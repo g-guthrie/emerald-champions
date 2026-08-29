@@ -93,7 +93,7 @@ Double Battle: Yes
 AI: Basic Trainer
 
 SPECIES_GIGALITH @ ITEM_SMOOTH_ROCK
-Level: 43
+Level: 38
 Ability: ABILITY_SAND_STREAM
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 32 Atk / 2 Def / 0 SpA / 0 SpD / 0 Spe
@@ -104,7 +104,7 @@ Nature: NATURE_BRAVE
 - MOVE_HEAVY_SLAM
 
 SPECIES_DRACOZOLT @ ITEM_LIFE_ORB
-Level: 43
+Level: 38
 Ability: ABILITY_SAND_RUSH
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -114,8 +114,8 @@ Nature: NATURE_JOLLY
 - MOVE_HIGH_HORSEPOWER
 - MOVE_PROTECT
 
-SPECIES_CRADILY @ ITEM_LEFTOVERS
-Level: 43
+SPECIES_LILEEP @ ITEM_LEFTOVERS
+Level: 38
 Ability: ABILITY_STORM_DRAIN
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 2 Def / 0 SpA / 32 SpD / 0 Spe
@@ -126,7 +126,7 @@ Nature: NATURE_QUIET
 - MOVE_ATTRACT
 
 SPECIES_EXCADRILL @ ITEM_EXCADRITE
-Level: 43
+Level: 38
 Ability: ABILITY_MOLD_BREAKER
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -622,7 +622,7 @@ Nature: NATURE_ADAMANT
 - MOVE_CRABHAMMER
 - MOVE_KNOCK_OFF
 - MOVE_AQUA_JET
-- MOVE_DRAGON_DANCE
+- MOVE_X_SCISSOR
 
 SPECIES_INKAY @ ITEM_LIFE_ORB
 Level: 16
@@ -851,7 +851,7 @@ Ability: ABILITY_FUR_COAT
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
 Nature: NATURE_TIMID
-- MOVE_HELPING_HAND
+- MOVE_SURF
 - MOVE_ICE_BEAM
 - MOVE_ICY_WIND
 - MOVE_ENCORE
@@ -944,7 +944,7 @@ SPECIES_LIEPARD @ ITEM_FOCUS_SASH
 Level: 53
 Ability: ABILITY_PRANKSTER
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
+EVs: 32 HP / 0 Atk / 2 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_TIMID
 - MOVE_FAKE_OUT
 - MOVE_FOUL_PLAY
@@ -1298,7 +1298,7 @@ Nature: NATURE_JOLLY
 - MOVE_CRUNCH
 - MOVE_PSYCHIC_FANGS
 - MOVE_LIQUIDATION
-- MOVE_PROTECT
+- MOVE_ICE_FANG
 
 SPECIES_WEAVILE @ ITEM_LIFE_ORB
 Level: 58
@@ -1373,7 +1373,7 @@ Nature: NATURE_MODEST
 - MOVE_SCALD
 - MOVE_THUNDERBOLT
 - MOVE_ICY_WIND
-- MOVE_PROTECT
+- MOVE_VOLT_SWITCH
 
 SPECIES_URSHIFU_RAPID_STRIKE @ ITEM_MYSTIC_WATER
 Level: 58
@@ -1876,10 +1876,10 @@ Nature: NATURE_MODEST
 
 SPECIES_GOODRA @ ITEM_LEFTOVERS
 Level: 71
-Ability: ABILITY_POISON_HEAL
+Ability: ABILITY_GOOEY
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
-Nature: NATURE_CAREFUL
+Nature: NATURE_MODEST
 - MOVE_DRACO_METEOR
 - MOVE_FLAMETHROWER
 - MOVE_DRAGON_TAIL
@@ -1890,7 +1890,7 @@ Level: 71
 Ability: ABILITY_CLEAR_BODY
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
-Nature: NATURE_JOLLY
+Nature: NATURE_TIMID
 - MOVE_CHILLING_WATER
 - MOVE_ACID_SPRAY
 - MOVE_ICY_WIND
@@ -1912,7 +1912,7 @@ Level: 71
 Ability: ABILITY_LEVITATE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
-Nature: NATURE_MODEST
+Nature: NATURE_ADAMANT
 - MOVE_WILD_CHARGE
 - MOVE_CRUNCH
 - MOVE_ROCK_SLIDE
@@ -2045,7 +2045,7 @@ Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Mon Choices / Assume Stab / Assume Status Moves
 
 SPECIES_ROSERADE @ ITEM_FOCUS_SASH
-Level: 54
+Level: 29
 Ability: ABILITY_TECHNICIAN
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -2056,7 +2056,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 SPECIES_VESPIQUEN @ ITEM_SITRUS_BERRY
-Level: 55
+Level: 30
 Ability: ABILITY_PRESSURE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 2 Def / 0 SpA / 32 SpD / 0 Spe
@@ -2067,7 +2067,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 SPECIES_COMFEY @ ITEM_BABIRI_BERRY
-Level: 55
+Level: 30
 Ability: ABILITY_FLOWER_VEIL
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 32 Def / 0 SpA / 2 SpD / 0 Spe
@@ -2349,7 +2349,7 @@ SPECIES_BRONZONG @ ITEM_LEFTOVERS
 Level: 54
 Ability: ABILITY_LEVITATE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 32 HP / 0 Atk / 2 Def / 32 SpA / 0 SpD / 0 Spe
+EVs: 32 HP / 0 Atk / 32 Def / 0 SpA / 2 SpD / 0 Spe
 Nature: NATURE_BRAVE
 - MOVE_TRICK_ROOM
 - MOVE_GYRO_BALL
@@ -2445,7 +2445,7 @@ Double Battle: Yes
 AI: Basic Trainer
 
 SPECIES_MAGNETON @ ITEM_EVIOLITE
-Level: 30
+Level: 40
 Ability: ABILITY_STURDY
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -2456,7 +2456,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 SPECIES_LOUDRED @ ITEM_WISE_GLASSES
-Level: 28
+Level: 38
 Ability: ABILITY_SOUNDPROOF
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -2467,7 +2467,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 SPECIES_ALCREMIE_RUBY_CREAM @ ITEM_SITRUS_BERRY
-Level: 28
+Level: 38
 Ability: ABILITY_AROMA_VEIL
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 2 Def / 0 SpA / 32 SpD / 0 Spe
@@ -2478,7 +2478,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 SPECIES_ORICORIO_PAU @ ITEM_EXPERT_BELT
-Level: 28
+Level: 38
 Ability: ABILITY_DANCER
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -2766,7 +2766,7 @@ SPECIES_CHERRIM @ ITEM_HEAT_ROCK
 Level: 30
 Ability: ABILITY_FLOWER_GIFT
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
+EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
 Nature: NATURE_MODEST
 - MOVE_SUNNY_DAY
 - MOVE_WEATHER_BALL
@@ -3262,7 +3262,7 @@ SPECIES_GIRAFARIG @ ITEM_SITRUS_BERRY
 Level: 43
 Ability: ABILITY_SAP_SIPPER
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
+EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
 Nature: NATURE_MODEST
 - MOVE_PSYCHIC
 - MOVE_HYPER_VOICE
@@ -3560,7 +3560,7 @@ SPECIES_SALAMENCE @ ITEM_LIFE_ORB
 Level: 100
 Ability: ABILITY_INTIMIDATE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
+EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
 Nature: NATURE_TIMID
 - MOVE_DRACO_METEOR
 - MOVE_HURRICANE
@@ -3610,7 +3610,7 @@ Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Mon Choices / Assume Stab / Assume Status Moves
 
 SPECIES_COFAGRIGUS @ ITEM_MENTAL_HERB
-Level: 45
+Level: 40
 Ability: ABILITY_MUMMY
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 32 Def / 0 SpA / 2 SpD / 0 Spe
@@ -3620,19 +3620,19 @@ Nature: NATURE_BOLD
 - MOVE_TRICK_ROOM
 - MOVE_BODY_PRESS
 
-SPECIES_REUNICLUS @ ITEM_LIFE_ORB
-Level: 45
+SPECIES_DUOSION @ ITEM_LIFE_ORB
+Level: 40
 Ability: ABILITY_MAGIC_GUARD
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 2 Def / 32 SpA / 0 SpD / 0 Spe
 Nature: NATURE_QUIET
 - MOVE_PSYCHIC
-- MOVE_FOCUS_BLAST
+- MOVE_ENERGY_BALL
 - MOVE_RECOVER
 - MOVE_PROTECT
 
-SPECIES_GARCHOMP @ ITEM_ROCKY_HELMET
-Level: 48
+SPECIES_GABITE @ ITEM_ROCKY_HELMET
+Level: 43
 Ability: ABILITY_ROUGH_SKIN
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -3715,7 +3715,7 @@ Nature: NATURE_TIMID
 - MOVE_VOLT_SWITCH
 - MOVE_SNARL
 - MOVE_OVERHEAT
-- MOVE_PROTECT
+- MOVE_THUNDERBOLT
 
 === TRAINER_ALBERT ===
 Name: ALBERT
@@ -3907,7 +3907,7 @@ Nature: NATURE_JOLLY
 - MOVE_DOUBLE_EDGE
 - MOVE_QUICK_ATTACK
 - MOVE_BRAVE_BIRD
-- MOVE_PROTECT
+- MOVE_DRILL_RUN
 
 SPECIES_ELECTIVIRE @ ITEM_ASSAULT_VEST
 Level: 79
@@ -3917,7 +3917,7 @@ EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_ADAMANT
 - MOVE_WILD_CHARGE
 - MOVE_ICE_PUNCH
-- MOVE_PROTECT
+- MOVE_KNOCK_OFF
 - MOVE_ELECTROWEB
 
 SPECIES_LURANTIS @ ITEM_SITRUS_BERRY
@@ -3936,7 +3936,7 @@ Level: 80
 Ability: ABILITY_TINTED_LENS
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
-Nature: NATURE_TIMID
+Nature: NATURE_JOLLY
 - MOVE_DRAGON_CLAW
 - MOVE_EARTHQUAKE
 - MOVE_TAILWIND
@@ -4499,7 +4499,7 @@ Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Mon Choices / Assume Stab / Assume Status Moves
 
 SPECIES_EMPOLEON @ ITEM_SITRUS_BERRY
-Level: 45
+Level: 40
 Ability: ABILITY_COMPETITIVE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -4510,7 +4510,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 SPECIES_INFERNAPE @ ITEM_FOCUS_SASH
-Level: 45
+Level: 40
 Ability: ABILITY_BLAZE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -4521,7 +4521,7 @@ Nature: NATURE_JOLLY
 - MOVE_MACH_PUNCH
 
 SPECIES_ROSERADE @ ITEM_LIFE_ORB
-Level: 45
+Level: 40
 Ability: ABILITY_TECHNICIAN
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -4531,15 +4531,15 @@ Nature: NATURE_TIMID
 - MOVE_EXTRASENSORY
 - MOVE_PROTECT
 
-SPECIES_HAXORUS @ ITEM_LUM_BERRY
-Level: 48
+SPECIES_FRAXURE @ ITEM_LUM_BERRY
+Level: 43
 Ability: ABILITY_MOLD_BREAKER
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_JOLLY
 - MOVE_DRAGON_DANCE
 - MOVE_DRAGON_CLAW
-- MOVE_EARTHQUAKE
+- MOVE_STOMPING_TANTRUM
 - MOVE_PROTECT
 
 === TRAINER_JENNIFER ===
@@ -4679,7 +4679,7 @@ Music: Cool
 Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Switching / Predict Switch / Predict Incoming Mon / Pp Stall Prevention / Assume Stab / Assume Status Moves
 
-SPECIES_BLAZIKEN @ ITEM_LIFE_ORB
+SPECIES_BLAZIKEN @ ITEM_BLAZIKENITE
 Level: 80
 Ability: ABILITY_SPEED_BOOST
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
@@ -5434,7 +5434,7 @@ Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Switching / Predict Switch / Predict Incoming Mon / Pp Stall Prevention / Assume Stab / Assume Status Moves
 
 SPECIES_FLYGON @ ITEM_YACHE_BERRY
-Level: 59
+Level: 69
 Ability: ABILITY_TINTED_LENS
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -5445,7 +5445,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 SPECIES_CROBAT @ ITEM_SAFETY_GOGGLES
-Level: 59
+Level: 69
 Ability: ABILITY_INNER_FOCUS
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -5456,7 +5456,7 @@ Nature: NATURE_JOLLY
 - MOVE_ACROBATICS
 
 SPECIES_DRAPION @ ITEM_SCOPE_LENS
-Level: 59
+Level: 69
 Ability: ABILITY_SNIPER
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -5467,7 +5467,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 SPECIES_KLEFKI @ ITEM_LIGHT_CLAY
-Level: 59
+Level: 69
 Ability: ABILITY_PRANKSTER
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 2 Def / 0 SpA / 32 SpD / 0 Spe
@@ -5658,7 +5658,7 @@ Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Mon Choices / Assume Stab / Assume Status Moves
 
 SPECIES_MILOTIC @ ITEM_LEFTOVERS
-Level: 45
+Level: 40
 Ability: ABILITY_COMPETITIVE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 32 Def / 0 SpA / 2 SpD / 0 Spe
@@ -5669,7 +5669,7 @@ Nature: NATURE_BOLD
 - MOVE_HAZE
 
 SPECIES_FURFROU @ ITEM_CHOPLE_BERRY
-Level: 45
+Level: 40
 Ability: ABILITY_FUR_COAT
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 2 Def / 0 SpA / 32 SpD / 0 Spe
@@ -5680,7 +5680,7 @@ Nature: NATURE_IMPISH
 - MOVE_REST
 
 SPECIES_LOPUNNY @ ITEM_FLAME_ORB
-Level: 45
+Level: 40
 Ability: ABILITY_CUTE_CHARM
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -5691,7 +5691,7 @@ Nature: NATURE_JOLLY
 - MOVE_HIGH_JUMP_KICK
 
 SPECIES_DIANCIE @ ITEM_DIANCITE
-Level: 45
+Level: 40
 Ability: ABILITY_CLEAR_BODY
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 2 Def / 0 SpA / 32 SpD / 0 Spe
@@ -5711,7 +5711,7 @@ Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Mon Choices / Assume Stab / Assume Status Moves
 
 SPECIES_TSAREENA @ ITEM_ASSAULT_VEST
-Level: 45
+Level: 40
 Ability: ABILITY_QUEENLY_MAJESTY
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -5722,7 +5722,7 @@ Nature: NATURE_ADAMANT
 - MOVE_U_TURN
 
 SPECIES_CINCCINO @ ITEM_KINGS_ROCK
-Level: 45
+Level: 40
 Ability: ABILITY_SKILL_LINK
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -5732,19 +5732,19 @@ Nature: NATURE_JOLLY
 - MOVE_ROCK_BLAST
 - MOVE_PROTECT
 
-SPECIES_BISHARP @ ITEM_EVIOLITE
-Level: 52
+SPECIES_PAWNIARD @ ITEM_EVIOLITE
+Level: 47
 Ability: ABILITY_DEFIANT
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_ADAMANT
 - MOVE_IRON_HEAD
-- MOVE_THROAT_CHOP
+- MOVE_NIGHT_SLASH
 - MOVE_PROTECT
 - MOVE_SWORDS_DANCE
 
 SPECIES_ESCAVALIER @ ITEM_OCCA_BERRY
-Level: 45
+Level: 40
 Ability: ABILITY_OVERCOAT
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 32 Atk / 2 Def / 0 SpA / 0 SpD / 0 Spe
@@ -5764,7 +5764,7 @@ Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Mon Choices / Assume Stab / Assume Status Moves
 
 SPECIES_ALCREMIE @ ITEM_BABIRI_BERRY
-Level: 45
+Level: 40
 Ability: ABILITY_AROMA_VEIL
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 2 Def / 0 SpA / 32 SpD / 0 Spe
@@ -5775,7 +5775,7 @@ Nature: NATURE_BOLD
 - MOVE_PROTECT
 
 SPECIES_MELOETTA @ ITEM_ASSAULT_VEST
-Level: 45
+Level: 40
 Ability: ABILITY_SERENE_GRACE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -5786,7 +5786,7 @@ Nature: NATURE_HASTY
 - MOVE_KNOCK_OFF
 
 SPECIES_NIHILEGO @ ITEM_LIFE_ORB
-Level: 45
+Level: 40
 Ability: ABILITY_BEAST_BOOST
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -5796,8 +5796,8 @@ Nature: NATURE_TIMID
 - MOVE_GRASS_KNOT
 - MOVE_PROTECT
 
-SPECIES_MR_RIME @ ITEM_CHOICE_SCARF
-Level: 45
+SPECIES_MR_MIME_GALAR @ ITEM_CHOICE_SCARF
+Level: 40
 Ability: ABILITY_SCREEN_CLEANER
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -6269,7 +6269,7 @@ SPECIES_PERSIAN_ALOLA @ ITEM_SITRUS_BERRY
 Level: 98
 Ability: ABILITY_FUR_COAT
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
+EVs: 32 HP / 0 Atk / 2 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_TIMID
 - MOVE_U_TURN
 - MOVE_FAKE_OUT
@@ -6386,7 +6386,7 @@ EVs: 32 HP / 32 Atk / 2 Def / 0 SpA / 0 SpD / 0 Spe
 Nature: NATURE_BRAVE
 - MOVE_HEAVY_SLAM
 - MOVE_HIGH_HORSEPOWER
-- MOVE_PROTECT
+- MOVE_PLAY_ROUGH
 - MOVE_ROCK_SLIDE
 
 SPECIES_TURTONATOR @ ITEM_WHITE_HERB
@@ -7098,8 +7098,8 @@ SPECIES_KINGDRA @ ITEM_LIFE_ORB
 Level: 58
 Ability: ABILITY_SWIFT_SWIM
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
-Nature: NATURE_ADAMANT
+EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
+Nature: NATURE_MODEST
 - MOVE_PROTECT
 - MOVE_DRACO_METEOR
 - MOVE_RAIN_DANCE
@@ -7239,7 +7239,7 @@ EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
 Nature: NATURE_MODEST
 - MOVE_MUDDY_WATER
 - MOVE_ICE_BEAM
-- MOVE_HELPING_HAND
+- MOVE_U_TURN
 - MOVE_PROTECT
 
 === TRAINER_RICHARD ===
@@ -7328,7 +7328,7 @@ Nature: NATURE_BRAVE
 
 SPECIES_GOURGEIST @ ITEM_OCCA_BERRY
 Level: 69
-Ability: ABILITY_FLARE_BOOST
+Ability: ABILITY_FRISK
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
 Nature: NATURE_MODEST
@@ -7534,7 +7534,7 @@ Nature: NATURE_JOLLY
 - MOVE_THROAT_CHOP
 - MOVE_PROTECT
 - MOVE_BELLY_DRUM
-- MOVE_HELPING_HAND
+- MOVE_DOUBLE_EDGE
 
 SPECIES_SIMIPOUR @ ITEM_FOCUS_SASH
 Level: 67
@@ -7848,7 +7848,7 @@ Double Battle: No
 AI: Basic Trainer
 
 SPECIES_MACHAMP @ ITEM_SITRUS_BERRY
-Level: 53
+Level: 12
 Ability: ABILITY_NO_GUARD
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -8079,6 +8079,7 @@ Gender: Male
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Mon Choices / Assume Stab / Assume Status Moves
+Multi Party: Half
 
 SPECIES_TOXTRICITY @ ITEM_THROAT_SPRAY
 Level: 30
@@ -8111,17 +8112,6 @@ Nature: NATURE_TIMID
 - MOVE_THUNDERBOLT
 - MOVE_VOLT_SWITCH
 - MOVE_TAUNT
-- MOVE_PROTECT
-
-SPECIES_GRAVELER_ALOLA @ ITEM_EVIOLITE
-Level: 30
-Ability: ABILITY_GALVANIZE
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
-Nature: NATURE_ADAMANT
-- MOVE_BODY_SLAM
-- MOVE_ROCK_SLIDE
-- MOVE_STOMPING_TANTRUM
 - MOVE_PROTECT
 
 === TRAINER_GRUNT_AQUA_HIDEOUT_7 ===
@@ -8223,7 +8213,7 @@ SPECIES_MISDREAVUS @ ITEM_EVIOLITE
 Level: 59
 Ability: ABILITY_LEVITATE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
+EVs: 32 HP / 0 Atk / 2 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_TIMID
 - MOVE_FOUL_PLAY
 - MOVE_WILL_O_WISP
@@ -8238,49 +8228,39 @@ Gender: Male
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Mon Choices / Assume Stab / Assume Status Moves
+Multi Party: Half
 
-SPECIES_MORPEKO @ ITEM_SITRUS_BERRY
+SPECIES_MINUN @ ITEM_COVERT_CLOAK
 Level: 30
-Ability: ABILITY_HUNGER_SWITCH
+Ability: ABILITY_MINUS
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
+Nature: NATURE_TIMID
+- MOVE_ELECTROWEB
+- MOVE_HELPING_HAND
+- MOVE_ENCORE
+- MOVE_PROTECT
+
+SPECIES_KLINK @ ITEM_EVIOLITE
+Level: 30
+Ability: ABILITY_MINUS
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
-Nature: NATURE_JOLLY
-- MOVE_AURA_WHEEL
-- MOVE_PARTING_SHOT
-- MOVE_FOUL_PLAY
+Nature: NATURE_ADAMANT
+- MOVE_SHIFT_GEAR
+- MOVE_GEAR_GRIND
+- MOVE_WILD_CHARGE
 - MOVE_PROTECT
 
 SPECIES_DEDENNE @ ITEM_PETAYA_BERRY
 Level: 30
 Ability: ABILITY_CHEEK_POUCH
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
+EVs: 32 HP / 0 Atk / 2 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_TIMID
 - MOVE_NUZZLE
 - MOVE_SUPER_FANG
 - MOVE_HELPING_HAND
-- MOVE_PROTECT
-
-SPECIES_ELECTABUZZ @ ITEM_EVIOLITE
-Level: 30
-Ability: ABILITY_VITAL_SPIRIT
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
-Nature: NATURE_TIMID
-- MOVE_THUNDERBOLT
-- MOVE_ELECTROWEB
-- MOVE_HELPING_HAND
-- MOVE_PROTECT
-
-SPECIES_EELEKTRIK @ ITEM_ROCKY_HELMET
-Level: 39
-Ability: ABILITY_LEVITATE
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 32 HP / 0 Atk / 2 Def / 0 SpA / 32 SpD / 0 Spe
-Nature: NATURE_SASSY
-- MOVE_THUNDERBOLT
-- MOVE_KNOCK_OFF
-- MOVE_SUPER_FANG
 - MOVE_PROTECT
 
 === TRAINER_FERNANDO_1 ===
@@ -8334,8 +8314,8 @@ Music: Intense
 Double Battle: No
 AI: Basic Trainer
 
-SPECIES_NOIVERN @ ITEM_FOCUS_SASH
-Level: 53
+SPECIES_NOIBAT @ ITEM_FOCUS_SASH
+Level: 28
 Ability: ABILITY_INFILTRATOR
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -8438,7 +8418,7 @@ Music: Hiker
 Double Battle: No
 AI: Basic Trainer / Hp Aware / Smart Mon Choices / Assume Stab / Assume Status Moves
 
-SPECIES_CHANDELURE @ ITEM_SPELL_TAG
+SPECIES_CHANDELURE @ ITEM_CHANDELURITE
 Level: 40
 Ability: ABILITY_FLASH_FIRE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
@@ -8464,7 +8444,7 @@ SPECIES_SIMISEAR @ ITEM_SALAC_BERRY
 Level: 40
 Ability: ABILITY_GLUTTONY
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
+EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
 Nature: NATURE_TIMID
 - MOVE_NASTY_PLOT
 - MOVE_FIRE_BLAST
@@ -8557,7 +8537,7 @@ Nature: NATURE_MODEST
 
 SPECIES_HEATMOR @ ITEM_EJECT_PACK
 Level: 40
-Ability: ABILITY_GLUTTONY
+Ability: ABILITY_FLASH_FIRE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_TIMID
@@ -8585,6 +8565,7 @@ Gender: Male
 Music: Hiker
 Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Mon Choices / Assume Stab / Assume Status Moves
+Multi Party: Half
 
 SPECIES_LAMPENT @ ITEM_BLUNDER_POLICY
 Level: 41
@@ -8618,17 +8599,6 @@ Nature: NATURE_JOLLY
 - MOVE_RAGING_FURY
 - MOVE_DRAGON_CLAW
 - MOVE_MORNING_SUN
-
-SPECIES_MAROWAK_ALOLA @ ITEM_THICK_CLUB
-Level: 40
-Ability: ABILITY_ROCK_HEAD
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 32 HP / 32 Atk / 2 Def / 0 SpA / 0 SpD / 0 Spe
-Nature: NATURE_ADAMANT
-- MOVE_FLARE_BLITZ
-- MOVE_POLTERGEIST
-- MOVE_BONEMERANG
-- MOVE_PROTECT
 
 === TRAINER_KEEGAN ===
 Name: KEEGAN
@@ -8848,7 +8818,7 @@ SPECIES_PERSIAN_ALOLA @ ITEM_SITRUS_BERRY
 Level: 45
 Ability: ABILITY_FUR_COAT
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
+EVs: 32 HP / 0 Atk / 2 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_TIMID
 - MOVE_FAKE_OUT
 - MOVE_U_TURN
@@ -8901,7 +8871,7 @@ SPECIES_VICTREEBEL @ ITEM_LANSAT_BERRY
 Level: 38
 Ability: ABILITY_GLUTTONY
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
+EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_JOLLY
 - MOVE_LEAF_BLADE
 - MOVE_POISON_JAB
@@ -9394,7 +9364,7 @@ Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Mon Choices / Assume Stab / Assume Status Moves
 
 SPECIES_WORMADAM @ ITEM_OCCA_BERRY
-Level: 40
+Level: 30
 Ability: ABILITY_OVERCOAT
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -9405,10 +9375,10 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 SPECIES_WORMADAM_SANDY @ ITEM_ASSAULT_VEST
-Level: 40
+Level: 30
 Ability: ABILITY_OVERCOAT
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
+EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_ADAMANT
 - MOVE_EARTHQUAKE
 - MOVE_ROCK_BLAST
@@ -9416,7 +9386,7 @@ Nature: NATURE_ADAMANT
 - MOVE_BUG_BITE
 
 SPECIES_WORMADAM_TRASH @ ITEM_ROCKY_HELMET
-Level: 40
+Level: 30
 Ability: ABILITY_OVERCOAT
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -9427,7 +9397,7 @@ Nature: NATURE_BOLD
 - MOVE_PROTECT
 
 SPECIES_MOTHIM @ ITEM_LIFE_ORB
-Level: 40
+Level: 30
 Ability: ABILITY_TINTED_LENS
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -9541,6 +9511,7 @@ Gender: Male
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Mon Choices / Assume Stab / Assume Status Moves
+Multi Party: Half
 
 SPECIES_LUNATONE @ ITEM_SITRUS_BERRY
 Level: 30
@@ -9574,17 +9545,6 @@ Nature: NATURE_TIMID
 - MOVE_AIR_SLASH
 - MOVE_TAILWIND
 - MOVE_U_TURN
-
-SPECIES_MUNNA @ ITEM_EVIOLITE
-Level: 30
-Ability: ABILITY_SYNCHRONIZE
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 32 HP / 0 Atk / 32 Def / 0 SpA / 2 SpD / 0 Spe
-Nature: NATURE_MODEST
-- MOVE_MOONBLAST
-- MOVE_ENERGY_BALL
-- MOVE_PSYCHIC
-- MOVE_MOONLIGHT
 
 === TRAINER_PRESTON ===
 Name: PRESTON
@@ -9860,7 +9820,7 @@ Nature: NATURE_BRAVE
 
 SPECIES_EXEGGUTOR_ALOLA @ ITEM_LIFE_ORB
 Level: 53
-Ability: ABILITY_HARVEST
+Ability: ABILITY_FRISK
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 2 Def / 32 SpA / 0 SpD / 0 Spe
 Nature: NATURE_QUIET
@@ -10030,7 +9990,7 @@ Nature: NATURE_JOLLY
 - MOVE_CRUNCH
 - MOVE_PSYCHIC_FANGS
 - MOVE_LIQUIDATION
-- MOVE_PROTECT
+- MOVE_ICE_FANG
 
 SPECIES_MALAMAR @ ITEM_LIFE_ORB
 Level: 58
@@ -10094,7 +10054,7 @@ Nature: NATURE_TIMID
 - MOVE_ENCORE
 - MOVE_FUTURE_SIGHT
 
-SPECIES_MAGEARNA @ ITEM_ASSAULT_VEST
+SPECIES_MAGEARNA @ ITEM_ROOM_SERVICE
 Level: 58
 Ability: ABILITY_SOUL_HEART
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
@@ -11520,7 +11480,7 @@ Double Battle: No
 AI: Basic Trainer
 
 SPECIES_KLINK @ ITEM_CHOICE_BAND
-Level: 18
+Level: 12
 Ability: ABILITY_PLUS
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -11528,10 +11488,10 @@ Nature: NATURE_BRAVE
 - MOVE_GEAR_GRIND
 - MOVE_WILD_CHARGE
 - MOVE_FACADE
-- MOVE_SHIFT_GEAR
+- MOVE_ASSURANCE
 
 SPECIES_TOGEDEMARU @ ITEM_AIR_BALLOON
-Level: 18
+Level: 12
 Ability: ABILITY_STURDY
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -11542,10 +11502,10 @@ Nature: NATURE_JOLLY
 - MOVE_SPIKY_SHIELD
 
 SPECIES_ELEKID @ ITEM_EXPERT_BELT
-Level: 18
+Level: 12
 Ability: ABILITY_VITAL_SPIRIT
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
+EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_JOLLY
 - MOVE_THUNDER_PUNCH
 - MOVE_ICE_PUNCH
@@ -11576,7 +11536,7 @@ SPECIES_PERSIAN_ALOLA @ ITEM_SITRUS_BERRY
 Level: 40
 Ability: ABILITY_FUR_COAT
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
+EVs: 32 HP / 0 Atk / 2 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_TIMID
 - MOVE_FAKE_OUT
 - MOVE_U_TURN
@@ -11729,7 +11689,7 @@ Double Battle: Yes
 AI: Basic Trainer
 
 SPECIES_ELGYEM @ ITEM_FOCUS_SASH
-Level: 18
+Level: 12
 Ability: ABILITY_SYNCHRONIZE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 2 Def / 32 SpA / 0 SpD / 0 Spe
@@ -11740,7 +11700,7 @@ Nature: NATURE_MODEST
 - MOVE_SKILL_SWAP
 
 SPECIES_ONIX @ ITEM_EVIOLITE
-Level: 18
+Level: 12
 Ability: ABILITY_STURDY
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -11751,7 +11711,7 @@ Nature: NATURE_ADAMANT
 - MOVE_DRAGON_TAIL
 
 SPECIES_MANTYKE @ ITEM_SITRUS_BERRY
-Level: 18
+Level: 12
 Ability: ABILITY_WATER_ABSORB
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 2 Def / 0 SpA / 32 SpD / 0 Spe
@@ -11762,7 +11722,7 @@ Nature: NATURE_MODEST
 - MOVE_AQUA_RING
 
 SPECIES_KECLEON @ ITEM_LIFE_ORB
-Level: 18
+Level: 12
 Ability: ABILITY_PROTEAN
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -11956,7 +11916,7 @@ Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Mon Choices / Assume Stab / Assume Status Moves
 
 SPECIES_PASSIMIAN @ ITEM_ROSELI_BERRY
-Level: 40
+Level: 30
 Ability: ABILITY_RECEIVER
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -11967,7 +11927,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 SPECIES_MUDSDALE @ ITEM_LEFTOVERS
-Level: 40
+Level: 30
 Ability: ABILITY_STAMINA
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 32 Atk / 2 Def / 0 SpA / 0 SpD / 0 Spe
@@ -11977,8 +11937,8 @@ Nature: NATURE_IMPISH
 - MOVE_HEAVY_SLAM
 - MOVE_ROCK_SLIDE
 
-SPECIES_MUK_ALOLA @ ITEM_BLACK_SLUDGE
-Level: 40
+SPECIES_GRIMER_ALOLA @ ITEM_BLACK_SLUDGE
+Level: 30
 Ability: ABILITY_POWER_OF_ALCHEMY
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 32 Atk / 2 Def / 0 SpA / 0 SpD / 0 Spe
@@ -11988,8 +11948,8 @@ Nature: NATURE_CAREFUL
 - MOVE_SNARL
 - MOVE_PROTECT
 
-SPECIES_MEDICHAM @ ITEM_EXPERT_BELT
-Level: 40
+SPECIES_MEDITITE @ ITEM_EXPERT_BELT
+Level: 30
 Ability: ABILITY_PURE_POWER
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -12101,22 +12061,22 @@ Class: Winstrate
 Pic: Pokefan M
 Gender: Male
 Music: Twins
-Double Battle: Yes
+Double Battle: No
 AI: Basic Trainer / Hp Aware / Smart Mon Choices / Assume Stab / Assume Status Moves
 
-SPECIES_STARAPTOR @ ITEM_SHARP_BEAK
-Level: 40
+SPECIES_STARAVIA @ ITEM_SHARP_BEAK
+Level: 30
 Ability: ABILITY_INTIMIDATE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_JOLLY
 - MOVE_BRAVE_BIRD
-- MOVE_CLOSE_COMBAT
+- MOVE_TAILWIND
 - MOVE_U_TURN
 - MOVE_QUICK_ATTACK
 
 SPECIES_DIGGERSBY @ ITEM_SOFT_SAND
-Level: 40
+Level: 30
 Ability: ABILITY_HUGE_POWER
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -12126,19 +12086,19 @@ Nature: NATURE_ADAMANT
 - MOVE_SWORDS_DANCE
 - MOVE_FOUL_PLAY
 
-SPECIES_OBSTAGOON @ ITEM_FLAME_ORB
-Level: 40
-Ability: ABILITY_GUTS
+SPECIES_LINOONE_GALAR @ ITEM_FLAME_ORB
+Level: 30
+Ability: ABILITY_QUICK_FEET
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_JOLLY
 - MOVE_FACADE
 - MOVE_THROAT_CHOP
-- MOVE_OBSTRUCT
-- MOVE_CROSS_CHOP
+- MOVE_PROTECT
+- MOVE_SEED_BOMB
 
 SPECIES_MILTANK @ ITEM_LUM_BERRY
-Level: 40
+Level: 30
 Ability: ABILITY_SCRAPPY
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -12225,7 +12185,7 @@ SPECIES_LIEPARD @ ITEM_FOCUS_SASH
 Level: 100
 Ability: ABILITY_PRANKSTER
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
+EVs: 32 HP / 0 Atk / 2 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_JOLLY
 - MOVE_FAKE_OUT
 - MOVE_FOUL_PLAY
@@ -12236,7 +12196,7 @@ SPECIES_PERSIAN_ALOLA @ ITEM_SITRUS_BERRY
 Level: 100
 Ability: ABILITY_FUR_COAT
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
+EVs: 32 HP / 0 Atk / 2 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_BOLD
 - MOVE_U_TURN
 - MOVE_FAKE_OUT
@@ -12254,7 +12214,7 @@ Nature: NATURE_ADAMANT
 - MOVE_THROAT_CHOP
 - MOVE_PARTING_SHOT
 
-SPECIES_MESPRIT @ ITEM_CHOICE_SPECS
+SPECIES_MESPRIT @ ITEM_ROOM_SERVICE
 Level: 100
 Ability: ABILITY_LEVITATE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
@@ -12334,11 +12294,11 @@ Class: Winstrate
 Pic: Pokefan F
 Gender: Female
 Music: Twins
-Double Battle: Yes
+Double Battle: No
 AI: Basic Trainer
 
 SPECIES_LILLIGANT @ ITEM_MIRACLE_SEED
-Level: 38
+Level: 28
 Ability: ABILITY_OWN_TEMPO
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -12349,7 +12309,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 SPECIES_WHIMSICOTT @ ITEM_BIG_ROOT
-Level: 38
+Level: 28
 Ability: ABILITY_PRANKSTER
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -12360,7 +12320,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 SPECIES_BLISSEY @ ITEM_LIGHT_CLAY
-Level: 38
+Level: 28
 Ability: ABILITY_NATURAL_CURE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 2 Def / 0 SpA / 32 SpD / 0 Spe
@@ -12371,7 +12331,7 @@ Nature: NATURE_CALM
 - MOVE_LIGHT_SCREEN
 
 SPECIES_ROSERADE @ ITEM_BLACK_SLUDGE
-Level: 38
+Level: 28
 Ability: ABILITY_TECHNICIAN
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -12495,6 +12455,7 @@ Gender: Female
 Music: Twins
 Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Mon Choices / Assume Stab / Assume Status Moves
+Multi Party: Half
 
 SPECIES_MELOETTA @ ITEM_THROAT_SPRAY
 Level: 30
@@ -12527,17 +12488,6 @@ Nature: NATURE_TIMID
 - MOVE_ROUND
 - MOVE_CHATTER
 - MOVE_HEAT_WAVE
-- MOVE_PROTECT
-
-SPECIES_GOSSIFLEUR @ ITEM_EVIOLITE
-Level: 30
-Ability: ABILITY_REGENERATOR
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 32 HP / 0 Atk / 2 Def / 0 SpA / 32 SpD / 0 Spe
-Nature: NATURE_MODEST
-- MOVE_ROUND
-- MOVE_GIGA_DRAIN
-- MOVE_HELPING_HAND
 - MOVE_PROTECT
 
 === TRAINER_ISABEL_2 ===
@@ -12739,7 +12689,7 @@ Double Battle: No
 AI: Basic Trainer
 
 SPECIES_MACHAMP @ ITEM_SITRUS_BERRY
-Level: 38
+Level: 28
 Ability: ABILITY_NO_GUARD
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -12758,8 +12708,8 @@ Music: Intense
 Double Battle: Yes
 AI: Basic Trainer
 
-SPECIES_MIENSHAO @ ITEM_FOCUS_SASH
-Level: 50
+SPECIES_MIENFOO @ ITEM_FOCUS_SASH
+Level: 45
 Ability: ABILITY_REGENERATOR
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -12770,7 +12720,7 @@ Nature: NATURE_JOLLY
 - MOVE_U_TURN
 
 SPECIES_WOBBUFFET @ ITEM_MENTAL_HERB
-Level: 43
+Level: 38
 Ability: ABILITY_SHADOW_TAG
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 2 Def / 0 SpA / 32 SpD / 0 Spe
@@ -12781,7 +12731,7 @@ Nature: NATURE_BOLD
 - MOVE_DESTINY_BOND
 
 SPECIES_SLOWBRO @ ITEM_COLBUR_BERRY
-Level: 43
+Level: 38
 Ability: ABILITY_REGENERATOR
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 32 Def / 0 SpA / 2 SpD / 0 Spe
@@ -12792,7 +12742,7 @@ Nature: NATURE_BOLD
 - MOVE_PSYSHOCK
 
 SPECIES_AEGISLASH @ ITEM_WEAKNESS_POLICY
-Level: 43
+Level: 38
 Ability: ABILITY_STANCE_CHANGE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 2 Def / 32 SpA / 0 SpD / 0 Spe
@@ -12883,7 +12833,7 @@ SPECIES_ZORUA @ ITEM_EXPERT_BELT
 Level: 14
 Ability: ABILITY_ILLUSION
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
+EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
 Nature: NATURE_TIMID
 - MOVE_DARK_PULSE
 - MOVE_EXTRASENSORY
@@ -13089,10 +13039,10 @@ Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Mon Choices / Assume Stab / Assume Status Moves
 
 SPECIES_CUBCHOO @ ITEM_FOCUS_SASH
-Level: 20
+Level: 14
 Ability: ABILITY_RATTLED
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
+EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
 Nature: NATURE_TIMID
 - MOVE_FROST_BREATH
 - MOVE_ICY_WIND
@@ -13100,7 +13050,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 SPECIES_CRABRAWLER @ ITEM_EVIOLITE
-Level: 20
+Level: 14
 Ability: ABILITY_ANGER_POINT
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -13111,7 +13061,7 @@ Nature: NATURE_BRAVE
 - MOVE_PROTECT
 
 SPECIES_PANCHAM @ ITEM_SITRUS_BERRY
-Level: 20
+Level: 14
 Ability: ABILITY_SCRAPPY
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -13122,7 +13072,7 @@ Nature: NATURE_ADAMANT
 - MOVE_DRAIN_PUNCH
 
 SPECIES_MANKEY @ ITEM_CHOICE_SCARF
-Level: 20
+Level: 14
 Ability: ABILITY_DEFIANT
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -13535,7 +13485,7 @@ SPECIES_PIKACHU @ ITEM_LIGHT_BALL
 Level: 14
 Ability: ABILITY_LIGHTNING_ROD
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
+EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_JOLLY
 - MOVE_FAKE_OUT
 - MOVE_ENCORE
@@ -13558,11 +13508,11 @@ Level: 14
 Ability: ABILITY_DRY_SKIN
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
-Nature: NATURE_BOLD
+Nature: NATURE_JOLLY
 - MOVE_SPORE
 - MOVE_PROTECT
 - MOVE_DIG
-- MOVE_SLEEP_POWDER
+- MOVE_X_SCISSOR
 
 SPECIES_ZIGZAGOON @ ITEM_SITRUS_BERRY
 Level: 14
@@ -13792,8 +13742,8 @@ SPECIES_WISHIWASHI @ ITEM_ASSAULT_VEST
 Level: 14
 Ability: ABILITY_SCHOOLING
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
-Nature: NATURE_MODEST
+EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
+Nature: NATURE_ADAMANT
 - MOVE_LIQUIDATION
 - MOVE_ICE_BEAM
 - MOVE_EARTHQUAKE
@@ -14094,7 +14044,7 @@ Double Battle: Yes
 AI: Basic Trainer
 
 SPECIES_EELEKTROSS @ ITEM_ASSAULT_VEST
-Level: 53
+Level: 28
 Ability: ABILITY_LEVITATE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -14105,7 +14055,7 @@ Nature: NATURE_MODEST
 - MOVE_VOLT_SWITCH
 
 SPECIES_KINGDRA @ ITEM_SCOPE_LENS
-Level: 53
+Level: 28
 Ability: ABILITY_SNIPER
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -14116,7 +14066,7 @@ Nature: NATURE_TIMID
 - MOVE_ICE_BEAM
 
 SPECIES_CRABOMINABLE @ ITEM_LIFE_ORB
-Level: 53
+Level: 28
 Ability: ABILITY_HYPER_CUTTER
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 32 Atk / 2 Def / 0 SpA / 0 SpD / 0 Spe
@@ -14127,7 +14077,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 SPECIES_DREDNAW @ ITEM_CHOICE_BAND
-Level: 53
+Level: 28
 Ability: ABILITY_SWIFT_SWIM
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -14739,7 +14689,7 @@ Double Battle: Yes
 AI: Basic Trainer
 
 SPECIES_LOPUNNY @ ITEM_PAYAPA_BERRY
-Level: 38
+Level: 28
 Ability: ABILITY_KLUTZ
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -14750,7 +14700,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 SPECIES_WISHIWASHI @ ITEM_SITRUS_BERRY
-Level: 38
+Level: 28
 Ability: ABILITY_SCHOOLING
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -14761,7 +14711,7 @@ Nature: NATURE_MODEST
 - MOVE_U_TURN
 
 SPECIES_ACCELGOR @ ITEM_BUG_GEM
-Level: 38
+Level: 28
 Ability: ABILITY_UNBURDEN
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -14772,10 +14722,10 @@ Nature: NATURE_TIMID
 - MOVE_WATER_SHURIKEN
 
 SPECIES_PHEROMOSA @ ITEM_WHITE_HERB
-Level: 38
+Level: 28
 Ability: ABILITY_BEAST_BOOST
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 32 Atk / 0 Def / 32 SpA / 0 SpD / 0 Spe
+EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_ADAMANT
 - MOVE_CLOSE_COMBAT
 - MOVE_TRIPLE_AXEL
@@ -14844,7 +14794,7 @@ Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Mon Choices / Assume Stab / Assume Status Moves
 
 SPECIES_ZERAORA @ ITEM_CHOICE_BAND
-Level: 40
+Level: 30
 Ability: ABILITY_VOLT_ABSORB
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -14855,7 +14805,7 @@ Nature: NATURE_JOLLY
 - MOVE_VOLT_SWITCH
 
 SPECIES_FROSLASS @ ITEM_FOCUS_SASH
-Level: 40
+Level: 30
 Ability: ABILITY_SNOW_CLOAK
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -14865,8 +14815,8 @@ Nature: NATURE_TIMID
 - MOVE_WILL_O_WISP
 - MOVE_DESTINY_BOND
 
-SPECIES_SALAZZLE @ ITEM_LIFE_ORB
-Level: 40
+SPECIES_SALANDIT @ ITEM_LIFE_ORB
+Level: 30
 Ability: ABILITY_CORROSION
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -14874,10 +14824,10 @@ Nature: NATURE_TIMID
 - MOVE_FLAMETHROWER
 - MOVE_SLUDGE_BOMB
 - MOVE_NASTY_PLOT
-- MOVE_ENCORE
+- MOVE_TAUNT
 
 SPECIES_LYCANROC_DUSK @ ITEM_EXPERT_BELT
-Level: 40
+Level: 30
 Ability: ABILITY_TOUGH_CLAWS
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -15276,7 +15226,7 @@ SPECIES_DEDENNE @ ITEM_SITRUS_BERRY
 Level: 68
 Ability: ABILITY_CHEEK_POUCH
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
+EVs: 32 HP / 0 Atk / 2 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_TIMID
 - MOVE_NUZZLE
 - MOVE_SUPER_FANG
@@ -15376,7 +15326,7 @@ Nature: NATURE_JOLLY
 - MOVE_BRAVE_BIRD
 - MOVE_TAILWIND
 - MOVE_PROTECT
-- MOVE_DETECT
+- MOVE_U_TURN
 
 SPECIES_GALVANTULA @ ITEM_LIFE_ORB
 Level: 68
@@ -15641,7 +15591,7 @@ Nature: NATURE_JOLLY
 - MOVE_BRAVE_BIRD
 - MOVE_TAILWIND
 - MOVE_PROTECT
-- MOVE_DETECT
+- MOVE_U_TURN
 
 SPECIES_DECIDUEYE @ ITEM_CLEAR_AMULET
 Level: 52
@@ -16010,7 +15960,7 @@ Nature: NATURE_JOLLY
 - MOVE_BRAVE_BIRD
 - MOVE_CLOSE_COMBAT
 - MOVE_TAILWIND
-- MOVE_PROTECT
+- MOVE_U_TURN
 
 SPECIES_BEAUTIFLY @ ITEM_FOCUS_SASH
 Level: 53
@@ -16473,7 +16423,7 @@ Nature: NATURE_ADAMANT
 
 SPECIES_SIMIPOUR @ ITEM_LIFE_ORB
 Level: 54
-Ability: ABILITY_GLUTTONY
+Ability: ABILITY_TORRENT
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
 Nature: NATURE_TIMID
@@ -16838,36 +16788,36 @@ Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Mon Choices / Assume Stab / Assume Status Moves
 
-SPECIES_SAMUROTT @ ITEM_LIFE_ORB
-Level: 52
+SPECIES_OSHAWOTT @ ITEM_LIFE_ORB
+Level: 11
 Ability: ABILITY_TORRENT
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_ADAMANT
 - MOVE_SWORDS_DANCE
 - MOVE_AQUA_JET
-- MOVE_MEGAHORN
-- MOVE_DETECT
+- MOVE_KNOCK_OFF
+- MOVE_PROTECT
 
-SPECIES_HAKAMO_O @ ITEM_EVIOLITE
-Level: 53
+SPECIES_JANGMO_O @ ITEM_EVIOLITE
+Level: 12
 Ability: ABILITY_OVERCOAT
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 2 Def / 0 SpA / 32 SpD / 0 Spe
 Nature: NATURE_CAREFUL
-- MOVE_DRAIN_PUNCH
+- MOVE_BRICK_BREAK
 - MOVE_DRAGON_CLAW
-- MOVE_COACHING
+- MOVE_DRAGON_CHEER
 - MOVE_PROTECT
 
-SPECIES_BLAZIKEN @ ITEM_BLAZIKENITE
-Level: 55
+SPECIES_TORCHIC @ ITEM_CHARCOAL
+Level: 14
 Ability: ABILITY_SPEED_BOOST
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_ADAMANT
 - MOVE_FLARE_BLITZ
-- MOVE_CLOSE_COMBAT
+- MOVE_LOW_KICK
 - MOVE_ROCK_SLIDE
 - MOVE_PROTECT
 
@@ -17332,7 +17282,7 @@ SPECIES_ALTARIA @ ITEM_ALTARIANITE
 Level: 55
 Ability: ABILITY_NATURAL_CURE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
+EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_JOLLY
 - MOVE_DOUBLE_EDGE
 - MOVE_EARTHQUAKE
@@ -17555,7 +17505,7 @@ Ability: ABILITY_UNAWARE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 32 Def / 0 SpA / 2 SpD / 0 Spe
 Nature: NATURE_BOLD
-- MOVE_HELPING_HAND
+- MOVE_TOXIC
 - MOVE_SOAK
 - MOVE_RECOVER
 - MOVE_PROTECT
@@ -18222,7 +18172,7 @@ Ability: ABILITY_ADAPTABILITY
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_ADAMANT
-- MOVE_SWORDS_DANCE
+- MOVE_CLOSE_COMBAT
 - MOVE_CRABHAMMER
 - MOVE_KNOCK_OFF
 - MOVE_LIQUIDATION
@@ -18251,8 +18201,8 @@ SPECIES_KINGDRA @ ITEM_LIFE_ORB
 Level: 67
 Ability: ABILITY_SWIFT_SWIM
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
-Nature: NATURE_ADAMANT
+EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
+Nature: NATURE_MODEST
 - MOVE_PROTECT
 - MOVE_DRACO_METEOR
 - MOVE_RAIN_DANCE
@@ -18628,7 +18578,7 @@ SPECIES_LICKILICKY @ ITEM_ASSAULT_VEST
 Level: 40
 Ability: ABILITY_CLOUD_NINE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
+EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
 Nature: NATURE_MODEST
 - MOVE_SURF
 - MOVE_ICE_BEAM
@@ -18712,7 +18662,7 @@ SPECIES_DELIBIRD @ ITEM_FOCUS_SASH
 Level: 40
 Ability: ABILITY_VITAL_SPIRIT
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
+EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
 Nature: NATURE_TIMID
 - MOVE_FAKE_OUT
 - MOVE_ICY_WIND
@@ -19565,6 +19515,7 @@ Gender: Male
 Music: Hiker
 Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Mon Choices / Assume Stab / Assume Status Moves
+Multi Party: Half
 
 SPECIES_CLAYDOL @ ITEM_LIGHT_CLAY
 Level: 40
@@ -19598,17 +19549,6 @@ Nature: NATURE_BOLD
 - MOVE_DRACO_METEOR
 - MOVE_HEAT_WAVE
 - MOVE_WIDE_GUARD
-
-SPECIES_GARGANACL @ ITEM_LEFTOVERS
-Level: 40
-Ability: ABILITY_PURIFYING_SALT
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 32 HP / 0 Atk / 2 Def / 0 SpA / 32 SpD / 0 Spe
-Nature: NATURE_SASSY
-- MOVE_SALT_CURE
-- MOVE_RECOVER
-- MOVE_WIDE_GUARD
-- MOVE_HEAVY_SLAM
 
 === TRAINER_ANNIKA ===
 Name: ANNIKA
@@ -19765,7 +19705,7 @@ Nature: NATURE_ADAMANT
 - MOVE_HORN_LEECH
 - MOVE_DOUBLE_EDGE
 - MOVE_PROTECT
-- MOVE_HELPING_HAND
+- MOVE_MEGAHORN
 
 === TRAINER_AURON ===
 Name: AURON
@@ -20082,6 +20022,7 @@ Gender: Male
 Music: Suspicious
 Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Mon Choices / Assume Stab / Assume Status Moves / Attacks Partner
+Multi Party: Half
 
 SPECIES_TERRAKION @ ITEM_WHITE_HERB
 Level: 30
@@ -20116,17 +20057,6 @@ Nature: NATURE_JOLLY
 - MOVE_CRUNCH
 - MOVE_U_TURN
 
-SPECIES_EELEKTRIK @ ITEM_EXPERT_BELT
-Level: 39
-Ability: ABILITY_LEVITATE
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 32 HP / 0 Atk / 2 Def / 0 SpA / 32 SpD / 0 Spe
-Nature: NATURE_SASSY
-- MOVE_THUNDERBOLT
-- MOVE_GIGA_DRAIN
-- MOVE_CRUNCH
-- MOVE_KNOCK_OFF
-
 === TRAINER_HECTOR ===
 Name: HECTOR
 Class: Collector
@@ -20137,7 +20067,7 @@ Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Mon Choices / Assume Stab / Assume Status Moves
 
 SPECIES_ZANGOOSE @ ITEM_TOXIC_ORB
-Level: 52
+Level: 11
 Ability: ABILITY_TOXIC_BOOST
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -20148,7 +20078,7 @@ Nature: NATURE_JOLLY
 - MOVE_CLOSE_COMBAT
 
 SPECIES_SEVIPER @ ITEM_SITRUS_BERRY
-Level: 52
+Level: 11
 Ability: ABILITY_INFILTRATOR
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -20158,19 +20088,19 @@ Nature: NATURE_TIMID
 - MOVE_FLAMETHROWER
 - MOVE_PROTECT
 
-SPECIES_FERROTHORN @ ITEM_LEFTOVERS
-Level: 52
+SPECIES_FERROSEED @ ITEM_LEFTOVERS
+Level: 11
 Ability: ABILITY_IRON_BARBS
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 32 Def / 0 SpA / 2 SpD / 0 Spe
 Nature: NATURE_ADAMANT
-- MOVE_BODY_PRESS
+- MOVE_GYRO_BALL
 - MOVE_IRON_DEFENSE
 - MOVE_GIGA_DRAIN
 - MOVE_PROTECT
 
 SPECIES_ROSELIA @ ITEM_EVIOLITE
-Level: 52
+Level: 11
 Ability: ABILITY_NATURAL_CURE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -21428,7 +21358,7 @@ Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Switching / Predict Switch / Predict Incoming Mon / Pp Stall Prevention / Assume Stab / Assume Status Moves
 
 SPECIES_MUNCHLAX @ ITEM_FIGY_BERRY
-Level: 42
+Level: 32
 Ability: ABILITY_GLUTTONY
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 32 Atk / 2 Def / 0 SpA / 0 SpD / 0 Spe
@@ -21439,7 +21369,7 @@ Nature: NATURE_BRAVE
 - MOVE_PROTECT
 
 SPECIES_TOGEPI @ ITEM_EVIOLITE
-Level: 41
+Level: 31
 Ability: ABILITY_SERENE_GRACE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 32 Def / 0 SpA / 2 SpD / 0 Spe
@@ -21450,7 +21380,7 @@ Nature: NATURE_BOLD
 - MOVE_ANCIENT_POWER
 
 SPECIES_KANGASKHAN @ ITEM_KANGASKHANITE
-Level: 42
+Level: 32
 Ability: ABILITY_SCRAPPY
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -21461,7 +21391,7 @@ Nature: NATURE_ADAMANT
 - MOVE_SUCKER_PUNCH
 
 SPECIES_FOONGUS @ ITEM_COBA_BERRY
-Level: 42
+Level: 32
 Ability: ABILITY_REGENERATOR
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 32 Def / 0 SpA / 2 SpD / 0 Spe
@@ -21472,7 +21402,7 @@ Nature: NATURE_BOLD
 - MOVE_GIGA_DRAIN
 
 SPECIES_ABRA @ ITEM_FOCUS_SASH
-Level: 42
+Level: 32
 Ability: ABILITY_MAGIC_GUARD
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -21483,7 +21413,7 @@ Nature: NATURE_TIMID
 - MOVE_ENCORE
 
 SPECIES_STARYU @ ITEM_LIFE_ORB
-Level: 42
+Level: 32
 Ability: ABILITY_ANALYTIC
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -21741,7 +21671,7 @@ Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Switching / Predict Switch / Predict Incoming Mon / Pp Stall Prevention / Assume Stab / Assume Status Moves
 
 SPECIES_FROAKIE @ ITEM_FOCUS_SASH
-Level: 41
+Level: 31
 Ability: ABILITY_PROTEAN
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 32 SpA / 0 SpD / 0 Spe
@@ -21752,10 +21682,10 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 SPECIES_PICHU @ ITEM_BERRY_JUICE
-Level: 41
+Level: 31
 Ability: ABILITY_LIGHTNING_ROD
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
+EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
 Nature: NATURE_TIMID
 - MOVE_FAKE_OUT
 - MOVE_NASTY_PLOT
@@ -21763,10 +21693,10 @@ Nature: NATURE_TIMID
 - MOVE_GRASS_KNOT
 
 SPECIES_MAGBY @ ITEM_LIFE_ORB
-Level: 42
+Level: 32
 Ability: ABILITY_VITAL_SPIRIT
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 32 Atk / 0 Def / 32 SpA / 0 SpD / 0 Spe
+EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_ADAMANT
 - MOVE_FIRE_PUNCH
 - MOVE_MACH_PUNCH
@@ -21774,7 +21704,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 SPECIES_SMOOCHUM @ ITEM_EXPERT_BELT
-Level: 42
+Level: 32
 Ability: ABILITY_FOREWARN
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -21785,7 +21715,7 @@ Nature: NATURE_TIMID
 - MOVE_SHADOW_BALL
 
 SPECIES_HAPPINY @ ITEM_EVIOLITE
-Level: 42
+Level: 32
 Ability: ABILITY_FRIEND_GUARD
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 2 Def / 0 SpA / 32 SpD / 0 Spe
@@ -21796,7 +21726,7 @@ Nature: NATURE_CALM
 - MOVE_PROTECT
 
 SPECIES_DRATINI @ ITEM_SITRUS_BERRY
-Level: 42
+Level: 32
 Ability: ABILITY_MARVEL_SCALE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -22071,7 +22001,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 2 Def / 0 SpA / 32 SpD / 0 Spe
 Nature: NATURE_SASSY
 - MOVE_SPORE
-- MOVE_SLEEP_POWDER
+- MOVE_LEECH_SEED
 - MOVE_PROTECT
 - MOVE_SCREECH
 
@@ -22619,7 +22549,7 @@ SPECIES_LIEPARD @ ITEM_FOCUS_SASH
 Level: 58
 Ability: ABILITY_PRANKSTER
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
+EVs: 32 HP / 0 Atk / 2 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_TIMID
 - MOVE_FAKE_OUT
 - MOVE_FOUL_PLAY
@@ -23057,7 +22987,7 @@ Nature: NATURE_ADAMANT
 - MOVE_POWER_WHIP
 - MOVE_STOMPING_TANTRUM
 - MOVE_PROTECT
-- MOVE_HELPING_HAND
+- MOVE_BODY_SLAM
 
 SPECIES_OMASTAR @ ITEM_WHITE_HERB
 Level: 58
@@ -23262,15 +23192,15 @@ Nature: NATURE_TIMID
 - MOVE_AIR_SLASH
 - MOVE_PROTECT
 
-SPECIES_SLURPUFF @ ITEM_CLEAR_AMULET
+SPECIES_SLURPUFF @ ITEM_WEAKNESS_POLICY
 Level: 58
 Ability: ABILITY_UNBURDEN
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
+EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
 Nature: NATURE_MODEST
 - MOVE_CALM_MIND
-- MOVE_PLAY_ROUGH
-- MOVE_DRAIN_PUNCH
+- MOVE_DAZZLING_GLEAM
+- MOVE_FLAMETHROWER
 - MOVE_PROTECT
 
 SPECIES_COMFEY @ ITEM_MENTAL_HERB
@@ -23506,7 +23436,7 @@ Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Switching / Predict Switch / Predict Incoming Mon / Pp Stall Prevention / Assume Stab / Assume Status Moves
 
 SPECIES_PYROAR @ ITEM_LIFE_ORB
-Level: 59
+Level: 69
 Ability: ABILITY_COMPETITIVE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -23517,7 +23447,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 SPECIES_PANGORO @ ITEM_SITRUS_BERRY
-Level: 59
+Level: 69
 Ability: ABILITY_IRON_FIST
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -23528,7 +23458,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 SPECIES_NIDOKING @ ITEM_WISE_GLASSES
-Level: 59
+Level: 69
 Ability: ABILITY_SHEER_FORCE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -23539,7 +23469,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 SPECIES_DUOSION @ ITEM_EVIOLITE
-Level: 59
+Level: 69
 Ability: ABILITY_MAGIC_GUARD
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 16 Def / 0 SpA / 18 SpD / 0 Spe
@@ -23615,7 +23545,7 @@ SPECIES_LIEPARD @ ITEM_FOCUS_SASH
 Level: 69
 Ability: ABILITY_PRANKSTER
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
+EVs: 32 HP / 0 Atk / 2 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_TIMID
 - MOVE_FAKE_OUT
 - MOVE_FOUL_PLAY
@@ -23718,7 +23648,7 @@ Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Switching / Predict Switch / Predict Incoming Mon / Pp Stall Prevention / Assume Stab / Assume Status Moves
 
 SPECIES_CASTFORM @ ITEM_FOCUS_SASH
-Level: 15
+Level: 21
 Ability: ABILITY_FORECAST
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -23729,7 +23659,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 SPECIES_COMBUSKEN @ ITEM_EVIOLITE
-Level: 16
+Level: 22
 Ability: ABILITY_BLAZE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -23740,7 +23670,7 @@ Nature: NATURE_HASTY
 - MOVE_PROTECT
 
 SPECIES_SNEASEL @ ITEM_LIFE_ORB
-Level: 15
+Level: 21
 Ability: ABILITY_INNER_FOCUS
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -23751,7 +23681,7 @@ Nature: NATURE_JOLLY
 - MOVE_ICE_PUNCH
 
 SPECIES_ROTOM @ ITEM_SITRUS_BERRY
-Level: 16
+Level: 22
 Ability: ABILITY_LEVITATE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -23771,7 +23701,7 @@ Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Switching / Predict Switch / Predict Incoming Mon / Pp Stall Prevention / Assume Stab / Assume Status Moves
 
 SPECIES_CASTFORM @ ITEM_FOCUS_SASH
-Level: 15
+Level: 21
 Ability: ABILITY_FORECAST
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -23782,7 +23712,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 SPECIES_GROVYLE @ ITEM_EVIOLITE
-Level: 16
+Level: 22
 Ability: ABILITY_OVERGROW
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -23793,7 +23723,7 @@ Nature: NATURE_HASTY
 - MOVE_PROTECT
 
 SPECIES_SNEASEL @ ITEM_LIFE_ORB
-Level: 15
+Level: 21
 Ability: ABILITY_INNER_FOCUS
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -23804,7 +23734,7 @@ Nature: NATURE_JOLLY
 - MOVE_ICE_PUNCH
 
 SPECIES_ROTOM @ ITEM_SITRUS_BERRY
-Level: 16
+Level: 22
 Ability: ABILITY_LEVITATE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -24078,7 +24008,7 @@ Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Switching / Predict Switch / Predict Incoming Mon / Pp Stall Prevention / Assume Stab / Assume Status Moves
 
 SPECIES_CASTFORM @ ITEM_FOCUS_SASH
-Level: 15
+Level: 21
 Ability: ABILITY_FORECAST
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -24089,7 +24019,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 SPECIES_MARSHTOMP @ ITEM_EVIOLITE
-Level: 16
+Level: 22
 Ability: ABILITY_TORRENT
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -24100,7 +24030,7 @@ Nature: NATURE_HASTY
 - MOVE_PROTECT
 
 SPECIES_SNEASEL @ ITEM_LIFE_ORB
-Level: 15
+Level: 21
 Ability: ABILITY_INNER_FOCUS
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -24111,7 +24041,7 @@ Nature: NATURE_JOLLY
 - MOVE_ICE_PUNCH
 
 SPECIES_ROTOM @ ITEM_SITRUS_BERRY
-Level: 16
+Level: 22
 Ability: ABILITY_LEVITATE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -24131,7 +24061,7 @@ Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Switching / Predict Switch / Predict Incoming Mon / Pp Stall Prevention / Assume Stab / Assume Status Moves
 
 SPECIES_CASTFORM @ ITEM_FOCUS_SASH
-Level: 15
+Level: 21
 Ability: ABILITY_FORECAST
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -24142,7 +24072,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 SPECIES_GROVYLE @ ITEM_EVIOLITE
-Level: 16
+Level: 22
 Ability: ABILITY_OVERGROW
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -24153,7 +24083,7 @@ Nature: NATURE_HASTY
 - MOVE_PROTECT
 
 SPECIES_SNEASEL @ ITEM_LIFE_ORB
-Level: 15
+Level: 21
 Ability: ABILITY_INNER_FOCUS
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -24164,7 +24094,7 @@ Nature: NATURE_JOLLY
 - MOVE_ICE_PUNCH
 
 SPECIES_ROTOM @ ITEM_SITRUS_BERRY
-Level: 16
+Level: 22
 Ability: ABILITY_LEVITATE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -24440,7 +24370,7 @@ Double Battle: Yes
 AI: Basic Trainer
 
 SPECIES_PINCURCHIN @ ITEM_TERRAIN_EXTENDER
-Level: 18
+Level: 12
 Ability: ABILITY_ELECTRIC_SURGE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 2 Def / 32 SpA / 0 SpD / 0 Spe
@@ -24451,7 +24381,7 @@ Nature: NATURE_QUIET
 - MOVE_RECOVER
 
 SPECIES_MIMIKYU @ ITEM_LIFE_ORB
-Level: 18
+Level: 12
 Ability: ABILITY_DISGUISE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 32 Def / 0 SpA / 2 SpD / 0 Spe
@@ -24462,7 +24392,7 @@ Nature: NATURE_JOLLY
 - MOVE_DRAIN_PUNCH
 
 SPECIES_SWIRLIX @ ITEM_SITRUS_BERRY
-Level: 18
+Level: 12
 Ability: ABILITY_UNBURDEN
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 32 Def / 0 SpA / 2 SpD / 0 Spe
@@ -24478,23 +24408,23 @@ Class: Winstrate
 Pic: Lass
 Gender: Female
 Music: Female
-Double Battle: Yes
+Double Battle: No
 AI: Basic Trainer / Hp Aware / Smart Mon Choices / Assume Stab / Assume Status Moves
 
-SPECIES_LURANTIS @ ITEM_COBA_BERRY
-Level: 40
+SPECIES_FOMANTIS @ ITEM_COBA_BERRY
+Level: 30
 Ability: ABILITY_CONTRARY
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 32 Atk / 2 Def / 0 SpA / 0 SpD / 0 Spe
 Nature: NATURE_MODEST
 - MOVE_LEAF_STORM
 - MOVE_LEAF_BLADE
-- MOVE_KNOCK_OFF
+- MOVE_SUPERPOWER
 - MOVE_PROTECT
 
-SPECIES_CAMERUPT @ ITEM_PASSHO_BERRY
-Level: 40
-Ability: ABILITY_SOLID_ROCK
+SPECIES_NUMEL @ ITEM_PASSHO_BERRY
+Level: 30
+Ability: ABILITY_SIMPLE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 2 Def / 32 SpA / 0 SpD / 0 Spe
 Nature: NATURE_QUIET
@@ -24504,7 +24434,7 @@ Nature: NATURE_QUIET
 - MOVE_PROTECT
 
 SPECIES_QUAGSIRE @ ITEM_RINDO_BERRY
-Level: 40
+Level: 30
 Ability: ABILITY_UNAWARE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -24514,13 +24444,13 @@ Nature: NATURE_BOLD
 - MOVE_EARTHQUAKE
 - MOVE_PROTECT
 
-SPECIES_FLYGON @ ITEM_SITRUS_BERRY
-Level: 45
+SPECIES_VIBRAVA @ ITEM_SITRUS_BERRY
+Level: 35
 Ability: ABILITY_LEVITATE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_JOLLY
-- MOVE_DRAGON_DANCE
+- MOVE_TAILWIND
 - MOVE_DRAGON_CLAW
 - MOVE_EARTHQUAKE
 - MOVE_ROCK_SLIDE
@@ -24822,7 +24752,7 @@ SPECIES_DEWPIDER @ ITEM_FOCUS_SASH
 Level: 14
 Ability: ABILITY_WATER_BUBBLE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
+EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
 Nature: NATURE_MODEST
 - MOVE_STICKY_WEB
 - MOVE_CHILLING_WATER
@@ -24925,7 +24855,7 @@ Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Mon Choices / Assume Stab / Assume Status Moves
 
 SPECIES_VIVILLON @ ITEM_FOCUS_SASH
-Level: 20
+Level: 14
 Ability: ABILITY_COMPOUND_EYES
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 16 Def / 0 SpA / 18 SpD / 0 Spe
@@ -24935,9 +24865,9 @@ Nature: NATURE_TIMID
 - MOVE_STUN_SPORE
 - MOVE_PROTECT
 
-SPECIES_CHARJABUG @ ITEM_EVIOLITE
-Level: 20
-Ability: ABILITY_BATTERY
+SPECIES_GRUBBIN @ ITEM_EVIOLITE
+Level: 14
+Ability: ABILITY_SWARM
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 32 Def / 0 SpA / 2 SpD / 0 Spe
 Nature: NATURE_MODEST
@@ -24947,7 +24877,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 SPECIES_SIZZLIPEDE @ ITEM_SITRUS_BERRY
-Level: 20
+Level: 14
 Ability: ABILITY_FLASH_FIRE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -24958,7 +24888,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 SPECIES_SCYTHER @ ITEM_CHOICE_BAND
-Level: 20
+Level: 14
 Ability: ABILITY_TECHNICIAN
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -25092,7 +25022,7 @@ Nature: NATURE_JOLLY
 - MOVE_LEAF_BLADE
 - MOVE_SACRED_SWORD
 - MOVE_PROTECT
-- MOVE_DETECT
+- MOVE_NIGHT_SLASH
 
 SPECIES_CHARIZARD @ ITEM_CHARIZARDITE_Y
 Level: 55
@@ -25476,7 +25406,7 @@ Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Mon Choices / Assume Stab / Assume Status Moves
 
 SPECIES_CARBINK @ ITEM_MENTAL_HERB
-Level: 20
+Level: 14
 Ability: ABILITY_STURDY
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 32 Def / 0 SpA / 2 SpD / 0 Spe
@@ -25487,7 +25417,7 @@ Nature: NATURE_BOLD
 - MOVE_PROTECT
 
 SPECIES_RHYHORN @ ITEM_EVIOLITE
-Level: 20
+Level: 14
 Ability: ABILITY_ROCK_HEAD
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 32 Atk / 2 Def / 0 SpA / 0 SpD / 0 Spe
@@ -25498,10 +25428,10 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 SPECIES_MINIOR @ ITEM_LIFE_ORB
-Level: 20
+Level: 14
 Ability: ABILITY_SHIELDS_DOWN
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
+EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
 Nature: NATURE_HASTY
 - MOVE_CHARGE_BEAM
 - MOVE_POWER_GEM
@@ -26058,6 +25988,7 @@ Gender: Female
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Mon Choices / Assume Stab / Assume Status Moves
+Multi Party: Half
 
 SPECIES_JOLTEON @ ITEM_FOCUS_SASH
 Level: 30
@@ -26091,17 +26022,6 @@ Nature: NATURE_JOLLY
 - MOVE_ICE_PUNCH
 - MOVE_PROTECT
 - MOVE_ELECTROWEB
-
-SPECIES_LANTURN @ ITEM_SITRUS_BERRY
-Level: 30
-Ability: ABILITY_VOLT_ABSORB
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
-Nature: NATURE_MODEST
-- MOVE_SCALD
-- MOVE_THUNDERBOLT
-- MOVE_ICY_WIND
-- MOVE_PROTECT
 
 === TRAINER_DANIELLE ===
 Name: DANIELLE
@@ -26495,7 +26415,7 @@ Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Switching / Predict Switch / Predict Incoming Mon / Pp Stall Prevention / Assume Stab / Assume Status Moves
 
 SPECIES_INDEEDEE_F @ ITEM_SITRUS_BERRY
-Level: 81
+Level: 100
 Ability: ABILITY_PSYCHIC_SURGE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 32 Def / 0 SpA / 2 SpD / 0 Spe
@@ -26506,7 +26426,7 @@ Nature: NATURE_CALM
 - MOVE_PROTECT
 
 SPECIES_GALLADE
-Level: 81
+Level: 100
 Ability: ABILITY_JUSTIFIED
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -26517,7 +26437,7 @@ Nature: NATURE_JOLLY
 - MOVE_SACRED_SWORD
 
 SPECIES_DRAGAPULT @ ITEM_LIFE_ORB
-Level: 81
+Level: 100
 Ability: ABILITY_INFILTRATOR
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -26528,7 +26448,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 SPECIES_HEATRAN @ ITEM_CHARCOAL
-Level: 81
+Level: 100
 Ability: ABILITY_FLASH_FIRE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -26539,7 +26459,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 SPECIES_INCINEROAR @ ITEM_MENTAL_HERB
-Level: 81
+Level: 100
 Ability: ABILITY_INTIMIDATE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 2 Def / 0 SpA / 32 SpD / 0 Spe
@@ -26550,7 +26470,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PARTING_SHOT
 
 SPECIES_SUICUNE @ ITEM_LEFTOVERS
-Level: 82
+Level: 100
 Ability: ABILITY_INNER_FOCUS
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 32 Def / 0 SpA / 2 SpD / 0 Spe
@@ -27414,7 +27334,7 @@ Nature: NATURE_ADAMANT
 - MOVE_EXTREME_SPEED
 - MOVE_PROTECT
 
-SPECIES_LOPUNNY @ ITEM_CHOICE_SCARF
+SPECIES_LOPUNNY @ ITEM_NORMAL_GEM
 Level: 60
 Ability: ABILITY_SCRAPPY
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
@@ -27633,17 +27553,17 @@ Nature: NATURE_MODEST
 - MOVE_VOLT_SWITCH
 - MOVE_SCALD
 - MOVE_ICE_BEAM
-- MOVE_PROTECT
+- MOVE_THUNDERBOLT
 
 SPECIES_SLURPUFF @ ITEM_SITRUS_BERRY
 Level: 68
 Ability: ABILITY_UNBURDEN
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
-Nature: NATURE_JOLLY
+EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
+Nature: NATURE_MODEST
 - MOVE_CALM_MIND
-- MOVE_PLAY_ROUGH
-- MOVE_DRAIN_PUNCH
+- MOVE_DAZZLING_GLEAM
+- MOVE_FLAMETHROWER
 - MOVE_PROTECT
 
 SPECIES_TAPU_FINI @ ITEM_WISE_GLASSES
@@ -27666,7 +27586,7 @@ Nature: NATURE_JOLLY
 - MOVE_BRAVE_BIRD
 - MOVE_TAILWIND
 - MOVE_PROTECT
-- MOVE_DETECT
+- MOVE_U_TURN
 
 === TRAINER_TORI_AND_TIA ===
 Name: TORI & TIA
@@ -27926,7 +27846,7 @@ SPECIES_ILLUMISE @ ITEM_LEFTOVERS
 Level: 40
 Ability: ABILITY_PRANKSTER
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
+EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
 Nature: NATURE_MODEST
 - MOVE_STRUGGLE_BUG
 - MOVE_DAZZLING_GLEAM
@@ -28115,7 +28035,7 @@ Nature: NATURE_MODEST
 - MOVE_SCALD
 - MOVE_THUNDERBOLT
 - MOVE_ICY_WIND
-- MOVE_PROTECT
+- MOVE_VOLT_SWITCH
 
 SPECIES_NIDORINA @ ITEM_EVIOLITE
 Level: 58
@@ -28323,7 +28243,7 @@ Double Battle: No
 AI: Basic Trainer / Hp Aware / Smart Mon Choices / Assume Stab / Assume Status Moves
 
 SPECIES_MEOWTH_GALAR @ ITEM_EVIOLITE
-Level: 20
+Level: 14
 Ability: ABILITY_TOUGH_CLAWS
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -28334,18 +28254,18 @@ Nature: NATURE_BRAVE
 - MOVE_U_TURN
 
 SPECIES_WOOLOO @ ITEM_CHESTO_BERRY
-Level: 20
+Level: 14
 Ability: ABILITY_FLUFFY
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 32 Def / 0 SpA / 2 SpD / 0 Spe
 Nature: NATURE_IMPISH
-- MOVE_DEFENSE_CURL
+- MOVE_THUNDER_WAVE
 - MOVE_COTTON_GUARD
 - MOVE_DOUBLE_EDGE
 - MOVE_REST
 
 SPECIES_MINCCINO @ ITEM_CHOICE_BAND
-Level: 20
+Level: 14
 Ability: ABILITY_SKILL_LINK
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -28365,7 +28285,7 @@ Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Mon Choices / Assume Stab / Assume Status Moves
 
 SPECIES_DIANCIE @ ITEM_MENTAL_HERB
-Level: 20
+Level: 14
 Ability: ABILITY_CLEAR_BODY
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 2 Def / 0 SpA / 32 SpD / 0 Spe
@@ -28376,7 +28296,7 @@ Nature: NATURE_SASSY
 - MOVE_PROTECT
 
 SPECIES_SABLEYE @ ITEM_LEFTOVERS
-Level: 20
+Level: 14
 Ability: ABILITY_PRANKSTER
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 2 Def / 0 SpA / 32 SpD / 0 Spe
@@ -28387,7 +28307,7 @@ Nature: NATURE_SASSY
 - MOVE_RECOVER
 
 SPECIES_GIMMIGHOUL @ ITEM_SPELL_TAG
-Level: 20
+Level: 14
 Ability: ABILITY_RATTLED
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -28415,7 +28335,7 @@ Nature: NATURE_HASTY
 - MOVE_WATER_SPOUT
 - MOVE_SEED_BOMB
 - MOVE_FIRE_BLAST
-- MOVE_PROTECT
+- MOVE_ICE_BEAM
 
 SPECIES_BRUXISH @ ITEM_EXPERT_BELT
 Level: 14
@@ -28532,7 +28452,7 @@ Nature: NATURE_TIMID
 - MOVE_THUNDER
 - MOVE_VOLT_SWITCH
 - MOVE_THUNDERBOLT
-- MOVE_PROTECT
+- MOVE_HYPER_BEAM
 
 SPECIES_CRYOGONAL @ ITEM_EXPERT_BELT
 Level: 30
@@ -28553,6 +28473,7 @@ Gender: Male
 Music: Twins
 Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Mon Choices / Assume Stab / Assume Status Moves
+Multi Party: Half
 
 SPECIES_AUDINO @ ITEM_LEFTOVERS
 Level: 30
@@ -28569,7 +28490,7 @@ SPECIES_SLURPUFF @ ITEM_SITRUS_BERRY
 Level: 30
 Ability: ABILITY_UNBURDEN
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
+EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
 Nature: NATURE_MODEST
 - MOVE_ROUND
 - MOVE_DAZZLING_GLEAM
@@ -28587,17 +28508,6 @@ Nature: NATURE_TIMID
 - MOVE_ICE_BEAM
 - MOVE_HYDRO_PUMP
 
-SPECIES_ELDEGOSS @ ITEM_ROCKY_HELMET
-Level: 30
-Ability: ABILITY_REGENERATOR
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 32 HP / 0 Atk / 2 Def / 0 SpA / 32 SpD / 0 Spe
-Nature: NATURE_MODEST
-- MOVE_ROUND
-- MOVE_GIGA_DRAIN
-- MOVE_HELPING_HAND
-- MOVE_PROTECT
-
 === TRAINER_JOSEPH ===
 Name: JOSEPH
 Class: Guitarist
@@ -28606,12 +28516,13 @@ Gender: Male
 Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Mon Choices / Assume Stab / Assume Status Moves / Attacks Partner
+Multi Party: Half
 
 SPECIES_HOUNDOOM @ ITEM_WIDE_LENS
 Level: 30
 Ability: ABILITY_FLASH_FIRE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
+EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
 Nature: NATURE_TIMID
 - MOVE_BEAT_UP
 - MOVE_HEAT_WAVE
@@ -28633,23 +28544,12 @@ SPECIES_TOXEL @ ITEM_BERRY_JUICE
 Level: 29
 Ability: ABILITY_RATTLED
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
+EVs: 32 HP / 0 Atk / 2 Def / 0 SpA / 32 SpD / 0 Spe
 Nature: NATURE_SASSY
 - MOVE_NUZZLE
 - MOVE_ENDEAVOR
 - MOVE_METAL_SOUND
 - MOVE_TEARFUL_LOOK
-
-SPECIES_KROKOROK @ ITEM_SOFT_SAND
-Level: 30
-Ability: ABILITY_MOXIE
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
-Nature: NATURE_JOLLY
-- MOVE_DIG
-- MOVE_CRUNCH
-- MOVE_ROCK_SLIDE
-- MOVE_EARTHQUAKE
 
 === TRAINER_ALYSSA ===
 Name: ALYSSA
@@ -28659,8 +28559,9 @@ Gender: Female
 Music: Female
 Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Mon Choices / Assume Stab / Assume Status Moves
+Multi Party: Half
 
-SPECIES_GLIGAR @ ITEM_EVIOLITE
+SPECIES_GLIGAR @ ITEM_FLYING_GEM
 Level: 30
 Ability: ABILITY_IMMUNITY
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
@@ -28680,7 +28581,7 @@ Nature: NATURE_MODEST
 - MOVE_MAGIC_ROOM
 - MOVE_PSYCHIC
 - MOVE_THUNDERBOLT
-- MOVE_ENERGY_BALL
+- MOVE_PSYCHIC_TERRAIN
 
 SPECIES_DRIFBLIM @ ITEM_PSYCHIC_SEED
 Level: 30
@@ -28692,17 +28593,6 @@ Nature: NATURE_TIMID
 - MOVE_SHADOW_BALL
 - MOVE_WILL_O_WISP
 - MOVE_STRENGTH_SAP
-
-SPECIES_EMOLGA @ ITEM_FOCUS_SASH
-Level: 30
-Ability: ABILITY_MOTOR_DRIVE
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
-Nature: NATURE_NAIVE
-- MOVE_ACROBATICS
-- MOVE_VOLT_SWITCH
-- MOVE_ENCORE
-- MOVE_TAUNT
 
 === TRAINER_MARCOS ===
 Name: MARCOS
@@ -28721,7 +28611,7 @@ EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
 Nature: NATURE_TIMID
 - MOVE_ELECTROWEB
 - MOVE_THUNDERBOLT
-- MOVE_HELPING_HAND
+- MOVE_VOLT_SWITCH
 - MOVE_PROTECT
 
 SPECIES_KRICKETUNE @ ITEM_CLEAR_AMULET
@@ -28765,7 +28655,7 @@ Double Battle: No
 AI: Basic Trainer / Hp Aware / Smart Mon Choices / Assume Stab / Assume Status Moves
 
 SPECIES_SCYTHER @ ITEM_EVIOLITE
-Level: 45
+Level: 30
 Ability: ABILITY_TECHNICIAN
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -28775,8 +28665,8 @@ Nature: NATURE_JOLLY
 - MOVE_BUG_BITE
 - MOVE_QUICK_ATTACK
 
-SPECIES_KABUTOPS @ ITEM_LIFE_ORB
-Level: 45
+SPECIES_KABUTO @ ITEM_LIFE_ORB
+Level: 30
 Ability: ABILITY_WEAK_ARMOR
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -28787,7 +28677,7 @@ Nature: NATURE_JOLLY
 - MOVE_AQUA_JET
 
 SPECIES_BEEDRILL @ ITEM_BEEDRILLITE
-Level: 45
+Level: 30
 Ability: ABILITY_SWARM
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -28807,7 +28697,7 @@ Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Mon Choices / Assume Stab / Assume Status Moves
 
 SPECIES_VICTREEBEL @ ITEM_FOCUS_SASH
-Level: 45
+Level: 30
 Ability: ABILITY_CHLOROPHYLL
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -28817,19 +28707,19 @@ Nature: NATURE_TIMID
 - MOVE_SLUDGE_BOMB
 - MOVE_PROTECT
 
-SPECIES_SLAKING @ ITEM_CHOICE_BAND
-Level: 45
-Ability: ABILITY_TRUANT
+SPECIES_VIGOROTH @ ITEM_CHOICE_BAND
+Level: 30
+Ability: ABILITY_VITAL_SPIRIT
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_ADAMANT
 - MOVE_DOUBLE_EDGE
-- MOVE_HIGH_HORSEPOWER
+- MOVE_EARTHQUAKE
 - MOVE_PLAY_ROUGH
-- MOVE_SUCKER_PUNCH
+- MOVE_KNOCK_OFF
 
 SPECIES_GOLISOPOD @ ITEM_ASSAULT_VEST
-Level: 45
+Level: 30
 Ability: ABILITY_EMERGENCY_EXIT
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -28840,8 +28730,8 @@ Nature: NATURE_ADAMANT
 - MOVE_WATERFALL
 
 SPECIES_DURANT @ ITEM_LIFE_ORB
-Level: 45
-Ability: ABILITY_TRUANT
+Level: 30
+Ability: ABILITY_VITAL_SPIRIT
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_JOLLY
@@ -28860,7 +28750,7 @@ Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Mon Choices / Assume Stab / Assume Status Moves
 
 SPECIES_GOURGEIST_SUPER @ ITEM_FLAME_ORB
-Level: 45
+Level: 30
 Ability: ABILITY_FRISK
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 2 Def / 32 SpA / 0 SpD / 0 Spe
@@ -28871,7 +28761,7 @@ Nature: NATURE_QUIET
 - MOVE_PROTECT
 
 SPECIES_GENGAR @ ITEM_LIFE_ORB
-Level: 45
+Level: 30
 Ability: ABILITY_LEVITATE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -28882,7 +28772,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 SPECIES_SUDOWOODO @ ITEM_CHOICE_BAND
-Level: 45
+Level: 30
 Ability: ABILITY_ROCK_HEAD
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 32 Atk / 2 Def / 0 SpA / 0 SpD / 0 Spe
@@ -28893,7 +28783,7 @@ Nature: NATURE_ADAMANT
 - MOVE_EARTHQUAKE
 
 SPECIES_MAGMORTAR @ ITEM_ASSAULT_VEST
-Level: 45
+Level: 30
 Ability: ABILITY_VITAL_SPIRIT
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -28913,7 +28803,7 @@ Double Battle: Yes
 AI: Basic Trainer
 
 SPECIES_GLISCOR @ ITEM_TOXIC_ORB
-Level: 43
+Level: 28
 Ability: ABILITY_POISON_HEAL
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -28924,18 +28814,18 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 SPECIES_ZANGOOSE @ ITEM_CLEAR_AMULET
-Level: 43
-Ability: ABILITY_TOXIC_BOOST
+Level: 28
+Ability: ABILITY_IMMUNITY
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_JOLLY
-- MOVE_FACADE
+- MOVE_CRUSH_CLAW
 - MOVE_CLOSE_COMBAT
 - MOVE_KNOCK_OFF
 - MOVE_QUICK_ATTACK
 
 SPECIES_VAPOREON @ ITEM_LEFTOVERS
-Level: 43
+Level: 28
 Ability: ABILITY_WATER_ABSORB
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -28945,15 +28835,15 @@ Nature: NATURE_BOLD
 - MOVE_HELPING_HAND
 - MOVE_PROTECT
 
-SPECIES_DRAPION @ ITEM_SCOPE_LENS
-Level: 43
+SPECIES_SKORUPI @ ITEM_SCOPE_LENS
+Level: 28
 Ability: ABILITY_SNIPER
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_JOLLY
 - MOVE_CROSS_POISON
 - MOVE_NIGHT_SLASH
-- MOVE_ROCK_SLIDE
+- MOVE_KNOCK_OFF
 - MOVE_PROTECT
 
 === TRAINER_SOPHIE ===
@@ -29260,7 +29150,7 @@ Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Mon Choices / Assume Stab / Assume Status Moves
 
 SPECIES_DIGGERSBY @ ITEM_LIFE_ORB
-Level: 53
+Level: 28
 Ability: ABILITY_HUGE_POWER
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -29270,8 +29160,8 @@ Nature: NATURE_ADAMANT
 - MOVE_QUICK_ATTACK
 - MOVE_PROTECT
 
-SPECIES_LAIRON @ ITEM_CLEAR_AMULET
-Level: 54
+SPECIES_ARON @ ITEM_CLEAR_AMULET
+Level: 29
 Ability: ABILITY_ROCK_HEAD
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -29282,7 +29172,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 SPECIES_SIMISEAR @ ITEM_SITRUS_BERRY
-Level: 53
+Level: 28
 Ability: ABILITY_BLAZE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -29293,7 +29183,7 @@ Nature: NATURE_JOLLY
 - MOVE_SUPERPOWER
 
 SPECIES_SAWSBUCK @ ITEM_MUSCLE_BAND
-Level: 53
+Level: 28
 Ability: ABILITY_SERENE_GRACE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -29338,7 +29228,7 @@ SPECIES_PERSIAN_ALOLA @ ITEM_EXPERT_BELT
 Level: 59
 Ability: ABILITY_FUR_COAT
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
+EVs: 32 HP / 0 Atk / 2 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_TIMID
 - MOVE_U_TURN
 - MOVE_FAKE_OUT
@@ -29349,7 +29239,7 @@ SPECIES_LIEPARD @ ITEM_FOCUS_SASH
 Level: 59
 Ability: ABILITY_PRANKSTER
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
+EVs: 32 HP / 0 Atk / 2 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_JOLLY
 - MOVE_FAKE_OUT
 - MOVE_FOUL_PLAY
@@ -30005,7 +29895,7 @@ SPECIES_LIEPARD @ ITEM_FOCUS_SASH
 Level: 59
 Ability: ABILITY_PRANKSTER
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
+EVs: 32 HP / 0 Atk / 2 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_TIMID
 - MOVE_FAKE_OUT
 - MOVE_FOUL_PLAY
@@ -30339,7 +30229,7 @@ EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
 Nature: NATURE_MODEST
 - MOVE_MUDDY_WATER
 - MOVE_ICE_BEAM
-- MOVE_HELPING_HAND
+- MOVE_U_TURN
 - MOVE_PROTECT
 
 === TRAINER_ISABELLE ===
@@ -30570,7 +30460,7 @@ Nature: NATURE_JOLLY
 - MOVE_HORN_LEECH
 - MOVE_DOUBLE_EDGE
 - MOVE_PROTECT
-- MOVE_HELPING_HAND
+- MOVE_MEGAHORN
 
 === TRAINER_ELIJAH ===
 Name: ELIJAH
@@ -30635,7 +30525,7 @@ Double Battle: No
 AI: Basic Trainer
 
 SPECIES_LUDICOLO @ ITEM_BIG_ROOT
-Level: 43
+Level: 38
 Ability: ABILITY_RAIN_DISH
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -30646,7 +30536,7 @@ Nature: NATURE_MODEST
 - MOVE_ICE_BEAM
 
 SPECIES_PARASECT @ ITEM_FOCUS_SASH
-Level: 43
+Level: 38
 Ability: ABILITY_DRY_SKIN
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 2 Def / 0 SpA / 32 SpD / 0 Spe
@@ -30657,7 +30547,7 @@ Nature: NATURE_CAREFUL
 - MOVE_SCREECH
 
 SPECIES_VENUSAUR @ ITEM_VENUSAURITE
-Level: 43
+Level: 38
 Ability: ABILITY_OVERGROW
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -30677,7 +30567,7 @@ Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Mon Choices / Assume Stab / Assume Status Moves
 
 SPECIES_SPIRITOMB @ ITEM_LEFTOVERS
-Level: 45
+Level: 40
 Ability: ABILITY_INFILTRATOR
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 2 Def / 0 SpA / 32 SpD / 0 Spe
@@ -30688,7 +30578,7 @@ Nature: NATURE_CAREFUL
 - MOVE_PROTECT
 
 SPECIES_TYRANTRUM @ ITEM_CHOICE_SCARF
-Level: 45
+Level: 40
 Ability: ABILITY_ROCK_HEAD
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -30699,7 +30589,7 @@ Nature: NATURE_JOLLY
 - MOVE_PSYCHIC_FANGS
 
 SPECIES_SERPERIOR @ ITEM_SITRUS_BERRY
-Level: 45
+Level: 40
 Ability: ABILITY_CONTRARY
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -30710,7 +30600,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 SPECIES_CARRACOSTA @ ITEM_WHITE_HERB
-Level: 45
+Level: 40
 Ability: ABILITY_STURDY
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 32 Atk / 2 Def / 0 SpA / 0 SpD / 0 Spe
@@ -30730,7 +30620,7 @@ Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Mon Choices / Assume Stab / Assume Status Moves
 
 SPECIES_PERRSERKER @ ITEM_ASSAULT_VEST
-Level: 45
+Level: 40
 Ability: ABILITY_STEELY_SPIRIT
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -30741,7 +30631,7 @@ Nature: NATURE_ADAMANT
 - MOVE_U_TURN
 
 SPECIES_DHELMISE @ ITEM_COLBUR_BERRY
-Level: 45
+Level: 40
 Ability: ABILITY_STEELWORKER
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 32 Atk / 2 Def / 0 SpA / 0 SpD / 0 Spe
@@ -30752,7 +30642,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 SPECIES_SIRFETCHD @ ITEM_LEEK
-Level: 45
+Level: 40
 Ability: ABILITY_SCRAPPY
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 32 Def / 0 SpA / 2 SpD / 0 Spe
@@ -30763,7 +30653,7 @@ Nature: NATURE_ADAMANT
 - MOVE_PROTECT
 
 SPECIES_KARTANA @ ITEM_FOCUS_SASH
-Level: 45
+Level: 40
 Ability: ABILITY_BEAST_BOOST
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -30806,7 +30696,7 @@ Nature: NATURE_TIMID
 
 SPECIES_HEATMOR @ ITEM_ASSAULT_VEST
 Level: 40
-Ability: ABILITY_GLUTTONY
+Ability: ABILITY_FLASH_FIRE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_ADAMANT
@@ -30833,7 +30723,7 @@ Nature: NATURE_MODEST
 - MOVE_SOLAR_BEAM
 - MOVE_EARTH_POWER
 - MOVE_WEATHER_BALL
-- MOVE_HELPING_HAND
+- MOVE_SUNNY_DAY
 
 SPECIES_BELLOSSOM @ ITEM_SITRUS_BERRY
 Level: 40
@@ -30854,7 +30744,7 @@ EVs: 32 HP / 0 Atk / 2 Def / 0 SpA / 32 SpD / 0 Spe
 Nature: NATURE_CALM
 - MOVE_MOONBLAST
 - MOVE_GIGA_DRAIN
-- MOVE_HELPING_HAND
+- MOVE_CALM_MIND
 - MOVE_PROTECT
 
 === TRAINER_KYRA ===
@@ -31034,8 +30924,8 @@ Music: Intense
 Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Mon Choices / Assume Stab / Assume Status Moves
 
-SPECIES_MEDICHAM @ ITEM_LIFE_ORB
-Level: 52
+SPECIES_MEDITITE @ ITEM_LIFE_ORB
+Level: 11
 Ability: ABILITY_PURE_POWER
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -31045,8 +30935,8 @@ Nature: NATURE_JOLLY
 - MOVE_ZEN_HEADBUTT
 - MOVE_BULLET_PUNCH
 
-SPECIES_GRUMPIG @ ITEM_SITRUS_BERRY
-Level: 52
+SPECIES_SPOINK @ ITEM_SITRUS_BERRY
+Level: 11
 Ability: ABILITY_THICK_FAT
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -31057,7 +30947,7 @@ Nature: NATURE_TIMID
 - MOVE_TAUNT
 
 SPECIES_TROPIUS @ ITEM_CLEAR_AMULET
-Level: 52
+Level: 11
 Ability: ABILITY_AERILATE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -31067,8 +30957,8 @@ Nature: NATURE_SASSY
 - MOVE_TAILWIND
 - MOVE_PROTECT
 
-SPECIES_CHANDELURE @ ITEM_CHANDELURITE
-Level: 55
+SPECIES_LITWICK @ ITEM_EVIOLITE
+Level: 14
 Ability: ABILITY_FLASH_FIRE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 2 Def / 32 SpA / 0 SpD / 0 Spe
@@ -31088,7 +30978,7 @@ Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Mon Choices / Assume Stab / Assume Status Moves
 
 SPECIES_HIPPOPOTAS @ ITEM_SMOOTH_ROCK
-Level: 20
+Level: 14
 Ability: ABILITY_SAND_STREAM
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 32 Def / 0 SpA / 2 SpD / 0 Spe
@@ -31099,7 +30989,7 @@ Nature: NATURE_IMPISH
 - MOVE_PROTECT
 
 SPECIES_DRILBUR @ ITEM_LIFE_ORB
-Level: 20
+Level: 14
 Ability: ABILITY_SAND_RUSH
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -31110,7 +31000,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 SPECIES_CACNEA @ ITEM_EVIOLITE
-Level: 20
+Level: 14
 Ability: ABILITY_WATER_ABSORB
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -31121,7 +31011,7 @@ Nature: NATURE_ADAMANT
 - MOVE_LEECH_SEED
 
 SPECIES_ARON @ ITEM_WEAKNESS_POLICY
-Level: 20
+Level: 14
 Ability: ABILITY_STURDY
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -31141,7 +31031,7 @@ Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Mon Choices / Assume Stab / Assume Status Moves
 
 SPECIES_CLEFAIRY @ ITEM_SITRUS_BERRY
-Level: 20
+Level: 14
 Ability: ABILITY_FRIEND_GUARD
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 32 Def / 0 SpA / 2 SpD / 0 Spe
@@ -31152,7 +31042,7 @@ Nature: NATURE_SASSY
 - MOVE_MOONBLAST
 
 SPECIES_RUFFLET @ ITEM_CHOICE_BAND
-Level: 20
+Level: 14
 Ability: ABILITY_HUSTLE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -31163,7 +31053,7 @@ Nature: NATURE_JOLLY
 - MOVE_AERIAL_ACE
 
 SPECIES_DARUMAKA_GALAR @ ITEM_EXPERT_BELT
-Level: 20
+Level: 14
 Ability: ABILITY_HUSTLE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -31182,8 +31072,8 @@ Music: Female
 Double Battle: No
 AI: Basic Trainer
 
-SPECIES_RAPIDASH @ ITEM_LIFE_ORB
-Level: 40
+SPECIES_PONYTA @ ITEM_LIFE_ORB
+Level: 30
 Ability: ABILITY_RUN_AWAY
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -31194,7 +31084,7 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 SPECIES_BOLTUND @ ITEM_MAGNET
-Level: 38
+Level: 28
 Ability: ABILITY_STRONG_JAW
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -31214,7 +31104,7 @@ Double Battle: No
 AI: Basic Trainer
 
 SPECIES_MEOWSTIC @ ITEM_LIGHT_CLAY
-Level: 38
+Level: 28
 Ability: ABILITY_PRANKSTER
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 32 Def / 0 SpA / 2 SpD / 0 Spe
@@ -31222,10 +31112,10 @@ Nature: NATURE_TIMID
 - MOVE_REFLECT
 - MOVE_LIGHT_SCREEN
 - MOVE_PSYCHIC
-- MOVE_HELPING_HAND
+- MOVE_THUNDER_WAVE
 
 SPECIES_MUSHARNA @ ITEM_KASIB_BERRY
-Level: 38
+Level: 28
 Ability: ABILITY_TELEPATHY
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 2 Def / 0 SpA / 32 SpD / 0 Spe
@@ -31244,8 +31134,8 @@ Music: Intense
 Double Battle: No
 AI: Basic Trainer
 
-SPECIES_MIENSHAO @ ITEM_FOCUS_SASH
-Level: 50
+SPECIES_MIENFOO @ ITEM_FOCUS_SASH
+Level: 30
 Ability: ABILITY_REGENERATOR
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -31256,7 +31146,7 @@ Nature: NATURE_JOLLY
 - MOVE_U_TURN
 
 SPECIES_HARIYAMA @ ITEM_SITRUS_BERRY
-Level: 38
+Level: 28
 Ability: ABILITY_THICK_FAT
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 32 Atk / 2 Def / 0 SpA / 0 SpD / 0 Spe
@@ -31518,7 +31408,7 @@ Nature: NATURE_JOLLY
 - MOVE_ZEN_HEADBUTT
 - MOVE_BULLET_PUNCH
 
-SPECIES_LOPUNNY @ ITEM_CHOICE_SCARF
+SPECIES_LOPUNNY @ ITEM_NORMAL_GEM
 Level: 53
 Ability: ABILITY_SCRAPPY
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
@@ -31696,7 +31586,7 @@ EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_JOLLY
 - MOVE_WILD_CHARGE
 - MOVE_ICE_PUNCH
-- MOVE_PROTECT
+- MOVE_KNOCK_OFF
 - MOVE_ELECTROWEB
 
 SPECIES_TROPIUS @ ITEM_SITRUS_BERRY
@@ -31795,7 +31685,7 @@ Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Switching / Predict Switch / Predict Incoming Mon / Pp Stall Prevention / Assume Stab / Assume Status Moves
 
 SPECIES_CASTFORM @ ITEM_FOCUS_SASH
-Level: 15
+Level: 21
 Ability: ABILITY_FORECAST
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -31806,7 +31696,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 SPECIES_COMBUSKEN @ ITEM_EVIOLITE
-Level: 16
+Level: 22
 Ability: ABILITY_BLAZE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -31817,7 +31707,7 @@ Nature: NATURE_HASTY
 - MOVE_PROTECT
 
 SPECIES_SNEASEL @ ITEM_LIFE_ORB
-Level: 15
+Level: 21
 Ability: ABILITY_INNER_FOCUS
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -31828,7 +31718,7 @@ Nature: NATURE_JOLLY
 - MOVE_ICE_PUNCH
 
 SPECIES_ROTOM @ ITEM_SITRUS_BERRY
-Level: 16
+Level: 22
 Ability: ABILITY_LEVITATE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -31848,7 +31738,7 @@ Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Switching / Predict Switch / Predict Incoming Mon / Pp Stall Prevention / Assume Stab / Assume Status Moves
 
 SPECIES_CASTFORM @ ITEM_FOCUS_SASH
-Level: 15
+Level: 21
 Ability: ABILITY_FORECAST
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -31859,7 +31749,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 SPECIES_MARSHTOMP @ ITEM_EVIOLITE
-Level: 16
+Level: 22
 Ability: ABILITY_TORRENT
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -31870,7 +31760,7 @@ Nature: NATURE_HASTY
 - MOVE_PROTECT
 
 SPECIES_SNEASEL @ ITEM_LIFE_ORB
-Level: 15
+Level: 21
 Ability: ABILITY_INNER_FOCUS
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -31881,7 +31771,7 @@ Nature: NATURE_JOLLY
 - MOVE_ICE_PUNCH
 
 SPECIES_ROTOM @ ITEM_SITRUS_BERRY
-Level: 16
+Level: 22
 Ability: ABILITY_LEVITATE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -32160,7 +32050,7 @@ SPECIES_LIEPARD @ ITEM_DAMP_ROCK
 Level: 31
 Ability: ABILITY_PRANKSTER
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
+EVs: 32 HP / 0 Atk / 2 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_TIMID
 - MOVE_RAIN_DANCE
 - MOVE_FAKE_OUT
@@ -32246,7 +32136,7 @@ SPECIES_JIRACHI @ ITEM_CHOICE_SCARF
 Level: 42
 Ability: ABILITY_SERENE_GRACE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
+EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_JOLLY
 - MOVE_IRON_HEAD
 - MOVE_ICY_WIND
@@ -32584,7 +32474,7 @@ Double Battle: Yes
 AI: Smart Trainer / Prediction / Know Opponent Party / Powerful Status / Hp Aware / Ability Omniscience / Item Omniscience / Move Omniscience
 
 SPECIES_KYOGRE @ ITEM_MYSTIC_WATER
-Level: 82
+Level: 100
 Ability: ABILITY_DRIZZLE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -32595,7 +32485,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 SPECIES_ARCEUS_ELECTRIC @ ITEM_LIFE_ORB
-Level: 82
+Level: 100
 Ability: ABILITY_MULTITYPE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -32606,7 +32496,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 SPECIES_TORNADUS_THERIAN @ ITEM_WISE_GLASSES
-Level: 82
+Level: 100
 Ability: ABILITY_REGENERATOR
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -32617,7 +32507,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 SPECIES_LATIOS @ ITEM_SOUL_DEW
-Level: 82
+Level: 100
 Ability: ABILITY_LEVITATE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -32628,7 +32518,7 @@ Nature: NATURE_TIMID
 - MOVE_PROTECT
 
 SPECIES_OMASTAR @ ITEM_WHITE_HERB
-Level: 82
+Level: 100
 Ability: ABILITY_SWIFT_SWIM
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -32639,7 +32529,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 SPECIES_STARMIE @ ITEM_STARMINITE
-Level: 82
+Level: 100
 Ability: ABILITY_NATURAL_CURE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -33127,7 +33017,7 @@ Ability: ABILITY_GRASSY_SURGE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_ADAMANT
-- MOVE_PROTECT
+- MOVE_KNOCK_OFF
 - MOVE_GRASSY_GLIDE
 - MOVE_WOOD_HAMMER
 - MOVE_U_TURN
@@ -33791,21 +33681,11 @@ Gender: Male
 Music: Suspicious
 Double Battle: Yes
 AI: Basic Trainer / Hp Aware / Smart Mon Choices / Assume Stab / Assume Status Moves
+Multi Party: Half
 
 SPECIES_PLUSLE @ ITEM_FOCUS_SASH
 Level: 30
 Ability: ABILITY_PLUS
-IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
-Nature: NATURE_TIMID
-- MOVE_ELECTROWEB
-- MOVE_HELPING_HAND
-- MOVE_ENCORE
-- MOVE_PROTECT
-
-SPECIES_MINUN @ ITEM_COVERT_CLOAK
-Level: 30
-Ability: ABILITY_MINUS
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
 Nature: NATURE_TIMID
@@ -33825,15 +33705,15 @@ Nature: NATURE_QUIET
 - MOVE_ELECTROWEB
 - MOVE_PROTECT
 
-SPECIES_KLINK @ ITEM_EVIOLITE
+SPECIES_ELECTABUZZ @ ITEM_EVIOLITE
 Level: 30
-Ability: ABILITY_MINUS
+Ability: ABILITY_VITAL_SPIRIT
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
-Nature: NATURE_ADAMANT
-- MOVE_SHIFT_GEAR
-- MOVE_GEAR_GRIND
-- MOVE_WILD_CHARGE
+EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
+Nature: NATURE_TIMID
+- MOVE_THUNDERBOLT
+- MOVE_ELECTROWEB
+- MOVE_HELPING_HAND
 - MOVE_PROTECT
 
 === TRAINER_DARIUS ===
@@ -33865,7 +33745,7 @@ Nature: NATURE_JOLLY
 - MOVE_DOUBLE_EDGE
 - MOVE_QUICK_ATTACK
 - MOVE_BRAVE_BIRD
-- MOVE_PROTECT
+- MOVE_DRILL_RUN
 
 SPECIES_EMOLGA @ ITEM_FOCUS_SASH
 Level: 55
@@ -34874,7 +34754,7 @@ SPECIES_PIKACHU @ ITEM_LIGHT_BALL
 Level: 78
 Ability: ABILITY_LIGHTNING_ROD
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
+EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_JOLLY
 - MOVE_FAKE_OUT
 - MOVE_VOLT_TACKLE
@@ -34910,7 +34790,7 @@ Nature: NATURE_ADAMANT
 - MOVE_WILD_CHARGE
 - MOVE_ICE_PUNCH
 - MOVE_EARTHQUAKE
-- MOVE_PROTECT
+- MOVE_LOW_KICK
 
 SPECIES_AMPHAROS @ ITEM_AMPHAROSITE
 Level: 80

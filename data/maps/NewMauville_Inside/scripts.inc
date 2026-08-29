@@ -357,7 +357,11 @@ NewMauville_Inside_Text_RotomRemains:
 NewMauville_Inside_Text_RotomCaught:
 	.string "The generator finally falls silent.\p"
 	.string "The ROTOM CATALOG nearby can change\n"
-	.string "ROTOM between all five appliances.$"
+	.string "ROTOM between all five appliances.\p"
+	.string "Faint conduits sketch REGISTEEL,\n"
+	.string "MANECTRIC, and DIALGA.\p"
+	.string "Bringing those families here may wake\n"
+	.string "other challengers in the plant.$"
 
 @ BEGIN EMERALD CHAMPIONS LEGENDARY ROOTS
 .set EC_SIGN_ZAPDOS_ID, 69
@@ -405,7 +409,7 @@ NewMauville_Inside_EventScript_ZapdosCleanup::
 	end
 
 NewMauville_Inside_Text_ZapdosDormant:
-	.string "A CHAMPION'S SIGN marks the silent generator.\p"
+	.string "A CHAMPION'S SIGN marks the generator.\p"
 	.string "Its light is dormant. HOENN's story\n"
 	.string "has not yet reached this place.$"
 
@@ -468,7 +472,7 @@ NewMauville_Inside_EventScript_MeltanCleanup::
 	end
 
 NewMauville_Inside_Text_MeltanDormant:
-	.string "A CHAMPION'S SIGN marks the liquid-metal conduit.\p"
+	.string "A CHAMPION'S SIGN marks a metal conduit.\p"
 	.string "Its light is dormant. HOENN's story\n"
 	.string "has not yet reached this place.$"
 

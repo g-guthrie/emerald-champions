@@ -619,7 +619,7 @@ LilycoveCity_Harbor_Text_SailorFerryUnavailable:
 	.string "at the SHIPYARD in SLATEPORT.$"
 
 LilycoveCity_Harbor_Text_SailorFerryAvailable:
-	.string "CHAMPION! STERN and DEVON authenticated\n"
+	.string "CHAMPION! STERN and DEVON approved\n"
 	.string "four old exploration passes for you.\p"
 	.string "They chart SOUTHERN ISLAND, NAVEL ROCK,\n"
 	.string "BIRTH ISLAND, and FARAWAY ISLAND.$"

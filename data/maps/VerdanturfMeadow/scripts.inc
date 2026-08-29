@@ -6,7 +6,7 @@ VerdanturfMeadow_EventScript_Warden::
 	end
 VerdanturfMeadow_Text_Warden:
 	.string "This meadow heals after every storm.\p"
-	.string "Bring ROSERADE after you master the heat.\n"
+	.string "Bring ROSERADE once you master the heat.\n"
 	.string "A tiny guardian may reveal itself.$"
 .set EC_SIGN_SHAYMIN_ID, 33
 

@@ -80,11 +80,11 @@ SootopolisCity_Gym_1F_Movement_FallThroughIce:
 	step_end
 
 SootopolisCity_Gym_1F_EventScript_Juan::
+	goto_if_unset FLAG_BADGE06_GET, SootopolisCity_Gym_1F_EventScript_GoGetFortreeBadge
 	trainerbattle_double TRAINER_JUAN_1, SootopolisCity_Gym_1F_Text_JuanIntro, SootopolisCity_Gym_1F_Text_JuanDefeat, EmeraldChampions_Text_NeedTwoPokemon, SootopolisCity_Gym_1F_EventScript_JuanDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, SootopolisCity_Gym_1F_EventScript_JuanRematch
 	goto_if_unset FLAG_RECEIVED_TM_WATER_PULSE, SootopolisCity_Gym_1F_EventScript_GiveWaterPulse2
-	goto_if_unset FLAG_BADGE06_GET, SootopolisCity_Gym_1F_EventScript_GoGetFortreeBadge
 	msgbox SootopolisCity_Gym_1F_Text_JuanPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -236,7 +236,7 @@ SootopolisCity_Gym_1F_Text_RegisteredJuan:
 
 SootopolisCity_Gym_1F_Text_JuanPostBattle:
 	.string "Eight BADGES open EVER GRANDE. Its\n"
-	.string "is five consecutive master teams.\p"
+	.string "challenge is five master teams in a row.\p"
 	.string "You may heal with your BAG between rooms,\n"
 	.string "but never use items inside their battles.$"
 

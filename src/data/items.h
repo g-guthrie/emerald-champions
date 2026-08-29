@@ -1957,8 +1957,8 @@ const struct ItemInfo gItemsInfo[] =
         .price = 1000,
         .description = COMPOUND_STRING(
             "Raises a Pokémon\n"
-            "up to ten levels,\n"
-            "stopping at the cap."),
+            "up to ten levels.\n"
+            "Stops at the cap."),
         .pocket = POCKET_ITEMS,
         .sortType = ITEM_TYPE_LEVEL_UP_ITEM,
         .type = ITEM_USE_PARTY_MENU,
@@ -15500,10 +15500,11 @@ const struct ItemInfo gItemsInfo[] =
     {
         .name = ITEM_NAME("Linking Cord"),
         .price = 0,
+        .importance = 1,
         .description = COMPOUND_STRING(
             "A reusable cord\n"
-            "that evolves certain\n"
-            "trade-linked Pokémon."),
+            "for Pokémon that\n"
+            "often need trades."),
         .pocket = POCKET_KEY_ITEMS,
         .sortType = ITEM_TYPE_EVOLUTION_ITEM,
         .type = ITEM_USE_PARTY_MENU,

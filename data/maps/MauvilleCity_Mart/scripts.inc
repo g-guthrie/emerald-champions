@@ -19,12 +19,12 @@ MauvilleCity_Mart_Pokemart:
 	.2byte ITEM_ANTIDOTE
 	.2byte ITEM_PARALYZE_HEAL
 	.2byte ITEM_AWAKENING
-	.2byte ITEM_X_SPEED
-	.2byte ITEM_X_ATTACK
-	.2byte ITEM_X_DEFENSE
-	.2byte ITEM_GUARD_SPEC
-	.2byte ITEM_DIRE_HIT
-	.2byte ITEM_X_ACCURACY
+	.2byte ITEM_HEAL_BALL
+	.2byte ITEM_NEST_BALL
+	.2byte ITEM_DUSK_BALL
+	.2byte ITEM_QUICK_BALL
+	.2byte ITEM_LUXURY_BALL
+	.2byte ITEM_POKE_TOY
 	.2byte ITEM_RARE_CANDY
 	pokemartlistend
 
@@ -37,16 +37,12 @@ MauvilleCity_Mart_EventScript_Man::
 	end
 
 MauvilleCity_Mart_Text_ItemsToTemporarilyElevateStats:
-	.string "There are items that temporarily\n"
-	.string "elevate the stats of POKéMON.\p"
-	.string "The ones I know you use in battle\n"
-	.string "are X ATTACK and X DEFEND…\p"
-	.string "I do believe that there are others\n"
-	.string "like them.$"
+	.string "Trainer battles do not allow BAG items.\n"
+	.string "This shop stocks specialized POKé BALLS\l"
+	.string "instead, so you can build more teams.$"
 
 MauvilleCity_Mart_Text_DecisionsDetermineBattle:
-	.string "Use a certain move, or use an item\n"
-	.string "instead…\p"
+	.string "Choose a move, switch a partner, or\n"
+	.string "protect a position…\p"
 	.string "The TRAINER's decisions determine how\n"
-	.string "battles turn out, I think.$"
-
+	.string "battles turn out.$"

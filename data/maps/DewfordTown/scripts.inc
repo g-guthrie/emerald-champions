@@ -10,6 +10,9 @@ DewfordTown_EventScript_Briney::
 	lock
 	faceplayer
 	goto_if_unset FLAG_DELIVERED_STEVEN_LETTER, DewfordTown_EventScript_ReturnToPetalburgPrompt
+	goto_if_unset FLAG_BADGE02_GET, DewfordTown_EventScript_KnuckleBadgePrompt
+	checkitem ITEM_MEGA_RING, 1
+	goto_if_eq VAR_RESULT, FALSE, DewfordTown_EventScript_MegaRingPrompt
 	message DewfordTown_Text_WhereAreWeBound
 	waitmessage
 	multichoicedefault 21, 6, MULTI_BRINEY_ON_DEWFORD, 2, FALSE
@@ -47,6 +50,19 @@ DewfordTown_EventScript_ReturnToPetalburgPrompt::
 	release
 	end
 
+DewfordTown_EventScript_KnuckleBadgePrompt::
+	msgbox DewfordTown_Text_BrawlyAwaitsBeforeSlateport, MSGBOX_DEFAULT
+	msgbox DewfordTown_Text_SetSailBackToPetalburg, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, DewfordTown_EventScript_SailBackToPetalburg
+	msgbox DewfordTown_Text_JustTellMeWhenYouNeedToSetSail, MSGBOX_DEFAULT
+	release
+	end
+
+DewfordTown_EventScript_MegaRingPrompt::
+	msgbox DewfordTown_Text_StevenStillHasMegaRing, MSGBOX_DEFAULT
+	release
+	end
+
 DewfordTown_EventScript_SailBackToPetalburg::
 	msgbox DewfordTown_Text_PetalburgWereSettingSail2, MSGBOX_DEFAULT
 	closemessage
@@ -56,6 +72,18 @@ DewfordTown_EventScript_SailBackToPetalburg::
 DewfordTown_EventScript_Woman::
 	msgbox DewfordTown_Text_TinyIslandCommunity, MSGBOX_NPC
 	end
+
+DewfordTown_Text_BrawlyAwaitsBeforeSlateport:
+	.string "You've delivered the LETTER, but BRAWLY\n"
+	.string "still awaits your challenge.\p"
+	.string "Win the KNUCKLE BADGE before we sail\n"
+	.string "on to SLATEPORT.$"
+
+DewfordTown_Text_StevenStillHasMegaRing:
+	.string "That KNUCKLE BADGE should convince\n"
+	.string "STEVEN. Return to him in GRANITE CAVE.\p"
+	.string "We'll sail for SLATEPORT after he gives\n"
+	.string "you the MEGA RING.$"
 
 DewfordTown_EventScript_TownSign::
 	msgbox DewfordTown_Text_TownSign, MSGBOX_SIGN

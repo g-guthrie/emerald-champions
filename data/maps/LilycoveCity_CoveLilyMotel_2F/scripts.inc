@@ -105,7 +105,7 @@ LilycoveCity_CoveLilyMotel_2F_Text_BuffelAfter:
 	.string "and different from the one before it.$"
 
 LilycoveCity_CoveLilyMotel_2F_Text_BuffelDecline:
-	.string "Come back when you want a designer's test.$"
+	.string "Return when you want a designer's test.$"
 
 LilycoveCity_CoveLilyMotel_2F_Text_FilledPokedexGiveYouThis:
 	.string "Wow! That's awesome!\n"

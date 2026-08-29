@@ -190,8 +190,7 @@ Route114_Text_MeteorFallsSign:
 
 Route114_Text_FossilManiacsHouseSign:
 	.string "FOSSIL MANIAC'S HOUSE\n"
-	.string "“Fossils gratefully accepted!”$"
+	.string "“Fossils from every era studied!”$"
 
 Route114_Text_LanettesHouse:
 	.string "LANETTE'S HOUSE$"
-

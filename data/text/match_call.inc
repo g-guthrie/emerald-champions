@@ -264,8 +264,8 @@ MatchCall_PositiveBattleText3::
 	.string "How's your battling?\p"
 	.string "Me, I had a battle the other day,\n"
 	.string "and my {STR_VAR_2} came up huge!\p"
-	.string "The next time I battle you,\n"
-	.string "{PLAYER}, it won't be me losing!$"
+	.string "That win proved our practice is\n"
+	.string "working. I had to tell you!$"
 
 MatchCall_PositiveBattleText4::
 	.string "Hey, {PLAYER}.\n"
@@ -282,8 +282,8 @@ MatchCall_PositiveBattleText5::
 	.string "Battling much?\p"
 	.string "I just won a while back!\n"
 	.string "My {STR_VAR_2} was brilliant!\p"
-	.string "You wait. I'm going to beat you\n"
-	.string "next time! Right, take care!$"
+	.string "I'm writing down what worked.\n"
+	.string "Right, take care!$"
 
 MatchCall_PositiveBattleText6::
 	.string "Hey, {PLAYER}{KUN}.\n"
@@ -291,16 +291,16 @@ MatchCall_PositiveBattleText6::
 	.string "How's it going for you?\p"
 	.string "I've been riding a hot streak.\n"
 	.string "Why, I just won a battle.\p"
-	.string "When we have our next battle,\n"
-	.string "I'm sure not going to lose!$"
+	.string "My team's rhythm is finally\n"
+	.string "coming together!$"
 
 MatchCall_PositiveBattleText7::
 	.string "{PLAYER}{KUN}?\n"
 	.string "{STR_VAR_1} here.\p"
 	.string "My {STR_VAR_2} is a force!\n"
 	.string "It won me another battle just now!\p"
-	.string "I can't wait to have a rematch\n"
-	.string "with you.$"
+	.string "I wanted you to hear that our\n"
+	.string "training is paying off.$"
 
 MatchCall_PositiveBattleText8::
 	.string "Oh, {PLAYER}{KUN}, how do you do?\n"
@@ -715,9 +715,9 @@ MatchCall_PersonalizedText8::
 	.string "Yahoo, it's {STR_VAR_1}!\n"
 	.string "How do you do?\p"
 	.string "I've been raising my POKéMON with\n"
-	.string "you as the target.\p"
-	.string "I don't intend to lose when we\n"
-	.string "battle again.\p"
+	.string "lessons from our battle.\p"
+	.string "Your example keeps our training\n"
+	.string "focused.\p"
 	.string "Isn't it great to have TRAINER\n"
 	.string "friends? Let's meet again!$"
 
@@ -784,9 +784,8 @@ MatchCall_PersonalizedText14::
 	.string "Oh, it's {STR_VAR_1}!\p"
 	.string "I was just thinking I'm getting\n"
 	.string "bored of the ABANDONED SHIP.\p"
-	.string "But since I'm already here,\n"
-	.string "and I want to beat you once,\l"
-	.string "I'll be sticking around a bit more.\p"
+	.string "But since I'm already here, I'll\n"
+	.string "learn every corner of the place.\p"
 	.string "If you feel compelled, why don't\n"
 	.string "you come see me?\p"
 	.string "I think today will be the day that\n"
@@ -811,10 +810,9 @@ MatchCall_PersonalizedText16::
 	.string "teaching karate to my POKéMON.\p"
 	.string "But now they're better than me!\n"
 	.string "I've done nothing but lose to them!\p"
-	.string "But even though I may lose to\n"
-	.string "POKéMON, I won't lose to another\l"
-	.string "TRAINER, no sir!\p"
-	.string "We have to battle again!\n"
+	.string "But teaching them has made all of\n"
+	.string "us tougher than before!\p"
+	.string "Training never ends!\n"
 	.string "Ugwaah!$"
 
 MatchCall_PersonalizedText17::
@@ -848,8 +846,8 @@ MatchCall_PersonalizedText19::
 	.string "camping.\p"
 	.string "But win or lose, I like to battle\n"
 	.string "when I'm camping.\p"
-	.string "Battle with us again, okay?\n"
-	.string "Oh, and let's go camping, too!$"
+	.string "Come camping with us sometime, okay?\n"
+	.string "I know the best sites!$"
 
 MatchCall_PersonalizedText20::
 	.string "It's me, me, {STR_VAR_1}!\p"
@@ -897,9 +895,9 @@ MatchCall_PersonalizedText24::
 	.string "shine to this region.\p"
 	.string "I plan to stay here a while.\n"
 	.string "Perhaps we can meet again?\p"
-	.string "I've not forgotten your dazzling\n"
+	.string "I still study your dazzling\n"
 	.string "techniques.\p"
-	.string "I do hope for a rematch.$"
+	.string "I hope our paths cross again.$"
 
 MatchCall_PersonalizedText25::
 	.string "Snivel… It's… {STR_VAR_1}…\n"
@@ -2097,8 +2095,8 @@ MatchCall_Text_Brawly_RematchReady::
 	.string "for another challenge!$"
 
 MatchCall_Text_Brawly_PostRematch::
-	.string "BRAWLY: {PLAYER}{KUN}, I don't think\n"
-	.string "I'll ever get bored of battling you!$"
+	.string "BRAWLY: {PLAYER}{KUN}, our battle keeps\n"
+	.string "teaching me new lines to ride!$"
 
 MatchCall_Text_Wattson_Preparing::
 	.string "WATTSON: Oh, it's you!\p"
@@ -2128,7 +2126,7 @@ MatchCall_Text_Wattson_RematchReady::
 
 MatchCall_Text_Wattson_PostRematch::
 	.string "WATTSON: Wahahaha!\p"
-	.string "A battle with you is always charged\n"
+	.string "The battle we shared was charged\n"
 	.string "with shocking power!$"
 
 MatchCall_Text_Flannery_Preparing::
@@ -2220,8 +2218,8 @@ MatchCall_Text_TateLiza_RematchReady::
 MatchCall_Text_TateLiza_PostRematch::
 	.string "TATE: {PLAYER}, the battle we had…\n"
 	.string "LIZA: Is an invaluable experience.\p"
-	.string "TATE: It would be nice if…\n"
-	.string "LIZA: We could all battle again!$"
+	.string "TATE: We still study…\n"
+	.string "LIZA: Every turn that shaped it!$"
 
 MatchCall_Text_Juan_Preparing::
 	.string "JUAN: Hmm…\n"
@@ -2250,8 +2248,8 @@ MatchCall_Text_Juan_RematchReady::
 
 MatchCall_Text_Juan_PostRematch::
 	.string "JUAN: {PLAYER}{KUN}…\p"
-	.string "Like the finest music, the battles\n"
-	.string "we wage together strike chords\l"
+	.string "Like the finest music, the battle\n"
+	.string "we shared still strikes chords\l"
 	.string "of inspiration in my heart…\p"
 	.string "When I close my eyes, I see visions\n"
 	.string "of you soaring with the melody…$"

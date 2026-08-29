@@ -24,20 +24,14 @@ MagmaHideout_3F_1R_Text_Grunt9PostBattle:
 	.string "hoods in this magma-filled volcano?$"
 
 MagmaHideout_3F_1R_Text_Grunt16Intro:
-	.string "We joined so we can help our leader\n"
-	.string "achieve his fantastic vision.\p"
-	.string "I don't care if you're with TEAM AQUA\n"
-	.string "or if you're just some kid passing by.\p"
-	.string "No one interferes with us and gets\n"
-	.string "away with it!$"
+	.string "MAXIE offers a world people can predict,\n"
+	.string "build on, and pass to their children.\p"
+	.string "AQUA rejects it. You question it.\n"
+	.string "I will defend it.$"
 
 MagmaHideout_3F_1R_Text_Grunt16Defeat:
-	.string "Oh, no!\n"
-	.string "You're not to be trusted at all!$"
+	.string "Your uncertainty outplayed my order…$"
 
 MagmaHideout_3F_1R_Text_Grunt16PostBattle:
-	.string "Listen to me.\n"
-	.string "TEAM MAGMA is right!\p"
-	.string "Don't listen to TEAM AQUA.\n"
-	.string "Don't believe their lies!$"
-
+	.string "I still believe MAGMA's question matters.\n"
+	.string "I am less certain our answer is complete.$"

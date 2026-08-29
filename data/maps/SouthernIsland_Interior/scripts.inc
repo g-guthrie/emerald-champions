@@ -78,15 +78,19 @@ SouthernIsland_Interior_EventScript_Lati::
 	special BattleSetup_StartLatiBattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, SouthernIsland_Interior_EventScript_LatiCaught
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, SouthernIsland_Interior_EventScript_LatiDefeated
 	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, SouthernIsland_Interior_EventScript_RanFromLati
 	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, SouthernIsland_Interior_EventScript_RanFromLati
+	releaseall
+	end
+
+SouthernIsland_Interior_EventScript_LatiCaught::
 	setflag FLAG_CAUGHT_LATIAS_OR_LATIOS
 	releaseall
 	end
 
 SouthernIsland_Interior_EventScript_LatiDefeated::
-	setflag FLAG_DEFEATED_LATIAS_OR_LATIOS
 	copyvar VAR_0x8004, VAR_TEMP_4
 	goto Common_EventScript_LegendaryFlewAway
 	end
@@ -102,11 +106,11 @@ SouthernIsland_Interior_EventScript_Sign::
 	end
 
 SouthernIsland_Interior_EventScript_SetLatiosBattleVars::
-	seteventmon SPECIES_LATIOS, 50, ITEM_SOUL_DEW
+	seteventmon SPECIES_LATIOS, 100, ITEM_SOUL_DEW
 	return
 
 SouthernIsland_Interior_EventScript_SetLatiasBattleVars::
-	seteventmon SPECIES_LATIAS, 50, ITEM_SOUL_DEW
+	seteventmon SPECIES_LATIAS, 100, ITEM_SOUL_DEW
 	return
 
 SouthernIsland_Interior_Movement_CameraPanUp:

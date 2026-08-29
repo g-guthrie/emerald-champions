@@ -40,10 +40,16 @@ EverGrandeCity_PhoebesRoom_EventScript_Phoebe::
 	lock
 	faceplayer
 	goto_if_set FLAG_DEFEATED_ELITE_4_PHOEBE, EverGrandeCity_PhoebesRoom_EventScript_PostBattleSpeech
+	call PokemonLeague_EliteFour_EventScript_CheckReadyOrOfferRetire
+	goto_if_eq VAR_RESULT, FALSE, EverGrandeCity_PhoebesRoom_EventScript_NotReady
 	playbgm MUS_ENCOUNTER_ELITE_FOUR, FALSE
 	msgbox EverGrandeCity_PhoebesRoom_Text_IntroSpeech, MSGBOX_DEFAULT
 	trainerbattle_no_intro_double TRAINER_PHOEBE, EverGrandeCity_PhoebesRoom_Text_Defeat, EmeraldChampions_Text_NeedTwoPokemon
 	goto EverGrandeCity_PhoebesRoom_EventScript_Defeated
+	end
+
+EverGrandeCity_PhoebesRoom_EventScript_NotReady::
+	release
 	end
 
 EverGrandeCity_PhoebesRoom_EventScript_PostBattleSpeech::

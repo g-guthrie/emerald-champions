@@ -71,9 +71,10 @@ MeteorFalls_1F_2R_Text_NicolasDefeat:
 	.string "I didn't expect you to be so strong!$"
 
 MeteorFalls_1F_2R_Text_NicolasPostBattle:
-	.string "The road ahead remains long and harsh.\p"
-	.string "When will my POKéMON and I become\n"
-	.string "the best?$"
+	.string "The rear wall rings near REGIROCK.\n"
+	.string "A deeper mark resembles ALAKAZAM.\p"
+	.string "Bring those families through the Falls;\n"
+	.string "the cave may answer without DEVON.$"
 
 MeteorFalls_1F_2R_Text_NicolasRegister:
 	.string "I want to know more about your power.\n"
@@ -116,8 +117,8 @@ MeteorFalls_1F_2R_Text_JohnNotEnoughMons:
 	.string "have to return with more POKéMON.$"
 
 MeteorFalls_1F_2R_Text_JohnRegister:
-	.string "JOHN: Young TRAINER, if the chance\n"
-	.string "arises, will you battle with us again?$"
+	.string "JOHN: Young TRAINER, may we trade\n"
+	.string "notes on teamwork through MATCH CALL?$"
 
 MeteorFalls_1F_2R_Text_JayIntro:
 	.string "JAY: We've been married for\n"
@@ -180,4 +181,3 @@ MeteorFalls_1F_2R_Text_JayRematchNotEnoughMons:
 	.string "TRAINER?\p"
 	.string "If you'd care to battle with us, you'll\n"
 	.string "have to come back with more POKéMON.$"
-

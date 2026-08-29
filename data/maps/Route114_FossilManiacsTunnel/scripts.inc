@@ -37,11 +37,29 @@ Route114_FossilManiacsTunnel_EventScript_ManiacMentionCaveIn::
 Route114_FossilManiacsTunnel_EventScript_FossilManiac::
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_REVIVED_FOSSIL_MON, Route114_FossilManiacsTunnel_EventScript_PlayerRevivedFossil
+	checkitem ITEM_HELIX_FOSSIL
+	goto_if_eq VAR_RESULT, TRUE, Route114_FossilManiacsTunnel_EventScript_PlayerHasFossil
+	checkitem ITEM_DOME_FOSSIL
+	goto_if_eq VAR_RESULT, TRUE, Route114_FossilManiacsTunnel_EventScript_PlayerHasFossil
+	checkitem ITEM_OLD_AMBER
+	goto_if_eq VAR_RESULT, TRUE, Route114_FossilManiacsTunnel_EventScript_PlayerHasFossil
 	checkitem ITEM_ROOT_FOSSIL
 	goto_if_eq VAR_RESULT, TRUE, Route114_FossilManiacsTunnel_EventScript_PlayerHasFossil
 	checkitem ITEM_CLAW_FOSSIL
 	goto_if_eq VAR_RESULT, TRUE, Route114_FossilManiacsTunnel_EventScript_PlayerHasFossil
+	checkitem ITEM_ARMOR_FOSSIL
+	goto_if_eq VAR_RESULT, TRUE, Route114_FossilManiacsTunnel_EventScript_PlayerHasFossil
+	checkitem ITEM_SKULL_FOSSIL
+	goto_if_eq VAR_RESULT, TRUE, Route114_FossilManiacsTunnel_EventScript_PlayerHasFossil
+	checkitem ITEM_COVER_FOSSIL
+	goto_if_eq VAR_RESULT, TRUE, Route114_FossilManiacsTunnel_EventScript_PlayerHasFossil
+	checkitem ITEM_PLUME_FOSSIL
+	goto_if_eq VAR_RESULT, TRUE, Route114_FossilManiacsTunnel_EventScript_PlayerHasFossil
+	checkitem ITEM_JAW_FOSSIL
+	goto_if_eq VAR_RESULT, TRUE, Route114_FossilManiacsTunnel_EventScript_PlayerHasFossil
+	checkitem ITEM_SAIL_FOSSIL
+	goto_if_eq VAR_RESULT, TRUE, Route114_FossilManiacsTunnel_EventScript_PlayerHasFossil
+	goto_if_set FLAG_RECEIVED_REVIVED_FOSSIL_MON, Route114_FossilManiacsTunnel_EventScript_PlayerRevivedFossil
 	msgbox Route114_FossilManiacsTunnel_Text_LookInDesertForFossils, MSGBOX_DEFAULT
 	release
 	end
@@ -70,17 +88,15 @@ Route114_FossilManiacsTunnel_Text_LookInDesertForFossils:
 Route114_FossilManiacsTunnel_Text_DevonCorpRevivingFossils:
 	.string "You found a FOSSIL, didn't you?\n"
 	.string "That's so nice… It's so dreamy…\p"
-	.string "What are you going to do with that\n"
-	.string "FOSSIL?\p"
-	.string "From what I've heard, DEVON is doing\n"
-	.string "research on reviving POKéMON from\l"
-	.string "FOSSILS…\p"
-	.string "I love my FOSSILS, so I would never\n"
-	.string "do anything like that…$"
+	.string "DEVON's researcher can revive complete\n"
+	.string "fossils from every ancient era.\p"
+	.string "The machine handles one at a time,\n"
+	.string "but you may return with every kind.$"
 
 Route114_FossilManiacsTunnel_Text_FossilsAreWonderful:
-	.string "FOSSILS are so… Wonderful…\n"
-	.string "It's so dreamy…$"
+	.string "You brought an ancient POKéMON back!\n"
+	.string "Perhaps fossils are meant to awaken…\p"
+	.string "DEVON can revive any others you find.$"
 
 Route114_FossilManiacsTunnel_Text_NotSafeThatWay:
 	.string "Oh…\n"
@@ -90,4 +106,6 @@ Route114_FossilManiacsTunnel_Text_NotSafeThatWay:
 	.string "I think there's a giant cavern\n"
 	.string "underneath now…\p"
 	.string "But I've left it alone because I don't\n"
-	.string "think there are any FOSSILS there…$"
+	.string "think there are any FOSSILS there…\p"
+	.string "One new wall mark does resemble\n"
+	.string "LANDORUS. That is not a fossil.$"

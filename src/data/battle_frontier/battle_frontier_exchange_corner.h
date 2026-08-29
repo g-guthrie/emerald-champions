@@ -23,28 +23,31 @@ static const u16 sFrontierExchangeCorner_Decor2[] =
     ITEM_LIST_END
 };
 
+// Legacy internal names are retained to minimize UI wiring churn. Player-facing
+// shelves now hold finite supplies and evolution tools rather than free Center
+// gear or redundant vitamins.
 static const enum Item sFrontierExchangeCorner_Vitamins[] =
 {
-    ITEM_PROTEIN,
-    ITEM_CALCIUM,
-    ITEM_IRON,
-    ITEM_ZINC,
-    ITEM_CARBOS,
-    ITEM_HP_UP,
+    ITEM_PP_UP,
+    ITEM_PP_MAX,
+    ITEM_MAX_REVIVE,
+    ITEM_SACRED_ASH,
+    ITEM_DREAM_BALL,
+    ITEM_BEAST_BALL,
     ITEM_LIST_END
 };
 
 static const enum Item sFrontierExchangeCorner_HoldItems[] =
 {
-    ITEM_LEFTOVERS,
-    ITEM_WHITE_HERB,
-    ITEM_QUICK_CLAW,
-    ITEM_MENTAL_HERB,
-    ITEM_BRIGHT_POWDER,
-    ITEM_CHOICE_BAND,
-    ITEM_KINGS_ROCK,
-    ITEM_FOCUS_BAND,
-    ITEM_SCOPE_LENS,
+    ITEM_LINKING_CORD,
+    ITEM_PROTECTOR,
+    ITEM_ELECTIRIZER,
+    ITEM_MAGMARIZER,
+    ITEM_REAPER_CLOTH,
+    ITEM_RAZOR_CLAW,
+    ITEM_SWEET_APPLE,
+    ITEM_TART_APPLE,
+    ITEM_PRISM_SCALE,
     ITEM_LIST_END
 };
 

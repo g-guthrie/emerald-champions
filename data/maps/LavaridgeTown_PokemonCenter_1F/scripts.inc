@@ -31,6 +31,7 @@ LavaridgeTown_PokemonCenter_1F_EventScript_Gentleman::
 LavaridgeTown_PokemonCenter_1F_EventScript_Lucy::
 	lock
 	faceplayer
+	goto_if_set FLAG_RECEIVED_LUCY_ABSOLITE, LavaridgeTown_PokemonCenter_1F_EventScript_LucyAfter
 	goto_if_defeated TRAINER_LUCY_LAVARIDGE, LavaridgeTown_PokemonCenter_1F_EventScript_LucyReward
 	msgbox LavaridgeTown_PokemonCenter_1F_Text_LucyChallenge, MSGBOX_DEFAULT
 	trainerbattle_no_intro_double TRAINER_LUCY_LAVARIDGE, LavaridgeTown_PokemonCenter_1F_Text_LucyDefeat, EmeraldChampions_Text_NeedTwoPokemon
@@ -38,6 +39,8 @@ LavaridgeTown_PokemonCenter_1F_EventScript_LucyReward::
 	checkitemspace ITEM_ABSOLITE, 1
 	goto_if_eq VAR_RESULT, FALSE, LavaridgeTown_PokemonCenter_1F_EventScript_LucyBagFull
 	giveitem ITEM_ABSOLITE
+	setflag FLAG_RECEIVED_LUCY_ABSOLITE
+LavaridgeTown_PokemonCenter_1F_EventScript_LucyAfter::
 	msgbox LavaridgeTown_PokemonCenter_1F_Text_LucyReward, MSGBOX_DEFAULT
 	release
 	end

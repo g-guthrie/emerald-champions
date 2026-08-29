@@ -48,10 +48,11 @@ def new_object(graphics: str, x: int, y: int, script: str) -> dict[str, object]:
 
 def choose_coordinate(occupied: set[tuple[int, int]], candidates: tuple[tuple[int, int], ...]) -> tuple[int, int]:
     for coordinate in candidates:
-        if coordinate not in occupied:
+        interaction_tile = (coordinate[0], coordinate[1] + 1)
+        if coordinate not in occupied and interaction_tile not in occupied:
             occupied.add(coordinate)
             return coordinate
-    raise RuntimeError("No free counter coordinate remains for a Center service")
+    raise RuntimeError("No counter coordinate with a free interaction tile remains for a Center service")
 
 
 def main() -> None:

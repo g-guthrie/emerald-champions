@@ -13,15 +13,15 @@ Route111_WinstrateFamilysHouse_EventScript_Victoria::
 	lock
 	faceplayer
 	setvar VAR_0x8008, LOCALID_WINSTRATE_HOUSE_VICTORIA
-	goto_if_set FLAG_RECEIVED_MACHO_BRACE, Route111_WinstrateFamilysHouse_EventScript_ReceivedMachoBrace
-	msgbox Route111_WinstrateFamilysHouse_Text_LikeYouToHaveMachoBrace, MSGBOX_DEFAULT
-	setvar VAR_POKE_VIAL_MAX_CHARGES, 2
-	setvar VAR_POKE_VIAL_CHARGES, 2
-	setflag FLAG_RECEIVED_MACHO_BRACE
+	goto_if_set FLAG_RECEIVED_WINSTRATE_KANGASKHANITE, Route111_WinstrateFamilysHouse_EventScript_ReceivedKangaskhanite
+	msgbox Route111_WinstrateFamilysHouse_Text_LikeYouToHaveKangaskhanite, MSGBOX_DEFAULT
+	giveitem ITEM_KANGASKHANITE
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_RECEIVED_WINSTRATE_KANGASKHANITE
 	goto Route111_WinstrateFamilysHouse_EventScript_FaceOriginalDirection
 	end
 
-Route111_WinstrateFamilysHouse_EventScript_ReceivedMachoBrace::
+Route111_WinstrateFamilysHouse_EventScript_ReceivedKangaskhanite::
 	msgbox Route111_WinstrateFamilysHouse_Text_PassionateAboutBattles, MSGBOX_DEFAULT
 	goto Route111_WinstrateFamilysHouse_EventScript_FaceOriginalDirection
 	end
@@ -64,15 +64,15 @@ Route111_WinstrateFamilysHouse_Text_MySonIsStrongerThanYou:
 	.string "He even took the POKéMON LEAGUE\n"
 	.string "challenge, I'll have you know.$"
 
-Route111_WinstrateFamilysHouse_Text_LikeYouToHaveMachoBrace:
+Route111_WinstrateFamilysHouse_Text_LikeYouToHaveKangaskhanite:
 	.string "You defeated all four of us without\n"
 	.string "a chance to rest. That's remarkable!\p"
-	.string "I tuned your Poké Vial as a reward.\n"
-	.string "Centers will now refill two charges.$"
+	.string "Our family guarded this KANGASKHANITE.\n"
+	.string "A Trainer like you has earned it.$"
 
 Route111_WinstrateFamilysHouse_Text_PassionateAboutBattles:
-	.string "Your Poké Vial now carries two\n"
-	.string "charges between Center visits.$"
+	.string "KANGASKHANITE suits a Trainer who can\n"
+	.string "survive a whole family without resting.$"
 
 Route111_WinstrateFamilysHouse_Text_StrongerFamilyMembers:
 	.string "Mommy is stronger than Daddy.\p"

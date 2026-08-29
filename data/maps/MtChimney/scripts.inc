@@ -570,78 +570,70 @@ MtChimney_Text_MaxieYouHaventSeenLastOfMagma:
 	.string "line is already moving beneath HOENN.$"
 
 MtChimney_Text_TabithaIntro:
-	.string "Hehehe!\p"
-	.string "So you've come all the way here!\p"
-	.string "But you're too late!\n"
-	.string "I've already delivered the METEORITE\l"
-	.string "from METEOR FALLS to the BOSS!$"
+	.string "TABITHA: You followed the METEORITE.\n"
+	.string "Good. You understand the real objective.\p"
+	.string "MAXIE already has it. My formation only\n"
+	.string "needs to keep you from his machine.$"
 
 MtChimney_Text_TabithaDefeat:
-	.string "Hehehe…\p"
-	.string "Even though I've lost, if our leader\n"
-	.string "awakens that thing…$"
+	.string "You broke the guard line too quickly…$"
 
 MtChimney_Text_TabithaPostBattle:
-	.string "BOSS, hurry!\n"
-	.string "Give it the METEORITE's energy!\p"
-	.string "Hehehe…$"
+	.string "MAXIE, begin the fault-line sequence!\n"
+	.string "The delay model has failed.$"
 
 MtChimney_Text_Grunt2Intro:
-	.string "We of TEAM MAGMA are working hard for\n"
-	.string "everyone's sake.\p"
-	.string "Like, if that thing's power made more\n"
-	.string "land, there'd be more places to live.\p"
-	.string "Everyone'd be happy!$"
+	.string "Stable land means homes, roads, and room\n"
+	.string "for people to build a future.\p"
+	.string "That is why I chose TEAM MAGMA.\n"
+	.string "You will not interrupt the work.$"
 
 MtChimney_Text_Grunt2Defeat:
-	.string "Hunh?\n"
-	.string "What do you mean I lost?$"
+	.string "My certainty cracked first…$"
 
 MtChimney_Text_Grunt2PostBattle:
-	.string "Our BOSS says, “It will make everyone\n"
-	.string "happy.”\p"
-	.string "But why does everyone keep getting\n"
-	.string "in our way?$"
+	.string "MAXIE promised a safer world.\p"
+	.string "If the method frightens everyone it is\n"
+	.string "meant to help, what did we misjudge?$"
 
 MtChimney_Text_Grunt1Intro:
-	.string "If there were more land, I'd be able\n"
-	.string "to get a big house of my own!\p"
-	.string "I'm going to build it on hardened lava!$"
+	.string "This ridge could become solid ground,\n"
+	.string "not a threat hanging over LAVARIDGE.\p"
+	.string "I believe in that future enough to\n"
+	.string "defend it.$"
 
 MtChimney_Text_Grunt1Defeat:
-	.string "My dream of a big house…$"
+	.string "Belief was not enough to hold the line…$"
 
 MtChimney_Text_Grunt1PostBattle:
-	.string "A kid like you, you ought to be\n"
-	.string "splashing about in the waves!$"
+	.string "You came through fire to challenge us.\n"
+	.string "Maybe certainty is not the same as truth.$"
 
 MtChimney_Text_TeamAquaAlwaysMessingWithPlans:
-	.string "That annoying TEAM AQUA…\n"
-	.string "They always mess with our plans!$"
+	.string "AQUA keeps changing the field before our\n"
+	.string "formation can stabilize it.$"
 
 MtChimney_Text_MeteoritesPackAmazingPower:
-	.string "METEORITES pack amazing power!$"
+	.string "The METEORITE resonates with the fault!$"
 
 MtChimney_Text_YouBetterNotMessWithUs:
-	.string "You'd better not mess with us!\p"
-	.string "We're trying to awaken that thing\n"
-	.string "for the benefit of everyone!$"
+	.string "Stand back! We are forcing the mountain\n"
+	.string "into a stable state for everyone.$"
 
 MtChimney_Text_AquasNameSimilar:
-	.string "We're TEAM MAGMA!\p"
-	.string "They're TEAM AQUA!\p"
-	.string "It totally annoys me that they'd\n"
-	.string "use a name like ours!$"
+	.string "MAGMA builds fixed ground. AQUA trusts\n"
+	.string "change without limits.\p"
+	.string "Do not confuse opposite answers.$"
 
 MtChimney_Text_DouseThemInFire:
-	.string "Yeah!\n"
-	.string "Douse them in fire!$"
+	.string "Hold the high ground!\n"
+	.string "Do not let AQUA reach the machine!$"
 
 MtChimney_Text_KeepMakingMoreLand:
-	.string "We're going to keep making more land!$"
+	.string "We will make the fault line hold!$"
 
 MtChimney_Text_Bufoh:
-	.string "Bufoh!$"
+	.string "The line is holding!$"
 
 MtChimney_Text_ArchieGoStopTeamMagma:
 	.string "ARCHIE: {PLAYER}! MAXIE is forcing the\n"
@@ -664,21 +656,19 @@ MtChimney_Text_ArchieThankYou:
 	.string "expect an even better battle.$"
 
 MtChimney_Text_MagmaOutnumbersUs:
-	.string "Darn… TEAM MAGMA outnumbers us!\n"
-	.string "We can't keep up with them!$"
+	.string "MAGMA fixed every approach at once.\n"
+	.string "We cannot break their formation!$"
 
 MtChimney_Text_LessHabitatForWaterPokemon:
-	.string "If they expand the land, there'll be\n"
-	.string "less habitats for WATER POKéMON!$"
+	.string "If they seal the currents, every WATER\n"
+	.string "POKéMON below loses its habitat!$"
 
 MtChimney_Text_MagmasNameSimilar:
-	.string "We're TEAM AQUA!\p"
-	.string "They're TEAM MAGMA!\p"
-	.string "It burns me up that they'd use such\n"
-	.string "a confusing name!$"
+	.string "AQUA keeps life moving. MAGMA would\n"
+	.string "freeze the world into one answer.$"
 
 MtChimney_Text_Bushaa:
-	.string "Bushaa!$"
+	.string "Break their line!$"
 
 MtChimney_Text_LavaCookiesJust200:
 	.string "LAVA COOKIES are MT. CHIMNEY's local\n"
@@ -738,8 +728,8 @@ MtChimney_Text_ShelbyPostBattle:
 MtChimney_Text_ShelbyRegister:
 	.string "Thank you, child. It was fun, as if\n"
 	.string "I were battling my own grandchild.\p"
-	.string "Please, come see me again for\n"
-	.string "a rematch.$"
+	.string "Please, keep in touch and tell me\n"
+	.string "where your journey takes you.$"
 
 MtChimney_Text_ShelbyRematchIntro:
 	.string "If you can mesh your heart with those\n"

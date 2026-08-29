@@ -459,7 +459,20 @@ Route110_EventScript_BrendanDefeated::
 
 Route110_EventScript_GiveItemfinder::
 	giveitem ITEM_DOWSING_MACHINE
+	goto_if_eq VAR_RESULT, FALSE, Route110_EventScript_ArchiveDowsingMachine
 	return
+
+
+Route110_EventScript_ArchiveDowsingMachine::
+	addpcitem ITEM_DOWSING_MACHINE
+	goto_if_eq VAR_RESULT, FALSE, Route110_EventScript_DowsingMachineNoRoom
+	msgbox Route110_Text_DowsingMachineSentToPC, MSGBOX_DEFAULT
+	return
+
+Route110_EventScript_DowsingMachineNoRoom::
+	msgbox Route110_Text_DowsingMachineNoRoom, MSGBOX_DEFAULT
+	releaseall
+	end
 
 Route110_EventScript_RivalExit::
 	closemessage
@@ -772,13 +785,21 @@ Route110_Text_MayTakeThis:
 	.string "This is from me!$"
 
 Route110_Text_MayExplainItemfinder:
-	.string "MAY: That's an ITEMFINDER.\p"
+	.string "MAY: That's a DOWSING MACHINE.\p"
 	.string "Try it out. If there is an item that's\n"
 	.string "not visible, it emits a sound.\p"
 	.string "Okay, {PLAYER}{KUN}, let's meet again!\p"
 	.string "I know it's a little silly coming from\n"
 	.string "me, but I think you should train a lot\l"
 	.string "harder for the next time.$"
+
+Route110_Text_DowsingMachineSentToPC:
+	.string "Your KEY ITEMS pocket is full, so the\n"
+	.string "DOWSING MACHINE was sent to your PC.$"
+
+Route110_Text_DowsingMachineNoRoom:
+	.string "Your KEY ITEMS pocket and PC are full.\n"
+	.string "Make room, then speak to me again.$"
 
 Route110_Text_BrendanLetsBattle:
 	.string "BRENDAN: Hey, {PLAYER}.\n"
@@ -798,7 +819,7 @@ Route110_Text_BrendanTakeThis:
 	.string "Here, take this.$"
 
 Route110_Text_BrendanExplainItemfinder:
-	.string "BRENDAN: That's an ITEMFINDER.\p"
+	.string "BRENDAN: That's a DOWSING MACHINE.\p"
 	.string "Use it to root around for items that\n"
 	.string "aren't visible.\p"
 	.string "If it senses something, it emits\n"
@@ -931,7 +952,9 @@ Route110_Text_SeasideParkingSign:
 
 Route110_Text_MauvilleCitySign:
 	.string "ROUTE 110\n"
-	.string "{UP_ARROW} MAUVILLE CITY$"
+	.string "{UP_ARROW} MAUVILLE CITY\p"
+	.string "A scorched note pairs this route's\n"
+	.string "lightning with MANECTRIC and RAICHU.$"
 
 Route110_Text_TrainerTipsPrlzSleep:
 	.string "TRAINER TIPS\p"
@@ -986,4 +1009,3 @@ Route110_Text_KeepAnEyeOutForRival:
 	.string "… … … … … …\p"
 	.string "Well, I had better get going.\n"
 	.string "See you again, {PLAYER}{KUN}!$"
-

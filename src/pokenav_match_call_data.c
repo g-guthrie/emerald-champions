@@ -187,7 +187,7 @@ static const struct MatchCallStructNPC sMrStoneMatchCallHeader =
         { MatchCall_Text_MrStone1,  ALWAYS_AVAILABLE,                    FLAG_ENABLE_MR_STONE_POKENAV },
         { MatchCall_Text_MrStone2,  FLAG_ENABLE_MR_STONE_POKENAV,        NO_FLAG_TO_SET },
         { MatchCall_Text_MrStone3,  FLAG_DELIVERED_STEVEN_LETTER,        NO_FLAG_TO_SET },
-        { MatchCall_Text_MrStone4,  FLAG_RECEIVED_EXP_SHARE,             NO_FLAG_TO_SET },
+        { MatchCall_Text_MrStone4,  FLAG_RECEIVED_PIDGEOTITE_FROM_DEVON, NO_FLAG_TO_SET },
         { MatchCall_Text_MrStone5,  FLAG_RECEIVED_HM_STRENGTH,           NO_FLAG_TO_SET },
         { MatchCall_Text_MrStone6,  FLAG_DEFEATED_PETALBURG_GYM,         NO_FLAG_TO_SET },
         { MatchCall_Text_MrStone7,  FLAG_RECEIVED_CASTFORM,              NO_FLAG_TO_SET },
@@ -828,6 +828,9 @@ static bool32 MatchCall_IsRematchable_NPC(match_call_t matchCall)
 
 static bool32 MatchCall_IsRematchable_Trainer(match_call_t matchCall)
 {
+    if (!OW_TRAINER_REMATCHES)
+        return FALSE;
+
 #if FREE_MATCH_CALL == FALSE
     if (matchCall.trainer->rematchTableIdx >= REMATCH_ELITE_FOUR_ENTRIES)
         return FALSE;
@@ -839,6 +842,9 @@ static bool32 MatchCall_IsRematchable_Trainer(match_call_t matchCall)
 
 static bool32 MatchCall_IsRematchable_Wally(match_call_t matchCall)
 {
+    if (!OW_TRAINER_REMATCHES)
+        return FALSE;
+
 #if FREE_MATCH_CALL == FALSE
     return gSaveBlock1Ptr->trainerRematches[matchCall.wally->rematchTableIdx] ? TRUE : FALSE;
 #else
@@ -1017,7 +1023,13 @@ static void MatchCall_BufferCallMessageTextByRematchTeam(const match_call_text_d
     }
     else
     {
-        if (FlagGet(FLAG_SYS_GAME_CLEAR))
+        if (!OW_TRAINER_REMATCHES)
+        {
+            // The fourth row is a safe retrospective line. Never select the
+            // preparing/ready rematch promises in a rematch-free campaign.
+            i += 3;
+        }
+        else if (FlagGet(FLAG_SYS_GAME_CLEAR))
         {
             do
             {

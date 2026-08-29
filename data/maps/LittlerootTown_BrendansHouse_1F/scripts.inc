@@ -398,6 +398,14 @@ PlayersHouse_1F_Text_TicketFromBrineyCameForYou:
 	.string "This came to you from someone named\l"
 	.string "MR. BRINEY.$"
 
+PlayersHouse_1F_Text_SSTicketSentToPC:
+	.string "Your KEY ITEMS pocket is full, so the\n"
+	.string "S.S. TICKET was sent to your PC.$"
+
+PlayersHouse_1F_Text_SSTicketNoRoom:
+	.string "Your KEY ITEMS pocket and PC are full.\n"
+	.string "Make room before taking the ticket.$"
+
 PlayersHouse_1F_Text_PortsInSlateportLilycove:
 	.string "DAD: Hm, a TICKET for a ferry?\p"
 	.string "If I recall, there are ferry ports in\n"

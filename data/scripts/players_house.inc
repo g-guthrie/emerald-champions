@@ -432,6 +432,16 @@ PlayersHouse_1F_EventScript_GetSSTicketAndSeeLatiTV::
 	call_if_eq VAR_0x8008, FEMALE, PlayersHouse_1F_EventScript_DadApproachPlayerFemale
 	msgbox PlayersHouse_1F_Text_TicketFromBrineyCameForYou, MSGBOX_DEFAULT
 	giveitem ITEM_SS_TICKET
+	goto_if_eq VAR_RESULT, FALSE, PlayersHouse_1F_EventScript_ArchiveSSTicket
+	goto PlayersHouse_1F_EventScript_ReceivedSSTicket
+	end
+
+PlayersHouse_1F_EventScript_ArchiveSSTicket::
+	addpcitem ITEM_SS_TICKET
+	goto_if_eq VAR_RESULT, FALSE, PlayersHouse_1F_EventScript_SSTicketNoRoom
+	msgbox PlayersHouse_1F_Text_SSTicketSentToPC, MSGBOX_DEFAULT
+
+PlayersHouse_1F_EventScript_ReceivedSSTicket::
 	msgbox PlayersHouse_1F_Text_PortsInSlateportLilycove, MSGBOX_DEFAULT
 	closemessage
 	delay 20
@@ -475,6 +485,11 @@ PlayersHouse_1F_EventScript_GetSSTicketAndSeeLatiTV::
 	closemessage
 	setvar VAR_LITTLEROOT_HOUSES_STATE_MAY, 4
 	setvar VAR_LITTLEROOT_HOUSES_STATE_BRENDAN, 4
+	releaseall
+	end
+
+PlayersHouse_1F_EventScript_SSTicketNoRoom::
+	msgbox PlayersHouse_1F_Text_SSTicketNoRoom, MSGBOX_DEFAULT
 	releaseall
 	end
 

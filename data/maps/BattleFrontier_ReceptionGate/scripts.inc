@@ -331,8 +331,11 @@ BattleFrontier_ReceptionGate_Text_OhMrScottGoodDay:
 BattleFrontier_ReceptionGate_Text_ScottGreatToSeeYouHere:
 	.string "SCOTT: It's great to see you here,\n"
 	.string "it really is!\p"
-	.string "I hope you'll take your time and\n"
-	.string "explore everywhere.\p"
+	.string "Start with the CHAMPIONS CIRCUIT at\n"
+	.string "the far desk inside the BATTLE TOWER.\p"
+	.string "It assembles a new full-team Double\n"
+	.string "Battle every round. The other facilities\l"
+	.string "preserve HOENN's classic challenges.$"
 	.string "Naturally, I hope you'll also experience\n"
 	.string "the pure essence of battling.\p"
 	.string "I also have my quarters here, so feel\n"
@@ -350,7 +353,10 @@ BattleFrontier_ReceptionGate_Text_BattleTowerInfo:
 	.string "to be the BATTLE FRONTIER's symbol.\p"
 	.string "There are four kinds of BATTLE ROOMS\n"
 	.string "in the tower for SINGLE, DOUBLE, MULTI,\l"
-	.string "and LINK MULTI BATTLES.$"
+	.string "and LINK MULTI BATTLES.\p"
+	.string "The far desk hosts the\n"
+	.string "CHAMPIONS CIRCUIT, the FRONTIER's\l"
+	.string "premier full-team test.$"
 
 BattleFrontier_ReceptionGate_Text_BattleDomeInfo:
 	.string "The BATTLE DOME is the large building\n"
@@ -484,16 +490,11 @@ BattleFrontier_ReceptionGate_Text_SymbolsInfo:
 	.string "I wish you the best of luck!$"
 
 BattleFrontier_ReceptionGate_Text_RecordedBattleInfo:
-	.string "It is possible to record one battle\n"
-	.string "on your FRONTIER PASS.\p"
-	.string "You may record a battle you had with\n"
-	.string "a friend or friends.\p"
-	.string "Or you may record a battle conducted\n"
-	.string "at the BATTLE FRONTIER excluding\l"
-	.string "matches at the BATTLE PIKE or\l"
-	.string "the BATTLE PYRAMID.\p"
-	.string "You may choose to record your match\n"
-	.string "at the end of a battle.$"
+	.string "Battle recordings are not offered\n"
+	.string "at this BATTLE FRONTIER.\p"
+	.string "Your FRONTIER PASS instead tracks\n"
+	.string "symbols, BATTLE POINTS, and your\l"
+	.string "challenge records.$"
 
 BattleFrontier_ReceptionGate_Text_BattlePointsInfo:
 	.string "Battle Points are rewards given to\n"
@@ -502,4 +503,3 @@ BattleFrontier_ReceptionGate_Text_BattlePointsInfo:
 	.string "You may trade in your Battle Points\n"
 	.string "for prizes at the EXCHANGE SERVICE\l"
 	.string "CORNER.$"
-

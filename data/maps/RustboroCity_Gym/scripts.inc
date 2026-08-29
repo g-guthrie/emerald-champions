@@ -6,6 +6,7 @@ RustboroCity_Gym_EventScript_Roxanne::
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, RustboroCity_Gym_EventScript_RoxanneRematch
 	goto_if_unset FLAG_RECEIVED_TM_ROCK_TOMB, RustboroCity_Gym_EventScript_GiveRockTomb
+	goto_if_unset FLAG_EC_RECEIVED_ROXANNE_AERODACTYLITE, RustboroCity_Gym_EventScript_GiveLegacyOldAmber
 	msgbox RustboroCity_Gym_Text_RoxannePostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -26,9 +27,23 @@ RustboroCity_Gym_EventScript_RoxanneDefeated::
 	end
 
 RustboroCity_Gym_EventScript_GiveRockTomb::
+	goto_if_set FLAG_EC_RECEIVED_ROXANNE_AERODACTYLITE, RustboroCity_Gym_EventScript_GiveOldAmber
 	giveitem ITEM_AERODACTYLITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_EC_RECEIVED_ROXANNE_AERODACTYLITE
+RustboroCity_Gym_EventScript_GiveOldAmber::
+	giveitem ITEM_OLD_AMBER
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM_ROCK_TOMB
+	msgbox RustboroCity_Gym_Text_ExplainRockTomb, MSGBOX_DEFAULT
+	release
+	end
+
+@ Saves created before Roxanne awarded Old Amber already have the legacy TM flag.
+RustboroCity_Gym_EventScript_GiveLegacyOldAmber::
+	giveitem ITEM_OLD_AMBER
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_EC_RECEIVED_ROXANNE_AERODACTYLITE
 	msgbox RustboroCity_Gym_Text_ExplainRockTomb, MSGBOX_DEFAULT
 	release
 	end
@@ -138,42 +153,41 @@ RustboroCity_Gym_Text_GymGuidePostVictory:
 	.string "That's got to feel awesome!$"
 
 RustboroCity_Gym_Text_JoshIntro:
-	.string "Don't take us GYM TRAINERS lightly!\n"
-	.string "I'll show you why we're better!$"
+	.string "GUARD SPLIT can lend a fossil SHUCKLE's\n"
+	.string "defenses, but the donor grows weaker.\p"
+	.string "Which side will you break first?$"
 
 RustboroCity_Gym_Text_JoshDefeat:
-	.string "You were too good for me…$"
+	.string "You found the cost of my transfer!$"
 
 RustboroCity_Gym_Text_JoshPostBattle:
-	.string "You haven't seen anything of the ROCK\n"
-	.string "type's terrifying power!$"
+	.string "LILEEP redirects WATER with STORM DRAIN.\n"
+	.string "Never attack a type without reading its\l"
+	.string "Ability first.$"
 
 RustboroCity_Gym_Text_TommyIntro:
-	.string "If you can't beat me, you won't stand\n"
-	.string "a chance against ROXANNE!$"
+	.string "ORANGURU can INSTRUCT its partner to\n"
+	.string "repeat an attack immediately.\p"
+	.string "Stop the teacher or guard the lesson!$"
 
 RustboroCity_Gym_Text_TommyDefeat:
-	.string "Wow! You've got some potential!$"
+	.string "You interrupted the repeat!$"
 
 RustboroCity_Gym_Text_TommyPostBattle:
-	.string "ROXANNE is stronger than me by\n"
-	.string "several times.\p"
-	.string "You'd better be on your guard!$"
+	.string "Changing the action order can break\n"
+	.string "INSTRUCT before it ever begins.$"
 
 RustboroCity_Gym_Text_MarcIntro:
-	.string "We might be in the middle of town,\n"
-	.string "but so what?\p"
-	.string "My ROCK POKéMON need room to\n"
-	.string "rampage!$"
+	.string "STEALTH ROCK taxes every switch. Then\n"
+	.string "TRICK and CURSED BODY attack your move.\p"
+	.string "Can you preserve a safe way out?$"
 
 RustboroCity_Gym_Text_MarcDefeat:
-	.string "Oh, man oh man!\n"
-	.string "Our challenger is one feisty customer!$"
+	.string "You kept control of your choices!$"
 
 RustboroCity_Gym_Text_MarcPostBattle:
-	.string "I have to hand it to our LEADER.\p"
-	.string "It took smarts and sense for her to\n"
-	.string "pick the ROCK type at her young age.$"
+	.string "ROXANNE combines every lesson: field\n"
+	.string "control, reverse speed, and endurance.$"
 
 RustboroCity_Gym_Text_RoxanneIntro:
 	.string "I am ROXANNE, RUSTBORO's GYM LEADER.\p"
@@ -193,14 +207,17 @@ RustboroCity_Gym_Text_ReceivedStoneBadge:
 	.string "from ROXANNE.$"
 
 RustboroCity_Gym_Text_StoneBadgeInfoTakeThis:
-	.string "The STONE BADGE heightens the ATTACK\n"
-	.string "power of your POKéMON.\p"
-	.string "It also enables them to use the HM move\n"
+	.string "The STONE BADGE enables POKéMON to use\n"
 	.string "CUT outside of battle.\p"
+	.string "It also marks your first true step\n"
+	.string "toward the POKéMON LEAGUE.\p"
 	.string "Please take this with you, too.$"
 RustboroCity_Gym_Text_ExplainRockTomb:
 	.string "Aerodactylite lets Aerodactyl Mega\n"
-	.string "Evolve once you possess a Mega Ring.$"
+	.string "Evolve once you possess a Mega Ring.\p"
+	.string "DEVON can restore that OLD AMBER.\n"
+	.string "Consider Aerodactyl your first Mega\l"
+	.string "project.$"
 
 RustboroCity_Gym_Text_RoxannePostBattle:
 	.string "No later Gym will ask the same question.\n"
@@ -222,12 +239,10 @@ RustboroCity_Gym_Text_RoxanneRegisterCall:
 	.string "I heard from BRAWLY that you're\n"
 	.string "moving up through the ranks of\l"
 	.string "TRAINERS at an incredible clip.\p"
-	.string "Well, I'd rather not think that\n"
-	.string "I can't beat you.\p"
-	.string "I promise, I will shape up my GYM\n"
-	.string "so that you may challenge us again.\p"
-	.string "I hope you'll be looking forward to\n"
-	.string "that occasion as much as me!\p"
+	.string "Your progress gives my students\n"
+	.string "an excellent model to study.\p"
+	.string "I hope you'll share what you learn\n"
+	.string "as your journey continues!\p"
 	.string "… … … … … …\n"
 	.string "… … … … … Click!$"
 

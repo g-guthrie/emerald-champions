@@ -84,6 +84,28 @@ SINGLE_BATTLE_TEST("Flower Gift transforms Cherrim back to normal when its abili
     }
 }
 
+SINGLE_BATTLE_TEST("Flower Gift transforms Cherrim back after losing Flower Gift to Skill Swap")
+{
+    GIVEN {
+        ASSUME(B_WEATHER_FORMS >= GEN_5);
+        ASSUME(GetMoveEffect(MOVE_SKILL_SWAP) == EFFECT_SKILL_SWAP);
+        PLAYER(SPECIES_CHERRIM_OVERCAST) { Ability(ABILITY_FLOWER_GIFT); }
+        OPPONENT(SPECIES_WOBBUFFET) { Ability(ABILITY_SHADOW_TAG); }
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_SUNNY_DAY); }
+        TURN { MOVE(opponent, MOVE_SKILL_SWAP); }
+    } SCENE {
+        ABILITY_POPUP(player, ABILITY_FLOWER_GIFT);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
+        MESSAGE("Cherrim transformed!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SKILL_SWAP, opponent);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
+        MESSAGE("Cherrim transformed!");
+    } THEN {
+        EXPECT_EQ(player->species, SPECIES_CHERRIM_OVERCAST);
+    }
+}
+
 SINGLE_BATTLE_TEST("Flower Gift transforms Cherrim back to normal under Cloud Nine/Air Lock")
 {
     enum Species species = SPECIES_NONE;

@@ -1493,6 +1493,9 @@ static void Task_SpinPokenavIcon(u8 taskId)
 
 static bool32 TrainerIsEligibleForRematch(int matchCallId)
 {
+    if (!OW_TRAINER_REMATCHES)
+        return FALSE;
+
 #if FREE_MATCH_CALL == FALSE
     return gSaveBlock1Ptr->trainerRematches[matchCallId] > 0;
 #else
@@ -1849,6 +1852,9 @@ static bool32 ShouldTrainerRequestBattle(int matchCallId)
     u16 dewfordRand;
     int numRematchTrainersFought;
     int max, rand, n;
+
+    if (!OW_TRAINER_REMATCHES)
+        return FALSE;
 
     if (GetNumOwnedBadges() < 5)
         return FALSE;

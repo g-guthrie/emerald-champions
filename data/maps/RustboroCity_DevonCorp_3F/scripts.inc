@@ -48,6 +48,16 @@ RustboroCity_DevonCorp_3F_EventScript_MeetPresident::
 	waitmovement 0
 	msgbox RustboroCity_DevonCorp_3F_Text_MrStoneIHaveFavor, MSGBOX_DEFAULT
 	giveitem ITEM_LETTER
+	goto_if_eq VAR_RESULT, FALSE, RustboroCity_DevonCorp_3F_EventScript_ArchiveLetter
+	goto RustboroCity_DevonCorp_3F_EventScript_ReceivedLetter
+	end
+
+RustboroCity_DevonCorp_3F_EventScript_ArchiveLetter::
+	addpcitem ITEM_LETTER
+	goto_if_eq VAR_RESULT, FALSE, RustboroCity_DevonCorp_3F_EventScript_LetterNoRoom
+	msgbox RustboroCity_DevonCorp_3F_Text_LetterSentToPC, MSGBOX_DEFAULT
+
+RustboroCity_DevonCorp_3F_EventScript_ReceivedLetter::
 	msgbox RustboroCity_DevonCorp_3F_Text_MrStoneWantYouToHaveThis, MSGBOX_DEFAULT
 	playfanfare MUS_OBTAIN_ITEM
 	message RustboroCity_DevonCorp_3F_Text_ReceivedPokenav
@@ -68,6 +78,11 @@ RustboroCity_DevonCorp_3F_EventScript_MeetPresident::
 	clearflag FLAG_HIDE_RUSTBORO_CITY_RIVAL
 	setvar VAR_DEVON_CORP_3F_STATE, 1
 	setvar VAR_RUSTBORO_CITY_STATE, 6
+	releaseall
+	end
+
+RustboroCity_DevonCorp_3F_EventScript_LetterNoRoom::
+	msgbox RustboroCity_DevonCorp_3F_Text_LetterNoRoom, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -149,8 +164,14 @@ RustboroCity_DevonCorp_3F_Movement_PlayerApproachDesk:
 RustboroCity_DevonCorp_3F_EventScript_MrStone::
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_EXP_SHARE, RustboroCity_DevonCorp_3F_EventScript_MrStoneAfterFavor
-	goto_if_set FLAG_DELIVERED_STEVEN_LETTER, RustboroCity_DevonCorp_3F_EventScript_GiveExpShare
+	goto_if_set FLAG_RECEIVED_PIDGEOTITE_FROM_DEVON, RustboroCity_DevonCorp_3F_EventScript_MrStoneAfterFavor
+	goto_if_unset FLAG_DELIVERED_STEVEN_LETTER, RustboroCity_DevonCorp_3F_EventScript_MrStoneFavorPending
+	checkitem ITEM_MEGA_RING, 1
+	goto_if_eq VAR_RESULT, FALSE, RustboroCity_DevonCorp_3F_EventScript_MegaRingPending
+	goto RustboroCity_DevonCorp_3F_EventScript_GivePidgeotite
+	end
+
+RustboroCity_DevonCorp_3F_EventScript_MrStoneFavorPending::
 	msgbox RustboroCity_DevonCorp_3F_Text_CountingOnYou, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
@@ -158,12 +179,20 @@ RustboroCity_DevonCorp_3F_EventScript_MrStone::
 	release
 	end
 
-RustboroCity_DevonCorp_3F_EventScript_GiveExpShare::
+RustboroCity_DevonCorp_3F_EventScript_MegaRingPending::
+	msgbox RustboroCity_DevonCorp_3F_Text_StevenAwaitsKnuckleBadge, MSGBOX_DEFAULT
+	closemessage
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
+	waitmovement 0
+	release
+	end
+
+RustboroCity_DevonCorp_3F_EventScript_GivePidgeotite::
 	msgbox RustboroCity_DevonCorp_3F_Text_ThankYouForDeliveringLetter, MSGBOX_DEFAULT
 	giveitem ITEM_PIDGEOTITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_EXP_SHARE
-	msgbox RustboroCity_DevonCorp_3F_Text_ExplainExpShare, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_PIDGEOTITE_FROM_DEVON
+	msgbox RustboroCity_DevonCorp_3F_Text_ExplainPidgeotite, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
@@ -208,6 +237,14 @@ RustboroCity_DevonCorp_3F_Text_MrStoneIHaveFavor:
 	.string "Then deliver the GOODS to CAPT. STERN\n"
 	.string "in SLATEPORT, as planned.$"
 
+RustboroCity_DevonCorp_3F_Text_LetterSentToPC:
+	.string "Your KEY ITEMS pocket is full, so the\n"
+	.string "LETTER was sent to your PC.$"
+
+RustboroCity_DevonCorp_3F_Text_LetterNoRoom:
+	.string "Your KEY ITEMS pocket and PC are full.\n"
+	.string "Make room, then return to my desk.$"
+
 RustboroCity_DevonCorp_3F_Text_MrStoneWantYouToHaveThis:
 	.string "Take DEVON's newest POKéNAV. Its map\n"
 	.string "will help you follow this disturbance.$"
@@ -231,16 +268,21 @@ RustboroCity_DevonCorp_3F_Text_CountingOnYou:
 	.string "STEVEN is in GRANITE CAVE. My researcher\n"
 	.string "downstairs can explain any active SIGN.$"
 
+RustboroCity_DevonCorp_3F_Text_StevenAwaitsKnuckleBadge:
+	.string "STEVEN received my LETTER. Good.\p"
+	.string "He will entrust the MEGA RING only after\n"
+	.string "you earn DEWFORD's KNUCKLE BADGE.$"
+
 RustboroCity_DevonCorp_3F_Text_ThankYouForDeliveringLetter:
 	.string "You reached STEVEN and earned the right\n"
 	.string "to use MEGA EVOLUTION. Excellent.\p"
 	.string "This stone was found above RUSTBORO.\n"
 	.string "Let PIDGEOT show you what it can become.$"
 
-RustboroCity_DevonCorp_3F_Text_ExplainExpShare:
-	.string "The PIDGEOTITE is a progression item,\n"
-	.string "not ordinary battle gear.\p"
-	.string "Seek other Mega Stones in HOENN's gyms,\n"
+RustboroCity_DevonCorp_3F_Text_ExplainPidgeotite:
+	.string "Shops do not stock rare MEGA STONES.\n"
+	.string "Each one marks a discovery or victory.\p"
+	.string "Seek them in HOENN's gyms,\n"
 	.string "ruins, caves, and hidden paths.$"
 
 RustboroCity_DevonCorp_3F_Text_NotFamiliarWithTrends:

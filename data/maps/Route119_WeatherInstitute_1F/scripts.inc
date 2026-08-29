@@ -69,32 +69,30 @@ Route119_WeatherInstitute_1F_EventScript_Grunt4::
 	end
 
 Route119_WeatherInstitute_1F_Text_Grunt1Intro:
-	.string "The BOSS got interested in\n"
-	.string "the research they have going here,\l"
-	.string "so he sent us out.\p"
-	.string "You quit meddling!$"
+	.string "The INSTITUTE mapped every pressure\n"
+	.string "shift before the storm arrived.\p"
+	.string "ARCHIE needs those maps. You are not\n"
+	.string "interrupting this current again.$"
 
 Route119_WeatherInstitute_1F_Text_Grunt1Defeat:
-	.string "Blast it…\n"
-	.string "Blasted by a kid…$"
+	.string "You read the pressure change first…$"
 
 Route119_WeatherInstitute_1F_Text_Grunt1PostBattle:
-	.string "Our BOSS knows everything.\p"
-	.string "But I'm just a GRUNT. What would I know\n"
-	.string "about what he's thinking?$"
+	.string "The maps show weather and the SIGNS\n"
+	.string "moving together.\p"
+	.string "That is why ARCHIE came.$"
 
 Route119_WeatherInstitute_1F_Text_Grunt4Intro:
-	.string "Huh?\n"
-	.string "What's a kid doing here?$"
+	.string "You crossed the flooded grass alone?\n"
+	.string "Then this indoor front will not stop you.\p"
+	.string "I will change the forecast myself.$"
 
 Route119_WeatherInstitute_1F_Text_Grunt4Defeat:
-	.string "Huh?\n"
-	.string "I lost?!$"
+	.string "My forecast failed completely…$"
 
 Route119_WeatherInstitute_1F_Text_Grunt4PostBattle:
-	.string "Oh, no…\n"
-	.string "I'll catch an earful for losing to a kid…\p"
-	.string "I should just take a nap in the bed…$"
+	.string "The bed restores exhausted teams.\n"
+	.string "Use it. The pressure rises upstairs.$"
 
 Route119_WeatherInstitute_1F_Text_EveryoneWentUpstairs:
 	.string "While I was sleeping, everyone went\n"
@@ -122,12 +120,10 @@ Route119_WeatherInstitute_1F_Text_NoticingAbnormalWeather:
 	.string "heavy rain lately…$"
 
 Route119_WeatherInstitute_1F_Text_WhatWereAquasUpTo:
-	.string "Hello!\n"
-	.string "We've been saved by your actions!\p"
-	.string "What I don't understand is what on\n"
-	.string "earth the AQUAS were up to.$"
+	.string "You saved our staff and our records.\p"
+	.string "AQUA was tracing the same anomaly that\n"
+	.string "links our weather stations to the SIGNS.$"
 
 Route119_WeatherInstitute_1F_Text_TakeRestInBed:
 	.string "There's a bed…\n"
 	.string "Let's take a rest.$"
-

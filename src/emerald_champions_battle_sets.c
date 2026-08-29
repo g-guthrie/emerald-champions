@@ -5,6 +5,7 @@
 #include "pokemon.h"
 #include "random.h"
 #include "string_util.h"
+#include "constants/battle.h"
 #include "constants/hold_effects.h"
 #include "constants/items.h"
 
@@ -57,11 +58,15 @@ bool32 IsEmeraldChampionsOrdinaryWildSpecies(enum Species species)
     if (gSpeciesInfo[species].baseHP == 0)
         return FALSE;
 
+    // Ultra Beasts and Paradox Pokemon are ordinary random encounters in the
+    // restored campaign maps. They therefore receive the same immediately
+    // usable competitive loadouts as every other table-seeded wild species.
+    // True legendary/mythical and temporary battle forms remain excluded;
+    // Legendary Signs opt in separately when their quest calls for a wild
+    // encounter.
     return !gSpeciesInfo[species].isRestrictedLegendary
         && !gSpeciesInfo[species].isSubLegendary
         && !gSpeciesInfo[species].isMythical
-        && !gSpeciesInfo[species].isUltraBeast
-        && !gSpeciesInfo[species].isParadox
         && !gSpeciesInfo[species].isMegaEvolution
         && !gSpeciesInfo[species].isPrimalReversion
         && !gSpeciesInfo[species].isUltraBurst
@@ -303,6 +308,10 @@ static u8 ApplyPreset(
     SetMonData(mon, MON_DATA_PP_BONUSES, &ppBonuses);
     for (u32 i = 0; i < MAX_MON_MOVES; i++)
         SetMonMoveSlot(mon, preset->moves[i], i);
+    // Normalize move-driven forms even when the authored move already occupied
+    // the same slot and SetMonMoveSlot therefore had no transition to observe.
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+        TryFormChangeOnMove(mon, preset->moves[i], B_TRAINER_PLAYER);
     SetMonData(mon, MON_DATA_HIDDEN_NATURE, &preset->nature);
     SetMonData(mon, MON_DATA_ABILITY_NUM, &abilitySlot);
     SetMonData(mon, MON_DATA_HP_EV, &preset->statPoints[0]);

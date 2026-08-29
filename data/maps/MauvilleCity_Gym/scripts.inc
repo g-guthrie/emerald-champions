@@ -272,65 +272,59 @@ MauvilleCity_Gym_Text_GymGuidePostVictory:
 	.string "You've powered the door open!$"
 
 MauvilleCity_Gym_Text_KirkIntro:
-	.string "My electric soul, it'll shatter your\n"
-	.string "dreams whole, whoa-yeahah!$"
+	.string "PUNK ROCK amplifies sound, and ELECTRIC\n"
+	.string "TERRAIN powers the whole stage!$"
 
 MauvilleCity_Gym_Text_KirkDefeat:
-	.string "That was plugged in, amped up,\n"
-	.string "over-driven electric, man!$"
+	.string "You shut down my amplifier!$"
 
 MauvilleCity_Gym_Text_KirkPostBattle:
-	.string "POKéMON and rock, it's all about heart,\n"
-	.string "whoa-yeah!$"
+	.string "Sound pressure is still special damage.\n"
+	.string "SNARL and LIGHT SCREEN can quiet it.$"
 
 MauvilleCity_Gym_Text_ShawnIntro:
-	.string "I trained under WATTSON!\n"
-	.string "There ain't no way I'll lose easily!$"
+	.string "My MINUN completes ANGELO's circuit.\n"
+	.string "PLUS and MINUS amplify each other!$"
 
 MauvilleCity_Gym_Text_ShawnDefeat:
-	.string "Unplugged and turned off…$"
+	.string "You broke our live connection…$"
 
 MauvilleCity_Gym_Text_ShawnPostBattle:
-	.string "WATTSON, our GYM LEADER, has been\n"
-	.string "around for a long, long time.\p"
-	.string "He was battling even before your\n"
-	.string "daddy was born, that tough coot.$"
+	.string "Stop one lead before HELPING HAND and\n"
+	.string "ELECTROWEB turn every attack dangerous.$"
 
 MauvilleCity_Gym_Text_BenIntro:
-	.string "This GYM's got puzzles!\n"
-	.string "Isn't it fun?$"
+	.string "TRICK ROOM slows the circuit. BATTERY\n"
+	.string "then amplifies its special current!$"
 
 MauvilleCity_Gym_Text_BenDefeat:
-	.string "It's no fun to lose…$"
+	.string "You reversed my reverse current!$"
 
 MauvilleCity_Gym_Text_BenPostBattle:
-	.string "WATTSON says he likes setting up\n"
-	.string "little traps with switches.$"
+	.string "Taunt ORANGURU or wait out TRICK ROOM.\n"
+	.string "Never race a slow battery on its clock.$"
 
 MauvilleCity_Gym_Text_VivianIntro:
-	.string "With my charm and my POKéMON's moves,\n"
-	.string "you'll be shocked!$"
+	.string "VOLT ABSORB, LIGHTNING ROD,\n"
+	.string "MOTOR DRIVE--we redirect our current!$"
 
 MauvilleCity_Gym_Text_VivianDefeat:
-	.string "I'm shocked by your power!$"
+	.string "You found a path around every immunity!$"
 
 MauvilleCity_Gym_Text_VivianPostBattle:
-	.string "I've heard that MAUVILLE was founded\n"
-	.string "by WATTSON.\p"
-	.string "He was a TRAINER long before we\n"
-	.string "became TRAINERS.\l"
-	.string "He must know all sorts of things!$"
+	.string "Do not press ELECTRIC attacks into the\n"
+	.string "Ability that wants to absorb them.$"
 
 MauvilleCity_Gym_Text_AngeloIntro:
-	.string "I love shiny things!$"
+	.string "My PLUSLE completes SHAWN's circuit.\n"
+	.string "Let's make the whole board shine!$"
 
 MauvilleCity_Gym_Text_AngeloDefeat:
-	.string "Oh…\n"
-	.string "My eyes are frazzled…$"
+	.string "Our relay lost its charge…$"
 
 MauvilleCity_Gym_Text_AngeloPostBattle:
-	.string "MAUVILLE GYM's WATTSON has a shiny\n"
-	.string "forehead. It makes me happy!$"
+	.string "Break PLUS and MINUS apart before their\n"
+	.string "support turns into amplified damage.$"
 
 MauvilleCity_Gym_Text_WattsonIntro:
 	.string "Wahahahah! I'm WATTSON!\p"
@@ -350,8 +344,6 @@ MauvilleCity_Gym_Text_ReceivedDynamoBadge:
 MauvilleCity_Gym_Text_ExplainDynamoBadgeTakeThis:
 	.string "With the DYNAMO BADGE, POKéMON can\n"
 	.string "use ROCK SMASH out of battle.\p"
-	.string "And, it will make your POKéMON a little\n"
-	.string "bit faster, too.\p"
 	.string "Hmm…\n"
 	.string "You should take this, too!$"
 MauvilleCity_Gym_Text_ExplainShockWave:
@@ -363,8 +355,8 @@ MauvilleCity_Gym_Text_RegisteredWattson:
 	.string "in the POKéNAV.$"
 
 MauvilleCity_Gym_Text_WattsonPostBattle:
-	.string "NEW MAUVILLE is reacting to the same\n"
-	.string "energy as your MEGA RING. Investigate it.$"
+	.string "The next road runs north through ROUTE\n"
+	.string "111. New climates demand new answers.$"
 
 MauvilleCity_Gym_Text_WattsonGoForthAndEndeavor:
 	.string "Wahahahah!\n"

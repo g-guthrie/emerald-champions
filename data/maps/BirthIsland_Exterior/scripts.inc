@@ -80,20 +80,26 @@ BirthIsland_Exterior_EventScript_Deoxys::
 	delay 40
 	waitmoncry
 	setvar VAR_LAST_TALKED, LOCALID_BIRTH_ISLAND_DEOXYS
-	seteventmon SPECIES_DEOXYS_NORMAL, 30
+	setvar VAR_0x8004, SPECIES_DEOXYS_NORMAL
+	setvar VAR_0x8005, 0
+	special CreateEmeraldChampionsStaticLegendaryEncounter
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, BirthIsland_Exterior_EventScript_CaughtDeoxys
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, BirthIsland_Exterior_EventScript_DefeatedDeoxys
 	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, BirthIsland_Exterior_EventScript_RanFromDeoxys
 	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, BirthIsland_Exterior_EventScript_RanFromDeoxys
+	release
+	end
+
+BirthIsland_Exterior_EventScript_CaughtDeoxys::
 	setflag FLAG_BATTLED_DEOXYS
 	release
 	end
 
 BirthIsland_Exterior_EventScript_DefeatedDeoxys::
-	setflag FLAG_DEFEATED_DEOXYS
 	setvar VAR_0x8004, SPECIES_DEOXYS_NORMAL
 	goto Common_EventScript_LegendaryFlewAway
 	end

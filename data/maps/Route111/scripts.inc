@@ -284,7 +284,7 @@ Route111_EventScript_Victor::
 
 Route111_EventScript_BattleWinstrates::
 	msgbox Route111_Text_VictorIntro, MSGBOX_DEFAULT
-	trainerbattle_no_intro_double TRAINER_VICTOR, Route111_Text_VictorDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro TRAINER_VICTOR, Route111_Text_VictorDefeat
 	applymovement LOCALID_ROUTE111_VICTOR, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	call Route111_EventScript_OpenWinstrateDoor
@@ -302,7 +302,7 @@ Route111_EventScript_BattleWinstrates::
 	waitmovement 0
 	call Route111_EventScript_CloseWinstrateDoor
 	msgbox Route111_Text_VictoriaIntro, MSGBOX_DEFAULT
-	trainerbattle_no_intro_double TRAINER_VICTORIA, Route111_Text_VictoriaDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro TRAINER_VICTORIA, Route111_Text_VictoriaDefeat
 	applymovement LOCALID_ROUTE111_VICTORIA, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	call Route111_EventScript_OpenWinstrateDoor
@@ -320,7 +320,7 @@ Route111_EventScript_BattleWinstrates::
 	waitmovement 0
 	call Route111_EventScript_CloseWinstrateDoor
 	msgbox Route111_Text_ViviIntro, MSGBOX_DEFAULT
-	trainerbattle_no_intro_double TRAINER_VIVI, Route111_Text_ViviDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro TRAINER_VIVI, Route111_Text_ViviDefeat
 	applymovement LOCALID_ROUTE111_VIVI, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	call Route111_EventScript_OpenWinstrateDoor

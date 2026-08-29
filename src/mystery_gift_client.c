@@ -26,6 +26,7 @@ static u32 MysteryGiftClient_CallFunc(struct MysteryGiftClient *);
 static void MysteryGiftClient_Free(struct MysteryGiftClient *);
 
 extern const struct MysteryGiftClientCmd gMysteryGiftClientScript_Init[];
+extern const u32 gMysteryGiftClientScript_InitSize;
 
 void MysteryGiftClient_Create(bool32 isWonderNews)
 {
@@ -99,7 +100,8 @@ static void MysteryGiftClient_InitSendWord(struct MysteryGiftClient *client, u32
 
 static u32 Client_Init(struct MysteryGiftClient *client)
 {
-    memcpy(client->script, gMysteryGiftClientScript_Init, MG_LINK_BUFFER_SIZE);
+    CpuFill32(0, client->script, MG_LINK_BUFFER_SIZE);
+    memcpy(client->script, gMysteryGiftClientScript_Init, gMysteryGiftClientScript_InitSize);
     client->cmdidx = 0;
     client->funcId = FUNC_RUN;
     client->funcState = 0;

@@ -46,10 +46,16 @@ EverGrandeCity_SidneysRoom_EventScript_Sidney::
 	lock
 	faceplayer
 	goto_if_set FLAG_DEFEATED_ELITE_4_SIDNEY, EverGrandeCity_SidneysRoom_EventScript_PostBattleSpeech
+	call PokemonLeague_EliteFour_EventScript_CheckReadyOrOfferRetire
+	goto_if_eq VAR_RESULT, FALSE, EverGrandeCity_SidneysRoom_EventScript_NotReady
 	playbgm MUS_ENCOUNTER_ELITE_FOUR, FALSE
 	msgbox EverGrandeCity_SidneysRoom_Text_IntroSpeech, MSGBOX_DEFAULT
 	trainerbattle_no_intro_double TRAINER_SIDNEY, EverGrandeCity_SidneysRoom_Text_Defeat, EmeraldChampions_Text_NeedTwoPokemon
 	goto EverGrandeCity_SidneysRoom_EventScript_Defeated
+	end
+
+EverGrandeCity_SidneysRoom_EventScript_NotReady::
+	release
 	end
 
 EverGrandeCity_SidneysRoom_EventScript_PostBattleSpeech::

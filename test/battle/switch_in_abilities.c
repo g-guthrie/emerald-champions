@@ -59,6 +59,65 @@ DOUBLE_BATTLE_TEST("Switch-in abilities trigger in Speed Order at the battle's s
     }
 }
 
+DOUBLE_BATTLE_TEST("Simultaneous manual switches resolve in Speed order")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Speed(10); }
+        PLAYER(SPECIES_WYNAUT) { Speed(100); }
+        PLAYER(SPECIES_CATERPIE) { Speed(20); }
+        PLAYER(SPECIES_WEEDLE) { Speed(30); }
+        OPPONENT(SPECIES_MAGIKARP) { Speed(1); }
+        OPPONENT(SPECIES_FEEBAS) { Speed(1); }
+    } WHEN {
+        TURN { SWITCH(playerLeft, 2); SWITCH(playerRight, 3); }
+    } SCENE {
+        SWITCH_OUT_MESSAGE("Wynaut");
+        SEND_IN_MESSAGE("Weedle");
+        SWITCH_OUT_MESSAGE("Wobbuffet");
+        SEND_IN_MESSAGE("Caterpie");
+    }
+}
+
+DOUBLE_BATTLE_TEST("Simultaneous manual switches ignore Custap Berry")
+{
+    GIVEN {
+        ASSUME(gItemsInfo[ITEM_CUSTAP_BERRY].holdEffect == HOLD_EFFECT_CUSTAP_BERRY);
+        PLAYER(SPECIES_WOBBUFFET) { Speed(10); MaxHP(40); HP(1); Item(ITEM_CUSTAP_BERRY); }
+        PLAYER(SPECIES_WYNAUT) { Speed(100); }
+        PLAYER(SPECIES_CATERPIE) { Speed(20); }
+        PLAYER(SPECIES_WEEDLE) { Speed(30); }
+        OPPONENT(SPECIES_MAGIKARP) { Speed(1); }
+        OPPONENT(SPECIES_FEEBAS) { Speed(1); }
+    } WHEN {
+        TURN { SWITCH(playerLeft, 2); SWITCH(playerRight, 3); }
+    } SCENE {
+        SWITCH_OUT_MESSAGE("Wynaut");
+        SEND_IN_MESSAGE("Weedle");
+        SWITCH_OUT_MESSAGE("Wobbuffet");
+        SEND_IN_MESSAGE("Caterpie");
+    }
+}
+
+DOUBLE_BATTLE_TEST("Simultaneous manual switches ignore Lagging Tail and Stall")
+{
+    GIVEN {
+        ASSUME(gItemsInfo[ITEM_LAGGING_TAIL].holdEffect == HOLD_EFFECT_LAGGING_TAIL);
+        PLAYER(SPECIES_SABLEYE) { Speed(100); Ability(ABILITY_STALL); Item(ITEM_LAGGING_TAIL); }
+        PLAYER(SPECIES_WYNAUT) { Speed(10); }
+        PLAYER(SPECIES_CATERPIE) { Speed(20); }
+        PLAYER(SPECIES_WEEDLE) { Speed(30); }
+        OPPONENT(SPECIES_MAGIKARP) { Speed(1); }
+        OPPONENT(SPECIES_FEEBAS) { Speed(1); }
+    } WHEN {
+        TURN { SWITCH(playerLeft, 2); SWITCH(playerRight, 3); }
+    } SCENE {
+        SWITCH_OUT_MESSAGE("Sableye");
+        SEND_IN_MESSAGE("Caterpie");
+        SWITCH_OUT_MESSAGE("Wynaut");
+        SEND_IN_MESSAGE("Weedle");
+    }
+}
+
 SINGLE_BATTLE_TEST("Switch-in abilities trigger in Speed Order after post-KO switch - Single Battle")
 {
     u32 spdPlayer, spdOpponent;

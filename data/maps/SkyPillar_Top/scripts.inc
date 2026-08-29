@@ -46,33 +46,33 @@ SkyPillar_Top_EventScript_Rayquaza::
 	playmoncry SPECIES_RAYQUAZA, CRY_MODE_ENCOUNTER
 	delay 40
 	waitmoncry
-	setwildbattle SPECIES_RAYQUAZA, 70
+	setvar VAR_0x8004, SPECIES_RAYQUAZA
+	setvar VAR_0x8005, 0
+	special CreateEmeraldChampionsStaticLegendaryEncounter
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, SkyPillar_Top_EventScript_CaughtRayquaza
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, SkyPillar_Top_EventScript_DefeatedRayquaza
 	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, SkyPillar_Top_EventScript_RanFromRayquaza
 	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, SkyPillar_Top_EventScript_RanFromRayquaza
+	releaseall
+	end
+
+SkyPillar_Top_EventScript_CaughtRayquaza::
 	setflag FLAG_DEFEATED_RAYQUAZA
 	releaseall
 	end
 
 SkyPillar_Top_EventScript_DefeatedRayquaza::
-	setflag FLAG_DEFEATED_RAYQUAZA
-	goto SkyPillar_Top_EventScript_DefeatedRayquaza2
+	setvar VAR_0x8004, SPECIES_RAYQUAZA
+	goto SkyPillar_Top_EventScript_RanFromRayquaza2
 	end
 
 SkyPillar_Top_EventScript_RanFromRayquaza::
 	setvar VAR_0x8004, SPECIES_RAYQUAZA
 	goto SkyPillar_Top_EventScript_RanFromRayquaza2
-	end
-
-SkyPillar_Top_EventScript_DefeatedRayquaza2::
-	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject VAR_LAST_TALKED
-	fadescreenswapbuffers FADE_FROM_BLACK
-	releaseall
 	end
 
 SkyPillar_Top_EventScript_RanFromRayquaza2::
@@ -179,4 +179,3 @@ SkyPillar_Top_Movement_CameraPanDown:
 
 SkyPillar_Top_Text_RayquazaFlewOff:
 	.string "The awakened RAYQUAZA flew off…$"
-

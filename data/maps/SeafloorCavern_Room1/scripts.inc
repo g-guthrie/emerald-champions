@@ -12,25 +12,23 @@ SeafloorCavern_Room1_EventScript_Grunt2::
 	end
 
 SeafloorCavern_Room1_Text_Grunt1Intro:
-	.string "We don't need a kid around!\n"
-	.string "Go on home already!$"
+	.string "This cavern changes direction with every\n"
+	.string "current. Turn back while you still can.$"
 
 SeafloorCavern_Room1_Text_Grunt1Defeat:
-	.string "I want to go home…$"
+	.string "You made the shifting floor look fixed…$"
 
 SeafloorCavern_Room1_Text_Grunt1PostBattle:
-	.string "I want to get a promotion so I can\n"
-	.string "boss around the GRUNTS…$"
+	.string "ARCHIE is farther below. Every room from\n"
+	.string "here is meant to misdirect pursuit.$"
 
 SeafloorCavern_Room1_Text_Grunt2Intro:
-	.string "That submarine… It's tiny inside.\n"
-	.string "I'm sore all over!$"
+	.string "The submarine found one narrow route in.\n"
+	.string "My formation seals it behind us.$"
 
 SeafloorCavern_Room1_Text_Grunt2Defeat:
-	.string "Losing makes me sore!$"
+	.string "You opened the route again…$"
 
 SeafloorCavern_Room1_Text_Grunt2PostBattle:
-	.string "That submarine we jacked, man,\n"
-	.string "it's brutal as a ride.\l"
-	.string "It's way too tight in there!$"
-
+	.string "The stolen submarine is already deeper.\n"
+	.string "You are following its pressure trail.$"

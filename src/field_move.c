@@ -21,7 +21,24 @@ static bool32 IsAlwaysTrue(enum FieldMove fieldMove)
 
 static bool32 HasBadgeForFieldMove(enum FieldMove fieldMove)
 {
-    return FlagGet(gFieldMoveInfo[fieldMove].arg + FLAG_BADGE01_GET);
+    static const u16 sEmeraldHiddenMoveLicenses[FIELD_MOVES_COUNT] =
+    {
+        [FIELD_MOVE_CUT]        = FLAG_RECEIVED_HM_CUT,
+        [FIELD_MOVE_FLASH]      = FLAG_RECEIVED_HM_FLASH,
+        [FIELD_MOVE_ROCK_SMASH] = FLAG_RECEIVED_HM_ROCK_SMASH,
+        [FIELD_MOVE_STRENGTH]   = FLAG_RECEIVED_HM_STRENGTH,
+        [FIELD_MOVE_SURF]       = FLAG_RECEIVED_HM_SURF,
+        [FIELD_MOVE_FLY]        = FLAG_RECEIVED_HM_FLY,
+        [FIELD_MOVE_DIVE]       = FLAG_RECEIVED_HM_DIVE,
+        [FIELD_MOVE_WATERFALL]  = FLAG_RECEIVED_HM_WATERFALL,
+    };
+    u16 licenseFlag = sEmeraldHiddenMoveLicenses[fieldMove];
+
+    if (!FlagGet(gFieldMoveInfo[fieldMove].arg + FLAG_BADGE01_GET))
+        return FALSE;
+    if (IS_FRLG || licenseFlag == 0)
+        return TRUE;
+    return FlagGet(licenseFlag);
 }
 
 const struct FieldMoveUnlock gFieldMoveUnlocks[FIELD_MOVE_UNLOCK_COUNT] =

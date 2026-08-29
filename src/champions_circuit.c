@@ -6,6 +6,7 @@
 #include "battle_util.h"
 #include "champions_circuit.h"
 #include "data.h"
+#include "difficulty.h"
 #include "event_data.h"
 #include "fpmath.h"
 #include "legendary_signs.h"
@@ -79,12 +80,12 @@ struct CircuitMovePool
 
 static EWRAM_DATA bool8 sExhaustedBaseDex[NATIONAL_DEX_COUNT + 1];
 
-static const u8 sCircuitStyleShowdown[] = _("Showdown random doubles");
-static const u8 sCircuitStyleRain[] = _("Showdown rain offense");
-static const u8 sCircuitStyleSun[] = _("Showdown sun offense");
-static const u8 sCircuitStyleSand[] = _("Showdown sand offense");
-static const u8 sCircuitStyleSnow[] = _("Showdown snow offense");
-static const u8 sCircuitStyleTrickRoom[] = _("Showdown Trick Room");
+static const u8 sCircuitStyleShowdown[] = _("a balanced doubles team");
+static const u8 sCircuitStyleRain[] = _("a rain offense team");
+static const u8 sCircuitStyleSun[] = _("a sun offense team");
+static const u8 sCircuitStyleSand[] = _("a sand offense team");
+static const u8 sCircuitStyleSnow[] = _("a snow offense team");
+static const u8 sCircuitStyleTrickRoom[] = _("a Trick Room team");
 
 static const enum Move sRecoveryMoves[] =
 {
@@ -1247,6 +1248,7 @@ void ChampionsCircuitGenerateOpponent(void)
             level++;
         CreateCircuitMon(&gParties[B_TRAINER_OPPONENT_A][slot], &team.sets[PARTY_SIZE - 1 - slot], level);
     }
+    ApplyTrainerLevelDifficulty(&gParties[B_TRAINER_OPPONENT_A][0]);
     CalculateEnemyPartyCount();
     if (team.details.rain)
         StringCopy(gStringVar1, sCircuitStyleRain);

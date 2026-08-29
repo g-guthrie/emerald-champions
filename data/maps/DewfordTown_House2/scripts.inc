@@ -33,9 +33,8 @@ DewfordTown_House2_Text_WantYouToHaveSilkScarf:
 
 DewfordTown_House2_Text_NoRoom:
 	.string "Oh, you don't have room?\p"
-	.string "Now, listen tight, this SCARF is a must-\n"
-	.string "have! Why, I would sell all my items\l"
-	.string "in order to get it!$"
+	.string "This REAPER CLOTH is rare! Make room\n"
+	.string "and come back for it.$"
 DewfordTown_House2_Text_ExplainSilkScarf:
 	.string "A Reaper Cloth evolves Dusclops.\n"
 	.string "Use it from the Bag when ready.$"
@@ -47,4 +46,3 @@ DewfordTown_House2_Text_BrawlySoCool:
 	.string "heard about BRAWLY?\p"
 	.string "He's so cool…\n"
 	.string "Everyone idolizes him.$"
-

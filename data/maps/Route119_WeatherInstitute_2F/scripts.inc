@@ -204,45 +204,40 @@ Route119_WeatherInstitute_2F_EventScript_WeatherScientist::
 	end
 
 Route119_WeatherInstitute_2F_Text_Grunt2Intro:
-	.string "The INSTITUTE created a type of\n"
-	.string "POKéMON that has something to do with\l"
-	.string "the weather. We're here to take them!$"
+	.string "CASTFORM reads a battlefield before the\n"
+	.string "first drop falls. AQUA needs that gift.\p"
+	.string "You will not reach the research wing.$"
 
 Route119_WeatherInstitute_2F_Text_Grunt2Defeat:
-	.string "Our plan's being spoiled by a kid?$"
+	.string "You changed the forecast around me…$"
 
 Route119_WeatherInstitute_2F_Text_Grunt2PostBattle:
-	.string "If the POKéMON they made here can\n"
-	.string "control the weather freely, then we of\l"
-	.string "TEAM AQUA definitely need it!$"
+	.string "CASTFORM does not command the weather.\n"
+	.string "It survives by changing with it.$"
 
 Route119_WeatherInstitute_2F_Text_Grunt3Intro:
-	.string "We're TEAM AQUA!\n"
-	.string "We appear wherever anything rare is\l"
-	.string "found!$"
+	.string "Rare data, rare POKéMON, hidden currents.\n"
+	.string "AQUA follows what the world conceals.$"
 
 Route119_WeatherInstitute_2F_Text_Grunt3Defeat:
-	.string "You got me!$"
+	.string "You exposed every hidden line…$"
 
 Route119_WeatherInstitute_2F_Text_Grunt3PostBattle:
-	.string "You don't have any idea what we of\n"
-	.string "TEAM AQUA are working towards!\l"
-	.string "You stay out of our way!$"
+	.string "ARCHIE wants a world no border can hold.\n"
+	.string "You keep asking what that freedom costs.$"
 
 Route119_WeatherInstitute_2F_Text_Grunt5Intro:
-	.string "Don't tell me you're looking for that\n"
-	.string "weather POKéMON, too?\p"
-	.string "That's a no-no!\n"
-	.string "We were here to get it first!$"
+	.string "You came for the weather POKéMON, too?\p"
+	.string "Then you know a changing form can answer\n"
+	.string "more fields than a rigid one. Show me.$"
 
 Route119_WeatherInstitute_2F_Text_Grunt5Defeat:
-	.string "Oh, will you look at my POKéMON?$"
+	.string "Your answer changed one turn sooner…$"
 
 Route119_WeatherInstitute_2F_Text_Grunt5PostBattle:
-	.string "Humph, so what?\n"
-	.string "What we want…\p"
-	.string "What we really want isn't here…\n"
-	.string "Ihihihihi…$"
+	.string "CASTFORM was never the whole objective.\n"
+	.string "The records point from storms to SIGNS,\l"
+	.string "and from here to MT. PYRE.$"
 
 Route119_WeatherInstitute_2F_Text_ShellyIntro:
 	.string "SHELLY: We came for weather records,\n"
@@ -252,8 +247,7 @@ Route119_WeatherInstitute_2F_Text_ShellyIntro:
 	.string "Let's see how quickly you read a storm.$"
 
 Route119_WeatherInstitute_2F_Text_ShellyDefeat:
-	.string "Ahahahaha!\n"
-	.string "You're disgustingly strong!$"
+	.string "You found the calm inside my storm…$"
 
 Route119_WeatherInstitute_2F_Text_ShellyPostBattle:
 	.string "You adapted inside the storm. No wonder\n"
@@ -262,15 +256,14 @@ Route119_WeatherInstitute_2F_Text_ShellyPostBattle:
 
 Route119_WeatherInstitute_2F_Text_TeamMagmaJustPassedBy:
 	.string "TEAM MAGMA just passed below us. They\n"
-	.string "were carrying an ancient BLUE ORB.\p"
+	.string "were searching for an ancient BLUE ORB.\p"
 	.string "They are headed for MT. PYRE!$"
 
 Route119_WeatherInstitute_2F_Text_WeHaveToHurryToMtPyre:
-	.string "What?!\p"
-	.string "We can't waste any more time here!\n"
-	.string "We have to hurry to MT. PYRE, too!\p"
-	.string "Ahahahaha!\n"
-	.string "TEAM MAGMA, just you wait!$"
+	.string "What?! MAGMA already moved toward the\n"
+	.string "BLUE ORB?\p"
+	.string "The records confirm MT. PYRE is the next\n"
+	.string "node. AQUA, change course now!$"
 
 Route119_WeatherInstitute_2F_Text_ThanksPleaseTakePokemon:
 	.string "You saved our staff and our data. Take\n"

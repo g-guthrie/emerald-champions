@@ -8333,6 +8333,11 @@ static void Cmd_givecaughtmon(void)
             {
                 //Before sending to PC, we revert battle form
                 TryRevertPartyMonFormChange(gSelectedMonPartyId);
+                // Champions restores every prepared loadout after battle. A
+                // catch-and-swap boxes this mon before the normal restoration
+                // pass, so restore its battle-start item before copying it.
+                if (GEN_LATEST == GEN_CHAMPIONS)
+                    RestorePlayerPartyMonHeldItem(gSelectedMonPartyId);
                 // Mon chosen, try to put it in the PC
                 if (CopyMonToPC(&gParties[B_TRAINER_PLAYER][gSelectedMonPartyId]) == MON_GIVEN_TO_PC)
                 {
@@ -8358,7 +8363,8 @@ static void Cmd_givecaughtmon(void)
         if (B_RESTORE_HELD_BATTLE_ITEMS >= GEN_9)
         {
             enum Item lostItem = gBattleStruct->itemLost[B_TRAINER_OPPONENT_A][gBattlerPartyIndexes[GetCatchingBattler()]].originalItem;
-            if (lostItem != ITEM_NONE && (GEN_LATEST == GEN_CHAMPIONS || GetItemPocket(lostItem) != POCKET_BERRIES))
+            if (GEN_LATEST == GEN_CHAMPIONS
+             || (lostItem != ITEM_NONE && GetItemPocket(lostItem) != POCKET_BERRIES))
                 SetMonData(caughtMon, MON_DATA_HELD_ITEM, &lostItem);
         }
 
@@ -8370,6 +8376,11 @@ static void Cmd_givecaughtmon(void)
         }
 
         u8 giveResult = GiveCapturedMonToPlayer(caughtMon);
+        // A caught mon can occupy a slot that was empty at battle start (or
+        // was cleared by catch-and-swap). Make its authored held item the new
+        // restoration baseline so TryRestoreHeldItems does not erase it.
+        if (GEN_LATEST == GEN_CHAMPIONS && giveResult == MON_GIVEN_TO_PARTY && emptySlot < PARTY_SIZE)
+            RecordPlayerPartyMonHeldItemForRestoration(emptySlot);
         if (giveResult != MON_CANT_GIVE)
             MarkLegendarySignCaughtBySpecies(GetMonData(caughtMon, MON_DATA_SPECIES));
 

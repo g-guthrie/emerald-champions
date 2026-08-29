@@ -176,7 +176,9 @@ Route112_Text_MtChimneyCableCarSign:
 Route112_Text_MtChimneySign:
 	.string "MT. CHIMNEY\p"
 	.string "“For LAVARIDGE TOWN or the summit,\n"
-	.string "please take the CABLE CAR.”$"
+	.string "please take the CABLE CAR.”\p"
+	.string "A newer carving points into FIERY PATH:\n"
+	.string "a flame, a mane, and TORKOAL's shell.$"
 
 Route112_Text_RouteSignLavaridge:
 	.string "ROUTE 112\n"

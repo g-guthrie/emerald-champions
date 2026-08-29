@@ -709,8 +709,23 @@ SlateportCity_EventScript_BerryPowderClerk::
 	goto_if_set FLAG_RECEIVED_POWDER_JAR, SlateportCity_EventScript_ReceivedPowderJar
 	msgbox SlateportCity_Text_ExplainBerries, MSGBOX_DEFAULT
 	giveitem ITEM_POWDER_JAR
+	goto_if_eq VAR_RESULT, FALSE, SlateportCity_EventScript_ArchivePowderJar
+	goto SlateportCity_EventScript_ReceivedPowderJarNow
+	end
+
+SlateportCity_EventScript_ArchivePowderJar::
+	addpcitem ITEM_POWDER_JAR
+	goto_if_eq VAR_RESULT, FALSE, SlateportCity_EventScript_PowderJarNoRoom
+	msgbox SlateportCity_Text_PowderJarSentToPC, MSGBOX_DEFAULT
+
+SlateportCity_EventScript_ReceivedPowderJarNow::
 	setflag FLAG_RECEIVED_POWDER_JAR
 	msgbox SlateportCity_Text_ExplainBerryPowder, MSGBOX_DEFAULT
+	release
+	end
+
+SlateportCity_EventScript_PowderJarNoRoom::
+	msgbox SlateportCity_Text_PowderJarNoRoom, MSGBOX_DEFAULT
 	release
 	end
 
@@ -1265,6 +1280,14 @@ SlateportCity_Text_ExplainBerries:
 	.string "I've got something good for someone\n"
 	.string "like you.$"
 
+SlateportCity_Text_PowderJarSentToPC:
+	.string "Your KEY ITEMS pocket is full, so the\n"
+	.string "POWDER JAR was sent to your PC.$"
+
+SlateportCity_Text_PowderJarNoRoom:
+	.string "Your KEY ITEMS pocket and PC are full.\n"
+	.string "Make room, then return for the jar.$"
+
 SlateportCity_Text_ExplainBerryPowder:
 	.string "I recently had machines installed at\n"
 	.string "POKéMON CENTERS for crushing BERRIES.\p"
@@ -1354,14 +1377,23 @@ SlateportCity_Text_TakingBattleTentChallenge:
 SlateportCity_EventScript_Greta::
 	lock
 	faceplayer
-	goto_if_defeated TRAINER_GRETA_SLATEPORT, SlateportCity_EventScript_GretaAfter
-	msgbox SlateportCity_Text_GretaChallenge, MSGBOX_DEFAULT
+	goto_if_set FLAG_RECEIVED_GRETA_GENGARITE, SlateportCity_EventScript_GretaAfter
+	goto_if_defeated TRAINER_GRETA_SLATEPORT, SlateportCity_EventScript_GretaReward
+	msgbox SlateportCity_Text_GretaChallenge, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, SlateportCity_EventScript_GretaDecline
 	trainerbattle_no_intro_double TRAINER_GRETA_SLATEPORT, SlateportCity_Text_GretaDefeat, EmeraldChampions_Text_NeedTwoPokemon
+SlateportCity_EventScript_GretaReward::
 	checkitemspace ITEM_GENGARITE, 1
 	goto_if_eq VAR_RESULT, FALSE, SlateportCity_EventScript_GretaBagFull
 	giveitem ITEM_GENGARITE
+	setflag FLAG_RECEIVED_GRETA_GENGARITE
 SlateportCity_EventScript_GretaAfter::
 	msgbox SlateportCity_Text_GretaAfter, MSGBOX_DEFAULT
+	release
+	end
+
+SlateportCity_EventScript_GretaDecline::
+	msgbox SlateportCity_Text_GretaDecline, MSGBOX_DEFAULT
 	release
 	end
 
@@ -1377,6 +1409,10 @@ SlateportCity_Text_GretaChallenge:
 
 SlateportCity_Text_GretaDefeat:
 	.string "All three were sharp. Nicely done!$"
+
+SlateportCity_Text_GretaDecline:
+	.string "Return when mind, skill, and body are\n"
+	.string "ready to be judged together.$"
 
 SlateportCity_Text_GretaAfter:
 	.string "That GENGARITE marks a contender.\n"

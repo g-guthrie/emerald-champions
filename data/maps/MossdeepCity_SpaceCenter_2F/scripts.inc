@@ -57,13 +57,13 @@ MossdeepCity_SpaceCenter_2F_EventScript_BattleThreeMagmaGrunts::
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	msgbox MossdeepCity_SpaceCenter_2F_Text_Grunt6Intro, MSGBOX_DEFAULT
-	trainerbattle_no_intro_double TRAINER_GRUNT_SPACE_CENTER_6, MossdeepCity_SpaceCenter_2F_Text_Grunt6Defeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double_allow_single TRAINER_GRUNT_SPACE_CENTER_6, MossdeepCity_SpaceCenter_2F_Text_Grunt6Defeat
 	applymovement LOCALID_SPACE_CENTER_GRUNT_6, MossdeepCity_SpaceCenter_2F_Movement_Grunt6Defeated
 	waitmovement 0
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	msgbox MossdeepCity_SpaceCenter_2F_Text_Grunt7Intro, MSGBOX_DEFAULT
-	trainerbattle_no_intro_double TRAINER_GRUNT_SPACE_CENTER_7, MossdeepCity_SpaceCenter_2F_Text_Grunt7Defeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double_allow_single TRAINER_GRUNT_SPACE_CENTER_7, MossdeepCity_SpaceCenter_2F_Text_Grunt7Defeat
 	applymovement LOCALID_SPACE_CENTER_GRUNT_7, MossdeepCity_SpaceCenter_2F_Movement_Grunt7Defeated
 	waitmovement 0
 	setvar VAR_MOSSDEEP_SPACE_CENTER_STATE, 2
@@ -376,60 +376,55 @@ MossdeepCity_SpaceCenter_2F_Text_DoesMagmaWantToGoToSpace:
 	.string "Do they want to go to space, too?$"
 
 MossdeepCity_SpaceCenter_2F_Text_YoureOutnumberedTakeUsOn:
-	.string "What's wrong with you?\p"
-	.string "You're outnumbered three to one,\n"
-	.string "but you still want to take us on?$"
+	.string "Three consecutive formations guard this\n"
+	.string "corridor. You still choose to advance?$"
 
 MossdeepCity_SpaceCenter_2F_Text_GoodAnswer:
-	.string "Good answer!\n"
-	.string "That's what a smart person'll do!$"
+	.string "A sound decision. Recover your team\n"
+	.string "before challenging the full sequence.$"
 
 MossdeepCity_SpaceCenter_2F_Text_Grunt5Intro:
-	.string "A reckless go-getter, are you?\n"
-	.string "Okay, I'll go first!$"
+	.string "First formation: establish pressure\n"
+	.string "before you can read the sequence.$"
 
 MossdeepCity_SpaceCenter_2F_Text_Grunt5Defeat:
-	.string "I lost!\n"
-	.string "But!$"
+	.string "First line broken. The sequence holds.$"
 
 MossdeepCity_SpaceCenter_2F_Text_Grunt6Intro:
-	.string "It's too soon to be relieved!\n"
-	.string "I'm up next!$"
+	.string "Second formation: punish the answer you\n"
+	.string "revealed in the first.$"
 
 MossdeepCity_SpaceCenter_2F_Text_Grunt6Defeat:
-	.string "I lost, too!\n"
-	.string "But!$"
+	.string "You changed plans between battles…$"
 
 MossdeepCity_SpaceCenter_2F_Text_Grunt7Intro:
-	.string "I bet you want to take a break.\n"
-	.string "But I'm not about to let you do that!$"
+	.string "Final formation: exploit the damage the\n"
+	.string "first two left behind. No reset.$"
 
 MossdeepCity_SpaceCenter_2F_Text_Grunt7Defeat:
-	.string "We should've taken a break…\n"
-	.string "That's what we should've done…$"
+	.string "Your team endured the whole sequence…$"
 
 MossdeepCity_SpaceCenter_2F_Text_Grunt6PostBattle:
-	.string "Three of us here, and look at the sorry\n"
-	.string "mess we got ourselves into.$"
+	.string "Three battles should expose every\n"
+	.string "answer. You kept finding new ones.$"
 
 MossdeepCity_SpaceCenter_2F_Text_Grunt7PostBattle:
-	.string "We three losing like this…\n"
-	.string "We look worse than usual by triple!$"
+	.string "Attrition favored us. Adaptation favored\n"
+	.string "you.$"
 
 MossdeepCity_SpaceCenter_2F_Text_Grunt5PostBattle:
-	.string "Are we being useful to our leader\n"
-	.string "at all?$"
+	.string "MAXIE's model did not account for a team\n"
+	.string "that improves while being worn down.$"
 
 MossdeepCity_SpaceCenter_2F_Text_WellTakeCareOfYou:
-	.string "Hehehe!\p"
-	.string "We come all the way here to get some\n"
-	.string "fuel, and we're interfered with again!\p"
-	.string "If you're going to mess with us too,\n"
-	.string "we'll take care of you at the same time!$"
+	.string "You broke the corridor and reached the\n"
+	.string "launch floor. That ends here.\p"
+	.string "Our final formation protects MAXIE and\n"
+	.string "the fuel at the same time.$"
 
 MossdeepCity_SpaceCenter_2F_Text_MaxieDontInterfere:
-	.string "MAXIE: Clear out of the way!\n"
-	.string "Don't you dare interfere!$"
+	.string "MAXIE: The calculation has reached its\n"
+	.string "final input. Do not interfere.$"
 
 MossdeepCity_SpaceCenter_2F_Text_StevenWhyStealRocketFuel:
 	.string "STEVEN: Rocket fuel cannot control\n"

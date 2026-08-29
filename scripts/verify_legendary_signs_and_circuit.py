@@ -50,7 +50,12 @@ def main() -> None:
     require(len(sign_ids) == 81 and len(set(sign_ids)) == 81, "Legendary Sign definitions are incomplete or duplicated")
     require("MIRAGE_TOWER" not in definitions, "a Sign still depends on collapsible Mirage Tower")
     require("SAFARI_ZONE" not in definitions, "a Sign still requires Safari capture rules")
-    require("min(MAX_LEVEL, GetCurrentLevelCap())" in read("src/legendary_signs.c"), "Arceus reward level is not clamped")
+    legendary_runtime = read("src/legendary_signs.c")
+    require("min(MAX_LEVEL, GetCurrentLevelCap())" in legendary_runtime, "Arceus reward level is not clamped")
+    require(
+        "signId != LEGENDARY_SIGN_ARCEUS && !IsLegendarySignCaught(signId)" in legendary_runtime,
+        "Arceus mastery does not require every other finite Sign source",
+    )
     require("MarkLegendarySignCaughtBySpecies" in read("src/battle_script_commands.c"), "wild catches do not close Signs")
     require("MarkLegendarySignCaughtBySpecies" in read("src/script_pokemon_util.c"), "gift catches do not close Signs")
     require("MarkLegendarySignCaughtBySpecies" in read("src/egg_hatch.c"), "Phione hatching does not close its Sign")

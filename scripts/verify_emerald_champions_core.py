@@ -24,11 +24,14 @@ def main() -> None:
     option_menu = read("src/option_menu.c")
     battle_setup = read("src/battle_setup.c")
     new_game = read("src/new_game.c")
+    overworld = read("src/overworld.c")
     pokemon_config = read("include/config/pokemon.h")
     summary_config = read("include/config/summary_screen.h")
     nurse = read("data/scripts/pkmn_center_nurse.inc")
+    birch_lab = read("data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc")
     items = read("src/data/items.h")
     field_specials = read("src/field_specials.c")
+    field_moves = read("src/field_move.c")
     party_menu = read("src/party_menu.c")
     party_menu_data = read("src/data/party_menu.h")
     vendor_scripts = read("data/scripts/emerald_champions.inc")
@@ -36,8 +39,45 @@ def main() -> None:
     require("COMPOUND_STRING(\"DIFFICULTY\")" in option_menu, "Options no longer exposes Difficulty")
     require(all(label in option_menu for label in ("DifficultyHard", "DifficultyMedium", "DifficultyEasy")), "Difficulty choices are incomplete")
     require("SetCurrentDifficultyLevel(DIFFICULTY_HARD);" in new_game, "Hard is not the new-game default")
+    require(
+        "FlagSet(FLAG_EC_BESPOKE_TRAINER_FLAGS_MIGRATED);" in new_game
+        and "sRepurposedRematchTrainerIds" in overworld
+        and "ClearTrainerFlag(sRepurposedRematchTrainerIds[i]);" in overworld,
+        "repurposed rematch trainer flags are not migrated safely",
+    )
+    require(
+        "if (GetCurrentDifficultyLevel() > DIFFICULTY_MAX)" in overworld
+        and "SetCurrentDifficultyLevel(DIFFICULTY_HARD);" in overworld,
+        "legacy saves do not preserve valid difficulty choices or repair invalid ones",
+    )
+    require(
+        "sRepurposedRewardFlags" in overworld
+        and "FlagClear(sRepurposedRewardFlags[i]);" in overworld
+        and all(flag in overworld for flag in (
+            "FLAG_RECEIVED_WINSTRATE_KANGASKHANITE",
+            "FLAG_EC_ITEM_MANOR_SABLENITE",
+            "FLAG_EC_ITEM_EMBER_BLAZIKENITE",
+            "FLAG_ITEM_SEAFLOOR_CAVERN_ROOM_9_TM_EARTHQUAKE",
+            "FLAG_EC_ITEM_RUINS_STEELIXITE",
+            "FLAG_EC_ITEM_SCORCHED_CHARIZARDITE_X",
+            "FLAG_EC_ITEM_SEASPRAY_SLOWBRONITE",
+            "FLAG_EC_ITEM_RUINS_BLACK_AUGURITE",
+        )),
+        "legacy saves can permanently miss replacement rewards",
+    )
     require(battle_setup.count("ApplyTrainerLevelDifficulty(&gParties[B_TRAINER_OPPONENT_") == 2, "Difficulty must affect exactly both enemy trainer parties")
     require("P_LEVEL_UP_MOVE_LEARNING    FALSE" in pokemon_config, "Level-up prompts are not disabled")
+    receive_dex = birch_lab.split("LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex::", 1)[1].split("return", 1)[0]
+    require(
+        "setflag FLAG_SYS_NATIONAL_DEX" in receive_dex and "special EnableNationalPokedex" in receive_dex,
+        "the initial Pokedex does not cover the Gen 1-9 campaign roster",
+    )
+    for flag in (
+        "FLAG_RECEIVED_HM_CUT", "FLAG_RECEIVED_HM_FLASH", "FLAG_RECEIVED_HM_ROCK_SMASH",
+        "FLAG_RECEIVED_HM_STRENGTH", "FLAG_RECEIVED_HM_SURF", "FLAG_RECEIVED_HM_FLY",
+        "FLAG_RECEIVED_HM_DIVE", "FLAG_RECEIVED_HM_WATERFALL",
+    ):
+        require(flag in field_moves, f"field use no longer requires the story license {flag}")
     require(all(value in summary_config for value in (
         "P_ENABLE_MOVE_RELEARNERS         TRUE",
         "P_PRE_EVO_MOVES                  TRUE",
@@ -86,6 +126,17 @@ def main() -> None:
             require(scripts.count("Common_EventScript_EmeraldChampionsMoveTutor") == 1, f"Move tutor count wrong in {path.parent.name}")
             coordinates = [(obj["x"], obj["y"]) for obj in data["object_events"]]
             require(len(coordinates) == len(set(coordinates)), f"Object overlap in {path.parent.name}")
+            for service_script, service_name in (
+                ("Common_EventScript_EmeraldChampionsBattleVendor", "Battle vendor"),
+                ("Common_EventScript_EmeraldChampionsMoveTutor", "Move tutor"),
+            ):
+                service = next(obj for obj in data["object_events"] if obj["script"] == service_script)
+                interaction_tile = (service["x"], service["y"] + 1)
+                blockers = [
+                    obj for obj in data["object_events"]
+                    if obj is not service and (obj["x"], obj["y"]) == interaction_tile
+                ]
+                require(not blockers, f"{service_name} interaction tile is blocked in {path.parent.name}")
     require(len(target_centers) == 16, f"Expected 16 serviced Hoenn Centers, found {len(target_centers)}")
 
     medicine = {"ITEM_POTION", "ITEM_SUPER_POTION", "ITEM_HYPER_POTION", "ITEM_MAX_POTION", "ITEM_FULL_RESTORE"}
@@ -105,7 +156,7 @@ def main() -> None:
             if listed.intersection(medicine):
                 medicine_lists += 1
                 require("ITEM_RARE_CANDY" in listed, f"Medicine mart lacks Rare Candy: {path}")
-    require(medicine_lists == 20, f"Expected 20 Hoenn medicine lists, found {medicine_lists}")
+    require(medicine_lists == 21, f"Expected 21 Hoenn medicine lists, found {medicine_lists}")
 
     free_block = field_specials.split("sEmeraldChampionsFreeBattleItems[]", 1)[1].split("};", 1)[0]
     free_items = set(re.findall(r"ITEM_[A-Z0-9_]+", free_block))

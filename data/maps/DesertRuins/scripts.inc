@@ -61,21 +61,28 @@ DesertRuins_EventScript_Regirock::
 	playmoncry SPECIES_REGIROCK, CRY_MODE_ENCOUNTER
 	delay 40
 	waitmoncry
-	setwildbattle SPECIES_REGIROCK, 40
+	setvar VAR_0x8004, SPECIES_REGIROCK
+	setvar VAR_0x8005, 0
+	special CreateEmeraldChampionsStaticLegendaryEncounter
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special StartRegiBattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, DesertRuins_EventScript_CaughtRegirock
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, DesertRuins_EventScript_DefeatedRegirock
 	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, DesertRuins_EventScript_RanFromRegirock
 	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, DesertRuins_EventScript_RanFromRegirock
+	release
+	end
+
+DesertRuins_EventScript_CaughtRegirock::
 	setflag FLAG_DEFEATED_REGIROCK
 	release
 	end
 
 DesertRuins_EventScript_DefeatedRegirock::
-	setflag FLAG_DEFEATED_REGIROCK
-	goto Common_EventScript_RemoveStaticPokemon
+	msgbox DesertRuins_Text_RegirockStillAwaitsCapture, MSGBOX_DEFAULT
+	release
 	end
 
 DesertRuins_EventScript_RanFromRegirock::
@@ -83,3 +90,6 @@ DesertRuins_EventScript_RanFromRegirock::
 	goto Common_EventScript_LegendaryFlewAway
 	end
 
+DesertRuins_Text_RegirockStillAwaitsCapture:
+	.string "REGIROCK gathers itself again.\p"
+	.string "It still awaits a true capture.$"

@@ -1238,7 +1238,9 @@ static void BattleSetup_ConfigureTrainerBattle(TrainerBattleParameter *battlePar
         return;
     }
 
-    if (battleParams->params.isDoubleBattle && !HasEnoughMonsForDoubleBattle2())
+    if (battleParams->params.isDoubleBattle
+     && !(battleParams->params.rivalBattleFlags & TRAINER_BATTLE_ALLOW_ONE_MON_IN_DOUBLES)
+     && !HasEnoughMonsForDoubleBattle2())
     {
         PUSH(EventSnippet_NotEnoughMonsForDoubleBattle)
         return;
@@ -2020,6 +2022,9 @@ u16 GetRematchTrainerIdFromTable(const struct RematchTrainer *table, u16 firstBa
     if (tableId == -1)
         return FALSE;
 
+    if (!OW_TRAINER_REMATCHES)
+        return table[tableId].trainerIds[0];
+
     trainerEntry = &table[tableId];
     for (i = 1; i < REMATCHES_COUNT; i++)
     {
@@ -2040,6 +2045,12 @@ static u16 GetLastBeatenRematchTrainerIdFromTable(const struct RematchTrainer *t
 
     if (tableId == -1)
         return FALSE;
+
+    // Bespoke Emerald Champions encounters intentionally reuse disabled
+    // rematch-stage IDs. Match Call must therefore describe only the retained
+    // first campaign team when overworld rematches are disabled.
+    if (!OW_TRAINER_REMATCHES)
+        return table[tableId].trainerIds[0];
 
     trainerEntry = &table[tableId];
     for (i = 1; i < REMATCHES_COUNT; i++)
@@ -2209,6 +2220,16 @@ bool8 ShouldTryRematchBattleForTrainerId(u16 trainerId)
 
 bool8 IsTrainerReadyForRematch(void)
 {
+    if (!OW_TRAINER_REMATCHES)
+    {
+        s32 tableId = FirstBattleTrainerIdToRematchTableId(gRematchTable, TRAINER_BATTLE_PARAM.opponentA);
+
+        // Existing trainer scripts use this result both for rematch readiness
+        // and to decide whether a Match Call contact still needs registering.
+        // With rematches disabled, return only the registration state so a
+        // defeated trainer shows normal post-battle dialogue thereafter.
+        return tableId >= 0 && TrainerIsMatchCallRegistered(tableId);
+    }
     return IsTrainerReadyForRematch_(gRematchTable, TRAINER_BATTLE_PARAM.opponentA);
 }
 
@@ -2250,6 +2271,9 @@ u16 CountBattledRematchTeams(u16 trainerId)
 {
     if (HasTrainerBeenFought(gRematchTable[trainerId].trainerIds[0]) != TRUE)
         return 0;
+
+    if (!OW_TRAINER_REMATCHES)
+        return 1;
 
     for (u32 i = 1; i < REMATCHES_COUNT; i++)
     {
@@ -2402,7 +2426,38 @@ static void ApplyRegionalRivalStarter(struct Pokemon *party, u16 trainerNum)
         SetMonData(&party[i], MON_DATA_NICKNAME, GetSpeciesName(newSpecies));
         experience = gExperienceTables[gSpeciesInfo[newSpecies].growthRate][level];
         SetMonData(&party[i], MON_DATA_EXP, &experience);
-        ApplyEmeraldChampionsOpponentSet(&party[i], 0);
+        bool32 applied = FALSE;
+        for (u8 choice = 0; choice < GetEmeraldChampionsRawBattleSetCount(newSpecies); choice++)
+        {
+            const struct EmeraldChampionsBattleSet *preset = GetEmeraldChampionsRawBattleSet(newSpecies, choice);
+            bool32 itemUsed = FALSE;
+
+            if (preset == NULL || preset->requiredItem != ITEM_NONE)
+                continue;
+            for (u32 other = 0; other < PARTY_SIZE; other++)
+            {
+                if (other != i
+                 && preset->item != ITEM_NONE
+                 && GetMonData(&party[other], MON_DATA_HELD_ITEM) == preset->item)
+                {
+                    itemUsed = TRUE;
+                    break;
+                }
+            }
+            if (!itemUsed)
+            {
+                applied = ApplyEmeraldChampionsOpponentSet(&party[i], choice) != EC_BATTLE_SET_FAILED;
+                if (applied)
+                    break;
+            }
+        }
+        if (!applied)
+        {
+            enum Item noItem = ITEM_NONE;
+
+            ApplyEmeraldChampionsOpponentSet(&party[i], 0);
+            SetMonData(&party[i], MON_DATA_HELD_ITEM, &noItem);
+        }
         CalculateMonStats(&party[i]);
         return;
     }

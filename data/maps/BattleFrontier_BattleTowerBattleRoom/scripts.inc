@@ -437,7 +437,8 @@ BattleFrontier_BattleTowerBattleRoom_Text_RestoreMonsToFullHealth:
 
 @ Unused
 BattleFrontier_BattleTowerBattleRoom_Text_ReadyForOpponent:
-	.string "You will be facing opponent no. {STR_VAR_1}.\n"
+	.string "You will face opponent\n"
+	.string "no. {STR_VAR_1}.\p"
 	.string "Are you ready?$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_ReadyFor2ndOpponent:
@@ -558,4 +559,3 @@ BattleFrontier_BattleTowerBattleRoom_Text_WishICouldBattleYouAgain:
 	.string "I have never had a POKéMON battle\n"
 	.string "so enjoyable before…\p"
 	.string "I wish I could battle with you again…$"
-

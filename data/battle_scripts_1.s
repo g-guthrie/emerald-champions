@@ -2640,6 +2640,8 @@ BattleScript_EffectSkillSwap_AfterAbilityPopUp:
 	switchinabilities BS_ATTACKER
 	switchinabilities BS_TARGET
 .endif
+	call BattleScript_TryRevertWeatherform
+	flushtextbox
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectImprison::
@@ -4349,6 +4351,7 @@ BattleScript_YawnMakesAsleep::
 	waitstate
 	tryactivateitem BS_EFFECT_BATTLER, ACTIVATION_ON_STATUS_CHANGE
 	jumpfifsemiinvulnerable BS_EFFECT_BATTLER, STATE_SKY_DROP_TARGET, BattleScript_YawnEnd
+	jumpfifsemiinvulnerable BS_EFFECT_BATTLER, STATE_COMMANDER, BattleScript_YawnEnd
 	makevisible BS_EFFECT_BATTLER
 BattleScript_YawnEnd:
 	return

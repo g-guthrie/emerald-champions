@@ -35,7 +35,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_CaptStern::
 	applymovement LOCALID_OCEANIC_MUSEUM_2F_GRUNT_1, SlateportCity_OceanicMuseum_2F_Movement_GruntApproachToBattle
 	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_2F_Text_LetMeTakeCareOfThis, MSGBOX_DEFAULT
-	trainerbattle_no_intro_double TRAINER_GRUNT_MUSEUM_2, SlateportCity_OceanicMuseum_2F_Text_Grunt2Defeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double_allow_single TRAINER_GRUNT_MUSEUM_2, SlateportCity_OceanicMuseum_2F_Text_Grunt2Defeat
 	applymovement LOCALID_OCEANIC_MUSEUM_2F_GRUNT_1, SlateportCity_OceanicMuseum_2F_Movement_GruntDefeated
 	waitmovement 0
 	applymovement LOCALID_OCEANIC_MUSEUM_2F_GRUNT_1, Common_Movement_WalkInPlaceFasterDown
@@ -53,7 +53,7 @@ SlateportCity_OceanicMuseum_2F_EventScript_CaptStern::
 	applymovement LOCALID_OCEANIC_MUSEUM_2F_ARCHIE, SlateportCity_OceanicMuseum_2F_Movement_ArchieApproachPlayer
 	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_2F_Text_ArchieWarning, MSGBOX_DEFAULT
-	trainerbattle_no_intro_double TRAINER_ARCHIE_SLATEPORT, SlateportCity_OceanicMuseum_2F_Text_ArchieDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_no_intro_double_allow_single TRAINER_ARCHIE_SLATEPORT, SlateportCity_OceanicMuseum_2F_Text_ArchieDefeat
 	msgbox SlateportCity_OceanicMuseum_2F_Text_ArchieDefeated, MSGBOX_DEFAULT
 	closemessage
 	savebgm MUS_DUMMY
@@ -277,8 +277,8 @@ SlateportCity_OceanicMuseum_2F_Text_ThankYouForTheParts:
 	.string "marks began shining across HOENN.$"
 
 SlateportCity_OceanicMuseum_2F_Text_WellTakeThoseParts:
-	.string "Hehehe, hold it!\n"
-	.string "We'll take those parts!$"
+	.string "Hold it. Those parts map pressure below\n"
+	.string "the seafloor. AQUA is taking them.$"
 
 SlateportCity_OceanicMuseum_2F_Text_SternWhoAreYou:
 	.string "CAPT. STERN: Wh-what?\n"
@@ -289,26 +289,23 @@ SlateportCity_OceanicMuseum_2F_Text_WereTeamAqua:
 	.string "the people who understand the sea!$"
 
 SlateportCity_OceanicMuseum_2F_Text_Grunt1Defeat:
-	.string "Awaaaah!\n"
-	.string "A kid beat me!$"
+	.string "You broke our opening current!$"
 
 SlateportCity_OceanicMuseum_2F_Text_BossGoingToBeFurious:
-	.string "Oh, man, what a disaster…\n"
-	.string "The BOSS is going to be furious…$"
+	.string "The handoff failed. ARCHIE will want to\n"
+	.string "know how you read it so quickly.$"
 
 SlateportCity_OceanicMuseum_2F_Text_LetMeTakeCareOfThis:
-	.string "Humph, sniveling wimp!\n"
-	.string "Let me take care of this!$"
+	.string "You committed too early. Fall back.\n"
+	.string "I will change the angle of attack.$"
 
 SlateportCity_OceanicMuseum_2F_Text_Grunt2Defeat:
-	.string "What?!\n"
-	.string "I lost, too!$"
+	.string "You adapted again…$"
 
 SlateportCity_OceanicMuseum_2F_Text_MeddlingKid:
-	.string "Now what? If we don't get the parts,\n"
-	.string "we're in for it!\p"
-	.string "Arrgh, I didn't count on being meddled\n"
-	.string "with by some meddling kid!$"
+	.string "Two formations failed, and the parts are\n"
+	.string "still with STERN.\p"
+	.string "We underestimated your independence.$"
 
 SlateportCity_OceanicMuseum_2F_Text_CameToSeeWhatsTakingSoLong:
 	.string "Two trained crews, stopped by one new\n"

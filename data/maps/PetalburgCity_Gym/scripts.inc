@@ -10,7 +10,8 @@ PetalburgCity_Gym_OnLoad:
 	call_if_ge VAR_PETALBURG_GYM_STATE, 7, PetalburgCity_Gym_EventScript_UnlockAllDoors
 	end
 
-@ NOTE: Strength and OHKO rooms are misleading. Both are more accurately Critical-Hit
+@ Internal OHKO labels are retained for map compatibility; player-facing text
+@ correctly identifies Berke's room as the Burst Room.
 PetalburgCity_Gym_EventScript_OpenUnlockedDoors::
 	setvar VAR_0x8005, 1
 	call PetalburgCity_Gym_EventScript_OpenGymEntranceDoors
@@ -38,7 +39,7 @@ PetalburgCity_Gym_EventScript_UnlockAllDoors::
 PetalburgCity_Gym_OnTransition:
 	call_if_eq VAR_PETALBURG_GYM_STATE, 1, PetalburgCity_Gym_EventScript_MoveWallyToEntrance
 	call_if_lt VAR_PETALBURG_GYM_STATE, 6, PetalburgCity_Gym_EventScript_MoveNormanToEntrance
-	call_if_set FLAG_SYS_GAME_CLEAR, PetalburgCity_Gym_EventScript_CheckNormanForRematch
+	call_if_eq VAR_PETALBURG_GYM_STATE, 8, PetalburgCity_Gym_EventScript_ResetLegacyNormanState
 	end
 
 PetalburgCity_Gym_EventScript_MoveWallyToEntrance::
@@ -49,17 +50,11 @@ PetalburgCity_Gym_EventScript_MoveNormanToEntrance::
 	setobjectxyperm LOCALID_PETALBURG_GYM_NORMAN, 4, 107
 	return
 
-PetalburgCity_Gym_EventScript_CheckNormanForRematch::
-	setorcopyvar VAR_TRAINER_BATTLE_OPPONENT_A, TRAINER_NORMAN_1
-	specialvar VAR_RESULT, IsTrainerReadyForRematch
-	goto_if_eq VAR_RESULT, TRUE, PetalburgCity_Gym_EventScript_DontMoveNormanToFront
-	goto_if_eq VAR_PETALBURG_GYM_STATE, 8, PetalburgCity_Gym_EventScript_DontMoveNormanToFront
-	setobjectxyperm LOCALID_PETALBURG_GYM_NORMAN, 4, 107
+@ State 8 belonged only to the deleted Gym rematch.  Old saves may already
+@ carry it, so normalize them to Norman's ordinary post-battle state.
+PetalburgCity_Gym_EventScript_ResetLegacyNormanState::
+	setvar VAR_PETALBURG_GYM_STATE, 7
 	return
-
-PetalburgCity_Gym_EventScript_DontMoveNormanToFront::
-	setvar VAR_PETALBURG_GYM_STATE, 8
-	end
 
 PetalburgCity_Gym_OnWarp:
 	map_script_2 VAR_PETALBURG_GYM_STATE, 1, PetalburgCity_Gym_EventScript_TurnPlayerNorth
@@ -110,7 +105,7 @@ PetalburgCity_Gym_EventScript_Norman::
 	case 5, PetalburgCity_Gym_EventScript_NormanThreeBadges
 	case 6, PetalburgCity_Gym_EventScript_NormanBattle
 	case 7, PetalburgCity_Gym_EventScript_NormanPostBattle
-	case 8, PetalburgCity_Gym_EventScript_NormanRematch
+	case 8, PetalburgCity_Gym_EventScript_NormanPostBattle
 	msgbox PetalburgCity_Gym_Text_DadYoureHereWithYourPokemon, MSGBOX_DEFAULT
 	closemessage
 	switch VAR_FACING
@@ -338,11 +333,6 @@ PetalburgCity_Gym_EventScript_NormanPostBattle::
 PetalburgCity_Gym_EventScript_GiveFacade2::
 	call PetalburgCity_Gym_EventScript_GiveFacade
 	release
-	end
-
-PetalburgCity_Gym_EventScript_NormanRematch::
-	trainerbattle_rematch_double TRAINER_NORMAN_1, PetalburgCity_Gym_Text_NormanPreRematch, PetalburgCity_Gym_Text_NormanRematchDefeat, PetalburgCity_Gym_Text_NormanRematchNeedTwoMons
-	msgbox PetalburgCity_Gym_Text_NormanPostRematch, MSGBOX_AUTOCLOSE
 	end
 
 PetalburgCity_Gym_EventScript_ShouldGiveEnigmaBerry::
@@ -1270,9 +1260,8 @@ PetalburgCity_Gym_Text_ReceivedBalanceBadge:
 	.string "from DAD!$"
 
 PetalburgCity_Gym_Text_ExplainBalanceBadgeTakeThis:
-	.string "DAD: With that BADGE, the DEFENSE\n"
-	.string "of all your POKéMON will increase.\p"
-	.string "POKéMON that know the HM move SURF\n"
+	.string "DAD: With that BADGE, POKéMON that\n"
+	.string "know the hidden move SURF\n"
 	.string "will be able to travel over water.\p"
 	.string "This is my gift to you. {PLAYER}, I'm\n"
 	.string "sure you can use it correctly.$"
@@ -1281,8 +1270,8 @@ PetalburgCity_Gym_Text_ExplainFacade:
 	.string "Let it hold the stone in battle.$"
 
 PetalburgCity_Gym_Text_DadHappyAndSad:
-	.string "DAD: As a LEADER, I already want the\n"
-	.string "rematch. As your father, I'm simply proud.$"
+	.string "DAD: As a LEADER, I learned from you.\n"
+	.string "As your father, I'm simply proud.$"
 
 PetalburgCity_Gym_Text_PleaseComeWithMe:
 	.string "Ah, there you are, {PLAYER}{KUN}!\p"
@@ -1398,22 +1387,17 @@ PetalburgCity_Gym_Text_GeorgePostBadge:
 	.string "One day, I'll become a LEADER.$"
 
 PetalburgCity_Gym_Text_BerkeIntro:
-	.string "I'm not going to take it easy just\n"
-	.string "because you're our LEADER's kid.\p"
-	.string "I'll show you how horrid it is for\n"
-	.string "a POKéMON to take a critical hit!$"
+	.string "This is the BURST ROOM. SCRAPPY sound\n"
+	.string "crosses Ghosts. One visible EXPLOSION\l"
+	.string "can erase a careless board. Position!$"
 
 PetalburgCity_Gym_Text_BerkeDefeat:
-	.string "Your power…\n"
-	.string "You're the real deal.$"
+	.string "You made every burst hit the wrong turn!$"
 
 PetalburgCity_Gym_Text_BerkePostBattle:
-	.string "Your father really is strong.\n"
-	.string "He's a TRAINER worth my respect.\p"
-	.string "And, I sense the same glow coming\n"
-	.string "from you as your father.\p"
-	.string "I hope that you'll stage a terrific\n"
-	.string "battle with your father!$"
+	.string "Track TRICK ROOM, guard the telegraphed\n"
+	.string "EXPLOSION, and keep an answer for the\l"
+	.string "refrigerated final impact.$"
 
 PetalburgCity_Gym_Text_BerkePostBadge:
 	.string "Since your dad became the LEADER,\n"
@@ -1519,7 +1503,7 @@ PetalburgCity_Gym_Text_EnterStrengthRoom:
 	.string "Do you want to go through?$"
 
 PetalburgCity_Gym_Text_EnterOHKORoom:
-	.string "“ONE-HIT KO ROOM,” the sign says.\p"
+	.string "“BURST ROOM,” the sign says.\p"
 	.string "Do you want to go through?$"
 
 PetalburgCity_Gym_Text_EnterGymLeadersRoom:
@@ -1535,40 +1519,3 @@ PetalburgCity_Gym_Text_GymStatueCertified:
 	.string "PETALBURG CITY POKéMON GYM\p"
 	.string "NORMAN'S CERTIFIED TRAINERS:\n"
 	.string "{PLAYER}$"
-
-PetalburgCity_Gym_Text_NormanPreRematch:
-	.string "DAD: {PLAYER}…\n"
-	.string "I had a feeling that you would come.\p"
-	.string "I would never refuse to accept\n"
-	.string "a challenge from you.\p"
-	.string "You do understand, don't you?\p"
-	.string "Inside a GYM, it doesn't matter that\n"
-	.string "we are a parent and child.\p"
-	.string "…No, because we are parent and child,\n"
-	.string "we owe it to each other to do the best\l"
-	.string "we can. Isn't that right, {PLAYER}?$"
-
-PetalburgCity_Gym_Text_NormanRematchDefeat:
-	.string "Uh… Haha…\n"
-	.string "Maybe that was going too hard…$"
-
-PetalburgCity_Gym_Text_NormanPostRematch:
-	.string "DAD: {PLAYER}…\n"
-	.string "What is your dream?\p"
-	.string "My dream…\n"
-	.string "Hahaha…\l"
-	.string "It has already come true, actually.$"
-
-PetalburgCity_Gym_Text_NormanRematchNeedTwoMons:
-	.string "DAD: {PLAYER}…\n"
-	.string "I had a feeling that you would come.\p"
-	.string "I would never refuse to accept\n"
-	.string "a challenge from you.\p"
-	.string "You do understand, don't you?\p"
-	.string "Inside a GYM, it doesn't matter that\n"
-	.string "we are a parent and child.\p"
-	.string "Hm? Wait a second, {PLAYER}.\p"
-	.string "Do you only have one POKéMON that is\n"
-	.string "capable of battle?\p"
-	.string "Sorry, but you'll have to come back\n"
-	.string "with at least two POKéMON.$"

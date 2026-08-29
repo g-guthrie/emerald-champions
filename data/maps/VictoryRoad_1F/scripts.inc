@@ -165,7 +165,9 @@ VictoryRoad_1F_Text_EdgarDefeat:
 VictoryRoad_1F_Text_EdgarPostBattle:
 	.string "You've made it this far. Keep the\n"
 	.string "momentum going and become the\l"
-	.string "CHAMPION! If anyone can, it's you!$"
+	.string "CHAMPION! If anyone can, it's you!\p"
+	.string "A victory-shaped mark nearby sketches\n"
+	.string "LUCARIO. Keep that family close.$"
 
 VictoryRoad_1F_Text_AlbertIntro:
 	.string "I didn't come all this way to lose now.\n"

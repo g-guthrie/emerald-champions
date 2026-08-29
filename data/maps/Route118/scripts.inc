@@ -305,7 +305,8 @@ Route118_Text_MagikarpGuyDefeat:
 	.string "the whole current.$"
 
 Route118_Text_MagikarpGuyAfter:
-	.string "MAGIKARP was the invitation, not the joke.\n"
+	.string "MAGIKARP was the invitation.\n"
+	.string "It was never the joke.\p"
 	.string "Every weak-looking lead can hide a plan.$"
 
 Route118_Text_MagikarpGuyDecline:

@@ -8529,6 +8529,7 @@ void MoveDeleterForgetMove(void)
 {
     enum Move move = MOVE_NONE;
     struct BoxPokemon *boxmon = GetSelectedBoxMonFromPcOrParty();
+    enum Move forgottenMove = GetBoxMonData(boxmon, MON_DATA_MOVE1 + gSpecialVar_0x8005);
     SetBoxMonData(boxmon, MON_DATA_MOVE1 + gSpecialVar_0x8005, &move);
     SetBoxMonData(boxmon, MON_DATA_PP1 + gSpecialVar_0x8005, &gMovesInfo[MOVE_NONE].pp);
     u8 ppBonuses = GetBoxMonData(boxmon, MON_DATA_PP_BONUSES);
@@ -8536,6 +8537,10 @@ void MoveDeleterForgetMove(void)
     SetBoxMonData(boxmon, MON_DATA_PP_BONUSES, &ppBonuses);
     for (u32 i = gSpecialVar_0x8005; i < MAX_MON_MOVES - 1; i++)
         ShiftMoveSlot(boxmon, i, i + 1);
+    if (gSpecialVar_0x8004 == PC_MON_CHOSEN)
+        TryBoxMonFormChangeOnMove(boxmon, forgottenMove);
+    else
+        TryFormChangeOnMove(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004], forgottenMove, B_TRAINER_PLAYER);
 }
 
 static void ShiftMoveSlot(struct BoxPokemon *mon, u8 slotTo, u8 slotFrom)

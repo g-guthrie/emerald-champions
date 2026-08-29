@@ -60,3 +60,44 @@ PokemonLeague_EliteFour_EventScript_CloseDoor::
 	setmetatile 6, 13, METATILE_EliteFour_EntryDoor_ClosedBottom, TRUE
 	setmetatile 7, 13, METATILE_EliteFour_EntryDoor_ClosedBottom, TRUE
 	return
+
+@ Every Emerald Champions League battle is a Double Battle. The doors still
+@ lock behind the player and the League still provides no automatic healing,
+@ but a player who reaches the next room with fewer than two usable Pokemon
+@ must not be trapped there without a Revive. Return TRUE when battle-ready,
+@ FALSE when the player chooses to stay and use the Bag, and end the current
+@ script through the native whiteout callback when the player retires.
+PokemonLeague_EliteFour_EventScript_CheckReadyOrOfferRetire::
+	special HasEnoughMonsForDoubleBattle
+	goto_if_eq VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS, PokemonLeague_EliteFour_EventScript_Ready
+	msgbox PokemonLeague_EliteFour_Text_RetirePrompt, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, PokemonLeague_EliteFour_EventScript_Retire
+	msgbox PokemonLeague_EliteFour_Text_Stay, MSGBOX_DEFAULT
+	setvar VAR_RESULT, FALSE
+	return
+
+PokemonLeague_EliteFour_EventScript_Ready::
+	setvar VAR_RESULT, TRUE
+	return
+
+PokemonLeague_EliteFour_EventScript_Retire::
+	msgbox PokemonLeague_EliteFour_Text_Retired, MSGBOX_DEFAULT
+	closemessage
+	setrespawn HEAL_LOCATION_EVER_GRANDE_CITY_POKEMON_LEAGUE
+	special Script_FadeOutMapMusic
+	fadescreen FADE_TO_BLACK
+	special SetCB2WhiteOut
+	end
+
+PokemonLeague_EliteFour_Text_RetirePrompt:
+	.string "You need two battle-ready POKéMON.\p"
+	.string "End this LEAGUE run and return to the\n"
+	.string "lobby?$"
+
+PokemonLeague_EliteFour_Text_Stay:
+	.string "Then restore another POKéMON with your\n"
+	.string "BAG and speak to me again.$"
+
+PokemonLeague_EliteFour_Text_Retired:
+	.string "Your LEAGUE run ends here. Rest, rebuild,\n"
+	.string "and challenge us again.$"

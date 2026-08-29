@@ -233,15 +233,15 @@ MeteorFalls_1F_1R_EventScript_MetCozmo::
 	end
 
 MeteorFalls_1F_1R_Text_WithThisMeteorite:
-	.string "Hehehe!\p"
-	.string "With this METEORITE, that thing in\n"
-	.string "MT. CHIMNEY will…$"
+	.string "The METEORITE is secured.\p"
+	.string "Its resonance will force MT. CHIMNEY's\n"
+	.string "ancient network awake.$"
 
 MeteorFalls_1F_1R_Text_DontExpectMercyFromMagma:
-	.string "Heh?\p"
-	.string "I don't know who you are, but if you get\n"
-	.string "in the way of TEAM MAGMA, don't\l"
-	.string "expect any mercy!$"
+	.string "COURTNEY: You crossed our operation\n"
+	.string "twice. Coincidence is no longer likely.\p"
+	.string "This formation will remove you from\n"
+	.string "MAXIE's equation.$"
 
 MeteorFalls_1F_1R_Text_CourtneyDefeat:
 	.string "You broke our celestial formation…$"
@@ -250,67 +250,55 @@ MeteorFalls_1F_1R_Text_GruntDefeat:
 	.string "Even the meteor team failed?!$"
 
 MeteorFalls_1F_1R_Text_HoldItRightThereMagma:
-	.string "Hold it right there, TEAM MAGMA!\p"
-	.string "You're badly mistaken if you think you\n"
-	.string "can have your way with the world!$"
+	.string "Hold it, TEAM MAGMA!\p"
+	.string "That METEORITE reaches currents below\n"
+	.string "HOENN. You will not seal them away!$"
 
 MeteorFalls_1F_1R_Text_BeSeeingYouTeamAqua:
-	.string "Hehehe!\n"
-	.string "Even TEAM AQUA joins us!\p"
-	.string "But it's too much trouble to deal with\n"
-	.string "you all…\p"
-	.string "Heh, it doesn't matter!\p"
-	.string "We've got the METEORITE, so off to\n"
-	.string "MT. CHIMNEY we go!\p"
-	.string "Hehehe! Be seeing you, you TEAM\n"
-	.string "AQUA dingbats!$"
+	.string "COURTNEY: AQUA arrived sooner than\n"
+	.string "projected. The result is unchanged.\p"
+	.string "We have the METEORITE. MAXIE is already\n"
+	.string "preparing MT. CHIMNEY's fault network.\p"
+	.string "Pursue us if you want to see certainty\n"
+	.string "replace your leader's chaos.$"
 
 MeteorFalls_1F_1R_Text_ArchieSeenYouBefore:
-	.string "ARCHIE: Didn't I see you before?\n"
-	.string "At SLATEPORT's MUSEUM?\p"
-	.string "Ah, so your name is {PLAYER}.\p"
-	.string "At the time, I thought you were one\n"
-	.string "of TEAM MAGMA's goons.\p"
-	.string "Humph…\n"
-	.string "You're one odd kid.\p"
-	.string "TEAM MAGMA is a dangerous group of\n"
-	.string "total fanatics.\p"
-	.string "They engage in destruction, claiming\n"
-	.string "to expand the land mass.\p"
-	.string "They are the rivals to us,\n"
-	.string "the sea-loving TEAM AQUA!$"
+	.string "ARCHIE: We met at SLATEPORT's MUSEUM.\n"
+	.string "{PLAYER}, wasn't it?\p"
+	.string "I mistook you for one of MAGMA's crew.\n"
+	.string "You proved you choose your own current.\p"
+	.string "MAXIE thinks every living system can be\n"
+	.string "measured, fixed, and made obedient.\p"
+	.string "Now he means to force that certainty\n"
+	.string "through MT. CHIMNEY.\p"
+	.string "AQUA will stop him. If you value a world\n"
+	.string "that can still change, follow us.$"
 
 MeteorFalls_1F_1R_Text_BossWeShouldChaseMagma:
 	.string "BOSS, we should give chase to\n"
 	.string "TEAM MAGMA…$"
 
 MeteorFalls_1F_1R_Text_ArchieYesNoTellingWhatMagmaWillDo:
-	.string "ARCHIE: Yes, yes, we must!\n"
-	.string "We've got to hurry.\p"
-	.string "There's no telling what TEAM MAGMA\n"
-	.string "will do at MT. CHIMNEY!$"
+	.string "ARCHIE: We move now.\p"
+	.string "If MAGMA drives that METEORITE into the\n"
+	.string "fault line, the mountain answers first.$"
 
 MeteorFalls_1F_1R_Text_ArchieFarewell:
-	.string "ARCHIE: {PLAYER}, you should keep\n"
-	.string "an eye out for TEAM MAGMA, too.\p"
-	.string "Farewell!$"
+	.string "ARCHIE: {PLAYER}, come to MT. CHIMNEY.\n"
+	.string "You have already changed this race.$"
 
 MeteorFalls_1F_1R_Text_MeetProfCozmo:
-	.string "I… I'm COZMO…\n"
-	.string "I'm a PROFESSOR…\p"
-	.string "TEAM MAGMA asked me to guide them\n"
-	.string "to METEOR FALLS…\p"
-	.string "But they tricked me.\n"
-	.string "They even took my METEORITE away…\p"
-	.string "And then another similar bunch,\n"
-	.string "TEAM AQUA showed up.\p"
-	.string "After that…\n"
-	.string "I don't understand any of it.\p"
-	.string "But that TEAM MAGMA…\p"
-	.string "What are they going to do with that\n"
-	.string "METEORITE at MT. CHIMNEY?$"
+	.string "I'm PROF. COZMO. MAGMA asked me to map\n"
+	.string "the METEORITE's resonance here.\p"
+	.string "I thought it was geological research.\n"
+	.string "They took the sample and my readings.\p"
+	.string "The pattern matches MT. CHIMNEY's fault\n"
+	.string "line and those strange marks in HOENN.\p"
+	.string "If they amplify it at the summit, the\n"
+	.string "whole network may answer at once.$"
 
 MeteorFalls_1F_1R_Text_WhatsTeamMagmaDoingAtMtChimney:
-	.string "PROF. COZMO: But that TEAM MAGMA…\p"
-	.string "What are they going to do with that\n"
-	.string "METEORITE at MT. CHIMNEY?$"
+	.string "PROF. COZMO: The METEORITE and the\n"
+	.string "fault line share one resonance.\p"
+	.string "Please stop MAGMA before they force the\n"
+	.string "entire network awake.$"

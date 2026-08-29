@@ -522,7 +522,8 @@ struct PokemonStorageSystemData
     u8 messageText[40];
     u8 boxTitleText[40];
     u8 releaseMonName[POKEMON_NAME_LENGTH + 1];
-    u8 itemName[20];
+    // Item names may use all ITEM_NAME_LENGTH characters; reserve EOS too.
+    u8 itemName[ITEM_NAME_LENGTH + 1];
     u8 inBoxMovingMode;
     u16 multiMoveWindowId;
     struct ItemIcon itemIcons[MAX_ITEM_ICONS];
@@ -4296,6 +4297,7 @@ static void InitPokeStorageBg0(void)
 static void PrintMessage(u8 id)
 {
     u8 *txtPtr;
+    u32 fontId;
 
     DynamicPlaceholderTextUtil_Reset();
     switch (sMessages[id].format)
@@ -4328,7 +4330,8 @@ static void PrintMessage(u8 id)
 
     DynamicPlaceholderTextUtil_ExpandPlaceholders(sStorage->messageText, sMessages[id].text);
     FillWindowPixelBuffer(WIN_MESSAGE, PIXEL_FILL(1));
-    AddTextPrinterParameterized(WIN_MESSAGE, FONT_NORMAL, sStorage->messageText, 0, 1, TEXT_SKIP_DRAW, NULL);
+    fontId = GetFontIdToFit(sStorage->messageText, FONT_NORMAL, 0, WindowWidthPx(WIN_MESSAGE));
+    AddTextPrinterParameterized(WIN_MESSAGE, fontId, sStorage->messageText, 0, 1, TEXT_SKIP_DRAW, NULL);
     DrawTextBorderOuter(WIN_MESSAGE, 2, 14);
     PutWindowTilemap(WIN_MESSAGE);
     CopyWindowToVram(WIN_MESSAGE, COPYWIN_GFX);

@@ -34,19 +34,14 @@ RustboroCity_CuttersHouse_Text_YouCanPutThisHMToGoodUse:
 	.string "Go on, take it!$"
 
 RustboroCity_CuttersHouse_Text_ExplainCut:
-	.string "That HIDDEN MACHINE, or HM for\n"
-	.string "short, is CUT.\p"
-	.string "An HM move is one that can be used\n"
-	.string "by POKéMON outside of battle.\p"
-	.string "Any POKéMON that's learned CUT can\n"
-	.string "chop down thin trees if the TRAINER\l"
-	.string "has earned the STONE BADGE.\p"
-	.string "And, unlike a TM, an HM can be used\n"
-	.string "more than once.$"
+	.string "That HM registers CUT as a field\n"
+	.string "technique for your team.\p"
+	.string "Once you earn the STONE BADGE, any\n"
+	.string "POKéMON that knows CUT can chop thin\l"
+	.string "trees outside battle.$"
 
 RustboroCity_CuttersHouse_Text_DadHelpedClearLandOfTrees:
 	.string "When they were expanding the city of\n"
 	.string "RUSTBORO, my dad helped out.\p"
 	.string "He made his POKéMON use CUT to clear\n"
 	.string "the land of trees.$"
-

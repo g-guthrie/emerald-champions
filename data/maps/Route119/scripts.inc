@@ -129,8 +129,23 @@ Route119_EventScript_DefeatedBrendan::
 
 Route119_EventScript_GiveFlyHM::
 	giveitem ITEM_HM_FLY
+	goto_if_eq VAR_RESULT, FALSE, Route119_EventScript_ArchiveFlyHM
+	goto Route119_EventScript_ReceivedFlyHM
+	end
+
+Route119_EventScript_ArchiveFlyHM::
+	addpcitem ITEM_HM_FLY
+	goto_if_eq VAR_RESULT, FALSE, Route119_EventScript_FlyHMNoRoom
+	msgbox Route119_Text_FlyHMSentToPC, MSGBOX_DEFAULT
+
+Route119_EventScript_ReceivedFlyHM::
 	setflag FLAG_RECEIVED_HM_FLY
 	return
+
+Route119_EventScript_FlyHMNoRoom::
+	msgbox Route119_Text_FlyHMNoRoom, MSGBOX_DEFAULT
+	releaseall
+	end
 
 Route119_EventScript_RivalExitScottArrive::
 	closemessage
@@ -507,6 +522,14 @@ Route119_Text_MayExplainFly:
 	.string "{PLAYER}{KUN}.\p"
 	.string "Well, let's meet again somewhere!$"
 
+Route119_Text_FlyHMSentToPC:
+	.string "Your TM pocket is full, so FLY was sent\n"
+	.string "to your PC. Retrieve it when ready.$"
+
+Route119_Text_FlyHMNoRoom:
+	.string "Your TM pocket and PC are both full.\n"
+	.string "Make room, then speak to me again.$"
+
 Route119_Text_BrendanIntro:
 	.string "BRENDAN: {PLAYER}! So this is where\n"
 	.string "you've been looking for POKéMON?\p"
@@ -598,7 +621,9 @@ Route119_Text_RouteSignFortree:
 	.string "{RIGHT_ARROW} FORTREE CITY$"
 
 Route119_Text_WeatherInstitute:
-	.string "WEATHER INSTITUTE$"
+	.string "WEATHER INSTITUTE\p"
+	.string "FIELD NOTE: CASTFORM may wake storm\n"
+	.string "SIGNS in ROUTE 119's grass and water.$"
 
 Route119_Text_TrainerTipsDecoration:
 	.string "TRAINER TIPS\p"

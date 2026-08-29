@@ -815,7 +815,7 @@
 
 	@ Starts a rematch double battle. Takes a trainer, intro text, loss text, and text for when you have too few pokemon
 	.macro trainerbattle_rematch_double trainer:req, intro_text:req, lose_text:req, not_enough_pkmn_text:req
-	trainerbattle LOCALID_NONE, \trainer, \intro_text, \lose_text, NULL, LOCALID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, \not_enough_pkmn_text, FALSE, TRUE, FALSE, TRUE, FALSE, TRUE, FALSE, FALSE
+	trainerbattle LOCALID_NONE, \trainer, \intro_text, \lose_text, NULL, LOCALID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, \not_enough_pkmn_text, TRUE, TRUE, FALSE, TRUE, FALSE, TRUE, FALSE, FALSE
 	.endm
 
 	@ Starts a trainer battle, skipping intro text. Takes a trainer and loss text
@@ -827,6 +827,12 @@
 	@ This retains the native two-usable-Pokemon guard used by trainerbattle_double.
 	.macro trainerbattle_no_intro_double trainer:req, lose_text:req, not_enough_pkmn_text:req
 	trainerbattle LOCALID_NONE, \trainer, NULL, \lose_text, NULL, LOCALID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, \not_enough_pkmn_text, TRUE, TRUE, FALSE, FALSE, TRUE, FALSE, FALSE, TRUE
+	.endm
+
+	@ Continues an already-started attrition sequence even if only one usable
+	@ player Pokemon survived the previous Double Battle.
+	.macro trainerbattle_no_intro_double_allow_single trainer:req, lose_text:req
+	trainerbattle LOCALID_NONE, \trainer, NULL, \lose_text, NULL, LOCALID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, NULL, TRUE, TRUE, FALSE, FALSE, TRUE, FALSE, FALSE, TRUE, TRAINER_BATTLE_ALLOW_ONE_MON_IN_DOUBLES
 	.endm
 
 	@ Starts a double battle with the player against two trainers
