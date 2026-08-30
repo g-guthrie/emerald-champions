@@ -2239,22 +2239,32 @@ static bool32 ShouldAvoidProtectingAgainstPartnerMove(enum BattlerId battler, en
 {
     enum BattlerId partner = GetPartnerBattler(battler);
     enum Move partnerMove;
+    u32 partnerMoveIndex;
+    bool32 partnerMoveWasScored;
 
     if (!IsDoubleBattle()
      || !HasPartner(battler)
-     || !(gAiLogicData->battlerMovesScored & (1u << partner))
      || gAiLogicData->shouldSwitch & (1u << partner))
     {
         return FALSE;
     }
 
-    partnerMove = gBattleMons[partner].moves[gAiBattleData->chosenMoveIndex[partner]];
+    partnerMoveWasScored = gAiLogicData->battlerMovesScored & (1u << partner);
+    if (partnerMoveWasScored)
+        partnerMoveIndex = gAiBattleData->chosenMoveIndex[partner];
+    else
+        partnerMoveIndex = GetMoveIndex(partner, gAiLogicData->partnerMove);
+
+    if (partnerMoveIndex >= MAX_MON_MOVES)
+        return FALSE;
+
+    partnerMove = gBattleMons[partner].moves[partnerMoveIndex];
     if (partnerMove == MOVE_NONE
      || partnerMove == MOVE_UNAVAILABLE
      || MoveIgnoresProtect(partnerMove)
      || !AI_IsFaster(battler, partner, protectMove, partnerMove, CONSIDER_PRIORITY)
      || !IsAllyProtectingFromMove(partner, partnerMove, protectMove)
-     || CanIndexMoveFaintTarget(partner, battler, gAiBattleData->chosenMoveIndex[partner], AI_ATTACKING))
+     || CanIndexMoveFaintTarget(partner, battler, partnerMoveIndex, AI_ATTACKING))
     {
         return FALSE;
     }
@@ -2267,7 +2277,32 @@ static bool32 ShouldAvoidProtectingAgainstPartnerMove(enum BattlerId battler, en
     case TARGET_RANDOM:
     case TARGET_ALLY:
     case TARGET_USER_OR_ALLY:
-        return gAiBattleData->chosenTarget[partner] == battler;
+        if (partnerMoveWasScored)
+            return gAiBattleData->chosenTarget[partner] == battler;
+
+        // If this battler is scored first, SetAllyMove only retains the move
+        // selected by its simulated partner, not that move's target. Recover
+        // the two intentional Beat Up ally targets so Protect does not block
+        // the activation merely because AI processing order was reversed.
+        if (GetMoveEffect(partnerMove) == EFFECT_BEAT_UP)
+        {
+            bool32 wouldFaint = CanIndexMoveFaintTarget(partner, battler, partnerMoveIndex, AI_ATTACKING_PARTNER);
+            enum Type moveType = GetDynamicMoveType(
+                GetBattlerMon(partner),
+                partnerMove,
+                partner,
+                gAiLogicData->abilities[partner],
+                gAiLogicData->holdEffects[partner],
+                MON_IN_BATTLE
+            );
+
+            if (moveType == TYPE_NONE)
+                moveType = GetMoveType(partnerMove);
+
+            return ShouldBeatUpForJustified(partner, battler, partnerMove, moveType, wouldFaint, gAiLogicData)
+                || ShouldBeatUpForRageFist(partner, battler, partnerMove, wouldFaint, gAiLogicData);
+        }
+        return FALSE;
     case TARGET_FOES_AND_ALLY:
     case TARGET_ALL_BATTLERS:
         if (!DoesBattlerIgnoreAbilityChecks(partner, gAiLogicData->abilities[partner], partnerMove)

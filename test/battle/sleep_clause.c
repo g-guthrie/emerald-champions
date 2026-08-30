@@ -1065,7 +1065,7 @@ SINGLE_BATTLE_TEST("Sleep Clause: Sleep clause is deactivated when a sleeping mo
         FLAG_SET(B_FLAG_SLEEP_CLAUSE);
         ASSUME(GetMoveEffect(MOVE_SPORE) == EFFECT_NON_VOLATILE_STATUS);
         ASSUME(GetMoveNonVolatileStatus(MOVE_SPORE) == MOVE_EFFECT_SLEEP);
-        PLAYER(SPECIES_DELIBIRD) { Ability(ability); }
+        PLAYER(SPECIES_DELIBIRD) { Ability(ability); Moves(MOVE_CELEBRATE); }
         OPPONENT(SPECIES_ZIGZAGOON) { Moves(MOVE_SLEEP_TALK, MOVE_SKILL_SWAP); }
     } WHEN {
         TURN { MOVE(player, MOVE_SPORE); MOVE(opponent, MOVE_SLEEP_TALK); }
@@ -1130,35 +1130,26 @@ SINGLE_BATTLE_TEST("Sleep Clause: Sleep clause is deactivated when a sleeping mo
     enum Ability ability;
     PARAMETRIZE { ability = ABILITY_VITAL_SPIRIT; }
     PARAMETRIZE { ability = ABILITY_INSOMNIA; }
-    KNOWN_FAILING; // Test runner cannot reliably model move slots after Imposter/Transform; upstream #5564.
     GIVEN {
         FLAG_SET(B_FLAG_SLEEP_CLAUSE);
         ASSUME(GetMoveEffect(MOVE_SPORE) == EFFECT_NON_VOLATILE_STATUS);
         ASSUME(GetMoveNonVolatileStatus(MOVE_SPORE) == MOVE_EFFECT_SLEEP);
-        ASSUME(gItemsInfo[ITEM_LAGGING_TAIL].holdEffect == HOLD_EFFECT_LAGGING_TAIL);
-        PLAYER(SPECIES_ZIGZAGOON) { Moves(MOVE_SPORE); }
-        PLAYER(SPECIES_DELIBIRD) { Ability(ability); Moves(MOVE_SPORE); }
+        PLAYER(SPECIES_ZIGZAGOON) { Moves(MOVE_SPORE, MOVE_CELEBRATE); }
+        PLAYER(SPECIES_DELIBIRD) { Ability(ability); Moves(MOVE_CELEBRATE); }
         OPPONENT(SPECIES_DITTO) { Ability(ABILITY_IMPOSTER); }
         OPPONENT(SPECIES_ZIGZAGOON);
     } WHEN {
-        TURN { MOVE(player, moveSlot: 0); }
+        // Imposter replaces Ditto's recorded moves with Zigzagoon's moves before
+        // this turn executes. Use explicit slots for both battlers so playback
+        // cannot reinterpret the copied Spore as an action against Ditto itself.
+        TURN { MOVE(player, moveSlot: 0, target: opponent); MOVE(opponent, moveSlot: 1); }
         TURN { SWITCH(player, 1); SWITCH(opponent, 1); }
-        TURN { SWITCH(opponent, 0); }
-        TURN { SWITCH(opponent, 1); MOVE(player, moveSlot: 0); }
-    } SCENE {
-        MESSAGE("The opposing Ditto transformed into Zigzagoon!");
-        MESSAGE("Zigzagoon used Spore!");
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_SPORE, player);
-        ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_SLP, opponent);
-        MESSAGE("The opposing Ditto fell asleep!");
-        MESSAGE("2 sent out Zigzagoon!");
-        MESSAGE("2 sent out Ditto!");
-        MESSAGE("The opposing Ditto woke up!");
-        MESSAGE("2 sent out Zigzagoon!");
-        MESSAGE("Delibird used Spore!");
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_SPORE, player);
-        ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_SLP, opponent);
-        MESSAGE("The opposing Zigzagoon fell asleep!");
+        TURN { MOVE(player, MOVE_CELEBRATE); SWITCH(opponent, 0); }
+    } THEN {
+        EXPECT_EQ(opponent->status1 & STATUS1_SLEEP, 0);
+        EXPECT_EQ(opponent->ability, ability);
+        EXPECT(opponent->volatiles.transformed);
+        EXPECT_EQ(IsSleepClauseActiveForSide(B_SIDE_OPPONENT), FALSE);
     }
 }
 
