@@ -1,5 +1,10 @@
 # Baseline builds
 
+> **Historical migration measurements, not current artifacts.** The source
+> commits, ROM digests, and memory figures below identify the two foundations
+> that were compared. They must not be reused as evidence for the current
+> working tree or a future release candidate.
+
 Both baselines were built in `devkitpro/devkitarm:latest` with `make -j4`.
 The Docker container installed only the host build dependencies `libpng-dev`
 and `pkg-config`; neither dependency is linked into the GBA ROM.

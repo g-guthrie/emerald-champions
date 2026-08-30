@@ -2,6 +2,11 @@
 
 Date: 2026-08-28
 
+> **Historical checkpoint, not current implementation status.** The exact
+> artifact and counts below describe the tree immediately before the story
+> rebuild. Current counts belong in `FEATURE_PARITY.md` and the live verifier
+> output.
+
 This is the source checkpoint immediately before restoring the 22 missing
 Inclement-era map directories and rebuilding the campaign story around them.
 

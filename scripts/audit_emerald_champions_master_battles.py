@@ -108,6 +108,17 @@ CHOICE_INCOHERENT_STATUS_MOVES = {
     "MOVE_BULK_UP", "MOVE_QUIVER_DANCE", "MOVE_IRON_DEFENSE", "MOVE_COTTON_GUARD",
     "MOVE_AGILITY", "MOVE_AUTOTOMIZE", "MOVE_WORK_UP", "MOVE_COIL", "MOVE_BELLY_DRUM",
 }
+SINGLES_DEAD_ALLY_MOVES = {
+    "MOVE_HELPING_HAND",
+    "MOVE_DECORATE",
+    "MOVE_COACHING",
+    "MOVE_ALLY_SWITCH",
+    "MOVE_AROMATIC_MIST",
+    "MOVE_GEAR_UP",
+    "MOVE_HOLD_HANDS",
+    "MOVE_HEAL_PULSE",
+    "MOVE_SPOTLIGHT",
+}
 REDUNDANT_STATUS_GROUPS = {
     "sleep": {
         "MOVE_SPORE", "MOVE_SLEEP_POWDER", "MOVE_HYPNOSIS", "MOVE_SING",
@@ -738,9 +749,11 @@ def audit(path: Path) -> tuple[list[str], list[str]]:
                 real_moves = [move for move in moves if move != "MOVE_NONE"]
                 if not real_moves or len(real_moves) != len(set(real_moves)):
                     errors.append(f"encounter {encounter_index}/{trainer}/{species}: empty or duplicate moves")
-                if fmt == "single" and "MOVE_HELPING_HAND" in real_moves:
+                dead_singles_moves = set(real_moves) & SINGLES_DEAD_ALLY_MOVES
+                if fmt == "single" and dead_singles_moves:
                     errors.append(
-                        f"encounter {encounter_index}/{trainer}/{species}: Helping Hand has no ally in a singles battle"
+                        f"encounter {encounter_index}/{trainer}/{species}: ally-only moves have no legal purpose "
+                        f"in a singles battle {sorted(dead_singles_moves)}"
                     )
                 uncategorized_moves = {move for move in real_moves if move not in MOVE_CATEGORIES}
                 if uncategorized_moves:

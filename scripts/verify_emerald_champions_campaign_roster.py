@@ -21,6 +21,20 @@ POST_LEAGUE_MAP_PARTS = {
     "TERRA_CAVE",
 }
 
+FOSSIL_REVIVALS = {
+    "ITEM_HELIX_FOSSIL": "SPECIES_OMANYTE",
+    "ITEM_DOME_FOSSIL": "SPECIES_KABUTO",
+    "ITEM_OLD_AMBER": "SPECIES_AERODACTYL",
+    "ITEM_ROOT_FOSSIL": "SPECIES_LILEEP",
+    "ITEM_CLAW_FOSSIL": "SPECIES_ANORITH",
+    "ITEM_ARMOR_FOSSIL": "SPECIES_SHIELDON",
+    "ITEM_SKULL_FOSSIL": "SPECIES_CRANIDOS",
+    "ITEM_COVER_FOSSIL": "SPECIES_TIRTOUGA",
+    "ITEM_PLUME_FOSSIL": "SPECIES_ARCHEN",
+    "ITEM_JAW_FOSSIL": "SPECIES_TYRUNT",
+    "ITEM_SAIL_FOSSIL": "SPECIES_AMAURA",
+}
+
 
 def hoenn_maps() -> tuple[set[str], set[str]]:
     """Return real Emerald/Champions map directory names and MAP_* IDs.
@@ -127,6 +141,7 @@ def map_is_allowed(map_name: str, pre_league: bool) -> bool:
 
 def direct_species(pre_league: bool) -> set[str]:
     result: set[str] = set()
+    obtainable_items: set[str] = set()
     wild = json.loads((ROOT / "src/data/wild_encounters.json").read_text())
     for group in wild["wild_encounter_groups"]:
         if group.get("label") != "gWildMonHeaders":
@@ -148,12 +163,24 @@ def direct_species(pre_league: bool) -> set[str]:
         if not map_is_allowed(map_name, pre_league):
             continue
         source = path.read_text()
+        map_data = json.loads(map_json.read_text())
+        obtainable_items.update(
+            obj["trainer_sight_or_berry_tree_id"]
+            for obj in map_data.get("object_events", [])
+            if obj.get("script") == "Common_EventScript_FindItem"
+            and obj.get("trainer_sight_or_berry_tree_id") in FOSSIL_REVIVALS
+        )
+        obtainable_items.update(
+            item for item in re.findall(r"\bgiveitem\s+(ITEM_[A-Z0-9_]+)", source)
+            if item in FOSSIL_REVIVALS
+        )
         result.update(re.findall(
             r"\b(?:givemon|giveegg|setwildbattle)\s+(SPECIES_[A-Z0-9_]+)", source
         ))
         result.update(re.findall(
             r"\bsetvar\s+VAR_0x8004,\s*(SPECIES_[A-Z0-9_]+)", source
         ))
+    result.update(FOSSIL_REVIVALS[item] for item in obtainable_items)
 
     # Do not count all twenty-seven mutually exclusive opening choices.  The
     # independently claimable Mauville archive is parsed from its live map
@@ -248,8 +275,9 @@ def main() -> None:
 
     sets_code = (ROOT / "src/emerald_champions_battle_sets.c").read_text()
     require(
-        "RandomUniform(RNG_NONE, 0, count - 1)" in sets_code,
-        "wild competitive presets are not sampled uniformly",
+        "return ApplyEmeraldChampionsRandomNonMegaSet(mon);" in sets_code
+        and "RandomUniform(RNG_NONE, 0, ++matches - 1)" in sets_code,
+        "wild competitive non-Mega presets are not sampled uniformly",
     )
 
     print(f"PASS: all {len(champions_components)} Champions families are obtainable before the League")

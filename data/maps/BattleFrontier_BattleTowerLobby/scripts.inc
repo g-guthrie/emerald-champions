@@ -446,6 +446,10 @@ BattleFrontier_BattleTowerLobby_EventScript_ChampionsCircuit::
 	lock
 	faceplayer
 	goto_if_unset FLAG_SYS_GAME_CLEAR, BattleFrontier_BattleTowerLobby_EventScript_CircuitLocked
+	special ChampionsCircuitTryGiveReward
+	call_if_eq VAR_RESULT, 1, BattleFrontier_BattleTowerLobby_EventScript_CircuitRewardParty
+	call_if_eq VAR_RESULT, 2, BattleFrontier_BattleTowerLobby_EventScript_CircuitRewardPC
+	goto_if_eq VAR_RESULT, 3, BattleFrontier_BattleTowerLobby_EventScript_CircuitPendingRewardNoRoom
 	msgbox BattleFrontier_BattleTowerLobby_Text_CircuitWelcome, MSGBOX_DEFAULT
 	special ChampionsCircuitCanEnter
 	goto_if_eq VAR_RESULT, FALSE, BattleFrontier_BattleTowerLobby_EventScript_CircuitNeedsParty
@@ -483,6 +487,11 @@ BattleFrontier_BattleTowerLobby_EventScript_CircuitRewardPC::
 BattleFrontier_BattleTowerLobby_EventScript_CircuitRewardNoRoom::
 	msgbox BattleFrontier_BattleTowerLobby_Text_CircuitRewardNoRoom, MSGBOX_DEFAULT
 	return
+
+BattleFrontier_BattleTowerLobby_EventScript_CircuitPendingRewardNoRoom::
+	msgbox BattleFrontier_BattleTowerLobby_Text_CircuitRewardNoRoom, MSGBOX_DEFAULT
+	release
+	end
 
 BattleFrontier_BattleTowerLobby_EventScript_CircuitLocked::
 	msgbox BattleFrontier_BattleTowerLobby_Text_CircuitLocked, MSGBOX_DEFAULT
@@ -544,7 +553,7 @@ BattleFrontier_BattleTowerLobby_Text_CircuitRewardPC:
 BattleFrontier_BattleTowerLobby_Text_CircuitRewardNoRoom:
 	.string "A Circuit reward is waiting, but both\n"
 	.string "your party and PC are full.\p"
-	.string "Make room before your next victory.$"
+	.string "Make room, then speak to this desk again.$"
 
 BattleFrontier_BattleTowerLobby_Text_CircuitLocked:
 	.string "This desk hosts a challenge beyond\n"

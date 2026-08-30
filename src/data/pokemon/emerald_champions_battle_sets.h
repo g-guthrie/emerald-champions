@@ -115,6 +115,7 @@ static const u8 sEmeraldChampionsSetName_SPECIES_TATSUGIRI[] = _("Special Attack
 static const u8 sEmeraldChampionsSetName_SPECIES_FLUTTER_MANE[] = _("Special Attacker");
 static const u8 sEmeraldChampionsSetName_SPECIES_IRON_BUNDLE[] = _("Special Attacker");
 static const u8 sEmeraldChampionsSetName_SPECIES_GIMMIGHOUL[] = _("Nasty Plot Chest");
+static const u8 sEmeraldChampionsSetName_SPECIES_GIMMIGHOUL_ROAMING[] = _("Dual Screens");
 static const u8 sEmeraldChampionsSetName_SPECIES_CHIEN_PAO[] = _("Physical Attacker");
 static const u8 sEmeraldChampionsSetName_SPECIES_TING_LU[] = _("Special Attacker");
 static const u8 sEmeraldChampionsSetName_SPECIES_CHI_YU[] = _("Special Attacker");
@@ -153,7 +154,7 @@ static const u8 sEmeraldChampionsSetName_SPECIES_VOLTORB_HISUI[] = _("Fast Seed 
 static const u8 sEmeraldChampionsSetName_SPECIES_ELECTRODE_HISUI[] = _("Chloroblast Pivot");
 static const u8 sEmeraldChampionsSetName_SPECIES_LILLIGANT_HISUI[] = _("Victory Dance");
 static const u8 sEmeraldChampionsSetName_SPECIES_BRAVIARY_HISUI[] = _("Tinted Lens");
-static const u8 sEmeraldChampionsSetName_SPECIES_SLIGGOO_HISUI[] = _("Shelter Press");
+static const u8 sEmeraldChampionsSetName_SPECIES_SLIGGOO_HISUI[] = _("Curse Tank");
 static const u8 sEmeraldChampionsSetName_SPECIES_URSALUNA_BLOODMOON[] = _("Blood Moon Voice");
 static const u8 sEmeraldChampionsSetName_SPECIES_WYRDEER[] = _("Trick Room Support");
 static const u8 sEmeraldChampionsSetName_SPECIES_KLEAVOR[] = _("Choice Attacker");
@@ -614,7 +615,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .requiredItem = ITEM_NONE,
         .nature = NATURE_JOLLY,
         .ability = ABILITY_INNER_FOCUS,
-        .statPoints = {2, 32, 0, 0, 0, 32},
+        .statPoints = {32, 0, 2, 0, 0, 32},
     },
     [SPECIES_ODDISH] =
     {
@@ -1730,7 +1731,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .requiredItem = ITEM_NONE,
         .nature = NATURE_TIMID,
         .ability = ABILITY_EARLY_BIRD,
-        .statPoints = {2, 0, 0, 32, 0, 32},
+        .statPoints = {32, 0, 2, 0, 0, 32},
     },
     [SPECIES_SPINARAK] =
     {
@@ -2036,7 +2037,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .requiredItem = ITEM_NONE,
         .nature = NATURE_TIMID,
         .ability = ABILITY_LEVITATE,
-        .statPoints = {2, 0, 0, 32, 0, 32},
+        .statPoints = {32, 0, 2, 0, 0, 32},
     },
     [SPECIES_UNOWN] =
     {
@@ -3679,7 +3680,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
     [SPECIES_GROUDON] =
     {
         .moves = {MOVE_PRECIPICE_BLADES, MOVE_STONE_EDGE, MOVE_SWORDS_DANCE, MOVE_PROTECT},
-        .item = ITEM_WHITE_HERB,
+        .item = ITEM_CLEAR_AMULET,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_ADAMANT,
         .ability = ABILITY_DROUGHT,
@@ -3917,7 +3918,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .requiredItem = ITEM_NONE,
         .nature = NATURE_ADAMANT,
         .ability = ABILITY_SHEER_FORCE,
-        .statPoints = {32, 0, 32, 0, 2, 0},
+        .statPoints = {2, 32, 0, 0, 0, 32},
     },
     [SPECIES_SHIELDON] =
     {
@@ -4259,7 +4260,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .requiredItem = ITEM_NONE,
         .nature = NATURE_JOLLY,
         .ability = ABILITY_PRANKSTER,
-        .statPoints = {2, 32, 0, 0, 0, 32},
+        .statPoints = {32, 0, 2, 0, 0, 32},
     },
     [SPECIES_LUCARIO] =
     {
@@ -4826,7 +4827,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .requiredItem = ITEM_NONE,
         .nature = NATURE_TIMID,
         .ability = ABILITY_PRANKSTER,
-        .statPoints = {2, 0, 0, 32, 0, 32},
+        .statPoints = {32, 0, 2, 0, 0, 32},
     },
     [SPECIES_PANSAGE] =
     {
@@ -5150,7 +5151,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .requiredItem = ITEM_NONE,
         .nature = NATURE_TIMID,
         .ability = ABILITY_PRANKSTER,
-        .statPoints = {2, 0, 0, 32, 0, 32},
+        .statPoints = {32, 0, 2, 0, 0, 32},
     },
     [SPECIES_WHIMSICOTT] =
     {
@@ -5429,7 +5430,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .requiredItem = ITEM_NONE,
         .nature = NATURE_QUIET,
         .ability = ABILITY_MAGIC_GUARD,
-        .statPoints = {32, 0, 2, 32, 0, 0},
+        .statPoints = {32, 0, 16, 0, 18, 0},
     },
     [SPECIES_DUOSION] =
     {
@@ -6207,7 +6208,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
     },
     [SPECIES_SCATTERBUG] =
     {
-        .moves = {MOVE_RAGE_POWDER, MOVE_STUN_SPORE, MOVE_STRING_SHOT, MOVE_TACKLE},
+        .moves = {MOVE_RAGE_POWDER, MOVE_STUN_SPORE, MOVE_STRING_SHOT, MOVE_PROTECT},
         .item = ITEM_EVIOLITE,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_BOLD,
@@ -6279,7 +6280,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
     },
     [SPECIES_SKIDDO] =
     {
-        .moves = {MOVE_BULK_UP, MOVE_HORN_LEECH, MOVE_HIGH_HORSEPOWER, MOVE_PROTECT},
+        .moves = {MOVE_BULK_UP, MOVE_HORN_LEECH, MOVE_STOMPING_TANTRUM, MOVE_PROTECT},
         .item = ITEM_EVIOLITE,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_CAREFUL,
@@ -6554,7 +6555,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .requiredItem = ITEM_NONE,
         .nature = NATURE_TIMID,
         .ability = ABILITY_CHEEK_POUCH,
-        .statPoints = {2, 0, 0, 32, 0, 32},
+        .statPoints = {32, 0, 2, 0, 0, 32},
     },
     [SPECIES_CARBINK] =
     {
@@ -6662,7 +6663,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .requiredItem = ITEM_NONE,
         .nature = NATURE_TIMID,
         .ability = ABILITY_INFILTRATOR,
-        .statPoints = {2, 0, 0, 32, 0, 32},
+        .statPoints = {32, 0, 2, 0, 0, 32},
     },
     [SPECIES_NOIVERN] =
     {
@@ -6716,7 +6717,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .requiredItem = ITEM_NONE,
         .nature = NATURE_QUIET,
         .ability = ABILITY_MAGICIAN,
-        .statPoints = {32, 0, 2, 0, 32, 0},
+        .statPoints = {32, 0, 2, 32, 0, 0},
     },
     [SPECIES_VOLCANION] =
     {
@@ -7229,7 +7230,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .requiredItem = ITEM_NONE,
         .nature = NATURE_JOLLY,
         .ability = ABILITY_STURDY,
-        .statPoints = {2, 32, 0, 0, 0, 32},
+        .statPoints = {32, 0, 2, 0, 0, 32},
     },
     [SPECIES_MIMIKYU] =
     {
@@ -7859,7 +7860,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .requiredItem = ITEM_NONE,
         .nature = NATURE_JOLLY,
         .ability = ABILITY_SWIFT_SWIM,
-        .statPoints = {32, 0, 32, 0, 2, 0},
+        .statPoints = {2, 32, 0, 0, 0, 32},
     },
     [SPECIES_TOXEL] =
     {
@@ -7895,7 +7896,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .requiredItem = ITEM_NONE,
         .nature = NATURE_ADAMANT,
         .ability = ABILITY_WHITE_SMOKE,
-        .statPoints = {32, 0, 32, 0, 2, 0},
+        .statPoints = {2, 32, 0, 0, 0, 32},
     },
     [SPECIES_CLOBBOPUS] =
     {
@@ -8021,7 +8022,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .requiredItem = ITEM_NONE,
         .nature = NATURE_ADAMANT,
         .ability = ABILITY_SCRAPPY,
-        .statPoints = {32, 0, 32, 0, 2, 0},
+        .statPoints = {2, 32, 0, 0, 0, 32},
     },
     [SPECIES_MR_RIME] =
     {
@@ -8273,7 +8274,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .requiredItem = ITEM_NONE,
         .nature = NATURE_JOLLY,
         .ability = ABILITY_LEAF_GUARD,
-        .statPoints = {32, 0, 32, 0, 2, 0},
+        .statPoints = {2, 32, 0, 0, 0, 32},
     },
     [SPECIES_REGIELEKI] =
     {
@@ -8470,7 +8471,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .item = ITEM_LIFE_ORB,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_QUIET,
-        .ability = ABILITY_HARVEST,
+        .ability = ABILITY_FRISK,
         .statPoints = {32, 0, 2, 32, 0, 0},
     },
     [SPECIES_MAROWAK_ALOLA] =
@@ -8889,7 +8890,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
     },
     [SPECIES_ROTOM_FROST] =
     {
-        .moves = {MOVE_FREEZE_DRY, MOVE_THUNDERBOLT, MOVE_ELECTROWEB, MOVE_PROTECT},
+        .moves = {MOVE_BLIZZARD, MOVE_THUNDERBOLT, MOVE_ELECTROWEB, MOVE_PROTECT},
         .item = ITEM_SITRUS_BERRY,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_TIMID,
@@ -8898,7 +8899,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
     },
     [SPECIES_ROTOM_FAN] =
     {
-        .moves = {MOVE_HURRICANE, MOVE_THUNDERBOLT, MOVE_ELECTROWEB, MOVE_PROTECT},
+        .moves = {MOVE_AIR_SLASH, MOVE_THUNDERBOLT, MOVE_ELECTROWEB, MOVE_PROTECT},
         .item = ITEM_SITRUS_BERRY,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_TIMID,
@@ -10392,8 +10393,8 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
     },
     [SPECIES_GIMMIGHOUL_ROAMING] =
     {
-        .moves = {MOVE_SHADOW_BALL, MOVE_ICY_WIND, MOVE_LIGHT_SCREEN, MOVE_PROTECT},
-        .item = ITEM_FOCUS_SASH,
+        .moves = {MOVE_SHADOW_BALL, MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_PROTECT},
+        .item = ITEM_LIGHT_CLAY,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_TIMID,
         .ability = ABILITY_RUN_AWAY,
@@ -10824,12 +10825,12 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
     },
     [SPECIES_SLIGGOO_HISUI] =
     {
-        .moves = {MOVE_BODY_PRESS, MOVE_HEAVY_SLAM, MOVE_SHELTER, MOVE_PROTECT},
+        .moves = {MOVE_HEAVY_SLAM, MOVE_BODY_SLAM, MOVE_CURSE, MOVE_PROTECT},
         .item = ITEM_EVIOLITE,
         .requiredItem = ITEM_NONE,
         .nature = NATURE_RELAXED,
         .ability = ABILITY_SHELL_ARMOR,
-        .statPoints = {32, 0, 32, 0, 2, 0},
+        .statPoints = {32, 32, 2, 0, 0, 0},
     },
     [SPECIES_URSALUNA_BLOODMOON] =
     {
@@ -10998,7 +10999,7 @@ const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SP
         .moves = {MOVE_SNARL, MOVE_HELPING_HAND, MOVE_PLAY_ROUGH, MOVE_YAWN},
         .item = ITEM_SITRUS_BERRY,
         .requiredItem = ITEM_NONE,
-        .nature = NATURE_CALM,
+        .nature = NATURE_CAREFUL,
         .ability = ABILITY_WELL_BAKED_BODY,
         .statPoints = {32, 0, 2, 0, 32, 0},
     },
@@ -11680,6 +11681,7 @@ const u8 *const gEmeraldChampionsDefaultBattleSetNames[NUM_SPECIES] =
     [SPECIES_FLUTTER_MANE] = sEmeraldChampionsSetName_SPECIES_FLUTTER_MANE,
     [SPECIES_IRON_BUNDLE] = sEmeraldChampionsSetName_SPECIES_IRON_BUNDLE,
     [SPECIES_GIMMIGHOUL] = sEmeraldChampionsSetName_SPECIES_GIMMIGHOUL,
+    [SPECIES_GIMMIGHOUL_ROAMING] = sEmeraldChampionsSetName_SPECIES_GIMMIGHOUL_ROAMING,
     [SPECIES_CHIEN_PAO] = sEmeraldChampionsSetName_SPECIES_CHIEN_PAO,
     [SPECIES_TING_LU] = sEmeraldChampionsSetName_SPECIES_TING_LU,
     [SPECIES_CHI_YU] = sEmeraldChampionsSetName_SPECIES_CHI_YU,
@@ -11805,198 +11807,219 @@ const u8 *const gEmeraldChampionsDefaultBattleSetNames[NUM_SPECIES] =
 const struct EmeraldChampionsBattleSetRange gEmeraldChampionsBattleSetRanges[NUM_SPECIES] =
 {
     [SPECIES_VENUSAUR] = {.offset = 0, .count = 1},
-    [SPECIES_CHARIZARD] = {.offset = 1, .count = 2},
-    [SPECIES_BLASTOISE] = {.offset = 3, .count = 1},
-    [SPECIES_RAICHU] = {.offset = 4, .count = 2},
-    [SPECIES_CLEFABLE] = {.offset = 6, .count = 1},
-    [SPECIES_NINETALES] = {.offset = 7, .count = 1},
-    [SPECIES_ARCANINE] = {.offset = 8, .count = 1},
-    [SPECIES_ALAKAZAM] = {.offset = 9, .count = 1},
-    [SPECIES_VICTREEBEL] = {.offset = 10, .count = 1},
-    [SPECIES_GOLEM] = {.offset = 11, .count = 1},
-    [SPECIES_SLOWBRO] = {.offset = 12, .count = 1},
-    [SPECIES_DODRIO] = {.offset = 13, .count = 1},
-    [SPECIES_GENGAR] = {.offset = 14, .count = 1},
-    [SPECIES_KANGASKHAN] = {.offset = 15, .count = 1},
-    [SPECIES_STARMIE] = {.offset = 16, .count = 1},
-    [SPECIES_TAUROS] = {.offset = 17, .count = 1},
-    [SPECIES_GYARADOS] = {.offset = 18, .count = 1},
-    [SPECIES_AERODACTYL] = {.offset = 19, .count = 1},
-    [SPECIES_ZAPDOS] = {.offset = 20, .count = 1},
-    [SPECIES_MOLTRES] = {.offset = 21, .count = 1},
-    [SPECIES_DRAGONITE] = {.offset = 22, .count = 1},
-    [SPECIES_MEWTWO] = {.offset = 23, .count = 1},
-    [SPECIES_MEW] = {.offset = 24, .count = 2},
-    [SPECIES_TYPHLOSION] = {.offset = 26, .count = 1},
-    [SPECIES_FERALIGATR] = {.offset = 27, .count = 1},
-    [SPECIES_LANTURN] = {.offset = 28, .count = 1},
-    [SPECIES_JUMPLUFF] = {.offset = 29, .count = 1},
-    [SPECIES_SLOWKING] = {.offset = 30, .count = 1},
-    [SPECIES_STEELIX] = {.offset = 31, .count = 1},
-    [SPECIES_SCIZOR] = {.offset = 32, .count = 1},
-    [SPECIES_SKARMORY] = {.offset = 33, .count = 1},
-    [SPECIES_HOUNDOOM] = {.offset = 34, .count = 1},
-    [SPECIES_KINGDRA] = {.offset = 35, .count = 1},
-    [SPECIES_PORYGON2] = {.offset = 36, .count = 1},
-    [SPECIES_RAIKOU] = {.offset = 37, .count = 1},
-    [SPECIES_SUICUNE] = {.offset = 38, .count = 1},
-    [SPECIES_TYRANITAR] = {.offset = 39, .count = 1},
-    [SPECIES_CELEBI] = {.offset = 40, .count = 1},
-    [SPECIES_SCEPTILE] = {.offset = 41, .count = 1},
-    [SPECIES_BLAZIKEN] = {.offset = 42, .count = 1},
-    [SPECIES_SWAMPERT] = {.offset = 43, .count = 1},
-    [SPECIES_LUDICOLO] = {.offset = 44, .count = 1},
-    [SPECIES_SHIFTRY] = {.offset = 45, .count = 1},
-    [SPECIES_GARDEVOIR] = {.offset = 46, .count = 1},
-    [SPECIES_HARIYAMA] = {.offset = 47, .count = 1},
-    [SPECIES_SABLEYE] = {.offset = 48, .count = 1},
-    [SPECIES_AGGRON] = {.offset = 49, .count = 1},
-    [SPECIES_MEDICHAM] = {.offset = 50, .count = 1},
-    [SPECIES_MANECTRIC] = {.offset = 51, .count = 1},
-    [SPECIES_SHARPEDO] = {.offset = 52, .count = 1},
-    [SPECIES_FLYGON] = {.offset = 53, .count = 1},
-    [SPECIES_ALTARIA] = {.offset = 54, .count = 1},
-    [SPECIES_CRAWDAUNT] = {.offset = 55, .count = 1},
-    [SPECIES_ABSOL] = {.offset = 56, .count = 1},
-    [SPECIES_GLALIE] = {.offset = 57, .count = 1},
-    [SPECIES_METAGROSS] = {.offset = 58, .count = 1},
-    [SPECIES_REGIROCK] = {.offset = 59, .count = 1},
-    [SPECIES_REGICE] = {.offset = 60, .count = 1},
-    [SPECIES_LATIAS] = {.offset = 61, .count = 1},
-    [SPECIES_LATIOS] = {.offset = 62, .count = 1},
-    [SPECIES_GROUDON] = {.offset = 63, .count = 1},
-    [SPECIES_RAYQUAZA] = {.offset = 64, .count = 1},
-    [SPECIES_JIRACHI] = {.offset = 65, .count = 1},
-    [SPECIES_STARAPTOR] = {.offset = 66, .count = 1},
-    [SPECIES_FLOATZEL] = {.offset = 67, .count = 1},
-    [SPECIES_GASTRODON] = {.offset = 68, .count = 1},
-    [SPECIES_LOPUNNY] = {.offset = 69, .count = 1},
-    [SPECIES_BRONZONG] = {.offset = 70, .count = 1},
-    [SPECIES_GARCHOMP] = {.offset = 71, .count = 1},
-    [SPECIES_LUCARIO] = {.offset = 72, .count = 1},
-    [SPECIES_ABOMASNOW] = {.offset = 73, .count = 1},
-    [SPECIES_ELECTIVIRE] = {.offset = 74, .count = 1},
-    [SPECIES_MAGMORTAR] = {.offset = 75, .count = 1},
-    [SPECIES_YANMEGA] = {.offset = 76, .count = 1},
-    [SPECIES_GALLADE] = {.offset = 77, .count = 1},
-    [SPECIES_PROBOPASS] = {.offset = 78, .count = 1},
-    [SPECIES_DUSKNOIR] = {.offset = 79, .count = 1},
-    [SPECIES_FROSLASS] = {.offset = 80, .count = 1},
-    [SPECIES_ROTOM] = {.offset = 81, .count = 1},
-    [SPECIES_MESPRIT] = {.offset = 82, .count = 1},
-    [SPECIES_AZELF] = {.offset = 83, .count = 1},
-    [SPECIES_PALKIA] = {.offset = 84, .count = 1},
-    [SPECIES_REGIGIGAS] = {.offset = 85, .count = 1},
-    [SPECIES_GIRATINA] = {.offset = 86, .count = 1},
-    [SPECIES_MANAPHY] = {.offset = 87, .count = 1},
-    [SPECIES_VICTINI] = {.offset = 88, .count = 1},
-    [SPECIES_ZEBSTRIKA] = {.offset = 89, .count = 1},
-    [SPECIES_EXCADRILL] = {.offset = 90, .count = 1},
-    [SPECIES_AUDINO] = {.offset = 91, .count = 1},
-    [SPECIES_LEAVANNY] = {.offset = 92, .count = 1},
-    [SPECIES_SCOLIPEDE] = {.offset = 93, .count = 1},
-    [SPECIES_BASCULIN] = {.offset = 94, .count = 1},
-    [SPECIES_SCRAFTY] = {.offset = 95, .count = 1},
-    [SPECIES_ZOROARK] = {.offset = 96, .count = 1},
-    [SPECIES_SWANNA] = {.offset = 97, .count = 1},
-    [SPECIES_AMOONGUSS] = {.offset = 98, .count = 1},
-    [SPECIES_EELEKTROSS] = {.offset = 99, .count = 1},
-    [SPECIES_CHANDELURE] = {.offset = 100, .count = 1},
-    [SPECIES_HAXORUS] = {.offset = 101, .count = 1},
-    [SPECIES_STUNFISK] = {.offset = 102, .count = 1},
-    [SPECIES_MIENSHAO] = {.offset = 103, .count = 1},
-    [SPECIES_GOLURK] = {.offset = 104, .count = 1},
-    [SPECIES_MANDIBUZZ] = {.offset = 105, .count = 1},
-    [SPECIES_COBALION] = {.offset = 106, .count = 1},
-    [SPECIES_TERRAKION] = {.offset = 107, .count = 1},
-    [SPECIES_THUNDURUS] = {.offset = 108, .count = 1},
-    [SPECIES_KYUREM] = {.offset = 109, .count = 1},
-    [SPECIES_GENESECT] = {.offset = 110, .count = 1},
-    [SPECIES_CHESNAUGHT] = {.offset = 111, .count = 1},
-    [SPECIES_DELPHOX] = {.offset = 112, .count = 1},
-    [SPECIES_GRENINJA] = {.offset = 113, .count = 1},
-    [SPECIES_FLOETTE] = {.offset = 114, .count = 1},
-    [SPECIES_MEOWSTIC] = {.offset = 115, .count = 1},
-    [SPECIES_MALAMAR] = {.offset = 116, .count = 1},
-    [SPECIES_DRAGALGE] = {.offset = 117, .count = 1},
-    [SPECIES_HAWLUCHA] = {.offset = 118, .count = 1},
-    [SPECIES_GOODRA] = {.offset = 119, .count = 1},
-    [SPECIES_GOURGEIST] = {.offset = 120, .count = 1},
-    [SPECIES_XERNEAS] = {.offset = 121, .count = 1},
-    [SPECIES_YVELTAL] = {.offset = 122, .count = 1},
-    [SPECIES_DIANCIE] = {.offset = 123, .count = 1},
-    [SPECIES_CRABOMINABLE] = {.offset = 124, .count = 1},
-    [SPECIES_LYCANROC] = {.offset = 125, .count = 1},
-    [SPECIES_LURANTIS] = {.offset = 126, .count = 1},
-    [SPECIES_SILVALLY] = {.offset = 127, .count = 1},
-    [SPECIES_BRUXISH] = {.offset = 128, .count = 1},
-    [SPECIES_DRAMPA] = {.offset = 129, .count = 1},
-    [SPECIES_SOLGALEO] = {.offset = 130, .count = 1},
-    [SPECIES_LUNALA] = {.offset = 131, .count = 2},
-    [SPECIES_PHEROMOSA] = {.offset = 133, .count = 1},
-    [SPECIES_CELESTEELA] = {.offset = 134, .count = 1},
-    [SPECIES_GUZZLORD] = {.offset = 135, .count = 1},
-    [SPECIES_NECROZMA] = {.offset = 136, .count = 2},
-    [SPECIES_MAGEARNA] = {.offset = 138, .count = 1},
-    [SPECIES_NAGANADEL] = {.offset = 139, .count = 1},
-    [SPECIES_ZERAORA] = {.offset = 140, .count = 1},
-    [SPECIES_RILLABOOM] = {.offset = 141, .count = 1},
-    [SPECIES_CINDERACE] = {.offset = 142, .count = 2},
-    [SPECIES_DREDNAW] = {.offset = 144, .count = 1},
-    [SPECIES_TOXTRICITY] = {.offset = 145, .count = 1},
-    [SPECIES_FALINKS] = {.offset = 146, .count = 1},
-    [SPECIES_STONJOURNER] = {.offset = 147, .count = 1},
-    [SPECIES_INDEEDEE] = {.offset = 148, .count = 1},
-    [SPECIES_COPPERAJAH] = {.offset = 149, .count = 1},
-    [SPECIES_DURALUDON] = {.offset = 150, .count = 1},
-    [SPECIES_ZAMAZENTA] = {.offset = 151, .count = 1},
-    [SPECIES_ETERNATUS] = {.offset = 152, .count = 2},
-    [SPECIES_TATSUGIRI] = {.offset = 154, .count = 1},
-    [SPECIES_FLUTTER_MANE] = {.offset = 155, .count = 1},
-    [SPECIES_IRON_BUNDLE] = {.offset = 156, .count = 1},
-    [SPECIES_IRON_HANDS] = {.offset = 157, .count = 1},
-    [SPECIES_GLIMMORA] = {.offset = 158, .count = 1},
-    [SPECIES_GIMMIGHOUL] = {.offset = 159, .count = 1},
-    [SPECIES_CHIEN_PAO] = {.offset = 160, .count = 1},
-    [SPECIES_TING_LU] = {.offset = 161, .count = 1},
-    [SPECIES_CHI_YU] = {.offset = 162, .count = 1},
-    [SPECIES_ROARING_MOON] = {.offset = 163, .count = 1},
-    [SPECIES_OGERPON] = {.offset = 164, .count = 1},
-    [SPECIES_RAGING_BOLT] = {.offset = 165, .count = 2},
-    [SPECIES_BASCULIN_WHITE_STRIPED] = {.offset = 167, .count = 1},
-    [SPECIES_CAPSAKID] = {.offset = 168, .count = 1},
-    [SPECIES_CHARCADET] = {.offset = 169, .count = 1},
-    [SPECIES_FLITTLE] = {.offset = 170, .count = 1},
-    [SPECIES_GREAVARD] = {.offset = 171, .count = 1},
-    [SPECIES_GROWLITHE_HISUI] = {.offset = 172, .count = 1},
-    [SPECIES_ORTHWORM] = {.offset = 173, .count = 1},
-    [SPECIES_POLTCHAGEIST] = {.offset = 174, .count = 1},
-    [SPECIES_QWILFISH_HISUI] = {.offset = 175, .count = 1},
-    [SPECIES_SNEASEL_HISUI] = {.offset = 176, .count = 1},
-    [SPECIES_TADBULB] = {.offset = 177, .count = 1},
-    [SPECIES_TANDEMAUS] = {.offset = 178, .count = 1},
-    [SPECIES_TAUROS_PALDEA_COMBAT] = {.offset = 179, .count = 1},
-    [SPECIES_TAUROS_PALDEA_BLAZE] = {.offset = 180, .count = 1},
-    [SPECIES_TAUROS_PALDEA_AQUA] = {.offset = 181, .count = 1},
-    [SPECIES_TINKATINK] = {.offset = 182, .count = 1},
-    [SPECIES_ZORUA_HISUI] = {.offset = 183, .count = 1},
-    [SPECIES_BASCULEGION] = {.offset = 184, .count = 1},
-    [SPECIES_OINKOLOGNE] = {.offset = 185, .count = 1},
-    [SPECIES_KILOWATTREL] = {.offset = 186, .count = 1},
-    [SPECIES_GRAFAIAI] = {.offset = 187, .count = 1},
-    [SPECIES_BRAMBLEGHAST] = {.offset = 188, .count = 1},
-    [SPECIES_SCOVILLAIN] = {.offset = 189, .count = 1},
-    [SPECIES_RABSCA] = {.offset = 190, .count = 1},
-    [SPECIES_BOMBIRDIER] = {.offset = 191, .count = 1},
-    [SPECIES_REVAVROOM] = {.offset = 192, .count = 1},
-    [SPECIES_CYCLIZAR] = {.offset = 193, .count = 1},
-    [SPECIES_DUDUNSPARCE] = {.offset = 194, .count = 1},
-    [SPECIES_BRUTE_BONNET] = {.offset = 195, .count = 1},
-    [SPECIES_IRON_MOTH] = {.offset = 196, .count = 1},
-    [SPECIES_BAXCALIBUR] = {.offset = 197, .count = 1},
-    [SPECIES_IRON_LEAVES] = {.offset = 198, .count = 2},
-    [SPECIES_IRON_BOULDER] = {.offset = 200, .count = 1},
-    [SPECIES_IRON_CROWN] = {.offset = 201, .count = 2},
+    [SPECIES_CHARIZARD] = {.offset = 1, .count = 3},
+    [SPECIES_BLASTOISE] = {.offset = 4, .count = 2},
+    [SPECIES_BEEDRILL] = {.offset = 6, .count = 1},
+    [SPECIES_PIDGEOT] = {.offset = 7, .count = 1},
+    [SPECIES_RAICHU] = {.offset = 8, .count = 3},
+    [SPECIES_CLEFABLE] = {.offset = 11, .count = 1},
+    [SPECIES_NINETALES] = {.offset = 12, .count = 1},
+    [SPECIES_ARCANINE] = {.offset = 13, .count = 1},
+    [SPECIES_ALAKAZAM] = {.offset = 14, .count = 2},
+    [SPECIES_VICTREEBEL] = {.offset = 16, .count = 2},
+    [SPECIES_GOLEM] = {.offset = 18, .count = 1},
+    [SPECIES_SLOWBRO] = {.offset = 19, .count = 2},
+    [SPECIES_DODRIO] = {.offset = 21, .count = 1},
+    [SPECIES_GENGAR] = {.offset = 22, .count = 2},
+    [SPECIES_KANGASKHAN] = {.offset = 24, .count = 2},
+    [SPECIES_STARMIE] = {.offset = 26, .count = 2},
+    [SPECIES_PINSIR] = {.offset = 28, .count = 1},
+    [SPECIES_TAUROS] = {.offset = 29, .count = 1},
+    [SPECIES_GYARADOS] = {.offset = 30, .count = 1},
+    [SPECIES_AERODACTYL] = {.offset = 31, .count = 1},
+    [SPECIES_ZAPDOS] = {.offset = 32, .count = 1},
+    [SPECIES_MOLTRES] = {.offset = 33, .count = 1},
+    [SPECIES_DRAGONITE] = {.offset = 34, .count = 1},
+    [SPECIES_MEWTWO] = {.offset = 35, .count = 3},
+    [SPECIES_MEW] = {.offset = 38, .count = 2},
+    [SPECIES_MEGANIUM] = {.offset = 40, .count = 1},
+    [SPECIES_TYPHLOSION] = {.offset = 41, .count = 1},
+    [SPECIES_FERALIGATR] = {.offset = 42, .count = 2},
+    [SPECIES_LANTURN] = {.offset = 44, .count = 1},
+    [SPECIES_AMPHAROS] = {.offset = 45, .count = 1},
+    [SPECIES_JUMPLUFF] = {.offset = 46, .count = 1},
+    [SPECIES_SLOWKING] = {.offset = 47, .count = 1},
+    [SPECIES_STEELIX] = {.offset = 48, .count = 2},
+    [SPECIES_SCIZOR] = {.offset = 50, .count = 1},
+    [SPECIES_HERACROSS] = {.offset = 51, .count = 1},
+    [SPECIES_SKARMORY] = {.offset = 52, .count = 2},
+    [SPECIES_HOUNDOOM] = {.offset = 54, .count = 2},
+    [SPECIES_KINGDRA] = {.offset = 56, .count = 1},
+    [SPECIES_PORYGON2] = {.offset = 57, .count = 1},
+    [SPECIES_RAIKOU] = {.offset = 58, .count = 1},
+    [SPECIES_SUICUNE] = {.offset = 59, .count = 1},
+    [SPECIES_TYRANITAR] = {.offset = 60, .count = 2},
+    [SPECIES_CELEBI] = {.offset = 62, .count = 1},
+    [SPECIES_SCEPTILE] = {.offset = 63, .count = 2},
+    [SPECIES_BLAZIKEN] = {.offset = 65, .count = 2},
+    [SPECIES_SWAMPERT] = {.offset = 67, .count = 2},
+    [SPECIES_LUDICOLO] = {.offset = 69, .count = 1},
+    [SPECIES_SHIFTRY] = {.offset = 70, .count = 1},
+    [SPECIES_GARDEVOIR] = {.offset = 71, .count = 2},
+    [SPECIES_HARIYAMA] = {.offset = 73, .count = 1},
+    [SPECIES_SABLEYE] = {.offset = 74, .count = 1},
+    [SPECIES_MAWILE] = {.offset = 75, .count = 1},
+    [SPECIES_AGGRON] = {.offset = 76, .count = 2},
+    [SPECIES_MEDICHAM] = {.offset = 78, .count = 1},
+    [SPECIES_MANECTRIC] = {.offset = 79, .count = 2},
+    [SPECIES_SHARPEDO] = {.offset = 81, .count = 1},
+    [SPECIES_CAMERUPT] = {.offset = 82, .count = 1},
+    [SPECIES_FLYGON] = {.offset = 83, .count = 1},
+    [SPECIES_ALTARIA] = {.offset = 84, .count = 1},
+    [SPECIES_CRAWDAUNT] = {.offset = 85, .count = 1},
+    [SPECIES_BANETTE] = {.offset = 86, .count = 1},
+    [SPECIES_CHIMECHO] = {.offset = 87, .count = 1},
+    [SPECIES_ABSOL] = {.offset = 88, .count = 3},
+    [SPECIES_GLALIE] = {.offset = 91, .count = 2},
+    [SPECIES_SALAMENCE] = {.offset = 93, .count = 1},
+    [SPECIES_METAGROSS] = {.offset = 94, .count = 2},
+    [SPECIES_REGIROCK] = {.offset = 96, .count = 1},
+    [SPECIES_REGICE] = {.offset = 97, .count = 1},
+    [SPECIES_LATIAS] = {.offset = 98, .count = 2},
+    [SPECIES_LATIOS] = {.offset = 100, .count = 2},
+    [SPECIES_GROUDON] = {.offset = 102, .count = 1},
+    [SPECIES_RAYQUAZA] = {.offset = 103, .count = 1},
+    [SPECIES_JIRACHI] = {.offset = 104, .count = 1},
+    [SPECIES_STARAPTOR] = {.offset = 105, .count = 2},
+    [SPECIES_FLOATZEL] = {.offset = 107, .count = 1},
+    [SPECIES_GASTRODON] = {.offset = 108, .count = 1},
+    [SPECIES_LOPUNNY] = {.offset = 109, .count = 2},
+    [SPECIES_BRONZONG] = {.offset = 111, .count = 1},
+    [SPECIES_GARCHOMP] = {.offset = 112, .count = 2},
+    [SPECIES_LUCARIO] = {.offset = 114, .count = 3},
+    [SPECIES_ABOMASNOW] = {.offset = 117, .count = 2},
+    [SPECIES_ELECTIVIRE] = {.offset = 119, .count = 1},
+    [SPECIES_MAGMORTAR] = {.offset = 120, .count = 1},
+    [SPECIES_YANMEGA] = {.offset = 121, .count = 1},
+    [SPECIES_GALLADE] = {.offset = 122, .count = 1},
+    [SPECIES_PROBOPASS] = {.offset = 123, .count = 1},
+    [SPECIES_DUSKNOIR] = {.offset = 124, .count = 1},
+    [SPECIES_FROSLASS] = {.offset = 125, .count = 2},
+    [SPECIES_ROTOM] = {.offset = 127, .count = 1},
+    [SPECIES_MESPRIT] = {.offset = 128, .count = 1},
+    [SPECIES_AZELF] = {.offset = 129, .count = 1},
+    [SPECIES_PALKIA] = {.offset = 130, .count = 1},
+    [SPECIES_HEATRAN] = {.offset = 131, .count = 1},
+    [SPECIES_REGIGIGAS] = {.offset = 132, .count = 1},
+    [SPECIES_GIRATINA] = {.offset = 133, .count = 1},
+    [SPECIES_MANAPHY] = {.offset = 134, .count = 1},
+    [SPECIES_DARKRAI] = {.offset = 135, .count = 1},
+    [SPECIES_VICTINI] = {.offset = 136, .count = 1},
+    [SPECIES_EMBOAR] = {.offset = 137, .count = 1},
+    [SPECIES_ZEBSTRIKA] = {.offset = 138, .count = 1},
+    [SPECIES_EXCADRILL] = {.offset = 139, .count = 1},
+    [SPECIES_AUDINO] = {.offset = 140, .count = 1},
+    [SPECIES_LEAVANNY] = {.offset = 141, .count = 1},
+    [SPECIES_SCOLIPEDE] = {.offset = 142, .count = 2},
+    [SPECIES_BASCULIN] = {.offset = 144, .count = 1},
+    [SPECIES_SCRAFTY] = {.offset = 145, .count = 2},
+    [SPECIES_ZOROARK] = {.offset = 147, .count = 1},
+    [SPECIES_SWANNA] = {.offset = 148, .count = 1},
+    [SPECIES_AMOONGUSS] = {.offset = 149, .count = 1},
+    [SPECIES_EELEKTROSS] = {.offset = 150, .count = 2},
+    [SPECIES_CHANDELURE] = {.offset = 152, .count = 1},
+    [SPECIES_HAXORUS] = {.offset = 153, .count = 1},
+    [SPECIES_STUNFISK] = {.offset = 154, .count = 1},
+    [SPECIES_MIENSHAO] = {.offset = 155, .count = 1},
+    [SPECIES_GOLURK] = {.offset = 156, .count = 2},
+    [SPECIES_MANDIBUZZ] = {.offset = 158, .count = 1},
+    [SPECIES_COBALION] = {.offset = 159, .count = 1},
+    [SPECIES_TERRAKION] = {.offset = 160, .count = 1},
+    [SPECIES_THUNDURUS] = {.offset = 161, .count = 1},
+    [SPECIES_KYUREM] = {.offset = 162, .count = 1},
+    [SPECIES_GENESECT] = {.offset = 163, .count = 1},
+    [SPECIES_CHESNAUGHT] = {.offset = 164, .count = 2},
+    [SPECIES_DELPHOX] = {.offset = 166, .count = 2},
+    [SPECIES_GRENINJA] = {.offset = 168, .count = 1},
+    [SPECIES_PYROAR] = {.offset = 169, .count = 1},
+    [SPECIES_FLOETTE] = {.offset = 170, .count = 2},
+    [SPECIES_MALAMAR] = {.offset = 172, .count = 2},
+    [SPECIES_BARBARACLE] = {.offset = 174, .count = 1},
+    [SPECIES_DRAGALGE] = {.offset = 175, .count = 2},
+    [SPECIES_HAWLUCHA] = {.offset = 177, .count = 2},
+    [SPECIES_GOODRA] = {.offset = 179, .count = 1},
+    [SPECIES_GOURGEIST] = {.offset = 180, .count = 1},
+    [SPECIES_XERNEAS] = {.offset = 181, .count = 1},
+    [SPECIES_YVELTAL] = {.offset = 182, .count = 1},
+    [SPECIES_DIANCIE] = {.offset = 183, .count = 2},
+    [SPECIES_CRABOMINABLE] = {.offset = 185, .count = 2},
+    [SPECIES_LYCANROC] = {.offset = 187, .count = 1},
+    [SPECIES_LURANTIS] = {.offset = 188, .count = 1},
+    [SPECIES_GOLISOPOD] = {.offset = 189, .count = 1},
+    [SPECIES_SILVALLY] = {.offset = 190, .count = 1},
+    [SPECIES_BRUXISH] = {.offset = 191, .count = 1},
+    [SPECIES_DRAMPA] = {.offset = 192, .count = 1},
+    [SPECIES_SOLGALEO] = {.offset = 193, .count = 1},
+    [SPECIES_LUNALA] = {.offset = 194, .count = 2},
+    [SPECIES_PHEROMOSA] = {.offset = 196, .count = 1},
+    [SPECIES_CELESTEELA] = {.offset = 197, .count = 1},
+    [SPECIES_GUZZLORD] = {.offset = 198, .count = 1},
+    [SPECIES_NECROZMA] = {.offset = 199, .count = 2},
+    [SPECIES_MAGEARNA] = {.offset = 201, .count = 2},
+    [SPECIES_NAGANADEL] = {.offset = 203, .count = 1},
+    [SPECIES_ZERAORA] = {.offset = 204, .count = 2},
+    [SPECIES_RILLABOOM] = {.offset = 206, .count = 1},
+    [SPECIES_CINDERACE] = {.offset = 207, .count = 2},
+    [SPECIES_DREDNAW] = {.offset = 209, .count = 1},
+    [SPECIES_TOXTRICITY] = {.offset = 210, .count = 1},
+    [SPECIES_FALINKS] = {.offset = 211, .count = 2},
+    [SPECIES_STONJOURNER] = {.offset = 213, .count = 1},
+    [SPECIES_INDEEDEE] = {.offset = 214, .count = 1},
+    [SPECIES_COPPERAJAH] = {.offset = 215, .count = 1},
+    [SPECIES_DURALUDON] = {.offset = 216, .count = 1},
+    [SPECIES_ZAMAZENTA] = {.offset = 217, .count = 1},
+    [SPECIES_ETERNATUS] = {.offset = 218, .count = 2},
+    [SPECIES_MEOWSTIC_F] = {.offset = 220, .count = 1},
+    [SPECIES_ZYGARDE_50_POWER_CONSTRUCT] = {.offset = 221, .count = 1},
+    [SPECIES_MAGEARNA_ORIGINAL] = {.offset = 222, .count = 1},
+    [SPECIES_TATSUGIRI] = {.offset = 223, .count = 2},
+    [SPECIES_TATSUGIRI_DROOPY] = {.offset = 225, .count = 1},
+    [SPECIES_TATSUGIRI_STRETCHY] = {.offset = 226, .count = 1},
+    [SPECIES_FLUTTER_MANE] = {.offset = 227, .count = 1},
+    [SPECIES_IRON_BUNDLE] = {.offset = 228, .count = 1},
+    [SPECIES_IRON_HANDS] = {.offset = 229, .count = 1},
+    [SPECIES_GLIMMORA] = {.offset = 230, .count = 1},
+    [SPECIES_GIMMIGHOUL] = {.offset = 231, .count = 1},
+    [SPECIES_CHIEN_PAO] = {.offset = 232, .count = 1},
+    [SPECIES_TING_LU] = {.offset = 233, .count = 1},
+    [SPECIES_CHI_YU] = {.offset = 234, .count = 1},
+    [SPECIES_ROARING_MOON] = {.offset = 235, .count = 1},
+    [SPECIES_OGERPON] = {.offset = 236, .count = 1},
+    [SPECIES_RAGING_BOLT] = {.offset = 237, .count = 2},
+    [SPECIES_BASCULIN_WHITE_STRIPED] = {.offset = 239, .count = 1},
+    [SPECIES_CAPSAKID] = {.offset = 240, .count = 1},
+    [SPECIES_CHARCADET] = {.offset = 241, .count = 1},
+    [SPECIES_FLITTLE] = {.offset = 242, .count = 1},
+    [SPECIES_GREAVARD] = {.offset = 243, .count = 1},
+    [SPECIES_GROWLITHE_HISUI] = {.offset = 244, .count = 1},
+    [SPECIES_ORTHWORM] = {.offset = 245, .count = 1},
+    [SPECIES_POLTCHAGEIST] = {.offset = 246, .count = 1},
+    [SPECIES_QWILFISH_HISUI] = {.offset = 247, .count = 1},
+    [SPECIES_SNEASEL_HISUI] = {.offset = 248, .count = 1},
+    [SPECIES_TADBULB] = {.offset = 249, .count = 1},
+    [SPECIES_TANDEMAUS] = {.offset = 250, .count = 1},
+    [SPECIES_TAUROS_PALDEA_COMBAT] = {.offset = 251, .count = 1},
+    [SPECIES_TAUROS_PALDEA_BLAZE] = {.offset = 252, .count = 1},
+    [SPECIES_TAUROS_PALDEA_AQUA] = {.offset = 253, .count = 1},
+    [SPECIES_TINKATINK] = {.offset = 254, .count = 1},
+    [SPECIES_ZORUA_HISUI] = {.offset = 255, .count = 1},
+    [SPECIES_BASCULEGION] = {.offset = 256, .count = 1},
+    [SPECIES_OINKOLOGNE] = {.offset = 257, .count = 1},
+    [SPECIES_KILOWATTREL] = {.offset = 258, .count = 1},
+    [SPECIES_GRAFAIAI] = {.offset = 259, .count = 1},
+    [SPECIES_BRAMBLEGHAST] = {.offset = 260, .count = 1},
+    [SPECIES_SCOVILLAIN] = {.offset = 261, .count = 1},
+    [SPECIES_RABSCA] = {.offset = 262, .count = 1},
+    [SPECIES_BOMBIRDIER] = {.offset = 263, .count = 1},
+    [SPECIES_REVAVROOM] = {.offset = 264, .count = 1},
+    [SPECIES_CYCLIZAR] = {.offset = 265, .count = 1},
+    [SPECIES_DUDUNSPARCE] = {.offset = 266, .count = 1},
+    [SPECIES_BRUTE_BONNET] = {.offset = 267, .count = 1},
+    [SPECIES_IRON_MOTH] = {.offset = 268, .count = 1},
+    [SPECIES_BAXCALIBUR] = {.offset = 269, .count = 2},
+    [SPECIES_IRON_LEAVES] = {.offset = 271, .count = 2},
+    [SPECIES_IRON_BOULDER] = {.offset = 273, .count = 1},
+    [SPECIES_IRON_CROWN] = {.offset = 274, .count = 2},
 };
 
 const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternatives[] =
@@ -12014,7 +12037,7 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
-        .name = _("Mega X Setup Sweeper"),
+        .name = _("Mega Setup Sweeper"),
         .preset =
         {
             .moves = {MOVE_PROTECT, MOVE_DRAGON_CLAW, MOVE_DRAGON_DANCE, MOVE_FLARE_BLITZ},
@@ -12038,6 +12061,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Mega Special Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_PROTECT, MOVE_HEAT_WAVE, MOVE_WEATHER_BALL, MOVE_SOLARBEAM},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_CHARIZARDITE_Y,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_DROUGHT,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
         .name = _("Physical Attacker"),
         .preset =
         {
@@ -12050,14 +12085,50 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
-        .name = _("Mega X Physical"),
+        .name = _("Mega Setup Sweeper"),
+        .preset =
+        {
+            .moves = {MOVE_WATER_SPOUT, MOVE_DARK_PULSE, MOVE_PROTECT, MOVE_SHELL_SMASH},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_BLASTOISINITE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_MEGA_LAUNCHER,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Mega Physical Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_POISON_JAB, MOVE_PROTECT, MOVE_U_TURN, MOVE_DRILL_RUN},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_BEEDRILLITE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_ADAPTABILITY,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Mega Tailwind Support"),
+        .preset =
+        {
+            .moves = {MOVE_HURRICANE, MOVE_HEAT_WAVE, MOVE_PROTECT, MOVE_TAILWIND},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_PIDGEOTITE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_NO_GUARD,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Mega Physical Attacker"),
         .preset =
         {
             .moves = {MOVE_FAKE_OUT, MOVE_PROTECT, MOVE_VOLT_SWITCH, MOVE_VOLT_TACKLE},
             .item = ITEM_NONE,
             .requiredItem = ITEM_RAICHUNITE_X,
             .nature = NATURE_JOLLY,
-            .ability = ABILITY_LIGHTNING_ROD,
+            .ability = ABILITY_ELECTRIC_SURGE,
             .statPoints = {2, 32, 0, 0, 0, 32},
         },
     },
@@ -12074,14 +12145,26 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
-        .name = _("Special Attacker"),
+        .name = _("Mega Special Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_ZAP_CANNON, MOVE_FOCUS_BLAST, MOVE_PROTECT, MOVE_FAKE_OUT},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_RAICHUNITE_Y,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_NO_GUARD,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Mega Special Attacker"),
         .preset =
         {
             .moves = {MOVE_FOLLOW_ME, MOVE_MOONBLAST, MOVE_PROTECT, MOVE_DAZZLING_GLEAM},
-            .item = ITEM_SITRUS_BERRY,
-            .requiredItem = ITEM_NONE,
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_CLEFABLITE,
             .nature = NATURE_CALM,
-            .ability = ABILITY_UNAWARE,
+            .ability = ABILITY_MAGIC_BOUNCE,
             .statPoints = {32, 0, 2, 0, 32, 0},
         },
     },
@@ -12122,6 +12205,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Mega Special Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_PROTECT, MOVE_EXPANDING_FORCE, MOVE_FOCUS_BLAST, MOVE_DAZZLING_GLEAM},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_ALAKAZITE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_TRACE,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
         .name = _("Support"),
         .preset =
         {
@@ -12130,6 +12225,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .requiredItem = ITEM_NONE,
             .nature = NATURE_TIMID,
             .ability = ABILITY_CHLOROPHYLL,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Mega Special Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_STRENGTH_SAP, MOVE_SUCKER_PUNCH, MOVE_SLUDGE_BOMB, MOVE_GIGA_DRAIN},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_VICTREEBELITE,
+            .nature = NATURE_RASH,
+            .ability = ABILITY_INNARDS_OUT,
             .statPoints = {2, 0, 0, 32, 0, 32},
         },
     },
@@ -12158,10 +12265,22 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Mega Trick Room Support"),
+        .preset =
+        {
+            .moves = {MOVE_BODY_PRESS, MOVE_SLACK_OFF, MOVE_PSYCHIC, MOVE_TRICK_ROOM},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_SLOWBRONITE,
+            .nature = NATURE_RELAXED,
+            .ability = ABILITY_SHELL_ARMOR,
+            .statPoints = {32, 0, 32, 0, 2, 0},
+        },
+    },
+    {
         .name = _("Wallbreaker"),
         .preset =
         {
-            .moves = {MOVE_DOUBLE_EDGE, MOVE_QUICK_ATTACK, MOVE_BRAVE_BIRD, MOVE_PROTECT},
+            .moves = {MOVE_DOUBLE_EDGE, MOVE_QUICK_ATTACK, MOVE_BRAVE_BIRD, MOVE_KNOCK_OFF},
             .item = ITEM_CHOICE_BAND,
             .requiredItem = ITEM_NONE,
             .nature = NATURE_JOLLY,
@@ -12182,6 +12301,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Mega Special Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_PROTECT, MOVE_SHADOW_BALL, MOVE_PERISH_SONG, MOVE_SLUDGE_BOMB},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_GENGARITE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_SHADOW_TAG,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
         .name = _("Physical Attacker"),
         .preset =
         {
@@ -12190,6 +12321,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .requiredItem = ITEM_NONE,
             .nature = NATURE_BRAVE,
             .ability = ABILITY_SCRAPPY,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Mega Physical Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_DOUBLE_EDGE, MOVE_SUCKER_PUNCH, MOVE_BRICK_BREAK},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_KANGASKHANITE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_PARENTAL_BOND,
             .statPoints = {32, 32, 2, 0, 0, 0},
         },
     },
@@ -12203,6 +12346,30 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_TIMID,
             .ability = ABILITY_NATURAL_CURE,
             .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Mega Physical Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_PROTECT, MOVE_LIQUIDATION, MOVE_AQUA_JET, MOVE_ZEN_HEADBUTT},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_STARMINITE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_HUGE_POWER,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Mega Physical Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_BODY_SLAM, MOVE_FEINT, MOVE_STORM_THROW, MOVE_GIGA_IMPACT},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_PINSIRITE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_AERILATE,
+            .statPoints = {2, 32, 0, 0, 0, 32},
         },
     },
     {
@@ -12225,19 +12392,19 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .item = ITEM_NONE,
             .requiredItem = ITEM_GYARADOSITE,
             .nature = NATURE_ADAMANT,
-            .ability = ABILITY_INTIMIDATE,
+            .ability = ABILITY_MOLD_BREAKER,
             .statPoints = {2, 32, 0, 0, 0, 32},
         },
     },
     {
-        .name = _("Mega Tailwind"),
+        .name = _("Mega Tailwind Support"),
         .preset =
         {
             .moves = {MOVE_ROCK_SLIDE, MOVE_TAILWIND, MOVE_DUAL_WINGBEAT, MOVE_ICE_FANG},
             .item = ITEM_NONE,
             .requiredItem = ITEM_AERODACTYLITE,
             .nature = NATURE_JOLLY,
-            .ability = ABILITY_UNNERVE,
+            .ability = ABILITY_TOUGH_CLAWS,
             .statPoints = {2, 32, 0, 0, 0, 32},
         },
     },
@@ -12266,7 +12433,7 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
-        .name = _("Mega Tailwind"),
+        .name = _("Mega Tailwind Support"),
         .preset =
         {
             .moves = {MOVE_PROTECT, MOVE_DRAGON_PULSE, MOVE_TAILWIND, MOVE_HEAT_WAVE},
@@ -12286,6 +12453,30 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .requiredItem = ITEM_NONE,
             .nature = NATURE_TIMID,
             .ability = ABILITY_UNNERVE,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Mega X Physical"),
+        .preset =
+        {
+            .moves = {MOVE_PSYCHO_CUT, MOVE_DRAIN_PUNCH, MOVE_ICE_PUNCH, MOVE_PROTECT},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_MEWTWONITE_X,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_STEADFAST,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Mega Y Special"),
+        .preset =
+        {
+            .moves = {MOVE_PSYSTRIKE, MOVE_AURA_SPHERE, MOVE_ICE_BEAM, MOVE_PROTECT},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_MEWTWONITE_Y,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_INSOMNIA,
             .statPoints = {2, 0, 0, 32, 0, 32},
         },
     },
@@ -12314,6 +12505,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Mega Special Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_SOLARBEAM, MOVE_WEATHER_BALL, MOVE_DAZZLING_GLEAM, MOVE_PROTECT},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_MEGANIUMITE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_MEGA_SOL,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
         .name = _("Special Attacker"),
         .preset =
         {
@@ -12338,15 +12541,39 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Mega Physical Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_PROTECT, MOVE_LIQUIDATION, MOVE_DOUBLE_EDGE, MOVE_AQUA_JET},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_FERALIGITE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_DRAGONIZE,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
         .name = _("Bulky Attacker"),
         .preset =
         {
-            .moves = {MOVE_VOLT_SWITCH, MOVE_SCALD, MOVE_ICE_BEAM, MOVE_PROTECT},
+            .moves = {MOVE_VOLT_SWITCH, MOVE_SCALD, MOVE_ICE_BEAM, MOVE_ELECTROWEB},
             .item = ITEM_ASSAULT_VEST,
             .requiredItem = ITEM_NONE,
             .nature = NATURE_MODEST,
             .ability = ABILITY_VOLT_ABSORB,
             .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Mega Special Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_DRAGON_PULSE, MOVE_PROTECT, MOVE_THUNDERBOLT, MOVE_POWER_GEM},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_AMPHAROSITE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_MOLD_BREAKER,
+            .statPoints = {32, 0, 2, 32, 0, 0},
         },
     },
     {
@@ -12386,14 +12613,38 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Mega Physical Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_HEAVY_SLAM, MOVE_HIGH_HORSEPOWER, MOVE_PROTECT, MOVE_WIDE_GUARD},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_STEELIXITE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_SAND_FORCE,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
         .name = _("Mega Setup Sweeper"),
         .preset =
         {
-            .moves = {MOVE_BULLET_PUNCH, MOVE_PROTECT, MOVE_SWORDS_DANCE, MOVE_BUG_BITE},
+            .moves = {MOVE_BULLET_PUNCH, MOVE_PROTECT, MOVE_SWORDS_DANCE, MOVE_CLOSE_COMBAT},
             .item = ITEM_NONE,
             .requiredItem = ITEM_SCIZORITE,
             .nature = NATURE_ADAMANT,
             .ability = ABILITY_TECHNICIAN,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Mega Physical Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_CLOSE_COMBAT, MOVE_ROCK_BLAST, MOVE_PROTECT, MOVE_PIN_MISSILE},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_HERACRONITE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_SKILL_LINK,
             .statPoints = {2, 32, 0, 0, 0, 32},
         },
     },
@@ -12410,6 +12661,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Mega Physical Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_BRAVE_BIRD, MOVE_IRON_HEAD, MOVE_PROTECT, MOVE_ROCK_TOMB},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_SKARMORITE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_STALWART,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Special Attacker"),
         .preset =
         {
@@ -12422,15 +12685,27 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
-        .name = _("Setup Sweeper"),
+        .name = _("Mega Special Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_HEAT_WAVE, MOVE_DARK_PULSE, MOVE_PROTECT, MOVE_OVERHEAT},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_HOUNDOOMINITE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_SOLAR_POWER,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Rain Sweeper"),
         .preset =
         {
             .moves = {MOVE_PROTECT, MOVE_DRACO_METEOR, MOVE_RAIN_DANCE, MOVE_HYDRO_PUMP},
             .item = ITEM_LIFE_ORB,
             .requiredItem = ITEM_NONE,
-            .nature = NATURE_ADAMANT,
+            .nature = NATURE_MODEST,
             .ability = ABILITY_SWIFT_SWIM,
-            .statPoints = {2, 32, 0, 0, 0, 32},
+            .statPoints = {2, 0, 0, 32, 0, 32},
         },
     },
     {
@@ -12473,9 +12748,21 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         .name = _("Choice Attacker"),
         .preset =
         {
-            .moves = {MOVE_ROCK_SLIDE, MOVE_LOW_KICK, MOVE_ICE_PUNCH, MOVE_PROTECT},
+            .moves = {MOVE_ROCK_SLIDE, MOVE_LOW_KICK, MOVE_ICE_PUNCH, MOVE_CRUNCH},
             .item = ITEM_CHOICE_SCARF,
             .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SAND_STREAM,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Mega Physical Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_ROCK_SLIDE, MOVE_PROTECT, MOVE_KNOCK_OFF, MOVE_LOW_KICK},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_TYRANITARITE,
             .nature = NATURE_JOLLY,
             .ability = ABILITY_SAND_STREAM,
             .statPoints = {2, 32, 0, 0, 0, 32},
@@ -12506,6 +12793,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Mega Special Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_DRAGON_PULSE, MOVE_EARTH_POWER, MOVE_PROTECT, MOVE_ENERGY_BALL},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_SCEPTILITE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_LIGHTNING_ROD,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
         .name = _("Special Attacker"),
         .preset =
         {
@@ -12518,6 +12817,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Mega Physical Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_CLOSE_COMBAT, MOVE_FLARE_BLITZ, MOVE_ROCK_SLIDE, MOVE_DETECT},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_BLAZIKENITE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_SPEED_BOOST,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Physical Attacker"),
         .preset =
         {
@@ -12527,6 +12838,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_IMPISH,
             .ability = ABILITY_TORRENT,
             .statPoints = {32, 0, 32, 0, 2, 0},
+        },
+    },
+    {
+        .name = _("Mega Physical Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_PROTECT, MOVE_WAVE_CRASH, MOVE_ICE_PUNCH, MOVE_EARTHQUAKE},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_SWAMPERTITE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_SWIFT_SWIM,
+            .statPoints = {2, 32, 0, 0, 0, 32},
         },
     },
     {
@@ -12566,6 +12889,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Mega Trick Room Support"),
+        .preset =
+        {
+            .moves = {MOVE_HYPER_VOICE, MOVE_PROTECT, MOVE_PSYCHIC, MOVE_TRICK_ROOM},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_GARDEVOIRITE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_PIXILATE,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
         .name = _("Bulky Attacker"),
         .preset =
         {
@@ -12585,8 +12920,20 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .item = ITEM_NONE,
             .requiredItem = ITEM_SABLENITE,
             .nature = NATURE_SASSY,
-            .ability = ABILITY_PRANKSTER,
+            .ability = ABILITY_MAGIC_BOUNCE,
             .statPoints = {32, 0, 2, 0, 32, 0},
+        },
+    },
+    {
+        .name = _("Mega Physical Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_PLAY_ROUGH, MOVE_SUCKER_PUNCH, MOVE_PROTECT, MOVE_IRON_HEAD},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_MAWILITE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_HUGE_POWER,
+            .statPoints = {32, 32, 2, 0, 0, 0},
         },
     },
     {
@@ -12599,6 +12946,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_ADAMANT,
             .ability = ABILITY_STURDY,
             .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Mega Setup Sweeper"),
+        .preset =
+        {
+            .moves = {MOVE_BODY_PRESS, MOVE_PROTECT, MOVE_HEAVY_SLAM, MOVE_IRON_DEFENSE},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_AGGRONITE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_FILTER,
+            .statPoints = {32, 0, 2, 0, 32, 0},
         },
     },
     {
@@ -12626,6 +12985,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Mega Special Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_PROTECT, MOVE_VOLT_SWITCH, MOVE_THUNDERBOLT, MOVE_EERIE_IMPULSE},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_MANECTITE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_INTIMIDATE,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
         .name = _("Mega Physical Attacker"),
         .preset =
         {
@@ -12633,15 +13004,27 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .item = ITEM_NONE,
             .requiredItem = ITEM_SHARPEDONITE,
             .nature = NATURE_ADAMANT,
-            .ability = ABILITY_SPEED_BOOST,
+            .ability = ABILITY_STRONG_JAW,
             .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Mega Special Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_EARTH_POWER, MOVE_PROTECT, MOVE_HEAT_WAVE, MOVE_ANCIENTPOWER},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_CAMERUPTITE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_SHEER_FORCE,
+            .statPoints = {32, 0, 2, 32, 0, 0},
         },
     },
     {
         .name = _("Bulky Attacker"),
         .preset =
         {
-            .moves = {MOVE_PROTECT, MOVE_SCALE_SHOT, MOVE_TAILWIND, MOVE_HIGH_HORSEPOWER},
+            .moves = {MOVE_PROTECT, MOVE_SCALE_SHOT, MOVE_TAILWIND, MOVE_EARTHQUAKE},
             .item = ITEM_YACHE_BERRY,
             .requiredItem = ITEM_NONE,
             .nature = NATURE_JOLLY,
@@ -12650,14 +13033,14 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
-        .name = _("Mega Tailwind"),
+        .name = _("Mega Tailwind Support"),
         .preset =
         {
             .moves = {MOVE_HYPER_VOICE, MOVE_PROTECT, MOVE_TAILWIND, MOVE_ROOST},
             .item = ITEM_NONE,
             .requiredItem = ITEM_ALTARIANITE,
             .nature = NATURE_MODEST,
-            .ability = ABILITY_CLOUD_NINE,
+            .ability = ABILITY_PIXILATE,
             .statPoints = {2, 0, 0, 32, 0, 32},
         },
     },
@@ -12674,6 +13057,30 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Mega Trick Room Support"),
+        .preset =
+        {
+            .moves = {MOVE_POLTERGEIST, MOVE_DESTINY_BOND, MOVE_SHADOW_SNEAK, MOVE_TRICK_ROOM},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_BANETTITE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_PRANKSTER,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Mega Trick Room Support"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_FLASH_CANNON, MOVE_PROTECT, MOVE_PSYCHIC},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_CHIMECHITE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_LEVITATE,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
         .name = _("Physical Attacker"),
         .preset =
         {
@@ -12683,6 +13090,30 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_BRAVE,
             .ability = ABILITY_JUSTIFIED,
             .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Mega Physical Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_SUCKER_PUNCH, MOVE_CLOSE_COMBAT, MOVE_KNOCK_OFF, MOVE_PROTECT},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_ABSOLITE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_MAGIC_BOUNCE,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Mega Z Physical"),
+        .preset =
+        {
+            .moves = {MOVE_PLAY_ROUGH, MOVE_KNOCK_OFF, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_ABSOLITE_Z,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_MAGIC_BOUNCE,
+            .statPoints = {2, 32, 0, 0, 0, 32},
         },
     },
     {
@@ -12698,6 +13129,30 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Mega Physical Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_PROTECT, MOVE_EXPLOSION, MOVE_ICE_SHARD, MOVE_BODY_SLAM},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_GLALITITE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_REFRIGERATE,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Mega Tailwind"),
+        .preset =
+        {
+            .moves = {MOVE_DOUBLE_EDGE, MOVE_EARTHQUAKE, MOVE_TAILWIND, MOVE_PROTECT},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_SALAMENCITE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_AERILATE,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Physical Attacker II"),
         .preset =
         {
@@ -12706,6 +13161,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .requiredItem = ITEM_NONE,
             .nature = NATURE_ADAMANT,
             .ability = ABILITY_CLEAR_BODY,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Mega Physical Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_PROTECT, MOVE_PSYCHIC_FANGS, MOVE_IRON_HEAD, MOVE_BODY_PRESS},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_METAGROSSITE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_TOUGH_CLAWS,
             .statPoints = {2, 32, 0, 0, 0, 32},
         },
     },
@@ -12746,12 +13213,36 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Mega Bulky Tailwind"),
+        .preset =
+        {
+            .moves = {MOVE_DRACO_METEOR, MOVE_MIST_BALL, MOVE_TAILWIND, MOVE_RECOVER},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_LATIASITE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_LEVITATE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Bulky Attacker"),
         .preset =
         {
             .moves = {MOVE_PROTECT, MOVE_TAILWIND, MOVE_DRACO_METEOR, MOVE_LUSTER_PURGE},
             .item = ITEM_SOUL_DEW,
             .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_LEVITATE,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Mega Tailwind"),
+        .preset =
+        {
+            .moves = {MOVE_DRACO_METEOR, MOVE_LUSTER_PURGE, MOVE_TAILWIND, MOVE_PROTECT},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_LATIOSITE,
             .nature = NATURE_TIMID,
             .ability = ABILITY_LEVITATE,
             .statPoints = {2, 0, 0, 32, 0, 32},
@@ -12806,10 +13297,22 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Mega Physical Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_CLOSE_COMBAT, MOVE_PROTECT, MOVE_BRAVE_BIRD, MOVE_ROOST},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_STARAPTITE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_CONTRARY,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Wallbreaker"),
         .preset =
         {
-            .moves = {MOVE_AQUA_JET, MOVE_CLOSE_COMBAT, MOVE_GIGA_IMPACT, MOVE_PROTECT},
+            .moves = {MOVE_AQUA_JET, MOVE_CLOSE_COMBAT, MOVE_GIGA_IMPACT, MOVE_FLIP_TURN},
             .item = ITEM_CHOICE_BAND,
             .requiredItem = ITEM_NONE,
             .nature = NATURE_JOLLY,
@@ -12842,6 +13345,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Mega Doubles Support"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_CLOSE_COMBAT, MOVE_ENCORE, MOVE_U_TURN},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_LOPUNNITE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SCRAPPY,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Bulky Setup"),
         .preset =
         {
@@ -12857,11 +13372,23 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         .name = _("Mega Special Attacker"),
         .preset =
         {
-            .moves = {MOVE_PROTECT, MOVE_EARTH_POWER, MOVE_EARTHQUAKE, MOVE_DRAGON_CLAW},
+            .moves = {MOVE_PROTECT, MOVE_EARTH_POWER, MOVE_POWER_GEM, MOVE_EARTHQUAKE},
             .item = ITEM_NONE,
             .requiredItem = ITEM_GARCHOMPITE,
             .nature = NATURE_MODEST,
-            .ability = ABILITY_ROUGH_SKIN,
+            .ability = ABILITY_SAND_FORCE,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Mega Z Special"),
+        .preset =
+        {
+            .moves = {MOVE_DRACO_METEOR, MOVE_EARTH_POWER, MOVE_FLAMETHROWER, MOVE_PROTECT},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_GARCHOMPITE_Z,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_SAND_VEIL,
             .statPoints = {2, 0, 0, 32, 0, 32},
         },
     },
@@ -12878,6 +13405,30 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Mega Physical Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_PROTECT, MOVE_CLOSE_COMBAT, MOVE_METEOR_MASH, MOVE_BULLET_PUNCH},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_LUCARIONITE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_ADAPTABILITY,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Mega Z Special"),
+        .preset =
+        {
+            .moves = {MOVE_AURA_SPHERE, MOVE_FLASH_CANNON, MOVE_VACUUM_WAVE, MOVE_PROTECT},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_LUCARIONITE_Z,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_STEADFAST,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
         .name = _("Special Attacker"),
         .preset =
         {
@@ -12890,10 +13441,22 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Mega Special Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_BLIZZARD, MOVE_EARTH_POWER, MOVE_PROTECT, MOVE_ENERGY_BALL},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_ABOMASITE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_SNOW_WARNING,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
         .name = _("Bulky Attacker"),
         .preset =
         {
-            .moves = {MOVE_ELECTROWEB, MOVE_ICE_PUNCH, MOVE_WILD_CHARGE, MOVE_PROTECT},
+            .moves = {MOVE_ELECTROWEB, MOVE_ICE_PUNCH, MOVE_WILD_CHARGE, MOVE_STOMPING_TANTRUM},
             .item = ITEM_ASSAULT_VEST,
             .requiredItem = ITEM_NONE,
             .nature = NATURE_JOLLY,
@@ -12933,7 +13496,7 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .item = ITEM_NONE,
             .requiredItem = ITEM_GALLADITE,
             .nature = NATURE_JOLLY,
-            .ability = ABILITY_JUSTIFIED,
+            .ability = ABILITY_INNER_FOCUS,
             .statPoints = {2, 32, 0, 0, 0, 32},
         },
     },
@@ -12974,10 +13537,22 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Mega Special Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_BLIZZARD, MOVE_PROTECT, MOVE_SHADOW_BALL, MOVE_AURORA_VEIL},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_FROSLASSITE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_SNOW_WARNING,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
         .name = _("Choice Attacker"),
         .preset =
         {
-            .moves = {MOVE_VOLT_SWITCH, MOVE_THUNDERBOLT, MOVE_DISCHARGE, MOVE_PROTECT},
+            .moves = {MOVE_VOLT_SWITCH, MOVE_THUNDERBOLT, MOVE_DISCHARGE, MOVE_TRICK},
             .item = ITEM_CHOICE_SCARF,
             .requiredItem = ITEM_NONE,
             .nature = NATURE_TIMID,
@@ -13022,6 +13597,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Mega Trick Room"),
+        .preset =
+        {
+            .moves = {MOVE_HEAT_WAVE, MOVE_EARTH_POWER, MOVE_FLASH_CANNON, MOVE_PROTECT},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_HEATRANITE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_FLASH_FIRE,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
         .name = _("Bulky Setup"),
         .preset =
         {
@@ -13058,6 +13645,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Mega Sleep Control"),
+        .preset =
+        {
+            .moves = {MOVE_DARK_VOID, MOVE_DARK_PULSE, MOVE_ICE_BEAM, MOVE_PROTECT},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_DARKRANITE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_BAD_DREAMS,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
         .name = _("Support"),
         .preset =
         {
@@ -13067,6 +13666,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_QUIET,
             .ability = ABILITY_VICTORY_STAR,
             .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Mega Physical Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_PROTECT, MOVE_CLOSE_COMBAT, MOVE_FLARE_BLITZ, MOVE_HELPING_HAND},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_EMBOARITE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_MOLD_BREAKER,
+            .statPoints = {2, 32, 0, 0, 0, 32},
         },
     },
     {
@@ -13089,15 +13700,15 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .item = ITEM_NONE,
             .requiredItem = ITEM_EXCADRITE,
             .nature = NATURE_JOLLY,
-            .ability = ABILITY_SAND_RUSH,
+            .ability = ABILITY_PIERCING_DRILL,
             .statPoints = {2, 32, 0, 0, 0, 32},
         },
     },
     {
-        .name = _("Mega Trick Room"),
+        .name = _("Mega Trick Room Support"),
         .preset =
         {
-            .moves = {MOVE_DAZZLING_GLEAM, MOVE_SIMPLE_BEAM, MOVE_HYPER_VOICE, MOVE_FIRE_BLAST},
+            .moves = {MOVE_TRICK_ROOM, MOVE_DAZZLING_GLEAM, MOVE_LIFE_DEW, MOVE_SIMPLE_BEAM},
             .item = ITEM_NONE,
             .requiredItem = ITEM_AUDINITE,
             .nature = NATURE_BOLD,
@@ -13130,10 +13741,22 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Mega Setup Sweeper"),
+        .preset =
+        {
+            .moves = {MOVE_PROTECT, MOVE_LEECH_LIFE, MOVE_SWORDS_DANCE, MOVE_POISON_JAB},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_SCOLIPITE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SHELL_ARMOR,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Wallbreaker"),
         .preset =
         {
-            .moves = {MOVE_FLIP_TURN, MOVE_PSYCHIC_FANGS, MOVE_AQUA_JET, MOVE_PROTECT},
+            .moves = {MOVE_FLIP_TURN, MOVE_PSYCHIC_FANGS, MOVE_AQUA_JET, MOVE_WAVE_CRASH},
             .item = ITEM_CHOICE_BAND,
             .requiredItem = ITEM_NONE,
             .nature = NATURE_JOLLY,
@@ -13151,6 +13774,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_CAREFUL,
             .ability = ABILITY_INTIMIDATE,
             .statPoints = {32, 0, 2, 0, 32, 0},
+        },
+    },
+    {
+        .name = _("Mega Physical Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_KNOCK_OFF, MOVE_DRAIN_PUNCH, MOVE_CLOSE_COMBAT},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_SCRAFTINITE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_INTIMIDATE,
+            .statPoints = {32, 32, 2, 0, 0, 0},
         },
     },
     {
@@ -13202,14 +13837,26 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
-        .name = _("Mega Trick Room"),
+        .name = _("Mega Special Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_PROTECT, MOVE_THUNDERBOLT, MOVE_GIGA_DRAIN, MOVE_FLAMETHROWER},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_EELEKTROSSITE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_EELEVATE,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Mega Trick Room Support"),
         .preset =
         {
             .moves = {MOVE_SHADOW_BALL, MOVE_HEAT_WAVE, MOVE_PROTECT, MOVE_TRICK_ROOM},
             .item = ITEM_NONE,
             .requiredItem = ITEM_CHANDELURITE,
             .nature = NATURE_MODEST,
-            .ability = ABILITY_FLASH_FIRE,
+            .ability = ABILITY_INFILTRATOR,
             .statPoints = {32, 0, 2, 32, 0, 0},
         },
     },
@@ -13262,6 +13909,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Mega Physical Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_POLTERGEIST, MOVE_HEADLONG_RUSH, MOVE_PROTECT, MOVE_ICE_PUNCH},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_GOLURKITE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_UNSEEN_FIST,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
         .name = _("Bulky Attacker"),
         .preset =
         {
@@ -13289,7 +13948,7 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         .name = _("Wallbreaker"),
         .preset =
         {
-            .moves = {MOVE_CLOSE_COMBAT, MOVE_ROCK_SLIDE, MOVE_STONE_EDGE, MOVE_PROTECT},
+            .moves = {MOVE_CLOSE_COMBAT, MOVE_ROCK_SLIDE, MOVE_STONE_EDGE, MOVE_HIGH_HORSEPOWER},
             .item = ITEM_CHOICE_BAND,
             .requiredItem = ITEM_NONE,
             .nature = NATURE_JOLLY,
@@ -13346,6 +14005,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Mega Physical Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_BODY_PRESS, MOVE_SPIKY_SHIELD, MOVE_WOOD_HAMMER, MOVE_WIDE_GUARD},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_CHESNAUGHTITE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_BULLETPROOF,
+            .statPoints = {32, 0, 2, 0, 32, 0},
+        },
+    },
+    {
         .name = _("Trick Room"),
         .preset =
         {
@@ -13355,6 +14026,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_QUIET,
             .ability = ABILITY_BLAZE,
             .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Mega Setup Sweeper"),
+        .preset =
+        {
+            .moves = {MOVE_HEAT_WAVE, MOVE_PROTECT, MOVE_NASTY_PLOT, MOVE_PSYCHIC},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_DELPHOXITE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_LEVITATE,
+            .statPoints = {2, 0, 0, 32, 0, 32},
         },
     },
     {
@@ -13370,10 +14053,22 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Mega Special Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_HEAT_WAVE, MOVE_PROTECT, MOVE_OVERHEAT, MOVE_SOLARBEAM},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_PYROARITE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_FIRE_MANE,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
         .name = _("Choice Attacker"),
         .preset =
         {
-            .moves = {MOVE_MOONBLAST, MOVE_DAZZLING_GLEAM, MOVE_ENERGY_BALL, MOVE_PROTECT},
+            .moves = {MOVE_MOONBLAST, MOVE_DAZZLING_GLEAM, MOVE_ENERGY_BALL, MOVE_PSYCHIC},
             .item = ITEM_CHOICE_SCARF,
             .requiredItem = ITEM_NONE,
             .nature = NATURE_MODEST,
@@ -13382,14 +14077,14 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
-        .name = _("Special Attacker"),
+        .name = _("Mega Special Attacker"),
         .preset =
         {
-            .moves = {MOVE_PROTECT, MOVE_EXPANDING_FORCE, MOVE_FAKE_OUT, MOVE_DARK_PULSE},
-            .item = ITEM_LIGHT_CLAY,
-            .requiredItem = ITEM_NONE,
-            .nature = NATURE_HASTY,
-            .ability = ABILITY_PRANKSTER,
+            .moves = {MOVE_PROTECT, MOVE_DAZZLING_GLEAM, MOVE_MOONBLAST, MOVE_LIGHT_OF_RUIN},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_FLOETTITE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_FAIRY_AURA,
             .statPoints = {2, 0, 0, 32, 0, 32},
         },
     },
@@ -13406,6 +14101,30 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Mega Trick Room Support"),
+        .preset =
+        {
+            .moves = {MOVE_SUPERPOWER, MOVE_PROTECT, MOVE_KNOCK_OFF, MOVE_TRICK_ROOM},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_MALAMARITE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_CONTRARY,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Mega Setup Sweeper"),
+        .preset =
+        {
+            .moves = {MOVE_CLOSE_COMBAT, MOVE_ROCK_SLIDE, MOVE_PROTECT, MOVE_SHELL_SMASH},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_BARBARACITE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_TOUGH_CLAWS,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Special Attacker"),
         .preset =
         {
@@ -13414,6 +14133,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .requiredItem = ITEM_NONE,
             .nature = NATURE_MODEST,
             .ability = ABILITY_ADAPTABILITY,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Mega Special Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_PROTECT, MOVE_SLUDGE_BOMB, MOVE_DRACO_METEOR, MOVE_FLIP_TURN},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_DRAGALGITE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_REGENERATOR,
             .statPoints = {2, 0, 0, 32, 0, 32},
         },
     },
@@ -13430,6 +14161,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Mega Physical Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_ENTRAINMENT, MOVE_DETECT, MOVE_PROTECT, MOVE_BRAVE_BIRD},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_HAWLUCHANITE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_NO_GUARD,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Special Attacker II"),
         .preset =
         {
@@ -13437,7 +14180,7 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .item = ITEM_LEFTOVERS,
             .requiredItem = ITEM_NONE,
             .nature = NATURE_MODEST,
-            .ability = ABILITY_POISON_HEAL,
+            .ability = ABILITY_GOOEY,
             .statPoints = {2, 0, 0, 32, 0, 32},
         },
     },
@@ -13449,7 +14192,7 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .item = ITEM_OCCA_BERRY,
             .requiredItem = ITEM_NONE,
             .nature = NATURE_RELAXED,
-            .ability = ABILITY_FLARE_BOOST,
+            .ability = ABILITY_INSOMNIA,
             .statPoints = {32, 0, 32, 0, 2, 0},
         },
     },
@@ -13490,6 +14233,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Mega Mixed Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_DIAMOND_STORM, MOVE_MOONBLAST, MOVE_EARTH_POWER, MOVE_PROTECT},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_DIANCITE,
+            .nature = NATURE_NAIVE,
+            .ability = ABILITY_MAGIC_BOUNCE,
+            .statPoints = {2, 16, 0, 16, 0, 32},
+        },
+    },
+    {
         .name = _("Physical Attacker"),
         .preset =
         {
@@ -13498,6 +14253,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .requiredItem = ITEM_NONE,
             .nature = NATURE_BRAVE,
             .ability = ABILITY_HYPER_CUTTER,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Mega Physical Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_ICE_HAMMER, MOVE_PROTECT, MOVE_DRAIN_PUNCH, MOVE_MACH_PUNCH},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_CRABOMINITE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_IRON_FIST,
             .statPoints = {32, 32, 2, 0, 0, 0},
         },
     },
@@ -13526,6 +14293,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Mega Trick Room"),
+        .preset =
+        {
+            .moves = {MOVE_FIRST_IMPRESSION, MOVE_LIQUIDATION, MOVE_LEECH_LIFE, MOVE_WIDE_GUARD},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_GOLISOPITE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_EMERGENCY_EXIT,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
         .name = _("Support"),
         .preset =
         {
@@ -13541,7 +14320,7 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         .name = _("Choice Attacker"),
         .preset =
         {
-            .moves = {MOVE_CRUNCH, MOVE_PSYCHIC_FANGS, MOVE_LIQUIDATION, MOVE_PROTECT},
+            .moves = {MOVE_CRUNCH, MOVE_PSYCHIC_FANGS, MOVE_LIQUIDATION, MOVE_ICE_FANG},
             .item = ITEM_CHOICE_SCARF,
             .requiredItem = ITEM_NONE,
             .nature = NATURE_JOLLY,
@@ -13550,12 +14329,12 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
-        .name = _("Special Attacker"),
+        .name = _("Mega Special Attacker"),
         .preset =
         {
-            .moves = {MOVE_PROTECT, MOVE_HYPER_VOICE, MOVE_DRAGON_PULSE, MOVE_HEAT_WAVE},
-            .item = ITEM_SITRUS_BERRY,
-            .requiredItem = ITEM_NONE,
+            .moves = {MOVE_PROTECT, MOVE_HYPER_VOICE, MOVE_EARTH_POWER, MOVE_DRAGON_PULSE},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_DRAMPANITE,
             .nature = NATURE_QUIET,
             .ability = ABILITY_BERSERK,
             .statPoints = {32, 0, 2, 32, 0, 0},
@@ -13670,6 +14449,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Mega Trick Room"),
+        .preset =
+        {
+            .moves = {MOVE_FLEUR_CANNON, MOVE_FLASH_CANNON, MOVE_TRICK_ROOM, MOVE_PROTECT},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_MAGEARNITE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_SOUL_HEART,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
         .name = _("Support"),
         .preset =
         {
@@ -13691,6 +14482,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_CALM,
             .ability = ABILITY_VOLT_ABSORB,
             .statPoints = {32, 0, 2, 0, 32, 0},
+        },
+    },
+    {
+        .name = _("Mega Physical"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_PLASMA_FISTS, MOVE_CLOSE_COMBAT, MOVE_PROTECT},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_ZERAORITE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_VOLT_ABSORB,
+            .statPoints = {2, 32, 0, 0, 0, 32},
         },
     },
     {
@@ -13730,10 +14533,10 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
-        .name = _("Bulky Setup"),
+        .name = _("Shell Smash"),
         .preset =
         {
-            .moves = {MOVE_ROCK_SLIDE, MOVE_LIQUIDATION, MOVE_PROTECT, MOVE_CRUNCH},
+            .moves = {MOVE_SHELL_SMASH, MOVE_ROCK_SLIDE, MOVE_LIQUIDATION, MOVE_PROTECT},
             .item = ITEM_WHITE_HERB,
             .requiredItem = ITEM_NONE,
             .nature = NATURE_ADAMANT,
@@ -13766,10 +14569,22 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Mega Physical Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_CLOSE_COMBAT, MOVE_NO_RETREAT, MOVE_PROTECT, MOVE_ROCK_SLIDE},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_FALINKSITE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_DEFIANT,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Choice Attacker"),
         .preset =
         {
-            .moves = {MOVE_HEAT_CRASH, MOVE_STONE_EDGE, MOVE_ROCK_SLIDE, MOVE_PROTECT},
+            .moves = {MOVE_HEAT_CRASH, MOVE_STONE_EDGE, MOVE_ROCK_SLIDE, MOVE_HEAVY_SLAM},
             .item = ITEM_CHOICE_BAND,
             .requiredItem = ITEM_NONE,
             .nature = NATURE_ADAMANT,
@@ -13850,13 +14665,85 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Mega Special Attacker"),
+        .preset =
+        {
+            .moves = {MOVE_PROTECT, MOVE_EXPANDING_FORCE, MOVE_FAKE_OUT, MOVE_DARK_PULSE},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_MEOWSTICITE,
+            .nature = NATURE_HASTY,
+            .ability = ABILITY_TRACE,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Mega Special Control"),
+        .preset =
+        {
+            .moves = {MOVE_DRACO_METEOR, MOVE_EARTH_POWER, MOVE_GLARE, MOVE_PROTECT},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_ZYGARDITE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_AURA_BREAK,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Mega Trick Room"),
+        .preset =
+        {
+            .moves = {MOVE_FLEUR_CANNON, MOVE_FLASH_CANNON, MOVE_TRICK_ROOM, MOVE_PROTECT},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_MAGEARNITE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_SOUL_HEART,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
         .name = _("Bulky Attacker"),
         .preset =
         {
-            .moves = {MOVE_MUDDY_WATER, MOVE_RAPID_SPIN, MOVE_ICY_WIND, MOVE_PROTECT},
+            .moves = {MOVE_MUDDY_WATER, MOVE_RAPID_SPIN, MOVE_ICY_WIND, MOVE_DRAGON_PULSE},
             .item = ITEM_ASSAULT_VEST,
             .requiredItem = ITEM_NONE,
             .nature = NATURE_MODEST,
+            .ability = ABILITY_STORM_DRAIN,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Mega Storm Drain"),
+        .preset =
+        {
+            .moves = {MOVE_DRACO_METEOR, MOVE_MUDDY_WATER, MOVE_ICY_WIND, MOVE_PROTECT},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_TATSUGIRINITE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_STORM_DRAIN,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Mega Storm Drain"),
+        .preset =
+        {
+            .moves = {MOVE_DRACO_METEOR, MOVE_MUDDY_WATER, MOVE_ICY_WIND, MOVE_PROTECT},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_TATSUGIRINITE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_STORM_DRAIN,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Mega Storm Drain"),
+        .preset =
+        {
+            .moves = {MOVE_DRACO_METEOR, MOVE_MUDDY_WATER, MOVE_ICY_WIND, MOVE_PROTECT},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_TATSUGIRINITE,
+            .nature = NATURE_TIMID,
             .ability = ABILITY_STORM_DRAIN,
             .statPoints = {2, 0, 0, 32, 0, 32},
         },
@@ -13901,11 +14788,11 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         .name = _("Mega Special Attacker"),
         .preset =
         {
-            .moves = {MOVE_POWER_GEM, MOVE_SLUDGE_BOMB, MOVE_SPIKY_SHIELD, MOVE_HYPER_BEAM},
+            .moves = {MOVE_POWER_GEM, MOVE_EARTH_POWER, MOVE_SLUDGE_BOMB, MOVE_SPIKY_SHIELD},
             .item = ITEM_NONE,
             .requiredItem = ITEM_GLIMMORANITE,
             .nature = NATURE_TIMID,
-            .ability = ABILITY_TOXIC_DEBRIS,
+            .ability = ABILITY_ADAPTABILITY,
             .statPoints = {2, 0, 0, 32, 0, 32},
         },
     },
@@ -13949,7 +14836,7 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         .name = _("Choice Attacker"),
         .preset =
         {
-            .moves = {MOVE_DARK_PULSE, MOVE_OVERHEAT, MOVE_HYPER_BEAM, MOVE_PROTECT},
+            .moves = {MOVE_DARK_PULSE, MOVE_OVERHEAT, MOVE_HYPER_BEAM, MOVE_HEAT_WAVE},
             .item = ITEM_CHOICE_SPECS,
             .requiredItem = ITEM_NONE,
             .nature = NATURE_TIMID,
@@ -13985,7 +14872,7 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         .name = _("Bulky Attacker"),
         .preset =
         {
-            .moves = {MOVE_THUNDERCLAP, MOVE_THUNDERBOLT, MOVE_DRAGON_PULSE, MOVE_PROTECT},
+            .moves = {MOVE_THUNDERCLAP, MOVE_THUNDERBOLT, MOVE_DRAGON_PULSE, MOVE_VOLT_SWITCH},
             .item = ITEM_ASSAULT_VEST,
             .requiredItem = ITEM_NONE,
             .nature = NATURE_MODEST,
@@ -14372,6 +15259,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .moves = {MOVE_ICICLE_CRASH, MOVE_GLAIVE_RUSH, MOVE_HIGH_HORSEPOWER, MOVE_ICE_SHARD},
             .item = ITEM_CHOICE_BAND,
             .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_THERMAL_EXCHANGE,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Mega Physical"),
+        .preset =
+        {
+            .moves = {MOVE_GLAIVE_RUSH, MOVE_ICICLE_CRASH, MOVE_ICE_SHARD, MOVE_PROTECT},
+            .item = ITEM_NONE,
+            .requiredItem = ITEM_BAXCALIBRITE,
             .nature = NATURE_ADAMANT,
             .ability = ABILITY_THERMAL_EXCHANGE,
             .statPoints = {2, 32, 0, 0, 0, 32},

@@ -53,14 +53,25 @@ class RuntimeGate:
 
 
 RUNTIME_GATES = (
-    RuntimeGate("*Champions", 68),
+    RuntimeGate("*Champions", 90),
     RuntimeGate("*Item descriptions fit on Bag and Shop Screen", 1),
     RuntimeGate("*Eggs safely inherit", 1),
     RuntimeGate("test/upstream_critical_fixes.c", 4),
     RuntimeGate("Commander", 42),
     RuntimeGate("test/battle/ability/forecast.c", 18),
     RuntimeGate("test/battle/ability/flower_gift.c", 12),
-    RuntimeGate("*Simultaneous manual switches", 3),
+    RuntimeGate("*returns its base Form upon battle end after Mega Evolving", 2),
+    RuntimeGate("*Simultaneous manual switches", 4),
+    RuntimeGate("*Switch-in abilities trigger in Speed Order after post-KO switch", 5),
+    RuntimeGate("*Spread Moves: Earthquake fails", 2),
+    RuntimeGate(
+        "AI_FLAG_SMART_MON_CHOICES: Move data does not spill over between switch-in candidates",
+        1,
+    ),
+    RuntimeGate(
+        "AI_FLAG_SMART_MON_CHOICES: Switchin move data is reset before recalculation",
+        1,
+    ),
     RuntimeGate(
         "Imposter uses a copied move slot against its selected opponent, not itself",
         1,
@@ -80,13 +91,7 @@ RUNTIME_GATES = (
     RuntimeGate("test/save.c", 4),
     RuntimeGate(
         "test/battle/ai/ai_doubles.c",
-        63,
-        maximum_todo=3,
-        allowed_todo=(
-            "AI understands Wide Guard",
-            "AI understands Instruct",
-            "AI understands Quick Guard",
-        ),
+        65,
     ),
 )
 

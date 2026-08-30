@@ -94,6 +94,7 @@ def main() -> None:
     claimed = function_block(field, "IsEmeraldChampionsGameCornerPokemonClaimed")
     give_wrapper = function_block(field, "GiveEmeraldChampionsGameCornerPokemon")
     give = function_block(field, "TryGiveEmeraldChampionsGameCornerPokemon")
+    prepared = function_block(field, "TryGiveEmeraldChampionsPreparedPokemon")
     require("IsEmeraldChampionsInitialStarter" in claimed, "initial starter is not treated as already claimed")
     require("TryGiveEmeraldChampionsGameCornerPokemon" in give_wrapper and "TRUE" in give_wrapper,
             "give path can bypass initial-starter rejection")
@@ -104,19 +105,22 @@ def main() -> None:
         "CreateRandomMon(&mon",
         "ApplyEmeraldChampionsRandomNonMegaSet(&mon)",
         "GiveScriptedMonToPlayer(&mon, PARTY_SIZE)",
-        "FlagSet(flag)",
     )
-    positions = [give.find(token) for token in ordered_tokens]
+    positions = [prepared.find(token) for token in ordered_tokens]
     require(all(position >= 0 for position in positions), "competitive prize transaction is incomplete")
     require(positions == sorted(positions), "preset/delivery/claim transaction order is unsafe")
-    require("giveResult == MON_CANT_GIVE" in give, "full party and PC are not retry-safe")
-    require("RecordPlayerPartyMonHeldItemForRestoration" in give,
+    require("giveResult == MON_CANT_GIVE" in prepared, "full party and PC are not retry-safe")
+    require("RecordPlayerPartyMonHeldItemForRestoration" in prepared,
             "party-delivered preset item lacks restoration baseline")
     require("MarkLegendarySignCaughtBySpecies(species)" in give,
             "Genesect/Poipole acquisition does not update Legendary Signs")
+    require(give.find("TryGiveEmeraldChampionsPreparedPokemon") < give.find("FlagSet(flag)"),
+            "Game Corner claim flag can advance before prepared delivery")
 
     for name in ("IsEmeraldChampionsGameCornerPokemonClaimed", "GiveEmeraldChampionsGameCornerPokemon"):
         require(f"def_special {name}" in specials, f"{name} is not exposed to map scripts")
+    require("def_special GiveEmeraldChampionsPreparedPokemon" in specials,
+            "prepared story-gift service is not exposed to map scripts")
     require("givemon VAR_TEMP_1, 30" not in script, "old unprepared Genesect/Poipole gift path remains")
     give_call = script.index("special GiveEmeraldChampionsGameCornerPokemon")
     remove_coins = script.index("removecoins VAR_0x8006", give_call)
@@ -155,8 +159,63 @@ def main() -> None:
     for test_name in required_runtime_tests:
         require(f'Emerald Champions Game Corner {test_name}' in tests,
                 f"missing Game Corner runtime test: {test_name}")
-    require('RuntimeGate("*Champions", 68)' in runtime_gates,
-            "curated Champions runtime gate does not require the five archive tests")
+    for test_name in (
+        "story gifts arrive battle-ready with restoration baselines",
+        "prepared story gifts preserve PC delivery and no-room retries",
+    ):
+        require(f'Emerald Champions {test_name}' in tests,
+                f"missing prepared-gift runtime test: {test_name}")
+
+    gift_scripts = {
+        "Weather Institute Castform": ROOT / "data/maps/Route119_WeatherInstitute_2F/scripts.inc",
+        "Steven Beldum": ROOT / "data/maps/MossdeepCity_StevensHouse/scripts.inc",
+        "Devon fossil revival": ROOT / "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
+    }
+    for label, path in gift_scripts.items():
+        source = path.read_text()
+        require("givemon" not in source, f"{label} still uses an unprepared raw givemon path")
+        require("special GiveEmeraldChampionsPreparedPokemon" in source,
+                f"{label} does not use the prepared-gift transaction")
+        require("goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY" in source
+                and "goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC" in source,
+                f"{label} lost party/PC delivery branches")
+        require("Common_EventScript_NoMoreRoomForPokemon" in source,
+                f"{label} no-room retry path disappeared")
+    castform = gift_scripts["Weather Institute Castform"].read_text()
+    beldum = gift_scripts["Steven Beldum"].read_text()
+    fossil = gift_scripts["Devon fossil revival"].read_text()
+    require("setvar VAR_0x8004, SPECIES_CASTFORM_NORMAL" in castform
+            and "setvar VAR_0x8005, 25" in castform,
+            "Castform prepared-gift parameters drifted")
+    require("setflag FLAG_RECEIVED_CASTFORM" in castform,
+            "Castform finite claim flag disappeared")
+    require("setvar VAR_0x8004, SPECIES_BELDUM" in beldum
+            and "setvar VAR_0x8005, 5" in beldum,
+            "Beldum prepared-gift parameters drifted")
+    require("setflag FLAG_RECEIVED_BELDUM" in beldum,
+            "Beldum finite claim flag disappeared")
+    require("copyvar VAR_0x8004, VAR_TEMP_TRANSFERRED_SPECIES" in fossil
+            and "setvar VAR_0x8005, 20" in fossil,
+            "fossil prepared-gift parameters drifted")
+    fossil_receive = fossil.split(
+        "RustboroCity_DevonCorp_2F_EventScript_ReceiveFossilMon::", 1
+    )[1].split("RustboroCity_DevonCorp_2F_EventScript_MatchCallScientist::", 1)[0]
+    require(fossil_receive.find("special GiveEmeraldChampionsPreparedPokemon")
+            < fossil_receive.find("setvar VAR_FOSSIL_RESURRECTION_STATE, 0"),
+            "fossil resurrection state can clear before delivery succeeds")
+    champions_gate = re.search(r'RuntimeGate\("\*Champions",\s*(\d+)\)', runtime_gates)
+    require(champions_gate is not None, "curated Champions runtime gate is missing")
+    champions_declarations = 0
+    declaration = re.compile(
+        r'^\s*(?:TEST|[A-Z_]+BATTLE_TEST)\s*\(\s*"((?:[^"\\]|\\.)*)"',
+        re.M,
+    )
+    for test_source in (ROOT / "test").rglob("*.c"):
+        champions_declarations += sum(
+            "Champions" in name for name in declaration.findall(test_source.read_text(errors="ignore"))
+        )
+    require(int(champions_gate.group(1)) == champions_declarations,
+            "curated Champions runtime minimum is stale against its live declarations")
 
     # Native message boxes safely fit roughly 36 monospace characters.  Keep
     # new prize dialogue at 34 visible characters to preserve a margin.
@@ -172,6 +231,7 @@ def main() -> None:
     print("PASS: all 27 regional starters have independent persistent claim flags")
     print("PASS: initial starter, no-room, preset-failure, payment, and one-time paths are transactional")
     print("PASS: all 29 Pokemon prizes receive a non-Mega competitive preset before party/PC delivery")
+    print("PASS: Castform, Beldum, and all Devon fossil gifts use the retry-safe prepared transaction")
     print("PASS: all starter menus and new dialogue fit their native windows")
 
 

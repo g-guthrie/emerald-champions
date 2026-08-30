@@ -298,6 +298,134 @@ def verify_inert_item_cleanup() -> None:
         for stale_copy in ("HP UP", "PROTEIN", "CARBOS", "CALCIUM", "ZINC", "EFFORT RIBBON"):
             require(stale_copy not in text, f"{relative} still advertises {stale_copy}")
 
+    stale_live_symbols = (
+        ("data/maps/VerdanturfTown_Mart/scripts.inc", "XSpecialIsCrucial"),
+        ("data/maps/VerdanturfTown_Mart/scripts.inc", "NestBallOnWeakenedPokemon"),
+        ("data/maps/LavaridgeTown_Mart/scripts.inc", "XSpeedFirstStrike"),
+        ("data/maps/SlateportCity_Mart/scripts.inc", "SomeItemsOnlyAtMart"),
+        ("data/maps/SlateportCity/map.json", "EffortRibbonWoman"),
+        ("data/maps/SlateportCity/scripts.inc", "EffortRibbonWoman"),
+    )
+    for relative, token in stale_live_symbols:
+        require(token not in read(relative), f"{relative} still exposes stale reward symbol {token}")
+    verdanturf_mart = read("data/maps/VerdanturfTown_Mart/scripts.inc")
+    require(
+        "lower-level wild POKéMON" in verdanturf_mart
+        and "only place you can" not in verdanturf_mart,
+        "Verdanturf still describes Nest Ball as an HP check or exclusive stock",
+    )
+    mossdeep_mart = read("data/maps/MossdeepCity_Mart/scripts.inc")
+    require(
+        "only made in MOSSDEEP" not in mossdeep_mart
+        and all(phrase in mossdeep_mart for phrase in ("BUG-", "WATER-type", "surfing", "fishing", "underwater")),
+        "Mossdeep still claims exclusive Net/Dive Ball stock or describes pre-Gen-4 Dive Ball mechanics",
+    )
+    overworld_config = read("include/config/overworld.h")
+    petalburg_mart = read("data/maps/PetalburgCity_Mart/scripts.inc")
+    require("#define OW_POISON_DAMAGE                GEN_LATEST" in overworld_config,
+            "poison-dialogue contract must be revisited if overworld poison damage changes")
+    require(
+        "Poison no longer drains HP while" in petalburg_mart
+        and "lose HP until it faints" not in petalburg_mart,
+        "Petalburg still describes disabled overworld poison damage",
+    )
+    pokemon_school = read("data/maps/RustboroCity_PokemonSchool/scripts.inc")
+    require(
+        "Poison remains after battle, but it no" in pokemon_school
+        and "longer causes damage while traveling" in pokemon_school
+        and "HP will drop" not in pokemon_school,
+        "Rustboro School still teaches disabled overworld poison damage",
+    )
+
+    stale_battle_item_copy = (
+        "X ATTACK",
+        "X DEFEND",
+        "X DEFENSE",
+        "X SP. ATK",
+        "X SPECIAL",
+        "X SP. DEF",
+        "X SPEED",
+        "X ACCURACY",
+        "DIRE HIT",
+        "GUARD SPEC",
+        "HP UP",
+        "PROTEIN",
+        "CALCIUM",
+        "ZINC",
+        "CARBOS",
+        "EFFORT RIBBON",
+        "MACHO BRACE",
+        "VITAMIN",
+    )
+    dialogue_sources = [
+        path for path in (ROOT / "data/maps").glob("*/scripts.inc")
+        if not path.parent.name.endswith("_Frlg")
+    ]
+    dialogue_sources.extend(
+        path for path in (ROOT / "data/scripts").glob("*.inc")
+        if "frlg" not in path.name.lower() and path.name != "debug.inc"
+    )
+    dialogue_sources.extend(
+        path for path in (ROOT / "data/text").glob("*.inc")
+        if "frlg" not in path.name.lower() and path.name != "trainers.inc"
+    )
+    stale_dialogue: list[str] = []
+    for path in dialogue_sources:
+        for line_number, line in enumerate(path.read_text(errors="ignore").splitlines(), 1):
+            if ".string" not in line:
+                continue
+            upper = line.upper()
+            for phrase in stale_battle_item_copy:
+                if phrase in upper:
+                    stale_dialogue.append(f"{path.relative_to(ROOT)}:{line_number}: {phrase}")
+    require(
+        not stale_dialogue,
+        "live non-trainer dialogue still advertises removed X-item/vitamin/EV rewards:\n"
+        + "\n".join(stale_dialogue),
+    )
+
+    exclusivity_phrases = (
+        "ONLY PLACE",
+        "ONLY SHOP",
+        "ONLY MADE",
+        "MADE ONLY",
+        "ONLY SOLD",
+        "SOLD ONLY",
+        "CAN ONLY GET",
+        "BUY ONLY",
+        "NOWHERE ELSE",
+    )
+    commerce_terms = (
+        "ITEM",
+        "BALL",
+        "MART",
+        "MARKET",
+        "SHOP",
+        "BUY",
+        "SOLD",
+        "STOCK",
+        "MERCHANDISE",
+        "DECOR",
+        "SPECIALTY",
+        "GOODS",
+        "SUPPL",
+    )
+    exclusivity_claims: list[str] = []
+    for path in dialogue_sources:
+        text = path.read_text(errors="ignore")
+        labels = list(re.finditer(r"(?m)^([A-Za-z_][A-Za-z0-9_]*):{1,2}\s*$", text))
+        for index, match in enumerate(labels):
+            block = text[match.end():labels[index + 1].start() if index + 1 < len(labels) else len(text)]
+            dialogue = " ".join(re.findall(r'\.string "(.*?)"', block)).upper()
+            if (any(phrase in dialogue for phrase in exclusivity_phrases)
+                    and any(term in dialogue for term in commerce_terms)):
+                exclusivity_claims.append(f"{path.relative_to(ROOT)}:{match.group(1)}")
+    require(
+        not exclusivity_claims,
+        "live commerce dialogue makes an unverified exclusivity claim:\n"
+        + "\n".join(exclusivity_claims),
+    )
+
     stale_flag_suffixes = ("_HP_UP", "_PROTEIN", "_IRON", "_CALCIUM", "_ZINC", "_CARBOS")
     for path in (ROOT / "data/maps").glob("*/map.json"):
         if path.parent.name.endswith("_Frlg"):

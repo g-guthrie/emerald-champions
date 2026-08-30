@@ -4,7 +4,7 @@
 
 - **The campaign has a clear and unusually coherent identity.** It remains Emerald's land-versus-sea story, but every major system now supports one thesis: catching and preparing a team is easy; reading and winning battles is hard. The regional starter choice, immediate National Pokédex, Poké Vial, Leveler, competitive set tutor, free held-item vendor, strict caps, live difficulty control, mostly doubles trainers, Mega progression, and Legendary Signs all reinforce that promise.
 
-- **The playable story spine is structurally sound.** The current source passes full map, warp, script-reference, story-item, badge, HM, Mega, League, reward-economy, legendary-availability, and dialogue-width gates. The checked surface contains 540 Hoenn maps, 4,086 physical events, 1,402 warps, 17,957 script references, 513 finite physical trainer groups, 561 battle branches, and 81 complete Legendary Sign definitions.
+- **The playable story spine is structurally connected.** The current source passes the named map, warp, script-reference, story-item, badge, HM, Mega, League, reward-economy, legendary-availability, and dialogue-width invariants. Those static checks are not a playthrough. The checked surface contains 540 Hoenn maps, 4,086 physical events, 1,402 warps, 17,938 resolved references across 104,701 assembled script lines, 391 value-returning special-call contracts, 513 finite physical trainer groups, 561 battle branches, and 82 complete Legendary Sign definitions.
 
 - **The story itself flows well from local discovery to regional catastrophe.** Champion's Signs begin as strange marks in Petalburg Woods and Granite Cave, become a Devon and Steven research problem, are connected to Magma and Aqua's machines at Slateport and Mt. Chimney, become a spiritual network at Mt. Pyre, and finally explain why Groudon, Kyogre, and Rayquaza react so violently. Rayquaza remains the campaign climax rather than being displaced by a new fan-made “true” villain.
 
@@ -21,7 +21,7 @@ The main chapters describe what a player actually does, when paths open, what is
 - every materialized Pokémon, item, Ability, nature, Stat Point spread, and move;
 - every trainer's live intro, defeat, and post-battle dialogue that is attached to the campaign script;
 - the exact source file and label for that dialogue;
-- all 81 Legendary Sign acquisition definitions.
+- all 82 Legendary Sign acquisition definitions.
 
 The atlas deliberately excludes rematch-only dialogue from the primary path because ordinary and Gym rematches are disabled campaign content. Repeatable endgame play belongs to the Champions Circuit and Battle Frontier. Its encounter order now matches the reordered master.
 
@@ -53,9 +53,9 @@ The first Pokémon Center visit gives two permanent tools:
 - The Poké Vial restores the full party outside battle. It begins with one charge, refills at every Center, and can be upgraded through optional exploration.
 - The Leveler raises the whole party to the current cap and never runs out.
 
-Every Center also exposes the game's competitive preparation loop. The battle-set tutor can apply one of a species' authored doubles sets: four moves, nature, Ability, Stat Points, and ordinary held item. Mega-oriented sets explain the required stone but do not create it. The ordinary move-teaching path remains available. A separate Center vendor gives unlimited ordinary competitive held items for free, while berries, Mega Stones, orbs, drives, masks, memories, plates, and other transformation or progression items remain scarce.
+Every Center also exposes the game's competitive preparation loop. The executable corpus contains 1,534 presets, including 95 Mega orientations covering all 92 campaign stones. The battle-set tutor can apply one of a species' authored doubles sets: four moves, nature, Ability, Stat Points, and ordinary held item. Mega-oriented sets explain the required stone but do not create it. The ordinary move-teaching path remains available. A separate Center vendor gives 111 ordinary competitive held items for free, while berries, Mega Stones, orbs, drives, masks, memories, plates, and other transformation or progression items remain scarce.
 
-Wild Pokémon arrive with one of their species' authored competitive sets. If a species has multiple presets, its wild orientations are distributed across those presets. This makes a newly caught Pokémon immediately legible and useful instead of an unfinished project.
+Ordinary table wild Pokémon arrive with one of their species' authored competitive sets. If a species has multiple presets, its wild orientations are distributed across those presets. All 616 species/forms parsed from encounter data resolve a non-Mega preset; the current Hoenn campaign distribution exposes 592 unique species/forms through 146 encounter headers on 138 maps. Finite Legendary Signs and temporary battle forms remain on their explicit quest paths rather than entering ordinary randomization. This makes a newly caught ordinary Pokémon immediately legible and useful instead of an unfinished project.
 
 ### Exploration rewards
 
@@ -267,9 +267,9 @@ Rock Smash comes from the Mauville house. The badge and HM together open the nor
 - Verdanturf and the Rusturf Tunnel reunion;
 - the first additional Trick House puzzle;
 - New Mauville later, when Wattson authorizes it;
-- Raikou on Route 110 with three badges and a Manectric-family partner;
+- Raikou as a conditional Route 110 catch and the visible Thundurus encounter on that route, both after three badges with a Manectric-family partner;
 - Entei in Fiery Path with three badges and a Torkoal-family partner;
-- ordinary wild Kubfu on Route 112.
+- the one-time Kubfu Sign on Route 112 with three badges and a Makuhita-family partner.
 
 # Part VI — The Mountain Breaks Open
 
@@ -366,7 +366,7 @@ The mandatory eastward route crosses Route 118. Steven meets the player, asks wh
 
 Team Aqua occupies the Weather Institute to steal weather data and Castform. The player fights through the building and defeats Shelly. She explains that the Institute's records chart both weather and Champion's Signs and that Aqua wins by changing the board before the opponent understands it.
 
-After Shelly's defeat, a grunt reports Magma moving toward Mt. Pyre. The Institute gives the player Castform and explicitly points toward the restored Route 111 ruins. Castform is the partner key for Landorus.
+After Shelly's defeat, a grunt reports Magma moving toward Mt. Pyre. The Institute gives the player Castform and explicitly points toward the restored Route 111 ruins. Castform is the partner key for visible Landorus at the Route 111 ruins and visible Tornadus on Route 119; both become solvable after Balance Badge, while Thundurus has already become visible on Route 110 after Dynamo Badge with a Manectric-family partner.
 
 ## 24. The Route 119 rival and Fly
 
@@ -464,7 +464,7 @@ Routes 129–134 are optional ocean exploration before or after the crisis. Rout
 
 ## 33. Seafloor Cavern
 
-The stolen submarine marks the Seafloor Cavern entrance. The player navigates Strength, current, and rock puzzles and fights Aqua defenders. Shelly guards a required chamber. Archie waits beside Kyogre in Room 9.
+The stolen submarine marks the Seafloor Cavern entrance. The player navigates Strength, current, and rock puzzles and fights Aqua defenders. The underwater approach is deliberately one of the campaign's richest special habitats: Relicanth, Dhelmise, Dragalge, Kingdra, Golisopod, Basculegion, Dondozo, Veluza, Wishiwashi, rare Iron Bundle and Nihilego, and a one-percent Feebas trophy all live there. Manaphy is a finite conditional Sign rather than repeatable grass-table loot. Shelly guards a required chamber. Archie waits beside Kyogre in Room 9.
 
 Archie's final team is the culmination of Aqua's changing-board identity. After losing, he still activates the Red Orb. Kyogre awakens and leaves. Reports of destructive rain force Archie to understand that freedom without limits can erase the people it was supposed to connect.
 
@@ -555,7 +555,7 @@ The Weather Institute begins the native abnormal-weather hunt for Terra Cave and
 
 ## 42. The Legendary Sign mastery path
 
-The Sign system contains 81 acquisition definitions and covers all 101 legendary-class families through visible quests, conditional wild encounters, ordinary wild roots, native encounters, breeding, the Game Corner, the Champions Circuit, or mastery rewards.
+The Sign system contains 82 acquisition definitions and covers all 101 legendary-class families through visible quests, conditional wild encounters, ordinary wild roots, native encounters, breeding, the Game Corner, the Champions Circuit, or mastery rewards.
 
 The most important postgame chains are:
 
@@ -567,11 +567,11 @@ The most important postgame chains are:
 - Landorus → Zygarde;
 - Ditto → Mewtwo;
 - Unown → Hoopa;
-- all 80 other finite Sign definitions, including Circuit and Game Corner milestones → Arceus.
+- all 81 other finite Sign definitions, including Circuit and Game Corner milestones → Arceus.
 
 Every required partner accepts the evolution family, so a player is not rejected for bringing an evolved form. No quest depends on Mirage Tower remaining uncollapsed or on a Safari capture. Conditional wild Signs awaken at their own marked habitats when the qualifying partner is present; visible Signs are solved at their objects. Restored-area wardens and inscriptions provide local hints, while the Devon researcher remains an optional remote clue, tuning, and mastery service.
 
-The complete, exact 81-entry table is in the evidence atlas.
+The complete, exact 82-entry table is in the evidence atlas.
 
 ## 43. Cynthia, Leaf, Steven, and other superbosses
 
@@ -589,7 +589,7 @@ These battles are separate from the endlessly generated Frontier loop and theref
 
 The Frontier is the true endless endgame. The native facilities remain, and the Battle Tower lobby also exposes the Champions Circuit.
 
-The Circuit generates doubles teams inside the ROM from a pinned Pokémon Showdown Champions corpus: 311 species or form variants and 444 role templates. It enforces species and item uniqueness, one Mega, type and weakness limits, weather and field compatibility, role-driven moves, and Ability filtering.
+The Circuit generates doubles teams inside the ROM from a pinned Pokémon Showdown Champions corpus: 311 species or form variants and 444 role templates. It enforces Species Clause by National Dex family, at most one Mega, type and weakness limits, weather and field compatibility, role-driven moves, and Ability filtering. It retains Showdown Random Doubles item behavior rather than imposing a separate Item Clause.
 
 The player's party is temporarily normalized to level 80 and restored afterward. Opponent scaling advances one slot by one level after each win, then rolls the whole team upward. Twelve finite legendary rewards finish before the win-40 Eternatus mastery reward. Circuit state is separate from the native Battle Tower records.
 
@@ -692,7 +692,7 @@ Critical items do not advance the story when delivery fails. Most can retry or u
 
 ### Presentation is source-gated
 
-All critical story strings and every literal Hoenn dialogue line are measured against the native font. The current audit checked 10,844 targeted story lines and 47,628 literal Hoenn lines without overflow.
+All critical story strings and every literal Hoenn dialogue line are measured against the native font. The current audit checked 10,846 targeted story lines and 47,623 literal Hoenn lines without overflow.
 
 ## Resolved audit findings
 
@@ -737,20 +737,20 @@ Ordinary and Gym rematches remain intentionally disabled. Some legacy rematch ba
 
 The inherited Expansion layer received a focused safety pass. Direct interaction with buried Trainers can no longer dispatch past its movement table. Secret Sword now drives Keldeo's Ordinary/Resolute form correctly through party moves, PC moves, the native tutor/deleter, authored presets, and wild presets. Unsafe battle recording and replay are disabled—and old Frontier Pass records are hidden—until upstream provides a proven serializer/playback repair. PC held-item text now reserves its terminator and selects a fitting native font for every item name.
 
-Battle regression coverage protects coordinated Pledge selection and ally-only Decorate targeting. Commander state now survives and clears coherently across status damage, sleep and Yawn progression, Dondozo replacement, fainting, and forced-switch effects. Forecast and Flower Gift faint transitions no longer emit phantom form messages, and simultaneous voluntary switches follow modern Speed order. The inherited Imposter sleep-clause case remains explicitly marked as a test-harness limitation because the upstream runner cannot model copied move slots after Transform; the campaign engine is not changed speculatively around that harness artifact.
+Battle regression coverage protects coordinated Pledge selection and ally-only Decorate targeting. Commander state now survives and clears coherently across status damage, sleep and Yawn progression, Dondozo replacement, fainting, and forced-switch effects. Forecast and Flower Gift faint transitions no longer emit phantom form messages, and simultaneous voluntary switches follow modern Speed order. The curated manifest now includes copied-move targeting, Imposter AI, Sleep Clause re-entry, and Billy's Imposter lead as ordinary zero-debt regressions; this covers those named paths without claiming every Transform interaction is exhaustively proven.
 
 Four parity questions remain deliberately deferred rather than patched speculatively:
 
 - exact simultaneous faint-replacement order is not established well enough to encode as Champions truth;
 - full per-target spread-move end-effect interleaving would require a risky architectural rewrite of the move-end pipeline;
-- mid-turn AI cache invalidation has not been confirmed with a reproducible failure;
+- broader mid-turn AI cache invalidation beyond the two named switch-in reset regressions has not been confirmed with a reproducible failure;
 - missing Gen 8/9 battle-animation assets and their presentation still require an asset pass and manual in-emulator playtesting.
 
 ## Remaining empirical concerns
 
 ### Trainer density and fatigue need human calibration
 
-The finite campaign contains 513 physical encounter groups, 84.49% of them doubles or multi battles. Ordinary target difficulty averages 7.56: 151 fights are 6.x, 257 are 7.x, and 66 are 8.x. That is intentionally demanding, but long clusters remain: Route 119 plus the Weather Institute contains 24 encounters, Mt. Pyre contains 16, and Magma Hideout contains 19. Static variety checks prove these are not copies of one puzzle; only actual pacing data can prove that a completionist still wants the next battle.
+The finite campaign contains 513 physical encounter groups and 561 branches: 87 single, 460 double, and 14 multi, so 84.49% are doubles-like. Those parties contain 2,147 authored Pokémon across 754 species/forms and showcase all 92 Mega Stones plus all 57 targeted legendary species. Ordinary target difficulty averages 7.57: 143 fights are 6.x, 267 are 7.x, and 64 are 8.x. That is intentionally demanding, but long clusters remain: Route 119 plus the Weather Institute contains 24 encounters, Mt. Pyre contains 16, and Magma Hideout contains 19. Static variety checks prove these are not copies of one puzzle; only actual pacing data can prove that a completionist still wants the next battle.
 
 ### Static correctness is not playthrough proof
 
@@ -779,6 +779,6 @@ Opening every Mega Stone and evolution item after Juan guarantees the full toolk
 
 # Caveats and Evidence Boundary
 
-This audit proves that the current source is wired, internally referenced, passes the current static release gates, and is coherent under the documented contracts. It does not claim that every optional event will be seen in one playthrough, that all dialogue has been experienced on hardware, or that the authored difficulty targets match human outcomes.
+This book records source wiring and the contracts exercised by the named static gates; it is not itself evidence that a consolidated release run passed. Use fresh verifier, build, boot, and runtime logs for the exact candidate under test. It does not claim that every optional event will be seen in one playthrough, that all dialogue has been experienced on hardware, or that the authored difficulty targets match human outcomes.
 
 The generated [campaign evidence atlas](EMERALD_CHAMPIONS_CAMPAIGN_EVIDENCE.txt) and reordered [master battle design](emerald_champions_master_battle_design.txt) now share the same encounter order and source snapshot. The existing [story-mode audit](EMERALD_CHAMPIONS_STORY_MODE_AUDIT.md), [story bible](emerald_champions_migration/STORY_BIBLE.md), and source verifiers remain supporting evidence rather than substitutes for playtesting.

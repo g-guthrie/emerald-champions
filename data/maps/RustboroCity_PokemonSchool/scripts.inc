@@ -207,13 +207,11 @@ RustboroCity_PokemonSchool_Text_ReadWhichTopic:
 	.string "Which topic do you want to read?$"
 
 RustboroCity_PokemonSchool_Text_ExplainPoison:
-	.string "If a POKéMON is poisoned, it will\n"
-	.string "steadily lose HP.\p"
-	.string "The effects of poison remain after\n"
-	.string "a battle.\p"
-	.string "A poisoned POKéMON's HP will drop\n"
-	.string "while it is traveling.\p"
-	.string "Heal a poisoning using an ANTIDOTE.$"
+	.string "If a POKéMON is poisoned, it steadily\n"
+	.string "loses HP during battle.\p"
+	.string "Poison remains after battle, but it no\n"
+	.string "longer causes damage while traveling.\p"
+	.string "Heal it using an ANTIDOTE.$"
 
 RustboroCity_PokemonSchool_Text_ExplainParalysis:
 	.string "If a POKéMON becomes paralyzed,\n"
@@ -339,4 +337,3 @@ RustboroCity_PokemonSchool_Text_ScottMetAlreadyStoneBadge:
 	.string "you in battle.\p"
 	.string "It's hard to tell what you're like as\n"
 	.string "a TRAINER from a LEAGUE BADGE.$"
-

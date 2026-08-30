@@ -404,7 +404,8 @@ PlayersHouse_1F_Text_SSTicketSentToPC:
 
 PlayersHouse_1F_Text_SSTicketNoRoom:
 	.string "Your KEY ITEMS pocket and PC are full.\n"
-	.string "Make room before taking the ticket.$"
+	.string "MR. BRINEY registered your pass with\l"
+	.string "both ferry ports instead.$"
 
 PlayersHouse_1F_Text_PortsInSlateportLilycove:
 	.string "DAD: Hm, a TICKET for a ferry?\p"

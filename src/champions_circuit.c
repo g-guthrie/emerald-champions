@@ -193,6 +193,14 @@ static bool32 SetHasMove(const struct CircuitGeneratedSet *set, enum Move move)
     return FALSE;
 }
 
+static bool32 TeamHasMove(const struct CircuitTeamState *team, enum Move move)
+{
+    for (u32 i = 0; i < team->count; i++)
+        if (SetHasMove(&team->sets[i], move))
+            return TRUE;
+    return FALSE;
+}
+
 static bool32 SetHasMoveFromList(const struct CircuitGeneratedSet *set, const enum Move *list, u32 count)
 {
     for (u32 i = 0; i < MAX_MON_MOVES; i++)
@@ -250,21 +258,43 @@ static bool32 IsDamagingMove(enum Move move)
 
 static enum Type GetTemplateMoveType(
     enum Move move,
-    const struct ShowdownCircuitTemplate *template)
+    const struct ShowdownCircuitTemplate *template,
+    const struct ShowdownCircuitVariant *variant)
 {
     enum Type type = GetMoveType(move);
+    bool32 hasAerilate = FALSE;
+    bool32 hasGalvanize = FALSE;
+    bool32 hasNormalize = FALSE;
     bool32 hasPixilate = FALSE;
+    bool32 hasRefrigerate = FALSE;
     bool32 hasLiquidVoice = FALSE;
+    u32 abilityCount = template->abilityCount;
 
-    for (u32 i = 0; i < template->abilityCount; i++)
+    for (u32 i = 0; i < abilityCount; i++)
     {
-        hasPixilate |= template->abilities[i] == ABILITY_PIXILATE;
-        hasLiquidVoice |= template->abilities[i] == ABILITY_LIQUID_VOICE;
+        enum Ability ability = variant->requiredItem != ITEM_NONE
+                             ? gSpeciesInfo[variant->formSpecies].abilities[i]
+                             : template->abilities[i];
+
+        hasAerilate |= ability == ABILITY_AERILATE;
+        hasGalvanize |= ability == ABILITY_GALVANIZE;
+        hasNormalize |= ability == ABILITY_NORMALIZE;
+        hasPixilate |= ability == ABILITY_PIXILATE;
+        hasRefrigerate |= ability == ABILITY_REFRIGERATE;
+        hasLiquidVoice |= ability == ABILITY_LIQUID_VOICE;
     }
-    if (hasPixilate && type == TYPE_NORMAL)
-        return TYPE_FAIRY;
+    if (hasNormalize)
+        return TYPE_NORMAL;
     if (hasLiquidVoice && IsSoundMove(move))
         return TYPE_WATER;
+    if (hasAerilate && type == TYPE_NORMAL)
+        return TYPE_FLYING;
+    if (hasGalvanize && type == TYPE_NORMAL)
+        return TYPE_ELECTRIC;
+    if (hasPixilate && type == TYPE_NORMAL)
+        return TYPE_FAIRY;
+    if (hasRefrigerate && type == TYPE_NORMAL)
+        return TYPE_ICE;
     return type;
 }
 
@@ -418,7 +448,7 @@ static bool32 AddRandomStabMove(
         enum Move move = pool->moves[i];
         if (IsDamagingMove(move)
          && !IsNoStabMove(move)
-         && GetTemplateMoveType(move, template) == wantedType
+         && GetTemplateMoveType(move, template, variant) == wantedType
          && CircuitRandomUniform(0, ++matches - 1) == 0)
             selected = move;
     }
@@ -428,10 +458,11 @@ static bool32 AddRandomStabMove(
 static bool32 SetHasDamagingType(
     const struct CircuitGeneratedSet *set,
     enum Type type,
-    const struct ShowdownCircuitTemplate *template)
+    const struct ShowdownCircuitTemplate *template,
+    const struct ShowdownCircuitVariant *variant)
 {
     for (u32 i = 0; i < MAX_MON_MOVES; i++)
-        if (IsDamagingMove(set->moves[i]) && GetTemplateMoveType(set->moves[i], template) == type)
+        if (IsDamagingMove(set->moves[i]) && GetTemplateMoveType(set->moves[i], template, variant) == type)
             return TRUE;
     return FALSE;
 }
@@ -459,7 +490,7 @@ static bool32 AddRandomDamagingMove(
         enum Move move = pool->moves[i];
         if (IsDamagingMove(move)
          && !IsNoStabMove(move)
-         && (excludedType == TYPE_NONE || GetTemplateMoveType(move, template) != excludedType)
+         && (excludedType == TYPE_NONE || GetTemplateMoveType(move, template, variant) != excludedType)
          && CircuitRandomUniform(0, ++matches - 1) == 0)
             selected = move;
     }
@@ -522,7 +553,7 @@ static void BuildShowdownMoveset(
         for (u32 i = 0; i < pool.count; i++)
         {
             enum Move move = pool.moves[i];
-            enum Type moveType = GetTemplateMoveType(move, template);
+            enum Type moveType = GetTemplateMoveType(move, template, variant);
             if (IsDamagingMove(move) && GetMovePriority(move) > 0
              && (moveType == type1 || moveType == type2)
              && CircuitRandomUniform(0, ++matches - 1) == 0)
@@ -532,11 +563,11 @@ static void BuildShowdownMoveset(
             AddMove(set, &pool, selected, template, variant);
     }
 
-    if (!SetHasDamagingType(set, type1, template))
+    if (!SetHasDamagingType(set, type1, template, variant))
         AddRandomStabMove(set, &pool, type1, template, variant);
-    if (type2 != type1 && !SetHasDamagingType(set, type2, template))
+    if (type2 != type1 && !SetHasDamagingType(set, type2, template, variant))
         AddRandomStabMove(set, &pool, type2, template, variant);
-    if (template->preferredType != TYPE_NONE && !SetHasDamagingType(set, template->preferredType, template))
+    if (template->preferredType != TYPE_NONE && !SetHasDamagingType(set, template->preferredType, template, variant))
         AddRandomStabMove(set, &pool, template->preferredType, template, variant);
     if (!SetHasDamagingMove(set))
     {
@@ -598,7 +629,7 @@ static void BuildShowdownMoveset(
         {
             if (IsDamagingMove(set->moves[i]) && !IsNoStabMove(set->moves[i]))
             {
-                onlyType = GetTemplateMoveType(set->moves[i], template);
+                onlyType = GetTemplateMoveType(set->moves[i], template, variant);
                 damagingCount++;
             }
         }
@@ -635,15 +666,17 @@ static void BuildShowdownMoveset(
 
 static bool32 SetHasGrassDamage(
     const struct CircuitGeneratedSet *set,
-    const struct ShowdownCircuitTemplate *template)
+    const struct ShowdownCircuitTemplate *template,
+    const struct ShowdownCircuitVariant *variant)
 {
-    return SetHasDamagingType(set, TYPE_GRASS, template);
+    return SetHasDamagingType(set, TYPE_GRASS, template, variant);
 }
 
 static bool32 AbilityAllowed(
     enum Ability ability,
     const struct CircuitGeneratedSet *set,
     const struct ShowdownCircuitTemplate *template,
+    const struct ShowdownCircuitVariant *variant,
     const struct CircuitTeamDetails *details)
 {
     switch (ability)
@@ -655,7 +688,7 @@ static bool32 AbilityAllowed(
     case ABILITY_SWIFT_SWIM:
         return details->rain;
     case ABILITY_OVERGROW:
-        return SetHasGrassDamage(set, template);
+        return SetHasGrassDamage(set, template, variant);
     case ABILITY_SAND_FORCE:
     case ABILITY_SAND_RUSH:
         return details->sand;
@@ -679,7 +712,7 @@ static enum Ability ChooseShowdownAbility(
     {
         if (SetHasMove(set, MOVE_BULLET_SEED) || SetHasMove(set, MOVE_ROCK_BLAST))
             return ABILITY_SKILL_LINK;
-        return ABILITY_SHEER_FORCE;
+        return template->abilities[0];
     }
     if (SetHasMove(set, MOVE_SNOWSCAPE))
         for (u32 i = 0; i < template->abilityCount; i++)
@@ -687,7 +720,7 @@ static enum Ability ChooseShowdownAbility(
                 return ABILITY_SLUSH_RUSH;
 
     for (u32 i = 0; i < template->abilityCount; i++)
-        if (AbilityAllowed(template->abilities[i], set, template, details))
+        if (AbilityAllowed(template->abilities[i], set, template, variant, details))
             choices[count++] = template->abilities[i];
     if (count != 0)
         return choices[CircuitRandomUniform(0, count - 1)];
@@ -776,7 +809,8 @@ static enum Item ChooseShowdownItem(
     if ((type1 == TYPE_NORMAL || type2 == TYPE_NORMAL)
      && SetHasMove(set, MOVE_DOUBLE_EDGE) && SetHasMove(set, MOVE_FAKE_OUT))
         return ITEM_SILK_SCARF;
-    if (SetHasMove(set, MOVE_POPULATION_BOMB)
+    if ((variant->partySpecies == SPECIES_FROSLASS && SetHasMove(set, MOVE_TRIPLE_AXEL))
+     || SetHasMove(set, MOVE_POPULATION_BOMB)
      || (ability == ABILITY_HUSTLE
       && SetHasMoveFromList(set, sSetupMoves, ARRAY_COUNT(sSetupMoves))
       && CircuitRandomUniform(0, 1) == 0)
@@ -1126,14 +1160,6 @@ static bool32 FindAbilitySlot(enum Species species, enum Ability ability, u32 *s
             return TRUE;
         }
     }
-    for (u32 i = 0; i < NUM_ABILITY_SLOTS; i++)
-    {
-        if (gSpeciesInfo[species].abilities[i] != ABILITY_NONE)
-        {
-            *slot = i;
-            return TRUE;
-        }
-    }
     return FALSE;
 }
 
@@ -1163,7 +1189,11 @@ static void CreateCircuitMon(struct Pokemon *mon, const struct CircuitGeneratedS
     for (u32 i = 0; i < MAX_MON_MOVES; i++)
         SetMonMoveSlot(mon, set->moves[i], i);
     SetMonData(mon, MON_DATA_HIDDEN_NATURE, &nature);
-    FindAbilitySlot(variant->partySpecies, set->ability, &abilitySlot);
+    if (!FindAbilitySlot(variant->partySpecies, set->ability, &abilitySlot))
+    {
+        assertf(FALSE, "Circuit requested illegal Ability %u for species %u", set->ability, variant->partySpecies);
+        abilitySlot = 0;
+    }
     SetMonData(mon, MON_DATA_ABILITY_NUM, &abilitySlot);
     SetMonData(mon, MON_DATA_HP_EV, &set->statPoints[STAT_HP]);
     SetMonData(mon, MON_DATA_ATK_EV, &set->statPoints[STAT_ATK]);
@@ -1258,7 +1288,7 @@ void ChampionsCircuitGenerateOpponent(void)
         StringCopy(gStringVar1, sCircuitStyleSand);
     else if (team.details.snow)
         StringCopy(gStringVar1, sCircuitStyleSnow);
-    else if (SetHasMove(&team.sets[0], MOVE_TRICK_ROOM) || SetHasMove(&team.sets[1], MOVE_TRICK_ROOM))
+    else if (TeamHasMove(&team, MOVE_TRICK_ROOM))
         StringCopy(gStringVar1, sCircuitStyleTrickRoom);
     else
         StringCopy(gStringVar1, sCircuitStyleShowdown);
@@ -1289,7 +1319,10 @@ void ChampionsCircuitHandleBattleResult(void)
 
 void ChampionsCircuitTryGiveReward(void)
 {
-    u16 wins = VarGet(VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS);
+    // Reward entitlement is lifetime Circuit progress, not transient streak
+    // state.  A full PC can therefore delay delivery without making the player
+    // repeat the same milestone after retiring to create room.
+    u16 wins = VarGet(VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS);
     u8 rewardIndex = 0;
 
     gSpecialVar_Result = 0;

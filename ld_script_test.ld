@@ -57,7 +57,13 @@ SECTIONS {
         data/*.o(COMMON);
         test/*.o(COMMON);
         *libc.a:sbrkr.o(COMMON);
+
+        __iwram_bss_end = .;
     } > IWRAM
+
+    /* Battle tests run on the GBA IRQ stack below the persistent page. */
+    ASSERT(__iwram_bss_end <= ORIGIN(IWRAM) + LENGTH(IWRAM) - 0x1000,
+           "test IWRAM leaves less than 4 KiB of stack headroom")
 
     /* .persistent starts at 0x3007F00 */
     /* WARNING: This is the end of the IRQ stack, if there's too

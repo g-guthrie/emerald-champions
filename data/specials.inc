@@ -309,9 +309,6 @@ gSpecials::
 	def_special FoundAbandonedShipRoom2Key
 	def_special FoundAbandonedShipRoom4Key
 	def_special FoundAbandonedShipRoom6Key
-	def_special LeadMonHasEffortRibbon
-	def_special GiveLeadMonEffortRibbon
-	def_special Special_AreLeadMonEVsMaxedOut
 	def_special Script_FacePlayer
 	def_special Script_ClearHeldMovement
 	def_special InitRoamer
@@ -518,6 +515,7 @@ gSpecials::
 	def_special OpenEmeraldChampionsEvolutionItemArchive
 	def_special IsEmeraldChampionsGameCornerPokemonClaimed
 	def_special GiveEmeraldChampionsGameCornerPokemon
+	def_special GiveEmeraldChampionsPreparedPokemon
 	def_special ApplySelectedMonEmeraldChampionsBattleSet
 	def_special GetSelectedMonEmeraldChampionsBattleSetCount
 	def_special BufferSelectedMonEmeraldChampionsBattleSetName

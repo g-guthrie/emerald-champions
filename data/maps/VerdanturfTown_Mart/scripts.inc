@@ -28,7 +28,7 @@ VerdanturfTown_Mart_Pokemart:
 	pokemartlistend
 
 VerdanturfTown_Mart_EventScript_Boy::
-	msgbox VerdanturfTown_Mart_Text_XSpecialIsCrucial, MSGBOX_NPC
+	msgbox VerdanturfTown_Mart_Text_LuxuryBallBuildsFriendship, MSGBOX_NPC
 	end
 
 VerdanturfTown_Mart_EventScript_ExpertF::
@@ -36,10 +36,10 @@ VerdanturfTown_Mart_EventScript_ExpertF::
 	end
 
 VerdanturfTown_Mart_EventScript_Lass::
-	msgbox VerdanturfTown_Mart_Text_NestBallOnWeakenedPokemon, MSGBOX_NPC
+	msgbox VerdanturfTown_Mart_Text_NestBallOnLowerLevelPokemon, MSGBOX_NPC
 	end
 
-VerdanturfTown_Mart_Text_XSpecialIsCrucial:
+VerdanturfTown_Mart_Text_LuxuryBallBuildsFriendship:
 	.string "A LUXURY BALL helps a caught POKéMON\n"
 	.string "grow friendly more quickly.\p"
 	.string "The right Ball can make team building\n"
@@ -51,8 +51,8 @@ VerdanturfTown_Mart_Text_NoStrategyGuidesForBattleTent:
 	.string "It seems one must rely on one's\n"
 	.string "own wits after all…$"
 
-VerdanturfTown_Mart_Text_NestBallOnWeakenedPokemon:
+VerdanturfTown_Mart_Text_NestBallOnLowerLevelPokemon:
 	.string "The NEST BALL works better on\n"
-	.string "weakened POKéMON.\p"
-	.string "VERDANTURF is the only place you can\n"
-	.string "buy it.$"
+	.string "lower-level wild POKéMON.\p"
+	.string "It is one of several specialty BALLS\n"
+	.string "sold around HOENN.$"

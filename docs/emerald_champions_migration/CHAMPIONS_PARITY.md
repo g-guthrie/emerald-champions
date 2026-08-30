@@ -1,5 +1,11 @@
 # Pokemon Champions battle parity checkpoint
 
+> **Historical checkpoint (2026-08-28), not current release status.** The
+> commits, artifact digest, memory figures, and 40-test result below are kept as
+> migration evidence for that exact foundation. Current source facts and gate
+> requirements live in `FEATURE_PARITY.md` and
+> `../EMERALD_CHAMPIONS_VERIFICATION_AUDIT.md`.
+
 This checkpoint covers the battle-rule foundation only. It is not a claim of
 campaign feature parity with the preserved Emerald Champions ROM.
 
@@ -29,7 +35,7 @@ campaign feature parity with the preserved Emerald Champions ROM.
 
 ## Regression result
 
-The current source was rebuilt into a fresh test ELF and run through the host
+The checkpoint source was rebuilt into a fresh test ELF and run through the host
 mGBA test hydra with the `*Champions` filter on 2026-08-28:
 
 - Passed: 40
@@ -52,7 +58,7 @@ ordinary passing regressions.
 
 The parity patch does not justify species or asset pruning.
 
-## Not yet claimed
+## Not claimed at this checkpoint
 
 - Full Showdown differential coverage for every Champions move, Ability, item,
   condition, and ordering edge case.
@@ -63,4 +69,6 @@ The parity patch does not justify species or asset pruning.
   the preserved Emerald Champions checkpoint.
 - Full-game emulator and playthrough readiness.
 
-Those items remain explicit gates in the migration ledger.
+Those items were explicit gates at this checkpoint. Consult the current
+evidence ledger rather than treating this historical omission list as present
+implementation status.

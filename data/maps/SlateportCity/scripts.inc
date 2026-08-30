@@ -133,7 +133,7 @@ SlateportCity_Pokemart_CatchingGuru:
 	.2byte ITEM_REPEAT_BALL
 	pokemartlistend
 
-SlateportCity_EventScript_EffortRibbonWoman::
+SlateportCity_EventScript_StatPointGuide::
 	bufferleadmonspeciesname STR_VAR_1
 	msgbox SlateportCity_Text_StatPointsAlreadyReady, MSGBOX_NPC
 	end
@@ -1211,7 +1211,7 @@ SlateportCity_Text_CitySign:
 
 SlateportCity_Text_MarketSign:
 	.string "SLATEPORT MARKET\n"
-	.string "“Unique items found nowhere else!”$"
+	.string "“Specialty goods and local services!”$"
 
 SlateportCity_Text_HarborFerryUnderConstruction:
 	.string "SLATEPORT HARBOR\p"

@@ -203,6 +203,21 @@ def main():
     with open("src/data/pokemon/special_movesets.json", "r") as file:
         special_movesets = json.load(file)
 
+    # Emerald Champions keeps a small, source-reviewed compatibility layer for
+    # historical event moves and deliberate Inclement learnset extensions.
+    # The manifest is authoritative: unsupported imports are replaced there,
+    # and only explicitly reviewed retained rows enter the native tutor path.
+    MOVE_ACCESS_REVIEW = pathlib.Path("./docs/emerald_champions_move_access_review.json")
+    with open(MOVE_ACCESS_REVIEW, "r") as file:
+        move_access_review = json.load(file)
+    tutor_extensions = [
+        row for row in move_access_review["assignments"]
+        if row.get("requires_tutor_extension", False)
+    ]
+    for row in tutor_extensions:
+        if row["move"] not in special_movesets["extraTutors"]:
+            special_movesets["extraTutors"].append(row["move"])
+
     repo_tutors = make_move_tutors(SOURCE_DIR, special_movesets)
     if tutor_mode:
         quit(0)
@@ -229,6 +244,12 @@ def main():
 
     with open(SOURCE_LEARNSETS_JSON, "r") as source_fp:
         all_learnables = json.load(source_fp)
+    for row in tutor_extensions:
+        species = row["teachable_species"]
+        move = row["move"]
+        assert species in all_learnables, (species, move)
+        if move not in all_learnables[species]:
+            all_learnables[species].append(move)
 
     with open(SOURCE_TEACHING_TYPES_JSON, "r") as source_fp:
         repo_teaching_types = json.load(source_fp)

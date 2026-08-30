@@ -84,7 +84,9 @@ MossdeepCity_StevensHouse_EventScript_LeaveBeldum::
 
 MossdeepCity_StevensHouse_EventScript_GiveBeldum::
 	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_BELDUM
-	givemon SPECIES_BELDUM, 5
+	setvar VAR_0x8004, SPECIES_BELDUM
+	setvar VAR_0x8005, 5
+	special GiveEmeraldChampionsPreparedPokemon
 	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, MossdeepCity_StevensHouse_EventScript_SendBeldumParty
 	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, MossdeepCity_StevensHouse_EventScript_SendBeldumPC
 	goto Common_EventScript_NoMoreRoomForPokemon

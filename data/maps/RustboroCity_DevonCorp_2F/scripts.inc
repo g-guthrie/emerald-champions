@@ -124,9 +124,13 @@ RustboroCity_DevonCorp_2F_Text_NoLegendarySignYet:
 	.string "progress of your Gym challenge.$"
 
 RustboroCity_DevonCorp_2F_Text_AllLegendarySignsRecorded:
-	.string "Every wild Legendary Sign is awake.\p"
-	.string "Capture each one, including the three\n"
-	.string "revealed by Mt. Pyre's storyteller.$"
+	.string "Every conditional wild SIGN I can tune\n"
+	.string "remotely is awake.\p"
+	.string "The network also spans visible shrines,\n"
+	.string "rare wild finds, breeding, the GAME\l"
+	.string "CORNER, CIRCUIT rewards, and mastery.\p"
+	.string "Complete every source--including MT.\n"
+	.string "PYRE's three--to call ARCEUS.$"
 
 RustboroCity_DevonCorp_2F_Text_ArceusRewardParty:
 	.string "Every Legendary Sign is complete!\p"
@@ -434,7 +438,9 @@ RustboroCity_DevonCorp_2F_EventScript_SetAmauraReady::
 RustboroCity_DevonCorp_2F_EventScript_ReceiveFossilMon::
 	bufferspeciesname STR_VAR_2, VAR_TEMP_TRANSFERRED_SPECIES
 	msgbox RustboroCity_DevonCorp_2F_Text_FossilizedMonBroughtBackToLife, MSGBOX_DEFAULT
-	givemon VAR_TEMP_TRANSFERRED_SPECIES, 20
+	copyvar VAR_0x8004, VAR_TEMP_TRANSFERRED_SPECIES
+	setvar VAR_0x8005, 20
+	special GiveEmeraldChampionsPreparedPokemon
 	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, RustboroCity_DevonCorp_2F_EventScript_ReceiveFossilMonParty
 	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, RustboroCity_DevonCorp_2F_EventScript_ReceiveFossilMonPC
 	goto Common_EventScript_NoMoreRoomForPokemon

@@ -255,8 +255,11 @@ def main() -> None:
                 f"postgame harbor does not unlock {item}")
 
     wild_code = (ROOT / "src/wild_encounter.c").read_text()
-    require("IsLegendarySignOrdinaryWildSpecies(species)" in wild_code,
-            "ordinary-wild legendary roots do not receive competitive sets")
+    create_wild = wild_code.split("void CreateWildMon", 1)[1].split("#ifdef BUGFIX", 1)[0]
+    require("IsEmeraldChampionsOrdinaryWildSpecies(species)" in create_wild,
+            "ordinary table encounters do not receive competitive sets")
+    require("IsLegendarySignOrdinaryWildSpecies(species)" not in create_wild,
+            "finite legendary encounters incorrectly enter ordinary wild-set randomization")
     require("GetCurrentLevelCap()" in wild_code,
             "ordinary-wild legendary roots are not normalized to the live cap")
 

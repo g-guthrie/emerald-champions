@@ -326,6 +326,47 @@ def verify_manaphy_clue() -> None:
         require(phrase in block.group("body"), f"Mossdeep's Manaphy clue is missing {phrase!r}")
 
 
+def verify_legendary_sign_completion_guidance() -> None:
+    definitions = (ROOT / "src/data/pokemon/legendary_signs.h").read_text()
+    source_contract = (
+        "WILD_SIGN(",
+        "VISIBLE_SIGN(",
+        "ORDINARY_WILD_SIGN(",
+        "LEGENDARY_SOURCE_BREEDING",
+        "LEGENDARY_SOURCE_GAME_CORNER",
+        "LEGENDARY_SOURCE_CIRCUIT",
+        "LEGENDARY_SOURCE_MASTERY",
+    )
+    for token in source_contract:
+        require(token in definitions, f"Legendary Sign source contract is missing {token}")
+
+    devon = (ROOT / "data/maps/RustboroCity_DevonCorp_2F/scripts.inc").read_text()
+    block = re.search(
+        r"RustboroCity_DevonCorp_2F_Text_AllLegendarySignsRecorded:\n"
+        r"(?P<body>.*?)(?=\n[A-Za-z_][A-Za-z0-9_]*:)",
+        devon,
+        re.DOTALL,
+    )
+    require(block is not None, "Devon's exhausted conditional-Sign guidance is missing")
+    guidance = block.group("body")
+    require("Every wild Legendary Sign is awake" not in guidance,
+            "Devon still claims every wild Sign is awake after checking only conditional-wild Signs")
+    for phrase in (
+        "conditional wild SIGN",
+        "visible shrines",
+        "rare wild finds",
+        "breeding",
+        "GAME",
+        "CORNER",
+        "CIRCUIT rewards",
+        "mastery",
+        "MT.",
+        "PYRE's three",
+        "ARCEUS",
+    ):
+        require(phrase in guidance, f"Devon's Sign-completion guidance omits {phrase!r}")
+
+
 def verify_stat_point_explanation_replaced_iv_rater() -> None:
     lounge = (ROOT / "data/maps/BattleFrontier_Lounge1/scripts.inc").read_text()
     for phrase in ("flawless potential", "STAT POINTS", "CENTER tutor"):
@@ -408,6 +449,7 @@ def main() -> None:
     verify_elite_four_retirement_path()
     verify_badge_leveler_and_field_move_contracts()
     verify_manaphy_clue()
+    verify_legendary_sign_completion_guidance()
     verify_stat_point_explanation_replaced_iv_rater()
     verify_repurposed_reward_services()
     checked = verify_widths()

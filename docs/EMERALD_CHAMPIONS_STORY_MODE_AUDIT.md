@@ -1,26 +1,37 @@
 # Emerald Champions Story-Mode Audit
 
-This is the release audit ledger for the Hoenn campaign. It records the
+This is the source-audit ledger for the Hoenn campaign. It records the
 deterministic checks used to follow the story from New Game through the
 Pokémon League and postgame, including optional trainers, NPCs, signs, map
 transitions, one-time rewards, legendary encounters, and the Battle Frontier.
+It is a description of checked source contracts, not a fresh-save playthrough
+or a release-ready declaration.
 
 ## Audited surface
 
 - 540 Hoenn maps
 - 4,086 NPC, trigger, and sign events
 - 1,402 map warps
-- 17,957 script control-flow, dialogue, and movement references
-- 10,844 story-dialogue visual lines and 47,628 literal Hoenn dialogue lines
+- 17,938 script control-flow, dialogue, and movement references across 104,701
+  assembled script lines
+- 391 value-returning `specialvar` calls checked against non-void C functions
+- 10,846 story-dialogue visual lines and 47,623 literal Hoenn dialogue lines
 - 513 physical trainer encounters containing 561 reachable battle branches
 - Every badge, HM license, Mega Ring, League, fossil, legendary-sign, and
   critical story-item progression contract
 
-The automated release gate is `scripts/verify_emerald_champions_release.py`.
-GitHub CI first builds the optimized `pokeemerald-release.gba`; the verifier
-then rejects missing or stale Make dependencies before checking source graphs,
-authored battles, generated data, memory layout, bootability, and focused
-runtime tests. A release is not accepted when one of those stages fails.
+The automated source-and-artifact gate is
+`scripts/verify_emerald_champions_release.py`. It runs 25 named source gates,
+checks materialized trainer data and state IDs, rejects stale build artifacts,
+and validates ROM identity and memory layout. It does not run the curated
+runtime suite itself. GitHub CI separately builds `pokeemerald-release.gba`,
+runs that verifier, performs a first-VBlank smoke, and invokes
+`scripts/run_emerald_champions_runtime_gates.py`.
+
+The current runtime manifest names 19 filters with a summed minimum of 256
+selected tests. The frozen integration tree completed 256/256 in one
+invocation, with zero known failures, TODOs, ordinary failures, or assumption
+failures. That result proves the named mechanics, not campaign playthrough.
 
 ## Progression defects corrected
 
@@ -33,12 +44,16 @@ runtime tests. A release is not accepted when one of those stages fails.
 - Letter, Devon Parts, S.S. Ticket, Dowsing Machine, Powder Jar, Go-Goggles,
   Fly, Devon Scope, and Magma Emblem delivery is retry-safe when the Bag is
   full, using the PC where the native item contract permits it.
-- Old saves receive a one-time migration that clears repurposed rematch flags
-  and invalid difficulty data without overwriting a valid player choice.
-- That migration also re-enables eight replacement rewards hidden by old
-  collection bits and moves legacy Linking Cord stacks from the Items pocket
-  into one reusable Key Item without risking loss when the Key Item pocket is
-  full.
+- Save migration is versioned through `VAR_EMERALD_CHAMPIONS_SAVE_VERSION`.
+  Version-1 and native unversioned e7 saves preserve current state; raw 81e
+  saves without the colliding Zygarde marker migrate their stable Sign prefix,
+  lifetime Circuit wins, and difficulty while clearing colliding reward and
+  trainer bits and rebuilding physical Sign flags. The byte-identical
+  81e-Zygarde/e7-upgrade overlap and other ambiguous layouts fail safe to a
+  playable Hard state instead of guessing. `SAVE_COMPATIBILITY.md` records the
+  bounded contract.
+- Legacy Linking Cord stacks move from the Items pocket into one reusable Key
+  Item without risking loss when the Key Item pocket is full.
 - Field HMs require the matching badge and the actual campaign HM license;
   early move-tutor access no longer bypasses story progression.
 - The Pokémon League entrance explicitly checks all eight badge flags.
@@ -74,7 +89,7 @@ runtime tests. A release is not accepted when one of those stages fails.
 - Conditional wild Legendary Signs awaken in their own habitat when the same
   badge, story, and partner requirements are met. Devon remains an optional
   remote oracle rather than mandatory backtracking.
-- Arceus mastery requires all 80 other finite Sign definitions, including
+- Arceus mastery requires all 81 other finite Sign definitions, including
   ordinary wilds, Game Corner prizes, Phione breeding, Circuit rewards, and
   the Eternatus mastery milestone.
 
@@ -131,9 +146,10 @@ runtime tests. A release is not accepted when one of those stages fails.
 - Pokémon Storage held-item messages reserve an EOS byte and select a native
   fitting font for every legal item name.
 - Pledge coordination and Decorate targeting have explicit doubles-AI rules.
-  The upstream Imposter report remains a documented test-runner limitation:
-  its harness cannot reliably model copied move slots after Transform, so no
-  speculative cartridge-engine patch is applied.
+  The curated manifest also selects copied-move targeting, Imposter AI, Sleep
+  Clause re-entry, and Billy's Imposter lead with no accepted TODO or
+  known-failing debt. These are focused regressions, not exhaustive proof of
+  every Transform state.
 - Commander preserves swallowed Tatsugiri visibility while sleep/Yawn state
   progresses correctly. Forecast, Flower Gift, Skill Swap reconciliation, and
   simultaneous modern manual-switch order have focused fixes.
@@ -141,9 +157,10 @@ runtime tests. A release is not accepted when one of those stages fails.
   animation corruption.
 
 Known upstream areas deliberately not rewritten without a proven target are
-fainted-replacement ordering, full cross-target move-end interleaving, the
-unconfirmed mid-turn AI-cache report, missing authored Gen 8/9 second frames,
-Terapagos's two-pixel raster defect, and the broad doubles-animation backlog.
+fainted-replacement ordering, full cross-target move-end interleaving, broader
+mid-turn AI-cache behavior beyond the two named switch-in reset regressions,
+missing authored Gen 8/9 second frames, Terapagos's two-pixel raster defect,
+and the broad doubles-animation backlog.
 
 ## Battle-master guarantees
 
@@ -164,8 +181,12 @@ and Wallace close the League before postgame begins.
 
 ## Evidence boundary
 
-This audit proves source consistency, reachable script wiring, authored battle
-materialization, ROM construction, bootability, and the covered runtime
-contracts. It does not claim that a human has completed a fresh end-to-end
-playthrough of this exact build. Difficulty ratings remain design targets
-until playtest observations replace `UNPLAYED` in the battle master.
+This audit supports source consistency, reachable script wiring, authored
+battle materialization, and the existence of focused runtime contracts. ROM
+construction, first-VBlank smoke, and the 19-filter zero-debt runtime manifest
+must be demonstrated by fresh logs for the exact candidate. It does not claim
+that a human has completed a fresh end-to-end playthrough, or that menus,
+dialogue, maps, sprites, collision, animations, saving, and controls have been
+visually exercised on every intended emulator, device, or hardware-like
+renderer. Difficulty ratings remain design targets until playtest observations
+replace `UNPLAYED` in the battle master.

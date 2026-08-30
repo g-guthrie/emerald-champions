@@ -1290,8 +1290,8 @@
 #define FLAG_EC_STARTER_ARCHIVE_FUECOCO                              0x4D4
 #define FLAG_EC_STARTER_ARCHIVE_QUAXLY                               0x4D5
 #define FLAG_EC_STARTER_ARCHIVE_FROAKIE                              0x4D6
-#define FLAG_UNUSED_0x4D7                                           0x4D7 // Unused Flag
-#define FLAG_UNUSED_0x4D8                                           0x4D8 // Unused Flag
+#define FLAG_EC_CAUGHT_THUNDURUS                                    0x4D7
+#define FLAG_EC_CAUGHT_TORNADUS                                     0x4D8
 #define FLAG_UNUSED_0x4D9                                           0x4D9 // Unused Flag
 #define FLAG_UNUSED_0x4DA                                           0x4DA // Unused Flag
 #define FLAG_UNUSED_0x4DB                                           0x4DB // Unused Flag

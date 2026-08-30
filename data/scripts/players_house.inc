@@ -490,8 +490,7 @@ PlayersHouse_1F_EventScript_ReceivedSSTicket::
 
 PlayersHouse_1F_EventScript_SSTicketNoRoom::
 	msgbox PlayersHouse_1F_Text_SSTicketNoRoom, MSGBOX_DEFAULT
-	releaseall
-	end
+	goto PlayersHouse_1F_EventScript_ReceivedSSTicket
 
 @ Never called.
 PlayersHouse_1F_EventScript_AirLatiBroadcast::

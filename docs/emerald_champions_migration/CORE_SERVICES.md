@@ -4,7 +4,7 @@ Emerald Champions removes preparation grind while preserving campaign
 progression around Mega Stones, evolution items, berries, and legendary
 acquisition.
 
-## Complete systems
+## Source-implemented systems
 
 - Native Difficulty option: Hard uses authored levels, Medium applies -2, and
   Easy applies -4 to every enemy trainer Pokemon. Hard is the default.
@@ -14,7 +14,7 @@ acquisition.
   capacity to two, and Route 133 raises it to three.
 - The Leveler raises the party to the current strict cap. Level-up move prompts
   are disabled, while normal evolution handling remains active.
-- Rare Candy costs 1,000 in all twenty Hoenn medicine lists and raises up to
+- Rare Candy costs 1,000 in all twenty-one Hoenn medicine lists and raises up to
   ten levels without crossing the cap.
 - All sixteen Hoenn Pokemon Centers have the shared move tutor and held-item
   vendor. The tutor exposes level, pre-evolution, egg, TM, and tutor moves.
@@ -35,9 +35,13 @@ acquisition.
 
 - Core-service static verifier: PASS
 - Pokemon Centers: 16 / 16
-- Medicine marts: 20 / 20
+- Medicine marts: 21 / 21
 - Free ordinary held items: 111
 - Reward scripts audited: 47 plus all map TM pickups
 - Poke Vial quest verifier: PASS
 - Solo evolution verifier: PASS
-- Emerald Champions mGBA suite: 14 passed, 0 failed
+- Current runtime contract: `*Champions` selected 90/90 tests with zero
+  accepted known-failing or TODO results in the frozen one-shot run
+
+These source checks do not replace rendered menu/vendor checks, save/reload
+scenarios, or human playtesting on intended emulator/device targets.

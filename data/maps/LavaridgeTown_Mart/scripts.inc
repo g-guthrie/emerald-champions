@@ -25,14 +25,14 @@ LavaridgeTown_Mart_Pokemart:
 	pokemartlistend
 
 LavaridgeTown_Mart_EventScript_ExpertM::
-	msgbox LavaridgeTown_Mart_Text_XSpeedFirstStrike, MSGBOX_NPC
+	msgbox LavaridgeTown_Mart_Text_PrepareBeforeTrainerBattles, MSGBOX_NPC
 	end
 
 LavaridgeTown_Mart_EventScript_OldWoman::
 	msgbox LavaridgeTown_Mart_Text_LocalSpecialtyOnMtChimney, MSGBOX_NPC
 	end
 
-LavaridgeTown_Mart_Text_XSpeedFirstStrike:
+LavaridgeTown_Mart_Text_PrepareBeforeTrainerBattles:
 	.string "TRAINER battles don't allow items\n"
 	.string "from the BAG.\p"
 	.string "Prepare your moves and held items\n"
@@ -40,5 +40,5 @@ LavaridgeTown_Mart_Text_XSpeedFirstStrike:
 
 LavaridgeTown_Mart_Text_LocalSpecialtyOnMtChimney:
 	.string "On MT. CHIMNEY's peak, there's a local\n"
-	.string "specialty that you can buy only there.\p"
+	.string "specialty sold beside the crater.\p"
 	.string "Give it to a POKéMON--it will be elated.$"

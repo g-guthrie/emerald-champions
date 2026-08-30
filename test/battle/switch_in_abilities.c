@@ -78,6 +78,27 @@ DOUBLE_BATTLE_TEST("Simultaneous manual switches resolve in Speed order")
     }
 }
 
+DOUBLE_BATTLE_TEST("Simultaneous manual switches reverse under Trick Room")
+{
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_TRICK_ROOM) == EFFECT_TRICK_ROOM);
+        PLAYER(SPECIES_WOBBUFFET) { Speed(10); }
+        PLAYER(SPECIES_WYNAUT) { Speed(100); }
+        PLAYER(SPECIES_CATERPIE) { Speed(20); }
+        PLAYER(SPECIES_WEEDLE) { Speed(30); }
+        OPPONENT(SPECIES_MAGIKARP) { Speed(1); }
+        OPPONENT(SPECIES_FEEBAS) { Speed(1); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_TRICK_ROOM); }
+        TURN { SWITCH(playerLeft, 2); SWITCH(playerRight, 3); }
+    } SCENE {
+        SWITCH_OUT_MESSAGE("Wobbuffet");
+        SEND_IN_MESSAGE("Caterpie");
+        SWITCH_OUT_MESSAGE("Wynaut");
+        SEND_IN_MESSAGE("Weedle");
+    }
+}
+
 DOUBLE_BATTLE_TEST("Simultaneous manual switches ignore Custap Berry")
 {
     GIVEN {

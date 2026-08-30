@@ -6,7 +6,7 @@ Authority: executable source, build rules, test runner, and GitHub run logs. Des
 
 ## Verdict
 
-The verification stack is useful and mostly well-factored. The static release suite is not the source of the long development loop: all 25 source gates complete locally in about 12 seconds. The expensive step was compiling the complete test ELF, which contained the whole engine and all upstream tests even when only a narrow filter would run. Required PR/release CI now derives a 41-file source allowlist from its filter manifest; a scheduled/manual workflow preserves full-corpus syntax/link coverage.
+The verification stack is useful and mostly well-factored. It separates 25 source gates, fresh artifact checks, a first-VBlank smoke, and a curated runtime manifest. The expensive step in the audited runs was compiling a test ELF that contained the whole engine and all upstream tests even when only a narrow filter would run. Candidate PR/release CI now derives a source allowlist from the current filter manifest; a scheduled/manual workflow preserves full-corpus syntax/link coverage.
 
 The stack proves structural consistency, selected runtime mechanics, ROM layout, and a minimal entrypoint boot. It does **not** prove that 513 encounters are fun, correctly rated, or human-playable from a fresh save. A green release run must never be described as a full campaign playthrough.
 
@@ -28,13 +28,13 @@ The first clean Linux compile also exposed a duplicate hidden-item flag name tha
 5. **Scenario test:** a scripted save/state traverses a real campaign sequence.
 6. **Human playthrough:** a person completes the campaign and evaluates difficulty, pacing, presentation, and fun.
 
-The current required CI reaches levels 1-4. It does not reach levels 5-6 for the complete campaign.
+The current candidate workflow reaches levels 1-4 when it completes. It does not reach levels 5-6 for the complete campaign.
 
 ## GitHub workflow inventory
 
 ### `.github/workflows/build.yml`
 
-Required release workflow. It builds `pokeemerald-release.gba`, runs the source verifier, performs a first-VBlank entrypoint smoke, builds the test ELF once, runs the curated runtime manifest, and reports ROM identity/memory use.
+Candidate release workflow. It builds `pokeemerald-release.gba`, runs the source verifier, performs a first-VBlank entrypoint smoke, builds the test ELF once, runs the curated runtime manifest, and reports ROM identity/memory use. As noted below, it remains advisory until a branch rule requires the stable `build` job.
 
 Latest observed `main` run before this audit (run `33275660117`):
 
@@ -73,35 +73,35 @@ This inherited contribution-governance workflow was not a release test. Its main
 
 ### Remote enforcement
 
-GitHub reported `main` as unprotected and returned no repository rulesets. Therefore CI is currently advisory: a green `build` is not technically required before a direct push or merge. Enable a branch ruleset after the final workflow lands if release enforcement is desired.
+At audit time, GitHub reported `main` as unprotected and returned no repository rulesets, so CI was advisory: a green `build` was not technically required before a direct push or merge. Re-check current protection/ruleset state before relying on enforcement, and enable a branch ruleset if the stable `build` job should be mandatory.
 
 ## Static release-gate inventory
 
 | Gate | What it actually proves | Boundary |
 |---|---|---|
-| Core services | Difficulty, Leveler/Vial, tutor, Ability menu, vendors, Rare Candy, field licenses, and 16 Center layouts retain exact hooks | Structural; does not render or play the menus |
+| Core services | Difficulty, Leveler/Vial, tutor, Ability menu, 111 free battle items, vendors, Rare Candy, field licenses, and 16 Center layouts retain exact hooks | Structural; does not render or play the menus |
 | Finite rewards | 47 authored script rewards and map TM replacements remain finite progression rewards | Enumerated producers, not a general economy simulation |
 | Reward economy | Inert vitamins/X items are unobtainable, finite rewards are coherent, world Mega Stones are unique | Policy-specific source scan |
-| Wild distribution | Live wild JSON conforms to chosen coverage and exclusion rules | Contains design policy; must not freeze rejected early species |
-| Route signs | 32 physical signs call the live method-grouped encounter formatter and percentages remain absent | Wiring/text, not visual rendering |
-| Competitive presets | Preset schema, move legality references, wild coverage, and generated table alignment | Legality/coverage, not set quality |
+| Wild distribution | 146 headers on 138 Hoenn wild maps expose 592 unique species/forms and conform to chosen coverage/exclusion rules | Contains design policy; must not freeze rejected early species |
+| Route signs | 32 wayfinding signs call the live method-grouped encounter formatter and percentages remain absent | Wiring/text, not visual rendering |
+| Competitive presets | 1,534 presets, 95 Mega orientations across 92 stones, all 616 parsed wild-table species/forms, move legality references, and generated table alignment | Legality/coverage, not set quality |
 | Species stat rebalances | Exact manifest of 102 selective Inclement stat ports plus three paired Mega HP changes; unselected species cannot drift | Exact data parity, not balance quality |
 | Upstream critical fixes | Required source tokens for buried trainers, Keldeo forms, recording disablement, and PC item text remain | Token contracts can be fooled by dead/commented code; runtime tests carry stronger weight |
 | Campaign roster | Champions and Kanto family acquisition graph plus Mega/evolution-item unlock coverage | Reachability graph, not catch-rate or player-time proof |
 | Game Corner starter archive | All alternate starters and special prizes use unique, transactional claim flags; pricing, dialogue, and five runtime tests remain present | Source transaction contract, not economy/fun proof |
 | Trainer Ability legality | Host C preprocessor resolves configured species/forms and validates all 2,147 authored Abilities | Strong source legality; does not test strategy quality |
 | Trainer runtime coherence | Attack-nature contradictions, unsupported charge moves, and exactly five reviewed dual-speed teams | Narrow data-quality check, not a complete per-team audit |
-| Story/dialogue | Critical plot tokens/assets, League retirement paths, and 47,628 literal Hoenn lines fit the width budget | Static language/width, not tone, sequencing feel, or rendered kerning |
+| Story/dialogue | Critical plot tokens/assets, League retirement paths, 10,846 selected story lines, and 47,623 literal Hoenn lines fit the width budget | Static language/width, not tone, sequencing feel, or rendered kerning |
 | Rematch-free Match Call | Disabled rematch entry points remain dormant and reachable dialogue makes no rematch promise | Source/control-flow contract |
-| Progression graph | 540 maps, 4,086 events, 1,402 warps, 17,957 references, and selected critical gates resolve | Broad structural graph, not every possible runtime state |
-| Legendary availability | 101 legendary families have roots; 82 dependency chains terminate; harbor/Circuit roots exist | Acquisition graph, not encounter UX |
-| Legendary Signs/Circuit | 82 sign definitions and generated Circuit manifest/hash agree | Data generation, not battle quality or endless-randomness proof |
+| Progression graph | 540 maps, 4,086 events, 1,402 warps, 17,938 references across 104,701 assembled lines, 391 value-returning special calls, and selected critical gates resolve | Broad structural graph, not every possible runtime state |
+| Legendary availability | 101 legendary families have roots; 82 dependency chains terminate; 25 visible quests and harbor/Circuit roots exist | Acquisition graph, not encounter UX |
+| Legendary Signs/Circuit | 82 Sign definitions, 32 physical one-offs, and a generated Circuit with 311 variants/444 templates agree with source | Data generation, not battle quality or endless-randomness proof |
 | Regional starters | Nine trios, 81 stage presets, and rival counter-family mappings remain | Selection/mapping contract |
 | Restored world | 22 maps, objects, pickups, encounter tables, signs, and sanctuaries are connected | Structural, not visual or collision playtesting |
 | Solo evolutions | 30 trade evolutions and required items have solo paths | Availability, not tutorial discoverability |
 | Fossil revival | All 11 complete fossils are recognized, repeatable, and safely delivered | Script contract |
 | Poké Vial quest | Native Chansey-chain scripts and state tokens grant the second charge once | Script/state contract |
-| Campaign battle master | 513 dossiers/561 branches satisfy schema, legality ledgers, chronology rules, and coverage declarations | Targets and difficulty labels are authored intent, not observations |
+| Campaign battle master | 513 dossiers/561 branches/2,147 authored Pokémon satisfy schema, legality ledgers, 87/460/14 format counts, 7.57 mean target difficulty, 754-species breadth, and 92-Mega/57-legendary showcase coverage | Targets and difficulty labels are authored intent, not observations |
 | Campaign evidence freshness | Evidence report exactly matches its declared source snapshot | Synchronization only; source may still be badly designed |
 | Battle script formats | All 561 physical branches use the authored single/double/multi macro | Format wiring only |
 
@@ -117,57 +117,57 @@ The replacement gate now checks opening-act generation bias, early doubles-role 
 
 ## Runtime test inventory
 
-The inherited test corpus contains:
+The inherited full corpus still contains TODO declarations, known-failing
+markers, and assumption-gated cases outside the curated release surface. The
+scheduled/manual workflow compiles that corpus but does not represent it as a
+passing runtime suite.
 
-- 968 C test files.
-- 953 function/overworld tests.
-- 4,248 implemented battle tests.
-- 585 declared `TO_DO_BATTLE_TEST` cases.
-- 9 active `KNOWN_FAILING` markers outside the newly repaired curated paths.
-- 390 assumption blocks and 4,982 individual `ASSUME` calls.
-
-Historically, compiling the required test ELF compiled this entire corpus. Required CI now selects only the 41 source files containing its named filters (including the three runner-support files), then proves at runtime that every filter still reaches its minimum count. The complete corpus remains covered by the scheduled/manual compile workflow rather than being represented as a green runtime suite.
-
-The curated manifest now requires at least 220 runtime tests across 14 filters:
+Candidate CI derives the selected test source files from 19 exact runtime filters plus the
+runner support sources. It then proves that every filter reaches its minimum
+count. The current manifest requires at least 256 selected tests:
 
 | Filter family | Minimum | Accepted debt |
 |---|---:|---|
-| Emerald Champions services/presets/mechanics | 68 | none |
+| Emerald Champions services/presets/mechanics | 90 | none |
 | Item-description layout | 1 | none |
 | Egg inheritance safety | 1 | none |
 | Upstream critical fixes | 4 | none |
 | Commander | 42 | none |
 | Forecast | 18 | none |
 | Flower Gift | 12 | none |
-| Simultaneous manual switches | 3 | none |
-| Sleep Clause + Imposter interaction | 1 declaration / 2 Ability trials | none after current repair |
-| Three explicit Imposter targeting scenarios | 3 | none |
+| Mega cleanup after battle | 2 | none |
+| Simultaneous manual switches | 4 | none |
+| Post-KO switch-in Ability order | 5 | none |
+| Earthquake spread-failure behavior | 2 | none |
+| Two named smart-switching cache/reset cases | 2 | none |
+| Four named Imposter, Sleep Clause, and Billy targeting cases | 4 | none |
 | Save-layout compatibility | 4 | none |
-| Doubles AI | 63 | exactly three named TODOs at most: Wide Guard, Instruct, Quick Guard |
+| Doubles AI | 65 | none |
+| **Total minimum** | **256** | **0 known-failing, 0 TODO** |
 
-Debt is identity-checked, not just counted. A new known failure cannot replace an old one while preserving a misleading aggregate. Losing selected tests also fails. The shared test ELF is SHA-256 checked before and after all filters so post-link copies cannot mutate the base artifact.
+Every `RuntimeGate` keeps its default maximum of zero known failures and zero
+TODO results; no gate supplies an allowlisted debt identity. Failures,
+assumption failures, unexpectedly passing known failures, and lost test counts
+also fail the run. The shared test ELF is digest-checked before and after all
+filters so post-link copies cannot mutate the base artifact.
 
-The remaining three AI TODOs are honest missing tests/behavior, not passing coverage. They remain visible until implemented.
+## Runtime-result boundary
 
-## Native runtime closure for the audited candidate
+An earlier audit executed a smaller 14-filter manifest that tolerated three AI
+TODOs. That result is historical and no longer describes the current release
+contract. A fresh 19-filter run is required for the exact candidate; this
+document does not substitute the superseded pass totals or a temporary local
+artifact path for that evidence.
 
-The retained Linux-built ARM test ELF was executed with the universal native macOS mGBA runner after byte-synchronizing the final runtime files. All 14 manifest filters passed:
+After the save migration and its independent review froze, the exact integrated
+tree rebuilt the curated ARM test ELF and completed all 19 filters in one
+invocation: 256/256 passed, with zero failure, assumption-failure,
+known-failing, or TODO results. Filter execution took 84.58 seconds (85.10
+seconds orchestration wall time). This proves the named runtime contracts, not
+a production-ROM build or campaign playthrough.
 
-| Family | Result |
-|---|---:|
-| Champions | 68 pass |
-| Item description / egg / upstream fixes | 6 pass |
-| Commander | 42 pass |
-| Forecast / Flower Gift | 30 pass |
-| Manual switch order | 3 pass |
-| Raw, singles-AI, Sleep-Clause, and Billy Imposter scenarios | 4 pass |
-| Save compatibility | 4 pass |
-| Doubles AI | 60 pass, 3 exact TODO |
-| **Total** | **217 pass, 3 TODO, 0 fail, 0 known-failing** |
-
-Native filter execution took 85.29 seconds; orchestration wall time was 85.82 seconds. The independently captured log is `/Users/gguthrie/Projects/ec-runtime-linux.CZpFep/final-host-runtime.log`.
-
-Runtime execution caught issues that compilation and the previous green CI could not:
+The historical runtime work caught issues that compilation and the previous
+green CI could not:
 
 - Helping Hand still lost to a weak Mud-Slap despite a much stronger ally; scoring now recognizes a materially stronger partner.
 - Left-side Beat Up/Justified coordination targeted a foe and allowed Protect to block the combo; target selection now resolves the intended ally activation in either processing order.
@@ -175,7 +175,7 @@ Runtime execution caught issues that compilation and the previous green CI could
 - The Commander test accidentally gave Inclement Pidgeot its new No Guard default, which legitimately lets Scratch connect through Fly; assigning legal Big Pecks makes the regression isolate Commander cleanup.
 - The old Sleep Clause/Imposter test used an incomplete recorded action stream. The replacement retains opponent-side Imposter re-entry, supplies explicit copied move slots/actions, checks both Insomnia and Vital Spirit, and proves sleep plus the clause clear.
 
-None of those paths is accepted as known failing now.
+The current manifest accepts none of those paths as known failing or TODO.
 
 ## Build-once implementation
 
@@ -183,11 +183,15 @@ None of those paths is accepted as known failing now.
 
 CI goes further: `scripts/run_emerald_champions_runtime_gates.py` maps its filters back to declaring C files, builds one curated `pokeemerald-test.elf`, copies it for each filter, patches only the copy's filter/headless flags, runs mGBA Hydra, validates the named summary, and verifies the base digest did not change. Minimum runtime counts protect against a faulty allowlist silently dropping selected tests. The runner supports split `--build-only` / `--run-only` operation so a Linux-built ARM ELF can be exercised by the native universal macOS mGBA runner when the local cross-toolchain is incomplete.
 
+The test linker also fails unless test IWRAM leaves at least 4 KiB below the
+persistent page for stack headroom. That is an explicit test-ELF safety guard,
+not a measurement of production gameplay stack depth.
+
 ## Platform findings
 
 The claim that macOS lacks `mgba-rom-test-mac` is false for this checkout. `tools/mgba/mgba-rom-test-mac` is a tracked universal Mach-O containing both arm64 and x86_64 slices. The local Hydra, patchelf, scaninc, and related native tools are valid arm64 Mach-O binaries.
 
-The real local blocker is the Homebrew `arm-none-eabi-gcc` installation: it lacks newlib standard headers (`string.h`, downstream `stdint.h`). A direct macOS test build therefore fails before game compilation. Linux CI installs `libnewlib-arm-none-eabi` and is the canonical clean-build environment. A disposable Ubuntu 24.04 Docker snapshot is also used for Linux parity; its object tree is retained at `/Users/gguthrie/Projects/ec-runtime-linux.CZpFep/repo` for incremental verification because Docker Desktop exposes only two CPUs.
+The audited Homebrew `arm-none-eabi-gcc` installation lacked newlib standard headers (`string.h`, downstream `stdint.h`), so a direct macOS test build failed before game compilation. Linux CI installs `libnewlib-arm-none-eabi` and remains the canonical clean-build environment. A disposable Ubuntu 24.04 Docker snapshot was also used for Linux parity; that temporary object tree is audit context, not a durable release artifact or documented dependency.
 
 ## Mutation sensitivity
 
@@ -209,7 +213,7 @@ Workflow syntax passes actionlint 1.7.12. The exact pinned mdBook 0.5.1 archive 
 
 ## Defensive-code appraisal
 
-The engine contains approximately 172 ordinary `assertf` calls and 39 `errorf` calls that intentionally become recovery/no-op paths in release builds, plus 10 `fatal_assertf` and 4 `fatalf` calls that remain fatal. Most are inherited engine diagnostics, not Emerald Champions-specific defensive clutter.
+The engine contains inherited ordinary `assertf`/`errorf` recovery paths and a smaller set of fatal assertions. Exact call counts are a source snapshot rather than a release metric. Most are inherited engine diagnostics, not Emerald Champions-specific defensive clutter.
 
 The former trainer-Ability fallback was not acceptable because it silently changed authored strategy in release. It is now protected three ways: exact configured legality gate, runtime preset coverage, and a fatal engine assertion if invalid authored data somehow ships.
 
@@ -217,7 +221,7 @@ Do not broadly convert or delete inherited assertions. Review a fallback when it
 
 ## Remote divergence warning
 
-At audit time, `origin/main` (`2f6737758`) was not the intended release baseline. Relative to this release branch it deleted the Docs workflow and a large documentation tree, removed trainer-Ability legality from the release verifier, and changed the Ability/data layer. Its green CI therefore proves a weaker and different tree. Do not merge it wholesale over this branch; review or cherry-pick independent changes.
+At audit time, `origin/main` was not the intended release baseline. Relative to this release branch it deleted the Docs workflow and a large documentation tree, removed trainer-Ability legality from the release verifier, and changed the Ability/data layer. Its green CI therefore proved a weaker and different tree. Re-check current remote state before integration; do not rely on this dated comparison or merge a divergent branch wholesale.
 
 ## What still requires play
 

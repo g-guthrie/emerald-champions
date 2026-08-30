@@ -112,8 +112,10 @@ def verify_map_data(map_names: list[str], labels: dict[str, tuple[Path, int]]) -
                         0 <= event["x"] < width and 0 <= event["y"] < height,
                         f"{name}:{section}[{index}] outside {width}x{height} at {event['x']},{event['y']}",
                     )
-                elif script not in NULL_SCRIPT_REFS:
-                    # A handful of native signs live on the one-tile border.
+                else:
+                    # A handful of native signs live on the one-tile border,
+                    # but even inert/null background entries must belong to
+                    # the map rather than surviving as out-of-layout debris.
                     require(
                         0 <= event["x"] <= width and 0 <= event["y"] <= height,
                         f"{name}:{section}[{index}] far outside {width}x{height} at {event['x']},{event['y']}",
@@ -358,6 +360,61 @@ def verify_critical_progression_contracts() -> None:
         and "LittlerootTown_ProfessorBirchsLab_EventScript_ReopenResearchReward" in migration,
         "old state-six saves cannot reopen the replacement Birch reward",
     )
+
+    for path, label, destination_token in (
+        (
+            "data/maps/SlateportCity_Harbor/scripts.inc",
+            "SlateportCity_Harbor_EventScript_FerryAttendant",
+            "SlateportCity_Harbor_EventScript_AskForTicket",
+        ),
+        (
+            "data/maps/LilycoveCity_Harbor/scripts.inc",
+            "LilycoveCity_Harbor_EventScript_FerryAttendant",
+            "LilycoveCity_Harbor_EventScript_GetEonTicketState",
+        ),
+    ):
+        ferry = label_block(path, label)
+        require(
+            ferry.index("FLAG_SYS_GAME_CLEAR")
+            < ferry.index("FLAG_RECEIVED_SS_TICKET")
+            < ferry.index(destination_token),
+            f"{path}: postgame ferry can board without the registered S.S. Ticket entitlement",
+        )
+    ticket_fallback = label_block(
+        "data/scripts/players_house.inc",
+        "PlayersHouse_1F_EventScript_SSTicketNoRoom",
+    )
+    require(
+        "goto PlayersHouse_1F_EventScript_ReceivedSSTicket" in ticket_fallback,
+        "full KEY ITEMS and PC storage trap the forced postgame scene before ferry registration",
+    )
+    frontier_ferry = label_block(
+        "data/maps/BattleFrontier_OutsideWest/scripts.inc",
+        "BattleFrontier_OutsideWest_EventScript_FerryAttendant",
+    )
+    require(
+        "FLAG_RECEIVED_SS_TICKET" in frontier_ferry
+        and "checkitem ITEM_SS_TICKET" not in frontier_ferry
+        and frontier_ferry.index("FLAG_RECEIVED_SS_TICKET")
+        < frontier_ferry.index("BattleFrontier_OutsideWest_EventScript_ChooseFerryDestination"),
+        "Battle Frontier return ferry ignores the registered S.S. Ticket entitlement",
+    )
+    for path in (
+        "data/maps/SlateportCity_Harbor/scripts.inc",
+        "data/maps/LilycoveCity_Harbor/scripts.inc",
+        "data/maps/BattleFrontier_OutsideWest/scripts.inc",
+    ):
+        ferry_text = (ROOT / path).read_text()
+        require(
+            "confirmed your ferry" in ferry_text
+            and "flashed the TICKET" not in ferry_text,
+            f"{path}: ferry narration ignores the full-storage registration fallback",
+        )
+        require(
+            "FlashTicketWhereTo" not in ferry_text
+            and "FlashedTicketWhereTo" not in ferry_text,
+            f"{path}: stale physical-ticket narration symbol remains live",
+        )
 
     sootopolis = (ROOT / "data/maps/SootopolisCity/scripts.inc").read_text()
     require(

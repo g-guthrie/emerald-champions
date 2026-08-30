@@ -1,90 +1,91 @@
-# Emerald Champions release-candidate ledger
+# Emerald Champions evidence ledger
 
-This ledger records measurable source and runtime closure for the standalone
-GBA ROM. `COMPLETE` means the implementation, deterministic verifier, clean
-production build, and relevant mGBA regression path are closed. `MANUAL` means
-the code is release-ready but still needs human campaign playtesting.
+This ledger reports what the current working source and its named gates can
+measure. It deliberately does not call the game perfect, release-ready, or a
+current release candidate.
+
+Evidence labels are narrow:
+
+- `SOURCE CHECKED` means a deterministic source/data verifier covers the stated
+  invariant. It is not build, runtime, visual, balance, or playthrough proof.
+- `RUNTIME CONTRACT` means the case is selected by the current curated manifest;
+  a fresh run for the exact candidate is still required.
+- `BUILD REQUIRED` and `MANUAL` name evidence that source checks cannot supply.
+- `UNSUPPORTED` and `OUT OF SCOPE` are product boundaries, not missing claims.
 
 ## Foundation
 
-| Feature | Status | Evidence |
+| Feature | Evidence | Current measurable truth |
 | --- | --- | --- |
-| Champions battle standard | COMPLETE | 57 Champions-named mechanics tests pass |
-| Species/forms through Gen 9 | COMPLETE | Modern expansion data and assets build in the 32 MiB ROM |
-| Official and custom Megas | COMPLETE | All 92 stones appear in the campaign battle master; Tatsugiri/Glimmora asset tests pass |
-| Mega-only selectable gimmick | COMPLETE | Mega allowed; Z-Move, Ultra Burst, Dynamax, and Tera rejected; approved Primals retained |
-| Strict cap curve | COMPLETE | Every badge milestone and postgame cap passes runtime tests |
-| Instant text and live difficulty | COMPLETE | Hard 0, Medium -2, Easy -4; enemy parties only |
-| Modern save layout | COMPLETE | SaveBlock1/2/3 compatibility tests pass; state IDs are unique |
-| Old Inclement-derived saves | UNSUPPORTED | Deliberate save-family boundary documented in `SAVE_COMPATIBILITY.md` |
+| Champions battle standard | RUNTIME CONTRACT | `*Champions` selected 90/90 tests with zero accepted known-failing or TODO debt in the frozen one-shot run |
+| Species/forms through Gen 9 | BUILD REQUIRED | Source/data/assets are present; a fresh 32 MiB ROM build must prove the candidate fits |
+| Official and custom Megas | SOURCE CHECKED | 95 preset orientations cover all 92 campaign Mega Stones; all 92 appear in trainer showcases |
+| Mega-only selectable gimmick | SOURCE CHECKED | Mega allowed; Z-Move, Ultra Burst, Dynamax, and Tera rejected; approved Primals retained |
+| Strict cap curve | SOURCE CHECKED | Badge milestones and postgame cap contracts resolve; observed difficulty remains unplayed |
+| Instant text and live difficulty | SOURCE CHECKED | Hard 0, Medium -2, Easy -4; enemy parties and Circuit use the same setting |
+| Modern save layout | RUNTIME CONTRACT | Four save-layout tests are mandatory; state IDs are statically checked for uniqueness |
+| Historical save families | SOURCE CHECKED | Raw 81e state without the colliding Zygarde marker has a bounded migration; native unversioned e7 state is stamped without rewrite; the indistinguishable 81e-Zygarde/e7-upgrade overlap and arbitrary layouts fail safe as documented in `SAVE_COMPATIBILITY.md` |
 
 ## Preparation and economy
 
-| Feature | Status | Evidence |
+| Feature | Evidence | Current measurable truth |
 | --- | --- | --- |
-| Poke Vial and capacity quest | COMPLETE | Native four-map Chansey chase and Route 133 third charge verified |
-| Reusable Leveler and ten-level Candy | COMPLETE | Strict-cap behavior, no move interruption, all medicine marts verified |
-| Complete legal move tutor | COMPLETE | Level, pre-evolution, egg, TM, and tutor sources enabled from the start |
-| Competitive preset selector | COMPLETE | 1,461 executable presets; exact nature, Ability, item, moves, and 66 Stat Points |
-| Battle-ready ordinary wild catches | COMPLETE | Every one of 613 current wild species and every valid ordinary form resolves to a preset |
-| Native Ability switching | COMPLETE | Party-menu action enumerates unique legal abilities |
-| Free held-item vendor | COMPLETE | Six categories, 111 ordinary items, all 16 Centers |
-| Berry/progression economy | COMPLETE | Berries and transformation items excluded; Mega/evolution archives unlock at badge eight |
-| Mart and reward progression | COMPLETE | Native Mart stock retained, 1,000 Candy added, 47 rewards plus all TM pickups audited |
-| Single-player evolutions | COMPLETE | 30 trade evolutions and all required evolution items verified |
+| Poke Vial and capacity quest | SOURCE CHECKED | Native four-map Chansey chase and Route 133 third charge are wired |
+| Reusable Leveler and ten-level Candy | SOURCE CHECKED | Strict-cap behavior, no move interruption, and all 21 medicine lists are checked |
+| Complete legal move tutor | SOURCE CHECKED | Level, pre-evolution, egg, TM, and tutor sources are enabled from the start |
+| Competitive preset selector | SOURCE CHECKED | 1,534 executable presets; 95 Mega orientations across 92 stones; exact nature, Ability, item, moves, and 66 Stat Points |
+| Battle-ready ordinary wild catches | SOURCE CHECKED | All 616 species/forms parsed from encounter data resolve a non-Mega preset |
+| Native Ability switching | SOURCE CHECKED | Party-menu action enumerates unique legal abilities |
+| Free held-item vendor | SOURCE CHECKED | Six categories, 111 ordinary items, all 16 Centers |
+| Berry/progression economy | SOURCE CHECKED | Berries and transformation items excluded; Mega/evolution archives unlock at badge eight |
+| Mart and reward progression | SOURCE CHECKED | Rare Candy appears in 21 medicine lists; 47 scripted rewards plus all map TM pickups are audited |
+| Single-player evolutions | SOURCE CHECKED | 30 trade evolutions and required evolution items have solo paths |
 
 ## Campaign, story, and encounters
 
-| Feature | Status | Evidence |
+| Feature | Evidence | Current measurable truth |
 | --- | --- | --- |
-| Emerald Champions branding | COMPLETE | ROM title `EM CHAMPIONS`, game code `BPEE`; obsolete player-facing branding rejected |
-| Restored side areas | COMPLETE | 22 maps, 129 objects, 40 pickups, 21 wild tables, directed reachability pass |
-| Wild distribution and route signs | COMPLETE | 602 unique wild species; 89 early species; 32 method-grouped signs |
-| Story/reward cohesion | COMPLETE | Magma/Aqua-Rayquaza-Wallace-Frontier arc preserved; restored areas and Signs discoverable |
-| Legendary acquisition | COMPLETE | 101 legendary-class families rooted; all 81 dependency chains terminate |
-| Visible legendary presentation | COMPLETE | 23 visible quests, four static sanctuaries, giant Regigigas, native follower assets |
-| Regional starter selection | COMPLETE | Nine trios, 81 starter-stage presets, rival counter family verified |
-| Rematch-free campaign | COMPLETE | Match Call/Gym escalation disabled; replayable League keeps final teams |
+| Emerald Champions branding | SOURCE CHECKED | Build identity is title `EM CHAMPIONS`, game code `BPEE`; a fresh ROM must still validate its header |
+| Story/progression graph | SOURCE CHECKED | 540 maps, 4,086 events, 1,402 warps, 17,938 references across 104,701 assembled lines, and 391 value-returning special calls resolve |
+| Restored side areas | SOURCE CHECKED | 22 maps, 129 objects, 40 pickups, 21 wild tables, and directed reachability contracts |
+| Wild distribution and route signs | SOURCE CHECKED | 146 headers on 138 Hoenn maps expose 592 unique species/forms; 32 method-grouped route signs |
+| Story and dialogue width | SOURCE CHECKED | 10,846 selected story lines and 47,623 literal Hoenn lines fit the static 216 px budget |
+| Legendary acquisition | SOURCE CHECKED | 101 legendary-class families rooted; all 82 dependency chains terminate |
+| Visible legendary presentation | SOURCE CHECKED | 25 visible Sign quests and 32 total physical one-off Pokémon objects are wired |
+| Regional starter selection | SOURCE CHECKED | Nine trios, 81 starter-stage presets, and rival counter-family mapping |
+| Rematch-free campaign | SOURCE CHECKED | Match Call/Gym escalation disabled; replayable League keeps final teams |
 
 ## Trainers, battles, dialogue, and AI
 
-| Feature | Status | Evidence |
+| Feature | Evidence | Current measurable truth |
 | --- | --- | --- |
-| Canonical encounter index | COMPLETE | 513 physical encounters and 561 reachable branches |
-| Materialized trainer parties | COMPLETE | Every branch source-locks exactly to `trainers.party` |
-| Battle format | COMPLETE | 84 singles, 475 doubles, 2 multi; 85.03 percent doubles/multi |
-| Fatigue curve | COMPLETE | Mean 7.56; 31.9 percent ordinary 6.x encounters; no ordinary 9.x compression |
-| Boss and showcase coverage | COMPLETE | All marquee bosses at 10.0; all 92 Megas and 58 targeted legendary showcases used |
-| Team diversity | COMPLETE | 751 unique species, no duplicate team fingerprints, rolling-repeat gate passes |
-| Trainer Bag rules | COMPLETE | No campaign trainer carries healing inventory; player Bag disabled in trainer battles |
-| Trainer dialogue/layout | COMPLETE | 10,471 dialogue lines fit the native 216 px window; stale party references rejected |
-| Doubles AI | COMPLETE | Core Champions, Commander, multi, Mega, status, viability, Circuit, and 56 doubles-AI fixtures pass; two upstream fixtures remain explicitly known-failing; harmful friendly fire is corrected |
+| Canonical encounter index | SOURCE CHECKED | 513 physical encounters, 561 branches, and 2,147 authored Pokémon |
+| Materialized trainer parties | SOURCE CHECKED | Every branch source-locks exactly to `trainers.party` |
+| Battle format | SOURCE CHECKED | 87 single, 460 double, 14 multi; 84.49% doubles-like |
+| Authored difficulty curve | SOURCE CHECKED | Mean 7.57, median 7.5; ordinary bands are 143 at 6.x, 267 at 7.x, and 64 at 8.x |
+| Boss and showcase coverage | SOURCE CHECKED | All 92 Megas and all 57 targeted legendary species appear in opponent parties |
+| Team diversity | SOURCE CHECKED | 754 unique species/forms; rolling-repeat and duplicate-team gates pass |
+| Trainer Ability legality | SOURCE CHECKED | All 2,147 authored Abilities resolve legally for the configured species/forms |
+| Trainer dialogue/layout | SOURCE CHECKED | Every campaign trainer ID resolves to source dialogue; static dialogue width gates cover the counts above |
+| Doubles AI | RUNTIME CONTRACT | The manifest requires at least 65 doubles-AI tests and accepts zero known-failing or TODO results |
 
-## Frontier and packaging
+## Frontier, packaging, and human evidence
 
-| Feature | Status | Evidence |
+| Feature | Evidence | Current measurable truth |
 | --- | --- | --- |
-| Live Showdown Champions Circuit | COMPLETE | 311 variants, 444 templates, sixteen seeded teams and exact party restoration pass |
-| Native Battle Frontier | MANUAL | Original facilities remain available beside the Circuit and compile under Champions rules; full facility streaks need playtesting |
-| Standalone ROM | COMPLETE | Clean 32 MiB build, valid header/checksum, 80.45% ROM, 86.77% EWRAM, 86.58% IWRAM |
-| Headless emulator boot | COMPLETE | Production ROM reaches the first BIOS/VBlank boundary with exit 0 |
-| Full human campaign playthrough | MANUAL | Automated progression and runtime gates pass; balance and late-story feel require human playtesting |
-| Hosted web ROM/cloud save | OUT OF SCOPE | Separate deployment project; do not infer deployment from this standalone build |
-| GitHub publication | NOT REQUESTED | Branch remains local until the user explicitly asks to push |
+| Live Showdown Champions Circuit | SOURCE CHECKED | 311 variants and 444 templates; generated legality, reward schedule, and party-restoration contracts are checked |
+| Curated runtime suite | RUNTIME CONTRACT | 19 filters, summed minimum 256, 43 selected source files; the frozen one-shot run passed 256/256 with zero accepted or observed debt |
+| Native Battle Frontier | MANUAL | Original facilities remain beside the Circuit; complete native streaks need playtesting |
+| Standalone ROM | BUILD REQUIRED | No ROM hash, size, or memory percentage in this ledger is evidence for a changed working tree |
+| Entrypoint smoke | BUILD REQUIRED | The exact production ROM must reach first VBlank in the release job |
+| Full human campaign playthrough | MANUAL | Pacing, balance, clarity, save/retry behavior, and fun remain unobserved where the master says `UNPLAYED` |
+| Visual/device coverage | MANUAL | Menus, dialogue, maps, sprites, collision, animations, audio, saving, and controls need hardware-like and intended-device checks |
+| Hosted web ROM/cloud save | OUT OF SCOPE | Separate deployment project; do not infer deployment or cloud retention from the standalone source |
 
-## Current release candidate
+## Candidate boundary
 
-- ROM: `pokeemerald.gba`
-- SHA-256:
-  `d5a9a17ce23a00c449b84b2b28e983107f862adfa0c3427df01913e94aefa008`
-- Consolidated release verifier: PASS
-- Emerald Champions custom tests: 14 passed, 0 failed
-- Champions Circuit tests: 3 passed, 0 failed
-- All Champions-named tests: 57 passed, 0 failed
-- Commander tests: 41 passed, 0 failed
-- Save-layout tests: 4 passed, 0 failed
-- Doubles AI tests: 56 passed, 0 unexpected failed, 2 known-failing
-
-This is a standalone-ROM release candidate. The remaining work is playtest
-feedback and any explicitly requested deployment/publication, not missing
-campaign source.
+A releasable candidate still needs a fresh clean build, the complete source and
+artifact verifier, first-VBlank smoke, a zero-debt run of the current runtime
+manifest, scenario saves, visual/device inspection, and a fresh-save human
+campaign playthrough. Record the resulting ROM digest and memory report with
+that candidate; do not carry an older artifact hash forward into this ledger.

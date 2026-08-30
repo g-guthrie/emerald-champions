@@ -450,22 +450,19 @@ void IsEmeraldChampionsGameCornerPokemonClaimed(void)
                       && (FlagGet(flag) || IsEmeraldChampionsInitialStarter(gSpecialVar_0x8004));
 }
 
-static u8 TryGiveEmeraldChampionsGameCornerPokemon(enum Species species, u16 flag, bool32 rejectInitialStarter)
+static u8 TryGiveEmeraldChampionsPreparedPokemon(enum Species species, u8 level)
 {
     struct Pokemon mon;
     u32 emptyPartySlot;
     u32 giveResult;
-    u8 level;
 
     if (species <= SPECIES_NONE
      || species >= NUM_SPECIES
-     || flag == 0
-     || FlagGet(flag)
-     || (rejectInitialStarter && IsEmeraldChampionsInitialStarter(species))
+     || level == 0
+     || level > MAX_LEVEL
      || GetEmeraldChampionsRawBattleSetCount(species) == 0)
         return EC_GAME_CORNER_PRIZE_SET_FAILED;
 
-    level = min(30, GetCurrentLevelCap());
     CreateRandomMon(&mon, species, level);
     if (ApplyEmeraldChampionsRandomNonMegaSet(&mon) != EC_BATTLE_SET_SUCCESS)
         return EC_GAME_CORNER_PRIZE_SET_FAILED;
@@ -481,9 +478,36 @@ static u8 TryGiveEmeraldChampionsGameCornerPokemon(enum Species species, u16 fla
 
     if (giveResult == MON_GIVEN_TO_PARTY && emptyPartySlot < PARTY_SIZE)
         RecordPlayerPartyMonHeldItemForRestoration(emptyPartySlot);
+    return giveResult;
+}
+
+static u8 TryGiveEmeraldChampionsGameCornerPokemon(enum Species species, u16 flag, bool32 rejectInitialStarter)
+{
+    u8 giveResult;
+
+    if (flag == 0
+     || FlagGet(flag)
+     || (rejectInitialStarter && IsEmeraldChampionsInitialStarter(species)))
+        return EC_GAME_CORNER_PRIZE_SET_FAILED;
+
+    giveResult = TryGiveEmeraldChampionsPreparedPokemon(
+        species,
+        min(30, GetCurrentLevelCap())
+    );
+    if (giveResult != MON_GIVEN_TO_PARTY && giveResult != MON_GIVEN_TO_PC)
+        return giveResult;
+
     MarkLegendarySignCaughtBySpecies(species);
     FlagSet(flag);
     return giveResult;
+}
+
+void GiveEmeraldChampionsPreparedPokemon(void)
+{
+    gSpecialVar_Result = TryGiveEmeraldChampionsPreparedPokemon(
+        gSpecialVar_0x8004,
+        gSpecialVar_0x8005
+    );
 }
 
 void GiveEmeraldChampionsGameCornerPokemon(void)
@@ -500,6 +524,11 @@ void GiveEmeraldChampionsGameCornerPokemon(void)
 u8 GiveEmeraldChampionsGameCornerPokemonForTesting(enum Species species, u16 flag)
 {
     return TryGiveEmeraldChampionsGameCornerPokemon(species, flag, FALSE);
+}
+
+u8 GiveEmeraldChampionsPreparedPokemonForTesting(enum Species species, u8 level)
+{
+    return TryGiveEmeraldChampionsPreparedPokemon(species, level);
 }
 #endif
 
@@ -1949,32 +1978,6 @@ bool8 FoundAbandonedShipRoom6Key(void)
         return FALSE;
 
     return TRUE;
-}
-
-bool8 LeadMonHasEffortRibbon(void)
-{
-    return GetMonData(&gParties[B_TRAINER_PLAYER][GetLeadMonIndex()], MON_DATA_EFFORT_RIBBON);
-}
-
-void GiveLeadMonEffortRibbon(void)
-{
-    bool8 ribbonSet;
-    struct Pokemon *leadMon;
-    IncrementGameStat(GAME_STAT_RECEIVED_RIBBONS);
-    FlagSet(FLAG_SYS_RIBBON_GET);
-    ribbonSet = TRUE;
-    leadMon = &gParties[B_TRAINER_PLAYER][GetLeadMonIndex()];
-    SetMonData(leadMon, MON_DATA_EFFORT_RIBBON, &ribbonSet);
-    if (GetRibbonCount(leadMon) > NUM_CUTIES_RIBBONS)
-        TryPutSpotTheCutiesOnAir(leadMon, MON_DATA_EFFORT_RIBBON);
-}
-
-bool8 Special_AreLeadMonEVsMaxedOut(void)
-{
-    if (GetMonEVCount(&gParties[B_TRAINER_PLAYER][GetLeadMonIndex()]) >= MAX_TOTAL_EVS)
-        return TRUE;
-
-    return FALSE;
 }
 
 u8 TryUpdateRusturfTunnelState(void)

@@ -11,8 +11,7 @@ BattleFrontier_OutsideWest_EventScript_FerryAttendant::
 	lock
 	faceplayer
 	msgbox BattleFrontier_OutsideWest_Text_MayISeeYourTicket, MSGBOX_DEFAULT
-	checkitem ITEM_SS_TICKET
-	goto_if_eq VAR_RESULT, FALSE, BattleFrontier_OutsideWest_EventScript_NoSSTicket
+	goto_if_unset FLAG_RECEIVED_SS_TICKET, BattleFrontier_OutsideWest_EventScript_NoSSTicket
 	message BattleFrontier_OutsideWest_Text_WhereWouldYouLikeToGo
 	waitmessage
 	goto BattleFrontier_OutsideWest_EventScript_ChooseFerryDestination
@@ -317,16 +316,17 @@ BattleFrontier_OutsideWest_Text_ThisIsBattleTower:
 
 BattleFrontier_OutsideWest_Text_MayISeeYourTicket:
 	.string "Hello, are you here for the ferry?\n"
-	.string "May I see your TICKET?$"
+	.string "May I confirm your ferry pass?$"
 
 BattleFrontier_OutsideWest_Text_MustHaveTicketToBoard:
-	.string "{PLAYER} doesn't have the TICKET…\p"
+	.string "Your ferry pass is not registered.\p"
 	.string "I'm terribly sorry.\p"
-	.string "You must have a TICKET to board\n"
+	.string "You need a registered pass to board\n"
 	.string "the ferry.$"
 
 BattleFrontier_OutsideWest_Text_WhereWouldYouLikeToGo:
-	.string "{PLAYER} flashed the TICKET.\p"
+	.string "The attendant confirmed your ferry\n"
+	.string "pass.\p"
 	.string "Perfect! That's all you need!\p"
 	.string "And where would you like to go?$"
 
@@ -514,4 +514,3 @@ BattleFrontier_OutsideWest_Text_MonWithLongTailInFrontier:
 	.string "It must be adorable. I'm sure of it…\p"
 	.string "Oh, challenges can wait. I feel driven\n"
 	.string "to find the delightful creature!$"
-

@@ -1,5 +1,9 @@
 # Emerald Champions migration source lock
 
+> **Historical input record.** The hashes below intentionally identify the
+> frozen migration inputs; they are not the current branch, ROM, or release
+> candidate identity.
+
 This migration rebuilds Emerald Champions on the modern
 `pokeemerald-expansion` `upcoming` battle and data foundation. It does not
 merge that tree into the old Inclement-derived tree: the histories have
@@ -15,6 +19,16 @@ diverged too far for that to be reviewable or safe.
   `b05016d5b48e8ca9376245e19ef71d5496f84232`
 - Pokemon Showdown Champions reference:
   `bb179fbf8449e3c31632bd56f671ffb4404fa6e7`
+
+## Save-compatibility reference points
+
+- Exact bounded legacy save contract supported by the modern migration:
+  `81e288b51995c59c1dbc640f77907b8120788bc9`
+- Unversioned modern e7 layout that is stamped without rewriting its current
+  state: `e7df953860be1a250f6720fa4579aebe30436a04`
+
+These hashes classify historical save layouts only. They are not current ROM
+or branch identities; `SAVE_COMPATIBILITY.md` defines the supported behavior.
 
 The expansion `upcoming` implementation is the GBA source of truth. The
 pinned Showdown `data/mods/champions` implementation is an independent
