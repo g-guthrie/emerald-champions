@@ -329,9 +329,11 @@ def main() -> None:
         return
 
     darwin = platform.system() == "Darwin"
+    # This repository's patchelf patches symbols inside the GBA test ELF; the
+    # unrelated system utility with the same name cannot perform that job.
     patchelf = resolve_tool(
         args.patchelf,
-        ("patchelf",),
+        (),
         ROOT / "tools/patchelf/patchelf",
     )
     hydra = resolve_tool(
