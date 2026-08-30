@@ -40,3 +40,19 @@ VerdanturfTown_PokemonCenter_1F_Text_VisitForBattleTent:
 	.string "Or is there somebody here that you\n"
 	.string "came to see?$"
 
+VerdanturfTown_PokemonCenter_1F_EventScript_Clerk2::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart PokeMart_PokeCenterVerdanturfTown
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+	.align 2
+PokeMart_PokeCenterVerdanturfTown::
+	.2byte ITEM_HEAL_BALL
+	.2byte ITEM_NEST_BALL
+	.2byte ITEM_LUXURY_BALL
+	.2byte ITEM_NONE

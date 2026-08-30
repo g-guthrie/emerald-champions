@@ -619,6 +619,25 @@ void BufferSelectedMonEmeraldChampionsBattleSetName(void)
     gSpecialVar_Result = GetEmeraldChampionsBattleSetRequiredItem(mon, gSpecialVar_0x8005) != ITEM_NONE;
 }
 
+void BufferSelectedMonCurrentEmeraldChampionsBattleSet(void)
+{
+    gSpecialVar_Result = FALSE;
+    gSpecialVar_0x8005 = 0;
+    if (gSpecialVar_0x800A >= gPartiesCount[B_TRAINER_PLAYER])
+        return;
+
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x800A];
+    s16 choice = GetEmeraldChampionsCurrentBattleSetChoice(mon);
+
+    GetMonNickname(mon, gStringVar1);
+    if (choice < 0)
+        return;
+
+    gSpecialVar_0x8005 = choice;
+    StringCopy(gStringVar2, GetEmeraldChampionsBattleSetName(mon, choice));
+    gSpecialVar_Result = TRUE;
+}
+
 void TryLoseFansFromPlayTime(void);
 void SetPlayerGotFirstFans(void);
 u16 GetNumFansOfPlayerInTrainerFanClub(void);
@@ -2946,19 +2965,23 @@ void ShowScrollableMultichoice(void)
         task->tLeft = 10;
         task->tTop = 1;
         task->tWidth = 20;
-        task->tHeight = 8;
+        task->tHeight = task->tMaxItemsOnScreen * 2;
         task->tKeepOpenAfterSelect = FALSE;
         task->tTaskId = taskId;
+        task->tScrollOffset = min(gSpecialVar_0x8005, task->tNumItems - task->tMaxItemsOnScreen);
+        task->tSelectedRow = gSpecialVar_0x8005 - task->tScrollOffset;
         break;
     case SCROLL_MULTI_STARTER_REGIONS:
-        task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
+        task->tMaxItemsOnScreen = 5;
         task->tNumItems = 9;
         task->tLeft = 18;
         task->tTop = 1;
         task->tWidth = 11;
-        task->tHeight = 12;
+        task->tHeight = task->tMaxItemsOnScreen * 2;
         task->tKeepOpenAfterSelect = FALSE;
         task->tTaskId = taskId;
+        task->tScrollOffset = min(gSpecialVar_0x8005, task->tNumItems - task->tMaxItemsOnScreen);
+        task->tSelectedRow = gSpecialVar_0x8005 - task->tScrollOffset;
         break;
     default:
         gSpecialVar_Result = MULTI_B_PRESSED;

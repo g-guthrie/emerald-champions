@@ -18,7 +18,7 @@
     {
       "local_id": "LOCALID_MAUVILLE_NURSE",
       "graphics_id": "OBJ_EVENT_GFX_NURSE",
-      "x": 7,
+      "x": 8,
       "y": 2,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
@@ -57,7 +57,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_VAR_0",
-      "x": 4,
+      "x": 5,
       "y": 4,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
@@ -70,8 +70,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_1",
-      "x": 8,
-      "y": 6,
+      "x": 12,
+      "y": 7,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
@@ -83,8 +83,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_5",
-      "x": 11,
-      "y": 4,
+      "x": 10,
+      "y": 6,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_WANDER_UP_AND_DOWN",
       "movement_range_x": 0,
@@ -96,8 +96,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER",
-      "x": 2,
-      "y": 8,
+      "x": 3,
+      "y": 5,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
@@ -110,14 +110,14 @@
   ],
   "warp_events": [
     {
-      "x": 7,
+      "x": 8,
       "y": 8,
       "elevation": 3,
       "dest_map": "MAP_MAUVILLE_CITY",
       "dest_warp_id": "1"
     },
     {
-      "x": 6,
+      "x": 7,
       "y": 8,
       "elevation": 3,
       "dest_map": "MAP_MAUVILLE_CITY",

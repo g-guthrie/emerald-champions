@@ -3,6 +3,7 @@
 #include "item.h"
 #include "party_menu.h"
 #include "pokemon.h"
+#include "random.h"
 #include "string_util.h"
 #include "test/test.h"
 #include "text.h"
@@ -34,19 +35,36 @@ TEST("Keldeo follows Secret Sword form changes in party and PC movesets")
     EXPECT_EQ(GetBoxMonData(&boxMon, MON_DATA_SPECIES), SPECIES_KELDEO_ORDINARY);
 }
 
-TEST("Emerald Champions Keldeo presets materialize Resolute form")
+TEST("Emerald Champions Keldeo presets match their Secret Sword form")
 {
     struct Pokemon mon;
-
     CreateMon(&mon, SPECIES_KELDEO_ORDINARY, 40, 0, OTID_STRUCT_PLAYER_ID);
     EXPECT_NE(ApplyEmeraldChampionsBattleSetChoice(&mon, 0), EC_BATTLE_SET_FAILED);
     EXPECT_EQ(GetMonData(&mon, MON_DATA_SPECIES), SPECIES_KELDEO_RESOLUTE);
     EXPECT(MonKnowsMove(&mon, MOVE_SECRET_SWORD));
 
     CreateMon(&mon, SPECIES_KELDEO_ORDINARY, 40, 0, OTID_STRUCT_PLAYER_ID);
-    EXPECT_NE(ApplyEmeraldChampionsRandomWildSet(&mon), EC_BATTLE_SET_FAILED);
-    EXPECT_EQ(GetMonData(&mon, MON_DATA_SPECIES), SPECIES_KELDEO_RESOLUTE);
-    EXPECT(MonKnowsMove(&mon, MOVE_SECRET_SWORD));
+    EXPECT_NE(ApplyEmeraldChampionsBattleSetChoice(&mon, 1), EC_BATTLE_SET_FAILED);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_SPECIES), SPECIES_KELDEO_ORDINARY);
+    EXPECT(!MonKnowsMove(&mon, MOVE_SECRET_SWORD));
+
+    // Wild Keldeo can roll either authored orientation. Its native form must
+    // follow the resulting moveset instead of being forced Resolute when the
+    // selected orientation does not know Secret Sword.
+    SeedRng(0x4B454C44);
+    for (u32 i = 0; i < 32; i++)
+    {
+        CreateMon(&mon, SPECIES_KELDEO_ORDINARY, 40, 0, OTID_STRUCT_PLAYER_ID);
+        EXPECT_NE(ApplyEmeraldChampionsRandomWildSet(&mon), EC_BATTLE_SET_FAILED);
+        if (MonKnowsMove(&mon, MOVE_SECRET_SWORD))
+        {
+            EXPECT_EQ(GetMonData(&mon, MON_DATA_SPECIES), SPECIES_KELDEO_RESOLUTE);
+        }
+        else
+        {
+            EXPECT_EQ(GetMonData(&mon, MON_DATA_SPECIES), SPECIES_KELDEO_ORDINARY);
+        }
+    }
 }
 
 TEST("Pokemon Storage held-item messages fit every item name")

@@ -212,15 +212,18 @@ MauvilleCity_GameCorner_EventScript_PrizeCornerPokemon::
 	faceplayer
 	msgbox MauvilleCity_GameCorner_Text_ExchangeCoinsForPrizes, MSGBOX_DEFAULT
 	checkitem ITEM_COIN_CASE
-	goto_if_eq VAR_RESULT, TRUE, MauvilleCity_GameCorner_EventScript_ChoosePokemonPrizeMessage
+	goto_if_eq VAR_RESULT, TRUE, MauvilleCity_GameCorner_EventScript_OpenPokemonPrizeMenu
 	release
 	end
+
+MauvilleCity_GameCorner_EventScript_OpenPokemonPrizeMenu::
+	setvar VAR_0x8005, 0
+	showcoinsbox 0, 0
 
 MauvilleCity_GameCorner_EventScript_ChoosePokemonPrizeMessage::
 	message MauvilleCity_GameCorner_Text_WhichPrize
 	waitmessage
-	showcoinsbox 0, 0
-	multichoice 8, 0, MULTI_GAME_CORNER_POKEMON, FALSE
+	multichoice 10, 0, MULTI_GAME_CORNER_POKEMON, FALSE
 	switch VAR_RESULT
 	case 0, MauvilleCity_GameCorner_EventScript_SelectGenesect
 	case 1, MauvilleCity_GameCorner_EventScript_SelectPoipole
@@ -242,6 +245,8 @@ MauvilleCity_GameCorner_EventScript_ChooseStarterRegion::
 	waitmessage
 	setvar VAR_0x8004, SCROLL_MULTI_STARTER_REGIONS
 	special ShowScrollableMultichoice
+	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, MauvilleCity_GameCorner_EventScript_ChoosePokemonPrizeMessage
+	copyvar VAR_0x8005, VAR_RESULT
 	switch VAR_RESULT
 	case 0, MauvilleCity_GameCorner_EventScript_StarterKanto
 	case 1, MauvilleCity_GameCorner_EventScript_StarterJohto
@@ -255,7 +260,7 @@ MauvilleCity_GameCorner_EventScript_ChooseStarterRegion::
 	goto MauvilleCity_GameCorner_EventScript_ChoosePokemonPrizeMessage
 
 MauvilleCity_GameCorner_EventScript_StarterKanto::
-	multichoice 8, 0, MULTI_EC_STARTER_ARCHIVE_KANTO, FALSE
+	multichoice 11, 0, MULTI_EC_STARTER_ARCHIVE_KANTO, FALSE
 	switch VAR_RESULT
 	case 0, MauvilleCity_GameCorner_EventScript_SelectBulbasaur
 	case 1, MauvilleCity_GameCorner_EventScript_SelectCharmander
@@ -263,7 +268,7 @@ MauvilleCity_GameCorner_EventScript_StarterKanto::
 	goto MauvilleCity_GameCorner_EventScript_ChooseStarterRegion
 
 MauvilleCity_GameCorner_EventScript_StarterJohto::
-	multichoice 8, 0, MULTI_EC_STARTER_ARCHIVE_JOHTO, FALSE
+	multichoice 11, 0, MULTI_EC_STARTER_ARCHIVE_JOHTO, FALSE
 	switch VAR_RESULT
 	case 0, MauvilleCity_GameCorner_EventScript_SelectChikorita
 	case 1, MauvilleCity_GameCorner_EventScript_SelectCyndaquil
@@ -271,7 +276,7 @@ MauvilleCity_GameCorner_EventScript_StarterJohto::
 	goto MauvilleCity_GameCorner_EventScript_ChooseStarterRegion
 
 MauvilleCity_GameCorner_EventScript_StarterHoenn::
-	multichoice 8, 0, MULTI_EC_STARTER_ARCHIVE_HOENN, FALSE
+	multichoice 11, 0, MULTI_EC_STARTER_ARCHIVE_HOENN, FALSE
 	switch VAR_RESULT
 	case 0, MauvilleCity_GameCorner_EventScript_SelectTreecko
 	case 1, MauvilleCity_GameCorner_EventScript_SelectTorchic
@@ -279,7 +284,7 @@ MauvilleCity_GameCorner_EventScript_StarterHoenn::
 	goto MauvilleCity_GameCorner_EventScript_ChooseStarterRegion
 
 MauvilleCity_GameCorner_EventScript_StarterSinnoh::
-	multichoice 8, 0, MULTI_EC_STARTER_ARCHIVE_SINNOH, FALSE
+	multichoice 11, 0, MULTI_EC_STARTER_ARCHIVE_SINNOH, FALSE
 	switch VAR_RESULT
 	case 0, MauvilleCity_GameCorner_EventScript_SelectTurtwig
 	case 1, MauvilleCity_GameCorner_EventScript_SelectChimchar
@@ -287,7 +292,7 @@ MauvilleCity_GameCorner_EventScript_StarterSinnoh::
 	goto MauvilleCity_GameCorner_EventScript_ChooseStarterRegion
 
 MauvilleCity_GameCorner_EventScript_StarterUnova::
-	multichoice 8, 0, MULTI_EC_STARTER_ARCHIVE_UNOVA, FALSE
+	multichoice 11, 0, MULTI_EC_STARTER_ARCHIVE_UNOVA, FALSE
 	switch VAR_RESULT
 	case 0, MauvilleCity_GameCorner_EventScript_SelectSnivy
 	case 1, MauvilleCity_GameCorner_EventScript_SelectTepig
@@ -295,7 +300,7 @@ MauvilleCity_GameCorner_EventScript_StarterUnova::
 	goto MauvilleCity_GameCorner_EventScript_ChooseStarterRegion
 
 MauvilleCity_GameCorner_EventScript_StarterKalos::
-	multichoice 8, 0, MULTI_EC_STARTER_ARCHIVE_KALOS, FALSE
+	multichoice 11, 0, MULTI_EC_STARTER_ARCHIVE_KALOS, FALSE
 	switch VAR_RESULT
 	case 0, MauvilleCity_GameCorner_EventScript_SelectChespin
 	case 1, MauvilleCity_GameCorner_EventScript_SelectFennekin
@@ -303,7 +308,7 @@ MauvilleCity_GameCorner_EventScript_StarterKalos::
 	goto MauvilleCity_GameCorner_EventScript_ChooseStarterRegion
 
 MauvilleCity_GameCorner_EventScript_StarterAlola::
-	multichoice 8, 0, MULTI_EC_STARTER_ARCHIVE_ALOLA, FALSE
+	multichoice 11, 0, MULTI_EC_STARTER_ARCHIVE_ALOLA, FALSE
 	switch VAR_RESULT
 	case 0, MauvilleCity_GameCorner_EventScript_SelectRowlet
 	case 1, MauvilleCity_GameCorner_EventScript_SelectLitten
@@ -311,7 +316,7 @@ MauvilleCity_GameCorner_EventScript_StarterAlola::
 	goto MauvilleCity_GameCorner_EventScript_ChooseStarterRegion
 
 MauvilleCity_GameCorner_EventScript_StarterGalar::
-	multichoice 8, 0, MULTI_EC_STARTER_ARCHIVE_GALAR, FALSE
+	multichoice 11, 0, MULTI_EC_STARTER_ARCHIVE_GALAR, FALSE
 	switch VAR_RESULT
 	case 0, MauvilleCity_GameCorner_EventScript_SelectGrookey
 	case 1, MauvilleCity_GameCorner_EventScript_SelectScorbunny
@@ -319,7 +324,7 @@ MauvilleCity_GameCorner_EventScript_StarterGalar::
 	goto MauvilleCity_GameCorner_EventScript_ChooseStarterRegion
 
 MauvilleCity_GameCorner_EventScript_StarterPaldea::
-	multichoice 8, 0, MULTI_EC_STARTER_ARCHIVE_PALDEA, FALSE
+	multichoice 11, 0, MULTI_EC_STARTER_ARCHIVE_PALDEA, FALSE
 	switch VAR_RESULT
 	case 0, MauvilleCity_GameCorner_EventScript_SelectSprigatito
 	case 1, MauvilleCity_GameCorner_EventScript_SelectFuecoco

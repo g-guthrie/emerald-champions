@@ -140,6 +140,10 @@ def main() -> None:
         menu_id = f"MULTI_EC_STARTER_ARCHIVE_{region}"
         require(menu_id in menu_constants, f"missing menu ID {menu_id}")
         require(f"[{menu_id}]" in menus, f"missing menu table {menu_id}")
+        require(
+            f"multichoice 11, 0, {menu_id}, FALSE" in script,
+            f"{menu_id} is not separated from the native Coins box",
+        )
     require("STARTER ARCHIVE" in menus, "top-level prize menu lacks Starter Archive")
     require(menus.count("{CLEAR_TO 72}500 COINS") == len(STARTERS),
             "starter menu row count or 500-Coin price drifted")

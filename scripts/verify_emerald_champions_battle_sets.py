@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import json
 import collections
+import itertools
 import re
 from pathlib import Path
 
@@ -52,6 +53,22 @@ UTILITY_DAMAGE_MOVES = {
     "MOVE_RUINATION", "MOVE_SALT_CURE", "MOVE_SEISMIC_TOSS", "MOVE_SNARL",
     "MOVE_SONIC_BOOM", "MOVE_STRUGGLE_BUG", "MOVE_SUPER_FANG",
 }
+SYNTHETIC_SETUP_MOVES = {
+    "MOVE_BULK_UP", "MOVE_CALM_MIND", "MOVE_COIL", "MOVE_DRAGON_DANCE",
+    "MOVE_GEOMANCY", "MOVE_HONE_CLAWS", "MOVE_HOWL", "MOVE_NASTY_PLOT",
+    "MOVE_QUIVER_DANCE", "MOVE_SHELL_SMASH", "MOVE_SHIFT_GEAR",
+    "MOVE_SWORDS_DANCE", "MOVE_TAIL_GLOW", "MOVE_TIDY_UP",
+    "MOVE_VICTORY_DANCE",
+}
+UNBURDEN_ITEMS = {
+    "ITEM_ELECTRIC_SEED", "ITEM_FOCUS_SASH", "ITEM_GRASSY_SEED",
+    "ITEM_MISTY_SEED", "ITEM_POWER_HERB", "ITEM_PSYCHIC_SEED",
+    "ITEM_SITRUS_BERRY", "ITEM_WEAKNESS_POLICY", "ITEM_WHITE_HERB",
+}
+TRIAGE_ATTACKS = {
+    "MOVE_DRAIN_PUNCH", "MOVE_DRAINING_KISS", "MOVE_GIGA_DRAIN",
+    "MOVE_HORN_LEECH", "MOVE_LEECH_LIFE", "MOVE_PARABOLIC_CHARGE",
+}
 
 
 def move_metadata() -> tuple[dict[str, str], set[str]]:
@@ -80,8 +97,8 @@ def main() -> None:
 
     assert manifest["source_commit"] == "0b2bc96c7d6480187f70f5b83a705c081780983e"
     assert manifest["default_count"] == len(defaults) == 1258
-    assert manifest["alternative_count"] == len(alternatives) == 276
-    assert manifest["set_count"] == len(entries) == 1534
+    assert manifest["alternative_count"] == len(alternatives) == 1361
+    assert manifest["set_count"] == len(entries) == 2619
     assert len({entry["species"] for entry in defaults}) == len(defaults)
     assert move_access_review["reviewed_assignment_count"] == 72
     assert len(move_access_review["assignments"]) == 72
@@ -101,6 +118,10 @@ def main() -> None:
         for identity, row in zip(reviewed_identities, move_access_review["assignments"])
         if row["action"] != "replace"
     }
+    retained_move_pairs = {
+        (species, move)
+        for species, _, move in retained_review
+    }
     assert len(retained_review) == 65
     extension_rows = [
         row for row in move_access_review["assignments"]
@@ -113,9 +134,9 @@ def main() -> None:
     for entry in entries:
         by_species[entry["species"]].append(entry)
     assert all(
-        any(entry["required_item"] == "ITEM_NONE" for entry in choices)
+        sum(entry["required_item"] == "ITEM_NONE" for entry in choices) >= 2
         for choices in by_species.values()
-    ), "a species has no non-Mega wild-eligible preset"
+    ), "a direct species/form has fewer than two pre-Mega orientations"
     for species, choices in by_species.items():
         names = [entry["name"] for entry in choices]
         assert len(names) == len(set(names)), (species, "duplicate role names", names)
@@ -126,6 +147,25 @@ def main() -> None:
         assert len(orientations) == len(set(orientations)), (
             species, "duplicate complete orientations",
         )
+        non_mega = [entry for entry in choices if entry["required_item"] == "ITEM_NONE"]
+        for first, second in itertools.combinations(non_mega, 2):
+            assert (
+                frozenset(first["moves"]) != frozenset(second["moves"])
+                or first["ability"] != second["ability"]
+                or first["nature"] != second["nature"]
+                or tuple(first["stat_points"]) != tuple(second["stat_points"])
+            ), (
+                species,
+                "superficial move-order/item-only duplicate",
+                first["name"],
+                second["name"],
+            )
+
+    synthesized = [
+        entry for entry in alternatives
+        if entry["source"].startswith("Emerald Champions legal doubles role synthesis")
+    ]
+    assert len(synthesized) == 1087
 
     by_identity = {(entry["species"], entry["name"]): entry for entry in entries}
     for row in move_access_review["assignments"]:
@@ -288,6 +328,19 @@ def main() -> None:
             failures.append(f"{tag}: Flare Boost has no Flame Orb")
         if entry["ability"] == "ABILITY_HARVEST" and not item.endswith("_BERRY"):
             failures.append(f"{tag}: Harvest has no Berry")
+        if entry["source"].startswith("Emerald Champions legal doubles role synthesis"):
+            if entry["ability"] == "ABILITY_CONTRARY" and moves & SYNTHETIC_SETUP_MOVES:
+                failures.append(f"{tag}: Contrary reverses its synthesized setup move")
+            if entry["ability"] == "ABILITY_GORILLA_TACTICS" and status_moves:
+                failures.append(f"{tag}: Gorilla Tactics synthesized a status-locked role")
+            if entry["ability"] == "ABILITY_GUTS" and item != "ITEM_FLAME_ORB":
+                failures.append(f"{tag}: synthesized Guts role has no Flame Orb")
+            if entry["ability"] in {"ABILITY_QUICK_FEET", "ABILITY_TOXIC_BOOST"} and item != "ITEM_TOXIC_ORB":
+                failures.append(f"{tag}: synthesized status Ability has no Toxic Orb")
+            if entry["ability"] == "ABILITY_UNBURDEN" and item not in UNBURDEN_ITEMS:
+                failures.append(f"{tag}: synthesized Unburden role cannot consume its item")
+            if entry["ability"] == "ABILITY_TRIAGE" and not moves & TRIAGE_ATTACKS:
+                failures.append(f"{tag}: synthesized Triage role has no priority healing attack")
     assert not failures, "battle-set coherence failures:\n" + "\n".join(failures)
 
     # These two formerly inert White Herbs were individually reviewed. White
@@ -308,7 +361,7 @@ def main() -> None:
     assert not missing, f"Current wild tables lack presets: {missing}"
 
     generated = (ROOT / "src" / "data" / "pokemon" / "emerald_champions_battle_sets.h").read_text()
-    assert generated.count(".statPoints =") == 1534
+    assert generated.count(".statPoints =") == 2619
     assert "gEmeraldChampionsDefaultBattleSets[NUM_SPECIES]" in generated
     assert "gEmeraldChampionsBattleSetAlternatives[]" in generated
     reviewed_header = (
@@ -398,11 +451,107 @@ def main() -> None:
     all_learnables = json.loads(
         (ROOT / "src/data/pokemon/all_learnables.json").read_text()
     )
+    preparation_source = {species: list(moves) for species, moves in all_learnables.items()}
+    for row in extension_rows:
+        moves = preparation_source[row["teachable_species"]]
+        if row["move"] not in moves:
+            moves.append(row["move"])
+    preparation: dict[str, list[str]] = {}
+    for species, source_moves in preparation_source.items():
+        species = {
+            "FLABÃ©BÃ©": "FLABEBE",
+            "MEOWSTIC": "MEOWSTIC_M",
+            "HOOPA": "HOOPA_CONFINED",
+            "TOXTRICITY": "TOXTRICITY_AMPED",
+            "INDEEDEE": "INDEEDEE_M",
+            "OINKOLOGNE": "OINKOLOGNE_M",
+        }.get(species, species)
+        species_key = re.sub(r"[^A-Z0-9]+", "_", species.replace("'", "").replace(".", "")).strip("_")
+        moves = preparation.setdefault(species_key, [])
+        moves.extend(move for move in source_moves if move not in moves)
+    preparation_counts = {species: len(moves) for species, moves in preparation.items()}
+    assert len(preparation) == 1108
+    assert sum(preparation_counts.values()) == 88073
+    assert max(preparation_counts.items(), key=lambda entry: entry[1]) == ("MEW", 372)
+    preparation_rom_data_bytes = 2 * (sum(preparation_counts.values()) + len(preparation)) + 4 * 1573
+    assert preparation_rom_data_bytes == 184654
+    assert preparation_rom_data_bytes < 200000
+    assert max(preparation_counts.values()) + 1 < 4096
+    assert len(preparation["MEW"]) == len(set(preparation["MEW"]))
+    assert {"MOVE_TAILWIND", "MOVE_WILL_O_WISP"} <= set(preparation["MEW"])
+    move_constants = set(re.findall(r"\bMOVE_[A-Z0-9_]+\b", (ROOT / "include/constants/moves.h").read_text()))
+    species_constants = set(re.findall(r"\bSPECIES_[A-Z0-9_]+\b", (ROOT / "include/constants/species.h").read_text()))
+    assert not set().union(*(set(moves) for moves in preparation.values())).difference(move_constants)
+    assert not {f"SPECIES_{species}" for species in preparation}.difference(species_constants)
+
+    tm_moves = re.findall(r"F\(([A-Z0-9_]+)\)", (ROOT / "include/constants/tms_hms.h").read_text())
+    tutor_moves: set[str] = set()
+    tutor_sources = list((ROOT / "data/scripts").glob("*.inc"))
+    tutor_sources.extend((ROOT / "data/maps").glob("*/scripts.inc"))
+    for path in tutor_sources:
+        source = path.read_text()
+        if "special ChooseMonForMoveTutor" not in source and "chooseboxmon SELECT_PC_MON_MOVE_TUTOR" not in source:
+            continue
+        tutor_moves.update(re.findall(r"setvar VAR_0x8005, (MOVE_[A-Z0-9_]+)", source))
+        tutor_moves.update(re.findall(r"move_tutor (MOVE_[A-Z0-9_]+)", source))
+    tutor_moves.update(row["move"] for row in extension_rows)
+    special_movesets = json.loads((ROOT / "src/data/pokemon/special_movesets.json").read_text())
+    signature_moves = set(special_movesets["signatureTeachables"])
+    current_mew_teachables = {
+        *(f"MOVE_{move}" for move in tm_moves),
+        *tutor_moves,
+        *special_movesets["extraTutors"],
+    }.difference(signature_moves)
+    mew_level_block = (ROOT / "src/data/pokemon/level_up_learnsets/gen_9.h").read_text().split(
+        "static const struct LevelUpMove sMewLevelUpLearnset[]", 1
+    )[1].split("LEVEL_UP_END", 1)[0]
+    mew_level_moves = set(re.findall(r"\bMOVE_[A-Z0-9_]+\b", mew_level_block))
+    assert len(current_mew_teachables) == 110
+    assert len(current_mew_teachables | mew_level_moves) == 119
+    assert {"MOVE_TAILWIND", "MOVE_WILL_O_WISP"}.isdisjoint(current_mew_teachables)
+
+    preparation_generator = (ROOT / "tools/learnset_helpers/make_teachables.py").read_text()
+    makefile = (ROOT / "Makefile").read_text()
+    move_relearner = (ROOT / "src/move_relearner.c").read_text()
+    preparation_population = move_relearner.rsplit(
+        "u32 GetEmeraldChampionsPreparationMovesToLearn", 1
+    )[1].split("void Special_HasMoveToRelearn", 1)[0]
+    preparation_has_check = move_relearner.rsplit(
+        "static bool32 HasRelearnerAllMoves", 1
+    )[1].split("static bool32 IsLevelUpMoveRelearnerActive", 1)[0]
+    assert "--preparation" in preparation_generator
+    assert "emerald_champions_preparation_learnsets.h" in preparation_generator
+    assert "EC_PREPARATION_LEARNSETS" in makefile and "--preparation" in makefile
+    assert '#include "data/pokemon/emerald_champions_preparation_learnsets.h"' in move_relearner
+    assert "GetEmeraldChampionsPreparationMoves(species)" in preparation_population
+    assert "CanLearnTeachableMove" not in preparation_population
+    assert "GetSpeciesLevelUpLearnset" not in preparation_population
+    assert "GetEmeraldChampionsPreparationMoves(species)" in preparation_has_check
+    assert "u16 numMenuChoices;" in move_relearner
+    assert "#define MAX_RELEARNER_MOVES MOVES_COUNT_ALL" in (
+        ROOT / "include/constants/move_relearner.h"
+    ).read_text()
+    assert "u32 totalItems:12;" in (ROOT / "include/list_menu.h").read_text()
+    ordinary_random = (ROOT / "src/random_mon_generation.c").read_text()
+    assert "GetSpeciesTeachableLearnset" in ordinary_random
+    assert "EmeraldChampionsPreparation" not in ordinary_random
+    pokemon_source = (ROOT / "src/pokemon.c").read_text()
+    can_teach = pokemon_source.split("bool32 CanLearnTeachableMove", 1)[1].split("u16 SpeciesToPokedexNum", 1)[0]
+    assert "GetSpeciesTeachableLearnset(species)" in can_teach
+    assert "EmeraldChampionsPreparation" not in can_teach
+    runtime_tests = (ROOT / "test/emerald_champions.c").read_text()
+    assert "canonicalCount, 372" in runtime_tests
+    assert "MOVE_TAILWIND" in runtime_tests and "MOVE_WILL_O_WISP" in runtime_tests
+    assert "GetEmeraldChampionsPreparationMovesToLearn" in runtime_tests
+
     direct_gaps: set[tuple[str, str, str]] = set()
     for entry in entries:
+        resolved_species = resolve_species(entry["species"], aliases)
         keys = {
             entry["species"].removeprefix("SPECIES_"),
+            resolved_species.removeprefix("SPECIES_"),
             pointer_keys.get(entry["species"], ""),
+            pointer_keys.get(resolved_species, ""),
         }
         configured = set().union(*(set(all_learnables.get(key, [])) for key in keys))
         showdown_id = re.sub(
@@ -417,10 +566,19 @@ def main() -> None:
                 and move_id not in projected
             ):
                 direct_gaps.add((entry["species"], entry["name"], move))
-    assert not direct_gaps.difference(retained_review), sorted(
-        direct_gaps.difference(retained_review)
-    )
+    unreviewed_gaps = {
+        gap for gap in direct_gaps
+        if gap not in retained_review and (gap[0], gap[2]) not in retained_move_pairs
+    }
+    assert not unreviewed_gaps, sorted(unreviewed_gaps)
+    # These rows are now directly reachable through inherited or shared-form
+    # learnset pointers; retaining the explicit extension is harmless and
+    # preserves the pinned migration disposition.
     assert retained_review.difference(direct_gaps) == {
+        ("SPECIES_ALCREMIE_SALTED_CREAM", "Recommended", "MOVE_DAZZLING_GLEAM"),
+        ("SPECIES_ALCREMIE_SALTED_CREAM", "Recommended", "MOVE_DECORATE"),
+        ("SPECIES_ALCREMIE_SALTED_CREAM", "Recommended", "MOVE_HELPING_HAND"),
+        ("SPECIES_ALCREMIE_SALTED_CREAM", "Recommended", "MOVE_PROTECT"),
         ("SPECIES_RABOOT", "Recommended", "MOVE_HIGH_JUMP_KICK"),
         ("SPECIES_CINDERACE", "Choice Attacker", "MOVE_HIGH_JUMP_KICK"),
         ("SPECIES_CINDERACE", "Offensive", "MOVE_HIGH_JUMP_KICK"),
@@ -453,6 +611,8 @@ def main() -> None:
 
     print("battle_set_static_checks=PASS")
     print(f"sets={len(entries)}")
+    print(f"non_mega_orientations={len(entries) - len(mega_entries)}; minimum=2 for {len(defaults)} species/forms")
+    print(f"legal_role_syntheses={len(synthesized)}")
     print(f"mega_roles={len(mega_entries)} across {len(mega_archive)} stones")
     print("move_access_review=65 retained + 7 replaced; 38 unique tutor extensions")
     print(f"wild_species_with_presets={len(wild_species)}")

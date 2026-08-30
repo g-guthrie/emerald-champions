@@ -274,6 +274,100 @@ enum Item GetEmeraldChampionsBattleSetRequiredItem(struct Pokemon *mon, u8 choic
     return preset->requiredItem;
 }
 
+static bool32 DoesMonMatchPresetMoves(struct Pokemon *mon, const struct EmeraldChampionsBattleSet *preset)
+{
+    for (u32 monSlot = 0; monSlot < MAX_MON_MOVES; monSlot++)
+    {
+        enum Move monMove = GetMonData(mon, MON_DATA_MOVE1 + monSlot);
+        bool32 found = FALSE;
+
+        for (u32 presetSlot = 0; presetSlot < MAX_MON_MOVES; presetSlot++)
+        {
+            if (monMove == preset->moves[presetSlot])
+            {
+                found = TRUE;
+                break;
+            }
+        }
+        if (!found)
+            return FALSE;
+    }
+    return TRUE;
+}
+
+static bool32 DoesMonMatchPresetAbility(struct Pokemon *mon, const struct EmeraldChampionsBattleSet *preset)
+{
+    enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+    enum Species setSpecies = ResolveBattleSetSpecies(species);
+    enum Ability actualAbility = GetMonAbility(mon);
+    u32 slot;
+
+    if (actualAbility == preset->ability)
+        return TRUE;
+
+    // Mega sets store the transformed Ability. Before Mega Evolution, applying
+    // one deliberately leaves the base species on the same legal fallback used
+    // by ApplyPreset.
+    if (!FindAbilitySlot(species, preset->ability, &slot))
+    {
+        if (!FindAbilitySlot(species, gEmeraldChampionsDefaultBattleSets[setSpecies].ability, &slot)
+         && !FindFallbackAbilitySlot(species, &slot))
+            return FALSE;
+        return actualAbility == GetAbilityBySpecies(species, slot);
+    }
+    return FALSE;
+}
+
+static bool32 DoesMonMatchPreset(struct Pokemon *mon, const struct EmeraldChampionsBattleSet *preset)
+{
+    static const s32 statPointFields[NUM_STATS] =
+    {
+        MON_DATA_HP_EV,
+        MON_DATA_ATK_EV,
+        MON_DATA_DEF_EV,
+        MON_DATA_SPATK_EV,
+        MON_DATA_SPDEF_EV,
+        MON_DATA_SPEED_EV,
+    };
+    enum Item item = GetMonData(mon, MON_DATA_HELD_ITEM);
+
+    if (GetMonData(mon, MON_DATA_HIDDEN_NATURE) != preset->nature
+     || !DoesMonMatchPresetAbility(mon, preset)
+     || !DoesMonMatchPresetMoves(mon, preset))
+        return FALSE;
+
+    if (preset->requiredItem == ITEM_NONE)
+    {
+        if (item != preset->item)
+            return FALSE;
+    }
+    else if (item != preset->item && item != preset->requiredItem)
+    {
+        return FALSE;
+    }
+
+    for (u32 stat = 0; stat < NUM_STATS; stat++)
+    {
+        if (GetMonData(mon, statPointFields[stat]) != preset->statPoints[stat])
+            return FALSE;
+    }
+    return TRUE;
+}
+
+s16 GetEmeraldChampionsCurrentBattleSetChoice(struct Pokemon *mon)
+{
+    u8 count = GetEmeraldChampionsBattleSetCount(mon);
+
+    for (u8 choice = 0; choice < count; choice++)
+    {
+        const struct EmeraldChampionsBattleSet *preset = NULL;
+
+        if (ResolveVisibleChoice(mon, choice, &preset, NULL) && DoesMonMatchPreset(mon, preset))
+            return choice;
+    }
+    return -1;
+}
+
 static u8 ApplyPreset(
     struct Pokemon *mon,
     const struct EmeraldChampionsBattleSet *preset,

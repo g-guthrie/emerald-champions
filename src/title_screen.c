@@ -3,6 +3,9 @@
 #include "config/quickstart.h"
 #include "quickstart.h"
 #include "title_screen.h"
+#if EC_HEADLESS_FIXTURES
+#include "emerald_champions_headless.h"
+#endif
 #include "sprite.h"
 #include "gba/m4a_internal.h"
 #include "clear_save_data_menu.h"
@@ -757,7 +760,11 @@ static void Task_TitleScreenPhase2(u8 taskId)
                                     | DISPCNT_OBJ_ON);
         CreatePressStartBanner(START_BANNER_X, 108);
         CreateCopyrightBanner(START_BANNER_X, 148);
-        if (QUICKSTART && QUICKSTART_HUD)
+        if (QUICKSTART && QUICKSTART_HUD
+#if EC_HEADLESS_FIXTURES
+         && gEcHeadlessFixtureActiveScenario != EC_HEADLESS_SCENARIO_TITLE
+#endif
+        )
             CreateQuickstartHud();
         gTasks[taskId].tBg1Y = 0;
         gTasks[taskId].func = Task_TitleScreenPhase3;

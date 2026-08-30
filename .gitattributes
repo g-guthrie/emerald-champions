@@ -27,3 +27,7 @@ Makefile text eol=lf
 
 *.h linguist-language=C
 *.inc linguist-language=Assembly
+
+# Preserve the vendored official mGBA snapshot byte-for-byte, including the
+# upstream line-ending choices in its third-party sources.
+tools/mgba-source/** -text

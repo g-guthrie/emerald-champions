@@ -1630,6 +1630,62 @@
       "y": 4,
       "width": 1,
       "height": 1
+    },
+    {
+      "id": "MAPSEC_SEASPRAY_CAVE",
+      "name": "SEASPRAY CAVE",
+      "x": 0,
+      "y": 4,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_EMBER_PATH",
+      "name": "EMBER PATH",
+      "x": 6,
+      "y": 3,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_ASHEN_WOODS",
+      "name": "ASHEN WOODS",
+      "x": 6,
+      "y": 3,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_SANDSTREWN_RUINS",
+      "name": "SANDSTREWN RUINS",
+      "x": 8,
+      "y": 2,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_DEWFORD_MEADOW",
+      "name": "DEWFORD MEADOW",
+      "x": 1,
+      "y": 14,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_DEWFORD_MANOR",
+      "name": "DEWFORD MANOR",
+      "x": 1,
+      "y": 14,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_VERDANTURF_MEADOW",
+      "name": "VERDANTURF MEADOW",
+      "x": 4,
+      "y": 7,
+      "width": 1,
+      "height": 1
     }
   ]
 }

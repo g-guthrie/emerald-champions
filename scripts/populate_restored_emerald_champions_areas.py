@@ -264,7 +264,7 @@ EXTRA_OBJECTS = {
     ],
     "CaveOfOrigin_DianciesRoom": [
         obj("OBJ_EVENT_GFX_SPECIES(DIANCIE)", 9, 9, "CaveOfOrigin_DianciesRoom_EventScript_Diancie", "FLAG_EC_CAUGHT_DIANCIE", "LOCALID_EC_DIANCIE"),
-        obj("OBJ_EVENT_GFX_SPECIES(TERAPAGOS)", 4, 9, "CaveOfOrigin_DianciesRoom_EventScript_Terapagos", "FLAG_EC_CAUGHT_TERAPAGOS", "LOCALID_EC_TERAPAGOS"),
+        obj("OBJ_EVENT_GFX_SPECIES(TERAPAGOS)", 7, 9, "CaveOfOrigin_DianciesRoom_EventScript_Terapagos", "FLAG_EC_CAUGHT_TERAPAGOS", "LOCALID_EC_TERAPAGOS"),
         obj("OBJ_EVENT_GFX_WALLACE", 13, 9, "CaveOfOrigin_DianciesRoom_EventScript_WallaceExhibition", "0", "LOCALID_EC_WALLACE"),
     ],
     "DewfordManor_1F": [
@@ -283,7 +283,7 @@ EXTRA_OBJECTS = {
     ],
     "MirageTower_B1F": [obj("OBJ_EVENT_GFX_OLD_MAN", 4, 7, "MirageTower_B1F_EventScript_Inscription")],
     "PetalburgWoods_2": [
-        obj("OBJ_EVENT_GFX_SPECIES(VIRIZION)", 42, 5, "PetalburgWoods_2_EventScript_Virizion", "FLAG_EC_CAUGHT_VIRIZION", "LOCALID_EC_VIRIZION"),
+        obj("OBJ_EVENT_GFX_SPECIES(VIRIZION)", 42, 6, "PetalburgWoods_2_EventScript_Virizion", "FLAG_EC_CAUGHT_VIRIZION", "LOCALID_EC_VIRIZION"),
         obj("OBJ_EVENT_GFX_SPECIES(WO_CHIEN)", 5, 5, "PetalburgWoods_2_EventScript_WoChien", "FLAG_EC_CAUGHT_WO_CHIEN", "LOCALID_EC_WO_CHIEN"),
         obj("OBJ_EVENT_GFX_BUG_CATCHER", 18, 31, "PetalburgWoods_2_EventScript_Ranger"),
     ],
@@ -292,7 +292,7 @@ EXTRA_OBJECTS = {
         obj("OBJ_EVENT_GFX_CAMPER", 8, 32, "PetalburgWoods_3_EventScript_Ranger"),
     ],
     "Route111_RuinsExterior": [
-        obj("OBJ_EVENT_GFX_SPECIES(LANDORUS)", 10, 10, "Route111_RuinsExterior_EventScript_Landorus", "FLAG_EC_CAUGHT_LANDORUS", "LOCALID_EC_LANDORUS"),
+        obj("OBJ_EVENT_GFX_SPECIES(LANDORUS)", 9, 10, "Route111_RuinsExterior_EventScript_Landorus", "FLAG_EC_CAUGHT_LANDORUS", "LOCALID_EC_LANDORUS"),
         obj("OBJ_EVENT_GFX_MANIAC", 8, 20, "Route111_RuinsExterior_EventScript_Archaeologist"),
     ],
     "SandstrewnRuins": [obj("OBJ_EVENT_GFX_MANIAC", 8, 128, "SandstrewnRuins_EventScript_Archaeologist")],
@@ -307,7 +307,7 @@ EXTRA_OBJECTS = {
     "VerdanturfMeadow": [
         obj("OBJ_EVENT_GFX_SPECIES(SHAYMIN)", 10, 14, "VerdanturfMeadow_EventScript_Shaymin", "FLAG_EC_CAUGHT_SHAYMIN", "LOCALID_EC_SHAYMIN"),
         obj("OBJ_EVENT_GFX_SPECIES(ENAMORUS)", 4, 12, "VerdanturfMeadow_EventScript_Enamorus", "FLAG_EC_CAUGHT_ENAMORUS", "LOCALID_EC_ENAMORUS"),
-        obj("OBJ_EVENT_GFX_SPECIES(FEZANDIPITI)", 14, 12, "VerdanturfMeadow_EventScript_Fezandipiti", "FLAG_EC_CAUGHT_FEZANDIPITI", "LOCALID_EC_FEZANDIPITI"),
+        obj("OBJ_EVENT_GFX_SPECIES(FEZANDIPITI)", 13, 12, "VerdanturfMeadow_EventScript_Fezandipiti", "FLAG_EC_CAUGHT_FEZANDIPITI", "LOCALID_EC_FEZANDIPITI"),
         obj("OBJ_EVENT_GFX_GIRL_2", 12, 9, "VerdanturfMeadow_EventScript_Warden"),
     ],
 }

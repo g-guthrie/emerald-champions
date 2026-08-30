@@ -450,30 +450,24 @@ BattleFrontier_BattleTowerLobby_EventScript_ChampionsCircuit::
 	call_if_eq VAR_RESULT, 1, BattleFrontier_BattleTowerLobby_EventScript_CircuitRewardParty
 	call_if_eq VAR_RESULT, 2, BattleFrontier_BattleTowerLobby_EventScript_CircuitRewardPC
 	goto_if_eq VAR_RESULT, 3, BattleFrontier_BattleTowerLobby_EventScript_CircuitPendingRewardNoRoom
+	goto_if_set FLAG_EC_CHAMPIONS_CIRCUIT_EXPLAINED, BattleFrontier_BattleTowerLobby_EventScript_CircuitWelcomeBack
 	msgbox BattleFrontier_BattleTowerLobby_Text_CircuitWelcome, MSGBOX_DEFAULT
+	setflag FLAG_EC_CHAMPIONS_CIRCUIT_EXPLAINED
+	goto BattleFrontier_BattleTowerLobby_EventScript_CircuitEntryCheck
+
+BattleFrontier_BattleTowerLobby_EventScript_CircuitWelcomeBack::
+	msgbox BattleFrontier_BattleTowerLobby_Text_CircuitWelcomeBack, MSGBOX_DEFAULT
+
+BattleFrontier_BattleTowerLobby_EventScript_CircuitEntryCheck::
 	special ChampionsCircuitCanEnter
 	goto_if_eq VAR_RESULT, FALSE, BattleFrontier_BattleTowerLobby_EventScript_CircuitNeedsParty
 	msgbox BattleFrontier_BattleTowerLobby_Text_CircuitEnter, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, BattleFrontier_BattleTowerLobby_EventScript_CircuitCancel
 	special ChampionsCircuitBegin
-
-BattleFrontier_BattleTowerLobby_EventScript_CircuitNext::
-	special ChampionsCircuitGenerateOpponent
-	goto_if_ne VAR_RESULT, PARTY_SIZE, BattleFrontier_BattleTowerLobby_EventScript_CircuitGenerationFailed
-	msgbox BattleFrontier_BattleTowerLobby_Text_CircuitOpponent, MSGBOX_DEFAULT
 	closemessage
-	special BattleSetup_StartChampionsCircuitBattle
-	special ChampionsCircuitHandleBattleResult
-	goto_if_eq VAR_RESULT, FALSE, BattleFrontier_BattleTowerLobby_EventScript_CircuitLost
-	special ChampionsCircuitTryGiveReward
-	call_if_eq VAR_RESULT, 1, BattleFrontier_BattleTowerLobby_EventScript_CircuitRewardParty
-	call_if_eq VAR_RESULT, 2, BattleFrontier_BattleTowerLobby_EventScript_CircuitRewardPC
-	call_if_eq VAR_RESULT, 3, BattleFrontier_BattleTowerLobby_EventScript_CircuitRewardNoRoom
-	msgbox BattleFrontier_BattleTowerLobby_Text_CircuitWon, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, BattleFrontier_BattleTowerLobby_EventScript_CircuitNext
-	special ChampionsCircuitEnd
-	msgbox BattleFrontier_BattleTowerLobby_Text_CircuitRetire, MSGBOX_DEFAULT
-	release
+	setvar VAR_0x8006, 0
+	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_CORRIDOR, 8, 1
+	waitstate
 	end
 
 BattleFrontier_BattleTowerLobby_EventScript_CircuitRewardParty::
@@ -508,17 +502,6 @@ BattleFrontier_BattleTowerLobby_EventScript_CircuitCancel::
 	release
 	end
 
-BattleFrontier_BattleTowerLobby_EventScript_CircuitLost::
-	msgbox BattleFrontier_BattleTowerLobby_Text_CircuitLost, MSGBOX_DEFAULT
-	release
-	end
-
-BattleFrontier_BattleTowerLobby_EventScript_CircuitGenerationFailed::
-	special ChampionsCircuitEnd
-	msgbox BattleFrontier_BattleTowerLobby_Text_CircuitGenerationFailed, MSGBOX_DEFAULT
-	release
-	end
-
 BattleFrontier_BattleTowerLobby_Text_CircuitWelcome:
 	.string "This is the FRONTIER's premier challenge:\n"
 	.string "the CHAMPIONS CIRCUIT.\p"
@@ -527,6 +510,10 @@ BattleFrontier_BattleTowerLobby_Text_CircuitWelcome:
 	.string "Your team becomes Lv. 80. Opponents\n"
 	.string "grow stronger after every victory.\p"
 	.string "Other desks preserve classic formats.$"
+
+BattleFrontier_BattleTowerLobby_Text_CircuitWelcomeBack:
+	.string "Welcome back to the CHAMPIONS CIRCUIT.\n"
+	.string "Are your six Pokémon ready?$"
 
 BattleFrontier_BattleTowerLobby_Text_CircuitEnter:
 	.string "Bring six healthy Pokémon. Held items\n"

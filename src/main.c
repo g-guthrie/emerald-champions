@@ -25,6 +25,9 @@
 #include "trainer_hill.h"
 #include "test_runner.h"
 #include "constants/rgb.h"
+#if EC_HEADLESS_FIXTURES
+#include "emerald_champions_headless.h"
+#endif
 
 static void VBlankIntr(void);
 static void HBlankIntr(void);
@@ -185,7 +188,11 @@ static void InitMainCallbacks(void)
     gTrainerHillVBlankCounter = NULL;
     gMain.vblankCounter2 = 0;
     gMain.callback1 = NULL;
+#if EC_HEADLESS_FIXTURES
+    SetMainCallback2(CB2_EmeraldChampionsHeadlessFixture);
+#else
     SetMainCallback2(gInitialMainCB2);
+#endif
     gSaveBlock2Ptr = &gSaveblock2.block;
     gPokemonStoragePtr = &gPokemonStorage.block;
 }
@@ -197,6 +204,9 @@ static void CallCallbacks(void)
 
     if (gMain.callback2)
         gMain.callback2();
+#if EC_HEADLESS_FIXTURES
+    EmeraldChampionsHeadlessObserve();
+#endif
 }
 
 void SetMainCallback2(MainCallback callback)

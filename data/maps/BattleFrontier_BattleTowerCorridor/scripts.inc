@@ -20,11 +20,21 @@ BattleFrontier_BattleTowerCorridor_OnFrame:
 
 BattleFrontier_BattleTowerCorridor_EventScript_EnterCorridor::
 	setvar VAR_TEMP_0, 1
+	goto_if_eq VAR_CHAMPIONS_CIRCUIT_ACTIVE, TRUE, BattleFrontier_BattleTowerCorridor_EventScript_EnterCircuitCorridor
 	goto_if_eq VAR_0x8006, 1, BattleFrontier_BattleTowerCorridor_EventScript_WalkToFarDoor
 	applymovement LOCALID_TOWER_CORRIDOR_ATTENDANT, BattleFrontier_BattleTowerCorridor_Movement_AttendantWalkToDoor
 	applymovement LOCALID_PLAYER, BattleFrontier_BattleTowerCorridor_Movement_PlayerWalkToDoor
 	waitmovement 0
 	goto BattleFrontier_BattleTowerCorridor_EventScript_WarpToBattleRoom
+
+BattleFrontier_BattleTowerCorridor_EventScript_EnterCircuitCorridor::
+	applymovement LOCALID_TOWER_CORRIDOR_ATTENDANT, BattleFrontier_BattleTowerCorridor_Movement_AttendantWalkToDoor
+	applymovement LOCALID_PLAYER, BattleFrontier_BattleTowerCorridor_Movement_PlayerWalkToDoor
+	waitmovement 0
+	setvar VAR_TEMP_0, 0
+	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_BATTLE_ROOM, 5, 8
+	waitstate
+	end
 
 BattleFrontier_BattleTowerCorridor_EventScript_WalkToFarDoor::
 	applymovement LOCALID_TOWER_CORRIDOR_ATTENDANT, BattleFrontier_BattleTowerCorridor_Movement_AttendantWalkToFarDoor
@@ -51,4 +61,3 @@ BattleFrontier_BattleTowerCorridor_Movement_AttendantWalkToDoor:
 	walk_up
 	set_invisible
 	step_end
-

@@ -1,0 +1,1777 @@
+{
+  "elf": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/pokeemerald-headless.elf",
+  "param_symbol": "0x0200195c",
+  "rendered": [
+    {
+      "frames": 600,
+      "keys": [],
+      "name": "center-oldale",
+      "png_sha256": "386cf27827f6b70db33177ecea23cfe7c149435b27d42748b7d0f5ebf423e444",
+      "scenario_id": 1,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/center-oldale.png",
+      "verified_runtime_state": false,
+      "video_hash": "1eca97d09480eb68"
+    },
+    {
+      "frames": 600,
+      "keys": [],
+      "name": "center-lavaridge",
+      "png_sha256": "b02c4dfbcc4dc7840cd5c75b1cdb83f3c37e365885604808d531fcd0319e37e0",
+      "scenario_id": 2,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/center-lavaridge.png",
+      "verified_runtime_state": false,
+      "video_hash": "8908a41e5d6f8560"
+    },
+    {
+      "frames": 520,
+      "keys": [
+        [
+          210,
+          2,
+          "A"
+        ],
+        [
+          250,
+          2,
+          "DOWN"
+        ],
+        [
+          290,
+          2,
+          "A"
+        ]
+      ],
+      "name": "ability-menu",
+      "png_sha256": "46764e2c2d30efa603a0add7cbe9167fd22ae380c96201a9b7a1ad99aedcce13",
+      "scenario_id": 3,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/ability-menu.png",
+      "verified_runtime_state": false,
+      "video_hash": "5463dbe9577f073d"
+    },
+    {
+      "frames": 300,
+      "keys": [],
+      "name": "party-overview",
+      "png_sha256": "cdf9d54986858062f1043970b51d79f21d3299aa4539568b4e1de7d9d20add43",
+      "scenario_id": 3,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/party-overview.png",
+      "verified_runtime_state": false,
+      "video_hash": "fd7fdfbb21ad7346"
+    },
+    {
+      "frames": 245,
+      "keys": [
+        [
+          210,
+          2,
+          "A"
+        ]
+      ],
+      "name": "party-action-menu",
+      "png_sha256": "d4d4c97f8176534d414d2e4aecdcdf4c5f6d9071d3e5cee30ff363d2a4288206",
+      "scenario_id": 3,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/party-action-menu.png",
+      "verified_runtime_state": false,
+      "video_hash": "1a19c6a9d12ca0d1"
+    },
+    {
+      "frames": 520,
+      "keys": [],
+      "name": "options",
+      "png_sha256": "3876d9a83887d46e72c89dddb87f2fb3d2934487387f6eac785efb50990c6f9e",
+      "scenario_id": 4,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/options.png",
+      "verified_runtime_state": false,
+      "video_hash": "0dbefe038a5ba606"
+    },
+    {
+      "frames": 760,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          360,
+          2,
+          "A"
+        ],
+        [
+          460,
+          2,
+          "A"
+        ]
+      ],
+      "name": "battle-vendor",
+      "png_sha256": "9a6ec16ee0af323e8f9223d830b276dde2c637456b135f0191594cc60fce4189",
+      "scenario_id": 5,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/battle-vendor.png",
+      "verified_runtime_state": false,
+      "video_hash": "84f707751cf1fc1a"
+    },
+    {
+      "frames": 1120,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          360,
+          2,
+          "A"
+        ],
+        [
+          460,
+          2,
+          "A"
+        ],
+        [
+          800,
+          2,
+          "A"
+        ],
+        [
+          940,
+          2,
+          "A"
+        ]
+      ],
+      "name": "battle-vendor-shop",
+      "png_sha256": "8857f25acc2bd29ae1c61158e5a3d7e1731dc6eb89538340e4aeecabdc146bf4",
+      "scenario_id": 5,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/battle-vendor-shop.png",
+      "verified_runtime_state": false,
+      "video_hash": "616f163977663cd1"
+    },
+    {
+      "frames": 350,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ]
+      ],
+      "name": "move-specialist-root",
+      "png_sha256": "6ce8a3626c162708053be77f55ad26ec2a95bc00114eaeff36141be5f001a847",
+      "scenario_id": 6,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/move-specialist-root.png",
+      "verified_runtime_state": false,
+      "video_hash": "5595eeaa3fc0e68f"
+    },
+    {
+      "frames": 700,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          380,
+          2,
+          "A"
+        ]
+      ],
+      "name": "move-specialist-party-prompt",
+      "png_sha256": "7d5538ccfcfafb04abac4163d3d58793bed50e40bb524742f57da4a7f9be882d",
+      "scenario_id": 6,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/move-specialist-party-prompt.png",
+      "verified_runtime_state": false,
+      "video_hash": "f295b108d88adb79"
+    },
+    {
+      "frames": 900,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          380,
+          2,
+          "A"
+        ],
+        [
+          520,
+          2,
+          "A"
+        ],
+        [
+          650,
+          2,
+          "A"
+        ],
+        [
+          760,
+          2,
+          "A"
+        ]
+      ],
+      "name": "battle-set-list",
+      "png_sha256": "85d305c341c5c0a51b76321cb507a849004141cb4cfd6cd64abe4edef91824c5",
+      "scenario_id": 6,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/battle-set-list.png",
+      "verified_runtime_state": false,
+      "video_hash": "8260c701a883dd58"
+    },
+    {
+      "frames": 1050,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          340,
+          2,
+          "DOWN"
+        ],
+        [
+          380,
+          2,
+          "A"
+        ],
+        [
+          520,
+          2,
+          "A"
+        ],
+        [
+          650,
+          2,
+          "A"
+        ]
+      ],
+      "name": "all-legal-moves",
+      "png_sha256": "264728d0e9d89f4cac139b979d6601c9b127c64188192d25a847da9f354134c1",
+      "scenario_id": 6,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/all-legal-moves.png",
+      "verified_runtime_state": false,
+      "video_hash": "d1964eaf6be2dd7d"
+    },
+    {
+      "frames": 560,
+      "keys": [
+        [
+          280,
+          2,
+          "UP"
+        ]
+      ],
+      "name": "thundurus",
+      "png_sha256": "4377c1e72c89cec676a99a5864d2da2376037c2fc84d6a92f109c593af6ea1c4",
+      "scenario_id": 7,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/thundurus.png",
+      "verified_runtime_state": false,
+      "video_hash": "e4842bcb9e236afa"
+    },
+    {
+      "frames": 560,
+      "keys": [
+        [
+          280,
+          2,
+          "UP"
+        ]
+      ],
+      "name": "tornadus",
+      "png_sha256": "af35208776b373208eada2335224138ff3ac700d85d8554167dd46483200424f",
+      "scenario_id": 8,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/tornadus.png",
+      "verified_runtime_state": false,
+      "video_hash": "a928c7ec14004e9b"
+    },
+    {
+      "frames": 560,
+      "keys": [
+        [
+          280,
+          2,
+          "UP"
+        ]
+      ],
+      "name": "landorus",
+      "png_sha256": "2a0ecf8204f06c75d3cf5ddeed68fed7198b9870a2b3ca0660524f6fc4519f8d",
+      "scenario_id": 9,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/landorus.png",
+      "verified_runtime_state": false,
+      "video_hash": "35faf9b5df19ccb6"
+    },
+    {
+      "frames": 700,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          360,
+          2,
+          "A"
+        ],
+        [
+          480,
+          2,
+          "A"
+        ]
+      ],
+      "name": "game-corner-prizes",
+      "png_sha256": "36eaf6b77cf909be389f6269907f32b3fae534a4ed782799515359d7b90eb36b",
+      "scenario_id": 10,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/game-corner-prizes.png",
+      "verified_runtime_state": false,
+      "video_hash": "42f01583c8c105ac"
+    },
+    {
+      "frames": 980,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          360,
+          2,
+          "A"
+        ],
+        [
+          480,
+          2,
+          "A"
+        ],
+        [
+          620,
+          2,
+          "DOWN"
+        ],
+        [
+          650,
+          2,
+          "DOWN"
+        ],
+        [
+          680,
+          2,
+          "A"
+        ],
+        [
+          800,
+          2,
+          "A"
+        ]
+      ],
+      "name": "game-corner-regions",
+      "png_sha256": "19f37eebb8f7e7494e055d0561e2cd59a3a28064bbf9987b4b72671675e0fe72",
+      "scenario_id": 10,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/game-corner-regions.png",
+      "verified_runtime_state": false,
+      "video_hash": "0dd411e87f1fbeee"
+    },
+    {
+      "frames": 760,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          360,
+          2,
+          "A"
+        ],
+        [
+          480,
+          2,
+          "A"
+        ],
+        [
+          620,
+          2,
+          "DOWN"
+        ],
+        [
+          650,
+          2,
+          "DOWN"
+        ],
+        [
+          680,
+          2,
+          "A"
+        ]
+      ],
+      "name": "game-corner-region-list",
+      "png_sha256": "63ba6b0919fd205bc1d82ff310f9a94145941b5a1f6591685b1d607dda0abed1",
+      "scenario_id": 10,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/game-corner-region-list.png",
+      "verified_runtime_state": false,
+      "video_hash": "9b18cea0d67a5353"
+    },
+    {
+      "frames": 600,
+      "keys": [],
+      "name": "circuit-lobby",
+      "png_sha256": "e783ea9f4016f8390f6f8c7bd03b1e475046c8e09d583b6d316dbab2502a6e2e",
+      "scenario_id": 11,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/circuit-lobby.png",
+      "verified_runtime_state": false,
+      "video_hash": "be017d2c9b19ad5e"
+    },
+    {
+      "frames": 700,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ]
+      ],
+      "name": "circuit-welcome",
+      "png_sha256": "1b25d0437d38cd1f7fb0ac46e1550f857694625071e905eeabc99893ba99574f",
+      "scenario_id": 11,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/circuit-welcome.png",
+      "verified_runtime_state": false,
+      "video_hash": "798677f8f53d5f9f"
+    },
+    {
+      "frames": 700,
+      "keys": [],
+      "name": "leveler-complete",
+      "png_sha256": "19287c24fb6aaf493a6ddf231fc7f848e8acf29076e7028a89798e0a8156df7e",
+      "scenario_id": 12,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/leveler-complete.png",
+      "verified_runtime_state": false,
+      "video_hash": "83c99837d4c60abe"
+    },
+    {
+      "frames": 650,
+      "keys": [],
+      "name": "all-legal-moves-direct",
+      "png_sha256": "9fa28caa99b48079f75fad7f519262473c6d50c8368c32a795764442ba62f0a4",
+      "scenario_id": 13,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/all-legal-moves-direct.png",
+      "verified_runtime_state": false,
+      "video_hash": "98602e399858c943"
+    },
+    {
+      "frames": 650,
+      "keys": [],
+      "name": "all-legal-moves-mew",
+      "png_sha256": "801adce6e0c52cd1c7e3945476bc5f62071f1896e8788189bbc6412f3d7116e7",
+      "scenario_id": 14,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/all-legal-moves-mew.png",
+      "verified_runtime_state": false,
+      "video_hash": "6a951dc2235138c0"
+    },
+    {
+      "frames": 1500,
+      "keys": [
+        [
+          400,
+          1000,
+          "DOWN"
+        ]
+      ],
+      "name": "all-legal-moves-mew-middle",
+      "png_sha256": "5a2f8251a1e752034976e2c3deec352dc60899c7be646d3cb86521bfa647a644",
+      "scenario_id": 14,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/all-legal-moves-mew-middle.png",
+      "verified_runtime_state": false,
+      "video_hash": "0d0b7f982529a987"
+    },
+    {
+      "frames": 3500,
+      "keys": [
+        [
+          400,
+          3000,
+          "DOWN"
+        ]
+      ],
+      "name": "all-legal-moves-mew-final",
+      "png_sha256": "3c1f99b67330b330a9cbb4b9106dbd8e6baa28342bbbc2ba8d8204a35b9fcfb4",
+      "scenario_id": 14,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/all-legal-moves-mew-final.png",
+      "verified_runtime_state": false,
+      "video_hash": "75835d2f161faaf3"
+    },
+    {
+      "frames": 1500,
+      "keys": [
+        [
+          900,
+          2,
+          "A"
+        ],
+        [
+          1100,
+          2,
+          "A"
+        ]
+      ],
+      "name": "wild-action-menu",
+      "png_sha256": "b74e4922c237927beedaf03b819f63948a497153f97608ad05651652b466a793",
+      "scenario_id": 15,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/wild-action-menu.png",
+      "verified_runtime_state": true,
+      "video_hash": "5a0f80776c94d5d7"
+    },
+    {
+      "frames": 1750,
+      "keys": [
+        [
+          900,
+          2,
+          "A"
+        ],
+        [
+          1100,
+          2,
+          "A"
+        ],
+        [
+          1400,
+          2,
+          "A"
+        ],
+        [
+          1550,
+          2,
+          "L"
+        ]
+      ],
+      "name": "move-details",
+      "png_sha256": "793c4b5bfa95731f9ed68433bf3f43705964294babb0568cef3321ab20703111",
+      "scenario_id": 16,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/move-details.png",
+      "verified_runtime_state": true,
+      "video_hash": "f613ca854091cf4f"
+    },
+    {
+      "frames": 1200,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          380,
+          2,
+          "A"
+        ],
+        [
+          520,
+          2,
+          "A"
+        ],
+        [
+          650,
+          2,
+          "A"
+        ],
+        [
+          760,
+          2,
+          "A"
+        ],
+        [
+          900,
+          2,
+          "A"
+        ],
+        [
+          1020,
+          2,
+          "A"
+        ]
+      ],
+      "name": "battle-set-current",
+      "png_sha256": "cad3296f4472a53b4b02c9fc181d5c2deb413fefdfe35e74b152a576f224d920",
+      "scenario_id": 17,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/battle-set-current.png",
+      "verified_runtime_state": false,
+      "video_hash": "527f4793f3360eaa"
+    },
+    {
+      "frames": 600,
+      "keys": [],
+      "name": "naming",
+      "png_sha256": "e439662298d7cd75192ef2788d7cf5e83b59b7bc5c177d22db0252e056c0a247",
+      "scenario_id": 18,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/naming.png",
+      "verified_runtime_state": false,
+      "video_hash": "3e268711dd2ee10b"
+    },
+    {
+      "frames": 700,
+      "keys": [],
+      "name": "storage-root",
+      "png_sha256": "d7250c0e7ba138d7ae6f2f12566b04abf5a6d5df19573fdfd5e4bc5da9a7adda",
+      "scenario_id": 19,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/storage-root.png",
+      "verified_runtime_state": false,
+      "video_hash": "c1c32a134388b184"
+    },
+    {
+      "frames": 1400,
+      "keys": [
+        [
+          760,
+          2,
+          "A"
+        ]
+      ],
+      "name": "storage-boxes",
+      "png_sha256": "69ae920937ba8cea2e208a937dbe860a00e18ecb6082e079c8fc30be471a9ec0",
+      "scenario_id": 19,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/storage-boxes.png",
+      "verified_runtime_state": false,
+      "video_hash": "81427a6e3bbec7d6"
+    },
+    {
+      "frames": 1900,
+      "keys": [
+        [
+          760,
+          2,
+          "A"
+        ],
+        [
+          1250,
+          2,
+          "START"
+        ],
+        [
+          1370,
+          2,
+          "A"
+        ],
+        [
+          1510,
+          2,
+          "A"
+        ]
+      ],
+      "name": "storage-box-popup",
+      "png_sha256": "8e41cc816be5cb857d782b7dafcba5229b25870193e20f0420f2132cc932db45",
+      "scenario_id": 19,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/storage-box-popup.png",
+      "verified_runtime_state": false,
+      "video_hash": "81596b31babcf724"
+    },
+    {
+      "frames": 2800,
+      "keys": [
+        [
+          900,
+          2,
+          "DOWN"
+        ],
+        [
+          1100,
+          2,
+          "A"
+        ],
+        [
+          1600,
+          2,
+          "A"
+        ],
+        [
+          2000,
+          2,
+          "DOWN"
+        ],
+        [
+          2200,
+          2,
+          "DOWN"
+        ],
+        [
+          2400,
+          2,
+          "A"
+        ]
+      ],
+      "name": "storage-move-items",
+      "png_sha256": "c9cfbe33410c28f2db9e3b35a6d6d074b6b3a845659b900c5f03fb92ad8b6b6c",
+      "scenario_id": 19,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/storage-move-items.png",
+      "verified_runtime_state": false,
+      "video_hash": "e4ad7f48775a9659"
+    },
+    {
+      "frames": 1100,
+      "keys": [
+        [
+          700,
+          2,
+          "A"
+        ],
+        [
+          840,
+          2,
+          "A"
+        ]
+      ],
+      "name": "starter-regions",
+      "png_sha256": "fae1208a41a6dac2468369ebb8ef47d1eb759c02e23cfdfe7698a695feed64f6",
+      "scenario_id": 20,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/starter-regions.png",
+      "verified_runtime_state": false,
+      "video_hash": "4a62ddf629b01615"
+    },
+    {
+      "frames": 900,
+      "keys": [],
+      "name": "circuit-room",
+      "png_sha256": "cf8fe630dac79be58adbee0277b564330bc10b1429cc5bb57debdc10cacb0c08",
+      "scenario_id": 21,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/circuit-room.png",
+      "verified_runtime_state": false,
+      "video_hash": "b613435269fddc8b"
+    },
+    {
+      "frames": 900,
+      "keys": [],
+      "name": "pokedex",
+      "png_sha256": "704b91bd6f185322c1aaf03998ef13cb6304d2b1e126a33f8020b9ad35f1b5ce",
+      "scenario_id": 23,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/pokedex.png",
+      "verified_runtime_state": false,
+      "video_hash": "c24c05b3fd66d468"
+    },
+    {
+      "frames": 900,
+      "keys": [],
+      "name": "summary-info",
+      "png_sha256": "c69090b12f99962c9286e874f94b21fd72833e9e713d3e75e678a368ca456dc9",
+      "scenario_id": 24,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/summary-info.png",
+      "verified_runtime_state": false,
+      "video_hash": "b16f145b23a04b87"
+    },
+    {
+      "frames": 1050,
+      "keys": [
+        [
+          800,
+          2,
+          "RIGHT"
+        ]
+      ],
+      "name": "summary-skills",
+      "png_sha256": "7b75fbc4654c65d01fe99d78e160ed5b15540f7bd0f9c64a7d020c5721c3f21e",
+      "scenario_id": 24,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/summary-skills.png",
+      "verified_runtime_state": false,
+      "video_hash": "8e393b9dfa5ac4d0"
+    },
+    {
+      "frames": 1200,
+      "keys": [
+        [
+          800,
+          2,
+          "RIGHT"
+        ],
+        [
+          980,
+          2,
+          "RIGHT"
+        ]
+      ],
+      "name": "summary-moves",
+      "png_sha256": "0f43017e785d47fdda045c21c41b7d1526d967de8206b4e6bd6893ab0581bfe4",
+      "scenario_id": 24,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/summary-moves.png",
+      "verified_runtime_state": false,
+      "video_hash": "7f02afd4dcf02c9c"
+    },
+    {
+      "frames": 1400,
+      "keys": [
+        [
+          800,
+          2,
+          "RIGHT"
+        ],
+        [
+          980,
+          2,
+          "RIGHT"
+        ],
+        [
+          1160,
+          2,
+          "A"
+        ]
+      ],
+      "name": "summary-move-detail",
+      "png_sha256": "1ac65481663bbf05cad59183583b1c96d3f939b8b8e5c9eaf55c5555d36a1bbd",
+      "scenario_id": 24,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/summary-move-detail.png",
+      "verified_runtime_state": false,
+      "video_hash": "8563272d074a18a3"
+    },
+    {
+      "frames": 1200,
+      "keys": [
+        [
+          820,
+          2,
+          "B"
+        ]
+      ],
+      "name": "summary-party-roundtrip",
+      "png_sha256": "13fd599c73723bd1723f4dba397a3f6d986852e0d5c3b60fa096e720d108e797",
+      "scenario_id": 24,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/summary-party-roundtrip.png",
+      "verified_runtime_state": false,
+      "video_hash": "01f156d82cfacd3d"
+    },
+    {
+      "frames": 900,
+      "keys": [],
+      "name": "bag",
+      "png_sha256": "dd743320756af6d9eb46aade785fdbe23b8bd66d33ea83ce313e17a0b7895594",
+      "scenario_id": 25,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/bag.png",
+      "verified_runtime_state": false,
+      "video_hash": "b3c004a5a127a2ca"
+    },
+    {
+      "frames": 900,
+      "keys": [],
+      "name": "frontier-pass",
+      "png_sha256": "701ce2db400830a246f9a96fde787e188010a3b4275ed20e8b0de16ffd5136b1",
+      "scenario_id": 26,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/frontier-pass.png",
+      "verified_runtime_state": false,
+      "video_hash": "54a6a3499d5eb751"
+    },
+    {
+      "frames": 1500,
+      "keys": [
+        [
+          900,
+          2,
+          "A"
+        ]
+      ],
+      "name": "frontier-pass-map",
+      "png_sha256": "4613235530fb1dc6d8e29c4bfbb43a541db5e792b6b040ed25bf247da1323e2a",
+      "scenario_id": 26,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/frontier-pass-map.png",
+      "verified_runtime_state": false,
+      "video_hash": "e1b2a111e1997b84"
+    },
+    {
+      "frames": 650,
+      "keys": [],
+      "name": "ember-path-warden",
+      "png_sha256": "2f686702dc739c0acffc63dee05ef02633b7c0485ab186d5a0104cba99467ec3",
+      "scenario_id": 27,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/ember-path-warden.png",
+      "verified_runtime_state": false,
+      "video_hash": "94cd3c2da0b72053"
+    },
+    {
+      "frames": 1640,
+      "keys": [
+        [
+          500,
+          2,
+          "A"
+        ],
+        [
+          700,
+          2,
+          "A"
+        ],
+        [
+          900,
+          2,
+          "A"
+        ],
+        [
+          1100,
+          2,
+          "A"
+        ]
+      ],
+      "name": "double-status-ability",
+      "png_sha256": "cd93d6128bc97903d9aa8931e061503628b688c7dc4851f901dfa00a003ac881",
+      "scenario_id": 29,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/double-status-ability.png",
+      "verified_runtime_state": true,
+      "video_hash": "badbdb566763618b"
+    },
+    {
+      "frames": 2400,
+      "keys": [
+        [
+          900,
+          2,
+          "A"
+        ],
+        [
+          1120,
+          2,
+          "A"
+        ],
+        [
+          1400,
+          2,
+          "A"
+        ]
+      ],
+      "name": "mega-ready",
+      "param": 0,
+      "png_sha256": "5c3e541e0074e8e8cd4ebf8af08384bdd1a1ec6a480a11109897192d89a2e4a2",
+      "scenario_id": 30,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/mega-ready.png",
+      "verified_runtime_state": true,
+      "video_hash": "e1b59984249e92c5"
+    },
+    {
+      "frames": 5000,
+      "keys": [
+        [
+          900,
+          2,
+          "A"
+        ],
+        [
+          1120,
+          2,
+          "A"
+        ],
+        [
+          1400,
+          2,
+          "A"
+        ],
+        [
+          1650,
+          2,
+          "START"
+        ],
+        [
+          1750,
+          2,
+          "A"
+        ],
+        [
+          2100,
+          2,
+          "A"
+        ],
+        [
+          2400,
+          2,
+          "A"
+        ],
+        [
+          2700,
+          2,
+          "A"
+        ]
+      ],
+      "name": "mega-active",
+      "param": 1,
+      "png_sha256": "07a94a94a2add211f14024f2a9cb0501f8e5b7c6b21f18b4d0a2493530652ede",
+      "scenario_id": 30,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/mega-active.png",
+      "verified_runtime_state": true,
+      "video_hash": "c631d8a6dfb54e49"
+    },
+    {
+      "frames": 4200,
+      "keys": [
+        [
+          500,
+          2,
+          "A"
+        ],
+        [
+          700,
+          2,
+          "A"
+        ],
+        [
+          900,
+          2,
+          "A"
+        ],
+        [
+          1100,
+          2,
+          "A"
+        ],
+        [
+          1400,
+          2,
+          "A"
+        ],
+        [
+          1700,
+          2,
+          "A"
+        ],
+        [
+          2000,
+          2,
+          "A"
+        ],
+        [
+          2300,
+          2,
+          "A"
+        ]
+      ],
+      "name": "opposing-primals",
+      "png_sha256": "df732e520f77abcfeb4136859ecccdaa741c87f37e5ad18f4b430d51308ce44b",
+      "scenario_id": 31,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/opposing-primals.png",
+      "verified_runtime_state": true,
+      "video_hash": "12bab02fbf5f6755"
+    },
+    {
+      "frames": 1800,
+      "keys": [
+        [
+          1000,
+          2,
+          "A"
+        ]
+      ],
+      "name": "safari-action",
+      "png_sha256": "ad9b5aecab219f5f51605b4ba67611b9d0bed577976e15c229f4ffb9628f0807",
+      "scenario_id": 32,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/safari-action.png",
+      "verified_runtime_state": true,
+      "video_hash": "6d00b845356f8fa8"
+    },
+    {
+      "frames": 900,
+      "keys": [],
+      "name": "title-live",
+      "png_sha256": "cba4860a23eca063738b284f517881a539973bf602d69255a0cca06b60ba1608",
+      "scenario_id": 33,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/title-live.png",
+      "verified_runtime_state": false,
+      "video_hash": "bda6fc60ea1b906d"
+    },
+    {
+      "frames": 1500,
+      "keys": [
+        [
+          600,
+          2,
+          "A"
+        ]
+      ],
+      "name": "birch-introduction",
+      "png_sha256": "840e3f43fc9ae788eb9569fef9e328c6b8fbcba0b5917e84657d6bf85993bad4",
+      "scenario_id": 34,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/birch-introduction.png",
+      "verified_runtime_state": false,
+      "video_hash": "ad1ed5edd0e2940d"
+    },
+    {
+      "frames": 1000,
+      "keys": [],
+      "name": "pokeblock-condition",
+      "png_sha256": "7a7e5d66589d48942a6e0457ab50683f63b28aac3ce4c86b1497df3f9d5ec5c5",
+      "scenario_id": 35,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/pokeblock-condition.png",
+      "verified_runtime_state": false,
+      "video_hash": "a6e03dc6a225456b"
+    },
+    {
+      "frames": 1000,
+      "keys": [],
+      "name": "trainer-card-gold",
+      "png_sha256": "c613e369305446e7a552d9f9ebf6c14e319bf4a468dda589ccc9746cde05d440",
+      "scenario_id": 36,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/trainer-card-gold.png",
+      "verified_runtime_state": false,
+      "video_hash": "fed65f30d9cd42b5"
+    },
+    {
+      "frames": 1500,
+      "keys": [],
+      "name": "battle-dome-info-card",
+      "png_sha256": "f93e8077977984b6d49ba472693aadb36145540ba5b4f6b1b8bf16e5583fed3d",
+      "scenario_id": 37,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/battle-dome-info-card.png",
+      "verified_runtime_state": false,
+      "video_hash": "dd2dfb560d41684c"
+    },
+    {
+      "frames": 1800,
+      "keys": [],
+      "name": "contest-results",
+      "png_sha256": "9928a397e4e1189a57ce2e1a80363a79949fb2a388471111bd7d1bee47402eba",
+      "scenario_id": 38,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/contest-results.png",
+      "verified_runtime_state": false,
+      "video_hash": "9d7bc3e92073030e"
+    },
+    {
+      "frames": 1200,
+      "keys": [],
+      "name": "slot-machine",
+      "png_sha256": "c845e4112c9cf79c78b3dfc604f3a2ba94fe09bdf46007bd9a4d0cb9c8110ac6",
+      "scenario_id": 39,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/slot-machine.png",
+      "verified_runtime_state": false,
+      "video_hash": "c3da549331d262d7"
+    },
+    {
+      "frames": 900,
+      "keys": [],
+      "name": "fairy-summary-info",
+      "png_sha256": "330261b158a8380237f636a5f726935cac8fc2068a08d5dce67ccfee5b965101",
+      "scenario_id": 40,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/fairy-summary-info.png",
+      "verified_runtime_state": false,
+      "video_hash": "5964f7cff1bbf524"
+    },
+    {
+      "frames": 1200,
+      "keys": [
+        [
+          800,
+          2,
+          "RIGHT"
+        ],
+        [
+          980,
+          2,
+          "RIGHT"
+        ]
+      ],
+      "name": "fairy-summary-moves",
+      "png_sha256": "df252b07fa0f2d8a31c7f1a9b9df4906bd2cc31490d0b27872cd4e66d7eeff62",
+      "scenario_id": 40,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/fairy-summary-moves.png",
+      "verified_runtime_state": false,
+      "video_hash": "141767a8feca736a"
+    },
+    {
+      "fixture_map": "MAP_ALTERING_CAVE_1F",
+      "fixture_species": "SPECIES_HOOPA",
+      "frames": 650,
+      "keys": [],
+      "name": "encounter-01-hoopa",
+      "param": 0,
+      "player": [
+        6,
+        11
+      ],
+      "png_sha256": "e1cda4a234bafb8f884d9bddb70697151addf3780659bd998363a0c9ae49531d",
+      "scenario_id": 28,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/encounter-01-hoopa.png",
+      "verified_runtime_state": true,
+      "video_hash": "49ab4209781356e3"
+    },
+    {
+      "fixture_map": "MAP_ALTERING_CAVE_B1F",
+      "fixture_species": "SPECIES_MEWTWO",
+      "frames": 650,
+      "keys": [],
+      "name": "encounter-02-mewtwo",
+      "param": 1,
+      "player": [
+        7,
+        15
+      ],
+      "png_sha256": "f5fb532f36364ad3eb07516125aee7ba33dc1bbe9b7c701f7109733e9123dd44",
+      "scenario_id": 28,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/encounter-02-mewtwo.png",
+      "verified_runtime_state": true,
+      "video_hash": "95e4a592c176e62e"
+    },
+    {
+      "fixture_map": "MAP_ASHEN_WOODS",
+      "fixture_species": "SPECIES_OKIDOGI",
+      "frames": 650,
+      "keys": [],
+      "name": "encounter-03-okidogi",
+      "param": 2,
+      "player": [
+        21,
+        37
+      ],
+      "png_sha256": "a55608502470538893027ce98f004fe74caeff092192ec7ed1bb481eedacd5a7",
+      "scenario_id": 28,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/encounter-03-okidogi.png",
+      "verified_runtime_state": true,
+      "video_hash": "031bf88710512294"
+    },
+    {
+      "fixture_map": "MAP_CAVE_OF_ORIGIN_DIANCIES_ROOM",
+      "fixture_species": "SPECIES_DIANCIE",
+      "frames": 650,
+      "keys": [],
+      "name": "encounter-04-diancie",
+      "param": 3,
+      "player": [
+        9,
+        11
+      ],
+      "png_sha256": "9df74734142009ed9a54a5bb929e607573d654d98338a808f27a54853bc95597",
+      "scenario_id": 28,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/encounter-04-diancie.png",
+      "verified_runtime_state": true,
+      "video_hash": "a5d907849ca6167a"
+    },
+    {
+      "fixture_map": "MAP_CAVE_OF_ORIGIN_DIANCIES_ROOM",
+      "fixture_species": "SPECIES_TERAPAGOS",
+      "frames": 650,
+      "keys": [],
+      "name": "encounter-05-terapagos",
+      "param": 4,
+      "player": [
+        8,
+        12
+      ],
+      "png_sha256": "85118f9d5938790e45c8eac8b45353403ef17a29afffc329a41c6b5b1f5d7fa2",
+      "scenario_id": 28,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/encounter-05-terapagos.png",
+      "verified_runtime_state": true,
+      "video_hash": "24871917ff063594"
+    },
+    {
+      "fixture_map": "MAP_DEWFORD_MANOR_1F",
+      "fixture_species": "SPECIES_MELOETTA",
+      "frames": 650,
+      "keys": [],
+      "name": "encounter-06-meloetta",
+      "param": 5,
+      "player": [
+        8,
+        10
+      ],
+      "png_sha256": "905323cd2546cf9295e4eee6104a0bc95afedca5e5dd2379c8ee597fb72ab4b1",
+      "scenario_id": 28,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/encounter-06-meloetta.png",
+      "verified_runtime_state": true,
+      "video_hash": "3f81e82da8d2717f"
+    },
+    {
+      "fixture_map": "MAP_DEWFORD_MANOR_1F",
+      "fixture_species": "SPECIES_MUNKIDORI",
+      "frames": 650,
+      "keys": [],
+      "name": "encounter-07-munkidori",
+      "param": 6,
+      "player": [
+        13,
+        11
+      ],
+      "png_sha256": "f79a213d449cb15bea17b04fb77ff6690b9f8dd7f7244de9d035d4af709c269c",
+      "scenario_id": 28,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/encounter-07-munkidori.png",
+      "verified_runtime_state": true,
+      "video_hash": "d73d9022905aed78"
+    },
+    {
+      "fixture_map": "MAP_EMBER_PATH",
+      "fixture_species": "SPECIES_MOLTRES",
+      "frames": 650,
+      "keys": [],
+      "name": "encounter-08-moltres",
+      "param": 7,
+      "player": [
+        21,
+        17
+      ],
+      "png_sha256": "c349c86224032cd4bcbdc57f8237fa3106d231642e21b37d9ccd65816f55c7cd",
+      "scenario_id": 28,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/encounter-08-moltres.png",
+      "verified_runtime_state": true,
+      "video_hash": "a735bf9d705ba6a2"
+    },
+    {
+      "fixture_map": "MAP_METEOR_FALLS_B1F_1R",
+      "fixture_species": "SPECIES_DIALGA",
+      "frames": 650,
+      "keys": [],
+      "name": "encounter-09-dialga",
+      "param": 8,
+      "player": [
+        15,
+        20
+      ],
+      "png_sha256": "7a5ced6b59276e2f9c83cdf3c8dc7869b379164084f8e4ba6e2a62daaec4fd87",
+      "scenario_id": 28,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/encounter-09-dialga.png",
+      "verified_runtime_state": true,
+      "video_hash": "b78d4adb88a3741b"
+    },
+    {
+      "fixture_map": "MAP_METEOR_FALLS_B1F_2R",
+      "fixture_species": "SPECIES_CRESSELIA",
+      "frames": 650,
+      "keys": [],
+      "name": "encounter-10-cresselia",
+      "param": 9,
+      "player": [
+        5,
+        4
+      ],
+      "png_sha256": "1877275049ee8148f8a6639bdd88bbf27ba38243c982e2db1903637f4c8e7646",
+      "scenario_id": 28,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/encounter-10-cresselia.png",
+      "verified_runtime_state": true,
+      "video_hash": "c39e2055bcc7a215"
+    },
+    {
+      "fixture_map": "MAP_METEOR_FALLS_JIRACHIS_ROOM",
+      "fixture_species": "SPECIES_JIRACHI",
+      "frames": 650,
+      "keys": [],
+      "name": "encounter-11-jirachi",
+      "param": 10,
+      "player": [
+        7,
+        9
+      ],
+      "png_sha256": "ae70f4e2c7b32560684cc1b26f75bbb46eb99857e14734156e1a14396d0009d9",
+      "scenario_id": 28,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/encounter-11-jirachi.png",
+      "verified_runtime_state": true,
+      "video_hash": "34034807af0e2175"
+    },
+    {
+      "fixture_map": "MAP_METEOR_FALLS_JIRACHIS_ROOM",
+      "fixture_species": "SPECIES_COSMOG",
+      "frames": 650,
+      "keys": [],
+      "name": "encounter-12-cosmog",
+      "param": 11,
+      "player": [
+        4,
+        9
+      ],
+      "png_sha256": "b581a0ff593f8498511826006670e6b6cbaf533b61d8715700deb753fb268c54",
+      "scenario_id": 28,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/encounter-12-cosmog.png",
+      "verified_runtime_state": true,
+      "video_hash": "025feef30f4b9525"
+    },
+    {
+      "fixture_map": "MAP_MT_PYRE_6F",
+      "fixture_species": "SPECIES_PECHARUNT",
+      "frames": 650,
+      "keys": [],
+      "name": "encounter-13-pecharunt",
+      "param": 12,
+      "player": [
+        11,
+        8
+      ],
+      "png_sha256": "53e2b0c3147b8be52f21b1a09320ec991af15f3621f87a9f58a9b741b6417710",
+      "scenario_id": 28,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/encounter-13-pecharunt.png",
+      "verified_runtime_state": true,
+      "video_hash": "88df63249964bc49"
+    },
+    {
+      "fixture_map": "MAP_MT_PYRE_SUMMIT",
+      "fixture_species": "SPECIES_DARKRAI",
+      "frames": 650,
+      "keys": [],
+      "name": "encounter-14-darkrai",
+      "param": 13,
+      "player": [
+        23,
+        13
+      ],
+      "png_sha256": "37e5c2df21773ce4189e76d4772e2ccb24b129b287b75e614880025ae3b45a78",
+      "scenario_id": 28,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/encounter-14-darkrai.png",
+      "verified_runtime_state": true,
+      "video_hash": "2ab7e018684ff143"
+    },
+    {
+      "fixture_map": "MAP_NEW_MAUVILLE_INSIDE",
+      "fixture_species": "SPECIES_ZAPDOS",
+      "frames": 650,
+      "keys": [],
+      "name": "encounter-15-zapdos",
+      "param": 14,
+      "player": [
+        33,
+        18
+      ],
+      "png_sha256": "c37784eb2a430dd2a16a1f38598800e1146f56017a0c2be86291eaa8f50c68e5",
+      "scenario_id": 28,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/encounter-15-zapdos.png",
+      "verified_runtime_state": true,
+      "video_hash": "4f1e237857961451"
+    },
+    {
+      "fixture_map": "MAP_NEW_MAUVILLE_INSIDE",
+      "fixture_species": "SPECIES_MELTAN",
+      "frames": 650,
+      "keys": [],
+      "name": "encounter-16-meltan",
+      "param": 15,
+      "player": [
+        34,
+        7
+      ],
+      "png_sha256": "f290c9fa1611e2ff3e6b769ed9b687029c65acefaca11a621fffd3b7805e6ce5",
+      "scenario_id": 28,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/encounter-16-meltan.png",
+      "verified_runtime_state": true,
+      "video_hash": "de20293c843cd9b6"
+    },
+    {
+      "fixture_map": "MAP_PETALBURG_WOODS_2",
+      "fixture_species": "SPECIES_VIRIZION",
+      "frames": 650,
+      "keys": [],
+      "name": "encounter-17-virizion",
+      "param": 16,
+      "player": [
+        39,
+        6
+      ],
+      "png_sha256": "dc0b24ab4c5e5632e4264f587857e0bff81c671d235bddae66f2635b2300c8f3",
+      "scenario_id": 28,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/encounter-17-virizion.png",
+      "verified_runtime_state": true,
+      "video_hash": "46aa8fdbf3585f03"
+    },
+    {
+      "fixture_map": "MAP_PETALBURG_WOODS_2",
+      "fixture_species": "SPECIES_WO_CHIEN",
+      "frames": 650,
+      "keys": [],
+      "name": "encounter-18-wo-chien",
+      "param": 17,
+      "player": [
+        5,
+        7
+      ],
+      "png_sha256": "85f2274b78c5d7ab7cfefab0a071fd2714394589b2e7a2f9e03a779cc0cd2239",
+      "scenario_id": 28,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/encounter-18-wo-chien.png",
+      "verified_runtime_state": true,
+      "video_hash": "11a2b4fbee16832e"
+    },
+    {
+      "fixture_map": "MAP_PETALBURG_WOODS_3",
+      "fixture_species": "SPECIES_CELEBI",
+      "frames": 650,
+      "keys": [],
+      "name": "encounter-19-celebi",
+      "param": 18,
+      "player": [
+        42,
+        41
+      ],
+      "png_sha256": "6f6ce646daa257ba944dc1635c811dc45f30f7ad23ec6561a4e04233f4b87a94",
+      "scenario_id": 28,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/encounter-19-celebi.png",
+      "verified_runtime_state": true,
+      "video_hash": "831ab541daea3ca6"
+    },
+    {
+      "fixture_map": "MAP_ROUTE110",
+      "fixture_species": "SPECIES_THUNDURUS",
+      "frames": 650,
+      "keys": [],
+      "name": "encounter-20-thundurus",
+      "param": 19,
+      "player": [
+        6,
+        16
+      ],
+      "png_sha256": "88beca8bbd957a5c17649c8920673e45392b8f6eac88bf4c39d25c514689f3bf",
+      "scenario_id": 28,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/encounter-20-thundurus.png",
+      "verified_runtime_state": true,
+      "video_hash": "5c79b564fd6647e7"
+    },
+    {
+      "fixture_map": "MAP_ROUTE111_RUINS_EXTERIOR",
+      "fixture_species": "SPECIES_LANDORUS",
+      "frames": 650,
+      "keys": [],
+      "name": "encounter-21-landorus",
+      "param": 20,
+      "player": [
+        9,
+        13
+      ],
+      "png_sha256": "33f641c4e61984b43af090f49b4ceece751d77dd5f4f028c1249df407ebf629b",
+      "scenario_id": 28,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/encounter-21-landorus.png",
+      "verified_runtime_state": true,
+      "video_hash": "1de1c489d50cecf7"
+    },
+    {
+      "fixture_map": "MAP_ROUTE119",
+      "fixture_species": "SPECIES_TORNADUS",
+      "frames": 650,
+      "keys": [],
+      "name": "encounter-22-tornadus",
+      "param": 21,
+      "player": [
+        29,
+        11
+      ],
+      "png_sha256": "43b8b49b6e5abd436c3f81988e0d263705e9182f66b4bbd737160224e7d0e718",
+      "scenario_id": 28,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/encounter-22-tornadus.png",
+      "verified_runtime_state": true,
+      "video_hash": "5ce7cbbcf92e8816"
+    },
+    {
+      "fixture_map": "MAP_RUSTBORO_CITY_DEVON_CORP_2F",
+      "fixture_species": "SPECIES_MAGEARNA",
+      "frames": 650,
+      "keys": [],
+      "name": "encounter-23-magearna",
+      "param": 22,
+      "player": [
+        11,
+        8
+      ],
+      "png_sha256": "8dcb0013aed931f5df1c841591acaf5b990577d66c2594e9fb869a44aed81081",
+      "scenario_id": 28,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/encounter-23-magearna.png",
+      "verified_runtime_state": true,
+      "video_hash": "301294ca38f788b6"
+    },
+    {
+      "fixture_map": "MAP_SANDSTREWN_RUINS_B1F",
+      "fixture_species": "SPECIES_ZYGARDE",
+      "frames": 650,
+      "keys": [],
+      "name": "encounter-24-zygarde",
+      "param": 23,
+      "player": [
+        31,
+        6
+      ],
+      "png_sha256": "af0e6529fe49a02bc8f67ca1d4ab19e03147d1550703235755f15433fc4945a1",
+      "scenario_id": 28,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/encounter-24-zygarde.png",
+      "verified_runtime_state": true,
+      "video_hash": "f7136f6d6b8cfde7"
+    },
+    {
+      "fixture_map": "MAP_SCORCHED_SLAB_B2F",
+      "fixture_species": "SPECIES_RESHIRAM",
+      "frames": 650,
+      "keys": [],
+      "name": "encounter-25-reshiram",
+      "param": 24,
+      "player": [
+        10,
+        5
+      ],
+      "png_sha256": "f5e5f5a4de99591fc70d0b9f85fa49893a377d3e0e8ac85263b6ac162503ce26",
+      "scenario_id": 28,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/encounter-25-reshiram.png",
+      "verified_runtime_state": true,
+      "video_hash": "8682b62645e00581"
+    },
+    {
+      "fixture_map": "MAP_SCORCHED_SLAB_HEATRANS_ROOM",
+      "fixture_species": "SPECIES_HEATRAN",
+      "frames": 650,
+      "keys": [],
+      "name": "encounter-26-heatran",
+      "param": 25,
+      "player": [
+        10,
+        15
+      ],
+      "png_sha256": "4ae19d71472a4a6063fae60db54655da0c3ac7347aa57f168cab2265f830d144",
+      "scenario_id": 28,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/encounter-26-heatran.png",
+      "verified_runtime_state": true,
+      "video_hash": "51ac290ac9aef921"
+    },
+    {
+      "fixture_map": "MAP_SEALED_CHAMBER_INNER_ROOM",
+      "fixture_species": "SPECIES_REGIGIGAS",
+      "frames": 650,
+      "keys": [],
+      "name": "encounter-27-regigigas",
+      "param": 26,
+      "player": [
+        13,
+        12
+      ],
+      "png_sha256": "6efad6a9c238b8f7f190f236d278e1543cc32dcd84d59a4f0e25f24eb777a303",
+      "scenario_id": 28,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/encounter-27-regigigas.png",
+      "verified_runtime_state": true,
+      "video_hash": "93332269bd9a6e6f"
+    },
+    {
+      "fixture_map": "MAP_SEASPRAY_CAVE_B1F",
+      "fixture_species": "SPECIES_PALKIA",
+      "frames": 650,
+      "keys": [],
+      "name": "encounter-28-palkia",
+      "param": 27,
+      "player": [
+        36,
+        7
+      ],
+      "png_sha256": "dbf382436cad1b49c8a4056dc19351bfe658c67cd66fabb6147b133a3e664639",
+      "scenario_id": 28,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/encounter-28-palkia.png",
+      "verified_runtime_state": true,
+      "video_hash": "cf78db413fcb70af"
+    },
+    {
+      "fixture_map": "MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM",
+      "fixture_species": "SPECIES_ARTICUNO",
+      "frames": 650,
+      "keys": [],
+      "name": "encounter-29-articuno",
+      "param": 28,
+      "player": [
+        8,
+        5
+      ],
+      "png_sha256": "f85768e32a9efc588ac73061e36332b18e564d163ba5c6c44c9d0e93135ba579",
+      "scenario_id": 28,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/encounter-29-articuno.png",
+      "verified_runtime_state": true,
+      "video_hash": "c8b0e2aaf866f926"
+    },
+    {
+      "fixture_map": "MAP_VERDANTURF_MEADOW",
+      "fixture_species": "SPECIES_SHAYMIN",
+      "frames": 650,
+      "keys": [],
+      "name": "encounter-30-shaymin",
+      "param": 29,
+      "player": [
+        10,
+        11
+      ],
+      "png_sha256": "213ef20081f70fcb46dc9b1e0190c614c48cab9e2508761487d7be940e1ee699",
+      "scenario_id": 28,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/encounter-30-shaymin.png",
+      "verified_runtime_state": true,
+      "video_hash": "eec708d87a683f76"
+    },
+    {
+      "fixture_map": "MAP_VERDANTURF_MEADOW",
+      "fixture_species": "SPECIES_ENAMORUS",
+      "frames": 650,
+      "keys": [],
+      "name": "encounter-31-enamorus",
+      "param": 30,
+      "player": [
+        7,
+        12
+      ],
+      "png_sha256": "d2acbc544f99103d37ffc772a4badc4a1cf1aaa7e4a19eebb61b49f06c230f98",
+      "scenario_id": 28,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/encounter-31-enamorus.png",
+      "verified_runtime_state": true,
+      "video_hash": "8c4567aaa359e3ec"
+    },
+    {
+      "fixture_map": "MAP_VERDANTURF_MEADOW",
+      "fixture_species": "SPECIES_FEZANDIPITI",
+      "frames": 650,
+      "keys": [],
+      "name": "encounter-32-fezandipiti",
+      "param": 31,
+      "player": [
+        10,
+        12
+      ],
+      "png_sha256": "a66c5aea684e42aaed00765019b5073b0045b567e8200b6397b1e828f8c3501c",
+      "scenario_id": 28,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/encounter-32-fezandipiti.png",
+      "verified_runtime_state": true,
+      "video_hash": "2d90c58ad8be84bf"
+    }
+  ],
+  "rom": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/pokeemerald-headless.gba",
+  "rom_sha256": "dc8d840fac30b18008bac7c73c3cb5b4fa1886bc79709ab7c362400743ee2af6",
+  "scenario_symbol": "0x0200196c",
+  "schema_version": 1
+}

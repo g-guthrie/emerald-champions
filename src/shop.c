@@ -46,6 +46,8 @@
 #define TAG_ITEM_ICON_BASE 9110 // immune to time blending
 
 #define MAX_ITEMS_SHOWN 8
+#define SHOP_ITEM_NAME_WIDTH_WITH_PRICE    84
+#define SHOP_ITEM_NAME_WIDTH_WITHOUT_PRICE 108
 #define SHOP_MENU_PALETTE_ID (gMapHeader.mapLayout->isFrlg ? 11 : 12)
 
 enum {
@@ -161,8 +163,6 @@ static void BuyMenuPrintItemDescriptionAndShowItemIcon(s32 item, bool8 onInit, s
 static void BuyMenuPrintPriceInList(u8 windowId, u32 itemId, u8 y);
 static u32 GetShopItemPrice(enum Item item);
 
-static const u8 sText_Free[] = _("FREE");
-
 static const struct YesNoFuncTable sShopPurchaseYesNoFuncs =
 {
     BuyMenuTryMakePurchase,
@@ -225,7 +225,7 @@ static const struct ListMenuTemplate sShopBuyMenuListTemplate =
     .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
     .fontId = FONT_NARROW,
     .cursorKind = CURSOR_BLACK_ARROW,
-    .textNarrowWidth = 84,
+    .textNarrowWidth = SHOP_ITEM_NAME_WIDTH_WITH_PRICE,
 };
 
 static const struct BgTemplate sShopBuyMenuBgTemplates[] =
@@ -588,6 +588,13 @@ static void BuyMenuBuildListMenuTemplate(void)
     sListMenuItems[i].id = LIST_CANCEL;
 
     gMultiuseListMenuTemplate = sShopBuyMenuListTemplate;
+    if (sMartInfo.freeItems)
+    {
+        // Free catalogs need no redundant price column.  Give the item names
+        // the full list width while retaining the ordinary shop layout below.
+        gMultiuseListMenuTemplate.itemPrintFunc = NULL;
+        gMultiuseListMenuTemplate.textNarrowWidth = SHOP_ITEM_NAME_WIDTH_WITHOUT_PRICE;
+    }
     gMultiuseListMenuTemplate.items = sListMenuItems;
     gMultiuseListMenuTemplate.totalItems = sMartInfo.itemCount + 1;
     if (gMultiuseListMenuTemplate.totalItems > MAX_ITEMS_SHOWN)
@@ -649,35 +656,28 @@ static void BuyMenuPrintPriceInList(u8 windowId, u32 itemId, u8 y)
 {
     u8 x;
 
-    if (itemId != LIST_CANCEL)
-    {
-        if (sMartInfo.martType == MART_TYPE_NORMAL)
-        {
-            if (sMartInfo.freeItems)
-                StringCopy(gStringVar4, sText_Free);
-            else
-                ConvertIntToDecimalStringN(gStringVar1, GetShopItemPrice(itemId), STR_CONV_MODE_LEFT_ALIGN, 6);
-        }
-        else
-        {
-            ConvertIntToDecimalStringN(
-                gStringVar1,
-                gDecorations[itemId].price,
-                STR_CONV_MODE_LEFT_ALIGN,
-                6);
-        }
+    if (sMartInfo.freeItems || itemId == LIST_CANCEL)
+        return;
 
-        if (sMartInfo.freeItems)
-        {
-            // gStringVar4 already contains the fixed FREE label.
-        }
-        else if (GetItemImportance(itemId) && (CheckBagHasItem(itemId, 1) || CheckPCHasItem(itemId, 1)))
-            StringCopy(gStringVar4, gText_SoldOut);
-        else
-            StringExpandPlaceholders(gStringVar4, gText_PokedollarVar1);
-        x = GetStringRightAlignXOffset(FONT_NARROW, gStringVar4, 120);
-        AddTextPrinterParameterized4(windowId, FONT_NARROW, x, y, 0, 0, sShopBuyMenuTextColors[COLORID_ITEM_LIST], TEXT_SKIP_DRAW, gStringVar4);
+    if (sMartInfo.martType == MART_TYPE_NORMAL)
+    {
+        ConvertIntToDecimalStringN(gStringVar1, GetShopItemPrice(itemId), STR_CONV_MODE_LEFT_ALIGN, 6);
     }
+    else
+    {
+        ConvertIntToDecimalStringN(
+            gStringVar1,
+            gDecorations[itemId].price,
+            STR_CONV_MODE_LEFT_ALIGN,
+            6);
+    }
+
+    if (GetItemImportance(itemId) && (CheckBagHasItem(itemId, 1) || CheckPCHasItem(itemId, 1)))
+        StringCopy(gStringVar4, gText_SoldOut);
+    else
+        StringExpandPlaceholders(gStringVar4, gText_PokedollarVar1);
+    x = GetStringRightAlignXOffset(FONT_NARROW, gStringVar4, 120);
+    AddTextPrinterParameterized4(windowId, FONT_NARROW, x, y, 0, 0, sShopBuyMenuTextColors[COLORID_ITEM_LIST], TEXT_SKIP_DRAW, gStringVar4);
 }
 
 static void BuyMenuAddScrollIndicatorArrows(void)

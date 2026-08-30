@@ -215,7 +215,7 @@ RustboroCity_DevonCorp_2F_EventScript_NoticeFossil::
 	call_if_eq VAR_RESULT, TRUE, RustboroCity_DevonCorp_2F_EventScript_PushJawFossil
 	checkitem ITEM_SAIL_FOSSIL
 	call_if_eq VAR_RESULT, TRUE, RustboroCity_DevonCorp_2F_EventScript_PushSailFossil
-	dynmultistack 0, 1, FALSE, 6, FALSE, 0, DYN_MULTICHOICE_CB_SHOW_ITEM
+	dynmultistack 0, 1, FALSE, 5, FALSE, 0, DYN_MULTICHOICE_CB_SHOW_ITEM
 	closemessage
 	switch VAR_RESULT
 	case ITEM_HELIX_FOSSIL, RustboroCity_DevonCorp_2F_EventScript_ChooseHelixFossil

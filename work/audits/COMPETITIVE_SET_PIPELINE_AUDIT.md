@@ -9,17 +9,19 @@ reproducible authoring layer; the supplied doubles handbook is evidence, not a
 replacement for the configured species, item, form, and Ability tables.
 
 - 1,258 species/form defaults.
-- 276 alternatives.
-- 1,534 complete orientations.
-- 1,439 non-Mega orientations eligible for ordinary wild sampling.
+- 1,361 alternatives: 274 preserved/source-backed orientations and 1,087
+  second-role syntheses from the live learnable, stat, Ability, and move tables.
+- 2,619 complete orientations.
+- 2,524 non-Mega orientations eligible for ordinary wild sampling.
 - 95 Mega orientations covering every one of the 92 campaign stones.
   - 75 are Pokemon Champions M-B ladder-backed handbook roles.
   - 20 are Emerald Champions extension roles derived from current form data
     and the authored doubles corpus.
   - Magearnite has roles for normal and Original Color Magearna.
   - Tatsugirinite has roles for Curly, Droopy, and Stretchy Tatsugiri.
-- Per-species role distribution: 1,044 species/forms have one role, 157 have
-  two, 52 have three, and five have four.
+- Pre-Mega distribution: 1,250 species/forms have two non-Mega roles and eight
+  have three. Including Mega roles, 1,161 have two choices, 91 have three, and
+  six have four.
 - All 616 species/forms named anywhere in the parsed encounter data resolve a
   preset; the reachable Hoenn tables currently expose 592 unique forms.
 
@@ -71,6 +73,13 @@ replacement for the configured species, item, form, and Ability tables.
     PC delivery preserve the full orientation; no-room attempts remain
     retryable; party-held items receive the restoration baseline before the
     finite story flag advances.
+13. Every direct species/form now has at least two genuinely distinct non-Mega
+    orientations. The generator uses the supplied handbook (its exact SHA-256
+    is pinned), current legal learnables, configured stats and Abilities, and
+    doubles role blueprints. It removed the two preserved item-only duplicates
+    (Chien-Pao and Kilowattrel) before supplying real control alternatives.
+    The verifier compares unordered moves, Ability, nature, and Stat Points so
+    a rename, move-order shuffle, or held-item swap cannot satisfy the floor.
 
 ## Proof
 
@@ -86,12 +95,8 @@ replacement for the configured species, item, form, and Ability tables.
 
 ## Remaining quality limits
 
-- The 1,044 one-role species/forms satisfy the minimum playable contract, but
-  they should not receive invented alternatives merely to hit a quota. Add a
-  second role only when playtesting or source evidence supports a genuinely
-  different useful orientation.
 - This is source/runtime verification, not empirical metagame validation of
-  all 1,534 orientations. Individual damage benchmarks, partner fit, and usage
+  all 2,619 orientations. Individual damage benchmarks, partner fit, and usage
   quality still require campaign playtesting.
 - No final production ROM or full release suite was built in this subtask; a
   release pass must regenerate ROM size/digest evidence after all parallel work

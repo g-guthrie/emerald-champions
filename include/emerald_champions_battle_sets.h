@@ -37,6 +37,7 @@ u8 GetEmeraldChampionsBattleSetCount(struct Pokemon *mon);
 const u8 *GetEmeraldChampionsBattleSetName(struct Pokemon *mon, u8 choice);
 enum Item GetEmeraldChampionsBattleSetItem(struct Pokemon *mon, u8 choice);
 enum Item GetEmeraldChampionsBattleSetRequiredItem(struct Pokemon *mon, u8 choice);
+s16 GetEmeraldChampionsCurrentBattleSetChoice(struct Pokemon *mon);
 u8 ApplyEmeraldChampionsBattleSetChoice(struct Pokemon *mon, u8 choice);
 u8 ApplyEmeraldChampionsRandomWildSet(struct Pokemon *mon);
 u8 ApplyEmeraldChampionsRandomNonMegaSet(struct Pokemon *mon);

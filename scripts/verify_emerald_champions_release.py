@@ -19,6 +19,7 @@ PYTHON = sys.executable
 
 STATIC_GATES = (
     ("core services", (PYTHON, "scripts/verify_emerald_champions_core.py")),
+    ("native field UI", (PYTHON, "scripts/verify_emerald_champions_native_ui.py")),
     ("finite rewards", (PYTHON, "scripts/emerald_champions_reward_rewrite.py")),
     ("reward economy", (PYTHON, "scripts/verify_emerald_champions_reward_economy.py")),
     ("wild distribution", (PYTHON, "scripts/emerald_champions_wild_distribution.py")),
@@ -259,7 +260,14 @@ def verify_patch_integrity(*, allow_source_bundle: bool) -> None:
         )
         print("SKIP (explicit): git diff --check for metadata-free source bundle")
         return
-    run_gate("whitespace and patch integrity", ("git", "diff", "--check"))
+    # The vendored official mGBA snapshot is preserved byte-for-byte. Its
+    # upstream tree intentionally contains legacy line endings, whitespace,
+    # and conflict-marker examples, so apply our patch-integrity policy only
+    # to Emerald Champions-owned source and evidence.
+    run_gate(
+        "whitespace and patch integrity",
+        ("git", "diff", "--check", "--", ".", ":(exclude)tools/mgba-source/**"),
+    )
 
 
 def main() -> None:

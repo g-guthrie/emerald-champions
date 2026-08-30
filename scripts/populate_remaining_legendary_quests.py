@@ -47,7 +47,7 @@ QUESTS = {
         ("MELTAN", 37, 7, 60, "MAGNETON", "FLAG_EC_CAUGHT_MELTAN", "the liquid-metal conduit"),
     ],
     "RustboroCity_DevonCorp_2F": [
-        ("MAGEARNA", 8, 8, 58, "DIANCIE", "FLAG_EC_CAUGHT_MAGEARNA", "DEVON's sealed prototype"),
+        ("MAGEARNA", 8, 7, 58, "DIANCIE", "FLAG_EC_CAUGHT_MAGEARNA", "DEVON's sealed prototype"),
     ],
 }
 

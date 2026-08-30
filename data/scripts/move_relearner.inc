@@ -1,9 +1,13 @@
 Common_EventScript_MoveRelearner::
 	lockall
 	faceplayer
-	message MoveRelearner_Text_WouldLearnNewMoves
-	waitmessage
-	goto Common_EventScript_MoveRelearnerDynMultiChoice
+	goto MoveRelearner_EventScript_TeachAllMoves
+	end
+
+MoveRelearner_EventScript_TeachAllMoves::
+	setmoverelearnerstate MOVE_RELEARNER_ALL_MOVES
+	bufferstring STR_VAR_3, MoveRelearner_Text_MoveLWR
+	goto MoveRelearner_EventScript_TeachMove
 	end
 
 Common_EventScript_MoveRelearnerDynMultiChoice::
@@ -67,11 +71,11 @@ MoveRelearner_EventScript_TeachMove::
 	msgbox MoveRelearner_Text_ChoosePkmn, MSGBOX_DEFAULT
 	chooseboxmon SELECT_PC_MON_MOVE_RELEARNER
 	waitstate
-	call_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, MoveRelearner_EventScript_AnythingElse
+	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, MoveRelearner_EventScript_PleaseComeAgain
 	special IsSelectedMonEgg
-	call_if_eq VAR_RESULT, TRUE, MoveRelearner_EventScript_CantTeachMoveToEgg
+	goto_if_eq VAR_RESULT, TRUE, MoveRelearner_EventScript_CantTeachMoveToEgg
 	special Special_HasMoveToRelearn
-	call_if_eq VAR_RESULT, FALSE, MoveRelearner_EventScript_CantTeachMoveToPkmn
+	goto_if_eq VAR_RESULT, FALSE, MoveRelearner_EventScript_CantTeachMoveToPkmn
 	msgbox MoveRelearner_Text_WhichXmoveShouldTeach, MSGBOX_DEFAULT
 	special TeachMoveRelearnerMove
 	goto MoveRelearner_EventScript_AnythingElse
@@ -84,16 +88,16 @@ MoveRelearner_EventScript_NoPkmn:
 
 MoveRelearner_EventScript_CantTeachMoveToEgg:
 	msgbox MoveRelearner_Text_CantTeachMoveToEgg, MSGBOX_AUTOCLOSE
-	goto MoveRelearner_EventScript_AnythingElse
+	goto MoveRelearner_EventScript_TeachAllMoves
 	end
 
 MoveRelearner_EventScript_CantTeachMoveToPkmn:
 	msgbox MoveRelearner_Text_CantTeachMoveToPkmn, MSGBOX_AUTOCLOSE
-	goto MoveRelearner_EventScript_AnythingElse
+	goto MoveRelearner_EventScript_TeachAllMoves
 	end
 
 MoveRelearner_EventScript_AnythingElse::
-	message MoveRelearner_Text_AnythingElse
-	waitmessage
-	goto Common_EventScript_MoveRelearnerDynMultiChoice
+	msgbox MoveRelearner_Text_AnythingElse, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, MoveRelearner_EventScript_TeachAllMoves
+	goto MoveRelearner_EventScript_PleaseComeAgain
 	end

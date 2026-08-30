@@ -3,7 +3,7 @@
   "name": "DewfordManor_1F",
   "layout": "LAYOUT_DEWFORD_MANOR_1F",
   "music": "MUS_MT_PYRE",
-  "region_map_section": "MAPSEC_DEWFORD_TOWN",
+  "region_map_section": "MAPSEC_DEWFORD_MANOR",
   "requires_flash": true,
   "weather": "WEATHER_SHADE",
   "map_type": "MAP_TYPE_INDOOR",

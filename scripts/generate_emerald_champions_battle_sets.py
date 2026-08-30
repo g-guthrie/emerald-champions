@@ -6,7 +6,15 @@ from __future__ import annotations
 import json
 import re
 import subprocess
+from collections import defaultdict
 from pathlib import Path
+
+from verify_trainer_ability_legality import (
+    SPECIES_MARKER,
+    preprocess_species_info,
+    resolve_species,
+    species_aliases,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -17,10 +25,125 @@ SOURCE_COMMIT = "0b2bc96c7d6480187f70f5b83a705c081780983e"
 DEFAULT_SOURCE = "docs/verdant_battle_set_presets.json"
 ALTERNATIVE_SOURCE = "docs/verdant_multi_battle_sets.json"
 HANDBOOK_SOURCE = "docs/pokemon_champions_handbook_sets.json"
+HANDBOOK_SHA256 = "a6a98dd09849c80c46e4d39b3fdaac161f56d80c69fdf8422bd4b7596cb714d5"
 JSON_OUTPUT = ROOT / "docs" / "emerald_champions_battle_sets.json"
 C_OUTPUT = ROOT / "src" / "data" / "pokemon" / "emerald_champions_battle_sets.h"
 MOVE_ACCESS_REVIEW = ROOT / "docs" / "emerald_champions_move_access_review.json"
 MOVE_ACCESS_C_OUTPUT = ROOT / "src" / "data" / "pokemon" / "emerald_champions_move_access_review.h"
+
+# A second set is useful only when it asks the Pokemon to do something
+# meaningfully different.  These authored role families are intentionally
+# small and doubles-specific; the synthesizer below chooses among them from
+# the species' live learnable pool instead of fabricating illegal coverage.
+ROLE_BLUEPRINTS = (
+    ("Trick Room Control", "MOVE_TRICK_ROOM", (
+        "MOVE_HELPING_HAND", "MOVE_FAKE_OUT", "MOVE_WIDE_GUARD",
+        "MOVE_ALLY_SWITCH", "MOVE_HEAL_PULSE", "MOVE_LIFE_DEW",
+        "MOVE_TAUNT", "MOVE_ENCORE", "MOVE_IMPRISON",
+    ), "slow_support"),
+    ("Redirection Support", "MOVE_FOLLOW_ME", (
+        "MOVE_HELPING_HAND", "MOVE_FAKE_OUT", "MOVE_HEAL_PULSE",
+        "MOVE_LIFE_DEW", "MOVE_THUNDER_WAVE", "MOVE_WILL_O_WISP",
+        "MOVE_ENCORE", "MOVE_TAUNT",
+    ), "bulky_support"),
+    ("Rage Powder Support", "MOVE_RAGE_POWDER", (
+        "MOVE_HELPING_HAND", "MOVE_POLLEN_PUFF", "MOVE_SLEEP_POWDER",
+        "MOVE_SPORE", "MOVE_STUN_SPORE", "MOVE_LEECH_SEED",
+    ), "bulky_support"),
+    ("Tailwind Control", "MOVE_TAILWIND", (
+        "MOVE_HELPING_HAND", "MOVE_TAUNT", "MOVE_ENCORE", "MOVE_FAKE_OUT",
+        "MOVE_ICY_WIND", "MOVE_ELECTROWEB", "MOVE_SNARL",
+    ), "fast_support"),
+    ("Wide Guard Support", "MOVE_WIDE_GUARD", (
+        "MOVE_FAKE_OUT", "MOVE_HELPING_HAND", "MOVE_COACHING",
+        "MOVE_QUICK_GUARD", "MOVE_TAUNT", "MOVE_KNOCK_OFF",
+    ), "bulky_support"),
+    ("Fake Out Control", "MOVE_FAKE_OUT", (
+        "MOVE_HELPING_HAND", "MOVE_TAUNT", "MOVE_ENCORE", "MOVE_NUZZLE",
+        "MOVE_THUNDER_WAVE", "MOVE_ICY_WIND", "MOVE_SNARL",
+    ), "fast_support"),
+    ("Dual Screens", "MOVE_REFLECT", (
+        "MOVE_LIGHT_SCREEN", "MOVE_AURORA_VEIL", "MOVE_HELPING_HAND",
+        "MOVE_THUNDER_WAVE", "MOVE_ICY_WIND", "MOVE_ELECTROWEB",
+    ), "bulky_support"),
+    ("Sleep Control", "MOVE_SPORE", (
+        "MOVE_RAGE_POWDER", "MOVE_POLLEN_PUFF", "MOVE_HELPING_HAND",
+        "MOVE_LEECH_SEED", "MOVE_TAILWIND",
+    ), "bulky_support"),
+    ("Sleep Control", "MOVE_SLEEP_POWDER", (
+        "MOVE_RAGE_POWDER", "MOVE_POLLEN_PUFF", "MOVE_HELPING_HAND",
+        "MOVE_LEECH_SEED", "MOVE_TAILWIND",
+    ), "fast_support"),
+    ("Tempo Control", "MOVE_ICY_WIND", (
+        "MOVE_HELPING_HAND", "MOVE_TAUNT", "MOVE_ENCORE", "MOVE_SNARL",
+        "MOVE_FAKE_TEARS", "MOVE_HEAL_PULSE",
+    ), "fast_support"),
+    ("Tempo Control", "MOVE_ELECTROWEB", (
+        "MOVE_HELPING_HAND", "MOVE_TAUNT", "MOVE_ENCORE", "MOVE_SNARL",
+        "MOVE_FAKE_TEARS", "MOVE_EERIE_IMPULSE",
+    ), "fast_support"),
+    ("Disruption Support", "MOVE_TAUNT", (
+        "MOVE_ENCORE", "MOVE_DISABLE", "MOVE_HELPING_HAND", "MOVE_FAKE_OUT",
+        "MOVE_WILL_O_WISP", "MOVE_THUNDER_WAVE", "MOVE_SNARL",
+    ), "fast_support"),
+)
+
+PHYSICAL_SETUP_MOVES = (
+    "MOVE_SHELL_SMASH", "MOVE_DRAGON_DANCE", "MOVE_VICTORY_DANCE",
+    "MOVE_SHIFT_GEAR", "MOVE_SWORDS_DANCE", "MOVE_BULK_UP", "MOVE_COIL",
+    "MOVE_TIDY_UP", "MOVE_HONE_CLAWS", "MOVE_HOWL",
+)
+SPECIAL_SETUP_MOVES = (
+    "MOVE_SHELL_SMASH", "MOVE_QUIVER_DANCE", "MOVE_TAIL_GLOW",
+    "MOVE_NASTY_PLOT", "MOVE_CALM_MIND", "MOVE_GEOMANCY",
+)
+GENERAL_SUPPORT_MOVES = (
+    "MOVE_HELPING_HAND", "MOVE_FAKE_OUT", "MOVE_WIDE_GUARD",
+    "MOVE_QUICK_GUARD", "MOVE_TAILWIND", "MOVE_TRICK_ROOM",
+    "MOVE_FOLLOW_ME", "MOVE_RAGE_POWDER", "MOVE_SPORE",
+    "MOVE_SLEEP_POWDER", "MOVE_ICY_WIND", "MOVE_ELECTROWEB", "MOVE_SNARL",
+    "MOVE_TAUNT", "MOVE_ENCORE", "MOVE_DISABLE", "MOVE_WILL_O_WISP",
+    "MOVE_THUNDER_WAVE", "MOVE_NUZZLE", "MOVE_FAKE_TEARS",
+    "MOVE_EERIE_IMPULSE", "MOVE_COACHING", "MOVE_DECORATE",
+    "MOVE_HEAL_PULSE", "MOVE_LIFE_DEW", "MOVE_POLLEN_PUFF",
+    "MOVE_REFLECT", "MOVE_LIGHT_SCREEN", "MOVE_AURORA_VEIL",
+    "MOVE_LEECH_SEED", "MOVE_RECOVER", "MOVE_ROOST", "MOVE_SYNTHESIS",
+    "MOVE_MOONLIGHT", "MOVE_MORNING_SUN", "MOVE_SLACK_OFF",
+    "MOVE_STRENGTH_SAP", "MOVE_SHORE_UP", "MOVE_SOFT_BOILED",
+    "MOVE_IRON_DEFENSE", "MOVE_ACID_ARMOR", "MOVE_AMNESIA",
+    "MOVE_COSMIC_POWER", "MOVE_AGILITY", "MOVE_STRING_SHOT",
+    "MOVE_SCREECH", "MOVE_CHARM", "MOVE_SCARY_FACE", "MOVE_GLARE",
+    "MOVE_SAFEGUARD",
+)
+
+# These moves can be excellent on a deliberately authored set, but their
+# conditional cost makes them unsafe as generic role-selection candidates.
+UNSUITABLE_SYNTHETIC_ATTACKS = {
+    "MOVE_AVALANCHE", "MOVE_BELCH", "MOVE_BIDE", "MOVE_BODY_PRESS", "MOVE_COUNTER",
+    "MOVE_CRUSH_GRIP", "MOVE_DIG", "MOVE_DIVE", "MOVE_ELECTRO_BALL",
+    "MOVE_EXPLOSION", "MOVE_FINAL_GAMBIT", "MOVE_FISSURE", "MOVE_FLAIL",
+    "MOVE_FLING", "MOVE_FLY", "MOVE_FOCUS_PUNCH", "MOVE_FOUL_PLAY",
+    "MOVE_FREEZE_SHOCK", "MOVE_FRUSTRATION", "MOVE_GEOMANCY",
+    "MOVE_DREAM_EATER", "MOVE_FUTURE_SIGHT", "MOVE_GIGA_IMPACT", "MOVE_GRASS_KNOT", "MOVE_GUILLOTINE",
+    "MOVE_GYRO_BALL", "MOVE_HEAT_CRASH", "MOVE_HEAVY_SLAM",
+    "MOVE_HIDDEN_POWER", "MOVE_HORN_DRILL", "MOVE_HYPER_BEAM",
+    "MOVE_ICE_BALL", "MOVE_ICE_BURN", "MOVE_LAST_RESORT",
+    "MOVE_LAST_RESPECTS", "MOVE_LOW_KICK", "MOVE_MAGNITUDE",
+    "MOVE_METAL_BURST", "MOVE_METEOR_ASSAULT", "MOVE_METEOR_BEAM",
+    "MOVE_MIRROR_COAT", "MOVE_MISTY_EXPLOSION", "MOVE_NATURAL_GIFT",
+    "MOVE_OUTRAGE", "MOVE_PETAL_DANCE", "MOVE_PHANTOM_FORCE",
+    "MOVE_POWER_TRIP", "MOVE_PRESENT", "MOVE_PRISMATIC_LASER",
+    "MOVE_RAGE_FIST", "MOVE_RAZOR_WIND", "MOVE_RETURN", "MOVE_REVENGE", "MOVE_REVERSAL",
+    "MOVE_ROAR_OF_TIME", "MOVE_ROCK_WRECKER", "MOVE_ROLLOUT",
+    "MOVE_SELF_DESTRUCT", "MOVE_SHADOW_FORCE", "MOVE_SHEER_COLD",
+    "MOVE_SKULL_BASH", "MOVE_SKY_ATTACK", "MOVE_SLEEP_TALK", "MOVE_SNORE",
+    "MOVE_SOLAR_BEAM", "MOVE_SOLAR_BLADE", "MOVE_STEEL_ROLLER",
+    "MOVE_STORED_POWER", "MOVE_SYNCHRONOISE", "MOVE_DRAGON_TAIL",
+    "MOVE_TERA_BLAST",
+    "MOVE_THRASH", "MOVE_TRUMP_CARD", "MOVE_UPROAR", "MOVE_WRING_OUT",
+    "MOVE_BLAST_BURN", "MOVE_FRENZY_PLANT", "MOVE_HYDRO_CANNON",
+    "MOVE_ETERNABEAM", "MOVE_ELECTRO_SHOT",
+}
 
 PHYSICAL_NATURES = {
     "NATURE_ADAMANT", "NATURE_BRAVE", "NATURE_JOLLY", "NATURE_LONELY",
@@ -584,6 +707,15 @@ def git_json(path: str) -> dict:
     return json.loads(result.stdout)
 
 
+def handbook_json() -> dict:
+    handbook = git_json(HANDBOOK_SOURCE)
+    assert handbook["source_file"] == "pokemon_champions_all_species_doubles_handbook.docx"
+    assert handbook["source_sha256"] == HANDBOOK_SHA256
+    assert handbook["declared_species_count"] == 1025
+    assert handbook["declared_set_count"] == len(handbook["sets"]) == 1216
+    return handbook
+
+
 def shorten_name(name: str) -> str:
     name = name.replace(" — ", " ").replace("-Mega", " Mega").strip()
     return name[:23]
@@ -688,6 +820,582 @@ def constants(path: Path, prefix: str) -> set[str]:
     return set(re.findall(rf"\b{prefix}[A-Z0-9_]+\b", path.read_text()))
 
 
+def move_metadata() -> dict[str, dict]:
+    """Read the configured move table closely enough to rank legal options."""
+    text = (ROOT / "src/data/moves_info.h").read_text()
+    markers = list(re.finditer(r"(?m)^\s*\[(MOVE_[A-Z0-9_]+)\]\s*=\s*\{", text))
+    result: dict[str, dict] = {}
+    for index, marker in enumerate(markers):
+        end = markers[index + 1].start() if index + 1 < len(markers) else len(text)
+        block = text[marker.end():end]
+        category = re.search(r"\.category\s*=\s*(DAMAGE_CATEGORY_[A-Z]+)", block)
+        move_type = re.search(r"\.type\s*=\s*[^,]*(TYPE_[A-Z0-9_]+)", block)
+        target = re.search(r"\.target\s*=\s*(TARGET_[A-Z0-9_]+)", block)
+        power_expr = re.search(r"\.power\s*=\s*([^,]+)", block)
+        accuracy_expr = re.search(r"\.accuracy\s*=\s*([^,]+)", block)
+        priority_expr = re.search(r"\.priority\s*=\s*([^,]+)", block)
+
+        def numeric(match: re.Match[str] | None, fallback: int) -> int:
+            if match is None:
+                return fallback
+            values = [int(value) for value in re.findall(r"\b\d+\b", match.group(1))]
+            return max(values) if values else fallback
+
+        result[marker.group(1)] = {
+            "category": category.group(1) if category else "DAMAGE_CATEGORY_STATUS",
+            "type": move_type.group(1) if move_type else "TYPE_NORMAL",
+            "target": target.group(1) if target else "TARGET_SELECTED",
+            "power": numeric(power_expr, 0),
+            "accuracy": numeric(accuracy_expr, 100),
+            "priority": numeric(priority_expr, 0),
+            "biting": ".bitingMove = TRUE" in block,
+            "contact": ".makesContact = TRUE" in block,
+            "punching": ".punchingMove = TRUE" in block,
+            "pulse": ".pulseMove = TRUE" in block,
+            "slicing": ".slicingMove = TRUE" in block,
+            "sound": ".soundMove = TRUE" in block,
+        }
+    return result
+
+
+def species_build_metadata() -> dict[str, dict]:
+    """Resolve the same configured species table consumed by the ROM."""
+    text = preprocess_species_info()
+    table_start = text.find("const struct SpeciesInfo gSpeciesInfo[]")
+    assert table_start >= 0
+    text = text[table_start:]
+    markers = list(SPECIES_MARKER.finditer(text))
+    result: dict[str, dict] = {}
+    for index, marker in enumerate(markers):
+        end = markers[index + 1].start() if index + 1 < len(markers) else len(text)
+        block = text[marker.start():end]
+
+        def stat(field: str) -> int:
+            match = re.search(rf"\.{field}\s*=\s*(\d+)", block)
+            return int(match.group(1)) if match else 0
+
+        type_match = re.search(r"\.types\s*=\s*\{([^}]+)\}", block)
+        learnset_match = re.search(
+            r"\.teachableLearnset\s*=\s*s([A-Za-z0-9]+)TeachableLearnset",
+            block,
+        )
+        ability_match = re.search(r"\.abilities\s*=\s*\{([^}]+)\}", block)
+        result[marker.group(1)] = {
+            "hp": stat("baseHP"),
+            "attack": stat("baseAttack"),
+            "defense": stat("baseDefense"),
+            "sp_attack": stat("baseSpAttack"),
+            "sp_defense": stat("baseSpDefense"),
+            "speed": stat("baseSpeed"),
+            "types": tuple(dict.fromkeys(re.findall(
+                r"TYPE_[A-Z0-9_]+", type_match.group(1) if type_match else ""
+            ))),
+            "abilities": tuple(dict.fromkeys(re.findall(
+                r"ABILITY_[A-Z0-9_]+", ability_match.group(1) if ability_match else ""
+            ))),
+            "learnset_key": (
+                re.sub(r"([a-z0-9])([A-Z])", r"\1_\2", learnset_match.group(1)).upper()
+                if learnset_match else ""
+            ),
+            "evolves": ".evolutions" in block,
+        }
+
+    aliases = species_aliases()
+    for alias in aliases:
+        target = resolve_species(alias, aliases)
+        if target in result:
+            result.setdefault(alias, result[target])
+    return result
+
+
+def legal_moves_for_species(
+    species: str,
+    existing: list[dict],
+    metadata: dict[str, dict],
+    learnables: dict[str, list[str]],
+) -> set[str]:
+    info = metadata.get(species, {})
+    keys = {
+        species.removeprefix("SPECIES_"),
+        info.get("learnset_key", ""),
+    }
+    legal = set().union(*(set(learnables.get(key, [])) for key in keys if key))
+    # Reviewed imported moves are executable and legal even when they enter
+    # through the small explicit move-access extension manifest.
+    legal.update(move for entry in existing for move in entry["moves"])
+    return legal
+
+
+def ranked_attacks(
+    legal: set[str],
+    category: str,
+    species_types: tuple[str, ...],
+    moves: dict[str, dict],
+    ability: str,
+) -> list[str]:
+    candidates: list[tuple[int, str]] = []
+    spread_targets = {
+        "TARGET_BOTH", "TARGET_FOES_AND_ALLY", "TARGET_OPPONENTS_FIELD",
+        "TARGET_ALL_BATTLERS", "TARGET_ALLY_AND_USER",
+    }
+    skill_link_moves = {
+        "MOVE_ARM_THRUST", "MOVE_BARRAGE", "MOVE_BONE_RUSH",
+        "MOVE_BULLET_SEED", "MOVE_DOUBLE_SLAP", "MOVE_FURY_ATTACK",
+        "MOVE_FURY_SWIPES", "MOVE_ICICLE_SPEAR", "MOVE_PIN_MISSILE",
+        "MOVE_POPULATION_BOMB", "MOVE_ROCK_BLAST", "MOVE_SCALE_SHOT",
+        "MOVE_SPIKE_CANNON", "MOVE_TAIL_SLAP", "MOVE_TRIPLE_KICK",
+    }
+    for move in legal:
+        info = moves.get(move)
+        if info is None or info["category"] != category:
+            continue
+        if move in UNSUITABLE_SYNTHETIC_ATTACKS:
+            continue
+        ate_abilities = {
+            "ABILITY_AERILATE", "ABILITY_GALVANIZE", "ABILITY_PIXILATE",
+            "ABILITY_REFRIGERATE",
+        }
+        if (
+            move == "MOVE_DOUBLE_EDGE"
+            and "TYPE_NORMAL" not in species_types
+            and ability not in ate_abilities
+        ):
+            continue
+        power = info["power"]
+        if (
+            power < 40
+            and info["priority"] <= 0
+            and not (ability == "ABILITY_SKILL_LINK" and move in skill_link_moves)
+        ):
+            continue
+        score = power
+        if ability == "ABILITY_SKILL_LINK" and move in skill_link_moves:
+            score = max(score, power * 5)
+        if info["type"] in species_types or (
+            info["type"] == "TYPE_NORMAL" and ability in ate_abilities
+        ):
+            score += 42
+        if (
+            move == "MOVE_FACADE"
+            and ability in {
+                "ABILITY_GUTS", "ABILITY_POISON_HEAL", "ABILITY_QUICK_FEET",
+                "ABILITY_TOXIC_BOOST",
+            }
+        ):
+            score += 80
+        if ability == "ABILITY_TRIAGE" and move in {
+            "MOVE_DRAIN_PUNCH", "MOVE_DRAINING_KISS", "MOVE_GIGA_DRAIN",
+            "MOVE_HORN_LEECH", "MOVE_LEECH_LIFE", "MOVE_PARABOLIC_CHARGE",
+        }:
+            score += 80
+        if ability == "ABILITY_TECHNICIAN" and power <= 60:
+            score += 35
+        if ability == "ABILITY_IRON_FIST" and info["punching"]:
+            score += 35
+        if ability == "ABILITY_STRONG_JAW" and info["biting"]:
+            score += 35
+        if ability == "ABILITY_SHARPNESS" and info["slicing"]:
+            score += 35
+        if ability == "ABILITY_MEGA_LAUNCHER" and info["pulse"]:
+            score += 35
+        if ability == "ABILITY_PUNK_ROCK" and info["sound"]:
+            score += 35
+        if ability == "ABILITY_TOUGH_CLAWS" and info["contact"]:
+            score += 20
+        if info["target"] in spread_targets:
+            score += 15
+        if info["priority"] > 0:
+            score += 18 + 4 * info["priority"]
+        if info["accuracy"] and info["accuracy"] < 90:
+            score -= 35
+        candidates.append((score, move))
+    return [move for _, move in sorted(candidates, key=lambda row: (-row[0], row[1]))]
+
+
+def diverse_attacks(ranked: list[str], moves: dict[str, dict], limit: int) -> list[str]:
+    selected: list[str] = []
+    seen_types: set[str] = set()
+    for move in ranked:
+        move_type = moves[move]["type"]
+        if move_type in seen_types:
+            continue
+        selected.append(move)
+        seen_types.add(move_type)
+        if len(selected) == limit:
+            return selected
+    for move in ranked:
+        if move not in selected:
+            selected.append(move)
+            if len(selected) == limit:
+                break
+    return selected
+
+
+def unique_available(sequence: tuple[str, ...] | list[str], legal: set[str]) -> list[str]:
+    return list(dict.fromkeys(move for move in sequence if move in legal))
+
+
+def coherent_item(ability: str, preferred: str) -> str:
+    if ability == "ABILITY_GUTS":
+        return "ITEM_FLAME_ORB"
+    if ability in {"ABILITY_QUICK_FEET", "ABILITY_TOXIC_BOOST"}:
+        return "ITEM_TOXIC_ORB"
+    if ability == "ABILITY_POISON_HEAL":
+        return "ITEM_TOXIC_ORB"
+    if ability == "ABILITY_FLARE_BOOST":
+        return "ITEM_FLAME_ORB"
+    if ability == "ABILITY_HARVEST":
+        return "ITEM_SITRUS_BERRY"
+    if ability == "ABILITY_UNBURDEN" and preferred not in {
+        "ITEM_FOCUS_SASH", "ITEM_SITRUS_BERRY", "ITEM_WHITE_HERB",
+        "ITEM_ELECTRIC_SEED", "ITEM_GRASSY_SEED", "ITEM_MISTY_SEED",
+        "ITEM_PSYCHIC_SEED", "ITEM_POWER_HERB", "ITEM_WEAKNESS_POLICY",
+    }:
+        return "ITEM_SITRUS_BERRY"
+    return preferred
+
+
+def make_synthetic_set(
+    base: dict,
+    name: str,
+    move_list: list[str],
+    nature: str,
+    item: str,
+    stat_points: list[int],
+    role: str,
+    ability: str | None = None,
+) -> dict:
+    return {
+        "species": base["species"],
+        "name": shorten_name(name),
+        "moves": list(dict.fromkeys(move_list))[:4],
+        "nature": nature,
+        "ability": ability or base["ability"],
+        "item": coherent_item(ability or base["ability"], item),
+        "required_item": "ITEM_NONE",
+        "stat_points": stat_points,
+        "role": role,
+        "source": (
+            "Emerald Champions legal doubles role synthesis; supplied handbook "
+            "plus current learnables, stats, and Abilities"
+        ),
+    }
+
+
+def is_genuinely_distinct(candidate: dict, existing: list[dict]) -> bool:
+    """Reject renames, move-order shuffles, and item-only alternatives."""
+    candidate_moves = frozenset(candidate["moves"])
+    for current in existing:
+        if current["required_item"] != "ITEM_NONE":
+            continue
+        moves_changed = candidate_moves != frozenset(current["moves"])
+        ability_changed = candidate["ability"] != current["ability"]
+        build_changed = (
+            candidate["nature"] != current["nature"]
+            or tuple(candidate["stat_points"]) != tuple(current["stat_points"])
+        )
+        if not (moves_changed or ability_changed or build_changed):
+            return False
+    return True
+
+
+def offensive_candidates(
+    base: dict,
+    legal: set[str],
+    info: dict,
+    move_info: dict[str, dict],
+) -> list[dict]:
+    result: list[dict] = []
+    protect = (
+        ["MOVE_PROTECT"]
+        if "MOVE_PROTECT" in legal and base["ability"] != "ABILITY_GORILLA_TACTICS"
+        else []
+    )
+    categories = [
+        ("physical", "DAMAGE_CATEGORY_PHYSICAL", info.get("attack", 0)),
+        ("special", "DAMAGE_CATEGORY_SPECIAL", info.get("sp_attack", 0)),
+    ]
+    categories.sort(key=lambda row: (-row[2], row[0]))
+
+    for label, category, attack_stat in categories:
+        ranked = ranked_attacks(
+            legal, category, info.get("types", ()), move_info, base["ability"]
+        )
+        if not ranked:
+            continue
+        selected = diverse_attacks(ranked, move_info, 3 if protect else 4)
+        if len(selected) < 2:
+            continue
+        setup_pool = PHYSICAL_SETUP_MOVES if label == "physical" else SPECIAL_SETUP_MOVES
+        setup = unique_available(setup_pool, legal)
+        if base["ability"] in {"ABILITY_CONTRARY", "ABILITY_GORILLA_TACTICS"}:
+            setup = []
+        fast = info.get("speed", 0) >= 70
+        if label == "physical":
+            nature = "NATURE_JOLLY" if fast else "NATURE_ADAMANT"
+            points = [2, 32, 0, 0, 0, 32] if fast else [32, 32, 2, 0, 0, 0]
+        else:
+            nature = "NATURE_TIMID" if fast else "NATURE_MODEST"
+            points = [2, 0, 0, 32, 0, 32] if fast else [32, 0, 2, 32, 0, 0]
+
+        if setup and len(selected) >= 2:
+            setup_move = setup[0]
+            setup_name = setup_move.removeprefix("MOVE_").replace("_", " ").title()
+            if setup_move == "MOVE_SHELL_SMASH":
+                setup_item = "ITEM_WHITE_HERB"
+            elif label == "special":
+                setup_item = "ITEM_LIFE_ORB"
+            elif info.get("speed", 0) < 60:
+                setup_item = "ITEM_SITRUS_BERRY"
+            else:
+                setup_item = "ITEM_CLEAR_AMULET"
+            result.append(make_synthetic_set(
+                base,
+                f"{setup_name} Setup",
+                [setup_move, *selected[:2], *protect],
+                nature,
+                setup_item,
+                points,
+                f"distinct doubles {label} setup pressure",
+            ))
+
+        support = unique_available(GENERAL_SUPPORT_MOVES, legal)
+        pressure_moves = [*selected, *protect]
+        if len(pressure_moves) < 4:
+            pressure_moves.extend(move for move in support if move not in pressure_moves)
+        result.append(make_synthetic_set(
+            base,
+            "Physical Pressure" if label == "physical" else "Special Pressure",
+            pressure_moves,
+            nature,
+            "ITEM_LIFE_ORB" if attack_stat >= 75 else "ITEM_FOCUS_SASH",
+            points,
+            f"doubles {label} attacker with coverage and positioning",
+        ))
+    return result
+
+
+def support_candidates(
+    base: dict,
+    legal: set[str],
+    info: dict,
+    move_info: dict[str, dict],
+) -> list[dict]:
+    if base["ability"] == "ABILITY_GORILLA_TACTICS":
+        return []
+    result: list[dict] = []
+    physical = ranked_attacks(
+        legal, "DAMAGE_CATEGORY_PHYSICAL", info.get("types", ()), move_info,
+        base["ability"],
+    )
+    special = ranked_attacks(
+        legal, "DAMAGE_CATEGORY_SPECIAL", info.get("types", ()), move_info,
+        base["ability"],
+    )
+    attack_pool = physical if info.get("attack", 0) >= info.get("sp_attack", 0) else special
+    attack_category = "physical" if attack_pool is physical else "special"
+    best_attack = attack_pool[:1] or (special[:1] if attack_pool is physical else physical[:1])
+
+    for name, primary, companions, style in ROLE_BLUEPRINTS:
+        if primary not in legal:
+            continue
+        if name == "Dual Screens" and not {
+            "MOVE_LIGHT_SCREEN", "MOVE_AURORA_VEIL"
+        }.intersection(legal):
+            continue
+        chosen = [primary]
+        chosen.extend(unique_available(companions, legal)[:1])
+        chosen.extend(move for move in best_attack if move != primary)
+        if "MOVE_PROTECT" in legal:
+            chosen.append("MOVE_PROTECT")
+        if len(chosen) < 4:
+            chosen.extend(
+                move for move in unique_available(GENERAL_SUPPORT_MOVES, legal)
+                if move not in chosen
+            )
+        if style == "slow_support":
+            nature = "NATURE_BRAVE" if attack_category == "physical" else "NATURE_QUIET"
+            points = [32, 0, 16, 0, 18, 0]
+        elif style == "fast_support":
+            nature = "NATURE_JOLLY" if attack_category == "physical" else "NATURE_TIMID"
+            points = [32, 0, 2, 0, 0, 32]
+        else:
+            nature = "NATURE_CAREFUL" if attack_category == "physical" else "NATURE_BOLD"
+            points = [32, 0, 16, 0, 18, 0]
+
+        if name == "Dual Screens":
+            item = "ITEM_LIGHT_CLAY"
+        elif info.get("evolves", False):
+            item = "ITEM_EVIOLITE"
+        else:
+            item = "ITEM_SITRUS_BERRY"
+        result.append(make_synthetic_set(
+            base,
+            name,
+            chosen,
+            nature,
+            item,
+            points,
+            f"distinct doubles {name.lower()} role",
+        ))
+    return result
+
+
+def fallback_candidate(
+    base: dict,
+    legal: set[str],
+    info: dict,
+    move_info: dict[str, dict],
+) -> dict:
+    """Cover legitimately narrow species without pretending they have moves."""
+    species = base["species"]
+    if species == "SPECIES_DITTO":
+        return make_synthetic_set(
+            base,
+            "Manual Transform",
+            ["MOVE_TRANSFORM"],
+            "NATURE_TIMID",
+            "ITEM_QUICK_POWDER",
+            [32, 0, 2, 0, 0, 32],
+            "Limber manual-Transform speed orientation",
+            ability="ABILITY_LIMBER",
+        )
+
+    physical = [
+        move for move in legal
+        if move_info.get(move, {}).get("category") == "DAMAGE_CATEGORY_PHYSICAL"
+    ]
+    special = [
+        move for move in legal
+        if move_info.get(move, {}).get("category") == "DAMAGE_CATEGORY_SPECIAL"
+    ]
+    default_physical = sum(
+        move_info.get(move, {}).get("category") == "DAMAGE_CATEGORY_PHYSICAL"
+        for move in base["moves"]
+    )
+    default_special = sum(
+        move_info.get(move, {}).get("category") == "DAMAGE_CATEGORY_SPECIAL"
+        for move in base["moves"]
+    )
+    use_physical = bool(physical) and (
+        not special or info.get("attack", 0) >= info.get("sp_attack", 0)
+    )
+    if use_physical:
+        nature = "NATURE_JOLLY" if base["nature"] != "NATURE_JOLLY" else "NATURE_CAREFUL"
+        points = [2, 32, 0, 0, 0, 32] if nature == "NATURE_JOLLY" else [32, 32, 2, 0, 0, 0]
+        name = "Fast Utility" if nature == "NATURE_JOLLY" else "Bulky Utility"
+        item = "ITEM_CHOICE_SCARF" if not any(
+            move_info.get(move, {}).get("category") == "DAMAGE_CATEGORY_STATUS"
+            for move in base["moves"]
+        ) else "ITEM_FOCUS_SASH"
+    else:
+        nature = "NATURE_TIMID" if base["nature"] != "NATURE_TIMID" else "NATURE_BOLD"
+        points = [2, 0, 0, 32, 0, 32] if nature == "NATURE_TIMID" else [32, 0, 32, 0, 2, 0]
+        name = "Fast Utility" if nature == "NATURE_TIMID" else "Bulky Utility"
+        item = "ITEM_CHOICE_SPECS" if not any(
+            move_info.get(move, {}).get("category") == "DAMAGE_CATEGORY_STATUS"
+            for move in base["moves"]
+        ) else "ITEM_FOCUS_SASH"
+
+    # Add one legal unused move when the species has one; Metapod-like narrow
+    # pools therefore become real control-versus-defense choices. Ditto and
+    # Unown still receive materially different nature/Stat Point orientations.
+    moves = list(base["moves"])
+    unused = sorted(legal - set(moves))
+    if unused:
+        if len(moves) == 4:
+            moves[-1] = unused[0]
+        else:
+            moves.append(unused[0])
+    return make_synthetic_set(
+        base,
+        name,
+        moves,
+        nature,
+        item,
+        points,
+        (
+            "speed-oriented narrow-pool utility" if "Fast" in name
+            else "bulk-oriented narrow-pool utility"
+        ),
+    )
+
+
+def ensure_minimum_non_mega_orientations(
+    defaults: list[dict], alternatives: list[dict]
+) -> list[dict]:
+    """Give every direct species/form two distinct pre-Mega choices."""
+    by_species: dict[str, list[dict]] = defaultdict(list)
+    for entry in defaults + alternatives:
+        by_species[entry["species"]].append(entry)
+
+    metadata = species_build_metadata()
+    move_info = move_metadata()
+    learnables = json.loads((ROOT / "src/data/pokemon/all_learnables.json").read_text())
+    synthesized: list[dict] = []
+    for default in defaults:
+        species = default["species"]
+        existing = by_species[species]
+        if sum(entry["required_item"] == "ITEM_NONE" for entry in existing) >= 2:
+            continue
+        base = next(entry for entry in existing if entry["required_item"] == "ITEM_NONE")
+        info = metadata.get(species, {})
+        legal = legal_moves_for_species(species, existing, metadata, learnables)
+        status_count = sum(
+            move_info.get(move, {}).get("category") == "DAMAGE_CATEGORY_STATUS"
+            and move not in {"MOVE_PROTECT", "MOVE_DETECT", "MOVE_ENDURE"}
+            for move in base["moves"]
+        )
+        candidates = (
+            offensive_candidates(base, legal, info, move_info)
+            + support_candidates(base, legal, info, move_info)
+            if status_count >= 2
+            else support_candidates(base, legal, info, move_info)
+            + offensive_candidates(base, legal, info, move_info)
+        )
+        candidates.append(fallback_candidate(base, legal, info, move_info))
+        used_names = {entry["name"] for entry in existing}
+        choice = next(
+            (
+                candidate for candidate in candidates
+                if candidate["name"] not in used_names
+                and candidate["moves"]
+                and is_genuinely_distinct(candidate, existing)
+            ),
+            None,
+        )
+        assert choice is not None, f"no genuinely distinct second orientation for {species}"
+        synthesized.append(choice)
+        existing.append(choice)
+    assert len(synthesized) == 1087, len(synthesized)
+    return alternatives + synthesized
+
+
+def remove_superficial_non_mega_alternatives(
+    defaults: list[dict], alternatives: list[dict]
+) -> list[dict]:
+    """Drop preserved alternatives that only reorder moves or swap an item."""
+    by_species: dict[str, list[dict]] = defaultdict(list)
+    for entry in defaults:
+        by_species[entry["species"]].append(entry)
+    retained: list[dict] = []
+    removed: list[tuple[str, str]] = []
+    for entry in alternatives:
+        if (
+            entry["required_item"] == "ITEM_NONE"
+            and not is_genuinely_distinct(entry, by_species[entry["species"]])
+        ):
+            removed.append((entry["species"], entry["name"]))
+            continue
+        retained.append(entry)
+        by_species[entry["species"]].append(entry)
+    assert removed == [
+        ("SPECIES_CHIEN_PAO", "Wallbreaker"),
+        ("SPECIES_KILOWATTREL", "Doubles Fast Attacker"),
+    ], removed
+    return retained
+
+
 def showdown_id(value: str) -> str:
     return re.sub(r"[^a-z0-9]", "", value.lower())
 
@@ -739,7 +1447,7 @@ def normalize_handbook_set(
 
 
 def handbook_supplements(present_species: set[str]) -> tuple[list[dict], list[dict]]:
-    handbook = git_json(HANDBOOK_SOURCE)
+    handbook = handbook_json()
     species_constants = constants(ROOT / "include/constants/species.h", "SPECIES_")
     move_map = constant_id_map(ROOT / "include/constants/moves.h", "MOVE_")
     item_map = constant_id_map(ROOT / "include/constants/items.h", "ITEM_")
@@ -783,7 +1491,7 @@ def handbook_supplements(present_species: set[str]) -> tuple[list[dict], list[di
 
 def handbook_mega_roles() -> list[dict]:
     """Return every ladder-backed Mega role that the current engine supports."""
-    handbook = git_json(HANDBOOK_SOURCE)
+    handbook = handbook_json()
     move_map = constant_id_map(ROOT / "include/constants/moves.h", "MOVE_")
     item_map = constant_id_map(ROOT / "include/constants/items.h", "ITEM_")
     ability_map = constant_id_map(ROOT / "include/constants/abilities.h", "ABILITY_")
@@ -985,6 +1693,8 @@ def main() -> None:
     defaults = [apply_audited_set_override(entry) for entry in defaults]
     raw_alternatives = [apply_audited_set_override(entry) for entry in raw_alternatives]
     defaults, raw_alternatives = merge_handbook_mega_roles(defaults, raw_alternatives)
+    raw_alternatives = remove_superficial_non_mega_alternatives(defaults, raw_alternatives)
+    raw_alternatives = ensure_minimum_non_mega_orientations(defaults, raw_alternatives)
     alternatives_by_species: dict[str, list[dict]] = {}
     for entry in raw_alternatives:
         alternatives_by_species.setdefault(entry["species"], []).append(entry)
@@ -1004,6 +1714,8 @@ def main() -> None:
             "stat_points": "66 total, 32 maximum per stat",
             "ability": "resolved by Ability identity against current species data",
             "protected_items": "never supplied by a preset",
+            "minimum_non_mega_orientations": "two genuinely distinct choices per direct species/form",
+            "wild_sampling": "uniform across every non-Mega orientation",
         },
         "default_count": len(defaults),
         "alternative_count": len(alternatives),

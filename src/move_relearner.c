@@ -32,6 +32,7 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "data/tutor_moves.h"
+#include "data/pokemon/emerald_champions_preparation_learnsets.h"
 
 // The different versions of hearts are selected using animation
 // commands.
@@ -65,7 +66,7 @@ static EWRAM_DATA struct
     u16 movesToLearn[MAX_RELEARNER_MOVES];
     struct ListMenuItem menuItems[MAX_RELEARNER_MOVES + 1];
     u8 mainTask;
-    u8 numMenuChoices;
+    u16 numMenuChoices;
     u8 numToShowAtOnce;
     u8 moveListMenuTask;
     u8 moveListScrollArrowTask;
@@ -260,14 +261,17 @@ static bool32 IsLevelUpMoveRelearnerActive(void);
 static bool32 IsEggMoveRelearnerActive(void);
 static bool32 IsTMMoveRelearnerActive(void);
 static bool32 IsTutorMoveRelearnerActive(void);
+static bool32 IsAllMoveRelearnerActive(void);
 static bool32 HasRelearnerLevelUpMoves(struct BoxPokemon *boxMon);
 static bool32 HasRelearnerEggMoves(struct BoxPokemon *boxMon);
 static bool32 HasRelearnerTMMoves(struct BoxPokemon *boxMon);
 static bool32 HasRelearnerTutorMoves(struct BoxPokemon *boxMon);
+static bool32 HasRelearnerAllMoves(struct BoxPokemon *boxMon);
 static u32 GetRelearnerLevelUpMoves(struct BoxPokemon *mon, u16 *moves);
 static u32 GetRelearnerEggMoves(struct BoxPokemon *mon, u16 *moves);
 static u32 GetRelearnerTMMoves(struct BoxPokemon *mon, u16 *moves);
 static u32 GetRelearnerTutorMoves(struct BoxPokemon *mon, u16 *moves);
+u32 GetEmeraldChampionsPreparationMovesToLearn(struct BoxPokemon *mon, u16 *moves);
 
 static void Task_MoveRelearner_HandleInput(u8 taskId);
 static void Task_MoveRelearner_LearnMove(u8 taskId);
@@ -300,6 +304,12 @@ static const struct RelearnType sRelearnTypes[MOVE_RELEARNER_COUNT] =
         .hasMoveToRelearn = HasRelearnerTutorMoves,
         .getMoves = GetRelearnerTutorMoves,
         .moveText = MoveRelearner_Text_TutorMoveLWR
+    },
+    [MOVE_RELEARNER_ALL_MOVES] = {
+        .isActive = IsAllMoveRelearnerActive,
+        .hasMoveToRelearn = HasRelearnerAllMoves,
+        .getMoves = GetEmeraldChampionsPreparationMovesToLearn,
+        .moveText = MoveRelearner_Text_MoveLWR
     },
 };
 
@@ -1010,6 +1020,48 @@ static u32 GetRelearnerTutorMoves(struct BoxPokemon *mon, u16 *moves)
     return numMoves;
 }
 
+const u16 *GetEmeraldChampionsPreparationMoves(enum Species species)
+{
+    const u16 *moves;
+    enum Species baseSpecies;
+
+    if (species <= SPECIES_NONE || species >= NUM_SPECIES)
+        return sEmeraldChampionsPreparationMoves_None;
+
+    // This table is intentionally separate from SpeciesInfo.teachableLearnset:
+    // only the Center's All Legal Moves service receives historical legality.
+    moves = sEmeraldChampionsPreparationLearnsets[species];
+    if (moves != NULL)
+        return moves;
+
+    baseSpecies = GET_BASE_SPECIES_ID(species);
+    if (baseSpecies > SPECIES_NONE && baseSpecies < NUM_SPECIES)
+    {
+        moves = sEmeraldChampionsPreparationLearnsets[baseSpecies];
+        if (moves != NULL)
+            return moves;
+    }
+
+    return sEmeraldChampionsPreparationMoves_None;
+}
+
+u32 GetEmeraldChampionsPreparationMovesToLearn(struct BoxPokemon *mon, u16 *moves)
+{
+    enum Species species = GetBoxMonData(mon, MON_DATA_SPECIES);
+    const u16 *preparationMoves = GetEmeraldChampionsPreparationMoves(species);
+    u32 numMoves = 0;
+
+    for (u32 i = 0; preparationMoves[i] != MOVE_UNAVAILABLE; i++)
+    {
+        enum Move move = preparationMoves[i];
+
+        if (move > MOVE_NONE && move < MOVES_COUNT_ALL && !BoxMonKnowsMove(mon, move))
+            moves[numMoves++] = move;
+    }
+
+    return numMoves;
+}
+
 void Special_HasMoveToRelearn(void)
 {
     struct BoxPokemon *boxmon = GetSelectedBoxMonFromPcOrParty();
@@ -1120,6 +1172,19 @@ static bool32 HasRelearnerTutorMoves(struct BoxPokemon *boxMon)
     return FALSE;
 }
 
+static bool32 HasRelearnerAllMoves(struct BoxPokemon *boxMon)
+{
+    enum Species species = GetBoxMonData(boxMon, MON_DATA_SPECIES);
+    const u16 *preparationMoves = GetEmeraldChampionsPreparationMoves(species);
+
+    for (u32 i = 0; preparationMoves[i] != MOVE_UNAVAILABLE; i++)
+    {
+        if (!BoxMonKnowsMove(boxMon, preparationMoves[i]))
+            return TRUE;
+    }
+    return FALSE;
+}
+
 static bool32 IsLevelUpMoveRelearnerActive(void)
 {
     return TRUE;
@@ -1138,4 +1203,9 @@ static bool32 IsTMMoveRelearnerActive(void)
 static bool32 IsTutorMoveRelearnerActive(void)
 {
     return (FlagGet(P_FLAG_TUTOR_MOVES) || P_ENABLE_MOVE_RELEARNERS);
+}
+
+static bool32 IsAllMoveRelearnerActive(void)
+{
+    return TRUE;
 }

@@ -33,6 +33,7 @@ BUILD_DIR := build
 COMPARE     ?= 0
 # Executes the Test Runner System that checks that all mechanics work as expected
 TEST         ?= 0
+EC_HEADLESS_FIXTURES ?= 0
 # Enables -fanalyzer C flag to analyze in depth potential UBs
 ANALYZE      ?= 0
 # Count unused warnings as errors. Used by RH-Hideout's repo
@@ -157,6 +158,7 @@ else
 O_LEVEL ?= 2
 endif
 CPPFLAGS := $(INCLUDE_CPP_ARGS) -Wno-trigraphs -DMODERN=1 -DTESTING=$(TEST) -D$(GAME_VERSION) -std=gnu17
+CPPFLAGS += -DEC_HEADLESS_FIXTURES=$(EC_HEADLESS_FIXTURES)
 ifeq ($(RELEASE),1)
 	override CPPFLAGS += -DRELEASE
 	ifeq ($(USE_LTO_ON_RELEASE),1)
@@ -241,6 +243,8 @@ LEARNSET_HELPERS_DATA_DIR := $(LEARNSET_HELPERS_DIR)/porymoves_files
 LEARNSET_HELPERS_BUILD_DIR := $(LEARNSET_HELPERS_DIR)/build
 ALL_LEARNABLES_JSON := $(DATA_SRC_SUBDIR)/pokemon/all_learnables.json
 MOVE_ACCESS_REVIEW_JSON := docs/emerald_champions_move_access_review.json
+EC_PREPARATION_LEARNSETS := $(DATA_SRC_SUBDIR)/pokemon/emerald_champions_preparation_learnsets.h
+AUTO_GEN_TARGETS += $(EC_PREPARATION_LEARNSETS)
 ALL_TUTORS_JSON := $(LEARNSET_HELPERS_BUILD_DIR)/all_tutors.json
 ALL_TEACHING_TYPES_JSON := $(LEARNSET_HELPERS_BUILD_DIR)/all_teaching_types.json
 
@@ -477,7 +481,7 @@ $(C_BUILDDIR)/graphics.o: override CFLAGS += -Wno-missing-braces
 
 # Dependency rules (for the *.c & *.s sources to .o files)
 # Have to be explicit or else missing files won't be reported.
-$(C_BUILDDIR)/move_relearner.o: $(C_SUBDIR)/move_relearner.c $(DATA_SRC_SUBDIR)/tutor_moves.h
+$(C_BUILDDIR)/move_relearner.o: $(C_SUBDIR)/move_relearner.c $(DATA_SRC_SUBDIR)/tutor_moves.h $(EC_PREPARATION_LEARNSETS)
 $(C_BUILDDIR)/pokemon.o: $(C_SUBDIR)/pokemon.c $(DATA_SRC_SUBDIR)/pokemon/teachable_learnsets.h
 
 # As a side effect, they're evaluated immediately instead of when the rule is invoked.
@@ -570,6 +574,9 @@ $(ALL_TEACHING_TYPES_JSON): $(wildcard $(DATA_SRC_SUBDIR)/pokemon/species_info/*
 
 $(DATA_SRC_SUBDIR)/pokemon/teachable_learnsets.h: $(TEACHABLE_DEPS) | $(ALL_TUTORS_JSON) $(ALL_TEACHING_TYPES_JSON)
 	python3 $(LEARNSET_HELPERS_DIR)/make_teachables.py $(LEARNSET_HELPERS_BUILD_DIR)
+
+$(EC_PREPARATION_LEARNSETS): $(ALL_LEARNABLES_JSON) $(MOVE_ACCESS_REVIEW_JSON) $(INCLUDE_DIRS)/constants/species.h $(INCLUDE_DIRS)/constants/moves.h $(LEARNSET_HELPERS_DIR)/make_teachables.py
+	python3 $(LEARNSET_HELPERS_DIR)/make_teachables.py --preparation
 
 $(DATA_SRC_SUBDIR)/tutor_moves.h: $(DATA_SRC_SUBDIR)/pokemon/special_movesets.json $(MOVE_ACCESS_REVIEW_JSON) | $(ALL_TUTORS_JSON)
 	python3 $(LEARNSET_HELPERS_DIR)/make_teachables.py  --tutors $(LEARNSET_HELPERS_BUILD_DIR)

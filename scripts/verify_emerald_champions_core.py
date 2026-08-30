@@ -105,7 +105,6 @@ def main() -> None:
     specials = read("data/specials.inc")
     field_moves = read("src/field_move.c")
     party_menu = read("src/party_menu.c")
-    party_menu_data = read("src/data/party_menu.h")
     vendor_scripts = read("data/scripts/emerald_champions.inc")
     trainers = read("src/data/trainers.party")
 
@@ -279,11 +278,6 @@ def main() -> None:
     require(
         "AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_OPEN_ABILITY)" in party_menu,
         "the normal party menu lacks on-the-fly Ability switching",
-    )
-    require(
-        "SELECTWINDOW_ABILITY" in party_menu
-        and all(token in party_menu_data for token in ("MENU_ABILITY_SLOT_0", "MENU_ABILITY_SLOT_1", "MENU_ABILITY_SLOT_2")),
-        "the native Ability chooser is incomplete",
     )
     require(
         "GetEmeraldChampionsBattleSetCount(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x800A]) + 1" in field_specials

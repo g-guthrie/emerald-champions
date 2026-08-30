@@ -519,6 +519,7 @@ gSpecials::
 	def_special ApplySelectedMonEmeraldChampionsBattleSet
 	def_special GetSelectedMonEmeraldChampionsBattleSetCount
 	def_special BufferSelectedMonEmeraldChampionsBattleSetName
+	def_special BufferSelectedMonCurrentEmeraldChampionsBattleSet
 	def_special TryUnlockSelectedLegendarySign
 	def_special GetSelectedLegendarySignState
 	def_special ShouldShowSelectedLegendarySignObject

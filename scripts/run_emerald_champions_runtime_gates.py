@@ -53,7 +53,8 @@ class RuntimeGate:
 
 
 RUNTIME_GATES = (
-    RuntimeGate("*Champions", 90),
+    RuntimeGate("*Champions", 94),
+    RuntimeGate("*preparation", 3),
     RuntimeGate("*Item descriptions fit on Bag and Shop Screen", 1),
     RuntimeGate("*Eggs safely inherit", 1),
     RuntimeGate("test/upstream_critical_fixes.c", 4),

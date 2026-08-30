@@ -46,6 +46,10 @@ def main() -> None:
     generated = read("src/data/pokemon/showdown_champions_circuit.h")
     circuit = read("src/champions_circuit.c")
     circuit_lobby = read("data/maps/BattleFrontier_BattleTowerLobby/scripts.inc")
+    circuit_corridor = read("data/maps/BattleFrontier_BattleTowerCorridor/scripts.inc")
+    circuit_room = read("data/maps/BattleFrontier_BattleTowerBattleRoom/scripts.inc")
+    flags = read("include/constants/flags.h")
+    migration = read("src/overworld.c")
     definitions = read("src/data/pokemon/legendary_signs.h")
 
     require(manifest["source_commit"] == "bb179fbf8449e3c31632bd56f671ffb4404fa6e7", "Showdown source commit drifted")
@@ -65,10 +69,68 @@ def main() -> None:
         "Circuit reward entitlement no longer survives retirement",
     )
     require(
-        circuit_lobby.count("special ChampionsCircuitTryGiveReward") == 2
+        circuit_lobby.count("special ChampionsCircuitTryGiveReward") == 1
+        and circuit_room.count("special ChampionsCircuitTryGiveReward") == 1
         and "BattleFrontier_BattleTowerLobby_EventScript_CircuitPendingRewardNoRoom" in circuit_lobby
         and "Make room, then speak to this desk again." in circuit_lobby,
         "pending Circuit rewards are not truthfully retryable from the desk",
+    )
+    require(
+        "#define FLAG_EC_CHAMPIONS_CIRCUIT_EXPLAINED                         0x4D9" in flags
+        and "FLAG_UNUSED_0x4D9" not in flags
+        and "{FLAG_EC_STARTER_ARCHIVE_BULBASAUR, FLAG_RECEIVED_GAME_CORNER_POIPOLE}" in migration
+        and circuit_lobby.index("goto_if_unset FLAG_SYS_GAME_CLEAR")
+        < circuit_lobby.index("goto_if_set FLAG_EC_CHAMPIONS_CIRCUIT_EXPLAINED")
+        < circuit_lobby.index("msgbox BattleFrontier_BattleTowerLobby_Text_CircuitWelcome")
+        < circuit_lobby.index("setflag FLAG_EC_CHAMPIONS_CIRCUIT_EXPLAINED")
+        and "BattleFrontier_BattleTowerLobby_Text_CircuitWelcomeBack" in circuit_lobby,
+        "Circuit first-talk explanation is not a persistent, postgame-only one-time presentation",
+    )
+    require(
+        "special ChampionsCircuitBegin" in circuit_lobby
+        and "warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_CORRIDOR, 8, 1" in circuit_lobby
+        and "special ChampionsCircuitGenerateOpponent" not in circuit_lobby
+        and "special BattleSetup_StartChampionsCircuitBattle" not in circuit_lobby,
+        "Circuit still starts battles at the lobby desk instead of entering the native Tower rooms",
+    )
+    corridor_branch = circuit_corridor.split(
+        "BattleFrontier_BattleTowerCorridor_EventScript_EnterCircuitCorridor::", 1
+    )[1].split("BattleFrontier_BattleTowerCorridor_EventScript_WalkToFarDoor::", 1)[0]
+    require(
+        "goto_if_eq VAR_CHAMPIONS_CIRCUIT_ACTIVE, TRUE, BattleFrontier_BattleTowerCorridor_EventScript_EnterCircuitCorridor"
+        in circuit_corridor
+        and "BattleFrontier_BattleTowerCorridor_Movement_AttendantWalkToDoor" in corridor_branch
+        and "BattleFrontier_BattleTowerCorridor_Movement_PlayerWalkToDoor" in corridor_branch
+        and "warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_BATTLE_ROOM, 5, 8" in corridor_branch
+        and "tower_" not in corridor_branch
+        and "frontier_" not in corridor_branch,
+        "Circuit corridor staging is not isolated from native Tower challenge state",
+    )
+    circuit_room_branch = circuit_room.split(
+        "BattleFrontier_BattleTowerBattleRoom_EventScript_EnterCircuitRoom::", 1
+    )[1].split("BattleFrontier_BattleTowerBattleRoom_EventScript_OpponentEnter::", 1)[0]
+    require(
+        "goto_if_eq VAR_CHAMPIONS_CIRCUIT_ACTIVE, TRUE, BattleFrontier_BattleTowerBattleRoom_EventScript_EnterCircuitRoom"
+        in circuit_room
+        and all(
+            token in circuit_room_branch
+            for token in (
+                "BattleFrontier_BattleTowerBattleRoom_Movement_PlayerEnter",
+                "BattleFrontier_BattleTowerBattleRoom_Movement_AttendantApproachPlayer",
+                "special ChampionsCircuitGenerateOpponent",
+                "special BattleSetup_StartChampionsCircuitBattle",
+                "special ChampionsCircuitHandleBattleResult",
+                "special ChampionsCircuitTryGiveReward",
+                "special ChampionsCircuitEnd",
+                "warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_LOBBY, 23, 6",
+            )
+        )
+        and circuit_room_branch.count("special ChampionsCircuitEnd") == 2
+        and circuit_room_branch.index("release\n\twarp MAP_BATTLE_FRONTIER_BATTLE_TOWER_LOBBY, 23, 6")
+        > circuit_room_branch.index("BattleFrontier_BattleTowerBattleRoom_EventScript_CircuitReturnToLobby::")
+        and "tower_" not in circuit_room_branch
+        and "frontier_" not in circuit_room_branch,
+        "Circuit battle-room staging does not preserve isolated result/reward/restoration exits",
     )
     require("CIRCUIT_MASTERY_WINS 40" in circuit, "Circuit mastery milestone drifted")
     require("Random() %" not in circuit, "Circuit still uses biased modulo sampling")

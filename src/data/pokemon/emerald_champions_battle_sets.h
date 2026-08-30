@@ -11806,224 +11806,1292 @@ const u8 *const gEmeraldChampionsDefaultBattleSetNames[NUM_SPECIES] =
 
 const struct EmeraldChampionsBattleSetRange gEmeraldChampionsBattleSetRanges[NUM_SPECIES] =
 {
-    [SPECIES_VENUSAUR] = {.offset = 0, .count = 1},
-    [SPECIES_CHARIZARD] = {.offset = 1, .count = 3},
-    [SPECIES_BLASTOISE] = {.offset = 4, .count = 2},
-    [SPECIES_BEEDRILL] = {.offset = 6, .count = 1},
-    [SPECIES_PIDGEOT] = {.offset = 7, .count = 1},
-    [SPECIES_RAICHU] = {.offset = 8, .count = 3},
-    [SPECIES_CLEFABLE] = {.offset = 11, .count = 1},
-    [SPECIES_NINETALES] = {.offset = 12, .count = 1},
-    [SPECIES_ARCANINE] = {.offset = 13, .count = 1},
-    [SPECIES_ALAKAZAM] = {.offset = 14, .count = 2},
-    [SPECIES_VICTREEBEL] = {.offset = 16, .count = 2},
-    [SPECIES_GOLEM] = {.offset = 18, .count = 1},
-    [SPECIES_SLOWBRO] = {.offset = 19, .count = 2},
-    [SPECIES_DODRIO] = {.offset = 21, .count = 1},
-    [SPECIES_GENGAR] = {.offset = 22, .count = 2},
-    [SPECIES_KANGASKHAN] = {.offset = 24, .count = 2},
-    [SPECIES_STARMIE] = {.offset = 26, .count = 2},
-    [SPECIES_PINSIR] = {.offset = 28, .count = 1},
-    [SPECIES_TAUROS] = {.offset = 29, .count = 1},
-    [SPECIES_GYARADOS] = {.offset = 30, .count = 1},
-    [SPECIES_AERODACTYL] = {.offset = 31, .count = 1},
-    [SPECIES_ZAPDOS] = {.offset = 32, .count = 1},
-    [SPECIES_MOLTRES] = {.offset = 33, .count = 1},
-    [SPECIES_DRAGONITE] = {.offset = 34, .count = 1},
-    [SPECIES_MEWTWO] = {.offset = 35, .count = 3},
-    [SPECIES_MEW] = {.offset = 38, .count = 2},
-    [SPECIES_MEGANIUM] = {.offset = 40, .count = 1},
-    [SPECIES_TYPHLOSION] = {.offset = 41, .count = 1},
-    [SPECIES_FERALIGATR] = {.offset = 42, .count = 2},
-    [SPECIES_LANTURN] = {.offset = 44, .count = 1},
-    [SPECIES_AMPHAROS] = {.offset = 45, .count = 1},
-    [SPECIES_JUMPLUFF] = {.offset = 46, .count = 1},
-    [SPECIES_SLOWKING] = {.offset = 47, .count = 1},
-    [SPECIES_STEELIX] = {.offset = 48, .count = 2},
-    [SPECIES_SCIZOR] = {.offset = 50, .count = 1},
-    [SPECIES_HERACROSS] = {.offset = 51, .count = 1},
-    [SPECIES_SKARMORY] = {.offset = 52, .count = 2},
-    [SPECIES_HOUNDOOM] = {.offset = 54, .count = 2},
-    [SPECIES_KINGDRA] = {.offset = 56, .count = 1},
-    [SPECIES_PORYGON2] = {.offset = 57, .count = 1},
-    [SPECIES_RAIKOU] = {.offset = 58, .count = 1},
-    [SPECIES_SUICUNE] = {.offset = 59, .count = 1},
-    [SPECIES_TYRANITAR] = {.offset = 60, .count = 2},
-    [SPECIES_CELEBI] = {.offset = 62, .count = 1},
-    [SPECIES_SCEPTILE] = {.offset = 63, .count = 2},
-    [SPECIES_BLAZIKEN] = {.offset = 65, .count = 2},
-    [SPECIES_SWAMPERT] = {.offset = 67, .count = 2},
-    [SPECIES_LUDICOLO] = {.offset = 69, .count = 1},
-    [SPECIES_SHIFTRY] = {.offset = 70, .count = 1},
-    [SPECIES_GARDEVOIR] = {.offset = 71, .count = 2},
-    [SPECIES_HARIYAMA] = {.offset = 73, .count = 1},
-    [SPECIES_SABLEYE] = {.offset = 74, .count = 1},
-    [SPECIES_MAWILE] = {.offset = 75, .count = 1},
-    [SPECIES_AGGRON] = {.offset = 76, .count = 2},
-    [SPECIES_MEDICHAM] = {.offset = 78, .count = 1},
-    [SPECIES_MANECTRIC] = {.offset = 79, .count = 2},
-    [SPECIES_SHARPEDO] = {.offset = 81, .count = 1},
-    [SPECIES_CAMERUPT] = {.offset = 82, .count = 1},
-    [SPECIES_FLYGON] = {.offset = 83, .count = 1},
-    [SPECIES_ALTARIA] = {.offset = 84, .count = 1},
-    [SPECIES_CRAWDAUNT] = {.offset = 85, .count = 1},
-    [SPECIES_BANETTE] = {.offset = 86, .count = 1},
-    [SPECIES_CHIMECHO] = {.offset = 87, .count = 1},
-    [SPECIES_ABSOL] = {.offset = 88, .count = 3},
-    [SPECIES_GLALIE] = {.offset = 91, .count = 2},
-    [SPECIES_SALAMENCE] = {.offset = 93, .count = 1},
-    [SPECIES_METAGROSS] = {.offset = 94, .count = 2},
-    [SPECIES_REGIROCK] = {.offset = 96, .count = 1},
-    [SPECIES_REGICE] = {.offset = 97, .count = 1},
-    [SPECIES_LATIAS] = {.offset = 98, .count = 2},
-    [SPECIES_LATIOS] = {.offset = 100, .count = 2},
-    [SPECIES_GROUDON] = {.offset = 102, .count = 1},
-    [SPECIES_RAYQUAZA] = {.offset = 103, .count = 1},
-    [SPECIES_JIRACHI] = {.offset = 104, .count = 1},
-    [SPECIES_STARAPTOR] = {.offset = 105, .count = 2},
-    [SPECIES_FLOATZEL] = {.offset = 107, .count = 1},
-    [SPECIES_GASTRODON] = {.offset = 108, .count = 1},
-    [SPECIES_LOPUNNY] = {.offset = 109, .count = 2},
-    [SPECIES_BRONZONG] = {.offset = 111, .count = 1},
-    [SPECIES_GARCHOMP] = {.offset = 112, .count = 2},
-    [SPECIES_LUCARIO] = {.offset = 114, .count = 3},
-    [SPECIES_ABOMASNOW] = {.offset = 117, .count = 2},
-    [SPECIES_ELECTIVIRE] = {.offset = 119, .count = 1},
-    [SPECIES_MAGMORTAR] = {.offset = 120, .count = 1},
-    [SPECIES_YANMEGA] = {.offset = 121, .count = 1},
-    [SPECIES_GALLADE] = {.offset = 122, .count = 1},
-    [SPECIES_PROBOPASS] = {.offset = 123, .count = 1},
-    [SPECIES_DUSKNOIR] = {.offset = 124, .count = 1},
-    [SPECIES_FROSLASS] = {.offset = 125, .count = 2},
-    [SPECIES_ROTOM] = {.offset = 127, .count = 1},
-    [SPECIES_MESPRIT] = {.offset = 128, .count = 1},
-    [SPECIES_AZELF] = {.offset = 129, .count = 1},
-    [SPECIES_PALKIA] = {.offset = 130, .count = 1},
-    [SPECIES_HEATRAN] = {.offset = 131, .count = 1},
-    [SPECIES_REGIGIGAS] = {.offset = 132, .count = 1},
-    [SPECIES_GIRATINA] = {.offset = 133, .count = 1},
-    [SPECIES_MANAPHY] = {.offset = 134, .count = 1},
-    [SPECIES_DARKRAI] = {.offset = 135, .count = 1},
-    [SPECIES_VICTINI] = {.offset = 136, .count = 1},
-    [SPECIES_EMBOAR] = {.offset = 137, .count = 1},
-    [SPECIES_ZEBSTRIKA] = {.offset = 138, .count = 1},
-    [SPECIES_EXCADRILL] = {.offset = 139, .count = 1},
-    [SPECIES_AUDINO] = {.offset = 140, .count = 1},
-    [SPECIES_LEAVANNY] = {.offset = 141, .count = 1},
-    [SPECIES_SCOLIPEDE] = {.offset = 142, .count = 2},
-    [SPECIES_BASCULIN] = {.offset = 144, .count = 1},
-    [SPECIES_SCRAFTY] = {.offset = 145, .count = 2},
-    [SPECIES_ZOROARK] = {.offset = 147, .count = 1},
-    [SPECIES_SWANNA] = {.offset = 148, .count = 1},
-    [SPECIES_AMOONGUSS] = {.offset = 149, .count = 1},
-    [SPECIES_EELEKTROSS] = {.offset = 150, .count = 2},
-    [SPECIES_CHANDELURE] = {.offset = 152, .count = 1},
-    [SPECIES_HAXORUS] = {.offset = 153, .count = 1},
-    [SPECIES_STUNFISK] = {.offset = 154, .count = 1},
-    [SPECIES_MIENSHAO] = {.offset = 155, .count = 1},
-    [SPECIES_GOLURK] = {.offset = 156, .count = 2},
-    [SPECIES_MANDIBUZZ] = {.offset = 158, .count = 1},
-    [SPECIES_COBALION] = {.offset = 159, .count = 1},
-    [SPECIES_TERRAKION] = {.offset = 160, .count = 1},
-    [SPECIES_THUNDURUS] = {.offset = 161, .count = 1},
-    [SPECIES_KYUREM] = {.offset = 162, .count = 1},
-    [SPECIES_GENESECT] = {.offset = 163, .count = 1},
-    [SPECIES_CHESNAUGHT] = {.offset = 164, .count = 2},
-    [SPECIES_DELPHOX] = {.offset = 166, .count = 2},
-    [SPECIES_GRENINJA] = {.offset = 168, .count = 1},
-    [SPECIES_PYROAR] = {.offset = 169, .count = 1},
-    [SPECIES_FLOETTE] = {.offset = 170, .count = 2},
-    [SPECIES_MALAMAR] = {.offset = 172, .count = 2},
-    [SPECIES_BARBARACLE] = {.offset = 174, .count = 1},
-    [SPECIES_DRAGALGE] = {.offset = 175, .count = 2},
-    [SPECIES_HAWLUCHA] = {.offset = 177, .count = 2},
-    [SPECIES_GOODRA] = {.offset = 179, .count = 1},
-    [SPECIES_GOURGEIST] = {.offset = 180, .count = 1},
-    [SPECIES_XERNEAS] = {.offset = 181, .count = 1},
-    [SPECIES_YVELTAL] = {.offset = 182, .count = 1},
-    [SPECIES_DIANCIE] = {.offset = 183, .count = 2},
-    [SPECIES_CRABOMINABLE] = {.offset = 185, .count = 2},
-    [SPECIES_LYCANROC] = {.offset = 187, .count = 1},
-    [SPECIES_LURANTIS] = {.offset = 188, .count = 1},
-    [SPECIES_GOLISOPOD] = {.offset = 189, .count = 1},
-    [SPECIES_SILVALLY] = {.offset = 190, .count = 1},
-    [SPECIES_BRUXISH] = {.offset = 191, .count = 1},
-    [SPECIES_DRAMPA] = {.offset = 192, .count = 1},
-    [SPECIES_SOLGALEO] = {.offset = 193, .count = 1},
-    [SPECIES_LUNALA] = {.offset = 194, .count = 2},
-    [SPECIES_PHEROMOSA] = {.offset = 196, .count = 1},
-    [SPECIES_CELESTEELA] = {.offset = 197, .count = 1},
-    [SPECIES_GUZZLORD] = {.offset = 198, .count = 1},
-    [SPECIES_NECROZMA] = {.offset = 199, .count = 2},
-    [SPECIES_MAGEARNA] = {.offset = 201, .count = 2},
-    [SPECIES_NAGANADEL] = {.offset = 203, .count = 1},
-    [SPECIES_ZERAORA] = {.offset = 204, .count = 2},
-    [SPECIES_RILLABOOM] = {.offset = 206, .count = 1},
-    [SPECIES_CINDERACE] = {.offset = 207, .count = 2},
-    [SPECIES_DREDNAW] = {.offset = 209, .count = 1},
-    [SPECIES_TOXTRICITY] = {.offset = 210, .count = 1},
-    [SPECIES_FALINKS] = {.offset = 211, .count = 2},
-    [SPECIES_STONJOURNER] = {.offset = 213, .count = 1},
-    [SPECIES_INDEEDEE] = {.offset = 214, .count = 1},
-    [SPECIES_COPPERAJAH] = {.offset = 215, .count = 1},
-    [SPECIES_DURALUDON] = {.offset = 216, .count = 1},
-    [SPECIES_ZAMAZENTA] = {.offset = 217, .count = 1},
-    [SPECIES_ETERNATUS] = {.offset = 218, .count = 2},
-    [SPECIES_MEOWSTIC_F] = {.offset = 220, .count = 1},
-    [SPECIES_ZYGARDE_50_POWER_CONSTRUCT] = {.offset = 221, .count = 1},
-    [SPECIES_MAGEARNA_ORIGINAL] = {.offset = 222, .count = 1},
-    [SPECIES_TATSUGIRI] = {.offset = 223, .count = 2},
-    [SPECIES_TATSUGIRI_DROOPY] = {.offset = 225, .count = 1},
-    [SPECIES_TATSUGIRI_STRETCHY] = {.offset = 226, .count = 1},
-    [SPECIES_FLUTTER_MANE] = {.offset = 227, .count = 1},
-    [SPECIES_IRON_BUNDLE] = {.offset = 228, .count = 1},
-    [SPECIES_IRON_HANDS] = {.offset = 229, .count = 1},
-    [SPECIES_GLIMMORA] = {.offset = 230, .count = 1},
-    [SPECIES_GIMMIGHOUL] = {.offset = 231, .count = 1},
-    [SPECIES_CHIEN_PAO] = {.offset = 232, .count = 1},
-    [SPECIES_TING_LU] = {.offset = 233, .count = 1},
-    [SPECIES_CHI_YU] = {.offset = 234, .count = 1},
-    [SPECIES_ROARING_MOON] = {.offset = 235, .count = 1},
-    [SPECIES_OGERPON] = {.offset = 236, .count = 1},
-    [SPECIES_RAGING_BOLT] = {.offset = 237, .count = 2},
-    [SPECIES_BASCULIN_WHITE_STRIPED] = {.offset = 239, .count = 1},
-    [SPECIES_CAPSAKID] = {.offset = 240, .count = 1},
-    [SPECIES_CHARCADET] = {.offset = 241, .count = 1},
-    [SPECIES_FLITTLE] = {.offset = 242, .count = 1},
-    [SPECIES_GREAVARD] = {.offset = 243, .count = 1},
-    [SPECIES_GROWLITHE_HISUI] = {.offset = 244, .count = 1},
-    [SPECIES_ORTHWORM] = {.offset = 245, .count = 1},
-    [SPECIES_POLTCHAGEIST] = {.offset = 246, .count = 1},
-    [SPECIES_QWILFISH_HISUI] = {.offset = 247, .count = 1},
-    [SPECIES_SNEASEL_HISUI] = {.offset = 248, .count = 1},
-    [SPECIES_TADBULB] = {.offset = 249, .count = 1},
-    [SPECIES_TANDEMAUS] = {.offset = 250, .count = 1},
-    [SPECIES_TAUROS_PALDEA_COMBAT] = {.offset = 251, .count = 1},
-    [SPECIES_TAUROS_PALDEA_BLAZE] = {.offset = 252, .count = 1},
-    [SPECIES_TAUROS_PALDEA_AQUA] = {.offset = 253, .count = 1},
-    [SPECIES_TINKATINK] = {.offset = 254, .count = 1},
-    [SPECIES_ZORUA_HISUI] = {.offset = 255, .count = 1},
-    [SPECIES_BASCULEGION] = {.offset = 256, .count = 1},
-    [SPECIES_OINKOLOGNE] = {.offset = 257, .count = 1},
-    [SPECIES_KILOWATTREL] = {.offset = 258, .count = 1},
-    [SPECIES_GRAFAIAI] = {.offset = 259, .count = 1},
-    [SPECIES_BRAMBLEGHAST] = {.offset = 260, .count = 1},
-    [SPECIES_SCOVILLAIN] = {.offset = 261, .count = 1},
-    [SPECIES_RABSCA] = {.offset = 262, .count = 1},
-    [SPECIES_BOMBIRDIER] = {.offset = 263, .count = 1},
-    [SPECIES_REVAVROOM] = {.offset = 264, .count = 1},
-    [SPECIES_CYCLIZAR] = {.offset = 265, .count = 1},
-    [SPECIES_DUDUNSPARCE] = {.offset = 266, .count = 1},
-    [SPECIES_BRUTE_BONNET] = {.offset = 267, .count = 1},
-    [SPECIES_IRON_MOTH] = {.offset = 268, .count = 1},
-    [SPECIES_BAXCALIBUR] = {.offset = 269, .count = 2},
-    [SPECIES_IRON_LEAVES] = {.offset = 271, .count = 2},
-    [SPECIES_IRON_BOULDER] = {.offset = 273, .count = 1},
-    [SPECIES_IRON_CROWN] = {.offset = 274, .count = 2},
+    [SPECIES_BULBASAUR] = {.offset = 0, .count = 1},
+    [SPECIES_IVYSAUR] = {.offset = 1, .count = 1},
+    [SPECIES_VENUSAUR] = {.offset = 2, .count = 2},
+    [SPECIES_CHARMANDER] = {.offset = 4, .count = 1},
+    [SPECIES_CHARMELEON] = {.offset = 5, .count = 1},
+    [SPECIES_CHARIZARD] = {.offset = 6, .count = 3},
+    [SPECIES_SQUIRTLE] = {.offset = 9, .count = 1},
+    [SPECIES_WARTORTLE] = {.offset = 10, .count = 1},
+    [SPECIES_BLASTOISE] = {.offset = 11, .count = 2},
+    [SPECIES_CATERPIE] = {.offset = 13, .count = 1},
+    [SPECIES_METAPOD] = {.offset = 14, .count = 1},
+    [SPECIES_BUTTERFREE] = {.offset = 15, .count = 1},
+    [SPECIES_WEEDLE] = {.offset = 16, .count = 1},
+    [SPECIES_KAKUNA] = {.offset = 17, .count = 1},
+    [SPECIES_BEEDRILL] = {.offset = 18, .count = 2},
+    [SPECIES_PIDGEY] = {.offset = 20, .count = 1},
+    [SPECIES_PIDGEOTTO] = {.offset = 21, .count = 1},
+    [SPECIES_PIDGEOT] = {.offset = 22, .count = 2},
+    [SPECIES_RATTATA] = {.offset = 24, .count = 1},
+    [SPECIES_RATICATE] = {.offset = 25, .count = 1},
+    [SPECIES_SPEAROW] = {.offset = 26, .count = 1},
+    [SPECIES_FEAROW] = {.offset = 27, .count = 1},
+    [SPECIES_EKANS] = {.offset = 28, .count = 1},
+    [SPECIES_ARBOK] = {.offset = 29, .count = 1},
+    [SPECIES_PIKACHU] = {.offset = 30, .count = 1},
+    [SPECIES_RAICHU] = {.offset = 31, .count = 3},
+    [SPECIES_SANDSHREW] = {.offset = 34, .count = 1},
+    [SPECIES_SANDSLASH] = {.offset = 35, .count = 1},
+    [SPECIES_NIDORAN_F] = {.offset = 36, .count = 1},
+    [SPECIES_NIDORINA] = {.offset = 37, .count = 1},
+    [SPECIES_NIDOQUEEN] = {.offset = 38, .count = 1},
+    [SPECIES_NIDORAN_M] = {.offset = 39, .count = 1},
+    [SPECIES_NIDORINO] = {.offset = 40, .count = 1},
+    [SPECIES_NIDOKING] = {.offset = 41, .count = 1},
+    [SPECIES_CLEFAIRY] = {.offset = 42, .count = 1},
+    [SPECIES_CLEFABLE] = {.offset = 43, .count = 2},
+    [SPECIES_VULPIX] = {.offset = 45, .count = 1},
+    [SPECIES_NINETALES] = {.offset = 46, .count = 1},
+    [SPECIES_JIGGLYPUFF] = {.offset = 47, .count = 1},
+    [SPECIES_WIGGLYTUFF] = {.offset = 48, .count = 1},
+    [SPECIES_ZUBAT] = {.offset = 49, .count = 1},
+    [SPECIES_GOLBAT] = {.offset = 50, .count = 1},
+    [SPECIES_ODDISH] = {.offset = 51, .count = 1},
+    [SPECIES_GLOOM] = {.offset = 52, .count = 1},
+    [SPECIES_VILEPLUME] = {.offset = 53, .count = 1},
+    [SPECIES_PARAS] = {.offset = 54, .count = 1},
+    [SPECIES_PARASECT] = {.offset = 55, .count = 1},
+    [SPECIES_VENONAT] = {.offset = 56, .count = 1},
+    [SPECIES_VENOMOTH] = {.offset = 57, .count = 1},
+    [SPECIES_DIGLETT] = {.offset = 58, .count = 1},
+    [SPECIES_DUGTRIO] = {.offset = 59, .count = 1},
+    [SPECIES_MEOWTH] = {.offset = 60, .count = 1},
+    [SPECIES_PERSIAN] = {.offset = 61, .count = 1},
+    [SPECIES_PSYDUCK] = {.offset = 62, .count = 1},
+    [SPECIES_GOLDUCK] = {.offset = 63, .count = 1},
+    [SPECIES_MANKEY] = {.offset = 64, .count = 1},
+    [SPECIES_PRIMEAPE] = {.offset = 65, .count = 1},
+    [SPECIES_GROWLITHE] = {.offset = 66, .count = 1},
+    [SPECIES_ARCANINE] = {.offset = 67, .count = 1},
+    [SPECIES_POLIWAG] = {.offset = 68, .count = 1},
+    [SPECIES_POLIWHIRL] = {.offset = 69, .count = 1},
+    [SPECIES_POLIWRATH] = {.offset = 70, .count = 1},
+    [SPECIES_ABRA] = {.offset = 71, .count = 1},
+    [SPECIES_KADABRA] = {.offset = 72, .count = 1},
+    [SPECIES_ALAKAZAM] = {.offset = 73, .count = 2},
+    [SPECIES_MACHOP] = {.offset = 75, .count = 1},
+    [SPECIES_MACHOKE] = {.offset = 76, .count = 1},
+    [SPECIES_MACHAMP] = {.offset = 77, .count = 1},
+    [SPECIES_BELLSPROUT] = {.offset = 78, .count = 1},
+    [SPECIES_WEEPINBELL] = {.offset = 79, .count = 1},
+    [SPECIES_VICTREEBEL] = {.offset = 80, .count = 2},
+    [SPECIES_TENTACOOL] = {.offset = 82, .count = 1},
+    [SPECIES_TENTACRUEL] = {.offset = 83, .count = 1},
+    [SPECIES_GEODUDE] = {.offset = 84, .count = 1},
+    [SPECIES_GRAVELER] = {.offset = 85, .count = 1},
+    [SPECIES_GOLEM] = {.offset = 86, .count = 1},
+    [SPECIES_PONYTA] = {.offset = 87, .count = 1},
+    [SPECIES_RAPIDASH] = {.offset = 88, .count = 1},
+    [SPECIES_SLOWPOKE] = {.offset = 89, .count = 1},
+    [SPECIES_SLOWBRO] = {.offset = 90, .count = 2},
+    [SPECIES_MAGNEMITE] = {.offset = 92, .count = 1},
+    [SPECIES_MAGNETON] = {.offset = 93, .count = 1},
+    [SPECIES_FARFETCHD] = {.offset = 94, .count = 1},
+    [SPECIES_DODUO] = {.offset = 95, .count = 1},
+    [SPECIES_DODRIO] = {.offset = 96, .count = 1},
+    [SPECIES_SEEL] = {.offset = 97, .count = 1},
+    [SPECIES_DEWGONG] = {.offset = 98, .count = 1},
+    [SPECIES_GRIMER] = {.offset = 99, .count = 1},
+    [SPECIES_MUK] = {.offset = 100, .count = 1},
+    [SPECIES_SHELLDER] = {.offset = 101, .count = 1},
+    [SPECIES_CLOYSTER] = {.offset = 102, .count = 1},
+    [SPECIES_GASTLY] = {.offset = 103, .count = 1},
+    [SPECIES_HAUNTER] = {.offset = 104, .count = 1},
+    [SPECIES_GENGAR] = {.offset = 105, .count = 2},
+    [SPECIES_ONIX] = {.offset = 107, .count = 1},
+    [SPECIES_DROWZEE] = {.offset = 108, .count = 1},
+    [SPECIES_HYPNO] = {.offset = 109, .count = 1},
+    [SPECIES_KRABBY] = {.offset = 110, .count = 1},
+    [SPECIES_KINGLER] = {.offset = 111, .count = 1},
+    [SPECIES_VOLTORB] = {.offset = 112, .count = 1},
+    [SPECIES_ELECTRODE] = {.offset = 113, .count = 1},
+    [SPECIES_EXEGGCUTE] = {.offset = 114, .count = 1},
+    [SPECIES_EXEGGUTOR] = {.offset = 115, .count = 1},
+    [SPECIES_CUBONE] = {.offset = 116, .count = 1},
+    [SPECIES_MAROWAK] = {.offset = 117, .count = 1},
+    [SPECIES_HITMONLEE] = {.offset = 118, .count = 1},
+    [SPECIES_HITMONCHAN] = {.offset = 119, .count = 1},
+    [SPECIES_LICKITUNG] = {.offset = 120, .count = 1},
+    [SPECIES_KOFFING] = {.offset = 121, .count = 1},
+    [SPECIES_WEEZING] = {.offset = 122, .count = 1},
+    [SPECIES_RHYHORN] = {.offset = 123, .count = 1},
+    [SPECIES_RHYDON] = {.offset = 124, .count = 1},
+    [SPECIES_CHANSEY] = {.offset = 125, .count = 1},
+    [SPECIES_TANGELA] = {.offset = 126, .count = 1},
+    [SPECIES_KANGASKHAN] = {.offset = 127, .count = 2},
+    [SPECIES_HORSEA] = {.offset = 129, .count = 1},
+    [SPECIES_SEADRA] = {.offset = 130, .count = 1},
+    [SPECIES_GOLDEEN] = {.offset = 131, .count = 1},
+    [SPECIES_SEAKING] = {.offset = 132, .count = 1},
+    [SPECIES_STARYU] = {.offset = 133, .count = 1},
+    [SPECIES_STARMIE] = {.offset = 134, .count = 2},
+    [SPECIES_MR_MIME] = {.offset = 136, .count = 1},
+    [SPECIES_SCYTHER] = {.offset = 137, .count = 1},
+    [SPECIES_JYNX] = {.offset = 138, .count = 1},
+    [SPECIES_ELECTABUZZ] = {.offset = 139, .count = 1},
+    [SPECIES_MAGMAR] = {.offset = 140, .count = 1},
+    [SPECIES_PINSIR] = {.offset = 141, .count = 2},
+    [SPECIES_TAUROS] = {.offset = 143, .count = 1},
+    [SPECIES_MAGIKARP] = {.offset = 144, .count = 1},
+    [SPECIES_GYARADOS] = {.offset = 145, .count = 2},
+    [SPECIES_LAPRAS] = {.offset = 147, .count = 1},
+    [SPECIES_DITTO] = {.offset = 148, .count = 1},
+    [SPECIES_EEVEE] = {.offset = 149, .count = 1},
+    [SPECIES_VAPOREON] = {.offset = 150, .count = 1},
+    [SPECIES_JOLTEON] = {.offset = 151, .count = 1},
+    [SPECIES_FLAREON] = {.offset = 152, .count = 1},
+    [SPECIES_PORYGON] = {.offset = 153, .count = 1},
+    [SPECIES_OMANYTE] = {.offset = 154, .count = 1},
+    [SPECIES_OMASTAR] = {.offset = 155, .count = 1},
+    [SPECIES_KABUTO] = {.offset = 156, .count = 1},
+    [SPECIES_KABUTOPS] = {.offset = 157, .count = 1},
+    [SPECIES_AERODACTYL] = {.offset = 158, .count = 2},
+    [SPECIES_SNORLAX] = {.offset = 160, .count = 1},
+    [SPECIES_ARTICUNO] = {.offset = 161, .count = 1},
+    [SPECIES_ZAPDOS] = {.offset = 162, .count = 1},
+    [SPECIES_MOLTRES] = {.offset = 163, .count = 1},
+    [SPECIES_DRATINI] = {.offset = 164, .count = 1},
+    [SPECIES_DRAGONAIR] = {.offset = 165, .count = 1},
+    [SPECIES_DRAGONITE] = {.offset = 166, .count = 2},
+    [SPECIES_MEWTWO] = {.offset = 168, .count = 3},
+    [SPECIES_MEW] = {.offset = 171, .count = 2},
+    [SPECIES_CHIKORITA] = {.offset = 173, .count = 1},
+    [SPECIES_BAYLEEF] = {.offset = 174, .count = 1},
+    [SPECIES_MEGANIUM] = {.offset = 175, .count = 2},
+    [SPECIES_CYNDAQUIL] = {.offset = 177, .count = 1},
+    [SPECIES_QUILAVA] = {.offset = 178, .count = 1},
+    [SPECIES_TYPHLOSION] = {.offset = 179, .count = 1},
+    [SPECIES_TOTODILE] = {.offset = 180, .count = 1},
+    [SPECIES_CROCONAW] = {.offset = 181, .count = 1},
+    [SPECIES_FERALIGATR] = {.offset = 182, .count = 2},
+    [SPECIES_SENTRET] = {.offset = 184, .count = 1},
+    [SPECIES_FURRET] = {.offset = 185, .count = 1},
+    [SPECIES_HOOTHOOT] = {.offset = 186, .count = 1},
+    [SPECIES_NOCTOWL] = {.offset = 187, .count = 1},
+    [SPECIES_LEDYBA] = {.offset = 188, .count = 1},
+    [SPECIES_LEDIAN] = {.offset = 189, .count = 1},
+    [SPECIES_SPINARAK] = {.offset = 190, .count = 1},
+    [SPECIES_ARIADOS] = {.offset = 191, .count = 1},
+    [SPECIES_CROBAT] = {.offset = 192, .count = 1},
+    [SPECIES_CHINCHOU] = {.offset = 193, .count = 1},
+    [SPECIES_LANTURN] = {.offset = 194, .count = 1},
+    [SPECIES_PICHU] = {.offset = 195, .count = 1},
+    [SPECIES_CLEFFA] = {.offset = 196, .count = 1},
+    [SPECIES_IGGLYBUFF] = {.offset = 197, .count = 1},
+    [SPECIES_TOGEPI] = {.offset = 198, .count = 1},
+    [SPECIES_TOGETIC] = {.offset = 199, .count = 1},
+    [SPECIES_NATU] = {.offset = 200, .count = 1},
+    [SPECIES_XATU] = {.offset = 201, .count = 1},
+    [SPECIES_MAREEP] = {.offset = 202, .count = 1},
+    [SPECIES_FLAAFFY] = {.offset = 203, .count = 1},
+    [SPECIES_AMPHAROS] = {.offset = 204, .count = 2},
+    [SPECIES_BELLOSSOM] = {.offset = 206, .count = 1},
+    [SPECIES_MARILL] = {.offset = 207, .count = 1},
+    [SPECIES_AZUMARILL] = {.offset = 208, .count = 1},
+    [SPECIES_SUDOWOODO] = {.offset = 209, .count = 1},
+    [SPECIES_POLITOED] = {.offset = 210, .count = 1},
+    [SPECIES_HOPPIP] = {.offset = 211, .count = 1},
+    [SPECIES_SKIPLOOM] = {.offset = 212, .count = 1},
+    [SPECIES_JUMPLUFF] = {.offset = 213, .count = 1},
+    [SPECIES_AIPOM] = {.offset = 214, .count = 1},
+    [SPECIES_SUNKERN] = {.offset = 215, .count = 1},
+    [SPECIES_SUNFLORA] = {.offset = 216, .count = 1},
+    [SPECIES_YANMA] = {.offset = 217, .count = 1},
+    [SPECIES_WOOPER] = {.offset = 218, .count = 1},
+    [SPECIES_QUAGSIRE] = {.offset = 219, .count = 1},
+    [SPECIES_ESPEON] = {.offset = 220, .count = 1},
+    [SPECIES_UMBREON] = {.offset = 221, .count = 1},
+    [SPECIES_MURKROW] = {.offset = 222, .count = 1},
+    [SPECIES_SLOWKING] = {.offset = 223, .count = 1},
+    [SPECIES_MISDREAVUS] = {.offset = 224, .count = 1},
+    [SPECIES_UNOWN] = {.offset = 225, .count = 1},
+    [SPECIES_WOBBUFFET] = {.offset = 226, .count = 1},
+    [SPECIES_GIRAFARIG] = {.offset = 227, .count = 1},
+    [SPECIES_PINECO] = {.offset = 228, .count = 1},
+    [SPECIES_FORRETRESS] = {.offset = 229, .count = 1},
+    [SPECIES_DUNSPARCE] = {.offset = 230, .count = 1},
+    [SPECIES_GLIGAR] = {.offset = 231, .count = 1},
+    [SPECIES_STEELIX] = {.offset = 232, .count = 2},
+    [SPECIES_SNUBBULL] = {.offset = 234, .count = 1},
+    [SPECIES_GRANBULL] = {.offset = 235, .count = 1},
+    [SPECIES_QWILFISH] = {.offset = 236, .count = 1},
+    [SPECIES_SCIZOR] = {.offset = 237, .count = 2},
+    [SPECIES_SHUCKLE] = {.offset = 239, .count = 1},
+    [SPECIES_HERACROSS] = {.offset = 240, .count = 2},
+    [SPECIES_SNEASEL] = {.offset = 242, .count = 1},
+    [SPECIES_TEDDIURSA] = {.offset = 243, .count = 1},
+    [SPECIES_URSARING] = {.offset = 244, .count = 1},
+    [SPECIES_SLUGMA] = {.offset = 245, .count = 1},
+    [SPECIES_MAGCARGO] = {.offset = 246, .count = 1},
+    [SPECIES_SWINUB] = {.offset = 247, .count = 1},
+    [SPECIES_PILOSWINE] = {.offset = 248, .count = 1},
+    [SPECIES_CORSOLA] = {.offset = 249, .count = 1},
+    [SPECIES_REMORAID] = {.offset = 250, .count = 1},
+    [SPECIES_OCTILLERY] = {.offset = 251, .count = 1},
+    [SPECIES_DELIBIRD] = {.offset = 252, .count = 1},
+    [SPECIES_MANTINE] = {.offset = 253, .count = 1},
+    [SPECIES_SKARMORY] = {.offset = 254, .count = 2},
+    [SPECIES_HOUNDOUR] = {.offset = 256, .count = 1},
+    [SPECIES_HOUNDOOM] = {.offset = 257, .count = 2},
+    [SPECIES_KINGDRA] = {.offset = 259, .count = 1},
+    [SPECIES_PHANPY] = {.offset = 260, .count = 1},
+    [SPECIES_DONPHAN] = {.offset = 261, .count = 1},
+    [SPECIES_PORYGON2] = {.offset = 262, .count = 1},
+    [SPECIES_STANTLER] = {.offset = 263, .count = 1},
+    [SPECIES_SMEARGLE] = {.offset = 264, .count = 1},
+    [SPECIES_TYROGUE] = {.offset = 265, .count = 1},
+    [SPECIES_HITMONTOP] = {.offset = 266, .count = 1},
+    [SPECIES_SMOOCHUM] = {.offset = 267, .count = 1},
+    [SPECIES_ELEKID] = {.offset = 268, .count = 1},
+    [SPECIES_MAGBY] = {.offset = 269, .count = 1},
+    [SPECIES_MILTANK] = {.offset = 270, .count = 1},
+    [SPECIES_BLISSEY] = {.offset = 271, .count = 1},
+    [SPECIES_RAIKOU] = {.offset = 272, .count = 1},
+    [SPECIES_ENTEI] = {.offset = 273, .count = 1},
+    [SPECIES_SUICUNE] = {.offset = 274, .count = 1},
+    [SPECIES_LARVITAR] = {.offset = 275, .count = 1},
+    [SPECIES_PUPITAR] = {.offset = 276, .count = 1},
+    [SPECIES_TYRANITAR] = {.offset = 277, .count = 2},
+    [SPECIES_LUGIA] = {.offset = 279, .count = 1},
+    [SPECIES_HO_OH] = {.offset = 280, .count = 1},
+    [SPECIES_CELEBI] = {.offset = 281, .count = 1},
+    [SPECIES_TREECKO] = {.offset = 282, .count = 1},
+    [SPECIES_GROVYLE] = {.offset = 283, .count = 1},
+    [SPECIES_SCEPTILE] = {.offset = 284, .count = 2},
+    [SPECIES_TORCHIC] = {.offset = 286, .count = 1},
+    [SPECIES_COMBUSKEN] = {.offset = 287, .count = 1},
+    [SPECIES_BLAZIKEN] = {.offset = 288, .count = 2},
+    [SPECIES_MUDKIP] = {.offset = 290, .count = 1},
+    [SPECIES_MARSHTOMP] = {.offset = 291, .count = 1},
+    [SPECIES_SWAMPERT] = {.offset = 292, .count = 2},
+    [SPECIES_POOCHYENA] = {.offset = 294, .count = 1},
+    [SPECIES_MIGHTYENA] = {.offset = 295, .count = 1},
+    [SPECIES_ZIGZAGOON] = {.offset = 296, .count = 1},
+    [SPECIES_LINOONE] = {.offset = 297, .count = 1},
+    [SPECIES_WURMPLE] = {.offset = 298, .count = 1},
+    [SPECIES_SILCOON] = {.offset = 299, .count = 1},
+    [SPECIES_BEAUTIFLY] = {.offset = 300, .count = 1},
+    [SPECIES_CASCOON] = {.offset = 301, .count = 1},
+    [SPECIES_DUSTOX] = {.offset = 302, .count = 1},
+    [SPECIES_LOTAD] = {.offset = 303, .count = 1},
+    [SPECIES_LOMBRE] = {.offset = 304, .count = 1},
+    [SPECIES_LUDICOLO] = {.offset = 305, .count = 1},
+    [SPECIES_SEEDOT] = {.offset = 306, .count = 1},
+    [SPECIES_NUZLEAF] = {.offset = 307, .count = 1},
+    [SPECIES_SHIFTRY] = {.offset = 308, .count = 1},
+    [SPECIES_TAILLOW] = {.offset = 309, .count = 1},
+    [SPECIES_SWELLOW] = {.offset = 310, .count = 1},
+    [SPECIES_WINGULL] = {.offset = 311, .count = 1},
+    [SPECIES_PELIPPER] = {.offset = 312, .count = 1},
+    [SPECIES_RALTS] = {.offset = 313, .count = 1},
+    [SPECIES_KIRLIA] = {.offset = 314, .count = 1},
+    [SPECIES_GARDEVOIR] = {.offset = 315, .count = 2},
+    [SPECIES_SURSKIT] = {.offset = 317, .count = 1},
+    [SPECIES_MASQUERAIN] = {.offset = 318, .count = 1},
+    [SPECIES_SHROOMISH] = {.offset = 319, .count = 1},
+    [SPECIES_BRELOOM] = {.offset = 320, .count = 1},
+    [SPECIES_SLAKOTH] = {.offset = 321, .count = 1},
+    [SPECIES_VIGOROTH] = {.offset = 322, .count = 1},
+    [SPECIES_SLAKING] = {.offset = 323, .count = 1},
+    [SPECIES_NINCADA] = {.offset = 324, .count = 1},
+    [SPECIES_NINJASK] = {.offset = 325, .count = 1},
+    [SPECIES_SHEDINJA] = {.offset = 326, .count = 1},
+    [SPECIES_WHISMUR] = {.offset = 327, .count = 1},
+    [SPECIES_LOUDRED] = {.offset = 328, .count = 1},
+    [SPECIES_EXPLOUD] = {.offset = 329, .count = 1},
+    [SPECIES_MAKUHITA] = {.offset = 330, .count = 1},
+    [SPECIES_HARIYAMA] = {.offset = 331, .count = 1},
+    [SPECIES_AZURILL] = {.offset = 332, .count = 1},
+    [SPECIES_NOSEPASS] = {.offset = 333, .count = 1},
+    [SPECIES_SKITTY] = {.offset = 334, .count = 1},
+    [SPECIES_DELCATTY] = {.offset = 335, .count = 1},
+    [SPECIES_SABLEYE] = {.offset = 336, .count = 2},
+    [SPECIES_MAWILE] = {.offset = 338, .count = 2},
+    [SPECIES_ARON] = {.offset = 340, .count = 1},
+    [SPECIES_LAIRON] = {.offset = 341, .count = 1},
+    [SPECIES_AGGRON] = {.offset = 342, .count = 2},
+    [SPECIES_MEDITITE] = {.offset = 344, .count = 1},
+    [SPECIES_MEDICHAM] = {.offset = 345, .count = 2},
+    [SPECIES_ELECTRIKE] = {.offset = 347, .count = 1},
+    [SPECIES_MANECTRIC] = {.offset = 348, .count = 2},
+    [SPECIES_PLUSLE] = {.offset = 350, .count = 1},
+    [SPECIES_MINUN] = {.offset = 351, .count = 1},
+    [SPECIES_VOLBEAT] = {.offset = 352, .count = 1},
+    [SPECIES_ILLUMISE] = {.offset = 353, .count = 1},
+    [SPECIES_ROSELIA] = {.offset = 354, .count = 1},
+    [SPECIES_GULPIN] = {.offset = 355, .count = 1},
+    [SPECIES_SWALOT] = {.offset = 356, .count = 1},
+    [SPECIES_CARVANHA] = {.offset = 357, .count = 1},
+    [SPECIES_SHARPEDO] = {.offset = 358, .count = 2},
+    [SPECIES_WAILMER] = {.offset = 360, .count = 1},
+    [SPECIES_WAILORD] = {.offset = 361, .count = 1},
+    [SPECIES_NUMEL] = {.offset = 362, .count = 1},
+    [SPECIES_CAMERUPT] = {.offset = 363, .count = 2},
+    [SPECIES_TORKOAL] = {.offset = 365, .count = 1},
+    [SPECIES_SPOINK] = {.offset = 366, .count = 1},
+    [SPECIES_GRUMPIG] = {.offset = 367, .count = 1},
+    [SPECIES_SPINDA] = {.offset = 368, .count = 1},
+    [SPECIES_TRAPINCH] = {.offset = 369, .count = 1},
+    [SPECIES_VIBRAVA] = {.offset = 370, .count = 1},
+    [SPECIES_FLYGON] = {.offset = 371, .count = 1},
+    [SPECIES_CACNEA] = {.offset = 372, .count = 1},
+    [SPECIES_CACTURNE] = {.offset = 373, .count = 1},
+    [SPECIES_SWABLU] = {.offset = 374, .count = 1},
+    [SPECIES_ALTARIA] = {.offset = 375, .count = 2},
+    [SPECIES_ZANGOOSE] = {.offset = 377, .count = 1},
+    [SPECIES_SEVIPER] = {.offset = 378, .count = 1},
+    [SPECIES_LUNATONE] = {.offset = 379, .count = 1},
+    [SPECIES_SOLROCK] = {.offset = 380, .count = 1},
+    [SPECIES_BARBOACH] = {.offset = 381, .count = 1},
+    [SPECIES_WHISCASH] = {.offset = 382, .count = 1},
+    [SPECIES_CORPHISH] = {.offset = 383, .count = 1},
+    [SPECIES_CRAWDAUNT] = {.offset = 384, .count = 1},
+    [SPECIES_BALTOY] = {.offset = 385, .count = 1},
+    [SPECIES_CLAYDOL] = {.offset = 386, .count = 1},
+    [SPECIES_LILEEP] = {.offset = 387, .count = 1},
+    [SPECIES_CRADILY] = {.offset = 388, .count = 1},
+    [SPECIES_ANORITH] = {.offset = 389, .count = 1},
+    [SPECIES_ARMALDO] = {.offset = 390, .count = 1},
+    [SPECIES_FEEBAS] = {.offset = 391, .count = 1},
+    [SPECIES_MILOTIC] = {.offset = 392, .count = 1},
+    [SPECIES_CASTFORM] = {.offset = 393, .count = 1},
+    [SPECIES_KECLEON] = {.offset = 394, .count = 1},
+    [SPECIES_SHUPPET] = {.offset = 395, .count = 1},
+    [SPECIES_BANETTE] = {.offset = 396, .count = 2},
+    [SPECIES_DUSKULL] = {.offset = 398, .count = 1},
+    [SPECIES_DUSCLOPS] = {.offset = 399, .count = 1},
+    [SPECIES_TROPIUS] = {.offset = 400, .count = 1},
+    [SPECIES_CHIMECHO] = {.offset = 401, .count = 2},
+    [SPECIES_ABSOL] = {.offset = 403, .count = 3},
+    [SPECIES_WYNAUT] = {.offset = 406, .count = 1},
+    [SPECIES_SNORUNT] = {.offset = 407, .count = 1},
+    [SPECIES_GLALIE] = {.offset = 408, .count = 2},
+    [SPECIES_SPHEAL] = {.offset = 410, .count = 1},
+    [SPECIES_SEALEO] = {.offset = 411, .count = 1},
+    [SPECIES_WALREIN] = {.offset = 412, .count = 1},
+    [SPECIES_CLAMPERL] = {.offset = 413, .count = 1},
+    [SPECIES_HUNTAIL] = {.offset = 414, .count = 1},
+    [SPECIES_GOREBYSS] = {.offset = 415, .count = 1},
+    [SPECIES_RELICANTH] = {.offset = 416, .count = 1},
+    [SPECIES_LUVDISC] = {.offset = 417, .count = 1},
+    [SPECIES_BAGON] = {.offset = 418, .count = 1},
+    [SPECIES_SHELGON] = {.offset = 419, .count = 1},
+    [SPECIES_SALAMENCE] = {.offset = 420, .count = 2},
+    [SPECIES_BELDUM] = {.offset = 422, .count = 1},
+    [SPECIES_METANG] = {.offset = 423, .count = 1},
+    [SPECIES_METAGROSS] = {.offset = 424, .count = 2},
+    [SPECIES_REGIROCK] = {.offset = 426, .count = 1},
+    [SPECIES_REGICE] = {.offset = 427, .count = 1},
+    [SPECIES_REGISTEEL] = {.offset = 428, .count = 1},
+    [SPECIES_LATIAS] = {.offset = 429, .count = 2},
+    [SPECIES_LATIOS] = {.offset = 431, .count = 2},
+    [SPECIES_KYOGRE] = {.offset = 433, .count = 1},
+    [SPECIES_GROUDON] = {.offset = 434, .count = 1},
+    [SPECIES_RAYQUAZA] = {.offset = 435, .count = 1},
+    [SPECIES_JIRACHI] = {.offset = 436, .count = 1},
+    [SPECIES_DEOXYS] = {.offset = 437, .count = 1},
+    [SPECIES_TURTWIG] = {.offset = 438, .count = 1},
+    [SPECIES_GROTLE] = {.offset = 439, .count = 1},
+    [SPECIES_TORTERRA] = {.offset = 440, .count = 1},
+    [SPECIES_CHIMCHAR] = {.offset = 441, .count = 1},
+    [SPECIES_MONFERNO] = {.offset = 442, .count = 1},
+    [SPECIES_INFERNAPE] = {.offset = 443, .count = 1},
+    [SPECIES_PIPLUP] = {.offset = 444, .count = 1},
+    [SPECIES_PRINPLUP] = {.offset = 445, .count = 1},
+    [SPECIES_EMPOLEON] = {.offset = 446, .count = 1},
+    [SPECIES_STARLY] = {.offset = 447, .count = 1},
+    [SPECIES_STARAVIA] = {.offset = 448, .count = 1},
+    [SPECIES_STARAPTOR] = {.offset = 449, .count = 2},
+    [SPECIES_BIDOOF] = {.offset = 451, .count = 1},
+    [SPECIES_BIBAREL] = {.offset = 452, .count = 1},
+    [SPECIES_KRICKETOT] = {.offset = 453, .count = 1},
+    [SPECIES_KRICKETUNE] = {.offset = 454, .count = 1},
+    [SPECIES_SHINX] = {.offset = 455, .count = 1},
+    [SPECIES_LUXIO] = {.offset = 456, .count = 1},
+    [SPECIES_LUXRAY] = {.offset = 457, .count = 1},
+    [SPECIES_BUDEW] = {.offset = 458, .count = 1},
+    [SPECIES_ROSERADE] = {.offset = 459, .count = 1},
+    [SPECIES_CRANIDOS] = {.offset = 460, .count = 1},
+    [SPECIES_RAMPARDOS] = {.offset = 461, .count = 1},
+    [SPECIES_SHIELDON] = {.offset = 462, .count = 1},
+    [SPECIES_BASTIODON] = {.offset = 463, .count = 1},
+    [SPECIES_BURMY] = {.offset = 464, .count = 1},
+    [SPECIES_WORMADAM] = {.offset = 465, .count = 1},
+    [SPECIES_MOTHIM] = {.offset = 466, .count = 1},
+    [SPECIES_COMBEE] = {.offset = 467, .count = 1},
+    [SPECIES_VESPIQUEN] = {.offset = 468, .count = 1},
+    [SPECIES_PACHIRISU] = {.offset = 469, .count = 1},
+    [SPECIES_BUIZEL] = {.offset = 470, .count = 1},
+    [SPECIES_FLOATZEL] = {.offset = 471, .count = 1},
+    [SPECIES_CHERUBI] = {.offset = 472, .count = 1},
+    [SPECIES_CHERRIM] = {.offset = 473, .count = 1},
+    [SPECIES_SHELLOS] = {.offset = 474, .count = 1},
+    [SPECIES_GASTRODON] = {.offset = 475, .count = 1},
+    [SPECIES_AMBIPOM] = {.offset = 476, .count = 1},
+    [SPECIES_DRIFLOON] = {.offset = 477, .count = 1},
+    [SPECIES_DRIFBLIM] = {.offset = 478, .count = 1},
+    [SPECIES_BUNEARY] = {.offset = 479, .count = 1},
+    [SPECIES_LOPUNNY] = {.offset = 480, .count = 2},
+    [SPECIES_MISMAGIUS] = {.offset = 482, .count = 1},
+    [SPECIES_HONCHKROW] = {.offset = 483, .count = 1},
+    [SPECIES_GLAMEOW] = {.offset = 484, .count = 1},
+    [SPECIES_PURUGLY] = {.offset = 485, .count = 1},
+    [SPECIES_CHINGLING] = {.offset = 486, .count = 1},
+    [SPECIES_STUNKY] = {.offset = 487, .count = 1},
+    [SPECIES_SKUNTANK] = {.offset = 488, .count = 1},
+    [SPECIES_BRONZOR] = {.offset = 489, .count = 1},
+    [SPECIES_BRONZONG] = {.offset = 490, .count = 1},
+    [SPECIES_BONSLY] = {.offset = 491, .count = 1},
+    [SPECIES_MIME_JR] = {.offset = 492, .count = 1},
+    [SPECIES_HAPPINY] = {.offset = 493, .count = 1},
+    [SPECIES_CHATOT] = {.offset = 494, .count = 1},
+    [SPECIES_SPIRITOMB] = {.offset = 495, .count = 1},
+    [SPECIES_GIBLE] = {.offset = 496, .count = 1},
+    [SPECIES_GABITE] = {.offset = 497, .count = 1},
+    [SPECIES_GARCHOMP] = {.offset = 498, .count = 3},
+    [SPECIES_MUNCHLAX] = {.offset = 501, .count = 1},
+    [SPECIES_RIOLU] = {.offset = 502, .count = 1},
+    [SPECIES_LUCARIO] = {.offset = 503, .count = 3},
+    [SPECIES_HIPPOPOTAS] = {.offset = 506, .count = 1},
+    [SPECIES_HIPPOWDON] = {.offset = 507, .count = 1},
+    [SPECIES_SKORUPI] = {.offset = 508, .count = 1},
+    [SPECIES_DRAPION] = {.offset = 509, .count = 1},
+    [SPECIES_CROAGUNK] = {.offset = 510, .count = 1},
+    [SPECIES_TOXICROAK] = {.offset = 511, .count = 1},
+    [SPECIES_CARNIVINE] = {.offset = 512, .count = 1},
+    [SPECIES_FINNEON] = {.offset = 513, .count = 1},
+    [SPECIES_LUMINEON] = {.offset = 514, .count = 1},
+    [SPECIES_MANTYKE] = {.offset = 515, .count = 1},
+    [SPECIES_SNOVER] = {.offset = 516, .count = 1},
+    [SPECIES_ABOMASNOW] = {.offset = 517, .count = 2},
+    [SPECIES_WEAVILE] = {.offset = 519, .count = 1},
+    [SPECIES_MAGNEZONE] = {.offset = 520, .count = 1},
+    [SPECIES_LICKILICKY] = {.offset = 521, .count = 1},
+    [SPECIES_RHYPERIOR] = {.offset = 522, .count = 1},
+    [SPECIES_TANGROWTH] = {.offset = 523, .count = 1},
+    [SPECIES_ELECTIVIRE] = {.offset = 524, .count = 1},
+    [SPECIES_MAGMORTAR] = {.offset = 525, .count = 1},
+    [SPECIES_TOGEKISS] = {.offset = 526, .count = 1},
+    [SPECIES_YANMEGA] = {.offset = 527, .count = 1},
+    [SPECIES_LEAFEON] = {.offset = 528, .count = 1},
+    [SPECIES_GLACEON] = {.offset = 529, .count = 1},
+    [SPECIES_GLISCOR] = {.offset = 530, .count = 1},
+    [SPECIES_MAMOSWINE] = {.offset = 531, .count = 1},
+    [SPECIES_PORYGON_Z] = {.offset = 532, .count = 1},
+    [SPECIES_GALLADE] = {.offset = 533, .count = 2},
+    [SPECIES_PROBOPASS] = {.offset = 535, .count = 1},
+    [SPECIES_DUSKNOIR] = {.offset = 536, .count = 1},
+    [SPECIES_FROSLASS] = {.offset = 537, .count = 2},
+    [SPECIES_ROTOM] = {.offset = 539, .count = 1},
+    [SPECIES_UXIE] = {.offset = 540, .count = 1},
+    [SPECIES_MESPRIT] = {.offset = 541, .count = 1},
+    [SPECIES_AZELF] = {.offset = 542, .count = 1},
+    [SPECIES_DIALGA] = {.offset = 543, .count = 1},
+    [SPECIES_PALKIA] = {.offset = 544, .count = 1},
+    [SPECIES_HEATRAN] = {.offset = 545, .count = 2},
+    [SPECIES_REGIGIGAS] = {.offset = 547, .count = 1},
+    [SPECIES_GIRATINA] = {.offset = 548, .count = 1},
+    [SPECIES_CRESSELIA] = {.offset = 549, .count = 1},
+    [SPECIES_PHIONE] = {.offset = 550, .count = 1},
+    [SPECIES_MANAPHY] = {.offset = 551, .count = 1},
+    [SPECIES_DARKRAI] = {.offset = 552, .count = 2},
+    [SPECIES_SHAYMIN] = {.offset = 554, .count = 1},
+    [SPECIES_ARCEUS] = {.offset = 555, .count = 1},
+    [SPECIES_VICTINI] = {.offset = 556, .count = 1},
+    [SPECIES_SNIVY] = {.offset = 557, .count = 1},
+    [SPECIES_SERVINE] = {.offset = 558, .count = 1},
+    [SPECIES_SERPERIOR] = {.offset = 559, .count = 1},
+    [SPECIES_TEPIG] = {.offset = 560, .count = 1},
+    [SPECIES_PIGNITE] = {.offset = 561, .count = 1},
+    [SPECIES_EMBOAR] = {.offset = 562, .count = 2},
+    [SPECIES_OSHAWOTT] = {.offset = 564, .count = 1},
+    [SPECIES_DEWOTT] = {.offset = 565, .count = 1},
+    [SPECIES_SAMUROTT] = {.offset = 566, .count = 1},
+    [SPECIES_PATRAT] = {.offset = 567, .count = 1},
+    [SPECIES_WATCHOG] = {.offset = 568, .count = 1},
+    [SPECIES_LILLIPUP] = {.offset = 569, .count = 1},
+    [SPECIES_HERDIER] = {.offset = 570, .count = 1},
+    [SPECIES_STOUTLAND] = {.offset = 571, .count = 1},
+    [SPECIES_PURRLOIN] = {.offset = 572, .count = 1},
+    [SPECIES_LIEPARD] = {.offset = 573, .count = 1},
+    [SPECIES_PANSAGE] = {.offset = 574, .count = 1},
+    [SPECIES_SIMISAGE] = {.offset = 575, .count = 1},
+    [SPECIES_PANSEAR] = {.offset = 576, .count = 1},
+    [SPECIES_SIMISEAR] = {.offset = 577, .count = 1},
+    [SPECIES_PANPOUR] = {.offset = 578, .count = 1},
+    [SPECIES_SIMIPOUR] = {.offset = 579, .count = 1},
+    [SPECIES_MUNNA] = {.offset = 580, .count = 1},
+    [SPECIES_MUSHARNA] = {.offset = 581, .count = 1},
+    [SPECIES_PIDOVE] = {.offset = 582, .count = 1},
+    [SPECIES_TRANQUILL] = {.offset = 583, .count = 1},
+    [SPECIES_UNFEZANT] = {.offset = 584, .count = 1},
+    [SPECIES_BLITZLE] = {.offset = 585, .count = 1},
+    [SPECIES_ZEBSTRIKA] = {.offset = 586, .count = 1},
+    [SPECIES_ROGGENROLA] = {.offset = 587, .count = 1},
+    [SPECIES_BOLDORE] = {.offset = 588, .count = 1},
+    [SPECIES_GIGALITH] = {.offset = 589, .count = 1},
+    [SPECIES_WOOBAT] = {.offset = 590, .count = 1},
+    [SPECIES_SWOOBAT] = {.offset = 591, .count = 1},
+    [SPECIES_DRILBUR] = {.offset = 592, .count = 1},
+    [SPECIES_EXCADRILL] = {.offset = 593, .count = 2},
+    [SPECIES_AUDINO] = {.offset = 595, .count = 2},
+    [SPECIES_TIMBURR] = {.offset = 597, .count = 1},
+    [SPECIES_GURDURR] = {.offset = 598, .count = 1},
+    [SPECIES_CONKELDURR] = {.offset = 599, .count = 1},
+    [SPECIES_TYMPOLE] = {.offset = 600, .count = 1},
+    [SPECIES_PALPITOAD] = {.offset = 601, .count = 1},
+    [SPECIES_SEISMITOAD] = {.offset = 602, .count = 1},
+    [SPECIES_THROH] = {.offset = 603, .count = 1},
+    [SPECIES_SAWK] = {.offset = 604, .count = 1},
+    [SPECIES_SEWADDLE] = {.offset = 605, .count = 1},
+    [SPECIES_SWADLOON] = {.offset = 606, .count = 1},
+    [SPECIES_LEAVANNY] = {.offset = 607, .count = 1},
+    [SPECIES_VENIPEDE] = {.offset = 608, .count = 1},
+    [SPECIES_WHIRLIPEDE] = {.offset = 609, .count = 1},
+    [SPECIES_SCOLIPEDE] = {.offset = 610, .count = 2},
+    [SPECIES_COTTONEE] = {.offset = 612, .count = 1},
+    [SPECIES_WHIMSICOTT] = {.offset = 613, .count = 1},
+    [SPECIES_PETILIL] = {.offset = 614, .count = 1},
+    [SPECIES_LILLIGANT] = {.offset = 615, .count = 1},
+    [SPECIES_BASCULIN] = {.offset = 616, .count = 1},
+    [SPECIES_SANDILE] = {.offset = 617, .count = 1},
+    [SPECIES_KROKOROK] = {.offset = 618, .count = 1},
+    [SPECIES_KROOKODILE] = {.offset = 619, .count = 1},
+    [SPECIES_DARUMAKA] = {.offset = 620, .count = 1},
+    [SPECIES_DARMANITAN] = {.offset = 621, .count = 1},
+    [SPECIES_MARACTUS] = {.offset = 622, .count = 1},
+    [SPECIES_DWEBBLE] = {.offset = 623, .count = 1},
+    [SPECIES_CRUSTLE] = {.offset = 624, .count = 1},
+    [SPECIES_SCRAGGY] = {.offset = 625, .count = 1},
+    [SPECIES_SCRAFTY] = {.offset = 626, .count = 2},
+    [SPECIES_SIGILYPH] = {.offset = 628, .count = 1},
+    [SPECIES_YAMASK] = {.offset = 629, .count = 1},
+    [SPECIES_COFAGRIGUS] = {.offset = 630, .count = 1},
+    [SPECIES_TIRTOUGA] = {.offset = 631, .count = 1},
+    [SPECIES_CARRACOSTA] = {.offset = 632, .count = 1},
+    [SPECIES_ARCHEN] = {.offset = 633, .count = 1},
+    [SPECIES_ARCHEOPS] = {.offset = 634, .count = 1},
+    [SPECIES_TRUBBISH] = {.offset = 635, .count = 1},
+    [SPECIES_GARBODOR] = {.offset = 636, .count = 1},
+    [SPECIES_ZORUA] = {.offset = 637, .count = 1},
+    [SPECIES_ZOROARK] = {.offset = 638, .count = 1},
+    [SPECIES_MINCCINO] = {.offset = 639, .count = 1},
+    [SPECIES_CINCCINO] = {.offset = 640, .count = 1},
+    [SPECIES_GOTHITA] = {.offset = 641, .count = 1},
+    [SPECIES_GOTHORITA] = {.offset = 642, .count = 1},
+    [SPECIES_GOTHITELLE] = {.offset = 643, .count = 1},
+    [SPECIES_SOLOSIS] = {.offset = 644, .count = 1},
+    [SPECIES_DUOSION] = {.offset = 645, .count = 1},
+    [SPECIES_REUNICLUS] = {.offset = 646, .count = 1},
+    [SPECIES_DUCKLETT] = {.offset = 647, .count = 1},
+    [SPECIES_SWANNA] = {.offset = 648, .count = 1},
+    [SPECIES_VANILLITE] = {.offset = 649, .count = 1},
+    [SPECIES_VANILLISH] = {.offset = 650, .count = 1},
+    [SPECIES_VANILLUXE] = {.offset = 651, .count = 1},
+    [SPECIES_DEERLING] = {.offset = 652, .count = 1},
+    [SPECIES_SAWSBUCK] = {.offset = 653, .count = 1},
+    [SPECIES_EMOLGA] = {.offset = 654, .count = 1},
+    [SPECIES_KARRABLAST] = {.offset = 655, .count = 1},
+    [SPECIES_ESCAVALIER] = {.offset = 656, .count = 1},
+    [SPECIES_FOONGUS] = {.offset = 657, .count = 1},
+    [SPECIES_AMOONGUSS] = {.offset = 658, .count = 1},
+    [SPECIES_FRILLISH] = {.offset = 659, .count = 1},
+    [SPECIES_JELLICENT] = {.offset = 660, .count = 1},
+    [SPECIES_ALOMOMOLA] = {.offset = 661, .count = 1},
+    [SPECIES_JOLTIK] = {.offset = 662, .count = 1},
+    [SPECIES_GALVANTULA] = {.offset = 663, .count = 1},
+    [SPECIES_FERROSEED] = {.offset = 664, .count = 1},
+    [SPECIES_FERROTHORN] = {.offset = 665, .count = 1},
+    [SPECIES_KLINK] = {.offset = 666, .count = 1},
+    [SPECIES_KLANG] = {.offset = 667, .count = 1},
+    [SPECIES_KLINKLANG] = {.offset = 668, .count = 1},
+    [SPECIES_TYNAMO] = {.offset = 669, .count = 1},
+    [SPECIES_EELEKTRIK] = {.offset = 670, .count = 1},
+    [SPECIES_EELEKTROSS] = {.offset = 671, .count = 2},
+    [SPECIES_ELGYEM] = {.offset = 673, .count = 1},
+    [SPECIES_BEHEEYEM] = {.offset = 674, .count = 1},
+    [SPECIES_LITWICK] = {.offset = 675, .count = 1},
+    [SPECIES_LAMPENT] = {.offset = 676, .count = 1},
+    [SPECIES_CHANDELURE] = {.offset = 677, .count = 2},
+    [SPECIES_AXEW] = {.offset = 679, .count = 1},
+    [SPECIES_FRAXURE] = {.offset = 680, .count = 1},
+    [SPECIES_HAXORUS] = {.offset = 681, .count = 1},
+    [SPECIES_CUBCHOO] = {.offset = 682, .count = 1},
+    [SPECIES_BEARTIC] = {.offset = 683, .count = 1},
+    [SPECIES_CRYOGONAL] = {.offset = 684, .count = 1},
+    [SPECIES_SHELMET] = {.offset = 685, .count = 1},
+    [SPECIES_ACCELGOR] = {.offset = 686, .count = 1},
+    [SPECIES_STUNFISK] = {.offset = 687, .count = 1},
+    [SPECIES_MIENFOO] = {.offset = 688, .count = 1},
+    [SPECIES_MIENSHAO] = {.offset = 689, .count = 1},
+    [SPECIES_DRUDDIGON] = {.offset = 690, .count = 1},
+    [SPECIES_GOLETT] = {.offset = 691, .count = 1},
+    [SPECIES_GOLURK] = {.offset = 692, .count = 2},
+    [SPECIES_PAWNIARD] = {.offset = 694, .count = 1},
+    [SPECIES_BISHARP] = {.offset = 695, .count = 1},
+    [SPECIES_BOUFFALANT] = {.offset = 696, .count = 1},
+    [SPECIES_RUFFLET] = {.offset = 697, .count = 1},
+    [SPECIES_BRAVIARY] = {.offset = 698, .count = 1},
+    [SPECIES_VULLABY] = {.offset = 699, .count = 1},
+    [SPECIES_MANDIBUZZ] = {.offset = 700, .count = 1},
+    [SPECIES_HEATMOR] = {.offset = 701, .count = 1},
+    [SPECIES_DURANT] = {.offset = 702, .count = 1},
+    [SPECIES_DEINO] = {.offset = 703, .count = 1},
+    [SPECIES_ZWEILOUS] = {.offset = 704, .count = 1},
+    [SPECIES_HYDREIGON] = {.offset = 705, .count = 1},
+    [SPECIES_LARVESTA] = {.offset = 706, .count = 1},
+    [SPECIES_VOLCARONA] = {.offset = 707, .count = 1},
+    [SPECIES_COBALION] = {.offset = 708, .count = 1},
+    [SPECIES_TERRAKION] = {.offset = 709, .count = 1},
+    [SPECIES_VIRIZION] = {.offset = 710, .count = 1},
+    [SPECIES_TORNADUS] = {.offset = 711, .count = 1},
+    [SPECIES_THUNDURUS] = {.offset = 712, .count = 1},
+    [SPECIES_RESHIRAM] = {.offset = 713, .count = 1},
+    [SPECIES_ZEKROM] = {.offset = 714, .count = 1},
+    [SPECIES_LANDORUS] = {.offset = 715, .count = 1},
+    [SPECIES_KYUREM] = {.offset = 716, .count = 1},
+    [SPECIES_KELDEO] = {.offset = 717, .count = 1},
+    [SPECIES_MELOETTA] = {.offset = 718, .count = 1},
+    [SPECIES_GENESECT] = {.offset = 719, .count = 1},
+    [SPECIES_CHESPIN] = {.offset = 720, .count = 1},
+    [SPECIES_QUILLADIN] = {.offset = 721, .count = 1},
+    [SPECIES_CHESNAUGHT] = {.offset = 722, .count = 2},
+    [SPECIES_FENNEKIN] = {.offset = 724, .count = 1},
+    [SPECIES_BRAIXEN] = {.offset = 725, .count = 1},
+    [SPECIES_DELPHOX] = {.offset = 726, .count = 2},
+    [SPECIES_FROAKIE] = {.offset = 728, .count = 1},
+    [SPECIES_FROGADIER] = {.offset = 729, .count = 1},
+    [SPECIES_GRENINJA] = {.offset = 730, .count = 2},
+    [SPECIES_BUNNELBY] = {.offset = 732, .count = 1},
+    [SPECIES_DIGGERSBY] = {.offset = 733, .count = 1},
+    [SPECIES_FLETCHLING] = {.offset = 734, .count = 1},
+    [SPECIES_FLETCHINDER] = {.offset = 735, .count = 1},
+    [SPECIES_TALONFLAME] = {.offset = 736, .count = 1},
+    [SPECIES_SCATTERBUG] = {.offset = 737, .count = 1},
+    [SPECIES_SPEWPA] = {.offset = 738, .count = 1},
+    [SPECIES_VIVILLON] = {.offset = 739, .count = 1},
+    [SPECIES_LITLEO] = {.offset = 740, .count = 1},
+    [SPECIES_PYROAR] = {.offset = 741, .count = 2},
+    [SPECIES_FLABEBE] = {.offset = 743, .count = 1},
+    [SPECIES_FLOETTE] = {.offset = 744, .count = 2},
+    [SPECIES_FLORGES] = {.offset = 746, .count = 1},
+    [SPECIES_SKIDDO] = {.offset = 747, .count = 1},
+    [SPECIES_GOGOAT] = {.offset = 748, .count = 1},
+    [SPECIES_PANCHAM] = {.offset = 749, .count = 1},
+    [SPECIES_PANGORO] = {.offset = 750, .count = 1},
+    [SPECIES_FURFROU] = {.offset = 751, .count = 1},
+    [SPECIES_ESPURR] = {.offset = 752, .count = 1},
+    [SPECIES_MEOWSTIC] = {.offset = 753, .count = 1},
+    [SPECIES_HONEDGE] = {.offset = 754, .count = 1},
+    [SPECIES_DOUBLADE] = {.offset = 755, .count = 1},
+    [SPECIES_AEGISLASH] = {.offset = 756, .count = 1},
+    [SPECIES_SPRITZEE] = {.offset = 757, .count = 1},
+    [SPECIES_AROMATISSE] = {.offset = 758, .count = 1},
+    [SPECIES_SWIRLIX] = {.offset = 759, .count = 1},
+    [SPECIES_SLURPUFF] = {.offset = 760, .count = 1},
+    [SPECIES_INKAY] = {.offset = 761, .count = 1},
+    [SPECIES_MALAMAR] = {.offset = 762, .count = 2},
+    [SPECIES_BINACLE] = {.offset = 764, .count = 1},
+    [SPECIES_BARBARACLE] = {.offset = 765, .count = 2},
+    [SPECIES_SKRELP] = {.offset = 767, .count = 1},
+    [SPECIES_DRAGALGE] = {.offset = 768, .count = 2},
+    [SPECIES_CLAUNCHER] = {.offset = 770, .count = 1},
+    [SPECIES_CLAWITZER] = {.offset = 771, .count = 1},
+    [SPECIES_HELIOPTILE] = {.offset = 772, .count = 1},
+    [SPECIES_HELIOLISK] = {.offset = 773, .count = 1},
+    [SPECIES_TYRUNT] = {.offset = 774, .count = 1},
+    [SPECIES_TYRANTRUM] = {.offset = 775, .count = 1},
+    [SPECIES_AMAURA] = {.offset = 776, .count = 1},
+    [SPECIES_AURORUS] = {.offset = 777, .count = 1},
+    [SPECIES_SYLVEON] = {.offset = 778, .count = 1},
+    [SPECIES_HAWLUCHA] = {.offset = 779, .count = 2},
+    [SPECIES_DEDENNE] = {.offset = 781, .count = 1},
+    [SPECIES_CARBINK] = {.offset = 782, .count = 1},
+    [SPECIES_GOOMY] = {.offset = 783, .count = 1},
+    [SPECIES_SLIGGOO] = {.offset = 784, .count = 1},
+    [SPECIES_GOODRA] = {.offset = 785, .count = 1},
+    [SPECIES_KLEFKI] = {.offset = 786, .count = 1},
+    [SPECIES_PHANTUMP] = {.offset = 787, .count = 1},
+    [SPECIES_TREVENANT] = {.offset = 788, .count = 1},
+    [SPECIES_PUMPKABOO] = {.offset = 789, .count = 1},
+    [SPECIES_GOURGEIST] = {.offset = 790, .count = 1},
+    [SPECIES_BERGMITE] = {.offset = 791, .count = 1},
+    [SPECIES_AVALUGG] = {.offset = 792, .count = 1},
+    [SPECIES_NOIBAT] = {.offset = 793, .count = 1},
+    [SPECIES_NOIVERN] = {.offset = 794, .count = 1},
+    [SPECIES_XERNEAS] = {.offset = 795, .count = 1},
+    [SPECIES_YVELTAL] = {.offset = 796, .count = 1},
+    [SPECIES_ZYGARDE] = {.offset = 797, .count = 1},
+    [SPECIES_DIANCIE] = {.offset = 798, .count = 2},
+    [SPECIES_HOOPA] = {.offset = 800, .count = 1},
+    [SPECIES_VOLCANION] = {.offset = 801, .count = 1},
+    [SPECIES_ROWLET] = {.offset = 802, .count = 1},
+    [SPECIES_DARTRIX] = {.offset = 803, .count = 1},
+    [SPECIES_DECIDUEYE] = {.offset = 804, .count = 1},
+    [SPECIES_LITTEN] = {.offset = 805, .count = 1},
+    [SPECIES_TORRACAT] = {.offset = 806, .count = 1},
+    [SPECIES_INCINEROAR] = {.offset = 807, .count = 1},
+    [SPECIES_POPPLIO] = {.offset = 808, .count = 1},
+    [SPECIES_BRIONNE] = {.offset = 809, .count = 1},
+    [SPECIES_PRIMARINA] = {.offset = 810, .count = 1},
+    [SPECIES_PIKIPEK] = {.offset = 811, .count = 1},
+    [SPECIES_TRUMBEAK] = {.offset = 812, .count = 1},
+    [SPECIES_TOUCANNON] = {.offset = 813, .count = 1},
+    [SPECIES_YUNGOOS] = {.offset = 814, .count = 1},
+    [SPECIES_GUMSHOOS] = {.offset = 815, .count = 1},
+    [SPECIES_GRUBBIN] = {.offset = 816, .count = 1},
+    [SPECIES_CHARJABUG] = {.offset = 817, .count = 1},
+    [SPECIES_VIKAVOLT] = {.offset = 818, .count = 1},
+    [SPECIES_CRABRAWLER] = {.offset = 819, .count = 1},
+    [SPECIES_CRABOMINABLE] = {.offset = 820, .count = 2},
+    [SPECIES_ORICORIO] = {.offset = 822, .count = 1},
+    [SPECIES_CUTIEFLY] = {.offset = 823, .count = 1},
+    [SPECIES_RIBOMBEE] = {.offset = 824, .count = 1},
+    [SPECIES_ROCKRUFF] = {.offset = 825, .count = 1},
+    [SPECIES_LYCANROC] = {.offset = 826, .count = 1},
+    [SPECIES_WISHIWASHI] = {.offset = 827, .count = 1},
+    [SPECIES_MAREANIE] = {.offset = 828, .count = 1},
+    [SPECIES_TOXAPEX] = {.offset = 829, .count = 1},
+    [SPECIES_MUDBRAY] = {.offset = 830, .count = 1},
+    [SPECIES_MUDSDALE] = {.offset = 831, .count = 1},
+    [SPECIES_DEWPIDER] = {.offset = 832, .count = 1},
+    [SPECIES_ARAQUANID] = {.offset = 833, .count = 1},
+    [SPECIES_FOMANTIS] = {.offset = 834, .count = 1},
+    [SPECIES_LURANTIS] = {.offset = 835, .count = 1},
+    [SPECIES_MORELULL] = {.offset = 836, .count = 1},
+    [SPECIES_SHIINOTIC] = {.offset = 837, .count = 1},
+    [SPECIES_SALANDIT] = {.offset = 838, .count = 1},
+    [SPECIES_SALAZZLE] = {.offset = 839, .count = 1},
+    [SPECIES_STUFFUL] = {.offset = 840, .count = 1},
+    [SPECIES_BEWEAR] = {.offset = 841, .count = 1},
+    [SPECIES_BOUNSWEET] = {.offset = 842, .count = 1},
+    [SPECIES_STEENEE] = {.offset = 843, .count = 1},
+    [SPECIES_TSAREENA] = {.offset = 844, .count = 1},
+    [SPECIES_COMFEY] = {.offset = 845, .count = 1},
+    [SPECIES_ORANGURU] = {.offset = 846, .count = 1},
+    [SPECIES_PASSIMIAN] = {.offset = 847, .count = 1},
+    [SPECIES_WIMPOD] = {.offset = 848, .count = 1},
+    [SPECIES_GOLISOPOD] = {.offset = 849, .count = 2},
+    [SPECIES_SANDYGAST] = {.offset = 851, .count = 1},
+    [SPECIES_PALOSSAND] = {.offset = 852, .count = 1},
+    [SPECIES_PYUKUMUKU] = {.offset = 853, .count = 1},
+    [SPECIES_TYPE_NULL] = {.offset = 854, .count = 1},
+    [SPECIES_SILVALLY] = {.offset = 855, .count = 1},
+    [SPECIES_MINIOR] = {.offset = 856, .count = 1},
+    [SPECIES_KOMALA] = {.offset = 857, .count = 1},
+    [SPECIES_TURTONATOR] = {.offset = 858, .count = 1},
+    [SPECIES_TOGEDEMARU] = {.offset = 859, .count = 1},
+    [SPECIES_MIMIKYU] = {.offset = 860, .count = 1},
+    [SPECIES_BRUXISH] = {.offset = 861, .count = 1},
+    [SPECIES_DRAMPA] = {.offset = 862, .count = 2},
+    [SPECIES_DHELMISE] = {.offset = 864, .count = 1},
+    [SPECIES_JANGMO_O] = {.offset = 865, .count = 1},
+    [SPECIES_HAKAMO_O] = {.offset = 866, .count = 1},
+    [SPECIES_KOMMO_O] = {.offset = 867, .count = 1},
+    [SPECIES_TAPU_KOKO] = {.offset = 868, .count = 1},
+    [SPECIES_TAPU_LELE] = {.offset = 869, .count = 1},
+    [SPECIES_TAPU_BULU] = {.offset = 870, .count = 1},
+    [SPECIES_TAPU_FINI] = {.offset = 871, .count = 1},
+    [SPECIES_COSMOG] = {.offset = 872, .count = 1},
+    [SPECIES_COSMOEM] = {.offset = 873, .count = 1},
+    [SPECIES_SOLGALEO] = {.offset = 874, .count = 1},
+    [SPECIES_LUNALA] = {.offset = 875, .count = 2},
+    [SPECIES_NIHILEGO] = {.offset = 877, .count = 1},
+    [SPECIES_BUZZWOLE] = {.offset = 878, .count = 1},
+    [SPECIES_PHEROMOSA] = {.offset = 879, .count = 1},
+    [SPECIES_XURKITREE] = {.offset = 880, .count = 1},
+    [SPECIES_CELESTEELA] = {.offset = 881, .count = 1},
+    [SPECIES_KARTANA] = {.offset = 882, .count = 1},
+    [SPECIES_GUZZLORD] = {.offset = 883, .count = 1},
+    [SPECIES_NECROZMA] = {.offset = 884, .count = 2},
+    [SPECIES_MAGEARNA] = {.offset = 886, .count = 2},
+    [SPECIES_MARSHADOW] = {.offset = 888, .count = 1},
+    [SPECIES_POIPOLE] = {.offset = 889, .count = 1},
+    [SPECIES_NAGANADEL] = {.offset = 890, .count = 1},
+    [SPECIES_STAKATAKA] = {.offset = 891, .count = 1},
+    [SPECIES_BLACEPHALON] = {.offset = 892, .count = 1},
+    [SPECIES_ZERAORA] = {.offset = 893, .count = 2},
+    [SPECIES_MELTAN] = {.offset = 895, .count = 1},
+    [SPECIES_MELMETAL] = {.offset = 896, .count = 1},
+    [SPECIES_GROOKEY] = {.offset = 897, .count = 1},
+    [SPECIES_THWACKEY] = {.offset = 898, .count = 1},
+    [SPECIES_RILLABOOM] = {.offset = 899, .count = 1},
+    [SPECIES_SCORBUNNY] = {.offset = 900, .count = 1},
+    [SPECIES_RABOOT] = {.offset = 901, .count = 1},
+    [SPECIES_CINDERACE] = {.offset = 902, .count = 2},
+    [SPECIES_SOBBLE] = {.offset = 904, .count = 1},
+    [SPECIES_DRIZZILE] = {.offset = 905, .count = 1},
+    [SPECIES_INTELEON] = {.offset = 906, .count = 1},
+    [SPECIES_SKWOVET] = {.offset = 907, .count = 1},
+    [SPECIES_GREEDENT] = {.offset = 908, .count = 1},
+    [SPECIES_ROOKIDEE] = {.offset = 909, .count = 1},
+    [SPECIES_CORVISQUIRE] = {.offset = 910, .count = 1},
+    [SPECIES_CORVIKNIGHT] = {.offset = 911, .count = 1},
+    [SPECIES_BLIPBUG] = {.offset = 912, .count = 1},
+    [SPECIES_DOTTLER] = {.offset = 913, .count = 1},
+    [SPECIES_ORBEETLE] = {.offset = 914, .count = 1},
+    [SPECIES_NICKIT] = {.offset = 915, .count = 1},
+    [SPECIES_THIEVUL] = {.offset = 916, .count = 1},
+    [SPECIES_GOSSIFLEUR] = {.offset = 917, .count = 1},
+    [SPECIES_ELDEGOSS] = {.offset = 918, .count = 1},
+    [SPECIES_WOOLOO] = {.offset = 919, .count = 1},
+    [SPECIES_DUBWOOL] = {.offset = 920, .count = 1},
+    [SPECIES_CHEWTLE] = {.offset = 921, .count = 1},
+    [SPECIES_DREDNAW] = {.offset = 922, .count = 1},
+    [SPECIES_YAMPER] = {.offset = 923, .count = 1},
+    [SPECIES_BOLTUND] = {.offset = 924, .count = 1},
+    [SPECIES_ROLYCOLY] = {.offset = 925, .count = 1},
+    [SPECIES_CARKOL] = {.offset = 926, .count = 1},
+    [SPECIES_COALOSSAL] = {.offset = 927, .count = 1},
+    [SPECIES_APPLIN] = {.offset = 928, .count = 1},
+    [SPECIES_FLAPPLE] = {.offset = 929, .count = 1},
+    [SPECIES_APPLETUN] = {.offset = 930, .count = 1},
+    [SPECIES_SILICOBRA] = {.offset = 931, .count = 1},
+    [SPECIES_SANDACONDA] = {.offset = 932, .count = 1},
+    [SPECIES_CRAMORANT] = {.offset = 933, .count = 1},
+    [SPECIES_ARROKUDA] = {.offset = 934, .count = 1},
+    [SPECIES_BARRASKEWDA] = {.offset = 935, .count = 1},
+    [SPECIES_TOXEL] = {.offset = 936, .count = 1},
+    [SPECIES_TOXTRICITY] = {.offset = 937, .count = 1},
+    [SPECIES_SIZZLIPEDE] = {.offset = 938, .count = 1},
+    [SPECIES_CENTISKORCH] = {.offset = 939, .count = 1},
+    [SPECIES_CLOBBOPUS] = {.offset = 940, .count = 1},
+    [SPECIES_GRAPPLOCT] = {.offset = 941, .count = 1},
+    [SPECIES_SINISTEA] = {.offset = 942, .count = 1},
+    [SPECIES_POLTEAGEIST] = {.offset = 943, .count = 1},
+    [SPECIES_HATENNA] = {.offset = 944, .count = 1},
+    [SPECIES_HATTREM] = {.offset = 945, .count = 1},
+    [SPECIES_HATTERENE] = {.offset = 946, .count = 1},
+    [SPECIES_IMPIDIMP] = {.offset = 947, .count = 1},
+    [SPECIES_MORGREM] = {.offset = 948, .count = 1},
+    [SPECIES_GRIMMSNARL] = {.offset = 949, .count = 1},
+    [SPECIES_OBSTAGOON] = {.offset = 950, .count = 1},
+    [SPECIES_PERRSERKER] = {.offset = 951, .count = 1},
+    [SPECIES_CURSOLA] = {.offset = 952, .count = 1},
+    [SPECIES_SIRFETCHD] = {.offset = 953, .count = 1},
+    [SPECIES_MR_RIME] = {.offset = 954, .count = 1},
+    [SPECIES_RUNERIGUS] = {.offset = 955, .count = 1},
+    [SPECIES_MILCERY] = {.offset = 956, .count = 1},
+    [SPECIES_ALCREMIE] = {.offset = 957, .count = 1},
+    [SPECIES_FALINKS] = {.offset = 958, .count = 2},
+    [SPECIES_PINCURCHIN] = {.offset = 960, .count = 1},
+    [SPECIES_SNOM] = {.offset = 961, .count = 1},
+    [SPECIES_FROSMOTH] = {.offset = 962, .count = 1},
+    [SPECIES_STONJOURNER] = {.offset = 963, .count = 1},
+    [SPECIES_EISCUE] = {.offset = 964, .count = 1},
+    [SPECIES_INDEEDEE] = {.offset = 965, .count = 1},
+    [SPECIES_MORPEKO] = {.offset = 966, .count = 1},
+    [SPECIES_CUFANT] = {.offset = 967, .count = 1},
+    [SPECIES_COPPERAJAH] = {.offset = 968, .count = 1},
+    [SPECIES_DRACOZOLT] = {.offset = 969, .count = 1},
+    [SPECIES_ARCTOZOLT] = {.offset = 970, .count = 1},
+    [SPECIES_DRACOVISH] = {.offset = 971, .count = 1},
+    [SPECIES_ARCTOVISH] = {.offset = 972, .count = 1},
+    [SPECIES_DURALUDON] = {.offset = 973, .count = 1},
+    [SPECIES_DREEPY] = {.offset = 974, .count = 1},
+    [SPECIES_DRAKLOAK] = {.offset = 975, .count = 1},
+    [SPECIES_DRAGAPULT] = {.offset = 976, .count = 1},
+    [SPECIES_ZACIAN] = {.offset = 977, .count = 1},
+    [SPECIES_ZAMAZENTA] = {.offset = 978, .count = 1},
+    [SPECIES_ETERNATUS] = {.offset = 979, .count = 2},
+    [SPECIES_KUBFU] = {.offset = 981, .count = 1},
+    [SPECIES_URSHIFU] = {.offset = 982, .count = 1},
+    [SPECIES_ZARUDE] = {.offset = 983, .count = 1},
+    [SPECIES_REGIELEKI] = {.offset = 984, .count = 1},
+    [SPECIES_REGIDRAGO] = {.offset = 985, .count = 1},
+    [SPECIES_GLASTRIER] = {.offset = 986, .count = 1},
+    [SPECIES_SPECTRIER] = {.offset = 987, .count = 1},
+    [SPECIES_CALYREX] = {.offset = 988, .count = 1},
+    [SPECIES_RATTATA_ALOLA] = {.offset = 989, .count = 1},
+    [SPECIES_RATICATE_ALOLA] = {.offset = 990, .count = 1},
+    [SPECIES_RAICHU_ALOLA] = {.offset = 991, .count = 1},
+    [SPECIES_SANDSHREW_ALOLA] = {.offset = 992, .count = 1},
+    [SPECIES_SANDSLASH_ALOLA] = {.offset = 993, .count = 1},
+    [SPECIES_VULPIX_ALOLA] = {.offset = 994, .count = 1},
+    [SPECIES_NINETALES_ALOLA] = {.offset = 995, .count = 1},
+    [SPECIES_DIGLETT_ALOLA] = {.offset = 996, .count = 1},
+    [SPECIES_DUGTRIO_ALOLA] = {.offset = 997, .count = 1},
+    [SPECIES_MEOWTH_ALOLA] = {.offset = 998, .count = 1},
+    [SPECIES_PERSIAN_ALOLA] = {.offset = 999, .count = 1},
+    [SPECIES_GEODUDE_ALOLA] = {.offset = 1000, .count = 1},
+    [SPECIES_GRAVELER_ALOLA] = {.offset = 1001, .count = 1},
+    [SPECIES_GOLEM_ALOLA] = {.offset = 1002, .count = 1},
+    [SPECIES_GRIMER_ALOLA] = {.offset = 1003, .count = 1},
+    [SPECIES_MUK_ALOLA] = {.offset = 1004, .count = 1},
+    [SPECIES_EXEGGUTOR_ALOLA] = {.offset = 1005, .count = 1},
+    [SPECIES_MAROWAK_ALOLA] = {.offset = 1006, .count = 1},
+    [SPECIES_MEOWTH_GALAR] = {.offset = 1007, .count = 1},
+    [SPECIES_PONYTA_GALAR] = {.offset = 1008, .count = 1},
+    [SPECIES_RAPIDASH_GALAR] = {.offset = 1009, .count = 1},
+    [SPECIES_SLOWPOKE_GALAR] = {.offset = 1010, .count = 1},
+    [SPECIES_SLOWBRO_GALAR] = {.offset = 1011, .count = 1},
+    [SPECIES_FARFETCHD_GALAR] = {.offset = 1012, .count = 1},
+    [SPECIES_WEEZING_GALAR] = {.offset = 1013, .count = 1},
+    [SPECIES_MR_MIME_GALAR] = {.offset = 1014, .count = 1},
+    [SPECIES_ARTICUNO_GALAR] = {.offset = 1015, .count = 1},
+    [SPECIES_ZAPDOS_GALAR] = {.offset = 1016, .count = 1},
+    [SPECIES_MOLTRES_GALAR] = {.offset = 1017, .count = 1},
+    [SPECIES_SLOWKING_GALAR] = {.offset = 1018, .count = 1},
+    [SPECIES_CORSOLA_GALAR] = {.offset = 1019, .count = 1},
+    [SPECIES_ZIGZAGOON_GALAR] = {.offset = 1020, .count = 1},
+    [SPECIES_LINOONE_GALAR] = {.offset = 1021, .count = 1},
+    [SPECIES_DARUMAKA_GALAR] = {.offset = 1022, .count = 1},
+    [SPECIES_DARMANITAN_GALAR] = {.offset = 1023, .count = 1},
+    [SPECIES_YAMASK_GALAR] = {.offset = 1024, .count = 1},
+    [SPECIES_STUNFISK_GALAR] = {.offset = 1025, .count = 1},
+    [SPECIES_PIKACHU_COSPLAY] = {.offset = 1026, .count = 1},
+    [SPECIES_PIKACHU_ROCK_STAR] = {.offset = 1027, .count = 1},
+    [SPECIES_PIKACHU_BELLE] = {.offset = 1028, .count = 1},
+    [SPECIES_PIKACHU_POP_STAR] = {.offset = 1029, .count = 1},
+    [SPECIES_PIKACHU_PHD] = {.offset = 1030, .count = 1},
+    [SPECIES_PIKACHU_LIBRE] = {.offset = 1031, .count = 1},
+    [SPECIES_PIKACHU_ORIGINAL] = {.offset = 1032, .count = 1},
+    [SPECIES_PIKACHU_HOENN] = {.offset = 1033, .count = 1},
+    [SPECIES_PIKACHU_SINNOH] = {.offset = 1034, .count = 1},
+    [SPECIES_PIKACHU_UNOVA] = {.offset = 1035, .count = 1},
+    [SPECIES_PIKACHU_KALOS] = {.offset = 1036, .count = 1},
+    [SPECIES_PIKACHU_ALOLA] = {.offset = 1037, .count = 1},
+    [SPECIES_PIKACHU_PARTNER] = {.offset = 1038, .count = 1},
+    [SPECIES_PIKACHU_WORLD] = {.offset = 1039, .count = 1},
+    [SPECIES_PICHU_SPIKY_EARED] = {.offset = 1040, .count = 1},
+    [SPECIES_DEOXYS_ATTACK] = {.offset = 1041, .count = 1},
+    [SPECIES_DEOXYS_DEFENSE] = {.offset = 1042, .count = 1},
+    [SPECIES_DEOXYS_SPEED] = {.offset = 1043, .count = 1},
+    [SPECIES_BURMY_SANDY] = {.offset = 1044, .count = 1},
+    [SPECIES_BURMY_TRASH] = {.offset = 1045, .count = 1},
+    [SPECIES_WORMADAM_SANDY] = {.offset = 1046, .count = 1},
+    [SPECIES_WORMADAM_TRASH] = {.offset = 1047, .count = 1},
+    [SPECIES_SHELLOS_EAST] = {.offset = 1048, .count = 1},
+    [SPECIES_GASTRODON_EAST] = {.offset = 1049, .count = 1},
+    [SPECIES_ROTOM_HEAT] = {.offset = 1050, .count = 1},
+    [SPECIES_ROTOM_WASH] = {.offset = 1051, .count = 1},
+    [SPECIES_ROTOM_FROST] = {.offset = 1052, .count = 1},
+    [SPECIES_ROTOM_FAN] = {.offset = 1053, .count = 1},
+    [SPECIES_ROTOM_MOW] = {.offset = 1054, .count = 1},
+    [SPECIES_GIRATINA_ORIGIN] = {.offset = 1055, .count = 1},
+    [SPECIES_SHAYMIN_SKY] = {.offset = 1056, .count = 1},
+    [SPECIES_ARCEUS_FIGHTING] = {.offset = 1057, .count = 1},
+    [SPECIES_ARCEUS_FLYING] = {.offset = 1058, .count = 1},
+    [SPECIES_ARCEUS_POISON] = {.offset = 1059, .count = 1},
+    [SPECIES_ARCEUS_GROUND] = {.offset = 1060, .count = 1},
+    [SPECIES_ARCEUS_ROCK] = {.offset = 1061, .count = 1},
+    [SPECIES_ARCEUS_BUG] = {.offset = 1062, .count = 1},
+    [SPECIES_ARCEUS_GHOST] = {.offset = 1063, .count = 1},
+    [SPECIES_ARCEUS_STEEL] = {.offset = 1064, .count = 1},
+    [SPECIES_ARCEUS_FIRE] = {.offset = 1065, .count = 1},
+    [SPECIES_ARCEUS_WATER] = {.offset = 1066, .count = 1},
+    [SPECIES_ARCEUS_GRASS] = {.offset = 1067, .count = 1},
+    [SPECIES_ARCEUS_ELECTRIC] = {.offset = 1068, .count = 1},
+    [SPECIES_ARCEUS_PSYCHIC] = {.offset = 1069, .count = 1},
+    [SPECIES_ARCEUS_ICE] = {.offset = 1070, .count = 1},
+    [SPECIES_ARCEUS_DRAGON] = {.offset = 1071, .count = 1},
+    [SPECIES_ARCEUS_DARK] = {.offset = 1072, .count = 1},
+    [SPECIES_ARCEUS_FAIRY] = {.offset = 1073, .count = 1},
+    [SPECIES_BASCULIN_BLUE_STRIPED] = {.offset = 1074, .count = 1},
+    [SPECIES_DEERLING_SUMMER] = {.offset = 1075, .count = 1},
+    [SPECIES_DEERLING_AUTUMN] = {.offset = 1076, .count = 1},
+    [SPECIES_DEERLING_WINTER] = {.offset = 1077, .count = 1},
+    [SPECIES_SAWSBUCK_SUMMER] = {.offset = 1078, .count = 1},
+    [SPECIES_SAWSBUCK_AUTUMN] = {.offset = 1079, .count = 1},
+    [SPECIES_SAWSBUCK_WINTER] = {.offset = 1080, .count = 1},
+    [SPECIES_TORNADUS_THERIAN] = {.offset = 1081, .count = 1},
+    [SPECIES_THUNDURUS_THERIAN] = {.offset = 1082, .count = 1},
+    [SPECIES_LANDORUS_THERIAN] = {.offset = 1083, .count = 1},
+    [SPECIES_KYUREM_WHITE] = {.offset = 1084, .count = 1},
+    [SPECIES_KYUREM_BLACK] = {.offset = 1085, .count = 1},
+    [SPECIES_KELDEO_RESOLUTE] = {.offset = 1086, .count = 1},
+    [SPECIES_GENESECT_DOUSE] = {.offset = 1087, .count = 1},
+    [SPECIES_GENESECT_SHOCK] = {.offset = 1088, .count = 1},
+    [SPECIES_GENESECT_BURN] = {.offset = 1089, .count = 1},
+    [SPECIES_GENESECT_CHILL] = {.offset = 1090, .count = 1},
+    [SPECIES_GRENINJA_BATTLE_BOND] = {.offset = 1091, .count = 1},
+    [SPECIES_VIVILLON_POLAR] = {.offset = 1092, .count = 1},
+    [SPECIES_VIVILLON_TUNDRA] = {.offset = 1093, .count = 1},
+    [SPECIES_VIVILLON_CONTINENTAL] = {.offset = 1094, .count = 1},
+    [SPECIES_VIVILLON_GARDEN] = {.offset = 1095, .count = 1},
+    [SPECIES_VIVILLON_ELEGANT] = {.offset = 1096, .count = 1},
+    [SPECIES_VIVILLON_MEADOW] = {.offset = 1097, .count = 1},
+    [SPECIES_VIVILLON_MODERN] = {.offset = 1098, .count = 1},
+    [SPECIES_VIVILLON_MARINE] = {.offset = 1099, .count = 1},
+    [SPECIES_VIVILLON_ARCHIPELAGO] = {.offset = 1100, .count = 1},
+    [SPECIES_VIVILLON_HIGH_PLAINS] = {.offset = 1101, .count = 1},
+    [SPECIES_VIVILLON_SANDSTORM] = {.offset = 1102, .count = 1},
+    [SPECIES_VIVILLON_RIVER] = {.offset = 1103, .count = 1},
+    [SPECIES_VIVILLON_MONSOON] = {.offset = 1104, .count = 1},
+    [SPECIES_VIVILLON_SAVANNA] = {.offset = 1105, .count = 1},
+    [SPECIES_VIVILLON_SUN] = {.offset = 1106, .count = 1},
+    [SPECIES_VIVILLON_OCEAN] = {.offset = 1107, .count = 1},
+    [SPECIES_VIVILLON_JUNGLE] = {.offset = 1108, .count = 1},
+    [SPECIES_VIVILLON_FANCY] = {.offset = 1109, .count = 1},
+    [SPECIES_VIVILLON_POKEBALL] = {.offset = 1110, .count = 1},
+    [SPECIES_FLABEBE_YELLOW] = {.offset = 1111, .count = 1},
+    [SPECIES_FLABEBE_ORANGE] = {.offset = 1112, .count = 1},
+    [SPECIES_FLABEBE_BLUE] = {.offset = 1113, .count = 1},
+    [SPECIES_FLABEBE_WHITE] = {.offset = 1114, .count = 1},
+    [SPECIES_FLOETTE_YELLOW] = {.offset = 1115, .count = 1},
+    [SPECIES_FLOETTE_ORANGE] = {.offset = 1116, .count = 1},
+    [SPECIES_FLOETTE_BLUE] = {.offset = 1117, .count = 1},
+    [SPECIES_FLOETTE_WHITE] = {.offset = 1118, .count = 1},
+    [SPECIES_FLOETTE_ETERNAL] = {.offset = 1119, .count = 1},
+    [SPECIES_FLORGES_YELLOW] = {.offset = 1120, .count = 1},
+    [SPECIES_FLORGES_ORANGE] = {.offset = 1121, .count = 1},
+    [SPECIES_FLORGES_BLUE] = {.offset = 1122, .count = 1},
+    [SPECIES_FLORGES_WHITE] = {.offset = 1123, .count = 1},
+    [SPECIES_FURFROU_HEART] = {.offset = 1124, .count = 1},
+    [SPECIES_FURFROU_STAR] = {.offset = 1125, .count = 1},
+    [SPECIES_FURFROU_DIAMOND] = {.offset = 1126, .count = 1},
+    [SPECIES_FURFROU_DEBUTANTE] = {.offset = 1127, .count = 1},
+    [SPECIES_FURFROU_MATRON] = {.offset = 1128, .count = 1},
+    [SPECIES_FURFROU_DANDY] = {.offset = 1129, .count = 1},
+    [SPECIES_FURFROU_LA_REINE] = {.offset = 1130, .count = 1},
+    [SPECIES_FURFROU_KABUKI] = {.offset = 1131, .count = 1},
+    [SPECIES_FURFROU_PHARAOH] = {.offset = 1132, .count = 1},
+    [SPECIES_MEOWSTIC_F] = {.offset = 1133, .count = 2},
+    [SPECIES_PUMPKABOO_SMALL] = {.offset = 1135, .count = 1},
+    [SPECIES_PUMPKABOO_LARGE] = {.offset = 1136, .count = 1},
+    [SPECIES_PUMPKABOO_SUPER] = {.offset = 1137, .count = 1},
+    [SPECIES_GOURGEIST_SMALL] = {.offset = 1138, .count = 1},
+    [SPECIES_GOURGEIST_LARGE] = {.offset = 1139, .count = 1},
+    [SPECIES_GOURGEIST_SUPER] = {.offset = 1140, .count = 1},
+    [SPECIES_ZYGARDE_10] = {.offset = 1141, .count = 1},
+    [SPECIES_ZYGARDE_10_POWER_CONSTRUCT] = {.offset = 1142, .count = 1},
+    [SPECIES_ZYGARDE_50_POWER_CONSTRUCT] = {.offset = 1143, .count = 2},
+    [SPECIES_HOOPA_UNBOUND] = {.offset = 1145, .count = 1},
+    [SPECIES_ORICORIO_POM_POM] = {.offset = 1146, .count = 1},
+    [SPECIES_ORICORIO_PAU] = {.offset = 1147, .count = 1},
+    [SPECIES_ORICORIO_SENSU] = {.offset = 1148, .count = 1},
+    [SPECIES_ROCKRUFF_OWN_TEMPO] = {.offset = 1149, .count = 1},
+    [SPECIES_LYCANROC_MIDNIGHT] = {.offset = 1150, .count = 1},
+    [SPECIES_LYCANROC_DUSK] = {.offset = 1151, .count = 1},
+    [SPECIES_SILVALLY_FIGHTING] = {.offset = 1152, .count = 1},
+    [SPECIES_SILVALLY_FLYING] = {.offset = 1153, .count = 1},
+    [SPECIES_SILVALLY_POISON] = {.offset = 1154, .count = 1},
+    [SPECIES_SILVALLY_GROUND] = {.offset = 1155, .count = 1},
+    [SPECIES_SILVALLY_ROCK] = {.offset = 1156, .count = 1},
+    [SPECIES_SILVALLY_BUG] = {.offset = 1157, .count = 1},
+    [SPECIES_SILVALLY_GHOST] = {.offset = 1158, .count = 1},
+    [SPECIES_SILVALLY_STEEL] = {.offset = 1159, .count = 1},
+    [SPECIES_SILVALLY_FIRE] = {.offset = 1160, .count = 1},
+    [SPECIES_SILVALLY_WATER] = {.offset = 1161, .count = 1},
+    [SPECIES_SILVALLY_GRASS] = {.offset = 1162, .count = 1},
+    [SPECIES_SILVALLY_ELECTRIC] = {.offset = 1163, .count = 1},
+    [SPECIES_SILVALLY_PSYCHIC] = {.offset = 1164, .count = 1},
+    [SPECIES_SILVALLY_ICE] = {.offset = 1165, .count = 1},
+    [SPECIES_SILVALLY_DRAGON] = {.offset = 1166, .count = 1},
+    [SPECIES_SILVALLY_DARK] = {.offset = 1167, .count = 1},
+    [SPECIES_SILVALLY_FAIRY] = {.offset = 1168, .count = 1},
+    [SPECIES_MINIOR_METEOR_ORANGE] = {.offset = 1169, .count = 1},
+    [SPECIES_MINIOR_METEOR_YELLOW] = {.offset = 1170, .count = 1},
+    [SPECIES_MINIOR_METEOR_GREEN] = {.offset = 1171, .count = 1},
+    [SPECIES_MINIOR_METEOR_BLUE] = {.offset = 1172, .count = 1},
+    [SPECIES_MINIOR_METEOR_INDIGO] = {.offset = 1173, .count = 1},
+    [SPECIES_MINIOR_METEOR_VIOLET] = {.offset = 1174, .count = 1},
+    [SPECIES_NECROZMA_DUSK_MANE] = {.offset = 1175, .count = 1},
+    [SPECIES_NECROZMA_DAWN_WINGS] = {.offset = 1176, .count = 1},
+    [SPECIES_MAGEARNA_ORIGINAL] = {.offset = 1177, .count = 2},
+    [SPECIES_TOXTRICITY_LOW_KEY] = {.offset = 1179, .count = 1},
+    [SPECIES_SINISTEA_ANTIQUE] = {.offset = 1180, .count = 1},
+    [SPECIES_POLTEAGEIST_ANTIQUE] = {.offset = 1181, .count = 1},
+    [SPECIES_ALCREMIE_RUBY_CREAM] = {.offset = 1182, .count = 1},
+    [SPECIES_ALCREMIE_MATCHA_CREAM] = {.offset = 1183, .count = 1},
+    [SPECIES_ALCREMIE_MINT_CREAM] = {.offset = 1184, .count = 1},
+    [SPECIES_ALCREMIE_LEMON_CREAM] = {.offset = 1185, .count = 1},
+    [SPECIES_ALCREMIE_SALTED_CREAM] = {.offset = 1186, .count = 1},
+    [SPECIES_ALCREMIE_RUBY_SWIRL] = {.offset = 1187, .count = 1},
+    [SPECIES_ALCREMIE_CARAMEL_SWIRL] = {.offset = 1188, .count = 1},
+    [SPECIES_ALCREMIE_RAINBOW_SWIRL] = {.offset = 1189, .count = 1},
+    [SPECIES_INDEEDEE_F] = {.offset = 1190, .count = 1},
+    [SPECIES_ZACIAN_CROWNED] = {.offset = 1191, .count = 1},
+    [SPECIES_ZAMAZENTA_CROWNED] = {.offset = 1192, .count = 1},
+    [SPECIES_URSHIFU_RAPID_STRIKE] = {.offset = 1193, .count = 1},
+    [SPECIES_ZARUDE_DADA] = {.offset = 1194, .count = 1},
+    [SPECIES_CALYREX_ICE] = {.offset = 1195, .count = 1},
+    [SPECIES_CALYREX_SHADOW] = {.offset = 1196, .count = 1},
+    [SPECIES_SPRIGATITO] = {.offset = 1197, .count = 1},
+    [SPECIES_FLORAGATO] = {.offset = 1198, .count = 1},
+    [SPECIES_MEOWSCARADA] = {.offset = 1199, .count = 1},
+    [SPECIES_FUECOCO] = {.offset = 1200, .count = 1},
+    [SPECIES_CROCALOR] = {.offset = 1201, .count = 1},
+    [SPECIES_SKELEDIRGE] = {.offset = 1202, .count = 1},
+    [SPECIES_NACLI] = {.offset = 1203, .count = 1},
+    [SPECIES_NACLSTACK] = {.offset = 1204, .count = 1},
+    [SPECIES_GARGANACL] = {.offset = 1205, .count = 1},
+    [SPECIES_FINIZEN] = {.offset = 1206, .count = 1},
+    [SPECIES_PALAFIN] = {.offset = 1207, .count = 1},
+    [SPECIES_DONDOZO] = {.offset = 1208, .count = 1},
+    [SPECIES_TATSUGIRI] = {.offset = 1209, .count = 2},
+    [SPECIES_TATSUGIRI_DROOPY] = {.offset = 1211, .count = 2},
+    [SPECIES_TATSUGIRI_STRETCHY] = {.offset = 1213, .count = 2},
+    [SPECIES_ANNIHILAPE] = {.offset = 1215, .count = 1},
+    [SPECIES_FARIGIRAF] = {.offset = 1216, .count = 1},
+    [SPECIES_KINGAMBIT] = {.offset = 1217, .count = 1},
+    [SPECIES_GREAT_TUSK] = {.offset = 1218, .count = 1},
+    [SPECIES_FLUTTER_MANE] = {.offset = 1219, .count = 1},
+    [SPECIES_IRON_BUNDLE] = {.offset = 1220, .count = 1},
+    [SPECIES_IRON_HANDS] = {.offset = 1221, .count = 1},
+    [SPECIES_GLIMMET] = {.offset = 1222, .count = 1},
+    [SPECIES_GLIMMORA] = {.offset = 1223, .count = 2},
+    [SPECIES_GIMMIGHOUL] = {.offset = 1225, .count = 1},
+    [SPECIES_GIMMIGHOUL_ROAMING] = {.offset = 1226, .count = 1},
+    [SPECIES_GHOLDENGO] = {.offset = 1227, .count = 1},
+    [SPECIES_CHIEN_PAO] = {.offset = 1228, .count = 1},
+    [SPECIES_TING_LU] = {.offset = 1229, .count = 1},
+    [SPECIES_CHI_YU] = {.offset = 1230, .count = 1},
+    [SPECIES_ROARING_MOON] = {.offset = 1231, .count = 1},
+    [SPECIES_IRON_VALIANT] = {.offset = 1232, .count = 1},
+    [SPECIES_WALKING_WAKE] = {.offset = 1233, .count = 1},
+    [SPECIES_OGERPON] = {.offset = 1234, .count = 1},
+    [SPECIES_OGERPON_WELLSPRING] = {.offset = 1235, .count = 1},
+    [SPECIES_OGERPON_HEARTHFLAME] = {.offset = 1236, .count = 1},
+    [SPECIES_OGERPON_CORNERSTONE] = {.offset = 1237, .count = 1},
+    [SPECIES_ARCHALUDON] = {.offset = 1238, .count = 1},
+    [SPECIES_GOUGING_FIRE] = {.offset = 1239, .count = 1},
+    [SPECIES_RAGING_BOLT] = {.offset = 1240, .count = 2},
+    [SPECIES_QUAXLY] = {.offset = 1242, .count = 1},
+    [SPECIES_QUAXWELL] = {.offset = 1243, .count = 1},
+    [SPECIES_QUAQUAVAL] = {.offset = 1244, .count = 1},
+    [SPECIES_ENAMORUS] = {.offset = 1245, .count = 1},
+    [SPECIES_FEZANDIPITI] = {.offset = 1246, .count = 1},
+    [SPECIES_KORAIDON] = {.offset = 1247, .count = 1},
+    [SPECIES_MIRAIDON] = {.offset = 1248, .count = 1},
+    [SPECIES_MUNKIDORI] = {.offset = 1249, .count = 1},
+    [SPECIES_OKIDOGI] = {.offset = 1250, .count = 1},
+    [SPECIES_PECHARUNT] = {.offset = 1251, .count = 1},
+    [SPECIES_TERAPAGOS] = {.offset = 1252, .count = 1},
+    [SPECIES_WO_CHIEN] = {.offset = 1253, .count = 1},
+    [SPECIES_BASCULIN_WHITE_STRIPED] = {.offset = 1254, .count = 1},
+    [SPECIES_CAPSAKID] = {.offset = 1255, .count = 1},
+    [SPECIES_CHARCADET] = {.offset = 1256, .count = 1},
+    [SPECIES_FLITTLE] = {.offset = 1257, .count = 1},
+    [SPECIES_GREAVARD] = {.offset = 1258, .count = 1},
+    [SPECIES_GROWLITHE_HISUI] = {.offset = 1259, .count = 1},
+    [SPECIES_ORTHWORM] = {.offset = 1260, .count = 1},
+    [SPECIES_POLTCHAGEIST] = {.offset = 1261, .count = 1},
+    [SPECIES_QWILFISH_HISUI] = {.offset = 1262, .count = 1},
+    [SPECIES_SNEASEL_HISUI] = {.offset = 1263, .count = 1},
+    [SPECIES_TADBULB] = {.offset = 1264, .count = 1},
+    [SPECIES_TANDEMAUS] = {.offset = 1265, .count = 1},
+    [SPECIES_TAUROS_PALDEA_COMBAT] = {.offset = 1266, .count = 1},
+    [SPECIES_TAUROS_PALDEA_BLAZE] = {.offset = 1267, .count = 1},
+    [SPECIES_TAUROS_PALDEA_AQUA] = {.offset = 1268, .count = 1},
+    [SPECIES_TINKATINK] = {.offset = 1269, .count = 1},
+    [SPECIES_ZORUA_HISUI] = {.offset = 1270, .count = 1},
+    [SPECIES_VOLTORB_HISUI] = {.offset = 1271, .count = 1},
+    [SPECIES_ELECTRODE_HISUI] = {.offset = 1272, .count = 1},
+    [SPECIES_LILLIGANT_HISUI] = {.offset = 1273, .count = 1},
+    [SPECIES_BRAVIARY_HISUI] = {.offset = 1274, .count = 1},
+    [SPECIES_SLIGGOO_HISUI] = {.offset = 1275, .count = 1},
+    [SPECIES_URSALUNA_BLOODMOON] = {.offset = 1276, .count = 1},
+    [SPECIES_WYRDEER] = {.offset = 1277, .count = 1},
+    [SPECIES_KLEAVOR] = {.offset = 1278, .count = 1},
+    [SPECIES_URSALUNA] = {.offset = 1279, .count = 1},
+    [SPECIES_BASCULEGION] = {.offset = 1280, .count = 1},
+    [SPECIES_SNEASLER] = {.offset = 1281, .count = 1},
+    [SPECIES_OVERQWIL] = {.offset = 1282, .count = 1},
+    [SPECIES_LECHONK] = {.offset = 1283, .count = 1},
+    [SPECIES_OINKOLOGNE] = {.offset = 1284, .count = 1},
+    [SPECIES_TAROUNTULA] = {.offset = 1285, .count = 1},
+    [SPECIES_SPIDOPS] = {.offset = 1286, .count = 1},
+    [SPECIES_NYMBLE] = {.offset = 1287, .count = 1},
+    [SPECIES_LOKIX] = {.offset = 1288, .count = 1},
+    [SPECIES_PAWMI] = {.offset = 1289, .count = 1},
+    [SPECIES_PAWMO] = {.offset = 1290, .count = 1},
+    [SPECIES_PAWMOT] = {.offset = 1291, .count = 1},
+    [SPECIES_MAUSHOLD] = {.offset = 1292, .count = 1},
+    [SPECIES_FIDOUGH] = {.offset = 1293, .count = 1},
+    [SPECIES_DACHSBUN] = {.offset = 1294, .count = 1},
+    [SPECIES_SMOLIV] = {.offset = 1295, .count = 1},
+    [SPECIES_DOLLIV] = {.offset = 1296, .count = 1},
+    [SPECIES_ARBOLIVA] = {.offset = 1297, .count = 1},
+    [SPECIES_SQUAWKABILLY] = {.offset = 1298, .count = 1},
+    [SPECIES_ARMAROUGE] = {.offset = 1299, .count = 1},
+    [SPECIES_CERULEDGE] = {.offset = 1300, .count = 1},
+    [SPECIES_BELLIBOLT] = {.offset = 1301, .count = 1},
+    [SPECIES_WATTREL] = {.offset = 1302, .count = 1},
+    [SPECIES_KILOWATTREL] = {.offset = 1303, .count = 1},
+    [SPECIES_MASCHIFF] = {.offset = 1304, .count = 1},
+    [SPECIES_MABOSSTIFF] = {.offset = 1305, .count = 1},
+    [SPECIES_SHROODLE] = {.offset = 1306, .count = 1},
+    [SPECIES_GRAFAIAI] = {.offset = 1307, .count = 1},
+    [SPECIES_BRAMBLIN] = {.offset = 1308, .count = 1},
+    [SPECIES_BRAMBLEGHAST] = {.offset = 1309, .count = 1},
+    [SPECIES_TOEDSCOOL] = {.offset = 1310, .count = 1},
+    [SPECIES_TOEDSCRUEL] = {.offset = 1311, .count = 1},
+    [SPECIES_KLAWF] = {.offset = 1312, .count = 1},
+    [SPECIES_SCOVILLAIN] = {.offset = 1313, .count = 2},
+    [SPECIES_RELLOR] = {.offset = 1315, .count = 1},
+    [SPECIES_RABSCA] = {.offset = 1316, .count = 1},
+    [SPECIES_ESPATHRA] = {.offset = 1317, .count = 1},
+    [SPECIES_TINKATUFF] = {.offset = 1318, .count = 1},
+    [SPECIES_TINKATON] = {.offset = 1319, .count = 1},
+    [SPECIES_WIGLETT] = {.offset = 1320, .count = 1},
+    [SPECIES_WUGTRIO] = {.offset = 1321, .count = 1},
+    [SPECIES_BOMBIRDIER] = {.offset = 1322, .count = 1},
+    [SPECIES_VAROOM] = {.offset = 1323, .count = 1},
+    [SPECIES_REVAVROOM] = {.offset = 1324, .count = 1},
+    [SPECIES_CYCLIZAR] = {.offset = 1325, .count = 1},
+    [SPECIES_HOUNDSTONE] = {.offset = 1326, .count = 1},
+    [SPECIES_FLAMIGO] = {.offset = 1327, .count = 1},
+    [SPECIES_CETODDLE] = {.offset = 1328, .count = 1},
+    [SPECIES_CETITAN] = {.offset = 1329, .count = 1},
+    [SPECIES_VELUZA] = {.offset = 1330, .count = 1},
+    [SPECIES_CLODSIRE] = {.offset = 1331, .count = 1},
+    [SPECIES_DUDUNSPARCE] = {.offset = 1332, .count = 1},
+    [SPECIES_SCREAM_TAIL] = {.offset = 1333, .count = 1},
+    [SPECIES_BRUTE_BONNET] = {.offset = 1334, .count = 1},
+    [SPECIES_SLITHER_WING] = {.offset = 1335, .count = 1},
+    [SPECIES_SANDY_SHOCKS] = {.offset = 1336, .count = 1},
+    [SPECIES_IRON_TREADS] = {.offset = 1337, .count = 1},
+    [SPECIES_IRON_JUGULIS] = {.offset = 1338, .count = 1},
+    [SPECIES_IRON_MOTH] = {.offset = 1339, .count = 1},
+    [SPECIES_IRON_THORNS] = {.offset = 1340, .count = 1},
+    [SPECIES_FRIGIBAX] = {.offset = 1341, .count = 1},
+    [SPECIES_ARCTIBAX] = {.offset = 1342, .count = 1},
+    [SPECIES_BAXCALIBUR] = {.offset = 1343, .count = 2},
+    [SPECIES_IRON_LEAVES] = {.offset = 1345, .count = 2},
+    [SPECIES_DIPPLIN] = {.offset = 1347, .count = 1},
+    [SPECIES_SINISTCHA] = {.offset = 1348, .count = 1},
+    [SPECIES_HYDRAPPLE] = {.offset = 1349, .count = 1},
+    [SPECIES_IRON_BOULDER] = {.offset = 1350, .count = 1},
+    [SPECIES_IRON_CROWN] = {.offset = 1351, .count = 2},
+    [SPECIES_ARCANINE_HISUI] = {.offset = 1353, .count = 1},
+    [SPECIES_TYPHLOSION_HISUI] = {.offset = 1354, .count = 1},
+    [SPECIES_SAMUROTT_HISUI] = {.offset = 1355, .count = 1},
+    [SPECIES_ZOROARK_HISUI] = {.offset = 1356, .count = 1},
+    [SPECIES_GOODRA_HISUI] = {.offset = 1357, .count = 1},
+    [SPECIES_AVALUGG_HISUI] = {.offset = 1358, .count = 1},
+    [SPECIES_DECIDUEYE_HISUI] = {.offset = 1359, .count = 1},
+    [SPECIES_BASCULEGION_F] = {.offset = 1360, .count = 1},
 };
 
 const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternatives[] =
 {
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_LEAF_STORM, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_CHLOROPHYLL,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_LEAF_STORM, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_CHLOROPHYLL,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
     {
         .name = _("Mega Special Attacker"),
         .preset =
@@ -12034,6 +13102,42 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_MODEST,
             .ability = ABILITY_THICK_FAT,
             .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_LEAF_STORM, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_CHLOROPHYLL,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Dragon Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_DRAGON_DANCE, MOVE_FLARE_BLITZ, MOVE_ROCK_SLIDE, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_SOLAR_POWER,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Dragon Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_DRAGON_DANCE, MOVE_FLARE_BLITZ, MOVE_ROCK_SLIDE, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SOLAR_POWER,
+            .statPoints = {2, 32, 0, 0, 0, 32},
         },
     },
     {
@@ -12073,6 +13177,30 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_WATER_SPOUT, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_RAIN_DISH,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_WATER_SPOUT, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_TORRENT,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Physical Attacker"),
         .preset =
         {
@@ -12097,6 +13225,66 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ELECTROWEB, MOVE_BUG_BITE, MOVE_PROTECT, MOVE_STRING_SHOT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SHIELD_DUST,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ELECTROWEB, MOVE_IRON_DEFENSE, MOVE_STRING_SHOT, MOVE_NONE},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_SHED_SKIN,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Quiver Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_QUIVER_DANCE, MOVE_BUG_BUZZ, MOVE_HURRICANE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_COMPOUND_EYES,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ELECTROWEB, MOVE_BUG_BITE, MOVE_STRING_SHOT, MOVE_NONE},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SHIELD_DUST,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_SKITTER_SMACK, MOVE_FACADE, MOVE_BUG_BITE, MOVE_ELECTROWEB},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_SHED_SKIN,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
         .name = _("Mega Physical Attacker"),
         .preset =
         {
@@ -12109,6 +13297,42 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_ELECTROWEB, MOVE_LUNGE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SWARM,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_BRAVE_BIRD, MOVE_DOUBLE_EDGE, MOVE_STEEL_WING, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_BIG_PECKS,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_BRAVE_BIRD, MOVE_PROTECT, MOVE_REFLECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_BIG_PECKS,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Mega Tailwind Support"),
         .preset =
         {
@@ -12118,6 +13342,102 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_TIMID,
             .ability = ABILITY_NO_GUARD,
             .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HURRICANE, MOVE_PROTECT, MOVE_REFLECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_NO_GUARD,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_TAUNT, MOVE_DOUBLE_EDGE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_HUSTLE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_TAUNT, MOVE_FACADE, MOVE_PROTECT},
+            .item = ITEM_FLAME_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_GUTS,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_DOUBLE_EDGE, MOVE_PROTECT, MOVE_ROOST},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SNIPER,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_DOUBLE_EDGE, MOVE_PROTECT, MOVE_ROOST},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_INTIMIDATE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Coil Setup"),
+        .preset =
+        {
+            .moves = {MOVE_COIL, MOVE_GUNK_SHOT, MOVE_EARTHQUAKE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_INTIMIDATE,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_SLUDGE_WAVE, MOVE_DARK_PULSE, MOVE_GIGA_DRAIN, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_INTIMIDATE,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_VOLT_TACKLE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_LIGHTNING_ROD,
+            .statPoints = {32, 0, 2, 0, 0, 32},
         },
     },
     {
@@ -12157,6 +13477,114 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_EARTHQUAKE, MOVE_ROCK_SLIDE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_SAND_RUSH,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_EARTHQUAKE, MOVE_ROCK_SLIDE, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_SAND_RUSH,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Hone Claws Setup"),
+        .preset =
+        {
+            .moves = {MOVE_HONE_CLAWS, MOVE_POISON_JAB, MOVE_BODY_SLAM, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_HUSTLE,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Hone Claws Setup"),
+        .preset =
+        {
+            .moves = {MOVE_HONE_CLAWS, MOVE_POISON_JAB, MOVE_BODY_SLAM, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_HUSTLE,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_SLUDGE_WAVE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_SHEER_FORCE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Hone Claws Setup"),
+        .preset =
+        {
+            .moves = {MOVE_HONE_CLAWS, MOVE_POISON_JAB, MOVE_HEAD_SMASH, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_HUSTLE,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Hone Claws Setup"),
+        .preset =
+        {
+            .moves = {MOVE_HONE_CLAWS, MOVE_POISON_JAB, MOVE_HEAD_SMASH, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_HUSTLE,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_EARTHQUAKE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SHEER_FORCE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_DAZZLING_GLEAM, MOVE_BLIZZARD, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_FRIEND_GUARD,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
         .name = _("Mega Special Attacker"),
         .preset =
         {
@@ -12166,6 +13594,30 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_CALM,
             .ability = ABILITY_MAGIC_BOUNCE,
             .statPoints = {32, 0, 2, 0, 32, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_PLAY_ROUGH, MOVE_METEOR_MASH, MOVE_BODY_SLAM, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_UNAWARE,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Howl Setup"),
+        .preset =
+        {
+            .moves = {MOVE_HOWL, MOVE_FLARE_BLITZ, MOVE_BODY_SLAM, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_DROUGHT,
+            .statPoints = {32, 32, 2, 0, 0, 0},
         },
     },
     {
@@ -12181,6 +13633,246 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_DOUBLE_EDGE, MOVE_PLAY_ROUGH, MOVE_WILD_CHARGE, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_FRIEND_GUARD,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_HYPER_VOICE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_COMPETITIVE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_BRAVE_BIRD, MOVE_CROSS_POISON, MOVE_CRUNCH, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_INNER_FOCUS,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_BRAVE_BIRD, MOVE_CROSS_POISON, MOVE_CRUNCH, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_INNER_FOCUS,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_LEAF_STORM, MOVE_SLUDGE_BOMB, MOVE_DAZZLING_GLEAM, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_CHLOROPHYLL,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Sleep Control"),
+        .preset =
+        {
+            .moves = {MOVE_SLEEP_POWDER, MOVE_POLLEN_PUFF, MOVE_LEAF_STORM, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_CHLOROPHYLL,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_PETAL_BLIZZARD, MOVE_BODY_SLAM, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_EFFECT_SPORE,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Rage Powder Support"),
+        .preset =
+        {
+            .moves = {MOVE_RAGE_POWDER, MOVE_SLEEP_POWDER, MOVE_LEECH_LIFE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_DRY_SKIN,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_LEECH_LIFE, MOVE_SEED_BOMB, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_DRY_SKIN,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Rage Powder Support"),
+        .preset =
+        {
+            .moves = {MOVE_RAGE_POWDER, MOVE_SLEEP_POWDER, MOVE_LEECH_LIFE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_COMPOUND_EYES,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Rage Powder Support"),
+        .preset =
+        {
+            .moves = {MOVE_RAGE_POWDER, MOVE_SLEEP_POWDER, MOVE_SLUDGE_WAVE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_TINTED_LENS,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_EARTHQUAKE, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_ARENA_TRAP,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_EARTHQUAKE, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_ARENA_TRAP,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_DOUBLE_EDGE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_TECHNICIAN,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_DOUBLE_EDGE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_TECHNICIAN,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_AQUA_TAIL, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_CLOUD_NINE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_AQUA_TAIL, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SWIFT_SWIM,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_ENCORE, MOVE_CLOSE_COMBAT, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_DEFIANT,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_ENCORE, MOVE_CLOSE_COMBAT, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_DEFIANT,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Howl Setup"),
+        .preset =
+        {
+            .moves = {MOVE_HOWL, MOVE_FLARE_BLITZ, MOVE_CLOSE_COMBAT, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_INTIMIDATE,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
         .name = _("Physical Attacker"),
         .preset =
         {
@@ -12190,6 +13882,66 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_ADAMANT,
             .ability = ABILITY_INTIMIDATE,
             .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_LIQUIDATION, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SWIFT_SWIM,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_LIQUIDATION, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SWIFT_SWIM,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_SURF, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_SWIFT_SWIM,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_ALLY_SWITCH, MOVE_PSYCHIC, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_MAGIC_GUARD,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_ALLY_SWITCH, MOVE_PSYCHIC, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_MAGIC_GUARD,
+            .statPoints = {32, 0, 16, 0, 18, 0},
         },
     },
     {
@@ -12217,6 +13969,66 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Bulk Up Setup"),
+        .preset =
+        {
+            .moves = {MOVE_BULK_UP, MOVE_CLOSE_COMBAT, MOVE_EARTHQUAKE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_NO_GUARD,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Bulk Up Setup"),
+        .preset =
+        {
+            .moves = {MOVE_BULK_UP, MOVE_CLOSE_COMBAT, MOVE_EARTHQUAKE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_NO_GUARD,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Wide Guard Support"),
+        .preset =
+        {
+            .moves = {MOVE_WIDE_GUARD, MOVE_HELPING_HAND, MOVE_CLOSE_COMBAT, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_NO_GUARD,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_POWER_WHIP, MOVE_POISON_JAB, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_CHLOROPHYLL,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Sleep Control"),
+        .preset =
+        {
+            .moves = {MOVE_SLEEP_POWDER, MOVE_POWER_WHIP, MOVE_PROTECT, MOVE_ENCORE},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_CHLOROPHYLL,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Support"),
         .preset =
         {
@@ -12241,6 +14053,54 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_GUNK_SHOT, MOVE_PROTECT, MOVE_REFLECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_LIQUID_OOZE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_GUNK_SHOT, MOVE_PROTECT, MOVE_REFLECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_CLEAR_BODY,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Wide Guard Support"),
+        .preset =
+        {
+            .moves = {MOVE_WIDE_GUARD, MOVE_EARTHQUAKE, MOVE_PROTECT, MOVE_IRON_DEFENSE},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_STURDY,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Wide Guard Support"),
+        .preset =
+        {
+            .moves = {MOVE_WIDE_GUARD, MOVE_EARTHQUAKE, MOVE_PROTECT, MOVE_IRON_DEFENSE},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_STURDY,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
         .name = _("Bulky Setup"),
         .preset =
         {
@@ -12250,6 +14110,42 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_ADAMANT,
             .ability = ABILITY_STURDY,
             .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_FLARE_BLITZ, MOVE_HIGH_HORSEPOWER, MOVE_PLAY_ROUGH, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_FLAME_BODY,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_FLARE_BLITZ, MOVE_HIGH_HORSEPOWER, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_RECKLESS,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_AQUA_TAIL, MOVE_ZEN_HEADBUTT, MOVE_EARTHQUAKE, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_REGENERATOR,
+            .statPoints = {32, 32, 2, 0, 0, 0},
         },
     },
     {
@@ -12277,6 +14173,54 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_STEEL_BEAM, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_STURDY,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_STEEL_BEAM, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_STURDY,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_AIR_CUTTER, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_DEFIANT,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_BRAVE_BIRD, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_EARLY_BIRD,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Wallbreaker"),
         .preset =
         {
@@ -12286,6 +14230,102 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_JOLLY,
             .ability = ABILITY_EARLY_BIRD,
             .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_AQUA_TAIL, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_ICE_BODY,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_BLIZZARD, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_FUR_COAT,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_DISABLE, MOVE_GUNK_SHOT, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_POISON_TOUCH,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_DISABLE, MOVE_GUNK_SHOT, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_POISON_TOUCH,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_LIQUIDATION, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SKILL_LINK,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_ICICLE_SPEAR, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_SKILL_LINK,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_ALLY_SWITCH, MOVE_SLUDGE_WAVE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_LEVITATE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_ALLY_SWITCH, MOVE_SLUDGE_WAVE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_LEVITATE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
         },
     },
     {
@@ -12313,6 +14353,246 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Wide Guard Support"),
+        .preset =
+        {
+            .moves = {MOVE_WIDE_GUARD, MOVE_TAUNT, MOVE_EARTHQUAKE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_STURDY,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_ZEN_HEADBUTT, MOVE_BODY_SLAM, MOVE_BRICK_BREAK, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_INNER_FOCUS,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_ZEN_HEADBUTT, MOVE_BODY_SLAM, MOVE_BRICK_BREAK, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_INNER_FOCUS,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_CRABHAMMER, MOVE_PROTECT, MOVE_IRON_DEFENSE},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SHEER_FORCE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Wide Guard Support"),
+        .preset =
+        {
+            .moves = {MOVE_WIDE_GUARD, MOVE_KNOCK_OFF, MOVE_CRABHAMMER, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_SHEER_FORCE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_DISCHARGE, MOVE_SIGNAL_BEAM, MOVE_SWIFT, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_AFTERMATH,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_DISCHARGE, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_ELECTRIC_SURGE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_LEAF_STORM, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_CHLOROPHYLL,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_LEAF_STORM, MOVE_PSYCHIC, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_HARVEST,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_EARTHQUAKE, MOVE_PROTECT, MOVE_IRON_DEFENSE},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_LIGHTNING_ROD,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_EARTHQUAKE, MOVE_PROTECT, MOVE_WILL_O_WISP},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_LIGHTNING_ROD,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Wide Guard Support"),
+        .preset =
+        {
+            .moves = {MOVE_WIDE_GUARD, MOVE_FAKE_OUT, MOVE_HIGH_JUMP_KICK, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_UNBURDEN,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_HIGH_JUMP_KICK, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_IRON_FIST,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_BLIZZARD, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_CLOUD_NINE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_GUNK_SHOT, MOVE_BODY_SLAM, MOVE_ASSURANCE, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_NEUTRALIZING_GAS,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_GUNK_SHOT, MOVE_BODY_SLAM, MOVE_ASSURANCE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_NEUTRALIZING_GAS,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_EARTHQUAKE, MOVE_PROTECT, MOVE_SCARY_FACE},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_LIGHTNING_ROD,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_EARTHQUAKE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_LIGHTNING_ROD,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_HYPER_VOICE, MOVE_BLIZZARD, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_HEALER,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_LEAF_STORM, MOVE_SLUDGE_BOMB, MOVE_ANCIENT_POWER, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_REGENERATOR,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
         .name = _("Physical Attacker"),
         .preset =
         {
@@ -12334,6 +14614,66 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_BRAVE,
             .ability = ABILITY_PARENTAL_BOND,
             .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_SURF, MOVE_PROTECT, MOVE_DISABLE},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_SWIFT_SWIM,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_SURF, MOVE_PROTECT, MOVE_DISABLE},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_SNIPER,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_AQUA_TAIL, MOVE_PROTECT, MOVE_AGILITY},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_LIGHTNING_ROD,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_AQUA_TAIL, MOVE_PROTECT, MOVE_AGILITY},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_LIGHTNING_ROD,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_SURF, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_NATURAL_CURE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
         },
     },
     {
@@ -12361,6 +14701,66 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_DAZZLING_GLEAM, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_FILTER,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_AERIAL_ACE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_TECHNICIAN,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_ZEN_HEADBUTT, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_DRY_SKIN,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Redirection Support"),
+        .preset =
+        {
+            .moves = {MOVE_FOLLOW_ME, MOVE_HELPING_HAND, MOVE_SUPERCELL_SLAM, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_VITAL_SPIRIT,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_FLARE_BLITZ, MOVE_BODY_SLAM, MOVE_POISON_JAB, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_FLAME_BODY,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Mega Physical Attacker"),
         .preset =
         {
@@ -12369,6 +14769,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .requiredItem = ITEM_PINSIRITE,
             .nature = NATURE_JOLLY,
             .ability = ABILITY_AERILATE,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_LUNGE, MOVE_CLOSE_COMBAT, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_MOXIE,
             .statPoints = {2, 32, 0, 0, 0, 32},
         },
     },
@@ -12385,6 +14797,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_FACADE, MOVE_BOUNCE, MOVE_TACKLE, MOVE_NONE},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_RATTLED,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Mega Setup Sweeper"),
         .preset =
         {
@@ -12397,6 +14821,150 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Dragon Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_DRAGON_DANCE, MOVE_AQUA_TAIL, MOVE_EARTHQUAKE, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_INTIMIDATE,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_AQUA_TAIL, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_WATER_ABSORB,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Manual Transform"),
+        .preset =
+        {
+            .moves = {MOVE_TRANSFORM, MOVE_NONE, MOVE_NONE, MOVE_NONE},
+            .item = ITEM_QUICK_POWDER,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_LIMBER,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_DOUBLE_EDGE, MOVE_IRON_TAIL, MOVE_TRAILBLAZE, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_ADAPTABILITY,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_SURF, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_WATER_ABSORB,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_DISCHARGE, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_VOLT_ABSORB,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HELPING_HAND, MOVE_FLARE_BLITZ, MOVE_PROTECT},
+            .item = ITEM_FLAME_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_GUTS,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_DOUBLE_EDGE, MOVE_ZEN_HEADBUTT, MOVE_IRON_TAIL, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_DOWNLOAD,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_SURF, MOVE_PROTECT, MOVE_REFLECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_SWIFT_SWIM,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_SURF, MOVE_PROTECT, MOVE_REFLECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_SWIFT_SWIM,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_ROCK_SLIDE, MOVE_PROTECT, MOVE_REFLECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SWIFT_SWIM,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_AQUA_TAIL, MOVE_PROTECT, MOVE_REFLECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SWIFT_SWIM,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Mega Tailwind Support"),
         .preset =
         {
@@ -12406,6 +14974,42 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_JOLLY,
             .ability = ABILITY_TOUGH_CLAWS,
             .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Dragon Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_DRAGON_DANCE, MOVE_ROCK_SLIDE, MOVE_EARTHQUAKE, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_UNNERVE,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_DOUBLE_EDGE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_THICK_FAT,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_BRAVE_BIRD, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_PRESSURE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
         },
     },
     {
@@ -12433,6 +15037,30 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_BREAKING_SWIPE, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_SHED_SKIN,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_BREAKING_SWIPE, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_SHED_SKIN,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
         .name = _("Mega Tailwind Support"),
         .preset =
         {
@@ -12442,6 +15070,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_MODEST,
             .ability = ABILITY_MULTISCALE,
             .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_DRAGON_CLAW, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_MULTISCALE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
         },
     },
     {
@@ -12505,6 +15145,30 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_SEED_BOMB, MOVE_BODY_SLAM, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_LEAF_GUARD,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_LEAF_STORM, MOVE_DAZZLING_GLEAM, MOVE_EARTH_POWER, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_LEAF_GUARD,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
         .name = _("Mega Special Attacker"),
         .preset =
         {
@@ -12513,6 +15177,42 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .requiredItem = ITEM_MEGANIUMITE,
             .nature = NATURE_MODEST,
             .ability = ABILITY_MEGA_SOL,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_GIGA_DRAIN, MOVE_DAZZLING_GLEAM, MOVE_EARTH_POWER, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_TRIAGE,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_ERUPTION, MOVE_EXTRASENSORY, MOVE_SWIFT, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_FLASH_FIRE,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_ERUPTION, MOVE_EXTRASENSORY, MOVE_SWIFT, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_FLASH_FIRE,
             .statPoints = {2, 0, 0, 32, 0, 32},
         },
     },
@@ -12526,6 +15226,30 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_MODEST,
             .ability = ABILITY_BLAZE,
             .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_FAKE_TEARS, MOVE_AQUA_TAIL, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SHEER_FORCE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_FAKE_TEARS, MOVE_AQUA_TAIL, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SHEER_FORCE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
         },
     },
     {
@@ -12553,6 +15277,126 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Tidy Up Setup"),
+        .preset =
+        {
+            .moves = {MOVE_TIDY_UP, MOVE_DOUBLE_EDGE, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_FRISK,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Redirection Support"),
+        .preset =
+        {
+            .moves = {MOVE_FOLLOW_ME, MOVE_HELPING_HAND, MOVE_DOUBLE_EDGE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_FRISK,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Nasty Plot Setup"),
+        .preset =
+        {
+            .moves = {MOVE_NASTY_PLOT, MOVE_HYPER_VOICE, MOVE_HURRICANE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_TINTED_LENS,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HYPER_VOICE, MOVE_PROTECT, MOVE_REFLECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_TINTED_LENS,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_ENCORE, MOVE_BUG_BUZZ, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_RATTLED,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_BUG_BUZZ, MOVE_AIR_CUTTER, MOVE_FOCUS_BLAST, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_EARLY_BIRD,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Hone Claws Setup"),
+        .preset =
+        {
+            .moves = {MOVE_HONE_CLAWS, MOVE_MEGAHORN, MOVE_POISON_JAB, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_SNIPER,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_FIRST_IMPRESSION, MOVE_POISON_JAB, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_INSOMNIA,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_BRAVE_BIRD, MOVE_CROSS_POISON, MOVE_PSYCHIC_FANGS, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_INNER_FOCUS,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_DISCHARGE, MOVE_PROTECT, MOVE_ELECTROWEB},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_VOLT_ABSORB,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Bulky Attacker"),
         .preset =
         {
@@ -12562,6 +15406,114 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_MODEST,
             .ability = ABILITY_VOLT_ABSORB,
             .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_VOLT_TACKLE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_LIGHTNING_ROD,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_DAZZLING_GLEAM, MOVE_BLIZZARD, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_FRIEND_GUARD,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Nasty Plot Setup"),
+        .preset =
+        {
+            .moves = {MOVE_NASTY_PLOT, MOVE_HYPER_VOICE, MOVE_DAZZLING_GLEAM, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_FRIEND_GUARD,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Nasty Plot Setup"),
+        .preset =
+        {
+            .moves = {MOVE_NASTY_PLOT, MOVE_HYPER_VOICE, MOVE_DAZZLING_GLEAM, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_SUPER_LUCK,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Nasty Plot Setup"),
+        .preset =
+        {
+            .moves = {MOVE_NASTY_PLOT, MOVE_HYPER_VOICE, MOVE_DAZZLING_GLEAM, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_SERENE_GRACE,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_ALLY_SWITCH, MOVE_PSYCHIC, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_MAGIC_BOUNCE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_ALLY_SWITCH, MOVE_PSYCHIC, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_MAGIC_BOUNCE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_DISCHARGE, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_STATIC,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_DISCHARGE, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_STATIC,
+            .statPoints = {32, 0, 16, 0, 18, 0},
         },
     },
     {
@@ -12577,6 +15529,102 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_DISCHARGE, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_STATIC,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Quiver Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_QUIVER_DANCE, MOVE_LEAF_STORM, MOVE_DAZZLING_GLEAM, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_CHLOROPHYLL,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_AQUA_TAIL, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_HUGE_POWER,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_AQUA_TAIL, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_HUGE_POWER,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HELPING_HAND, MOVE_HEAD_SMASH, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_ROCK_HEAD,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_SURF, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_DRIZZLE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_SEED_BOMB, MOVE_AERIAL_ACE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_CHLOROPHYLL,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_SEED_BOMB, MOVE_AERIAL_ACE, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_CHLOROPHYLL,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Bulky Attacker"),
         .preset =
         {
@@ -12585,6 +15633,114 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .requiredItem = ITEM_NONE,
             .nature = NATURE_JOLLY,
             .ability = ABILITY_INFILTRATOR,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_DOUBLE_EDGE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SKILL_LINK,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_SEED_BOMB, MOVE_FACADE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_CHLOROPHYLL,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_LEAF_STORM, MOVE_OVERHEAT, MOVE_DAZZLING_GLEAM, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_EARLY_BIRD,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_BUG_BUZZ, MOVE_PROTECT, MOVE_ROOST},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_SPEED_BOOST,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_EARTHQUAKE, MOVE_AQUA_TAIL, MOVE_ROCK_SLIDE, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_UNAWARE,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_EARTHQUAKE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_WATER_ABSORB,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_PSYCHIC, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_MAGIC_BOUNCE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_INNER_FOCUS,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_BRAVE_BIRD, MOVE_SUCKER_PUNCH, MOVE_FACADE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_PRANKSTER,
             .statPoints = {2, 32, 0, 0, 0, 32},
         },
     },
@@ -12598,6 +15754,102 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_QUIET,
             .ability = ABILITY_REGENERATOR,
             .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Nasty Plot Setup"),
+        .preset =
+        {
+            .moves = {MOVE_NASTY_PLOT, MOVE_SHADOW_BALL, MOVE_HYPER_VOICE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_LEVITATE,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Fast Utility"),
+        .preset =
+        {
+            .moves = {MOVE_HIDDEN_POWER, MOVE_STORED_POWER, MOVE_NONE, MOVE_NONE},
+            .item = ITEM_CHOICE_SPECS,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_LEVITATE,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Fast Utility"),
+        .preset =
+        {
+            .moves = {MOVE_MIRROR_COAT, MOVE_COUNTER, MOVE_ENCORE, MOVE_AMNESIA},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SHADOW_TAG,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_HYPER_VOICE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_STRONG_JAW,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_LUNGE, MOVE_EARTHQUAKE, MOVE_ROCK_SLIDE, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_STURDY,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_HARD_PRESS, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_OVERCOAT,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Coil Setup"),
+        .preset =
+        {
+            .moves = {MOVE_COIL, MOVE_DOUBLE_EDGE, MOVE_EARTHQUAKE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_SERENE_GRACE,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_TAUNT, MOVE_EARTHQUAKE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_HYPER_CUTTER,
+            .statPoints = {32, 0, 2, 0, 0, 32},
         },
     },
     {
@@ -12625,6 +15877,42 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_ENCORE, MOVE_PLAY_ROUGH, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_INTIMIDATE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_ENCORE, MOVE_PLAY_ROUGH, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_INTIMIDATE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_TAUNT, MOVE_AQUA_TAIL, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_INTIMIDATE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Mega Setup Sweeper"),
         .preset =
         {
@@ -12637,6 +15925,30 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_HARD_PRESS, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_TECHNICIAN,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Shell Smash Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SHELL_SMASH, MOVE_ROCK_SLIDE, MOVE_EARTHQUAKE, MOVE_PROTECT},
+            .item = ITEM_WHITE_HERB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_STURDY,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
         .name = _("Mega Physical Attacker"),
         .preset =
         {
@@ -12646,6 +15958,162 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_ADAMANT,
             .ability = ABILITY_SKILL_LINK,
             .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_CLOSE_COMBAT, MOVE_FACADE, MOVE_PROTECT},
+            .item = ITEM_FLAME_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_GUTS,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_ICICLE_CRASH, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_INNER_FOCUS,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HELPING_HAND, MOVE_FACADE, MOVE_PROTECT},
+            .item = ITEM_TOXIC_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_QUICK_FEET,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HELPING_HAND, MOVE_FACADE, MOVE_PROTECT},
+            .item = ITEM_FLAME_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_GUTS,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_OVERHEAT, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_FLAME_BODY,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_FLARE_BLITZ, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_SIMPLE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_EARTHQUAKE, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_THICK_FAT,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_EARTHQUAKE, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_THICK_FAT,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_SURF, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_REGENERATOR,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_WATERFALL, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_MOODY,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_LIQUIDATION, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_MOODY,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_BLIZZARD, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_INSOMNIA,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_SURF, MOVE_BLIZZARD, MOVE_HURRICANE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_WATER_ABSORB,
+            .statPoints = {2, 0, 0, 32, 0, 32},
         },
     },
     {
@@ -12670,6 +16138,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_ADAMANT,
             .ability = ABILITY_STALWART,
             .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HELPING_HAND, MOVE_OVERHEAT, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_FLASH_FIRE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
         },
     },
     {
@@ -12709,6 +16189,30 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_EARTHQUAKE, MOVE_SUPERPOWER, MOVE_HEAD_SMASH, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_SAND_VEIL,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_EARTHQUAKE, MOVE_SUPERPOWER, MOVE_HEAD_SMASH, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_STURDY,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
         .name = _("Bulky Attacker"),
         .preset =
         {
@@ -12718,6 +16222,114 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_MODEST,
             .ability = ABILITY_DOWNLOAD,
             .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_DOUBLE_EDGE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_INTIMIDATE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Redirection Support"),
+        .preset =
+        {
+            .moves = {MOVE_FOLLOW_ME, MOVE_FAKE_OUT, MOVE_WIDE_GUARD, MOVE_SPORE},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_MOODY,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_HIGH_JUMP_KICK, MOVE_PROTECT},
+            .item = ITEM_FLAME_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_GUTS,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Bulk Up Setup"),
+        .preset =
+        {
+            .moves = {MOVE_BULK_UP, MOVE_HIGH_JUMP_KICK, MOVE_EARTHQUAKE, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_INTIMIDATE,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_BLIZZARD, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_OBLIVIOUS,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Redirection Support"),
+        .preset =
+        {
+            .moves = {MOVE_FOLLOW_ME, MOVE_HELPING_HAND, MOVE_DISCHARGE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_VITAL_SPIRIT,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Redirection Support"),
+        .preset =
+        {
+            .moves = {MOVE_FOLLOW_ME, MOVE_HELPING_HAND, MOVE_FLARE_BLITZ, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_VITAL_SPIRIT,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_DOUBLE_EDGE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SAP_SIPPER,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_HYPER_VOICE, MOVE_BLIZZARD, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_HEALER,
+            .statPoints = {32, 0, 2, 32, 0, 0},
         },
     },
     {
@@ -12733,6 +16345,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_FLARE_BLITZ, MOVE_EXTREME_SPEED, MOVE_CRUNCH, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_INNER_FOCUS,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Bulky Setup"),
         .preset =
         {
@@ -12742,6 +16366,30 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_MODEST,
             .ability = ABILITY_INNER_FOCUS,
             .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HELPING_HAND, MOVE_EARTHQUAKE, MOVE_PROTECT},
+            .item = ITEM_FLAME_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_GUTS,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HELPING_HAND, MOVE_EARTHQUAKE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SHED_SKIN,
+            .statPoints = {32, 0, 2, 0, 0, 32},
         },
     },
     {
@@ -12769,6 +16417,30 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_BRAVE_BIRD, MOVE_ZEN_HEADBUTT, MOVE_EARTHQUAKE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_MULTISCALE,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_BRAVE_BIRD, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_REGENERATOR,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Support II"),
         .preset =
         {
@@ -12778,6 +16450,30 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_QUIET,
             .ability = ABILITY_NATURAL_CURE,
             .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_LEAF_STORM, MOVE_SWIFT, MOVE_DRAGON_BREATH, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_UNBURDEN,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_LEAF_STORM, MOVE_DRAGON_PULSE, MOVE_SWIFT, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_UNBURDEN,
+            .statPoints = {2, 0, 0, 32, 0, 32},
         },
     },
     {
@@ -12805,6 +16501,30 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_OVERHEAT, MOVE_SWIFT, MOVE_HEAT_WAVE, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_SPEED_BOOST,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_CLOSE_COMBAT, MOVE_FLARE_BLITZ, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_SPEED_BOOST,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
         .name = _("Special Attacker"),
         .preset =
         {
@@ -12826,6 +16546,30 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_ADAMANT,
             .ability = ABILITY_SPEED_BOOST,
             .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Wide Guard Support"),
+        .preset =
+        {
+            .moves = {MOVE_WIDE_GUARD, MOVE_AQUA_TAIL, MOVE_PROTECT, MOVE_ICY_WIND},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_TORRENT,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Wide Guard Support"),
+        .preset =
+        {
+            .moves = {MOVE_WIDE_GUARD, MOVE_HELPING_HAND, MOVE_EARTHQUAKE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_TORRENT,
+            .statPoints = {32, 0, 16, 0, 18, 0},
         },
     },
     {
@@ -12853,6 +16597,138 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HELPING_HAND, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_RATTLED,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HELPING_HAND, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_INTIMIDATE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_DOUBLE_EDGE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_GLUTTONY,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_DOUBLE_EDGE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_GLUTTONY,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ELECTROWEB, MOVE_BUG_BITE, MOVE_STRING_SHOT, MOVE_NONE},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_RUN_AWAY,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_BUG_BITE, MOVE_TACKLE, MOVE_ELECTROWEB, MOVE_IRON_DEFENSE},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_SHED_SKIN,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Quiver Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_QUIVER_DANCE, MOVE_BUG_BUZZ, MOVE_AIR_CUTTER, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_BERSERK,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_BUG_BITE, MOVE_TACKLE, MOVE_ELECTROWEB, MOVE_IRON_DEFENSE},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_SHED_SKIN,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Quiver Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_QUIVER_DANCE, MOVE_BUG_BUZZ, MOVE_SLUDGE_BOMB, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_UNAWARE,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_SURF, MOVE_PROTECT, MOVE_LEECH_SEED},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_SWIFT_SWIM,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_ENCORE, MOVE_SURF, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_SWIFT_SWIM,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Offensive"),
         .preset =
         {
@@ -12865,6 +16741,30 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_SEED_BOMB, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_CHLOROPHYLL,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_SNARL, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_CHLOROPHYLL,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Fast Attacker"),
         .preset =
         {
@@ -12874,6 +16774,78 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_JOLLY,
             .ability = ABILITY_CHLOROPHYLL,
             .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_BRAVE_BIRD, MOVE_PROTECT, MOVE_QUICK_GUARD},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SCRAPPY,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_FACADE, MOVE_PROTECT, MOVE_QUICK_GUARD},
+            .item = ITEM_FLAME_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_GUTS,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_SURF, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_KEEN_EYE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_BRAVE_BIRD, MOVE_LIQUIDATION, MOVE_BODY_SLAM, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_DRIZZLE,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_DAZZLING_GLEAM, MOVE_PSYCHIC, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_TELEPATHY,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_DAZZLING_GLEAM, MOVE_PSYCHIC, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_TELEPATHY,
+            .statPoints = {32, 0, 2, 32, 0, 0},
         },
     },
     {
@@ -12901,6 +16873,174 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_SURF, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_SWIFT_SWIM,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_BLIZZARD, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_INTIMIDATE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Sleep Control"),
+        .preset =
+        {
+            .moves = {MOVE_SPORE, MOVE_HELPING_HAND, MOVE_SEED_BOMB, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_EFFECT_SPORE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Sleep Control"),
+        .preset =
+        {
+            .moves = {MOVE_SPORE, MOVE_HELPING_HAND, MOVE_CLOSE_COMBAT, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_TECHNICIAN,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Bulk Up Setup"),
+        .preset =
+        {
+            .moves = {MOVE_BULK_UP, MOVE_DOUBLE_EDGE, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_TRUANT,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_DOUBLE_EDGE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_VITAL_SPIRIT,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_DOUBLE_EDGE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_TRUANT,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Hone Claws Setup"),
+        .preset =
+        {
+            .moves = {MOVE_HONE_CLAWS, MOVE_LEECH_LIFE, MOVE_FACADE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_COMPOUND_EYES,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_LEECH_LIFE, MOVE_AERIAL_ACE, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SPEED_BOOST,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Hone Claws Setup"),
+        .preset =
+        {
+            .moves = {MOVE_HONE_CLAWS, MOVE_POLTERGEIST, MOVE_LEECH_LIFE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_WONDER_GUARD,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_FAKE_TEARS, MOVE_DOUBLE_EDGE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SOUNDPROOF,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_TAUNT, MOVE_DOUBLE_EDGE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SOUNDPROOF,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_TAUNT, MOVE_DOUBLE_EDGE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SCRAPPY,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Wide Guard Support"),
+        .preset =
+        {
+            .moves = {MOVE_WIDE_GUARD, MOVE_FAKE_OUT, MOVE_CLOSE_COMBAT, MOVE_PROTECT},
+            .item = ITEM_FLAME_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_GUTS,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
         .name = _("Bulky Attacker"),
         .preset =
         {
@@ -12910,6 +17050,54 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_ADAMANT,
             .ability = ABILITY_THICK_FAT,
             .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_DOUBLE_EDGE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_HUGE_POWER,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_HEAD_SMASH, MOVE_EARTHQUAKE, MOVE_BODY_SLAM, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_STURDY,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_DOUBLE_EDGE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_WONDER_SKIN,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_DOUBLE_EDGE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_WONDER_SKIN,
+            .statPoints = {32, 0, 2, 0, 0, 32},
         },
     },
     {
@@ -12925,6 +17113,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Bulk Up Setup"),
+        .preset =
+        {
+            .moves = {MOVE_BULK_UP, MOVE_POLTERGEIST, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_PRANKSTER,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
         .name = _("Mega Physical Attacker"),
         .preset =
         {
@@ -12933,6 +17133,42 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .requiredItem = ITEM_MAWILITE,
             .nature = NATURE_BRAVE,
             .ability = ABILITY_HUGE_POWER,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_PLAY_ROUGH, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_INTIMIDATE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Hone Claws Setup"),
+        .preset =
+        {
+            .moves = {MOVE_HONE_CLAWS, MOVE_HEAD_SMASH, MOVE_IRON_HEAD, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_STURDY,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Hone Claws Setup"),
+        .preset =
+        {
+            .moves = {MOVE_HONE_CLAWS, MOVE_HEAD_SMASH, MOVE_IRON_HEAD, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_ROCK_HEAD,
             .statPoints = {32, 32, 2, 0, 0, 0},
         },
     },
@@ -12961,6 +17197,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_HIGH_JUMP_KICK, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_PURE_POWER,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
         .name = _("Mega Physical Attacker"),
         .preset =
         {
@@ -12970,6 +17218,30 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_BRAVE,
             .ability = ABILITY_PURE_POWER,
             .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_HIGH_JUMP_KICK, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_PURE_POWER,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_DISCHARGE, MOVE_FLAMETHROWER, MOVE_SIGNAL_BEAM, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_LIGHTNING_ROD,
+            .statPoints = {32, 0, 2, 32, 0, 0},
         },
     },
     {
@@ -12997,6 +17269,102 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Nasty Plot Setup"),
+        .preset =
+        {
+            .moves = {MOVE_NASTY_PLOT, MOVE_DISCHARGE, MOVE_ALLURING_VOICE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_PLUS,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Nasty Plot Setup"),
+        .preset =
+        {
+            .moves = {MOVE_NASTY_PLOT, MOVE_DISCHARGE, MOVE_ALLURING_VOICE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_MINUS,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_LUNGE, MOVE_PLAY_ROUGH, MOVE_BODY_SLAM, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_PRANKSTER,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_BUG_BUZZ, MOVE_DAZZLING_GLEAM, MOVE_THUNDERBOLT, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_PRANKSTER,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Sleep Control"),
+        .preset =
+        {
+            .moves = {MOVE_SLEEP_POWDER, MOVE_LEECH_SEED, MOVE_LEAF_STORM, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_NATURAL_CURE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_GUNK_SHOT, MOVE_BODY_SLAM, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_LIQUID_OOZE,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_GUNK_SHOT, MOVE_EARTHQUAKE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_STICKY_HOLD,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_TAUNT, MOVE_LIQUIDATION, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SPEED_BOOST,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Mega Physical Attacker"),
         .preset =
         {
@@ -13006,6 +17374,54 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_ADAMANT,
             .ability = ABILITY_STRONG_JAW,
             .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_TAUNT, MOVE_LIQUIDATION, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SPEED_BOOST,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_WATERFALL, MOVE_PROTECT, MOVE_AMNESIA},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_PRESSURE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_LIQUIDATION, MOVE_PROTECT, MOVE_AMNESIA},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_DRIZZLE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_OVERHEAT, MOVE_EARTH_POWER, MOVE_FLASH_CANNON, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_SIMPLE,
+            .statPoints = {32, 0, 2, 32, 0, 0},
         },
     },
     {
@@ -13021,6 +17437,90 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_ERUPTION, MOVE_EARTH_POWER, MOVE_FLASH_CANNON, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_SOLID_ROCK,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Shell Smash Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SHELL_SMASH, MOVE_FLARE_BLITZ, MOVE_SUPERPOWER, MOVE_PROTECT},
+            .item = ITEM_WHITE_HERB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_DROUGHT,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_PSYCHIC, MOVE_DAZZLING_GLEAM, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_THICK_FAT,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Nasty Plot Setup"),
+        .preset =
+        {
+            .moves = {MOVE_NASTY_PLOT, MOVE_PSYCHIC, MOVE_HYPER_VOICE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_THICK_FAT,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_DOUBLE_EDGE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_CONTRARY,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_EARTHQUAKE, MOVE_FIRST_IMPRESSION, MOVE_SUPERPOWER, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_ARENA_TRAP,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_EARTHQUAKE, MOVE_PROTECT, MOVE_ROOST},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_LEVITATE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Bulky Attacker"),
         .preset =
         {
@@ -13030,6 +17530,42 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_JOLLY,
             .ability = ABILITY_LEVITATE,
             .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_SEED_BOMB, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_WATER_ABSORB,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_ENCORE, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_WATER_ABSORB,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_BRAVE_BIRD, MOVE_DOUBLE_EDGE, MOVE_PLAY_ROUGH, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_CLOUD_NINE,
+            .statPoints = {32, 32, 2, 0, 0, 0},
         },
     },
     {
@@ -13045,6 +17581,102 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_BRAVE_BIRD, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_CLOUD_NINE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_FACADE, MOVE_PROTECT},
+            .item = ITEM_TOXIC_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_TOXIC_BOOST,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HELPING_HAND, MOVE_GUNK_SHOT, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_INFILTRATOR,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_BLIZZARD, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_LEVITATE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_ROCK_SLIDE, MOVE_ZEN_HEADBUTT, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_LEVITATE,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_EARTHQUAKE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_OBLIVIOUS,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_EARTHQUAKE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_HYDRATION,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_TAUNT, MOVE_CRABHAMMER, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_ADAPTABILITY,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Choice Attacker"),
         .preset =
         {
@@ -13054,6 +17686,138 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_ADAMANT,
             .ability = ABILITY_ADAPTABILITY,
             .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_ALLY_SWITCH, MOVE_EARTHQUAKE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_LEVITATE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_ALLY_SWITCH, MOVE_EARTHQUAKE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_LEVITATE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_ENERGY_BALL, MOVE_ANCIENT_POWER, MOVE_EARTH_POWER, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_STORM_DRAIN,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_ROCK_SLIDE, MOVE_POWER_WHIP, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_STORM_DRAIN,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_ROCK_SLIDE, MOVE_X_SCISSOR, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SWIFT_SWIM,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_ROCK_SLIDE, MOVE_X_SCISSOR, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_SWIFT_SWIM,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_WATERFALL, MOVE_PROTECT, MOVE_LIGHT_SCREEN},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_OBLIVIOUS,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_SURF, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_COMPETITIVE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_ICY_WIND, MOVE_DOUBLE_EDGE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_FORECAST,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_FAKE_OUT, MOVE_DOUBLE_EDGE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_PROTEAN,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_POLTERGEIST, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_FRISK,
+            .statPoints = {32, 32, 2, 0, 0, 0},
         },
     },
     {
@@ -13069,6 +17833,54 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_POLTERGEIST, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_INSOMNIA,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_POLTERGEIST, MOVE_SUCKER_PUNCH, MOVE_BODY_SLAM, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_LEVITATE,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_POLTERGEIST, MOVE_EARTHQUAKE, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_FRISK,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_DOUBLE_EDGE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_AERILATE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Mega Trick Room Support"),
         .preset =
         {
@@ -13076,6 +17888,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .item = ITEM_NONE,
             .requiredItem = ITEM_CHIMECHITE,
             .nature = NATURE_QUIET,
+            .ability = ABILITY_LEVITATE,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_BOOMBURST, MOVE_PSYCHIC, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
             .ability = ABILITY_LEVITATE,
             .statPoints = {32, 0, 2, 32, 0, 0},
         },
@@ -13117,6 +17941,30 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Fast Utility"),
+        .preset =
+        {
+            .moves = {MOVE_COUNTER, MOVE_MIRROR_COAT, MOVE_ENCORE, MOVE_AMNESIA},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SHADOW_TAG,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_ICICLE_CRASH, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_ICE_BODY,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Support"),
         .preset =
         {
@@ -13141,6 +17989,126 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_ENCORE, MOVE_BLIZZARD, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_THICK_FAT,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_ENCORE, MOVE_BLIZZARD, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_THICK_FAT,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_ENCORE, MOVE_BLIZZARD, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_THICK_FAT,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_SURF, MOVE_PROTECT, MOVE_IRON_DEFENSE},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_SHELL_ARMOR,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_AQUA_TAIL, MOVE_PROTECT, MOVE_IRON_DEFENSE},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_WATER_VEIL,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_SURF, MOVE_PROTECT, MOVE_IRON_DEFENSE},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_SWIFT_SWIM,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HEAD_SMASH, MOVE_PROTECT, MOVE_IRON_DEFENSE},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_ROCK_HEAD,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HEAL_PULSE, MOVE_SURF, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_SOUL_HEART,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Dragon Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_DRAGON_DANCE, MOVE_DRAGON_CLAW, MOVE_ROCK_SLIDE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_SHEER_FORCE,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Dragon Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_DRAGON_DANCE, MOVE_DRAGON_CLAW, MOVE_ROCK_SLIDE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_OVERCOAT,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
         .name = _("Mega Tailwind"),
         .preset =
         {
@@ -13150,6 +18118,42 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_JOLLY,
             .ability = ABILITY_AERILATE,
             .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_DRAGON_CLAW, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_INTIMIDATE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_IRON_HEAD, MOVE_ZEN_HEADBUTT, MOVE_FACADE, MOVE_HEADBUTT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_CLEAR_BODY,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_HARD_PRESS, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_CLEAR_BODY,
+            .statPoints = {32, 0, 16, 0, 18, 0},
         },
     },
     {
@@ -13201,6 +18205,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Hone Claws Setup"),
+        .preset =
+        {
+            .moves = {MOVE_HONE_CLAWS, MOVE_HARD_PRESS, MOVE_SUPERPOWER, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_CLEAR_BODY,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
         .name = _("Bulky Attacker"),
         .preset =
         {
@@ -13249,6 +18265,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_WATER_SPOUT, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_DRIZZLE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Bulky Setup"),
         .preset =
         {
@@ -13285,6 +18313,150 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_ALLY_SWITCH, MOVE_ZEN_HEADBUTT, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_PRESSURE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Shell Smash Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SHELL_SMASH, MOVE_LEAF_BLADE, MOVE_SUPERPOWER, MOVE_PROTECT},
+            .item = ITEM_WHITE_HERB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_SHELL_ARMOR,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Shell Smash Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SHELL_SMASH, MOVE_LEAF_BLADE, MOVE_SUPERPOWER, MOVE_PROTECT},
+            .item = ITEM_WHITE_HERB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_SHELL_ARMOR,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Wide Guard Support"),
+        .preset =
+        {
+            .moves = {MOVE_WIDE_GUARD, MOVE_HEADLONG_RUSH, MOVE_PROTECT, MOVE_SLEEP_POWDER},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_SOLID_ROCK,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_FLARE_BLITZ, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_IRON_FIST,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_CLOSE_COMBAT, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_IRON_FIST,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_CLOSE_COMBAT, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_BLAZE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_SURF, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_COMPETITIVE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_SURF, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_COMPETITIVE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_STEEL_BEAM, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_COMPETITIVE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_BRAVE_BIRD, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_RECKLESS,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_BRAVE_BIRD, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_INTIMIDATE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Choice Attacker"),
         .preset =
         {
@@ -13309,6 +18481,246 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_TAUNT, MOVE_DOUBLE_EDGE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SIMPLE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_TAUNT, MOVE_DOUBLE_EDGE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SIMPLE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_LUNGE, MOVE_POUND, MOVE_SKITTER_SMACK, MOVE_BUG_BITE},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_SHED_SKIN,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HELPING_HAND, MOVE_BUG_BITE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_TECHNICIAN,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Howl Setup"),
+        .preset =
+        {
+            .moves = {MOVE_HOWL, MOVE_WILD_CHARGE, MOVE_PLAY_ROUGH, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_INTIMIDATE,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ELECTROWEB, MOVE_HELPING_HAND, MOVE_WILD_CHARGE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_INTIMIDATE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ELECTROWEB, MOVE_HELPING_HAND, MOVE_SUPERCELL_SLAM, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_INTIMIDATE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Sleep Control"),
+        .preset =
+        {
+            .moves = {MOVE_SLEEP_POWDER, MOVE_LEAF_STORM, MOVE_PROTECT, MOVE_LIFE_DEW},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_NATURAL_CURE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Sleep Control"),
+        .preset =
+        {
+            .moves = {MOVE_SLEEP_POWDER, MOVE_LEECH_SEED, MOVE_LEAF_STORM, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_NATURAL_CURE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_HEAD_SMASH, MOVE_SUPERPOWER, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_SHEER_FORCE,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_HEAD_SMASH, MOVE_SUPERPOWER, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_SHEER_FORCE,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Wide Guard Support"),
+        .preset =
+        {
+            .moves = {MOVE_WIDE_GUARD, MOVE_TAUNT, MOVE_HARD_PRESS, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_STURDY,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Wide Guard Support"),
+        .preset =
+        {
+            .moves = {MOVE_WIDE_GUARD, MOVE_TAUNT, MOVE_HARD_PRESS, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_STURDY,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ELECTROWEB, MOVE_BUG_BITE, MOVE_PROTECT, MOVE_STRING_SHOT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_OVERCOAT,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ELECTROWEB, MOVE_LEAF_STORM, MOVE_PROTECT, MOVE_SYNTHESIS},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_OVERCOAT,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_ELECTROWEB, MOVE_LUNGE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_TINTED_LENS,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_LUNGE, MOVE_STRING_SHOT, MOVE_NONE},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_HUSTLE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Hone Claws Setup"),
+        .preset =
+        {
+            .moves = {MOVE_HONE_CLAWS, MOVE_ATTACK_ORDER, MOVE_AERIAL_ACE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_INTIMIDATE,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Redirection Support"),
+        .preset =
+        {
+            .moves = {MOVE_FOLLOW_ME, MOVE_HELPING_HAND, MOVE_WILD_CHARGE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_VOLT_ABSORB,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_WAVE_CRASH, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SWIFT_SWIM,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Wallbreaker"),
         .preset =
         {
@@ -13321,6 +18733,42 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Sleep Control"),
+        .preset =
+        {
+            .moves = {MOVE_SLEEP_POWDER, MOVE_POLLEN_PUFF, MOVE_ENERGY_BALL, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_CHLOROPHYLL,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_ENERGY_BALL, MOVE_DAZZLING_GLEAM, MOVE_POLLEN_PUFF, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_FLOWER_GIFT,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_SURF, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_STORM_DRAIN,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Bulky Attacker"),
         .preset =
         {
@@ -13330,6 +18778,54 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_MODEST,
             .ability = ABILITY_STORM_DRAIN,
             .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_DOUBLE_EDGE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_TECHNICIAN,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_SHADOW_BALL, MOVE_AIR_CUTTER, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_UNBURDEN,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_SHADOW_BALL, MOVE_AIR_CUTTER, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_UNBURDEN,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_DOUBLE_EDGE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_LIMBER,
+            .statPoints = {32, 0, 2, 0, 0, 32},
         },
     },
     {
@@ -13357,6 +18853,102 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_HYPER_VOICE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_PIXILATE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_BRAVE_BIRD, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_MOXIE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_TAUNT, MOVE_DOUBLE_EDGE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_LIMBER,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_TAUNT, MOVE_DOUBLE_EDGE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_DEFIANT,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_PSYCHIC, MOVE_HYPER_VOICE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_LEVITATE,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HELPING_HAND, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_AFTERMATH,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HELPING_HAND, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_AFTERMATH,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_IRON_HEAD, MOVE_ZEN_HEADBUTT, MOVE_EARTHQUAKE, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_LEVITATE,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
         .name = _("Bulky Setup"),
         .preset =
         {
@@ -13366,6 +18958,90 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_QUIET,
             .ability = ABILITY_LEVITATE,
             .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_HEAD_SMASH, MOVE_EARTHQUAKE, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_STURDY,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_DAZZLING_GLEAM, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_FILTER,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_HYPER_VOICE, MOVE_FLAMETHROWER, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_FRIEND_GUARD,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_TAUNT, MOVE_BOOMBURST, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_BIG_PECKS,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_POLTERGEIST, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_INFILTRATOR,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_EARTHQUAKE, MOVE_DRAGON_CLAW, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_ROUGH_SKIN,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_EARTHQUAKE, MOVE_DRAGON_CLAW, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_ROUGH_SKIN,
+            .statPoints = {2, 32, 0, 0, 0, 32},
         },
     },
     {
@@ -13390,6 +19066,42 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_TIMID,
             .ability = ABILITY_SAND_VEIL,
             .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_EARTHQUAKE, MOVE_DRAGON_CLAW, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_ROUGH_SKIN,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_DOUBLE_EDGE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_THICK_FAT,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_CLOSE_COMBAT, MOVE_EARTHQUAKE, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_PRANKSTER,
+            .statPoints = {32, 32, 2, 0, 0, 0},
         },
     },
     {
@@ -13429,6 +19141,138 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_EARTHQUAKE, MOVE_SUPERPOWER, MOVE_ROCK_SLIDE, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_SAND_STREAM,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_EARTHQUAKE, MOVE_SUPERPOWER, MOVE_HARD_PRESS, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_SAND_STREAM,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_POISON_JAB, MOVE_PROTECT, MOVE_AGILITY},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SNIPER,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_SNARL, MOVE_CRUNCH, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SNIPER,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_CLOSE_COMBAT, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_DRY_SKIN,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_CLOSE_COMBAT, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_DRY_SKIN,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Rage Powder Support"),
+        .preset =
+        {
+            .moves = {MOVE_RAGE_POWDER, MOVE_SLEEP_POWDER, MOVE_POWER_WHIP, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_LEVITATE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_AQUA_TAIL, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_STORM_DRAIN,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_AQUA_TAIL, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_STORM_DRAIN,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_SURF, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_WATER_ABSORB,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_WOOD_HAMMER, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SNOW_WARNING,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Special Attacker"),
         .preset =
         {
@@ -13449,6 +19293,66 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .requiredItem = ITEM_ABOMASITE,
             .nature = NATURE_QUIET,
             .ability = ABILITY_SNOW_WARNING,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_ICICLE_CRASH, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_PRESSURE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_STEEL_BEAM, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_STURDY,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_DOUBLE_EDGE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_CLOUD_NINE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_EARTHQUAKE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SOLID_ROCK,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_LEAF_STORM, MOVE_SLUDGE_BOMB, MOVE_FOCUS_BLAST, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_REGENERATOR,
             .statPoints = {32, 0, 2, 32, 0, 0},
         },
     },
@@ -13477,6 +19381,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Nasty Plot Setup"),
+        .preset =
+        {
+            .moves = {MOVE_NASTY_PLOT, MOVE_HYPER_VOICE, MOVE_DAZZLING_GLEAM, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_SERENE_GRACE,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
         .name = _("Fast Attacker"),
         .preset =
         {
@@ -13489,6 +19405,66 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HELPING_HAND, MOVE_LEAF_BLADE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_CHLOROPHYLL,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_BLIZZARD, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_SLUSH_RUSH,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_TAUNT, MOVE_EARTHQUAKE, MOVE_PROTECT},
+            .item = ITEM_TOXIC_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_POISON_HEAL,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_EARTHQUAKE, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_THICK_FAT,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_ALLY_SWITCH, MOVE_BLIZZARD, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_ADAPTABILITY,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
         .name = _("Mega Physical Attacker"),
         .preset =
         {
@@ -13498,6 +19474,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_JOLLY,
             .ability = ABILITY_INNER_FOCUS,
             .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_CLOSE_COMBAT, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_JUSTIFIED,
+            .statPoints = {32, 0, 16, 0, 18, 0},
         },
     },
     {
@@ -13561,6 +19549,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_ZEN_HEADBUTT, MOVE_PLAY_ROUGH, MOVE_DRAIN_PUNCH, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_LEVITATE,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Choice Attacker"),
         .preset =
         {
@@ -13582,6 +19582,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_TIMID,
             .ability = ABILITY_LEVITATE,
             .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_DRACO_METEOR, MOVE_PROTECT, MOVE_THUNDER_WAVE},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_TELEPATHY,
+            .statPoints = {32, 0, 16, 0, 18, 0},
         },
     },
     {
@@ -13609,6 +19621,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_WILL_O_WISP, MOVE_OVERHEAT, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_FLASH_FIRE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Bulky Setup"),
         .preset =
         {
@@ -13630,6 +19654,30 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_TIMID,
             .ability = ABILITY_PRESSURE,
             .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_PSYCHIC, MOVE_DAZZLING_GLEAM, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_LEVITATE,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_LIQUIDATION, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_HYDRATION,
+            .statPoints = {32, 0, 2, 0, 0, 32},
         },
     },
     {
@@ -13657,6 +19705,42 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_TAUNT, MOVE_BLIZZARD, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_BAD_DREAMS,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_PETAL_BLIZZARD, MOVE_PROTECT, MOVE_SLEEP_POWDER},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_NATURAL_CURE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_TAUNT, MOVE_DOUBLE_EDGE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_MULTITYPE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
         .name = _("Support"),
         .preset =
         {
@@ -13666,6 +19750,66 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_QUIET,
             .ability = ABILITY_VICTORY_STAR,
             .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_PETAL_BLIZZARD, MOVE_AQUA_TAIL, MOVE_FACADE, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_CONTRARY,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_PETAL_BLIZZARD, MOVE_AQUA_TAIL, MOVE_FACADE, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_CONTRARY,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_PETAL_BLIZZARD, MOVE_AQUA_TAIL, MOVE_BODY_SLAM, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_CONTRARY,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HELPING_HAND, MOVE_FLARE_BLITZ, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_THICK_FAT,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HELPING_HAND, MOVE_CLOSE_COMBAT, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_THICK_FAT,
+            .statPoints = {32, 0, 2, 0, 0, 32},
         },
     },
     {
@@ -13681,6 +19825,282 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HELPING_HAND, MOVE_CLOSE_COMBAT, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_BLAZE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_SURF, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_TORRENT,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_SURF, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_TORRENT,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_SURF, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_TORRENT,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_BODY_SLAM, MOVE_AQUA_TAIL, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_ANALYTIC,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_DOUBLE_EDGE, MOVE_AQUA_TAIL, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_ANALYTIC,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Howl Setup"),
+        .preset =
+        {
+            .moves = {MOVE_HOWL, MOVE_BODY_SLAM, MOVE_PLAY_ROUGH, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_VITAL_SPIRIT,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Howl Setup"),
+        .preset =
+        {
+            .moves = {MOVE_HOWL, MOVE_DOUBLE_EDGE, MOVE_PLAY_ROUGH, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_INTIMIDATE,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_HYPER_VOICE, MOVE_SURF, MOVE_THUNDERBOLT, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_SAND_RUSH,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Hone Claws Setup"),
+        .preset =
+        {
+            .moves = {MOVE_HONE_CLAWS, MOVE_SUCKER_PUNCH, MOVE_FIRST_IMPRESSION, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_PRANKSTER,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_SUCKER_PUNCH, MOVE_FIRST_IMPRESSION, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_PRANKSTER,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HELPING_HAND, MOVE_SEED_BOMB, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_OVERGROW,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_SEED_BOMB, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_OVERGROW,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Hone Claws Setup"),
+        .preset =
+        {
+            .moves = {MOVE_HONE_CLAWS, MOVE_FLARE_BLITZ, MOVE_ROCK_SLIDE, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_BLAZE,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_FLARE_BLITZ, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_BLAZE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_AQUA_TAIL, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_TORRENT,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_AQUA_TAIL, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_TORRENT,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_PSYCHIC, MOVE_DAZZLING_GLEAM, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_SYNCHRONIZE,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_PSYCHIC, MOVE_DAZZLING_GLEAM, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_FOREWARN,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_TAUNT, MOVE_FACADE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SUPER_LUCK,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_TAUNT, MOVE_FACADE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SUPER_LUCK,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_TAUNT, MOVE_HURRICANE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_SUPER_LUCK,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ELECTROWEB, MOVE_HELPING_HAND, MOVE_SUPERCELL_SLAM, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_LIGHTNING_ROD,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Fast Attacker"),
         .preset =
         {
@@ -13693,6 +20113,78 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Wide Guard Support"),
+        .preset =
+        {
+            .moves = {MOVE_WIDE_GUARD, MOVE_ROCK_SLIDE, MOVE_PROTECT, MOVE_IRON_DEFENSE},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_STURDY,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Wide Guard Support"),
+        .preset =
+        {
+            .moves = {MOVE_WIDE_GUARD, MOVE_ROCK_SLIDE, MOVE_PROTECT, MOVE_IRON_DEFENSE},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_STURDY,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Wide Guard Support"),
+        .preset =
+        {
+            .moves = {MOVE_WIDE_GUARD, MOVE_ROCK_SLIDE, MOVE_PROTECT, MOVE_IRON_DEFENSE},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_SAND_STREAM,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_PSYCHIC, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_SIMPLE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_PSYCHIC, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_SIMPLE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_EARTHQUAKE, MOVE_ROCK_SLIDE, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_SAND_RUSH,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
         .name = _("Mega Physical Attacker"),
         .preset =
         {
@@ -13701,6 +20193,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .requiredItem = ITEM_EXCADRITE,
             .nature = NATURE_JOLLY,
             .ability = ABILITY_PIERCING_DRILL,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_EARTHQUAKE, MOVE_IRON_HEAD, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SAND_RUSH,
             .statPoints = {2, 32, 0, 0, 0, 32},
         },
     },
@@ -13717,6 +20221,138 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_DOUBLE_EDGE, MOVE_WILD_CHARGE, MOVE_THROAT_CHOP, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_REGENERATOR,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Wide Guard Support"),
+        .preset =
+        {
+            .moves = {MOVE_WIDE_GUARD, MOVE_HELPING_HAND, MOVE_HAMMER_ARM, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_IRON_FIST,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Wide Guard Support"),
+        .preset =
+        {
+            .moves = {MOVE_WIDE_GUARD, MOVE_HELPING_HAND, MOVE_CLOSE_COMBAT, MOVE_PROTECT},
+            .item = ITEM_FLAME_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_GUTS,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Wide Guard Support"),
+        .preset =
+        {
+            .moves = {MOVE_WIDE_GUARD, MOVE_HELPING_HAND, MOVE_CLOSE_COMBAT, MOVE_PROTECT},
+            .item = ITEM_FLAME_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_GUTS,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_FACADE, MOVE_PROTECT, MOVE_SCREECH},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_WATER_ABSORB,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_BULLDOZE, MOVE_PROTECT, MOVE_SCREECH},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_WATER_ABSORB,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_SURF, MOVE_PROTECT, MOVE_SCREECH},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_WATER_ABSORB,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Wide Guard Support"),
+        .preset =
+        {
+            .moves = {MOVE_WIDE_GUARD, MOVE_HELPING_HAND, MOVE_CLOSE_COMBAT, MOVE_PROTECT},
+            .item = ITEM_FLAME_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_GUTS,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HELPING_HAND, MOVE_CLOSE_COMBAT, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_STURDY,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ELECTROWEB, MOVE_LUNGE, MOVE_PROTECT, MOVE_LIGHT_SCREEN},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_OVERCOAT,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ELECTROWEB, MOVE_LUNGE, MOVE_PROTECT, MOVE_LIGHT_SCREEN},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_OVERCOAT,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Offensive"),
         .preset =
         {
@@ -13726,6 +20362,30 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_JOLLY,
             .ability = ABILITY_SWARM,
             .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_POISON_JAB, MOVE_SKITTER_SMACK, MOVE_FACADE, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_SPEED_BOOST,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_POISON_JAB, MOVE_SKITTER_SMACK, MOVE_FACADE, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_SPEED_BOOST,
+            .statPoints = {32, 32, 2, 0, 0, 0},
         },
     },
     {
@@ -13753,6 +20413,54 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_DAZZLING_GLEAM, MOVE_ENERGY_BALL, MOVE_SWIFT, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_PRANKSTER,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_DAZZLING_GLEAM, MOVE_ENERGY_BALL, MOVE_PSYCHIC, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_PRANKSTER,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_LEAF_STORM, MOVE_POLLEN_PUFF, MOVE_ROUND, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_CHLOROPHYLL,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Quiver Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_QUIVER_DANCE, MOVE_LEAF_STORM, MOVE_POLLEN_PUFF, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_CHLOROPHYLL,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
         .name = _("Wallbreaker"),
         .preset =
         {
@@ -13762,6 +20470,114 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_JOLLY,
             .ability = ABILITY_ADAPTABILITY,
             .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HELPING_HAND, MOVE_EARTHQUAKE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_MOXIE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HELPING_HAND, MOVE_EARTHQUAKE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_INTIMIDATE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HELPING_HAND, MOVE_EARTHQUAKE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_INTIMIDATE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_ENCORE, MOVE_FLARE_BLITZ, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_HUSTLE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_ENCORE, MOVE_FLARE_BLITZ, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SHEER_FORCE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_LEAF_STORM, MOVE_HYPER_VOICE, MOVE_ENERGY_BALL, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_STORM_DRAIN,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Wide Guard Support"),
+        .preset =
+        {
+            .moves = {MOVE_WIDE_GUARD, MOVE_KNOCK_OFF, MOVE_ROCK_SLIDE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_STURDY,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Wide Guard Support"),
+        .preset =
+        {
+            .moves = {MOVE_WIDE_GUARD, MOVE_KNOCK_OFF, MOVE_ROCK_SLIDE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_STURDY,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_HIGH_JUMP_KICK, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SHED_SKIN,
+            .statPoints = {32, 0, 2, 0, 0, 32},
         },
     },
     {
@@ -13789,6 +20605,126 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_IMPRISON, MOVE_PSYCHIC, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_MAGIC_GUARD,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Nasty Plot Setup"),
+        .preset =
+        {
+            .moves = {MOVE_NASTY_PLOT, MOVE_SHADOW_BALL, MOVE_EARTH_POWER, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_MUMMY,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Nasty Plot Setup"),
+        .preset =
+        {
+            .moves = {MOVE_NASTY_PLOT, MOVE_SHADOW_BALL, MOVE_ENERGY_BALL, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_MUMMY,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Wide Guard Support"),
+        .preset =
+        {
+            .moves = {MOVE_WIDE_GUARD, MOVE_KNOCK_OFF, MOVE_AQUA_TAIL, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_SOLID_ROCK,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Wide Guard Support"),
+        .preset =
+        {
+            .moves = {MOVE_WIDE_GUARD, MOVE_KNOCK_OFF, MOVE_AQUA_TAIL, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_STURDY,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_TAUNT, MOVE_HEAD_SMASH, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_DEFEATIST,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_TAUNT, MOVE_HEAD_SMASH, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_DEFEATIST,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_GUNK_SHOT, MOVE_SEED_BOMB, MOVE_BRUTAL_SWING, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_STICKY_HOLD,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_GUNK_SHOT, MOVE_BODY_SLAM, MOVE_SEED_BOMB, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_AFTERMATH,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_ENCORE, MOVE_NIGHT_DAZE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_ILLUSION,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Special Attacker"),
         .preset =
         {
@@ -13798,6 +20734,114 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_MODEST,
             .ability = ABILITY_ILLUSION,
             .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Tidy Up Setup"),
+        .preset =
+        {
+            .moves = {MOVE_TIDY_UP, MOVE_TAIL_SLAP, MOVE_BULLET_SEED, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SKILL_LINK,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tidy Up Setup"),
+        .preset =
+        {
+            .moves = {MOVE_TIDY_UP, MOVE_DOUBLE_EDGE, MOVE_BULLET_SEED, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SKILL_LINK,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Nasty Plot Setup"),
+        .preset =
+        {
+            .moves = {MOVE_NASTY_PLOT, MOVE_PSYCHIC, MOVE_THUNDERBOLT, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_SHADOW_TAG,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_PSYCHIC, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_COMPETITIVE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Nasty Plot Setup"),
+        .preset =
+        {
+            .moves = {MOVE_NASTY_PLOT, MOVE_PSYCHIC, MOVE_THUNDERBOLT, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_SHADOW_TAG,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_PSYCHIC, MOVE_ENERGY_BALL, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_MAGIC_GUARD,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_PSYCHIC, MOVE_ENERGY_BALL, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_MAGIC_GUARD,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_PSYCHIC, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_MAGIC_GUARD,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_BRAVE_BIRD, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_HYDRATION,
+            .statPoints = {32, 0, 2, 0, 0, 32},
         },
     },
     {
@@ -13813,6 +20857,114 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_TAUNT, MOVE_BLIZZARD, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_ICE_BODY,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_TAUNT, MOVE_BLIZZARD, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_ICE_BODY,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_TAUNT, MOVE_BLIZZARD, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_SNOW_WARNING,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_DOUBLE_EDGE, MOVE_SEED_BOMB, MOVE_JUMP_KICK, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SERENE_GRACE,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_DOUBLE_EDGE, MOVE_PETAL_BLIZZARD, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SERENE_GRACE,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_DISCHARGE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_LIGHTNING_ROD,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_MEGAHORN, MOVE_DRILL_RUN, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_NO_GUARD,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_ENCORE, MOVE_MEGAHORN, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SWARM,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_FIRST_IMPRESSION, MOVE_SEED_BOMB, MOVE_BODY_SLAM, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_REGENERATOR,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
         .name = _("Bulky Attacker"),
         .preset =
         {
@@ -13822,6 +20974,150 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_MODEST,
             .ability = ABILITY_REGENERATOR,
             .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_TAUNT, MOVE_WATER_SPOUT, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_CURSED_BODY,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_WATER_SPOUT, MOVE_BLIZZARD, MOVE_SHADOW_BALL, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_WATER_ABSORB,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_LIQUIDATION, MOVE_PLAY_ROUGH, MOVE_BODY_SLAM, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_REGENERATOR,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ELECTROWEB, MOVE_HELPING_HAND, MOVE_DISCHARGE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_SWARM,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ELECTROWEB, MOVE_HELPING_HAND, MOVE_DISCHARGE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_COMPOUND_EYES,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Hone Claws Setup"),
+        .preset =
+        {
+            .moves = {MOVE_HONE_CLAWS, MOVE_IRON_HEAD, MOVE_SEED_BOMB, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_IRON_BARBS,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_POWER_WHIP, MOVE_IRON_HEAD, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_IRON_BARBS,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Shift Gear Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SHIFT_GEAR, MOVE_GEAR_GRIND, MOVE_WILD_CHARGE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_CLEAR_BODY,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Shift Gear Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SHIFT_GEAR, MOVE_GEAR_GRIND, MOVE_WILD_CHARGE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_CLEAR_BODY,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_ALLY_SWITCH, MOVE_GEAR_GRIND, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_CLEAR_BODY,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_SPARK, MOVE_FACADE, MOVE_KNOCK_OFF, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_LEVITATE,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ELECTROWEB, MOVE_EERIE_IMPULSE, MOVE_WILD_CHARGE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_LEVITATE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
         },
     },
     {
@@ -13849,6 +21145,54 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_ALLY_SWITCH, MOVE_PSYCHIC, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_ANALYTIC,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Nasty Plot Setup"),
+        .preset =
+        {
+            .moves = {MOVE_NASTY_PLOT, MOVE_PSYCHIC, MOVE_THUNDERBOLT, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_TELEPATHY,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_ALLY_SWITCH, MOVE_OVERHEAT, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_FLASH_FIRE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_ALLY_SWITCH, MOVE_OVERHEAT, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_FLASH_FIRE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
         .name = _("Mega Trick Room Support"),
         .preset =
         {
@@ -13858,6 +21202,42 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_MODEST,
             .ability = ABILITY_INFILTRATOR,
             .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_ALLY_SWITCH, MOVE_OVERHEAT, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_FLASH_FIRE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_SNARL, MOVE_FIRST_IMPRESSION, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_MOLD_BREAKER,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_SNARL, MOVE_FIRST_IMPRESSION, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_MOLD_BREAKER,
+            .statPoints = {32, 0, 2, 0, 0, 32},
         },
     },
     {
@@ -13873,6 +21253,66 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_TAUNT, MOVE_SUPERPOWER, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SLUSH_RUSH,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_TAUNT, MOVE_BLIZZARD, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_SLUSH_RUSH,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_BLIZZARD, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_LEVITATE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_LEECH_LIFE, MOVE_BODY_SLAM, MOVE_PURSUIT, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_OVERCOAT,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_BUG_BUZZ, MOVE_ENERGY_BALL, MOVE_SLUDGE_BOMB, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_UNBURDEN,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
         .name = _("Physical Attacker"),
         .preset =
         {
@@ -13885,6 +21325,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_HIGH_JUMP_KICK, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_REGENERATOR,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Fast Attacker"),
         .preset =
         {
@@ -13894,6 +21346,30 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_JOLLY,
             .ability = ABILITY_REGENERATOR,
             .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_SNARL, MOVE_DRAGON_CLAW, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SHEER_FORCE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_EARTHQUAKE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_IRON_FIST,
+            .statPoints = {32, 0, 2, 0, 0, 32},
         },
     },
     {
@@ -13921,6 +21397,78 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_THUNDER_WAVE, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_DEFIANT,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_THUNDER_WAVE, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_DEFIANT,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HEAD_CHARGE, MOVE_PROTECT, MOVE_AMNESIA},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_RECKLESS,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_BRAVE_BIRD, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_HUSTLE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_BRAVE_BIRD, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SHEER_FORCE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_BRAVE_BIRD, MOVE_THROAT_CHOP, MOVE_FACADE, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_OVERCOAT,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
         .name = _("Bulky Attacker"),
         .preset =
         {
@@ -13930,6 +21478,90 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_ADAMANT,
             .ability = ABILITY_OVERCOAT,
             .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_WILL_O_WISP, MOVE_FLARE_BLITZ, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_TOUGH_CLAWS,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Hone Claws Setup"),
+        .preset =
+        {
+            .moves = {MOVE_HONE_CLAWS, MOVE_FIRST_IMPRESSION, MOVE_IRON_HEAD, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_HUSTLE,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_THUNDER_WAVE, MOVE_CRUNCH, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_HUSTLE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HELPING_HAND, MOVE_CRUNCH, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_HUSTLE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_DRACO_METEOR, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_LEVITATE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_FLARE_BLITZ, MOVE_LEECH_LIFE, MOVE_WILD_CHARGE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_FLAME_BODY,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Rage Powder Support"),
+        .preset =
+        {
+            .moves = {MOVE_RAGE_POWDER, MOVE_OVERHEAT, MOVE_PROTECT, MOVE_TAILWIND},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_FLAME_BODY,
+            .statPoints = {32, 0, 16, 0, 18, 0},
         },
     },
     {
@@ -13957,6 +21589,30 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_CLOSE_COMBAT, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_JUSTIFIED,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Nasty Plot Setup"),
+        .preset =
+        {
+            .moves = {MOVE_NASTY_PLOT, MOVE_HURRICANE, MOVE_HEAT_WAVE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_PRANKSTER,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
         .name = _("Offensive"),
         .preset =
         {
@@ -13966,6 +21622,42 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_TIMID,
             .ability = ABILITY_DEFIANT,
             .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_DRACO_METEOR, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_TURBOBLAZE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_FUSION_BOLT, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_TERAVOLT,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_EARTHQUAKE, MOVE_PROTECT, MOVE_SCARY_FACE},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SHEER_FORCE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
         },
     },
     {
@@ -13981,6 +21673,30 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_SURF, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_JUSTIFIED,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_HYPER_VOICE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_SERENE_GRACE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
         .name = _("Support"),
         .preset =
         {
@@ -13990,6 +21706,30 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_CALM,
             .ability = ABILITY_DOWNLOAD,
             .statPoints = {32, 0, 2, 0, 32, 0},
+        },
+    },
+    {
+        .name = _("Wide Guard Support"),
+        .preset =
+        {
+            .moves = {MOVE_WIDE_GUARD, MOVE_HELPING_HAND, MOVE_WOOD_HAMMER, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_BULLETPROOF,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Wide Guard Support"),
+        .preset =
+        {
+            .moves = {MOVE_WIDE_GUARD, MOVE_HELPING_HAND, MOVE_WOOD_HAMMER, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_BULLETPROOF,
+            .statPoints = {32, 0, 16, 0, 18, 0},
         },
     },
     {
@@ -14017,6 +21757,30 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_OVERHEAT, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_BLAZE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_OVERHEAT, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_BLAZE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
         .name = _("Trick Room"),
         .preset =
         {
@@ -14041,6 +21805,30 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_SURF, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_PROTEAN,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_SURF, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_PROTEAN,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Mega Special Attacker"),
         .preset =
         {
@@ -14053,6 +21841,126 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_SURF, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_PROTEAN,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_STRENGTH, MOVE_EARTHQUAKE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_HUGE_POWER,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_EARTHQUAKE, MOVE_BODY_SLAM, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_HUGE_POWER,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_BRAVE_BIRD, MOVE_DOUBLE_EDGE, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_GALE_WINGS,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_BRAVE_BIRD, MOVE_FLARE_BLITZ, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_GALE_WINGS,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_TAUNT, MOVE_BRAVE_BIRD, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_GALE_WINGS,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_BUG_BITE, MOVE_FACADE, MOVE_POUNCE, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_FRIEND_GUARD,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_STRUGGLE_BUG, MOVE_ELECTROWEB, MOVE_PROTECT, MOVE_RAGE_POWDER},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_FRIEND_GUARD,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Quiver Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_QUIVER_DANCE, MOVE_BUG_BUZZ, MOVE_HURRICANE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_COMPOUND_EYES,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HELPING_HAND, MOVE_OVERHEAT, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_MOXIE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Mega Special Attacker"),
         .preset =
         {
@@ -14062,6 +21970,30 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_TIMID,
             .ability = ABILITY_FIRE_MANE,
             .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HELPING_HAND, MOVE_OVERHEAT, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_COMPETITIVE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_DAZZLING_GLEAM, MOVE_ENERGY_BALL, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_SYMBIOSIS,
+            .statPoints = {32, 0, 2, 32, 0, 0},
         },
     },
     {
@@ -14089,6 +22021,198 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_DAZZLING_GLEAM, MOVE_ENERGY_BALL, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_MISTY_SURGE,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Bulk Up Setup"),
+        .preset =
+        {
+            .moves = {MOVE_BULK_UP, MOVE_LEAF_BLADE, MOVE_PLAY_ROUGH, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_SAP_SIPPER,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Bulk Up Setup"),
+        .preset =
+        {
+            .moves = {MOVE_BULK_UP, MOVE_LEAF_BLADE, MOVE_SUPERPOWER, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_GRASSY_SURGE,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HELPING_HAND, MOVE_SUPERPOWER, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SCRAPPY,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HELPING_HAND, MOVE_HAMMER_ARM, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_IRON_FIST,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_DOUBLE_EDGE, MOVE_SUCKER_PUNCH, MOVE_WILD_CHARGE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_FUR_COAT,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Nasty Plot Setup"),
+        .preset =
+        {
+            .moves = {MOVE_NASTY_PLOT, MOVE_PSYCHIC, MOVE_THUNDERBOLT, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_INFILTRATOR,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Nasty Plot Setup"),
+        .preset =
+        {
+            .moves = {MOVE_NASTY_PLOT, MOVE_PSYCHIC, MOVE_MOONBLAST, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_PRANKSTER,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Wide Guard Support"),
+        .preset =
+        {
+            .moves = {MOVE_WIDE_GUARD, MOVE_IRON_HEAD, MOVE_PROTECT, MOVE_REFLECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_NO_GUARD,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Wide Guard Support"),
+        .preset =
+        {
+            .moves = {MOVE_WIDE_GUARD, MOVE_IRON_HEAD, MOVE_PROTECT, MOVE_REFLECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_NO_GUARD,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_IRON_HEAD, MOVE_CLOSE_COMBAT, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_STANCE_CHANGE,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Nasty Plot Setup"),
+        .preset =
+        {
+            .moves = {MOVE_NASTY_PLOT, MOVE_DAZZLING_GLEAM, MOVE_THUNDERBOLT, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_AROMA_VEIL,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Nasty Plot Setup"),
+        .preset =
+        {
+            .moves = {MOVE_NASTY_PLOT, MOVE_DAZZLING_GLEAM, MOVE_THUNDERBOLT, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_AROMA_VEIL,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_DAZZLING_GLEAM, MOVE_FLAMETHROWER, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_SWEET_VEIL,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_DAZZLING_GLEAM, MOVE_FLAMETHROWER, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_UNBURDEN,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_ZEN_HEADBUTT, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_CONTRARY,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
         .name = _("Trick Room"),
         .preset =
         {
@@ -14113,6 +22237,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_LIQUIDATION, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_TOUGH_CLAWS,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Mega Setup Sweeper"),
         .preset =
         {
@@ -14122,6 +22258,30 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_ADAMANT,
             .ability = ABILITY_TOUGH_CLAWS,
             .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_LIQUIDATION, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_TOUGH_CLAWS,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_AQUA_TAIL, MOVE_PROTECT, MOVE_ACID_ARMOR},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_ADAPTABILITY,
+            .statPoints = {32, 0, 2, 0, 0, 32},
         },
     },
     {
@@ -14149,6 +22309,114 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_SURF, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_MEGA_LAUNCHER,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_SURF, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_MEGA_LAUNCHER,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ELECTROWEB, MOVE_DISCHARGE, MOVE_PROTECT, MOVE_THUNDER_WAVE},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_DRY_SKIN,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ELECTROWEB, MOVE_EERIE_IMPULSE, MOVE_HYPER_VOICE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_DRY_SKIN,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Dragon Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_DRAGON_DANCE, MOVE_ROCK_SLIDE, MOVE_DRAGON_CLAW, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_STRONG_JAW,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Dragon Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_DRAGON_DANCE, MOVE_HEAD_SMASH, MOVE_DRAGON_CLAW, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_ROCK_HEAD,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_BLIZZARD, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_SNOW_WARNING,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_BLIZZARD, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_SNOW_WARNING,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_HYPER_VOICE, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_PIXILATE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
         .name = _("Support"),
         .preset =
         {
@@ -14173,6 +22441,54 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_DAZZLING_GLEAM, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_CHEEK_POUCH,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_ALLY_SWITCH, MOVE_ROCK_SLIDE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_STURDY,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_DRACO_METEOR, MOVE_SLUDGE_WAVE, MOVE_SURF, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_GOOEY,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_DRACO_METEOR, MOVE_STEEL_BEAM, MOVE_BLIZZARD, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_SAP_SIPPER,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
         .name = _("Special Attacker II"),
         .preset =
         {
@@ -14185,6 +22501,54 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_PLAY_ROUGH, MOVE_MAGNET_BOMB, MOVE_FACADE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_PRANKSTER,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_WOOD_HAMMER, MOVE_POLTERGEIST, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_NATURAL_CURE,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_ALLY_SWITCH, MOVE_WOOD_HAMMER, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_GRASSY_SURGE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_POLTERGEIST, MOVE_POWER_WHIP, MOVE_ROCK_SLIDE, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_INSOMNIA,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
         .name = _("Trick Room"),
         .preset =
         {
@@ -14194,6 +22558,54 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_RELAXED,
             .ability = ABILITY_INSOMNIA,
             .statPoints = {32, 0, 32, 0, 2, 0},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_ICE_SPINNER, MOVE_PROTECT, MOVE_AURORA_VEIL},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_STURDY,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_ICICLE_CRASH, MOVE_SUPERPOWER, MOVE_EARTHQUAKE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_STURDY,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_DRACO_METEOR, MOVE_HURRICANE, MOVE_HEAT_WAVE, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_INFILTRATOR,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_TAUNT, MOVE_DRACO_METEOR, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_INFILTRATOR,
+            .statPoints = {32, 0, 2, 0, 0, 32},
         },
     },
     {
@@ -14221,6 +22633,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Dragon Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_DRAGON_DANCE, MOVE_EARTHQUAKE, MOVE_SUPERPOWER, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_AURA_BREAK,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Bulky Setup"),
         .preset =
         {
@@ -14242,6 +22666,246 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_NAIVE,
             .ability = ABILITY_MAGIC_BOUNCE,
             .statPoints = {2, 16, 0, 16, 0, 32},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_ALLY_SWITCH, MOVE_PSYCHIC, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_MAGICIAN,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_WILL_O_WISP, MOVE_OVERHEAT, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_WATER_ABSORB,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_BRAVE_BIRD, MOVE_LEAF_BLADE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_LONG_REACH,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_BRAVE_BIRD, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_LONG_REACH,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_POLTERGEIST, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_TINTED_LENS,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_FLARE_BLITZ, MOVE_BODY_SLAM, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_INTIMIDATE,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_FLARE_BLITZ, MOVE_BODY_SLAM, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_INTIMIDATE,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_FLARE_BLITZ, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_INTIMIDATE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_SURF, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_LIQUID_VOICE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_SURF, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_LIQUID_VOICE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_SPARKLING_ARIA, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_LIQUID_VOICE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_BRAVE_BIRD, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SKILL_LINK,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_BRAVE_BIRD, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SKILL_LINK,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_BEAK_BLAST, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SKILL_LINK,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HELPING_HAND, MOVE_DOUBLE_EDGE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_STAKEOUT,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HELPING_HAND, MOVE_DOUBLE_EDGE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_ADAPTABILITY,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ELECTROWEB, MOVE_LUNGE, MOVE_PROTECT, MOVE_THUNDER_WAVE},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SWARM,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ELECTROWEB, MOVE_EERIE_IMPULSE, MOVE_WILD_CHARGE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_BATTERY,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ELECTROWEB, MOVE_EERIE_IMPULSE, MOVE_DISCHARGE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_LEVITATE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Wide Guard Support"),
+        .preset =
+        {
+            .moves = {MOVE_WIDE_GUARD, MOVE_HELPING_HAND, MOVE_CLOSE_COMBAT, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_IRON_FIST,
+            .statPoints = {32, 0, 16, 0, 18, 0},
         },
     },
     {
@@ -14269,6 +22933,54 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_HURRICANE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_DANCER,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Quiver Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_QUIVER_DANCE, MOVE_DAZZLING_GLEAM, MOVE_BUG_BUZZ, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_SWEET_VEIL,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_DAZZLING_GLEAM, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_SWEET_VEIL,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HELPING_HAND, MOVE_ROCK_SLIDE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_VITAL_SPIRIT,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Physical Attacker"),
         .preset =
         {
@@ -14278,6 +22990,102 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_JOLLY,
             .ability = ABILITY_SAND_RUSH,
             .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_SURF, MOVE_ICE_BEAM, MOVE_ROUND, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_SCHOOLING,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_GUNK_SHOT, MOVE_LIQUIDATION, MOVE_ICE_SPINNER, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_REGENERATOR,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_GUNK_SHOT, MOVE_LIQUIDATION, MOVE_BODY_SLAM, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_REGENERATOR,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_EARTHQUAKE, MOVE_CLOSE_COMBAT, MOVE_ROCK_SLIDE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_STAMINA,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_EARTHQUAKE, MOVE_CLOSE_COMBAT, MOVE_ROCK_SLIDE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_STAMINA,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_LIQUIDATION, MOVE_PROTECT, MOVE_IRON_DEFENSE},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_WATER_BUBBLE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Wide Guard Support"),
+        .preset =
+        {
+            .moves = {MOVE_WIDE_GUARD, MOVE_LIQUIDATION, MOVE_PROTECT, MOVE_ICY_WIND},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_WATER_BUBBLE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_PETAL_BLIZZARD, MOVE_SUPERPOWER, MOVE_LEECH_LIFE, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_CONTRARY,
+            .statPoints = {32, 32, 2, 0, 0, 0},
         },
     },
     {
@@ -14293,6 +23101,162 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_DAZZLING_GLEAM, MOVE_ENERGY_BALL, MOVE_POLLEN_PUFF, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_EFFECT_SPORE,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_DAZZLING_GLEAM, MOVE_ENERGY_BALL, MOVE_POLLEN_PUFF, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_EFFECT_SPORE,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_OVERHEAT, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_OBLIVIOUS,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_OVERHEAT, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_OBLIVIOUS,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Wide Guard Support"),
+        .preset =
+        {
+            .moves = {MOVE_WIDE_GUARD, MOVE_COACHING, MOVE_DOUBLE_EDGE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_FLUFFY,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Wide Guard Support"),
+        .preset =
+        {
+            .moves = {MOVE_WIDE_GUARD, MOVE_COACHING, MOVE_CLOSE_COMBAT, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_FLUFFY,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_SEED_BOMB, MOVE_PLAY_ROUGH, MOVE_ZEN_HEADBUTT, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_SWEET_VEIL,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_PETAL_BLIZZARD, MOVE_PLAY_ROUGH, MOVE_ZEN_HEADBUTT, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_SWEET_VEIL,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_PETAL_BLIZZARD, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_QUEENLY_MAJESTY,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_DRAINING_KISS, MOVE_GIGA_DRAIN, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_TRIAGE,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Nasty Plot Setup"),
+        .preset =
+        {
+            .moves = {MOVE_NASTY_PLOT, MOVE_HYPER_VOICE, MOVE_PSYCHIC, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_INNER_FOCUS,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ELECTROWEB, MOVE_TAUNT, MOVE_CLOSE_COMBAT, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_DEFIANT,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Wide Guard Support"),
+        .preset =
+        {
+            .moves = {MOVE_WIDE_GUARD, MOVE_TAUNT, MOVE_LEECH_LIFE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_WIMP_OUT,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
         .name = _("Mega Trick Room"),
         .preset =
         {
@@ -14305,6 +23269,66 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Wide Guard Support"),
+        .preset =
+        {
+            .moves = {MOVE_WIDE_GUARD, MOVE_TAUNT, MOVE_FIRST_IMPRESSION, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_EMERGENCY_EXIT,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Nasty Plot Setup"),
+        .preset =
+        {
+            .moves = {MOVE_NASTY_PLOT, MOVE_EARTH_POWER, MOVE_SHADOW_BALL, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_WATER_COMPACTION,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_EARTH_POWER, MOVE_PROTECT, MOVE_SHORE_UP},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_SAND_STREAM,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_PROTECT, MOVE_HELPING_HAND},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_UNAWARE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_DOUBLE_EDGE, MOVE_PROTECT, MOVE_THUNDER_WAVE},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_BATTLE_ARMOR,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Support"),
         .preset =
         {
@@ -14314,6 +23338,66 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_CALM,
             .ability = ABILITY_RKS_SYSTEM,
             .statPoints = {32, 0, 2, 0, 32, 0},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_ROCK_SLIDE, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_SHIELDS_DOWN,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_DOUBLE_EDGE, MOVE_SUPERPOWER, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_COMATOSE,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Wide Guard Support"),
+        .preset =
+        {
+            .moves = {MOVE_WIDE_GUARD, MOVE_TAUNT, MOVE_SHELL_TRAP, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_SHELL_ARMOR,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_WILD_CHARGE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_STURDY,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_PLAY_ROUGH, MOVE_WOOD_HAMMER, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_DISGUISE,
+            .statPoints = {2, 32, 0, 0, 0, 32},
         },
     },
     {
@@ -14338,6 +23422,138 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_QUIET,
             .ability = ABILITY_BERSERK,
             .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_DRACO_METEOR, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_BERSERK,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_POLTERGEIST, MOVE_POWER_WHIP, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_STEELWORKER,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_DRAGON_CLAW, MOVE_PROTECT, MOVE_IRON_DEFENSE},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_OVERCOAT,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_CLOSE_COMBAT, MOVE_PROTECT, MOVE_COACHING},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_OVERCOAT,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HELPING_HAND, MOVE_CLOSE_COMBAT, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_OVERCOAT,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_WILD_CHARGE, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_ELECTRIC_SURGE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_DAZZLING_GLEAM, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_PSYCHIC_SURGE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_WOOD_HAMMER, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_GRASSY_SURGE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_DAZZLING_GLEAM, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_MISTY_SURGE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Fast Utility"),
+        .preset =
+        {
+            .moves = {MOVE_TELEPORT, MOVE_DOUBLE_EDGE, MOVE_MIMIC, MOVE_SPLASH},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_UNAWARE,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fast Utility"),
+        .preset =
+        {
+            .moves = {MOVE_COSMIC_POWER, MOVE_TELEPORT, MOVE_DOUBLE_EDGE, MOVE_MIMIC},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_STURDY,
+            .statPoints = {2, 32, 0, 0, 0, 32},
         },
     },
     {
@@ -14377,6 +23593,30 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_ALLY_SWITCH, MOVE_SLUDGE_WAVE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_BEAST_BOOST,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_CLOSE_COMBAT, MOVE_PROTECT, MOVE_COACHING},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_BEAST_BOOST,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Setup Sweeper"),
         .preset =
         {
@@ -14389,6 +23629,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_DISCHARGE, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_BEAST_BOOST,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
         .name = _("Setup Sweeper"),
         .preset =
         {
@@ -14398,6 +23650,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_MODEST,
             .ability = ABILITY_BEAST_BOOST,
             .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_LEAF_BLADE, MOVE_PROTECT, MOVE_SYNTHESIS},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_BEAST_BOOST,
+            .statPoints = {32, 0, 2, 0, 0, 32},
         },
     },
     {
@@ -14461,6 +23725,30 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Bulk Up Setup"),
+        .preset =
+        {
+            .moves = {MOVE_BULK_UP, MOVE_CLOSE_COMBAT, MOVE_POLTERGEIST, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_TECHNICIAN,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_GUNK_SHOT, MOVE_FACADE, MOVE_IRON_TAIL, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_BEAST_BOOST,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Support"),
         .preset =
         {
@@ -14470,6 +23758,30 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_CALM,
             .ability = ABILITY_BEAST_BOOST,
             .statPoints = {32, 0, 2, 0, 32, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_ROCK_SLIDE, MOVE_IRON_HEAD, MOVE_SUPERPOWER, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_BEAST_BOOST,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_ENCORE, MOVE_MIND_BLOWN, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_BEAST_BOOST,
+            .statPoints = {32, 0, 2, 0, 0, 32},
         },
     },
     {
@@ -14497,6 +23809,54 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_IRON_HEAD, MOVE_BRUTAL_SWING, MOVE_FACADE, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_MAGNET_PULL,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_DOUBLE_IRON_BASH, MOVE_SUPERPOWER, MOVE_EARTHQUAKE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_IRON_FIST,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_TAUNT, MOVE_WOOD_HAMMER, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_GRASSY_SURGE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_TAUNT, MOVE_WOOD_HAMMER, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_GRASSY_SURGE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Bulky Attacker"),
         .preset =
         {
@@ -14506,6 +23866,30 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_ADAMANT,
             .ability = ABILITY_GRASSY_SURGE,
             .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HELPING_HAND, MOVE_FLARE_BLITZ, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_LIBERO,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HELPING_HAND, MOVE_FLARE_BLITZ, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_LIBERO,
+            .statPoints = {32, 0, 2, 0, 0, 32},
         },
     },
     {
@@ -14533,6 +23917,222 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_SURF, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_SNIPER,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_SURF, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_SNIPER,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_SURF, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_SNIPER,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_DOUBLE_EDGE, MOVE_CRUNCH, MOVE_SEED_BOMB, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_CHEEK_POUCH,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_DOUBLE_EDGE, MOVE_SUPERPOWER, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_CHEEK_POUCH,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_TAUNT, MOVE_BRAVE_BIRD, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_UNNERVE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_TAUNT, MOVE_BRAVE_BIRD, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_UNNERVE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Bulk Up Setup"),
+        .preset =
+        {
+            .moves = {MOVE_BULK_UP, MOVE_BRAVE_BIRD, MOVE_IRON_HEAD, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_MIRROR_ARMOR,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Fast Utility"),
+        .preset =
+        {
+            .moves = {MOVE_STRUGGLE_BUG, MOVE_SUPERSONIC, MOVE_RECOVER, MOVE_INFESTATION},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_COMPOUND_EYES,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_BUG_BUZZ, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_TELEPATHY,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_BUG_BUZZ, MOVE_PSYCHIC, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_TELEPATHY,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_TAUNT, MOVE_DARK_PULSE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_STAKEOUT,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_TAUNT, MOVE_DARK_PULSE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_STAKEOUT,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_GRASSY_GLIDE, MOVE_FACADE, MOVE_RAZOR_LEAF, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_REGENERATOR,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_LEAF_STORM, MOVE_HYPER_VOICE, MOVE_POLLEN_PUFF, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_REGENERATOR,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_DOUBLE_EDGE, MOVE_WILD_CHARGE, MOVE_GRASSY_GLIDE, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_FLUFFY,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_DOUBLE_EDGE, MOVE_WILD_CHARGE, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_FLUFFY,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Shell Smash Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SHELL_SMASH, MOVE_LIQUIDATION, MOVE_CRUNCH, MOVE_PROTECT},
+            .item = ITEM_WHITE_HERB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_STRONG_JAW,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
         .name = _("Shell Smash"),
         .preset =
         {
@@ -14545,6 +24145,174 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Howl Setup"),
+        .preset =
+        {
+            .moves = {MOVE_HOWL, MOVE_WILD_CHARGE, MOVE_PLAY_ROUGH, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_RATTLED,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Bulk Up Setup"),
+        .preset =
+        {
+            .moves = {MOVE_BULK_UP, MOVE_THUNDER_FANG, MOVE_PSYCHIC_FANGS, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_STRONG_JAW,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_ROCK_SLIDE, MOVE_BODY_SLAM, MOVE_IRON_HEAD, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_FLASH_FIRE,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_FLARE_BLITZ, MOVE_ROCK_SLIDE, MOVE_HIGH_HORSEPOWER, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_STEAM_ENGINE,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_FLARE_BLITZ, MOVE_ROCK_SLIDE, MOVE_EARTHQUAKE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_STEAM_ENGINE,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_GRASSY_GLIDE, MOVE_SUCKER_PUNCH, MOVE_POUNCE, MOVE_NONE},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_BULLETPROOF,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Dragon Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_DRAGON_DANCE, MOVE_GRAV_APPLE, MOVE_DRAGON_RUSH, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_HUSTLE,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_DRACO_METEOR, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_THICK_FAT,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Coil Setup"),
+        .preset =
+        {
+            .moves = {MOVE_COIL, MOVE_EARTHQUAKE, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_SAND_SPIT,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Coil Setup"),
+        .preset =
+        {
+            .moves = {MOVE_COIL, MOVE_EARTHQUAKE, MOVE_ROCK_SLIDE, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SAND_SPIT,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_ICY_WIND, MOVE_BRAVE_BIRD, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_GULP_MISSILE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_LIQUIDATION, MOVE_CLOSE_COMBAT, MOVE_PSYCHIC_FANGS, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_SWIFT_SWIM,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_LIQUIDATION, MOVE_CLOSE_COMBAT, MOVE_PSYCHIC_FANGS, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SWIFT_SWIM,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_ACID, MOVE_ROUND, MOVE_PROTECT, MOVE_ENCORE},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_STATIC,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
         .name = _("Choice Attacker"),
         .preset =
         {
@@ -14554,6 +24322,246 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_TIMID,
             .ability = ABILITY_PUNK_ROCK,
             .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Coil Setup"),
+        .preset =
+        {
+            .moves = {MOVE_COIL, MOVE_FIRE_LASH, MOVE_LEECH_LIFE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_WHITE_SMOKE,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Coil Setup"),
+        .preset =
+        {
+            .moves = {MOVE_COIL, MOVE_FLARE_BLITZ, MOVE_LEECH_LIFE, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_WHITE_SMOKE,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_CIRCLE_THROW, MOVE_PROTECT, MOVE_COACHING},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_TECHNICIAN,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_CLOSE_COMBAT, MOVE_PROTECT, MOVE_COACHING},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_LIMBER,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_ALLY_SWITCH, MOVE_SHADOW_BALL, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_WEAK_ARMOR,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_ALLY_SWITCH, MOVE_SHADOW_BALL, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_WEAK_ARMOR,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_PSYCHIC, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_MAGIC_BOUNCE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_PSYCHIC, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_MAGIC_BOUNCE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_DAZZLING_GLEAM, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_MAGIC_BOUNCE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_TAUNT, MOVE_DAZZLING_GLEAM, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_PRANKSTER,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Nasty Plot Setup"),
+        .preset =
+        {
+            .moves = {MOVE_NASTY_PLOT, MOVE_DAZZLING_GLEAM, MOVE_DARK_PULSE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_PRANKSTER,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Bulk Up Setup"),
+        .preset =
+        {
+            .moves = {MOVE_BULK_UP, MOVE_SUCKER_PUNCH, MOVE_PLAY_ROUGH, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_PRANKSTER,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_FACADE, MOVE_PROTECT},
+            .item = ITEM_FLAME_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_GUTS,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_IRON_HEAD, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_STEELY_SPIRIT,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_BLIZZARD, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_PERISH_BODY,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_CLOSE_COMBAT, MOVE_FIRST_IMPRESSION, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_SCRAPPY,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_BLIZZARD, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_SCREEN_CLEANER,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_EARTHQUAKE, MOVE_POLTERGEIST, MOVE_ROCK_SLIDE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_WANDERING_SPIRIT,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_DAZZLING_GLEAM, MOVE_ROUND, MOVE_DRAINING_KISS, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_AROMA_VEIL,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_DAZZLING_GLEAM, MOVE_ENERGY_BALL, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_AROMA_VEIL,
+            .statPoints = {32, 0, 2, 32, 0, 0},
         },
     },
     {
@@ -14581,6 +24589,42 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ELECTROWEB, MOVE_SUPERCELL_SLAM, MOVE_PROTECT, MOVE_THUNDER_WAVE},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_ELECTRIC_SURGE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_BUG_BUZZ, MOVE_PROTECT, MOVE_NONE},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_ICE_SCALES,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_BLIZZARD, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_ICE_SCALES,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Choice Attacker"),
         .preset =
         {
@@ -14590,6 +24634,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_ADAMANT,
             .ability = ABILITY_POWER_SPOT,
             .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_AURORA_VEIL, MOVE_ICICLE_CRASH, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_ICE_FACE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
         },
     },
     {
@@ -14605,6 +24661,30 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_TAUNT, MOVE_AURA_WHEEL, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_HUNGER_SWITCH,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_IRON_HEAD, MOVE_SUPERPOWER, MOVE_EARTHQUAKE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_SHEER_FORCE,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
         .name = _("Bulky Attacker"),
         .preset =
         {
@@ -14617,6 +24697,54 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_THUNDER_WAVE, MOVE_WILD_CHARGE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SAND_RUSH,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_TAUNT, MOVE_WILD_CHARGE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SLUSH_RUSH,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_FISHIOUS_REND, MOVE_PSYCHIC_FANGS, MOVE_CRUNCH, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_STRONG_JAW,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_FISHIOUS_REND, MOVE_PROTECT, MOVE_AURORA_VEIL},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SLUSH_RUSH,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Bulky Setup"),
         .preset =
         {
@@ -14625,6 +24753,54 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .requiredItem = ITEM_NONE,
             .nature = NATURE_MODEST,
             .ability = ABILITY_STALWART,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_SUCKER_PUNCH, MOVE_FACADE, MOVE_QUICK_ATTACK, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_CLEAR_BODY,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_BREAKING_SWIPE, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_INFILTRATOR,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_DRAGON_CLAW, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_INFILTRATOR,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_STEEL_BEAM, MOVE_DAZZLING_GLEAM, MOVE_HYPER_VOICE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_INTREPID_SWORD,
             .statPoints = {2, 0, 0, 32, 0, 32},
         },
     },
@@ -14665,6 +24841,1830 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_CLOSE_COMBAT, MOVE_BODY_SLAM, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_INNER_FOCUS,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HELPING_HAND, MOVE_CLOSE_COMBAT, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_UNSEEN_FIST,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_ENCORE, MOVE_PETAL_BLIZZARD, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_LEAF_GUARD,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_SUPERCELL_SLAM, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_TRANSISTOR,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_DRAGON_CLAW, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_DRAGONS_MAW,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_TAUNT, MOVE_ICICLE_CRASH, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_CHILLING_NEIGH,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_DISABLE, MOVE_SHADOW_BALL, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_GRIM_NEIGH,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_SEED_BOMB, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_UNNERVE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_TAUNT, MOVE_DOUBLE_EDGE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_HUSTLE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_TAUNT, MOVE_DOUBLE_EDGE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_HUSTLE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_DISCHARGE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_SURGE_SURFER,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_ICICLE_CRASH, MOVE_PROTECT, MOVE_AURORA_VEIL},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SLUSH_RUSH,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_ICICLE_CRASH, MOVE_PROTECT, MOVE_AURORA_VEIL},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SLUSH_RUSH,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_AURORA_VEIL, MOVE_BLIZZARD, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_SNOW_WARNING,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Nasty Plot Setup"),
+        .preset =
+        {
+            .moves = {MOVE_NASTY_PLOT, MOVE_BLIZZARD, MOVE_DAZZLING_GLEAM, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_SNOW_WARNING,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_EARTHQUAKE, MOVE_IRON_HEAD, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_TANGLING_HAIR,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_EARTHQUAKE, MOVE_IRON_HEAD, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_TANGLING_HAIR,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_SNARL, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_TECHNICIAN,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_DARK_PULSE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_FUR_COAT,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Wide Guard Support"),
+        .preset =
+        {
+            .moves = {MOVE_WIDE_GUARD, MOVE_DOUBLE_EDGE, MOVE_PROTECT, MOVE_ELECTROWEB},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_GALVANIZE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Wide Guard Support"),
+        .preset =
+        {
+            .moves = {MOVE_WIDE_GUARD, MOVE_DOUBLE_EDGE, MOVE_PROTECT, MOVE_ELECTROWEB},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_GALVANIZE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Wide Guard Support"),
+        .preset =
+        {
+            .moves = {MOVE_WIDE_GUARD, MOVE_DOUBLE_EDGE, MOVE_PROTECT, MOVE_ELECTROWEB},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_GALVANIZE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_DISABLE, MOVE_GUNK_SHOT, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_POISON_TOUCH,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_DISABLE, MOVE_GUNK_SHOT, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_GLUTTONY,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_DRACO_METEOR, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_FRISK,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_FLARE_BLITZ, MOVE_PROTECT, MOVE_WILL_O_WISP},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_LIGHTNING_ROD,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_IRON_HEAD, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_TOUGH_CLAWS,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_ZEN_HEADBUTT, MOVE_FLARE_BLITZ, MOVE_HIGH_HORSEPOWER, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_PASTEL_VEIL,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_ALLY_SWITCH, MOVE_PLAY_ROUGH, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_PASTEL_VEIL,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_ZEN_HEADBUTT, MOVE_EARTHQUAKE, MOVE_BODY_SLAM, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_REGENERATOR,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_GUNK_SHOT, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_REGENERATOR,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_CLOSE_COMBAT, MOVE_BRAVE_BIRD, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_SCRAPPY,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_PLAY_ROUGH, MOVE_GUNK_SHOT, MOVE_BODY_SLAM, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_NEUTRALIZING_GAS,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_BLIZZARD, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_VITAL_SPIRIT,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_FREEZING_GLARE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_COMPETITIVE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_BRAVE_BIRD, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_DEFIANT,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_FIERY_WRATH, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_BERSERK,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_SLUDGE_WAVE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_REGENERATOR,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_BLIZZARD, MOVE_SHADOW_BALL, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_CURSED_BODY,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_FACADE, MOVE_LASH_OUT, MOVE_GUNK_SHOT, MOVE_PROTECT},
+            .item = ITEM_TOXIC_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_QUICK_FEET,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_FACADE, MOVE_PROTECT},
+            .item = ITEM_TOXIC_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_QUICK_FEET,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_ENCORE, MOVE_FLARE_BLITZ, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_HUSTLE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_ICICLE_CRASH, MOVE_FLARE_BLITZ, MOVE_SUPERPOWER, MOVE_EARTHQUAKE},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_GORILLA_TACTICS,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_EARTHQUAKE, MOVE_POLTERGEIST, MOVE_ROCK_SLIDE, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_WANDERING_SPIRIT,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_EARTHQUAKE, MOVE_SUCKER_PUNCH, MOVE_METAL_CLAW, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_MIMICRY,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_VOLT_TACKLE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_STATIC,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_VOLT_TACKLE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_STATIC,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_VOLT_TACKLE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_STATIC,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_VOLT_TACKLE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_STATIC,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_VOLT_TACKLE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_STATIC,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_VOLT_TACKLE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_STATIC,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_VOLT_TACKLE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_STATIC,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_VOLT_TACKLE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_STATIC,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_VOLT_TACKLE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_STATIC,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_VOLT_TACKLE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_STATIC,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_VOLT_TACKLE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_STATIC,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_VOLT_TACKLE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_STATIC,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_VOLT_TACKLE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_STATIC,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_VOLT_TACKLE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_STATIC,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_VOLT_TACKLE, MOVE_PLAY_ROUGH, MOVE_BODY_SLAM, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_STATIC,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_ALLY_SWITCH, MOVE_ZEN_HEADBUTT, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_PRESSURE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_ZEN_HEADBUTT, MOVE_ROCK_SLIDE, MOVE_BODY_SLAM, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_PRESSURE,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_ALLY_SWITCH, MOVE_ZEN_HEADBUTT, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_PRESSURE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ELECTROWEB, MOVE_BUG_BITE, MOVE_PROTECT, MOVE_STRING_SHOT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SHED_SKIN,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ELECTROWEB, MOVE_BUG_BITE, MOVE_PROTECT, MOVE_STRING_SHOT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SHED_SKIN,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ELECTROWEB, MOVE_EARTHQUAKE, MOVE_PROTECT, MOVE_STRING_SHOT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_ANTICIPATION,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ELECTROWEB, MOVE_IRON_HEAD, MOVE_PROTECT, MOVE_IRON_DEFENSE},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_ANTICIPATION,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_SURF, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_STICKY_HOLD,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_SURF, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_STORM_DRAIN,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_OVERHEAT, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_LEVITATE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_LEAF_STORM, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_LEVITATE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_BLIZZARD, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_LEVITATE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_LEAF_STORM, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_MOTOR_DRIVE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_LEAF_STORM, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_LEVITATE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_POLTERGEIST, MOVE_PROTECT, MOVE_WILL_O_WISP},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_LEVITATE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_LEAF_STORM, MOVE_PROTECT, MOVE_SLEEP_POWDER},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_SERENE_GRACE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_TAUNT, MOVE_FLARE_BLITZ, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_MULTITYPE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_TAUNT, MOVE_FLARE_BLITZ, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_MULTITYPE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_TAUNT, MOVE_GUNK_SHOT, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_MULTITYPE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_TAUNT, MOVE_EARTHQUAKE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_MULTITYPE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_TAUNT, MOVE_ROCK_SLIDE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_MULTITYPE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_TAUNT, MOVE_X_SCISSOR, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_MULTITYPE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_TAUNT, MOVE_FLARE_BLITZ, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_MULTITYPE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_TAUNT, MOVE_IRON_HEAD, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_MULTITYPE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_TAUNT, MOVE_FLARE_BLITZ, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_MULTITYPE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_TAUNT, MOVE_AQUA_TAIL, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_MULTITYPE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_TAUNT, MOVE_FLARE_BLITZ, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_MULTITYPE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_TAUNT, MOVE_SUPERCELL_SLAM, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_MULTITYPE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_TAUNT, MOVE_ZEN_HEADBUTT, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_MULTITYPE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_TAUNT, MOVE_FLARE_BLITZ, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_MULTITYPE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Dragon Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_DRAGON_DANCE, MOVE_DRAGON_CLAW, MOVE_FLARE_BLITZ, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_MULTITYPE,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_TAUNT, MOVE_FLARE_BLITZ, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_MULTITYPE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_TAUNT, MOVE_FLARE_BLITZ, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_MULTITYPE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_TAUNT, MOVE_WAVE_CRASH, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_ADAPTABILITY,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_LEAF_STORM, MOVE_ROUND, MOVE_SHADOW_BALL, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_SAP_SIPPER,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_LEAF_STORM, MOVE_ROUND, MOVE_SHADOW_BALL, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_SAP_SIPPER,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_LEAF_STORM, MOVE_ROUND, MOVE_SHADOW_BALL, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_SAP_SIPPER,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_DOUBLE_EDGE, MOVE_PETAL_BLIZZARD, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SAP_SIPPER,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_DOUBLE_EDGE, MOVE_PETAL_BLIZZARD, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SAP_SIPPER,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_DOUBLE_EDGE, MOVE_PETAL_BLIZZARD, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SAP_SIPPER,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Nasty Plot Setup"),
+        .preset =
+        {
+            .moves = {MOVE_NASTY_PLOT, MOVE_HURRICANE, MOVE_HEAT_WAVE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_REGENERATOR,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ELECTROWEB, MOVE_TAUNT, MOVE_DISCHARGE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_VOLT_ABSORB,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_EARTHQUAKE, MOVE_PROTECT, MOVE_SCARY_FACE},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_INTIMIDATE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_DRACO_METEOR, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_TURBOBLAZE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_DRAGON_CLAW, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_TERAVOLT,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_SURF, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_JUSTIFIED,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_IRON_HEAD, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_DOWNLOAD,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_IRON_HEAD, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_DOWNLOAD,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_IRON_HEAD, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_DOWNLOAD,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_IRON_HEAD, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_DOWNLOAD,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_SURF, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_BATTLE_BOND,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Quiver Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_QUIVER_DANCE, MOVE_BUG_BUZZ, MOVE_HURRICANE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_COMPOUND_EYES,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Quiver Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_QUIVER_DANCE, MOVE_BUG_BUZZ, MOVE_HURRICANE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_COMPOUND_EYES,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Quiver Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_QUIVER_DANCE, MOVE_BUG_BUZZ, MOVE_HURRICANE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_COMPOUND_EYES,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Quiver Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_QUIVER_DANCE, MOVE_BUG_BUZZ, MOVE_HURRICANE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_COMPOUND_EYES,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Quiver Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_QUIVER_DANCE, MOVE_BUG_BUZZ, MOVE_HURRICANE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_COMPOUND_EYES,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Quiver Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_QUIVER_DANCE, MOVE_BUG_BUZZ, MOVE_HURRICANE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_COMPOUND_EYES,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Quiver Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_QUIVER_DANCE, MOVE_BUG_BUZZ, MOVE_HURRICANE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_COMPOUND_EYES,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Quiver Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_QUIVER_DANCE, MOVE_BUG_BUZZ, MOVE_HURRICANE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_COMPOUND_EYES,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Quiver Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_QUIVER_DANCE, MOVE_BUG_BUZZ, MOVE_HURRICANE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_COMPOUND_EYES,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Quiver Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_QUIVER_DANCE, MOVE_BUG_BUZZ, MOVE_HURRICANE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_COMPOUND_EYES,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Quiver Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_QUIVER_DANCE, MOVE_BUG_BUZZ, MOVE_HURRICANE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_COMPOUND_EYES,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Quiver Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_QUIVER_DANCE, MOVE_BUG_BUZZ, MOVE_HURRICANE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_COMPOUND_EYES,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Quiver Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_QUIVER_DANCE, MOVE_BUG_BUZZ, MOVE_HURRICANE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_COMPOUND_EYES,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Quiver Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_QUIVER_DANCE, MOVE_BUG_BUZZ, MOVE_HURRICANE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_COMPOUND_EYES,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Quiver Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_QUIVER_DANCE, MOVE_BUG_BUZZ, MOVE_HURRICANE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_COMPOUND_EYES,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Quiver Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_QUIVER_DANCE, MOVE_BUG_BUZZ, MOVE_HURRICANE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_COMPOUND_EYES,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Quiver Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_QUIVER_DANCE, MOVE_BUG_BUZZ, MOVE_HURRICANE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_COMPOUND_EYES,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Quiver Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_QUIVER_DANCE, MOVE_BUG_BUZZ, MOVE_HURRICANE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_COMPOUND_EYES,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Quiver Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_QUIVER_DANCE, MOVE_BUG_BUZZ, MOVE_HURRICANE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_COMPOUND_EYES,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_DAZZLING_GLEAM, MOVE_ENERGY_BALL, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_FLOWER_VEIL,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_DAZZLING_GLEAM, MOVE_ENERGY_BALL, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_FLOWER_VEIL,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_DAZZLING_GLEAM, MOVE_ENERGY_BALL, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_FLOWER_VEIL,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_DAZZLING_GLEAM, MOVE_ENERGY_BALL, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_FLOWER_VEIL,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_LIGHT_OF_RUIN, MOVE_ENERGY_BALL, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_FLOWER_VEIL,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_LIGHT_OF_RUIN, MOVE_ENERGY_BALL, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_FLOWER_VEIL,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_LIGHT_OF_RUIN, MOVE_ENERGY_BALL, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_FLOWER_VEIL,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_LIGHT_OF_RUIN, MOVE_ENERGY_BALL, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_FLOWER_VEIL,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_LIGHT_OF_RUIN, MOVE_ENERGY_BALL, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_FLOWER_VEIL,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_DAZZLING_GLEAM, MOVE_ENERGY_BALL, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_SYMBIOSIS,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_DAZZLING_GLEAM, MOVE_ENERGY_BALL, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_SYMBIOSIS,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_DAZZLING_GLEAM, MOVE_ENERGY_BALL, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_SYMBIOSIS,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_DAZZLING_GLEAM, MOVE_ENERGY_BALL, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_SYMBIOSIS,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_DOUBLE_EDGE, MOVE_SUCKER_PUNCH, MOVE_WILD_CHARGE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_FUR_COAT,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_DOUBLE_EDGE, MOVE_SUCKER_PUNCH, MOVE_WILD_CHARGE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_FUR_COAT,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_DOUBLE_EDGE, MOVE_SUCKER_PUNCH, MOVE_WILD_CHARGE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_FUR_COAT,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_DOUBLE_EDGE, MOVE_SUCKER_PUNCH, MOVE_WILD_CHARGE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_FUR_COAT,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_DOUBLE_EDGE, MOVE_SUCKER_PUNCH, MOVE_WILD_CHARGE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_FUR_COAT,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_DOUBLE_EDGE, MOVE_SUCKER_PUNCH, MOVE_WILD_CHARGE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_FUR_COAT,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_DOUBLE_EDGE, MOVE_SUCKER_PUNCH, MOVE_WILD_CHARGE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_FUR_COAT,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_DOUBLE_EDGE, MOVE_SUCKER_PUNCH, MOVE_WILD_CHARGE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_FUR_COAT,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_DOUBLE_EDGE, MOVE_SUCKER_PUNCH, MOVE_WILD_CHARGE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_FUR_COAT,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Mega Special Attacker"),
         .preset =
         {
@@ -14674,6 +26674,114 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_HASTY,
             .ability = ABILITY_TRACE,
             .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_PSYCHIC, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_COMPETITIVE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_POLTERGEIST, MOVE_POWER_WHIP, MOVE_ROCK_SLIDE, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_INSOMNIA,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_POLTERGEIST, MOVE_POWER_WHIP, MOVE_ROCK_SLIDE, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_INSOMNIA,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_POLTERGEIST, MOVE_POWER_WHIP, MOVE_ROCK_SLIDE, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_INSOMNIA,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_ALLY_SWITCH, MOVE_ENERGY_BALL, MOVE_PROTECT},
+            .item = ITEM_FLAME_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_FLARE_BOOST,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_ALLY_SWITCH, MOVE_ENERGY_BALL, MOVE_PROTECT},
+            .item = ITEM_FLAME_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_FLARE_BOOST,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_ALLY_SWITCH, MOVE_ENERGY_BALL, MOVE_PROTECT},
+            .item = ITEM_FLAME_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_FLARE_BOOST,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Dragon Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_DRAGON_DANCE, MOVE_EARTHQUAKE, MOVE_SUPERPOWER, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_AURA_BREAK,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Dragon Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_DRAGON_DANCE, MOVE_EARTHQUAKE, MOVE_SUPERPOWER, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_POWER_CONSTRUCT,
+            .statPoints = {2, 32, 0, 0, 0, 32},
         },
     },
     {
@@ -14689,6 +26797,402 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Dragon Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_DRAGON_DANCE, MOVE_EARTHQUAKE, MOVE_SUPERPOWER, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_POWER_CONSTRUCT,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_ALLY_SWITCH, MOVE_PSYCHIC, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_MAGICIAN,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_HURRICANE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_DANCER,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_HURRICANE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_DANCER,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_HURRICANE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_DANCER,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_ROCK_SLIDE, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_OWN_TEMPO,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HELPING_HAND, MOVE_ROCK_SLIDE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_NO_GUARD,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HELPING_HAND, MOVE_CLOSE_COMBAT, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_TOUGH_CLAWS,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_ICY_WIND, MOVE_MULTI_ATTACK, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_RKS_SYSTEM,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_ICY_WIND, MOVE_MULTI_ATTACK, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_RKS_SYSTEM,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_ICY_WIND, MOVE_MULTI_ATTACK, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_RKS_SYSTEM,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_ICY_WIND, MOVE_MULTI_ATTACK, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_RKS_SYSTEM,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_ICY_WIND, MOVE_ROCK_SLIDE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_RKS_SYSTEM,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_ICY_WIND, MOVE_X_SCISSOR, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_RKS_SYSTEM,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_ICY_WIND, MOVE_MULTI_ATTACK, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_RKS_SYSTEM,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_ICY_WIND, MOVE_IRON_HEAD, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_RKS_SYSTEM,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_ICY_WIND, MOVE_MULTI_ATTACK, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_RKS_SYSTEM,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_ICY_WIND, MOVE_MULTI_ATTACK, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_RKS_SYSTEM,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_ICY_WIND, MOVE_MULTI_ATTACK, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_RKS_SYSTEM,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_ICY_WIND, MOVE_MULTI_ATTACK, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_RKS_SYSTEM,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_ICY_WIND, MOVE_PSYCHIC_FANGS, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_RKS_SYSTEM,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_ICY_WIND, MOVE_MULTI_ATTACK, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_RKS_SYSTEM,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_ICY_WIND, MOVE_DRAGON_CLAW, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_RKS_SYSTEM,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_CRUNCH, MOVE_MULTI_ATTACK, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_RKS_SYSTEM,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_ICY_WIND, MOVE_MULTI_ATTACK, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_RKS_SYSTEM,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_HEAD_SMASH, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_SHIELDS_DOWN,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_HEAD_SMASH, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_SHIELDS_DOWN,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_HEAD_SMASH, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_SHIELDS_DOWN,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_HEAD_SMASH, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_SHIELDS_DOWN,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_HEAD_SMASH, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_SHIELDS_DOWN,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_HEAD_SMASH, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_SHIELDS_DOWN,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_ALLY_SWITCH, MOVE_SUNSTEEL_STRIKE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_PRISM_ARMOR,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_ALLY_SWITCH, MOVE_MOONGEIST_BEAM, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_PRISM_ARMOR,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
         .name = _("Mega Trick Room"),
         .preset =
         {
@@ -14698,6 +27202,378 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_QUIET,
             .ability = ABILITY_SOUL_HEART,
             .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_STEEL_BEAM, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_SOUL_HEART,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ELECTROWEB, MOVE_HELPING_HAND, MOVE_BOOMBURST, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_PUNK_ROCK,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_ALLY_SWITCH, MOVE_SHADOW_BALL, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_WEAK_ARMOR,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_ALLY_SWITCH, MOVE_SHADOW_BALL, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_CURSED_BODY,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_DAZZLING_GLEAM, MOVE_ENERGY_BALL, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_AROMA_VEIL,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_DAZZLING_GLEAM, MOVE_ENERGY_BALL, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_AROMA_VEIL,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_DAZZLING_GLEAM, MOVE_ENERGY_BALL, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_AROMA_VEIL,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_DAZZLING_GLEAM, MOVE_ENERGY_BALL, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_AROMA_VEIL,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_DAZZLING_GLEAM, MOVE_ENERGY_BALL, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_AROMA_VEIL,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_DAZZLING_GLEAM, MOVE_ENERGY_BALL, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_AROMA_VEIL,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_DAZZLING_GLEAM, MOVE_ENERGY_BALL, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_AROMA_VEIL,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_DAZZLING_GLEAM, MOVE_ENERGY_BALL, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_AROMA_VEIL,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_HYPER_VOICE, MOVE_PSYCHIC, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_PSYCHIC_SURGE,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_STEEL_BEAM, MOVE_DAZZLING_GLEAM, MOVE_HYPER_VOICE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_INTREPID_SWORD,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Wide Guard Support"),
+        .preset =
+        {
+            .moves = {MOVE_WIDE_GUARD, MOVE_HELPING_HAND, MOVE_STEEL_BEAM, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_DAUNTLESS_SHIELD,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HELPING_HAND, MOVE_CLOSE_COMBAT, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_UNSEEN_FIST,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_ENCORE, MOVE_PETAL_BLIZZARD, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_LEAF_GUARD,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_GLACIAL_LANCE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_AS_ONE_ICE_RIDER,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_ASTRAL_BARRAGE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_AS_ONE_SHADOW_RIDER,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HELPING_HAND, MOVE_PETAL_BLIZZARD, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_PROTEAN,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HELPING_HAND, MOVE_PETAL_BLIZZARD, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_PROTEAN,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_PETAL_BLIZZARD, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_PROTEAN,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_OVERHEAT, MOVE_HYPER_VOICE, MOVE_SNARL, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_UNAWARE,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_OVERHEAT, MOVE_HYPER_VOICE, MOVE_SNARL, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_UNAWARE,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_OVERHEAT, MOVE_SHADOW_BALL, MOVE_HYPER_VOICE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_UNAWARE,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_ROCK_SLIDE, MOVE_EARTHQUAKE, MOVE_BODY_SLAM, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_PURIFYING_SALT,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_ROCK_SLIDE, MOVE_EARTHQUAKE, MOVE_BODY_SLAM, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_PURIFYING_SALT,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_ROCK_SLIDE, MOVE_EARTHQUAKE, MOVE_HAMMER_ARM, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_PURIFYING_SALT,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_AQUA_TAIL, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_WATER_VEIL,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_WAVE_CRASH, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_ZERO_TO_HERO,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_WAVE_CRASH, MOVE_EARTHQUAKE, MOVE_ROCK_SLIDE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_OBLIVIOUS,
+            .statPoints = {32, 32, 2, 0, 0, 0},
         },
     },
     {
@@ -14737,6 +27613,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_DRACO_METEOR, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_COMMANDER,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Mega Storm Drain"),
         .preset =
         {
@@ -14746,6 +27634,66 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_TIMID,
             .ability = ABILITY_STORM_DRAIN,
             .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_DRACO_METEOR, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_COMMANDER,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_ENCORE, MOVE_CLOSE_COMBAT, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_DEFIANT,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_HYPER_VOICE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_ARMOR_TAIL,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_THUNDER_WAVE, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_DEFIANT,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_CLOSE_COMBAT, MOVE_PROTECT, MOVE_SCARY_FACE},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_PROTOSYNTHESIS,
+            .statPoints = {32, 0, 2, 0, 0, 32},
         },
     },
     {
@@ -14785,6 +27733,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_SLUDGE_WAVE, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_TOXIC_DEBRIS,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
         .name = _("Mega Special Attacker"),
         .preset =
         {
@@ -14793,6 +27753,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .requiredItem = ITEM_GLIMMORANITE,
             .nature = NATURE_TIMID,
             .ability = ABILITY_ADAPTABILITY,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_SLUDGE_WAVE, MOVE_POWER_GEM, MOVE_DAZZLING_GLEAM, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_TOXIC_DEBRIS,
             .statPoints = {2, 0, 0, 32, 0, 32},
         },
     },
@@ -14809,15 +27781,39 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
-        .name = _("Wallbreaker"),
+        .name = _("Nasty Plot Setup"),
         .preset =
         {
-            .moves = {MOVE_SACRED_SWORD, MOVE_PROTECT, MOVE_SUCKER_PUNCH, MOVE_ICICLE_CRASH},
+            .moves = {MOVE_NASTY_PLOT, MOVE_SHADOW_BALL, MOVE_POWER_GEM, MOVE_PROTECT},
             .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_RUN_AWAY,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_STEEL_BEAM, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_GOOD_AS_GOLD,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_TAUNT, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
             .requiredItem = ITEM_NONE,
             .nature = NATURE_JOLLY,
             .ability = ABILITY_SWORD_OF_RUIN,
-            .statPoints = {2, 32, 0, 0, 0, 32},
+            .statPoints = {32, 0, 2, 0, 0, 32},
         },
     },
     {
@@ -14857,6 +27853,30 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_CLOSE_COMBAT, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BRAVE,
+            .ability = ABILITY_QUARK_DRIVE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_DRACO_METEOR, MOVE_SURF, MOVE_FLAMETHROWER, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_PROTOSYNTHESIS,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
         .name = _("Wallbreaker"),
         .preset =
         {
@@ -14865,6 +27885,66 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .requiredItem = ITEM_NONE,
             .nature = NATURE_JOLLY,
             .ability = ABILITY_DEFIANT,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_WOOD_HAMMER, MOVE_SUPERPOWER, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_WATER_ABSORB,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_WOOD_HAMMER, MOVE_SUPERPOWER, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_MOLD_BREAKER,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_WOOD_HAMMER, MOVE_SUPERPOWER, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_STURDY,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_DRACO_METEOR, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_STAMINA,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Dragon Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_DRAGON_DANCE, MOVE_FLARE_BLITZ, MOVE_DRAGON_CLAW, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_PROTOSYNTHESIS,
             .statPoints = {2, 32, 0, 0, 0, 32},
         },
     },
@@ -14890,6 +27970,150 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_MODEST,
             .ability = ABILITY_PROTOSYNTHESIS,
             .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_LIQUIDATION, MOVE_BRAVE_BIRD, MOVE_FACADE, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_MOXIE,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_LIQUIDATION, MOVE_BRAVE_BIRD, MOVE_FACADE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_MOXIE,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_CLOSE_COMBAT, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_MOXIE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_TAUNT, MOVE_DAZZLING_GLEAM, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_CONTRARY,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_TAUNT, MOVE_PLAY_ROUGH, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_TOXIC_CHAIN,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HELPING_HAND, MOVE_CLOSE_COMBAT, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_ORICHALCUM_PULSE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_DRACO_METEOR, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_HADRON_ENGINE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_SLUDGE_WAVE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_TOXIC_CHAIN,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_SNARL, MOVE_CLOSE_COMBAT, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_TOXIC_CHAIN,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_POLTERGEIST, MOVE_GUNK_SHOT, MOVE_PROTECT, MOVE_FAKE_TEARS},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_POISON_PUPPETEER,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_DOUBLE_EDGE, MOVE_FLARE_BLITZ, MOVE_EARTHQUAKE, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_TERA_SHIFT,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_LEAF_STORM, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_TABLETS_OF_RUIN,
+            .statPoints = {32, 0, 16, 0, 18, 0},
         },
     },
     {
@@ -15097,6 +28321,114 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ELECTROWEB, MOVE_TAUNT, MOVE_LEAF_STORM, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_SOUNDPROOF,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ELECTROWEB, MOVE_TAUNT, MOVE_CHLOROBLAST, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_SOUNDPROOF,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Victory Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_VICTORY_DANCE, MOVE_AXE_KICK, MOVE_PETAL_BLIZZARD, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_CHLOROPHYLL,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_PSYCHIC, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_TINTED_LENS,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_DRACO_METEOR, MOVE_STEEL_BEAM, MOVE_BLIZZARD, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_SHELL_ARMOR,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HELPING_HAND, MOVE_BLOOD_MOON, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_MINDS_EYE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_DOUBLE_EDGE, MOVE_PSYSHIELD_BASH, MOVE_EARTHQUAKE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_INTIMIDATE,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_X_SCISSOR, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SHARPNESS,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HELPING_HAND, MOVE_FACADE, MOVE_PROTECT},
+            .item = ITEM_FLAME_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_GUTS,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Special Attacker"),
         .preset =
         {
@@ -15106,6 +28438,42 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_MODEST,
             .ability = ABILITY_SWIFT_SWIM,
             .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_TAUNT, MOVE_CLOSE_COMBAT, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_UNBURDEN,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_GUNK_SHOT, MOVE_CRUNCH, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_INTIMIDATE,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_DOUBLE_EDGE, MOVE_PLAY_ROUGH, MOVE_IRON_HEAD, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_THICK_FAT,
+            .statPoints = {32, 32, 2, 0, 0, 0},
         },
     },
     {
@@ -15121,15 +28489,267 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
-        .name = _("Doubles Fast Attacker"),
+        .name = _("Physical Pressure"),
         .preset =
         {
-            .moves = {MOVE_HURRICANE, MOVE_THUNDERBOLT, MOVE_TAILWIND, MOVE_PROTECT},
+            .moves = {MOVE_FIRST_IMPRESSION, MOVE_CIRCLE_THROW, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
             .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_INSOMNIA,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_FIRST_IMPRESSION, MOVE_CIRCLE_THROW, MOVE_SUCKER_PUNCH, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_STAKEOUT,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_FIRST_IMPRESSION, MOVE_SUCKER_PUNCH, MOVE_FEINT, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_SWARM,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_FIRST_IMPRESSION, MOVE_PROTECT, MOVE_AGILITY},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_TINTED_LENS,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_WILD_CHARGE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_NATURAL_CURE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_UPPER_HAND, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_NATURAL_CURE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_CLOSE_COMBAT, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_VOLT_ABSORB,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Redirection Support"),
+        .preset =
+        {
+            .moves = {MOVE_FOLLOW_ME, MOVE_HELPING_HAND, MOVE_DOUBLE_EDGE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_FRIEND_GUARD,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Howl Setup"),
+        .preset =
+        {
+            .moves = {MOVE_HOWL, MOVE_PLAY_ROUGH, MOVE_BODY_SLAM, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_OWN_TEMPO,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Howl Setup"),
+        .preset =
+        {
+            .moves = {MOVE_HOWL, MOVE_PLAY_ROUGH, MOVE_BODY_SLAM, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_WELL_BAKED_BODY,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_LEAF_STORM, MOVE_SWIFT, MOVE_EARTH_POWER, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_EARLY_BIRD,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_LEAF_STORM, MOVE_SWIFT, MOVE_EARTH_POWER, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_EARLY_BIRD,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_LEAF_STORM, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_SEED_SOWER,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_BRAVE_BIRD, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_INTIMIDATE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Trick Room Control"),
+        .preset =
+        {
+            .moves = {MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_OVERHEAT, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_QUIET,
+            .ability = ABILITY_FLASH_FIRE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_FLARE_BLITZ, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_FLASH_FIRE,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_DISCHARGE, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_ELECTROMORPHOSIS,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_ELECTROWEB, MOVE_DISCHARGE, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
             .requiredItem = ITEM_NONE,
             .nature = NATURE_TIMID,
             .ability = ABILITY_COMPETITIVE,
-            .statPoints = {2, 0, 0, 32, 0, 32},
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_ELECTROWEB, MOVE_DISCHARGE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_COMPETITIVE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HELPING_HAND, MOVE_CRUNCH, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_INTIMIDATE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_HELPING_HAND, MOVE_CRUNCH, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_INTIMIDATE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_DOUBLE_EDGE, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_PRANKSTER,
+            .statPoints = {32, 0, 16, 0, 18, 0},
         },
     },
     {
@@ -15145,6 +28765,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_POLTERGEIST, MOVE_POWER_WHIP, MOVE_FACADE, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_WIND_RIDER,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
         .name = _("Offensive Protect"),
         .preset =
         {
@@ -15153,6 +28785,42 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .requiredItem = ITEM_NONE,
             .nature = NATURE_JOLLY,
             .ability = ABILITY_WIND_RIDER,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_LEAF_STORM, MOVE_EARTH_POWER, MOVE_DAZZLING_GLEAM, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_MYCELIUM_MIGHT,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_LEAF_STORM, MOVE_EARTH_POWER, MOVE_DAZZLING_GLEAM, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_MYCELIUM_MIGHT,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Swords Dance Setup"),
+        .preset =
+        {
+            .moves = {MOVE_SWORDS_DANCE, MOVE_ROCK_SLIDE, MOVE_CRABHAMMER, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_REGENERATOR,
             .statPoints = {2, 32, 0, 0, 0, 32},
         },
     },
@@ -15169,6 +28837,30 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Rage Powder Support"),
+        .preset =
+        {
+            .moves = {MOVE_RAGE_POWDER, MOVE_HELPING_HAND, MOVE_FLARE_BLITZ, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_MOODY,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_LEECH_LIFE, MOVE_GUNK_SHOT, MOVE_FACADE, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_COMPOUND_EYES,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
         .name = _("Doubles Bulky Attacker"),
         .preset =
         {
@@ -15181,6 +28873,66 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_PSYCHIC, MOVE_HYPER_VOICE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_SPEED_BOOST,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_PLAY_ROUGH, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_MOLD_BREAKER,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Fake Out Control"),
+        .preset =
+        {
+            .moves = {MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_GIGATON_HAMMER, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_MOLD_BREAKER,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_LIQUIDATION, MOVE_SUCKER_PUNCH, MOVE_BULLDOZE, MOVE_PROTECT},
+            .item = ITEM_FOCUS_SASH,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_GOOEY,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_LIQUIDATION, MOVE_SUCKER_PUNCH, MOVE_BULLDOZE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_GOOEY,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Choice Attacker"),
         .preset =
         {
@@ -15190,6 +28942,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_ADAMANT,
             .ability = ABILITY_ROCKY_PAYLOAD,
             .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Disruption Support"),
+        .preset =
+        {
+            .moves = {MOVE_TAUNT, MOVE_SPIN_OUT, MOVE_PROTECT, MOVE_IRON_DEFENSE},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_OVERCOAT,
+            .statPoints = {32, 0, 2, 0, 0, 32},
         },
     },
     {
@@ -15217,6 +28981,78 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Howl Setup"),
+        .preset =
+        {
+            .moves = {MOVE_HOWL, MOVE_POLTERGEIST, MOVE_PLAY_ROUGH, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_SAND_RUSH,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_TAUNT, MOVE_BRAVE_BIRD, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SCRAPPY,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_ICICLE_CRASH, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_THICK_FAT,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_ICICLE_CRASH, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SHEER_FORCE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_AQUA_CUTTER, MOVE_PROTECT, MOVE_RECOVER},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SHARPNESS,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_EARTHQUAKE, MOVE_GUNK_SHOT, MOVE_ROCK_SLIDE, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_ADAMANT,
+            .ability = ABILITY_WATER_ABSORB,
+            .statPoints = {32, 32, 2, 0, 0, 0},
+        },
+    },
+    {
         .name = _("Bulky Protect"),
         .preset =
         {
@@ -15225,6 +29061,18 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .requiredItem = ITEM_NONE,
             .nature = NATURE_ADAMANT,
             .ability = ABILITY_RATTLED,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Bulk Up Setup"),
+        .preset =
+        {
+            .moves = {MOVE_BULK_UP, MOVE_PLAY_ROUGH, MOVE_PSYCHIC_FANGS, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_PROTOSYNTHESIS,
             .statPoints = {2, 32, 0, 0, 0, 32},
         },
     },
@@ -15241,6 +29089,54 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Bulk Up Setup"),
+        .preset =
+        {
+            .moves = {MOVE_BULK_UP, MOVE_FIRST_IMPRESSION, MOVE_CLOSE_COMBAT, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_PROTOSYNTHESIS,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Dual Screens"),
+        .preset =
+        {
+            .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_DISCHARGE, MOVE_PROTECT},
+            .item = ITEM_LIGHT_CLAY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_BOLD,
+            .ability = ABILITY_PROTOSYNTHESIS,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Physical Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_EARTHQUAKE, MOVE_HARD_PRESS, MOVE_SUPERCELL_SLAM, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_QUARK_DRIVE,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_TAUNT, MOVE_HURRICANE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_QUARK_DRIVE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
         .name = _("Doubles Setup Sweeper"),
         .preset =
         {
@@ -15250,6 +29146,42 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_TIMID,
             .ability = ABILITY_QUARK_DRIVE,
             .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ELECTROWEB, MOVE_TAUNT, MOVE_SUPERCELL_SLAM, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_QUARK_DRIVE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_ICICLE_CRASH, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_THERMAL_EXCHANGE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_ICICLE_CRASH, MOVE_PROTECT},
+            .item = ITEM_EVIOLITE,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_THERMAL_EXCHANGE,
+            .statPoints = {32, 0, 2, 0, 0, 32},
         },
     },
     {
@@ -15301,6 +29233,42 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
         },
     },
     {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_DRACO_METEOR, MOVE_LEAF_STORM, MOVE_POLLEN_PUFF, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_STICKY_HOLD,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Nasty Plot Setup"),
+        .preset =
+        {
+            .moves = {MOVE_NASTY_PLOT, MOVE_LEAF_STORM, MOVE_SHADOW_BALL, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_HOSPITALITY,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Nasty Plot Setup"),
+        .preset =
+        {
+            .moves = {MOVE_NASTY_PLOT, MOVE_DRACO_METEOR, MOVE_LEAF_STORM, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_SUPERSWEET_SYRUP,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
         .name = _("Doubles Setup Sweeper"),
         .preset =
         {
@@ -15334,6 +29302,102 @@ const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternati
             .nature = NATURE_TIMID,
             .ability = ABILITY_QUARK_DRIVE,
             .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Howl Setup"),
+        .preset =
+        {
+            .moves = {MOVE_HOWL, MOVE_FLARE_BLITZ, MOVE_HEAD_SMASH, MOVE_PROTECT},
+            .item = ITEM_CLEAR_AMULET,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_ROCK_HEAD,
+            .statPoints = {2, 32, 0, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Calm Mind Setup"),
+        .preset =
+        {
+            .moves = {MOVE_CALM_MIND, MOVE_ERUPTION, MOVE_SHADOW_BALL, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_FRISK,
+            .statPoints = {2, 0, 0, 32, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_RAZOR_SHELL, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SHARPNESS,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_HYPER_VOICE, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_ILLUSION,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Special Pressure"),
+        .preset =
+        {
+            .moves = {MOVE_DRACO_METEOR, MOVE_STEEL_BEAM, MOVE_BLIZZARD, MOVE_PROTECT},
+            .item = ITEM_LIFE_ORB,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_MODEST,
+            .ability = ABILITY_SHELL_ARMOR,
+            .statPoints = {32, 0, 2, 32, 0, 0},
+        },
+    },
+    {
+        .name = _("Wide Guard Support"),
+        .preset =
+        {
+            .moves = {MOVE_WIDE_GUARD, MOVE_ROCK_SLIDE, MOVE_PROTECT, MOVE_ICY_WIND},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_CAREFUL,
+            .ability = ABILITY_STURDY,
+            .statPoints = {32, 0, 16, 0, 18, 0},
+        },
+    },
+    {
+        .name = _("Tailwind Control"),
+        .preset =
+        {
+            .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_CLOSE_COMBAT, MOVE_PROTECT},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_JOLLY,
+            .ability = ABILITY_SCRAPPY,
+            .statPoints = {32, 0, 2, 0, 0, 32},
+        },
+    },
+    {
+        .name = _("Tempo Control"),
+        .preset =
+        {
+            .moves = {MOVE_ICY_WIND, MOVE_SURF, MOVE_PROTECT, MOVE_AGILITY},
+            .item = ITEM_SITRUS_BERRY,
+            .requiredItem = ITEM_NONE,
+            .nature = NATURE_TIMID,
+            .ability = ABILITY_SWIFT_SWIM,
+            .statPoints = {32, 0, 2, 0, 0, 32},
         },
     },
 };

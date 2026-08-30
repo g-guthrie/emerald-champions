@@ -64,7 +64,7 @@ def main() -> None:
 
     require("MULTI_FOSSIL" not in devon, "Devon still uses the Root/Claw-only static menu")
     require(
-        "dynmultistack 0, 1, FALSE, 6, FALSE, 0, DYN_MULTICHOICE_CB_SHOW_ITEM" in notice,
+        "dynmultistack 0, 1, FALSE, 5, FALSE, 0, DYN_MULTICHOICE_CB_SHOW_ITEM" in notice,
         "fossil selection is not the native scrolling item menu",
     )
     require(

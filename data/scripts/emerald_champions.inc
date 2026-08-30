@@ -5,18 +5,31 @@ Common_EventScript_EmeraldChampionsMoveTutor::
 	waitmessage
 	dynmultipush EmeraldChampions_Text_BuildBattleSet, 0
 	dynmultipush EmeraldChampions_Text_LearnMove, 1
-	dynmultipush EmeraldChampions_Text_Exit, 2
-	dynmultistack 0, 0, FALSE, 3, 0, 0, DYN_MULTICHOICE_CB_NONE
+	dynmultipush EmeraldChampions_Text_ForgetMove, 2
+	dynmultipush EmeraldChampions_Text_RenamePokemon, 3
+	dynmultipush EmeraldChampions_Text_Exit, 4
+	dynmultistack 0, 0, FALSE, 5, 0, 0, DYN_MULTICHOICE_CB_NONE
 	closemessage
 	switch VAR_RESULT
 	case 0, EmeraldChampions_EventScript_BattleSetChooseMon
 	case 1, EmeraldChampions_EventScript_OpenMoveRelearner
-	case 2, EmeraldChampions_EventScript_MoveTutorExit
+	case 2, EmeraldChampions_EventScript_OpenMoveDeleter
+	case 3, EmeraldChampions_EventScript_OpenNameRater
+	case 4, EmeraldChampions_EventScript_MoveTutorExit
 	case MULTI_B_PRESSED, EmeraldChampions_EventScript_MoveTutorExit
 
 EmeraldChampions_EventScript_OpenMoveRelearner:
 	releaseall
 	goto Common_EventScript_MoveRelearner
+
+EmeraldChampions_EventScript_OpenMoveDeleter:
+	msgbox LilycoveCity_MoveDeletersHouse_Text_ICanMakeMonForgetMove, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget
+	goto LilycoveCity_MoveDeletersHouse_EventScript_ComeAgain
+
+EmeraldChampions_EventScript_OpenNameRater:
+	releaseall
+	goto SlateportCity_NameRatersHouse_EventScript_NameRater
 
 EmeraldChampions_EventScript_BattleSetChooseMon:
 	msgbox EmeraldChampions_Text_ChooseBattleSetMon, MSGBOX_DEFAULT
@@ -30,7 +43,15 @@ EmeraldChampions_EventScript_BattleSetChooseMon:
 	goto_if_eq VAR_RESULT, 1, EmeraldChampions_EventScript_BattleSetUseDefault
 
 EmeraldChampions_EventScript_BattleSetChooseStyle:
+	special BufferSelectedMonCurrentEmeraldChampionsBattleSet
+	goto_if_eq VAR_RESULT, TRUE, EmeraldChampions_EventScript_BattleSetChooseCurrentStyle
 	msgbox EmeraldChampions_Text_ChooseBattleSetStyle, MSGBOX_DEFAULT
+	goto EmeraldChampions_EventScript_BattleSetOpenStyleList
+
+EmeraldChampions_EventScript_BattleSetChooseCurrentStyle:
+	msgbox EmeraldChampions_Text_ChooseCurrentBattleSetStyle, MSGBOX_DEFAULT
+
+EmeraldChampions_EventScript_BattleSetOpenStyleList:
 	setvar VAR_0x8004, SCROLL_MULTI_EMERALD_CHAMPIONS_BATTLE_SET
 	special ShowScrollableMultichoice
 	copyvar VAR_0x8006, VAR_RESULT
@@ -61,12 +82,16 @@ EmeraldChampions_EventScript_BattleSetConfirmResult:
 	goto_if_ne VAR_RESULT, EC_BATTLE_SET_SUCCESS, EmeraldChampions_EventScript_BattleSetMissing
 	playfanfare MUS_LEVEL_UP
 	msgbox EmeraldChampions_Text_BattleSetSuccess, MSGBOX_DEFAULT
-	releaseall
-	end
+	goto EmeraldChampions_EventScript_PrepareAnotherBattleSet
 
 EmeraldChampions_EventScript_BattleSetMegaSuccess:
 	playfanfare MUS_LEVEL_UP
 	msgbox EmeraldChampions_Text_MegaBattleSetSuccess, MSGBOX_DEFAULT
+	goto EmeraldChampions_EventScript_PrepareAnotherBattleSet
+
+EmeraldChampions_EventScript_PrepareAnotherBattleSet:
+	msgbox EmeraldChampions_Text_PrepareAnotherBattleSet, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, EmeraldChampions_EventScript_BattleSetChooseMon
 	releaseall
 	end
 
@@ -90,18 +115,14 @@ EmeraldChampions_EventScript_MoveTutorExit:
 Common_EventScript_EmeraldChampionsBattleVendor::
 	lock
 	faceplayer
+	setvar VAR_0x8008, 0
+	setvar VAR_0x8009, 0
 
 EmeraldChampions_EventScript_BattleVendorMain:
 	goto_if_set FLAG_BADGE08_GET, EmeraldChampions_EventScript_BattleVendorCompleteArchive
 	message EmeraldChampions_Text_BattleVendorWelcome
 	waitmessage
-	dynmultipush EmeraldChampions_Text_HeldItems, 0
-	dynmultipush EmeraldChampions_Text_Exit, 1
-	dynmultistack 0, 0, FALSE, 2, 0, 0, DYN_MULTICHOICE_CB_NONE
-	closemessage
-	switch VAR_RESULT
-	case 0, EmeraldChampions_EventScript_BattleItemCategories
-	goto EmeraldChampions_EventScript_BattleVendorExit
+	goto EmeraldChampions_EventScript_BattleItemCategoryChoices
 
 EmeraldChampions_EventScript_BattleVendorCompleteArchive:
 	message EmeraldChampions_Text_BattleVendorCompleteWelcome
@@ -110,8 +131,10 @@ EmeraldChampions_EventScript_BattleVendorCompleteArchive:
 	dynmultipush EmeraldChampions_Text_MegaArchive, 1
 	dynmultipush EmeraldChampions_Text_EvolutionArchive, 2
 	dynmultipush EmeraldChampions_Text_Exit, 3
-	dynmultistack 0, 0, FALSE, 4, 0, 0, DYN_MULTICHOICE_CB_NONE
+	dynmultistack 0, 0, FALSE, 4, 0, VAR_0x8009, DYN_MULTICHOICE_CB_NONE
 	closemessage
+	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, EmeraldChampions_EventScript_BattleVendorExit
+	copyvar VAR_0x8009, VAR_RESULT
 	switch VAR_RESULT
 	case 0, EmeraldChampions_EventScript_BattleItemCategories
 	case 1, EmeraldChampions_EventScript_OpenMegaArchive
@@ -121,6 +144,8 @@ EmeraldChampions_EventScript_BattleVendorCompleteArchive:
 EmeraldChampions_EventScript_BattleItemCategories:
 	message EmeraldChampions_Text_BattleItemCategoryPrompt
 	waitmessage
+
+EmeraldChampions_EventScript_BattleItemCategoryChoices:
 	dynmultipush EmeraldChampions_Text_OffenseItems, 0
 	dynmultipush EmeraldChampions_Text_DefenseItems, 1
 	dynmultipush EmeraldChampions_Text_FieldItems, 2
@@ -128,8 +153,10 @@ EmeraldChampions_EventScript_BattleItemCategories:
 	dynmultipush EmeraldChampions_Text_GemItems, 4
 	dynmultipush EmeraldChampions_Text_SpeciesItems, 5
 	dynmultipush EmeraldChampions_Text_Back, 6
-	dynmultistack 0, 0, FALSE, 7, 0, 0, DYN_MULTICHOICE_CB_NONE
+	dynmultistack 0, 0, FALSE, 5, 0, VAR_0x8008, DYN_MULTICHOICE_CB_NONE
 	closemessage
+	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, EmeraldChampions_EventScript_BattleItemCategoryBack
+	copyvar VAR_0x8008, VAR_RESULT
 	switch VAR_RESULT
 	case 0, EmeraldChampions_EventScript_OpenOffenseItems
 	case 1, EmeraldChampions_EventScript_OpenDefenseItems
@@ -137,7 +164,11 @@ EmeraldChampions_EventScript_BattleItemCategories:
 	case 3, EmeraldChampions_EventScript_OpenTypeItems
 	case 4, EmeraldChampions_EventScript_OpenGemItems
 	case 5, EmeraldChampions_EventScript_OpenSpeciesItems
-	goto EmeraldChampions_EventScript_BattleVendorMain
+	goto EmeraldChampions_EventScript_BattleItemCategoryBack
+
+EmeraldChampions_EventScript_BattleItemCategoryBack:
+	goto_if_set FLAG_BADGE08_GET, EmeraldChampions_EventScript_BattleVendorMain
+	goto EmeraldChampions_EventScript_BattleVendorExit
 
 EmeraldChampions_EventScript_OpenOffenseItems:
 	special OpenEmeraldChampionsOffenseItemMart
@@ -178,7 +209,8 @@ EmeraldChampions_EventScript_BattleVendorExit:
 
 EmeraldChampions_Text_BattleVendorWelcome:
 	.string "Competitive held items are free here.\p"
-	.string "Take as many as your teams need!$"
+	.string "Take as many as your teams need!\p"
+	.string "Which kind of held item do you need?$"
 
 EmeraldChampions_Text_BattleVendorCompleteWelcome:
 	.string "All eight BADGES! The complete Mega\n"
@@ -186,7 +218,7 @@ EmeraldChampions_Text_BattleVendorCompleteWelcome:
 	.string "What does your team need?$"
 
 EmeraldChampions_Text_HeldItems:
-	.string "Held Items$"
+	.string "Battle Items$"
 
 EmeraldChampions_Text_MegaArchive:
 	.string "Mega Stone Archive$"
@@ -227,6 +259,12 @@ EmeraldChampions_Text_BuildBattleSet:
 EmeraldChampions_Text_LearnMove:
 	.string "Learn a Move$"
 
+EmeraldChampions_Text_ForgetMove:
+	.string "Forget a Move$"
+
+EmeraldChampions_Text_RenamePokemon:
+	.string "Rename Pokémon$"
+
 EmeraldChampions_Text_Exit:
 	.string "Exit$"
 
@@ -237,29 +275,30 @@ EmeraldChampions_Text_ChooseBattleSetMon:
 EmeraldChampions_Text_ChooseBattleSetStyle:
 	.string "Which battle style should I build?$"
 
+EmeraldChampions_Text_ChooseCurrentBattleSetStyle:
+	.string "{STR_VAR_1}'s current set:\n"
+	.string "{STR_VAR_2}.\p"
+	.string "Which battle style should I build?$"
+
 EmeraldChampions_Text_ConfirmBattleSet:
-	.string "I'll give {STR_VAR_1} the\n"
-	.string "{STR_VAR_2} set.\p"
-	.string "This updates all four moves, nature,\n"
-	.string "Ability, Stat Points, and held item.\p"
-	.string "Continue?$"
+	.string "Apply the {STR_VAR_2} set to\n"
+	.string "{STR_VAR_1}?$"
 
 EmeraldChampions_Text_ConfirmMegaBattleSet:
-	.string "I'll give {STR_VAR_1} the\n"
-	.string "{STR_VAR_2} set.\p"
-	.string "It is designed for {STR_VAR_3}, but\n"
-	.string "I will not supply that Mega Stone.\p"
-	.string "Continue?$"
+	.string "Required stone:\n"
+	.string "{STR_VAR_3}.\p"
+	.string "Apply this set without it?$"
 
 EmeraldChampions_Text_BattleSetSuccess:
-	.string "All set! {STR_VAR_1}'s moves, nature,\n"
-	.string "Ability, Stat Points, and held item\l"
-	.string "now match the {STR_VAR_2} set.$"
+	.string "{STR_VAR_1} is ready with the\n"
+	.string "{STR_VAR_2} set!$"
 
 EmeraldChampions_Text_MegaBattleSetSuccess:
-	.string "All set! {STR_VAR_1} is ready for\n"
-	.string "the {STR_VAR_2} role.\p"
-	.string "Use this set with {STR_VAR_3}.$"
+	.string "{STR_VAR_1} is ready for the\n"
+	.string "{STR_VAR_2} role with {STR_VAR_3}.$"
+
+EmeraldChampions_Text_PrepareAnotherBattleSet:
+	.string "Prepare another Pokémon?$"
 
 EmeraldChampions_Text_BattleSetEgg:
 	.string "An Egg can't use a battle set.$"
@@ -281,9 +320,14 @@ EmeraldChampions_Text_NeedTwoPokemon:
 	.string "with two usable Pokémon.$"
 
 Common_EventScript_ChooseStarterRegion::
+	setvar VAR_0x8005, 0
+
+EmeraldChampions_EventScript_ChooseStarterRegionMenu:
 	msgbox EmeraldChampions_Text_ChooseStarterRegion, MSGBOX_DEFAULT
 	setvar VAR_0x8004, SCROLL_MULTI_STARTER_REGIONS
 	special ShowScrollableMultichoice
+	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, EmeraldChampions_EventScript_ChooseStarterRegionMenu
+	copyvar VAR_0x8005, VAR_RESULT
 	switch VAR_RESULT
 	case 0, EmeraldChampions_EventScript_StarterKanto
 	case 1, EmeraldChampions_EventScript_StarterJohto
@@ -294,7 +338,7 @@ Common_EventScript_ChooseStarterRegion::
 	case 6, EmeraldChampions_EventScript_StarterAlola
 	case 7, EmeraldChampions_EventScript_StarterGalar
 	case 8, EmeraldChampions_EventScript_StarterPaldea
-	goto EmeraldChampions_EventScript_StarterHoenn
+	goto EmeraldChampions_EventScript_ChooseStarterRegionMenu
 
 EmeraldChampions_EventScript_StarterKanto:
 	setvar VAR_STARTER_GEN, 1

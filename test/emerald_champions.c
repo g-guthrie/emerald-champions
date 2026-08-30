@@ -13,6 +13,7 @@
 #include "item.h"
 #include "legendary_signs.h"
 #include "load_save.h"
+#include "move_relearner.h"
 #include "overworld.h"
 #include "pokemon.h"
 #include "pokemon_storage_system.h"
@@ -36,6 +37,7 @@
 // Large test fixtures must not consume the test linker's limited IWRAM stack
 // headroom. Both transaction tests zero and use this fixture independently.
 static EWRAM_DATA struct BattleStruct sEmeraldChampionsTestBattleStruct;
+static EWRAM_DATA u16 sEmeraldChampionsPreparationMoveBuffer[MAX_RELEARNER_MOVES];
 
 static const u16 sEmeraldChampionsTestSignStateVars[] =
 {
@@ -215,6 +217,84 @@ TEST("Emerald Champions exposes Mega as its only selectable gimmick")
     EXPECT(!IsEmeraldChampionsGimmickAllowed(GIMMICK_ULTRA_BURST));
     EXPECT(!IsEmeraldChampionsGimmickAllowed(GIMMICK_DYNAMAX));
     EXPECT(!IsEmeraldChampionsGimmickAllowed(GIMMICK_TERA));
+}
+
+TEST("Emerald Champions Center preparation lists are complete and isolated")
+{
+    struct Pokemon mon;
+    const u16 *canonical = GetEmeraldChampionsPreparationMoves(SPECIES_MEW);
+    u32 canonicalCount = 0;
+    bool32 hasTailwind = FALSE;
+    bool32 hasWillOWisp = FALSE;
+    bool32 hasPreparationOnlyMove = FALSE;
+
+    while (canonical[canonicalCount] != MOVE_UNAVAILABLE)
+    {
+        enum Move move = canonical[canonicalCount];
+
+        EXPECT(move > MOVE_NONE && move < MOVES_COUNT_ALL);
+        for (u32 previous = 0; previous < canonicalCount; previous++)
+            EXPECT_NE(canonical[previous], move);
+        hasTailwind |= move == MOVE_TAILWIND;
+        hasWillOWisp |= move == MOVE_WILL_O_WISP;
+        hasPreparationOnlyMove |= !CanLearnTeachableMove(SPECIES_MEW, move);
+        canonicalCount++;
+    }
+    EXPECT_EQ(canonicalCount, 372);
+    EXPECT(hasTailwind);
+    EXPECT(hasWillOWisp);
+    EXPECT(hasPreparationOnlyMove);
+    EXPECT(!CanLearnTeachableMove(SPECIES_MEW, MOVE_TAILWIND));
+    EXPECT(!CanLearnTeachableMove(SPECIES_MEW, MOVE_WILL_O_WISP));
+
+    CreateMon(&mon, SPECIES_MEW, 50, 0, OTID_STRUCT_PLAYER_ID);
+    EXPECT_EQ(
+        GetEmeraldChampionsPreparationMovesToLearn(&mon.box, sEmeraldChampionsPreparationMoveBuffer),
+        372);
+
+    SetMonMoveSlot(&mon, MOVE_PSYCHIC, 0);
+    SetMonMoveSlot(&mon, MOVE_TAILWIND, 1);
+    SetMonMoveSlot(&mon, MOVE_WILL_O_WISP, 2);
+    SetMonMoveSlot(&mon, MOVE_PROTECT, 3);
+    EXPECT_EQ(
+        GetEmeraldChampionsPreparationMovesToLearn(&mon.box, sEmeraldChampionsPreparationMoveBuffer),
+        368);
+    for (u32 i = 0; i < 368; i++)
+    {
+        EXPECT_NE(sEmeraldChampionsPreparationMoveBuffer[i], MOVE_PSYCHIC);
+        EXPECT_NE(sEmeraldChampionsPreparationMoveBuffer[i], MOVE_TAILWIND);
+        EXPECT_NE(sEmeraldChampionsPreparationMoveBuffer[i], MOVE_WILL_O_WISP);
+        EXPECT_NE(sEmeraldChampionsPreparationMoveBuffer[i], MOVE_PROTECT);
+    }
+}
+
+TEST("Emerald Champions preparation table covers every enabled species")
+{
+    for (enum Species species = SPECIES_BULBASAUR; species < NUM_SPECIES; species++)
+    {
+        if (!IsSpeciesEnabled(species))
+            continue;
+
+        const u16 *moves = GetEmeraldChampionsPreparationMoves(species);
+        u32 count = 0;
+
+        while (moves[count] != MOVE_UNAVAILABLE)
+        {
+            EXPECT(moves[count] > MOVE_NONE && moves[count] < MOVES_COUNT_ALL);
+            EXPECT(count < MAX_RELEARNER_MOVES);
+            count++;
+        }
+        EXPECT(count > 0);
+    }
+
+    // Historical form rows override their base form; custom forms absent from
+    // the source corpus inherit the base species without changing TM data.
+    EXPECT_NE(
+        GetEmeraldChampionsPreparationMoves(SPECIES_ROTOM_WASH),
+        GetEmeraldChampionsPreparationMoves(SPECIES_ROTOM));
+    EXPECT_EQ(
+        GetEmeraldChampionsPreparationMoves(SPECIES_GLIMMORA_MEGA),
+        GetEmeraldChampionsPreparationMoves(SPECIES_GLIMMORA));
 }
 
 TEST("Emerald Champions disables the Bag only in competitive trainer battles")
@@ -748,6 +828,36 @@ TEST("Emerald Champions tutor gates Mega roles and never grants their stones")
     ClearBag();
 }
 
+TEST("Emerald Champions tutor recognizes and reopens on the current battle set")
+{
+    struct Pokemon mon;
+    enum Move firstMove;
+    enum Move secondMove;
+    u8 changedNature;
+
+    ClearBag();
+    CreateMon(&mon, SPECIES_GEODUDE, 30, 0, OTID_STRUCT_PLAYER_ID);
+    EXPECT_GE(GetEmeraldChampionsBattleSetCount(&mon), 2);
+
+    for (u8 choice = 0; choice < GetEmeraldChampionsBattleSetCount(&mon); choice++)
+    {
+        EXPECT_EQ(ApplyEmeraldChampionsBattleSetChoice(&mon, choice), EC_BATTLE_SET_SUCCESS);
+        EXPECT_EQ(GetEmeraldChampionsCurrentBattleSetChoice(&mon), choice);
+
+        // Reordering moves is presentation-only and must not make the tutor
+        // forget which authored orientation the Pokémon is using.
+        firstMove = GetMonData(&mon, MON_DATA_MOVE1);
+        secondMove = GetMonData(&mon, MON_DATA_MOVE2);
+        SetMonMoveSlot(&mon, secondMove, 0);
+        SetMonMoveSlot(&mon, firstMove, 1);
+        EXPECT_EQ(GetEmeraldChampionsCurrentBattleSetChoice(&mon), choice);
+
+        changedNature = (GetMonData(&mon, MON_DATA_HIDDEN_NATURE) + 1) % NUM_NATURES;
+        SetMonData(&mon, MON_DATA_HIDDEN_NATURE, &changedNature);
+        EXPECT_EQ(GetEmeraldChampionsCurrentBattleSetChoice(&mon), -1);
+    }
+}
+
 TEST("Emerald Champions role and Ability chooser names fit their bounded windows")
 {
     ClearBag();
@@ -1136,7 +1246,7 @@ TEST("Emerald Champions reviewed move-access exceptions are natively tutor-acces
 TEST("Emerald Champions covers every ordinary species and form")
 {
     u32 missing = 0;
-    u32 missingNonMega = 0;
+    u32 missingSecondNonMega = 0;
 
     for (enum Species species = SPECIES_BULBASAUR; species < NUM_SPECIES; species++)
     {
@@ -1145,20 +1255,43 @@ TEST("Emerald Champions covers every ordinary species and form")
             missing++;
         if (IsEmeraldChampionsOrdinaryWildSpecies(species))
         {
-            bool32 foundNonMega = FALSE;
+            u32 nonMegaCount = 0;
 
             for (u8 choice = 0; choice < GetEmeraldChampionsRawBattleSetCount(species); choice++)
             {
                 const struct EmeraldChampionsBattleSet *preset =
                     GetEmeraldChampionsRawBattleSet(species, choice);
-                foundNonMega |= preset != NULL && preset->requiredItem == ITEM_NONE;
+                nonMegaCount += preset != NULL && preset->requiredItem == ITEM_NONE;
             }
-            if (!foundNonMega)
-                missingNonMega++;
+            if (nonMegaCount < 2)
+                missingSecondNonMega++;
         }
     }
     EXPECT_EQ(missing, 0);
-    EXPECT_EQ(missingNonMega, 0);
+    EXPECT_EQ(missingSecondNonMega, 0);
+}
+
+TEST("Emerald Champions exposes two pre-Mega roles for every direct set row")
+{
+    u32 rowsBelowMinimum = 0;
+
+    for (enum Species species = SPECIES_BULBASAUR; species < NUM_SPECIES; species++)
+    {
+        u32 nonMegaCount = 0;
+
+        if (gEmeraldChampionsDefaultBattleSets[species].moves[0] == MOVE_NONE)
+            continue;
+        for (u8 choice = 0; choice < GetEmeraldChampionsRawBattleSetCount(species); choice++)
+        {
+            const struct EmeraldChampionsBattleSet *preset =
+                GetEmeraldChampionsRawBattleSet(species, choice);
+
+            nonMegaCount += preset != NULL && preset->requiredItem == ITEM_NONE;
+        }
+        if (nonMegaCount < 2)
+            rowsBelowMinimum++;
+    }
+    EXPECT_EQ(rowsBelowMinimum, 0);
 }
 
 TEST("Champions Circuit entry requires six healthy non-Egg Pokemon")

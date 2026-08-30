@@ -124,11 +124,12 @@ passing runtime suite.
 
 Candidate CI derives the selected test source files from 19 exact runtime filters plus the
 runner support sources. It then proves that every filter reaches its minimum
-count. The current manifest requires at least 256 selected tests:
+count. The current manifest requires at least 263 selected test executions:
 
 | Filter family | Minimum | Accepted debt |
 |---|---:|---|
-| Emerald Champions services/presets/mechanics | 90 | none |
+| Emerald Champions services/presets/mechanics | 94 | none |
+| Center-only historical preparation corpus | 3 | none |
 | Item-description layout | 1 | none |
 | Egg inheritance safety | 1 | none |
 | Upstream critical fixes | 4 | none |
@@ -143,7 +144,7 @@ count. The current manifest requires at least 256 selected tests:
 | Four named Imposter, Sleep Clause, and Billy targeting cases | 4 | none |
 | Save-layout compatibility | 4 | none |
 | Doubles AI | 65 | none |
-| **Total minimum** | **256** | **0 known-failing, 0 TODO** |
+| **Total minimum** | **263** | **0 known-failing, 0 TODO** |
 
 Every `RuntimeGate` keeps its default maximum of zero known failures and zero
 TODO results; no gate supplies an allowlisted debt identity. Failures,
@@ -155,16 +156,16 @@ filters so post-link copies cannot mutate the base artifact.
 
 An earlier audit executed a smaller 14-filter manifest that tolerated three AI
 TODOs. That result is historical and no longer describes the current release
-contract. A fresh 19-filter run is required for the exact candidate; this
+contract. A fresh 20-filter run is required for the exact candidate; this
 document does not substitute the superseded pass totals or a temporary local
 artifact path for that evidence.
 
 After the save migration and its independent review froze, the exact integrated
-tree rebuilt the curated ARM test ELF and completed all 19 filters in one
-invocation: 256/256 passed, with zero failure, assumption-failure,
-known-failing, or TODO results. Filter execution took 84.58 seconds (85.10
-seconds orchestration wall time). This proves the named runtime contracts, not
-a production-ROM build or campaign playthrough.
+tree rebuilt the curated ARM test ELF and completed all 20 filters in one
+invocation: 263/263 selected test executions passed, with zero failure,
+assumption-failure, known-failing, or TODO results. Filter execution took
+48.55 seconds (48.89 seconds orchestration wall time). This proves the named
+runtime contracts, not a production-ROM build or campaign playthrough.
 
 The historical runtime work caught issues that compilation and the previous
 green CI could not:

@@ -821,10 +821,7 @@ struct
     [MENU_CATALOG_MOWER]   = {COMPOUND_STRING("Lawn mower"),      CursorCb_CatalogMower},
     [MENU_CHANGE_FORM]     = {COMPOUND_STRING("Change form"),     CursorCb_ChangeForm},
     [MENU_CHANGE_ABILITY]  = {COMPOUND_STRING("Change Ability"),  CursorCb_ChangeAbility},
-    [MENU_OPEN_ABILITY]    = {COMPOUND_STRING("ABILITY"),         CursorCb_OpenAbilityMenu},
-    [MENU_ABILITY_SLOT_0]  = {gText_EmptyString2,                  CursorCb_AbilitySlot0},
-    [MENU_ABILITY_SLOT_1]  = {gText_EmptyString2,                  CursorCb_AbilitySlot1},
-    [MENU_ABILITY_SLOT_2]  = {gText_EmptyString2,                  CursorCb_AbilitySlot2},
+    [MENU_OPEN_ABILITY]    = {COMPOUND_STRING("Ability"),         CursorCb_OpenAbilityMenu},
 };
 
 static const u8 sPartyMenuAction_SummarySwitchCancel[] = {MENU_SUMMARY, MENU_SWITCH, MENU_CANCEL1};

@@ -81,3 +81,22 @@ LavaridgeTown_PokemonCenter_1F_Text_TrainersShouldRestToo:
 	.string "the hot springs from here.\p"
 	.string "If POKéMON are getting rest, so too\n"
 	.string "should their TRAINERS.$"
+
+LavaridgeTown_PokemonCenter_1F_EventScript_MoomooMilk::
+	lock
+	faceplayer
+	message LavaridgeTown_PokemonCenter_1F_Text_MoomooMilkWelcome
+	waitmessage
+	pokemart PokeMart_PokeCenterLavaridgeMilk
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+	.align 2
+PokeMart_PokeCenterLavaridgeMilk::
+	.2byte ITEM_MOOMOO_MILK
+	.2byte ITEM_NONE
+
+LavaridgeTown_PokemonCenter_1F_Text_MoomooMilkWelcome:
+	.string "Moomoo Milk is perfect before or after\n"
+	.string "the hot spring. How many would you like?$"
