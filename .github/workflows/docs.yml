@@ -33,7 +33,7 @@ jobs:
             exit 1
           fi
       - name: Check if Pages is enabled
-        uses: octokit/request-action@v3
+        uses: octokit/request-action@b91aabaa861c777dcdb14e2387e30eddf04619ae # v3.0.0
         id: check_pages
         continue-on-error: true
         with:
