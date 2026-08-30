@@ -22,10 +22,12 @@ def require(condition: bool, message: str) -> None:
 
 def main() -> None:
     option_menu = read("src/option_menu.c")
+    battle_main = read("src/battle_main.c")
     battle_setup = read("src/battle_setup.c")
     new_game = read("src/new_game.c")
     overworld = read("src/overworld.c")
     pokemon_config = read("include/config/pokemon.h")
+    text_config = read("include/config/text.h")
     summary_config = read("include/config/summary_screen.h")
     nurse = read("data/scripts/pkmn_center_nurse.inc")
     birch_lab = read("data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc")
@@ -39,6 +41,22 @@ def main() -> None:
     require("COMPOUND_STRING(\"DIFFICULTY\")" in option_menu, "Options no longer exposes Difficulty")
     require(all(label in option_menu for label in ("DifficultyHard", "DifficultyMedium", "DifficultyEasy")), "Difficulty choices are incomplete")
     require("SetCurrentDifficultyLevel(DIFFICULTY_HARD);" in new_game, "Hard is not the new-game default")
+    require(
+        "MENUITEM_BATTLESTYLE" not in option_menu
+        and "COMPOUND_STRING(\"BATTLE STYLE\")" not in option_menu,
+        "Options still exposes the removed Shift/Set selector",
+    )
+    require(
+        "TEXT SPEED" not in option_menu
+        and "#define TEXT_SPEED_INSTANT           TRUE" in text_config
+        and "optionsTextSpeed = OPTIONS_TEXT_SPEED_INSTANT;" in new_game,
+        "instant text is not the fixed native default",
+    )
+    require(
+        "gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SET;" in new_game
+        and "gBattleScripting.battleStyle = OPTIONS_BATTLE_STYLE_SET;" in battle_main,
+        "Emerald Champions no longer forces competitive Set-style battles",
+    )
     require(
         "FlagSet(FLAG_EC_BESPOKE_TRAINER_FLAGS_MIGRATED);" in new_game
         and "sRepurposedRematchTrainerIds" in overworld
@@ -57,7 +75,7 @@ def main() -> None:
             "FLAG_RECEIVED_WINSTRATE_KANGASKHANITE",
             "FLAG_EC_ITEM_MANOR_SABLENITE",
             "FLAG_EC_ITEM_EMBER_BLAZIKENITE",
-            "FLAG_ITEM_SEAFLOOR_CAVERN_ROOM_9_TM_EARTHQUAKE",
+            "FLAG_ITEM_SEAFLOOR_CAVERN_ROOM_9_SHARPEDONITE",
             "FLAG_EC_ITEM_RUINS_STEELIXITE",
             "FLAG_EC_ITEM_SCORCHED_CHARIZARDITE_X",
             "FLAG_EC_ITEM_SEASPRAY_SLOWBRONITE",
