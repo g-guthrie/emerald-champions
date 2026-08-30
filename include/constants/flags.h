@@ -53,7 +53,7 @@
 
 #define FLAG_EC_ITEM_PRISON_BOTTLE              0x20
 #define FLAG_EC_ITEM_MASTER_BALL                0x21
-#define FLAG_EC_ITEM_REVEAL_GLASS               0x22
+#define FLAG_EC_ITEM_ALTERING_BEAST_BALL        0x22
 #define FLAG_EC_ITEM_ASHEN_PINSIRITE            0x23
 #define FLAG_EC_ITEM_ASHEN_DUSK_STONE           0x24
 #define FLAG_EC_ITEM_ASHEN_RARE_CANDY           0x25

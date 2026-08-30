@@ -189,6 +189,14 @@ def main() -> None:
             "Castform prepared-gift parameters drifted")
     require("setflag FLAG_RECEIVED_CASTFORM" in castform,
             "Castform finite claim flag disappeared")
+    require(castform.count("giveitem ITEM_REVEAL_GLASS") == 2
+            and "checkitem ITEM_REVEAL_GLASS, 1" in castform
+            and "Route119_WeatherInstitute_2F_EventScript_RevealGlassBagFull" in castform,
+            "Weather Institute Reveal Glass delivery lost its initial/retry-safe paths")
+    altering_cave = (ROOT / "data/maps/AlteringCave_1F/map.json").read_text()
+    require("ITEM_REVEAL_GLASS" not in altering_cave
+            and "ITEM_BEAST_BALL" in altering_cave,
+            "postgame Altering Cave still delays or duplicates the Reveal Glass")
     require("setvar VAR_0x8004, SPECIES_BELDUM" in beldum
             and "setvar VAR_0x8005, 5" in beldum,
             "Beldum prepared-gift parameters drifted")

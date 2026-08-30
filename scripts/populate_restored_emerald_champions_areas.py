@@ -180,7 +180,7 @@ ITEMS = {
     "AlteringCave_1F": [
         item(33, 12, "ITEM_PRISON_BOTTLE", "FLAG_EC_ITEM_PRISON_BOTTLE"),
         item(29, 16, "ITEM_MASTER_BALL", "FLAG_EC_ITEM_MASTER_BALL"),
-        item(9, 18, "ITEM_REVEAL_GLASS", "FLAG_EC_ITEM_REVEAL_GLASS"),
+        item(9, 18, "ITEM_BEAST_BALL", "FLAG_EC_ITEM_ALTERING_BEAST_BALL"),
     ],
     "AshenWoods": [
         item(10, 5, "ITEM_PINSIRITE", "FLAG_EC_ITEM_ASHEN_PINSIRITE"),
