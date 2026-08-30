@@ -1,17 +1,15 @@
-name: CI
+name: Full test-corpus compile
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
+  schedule:
+    - cron: '17 9 * * 1'
   workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: emerald-champions-ci-${{ github.ref }}
+  group: emerald-champions-full-test-compile
   cancel-in-progress: true
 
 env:
@@ -19,17 +17,14 @@ env:
   DEPRECATED_ERROR: 1
 
 jobs:
-  # Keep this job name stable so it can be selected if branch protection is enabled.
-  build:
-    name: build
+  compile:
+    name: full-test-compile
     runs-on: ubuntu-24.04
     timeout-minutes: 45
 
     steps:
       - name: Checkout
         uses: actions/checkout@v7
-        with:
-          fetch-depth: 1
 
       - name: Install GBA toolchain
         run: |
@@ -64,19 +59,12 @@ jobs:
             tools/wav2agb/wav2agb
           key: emerald-champions-tools-${{ runner.os }}-${{ hashFiles('tools/*/Makefile', 'tools/**/*.c', 'tools/**/*.cpp', 'tools/**/*.h') }}
 
-      - name: Build Emerald Champions release ROM
-        run: make -j"$(nproc)" release
-
-      - name: Verify campaign, generated data, and ROM layout
-        run: python3 scripts/verify_emerald_champions_release.py
-
-      - name: ROM entrypoint smoke (first VBlank)
-        run: tools/mgba/mgba-rom-test -l15 -ClogLevel.gba.dma=16 -S 5 pokeemerald-release.gba
-
-      - name: Build once and run curated runtime gates
-        run: python3 scripts/run_emerald_champions_runtime_gates.py --jobs "$(nproc)"
-
-      - name: Report ROM identity
+      - name: Compile and link every upstream test source
         run: |
-          sha256sum pokeemerald-release.gba
-          arm-none-eabi-size pokeemerald-release.elf
+          echo "test_c_files=$(find test -type f -name '*.c' | wc -l)"
+          make -j"$(nproc)" pokeemerald-test.elf TESTS=''
+
+      - name: Report full test ELF
+        run: |
+          sha256sum pokeemerald-test.elf
+          arm-none-eabi-size pokeemerald-test.elf

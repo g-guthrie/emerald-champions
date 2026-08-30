@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import ast
 import collections
 import re
 import shutil
@@ -76,20 +77,79 @@ def verify_unique_state_ids() -> None:
         ("include/constants/flags.h", "FLAG_"),
         ("include/constants/vars.h", "VAR_"),
     ):
-        values: dict[int, list[str]] = collections.defaultdict(list)
-        for line in (ROOT / relative).read_text().splitlines():
+        definitions: dict[str, list[tuple[int, str]]] = collections.defaultdict(list)
+        for line_number, line in enumerate((ROOT / relative).read_text().splitlines(), 1):
             match = re.match(
-                rf"#define\s+({prefix}[A-Z0-9_]+)\s+(0x[0-9A-Fa-f]+|\d+)\b",
+                rf"#define\s+({prefix}[A-Z0-9_]+)\s+(.+?)(?:\s*//.*|\s*/\*.*)?$",
                 line,
             )
-            if match is None:
+            if match is not None:
+                definitions[match.group(1)].append((line_number, match.group(2).strip()))
+        duplicate_names = {
+            name: rows for name, rows in definitions.items() if len(rows) > 1
+        }
+        require(
+            not duplicate_names,
+            f"{relative}: state macros are defined more than once: {duplicate_names}",
+        )
+
+        expressions = {name: rows[0][1] for name, rows in definitions.items()}
+        resolved: dict[str, int] = {}
+
+        def evaluate_node(node: ast.AST, stack: tuple[str, ...]) -> int:
+            if isinstance(node, ast.Constant) and isinstance(node.value, int):
+                return node.value
+            if isinstance(node, ast.Name):
+                return evaluate(node.id, stack)
+            if isinstance(node, ast.UnaryOp) and isinstance(
+                node.op, (ast.UAdd, ast.USub, ast.Invert)
+            ):
+                value = evaluate_node(node.operand, stack)
+                if isinstance(node.op, ast.UAdd):
+                    return value
+                if isinstance(node.op, ast.USub):
+                    return -value
+                return ~value
+            if isinstance(node, ast.BinOp) and isinstance(
+                node.op, (ast.Add, ast.Sub, ast.BitOr, ast.BitAnd, ast.LShift, ast.RShift)
+            ):
+                left = evaluate_node(node.left, stack)
+                right = evaluate_node(node.right, stack)
+                if isinstance(node.op, ast.Add):
+                    return left + right
+                if isinstance(node.op, ast.Sub):
+                    return left - right
+                if isinstance(node.op, ast.BitOr):
+                    return left | right
+                if isinstance(node.op, ast.BitAnd):
+                    return left & right
+                if isinstance(node.op, ast.LShift):
+                    return left << right
+                return left >> right
+            raise ValueError(f"unsupported state expression: {ast.dump(node)}")
+
+        def evaluate(name: str, stack: tuple[str, ...] = ()) -> int:
+            if name in resolved:
+                return resolved[name]
+            if name not in expressions or name in stack:
+                raise ValueError(name)
+            value = evaluate_node(ast.parse(expressions[name], mode="eval").body, stack + (name,))
+            resolved[name] = value
+            return value
+
+        values: dict[int, list[str]] = collections.defaultdict(list)
+        for name in expressions:
+            if name.endswith(("_START", "_END")):
                 continue
-            value = int(match.group(2), 0)
+            try:
+                value = evaluate(name)
+            except (SyntaxError, ValueError):
+                continue
             if value != 0:  # FRLG compatibility aliases use zero deliberately.
-                values[value].append(match.group(1))
+                values[value].append(name)
         duplicates = {value: names for value, names in values.items() if len(names) > 1}
         require(not duplicates, f"{relative}: duplicate state IDs: {duplicates}")
-    print("PASS: numeric flag and variable assignments are unique")
+    print("PASS: resolved flag and variable names and assignments are unique")
 
 
 def verify_branding() -> None:
