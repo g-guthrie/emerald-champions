@@ -123,6 +123,10 @@ Route119_WeatherInstitute_2F_EventScript_ReceivedCastformFanfare::
 Route119_WeatherInstitute_2F_EventScript_ExplainCastform::
 	msgbox Route119_WeatherInstitute_2F_Text_PokemonChangesWithWeather, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_CASTFORM
+	goto Route119_WeatherInstitute_2F_EventScript_TryGiveRevealGlass
+	end
+
+Route119_WeatherInstitute_2F_EventScript_TryGiveRevealGlass::
 	checkitem ITEM_REVEAL_GLASS, 1
 	goto_if_eq VAR_RESULT, TRUE, Route119_WeatherInstitute_2F_EventScript_Release
 	giveitem ITEM_REVEAL_GLASS
