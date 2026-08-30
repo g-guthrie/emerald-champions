@@ -6,19 +6,19 @@ LilycoveCity_DepartmentStore_3F_EventScript_ClerkLeft::
 	faceplayer
 	message gText_HowMayIServeYou
 	waitmessage
-	pokemart LilycoveCity_DepartmentStore_3F_Pokemart_Vitamins
+	pokemart LilycoveCity_DepartmentStore_3F_Pokemart_CaptureBalls
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
 	.align 2
-LilycoveCity_DepartmentStore_3F_Pokemart_Vitamins:
-	.2byte ITEM_PROTEIN
-	.2byte ITEM_CALCIUM
-	.2byte ITEM_IRON
-	.2byte ITEM_ZINC
-	.2byte ITEM_CARBOS
-	.2byte ITEM_HP_UP
+LilycoveCity_DepartmentStore_3F_Pokemart_CaptureBalls:
+	.2byte ITEM_ULTRA_BALL
+	.2byte ITEM_QUICK_BALL
+	.2byte ITEM_DUSK_BALL
+	.2byte ITEM_TIMER_BALL
+	.2byte ITEM_REPEAT_BALL
+	.2byte ITEM_LUXURY_BALL
 	pokemartlistend
 
 LilycoveCity_DepartmentStore_3F_EventScript_ClerkRight::
@@ -44,29 +44,28 @@ LilycoveCity_DepartmentStore_3F_Pokemart_StatBoosters:
 	pokemartlistend
 
 LilycoveCity_DepartmentStore_3F_EventScript_TriathleteM::
-	msgbox LilycoveCity_DepartmentStore_3F_Text_ItemsBestForTougheningPokemon, MSGBOX_NPC
+	msgbox LilycoveCity_DepartmentStore_3F_Text_RightBallBuildsTeamsFast, MSGBOX_NPC
 	end
 
 LilycoveCity_DepartmentStore_3F_EventScript_PokefanM::
-	msgbox LilycoveCity_DepartmentStore_3F_Text_WantMoreEndurance, MSGBOX_NPC
+	msgbox LilycoveCity_DepartmentStore_3F_Text_TimerBallsRewardPatience, MSGBOX_NPC
 	end
 
 LilycoveCity_DepartmentStore_3F_EventScript_Woman::
-	msgbox LilycoveCity_DepartmentStore_3F_Text_GaveCarbosToSpeedUpMon, MSGBOX_NPC
+	msgbox LilycoveCity_DepartmentStore_3F_Text_QuickBallFirstTurnCatch, MSGBOX_NPC
 	end
 
-LilycoveCity_DepartmentStore_3F_Text_ItemsBestForTougheningPokemon:
-	.string "For quickly toughening up POKéMON,\n"
-	.string "items are the best.\p"
-	.string "PROTEIN boosts ATTACK,\n"
-	.string "and CALCIUM raises SP. ATK.$"
+LilycoveCity_DepartmentStore_3F_Text_RightBallBuildsTeamsFast:
+	.string "For building a new team quickly,\n"
+	.string "the right kind of BALL is best.\p"
+	.string "QUICK BALLS reward a fast throw,\n"
+	.string "while DUSK BALLS shine in caves.$"
 
-LilycoveCity_DepartmentStore_3F_Text_WantMoreEndurance:
-	.string "I want my POKéMON to have more\n"
-	.string "endurance.\p"
-	.string "I'm trying to decide whether to raise\n"
-	.string "DEFENSE with IRON, or SP. DEF with ZINC.$"
+LilycoveCity_DepartmentStore_3F_Text_TimerBallsRewardPatience:
+	.string "Some rare POKéMON take patience.\p"
+	.string "A TIMER BALL grows stronger as the\n"
+	.string "battle lasts, so I always carry a few.$"
 
-LilycoveCity_DepartmentStore_3F_Text_GaveCarbosToSpeedUpMon:
-	.string "I gave a CARBOS to my POKéMON,\n"
-	.string "and its SPEED went up.$"
+LilycoveCity_DepartmentStore_3F_Text_QuickBallFirstTurnCatch:
+	.string "I caught a new partner with a\n"
+	.string "QUICK BALL on the very first turn!$"

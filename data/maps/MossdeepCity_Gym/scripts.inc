@@ -58,7 +58,7 @@ MossdeepCity_Gym_EventScript_TateAndLiza::
 	trainerbattle_double TRAINER_TATE_AND_LIZA_1, MossdeepCity_Gym_Text_TateAndLizaIntro, MossdeepCity_Gym_Text_TateAndLizaDefeat, MossdeepCity_Gym_Text_TateAndLizaNeedTwoMons, MossdeepCity_Gym_EventScript_TateAndLizaDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, MossdeepCity_Gym_EventScript_TateAndLizaRematch
-	goto_if_unset FLAG_RECEIVED_TM_CALM_MIND, MossdeepCity_Gym_EventScript_GiveCalmMind2
+	goto_if_unset FLAG_RECEIVED_TATE_LIZA_METAGROSSITE, MossdeepCity_Gym_EventScript_GiveMetagrossite2
 	msgbox MossdeepCity_Gym_Text_TateAndLizaPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -88,7 +88,7 @@ MossdeepCity_Gym_EventScript_TateAndLizaDefeated::
 	setvar VAR_MOSSDEEP_CITY_STATE, 1
 	setflag FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_1F_STEVEN
 	setvar VAR_MOSSDEEP_SPACE_CENTER_STATE, 1
-	call MossdeepCity_Gym_EventScript_GiveCalmMind
+	call MossdeepCity_Gym_EventScript_GiveMetagrossite
 	closemessage
 	delay 30
 	playfanfare MUS_REGISTER_MATCH_CALL
@@ -100,19 +100,19 @@ MossdeepCity_Gym_EventScript_TateAndLizaDefeated::
 	release
 	end
 
-MossdeepCity_Gym_EventScript_GiveCalmMind2::
+MossdeepCity_Gym_EventScript_GiveMetagrossite2::
 	giveitem ITEM_METAGROSSITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	msgbox MossdeepCity_Gym_Text_ExplainCalmMind, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM_CALM_MIND
+	msgbox MossdeepCity_Gym_Text_ExplainMetagrossite, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_TATE_LIZA_METAGROSSITE
 	release
 	end
 
-MossdeepCity_Gym_EventScript_GiveCalmMind::
+MossdeepCity_Gym_EventScript_GiveMetagrossite::
 	giveitem ITEM_METAGROSSITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
-	msgbox MossdeepCity_Gym_Text_ExplainCalmMind, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM_CALM_MIND
+	msgbox MossdeepCity_Gym_Text_ExplainMetagrossite, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_TATE_LIZA_METAGROSSITE
 	return
 
 MossdeepCity_Gym_EventScript_TateAndLizaRematch::
@@ -581,12 +581,12 @@ MossdeepCity_Gym_Text_ReceivedMindBadge:
 	.string "from TATE and LIZA.$"
 
 MossdeepCity_Gym_Text_ExplainMindBadgeTakeThis:
-	.string "TATE: The MIND BADGE enhances the\n"
-	.string "SP. ATK and SP. DEF of POKéMON.\p"
-	.string "LIZA: It also lets you use the HM move\n"
-	.string "DIVE outside of battle.\p"
+	.string "TATE: The MIND BADGE lets your LEVELER\n"
+	.string "train a party up to Lv. 70.\p"
+	.string "LIZA: It also enables DIVE outside\n"
+	.string "of battle.\p"
 	.string "TATE: You should also take this, too.$"
-MossdeepCity_Gym_Text_ExplainCalmMind:
+MossdeepCity_Gym_Text_ExplainMetagrossite:
 	.string "Tate: Metagrossite lets Metagross Mega\n"
 	.string "Evolve. Let it hold the stone.$"
 

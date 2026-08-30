@@ -10,6 +10,65 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
+# Persisted by the 81e288b51995c59c1dbc640f77907b8120788bc9 save
+# contract. These ordinals are data, not merely names: the runtime migration
+# copies their bits into the current append-only Sign fields.
+LEGACY_81E_SIGN_PREFIX = (
+    "LEGENDARY_SIGN_ARCEUS",
+    "LEGENDARY_SIGN_AZELF",
+    "LEGENDARY_SIGN_BLACEPHALON",
+    "LEGENDARY_SIGN_BUZZWOLE",
+    "LEGENDARY_SIGN_CALYREX",
+    "LEGENDARY_SIGN_CELEBI",
+    "LEGENDARY_SIGN_CELESTEELA",
+    "LEGENDARY_SIGN_COBALION",
+    "LEGENDARY_SIGN_CRESSELIA",
+    "LEGENDARY_SIGN_DARKRAI",
+    "LEGENDARY_SIGN_DIALGA",
+    "LEGENDARY_SIGN_ENTEI",
+    "LEGENDARY_SIGN_ETERNATUS",
+    "LEGENDARY_SIGN_GENESECT",
+    "LEGENDARY_SIGN_GIRATINA",
+    "LEGENDARY_SIGN_GLASTRIER",
+    "LEGENDARY_SIGN_GUZZLORD",
+    "LEGENDARY_SIGN_HOOPA",
+    "LEGENDARY_SIGN_KARTANA",
+    "LEGENDARY_SIGN_KYUREM",
+    "LEGENDARY_SIGN_LANDORUS",
+    "LEGENDARY_SIGN_MARSHADOW",
+    "LEGENDARY_SIGN_MESPRIT",
+    "LEGENDARY_SIGN_NECROZMA",
+    "LEGENDARY_SIGN_NIHILEGO",
+    "LEGENDARY_SIGN_PALKIA",
+    "LEGENDARY_SIGN_PHEROMOSA",
+    "LEGENDARY_SIGN_PHIONE",
+    "LEGENDARY_SIGN_POIPOLE",
+    "LEGENDARY_SIGN_RAIKOU",
+    "LEGENDARY_SIGN_REGIDRAGO",
+    "LEGENDARY_SIGN_REGIELEKI",
+    "LEGENDARY_SIGN_RESHIRAM",
+    "LEGENDARY_SIGN_SHAYMIN",
+    "LEGENDARY_SIGN_SPECTRIER",
+    "LEGENDARY_SIGN_STAKATAKA",
+    "LEGENDARY_SIGN_TAPU_BULU",
+    "LEGENDARY_SIGN_TAPU_KOKO",
+    "LEGENDARY_SIGN_TAPU_LELE",
+    "LEGENDARY_SIGN_THUNDURUS",
+    "LEGENDARY_SIGN_TORNADUS",
+    "LEGENDARY_SIGN_UXIE",
+    "LEGENDARY_SIGN_VICTINI",
+    "LEGENDARY_SIGN_VIRIZION",
+    "LEGENDARY_SIGN_XERNEAS",
+    "LEGENDARY_SIGN_XURKITREE",
+    "LEGENDARY_SIGN_YVELTAL",
+    "LEGENDARY_SIGN_ZACIAN",
+    "LEGENDARY_SIGN_ZAMAZENTA",
+    "LEGENDARY_SIGN_ZARUDE",
+    "LEGENDARY_SIGN_ZEKROM",
+    "LEGENDARY_SIGN_ZERAORA",
+    "LEGENDARY_SIGN_ZYGARDE",
+)
+
 
 def read(path: str) -> str:
     return (ROOT / path).read_text()
@@ -22,48 +81,154 @@ def require(condition: bool, message: str) -> None:
 
 def main() -> None:
     option_menu = read("src/option_menu.c")
+    battle_main = read("src/battle_main.c")
     battle_setup = read("src/battle_setup.c")
+    battle_util = read("src/battle_util.c")
+    battle_config = read("include/config/battle.h")
+    general_config = read("include/config/general.h")
+    graphics = read("src/graphics.c")
+    species_config = read("include/config/species_enabled.h")
     new_game = read("src/new_game.c")
     overworld = read("src/overworld.c")
+    core_migration = overworld.split("void MigrateEmeraldChampionsCoreState(void)", 1)[1].split("void CB2_ContinueSavedGame(void)", 1)[0]
+    vars_header = read("include/constants/vars.h")
+    sign_header = read("include/legendary_signs.h")
+    sign_definitions = read("src/data/pokemon/legendary_signs.h")
     pokemon_config = read("include/config/pokemon.h")
+    text_config = read("include/config/text.h")
     summary_config = read("include/config/summary_screen.h")
     nurse = read("data/scripts/pkmn_center_nurse.inc")
     birch_lab = read("data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc")
     items = read("src/data/items.h")
+    item_use = read("src/item_use.c")
     field_specials = read("src/field_specials.c")
+    specials = read("data/specials.inc")
     field_moves = read("src/field_move.c")
     party_menu = read("src/party_menu.c")
     party_menu_data = read("src/data/party_menu.h")
     vendor_scripts = read("data/scripts/emerald_champions.inc")
+    trainers = read("src/data/trainers.party")
+
+    retired_effort_ribbon_specials = (
+        "LeadMonHasEffortRibbon",
+        "GiveLeadMonEffortRibbon",
+        "Special_AreLeadMonEVsMaxedOut",
+    )
+    require(
+        all(name not in field_specials and name not in specials for name in retired_effort_ribbon_specials),
+        "retired EV/Effort Ribbon specials were reintroduced into the live engine",
+    )
+
+    require("#define GEN_LATEST GEN_CHAMPIONS" in general_config, "battle standard is not pinned to Champions")
+    title_asset = ROOT / "graphics/title_screen/emerald_champions_version.png"
+    require(
+        graphics.count('"graphics/title_screen/emerald_champions_version.png"') == 2
+        and "gTitleScreenEmeraldVersionGfx" in graphics
+        and "gTitleScreenEmeraldVersionPal" in graphics
+        and '"graphics/title_screen/emerald_version.png"' not in graphics
+        and title_asset.is_file()
+        and title_asset.stat().st_size > 0,
+        "the live Emerald title path is not exclusively branded Emerald Champions",
+    )
+    require("#define P_MEGA_EVOLUTIONS                TRUE" in species_config, "Mega Evolution is disabled")
+    require(
+        "#define B_FLAG_DYNAMAX_BATTLE       0" in battle_config
+        and "#define B_FLAG_TERA_ORB_CHARGED     0" in battle_config
+        and "#define B_TERA_ORB_ALWAYS_CHARGED       FALSE" in battle_config,
+        "Dynamax or Terastallization has a global campaign enable path",
+    )
+    require(
+        "GEN_LATEST == GEN_CHAMPIONS" in battle_util
+        and "gBattleTypeFlags & BATTLE_TYPE_TRAINER" in battle_util
+        and "!(gBattleTypeFlags & BATTLE_TYPE_PYRAMID)" in battle_util,
+        "ordinary Trainer battles no longer enforce the no-Bag puzzle rule",
+    )
+    require(
+        "if (GEN_LATEST == GEN_CHAMPIONS)" in battle_util
+        and "RestorePlayerPartyMonHeldItem(i);" in battle_util,
+        "competitive held loadouts are not restored after battle",
+    )
+    require(
+        "Dynamax:" not in trainers and "Gigantamax:" not in trainers and "Tera Type:" not in trainers,
+        "an authored campaign trainer uses a non-Mega gimmick",
+    )
+    active_hoenn_source = "\n".join(
+        path.read_text()
+        for path in (ROOT / "data/maps").glob("*/**/*")
+        if path.is_file() and "_Frlg" not in path.parts[-2]
+    )
+    for inaccessible_gimmick_item in ("ITEM_Z_POWER_RING", "ITEM_DYNAMAX_BAND", "ITEM_TERA_ORB"):
+        require(
+            inaccessible_gimmick_item not in active_hoenn_source,
+            f"non-Mega campaign gimmick item is obtainable: {inaccessible_gimmick_item}",
+        )
 
     require("COMPOUND_STRING(\"DIFFICULTY\")" in option_menu, "Options no longer exposes Difficulty")
     require(all(label in option_menu for label in ("DifficultyHard", "DifficultyMedium", "DifficultyEasy")), "Difficulty choices are incomplete")
     require("SetCurrentDifficultyLevel(DIFFICULTY_HARD);" in new_game, "Hard is not the new-game default")
     require(
-        "FlagSet(FLAG_EC_BESPOKE_TRAINER_FLAGS_MIGRATED);" in new_game
+        "MENUITEM_BATTLESTYLE" not in option_menu
+        and "COMPOUND_STRING(\"BATTLE STYLE\")" not in option_menu,
+        "Options still exposes the removed Shift/Set selector",
+    )
+    require(
+        "TEXT SPEED" not in option_menu
+        and "#define TEXT_SPEED_INSTANT           TRUE" in text_config
+        and "optionsTextSpeed = OPTIONS_TEXT_SPEED_INSTANT;" in new_game,
+        "instant text is not the fixed native default",
+    )
+    require(
+        "gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SET;" in new_game
+        and "gBattleScripting.battleStyle = OPTIONS_BATTLE_STYLE_SET;" in battle_main,
+        "Emerald Champions no longer forces competitive Set-style battles",
+    )
+    require(
+        "VarSet(VAR_EMERALD_CHAMPIONS_SAVE_VERSION, EMERALD_CHAMPIONS_SAVE_VERSION_CURRENT);" in new_game
+        and "FlagSet(FLAG_EC_BESPOKE_TRAINER_FLAGS_MIGRATED);" in new_game
         and "sRepurposedRematchTrainerIds" in overworld
         and "ClearTrainerFlag(sRepurposedRematchTrainerIds[i]);" in overworld,
         "repurposed rematch trainer flags are not migrated safely",
     )
     require(
-        "if (GetCurrentDifficultyLevel() > DIFFICULTY_MAX)" in overworld
-        and "SetCurrentDifficultyLevel(DIFFICULTY_HARD);" in overworld,
-        "legacy saves do not preserve valid difficulty choices or repair invalid ones",
+        "MigrateEmeraldChampionsCoreState();" in overworld
+        and "VAR_EMERALD_CHAMPIONS_SAVE_VERSION                0x40B8" in vars_header
+        and "if (version == EMERALD_CHAMPIONS_SAVE_VERSION_CURRENT)" in core_migration
+        and core_migration.index("if (version == EMERALD_CHAMPIONS_SAVE_VERSION_CURRENT)")
+            < core_migration.index("FlagGet(FLAG_EC_BESPOKE_TRAINER_FLAGS_MIGRATED)")
+        and "legacyGymMarker" in core_migration
+        and "legacyItemMarker" in core_migration
+        and "completeLegacySignature" in core_migration
+        and "completeLegacySignature\n     && !modernMarker" in core_migration
+        and "modernMarker\n          && !legacyGymMarker\n          && !legacyItemMarker" in core_migration
+        and "MigrateEmeraldChampions81eState();" in core_migration
+        and "ResetAmbiguousEmeraldChampionsState();" in core_migration,
+        "save version is not authoritative over the colliding 0x4C5 legacy Zygarde bit",
     )
     require(
-        "sRepurposedRewardFlags" in overworld
-        and "FlagClear(sRepurposedRewardFlags[i]);" in overworld
-        and all(flag in overworld for flag in (
-            "FLAG_RECEIVED_WINSTRATE_KANGASKHANITE",
-            "FLAG_EC_ITEM_MANOR_SABLENITE",
-            "FLAG_EC_ITEM_EMBER_BLAZIKENITE",
-            "FLAG_ITEM_SEAFLOOR_CAVERN_ROOM_9_TM_EARTHQUAKE",
-            "FLAG_EC_ITEM_RUINS_STEELIXITE",
-            "FLAG_EC_ITEM_SCORCHED_CHARIZARDITE_X",
-            "FLAG_EC_ITEM_SEASPRAY_SLOWBRONITE",
-            "FLAG_EC_ITEM_RUINS_BLACK_AUGURITE",
+        all(token in overworld for token in (
+            "FLAG_EC_ITEM_PRISON_BOTTLE, FLAG_EC_RECEIVED_ROXANNE_AERODACTYLITE",
+            "FLAG_HIDDEN_ITEMS_START, FLAG_UNUSED_0x2BB",
+            "FLAG_ITEM_ROUTE_116_THUNDER_STONE, FLAG_ITEM_SAFARI_ZONE_SOUTH_EAST_BIG_PEARL",
+            "FLAG_EC_STARTER_ARCHIVE_BULBASAUR, FLAG_RECEIVED_GAME_CORNER_POIPOLE",
+            "sDirectClaimFlags",
+            "sEmeraldChampionsPhysicalSignFlags",
+            "SetEmeraldChampionsPhysicalSignFlags();",
         )),
-        "legacy saves can permanently miss replacement rewards",
+        "legacy pickup, claim, or physical-object collisions are not reset and reconstructed",
+    )
+    enum_body = sign_header.split("enum LegendarySignId", 1)[1].split("};", 1)[0]
+    current_sign_ids = tuple(re.findall(r"\bLEGENDARY_SIGN_[A-Z0-9_]+\b", enum_body))
+    require(
+        current_sign_ids[: len(LEGACY_81E_SIGN_PREFIX)] == LEGACY_81E_SIGN_PREFIX,
+        "persisted 81e Legendary Sign ID prefix was reordered",
+    )
+    current_definition_ids = tuple(re.findall(
+        r"(?:WILD|VISIBLE|OTHER)_SIGN\((LEGENDARY_SIGN_[A-Z0-9_]+)",
+        sign_definitions,
+    ))
+    require(
+        current_definition_ids[: len(LEGACY_81E_SIGN_PREFIX)] == LEGACY_81E_SIGN_PREFIX,
+        "persisted 81e Legendary Sign definition prefix was reordered",
     )
     require(battle_setup.count("ApplyTrainerLevelDifficulty(&gParties[B_TRAINER_OPPONENT_") == 2, "Difficulty must affect exactly both enemy trainer parties")
     require("P_LEVEL_UP_MOVE_LEARNING    FALSE" in pokemon_config, "Level-up prompts are not disabled")
@@ -88,6 +253,12 @@ def main() -> None:
 
     require("giveitem ITEM_POKE_VIAL" in nurse and "giveitem ITEM_LEVELER" in nurse, "Center does not grant both tools")
     require("copyvar VAR_POKE_VIAL_CHARGES, VAR_POKE_VIAL_MAX_CHARGES" in nurse, "Center does not refill the Vial")
+    require(
+        "for (u32 i = 0; i < gPartiesCount[B_TRAINER_PLAYER]; i++)" in item_use
+        and "HealPokemon(&gParties[B_TRAINER_PLAYER][i]);" in item_use
+        and "VarSet(VAR_POKE_VIAL_CHARGES, VarGet(VAR_POKE_VIAL_CHARGES) - 1);" in item_use,
+        "Poke Vial no longer heals the complete live party and consumes exactly one charge",
+    )
     require(re.search(r"\[ITEM_RARE_CANDY\].*?\.price = 1000,", items, re.S) is not None, "Rare Candy price is not 1,000")
     route111 = read("data/maps/Route111/scripts.inc")
     route133 = read("data/maps/Route133/scripts.inc")
@@ -113,6 +284,13 @@ def main() -> None:
         "SELECTWINDOW_ABILITY" in party_menu
         and all(token in party_menu_data for token in ("MENU_ABILITY_SLOT_0", "MENU_ABILITY_SLOT_1", "MENU_ABILITY_SLOT_2")),
         "the native Ability chooser is incomplete",
+    )
+    require(
+        "GetEmeraldChampionsBattleSetCount(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x800A]) + 1" in field_specials
+        and "task->tMaxItemsOnScreen = min(task->tNumItems, 4);" in field_specials
+        and "task->tWidth = ConvertPixelWidthToTileWidth(width);" in field_specials
+        and "if (task->tLeft + task->tWidth > MAX_MULTICHOICE_WIDTH + 1)" in field_specials,
+        "the battle-role chooser is no longer dynamically sized and screen-bounded",
     )
 
     centers = tuple((ROOT / "data" / "maps").glob("*PokemonCenter_1F/map.json"))
@@ -163,9 +341,12 @@ def main() -> None:
     require(not any("_BERRY" in item for item in free_items), "Berries leaked into the free vendor")
 
     mega_items = set()
+    z_crystal_items = set()
     for match in re.finditer(r"\[(ITEM_[A-Z0-9_]+)\]\s*=\s*\{(.*?)\n\s*\},", items, re.S):
         if "HOLD_EFFECT_MEGA_STONE" in match.group(2):
             mega_items.add(match.group(1))
+        if "HOLD_EFFECT_Z_CRYSTAL" in match.group(2):
+            z_crystal_items.add(match.group(1))
     require(not free_items.intersection(mega_items), "Mega Stones leaked into the free vendor")
     forbidden_parts = ("_PLATE", "_MEMORY", "_DRIVE", "_MASK", "_Z_CRYSTAL", "TERA_SHARD")
     require(not any(any(part in item for part in forbidden_parts) for item in free_items), "Progression held items leaked into the free vendor")
@@ -205,6 +386,11 @@ def main() -> None:
         for entry in presets[group]
         for field in ("item", "required_item")
     }
+    trainer_items = set(re.findall(r"@\s*(ITEM_[A-Z0-9_]+)", trainers))
+    require(
+        not z_crystal_items.intersection(free_items | preset_items | trainer_items),
+        "a live campaign loadout enables Z-Moves",
+    )
     preset_protected = mega_items | {
         item for item in preset_items
         if any(part in item for part in forbidden_parts)

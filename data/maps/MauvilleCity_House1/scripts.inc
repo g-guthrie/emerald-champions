@@ -7,6 +7,7 @@ MauvilleCity_House1_EventScript_RockSmashDude::
 	goto_if_set FLAG_RECEIVED_HM_ROCK_SMASH, MauvilleCity_House1_EventScript_ReceivedRockSmash
 	msgbox MauvilleCity_House1_Text_ImRockSmashDudeTakeThis, MSGBOX_DEFAULT
 	giveitem ITEM_HM_ROCK_SMASH
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_HM_ROCK_SMASH
 	setflag FLAG_HIDE_ROUTE_111_ROCK_SMASH_TIP_GUY
 	msgbox MauvilleCity_House1_Text_ExplainRockSmash, MSGBOX_DEFAULT

@@ -42,8 +42,8 @@
       "x": 38,
       "y": 19,
       "elevation": 3,
-      "item": "ITEM_PROTEIN",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_128_PROTEIN"
+      "item": "ITEM_BIG_PEARL",
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_128_BIG_PEARL"
     },
     {
       "type": "hidden_item",

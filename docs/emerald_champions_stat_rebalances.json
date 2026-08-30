@@ -1,0 +1,2918 @@
+{
+  "schema_version": 1,
+  "policy": "Emerald Champions selective Inclement Emerald stat port",
+  "current_base_commit": "8432feb0996ea830807a6f786f7008d54c1ebc91",
+  "inclement_source": {
+    "repository": "https://github.com/jrci-dev/inclementemerald",
+    "commit": "93e96730fb3c771f7f08f9623ae36f0643c52d3d",
+    "configuration": "REBALANCED_VERSION with P_UPDATED_STATS=GEN_8"
+  },
+  "audit": "work/audits/INCLEMENT_STAT_PORT_AUDIT.md",
+  "counts": {
+    "inclement_changed_species_forms": 264,
+    "ported_species_forms": 102,
+    "paired_form_adjustments": 3,
+    "excluded_or_deferred": 162
+  },
+  "expected_exposure": {
+    "trainer_pokemon": 398,
+    "trainer_branches": 287,
+    "tutor_presets": 122,
+    "wild_slots": 468,
+    "wild_maps": 116
+  },
+  "stat_order": [
+    "baseHP",
+    "baseAttack",
+    "baseDefense",
+    "baseSpeed",
+    "baseSpAttack",
+    "baseSpDefense"
+  ],
+  "port_entries": [
+    {
+      "species": "SPECIES_ABSOL",
+      "inclement_species": "SPECIES_ABSOL",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 65,
+        "baseAttack": 130,
+        "baseDefense": 60,
+        "baseSpeed": 75,
+        "baseSpAttack": 75,
+        "baseSpDefense": 60
+      },
+      "stats_target": {
+        "baseHP": 65,
+        "baseAttack": 130,
+        "baseDefense": 65,
+        "baseSpeed": 85,
+        "baseSpAttack": 75,
+        "baseSpDefense": 65
+      },
+      "exposure": {
+        "trainer_pokemon": 5,
+        "trainer_branches": 5,
+        "tutor_presets": 2,
+        "wild_slots": 1,
+        "wild_maps": 1
+      }
+    },
+    {
+      "species": "SPECIES_AMBIPOM",
+      "inclement_species": "SPECIES_AMBIPOM",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 75,
+        "baseAttack": 100,
+        "baseDefense": 66,
+        "baseSpeed": 115,
+        "baseSpAttack": 60,
+        "baseSpDefense": 66
+      },
+      "stats_target": {
+        "baseHP": 75,
+        "baseAttack": 100,
+        "baseDefense": 66,
+        "baseSpeed": 125,
+        "baseSpAttack": 60,
+        "baseSpDefense": 66
+      },
+      "exposure": {
+        "trainer_pokemon": 3,
+        "trainer_branches": 3,
+        "tutor_presets": 1,
+        "wild_slots": 2,
+        "wild_maps": 1
+      }
+    },
+    {
+      "species": "SPECIES_ARAQUANID",
+      "inclement_species": "SPECIES_ARAQUANID",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 68,
+        "baseAttack": 70,
+        "baseDefense": 92,
+        "baseSpeed": 42,
+        "baseSpAttack": 50,
+        "baseSpDefense": 132
+      },
+      "stats_target": {
+        "baseHP": 68,
+        "baseAttack": 90,
+        "baseDefense": 92,
+        "baseSpeed": 42,
+        "baseSpAttack": 50,
+        "baseSpDefense": 132
+      },
+      "exposure": {
+        "trainer_pokemon": 7,
+        "trainer_branches": 7,
+        "tutor_presets": 1,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_BASCULIN_BLUE_STRIPED",
+      "inclement_species": "SPECIES_BASCULIN_BLUE_STRIPED",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 70,
+        "baseAttack": 92,
+        "baseDefense": 65,
+        "baseSpeed": 98,
+        "baseSpAttack": 80,
+        "baseSpDefense": 55
+      },
+      "stats_target": {
+        "baseHP": 70,
+        "baseAttack": 92,
+        "baseDefense": 65,
+        "baseSpeed": 118,
+        "baseSpAttack": 80,
+        "baseSpDefense": 55
+      },
+      "exposure": {
+        "trainer_pokemon": 0,
+        "trainer_branches": 0,
+        "tutor_presets": 1,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_BASCULIN_RED_STRIPED",
+      "inclement_species": "SPECIES_BASCULIN",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 70,
+        "baseAttack": 92,
+        "baseDefense": 65,
+        "baseSpeed": 98,
+        "baseSpAttack": 80,
+        "baseSpDefense": 55
+      },
+      "stats_target": {
+        "baseHP": 70,
+        "baseAttack": 92,
+        "baseDefense": 65,
+        "baseSpeed": 118,
+        "baseSpAttack": 80,
+        "baseSpDefense": 55
+      },
+      "exposure": {
+        "trainer_pokemon": 5,
+        "trainer_branches": 5,
+        "tutor_presets": 2,
+        "wild_slots": 9,
+        "wild_maps": 3
+      }
+    },
+    {
+      "species": "SPECIES_BEAUTIFLY",
+      "inclement_species": "SPECIES_BEAUTIFLY",
+      "decision": "ability_coupled",
+      "stats_before": {
+        "baseHP": 60,
+        "baseAttack": 70,
+        "baseDefense": 50,
+        "baseSpeed": 65,
+        "baseSpAttack": 100,
+        "baseSpDefense": 50
+      },
+      "stats_target": {
+        "baseHP": 60,
+        "baseAttack": 50,
+        "baseDefense": 60,
+        "baseSpeed": 85,
+        "baseSpAttack": 110,
+        "baseSpDefense": 60
+      },
+      "exposure": {
+        "trainer_pokemon": 2,
+        "trainer_branches": 2,
+        "tutor_presets": 1,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_BEEDRILL",
+      "inclement_species": "SPECIES_BEEDRILL",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 65,
+        "baseAttack": 90,
+        "baseDefense": 40,
+        "baseSpeed": 75,
+        "baseSpAttack": 45,
+        "baseSpDefense": 80
+      },
+      "stats_target": {
+        "baseHP": 65,
+        "baseAttack": 100,
+        "baseDefense": 40,
+        "baseSpeed": 90,
+        "baseSpAttack": 45,
+        "baseSpDefense": 80
+      },
+      "exposure": {
+        "trainer_pokemon": 4,
+        "trainer_branches": 4,
+        "tutor_presets": 1,
+        "wild_slots": 1,
+        "wild_maps": 1
+      }
+    },
+    {
+      "species": "SPECIES_BIBAREL",
+      "inclement_species": "SPECIES_BIBAREL",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 79,
+        "baseAttack": 85,
+        "baseDefense": 60,
+        "baseSpeed": 71,
+        "baseSpAttack": 55,
+        "baseSpDefense": 60
+      },
+      "stats_target": {
+        "baseHP": 89,
+        "baseAttack": 85,
+        "baseDefense": 80,
+        "baseSpeed": 71,
+        "baseSpAttack": 55,
+        "baseSpDefense": 60
+      },
+      "exposure": {
+        "trainer_pokemon": 3,
+        "trainer_branches": 3,
+        "tutor_presets": 1,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_BUTTERFREE",
+      "inclement_species": "SPECIES_BUTTERFREE",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 60,
+        "baseAttack": 45,
+        "baseDefense": 50,
+        "baseSpeed": 70,
+        "baseSpAttack": 90,
+        "baseSpDefense": 80
+      },
+      "stats_target": {
+        "baseHP": 60,
+        "baseAttack": 45,
+        "baseDefense": 50,
+        "baseSpeed": 90,
+        "baseSpAttack": 100,
+        "baseSpDefense": 80
+      },
+      "exposure": {
+        "trainer_pokemon": 4,
+        "trainer_branches": 4,
+        "tutor_presets": 1,
+        "wild_slots": 5,
+        "wild_maps": 1
+      }
+    },
+    {
+      "species": "SPECIES_CACTURNE",
+      "inclement_species": "SPECIES_CACTURNE",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 70,
+        "baseAttack": 115,
+        "baseDefense": 60,
+        "baseSpeed": 55,
+        "baseSpAttack": 115,
+        "baseSpDefense": 60
+      },
+      "stats_target": {
+        "baseHP": 70,
+        "baseAttack": 115,
+        "baseDefense": 60,
+        "baseSpeed": 85,
+        "baseSpAttack": 115,
+        "baseSpDefense": 60
+      },
+      "exposure": {
+        "trainer_pokemon": 3,
+        "trainer_branches": 3,
+        "tutor_presets": 1,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_CHATOT",
+      "inclement_species": "SPECIES_CHATOT",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 76,
+        "baseAttack": 65,
+        "baseDefense": 45,
+        "baseSpeed": 91,
+        "baseSpAttack": 92,
+        "baseSpDefense": 42
+      },
+      "stats_target": {
+        "baseHP": 76,
+        "baseAttack": 65,
+        "baseDefense": 45,
+        "baseSpeed": 101,
+        "baseSpAttack": 102,
+        "baseSpDefense": 42
+      },
+      "exposure": {
+        "trainer_pokemon": 5,
+        "trainer_branches": 5,
+        "tutor_presets": 1,
+        "wild_slots": 2,
+        "wild_maps": 2
+      }
+    },
+    {
+      "species": "SPECIES_CHIMECHO",
+      "inclement_species": "SPECIES_CHIMECHO",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 75,
+        "baseAttack": 50,
+        "baseDefense": 80,
+        "baseSpeed": 65,
+        "baseSpAttack": 95,
+        "baseSpDefense": 90
+      },
+      "stats_target": {
+        "baseHP": 85,
+        "baseAttack": 50,
+        "baseDefense": 90,
+        "baseSpeed": 65,
+        "baseSpAttack": 95,
+        "baseSpDefense": 100
+      },
+      "exposure": {
+        "trainer_pokemon": 3,
+        "trainer_branches": 3,
+        "tutor_presets": 1,
+        "wild_slots": 2,
+        "wild_maps": 1
+      }
+    },
+    {
+      "species": "SPECIES_CINCCINO",
+      "inclement_species": "SPECIES_CINCCINO",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 75,
+        "baseAttack": 95,
+        "baseDefense": 60,
+        "baseSpeed": 115,
+        "baseSpAttack": 65,
+        "baseSpDefense": 60
+      },
+      "stats_target": {
+        "baseHP": 75,
+        "baseAttack": 115,
+        "baseDefense": 60,
+        "baseSpeed": 115,
+        "baseSpAttack": 65,
+        "baseSpDefense": 60
+      },
+      "exposure": {
+        "trainer_pokemon": 3,
+        "trainer_branches": 3,
+        "tutor_presets": 1,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_CRUSTLE",
+      "inclement_species": "SPECIES_CRUSTLE",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 70,
+        "baseAttack": 105,
+        "baseDefense": 125,
+        "baseSpeed": 45,
+        "baseSpAttack": 65,
+        "baseSpDefense": 75
+      },
+      "stats_target": {
+        "baseHP": 70,
+        "baseAttack": 115,
+        "baseDefense": 135,
+        "baseSpeed": 45,
+        "baseSpAttack": 65,
+        "baseSpDefense": 75
+      },
+      "exposure": {
+        "trainer_pokemon": 3,
+        "trainer_branches": 3,
+        "tutor_presets": 1,
+        "wild_slots": 6,
+        "wild_maps": 2
+      }
+    },
+    {
+      "species": "SPECIES_DECIDUEYE",
+      "inclement_species": "SPECIES_DECIDUEYE",
+      "decision": "ability_coupled",
+      "stats_before": {
+        "baseHP": 78,
+        "baseAttack": 107,
+        "baseDefense": 75,
+        "baseSpeed": 70,
+        "baseSpAttack": 100,
+        "baseSpDefense": 100
+      },
+      "stats_target": {
+        "baseHP": 78,
+        "baseAttack": 107,
+        "baseDefense": 75,
+        "baseSpeed": 110,
+        "baseSpAttack": 70,
+        "baseSpDefense": 90
+      },
+      "exposure": {
+        "trainer_pokemon": 1,
+        "trainer_branches": 1,
+        "tutor_presets": 1,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_DEWGONG",
+      "inclement_species": "SPECIES_DEWGONG",
+      "decision": "ability_coupled",
+      "stats_before": {
+        "baseHP": 90,
+        "baseAttack": 70,
+        "baseDefense": 80,
+        "baseSpeed": 70,
+        "baseSpAttack": 70,
+        "baseSpDefense": 95
+      },
+      "stats_target": {
+        "baseHP": 90,
+        "baseAttack": 90,
+        "baseDefense": 60,
+        "baseSpeed": 90,
+        "baseSpAttack": 95,
+        "baseSpDefense": 95
+      },
+      "exposure": {
+        "trainer_pokemon": 2,
+        "trainer_branches": 2,
+        "tutor_presets": 1,
+        "wild_slots": 45,
+        "wild_maps": 9
+      }
+    },
+    {
+      "species": "SPECIES_DODRIO",
+      "inclement_species": "SPECIES_DODRIO",
+      "decision": "ability_coupled",
+      "stats_before": {
+        "baseHP": 60,
+        "baseAttack": 110,
+        "baseDefense": 70,
+        "baseSpeed": 110,
+        "baseSpAttack": 60,
+        "baseSpDefense": 60
+      },
+      "stats_target": {
+        "baseHP": 80,
+        "baseAttack": 110,
+        "baseDefense": 70,
+        "baseSpeed": 110,
+        "baseSpAttack": 60,
+        "baseSpDefense": 60
+      },
+      "exposure": {
+        "trainer_pokemon": 7,
+        "trainer_branches": 7,
+        "tutor_presets": 2,
+        "wild_slots": 2,
+        "wild_maps": 2
+      }
+    },
+    {
+      "species": "SPECIES_DRUDDIGON",
+      "inclement_species": "SPECIES_DRUDDIGON",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 77,
+        "baseAttack": 120,
+        "baseDefense": 90,
+        "baseSpeed": 48,
+        "baseSpAttack": 60,
+        "baseSpDefense": 90
+      },
+      "stats_target": {
+        "baseHP": 97,
+        "baseAttack": 120,
+        "baseDefense": 90,
+        "baseSpeed": 48,
+        "baseSpAttack": 60,
+        "baseSpDefense": 90
+      },
+      "exposure": {
+        "trainer_pokemon": 3,
+        "trainer_branches": 3,
+        "tutor_presets": 1,
+        "wild_slots": 13,
+        "wild_maps": 6
+      }
+    },
+    {
+      "species": "SPECIES_DURANT",
+      "inclement_species": "SPECIES_DURANT",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 58,
+        "baseAttack": 109,
+        "baseDefense": 112,
+        "baseSpeed": 109,
+        "baseSpAttack": 48,
+        "baseSpDefense": 48
+      },
+      "stats_target": {
+        "baseHP": 58,
+        "baseAttack": 109,
+        "baseDefense": 112,
+        "baseSpeed": 109,
+        "baseSpAttack": 48,
+        "baseSpDefense": 78
+      },
+      "exposure": {
+        "trainer_pokemon": 4,
+        "trainer_branches": 4,
+        "tutor_presets": 1,
+        "wild_slots": 2,
+        "wild_maps": 1
+      }
+    },
+    {
+      "species": "SPECIES_DUSTOX",
+      "inclement_species": "SPECIES_DUSTOX",
+      "decision": "ability_coupled",
+      "stats_before": {
+        "baseHP": 60,
+        "baseAttack": 50,
+        "baseDefense": 70,
+        "baseSpeed": 65,
+        "baseSpAttack": 50,
+        "baseSpDefense": 90
+      },
+      "stats_target": {
+        "baseHP": 80,
+        "baseAttack": 30,
+        "baseDefense": 90,
+        "baseSpeed": 65,
+        "baseSpAttack": 70,
+        "baseSpDefense": 90
+      },
+      "exposure": {
+        "trainer_pokemon": 3,
+        "trainer_branches": 3,
+        "tutor_presets": 1,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_EMOLGA",
+      "inclement_species": "SPECIES_EMOLGA",
+      "decision": "ability_coupled",
+      "stats_before": {
+        "baseHP": 55,
+        "baseAttack": 75,
+        "baseDefense": 60,
+        "baseSpeed": 103,
+        "baseSpAttack": 75,
+        "baseSpDefense": 60
+      },
+      "stats_target": {
+        "baseHP": 55,
+        "baseAttack": 75,
+        "baseDefense": 60,
+        "baseSpeed": 113,
+        "baseSpAttack": 105,
+        "baseSpDefense": 60
+      },
+      "exposure": {
+        "trainer_pokemon": 4,
+        "trainer_branches": 4,
+        "tutor_presets": 1,
+        "wild_slots": 2,
+        "wild_maps": 1
+      }
+    },
+    {
+      "species": "SPECIES_FEAROW",
+      "inclement_species": "SPECIES_FEAROW",
+      "decision": "ability_coupled",
+      "stats_before": {
+        "baseHP": 65,
+        "baseAttack": 90,
+        "baseDefense": 65,
+        "baseSpeed": 100,
+        "baseSpAttack": 61,
+        "baseSpDefense": 61
+      },
+      "stats_target": {
+        "baseHP": 65,
+        "baseAttack": 110,
+        "baseDefense": 75,
+        "baseSpeed": 100,
+        "baseSpAttack": 61,
+        "baseSpDefense": 71
+      },
+      "exposure": {
+        "trainer_pokemon": 3,
+        "trainer_branches": 3,
+        "tutor_presets": 1,
+        "wild_slots": 49,
+        "wild_maps": 13
+      }
+    },
+    {
+      "species": "SPECIES_FLYGON",
+      "inclement_species": "SPECIES_FLYGON",
+      "decision": "ability_coupled",
+      "stats_before": {
+        "baseHP": 80,
+        "baseAttack": 100,
+        "baseDefense": 80,
+        "baseSpeed": 100,
+        "baseSpAttack": 80,
+        "baseSpDefense": 80
+      },
+      "stats_target": {
+        "baseHP": 80,
+        "baseAttack": 100,
+        "baseDefense": 80,
+        "baseSpeed": 100,
+        "baseSpAttack": 100,
+        "baseSpDefense": 80
+      },
+      "exposure": {
+        "trainer_pokemon": 5,
+        "trainer_branches": 5,
+        "tutor_presets": 2,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_GALVANTULA",
+      "inclement_species": "SPECIES_GALVANTULA",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 70,
+        "baseAttack": 77,
+        "baseDefense": 60,
+        "baseSpeed": 108,
+        "baseSpAttack": 97,
+        "baseSpDefense": 60
+      },
+      "stats_target": {
+        "baseHP": 70,
+        "baseAttack": 77,
+        "baseDefense": 60,
+        "baseSpeed": 108,
+        "baseSpAttack": 107,
+        "baseSpDefense": 60
+      },
+      "exposure": {
+        "trainer_pokemon": 5,
+        "trainer_branches": 5,
+        "tutor_presets": 1,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_GARBODOR",
+      "inclement_species": "SPECIES_GARBODOR",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 80,
+        "baseAttack": 95,
+        "baseDefense": 82,
+        "baseSpeed": 75,
+        "baseSpAttack": 60,
+        "baseSpDefense": 82
+      },
+      "stats_target": {
+        "baseHP": 80,
+        "baseAttack": 95,
+        "baseDefense": 102,
+        "baseSpeed": 75,
+        "baseSpAttack": 60,
+        "baseSpDefense": 82
+      },
+      "exposure": {
+        "trainer_pokemon": 2,
+        "trainer_branches": 2,
+        "tutor_presets": 1,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_GOGOAT",
+      "inclement_species": "SPECIES_GOGOAT",
+      "decision": "ability_coupled",
+      "stats_before": {
+        "baseHP": 123,
+        "baseAttack": 100,
+        "baseDefense": 62,
+        "baseSpeed": 68,
+        "baseSpAttack": 97,
+        "baseSpDefense": 81
+      },
+      "stats_target": {
+        "baseHP": 123,
+        "baseAttack": 100,
+        "baseDefense": 62,
+        "baseSpeed": 95,
+        "baseSpAttack": 79,
+        "baseSpDefense": 81
+      },
+      "exposure": {
+        "trainer_pokemon": 3,
+        "trainer_branches": 3,
+        "tutor_presets": 1,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_GOLURK",
+      "inclement_species": "SPECIES_GOLURK",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 89,
+        "baseAttack": 124,
+        "baseDefense": 80,
+        "baseSpeed": 55,
+        "baseSpAttack": 55,
+        "baseSpDefense": 80
+      },
+      "stats_target": {
+        "baseHP": 89,
+        "baseAttack": 134,
+        "baseDefense": 90,
+        "baseSpeed": 55,
+        "baseSpAttack": 55,
+        "baseSpDefense": 90
+      },
+      "exposure": {
+        "trainer_pokemon": 5,
+        "trainer_branches": 5,
+        "tutor_presets": 2,
+        "wild_slots": 9,
+        "wild_maps": 3
+      }
+    },
+    {
+      "species": "SPECIES_GOODRA",
+      "inclement_species": "SPECIES_GOODRA",
+      "decision": "ability_coupled",
+      "stats_before": {
+        "baseHP": 90,
+        "baseAttack": 100,
+        "baseDefense": 70,
+        "baseSpeed": 80,
+        "baseSpAttack": 110,
+        "baseSpDefense": 150
+      },
+      "stats_target": {
+        "baseHP": 90,
+        "baseAttack": 100,
+        "baseDefense": 85,
+        "baseSpeed": 80,
+        "baseSpAttack": 110,
+        "baseSpDefense": 135
+      },
+      "exposure": {
+        "trainer_pokemon": 4,
+        "trainer_branches": 4,
+        "tutor_presets": 2,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_GOREBYSS",
+      "inclement_species": "SPECIES_GOREBYSS",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 55,
+        "baseAttack": 84,
+        "baseDefense": 105,
+        "baseSpeed": 52,
+        "baseSpAttack": 114,
+        "baseSpDefense": 75
+      },
+      "stats_target": {
+        "baseHP": 55,
+        "baseAttack": 84,
+        "baseDefense": 105,
+        "baseSpeed": 72,
+        "baseSpAttack": 124,
+        "baseSpDefense": 75
+      },
+      "exposure": {
+        "trainer_pokemon": 7,
+        "trainer_branches": 7,
+        "tutor_presets": 1,
+        "wild_slots": 2,
+        "wild_maps": 2
+      }
+    },
+    {
+      "species": "SPECIES_GOURGEIST_AVERAGE",
+      "inclement_species": "SPECIES_GOURGEIST",
+      "decision": "ability_coupled",
+      "stats_before": {
+        "baseHP": 65,
+        "baseAttack": 90,
+        "baseDefense": 122,
+        "baseSpeed": 84,
+        "baseSpAttack": 58,
+        "baseSpDefense": 75
+      },
+      "stats_target": {
+        "baseHP": 65,
+        "baseAttack": 58,
+        "baseDefense": 122,
+        "baseSpeed": 84,
+        "baseSpAttack": 90,
+        "baseSpDefense": 75
+      },
+      "exposure": {
+        "trainer_pokemon": 2,
+        "trainer_branches": 2,
+        "tutor_presets": 2,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_GOURGEIST_LARGE",
+      "inclement_species": "SPECIES_GOURGEIST_LARGE",
+      "decision": "ability_coupled",
+      "stats_before": {
+        "baseHP": 75,
+        "baseAttack": 95,
+        "baseDefense": 122,
+        "baseSpeed": 69,
+        "baseSpAttack": 58,
+        "baseSpDefense": 75
+      },
+      "stats_target": {
+        "baseHP": 75,
+        "baseAttack": 58,
+        "baseDefense": 122,
+        "baseSpeed": 69,
+        "baseSpAttack": 95,
+        "baseSpDefense": 75
+      },
+      "exposure": {
+        "trainer_pokemon": 1,
+        "trainer_branches": 1,
+        "tutor_presets": 1,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_GOURGEIST_SMALL",
+      "inclement_species": "SPECIES_GOURGEIST_SMALL",
+      "decision": "ability_coupled",
+      "stats_before": {
+        "baseHP": 55,
+        "baseAttack": 85,
+        "baseDefense": 122,
+        "baseSpeed": 99,
+        "baseSpAttack": 58,
+        "baseSpDefense": 75
+      },
+      "stats_target": {
+        "baseHP": 55,
+        "baseAttack": 58,
+        "baseDefense": 122,
+        "baseSpeed": 99,
+        "baseSpAttack": 85,
+        "baseSpDefense": 75
+      },
+      "exposure": {
+        "trainer_pokemon": 1,
+        "trainer_branches": 1,
+        "tutor_presets": 1,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_GOURGEIST_SUPER",
+      "inclement_species": "SPECIES_GOURGEIST_SUPER",
+      "decision": "ability_coupled",
+      "stats_before": {
+        "baseHP": 85,
+        "baseAttack": 100,
+        "baseDefense": 122,
+        "baseSpeed": 54,
+        "baseSpAttack": 58,
+        "baseSpDefense": 75
+      },
+      "stats_target": {
+        "baseHP": 85,
+        "baseAttack": 58,
+        "baseDefense": 122,
+        "baseSpeed": 54,
+        "baseSpAttack": 100,
+        "baseSpDefense": 75
+      },
+      "exposure": {
+        "trainer_pokemon": 2,
+        "trainer_branches": 2,
+        "tutor_presets": 1,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_GRANBULL",
+      "inclement_species": "SPECIES_GRANBULL",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 90,
+        "baseAttack": 120,
+        "baseDefense": 75,
+        "baseSpeed": 45,
+        "baseSpAttack": 60,
+        "baseSpDefense": 60
+      },
+      "stats_target": {
+        "baseHP": 90,
+        "baseAttack": 130,
+        "baseDefense": 75,
+        "baseSpeed": 65,
+        "baseSpAttack": 60,
+        "baseSpDefense": 60
+      },
+      "exposure": {
+        "trainer_pokemon": 1,
+        "trainer_branches": 1,
+        "tutor_presets": 1,
+        "wild_slots": 3,
+        "wild_maps": 1
+      }
+    },
+    {
+      "species": "SPECIES_GRUMPIG",
+      "inclement_species": "SPECIES_GRUMPIG",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 80,
+        "baseAttack": 45,
+        "baseDefense": 65,
+        "baseSpeed": 80,
+        "baseSpAttack": 90,
+        "baseSpDefense": 110
+      },
+      "stats_target": {
+        "baseHP": 100,
+        "baseAttack": 45,
+        "baseDefense": 65,
+        "baseSpeed": 80,
+        "baseSpAttack": 100,
+        "baseSpDefense": 110
+      },
+      "exposure": {
+        "trainer_pokemon": 3,
+        "trainer_branches": 3,
+        "tutor_presets": 1,
+        "wild_slots": 1,
+        "wild_maps": 1
+      }
+    },
+    {
+      "species": "SPECIES_HARIYAMA",
+      "inclement_species": "SPECIES_HARIYAMA",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 144,
+        "baseAttack": 120,
+        "baseDefense": 60,
+        "baseSpeed": 50,
+        "baseSpAttack": 40,
+        "baseSpDefense": 60
+      },
+      "stats_target": {
+        "baseHP": 144,
+        "baseAttack": 130,
+        "baseDefense": 70,
+        "baseSpeed": 50,
+        "baseSpAttack": 40,
+        "baseSpDefense": 70
+      },
+      "exposure": {
+        "trainer_pokemon": 6,
+        "trainer_branches": 6,
+        "tutor_presets": 2,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_HEATMOR",
+      "inclement_species": "SPECIES_HEATMOR",
+      "decision": "ability_coupled",
+      "stats_before": {
+        "baseHP": 85,
+        "baseAttack": 97,
+        "baseDefense": 66,
+        "baseSpeed": 65,
+        "baseSpAttack": 105,
+        "baseSpDefense": 66
+      },
+      "stats_target": {
+        "baseHP": 85,
+        "baseAttack": 97,
+        "baseDefense": 96,
+        "baseSpeed": 65,
+        "baseSpAttack": 85,
+        "baseSpDefense": 96
+      },
+      "exposure": {
+        "trainer_pokemon": 3,
+        "trainer_branches": 3,
+        "tutor_presets": 1,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_HELIOLISK",
+      "inclement_species": "SPECIES_HELIOLISK",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 62,
+        "baseAttack": 55,
+        "baseDefense": 52,
+        "baseSpeed": 109,
+        "baseSpAttack": 109,
+        "baseSpDefense": 94
+      },
+      "stats_target": {
+        "baseHP": 62,
+        "baseAttack": 55,
+        "baseDefense": 52,
+        "baseSpeed": 109,
+        "baseSpAttack": 119,
+        "baseSpDefense": 94
+      },
+      "exposure": {
+        "trainer_pokemon": 6,
+        "trainer_branches": 6,
+        "tutor_presets": 1,
+        "wild_slots": 1,
+        "wild_maps": 1
+      }
+    },
+    {
+      "species": "SPECIES_HITMONCHAN",
+      "inclement_species": "SPECIES_HITMONCHAN",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 50,
+        "baseAttack": 105,
+        "baseDefense": 79,
+        "baseSpeed": 76,
+        "baseSpAttack": 35,
+        "baseSpDefense": 110
+      },
+      "stats_target": {
+        "baseHP": 80,
+        "baseAttack": 105,
+        "baseDefense": 79,
+        "baseSpeed": 76,
+        "baseSpAttack": 35,
+        "baseSpDefense": 110
+      },
+      "exposure": {
+        "trainer_pokemon": 2,
+        "trainer_branches": 2,
+        "tutor_presets": 1,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_HITMONLEE",
+      "inclement_species": "SPECIES_HITMONLEE",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 50,
+        "baseAttack": 120,
+        "baseDefense": 53,
+        "baseSpeed": 87,
+        "baseSpAttack": 35,
+        "baseSpDefense": 110
+      },
+      "stats_target": {
+        "baseHP": 80,
+        "baseAttack": 120,
+        "baseDefense": 53,
+        "baseSpeed": 87,
+        "baseSpAttack": 35,
+        "baseSpDefense": 110
+      },
+      "exposure": {
+        "trainer_pokemon": 1,
+        "trainer_branches": 1,
+        "tutor_presets": 1,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_HITMONTOP",
+      "inclement_species": "SPECIES_HITMONTOP",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 50,
+        "baseAttack": 95,
+        "baseDefense": 95,
+        "baseSpeed": 70,
+        "baseSpAttack": 35,
+        "baseSpDefense": 110
+      },
+      "stats_target": {
+        "baseHP": 80,
+        "baseAttack": 95,
+        "baseDefense": 95,
+        "baseSpeed": 70,
+        "baseSpAttack": 35,
+        "baseSpDefense": 110
+      },
+      "exposure": {
+        "trainer_pokemon": 2,
+        "trainer_branches": 2,
+        "tutor_presets": 1,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_HUNTAIL",
+      "inclement_species": "SPECIES_HUNTAIL",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 55,
+        "baseAttack": 104,
+        "baseDefense": 105,
+        "baseSpeed": 52,
+        "baseSpAttack": 94,
+        "baseSpDefense": 75
+      },
+      "stats_target": {
+        "baseHP": 55,
+        "baseAttack": 114,
+        "baseDefense": 105,
+        "baseSpeed": 72,
+        "baseSpAttack": 94,
+        "baseSpDefense": 75
+      },
+      "exposure": {
+        "trainer_pokemon": 5,
+        "trainer_branches": 5,
+        "tutor_presets": 1,
+        "wild_slots": 2,
+        "wild_maps": 2
+      }
+    },
+    {
+      "species": "SPECIES_JYNX",
+      "inclement_species": "SPECIES_JYNX",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 65,
+        "baseAttack": 50,
+        "baseDefense": 35,
+        "baseSpeed": 95,
+        "baseSpAttack": 115,
+        "baseSpDefense": 95
+      },
+      "stats_target": {
+        "baseHP": 65,
+        "baseAttack": 50,
+        "baseDefense": 35,
+        "baseSpeed": 115,
+        "baseSpAttack": 115,
+        "baseSpDefense": 95
+      },
+      "exposure": {
+        "trainer_pokemon": 5,
+        "trainer_branches": 5,
+        "tutor_presets": 1,
+        "wild_slots": 1,
+        "wild_maps": 1
+      }
+    },
+    {
+      "species": "SPECIES_KECLEON",
+      "inclement_species": "SPECIES_KECLEON",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 60,
+        "baseAttack": 90,
+        "baseDefense": 70,
+        "baseSpeed": 40,
+        "baseSpAttack": 60,
+        "baseSpDefense": 120
+      },
+      "stats_target": {
+        "baseHP": 80,
+        "baseAttack": 100,
+        "baseDefense": 70,
+        "baseSpeed": 40,
+        "baseSpAttack": 60,
+        "baseSpDefense": 120
+      },
+      "exposure": {
+        "trainer_pokemon": 3,
+        "trainer_branches": 3,
+        "tutor_presets": 1,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_KINGLER",
+      "inclement_species": "SPECIES_KINGLER",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 55,
+        "baseAttack": 130,
+        "baseDefense": 115,
+        "baseSpeed": 75,
+        "baseSpAttack": 50,
+        "baseSpDefense": 50
+      },
+      "stats_target": {
+        "baseHP": 80,
+        "baseAttack": 130,
+        "baseDefense": 115,
+        "baseSpeed": 75,
+        "baseSpAttack": 50,
+        "baseSpDefense": 50
+      },
+      "exposure": {
+        "trainer_pokemon": 3,
+        "trainer_branches": 3,
+        "tutor_presets": 1,
+        "wild_slots": 22,
+        "wild_maps": 21
+      }
+    },
+    {
+      "species": "SPECIES_LANTURN",
+      "inclement_species": "SPECIES_LANTURN",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 125,
+        "baseAttack": 58,
+        "baseDefense": 58,
+        "baseSpeed": 67,
+        "baseSpAttack": 76,
+        "baseSpDefense": 76
+      },
+      "stats_target": {
+        "baseHP": 125,
+        "baseAttack": 58,
+        "baseDefense": 58,
+        "baseSpeed": 67,
+        "baseSpAttack": 86,
+        "baseSpDefense": 86
+      },
+      "exposure": {
+        "trainer_pokemon": 6,
+        "trainer_branches": 6,
+        "tutor_presets": 2,
+        "wild_slots": 3,
+        "wild_maps": 3
+      }
+    },
+    {
+      "species": "SPECIES_LIEPARD",
+      "inclement_species": "SPECIES_LIEPARD",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 64,
+        "baseAttack": 88,
+        "baseDefense": 50,
+        "baseSpeed": 106,
+        "baseSpAttack": 88,
+        "baseSpDefense": 50
+      },
+      "stats_target": {
+        "baseHP": 64,
+        "baseAttack": 98,
+        "baseDefense": 50,
+        "baseSpeed": 106,
+        "baseSpAttack": 98,
+        "baseSpDefense": 50
+      },
+      "exposure": {
+        "trainer_pokemon": 7,
+        "trainer_branches": 7,
+        "tutor_presets": 1,
+        "wild_slots": 1,
+        "wild_maps": 1
+      }
+    },
+    {
+      "species": "SPECIES_LOPUNNY",
+      "inclement_species": "SPECIES_LOPUNNY",
+      "decision": "ability_coupled",
+      "stats_before": {
+        "baseHP": 65,
+        "baseAttack": 76,
+        "baseDefense": 84,
+        "baseSpeed": 105,
+        "baseSpAttack": 54,
+        "baseSpDefense": 96
+      },
+      "stats_target": {
+        "baseHP": 65,
+        "baseAttack": 96,
+        "baseDefense": 84,
+        "baseSpeed": 105,
+        "baseSpAttack": 54,
+        "baseSpDefense": 96
+      },
+      "exposure": {
+        "trainer_pokemon": 5,
+        "trainer_branches": 5,
+        "tutor_presets": 2,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_LUDICOLO",
+      "inclement_species": "SPECIES_LUDICOLO",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 80,
+        "baseAttack": 70,
+        "baseDefense": 70,
+        "baseSpeed": 70,
+        "baseSpAttack": 90,
+        "baseSpDefense": 100
+      },
+      "stats_target": {
+        "baseHP": 80,
+        "baseAttack": 70,
+        "baseDefense": 70,
+        "baseSpeed": 80,
+        "baseSpAttack": 100,
+        "baseSpDefense": 100
+      },
+      "exposure": {
+        "trainer_pokemon": 6,
+        "trainer_branches": 6,
+        "tutor_presets": 2,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_LURANTIS",
+      "inclement_species": "SPECIES_LURANTIS",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 70,
+        "baseAttack": 105,
+        "baseDefense": 90,
+        "baseSpeed": 45,
+        "baseSpAttack": 80,
+        "baseSpDefense": 90
+      },
+      "stats_target": {
+        "baseHP": 80,
+        "baseAttack": 115,
+        "baseDefense": 95,
+        "baseSpeed": 45,
+        "baseSpAttack": 80,
+        "baseSpDefense": 95
+      },
+      "exposure": {
+        "trainer_pokemon": 2,
+        "trainer_branches": 2,
+        "tutor_presets": 2,
+        "wild_slots": 2,
+        "wild_maps": 1
+      }
+    },
+    {
+      "species": "SPECIES_LUVDISC",
+      "inclement_species": "SPECIES_LUVDISC",
+      "decision": "ability_coupled",
+      "stats_before": {
+        "baseHP": 43,
+        "baseAttack": 30,
+        "baseDefense": 55,
+        "baseSpeed": 97,
+        "baseSpAttack": 40,
+        "baseSpDefense": 65
+      },
+      "stats_target": {
+        "baseHP": 43,
+        "baseAttack": 30,
+        "baseDefense": 55,
+        "baseSpeed": 97,
+        "baseSpAttack": 95,
+        "baseSpDefense": 65
+      },
+      "exposure": {
+        "trainer_pokemon": 5,
+        "trainer_branches": 5,
+        "tutor_presets": 1,
+        "wild_slots": 10,
+        "wild_maps": 3
+      }
+    },
+    {
+      "species": "SPECIES_MAGMORTAR",
+      "inclement_species": "SPECIES_MAGMORTAR",
+      "decision": "ability_coupled",
+      "stats_before": {
+        "baseHP": 75,
+        "baseAttack": 95,
+        "baseDefense": 67,
+        "baseSpeed": 83,
+        "baseSpAttack": 125,
+        "baseSpDefense": 95
+      },
+      "stats_target": {
+        "baseHP": 75,
+        "baseAttack": 95,
+        "baseDefense": 67,
+        "baseSpeed": 93,
+        "baseSpAttack": 125,
+        "baseSpDefense": 85
+      },
+      "exposure": {
+        "trainer_pokemon": 6,
+        "trainer_branches": 6,
+        "tutor_presets": 2,
+        "wild_slots": 14,
+        "wild_maps": 7
+      }
+    },
+    {
+      "species": "SPECIES_MANECTRIC",
+      "inclement_species": "SPECIES_MANECTRIC",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 70,
+        "baseAttack": 75,
+        "baseDefense": 60,
+        "baseSpeed": 105,
+        "baseSpAttack": 105,
+        "baseSpDefense": 60
+      },
+      "stats_target": {
+        "baseHP": 70,
+        "baseAttack": 75,
+        "baseDefense": 60,
+        "baseSpeed": 105,
+        "baseSpAttack": 125,
+        "baseSpDefense": 60
+      },
+      "exposure": {
+        "trainer_pokemon": 7,
+        "trainer_branches": 7,
+        "tutor_presets": 2,
+        "wild_slots": 1,
+        "wild_maps": 1
+      }
+    },
+    {
+      "species": "SPECIES_MAROWAK",
+      "inclement_species": "SPECIES_MAROWAK",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 60,
+        "baseAttack": 80,
+        "baseDefense": 110,
+        "baseSpeed": 45,
+        "baseSpAttack": 50,
+        "baseSpDefense": 80
+      },
+      "stats_target": {
+        "baseHP": 75,
+        "baseAttack": 80,
+        "baseDefense": 110,
+        "baseSpeed": 45,
+        "baseSpAttack": 50,
+        "baseSpDefense": 80
+      },
+      "exposure": {
+        "trainer_pokemon": 0,
+        "trainer_branches": 0,
+        "tutor_presets": 1,
+        "wild_slots": 14,
+        "wild_maps": 4
+      }
+    },
+    {
+      "species": "SPECIES_MAROWAK_ALOLA",
+      "inclement_species": "SPECIES_MAROWAK_ALOLAN",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 60,
+        "baseAttack": 80,
+        "baseDefense": 110,
+        "baseSpeed": 45,
+        "baseSpAttack": 50,
+        "baseSpDefense": 80
+      },
+      "stats_target": {
+        "baseHP": 75,
+        "baseAttack": 80,
+        "baseDefense": 110,
+        "baseSpeed": 45,
+        "baseSpAttack": 50,
+        "baseSpDefense": 80
+      },
+      "exposure": {
+        "trainer_pokemon": 4,
+        "trainer_branches": 4,
+        "tutor_presets": 1,
+        "wild_slots": 1,
+        "wild_maps": 1
+      }
+    },
+    {
+      "species": "SPECIES_MASQUERAIN",
+      "inclement_species": "SPECIES_MASQUERAIN",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 70,
+        "baseAttack": 60,
+        "baseDefense": 62,
+        "baseSpeed": 80,
+        "baseSpAttack": 100,
+        "baseSpDefense": 82
+      },
+      "stats_target": {
+        "baseHP": 70,
+        "baseAttack": 60,
+        "baseDefense": 72,
+        "baseSpeed": 80,
+        "baseSpAttack": 110,
+        "baseSpDefense": 82
+      },
+      "exposure": {
+        "trainer_pokemon": 3,
+        "trainer_branches": 3,
+        "tutor_presets": 1,
+        "wild_slots": 20,
+        "wild_maps": 6
+      }
+    },
+    {
+      "species": "SPECIES_MAWILE",
+      "inclement_species": "SPECIES_MAWILE",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 50,
+        "baseAttack": 85,
+        "baseDefense": 85,
+        "baseSpeed": 50,
+        "baseSpAttack": 55,
+        "baseSpDefense": 55
+      },
+      "stats_target": {
+        "baseHP": 70,
+        "baseAttack": 85,
+        "baseDefense": 95,
+        "baseSpeed": 50,
+        "baseSpAttack": 55,
+        "baseSpDefense": 55
+      },
+      "exposure": {
+        "trainer_pokemon": 4,
+        "trainer_branches": 4,
+        "tutor_presets": 1,
+        "wild_slots": 8,
+        "wild_maps": 8
+      }
+    },
+    {
+      "species": "SPECIES_MEGANIUM",
+      "inclement_species": "SPECIES_MEGANIUM",
+      "decision": "ability_coupled",
+      "stats_before": {
+        "baseHP": 80,
+        "baseAttack": 82,
+        "baseDefense": 100,
+        "baseSpeed": 80,
+        "baseSpAttack": 83,
+        "baseSpDefense": 100
+      },
+      "stats_target": {
+        "baseHP": 80,
+        "baseAttack": 82,
+        "baseDefense": 100,
+        "baseSpeed": 80,
+        "baseSpAttack": 93,
+        "baseSpDefense": 100
+      },
+      "exposure": {
+        "trainer_pokemon": 4,
+        "trainer_branches": 4,
+        "tutor_presets": 1,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_MINUN",
+      "inclement_species": "SPECIES_MINUN",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 60,
+        "baseAttack": 40,
+        "baseDefense": 50,
+        "baseSpeed": 95,
+        "baseSpAttack": 75,
+        "baseSpDefense": 85
+      },
+      "stats_target": {
+        "baseHP": 60,
+        "baseAttack": 40,
+        "baseDefense": 50,
+        "baseSpeed": 105,
+        "baseSpAttack": 75,
+        "baseSpDefense": 105
+      },
+      "exposure": {
+        "trainer_pokemon": 3,
+        "trainer_branches": 3,
+        "tutor_presets": 1,
+        "wild_slots": 1,
+        "wild_maps": 1
+      }
+    },
+    {
+      "species": "SPECIES_MISMAGIUS",
+      "inclement_species": "SPECIES_MISMAGIUS",
+      "decision": "ability_coupled",
+      "stats_before": {
+        "baseHP": 60,
+        "baseAttack": 60,
+        "baseDefense": 60,
+        "baseSpeed": 105,
+        "baseSpAttack": 105,
+        "baseSpDefense": 105
+      },
+      "stats_target": {
+        "baseHP": 60,
+        "baseAttack": 60,
+        "baseDefense": 60,
+        "baseSpeed": 110,
+        "baseSpAttack": 110,
+        "baseSpDefense": 110
+      },
+      "exposure": {
+        "trainer_pokemon": 4,
+        "trainer_branches": 4,
+        "tutor_presets": 1,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_MR_MIME",
+      "inclement_species": "SPECIES_MR_MIME",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 40,
+        "baseAttack": 45,
+        "baseDefense": 65,
+        "baseSpeed": 90,
+        "baseSpAttack": 100,
+        "baseSpDefense": 120
+      },
+      "stats_target": {
+        "baseHP": 40,
+        "baseAttack": 45,
+        "baseDefense": 65,
+        "baseSpeed": 90,
+        "baseSpAttack": 120,
+        "baseSpDefense": 120
+      },
+      "exposure": {
+        "trainer_pokemon": 2,
+        "trainer_branches": 2,
+        "tutor_presets": 1,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_NINJASK",
+      "inclement_species": "SPECIES_NINJASK",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 61,
+        "baseAttack": 90,
+        "baseDefense": 45,
+        "baseSpeed": 160,
+        "baseSpAttack": 50,
+        "baseSpDefense": 50
+      },
+      "stats_target": {
+        "baseHP": 61,
+        "baseAttack": 100,
+        "baseDefense": 45,
+        "baseSpeed": 160,
+        "baseSpAttack": 50,
+        "baseSpDefense": 50
+      },
+      "exposure": {
+        "trainer_pokemon": 4,
+        "trainer_branches": 4,
+        "tutor_presets": 1,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_NOCTOWL",
+      "inclement_species": "SPECIES_NOCTOWL",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 100,
+        "baseAttack": 50,
+        "baseDefense": 50,
+        "baseSpeed": 70,
+        "baseSpAttack": 86,
+        "baseSpDefense": 96
+      },
+      "stats_target": {
+        "baseHP": 100,
+        "baseAttack": 50,
+        "baseDefense": 70,
+        "baseSpeed": 70,
+        "baseSpAttack": 96,
+        "baseSpDefense": 96
+      },
+      "exposure": {
+        "trainer_pokemon": 5,
+        "trainer_branches": 5,
+        "tutor_presets": 1,
+        "wild_slots": 5,
+        "wild_maps": 2
+      }
+    },
+    {
+      "species": "SPECIES_ORICORIO_BAILE",
+      "inclement_species": "SPECIES_ORICORIO",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 75,
+        "baseAttack": 70,
+        "baseDefense": 70,
+        "baseSpeed": 93,
+        "baseSpAttack": 98,
+        "baseSpDefense": 70
+      },
+      "stats_target": {
+        "baseHP": 75,
+        "baseAttack": 70,
+        "baseDefense": 70,
+        "baseSpeed": 103,
+        "baseSpAttack": 108,
+        "baseSpDefense": 70
+      },
+      "exposure": {
+        "trainer_pokemon": 3,
+        "trainer_branches": 3,
+        "tutor_presets": 1,
+        "wild_slots": 1,
+        "wild_maps": 1
+      }
+    },
+    {
+      "species": "SPECIES_ORICORIO_PAU",
+      "inclement_species": "SPECIES_ORICORIO_PAU",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 75,
+        "baseAttack": 70,
+        "baseDefense": 70,
+        "baseSpeed": 93,
+        "baseSpAttack": 98,
+        "baseSpDefense": 70
+      },
+      "stats_target": {
+        "baseHP": 75,
+        "baseAttack": 70,
+        "baseDefense": 70,
+        "baseSpeed": 103,
+        "baseSpAttack": 108,
+        "baseSpDefense": 70
+      },
+      "exposure": {
+        "trainer_pokemon": 1,
+        "trainer_branches": 1,
+        "tutor_presets": 1,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_ORICORIO_POM_POM",
+      "inclement_species": "SPECIES_ORICORIO_POM_POM",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 75,
+        "baseAttack": 70,
+        "baseDefense": 70,
+        "baseSpeed": 93,
+        "baseSpAttack": 98,
+        "baseSpDefense": 70
+      },
+      "stats_target": {
+        "baseHP": 75,
+        "baseAttack": 70,
+        "baseDefense": 70,
+        "baseSpeed": 103,
+        "baseSpAttack": 108,
+        "baseSpDefense": 70
+      },
+      "exposure": {
+        "trainer_pokemon": 3,
+        "trainer_branches": 3,
+        "tutor_presets": 1,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_ORICORIO_SENSU",
+      "inclement_species": "SPECIES_ORICORIO_SENSU",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 75,
+        "baseAttack": 70,
+        "baseDefense": 70,
+        "baseSpeed": 93,
+        "baseSpAttack": 98,
+        "baseSpDefense": 70
+      },
+      "stats_target": {
+        "baseHP": 75,
+        "baseAttack": 70,
+        "baseDefense": 70,
+        "baseSpeed": 103,
+        "baseSpAttack": 108,
+        "baseSpDefense": 70
+      },
+      "exposure": {
+        "trainer_pokemon": 1,
+        "trainer_branches": 1,
+        "tutor_presets": 1,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_PALOSSAND",
+      "inclement_species": "SPECIES_PALOSSAND",
+      "decision": "ability_coupled",
+      "stats_before": {
+        "baseHP": 85,
+        "baseAttack": 75,
+        "baseDefense": 110,
+        "baseSpeed": 35,
+        "baseSpAttack": 100,
+        "baseSpDefense": 75
+      },
+      "stats_target": {
+        "baseHP": 85,
+        "baseAttack": 75,
+        "baseDefense": 120,
+        "baseSpeed": 35,
+        "baseSpAttack": 100,
+        "baseSpDefense": 85
+      },
+      "exposure": {
+        "trainer_pokemon": 5,
+        "trainer_branches": 5,
+        "tutor_presets": 1,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_PIDGEOT",
+      "inclement_species": "SPECIES_PIDGEOT",
+      "decision": "ability_coupled",
+      "stats_before": {
+        "baseHP": 83,
+        "baseAttack": 80,
+        "baseDefense": 75,
+        "baseSpeed": 101,
+        "baseSpAttack": 70,
+        "baseSpDefense": 70
+      },
+      "stats_target": {
+        "baseHP": 83,
+        "baseAttack": 70,
+        "baseDefense": 75,
+        "baseSpeed": 101,
+        "baseSpAttack": 95,
+        "baseSpDefense": 70
+      },
+      "exposure": {
+        "trainer_pokemon": 5,
+        "trainer_branches": 5,
+        "tutor_presets": 1,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_PLUSLE",
+      "inclement_species": "SPECIES_PLUSLE",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 60,
+        "baseAttack": 50,
+        "baseDefense": 40,
+        "baseSpeed": 95,
+        "baseSpAttack": 85,
+        "baseSpDefense": 75
+      },
+      "stats_target": {
+        "baseHP": 60,
+        "baseAttack": 50,
+        "baseDefense": 40,
+        "baseSpeed": 105,
+        "baseSpAttack": 105,
+        "baseSpDefense": 75
+      },
+      "exposure": {
+        "trainer_pokemon": 4,
+        "trainer_branches": 4,
+        "tutor_presets": 1,
+        "wild_slots": 1,
+        "wild_maps": 1
+      }
+    },
+    {
+      "species": "SPECIES_PYROAR",
+      "inclement_species": "SPECIES_PYROAR",
+      "decision": "ability_coupled",
+      "stats_before": {
+        "baseHP": 86,
+        "baseAttack": 68,
+        "baseDefense": 72,
+        "baseSpeed": 106,
+        "baseSpAttack": 109,
+        "baseSpDefense": 66
+      },
+      "stats_target": {
+        "baseHP": 86,
+        "baseAttack": 68,
+        "baseDefense": 72,
+        "baseSpeed": 106,
+        "baseSpAttack": 129,
+        "baseSpDefense": 66
+      },
+      "exposure": {
+        "trainer_pokemon": 6,
+        "trainer_branches": 6,
+        "tutor_presets": 1,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_QUAGSIRE",
+      "inclement_species": "SPECIES_QUAGSIRE",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 95,
+        "baseAttack": 85,
+        "baseDefense": 85,
+        "baseSpeed": 35,
+        "baseSpAttack": 65,
+        "baseSpDefense": 65
+      },
+      "stats_target": {
+        "baseHP": 95,
+        "baseAttack": 95,
+        "baseDefense": 95,
+        "baseSpeed": 35,
+        "baseSpAttack": 65,
+        "baseSpDefense": 65
+      },
+      "exposure": {
+        "trainer_pokemon": 6,
+        "trainer_branches": 6,
+        "tutor_presets": 1,
+        "wild_slots": 6,
+        "wild_maps": 3
+      }
+    },
+    {
+      "species": "SPECIES_QWILFISH",
+      "inclement_species": "SPECIES_QWILFISH",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 65,
+        "baseAttack": 95,
+        "baseDefense": 85,
+        "baseSpeed": 85,
+        "baseSpAttack": 55,
+        "baseSpDefense": 55
+      },
+      "stats_target": {
+        "baseHP": 65,
+        "baseAttack": 95,
+        "baseDefense": 115,
+        "baseSpeed": 85,
+        "baseSpAttack": 55,
+        "baseSpDefense": 55
+      },
+      "exposure": {
+        "trainer_pokemon": 6,
+        "trainer_branches": 6,
+        "tutor_presets": 1,
+        "wild_slots": 11,
+        "wild_maps": 10
+      }
+    },
+    {
+      "species": "SPECIES_RAICHU",
+      "inclement_species": "SPECIES_RAICHU",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 60,
+        "baseAttack": 90,
+        "baseDefense": 55,
+        "baseSpeed": 110,
+        "baseSpAttack": 90,
+        "baseSpDefense": 80
+      },
+      "stats_target": {
+        "baseHP": 60,
+        "baseAttack": 90,
+        "baseDefense": 55,
+        "baseSpeed": 115,
+        "baseSpAttack": 90,
+        "baseSpDefense": 80
+      },
+      "exposure": {
+        "trainer_pokemon": 7,
+        "trainer_branches": 7,
+        "tutor_presets": 3,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_RAICHU_ALOLA",
+      "inclement_species": "SPECIES_RAICHU_ALOLAN",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 60,
+        "baseAttack": 85,
+        "baseDefense": 50,
+        "baseSpeed": 110,
+        "baseSpAttack": 95,
+        "baseSpDefense": 85
+      },
+      "stats_target": {
+        "baseHP": 60,
+        "baseAttack": 85,
+        "baseDefense": 50,
+        "baseSpeed": 115,
+        "baseSpAttack": 95,
+        "baseSpDefense": 85
+      },
+      "exposure": {
+        "trainer_pokemon": 3,
+        "trainer_branches": 3,
+        "tutor_presets": 1,
+        "wild_slots": 3,
+        "wild_maps": 1
+      }
+    },
+    {
+      "species": "SPECIES_RAPIDASH",
+      "inclement_species": "SPECIES_RAPIDASH",
+      "decision": "ability_coupled",
+      "stats_before": {
+        "baseHP": 65,
+        "baseAttack": 100,
+        "baseDefense": 70,
+        "baseSpeed": 105,
+        "baseSpAttack": 80,
+        "baseSpDefense": 80
+      },
+      "stats_target": {
+        "baseHP": 85,
+        "baseAttack": 110,
+        "baseDefense": 70,
+        "baseSpeed": 105,
+        "baseSpAttack": 80,
+        "baseSpDefense": 80
+      },
+      "exposure": {
+        "trainer_pokemon": 5,
+        "trainer_branches": 5,
+        "tutor_presets": 1,
+        "wild_slots": 8,
+        "wild_maps": 2
+      }
+    },
+    {
+      "species": "SPECIES_RATICATE",
+      "inclement_species": "SPECIES_RATICATE",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 55,
+        "baseAttack": 81,
+        "baseDefense": 60,
+        "baseSpeed": 97,
+        "baseSpAttack": 50,
+        "baseSpDefense": 70
+      },
+      "stats_target": {
+        "baseHP": 55,
+        "baseAttack": 101,
+        "baseDefense": 60,
+        "baseSpeed": 102,
+        "baseSpAttack": 50,
+        "baseSpDefense": 70
+      },
+      "exposure": {
+        "trainer_pokemon": 1,
+        "trainer_branches": 1,
+        "tutor_presets": 1,
+        "wild_slots": 31,
+        "wild_maps": 8
+      }
+    },
+    {
+      "species": "SPECIES_RATICATE_ALOLA",
+      "inclement_species": "SPECIES_RATICATE_ALOLAN",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 75,
+        "baseAttack": 71,
+        "baseDefense": 70,
+        "baseSpeed": 77,
+        "baseSpAttack": 40,
+        "baseSpDefense": 80
+      },
+      "stats_target": {
+        "baseHP": 75,
+        "baseAttack": 86,
+        "baseDefense": 80,
+        "baseSpeed": 77,
+        "baseSpAttack": 40,
+        "baseSpDefense": 80
+      },
+      "exposure": {
+        "trainer_pokemon": 2,
+        "trainer_branches": 2,
+        "tutor_presets": 1,
+        "wild_slots": 3,
+        "wild_maps": 1
+      }
+    },
+    {
+      "species": "SPECIES_RELICANTH",
+      "inclement_species": "SPECIES_RELICANTH",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 100,
+        "baseAttack": 90,
+        "baseDefense": 130,
+        "baseSpeed": 55,
+        "baseSpAttack": 45,
+        "baseSpDefense": 65
+      },
+      "stats_target": {
+        "baseHP": 100,
+        "baseAttack": 110,
+        "baseDefense": 130,
+        "baseSpeed": 55,
+        "baseSpAttack": 45,
+        "baseSpDefense": 65
+      },
+      "exposure": {
+        "trainer_pokemon": 5,
+        "trainer_branches": 5,
+        "tutor_presets": 1,
+        "wild_slots": 17,
+        "wild_maps": 3
+      }
+    },
+    {
+      "species": "SPECIES_SABLEYE",
+      "inclement_species": "SPECIES_SABLEYE",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 50,
+        "baseAttack": 75,
+        "baseDefense": 75,
+        "baseSpeed": 50,
+        "baseSpAttack": 65,
+        "baseSpDefense": 65
+      },
+      "stats_target": {
+        "baseHP": 70,
+        "baseAttack": 75,
+        "baseDefense": 80,
+        "baseSpeed": 50,
+        "baseSpAttack": 65,
+        "baseSpDefense": 70
+      },
+      "exposure": {
+        "trainer_pokemon": 7,
+        "trainer_branches": 7,
+        "tutor_presets": 2,
+        "wild_slots": 11,
+        "wild_maps": 11
+      }
+    },
+    {
+      "species": "SPECIES_SANDSLASH",
+      "inclement_species": "SPECIES_SANDSLASH",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 75,
+        "baseAttack": 100,
+        "baseDefense": 110,
+        "baseSpeed": 65,
+        "baseSpAttack": 45,
+        "baseSpDefense": 55
+      },
+      "stats_target": {
+        "baseHP": 95,
+        "baseAttack": 110,
+        "baseDefense": 110,
+        "baseSpeed": 65,
+        "baseSpAttack": 45,
+        "baseSpDefense": 55
+      },
+      "exposure": {
+        "trainer_pokemon": 4,
+        "trainer_branches": 4,
+        "tutor_presets": 1,
+        "wild_slots": 4,
+        "wild_maps": 4
+      }
+    },
+    {
+      "species": "SPECIES_SANDSLASH_ALOLA",
+      "inclement_species": "SPECIES_SANDSLASH_ALOLAN",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 75,
+        "baseAttack": 100,
+        "baseDefense": 120,
+        "baseSpeed": 65,
+        "baseSpAttack": 25,
+        "baseSpDefense": 65
+      },
+      "stats_target": {
+        "baseHP": 95,
+        "baseAttack": 110,
+        "baseDefense": 120,
+        "baseSpeed": 65,
+        "baseSpAttack": 25,
+        "baseSpDefense": 65
+      },
+      "exposure": {
+        "trainer_pokemon": 1,
+        "trainer_branches": 1,
+        "tutor_presets": 1,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_SAWSBUCK_AUTUMN",
+      "inclement_species": "SPECIES_SAWSBUCK_AUTUMN",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 80,
+        "baseAttack": 100,
+        "baseDefense": 70,
+        "baseSpeed": 95,
+        "baseSpAttack": 60,
+        "baseSpDefense": 70
+      },
+      "stats_target": {
+        "baseHP": 80,
+        "baseAttack": 110,
+        "baseDefense": 70,
+        "baseSpeed": 105,
+        "baseSpAttack": 60,
+        "baseSpDefense": 70
+      },
+      "exposure": {
+        "trainer_pokemon": 1,
+        "trainer_branches": 1,
+        "tutor_presets": 1,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_SAWSBUCK_SPRING",
+      "inclement_species": "SPECIES_SAWSBUCK",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 80,
+        "baseAttack": 100,
+        "baseDefense": 70,
+        "baseSpeed": 95,
+        "baseSpAttack": 60,
+        "baseSpDefense": 70
+      },
+      "stats_target": {
+        "baseHP": 80,
+        "baseAttack": 110,
+        "baseDefense": 70,
+        "baseSpeed": 105,
+        "baseSpAttack": 60,
+        "baseSpDefense": 70
+      },
+      "exposure": {
+        "trainer_pokemon": 5,
+        "trainer_branches": 5,
+        "tutor_presets": 1,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_SAWSBUCK_SUMMER",
+      "inclement_species": "SPECIES_SAWSBUCK_SUMMER",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 80,
+        "baseAttack": 100,
+        "baseDefense": 70,
+        "baseSpeed": 95,
+        "baseSpAttack": 60,
+        "baseSpDefense": 70
+      },
+      "stats_target": {
+        "baseHP": 80,
+        "baseAttack": 110,
+        "baseDefense": 70,
+        "baseSpeed": 105,
+        "baseSpAttack": 60,
+        "baseSpDefense": 70
+      },
+      "exposure": {
+        "trainer_pokemon": 0,
+        "trainer_branches": 0,
+        "tutor_presets": 1,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_SAWSBUCK_WINTER",
+      "inclement_species": "SPECIES_SAWSBUCK_WINTER",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 80,
+        "baseAttack": 100,
+        "baseDefense": 70,
+        "baseSpeed": 95,
+        "baseSpAttack": 60,
+        "baseSpDefense": 70
+      },
+      "stats_target": {
+        "baseHP": 80,
+        "baseAttack": 110,
+        "baseDefense": 70,
+        "baseSpeed": 105,
+        "baseSpAttack": 60,
+        "baseSpDefense": 70
+      },
+      "exposure": {
+        "trainer_pokemon": 0,
+        "trainer_branches": 0,
+        "tutor_presets": 1,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_SHARPEDO",
+      "inclement_species": "SPECIES_SHARPEDO",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 70,
+        "baseAttack": 120,
+        "baseDefense": 40,
+        "baseSpeed": 95,
+        "baseSpAttack": 95,
+        "baseSpDefense": 40
+      },
+      "stats_target": {
+        "baseHP": 70,
+        "baseAttack": 120,
+        "baseDefense": 40,
+        "baseSpeed": 95,
+        "baseSpAttack": 115,
+        "baseSpDefense": 40
+      },
+      "exposure": {
+        "trainer_pokemon": 9,
+        "trainer_branches": 9,
+        "tutor_presets": 2,
+        "wild_slots": 16,
+        "wild_maps": 5
+      }
+    },
+    {
+      "species": "SPECIES_SHIFTRY",
+      "inclement_species": "SPECIES_SHIFTRY",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 90,
+        "baseAttack": 100,
+        "baseDefense": 60,
+        "baseSpeed": 80,
+        "baseSpAttack": 90,
+        "baseSpDefense": 60
+      },
+      "stats_target": {
+        "baseHP": 90,
+        "baseAttack": 110,
+        "baseDefense": 60,
+        "baseSpeed": 80,
+        "baseSpAttack": 100,
+        "baseSpDefense": 60
+      },
+      "exposure": {
+        "trainer_pokemon": 6,
+        "trainer_branches": 6,
+        "tutor_presets": 2,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_SKUNTANK",
+      "inclement_species": "SPECIES_SKUNTANK",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 103,
+        "baseAttack": 93,
+        "baseDefense": 67,
+        "baseSpeed": 84,
+        "baseSpAttack": 71,
+        "baseSpDefense": 61
+      },
+      "stats_target": {
+        "baseHP": 103,
+        "baseAttack": 113,
+        "baseDefense": 67,
+        "baseSpeed": 84,
+        "baseSpAttack": 71,
+        "baseSpDefense": 61
+      },
+      "exposure": {
+        "trainer_pokemon": 6,
+        "trainer_branches": 6,
+        "tutor_presets": 1,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_SUDOWOODO",
+      "inclement_species": "SPECIES_SUDOWOODO",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 70,
+        "baseAttack": 100,
+        "baseDefense": 115,
+        "baseSpeed": 30,
+        "baseSpAttack": 30,
+        "baseSpDefense": 65
+      },
+      "stats_target": {
+        "baseHP": 70,
+        "baseAttack": 110,
+        "baseDefense": 125,
+        "baseSpeed": 30,
+        "baseSpAttack": 30,
+        "baseSpDefense": 65
+      },
+      "exposure": {
+        "trainer_pokemon": 2,
+        "trainer_branches": 2,
+        "tutor_presets": 1,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_SWANNA",
+      "inclement_species": "SPECIES_SWANNA",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 75,
+        "baseAttack": 87,
+        "baseDefense": 63,
+        "baseSpeed": 98,
+        "baseSpAttack": 87,
+        "baseSpDefense": 63
+      },
+      "stats_target": {
+        "baseHP": 75,
+        "baseAttack": 87,
+        "baseDefense": 63,
+        "baseSpeed": 103,
+        "baseSpAttack": 107,
+        "baseSpDefense": 63
+      },
+      "exposure": {
+        "trainer_pokemon": 6,
+        "trainer_branches": 6,
+        "tutor_presets": 2,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_SWELLOW",
+      "inclement_species": "SPECIES_SWELLOW",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 60,
+        "baseAttack": 85,
+        "baseDefense": 60,
+        "baseSpeed": 125,
+        "baseSpAttack": 75,
+        "baseSpDefense": 50
+      },
+      "stats_target": {
+        "baseHP": 60,
+        "baseAttack": 85,
+        "baseDefense": 60,
+        "baseSpeed": 125,
+        "baseSpAttack": 85,
+        "baseSpDefense": 50
+      },
+      "exposure": {
+        "trainer_pokemon": 14,
+        "trainer_branches": 14,
+        "tutor_presets": 1,
+        "wild_slots": 1,
+        "wild_maps": 1
+      }
+    },
+    {
+      "species": "SPECIES_SWOOBAT",
+      "inclement_species": "SPECIES_SWOOBAT",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 67,
+        "baseAttack": 57,
+        "baseDefense": 55,
+        "baseSpeed": 114,
+        "baseSpAttack": 77,
+        "baseSpDefense": 55
+      },
+      "stats_target": {
+        "baseHP": 67,
+        "baseAttack": 57,
+        "baseDefense": 55,
+        "baseSpeed": 114,
+        "baseSpAttack": 97,
+        "baseSpDefense": 55
+      },
+      "exposure": {
+        "trainer_pokemon": 4,
+        "trainer_branches": 4,
+        "tutor_presets": 1,
+        "wild_slots": 2,
+        "wild_maps": 2
+      }
+    },
+    {
+      "species": "SPECIES_TORTERRA",
+      "inclement_species": "SPECIES_TORTERRA",
+      "decision": "ability_coupled",
+      "stats_before": {
+        "baseHP": 95,
+        "baseAttack": 109,
+        "baseDefense": 105,
+        "baseSpeed": 56,
+        "baseSpAttack": 75,
+        "baseSpDefense": 85
+      },
+      "stats_target": {
+        "baseHP": 95,
+        "baseAttack": 109,
+        "baseDefense": 114,
+        "baseSpeed": 56,
+        "baseSpAttack": 75,
+        "baseSpDefense": 85
+      },
+      "exposure": {
+        "trainer_pokemon": 4,
+        "trainer_branches": 4,
+        "tutor_presets": 1,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_TREVENANT",
+      "inclement_species": "SPECIES_TREVENANT",
+      "decision": "ability_coupled",
+      "stats_before": {
+        "baseHP": 85,
+        "baseAttack": 110,
+        "baseDefense": 76,
+        "baseSpeed": 56,
+        "baseSpAttack": 65,
+        "baseSpDefense": 82
+      },
+      "stats_target": {
+        "baseHP": 85,
+        "baseAttack": 110,
+        "baseDefense": 86,
+        "baseSpeed": 56,
+        "baseSpAttack": 65,
+        "baseSpDefense": 92
+      },
+      "exposure": {
+        "trainer_pokemon": 4,
+        "trainer_branches": 4,
+        "tutor_presets": 1,
+        "wild_slots": 4,
+        "wild_maps": 1
+      }
+    },
+    {
+      "species": "SPECIES_TROPIUS",
+      "inclement_species": "SPECIES_TROPIUS",
+      "decision": "ability_coupled",
+      "stats_before": {
+        "baseHP": 99,
+        "baseAttack": 68,
+        "baseDefense": 83,
+        "baseSpeed": 51,
+        "baseSpAttack": 72,
+        "baseSpDefense": 87
+      },
+      "stats_target": {
+        "baseHP": 99,
+        "baseAttack": 88,
+        "baseDefense": 93,
+        "baseSpeed": 51,
+        "baseSpAttack": 72,
+        "baseSpDefense": 97
+      },
+      "exposure": {
+        "trainer_pokemon": 6,
+        "trainer_branches": 6,
+        "tutor_presets": 1,
+        "wild_slots": 2,
+        "wild_maps": 2
+      }
+    },
+    {
+      "species": "SPECIES_TURTONATOR",
+      "inclement_species": "SPECIES_TURTONATOR",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 60,
+        "baseAttack": 78,
+        "baseDefense": 135,
+        "baseSpeed": 36,
+        "baseSpAttack": 91,
+        "baseSpDefense": 85
+      },
+      "stats_target": {
+        "baseHP": 60,
+        "baseAttack": 78,
+        "baseDefense": 135,
+        "baseSpeed": 36,
+        "baseSpAttack": 111,
+        "baseSpDefense": 85
+      },
+      "exposure": {
+        "trainer_pokemon": 2,
+        "trainer_branches": 2,
+        "tutor_presets": 1,
+        "wild_slots": 23,
+        "wild_maps": 11
+      }
+    },
+    {
+      "species": "SPECIES_VENOMOTH",
+      "inclement_species": "SPECIES_VENOMOTH",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 70,
+        "baseAttack": 65,
+        "baseDefense": 60,
+        "baseSpeed": 90,
+        "baseSpAttack": 90,
+        "baseSpDefense": 75
+      },
+      "stats_target": {
+        "baseHP": 70,
+        "baseAttack": 65,
+        "baseDefense": 60,
+        "baseSpeed": 100,
+        "baseSpAttack": 100,
+        "baseSpDefense": 75
+      },
+      "exposure": {
+        "trainer_pokemon": 2,
+        "trainer_branches": 2,
+        "tutor_presets": 1,
+        "wild_slots": 13,
+        "wild_maps": 5
+      }
+    },
+    {
+      "species": "SPECIES_VESPIQUEN",
+      "inclement_species": "SPECIES_VESPIQUEN",
+      "decision": "ability_coupled",
+      "stats_before": {
+        "baseHP": 70,
+        "baseAttack": 80,
+        "baseDefense": 102,
+        "baseSpeed": 40,
+        "baseSpAttack": 80,
+        "baseSpDefense": 102
+      },
+      "stats_target": {
+        "baseHP": 70,
+        "baseAttack": 80,
+        "baseDefense": 112,
+        "baseSpeed": 40,
+        "baseSpAttack": 80,
+        "baseSpDefense": 112
+      },
+      "exposure": {
+        "trainer_pokemon": 4,
+        "trainer_branches": 4,
+        "tutor_presets": 1,
+        "wild_slots": 0,
+        "wild_maps": 0
+      }
+    },
+    {
+      "species": "SPECIES_WAILORD",
+      "inclement_species": "SPECIES_WAILORD",
+      "decision": "ability_coupled",
+      "stats_before": {
+        "baseHP": 170,
+        "baseAttack": 90,
+        "baseDefense": 45,
+        "baseSpeed": 60,
+        "baseSpAttack": 90,
+        "baseSpDefense": 45
+      },
+      "stats_target": {
+        "baseHP": 170,
+        "baseAttack": 90,
+        "baseDefense": 65,
+        "baseSpeed": 60,
+        "baseSpAttack": 90,
+        "baseSpDefense": 65
+      },
+      "exposure": {
+        "trainer_pokemon": 6,
+        "trainer_branches": 6,
+        "tutor_presets": 1,
+        "wild_slots": 22,
+        "wild_maps": 8
+      }
+    },
+    {
+      "species": "SPECIES_WHISCASH",
+      "inclement_species": "SPECIES_WHISCASH",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 110,
+        "baseAttack": 78,
+        "baseDefense": 73,
+        "baseSpeed": 60,
+        "baseSpAttack": 76,
+        "baseSpDefense": 71
+      },
+      "stats_target": {
+        "baseHP": 110,
+        "baseAttack": 98,
+        "baseDefense": 73,
+        "baseSpeed": 60,
+        "baseSpAttack": 76,
+        "baseSpDefense": 71
+      },
+      "exposure": {
+        "trainer_pokemon": 6,
+        "trainer_branches": 6,
+        "tutor_presets": 1,
+        "wild_slots": 25,
+        "wild_maps": 9
+      }
+    },
+    {
+      "species": "SPECIES_XATU",
+      "inclement_species": "SPECIES_XATU",
+      "decision": "conservative",
+      "stats_before": {
+        "baseHP": 65,
+        "baseAttack": 75,
+        "baseDefense": 70,
+        "baseSpeed": 95,
+        "baseSpAttack": 95,
+        "baseSpDefense": 70
+      },
+      "stats_target": {
+        "baseHP": 65,
+        "baseAttack": 75,
+        "baseDefense": 70,
+        "baseSpeed": 105,
+        "baseSpAttack": 115,
+        "baseSpDefense": 70
+      },
+      "exposure": {
+        "trainer_pokemon": 5,
+        "trainer_branches": 5,
+        "tutor_presets": 1,
+        "wild_slots": 2,
+        "wild_maps": 2
+      }
+    }
+  ],
+  "paired_form_adjustments": [
+    {
+      "species": "SPECIES_CHIMECHO_MEGA",
+      "base_species": "SPECIES_CHIMECHO",
+      "baseHP_before": 75,
+      "baseHP_target": 85,
+      "reason": "battle forms must preserve base HP"
+    },
+    {
+      "species": "SPECIES_MAWILE_MEGA",
+      "base_species": "SPECIES_MAWILE",
+      "baseHP_before": 50,
+      "baseHP_target": 70,
+      "reason": "battle forms must preserve base HP"
+    },
+    {
+      "species": "SPECIES_SABLEYE_MEGA",
+      "base_species": "SPECIES_SABLEYE",
+      "baseHP_before": 50,
+      "baseHP_target": 70,
+      "reason": "battle forms must preserve base HP"
+    }
+  ],
+  "unselected_configured_stats_guard": {
+    "species_count": 1466,
+    "sha256": "48bb4839ede93bf0b26115910881b9cd7edbc97cd7cfee3e3214053578650314",
+    "purpose": "reject every unmanifested configured base-stat change"
+  }
+}

@@ -152,9 +152,9 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_PROTEIN",
+      "trainer_sight_or_berry_tree_id": "ITEM_TIMER_BALL",
       "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ITEM_ROUTE_114_PROTEIN"
+      "flag": "FLAG_ITEM_ROUTE_114_TIMER_BALL"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
@@ -488,8 +488,8 @@
       "x": 20,
       "y": 57,
       "elevation": 3,
-      "item": "ITEM_CARBOS",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_114_CARBOS"
+      "item": "ITEM_STAR_PIECE",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_114_STAR_PIECE"
     },
     {
       "type": "secret_base",

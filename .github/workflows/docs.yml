@@ -1,0 +1,55 @@
+name: Docs
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Install pinned mdBook 0.5.1
+        run: |
+          tag="v0.5.1"
+          url="https://github.com/rust-lang/mdbook/releases/download/${tag}/mdbook-${tag}-x86_64-unknown-linux-gnu.tar.gz"
+          mkdir mdbook
+          curl --fail --location --retry 3 --silent --show-error "$url" --output mdbook.tar.gz
+          echo "5c746127707bd768ecfc2d7fb2374cc11d5ae653aea438e15eea3154a1a69f92  mdbook.tar.gz" | sha256sum --check
+          tar -xzf mdbook.tar.gz --directory=./mdbook
+          echo "$(pwd)/mdbook" >> "$GITHUB_PATH"
+      - name: Build Book
+        run: |
+          cd docs
+          mdbook build 2>&1 | tee /tmp/emerald-champions-mdbook.log
+          if grep -qE '(^|[[:space:]])ERROR[[:space:]]' /tmp/emerald-champions-mdbook.log; then
+            echo "mdBook reported a source/include error" >&2
+            exit 1
+          fi
+      - name: Check if Pages is enabled
+        uses: octokit/request-action@v3
+        id: check_pages
+        continue-on-error: true
+        with:
+          route: GET /repos/{repo}/pages
+          repo: ${{ github.repository }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Setup Pages
+        uses: actions/configure-pages@v6
+        if: steps.check_pages.outcome == 'success'
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v5
+        if: steps.check_pages.outcome == 'success'
+        with:
+          path: 'docs/book'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
+        if: steps.check_pages.outcome == 'success'

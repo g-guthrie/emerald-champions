@@ -121,7 +121,7 @@ SSTidalCorridor_EventScript_ExitSailor::
 SSTidalCorridor_EventScript_ExitLilycove::
 	setrespawn HEAL_LOCATION_LILYCOVE_CITY
 	msgbox SSTidalCorridor_Text_WeveArrived, MSGBOX_DEFAULT
-	call_if_set FLAG_RECEIVED_TM_SNATCH, SSTidalCorridor_EventScript_HideSnatchGiver
+	call_if_set FLAG_RECEIVED_SS_TIDAL_REAPER_CLOTH, SSTidalCorridor_EventScript_HideReaperClothGiver
 	warp MAP_LILYCOVE_CITY_HARBOR, 8, 11
 	waitstate
 	release
@@ -130,13 +130,13 @@ SSTidalCorridor_EventScript_ExitLilycove::
 SSTidalCorridor_EventScript_ExitSlateport::
 	setrespawn HEAL_LOCATION_SLATEPORT_CITY
 	msgbox SSTidalCorridor_Text_WeveArrived, MSGBOX_DEFAULT
-	call_if_set FLAG_RECEIVED_TM_SNATCH, SSTidalCorridor_EventScript_HideSnatchGiver
+	call_if_set FLAG_RECEIVED_SS_TIDAL_REAPER_CLOTH, SSTidalCorridor_EventScript_HideReaperClothGiver
 	warp MAP_SLATEPORT_CITY_HARBOR, 8, 11
 	waitstate
 	release
 	end
 
-SSTidalCorridor_EventScript_HideSnatchGiver::
+SSTidalCorridor_EventScript_HideReaperClothGiver::
 	setflag FLAG_HIDE_SS_TIDAL_ROOMS_SNATCH_GIVER
 	return
 

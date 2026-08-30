@@ -337,9 +337,115 @@ AI_DOUBLE_BATTLE_TEST("AI will not use a status move if partner already chose He
     }
 }
 
-TO_DO_BATTLE_TEST("AI understands Instruct")
-TO_DO_BATTLE_TEST("AI understands Quick Guard")
-TO_DO_BATTLE_TEST("AI understands Wide Guard")
+AI_DOUBLE_BATTLE_TEST("AI understands Instruct by repeating its ally's spread attack")
+{
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_INSTRUCT) == EFFECT_INSTRUCT);
+        ASSUME(IsSpreadMove(GetMoveTarget(MOVE_HEAT_WAVE)));
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT
+               | AI_FLAG_OMNISCIENT | AI_FLAG_DOUBLE_BATTLE);
+        PLAYER(SPECIES_WOBBUFFET) { HP(500); Speed(40); Moves(MOVE_CELEBRATE); }
+        PLAYER(SPECIES_WOBBUFFET) { HP(500); Speed(30); Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_ORANGURU) { Speed(10); Moves(MOVE_INSTRUCT, MOVE_PSYCHIC); }
+        OPPONENT(SPECIES_TORKOAL) { Speed(20); SpAttack(100); Moves(MOVE_HEAT_WAVE); }
+    } WHEN {
+        TURN {
+            EXPECT_MOVE(opponentLeft, MOVE_INSTRUCT, target: opponentRight);
+            EXPECT_MOVE(opponentRight, MOVE_HEAT_WAVE);
+        }
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("AI avoids Instruct when its faster ally has no last move")
+{
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_INSTRUCT) == EFFECT_INSTRUCT);
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT
+               | AI_FLAG_OMNISCIENT | AI_FLAG_DOUBLE_BATTLE);
+        PLAYER(SPECIES_WOBBUFFET) { HP(500); Speed(50); Moves(MOVE_CELEBRATE); }
+        PLAYER(SPECIES_WOBBUFFET) { HP(500); Speed(40); Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_ORANGURU) { Speed(30); Moves(MOVE_INSTRUCT, MOVE_PSYCHIC); }
+        OPPONENT(SPECIES_TORKOAL) { Speed(20); Moves(MOVE_HEAT_WAVE); }
+    } WHEN {
+        TURN {
+            NOT_EXPECT_MOVE(opponentLeft, MOVE_INSTRUCT);
+            SCORE_LT_VAL(opponentLeft, MOVE_INSTRUCT, AI_SCORE_DEFAULT, target: opponentRight);
+        }
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("AI avoids Instruct when its ally's pending move is banned")
+{
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_INSTRUCT) == EFFECT_INSTRUCT);
+        ASSUME(IsMoveInstructBanned(MOVE_CELEBRATE));
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT
+               | AI_FLAG_OMNISCIENT | AI_FLAG_DOUBLE_BATTLE);
+        PLAYER(SPECIES_WOBBUFFET) { HP(500); Speed(50); Moves(MOVE_CELEBRATE); }
+        PLAYER(SPECIES_WOBBUFFET) { HP(500); Speed(40); Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_ORANGURU) { Speed(10); Moves(MOVE_INSTRUCT, MOVE_PSYCHIC); }
+        OPPONENT(SPECIES_TORKOAL) { Speed(20); Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN {
+            NOT_EXPECT_MOVE(opponentLeft, MOVE_INSTRUCT);
+            SCORE_LT_VAL(opponentLeft, MOVE_INSTRUCT, AI_SCORE_DEFAULT, target: opponentRight);
+        }
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("AI understands Quick Guard")
+{
+    u32 reverseOrderChance;
+
+    PARAMETRIZE { reverseOrderChance = 0; }
+    PARAMETRIZE { reverseOrderChance = 100; }
+
+    GIVEN {
+        WITH_CONFIG(AI_REVERSE_BATTLER_LOGIC_ORDER_CHANCE, reverseOrderChance);
+        ASSUME(GetMovePriority(MOVE_QUICK_ATTACK) > 0);
+        ASSUME(GetMoveProtectMethod(MOVE_QUICK_GUARD) == PROTECT_QUICK_GUARD);
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT
+               | AI_FLAG_OMNISCIENT | AI_FLAG_PREDICT_MOVE | AI_FLAG_DOUBLE_BATTLE);
+        PLAYER(SPECIES_RATTATA) { Moves(MOVE_QUICK_ATTACK); Status1(STATUS1_TOXIC_POISON); }
+        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_RATTATA) { Moves(MOVE_QUICK_GUARD, MOVE_TACKLE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_QUICK_ATTACK, target: opponentLeft);
+            MOVE(playerRight, MOVE_CELEBRATE);
+            EXPECT_MOVE(opponentLeft, MOVE_QUICK_GUARD);
+            EXPECT_MOVE(opponentRight, MOVE_CELEBRATE);
+        }
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("AI understands Wide Guard")
+{
+    u32 reverseOrderChance;
+
+    PARAMETRIZE { reverseOrderChance = 0; }
+    PARAMETRIZE { reverseOrderChance = 100; }
+
+    GIVEN {
+        WITH_CONFIG(AI_REVERSE_BATTLER_LOGIC_ORDER_CHANCE, reverseOrderChance);
+        ASSUME(IsSpreadMove(GetMoveTarget(MOVE_EARTHQUAKE)));
+        ASSUME(GetMoveProtectMethod(MOVE_WIDE_GUARD) == PROTECT_WIDE_GUARD);
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT
+               | AI_FLAG_OMNISCIENT | AI_FLAG_PREDICT_MOVE | AI_FLAG_DOUBLE_BATTLE);
+        PLAYER(SPECIES_RATTATA) { Moves(MOVE_EARTHQUAKE); Status1(STATUS1_TOXIC_POISON); }
+        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_RATTATA) { Moves(MOVE_WIDE_GUARD, MOVE_TACKLE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_EARTHQUAKE);
+            MOVE(playerRight, MOVE_CELEBRATE);
+            EXPECT_MOVE(opponentLeft, MOVE_WIDE_GUARD);
+            EXPECT_MOVE(opponentRight, MOVE_CELEBRATE);
+        }
+    }
+}
 
 AI_DOUBLE_BATTLE_TEST("AI won't use the same nondamaging move as its partner for no reason")
 {
@@ -623,7 +729,6 @@ AI_DOUBLE_BATTLE_TEST("AI will not use Protect if its left ally is about to trig
     ASSUME(GetMoveEffect(MOVE_BEAT_UP) == EFFECT_BEAT_UP);
     ASSUME(GetMoveType(MOVE_BEAT_UP) == TYPE_DARK);
 
-    KNOWN_FAILING; // partner is protecting
     GIVEN {
         WITH_CONFIG(AI_REVERSE_BATTLER_LOGIC_ORDER_CHANCE, 0);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
@@ -1238,7 +1343,6 @@ AI_DOUBLE_BATTLE_TEST("AI uses Helping Hand if it's about to die")
 
 AI_DOUBLE_BATTLE_TEST("AI uses Helping Hand if the ally does notably more damage")
 {
-    KNOWN_FAILING;  // Failure was masked by test runner issues
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_HELPING_HAND) == EFFECT_HELPING_HAND);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_OMNISCIENT);

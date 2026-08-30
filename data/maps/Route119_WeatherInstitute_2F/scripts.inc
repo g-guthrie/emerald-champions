@@ -82,7 +82,9 @@ Route119_WeatherInstitute_2F_EventScript_ShellyDefeated::
 Route119_WeatherInstitute_2F_EventScript_ReceiveCastform::
 	msgbox Route119_WeatherInstitute_2F_Text_ThanksPleaseTakePokemon, MSGBOX_DEFAULT
 	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_CASTFORM_NORMAL
-	givemon SPECIES_CASTFORM_NORMAL, 25, ITEM_MYSTIC_WATER
+	setvar VAR_0x8004, SPECIES_CASTFORM_NORMAL
+	setvar VAR_0x8005, 25
+	special GiveEmeraldChampionsPreparedPokemon
 	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, Route119_WeatherInstitute_2F_EventScript_ReceiveCastformParty
 	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, Route119_WeatherInstitute_2F_EventScript_ReceiveCastformPC
 	goto Common_EventScript_NoMoreRoomForPokemon
@@ -121,6 +123,22 @@ Route119_WeatherInstitute_2F_EventScript_ReceivedCastformFanfare::
 Route119_WeatherInstitute_2F_EventScript_ExplainCastform::
 	msgbox Route119_WeatherInstitute_2F_Text_PokemonChangesWithWeather, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_CASTFORM
+	goto Route119_WeatherInstitute_2F_EventScript_TryGiveRevealGlass
+	end
+
+Route119_WeatherInstitute_2F_EventScript_TryGiveRevealGlass::
+	checkitem ITEM_REVEAL_GLASS, 1
+	goto_if_eq VAR_RESULT, TRUE, Route119_WeatherInstitute_2F_EventScript_Release
+	giveitem ITEM_REVEAL_GLASS
+	goto_if_eq VAR_RESULT, FALSE, Route119_WeatherInstitute_2F_EventScript_RevealGlassBagFull
+	msgbox Route119_WeatherInstitute_2F_Text_RevealGlassPurpose, MSGBOX_DEFAULT
+
+Route119_WeatherInstitute_2F_EventScript_Release::
+	release
+	end
+
+Route119_WeatherInstitute_2F_EventScript_RevealGlassBagFull::
+	msgbox Route119_WeatherInstitute_2F_Text_RevealGlassBagFull, MSGBOX_DEFAULT
 	release
 	end
 
@@ -199,8 +217,17 @@ Route119_WeatherInstitute_2F_Movement_ScientistApproachPlayer:
 Route119_WeatherInstitute_2F_EventScript_WeatherScientist::
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_CASTFORM, Route119_WeatherInstitute_2F_EventScript_ScientistMentionWeather
-	goto Route119_WeatherInstitute_2F_EventScript_ReceiveCastform
+	goto_if_unset FLAG_RECEIVED_CASTFORM, Route119_WeatherInstitute_2F_EventScript_ReceiveCastform
+	checkitem ITEM_REVEAL_GLASS, 1
+	goto_if_eq VAR_RESULT, FALSE, Route119_WeatherInstitute_2F_EventScript_GiveRevealGlass
+	goto Route119_WeatherInstitute_2F_EventScript_ScientistMentionWeather
+	end
+
+Route119_WeatherInstitute_2F_EventScript_GiveRevealGlass::
+	giveitem ITEM_REVEAL_GLASS
+	goto_if_eq VAR_RESULT, FALSE, Route119_WeatherInstitute_2F_EventScript_RevealGlassBagFull
+	msgbox Route119_WeatherInstitute_2F_Text_RevealGlassPurpose, MSGBOX_DEFAULT
+	goto Route119_WeatherInstitute_2F_EventScript_ScientistMentionWeather
 	end
 
 Route119_WeatherInstitute_2F_Text_Grunt2Intro:
@@ -284,6 +311,17 @@ Route119_WeatherInstitute_2F_Text_PokemonChangesWithWeather:
 	.string "it to ROUTE 111's restored desert ruins.\p"
 	.string "A CHAMPION'S SIGN there may recognize a\n"
 	.string "Trainer who can master every forecast.$"
+
+Route119_WeatherInstitute_2F_Text_RevealGlassPurpose:
+	.string "This REVEAL GLASS changes the forms of\n"
+	.string "TORNADUS, THUNDURUS, and LANDORUS.\p"
+	.string "Their SIGNS are already stirring across\n"
+	.string "HOENN. Test both forms in your teams.$"
+
+Route119_WeatherInstitute_2F_Text_RevealGlassBagFull:
+	.string "The REVEAL GLASS is ready for you, but\n"
+	.string "your KEY ITEMS pocket is full.\p"
+	.string "Make room, then speak with me again.$"
 
 Route119_WeatherInstitute_2F_Text_ChangingWeatherRidiculous:
 	.string "Our instruments show one network linking\n"

@@ -12,6 +12,10 @@
 #include "data/pokemon/emerald_champions_battle_sets.h"
 
 static const u8 sRecommendedSetName[] = _("Recommended");
+static const enum Item sEmeraldChampionsEvolutionItems[] =
+{
+#include "data/emerald_champions_evolution_items.h"
+};
 
 static bool32 HasMegaAccess(void)
 {
@@ -22,6 +26,16 @@ bool32 IsEmeraldChampionsProtectedProgressionItem(enum Item item)
 {
     if (item == ITEM_NONE)
         return FALSE;
+
+    // The complete archive is generated from the live solo-evolution tables.
+    // Some entries (notably Deep Sea Tooth/Scale) are functional held battle
+    // items rather than ITEM_TYPE_EVOLUTION_ITEM, so sort type alone cannot
+    // protect the player's finite campaign reward.
+    for (u32 i = 0; i < ARRAY_COUNT(sEmeraldChampionsEvolutionItems); i++)
+    {
+        if (item == sEmeraldChampionsEvolutionItems[i])
+            return TRUE;
+    }
 
     switch (gItemsInfo[item].sortType)
     {
@@ -58,8 +72,8 @@ bool32 IsEmeraldChampionsOrdinaryWildSpecies(enum Species species)
     if (gSpeciesInfo[species].baseHP == 0)
         return FALSE;
 
-    // Ultra Beasts and Paradox Pokemon are ordinary random encounters in the
-    // restored campaign maps. They therefore receive the same immediately
+    // Ultra Beasts and Paradox Pokemon can be ordinary random encounters in
+    // curated campaign maps. They therefore receive the same immediately
     // usable competitive loadouts as every other table-seeded wild species.
     // True legendary/mythical and temporary battle forms remain excluded;
     // Legendary Signs opt in separately when their quest calls for a wild
@@ -339,14 +353,10 @@ u8 ApplyEmeraldChampionsBattleSetChoice(struct Pokemon *mon, u8 choice)
 
 u8 ApplyEmeraldChampionsRandomWildSet(struct Pokemon *mon)
 {
-    u8 count = GetEmeraldChampionsBattleSetCount(mon);
-    const struct EmeraldChampionsBattleSet *preset = NULL;
-
-    if (count == 0)
-        return EC_BATTLE_SET_FAILED;
-    if (!ResolveVisibleChoice(mon, RandomUniform(RNG_NONE, 0, count - 1), &preset, NULL))
-        return EC_BATTLE_SET_FAILED;
-    return ApplyPreset(mon, preset, FALSE, FALSE, TRUE);
+    // Wild loadouts are independent of campaign inventory.  In particular,
+    // acquiring the Mega Ring must never add required-stone tutor roles to a
+    // species' wild pool or let a wild Pokemon carry a progression item.
+    return ApplyEmeraldChampionsRandomNonMegaSet(mon);
 }
 
 u8 ApplyEmeraldChampionsRandomNonMegaSet(struct Pokemon *mon)

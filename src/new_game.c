@@ -100,10 +100,10 @@ static void InitPlayerTrainerId(void)
 // L=A isnt set here for some reason.
 static void SetDefaultOptions(void)
 {
-    gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_MID;
+    gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_INSTANT;
     gSaveBlock2Ptr->optionsWindowFrameType = 0;
     gSaveBlock2Ptr->optionsSound = OPTIONS_SOUND_MONO;
-    gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SHIFT;
+    gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SET;
     gSaveBlock2Ptr->optionsBattleSceneOff = FALSE;
     gSaveBlock2Ptr->regionMapZoom = FALSE;
 }
@@ -231,6 +231,7 @@ void NewGameInitData(void)
     ResetTrainerTowerResults();
     ResetContestLinkResults();
     SetCurrentDifficultyLevel(DIFFICULTY_HARD);
+    VarSet(VAR_EMERALD_CHAMPIONS_SAVE_VERSION, EMERALD_CHAMPIONS_SAVE_VERSION_CURRENT);
     FlagSet(FLAG_EC_BESPOKE_TRAINER_FLAGS_MIGRATED);
     ResetItemFlags();
     ResetDexNav();

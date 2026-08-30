@@ -364,11 +364,10 @@ MossdeepCity_Text_NiceIfWorldCoveredByFlowers:
 MossdeepCity_Text_LifeNeedsSeaToLive:
 	.string "All life needs the sea to live, even\n"
 	.string "though it makes its home on the land.\p"
-	.string "Life, having run its course, becomes\n"
-	.string "soil and returns to the land.\p"
-	.string "And the sea is always connected to\n"
-	.string "the land.\p"
-	.string "Yes, like the very shoreline here.$"
+	.string "Old divers tell of a RELICANTH circling\n"
+	.string "the SEAFLOOR CAVERN approach.\p"
+	.string "When it does, a princely light stirs\n"
+	.string "beneath the trench.$"
 
 MossdeepCity_Text_SurfExhilarating:
 	.string "A voyage on a ship is fine.\p"
@@ -425,4 +424,3 @@ MossdeepCity_Text_SootopolisNewGymLeader:
 	.string "LEADER come in.\p"
 	.string "People tell me the new LEADER once\n"
 	.string "mentored WALLACE.$"
-

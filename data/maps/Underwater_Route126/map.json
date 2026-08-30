@@ -79,8 +79,8 @@
       "x": 11,
       "y": 39,
       "elevation": 3,
-      "item": "ITEM_IRON",
-      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_126_IRON"
+      "item": "ITEM_PEARL_STRING",
+      "flag": "FLAG_HIDDEN_ITEM_UNDERWATER_126_PEARL_STRING"
     },
     {
       "type": "hidden_item",

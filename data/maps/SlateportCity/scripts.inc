@@ -113,52 +113,29 @@ SlateportCity_Movement_ScottExit:
 	walk_left
 	step_end
 
-SlateportCity_EventScript_EnergyGuru::
+SlateportCity_EventScript_CatchingGuru::
 	lock
 	faceplayer
-	message SlateportCity_Text_EnergyGuruSellWhatYouNeed
+	message SlateportCity_Text_CatchingGuruSellWhatYouNeed
 	waitmessage
-	pokemart SlateportCity_Pokemart_EnergyGuru
+	pokemart SlateportCity_Pokemart_CatchingGuru
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
 	.align 2
-SlateportCity_Pokemart_EnergyGuru:
-	.2byte ITEM_PROTEIN
-	.2byte ITEM_IRON
-	.2byte ITEM_CARBOS
-	.2byte ITEM_ZINC
-	.2byte ITEM_CALCIUM
-	.2byte ITEM_HP_UP
+SlateportCity_Pokemart_CatchingGuru:
+	.2byte ITEM_HEAL_BALL
+	.2byte ITEM_NET_BALL
+	.2byte ITEM_NEST_BALL
+	.2byte ITEM_DIVE_BALL
+	.2byte ITEM_TIMER_BALL
+	.2byte ITEM_REPEAT_BALL
 	pokemartlistend
 
-SlateportCity_EventScript_EffortRibbonWoman::
-	lock
-	faceplayer
+SlateportCity_EventScript_StatPointGuide::
 	bufferleadmonspeciesname STR_VAR_1
-	msgbox SlateportCity_Text_OhYourPokemon, MSGBOX_DEFAULT
-	specialvar VAR_RESULT, LeadMonHasEffortRibbon
-	call_if_eq VAR_RESULT, TRUE, SlateportCity_EventScript_MonHasEffortRibbon
-	specialvar VAR_RESULT, Special_AreLeadMonEVsMaxedOut
-	call_if_eq VAR_RESULT, FALSE, SlateportCity_EventScript_MonEVsNotMaxed
-	msgbox SlateportCity_Text_PleaseGiveItThisEffortRibbon, MSGBOX_DEFAULT
-	playfanfare MUS_OBTAIN_ITEM
-	message SlateportCity_Text_ReceivedEffortRibbon
-	waitfanfare
-	msgbox SlateportCity_Text_PutEffortRibbonOnMon, MSGBOX_DEFAULT
-	special GiveLeadMonEffortRibbon
-	release
-	end
-
-SlateportCity_EventScript_MonEVsNotMaxed::
-	msgbox SlateportCity_Text_GoForItLittleHarder, MSGBOX_DEFAULT
-	release
-	end
-
-SlateportCity_EventScript_MonHasEffortRibbon::
-	msgbox SlateportCity_Text_EffortRibbonLooksGoodOnIt, MSGBOX_DEFAULT
-	release
+	msgbox SlateportCity_Text_StatPointsAlreadyReady, MSGBOX_NPC
 	end
 
 SlateportCity_EventScript_Cook::
@@ -525,20 +502,24 @@ SlateportCity_PokemartDecor:
 	.2byte DECOR_C_HIGH_NOTE_MAT
 	pokemartlistend
 
-SlateportCity_EventScript_PowerTMClerk::
+SlateportCity_EventScript_FieldSupplyClerk::
 	lock
 	faceplayer
 	message gText_HowMayIServeYou
 	waitmessage
-	pokemart SlateportCity_Pokemart_PowerTMs
+	pokemart SlateportCity_Pokemart_FieldSupplies
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
 	.align 2
-SlateportCity_Pokemart_PowerTMs:
-	.2byte ITEM_TM_HIDDEN_POWER
-	.2byte ITEM_TM_SECRET_POWER
+SlateportCity_Pokemart_FieldSupplies:
+	.2byte ITEM_HONEY
+	.2byte ITEM_POKE_DOLL
+	.2byte ITEM_FLUFFY_TAIL
+	.2byte ITEM_ESCAPE_ROPE
+	.2byte ITEM_REPEL
+	.2byte ITEM_SUPER_REPEL
 	pokemartlistend
 
 @ Scene with Capt Sterns interview and Team Aqua announcing plans to steal Submarine
@@ -753,13 +734,13 @@ SlateportCity_EventScript_ChooseBerryPowderItem::
 	case 1, SlateportCity_EventScript_EnergyRoot
 	case 2, SlateportCity_EventScript_HealPowder
 	case 3, SlateportCity_EventScript_RevivalHerb
-	case 4, SlateportCity_EventScript_Protein
-	case 5, SlateportCity_EventScript_Iron
-	case 6, SlateportCity_EventScript_Carbos
-	case 7, SlateportCity_EventScript_Calcium
-	case 8, SlateportCity_EventScript_Zinc
-	case 9, SlateportCity_EventScript_HPUp
-	case 10, SlateportCity_EventScript_PPUp
+	case 4, SlateportCity_EventScript_Ether
+	case 5, SlateportCity_EventScript_MaxEther
+	case 6, SlateportCity_EventScript_Elixir
+	case 7, SlateportCity_EventScript_MaxElixir
+	case 8, SlateportCity_EventScript_PPUp
+	case 9, SlateportCity_EventScript_PPMax
+	case 10, SlateportCity_EventScript_SacredAsh
 	case 11, SlateportCity_EventScript_CancelPowderItemSelect
 	case MULTI_B_PRESSED, SlateportCity_EventScript_CancelPowderItemSelect
 	end
@@ -792,45 +773,31 @@ SlateportCity_EventScript_RevivalHerb::
 	goto SlateportCity_EventScript_TryBuyBerryPowderItem
 	end
 
-SlateportCity_EventScript_Protein::
-	bufferitemname STR_VAR_1, ITEM_PROTEIN
-	setvar VAR_0x8008, ITEM_PROTEIN
+SlateportCity_EventScript_Ether::
+	bufferitemname STR_VAR_1, ITEM_ETHER
+	setvar VAR_0x8008, ITEM_ETHER
+	setvar VAR_0x8009, 500
+	goto SlateportCity_EventScript_TryBuyBerryPowderItem
+	end
+
+SlateportCity_EventScript_MaxEther::
+	bufferitemname STR_VAR_1, ITEM_MAX_ETHER
+	setvar VAR_0x8008, ITEM_MAX_ETHER
 	setvar VAR_0x8009, 1000
 	goto SlateportCity_EventScript_TryBuyBerryPowderItem
 	end
 
-SlateportCity_EventScript_Iron::
-	bufferitemname STR_VAR_1, ITEM_IRON
-	setvar VAR_0x8008, ITEM_IRON
-	setvar VAR_0x8009, 1000
+SlateportCity_EventScript_Elixir::
+	bufferitemname STR_VAR_1, ITEM_ELIXIR
+	setvar VAR_0x8008, ITEM_ELIXIR
+	setvar VAR_0x8009, 1500
 	goto SlateportCity_EventScript_TryBuyBerryPowderItem
 	end
 
-SlateportCity_EventScript_Carbos::
-	bufferitemname STR_VAR_1, ITEM_CARBOS
-	setvar VAR_0x8008, ITEM_CARBOS
-	setvar VAR_0x8009, 1000
-	goto SlateportCity_EventScript_TryBuyBerryPowderItem
-	end
-
-SlateportCity_EventScript_Calcium::
-	bufferitemname STR_VAR_1, ITEM_CALCIUM
-	setvar VAR_0x8008, ITEM_CALCIUM
-	setvar VAR_0x8009, 1000
-	goto SlateportCity_EventScript_TryBuyBerryPowderItem
-	end
-
-SlateportCity_EventScript_Zinc::
-	bufferitemname STR_VAR_1, ITEM_ZINC
-	setvar VAR_0x8008, ITEM_ZINC
-	setvar VAR_0x8009, 1000
-	goto SlateportCity_EventScript_TryBuyBerryPowderItem
-	end
-
-SlateportCity_EventScript_HPUp::
-	bufferitemname STR_VAR_1, ITEM_HP_UP
-	setvar VAR_0x8008, ITEM_HP_UP
-	setvar VAR_0x8009, 1000
+SlateportCity_EventScript_MaxElixir::
+	bufferitemname STR_VAR_1, ITEM_MAX_ELIXIR
+	setvar VAR_0x8008, ITEM_MAX_ELIXIR
+	setvar VAR_0x8009, 3000
 	goto SlateportCity_EventScript_TryBuyBerryPowderItem
 	end
 
@@ -838,6 +805,20 @@ SlateportCity_EventScript_PPUp::
 	bufferitemname STR_VAR_1, ITEM_PP_UP
 	setvar VAR_0x8008, ITEM_PP_UP
 	setvar VAR_0x8009, 3000
+	goto SlateportCity_EventScript_TryBuyBerryPowderItem
+	end
+
+SlateportCity_EventScript_PPMax::
+	bufferitemname STR_VAR_1, ITEM_PP_MAX
+	setvar VAR_0x8008, ITEM_PP_MAX
+	setvar VAR_0x8009, 9000
+	goto SlateportCity_EventScript_TryBuyBerryPowderItem
+	end
+
+SlateportCity_EventScript_SacredAsh::
+	bufferitemname STR_VAR_1, ITEM_SACRED_ASH
+	setvar VAR_0x8008, ITEM_SACRED_ASH
+	setvar VAR_0x8009, 12000
 	goto SlateportCity_EventScript_TryBuyBerryPowderItem
 	end
 
@@ -932,34 +913,17 @@ SlateportCity_EventScript_BerryCrushRankingsSign::
 	releaseall
 	end
 
-SlateportCity_Text_EnergyGuruSellWhatYouNeed:
-	.string "I'm the ENERGY GURU! I'll go for it and\n"
-	.string "sell you what you need!$"
+SlateportCity_Text_CatchingGuruSellWhatYouNeed:
+	.string "I'm the CATCHING GURU! I stock\n"
+	.string "specialized BALLS for every hunt.\p"
+	.string "The right BALL can turn a rare sighting\n"
+	.string "into your next teammate!$"
 
-SlateportCity_Text_OhYourPokemon:
-	.string "Oh?\n"
-	.string "Your {STR_VAR_1}…$"
-
-SlateportCity_Text_PleaseGiveItThisEffortRibbon:
-	.string "Went for it stupendously!\p"
-	.string "As its reward, please give it this\n"
-	.string "EFFORT RIBBON.$"
-
-SlateportCity_Text_ReceivedEffortRibbon:
-	.string "{PLAYER} received the EFFORT RIBBON.$"
-
-SlateportCity_Text_PutEffortRibbonOnMon:
-	.string "{PLAYER} put the EFFORT RIBBON\n"
-	.string "on {STR_VAR_1}.$"
-
-SlateportCity_Text_GoForItLittleHarder:
-	.string "You have to go for it a little harder.\p"
-	.string "If you do, I'll give your POKéMON\n"
-	.string "something nice.$"
-
-SlateportCity_Text_EffortRibbonLooksGoodOnIt:
-	.string "Oh! Your {STR_VAR_1}, that EFFORT\n"
-	.string "RIBBON looks good on it!$"
+SlateportCity_Text_StatPointsAlreadyReady:
+	.string "Your {STR_VAR_1} already has its full\n"
+	.string "competitive STAT POINT budget.\p"
+	.string "There is no EV training here; only\n"
+	.string "team building and battle practice!$"
 
 SlateportCity_Text_WonderIfLighthouseStartlesPokemon:
 	.string "The light of the lighthouse reaches\n"
@@ -1247,7 +1211,7 @@ SlateportCity_Text_CitySign:
 
 SlateportCity_Text_MarketSign:
 	.string "SLATEPORT MARKET\n"
-	.string "“Unique items found nowhere else!”$"
+	.string "“Specialty goods and local services!”$"
 
 SlateportCity_Text_HarborFerryUnderConstruction:
 	.string "SLATEPORT HARBOR\p"

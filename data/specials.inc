@@ -309,9 +309,6 @@ gSpecials::
 	def_special FoundAbandonedShipRoom2Key
 	def_special FoundAbandonedShipRoom4Key
 	def_special FoundAbandonedShipRoom6Key
-	def_special LeadMonHasEffortRibbon
-	def_special GiveLeadMonEffortRibbon
-	def_special Special_AreLeadMonEVsMaxedOut
 	def_special Script_FacePlayer
 	def_special Script_ClearHeldMovement
 	def_special InitRoamer
@@ -333,7 +330,7 @@ gSpecials::
 	def_special StartRegiBattle, waitstate=1
 	def_special SetTrainerFacingDirection
 	def_special DoSealedChamberShakingEffect_Short, waitstate=1
-	def_special FoundBlackGlasses
+	def_special FoundRoute116DuskStone
 	def_special StartDroughtWeatherBlend
 	def_special DoDiveWarp
 	def_special DoFallWarp, waitstate=1
@@ -351,8 +348,8 @@ gSpecials::
 	def_special MoveOutOfSecretBaseFromOutside
 	def_special LoadPlayerBag
 	def_special Script_FadeOutMapMusic, waitstate=1
-	def_special SetPacifidlogTMReceivedDay
-	def_special GetDaysUntilPacifidlogTMAvailable
+	def_special SetPacifidlogStoneReceivedDay
+	def_special GetDaysUntilPacifidlogStoneAvailable
 	def_special HasAllHoennMons
 	def_special MonOTNameNotPlayer
 	def_special BufferLottoTicketNumber
@@ -450,7 +447,6 @@ gSpecials::
 	def_special ShowDodrioBerryPickingRecords, waitstate=1
 	def_special OffsetCameraForBattle
 	def_special GetDeptStoreDefaultFloorChoice
-	def_special BufferVarsForIVRater
 	def_special LinkContestWaitForConnection, waitstate=1
 	def_special GetWirelessCommType
 	def_special LinkContestTryShowWirelessIndicator
@@ -517,6 +513,9 @@ gSpecials::
 	def_special OpenEmeraldChampionsSpeciesItemMart
 	def_special OpenEmeraldChampionsMegaStoneArchive
 	def_special OpenEmeraldChampionsEvolutionItemArchive
+	def_special IsEmeraldChampionsGameCornerPokemonClaimed
+	def_special GiveEmeraldChampionsGameCornerPokemon
+	def_special GiveEmeraldChampionsPreparedPokemon
 	def_special ApplySelectedMonEmeraldChampionsBattleSet
 	def_special GetSelectedMonEmeraldChampionsBattleSetCount
 	def_special BufferSelectedMonEmeraldChampionsBattleSetName

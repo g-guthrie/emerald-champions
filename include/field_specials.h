@@ -40,5 +40,12 @@ bool32 CheckObjectAtXY(u32, u32);
 bool32 CheckPartyHasSpecies(enum Species);
 bool8 CutMoveRuinValleyCheck(void);
 void CutMoveOpenDottedHoleDoor(void);
+void IsEmeraldChampionsGameCornerPokemonClaimed(void);
+void GiveEmeraldChampionsGameCornerPokemon(void);
+void GiveEmeraldChampionsPreparedPokemon(void);
+#if TESTING
+u8 GiveEmeraldChampionsGameCornerPokemonForTesting(enum Species species, u16 flag);
+u8 GiveEmeraldChampionsPreparedPokemonForTesting(enum Species species, u8 level);
+#endif
 
 #endif // GUARD_FIELD_SPECIALS_H

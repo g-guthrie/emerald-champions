@@ -39,6 +39,22 @@ COMPATIBILITY_FLAGS = {
     "snow": "SHOWDOWN_COMPAT_SNOW_SETTER",
 }
 
+# Showdown's pinned Champions data uses the official Ability roster. Emerald
+# Champions deliberately retains a small Inclement-derived rebalance layer, so
+# these replaced Abilities must be translated rather than silently falling
+# back to party Ability slot zero at runtime.
+ABILITY_OVERRIDES = {
+    ("SPECIES_MEGANIUM", "ABILITY_LEAF_GUARD"): "ABILITY_TRIAGE",
+    ("SPECIES_TORTERRA", "ABILITY_SHELL_ARMOR"): "ABILITY_SOLID_ROCK",
+    ("SPECIES_ROTOM_FAN", "ABILITY_LEVITATE"): "ABILITY_MOTOR_DRIVE",
+    ("SPECIES_PYROAR", "ABILITY_UNNERVE"): "ABILITY_COMPETITIVE",
+    ("SPECIES_GOODRA", "ABILITY_SAP_SIPPER"): "ABILITY_GOOEY",
+    ("SPECIES_GOURGEIST", "ABILITY_FRISK"): "ABILITY_INSOMNIA",
+    ("SPECIES_GOURGEIST_SMALL", "ABILITY_FRISK"): "ABILITY_INSOMNIA",
+    ("SPECIES_GOURGEIST_LARGE", "ABILITY_FRISK"): "ABILITY_INSOMNIA",
+    ("SPECIES_GOURGEIST_SUPER", "ABILITY_FRISK"): "ABILITY_INSOMNIA",
+}
+
 
 def to_id(value: str) -> str:
     return re.sub(r"[^a-z0-9]", "", value.lower())
@@ -108,10 +124,12 @@ def build(showdown_root: Path) -> tuple[dict, str]:
         offset = len(templates)
         for source_set in species_data["sets"]:
             preferred = source_set.get("preferredTypes", [])
+            abilities = [ability_map[to_id(ability)] for ability in source_set.get("abilities", [])]
+            abilities = [ABILITY_OVERRIDES.get((party_species, ability), ability) for ability in abilities]
             template = {
                 "role": ROLES[source_set["role"]],
                 "moves": [move_map[to_id(move)] for move in source_set["movepool"]],
-                "abilities": [ability_map[to_id(ability)] for ability in source_set.get("abilities", [])],
+                "abilities": abilities,
                 "preferred_type": type_map[to_id(preferred[0])] if preferred else "TYPE_NONE",
             }
             templates.append(template)
@@ -139,6 +157,10 @@ def build(showdown_root: Path) -> tuple[dict, str]:
         "policy": {
             "runtime": "teams and moves are selected on demand in the GBA ROM",
             "adaptations": "Circuit level escalation, Emerald AI, Mega-only selectable gimmick",
+            "ability_overrides": {
+                f"{species}/{ability}": replacement
+                for (species, ability), replacement in sorted(ABILITY_OVERRIDES.items())
+            },
         },
         "variant_count": len(variants),
         "template_count": len(templates),

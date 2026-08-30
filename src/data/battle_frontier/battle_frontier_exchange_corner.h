@@ -23,10 +23,9 @@ static const u16 sFrontierExchangeCorner_Decor2[] =
     ITEM_LIST_END
 };
 
-// Legacy internal names are retained to minimize UI wiring churn. Player-facing
-// shelves now hold finite supplies and evolution tools rather than free Center
-// gear or redundant vitamins.
-static const enum Item sFrontierExchangeCorner_Vitamins[] =
+// These shelves complement the free Center loadout gear with finite supplies
+// and evolution tools that remain meaningful in the postgame.
+static const enum Item sFrontierExchangeCorner_Supplies[] =
 {
     ITEM_PP_UP,
     ITEM_PP_MAX,
@@ -37,7 +36,7 @@ static const enum Item sFrontierExchangeCorner_Vitamins[] =
     ITEM_LIST_END
 };
 
-static const enum Item sFrontierExchangeCorner_HoldItems[] =
+static const enum Item sFrontierExchangeCorner_EvolutionItems[] =
 {
     ITEM_LINKING_CORD,
     ITEM_PROTECTOR,
@@ -76,27 +75,27 @@ static const u8 *const sFrontierExchangeCorner_Decor2Descriptions[] =
     gText_Exit
 };
 
-static const u8 *const sFrontierExchangeCorner_VitaminsDescriptions[] =
+static const u8 *const sFrontierExchangeCorner_SupplyDescriptions[] =
 {
-    BattleFrontier_ExchangeServiceCorner_Text_ProteinDesc,
-    BattleFrontier_ExchangeServiceCorner_Text_CalciumDesc,
-    BattleFrontier_ExchangeServiceCorner_Text_IronDesc,
-    BattleFrontier_ExchangeServiceCorner_Text_ZincDesc,
-    BattleFrontier_ExchangeServiceCorner_Text_CarbosDesc,
-    BattleFrontier_ExchangeServiceCorner_Text_HPUpDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_PPUpDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_PPMaxDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_MaxReviveDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_SacredAshDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_DreamBallDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_BeastBallDesc,
     gText_Exit
 };
 
-static const u8 *const sFrontierExchangeCorner_HoldItemsDescriptions[] =
+static const u8 *const sFrontierExchangeCorner_EvolutionItemDescriptions[] =
 {
-    BattleFrontier_ExchangeServiceCorner_Text_LeftoversDesc,
-    BattleFrontier_ExchangeServiceCorner_Text_WhiteHerbDesc,
-    BattleFrontier_ExchangeServiceCorner_Text_QuickClawDesc,
-    BattleFrontier_ExchangeServiceCorner_Text_MentalHerbDesc,
-    BattleFrontier_ExchangeServiceCorner_Text_BrightpowderDesc,
-    BattleFrontier_ExchangeServiceCorner_Text_ChoiceBandDesc,
-    BattleFrontier_ExchangeServiceCorner_Text_KingsRockDesc,
-    BattleFrontier_ExchangeServiceCorner_Text_FocusBandDesc,
-    BattleFrontier_ExchangeServiceCorner_Text_ScopeLensDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_LinkingCordDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_ProtectorDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_ElectirizerDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_MagmarizerDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_ReaperClothDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_RazorClawDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_SweetAppleDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_TartAppleDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_PrismScaleDesc,
     gText_Exit
 };

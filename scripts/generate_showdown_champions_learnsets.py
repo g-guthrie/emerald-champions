@@ -70,10 +70,14 @@ def main() -> None:
     mod_moves = moves_from_entries(mod_entries)
     mod_inherits = {species for species, body in mod_entries.items() if re.search(r"^\t\tinherit:\s*true", body, re.M)}
     parents = {}
+    pre_evolutions = {}
     for species, body in pokedex_entries.items():
         match = re.search(r"^\t\tbaseSpecies:\s*[\"']([^\"']+)", body, re.M)
         if match:
             parents[species] = to_id(match.group(1))
+        match = re.search(r"^\t\tprevo:\s*[\"']([^\"']+)", body, re.M)
+        if match:
+            pre_evolutions[species] = to_id(match.group(1))
 
     @lru_cache(None)
     def own_moves(species: str) -> frozenset[str]:
@@ -89,6 +93,9 @@ def main() -> None:
         parent = parents.get(species)
         if parent and parent != species:
             moves.update(legal_moves(parent))
+        prevo = pre_evolutions.get(species)
+        if prevo and prevo != species:
+            moves.update(legal_moves(prevo))
         return frozenset(moves)
 
     species_ids = sorted(set(base_entries) | set(mod_entries) | set(pokedex_entries))
@@ -97,13 +104,14 @@ def main() -> None:
         "source": "smogon/pokemon-showdown",
         "source_commit": commit,
         "license": "MIT; see docs/THIRD_PARTY_NOTICES.md",
-        "policy": "Champions mod overrides for supported species; each other species uses its most recent official mainline generation in Showdown; form data inherits its base species.",
+        "policy": "Champions mod overrides for supported species; each other species uses its most recent official mainline generation in Showdown; forms and evolved species inherit legal moves from their base form and pre-evolution chains.",
         "source_files": {
             str(path.relative_to(showdown)): hashlib.sha256(path.read_bytes()).hexdigest()
             for path in (base_path, mod_path, pokedex_path)
         },
         "champions_species": sorted(mod_entries),
         "form_parents": dict(sorted(parents.items())),
+        "evolution_parents": dict(sorted(pre_evolutions.items())),
         "learnsets": {species: sorted(legal_moves(species)) for species in species_ids},
     }
     args.output.write_text(json.dumps(payload, indent=2, sort_keys=False) + "\n")

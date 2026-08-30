@@ -10,12 +10,17 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE_COMMIT = "33202c162ebc34a1dbe2000acd26b0720baa109d"
+# This reachable repository checkpoint preserves the three authored source
+# corpora.  Keeping the object reachable makes preset generation reproducible
+# in clean clones and CI.
+SOURCE_COMMIT = "0b2bc96c7d6480187f70f5b83a705c081780983e"
 DEFAULT_SOURCE = "docs/verdant_battle_set_presets.json"
 ALTERNATIVE_SOURCE = "docs/verdant_multi_battle_sets.json"
 HANDBOOK_SOURCE = "docs/pokemon_champions_handbook_sets.json"
 JSON_OUTPUT = ROOT / "docs" / "emerald_champions_battle_sets.json"
 C_OUTPUT = ROOT / "src" / "data" / "pokemon" / "emerald_champions_battle_sets.h"
+MOVE_ACCESS_REVIEW = ROOT / "docs" / "emerald_champions_move_access_review.json"
+MOVE_ACCESS_C_OUTPUT = ROOT / "src" / "data" / "pokemon" / "emerald_champions_move_access_review.h"
 
 PHYSICAL_NATURES = {
     "NATURE_ADAMANT", "NATURE_BRAVE", "NATURE_JOLLY", "NATURE_LONELY",
@@ -70,70 +75,31 @@ ABILITY_ALIASES = {
     ("SPECIES_DELPHOX", "ABILITY_PYROMANCY"): "ABILITY_BLAZE",
     ("SPECIES_HITMONCHAN", "ABILITY_BLITZ_BOXER"): "ABILITY_IRON_FIST",
     ("SPECIES_SQUIRTLE", "ABILITY_OVERCOAT"): "ABILITY_RAIN_DISH",
-    ("SPECIES_BLASTOISE", "ABILITY_MEGA_LAUNCHER"): "ABILITY_RAIN_DISH",
     ("SPECIES_PIDGEY", "ABILITY_NO_GUARD"): "ABILITY_BIG_PECKS",
     ("SPECIES_PIDGEOTTO", "ABILITY_NO_GUARD"): "ABILITY_BIG_PECKS",
-    ("SPECIES_PIDGEOT", "ABILITY_NO_GUARD"): "ABILITY_BIG_PECKS",
-    ("SPECIES_FEAROW", "ABILITY_INTIMIDATE"): "ABILITY_SNIPER",
     ("SPECIES_PONYTA", "ABILITY_RECKLESS"): "ABILITY_FLAME_BODY",
-    ("SPECIES_RAPIDASH", "ABILITY_RECKLESS"): "ABILITY_FLAME_BODY",
-    ("SPECIES_DODRIO", "ABILITY_MOXIE"): "ABILITY_TANGLED_FEET",
     ("SPECIES_SEEL", "ABILITY_FUR_COAT"): "ABILITY_ICE_BODY",
-    ("SPECIES_DEWGONG", "ABILITY_FUR_COAT"): "ABILITY_ICE_BODY",
-    ("SPECIES_GENGAR", "ABILITY_LEVITATE"): "ABILITY_CURSED_BODY",
-    ("SPECIES_ELECTRODE", "ABILITY_ELECTRIC_SURGE"): "ABILITY_AFTERMATH",
     ("SPECIES_CHIKORITA", "ABILITY_TRIAGE"): "ABILITY_LEAF_GUARD",
     ("SPECIES_BAYLEEF", "ABILITY_TRIAGE"): "ABILITY_LEAF_GUARD",
-    ("SPECIES_MEGANIUM", "ABILITY_TRIAGE"): "ABILITY_LEAF_GUARD",
     ("SPECIES_SENTRET", "ABILITY_FUR_COAT"): "ABILITY_FRISK",
     ("SPECIES_FURRET", "ABILITY_FUR_COAT"): "ABILITY_FRISK",
     ("SPECIES_LEDYBA", "ABILITY_AERILATE"): "ABILITY_RATTLED",
     ("SPECIES_SPINARAK", "ABILITY_MERCILESS"): "ABILITY_SNIPER",
     ("SPECIES_SUNFLORA", "ABILITY_DROUGHT"): "ABILITY_EARLY_BIRD",
-    ("SPECIES_GIRAFARIG", "ABILITY_STRONG_JAW"): "ABILITY_SAP_SIPPER",
-    ("SPECIES_MAGCARGO", "ABILITY_SIMPLE"): "ABILITY_WEAK_ARMOR",
     ("SPECIES_DELIBIRD", "ABILITY_REFRIGERATE"): "ABILITY_INSOMNIA",
     ("SPECIES_WURMPLE", "ABILITY_POISON_POINT"): "ABILITY_RUN_AWAY",
-    ("SPECIES_BEAUTIFLY", "ABILITY_BERSERK"): "ABILITY_RIVALRY",
-    ("SPECIES_DUSTOX", "ABILITY_UNAWARE"): "ABILITY_COMPOUND_EYES",
     ("SPECIES_SLAKOTH", "ABILITY_STALL"): "ABILITY_TRUANT",
-    ("SPECIES_WAILORD", "ABILITY_DRIZZLE"): "ABILITY_PRESSURE",
-    ("SPECIES_FLYGON", "ABILITY_TINTED_LENS"): "ABILITY_LEVITATE",
-    ("SPECIES_TROPIUS", "ABILITY_AERILATE"): "ABILITY_HARVEST",
     ("SPECIES_GLALIE", "ABILITY_REFRIGERATE"): "ABILITY_MOODY",
-    ("SPECIES_LUVDISC", "ABILITY_SOUL_HEART"): "ABILITY_HYDRATION",
     ("SPECIES_TURTWIG", "ABILITY_SOLID_ROCK"): "ABILITY_SHELL_ARMOR",
     ("SPECIES_GROTLE", "ABILITY_SOLID_ROCK"): "ABILITY_SHELL_ARMOR",
-    ("SPECIES_TORTERRA", "ABILITY_SOLID_ROCK"): "ABILITY_SHELL_ARMOR",
-    ("SPECIES_VESPIQUEN", "ABILITY_INTIMIDATE"): "ABILITY_UNNERVE",
-    ("SPECIES_LOPUNNY", "ABILITY_SCRAPPY"): "ABILITY_LIMBER",
-    ("SPECIES_MISMAGIUS", "ABILITY_PIXILATE"): "ABILITY_LEVITATE",
-    ("SPECIES_MAGMORTAR", "ABILITY_MEGA_LAUNCHER"): "ABILITY_VITAL_SPIRIT",
-    ("SPECIES_GLACEON", "ABILITY_SLUSH_RUSH"): "ABILITY_ICE_BODY",
-    ("SPECIES_REGIGIGAS", "ABILITY_CLEAR_BODY"): "ABILITY_SLOW_START",
     ("SPECIES_WATCHOG", "ABILITY_DAZZLING"): "ABILITY_ANALYTIC",
-    ("SPECIES_EMOLGA", "ABILITY_LIGHTNING_ROD"): "ABILITY_MOTOR_DRIVE",
-    ("SPECIES_HEATMOR", "ABILITY_TOUGH_CLAWS"): "ABILITY_WHITE_SMOKE",
-    ("SPECIES_PYROAR", "ABILITY_COMPETITIVE"): "ABILITY_MOXIE",
     ("SPECIES_FLABEBE_RED", "ABILITY_HEALER"): "ABILITY_SYMBIOSIS",
     ("SPECIES_FLABEBE", "ABILITY_HEALER"): "ABILITY_SYMBIOSIS",
-    ("SPECIES_FLOETTE_RED", "ABILITY_HEALER"): "ABILITY_SYMBIOSIS",
-    ("SPECIES_FLOETTE", "ABILITY_HEALER"): "ABILITY_SYMBIOSIS",
-    ("SPECIES_FLORGES_RED", "ABILITY_MISTY_SURGE"): "ABILITY_SYMBIOSIS",
-    ("SPECIES_FLORGES", "ABILITY_MISTY_SURGE"): "ABILITY_SYMBIOSIS",
-    ("SPECIES_GOGOAT", "ABILITY_GRASSY_SURGE"): "ABILITY_GRASS_PELT",
-    ("SPECIES_GOODRA", "ABILITY_POISON_HEAL"): "ABILITY_GOOEY",
-    ("SPECIES_TREVENANT", "ABILITY_GRASSY_SURGE"): "ABILITY_HARVEST",
-    ("SPECIES_GOURGEIST_AVERAGE", "ABILITY_FLARE_BOOST"): "ABILITY_INSOMNIA",
-    ("SPECIES_GOURGEIST", "ABILITY_FLARE_BOOST"): "ABILITY_INSOMNIA",
     ("SPECIES_ROWLET", "ABILITY_TINTED_LENS"): "ABILITY_LONG_REACH",
     ("SPECIES_DARTRIX", "ABILITY_TINTED_LENS"): "ABILITY_LONG_REACH",
-    ("SPECIES_DECIDUEYE", "ABILITY_TINTED_LENS"): "ABILITY_LONG_REACH",
-    ("SPECIES_PALOSSAND", "ABILITY_SAND_STREAM"): "ABILITY_SAND_VEIL",
-    ("SPECIES_ROTOM_FAN", "ABILITY_MOTOR_DRIVE"): "ABILITY_LEVITATE",
-    ("SPECIES_GOURGEIST_SMALL", "ABILITY_FLARE_BOOST"): "ABILITY_INSOMNIA",
-    ("SPECIES_GOURGEIST_LARGE", "ABILITY_FLARE_BOOST"): "ABILITY_INSOMNIA",
-    ("SPECIES_GOURGEIST_SUPER", "ABILITY_FLARE_BOOST"): "ABILITY_INSOMNIA",
+    # This pair was introduced by a broad Vital Spirit rewrite.  Durant's
+    # authored physical set is the standard Hustle orientation.
+    ("SPECIES_DURANT", "ABILITY_VITAL_SPIRIT"): "ABILITY_HUSTLE",
 }
 
 HANDBOOK_FORM_ROLES = {
@@ -145,6 +111,12 @@ HANDBOOK_FORM_ROLES = {
     "Avalugg-Hisui": "SPECIES_AVALUGG_HISUI",
     "Decidueye-Hisui": "SPECIES_DECIDUEYE_HISUI",
     "Basculegion-F": "SPECIES_BASCULEGION_F",
+}
+
+HANDBOOK_MEGA_BASE_ROLES = {
+    # The National Dex row is Meowstic-M, but this role explicitly targets the
+    # separately configured female Mega form.
+    "Meowstic-F-Mega": "SPECIES_MEOWSTIC_F",
 }
 
 # The preserved handbook predates the Quaxly family.  These three sets close
@@ -378,6 +350,59 @@ SUPPLEMENTAL_ALTERNATIVES = [
     authored_modern_set("SPECIES_ZORUA_HISUI", "Illusion Nasty Plot", ["MOVE_SHADOW_BALL", "MOVE_SNARL", "MOVE_NASTY_PLOT", "MOVE_PROTECT"], "NATURE_TIMID", "ABILITY_ILLUSION", "ITEM_EVIOLITE", [2, 0, 0, 32, 0, 32], "Illusion setup attacker and Snarl control"),
 ]
 
+
+def authored_mega_set(
+    species: str,
+    name: str,
+    moves: list[str],
+    nature: str,
+    ability: str,
+    required_item: str,
+    stat_points: list[int],
+    role: str,
+) -> dict:
+    entry = authored_modern_set(
+        species,
+        name,
+        moves,
+        nature,
+        ability,
+        "ITEM_NONE",
+        stat_points,
+        role,
+    )
+    entry["required_item"] = required_item
+    entry["source"] = "Emerald Champions custom Mega extension: current form data and authored doubles corpus"
+    return entry
+
+
+# The Champions M-B handbook covers 75 of the 92 campaign stones.  These
+# orientations cover the remaining current forms, using their executable
+# stats/Abilities and the existing authored doubles corpus. Tatsugirinite has
+# one legal orientation for each of its three independently catchable forms.
+CUSTOM_MEGA_ROLES = [
+    authored_mega_set("SPECIES_MEWTWO", "Mega X Physical", ["MOVE_PSYCHO_CUT", "MOVE_DRAIN_PUNCH", "MOVE_ICE_PUNCH", "MOVE_PROTECT"], "NATURE_JOLLY", "ABILITY_STEADFAST", "ITEM_MEWTWONITE_X", [2, 32, 0, 0, 0, 32], "Mega X fast physical attacker"),
+    authored_mega_set("SPECIES_MEWTWO", "Mega Y Special", ["MOVE_PSYSTRIKE", "MOVE_AURA_SPHERE", "MOVE_ICE_BEAM", "MOVE_PROTECT"], "NATURE_TIMID", "ABILITY_INSOMNIA", "ITEM_MEWTWONITE_Y", [2, 0, 0, 32, 0, 32], "Mega Y fast special attacker"),
+    authored_mega_set("SPECIES_ABSOL", "Mega Z Physical", ["MOVE_PLAY_ROUGH", "MOVE_KNOCK_OFF", "MOVE_SUCKER_PUNCH", "MOVE_PROTECT"], "NATURE_JOLLY", "ABILITY_MAGIC_BOUNCE", "ITEM_ABSOLITE_Z", [2, 32, 0, 0, 0, 32], "Mega Z Magic Bounce physical attacker"),
+    authored_mega_set("SPECIES_SALAMENCE", "Mega Tailwind", ["MOVE_DOUBLE_EDGE", "MOVE_EARTHQUAKE", "MOVE_TAILWIND", "MOVE_PROTECT"], "NATURE_JOLLY", "ABILITY_AERILATE", "ITEM_SALAMENCITE", [2, 32, 0, 0, 0, 32], "Mega Aerilate Tailwind attacker"),
+    authored_mega_set("SPECIES_LATIAS", "Mega Bulky Tailwind", ["MOVE_DRACO_METEOR", "MOVE_MIST_BALL", "MOVE_TAILWIND", "MOVE_RECOVER"], "NATURE_TIMID", "ABILITY_LEVITATE", "ITEM_LATIASITE", [32, 0, 2, 0, 0, 32], "Mega bulky Tailwind support attacker"),
+    authored_mega_set("SPECIES_LATIOS", "Mega Tailwind", ["MOVE_DRACO_METEOR", "MOVE_LUSTER_PURGE", "MOVE_TAILWIND", "MOVE_PROTECT"], "NATURE_TIMID", "ABILITY_LEVITATE", "ITEM_LATIOSITE", [2, 0, 0, 32, 0, 32], "Mega fast Tailwind special attacker"),
+    authored_mega_set("SPECIES_GARCHOMP", "Mega Z Special", ["MOVE_DRACO_METEOR", "MOVE_EARTH_POWER", "MOVE_FLAMETHROWER", "MOVE_PROTECT"], "NATURE_TIMID", "ABILITY_SAND_VEIL", "ITEM_GARCHOMPITE_Z", [2, 0, 0, 32, 0, 32], "Mega Z fast special attacker"),
+    authored_mega_set("SPECIES_LUCARIO", "Mega Z Special", ["MOVE_AURA_SPHERE", "MOVE_FLASH_CANNON", "MOVE_VACUUM_WAVE", "MOVE_PROTECT"], "NATURE_TIMID", "ABILITY_STEADFAST", "ITEM_LUCARIONITE_Z", [2, 0, 0, 32, 0, 32], "Mega Z fast special priority attacker"),
+    authored_mega_set("SPECIES_HEATRAN", "Mega Trick Room", ["MOVE_HEAT_WAVE", "MOVE_EARTH_POWER", "MOVE_FLASH_CANNON", "MOVE_PROTECT"], "NATURE_QUIET", "ABILITY_FLASH_FIRE", "ITEM_HEATRANITE", [32, 0, 2, 32, 0, 0], "Mega slow bulky spread attacker"),
+    authored_mega_set("SPECIES_DARKRAI", "Mega Sleep Control", ["MOVE_DARK_VOID", "MOVE_DARK_PULSE", "MOVE_ICE_BEAM", "MOVE_PROTECT"], "NATURE_TIMID", "ABILITY_BAD_DREAMS", "ITEM_DARKRANITE", [2, 0, 0, 32, 0, 32], "Mega Bad Dreams sleep-control attacker"),
+    authored_mega_set("SPECIES_ZYGARDE_50_POWER_CONSTRUCT", "Mega Special Control", ["MOVE_DRACO_METEOR", "MOVE_EARTH_POWER", "MOVE_GLARE", "MOVE_PROTECT"], "NATURE_TIMID", "ABILITY_AURA_BREAK", "ITEM_ZYGARDITE", [2, 0, 0, 32, 0, 32], "Power Construct into Complete, then Mega special control"),
+    authored_mega_set("SPECIES_DIANCIE", "Mega Mixed Attacker", ["MOVE_DIAMOND_STORM", "MOVE_MOONBLAST", "MOVE_EARTH_POWER", "MOVE_PROTECT"], "NATURE_NAIVE", "ABILITY_MAGIC_BOUNCE", "ITEM_DIANCITE", [2, 16, 0, 16, 0, 32], "Mega Magic Bounce mixed attacker"),
+    authored_mega_set("SPECIES_GOLISOPOD", "Mega Trick Room", ["MOVE_FIRST_IMPRESSION", "MOVE_LIQUIDATION", "MOVE_LEECH_LIFE", "MOVE_WIDE_GUARD"], "NATURE_BRAVE", "ABILITY_EMERGENCY_EXIT", "ITEM_GOLISOPITE", [32, 32, 2, 0, 0, 0], "Mega slow physical attacker and Wide Guard support"),
+    authored_mega_set("SPECIES_MAGEARNA", "Mega Trick Room", ["MOVE_FLEUR_CANNON", "MOVE_FLASH_CANNON", "MOVE_TRICK_ROOM", "MOVE_PROTECT"], "NATURE_QUIET", "ABILITY_SOUL_HEART", "ITEM_MAGEARNITE", [32, 0, 2, 32, 0, 0], "Mega Soul-Heart Trick Room attacker"),
+    authored_mega_set("SPECIES_MAGEARNA_ORIGINAL", "Mega Trick Room", ["MOVE_FLEUR_CANNON", "MOVE_FLASH_CANNON", "MOVE_TRICK_ROOM", "MOVE_PROTECT"], "NATURE_QUIET", "ABILITY_SOUL_HEART", "ITEM_MAGEARNITE", [32, 0, 2, 32, 0, 0], "Original Color Mega Soul-Heart Trick Room attacker"),
+    authored_mega_set("SPECIES_ZERAORA", "Mega Physical", ["MOVE_FAKE_OUT", "MOVE_PLASMA_FISTS", "MOVE_CLOSE_COMBAT", "MOVE_PROTECT"], "NATURE_JOLLY", "ABILITY_VOLT_ABSORB", "ITEM_ZERAORITE", [2, 32, 0, 0, 0, 32], "Mega fast Fake Out physical attacker"),
+    authored_mega_set("SPECIES_TATSUGIRI", "Mega Storm Drain", ["MOVE_DRACO_METEOR", "MOVE_MUDDY_WATER", "MOVE_ICY_WIND", "MOVE_PROTECT"], "NATURE_TIMID", "ABILITY_STORM_DRAIN", "ITEM_TATSUGIRINITE", [2, 0, 0, 32, 0, 32], "Mega Curly Storm Drain special attacker"),
+    authored_mega_set("SPECIES_TATSUGIRI_DROOPY", "Mega Storm Drain", ["MOVE_DRACO_METEOR", "MOVE_MUDDY_WATER", "MOVE_ICY_WIND", "MOVE_PROTECT"], "NATURE_TIMID", "ABILITY_STORM_DRAIN", "ITEM_TATSUGIRINITE", [2, 0, 0, 32, 0, 32], "Mega Droopy Storm Drain special attacker"),
+    authored_mega_set("SPECIES_TATSUGIRI_STRETCHY", "Mega Storm Drain", ["MOVE_DRACO_METEOR", "MOVE_MUDDY_WATER", "MOVE_ICY_WIND", "MOVE_PROTECT"], "NATURE_TIMID", "ABILITY_STORM_DRAIN", "ITEM_TATSUGIRINITE", [2, 0, 0, 32, 0, 32], "Mega Stretchy Storm Drain special attacker"),
+    authored_mega_set("SPECIES_BAXCALIBUR", "Mega Physical", ["MOVE_GLAIVE_RUSH", "MOVE_ICICLE_CRASH", "MOVE_ICE_SHARD", "MOVE_PROTECT"], "NATURE_ADAMANT", "ABILITY_THERMAL_EXCHANGE", "ITEM_BAXCALIBRITE", [2, 32, 0, 0, 0, 32], "Mega physical breaker and priority cleaner"),
+]
+
 SUPPLEMENTAL_DEFAULT_OVERRIDES = {
     "SPECIES_GIMMIGHOUL": authored_modern_set(
         "SPECIES_GIMMIGHOUL",
@@ -390,6 +415,164 @@ SUPPLEMENTAL_DEFAULT_OVERRIDES = {
         "slow bulky special setup attacker",
     ),
 }
+
+SUPPLEMENTAL_ALTERNATIVE_OVERRIDES = {
+    ("SPECIES_FLYGON", "Bulky Attacker"): authored_modern_set(
+        "SPECIES_FLYGON",
+        "Bulky Attacker",
+        ["MOVE_PROTECT", "MOVE_SCALE_SHOT", "MOVE_TAILWIND", "MOVE_EARTHQUAKE"],
+        "NATURE_JOLLY",
+        "ABILITY_LEVITATE",
+        "ITEM_YACHE_BERRY",
+        [2, 32, 0, 0, 0, 32],
+        "Yache physical attacker and Tailwind setter",
+    ),
+}
+
+# Source-backed sets still need an executable review after import.  These are
+# narrowly scoped corrections for configurations that cannot perform their
+# authored role (for example, Protect on an Assault Vest set), not a template
+# pass or an alternative-set quota.
+AUDITED_SET_FIELD_OVERRIDES = {
+    # Preserve support bulk while putting otherwise wasted offensive Stat
+    # Points into HP on fast, damage-independent doubles utility sets.
+    ("SPECIES_GOLBAT", "Recommended"): {"stat_points": [32, 0, 2, 0, 0, 32]},
+    ("SPECIES_LEDIAN", "Recommended"): {"stat_points": [32, 0, 2, 0, 0, 32]},
+    ("SPECIES_MISDREAVUS", "Recommended"): {"stat_points": [32, 0, 2, 0, 0, 32]},
+    ("SPECIES_RIOLU", "Recommended"): {"stat_points": [32, 0, 2, 0, 0, 32]},
+    ("SPECIES_LIEPARD", "Recommended"): {"stat_points": [32, 0, 2, 0, 0, 32]},
+    ("SPECIES_COTTONEE", "Recommended"): {"stat_points": [32, 0, 2, 0, 0, 32]},
+    ("SPECIES_SOLOSIS", "Recommended"): {"stat_points": [32, 0, 16, 0, 18, 0]},
+    ("SPECIES_DEDENNE", "Recommended"): {"stat_points": [32, 0, 2, 0, 0, 32]},
+    ("SPECIES_NOIBAT", "Recommended"): {"stat_points": [32, 0, 2, 0, 0, 32]},
+    ("SPECIES_TOGEDEMARU", "Recommended"): {"stat_points": [32, 0, 2, 0, 0, 32]},
+    ("SPECIES_SCATTERBUG", "Recommended"): {
+        "moves": ["MOVE_RAGE_POWDER", "MOVE_STUN_SPORE", "MOVE_STRING_SHOT", "MOVE_PROTECT"],
+    },
+    ("SPECIES_DACHSBUN", "Doubles Support"): {"nature": "NATURE_CAREFUL"},
+    ("SPECIES_SKIDDO", "Recommended"): {
+        "moves": ["MOVE_BULK_UP", "MOVE_HORN_LEECH", "MOVE_STOMPING_TANTRUM", "MOVE_PROTECT"],
+    },
+    ("SPECIES_GIMMIGHOUL_ROAMING", "Recommended"): {
+        "name": "Dual Screens",
+        "moves": ["MOVE_SHADOW_BALL", "MOVE_REFLECT", "MOVE_LIGHT_SCREEN", "MOVE_PROTECT"],
+        "item": "ITEM_LIGHT_CLAY",
+        "role": "Fast dual-screen support",
+    },
+    ("SPECIES_SLIGGOO_HISUI", "Shelter Press"): {
+        "name": "Curse Tank",
+        "moves": ["MOVE_HEAVY_SLAM", "MOVE_BODY_SLAM", "MOVE_CURSE", "MOVE_PROTECT"],
+        "stat_points": [32, 32, 2, 0, 0, 0],
+        "role": "Eviolite Curse physical win condition",
+    },
+    ("SPECIES_ROTOM_FROST", "Recommended"): {
+        "moves": ["MOVE_BLIZZARD", "MOVE_THUNDERBOLT", "MOVE_ELECTROWEB", "MOVE_PROTECT"],
+    },
+    ("SPECIES_ROTOM_FAN", "Recommended"): {
+        "moves": ["MOVE_AIR_SLASH", "MOVE_THUNDERBOLT", "MOVE_ELECTROWEB", "MOVE_PROTECT"],
+    },
+
+    # Abilities whose activation condition was impossible in the authored
+    # orientation are replaced by a legal, useful Ability for that role.
+    ("SPECIES_EXEGGUTOR_ALOLA", "Recommended"): {"ability": "ABILITY_FRISK"},
+    ("SPECIES_GOODRA", "Special Attacker II"): {"ability": "ABILITY_GOOEY"},
+    ("SPECIES_GOURGEIST", "Trick Room"): {"ability": "ABILITY_INSOMNIA"},
+
+    # White Herb must have a trigger; Clear Amulet is Groudon's coherent
+    # physical setup item, while Drednaw's set was missing Shell Smash.
+    ("SPECIES_GROUDON", "Recommended"): {"item": "ITEM_CLEAR_AMULET"},
+    ("SPECIES_DREDNAW", "Bulky Setup"): {
+        "name": "Shell Smash",
+        "moves": ["MOVE_SHELL_SMASH", "MOVE_ROCK_SLIDE", "MOVE_LIQUIDATION", "MOVE_PROTECT"],
+        "role": "White Herb Shell Smash attacker",
+    },
+
+    # Choice and Assault Vest roles cannot select Protect.  Each replacement
+    # is in the species' current authored learnable pool and preserves the
+    # role rather than changing the item to conceal the contradiction.
+    ("SPECIES_DODRIO", "Wallbreaker"): {
+        "moves": ["MOVE_DOUBLE_EDGE", "MOVE_QUICK_ATTACK", "MOVE_BRAVE_BIRD", "MOVE_KNOCK_OFF"],
+    },
+    ("SPECIES_LANTURN", "Bulky Attacker"): {
+        "moves": ["MOVE_VOLT_SWITCH", "MOVE_SCALD", "MOVE_ICE_BEAM", "MOVE_ELECTROWEB"],
+    },
+    ("SPECIES_TYRANITAR", "Choice Attacker"): {
+        "moves": ["MOVE_ROCK_SLIDE", "MOVE_LOW_KICK", "MOVE_ICE_PUNCH", "MOVE_CRUNCH"],
+    },
+    ("SPECIES_FLOATZEL", "Wallbreaker"): {
+        "moves": ["MOVE_AQUA_JET", "MOVE_CLOSE_COMBAT", "MOVE_GIGA_IMPACT", "MOVE_FLIP_TURN"],
+    },
+    ("SPECIES_ELECTIVIRE", "Bulky Attacker"): {
+        "moves": ["MOVE_ELECTROWEB", "MOVE_ICE_PUNCH", "MOVE_WILD_CHARGE", "MOVE_STOMPING_TANTRUM"],
+    },
+    ("SPECIES_ROTOM", "Choice Attacker"): {
+        "moves": ["MOVE_VOLT_SWITCH", "MOVE_THUNDERBOLT", "MOVE_DISCHARGE", "MOVE_TRICK"],
+    },
+    ("SPECIES_BASCULIN", "Wallbreaker"): {
+        "moves": ["MOVE_FLIP_TURN", "MOVE_PSYCHIC_FANGS", "MOVE_AQUA_JET", "MOVE_WAVE_CRASH"],
+    },
+    ("SPECIES_TERRAKION", "Wallbreaker"): {
+        "moves": ["MOVE_CLOSE_COMBAT", "MOVE_ROCK_SLIDE", "MOVE_STONE_EDGE", "MOVE_HIGH_HORSEPOWER"],
+    },
+    ("SPECIES_FLOETTE", "Choice Attacker"): {
+        "moves": ["MOVE_MOONBLAST", "MOVE_DAZZLING_GLEAM", "MOVE_ENERGY_BALL", "MOVE_PSYCHIC"],
+    },
+    ("SPECIES_BRUXISH", "Choice Attacker"): {
+        "moves": ["MOVE_CRUNCH", "MOVE_PSYCHIC_FANGS", "MOVE_LIQUIDATION", "MOVE_ICE_FANG"],
+    },
+    ("SPECIES_STONJOURNER", "Choice Attacker"): {
+        "moves": ["MOVE_HEAT_CRASH", "MOVE_STONE_EDGE", "MOVE_ROCK_SLIDE", "MOVE_HEAVY_SLAM"],
+    },
+    ("SPECIES_TATSUGIRI", "Bulky Attacker"): {
+        "moves": ["MOVE_MUDDY_WATER", "MOVE_RAPID_SPIN", "MOVE_ICY_WIND", "MOVE_DRAGON_PULSE"],
+    },
+    ("SPECIES_CHI_YU", "Choice Attacker"): {
+        "moves": ["MOVE_DARK_PULSE", "MOVE_OVERHEAT", "MOVE_HYPER_BEAM", "MOVE_HEAT_WAVE"],
+    },
+    ("SPECIES_RAGING_BOLT", "Bulky Attacker"): {
+        "moves": ["MOVE_THUNDERCLAP", "MOVE_THUNDERBOLT", "MOVE_DRAGON_PULSE", "MOVE_VOLT_SWITCH"],
+    },
+
+    # This was the only real attack-category allocation reversal.
+    ("SPECIES_KINGDRA", "Setup Sweeper"): {
+        "name": "Rain Sweeper",
+        "nature": "NATURE_MODEST",
+        "stat_points": [2, 0, 0, 32, 0, 32],
+        "role": "Swift Swim Rain Dance special sweeper",
+    },
+
+    # These three handbook roles describe Megas that now exist in the current
+    # engine.  Keep them hidden until Mega access, use the transformed Ability,
+    # and never place the progression stone in the supplied-item field.
+    ("SPECIES_CLEFABLE", "Special Attacker"): {
+        "name": "Mega Special Attacker",
+        "ability": "ABILITY_MAGIC_BOUNCE",
+        "item": "ITEM_NONE",
+        "required_item": "ITEM_CLEFABLITE",
+    },
+    ("SPECIES_MEOWSTIC", "Special Attacker"): {
+        "species": "SPECIES_MEOWSTIC_F",
+        "name": "Mega Special Attacker",
+        "ability": "ABILITY_TRACE",
+        "item": "ITEM_NONE",
+        "required_item": "ITEM_MEOWSTICITE",
+    },
+    ("SPECIES_DRAMPA", "Special Attacker"): {
+        "name": "Mega Special Attacker",
+        "moves": ["MOVE_PROTECT", "MOVE_HYPER_VOICE", "MOVE_EARTH_POWER", "MOVE_DRAGON_PULSE"],
+        "item": "ITEM_NONE",
+        "required_item": "ITEM_DRAMPANITE",
+    },
+}
+
+
+def apply_audited_set_override(entry: dict) -> dict:
+    changes = AUDITED_SET_FIELD_OVERRIDES.get((entry["species"], entry["name"]))
+    if changes is None:
+        return entry
+    result = {**entry, **changes}
+    result["audit_note"] = "Emerald Champions executable set-coherence review"
+    return result
 
 
 def git_json(path: str) -> dict:
@@ -443,9 +626,9 @@ def infer_stat_points(nature: str, moves: list[str], role: str) -> list[int]:
     trick_room = "TRICK_ROOM" in text or "TRICK ROOM" in text or nature in {"NATURE_BRAVE", "NATURE_QUIET"}
     physical, special = count_damage_bias(moves)
 
-    if nature in PHYSICAL_WALL_NATURES or any(word in text for word in ("PHYSICAL WALL", "PHYSICALLY DEFENSIVE")):
+    if nature in PHYSICAL_WALL_NATURES or re.search(r"\bPHYSICAL WALL\b", text) or "PHYSICALLY DEFENSIVE" in text:
         return [32, 0, 32, 0, 2, 0]
-    if nature in SPECIAL_WALL_NATURES or any(word in text for word in ("SPECIAL WALL", "SPECIALLY DEFENSIVE")):
+    if nature in SPECIAL_WALL_NATURES or re.search(r"\bSPECIAL WALL\b", text) or "SPECIALLY DEFENSIVE" in text:
         return [32, 0, 2, 0, 32, 0]
     if any(word in text for word in ("MIXED WALL", "BULKY SUPPORT", "REDIRECTION", "PERISH", "TRICK ROOM SETTER")):
         return [32, 0, 16, 0, 18, 0]
@@ -537,12 +720,16 @@ def normalize_handbook_set(
     role = source["role"].split(" — ", 1)[0]
     item = item_map[showdown_id(source["item"])]
     required_item = item if "Mega" in source["role"] and item != "ITEM_EVIOLITE" else "ITEM_NONE"
+    ability = ability_map[showdown_id(source["ability"])]
     return {
         "species": species,
         "name": shorten_name(role),
         "moves": moves,
         "nature": nature,
-        "ability": normalize_ability(species, ability_map[showdown_id(source["ability"])]),
+        # A Mega role records the transformed Ability, which need not be legal
+        # on the base species.  Ordinary roles still use the compatibility
+        # aliases needed by the current base-species tables.
+        "ability": ability if required_item != "ITEM_NONE" else normalize_ability(species, ability),
         "item": "ITEM_NONE" if required_item != "ITEM_NONE" else item,
         "required_item": required_item,
         "stat_points": infer_stat_points(nature, moves, role),
@@ -591,6 +778,83 @@ def handbook_supplements(present_species: set[str]) -> tuple[list[dict], list[di
         )
         present_species.add(species)
 
+    return defaults, alternatives
+
+
+def handbook_mega_roles() -> list[dict]:
+    """Return every ladder-backed Mega role that the current engine supports."""
+    handbook = git_json(HANDBOOK_SOURCE)
+    move_map = constant_id_map(ROOT / "include/constants/moves.h", "MOVE_")
+    item_map = constant_id_map(ROOT / "include/constants/items.h", "ITEM_")
+    ability_map = constant_id_map(ROOT / "include/constants/abilities.h", "ABILITY_")
+    nature_map = constant_id_map(ROOT / "include/constants/pokemon.h", "NATURE_")
+    national_species = national_species_order()
+    form_changes = (ROOT / "src/data/pokemon/form_change_tables.h").read_text()
+    supported_items = set(re.findall(
+        r"FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM,\s*SPECIES_[A-Z0-9_]+,\s*(ITEM_[A-Z0-9_]+)",
+        form_changes,
+    ))
+    result: list[dict] = []
+
+    for source in handbook["sets"]:
+        if "Mega" not in source["role"]:
+            continue
+        role_suffix = source["role"].split("—", 1)[-1].strip()
+        species = HANDBOOK_MEGA_BASE_ROLES.get(
+            role_suffix,
+            national_species[source["national_dex"]],
+        )
+        entry = normalize_handbook_set(
+            source,
+            species,
+            move_map,
+            item_map,
+            ability_map,
+            nature_map,
+        )
+        assert entry["required_item"] in supported_items, (
+            species,
+            entry["required_item"],
+            source["role"],
+        )
+        result.append(entry)
+
+    assert len(result) == 75, len(result)
+    assert len({(entry["species"], entry["required_item"]) for entry in result}) == len(result)
+    return result
+
+
+def merge_handbook_mega_roles(
+    defaults: list[dict], alternatives: list[dict]
+) -> tuple[list[dict], list[dict]]:
+    """Replace adapted legacy Mega rows and append every missing Mega role."""
+    mega_roles = handbook_mega_roles()
+    default_index = {
+        (entry["species"], entry["required_item"]): index
+        for index, entry in enumerate(defaults)
+        if entry["required_item"] != "ITEM_NONE"
+    }
+    alternative_index = {
+        (entry["species"], entry["required_item"]): index
+        for index, entry in enumerate(alternatives)
+        if entry["required_item"] != "ITEM_NONE"
+    }
+
+    for entry in mega_roles:
+        key = (entry["species"], entry["required_item"])
+        if key in default_index:
+            defaults[default_index[key]] = entry
+        elif key in alternative_index:
+            alternatives[alternative_index[key]] = entry
+        else:
+            alternative_index[key] = len(alternatives)
+            alternatives.append(entry)
+
+    for entry in CUSTOM_MEGA_ROLES:
+        key = (entry["species"], entry["required_item"])
+        assert key not in default_index and key not in alternative_index, key
+        alternative_index[key] = len(alternatives)
+        alternatives.append(entry)
     return defaults, alternatives
 
 
@@ -673,6 +937,22 @@ def write_c(defaults: list[dict], alternatives: list[dict]) -> None:
     C_OUTPUT.write_text("\n".join(lines))
 
 
+def write_move_access_review_c() -> None:
+    review = json.loads(MOVE_ACCESS_REVIEW.read_text())
+    retained = [row for row in review["assignments"] if row["action"] != "replace"]
+    assert len(review["assignments"]) == 72
+    assert len(retained) == 65
+    lines = [
+        "// Generated by scripts/generate_emerald_champions_battle_sets.py. Do not edit by hand.",
+    ]
+    lines.extend(
+        f'    {{{row["species"]}, {row["move"]}}},'
+        for row in retained
+    )
+    lines.append("")
+    MOVE_ACCESS_C_OUTPUT.write_text("\n".join(lines))
+
+
 def main() -> None:
     default_source = git_json(DEFAULT_SOURCE)
     alternative_source = git_json(ALTERNATIVE_SOURCE)
@@ -696,6 +976,15 @@ def main() -> None:
         if entry["species"] in default_species
     )
     raw_alternatives.extend(handbook_alternatives)
+    raw_alternatives = [
+        SUPPLEMENTAL_ALTERNATIVE_OVERRIDES.get(
+            (entry["species"], entry["name"]), entry
+        )
+        for entry in raw_alternatives
+    ]
+    defaults = [apply_audited_set_override(entry) for entry in defaults]
+    raw_alternatives = [apply_audited_set_override(entry) for entry in raw_alternatives]
+    defaults, raw_alternatives = merge_handbook_mega_roles(defaults, raw_alternatives)
     alternatives_by_species: dict[str, list[dict]] = {}
     for entry in raw_alternatives:
         alternatives_by_species.setdefault(entry["species"], []).append(entry)
@@ -724,6 +1013,7 @@ def main() -> None:
     }
     JSON_OUTPUT.write_text(json.dumps(output, indent=2, ensure_ascii=False) + "\n")
     write_c(defaults, alternatives)
+    write_move_access_review_c()
     print(f"defaults={len(defaults)}")
     print(f"alternatives={len(alternatives)}")
     print(f"sets={len(entries)}")

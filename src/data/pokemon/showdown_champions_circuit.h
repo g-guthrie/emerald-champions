@@ -3146,7 +3146,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
     },
     {
         .moves = {MOVE_DAZZLING_GLEAM, MOVE_SOLARBEAM, MOVE_SYNTHESIS, MOVE_WEATHER_BALL, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
-        .abilities = {ABILITY_LEAF_GUARD, ABILITY_NONE},
+        .abilities = {ABILITY_TRIAGE, ABILITY_NONE},
         .preferredType = TYPE_NONE,
         .role = SHOWDOWN_ROLE_BULKY_ATTACKER,
         .moveCount = 4,
@@ -3154,7 +3154,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
     },
     {
         .moves = {MOVE_DAZZLING_GLEAM, MOVE_PROTECT, MOVE_SOLARBEAM, MOVE_WEATHER_BALL, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
-        .abilities = {ABILITY_LEAF_GUARD, ABILITY_NONE},
+        .abilities = {ABILITY_TRIAGE, ABILITY_NONE},
         .preferredType = TYPE_NONE,
         .role = SHOWDOWN_ROLE_OFFENSIVE_PROTECT,
         .moveCount = 4,
@@ -3890,7 +3890,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
     },
     {
         .moves = {MOVE_HEADLONG_RUSH, MOVE_PROTECT, MOVE_ROCK_SLIDE, MOVE_SHELL_SMASH, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
-        .abilities = {ABILITY_SHELL_ARMOR, ABILITY_NONE},
+        .abilities = {ABILITY_SOLID_ROCK, ABILITY_NONE},
         .preferredType = TYPE_NONE,
         .role = SHOWDOWN_ROLE_SETUP_SWEEPER,
         .moveCount = 4,
@@ -4226,7 +4226,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
     },
     {
         .moves = {MOVE_AIR_SLASH, MOVE_ELECTROWEB, MOVE_PROTECT, MOVE_THUNDERBOLT, MOVE_VOLT_SWITCH, MOVE_WILL_O_WISP, MOVE_NONE, MOVE_NONE},
-        .abilities = {ABILITY_LEVITATE, ABILITY_NONE},
+        .abilities = {ABILITY_MOTOR_DRIVE, ABILITY_NONE},
         .preferredType = TYPE_NONE,
         .role = SHOWDOWN_ROLE_BULKY_ATTACKER,
         .moveCount = 6,
@@ -4834,7 +4834,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
     },
     {
         .moves = {MOVE_FIRE_BLAST, MOVE_HYPER_VOICE, MOVE_PROTECT, MOVE_SCORCHING_SANDS, MOVE_TAUNT, MOVE_WILL_O_WISP, MOVE_NONE, MOVE_NONE},
-        .abilities = {ABILITY_UNNERVE, ABILITY_NONE},
+        .abilities = {ABILITY_COMPETITIVE, ABILITY_NONE},
         .preferredType = TYPE_NONE,
         .role = SHOWDOWN_ROLE_OFFENSIVE_PROTECT,
         .moveCount = 6,
@@ -4842,7 +4842,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
     },
     {
         .moves = {MOVE_FIRE_BLAST, MOVE_HEAT_WAVE, MOVE_HYPER_VOICE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
-        .abilities = {ABILITY_UNNERVE, ABILITY_NONE},
+        .abilities = {ABILITY_COMPETITIVE, ABILITY_NONE},
         .preferredType = TYPE_NONE,
         .role = SHOWDOWN_ROLE_OFFENSIVE_PROTECT,
         .moveCount = 4,
@@ -5162,7 +5162,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
     },
     {
         .moves = {MOVE_DRACO_METEOR, MOVE_FIRE_BLAST, MOVE_POWER_WHIP, MOVE_PROTECT, MOVE_SCALD, MOVE_SLUDGE_BOMB, MOVE_NONE, MOVE_NONE},
-        .abilities = {ABILITY_SAP_SIPPER, ABILITY_NONE},
+        .abilities = {ABILITY_GOOEY, ABILITY_NONE},
         .preferredType = TYPE_FIRE,
         .role = SHOWDOWN_ROLE_BULKY_ATTACKER,
         .moveCount = 6,
@@ -5202,7 +5202,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
     },
     {
         .moves = {MOVE_POLTERGEIST, MOVE_POWER_WHIP, MOVE_PROTECT, MOVE_SHADOW_SNEAK, MOVE_WILL_O_WISP, MOVE_NONE, MOVE_NONE, MOVE_NONE},
-        .abilities = {ABILITY_FRISK, ABILITY_NONE},
+        .abilities = {ABILITY_INSOMNIA, ABILITY_NONE},
         .preferredType = TYPE_NONE,
         .role = SHOWDOWN_ROLE_OFFENSIVE_PROTECT,
         .moveCount = 5,
@@ -5210,7 +5210,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
     },
     {
         .moves = {MOVE_POLTERGEIST, MOVE_POWER_WHIP, MOVE_PROTECT, MOVE_SHADOW_SNEAK, MOVE_WILL_O_WISP, MOVE_NONE, MOVE_NONE, MOVE_NONE},
-        .abilities = {ABILITY_FRISK, ABILITY_NONE},
+        .abilities = {ABILITY_INSOMNIA, ABILITY_NONE},
         .preferredType = TYPE_NONE,
         .role = SHOWDOWN_ROLE_OFFENSIVE_PROTECT,
         .moveCount = 5,
@@ -5218,7 +5218,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
     },
     {
         .moves = {MOVE_POLTERGEIST, MOVE_POWER_WHIP, MOVE_PROTECT, MOVE_SHADOW_SNEAK, MOVE_TRICK_ROOM, MOVE_NONE, MOVE_NONE, MOVE_NONE},
-        .abilities = {ABILITY_FRISK, ABILITY_NONE},
+        .abilities = {ABILITY_INSOMNIA, ABILITY_NONE},
         .preferredType = TYPE_NONE,
         .role = SHOWDOWN_ROLE_OFFENSIVE_PROTECT,
         .moveCount = 5,
@@ -5226,7 +5226,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
     },
     {
         .moves = {MOVE_POLTERGEIST, MOVE_POWER_WHIP, MOVE_PROTECT, MOVE_SHADOW_SNEAK, MOVE_TRICK_ROOM, MOVE_NONE, MOVE_NONE, MOVE_NONE},
-        .abilities = {ABILITY_FRISK, ABILITY_NONE},
+        .abilities = {ABILITY_INSOMNIA, ABILITY_NONE},
         .preferredType = TYPE_NONE,
         .role = SHOWDOWN_ROLE_OFFENSIVE_PROTECT,
         .moveCount = 5,

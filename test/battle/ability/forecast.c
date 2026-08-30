@@ -350,7 +350,7 @@ SINGLE_BATTLE_TEST("Forecast transforms Castform when weather changes")
     }
 }
 
-SINGLE_BATTLE_TEST("Forecast keeps Castform's current form while its ability is suppressed")
+SINGLE_BATTLE_TEST("Forecast transforms Castform back to normal when its ability is suppressed")
 {
     GIVEN {
         ASSUME(B_WEATHER_FORMS >= GEN_5);
@@ -364,14 +364,15 @@ SINGLE_BATTLE_TEST("Forecast keeps Castform's current form while its ability is 
         ABILITY_POPUP(player, ABILITY_FORECAST);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
         MESSAGE("Castform transformed!");
-        // Forecast is suppressed, so Castform retains its current form.
-        NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
+        // back to normal
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
+        MESSAGE("Castform transformed!");
     } THEN {
-        EXPECT_EQ(player->species, SPECIES_CASTFORM_SUNNY);
+        EXPECT_EQ(player->species, SPECIES_CASTFORM_NORMAL);
     }
 }
 
-SINGLE_BATTLE_TEST("Forecast keeps Castform's current form after losing Forecast to Skill Swap")
+SINGLE_BATTLE_TEST("Forecast transforms Castform back after losing Forecast to Skill Swap")
 {
     GIVEN {
         ASSUME(B_WEATHER_FORMS >= GEN_5);
@@ -386,9 +387,10 @@ SINGLE_BATTLE_TEST("Forecast keeps Castform's current form after losing Forecast
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
         MESSAGE("Castform transformed!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SKILL_SWAP, opponent);
-        NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
+        MESSAGE("Castform transformed!");
     } THEN {
-        EXPECT_EQ(player->species, SPECIES_CASTFORM_SUNNY);
+        EXPECT_EQ(player->species, SPECIES_CASTFORM_NORMAL);
     }
 }
 

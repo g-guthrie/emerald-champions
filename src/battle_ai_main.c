@@ -1298,11 +1298,52 @@ void BattleAI_DoAIProcessing_PredictedSwitchin(struct AiThinkingStruct *aiThink,
 
 // AI Score Functions
 // AI_FLAG_CHECK_BAD_MOVE - decreases move scores
+static enum Move GetAIInstructedMove(
+    enum BattlerId battlerAtk,
+    enum BattlerId battlerDef,
+    enum Move instruct,
+    enum Move predictedMove,
+    struct AiLogicData *aiData)
+{
+    // A slower instructor can repeat the target's selected move after it acts;
+    // a faster instructor can only repeat a move completed on an earlier turn.
+    if (AI_IsSlower(battlerAtk, battlerDef, instruct, predictedMove, CONSIDER_PRIORITY))
+    {
+        if (IsTargetingPartner(battlerAtk, battlerDef))
+            return aiData->partnerMove;
+        return GetIncomingMove(battlerAtk, battlerDef, aiData);
+    }
+    return aiData->lastUsedMove[battlerDef];
+}
+
+static bool32 CanAIInstructTarget(enum BattlerId target, enum Move move)
+{
+    u32 moveIndex;
+
+    if (move == MOVE_NONE
+     || move == MOVE_UNAVAILABLE
+     || MoveHasAdditionalEffectSelf(move, MOVE_EFFECT_RECHARGE)
+     || IsMoveInstructBanned(move)
+     || IsZMove(move)
+     || IsMaxMove(move)
+     || GetActiveGimmick(target) == GIMMICK_DYNAMAX
+     || gBattleMons[target].volatiles.bideTurns != 0
+     || gBattleMons[target].volatiles.multipleTurns
+     || gBattleMons[target].volatiles.semiInvulnerable == STATE_SKY_DROP_TARGET
+     || gBattleMoveEffects[GetMoveEffect(move)].twoTurnEffect
+     || gBattleMons[target].volatiles.disabledMove == move)
+        return FALSE;
+
+    for (moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
+    {
+        if (gBattleMons[target].moves[moveIndex] == move)
+            return gBattleMons[target].pp[moveIndex] != 0;
+    }
+    return FALSE;
+}
+
 static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move, s32 score)
 {
-    if (IsTargetingPartner(battlerAtk, battlerDef))
-        return score;
-
     // move data
     enum BattleMoveEffects moveEffect = GetMoveEffect(move);
     enum MoveEffect nonVolatileStatus = GetMoveNonVolatileStatus(move);
@@ -1323,11 +1364,23 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
     SetTypeBeforeUsingMove(move, battlerAtk, abilityAtk, aiData->holdEffects[battlerAtk]);
     moveType = GetBattleMoveType(move);
 
+    // Most ally-targeting moves are scored entirely by doubles logic. Instruct
+    // is different: its target can be invalid, so validate it before granting
+    // the usual neutral partner score.
+    if (IsTargetingPartner(battlerAtk, battlerDef) && moveEffect != EFFECT_INSTRUCT)
+        return score;
+
     if (gBattleStruct->battlerState[battlerDef].commandingDondozo)
         RETURN_SCORE_MINUS(20);
 
     if (IsPowderMove(move) && !IsAffectedByPowderMove(battlerDef, aiData->abilities[battlerDef], aiData->holdEffects[battlerDef]))
-        RETURN_SCORE_MINUS(10);
+    {
+        // This move cannot affect the target. Returning a merely reduced score
+        // can accidentally make the immune target look *better* than a valid
+        // one when later, unrelated penalties (for example a Choice-locked
+        // status move with no reserve) apply only to the valid-target path.
+        return 0;
+    }
 
     // Don't use moves that miss against already semi-invulnerable targets when we move first.
     if (!CanBreakThroughSemiInvulnerablity(battlerAtk, battlerDef, aiData->abilities[battlerAtk], aiData->abilities[battlerDef], move)
@@ -2867,18 +2920,16 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
         break;
     case EFFECT_INSTRUCT:
         {
-            u32 instructedMove;
-            if (AI_IsSlower(battlerAtk, battlerDef, move, predictedMove, CONSIDER_PRIORITY))
-                instructedMove = incomingMove;
-            else
-                instructedMove = aiData->lastUsedMove[battlerDef];
+            enum Move instructedMove = GetAIInstructedMove(
+                battlerAtk,
+                battlerDef,
+                move,
+                predictedMove,
+                aiData
+            );
 
-            if (instructedMove == MOVE_NONE
-             || IsMoveInstructBanned(instructedMove)
-             || MoveHasAdditionalEffectSelf(instructedMove, MOVE_EFFECT_RECHARGE)
-             || IsZMove(instructedMove)
+            if (!CanAIInstructTarget(battlerDef, instructedMove)
              || (gLockedMoves[battlerDef] != MOVE_NONE && gLockedMoves[battlerDef] != MOVE_UNAVAILABLE)
-             || gBattleMons[battlerDef].volatiles.multipleTurns
              || PartnerMoveIsSameAsAttacker(GetPartnerBattler(battlerAtk), battlerDef, move, aiData->partnerMove))
             {
                 ADJUST_SCORE(-10);
@@ -3167,8 +3218,12 @@ static s32 AI_DoubleBattle(enum BattlerId battlerAtk, enum BattlerId battlerDef,
     bool32 hasPartner = HasPartner(battlerAtk);
     u32 friendlyFireThreshold = GetFriendlyFireKOThreshold(battlerAtk);
     u32 noOfHitsToKOPartner = GetNoOfHitsToKOBattler(battlerAtk, battlerAtkPartner, gAiThinkingStruct->movesetIndex, AI_ATTACKING_PARTNER, CONSIDER_ENDURE);
+    bool32 wouldPartnerFaintWithoutProtect = hasPartner && CanIndexMoveFaintTarget(battlerAtk, battlerAtkPartner, gAiThinkingStruct->movesetIndex, AI_ATTACKING_PARTNER);
     bool32 wouldPartnerFaint = hasPartner && CanIndexMoveFaintTarget(battlerAtk, battlerAtkPartner, gAiThinkingStruct->movesetIndex, AI_ATTACKING_PARTNER) && !partnerProtecting;
     bool32 isFriendlyFireOK = !wouldPartnerFaint && (noOfHitsToKOPartner == 0 || noOfHitsToKOPartner > friendlyFireThreshold);
+    bool32 shouldBeatUpPartner = effect == EFFECT_BEAT_UP
+                              && (ShouldBeatUpForJustified(battlerAtk, battlerAtkPartner, move, moveType, wouldPartnerFaintWithoutProtect, aiData)
+                               || ShouldBeatUpForRageFist(battlerAtk, battlerAtkPartner, move, wouldPartnerFaintWithoutProtect, aiData));
 
     // check what effect partner is using
     if (aiData->partnerMove != MOVE_NONE && hasPartner)
@@ -3255,6 +3310,14 @@ static s32 AI_DoubleBattle(enum BattlerId battlerAtk, enum BattlerId battlerDef,
             u32 partnerHitsToKOFoe1 = GetBestNoOfHitsToKO(battlerAtkPartner, GetBattlerLeftFoe(battlerAtk), AI_ATTACKING);
             u32 ownHitsToKOFoe2 = GetBestNoOfHitsToKO(battlerAtk, GetBattlerRightFoe(battlerAtk), AI_ATTACKING);
             u32 partnerHitsToKOFoe2 = GetBestNoOfHitsToKO(battlerAtkPartner, GetBattlerRightFoe(battlerAtk), AI_ATTACKING);
+            u32 ownDamageFoe1 = GetBestDmgFromBattler(battlerAtk, GetBattlerLeftFoe(battlerAtk), AI_ATTACKING);
+            u32 partnerDamageFoe1 = GetBestDmgFromBattler(battlerAtkPartner, GetBattlerLeftFoe(battlerAtk), AI_ATTACKING);
+            u32 ownDamageFoe2 = GetBestDmgFromBattler(battlerAtk, GetBattlerRightFoe(battlerAtk), AI_ATTACKING);
+            u32 partnerDamageFoe2 = GetBestDmgFromBattler(battlerAtkPartner, GetBattlerRightFoe(battlerAtk), AI_ATTACKING);
+            bool32 worthwhileForFoe1 = partnerDamageFoe1 < gBattleMons[GetBattlerLeftFoe(battlerAtk)].hp
+                                   && partnerDamageFoe1 > 2 * ownDamageFoe1;
+            bool32 worthwhileForFoe2 = partnerDamageFoe2 < gBattleMons[GetBattlerRightFoe(battlerAtk)].hp
+                                   && partnerDamageFoe2 > 2 * ownDamageFoe2;
 
             if (hasTwoOpponents)
             {
@@ -3264,9 +3327,15 @@ static s32 AI_DoubleBattle(enum BattlerId battlerAtk, enum BattlerId battlerDef,
                  && AI_IsSlower(battlerAtk, GetBattlerRightFoe(battlerAtk), move, incomingMove, DONT_CONSIDER_PRIORITY))
                     ADJUST_SCORE(GOOD_EFFECT);
 
-                if (ownHitsToKOFoe1 > partnerHitsToKOFoe1 && partnerHitsToKOFoe1 > 1
-                 && ownHitsToKOFoe2 > partnerHitsToKOFoe2 && partnerHitsToKOFoe2 > 1)
-                    ADJUST_SCORE(GOOD_EFFECT);
+                if ((ownHitsToKOFoe1 > partnerHitsToKOFoe1 && partnerHitsToKOFoe1 > 1
+                  && ownHitsToKOFoe2 > partnerHitsToKOFoe2 && partnerHitsToKOFoe2 > 1)
+                 || (worthwhileForFoe1 && worthwhileForFoe2))
+                {
+                    // Helping Hand adds half of the partner's spread damage to
+                    // each foe. When that clearly beats this user's best direct
+                    // contribution, it must outrank minor damage-side effects.
+                    ADJUST_SCORE(BEST_EFFECT + WEAK_EFFECT);
+                }
             }
             else if (IsBattlerAlive(GetBattlerLeftFoe(battlerAtk)))
             {
@@ -3275,8 +3344,9 @@ static s32 AI_DoubleBattle(enum BattlerId battlerAtk, enum BattlerId battlerDef,
                  && AI_IsSlower(battlerAtk, GetBattlerLeftFoe(battlerAtk), move, incomingMove, DONT_CONSIDER_PRIORITY))
                     ADJUST_SCORE(GOOD_EFFECT);
 
-                if (ownHitsToKOFoe1 > partnerHitsToKOFoe1 && partnerHitsToKOFoe1 > 1)
-                    ADJUST_SCORE(GOOD_EFFECT);
+                if ((ownHitsToKOFoe1 > partnerHitsToKOFoe1 && partnerHitsToKOFoe1 > 1)
+                 || worthwhileForFoe1)
+                    ADJUST_SCORE(BEST_EFFECT + WEAK_EFFECT);
             }
             else if (IsBattlerAlive(GetBattlerRightFoe(battlerAtk)))
             {
@@ -3285,8 +3355,9 @@ static s32 AI_DoubleBattle(enum BattlerId battlerAtk, enum BattlerId battlerDef,
                  && AI_IsSlower(battlerAtk, GetBattlerRightFoe(battlerAtk), move, incomingMove, DONT_CONSIDER_PRIORITY))
                     ADJUST_SCORE(GOOD_EFFECT);
 
-                if (ownHitsToKOFoe2 > partnerHitsToKOFoe2 && partnerHitsToKOFoe2 > 1)
-                    ADJUST_SCORE(GOOD_EFFECT);
+                if ((ownHitsToKOFoe2 > partnerHitsToKOFoe2 && partnerHitsToKOFoe2 > 1)
+                 || worthwhileForFoe2)
+                    ADJUST_SCORE(BEST_EFFECT + WEAK_EFFECT);
 
             }
         }
@@ -3728,7 +3799,11 @@ static s32 AI_DoubleBattle(enum BattlerId battlerAtk, enum BattlerId battlerDef,
         } // ability checks
 
         // attacker move effects specifically targeting partner
-        if (!partnerProtecting)
+        // If the partner is only *simulated* to Protect, still let a deliberate
+        // Beat Up activation win this battler's target choice. The partner is
+        // scored afterward and will then see the committed Beat Up target and
+        // avoid Protect. Otherwise both allies veto the intended combination.
+        if (!partnerProtecting || shouldBeatUpPartner)
         {
             if (wouldPartnerFaint)
             {
@@ -3797,8 +3872,7 @@ static s32 AI_DoubleBattle(enum BattlerId battlerAtk, enum BattlerId battlerDef,
                 }
                 break;
             case EFFECT_BEAT_UP:
-                if (ShouldBeatUpForJustified(battlerAtk, battlerAtkPartner, move, moveType, wouldPartnerFaint, aiData)
-                 || ShouldBeatUpForRageFist(battlerAtk, battlerAtkPartner, move, wouldPartnerFaint, aiData))
+                if (shouldBeatUpPartner)
                 {
                     if (isFriendlyFireOK)
                     {
@@ -3817,15 +3891,22 @@ static s32 AI_DoubleBattle(enum BattlerId battlerAtk, enum BattlerId battlerDef,
                 break;
             case EFFECT_INSTRUCT:
                 {
-                    enum Move instructedMove = aiData->lastUsedMove[battlerAtkPartner];
-                    if (AI_IsFaster(battlerAtk, battlerAtkPartner, move, predictedMove, CONSIDER_PRIORITY))
-                        instructedMove = aiData->partnerMove;
+                    enum Move instructedMove = GetAIInstructedMove(
+                        battlerAtk,
+                        battlerAtkPartner,
+                        move,
+                        predictedMove,
+                        aiData
+                    );
 
-                    if (instructedMove != MOVE_NONE
-                     && !IsBattleMoveStatus(instructedMove)
-                     && IsSpreadMove(AI_GetBattlerMoveTargetType(battlerAtkPartner, instructedMove)))
+                    if (CanAIInstructTarget(battlerAtkPartner, instructedMove)
+                     && ShouldInstructPartner(battlerAtkPartner, instructedMove))
                     {
-                        RETURN_SCORE_PLUS(WEAK_EFFECT);
+                        if (IsBattleMoveStatus(instructedMove))
+                            RETURN_SCORE_PLUS(WEAK_EFFECT);
+                        if (IsSpreadMove(AI_GetBattlerMoveTargetType(battlerAtkPartner, instructedMove)))
+                            RETURN_SCORE_PLUS(GOOD_EFFECT);
+                        RETURN_SCORE_PLUS(DECENT_EFFECT);
                     }
                 }
                 break;

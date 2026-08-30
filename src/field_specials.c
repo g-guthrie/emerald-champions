@@ -3,6 +3,7 @@
 #include "malloc.h"
 #include "battle.h"
 #include "battle_special.h"
+#include "caps.h"
 #include "cable_club.h"
 #include "data.h"
 #include "daycare.h"
@@ -26,6 +27,7 @@
 #include "item_menu.h"
 #include "link.h"
 #include "list_menu.h"
+#include "legendary_signs.h"
 #include "load_save.h"
 #include "mail.h"
 #include "main.h"
@@ -106,6 +108,62 @@ static EWRAM_DATA u8 sBattlePointsWindowId = 0;
 static EWRAM_DATA u8 sFrontierExchangeCorner_ItemIconWindowId = 0;
 static EWRAM_DATA u8 sPCBoxToSendMon = 0;
 static EWRAM_DATA u32 sBattleTowerMultiBattleTypeFlags = 0;
+
+struct EmeraldChampionsGameCornerPokemonPrize
+{
+    enum Species species;
+    u16 claimedFlag;
+};
+
+static const struct EmeraldChampionsGameCornerPokemonPrize sEmeraldChampionsGameCornerPokemonPrizes[] =
+{
+    {SPECIES_BULBASAUR,  FLAG_EC_STARTER_ARCHIVE_BULBASAUR},
+    {SPECIES_CHARMANDER, FLAG_EC_STARTER_ARCHIVE_CHARMANDER},
+    {SPECIES_SQUIRTLE,   FLAG_EC_STARTER_ARCHIVE_SQUIRTLE},
+    {SPECIES_CHIKORITA,  FLAG_EC_STARTER_ARCHIVE_CHIKORITA},
+    {SPECIES_CYNDAQUIL,  FLAG_EC_STARTER_ARCHIVE_CYNDAQUIL},
+    {SPECIES_TOTODILE,   FLAG_EC_STARTER_ARCHIVE_TOTODILE},
+    {SPECIES_TREECKO,    FLAG_EC_STARTER_ARCHIVE_TREECKO},
+    {SPECIES_TORCHIC,    FLAG_EC_STARTER_ARCHIVE_TORCHIC},
+    {SPECIES_MUDKIP,     FLAG_EC_STARTER_ARCHIVE_MUDKIP},
+    {SPECIES_TURTWIG,    FLAG_EC_STARTER_ARCHIVE_TURTWIG},
+    {SPECIES_CHIMCHAR,   FLAG_EC_STARTER_ARCHIVE_CHIMCHAR},
+    {SPECIES_PIPLUP,     FLAG_EC_STARTER_ARCHIVE_PIPLUP},
+    {SPECIES_SNIVY,      FLAG_EC_STARTER_ARCHIVE_SNIVY},
+    {SPECIES_TEPIG,      FLAG_EC_STARTER_ARCHIVE_TEPIG},
+    {SPECIES_OSHAWOTT,   FLAG_EC_STARTER_ARCHIVE_OSHAWOTT},
+    {SPECIES_CHESPIN,    FLAG_EC_STARTER_ARCHIVE_CHESPIN},
+    {SPECIES_FENNEKIN,   FLAG_EC_STARTER_ARCHIVE_FENNEKIN},
+    {SPECIES_FROAKIE,    FLAG_EC_STARTER_ARCHIVE_FROAKIE},
+    {SPECIES_ROWLET,     FLAG_EC_STARTER_ARCHIVE_ROWLET},
+    {SPECIES_LITTEN,     FLAG_EC_STARTER_ARCHIVE_LITTEN},
+    {SPECIES_POPPLIO,    FLAG_EC_STARTER_ARCHIVE_POPPLIO},
+    {SPECIES_GROOKEY,    FLAG_EC_STARTER_ARCHIVE_GROOKEY},
+    {SPECIES_SCORBUNNY,  FLAG_EC_STARTER_ARCHIVE_SCORBUNNY},
+    {SPECIES_SOBBLE,     FLAG_EC_STARTER_ARCHIVE_SOBBLE},
+    {SPECIES_SPRIGATITO, FLAG_EC_STARTER_ARCHIVE_SPRIGATITO},
+    {SPECIES_FUECOCO,    FLAG_EC_STARTER_ARCHIVE_FUECOCO},
+    {SPECIES_QUAXLY,     FLAG_EC_STARTER_ARCHIVE_QUAXLY},
+    {SPECIES_GENESECT,   FLAG_RECEIVED_GAME_CORNER_GENESECT},
+    {SPECIES_POIPOLE,    FLAG_RECEIVED_GAME_CORNER_POIPOLE},
+};
+
+static u16 GetEmeraldChampionsGameCornerPokemonPrizeFlag(enum Species species)
+{
+    for (u32 i = 0; i < ARRAY_COUNT(sEmeraldChampionsGameCornerPokemonPrizes); i++)
+    {
+        if (sEmeraldChampionsGameCornerPokemonPrizes[i].species == species)
+            return sEmeraldChampionsGameCornerPokemonPrizes[i].claimedFlag;
+    }
+    return 0;
+}
+
+static bool32 IsEmeraldChampionsInitialStarter(enum Species species)
+{
+    return species == GetStarterPokemonForGeneration(
+        VarGet(VAR_STARTER_MON),
+        VarGet(VAR_STARTER_GEN));
+}
 
 static const u16 sEmeraldChampionsFreeBattleItems[] =
 {
@@ -383,6 +441,96 @@ static EWRAM_DATA u8 sElevatorCurrentFloorWindowId = 0;
 static EWRAM_DATA u16 sElevatorScroll = 0;
 static EWRAM_DATA u16 sElevatorCursorPos = 0;
 static EWRAM_DATA u8 sBrailleTextCursorSpriteID = 0;
+
+void IsEmeraldChampionsGameCornerPokemonClaimed(void)
+{
+    u16 flag = GetEmeraldChampionsGameCornerPokemonPrizeFlag(gSpecialVar_0x8004);
+
+    gSpecialVar_Result = flag != 0
+                      && (FlagGet(flag) || IsEmeraldChampionsInitialStarter(gSpecialVar_0x8004));
+}
+
+static u8 TryGiveEmeraldChampionsPreparedPokemon(enum Species species, u8 level)
+{
+    struct Pokemon mon;
+    u32 emptyPartySlot;
+    u32 giveResult;
+
+    if (species <= SPECIES_NONE
+     || species >= NUM_SPECIES
+     || level == 0
+     || level > MAX_LEVEL
+     || GetEmeraldChampionsRawBattleSetCount(species) == 0)
+        return EC_GAME_CORNER_PRIZE_SET_FAILED;
+
+    CreateRandomMon(&mon, species, level);
+    if (ApplyEmeraldChampionsRandomNonMegaSet(&mon) != EC_BATTLE_SET_SUCCESS)
+        return EC_GAME_CORNER_PRIZE_SET_FAILED;
+
+    for (emptyPartySlot = 0; emptyPartySlot < PARTY_SIZE; emptyPartySlot++)
+    {
+        if (GetMonData(&gParties[B_TRAINER_PLAYER][emptyPartySlot], MON_DATA_SPECIES) == SPECIES_NONE)
+            break;
+    }
+    giveResult = GiveScriptedMonToPlayer(&mon, PARTY_SIZE);
+    if (giveResult == MON_CANT_GIVE)
+        return MON_CANT_GIVE;
+
+    if (giveResult == MON_GIVEN_TO_PARTY && emptyPartySlot < PARTY_SIZE)
+        RecordPlayerPartyMonHeldItemForRestoration(emptyPartySlot);
+    return giveResult;
+}
+
+static u8 TryGiveEmeraldChampionsGameCornerPokemon(enum Species species, u16 flag, bool32 rejectInitialStarter)
+{
+    u8 giveResult;
+
+    if (flag == 0
+     || FlagGet(flag)
+     || (rejectInitialStarter && IsEmeraldChampionsInitialStarter(species)))
+        return EC_GAME_CORNER_PRIZE_SET_FAILED;
+
+    giveResult = TryGiveEmeraldChampionsPreparedPokemon(
+        species,
+        min(30, GetCurrentLevelCap())
+    );
+    if (giveResult != MON_GIVEN_TO_PARTY && giveResult != MON_GIVEN_TO_PC)
+        return giveResult;
+
+    MarkLegendarySignCaughtBySpecies(species);
+    FlagSet(flag);
+    return giveResult;
+}
+
+void GiveEmeraldChampionsPreparedPokemon(void)
+{
+    gSpecialVar_Result = TryGiveEmeraldChampionsPreparedPokemon(
+        gSpecialVar_0x8004,
+        gSpecialVar_0x8005
+    );
+}
+
+void GiveEmeraldChampionsGameCornerPokemon(void)
+{
+    enum Species species = gSpecialVar_0x8004;
+
+    gSpecialVar_Result = TryGiveEmeraldChampionsGameCornerPokemon(
+        species,
+        GetEmeraldChampionsGameCornerPokemonPrizeFlag(species),
+        TRUE);
+}
+
+#if TESTING
+u8 GiveEmeraldChampionsGameCornerPokemonForTesting(enum Species species, u16 flag)
+{
+    return TryGiveEmeraldChampionsGameCornerPokemon(species, flag, FALSE);
+}
+
+u8 GiveEmeraldChampionsPreparedPokemonForTesting(enum Species species, u8 level)
+{
+    return TryGiveEmeraldChampionsPreparedPokemon(species, level);
+}
+#endif
 
 void OpenEmeraldChampionsBattleItemMart(void)
 {
@@ -1832,32 +1980,6 @@ bool8 FoundAbandonedShipRoom6Key(void)
     return TRUE;
 }
 
-bool8 LeadMonHasEffortRibbon(void)
-{
-    return GetMonData(&gParties[B_TRAINER_PLAYER][GetLeadMonIndex()], MON_DATA_EFFORT_RIBBON);
-}
-
-void GiveLeadMonEffortRibbon(void)
-{
-    bool8 ribbonSet;
-    struct Pokemon *leadMon;
-    IncrementGameStat(GAME_STAT_RECEIVED_RIBBONS);
-    FlagSet(FLAG_SYS_RIBBON_GET);
-    ribbonSet = TRUE;
-    leadMon = &gParties[B_TRAINER_PLAYER][GetLeadMonIndex()];
-    SetMonData(leadMon, MON_DATA_EFFORT_RIBBON, &ribbonSet);
-    if (GetRibbonCount(leadMon) > NUM_CUTIES_RIBBONS)
-        TryPutSpotTheCutiesOnAir(leadMon, MON_DATA_EFFORT_RIBBON);
-}
-
-bool8 Special_AreLeadMonEVsMaxedOut(void)
-{
-    if (GetMonEVCount(&gParties[B_TRAINER_PLAYER][GetLeadMonIndex()]) >= MAX_TOTAL_EVS)
-        return TRUE;
-
-    return FALSE;
-}
-
 u8 TryUpdateRusturfTunnelState(void)
 {
     if (!FlagGet(FLAG_RUSTURF_TUNNEL_OPENED)
@@ -1966,9 +2088,9 @@ static void StopCameraShake(u8 taskId)
 #undef tDelay
 #undef tVerticalPan
 
-bool8 FoundBlackGlasses(void)
+bool8 FoundRoute116DuskStone(void)
 {
-    return FlagGet(FLAG_HIDDEN_ITEM_ROUTE_116_BLACK_GLASSES);
+    return FlagGet(FLAG_HIDDEN_ITEM_ROUTE_116_DUSK_STONE);
 }
 
 void SetRoute119Weather(void)
@@ -2007,20 +2129,20 @@ void TryInitBattleTowerAwardManObjectEvent(void)
     //TryInitLocalObjectEvent(6);
 }
 
-u16 GetDaysUntilPacifidlogTMAvailable(void)
+u16 GetDaysUntilPacifidlogStoneAvailable(void)
 {
-    u16 tmReceivedDay = VarGet(VAR_PACIFIDLOG_TM_RECEIVED_DAY);
-    if (gLocalTime.days - tmReceivedDay >= 7)
+    u16 stoneReceivedDay = VarGet(VAR_PACIFIDLOG_STONE_RECEIVED_DAY);
+    if (gLocalTime.days - stoneReceivedDay >= 7)
         return 0;
     else if (gLocalTime.days < 0)
         return 8;
 
-    return 7 - (gLocalTime.days - tmReceivedDay);
+    return 7 - (gLocalTime.days - stoneReceivedDay);
 }
 
-u16 SetPacifidlogTMReceivedDay(void)
+u16 SetPacifidlogStoneReceivedDay(void)
 {
-    VarSet(VAR_PACIFIDLOG_TM_RECEIVED_DAY, gLocalTime.days);
+    VarSet(VAR_PACIFIDLOG_STONE_RECEIVED_DAY, gLocalTime.days);
     return gLocalTime.days;
 }
 
@@ -2416,45 +2538,6 @@ static void Task_MoveElevatorWindowLights(u8 taskId)
 #undef tDescending
 #undef tTotalMoves
 
-void BufferVarsForIVRater(void)
-{
-    u32 i;
-    u32 ivStorage[NUM_STATS];
-
-    struct BoxPokemon *boxmon = GetSelectedBoxMonFromPcOrParty();;
-
-    for (i = 0; i < NUM_STATS; i++)
-    {
-       ivStorage[i] = GetBoxMonData(boxmon, MON_DATA_HP_IV + i);
-    }
-
-    gSpecialVar_0x8005 = 0;
-
-    for (i = 0; i < NUM_STATS; i++)
-        gSpecialVar_0x8005 += ivStorage[i];
-
-    gSpecialVar_0x8006 = 0;
-    gSpecialVar_0x8007 = ivStorage[STAT_HP];
-
-    for (i = 1; i < NUM_STATS; i++)
-    {
-        if (ivStorage[gSpecialVar_0x8006] < ivStorage[i])
-        {
-            gSpecialVar_0x8006 = i;
-            gSpecialVar_0x8007 = ivStorage[i];
-        }
-        else if (ivStorage[gSpecialVar_0x8006] == ivStorage[i])
-        {
-            u16 randomNumber = Random();
-            if (randomNumber & 1)
-            {
-                gSpecialVar_0x8006 = i;
-                gSpecialVar_0x8007 = ivStorage[i];
-            }
-        }
-    }
-}
-
 bool8 UsedPokemonCenterWarp(void)
 {
     static const u16 sPokemonCenters[] =
@@ -2761,7 +2844,7 @@ void ShowScrollableMultichoice(void)
         task->tKeepOpenAfterSelect = FALSE;
         task->tTaskId = taskId;
         break;
-    case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR:
+    case SCROLL_MULTI_BF_EXCHANGE_CORNER_SUPPLY_VENDOR:
         task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
         task->tNumItems = 7;
         task->tLeft = 14;
@@ -2771,7 +2854,7 @@ void ShowScrollableMultichoice(void)
         task->tKeepOpenAfterSelect = FALSE;
         task->tTaskId = taskId;
         break;
-    case SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR:
+    case SCROLL_MULTI_BF_EXCHANGE_CORNER_EVOLUTION_VENDOR:
         task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
         task->tNumItems = 10;
         task->tLeft = 14;
@@ -2939,7 +3022,7 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         COMPOUND_STRING("BLASTOISE DOLL{CLEAR_TO 88}256BP"),
         gText_Exit
     },
-    [SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR] =
+    [SCROLL_MULTI_BF_EXCHANGE_CORNER_SUPPLY_VENDOR] =
     {
         COMPOUND_STRING("PP UP{CLEAR_TO 100}4BP"),
         COMPOUND_STRING("PP MAX{CLEAR_TO 94}12BP"),
@@ -2949,7 +3032,7 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         COMPOUND_STRING("BEAST BALL{CLEAR_TO 100}8BP"),
         gText_Exit
     },
-    [SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR] =
+    [SCROLL_MULTI_BF_EXCHANGE_CORNER_EVOLUTION_VENDOR] =
     {
         COMPOUND_STRING("LINKING CORD{CLEAR_TO 100}8BP"),
         COMPOUND_STRING("PROTECTOR{CLEAR_TO 94}12BP"),
@@ -2968,13 +3051,13 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         COMPOUND_STRING("ENERGY ROOT{CLEAR_TO 114}{FONT_SMALL}80"),
         COMPOUND_STRING("HEAL POWDER{CLEAR_TO 114}{FONT_SMALL}50"),
         COMPOUND_STRING("REVIVAL HERB{CLEAR_TO 108}{FONT_SMALL}300"),
-        COMPOUND_STRING("PROTEIN{CLEAR_TO 99}{FONT_SMALL}1,000"),
-        COMPOUND_STRING("IRON{CLEAR_TO 99}{FONT_SMALL}1,000"),
-        COMPOUND_STRING("CARBOS{CLEAR_TO 99}{FONT_SMALL}1,000"),
-        COMPOUND_STRING("CALCIUM{CLEAR_TO 99}{FONT_SMALL}1,000"),
-        COMPOUND_STRING("ZINC{CLEAR_TO 99}{FONT_SMALL}1,000"),
-        COMPOUND_STRING("HP UP{CLEAR_TO 99}{FONT_SMALL}1,000"),
+        COMPOUND_STRING("ETHER{CLEAR_TO 99}{FONT_SMALL}500"),
+        COMPOUND_STRING("MAX ETHER{CLEAR_TO 99}{FONT_SMALL}1,000"),
+        COMPOUND_STRING("ELIXIR{CLEAR_TO 99}{FONT_SMALL}1,500"),
+        COMPOUND_STRING("MAX ELIXIR{CLEAR_TO 99}{FONT_SMALL}3,000"),
         COMPOUND_STRING("PP UP{CLEAR_TO 99}{FONT_SMALL}3,000"),
+        COMPOUND_STRING("PP MAX{CLEAR_TO 99}{FONT_SMALL}9,000"),
+        COMPOUND_STRING("SACRED ASH{CLEAR_TO 99}{FONT_SMALL}12,000"),
         gText_Exit
     },
     [SCROLL_MULTI_BF_RECEPTIONIST] =
@@ -3504,7 +3587,7 @@ static void FillFrontierExchangeCornerWindowAndItemIcon(enum ScrollMulti menu, u
 {
     #include "data/battle_frontier/battle_frontier_exchange_corner.h"
 
-    if (menu >= SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_1 && menu <= SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR)
+    if (menu >= SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_1 && menu <= SCROLL_MULTI_BF_EXCHANGE_CORNER_EVOLUTION_VENDOR)
     {
         FillWindowPixelRect(0, PIXEL_FILL(1), 0, 0, 216, 32);
         switch (menu)
@@ -3535,13 +3618,13 @@ static void FillFrontierExchangeCornerWindowAndItemIcon(enum ScrollMulti menu, u
                 sScrollableMultichoice_ItemSpriteId = AddDecorationIconObject(sFrontierExchangeCorner_Decor2[selection], 33, 88, 0, TAG_ITEM_ICON, TAG_ITEM_ICON);
             }
             break;
-        case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR:
-            AddTextPrinterParameterized2(0, FONT_NORMAL, sFrontierExchangeCorner_VitaminsDescriptions[selection], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
-            ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_Vitamins[selection]);
+        case SCROLL_MULTI_BF_EXCHANGE_CORNER_SUPPLY_VENDOR:
+            AddTextPrinterParameterized2(0, FONT_NORMAL, sFrontierExchangeCorner_SupplyDescriptions[selection], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+            ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_Supplies[selection]);
             break;
-        case SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR:
-            AddTextPrinterParameterized2(0, FONT_NORMAL, sFrontierExchangeCorner_HoldItemsDescriptions[selection], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
-            ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_HoldItems[selection]);
+        case SCROLL_MULTI_BF_EXCHANGE_CORNER_EVOLUTION_VENDOR:
+            AddTextPrinterParameterized2(0, FONT_NORMAL, sFrontierExchangeCorner_EvolutionItemDescriptions[selection], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+            ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_EvolutionItems[selection]);
             break;
         default:
             break;
@@ -3571,8 +3654,8 @@ static void HideFrontierExchangeCornerItemIcon(enum ScrollMulti menu, u16 unused
         {
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_1:
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2:
-        case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR:
-        case SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR:
+        case SCROLL_MULTI_BF_EXCHANGE_CORNER_SUPPLY_VENDOR:
+        case SCROLL_MULTI_BF_EXCHANGE_CORNER_EVOLUTION_VENDOR:
             // This makes sure deleting the icon will not clear palettes in use by object events
             FieldEffectFreeGraphicsResources(&gSprites[sScrollableMultichoice_ItemSpriteId]);
             break;

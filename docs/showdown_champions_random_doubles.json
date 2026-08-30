@@ -7,7 +7,18 @@
   "license": "MIT; copyright 2011-2026 Guangcong Luo and other contributors",
   "policy": {
     "runtime": "teams and moves are selected on demand in the GBA ROM",
-    "adaptations": "Circuit level escalation, Emerald AI, Mega-only selectable gimmick"
+    "adaptations": "Circuit level escalation, Emerald AI, Mega-only selectable gimmick",
+    "ability_overrides": {
+      "SPECIES_GOODRA/ABILITY_SAP_SIPPER": "ABILITY_GOOEY",
+      "SPECIES_GOURGEIST/ABILITY_FRISK": "ABILITY_INSOMNIA",
+      "SPECIES_GOURGEIST_LARGE/ABILITY_FRISK": "ABILITY_INSOMNIA",
+      "SPECIES_GOURGEIST_SMALL/ABILITY_FRISK": "ABILITY_INSOMNIA",
+      "SPECIES_GOURGEIST_SUPER/ABILITY_FRISK": "ABILITY_INSOMNIA",
+      "SPECIES_MEGANIUM/ABILITY_LEAF_GUARD": "ABILITY_TRIAGE",
+      "SPECIES_PYROAR/ABILITY_UNNERVE": "ABILITY_COMPETITIVE",
+      "SPECIES_ROTOM_FAN/ABILITY_LEVITATE": "ABILITY_MOTOR_DRIVE",
+      "SPECIES_TORTERRA/ABILITY_SHELL_ARMOR": "ABILITY_SOLID_ROCK"
+    }
   },
   "variant_count": 311,
   "template_count": 444,
@@ -3987,7 +3998,7 @@
         "MOVE_WEATHER_BALL"
       ],
       "abilities": [
-        "ABILITY_LEAF_GUARD"
+        "ABILITY_TRIAGE"
       ],
       "preferred_type": "TYPE_NONE"
     },
@@ -4000,7 +4011,7 @@
         "MOVE_WEATHER_BALL"
       ],
       "abilities": [
-        "ABILITY_LEAF_GUARD"
+        "ABILITY_TRIAGE"
       ],
       "preferred_type": "TYPE_NONE"
     },
@@ -5262,7 +5273,7 @@
         "MOVE_SHELL_SMASH"
       ],
       "abilities": [
-        "ABILITY_SHELL_ARMOR"
+        "ABILITY_SOLID_ROCK"
       ],
       "preferred_type": "TYPE_NONE"
     },
@@ -5846,7 +5857,7 @@
         "MOVE_WILL_O_WISP"
       ],
       "abilities": [
-        "ABILITY_LEVITATE"
+        "ABILITY_MOTOR_DRIVE"
       ],
       "preferred_type": "TYPE_NONE"
     },
@@ -6903,7 +6914,7 @@
         "MOVE_WILL_O_WISP"
       ],
       "abilities": [
-        "ABILITY_UNNERVE"
+        "ABILITY_COMPETITIVE"
       ],
       "preferred_type": "TYPE_NONE"
     },
@@ -6916,7 +6927,7 @@
         "MOVE_PROTECT"
       ],
       "abilities": [
-        "ABILITY_UNNERVE"
+        "ABILITY_COMPETITIVE"
       ],
       "preferred_type": "TYPE_NONE"
     },
@@ -7459,7 +7470,7 @@
         "MOVE_SLUDGE_BOMB"
       ],
       "abilities": [
-        "ABILITY_SAP_SIPPER"
+        "ABILITY_GOOEY"
       ],
       "preferred_type": "TYPE_FIRE"
     },
@@ -7526,7 +7537,7 @@
         "MOVE_WILL_O_WISP"
       ],
       "abilities": [
-        "ABILITY_FRISK"
+        "ABILITY_INSOMNIA"
       ],
       "preferred_type": "TYPE_NONE"
     },
@@ -7540,7 +7551,7 @@
         "MOVE_WILL_O_WISP"
       ],
       "abilities": [
-        "ABILITY_FRISK"
+        "ABILITY_INSOMNIA"
       ],
       "preferred_type": "TYPE_NONE"
     },
@@ -7554,7 +7565,7 @@
         "MOVE_TRICK_ROOM"
       ],
       "abilities": [
-        "ABILITY_FRISK"
+        "ABILITY_INSOMNIA"
       ],
       "preferred_type": "TYPE_NONE"
     },
@@ -7568,7 +7579,7 @@
         "MOVE_TRICK_ROOM"
       ],
       "abilities": [
-        "ABILITY_FRISK"
+        "ABILITY_INSOMNIA"
       ],
       "preferred_type": "TYPE_NONE"
     },

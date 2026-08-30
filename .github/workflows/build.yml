@@ -15,16 +15,11 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  GAME_VERSION: EMERALD
-  GAME_REVISION: 0
-  GAME_LANGUAGE: ENGLISH
-  MODERN: 1
-  COMPARE: 0
   UNUSED_ERROR: 1
   DEPRECATED_ERROR: 1
 
 jobs:
-  # Keep this job name stable: repository branch protection requires `build`.
+  # Keep this job name stable so it can be selected if branch protection is enabled.
   build:
     name: build
     runs-on: ubuntu-24.04
@@ -32,7 +27,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           fetch-depth: 1
 
@@ -48,7 +43,7 @@ jobs:
             python3
 
       - name: Cache native build tools
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: |
             tools/bin2c/bin2c
@@ -75,31 +70,11 @@ jobs:
       - name: Verify campaign, generated data, and ROM layout
         run: python3 scripts/verify_emerald_champions_release.py
 
-      - name: Headless ROM boot smoke
+      - name: ROM entrypoint smoke (first VBlank)
         run: tools/mgba/mgba-rom-test -l15 -ClogLevel.gba.dma=16 -S 5 pokeemerald-release.gba
 
-      - name: Run Emerald Champions runtime gates
-        shell: bash
-        run: |
-          set -euo pipefail
-
-          run_tests() {
-            local filter="$1"
-            rm -f pokeemerald-test.elf pokeemerald-test-headless.elf
-            make -j"$(nproc)" check TESTS="$filter"
-          }
-
-          run_tests '*Champions'
-          run_tests '*Item descriptions fit on Bag and Shop Screen*'
-          run_tests '*Eggs safely inherit*'
-          run_tests 'test/upstream_critical_fixes.c'
-          run_tests 'Commander'
-          run_tests 'test/battle/ability/forecast.c'
-          run_tests 'test/battle/ability/flower_gift.c'
-          run_tests '*Simultaneous manual switches*'
-          run_tests '*transforms into a mon with Insomnia*'
-          run_tests 'test/save.c'
-          run_tests 'test/battle/ai/ai_doubles.c'
+      - name: Build once and run curated runtime gates
+        run: python3 scripts/run_emerald_champions_runtime_gates.py --jobs "$(nproc)"
 
       - name: Report ROM identity
         run: |

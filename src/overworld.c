@@ -34,6 +34,7 @@
 #include "item.h"
 #include "item_icon.h"
 #include "line_break.h"
+#include "legendary_signs.h"
 #include "link.h"
 #include "link_rfu.h"
 #include "load_save.h"
@@ -2154,6 +2155,283 @@ void MigrateEmeraldChampionsLinkingCord(void)
         RemoveBagItem(ITEM_LINKING_CORD, keyItemCount - 1);
 }
 
+struct EmeraldChampionsFlagRange
+{
+    u16 first;
+    u16 last;
+};
+
+struct EmeraldChampionsPhysicalSignFlag
+{
+    enum LegendarySignId signId;
+    u16 flag;
+    bool8 hiddenUntilUnlocked;
+};
+
+STATIC_ASSERT(LEGENDARY_SIGN_ZYGARDE == 52, LegacyLegendarySignPrefixChanged);
+
+static const u16 sEmeraldChampionsSignStateVars[] =
+{
+    VAR_LEGENDARY_SIGNS_UNLOCKED_0,
+    VAR_LEGENDARY_SIGNS_UNLOCKED_1,
+    VAR_LEGENDARY_SIGNS_UNLOCKED_2,
+    VAR_LEGENDARY_SIGNS_UNLOCKED_3,
+    VAR_LEGENDARY_SIGNS_UNLOCKED_4,
+    VAR_LEGENDARY_SIGNS_UNLOCKED_5,
+    VAR_LEGENDARY_SIGNS_CAUGHT_0,
+    VAR_LEGENDARY_SIGNS_CAUGHT_1,
+    VAR_LEGENDARY_SIGNS_CAUGHT_2,
+    VAR_LEGENDARY_SIGNS_CAUGHT_3,
+    VAR_LEGENDARY_SIGNS_CAUGHT_4,
+    VAR_LEGENDARY_SIGNS_CAUGHT_5,
+};
+
+static const struct EmeraldChampionsPhysicalSignFlag sEmeraldChampionsPhysicalSignFlags[] =
+{
+    {LEGENDARY_SIGN_CELEBI,    FLAG_EC_CAUGHT_CELEBI, FALSE},
+    {LEGENDARY_SIGN_CRESSELIA, FLAG_HIDE_LEGENDARY_SIGN_CRESSELIA, TRUE},
+    {LEGENDARY_SIGN_DARKRAI,   FLAG_HIDE_LEGENDARY_SIGN_DARKRAI, TRUE},
+    {LEGENDARY_SIGN_DIALGA,    FLAG_HIDE_LEGENDARY_SIGN_DIALGA, TRUE},
+    {LEGENDARY_SIGN_HOOPA,     FLAG_EC_CAUGHT_HOOPA, FALSE},
+    {LEGENDARY_SIGN_LANDORUS,  FLAG_EC_CAUGHT_LANDORUS, FALSE},
+    {LEGENDARY_SIGN_PALKIA,    FLAG_EC_CAUGHT_PALKIA, FALSE},
+    {LEGENDARY_SIGN_RESHIRAM,  FLAG_EC_CAUGHT_RESHIRAM, FALSE},
+    {LEGENDARY_SIGN_SHAYMIN,   FLAG_EC_CAUGHT_SHAYMIN, FALSE},
+    {LEGENDARY_SIGN_THUNDURUS, FLAG_EC_CAUGHT_THUNDURUS, FALSE},
+    {LEGENDARY_SIGN_TORNADUS,  FLAG_EC_CAUGHT_TORNADUS, FALSE},
+    {LEGENDARY_SIGN_VIRIZION,  FLAG_EC_CAUGHT_VIRIZION, FALSE},
+    {LEGENDARY_SIGN_ZYGARDE,   FLAG_EC_CAUGHT_ZYGARDE, FALSE},
+};
+
+static void ResetEmeraldChampionsSignState(void)
+{
+    for (u32 i = 0; i < ARRAY_COUNT(sEmeraldChampionsSignStateVars); i++)
+        VarSet(sEmeraldChampionsSignStateVars[i], 0);
+}
+
+static void SetEmeraldChampionsPhysicalSignFlags(void)
+{
+    for (u32 i = 0; i < ARRAY_COUNT(sEmeraldChampionsPhysicalSignFlags); i++)
+    {
+        const struct EmeraldChampionsPhysicalSignFlag *entry = &sEmeraldChampionsPhysicalSignFlags[i];
+        bool32 caught = IsLegendarySignCaught(entry->signId);
+        bool32 hide = caught;
+
+        if (entry->hiddenUntilUnlocked)
+            hide = caught || !IsLegendarySignUnlocked(entry->signId);
+        if (hide)
+            FlagSet(entry->flag);
+        else
+            FlagClear(entry->flag);
+    }
+}
+
+static void ClearEmeraldChampionsFlagRange(u16 first, u16 last)
+{
+    for (u16 flag = first; flag <= last; flag++)
+        FlagClear(flag);
+}
+
+static void ResetEmeraldChampionsCollidingFlags(void)
+{
+    static const struct EmeraldChampionsFlagRange sPickupAndClaimRanges[] =
+    {
+        {FLAG_EC_ITEM_PRISON_BOTTLE, FLAG_EC_RECEIVED_ROXANNE_AERODACTYLITE},
+        {FLAG_HIDDEN_ITEMS_START, FLAG_UNUSED_0x2BB},
+        {FLAG_ITEM_ROUTE_116_THUNDER_STONE, FLAG_ITEM_SAFARI_ZONE_SOUTH_EAST_BIG_PEARL},
+        {FLAG_EC_STARTER_ARCHIVE_BULBASAUR, FLAG_RECEIVED_GAME_CORNER_POIPOLE},
+    };
+    static const u16 sDirectClaimFlags[] =
+    {
+        FLAG_RECEIVED_RAZOR_CLAW,
+        FLAG_RECEIVED_CONTEST_PASS,
+        FLAG_RECEIVED_ROXANNE_OLD_AMBER,
+        FLAG_RECEIVED_BRAWLY_LUCARIONITE,
+        FLAG_RECEIVED_WATTSON_MANECTITE,
+        FLAG_RECEIVED_FLANNERY_CAMERUPTITE,
+        FLAG_RECEIVED_NORMAN_LOPUNNITE,
+        FLAG_RECEIVED_WINONA_ALTARIANITE,
+        FLAG_RECEIVED_TATE_LIZA_METAGROSSITE,
+        FLAG_RECEIVED_JUAN_GYARADOSITE,
+        FLAG_RECEIVED_WATTSON_ELECTIRIZER,
+        FLAG_RECEIVED_FORTREE_SACHET,
+        FLAG_RECEIVED_COZMO_DAWN_STONE,
+        FLAG_RECEIVED_DEWFORD_DEEP_SEA_SCALE,
+        FLAG_RECEIVED_ROUTE114_DRAGON_SCALE,
+        FLAG_RECEIVED_ROUTE123_SWEET_APPLE,
+        FLAG_RECEIVED_LILYCOVE_MOON_STONE,
+        FLAG_RECEIVED_VERDANTURF_SHINY_STONE,
+        FLAG_RECEIVED_LAVARIDGE_FIRE_STONE,
+        FLAG_RECEIVED_REPEAT_BALL,
+        FLAG_RECEIVED_SS_TIDAL_REAPER_CLOTH,
+        FLAG_RECEIVED_FOSSIL_MANIAC_METAL_COAT,
+        FLAG_RECEIVED_ROUTE104_LEAF_STONE,
+        FLAG_RECEIVED_FORTREE_DUBIOUS_DISC,
+        FLAG_RECEIVED_SLATEPORT_PRISM_SCALE,
+        FLAG_RECEIVED_MUSEUM_DEEP_SEA_TOOTH,
+        FLAG_RECEIVED_PIDGEOTITE_FROM_DEVON,
+        FLAG_RECEIVED_SCHOOL_SUN_STONE,
+        FLAG_RECEIVED_WINSTRATE_KANGASKHANITE,
+        FLAG_RECEIVED_ROUTE104_FLORIST_LEAF_STONE,
+        FLAG_RECEIVED_ROUTE109_WATER_STONE,
+        FLAG_RECEIVED_SHOAL_DEEP_SEA_SCALE,
+        FLAG_RECEIVED_DEWFORD_REAPER_CLOTH,
+        FLAG_RECEIVED_PETALBURG_WOODS_TART_APPLE,
+        FLAG_RECEIVED_BELDUM,
+        FLAG_RECEIVED_FANCLUB_STONE_THIS_WEEK,
+    };
+
+    for (u32 i = 0; i < ARRAY_COUNT(sPickupAndClaimRanges); i++)
+        ClearEmeraldChampionsFlagRange(sPickupAndClaimRanges[i].first, sPickupAndClaimRanges[i].last);
+    for (u32 i = 0; i < ARRAY_COUNT(sDirectClaimFlags); i++)
+        FlagClear(sDirectClaimFlags[i]);
+
+    FlagClear(FLAG_EC_CAUGHT_SHAYMIN);
+    FlagClear(FLAG_EC_CAUGHT_PALKIA);
+    FlagClear(FLAG_UNUSED_0x91E);
+    FlagClear(FLAG_UNUSED_0x91F);
+    VarSet(VAR_CHANSEY_NURSE_STATE, 0);
+}
+
+static void ResetEmeraldChampionsRepurposedTrainers(void)
+{
+    static const u16 sRepurposedRematchTrainerIds[] =
+    {
+        TRAINER_ARCHIE_SLATEPORT,
+        TRAINER_COURTNEY_METEOR_FALLS,
+        TRAINER_GRUNT_METEOR_FALLS,
+        TRAINER_LUCY_LAVARIDGE,
+        TRAINER_GRETA_SLATEPORT,
+        TRAINER_SPENSER_FORTREE,
+        TRAINER_MAGIKARP_GUY,
+        TRAINER_BUFFEL,
+        TRAINER_COURTNEY_MAGMA_HIDEOUT,
+        TRAINER_MATT_MT_PYRE,
+        TRAINER_COURTNEY_MOSSDEEP,
+        TRAINER_WALLACE_DOUBLES_LEGENDS,
+        TRAINER_LEAF_ALTERING_CAVE,
+        TRAINER_CYNTHIA_1,
+        TRAINER_ALANNAH,
+        TRAINER_MARTIN,
+        TRAINER_ROMAN,
+        TRAINER_ELMER,
+    };
+
+    for (u32 i = 0; i < ARRAY_COUNT(sRepurposedRematchTrainerIds); i++)
+        ClearTrainerFlag(sRepurposedRematchTrainerIds[i]);
+}
+
+static void MigrateEmeraldChampions81eState(void)
+{
+    static const u16 sLegacyUnlockedVars[] = {0x40F7, 0x40F8, 0x40F9, 0x40FA};
+    static const u16 sLegacyCaughtVars[] = {0x40FB, 0x40FC, 0x40FD, 0x40FE};
+    static const u16 sCurrentUnlockedVars[] =
+    {
+        VAR_LEGENDARY_SIGNS_UNLOCKED_0,
+        VAR_LEGENDARY_SIGNS_UNLOCKED_1,
+        VAR_LEGENDARY_SIGNS_UNLOCKED_2,
+        VAR_LEGENDARY_SIGNS_UNLOCKED_3,
+    };
+    static const u16 sCurrentCaughtVars[] =
+    {
+        VAR_LEGENDARY_SIGNS_CAUGHT_0,
+        VAR_LEGENDARY_SIGNS_CAUGHT_1,
+        VAR_LEGENDARY_SIGNS_CAUGHT_2,
+        VAR_LEGENDARY_SIGNS_CAUGHT_3,
+    };
+    u16 unlocked[ARRAY_COUNT(sLegacyUnlockedVars)];
+    u16 caught[ARRAY_COUNT(sLegacyCaughtVars)];
+    u16 totalWins = VarGet(0x40FF);
+    enum DifficultyLevel difficulty = DIFFICULTY_HARD;
+
+    for (u32 i = 0; i < ARRAY_COUNT(sLegacyUnlockedVars); i++)
+    {
+        unlocked[i] = VarGet(sLegacyUnlockedVars[i]);
+        caught[i] = VarGet(sLegacyCaughtVars[i]);
+    }
+    // The preserved 81e contract encoded Hard/Medium/Easy as 0/1/2 in the
+    // former text-speed field.
+    if (gSaveBlock2Ptr->optionsTextSpeed == 1)
+        difficulty = DIFFICULTY_NORMAL;
+    else if (gSaveBlock2Ptr->optionsTextSpeed == 2)
+        difficulty = DIFFICULTY_EASY;
+
+    ResetEmeraldChampionsCollidingFlags();
+    ResetEmeraldChampionsSignState();
+    // Only IDs 0-52 existed in 81e; never import garbage from the unused tail.
+    unlocked[3] &= 0x1F;
+    caught[3] &= 0x1F;
+    for (u32 i = 0; i < ARRAY_COUNT(sCurrentUnlockedVars); i++)
+    {
+        VarSet(sCurrentUnlockedVars[i], unlocked[i]);
+        VarSet(sCurrentCaughtVars[i], caught[i]);
+    }
+    SetCurrentDifficultyLevel(difficulty);
+    VarSet(VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, 0);
+    VarSet(VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS, totalWins);
+    VarSet(VAR_CHAMPIONS_CIRCUIT_ACTIVE, 0);
+    SetEmeraldChampionsPhysicalSignFlags();
+}
+
+static void ResetAmbiguousEmeraldChampionsState(void)
+{
+    ResetEmeraldChampionsCollidingFlags();
+    ResetEmeraldChampionsSignState();
+    ResetEmeraldChampionsRepurposedTrainers();
+    SetCurrentDifficultyLevel(DIFFICULTY_HARD);
+    VarSet(VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, 0);
+    VarSet(VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS, 0);
+    VarSet(VAR_CHAMPIONS_CIRCUIT_ACTIVE, 0);
+    SetEmeraldChampionsPhysicalSignFlags();
+}
+
+void MigrateEmeraldChampionsCoreState(void)
+{
+    u16 version = VarGet(VAR_EMERALD_CHAMPIONS_SAVE_VERSION);
+    bool32 legacyGymMarker;
+    bool32 legacyItemMarker;
+    bool32 legacyDifficultyMarker;
+    bool32 modernMarker;
+    bool32 completeLegacySignature;
+
+    // This dedicated version is authoritative. In particular, never trust the
+    // 0x4C5 flag first: 81e used that same bit for defeated Zygarde.
+    if (version == EMERALD_CHAMPIONS_SAVE_VERSION_CURRENT)
+        return;
+
+    legacyGymMarker = FlagGet(FLAG_UNUSED_0x91E);
+    legacyItemMarker = FlagGet(FLAG_UNUSED_0x91F);
+    legacyDifficultyMarker = FlagGet(FLAG_EC_CAUGHT_SHAYMIN);
+    modernMarker = FlagGet(FLAG_EC_BESPOKE_TRAINER_FLAGS_MIGRATED);
+    completeLegacySignature = legacyGymMarker && legacyItemMarker && legacyDifficultyMarker;
+
+    if (version == 0
+     && completeLegacySignature
+     && !modernMarker)
+    {
+        MigrateEmeraldChampions81eState();
+        ResetEmeraldChampionsRepurposedTrainers();
+    }
+    else if (version == 0
+          && modernMarker
+          && !legacyGymMarker
+          && !legacyItemMarker)
+    {
+        // Native e7 and later modern saves already use the current layout.
+        // Stamp the new version without touching difficulty, Signs, rewards,
+        // or Shaymin.
+        VarSet(VAR_EMERALD_CHAMPIONS_SAVE_VERSION, EMERALD_CHAMPIONS_SAVE_VERSION_CURRENT);
+        return;
+    }
+    else
+    {
+        ResetAmbiguousEmeraldChampionsState();
+    }
+
+    FlagSet(FLAG_EC_BESPOKE_TRAINER_FLAGS_MIGRATED);
+    VarSet(VAR_EMERALD_CHAMPIONS_SAVE_VERSION, EMERALD_CHAMPIONS_SAVE_VERSION_CURRENT);
+}
+
 void CB2_ContinueSavedGame(void)
 {
     u8 trainerHillMapId;
@@ -2164,50 +2442,7 @@ void CB2_ContinueSavedGame(void)
     if (gSaveFileStatus == SAVE_STATUS_ERROR)
         ResetWinStreaks();
 
-    if (!FlagGet(FLAG_EC_BESPOKE_TRAINER_FLAGS_MIGRATED))
-    {
-        static const u16 sRepurposedRematchTrainerIds[] =
-        {
-            TRAINER_ARCHIE_SLATEPORT,
-            TRAINER_COURTNEY_METEOR_FALLS,
-            TRAINER_GRUNT_METEOR_FALLS,
-            TRAINER_LUCY_LAVARIDGE,
-            TRAINER_GRETA_SLATEPORT,
-            TRAINER_SPENSER_FORTREE,
-            TRAINER_MAGIKARP_GUY,
-            TRAINER_BUFFEL,
-            TRAINER_COURTNEY_MAGMA_HIDEOUT,
-            TRAINER_MATT_MT_PYRE,
-            TRAINER_COURTNEY_MOSSDEEP,
-            TRAINER_WALLACE_DOUBLES_LEGENDS,
-            TRAINER_LEAF_ALTERING_CAVE,
-            TRAINER_CYNTHIA_1,
-            TRAINER_ALANNAH,
-            TRAINER_MARTIN,
-            TRAINER_ROMAN,
-            TRAINER_ELMER,
-        };
-        static const u16 sRepurposedRewardFlags[] =
-        {
-            FLAG_RECEIVED_WINSTRATE_KANGASKHANITE,
-            FLAG_EC_ITEM_MANOR_SABLENITE,
-            FLAG_EC_ITEM_EMBER_BLAZIKENITE,
-            FLAG_ITEM_SEAFLOOR_CAVERN_ROOM_9_TM_EARTHQUAKE,
-            FLAG_EC_ITEM_RUINS_STEELIXITE,
-            FLAG_EC_ITEM_SCORCHED_CHARIZARDITE_X,
-            FLAG_EC_ITEM_SEASPRAY_SLOWBRONITE,
-            FLAG_EC_ITEM_RUINS_BLACK_AUGURITE,
-        };
-
-        for (u32 i = 0; i < ARRAY_COUNT(sRepurposedRematchTrainerIds); i++)
-            ClearTrainerFlag(sRepurposedRematchTrainerIds[i]);
-        for (u32 i = 0; i < ARRAY_COUNT(sRepurposedRewardFlags); i++)
-            FlagClear(sRepurposedRewardFlags[i]);
-        if (GetCurrentDifficultyLevel() > DIFFICULTY_MAX)
-            SetCurrentDifficultyLevel(DIFFICULTY_HARD);
-        FlagSet(FLAG_EC_BESPOKE_TRAINER_FLAGS_MIGRATED);
-    }
-
+    MigrateEmeraldChampionsCoreState();
     MigrateEmeraldChampionsLinkingCord();
 
     LoadSaveblockMapHeader();

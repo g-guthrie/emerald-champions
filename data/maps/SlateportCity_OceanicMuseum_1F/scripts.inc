@@ -150,8 +150,8 @@ SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGrunt::
 	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_1F_Text_RememberMeTakeThis, MSGBOX_DEFAULT
 	giveitem ITEM_DEEP_SEA_TOOTH
-	goto_if_eq VAR_RESULT, 0, SlateportCity_OceanicMuseum_1F_EventScript_NoRoomForThief
-	setflag FLAG_RECEIVED_TM_THIEF
+	goto_if_eq VAR_RESULT, 0, SlateportCity_OceanicMuseum_1F_EventScript_NoRoomForDeepSeaTooth
+	setflag FLAG_RECEIVED_MUSEUM_DEEP_SEA_TOOTH
 	msgbox SlateportCity_OceanicMuseum_1F_Text_HopeINeverSeeYouAgain, MSGBOX_DEFAULT
 	closemessage
 	goto_if_eq VAR_FACING, DIR_NORTH, SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExitNorth
@@ -187,7 +187,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExited::
 	release
 	end
 
-SlateportCity_OceanicMuseum_1F_EventScript_NoRoomForThief::
+SlateportCity_OceanicMuseum_1F_EventScript_NoRoomForDeepSeaTooth::
 	msgbox SlateportCity_OceanicMuseum_1F_Text_YouHaveToTakeThis, MSGBOX_DEFAULT
 	release
 	end

@@ -27,6 +27,70 @@ Route110_EventScript_BeginCylcingRoadChallenge::
 	setvar VAR_CYCLING_CHALLENGE_STATE, 2
 	return
 
+.set EC_SIGN_THUNDURUS_ID, 39
+
+Route110_EventScript_Thundurus::
+	lock
+	faceplayer
+	setvar VAR_0x8004, EC_SIGN_THUNDURUS_ID
+	special TryUnlockSelectedLegendarySign
+	goto_if_eq VAR_RESULT, 0, Route110_EventScript_ThundurusDormant
+	goto_if_eq VAR_RESULT, 1, Route110_EventScript_ThundurusNeedsPartner
+	goto_if_eq VAR_RESULT, 4, Route110_EventScript_ThundurusCleanup
+	msgbox Route110_Text_ThundurusAwakens, MSGBOX_DEFAULT
+	waitse
+	playmoncry SPECIES_THUNDURUS, CRY_MODE_ENCOUNTER
+	delay 40
+	waitmoncry
+	setvar VAR_0x8004, EC_SIGN_THUNDURUS_ID
+	special CreateSelectedLegendarySignEncounter
+	setflag FLAG_SYS_CTRL_OBJ_DELETE
+	special BattleSetup_StartLegendaryBattle
+	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, Route110_EventScript_ThundurusCaught
+	msgbox Route110_Text_ThundurusRemains, MSGBOX_DEFAULT
+	release
+	end
+
+Route110_EventScript_ThundurusDormant::
+	msgbox Route110_Text_ThundurusDormant, MSGBOX_DEFAULT
+	release
+	end
+
+Route110_EventScript_ThundurusNeedsPartner::
+	msgbox Route110_Text_ThundurusNeedsPartner, MSGBOX_DEFAULT
+	release
+	end
+
+Route110_EventScript_ThundurusCaught::
+	setflag FLAG_EC_CAUGHT_THUNDURUS
+Route110_EventScript_ThundurusCleanup::
+	setflag FLAG_EC_CAUGHT_THUNDURUS
+	removeobject LOCALID_EC_THUNDURUS
+	release
+	end
+
+Route110_Text_ThundurusDormant:
+	.string "Thunder rolls around a silent\n"
+	.string "CHAMPION'S SIGN.\p"
+	.string "Its light is dormant. Hoenn's story\n"
+	.string "has not reached this storm.$"
+
+Route110_Text_ThundurusNeedsPartner:
+	.string "The SIGN sketches MANECTRIC beneath\n"
+	.string "a fork of lightning.\p"
+	.string "Bring that POKéMON's family here, and\n"
+	.string "the storm may answer.$"
+
+Route110_Text_ThundurusAwakens:
+	.string "The CHAMPION'S SIGN splits the air!\n"
+	.string "THUNDURUS answers the challenge!$"
+
+Route110_Text_ThundurusRemains:
+	.string "The SIGN still crackles. THUNDURUS\n"
+	.string "will accept another challenge.$"
+
 Route110_EventScript_AquaGrunt1::
 	lock
 	faceplayer
@@ -953,8 +1017,8 @@ Route110_Text_SeasideParkingSign:
 Route110_Text_MauvilleCitySign:
 	.string "ROUTE 110\n"
 	.string "{UP_ARROW} MAUVILLE CITY\p"
-	.string "A scorched note pairs this route's\n"
-	.string "lightning with MANECTRIC and RAICHU.$"
+	.string "A scorched note says MANECTRIC may\n"
+	.string "call a storm Champion after MAUVILLE.$"
 
 Route110_Text_TrainerTipsPrlzSleep:
 	.string "TRAINER TIPS\p"

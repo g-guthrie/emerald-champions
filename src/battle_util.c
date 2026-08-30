@@ -8760,11 +8760,6 @@ bool32 TryBattleFormChange(enum BattlerId battler, enum FormChanges method, enum
     {
         enum Species baseSpecies = GET_BASE_SPECIES_ID(gBattleMons[battler].species);
 
-        // Forecast's weather form persists while Forecast is suppressed or
-        // replaced. It is reconciled with the weather when Forecast returns.
-        if (baseSpecies == SPECIES_CASTFORM && ability != ABILITY_FORECAST)
-            return FALSE;
-
         // Flower Gift normally reverts without its Ability, except while the
         // Cherrim is Dynamaxed.
         if (baseSpecies == SPECIES_CHERRIM

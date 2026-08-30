@@ -149,59 +149,60 @@ Route116_EventScript_BrineyTrigger::
 	releaseall
 	end
 
-Route116_EventScript_GlassesMan::
+Route116_EventScript_DuskStoneSeeker::
 	lock
 	faceplayer
-	checkitem ITEM_BLACK_GLASSES
-	goto_if_eq VAR_RESULT, TRUE, Route116_EventScript_PlayerHasGlasses
-	specialvar VAR_RESULT, FoundBlackGlasses
-	goto_if_eq VAR_RESULT, TRUE, Route116_EventScript_FoundGlassesNotOnPlayer
-	msgbox Route116_Text_CanYouHelpMeFindGlasses, MSGBOX_DEFAULT
+	checkitem ITEM_DUSK_STONE
+	goto_if_eq VAR_RESULT, TRUE, Route116_EventScript_PlayerHasDuskStone
+	specialvar VAR_RESULT, FoundRoute116DuskStone
+	goto_if_eq VAR_RESULT, TRUE, Route116_EventScript_DuskStoneAlreadyUsed
+	msgbox Route116_Text_CanYouHelpMeFindDuskStone, MSGBOX_DEFAULT
 	release
 	end
 
-Route116_EventScript_FoundGlassesNotOnPlayer::
-	msgbox Route116_Text_CantFindGlassesNotHere, MSGBOX_DEFAULT
+Route116_EventScript_DuskStoneAlreadyUsed::
+	msgbox Route116_Text_DuskStoneAlreadyUsed, MSGBOX_DEFAULT
 	closemessage
-	goto Route116_EventScript_GlassesManExit
+	goto Route116_EventScript_DuskStoneSeekerExit
 	end
 
-Route116_EventScript_PlayerHasGlasses::
-	msgbox Route116_Text_CanYouHelpMeFindGlasses, MSGBOX_DEFAULT
-	msgbox Route116_Text_MayISeeThoseGlasses, MSGBOX_DEFAULT
-	specialvar VAR_RESULT, FoundBlackGlasses
-	goto_if_eq VAR_RESULT, TRUE, Route116_EventScript_FoundGlassesOnPlayer
-	msgbox Route116_Text_NotWhatImLookingFor, MSGBOX_DEFAULT
+Route116_EventScript_PlayerHasDuskStone::
+	msgbox Route116_Text_CanYouHelpMeFindDuskStone, MSGBOX_DEFAULT
+	msgbox Route116_Text_MayISeeThatDuskStone, MSGBOX_DEFAULT
+	specialvar VAR_RESULT, FoundRoute116DuskStone
+	goto_if_eq VAR_RESULT, TRUE, Route116_EventScript_DuskStoneFound
+	msgbox Route116_Text_DuskStoneNotYetFound, MSGBOX_DEFAULT
 	release
 	end
 
-Route116_EventScript_FoundGlassesOnPlayer::
-	msgbox Route116_Text_NotWhatImLookingForMaybeTheyArentHere, MSGBOX_DEFAULT
+Route116_EventScript_DuskStoneFound::
+	msgbox Route116_Text_DuskStoneIsYours, MSGBOX_DEFAULT
 	closemessage
-	goto Route116_EventScript_GlassesManExit
+	goto Route116_EventScript_DuskStoneSeekerExit
 	end
 
-Route116_EventScript_GlassesManExit::
+Route116_EventScript_DuskStoneSeekerExit::
 	delay 20
-	call_if_eq VAR_FACING, DIR_NORTH, Route116_EventScript_GlassesManExitNormal
-	call_if_eq VAR_FACING, DIR_SOUTH, Route116_EventScript_GlassesManExitNormal
-	call_if_eq VAR_FACING, DIR_WEST, Route116_EventScript_GlassesManExitNormal
-	call_if_eq VAR_FACING, DIR_EAST, Route116_EventScript_GlassesManExitEast
+	call_if_eq VAR_FACING, DIR_NORTH, Route116_EventScript_DuskStoneSeekerExitNormal
+	call_if_eq VAR_FACING, DIR_SOUTH, Route116_EventScript_DuskStoneSeekerExitNormal
+	call_if_eq VAR_FACING, DIR_WEST, Route116_EventScript_DuskStoneSeekerExitNormal
+	call_if_eq VAR_FACING, DIR_EAST, Route116_EventScript_DuskStoneSeekerExitEast
+	setflag FLAG_HIDE_ROUTE_116_DUSK_STONE_SEEKER
 	removeobject VAR_LAST_TALKED
 	release
 	end
 
-Route116_EventScript_GlassesManExitNormal::
-	applymovement VAR_LAST_TALKED, Route116_Movement_GlassesManExit
+Route116_EventScript_DuskStoneSeekerExitNormal::
+	applymovement VAR_LAST_TALKED, Route116_Movement_DuskStoneSeekerExit
 	waitmovement 0
 	return
 
-Route116_EventScript_GlassesManExitEast::
-	applymovement VAR_LAST_TALKED, Route116_Movement_GlassesManExitEast
+Route116_EventScript_DuskStoneSeekerExitEast::
+	applymovement VAR_LAST_TALKED, Route116_Movement_DuskStoneSeekerExitEast
 	waitmovement 0
 	return
 
-Route116_Movement_GlassesManExit:
+Route116_Movement_DuskStoneSeekerExit:
 	walk_left
 	walk_left
 	walk_left
@@ -213,7 +214,7 @@ Route116_Movement_GlassesManExit:
 	walk_left
 	step_end
 
-Route116_Movement_GlassesManExitEast:
+Route116_Movement_DuskStoneSeekerExitEast:
 	walk_up
 	walk_left
 	walk_left
@@ -414,30 +415,29 @@ Route116_Text_TokenOfAppreciation:
 	.string "a gift of a new kind of POKé BALL\l"
 	.string "for our most wonderful TRAINER!$"
 
-Route116_Text_CanYouHelpMeFindGlasses:
-	.string "I dropped my glasses…\n"
-	.string "Can you help me find them?$"
+Route116_Text_CanYouHelpMeFindDuskStone:
+	.string "I dropped a dark stone with a purple\n"
+	.string "gleam…\p"
+	.string "Can you help me find it?$"
 
-Route116_Text_MayISeeThoseGlasses:
-	.string "Those glasses!\n"
-	.string "May I see them for a second?$"
+Route116_Text_MayISeeThatDuskStone:
+	.string "That DUSK STONE!\n"
+	.string "May I see it for a second?$"
 
-Route116_Text_NotWhatImLookingForMaybeTheyArentHere:
-	.string "Hmm…\n"
-	.string "These are BLACKGLASSES.\l"
-	.string "They're not what I'm looking for…\p"
-	.string "Maybe my glasses aren't around\n"
-	.string "here…$"
+Route116_Text_DuskStoneIsYours:
+	.string "Hmm… Mine bore a crescent scratch.\n"
+	.string "This one is different.\p"
+	.string "It seems to have chosen you. Keep it--\n"
+	.string "some POKéMON evolve in its darkness.$"
 
-Route116_Text_CantFindGlassesNotHere:
-	.string "Hmm…\n"
-	.string "I can't find my glasses anywhere…\l"
-	.string "Maybe they're not around here…$"
+Route116_Text_DuskStoneAlreadyUsed:
+	.string "The purple gleam that was here is gone.\p"
+	.string "Perhaps a TRAINER found it and gave it\n"
+	.string "purpose. I'll search on.$"
 
-Route116_Text_NotWhatImLookingFor:
-	.string "Hmm…\n"
-	.string "These are BLACKGLASSES.\l"
-	.string "They're not what I'm looking for…$"
+Route116_Text_DuskStoneNotYetFound:
+	.string "A lovely DUSK STONE, but not the one\n"
+	.string "gleaming somewhere along this path.$"
 
 Route116_Text_RouteSignRustboro:
 	.string "ROUTE 116\n"
@@ -467,4 +467,3 @@ Route116_Text_TrainerTipsBagHasPockets:
 	.string "placed in the appropriate POCKETS.\p"
 	.string "No TRAINER can afford to be without\n"
 	.string "a BAG of their own.$"
-

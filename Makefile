@@ -240,6 +240,7 @@ LEARNSET_HELPERS_DIR := $(TOOLS_DIR)/learnset_helpers
 LEARNSET_HELPERS_DATA_DIR := $(LEARNSET_HELPERS_DIR)/porymoves_files
 LEARNSET_HELPERS_BUILD_DIR := $(LEARNSET_HELPERS_DIR)/build
 ALL_LEARNABLES_JSON := $(DATA_SRC_SUBDIR)/pokemon/all_learnables.json
+MOVE_ACCESS_REVIEW_JSON := docs/emerald_champions_move_access_review.json
 ALL_TUTORS_JSON := $(LEARNSET_HELPERS_BUILD_DIR)/all_tutors.json
 ALL_TEACHING_TYPES_JSON := $(LEARNSET_HELPERS_BUILD_DIR)/all_teaching_types.json
 
@@ -269,7 +270,7 @@ MAKEFLAGS += --no-print-directory
 .DELETE_ON_ERROR:
 
 RULES_NO_SCAN += libagbsyscall clean clean-assets tidy tidymodern tidycheck tidyrelease generated clean-generated clean-teachables clean-teachables_intermediates
-.PHONY: all rom agbcc modern compare check debug release
+.PHONY: all rom agbcc modern compare check patch-test-filter debug release
 .PHONY: $(RULES_NO_SCAN)
 
 infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
@@ -307,7 +308,15 @@ C_SRCS_IN := $(wildcard $(C_SUBDIR)/*.c $(C_SUBDIR)/*/*.c $(C_SUBDIR)/*/*/*.c)
 C_SRCS := $(foreach src,$(C_SRCS_IN),$(if $(findstring .inc.c,$(src)),,$(src)))
 C_OBJS := $(patsubst $(C_SUBDIR)/%.c,$(C_BUILDDIR)/%.o,$(C_SRCS))
 
+# A release/PR job may provide a curated source allowlist.  The normal default
+# remains the complete upstream test corpus for manual and scheduled builds.
+TEST_SOURCE_ALLOWLIST ?=
+TEST_SUPPORT_SRCS := $(TEST_SUBDIR)/test_runner.c $(TEST_SUBDIR)/test_runner_args.c $(TEST_SUBDIR)/test_runner_battle.c
+ifeq (,$(strip $(TEST_SOURCE_ALLOWLIST)))
 TEST_SRCS_IN := $(wildcard $(TEST_SUBDIR)/*.c $(TEST_SUBDIR)/*/*.c $(TEST_SUBDIR)/*/*/*.c)
+else
+TEST_SRCS_IN := $(sort $(TEST_SUPPORT_SRCS) $(TEST_SOURCE_ALLOWLIST))
+endif
 TEST_SRCS := $(foreach src,$(TEST_SRCS_IN),$(if $(findstring .inc.c,$(src)),,$(src)))
 TEST_OBJS := $(patsubst $(TEST_SUBDIR)/%.c,$(TEST_BUILDDIR)/%.o,$(TEST_SRCS))
 TEST_OBJS_REL := $(patsubst $(OBJ_DIR)/%,%,$(TEST_OBJS))
@@ -353,14 +362,20 @@ $(TESTELF): $(OBJ_DIR)/ld_script_test.ld $(OBJS) $(TEST_OBJS) libagbsyscall tool
 	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) -d0 --silent
 	$(PATCHELF) $(TESTELF) gTestRunnerArgv "$(TESTS:%*=%)\0"
 
+# The test filter lives in a fixed-size post-link buffer.  Re-patch that
+# buffer for every invocation instead of deleting and relinking the complete
+# test ELF whenever CI advances to the next curated filter.
+patch-test-filter: $(TESTELF)
+	$(PATCHELF) $(TESTELF) gTestRunnerArgv "$(TESTS:%*=%)\0"
+
 ifeq ($(GITHUB_REPOSITORY_OWNER),rh-hideout)
 TEST_SKIP_IS_FAIL := \x01
 else
 TEST_SKIP_IS_FAIL := \x00
 endif
 
-check: $(TESTELF)
-	@cp $< $(HEADLESSELF)
+check: patch-test-filter
+	@cp $(TESTELF) $(HEADLESSELF)
 	$(PATCHELF) $(HEADLESSELF) gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "$(TEST_SKIP_IS_FAIL)"
 	$(ROMTESTHYDRA) $(ROMTEST) $(OBJCOPY) $(HEADLESSELF)
 
@@ -539,7 +554,7 @@ $(OBJ_DIR)/sym_common.ld: sym_common.txt $(C_OBJS) $(wildcard common_syms/*.txt)
 $(OBJ_DIR)/sym_ewram.ld: sym_ewram.txt
 	$(RAMSCRGEN) ewram_data $< ENGLISH > $@
 
-TEACHABLE_DEPS := $(ALL_LEARNABLES_JSON) $(INCLUDE_DIRS)/constants/tms_hms.h $(INCLUDE_DIRS)/config/pokemon.h $(DATA_SRC_SUBDIR)/pokemon/special_movesets.json $(INCLUDE_DIRS)/config/pokedex_plus_hgss.h $(LEARNSET_HELPERS_DIR)/make_teachables.py
+TEACHABLE_DEPS := $(ALL_LEARNABLES_JSON) $(MOVE_ACCESS_REVIEW_JSON) $(INCLUDE_DIRS)/constants/tms_hms.h $(INCLUDE_DIRS)/config/pokemon.h $(DATA_SRC_SUBDIR)/pokemon/special_movesets.json $(INCLUDE_DIRS)/config/pokedex_plus_hgss.h $(LEARNSET_HELPERS_DIR)/make_teachables.py
 
 $(LEARNSET_HELPERS_BUILD_DIR):
 	@mkdir -p $@
@@ -556,7 +571,7 @@ $(ALL_TEACHING_TYPES_JSON): $(wildcard $(DATA_SRC_SUBDIR)/pokemon/species_info/*
 $(DATA_SRC_SUBDIR)/pokemon/teachable_learnsets.h: $(TEACHABLE_DEPS) | $(ALL_TUTORS_JSON) $(ALL_TEACHING_TYPES_JSON)
 	python3 $(LEARNSET_HELPERS_DIR)/make_teachables.py $(LEARNSET_HELPERS_BUILD_DIR)
 
-$(DATA_SRC_SUBDIR)/tutor_moves.h: $(DATA_SRC_SUBDIR)/pokemon/special_movesets.json | $(ALL_TUTORS_JSON)
+$(DATA_SRC_SUBDIR)/tutor_moves.h: $(DATA_SRC_SUBDIR)/pokemon/special_movesets.json $(MOVE_ACCESS_REVIEW_JSON) | $(ALL_TUTORS_JSON)
 	python3 $(LEARNSET_HELPERS_DIR)/make_teachables.py  --tutors $(LEARNSET_HELPERS_BUILD_DIR)
 
 # Linker script

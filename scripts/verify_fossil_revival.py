@@ -75,11 +75,13 @@ def main() -> None:
         "revival state can advance without a successful fossil removal",
     )
     require(
-        "givemon VAR_TEMP_TRANSFERRED_SPECIES, 20" in receive
+        "copyvar VAR_0x8004, VAR_TEMP_TRANSFERRED_SPECIES" in receive
+        and "setvar VAR_0x8005, 20" in receive
+        and "special GiveEmeraldChampionsPreparedPokemon" in receive
         and "MON_GIVEN_TO_PARTY" in receive
         and "MON_GIVEN_TO_PC" in receive
         and "Common_EventScript_NoMoreRoomForPokemon" in receive,
-        "revived Pokemon does not cover party, PC, and no-room outcomes",
+        "revived Pokemon is not prepared and delivered across party, PC, and no-room outcomes",
     )
     for line in (
         "setvar VAR_FOSSIL_RESURRECTION_STATE, 0",

@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "source_commit": "33202c162ebc34a1dbe2000acd26b0720baa109d",
+  "source_commit": "0b2bc96c7d6480187f70f5b83a705c081780983e",
   "policy": {
     "format": "doubles-first",
     "stat_points": "66 total, 32 maximum per stat",
@@ -8,8 +8,8 @@
     "protected_items": "never supplied by a preset"
   },
   "default_count": 1258,
-  "alternative_count": 203,
-  "set_count": 1461,
+  "alternative_count": 276,
+  "set_count": 1534,
   "defaults": [
     {
       "species": "SPECIES_BULBASAUR",
@@ -213,7 +213,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_MODEST",
-      "ability": "ABILITY_RAIN_DISH",
+      "ability": "ABILITY_MEGA_LAUNCHER",
       "item": "ITEM_SITRUS_BERRY",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -429,7 +429,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_TIMID",
-      "ability": "ABILITY_BIG_PECKS",
+      "ability": "ABILITY_NO_GUARD",
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -525,7 +525,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_JOLLY",
-      "ability": "ABILITY_SNIPER",
+      "ability": "ABILITY_INTIMIDATE",
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -1009,15 +1009,16 @@
       "item": "ITEM_EVIOLITE",
       "required_item": "ITEM_NONE",
       "stat_points": [
-        2,
         32,
         0,
+        2,
         0,
         0,
         32
       ],
       "role": "Eviolite Tailwind disruptor",
-      "source": "preserved-authored-default"
+      "source": "preserved-authored-default",
+      "audit_note": "Emerald Champions executable set-coherence review"
     },
     {
       "species": "SPECIES_ODDISH",
@@ -1869,7 +1870,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_JOLLY",
-      "ability": "ABILITY_FLAME_BODY",
+      "ability": "ABILITY_RECKLESS",
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -2037,7 +2038,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_JOLLY",
-      "ability": "ABILITY_TANGLED_FEET",
+      "ability": "ABILITY_MOXIE",
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -2085,7 +2086,7 @@
         "MOVE_ENCORE"
       ],
       "nature": "NATURE_TIMID",
-      "ability": "ABILITY_ICE_BODY",
+      "ability": "ABILITY_FUR_COAT",
       "item": "ITEM_SITRUS_BERRY",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -2253,7 +2254,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_TIMID",
-      "ability": "ABILITY_CURSED_BODY",
+      "ability": "ABILITY_LEVITATE",
       "item": "ITEM_FOCUS_SASH",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -2421,7 +2422,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_TIMID",
-      "ability": "ABILITY_AFTERMATH",
+      "ability": "ABILITY_ELECTRIC_SURGE",
       "item": "ITEM_FOCUS_SASH",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -3690,7 +3691,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_BOLD",
-      "ability": "ABILITY_LEAF_GUARD",
+      "ability": "ABILITY_TRIAGE",
       "item": "ITEM_SITRUS_BERRY",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -3982,15 +3983,16 @@
       "item": "ITEM_LIGHT_CLAY",
       "required_item": "ITEM_NONE",
       "stat_points": [
+        32,
+        0,
         2,
         0,
-        0,
-        32,
         0,
         32
       ],
       "role": "Fast screen and tempo support",
-      "source": "preserved-authored-default"
+      "source": "preserved-authored-default",
+      "audit_note": "Emerald Champions executable set-coherence review"
     },
     {
       "species": "SPECIES_SPINARAK",
@@ -4798,15 +4800,16 @@
       "item": "ITEM_EVIOLITE",
       "required_item": "ITEM_NONE",
       "stat_points": [
+        32,
+        0,
         2,
         0,
-        0,
-        32,
         0,
         32
       ],
       "role": "Levitate anti-setup utility",
-      "source": "preserved-authored-default"
+      "source": "preserved-authored-default",
+      "audit_note": "Emerald Champions executable set-coherence review"
     },
     {
       "species": "SPECIES_UNOWN",
@@ -4864,7 +4867,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_JOLLY",
-      "ability": "ABILITY_SAP_SIPPER",
+      "ability": "ABILITY_STRONG_JAW",
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -5248,7 +5251,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_MODEST",
-      "ability": "ABILITY_WEAK_ARMOR",
+      "ability": "ABILITY_SIMPLE",
       "item": "ITEM_WHITE_HERB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -6400,7 +6403,7 @@
         "MOVE_ROOST"
       ],
       "nature": "NATURE_TIMID",
-      "ability": "ABILITY_RIVALRY",
+      "ability": "ABILITY_BERSERK",
       "item": "ITEM_FOCUS_SASH",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -6448,7 +6451,7 @@
         "MOVE_ROOST"
       ],
       "nature": "NATURE_BOLD",
-      "ability": "ABILITY_COMPOUND_EYES",
+      "ability": "ABILITY_UNAWARE",
       "item": "ITEM_LEFTOVERS",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -7696,7 +7699,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_QUIET",
-      "ability": "ABILITY_PRESSURE",
+      "ability": "ABILITY_DRIZZLE",
       "item": "ITEM_SITRUS_BERRY",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -7912,7 +7915,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_JOLLY",
-      "ability": "ABILITY_LEVITATE",
+      "ability": "ABILITY_TINTED_LENS",
       "item": "ITEM_YACHE_BERRY",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -8560,7 +8563,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_ADAMANT",
-      "ability": "ABILITY_HARVEST",
+      "ability": "ABILITY_AERILATE",
       "item": "ITEM_SITRUS_BERRY",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -8872,7 +8875,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_TIMID",
-      "ability": "ABILITY_HYDRATION",
+      "ability": "ABILITY_SOUL_HEART",
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -9185,7 +9188,7 @@
       ],
       "nature": "NATURE_ADAMANT",
       "ability": "ABILITY_DROUGHT",
-      "item": "ITEM_WHITE_HERB",
+      "item": "ITEM_CLEAR_AMULET",
       "required_item": "ITEM_NONE",
       "stat_points": [
         2,
@@ -9196,7 +9199,8 @@
         32
       ],
       "role": "Groudon Swords Dance",
-      "source": "preserved-authored-default"
+      "source": "preserved-authored-default",
+      "audit_note": "Emerald Champions executable set-coherence review"
     },
     {
       "species": "SPECIES_RAYQUAZA",
@@ -9328,7 +9332,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_BRAVE",
-      "ability": "ABILITY_SHELL_ARMOR",
+      "ability": "ABILITY_SOLID_ROCK",
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -9812,12 +9816,12 @@
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
-        32,
-        0,
-        32,
-        0,
         2,
-        0
+        32,
+        0,
+        0,
+        0,
+        32
       ],
       "role": "Sheer Force physical wallbreaker",
       "source": "preserved-authored-default"
@@ -9976,7 +9980,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_CAREFUL",
-      "ability": "ABILITY_UNNERVE",
+      "ability": "ABILITY_INTIMIDATE",
       "item": "ITEM_LEFTOVERS",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -10264,7 +10268,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_JOLLY",
-      "ability": "ABILITY_LIMBER",
+      "ability": "ABILITY_SCRAPPY",
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -10288,7 +10292,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_TIMID",
-      "ability": "ABILITY_LEVITATE",
+      "ability": "ABILITY_PIXILATE",
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -10724,15 +10728,16 @@
       "item": "ITEM_FOCUS_SASH",
       "required_item": "ITEM_NONE",
       "stat_points": [
-        2,
         32,
         0,
+        2,
         0,
         0,
         32
       ],
       "role": "Prankster Coaching support",
-      "source": "preserved-authored-default"
+      "source": "preserved-authored-default",
+      "audit_note": "Emerald Champions executable set-coherence review"
     },
     {
       "species": "SPECIES_LUCARIO",
@@ -11200,7 +11205,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_MODEST",
-      "ability": "ABILITY_VITAL_SPIRIT",
+      "ability": "ABILITY_MEGA_LAUNCHER",
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -11296,7 +11301,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_MODEST",
-      "ability": "ABILITY_ICE_BODY",
+      "ability": "ABILITY_SLUSH_RUSH",
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -11656,7 +11661,7 @@
         "MOVE_WIDE_GUARD"
       ],
       "nature": "NATURE_ADAMANT",
-      "ability": "ABILITY_SLOW_START",
+      "ability": "ABILITY_CLEAR_BODY",
       "item": "ITEM_SITRUS_BERRY",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -12236,15 +12241,16 @@
       "item": "ITEM_FOCUS_SASH",
       "required_item": "ITEM_NONE",
       "stat_points": [
+        32,
+        0,
         2,
         0,
-        0,
-        32,
         0,
         32
       ],
       "role": "Liepard source-backed doubles set",
-      "source": "preserved-authored-default"
+      "source": "preserved-authored-default",
+      "audit_note": "Emerald Champions executable set-coherence review"
     },
     {
       "species": "SPECIES_PANSAGE",
@@ -13100,15 +13106,16 @@
       "item": "ITEM_EVIOLITE",
       "required_item": "ITEM_NONE",
       "stat_points": [
+        32,
+        0,
         2,
         0,
-        0,
-        32,
         0,
         32
       ],
       "role": "Prankster speed support",
-      "source": "preserved-authored-default"
+      "source": "preserved-authored-default",
+      "audit_note": "Emerald Champions executable set-coherence review"
     },
     {
       "species": "SPECIES_WHIMSICOTT",
@@ -13846,13 +13853,14 @@
       "stat_points": [
         32,
         0,
-        2,
-        32,
+        16,
         0,
+        18,
         0
       ],
       "role": "Solosis source-backed doubles set",
-      "source": "preserved-authored-default"
+      "source": "preserved-authored-default",
+      "audit_note": "Emerald Champions executable set-coherence review"
     },
     {
       "species": "SPECIES_DUOSION",
@@ -14080,7 +14088,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_TIMID",
-      "ability": "ABILITY_MOTOR_DRIVE",
+      "ability": "ABILITY_LIGHTNING_ROD",
       "item": "ITEM_FOCUS_SASH",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -15136,7 +15144,7 @@
         "MOVE_ROCK_TOMB"
       ],
       "nature": "NATURE_ADAMANT",
-      "ability": "ABILITY_WHITE_SMOKE",
+      "ability": "ABILITY_TOUGH_CLAWS",
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -15925,7 +15933,7 @@
         "MOVE_RAGE_POWDER",
         "MOVE_STUN_SPORE",
         "MOVE_STRING_SHOT",
-        "MOVE_TACKLE"
+        "MOVE_PROTECT"
       ],
       "nature": "NATURE_BOLD",
       "ability": "ABILITY_FRIEND_GUARD",
@@ -15940,7 +15948,8 @@
         0
       ],
       "role": "Friend Guard redirection disruptor",
-      "source": "preserved-authored-default"
+      "source": "preserved-authored-default",
+      "audit_note": "Emerald Champions executable set-coherence review"
     },
     {
       "species": "SPECIES_SPEWPA",
@@ -16024,7 +16033,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_TIMID",
-      "ability": "ABILITY_MOXIE",
+      "ability": "ABILITY_COMPETITIVE",
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -16072,7 +16081,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_CALM",
-      "ability": "ABILITY_SYMBIOSIS",
+      "ability": "ABILITY_HEALER",
       "item": "ITEM_EVIOLITE",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -16096,7 +16105,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_CALM",
-      "ability": "ABILITY_SYMBIOSIS",
+      "ability": "ABILITY_MISTY_SURGE",
       "item": "ITEM_SITRUS_BERRY",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -16116,7 +16125,7 @@
       "moves": [
         "MOVE_BULK_UP",
         "MOVE_HORN_LEECH",
-        "MOVE_HIGH_HORSEPOWER",
+        "MOVE_STOMPING_TANTRUM",
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_CAREFUL",
@@ -16132,7 +16141,8 @@
         0
       ],
       "role": "Eviolite Bulk Up drain attacker",
-      "source": "preserved-authored-default"
+      "source": "preserved-authored-default",
+      "audit_note": "Emerald Champions executable set-coherence review"
     },
     {
       "species": "SPECIES_GOGOAT",
@@ -16144,7 +16154,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_CAREFUL",
-      "ability": "ABILITY_GRASS_PELT",
+      "ability": "ABILITY_GRASSY_SURGE",
       "item": "ITEM_LEFTOVERS",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -16844,15 +16854,16 @@
       "item": "ITEM_SITRUS_BERRY",
       "required_item": "ITEM_NONE",
       "stat_points": [
+        32,
+        0,
         2,
         0,
-        0,
-        32,
         0,
         32
       ],
       "role": "Cheek Pouch disruption support",
-      "source": "preserved-authored-default"
+      "source": "preserved-authored-default",
+      "audit_note": "Emerald Champions executable set-coherence review"
     },
     {
       "species": "SPECIES_CARBINK",
@@ -16936,7 +16947,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_MODEST",
-      "ability": "ABILITY_GOOEY",
+      "ability": "ABILITY_POISON_HEAL",
       "item": "ITEM_TOXIC_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -17008,7 +17019,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_ADAMANT",
-      "ability": "ABILITY_HARVEST",
+      "ability": "ABILITY_GRASSY_SURGE",
       "item": "ITEM_LEFTOVERS",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -17056,7 +17067,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_MODEST",
-      "ability": "ABILITY_INSOMNIA",
+      "ability": "ABILITY_FLARE_BOOST",
       "item": "ITEM_FLAME_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -17132,15 +17143,16 @@
       "item": "ITEM_FOCUS_SASH",
       "required_item": "ITEM_NONE",
       "stat_points": [
+        32,
+        0,
         2,
         0,
-        0,
-        32,
         0,
         32
       ],
       "role": "Focus Sash Tailwind disruptor",
-      "source": "preserved-authored-default"
+      "source": "preserved-authored-default",
+      "audit_note": "Emerald Champions executable set-coherence review"
     },
     {
       "species": "SPECIES_NOIVERN",
@@ -17279,8 +17291,8 @@
         32,
         0,
         2,
-        0,
         32,
+        0,
         0
       ],
       "role": "Trick Room special wallbreaker",
@@ -17368,7 +17380,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_JOLLY",
-      "ability": "ABILITY_LONG_REACH",
+      "ability": "ABILITY_TINTED_LENS",
       "item": "ITEM_SITRUS_BERRY",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -18472,7 +18484,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_BOLD",
-      "ability": "ABILITY_SAND_VEIL",
+      "ability": "ABILITY_SAND_STREAM",
       "item": "ITEM_LEFTOVERS",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -18644,15 +18656,16 @@
       "item": "ITEM_BERRY_JUICE",
       "required_item": "ITEM_NONE",
       "stat_points": [
-        2,
         32,
         0,
+        2,
         0,
         0,
         32
       ],
       "role": "Sturdy Fake Out Endeavor disruptor",
-      "source": "preserved-authored-default"
+      "source": "preserved-authored-default",
+      "audit_note": "Emerald Champions executable set-coherence review"
     },
     {
       "species": "SPECIES_MIMIKYU",
@@ -20324,12 +20337,12 @@
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
-        32,
-        0,
-        32,
-        0,
         2,
-        0
+        32,
+        0,
+        0,
+        0,
+        32
       ],
       "role": "Swift Swim physical wallbreaker",
       "source": "preserved-authored-default"
@@ -20420,12 +20433,12 @@
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
-        32,
-        0,
-        32,
-        0,
         2,
-        0
+        32,
+        0,
+        0,
+        0,
+        32
       ],
       "role": "White Smoke physical wallbreaker",
       "source": "preserved-authored-default"
@@ -20756,12 +20769,12 @@
       "item": "ITEM_LEEK",
       "required_item": "ITEM_NONE",
       "stat_points": [
-        32,
-        0,
-        32,
-        0,
         2,
-        0
+        32,
+        0,
+        0,
+        0,
+        32
       ],
       "role": "Scrappy physical wallbreaker",
       "source": "preserved-authored-default"
@@ -21428,12 +21441,12 @@
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
-        32,
-        0,
-        32,
-        0,
         2,
-        0
+        32,
+        0,
+        0,
+        0,
+        32
       ],
       "role": "fast physical wallbreaker",
       "source": "preserved-authored-default"
@@ -21952,7 +21965,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_QUIET",
-      "ability": "ABILITY_HARVEST",
+      "ability": "ABILITY_FRISK",
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -21964,7 +21977,8 @@
         0
       ],
       "role": "Chloroplast Trick Room special breaker",
-      "source": "preserved-authored-default"
+      "source": "preserved-authored-default",
+      "audit_note": "Emerald Champions executable set-coherence review"
     },
     {
       "species": "SPECIES_MAROWAK_ALOLA",
@@ -23074,7 +23088,7 @@
       "species": "SPECIES_ROTOM_FROST",
       "name": "Recommended",
       "moves": [
-        "MOVE_FREEZE_DRY",
+        "MOVE_BLIZZARD",
         "MOVE_THUNDERBOLT",
         "MOVE_ELECTROWEB",
         "MOVE_PROTECT"
@@ -23092,19 +23106,20 @@
         32
       ],
       "role": "Frost-form coverage and speed-control attacker",
-      "source": "preserved-authored-default"
+      "source": "preserved-authored-default",
+      "audit_note": "Emerald Champions executable set-coherence review"
     },
     {
       "species": "SPECIES_ROTOM_FAN",
       "name": "Recommended",
       "moves": [
-        "MOVE_HURRICANE",
+        "MOVE_AIR_SLASH",
         "MOVE_THUNDERBOLT",
         "MOVE_ELECTROWEB",
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_TIMID",
-      "ability": "ABILITY_LEVITATE",
+      "ability": "ABILITY_MOTOR_DRIVE",
       "item": "ITEM_SITRUS_BERRY",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -23116,7 +23131,8 @@
         32
       ],
       "role": "Fan-form dual-STAB speed-control attacker",
-      "source": "preserved-authored-default"
+      "source": "preserved-authored-default",
+      "audit_note": "Emerald Champions executable set-coherence review"
     },
     {
       "species": "SPECIES_ROTOM_MOW",
@@ -25120,7 +25136,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_TIMID",
-      "ability": "ABILITY_INSOMNIA",
+      "ability": "ABILITY_FLARE_BOOST",
       "item": "ITEM_FLAME_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -25144,7 +25160,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_MODEST",
-      "ability": "ABILITY_INSOMNIA",
+      "ability": "ABILITY_FLARE_BOOST",
       "item": "ITEM_FLAME_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -25168,7 +25184,7 @@
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_QUIET",
-      "ability": "ABILITY_INSOMNIA",
+      "ability": "ABILITY_FLARE_BOOST",
       "item": "ITEM_FLAME_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -27080,16 +27096,16 @@
     },
     {
       "species": "SPECIES_GIMMIGHOUL_ROAMING",
-      "name": "Recommended",
+      "name": "Dual Screens",
       "moves": [
         "MOVE_SHADOW_BALL",
-        "MOVE_ICY_WIND",
+        "MOVE_REFLECT",
         "MOVE_LIGHT_SCREEN",
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_RUN_AWAY",
-      "item": "ITEM_FOCUS_SASH",
+      "item": "ITEM_LIGHT_CLAY",
       "required_item": "ITEM_NONE",
       "stat_points": [
         2,
@@ -27099,8 +27115,9 @@
         0,
         32
       ],
-      "role": "Fast frail special speed support",
-      "source": "preserved-authored-default"
+      "role": "Fast dual-screen support",
+      "source": "preserved-authored-default",
+      "audit_note": "Emerald Champions executable set-coherence review"
     },
     {
       "species": "SPECIES_GHOLDENGO",
@@ -28232,11 +28249,11 @@
     },
     {
       "species": "SPECIES_SLIGGOO_HISUI",
-      "name": "Shelter Press",
+      "name": "Curse Tank",
       "moves": [
-        "MOVE_BODY_PRESS",
         "MOVE_HEAVY_SLAM",
-        "MOVE_SHELTER",
+        "MOVE_BODY_SLAM",
+        "MOVE_CURSE",
         "MOVE_PROTECT"
       ],
       "nature": "NATURE_RELAXED",
@@ -28245,14 +28262,15 @@
       "required_item": "ITEM_NONE",
       "stat_points": [
         32,
-        0,
         32,
-        0,
         2,
+        0,
+        0,
         0
       ],
-      "role": "Eviolite Body Press win condition",
-      "source": "Emerald Champions authored modern doubles supplement"
+      "role": "Eviolite Curse physical win condition",
+      "source": "Emerald Champions authored modern doubles supplement",
+      "audit_note": "Emerald Champions executable set-coherence review"
     },
     {
       "species": "SPECIES_URSALUNA_BLOODMOON",
@@ -28695,7 +28713,7 @@
         "MOVE_PLAY_ROUGH",
         "MOVE_YAWN"
       ],
-      "nature": "NATURE_CALM",
+      "nature": "NATURE_CAREFUL",
       "ability": "ABILITY_WELL_BAKED_BODY",
       "item": "ITEM_SITRUS_BERRY",
       "required_item": "ITEM_NONE",
@@ -28708,7 +28726,8 @@
         0
       ],
       "role": "Doubles Support",
-      "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+      "source": "Pokemon Champions doubles handbook: Smogon doubles pool",
+      "audit_note": "Emerald Champions executable set-coherence review"
     },
     {
       "species": "SPECIES_SMOLIV",
@@ -30221,12 +30240,12 @@
         0,
         32
       ],
-      "role": "Mega Special Attacker — Venusaur-Mega",
-      "source": "preserved-handbook-alternative"
+      "role": "Mega Special Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
     },
     {
       "species": "SPECIES_CHARIZARD",
-      "name": "Mega X Setup Sweeper",
+      "name": "Mega Setup Sweeper",
       "moves": [
         "MOVE_PROTECT",
         "MOVE_DRAGON_CLAW",
@@ -30245,8 +30264,8 @@
         0,
         32
       ],
-      "role": "Mega Setup Sweeper — Charizard-Mega-X",
-      "source": "preserved-handbook-alternative"
+      "role": "Mega Setup Sweeper",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
     },
     {
       "species": "SPECIES_CHARIZARD",
@@ -30273,6 +30292,30 @@
       "source": "preserved-handbook-alternative"
     },
     {
+      "species": "SPECIES_CHARIZARD",
+      "name": "Mega Special Attacker",
+      "moves": [
+        "MOVE_PROTECT",
+        "MOVE_HEAT_WAVE",
+        "MOVE_WEATHER_BALL",
+        "MOVE_SOLARBEAM"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_DROUGHT",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_CHARIZARDITE_Y",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Mega Special Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
       "species": "SPECIES_BLASTOISE",
       "name": "Physical Attacker",
       "moves": [
@@ -30297,8 +30340,80 @@
       "source": "preserved-handbook-alternative"
     },
     {
+      "species": "SPECIES_BLASTOISE",
+      "name": "Mega Setup Sweeper",
+      "moves": [
+        "MOVE_WATER_SPOUT",
+        "MOVE_DARK_PULSE",
+        "MOVE_PROTECT",
+        "MOVE_SHELL_SMASH"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_MEGA_LAUNCHER",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_BLASTOISINITE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Mega Setup Sweeper",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
+      "species": "SPECIES_BEEDRILL",
+      "name": "Mega Physical Attacker",
+      "moves": [
+        "MOVE_POISON_JAB",
+        "MOVE_PROTECT",
+        "MOVE_U_TURN",
+        "MOVE_DRILL_RUN"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_ADAPTABILITY",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_BEEDRILLITE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Mega Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
+      "species": "SPECIES_PIDGEOT",
+      "name": "Mega Tailwind Support",
+      "moves": [
+        "MOVE_HURRICANE",
+        "MOVE_HEAT_WAVE",
+        "MOVE_PROTECT",
+        "MOVE_TAILWIND"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_NO_GUARD",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_PIDGEOTITE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Mega Tailwind Support",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
       "species": "SPECIES_RAICHU",
-      "name": "Mega X Physical",
+      "name": "Mega Physical Attacker",
       "moves": [
         "MOVE_FAKE_OUT",
         "MOVE_PROTECT",
@@ -30306,7 +30421,7 @@
         "MOVE_VOLT_TACKLE"
       ],
       "nature": "NATURE_JOLLY",
-      "ability": "ABILITY_LIGHTNING_ROD",
+      "ability": "ABILITY_ELECTRIC_SURGE",
       "item": "ITEM_NONE",
       "required_item": "ITEM_RAICHUNITE_X",
       "stat_points": [
@@ -30317,8 +30432,8 @@
         0,
         32
       ],
-      "role": "Mega Physical Attacker — Raichu-Mega-X",
-      "source": "preserved-handbook-alternative"
+      "role": "Mega Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
     },
     {
       "species": "SPECIES_RAICHU",
@@ -30345,8 +30460,32 @@
       "source": "preserved-handbook-alternative"
     },
     {
+      "species": "SPECIES_RAICHU",
+      "name": "Mega Special Attacker",
+      "moves": [
+        "MOVE_ZAP_CANNON",
+        "MOVE_FOCUS_BLAST",
+        "MOVE_PROTECT",
+        "MOVE_FAKE_OUT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_NO_GUARD",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_RAICHUNITE_Y",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Mega Special Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
       "species": "SPECIES_CLEFABLE",
-      "name": "Special Attacker",
+      "name": "Mega Special Attacker",
       "moves": [
         "MOVE_FOLLOW_ME",
         "MOVE_MOONBLAST",
@@ -30354,9 +30493,9 @@
         "MOVE_DAZZLING_GLEAM"
       ],
       "nature": "NATURE_CALM",
-      "ability": "ABILITY_UNAWARE",
-      "item": "ITEM_SITRUS_BERRY",
-      "required_item": "ITEM_NONE",
+      "ability": "ABILITY_MAGIC_BOUNCE",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_CLEFABLITE",
       "stat_points": [
         32,
         0,
@@ -30365,8 +30504,8 @@
         32,
         0
       ],
-      "role": "Mega Special Attacker — Clefable-Mega",
-      "source": "preserved-handbook-alternative"
+      "role": "Mega Special Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
     },
     {
       "species": "SPECIES_NINETALES",
@@ -30441,6 +30580,30 @@
       "source": "preserved-handbook-alternative"
     },
     {
+      "species": "SPECIES_ALAKAZAM",
+      "name": "Mega Special Attacker",
+      "moves": [
+        "MOVE_PROTECT",
+        "MOVE_EXPANDING_FORCE",
+        "MOVE_FOCUS_BLAST",
+        "MOVE_DAZZLING_GLEAM"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_TRACE",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_ALAKAZITE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Mega Special Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
       "species": "SPECIES_VICTREEBEL",
       "name": "Support",
       "moves": [
@@ -30463,6 +30626,30 @@
       ],
       "role": "Doubles Support",
       "source": "preserved-handbook-alternative"
+    },
+    {
+      "species": "SPECIES_VICTREEBEL",
+      "name": "Mega Special Attacker",
+      "moves": [
+        "MOVE_STRENGTH_SAP",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_GIGA_DRAIN"
+      ],
+      "nature": "NATURE_RASH",
+      "ability": "ABILITY_INNARDS_OUT",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_VICTREEBELITE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Mega Special Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
     },
     {
       "species": "SPECIES_GOLEM",
@@ -30513,13 +30700,37 @@
       "source": "preserved-handbook-alternative"
     },
     {
+      "species": "SPECIES_SLOWBRO",
+      "name": "Mega Trick Room Support",
+      "moves": [
+        "MOVE_BODY_PRESS",
+        "MOVE_SLACK_OFF",
+        "MOVE_PSYCHIC",
+        "MOVE_TRICK_ROOM"
+      ],
+      "nature": "NATURE_RELAXED",
+      "ability": "ABILITY_SHELL_ARMOR",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_SLOWBRONITE",
+      "stat_points": [
+        32,
+        0,
+        32,
+        0,
+        2,
+        0
+      ],
+      "role": "Mega Trick Room Support",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
       "species": "SPECIES_DODRIO",
       "name": "Wallbreaker",
       "moves": [
         "MOVE_DOUBLE_EDGE",
         "MOVE_QUICK_ATTACK",
         "MOVE_BRAVE_BIRD",
-        "MOVE_PROTECT"
+        "MOVE_KNOCK_OFF"
       ],
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_EARLY_BIRD",
@@ -30534,7 +30745,8 @@
         32
       ],
       "role": "Doubles Wallbreaker",
-      "source": "preserved-handbook-alternative"
+      "source": "preserved-handbook-alternative",
+      "audit_note": "Emerald Champions executable set-coherence review"
     },
     {
       "species": "SPECIES_GENGAR",
@@ -30561,6 +30773,30 @@
       "source": "preserved-handbook-alternative"
     },
     {
+      "species": "SPECIES_GENGAR",
+      "name": "Mega Special Attacker",
+      "moves": [
+        "MOVE_PROTECT",
+        "MOVE_SHADOW_BALL",
+        "MOVE_PERISH_SONG",
+        "MOVE_SLUDGE_BOMB"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_SHADOW_TAG",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_GENGARITE",
+      "stat_points": [
+        32,
+        0,
+        16,
+        0,
+        18,
+        0
+      ],
+      "role": "Mega Special Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
       "species": "SPECIES_KANGASKHAN",
       "name": "Physical Attacker",
       "moves": [
@@ -30585,6 +30821,30 @@
       "source": "preserved-handbook-alternative"
     },
     {
+      "species": "SPECIES_KANGASKHAN",
+      "name": "Mega Physical Attacker",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_BRICK_BREAK"
+      ],
+      "nature": "NATURE_BRAVE",
+      "ability": "ABILITY_PARENTAL_BOND",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_KANGASKHANITE",
+      "stat_points": [
+        32,
+        32,
+        2,
+        0,
+        0,
+        0
+      ],
+      "role": "Mega Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
       "species": "SPECIES_STARMIE",
       "name": "Special Attacker II",
       "moves": [
@@ -30607,6 +30867,54 @@
       ],
       "role": "Special Attacker",
       "source": "preserved-handbook-alternative"
+    },
+    {
+      "species": "SPECIES_STARMIE",
+      "name": "Mega Physical Attacker",
+      "moves": [
+        "MOVE_PROTECT",
+        "MOVE_LIQUIDATION",
+        "MOVE_AQUA_JET",
+        "MOVE_ZEN_HEADBUTT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_HUGE_POWER",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_STARMINITE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Mega Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
+      "species": "SPECIES_PINSIR",
+      "name": "Mega Physical Attacker",
+      "moves": [
+        "MOVE_BODY_SLAM",
+        "MOVE_FEINT",
+        "MOVE_STORM_THROW",
+        "MOVE_GIGA_IMPACT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_AERILATE",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_PINSIRITE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Mega Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
     },
     {
       "species": "SPECIES_TAUROS",
@@ -30642,7 +30950,7 @@
         "MOVE_CRUNCH"
       ],
       "nature": "NATURE_ADAMANT",
-      "ability": "ABILITY_INTIMIDATE",
+      "ability": "ABILITY_MOLD_BREAKER",
       "item": "ITEM_NONE",
       "required_item": "ITEM_GYARADOSITE",
       "stat_points": [
@@ -30653,12 +30961,12 @@
         0,
         32
       ],
-      "role": "Mega Setup Sweeper — Gyarados-Mega",
-      "source": "preserved-handbook-alternative"
+      "role": "Mega Setup Sweeper",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
     },
     {
       "species": "SPECIES_AERODACTYL",
-      "name": "Mega Tailwind",
+      "name": "Mega Tailwind Support",
       "moves": [
         "MOVE_ROCK_SLIDE",
         "MOVE_TAILWIND",
@@ -30666,7 +30974,7 @@
         "MOVE_ICE_FANG"
       ],
       "nature": "NATURE_JOLLY",
-      "ability": "ABILITY_UNNERVE",
+      "ability": "ABILITY_TOUGH_CLAWS",
       "item": "ITEM_NONE",
       "required_item": "ITEM_AERODACTYLITE",
       "stat_points": [
@@ -30677,8 +30985,8 @@
         0,
         32
       ],
-      "role": "Mega Tailwind Support — Aerodactyl-Mega",
-      "source": "preserved-handbook-alternative"
+      "role": "Mega Tailwind Support",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
     },
     {
       "species": "SPECIES_ZAPDOS",
@@ -30730,7 +31038,7 @@
     },
     {
       "species": "SPECIES_DRAGONITE",
-      "name": "Mega Tailwind",
+      "name": "Mega Tailwind Support",
       "moves": [
         "MOVE_PROTECT",
         "MOVE_DRAGON_PULSE",
@@ -30749,8 +31057,8 @@
         0,
         32
       ],
-      "role": "Mega Tailwind Support — Dragonite-Mega",
-      "source": "preserved-handbook-alternative"
+      "role": "Mega Tailwind Support",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
     },
     {
       "species": "SPECIES_MEWTWO",
@@ -30775,6 +31083,54 @@
       ],
       "role": "Doubles Bulky Setup",
       "source": "preserved-handbook-alternative"
+    },
+    {
+      "species": "SPECIES_MEWTWO",
+      "name": "Mega X Physical",
+      "moves": [
+        "MOVE_PSYCHO_CUT",
+        "MOVE_DRAIN_PUNCH",
+        "MOVE_ICE_PUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_STEADFAST",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_MEWTWONITE_X",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Mega X fast physical attacker",
+      "source": "Emerald Champions custom Mega extension: current form data and authored doubles corpus"
+    },
+    {
+      "species": "SPECIES_MEWTWO",
+      "name": "Mega Y Special",
+      "moves": [
+        "MOVE_PSYSTRIKE",
+        "MOVE_AURA_SPHERE",
+        "MOVE_ICE_BEAM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_INSOMNIA",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_MEWTWONITE_Y",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Mega Y fast special attacker",
+      "source": "Emerald Champions custom Mega extension: current form data and authored doubles corpus"
     },
     {
       "species": "SPECIES_MEW",
@@ -30825,6 +31181,30 @@
       "source": "preserved-handbook-alternative"
     },
     {
+      "species": "SPECIES_MEGANIUM",
+      "name": "Mega Special Attacker",
+      "moves": [
+        "MOVE_SOLARBEAM",
+        "MOVE_WEATHER_BALL",
+        "MOVE_DAZZLING_GLEAM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_MEGA_SOL",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_MEGANIUMITE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Mega Special Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
       "species": "SPECIES_TYPHLOSION",
       "name": "Special Attacker",
       "moves": [
@@ -30873,13 +31253,37 @@
       "source": "preserved-handbook-alternative"
     },
     {
+      "species": "SPECIES_FERALIGATR",
+      "name": "Mega Physical Attacker",
+      "moves": [
+        "MOVE_PROTECT",
+        "MOVE_LIQUIDATION",
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_AQUA_JET"
+      ],
+      "nature": "NATURE_BRAVE",
+      "ability": "ABILITY_DRAGONIZE",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_FERALIGITE",
+      "stat_points": [
+        32,
+        32,
+        2,
+        0,
+        0,
+        0
+      ],
+      "role": "Mega Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
       "species": "SPECIES_LANTURN",
       "name": "Bulky Attacker",
       "moves": [
         "MOVE_VOLT_SWITCH",
         "MOVE_SCALD",
         "MOVE_ICE_BEAM",
-        "MOVE_PROTECT"
+        "MOVE_ELECTROWEB"
       ],
       "nature": "NATURE_MODEST",
       "ability": "ABILITY_VOLT_ABSORB",
@@ -30894,7 +31298,32 @@
         32
       ],
       "role": "Doubles Bulky Attacker",
-      "source": "preserved-handbook-alternative"
+      "source": "preserved-handbook-alternative",
+      "audit_note": "Emerald Champions executable set-coherence review"
+    },
+    {
+      "species": "SPECIES_AMPHAROS",
+      "name": "Mega Special Attacker",
+      "moves": [
+        "MOVE_DRAGON_PULSE",
+        "MOVE_PROTECT",
+        "MOVE_THUNDERBOLT",
+        "MOVE_POWER_GEM"
+      ],
+      "nature": "NATURE_QUIET",
+      "ability": "ABILITY_MOLD_BREAKER",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_AMPHAROSITE",
+      "stat_points": [
+        32,
+        0,
+        2,
+        32,
+        0,
+        0
+      ],
+      "role": "Mega Special Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
     },
     {
       "species": "SPECIES_JUMPLUFF",
@@ -30969,13 +31398,37 @@
       "source": "preserved-handbook-alternative"
     },
     {
+      "species": "SPECIES_STEELIX",
+      "name": "Mega Physical Attacker",
+      "moves": [
+        "MOVE_HEAVY_SLAM",
+        "MOVE_HIGH_HORSEPOWER",
+        "MOVE_PROTECT",
+        "MOVE_WIDE_GUARD"
+      ],
+      "nature": "NATURE_BRAVE",
+      "ability": "ABILITY_SAND_FORCE",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_STEELIXITE",
+      "stat_points": [
+        32,
+        32,
+        2,
+        0,
+        0,
+        0
+      ],
+      "role": "Mega Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
       "species": "SPECIES_SCIZOR",
       "name": "Mega Setup Sweeper",
       "moves": [
         "MOVE_BULLET_PUNCH",
         "MOVE_PROTECT",
         "MOVE_SWORDS_DANCE",
-        "MOVE_BUG_BITE"
+        "MOVE_CLOSE_COMBAT"
       ],
       "nature": "NATURE_ADAMANT",
       "ability": "ABILITY_TECHNICIAN",
@@ -30989,8 +31442,32 @@
         0,
         32
       ],
-      "role": "Mega Setup Sweeper — Scizor-Mega",
-      "source": "preserved-handbook-alternative"
+      "role": "Mega Setup Sweeper",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
+      "species": "SPECIES_HERACROSS",
+      "name": "Mega Physical Attacker",
+      "moves": [
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_ROCK_BLAST",
+        "MOVE_PROTECT",
+        "MOVE_PIN_MISSILE"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_SKILL_LINK",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_HERACRONITE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Mega Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
     },
     {
       "species": "SPECIES_SKARMORY",
@@ -31017,6 +31494,30 @@
       "source": "preserved-handbook-alternative"
     },
     {
+      "species": "SPECIES_SKARMORY",
+      "name": "Mega Physical Attacker",
+      "moves": [
+        "MOVE_BRAVE_BIRD",
+        "MOVE_IRON_HEAD",
+        "MOVE_PROTECT",
+        "MOVE_ROCK_TOMB"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_STALWART",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_SKARMORITE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Mega Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
       "species": "SPECIES_HOUNDOOM",
       "name": "Special Attacker",
       "moves": [
@@ -31041,28 +31542,53 @@
       "source": "preserved-handbook-alternative"
     },
     {
+      "species": "SPECIES_HOUNDOOM",
+      "name": "Mega Special Attacker",
+      "moves": [
+        "MOVE_HEAT_WAVE",
+        "MOVE_DARK_PULSE",
+        "MOVE_PROTECT",
+        "MOVE_OVERHEAT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_SOLAR_POWER",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_HOUNDOOMINITE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Mega Special Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
       "species": "SPECIES_KINGDRA",
-      "name": "Setup Sweeper",
+      "name": "Rain Sweeper",
       "moves": [
         "MOVE_PROTECT",
         "MOVE_DRACO_METEOR",
         "MOVE_RAIN_DANCE",
         "MOVE_HYDRO_PUMP"
       ],
-      "nature": "NATURE_ADAMANT",
+      "nature": "NATURE_MODEST",
       "ability": "ABILITY_SWIFT_SWIM",
       "item": "ITEM_LIFE_ORB",
       "required_item": "ITEM_NONE",
       "stat_points": [
         2,
+        0,
+        0,
         32,
-        0,
-        0,
         0,
         32
       ],
-      "role": "Doubles Setup Sweeper",
-      "source": "preserved-handbook-alternative"
+      "role": "Swift Swim Rain Dance special sweeper",
+      "source": "preserved-handbook-alternative",
+      "audit_note": "Emerald Champions executable set-coherence review"
     },
     {
       "species": "SPECIES_PORYGON2",
@@ -31143,7 +31669,7 @@
         "MOVE_ROCK_SLIDE",
         "MOVE_LOW_KICK",
         "MOVE_ICE_PUNCH",
-        "MOVE_PROTECT"
+        "MOVE_CRUNCH"
       ],
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_SAND_STREAM",
@@ -31158,7 +31684,32 @@
         32
       ],
       "role": "Choice Attacker",
-      "source": "preserved-handbook-alternative"
+      "source": "preserved-handbook-alternative",
+      "audit_note": "Emerald Champions executable set-coherence review"
+    },
+    {
+      "species": "SPECIES_TYRANITAR",
+      "name": "Mega Physical Attacker",
+      "moves": [
+        "MOVE_ROCK_SLIDE",
+        "MOVE_PROTECT",
+        "MOVE_KNOCK_OFF",
+        "MOVE_LOW_KICK"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_SAND_STREAM",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_TYRANITARITE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Mega Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
     },
     {
       "species": "SPECIES_CELEBI",
@@ -31209,6 +31760,30 @@
       "source": "preserved-handbook-alternative"
     },
     {
+      "species": "SPECIES_SCEPTILE",
+      "name": "Mega Special Attacker",
+      "moves": [
+        "MOVE_DRAGON_PULSE",
+        "MOVE_EARTH_POWER",
+        "MOVE_PROTECT",
+        "MOVE_ENERGY_BALL"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_LIGHTNING_ROD",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_SCEPTILITE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Mega Special Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
       "species": "SPECIES_BLAZIKEN",
       "name": "Special Attacker",
       "moves": [
@@ -31233,6 +31808,30 @@
       "source": "preserved-handbook-alternative"
     },
     {
+      "species": "SPECIES_BLAZIKEN",
+      "name": "Mega Physical Attacker",
+      "moves": [
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_FLARE_BLITZ",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_DETECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_SPEED_BOOST",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_BLAZIKENITE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Mega Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
       "species": "SPECIES_SWAMPERT",
       "name": "Physical Attacker",
       "moves": [
@@ -31255,6 +31854,30 @@
       ],
       "role": "Physical Attacker",
       "source": "preserved-handbook-alternative"
+    },
+    {
+      "species": "SPECIES_SWAMPERT",
+      "name": "Mega Physical Attacker",
+      "moves": [
+        "MOVE_PROTECT",
+        "MOVE_WAVE_CRASH",
+        "MOVE_ICE_PUNCH",
+        "MOVE_EARTHQUAKE"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_SWIFT_SWIM",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_SWAMPERTITE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Mega Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
     },
     {
       "species": "SPECIES_LUDICOLO",
@@ -31329,6 +31952,30 @@
       "source": "preserved-handbook-alternative"
     },
     {
+      "species": "SPECIES_GARDEVOIR",
+      "name": "Mega Trick Room Support",
+      "moves": [
+        "MOVE_HYPER_VOICE",
+        "MOVE_PROTECT",
+        "MOVE_PSYCHIC",
+        "MOVE_TRICK_ROOM"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_PIXILATE",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_GARDEVOIRITE",
+      "stat_points": [
+        32,
+        0,
+        2,
+        32,
+        0,
+        0
+      ],
+      "role": "Mega Trick Room Support",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
       "species": "SPECIES_HARIYAMA",
       "name": "Bulky Attacker",
       "moves": [
@@ -31362,7 +32009,7 @@
         "MOVE_DARK_PULSE"
       ],
       "nature": "NATURE_SASSY",
-      "ability": "ABILITY_PRANKSTER",
+      "ability": "ABILITY_MAGIC_BOUNCE",
       "item": "ITEM_NONE",
       "required_item": "ITEM_SABLENITE",
       "stat_points": [
@@ -31373,8 +32020,32 @@
         32,
         0
       ],
-      "role": "Mega Bulky Attacker — Sableye-Mega",
-      "source": "preserved-handbook-alternative"
+      "role": "Mega Bulky Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
+      "species": "SPECIES_MAWILE",
+      "name": "Mega Physical Attacker",
+      "moves": [
+        "MOVE_PLAY_ROUGH",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_PROTECT",
+        "MOVE_IRON_HEAD"
+      ],
+      "nature": "NATURE_BRAVE",
+      "ability": "ABILITY_HUGE_POWER",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_MAWILITE",
+      "stat_points": [
+        32,
+        32,
+        2,
+        0,
+        0,
+        0
+      ],
+      "role": "Mega Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
     },
     {
       "species": "SPECIES_AGGRON",
@@ -31401,6 +32072,30 @@
       "source": "preserved-handbook-alternative"
     },
     {
+      "species": "SPECIES_AGGRON",
+      "name": "Mega Setup Sweeper",
+      "moves": [
+        "MOVE_BODY_PRESS",
+        "MOVE_PROTECT",
+        "MOVE_HEAVY_SLAM",
+        "MOVE_IRON_DEFENSE"
+      ],
+      "nature": "NATURE_CAREFUL",
+      "ability": "ABILITY_FILTER",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_AGGRONITE",
+      "stat_points": [
+        32,
+        0,
+        2,
+        0,
+        32,
+        0
+      ],
+      "role": "Mega Setup Sweeper",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
       "species": "SPECIES_MEDICHAM",
       "name": "Mega Physical Attacker",
       "moves": [
@@ -31421,8 +32116,8 @@
         0,
         0
       ],
-      "role": "Mega Physical Attacker — Medicham-Mega",
-      "source": "preserved-handbook-alternative"
+      "role": "Mega Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
     },
     {
       "species": "SPECIES_MANECTRIC",
@@ -31449,6 +32144,30 @@
       "source": "preserved-handbook-alternative"
     },
     {
+      "species": "SPECIES_MANECTRIC",
+      "name": "Mega Special Attacker",
+      "moves": [
+        "MOVE_PROTECT",
+        "MOVE_VOLT_SWITCH",
+        "MOVE_THUNDERBOLT",
+        "MOVE_EERIE_IMPULSE"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_MANECTITE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Mega Special Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
       "species": "SPECIES_SHARPEDO",
       "name": "Mega Physical Attacker",
       "moves": [
@@ -31458,7 +32177,7 @@
         "MOVE_ICE_FANG"
       ],
       "nature": "NATURE_ADAMANT",
-      "ability": "ABILITY_SPEED_BOOST",
+      "ability": "ABILITY_STRONG_JAW",
       "item": "ITEM_NONE",
       "required_item": "ITEM_SHARPEDONITE",
       "stat_points": [
@@ -31469,8 +32188,32 @@
         0,
         32
       ],
-      "role": "Mega Physical Attacker — Sharpedo-Mega",
-      "source": "preserved-handbook-alternative"
+      "role": "Mega Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
+      "species": "SPECIES_CAMERUPT",
+      "name": "Mega Special Attacker",
+      "moves": [
+        "MOVE_EARTH_POWER",
+        "MOVE_PROTECT",
+        "MOVE_HEAT_WAVE",
+        "MOVE_ANCIENTPOWER"
+      ],
+      "nature": "NATURE_QUIET",
+      "ability": "ABILITY_SHEER_FORCE",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_CAMERUPTITE",
+      "stat_points": [
+        32,
+        0,
+        2,
+        32,
+        0,
+        0
+      ],
+      "role": "Mega Special Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
     },
     {
       "species": "SPECIES_FLYGON",
@@ -31479,7 +32222,7 @@
         "MOVE_PROTECT",
         "MOVE_SCALE_SHOT",
         "MOVE_TAILWIND",
-        "MOVE_EARTH_POWER"
+        "MOVE_EARTHQUAKE"
       ],
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_LEVITATE",
@@ -31493,12 +32236,12 @@
         0,
         32
       ],
-      "role": "Doubles Bulky Attacker",
-      "source": "preserved-handbook-alternative"
+      "role": "Yache physical attacker and Tailwind setter",
+      "source": "Emerald Champions authored modern doubles supplement"
     },
     {
       "species": "SPECIES_ALTARIA",
-      "name": "Mega Tailwind",
+      "name": "Mega Tailwind Support",
       "moves": [
         "MOVE_HYPER_VOICE",
         "MOVE_PROTECT",
@@ -31506,7 +32249,7 @@
         "MOVE_ROOST"
       ],
       "nature": "NATURE_MODEST",
-      "ability": "ABILITY_CLOUD_NINE",
+      "ability": "ABILITY_PIXILATE",
       "item": "ITEM_NONE",
       "required_item": "ITEM_ALTARIANITE",
       "stat_points": [
@@ -31517,8 +32260,8 @@
         0,
         32
       ],
-      "role": "Mega Tailwind Support — Altaria-Mega",
-      "source": "preserved-handbook-alternative"
+      "role": "Mega Tailwind Support",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
     },
     {
       "species": "SPECIES_CRAWDAUNT",
@@ -31545,6 +32288,54 @@
       "source": "preserved-handbook-alternative"
     },
     {
+      "species": "SPECIES_BANETTE",
+      "name": "Mega Trick Room Support",
+      "moves": [
+        "MOVE_POLTERGEIST",
+        "MOVE_DESTINY_BOND",
+        "MOVE_SHADOW_SNEAK",
+        "MOVE_TRICK_ROOM"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_PRANKSTER",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_BANETTITE",
+      "stat_points": [
+        32,
+        32,
+        2,
+        0,
+        0,
+        0
+      ],
+      "role": "Mega Trick Room Support",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
+      "species": "SPECIES_CHIMECHO",
+      "name": "Mega Trick Room Support",
+      "moves": [
+        "MOVE_TRICK_ROOM",
+        "MOVE_FLASH_CANNON",
+        "MOVE_PROTECT",
+        "MOVE_PSYCHIC"
+      ],
+      "nature": "NATURE_QUIET",
+      "ability": "ABILITY_LEVITATE",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_CHIMECHITE",
+      "stat_points": [
+        32,
+        0,
+        2,
+        32,
+        0,
+        0
+      ],
+      "role": "Mega Trick Room Support",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
       "species": "SPECIES_ABSOL",
       "name": "Physical Attacker",
       "moves": [
@@ -31567,6 +32358,54 @@
       ],
       "role": "Physical Attacker",
       "source": "preserved-handbook-alternative"
+    },
+    {
+      "species": "SPECIES_ABSOL",
+      "name": "Mega Physical Attacker",
+      "moves": [
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_KNOCK_OFF",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_MAGIC_BOUNCE",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_ABSOLITE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Mega Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
+      "species": "SPECIES_ABSOL",
+      "name": "Mega Z Physical",
+      "moves": [
+        "MOVE_PLAY_ROUGH",
+        "MOVE_KNOCK_OFF",
+        "MOVE_SUCKER_PUNCH",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_MAGIC_BOUNCE",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_ABSOLITE_Z",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Mega Z Magic Bounce physical attacker",
+      "source": "Emerald Champions custom Mega extension: current form data and authored doubles corpus"
     },
     {
       "species": "SPECIES_GLALIE",
@@ -31593,6 +32432,54 @@
       "source": "preserved-handbook-alternative"
     },
     {
+      "species": "SPECIES_GLALIE",
+      "name": "Mega Physical Attacker",
+      "moves": [
+        "MOVE_PROTECT",
+        "MOVE_EXPLOSION",
+        "MOVE_ICE_SHARD",
+        "MOVE_BODY_SLAM"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_REFRIGERATE",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_GLALITITE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Mega Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
+      "species": "SPECIES_SALAMENCE",
+      "name": "Mega Tailwind",
+      "moves": [
+        "MOVE_DOUBLE_EDGE",
+        "MOVE_EARTHQUAKE",
+        "MOVE_TAILWIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_AERILATE",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_SALAMENCITE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Mega Aerilate Tailwind attacker",
+      "source": "Emerald Champions custom Mega extension: current form data and authored doubles corpus"
+    },
+    {
       "species": "SPECIES_METAGROSS",
       "name": "Physical Attacker II",
       "moves": [
@@ -31615,6 +32502,30 @@
       ],
       "role": "Physical Attacker",
       "source": "preserved-handbook-alternative"
+    },
+    {
+      "species": "SPECIES_METAGROSS",
+      "name": "Mega Physical Attacker",
+      "moves": [
+        "MOVE_PROTECT",
+        "MOVE_PSYCHIC_FANGS",
+        "MOVE_IRON_HEAD",
+        "MOVE_BODY_PRESS"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_TOUGH_CLAWS",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_METAGROSSITE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Mega Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
     },
     {
       "species": "SPECIES_REGIROCK",
@@ -31689,6 +32600,30 @@
       "source": "preserved-handbook-alternative"
     },
     {
+      "species": "SPECIES_LATIAS",
+      "name": "Mega Bulky Tailwind",
+      "moves": [
+        "MOVE_DRACO_METEOR",
+        "MOVE_MIST_BALL",
+        "MOVE_TAILWIND",
+        "MOVE_RECOVER"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_LEVITATE",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_LATIASITE",
+      "stat_points": [
+        32,
+        0,
+        2,
+        0,
+        0,
+        32
+      ],
+      "role": "Mega bulky Tailwind support attacker",
+      "source": "Emerald Champions custom Mega extension: current form data and authored doubles corpus"
+    },
+    {
       "species": "SPECIES_LATIOS",
       "name": "Bulky Attacker",
       "moves": [
@@ -31711,6 +32646,30 @@
       ],
       "role": "Doubles Bulky Attacker",
       "source": "preserved-handbook-alternative"
+    },
+    {
+      "species": "SPECIES_LATIOS",
+      "name": "Mega Tailwind",
+      "moves": [
+        "MOVE_DRACO_METEOR",
+        "MOVE_LUSTER_PURGE",
+        "MOVE_TAILWIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_LEVITATE",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_LATIOSITE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Mega fast Tailwind special attacker",
+      "source": "Emerald Champions custom Mega extension: current form data and authored doubles corpus"
     },
     {
       "species": "SPECIES_GROUDON",
@@ -31809,13 +32768,37 @@
       "source": "preserved-handbook-alternative"
     },
     {
+      "species": "SPECIES_STARAPTOR",
+      "name": "Mega Physical Attacker",
+      "moves": [
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_PROTECT",
+        "MOVE_BRAVE_BIRD",
+        "MOVE_ROOST"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_CONTRARY",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_STARAPTITE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Mega Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
       "species": "SPECIES_FLOATZEL",
       "name": "Wallbreaker",
       "moves": [
         "MOVE_AQUA_JET",
         "MOVE_CLOSE_COMBAT",
         "MOVE_GIGA_IMPACT",
-        "MOVE_PROTECT"
+        "MOVE_FLIP_TURN"
       ],
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_WATER_VEIL",
@@ -31830,7 +32813,8 @@
         32
       ],
       "role": "Doubles Wallbreaker",
-      "source": "preserved-handbook-alternative"
+      "source": "preserved-handbook-alternative",
+      "audit_note": "Emerald Champions executable set-coherence review"
     },
     {
       "species": "SPECIES_GASTRODON",
@@ -31866,7 +32850,7 @@
         "MOVE_GIGA_IMPACT"
       ],
       "nature": "NATURE_JOLLY",
-      "ability": "ABILITY_LIMBER",
+      "ability": "ABILITY_SCRAPPY",
       "item": "ITEM_CHOICE_SCARF",
       "required_item": "ITEM_NONE",
       "stat_points": [
@@ -31879,6 +32863,30 @@
       ],
       "role": "Choice Attacker",
       "source": "preserved-handbook-alternative"
+    },
+    {
+      "species": "SPECIES_LOPUNNY",
+      "name": "Mega Doubles Support",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_ENCORE",
+        "MOVE_U_TURN"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_SCRAPPY",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_LOPUNNITE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Mega Doubles Support",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
     },
     {
       "species": "SPECIES_BRONZONG",
@@ -31910,11 +32918,11 @@
       "moves": [
         "MOVE_PROTECT",
         "MOVE_EARTH_POWER",
-        "MOVE_EARTHQUAKE",
-        "MOVE_DRAGON_CLAW"
+        "MOVE_POWER_GEM",
+        "MOVE_EARTHQUAKE"
       ],
       "nature": "NATURE_MODEST",
-      "ability": "ABILITY_ROUGH_SKIN",
+      "ability": "ABILITY_SAND_FORCE",
       "item": "ITEM_NONE",
       "required_item": "ITEM_GARCHOMPITE",
       "stat_points": [
@@ -31925,8 +32933,32 @@
         0,
         32
       ],
-      "role": "Mega Special Attacker — Garchomp-Mega",
-      "source": "preserved-handbook-alternative"
+      "role": "Mega Special Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
+      "species": "SPECIES_GARCHOMP",
+      "name": "Mega Z Special",
+      "moves": [
+        "MOVE_DRACO_METEOR",
+        "MOVE_EARTH_POWER",
+        "MOVE_FLAMETHROWER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_SAND_VEIL",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_GARCHOMPITE_Z",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Mega Z fast special attacker",
+      "source": "Emerald Champions custom Mega extension: current form data and authored doubles corpus"
     },
     {
       "species": "SPECIES_LUCARIO",
@@ -31953,6 +32985,54 @@
       "source": "preserved-handbook-alternative"
     },
     {
+      "species": "SPECIES_LUCARIO",
+      "name": "Mega Physical Attacker",
+      "moves": [
+        "MOVE_PROTECT",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_METEOR_MASH",
+        "MOVE_BULLET_PUNCH"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_ADAPTABILITY",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_LUCARIONITE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Mega Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
+      "species": "SPECIES_LUCARIO",
+      "name": "Mega Z Special",
+      "moves": [
+        "MOVE_AURA_SPHERE",
+        "MOVE_FLASH_CANNON",
+        "MOVE_VACUUM_WAVE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_STEADFAST",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_LUCARIONITE_Z",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Mega Z fast special priority attacker",
+      "source": "Emerald Champions custom Mega extension: current form data and authored doubles corpus"
+    },
+    {
       "species": "SPECIES_ABOMASNOW",
       "name": "Special Attacker",
       "moves": [
@@ -31977,13 +33057,37 @@
       "source": "preserved-handbook-alternative"
     },
     {
+      "species": "SPECIES_ABOMASNOW",
+      "name": "Mega Special Attacker",
+      "moves": [
+        "MOVE_BLIZZARD",
+        "MOVE_EARTH_POWER",
+        "MOVE_PROTECT",
+        "MOVE_ENERGY_BALL"
+      ],
+      "nature": "NATURE_QUIET",
+      "ability": "ABILITY_SNOW_WARNING",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_ABOMASITE",
+      "stat_points": [
+        32,
+        0,
+        2,
+        32,
+        0,
+        0
+      ],
+      "role": "Mega Special Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
       "species": "SPECIES_ELECTIVIRE",
       "name": "Bulky Attacker",
       "moves": [
         "MOVE_ELECTROWEB",
         "MOVE_ICE_PUNCH",
         "MOVE_WILD_CHARGE",
-        "MOVE_PROTECT"
+        "MOVE_STOMPING_TANTRUM"
       ],
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_MOTOR_DRIVE",
@@ -31998,7 +33102,8 @@
         32
       ],
       "role": "Doubles Bulky Attacker",
-      "source": "preserved-handbook-alternative"
+      "source": "preserved-handbook-alternative",
+      "audit_note": "Emerald Champions executable set-coherence review"
     },
     {
       "species": "SPECIES_MAGMORTAR",
@@ -32058,7 +33163,7 @@
         "MOVE_SACRED_SWORD"
       ],
       "nature": "NATURE_JOLLY",
-      "ability": "ABILITY_JUSTIFIED",
+      "ability": "ABILITY_INNER_FOCUS",
       "item": "ITEM_NONE",
       "required_item": "ITEM_GALLADITE",
       "stat_points": [
@@ -32069,8 +33174,8 @@
         0,
         32
       ],
-      "role": "Mega Physical Attacker — Gallade-Mega",
-      "source": "preserved-handbook-alternative"
+      "role": "Mega Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
     },
     {
       "species": "SPECIES_PROBOPASS",
@@ -32145,13 +33250,37 @@
       "source": "preserved-handbook-alternative"
     },
     {
+      "species": "SPECIES_FROSLASS",
+      "name": "Mega Special Attacker",
+      "moves": [
+        "MOVE_BLIZZARD",
+        "MOVE_PROTECT",
+        "MOVE_SHADOW_BALL",
+        "MOVE_AURORA_VEIL"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_SNOW_WARNING",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_FROSLASSITE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Mega Special Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
       "species": "SPECIES_ROTOM",
       "name": "Choice Attacker",
       "moves": [
         "MOVE_VOLT_SWITCH",
         "MOVE_THUNDERBOLT",
         "MOVE_DISCHARGE",
-        "MOVE_PROTECT"
+        "MOVE_TRICK"
       ],
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_LEVITATE",
@@ -32166,7 +33295,8 @@
         32
       ],
       "role": "Choice Attacker — Rotom-Heat",
-      "source": "preserved-handbook-alternative"
+      "source": "preserved-handbook-alternative",
+      "audit_note": "Emerald Champions executable set-coherence review"
     },
     {
       "species": "SPECIES_MESPRIT",
@@ -32241,6 +33371,30 @@
       "source": "preserved-handbook-alternative"
     },
     {
+      "species": "SPECIES_HEATRAN",
+      "name": "Mega Trick Room",
+      "moves": [
+        "MOVE_HEAT_WAVE",
+        "MOVE_EARTH_POWER",
+        "MOVE_FLASH_CANNON",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_QUIET",
+      "ability": "ABILITY_FLASH_FIRE",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_HEATRANITE",
+      "stat_points": [
+        32,
+        0,
+        2,
+        32,
+        0,
+        0
+      ],
+      "role": "Mega slow bulky spread attacker",
+      "source": "Emerald Champions custom Mega extension: current form data and authored doubles corpus"
+    },
+    {
       "species": "SPECIES_REGIGIGAS",
       "name": "Bulky Setup",
       "moves": [
@@ -32313,6 +33467,30 @@
       "source": "preserved-handbook-alternative"
     },
     {
+      "species": "SPECIES_DARKRAI",
+      "name": "Mega Sleep Control",
+      "moves": [
+        "MOVE_DARK_VOID",
+        "MOVE_DARK_PULSE",
+        "MOVE_ICE_BEAM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_BAD_DREAMS",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_DARKRANITE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Mega Bad Dreams sleep-control attacker",
+      "source": "Emerald Champions custom Mega extension: current form data and authored doubles corpus"
+    },
+    {
       "species": "SPECIES_VICTINI",
       "name": "Support",
       "moves": [
@@ -32335,6 +33513,30 @@
       ],
       "role": "Doubles Support",
       "source": "preserved-handbook-alternative"
+    },
+    {
+      "species": "SPECIES_EMBOAR",
+      "name": "Mega Physical Attacker",
+      "moves": [
+        "MOVE_PROTECT",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_FLARE_BLITZ",
+        "MOVE_HELPING_HAND"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_MOLD_BREAKER",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_EMBOARITE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Mega Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
     },
     {
       "species": "SPECIES_ZEBSTRIKA",
@@ -32370,7 +33572,7 @@
         "MOVE_HIGH_HORSEPOWER"
       ],
       "nature": "NATURE_JOLLY",
-      "ability": "ABILITY_SAND_RUSH",
+      "ability": "ABILITY_PIERCING_DRILL",
       "item": "ITEM_NONE",
       "required_item": "ITEM_EXCADRITE",
       "stat_points": [
@@ -32381,17 +33583,17 @@
         0,
         32
       ],
-      "role": "Mega Physical Attacker — Excadrill-Mega",
-      "source": "preserved-handbook-alternative"
+      "role": "Mega Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
     },
     {
       "species": "SPECIES_AUDINO",
-      "name": "Mega Trick Room",
+      "name": "Mega Trick Room Support",
       "moves": [
+        "MOVE_TRICK_ROOM",
         "MOVE_DAZZLING_GLEAM",
-        "MOVE_SIMPLE_BEAM",
-        "MOVE_HYPER_VOICE",
-        "MOVE_FIRE_BLAST"
+        "MOVE_LIFE_DEW",
+        "MOVE_SIMPLE_BEAM"
       ],
       "nature": "NATURE_BOLD",
       "ability": "ABILITY_HEALER",
@@ -32405,8 +33607,8 @@
         2,
         0
       ],
-      "role": "Mega Trick Room Support — Audino-Mega",
-      "source": "preserved-handbook-alternative"
+      "role": "Mega Trick Room Support",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
     },
     {
       "species": "SPECIES_LEAVANNY",
@@ -32457,13 +33659,37 @@
       "source": "preserved-handbook-alternative"
     },
     {
+      "species": "SPECIES_SCOLIPEDE",
+      "name": "Mega Setup Sweeper",
+      "moves": [
+        "MOVE_PROTECT",
+        "MOVE_LEECH_LIFE",
+        "MOVE_SWORDS_DANCE",
+        "MOVE_POISON_JAB"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_SHELL_ARMOR",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_SCOLIPITE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Mega Setup Sweeper",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
       "species": "SPECIES_BASCULIN",
       "name": "Wallbreaker",
       "moves": [
         "MOVE_FLIP_TURN",
         "MOVE_PSYCHIC_FANGS",
         "MOVE_AQUA_JET",
-        "MOVE_PROTECT"
+        "MOVE_WAVE_CRASH"
       ],
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_ADAPTABILITY",
@@ -32478,7 +33704,8 @@
         32
       ],
       "role": "Doubles Wallbreaker",
-      "source": "preserved-handbook-alternative"
+      "source": "preserved-handbook-alternative",
+      "audit_note": "Emerald Champions executable set-coherence review"
     },
     {
       "species": "SPECIES_SCRAFTY",
@@ -32503,6 +33730,30 @@
       ],
       "role": "Physical Attacker",
       "source": "preserved-handbook-alternative"
+    },
+    {
+      "species": "SPECIES_SCRAFTY",
+      "name": "Mega Physical Attacker",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_KNOCK_OFF",
+        "MOVE_DRAIN_PUNCH",
+        "MOVE_CLOSE_COMBAT"
+      ],
+      "nature": "NATURE_BRAVE",
+      "ability": "ABILITY_INTIMIDATE",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_SCRAFTINITE",
+      "stat_points": [
+        32,
+        32,
+        2,
+        0,
+        0,
+        0
+      ],
+      "role": "Mega Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
     },
     {
       "species": "SPECIES_ZOROARK",
@@ -32601,8 +33852,32 @@
       "source": "preserved-handbook-alternative"
     },
     {
+      "species": "SPECIES_EELEKTROSS",
+      "name": "Mega Special Attacker",
+      "moves": [
+        "MOVE_PROTECT",
+        "MOVE_THUNDERBOLT",
+        "MOVE_GIGA_DRAIN",
+        "MOVE_FLAMETHROWER"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_EELEVATE",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_EELEKTROSSITE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Mega Special Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
       "species": "SPECIES_CHANDELURE",
-      "name": "Mega Trick Room",
+      "name": "Mega Trick Room Support",
       "moves": [
         "MOVE_SHADOW_BALL",
         "MOVE_HEAT_WAVE",
@@ -32610,7 +33885,7 @@
         "MOVE_TRICK_ROOM"
       ],
       "nature": "NATURE_MODEST",
-      "ability": "ABILITY_FLASH_FIRE",
+      "ability": "ABILITY_INFILTRATOR",
       "item": "ITEM_NONE",
       "required_item": "ITEM_CHANDELURITE",
       "stat_points": [
@@ -32621,8 +33896,8 @@
         0,
         0
       ],
-      "role": "Mega Trick Room Support — Chandelure-Mega",
-      "source": "preserved-handbook-alternative"
+      "role": "Mega Trick Room Support",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
     },
     {
       "species": "SPECIES_HAXORUS",
@@ -32721,6 +33996,30 @@
       "source": "preserved-handbook-alternative"
     },
     {
+      "species": "SPECIES_GOLURK",
+      "name": "Mega Physical Attacker",
+      "moves": [
+        "MOVE_POLTERGEIST",
+        "MOVE_HEADLONG_RUSH",
+        "MOVE_PROTECT",
+        "MOVE_ICE_PUNCH"
+      ],
+      "nature": "NATURE_BRAVE",
+      "ability": "ABILITY_UNSEEN_FIST",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_GOLURKITE",
+      "stat_points": [
+        32,
+        32,
+        2,
+        0,
+        0,
+        0
+      ],
+      "role": "Mega Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
       "species": "SPECIES_MANDIBUZZ",
       "name": "Bulky Attacker",
       "moves": [
@@ -32775,7 +34074,7 @@
         "MOVE_CLOSE_COMBAT",
         "MOVE_ROCK_SLIDE",
         "MOVE_STONE_EDGE",
-        "MOVE_PROTECT"
+        "MOVE_HIGH_HORSEPOWER"
       ],
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_JUSTIFIED",
@@ -32790,7 +34089,8 @@
         32
       ],
       "role": "Doubles Wallbreaker",
-      "source": "preserved-handbook-alternative"
+      "source": "preserved-handbook-alternative",
+      "audit_note": "Emerald Champions executable set-coherence review"
     },
     {
       "species": "SPECIES_THUNDURUS",
@@ -32889,6 +34189,30 @@
       "source": "preserved-handbook-alternative"
     },
     {
+      "species": "SPECIES_CHESNAUGHT",
+      "name": "Mega Physical Attacker",
+      "moves": [
+        "MOVE_BODY_PRESS",
+        "MOVE_SPIKY_SHIELD",
+        "MOVE_WOOD_HAMMER",
+        "MOVE_WIDE_GUARD"
+      ],
+      "nature": "NATURE_CAREFUL",
+      "ability": "ABILITY_BULLETPROOF",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_CHESNAUGHTITE",
+      "stat_points": [
+        32,
+        0,
+        2,
+        0,
+        32,
+        0
+      ],
+      "role": "Mega Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
       "species": "SPECIES_DELPHOX",
       "name": "Trick Room",
       "moves": [
@@ -32913,6 +34237,30 @@
       "source": "preserved-handbook-alternative"
     },
     {
+      "species": "SPECIES_DELPHOX",
+      "name": "Mega Setup Sweeper",
+      "moves": [
+        "MOVE_HEAT_WAVE",
+        "MOVE_PROTECT",
+        "MOVE_NASTY_PLOT",
+        "MOVE_PSYCHIC"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_LEVITATE",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_DELPHOXITE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Mega Setup Sweeper",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
       "species": "SPECIES_GRENINJA",
       "name": "Mega Special Attacker",
       "moves": [
@@ -32933,8 +34281,32 @@
         0,
         32
       ],
-      "role": "Mega Special Attacker — Greninja-Mega",
-      "source": "preserved-handbook-alternative"
+      "role": "Mega Special Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
+      "species": "SPECIES_PYROAR",
+      "name": "Mega Special Attacker",
+      "moves": [
+        "MOVE_HEAT_WAVE",
+        "MOVE_PROTECT",
+        "MOVE_OVERHEAT",
+        "MOVE_SOLARBEAM"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_FIRE_MANE",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_PYROARITE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Mega Special Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
     },
     {
       "species": "SPECIES_FLOETTE",
@@ -32943,7 +34315,7 @@
         "MOVE_MOONBLAST",
         "MOVE_DAZZLING_GLEAM",
         "MOVE_ENERGY_BALL",
-        "MOVE_PROTECT"
+        "MOVE_PSYCHIC"
       ],
       "nature": "NATURE_MODEST",
       "ability": "ABILITY_FLOWER_VEIL",
@@ -32958,21 +34330,22 @@
         32
       ],
       "role": "Choice Attacker — Floette-Eternal",
-      "source": "preserved-handbook-alternative"
+      "source": "preserved-handbook-alternative",
+      "audit_note": "Emerald Champions executable set-coherence review"
     },
     {
-      "species": "SPECIES_MEOWSTIC",
-      "name": "Special Attacker",
+      "species": "SPECIES_FLOETTE",
+      "name": "Mega Special Attacker",
       "moves": [
         "MOVE_PROTECT",
-        "MOVE_EXPANDING_FORCE",
-        "MOVE_FAKE_OUT",
-        "MOVE_DARK_PULSE"
+        "MOVE_DAZZLING_GLEAM",
+        "MOVE_MOONBLAST",
+        "MOVE_LIGHT_OF_RUIN"
       ],
-      "nature": "NATURE_HASTY",
-      "ability": "ABILITY_PRANKSTER",
-      "item": "ITEM_LIGHT_CLAY",
-      "required_item": "ITEM_NONE",
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_FAIRY_AURA",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_FLOETTITE",
       "stat_points": [
         2,
         0,
@@ -32981,8 +34354,8 @@
         0,
         32
       ],
-      "role": "Mega Special Attacker — Meowstic-F-Mega",
-      "source": "preserved-handbook-alternative"
+      "role": "Mega Special Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
     },
     {
       "species": "SPECIES_MALAMAR",
@@ -33009,6 +34382,54 @@
       "source": "preserved-handbook-alternative"
     },
     {
+      "species": "SPECIES_MALAMAR",
+      "name": "Mega Trick Room Support",
+      "moves": [
+        "MOVE_SUPERPOWER",
+        "MOVE_PROTECT",
+        "MOVE_KNOCK_OFF",
+        "MOVE_TRICK_ROOM"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_CONTRARY",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_MALAMARITE",
+      "stat_points": [
+        32,
+        32,
+        2,
+        0,
+        0,
+        0
+      ],
+      "role": "Mega Trick Room Support",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
+      "species": "SPECIES_BARBARACLE",
+      "name": "Mega Setup Sweeper",
+      "moves": [
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_ROCK_SLIDE",
+        "MOVE_PROTECT",
+        "MOVE_SHELL_SMASH"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_TOUGH_CLAWS",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_BARBARACITE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Mega Setup Sweeper",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
       "species": "SPECIES_DRAGALGE",
       "name": "Special Attacker",
       "moves": [
@@ -33031,6 +34452,30 @@
       ],
       "role": "Special Attacker",
       "source": "preserved-handbook-alternative"
+    },
+    {
+      "species": "SPECIES_DRAGALGE",
+      "name": "Mega Special Attacker",
+      "moves": [
+        "MOVE_PROTECT",
+        "MOVE_SLUDGE_BOMB",
+        "MOVE_DRACO_METEOR",
+        "MOVE_FLIP_TURN"
+      ],
+      "nature": "NATURE_MODEST",
+      "ability": "ABILITY_REGENERATOR",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_DRAGALGITE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Mega Special Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
     },
     {
       "species": "SPECIES_HAWLUCHA",
@@ -33057,6 +34502,30 @@
       "source": "preserved-handbook-alternative"
     },
     {
+      "species": "SPECIES_HAWLUCHA",
+      "name": "Mega Physical Attacker",
+      "moves": [
+        "MOVE_ENTRAINMENT",
+        "MOVE_DETECT",
+        "MOVE_PROTECT",
+        "MOVE_BRAVE_BIRD"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_NO_GUARD",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_HAWLUCHANITE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Mega Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
       "species": "SPECIES_GOODRA",
       "name": "Special Attacker II",
       "moves": [
@@ -33078,7 +34547,8 @@
         32
       ],
       "role": "Special Attacker",
-      "source": "preserved-handbook-alternative"
+      "source": "preserved-handbook-alternative",
+      "audit_note": "Emerald Champions executable set-coherence review"
     },
     {
       "species": "SPECIES_GOURGEIST",
@@ -33102,7 +34572,8 @@
         0
       ],
       "role": "Trick Room Support — Gourgeist-Super",
-      "source": "preserved-handbook-alternative"
+      "source": "preserved-handbook-alternative",
+      "audit_note": "Emerald Champions executable set-coherence review"
     },
     {
       "species": "SPECIES_XERNEAS",
@@ -33177,6 +34648,30 @@
       "source": "preserved-handbook-alternative"
     },
     {
+      "species": "SPECIES_DIANCIE",
+      "name": "Mega Mixed Attacker",
+      "moves": [
+        "MOVE_DIAMOND_STORM",
+        "MOVE_MOONBLAST",
+        "MOVE_EARTH_POWER",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_NAIVE",
+      "ability": "ABILITY_MAGIC_BOUNCE",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_DIANCITE",
+      "stat_points": [
+        2,
+        16,
+        0,
+        16,
+        0,
+        32
+      ],
+      "role": "Mega Magic Bounce mixed attacker",
+      "source": "Emerald Champions custom Mega extension: current form data and authored doubles corpus"
+    },
+    {
       "species": "SPECIES_CRABOMINABLE",
       "name": "Physical Attacker",
       "moves": [
@@ -33199,6 +34694,30 @@
       ],
       "role": "Physical Attacker",
       "source": "preserved-handbook-alternative"
+    },
+    {
+      "species": "SPECIES_CRABOMINABLE",
+      "name": "Mega Physical Attacker",
+      "moves": [
+        "MOVE_ICE_HAMMER",
+        "MOVE_PROTECT",
+        "MOVE_DRAIN_PUNCH",
+        "MOVE_MACH_PUNCH"
+      ],
+      "nature": "NATURE_BRAVE",
+      "ability": "ABILITY_IRON_FIST",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_CRABOMINITE",
+      "stat_points": [
+        32,
+        32,
+        2,
+        0,
+        0,
+        0
+      ],
+      "role": "Mega Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
     },
     {
       "species": "SPECIES_LYCANROC",
@@ -33249,6 +34768,30 @@
       "source": "preserved-handbook-alternative"
     },
     {
+      "species": "SPECIES_GOLISOPOD",
+      "name": "Mega Trick Room",
+      "moves": [
+        "MOVE_FIRST_IMPRESSION",
+        "MOVE_LIQUIDATION",
+        "MOVE_LEECH_LIFE",
+        "MOVE_WIDE_GUARD"
+      ],
+      "nature": "NATURE_BRAVE",
+      "ability": "ABILITY_EMERGENCY_EXIT",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_GOLISOPITE",
+      "stat_points": [
+        32,
+        32,
+        2,
+        0,
+        0,
+        0
+      ],
+      "role": "Mega slow physical attacker and Wide Guard support",
+      "source": "Emerald Champions custom Mega extension: current form data and authored doubles corpus"
+    },
+    {
       "species": "SPECIES_SILVALLY",
       "name": "Support",
       "moves": [
@@ -33279,7 +34822,7 @@
         "MOVE_CRUNCH",
         "MOVE_PSYCHIC_FANGS",
         "MOVE_LIQUIDATION",
-        "MOVE_PROTECT"
+        "MOVE_ICE_FANG"
       ],
       "nature": "NATURE_JOLLY",
       "ability": "ABILITY_STRONG_JAW",
@@ -33294,21 +34837,22 @@
         32
       ],
       "role": "Choice Attacker",
-      "source": "preserved-handbook-alternative"
+      "source": "preserved-handbook-alternative",
+      "audit_note": "Emerald Champions executable set-coherence review"
     },
     {
       "species": "SPECIES_DRAMPA",
-      "name": "Special Attacker",
+      "name": "Mega Special Attacker",
       "moves": [
         "MOVE_PROTECT",
         "MOVE_HYPER_VOICE",
-        "MOVE_DRAGON_PULSE",
-        "MOVE_HEAT_WAVE"
+        "MOVE_EARTH_POWER",
+        "MOVE_DRAGON_PULSE"
       ],
       "nature": "NATURE_QUIET",
       "ability": "ABILITY_BERSERK",
-      "item": "ITEM_SITRUS_BERRY",
-      "required_item": "ITEM_NONE",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_DRAMPANITE",
       "stat_points": [
         32,
         0,
@@ -33317,8 +34861,8 @@
         0,
         0
       ],
-      "role": "Mega Special Attacker — Drampa-Mega",
-      "source": "preserved-handbook-alternative"
+      "role": "Mega Special Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
     },
     {
       "species": "SPECIES_SOLGALEO",
@@ -33537,6 +35081,30 @@
       "source": "preserved-handbook-alternative"
     },
     {
+      "species": "SPECIES_MAGEARNA",
+      "name": "Mega Trick Room",
+      "moves": [
+        "MOVE_FLEUR_CANNON",
+        "MOVE_FLASH_CANNON",
+        "MOVE_TRICK_ROOM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_QUIET",
+      "ability": "ABILITY_SOUL_HEART",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_MAGEARNITE",
+      "stat_points": [
+        32,
+        0,
+        2,
+        32,
+        0,
+        0
+      ],
+      "role": "Mega Soul-Heart Trick Room attacker",
+      "source": "Emerald Champions custom Mega extension: current form data and authored doubles corpus"
+    },
+    {
       "species": "SPECIES_NAGANADEL",
       "name": "Support",
       "moves": [
@@ -33583,6 +35151,30 @@
       ],
       "role": "Doubles Support",
       "source": "preserved-handbook-alternative"
+    },
+    {
+      "species": "SPECIES_ZERAORA",
+      "name": "Mega Physical",
+      "moves": [
+        "MOVE_FAKE_OUT",
+        "MOVE_PLASMA_FISTS",
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_VOLT_ABSORB",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_ZERAORITE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Mega fast Fake Out physical attacker",
+      "source": "Emerald Champions custom Mega extension: current form data and authored doubles corpus"
     },
     {
       "species": "SPECIES_RILLABOOM",
@@ -33658,12 +35250,12 @@
     },
     {
       "species": "SPECIES_DREDNAW",
-      "name": "Bulky Setup",
+      "name": "Shell Smash",
       "moves": [
+        "MOVE_SHELL_SMASH",
         "MOVE_ROCK_SLIDE",
         "MOVE_LIQUIDATION",
-        "MOVE_PROTECT",
-        "MOVE_CRUNCH"
+        "MOVE_PROTECT"
       ],
       "nature": "NATURE_ADAMANT",
       "ability": "ABILITY_SHELL_ARMOR",
@@ -33677,8 +35269,9 @@
         0,
         32
       ],
-      "role": "Doubles Bulky Setup",
-      "source": "preserved-handbook-alternative"
+      "role": "White Herb Shell Smash attacker",
+      "source": "preserved-handbook-alternative",
+      "audit_note": "Emerald Champions executable set-coherence review"
     },
     {
       "species": "SPECIES_TOXTRICITY",
@@ -33729,13 +35322,37 @@
       "source": "preserved-handbook-alternative"
     },
     {
+      "species": "SPECIES_FALINKS",
+      "name": "Mega Physical Attacker",
+      "moves": [
+        "MOVE_CLOSE_COMBAT",
+        "MOVE_NO_RETREAT",
+        "MOVE_PROTECT",
+        "MOVE_ROCK_SLIDE"
+      ],
+      "nature": "NATURE_JOLLY",
+      "ability": "ABILITY_DEFIANT",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_FALINKSITE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Mega Physical Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
       "species": "SPECIES_STONJOURNER",
       "name": "Choice Attacker",
       "moves": [
         "MOVE_HEAT_CRASH",
         "MOVE_STONE_EDGE",
         "MOVE_ROCK_SLIDE",
-        "MOVE_PROTECT"
+        "MOVE_HEAVY_SLAM"
       ],
       "nature": "NATURE_ADAMANT",
       "ability": "ABILITY_POWER_SPOT",
@@ -33750,7 +35367,8 @@
         32
       ],
       "role": "Choice Attacker",
-      "source": "preserved-handbook-alternative"
+      "source": "preserved-handbook-alternative",
+      "audit_note": "Emerald Champions executable set-coherence review"
     },
     {
       "species": "SPECIES_INDEEDEE",
@@ -33897,13 +35515,85 @@
       "source": "preserved-handbook-alternative"
     },
     {
+      "species": "SPECIES_MEOWSTIC_F",
+      "name": "Mega Special Attacker",
+      "moves": [
+        "MOVE_PROTECT",
+        "MOVE_EXPANDING_FORCE",
+        "MOVE_FAKE_OUT",
+        "MOVE_DARK_PULSE"
+      ],
+      "nature": "NATURE_HASTY",
+      "ability": "ABILITY_TRACE",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_MEOWSTICITE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Mega Special Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
+    },
+    {
+      "species": "SPECIES_ZYGARDE_50_POWER_CONSTRUCT",
+      "name": "Mega Special Control",
+      "moves": [
+        "MOVE_DRACO_METEOR",
+        "MOVE_EARTH_POWER",
+        "MOVE_GLARE",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_AURA_BREAK",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_ZYGARDITE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Power Construct into Complete, then Mega special control",
+      "source": "Emerald Champions custom Mega extension: current form data and authored doubles corpus"
+    },
+    {
+      "species": "SPECIES_MAGEARNA_ORIGINAL",
+      "name": "Mega Trick Room",
+      "moves": [
+        "MOVE_FLEUR_CANNON",
+        "MOVE_FLASH_CANNON",
+        "MOVE_TRICK_ROOM",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_QUIET",
+      "ability": "ABILITY_SOUL_HEART",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_MAGEARNITE",
+      "stat_points": [
+        32,
+        0,
+        2,
+        32,
+        0,
+        0
+      ],
+      "role": "Original Color Mega Soul-Heart Trick Room attacker",
+      "source": "Emerald Champions custom Mega extension: current form data and authored doubles corpus"
+    },
+    {
       "species": "SPECIES_TATSUGIRI",
       "name": "Bulky Attacker",
       "moves": [
         "MOVE_MUDDY_WATER",
         "MOVE_RAPID_SPIN",
         "MOVE_ICY_WIND",
-        "MOVE_PROTECT"
+        "MOVE_DRAGON_PULSE"
       ],
       "nature": "NATURE_MODEST",
       "ability": "ABILITY_STORM_DRAIN",
@@ -33918,7 +35608,80 @@
         32
       ],
       "role": "Doubles Bulky Attacker",
-      "source": "preserved-handbook-alternative"
+      "source": "preserved-handbook-alternative",
+      "audit_note": "Emerald Champions executable set-coherence review"
+    },
+    {
+      "species": "SPECIES_TATSUGIRI",
+      "name": "Mega Storm Drain",
+      "moves": [
+        "MOVE_DRACO_METEOR",
+        "MOVE_MUDDY_WATER",
+        "MOVE_ICY_WIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_STORM_DRAIN",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_TATSUGIRINITE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Mega Curly Storm Drain special attacker",
+      "source": "Emerald Champions custom Mega extension: current form data and authored doubles corpus"
+    },
+    {
+      "species": "SPECIES_TATSUGIRI_DROOPY",
+      "name": "Mega Storm Drain",
+      "moves": [
+        "MOVE_DRACO_METEOR",
+        "MOVE_MUDDY_WATER",
+        "MOVE_ICY_WIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_STORM_DRAIN",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_TATSUGIRINITE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Mega Droopy Storm Drain special attacker",
+      "source": "Emerald Champions custom Mega extension: current form data and authored doubles corpus"
+    },
+    {
+      "species": "SPECIES_TATSUGIRI_STRETCHY",
+      "name": "Mega Storm Drain",
+      "moves": [
+        "MOVE_DRACO_METEOR",
+        "MOVE_MUDDY_WATER",
+        "MOVE_ICY_WIND",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_TIMID",
+      "ability": "ABILITY_STORM_DRAIN",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_TATSUGIRINITE",
+      "stat_points": [
+        2,
+        0,
+        0,
+        32,
+        0,
+        32
+      ],
+      "role": "Mega Stretchy Storm Drain special attacker",
+      "source": "Emerald Champions custom Mega extension: current form data and authored doubles corpus"
     },
     {
       "species": "SPECIES_FLUTTER_MANE",
@@ -33997,12 +35760,12 @@
       "name": "Mega Special Attacker",
       "moves": [
         "MOVE_POWER_GEM",
+        "MOVE_EARTH_POWER",
         "MOVE_SLUDGE_BOMB",
-        "MOVE_SPIKY_SHIELD",
-        "MOVE_HYPER_BEAM"
+        "MOVE_SPIKY_SHIELD"
       ],
       "nature": "NATURE_TIMID",
-      "ability": "ABILITY_TOXIC_DEBRIS",
+      "ability": "ABILITY_ADAPTABILITY",
       "item": "ITEM_NONE",
       "required_item": "ITEM_GLIMMORANITE",
       "stat_points": [
@@ -34013,8 +35776,8 @@
         0,
         32
       ],
-      "role": "Mega Special Attacker — Glimmora-Mega",
-      "source": "preserved-handbook-alternative"
+      "role": "Mega Special Attacker",
+      "source": "Pokemon Champions doubles handbook: M-B ladder data"
     },
     {
       "species": "SPECIES_GIMMIGHOUL",
@@ -34095,7 +35858,7 @@
         "MOVE_DARK_PULSE",
         "MOVE_OVERHEAT",
         "MOVE_HYPER_BEAM",
-        "MOVE_PROTECT"
+        "MOVE_HEAT_WAVE"
       ],
       "nature": "NATURE_TIMID",
       "ability": "ABILITY_BEADS_OF_RUIN",
@@ -34110,7 +35873,8 @@
         32
       ],
       "role": "Choice Attacker",
-      "source": "preserved-handbook-alternative"
+      "source": "preserved-handbook-alternative",
+      "audit_note": "Emerald Champions executable set-coherence review"
     },
     {
       "species": "SPECIES_ROARING_MOON",
@@ -34167,7 +35931,7 @@
         "MOVE_THUNDERCLAP",
         "MOVE_THUNDERBOLT",
         "MOVE_DRAGON_PULSE",
-        "MOVE_PROTECT"
+        "MOVE_VOLT_SWITCH"
       ],
       "nature": "NATURE_MODEST",
       "ability": "ABILITY_PROTOSYNTHESIS",
@@ -34182,7 +35946,8 @@
         32
       ],
       "role": "Doubles Bulky Attacker",
-      "source": "preserved-handbook-alternative"
+      "source": "preserved-handbook-alternative",
+      "audit_note": "Emerald Champions executable set-coherence review"
     },
     {
       "species": "SPECIES_RAGING_BOLT",
@@ -34951,6 +36716,30 @@
       ],
       "role": "Choice Attacker",
       "source": "Pokemon Champions doubles handbook: Smogon doubles pool"
+    },
+    {
+      "species": "SPECIES_BAXCALIBUR",
+      "name": "Mega Physical",
+      "moves": [
+        "MOVE_GLAIVE_RUSH",
+        "MOVE_ICICLE_CRASH",
+        "MOVE_ICE_SHARD",
+        "MOVE_PROTECT"
+      ],
+      "nature": "NATURE_ADAMANT",
+      "ability": "ABILITY_THERMAL_EXCHANGE",
+      "item": "ITEM_NONE",
+      "required_item": "ITEM_BAXCALIBRITE",
+      "stat_points": [
+        2,
+        32,
+        0,
+        0,
+        0,
+        32
+      ],
+      "role": "Mega physical breaker and priority cleaner",
+      "source": "Emerald Champions custom Mega extension: current form data and authored doubles corpus"
     },
     {
       "species": "SPECIES_IRON_LEAVES",

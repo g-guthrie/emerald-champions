@@ -1,5 +1,5 @@
 @ As of 04.06.26 event Script are superseded by Event Snippets (see below).
-@ Kept for backwards compatability.
+@ Kept for backwards compatibility.
 
 EventScript_StartTrainerApproach::
 	selectapproachingtrainer

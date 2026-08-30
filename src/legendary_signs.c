@@ -39,11 +39,19 @@ static const u8 sSignLocationRoute117[] = _("Route 117");
 static const u8 sSignLocationRoute123[] = _("Route 123");
 static const u8 sSignLocationMtPyreExterior[] = _("Mt. Pyre's exterior");
 static const u8 sSignLocationRoute119Land[] = _("Route 119's grass");
-static const u8 sSignLocationRoute119Water[] = _("Route 119's water");
 static const u8 sSignLocationMeteorB1F1R[] = _("Meteor Falls B1F");
 static const u8 sSignLocationVictoryRoad1F[] = _("Victory Road 1F");
 static const u8 sSignLocationPetalburgWoods2[] = _("deep Petalburg Woods");
 static const u8 sSignLocationDesertUnderpass[] = _("Desert Underpass");
+static const u8 sSignLocationAshenWoods[] = _("Ashen Woods");
+static const u8 sSignLocationRoute112[] = _("Route 112");
+static const u8 sSignLocationRoute118[] = _("Route 118");
+static const u8 sSignLocationSeafloorApproach[] = _("Seafloor Cavern");
+static const u8 sSignLocationRoute125[] = _("Route 125");
+static const u8 sSignLocationRoute126[] = _("Route 126");
+static const u8 sSignLocationRoute127[] = _("Route 127");
+static const u8 sSignLocationVictoryRoadB1F[] = _("Victory Road B1F");
+static const u8 sSignLocationMagmaHideout4F[] = _("Magma Hideout 4F");
 static const u8 sSignLocationUnknown[] = _("an unknown place");
 
 static const u8 *GetLegendarySignLocationName(enum LegendarySignId signId)
@@ -51,6 +59,7 @@ static const u8 *GetLegendarySignLocationName(enum LegendarySignId signId)
     switch (signId)
     {
     case LEGENDARY_SIGN_AZELF:
+    case LEGENDARY_SIGN_CHIEN_PAO:
     case LEGENDARY_SIGN_KYUREM:
         return sSignLocationShoalIce;
     case LEGENDARY_SIGN_CELEBI:
@@ -72,6 +81,7 @@ static const u8 *GetLegendarySignLocationName(enum LegendarySignId signId)
         return sSignLocationSeafloorRoom6;
     case LEGENDARY_SIGN_RAIKOU:
     case LEGENDARY_SIGN_TAPU_KOKO:
+    case LEGENDARY_SIGN_THUNDURUS:
         return sSignLocationRoute110;
     case LEGENDARY_SIGN_REGIDRAGO:
         return sSignLocationMeteor1F2R;
@@ -88,8 +98,6 @@ static const u8 *GetLegendarySignLocationName(enum LegendarySignId signId)
     case LEGENDARY_SIGN_TAPU_LELE:
     case LEGENDARY_SIGN_YVELTAL:
         return sSignLocationMtPyreExterior;
-    case LEGENDARY_SIGN_THUNDURUS:
-        return sSignLocationRoute119Water;
     case LEGENDARY_SIGN_TORNADUS:
         return sSignLocationRoute119Land;
     case LEGENDARY_SIGN_UXIE:
@@ -99,7 +107,28 @@ static const u8 *GetLegendarySignLocationName(enum LegendarySignId signId)
     case LEGENDARY_SIGN_VIRIZION:
         return sSignLocationPetalburgWoods2;
     case LEGENDARY_SIGN_ZYGARDE:
+    case LEGENDARY_SIGN_TING_LU:
         return sSignLocationDesertUnderpass;
+    case LEGENDARY_SIGN_CHI_YU:
+        return sSignLocationAshenWoods;
+    case LEGENDARY_SIGN_KUBFU:
+        return sSignLocationRoute112;
+    case LEGENDARY_SIGN_TYPE_NULL:
+        return sSignLocationRoute118;
+    case LEGENDARY_SIGN_OGERPON:
+        return sSignLocationRoute120;
+    case LEGENDARY_SIGN_MANAPHY:
+        return sSignLocationSeafloorApproach;
+    case LEGENDARY_SIGN_SUICUNE:
+        return sSignLocationRoute125;
+    case LEGENDARY_SIGN_TAPU_FINI:
+        return sSignLocationRoute126;
+    case LEGENDARY_SIGN_KELDEO:
+        return sSignLocationRoute127;
+    case LEGENDARY_SIGN_TERRAKION:
+        return sSignLocationVictoryRoadB1F;
+    case LEGENDARY_SIGN_VOLCANION:
+        return sSignLocationMagmaHideout4F;
     default:
         return sSignLocationUnknown;
     }

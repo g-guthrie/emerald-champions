@@ -131,7 +131,7 @@ MagmaHideout_4F_EventScript_Courtney::
 
 MagmaHideout_4F_Text_CourtneyIntro:
 	.string "COURTNEY: Prediction: you will target the\n"
-	.string "sun before noticing the reversed clock.\p"
+	.string "sun before noticing the split pressure.\p"
 	.string "Let us measure how quickly you correct.$"
 
 MagmaHideout_4F_Text_CourtneyDefeat:

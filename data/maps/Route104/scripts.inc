@@ -15,16 +15,16 @@ Route104_EventScript_StartSailToDewford::
 Route104_OnTransition:
 	call Common_EventScript_SetupRivalGfxId
 	call Route104_EventScript_TrySetRivalPos
-	call Route104_EventScript_ShowOrHideWhiteHerbFlorist
+	call Route104_EventScript_ShowOrHideLeafStoneFlorist
 	end
 
-Route104_EventScript_ShowOrHideWhiteHerbFlorist::
-	goto_if_unset FLAG_MET_PRETTY_PETAL_SHOP_OWNER, Route104_EventScript_HideWhiteHerbFlorist
-	goto_if_unset FLAG_BADGE03_GET, Route104_EventScript_HideWhiteHerbFlorist
+Route104_EventScript_ShowOrHideLeafStoneFlorist::
+	goto_if_unset FLAG_MET_PRETTY_PETAL_SHOP_OWNER, Route104_EventScript_HideLeafStoneFlorist
+	goto_if_unset FLAG_BADGE03_GET, Route104_EventScript_HideLeafStoneFlorist
 	clearflag FLAG_HIDE_ROUTE_104_WHITE_HERB_FLORIST
 	return
 
-Route104_EventScript_HideWhiteHerbFlorist::
+Route104_EventScript_HideLeafStoneFlorist::
 	setflag FLAG_HIDE_ROUTE_104_WHITE_HERB_FLORIST
 	return
 
@@ -270,18 +270,18 @@ Route104_EventScript_ReceivedBerry::
 	release
 	end
 
-Route104_EventScript_WhiteHerbFlorist::
+Route104_EventScript_LeafStoneFlorist::
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_WHITE_HERB, Route104_EventScript_ReceivedWhiteHerb
+	goto_if_set FLAG_RECEIVED_ROUTE104_FLORIST_LEAF_STONE, Route104_EventScript_ReceivedFloristLeafStone
 	msgbox Route104_Text_DontNeedThisTakeIt, MSGBOX_DEFAULT
 	giveitem ITEM_LEAF_STONE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_WHITE_HERB
+	setflag FLAG_RECEIVED_ROUTE104_FLORIST_LEAF_STONE
 	release
 	end
 
-Route104_EventScript_ReceivedWhiteHerb::
+Route104_EventScript_ReceivedFloristLeafStone::
 	msgbox Route104_Text_FlowerShopSellingSaplings, MSGBOX_DEFAULT
 	release
 	end
@@ -325,16 +325,16 @@ Route104_EventScript_Woman::
 Route104_EventScript_Boy2::
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_TM_BULLET_SEED, Route104_EventScript_ReceivedBulletSeed
+	goto_if_set FLAG_RECEIVED_ROUTE104_LEAF_STONE, Route104_EventScript_ReceivedLeafStone
 	msgbox Route104_Text_LikeFillingMouthWithSeedsTakeThis, MSGBOX_DEFAULT
 	giveitem ITEM_LEAF_STONE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_TM_BULLET_SEED
+	setflag FLAG_RECEIVED_ROUTE104_LEAF_STONE
 	release
 	end
 
-Route104_EventScript_ReceivedBulletSeed::
-	msgbox Route104_Text_TMsAreOneTimeUse, MSGBOX_DEFAULT
+Route104_EventScript_ReceivedLeafStone::
+	msgbox Route104_Text_LeafStoneExplanation, MSGBOX_DEFAULT
 	release
 	end
 
@@ -1027,7 +1027,7 @@ Route104_Text_LikeFillingMouthWithSeedsTakeThis:
 	.string "I found this LEAF STONE beneath the\n"
 	.string "flowers! Some GRASS POKéMON evolve\l"
 	.string "when exposed to it. You should have it!$"
-Route104_Text_TMsAreOneTimeUse:
+Route104_Text_LeafStoneExplanation:
 	.string "That LEAF STONE can evolve certain\n"
 	.string "GRASS POKéMON. Use it when ready.$"
 Route104_Text_DontNeedThisTakeIt:

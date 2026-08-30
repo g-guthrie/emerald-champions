@@ -87,7 +87,11 @@ static bool32 SetCorrectAbilityNum(struct Pokemon *mon, enum Species species, en
         if (speciesInfo->abilities[abilityNum] == ability)
             break;
     }
-    assertf(abilityNum < maxAbilityNum, "illegal ability %S for %S", gAbilitiesInfo[ability].name, speciesInfo->speciesName)
+    // An authored Ability mismatch changes the designed battle if we recover
+    // through the generic slot-zero fallback.  Make it fatal in every build;
+    // the release verifier catches the same condition before a ROM ships.
+    fatal_assertf(abilityNum < maxAbilityNum, "illegal ability %S for %S", gAbilitiesInfo[ability].name, speciesInfo->speciesName);
+    if (abilityNum >= maxAbilityNum)
     {
         return FALSE;
     }

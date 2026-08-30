@@ -248,16 +248,16 @@ PetalburgWoods_EventScript_Boy2::
 PetalburgWoods_EventScript_Girl::
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_MIRACLE_SEED, PetalburgWoods_EventScript_ExplainMiracleSeed
+	goto_if_set FLAG_RECEIVED_PETALBURG_WOODS_TART_APPLE, PetalburgWoods_EventScript_ExplainTartApple
 	msgbox PetalburgWoods_Text_TryUsingThisItem, MSGBOX_DEFAULT
 	giveitem ITEM_TART_APPLE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_MIRACLE_SEED
+	setflag FLAG_RECEIVED_PETALBURG_WOODS_TART_APPLE
 	release
 	end
 
-PetalburgWoods_EventScript_ExplainMiracleSeed::
-	msgbox PetalburgWoods_Text_MiracleSeedExplanation, MSGBOX_DEFAULT
+PetalburgWoods_EventScript_ExplainTartApple::
+	msgbox PetalburgWoods_Text_TartAppleExplanation, MSGBOX_DEFAULT
 	release
 	end
 
@@ -445,7 +445,7 @@ PetalburgWoods_Text_TryUsingThisItem:
 	.string "You must be a TRAINER.\n"
 	.string "You should try using this item.$"
 
-PetalburgWoods_Text_MiracleSeedExplanation:
+PetalburgWoods_Text_TartAppleExplanation:
 	.string "It's a TART APPLE.\n"
 	.string "Use it to evolve the right APPLIN.\p"
 	.string "Evolution items reward exploring even\n"

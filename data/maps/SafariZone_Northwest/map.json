@@ -50,7 +50,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "ITEM_VENUSAURITE",
       "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ITEM_SAFARI_ZONE_NORTH_WEST_TM_SOLAR_BEAM"
+      "flag": "FLAG_ITEM_SAFARI_ZONE_NORTH_WEST_VENUSAURITE"
     }
   ],
   "warp_events": [],

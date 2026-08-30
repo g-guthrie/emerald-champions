@@ -112,8 +112,10 @@ def verify_map_data(map_names: list[str], labels: dict[str, tuple[Path, int]]) -
                         0 <= event["x"] < width and 0 <= event["y"] < height,
                         f"{name}:{section}[{index}] outside {width}x{height} at {event['x']},{event['y']}",
                     )
-                elif script not in NULL_SCRIPT_REFS:
-                    # A handful of native signs live on the one-tile border.
+                else:
+                    # A handful of native signs live on the one-tile border,
+                    # but even inert/null background entries must belong to
+                    # the map rather than surviving as out-of-layout debris.
                     require(
                         0 <= event["x"] <= width and 0 <= event["y"] <= height,
                         f"{name}:{section}[{index}] far outside {width}x{height} at {event['x']},{event['y']}",
@@ -206,6 +208,28 @@ def verify_script_references(paths: list[Path], labels: dict[str, tuple[Path, in
     return checked
 
 
+def verify_specialvar_return_contracts(paths: list[Path]) -> int:
+    """Reject `specialvar` calls to C functions that cannot return a value."""
+    void_specials: set[str] = set()
+    for path in (ROOT / "src").rglob("*.c"):
+        void_specials.update(
+            re.findall(r"(?m)^void\s+([A-Za-z_][A-Za-z0-9_]*)\s*\(", path.read_text(errors="ignore"))
+        )
+
+    checked = 0
+    for path in paths:
+        for line_number, line in enumerate(path.read_text(errors="ignore").splitlines(), 1):
+            match = re.search(r"\bspecialvar\s+[^,]+,\s*([A-Za-z_][A-Za-z0-9_]*)", line)
+            if match is None:
+                continue
+            checked += 1
+            require(
+                match.group(1) not in void_specials,
+                f"{path.relative_to(ROOT)}:{line_number}: specialvar reads void special {match.group(1)}",
+            )
+    return checked
+
+
 def label_block(path: str, label: str) -> str:
     text = (ROOT / path).read_text()
     match = re.search(
@@ -254,8 +278,8 @@ def verify_critical_progression_contracts() -> None:
     )
     juan = label_block("data/maps/SootopolisCity_Gym_1F/scripts.inc", "SootopolisCity_Gym_1F_EventScript_Juan")
     require(
-        juan.index("FLAG_BADGE06_GET") < juan.index("trainerbattle_double"),
-        "Juan can be defeated before Winona",
+        juan.index("FLAG_BADGE07_GET") < juan.index("trainerbattle_double"),
+        "Juan can be defeated before Tate and Liza",
     )
 
     dewford = label_block("data/maps/DewfordTown/scripts.inc", "DewfordTown_EventScript_Briney")
@@ -337,6 +361,61 @@ def verify_critical_progression_contracts() -> None:
         "old state-six saves cannot reopen the replacement Birch reward",
     )
 
+    for path, label, destination_token in (
+        (
+            "data/maps/SlateportCity_Harbor/scripts.inc",
+            "SlateportCity_Harbor_EventScript_FerryAttendant",
+            "SlateportCity_Harbor_EventScript_AskForTicket",
+        ),
+        (
+            "data/maps/LilycoveCity_Harbor/scripts.inc",
+            "LilycoveCity_Harbor_EventScript_FerryAttendant",
+            "LilycoveCity_Harbor_EventScript_GetEonTicketState",
+        ),
+    ):
+        ferry = label_block(path, label)
+        require(
+            ferry.index("FLAG_SYS_GAME_CLEAR")
+            < ferry.index("FLAG_RECEIVED_SS_TICKET")
+            < ferry.index(destination_token),
+            f"{path}: postgame ferry can board without the registered S.S. Ticket entitlement",
+        )
+    ticket_fallback = label_block(
+        "data/scripts/players_house.inc",
+        "PlayersHouse_1F_EventScript_SSTicketNoRoom",
+    )
+    require(
+        "goto PlayersHouse_1F_EventScript_ReceivedSSTicket" in ticket_fallback,
+        "full KEY ITEMS and PC storage trap the forced postgame scene before ferry registration",
+    )
+    frontier_ferry = label_block(
+        "data/maps/BattleFrontier_OutsideWest/scripts.inc",
+        "BattleFrontier_OutsideWest_EventScript_FerryAttendant",
+    )
+    require(
+        "FLAG_RECEIVED_SS_TICKET" in frontier_ferry
+        and "checkitem ITEM_SS_TICKET" not in frontier_ferry
+        and frontier_ferry.index("FLAG_RECEIVED_SS_TICKET")
+        < frontier_ferry.index("BattleFrontier_OutsideWest_EventScript_ChooseFerryDestination"),
+        "Battle Frontier return ferry ignores the registered S.S. Ticket entitlement",
+    )
+    for path in (
+        "data/maps/SlateportCity_Harbor/scripts.inc",
+        "data/maps/LilycoveCity_Harbor/scripts.inc",
+        "data/maps/BattleFrontier_OutsideWest/scripts.inc",
+    ):
+        ferry_text = (ROOT / path).read_text()
+        require(
+            "confirmed your ferry" in ferry_text
+            and "flashed the TICKET" not in ferry_text,
+            f"{path}: ferry narration ignores the full-storage registration fallback",
+        )
+        require(
+            "FlashTicketWhereTo" not in ferry_text
+            and "FlashedTicketWhereTo" not in ferry_text,
+            f"{path}: stale physical-ticket narration symbol remains live",
+        )
+
     sootopolis = (ROOT / "data/maps/SootopolisCity/scripts.inc").read_text()
     require(
         "SootopolisCity_EventScript_SetExpertBesideCaveEntrance::\n\tsetobjectxyperm LOCALID_SOOTOPOLIS_EXPERT, 30, 18" in sootopolis,
@@ -374,6 +453,14 @@ def verify_critical_progression_contracts() -> None:
             )
 
     for path, item, progress_token in (
+        ("data/maps/RustboroCity_CuttersHouse/scripts.inc", "ITEM_HM_CUT", "FLAG_RECEIVED_HM_CUT"),
+        ("data/maps/GraniteCave_1F/scripts.inc", "ITEM_HM_FLASH", "FLAG_RECEIVED_HM_FLASH"),
+        ("data/maps/MauvilleCity_House1/scripts.inc", "ITEM_HM_ROCK_SMASH", "FLAG_RECEIVED_HM_ROCK_SMASH"),
+        ("data/maps/RusturfTunnel/scripts.inc", "ITEM_HM_STRENGTH", "FLAG_RECEIVED_HM_STRENGTH"),
+        ("data/maps/PetalburgCity_WallysHouse/scripts.inc", "ITEM_HM_SURF", "FLAG_RECEIVED_HM_SURF"),
+        ("data/maps/MossdeepCity_StevensHouse/scripts.inc", "ITEM_HM_DIVE", "FLAG_RECEIVED_HM_DIVE"),
+        ("data/maps/SootopolisCity/scripts.inc", "ITEM_HM_WATERFALL", "FLAG_RECEIVED_HM_WATERFALL"),
+        ("data/maps/RustboroCity/scripts.inc", "ITEM_GREAT_BALL", "FLAG_RETURNED_DEVON_GOODS"),
         ("data/maps/RustboroCity_DevonCorp_3F/scripts.inc", "ITEM_LETTER", "FLAG_RECEIVED_POKENAV"),
         ("data/maps/RusturfTunnel/scripts.inc", "ITEM_DEVON_PARTS", "FLAG_RECOVERED_DEVON_GOODS"),
         ("data/scripts/players_house.inc", "ITEM_SS_TICKET", "FLAG_RECEIVED_SS_TICKET"),
@@ -396,7 +483,9 @@ def main() -> None:
     all_sources = all_assembly_sources()
     labels = label_index(all_sources)
     event_count, warp_count = verify_map_data(map_names, labels)
-    script_refs = verify_script_references(assembled_sources(map_names), labels)
+    campaign_sources = assembled_sources(map_names)
+    script_refs = verify_script_references(campaign_sources, labels)
+    specialvar_refs = verify_specialvar_return_contracts(campaign_sources)
     verify_critical_progression_contracts()
     script_lines = sum(
         len(path.read_text(errors="ignore").splitlines())
@@ -405,6 +494,7 @@ def main() -> None:
     print(f"PASS: {len(map_names)} Hoenn maps have valid layouts, events, warps, and assembled scripts")
     print(f"PASS: {event_count} physical NPC/trigger/sign events and {warp_count} warps resolve")
     print(f"PASS: {script_refs} control-flow/dialogue/movement references resolve across {script_lines} script lines")
+    print(f"PASS: {specialvar_refs} value-returning special calls never read a void C function")
     print("PASS: critical badge, Mega, League, legendary, and story-item progression contracts hold")
 
 

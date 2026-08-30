@@ -10,6 +10,7 @@ LilycoveCity_Harbor_EventScript_FerryAttendant::
 	lock
 	faceplayer
 	goto_if_unset FLAG_SYS_GAME_CLEAR, LilycoveCity_Harbor_EventScript_FerryUnavailable
+	goto_if_unset FLAG_RECEIVED_SS_TICKET, LilycoveCity_Harbor_EventScript_NoTicket
 	call LilycoveCity_Harbor_EventScript_GetEonTicketState
 	call LilycoveCity_Harbor_EventScript_GetAuroraTicketState
 	call LilycoveCity_Harbor_EventScript_GetOldSeaMapState
@@ -29,7 +30,7 @@ LilycoveCity_Harbor_EventScript_FerryAttendant::
 LilycoveCity_Harbor_EventScript_NoFirstTimeEventTickets::
 	goto_if_eq VAR_TEMP_A, 0, LilycoveCity_Harbor_EventScript_NoEventTickets
 	msgbox LilycoveCity_Harbor_Text_MayISeeYourTicket, MSGBOX_DEFAULT
-	message LilycoveCity_Harbor_Text_FlashTicketWhereTo
+	message LilycoveCity_Harbor_Text_ConfirmedPassWhereTo
 	waitmessage
 	goto LilycoveCity_Harbor_EventScript_FerryRegularLocationSelect
 	end
@@ -343,12 +344,11 @@ LilycoveCity_Harbor_EventScript_FerryUnavailable::
 
 LilycoveCity_Harbor_EventScript_NoEventTickets::
 	msgbox LilycoveCity_Harbor_Text_MayISeeYourTicket, MSGBOX_DEFAULT
-	message LilycoveCity_Harbor_Text_FlashTicketWhereTo
+	message LilycoveCity_Harbor_Text_ConfirmedPassWhereTo
 	waitmessage
 	goto LilycoveCity_Harbor_EventScript_FerryRegularLocationSelect
 	end
 
-@ Unused
 LilycoveCity_Harbor_EventScript_NoTicket::
 	msgbox LilycoveCity_Harbor_Text_NoTicket, MSGBOX_DEFAULT
 	release
@@ -583,16 +583,17 @@ LilycoveCity_Harbor_Text_FerryUnavailable:
 
 LilycoveCity_Harbor_Text_MayISeeYourTicket:
 	.string "Hello, are you here for the ferry?\n"
-	.string "May I see your TICKET?$"
+	.string "May I confirm your ferry pass?$"
 
 LilycoveCity_Harbor_Text_NoTicket:
-	.string "{PLAYER} doesn't have the TICKET…\p"
+	.string "Your ferry pass is not registered.\p"
 	.string "I'm terribly sorry.\p"
-	.string "You must have a TICKET to board\n"
+	.string "You need a registered pass to board\n"
 	.string "the ferry.$"
 
-LilycoveCity_Harbor_Text_FlashTicketWhereTo:
-	.string "{PLAYER} flashed the TICKET.\p"
+LilycoveCity_Harbor_Text_ConfirmedPassWhereTo:
+	.string "The attendant confirmed your ferry\n"
+	.string "pass.\p"
 	.string "Perfect! That's all you need!\p"
 	.string "And where would you like to go?$"
 

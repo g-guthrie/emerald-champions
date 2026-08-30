@@ -240,8 +240,8 @@
       "x": 9,
       "y": 25,
       "elevation": 0,
-      "item": "ITEM_ZINC",
-      "flag": "FLAG_HIDDEN_ITEM_MT_PYRE_SUMMIT_ZINC"
+      "item": "ITEM_DUSK_BALL",
+      "flag": "FLAG_HIDDEN_ITEM_MT_PYRE_SUMMIT_DUSK_BALL"
     },
     {
       "type": "hidden_item",

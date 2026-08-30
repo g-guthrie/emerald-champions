@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import ast
 import collections
 import re
 import shutil
@@ -23,8 +24,12 @@ STATIC_GATES = (
     ("wild distribution", (PYTHON, "scripts/emerald_champions_wild_distribution.py")),
     ("route signs", (PYTHON, "scripts/emerald_champions_route_signs.py")),
     ("competitive presets", (PYTHON, "scripts/verify_emerald_champions_battle_sets.py")),
+    ("species stat rebalances", (PYTHON, "scripts/verify_species_stat_rebalances.py")),
     ("upstream critical fixes", (PYTHON, "scripts/verify_upstream_critical_fixes.py")),
     ("campaign roster", (PYTHON, "scripts/verify_emerald_champions_campaign_roster.py")),
+    ("Game Corner starter archive", (PYTHON, "scripts/verify_game_corner_starter_archive.py")),
+    ("trainer Ability legality", (PYTHON, "scripts/verify_trainer_ability_legality.py")),
+    ("trainer runtime coherence", (PYTHON, "scripts/verify_trainer_runtime_coherence.py")),
     ("story and dialogue", (PYTHON, "scripts/verify_emerald_champions_story.py")),
     ("rematch-free Match Call", (PYTHON, "scripts/verify_rematch_free_match_call.py")),
     ("whole-campaign progression graph", (PYTHON, "scripts/verify_emerald_champions_progression.py")),
@@ -72,20 +77,79 @@ def verify_unique_state_ids() -> None:
         ("include/constants/flags.h", "FLAG_"),
         ("include/constants/vars.h", "VAR_"),
     ):
-        values: dict[int, list[str]] = collections.defaultdict(list)
-        for line in (ROOT / relative).read_text().splitlines():
+        definitions: dict[str, list[tuple[int, str]]] = collections.defaultdict(list)
+        for line_number, line in enumerate((ROOT / relative).read_text().splitlines(), 1):
             match = re.match(
-                rf"#define\s+({prefix}[A-Z0-9_]+)\s+(0x[0-9A-Fa-f]+|\d+)\b",
+                rf"#define\s+({prefix}[A-Z0-9_]+)\s+(.+?)(?:\s*//.*|\s*/\*.*)?$",
                 line,
             )
-            if match is None:
+            if match is not None:
+                definitions[match.group(1)].append((line_number, match.group(2).strip()))
+        duplicate_names = {
+            name: rows for name, rows in definitions.items() if len(rows) > 1
+        }
+        require(
+            not duplicate_names,
+            f"{relative}: state macros are defined more than once: {duplicate_names}",
+        )
+
+        expressions = {name: rows[0][1] for name, rows in definitions.items()}
+        resolved: dict[str, int] = {}
+
+        def evaluate_node(node: ast.AST, stack: tuple[str, ...]) -> int:
+            if isinstance(node, ast.Constant) and isinstance(node.value, int):
+                return node.value
+            if isinstance(node, ast.Name):
+                return evaluate(node.id, stack)
+            if isinstance(node, ast.UnaryOp) and isinstance(
+                node.op, (ast.UAdd, ast.USub, ast.Invert)
+            ):
+                value = evaluate_node(node.operand, stack)
+                if isinstance(node.op, ast.UAdd):
+                    return value
+                if isinstance(node.op, ast.USub):
+                    return -value
+                return ~value
+            if isinstance(node, ast.BinOp) and isinstance(
+                node.op, (ast.Add, ast.Sub, ast.BitOr, ast.BitAnd, ast.LShift, ast.RShift)
+            ):
+                left = evaluate_node(node.left, stack)
+                right = evaluate_node(node.right, stack)
+                if isinstance(node.op, ast.Add):
+                    return left + right
+                if isinstance(node.op, ast.Sub):
+                    return left - right
+                if isinstance(node.op, ast.BitOr):
+                    return left | right
+                if isinstance(node.op, ast.BitAnd):
+                    return left & right
+                if isinstance(node.op, ast.LShift):
+                    return left << right
+                return left >> right
+            raise ValueError(f"unsupported state expression: {ast.dump(node)}")
+
+        def evaluate(name: str, stack: tuple[str, ...] = ()) -> int:
+            if name in resolved:
+                return resolved[name]
+            if name not in expressions or name in stack:
+                raise ValueError(name)
+            value = evaluate_node(ast.parse(expressions[name], mode="eval").body, stack + (name,))
+            resolved[name] = value
+            return value
+
+        values: dict[int, list[str]] = collections.defaultdict(list)
+        for name in expressions:
+            if name.endswith(("_START", "_END")):
                 continue
-            value = int(match.group(2), 0)
+            try:
+                value = evaluate(name)
+            except (SyntaxError, ValueError):
+                continue
             if value != 0:  # FRLG compatibility aliases use zero deliberately.
-                values[value].append(match.group(1))
+                values[value].append(name)
         duplicates = {value: names for value, names in values.items() if len(names) > 1}
         require(not duplicates, f"{relative}: duplicate state IDs: {duplicates}")
-    print("PASS: numeric flag and variable assignments are unique")
+    print("PASS: resolved flag and variable names and assignments are unique")
 
 
 def verify_branding() -> None:
@@ -179,7 +243,7 @@ def verify_build_freshness(rom: Path, elf: Path) -> None:
     print(f"PASS: {rom.name} is newer than every canonical ROM build input")
 
 
-def verify_patch_integrity() -> None:
+def verify_patch_integrity(*, allow_source_bundle: bool) -> None:
     probe = subprocess.run(
         ("git", "rev-parse", "--is-inside-work-tree"),
         cwd=ROOT,
@@ -188,7 +252,12 @@ def verify_patch_integrity() -> None:
         stderr=subprocess.DEVNULL,
     )
     if probe.returncode != 0:
-        print("SKIP: git diff --check (source bundle has no Git metadata)")
+        require(
+            allow_source_bundle,
+            "Git metadata is required for whitespace and patch-integrity verification; "
+            "pass --allow-source-bundle only for an intentionally metadata-free export",
+        )
+        print("SKIP (explicit): git diff --check for metadata-free source bundle")
         return
     run_gate("whitespace and patch integrity", ("git", "diff", "--check"))
 
@@ -197,6 +266,11 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--rom", type=Path, default=ROOT / "pokeemerald-release.gba")
     parser.add_argument("--elf", type=Path, default=ROOT / "pokeemerald-release.elf")
+    parser.add_argument(
+        "--allow-source-bundle",
+        action="store_true",
+        help="allow an intentional metadata-free export to skip git diff --check",
+    )
     args = parser.parse_args()
 
     for label, command in STATIC_GATES:
@@ -204,7 +278,7 @@ def main() -> None:
     verify_materialized_trainers()
     verify_unique_state_ids()
     verify_branding()
-    verify_patch_integrity()
+    verify_patch_integrity(allow_source_bundle=args.allow_source_bundle)
     verify_build_freshness(args.rom.resolve(), args.elf.resolve())
     verify_rom(args.rom.resolve(), args.elf.resolve())
     print("\nEMERALD CHAMPIONS RELEASE GATES: PASS")

@@ -102,9 +102,8 @@ def ai_flags(design: Design) -> str:
     else:
         flags = ["Basic Trainer"]
     moves = {move for mon in design.mons for move in mon.moves}
-    abilities = {mon.ability for mon in design.mons}
-    if "MOVE_BEAT_UP" in moves and "ABILITY_JUSTIFIED" in abilities:
-        flags.append("Attacks Partner")
+    if moves.intersection({"MOVE_EXPLOSION", "MOVE_SELF_DESTRUCT", "MOVE_MISTY_EXPLOSION"}):
+        flags.append("Will Suicide")
     return " / ".join(flags)
 
 

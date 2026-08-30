@@ -77,7 +77,7 @@ MauvilleCity_Gym_EventScript_Wattson::
 	trainerbattle_double TRAINER_WATTSON_1, MauvilleCity_Gym_Text_WattsonIntro, MauvilleCity_Gym_Text_WattsonDefeat, EmeraldChampions_Text_NeedTwoPokemon, MauvilleCity_Gym_EventScript_WattsonDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, MauvilleCity_Gym_EventScript_WattsonRematch
-	goto_if_unset FLAG_RECEIVED_TM_SHOCK_WAVE, MauvilleCity_Gym_EventScript_GiveShockWave2
+	goto_if_unset FLAG_RECEIVED_WATTSON_MANECTITE, MauvilleCity_Gym_EventScript_GiveManectite2
 	goto_if_eq VAR_NEW_MAUVILLE_STATE, 2, MauvilleCity_Gym_EventScript_CompletedNewMauville
 	msgbox MauvilleCity_Gym_Text_WattsonPostBattle, MSGBOX_DEFAULT
 	release
@@ -99,7 +99,7 @@ MauvilleCity_Gym_EventScript_WattsonDefeated::
 	special MauvilleGymDeactivatePuzzle
 	special DrawWholeMapView
 	playse SE_UNLOCK
-	call MauvilleCity_Gym_EventScript_GiveShockWave
+	call MauvilleCity_Gym_EventScript_GiveManectite
 	closemessage
 	delay 30
 	playfanfare MUS_REGISTER_MATCH_CALL
@@ -111,19 +111,19 @@ MauvilleCity_Gym_EventScript_WattsonDefeated::
 	release
 	end
 
-MauvilleCity_Gym_EventScript_GiveShockWave2::
+MauvilleCity_Gym_EventScript_GiveManectite2::
 	giveitem ITEM_MANECTITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	msgbox MauvilleCity_Gym_Text_ExplainShockWave, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM_SHOCK_WAVE
+	msgbox MauvilleCity_Gym_Text_ExplainManectite, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_WATTSON_MANECTITE
 	release
 	end
 
-MauvilleCity_Gym_EventScript_GiveShockWave::
+MauvilleCity_Gym_EventScript_GiveManectite::
 	giveitem ITEM_MANECTITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
-	msgbox MauvilleCity_Gym_Text_ExplainShockWave, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM_SHOCK_WAVE
+	msgbox MauvilleCity_Gym_Text_ExplainManectite, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_WATTSON_MANECTITE
 	return
 
 MauvilleCity_Gym_EventScript_CompletedNewMauville::
@@ -342,11 +342,13 @@ MauvilleCity_Gym_Text_ReceivedDynamoBadge:
 	.string "from WATTSON.$"
 
 MauvilleCity_Gym_Text_ExplainDynamoBadgeTakeThis:
-	.string "With the DYNAMO BADGE, POKéMON can\n"
-	.string "use ROCK SMASH out of battle.\p"
+	.string "The DYNAMO BADGE lets your LEVELER\n"
+	.string "train a party up to Lv. 40.\p"
+	.string "It also enables ROCK SMASH outside\n"
+	.string "of battle.\p"
 	.string "Hmm…\n"
 	.string "You should take this, too!$"
-MauvilleCity_Gym_Text_ExplainShockWave:
+MauvilleCity_Gym_Text_ExplainManectite:
 	.string "Manectite lets Manectric Mega Evolve.\n"
 	.string "Let it hold the stone in battle.$"
 

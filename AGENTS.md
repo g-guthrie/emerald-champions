@@ -1,125 +1,83 @@
 # Working on Emerald Champions
 
-Emerald Champions is a hard, doubles-focused Emerald romhack built on
-pokeemerald-expansion. Read this before you touch anything.
+Emerald Champions is a hard, doubles-focused Emerald campaign built on
+pokeemerald-expansion. Its core loop removes preparation grind so difficulty
+comes from team construction, battle decisions, exploration, and authored
+encounters.
 
-## The one rule
+## Authority
 
-**`docs/` is generated output. It is not ground truth. Do not summarize it,
-and never cite it as evidence that something works.**
+Executable source and runtime behavior are ground truth. Documents describe
+intent or project source into a readable form; they never prove that a feature
+works, is balanced, or is fun.
 
-Every prose document in this repo was written by a script or an agent
-describing intent. None of it was produced by playing the game. If you
-report back a summary of `docs/`, you have not looked at this project.
+Read these first for factual questions:
 
-The narrative documentation that used to live here — a campaign book, a story
-audit, and a parity ledger reading `COMPLETE` on 38 rows — was deleted
-precisely because agents kept reading it instead of the game. Do not
-reconstruct it. If you want to know whether something works, query the data.
+- Trainer loadouts and AI flags: `src/data/trainers.party`
+- Wild tables: `src/data/wild_encounters.json`
+- Species data: `src/data/pokemon/species_info/`
+- Moves, Abilities, items, and battle callbacks: `src/data/`, `src/battle_*`,
+  and `include/config/`
+- Story, NPCs, rewards, and event state: `data/maps/*/scripts.inc`, map JSON,
+  and `data/scripts/`
+- Frontier generation: the actual Frontier C sources and generated tables
+- Build/test behavior: `Makefile`, `.github/workflows/`, `scripts/verify_*`,
+  and `test/`
 
-Specific traps that remain:
+Two files under `docs/` are load-bearing inputs and must stay synchronized
+with compiled source:
 
-- `scripts/verify_emerald_champions_release.py` prints 40+ `PASS:` lines and
-  exits 0. A green gate means the data is **self-consistent**, not that the
-  game is good, balanced, or fun.
-- Every one of the 513 encounters in the battle master is marked
-  `difficulty_observed: UNPLAYED`. Nobody has played this game. Any claim
-  about difficulty or pacing that is not derived from the data is a guess.
+- `docs/emerald_champions_master_battle_design.txt`
+- `docs/emerald_champions_battle_sets.json`
 
-## Ground truth
+Use their rationale and schemas, but verify every material claim against the
+compiled data. `difficulty_observed: UNPLAYED` is not playtest evidence.
 
-| What you want to know | Read this |
-|---|---|
-| Trainer teams, items, moves, natures, AI | `src/data/trainers.party` (Showdown format) |
-| Wild encounters | `src/data/wild_encounters.json` (409 maps) |
-| Base stats, types, abilities, evolutions | `src/data/pokemon/species_info/gen_*_families.h` |
-| Level/EV caps, battle rules | `include/config/caps.h`, `include/config/battle.h` |
-| Authored competitive sets | `docs/emerald_champions_battle_sets.json` (1,461 sets) |
-| Encounter design rationale | `docs/emerald_champions_master_battle_design.txt` |
-| Story scripts and dialogue | `data/maps/*/scripts.inc`, `data/scripts/emerald_champions.inc` |
+## Working rules
 
-The last two live in `docs/` but are **load-bearing inputs**, not prose — six
-scripts parse the battle master, and five parse the battle sets. Do not delete
-them.
+- Make minimal, explicit changes. Preserve save IDs and map object IDs unless
+  a migration is deliberately designed and tested.
+- Do not regenerate data with an old allocator or snapshot merely because a
+  generator exists. Confirm that the generator still expresses the accepted
+  design first.
+- A static gate proves only its named source invariant. It does not prove a
+  complete campaign, rendered presentation, difficulty, pacing, or fun.
+- Treat warnings, TODOs, known failures, fallbacks, and recovery paths as
+  evidence to investigate. Never hide a strategy-changing fallback behind a
+  release assertion.
+- Reconcile trainer changes in both the load-bearing battle design and
+  `src/data/trainers.party`; the ROM consumes the latter.
+- Keep ordinary held items non-scarce, berries and special transformation
+  items progression-aware, starters out of ordinary wild grass, and fossils
+  behind revival unless a new design explicitly replaces those rules.
+- Do not call the game release-ready until a fresh build, curated runtime
+  suite, scenario saves, visual checks, and a fresh-save campaign playthrough
+  support that claim.
 
-## Recipes
+## Verification
 
-Read one trainer's full team:
+Run the source/static suite with:
 
-```bash
-awk '/^=== TRAINER_WALLACE ===$/{f=1} f&&/^=== /&&!/^=== TRAINER_WALLACE ===$/{exit} f' src/data/trainers.party
+```sh
+python3 scripts/verify_emerald_champions_release.py
 ```
 
-Check a species' legal abilities:
+That command also requires fresh release artifacts. The curated runtime suite
+is:
 
-```bash
-awk '/\[SPECIES_WAILORD\] =/,/^    },/' src/data/pokemon/species_info/*.h | grep '\.abilities'
+```sh
+python3 scripts/run_emerald_champions_runtime_gates.py --jobs "$(sysctl -n hw.ncpu)"
 ```
 
-Dump a route's encounter table:
+The local macOS checkout has a native `mgba-rom-test-mac`, but a complete GBA
+cross-toolchain may still require Linux/CI. The weekly full-test workflow
+compiles the entire upstream test corpus; required CI runs the smaller,
+identity-checked Emerald Champions runtime manifest.
 
-```bash
-python3 -c "import json;d=json.load(open('src/data/wild_encounters.json'));[print(e) for e in d['wild_encounter_groups'][0]['encounters'] if e.get('map')=='MAP_ROUTE103']"
-```
+## Git and release discipline
 
-Run every gate (~13s total):
-
-```bash
-for f in scripts/verify_*.py scripts/audit_*.py; do echo "== $f"; python3 "$f" >/dev/null 2>&1 && echo PASS || echo FAIL; done
-```
-
-The ROM test suite (22 tests) runs **only in GitHub CI on Linux** —
-`tools/mgba/mgba-rom-test` is an x86-64 binary and `mgba-rom-test-mac` does not
-exist. You cannot run it on macOS.
-
-## Known open defects
-
-These are confirmed against the data. Do not re-report them as new, and do not
-report "all gates pass" as though these do not exist — no gate covers any of
-them.
-
-- **86 trainer Pokémon have abilities their species cannot legally have.**
-  `trainer_util.c:80` fails the lookup and, because
-  `B_TRAINER_MON_RANDOM_ABILITY = 0`, silently falls back to ability slot 0.
-  Authored in the battle master by flavour (Wailord→Drizzle, Palossand→Sand
-  Stream, Trevenant→Grassy Surge). 18 are weather or terrain setters whose
-  teams are built on weather that never gets set.
-- **12 teams run Trick Room and Tailwind together**, which cancel. One is
-  Drake of the Elite Four.
-- **42 Pokémon with base Speed ≤50 carry +Speed natures**, including Wallace's
-  Ferrothorn (base Speed 20, Jolly). 92 fast Pokémon carry +Speed natures on
-  Trick Room teams.
-- **Wild generation curve runs backwards** (r = −0.299 against campaign
-  order). Early routes average generation 4.47; the last eight average 3.69.
-- **Starters appear in early wild tables** — Fuecoco on Route 103, the first
-  route; Sobble in Route 104's Old Rod slots; Primarina (fully evolved) on
-  Routes 126/128.
-- **Ordinary difficulty is flat** (7.32 → 7.19 across quarters) and misses the
-  project's own target: 54.2% of fights sit at 6.x–7.x against a 35% target
-  for 7.x, only 13.9% at 8.x against 25%, and **zero** at 9.x.
-- **All 2,147 campaign Pokémon have exactly 66 EVs** across only 9 spreads,
-  two of which cover 71% of the game. At the mean trainer level that is ~4
-  stat points.
-- **Six vitamins are sold in 9 mart lists and do nothing** —
-  `B_EV_CAP_TYPE = EV_CAP_NO_GAIN` makes the EV cap zero.
-- **`MAP_ROUTE109.rock_smash_mons` has `encounter_rate: 255`**, which clamps to
-  a guaranteed encounter. It is the only value above 100 in 761 tables.
-
-## If you are asked to evaluate the game
-
-Open and read individual trainer entries and encounter tables. Aggregate
-statistics are a starting point for finding where to look, not an answer —
-they hide exactly the defects above. Roxanne and Brawly are adjacent gyms of
-very different quality; no metric shows that. Read them.
-
-State plainly when something cannot be verified without play.
-
-## Build
-
-```bash
-make -j$(sysctl -n hw.ncpu) release   # produces pokeemerald-release.gba
-```
-
-The tracked ROM is `pokeemerald-release.gba`, SHA-1
-`61301ca6e1fa0d08e528ed7be19dd0d1ca2e0b4b`. The release gate refuses to pass
-if any source input is newer than the ROM — rebuild before verifying.
+Work on a coherent branch, commit only reviewed files, push, and confirm the
+remote head. Do not merge `origin/main` wholesale when it diverges: inspect
+each commit because an earlier main commit deleted useful documentation and
+carried stale defect counts. Required CI is not enforced until a branch rule
+requires the stable `build` job.

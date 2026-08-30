@@ -2617,15 +2617,15 @@ Route118_Text_PerryPostBattle:
 	.string "I'll have to train mine better.$"
 
 Route118_Text_ChesterIntro:
-	.string "Take flight!\n"
-	.string "My BIRD POKéMON!$"
+	.string "Take your marks!\n"
+	.string "My whole team!$"
 
 Route118_Text_ChesterDefeat:
 	.string "They did take flight…$"
 
 Route118_Text_ChesterPostBattle:
-	.string "If they'd get stronger, they'd be able\n"
-	.string "to fly more freely…$"
+	.string "If my birds get stronger, they'll be\n"
+	.string "able to fly more freely…$"
 
 Route118_Text_BarnyIntro:
 	.string "I'm a FISHERMAN, but also a TRAINER.\n"
@@ -2842,7 +2842,7 @@ Route119_Text_HughPostBattle:
 
 Route119_Text_PhilIntro:
 	.string "I'll show you the true potential of me\n"
-	.string "and my BIRD POKéMON!$"
+	.string "and my whole team!$"
 
 Route119_Text_PhilDefeat:
 	.string "We lacked potential…$"
@@ -2864,16 +2864,16 @@ Route119_Text_YasuPostBattle:
 	.string "must answer a specific threat.$"
 
 Route119_Text_TakashiIntro:
-	.string "First I silence every Ability. Then sand\n"
-	.string "turns the route against both sides.\p"
-	.string "Can your plan survive losing its premise?$"
+	.string "Levitate keeps my own plan clear.\n"
+	.string "Then sand turns the route against you.\p"
+	.string "Can your footing survive the shift?$"
 
 Route119_Text_TakashiDefeat:
-	.string "Your plan survived without its premise…$"
+	.string "You found solid ground before I did…$"
 
 Route119_Text_TakashiPostBattle:
-	.string "Suppression punishes dependence, but\n"
-	.string "punishes my own team if timed badly.$"
+	.string "Sand rewards a plan with safe footing.\n"
+	.string "Yours had more than one.$"
 
 Route119_Text_HideoIntro:
 	.string "To hide a tree, use a forest!$"
@@ -3064,17 +3064,15 @@ Route120_Text_ChipPostBattle:
 	.string "ruins. But I see no entrance.$"
 
 Route120_Text_ClarissaIntro:
-	.string "Why am I carrying this parasol?\p"
-	.string "I'll tell you if you can win against me.$"
+	.string "My parasol follows the forecast.\p"
+	.string "Can your team do the same?$"
 
 Route120_Text_ClarissaDefeat:
-	.string "A parasol can't ward off POKéMON\n"
-	.string "attacks…$"
+	.string "You found shelter inside my storm…$"
 
 Route120_Text_ClarissaPostBattle:
-	.string "I don't think strong sunlight is good\n"
-	.string "for my POKéMON.\l"
-	.string "So I shield them with my parasol.$"
+	.string "Rain should create choices, not force\n"
+	.string "one answer. Your team found several.$"
 
 Route120_Text_AngelicaIntro:
 	.string "Me, POKéMON, and my parasol…\p"
@@ -3127,15 +3125,15 @@ Route120_Text_CalliePostBattle:
 	.string "They're cute the way they are, though.$"
 
 Route120_Text_LeonelIntro:
-	.string "Your party POKéMON…\n"
-	.string "Do you have different types?$"
+	.string "The rain wakes old stories here.\n"
+	.string "Have you seen the masked POKéMON?$"
 
 Route120_Text_LeonelDefeat:
-	.string "I've seen your policy in action!$"
+	.string "You read every change in the field!$"
 
 Route120_Text_LeonelPostBattle:
-	.string "I think it's awesome you're so strong\n"
-	.string "battling with your favorite POKéMON.$"
+	.string "A TRAINER with TROPIUS said the marks\n"
+	.string "in this grass answered their party.$"
 
 Route121_Text_VanessaIntro:
 	.string "Will you play with my delightfully\n"
@@ -4699,8 +4697,8 @@ Route134_Text_AlexDefeat:
 	.string "Tuckered out again…$"
 
 Route134_Text_AlexPostBattle:
-	.string "My BIRD POKéMON get tired quickly after\n"
-	.string "a long flight…$"
+	.string "My whole team gets tired quickly after\n"
+	.string "a long journey…$"
 
 Route134_Text_HitoshiIntro:
 	.string "You're a POKéMON TRAINER.\n"

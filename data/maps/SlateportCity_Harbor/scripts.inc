@@ -157,14 +157,18 @@ SlateportCity_Harbor_Movement_PlayerWalkUp:
 SlateportCity_Harbor_EventScript_FerryAttendant::
 	lock
 	faceplayer
-	goto_if_set FLAG_SYS_GAME_CLEAR, SlateportCity_Harbor_EventScript_AskForTicket
+	goto_if_unset FLAG_SYS_GAME_CLEAR, SlateportCity_Harbor_EventScript_FerryUnavailable
+	goto_if_unset FLAG_RECEIVED_SS_TICKET, SlateportCity_Harbor_EventScript_NoTicket
+	goto SlateportCity_Harbor_EventScript_AskForTicket
+
+SlateportCity_Harbor_EventScript_FerryUnavailable::
 	msgbox SlateportCity_Harbor_Text_FerryServiceUnavailable, MSGBOX_DEFAULT
 	release
 	end
 
 SlateportCity_Harbor_EventScript_AskForTicket::
 	msgbox SlateportCity_Harbor_Text_MayISeeYourTicket, MSGBOX_DEFAULT
-	message SlateportCity_Harbor_Text_FlashedTicketWhereTo
+	message SlateportCity_Harbor_Text_ConfirmedPassWhereTo
 	waitmessage
 	goto SlateportCity_Harbor_EventScript_ChooseDestination
 	end
@@ -187,7 +191,6 @@ SlateportCity_Harbor_EventScript_ChooseDestinationWithBattleFrontier::
 	case MULTI_B_PRESSED, SlateportCity_Harbor_EventScript_CancelDestinationSelect
 	end
 
-@ Unused. Should be impossible for player to reach Ferry without having received SS Tidal ticket
 SlateportCity_Harbor_EventScript_NoTicket::
 	msgbox SlateportCity_Harbor_Text_YouMustHaveTicket, MSGBOX_DEFAULT
 	release
@@ -388,16 +391,17 @@ SlateportCity_Harbor_Text_FerryServiceUnavailable:
 
 SlateportCity_Harbor_Text_MayISeeYourTicket:
 	.string "Hello, are you here for the ferry?\n"
-	.string "May I see your TICKET?$"
+	.string "May I confirm your ferry pass?$"
 
 SlateportCity_Harbor_Text_YouMustHaveTicket:
-	.string "{PLAYER} doesn't have the TICKET…\p"
+	.string "Your ferry pass is not registered.\p"
 	.string "I'm terribly sorry.\p"
-	.string "You must have a TICKET to board\n"
+	.string "You need a registered pass to board\n"
 	.string "the ferry.$"
 
-SlateportCity_Harbor_Text_FlashedTicketWhereTo:
-	.string "{PLAYER} flashed the TICKET.\p"
+SlateportCity_Harbor_Text_ConfirmedPassWhereTo:
+	.string "The attendant confirmed your ferry\n"
+	.string "pass.\p"
 	.string "Perfect! That's all you need!\p"
 	.string "And where would you like to go?$"
 

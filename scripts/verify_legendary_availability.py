@@ -196,6 +196,15 @@ def main() -> None:
     )
 
     wild_species, wild_maps = wild_locations()
+    require(
+        "MAP_SANDSTREWN_RUINS" in wild_species.get("SPECIES_UNOWN", set()),
+        "Hoopa prerequisite Unown must have a permanent Hoenn source in Sandstrewn Ruins",
+    )
+    desert_underpass = json.loads((ROOT / "data/maps/DesertUnderpass/map.json").read_text())
+    require(
+        any(warp.get("dest_map") == "MAP_SANDSTREWN_RUINS" for warp in desert_underpass["warp_events"]),
+        "Sandstrewn Ruins lost its Mirage-collapse-independent Desert Underpass entrance",
+    )
     ordinary_rows = [row for row in sign_rows if row[0] == "ORDINARY_WILD_SIGN"]
     for _, sign_id, species_name, map_name in ordinary_rows:
         species = "SPECIES_" + species_name
@@ -246,8 +255,11 @@ def main() -> None:
                 f"postgame harbor does not unlock {item}")
 
     wild_code = (ROOT / "src/wild_encounter.c").read_text()
-    require("IsLegendarySignOrdinaryWildSpecies(species)" in wild_code,
-            "ordinary-wild legendary roots do not receive competitive sets")
+    create_wild = wild_code.split("void CreateWildMon", 1)[1].split("#ifdef BUGFIX", 1)[0]
+    require("IsEmeraldChampionsOrdinaryWildSpecies(species)" in create_wild,
+            "ordinary table encounters do not receive competitive sets")
+    require("IsLegendarySignOrdinaryWildSpecies(species)" not in create_wild,
+            "finite legendary encounters incorrectly enter ordinary wild-set randomization")
     require("GetCurrentLevelCap()" in wild_code,
             "ordinary-wild legendary roots are not normalized to the live cap")
 
