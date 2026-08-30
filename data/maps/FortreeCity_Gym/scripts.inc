@@ -21,7 +21,7 @@ FortreeCity_Gym_EventScript_Winona::
 	trainerbattle_double TRAINER_WINONA_1, FortreeCity_Gym_Text_WinonaIntro, FortreeCity_Gym_Text_WinonaDefeat, EmeraldChampions_Text_NeedTwoPokemon, FortreeCity_Gym_EventScript_WinonaDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, FortreeCity_Gym_EventScript_WinonaRematch
-	goto_if_unset FLAG_RECEIVED_TM_AERIAL_ACE, FortreeCity_Gym_EventScript_GiveAerialAce2
+	goto_if_unset FLAG_RECEIVED_WINONA_ALTARIANITE, FortreeCity_Gym_EventScript_GiveAltarianite2
 	msgbox FortreeCity_Gym_Text_WinonaPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -36,7 +36,7 @@ FortreeCity_Gym_EventScript_WinonaDefeated::
 	setflag FLAG_HIDE_ROUTE_120_STEVEN
 	setvar VAR_0x8008, 6
 	call Common_EventScript_SetGymTrainers
-	call FortreeCity_Gym_EventScript_GiveAerialAce
+	call FortreeCity_Gym_EventScript_GiveAltarianite
 	closemessage
 	delay 30
 	playfanfare MUS_REGISTER_MATCH_CALL
@@ -50,19 +50,19 @@ FortreeCity_Gym_EventScript_WinonaDefeated::
 	release
 	end
 
-FortreeCity_Gym_EventScript_GiveAerialAce2::
+FortreeCity_Gym_EventScript_GiveAltarianite2::
 	giveitem ITEM_ALTARIANITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	msgbox FortreeCity_Gym_Text_ExplainAerialAce, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM_AERIAL_ACE
+	msgbox FortreeCity_Gym_Text_ExplainAltarianite, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_WINONA_ALTARIANITE
 	release
 	end
 
-FortreeCity_Gym_EventScript_GiveAerialAce::
+FortreeCity_Gym_EventScript_GiveAltarianite::
 	giveitem ITEM_ALTARIANITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
-	msgbox FortreeCity_Gym_Text_ExplainAerialAce, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM_AERIAL_ACE
+	msgbox FortreeCity_Gym_Text_ExplainAltarianite, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_WINONA_ALTARIANITE
 	return
 
 FortreeCity_Gym_EventScript_WinonaRematch::
@@ -250,14 +250,13 @@ FortreeCity_Gym_Text_ReceivedFeatherBadge:
 	.string "from WINONA.$"
 
 FortreeCity_Gym_Text_ExplainFeatherBadgeTakeThis:
-	.string "With the FEATHER BADGE, all POKéMON up\n"
-	.string "to LV 70, even those received through\l"
-	.string "trades, will obey your every command.\p"
-	.string "You will also be able to use\n"
-	.string "the HM move FLY outside of battle.\p"
+	.string "The FEATHER BADGE lets your LEVELER\n"
+	.string "train a party up to Lv. 60.\p"
+	.string "It also enables FLY outside\n"
+	.string "of battle.\p"
 	.string "And this…\n"
 	.string "This is a gift from me.$"
-FortreeCity_Gym_Text_ExplainAerialAce:
+FortreeCity_Gym_Text_ExplainAltarianite:
 	.string "Altarianite lets Altaria Mega Evolve.\n"
 	.string "Let it hold the stone in battle.$"
 

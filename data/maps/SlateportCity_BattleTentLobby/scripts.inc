@@ -194,20 +194,20 @@ SlateportCity_BattleTentLobby_Movement_UnusedEnterDoor::
 	set_invisible
 	step_end
 
-SlateportCity_BattleTentLobby_EventScript_TormentGiver::
+SlateportCity_BattleTentLobby_EventScript_PrismScaleGiver::
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_TM_TORMENT, SlateportCity_BattleTentLobby_EventScript_ReceivedTorment
+	goto_if_set FLAG_RECEIVED_SLATEPORT_PRISM_SCALE, SlateportCity_BattleTentLobby_EventScript_ReceivedPrismScale
 	msgbox SlateportCity_BattleTentLobby_Text_CouldntFindMonForMe, MSGBOX_DEFAULT
 	giveitem ITEM_PRISM_SCALE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_TM_TORMENT
-	msgbox SlateportCity_BattleTentLobby_Text_ExplainTorment, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_SLATEPORT_PRISM_SCALE
+	msgbox SlateportCity_BattleTentLobby_Text_ExplainPrismScale, MSGBOX_DEFAULT
 	release
 	end
 
-SlateportCity_BattleTentLobby_EventScript_ReceivedTorment::
-	msgbox SlateportCity_BattleTentLobby_Text_ExplainTorment, MSGBOX_DEFAULT
+SlateportCity_BattleTentLobby_EventScript_ReceivedPrismScale::
+	msgbox SlateportCity_BattleTentLobby_Text_ExplainPrismScale, MSGBOX_DEFAULT
 	release
 	end
 
@@ -281,7 +281,7 @@ SlateportCity_BattleTentLobby_Text_CouldntFindMonForMe:
 	.string "So, like, total bummer, man!\p"
 	.string "Hey, like, you! Zip it, you know?\n"
 	.string "Just, you know, take this!$"
-SlateportCity_BattleTentLobby_Text_ExplainTorment:
+SlateportCity_BattleTentLobby_Text_ExplainPrismScale:
 	.string "A Prism Scale evolves Feebas.\n"
 	.string "Use it from the Bag when ready.$"
 
@@ -299,4 +299,3 @@ SlateportCity_BattleTentLobby_Text_BattleEvenWithoutToughMons:
 SlateportCity_BattleTentLobby_Text_NiceIfMoreSelection:
 	.string "Wouldn't it be nice if they had more of\n"
 	.string "a selection?$"
-

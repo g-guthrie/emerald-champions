@@ -280,6 +280,86 @@ def verify_elite_four_retirement_path() -> None:
             "League lobby no longer establishes the retirement respawn point")
 
 
+def verify_badge_leveler_and_field_move_contracts() -> None:
+    expected = (
+        ("FLAG_BADGE01_GET", 14, "RustboroCity_Gym", 20, "FIELD_MOVE_CUT", "FLAG_RECEIVED_HM_CUT"),
+        ("FLAG_BADGE02_GET", 20, "DewfordTown_Gym", 30, "FIELD_MOVE_FLASH", "FLAG_RECEIVED_HM_FLASH"),
+        ("FLAG_BADGE03_GET", 30, "MauvilleCity_Gym", 40, "FIELD_MOVE_ROCK_SMASH", "FLAG_RECEIVED_HM_ROCK_SMASH"),
+        ("FLAG_BADGE04_GET", 40, "LavaridgeTown_Gym_1F", 45, "FIELD_MOVE_STRENGTH", "FLAG_RECEIVED_HM_STRENGTH"),
+        ("FLAG_BADGE05_GET", 45, "PetalburgCity_Gym", 55, "FIELD_MOVE_SURF", "FLAG_RECEIVED_HM_SURF"),
+        ("FLAG_BADGE06_GET", 55, "FortreeCity_Gym", 60, "FIELD_MOVE_FLY", "FLAG_RECEIVED_HM_FLY"),
+        ("FLAG_BADGE07_GET", 60, "MossdeepCity_Gym", 70, "FIELD_MOVE_DIVE", "FLAG_RECEIVED_HM_DIVE"),
+        ("FLAG_BADGE08_GET", 70, "SootopolisCity_Gym_1F", 80, "FIELD_MOVE_WATERFALL", "FLAG_RECEIVED_HM_WATERFALL"),
+    )
+    caps = (ROOT / "src/caps.c").read_text()
+    field_moves = (ROOT / "src/field_move.c").read_text()
+    for badge, prior_cap, map_name, next_cap, field_move, license_flag in expected:
+        require(
+            re.search(rf"\{{\s*{badge},\s*{prior_cap}\s*\}}", caps) is not None,
+            f"{badge} no longer advances from the expected {prior_cap} cap",
+        )
+        gym_text = (ROOT / f"data/maps/{map_name}/scripts.inc").read_text()
+        require(
+            f"Lv. {next_cap}." in gym_text,
+            f"{map_name}: badge speech does not state the live Leveler cap {next_cap}",
+        )
+        move_block = re.search(
+            rf"\[{field_move}\]\s*=\s*\{{(?P<body>.*?)\n\s*\}},",
+            field_moves,
+            re.DOTALL,
+        )
+        require(move_block is not None and badge in move_block.group("body"),
+                f"{field_move} is not licensed by {badge}")
+        require(license_flag in field_moves,
+                f"{field_move} no longer requires receipt of {license_flag}")
+
+
+def verify_manaphy_clue() -> None:
+    mossdeep = (ROOT / "data/maps/MossdeepCity/scripts.inc").read_text()
+    block = re.search(
+        r"MossdeepCity_Text_LifeNeedsSeaToLive:\n(?P<body>.*?)(?=\n[A-Za-z_][A-Za-z0-9_]*:)",
+        mossdeep,
+        re.DOTALL,
+    )
+    require(block is not None, "Mossdeep's Seafloor approach clue is missing")
+    for phrase in ("RELICANTH", "SEAFLOOR CAVERN", "princely light"):
+        require(phrase in block.group("body"), f"Mossdeep's Manaphy clue is missing {phrase!r}")
+
+
+def verify_stat_point_explanation_replaced_iv_rater() -> None:
+    lounge = (ROOT / "data/maps/BattleFrontier_Lounge1/scripts.inc").read_text()
+    for phrase in ("flawless potential", "STAT POINTS", "CENTER tutor"):
+        require(phrase in lounge, f"Frontier Stat Point explanation is missing {phrase!r}")
+    require(
+        all(token not in lounge for token in ("chooseboxmon", "HighestIV", "TotalIVs", "BufferVarsForIVRater")),
+        "the reachable Frontier lounge still rates stored IVs that do not affect battle stats",
+    )
+    require("BufferVarsForIVRater" not in (ROOT / "data/specials.inc").read_text(),
+            "the obsolete IV-rater special remains registered")
+    require("void BufferVarsForIVRater" not in (ROOT / "src/field_specials.c").read_text(),
+            "the obsolete IV-rater implementation remains compiled")
+
+
+def verify_repurposed_reward_services() -> None:
+    route116 = (ROOT / "data/maps/Route116/scripts.inc").read_text()
+    require("checkitem ITEM_DUSK_STONE" in route116 and "FoundRoute116DuskStone" in route116,
+            "Route 116's seeker does not follow the live Dusk Stone pickup")
+    require("ITEM_BLACK_GLASSES" not in route116 and "FoundBlackGlasses" not in route116,
+            "Route 116 still describes the deleted Black Glasses pickup")
+    require(
+        "setflag FLAG_HIDE_ROUTE_116_DUSK_STONE_SEEKER" in route116,
+        "Route 116's completed Dusk Stone seeker scene respawns after reloading the map",
+    )
+
+    vars_text = (ROOT / "include/constants/vars.h").read_text()
+    require(
+        re.search(r"#define\s+VAR_PACIFIDLOG_STONE_RECEIVED_DAY\s+0x40C2\b", vars_text) is not None,
+        "Pacifidlog's weekly evolution-stone timer lost its save-compatible variable",
+    )
+    require("VAR_PACIFIDLOG_TM_RECEIVED_DAY" not in vars_text,
+            "Pacifidlog's evolution-stone timer still has a deleted-TM name")
+
+
 def main() -> None:
     combined = "\n".join((ROOT / relative).read_text() for relative in STORY_FILES)
     require("—" not in combined and "–" not in combined, "unsupported dash leaked into story text")
@@ -326,6 +406,10 @@ def main() -> None:
 
     verify_cynthia_assets()
     verify_elite_four_retirement_path()
+    verify_badge_leveler_and_field_move_contracts()
+    verify_manaphy_clue()
+    verify_stat_point_explanation_replaced_iv_rater()
+    verify_repurposed_reward_services()
     checked = verify_widths()
     all_static_checked = verify_all_static_widths()
     print("PASS: core Hoenn story preserves Magma/Aqua, Rayquaza, Wallace, and the Frontier")

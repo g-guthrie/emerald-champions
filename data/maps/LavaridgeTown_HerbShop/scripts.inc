@@ -26,16 +26,16 @@ LavaridgeTown_HerbShop_EventScript_ExpertM::
 LavaridgeTown_HerbShop_EventScript_OldMan::
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_CHARCOAL, LavaridgeTown_HerbShop_EventScript_ExplainCharcoal
+	goto_if_set FLAG_RECEIVED_LAVARIDGE_FIRE_STONE, LavaridgeTown_HerbShop_EventScript_ExplainFireStone
 	msgbox LavaridgeTown_HerbShop_Text_YouveComeToLookAtHerbalMedicine, MSGBOX_DEFAULT
 	giveitem ITEM_FIRE_STONE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_CHARCOAL
+	setflag FLAG_RECEIVED_LAVARIDGE_FIRE_STONE
 	release
 	end
 
-LavaridgeTown_HerbShop_EventScript_ExplainCharcoal::
-	msgbox LavaridgeTown_HerbShop_Text_ExplainCharcoal, MSGBOX_DEFAULT
+LavaridgeTown_HerbShop_EventScript_ExplainFireStone::
+	msgbox LavaridgeTown_HerbShop_Text_ExplainFireStone, MSGBOX_DEFAULT
 	release
 	end
 
@@ -48,7 +48,7 @@ LavaridgeTown_HerbShop_Text_YouveComeToLookAtHerbalMedicine:
 	.string "in LAVARIDGE?\p"
 	.string "That's rather commendable.\p"
 	.string "I like you! Take this!$"
-LavaridgeTown_HerbShop_Text_ExplainCharcoal:
+LavaridgeTown_HerbShop_Text_ExplainFireStone:
 	.string "A Fire Stone evolves certain Pokémon.\n"
 	.string "Use it from the Bag when ready.$"
 

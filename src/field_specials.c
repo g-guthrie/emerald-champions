@@ -2085,9 +2085,9 @@ static void StopCameraShake(u8 taskId)
 #undef tDelay
 #undef tVerticalPan
 
-bool8 FoundBlackGlasses(void)
+bool8 FoundRoute116DuskStone(void)
 {
-    return FlagGet(FLAG_HIDDEN_ITEM_ROUTE_116_BLACK_GLASSES);
+    return FlagGet(FLAG_HIDDEN_ITEM_ROUTE_116_DUSK_STONE);
 }
 
 void SetRoute119Weather(void)
@@ -2126,20 +2126,20 @@ void TryInitBattleTowerAwardManObjectEvent(void)
     //TryInitLocalObjectEvent(6);
 }
 
-u16 GetDaysUntilPacifidlogTMAvailable(void)
+u16 GetDaysUntilPacifidlogStoneAvailable(void)
 {
-    u16 tmReceivedDay = VarGet(VAR_PACIFIDLOG_TM_RECEIVED_DAY);
-    if (gLocalTime.days - tmReceivedDay >= 7)
+    u16 stoneReceivedDay = VarGet(VAR_PACIFIDLOG_STONE_RECEIVED_DAY);
+    if (gLocalTime.days - stoneReceivedDay >= 7)
         return 0;
     else if (gLocalTime.days < 0)
         return 8;
 
-    return 7 - (gLocalTime.days - tmReceivedDay);
+    return 7 - (gLocalTime.days - stoneReceivedDay);
 }
 
-u16 SetPacifidlogTMReceivedDay(void)
+u16 SetPacifidlogStoneReceivedDay(void)
 {
-    VarSet(VAR_PACIFIDLOG_TM_RECEIVED_DAY, gLocalTime.days);
+    VarSet(VAR_PACIFIDLOG_STONE_RECEIVED_DAY, gLocalTime.days);
     return gLocalTime.days;
 }
 
@@ -2534,45 +2534,6 @@ static void Task_MoveElevatorWindowLights(u8 taskId)
 #undef tTimer
 #undef tDescending
 #undef tTotalMoves
-
-void BufferVarsForIVRater(void)
-{
-    u32 i;
-    u32 ivStorage[NUM_STATS];
-
-    struct BoxPokemon *boxmon = GetSelectedBoxMonFromPcOrParty();;
-
-    for (i = 0; i < NUM_STATS; i++)
-    {
-       ivStorage[i] = GetBoxMonData(boxmon, MON_DATA_HP_IV + i);
-    }
-
-    gSpecialVar_0x8005 = 0;
-
-    for (i = 0; i < NUM_STATS; i++)
-        gSpecialVar_0x8005 += ivStorage[i];
-
-    gSpecialVar_0x8006 = 0;
-    gSpecialVar_0x8007 = ivStorage[STAT_HP];
-
-    for (i = 1; i < NUM_STATS; i++)
-    {
-        if (ivStorage[gSpecialVar_0x8006] < ivStorage[i])
-        {
-            gSpecialVar_0x8006 = i;
-            gSpecialVar_0x8007 = ivStorage[i];
-        }
-        else if (ivStorage[gSpecialVar_0x8006] == ivStorage[i])
-        {
-            u16 randomNumber = Random();
-            if (randomNumber & 1)
-            {
-                gSpecialVar_0x8006 = i;
-                gSpecialVar_0x8007 = ivStorage[i];
-            }
-        }
-    }
-}
 
 bool8 UsedPokemonCenterWarp(void)
 {

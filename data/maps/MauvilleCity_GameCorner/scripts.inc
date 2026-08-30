@@ -207,7 +207,7 @@ MauvilleCity_GameCorner_EventScript_CancelDollSelect::
 	release
 	end
 
-MauvilleCity_GameCorner_EventScript_PrizeCornerTMs::
+MauvilleCity_GameCorner_EventScript_PrizeCornerPokemon::
 	lock
 	faceplayer
 	msgbox MauvilleCity_GameCorner_Text_ExchangeCoinsForPrizes, MSGBOX_DEFAULT
@@ -220,7 +220,7 @@ MauvilleCity_GameCorner_EventScript_ChoosePokemonPrizeMessage::
 	message MauvilleCity_GameCorner_Text_WhichPrize
 	waitmessage
 	showcoinsbox 0, 0
-	multichoice 8, 0, MULTI_GAME_CORNER_TMS, FALSE
+	multichoice 8, 0, MULTI_GAME_CORNER_POKEMON, FALSE
 	switch VAR_RESULT
 	case 0, MauvilleCity_GameCorner_EventScript_SelectGenesect
 	case 1, MauvilleCity_GameCorner_EventScript_SelectPoipole

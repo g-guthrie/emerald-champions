@@ -1,20 +1,20 @@
 SootopolisCity_House1_MapScripts::
 	.byte 0
 
-SootopolisCity_House1_EventScript_BrickBreakBlackBelt::
+SootopolisCity_House1_EventScript_RazorClawBlackBelt::
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_TM_BRICK_BREAK, SootopolisCity_House1_EventScript_ReceivedBrickBreak
-	msgbox SootopolisCity_House1_Text_DevelopedThisTM, MSGBOX_DEFAULT
+	goto_if_set FLAG_RECEIVED_RAZOR_CLAW, SootopolisCity_House1_EventScript_ReceivedRazorClaw
+	msgbox SootopolisCity_House1_Text_FoundThisRazorClaw, MSGBOX_DEFAULT
 	giveitem ITEM_RAZOR_CLAW
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_TM_BRICK_BREAK
-	msgbox SootopolisCity_House1_Text_ExplainBrickBreak, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_RAZOR_CLAW
+	msgbox SootopolisCity_House1_Text_ExplainRazorClaw, MSGBOX_DEFAULT
 	release
 	end
 
-SootopolisCity_House1_EventScript_ReceivedBrickBreak::
-	msgbox SootopolisCity_House1_Text_ExplainBrickBreak, MSGBOX_DEFAULT
+SootopolisCity_House1_EventScript_ReceivedRazorClaw::
+	msgbox SootopolisCity_House1_Text_ExplainRazorClaw, MSGBOX_DEFAULT
 	release
 	end
 
@@ -27,15 +27,14 @@ SootopolisCity_House1_EventScript_Kecleon::
 	waitmoncry
 	release
 	end
-SootopolisCity_House1_Text_DevelopedThisTM:
+SootopolisCity_House1_Text_FoundThisRazorClaw:
 	.string "For thirty years I've remained in\n"
 	.string "SOOTOPOLIS honing my skills.\p"
 	.string "This RAZOR CLAW is just as sharp.\n"
 	.string "I bequeath it to you!$"
-SootopolisCity_House1_Text_ExplainBrickBreak:
+SootopolisCity_House1_Text_ExplainRazorClaw:
 	.string "A Razor Claw evolves Sneasel.\n"
 	.string "Use it at night when ready.$"
 
 SootopolisCity_House1_Text_Kecleon:
 	.string "KECLEON: Puu puhyaah.$"
-

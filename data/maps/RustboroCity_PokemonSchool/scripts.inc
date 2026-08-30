@@ -77,16 +77,16 @@ RustboroCity_PokemonSchool_EventScript_StudentNotebook::
 RustboroCity_PokemonSchool_EventScript_Teacher::
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_QUICK_CLAW, RustboroCity_PokemonSchool_EventScript_GaveQuickClaw
+	goto_if_set FLAG_RECEIVED_SCHOOL_SUN_STONE, RustboroCity_PokemonSchool_EventScript_GaveSunStone
 	call_if_eq VAR_FACING, DIR_EAST, RustboroCity_PokemonSchool_EventScript_TeacherCheckOnStudentsEast
 	call_if_eq VAR_FACING, DIR_WEST, RustboroCity_PokemonSchool_EventScript_TeacherCheckOnStudentsWest
-	msgbox RustboroCity_PokemonSchool_Text_StudentsWhoDontStudyGetQuickClaw, MSGBOX_DEFAULT
+	msgbox RustboroCity_PokemonSchool_Text_StudentsWhoStudyEveryTool, MSGBOX_DEFAULT
 	giveitem ITEM_SUN_STONE
 	goto_if_eq VAR_RESULT, 0, Common_EventScript_ShowBagIsFull
 	closemessage
 	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
-	setflag FLAG_RECEIVED_QUICK_CLAW
+	setflag FLAG_RECEIVED_SCHOOL_SUN_STONE
 	release
 	end
 
@@ -100,8 +100,8 @@ RustboroCity_PokemonSchool_EventScript_TeacherCheckOnStudentsWest::
 	waitmovement 0
 	return
 
-RustboroCity_PokemonSchool_EventScript_GaveQuickClaw::
-	msgbox RustboroCity_PokemonSchool_Text_ExplainQuickClaw, MSGBOX_DEFAULT
+RustboroCity_PokemonSchool_EventScript_GaveSunStone::
+	msgbox RustboroCity_PokemonSchool_Text_ExplainSunStone, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
@@ -242,11 +242,11 @@ RustboroCity_PokemonSchool_Text_ExplainFreeze:
 	.string "completely helpless.\p"
 	.string "It will remain frozen after battle.\n"
 	.string "Thaw it out using an ICE HEAL.$"
-RustboroCity_PokemonSchool_Text_StudentsWhoDontStudyGetQuickClaw:
+RustboroCity_PokemonSchool_Text_StudentsWhoStudyEveryTool:
 	.string "A good TRAINER studies every tool.\p"
 	.string "This SUN STONE evolves certain POKéMON.\n"
 	.string "Show me that you know when to use it.$"
-RustboroCity_PokemonSchool_Text_ExplainQuickClaw:
+RustboroCity_PokemonSchool_Text_ExplainSunStone:
 	.string "A Sun Stone evolves certain Pokémon.\n"
 	.string "Use it from the Bag when ready.$"
 

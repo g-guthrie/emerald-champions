@@ -136,7 +136,7 @@ DewfordTown_Gym_EventScript_Brawly::
 	trainerbattle_double TRAINER_BRAWLY_1, DewfordTown_Gym_Text_BrawlyIntro, DewfordTown_Gym_Text_BrawlyDefeat, EmeraldChampions_Text_NeedTwoPokemon, DewfordTown_Gym_EventScript_BrawlyDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, DewfordTown_Gym_EventScript_BrawlyRematch
-	goto_if_unset FLAG_RECEIVED_TM_BULK_UP, DewfordTown_Gym_EventScript_GiveBulkUp2
+	goto_if_unset FLAG_RECEIVED_BRAWLY_LUCARIONITE, DewfordTown_Gym_EventScript_GiveLucarionite2
 	msgbox DewfordTown_Gym_Text_BrawlyPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -153,7 +153,7 @@ DewfordTown_Gym_EventScript_BrawlyDefeated::
 	call_if_eq VAR_PETALBURG_GYM_STATE, 6, Common_EventScript_ReadyPetalburgGymForBattle
 	setvar VAR_0x8008, 2
 	call Common_EventScript_SetGymTrainers
-	call DewfordTown_Gym_EventScript_GiveBulkUp
+	call DewfordTown_Gym_EventScript_GiveLucarionite
 	closemessage
 	delay 30
 	playfanfare MUS_REGISTER_MATCH_CALL
@@ -167,18 +167,18 @@ DewfordTown_Gym_EventScript_BrawlyDefeated::
 	release
 	end
 
-DewfordTown_Gym_EventScript_GiveBulkUp::
+DewfordTown_Gym_EventScript_GiveLucarionite::
 	giveitem ITEM_LUCARIONITE
 	goto_if_eq VAR_RESULT, 0, Common_EventScript_BagIsFull
-	msgbox DewfordTown_Gym_Text_ExplainBulkUp, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM_BULK_UP
+	msgbox DewfordTown_Gym_Text_ExplainLucarionite, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_BRAWLY_LUCARIONITE
 	return
 
-DewfordTown_Gym_EventScript_GiveBulkUp2:
+DewfordTown_Gym_EventScript_GiveLucarionite2:
 	giveitem ITEM_LUCARIONITE
 	goto_if_eq VAR_RESULT, 0, Common_EventScript_ShowBagIsFull
-	msgbox DewfordTown_Gym_Text_ExplainBulkUp, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM_BULK_UP
+	msgbox DewfordTown_Gym_Text_ExplainLucarionite, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_BRAWLY_LUCARIONITE
 	release
 	end
 
@@ -386,13 +386,12 @@ DewfordTown_Gym_Text_ReceivedKnuckleBadge:
 	.string "from BRAWLY.$"
 
 DewfordTown_Gym_Text_KnuckleBadgeInfoTakeThis:
-	.string "The KNUCKLE BADGE makes all POKéMON\n"
-	.string "up to Level 30, even those you get in\l"
-	.string "trades, obey without question.\p"
-	.string "And, you'll be able to use the HM move\n"
-	.string "FLASH outside of battle.\p"
+	.string "The KNUCKLE BADGE lets your LEVELER\n"
+	.string "train a party up to Lv. 30.\p"
+	.string "It also enables the hidden move FLASH\n"
+	.string "outside of battle.\p"
 	.string "Take this rare MEGA STONE, too.$"
-DewfordTown_Gym_Text_ExplainBulkUp:
+DewfordTown_Gym_Text_ExplainLucarionite:
 	.string "Lucarionite lets Lucario Mega Evolve.\n"
 	.string "You'll soon receive the Ring it needs.$"
 

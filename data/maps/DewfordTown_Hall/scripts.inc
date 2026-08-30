@@ -237,20 +237,20 @@ DewfordTown_Hall_Movement_SchoolKidWalkInPlaceRight:
 	walk_in_place_right
 	step_end
 
-DewfordTown_Hall_EventScript_SludgeBombMan::
+DewfordTown_Hall_EventScript_DeepSeaScaleMan::
 	lock
 	faceplayer
 	call Common_EventScript_BufferTrendyPhrase
-	goto_if_set FLAG_RECEIVED_TM_SLUDGE_BOMB, DewfordTown_Hall_EventScript_ReceivedSludgeBomb
-	msgbox DewfordTown_Hall_Text_GiveYouSludgeBomb, MSGBOX_DEFAULT
+	goto_if_set FLAG_RECEIVED_DEWFORD_DEEP_SEA_SCALE, DewfordTown_Hall_EventScript_ReceivedDeepSeaScale
+	msgbox DewfordTown_Hall_Text_GiveYouDeepSeaScale, MSGBOX_DEFAULT
 	giveitem ITEM_DEEP_SEA_SCALE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_TM_SLUDGE_BOMB
+	setflag FLAG_RECEIVED_DEWFORD_DEEP_SEA_SCALE
 	release
 	end
 
-DewfordTown_Hall_EventScript_ReceivedSludgeBomb::
-	msgbox DewfordTown_Hall_Text_LoveSludgeBombButTrendInToo, MSGBOX_DEFAULT
+DewfordTown_Hall_EventScript_ReceivedDeepSeaScale::
+	msgbox DewfordTown_Hall_Text_ScaleAndTrend, MSGBOX_DEFAULT
 	release
 	end
 
@@ -423,11 +423,11 @@ DewfordTown_Hall_Text_WellBeTrendDuo:
 	.string "“{STR_VAR_1}” DUO!\p"
 	.string "Isn't that a ripe image?\n"
 	.string "Hahahah!$"
-DewfordTown_Hall_Text_GiveYouSludgeBomb:
+DewfordTown_Hall_Text_GiveYouDeepSeaScale:
 	.string "The Deep Sea Scale is trending!\p"
 	.string "It evolves Clamperl into Gorebyss.$"
 
-DewfordTown_Hall_Text_LoveSludgeBombButTrendInToo:
+DewfordTown_Hall_Text_ScaleAndTrend:
 	.string "That DEEP SEA SCALE evolves CLAMPERL\n"
 	.string "into GOREBYSS.\p"
 	.string "The trendy move “{STR_VAR_1}” is\n"

@@ -271,7 +271,7 @@ static const struct MenuAction MultichoiceList_GameCornerDolls[] =
     {gText_Exit},
 };
 
-static const struct MenuAction MultichoiceList_GameCornerTMs[] =
+static const struct MenuAction MultichoiceList_GameCornerPokemon[] =
 {
     {COMPOUND_STRING("GENESECT{CLEAR_TO 72}7,500 COINS")},
     {COMPOUND_STRING("POIPOLE{CLEAR_TO 72}6,500 COINS")},
@@ -1260,7 +1260,7 @@ static const struct MultichoiceListStruct sMultichoiceLists[] =
     [MULTI_SSTIDAL_SLATEPORT_WITH_BF]  = MULTICHOICE(MultichoiceList_SSTidalSlateportWithBF),
     [MULTI_SSTIDAL_BATTLE_FRONTIER]    = MULTICHOICE(MultichoiceList_SSTidalBattleFrontier),
     [MULTI_RIGHTLEFT]                  = MULTICHOICE(MultichoiceList_RightLeft),
-    [MULTI_GAME_CORNER_TMS]            = MULTICHOICE(MultichoiceList_GameCornerTMs),
+    [MULTI_GAME_CORNER_POKEMON]        = MULTICHOICE(MultichoiceList_GameCornerPokemon),
     [MULTI_EC_STARTER_ARCHIVE_KANTO]   = MULTICHOICE(MultichoiceList_ECStarterArchiveKanto),
     [MULTI_EC_STARTER_ARCHIVE_JOHTO]   = MULTICHOICE(MultichoiceList_ECStarterArchiveJohto),
     [MULTI_EC_STARTER_ARCHIVE_HOENN]   = MULTICHOICE(MultichoiceList_ECStarterArchiveHoenn),

@@ -4,11 +4,11 @@ DewfordTown_House2_MapScripts::
 DewfordTown_House2_EventScript_Man::
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_SILK_SCARF, DewfordTown_House2_EventScript_ExplainSilkScarf
-	msgbox DewfordTown_House2_Text_WantYouToHaveSilkScarf, MSGBOX_DEFAULT
+	goto_if_set FLAG_RECEIVED_DEWFORD_REAPER_CLOTH, DewfordTown_House2_EventScript_ExplainReaperCloth
+	msgbox DewfordTown_House2_Text_WantYouToHaveReaperCloth, MSGBOX_DEFAULT
 	giveitem ITEM_REAPER_CLOTH
 	goto_if_eq VAR_RESULT, FALSE, DewfordTown_House2_EventScript_NoRoomForScarf
-	setflag FLAG_RECEIVED_SILK_SCARF
+	setflag FLAG_RECEIVED_DEWFORD_REAPER_CLOTH
 	release
 	end
 
@@ -17,15 +17,15 @@ DewfordTown_House2_EventScript_NoRoomForScarf::
 	release
 	end
 
-DewfordTown_House2_EventScript_ExplainSilkScarf::
-	msgbox DewfordTown_House2_Text_ExplainSilkScarf, MSGBOX_DEFAULT
+DewfordTown_House2_EventScript_ExplainReaperCloth::
+	msgbox DewfordTown_House2_Text_ExplainReaperCloth, MSGBOX_DEFAULT
 	release
 	end
 
 DewfordTown_House2_EventScript_Boy::
 	msgbox DewfordTown_House2_Text_BrawlySoCool, MSGBOX_NPC
 	end
-DewfordTown_House2_Text_WantYouToHaveSilkScarf:
+DewfordTown_House2_Text_WantYouToHaveReaperCloth:
 	.string "Gorge your eyes on this rare\n"
 	.string "REAPER CLOTH! Spooky, yet stylish!\p"
 	.string "You appreciate my dazzling taste.\n"
@@ -35,7 +35,7 @@ DewfordTown_House2_Text_NoRoom:
 	.string "Oh, you don't have room?\p"
 	.string "This REAPER CLOTH is rare! Make room\n"
 	.string "and come back for it.$"
-DewfordTown_House2_Text_ExplainSilkScarf:
+DewfordTown_House2_Text_ExplainReaperCloth:
 	.string "A Reaper Cloth evolves Dusclops.\n"
 	.string "Use it from the Bag when ready.$"
 

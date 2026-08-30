@@ -1,10 +1,10 @@
 FortreeCity_House2_MapScripts::
 	.byte 0
 
-FortreeCity_House2_EventScript_HiddenPowerGiver::
+FortreeCity_House2_EventScript_DubiousDiscGiver::
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_TM_HIDDEN_POWER, FortreeCity_House2_EventScript_ExplainHiddenPower
+	goto_if_set FLAG_RECEIVED_FORTREE_DUBIOUS_DISC, FortreeCity_House2_EventScript_ExplainDubiousDisc
 	call_if_unset FLAG_MET_HIDDEN_POWER_GIVER, FortreeCity_House2_EventScript_Greeting
 	msgbox FortreeCity_House2_Text_CoinInWhichHand, MSGBOX_DEFAULT
 	multichoice 21, 8, MULTI_RIGHTLEFT, TRUE
@@ -21,8 +21,8 @@ FortreeCity_House2_EventScript_HiddenPowerGiver::
 	msgbox FortreeCity_House2_Text_YourHiddenPowerHasAwoken, MSGBOX_DEFAULT
 	giveitem ITEM_DUBIOUS_DISC
 	goto_if_eq VAR_RESULT, 0, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_TM_HIDDEN_POWER
-	msgbox FortreeCity_House2_Text_ExplainHiddenPower, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_FORTREE_DUBIOUS_DISC
+	msgbox FortreeCity_House2_Text_ExplainDubiousDisc, MSGBOX_DEFAULT
 	release
 	end
 
@@ -31,8 +31,8 @@ FortreeCity_House2_EventScript_Greeting::
 	setflag FLAG_MET_HIDDEN_POWER_GIVER
 	return
 
-FortreeCity_House2_EventScript_ExplainHiddenPower::
-	msgbox FortreeCity_House2_Text_ExplainHiddenPower, MSGBOX_DEFAULT
+FortreeCity_House2_EventScript_ExplainDubiousDisc::
+	msgbox FortreeCity_House2_Text_ExplainDubiousDisc, MSGBOX_DEFAULT
 	release
 	end
 
@@ -67,11 +67,10 @@ FortreeCity_House2_Text_CorrectTryAgainWhichHand2:
 FortreeCity_House2_Text_YourHiddenPowerHasAwoken:
 	.string "Your insight has awoken!\p"
 	.string "Take this Dubious Disc for Porygon2.$"
-FortreeCity_House2_Text_ExplainHiddenPower:
+FortreeCity_House2_Text_ExplainDubiousDisc:
 	.string "A DUBIOUS DISC evolves PORYGON2.\n"
 	.string "Use it from the Bag when ready.$"
 
 FortreeCity_House2_Text_YouGuessedWrong:
 	.string "No, too bad.\n"
 	.string "You guessed wrong.$"
-

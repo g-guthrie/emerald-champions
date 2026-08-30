@@ -5,7 +5,7 @@ RustboroCity_Gym_EventScript_Roxanne::
 	trainerbattle_double TRAINER_ROXANNE_1, RustboroCity_Gym_Text_RoxanneIntro, RustboroCity_Gym_Text_RoxanneDefeat, EmeraldChampions_Text_NeedTwoPokemon, RustboroCity_Gym_EventScript_RoxanneDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, RustboroCity_Gym_EventScript_RoxanneRematch
-	goto_if_unset FLAG_RECEIVED_TM_ROCK_TOMB, RustboroCity_Gym_EventScript_GiveRockTomb
+	goto_if_unset FLAG_RECEIVED_ROXANNE_OLD_AMBER, RustboroCity_Gym_EventScript_GiveRoxanneRewards
 	goto_if_unset FLAG_EC_RECEIVED_ROXANNE_AERODACTYLITE, RustboroCity_Gym_EventScript_GiveLegacyOldAmber
 	msgbox RustboroCity_Gym_Text_RoxannePostBattle, MSGBOX_DEFAULT
 	release
@@ -23,10 +23,10 @@ RustboroCity_Gym_EventScript_RoxanneDefeated::
 	setvar VAR_0x8008, 1
 	call Common_EventScript_SetGymTrainers
 	call_if_eq VAR_PETALBURG_GYM_STATE, 6, Common_EventScript_ReadyPetalburgGymForBattle
-	goto RustboroCity_Gym_EventScript_GiveRockTomb
+	goto RustboroCity_Gym_EventScript_GiveRoxanneRewards
 	end
 
-RustboroCity_Gym_EventScript_GiveRockTomb::
+RustboroCity_Gym_EventScript_GiveRoxanneRewards::
 	goto_if_set FLAG_EC_RECEIVED_ROXANNE_AERODACTYLITE, RustboroCity_Gym_EventScript_GiveOldAmber
 	giveitem ITEM_AERODACTYLITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
@@ -34,8 +34,8 @@ RustboroCity_Gym_EventScript_GiveRockTomb::
 RustboroCity_Gym_EventScript_GiveOldAmber::
 	giveitem ITEM_OLD_AMBER
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_TM_ROCK_TOMB
-	msgbox RustboroCity_Gym_Text_ExplainRockTomb, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_ROXANNE_OLD_AMBER
+	msgbox RustboroCity_Gym_Text_ExplainRoxanneRewards, MSGBOX_DEFAULT
 	release
 	end
 
@@ -44,7 +44,7 @@ RustboroCity_Gym_EventScript_GiveLegacyOldAmber::
 	giveitem ITEM_OLD_AMBER
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_EC_RECEIVED_ROXANNE_AERODACTYLITE
-	msgbox RustboroCity_Gym_Text_ExplainRockTomb, MSGBOX_DEFAULT
+	msgbox RustboroCity_Gym_Text_ExplainRoxanneRewards, MSGBOX_DEFAULT
 	release
 	end
 
@@ -207,12 +207,14 @@ RustboroCity_Gym_Text_ReceivedStoneBadge:
 	.string "from ROXANNE.$"
 
 RustboroCity_Gym_Text_StoneBadgeInfoTakeThis:
-	.string "The STONE BADGE enables POKéMON to use\n"
-	.string "CUT outside of battle.\p"
+	.string "The STONE BADGE lets your LEVELER train\n"
+	.string "a party up to Lv. 20.\p"
+	.string "It also enables POKéMON to use CUT\n"
+	.string "outside of battle.\p"
 	.string "It also marks your first true step\n"
 	.string "toward the POKéMON LEAGUE.\p"
 	.string "Please take this with you, too.$"
-RustboroCity_Gym_Text_ExplainRockTomb:
+RustboroCity_Gym_Text_ExplainRoxanneRewards:
 	.string "Aerodactylite lets Aerodactyl Mega\n"
 	.string "Evolve once you possess a Mega Ring.\p"
 	.string "DEVON can restore that OLD AMBER.\n"

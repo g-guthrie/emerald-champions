@@ -32,7 +32,7 @@ Route128_EventScript_KyogreAwakenedScene::
 	waitmovement 0
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
-	msgbox Route128_Text_MaxieResposibilityFallsToArchieAndMe, MSGBOX_DEFAULT
+	msgbox Route128_Text_MaxieResponsibilityFallsToArchieAndMe, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_ROUTE128_ARCHIE, Route128_Movement_ArchieRunLeft
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
@@ -259,7 +259,7 @@ Route128_Text_MaxieDoYouUnderstandNow:
 	.string "something before the situation goes\l"
 	.string "completely out of control!$"
 
-Route128_Text_MaxieResposibilityFallsToArchieAndMe:
+Route128_Text_MaxieResponsibilityFallsToArchieAndMe:
 	.string "MAXIE: {PLAYER}, don't say anything.\p"
 	.string "I know that I have no right to be\n"
 	.string "critical of ARCHIE…\p"

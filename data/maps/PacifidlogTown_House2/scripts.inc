@@ -5,8 +5,8 @@ PacifidlogTown_House2_EventScript_FanClubYoungerBrother::
 	lock
 	faceplayer
 	dotimebasedevents
-	call PacifidlogTown_House2_EventScript_UpdateFanClubTMFlag
-	goto_if_set FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK, PacifidlogTown_House2_EventScript_ComeBackInXDays
+	call PacifidlogTown_House2_EventScript_UpdateFanClubStoneFlag
+	goto_if_set FLAG_RECEIVED_FANCLUB_STONE_THIS_WEEK, PacifidlogTown_House2_EventScript_ComeBackInXDays
 	call_if_set FLAG_MET_FANCLUB_YOUNGER_BROTHER, PacifidlogTown_House2_EventScript_MonAssessment
 	call_if_unset FLAG_MET_FANCLUB_YOUNGER_BROTHER, PacifidlogTown_House2_EventScript_FirstMonAssessment
 	setflag FLAG_MET_FANCLUB_YOUNGER_BROTHER
@@ -17,10 +17,10 @@ PacifidlogTown_House2_EventScript_FanClubYoungerBrother::
 	goto PacifidlogTown_House2_EventScript_GiveFrustration
 	end
 
-PacifidlogTown_House2_EventScript_UpdateFanClubTMFlag::
-	goto_if_unset FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK, Common_EventScript_NopReturn
-	specialvar VAR_RESULT, GetDaysUntilPacifidlogTMAvailable
-	call_if_eq VAR_RESULT, 0, PacifidlogTown_House2_EventScript_ClearReceivedFanClubTM
+PacifidlogTown_House2_EventScript_UpdateFanClubStoneFlag::
+	goto_if_unset FLAG_RECEIVED_FANCLUB_STONE_THIS_WEEK, Common_EventScript_NopReturn
+	specialvar VAR_RESULT, GetDaysUntilPacifidlogStoneAvailable
+	call_if_eq VAR_RESULT, 0, PacifidlogTown_House2_EventScript_ClearReceivedFanClubStone
 	return
 
 PacifidlogTown_House2_EventScript_MonAssessment::
@@ -32,16 +32,16 @@ PacifidlogTown_House2_EventScript_FirstMonAssessment::
 	msgbox PacifidlogTown_House2_Text_AhYourPokemon, MSGBOX_DEFAULT
 	return
 
-PacifidlogTown_House2_EventScript_ClearReceivedFanClubTM::
-	clearflag FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK
+PacifidlogTown_House2_EventScript_ClearReceivedFanClubStone::
+	clearflag FLAG_RECEIVED_FANCLUB_STONE_THIS_WEEK
 	return
 
 PacifidlogTown_House2_EventScript_GiveReturn::
 	msgbox PacifidlogTown_House2_Text_AdoringPokemonTakeThis, MSGBOX_DEFAULT
 	giveitem ITEM_SUN_STONE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK
-	special SetPacifidlogTMReceivedDay
+	setflag FLAG_RECEIVED_FANCLUB_STONE_THIS_WEEK
+	special SetPacifidlogStoneReceivedDay
 	msgbox PacifidlogTown_House2_Text_ExplainReturnFrustration, MSGBOX_DEFAULT
 	release
 	end
@@ -55,16 +55,16 @@ PacifidlogTown_House2_EventScript_GiveFrustration::
 	msgbox PacifidlogTown_House2_Text_ViciousPokemonTakeThis, MSGBOX_DEFAULT
 	giveitem ITEM_MOON_STONE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK
-	special SetPacifidlogTMReceivedDay
+	setflag FLAG_RECEIVED_FANCLUB_STONE_THIS_WEEK
+	special SetPacifidlogStoneReceivedDay
 	msgbox PacifidlogTown_House2_Text_ExplainReturnFrustration, MSGBOX_DEFAULT
 	release
 	end
 
 PacifidlogTown_House2_EventScript_ComeBackInXDays::
-	specialvar VAR_RESULT, GetDaysUntilPacifidlogTMAvailable
+	specialvar VAR_RESULT, GetDaysUntilPacifidlogStoneAvailable
 	buffernumberstring STR_VAR_1, VAR_RESULT
-	msgbox PacifidlogTown_House2_Text_GetGoodTMInXDays, MSGBOX_DEFAULT
+	msgbox PacifidlogTown_House2_Text_GetGoodStoneInXDays, MSGBOX_DEFAULT
 	release
 	end
 
@@ -118,7 +118,7 @@ PacifidlogTown_House2_Text_ViciousPokemonTakeThis:
 PacifidlogTown_House2_Text_ExplainReturnFrustration:
 	.string "SUN and MOON STONES evolve different\n"
 	.string "POKéMON. Use this one when ready.$"
-PacifidlogTown_House2_Text_GetGoodTMInXDays:
+PacifidlogTown_House2_Text_GetGoodStoneInXDays:
 	.string "In {STR_VAR_1} days, I'll receive more\n"
 	.string "evolution stones.\p"
 	.string "Come see me then, and I'll choose one\n"

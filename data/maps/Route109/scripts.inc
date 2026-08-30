@@ -326,22 +326,22 @@ Route109_EventScript_SandCastleBoy::
 	release
 	end
 
-Route109_EventScript_SoftSandGirl::
+Route109_EventScript_WaterStoneGirl::
 	lock
 	faceplayer
 	special GetPlayerBigGuyGirlString
-	goto_if_set FLAG_RECEIVED_SOFT_SAND, Route109_EventScript_AlreadyReceivedSoftSand
+	goto_if_set FLAG_RECEIVED_ROUTE109_WATER_STONE, Route109_EventScript_AlreadyReceivedWaterStone
 	msgbox Route109_Text_YouCanHaveThis, MSGBOX_DEFAULT
 	giveitem ITEM_WATER_STONE
 	goto_if_eq VAR_RESULT, 0, Common_EventScript_ShowBagIsFull
 	closemessage
 	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
-	setflag FLAG_RECEIVED_SOFT_SAND
+	setflag FLAG_RECEIVED_ROUTE109_WATER_STONE
 	release
 	end
 
-Route109_EventScript_AlreadyReceivedSoftSand::
+Route109_EventScript_AlreadyReceivedWaterStone::
 	msgbox Route109_Text_WereGoingToMakeBigCastle, MSGBOX_DEFAULT
 	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0

@@ -184,7 +184,7 @@ def verify_inert_item_cleanup() -> None:
     item = next(
         obj["trainer_sight_or_berry_tree_id"]
         for obj in route["object_events"]
-        if obj.get("flag") == "FLAG_ITEM_ROUTE_116_X_SPECIAL"
+        if obj.get("flag") == "FLAG_ITEM_ROUTE_116_THUNDER_STONE"
     )
     require(item == "ITEM_THUNDER_STONE", "Route 116's obsolete X Special was not replaced")
     lavaridge = read("data/maps/LavaridgeTown_Mart/scripts.inc")
@@ -348,7 +348,7 @@ def verify_finite_side_rewards() -> None:
             "Heart Scale exchange can charge before checking reward space")
 
     roxanne_text = read("data/maps/RustboroCity_Gym/scripts.inc")
-    roxanne = roxanne_text.split("RustboroCity_Gym_EventScript_GiveRockTomb::", 1)[1].split(
+    roxanne = roxanne_text.split("RustboroCity_Gym_EventScript_GiveRoxanneRewards::", 1)[1].split(
         "RustboroCity_Gym_EventScript_RoxanneRematch::", 1
     )[0]
     order = (
@@ -356,7 +356,7 @@ def verify_finite_side_rewards() -> None:
         "giveitem ITEM_AERODACTYLITE",
         "setflag FLAG_EC_RECEIVED_ROXANNE_AERODACTYLITE",
         "giveitem ITEM_OLD_AMBER",
-        "setflag FLAG_RECEIVED_TM_ROCK_TOMB",
+        "setflag FLAG_RECEIVED_ROXANNE_OLD_AMBER",
     )
     require(all(token in roxanne for token in order), "Roxanne's Aerodactyl project reward is incomplete")
     require([roxanne.index(token) for token in order] == sorted(roxanne.index(token) for token in order),
@@ -382,12 +382,66 @@ def verify_finite_side_rewards() -> None:
     ):
         require(obsolete not in game_corner, f"dead Game Corner TM prize path remains: {obsolete}")
     for active in (
-        "MauvilleCity_GameCorner_EventScript_PrizeCornerTMs::",
+        "MauvilleCity_GameCorner_EventScript_PrizeCornerPokemon::",
         "MauvilleCity_GameCorner_EventScript_SelectGenesect::",
         "MauvilleCity_GameCorner_EventScript_SelectPoipole::",
         "MauvilleCity_GameCorner_EventScript_PrizeCornerDolls::",
     ):
         require(active in game_corner, f"active Game Corner prize path was lost: {active}")
+
+
+def verify_no_redundant_tm_economy() -> None:
+    active_sources = [
+        path
+        for path in (ROOT / "data/maps").glob("*/scripts.inc")
+        if not path.parent.name.endswith("_Frlg")
+    ]
+    active_sources.extend(
+        path
+        for path in (ROOT / "data/maps").glob("*/map.json")
+        if not path.parent.name.endswith("_Frlg")
+    )
+    violations = [
+        str(path.relative_to(ROOT))
+        for path in active_sources
+        if re.search(
+            r"(?:giveitem|\.2byte|trainer_sight_or_berry_tree_id[^\n]*)\s+(?:\"?)ITEM_TM_",
+            path.read_text(),
+        )
+    ]
+    require(
+        not violations,
+        "a Hoenn acquisition path still sells or gives a redundant TM: " + ", ".join(violations),
+    )
+
+    flags = read("include/constants/flags.h")
+    require(
+        "FLAG_RECEIVED_TM_" not in flags and "FLAG_GOT_TM_" not in flags,
+        "a live reward flag still describes a deleted TM reward",
+    )
+
+    slateport = read("data/maps/SlateportCity/scripts.inc")
+    field_supply_block = slateport.split("SlateportCity_Pokemart_FieldSupplies:", 1)[1].split(
+        "pokemartlistend", 1
+    )[0]
+    require(
+        tuple(re.findall(r"ITEM_[A-Z0-9_]+", field_supply_block))
+        == (
+            "ITEM_HONEY",
+            "ITEM_POKE_DOLL",
+            "ITEM_FLUFFY_TAIL",
+            "ITEM_ESCAPE_ROPE",
+            "ITEM_REPEL",
+            "ITEM_SUPER_REPEL",
+        ),
+        "Slateport's deleted TM stall is not a coherent field-supply vendor",
+    )
+
+    lilycove = read("data/maps/LilycoveCity_DepartmentStore_4F/scripts.inc")
+    require("\tpokemart " not in lilycove and "ITEM_TM_" not in lilycove,
+            "Lilycove 4F still exposes a redundant TM shop")
+    for concept in ("every move a species may legally learn", "competitive sets", "Mega sets"):
+        require(concept in lilycove, f"Lilycove's move-study floor omits {concept!r}")
 
 
 def verify_frontier_exchange() -> None:
@@ -455,12 +509,95 @@ def verify_unique_world_stones() -> None:
     print(f"world_mega_stone_pickups={len(pickups)} unique={len(counts)}")
 
 
+def verify_pickup_flag_names_match_rewards() -> None:
+    mismatches: list[str] = []
+    checked = 0
+    hidden_checked = 0
+    legacy_key_aliases = {
+        "ITEM_KEY_TO_ROOM_1": "RM_1_KEY",
+        "ITEM_KEY_TO_ROOM_2": "RM_2_KEY",
+        "ITEM_KEY_TO_ROOM_4": "RM_4_KEY",
+        "ITEM_KEY_TO_ROOM_6": "RM_6_KEY",
+    }
+    for path in sorted((ROOT / "data/maps").glob("*/map.json")):
+        if path.parent.name.endswith("_Frlg"):
+            continue
+        payload = json.loads(path.read_text())
+        for event in payload.get("object_events", []):
+            if event.get("script") != "Common_EventScript_FindItem":
+                continue
+            checked += 1
+            item = str(event.get("trainer_sight_or_berry_tree_id"))
+            flag = str(event.get("flag"))
+            if item.removeprefix("ITEM_") not in flag:
+                mismatches.append(f"{path.parent.name}: {item} uses {flag}")
+        for event in payload.get("bg_events", []):
+            if event.get("type") != "hidden_item":
+                continue
+            hidden_checked += 1
+            item = str(event.get("item"))
+            flag = str(event.get("flag"))
+            expected = legacy_key_aliases.get(item, item.removeprefix("ITEM_"))
+            if expected not in flag:
+                mismatches.append(f"{path.parent.name}: hidden {item} uses {flag}")
+    require(
+        not mismatches,
+        "world pickup flags still describe deleted rewards:\n" + "\n".join(mismatches),
+    )
+    print(f"world_pickup_flags={checked} hidden_pickup_flags={hidden_checked} reward_names_match")
+
+
+def verify_direct_reward_flag_names() -> None:
+    generic_state_exceptions = {
+        ("PacifidlogTown_House2", "PacifidlogTown_House2_EventScript_GiveReturn"),
+        ("PacifidlogTown_House2", "PacifidlogTown_House2_EventScript_GiveFrustration"),
+        ("Route111", "Route111_EventScript_Girl"),
+        ("RustboroCity", "RustboroCity_EventScript_ReturnGoods"),
+        ("RustboroCity_Gym", "RustboroCity_Gym_EventScript_GiveLegacyOldAmber"),
+        ("SlateportCity_Harbor", "SlateportCity_Harbor_EventScript_DeepSeaTooth"),
+        ("SlateportCity_Harbor", "SlateportCity_Harbor_EventScript_DeepSeaScale"),
+    }
+    checked = 0
+    mismatches: list[str] = []
+    for path in sorted((ROOT / "data/maps").glob("*/scripts.inc")):
+        if path.parent.name.endswith("_Frlg"):
+            continue
+        text = path.read_text()
+        labels = list(re.finditer(r"(?m)^([A-Za-z_][A-Za-z0-9_]*)::?\s*$", text))
+        for index, match in enumerate(labels):
+            block = text[match.end():labels[index + 1].start() if index + 1 < len(labels) else len(text)]
+            items = re.findall(r"\bgiveitem\s+(ITEM_[A-Z0-9_]+)", block)
+            flags = [
+                flag
+                for flag in re.findall(r"\bsetflag\s+(FLAG_[A-Z0-9_]+)", block)
+                if any(token in flag for token in ("RECEIVED", "GOT_", "EXCHANGED", "RETURNED"))
+            ]
+            if not items or not flags:
+                continue
+            checked += 1
+            if (path.parent.name, match.group(1)) in generic_state_exceptions:
+                continue
+            for item in items:
+                if not any(item.removeprefix("ITEM_") in flag for flag in flags):
+                    mismatches.append(
+                        f"{path.parent.name}:{match.group(1)} gives {item} but records {flags}"
+                    )
+    require(
+        not mismatches,
+        "direct gift flags still describe deleted rewards:\n" + "\n".join(mismatches),
+    )
+    print(f"direct_reward_flags={checked} reward_names_match")
+
+
 def main() -> None:
     verify_trainer_hill()
     verify_inert_item_cleanup()
     verify_finite_side_rewards()
+    verify_no_redundant_tm_economy()
     verify_frontier_exchange()
     verify_unique_world_stones()
+    verify_pickup_flag_names_match_rewards()
+    verify_direct_reward_flag_names()
     print("PASS: finite reward economy is coherent and one-time world Mega Stones are unique")
 
 

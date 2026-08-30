@@ -80,11 +80,11 @@ SootopolisCity_Gym_1F_Movement_FallThroughIce:
 	step_end
 
 SootopolisCity_Gym_1F_EventScript_Juan::
-	goto_if_unset FLAG_BADGE06_GET, SootopolisCity_Gym_1F_EventScript_GoGetFortreeBadge
+	goto_if_unset FLAG_BADGE07_GET, SootopolisCity_Gym_1F_EventScript_NeedMindBadge
 	trainerbattle_double TRAINER_JUAN_1, SootopolisCity_Gym_1F_Text_JuanIntro, SootopolisCity_Gym_1F_Text_JuanDefeat, EmeraldChampions_Text_NeedTwoPokemon, SootopolisCity_Gym_1F_EventScript_JuanDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, SootopolisCity_Gym_1F_EventScript_JuanRematch
-	goto_if_unset FLAG_RECEIVED_TM_WATER_PULSE, SootopolisCity_Gym_1F_EventScript_GiveWaterPulse2
+	goto_if_unset FLAG_RECEIVED_JUAN_GYARADOSITE, SootopolisCity_Gym_1F_EventScript_GiveGyaradosite2
 	msgbox SootopolisCity_Gym_1F_Text_JuanPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -103,7 +103,7 @@ SootopolisCity_Gym_1F_EventScript_JuanDefeated::
 	clearflag FLAG_HIDE_SOOTOPOLIS_CITY_MAN_1
 	setvar VAR_0x8008, 8
 	call Common_EventScript_SetGymTrainers
-	call SootopolisCity_Gym_1F_EventScript_GiveWaterPulse
+	call SootopolisCity_Gym_1F_EventScript_GiveGyaradosite
 	closemessage
 	delay 30
 	playfanfare MUS_REGISTER_MATCH_CALL
@@ -115,23 +115,23 @@ SootopolisCity_Gym_1F_EventScript_JuanDefeated::
 	release
 	end
 
-SootopolisCity_Gym_1F_EventScript_GiveWaterPulse::
+SootopolisCity_Gym_1F_EventScript_GiveGyaradosite::
 	giveitem ITEM_GYARADOSITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
-	msgbox SootopolisCity_Gym_1F_Text_ExplainWaterPulse, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM_WATER_PULSE
+	msgbox SootopolisCity_Gym_1F_Text_ExplainGyaradosite, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_JUAN_GYARADOSITE
 	return
 
-SootopolisCity_Gym_1F_EventScript_GiveWaterPulse2::
+SootopolisCity_Gym_1F_EventScript_GiveGyaradosite2::
 	giveitem ITEM_GYARADOSITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	msgbox SootopolisCity_Gym_1F_Text_ExplainWaterPulse, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM_WATER_PULSE
+	msgbox SootopolisCity_Gym_1F_Text_ExplainGyaradosite, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_JUAN_GYARADOSITE
 	release
 	end
 
-SootopolisCity_Gym_1F_EventScript_GoGetFortreeBadge::
-	msgbox SootopolisCity_Gym_1F_Text_GoGetFortreeBadge, MSGBOX_DEFAULT
+SootopolisCity_Gym_1F_EventScript_NeedMindBadge::
+	msgbox SootopolisCity_Gym_1F_Text_NeedMindBadge, MSGBOX_DEFAULT
 	release
 	end
 
@@ -218,15 +218,13 @@ SootopolisCity_Gym_1F_Text_ReceivedRainBadge:
 	.string "from JUAN.$"
 
 SootopolisCity_Gym_1F_Text_ExplainRainBadgeTakeThis:
-	.string "Having the RAIN BADGE shall assure you\n"
-	.string "the full obedience of all your POKéMON\l"
-	.string "to your every command.\p"
-	.string "The RAIN BADGE also allows the use\n"
-	.string "of the HM move WATERFALL to scale\l"
+	.string "The RAIN BADGE lets your LEVELER train\n"
+	.string "a party up to Lv. 80.\p"
+	.string "It also enables WATERFALL to scale\n"
 	.string "walls of cascading water.\p"
 	.string "And, so that you never forget the\n"
 	.string "battle we shared, take this…$"
-SootopolisCity_Gym_1F_Text_ExplainWaterPulse:
+SootopolisCity_Gym_1F_Text_ExplainGyaradosite:
 	.string "Gyaradosite lets Gyarados Mega Evolve.\n"
 	.string "Let it hold the stone in battle.$"
 
@@ -240,12 +238,12 @@ SootopolisCity_Gym_1F_Text_JuanPostBattle:
 	.string "You may heal with your BAG between rooms,\n"
 	.string "but never use items inside their battles.$"
 
-SootopolisCity_Gym_1F_Text_GoGetFortreeBadge:
+SootopolisCity_Gym_1F_Text_NeedMindBadge:
 	.string "There remains but one BADGE to\n"
 	.string "obtain in HOENN.\p"
 	.string "If you wish to challenge the POKéMON\n"
-	.string "LEAGUE, you must obtain the last\l"
-	.string "BADGE from the GYM in FORTREE.$"
+	.string "LEAGUE, first earn the MIND BADGE\l"
+	.string "from the GYM in MOSSDEEP.$"
 
 SootopolisCity_Gym_1F_Text_GymStatue:
 	.string "SOOTOPOLIS CITY POKéMON GYM$"

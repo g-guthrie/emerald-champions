@@ -6,17 +6,17 @@ Route123_OnTransition:
 	special SetRoute123Weather
 	end
 
-Route123_EventScript_GigaDrainGirl::
+Route123_EventScript_SweetAppleGirl::
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_TM_GIGA_DRAIN, Route123_EventScript_ReceivedGigaDrain
+	goto_if_set FLAG_RECEIVED_ROUTE123_SWEET_APPLE, Route123_EventScript_ReceivedSweetApple
 	msgbox Route123_Text_LoveGrassMonsHaveAny, MSGBOX_DEFAULT
 	special IsGrassTypeInParty
 	goto_if_eq VAR_RESULT, FALSE, Route123_EventScript_NoGrassMons
 	msgbox Route123_Text_YouLikeGrassMonsTooHaveThis, MSGBOX_DEFAULT
 	giveitem ITEM_SWEET_APPLE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_TM_GIGA_DRAIN
+	setflag FLAG_RECEIVED_ROUTE123_SWEET_APPLE
 	msgbox Route123_Text_CheckTreesWithMyGrassMon, MSGBOX_DEFAULT
 	release
 	end
@@ -25,7 +25,7 @@ Route123_EventScript_NoGrassMons::
 	release
 	end
 
-Route123_EventScript_ReceivedGigaDrain::
+Route123_EventScript_ReceivedSweetApple::
 	msgbox Route123_Text_CheckTreesWithMyGrassMon, MSGBOX_DEFAULT
 	release
 	end

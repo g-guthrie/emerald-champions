@@ -40,16 +40,16 @@ Route114_EventScript_ReceivedBerry::
 Route114_EventScript_RoarGentleman::
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_TM_ROAR, Route114_EventScript_ReceivedRoar
+	goto_if_set FLAG_RECEIVED_ROUTE114_DRAGON_SCALE, Route114_EventScript_ReceivedDragonScale
 	msgbox Route114_Text_AllMyMonDoesIsRoarTakeThis, MSGBOX_DEFAULT
 	giveitem ITEM_DRAGON_SCALE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_TM_ROAR
+	setflag FLAG_RECEIVED_ROUTE114_DRAGON_SCALE
 	msgbox Route114_Text_ExplainRoar, MSGBOX_DEFAULT
 	release
 	end
 
-Route114_EventScript_ReceivedRoar::
+Route114_EventScript_ReceivedDragonScale::
 	msgbox Route114_Text_ExplainRoar, MSGBOX_DEFAULT
 	release
 	end

@@ -9,15 +9,15 @@ Route114_FossilManiacsHouse_OnTransition:
 Route114_FossilManiacsHouse_EventScript_FossilManiacsBrother::
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_TM_DIG, Route114_FossilManiacsHouse_EventScript_ReceivedDig
+	goto_if_set FLAG_RECEIVED_FOSSIL_MANIAC_METAL_COAT, Route114_FossilManiacsHouse_EventScript_ReceivedMetalCoat
 	msgbox Route114_FossilManiacsHouse_Text_HaveThisToDigLikeMyBrother, MSGBOX_DEFAULT
 	giveitem ITEM_METAL_COAT
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_TM_DIG
+	setflag FLAG_RECEIVED_FOSSIL_MANIAC_METAL_COAT
 	release
 	end
 
-Route114_FossilManiacsHouse_EventScript_ReceivedDig::
+Route114_FossilManiacsHouse_EventScript_ReceivedMetalCoat::
 	msgbox Route114_FossilManiacsHouse_Text_DigReturnsYouToEntrance, MSGBOX_DEFAULT
 	release
 	end

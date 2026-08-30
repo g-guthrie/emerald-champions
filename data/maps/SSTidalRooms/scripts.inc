@@ -1,20 +1,20 @@
 SSTidalRooms_MapScripts::
 	.byte 0
 
-SSTidalRooms_EventScript_SnatchGiver::
+SSTidalRooms_EventScript_ReaperClothGiver::
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_TM_SNATCH, SSTidalRooms_EventScript_ExplainSnatch
+	goto_if_set FLAG_RECEIVED_SS_TIDAL_REAPER_CLOTH, SSTidalRooms_EventScript_ExplainReaperCloth
 	msgbox SSTidalRooms_Text_NotSuspiciousTakeThis, MSGBOX_DEFAULT
 	giveitem ITEM_REAPER_CLOTH
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_TM_SNATCH
-	msgbox SSTidalRooms_Text_ExplainSnatch, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_SS_TIDAL_REAPER_CLOTH
+	msgbox SSTidalRooms_Text_ExplainReaperCloth, MSGBOX_DEFAULT
 	release
 	end
 
-SSTidalRooms_EventScript_ExplainSnatch::
-	msgbox SSTidalRooms_Text_ExplainSnatch, MSGBOX_DEFAULT
+SSTidalRooms_EventScript_ExplainReaperCloth::
+	msgbox SSTidalRooms_Text_ExplainReaperCloth, MSGBOX_DEFAULT
 	release
 	end
 
@@ -164,6 +164,6 @@ SSTidalRooms_Text_NotSuspiciousTakeThis:
 	.string "Uh… Hi! I'm not acting suspicious!\p"
 	.string "I didn't SNATCH this REAPER CLOTH\n"
 	.string "from anyone. It's clean! Take it!$"
-SSTidalRooms_Text_ExplainSnatch:
+SSTidalRooms_Text_ExplainReaperCloth:
 	.string "A REAPER CLOTH evolves DUSCLOPS.\n"
 	.string "Use it from the Bag when ready.$"

@@ -7,7 +7,7 @@ FortreeCity_House4_EventScript_Woman::
 
 FortreeCity_House4_EventScript_Boy::
 	lockall
-	goto_if_set FLAG_RECEIVED_MENTAL_HERB, FortreeCity_House4_EventScript_ReceivedMentalHerb
+	goto_if_set FLAG_RECEIVED_FORTREE_SACHET, FortreeCity_House4_EventScript_ReceivedSachet
 	goto_if_set FLAG_WINGULL_DELIVERED_MAIL, FortreeCity_House4_EventScript_WingullReturned
 	goto_if_set FLAG_WINGULL_SENT_ON_ERRAND, FortreeCity_House4_EventScript_WingullOnErrand
 	msgbox FortreeCity_House4_Text_GoBirdPokemon, MSGBOX_DEFAULT
@@ -30,14 +30,14 @@ FortreeCity_House4_EventScript_WingullOnErrand::
 FortreeCity_House4_EventScript_WingullReturned::
 	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
-	msgbox FortreeCity_House4_Text_WelcomeWingullTakeMentalHerb, MSGBOX_DEFAULT
+	msgbox FortreeCity_House4_Text_WelcomeWingullTakeSachet, MSGBOX_DEFAULT
 	giveitem ITEM_SACHET
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_MENTAL_HERB
+	setflag FLAG_RECEIVED_FORTREE_SACHET
 	releaseall
 	end
 
-FortreeCity_House4_EventScript_ReceivedMentalHerb::
+FortreeCity_House4_EventScript_ReceivedSachet::
 	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox FortreeCity_House4_Text_FriendsFarAwayThanksToWingull, MSGBOX_DEFAULT
@@ -75,7 +75,7 @@ FortreeCity_House4_Text_GoBirdPokemon:
 FortreeCity_House4_Text_AskedWingullToRunErrand:
 	.string "Heheh, I asked my WINGULL to run\n"
 	.string "an errand for me.$"
-FortreeCity_House4_Text_WelcomeWingullTakeMentalHerb:
+FortreeCity_House4_Text_WelcomeWingullTakeSachet:
 	.string "Welcome back, Wingull! And thank you.\p"
 	.string "Please take this Sachet as my thanks.$"
 
