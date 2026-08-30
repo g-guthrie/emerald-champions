@@ -286,6 +286,16 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "frames": 1200,
         "keys": [(800, 2, "RIGHT"), (980, 2, "RIGHT")],
     },
+    "pecharunt-shrine-background": {
+        "id": 41,
+        "param": 12,
+        "frames": 650,
+        "keys": [],
+        "verify": True,
+        "fixture_map": "MAP_MT_PYRE_6F",
+        "fixture_species": "SPECIES_PECHARUNT",
+        "player": [11, 8],
+    },
 }
 
 

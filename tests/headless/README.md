@@ -77,6 +77,9 @@ the reviewed 32-row table in
 `include/emerald_champions_headless_overworld_fixtures.h`. Each row loads the
 actual authored map and object rather than staging the species on a surrogate
 map, and requires both active-object and visible-sprite runtime proof.
+`pecharunt-shrine-background` loads the identical reviewed Mt. Pyre camera,
+then removes only Pecharunt's live object so the compiled metatile beneath it
+can be inspected without modifying production map data.
 Add scenarios by extending the enum and test-only switch in
 `src/emerald_champions_headless.c`, then adding a named row to
 `scripts/render_emerald_champions_ui.py`.

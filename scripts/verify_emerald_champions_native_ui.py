@@ -1123,7 +1123,23 @@ def verify_physical_encounter_render_coverage() -> None:
             and tuple(spec.get("player", ())) == fixture["player"],
             f"renderer metadata drifted for {name}: {spec}",
         )
-    print("PASS: all 32 live physical one-off objects have exact reviewed generic render coverage")
+    background_spec = scenarios.get("pecharunt-shrine-background", {})
+    require(
+        enum_names.index("EC_HEADLESS_SCENARIO_SPECIES_OVERWORLD_BACKGROUND")
+        == background_spec.get("id")
+        and background_spec.get("param") == 12
+        and background_spec.get("verify") is True
+        and background_spec.get("fixture_map") == "MAP_MT_PYRE_6F"
+        and background_spec.get("fixture_species") == "SPECIES_PECHARUNT"
+        and tuple(background_spec.get("player", ())) == (11, 8)
+        and "EC_HEADLESS_SCENARIO_SPECIES_OVERWORLD_BACKGROUND" in fixture_c
+        and "RemoveObjectEvent(objectEvent);" in fixture_c,
+        "Pecharunt background proof no longer removes only the live object at the reviewed camera",
+    )
+    print(
+        "PASS: all 32 live physical one-off objects have exact reviewed generic render coverage; "
+        "Pecharunt has same-camera background proof"
+    )
 
 
 def verify_headless_fixture_separation() -> None:

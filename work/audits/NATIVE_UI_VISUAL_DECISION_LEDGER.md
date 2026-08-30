@@ -46,12 +46,13 @@ scenario has been rendered and operated.
 ### Manifest authority and boundary
 
 The canonical evidence set is
-`work/visual-audit/rendered/current/manifest.json`: **91 scenarios** rendered
+`work/visual-audit/rendered/current/manifest.json`: **92 scenarios** rendered
 at 240x160 by native libmGBA from ROM SHA-256
-`dc8d840fac30b18008bac7c73c3cb5b4fa1886bc79709ab7c362400743ee2af6`.
-All 91 current frames were visually inspected. The manifest records **39**
+`efa3292fab99bdfcdb8746976f676e68fef7fbd7c109426d8ecc3ac66b626e44`.
+All 92 current frames were visually inspected. The manifest records **40**
 runtime-state-verified scenarios: the wild-action/move-details seams, five
-battle-presentation states, and all 32 physical one-off encounter placements.
+battle-presentation states, all 32 physical one-off encounter placements, and
+the same-camera compiled Pecharunt shrine/tombstone background proof.
 
 The manifest, rather than loose historical PNG aliases in the same directory,
 is the authoritative scenario membership and hash record. A clean standing
@@ -60,7 +61,7 @@ does not by itself prove Back behavior, cursor retention, scrolling, repeated
 allocation/deallocation, animation, audio, collision, save migration, touch/web
 controls, or every alternate data value. Those limits remain explicit below.
 
-### Complete 91-scenario coverage
+### Complete 92-scenario coverage
 
 | Surface group | Canonical scenarios and observed result | Decision closed by render | Remaining honest limit |
 | --- | --- | --- | --- |
@@ -90,7 +91,7 @@ controls, or every alternate data value. Those limits remain explicit below.
 | Battle Dome card | `battle-dome-info-card` | Triathlete portrait, three-Pokémon team, header and three strategy lines fit the native tournament card. `KEEP NEW` data in Frontier chrome. | Other trainer names/classes/teams/long descriptions and bracket navigation. |
 | Contest Results | `contest-results` | Master Rank header, contestants, gauges, hearts/stars, Milotic and win message compose cleanly. `KEEP NEW` engine fixes in native contest art. | Other ranks/results/ties, animation, transitions, awards and exit. |
 | Slot Machine | `slot-machine` | Reels, replay tiles, credit/payout, lights, Select Info and B Quit fit the canonical machine. `KEEP OLD` presentation. | Spin/replay/win/loss/help/quit animations and coin edge values. |
-| All 32 physical one-off encounters | `encounter-01-hoopa` through `encounter-32-fezandipiti` — all runtime-state verified; supplemental earlier placement frames `thundurus`, `tornadus`, and `landorus` are also present | **32/32 clean** on their live maps, including complete 64px Dialga, Zygarde, Reshiram, Regigigas, Palkia and Enamorus. Exact coordinates, collision, approaches, margins, nearby objects/signs and hashes are in [OVERWORLD_ENCOUNTER_VISUAL_AUDIT.md](OVERWORLD_ENCOUNTER_VISUAL_AUDIT.md). `KEEP NEW`. | Standing frames do not prove dormant/partner/awakening/defeat/catch/full-party/full-PC state machines or every animation frame. |
+| All 32 physical one-off encounters | `encounter-01-hoopa` through `encounter-32-fezandipiti` plus runtime-verified `pecharunt-shrine-background`; supplemental earlier placement frames `thundurus`, `tornadus`, and `landorus` are also present | **32/32 clean** on their live maps, including complete 64px Dialga, Zygarde, Reshiram, Regigigas, Palkia and Enamorus. Pecharunt's same-camera frame proves the compiled tombstone/shrine directly beneath it; the sprite intentionally masks only the upper face while the base remains visible. Exact geometry and hashes are in [OVERWORLD_ENCOUNTER_VISUAL_AUDIT.md](OVERWORLD_ENCOUNTER_VISUAL_AUDIT.md). `KEEP NEW`. | Standing/background frames do not prove dormant/partner/awakening/defeat/catch/full-party/full-PC state machines or every animation frame. |
 
 ### Accessibility and evidence limitations
 
@@ -101,11 +102,12 @@ controls, or every alternate data value. Those limits remain explicit below.
   labels do not duplicate meaning.
 - Still frames cannot reveal flicker, palette cycling, held-button repetition,
   audio-only feedback, resource leaks after repeated navigation, or focus loss.
-- Only 39 scenarios carry runtime-state sentinels; the remaining 52 are
+- Only 40 scenarios carry runtime-state sentinels; the remaining 52 are
   deterministic final-frame geometry evidence, not proof that every ordinary
   story path reaches the state.
-- The 32 encounter frames prove live standing composition and fixture state,
-  not their quest/capture persistence logic or every animation frame.
+- The 32 encounter frames and Pecharunt same-camera background proof establish
+  live standing/shrine composition and fixture state, not quest/capture
+  persistence logic or every animation frame.
 
 ## Decision ledger
 
@@ -139,7 +141,7 @@ controls, or every alternate data value. Those limits remain explicit below.
 | Pokédex shell | Native Emerald Dex | Native Emerald Dex remains selected; HGSS Dex and DexNav assets/code exist but configs are false | `KEEP OLD` shell | Inactive expansion assets are not a live visual regression. The list page renders natively; four-digit National numbers have explicit source handling. | Base list approved; info/area/search and #999/#1000 boundary remain |
 | Route signs | Native wayfinding only | A second native sign message lists live species by Grass, Surf, Rock Smash, rods, Hidden/Honey, and special under-bridge source | `HYBRID` | Keep the native Dex untouched and embed availability in world signs, as requested. Lines are bounded at 200px and `gStringVar4` is 1000 bytes. | Static route-sign gate passes; test short and maximum-page signs |
 | Restored-area identity | Unique `MAPSEC_SEASPRAY_CAVE`, `EMBER_PATH`, `ASHEN_WOODS`, `SANDSTREWN_RUINS`, `DEWFORD_MEADOW`, `DEWFORD_MANOR`, `VERDANTURF_MEADOW` with themed popups | Those maps were mislabeled as Route 115, Jagged Pass, Route 111, Dewford Town, or Verdanturf Town | `KEEP OLD` | This was a direct migration loss. It made authored locations announce the wrong names. WIP restores all seven names, old coordinates, Stone/Wood themes, and parent-region links. | `FIXED IN WIP`; generate constants and test every entrance/floor/region map |
-| Visible Legendary interactions | Native object interaction, cry, message, battle | Same general pattern with more sprites and conditional states | `KEEP NEW` | No separate quest UI should be added. All 32 physical one-off objects are now full, clean, actual-map, runtime-state-verified compositions, including six 64px sprites and the repaired Magearna/Fezandipiti/Virizion placements. Exact live geometry and evidence are in `OVERWORLD_ENCOUNTER_VISUAL_AUDIT.md`. | Standing composition closed 32/32; dormant/partner/awakening/defeat/catch/full-party/full-PC logic and animation frames remain |
+| Visible Legendary interactions | Native object interaction, cry, message, battle | Same general pattern with more sprites and conditional states | `KEEP NEW` | No separate quest UI should be added. All 32 physical one-off objects are full, clean, actual-map, runtime-state-verified compositions, including six 64px sprites and the repaired Magearna/Fezandipiti/Virizion placements. Pecharunt additionally has same-camera compiled tombstone/shrine proof. Exact live geometry and evidence are in `OVERWORLD_ENCOUNTER_VISUAL_AUDIT.md`. | Standing/background composition closed 32/32 plus shrine proof; dormant/partner/awakening/defeat/catch/full-party/full-PC logic and animation frames remain |
 | Form-change Key Items | Most modern forms were unavailable or items were inert | Expansion party popups support Rotom, Zygarde, fusions, and other form tools | `KEEP NEW` under old party skin | These are necessary capabilities and their current bounded side windows fit the party screen. Do not restore the old inert Rotom Catalog. | Source geometry cleared; test every obtainable form item and B path |
 | Leveler | New Verdant system, using party/evolution machinery | Baseline retained fanfare plus two stat pages for every under-cap member | `HYBRID` | The WIP raises each eligible member silently inside the native party sequence, interrupts only for real evolution chains, tracks whether anything changed, and prints one final native message with the current cap. The final party/cap message renders cleanly. Rare Candy retains its ordinary per-Pokémon stat flow. | `FIXED IN WIP`; final-frame proof only; operate 0/1/6 eligible members and chained evolutions |
 | Poké Vial | New Verdant Key Item with charges and native item message | Same | `KEEP NEW` | No custom full-screen UI is needed. | Source-cleared; test 0/1/max charges, register/use, refill, upgrades |
@@ -611,7 +613,7 @@ menus without message-box budgets, modern shortcuts bypassing the approved
 service flow, and shared L/R widgets assuming each other's sprites existed.
 
 The working tree restores the important old presentation contracts while
-retaining current mechanics. The reproducible 91-scenario manifest now closes
+retaining current mechanics. The reproducible 92-scenario manifest now closes
 the principal composition questions: Center shells, party/Ability, preparation
 menus, the full 372-row Mew list extent, deep Storage, Frontier pages, modern
 battle overlays, title/Birch, Pokéblock, cards, Contest, Slot Machine, Fairy,

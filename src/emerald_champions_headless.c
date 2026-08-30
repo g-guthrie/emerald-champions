@@ -513,6 +513,32 @@ void EmeraldChampionsHeadlessObserve(void)
         }
         return;
     }
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_SPECIES_OVERWORLD_BACKGROUND
+     && gMain.callback2 == CB2_Overworld)
+    {
+        const struct EcHeadlessOverworldFixture *fixture;
+
+        if (gEcHeadlessFixtureParam >= ARRAY_COUNT(sEcHeadlessOverworldFixtures))
+            return;
+        fixture = &sEcHeadlessOverworldFixtures[gEcHeadlessFixtureParam];
+        for (u32 objectEventId = 0; objectEventId < OBJECT_EVENTS_COUNT; objectEventId++)
+        {
+            struct ObjectEvent *objectEvent = &gObjectEvents[objectEventId];
+
+            if (!objectEvent->active
+             || objectEvent->mapGroup != MAP_GROUP(fixture->map)
+             || objectEvent->mapNum != MAP_NUM(fixture->map)
+             || objectEvent->graphicsId != OBJ_EVENT_MON + fixture->species)
+                continue;
+
+            RemoveObjectEvent(objectEvent);
+            gEcHeadlessFixtureSetupResult = TRUE;
+            return;
+        }
+        if (gEcHeadlessFixtureSetupResult)
+            gEcHeadlessFixtureObservedResult = TRUE;
+        return;
+    }
     if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_STORAGE
      && !gEcHeadlessFixtureSetupResult
      && gMain.callback2 == CB2_Overworld)
@@ -775,6 +801,20 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 &sEcHeadlessOverworldFixtures[gEcHeadlessFixtureParam];
 
             UnlockLegendarySign(GetLegendarySignIdBySpecies(fixture->species));
+            FlagSet(FLAG_SYS_USE_FLASH);
+            LoadHeadlessMap(fixture->map, fixture->playerX, fixture->playerY);
+        }
+        else
+        {
+            SetMainCallback2(gInitialMainCB2);
+        }
+        break;
+    case EC_HEADLESS_SCENARIO_SPECIES_OVERWORLD_BACKGROUND:
+        if (gEcHeadlessFixtureParam < ARRAY_COUNT(sEcHeadlessOverworldFixtures))
+        {
+            const struct EcHeadlessOverworldFixture *fixture =
+                &sEcHeadlessOverworldFixtures[gEcHeadlessFixtureParam];
+
             FlagSet(FLAG_SYS_USE_FLASH);
             LoadHeadlessMap(fixture->map, fixture->playerX, fixture->playerY);
         }

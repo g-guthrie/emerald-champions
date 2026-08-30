@@ -1226,6 +1226,23 @@
       "video_hash": "141767a8feca736a"
     },
     {
+      "fixture_map": "MAP_MT_PYRE_6F",
+      "fixture_species": "SPECIES_PECHARUNT",
+      "frames": 650,
+      "keys": [],
+      "name": "pecharunt-shrine-background",
+      "param": 12,
+      "player": [
+        11,
+        8
+      ],
+      "png_sha256": "085ba8b42fc73a0fde5d83b35ea7b82abdf8ec64133ef780f54746edca4caad2",
+      "scenario_id": 41,
+      "screenshot": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/visual-audit/rendered/current/pecharunt-shrine-background.png",
+      "verified_runtime_state": true,
+      "video_hash": "5ab25542d29a56ec"
+    },
+    {
       "fixture_map": "MAP_ALTERING_CAVE_1F",
       "fixture_species": "SPECIES_HOOPA",
       "frames": 650,
@@ -1771,7 +1788,7 @@
     }
   ],
   "rom": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/pokeemerald-headless.gba",
-  "rom_sha256": "dc8d840fac30b18008bac7c73c3cb5b4fa1886bc79709ab7c362400743ee2af6",
+  "rom_sha256": "efa3292fab99bdfcdb8746976f676e68fef7fbd7c109426d8ecc3ac66b626e44",
   "scenario_symbol": "0x0200196c",
   "schema_version": 1
 }

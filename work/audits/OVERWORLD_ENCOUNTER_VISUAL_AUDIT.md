@@ -9,7 +9,8 @@ service mascots and the non-catchable Cave of Origin Carbink story gate are
 excluded, leaving exactly 32 encounter objects.
 
 This revision re-read every live map object and re-inspected all 32 current
-`encounter-##-species.png` frames. No design document supplied placement
+`encounter-##-species.png` frames plus the same-camera
+`pecharunt-shrine-background.png` proof. No design document supplied placement
 data. Each row reads:
 
 - the current map JSON object and exact object index, coordinates, elevation,
@@ -54,9 +55,10 @@ otherwise valid.
 - **6** use 64x64 frames: DIALGA, ZYGARDE, RESHIRAM, REGIGIGAS, PALKIA, ENAMORUS.
 - Production moves are reflected live: Magearna **(8,7)**, Fezandipiti
   **(13,12)**, and Virizion **(42,6)**.
-- **32/32** actual-map frames are visually clean and runtime-verified in
-  `manifest.overworld-encounters.json` against ROM SHA-256
-  `e9cdcd5056030bcf0bbbfcca991e5038a4f515c94dc9809ab8c426c20a8e52af`.
+- **32/32** encounter frames plus **one** supplemental same-camera Pecharunt
+  background frame are visually clean and runtime-verified in the authoritative
+  92-scenario `manifest.json` against fixture ROM SHA-256
+  `efa3292fab99bdfcdb8746976f676e68fef7fbd7c109426d8ecc3ac66b626e44`.
 - Reshiram's final frame is the post-message 16:15:26 recenter with player at
   **(10,5)**; the complete sprite is visible and approved.
 
@@ -76,7 +78,7 @@ otherwise valid.
 | CRESSELIA | `MeteorFalls_B1F_2R` 11x18<br>`data/maps/MeteorFalls_B1F_2R/map.json` obj 1<br>(5,6), object e3<br>`MeteorFalls_B1F_2R_EventScript_Cresselia`<br>`FLAG_HIDE_LEGENDARY_SIGN_CRESSELIA` | `graphics/pokemon/cresselia/overworld.png`<br>frame 32x32; sheet 192x32; 6 cells | metatile 368; c0/e1 | N (5,5) c0/e1<br>E (6,6) c0/e1<br>S (5,7) c0/e1<br>W (4,6) c0/e1 | None within 2 tiles. | map 11x18; margins N6/E5/S11/W5; cannot fully center toward E/W | [`encounter-10-cresselia.png`](../visual-audit/rendered/current/encounter-10-cresselia.png) (`18772750…`) — **CLEAN:** full sprite and player visible; no clipping, palette corruption, or object/sign occlusion. |
 | JIRACHI | `MeteorFalls_JirachisRoom` 15x13<br>`data/maps/MeteorFalls_JirachisRoom/map.json` obj 0<br>(7,6), object e3<br>`MeteorFalls_JirachisRoom_EventScript_Jirachi`<br>`FLAG_EC_CAUGHT_JIRACHI` | `graphics/pokemon/jirachi/overworld.png`<br>frame 32x32; sheet 192x32; 6 cells | metatile 513; c0/e3 | N (7,5) c0/e3<br>E (8,6) c0/e3<br>S (7,7) c0/e3<br>W (6,6) c0/e3 | None within 2 tiles. | map 15x13; margins N6/E7/S6/W7; centerable | [`encounter-11-jirachi.png`](../visual-audit/rendered/current/encounter-11-jirachi.png) (`ae70f4e2…`) — **CLEAN:** full sprite and player visible; no clipping, palette corruption, or object/sign occlusion. |
 | COSMOG | `MeteorFalls_JirachisRoom` 15x13<br>`data/maps/MeteorFalls_JirachisRoom/map.json` obj 1<br>(4,6), object e3<br>`MeteorFalls_JirachisRoom_EventScript_Cosmog`<br>`FLAG_EC_CAUGHT_COSMOG` | `graphics/pokemon/cosmog/overworld.png`<br>frame 32x32; sheet 192x32; 6 cells | metatile 513; c0/e3 | N (4,5) c0/e3<br>E (5,6) c0/e3<br>S (4,7) c1/e0<br>W (3,6) c0/e3 | None within 2 tiles. | map 15x13; margins N6/E10/S6/W4; cannot fully center toward W | [`encounter-12-cosmog.png`](../visual-audit/rendered/current/encounter-12-cosmog.png) (`b581a0ff…`) — **CLEAN:** full sprite and player visible; no clipping, palette corruption, or object/sign occlusion. |
-| PECHARUNT | `MtPyre_6F` 13x13<br>`data/maps/MtPyre_6F/map.json` obj 3<br>(8,8), object e3<br>`MtPyre_6F_EventScript_Pecharunt`<br>`FLAG_EC_CAUGHT_PECHARUNT` | `graphics/pokemon/pecharunt/overworld.png`<br>frame 32x32; sheet 192x32; 6 cells | metatile 806; c1/e0 | N (8,7) c1/e0<br>E (9,8) c1/e0<br>S (8,9) c0/e3<br>W (7,8) c0/e3 | object ITEM_BALL at (6,9), d2 | map 13x13; margins N8/E4/S4/W8; cannot fully center toward E/S | [`encounter-13-pecharunt.png`](../visual-audit/rendered/current/encounter-13-pecharunt.png) (`53e2b0c3…`) — **CLEAN:** full sprite and player visible; no clipping, palette corruption, or object/sign occlusion. |
+| PECHARUNT | `MtPyre_6F` 13x13<br>`data/maps/MtPyre_6F/map.json` obj 3<br>(8,8), object e3<br>`MtPyre_6F_EventScript_Pecharunt`<br>`FLAG_EC_CAUGHT_PECHARUNT` | `graphics/pokemon/pecharunt/overworld.png`<br>frame 32x32; sheet 192x32; 6 cells | metatile 806; c1/e0<br>Facility local `0x126`: tombstone/shrine | N (8,7) c1/e0<br>E (9,8) c1/e0<br>S (8,9) c0/e3<br>W (7,8) c0/e3 | object ITEM_BALL at (6,9), d2 | map 13x13; margins N8/E4/S4/W8; cannot fully center toward E/S | [`encounter-13-pecharunt.png`](../visual-audit/rendered/current/encounter-13-pecharunt.png) (`53e2b0c3…`), [`pecharunt-shrine-background.png`](../visual-audit/rendered/current/pecharunt-shrine-background.png) (`085ba8b4…`) — **CLEAN:** runtime-verified same-camera player (11,8) proof confirms the complete tombstone/shrine is compiled directly beneath Pecharunt; the sprite intentionally masks its upper face while the base remains visible. |
 | DARKRAI | `MtPyre_Summit` 50x37<br>`data/maps/MtPyre_Summit/map.json` obj 8<br>(23,10), object e3<br>`MtPyre_Summit_EventScript_Darkrai`<br>`FLAG_HIDE_LEGENDARY_SIGN_DARKRAI` | `graphics/pokemon/darkrai/overworld.png`<br>frame 32x32; sheet 192x32; 6 cells | metatile 207; c0/e3 | N (23,9) c0/e3<br>E (24,10) c0/e3<br>S (23,11) c0/e3<br>W (22,10) c0/e3 | object AQUA_MEMBER_M at (21,11), d2<br>object AQUA_MEMBER_F at (25,11), d2 | map 50x37; margins N10/E26/S26/W23; centerable | [`encounter-14-darkrai.png`](../visual-audit/rendered/current/encounter-14-darkrai.png) (`37e5c2df…`) — **CLEAN:** full sprite and player visible; no clipping, palette corruption, or object/sign occlusion. |
 | ZAPDOS | `NewMauville_Inside` 41x41<br>`data/maps/NewMauville_Inside/map.json` obj 8<br>(33,15), object e3<br>`NewMauville_Inside_EventScript_Zapdos`<br>`FLAG_EC_CAUGHT_ZAPDOS` | `graphics/pokemon/zapdos/overworld.png`<br>frame 32x32; sheet 192x32; 6 cells | metatile 528; c0/e3 | N (33,14) c0/e3<br>E (34,15) c0/e3<br>S (33,16) c0/e3<br>W (32,15) c0/e3 | None within 2 tiles. | map 41x41; margins N15/E7/S25/W33; centerable | [`encounter-15-zapdos.png`](../visual-audit/rendered/current/encounter-15-zapdos.png) (`c37784eb…`) — **CLEAN:** full sprite and player visible; no clipping, palette corruption, or object/sign occlusion. |
 | MELTAN | `NewMauville_Inside` 41x41<br>`data/maps/NewMauville_Inside/map.json` obj 9<br>(37,7), object e3<br>`NewMauville_Inside_EventScript_Meltan`<br>`FLAG_EC_CAUGHT_MELTAN` | `graphics/pokemon/meltan/overworld.png`<br>frame 32x32; sheet 192x32; 6 cells | metatile 528; c0/e3 | N (37,6) c0/e3<br>E (38,7) c1/e0<br>S (37,8) c0/e3<br>W (36,7) c1/e0 | None within 2 tiles. | map 41x41; margins N7/E3/S33/W37; cannot fully center toward E | [`encounter-16-meltan.png`](../visual-audit/rendered/current/encounter-16-meltan.png) (`f290c9fa…`) — **CLEAN:** full sprite and player visible; no clipping, palette corruption, or object/sign occlusion. |
@@ -109,8 +111,9 @@ otherwise valid.
 
 ## Evidence limits
 
-This ledger proves current source geometry, source-sheet resolution, and one
-deterministic actual-map standing frame per encounter. It does not model
+This ledger proves current source geometry, source-sheet resolution, one
+deterministic actual-map standing frame per encounter, and Pecharunt's compiled
+same-camera shrine background. It does not model
 directional metatile behavior, animated metatile changes, mutually exclusive
 event flags, every sprite animation frame, palette cycling, cries, collision
 during interaction, capture persistence, or camera movement during scripted
