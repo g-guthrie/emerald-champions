@@ -1,5 +1,5 @@
 {
-  "scenario_count": 138,
+  "scenario_count": 139,
   "scenario_group": "inclement-seams",
   "scenarios": {
     "ability-applied-message": {
@@ -585,7 +585,7 @@
           "B"
         ]
       ],
-      "pixel_sha256": "cc03070de5805b83380ec9cc43e540747d61fbdded8ab2d4a8c69211fded483b",
+      "pixel_sha256": "d3f73b1561e3e9b87c01c4963930aea315a6491cd0a4e539704c1984d4e68aaf",
       "verified_runtime_state": false
     },
     "battle-set-format": {
@@ -1807,7 +1807,7 @@
       "verified_runtime_state": false
     },
     "move-specialist-forget-decline": {
-      "frames": 1300,
+      "frames": 1340,
       "keys": [
         [
           220,
@@ -1837,25 +1837,30 @@
         [
           500,
           2,
-          "A"
+          "DOWN"
         ],
         [
-          650,
+          540,
           2,
           "A"
         ],
         [
-          800,
+          690,
           2,
           "A"
         ],
         [
-          1000,
+          840,
           2,
           "A"
         ],
         [
-          1200,
+          1040,
+          2,
+          "A"
+        ],
+        [
+          1240,
           2,
           "B"
         ]
@@ -1864,7 +1869,7 @@
       "verified_runtime_state": false
     },
     "move-specialist-forget-intro": {
-      "frames": 800,
+      "frames": 840,
       "keys": [
         [
           220,
@@ -1894,10 +1899,15 @@
         [
           500,
           2,
+          "DOWN"
+        ],
+        [
+          540,
+          2,
           "A"
         ],
         [
-          650,
+          690,
           2,
           "A"
         ]
@@ -1906,7 +1916,7 @@
       "verified_runtime_state": false
     },
     "move-specialist-forget-party": {
-      "frames": 1540,
+      "frames": 1580,
       "keys": [
         [
           220,
@@ -1936,30 +1946,35 @@
         [
           500,
           2,
-          "A"
+          "DOWN"
         ],
         [
-          650,
+          540,
           2,
           "A"
         ],
         [
-          800,
+          690,
           2,
           "A"
         ],
         [
-          1000,
+          840,
           2,
           "A"
         ],
         [
-          1200,
+          1040,
           2,
           "A"
         ],
         [
-          1400,
+          1240,
+          2,
+          "A"
+        ],
+        [
+          1440,
           2,
           "A"
         ]
@@ -1968,7 +1983,79 @@
       "verified_runtime_state": false
     },
     "move-specialist-forget-party-back": {
-      "frames": 1780,
+      "frames": 1820,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          380,
+          2,
+          "DOWN"
+        ],
+        [
+          420,
+          2,
+          "DOWN"
+        ],
+        [
+          460,
+          2,
+          "DOWN"
+        ],
+        [
+          500,
+          2,
+          "DOWN"
+        ],
+        [
+          540,
+          2,
+          "A"
+        ],
+        [
+          690,
+          2,
+          "A"
+        ],
+        [
+          840,
+          2,
+          "A"
+        ],
+        [
+          1040,
+          2,
+          "A"
+        ],
+        [
+          1240,
+          2,
+          "A"
+        ],
+        [
+          1440,
+          2,
+          "A"
+        ],
+        [
+          1640,
+          2,
+          "B"
+        ]
+      ],
+      "pixel_sha256": "cc19cbed0672428594b12973e091f0b08887503dec6f4c08819996e10ac78d73",
+      "verified_runtime_state": false
+    },
+    "move-specialist-learn-move-back": {
+      "frames": 1120,
       "keys": [
         [
           220,
@@ -2001,83 +2088,21 @@
           "A"
         ],
         [
-          650,
+          640,
           2,
           "A"
         ],
         [
-          800,
-          2,
-          "A"
-        ],
-        [
-          1000,
-          2,
-          "A"
-        ],
-        [
-          1200,
-          2,
-          "A"
-        ],
-        [
-          1400,
-          2,
-          "A"
-        ],
-        [
-          1600,
+          980,
           2,
           "B"
         ]
       ],
-      "pixel_sha256": "cc19cbed0672428594b12973e091f0b08887503dec6f4c08819996e10ac78d73",
-      "verified_runtime_state": false
-    },
-    "move-specialist-learn-move-back": {
-      "frames": 1080,
-      "keys": [
-        [
-          220,
-          2,
-          "UP"
-        ],
-        [
-          250,
-          2,
-          "A"
-        ],
-        [
-          380,
-          2,
-          "DOWN"
-        ],
-        [
-          420,
-          2,
-          "DOWN"
-        ],
-        [
-          460,
-          2,
-          "A"
-        ],
-        [
-          600,
-          2,
-          "A"
-        ],
-        [
-          940,
-          2,
-          "B"
-        ]
-      ],
-      "pixel_sha256": "cc03070de5805b83380ec9cc43e540747d61fbdded8ab2d4a8c69211fded483b",
+      "pixel_sha256": "9e679eea2e944828c49018172f4e882a51fd8f4fb3d937813972549bc0e6cebe",
       "verified_runtime_state": false
     },
     "move-specialist-learn-move-party": {
-      "frames": 900,
+      "frames": 940,
       "keys": [
         [
           220,
@@ -2102,10 +2127,15 @@
         [
           460,
           2,
+          "DOWN"
+        ],
+        [
+          500,
+          2,
           "A"
         ],
         [
-          600,
+          640,
           2,
           "A"
         ]
@@ -2168,7 +2198,7 @@
       "verified_runtime_state": false
     },
     "move-specialist-rename-back": {
-      "frames": 1380,
+      "frames": 1420,
       "keys": [
         [
           220,
@@ -2198,25 +2228,30 @@
         [
           500,
           2,
+          "DOWN"
+        ],
+        [
+          540,
+          2,
           "A"
         ],
         [
-          650,
+          690,
           2,
           "DOWN"
         ],
         [
-          700,
+          740,
           2,
           "A"
         ],
         [
-          900,
+          940,
           2,
           "A"
         ],
         [
-          1200,
+          1240,
           2,
           "B"
         ]
@@ -2225,7 +2260,7 @@
       "verified_runtime_state": false
     },
     "move-specialist-rename-party": {
-      "frames": 1050,
+      "frames": 1090,
       "keys": [
         [
           220,
@@ -2255,20 +2290,25 @@
         [
           500,
           2,
+          "DOWN"
+        ],
+        [
+          540,
+          2,
           "A"
         ],
         [
-          650,
+          690,
           2,
           "DOWN"
         ],
         [
-          700,
+          740,
           2,
           "A"
         ],
         [
-          900,
+          940,
           2,
           "A"
         ]
@@ -2277,7 +2317,7 @@
       "verified_runtime_state": false
     },
     "move-specialist-rename-prompt": {
-      "frames": 820,
+      "frames": 860,
       "keys": [
         [
           220,
@@ -2307,15 +2347,20 @@
         [
           500,
           2,
+          "DOWN"
+        ],
+        [
+          540,
+          2,
           "A"
         ],
         [
-          650,
+          690,
           2,
           "DOWN"
         ],
         [
-          700,
+          740,
           2,
           "A"
         ]
@@ -2337,7 +2382,7 @@
           "A"
         ]
       ],
-      "pixel_sha256": "cc03070de5805b83380ec9cc43e540747d61fbdded8ab2d4a8c69211fded483b",
+      "pixel_sha256": "d3f73b1561e3e9b87c01c4963930aea315a6491cd0a4e539704c1984d4e68aaf",
       "verified_runtime_state": false
     },
     "move-specialist-root-back": {
@@ -2385,6 +2430,43 @@
       "keys": [],
       "pixel_sha256": "0b11d23ec37fd12876047cacc49bd2f4db6975a596639c7bfdf105cc101252d2",
       "verified_runtime_state": true
+    },
+    "nature-list": {
+      "frames": 940,
+      "keys": [
+        [
+          220,
+          100,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          360,
+          2,
+          "DOWN"
+        ],
+        [
+          400,
+          2,
+          "A"
+        ],
+        [
+          560,
+          2,
+          "A"
+        ],
+        [
+          760,
+          2,
+          "A"
+        ]
+      ],
+      "pixel_sha256": "9449f1a9dd95e640cfcb2dd512553ef7199dd264751c5b1282f3e3a0a2d1e7ad",
+      "verified_runtime_state": false
     },
     "nurse-heal-facing-machine": {
       "frames": 1690,
@@ -2750,7 +2832,7 @@
       "verified_runtime_state": true
     },
     "stat-point-adjust-back": {
-      "frames": 1420,
+      "frames": 1460,
       "keys": [
         [
           220,
@@ -2770,34 +2852,39 @@
         [
           400,
           2,
-          "A"
+          "DOWN"
         ],
         [
-          560,
+          440,
           2,
           "A"
         ],
         [
-          760,
+          600,
           2,
           "A"
         ],
         [
-          1100,
+          800,
           2,
           "A"
         ],
         [
-          1240,
+          1140,
+          2,
+          "A"
+        ],
+        [
+          1280,
           2,
           "B"
         ]
       ],
-      "pixel_sha256": "aad0ff1f3ad99565727391513bcf6a6266d91110823a82ee83c6c7f8e96b33d5",
+      "pixel_sha256": "11e3305212235bd6da2bc287d6a886222fb3a243b3e15c4a345f0257eb3a2914",
       "verified_runtime_state": false
     },
     "stat-point-adjust-list": {
-      "frames": 1220,
+      "frames": 1260,
       "keys": [
         [
           220,
@@ -2817,29 +2904,34 @@
         [
           400,
           2,
-          "A"
+          "DOWN"
         ],
         [
-          560,
+          440,
           2,
           "A"
         ],
         [
-          760,
+          600,
           2,
           "A"
         ],
         [
-          1100,
+          800,
+          2,
+          "A"
+        ],
+        [
+          1140,
           2,
           "A"
         ]
       ],
-      "pixel_sha256": "f69332d0d3a028febe372eceb8e4502f3a27a03847f4febe092959dc162fc291",
+      "pixel_sha256": "951fc951206f561843d5b1620d3adce22517a8cef2e21628ea9ce2fd87bb6881",
       "verified_runtime_state": false
     },
     "stat-point-adjust-scrolled": {
-      "frames": 1640,
+      "frames": 1680,
       "keys": [
         [
           220,
@@ -2859,27 +2951,27 @@
         [
           400,
           2,
-          "A"
-        ],
-        [
-          560,
-          2,
-          "A"
-        ],
-        [
-          760,
-          2,
-          "A"
-        ],
-        [
-          1100,
-          2,
-          "A"
-        ],
-        [
-          1240,
-          2,
           "DOWN"
+        ],
+        [
+          440,
+          2,
+          "A"
+        ],
+        [
+          600,
+          2,
+          "A"
+        ],
+        [
+          800,
+          2,
+          "A"
+        ],
+        [
+          1140,
+          2,
+          "A"
         ],
         [
           1280,
@@ -2915,69 +3007,17 @@
           1520,
           2,
           "DOWN"
+        ],
+        [
+          1560,
+          2,
+          "DOWN"
         ]
       ],
-      "pixel_sha256": "277e71e359cc3e938c3f30627584d587e74d1db4b2d67804909993430f38e70a",
+      "pixel_sha256": "c17faa2968c12f29724369741d6605d98f6852749689ab3a604a84d30d8445da",
       "verified_runtime_state": false
     },
     "stat-point-adjusted": {
-      "frames": 1460,
-      "keys": [
-        [
-          220,
-          2,
-          "UP"
-        ],
-        [
-          250,
-          2,
-          "A"
-        ],
-        [
-          360,
-          2,
-          "DOWN"
-        ],
-        [
-          400,
-          2,
-          "A"
-        ],
-        [
-          560,
-          2,
-          "A"
-        ],
-        [
-          760,
-          2,
-          "A"
-        ],
-        [
-          1100,
-          2,
-          "A"
-        ],
-        [
-          1240,
-          2,
-          "DOWN"
-        ],
-        [
-          1280,
-          2,
-          "DOWN"
-        ],
-        [
-          1320,
-          2,
-          "A"
-        ]
-      ],
-      "pixel_sha256": "728fbee5c78681ebe4dcccbb36c16762a34ca271fd2c394d4826933e8c1e553e",
-      "verified_runtime_state": false
-    },
-    "stat-point-boundary-feedback": {
       "frames": 1500,
       "keys": [
         [
@@ -2998,27 +3038,27 @@
         [
           400,
           2,
-          "A"
-        ],
-        [
-          560,
-          2,
-          "A"
-        ],
-        [
-          760,
-          2,
-          "A"
-        ],
-        [
-          1100,
-          2,
-          "A"
-        ],
-        [
-          1240,
-          2,
           "DOWN"
+        ],
+        [
+          440,
+          2,
+          "A"
+        ],
+        [
+          600,
+          2,
+          "A"
+        ],
+        [
+          800,
+          2,
+          "A"
+        ],
+        [
+          1140,
+          2,
+          "A"
         ],
         [
           1280,
@@ -3036,11 +3076,11 @@
           "A"
         ]
       ],
-      "pixel_sha256": "ea90cddc5d61513185164a24171ad13794eb78120b637eea2baf95d972eee67c",
+      "pixel_sha256": "39582a53bc15762cba4e6dba83ce30b506296f554f3108a745c6a6d7721f40fa",
       "verified_runtime_state": false
     },
-    "stat-point-egg-rejected": {
-      "frames": 940,
+    "stat-point-boundary-feedback": {
+      "frames": 1540,
       "keys": [
         [
           220,
@@ -3060,20 +3100,92 @@
         [
           400,
           2,
-          "A"
+          "DOWN"
         ],
         [
-          560,
+          440,
           2,
           "A"
         ],
         [
-          700,
+          600,
+          2,
+          "A"
+        ],
+        [
+          800,
+          2,
+          "A"
+        ],
+        [
+          1140,
+          2,
+          "A"
+        ],
+        [
+          1280,
           2,
           "DOWN"
         ],
         [
-          760,
+          1320,
+          2,
+          "DOWN"
+        ],
+        [
+          1360,
+          2,
+          "DOWN"
+        ],
+        [
+          1400,
+          2,
+          "A"
+        ]
+      ],
+      "pixel_sha256": "65321ed4414187e4b9fe85214db31985604eae277f2e84ad9144c529d8e3da53",
+      "verified_runtime_state": false
+    },
+    "stat-point-egg-rejected": {
+      "frames": 980,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          360,
+          2,
+          "DOWN"
+        ],
+        [
+          400,
+          2,
+          "DOWN"
+        ],
+        [
+          440,
+          2,
+          "A"
+        ],
+        [
+          600,
+          2,
+          "A"
+        ],
+        [
+          740,
+          2,
+          "DOWN"
+        ],
+        [
+          800,
           2,
           "A"
         ]
@@ -3126,7 +3238,7 @@
       "verified_runtime_state": false
     },
     "stat-point-list": {
-      "frames": 940,
+      "frames": 980,
       "keys": [
         [
           220,
@@ -3146,23 +3258,80 @@
         [
           400,
           2,
-          "A"
+          "DOWN"
         ],
         [
-          560,
+          440,
           2,
           "A"
         ],
         [
-          760,
+          600,
+          2,
+          "A"
+        ],
+        [
+          800,
           2,
           "A"
         ]
       ],
-      "pixel_sha256": "f3ec0bae2f29f841fb77756489516d01c23af704c0ee446ce843e89fe21328bd",
+      "pixel_sha256": "b9cec1ee7da8de6dffb43b0f021eb1145af5c6d74ad9564cbc74968d7f9dc274",
       "verified_runtime_state": false
     },
     "stat-point-list-back": {
+      "frames": 1400,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          360,
+          2,
+          "DOWN"
+        ],
+        [
+          400,
+          2,
+          "DOWN"
+        ],
+        [
+          440,
+          2,
+          "A"
+        ],
+        [
+          600,
+          2,
+          "A"
+        ],
+        [
+          800,
+          2,
+          "A"
+        ],
+        [
+          1040,
+          2,
+          "B"
+        ],
+        [
+          1240,
+          2,
+          "A"
+        ]
+      ],
+      "pixel_sha256": "8036f5a1110aa4ae4bad542a89c0a3e8744243ac067cf55f01933ea056bb33bd",
+      "verified_runtime_state": false
+    },
+    "stat-point-list-scrolled": {
       "frames": 1360,
       "keys": [
         [
@@ -3183,69 +3352,22 @@
         [
           400,
           2,
-          "A"
-        ],
-        [
-          560,
-          2,
-          "A"
-        ],
-        [
-          760,
-          2,
-          "A"
-        ],
-        [
-          1000,
-          2,
-          "B"
-        ],
-        [
-          1200,
-          2,
-          "A"
-        ]
-      ],
-      "pixel_sha256": "8036f5a1110aa4ae4bad542a89c0a3e8744243ac067cf55f01933ea056bb33bd",
-      "verified_runtime_state": false
-    },
-    "stat-point-list-scrolled": {
-      "frames": 1320,
-      "keys": [
-        [
-          220,
-          2,
-          "UP"
-        ],
-        [
-          250,
-          2,
-          "A"
-        ],
-        [
-          360,
-          2,
           "DOWN"
         ],
         [
-          400,
+          440,
           2,
           "A"
         ],
         [
-          560,
+          600,
           2,
           "A"
         ],
         [
-          760,
+          800,
           2,
           "A"
-        ],
-        [
-          1000,
-          2,
-          "DOWN"
         ],
         [
           1040,
@@ -3271,13 +3393,18 @@
           1200,
           2,
           "DOWN"
+        ],
+        [
+          1240,
+          2,
+          "DOWN"
         ]
       ],
-      "pixel_sha256": "b80b9565c7bb23b5d30ac1adbd3844d97c7ab50154aed9e7699fc0325d962803",
+      "pixel_sha256": "f0c74a290ae35c9bfe5e9e4b507dafbd64c24ebac0d219a513684bb2590ecb4f",
       "verified_runtime_state": false
     },
     "stat-point-party": {
-      "frames": 760,
+      "frames": 800,
       "keys": [
         [
           220,
@@ -3297,10 +3424,15 @@
         [
           400,
           2,
+          "DOWN"
+        ],
+        [
+          440,
+          2,
           "A"
         ],
         [
-          560,
+          600,
           2,
           "A"
         ]
@@ -3309,7 +3441,7 @@
       "verified_runtime_state": false
     },
     "stat-point-reset-confirm": {
-      "frames": 1380,
+      "frames": 1420,
       "keys": [
         [
           220,
@@ -3329,22 +3461,22 @@
         [
           400,
           2,
-          "A"
-        ],
-        [
-          560,
-          2,
-          "A"
-        ],
-        [
-          760,
-          2,
-          "A"
-        ],
-        [
-          1000,
-          2,
           "DOWN"
+        ],
+        [
+          440,
+          2,
+          "A"
+        ],
+        [
+          600,
+          2,
+          "A"
+        ],
+        [
+          800,
+          2,
+          "A"
         ],
         [
           1040,
@@ -3372,7 +3504,12 @@
           "DOWN"
         ],
         [
-          1260,
+          1240,
+          2,
+          "DOWN"
+        ],
+        [
+          1300,
           2,
           "A"
         ]
@@ -3381,7 +3518,7 @@
       "verified_runtime_state": false
     },
     "stat-point-reset-no": {
-      "frames": 1600,
+      "frames": 1640,
       "keys": [
         [
           220,
@@ -3401,22 +3538,22 @@
         [
           400,
           2,
-          "A"
-        ],
-        [
-          560,
-          2,
-          "A"
-        ],
-        [
-          760,
-          2,
-          "A"
-        ],
-        [
-          1000,
-          2,
           "DOWN"
+        ],
+        [
+          440,
+          2,
+          "A"
+        ],
+        [
+          600,
+          2,
+          "A"
+        ],
+        [
+          800,
+          2,
+          "A"
         ],
         [
           1040,
@@ -3444,21 +3581,26 @@
           "DOWN"
         ],
         [
-          1260,
+          1240,
+          2,
+          "DOWN"
+        ],
+        [
+          1300,
           2,
           "A"
         ],
         [
-          1420,
+          1460,
           2,
           "B"
         ]
       ],
-      "pixel_sha256": "ebcc0333be6a5dbbb8fc2a8253a32004b91c04ca5cf9f9047340e1b8a28da8c7",
+      "pixel_sha256": "ad9eab20c4ad2d4fd673e44e6e34a83026eba7f60a526de132a6afa9e3ee3c4b",
       "verified_runtime_state": false
     },
     "stat-point-reset-yes": {
-      "frames": 1600,
+      "frames": 1640,
       "keys": [
         [
           220,
@@ -3478,22 +3620,22 @@
         [
           400,
           2,
-          "A"
-        ],
-        [
-          560,
-          2,
-          "A"
-        ],
-        [
-          760,
-          2,
-          "A"
-        ],
-        [
-          1000,
-          2,
           "DOWN"
+        ],
+        [
+          440,
+          2,
+          "A"
+        ],
+        [
+          600,
+          2,
+          "A"
+        ],
+        [
+          800,
+          2,
+          "A"
         ],
         [
           1040,
@@ -3521,12 +3663,17 @@
           "DOWN"
         ],
         [
-          1260,
+          1240,
+          2,
+          "DOWN"
+        ],
+        [
+          1300,
           2,
           "A"
         ],
         [
-          1420,
+          1460,
           2,
           "A"
         ]
@@ -3535,7 +3682,7 @@
       "verified_runtime_state": false
     },
     "stat-point-reset-zero-list": {
-      "frames": 1900,
+      "frames": 1940,
       "keys": [
         [
           220,
@@ -3555,22 +3702,22 @@
         [
           400,
           2,
-          "A"
-        ],
-        [
-          560,
-          2,
-          "A"
-        ],
-        [
-          760,
-          2,
-          "A"
-        ],
-        [
-          1000,
-          2,
           "DOWN"
+        ],
+        [
+          440,
+          2,
+          "A"
+        ],
+        [
+          600,
+          2,
+          "A"
+        ],
+        [
+          800,
+          2,
+          "A"
         ],
         [
           1040,
@@ -3598,22 +3745,27 @@
           "DOWN"
         ],
         [
-          1260,
+          1240,
+          2,
+          "DOWN"
+        ],
+        [
+          1300,
           2,
           "A"
         ],
         [
-          1420,
+          1460,
           2,
           "A"
         ],
         [
-          1640,
+          1680,
           2,
           "A"
         ]
       ],
-      "pixel_sha256": "985d723c27161cb40be09b95fb56ed753cf71990709eb957a09f0ce1c67fa5ba",
+      "pixel_sha256": "9dccd556dc82917de87836138786339238fb2b5100286ef7ace6a3c5af8b3120",
       "verified_runtime_state": false
     },
     "summary-contest-moves": {

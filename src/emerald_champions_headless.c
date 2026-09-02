@@ -916,8 +916,11 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
     case EC_HEADLESS_SCENARIO_CENTER_OLDALE:
         if (gEcHeadlessFixtureParam != 0)
         {
+            // An established save holds every Center tool; without the spray
+            // the nurse's back-fill dialog would shift the scenario timeline.
             AddBagItem(ITEM_POKE_VIAL, 1);
             AddBagItem(ITEM_LEVELER, 1);
+            AddBagItem(ITEM_REPEL_SPRAY, 1);
             VarSet(VAR_POKE_VIAL_MAX_CHARGES, 1);
             VarSet(VAR_POKE_VIAL_CHARGES, 1);
             PrepareCircuitParty();
