@@ -1454,10 +1454,13 @@ def find_mgba_prefix() -> Path:
         if result.returncode == 0 and result.stdout.strip():
             candidates.append(Path(result.stdout.strip()))
     candidates.extend((Path("/opt/homebrew/opt/mgba"), Path("/usr/local/opt/mgba")))
+    # Ubuntu's libmgba-dev installs headers under /usr/include and the shared
+    # library in a multiarch directory such as /usr/lib/x86_64-linux-gnu.
+    candidates.append(Path("/usr"))
     for candidate in candidates:
-        if (candidate / "include/mgba/core/core.h").is_file() and any(
-            (candidate / "lib").glob("libmgba*")
-        ):
+        lib_dir = candidate / "lib"
+        libraries = list(lib_dir.glob("libmgba*")) + list(lib_dir.glob("*/libmgba*"))
+        if (candidate / "include/mgba/core/core.h").is_file() and libraries:
             return candidate.resolve()
     fail("native libmGBA headers/library are unavailable; set MGBA_PREFIX")
 
