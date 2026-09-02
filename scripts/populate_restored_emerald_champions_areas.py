@@ -47,8 +47,6 @@ def item(x, y, item_id, flag, gfx=None):
             gfx = "OBJ_EVENT_GFX_ITEM_BALL"
         elif "FOSSIL" in item_id or item_id == "ITEM_OLD_AMBER":
             gfx = "OBJ_EVENT_GFX_FOSSIL"
-        elif item_id == "ITEM_ULTRA_BALL":
-            gfx = "OBJ_EVENT_GFX_ITEM_BALL"
         else:
             gfx = "OBJ_EVENT_GFX_ITEM_BALL"
     row = obj(gfx, x, y, "Common_EventScript_FindItem", flag)
@@ -207,7 +205,7 @@ ITEMS = {
     "AshenWoods": [
         item(10, 5, "ITEM_PINSIRITE", "FLAG_EC_ITEM_ASHEN_PINSIRITE"),
         item(26, 5, "ITEM_DUSK_STONE", "FLAG_EC_ITEM_ASHEN_DUSK_STONE"),
-        item(26, 43, "ITEM_ULTRA_BALL", "FLAG_EC_ITEM_ASHEN_ULTRA_BALL"),
+        item(26, 43, "ITEM_SCOLIPITE", "FLAG_EC_ITEM_ASHEN_SCOLIPITE"),
     ],
     "DewfordManor_1F": [
         item(1, 11, "ITEM_SABLENITE", "FLAG_EC_ITEM_MANOR_SABLENITE"),
@@ -216,12 +214,12 @@ ITEMS = {
     "DewfordMeadow": [
         item(21, 14, "ITEM_MAWILITE", "FLAG_EC_ITEM_MEADOW_MAWILITE"),
         item(27, 1, "ITEM_SHINY_STONE", "FLAG_EC_ITEM_MEADOW_SHINY_STONE"),
-        item(4, 13, "ITEM_ULTRA_BALL", "FLAG_EC_ITEM_MEADOW_ULTRA_BALL"),
+        item(4, 13, "ITEM_HAWLUCHANITE", "FLAG_EC_ITEM_MEADOW_HAWLUCHANITE"),
     ],
     "EmberPath": [
         item(36, 2, "ITEM_BLAZIKENITE", "FLAG_EC_ITEM_EMBER_BLAZIKENITE"),
         item(12, 10, "ITEM_MAGMARIZER", "FLAG_EC_ITEM_EMBER_MAGMARIZER"),
-        item(25, 35, "ITEM_ULTRA_BALL", "FLAG_EC_ITEM_EMBER_ULTRA_BALL"),
+        item(25, 35, "ITEM_GARCHOMPITE_Z", "FLAG_EC_ITEM_EMBER_GARCHOMPITE_Z"),
     ],
     "PetalburgWoods_2": [
         item(36, 5, "ITEM_SUN_STONE", "FLAG_EC_ITEM_WOODS2_SUN_STONE"),
@@ -246,7 +244,7 @@ ITEMS = {
         item(3, 118, "ITEM_DOME_FOSSIL", "FLAG_EC_ITEM_RUINS_DOME_FOSSIL"),
         item(4, 2, "ITEM_JAW_FOSSIL", "FLAG_EC_ITEM_RUINS_JAW_FOSSIL"),
         item(3, 14, "ITEM_ODD_KEYSTONE", "FLAG_EC_ITEM_RUINS_ODD_KEYSTONE"),
-        item(12, 113, "ITEM_ULTRA_BALL", "FLAG_EC_ITEM_RUINS_ULTRA_BALL"),
+        item(12, 113, "ITEM_GOLURKITE", "FLAG_EC_ITEM_RUINS_GOLURKITE"),
     ],
     "ScorchedSlab_B2F": [
         item(23, 22, "ITEM_CHARIZARDITE_X", "FLAG_EC_ITEM_SCORCHED_CHARIZARDITE_X"),
@@ -255,7 +253,7 @@ ITEMS = {
         item(6, 25, "ITEM_BLASTOISINITE", "FLAG_EC_ITEM_SEASPRAY_BLASTOISINITE"),
         item(5, 5, "ITEM_DAWN_STONE", "FLAG_EC_ITEM_SEASPRAY_DAWN_STONE"),
         item(10, 24, "ITEM_LURE_BALL", "FLAG_EC_ITEM_SEASPRAY_LURE_BALL"),
-        item(46, 18, "ITEM_ULTRA_BALL", "FLAG_EC_ITEM_SEASPRAY_ULTRA_BALL"),
+        item(46, 18, "ITEM_TIMER_BALL", "FLAG_EC_ITEM_SEASPRAY_TIMER_BALL"),
     ],
     "Seaspray_Cave_B1F": [
         item(46, 15, "ITEM_KINGS_ROCK", "FLAG_EC_ITEM_SEASPRAY_KINGS_ROCK"),
@@ -263,7 +261,7 @@ ITEMS = {
         item(20, 24, "ITEM_ICE_STONE", "FLAG_EC_ITEM_SEASPRAY_ICE_STONE"),
     ],
     "VerdanturfMeadow": [
-        item(7, 10, "ITEM_ULTRA_BALL", "FLAG_EC_ITEM_VERDANTURF_ULTRA_BALL"),
+        item(7, 10, "ITEM_FLOETTITE", "FLAG_EC_ITEM_VERDANTURF_FLOETTITE"),
     ],
 }
 

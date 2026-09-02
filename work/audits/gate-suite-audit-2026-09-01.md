@@ -22,17 +22,20 @@ seconds, so cost is not the problem. Value and failure modes are.
    `SCRIPTED_WARP_LITERAL_COORDS = 192`, `LITERAL_LOCAL_ID_VISUAL_CALLS = 1844`).
    Adding one `applymovement` to a scene fails the release. The counts prove
    nothing about correctness; the classification checks in the same script
-   already do the real work. Recommendation: drop the count pins and keep the
-   per-call classification requirement.
+   already do the real work. Fixed: the four pins are now coverage floors
+   (`*_MIN`) so a collapse of the parser still fails while ordinary scene edits
+   pass.
 3. `verify_inclement_overworld_parity.py` pins `tileset_asset_count == 1566`,
    and the generator counted gitignored `.4bpp` build outputs, so regenerating
    the manifest after a local build failed the gate. Generator fixed to skip
-   git-ignored files. The `map_count == 540` pin has the same shape and will
-   fail the moment a map is legitimately added or removed.
+   git-ignored files. The `map_count == 540` pin had the same shape; both pins
+   are now floors (500 maps, 1500 assets).
 4. The curated runtime suite is not tied to the release ROM. Nothing checks that
    `pokeemerald-test.elf` was built from the same sources as
-   `pokeemerald-release.gba`; today it predated 128 changed files. The stamp
-   should also be required for the test ELF.
+   `pokeemerald-release.gba`; today it predated 128 changed files. Fixed:
+   `run_emerald_champions_runtime_gates.py` now writes
+   `pokeemerald-test.inputs.json` after building the ELF and `--run-only`
+   refuses to run without a matching stamp.
 
 **Redundant (three or more gates hash the same bytes)**
 
@@ -88,10 +91,9 @@ seconds, so cost is not the problem. Value and failure modes are.
 
 ## Recommendations in priority order
 
-1. Require the content stamp for both the release ROM and the test ELF (done
-   for the ROM).
+1. Require the content stamp for both the release ROM and the test ELF. Done.
 2. Remove the four visual-contract count pins and the two parity count pins;
-   keep classification and per-map contracts.
+   keep classification and per-map contracts. Done (floors remain).
 3. Retire the Verdant byte manifest gate or restrict it to files with a frozen
    reference; regenerate the campaign evidence appendix instead of gating on it.
 4. Add the missing invariants: per-map wild level bands, `IF_BAG_ITEM_COUNT`

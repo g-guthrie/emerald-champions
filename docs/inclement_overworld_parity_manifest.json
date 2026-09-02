@@ -6160,9 +6160,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_ULTRA_BALL",
+            "ITEM_MALAMARITE",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_AQUA_HIDEOUT_B1F_ULTRA_BALL",
+            "FLAG_EC_ITEM_AQUA_HIDEOUT_B1F_MALAMARITE",
             null
           ],
           [
@@ -7348,9 +7348,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_ULTRA_BALL",
+            "ITEM_SCOLIPITE",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_ASHEN_ULTRA_BALL",
+            "FLAG_EC_ITEM_ASHEN_SCOLIPITE",
             null
           ],
           [
@@ -27732,9 +27732,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_ULTRA_BALL",
+            "ITEM_GARCHOMPITE_Z",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_EMBER_ULTRA_BALL",
+            "FLAG_EC_ITEM_EMBER_GARCHOMPITE_Z",
             null
           ]
         ],
@@ -27849,9 +27849,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_ULTRA_BALL",
+            "ITEM_LUCARIONITE_Z",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_WOODS2_ULTRA_BALL",
+            "FLAG_EC_ITEM_WOODS2_LUCARIONITE_Z",
             null
           ],
           [
@@ -28023,9 +28023,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_ULTRA_BALL",
+            "ITEM_HAWLUCHANITE",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_MEADOW_ULTRA_BALL",
+            "FLAG_EC_ITEM_MEADOW_HAWLUCHANITE",
             null
           ],
           [
@@ -30640,9 +30640,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_ULTRA_BALL",
+            "ITEM_BAXCALIBRITE",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_EVER_GRANDE_ULTRA_BALL",
+            "FLAG_EC_ITEM_EVER_GRANDE_BAXCALIBRITE",
             null
           ]
         ],
@@ -38603,9 +38603,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_ULTRA_BALL",
-            "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_GRANITE_CAVE_B1F_ULTRA_BALL",
+            "ITEM_DUSK_BALL",
+            "GraniteCave_B1F_EventScript_DuskBallPack",
+            "FLAG_EC_ITEM_GRANITE_CAVE_B1F_DUSK_BALL",
             null
           ],
           [
@@ -39037,9 +39037,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_ULTRA_BALL",
-            "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_GRANITE_CAVE_B2F_ULTRA_BALL",
+            "ITEM_TIMER_BALL",
+            "GraniteCave_B2F_EventScript_TimerBallPack",
+            "FLAG_EC_ITEM_GRANITE_CAVE_B2F_TIMER_BALL",
             null
           ],
           [
@@ -61495,9 +61495,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_ULTRA_BALL",
+            "ITEM_DRAGONINITE",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_METEOR_FALLS_1F_2R_ULTRA_BALL",
+            "FLAG_EC_ITEM_METEOR_FALLS_1F_2R_DRAGONINITE",
             null
           ]
         ],
@@ -63016,9 +63016,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_ULTRA_BALL",
+            "ITEM_GALLADITE",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_MOSSDEEP_CITY_ULTRA_BALL",
+            "FLAG_EC_ITEM_MOSSDEEP_CITY_GALLADITE",
             null
           ],
           [
@@ -71147,9 +71147,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_ULTRA_BALL",
+            "ITEM_CHIMECHITE",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_MT_PYRE_SUMMIT_ULTRA_BALL",
+            "FLAG_EC_ITEM_MT_PYRE_SUMMIT_CHIMECHITE",
             null
           ],
           [
@@ -73078,9 +73078,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_ULTRA_BALL",
+            "ITEM_EELEKTROSSITE",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_NEW_MAUVILLE_ULTRA_BALL",
+            "FLAG_EC_ITEM_NEW_MAUVILLE_EELEKTROSSITE",
             null
           ],
           [
@@ -80487,9 +80487,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_ULTRA_BALL",
-            "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_PETALBURG_WOODS_2_ULTRA_BALL",
+            "ITEM_QUICK_BALL",
+            "PetalburgWoods_2_EventScript_QuickBallPack",
+            "FLAG_EC_ITEM_PETALBURG_WOODS_2_QUICK_BALL",
             null
           ],
           [
@@ -85073,9 +85073,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_ULTRA_BALL",
+            "ITEM_CRABOMINITE",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_ROUTE105_ULTRA_BALL",
+            "FLAG_EC_ITEM_ROUTE105_CRABOMINITE",
             null
           ],
           [
@@ -89134,9 +89134,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_ULTRA_BALL",
+            "ITEM_RAICHUNITE_X",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_ROUTE110_ULTRA_BALL",
+            "FLAG_EC_ITEM_ROUTE110_RAICHUNITE_X",
             null
           ],
           [
@@ -92666,9 +92666,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_ULTRA_BALL",
+            "ITEM_CLEFABLITE",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_TRICK_HOUSE_PUZZLE5_ULTRA_BALL",
+            "FLAG_EC_ITEM_TRICK_HOUSE_PUZZLE5_CLEFABLITE",
             null
           ],
           [
@@ -95633,9 +95633,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_ULTRA_BALL",
+            "ITEM_EXCADRITE",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_ROUTE111_ULTRA_BALL",
+            "FLAG_EC_ITEM_ROUTE111_EXCADRITE",
             null
           ],
           [
@@ -105113,9 +105113,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_ULTRA_BALL",
+            "ITEM_AMPHAROSITE",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_ROUTE117_ULTRA_BALL",
+            "FLAG_EC_ITEM_ROUTE117_AMPHAROSITE",
             null
           ],
           [
@@ -107858,9 +107858,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_ULTRA_BALL",
+            "ITEM_DRAGALGITE",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_ROUTE119_ULTRA_BALL",
+            "FLAG_EC_ITEM_ROUTE119_DRAGALGITE",
             null
           ],
           [
@@ -113508,9 +113508,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_ULTRA_BALL",
+            "ITEM_CHANDELURITE",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_ROUTE121_ULTRA_BALL",
+            "FLAG_EC_ITEM_ROUTE121_CHANDELURITE",
             null
           ],
           [
@@ -116928,9 +116928,9 @@
             1,
             1,
             "TRAINER_TYPE_NONE",
-            "ITEM_ULTRA_BALL",
+            "ITEM_BARBARACITE",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_ROUTE124_ULTRA_BALL",
+            "FLAG_EC_ITEM_ROUTE124_BARBARACITE",
             null
           ],
           [
@@ -119925,9 +119925,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_ULTRA_BALL",
+            "ITEM_GOLISOPITE",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_ROUTE131_ULTRA_BALL",
+            "FLAG_EC_ITEM_ROUTE131_GOLISOPITE",
             null
           ],
           [
@@ -129598,9 +129598,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_ULTRA_BALL",
+            "ITEM_HERACRONITE",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_SAFARI_ZONE_SOUTH_ULTRA_BALL",
+            "FLAG_EC_ITEM_SAFARI_ZONE_SOUTH_HERACRONITE",
             null
           ],
           [
@@ -131030,9 +131030,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_ULTRA_BALL",
+            "ITEM_GOLURKITE",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_RUINS_ULTRA_BALL",
+            "FLAG_EC_ITEM_RUINS_GOLURKITE",
             null
           ],
           [
@@ -133514,9 +133514,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_ULTRA_BALL",
+            "ITEM_GLIMMORANITE",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_SEAFLOOR_CAVERN_ROOM6_ULTRA_BALL",
+            "FLAG_EC_ITEM_SEAFLOOR_CAVERN_ROOM6_GLIMMORANITE",
             null
           ]
         ],
@@ -135600,9 +135600,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_ULTRA_BALL",
-            "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_SEASPRAY_CAVE_ULTRA_BALL",
+            "ITEM_DUSK_BALL",
+            "Seaspray_Cave_EventScript_DuskBallPack",
+            "FLAG_EC_ITEM_SEASPRAY_CAVE_DUSK_BALL",
             null
           ],
           [
@@ -135614,9 +135614,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_ULTRA_BALL",
-            "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_SEASPRAY_ULTRA_BALL",
+            "ITEM_TIMER_BALL",
+            "Seaspray_Cave_EventScript_TimerBallPack",
+            "FLAG_EC_ITEM_SEASPRAY_TIMER_BALL",
             null
           ],
           [
@@ -135851,9 +135851,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_ULTRA_BALL",
-            "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_SEASPRAY_CAVE_B1F_ULTRA_BALL",
+            "ITEM_QUICK_BALL",
+            "Seaspray_Cave_B1F_EventScript_QuickBallPack",
+            "FLAG_EC_ITEM_SEASPRAY_CAVE_B1F_QUICK_BALL",
             null
           ],
           [
@@ -150866,9 +150866,9 @@
             1,
             1,
             "TRAINER_TYPE_NONE",
-            "ITEM_ULTRA_BALL",
+            "ITEM_FROSLASSITE",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_SHOAL_CAVE_ICE_ROOM_ULTRA_BALL",
+            "FLAG_EC_ITEM_SHOAL_CAVE_ICE_ROOM_FROSLASSITE",
             null
           ]
         ],
@@ -153407,9 +153407,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_ULTRA_BALL",
+            "ITEM_STARMINITE",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_SLATEPORT_CITY_ULTRA_BALL",
+            "FLAG_EC_ITEM_SLATEPORT_CITY_STARMINITE",
             null
           ],
           [
@@ -164940,9 +164940,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_ULTRA_BALL",
+            "ITEM_FLOETTITE",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_VERDANTURF_ULTRA_BALL",
+            "FLAG_EC_ITEM_VERDANTURF_FLOETTITE",
             null
           ]
         ],

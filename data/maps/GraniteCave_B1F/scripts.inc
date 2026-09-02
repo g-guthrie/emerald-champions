@@ -9,3 +9,6 @@ GraniteCave_B1F_SetHoleWarp:
 	setholewarp MAP_GRANITE_CAVE_B2F
 	end
 
+GraniteCave_B1F_EventScript_DuskBallPack::
+	finditem ITEM_DUSK_BALL, 5
+	end

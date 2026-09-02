@@ -631,9 +631,11 @@ def verify_unique_world_stones() -> None:
     flags = [flag for _, _, flag in pickups]
     require(all(flag != "0" for flag in flags), "a world Mega Stone pickup is not one-time")
     require(len(flags) == len(set(flags)), "world Mega Stone pickups share a collection flag")
-    by_map = {map_name: item for map_name, item, _ in pickups}
+    by_map: dict[str, set[str]] = {}
+    for map_name, item, _ in pickups:
+        by_map.setdefault(map_name, set()).add(item)
     for map_name, item in UNIQUE_WORLD_STONE_REPLACEMENTS.items():
-        require(by_map.get(map_name) == item, f"{map_name} should hold {item}, found {by_map.get(map_name)}")
+        require(item in by_map.get(map_name, set()), f"{map_name} should hold {item}, found {sorted(by_map.get(map_name, set()))}")
     print(f"world_mega_stone_pickups={len(pickups)} unique={len(counts)}")
 
 

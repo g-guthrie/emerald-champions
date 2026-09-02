@@ -133644,7 +133644,7 @@
       "same_path_identical": 96
     }
   },
-  "current_visual_tree_sha256": "d70ec3ba91303b3ee81689f0eb53a0c0bf270e7e948d3cf33db0b6baf2a34698",
+  "current_visual_tree_sha256": "4eacd857adef11de02f953ba12392e75d1cbe94b6ed16f27d4c79d3dcf7be01a",
   "policy_version": 1,
   "reference_assets": [
     {
@@ -144056,7 +144056,7 @@
     {
       "classification": "changed",
       "current_path": "data/maps/AquaHideout_B1F/map.json",
-      "current_sha256": "5fc7bc143c496e05241f57f5aa3c31e3fc0b3ef42c477cba761cbaafd4490252",
+      "current_sha256": "09d528eae23f7249a29a265be269e4b53227a4ef8bf18d76b1d762d20d9884d4",
       "current_size": 8115,
       "group": "map",
       "kind": "map_data",
@@ -144133,8 +144133,8 @@
     {
       "classification": "changed",
       "current_path": "data/maps/AshenWoods/map.json",
-      "current_sha256": "225b32960f16b18a92a005112757bb1296b94adf87693813c8bc1da7926bdece",
-      "current_size": 6684,
+      "current_sha256": "cbe0ef8673d1cb3330d9763ecb03d67d1087f32c12cb0a897619b2a936a3e0df",
+      "current_size": 6682,
       "group": "map",
       "kind": "map_data",
       "reference_path": "data/maps/AshenWoods/map.json",
@@ -145035,8 +145035,8 @@
     {
       "classification": "changed",
       "current_path": "data/maps/DesertUnderpass/map.json",
-      "current_sha256": "a97111c0058eb6a331d561f553c01f60df800590dd8b933a338d31838d34362f",
-      "current_size": 1726,
+      "current_sha256": "06b64b5534152316083ec720f32c41358dd7838d631cb84e41e25a96893cf857",
+      "current_size": 1732,
       "group": "map",
       "kind": "map_data",
       "reference_path": "data/maps/DesertUnderpass/map.json",
@@ -145046,8 +145046,8 @@
     {
       "classification": "changed",
       "current_path": "data/maps/DewfordManor_1F/map.json",
-      "current_sha256": "0f43b5e179c34856e31ce9af831607494424ca3ec8a5c93131060596fd90c990",
-      "current_size": 1646,
+      "current_sha256": "7c8bcc06c0532a528ea35dac4c8fb1fa70a8706c2a3c719b0800f375df84dabc",
+      "current_size": 1652,
       "group": "map",
       "kind": "map_data",
       "reference_path": "data/maps/DewfordManor_1F/map.json",
@@ -145057,8 +145057,8 @@
     {
       "classification": "changed",
       "current_path": "data/maps/DewfordMeadow/map.json",
-      "current_sha256": "522762dea67087f2df9ff7a8967f57db827b008af678050e1c4fc44fb4ca3284",
-      "current_size": 2604,
+      "current_sha256": "8bd77d4b98b3726f1631bf36fef728a7c27bc0c2012a4d20d0b4920f0fa4c95c",
+      "current_size": 2608,
       "group": "map",
       "kind": "map_data",
       "reference_path": "data/maps/DewfordMeadow/map.json",
@@ -145156,8 +145156,8 @@
     {
       "classification": "changed",
       "current_path": "data/maps/EverGrandeCity/map.json",
-      "current_sha256": "5b8a107a6f7a496f7147043f77e17c30d827880d3bed0c709490523f99aad447",
-      "current_size": 4943,
+      "current_sha256": "79223412058152e7729cec5ed4f3bc419d41eb3d121be5bc59fabbdb8f2d24fd",
+      "current_size": 4947,
       "group": "map",
       "kind": "map_data",
       "reference_path": "data/maps/EverGrandeCity/map.json",
@@ -145596,8 +145596,8 @@
     {
       "classification": "changed",
       "current_path": "data/maps/GraniteCave_B1F/map.json",
-      "current_sha256": "11ce32b394d87aa55c2fce6c9d978af4313a1a086e6a258edb0e91a33a5c334a",
-      "current_size": 2337,
+      "current_sha256": "6cd51409bf902c5cee36054044bd6b0c44625d2b0e21e7395ee9955c09b42c76",
+      "current_size": 2348,
       "group": "map",
       "kind": "map_data",
       "reference_path": "data/maps/GraniteCave_B1F/map.json",
@@ -145607,8 +145607,8 @@
     {
       "classification": "changed",
       "current_path": "data/maps/GraniteCave_B2F/map.json",
-      "current_sha256": "f4c2fffe3825025c12c5c3b58feebfa3f79d409c48bcc3902420dbad5510672c",
-      "current_size": 5577,
+      "current_sha256": "26400debfb115744fc0f9de09f9e13ba177eae2ebc516f85c1ac88c0c36df9db",
+      "current_size": 5591,
       "group": "map",
       "kind": "map_data",
       "reference_path": "data/maps/GraniteCave_B2F/map.json",
@@ -146300,8 +146300,8 @@
     {
       "classification": "changed",
       "current_path": "data/maps/MeteorFalls_1F_2R/map.json",
-      "current_sha256": "60a5221798c0d451799cbd62198d2f6f49e7ab930d007a7a7211ff3078832571",
-      "current_size": 3080,
+      "current_sha256": "5e5e755df058abaf590226de731fadd0afbec3283d7f951a018ebefc417855c7",
+      "current_size": 3082,
       "group": "map",
       "kind": "map_data",
       "reference_path": "data/maps/MeteorFalls_1F_2R/map.json",
@@ -146410,8 +146410,8 @@
     {
       "classification": "changed",
       "current_path": "data/maps/MossdeepCity/map.json",
-      "current_sha256": "2c4f0b34a63a4bce79defaf054d5c30493d7acda83f6d4afa4676a8b40180a56",
-      "current_size": 12820,
+      "current_sha256": "7d9c8d24ea0c0218c2739c27b2a1cde7db494735475e442f6865367974145d00",
+      "current_size": 12818,
       "group": "map",
       "kind": "map_data",
       "reference_path": "data/maps/MossdeepCity/map.json",
@@ -146663,7 +146663,7 @@
     {
       "classification": "changed",
       "current_path": "data/maps/MtPyre_Summit/map.json",
-      "current_sha256": "b31d4aef2952992ff8b49d1254d5adcacb056d64f98f7df16ff652bc25a4dfdd",
+      "current_sha256": "25dda5bab098340e54f53b0beed8c94333aebb5ad391c9d3ddf3c4833fdba131",
       "current_size": 7213,
       "group": "map",
       "kind": "map_data",
@@ -146927,8 +146927,8 @@
     {
       "classification": "changed",
       "current_path": "data/maps/NewMauville_Inside/map.json",
-      "current_sha256": "a5619f9e150c6a70208cb8efc3c20c6c4d8e9a1064c61e579770453432187d4f",
-      "current_size": 10746,
+      "current_sha256": "fbdc9e8afa911ae5aef6090466420e7edbec1dba3a03eb7539ac087a8be94f11",
+      "current_size": 10752,
       "group": "map",
       "kind": "map_data",
       "reference_path": "data/maps/NewMauville_Inside/map.json",
@@ -147191,8 +147191,8 @@
     {
       "classification": "changed",
       "current_path": "data/maps/PetalburgWoods_2/map.json",
-      "current_sha256": "cf99ae4fda35d116b6f8ee11e7382c6e4bef3f108420e914c76dff08b65335e8",
-      "current_size": 3441,
+      "current_sha256": "862b894c81eb04ec721e97d3be50e4ad0052a7cbfd48449ac57a5ad00cdccd62",
+      "current_size": 3456,
       "group": "map",
       "kind": "map_data",
       "reference_path": "data/maps/PetalburgWoods_2/map.json",
@@ -147312,8 +147312,8 @@
     {
       "classification": "changed",
       "current_path": "data/maps/Route105/map.json",
-      "current_sha256": "0a174257fb5e8a95fcf12b4c310708601d109fdf3dd35a94e2bd3e835a08e841",
-      "current_size": 4351,
+      "current_sha256": "8b87f4785d6d8d99b588359d475203d7b9d91361632fd4dca46439a56c689a89",
+      "current_size": 4353,
       "group": "map",
       "kind": "map_data",
       "reference_path": "data/maps/Route105/map.json",
@@ -147378,8 +147378,8 @@
     {
       "classification": "changed",
       "current_path": "data/maps/Route110/map.json",
-      "current_sha256": "14e29f1d430d03ea28545b8bcb7d430b97f25d93cded36a55119b8f4b578f96a",
-      "current_size": 21065,
+      "current_sha256": "b0b90b7ed6899bf735410adc2fd79766e20d1e18ce6251d091fee6cd6505e86d",
+      "current_size": 21069,
       "group": "map",
       "kind": "map_data",
       "reference_path": "data/maps/Route110/map.json",
@@ -147488,7 +147488,7 @@
     {
       "classification": "changed",
       "current_path": "data/maps/Route110_TrickHousePuzzle5/map.json",
-      "current_sha256": "590f93515780c83040a29dbe0832a9b8becaf9e8a4288e2ba96570d60c974162",
+      "current_sha256": "a262e7c5e1ee80e41587fde544286e4ae800d60eca427126f6d98ce3c595552d",
       "current_size": 8573,
       "group": "map",
       "kind": "map_data",
@@ -147532,8 +147532,8 @@
     {
       "classification": "changed",
       "current_path": "data/maps/Route111/map.json",
-      "current_sha256": "a4a2265871d1a730c55d36ffb13cbfee7f45818177b34a9e450d0c880ffcf29d",
-      "current_size": 30844,
+      "current_sha256": "26a57b5dd9b6da3e001852e808c065fe14a5d7a2ce7c45d47fb5c4763c74a817",
+      "current_size": 30842,
       "group": "map",
       "kind": "map_data",
       "reference_path": "data/maps/Route111/map.json",
@@ -147697,8 +147697,8 @@
     {
       "classification": "changed",
       "current_path": "data/maps/Route117/map.json",
-      "current_sha256": "038d5122568bdd498b9f35a0220431a1f6463355b6a4497e19730386de87b467",
-      "current_size": 11254,
+      "current_sha256": "97c65168a8b32220cd1ef5d891d60b4105d0c88e8fb25e116ca55ae826da6abb",
+      "current_size": 11256,
       "group": "map",
       "kind": "map_data",
       "reference_path": "data/maps/Route117/map.json",
@@ -147730,7 +147730,7 @@
     {
       "classification": "changed",
       "current_path": "data/maps/Route119/map.json",
-      "current_sha256": "1a43aff47f72cbdb7587197a4d13d1e93deabd8feaf57be19f24d006d13b0de4",
+      "current_sha256": "25243d3a6afc3d88bb40ca45c3ea9421bb0fe32d751ca860421488df7ba1a8c1",
       "current_size": 25044,
       "group": "map",
       "kind": "map_data",
@@ -147785,8 +147785,8 @@
     {
       "classification": "changed",
       "current_path": "data/maps/Route121/map.json",
-      "current_sha256": "75ddc2825633827fc0a26359188290be23d3fee74e66652316a48b234ac1eabe",
-      "current_size": 15558,
+      "current_sha256": "6724da2b17b1372a624485a0008ba5876ca481514980070f693162cbbd4c421b",
+      "current_size": 15562,
       "group": "map",
       "kind": "map_data",
       "reference_path": "data/maps/Route121/map.json",
@@ -147840,8 +147840,8 @@
     {
       "classification": "changed",
       "current_path": "data/maps/Route124/map.json",
-      "current_sha256": "d90d92aacc57352219c2ceae2144bff55210041cedee600dfec8e74917942922",
-      "current_size": 6464,
+      "current_sha256": "aa996438b97a0528530572277394da3b14a7122d64f9234a135b0f3b7abce406",
+      "current_size": 6466,
       "group": "map",
       "kind": "map_data",
       "reference_path": "data/maps/Route124/map.json",
@@ -147928,7 +147928,7 @@
     {
       "classification": "changed",
       "current_path": "data/maps/Route131/map.json",
-      "current_sha256": "5eedbbea4291477d387ade1e69b3cd18d11a0a6fd1aab48548dc7cae8d0a0331",
+      "current_sha256": "341bed8d3144345f55388c93d4d8d765b6392818f19a687eb789ee33f18a54f2",
       "current_size": 4320,
       "group": "map",
       "kind": "map_data",
@@ -148258,8 +148258,8 @@
     {
       "classification": "changed",
       "current_path": "data/maps/SafariZone_South/map.json",
-      "current_sha256": "ff25eb12ea943e57926a29a3cc98d9589c880d8db8ac5c007bc6a4121ffc43b3",
-      "current_size": 3004,
+      "current_sha256": "c48f69c50e7cc6c1398d81a4c22efecb6f618f2da745bfd5f051a1606b2858da",
+      "current_size": 3006,
       "group": "map",
       "kind": "map_data",
       "reference_path": "data/maps/SafariZone_South/map.json",
@@ -148291,8 +148291,8 @@
     {
       "classification": "changed",
       "current_path": "data/maps/SandstrewnRuins/map.json",
-      "current_sha256": "73c29e4a242b269082f4f34d20aac4f0b3c0da6796dfa274b8d2b591802d5f08",
-      "current_size": 12522,
+      "current_sha256": "b3514464515c0390406068e6b7f8c6238bb58e572da4a670008eb20687893863",
+      "current_size": 12520,
       "group": "map",
       "kind": "map_data",
       "reference_path": "data/maps/SandstrewnRuins/map.json",
@@ -148445,8 +148445,8 @@
     {
       "classification": "changed",
       "current_path": "data/maps/SeafloorCavern_Room6/map.json",
-      "current_sha256": "4a43c13a5a77fc61b3843a71fc0b7085c1c5dd44b08319856f325f082ab2aec8",
-      "current_size": 1431,
+      "current_sha256": "894d62ed577727f4ce1737b665a096fef40886047c18af39690d8cd10aa6c156",
+      "current_size": 1435,
       "group": "map",
       "kind": "map_data",
       "reference_path": "data/maps/SeafloorCavern_Room6/map.json",
@@ -148511,8 +148511,8 @@
     {
       "classification": "changed",
       "current_path": "data/maps/Seaspray_Cave/map.json",
-      "current_sha256": "c53a5d4798abcd99545490b3d6fa478968f3e554864b76369f0cef20f7b82a5b",
-      "current_size": 4387,
+      "current_sha256": "208f7e225fc9032004487f912a7bd2fe6731ca444b4cf7bbb764967aa8c50186",
+      "current_size": 4408,
       "group": "map",
       "kind": "map_data",
       "reference_path": "data/maps/Seaspray_Cave/map.json",
@@ -148522,8 +148522,8 @@
     {
       "classification": "changed",
       "current_path": "data/maps/Seaspray_Cave_B1F/map.json",
-      "current_sha256": "5763aa0e7af5163f48c24fe2968201217d931901b16f379258cf667bee36d26f",
-      "current_size": 2684,
+      "current_sha256": "38c1f017fd7d5d84547cbb8230ae58b0bced8831b24dd0bf30325cc703fb6dd0",
+      "current_size": 2700,
       "group": "map",
       "kind": "map_data",
       "reference_path": "data/maps/Seaspray_Cave_B1F/map.json",
@@ -148830,8 +148830,8 @@
     {
       "classification": "changed",
       "current_path": "data/maps/ShoalCave_LowTideIceRoom/map.json",
-      "current_sha256": "67a478ec7fe2a21c267d8f9bc020a76862c3296b09c0a490c9eb3be0f9a387ab",
-      "current_size": 2488,
+      "current_sha256": "4fdcfe9c61036c9583554f01917dac20cb84e6e77cb079ab2497187da27cf4a6",
+      "current_size": 2490,
       "group": "map",
       "kind": "map_data",
       "reference_path": "data/maps/ShoalCave_LowTideIceRoom/map.json",
@@ -148962,7 +148962,7 @@
     {
       "classification": "changed",
       "current_path": "data/maps/SlateportCity/map.json",
-      "current_sha256": "3cf62fcc8550a930fbb9c5be14548fa4ab112fba023213f9e8ac89243f237a41",
+      "current_sha256": "3062bb80dc8ab3d3db7b71c6b0cd542db8d356410b1d2e82ef6fc07853c5f417",
       "current_size": 22151,
       "group": "map",
       "kind": "map_data",
@@ -149644,8 +149644,8 @@
     {
       "classification": "changed",
       "current_path": "data/maps/VerdanturfMeadow/map.json",
-      "current_sha256": "89f75686a8c2d729abc092ec5b1f85347c0d651431259f757fdd00ea0605fc13",
-      "current_size": 1839,
+      "current_sha256": "4de2fa7e079ee3f7a058c26923ddc8ac84ceebf0d1a313b2dcec5001c8c30a63",
+      "current_size": 1837,
       "group": "map",
       "kind": "map_data",
       "reference_path": "data/maps/VerdanturfMeadow/map.json",

@@ -9,3 +9,7 @@ PetalburgWoods_2_Text_Ranger:
 	.string "CHAMPION'S SIGN lit up.\p"
 	.string "A swordsman of the forest appears only\n"
 	.string "beside a fully grown BRELOOM.$"
+
+PetalburgWoods_2_EventScript_QuickBallPack::
+	finditem ITEM_QUICK_BALL, 5
+	end

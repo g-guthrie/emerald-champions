@@ -326,6 +326,13 @@ def main() -> None:
         )
     if not test_elf.is_file():
         fail(f"shared test ELF is missing: {test_elf}")
+    test_stamp = test_elf.with_name(test_elf.stem + ".inputs.json")
+    if args.run_only:
+        # The ELF may have been built in a container copy of the tree; require
+        # the content stamp written beside it so the suite proves this tree.
+        run([sys.executable, str(ROOT / "scripts" / "stamp_release_inputs.py"), "--check", "--stamp", str(test_stamp)])
+    else:
+        run([sys.executable, str(ROOT / "scripts" / "stamp_release_inputs.py"), "--stamp", str(test_stamp)])
     if args.build_only:
         print(f"runtime_test_elf={test_elf} build_seconds={build_elapsed:.2f}")
         return

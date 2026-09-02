@@ -72,8 +72,11 @@ python3 scripts/stamp_release_inputs.py
 
 and copy `pokeemerald-release.inputs.json` out beside the ROM. The verifier
 compares that stamp to the host tree by content; modification times alone
-cannot prove the ROM was built from the current sources. The curated runtime
-suite is:
+cannot prove the ROM was built from the current sources. The test ELF gets the
+same treatment: `run_emerald_champions_runtime_gates.py --build-only` writes
+`pokeemerald-test.inputs.json` beside `pokeemerald-test.elf`, and `--run-only`
+on the Mac refuses to run unless that stamp matches the host tree, so copy both
+files out of the container together. The curated runtime suite is:
 
 ```sh
 python3 scripts/run_emerald_champions_runtime_gates.py --jobs "$(sysctl -n hw.ncpu)"

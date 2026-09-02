@@ -50,9 +50,9 @@
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_ULTRA_BALL",
+      "trainer_sight_or_berry_tree_id": "ITEM_FROSLASSITE",
       "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_EC_ITEM_SHOAL_CAVE_ICE_ROOM_ULTRA_BALL"
+      "flag": "FLAG_EC_ITEM_SHOAL_CAVE_ICE_ROOM_FROSLASSITE"
     },
     {
       "local_id": "LOCALID_EC_ARTICUNO",

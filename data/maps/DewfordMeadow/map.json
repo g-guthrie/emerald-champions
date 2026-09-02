@@ -42,9 +42,9 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_ULTRA_BALL",
+      "trainer_sight_or_berry_tree_id": "ITEM_HAWLUCHANITE",
       "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_EC_ITEM_MEADOW_ULTRA_BALL"
+      "flag": "FLAG_EC_ITEM_MEADOW_HAWLUCHANITE"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",

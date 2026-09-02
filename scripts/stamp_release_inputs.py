@@ -10,6 +10,10 @@ the build) and copy the stamp out beside ``pokeemerald-release.gba``.
 
     python3 scripts/stamp_release_inputs.py            # write the stamp
     python3 scripts/stamp_release_inputs.py --check    # compare tree to stamp
+
+The runtime-gate runner writes the same digest to ``pokeemerald-test.inputs.json``
+after building the shared test ELF and requires it in ``--run-only`` mode, so the
+curated runtime suite is tied to the same sources as the release ROM.
 """
 
 from __future__ import annotations
@@ -115,23 +119,30 @@ def digest_tree() -> tuple[str, int]:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--check", action="store_true")
+    parser.add_argument(
+        "--stamp",
+        type=Path,
+        default=STAMP,
+        help="stamp file to write or check (default: the release ROM stamp)",
+    )
     args = parser.parse_args()
+    stamp_path = args.stamp if args.stamp.is_absolute() else ROOT / args.stamp
     digest, count = digest_tree()
     if args.check:
-        if not STAMP.is_file():
-            print(f"missing release input stamp: {STAMP.name}; run scripts/stamp_release_inputs.py in the built tree")
+        if not stamp_path.is_file():
+            print(f"missing input stamp: {stamp_path.name}; run scripts/stamp_release_inputs.py in the built tree")
             return 1
-        stamp = json.loads(STAMP.read_text())
+        stamp = json.loads(stamp_path.read_text())
         if stamp.get("inputs_sha256") != digest:
             print(
-                "release ROM was built from different sources than this tree: "
+                f"{stamp_path.name} was built from different sources than this tree: "
                 f"stamp={stamp.get('inputs_sha256', '?')[:12]} tree={digest[:12]} "
                 f"(stamp files={stamp.get('input_count')}, tree files={count})"
             )
             return 1
-        print(f"PASS: release input stamp matches {count} build inputs by content")
+        print(f"PASS: {stamp_path.name} matches {count} build inputs by content")
         return 0
-    STAMP.write_text(json.dumps({"inputs_sha256": digest, "input_count": count}, indent=2) + "\n")
+    stamp_path.write_text(json.dumps({"inputs_sha256": digest, "input_count": count}, indent=2) + "\n")
     print(f"stamped {count} build inputs: {digest[:12]}")
     return 0
 
