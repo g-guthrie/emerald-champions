@@ -2101,6 +2101,11 @@ FEATURE_FLAG_ASSERT(I_EXP_SHARE_FLAG, YouNeedToSetTheExpShareFlagToAnUnusedFlag)
 
 static bool32 BattleTypeAllowsExp(void)
 {
+    // Emerald Champions: the Leveler brings the party to the cap for free, so
+    // battle experience only ever printed "gained 0 Exp. Points" at the cap.
+    // Skip the whole exp phase instead of showing a meaningless message.
+    if (!B_EC_BATTLE_EXP)
+        return FALSE;
     if (RECORDED_WILD_BATTLE)
         return TRUE;
     else if (gBattleTypeFlags &

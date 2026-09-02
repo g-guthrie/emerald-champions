@@ -1376,6 +1376,55 @@ static const u8 sWhiteoutTextColors[] = { TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHI
 #define tPrintState    data[2]
 #define tIsPlayerHouse data[3]
 
+#define WHITEOUT_TEXT_WINDOW_WIDTH  (30 * 8)
+#define WHITEOUT_TEXT_WINDOW_HEIGHT (11 * 8)
+#define WHITEOUT_TEXT_LINE_HEIGHT   16
+
+// Rewrites the expanded recovery message so every line starts with a
+// {SKIP x} control code that places it in the horizontal middle of the
+// whiteout window, and returns the number of lines so the block can also be
+// centered vertically. The native version printed every line hard-left.
+static u32 CenterWhiteOutRecoveryMessage(u8 *dst, const u8 *src)
+{
+    u8 line[64];
+    u32 lineCount = 0;
+
+    while (TRUE)
+    {
+        u32 length = 0;
+        u32 width;
+
+        while (src[length] != CHAR_NEWLINE
+            && src[length] != CHAR_PROMPT_SCROLL
+            && src[length] != CHAR_PROMPT_CLEAR
+            && src[length] != EOS
+            && length < ARRAY_COUNT(line) - 1)
+        {
+            line[length] = src[length];
+            length++;
+        }
+        line[length] = EOS;
+
+        if (length != 0)
+        {
+            width = GetStringWidth(FONT_NORMAL, line, 0);
+            *dst++ = EXT_CTRL_CODE_BEGIN;
+            *dst++ = EXT_CTRL_CODE_SKIP;
+            *dst++ = width < WHITEOUT_TEXT_WINDOW_WIDTH ? (WHITEOUT_TEXT_WINDOW_WIDTH - width) / 2 : 0;
+            memcpy(dst, line, length);
+            dst += length;
+            lineCount++;
+        }
+
+        if (src[length] == EOS)
+            break;
+        *dst++ = src[length];
+        src += length + 1;
+    }
+    *dst = EOS;
+    return lineCount;
+}
+
 static bool32 PrintWhiteOutRecoveryMessage(u8 taskId, const u8 *text, u32 x, u32 y)
 {
     u32 windowId = gTasks[taskId].tWindowId;
@@ -1383,9 +1432,18 @@ static bool32 PrintWhiteOutRecoveryMessage(u8 taskId, const u8 *text, u32 x, u32
     switch (gTasks[taskId].tPrintState)
     {
     case 0:
+    {
+        u8 centered[256];
+        u32 lineCount;
+
         FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
         StringExpandPlaceholders(gStringVar4, text);
-        AddTextPrinterParameterized4(windowId, FONT_NORMAL, x, y, 1, 0, sWhiteoutTextColors, 1, gStringVar4);
+        lineCount = CenterWhiteOutRecoveryMessage(centered, gStringVar4);
+        StringCopy(gStringVar4, centered);
+        if (lineCount * WHITEOUT_TEXT_LINE_HEIGHT < WHITEOUT_TEXT_WINDOW_HEIGHT)
+            y = (WHITEOUT_TEXT_WINDOW_HEIGHT - lineCount * WHITEOUT_TEXT_LINE_HEIGHT) / 2;
+        AddTextPrinterParameterized4(windowId, FONT_NORMAL, 0, y, 1, 0, sWhiteoutTextColors, 1, gStringVar4);
+    }
         gTextFlags.canABSpeedUpPrint = FALSE;
         gTasks[taskId].tPrintState = 1;
         break;

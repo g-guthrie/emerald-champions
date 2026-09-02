@@ -50,7 +50,7 @@ difficulty_target: 7.5
 difficulty_observed: UNPLAYED
 fatigue_role: ordinary_standard
 primary_question: Can the chosen starter beat its same-generation type counter when neither side has a captured team yet?
-theme_and_tempo: The rival's species is resolved from the player's starter generation and choice. Every branch is level 15 with a Life Orb, perfect preparation, its legal Pledge STAB, Protect, and two species-specific current moves: Treecko and Torchic can threaten setup while Mudkip commits to immediate physical pressure.
+theme_and_tempo: The rival's species is resolved from the player's starter generation and choice. Every branch is level 13 with a Life Orb, perfect preparation, its legal Pledge STAB, Protect, and two species-specific current moves: Treecko and Torchic can threaten setup while Mudkip commits to immediate physical pressure.
 intentional_weakness: This is a one-on-one with no hidden reserve. Focus Sash, Eviolite, Leftovers, priority, status, setup denial, Counter or Mirror Coat, Endeavor, recovery, and direct coverage all provide different solutions across the starter families.
 first_loss_lesson: Use the chosen starter's own legal utility and item access instead of trading resisted attacks into the obvious type counter.
 strongest_part: The same rule produces a fair but different opening puzzle for every starter family without pretending all starters want the same four moves.
@@ -64,32 +64,32 @@ branches:
 trainer_id: TRAINER_BRENDAN_ROUTE_103_MUDKIP
 format: single
 team:
-  1. SPECIES_TREECKO @ ITEM_LIFE_ORB | level_offset=1 | ability=ABILITY_OVERGROW | nature=NATURE_JOLLY | stat_points=2/32/0/0/0/32 | moves=MOVE_GRASS_PLEDGE,MOVE_FACADE,MOVE_SWORDS_DANCE,MOVE_QUICK_ATTACK
+  1. SPECIES_TREECKO @ ITEM_LIFE_ORB | level_offset=-1 | ability=ABILITY_OVERGROW | nature=NATURE_JOLLY | stat_points=2/32/0/0/0/32 | moves=MOVE_GRASS_PLEDGE,MOVE_FACADE,MOVE_SWORDS_DANCE,MOVE_QUICK_ATTACK
 --- BRANCH TRAINER_BRENDAN_ROUTE_103_TORCHIC ---
 trainer_id: TRAINER_BRENDAN_ROUTE_103_TORCHIC
 format: single
 team:
-  1. SPECIES_MUDKIP @ ITEM_LIFE_ORB | level_offset=1 | ability=ABILITY_TORRENT | nature=NATURE_ADAMANT | stat_points=2/32/0/0/0/32 | moves=MOVE_WATER_PLEDGE,MOVE_DOUBLE_EDGE,MOVE_WATERFALL,MOVE_ROCK_SLIDE
+  1. SPECIES_MUDKIP @ ITEM_LIFE_ORB | level_offset=-1 | ability=ABILITY_TORRENT | nature=NATURE_ADAMANT | stat_points=2/32/0/0/0/32 | moves=MOVE_WATER_PLEDGE,MOVE_DOUBLE_EDGE,MOVE_WATERFALL,MOVE_ROCK_SLIDE
 --- BRANCH TRAINER_BRENDAN_ROUTE_103_TREECKO ---
 trainer_id: TRAINER_BRENDAN_ROUTE_103_TREECKO
 format: single
 team:
-  1. SPECIES_TORCHIC @ ITEM_LIFE_ORB | level_offset=1 | ability=ABILITY_BLAZE | nature=NATURE_JOLLY | stat_points=2/32/0/0/0/32 | moves=MOVE_FIRE_PLEDGE,MOVE_DOUBLE_EDGE,MOVE_SWORDS_DANCE,MOVE_LOW_KICK
+  1. SPECIES_TORCHIC @ ITEM_LIFE_ORB | level_offset=-1 | ability=ABILITY_BLAZE | nature=NATURE_JOLLY | stat_points=2/32/0/0/0/32 | moves=MOVE_FIRE_PLEDGE,MOVE_DOUBLE_EDGE,MOVE_SWORDS_DANCE,MOVE_LOW_KICK
 --- BRANCH TRAINER_MAY_ROUTE_103_MUDKIP ---
 trainer_id: TRAINER_MAY_ROUTE_103_MUDKIP
 format: single
 team:
-  1. SPECIES_TREECKO @ ITEM_LIFE_ORB | level_offset=1 | ability=ABILITY_OVERGROW | nature=NATURE_JOLLY | stat_points=2/32/0/0/0/32 | moves=MOVE_GRASS_PLEDGE,MOVE_FACADE,MOVE_SWORDS_DANCE,MOVE_QUICK_ATTACK
+  1. SPECIES_TREECKO @ ITEM_LIFE_ORB | level_offset=-1 | ability=ABILITY_OVERGROW | nature=NATURE_JOLLY | stat_points=2/32/0/0/0/32 | moves=MOVE_GRASS_PLEDGE,MOVE_FACADE,MOVE_SWORDS_DANCE,MOVE_QUICK_ATTACK
 --- BRANCH TRAINER_MAY_ROUTE_103_TORCHIC ---
 trainer_id: TRAINER_MAY_ROUTE_103_TORCHIC
 format: single
 team:
-  1. SPECIES_MUDKIP @ ITEM_LIFE_ORB | level_offset=1 | ability=ABILITY_TORRENT | nature=NATURE_ADAMANT | stat_points=2/32/0/0/0/32 | moves=MOVE_WATER_PLEDGE,MOVE_DOUBLE_EDGE,MOVE_WATERFALL,MOVE_ROCK_SLIDE
+  1. SPECIES_MUDKIP @ ITEM_LIFE_ORB | level_offset=-1 | ability=ABILITY_TORRENT | nature=NATURE_ADAMANT | stat_points=2/32/0/0/0/32 | moves=MOVE_WATER_PLEDGE,MOVE_DOUBLE_EDGE,MOVE_WATERFALL,MOVE_ROCK_SLIDE
 --- BRANCH TRAINER_MAY_ROUTE_103_TREECKO ---
 trainer_id: TRAINER_MAY_ROUTE_103_TREECKO
 format: single
 team:
-  1. SPECIES_TORCHIC @ ITEM_LIFE_ORB | level_offset=1 | ability=ABILITY_BLAZE | nature=NATURE_JOLLY | stat_points=2/32/0/0/0/32 | moves=MOVE_FIRE_PLEDGE,MOVE_DOUBLE_EDGE,MOVE_SWORDS_DANCE,MOVE_LOW_KICK
+  1. SPECIES_TORCHIC @ ITEM_LIFE_ORB | level_offset=-1 | ability=ABILITY_BLAZE | nature=NATURE_JOLLY | stat_points=2/32/0/0/0/32 | moves=MOVE_FIRE_PLEDGE,MOVE_DOUBLE_EDGE,MOVE_SWORDS_DANCE,MOVE_LOW_KICK
 source_note: Master-audited current Champions design; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -197,7 +197,7 @@ format: double
 team:
   1. SPECIES_PIKACHU @ ITEM_LIGHT_BALL | level_offset=0 | ability=ABILITY_LIGHTNING_ROD | nature=NATURE_JOLLY | stat_points=2/32/0/0/0/32 | moves=MOVE_FAKE_OUT,MOVE_ENCORE,MOVE_VOLT_TACKLE,MOVE_ELECTROWEB
   2. SPECIES_TAILLOW @ ITEM_TOXIC_ORB | level_offset=0 | ability=ABILITY_GUTS | nature=NATURE_JOLLY | stat_points=2/32/0/0/0/32 | moves=MOVE_PROTECT,MOVE_QUICK_ATTACK,MOVE_BRAVE_BIRD,MOVE_FACADE
-  3. SPECIES_PARAS @ ITEM_EVIOLITE | level_offset=0 | ability=ABILITY_DRY_SKIN | nature=NATURE_JOLLY | stat_points=2/32/0/0/0/32 | moves=MOVE_SPORE,MOVE_PROTECT,MOVE_DIG,MOVE_X_SCISSOR
+  3. SPECIES_PARAS @ ITEM_EVIOLITE | level_offset=0 | ability=ABILITY_DRY_SKIN | nature=NATURE_ADAMANT | stat_points=32/32/2/0/0/0 | moves=MOVE_SPORE,MOVE_PROTECT,MOVE_DIG,MOVE_X_SCISSOR
   4. SPECIES_ZIGZAGOON @ ITEM_SITRUS_BERRY | level_offset=0 | ability=ABILITY_QUICK_FEET | nature=NATURE_ADAMANT | stat_points=2/32/0/0/0/32 | moves=MOVE_BELLY_DRUM,MOVE_EXTREME_SPEED,MOVE_SEED_BOMB,MOVE_PROTECT
 source_note: Master-audited current Champions design; implementation must match exactly.
 === END ENCOUNTER ===
@@ -340,7 +340,7 @@ branches:
 trainer_id: TRAINER_CINDY_1
 format: double
 team:
-  1. SPECIES_BUNEARY @ ITEM_EVIOLITE | level_offset=0 | ability=ABILITY_LIMBER | nature=NATURE_JOLLY | stat_points=2/32/0/0/0/32 | moves=MOVE_FAKE_OUT,MOVE_FACADE,MOVE_DRAIN_PUNCH,MOVE_ENCORE
+  1. SPECIES_BUNEARY @ ITEM_EVIOLITE | level_offset=0 | ability=ABILITY_LIMBER | nature=NATURE_ADAMANT | stat_points=2/32/0/0/0/32 | moves=MOVE_FAKE_OUT,MOVE_FACADE,MOVE_DRAIN_PUNCH,MOVE_ENCORE
   2. SPECIES_GOTHITA @ ITEM_FOCUS_SASH | level_offset=0 | ability=ABILITY_COMPETITIVE | nature=NATURE_QUIET | stat_points=32/0/2/0/32/0 | moves=MOVE_TRICK_ROOM,MOVE_PSYCHIC,MOVE_THUNDERBOLT,MOVE_PROTECT
   3. SPECIES_MAWILE @ ITEM_LIFE_ORB | level_offset=0 | ability=ABILITY_HYPER_CUTTER | nature=NATURE_BRAVE | stat_points=32/32/2/0/0/0 | moves=MOVE_PLAY_ROUGH,MOVE_IRON_HEAD,MOVE_FIRE_FANG,MOVE_SUCKER_PUNCH
   4. SPECIES_FURFROU_DEBUTANTE @ ITEM_CHOICE_BAND | level_offset=0 | ability=ABILITY_FUR_COAT | nature=NATURE_JOLLY | stat_points=2/32/0/0/0/32 | moves=MOVE_DOUBLE_EDGE,MOVE_U_TURN,MOVE_ZEN_HEADBUTT,MOVE_SUCKER_PUNCH
@@ -3169,7 +3169,7 @@ trainer_id: TRAINER_BIANCA
 format: double
 team:
   1. SPECIES_GOURGEIST_SUPER @ ITEM_FLAME_ORB | level_offset=0 | ability=ABILITY_FLARE_BOOST | nature=NATURE_QUIET | stat_points=32/0/2/32/0/0 | moves=MOVE_SHADOW_BALL,MOVE_ENERGY_BALL,MOVE_TRICK_ROOM,MOVE_PROTECT
-  2. SPECIES_GENGAR @ ITEM_LIFE_ORB | level_offset=0 | ability=ABILITY_LEVITATE | nature=NATURE_TIMID | stat_points=2/0/0/32/0/32 | moves=MOVE_SLUDGE_BOMB,MOVE_SHADOW_BALL,MOVE_DAZZLING_GLEAM,MOVE_PROTECT
+  2. SPECIES_GENGAR @ ITEM_LIFE_ORB | level_offset=0 | ability=ABILITY_LEVITATE | nature=NATURE_MODEST | stat_points=2/0/0/32/0/32 | moves=MOVE_SLUDGE_BOMB,MOVE_SHADOW_BALL,MOVE_DAZZLING_GLEAM,MOVE_PROTECT
   3. SPECIES_SUDOWOODO @ ITEM_CHOICE_BAND | level_offset=0 | ability=ABILITY_ROCK_HEAD | nature=NATURE_ADAMANT | stat_points=32/32/2/0/0/0 | moves=MOVE_HEAD_SMASH,MOVE_LOW_KICK,MOVE_SUCKER_PUNCH,MOVE_EARTHQUAKE
   4. SPECIES_MAGMORTAR @ ITEM_ASSAULT_VEST | level_offset=0 | ability=ABILITY_VITAL_SPIRIT | nature=NATURE_MODEST | stat_points=2/0/0/32/0/32 | moves=MOVE_HEAT_WAVE,MOVE_THUNDERBOLT,MOVE_PSYCHIC,MOVE_FOCUS_BLAST
 source_note: Master-audited current Champions design; implementation must match exactly.
@@ -3538,12 +3538,12 @@ branches:
 trainer_id: TRAINER_WATTSON_1
 format: double
 team:
-  1. SPECIES_MIRAIDON @ ITEM_LIFE_ORB | level_offset=2 | ability=ABILITY_HADRON_ENGINE | nature=NATURE_TIMID | stat_points=2/0/0/32/0/32 | moves=MOVE_ELECTRO_DRIFT,MOVE_DRACO_METEOR,MOVE_VOLT_SWITCH,MOVE_PROTECT
-  2. SPECIES_EMOLGA @ ITEM_FOCUS_SASH | level_offset=2 | ability=ABILITY_STATIC | nature=NATURE_TIMID | stat_points=2/0/0/32/0/32 | moves=MOVE_ELECTROWEB,MOVE_ENCORE,MOVE_HELPING_HAND,MOVE_THUNDERBOLT
+  1. SPECIES_MIRAIDON @ ITEM_LIFE_ORB | level_offset=2 | ability=ABILITY_HADRON_ENGINE | nature=NATURE_MODEST | stat_points=2/0/0/32/0/32 | moves=MOVE_ELECTRO_DRIFT,MOVE_DRACO_METEOR,MOVE_VOLT_SWITCH,MOVE_PROTECT
+  2. SPECIES_EMOLGA @ ITEM_FOCUS_SASH | level_offset=2 | ability=ABILITY_STATIC | nature=NATURE_MODEST | stat_points=2/0/0/32/0/32 | moves=MOVE_ELECTROWEB,MOVE_ENCORE,MOVE_HELPING_HAND,MOVE_THUNDERBOLT
   3. SPECIES_IRON_HANDS @ ITEM_ASSAULT_VEST | level_offset=3 | ability=ABILITY_QUARK_DRIVE | nature=NATURE_ADAMANT | stat_points=2/32/0/0/0/32 | moves=MOVE_FAKE_OUT,MOVE_CLOSE_COMBAT,MOVE_WILD_CHARGE,MOVE_ICE_PUNCH
   4. SPECIES_FARIGIRAF @ ITEM_SITRUS_BERRY | level_offset=3 | ability=ABILITY_ARMOR_TAIL | nature=NATURE_MODEST | stat_points=32/0/2/32/0/0 | moves=MOVE_TWIN_BEAM,MOVE_TRICK_ROOM,MOVE_LIGHT_SCREEN,MOVE_PROTECT
   5. SPECIES_PORYGON2 @ ITEM_EVIOLITE | level_offset=4 | ability=ABILITY_DOWNLOAD | nature=NATURE_SASSY | stat_points=32/0/32/0/2/0 | moves=MOVE_TRICK_ROOM,MOVE_TRI_ATTACK,MOVE_ICE_BEAM,MOVE_RECOVER
-  6. SPECIES_RAICHU @ ITEM_RAICHUNITE_Y | level_offset=5 | ability=ABILITY_STATIC | nature=NATURE_TIMID | stat_points=2/0/0/32/0/32 | moves=MOVE_THUNDER,MOVE_FOCUS_BLAST,MOVE_GRASS_KNOT,MOVE_PROTECT
+  6. SPECIES_RAICHU @ ITEM_RAICHUNITE_Y | level_offset=5 | ability=ABILITY_STATIC | nature=NATURE_MODEST | stat_points=2/0/0/32/0/32 | moves=MOVE_THUNDER,MOVE_FOCUS_BLAST,MOVE_GRASS_KNOT,MOVE_PROTECT
 source_note: Master-audited current Champions design; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -3723,7 +3723,7 @@ team:
   1. SPECIES_SPIRITOMB @ ITEM_LEFTOVERS | level_offset=0 | ability=ABILITY_INFILTRATOR | nature=NATURE_CALM | stat_points=32/0/2/0/32/0 | moves=MOVE_SNARL,MOVE_WILL_O_WISP,MOVE_PAIN_SPLIT,MOVE_PROTECT
   2. SPECIES_TYRANTRUM @ ITEM_CHOICE_SCARF | level_offset=0 | ability=ABILITY_ROCK_HEAD | nature=NATURE_JOLLY | stat_points=2/32/0/0/0/32 | moves=MOVE_HEAD_SMASH,MOVE_DRAGON_CLAW,MOVE_HIGH_HORSEPOWER,MOVE_PSYCHIC_FANGS
   3. SPECIES_SERPERIOR @ ITEM_SITRUS_BERRY | level_offset=0 | ability=ABILITY_CONTRARY | nature=NATURE_TIMID | stat_points=2/0/0/32/0/32 | moves=MOVE_LEAF_STORM,MOVE_DRAGON_PULSE,MOVE_GLARE,MOVE_PROTECT
-  4. SPECIES_CARRACOSTA @ ITEM_WHITE_HERB | level_offset=0 | ability=ABILITY_STURDY | nature=NATURE_JOLLY | stat_points=32/32/2/0/0/0 | moves=MOVE_SHELL_SMASH,MOVE_ROCK_SLIDE,MOVE_LIQUIDATION,MOVE_AQUA_JET
+  4. SPECIES_CARRACOSTA @ ITEM_WHITE_HERB | level_offset=0 | ability=ABILITY_STURDY | nature=NATURE_ADAMANT | stat_points=32/32/2/0/0/0 | moves=MOVE_SHELL_SMASH,MOVE_ROCK_SLIDE,MOVE_LIQUIDATION,MOVE_AQUA_JET
 source_note: Master-audited current Champions design; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -4837,7 +4837,7 @@ format: double
 team:
   1. SPECIES_SOLROCK @ ITEM_FOCUS_SASH | level_offset=1 | ability=ABILITY_LEVITATE | nature=NATURE_JOLLY | stat_points=32/32/2/0/0/0 | moves=MOVE_ROCK_SLIDE,MOVE_ZEN_HEADBUTT,MOVE_WILL_O_WISP,MOVE_EXPLOSION
   2. SPECIES_MINIOR @ ITEM_WHITE_HERB | level_offset=2 | ability=ABILITY_SHIELDS_DOWN | nature=NATURE_JOLLY | stat_points=2/32/0/0/0/32 | moves=MOVE_SHELL_SMASH,MOVE_ACROBATICS,MOVE_ROCK_SLIDE,MOVE_PROTECT
-  3. SPECIES_CELESTEELA @ ITEM_ASSAULT_VEST | level_offset=3 | ability=ABILITY_BEAST_BOOST | nature=NATURE_ADAMANT | stat_points=32/0/2/0/32/0 | moves=MOVE_HEAVY_SLAM,MOVE_FLAMETHROWER,MOVE_GIGA_DRAIN,MOVE_ROCK_SLIDE
+  3. SPECIES_CELESTEELA @ ITEM_ASSAULT_VEST | level_offset=3 | ability=ABILITY_BEAST_BOOST | nature=NATURE_MODEST | stat_points=32/0/2/0/32/0 | moves=MOVE_HEAVY_SLAM,MOVE_FLAMETHROWER,MOVE_GIGA_DRAIN,MOVE_ROCK_SLIDE
 source_note: Master-audited current Champions design; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -5698,7 +5698,7 @@ trainer_id: TRAINER_FLANNERY_1
 format: double
 team:
   1. SPECIES_TORKOAL @ ITEM_EJECT_BUTTON | level_offset=1 | ability=ABILITY_DROUGHT | nature=NATURE_BOLD | stat_points=32/0/2/32/0/0 | moves=MOVE_ERUPTION,MOVE_BODY_PRESS,MOVE_YAWN,MOVE_PROTECT
-  2. SPECIES_LILLIGANT @ ITEM_FOCUS_SASH | level_offset=1 | ability=ABILITY_CHLOROPHYLL | nature=NATURE_TIMID | stat_points=2/0/0/32/0/32 | moves=MOVE_AFTER_YOU,MOVE_HELPING_HAND,MOVE_SOLAR_BEAM,MOVE_PROTECT
+  2. SPECIES_LILLIGANT @ ITEM_FOCUS_SASH | level_offset=1 | ability=ABILITY_CHLOROPHYLL | nature=NATURE_MODEST | stat_points=2/0/0/32/0/32 | moves=MOVE_AFTER_YOU,MOVE_HELPING_HAND,MOVE_SOLAR_BEAM,MOVE_PROTECT
   3. SPECIES_DELPHOX @ ITEM_MENTAL_HERB | level_offset=2 | ability=ABILITY_BLAZE | nature=NATURE_QUIET | stat_points=32/0/2/32/0/0 | moves=MOVE_TRICK_ROOM,MOVE_HEAT_WAVE,MOVE_SHADOW_BALL,MOVE_WILL_O_WISP
   4. SPECIES_SKELEDIRGE @ ITEM_THROAT_SPRAY | level_offset=2 | ability=ABILITY_UNAWARE | nature=NATURE_QUIET | stat_points=32/0/32/0/2/0 | moves=MOVE_TORCH_SONG,MOVE_SHADOW_BALL,MOVE_HYPER_VOICE,MOVE_PROTECT
   5. SPECIES_HEATRAN @ ITEM_AIR_BALLOON | level_offset=3 | ability=ABILITY_FLASH_FIRE | nature=NATURE_MODEST | stat_points=2/0/0/32/0/32 | moves=MOVE_MAGMA_STORM,MOVE_FLASH_CANNON,MOVE_EARTH_POWER,MOVE_PROTECT
@@ -6311,7 +6311,7 @@ team:
   1. SPECIES_EXPLOUD @ ITEM_CHOICE_SPECS | level_offset=0 | ability=ABILITY_SCRAPPY | nature=NATURE_MODEST | stat_points=2/0/0/32/0/32 | moves=MOVE_BOOMBURST,MOVE_FIRE_BLAST,MOVE_ICE_BEAM,MOVE_SURF
   2. SPECIES_MIMIKYU @ ITEM_MENTAL_HERB | level_offset=0 | ability=ABILITY_DISGUISE | nature=NATURE_BRAVE | stat_points=32/0/32/0/2/0 | moves=MOVE_TRICK_ROOM,MOVE_PLAY_ROUGH,MOVE_SHADOW_SNEAK,MOVE_PROTECT
   3. SPECIES_SILVALLY @ ITEM_NORMAL_GEM | level_offset=0 | ability=ABILITY_RKS_SYSTEM | nature=NATURE_JOLLY | stat_points=2/32/0/0/0/32 | moves=MOVE_EXPLOSION,MOVE_MULTI_ATTACK,MOVE_CRUNCH,MOVE_PROTECT
-  4. SPECIES_GLALIE @ ITEM_GLALITITE | level_offset=0 | ability=ABILITY_INNER_FOCUS | nature=NATURE_JOLLY | stat_points=2/32/0/0/0/32 | moves=MOVE_BODY_SLAM,MOVE_EARTHQUAKE,MOVE_ICE_SHARD,MOVE_PROTECT
+  4. SPECIES_GLALIE @ ITEM_GLALITITE | level_offset=0 | ability=ABILITY_INNER_FOCUS | nature=NATURE_ADAMANT | stat_points=2/32/0/0/0/32 | moves=MOVE_BODY_SLAM,MOVE_EARTHQUAKE,MOVE_ICE_SHARD,MOVE_PROTECT
 source_note: Master-audited current Champions design; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -7485,7 +7485,7 @@ format: double
 team:
   1. SPECIES_GOLEM_ALOLA @ ITEM_ASSAULT_VEST | level_offset=-2 | ability=ABILITY_GALVANIZE | nature=NATURE_ADAMANT | stat_points=2/32/0/0/0/32 | moves=MOVE_DOUBLE_EDGE,MOVE_HIGH_HORSEPOWER,MOVE_ROCK_SLIDE,MOVE_EXPLOSION
   2. SPECIES_STEELIX @ ITEM_STEELIXITE | level_offset=-2 | ability=ABILITY_STURDY | nature=NATURE_ADAMANT | stat_points=32/32/2/0/0/0 | moves=MOVE_HEAVY_SLAM,MOVE_HIGH_HORSEPOWER,MOVE_BODY_PRESS,MOVE_PROTECT
-  3. SPECIES_CARRACOSTA @ ITEM_WHITE_HERB | level_offset=-2 | ability=ABILITY_STURDY | nature=NATURE_JOLLY | stat_points=32/32/2/0/0/0 | moves=MOVE_SHELL_SMASH,MOVE_LIQUIDATION,MOVE_ROCK_SLIDE,MOVE_PROTECT
+  3. SPECIES_CARRACOSTA @ ITEM_WHITE_HERB | level_offset=-2 | ability=ABILITY_STURDY | nature=NATURE_ADAMANT | stat_points=32/32/2/0/0/0 | moves=MOVE_SHELL_SMASH,MOVE_LIQUIDATION,MOVE_ROCK_SLIDE,MOVE_PROTECT
 source_note: Master-audited current Champions design; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -9046,7 +9046,7 @@ trainer_id: TRAINER_GRUNT_WEATHER_INST_4
 format: double
 team:
   1. SPECIES_WALREIN @ ITEM_SITRUS_BERRY | level_offset=-2 | ability=ABILITY_THICK_FAT | nature=NATURE_CALM | stat_points=32/0/2/0/32/0 | moves=MOVE_ICY_WIND,MOVE_PROTECT,MOVE_ENCORE,MOVE_HYDRO_PUMP
-  2. SPECIES_FLOATZEL @ ITEM_LIFE_ORB | level_offset=-2 | ability=ABILITY_WATER_VEIL | nature=NATURE_JOLLY | stat_points=2/32/0/0/0/32 | moves=MOVE_LIQUIDATION,MOVE_ICE_PUNCH,MOVE_AQUA_JET,MOVE_PROTECT
+  2. SPECIES_FLOATZEL @ ITEM_LIFE_ORB | level_offset=-2 | ability=ABILITY_WATER_VEIL | nature=NATURE_ADAMANT | stat_points=2/32/0/0/0/32 | moves=MOVE_LIQUIDATION,MOVE_ICE_PUNCH,MOVE_AQUA_JET,MOVE_PROTECT
   3. SPECIES_MALAMAR @ ITEM_CLEAR_AMULET | level_offset=-2 | ability=ABILITY_CONTRARY | nature=NATURE_JOLLY | stat_points=2/32/0/0/0/32 | moves=MOVE_SUPERPOWER,MOVE_KNOCK_OFF,MOVE_ROCK_SLIDE,MOVE_PROTECT
   4. SPECIES_GOURGEIST_SUPER @ ITEM_FLAME_ORB | level_offset=-2 | ability=ABILITY_FLARE_BOOST | nature=NATURE_QUIET | stat_points=32/0/2/32/0/0 | moves=MOVE_TRICK_ROOM,MOVE_SHADOW_BALL,MOVE_ENERGY_BALL,MOVE_PROTECT
 source_note: Master-audited current Champions design; implementation must match exactly.
@@ -9623,15 +9623,15 @@ quality_target: 10
 difficulty_target: 7.4
 difficulty_observed: UNPLAYED
 fatigue_role: ordinary_standard
-primary_question: Can the player read Crustle's Swords Dance opening, solve the Trick Room, Tailwind, setup, spread pressure board, and still preserve an answer for Aerodactyl's Tailwind finish?
-theme_and_tempo: This Route120 encounter is a Trick Room, Tailwind, setup, spread pressure puzzle. Crustle carries Rock Gem with Sturdy and lists Swords Dance among its public options; Claydol carries Sitrus Berry with Levitate and lists Trick Room among its public options; Aerodactyl carries None with Unnerve and lists Tailwind among its public options.
+primary_question: Can the player read Crustle's Swords Dance opening, solve the Trick Room, setup, spread pressure board, and still preserve an answer for Aerodactyl's Rock Slide finish?
+theme_and_tempo: This Route120 encounter is a Trick Room, setup, spread pressure puzzle. Crustle carries Rock Gem with Sturdy and lists Swords Dance among its public options; Claydol carries Sitrus Berry with Levitate and lists Trick Room among its public options; Aerodactyl carries None with Unnerve and lists Rock Slide among its public options.
 intentional_weakness: The broad answers are to Taunt or reverse Trick Room, stall its finite turns, or remove the setter. The player can also pressure Crustle before the plan stabilizes or isolate Aerodactyl; no single species or exact move order is required.
-first_loss_lesson: Decide whether Crustle is damage or infrastructure, then preserve the answer that best denies Aerodactyl's Tailwind rather than spending it on Claydol.
-strongest_part: Crustle's Swords Dance creates a readable handoff through Claydol into Aerodactyl's Tailwind, so the team has one identity without becoming one scripted solution.
+first_loss_lesson: Decide whether Crustle is damage or infrastructure, then preserve the answer that best denies Aerodactyl's Rock Slide rather than spending it on Claydol.
+strongest_part: Crustle's Swords Dance creates a readable handoff through Claydol into Aerodactyl's Rock Slide, so the team has one identity without becoming one scripted solution.
 weakest_link: If the player breaks the Trick Room layer or removes Crustle early, the remaining members must win through ordinary positioning; that intentional seam keeps difficulty 7.4 honest.
 competitive_references: Pinned Pokemon Showdown Champions learnsets and doubles roles; Emerald Champions authored battle corpus
 dialogue_status: implemented native source dialogue; literal width verified; bespoke team-specific rewrite not claimed
-reservation_status: spends the Crustle plus Aerodactyl Trick Room, Tailwind, setup, spread pressure pairing here; checked against campaign species, Mega, legendary, and rolling-strategy ledgers
+reservation_status: spends the Crustle plus Aerodactyl Trick Room, setup, spread pressure pairing here; checked against campaign species, Mega, legendary, and rolling-strategy ledgers
 trainer_ids: TRAINER_CHIP
 branches:
 --- BRANCH TRAINER_CHIP ---
@@ -9640,7 +9640,7 @@ format: double
 team:
   1. SPECIES_CRUSTLE @ ITEM_ROCK_GEM | level_offset=-3 | ability=ABILITY_STURDY | nature=NATURE_BRAVE | stat_points=32/32/2/0/0/0 | moves=MOVE_ROCK_SLIDE,MOVE_X_SCISSOR,MOVE_SWORDS_DANCE,MOVE_PROTECT
   2. SPECIES_CLAYDOL @ ITEM_SITRUS_BERRY | level_offset=-3 | ability=ABILITY_LEVITATE | nature=NATURE_QUIET | stat_points=32/0/2/32/0/0 | moves=MOVE_TRICK_ROOM,MOVE_EARTH_POWER,MOVE_PSYCHIC,MOVE_PROTECT
-  3. SPECIES_AERODACTYL @ ITEM_NONE | level_offset=-3 | ability=ABILITY_UNNERVE | nature=NATURE_JOLLY | stat_points=2/32/0/0/0/32 | moves=MOVE_ROCK_SLIDE,MOVE_TAILWIND,MOVE_DUAL_WINGBEAT,MOVE_ICE_FANG
+  3. SPECIES_AERODACTYL @ ITEM_NONE | level_offset=-3 | ability=ABILITY_UNNERVE | nature=NATURE_ADAMANT | stat_points=2/32/0/0/0/32 | moves=MOVE_ROCK_SLIDE,MOVE_PROTECT,MOVE_DUAL_WINGBEAT,MOVE_ICE_FANG
 source_note: Master-audited current Champions design; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -10017,15 +10017,15 @@ quality_target: 10
 difficulty_target: 7.9
 difficulty_observed: UNPLAYED
 fatigue_role: ordinary_standard
-primary_question: Can the player read Solrock's Trick Room opening, solve the Trick Room, Tailwind, setup, spread pressure board, and still preserve an answer for Shaymin's Tailwind finish?
-theme_and_tempo: This Route123 encounter is a Trick Room, Tailwind, setup, spread pressure puzzle. Solrock carries Sitrus Berry with Levitate and lists Trick Room among its public options; Exeggutor Alola carries Life Orb with Frisk and lists Trick Room among its public options; Delphox carries Focus Sash with Blaze and lists Nasty Plot among its public options; Shaymin carries Wise Glasses with Natural Cure and lists Tailwind among its public options.
+primary_question: Can the player read Solrock's Trick Room opening, solve the Trick Room, setup, spread pressure board, and still preserve an answer for Shaymin's Seed Flare finish?
+theme_and_tempo: This Route123 encounter is a Trick Room, setup, spread pressure puzzle. Solrock carries Sitrus Berry with Levitate and lists Trick Room among its public options; Exeggutor Alola carries Life Orb with Frisk and lists Trick Room among its public options; Delphox carries Focus Sash with Blaze and lists Nasty Plot among its public options; Shaymin carries Wise Glasses with Natural Cure and lists Seed Flare among its public options.
 intentional_weakness: The broad answers are to Taunt or reverse Trick Room, stall its finite turns, or remove the setter. The player can also pressure Solrock before the plan stabilizes or isolate Shaymin; no single species or exact move order is required.
-first_loss_lesson: Decide whether Solrock is damage or infrastructure, then preserve the answer that best denies Shaymin's Tailwind rather than spending it on Exeggutor Alola, Delphox.
-strongest_part: Solrock's Trick Room creates a readable handoff through Exeggutor Alola, Delphox into Shaymin's Tailwind, so the team has one identity without becoming one scripted solution.
+first_loss_lesson: Decide whether Solrock is damage or infrastructure, then preserve the answer that best denies Shaymin's Seed Flare rather than spending it on Exeggutor Alola, Delphox.
+strongest_part: Solrock's Trick Room creates a readable handoff through Exeggutor Alola, Delphox into Shaymin's Seed Flare, so the team has one identity without becoming one scripted solution.
 weakest_link: If the player breaks the Trick Room layer or removes Solrock early, the remaining members must win through ordinary positioning; that intentional seam keeps difficulty 7.9 honest.
 competitive_references: Pinned Pokemon Showdown Champions learnsets and doubles roles; Emerald Champions authored battle corpus
 dialogue_status: implemented native source dialogue; literal width verified; bespoke team-specific rewrite not claimed
-reservation_status: spends the Solrock plus Shaymin Trick Room, Tailwind, setup, spread pressure pairing here; checked against campaign species, Mega, legendary, and rolling-strategy ledgers
+reservation_status: spends the Solrock plus Shaymin Trick Room, setup, spread pressure pairing here; checked against campaign species, Mega, legendary, and rolling-strategy ledgers
 trainer_ids: TRAINER_CAMERON_1
 branches:
 --- BRANCH TRAINER_CAMERON_1 ---
@@ -10034,8 +10034,8 @@ format: double
 team:
   1. SPECIES_SOLROCK @ ITEM_SITRUS_BERRY | level_offset=-2 | ability=ABILITY_LEVITATE | nature=NATURE_BRAVE | stat_points=32/32/2/0/0/0 | moves=MOVE_TRICK_ROOM,MOVE_ROCK_SLIDE,MOVE_WILL_O_WISP,MOVE_PROTECT
   2. SPECIES_EXEGGUTOR_ALOLA @ ITEM_LIFE_ORB | level_offset=-2 | ability=ABILITY_FRISK | nature=NATURE_QUIET | stat_points=32/0/2/32/0/0 | moves=MOVE_TRICK_ROOM,MOVE_DRACO_METEOR,MOVE_GIGA_DRAIN,MOVE_PROTECT
-  3. SPECIES_DELPHOX @ ITEM_FOCUS_SASH | level_offset=-2 | ability=ABILITY_BLAZE | nature=NATURE_TIMID | stat_points=2/0/0/32/0/32 | moves=MOVE_HEAT_WAVE,MOVE_PSYCHIC,MOVE_NASTY_PLOT,MOVE_PROTECT
-  4. SPECIES_SHAYMIN @ ITEM_WISE_GLASSES | level_offset=-2 | ability=ABILITY_NATURAL_CURE | nature=NATURE_TIMID | stat_points=2/0/0/32/0/32 | moves=MOVE_SEED_FLARE,MOVE_EARTH_POWER,MOVE_TAILWIND,MOVE_PROTECT
+  3. SPECIES_DELPHOX @ ITEM_FOCUS_SASH | level_offset=-2 | ability=ABILITY_BLAZE | nature=NATURE_MODEST | stat_points=2/0/0/32/0/32 | moves=MOVE_HEAT_WAVE,MOVE_PSYCHIC,MOVE_NASTY_PLOT,MOVE_PROTECT
+  4. SPECIES_SHAYMIN @ ITEM_WISE_GLASSES | level_offset=-2 | ability=ABILITY_NATURAL_CURE | nature=NATURE_TIMID | stat_points=2/0/0/32/0/32 | moves=MOVE_SEED_FLARE,MOVE_EARTH_POWER,MOVE_SUBSTITUTE,MOVE_PROTECT
 source_note: Master-audited current Champions design; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -10142,7 +10142,7 @@ format: double
 team:
   1. SPECIES_COFAGRIGUS @ ITEM_MENTAL_HERB | level_offset=-2 | ability=ABILITY_MUMMY | nature=NATURE_RELAXED | stat_points=32/0/32/0/2/0 | moves=MOVE_TRICK_ROOM,MOVE_WILL_O_WISP,MOVE_SHADOW_BALL,MOVE_ALLY_SWITCH
   2. SPECIES_MAROWAK_ALOLA @ ITEM_THICK_CLUB | level_offset=-2 | ability=ABILITY_LIGHTNING_ROD | nature=NATURE_BRAVE | stat_points=32/32/2/0/0/0 | moves=MOVE_FLARE_BLITZ,MOVE_SHADOW_BONE,MOVE_LOW_KICK,MOVE_PROTECT
-  3. SPECIES_ROTOM_FROST @ ITEM_SITRUS_BERRY | level_offset=-2 | ability=ABILITY_LEVITATE | nature=NATURE_TIMID | stat_points=2/0/0/32/0/32 | moves=MOVE_BLIZZARD,MOVE_THUNDERBOLT,MOVE_ELECTROWEB,MOVE_PROTECT
+  3. SPECIES_ROTOM_FROST @ ITEM_SITRUS_BERRY | level_offset=-2 | ability=ABILITY_LEVITATE | nature=NATURE_MODEST | stat_points=2/0/0/32/0/32 | moves=MOVE_BLIZZARD,MOVE_THUNDERBOLT,MOVE_ELECTROWEB,MOVE_PROTECT
 source_note: Master-audited current Champions design; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -10824,7 +10824,7 @@ trainer_id: TRAINER_WALTER_1
 format: double
 team:
   1. SPECIES_LUXRAY @ ITEM_SITRUS_BERRY | level_offset=-2 | ability=ABILITY_INTIMIDATE | nature=NATURE_ADAMANT | stat_points=2/32/0/0/0/32 | moves=MOVE_WILD_CHARGE,MOVE_CRUNCH,MOVE_SNARL,MOVE_PROTECT
-  2. SPECIES_LINOONE @ ITEM_WIKI_BERRY | level_offset=-2 | ability=ABILITY_GLUTTONY | nature=NATURE_JOLLY | stat_points=2/32/0/0/0/32 | moves=MOVE_THROAT_CHOP,MOVE_PROTECT,MOVE_BELLY_DRUM,MOVE_HELPING_HAND
+  2. SPECIES_LINOONE @ ITEM_WIKI_BERRY | level_offset=-2 | ability=ABILITY_GLUTTONY | nature=NATURE_ADAMANT | stat_points=2/32/0/0/0/32 | moves=MOVE_THROAT_CHOP,MOVE_PROTECT,MOVE_BELLY_DRUM,MOVE_HELPING_HAND
   3. SPECIES_SLOWKING @ ITEM_MENTAL_HERB | level_offset=-2 | ability=ABILITY_REGENERATOR | nature=NATURE_QUIET | stat_points=32/0/16/0/18/0 | moves=MOVE_TRICK_ROOM,MOVE_SCALD,MOVE_PSYCHIC,MOVE_PROTECT
 source_note: Master-audited current Champions design; implementation must match exactly.
 === END ENCOUNTER ===
@@ -11814,7 +11814,7 @@ team:
   1. SPECIES_JELLICENT @ ITEM_SITRUS_BERRY | level_offset=-2 | ability=ABILITY_WATER_ABSORB | nature=NATURE_QUIET | stat_points=32/0/2/32/0/0 | moves=MOVE_TRICK_ROOM,MOVE_WATER_SPOUT,MOVE_SHADOW_BALL,MOVE_RECOVER
   2. SPECIES_AMOONGUSS @ ITEM_COBA_BERRY | level_offset=-2 | ability=ABILITY_REGENERATOR | nature=NATURE_CALM | stat_points=32/0/2/0/32/0 | moves=MOVE_SPORE,MOVE_RAGE_POWDER,MOVE_GIGA_DRAIN,MOVE_PROTECT
   3. SPECIES_LANTURN @ ITEM_ASSAULT_VEST | level_offset=-2 | ability=ABILITY_VOLT_ABSORB | nature=NATURE_MODEST | stat_points=2/0/0/32/0/32 | moves=MOVE_SCALD,MOVE_THUNDERBOLT,MOVE_ICY_WIND,MOVE_VOLT_SWITCH
-  4. SPECIES_URSHIFU_RAPID_STRIKE @ ITEM_MYSTIC_WATER | level_offset=-2 | ability=ABILITY_UNSEEN_FIST | nature=NATURE_JOLLY | stat_points=2/32/0/0/0/32 | moves=MOVE_SURGING_STRIKES,MOVE_CLOSE_COMBAT,MOVE_AQUA_JET,MOVE_PROTECT
+  4. SPECIES_URSHIFU_RAPID_STRIKE @ ITEM_MYSTIC_WATER | level_offset=-2 | ability=ABILITY_UNSEEN_FIST | nature=NATURE_ADAMANT | stat_points=2/32/0/0/0/32 | moves=MOVE_SURGING_STRIKES,MOVE_CLOSE_COMBAT,MOVE_AQUA_JET,MOVE_PROTECT
 source_note: Master-audited current Champions design; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -14358,7 +14358,7 @@ branches:
 trainer_id: TRAINER_VIRGIL
 format: double
 team:
-  1. SPECIES_MEDICHAM @ ITEM_FOCUS_SASH | level_offset=-2 | ability=ABILITY_PURE_POWER | nature=NATURE_JOLLY | stat_points=32/32/2/0/0/0 | moves=MOVE_FAKE_OUT,MOVE_CLOSE_COMBAT,MOVE_POISON_JAB,MOVE_ROCK_SLIDE
+  1. SPECIES_MEDICHAM @ ITEM_FOCUS_SASH | level_offset=-2 | ability=ABILITY_PURE_POWER | nature=NATURE_ADAMANT | stat_points=32/32/2/0/0/0 | moves=MOVE_FAKE_OUT,MOVE_CLOSE_COMBAT,MOVE_POISON_JAB,MOVE_ROCK_SLIDE
   2. SPECIES_BRONZONG @ ITEM_MENTAL_HERB | level_offset=-2 | ability=ABILITY_LEVITATE | nature=NATURE_ADAMANT | stat_points=32/0/32/0/2/0 | moves=MOVE_TRICK_ROOM,MOVE_GYRO_BALL,MOVE_HYPNOSIS,MOVE_PROTECT
   3. SPECIES_DUSCLOPS @ ITEM_EVIOLITE | level_offset=-2 | ability=ABILITY_FRISK | nature=NATURE_SASSY | stat_points=32/0/32/0/2/0 | moves=MOVE_NIGHT_SHADE,MOVE_TRICK_ROOM,MOVE_PAIN_SPLIT,MOVE_WILL_O_WISP
   4. SPECIES_RHYPERIOR @ ITEM_WEAKNESS_POLICY | level_offset=-2 | ability=ABILITY_SOLID_ROCK | nature=NATURE_BRAVE | stat_points=32/32/2/0/0/0 | moves=MOVE_ROCK_SLIDE,MOVE_HIGH_HORSEPOWER,MOVE_ICE_PUNCH,MOVE_PROTECT
@@ -14682,7 +14682,7 @@ branches:
 trainer_id: TRAINER_NICHOLAS
 format: double
 team:
-  1. SPECIES_INDEEDEE_F @ ITEM_COVERT_CLOAK | level_offset=0 | ability=ABILITY_PSYCHIC_SURGE | nature=NATURE_TIMID | stat_points=32/0/32/0/2/0 | moves=MOVE_FOLLOW_ME,MOVE_EXPANDING_FORCE,MOVE_HELPING_HAND,MOVE_PROTECT
+  1. SPECIES_INDEEDEE_F @ ITEM_COVERT_CLOAK | level_offset=0 | ability=ABILITY_PSYCHIC_SURGE | nature=NATURE_MODEST | stat_points=32/0/32/0/2/0 | moves=MOVE_FOLLOW_ME,MOVE_EXPANDING_FORCE,MOVE_HELPING_HAND,MOVE_PROTECT
   2. SPECIES_HATTERENE @ ITEM_LIFE_ORB | level_offset=0 | ability=ABILITY_MAGIC_BOUNCE | nature=NATURE_MODEST | stat_points=32/0/2/32/0/0 | moves=MOVE_EXPANDING_FORCE,MOVE_DAZZLING_GLEAM,MOVE_TRICK_ROOM,MOVE_PROTECT
   3. SPECIES_MUSHARNA @ ITEM_MENTAL_HERB | level_offset=-2 | ability=ABILITY_FOREWARN | nature=NATURE_MODEST | stat_points=32/0/2/0/32/0 | moves=MOVE_TRICK_ROOM,MOVE_PSYCHIC,MOVE_HELPING_HAND,MOVE_LIGHT_SCREEN
   4. SPECIES_WOBBUFFET @ ITEM_SITRUS_BERRY | level_offset=-2 | ability=ABILITY_SHADOW_TAG | nature=NATURE_BOLD | stat_points=32/0/2/0/32/0 | moves=MOVE_MIRROR_COAT,MOVE_COUNTER,MOVE_ENCORE,MOVE_CHARM
@@ -14755,9 +14755,9 @@ branches:
 trainer_id: TRAINER_TATE_AND_LIZA_1
 format: double
 team:
-  1. SPECIES_TAPU_LELE @ ITEM_LIFE_ORB | level_offset=0 | ability=ABILITY_PSYCHIC_SURGE | nature=NATURE_TIMID | stat_points=2/0/0/32/0/32 | moves=MOVE_PSYCHIC,MOVE_MOONBLAST,MOVE_TAUNT,MOVE_PROTECT
+  1. SPECIES_TAPU_LELE @ ITEM_LIFE_ORB | level_offset=0 | ability=ABILITY_PSYCHIC_SURGE | nature=NATURE_MODEST | stat_points=2/0/0/32/0/32 | moves=MOVE_PSYCHIC,MOVE_MOONBLAST,MOVE_TAUNT,MOVE_PROTECT
   2. SPECIES_LUNALA @ ITEM_POWER_HERB | level_offset=0 | ability=ABILITY_SHADOW_SHIELD | nature=NATURE_MODEST | stat_points=2/0/0/32/0/32 | moves=MOVE_METEOR_BEAM,MOVE_MOONBLAST,MOVE_MOONGEIST_BEAM,MOVE_PROTECT
-  3. SPECIES_VICTINI @ ITEM_CLEAR_AMULET | level_offset=1 | ability=ABILITY_VICTORY_STAR | nature=NATURE_JOLLY | stat_points=2/32/0/0/0/32 | moves=MOVE_V_CREATE,MOVE_ENCORE,MOVE_PROTECT,MOVE_SEARING_SHOT
+  3. SPECIES_VICTINI @ ITEM_CLEAR_AMULET | level_offset=1 | ability=ABILITY_VICTORY_STAR | nature=NATURE_ADAMANT | stat_points=2/32/0/0/0/32 | moves=MOVE_V_CREATE,MOVE_ENCORE,MOVE_PROTECT,MOVE_SEARING_SHOT
   4. SPECIES_CRESSELIA @ ITEM_SITRUS_BERRY | level_offset=0 | ability=ABILITY_LEVITATE | nature=NATURE_MODEST | stat_points=32/0/2/0/32/0 | moves=MOVE_PROTECT,MOVE_ICY_WIND,MOVE_HELPING_HAND,MOVE_MOONLIGHT
   5. SPECIES_SLOWBRO @ ITEM_LEFTOVERS | level_offset=0 | ability=ABILITY_REGENERATOR | nature=NATURE_QUIET | stat_points=32/0/32/0/2/0 | moves=MOVE_TRICK_ROOM,MOVE_SCALD,MOVE_SLACK_OFF,MOVE_PROTECT
   6. SPECIES_CALYREX_ICE @ ITEM_WEAKNESS_POLICY | level_offset=2 | ability=ABILITY_AS_ONE_ICE_RIDER | nature=NATURE_BRAVE | stat_points=32/32/2/0/0/0 | moves=MOVE_TRICK_ROOM,MOVE_GLACIAL_LANCE,MOVE_CLOSE_COMBAT,MOVE_PROTECT
@@ -17114,15 +17114,15 @@ quality_target: 10
 difficulty_target: 8.0
 difficulty_observed: UNPLAYED
 fatigue_role: notable_optional_or_route_ace
-primary_question: Can the player read Slowking's Trick Room opening, solve the Trick Room, Tailwind, setup, spread pressure board, and still preserve an answer for Staraptor's Tailwind finish?
-theme_and_tempo: This SootopolisCity Gym B1F encounter is a Trick Room, Tailwind, setup, spread pressure puzzle. Slowking carries Mental Herb with Regenerator and lists Trick Room among its public options; Azumarill carries Sitrus Berry with Huge Power and lists Belly Drum among its public options; Relicanth carries Life Orb with Rock Head and lists Waterfall among its public options; Staraptor carries Staraptite with Intimidate and lists Tailwind among its public options.
+primary_question: Can the player read Slowking's Trick Room opening, solve the Trick Room, setup, spread pressure board, and still preserve an answer for Staraptor's Helping Hand finish?
+theme_and_tempo: This SootopolisCity Gym B1F encounter is a Trick Room, setup, spread pressure puzzle. Slowking carries Mental Herb with Regenerator and lists Trick Room among its public options; Azumarill carries Sitrus Berry with Huge Power and lists Belly Drum among its public options; Relicanth carries Life Orb with Rock Head and lists Waterfall among its public options; Staraptor carries Staraptite with Intimidate and lists Helping Hand among its public options.
 intentional_weakness: The broad answers are to Taunt or reverse Trick Room, stall its finite turns, or remove the setter. The player can also pressure Slowking before the plan stabilizes or isolate Staraptor; no single species or exact move order is required.
-first_loss_lesson: Decide whether Slowking is damage or infrastructure, then preserve the answer that best denies Staraptor's Tailwind rather than spending it on Azumarill, Relicanth.
-strongest_part: Slowking's Trick Room creates a readable handoff through Azumarill, Relicanth into Staraptor's Tailwind, so the team has one identity without becoming one scripted solution.
+first_loss_lesson: Decide whether Slowking is damage or infrastructure, then preserve the answer that best denies Staraptor's Helping Hand rather than spending it on Azumarill, Relicanth.
+strongest_part: Slowking's Trick Room creates a readable handoff through Azumarill, Relicanth into Staraptor's Helping Hand, so the team has one identity without becoming one scripted solution.
 weakest_link: If the player breaks the Trick Room layer or removes Slowking early, the remaining members must win through ordinary positioning; that intentional seam keeps difficulty 8.0 honest.
 competitive_references: Pinned Pokemon Showdown Champions learnsets and doubles roles; Emerald Champions authored battle corpus
 dialogue_status: implemented native source dialogue; literal width verified; bespoke team-specific rewrite not claimed
-reservation_status: spends the Slowking plus Staraptor Trick Room, Tailwind, setup, spread pressure pairing here; checked against campaign species, Mega, legendary, and rolling-strategy ledgers
+reservation_status: spends the Slowking plus Staraptor Trick Room, setup, spread pressure pairing here; checked against campaign species, Mega, legendary, and rolling-strategy ledgers
 trainer_ids: TRAINER_BETHANY
 branches:
 --- BRANCH TRAINER_BETHANY ---
@@ -17132,7 +17132,7 @@ team:
   1. SPECIES_SLOWKING @ ITEM_MENTAL_HERB | level_offset=-1 | ability=ABILITY_REGENERATOR | nature=NATURE_QUIET | stat_points=32/0/16/0/18/0 | moves=MOVE_TRICK_ROOM,MOVE_SCALD,MOVE_PSYCHIC,MOVE_PROTECT
   2. SPECIES_AZUMARILL @ ITEM_SITRUS_BERRY | level_offset=-1 | ability=ABILITY_HUGE_POWER | nature=NATURE_BRAVE | stat_points=32/32/2/0/0/0 | moves=MOVE_BELLY_DRUM,MOVE_AQUA_JET,MOVE_PLAY_ROUGH,MOVE_PROTECT
   3. SPECIES_RELICANTH @ ITEM_LIFE_ORB | level_offset=-1 | ability=ABILITY_ROCK_HEAD | nature=NATURE_BRAVE | stat_points=32/32/2/0/0/0 | moves=MOVE_WATERFALL,MOVE_ROCK_SLIDE,MOVE_HEAD_SMASH,MOVE_PROTECT
-  4. SPECIES_STARAPTOR @ ITEM_STARAPTITE | level_offset=2 | ability=ABILITY_INTIMIDATE | nature=NATURE_JOLLY | stat_points=2/32/0/0/0/32 | moves=MOVE_BRAVE_BIRD,MOVE_CLOSE_COMBAT,MOVE_TAILWIND,MOVE_PROTECT
+  4. SPECIES_STARAPTOR @ ITEM_STARAPTITE | level_offset=2 | ability=ABILITY_INTIMIDATE | nature=NATURE_ADAMANT | stat_points=2/32/0/0/0/32 | moves=MOVE_BRAVE_BIRD,MOVE_CLOSE_COMBAT,MOVE_HELPING_HAND,MOVE_PROTECT
 source_note: Master-audited current Champions design; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -17347,7 +17347,7 @@ team:
   1. SPECIES_INDEEDEE_F @ ITEM_PSYCHIC_SEED | level_offset=0 | ability=ABILITY_PSYCHIC_SURGE | nature=NATURE_BOLD | stat_points=32/0/32/0/2/0 | moves=MOVE_FOLLOW_ME,MOVE_PSYCHIC,MOVE_HELPING_HAND,MOVE_PROTECT
   2. SPECIES_HATTERENE @ ITEM_LIFE_ORB | level_offset=0 | ability=ABILITY_MAGIC_BOUNCE | nature=NATURE_QUIET | stat_points=32/0/2/32/0/0 | moves=MOVE_EXPANDING_FORCE,MOVE_DAZZLING_GLEAM,MOVE_MYSTICAL_FIRE,MOVE_TRICK_ROOM
   3. SPECIES_REUNICLUS @ ITEM_ASSAULT_VEST | level_offset=0 | ability=ABILITY_MAGIC_GUARD | nature=NATURE_QUIET | stat_points=32/0/2/32/0/0 | moves=MOVE_EXPANDING_FORCE,MOVE_FOCUS_BLAST,MOVE_SHADOW_BALL,MOVE_ENERGY_BALL
-  4. SPECIES_GARDEVOIR @ ITEM_GARDEVOIRITE | level_offset=0 | ability=ABILITY_TELEPATHY | nature=NATURE_TIMID | stat_points=2/0/0/32/0/32 | moves=MOVE_HYPER_VOICE,MOVE_PSYCHIC,MOVE_MYSTICAL_FIRE,MOVE_PROTECT
+  4. SPECIES_GARDEVOIR @ ITEM_GARDEVOIRITE | level_offset=0 | ability=ABILITY_TELEPATHY | nature=NATURE_MODEST | stat_points=2/0/0/32/0/32 | moves=MOVE_HYPER_VOICE,MOVE_PSYCHIC,MOVE_MYSTICAL_FIRE,MOVE_PROTECT
 source_note: Master-audited current Champions design; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -17567,7 +17567,7 @@ team:
   3. SPECIES_SABLEYE @ ITEM_MENTAL_HERB | level_offset=0 | ability=ABILITY_PRANKSTER | nature=NATURE_BOLD | stat_points=32/0/2/0/32/0 | moves=MOVE_PSYCH_UP,MOVE_FOUL_PLAY,MOVE_PAIN_SPLIT,MOVE_DARK_PULSE
   4. SPECIES_WEAVILE @ ITEM_CLEAR_AMULET | level_offset=-1 | ability=ABILITY_PRESSURE | nature=NATURE_JOLLY | stat_points=2/32/0/0/0/32 | moves=MOVE_FAKE_OUT,MOVE_KNOCK_OFF,MOVE_ICICLE_CRASH,MOVE_PROTECT
   5. SPECIES_CONKELDURR @ ITEM_FLAME_ORB | level_offset=-1 | ability=ABILITY_GUTS | nature=NATURE_ADAMANT | stat_points=2/32/0/0/0/32 | moves=MOVE_DRAIN_PUNCH,MOVE_ICE_PUNCH,MOVE_KNOCK_OFF,MOVE_MACH_PUNCH
-  6. SPECIES_GUZZLORD @ ITEM_SITRUS_BERRY | level_offset=1 | ability=ABILITY_BEAST_BOOST | nature=NATURE_MODEST | stat_points=2/32/0/32/0/0 | moves=MOVE_KNOCK_OFF,MOVE_DRACO_METEOR,MOVE_HEAT_WAVE,MOVE_PROTECT
+  6. SPECIES_GUZZLORD @ ITEM_SITRUS_BERRY | level_offset=1 | ability=ABILITY_BEAST_BOOST | nature=NATURE_ADAMANT | stat_points=2/32/0/32/0/0 | moves=MOVE_KNOCK_OFF,MOVE_DRACO_METEOR,MOVE_HEAT_WAVE,MOVE_PROTECT
 source_note: Master-audited current Champions design; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -18432,8 +18432,8 @@ team:
   1. SPECIES_CRESSELIA @ ITEM_MENTAL_HERB | level_offset=0 | ability=ABILITY_LEVITATE | nature=NATURE_BOLD | stat_points=32/0/2/0/32/0 | moves=MOVE_TRICK_ROOM,MOVE_MOONLIGHT,MOVE_PSYCHIC,MOVE_HELPING_HAND
   2. SPECIES_VOLCANION @ ITEM_ASSAULT_VEST | level_offset=0 | ability=ABILITY_WATER_ABSORB | nature=NATURE_QUIET | stat_points=32/0/2/32/0/0 | moves=MOVE_STEAM_ERUPTION,MOVE_HEAT_WAVE,MOVE_EARTH_POWER,MOVE_SLUDGE_BOMB
   3. SPECIES_MAWILE @ ITEM_MAWILITE | level_offset=0 | ability=ABILITY_HYPER_CUTTER | nature=NATURE_BRAVE | stat_points=32/32/2/0/0/0 | moves=MOVE_PLAY_ROUGH,MOVE_IRON_HEAD,MOVE_SUCKER_PUNCH,MOVE_PROTECT
-  4. SPECIES_SALAMENCE @ ITEM_LIFE_ORB | level_offset=0 | ability=ABILITY_INTIMIDATE | nature=NATURE_TIMID | stat_points=2/0/0/32/0/32 | moves=MOVE_DRACO_METEOR,MOVE_HURRICANE,MOVE_FLAMETHROWER,MOVE_TAILWIND
-  5. SPECIES_KARTANA @ ITEM_FOCUS_SASH | level_offset=0 | ability=ABILITY_BEAST_BOOST | nature=NATURE_JOLLY | stat_points=2/32/0/0/0/32 | moves=MOVE_LEAF_BLADE,MOVE_SACRED_SWORD,MOVE_NIGHT_SLASH,MOVE_PROTECT
+  4. SPECIES_SALAMENCE @ ITEM_LIFE_ORB | level_offset=0 | ability=ABILITY_INTIMIDATE | nature=NATURE_MODEST | stat_points=2/0/0/32/0/32 | moves=MOVE_DRACO_METEOR,MOVE_HURRICANE,MOVE_FLAMETHROWER,MOVE_PROTECT
+  5. SPECIES_KARTANA @ ITEM_FOCUS_SASH | level_offset=0 | ability=ABILITY_BEAST_BOOST | nature=NATURE_ADAMANT | stat_points=2/32/0/0/0/32 | moves=MOVE_LEAF_BLADE,MOVE_SACRED_SWORD,MOVE_NIGHT_SLASH,MOVE_PROTECT
   6. SPECIES_SLURPUFF @ ITEM_SITRUS_BERRY | level_offset=0 | ability=ABILITY_UNBURDEN | nature=NATURE_JOLLY | stat_points=2/32/0/0/0/32 | moves=MOVE_COTTON_GUARD,MOVE_PLAY_ROUGH,MOVE_DRAIN_PUNCH,MOVE_PROTECT
 source_note: Master-audited current Champions design; implementation must match exactly.
 === END ENCOUNTER ===

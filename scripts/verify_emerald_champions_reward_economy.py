@@ -459,8 +459,13 @@ def verify_inert_item_cleanup() -> None:
 
 def verify_finite_side_rewards() -> None:
     tent = read("src/battle_tent.c")
-    require("static const u16 sFallarborTentRewards[] = {ITEM_PP_MAX};" in tent,
-            "Fallarbor Battle Tent still has a disposable medicine prize")
+    for label in ("sVerdanturfTentRewards", "sFallarborTentRewards", "sSlateportTentRewards"):
+        body = re.search(r"static const u16 " + label + r"\[\] = \{(.*?)\};", tent, re.S)
+        require(body is not None, f"{label} missing from battle_tent.c")
+        items = re.findall(r"ITEM_[A-Z0-9_]+", body.group(1))
+        require(len(items) >= 10, f"{label} is not a real prize pool ({len(items)} entries)")
+        for medicine in ("ITEM_FULL_HEAL", "ITEM_NEST_BALL", "ITEM_POTION", "ITEM_REVIVE", "ITEM_RARE_CANDY"):
+            require(medicine not in items, f"{label} still pays a disposable prize: {medicine}")
 
     house = read("data/maps/FallarborTown_MoveRelearnersHouse/scripts.inc")
     for obsolete in ("TeachMoveRelearnerMove", "setmoverelearnerstate", "chooseboxmon"):

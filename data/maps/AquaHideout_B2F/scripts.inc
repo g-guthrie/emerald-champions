@@ -134,14 +134,14 @@ AquaHideout_B2F_Text_Grunt6PostBattle:
 	.string "chew me out…$"
 
 AquaHideout_B2F_Text_Grunt8Intro:
-	.string "When I joined TEAM AQUA, the first\n"
-	.string "thing I had to learn was how these\l"
-	.string "warp panels connected.$"
+	.string "First thing they taught me here was how\n"
+	.string "the warp panels connect.\p"
+	.string "Second thing was doubles. I'm better\n"
+	.string "at the panels.$"
 
 AquaHideout_B2F_Text_Grunt8Defeat:
-	.string "I was too occupied thinking about\n"
-	.string "the warp panels…$"
+	.string "Too busy thinking about panels…$"
 
 AquaHideout_B2F_Text_Grunt8PostBattle:
-	.string "I'll have to learn about how I can\n"
-	.string "battle more effectively…$"
+	.string "I'll learn to battle properly. Someday.\n"
+	.string "The panels are just more fun.$"

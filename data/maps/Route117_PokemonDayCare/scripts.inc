@@ -17,13 +17,21 @@ Route117_PokemonDayCare_EventScript_TogepiEgg::
 	giveegg SPECIES_TOGEPI
 	setflag FLAG_EC_RECEIVED_DAYCARE_TOGEPI_EGG
 	msgbox Route117_PokemonDayCare_Text_TogepiEggReceived, MSGBOX_DEFAULT
+	goto Route117_PokemonDayCare_EventScript_TryGiveOvalCharm
+
+Route117_PokemonDayCare_EventScript_TryGiveOvalCharm::
+	goto_if_set FLAG_EC_RECEIVED_OVAL_CHARM, Route117_PokemonDayCare_EventScript_TogepiEggEnd
+	msgbox Route117_PokemonDayCare_Text_OvalCharmGift, MSGBOX_DEFAULT
+	giveitem ITEM_OVAL_CHARM
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_EC_RECEIVED_OVAL_CHARM
+Route117_PokemonDayCare_EventScript_TogepiEggEnd::
 	release
 	end
 
 Route117_PokemonDayCare_EventScript_TogepiEggAfter::
 	msgbox Route117_PokemonDayCare_Text_TogepiEggAfter, MSGBOX_DEFAULT
-	release
-	end
+	goto Route117_PokemonDayCare_EventScript_TryGiveOvalCharm
 
 Route117_PokemonDayCare_EventScript_TogepiEggDeclined::
 	msgbox Route117_PokemonDayCare_Text_TogepiEggDeclined, MSGBOX_DEFAULT
@@ -55,3 +63,7 @@ Route117_PokemonDayCare_Text_TogepiEggDeclined:
 Route117_PokemonDayCare_Text_TogepiEggNoRoom:
 	.string "Your party is full. Make one open slot,\n"
 	.string "then return for the EGG.$"
+
+Route117_PokemonDayCare_Text_OvalCharmGift:
+	.string "Take this OVAL CHARM as well. EGGS\n"
+	.string "turn up far more often with it.$"

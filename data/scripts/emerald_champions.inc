@@ -274,7 +274,14 @@ EmeraldChampions_EventScript_BattleSetOpenStyleList:
 	special GetSelectedMonEmeraldChampionsBattleSetCount
 	goto_if_ge VAR_0x8006, VAR_RESULT, EmeraldChampions_EventScript_BattleSetChooseFormat
 	copyvar VAR_0x8005, VAR_0x8006
-	goto EmeraldChampions_EventScript_BattleSetConfirm
+	goto EmeraldChampions_EventScript_BattleSetPreview
+
+@ Read the set out loud before the yes/no prompt: four moves, then Ability,
+@ nature and held item. Declining the prompt returns to the style list.
+EmeraldChampions_EventScript_BattleSetPreview:
+	copyvar VAR_0x8004, VAR_0x800A
+	special BufferSelectedMonEmeraldChampionsBattleSetPreview
+	msgbox gStringVar4, MSGBOX_DEFAULT
 
 EmeraldChampions_EventScript_BattleSetConfirm:
 	copyvar VAR_0x8004, VAR_0x800A

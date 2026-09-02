@@ -522,6 +522,7 @@ gSpecials::
 	def_special ApplySelectedMonEmeraldChampionsBattleSet
 	def_special GetSelectedMonEmeraldChampionsBattleSetCount
 	def_special BufferSelectedMonEmeraldChampionsBattleSetName
+	def_special BufferSelectedMonEmeraldChampionsBattleSetPreview
 	def_special BufferSelectedMonCurrentEmeraldChampionsBattleSet
 	def_special BufferSelectedMonEmeraldChampionsStatPointSummary
 	def_special BufferSelectedMonEmeraldChampionsStatPointDetail
@@ -538,6 +539,7 @@ gSpecials::
 	def_special BufferCurrentMapRouteSignSpecies
 	def_special TryUnlockDarkraiLegendarySign
 	def_special TryDiscoverEligibleLegendarySign
+	def_special BufferLegendarySignLedger
 	def_special TryGiveArceusLegendarySignMasteryReward
 	def_special ChampionsCircuitCanEnter
 	def_special ChampionsCircuitBegin

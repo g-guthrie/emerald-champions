@@ -12,16 +12,16 @@ MagmaHideout_3F_1R_EventScript_Grunt16::
 	end
 
 MagmaHideout_3F_1R_Text_Grunt9Intro:
-	.string "What did I do to deserve this guard\n"
-	.string "posting?\p"
-	.string "My left ear is burning up!$"
+	.string "Guard posting next to the lava. My left\n"
+	.string "ear's been cooking for an hour.\p"
+	.string "At least fighting you means I can move.$"
 
 MagmaHideout_3F_1R_Text_Grunt9Defeat:
-	.string "I'm getting heat exhaustion…$"
+	.string "Heat exhaustion. Definitely the heat.$"
 
 MagmaHideout_3F_1R_Text_Grunt9PostBattle:
-	.string "Do you think it's odd that we're wearing\n"
-	.string "hoods in this magma-filled volcano?$"
+	.string "Do you think it's weird that we wear\n"
+	.string "hoods inside a volcano? Be honest.$"
 
 MagmaHideout_3F_1R_Text_Grunt16Intro:
 	.string "MAXIE offers a world people can predict,\n"

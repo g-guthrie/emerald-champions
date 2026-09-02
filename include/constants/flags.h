@@ -679,8 +679,8 @@
 #define FLAG_EC_DEWFORD_TROPIUS_TRADE           0x270
 #define FLAG_EC_VERDANTURF_HAPPINY_TRADE        0x271
 #define FLAG_EC_RECEIVED_DAYCARE_TOGEPI_EGG     0x272
-#define FLAG_UNUSED_0x273  0x273 // Unused Flag
-#define FLAG_UNUSED_0x274  0x274 // Unused Flag
+#define FLAG_EC_RECEIVED_CATCHING_CHARM         0x273
+#define FLAG_EC_RECEIVED_OVAL_CHARM             0x274
 #define FLAG_UNUSED_0x275  0x275 // Unused Flag
 #define FLAG_UNUSED_0x276  0x276 // Unused Flag
 #define FLAG_UNUSED_0x277  0x277 // Unused Flag

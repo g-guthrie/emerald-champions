@@ -1411,6 +1411,21 @@ static u8 GetPartyBoxPaletteFlags(u8 slot, u8 animNum)
     }
     if (gPartyMenu.action == PARTY_ACTION_SOFTBOILED && slot == gPartyMenu.slotId )
         palFlags |= PARTY_PAL_TO_SOFTBOIL;
+    // Double battle, both of the player's Pokémon fainted: while the second
+    // replacement is being chosen, tint the first pick with the same
+    // "selected to switch" palette the party menu uses everywhere else, so it
+    // reads as already taken instead of looking like a free choice.
+    if (gMain.inBattle && IsDoubleBattle() && gBattlerInMenuId < gBattlersCount)
+    {
+        enum BattlerId partner = GetPartnerBattler(gBattlerInMenuId);
+
+        if (partner != gBattlerInMenuId
+         && BattlersShareParty(gBattlerInMenuId, partner)
+         && gBattleResources->bufferB[partner][0] == CONTROLLER_CHOSENMONRETURNVALUE
+         && gBattleResources->bufferB[partner][1] != PARTY_SIZE
+         && GetPartyIdFromBattleSlot(slot) == gBattleResources->bufferB[partner][1])
+            palFlags |= PARTY_PAL_TO_SWITCH;
+    }
 
     return palFlags;
 }
@@ -7930,6 +7945,27 @@ static bool8 TrySwitchInPokemon(void)
         GetMonNickname(&party[partySlot], gStringVar1);
         StringExpandPlaceholders(gStringVar4, gText_PkmnAlreadySelected);
         return FALSE;
+    }
+    // When both of the player's Pokémon faint on the same turn, both
+    // replacement prompts are emitted in one pass of Cmd_openpartyscreen, so
+    // the second prompt's "already chosen" slot (prevSelectedPartySlot) was
+    // filled in before the first pick existed. The first pick is still sitting
+    // in the partner controller's return buffer at this point, so consult it
+    // directly rather than letting the same Pokémon be chosen twice.
+    {
+        enum BattlerId partner = GetPartnerBattler(gBattlerInMenuId);
+
+        if (IsDoubleBattle()
+         && partner != gBattlerInMenuId
+         && BattlersShareParty(gBattlerInMenuId, partner)
+         && gBattleResources->bufferB[partner][0] == CONTROLLER_CHOSENMONRETURNVALUE
+         && gBattleResources->bufferB[partner][1] != PARTY_SIZE
+         && battlePartyId == gBattleResources->bufferB[partner][1])
+        {
+            GetMonNickname(&party[partySlot], gStringVar1);
+            StringExpandPlaceholders(gStringVar4, gText_PkmnAlreadySelected);
+            return FALSE;
+        }
     }
     if (gPartyMenu.action == PARTY_ACTION_ABILITY_PREVENTS)
     {

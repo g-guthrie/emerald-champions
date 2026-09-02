@@ -18,6 +18,7 @@
 #define B_PARALYSIS_CHANCE          GEN_LATEST // In Champions, paralysis has a 12.5% chance of not moving, instead of 25%.
 
 // Experience settings
+#define B_EC_BATTLE_EXP             FALSE      // Emerald Champions: battles award no experience at all. The Leveler is the only way to gain levels, so the exp phase (and its "gained 0 Exp. Points" message at the cap) is skipped entirely.
 #define B_EXP_CATCH                 GEN_LATEST // In Gen6+, the party gains experience when the player catches another Pokémon.
 #define B_TRAINER_EXP_MULTIPLIER    GEN_LATEST // In Gen7+, Trainer battles no longer increase total experience by 1.5x.
 #define B_SPLIT_EXP                 GEN_LATEST // In Gen6+, all Pokémon that participate in a battle gain full experience. In Gen5 and earlier, the total experience would be evenly split across them.

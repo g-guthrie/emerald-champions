@@ -95,7 +95,7 @@ Route110_TrickHouseEnd_EventScript_CompletedPuzzle4::
 	msgbox Route110_TrickHouseEnd_Text_AllNightToShoveBoulders, MSGBOX_DEFAULT
 	msgbox Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward, MSGBOX_DEFAULT
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
-	giveitem ITEM_SMOKE_BALL
+	giveitem ITEM_KINGS_ROCK
 	call_if_eq VAR_RESULT, FALSE, Route110_TrickHouseEnd_EventScript_BagFull
 	msgbox Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou, MSGBOX_DEFAULT
 	closemessage
@@ -156,6 +156,9 @@ Route110_TrickHouseEnd_EventScript_CompletedPuzzle8::
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	call Route110_TrickHouseEnd_EventScript_ChooseTent
 	call_if_eq VAR_RESULT, FALSE, Route110_TrickHouseEnd_EventScript_NoRoomForTent
+	msgbox Route110_TrickHouseEnd_Text_FinalPrizeMegaStone, MSGBOX_DEFAULT
+	giveitem ITEM_ALAKAZITE
+	call_if_eq VAR_RESULT, FALSE, Route110_TrickHouseEnd_EventScript_BagFull
 	msgbox Route110_TrickHouseEnd_Text_LeavingOnJourney, MSGBOX_DEFAULT
 	call Route110_TrickHouseEnd_EventScript_TrickMasterExit
 	special ResetTrickHouseNuggetFlag
@@ -354,3 +357,7 @@ Route110_TrickHouseEnd_Text_YoureIgnoringMe:
 	.string "Now, now! You're ignoring me now?\n"
 	.string "Now that, I consider heartbreaking!$"
 
+
+Route110_TrickHouseEnd_Text_FinalPrizeMegaStone:
+	.string "And one more thing! A true master of\n"
+	.string "tricks deserves a master of the mind.$"

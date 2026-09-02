@@ -68,17 +68,20 @@ EverGrandeCity_DrakesRoom_EventScript_Defeated::
 	end
 
 EverGrandeCity_DrakesRoom_Text_IntroSpeech:
-	.string "I am DRAKE, last of the ELITE FOUR.\p"
+	.string "DRAKE. Last of the four, and the one\n"
+	.string "who's sailed the longest.\p"
 	.string "Dragons remember every age of battle.\n"
-	.string "DIALGA reverses time; RESHIRAM drives\l"
-	.string "wind, and two aces can set themselves.\p"
-	.string "Deny the first clock without arriving\n"
-	.string "empty-handed at SALAMENCE.$"
+	.string "DIALGA runs the clock backwards,\l"
+	.string "RESHIRAM runs it forward, and two of\l"
+	.string "mine set up while you decide which.\p"
+	.string "Kill the first clock. Then meet\n"
+	.string "SALAMENCE with something left. Come on!$"
 
 EverGrandeCity_DrakesRoom_Text_Defeat:
-	.string "Superb. You mastered both clocks.$"
+	.string "Hah! Both clocks, and you still stood.\n"
+	.string "Superb, Trainer. Superb.$"
 
 EverGrandeCity_DrakesRoom_Text_PostBattleSpeech:
-	.string "You may heal now. Beyond that door,\n"
-	.string "WALLACE combines every lesson at once.\p"
-	.string "Go. The CHAMPION is waiting.$"
+	.string "Heal up. Beyond that door WALLACE will\n"
+	.string "throw every lesson at you at once.\p"
+	.string "Go on. The CHAMPION's waiting.$"

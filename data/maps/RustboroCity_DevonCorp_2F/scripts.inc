@@ -114,6 +114,11 @@ RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist::
 	goto_if_eq VAR_RESULT, 2, RustboroCity_DevonCorp_2F_EventScript_MagearnaPC
 	goto_if_eq VAR_RESULT, 3, RustboroCity_DevonCorp_2F_EventScript_MagearnaNoRoom
 	msgbox RustboroCity_DevonCorp_2F_Text_LegendarySignResearcherIntro, MSGBOX_DEFAULT
+	special BufferLegendarySignLedger
+	goto_if_eq VAR_RESULT, 0, RustboroCity_DevonCorp_2F_EventScript_CheckLegendarySign
+	msgbox RustboroCity_DevonCorp_2F_Text_ReviewAwakenedSigns, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, RustboroCity_DevonCorp_2F_EventScript_CheckLegendarySign
+	msgbox gStringVar4, MSGBOX_DEFAULT
 RustboroCity_DevonCorp_2F_EventScript_CheckLegendarySign::
 	special TryDiscoverEligibleLegendarySign
 	goto_if_eq VAR_RESULT, 0, RustboroCity_DevonCorp_2F_EventScript_NoLegendarySignYet
@@ -732,3 +737,7 @@ RustboroCity_DevonCorp_2F_Text_WhatToWorkOnNext:
 
 @ BEGIN EMERALD CHAMPIONS LEGENDARY ROOTS
 @ END EMERALD CHAMPIONS LEGENDARY ROOTS
+
+RustboroCity_DevonCorp_2F_Text_ReviewAwakenedSigns:
+	.string "Some awakened SIGNS are still waiting\n"
+	.string "for you. Review the list?$"

@@ -59,7 +59,7 @@ Ordinary table wild Pokémon arrive with one of their species' authored non-Mega
 
 ### Exploration rewards
 
-Poké Marts retain ordinary campaign progression and sell Rare Candies for $1,000 anywhere medicine is sold. Gyms award badges and one thematic Mega Stone instead of redundant TMs. World TMs and obsolete X-items have been converted into capture, recovery, PP, evolution, fossil, Mega, or story rewards. Berries remain a real cultivation economy.
+Poké Marts retain ordinary campaign progression. Rare Candy is never sold or awarded; the free Leveler replaces it entirely. Gyms award badges and one thematic Mega Stone instead of redundant TMs. World TMs and obsolete X-items have been converted into capture, recovery, PP, evolution, fossil, Mega, or story rewards. Berries remain a real cultivation economy.
 
 The complete Mega Stone and evolution-item archives open at the Center vendor after the eighth badge, before the League. That fulfills the game's promise that every Mega can be used in the authored campaign while preserving discovery value during most of the journey.
 

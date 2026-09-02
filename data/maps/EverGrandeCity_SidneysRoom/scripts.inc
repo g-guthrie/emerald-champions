@@ -71,16 +71,18 @@ EverGrandeCity_SidneysRoom_EventScript_Defeated::
 	end
 
 EverGrandeCity_SidneysRoom_Text_IntroSpeech:
-	.string "I'm SIDNEY, first of the ELITE FOUR.\p"
-	.string "Dark teams punish assumptions: Fake Out\n"
-	.string "may hide a pivot, sleep may hide speed,\l"
-	.string "and the fastest board may turn slow.\p"
-	.string "If you spend every answer on my famous\n"
-	.string "names, ABSOL will finish the lesson.$"
+	.string "Heh. SIDNEY. First door, best door.\p"
+	.string "My crew fights dirty. Fake Out, sleep,\n"
+	.string "a fast board that goes slow when you\l"
+	.string "blink. You'll think you've read it.\p"
+	.string "Then ABSOL shows up and the reading\n"
+	.string "was wrong. Let's go, kid!$"
 
 EverGrandeCity_SidneysRoom_Text_Defeat:
-	.string "You read every dirty handoff. Fun!$"
+	.string "Ha! You saw every trick coming. Fine.\n"
+	.string "That was a good time.$"
 
 EverGrandeCity_SidneysRoom_Text_PostBattleSpeech:
-	.string "Heal with your BAG if you need to. The\n"
-	.string "next room changes what 'safe' means.$"
+	.string "Patch up from your BAG if you want.\p"
+	.string "PHOEBE's next. Her idea of “safe” is\n"
+	.string "not gonna match yours.$"

@@ -466,9 +466,8 @@ MauvilleCity_Text_UncleHesTooPeppy:
 
 MauvilleCity_Text_WallyWantToChallengeGym:
 	.string "WALLY: Aww, UNCLE, please?\p"
-	.string "I want to challenge this GYM and see\n"
-	.string "how much better I've become.\p"
-	.string "Please? May I, please?$"
+	.string "I don't grind. Nobody has to. I built a\n"
+	.string "team, and a GYM is where you test one.$"
 
 MauvilleCity_Text_UncleYourePushingIt:
 	.string "UNCLE: Now hold on, WALLY.\p"
@@ -479,22 +478,18 @@ MauvilleCity_Text_UncleYourePushingIt:
 
 MauvilleCity_Text_WallyWeCanBeatAnyone:
 	.string "WALLY: I'm not pushing it.\p"
-	.string "If I combine forces with RALTS,\n"
-	.string "we can beat anyone!$"
+	.string "RALTS and I found five partners who\n"
+	.string "cover each other. We can beat anyone!$"
 
 MauvilleCity_Text_WallyWillYouBattleMe:
 	.string "WALLY: Oh! Hi, {PLAYER}!\p"
-	.string "I've gotten a lot stronger since\n"
-	.string "we met.\p"
-	.string "{PLAYER}, I want you and my UNCLE to\n"
-	.string "understand that.\p"
-	.string "{PLAYER}, please, will you have\n"
-	.string "a battle with me?$"
+	.string "I've built a real doubles team since we\n"
+	.string "met. I want you and my UNCLE to see it.\p"
+	.string "Please, will you battle me?$"
 
 MauvilleCity_Text_WallyMyUncleWontKnowImStrong:
-	.string "WALLY: Oh… If you won't battle me,\n"
-	.string "{PLAYER}, my UNCLE won't know that I've\l"
-	.string "become really strong.$"
+	.string "WALLY: Oh… If you won't, my UNCLE will\n"
+	.string "never believe my team is real.$"
 
 MauvilleCity_Text_UncleCanYouBattleWally:
 	.string "UNCLE: {PLAYER}{KUN}, was it?\n"
@@ -505,20 +500,23 @@ MauvilleCity_Text_UncleCanYouBattleWally:
 
 MauvilleCity_Text_WallyPleaseBattleMe:
 	.string "WALLY: {PLAYER}, please!\n"
-	.string "Battle with me, please.$"
+	.string "One battle.$"
 
 MauvilleCity_Text_WallyHereICome:
 	.string "WALLY: {PLAYER}, thank you.\p"
-	.string "Okay… Here I come!$"
+	.string "WEAVILE leads, ZAPDOS sets the wind…\n"
+	.string "Okay. Here I come!$"
 
 MauvilleCity_Text_WallyDefeat:
 	.string "WALLY: … … … … … … …\p"
-	.string "… … … … … … … …\p"
+	.string "My wind never came. You took the lead\n"
+	.string "before it mattered.\p"
 	.string "I lost…$"
 
 MauvilleCity_Text_WallyIllGoBackToVerdanturf:
-	.string "WALLY: UNCLE…\n"
-	.string "I'll go back to VERDANTURF…$"
+	.string "WALLY: UNCLE… I'll go back to\n"
+	.string "VERDANTURF.\p"
+	.string "I know what my team was missing now.$"
 
 MauvilleCity_Text_ThankYouNotEnoughToBattle:
 	.string "{PLAYER}, thank you.\n"

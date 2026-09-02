@@ -233,9 +233,9 @@ EverGrandeCity_ChampionsRoom_Text_IntroSpeech:
 	.string "and the power of Mega Evolution.\p"
 	.string "Nothing was hidden behind grinding. Every\n"
 	.string "loss asked you to build a better answer.\p"
-	.string "You restored SOOTOPOLIS's board and\n"
-	.string "survived four Champions without healing\l"
-	.string "inside their battles.\p"
+	.string "You restored SOOTOPOLIS's balance and\n"
+	.string "beat the ELITE FOUR without healing\l"
+	.string "inside a single battle.\p"
 	.string "Now face the region's complete exam. My\n"
 	.string "team shifts rhythm until yours breaks.\p"
 	.string "Show me the Champion you became!$"
@@ -255,26 +255,26 @@ EverGrandeCity_ChampionsRoom_Text_PostBattleSpeech:
 	.string "I proclaim you the new HOENN CHAMPION!$"
 
 EverGrandeCity_ChampionsRoom_Text_MayAdvice:
-	.string "MAY: {PLAYER}{KUN}!\p"
-	.string "Here's some advice before you challenge\n"
-	.string "the CHAMPION…$"
+	.string "MAY: {PLAYER}{KUN}! One thing before\n"
+	.string "WALLACE.\p"
+	.string "He changes rhythm the moment you settle.\n"
+	.string "The turn you just won says nothing\l"
+	.string "about the next one.$"
 
 EverGrandeCity_ChampionsRoom_Text_MayItsAlreadyOver:
-	.string "MAY: Huh?\n"
-	.string "What, what, what?\p"
-	.string "{PLAYER}{KUN}…\n"
-	.string "Could it be that…\l"
-	.string "It's already over?$"
+	.string "MAY: Huh? Wait. Your face…\p"
+	.string "{PLAYER}{KUN}… It's already over,\n"
+	.string "isn't it?$"
 
 EverGrandeCity_ChampionsRoom_Text_BrendanAdvice:
-	.string "BRENDAN: {PLAYER}!\p"
-	.string "How would you like some advice before\n"
-	.string "you challenge the CHAMPION?…$"
+	.string "BRENDAN: {PLAYER}! Advice before\n"
+	.string "WALLACE, if you want it.\p"
+	.string "He resets the pace every time you find\n"
+	.string "it. Don't trust a winning turn.$"
 
 EverGrandeCity_ChampionsRoom_Text_BrendanYouveWon:
 	.string "BRENDAN: {PLAYER}…\p"
-	.string "Are you trying to tell me…\n"
-	.string "You've beaten the CHAMPION?$"
+	.string "Don't tell me. You already beat him.$"
 
 EverGrandeCity_ChampionsRoom_Text_BirchArriveRatePokedex:
 	.string "BIRCH: You did it, {PLAYER}!\p"
@@ -302,16 +302,13 @@ EverGrandeCity_ChampionsRoom_Text_WallaceWaitOutside:
 
 EverGrandeCity_ChampionsRoom_Text_MayCongratulations:
 	.string "MAY: Groan…\p"
-	.string "… … … … … … … …\n"
 	.string "… … … … … … … …\p"
-	.string "I'm just joking! That's okay!\n"
-	.string "That's the rule!\p"
-	.string "{PLAYER}{KUN}!\n"
-	.string "Honestly, congratulations!$"
+	.string "Kidding! That's the rule, and you\n"
+	.string "earned every part of it.\p"
+	.string "{PLAYER}{KUN}! Honestly, congratulations!$"
 
 EverGrandeCity_ChampionsRoom_Text_BrendanCongratulations:
-	.string "BRENDAN: Whaaaat?! … … … … …\n"
-	.string "… … … … … … … …\p"
-	.string "It can't be helped if that's the rule.\p"
-	.string "{PLAYER}, way to go!\n"
-	.string "Congratulations!$"
+	.string "BRENDAN: Whaaaat?! … … … … …\p"
+	.string "Fine. That's the rule, and I watched\n"
+	.string "you earn it.\p"
+	.string "{PLAYER}, way to go! Congratulations!$"

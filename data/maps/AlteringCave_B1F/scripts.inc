@@ -15,9 +15,9 @@ AlteringCave_B1F_EventScript_Leaf::
 	applymovement LOCALID_PLAYER, AlteringCave_B1F_Movement_PlayerApproach
 	waitmovement 0
 	trainerbattle_no_intro_double TRAINER_LEAF_ALTERING_CAVE, AlteringCave_B1F_Text_LeafDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	checkitem ITEM_CATCHING_CHARM, 1
+	checkitem ITEM_MEWTWONITE_X, 1
 	goto_if_eq VAR_RESULT, TRUE, AlteringCave_B1F_EventScript_LeafComplete
-	giveitem ITEM_CATCHING_CHARM
+	giveitem ITEM_MEWTWONITE_X
 	goto_if_eq VAR_RESULT, FALSE, AlteringCave_B1F_EventScript_LeafBagFull
 AlteringCave_B1F_EventScript_LeafComplete::
 	msgbox AlteringCave_B1F_Text_LeafAfter, MSGBOX_DEFAULT
@@ -71,10 +71,10 @@ AlteringCave_B1F_Text_LeafDefeat:
 	.string "It did. That was a Champion's answer.$"
 
 AlteringCave_B1F_Text_LeafAfter:
-	.string "Take this CATCHING CHARM. It rewards\n"
-	.string "the patience these distortions demand.$"
+	.string "Take this MEWTWONITE X. What waits\n"
+	.string "below deserves its full power.$"
 AlteringCave_B1F_Text_LeafBagFull:
-	.string "Make room for the CATCHING CHARM.\n"
+	.string "Make room for the MEWTWONITE X.\n"
 	.string "Your reward will wait here.$"
 .set EC_SIGN_MEWTWO_ID, 61
 

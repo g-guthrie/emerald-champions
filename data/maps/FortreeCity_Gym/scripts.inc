@@ -151,87 +151,76 @@ FortreeCity_Gym_Text_GymGuidePostVictory:
 	.string "You've achieved liftoff!$"
 
 FortreeCity_Gym_Text_JaredIntro:
-	.string "Behold the elegant battle style of\n"
-	.string "BIRD POKéMON!$"
+	.string "SWOOBAT's SIMPLE doubles every CALM\n"
+	.string "MIND. NOCTOWL puts you to sleep first.\p"
+	.string "Wake up before STORED POWER lands!$"
 
 FortreeCity_Gym_Text_JaredDefeat:
-	.string "You…\n"
-	.string "You're strong…$"
+	.string "You broke the boost before it grew!$"
 
 FortreeCity_Gym_Text_JaredPostBattle:
-	.string "A TRAINER has to be smart to keep\n"
-	.string "up with unexpected turns of events.\p"
-	.string "Do you have the smarts to get to\n"
-	.string "our LEADER?$"
+	.string "TAUNT or a fast hit stops SIMPLE setup.\n"
+	.string "Never give a SIMPLE user a free turn.$"
 
 FortreeCity_Gym_Text_EdwardoIntro:
-	.string "The lovers of BIRD POKéMON aspire\n"
-	.string "to join this GYM.\p"
-	.string "As a member of the FORTREE GYM,\n"
-	.string "I'm not allowed to lose!$"
+	.string "DRIFBLIM sets TAILWIND, JUMPLUFF puts\n"
+	.string "you to sleep, STARAPTOR ends the game.\p"
+	.string "Which turn will you spend on which?$"
 
 FortreeCity_Gym_Text_EdwardoDefeat:
-	.string "It was too much of a load for me\n"
-	.string "to bear…$"
+	.string "You outlasted my wind…$"
 
 FortreeCity_Gym_Text_EdwardoPostBattle:
-	.string "The world is huge, and there are\n"
-	.string "countless tough TRAINERS.\p"
-	.string "I'm going to keep training and make\n"
-	.string "myself even stronger.$"
+	.string "TAILWIND lasts four turns. Stall the\n"
+	.string "wind, then punish what it carried.$"
 
 FortreeCity_Gym_Text_FlintIntro:
-	.string "There's no need for WINONA, our GYM\n"
-	.string "LEADER, to deal with you!\p"
-	.string "I'm plenty good enough for you!$"
+	.string "GUTS SWELLOW, SPEED BOOST YANMEGA, and\n"
+	.string "a TAILWIND behind them.\p"
+	.string "WINONA needn't see you if I win here!$"
 
 FortreeCity_Gym_Text_FlintDefeat:
-	.string "WINONA, I…\n"
-	.string "I lost!$"
+	.string "WINONA, I… The wind broke!$"
 
 FortreeCity_Gym_Text_FlintPostBattle:
-	.string "WINONA is cute and she's strong.\n"
-	.string "She's the ultimate LEADER!\p"
-	.string "Blush…$"
+	.string "Speed stacked on speed still dies to\n"
+	.string "priority. EXTREME SPEED is coming.$"
 
 FortreeCity_Gym_Text_AshleyIntro:
-	.string "WINONA taught me personally!\n"
-	.string "You can't beat me easily!$"
+	.string "PIDGEOT's HURRICANE never misses under\n"
+	.string "NO GUARD. SWANNA brings the rain.\p"
+	.string "Position, then power!$"
 
 FortreeCity_Gym_Text_AshleyDefeat:
-	.string "I was beaten…$"
+	.string "You changed the weather on me!$"
 
 FortreeCity_Gym_Text_AshleyPostBattle:
-	.string "Thanks to WINONA, the people of\n"
-	.string "FORTREE can live without fear.$"
+	.string "Your own weather move overwrites mine.\n"
+	.string "The sky belongs to whoever set it last.$"
 
 FortreeCity_Gym_Text_HumbertoIntro:
-	.string "When WINONA takes to battle, her face\n"
-	.string "shines with beautiful determination…\p"
-	.string "I'm not letting you witness that\n"
-	.string "lovely sight!$"
+	.string "GLISCOR heals through poison and sets\n"
+	.string "up. MANDIBUZZ taunts your answer.\p"
+	.string "Then MINIOR breaks its shell!$"
 
 FortreeCity_Gym_Text_HumbertoDefeat:
-	.string "Urk!\n"
-	.string "I couldn't stop you.$"
+	.string "You hit MINIOR before the shell came off!$"
 
 FortreeCity_Gym_Text_HumbertoPostBattle:
-	.string "You'd better watch it!\n"
-	.string "Don't get distracted staring at WINONA\l"
-	.string "or you'll go crashing down in a heap!$"
+	.string "SHELL SMASH needs one free turn.\n"
+	.string "FAKE OUT or a spread attack denies it.$"
 
 FortreeCity_Gym_Text_DariusIntro:
-	.string "You'd better know that there are all\n"
-	.string "sorts of FLYING-type POKéMON.\p"
-	.string "You do know that, right?$"
+	.string "EMOLGA's LIGHTNING ROD swallows every\n"
+	.string "ELECTRIC move aimed at my birds.\p"
+	.string "Attack through it, if you can!$"
 
 FortreeCity_Gym_Text_DariusDefeat:
-	.string "You seem to know your stuff!$"
+	.string "You aimed at the rod itself!$"
 
 FortreeCity_Gym_Text_DariusPostBattle:
-	.string "Sure, you beat me all right.\n"
-	.string "But you'd better watch it! Our LEADER\l"
-	.string "WINONA's POKéMON are all business.$"
+	.string "Remove the redirect first. The birds\n"
+	.string "behind it are only fast, not sturdy.$"
 
 FortreeCity_Gym_Text_WinonaIntro:
 	.string "I am WINONA, FORTREE's GYM LEADER.\p"

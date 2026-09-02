@@ -60,33 +60,24 @@ CaveOfOrigin_B1F_EventScript_AtSkyPillar::
 	end
 
 CaveOfOrigin_B1F_Text_WallaceStory:
-	.string "Ah, so you are {PLAYER}{KUN}?\n"
-	.string "I've heard tales of your exploits.\p"
-	.string "My name is WALLACE.\p"
-	.string "I was once the GYM LEADER of\n"
-	.string "SOOTOPOLIS, but something came up.\p"
-	.string "So now, I've entrusted my mentor JUAN\n"
-	.string "with the GYM's operation.\p"
+	.string "Ah, so you are {PLAYER}{KUN}. STEVEN\n"
+	.string "told me how you read the SIGNS.\p"
+	.string "My name is WALLACE. I led SOOTOPOLIS's\n"
+	.string "GYM until this, and left it to JUAN.\p"
 	.string "… … … … … …\n"
 	.string "… … … … … …\p"
-	.string "GROUDON and KYOGRE, the two POKéMON\n"
-	.string "wreaking havoc here, are considered\l"
-	.string "to be super-ancient POKéMON.\p"
-	.string "But there aren't just two super-\n"
-	.string "ancient POKéMON.\p"
-	.string "There is one more somewhere.\p"
-	.string "Somewhere, there is a super-\n"
-	.string "ancient POKéMON named RAYQUAZA.\p"
-	.string "It's said that it was RAYQUAZA that\n"
-	.string "becalmed the two combatants in\l"
-	.string "the distant past.\p"
-	.string "But even I have no clue as to\n"
-	.string "RAYQUAZA's whereabouts…$"
+	.string "GROUDON and KYOGRE are not enemies. The\n"
+	.string "network amplified both until neither\l"
+	.string "could hear the other.\p"
+	.string "The oldest tale says a third power once\n"
+	.string "reminded them of the whole: RAYQUAZA.\p"
+	.string "It is the one SIGN no one alive has\n"
+	.string "read. I do not know where it sleeps…$"
 
 CaveOfOrigin_B1F_Text_WhereIsRayquaza:
-	.string "WALLACE: {PLAYER}{KUN}, do you perhaps\n"
-	.string "know where RAYQUAZA is now?\p"
-	.string "If you do, please tell me.$"
+	.string "WALLACE: {PLAYER}{KUN}, you have walked\n"
+	.string "more of HOENN than any of us.\p"
+	.string "Do you know where RAYQUAZA is now?$"
 
 CaveOfOrigin_B1F_Text_ButWereInCaveOfOrigin:
 	.string "WALLACE: The CAVE OF ORIGIN?\p"
@@ -111,8 +102,9 @@ CaveOfOrigin_B1F_Text_CantYouRememberSomehow:
 
 CaveOfOrigin_B1F_Text_WellHeadToSkyPillar:
 	.string "WALLACE: The SKY PILLAR?\p"
-	.string "That's it!\n"
-	.string "It must be the SKY PILLAR!\p"
-	.string "{PLAYER}{KUN}, there's not a moment to lose!\n"
-	.string "We'll head to the SKY PILLAR right away!$"
+	.string "Of course. Above the sea and the land\n"
+	.string "both. That is where the sky would keep\l"
+	.string "its oldest SIGN!\p"
+	.string "{PLAYER}{KUN}, there's not a moment to\n"
+	.string "lose. To the SKY PILLAR!$"
 

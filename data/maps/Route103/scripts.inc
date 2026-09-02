@@ -291,52 +291,45 @@ Route103_Text_MayRoute103Pokemon:
 	.string "on ROUTE 103 include…$"
 
 Route103_Text_MayLetsBattle:
-	.string "Oh, hi, {PLAYER}{KUN}!\p"
-	.string "…Oh, I see, my dad gave you\n"
-	.string "a POKéMON as a gift.\p"
-	.string "Since we're here, let's have a quick\n"
-	.string "battle!\p"
-	.string "I'll give you a taste of what being\n"
-	.string "a TRAINER is like.$"
+	.string "MAY: There you are, {PLAYER}{KUN}!\p"
+	.string "I chose the partner that counters yours\n"
+	.string "on purpose. Dad wanted you to face an\l"
+	.string "informed opponent from battle one.\p"
+	.string "You used the CENTER's LEVELER, right?\n"
+	.string "Good. Then show me your first plan!$"
 
 Route103_Text_MayDefeated:
-	.string "Wow! That's great!\n"
-	.string "{PLAYER}{KUN}, you're pretty good!$"
+	.string "You found the answer anyway!$"
 
 Route103_Text_MayTimeToHeadBack:
-	.string "MAY: I think I know why my dad has\n"
-	.string "an eye out for you now.\p"
-	.string "I mean, you just got that POKéMON,\n"
-	.string "but it already likes you.\p"
-	.string "You might be able to befriend any\n"
-	.string "kind of POKéMON easily.\p"
-	.string "Well, it's time to head back to\n"
-	.string "the LAB.$"
+	.string "MAY: You didn't trade hits into the type\n"
+	.string "chart. You read my set and went around.\p"
+	.string "Now I know why Dad has his eye on you.\p"
+	.string "Let's head back to the LAB. He has\n"
+	.string "something for a Trainer who thinks.$"
 
 Route103_Text_BrendanRoute103Pokemon:
 	.string "BRENDAN: Okay, so it's this one and\n"
 	.string "that one that live on ROUTE 103…$"
 
 Route103_Text_BrendanLetsBattle:
-	.string "Hey, it's {PLAYER}!\p"
-	.string "…Oh, yeah, Dad gave you a POKéMON.\p"
-	.string "Since we're here, how about a little\n"
-	.string "battle?\p"
-	.string "I'll teach you what being a TRAINER's\n"
-	.string "about!$"
+	.string "BRENDAN: Took you long enough, {PLAYER}.\p"
+	.string "I trained the partner that beats yours.\n"
+	.string "Dad wanted your first opponent to know\l"
+	.string "exactly what it was doing.\p"
+	.string "You hit the LEVELER in OLDALE, right?\n"
+	.string "Then no excuses. Show me yours.$"
 
 Route103_Text_BrendanDefeated:
-	.string "Huh, {PLAYER}, you're not too shabby.$"
+	.string "Huh. You had an answer for that.$"
 
 Route103_Text_BrendanTimeToHeadBack:
-	.string "BRENDAN: I think I get it.\n"
-	.string "I think I know why my dad has his eye\l"
-	.string "out for you now.\p"
-	.string "Look, your POKéMON already likes you,\n"
-	.string "even though you just got it.\p"
-	.string "{PLAYER}, I get the feeling that you\n"
-	.string "could befriend any POKéMON with ease.\p"
-	.string "We should head back to the LAB.$"
+	.string "BRENDAN: You didn't just swing into the\n"
+	.string "type chart. You read the set first.\p"
+	.string "Fine. I get why Dad keeps talking about\n"
+	.string "you now.\p"
+	.string "Come back to the LAB. He's got something\n"
+	.string "for Trainers who plan.$"
 
 Route103_Text_ShouldHaveBroughtPotion:
 	.string "My POKéMON is staggeringly tired…\n"

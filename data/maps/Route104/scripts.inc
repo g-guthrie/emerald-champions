@@ -1096,20 +1096,18 @@ Route104_Text_MayLetsBattle:
 	.string "How about a little battle here?$"
 
 Route104_Text_MayIntro:
-	.string "MAY: You just became a TRAINER,\n"
-	.string "{PLAYER}{KUN}. I'm not going to lose!$"
+	.string "MAY: {PLAYER}{KUN}! Two badges' worth of\n"
+	.string "catching between us now. Show me!$"
 
 Route104_Text_MayDefeat:
-	.string "Yikes!\n"
-	.string "You're better than I expected!$"
+	.string "Yikes! You read that faster than me!$"
 
 Route104_Text_MayPostBattle:
-	.string "MAY: I can tell you've gotten pretty\n"
-	.string "good with the way you handle POKéMON.\p"
-	.string "But instead of only making them\n"
-	.string "battle, you should be like MR. BRINEY.\p"
-	.string "It's important to become friends with\n"
-	.string "POKéMON, too.$"
+	.string "MAY: You handle a team like you've\n"
+	.string "done it for years.\p"
+	.string "But go talk to MR. BRINEY sometime.\n"
+	.string "He and PEEKO aren't a “set”. They're\l"
+	.string "friends. That matters here too.$"
 
 Route104_Text_BrendanWeShouldRegister:
 	.string "BRENDAN: Oh, hey, {PLAYER}!\p"
@@ -1140,17 +1138,14 @@ Route104_Text_BrendanLetsBattle:
 	.string "Want to have a battle with me?$"
 
 Route104_Text_BrendanIntro:
-	.string "BRENDAN: I know you just became\n"
-	.string "a TRAINER, but I won't go easy!$"
+	.string "BRENDAN: {PLAYER}. Fresh TRAINER or not,\n"
+	.string "I'm not going easy.$"
 
 Route104_Text_BrendanDefeat:
-	.string "Hmm…\n"
-	.string "You're pretty good.$"
+	.string "Hmm… Fine. You saw it coming.$"
 
 Route104_Text_BrendanPostBattle:
-	.string "BRENDAN: You've gotten pretty decent\n"
-	.string "at handling POKéMON.\p"
-	.string "But, you know, you shouldn't just be\n"
-	.string "making POKéMON battle.\p"
-	.string "Like MR. BRINEY, it's important to\n"
-	.string "become friends with your POKéMON.$"
+	.string "BRENDAN: You build well already.\p"
+	.string "Still. Watch MR. BRINEY with PEEKO some\n"
+	.string "time. Not every partner is a piece on\l"
+	.string "a board. Don't forget that part.$"

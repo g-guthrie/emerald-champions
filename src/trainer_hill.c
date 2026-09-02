@@ -146,31 +146,31 @@ struct
     {TRAINER_CLASS_SCHOOL_KID, TRAINER_ENCOUNTER_MUSIC_MALE},
 };
 
-static const enum Item sPrizeListRareCandy1[]  = {ITEM_RARE_CANDY,       ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
-static const enum Item sPrizeListLuxuryBall1[] = {ITEM_LUXURY_BALL,      ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
-static const enum Item sPrizeListMaxRevive1[]  = {ITEM_MAX_REVIVE,       ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
-static const enum Item sPrizeListMaxEther1[]   = {ITEM_MAX_ETHER,        ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
-static const enum Item sPrizeListElixir1[]     = {ITEM_ELIXIR,           ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
-static const enum Item sPrizeListLevelBall[]   = {ITEM_LEVEL_BALL,       ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
-static const enum Item sPrizeListLureBall[]    = {ITEM_LURE_BALL,        ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
-static const enum Item sPrizeListMoonBall[]    = {ITEM_MOON_BALL,        ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
-static const enum Item sPrizeListFriendBall[]  = {ITEM_FRIEND_BALL,      ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
-static const enum Item sPrizeListLoveBall[]    = {ITEM_LOVE_BALL,        ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
+static const enum Item sPrizeListPPMax1[]      = {ITEM_PP_MAX,           ITEM_PP_UP, ITEM_HEART_SCALE, ITEM_BIG_NUGGET, ITEM_QUICK_BALL, ITEM_DUSK_BALL};
+static const enum Item sPrizeListLuxuryBall1[] = {ITEM_LUXURY_BALL,      ITEM_PP_UP, ITEM_HEART_SCALE, ITEM_BIG_NUGGET, ITEM_QUICK_BALL, ITEM_DUSK_BALL};
+static const enum Item sPrizeListMaxRevive1[]  = {ITEM_MAX_REVIVE,       ITEM_PP_UP, ITEM_HEART_SCALE, ITEM_BIG_NUGGET, ITEM_QUICK_BALL, ITEM_DUSK_BALL};
+static const enum Item sPrizeListMaxEther1[]   = {ITEM_MAX_ETHER,        ITEM_PP_UP, ITEM_HEART_SCALE, ITEM_BIG_NUGGET, ITEM_QUICK_BALL, ITEM_DUSK_BALL};
+static const enum Item sPrizeListElixir1[]     = {ITEM_ELIXIR,           ITEM_PP_UP, ITEM_HEART_SCALE, ITEM_BIG_NUGGET, ITEM_QUICK_BALL, ITEM_DUSK_BALL};
+static const enum Item sPrizeListLevelBall[]   = {ITEM_LEVEL_BALL,       ITEM_PP_UP, ITEM_HEART_SCALE, ITEM_BIG_NUGGET, ITEM_QUICK_BALL, ITEM_DUSK_BALL};
+static const enum Item sPrizeListLureBall[]    = {ITEM_LURE_BALL,        ITEM_PP_UP, ITEM_HEART_SCALE, ITEM_BIG_NUGGET, ITEM_QUICK_BALL, ITEM_DUSK_BALL};
+static const enum Item sPrizeListMoonBall[]    = {ITEM_MOON_BALL,        ITEM_PP_UP, ITEM_HEART_SCALE, ITEM_BIG_NUGGET, ITEM_QUICK_BALL, ITEM_DUSK_BALL};
+static const enum Item sPrizeListFriendBall[]  = {ITEM_FRIEND_BALL,      ITEM_PP_UP, ITEM_HEART_SCALE, ITEM_BIG_NUGGET, ITEM_QUICK_BALL, ITEM_DUSK_BALL};
+static const enum Item sPrizeListLoveBall[]    = {ITEM_LOVE_BALL,        ITEM_PP_UP, ITEM_HEART_SCALE, ITEM_BIG_NUGGET, ITEM_QUICK_BALL, ITEM_DUSK_BALL};
 
-static const enum Item sPrizeListRareCandy2[]  = {ITEM_RARE_CANDY,       ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
-static const enum Item sPrizeListLuxuryBall2[] = {ITEM_LUXURY_BALL,      ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
-static const enum Item sPrizeListMaxRevive2[]  = {ITEM_MAX_REVIVE,       ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
-static const enum Item sPrizeListMaxEther2[]   = {ITEM_MAX_ETHER,        ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
-static const enum Item sPrizeListElixir2[]     = {ITEM_ELIXIR,           ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
-static const enum Item sPrizeListFastBall[]    = {ITEM_FAST_BALL,        ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
-static const enum Item sPrizeListHeavyBall[]   = {ITEM_HEAVY_BALL,       ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
-static const enum Item sPrizeListDreamBall[]   = {ITEM_DREAM_BALL,       ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
-static const enum Item sPrizeListSportBall[]   = {ITEM_SPORT_BALL,       ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
-static const enum Item sPrizeListBeastBall[]   = {ITEM_BEAST_BALL,       ITEM_ETHER, ITEM_MAX_POTION, ITEM_REVIVE, ITEM_FLUFFY_TAIL, ITEM_GREAT_BALL};
+static const enum Item sPrizeListLinkingCord[] = {ITEM_LINKING_CORD,     ITEM_PP_UP, ITEM_HEART_SCALE, ITEM_BIG_NUGGET, ITEM_QUICK_BALL, ITEM_DUSK_BALL};
+static const enum Item sPrizeListLuxuryBall2[] = {ITEM_LUXURY_BALL,      ITEM_PP_UP, ITEM_HEART_SCALE, ITEM_BIG_NUGGET, ITEM_QUICK_BALL, ITEM_DUSK_BALL};
+static const enum Item sPrizeListMaxRevive2[]  = {ITEM_MAX_REVIVE,       ITEM_PP_UP, ITEM_HEART_SCALE, ITEM_BIG_NUGGET, ITEM_QUICK_BALL, ITEM_DUSK_BALL};
+static const enum Item sPrizeListMaxEther2[]   = {ITEM_MAX_ETHER,        ITEM_PP_UP, ITEM_HEART_SCALE, ITEM_BIG_NUGGET, ITEM_QUICK_BALL, ITEM_DUSK_BALL};
+static const enum Item sPrizeListElixir2[]     = {ITEM_ELIXIR,           ITEM_PP_UP, ITEM_HEART_SCALE, ITEM_BIG_NUGGET, ITEM_QUICK_BALL, ITEM_DUSK_BALL};
+static const enum Item sPrizeListFastBall[]    = {ITEM_FAST_BALL,        ITEM_PP_UP, ITEM_HEART_SCALE, ITEM_BIG_NUGGET, ITEM_QUICK_BALL, ITEM_DUSK_BALL};
+static const enum Item sPrizeListHeavyBall[]   = {ITEM_HEAVY_BALL,       ITEM_PP_UP, ITEM_HEART_SCALE, ITEM_BIG_NUGGET, ITEM_QUICK_BALL, ITEM_DUSK_BALL};
+static const enum Item sPrizeListDreamBall[]   = {ITEM_DREAM_BALL,       ITEM_PP_UP, ITEM_HEART_SCALE, ITEM_BIG_NUGGET, ITEM_QUICK_BALL, ITEM_DUSK_BALL};
+static const enum Item sPrizeListSportBall[]   = {ITEM_SPORT_BALL,       ITEM_PP_UP, ITEM_HEART_SCALE, ITEM_BIG_NUGGET, ITEM_QUICK_BALL, ITEM_DUSK_BALL};
+static const enum Item sPrizeListBeastBall[]   = {ITEM_BEAST_BALL,       ITEM_PP_UP, ITEM_HEART_SCALE, ITEM_BIG_NUGGET, ITEM_QUICK_BALL, ITEM_DUSK_BALL};
 
 static const enum Item *const sPrizeLists1[NUM_TRAINER_HILL_PRIZE_LISTS] =
 {
-    sPrizeListRareCandy1,
+    sPrizeListPPMax1,
     sPrizeListLuxuryBall1,
     sPrizeListMaxRevive1,
     sPrizeListMaxEther1,
@@ -184,7 +184,7 @@ static const enum Item *const sPrizeLists1[NUM_TRAINER_HILL_PRIZE_LISTS] =
 
 static const enum Item *const sPrizeLists2[NUM_TRAINER_HILL_PRIZE_LISTS] =
 {
-    sPrizeListRareCandy2,
+    sPrizeListLinkingCord,
     sPrizeListLuxuryBall2,
     sPrizeListMaxRevive2,
     sPrizeListMaxEther2,
@@ -1096,7 +1096,7 @@ static enum Item GetPrizeItemId(void)
     // The prize for any time after 12 minutes is the same in every list.
     // The prizes for a time under 12 minutes are:
     // - ITEM_FRIEND_BALL      (Normal)
-    // - ITEM_ELIXIR           (Variety)
+    // - ITEM_ELIXIR           (Variety)  [medicine fillers were replaced with PP Up / Heart Scale / Big Nugget / Quick Ball / Dusk Ball]
     // - ITEM_SPORT_BALL       (Unique)
     // - ITEM_FAST_BALL        (Expert)
     // As an additional note, if players were allowed to enter a Trainer Hill challenge before
@@ -1106,15 +1106,15 @@ static enum Item GetPrizeItemId(void)
     if (minutes < 12)
         id = 0; // Depends on list
     else if (minutes < 13)
-        id = 1; // ITEM_ETHER
+        id = 1; // ITEM_PP_UP
     else if (minutes < 14)
-        id = 2; // ITEM_MAX_POTION
+        id = 2; // ITEM_HEART_SCALE
     else if (minutes < 16)
-        id = 3; // ITEM_REVIVE
+        id = 3; // ITEM_BIG_NUGGET
     else if (minutes < 18)
-        id = 4; // ITEM_FLUFFY_TAIL
+        id = 4; // ITEM_QUICK_BALL
     else
-        id = 5; // ITEM_GREAT_BALL
+        id = 5; // ITEM_DUSK_BALL
 
     return prizeList[id];
 }

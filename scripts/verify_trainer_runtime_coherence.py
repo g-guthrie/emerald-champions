@@ -10,14 +10,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 PARTIES = ROOT / "src/data/trainers.party"
 
-# These five teams were individually reviewed as phased speed-control teams.
-# Any new Trick Room + Tailwind party must be reviewed before joining this set.
-APPROVED_DUAL_SPEED = {
-    "TRAINER_BETHANY",
-    "TRAINER_CAMERON_1",
-    "TRAINER_CHIP",
-    "TRAINER_LEROY",
-}
+# No campaign team runs Trick Room and Tailwind together any more; the last
+# four were resolved on 2026-09-02. Any new Trick Room + Tailwind party must
+# be reviewed before joining this set.
+APPROVED_DUAL_SPEED: set[str] = set()
 
 LOWERS_ATTACK = {
     "NATURE_BOLD",

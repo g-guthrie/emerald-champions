@@ -24,6 +24,9 @@ void SetCurrentDifficultyLevel(enum DifficultyLevel desiredDifficulty)
     VarSet(B_VAR_DIFFICULTY, desiredDifficulty);
 }
 
+// Difficulty only staggers opponent levels (Easy -4, Normal -2, Hard 0).
+// It never changes trainer AI: the player is meant to experiment with the
+// same authored teams and the same opponents at different level gaps.
 u8 GetTrainerLevelReduction(void)
 {
     switch (GetCurrentDifficultyLevel())

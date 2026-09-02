@@ -1595,8 +1595,8 @@ SootopolisCity_Text_TryingMeaninglessToPokemon:
 SootopolisCity_Text_InvolvedWithCrisisComeWithMe:
 	.string "STEVEN: GROUDON and KYOGRE are pulling\n"
 	.string "every awakened SIGN toward this crater.\p"
-	.string "No battle team can defeat this weather.\n"
-	.string "The board itself must be restored.\p"
+	.string "No team can defeat this weather. The\n"
+	.string "balance itself must be restored.\p"
 	.string "You have solved that kind of problem all\n"
 	.string "across HOENN. Come meet WALLACE.$"
 
@@ -1615,18 +1615,19 @@ SootopolisCity_Text_KnowWhatsNeededToHelpHim:
 
 SootopolisCity_Text_NeverBeenToSkyPillar:
 	.string "STEVEN: The SKY PILLAR…\p"
-	.string "I've never been there.\n"
-	.string "I wonder where it could be?$"
+	.string "The oldest SIGN in HOENN should be there,\n"
+	.string "and no one has read it in centuries.$"
 
 SootopolisCity_Text_SoThatsRayquaza:
 	.string "STEVEN: RAYQUAZA did not make them flee.\n"
 	.string "It reminded land and sea of the whole.$"
 
 SootopolisCity_Text_MaxieArchieLeft:
-	.string "STEVEN: It looks like both MAXIE and\n"
-	.string "ARCHIE have gone away somewhere.\p"
-	.string "Perhaps they've gone to MT. PYRE to\n"
-	.string "return those ORBS…$"
+	.string "STEVEN: MAXIE and ARCHIE have gone to\n"
+	.string "MT. PYRE to return the ORBS.\p"
+	.string "The network is quiet again. Every SIGN\n"
+	.string "it woke is still out there, waiting for\l"
+	.string "the partner it asked for.$"
 
 SootopolisCity_Text_HaventYouScaledSkyPillar:
 	.string "WALLACE: Oh?\n"

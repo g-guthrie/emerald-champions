@@ -87,16 +87,22 @@ def is_ignored(relative: str, rules: list[tuple[str, str, bool]]) -> bool:
     return ignored
 
 
-def build_inputs() -> list[Path]:
+def build_inputs(*, include_tests: bool = False) -> list[Path]:
     rules = ignore_rules()
     paths: list[Path] = []
-    for directory in INPUT_DIRS:
+    input_dirs = INPUT_DIRS + (("test",) if include_tests else ())
+    for directory in input_dirs:
         for path in (ROOT / directory).rglob("*"):
             if path.is_file() and not path.name.startswith("._"):
                 paths.append(path)
     for path in ROOT.iterdir():
         if path.is_file() and (path.name in INPUT_FILES or path.suffix in INPUT_SUFFIXES):
             paths.append(path)
+    if include_tests:
+        # This script determines the exact source manifest compiled into the
+        # shared test ELF, so changing it invalidates that ELF even when no C
+        # source changed.
+        paths.append(ROOT / "scripts/run_emerald_champions_runtime_gates.py")
     return sorted(
         p for p in paths
         if p.is_file() and not p.name.startswith("._")
@@ -104,16 +110,29 @@ def build_inputs() -> list[Path]:
     )
 
 
-def digest_tree() -> tuple[str, int]:
+def digest_tree(*, include_tests: bool = False) -> tuple[str, int]:
     tree = hashlib.sha256()
     count = 0
-    for path in build_inputs():
+    for path in build_inputs(include_tests=include_tests):
         relative = path.relative_to(ROOT).as_posix()
         tree.update(relative.encode())
         tree.update(b"\0")
         tree.update(hashlib.sha256(path.read_bytes()).digest())
         count += 1
     return tree.hexdigest(), count
+
+
+def artifact_for_stamp(stamp_path: Path) -> Path:
+    # The release stamp binds to the release ROM, the test stamp to the test ELF.
+    if stamp_path.name.startswith("pokeemerald-test"):
+        # pokeemerald-test.inputs.json -> pokeemerald-test.elf, and likewise for
+        # any ad-hoc test ELF (pokeemerald-test-all-ai.inputs.json).
+        return ROOT / (stamp_path.name.split(".inputs.json")[0] + ".elf")
+    return ROOT / "pokeemerald-release.gba"
+
+
+def newest_input(paths: list[Path]) -> Path:
+    return max(paths, key=lambda path: path.stat().st_mtime)
 
 
 def main() -> int:
@@ -127,7 +146,10 @@ def main() -> int:
     )
     args = parser.parse_args()
     stamp_path = args.stamp if args.stamp.is_absolute() else ROOT / args.stamp
-    digest, count = digest_tree()
+    artifact = artifact_for_stamp(stamp_path)
+    include_tests = stamp_path.name.startswith("pokeemerald-test")
+    inputs = build_inputs(include_tests=include_tests)
+    digest, count = digest_tree(include_tests=include_tests)
     if args.check:
         if not stamp_path.is_file():
             print(f"missing input stamp: {stamp_path.name}; run scripts/stamp_release_inputs.py in the built tree")
@@ -140,10 +162,41 @@ def main() -> int:
                 f"(stamp files={stamp.get('input_count')}, tree files={count})"
             )
             return 1
-        print(f"PASS: {stamp_path.name} matches {count} build inputs by content")
+        # The stamp also records the binary it was written beside, so a stale
+        # ROM copied next to a fresh stamp is caught (2026-09-02: a hidden make
+        # failure produced exactly that).
+        expected_artifact = stamp.get("artifact_sha256")
+        if expected_artifact is not None:
+            if not artifact.is_file():
+                print(f"{stamp_path.name} names {artifact.name}, which is missing")
+                return 1
+            actual = hashlib.sha256(artifact.read_bytes()).hexdigest()
+            if actual != expected_artifact:
+                print(
+                    f"{artifact.name} is not the binary {stamp_path.name} was written for: "
+                    f"stamp={expected_artifact[:12]} file={actual[:12]}"
+                )
+                return 1
+        print(f"PASS: {stamp_path.name} matches {count} build inputs by content and binds to {artifact.name}")
         return 0
-    stamp_path.write_text(json.dumps({"inputs_sha256": digest, "input_count": count}, indent=2) + "\n")
-    print(f"stamped {count} build inputs: {digest[:12]}")
+    if not artifact.is_file():
+        print(f"refusing to stamp: {artifact.name} does not exist; the build did not produce it")
+        return 1
+    newest = newest_input(inputs)
+    if artifact.stat().st_mtime < newest.stat().st_mtime:
+        print(
+            f"refusing to stamp: {artifact.name} is older than build input "
+            f"{newest.relative_to(ROOT).as_posix()}; the build did not complete"
+        )
+        return 1
+    artifact_digest = hashlib.sha256(artifact.read_bytes()).hexdigest()
+    stamp_path.write_text(json.dumps({
+        "inputs_sha256": digest,
+        "input_count": count,
+        "artifact": artifact.name,
+        "artifact_sha256": artifact_digest,
+    }, indent=2) + "\n")
+    print(f"stamped {count} build inputs: {digest[:12]} (binds {artifact.name} {artifact_digest[:12]})")
     return 0
 
 

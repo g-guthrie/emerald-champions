@@ -309,15 +309,13 @@ JaggedPass_Text_EthanPostRematch:
 	.string "in MAUVILLE CITY…$"
 
 JaggedPass_Text_GruntIntro:
-	.string "Wah!\n"
-	.string "What are you doing here?\p"
-	.string "What am I doing in a place like this?\p"
-	.string "What business is it of yours?$"
+	.string "Wah! What are you doing up here?\p"
+	.string "What am I doing up here? Guarding a\n"
+	.string "path. Badly, apparently. Fight me!$"
 
 JaggedPass_Text_GruntDefeat:
-	.string "Urrrgh…\p"
-	.string "I should've ducked into our HIDEOUT\n"
-	.string "right away…$"
+	.string "Urrrgh… Should've ducked into the\n"
+	.string "HIDEOUT while I could.$"
 
 JaggedPass_Text_GoWhereverYouWant:
 	.string "Okay, oh-kay!\n"

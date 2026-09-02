@@ -65,16 +65,20 @@ EverGrandeCity_PhoebesRoom_EventScript_Defeated::
 	end
 
 EverGrandeCity_PhoebesRoom_Text_IntroSpeech:
-	.string "I'm PHOEBE. MT. PYRE taught me that a\n"
-	.string "battle continues through what is absent.\p"
-	.string "Boosts can be stolen, spread attacks can\n"
-	.string "be guarded, and one empty shell can make\l"
-	.string "your best attack meaningless.\p"
-	.string "Keep an answer for the shadow rider.$"
+	.string "Welcome. I am PHOEBE.\p"
+	.string "I trained on MT. PYRE, where the ones\n"
+	.string "who are gone still take part.\p"
+	.string "My friends borrow your boosts, shelter\n"
+	.string "from your spread attacks, and one empty\l"
+	.string "shell will swallow your best move.\p"
+	.string "Keep something for the rider in the\n"
+	.string "shadow. It is always closer than it looks.$"
 
 EverGrandeCity_PhoebesRoom_Text_Defeat:
-	.string "You respected what you could not hit.$"
+	.string "You honored what you could not touch.\n"
+	.string "My grandmother would like you.$"
 
 EverGrandeCity_PhoebesRoom_Text_PostBattleSpeech:
-	.string "The next room covers the field before it\n"
-	.string "attacks. Do not fight behind its screen.$"
+	.string "Rest a moment if you need to.\p"
+	.string "GLACIA covers the whole field before\n"
+	.string "she strikes. Do not fight in her snow.$"

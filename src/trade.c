@@ -7,6 +7,7 @@
 #include "data.h"
 #include "daycare.h"
 #include "decompress.h"
+#include "emerald_champions_battle_sets.h"
 #include "event_data.h"
 #include "evolution_scene.h"
 #include "field_screen_effect.h"
@@ -4606,6 +4607,9 @@ static void CreateInGameTradePokemonInternal(u8 whichPlayerMon, u8 whichInGameTr
             SetMonData(pokemon, MON_DATA_HELD_ITEM, &inGameTrade->heldItem);
         }
     }
+    // Apply this last so legacy trade fields cannot overwrite the finished
+    // competitive build's moves, nature, Ability, Stat Points, or held item.
+    ApplyEmeraldChampionsBattleSetChoice(pokemon, 0);
     CalculateMonStats(&gParties[B_TRAINER_OPPONENT_A][0]);
 }
 

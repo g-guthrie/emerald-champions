@@ -120,7 +120,7 @@ VerdanturfTown_BattleTentLobby_EventScript_AskEnterChallenge::
 
 VerdanturfTown_BattleTentLobby_EventScript_TryEnterChallenge::
 	setvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_PALACE
-	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
+	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES
 	setvar VAR_RESULT, 2
 	frontier_checkineligible
 	goto_if_eq VAR_0x8004, TRUE, VerdanturfTown_BattleTentLobby_EventScript_NotEnoughValidMons
@@ -128,7 +128,7 @@ VerdanturfTown_BattleTentLobby_EventScript_TryEnterChallenge::
 	msgbox VerdanturfTown_BattleTentLobby_Text_SelectThreeMons, MSGBOX_DEFAULT
 	fadescreen FADE_TO_BLACK
 	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
+	setvar VAR_0x8005, FRONTIER_DOUBLES_PARTY_SIZE
 	special ChoosePartyForBattleFrontier
 	goto_if_eq VAR_RESULT, 0, VerdanturfTown_BattleTentLobby_EventScript_LoadPartyCancelChallenge
 	msgbox VerdanturfTown_BattleTentLobby_Text_SaveBeforeChallenge, MSGBOX_YESNO
@@ -151,7 +151,7 @@ VerdanturfTown_BattleTentLobby_EventScript_SaveBeforeChallenge::
 	goto_if_eq VAR_RESULT, 0, VerdanturfTown_BattleTentLobby_EventScript_CancelChallengeSaveFailed
 VerdanturfTown_BattleTentLobby_EventScript_EnterChallenge::
 	special SavePlayerParty
-	frontier_setpartyorder FRONTIER_PARTY_SIZE
+	frontier_setpartyorder FRONTIER_DOUBLES_PARTY_SIZE
 	msgbox VerdanturfTown_BattleTentLobby_Text_NowFollowMe, MSGBOX_DEFAULT
 	closemessage
 	call VerdanturfTown_BattleTentLobby_EventScript_WalkToDoor

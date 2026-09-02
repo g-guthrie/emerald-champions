@@ -5,7 +5,7 @@ FortreeCity_House1_EventScript_Trader::
 	lock
 	faceplayer
 	goto_if_set FLAG_FORTREE_NPC_TRADE_COMPLETED, FortreeCity_House1_EventScript_TradeCompleted
-	ingame_trade INGAME_TRADE_PLUSLE, FortreeCity_House1_Text_YouWillTradeWontYou, FortreeCity_House1_EventScript_DeclineTrade, FortreeCity_House1_EventScript_NotRequestedMon, FortreeCity_House1_Text_MonYouTakeCare
+	ingame_trade INGAME_TRADE_BOMBIRDIER, FortreeCity_House1_Text_YouWillTradeWontYou, FortreeCity_House1_EventScript_DeclineTrade, FortreeCity_House1_EventScript_NotRequestedMon, FortreeCity_House1_Text_MonYouTakeCare
 	setflag FLAG_FORTREE_NPC_TRADE_COMPLETED
 	release
 	end
@@ -66,7 +66,8 @@ FortreeCity_House1_Text_YouWontTradeMe:
 FortreeCity_House1_Text_GoingToMakeVolbeatStrong:
 	.string "I'm going to make VOLBEAT super\n"
 	.string "strong from this moment on!\p"
-	.string "I hope you do the same with PLUSLE!$"
+	.string "BOMBIRDIER already knows its role.\n"
+	.string "Just give it a partner to cover!$"
 
 FortreeCity_House1_Text_TradingMemoriesWithOthers:
 	.string "Trading POKéMON with others…\p"

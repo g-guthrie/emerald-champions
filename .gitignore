@@ -2,6 +2,7 @@
 *.o
 *.i
 *.elf
+pokeemerald-test-all-ai.inputs.json
 *.gba
 !data/*.gba
 !pokeemerald-release.gba

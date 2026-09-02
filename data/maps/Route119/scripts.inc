@@ -491,36 +491,24 @@ Route119_EventScript_ScottWonAtFortreeGymCall::
 	end
 
 Route119_Text_MayIntro:
-	.string "MAY: {PLAYER}{KUN}!\n"
-	.string "Where were you? I was looking for you!\p"
-	.string "How much stronger have you gotten?\n"
-	.string "Let me check for you!\p"
-	.string "Ready with your POKéMON?\n"
-	.string "Of course you are! Go!$"
+	.string "MAY: {PLAYER}{KUN}! The storms up here\n"
+	.string "rewrote my whole team.\p"
+	.string "I want to know if you still adapt faster\n"
+	.string "than I do. Ready? Go!$"
 
 Route119_Text_MayDefeat:
-	.string "Achah!\n"
-	.string "{PLAYER}{KUN}, you're strong!\p"
-	.string "I was worried that you might be\n"
-	.string "struggling with your training.$"
+	.string "You changed plans mid-storm!$"
 
 Route119_Text_MayPresentForYou:
-	.string "MAY: But I had absolutely nothing to\n"
-	.string "worry about! Keep it up!\p"
-	.string "And, here! I have a present for you.$"
+	.string "MAY: I worried the BADGE road would\n"
+	.string "harden you into one team. It didn't.\p"
+	.string "Here. I have a present for you.$"
 
 Route119_Text_MayExplainFly:
-	.string "MAY: Use FLY, and your POKéMON will\n"
-	.string "instantly carry you to any town you've\l"
-	.string "already visited.\p"
-	.string "But, to use FLY, you have to get\n"
-	.string "the GYM BADGE from FORTREE CITY.\l"
-	.string "That's important, so don't forget.\p"
-	.string "You should FLY home and visit\n"
-	.string "LITTLEROOT for a change.\p"
-	.string "I bet your mom's worried about you,\n"
-	.string "{PLAYER}{KUN}.\p"
-	.string "Well, let's meet again somewhere!$"
+	.string "MAY: Use FLY once you hold the FEATHER\n"
+	.string "BADGE. Any town you've seen, instantly.\p"
+	.string "Go home sometime. Mom asks about you.\p"
+	.string "Maybe we'll meet at the LEAGUE!$"
 
 Route119_Text_FlyHMSentToPC:
 	.string "Your TM pocket is full, so FLY was sent\n"
@@ -531,30 +519,24 @@ Route119_Text_FlyHMNoRoom:
 	.string "Make room, then speak to me again.$"
 
 Route119_Text_BrendanIntro:
-	.string "BRENDAN: {PLAYER}! So this is where\n"
-	.string "you've been looking for POKéMON?\p"
-	.string "Let me see how good you got.\n"
-	.string "I'll test you!\p"
-	.string "Now!\n"
+	.string "BRENDAN: {PLAYER}! The rain up here\n"
+	.string "made me rebuild everything.\p"
+	.string "Let's see whose rebuild is better.\n"
 	.string "It's a battle, so battle!$"
 
 Route119_Text_BrendanDefeat:
-	.string "Hmm…\n"
-	.string "You've gotten pretty darn decent.$"
+	.string "Hmm… You adapted quicker than me.$"
 
 Route119_Text_BrendanIllGiveYouThis:
-	.string "BRENDAN: I'd say you're good enough\n"
-	.string "to search for POKéMON anywhere.\p"
-	.string "Here, I'll give you this.\n"
-	.string "Try it out.$"
+	.string "BRENDAN: You could build a team for any\n"
+	.string "route in HOENN now.\p"
+	.string "Here. Try this out.$"
 
 Route119_Text_BrendanExplainFly:
-	.string "BRENDAN: Use FLY, and your POKéMON\n"
-	.string "instantly carries you to any town\l"
-	.string "you've already visited.\p"
-	.string "But you need the FORTREE GYM BADGE \n"
-	.string "to do that.\p"
-	.string "Anyway, I have to move along.$"
+	.string "BRENDAN: Use FLY once you have the\n"
+	.string "FORTREE BADGE. Any town you've seen.\p"
+	.string "I'm off. The SIGNS won't catalog\n"
+	.string "themselves.$"
 
 Route119_Text_ScottWayToGoBeSeeingYou:
 	.string "SCOTT: Hahahah!\n"

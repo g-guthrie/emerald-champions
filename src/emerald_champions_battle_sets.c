@@ -335,6 +335,14 @@ const u8 *GetEmeraldChampionsBattleSetName(struct Pokemon *mon, u8 choice)
     return GetEmeraldChampionsBattleSetNameForFormat(mon, choice, EC_BATTLE_FORMAT_DOUBLES);
 }
 
+const struct EmeraldChampionsBattleSet *GetEmeraldChampionsBattleSetPresetForFormat(struct Pokemon *mon, u8 choice, u8 format)
+{
+    const struct EmeraldChampionsBattleSet *preset = NULL;
+    if (!ResolveVisibleChoice(mon, choice, format, &preset, NULL))
+        return NULL;
+    return preset;
+}
+
 enum Item GetEmeraldChampionsBattleSetItemForFormat(struct Pokemon *mon, u8 choice, u8 format)
 {
     const struct EmeraldChampionsBattleSet *preset = NULL;

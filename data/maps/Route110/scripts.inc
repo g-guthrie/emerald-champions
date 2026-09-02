@@ -768,30 +768,25 @@ Route110_Text_AquaActionsBringSmiles:
 	.string "smiles to people's faces!$"
 
 Route110_Text_MayLetsBattle:
-	.string "MAY: Hi, {PLAYER}{KUN}, long time no see!\p"
-	.string "While I was searching for other\n"
-	.string "POKéMON, my POKéMON grew stronger.\p"
-	.string "So…\n"
-	.string "How about a little battle?$"
+	.string "MAY: {PLAYER}{KUN}! I've been catching\n"
+	.string "partners on every route since OLDALE.\p"
+	.string "Two of them cover each other in a way\n"
+	.string "I want to test. Doubles, right now!$"
 
 Route110_Text_MayDefeated:
-	.string "Yikes!\n"
-	.string "You're better than I expected!$"
+	.string "You broke my pair before it clicked!$"
 
 Route110_Text_MayTakeThis:
-	.string "MAY: {PLAYER}{KUN}, you've been busy\n"
-	.string "training, too, haven't you?\p"
-	.string "I think you deserve a reward!\n"
-	.string "This is from me!$"
+	.string "MAY: You didn't outlevel me. Nobody can,\n"
+	.string "here. You built the better answer.\p"
+	.string "Take this. It finds what routes hide.$"
 
 Route110_Text_MayExplainItemfinder:
-	.string "MAY: That's a DOWSING MACHINE.\p"
-	.string "Try it out. If there is an item that's\n"
-	.string "not visible, it emits a sound.\p"
-	.string "Okay, {PLAYER}{KUN}, let's meet again!\p"
-	.string "I know it's a little silly coming from\n"
-	.string "me, but I think you should train a lot\l"
-	.string "harder for the next time.$"
+	.string "MAY: That's a DOWSING MACHINE. Hidden\n"
+	.string "items make it sing.\p"
+	.string "Dad says the SIGNS answer the right\n"
+	.string "partner, not the strongest one. Keep\l"
+	.string "catching. I'll find you ahead!$"
 
 Route110_Text_DowsingMachineSentToPC:
 	.string "Your KEY ITEMS pocket is full, so the\n"
@@ -802,30 +797,24 @@ Route110_Text_DowsingMachineNoRoom:
 	.string "Make room, then speak to me again.$"
 
 Route110_Text_BrendanLetsBattle:
-	.string "BRENDAN: Hey, {PLAYER}.\n"
-	.string "So this is where you were.\l"
-	.string "How's it going?\p"
-	.string "Have you been raising your POKéMON?\n"
-	.string "I'll check for you.$"
+	.string "BRENDAN: Hey, {PLAYER}. Figured you'd\n"
+	.string "come this way.\p"
+	.string "I built a pair that covers each other.\n"
+	.string "Let's see if your six can read it.$"
 
 Route110_Text_BrendanDefeated:
-	.string "Hmm…\n"
-	.string "You're pretty good.$"
+	.string "Hmm… You read the pair fast.$"
 
 Route110_Text_BrendanTakeThis:
-	.string "BRENDAN: {PLAYER}, you've trained\n"
-	.string "without me noticing…\p"
-	.string "Good enough!\n"
-	.string "Here, take this.$"
+	.string "BRENDAN: Levels don't decide anything in\n"
+	.string "HOENN. Plans do. Yours was better.\p"
+	.string "Here. Take this.$"
 
 Route110_Text_BrendanExplainItemfinder:
-	.string "BRENDAN: That's a DOWSING MACHINE.\p"
-	.string "Use it to root around for items that\n"
-	.string "aren't visible.\p"
-	.string "If it senses something, it emits\n"
-	.string "a sound.\p"
-	.string "Anyway, I'm off to look for new\n"
-	.string "POKéMON.$"
+	.string "BRENDAN: DOWSING MACHINE. It hums near\n"
+	.string "items you can't see.\p"
+	.string "The SIGNS Dad studies want the right\n"
+	.string "partner brought to them. Go find some.$"
 
 Route110_Text_RideBikeAtFullSpeed:
 	.string "Wouldn't it be great to ride a BIKE\n"

@@ -37,7 +37,7 @@ RustboroCity_Flat2_2F_EventScript_GiveFloatStone::
 	faceplayer
 	goto_if_set FLAG_ITEM_RUSTBORO_FLOAT_STONE, RustboroCity_Flat2_2F_EventScript_GaveFloatStone
 	msgbox RustboroCity_Flat2_2F_Text_MyDadsAceAtDevon, MSGBOX_DEFAULT
-	giveitem ITEM_FLOAT_STONE
+	giveitem ITEM_METAL_COAT
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_ITEM_RUSTBORO_FLOAT_STONE
 	msgbox RustboroCity_Flat2_2F_Text_PokemonHoldFloatStone, MSGBOX_DEFAULT
@@ -73,8 +73,8 @@ RustboroCity_Flat2_2F_Text_MyDadsAceAtDevon:
 	.string "like me knows how to use.$"
 
 RustboroCity_Flat2_2F_Text_PokemonHoldFloatStone:
-	.string "A FLOAT STONE halves a POKéMON's weight.\n"
-	.string "That can change weight-based attacks.$"
+	.string "A METAL COAT lets some POKéMON evolve\n"
+	.string "when traded. DEVON refines them.$"
 
 RustboroCity_Flat2_2F_Text_PutOnWeight:
 	.string "For some reason, I've put on a lot of\n"

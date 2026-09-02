@@ -70,7 +70,13 @@ void static (*const sVerdanturfTentFuncs[])(void) =
     [VERDANTURF_TENT_FUNC_GIVE_PRIZE]         = GiveVerdanturfTentPrize
 };
 
-static const u16 sVerdanturfTentRewards[] = {ITEM_NEST_BALL};
+// Battle Tent prizes: every clear pays out something that unlocks a species
+// or form, never a disposable medicine or a held item the Pokémon Center
+// already gives away for free.
+static const u16 sVerdanturfTentRewards[] = {
+    ITEM_FIRE_STONE, ITEM_WATER_STONE, ITEM_THUNDER_STONE, ITEM_LEAF_STONE, ITEM_MOON_STONE,
+    ITEM_SUN_STONE, ITEM_SHINY_STONE, ITEM_DUSK_STONE, ITEM_DAWN_STONE, ITEM_ICE_STONE,
+};
 
 void static (*const sFallarborTentFuncs[])(void) =
 {
@@ -83,7 +89,10 @@ void static (*const sFallarborTentFuncs[])(void) =
     [FALLARBOR_TENT_FUNC_GET_OPPONENT_NAME] = BufferFallarborTentTrainerName
 };
 
-static const u16 sFallarborTentRewards[] = {ITEM_PP_MAX};
+static const u16 sFallarborTentRewards[] = {
+    ITEM_PP_MAX, ITEM_LEVEL_BALL, ITEM_LURE_BALL, ITEM_MOON_BALL, ITEM_FRIEND_BALL,
+    ITEM_LOVE_BALL, ITEM_HEAVY_BALL, ITEM_FAST_BALL, ITEM_DREAM_BALL, ITEM_BEAST_BALL,
+};
 
 void static (*const sSlateportTentFuncs[])(void) =
 {
@@ -99,7 +108,12 @@ void static (*const sSlateportTentFuncs[])(void) =
     [SLATEPORT_TENT_FUNC_GENERATE_RENTAL_MONS]   = GenerateInitialRentalMons
 };
 
-static const u16 sSlateportTentRewards[] = {ITEM_FULL_HEAL};
+static const u16 sSlateportTentRewards[] = {
+    ITEM_KINGS_ROCK, ITEM_METAL_COAT, ITEM_DRAGON_SCALE, ITEM_UPGRADE, ITEM_DUBIOUS_DISC,
+    ITEM_PROTECTOR, ITEM_ELECTIRIZER, ITEM_MAGMARIZER, ITEM_REAPER_CLOTH, ITEM_RAZOR_CLAW,
+    ITEM_RAZOR_FANG, ITEM_PRISM_SCALE, ITEM_OVAL_STONE, ITEM_DEEP_SEA_TOOTH, ITEM_DEEP_SEA_SCALE,
+    ITEM_LINKING_CORD,
+};
 
 // code
 void CallVerdanturfTentFunction(void)

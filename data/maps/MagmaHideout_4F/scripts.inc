@@ -156,41 +156,43 @@ MagmaHideout_4F_Text_AdminsStillStanding:
 	.string "chamber. Face both before MAXIE.$"
 
 MagmaHideout_4F_Text_Grunt11Intro:
-	.string "I want to see GROUDON, too, but they\n"
-	.string "won't let me see even its tail…\p"
-	.string "It's got me feeling really frustrated.\p"
-	.string "Oh, no!\n"
-	.string "I blabbed about GROUDON!$"
+	.string "MAXIE promised solid ground under every\n"
+	.string "home in HOENN. I believe him.\p"
+	.string "MANDIBUZZ taunts, MAMOSWINE crushes.\n"
+	.string "You will not reach the chamber.$"
 
 MagmaHideout_4F_Text_Grunt11Defeat:
-	.string "I guess it's impossible to win if one\n"
-	.string "doesn't have a calm mind…$"
+	.string "You moved before my TAUNT mattered…$"
 
 MagmaHideout_4F_Text_Grunt11PostBattle:
-	.string "I wonder if GROUDON even has a tail?$"
+	.string "None of us have seen GROUDON. MAXIE\n"
+	.string "keeps it behind the last door.\p"
+	.string "I wonder if certainty needs a door.$"
 
 MagmaHideout_4F_Text_Grunt12Intro:
-	.string "Fuhahaha!\n"
-	.string "Soon! Very soon!\l"
-	.string "Our grand objective will be achieved!$"
+	.string "Sun, sand, and GARCHOMP's stone. MAXIE\n"
+	.string "built this formation for one outcome.\p"
+	.string "Soon! Very soon our ground will hold!$"
 
 MagmaHideout_4F_Text_Grunt12Defeat:
-	.string "Grrr…\n"
-	.string "I've come so far, but now this?$"
+	.string "The formation had one answer, and you\n"
+	.string "found the other…$"
 
 MagmaHideout_4F_Text_Grunt12PostBattle:
-	.string "MAXIE, sir!\n"
-	.string "An intruder is headed your way!$"
+	.string "MAXIE, sir! An intruder is headed for\n"
+	.string "the chamber!$"
 
 MagmaHideout_4F_Text_Grunt13Intro:
-	.string "You're not finished yet!\n"
+	.string "AMOONGUSS pulls your attacks. RHYPERIOR\n"
+	.string "turns the ones that land into power.\p"
 	.string "You're not getting by me easily!$"
 
 MagmaHideout_4F_Text_Grunt13Defeat:
-	.string "Was I that easy to knock down?$"
+	.string "You hit the slot I left open…$"
 
 MagmaHideout_4F_Text_Grunt13PostBattle:
-	.string "C-come on, one more match…$"
+	.string "Go on, then. Tell MAXIE the ground\n"
+	.string "moved under us too.$"
 
 MagmaHideout_4F_Text_TabithaIntro:
 	.string "TABITHA: Every chamber behind you was\n"
@@ -199,12 +201,13 @@ MagmaHideout_4F_Text_TabithaIntro:
 	.string "need to make your last answer too slow.$"
 
 MagmaHideout_4F_Text_TabithaDefeat:
-	.string "Taken down again…\n"
-	.string "Hehe…$"
+	.string "Your last answer was faster than my\n"
+	.string "model allowed…$"
 
 MagmaHideout_4F_Text_TabithaPostBattle:
-	.string "…And while you wasted time with me,\n"
-	.string "MAXIE should have awakened GROUDON…$"
+	.string "Every minute you spent on me was one\n"
+	.string "more MAXIE had with GROUDON.\p"
+	.string "Go and see what certainty awakened.$"
 
 MagmaHideout_4F_Text_MaxieAwakenGroudon:
 	.string "MAXIE: GROUDON, ancient architect of\n"

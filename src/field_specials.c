@@ -701,6 +701,74 @@ void BufferSelectedMonEmeraldChampionsBattleSetName(void)
         gSpecialVar_Result = 1;
 }
 
+static const u8 sText_BattleSetPreviewNewline[] = _("\n");
+static const u8 sText_BattleSetPreviewScroll[] = _("\l");
+static const u8 sText_BattleSetPreviewPage[] = _("\p");
+static const u8 sText_BattleSetPreviewEmpty[] = _("--");
+static const u8 sText_BattleSetPreviewAbility[] = _("Ability: ");
+static const u8 sText_BattleSetPreviewNature[] = _("Nature: ");
+static const u8 sText_BattleSetPreviewItem[] = _("Item: ");
+static const u8 sText_BattleSetPreviewMissing[] = _("I don't have that set anymore.");
+
+// Shown between choosing a set from the style list and the confirmation
+// prompt, so the player can read what the set actually does first. Page 1 is
+// the set name and its first two moves, page 2 the other two, page 3 the
+// Ability, nature and held item.
+void BufferSelectedMonEmeraldChampionsBattleSetPreview(void)
+{
+    struct Pokemon *mon;
+    const struct EmeraldChampionsBattleSet *preset;
+    enum Item item;
+    u8 *end;
+
+    if (gSpecialVar_0x8004 >= gPartiesCount[B_TRAINER_PLAYER])
+    {
+        StringCopy(gStringVar4, sText_BattleSetPreviewMissing);
+        return;
+    }
+
+    mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004];
+    preset = GetEmeraldChampionsBattleSetPresetForFormat(mon, gSpecialVar_0x8005, gSpecialVar_0x8007);
+    if (preset == NULL)
+    {
+        StringCopy(gStringVar4, sText_BattleSetPreviewMissing);
+        return;
+    }
+
+    end = StringCopy(
+        gStringVar4,
+        GetEmeraldChampionsBattleSetNameForFormat(mon, gSpecialVar_0x8005, gSpecialVar_0x8007)
+    );
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+    {
+        const u8 *separator;
+
+        if (i == 1)
+            separator = sText_BattleSetPreviewScroll;
+        else if (i == 2)
+            separator = sText_BattleSetPreviewPage;
+        else
+            separator = sText_BattleSetPreviewNewline;
+
+        end = StringAppend(end, separator);
+        end = StringAppend(end, preset->moves[i] != MOVE_NONE
+                              ? GetMoveName(preset->moves[i])
+                              : sText_BattleSetPreviewEmpty);
+    }
+
+    end = StringAppend(end, sText_BattleSetPreviewPage);
+    end = StringAppend(end, sText_BattleSetPreviewAbility);
+    end = StringAppend(end, gAbilitiesInfo[preset->ability].name);
+    end = StringAppend(end, sText_BattleSetPreviewNewline);
+    end = StringAppend(end, sText_BattleSetPreviewNature);
+    end = StringAppend(end, gNaturesInfo[preset->nature].name);
+    end = StringAppend(end, sText_BattleSetPreviewScroll);
+    end = StringAppend(end, sText_BattleSetPreviewItem);
+
+    item = preset->requiredItem != ITEM_NONE ? preset->requiredItem : preset->item;
+    StringAppend(end, item != ITEM_NONE ? GetItemName(item) : sText_BattleSetPreviewEmpty);
+}
+
 void BufferSelectedMonCurrentEmeraldChampionsBattleSet(void)
 {
     gSpecialVar_Result = FALSE;
@@ -6418,7 +6486,7 @@ static const u16 sResortGorgeousDeluxeRewards[] = {
     ITEM_STARDUST,
     ITEM_STAR_PIECE,
     ITEM_NUGGET,
-    ITEM_RARE_CANDY
+    ITEM_BIG_NUGGET
 };
 
 static u16 SampleResortGorgeousReward(void)

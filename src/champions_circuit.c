@@ -18,6 +18,8 @@
 #include "script_pokemon_util.h"
 #include "showdown_champions_circuit.h"
 #include "string_util.h"
+#include "tv.h"
+#include "constants/battle_frontier.h"
 #include "constants/battle_frontier_trainers.h"
 #include "constants/items.h"
 #include "constants/pokedex.h"
@@ -1296,6 +1298,33 @@ void ChampionsCircuitGenerateOpponent(void)
     gSpecialVar_Result = PARTY_SIZE;
 }
 
+// Every Circuit victory funds the Battle Point exchange. The old Frontier
+// facilities' frontier_givepoints paths are unreachable because every
+// challenge desk now leads here, so this is the only repeatable BP source.
+// Base award grows with the current streak and every tenth lifetime win pays
+// a milestone bonus.
+#define CIRCUIT_BP_BASE            5
+#define CIRCUIT_BP_STREAK_MAX      15
+#define CIRCUIT_BP_MILESTONE_EVERY 10
+#define CIRCUIT_BP_MILESTONE_BONUS 20
+
+static u16 AwardCircuitBattlePoints(u16 streakBeforeWin, u16 totalAfterWin)
+{
+    u32 points = CIRCUIT_BP_BASE + min(streakBeforeWin, CIRCUIT_BP_STREAK_MAX);
+
+    if (totalAfterWin != 0 && totalAfterWin % CIRCUIT_BP_MILESTONE_EVERY == 0)
+        points += CIRCUIT_BP_MILESTONE_BONUS;
+
+    gSaveBlock2Ptr->frontier.battlePoints += points;
+    if (gSaveBlock2Ptr->frontier.battlePoints > MAX_BATTLE_FRONTIER_POINTS)
+        gSaveBlock2Ptr->frontier.battlePoints = MAX_BATTLE_FRONTIER_POINTS;
+    gSaveBlock2Ptr->frontier.cardBattlePoints += points;
+    if (gSaveBlock2Ptr->frontier.cardBattlePoints > MAX_BATTLE_FRONTIER_POINTS)
+        gSaveBlock2Ptr->frontier.cardBattlePoints = MAX_BATTLE_FRONTIER_POINTS;
+    IncrementDailyBattlePoints(points);
+    return points;
+}
+
 void ChampionsCircuitHandleBattleResult(void)
 {
     gSpecialVar_Result = FALSE;
@@ -1303,11 +1332,14 @@ void ChampionsCircuitHandleBattleResult(void)
     {
         u16 wins = VarGet(VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS);
         u16 total = VarGet(VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS);
+        u16 points;
 
         if (wins != 0xFFFF)
             VarSet(VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, wins + 1);
         if (total != 0xFFFF)
             VarSet(VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS, total + 1);
+        points = AwardCircuitBattlePoints(wins, total + 1);
+        ConvertIntToDecimalStringN(gStringVar3, points, STR_CONV_MODE_LEFT_ALIGN, 2);
         HealPlayerParty();
         gSpecialVar_Result = TRUE;
     }

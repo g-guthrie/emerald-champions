@@ -106,14 +106,14 @@ AquaHideout_1F_Text_BossIsInSlateportCity:
 	.string "you something that crucial?$"
 
 AquaHideout_1F_Text_Grunt1Intro:
-	.string "Ayiyiyi!\n"
-	.string "Suspicious character spotted!$"
+	.string "Ayiyiyi! Suspicious character!\p"
+	.string "Right, right, procedure. TENTACRUEL,\n"
+	.string "DHELMISE, hold the gate!$"
 
 AquaHideout_1F_Text_Grunt1Defeat:
-	.string "Grrrrr…\n"
-	.string "I lost it!$"
+	.string "Grrrr… I lost it! I lost the gate!$"
 
 AquaHideout_1F_Text_Grunt1PostBattle:
-	.string "I took the loss for the TEAM,\n"
-	.string "but I did my job…$"
+	.string "I did my part. The rest of the crew is\n"
+	.string "deeper in, and they're better than me.$"
 

@@ -590,6 +590,9 @@ LittlerootTown_ProfessorBirchsLab_Text_WhyNotGiveNicknameToMon:
 LittlerootTown_ProfessorBirchsLab_Text_MightBeGoodIdeaToGoSeeRival:
 	.string "{RIVAL} chose the partner with the type\n"
 	.string "advantage and is waiting on ROUTE 103.\p"
+	.string "Stop at OLDALE's POKéMON CENTER first.\n"
+	.string "Its LEVELER brings your partner to the\l"
+	.string "current limit for free. Nobody grinds.\p"
 	.string "Want to see how your first plan holds\n"
 	.string "against an informed opponent?$"
 

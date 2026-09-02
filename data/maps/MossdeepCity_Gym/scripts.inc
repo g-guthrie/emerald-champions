@@ -394,167 +394,148 @@ MossdeepCity_Gym_Text_GymGuidePostVictory:
 	.string "You're one great TRAINER!$"
 
 MossdeepCity_Gym_Text_PrestonIntro:
-	.string "Battles hinge on the strength of your\n"
-	.string "spirit! The weak-spirited will never win!$"
+	.string "JIRACHI's ICY WIND rewrites the speed\n"
+	.string "order. ALAKAZAM ENCOREs your reply.\p"
+	.string "Then GARCHOMP finishes what you locked!$"
 
 MossdeepCity_Gym_Text_PrestonDefeat:
-	.string "I lost!\n"
-	.string "I must temper my spirit again!$"
+	.string "You refused to repeat yourself!$"
 
 MossdeepCity_Gym_Text_PrestonPostBattle:
-	.string "The indecisive lose.\n"
-	.string "That's my warning to you.$"
+	.string "Never use a setup move beside ENCORE.\n"
+	.string "Attack, or switch the locked partner.$"
 
 MossdeepCity_Gym_Text_VirgilIntro:
-	.string "Let me see your talent!$"
+	.string "MEDICHAM buys one turn with FAKE OUT.\n"
+	.string "BRONZONG spends it on TRICK ROOM.\p"
+	.string "Then the slowest hits first!$"
 
 MossdeepCity_Gym_Text_VirgilDefeat:
-	.string "You possess spectacular talent!$"
+	.string "You stopped the ROOM before it opened!$"
 
 MossdeepCity_Gym_Text_VirgilPostBattle:
-	.string "If there are prodigies in the world,\n"
-	.string "then our GYM LEADERS are them!\p"
-	.string "However, you may be even more talented\n"
-	.string "than them…$"
+	.string "Protect the FAKE OUT turn and the ROOM\n"
+	.string "never happens. Reverse it if it does.$"
 
 MossdeepCity_Gym_Text_BlakeIntro:
-	.string "Fufufufu… Watch me levitate a POKé\n"
-	.string "BALL telekinetically!\p"
-	.string "Wrooooooooaaaar!\n"
-	.string "… … … … … … …\p"
-	.string "Sometimes, I'm out of sync…$"
+	.string "GIRAFARIG's THUNDER WAVE and MR. MIME's\n"
+	.string "ICY WIND both attack your speed.\p"
+	.string "Two ways to be slow. Pick neither!$"
 
 MossdeepCity_Gym_Text_BlakeDefeat:
-	.string "My POKéMON battling skills are out\n"
-	.string "of sync, too!$"
+	.string "You kept your speed through both!$"
 
 MossdeepCity_Gym_Text_BlakePostBattle:
-	.string "A POKé BALL was too heavy to lift\n"
-	.string "psychically. But this dust bunny…\p"
-	.string "Whoooooooooooooooh!\n"
-	.string "… … … … … …\p"
-	.string "No, I'm not cheating!\n"
-	.string "I didn't blow on it! Honestly!$"
+	.string "A paralyzed partner can still switch.\n"
+	.string "Bring the fresh one back in later.$"
 
 MossdeepCity_Gym_Text_HannahIntro:
-	.string "When you lose to me, don't be too hard\n"
-	.string "on yourself.\p"
-	.string "It's not that you're weak--I'm just\n"
-	.string "too strong!$"
+	.string "SOLROCK sets both screens. MALAMAR's\n"
+	.string "CONTRARY grows through SUPERPOWER.\p"
+	.string "Break the screens or the growth!$"
 
 MossdeepCity_Gym_Text_HannahDefeat:
-	.string "You're just too strong!$"
+	.string "You broke the screens first!$"
 
 MossdeepCity_Gym_Text_HannahPostBattle:
-	.string "I'm not going to get down on myself for\n"
-	.string "losing. I just need to train harder.\p"
-	.string "Positive thinking--that's my strong\n"
-	.string "point!$"
+	.string "CONTRARY turns every drop into a boost.\n"
+	.string "Never INTIMIDATE a MALAMAR.$"
 
 MossdeepCity_Gym_Text_SamanthaIntro:
-	.string "I see it…\n"
-	.string "I see your future…\p"
-	.string "If you can beat me, I will tell you\n"
-	.string "your future!$"
+	.string "XATU bounces status and sets TAILWIND.\n"
+	.string "GLIMMORA lays rocks on every switch.\p"
+	.string "Each swap costs you. Choose them well!$"
 
 MossdeepCity_Gym_Text_SamanthaDefeat:
-	.string "I surrender!$"
+	.string "You barely switched at all!$"
 
 MossdeepCity_Gym_Text_SamanthaPostBattle:
-	.string "You will wage a terrifically intense\n"
-	.string "battle with our GYM LEADERS…\p"
-	.string "The result…\n"
-	.string "You won't hear it from me!$"
+	.string "MAGIC BOUNCE returns your hazards and\n"
+	.string "sleep. Attack through XATU instead.$"
 
 MossdeepCity_Gym_Text_MauraIntro:
-	.string "The roads you have traveled…\n"
-	.string "What you have experienced…\p"
-	.string "Come at me with everything you've\n"
-	.string "learned!$"
+	.string "BEHEEYEM's ALLY SWITCH moves my board\n"
+	.string "while you aim. ESPEON bounces status.\p"
+	.string "Target the slot, not the POKéMON!$"
 
 MossdeepCity_Gym_Text_MauraDefeat:
-	.string "You've traveled a path of greatness!$"
+	.string "You aimed where I would be!$"
 
 MossdeepCity_Gym_Text_MauraPostBattle:
-	.string "A bright future awaits those who have\n"
-	.string "worked diligently.\p"
-	.string "For those who lazed idly, there is\n"
-	.string "only despair at the end.\p"
-	.string "What goes around comes around…$"
+	.string "Spread moves ignore ALLY SWITCH.\n"
+	.string "Single-target moves gamble against it.$"
 
 MossdeepCity_Gym_Text_SylviaIntro:
-	.string "Even at the risk of life, I will win\n"
-	.string "this battle!$"
+	.string "GOTHITELLE traps you, TRICK ROOM slows\n"
+	.string "you, then ORANGURU INSTRUCTS ERUPTION.\p"
+	.string "Two ERUPTIONS under the sun. Survive!$"
 
 MossdeepCity_Gym_Text_SylviaDefeat:
-	.string "What you do…\n"
-	.string "It horrifies me…$"
+	.string "You silenced the second ERUPTION!$"
 
 MossdeepCity_Gym_Text_SylviaPostBattle:
-	.string "How dare you beat me…\p"
-	.string "It won't be my fault if something\n"
-	.string "horrible befalls you…$"
+	.string "Lower TORKOAL's HP and ERUPTION fades.\n"
+	.string "KO or TAUNT ORANGURU before it teaches.$"
 
 MossdeepCity_Gym_Text_NateIntro:
-	.string "Hohoho.\p"
-	.string "You need me to show you how tenacious\n"
-	.string "the PSYCHIC type can be.$"
+	.string "NECROZMA sets DRAGON DANCE behind\n"
+	.string "GRUMPIG's TAUNT and THUNDER WAVE.\p"
+	.string "Which of the three do you answer first?$"
 
 MossdeepCity_Gym_Text_NateDefeat:
-	.string "Oh! My, my!\n"
-	.string "Your battle style is fantastic!$"
+	.string "You hit the dancer before the dance!$"
 
 MossdeepCity_Gym_Text_NatePostBattle:
-	.string "I… I don't let defeat rattle m-me,\n"
-	.string "however b-badly.$"
+	.string "Setup beside support is the strongest\n"
+	.string "plan and the most fragile. Deny turn one.$"
 
 MossdeepCity_Gym_Text_KathleenIntro:
-	.string "Let me show you a perfectly awful,\n"
-	.string "horrifying time!$"
+	.string "HYPNO puts you to sleep, COMFEY heals\n"
+	.string "first, SLURPUFF grows on your hits.\p"
+	.string "Every reply feeds one of them!$"
 
 MossdeepCity_Gym_Text_KathleenDefeat:
-	.string "N-nooooo!$"
+	.string "You found the move that fed nothing!$"
 
 MossdeepCity_Gym_Text_KathleenPostBattle:
-	.string "Your vitality is contagious!\n"
-	.string "Get away from me quickly!$"
+	.string "WEAKNESS POLICY punishes the obvious\n"
+	.string "super-effective hit. Hit neutral first.$"
 
 MossdeepCity_Gym_Text_CliffordIntro:
-	.string "I may be past my prime, but I suggest\n"
-	.string "you not patronize me.$"
+	.string "PINCURCHIN's terrain doubles RAICHU's\n"
+	.string "speed. MR. MIME leads with FAKE OUT.\p"
+	.string "Then GOLISOPOD Mega Evolves!$"
 
 MossdeepCity_Gym_Text_CliffordDefeat:
-	.string "Ah, you overflow with the power\n"
-	.string "of youth!$"
+	.string "You turned the terrain off!$"
 
 MossdeepCity_Gym_Text_CliffordPostBattle:
-	.string "It seems that I could not overcome\n"
-	.string "your youthful energy.$"
+	.string "Overwrite ELECTRIC TERRAIN and SURGE\n"
+	.string "SURFER becomes an ordinary RAICHU.$"
 
 MossdeepCity_Gym_Text_MaceyIntro:
-	.string "You're not getting through to the end!\n"
-	.string "Not if I can help it!$"
+	.string "JYNX's LOVELY KISS opens the door.\n"
+	.string "DELPHOX NASTY PLOTS behind it.\p"
+	.string "GRUMPIG TAUNTS whatever you try!$"
 
 MossdeepCity_Gym_Text_MaceyDefeat:
-	.string "How could you be so ludicrously\n"
-	.string "strong?$"
+	.string "You attacked through the sleep!$"
 
 MossdeepCity_Gym_Text_MaceyPostBattle:
-	.string "Humph! You may be strong, but you're\n"
-	.string "not suitable for the PSYCHIC type!\p"
-	.string "The way you battle is somehow brutal!$"
+	.string "Wake-up plans lose to attack plans.\n"
+	.string "Remove the sleeper before it moves.$"
 
 MossdeepCity_Gym_Text_NicholasIntro:
-	.string "Wroooar! Have a taste of my super\n"
-	.string "POKéMON hard-battling power!$"
+	.string "INDEEDEE pulls your attacks. HATTERENE\n"
+	.string "opens TRICK ROOM behind it.\p"
+	.string "WOBBUFFET returns whatever remains!$"
 
 MossdeepCity_Gym_Text_NicholasDefeat:
-	.string "Oh!\n"
-	.string "Done in!$"
+	.string "You broke the ROOM through the redirect!$"
 
 MossdeepCity_Gym_Text_NicholasPostBattle:
-	.string "All right! I think I'll develop a special\n"
-	.string "invincible POKéMON power next.$"
+	.string "FOLLOW ME cannot pull spread attacks.\n"
+	.string "Hit both slots and the ROOM never opens.$"
 
 MossdeepCity_Gym_Text_NeedFeatherBadge:
 	.string "TATE: Your path still bends west.\n"

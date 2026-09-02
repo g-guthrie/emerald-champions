@@ -516,8 +516,10 @@ def main() -> None:
         require(stale not in trainer_dialogue, f"trainer dialogue still references a removed party member: {stale}")
 
     postgame_rewards = {
-        "data/maps/AlteringCave_B1F/scripts.inc": ("ITEM_CATCHING_CHARM", "ITEM_ZERAORITE"),
-        "data/maps/CaveOfOrigin_DianciesRoom/scripts.inc": ("ITEM_OVAL_CHARM", "ITEM_STARMINITE"),
+        "data/maps/AlteringCave_B1F/scripts.inc": ("ITEM_MEWTWONITE_X", "ITEM_ZERAORITE"),
+        "data/maps/CaveOfOrigin_DianciesRoom/scripts.inc": ("ITEM_DIANCITE", "ITEM_STARMINITE"),
+        "data/maps/Route121_SafariZoneEntrance/scripts.inc": ("ITEM_CATCHING_CHARM", "ITEM_ZERAORITE"),
+        "data/maps/Route117_PokemonDayCare/scripts.inc": ("ITEM_OVAL_CHARM", "ITEM_STARMINITE"),
         "data/maps/MossdeepCity_House1/scripts.inc": ("ITEM_SHINY_CHARM", "ITEM_GARCHOMPITE_Z"),
     }
     for relative, (reward, obsolete) in postgame_rewards.items():

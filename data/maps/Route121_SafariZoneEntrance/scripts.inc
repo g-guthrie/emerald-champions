@@ -40,6 +40,12 @@ Route121_SafariZoneEntrance_EventScript_InfoAttendant::
 
 Route121_SafariZoneEntrance_EventScript_FirstTimeInfo::
 	msgbox Route121_SafariZoneEntrance_Text_FirstTimeInfo, MSGBOX_DEFAULT
+	goto_if_set FLAG_EC_RECEIVED_CATCHING_CHARM, Route121_SafariZoneEntrance_EventScript_FirstTimeInfoEnd
+	msgbox Route121_SafariZoneEntrance_Text_CatchingCharmGift, MSGBOX_DEFAULT
+	giveitem ITEM_CATCHING_CHARM
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_EC_RECEIVED_CATCHING_CHARM
+Route121_SafariZoneEntrance_EventScript_FirstTimeInfoEnd::
 	release
 	end
 
@@ -129,3 +135,8 @@ Route121_SafariZoneEntrance_EventScript_TrainerTipSign::
 	msgbox Route121_SafariZoneEntrance_Text_TrainerTip, MSGBOX_SIGN
 	end
 
+
+Route121_SafariZoneEntrance_Text_CatchingCharmGift:
+	.string "First-time visitors get a CATCHING\n"
+	.string "CHARM. Carry it and your throws will\l"
+	.string "land critical captures more often.$"

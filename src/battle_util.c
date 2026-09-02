@@ -6,6 +6,7 @@
 #include "battle_environment.h"
 #include "battle_pyramid.h"
 #include "battle_util.h"
+#include "caps.h"
 #include "battle_controllers.h"
 #include "battle_interface.h"
 #include "battle_setup.h"
@@ -5646,22 +5647,35 @@ enum Obedience GetAttackerObedienceForAction(void)
     if (FlagGet(FLAG_BADGE08_GET)) // Rain Badge, ignore obedience altogether
         return OBEYS;
 
-    obedienceLevel = 10;
+    // Emerald Champions: obedience follows the strict level cap exactly
+    // (14/20/30/40/45/55/60/70/80) instead of the vanilla 10-per-badge ladder,
+    // which disagreed with the cap at every step. A Pokémon whose met level is
+    // above the current cap (a Lv. 45 fished up on Route 102 under a Lv. 14
+    // cap) is a catch for later, not a way around the cap; anything caught or
+    // Leveled within the cap always obeys.
+    if (B_EXP_CAP_TYPE != EXP_CAP_NONE)
+    {
+        obedienceLevel = GetCurrentLevelCap();
+    }
+    else
+    {
+        obedienceLevel = 10;
 
-    if (FlagGet(FLAG_BADGE01_GET)) // Stone Badge
-        obedienceLevel = 20;
-    if (FlagGet(FLAG_BADGE02_GET)) // Knuckle Badge
-        obedienceLevel = 30;
-    if (FlagGet(FLAG_BADGE03_GET)) // Dynamo Badge
-        obedienceLevel = 40;
-    if (FlagGet(FLAG_BADGE04_GET)) // Heat Badge
-        obedienceLevel = 50;
-    if (FlagGet(FLAG_BADGE05_GET)) // Balance Badge
-        obedienceLevel = 60;
-    if (FlagGet(FLAG_BADGE06_GET)) // Feather Badge
-        obedienceLevel = 70;
-    if (FlagGet(FLAG_BADGE07_GET)) // Mind Badge
-        obedienceLevel = 80;
+        if (FlagGet(FLAG_BADGE01_GET)) // Stone Badge
+            obedienceLevel = 20;
+        if (FlagGet(FLAG_BADGE02_GET)) // Knuckle Badge
+            obedienceLevel = 30;
+        if (FlagGet(FLAG_BADGE03_GET)) // Dynamo Badge
+            obedienceLevel = 40;
+        if (FlagGet(FLAG_BADGE04_GET)) // Heat Badge
+            obedienceLevel = 50;
+        if (FlagGet(FLAG_BADGE05_GET)) // Balance Badge
+            obedienceLevel = 60;
+        if (FlagGet(FLAG_BADGE06_GET)) // Feather Badge
+            obedienceLevel = 70;
+        if (FlagGet(FLAG_BADGE07_GET)) // Mind Badge
+            obedienceLevel = 80;
+    }
 
     if (B_OBEDIENCE_MECHANICS >= GEN_8
      && !IsOtherTrainer(gBattleMons[gBattlerAttacker].otId, gBattleMons[gBattlerAttacker].otName))

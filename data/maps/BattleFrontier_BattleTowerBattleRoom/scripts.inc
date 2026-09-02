@@ -57,6 +57,7 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_CircuitNext::
 	waitmovement 0
 	applymovement LOCALID_PLAYER, BattleFrontier_BattleTowerBattleRoom_Movement_PlayerFaceAttendant
 	waitmovement 0
+	msgbox BattleFrontier_BattleTowerBattleRoom_Text_CircuitBattlePoints, MSGBOX_DEFAULT
 	special ChampionsCircuitTryGiveReward
 	call_if_eq VAR_RESULT, 1, BattleFrontier_BattleTowerLobby_EventScript_CircuitRewardParty
 	call_if_eq VAR_RESULT, 2, BattleFrontier_BattleTowerLobby_EventScript_CircuitRewardPC
@@ -623,3 +624,8 @@ BattleFrontier_BattleTowerBattleRoom_Text_WishICouldBattleYouAgain:
 	.string "I have never had a POKéMON battle\n"
 	.string "so enjoyable before…\p"
 	.string "I wish I could battle with you again…$"
+
+BattleFrontier_BattleTowerBattleRoom_Text_CircuitBattlePoints:
+	.string "You earned {STR_VAR_3} Battle Points!\p"
+	.string "Spend them at the Exchange Service\n"
+	.string "Corner whenever you like.$"

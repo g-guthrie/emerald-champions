@@ -5,7 +5,7 @@ PacifidlogTown_House3_EventScript_Trader::
 	lock
 	faceplayer
 	goto_if_set FLAG_PACIFIDLOG_NPC_TRADE_COMPLETED, PacifidlogTown_House3_EventScript_TradeCompleted
-	ingame_trade INGAME_TRADE_HORSEA, PacifidlogTown_House3_Text_WillingToTradeIt, PacifidlogTown_House3_EventScript_DeclineTrade, PacifidlogTown_House3_EventScript_NotRequestedMon, PacifidlogTown_House3_Text_ItsSubtlyDifferentThankYou
+	ingame_trade INGAME_TRADE_CYCLIZAR, PacifidlogTown_House3_Text_WillingToTradeIt, PacifidlogTown_House3_EventScript_DeclineTrade, PacifidlogTown_House3_EventScript_NotRequestedMon, PacifidlogTown_House3_Text_ItsSubtlyDifferentThankYou
 	setflag FLAG_PACIFIDLOG_NPC_TRADE_COMPLETED
 	release
 	end
@@ -43,7 +43,8 @@ PacifidlogTown_House3_Text_ItsSubtlyDifferentThankYou:
 	.string "Oh, so this is a {STR_VAR_1}?\p"
 	.string "It's sort of like a {STR_VAR_2},\n"
 	.string "and yet it's subtly different.\p"
-	.string "Thank you!$"
+	.string "My {STR_VAR_2} is already trained\n"
+	.string "for doubles. Ride it well!$"
 
 PacifidlogTown_House3_Text_WontAcceptAnyLessThanRealMon:
 	.string "No, no, no! I won't accept any\n"

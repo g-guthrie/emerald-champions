@@ -12,6 +12,7 @@
 #include "random.h"
 #include "script_pokemon_util.h"
 #include "string_util.h"
+#include "constants/characters.h"
 #include "constants/flags.h"
 #include "constants/items.h"
 #include "constants/maps.h"
@@ -206,6 +207,45 @@ static u8 GetBadgeCountForLegendarySigns(void)
         if (FlagGet(FLAG_BADGE01_GET + badge))
             count++;
     return count;
+}
+
+#define SIGN_LEDGER_MAX_ENTRIES 9
+
+static const u8 sText_LedgerAt[] = _(" waits at\n");
+static const u8 sText_LedgerPage[] = _("\p");
+static const u8 sText_LedgerMore[] = _("…and more SIGNS are awake elsewhere.");
+static const u8 sText_LedgerEnd[] = _(".");
+
+// Builds a readable list of every awakened, uncaught Sign into gStringVar4
+// (one "SPECIES waits at\nLOCATION." page per Sign) and returns the count in
+// gSpecialVar_Result, so the player can always find out what is pending
+// without walking the whole region.
+void BufferLegendarySignLedger(void)
+{
+    u8 *end = gStringVar4;
+    u32 count = 0;
+
+    *end = EOS;
+    for (enum LegendarySignId signId = 0; signId < LEGENDARY_SIGN_COUNT; signId++)
+    {
+        if (!IsLegendarySignUnlocked(signId) || IsLegendarySignCaught(signId))
+            continue;
+        if (count == SIGN_LEDGER_MAX_ENTRIES)
+        {
+            end = StringAppend(end, sText_LedgerPage);
+            StringAppend(end, sText_LedgerMore);
+            count++;
+            break;
+        }
+        if (count != 0)
+            end = StringAppend(end, sText_LedgerPage);
+        end = StringAppend(end, GetSpeciesName(gLegendarySignDefinitions[signId].species));
+        end = StringAppend(end, sText_LedgerAt);
+        end = StringAppend(end, GetLegendarySignLocationName(signId));
+        end = StringAppend(end, sText_LedgerEnd);
+        count++;
+    }
+    gSpecialVar_Result = count;
 }
 
 bool32 IsLegendarySignUnlocked(enum LegendarySignId signId)

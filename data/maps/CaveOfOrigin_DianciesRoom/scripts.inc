@@ -9,9 +9,9 @@ CaveOfOrigin_DianciesRoom_EventScript_WallaceExhibition::
 	trainerbattle_double TRAINER_WALLACE_DOUBLES_LEGENDS, CaveOfOrigin_DianciesRoom_Text_WallaceIntro, CaveOfOrigin_DianciesRoom_Text_WallaceDefeat, EmeraldChampions_Text_NeedTwoPokemon
 
 CaveOfOrigin_DianciesRoom_EventScript_WallaceReward::
-	checkitem ITEM_OVAL_CHARM, 1
+	checkitem ITEM_DIANCITE, 1
 	goto_if_eq VAR_RESULT, TRUE, CaveOfOrigin_DianciesRoom_EventScript_WallaceAfter
-	giveitem ITEM_OVAL_CHARM
+	giveitem ITEM_DIANCITE
 	goto_if_eq VAR_RESULT, FALSE, CaveOfOrigin_DianciesRoom_EventScript_WallaceBagFull
 
 CaveOfOrigin_DianciesRoom_EventScript_WallaceAfter::
@@ -39,15 +39,15 @@ CaveOfOrigin_DianciesRoom_Text_WallaceDefeat:
 	.string "You found calm inside impossible rain.$"
 
 CaveOfOrigin_DianciesRoom_Text_WallaceAfter:
-	.string "Take this OVAL CHARM. Let the next\n"
-	.string "generation inherit what you learned.$"
+	.string "Take this DIANCITE. Let the jewel of\n"
+	.string "this cave shine as brightly as you.$"
 
 CaveOfOrigin_DianciesRoom_Text_WallaceNotReady:
 	.string "First defeat me at the POKéMON LEAGUE.\n"
 	.string "Then return for the unrestricted battle.$"
 
 CaveOfOrigin_DianciesRoom_Text_WallaceBagFull:
-	.string "Make room for the OVAL CHARM and return.\n"
+	.string "Make room for the DIANCITE and return.\n"
 	.string "A Champion's reward will wait.$"
 CaveOfOrigin_DianciesRoom_EventScript_Diancie::
 	lock

@@ -120,40 +120,34 @@ VictoryRoad_1F_EventScript_Katelynn::
 
 VictoryRoad_1F_Text_WallyNotGoingToLoseAnymore:
 	.string "WALLY: Hi! {PLAYER}!\p"
-	.string "I bet you're surprised to see me here!\p"
-	.string "I made it all the way here, and it's\n"
-	.string "all thanks to you!\p"
-	.string "{PLAYER}, losing to you that time\n"
-	.string "made me stronger!\p"
-	.string "But I'm not going to lose anymore!\p"
-	.string "I'm going to win! For the POKéMON who\n"
-	.string "gave me courage and strength!\p"
-	.string "Okay… Here I come!$"
+	.string "Surprised? I made it here, and it's\n"
+	.string "because of you.\p"
+	.string "Losing in MAUVILLE showed me my team had\n"
+	.string "no answer for speed. Now TOGEKISS pulls\l"
+	.string "every attack while the rest set up.\p"
+	.string "I'm not losing anymore. Here I come!$"
 
 VictoryRoad_1F_Text_WallyEntranceDefeat:
-	.string "Wow!\n"
-	.string "{PLAYER}, you are strong, after all!$"
+	.string "You still had an answer for my answer…$"
 
 VictoryRoad_1F_Text_WallyPostEntranceBattle:
-	.string "WALLY: I couldn't beat you today,\n"
-	.string "{PLAYER}, but one of these days, I'll\l"
-	.string "catch up to you!$"
+	.string "WALLY: I couldn't beat you today, but I\n"
+	.string "saw the seam in my team.\p"
+	.string "Next time it's closed.$"
 
 VictoryRoad_1F_Text_WallyIntro:
 	.string "WALLY: Hi! {PLAYER}!\p"
-	.string "I've gotten stronger since that last\n"
-	.string "time! I wanted to show you, {PLAYER}!\p"
+	.string "I rebuilt again since last time. I\n"
+	.string "wanted you to see it first!\p"
 	.string "Okay… Here I come!$"
 
 VictoryRoad_1F_Text_WallyDefeat:
-	.string "Wow!\n"
-	.string "{PLAYER}, you are strong, after all!$"
+	.string "You still had an answer for my answer…$"
 
 VictoryRoad_1F_Text_WallyPostBattle:
-	.string "WALLY: I couldn't beat you this time,\n"
-	.string "too… But one of these days, {PLAYER},\l"
-	.string "I'm going to catch up to you…\p"
-	.string "And challenge the POKéMON LEAGUE!$"
+	.string "WALLY: Not this time either… But the gap\n"
+	.string "is closing, {PLAYER}.\p"
+	.string "When it closes, I'm taking the LEAGUE.$"
 
 VictoryRoad_1F_Text_EdgarIntro:
 	.string "I've made it this far a couple times,\n"

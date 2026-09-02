@@ -65,15 +65,17 @@ EverGrandeCity_GlaciasRoom_EventScript_Defeated::
 	end
 
 EverGrandeCity_GlaciasRoom_Text_IntroSpeech:
-	.string "I am GLACIA of the ELITE FOUR.\p"
-	.string "Snow turns defense into tempo: VEIL buys\n"
-	.string "Blizzards, wind changes order, and one\l"
-	.string "slow horse can punish a rushed answer.\p"
-	.string "Break the climate, not merely the ice.$"
+	.string "GLACIA. I came far for opponents worth\n"
+	.string "the cold.\p"
+	.string "Snow is patience. The VEIL buys time,\n"
+	.string "the wind rearranges order, and one\l"
+	.string "slow horse ends whoever hurries.\p"
+	.string "Break the climate. The ice will follow.$"
 
 EverGrandeCity_GlaciasRoom_Text_Defeat:
-	.string "You broke the shelter before the storm.$"
+	.string "…You thawed the shelter before the\n"
+	.string "storm arrived. Acceptable.$"
 
 EverGrandeCity_GlaciasRoom_Text_PostBattleSpeech:
-	.string "DRAKE commands both old and new speed.\n"
-	.string "Do not assume a Dragon moves one way.$"
+	.string "DRAKE is old, and old Dragons know both\n"
+	.string "speeds. Assume nothing about his tempo.$"

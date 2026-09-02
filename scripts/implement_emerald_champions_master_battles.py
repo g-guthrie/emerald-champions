@@ -46,6 +46,7 @@ class Design:
     format: str
     difficulty: float
     mons: list[Mon]
+    tier: int = 1
 
 
 def line_value(text: str, key: str) -> str:
@@ -70,6 +71,8 @@ def read_designs() -> dict[str, Design]:
         encounter_number = int(encounter_marker.group(1))
         cap = int(line_value(encounter, "strict_cap"))
         difficulty = float(line_value(encounter, "difficulty_target"))
+        location = line_value(encounter, "location")
+        fatigue_role = line_value(encounter, "fatigue_role")
         _prefix, branches = split_by_markers(encounter, BRANCH_RE)
         for _branch_marker, branch in branches:
             trainer = line_value(branch, "trainer_id")
@@ -88,27 +91,141 @@ def read_designs() -> dict[str, Design]:
                 ))
             if trainer in designs:
                 raise ValueError(f"duplicate trainer design {trainer}")
-            designs[trainer] = Design(encounter_number, trainer, fmt, difficulty, mons)
+            tier = trainer_tier(trainer, location, fatigue_role)
+            apply_tier(mons, tier, cap)
+            designs[trainer] = Design(encounter_number, trainer, fmt, difficulty, mons, tier)
     return designs
+
+
+TRAINER_CLASSES: dict[str, str] = {}
+
+
+def trainer_class(trainer: str) -> str:
+    if not TRAINER_CLASSES:
+        for block in TRAINERS_PARTY.read_text().split("=== TRAINER_")[1:]:
+            name = "TRAINER_" + block.split(" ===", 1)[0]
+            match = re.search(r"(?m)^Class: (.*)$", block)
+            TRAINER_CLASSES[name] = match.group(1) if match else ""
+    return TRAINER_CLASSES.get(trainer, "")
+
+
+ACE_CLASSES = {"Cooltrainer", "Cooltrainer 2", "Expert", "Pkmn Ranger", "Dragon Tamer", "Winstrate"}
+TEAM_CLASSES = {"Team Magma", "Team Aqua"}
+ADMIN_CLASSES = {"Magma Admin", "Aqua Admin"}
+BOSS_CLASSES = {
+    "Leader", "Magma Leader", "Aqua Leader", "Rival", "Elite Four", "Champion",
+    "Arena Tycoon", "Pike Queen", "Palace Maven", "Salon Maiden", "Dome Ace",
+    "Factory Head", "Pyramid King",
+}
+
+# Skill tiers. Every campaign trainer belongs to exactly one, and the tier
+# decides its AI, how much of the 66-point Stat Point budget its team spends,
+# and a level nudge relative to the encounter's authored offset. This is what
+# makes a Youngster feel different from a Cooltrainer, a Grunt from an Admin,
+# and a Gym trainer from the Elite Four, before any team-composition choice.
+TIER_BREATHER = 0   # deliberate breather: a person with a hobby
+TIER_STANDARD = 6   # ordinary route trainer: competent, not clever
+TIER_ACE = 1        # route ace / notable optional: plays real tactics
+TIER_TEAM = 2       # Magma/Aqua grunt: coordinated but not clever
+TIER_GYM = 3        # Gym trainer / mini-boss: teaches one mechanic well
+TIER_ADMIN = 4      # Team admin: switches and predicts
+TIER_BOSS = 5       # Leader / Rival / Elite Four / Champion / Frontier Brain
+
+TIER_AI = {
+    TIER_BREATHER: ["Basic Trainer", "Hp Aware"],
+    TIER_STANDARD: ["Basic Trainer", "Hp Aware", "Smart Mon Choices"],
+    TIER_ACE: ["Basic Trainer", "Hp Aware", "Smart Mon Choices", "Assume Stab", "Assume Status Moves"],
+    TIER_TEAM: ["Basic Trainer", "Hp Aware", "Smart Mon Choices", "Assume Stab"],
+    TIER_GYM: ["Basic Trainer", "Hp Aware", "Smart Mon Choices", "Pp Stall Prevention", "Assume Stab", "Assume Status Moves"],
+    TIER_ADMIN: [
+        "Basic Trainer", "Hp Aware", "Smart Switching", "Predict Switch",
+        "Predict Incoming Mon", "Pp Stall Prevention", "Assume Stab", "Assume Status Moves",
+    ],
+    TIER_BOSS: [
+        "Smart Trainer", "Prediction", "Know Opponent Party", "Powerful Status",
+        "Hp Aware", "Ability Omniscience", "Item Omniscience", "Move Omniscience",
+    ],
+}
+# Fraction of the 66 Stat Point budget each tier is allowed to spend.
+TIER_STAT_BUDGET = {
+    TIER_BREATHER: 0.55,
+    TIER_STANDARD: 0.70,
+    TIER_ACE: 0.85,
+    TIER_TEAM: 0.70,
+    TIER_GYM: 0.90,
+    TIER_ADMIN: 1.00,
+    TIER_BOSS: 1.00,
+}
+# Level nudge applied on top of the authored level_offset.
+TIER_LEVEL_DELTA = {
+    TIER_BREATHER: -1,
+    TIER_STANDARD: 0,
+    TIER_ACE: 0,
+    TIER_TEAM: 0,
+    TIER_GYM: 0,
+    TIER_ADMIN: 1,
+    TIER_BOSS: 1,
+}
+
+
+def trainer_tier(trainer: str, location: str, fatigue_role: str) -> int:
+    cls = trainer_class(trainer)
+    if cls in BOSS_CLASSES or fatigue_role == "marquee_boss":
+        if trainer == "TRAINER_WALLY_MAUVILLE":
+            return TIER_GYM
+        return TIER_BOSS
+    if cls in ADMIN_CLASSES:
+        return TIER_ADMIN
+    if "Gym" in location or fatigue_role == "mini_boss_or_exceptional_trainer":
+        return TIER_GYM
+    if cls in TEAM_CLASSES:
+        return TIER_TEAM
+    if cls in ACE_CLASSES or fatigue_role == "notable_optional_or_route_ace":
+        return TIER_ACE
+    if fatigue_role == "ordinary_breather":
+        return TIER_BREATHER
+    return TIER_STANDARD
+
+
+EVOLUTION_LEVELS: dict[str, int] = {}
+
+
+def evolution_level(species: str) -> int | None:
+    if not EVOLUTION_LEVELS:
+        for path in (ROOT / "src" / "data" / "pokemon" / "species_info").glob("gen_*_families.h"):
+            text = path.read_text()
+            for level, evolved in re.findall(r"\{EVO_LEVEL,\s*(\d+),\s*(SPECIES_[A-Z0-9_]+)", text):
+                EVOLUTION_LEVELS[evolved] = min(EVOLUTION_LEVELS.get(evolved, 1000), int(level))
+    return EVOLUTION_LEVELS.get(species)
+
+
+def scale_points(points: list[int], budget: float) -> list[int]:
+    # Scale the authored spread down to the tier's budget, keeping its shape.
+    # Bosses keep the full 66; a breather spends about half of it.
+    if budget >= 1.0:
+        return points
+    scaled = [int(value * budget) for value in points]
+    # Keep the spread's dominant stats meaningful: never drop a 32 below 16.
+    return [max(value, 16) if original == 32 else value for value, original in zip(scaled, points)]
+
+
+def apply_tier(mons: list[Mon], tier: int, cap: int) -> None:
+    delta = TIER_LEVEL_DELTA[tier]
+    budget = TIER_STAT_BUDGET[tier]
+    for mon in mons:
+        mon.points = scale_points(mon.points, budget)
+        level = max(1, min(100, mon.level + delta))
+        evo = evolution_level(mon.species)
+        if delta < 0 and evo is not None and level < evo <= mon.level:
+            level = mon.level
+        mon.level = level
 
 
 def ai_flags(design: Design) -> str:
     if design.trainer in SMART_AI_OVERRIDES:
         flags = ["Basic Trainer", "Hp Aware", "Smart Mon Choices", "Assume Stab", "Assume Status Moves"]
-    elif design.difficulty >= 9.5:
-        flags = [
-            "Smart Trainer", "Prediction", "Know Opponent Party", "Powerful Status",
-            "Hp Aware", "Ability Omniscience", "Item Omniscience", "Move Omniscience",
-        ]
-    elif design.difficulty >= 8.0:
-        flags = [
-            "Basic Trainer", "Hp Aware", "Smart Switching", "Predict Switch",
-            "Predict Incoming Mon", "Pp Stall Prevention", "Assume Stab", "Assume Status Moves",
-        ]
-    elif design.difficulty >= 7.0:
-        flags = ["Basic Trainer", "Hp Aware", "Smart Mon Choices", "Assume Stab", "Assume Status Moves"]
     else:
-        flags = ["Basic Trainer"]
+        flags = list(TIER_AI[design.tier])
     moves = {move for mon in design.mons for move in mon.moves}
     if moves.intersection({"MOVE_EXPLOSION", "MOVE_SELF_DESTRUCT", "MOVE_MISTY_EXPLOSION"}):
         flags.append("Will Suicide")

@@ -2453,14 +2453,18 @@ void DoWallyTutorialBagMenu(void)
 {
     PrepareBagForWallyTutorial();
     AddBagItem(ITEM_POKE_BALL, 1);
-    GoToBagMenu(ITEMMENULOCATION_WALLY, POCKET_POKE_BALLS, CB2_SetUpReshowBattleScreenAfterMenu2);
+    // Task_WallyTutorialBagMenu scrolls one pocket to the right before picking
+    // the Poké Ball, so open on the pocket immediately left of Poké Balls.
+    // Opening on Poké Balls directly made Wally scroll into Key Items and
+    // "throw" from the wrong pocket.
+    GoToBagMenu(ITEMMENULOCATION_WALLY, POCKET_POKE_BALLS - 1, CB2_SetUpReshowBattleScreenAfterMenu2);
 }
 
 void InitOldManBag(void)
 {
     PrepareBagForWallyTutorial();
     AddBagItem(ITEM_POKE_BALL, 1);
-    GoToBagMenu(ITEMMENULOCATION_WALLY, POCKET_POKE_BALLS, CB2_SetUpReshowBattleScreenAfterMenu2);
+    GoToBagMenu(ITEMMENULOCATION_WALLY, POCKET_POKE_BALLS - 1, CB2_SetUpReshowBattleScreenAfterMenu2);
 }
 
 #define tTimer data[8]

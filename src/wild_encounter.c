@@ -751,6 +751,10 @@ bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, enum WildPok
     level = ChooseWildMonLevel(wildMonInfo->wildPokemon, wildMonIndex, area);
     if (IsLegendarySignOrdinaryWildSpecies(wildMonInfo->wildPokemon[wildMonIndex].species))
         level = min(MAX_LEVEL, GetCurrentLevelCap());
+    // Emerald Champions: nothing in the wild is ever above the live level cap.
+    // Table levels describe the route; an early Old Rod cannot pull a Lv 45
+    // Qwilfish out of Route 103 when the cap is 14.
+    level = min(level, GetCurrentLevelCap());
     if (flags & WILD_CHECK_REPEL && !IsWildLevelAllowedByRepel(level))
         return FALSE;
     if (gMapHeader.mapLayoutId != LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_WILD_MONS && flags & WILD_CHECK_KEEN_EYE && !IsAbilityAllowingEncounter(level))
@@ -766,6 +770,7 @@ static u16 GenerateFishingWildMon(const struct WildPokemonInfo *wildMonInfo, u8 
     enum Species wildMonSpecies = wildMonInfo->wildPokemon[wildMonIndex].species;
     u8 level = ChooseWildMonLevel(wildMonInfo->wildPokemon, wildMonIndex, WILD_AREA_FISHING);
 
+    level = min(level, GetCurrentLevelCap());
     UpdateChainFishingStreak();
     CreateWildMon(wildMonSpecies, level);
     return wildMonSpecies;

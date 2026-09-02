@@ -1,7 +1,7 @@
 FallarborTown_BattleTentLobby_Text_WelcomeToBattleTent:
-	.string "I welcome you to the BATTLE TENT\n"
-	.string "FALLARBOR SITE!\p"
-	.string "I am your guide to the Set KO Tourney!$"
+	.string "Welcome to the FALLARBOR BATTLE TENT!\p"
+	.string "I run the Set KO Tourney, HOENN's only\n"
+	.string "SINGLE BATTLE laboratory.$"
 
 FallarborTown_BattleTentLobby_Text_TakeChallenge:
 	.string "Now, do you wish to take the challenge\n"
@@ -12,25 +12,18 @@ FallarborTown_BattleTentLobby_Text_AwaitAnotherChallenge:
 	.string "another occasion!$"
 
 FallarborTown_BattleTentLobby_Text_ExplainFallarborTent:
-	.string "In the FALLARBOR BATTLE TENT,\n"
-	.string "we undertake the Set KO Tourney.\p"
-	.string "All participants enter with a team of\n"
-	.string "three POKéMON.\p"
-	.string "The three POKéMON must be lined up\n"
-	.string "in the order that they are to appear in.\p"
-	.string "During battle, the POKéMON will appear\n"
-	.string "one at a time in the preset order.\p"
-	.string "Once a POKéMON enters battle, it must\n"
-	.string "remain out until the match is decided.\p"
-	.string "If a match remains undecided in\n"
-	.string "three turns, it goes to judging.\p"
-	.string "If you wish to interrupt your challenge,\n"
-	.string "please save the game.\p"
-	.string "If you don't save, you will not be able\n"
-	.string "to continue with your challenge.\p"
-	.string "If you pull off the feat of beating\n"
-	.string "three TRAINERS in succession,\l"
-	.string "we will present you with a fine prize.$"
+	.string "The FALLARBOR BATTLE TENT is the one\n"
+	.string "place in HOENN built for SINGLES.\p"
+	.string "Bring three POKéMON, in order. Each\n"
+	.string "fights alone until it faints or wins.\p"
+	.string "If a bout lasts three turns it goes to\n"
+	.string "judging: mind, skill, and body.\p"
+	.string "Doubles teaches cooperation. This\n"
+	.string "teaches a single set to stand alone.\p"
+	.string "Three wins in a row earn a PP MAX or a\n"
+	.string "rare capture Ball.\p"
+	.string "To interrupt a challenge, save the\n"
+	.string "game. Quitting without saving forfeits.$"
 
 FallarborTown_BattleTentLobby_Text_SaveBeforeChallenge:
 	.string "Before showing you to the BATTLE\n"
@@ -118,34 +111,27 @@ FallarborTown_BattleTentLobby_Text_LookingForwardToArrival:
 	.string "I must save the game. Please wait.$"
 
 VerdanturfTown_BattleTentLobby_Text_WelcomeToBattleTent:
-	.string "I welcome you to the BATTLE TENT\n"
-	.string "VERDANTURF SITE!\p"
-	.string "Here, the TRAINER's trust toward\n"
-	.string "POKéMON is tested.$"
+	.string "Welcome to the VERDANTURF BATTLE TENT!\p"
+	.string "Here, four POKéMON battle in pairs, and\n"
+	.string "their TRAINER only watches.$"
 
 VerdanturfTown_BattleTentLobby_Text_TakeChallenge:
 	.string "Do you wish to take the VERDANTURF\n"
 	.string "BATTLE TENT challenge?$"
 
 VerdanturfTown_BattleTentLobby_Text_ExplainVerdanturfTent:
-	.string "In the VERDANTURF BATTLE TENT,\n"
-	.string "there is one crucial rule that must\l"
-	.string "be obeyed.\p"
-	.string "TRAINERS are permitted only to switch\n"
-	.string "their POKéMON in and out.\p"
-	.string "TRAINERS are otherwise forbidden to\n"
-	.string "command their POKéMON.\p"
-	.string "The POKéMON are to behave according\n"
-	.string "to their nature and battle on their own.\p"
-	.string "You must put your trust in your\n"
-	.string "POKéMON and watch over them.\p"
-	.string "If you achieve the honor of beating\n"
-	.string "three TRAINERS in succession,\l"
-	.string "we will present you with a prize.\p"
-	.string "If you want to interrupt your\n"
-	.string "challenge, please save the game.\p"
-	.string "If you don't save before interrupting,\n"
-	.string "you will be disqualified.$"
+	.string "In the VERDANTURF BATTLE TENT every\n"
+	.string "match is a DOUBLE BATTLE.\p"
+	.string "You bring four POKéMON. Once a pair is\n"
+	.string "out, you may only switch them.\p"
+	.string "You give no commands. Each POKéMON\n"
+	.string "chooses moves by its own Nature.\p"
+	.string "It is the purest test of a build: does\n"
+	.string "the set work without you?\p"
+	.string "Win three matches in a row and you\n"
+	.string "earn an Evolution Stone.\p"
+	.string "To interrupt a challenge, save the\n"
+	.string "game. Quitting without saving forfeits.$"
 
 VerdanturfTown_BattleTentLobby_Text_ReturnFortified:
 	.string "When you have fortified your heart\n"
@@ -183,7 +169,7 @@ VerdanturfTown_BattleTentLobby_Text_NotEnoughValidMonsLvOpen:
 
 VerdanturfTown_BattleTentLobby_Text_SelectThreeMons:
 	.string "Good. Now, you must select your\n"
-	.string "three POKéMON.$"
+	.string "four POKéMON for Double Battles.$"
 
 VerdanturfTown_BattleTentLobby_Text_SaveBeforeChallenge:
 	.string "I must save before I show you to\n"
@@ -213,32 +199,26 @@ VerdanturfTown_BattleTentLobby_Text_PresentYouWithPrize:
 	.string "we present you with this prize.$"
 
 SlateportCity_BattleTentLobby_Text_WelcomeToBattleTent:
-	.string "Welcome to the BATTLE TENT\n"
-	.string "SLATEPORT SITE!\p"
-	.string "I am your guide to the Battle Swap\n"
-	.string "Tournament.$"
+	.string "Welcome to the SLATEPORT BATTLE TENT!\p"
+	.string "I run the Doubles Swap Tournament.$"
 
 SlateportCity_BattleTentLobby_Text_TakeChallenge:
 	.string "Would you like to take the Battle\n"
 	.string "Swap challenge?$"
 
 SlateportCity_BattleTentLobby_Text_ExplainSlateportTent:
-	.string "Here at the SLATEPORT BATTLE TENT,\n"
-	.string "we hold Battle Swap events\l"
-	.string "using rental POKéMON.\p"
-	.string "First, you will be loaned three\n"
-	.string "POKéMON specifically for this event.\p"
-	.string "Using the supplied rental POKéMON,\n"
-	.string "you must conduct a SINGLE BATTLE.\p"
-	.string "If you win, you are permitted to trade\n"
-	.string "one of your rental POKéMON.\p"
-	.string "Repeat this cycle of battling and\n"
-	.string "trading--if you win three times in\l"
-	.string "a row, you will earn a fine prize.\p"
-	.string "If you want to interrupt your\n"
-	.string "challenge, please save the game.\p"
-	.string "If you don't save before interrupting,\n"
-	.string "you will be disqualified.$"
+	.string "At the SLATEPORT BATTLE TENT you fight\n"
+	.string "with rental POKéMON, in DOUBLE BATTLES.\p"
+	.string "First, choose a rental team from sets\n"
+	.string "built exactly like the CENTER builds.\p"
+	.string "After each win you may swap one rental\n"
+	.string "for one of the opponent's.\p"
+	.string "It teaches the game's hardest skill:\n"
+	.string "winning with pieces you didn't pick.\p"
+	.string "Three wins in a row earn a held\n"
+	.string "Evolution item.\p"
+	.string "To interrupt a challenge, save the\n"
+	.string "game. Quitting without saving forfeits.$"
 
 SlateportCity_BattleTentLobby_Text_LookForwardToNextVisit:
 	.string "We look forward to your next visit.$"

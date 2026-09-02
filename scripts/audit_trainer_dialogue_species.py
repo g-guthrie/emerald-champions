@@ -16,7 +16,6 @@ ROOT = Path(__file__).resolve().parents[1]
 
 # These are plot nouns, not claims about the speaker's own party.
 APPROVED_CONTEXTUAL_MENTIONS = {
-    ("TRAINER_GRUNT_MAGMA_HIDEOUT_11", "GROUDON"),
     ("TRAINER_TABITHA_MAGMA_HIDEOUT", "GROUDON"),
     ("TRAINER_GRUNT_WEATHER_INST_2", "CASTFORM"),
 }

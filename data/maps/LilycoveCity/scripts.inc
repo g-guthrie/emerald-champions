@@ -451,64 +451,46 @@ LilycoveCity_EventScript_DontKnowAboutBerryBlender::
 	return
 
 LilycoveCity_Text_MayShoppingLetsBattle:
-	.string "MAY: Oh, hey?\n"
-	.string "{PLAYER}{KUN}, are you shopping, too?\p"
-	.string "I bought a whole bunch of DOLLS and\n"
-	.string "POSTERS.\p"
-	.string "Of course, I've also caught a lot of\n"
-	.string "POKéMON, and I'm raising them\l"
-	.string "properly, too.\p"
-	.string "Actually, I'm more worried if you're\n"
-	.string "raising POKéMON properly, {PLAYER}{KUN}.\p"
-	.string "I'll battle with you, so you can show\n"
-	.string "me your POKéMON, {PLAYER}{KUN}.$"
+	.string "MAY: {PLAYER}{KUN}! Shopping? I'm picking\n"
+	.string "held items. The CENTER gives them free,\l"
+	.string "but choosing is the fun part.\p"
+	.string "I rebuilt my six around every SIGN I\n"
+	.string "woke. Battle me and show me yours!$"
 
 LilycoveCity_Text_MayNotRaisingPokemon:
-	.string "MAY: Oh, why? {PLAYER}{KUN}, haven't you\n"
-	.string "been raising your POKéMON?\p"
-	.string "That's not a very good showing as a\n"
-	.string "TRAINER…$"
+	.string "MAY: Not now? Come on. Nobody needs to\n"
+	.string "grind here. Bring the plan you have.$"
 
 LilycoveCity_Text_MayBattleMe:
-	.string "MAY: Come on, battle with me, so I can\n"
-	.string "check out your POKéMON!$"
+	.string "MAY: Come on, battle me so I can see\n"
+	.string "how you build now!$"
 
 LilycoveCity_Text_MayWontBeBeaten:
-	.string "MAY: The POKéMON I raised won't be\n"
-	.string "beaten by your POKéMON, {PLAYER}{KUN}!$"
+	.string "MAY: My six have an answer for\n"
+	.string "everything. Let's see yours answer them!$"
 
 LilycoveCity_Text_MayDefeat:
 	.string "… … … … … … … …\p"
-	.string "I remember the battle I had with you,\n"
-	.string "{PLAYER}{KUN}, on ROUTE 103.\p"
-	.string "That battle helped you become this\n"
-	.string "strong, {PLAYER}{KUN}, didn't it?$"
+	.string "I remember ROUTE 103. You didn't win\n"
+	.string "on power then either. You read faster.\p"
+	.string "You're still reading faster.$"
 
 LilycoveCity_Text_MayGoingBackToLittleroot:
-	.string "MAY: I'm thinking of going back to\n"
-	.string "LITTLEROOT soon.\p"
-	.string "I've caught a decent group of POKéMON,\n"
-	.string "and my POKéDEX is coming along, so\l"
-	.string "I'm going home to show my dad.$"
+	.string "MAY: I'm heading back to LITTLEROOT.\p"
+	.string "Dad's SIGN records need a second pair of\n"
+	.string "hands, and mine are free now.$"
 
 LilycoveCity_Text_MayYouGoingToCollectBadges:
-	.string "{PLAYER}{KUN}, what are you going to do?\p"
-	.string "Collect all the GYM BADGES and take\n"
-	.string "the POKéMON LEAGUE challenge?\p"
-	.string "Well, while you're collecting BADGES,\n"
-	.string "{PLAYER}{KUN}, I'm going to work on my\l"
-	.string "POKéDEX. I'll complete it before you!\p"
-	.string "See you!$"
+	.string "{PLAYER}{KUN}, keep going. Earn the\n"
+	.string "BADGES, wake the SIGNS, take the LEAGUE.\p"
+	.string "I'll still finish the POKéDEX before\n"
+	.string "you do. See you!$"
 
 LilycoveCity_Text_MayYouGoingToPokemonLeague:
-	.string "{PLAYER}{KUN}, what are you going to do?\p"
-	.string "Are you taking the POKéMON LEAGUE\n"
-	.string "challenge?\p"
-	.string "Or, are you going to complete your\n"
-	.string "POKéDEX?\p"
-	.string "I might've lost to you in battling,\n"
-	.string "but I'll finish my POKéDEX before you!\p"
-	.string "See you!$"
+	.string "{PLAYER}{KUN}, is it the LEAGUE next?\n"
+	.string "Or the POKéDEX?\p"
+	.string "I lost the battle. I'm still winning\n"
+	.string "the POKéDEX. See you!$"
 
 LilycoveCity_Text_MayYouGoingToBattleFrontier:
 	.string "{PLAYER}{KUN}, what are you going to do?\p"
@@ -521,67 +503,51 @@ LilycoveCity_Text_MayYouGoingToBattleFrontier:
 	.string "See you!$"
 
 LilycoveCity_Text_BrendanShoppingLetsBattle:
-	.string "BRENDAN: Oh, hey, it's {PLAYER}.\p"
-	.string "I'm running an errand for my dad.\n"
-	.string "No, I'm not buying any DOLLS.\p"
-	.string "Anyways, it's been a while.\p"
-	.string "Want to have a battle to see who's been\n"
-	.string "raising POKéMON better?$"
+	.string "BRENDAN: {PLAYER}. Running an errand for\n"
+	.string "Dad. No, not DOLLS.\p"
+	.string "It's been a while. Let's see whose six\n"
+	.string "got smarter since ROUTE 119.$"
 
 LilycoveCity_Text_BrendanNoConfidence:
-	.string "BRENDAN: Oh, what's the matter?\n"
-	.string "Don't have the confidence?$"
+	.string "BRENDAN: What, no plan ready?\n"
+	.string "That's new for you.$"
 
 LilycoveCity_Text_BrendanBattleMe:
-	.string "BRENDAN: Want to battle to see who's\n"
-	.string "been raising POKéMON better?$"
+	.string "BRENDAN: Battle me. I want to see how\n"
+	.string "you build now.$"
 
 LilycoveCity_Text_BrendanWontBeBeaten:
-	.string "BRENDAN: Aww, but you know I'm not\n"
-	.string "going to lose to no {PLAYER}.$"
+	.string "BRENDAN: I read every SIGN on the way\n"
+	.string "here. I'm not losing to {PLAYER}.$"
 
 LilycoveCity_Text_BrendanDefeat:
-	.string "Humph…\n"
-	.string "You've done a lot of raising.\p"
-	.string "That stings a bit--I had a head start\n"
-	.string "on you as a TRAINER…$"
+	.string "Humph… You read my lead in one turn.\p"
+	.string "That stings. I had a head start on you\n"
+	.string "as a TRAINER…$"
 
 LilycoveCity_Text_BrendanGoingBackToLittleroot:
-	.string "BRENDAN: I…\n"
-	.string "I plan on going home to LITTLEROOT.\p"
-	.string "You know I'm helping out my dad on his\n"
-	.string "POKéDEX. It's coming together pretty\l"
-	.string "decently, so I should go show him.$"
+	.string "BRENDAN: I'm going home to LITTLEROOT.\p"
+	.string "Dad's SIGN records are a mess. Someone\n"
+	.string "who's actually seen them should help.$"
 
 LilycoveCity_Text_BrendanYouGoingToCollectBadges:
-	.string "{PLAYER}, what are you going to do?\p"
-	.string "Collect all the GYM BADGES and take\n"
-	.string "the POKéMON LEAGUE challenge?\p"
-	.string "Maybe I'll do that, too…\p"
-	.string "Well, anyway, hang in there!$"
+	.string "{PLAYER}, what's next? The rest of the\n"
+	.string "BADGES and the LEAGUE?\p"
+	.string "Maybe I'll do that too…\p"
+	.string "Anyway. Keep reading them faster.$"
 
 LilycoveCity_Text_BrendanYouGoingToPokemonLeague:
-	.string "{PLAYER}, what are you going to do?\p"
-	.string "Since you're that strong, are you\n"
-	.string "taking the POKéMON LEAGUE challenge?\p"
-	.string "Heh, even me--if I trained my POKéMON\n"
-	.string "a bit more, I should be stronger than\l"
-	.string "you, {PLAYER}.\p"
-	.string "Well, anyway, hang in there!$"
+	.string "{PLAYER}, going for the LEAGUE?\p"
+	.string "One more rebuild and I'd beat you.\n"
+	.string "Probably. Anyway, hang in there!$"
 
 LilycoveCity_Text_BrendanYouGoingToBattleFrontier:
-	.string "{PLAYER}, what are you going to do?\p"
-	.string "Are you taking the BATTLE FRONTIER\n"
-	.string "challenge?\p"
-	.string "Or, are you going to complete your\n"
-	.string "POKéDEX?\p"
-	.string "Since you're that strong, you should\n"
-	.string "consider the BATTLE FRONTIER.\p"
-	.string "Heh, if I train my POKéMON a bit more,\n"
-	.string "I'll get stronger than you, {PLAYER}.\p"
-	.string "Maybe I should go to the BATTLE\n"
-	.string "FRONTIER.\p"
-	.string "Well, anyway, hang in there!$"
+	.string "{PLAYER}, what now? The FRONTIER, or\n"
+	.string "the POKéDEX?\p"
+	.string "With your teams, the FRONTIER. The\n"
+	.string "CIRCUIT there is doubles all the way.\p"
+	.string "One more rebuild and I'm stronger than\n"
+	.string "you. Probably. Hang in there!$"
 
 LilycoveCity_Text_MovedLootIntoHideoutToday:
 	.string "Fufufu…\p"

@@ -231,6 +231,20 @@ def main() -> None:
     )
     require(battle_setup.count("ApplyTrainerLevelDifficulty(&gParties[B_TRAINER_OPPONENT_") == 2, "Difficulty must affect exactly both enemy trainer parties")
     require("P_LEVEL_UP_MOVE_LEARNING    FALSE" in pokemon_config, "Level-up prompts are not disabled")
+    battle_util = read("src/battle_util.c")
+    require(
+        "obedienceLevel = GetCurrentLevelCap();" in battle_util,
+        "Obedience must follow the strict level cap, not the vanilla badge ladder",
+    )
+    party_menu = read("src/party_menu.c")
+    require(
+        "gBattleResources->bufferB[partner][0] == CONTROLLER_CHOSENMONRETURNVALUE" in party_menu,
+        "Double-faint replacement menu must reject the partner's pending pick",
+    )
+    require(
+        "GetPartyIdFromBattleSlot(slot) == gBattleResources->bufferB[partner][1])\n            palFlags |= PARTY_PAL_TO_SWITCH;" in party_menu,
+        "Double-faint replacement menu must tint the partner's pending pick with the native switch palette",
+    )
     receive_dex = birch_lab.split("LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex::", 1)[1].split("return", 1)[0]
     require(
         "setflag FLAG_SYS_NATIONAL_DEX" in receive_dex and "special EnableNationalPokedex" in receive_dex,
