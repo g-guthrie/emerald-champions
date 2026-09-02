@@ -80,7 +80,13 @@ seconds, so cost is not the problem. Value and failure modes are.
 
 **Blind spots found this week (gates that pass while the game is wrong)**
 
-- Wild distribution had no level sanity; level 2 Hydreigon passed.
+- Wild distribution had no level sanity; level 2 Hydreigon passed. Fixed:
+  `emerald_champions_wild_distribution.py` now derives evolution-level floors
+  from `species_info` and fails any evolved form on a sub-level-10 slot; the
+  full below-floor list (intentional late-area cases) is written to
+  `work/audits/WILD_LEVEL_FLOOR_REPORT.md`. The sweep found 29 surf/rock slots
+  with level 5 evolved forms and 87 DexNav hidden slots still at upstream's
+  level 2-3 sample values; both are corrected in `wild_encounters.json`.
 - Solo-evolution ignored `IF_BAG_ITEM_COUNT` and Sweets.
 - Reward economy accepted Rare Candy as a live finite reward.
 - Nothing checked facility EV spreads; every Frontier Pokemon carried 252-point
@@ -88,6 +94,8 @@ seconds, so cost is not the problem. Value and failure modes are.
   `generate_emerald_champions_frontier_sets.py --check` was added.
 - The overworld parity manifest checks sprite/position but not the
   `local_id -> graphics_id` binding scripts rely on (Meteor Falls Archie).
+  Fixed: `verify_local_id_sprite_bindings.py` requires every named local ID to
+  carry the sprite family its name promises.
 
 ## Recommendations in priority order
 
@@ -97,4 +105,5 @@ seconds, so cost is not the problem. Value and failure modes are.
 3. Retire the Verdant byte manifest gate or restrict it to files with a frozen
    reference; regenerate the campaign evidence appendix instead of gating on it.
 4. Add the missing invariants: per-map wild level bands, `IF_BAG_ITEM_COUNT`
-   evolution sources, and local-ID sprite bindings against Inclement.
+   evolution sources, and local-ID sprite bindings. Done (evolution floors,
+   sprite bindings; the solo-evolution gate already covers `IF_BAG_ITEM_COUNT`).

@@ -52,6 +52,7 @@ STATIC_GATES = (
     ("Poke Vial quest", (PYTHON, "scripts/restore_poke_vial_quest.py")),
     ("campaign battle master", (PYTHON, "scripts/audit_emerald_champions_master_battles.py")),
     ("Frontier competitive loadouts", (PYTHON, "scripts/generate_emerald_champions_frontier_sets.py", "--check")),
+    ("local-ID sprite bindings", (PYTHON, "scripts/verify_local_id_sprite_bindings.py")),
     ("battle script formats", (PYTHON, "scripts/align_emerald_champions_battle_scripts.py")),
 )
 
