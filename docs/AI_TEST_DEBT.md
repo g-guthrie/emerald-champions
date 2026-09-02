@@ -25,7 +25,7 @@ a new failure or a debt item that starts passing both break the gate.
   `ABILITY_IMMUNITY`. The code path looks correct, so the failure needs an instrumented run
   (`Test_MgbaPrintf` on the Toxic score in `AI_CheckBadMove`) rather than more reading.
 - **Chip Away vs Swift, switch-in weather ability, Retaliate:** same — no static explanation found; the
-  Champions stat formula (IV=31, `2*ev-1`) changes every damage threshold these tests were tuned on, so the
+  Champions stat formula (IV=31, `min(2*ev, 63)`) changes every damage threshold these tests were tuned on, so the
   first step is printing the AI's damage estimates for both moves in the failing scenario.
 - **Thinking time:** 1 frame over on doubles-smart (29/28) and Steven multi (22/21). Measured, not a crash.
 

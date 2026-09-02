@@ -7,7 +7,7 @@ Why this exists
 The facilities shipped with upstream's vanilla Gen 3 loadouts (Lax Incense
 Sunkern, Bright Powder Alakazam) and, worse, with 252-point EV spreads.  Under
 ``P_STAT_CALCULATION >= GEN_CHAMPIONS`` an EV field is a Stat Point (0-32,
-66 total) and feeds ``2*ev-1`` into the stat formula, so a vanilla 252 spread
+66 total) and feeds ``min(2*ev, 63)`` into the stat formula, so a vanilla 252 spread
 inflated every facility Pokemon by roughly +440 stat points per invested stat.
 
 What it does

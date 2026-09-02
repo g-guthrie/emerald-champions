@@ -28,6 +28,14 @@ struct EmeraldChampionsBattleSetChoice
     struct EmeraldChampionsBattleSet preset;
 };
 
+// Stat Points are shown and authored in display order (HP, Atk, Def, Sp. Atk,
+// Sp. Def, Speed), which is not STAT_* order. This is the one table that maps
+// display index -> STAT_* id; every editor, matcher and preset uses it so the
+// six stats can never be paired differently in two places.
+extern const u8 gEmeraldChampionsStatPointOrder[NUM_STATS];
+#define EC_STAT_POINT_DATA(displayIndex) (MON_DATA_HP_EV + gEmeraldChampionsStatPointOrder[displayIndex])
+#define EC_STAT_VALUE_DATA(displayIndex) (MON_DATA_MAX_HP + gEmeraldChampionsStatPointOrder[displayIndex])
+
 extern const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SPECIES];
 extern const u8 *const gEmeraldChampionsDefaultBattleSetNames[NUM_SPECIES];
 extern const struct EmeraldChampionsBattleSetRange gEmeraldChampionsBattleSetRanges[NUM_SPECIES];
@@ -57,6 +65,7 @@ u8 GetEmeraldChampionsRawBattleSetCount(enum Species species);
 const struct EmeraldChampionsBattleSet *GetEmeraldChampionsRawBattleSet(enum Species species, u8 rawChoice);
 u8 ApplyEmeraldChampionsOpponentSet(struct Pokemon *mon, u8 rawChoice);
 bool32 IsEmeraldChampionsProtectedProgressionItem(enum Item item);
+bool32 TryNormalizeEmeraldChampionsBellyDrumHpParity(struct Pokemon *mon);
 bool32 IsEmeraldChampionsOrdinaryWildSpecies(enum Species species);
 
 #endif // GUARD_EMERALD_CHAMPIONS_BATTLE_SETS_H

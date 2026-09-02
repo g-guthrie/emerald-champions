@@ -173,7 +173,7 @@ TEST("Champions stat calculation uses perfect IVs and Stat Points")
     u32 nature = NATURE_HARDY;
     u32 friendship = 0;
     u32 level = 50;
-    u32 investment = 2 * statPoints - 1;
+    u32 investment = min(2 * statPoints, 63);
     u32 expectedHp;
     u32 expectedAttack;
 

@@ -35,6 +35,7 @@
 #include "item_menu.h"
 #include "item_use.h"
 #include "caps.h"
+#include "emerald_champions_battle_sets.h"
 #include "link.h"
 #include "link_rfu.h"
 #include "mail.h"
@@ -6043,6 +6044,11 @@ static void CB2_ShowPartyMenuForLeveler(void)
 
     if (slot == PARTY_SIZE)
     {
+        // The new level may have flipped HP parity under a Belly Drum + berry
+        // set; re-land it before the party boxes are drawn.
+        for (u32 i = 0; i < gPartiesCount[B_TRAINER_PLAYER]; i++)
+            TryNormalizeEmeraldChampionsBellyDrumHpParity(&gParties[B_TRAINER_PLAYER][i]);
+
         if (sLevelerRaisedParty)
         {
             gPartyMenu.slotId = 0;

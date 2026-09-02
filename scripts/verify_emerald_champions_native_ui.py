@@ -832,6 +832,7 @@ def verify_move_specialist_navigation() -> None:
     require(
         "EmeraldChampions_EventScript_MoveTutorMain:" in root
         and "dynmultistack 30, 1, FALSE, 5, 0, 0, DYN_MULTICHOICE_CB_NONE" in root
+        and "EmeraldChampions_Text_ChangeNature" in root
         and "EmeraldChampions_Text_EditStatPoints" in root
         and "EmeraldChampions_Text_OtherServices" in root
         and "case MULTI_B_PRESSED, EmeraldChampions_EventScript_MoveTutorExit" in root,

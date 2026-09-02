@@ -97,6 +97,74 @@ def main() -> None:
     pokemon_config = read("include/config/pokemon.h")
     text_config = read("include/config/text.h")
     summary_config = read("include/config/summary_screen.h")
+    tutor = read("data/scripts/emerald_champions.inc")
+    wild = read("src/wild_encounter.c")
+    item_use = read("src/item_use.c")
+    require(
+        "special SetHiddenNature" in tutor and "special BufferSelectedMonNature" in tutor,
+        "Nature must be changeable standalone at the Center specialist",
+    )
+    require(
+        "SCROLL_MULTI_EMERALD_CHAMPIONS_NATURES" in tutor
+        and "task->tNumItems = NUM_NATURES;" in read("src/field_specials.c")
+        and "BuildEmeraldChampionsNatureMenuText(i)" in read("src/field_specials.c"),
+        "Nature service must list every Nature from gNaturesInfo in a native scrolling list",
+    )
+    require(
+        "if (sSweetScentInverted || (LURE_STEP_COUNT != 0" in wild,
+        "Sweet Scent must invert the rarity curve",
+    )
+    require(
+        "TryEndRepelSprayForAttractant()" in item_use
+        and "sText_RepelSprayEnded" in item_use,
+        "Attracting items must end the Repel Spray and say so",
+    )
+    lure_task = item_use.split("static void Task_UseLure(u8 taskId)\n{", 1)[1].split("\n}\n", 1)[0]
+    repel_task = item_use.split("static void Task_UseRepel(u8 taskId)\n{", 1)[1].split("\n}\n", 1)[0]
+    require(
+        "TryEndRepelSprayForAttractant()" in lure_task
+        and "TryEndRepelSprayForAttractant()" not in repel_task,
+        "Lures (not Repels) must end the Repel Spray",
+    )
+    field_specials = read("src/field_specials.c")
+    require(
+        "{RIGHT_ARROW}" in field_specials
+        and "GetEmeraldChampionsStatPointBreakpoint" in field_specials,
+        "Stat Point editor must show the resulting stat and the next breakpoint",
+    )
+    battle_sets = read("src/emerald_champions_battle_sets.c")
+    require(
+        "TryNormalizeEmeraldChampionsBellyDrumHpParity(mon);" in battle_sets
+        and "TryNormalizeEmeraldChampionsBellyDrumHpParity(" in read("src/party_menu.c"),
+        "Belly Drum + berry spreads must be re-landed on even HP by presets and the Leveler",
+    )
+    pokemon_c = read("src/pokemon.c")
+    require(
+        "statInvestment = min(2 * ev[i], 63);" in pokemon_c
+        and "statInvestment = min(2 * ev[STAT_HP], 63);" in pokemon_c,
+        "one Stat Point must be worth two investment, capped at 63",
+    )
+    require(
+        "#define B_EC_CATCH_ODDS_PERCENT         125" in read("include/config/battle.h")
+        and "odds = odds * B_EC_CATCH_ODDS_PERCENT / 100;" in read("src/battle_script_commands.c"),
+        "capture odds must carry the Emerald Champions flat boost after all other modifiers",
+    )
+    require(
+        "#define B_MISSING_BADGE_CATCH_MALUS     GEN_3" in read("include/config/battle.h"),
+        "the badge catch malus must stay off: caps already clamp wild levels",
+    )
+    start_menu = read("src/start_menu.c")
+    overworld = read("src/overworld.c")
+    # Reload lives on the Start menu only. A prompt on the whiteout screen was
+    # removed on purpose: players have not always saved before that battle, so
+    # offering a reload there invites throwing progress away.
+    require(
+        "MENU_ACTION_RELOAD_SAVE" in start_menu
+        and "if (CanReloadLastSave())" in start_menu
+        and "WhiteOutReload" not in overworld
+        and "WhiteOutReload" not in tutor,
+        "Reload must be offered from the Start menu and never from the whiteout screen",
+    )
     nurse = read("data/scripts/pkmn_center_nurse.inc")
     birch_lab = read("data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc")
     items = read("src/data/items.h")
@@ -244,6 +312,25 @@ def main() -> None:
     require(
         "GetPartyIdFromBattleSlot(slot) == gBattleResources->bufferB[partner][1])\n            palFlags |= PARTY_PAL_TO_SWITCH;" in party_menu,
         "Double-faint replacement menu must tint the partner's pending pick with the native switch palette",
+    )
+    wild = read("src/wild_encounter.c")
+    require(
+        "if (FlagGet(FLAG_EC_REPEL_SPRAY_ACTIVE))\n        return FALSE;" in wild,
+        "Repel Spray must suppress step-based wild encounters",
+    )
+    for deliberate in ("FishingWildEncounter", "SweetScentWildEncounter", "RockSmashWildEncounter"):
+        body = wild.split(deliberate, 1)
+        require(len(body) > 1, f"{deliberate} still exists")
+    item_use = read("src/item_use.c")
+    require(
+        "FlagClear(FLAG_EC_REPEL_SPRAY_ACTIVE);" in item_use
+        and "FlagSet(FLAG_EC_REPEL_SPRAY_ACTIVE);" in item_use,
+        "Repel Spray must be a binary toggle, not a step counter",
+    )
+    nurse = read("data/scripts/pkmn_center_nurse.inc")
+    require(
+        nurse.count("giveitem ITEM_REPEL_SPRAY, 1") == 2,
+        "Repel Spray must be given with the starter tools and back-filled for existing saves",
     )
     receive_dex = birch_lab.split("LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex::", 1)[1].split("return", 1)[0]
     require(

@@ -110,11 +110,17 @@ static const u8 sText_StatSummaryPrefix[] = _("Total Stat Points: ");
 static const u8 sText_StatSummarySuffix[] = _("/66.\nChoose a stat to adjust.");
 static const u8 sText_StatCannotAdjust[] = _("That stat cannot be adjusted.");
 static const u8 sText_StatPossessive[] = _("'s ");
-static const u8 sText_StatPointsValue[] = _(" points: ");
-static const u8 sText_StatDetailTotal[] = _("/32.\nTotal ");
-static const u8 sText_StatDetailSuffix[] = _("/66. Choose an adjustment.");
 static const u8 sText_StatMenuDivider[] = _("  ");
 static const u8 sText_StatMenuMaximum[] = _("/32");
+static const u8 sText_StatArrow[] = _(" {RIGHT_ARROW} ");
+static const u8 sText_StatColon[] = _(": ");
+static const u8 sText_StatPointsOpen[] = _(" (");
+static const u8 sText_StatPointsClose[] = _("/32)\nTotal ");
+static const u8 sText_StatNextChange[] = _("/66. Next: +");
+static const u8 sText_StatAtMaximum[] = _("/66. At 32.");
+static const u8 sText_StatNoPointsLeft[] = _("/66. No points left.");
+static const u8 sText_StatNoChangeOpen[] = _("/66. +");
+static const u8 sText_StatNoChangeClose[] = _(" changes nothing.");
 
 static const u8 *const sEmeraldChampionsStatPointNames[] =
 {
@@ -141,17 +147,48 @@ static const u8 *const sEmeraldChampionsStatAdjustNames[] =
     sText_Back,
 };
 
-static const s32 sEmeraldChampionsStatPointFields[NUM_STATS] =
-{
-    MON_DATA_HP_EV,
-    MON_DATA_ATK_EV,
-    MON_DATA_DEF_EV,
-    MON_DATA_SPATK_EV,
-    MON_DATA_SPDEF_EV,
-    MON_DATA_SPEED_EV,
-};
+static EWRAM_DATA u8 sEmeraldChampionsStatPointMenuText[NUM_STATS][32] = {0};
 
-static EWRAM_DATA u8 sEmeraldChampionsStatPointMenuText[NUM_STATS][24] = {0};
+// Nature rows are built from gNaturesInfo so the list can never disagree with
+// the engine's own table: "Adamant  +Atk -SpA", "Hardy  no change".
+static const u8 sText_NatureNoChange[] = _("no change");
+static const u8 sText_NaturePlus[] = _("+");
+static const u8 sText_NatureMinus[] = _(" -");
+static const u8 sText_StatAbbrAtk[] = _("Atk");
+static const u8 sText_StatAbbrDef[] = _("Def");
+static const u8 sText_StatAbbrSpe[] = _("Spe");
+static const u8 sText_StatAbbrSpA[] = _("SpA");
+static const u8 sText_StatAbbrSpD[] = _("SpD");
+static const u8 *const sNatureStatAbbreviations[NUM_STATS] =
+{
+    [STAT_ATK] = sText_StatAbbrAtk,
+    [STAT_DEF] = sText_StatAbbrDef,
+    [STAT_SPEED] = sText_StatAbbrSpe,
+    [STAT_SPATK] = sText_StatAbbrSpA,
+    [STAT_SPDEF] = sText_StatAbbrSpD,
+};
+static EWRAM_DATA u8 sEmeraldChampionsNatureMenuText[NUM_NATURES][24] = {0};
+
+static const u8 *BuildEmeraldChampionsNatureMenuText(u32 nature)
+{
+    const struct NatureInfo *info = &gNaturesInfo[nature];
+    u8 *text = sEmeraldChampionsNatureMenuText[nature];
+
+    StringCopy(text, info->name);
+    StringAppend(text, sText_StatMenuDivider);
+    if (info->statUp == info->statDown)
+    {
+        StringAppend(text, sText_NatureNoChange);
+    }
+    else
+    {
+        StringAppend(text, sText_NaturePlus);
+        StringAppend(text, sNatureStatAbbreviations[info->statUp]);
+        StringAppend(text, sText_NatureMinus);
+        StringAppend(text, sNatureStatAbbreviations[info->statDown]);
+    }
+    return text;
+}
 
 #define ELEVATOR_WINDOW_WIDTH  3
 #define ELEVATOR_WINDOW_HEIGHT 3
@@ -714,6 +751,22 @@ static const u8 sText_BattleSetPreviewMissing[] = _("I don't have that set anymo
 // prompt, so the player can read what the set actually does first. Page 1 is
 // the set name and its first two moves, page 2 the other two, page 3 the
 // Ability, nature and held item.
+// Mirrors the party menu's Change Ability flow: nickname in STR_VAR_1, the
+// value being replaced in STR_VAR_2, so the nature service reads like the
+// Ability service the player already knows.
+void BufferSelectedMonNature(void)
+{
+    struct Pokemon *mon;
+
+    if (gSpecialVar_0x8004 >= gPartiesCount[B_TRAINER_PLAYER])
+        return;
+
+    mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004];
+    GetMonNickname(mon, gStringVar1);
+    gSpecialVar_0x8005 = GetMonData(mon, MON_DATA_HIDDEN_NATURE);
+    StringCopy(gStringVar2, gNaturesInfo[gSpecialVar_0x8005].name);
+}
+
 void BufferSelectedMonEmeraldChampionsBattleSetPreview(void)
 {
     struct Pokemon *mon;
@@ -793,7 +846,7 @@ static u32 GetSelectedMonStatPointTotal(struct Pokemon *mon)
     u32 total = 0;
 
     for (u32 stat = 0; stat < NUM_STATS; stat++)
-        total += GetMonData(mon, sEmeraldChampionsStatPointFields[stat]);
+        total += GetMonData(mon, EC_STAT_POINT_DATA(stat));
     return total;
 }
 
@@ -805,6 +858,16 @@ static void AppendStatPointValue(u8 *text, u32 value)
     StringAppend(text, number);
 }
 
+static void AppendStatValue(u8 *text, u32 value)
+{
+    u8 number[4];
+
+    ConvertIntToDecimalStringN(number, value, STR_CONV_MODE_LEFT_ALIGN, 3);
+    StringAppend(text, number);
+}
+
+// "HP  4/32 {RIGHT_ARROW} 52": the resulting stat is the number the player
+// is actually tuning, so it sits on the row next to the points.
 static const u8 *BuildEmeraldChampionsStatPointMenuText(u32 stat)
 {
     struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x800A];
@@ -812,9 +875,56 @@ static const u8 *BuildEmeraldChampionsStatPointMenuText(u32 stat)
 
     StringCopy(text, sEmeraldChampionsStatPointNames[stat]);
     StringAppend(text, sText_StatMenuDivider);
-    AppendStatPointValue(text, GetMonData(mon, sEmeraldChampionsStatPointFields[stat]));
+    AppendStatPointValue(text, GetMonData(mon, EC_STAT_POINT_DATA(stat)));
     StringAppend(text, sText_StatMenuMaximum);
+    StringAppend(text, sText_StatArrow);
+    AppendStatValue(text, GetMonData(mon, EC_STAT_VALUE_DATA(stat)));
     return text;
+}
+
+// Reports the smallest point increase that changes the stat. A point is worth
+// 2 * level / 100 stat, so below Lv. 50 a single point often changes nothing;
+// the editor shows the next step that does instead of leaving the player to
+// guess. Probes with the real stat calculation and restores the Pokémon, so
+// the answer can never drift from the game.
+enum EmeraldChampionsStatBreakpoint GetEmeraldChampionsStatPointBreakpoint(struct Pokemon *mon, u32 displayStat, u32 *delta, u32 *value)
+{
+    s32 statData = EC_STAT_VALUE_DATA(displayStat);
+    s32 pointsData = EC_STAT_POINT_DATA(displayStat);
+    u32 current = GetMonData(mon, pointsData);
+    u32 remaining = EC_STAT_POINT_BUDGET - min(GetSelectedMonStatPointTotal(mon), EC_STAT_POINT_BUDGET);
+    u32 base = GetMonData(mon, statData);
+    u32 currentHp = GetMonData(mon, MON_DATA_HP);
+    enum EmeraldChampionsStatBreakpoint result = EC_STAT_BREAKPOINT_NO_CHANGE;
+    u8 points;
+
+    *delta = 0;
+    *value = base;
+    if (current >= EC_STAT_POINTS_PER_STAT)
+        return EC_STAT_BREAKPOINT_STAT_MAXED;
+    if (remaining == 0)
+        return EC_STAT_BREAKPOINT_NO_POINTS;
+    remaining = min(remaining, EC_STAT_POINTS_PER_STAT - current);
+    *delta = remaining;
+
+    for (u32 step = 1; step <= remaining; step++)
+    {
+        points = current + step;
+        SetMonData(mon, pointsData, &points);
+        CalculateMonStats(mon);
+        if (GetMonData(mon, statData) > base)
+        {
+            *delta = step;
+            *value = GetMonData(mon, statData);
+            result = EC_STAT_BREAKPOINT_FOUND;
+            break;
+        }
+    }
+    points = current;
+    SetMonData(mon, pointsData, &points);
+    CalculateMonStats(mon);
+    SetMonData(mon, MON_DATA_HP, &currentHp);
+    return result;
 }
 
 void BufferSelectedMonEmeraldChampionsStatPointSummary(void)
@@ -831,8 +941,14 @@ void BufferSelectedMonEmeraldChampionsStatPointSummary(void)
     StringAppend(gStringVar4, sText_StatSummarySuffix);
 }
 
+// "Zigzagoon's HP: 52 (4/32)" over "Total 44/66. Next: +2 {RIGHT_ARROW} 53".
 void BufferSelectedMonEmeraldChampionsStatPointDetail(void)
 {
+    struct Pokemon *mon;
+    u32 stat;
+    u32 delta;
+    u32 value;
+
     if (gSpecialVar_0x800A >= gPartiesCount[B_TRAINER_PLAYER]
      || gSpecialVar_0x8005 >= NUM_STATS)
     {
@@ -840,19 +956,38 @@ void BufferSelectedMonEmeraldChampionsStatPointDetail(void)
         return;
     }
 
-    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x800A];
+    mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x800A];
+    stat = gSpecialVar_0x8005;
     GetMonNickname(mon, gStringVar1);
     StringCopy(gStringVar4, gStringVar1);
     StringAppend(gStringVar4, sText_StatPossessive);
-    StringAppend(gStringVar4, sEmeraldChampionsStatPointNames[gSpecialVar_0x8005]);
-    StringAppend(gStringVar4, sText_StatPointsValue);
-    AppendStatPointValue(
-        gStringVar4,
-        GetMonData(mon, sEmeraldChampionsStatPointFields[gSpecialVar_0x8005])
-    );
-    StringAppend(gStringVar4, sText_StatDetailTotal);
+    StringAppend(gStringVar4, sEmeraldChampionsStatPointNames[stat]);
+    StringAppend(gStringVar4, sText_StatColon);
+    AppendStatValue(gStringVar4, GetMonData(mon, EC_STAT_VALUE_DATA(stat)));
+    StringAppend(gStringVar4, sText_StatPointsOpen);
+    AppendStatPointValue(gStringVar4, GetMonData(mon, EC_STAT_POINT_DATA(stat)));
+    StringAppend(gStringVar4, sText_StatPointsClose);
     AppendStatPointValue(gStringVar4, GetSelectedMonStatPointTotal(mon));
-    StringAppend(gStringVar4, sText_StatDetailSuffix);
+    switch (GetEmeraldChampionsStatPointBreakpoint(mon, stat, &delta, &value))
+    {
+    case EC_STAT_BREAKPOINT_FOUND:
+        StringAppend(gStringVar4, sText_StatNextChange);
+        AppendStatPointValue(gStringVar4, delta);
+        StringAppend(gStringVar4, sText_StatArrow);
+        AppendStatValue(gStringVar4, value);
+        break;
+    case EC_STAT_BREAKPOINT_STAT_MAXED:
+        StringAppend(gStringVar4, sText_StatAtMaximum);
+        break;
+    case EC_STAT_BREAKPOINT_NO_POINTS:
+        StringAppend(gStringVar4, sText_StatNoPointsLeft);
+        break;
+    case EC_STAT_BREAKPOINT_NO_CHANGE:
+        StringAppend(gStringVar4, sText_StatNoChangeOpen);
+        AppendStatPointValue(gStringVar4, delta);
+        StringAppend(gStringVar4, sText_StatNoChangeClose);
+        break;
+    }
 }
 
 void AdjustSelectedMonEmeraldChampionsStatPoints(void)
@@ -870,23 +1005,24 @@ void AdjustSelectedMonEmeraldChampionsStatPoints(void)
         return;
 
     mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x800A];
-    current = GetMonData(mon, sEmeraldChampionsStatPointFields[gSpecialVar_0x8005]);
+    current = GetMonData(mon, EC_STAT_POINT_DATA(gSpecialVar_0x8005));
     total = GetSelectedMonStatPointTotal(mon);
     if (gSpecialVar_0x8006 < ARRAY_COUNT(deltas))
         target = current + deltas[gSpecialVar_0x8006];
     else if (gSpecialVar_0x8006 == 6)
         target = 0;
     else
-        target = min(32, current + 66 - total);
+        target = EC_STAT_POINTS_PER_STAT;
 
-    target = min(max(target, 0), 32);
+    // Never below zero or above the per-stat cap, and an increase can only
+    // spend what is left of the budget.
+    target = min(max(target, 0), EC_STAT_POINTS_PER_STAT);
     if (target > current)
-        target = min(target, current + max(66 - total, 0));
-    target = min(max(target, 0), 32);
+        target = min(target, current + max(EC_STAT_POINT_BUDGET - total, 0));
     if (target == current)
         return;
     u8 value = target;
-    SetMonData(mon, sEmeraldChampionsStatPointFields[gSpecialVar_0x8005], &value);
+    SetMonData(mon, EC_STAT_POINT_DATA(gSpecialVar_0x8005), &value);
     CalculateMonStats(mon);
     gSpecialVar_Result = TRUE;
 }
@@ -901,7 +1037,7 @@ void ResetSelectedMonEmeraldChampionsStatPoints(void)
     for (u32 stat = 0; stat < NUM_STATS; stat++)
         SetMonData(
             &gParties[B_TRAINER_PLAYER][gSpecialVar_0x800A],
-            sEmeraldChampionsStatPointFields[stat],
+            EC_STAT_POINT_DATA(stat),
             &zero
         );
     CalculateMonStats(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x800A]);
@@ -3259,9 +3395,12 @@ void ShowScrollableMultichoice(void)
     case SCROLL_MULTI_EMERALD_CHAMPIONS_STAT_POINTS:
         task->tMaxItemsOnScreen = 4;
         task->tNumItems = ARRAY_COUNT(sEmeraldChampionsStatPointNames);
-        task->tLeft = 18;
+        // Rows carry the resulting stat ("Sp. Def  32/32 {RIGHT_ARROW} 179",
+        // 103px at item_X 8), so this list is four tiles wider than the
+        // other specialist menus while keeping the same right edge.
+        task->tLeft = 14;
         task->tTop = 1;
-        task->tWidth = 11;
+        task->tWidth = 15;
         task->tHeight = task->tMaxItemsOnScreen * 2;
         task->tKeepOpenAfterSelect = FALSE;
         task->tTaskId = taskId;
@@ -3282,6 +3421,19 @@ void ShowScrollableMultichoice(void)
         task->tTaskId = taskId;
         task->tScrollOffset = min(gSpecialVar_0x8006, task->tNumItems - task->tMaxItemsOnScreen);
         task->tSelectedRow = gSpecialVar_0x8006 - task->tScrollOffset;
+        break;
+    case SCROLL_MULTI_EMERALD_CHAMPIONS_NATURES:
+        // All 25 Natures, five rows, opened on the Pokémon's current Nature.
+        task->tMaxItemsOnScreen = 5;
+        task->tNumItems = NUM_NATURES;
+        task->tLeft = 1;
+        task->tTop = 1;
+        task->tWidth = 14;
+        task->tHeight = task->tMaxItemsOnScreen * 2;
+        task->tKeepOpenAfterSelect = FALSE;
+        task->tTaskId = taskId;
+        task->tScrollOffset = min(gSpecialVar_0x8005, NUM_NATURES - task->tMaxItemsOnScreen);
+        task->tSelectedRow = gSpecialVar_0x8005 - task->tScrollOffset;
         break;
     case SCROLL_MULTI_FURFROU_TRIMS:
         task->tMaxItemsOnScreen = 5;
@@ -3330,6 +3482,10 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         sText_SetZero,
         sText_SetMaximum,
         sText_Back,
+    },
+    [SCROLL_MULTI_EMERALD_CHAMPIONS_NATURES] =
+    {
+        sText_Back, // unused: rows are built from gNaturesInfo
     },
     [SCROLL_MULTI_FURFROU_TRIMS] =
     {
@@ -3569,6 +3725,10 @@ static void Task_ShowScrollableMultichoice(u8 taskId)
               && gSpecialVar_0x800A < gPartiesCount[B_TRAINER_PLAYER])
         {
             text = BuildEmeraldChampionsStatPointMenuText(i);
+        }
+        else if (gSpecialVar_0x8004 == SCROLL_MULTI_EMERALD_CHAMPIONS_NATURES && i < NUM_NATURES)
+        {
+            text = BuildEmeraldChampionsNatureMenuText(i);
         }
         else
         {

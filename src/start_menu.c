@@ -32,6 +32,7 @@
 #include "pokedex.h"
 #include "pokenav.h"
 #include "safari_zone.h"
+#include "reload_save.h"
 #include "save.h"
 #include "scanline_effect.h"
 #include "script.h"
@@ -69,6 +70,7 @@ enum
     MENU_ACTION_PYRAMID_BAG,
     MENU_ACTION_DEBUG,
     MENU_ACTION_DEXNAV,
+    MENU_ACTION_RELOAD_SAVE,
 };
 
 // Save status
@@ -111,6 +113,13 @@ static bool8 StartMenuBattlePyramidRetireCallback(void);
 static bool8 StartMenuBattlePyramidBagCallback(void);
 static bool8 StartMenuDebugCallback(void);
 static bool8 StartMenuDexNavCallback(void);
+static bool8 StartMenuReloadSaveCallback(void);
+static bool8 ReloadSaveStartCallback(void);
+static bool8 ReloadSaveCallback(void);
+static u8 ReloadSaveConfirmCallback(void);
+static u8 ReloadSaveYesNoCallback(void);
+static u8 ReloadSaveConfirmInputCallback(void);
+static u8 ReloadSaveWaitFadeCallback(void);
 
 // Menu callbacks
 static bool8 SaveStartCallback(void);
@@ -188,6 +197,8 @@ static const struct WindowTemplate sWindowTemplate_PyramidPeak = {
 };
 
 static const u8 sText_MenuDebug[] = _("DEBUG");
+static const u8 sText_MenuReload[] = _("Reload");
+static const u8 sText_ReloadLastSaveConfirm[] = _("Reload the last save?\nAnything since then will be lost.");
 
 static const struct MenuAction sStartMenuItems[] =
 {
@@ -205,6 +216,7 @@ static const struct MenuAction sStartMenuItems[] =
     [MENU_ACTION_RETIRE_FRONTIER] = {gText_MenuRetire,  {.u8_void = StartMenuBattlePyramidRetireCallback}},
     [MENU_ACTION_PYRAMID_BAG]     = {gText_MenuBag,     {.u8_void = StartMenuBattlePyramidBagCallback}},
     [MENU_ACTION_DEBUG]           = {sText_MenuDebug,   {.u8_void = StartMenuDebugCallback}},
+    [MENU_ACTION_RELOAD_SAVE]     = {sText_MenuReload,  {.u8_void = StartMenuReloadSaveCallback}},
     [MENU_ACTION_DEXNAV]          = {gText_MenuDexNav,  {.u8_void = StartMenuDexNavCallback}},
 };
 
@@ -340,6 +352,9 @@ static void BuildNormalStartMenu(void)
 
     AddStartMenuAction(MENU_ACTION_PLAYER);
     AddStartMenuAction(MENU_ACTION_SAVE);
+    // Emerald Champions: instant retry from the last save, only when one exists.
+    if (CanReloadLastSave())
+        AddStartMenuAction(MENU_ACTION_RELOAD_SAVE);
     AddStartMenuAction(MENU_ACTION_OPTION);
     AddStartMenuAction(MENU_ACTION_EXIT);
 }
@@ -656,7 +671,8 @@ static bool8 HandleStartMenuInput(void)
             && gMenuCallback != StartMenuExitCallback
             && gMenuCallback != StartMenuDebugCallback
             && gMenuCallback != StartMenuSafariZoneRetireCallback
-            && gMenuCallback != StartMenuBattlePyramidRetireCallback)
+            && gMenuCallback != StartMenuBattlePyramidRetireCallback
+            && gMenuCallback != StartMenuReloadSaveCallback)
         {
            FadeScreen(FADE_TO_BLACK, 0);
         }
@@ -764,6 +780,78 @@ static bool8 StartMenuSaveCallback(void)
     gMenuCallback = SaveStartCallback; // Display save menu
 
     return FALSE;
+}
+
+// Reload flow. Reuses the save dialog machinery so it reads exactly like Save:
+// the menu stays up, a Yes/No confirms, and Yes fades out and reloads in place.
+static bool8 StartMenuReloadSaveCallback(void)
+{
+    gMenuCallback = ReloadSaveStartCallback;
+
+    return FALSE;
+}
+
+static bool8 ReloadSaveStartCallback(void)
+{
+    sSaveDialogCallback = ReloadSaveConfirmCallback;
+    sSavingComplete = FALSE;
+    gMenuCallback = ReloadSaveCallback;
+
+    return FALSE;
+}
+
+static bool8 ReloadSaveCallback(void)
+{
+    switch (RunSaveCallback())
+    {
+    case SAVE_CANCELED: // Back to start menu
+        ClearDialogWindowAndFrameToTransparent(0, FALSE);
+        InitStartMenu();
+        gMenuCallback = HandleStartMenuInput;
+        return FALSE;
+    default:
+        return FALSE;
+    }
+}
+
+static u8 ReloadSaveConfirmCallback(void)
+{
+    ShowSaveMessage(sText_ReloadLastSaveConfirm, ReloadSaveYesNoCallback);
+    return SAVE_IN_PROGRESS;
+}
+
+static u8 ReloadSaveYesNoCallback(void)
+{
+    DisplayYesNoMenuDefaultYes();
+    sSaveDialogCallback = ReloadSaveConfirmInputCallback;
+    return SAVE_IN_PROGRESS;
+}
+
+static u8 ReloadSaveConfirmInputCallback(void)
+{
+    switch (Menu_ProcessInputNoWrapClearOnChoose())
+    {
+    case 0: // Yes
+        HideSaveMessageWindow();
+        FadeScreen(FADE_TO_BLACK, 0);
+        sSaveDialogCallback = ReloadSaveWaitFadeCallback;
+        return SAVE_IN_PROGRESS;
+    case MENU_B_PRESSED:
+    case 1: // No
+        HideSaveMessageWindow();
+        return SAVE_CANCELED;
+    }
+
+    return SAVE_IN_PROGRESS;
+}
+
+static u8 ReloadSaveWaitFadeCallback(void)
+{
+    if (gPaletteFade.active)
+        return SAVE_IN_PROGRESS;
+    // Never returns to this menu: the game continues from the loaded save.
+    ReloadLastSave();
+    return SAVE_IN_PROGRESS;
 }
 
 static bool8 StartMenuOptionCallback(void)

@@ -74,8 +74,11 @@ static void Task_ShowTMHMContainedMessage(u8);
 static void UseTMHMYesNo(u8);
 static void UseTMHM(u8);
 static void Task_StartUseRepel(u8);
+static bool32 TryEndRepelSprayForAttractant(void);
 static void Task_StartUseLure(u8 taskId);
 static void Task_UseRepel(u8);
+static void Task_StartUseRepelSpray(u8);
+static void Task_UseRepelSpray(u8);
 static void Task_UseLure(u8 taskId);
 static void ItemUseOnFieldCB_PokeVial(u8 taskId);
 static void CB2_OpenLevelerFromBag(void);
@@ -102,6 +105,9 @@ static const u8 sText_PlayedPokeFlute[] = _("Played the POKé FLUTE.");
 static const u8 sText_PokeFluteAwakenedMon[] = _("The POKé FLUTE awakened sleeping\nPOKéMON.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_PokeVialEmpty[] = _("The Poké Vial is empty.\nRefill it at a Pokémon Center.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_UsedPokeVial[] = _("{PLAYER} used the Poké Vial.\nThe party was fully restored!{PAUSE_UNTIL_PRESS}");
+static const u8 sText_RepelSprayEnded[] = _("\pThe Repel Spray's effect ended.{PAUSE_UNTIL_PRESS}");
+static const u8 sText_RepelSprayOn[] = _("{PLAYER} misted the air.\pWild Pokémon will keep their distance\nuntil the spray is used again.{PAUSE_UNTIL_PRESS}");
+static const u8 sText_RepelSprayOff[] = _("{PLAYER} let the mist settle.\pThe grass stirs. Wild Pokémon are\ncoming back.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_LevelerNoEffect[] = _("Every Pokémon in the party is\nalready at the current level cap.{PAUSE_UNTIL_PRESS}");
 
 // EWRAM variables
@@ -1039,6 +1045,8 @@ static void Task_UseLure(u8 taskId)
         VarSet(VAR_LAST_REPEL_LURE_USED, gSpecialVar_ItemId);
     #endif
         RemoveUsedItem();
+        if (TryEndRepelSprayForAttractant())
+            StringAppend(gStringVar4, sText_RepelSprayEnded);
         if (CurrentBattlePyramidLocation() == PYRAMID_LOCATION_NONE)
             DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, CloseItemMessage);
         else
@@ -1066,6 +1074,8 @@ void ItemUseOutOfBattle_BlackWhiteFlute(u8 taskId)
         FlagSet(FLAG_SYS_ENC_UP_ITEM);
         FlagClear(FLAG_SYS_ENC_DOWN_ITEM);
         StringExpandPlaceholders(gStringVar4, sText_UsedVar2WildLured);
+        if (TryEndRepelSprayForAttractant())
+            StringAppend(gStringVar4, sText_RepelSprayEnded);
     }
     else
     {
@@ -1489,6 +1499,63 @@ static bool32 CanLevelPartyToCap(void)
     }
 
     return FALSE;
+}
+
+// Binary toggle: while the spray is active no step-based wild encounter can
+// start anywhere. Deliberate encounters (fishing, Rock Smash, Sweet Scent)
+// still work, so the spray removes grass tax without removing the ability to
+// go looking for a Pokemon on purpose.
+// Attracting items would otherwise do nothing while the spray suppresses
+// encounters. Cancel the spray for the player and say so, instead of leaving
+// them to wonder why the Lure did not work.
+static bool32 TryEndRepelSprayForAttractant(void)
+{
+    if (!FlagGet(FLAG_EC_REPEL_SPRAY_ACTIVE))
+        return FALSE;
+    FlagClear(FLAG_EC_REPEL_SPRAY_ACTIVE);
+    return TRUE;
+}
+
+// Same presentation as a Repel: a short beat, the sound, then the message
+// once the sound has finished, in the Bag or on the field when registered.
+void ItemUseOutOfBattle_RepelSpray(u8 taskId)
+{
+    gTasks[taskId].data[8] = 0;
+    gTasks[taskId].func = Task_StartUseRepelSpray;
+}
+
+static void Task_StartUseRepelSpray(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+
+    if (++data[8] > 7)
+    {
+        data[8] = 0;
+        if (FlagGet(FLAG_EC_REPEL_SPRAY_ACTIVE))
+        {
+            FlagClear(FLAG_EC_REPEL_SPRAY_ACTIVE);
+            PlaySE(SE_PC_OFF);
+        }
+        else
+        {
+            FlagSet(FLAG_EC_REPEL_SPRAY_ACTIVE);
+            PlaySE(SE_REPEL);
+        }
+        gTasks[taskId].func = Task_UseRepelSpray;
+    }
+}
+
+static void Task_UseRepelSpray(u8 taskId)
+{
+    const u8 *message;
+
+    if (IsSEPlaying())
+        return;
+    message = FlagGet(FLAG_EC_REPEL_SPRAY_ACTIVE) ? sText_RepelSprayOn : sText_RepelSprayOff;
+    if (!gTasks[taskId].tUsingRegisteredKeyItem)
+        DisplayItemMessage(taskId, FONT_NORMAL, message, CloseItemMessage);
+    else
+        DisplayItemMessageOnField(taskId, message, Task_CloseCantUseKeyItemMessage);
 }
 
 void ItemUseOutOfBattle_Leveler(u8 taskId)

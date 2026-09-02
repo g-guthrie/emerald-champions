@@ -1416,8 +1416,12 @@ void CalculateMonStatsCont(struct Pokemon *mon, bool32 updateSpeedStat)
 
         if (P_STAT_CALCULATION >= GEN_CHAMPIONS)
         {
+            // Emerald Champions: one Stat Point is worth two investment (eight
+            // vanilla EVs), so a point is exactly one stat at Lv. 50 and two
+            // at Lv. 100. The cap of 63 keeps 32 points equal to a 252 EV
+            // spread.
             iv[i] = MAX_PER_STAT_IVS;
-            statInvestment = max(2 * ev[i] - 1, 0);
+            statInvestment = min(2 * ev[i], 63);
         }
         else
         {
@@ -1447,7 +1451,7 @@ void CalculateMonStatsCont(struct Pokemon *mon, bool32 updateSpeedStat)
         if (P_STAT_CALCULATION >= GEN_CHAMPIONS)
         {
             iv[STAT_HP] = MAX_PER_STAT_IVS;
-            statInvestment = max(2 * ev[STAT_HP] - 1, 0);
+            statInvestment = min(2 * ev[STAT_HP], 63);
         }
         else
         {

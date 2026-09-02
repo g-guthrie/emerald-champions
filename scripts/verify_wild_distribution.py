@@ -199,6 +199,23 @@ def main() -> int:
     require(wild_code.count("level = min(level, GetCurrentLevelCap());") >= 2,
             "runtime clamps every wild level (land/water/rocks and fishing) to the live cap")
 
+    # The slot weights are a hand-maintained design contract, not generator
+    # output: a flattened curve so the rarest slot on a route is 4%, not 1%,
+    # and Sweet Scent's full slot reversal turns that 4% slot into the 14% one.
+    encounters = json.loads((ROOT / "src/data/wild_encounters.json").read_text())
+    rates = {field["type"]: field["encounter_rates"] for field in encounters["wild_encounter_groups"][0]["fields"]}
+    require(rates["land_mons"] == [14, 12, 11, 10, 9, 9, 8, 7, 6, 5, 5, 4],
+            f"land slot weights are the flattened 14..4 curve, got {rates['land_mons']}")
+    require(rates["water_mons"] == [35, 25, 18, 12, 10] and rates["rock_smash_mons"] == [35, 25, 18, 12, 10],
+            "water and Rock Smash slot weights are the flattened 35..10 curve")
+    require(rates["fishing_mons"] == [60, 40, 45, 30, 25, 30, 25, 20, 15, 10],
+            "fishing slot weights are unchanged (100 per rod)")
+    require(all(sum(rates[key]) == 100 for key in ("land_mons", "water_mons", "rock_smash_mons")),
+            "land, water and Rock Smash slot weights each sum to 100")
+    require("wildMonIndex = 11 - wildMonIndex;" in wild_code
+            and wild_code.count("if (sSweetScentInverted || (LURE_STEP_COUNT != 0") == 4,
+            "Sweet Scent reverses the full slot order in every table (land/water/rocks/fishing)")
+
     if FAILURES:
         print(f"\n{len(FAILURES)} wild-distribution check(s) failed")
         return 1

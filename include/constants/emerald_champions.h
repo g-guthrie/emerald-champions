@@ -7,6 +7,11 @@
 #define EC_BATTLE_SET_MEGA                   3
 #define EC_BATTLE_SET_MEGA_STONE_HELD        4
 
+// Stat Points: the Champions budget. 32 points is a 252 EV spread; 66 total
+// lets two stats max with two points to spare.
+#define EC_STAT_POINTS_PER_STAT              32
+#define EC_STAT_POINT_BUDGET                 66
+
 #define EC_BATTLE_FORMAT_DOUBLES             0
 #define EC_BATTLE_FORMAT_SINGLES             1
 #define EC_BATTLE_FORMAT_COUNT               2

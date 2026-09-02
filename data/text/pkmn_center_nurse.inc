@@ -1,11 +1,14 @@
 gText_EmeraldChampionsFirstCenterVisit::
 	.string "This is your first visit, isn't it?\p"
-	.string "We give every new Trainer two tools\n"
-	.string "for building teams quickly.\p"
+	.string "We give every new Trainer three\n"
+	.string "tools for building teams quickly.\p"
 	.string "First, take this Poké Vial!$"
 
 gText_EmeraldChampionsGiveLeveler::
 	.string "And here is your Leveler!$"
+
+gText_EmeraldChampionsGiveRepelSpray::
+	.string "And last, the Repel Spray!$"
 
 gText_EmeraldChampionsExplainTools::
 	.string "The Poké Vial fully restores your\n"
@@ -15,7 +18,22 @@ gText_EmeraldChampionsExplainTools::
 	.string "The Leveler raises your whole party\n"
 	.string "to the current level cap.\p"
 	.string "It never runs out. Use it whenever\n"
-	.string "you want to prepare a new team.$"
+	.string "you want to prepare a new team.\p"
+	.string "The Repel Spray switches wild\n"
+	.string "encounters off until you use it again.\p"
+	.string "Fishing, Rock Smash and Sweet Scent\n"
+	.string "still work. Travel in peace!$"
+
+gText_EmeraldChampionsGiveMissingRepelSpray::
+	.string "One more tool for you:\n"
+	.string "the Repel Spray!$"
+
+gText_EmeraldChampionsExplainRepelSpray::
+	.string "Use it once and wild Pokémon leave\n"
+	.string "you alone. Use it again and they\l"
+	.string "come back.\p"
+	.string "Fishing, Rock Smash and Sweet Scent\n"
+	.string "are never blocked.$"
 
 gText_EmeraldChampionsGiveMissingLeveler::
 	.string "We have one more tool for you:\n"

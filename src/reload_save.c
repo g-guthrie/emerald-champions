@@ -8,6 +8,7 @@
 #include "new_game.h"
 #include "overworld.h"
 #include "malloc.h"
+#include "sound.h"
 #include "text.h"
 
 // Reloads the game, continuing from the point of the last save
@@ -31,4 +32,23 @@ void ReloadSave(void)
     SetPokemonCryStereo(gSaveBlock2Ptr->optionsSound);
     InitHeap(gHeap, HEAP_SIZE);
     SetMainCallback2(CB2_ContinueSavedGame);
+}
+
+// Emerald Champions: instant retry from the Start menu and after a lost
+// battle. Only offered while a real save exists on the cart, since reloading
+// an empty or corrupt file would reset the game to defaults.
+bool32 CanReloadLastSave(void)
+{
+    if (gSaveFileStatus == SAVE_STATUS_CORRUPT)
+        return FALSE;
+    return gSaveFileStatus == SAVE_STATUS_OK || !gDifferentSaveFile;
+}
+
+void ReloadLastSave(void)
+{
+    if (!CanReloadLastSave())
+        return;
+    StopMapMusic();
+    m4aMPlayAllStop();
+    ReloadSave();
 }

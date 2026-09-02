@@ -11,16 +11,28 @@ Common_EventScript_PkmnCenterNurse::
 	msgbox gText_EmeraldChampionsGiveLeveler, MSGBOX_DEFAULT
 	giveitem ITEM_LEVELER, 1
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	msgbox gText_EmeraldChampionsGiveRepelSpray, MSGBOX_DEFAULT
+	giveitem ITEM_REPEL_SPRAY, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	msgbox gText_EmeraldChampionsExplainTools, MSGBOX_DEFAULT
 	goto EventScript_PkmnCenterNurse_Main
 
 EventScript_PkmnCenterNurse_HasVial::
 	checkitem ITEM_LEVELER, 1
-	goto_if_eq VAR_RESULT, TRUE, EventScript_PkmnCenterNurse_Main
+	goto_if_eq VAR_RESULT, TRUE, EventScript_PkmnCenterNurse_CheckRepelSpray
 	msgbox gText_EmeraldChampionsGiveMissingLeveler, MSGBOX_DEFAULT
 	giveitem ITEM_LEVELER, 1
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	msgbox gText_EmeraldChampionsExplainLeveler, MSGBOX_DEFAULT
+
+@ Existing saves predate the Repel Spray, so every Center hands it out once.
+EventScript_PkmnCenterNurse_CheckRepelSpray::
+	checkitem ITEM_REPEL_SPRAY, 1
+	goto_if_eq VAR_RESULT, TRUE, EventScript_PkmnCenterNurse_Main
+	msgbox gText_EmeraldChampionsGiveMissingRepelSpray, MSGBOX_DEFAULT
+	giveitem ITEM_REPEL_SPRAY, 1
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	msgbox gText_EmeraldChampionsExplainRepelSpray, MSGBOX_DEFAULT
 
 EventScript_PkmnCenterNurse_Main::
 	setvar VAR_0x8004, 0

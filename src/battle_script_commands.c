@@ -8103,6 +8103,10 @@ static u32 ComputeCaptureOdds(u32 wildMonBattler, u32 playerBattler)
     if (battleMon->status1 & STATUS1_CAN_MOVE)
         odds = odds * 15 / 10;
 
+    // Emerald Champions: a flat boost on top of everything above, so every
+    // ball and every status still matter in the same proportion.
+    odds = odds * B_EC_CATCH_ODDS_PERCENT / 100;
+
     return odds;
 }
 

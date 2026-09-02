@@ -16133,6 +16133,22 @@ const struct ItemInfo gItemsInfo[] =
         .iconPalette = gItemIconPalette_RareCandy,
     },
 
+    [ITEM_REPEL_SPRAY] =
+    {
+        .name = ITEM_NAME("Repel Spray"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "Keeps wild Pokémon\n"
+            "away. Use again to\n"
+            "let them return."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_RepelSpray,
+        .iconPic = gItemIcon_Repel,
+        .iconPalette = gItemIconPalette_MaxRepel,
+    },
+
     [ITEM_MAGMA_STONE] =
     {
         .name = ITEM_NAME("Magma Stone"),

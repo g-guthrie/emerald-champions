@@ -43,6 +43,16 @@ void CutMoveOpenDottedHoleDoor(void);
 void IsEmeraldChampionsGameCornerPokemonClaimed(void);
 void GiveEmeraldChampionsGameCornerPokemon(void);
 void GiveEmeraldChampionsPreparedPokemon(void);
+enum EmeraldChampionsStatBreakpoint
+{
+    EC_STAT_BREAKPOINT_FOUND,
+    EC_STAT_BREAKPOINT_STAT_MAXED,
+    EC_STAT_BREAKPOINT_NO_POINTS,
+    EC_STAT_BREAKPOINT_NO_CHANGE,
+};
+
+struct Pokemon;
+enum EmeraldChampionsStatBreakpoint GetEmeraldChampionsStatPointBreakpoint(struct Pokemon *mon, u32 displayStat, u32 *delta, u32 *value);
 void BufferSelectedMonEmeraldChampionsStatPointSummary(void);
 void BufferSelectedMonEmeraldChampionsStatPointDetail(void);
 void AdjustSelectedMonEmeraldChampionsStatPoints(void);

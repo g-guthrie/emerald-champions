@@ -9,10 +9,11 @@ EmeraldChampions_EventScript_MoveTutorMain:
 	message EmeraldChampions_Text_MoveTutorHowCanHelp
 	waitmessage
 	dynmultipush EmeraldChampions_Text_BuildBattleSet, 0
-	dynmultipush EmeraldChampions_Text_EditStatPoints, 1
-	dynmultipush EmeraldChampions_Text_LearnMove, 2
-	dynmultipush EmeraldChampions_Text_OtherServices, 3
-	dynmultipush EmeraldChampions_Text_Exit, 4
+	dynmultipush EmeraldChampions_Text_ChangeNature, 1
+	dynmultipush EmeraldChampions_Text_EditStatPoints, 2
+	dynmultipush EmeraldChampions_Text_LearnMove, 3
+	dynmultipush EmeraldChampions_Text_OtherServices, 4
+	dynmultipush EmeraldChampions_Text_Exit, 5
 	@ A far-right anchor gives this the same upper-right presentation as
 	@ Inclement Emerald's native Pokémon Center specialist menu.  The dynamic
 	@ menu code clamps the final left edge from its measured text width.
@@ -20,10 +21,11 @@ EmeraldChampions_EventScript_MoveTutorMain:
 	closemessage
 	switch VAR_RESULT
 	case 0, EmeraldChampions_EventScript_BattleSetChooseMon
-	case 1, EmeraldChampions_EventScript_StatPointChooseMon
-	case 2, EmeraldChampions_EventScript_OpenMoveRelearner
-	case 3, EmeraldChampions_EventScript_OtherServices
-	case 4, EmeraldChampions_EventScript_MoveTutorExit
+	case 1, EmeraldChampions_EventScript_NatureChooseMon
+	case 2, EmeraldChampions_EventScript_StatPointChooseMon
+	case 3, EmeraldChampions_EventScript_OpenMoveRelearner
+	case 4, EmeraldChampions_EventScript_OtherServices
+	case 5, EmeraldChampions_EventScript_MoveTutorExit
 	case MULTI_B_PRESSED, EmeraldChampions_EventScript_MoveTutorExit
 
 EmeraldChampions_EventScript_OtherServices:
@@ -230,6 +232,39 @@ EmeraldChampions_EventScript_StatPointExternalExit:
 	msgbox EmeraldChampions_Text_StatPointGoodbye, MSGBOX_DEFAULT
 	releaseall
 	end
+
+@ Nature service. Mirrors the party menu's Change Ability flow: pick a party
+@ member, see what it is now, then pick the replacement from a scrolling list
+@ that names the stat each Nature raises and lowers. B backs out at every step.
+EmeraldChampions_EventScript_NatureChooseMon:
+	msgbox EmeraldChampions_Text_ChooseNatureMon, MSGBOX_DEFAULT
+	special ChoosePartyMon
+	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, EmeraldChampions_EventScript_MoveTutorMain
+	special IsSelectedMonEgg
+	goto_if_eq VAR_RESULT, TRUE, EmeraldChampions_EventScript_NatureEgg
+	special BufferSelectedMonNature
+	copyvar VAR_0x800A, VAR_0x8004
+	message EmeraldChampions_Text_CurrentNature
+	waitmessage
+@ The list is built from gNaturesInfo in C (see BuildEmeraldChampionsNatureMenuText)
+@ and opens on the current Nature. VAR_0x8004 carries the menu id for the
+@ scrolling list, so the party slot rides in VAR_0x800A meanwhile.
+	setvar VAR_0x8004, SCROLL_MULTI_EMERALD_CHAMPIONS_NATURES
+	special ShowScrollableMultichoice
+	copyvar VAR_0x8004, VAR_0x800A
+	closemessage
+	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, EmeraldChampions_EventScript_NatureChooseMon
+	special SetHiddenNature
+	playfanfare MUS_LEVEL_UP
+	special BufferSelectedMonNature
+	msgbox EmeraldChampions_Text_NatureChanged, MSGBOX_DEFAULT
+	msgbox EmeraldChampions_Text_ChangeAnotherNature, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, EmeraldChampions_EventScript_NatureChooseMon
+	goto EmeraldChampions_EventScript_MoveTutorMain
+
+EmeraldChampions_EventScript_NatureEgg:
+	msgbox EmeraldChampions_Text_NatureEgg, MSGBOX_DEFAULT
+	goto EmeraldChampions_EventScript_NatureChooseMon
 
 EmeraldChampions_EventScript_BattleSetChooseMon:
 	call_if_eq VAR_0x800B, 0, EmeraldChampions_EventScript_ExplainBattleSets
@@ -705,3 +740,21 @@ EmeraldChampions_Text_StarterRegionGalar:
 	.string "Galar$"
 EmeraldChampions_Text_StarterRegionPaldea:
 	.string "Paldea$"
+
+EmeraldChampions_Text_ChangeNature:
+	.string "Change Nature$"
+
+EmeraldChampions_Text_ChooseNatureMon:
+	.string "Whose Nature should I change?$"
+
+EmeraldChampions_Text_CurrentNature:
+	.string "Nature: {STR_VAR_2}.\nWhich Nature would you like?$"
+
+EmeraldChampions_Text_NatureChanged:
+	.string "{STR_VAR_1}'s Nature is now\n{STR_VAR_2}. Stats recalculated.$"
+
+EmeraldChampions_Text_ChangeAnotherNature:
+	.string "Change another Nature?$"
+
+EmeraldChampions_Text_NatureEgg:
+	.string "An Egg's Nature can't be changed.$"

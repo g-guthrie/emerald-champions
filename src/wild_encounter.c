@@ -52,6 +52,8 @@ extern const u8 EventScript_SprayWoreOff[];
 
 static u16 FeebasRandom(void);
 static void FeebasSeedRng(u16 seed);
+static bool8 sSweetScentInverted = FALSE;
+
 static void ApplyFluteEncounterRateMod(u32 *encRate);
 static void ApplyCleanseTagEncounterRateMod(u32 *encRate);
 static u8 GetMaxLevelOfSpeciesInWildTable(const struct WildPokemon *wildMon, enum Species species, enum WildPokemonArea area);
@@ -364,7 +366,10 @@ u32 ChooseWildMonIndex_Land(void)
     else
         wildMonIndex = 11;
 
-    if (LURE_STEP_COUNT != 0 && (Random() % 10 < 2))
+    // Sweet Scent always reverses the slot order, so the rarest Pokemon on the
+    // route becomes the most likely one. It is the reward for spending a turn
+    // and a move slot instead of walking.
+    if (sSweetScentInverted || (LURE_STEP_COUNT != 0 && (Random() % 10 < 2)))
         swap = TRUE;
 
     if (swap)
@@ -423,7 +428,10 @@ u32 ChooseWildMonIndex_Water(void)
     else
         wildMonIndex = 4;
 
-    if (LURE_STEP_COUNT != 0 && (Random() % 10 < 2))
+    // Sweet Scent always reverses the slot order, so the rarest Pokemon on the
+    // route becomes the most likely one. It is the reward for spending a turn
+    // and a move slot instead of walking.
+    if (sSweetScentInverted || (LURE_STEP_COUNT != 0 && (Random() % 10 < 2)))
         swap = TRUE;
 
     if (swap)
@@ -469,7 +477,10 @@ u32 ChooseWildMonIndex_Rocks(void)
     else
         wildMonIndex = 4;
 
-    if (LURE_STEP_COUNT != 0 && (Random() % 10 < 2))
+    // Sweet Scent always reverses the slot order, so the rarest Pokemon on the
+    // route becomes the most likely one. It is the reward for spending a turn
+    // and a move slot instead of walking.
+    if (sSweetScentInverted || (LURE_STEP_COUNT != 0 && (Random() % 10 < 2)))
         swap = TRUE;
 
     if (swap)
@@ -486,7 +497,10 @@ static u32 ChooseWildMonIndex_Fishing(u8 rod)
     u8 rand = Random() % max(max(ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_TOTAL, ENCOUNTER_CHANCE_FISHING_MONS_GOOD_ROD_TOTAL),
                              ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_TOTAL);
 
-    if (LURE_STEP_COUNT != 0 && (Random() % 10 < 2))
+    // Sweet Scent always reverses the slot order, so the rarest Pokemon on the
+    // route becomes the most likely one. It is the reward for spending a turn
+    // and a move slot instead of walking.
+    if (sSweetScentInverted || (LURE_STEP_COUNT != 0 && (Random() % 10 < 2)))
         swap = TRUE;
 
     switch (rod)
@@ -854,6 +868,12 @@ bool8 StandardWildEncounter(u16 curMetatileBehavior, u16 prevMetatileBehavior)
     if (sWildEncountersDisabled == TRUE)
         return FALSE;
 
+    // Emerald Champions: the Repel Spray is a binary toggle key item. While it
+    // is active, no step-based encounter can start. Fishing, Rock Smash and
+    // Sweet Scent are deliberate actions and are deliberately unaffected.
+    if (FlagGet(FLAG_EC_REPEL_SPRAY_ACTIVE))
+        return FALSE;
+
     headerId = GetCurrentMapWildMonHeaderId();
     if (headerId == HEADER_NONE)
     {
@@ -1033,7 +1053,7 @@ void RockSmashWildEncounter(void)
     }
 }
 
-bool8 SweetScentWildEncounter(void)
+static bool8 SweetScentWildEncounterInner(void)
 {
     s16 x, y;
     u32 headerId;
@@ -1114,6 +1134,17 @@ bool8 SweetScentWildEncounter(void)
 
     return FALSE;
 }
+
+bool8 SweetScentWildEncounter(void)
+{
+    bool8 encountered;
+
+    sSweetScentInverted = TRUE;
+    encountered = SweetScentWildEncounterInner();
+    sSweetScentInverted = FALSE;
+    return encountered;
+}
+
 
 bool8 DoesCurrentMapHaveFishingMons(void)
 {
