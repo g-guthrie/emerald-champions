@@ -82,6 +82,7 @@ static void MoveSelectionDisplayMoveType(enum BattlerId battler);
 static void MoveSelectionDisplayMoveNames(enum BattlerId battler);
 static void TryMoveSelectionDisplayMoveDescription(enum BattlerId battler);
 static void MoveSelectionDisplayMoveDescription(enum BattlerId battler);
+static void MoveSelectionDisplayFoeTypes(enum BattlerId battler);
 static void WaitForMonSelection(enum BattlerId battler);
 static void CompleteWhenChoseItem(enum BattlerId battler);
 static void Task_LaunchLvlUpAnim(u8);
@@ -884,9 +885,10 @@ void HandleInputChooseMove(enum BattlerId battler)
     }
     else if (gBattleStruct->descriptionSubmenu)
     {
-        if (JOY_NEW(B_MOVE_DESCRIPTION_BUTTON) || JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
+        if (JOY_NEW(B_MOVE_DESCRIPTION_BUTTON) || JOY_NEW(R_BUTTON) || JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
         {
             gBattleStruct->descriptionSubmenu = FALSE;
+            gBattleStruct->foeTypesSubmenu = FALSE;
             if (gCategoryIconSpriteId != 0xFF)
             {
                 DestroySprite(&gSprites[gCategoryIconSpriteId]);
@@ -907,6 +909,12 @@ void HandleInputChooseMove(enum BattlerId battler)
         !(B_MOVE_DESCRIPTION_BUTTON == L_BUTTON && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A))
     {
         gBattleStruct->descriptionSubmenu = TRUE;
+        TryMoveSelectionDisplayMoveDescription(battler);
+    }
+    else if (JOY_NEW(R_BUTTON) && !gBattleStruct->zmove.viewing)
+    {
+        gBattleStruct->descriptionSubmenu = TRUE;
+        gBattleStruct->foeTypesSubmenu = TRUE;
         TryMoveSelectionDisplayMoveDescription(battler);
     }
     else if (JOY_NEW(START_BUTTON))
@@ -1747,8 +1755,45 @@ static void TryMoveSelectionDisplayMoveDescription(enum BattlerId battler)
     if (!B_SHOW_MOVE_DESCRIPTION)
         return;
 
-    if (gBattleStruct->descriptionSubmenu)
+    if (gBattleStruct->foeTypesSubmenu)
+        MoveSelectionDisplayFoeTypes(battler);
+    else if (gBattleStruct->descriptionSubmenu)
         MoveSelectionDisplayMoveDescription(battler);
+}
+
+// Emerald Champions: the same panel as the move description, listing each
+// opposing Pokémon and its current types ("Wingull   Water/Flying"). Opened
+// with R during move selection; it is deliberately unadvertised.
+static void MoveSelectionDisplayFoeTypes(enum BattlerId battler)
+{
+    static const u8 sText_TypeColumn[] = _("{CLEAR_TO 96}");
+    static const u8 sText_TypeSlash[] = _("/");
+    u8 *text = gDisplayedStringBattle;
+    u32 lines = 0;
+
+    LoadMessageBoxAndBorderGfx();
+    DrawStdWindowFrame(B_WIN_MOVE_DESCRIPTION, FALSE);
+    text[0] = EOS;
+    for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
+    {
+        enum Type types[3];
+
+        if (GetBattlerSide(foe) == GetBattlerSide(battler) || !IsBattlerAlive(foe))
+            continue;
+        if (lines++ > 0)
+            text = StringAppend(text, gText_NewLine);
+        text = StringAppend(text, GetSpeciesName(gBattleMons[foe].species));
+        text = StringAppend(text, sText_TypeColumn);
+        GetBattlerTypes(foe, FALSE, types);
+        text = StringAppend(text, gTypesInfo[types[0]].name);
+        if (types[1] != types[0] && types[1] != TYPE_MYSTERY)
+        {
+            text = StringAppend(text, sText_TypeSlash);
+            text = StringAppend(text, gTypesInfo[types[1]].name);
+        }
+    }
+    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_DESCRIPTION);
+    CopyWindowToVram(B_WIN_MOVE_DESCRIPTION, COPYWIN_FULL);
 }
 
 static void MoveSelectionDisplayMoveDescription(enum BattlerId battler)

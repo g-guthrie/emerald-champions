@@ -153,6 +153,12 @@ def main() -> None:
         "#define B_MISSING_BADGE_CATCH_MALUS     GEN_3" in read("include/config/battle.h"),
         "the badge catch malus must stay off: caps already clamp wild levels",
     )
+    player_controller = read("src/battle_controller_player.c")
+    require(
+        "MoveSelectionDisplayFoeTypes(battler);" in player_controller
+        and "JOY_NEW(R_BUTTON) && !gBattleStruct->zmove.viewing" in player_controller,
+        "R during move selection must show the foes' types in the description panel",
+    )
     start_menu = read("src/start_menu.c")
     overworld = read("src/overworld.c")
     # Reload lives on the Start menu only. A prompt on the whiteout screen was
