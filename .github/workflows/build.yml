@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - main
+      # Work branches get the same run as main, so a red build is known
+      # before it lands rather than after.
+      - 'fix/**'
+      - 'feat/**'
+      - 'feature/**'
+      - 'release/**'
   pull_request:
   workflow_dispatch:
 
@@ -92,3 +98,16 @@ jobs:
         run: |
           sha256sum pokeemerald-release.gba
           arm-none-eabi-size pokeemerald-release.elf
+
+      # Every green build is a downloadable ROM: the .gba, the ELF for
+      # symbolised crash reads, and the stamp that proves which sources built it.
+      - name: Upload release ROM
+        uses: actions/upload-artifact@v4
+        with:
+          name: emerald-champions-${{ github.sha }}
+          path: |
+            pokeemerald-release.gba
+            pokeemerald-release.elf
+            pokeemerald-release.inputs.json
+          retention-days: 30
+          if-no-files-found: error
