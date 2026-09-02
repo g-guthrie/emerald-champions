@@ -11,6 +11,7 @@ every illegal explicit Ability in ``src/data/trainers.party``.
 
 from __future__ import annotations
 
+import os
 import re
 import shutil
 import subprocess
@@ -20,7 +21,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-TRAINERS = ROOT / "src/data/trainers.party"
+TRAINERS = Path(os.environ.get("EC_TRAINERS_PARTY", ROOT / "src/data/trainers.party"))
 SPECIES_CONSTANTS = ROOT / "include/constants/species.h"
 
 SPECIES_MARKER = re.compile(
@@ -159,12 +160,12 @@ def main() -> None:
         legal = abilities.get(configured_species)
         if legal is None:
             failures.append(
-                f"{TRAINERS.relative_to(ROOT)}:{entry.line}: {entry.trainer}/{entry.species}: "
+                f"{(TRAINERS.relative_to(ROOT) if TRAINERS.is_relative_to(ROOT) else TRAINERS)}:{entry.line}: {entry.trainer}/{entry.species}: "
                 f"configured species {configured_species} has no gSpeciesInfo entry"
             )
         elif entry.ability not in legal:
             failures.append(
-                f"{TRAINERS.relative_to(ROOT)}:{entry.line}: {entry.trainer}/{entry.species}: "
+                f"{(TRAINERS.relative_to(ROOT) if TRAINERS.is_relative_to(ROOT) else TRAINERS)}:{entry.line}: {entry.trainer}/{entry.species}: "
                 f"illegal {entry.ability}; legal={','.join(sorted(legal))}"
             )
 

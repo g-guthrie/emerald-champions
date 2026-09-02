@@ -16,6 +16,8 @@
 #include "contest.h"
 #include "contest_util.h"
 #include "event_data.h"
+#include "item_use.h"
+#include "load_save.h"
 #include "event_object_movement.h"
 #include "field_effect.h"
 #include "field_specials.h"
@@ -127,6 +129,26 @@ static void PrepareHeadlessOverworldFixtureState(enum Species species)
     FlagClear(FLAG_EC_CAUGHT_REGIGIGAS);
     FlagClear(FLAG_EC_CAUGHT_ZAPDOS);
     UnlockLegendarySign(GetLegendarySignIdBySpecies(species));
+}
+
+static EWRAM_DATA enum Species sEcHeadlessFlightRider = SPECIES_NONE;
+
+static void PrepareHeadlessFieldMoveParty(u16 badgeFlag, u16 hmFlag)
+{
+    ZeroPlayerPartyMons();
+    CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_ZIGZAGOON, 14, 0, OTID_STRUCT_PLAYER_ID);
+    CalculatePlayerPartyCount();
+    FlagSet(badgeFlag);
+    FlagSet(hmFlag);
+}
+
+static void Task_HeadlessOpenFlightBeaconMap(u8 taskId)
+{
+    CleanupOverworldWindowsAndTilemaps();
+    OpenFlyMapForFlightBeacon(CB2_ReturnToField);
+    sEcHeadlessFlightRider = gFieldMoveShowMonSpeciesOverride;
+    gEcHeadlessFixtureSetupResult = TRUE;
+    DestroyTask(taskId);
 }
 
 static void PrepareHeadlessNewGame(void)
@@ -578,6 +600,29 @@ void EmeraldChampionsHeadlessObserve(void)
                 && FieldEffectActiveListContains(FLDEFF_POKECENTER_HEAL);
         return;
     }
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_FIELD_MOVE_CUT
+     || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_FIELD_MOVE_ROCK_SMASH
+     || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_FIELD_MOVE_STRENGTH)
+    {
+        gEcHeadlessFixtureSetupResult = TRUE;
+        if (FieldEffectActiveListContains(FLDEFF_FIELD_MOVE_SHOW_MON))
+            gEcHeadlessFixtureObservedResult = TRUE;
+        return;
+    }
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_FLIGHT_BEACON)
+    {
+        if (gEcHeadlessFixtureTrigger)
+        {
+            gEcHeadlessFixtureTrigger = FALSE;
+            CreateTask(Task_HeadlessOpenFlightBeaconMap, 0);
+        }
+        if (sEcHeadlessFlightRider == SPECIES_WINGULL
+         && gFieldMoveShowMonSpeciesOverride == SPECIES_NONE
+         && FieldEffectActiveListContains(FLDEFF_USE_FLY)
+         && FieldEffectActiveListContains(FLDEFF_FIELD_MOVE_SHOW_MON))
+            gEcHeadlessFixtureObservedResult = TRUE;
+        return;
+    }
     if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_HALL_OF_FAME_RECORD)
     {
         if (gEcHeadlessFixtureTrigger && !gEcHeadlessFixtureSetupResult
@@ -921,6 +966,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
             AddBagItem(ITEM_POKE_VIAL, 1);
             AddBagItem(ITEM_LEVELER, 1);
             AddBagItem(ITEM_REPEL_SPRAY, 1);
+            AddBagItem(ITEM_FLIGHT_BEACON, 1);
             VarSet(VAR_POKE_VIAL_MAX_CHARGES, 1);
             VarSet(VAR_POKE_VIAL_CHARGES, 1);
             PrepareCircuitParty();
@@ -1162,6 +1208,40 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
         SetMainCallback2(CB2_LoadMap);
         gEcHeadlessFixtureSetupResult = TRUE;
         break;
+    // Field moves without HM carriers: the party is one Zigzagoon that could
+    // learn the move but does not know it, the badge and HM flags are set, and
+    // the player stands facing the obstacle. The scenario taps UP, A, then A on
+    // the Yes/No, and the observer latches the "used <move>!" showcase.
+    case EC_HEADLESS_SCENARIO_FIELD_MOVE_CUT:
+        PrepareHeadlessFieldMoveParty(FLAG_BADGE01_GET, FLAG_RECEIVED_HM_CUT);
+        LoadHeadlessMap(MAP_ROUTE104, 35, 23);
+        break;
+    case EC_HEADLESS_SCENARIO_FIELD_MOVE_ROCK_SMASH:
+        PrepareHeadlessFieldMoveParty(FLAG_BADGE03_GET, FLAG_RECEIVED_HM_ROCK_SMASH);
+        LoadHeadlessMap(MAP_ROUTE111, 18, 102);
+        break;
+    case EC_HEADLESS_SCENARIO_FIELD_MOVE_STRENGTH:
+        PrepareHeadlessFieldMoveParty(FLAG_BADGE04_GET, FLAG_RECEIVED_HM_STRENGTH);
+        LoadHeadlessMap(MAP_FIERY_PATH, 10, 16);
+        break;
+    // The Flight Beacon: nobody in the party can fly, but a boxed Wingull knows
+    // Fly. The trigger opens the fly map the way the item does, A picks the
+    // current town, and the observer latches the Fly showcase carrying the
+    // boxed rider with the override consumed.
+    case EC_HEADLESS_SCENARIO_FLIGHT_BEACON:
+    {
+        struct Pokemon rider;
+
+        PrepareHeadlessFieldMoveParty(FLAG_BADGE06_GET, FLAG_RECEIVED_HM_FLY);
+        AddBagItem(ITEM_FLIGHT_BEACON, 1);
+        FlagSet(FLAG_VISITED_LITTLEROOT_TOWN);
+        CreateMon(&rider, SPECIES_WINGULL, 20, 0, OTID_STRUCT_PLAYER_ID);
+        SetMonMoveSlot(&rider, MOVE_FLY, 0);
+        gPokemonStoragePtr->boxes[0][0] = rider.box;
+        sEcHeadlessFlightRider = SPECIES_NONE;
+        LoadHeadlessMap(MAP_LITTLEROOT_TOWN, 8, 10);
+        break;
+    }
     case EC_HEADLESS_SCENARIO_HALL_OF_FAME_RECORD:
         PrepareHeadlessHallParty(gEcHeadlessFixtureParam);
         LoadHeadlessMap(MAP_EVER_GRANDE_CITY_HALL_OF_FAME, 7, 11);

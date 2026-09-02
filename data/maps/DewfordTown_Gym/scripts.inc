@@ -348,8 +348,8 @@ DewfordTown_Gym_Text_LilithPostBattle:
 	.string "not one trick repeated twice.$"
 
 DewfordTown_Gym_Text_BrendenIntro:
-	.string "KUBFU brings direct force, but SOLOSIS\n"
-	.string "attacks from the other axis.$"
+	.string "SAWK brings direct force, but TIMBURR\n"
+	.string "and CLOBBOPUS hold the other axis.$"
 
 DewfordTown_Gym_Text_BrendenDefeat:
 	.string "You changed answers with the damage!$"

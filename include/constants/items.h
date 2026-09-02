@@ -1057,6 +1057,7 @@ enum __attribute__((packed)) Item
     ITEM_LEVELER = 875,
     ITEM_MAGMA_STONE = 876,
     ITEM_REPEL_SPRAY = 877,
+    ITEM_FLIGHT_BEACON = 878,
 
     ITEMS_COUNT,
     ITEM_FIELD_ARROW = ITEMS_COUNT,

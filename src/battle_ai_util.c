@@ -237,8 +237,24 @@ bool32 IsBattlerPredictedToSwitch(enum BattlerId battler)
 }
 
 // Either a predicted move or the last used move from an opposing battler
+// A battler that Encore locked can only use the Encored move. That is
+// certain knowledge rather than a guess, so every AI is entitled to it no
+// matter which prediction flags the trainer carries.
+enum Move GetLockedInMove(enum BattlerId battler)
+{
+    if (!IsBattlerAlive(battler))
+        return MOVE_NONE;
+    if (gBattleMons[battler].volatiles.encoreTimer == 0)
+        return MOVE_NONE;
+    return gBattleMons[battler].volatiles.encoredMove;
+}
+
 enum Move GetIncomingMove(enum BattlerId battler, enum BattlerId opposingBattler, struct AiLogicData *aiData)
 {
+    enum Move locked = GetLockedInMove(opposingBattler);
+
+    if (locked != MOVE_NONE)
+        return locked;
     if (aiData->predictingMove)
         return aiData->predictedMove[opposingBattler];
     return aiData->lastUsedMove[opposingBattler];
@@ -247,9 +263,39 @@ enum Move GetIncomingMove(enum BattlerId battler, enum BattlerId opposingBattler
 // When not predicting, don't want to reference player's previous move; leads to weird behaviour for cases like Fake Out or Protect, especially in doubles
 enum Move GetPredictedMove(enum BattlerId battler, enum BattlerId opposingBattler, struct AiLogicData *aiData)
 {
+    enum Move locked = GetLockedInMove(opposingBattler);
+
+    if (locked != MOVE_NONE)
+        return locked;
     if (aiData->predictingMove)
         return aiData->predictedMove[opposingBattler];
     return MOVE_NONE;
+}
+
+// TRUE when the target is certain to Protect this turn and that Protect is
+// certain to succeed. Its consecutive-use counter reads zero the turn after a
+// Protect fails, so the classic Encore-into-Protect loop hands the AI a free
+// read: attacking is a guaranteed wasted turn, and it should set up, status,
+// or hit the other slot instead.
+bool32 IsTargetCertainToBlockWithProtect(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move)
+{
+    enum Move locked = GetLockedInMove(battlerDef);
+
+    if (locked == MOVE_NONE || IsTargetingPartner(battlerAtk, battlerDef))
+        return FALSE;
+    if (GetMoveEffect(locked) != EFFECT_PROTECT)
+        return FALSE;
+    if (GetProtectType(GetMoveProtectMethod(locked)) != PROTECT_TYPE_SINGLE)
+        return FALSE;
+    // A non-zero counter means the Protect can still fail, so attacking into
+    // it stays a fair gamble and the AI is left alone.
+    if (gBattleMons[battlerDef].volatiles.consecutiveMoveUses != 0)
+        return FALSE;
+    if (IsBattleMoveStatus(move) || MoveIgnoresProtect(move))
+        return FALSE;
+    if (gAiLogicData->abilities[battlerAtk] == ABILITY_UNSEEN_FIST && MoveMakesContact(move))
+        return FALSE;
+    return TRUE;
 }
 
 void SaveBattlerData(enum BattlerId battlerId)

@@ -52,6 +52,18 @@ STATIC_GATES = (
     ("fossil revival", (PYTHON, "scripts/verify_fossil_revival.py")),
     ("Poke Vial quest", (PYTHON, "scripts/restore_poke_vial_quest.py")),
     ("campaign battle master", (PYTHON, "scripts/audit_emerald_champions_master_battles.py")),
+    # The master is the authored source; trainers.party is generated from it by the
+    # tier system. --verify-only regenerates and compares, so a hand-edit to
+    # trainers.party, or a drift in the AI / Stat Point / level-ceiling tiers, fails
+    # here instead of shipping.
+    ("battle master regenerates byte-for-byte",
+     (PYTHON, "scripts/implement_emerald_champions_master_battles.py",
+      "--through-encounter", "513", "--verify-only")),
+    # audit_encounter_quality walks all 561 branches for teams that cannot do the
+    # thing they were built to do. selftest_encounter_audit proves its rules still
+    # fire, so "zero findings" means the corpus is clean, not that the rules rotted.
+    ("per-encounter quality audit self-test", (PYTHON, "scripts/selftest_encounter_audit.py")),
+    ("per-encounter quality audit", (PYTHON, "scripts/audit_encounter_quality.py", "--fail-on-findings")),
     ("Frontier competitive loadouts", (PYTHON, "scripts/generate_emerald_champions_frontier_sets.py", "--check")),
     ("local-ID sprite bindings", (PYTHON, "scripts/verify_local_id_sprite_bindings.py")),
     ("battle script formats", (PYTHON, "scripts/align_emerald_champions_battle_scripts.py")),

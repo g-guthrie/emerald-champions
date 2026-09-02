@@ -316,29 +316,28 @@ RustboroCity_Gym_Text_GymGuidePostVictory:
 	.string "That's got to feel awesome!$"
 
 RustboroCity_Gym_Text_JoshIntro:
-	.string "GUARD SPLIT can lend a fossil SHUCKLE's\n"
-	.string "defenses, but the donor grows weaker.\p"
+	.string "NOSEPASS holds the line while ANORITH\n"
+	.string "and ROCKRUFF chip from the sides.\p"
 	.string "Which side will you break first?$"
 
 RustboroCity_Gym_Text_JoshDefeat:
-	.string "You found the cost of my transfer!$"
+	.string "You broke the wall and the chip!$"
 
 RustboroCity_Gym_Text_JoshPostBattle:
-	.string "LILEEP redirects WATER with STORM DRAIN.\n"
-	.string "Never attack a type without reading its\l"
-	.string "Ability first.$"
+	.string "STURDY guarantees NOSEPASS one more\n"
+	.string "turn. Plan for the turn after it.$"
 
 RustboroCity_Gym_Text_TommyIntro:
-	.string "ORANGURU can INSTRUCT its partner to\n"
-	.string "repeat an attack immediately.\p"
-	.string "Stop the teacher or guard the lesson!$"
+	.string "BONSLY plays dead, ROLYCOLY plays\n"
+	.string "pebble. Neither is what it seems.\p"
+	.string "Look before you swing!$"
 
 RustboroCity_Gym_Text_TommyDefeat:
-	.string "You interrupted the repeat!$"
+	.string "You saw right through them!$"
 
 RustboroCity_Gym_Text_TommyPostBattle:
-	.string "Changing the action order can break\n"
-	.string "INSTRUCT before it ever begins.$"
+	.string "Two small ROCKS still add up. Never\n"
+	.string "underestimate a first-badge team.$"
 
 RustboroCity_Gym_Text_MarcIntro:
 	.string "STEALTH ROCK taxes every switch. Then\n"

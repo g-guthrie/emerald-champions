@@ -316,15 +316,15 @@ MauvilleCity_Gym_Text_VivianPostBattle:
 	.string "Ability that wants to absorb them.$"
 
 MauvilleCity_Gym_Text_AngeloIntro:
-	.string "My PLUSLE completes SHAWN's circuit.\n"
-	.string "Let's make the whole board shine!$"
+	.string "My JOLTIK spins the web for SHAWN's\n"
+	.string "circuit. Let's make the board shine!$"
 
 MauvilleCity_Gym_Text_AngeloDefeat:
 	.string "Our relay lost its charge…$"
 
 MauvilleCity_Gym_Text_AngeloPostBattle:
-	.string "Break PLUS and MINUS apart before their\n"
-	.string "support turns into amplified damage.$"
+	.string "Clear the STICKY WEB before my\n"
+	.string "VIKAVOLT outspeeds your whole team.$"
 
 MauvilleCity_Gym_Text_WattsonIntro:
 	.string "Wahahahah! I'm WATTSON!\p"

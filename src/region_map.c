@@ -2060,6 +2060,15 @@ static void SetFlyMapCallback(void callback(void))
     sFlyMap->state = 0;
 }
 
+// Emerald Champions: the Flight Beacon opens this map from the Bag or the
+// field, so cancelling must return there rather than to the party menu.
+static EWRAM_DATA MainCallback sFlyMapCancelCallback = NULL;
+
+void SetFlyMapCancelCallback(MainCallback callback)
+{
+    sFlyMapCancelCallback = callback;
+}
+
 static void DrawFlyDestTextWindow(void)
 {
     u16 i;
@@ -2493,10 +2502,16 @@ static void CB_ExitFlyMap(void)
                 SetFlyDestination(tempRegionMap);
                 ReturnToFieldFromFlyMapSelect();
             }
+            else if (sFlyMapCancelCallback != NULL)
+            {
+                FieldMoveShowMon_ClearSpeciesOverride();
+                SetMainCallback2(sFlyMapCancelCallback);
+            }
             else
             {
                 SetMainCallback2(CB2_ReturnToPartyMenuFromFlyMap);
             }
+            sFlyMapCancelCallback = NULL;
             TRY_FREE_AND_SET_NULL(sFlyMap);
             FreeAllWindowBuffers();
         }

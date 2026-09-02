@@ -1,6 +1,6 @@
 gText_EmeraldChampionsFirstCenterVisit::
 	.string "This is your first visit, isn't it?\p"
-	.string "We give every new Trainer three\n"
+	.string "We give every new Trainer four\n"
 	.string "tools for building teams quickly.\p"
 	.string "First, take this Poké Vial!$"
 
@@ -8,7 +8,10 @@ gText_EmeraldChampionsGiveLeveler::
 	.string "And here is your Leveler!$"
 
 gText_EmeraldChampionsGiveRepelSpray::
-	.string "And last, the Repel Spray!$"
+	.string "Next, the Repel Spray!$"
+
+gText_EmeraldChampionsGiveFlightBeacon::
+	.string "And last, the Flight Beacon!$"
 
 gText_EmeraldChampionsExplainTools::
 	.string "The Poké Vial fully restores your\n"
@@ -22,7 +25,20 @@ gText_EmeraldChampionsExplainTools::
 	.string "The Repel Spray switches wild\n"
 	.string "encounters off until you use it again.\p"
 	.string "Fishing, Rock Smash and Sweet Scent\n"
-	.string "still work. Travel in peace!$"
+	.string "still work.\p"
+	.string "The Flight Beacon calls a flier to\n"
+	.string "carry you, once you have the badge\l"
+	.string "for Fly. Travel in peace!$"
+
+gText_EmeraldChampionsGiveMissingFlightBeacon::
+	.string "One more tool for you:\n"
+	.string "the Flight Beacon!$"
+
+gText_EmeraldChampionsExplainFlightBeacon::
+	.string "Use it to call a flier, once you\n"
+	.string "have the badge for Fly.\p"
+	.string "Badges unlock field moves here. Any\n"
+	.string "Pokémon that could learn one uses it.$"
 
 gText_EmeraldChampionsGiveMissingRepelSpray::
 	.string "One more tool for you:\n"

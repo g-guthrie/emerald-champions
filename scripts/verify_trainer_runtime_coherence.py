@@ -3,12 +3,13 @@
 
 from __future__ import annotations
 
+import os
 import re
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-PARTIES = ROOT / "src/data/trainers.party"
+PARTIES = Path(os.environ.get("EC_TRAINERS_PARTY", ROOT / "src/data/trainers.party"))
 
 # No campaign team runs Trick Room and Tailwind together any more; the last
 # four were resolved on 2026-09-02. Any new Trick Room + Tailwind party must
@@ -47,12 +48,14 @@ REQUIRED_SMART_AI = {
     "TRAINER_EDGAR",
     "TRAINER_CAROLINE",
 }
+# "Assumptions" is the AI_FLAG_ASSUMPTIONS composite and supplies Assume Stab,
+# Assume Status Moves and Weigh Ability Prediction in one flag, which is how every
+# campaign trainer now declares them.
 SMART_AI_BASELINE = {
     "Basic Trainer",
     "Hp Aware",
     "Smart Mon Choices",
-    "Assume Stab",
-    "Assume Status Moves",
+    "Assumptions",
 }
 SUN_SOURCES = {
     "ABILITY_DROUGHT",

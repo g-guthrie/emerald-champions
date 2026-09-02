@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import statistics
 from collections import Counter
@@ -992,7 +993,7 @@ def audit(path: Path) -> tuple[list[str], list[str]]:
     if missing_planned:
         errors.append(f"declared restoration trainers absent from master: {missing_planned}")
 
-    party_source = (ROOT / "src" / "data" / "trainers.party").read_text()
+    party_source = Path(os.environ.get("EC_TRAINERS_PARTY", ROOT / "src" / "data" / "trainers.party")).read_text()
     party_blocks = {
         match.group(1): match.group(2)
         for match in re.finditer(

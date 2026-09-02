@@ -1055,6 +1055,32 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "id": 46, "param": 3, "frames": 1000, "keys": [],
         "trigger_frame": 600, "verify": True, "stop_on_observed": True,
     },
+    # Field moves without HM carriers: a Zigzagoon that could learn the move
+    # (but does not know it) performs it once the badge is held. UP turns to
+    # face the obstacle, A talks to it, A confirms; the observer latches the
+    # "used <move>!" showcase.
+    "field-move-cut-fallback": {
+        "id": 47, "frames": 900,
+        "keys": [(200, 2, "UP"), (260, 2, "A"), (420, 2, "A")],
+        "verify": True, "stop_on_observed": True,
+    },
+    "field-move-rock-smash-fallback": {
+        "id": 48, "frames": 900,
+        "keys": [(200, 2, "UP"), (260, 2, "A"), (420, 2, "A")],
+        "verify": True, "stop_on_observed": True,
+    },
+    "field-move-strength-fallback": {
+        "id": 49, "frames": 900,
+        "keys": [(200, 2, "UP"), (260, 2, "A"), (420, 2, "A")],
+        "verify": True, "stop_on_observed": True,
+    },
+    # The Flight Beacon: the trigger opens the fly map, A picks the current
+    # town, and the boxed Wingull that knows Fly is the one shown flying.
+    "flight-beacon-fly": {
+        "id": 50, "frames": 1500,
+        "keys": [(560, 2, "A")],
+        "trigger_frame": 300, "verify": True, "stop_on_observed": True,
+    },
 }
 
 
@@ -1076,6 +1102,10 @@ SERVICE_UI_SCENARIOS = (
     "move-specialist-root",
     "move-specialist-root-back",
     "nature-list",
+    "field-move-cut-fallback",
+    "field-move-rock-smash-fallback",
+    "field-move-strength-fallback",
+    "flight-beacon-fly",
     "move-specialist-party-prompt",
     "move-specialist-battle-set-party",
     "move-specialist-party-back",

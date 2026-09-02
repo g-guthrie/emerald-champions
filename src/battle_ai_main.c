@@ -1358,6 +1358,11 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
     enum Move incomingMove = GetIncomingMove(battlerAtk, battlerDef, gAiLogicData);
     enum Move predictedMove = GetPredictedMove(battlerAtk, battlerDef, gAiLogicData);
     enum Ability abilityAtk = aiData->abilities[battlerAtk];
+
+    // Never spend a turn attacking a target that is Encore locked into a
+    // Protect which cannot fail this turn.
+    if (IsTargetCertainToBlockWithProtect(battlerAtk, battlerDef, move))
+        ADJUST_SCORE(-10);
     enum Ability abilityDef = aiData->abilities[battlerDef];
     s32 atkPriority = GetBattleMovePriority(battlerAtk, abilityAtk, move);
 

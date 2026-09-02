@@ -78,7 +78,7 @@ class RuntimeGate:
 
 
 RUNTIME_GATES = (
-    RuntimeGate("*Champions", 102),
+    RuntimeGate("*Champions", 103),
     RuntimeGate("Blitz Boxer", 1),
     RuntimeGate("*preparation", 3),
     RuntimeGate("*Item descriptions fit on Bag and Shop Screen", 1),

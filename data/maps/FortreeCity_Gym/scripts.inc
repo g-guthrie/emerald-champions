@@ -175,8 +175,8 @@ FortreeCity_Gym_Text_EdwardoPostBattle:
 	.string "wind, then punish what it carried.$"
 
 FortreeCity_Gym_Text_FlintIntro:
-	.string "GUTS SWELLOW, SPEED BOOST YANMEGA, and\n"
-	.string "a TAILWIND behind them.\p"
+	.string "MULTISCALE DRAGONITE, SPEED BOOST\n"
+	.string "YANMEGA, and a TAILWIND behind them.\p"
 	.string "WINONA needn't see you if I win here!$"
 
 FortreeCity_Gym_Text_FlintDefeat:

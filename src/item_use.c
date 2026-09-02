@@ -22,6 +22,7 @@
 #include "field_weather.h"
 #include "fishing.h"
 #include "fldeff.h"
+#include "field_move.h"
 #include "follower_npc.h"
 #include "item.h"
 #include "item_menu.h"
@@ -35,6 +36,8 @@
 #include "overworld.h"
 #include "palette.h"
 #include "party_menu.h"
+#include "pokemon_storage_system.h"
+#include "region_map.h"
 #include "pokeblock.h"
 #include "pokemon.h"
 #include "script.h"
@@ -109,6 +112,8 @@ static const u8 sText_RepelSprayEnded[] = _("\pThe Repel Spray's effect ended.{P
 static const u8 sText_RepelSprayOn[] = _("{PLAYER} misted the air.\pWild Pokémon will keep their distance\nuntil the spray is used again.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_RepelSprayOff[] = _("{PLAYER} let the mist settle.\pThe grass stirs. Wild Pokémon are\ncoming back.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_LevelerNoEffect[] = _("Every Pokémon in the party is\nalready at the current level cap.{PAUSE_UNTIL_PRESS}");
+static const u8 sText_FlightBeaconLocked[] = _("The Flight Beacon can't reach a flier\nyet. Earn the FEATHER BADGE first.{PAUSE_UNTIL_PRESS}");
+static const u8 sText_FlightBeaconCantHere[] = _("A flier can't pick you up here.{PAUSE_UNTIL_PRESS}");
 
 // EWRAM variables
 EWRAM_DATA static TaskFunc sItemUseOnFieldCB = NULL;
@@ -1556,6 +1561,117 @@ static void Task_UseRepelSpray(u8 taskId)
         DisplayItemMessage(taskId, FONT_NORMAL, message, CloseItemMessage);
     else
         DisplayItemMessageOnField(taskId, message, Task_CloseCantUseKeyItemMessage);
+}
+
+// Emerald Champions: the Flight Beacon is Fly without a Pokémon that knows
+// it. It opens the same fly map the party menu does; the first non-egg party
+// member rides the Fly animation. Needs the Feather Badge like Fly itself.
+// The flier shown is one of the player's own if any knows Fly (party first,
+// then the PC), else one that could learn it, else whoever leads the party.
+static enum Species FindFlightBeaconRider(bool32 mustKnowFly)
+{
+    for (u32 i = 0; i < PARTY_SIZE; i++)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
+        enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+
+        if (species == SPECIES_NONE)
+            break;
+        if (GetMonData(mon, MON_DATA_IS_EGG))
+            continue;
+        if (mustKnowFly ? MonKnowsMove(mon, MOVE_FLY) : SpeciesCanLearnFieldMove(species, MOVE_FLY))
+            return species;
+    }
+    for (u32 box = 0; box < TOTAL_BOXES_COUNT; box++)
+    {
+        for (u32 pos = 0; pos < IN_BOX_COUNT; pos++)
+        {
+            struct BoxPokemon *boxMon = &gPokemonStoragePtr->boxes[box][pos];
+            enum Species species = GetBoxMonData(boxMon, MON_DATA_SPECIES);
+
+            if (species == SPECIES_NONE || GetBoxMonData(boxMon, MON_DATA_IS_EGG))
+                continue;
+            if (mustKnowFly ? BoxMonKnowsMove(boxMon, MOVE_FLY) : SpeciesCanLearnFieldMove(species, MOVE_FLY))
+                return species;
+        }
+    }
+    return SPECIES_NONE;
+}
+
+static void PrepareFlightBeaconRider(void)
+{
+    enum Species rider = FindFlightBeaconRider(TRUE);
+
+    if (rider == SPECIES_NONE)
+        rider = FindFlightBeaconRider(FALSE);
+    gFieldMoveShowMonSpeciesOverride = rider;
+
+    gPartyMenu.slotId = 0;
+    for (u32 i = 0; i < PARTY_SIZE; i++)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
+
+        if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_NONE)
+            break;
+        if (!GetMonData(mon, MON_DATA_IS_EGG))
+        {
+            gPartyMenu.slotId = i;
+            break;
+        }
+    }
+}
+
+// Shared by the Bag, the registered-item path and the headless fixtures.
+void OpenFlyMapForFlightBeacon(void (*cancelCallback)(void))
+{
+    PrepareFlightBeaconRider();
+    SetFlyMapCancelCallback(cancelCallback);
+    SetMainCallback2(CB2_OpenFlyMap);
+}
+
+static void CB2_OpenFlyMapFromBag(void)
+{
+    OpenFlyMapForFlightBeacon(CB2_ReturnToBagMenuPocket);
+}
+
+static void Task_OpenRegisteredFlightBeacon(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        CleanupOverworldWindowsAndTilemaps();
+        OpenFlyMapForFlightBeacon(CB2_ReturnToField);
+        DestroyTask(taskId);
+    }
+}
+
+void ItemUseOutOfBattle_FlightBeacon(u8 taskId)
+{
+    const u8 *refusal = NULL;
+
+    if (!IsFieldMoveUnlocked(FIELD_MOVE_FLY))
+        refusal = sText_FlightBeaconLocked;
+    else if (!Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType)
+          || !CheckFollowerNPCFlag(FOLLOWER_NPC_FLAG_CAN_LEAVE_ROUTE))
+        refusal = sText_FlightBeaconCantHere;
+
+    if (refusal != NULL)
+    {
+        if (!gTasks[taskId].tUsingRegisteredKeyItem)
+            DisplayItemMessage(taskId, FONT_NORMAL, refusal, CloseItemMessage);
+        else
+            DisplayItemMessageOnField(taskId, refusal, Task_CloseCantUseKeyItemMessage);
+    }
+    else if (!gTasks[taskId].tUsingRegisteredKeyItem)
+    {
+        gBagMenu->newScreenCallback = CB2_OpenFlyMapFromBag;
+        Task_FadeAndCloseBagMenu(taskId);
+    }
+    else
+    {
+        gFieldCallback = FieldCB_ReturnToFieldNoScript;
+        FadeScreen(FADE_TO_BLACK, 0);
+        gTasks[taskId].func = Task_OpenRegisteredFlightBeacon;
+    }
 }
 
 void ItemUseOutOfBattle_Leveler(u8 taskId)

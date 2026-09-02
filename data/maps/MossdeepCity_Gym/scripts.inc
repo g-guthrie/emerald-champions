@@ -396,7 +396,8 @@ MossdeepCity_Gym_Text_GymGuidePostVictory:
 MossdeepCity_Gym_Text_PrestonIntro:
 	.string "JIRACHI's ICY WIND rewrites the speed\n"
 	.string "order. ALAKAZAM ENCOREs your reply.\p"
-	.string "Then GARCHOMP finishes what you locked!$"
+	.string "Then SLOWKING's TRICK ROOM finishes\n"
+	.string "what you locked!$"
 
 MossdeepCity_Gym_Text_PrestonDefeat:
 	.string "You refused to repeat yourself!$"
@@ -430,20 +431,20 @@ MossdeepCity_Gym_Text_BlakePostBattle:
 	.string "Bring the fresh one back in later.$"
 
 MossdeepCity_Gym_Text_HannahIntro:
-	.string "SOLROCK sets both screens. MALAMAR's\n"
-	.string "CONTRARY grows through SUPERPOWER.\p"
+	.string "SOLROCK sets both screens. AZELF\n"
+	.string "NASTY PLOTS behind them.\p"
 	.string "Break the screens or the growth!$"
 
 MossdeepCity_Gym_Text_HannahDefeat:
 	.string "You broke the screens first!$"
 
 MossdeepCity_Gym_Text_HannahPostBattle:
-	.string "CONTRARY turns every drop into a boost.\n"
-	.string "Never INTIMIDATE a MALAMAR.$"
+	.string "NASTY PLOT doubles the damage each\n"
+	.string "turn. Never give AZELF a free one.$"
 
 MossdeepCity_Gym_Text_SamanthaIntro:
 	.string "XATU bounces status and sets TAILWIND.\n"
-	.string "GLIMMORA lays rocks on every switch.\p"
+	.string "UXIE YAWNS at every switch-in.\p"
 	.string "Each swap costs you. Choose them well!$"
 
 MossdeepCity_Gym_Text_SamanthaDefeat:
@@ -478,33 +479,33 @@ MossdeepCity_Gym_Text_SylviaPostBattle:
 	.string "KO or TAUNT ORANGURU before it teaches.$"
 
 MossdeepCity_Gym_Text_NateIntro:
-	.string "NECROZMA sets DRAGON DANCE behind\n"
-	.string "GRUMPIG's TAUNT and THUNDER WAVE.\p"
-	.string "Which of the three do you answer first?$"
+	.string "STARMIE covers four types behind\n"
+	.string "GRUMPIG's THUNDER WAVE.\p"
+	.string "Which of the two do you answer first?$"
 
 MossdeepCity_Gym_Text_NateDefeat:
-	.string "You hit the dancer before the dance!$"
+	.string "You hit the star before it shone!$"
 
 MossdeepCity_Gym_Text_NatePostBattle:
-	.string "Setup beside support is the strongest\n"
-	.string "plan and the most fragile. Deny turn one.$"
+	.string "An attacker beside support is strong\n"
+	.string "and fragile. Remove the support first.$"
 
 MossdeepCity_Gym_Text_KathleenIntro:
-	.string "HYPNO puts you to sleep, COMFEY heals\n"
-	.string "first, SLURPUFF grows on your hits.\p"
-	.string "Every reply feeds one of them!$"
+	.string "HYPNO puts you to sleep, SWOOBAT\n"
+	.string "CALM MINDS into STORED POWER.\p"
+	.string "Every free turn feeds it!$"
 
 MossdeepCity_Gym_Text_KathleenDefeat:
 	.string "You found the move that fed nothing!$"
 
 MossdeepCity_Gym_Text_KathleenPostBattle:
-	.string "WEAKNESS POLICY punishes the obvious\n"
-	.string "super-effective hit. Hit neutral first.$"
+	.string "STORED POWER grows with every boost.\n"
+	.string "Never let SWOOBAT set up twice.$"
 
 MossdeepCity_Gym_Text_CliffordIntro:
 	.string "PINCURCHIN's terrain doubles RAICHU's\n"
-	.string "speed. MR. MIME leads with FAKE OUT.\p"
-	.string "Then GOLISOPOD Mega Evolves!$"
+	.string "speed. ESPATHRA gets faster every turn.\p"
+	.string "Keep up if you can!$"
 
 MossdeepCity_Gym_Text_CliffordDefeat:
 	.string "You turned the terrain off!$"
@@ -516,7 +517,7 @@ MossdeepCity_Gym_Text_CliffordPostBattle:
 MossdeepCity_Gym_Text_MaceyIntro:
 	.string "JYNX's LOVELY KISS opens the door.\n"
 	.string "DELPHOX NASTY PLOTS behind it.\p"
-	.string "GRUMPIG TAUNTS whatever you try!$"
+	.string "REUNICLUS ignores whatever you try!$"
 
 MossdeepCity_Gym_Text_MaceyDefeat:
 	.string "You attacked through the sleep!$"

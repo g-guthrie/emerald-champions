@@ -789,7 +789,7 @@ Route108_Text_CoryRematchPostBattle:
 	.string "try shouting at the sea!$"
 
 Route108_Text_CarolinaIntro:
-	.string "MANECTRIC and HAWLUCHA, one speedy\n"
+	.string "LUXRAY and HAWLUCHA, one speedy\n"
 	.string "battle. I take pride in this team.$"
 
 Route108_Text_CarolinaDefeated:
@@ -1362,7 +1362,7 @@ Route111_Text_DaisukePostBattle:
 
 Route111_Text_WiltonIntro:
 	.string "COFAGRIGUS gives your attacker MUMMY,\n"
-	.string "then GABITE cleans what's left.\p"
+	.string "then STEELIX cleans what's left.\p"
 	.string "Show me a team that doesn't need to\n"
 	.string "touch it.$"
 
@@ -1392,9 +1392,9 @@ Route111_Text_WiltonPostRematch:
 	.string "aim for the POKéMON LEAGUE.$"
 
 Route111_Text_BrookeIntro:
-	.string "Four starters, four roles. EMPOLEON\n"
-	.string "holds, INFERNAPE leads, ROSERADE\l"
-	.string "sleeps, FRAXURE finishes.\p"
+	.string "Four roles. BLASTOISE holds,\n"
+	.string "INFERNAPE leads, EXEGGUTOR\l"
+	.string "sleeps, RAIKOU finishes.\p"
 	.string "Which one do you answer first?$"
 
 Route111_Text_BrookeDefeat:
@@ -1637,7 +1637,7 @@ Route113_Text_DillonPostBattle:
 Route113_Text_MadelineIntro:
 	.string "I use this parasol to ward off this\n"
 	.string "filthy, yucky volcanic ash from\l"
-	.string "my dear NOIBAT.$"
+	.string "my dear VANILLISH.$"
 
 Route113_Text_MadelineDefeat:
 	.string "Huff, huff…\n"
@@ -1995,7 +1995,8 @@ Route114_Text_AngelinaPostBattle:
 
 Route115_Text_TimothyIntro:
 	.string "HARIYAMA opens with FAKE OUT. Then\n"
-	.string "DUSCLOPS slows the clock for MELMETAL.\p"
+	.string "DUSCLOPS slows the clock for\n"
+	.string "CONKELDURR.\p"
 	.string "Read the tempo. Then keep me company.$"
 
 Route115_Text_TimothyDefeat:
@@ -2764,7 +2765,7 @@ Route119_Text_KentPostBattle:
 
 Route119_Text_JacksonIntro:
 	.string "A RANGER reads the ground. Here the\n"
-	.string "ground is rain, and LAPRAS loves rain.$"
+	.string "ground is TAPU KOKO's own terrain.$"
 
 Route119_Text_JacksonDefeat:
 	.string "You read the rain faster than I did.$"
@@ -2971,7 +2972,7 @@ Route120_Text_RobertPostRematch:
 	.string "I have to grow stronger, too.$"
 
 Route120_Text_LorenzoIntro:
-	.string "Fitness check! LUDICOLO sets the pace,\n"
+	.string "Fitness check! OGERPON sets the pace,\n"
 	.string "STARMIE keeps it. Can you keep up?$"
 
 Route120_Text_LorenzoDefeat:
@@ -3311,7 +3312,7 @@ Route121_Text_PatPostBattle:
 
 Route121_Text_MarcelIntro:
 	.string "My gang has never tasted defeat.\n"
-	.string "ZARUDE, show them why!$"
+	.string "ZERAORA, show them why!$"
 
 Route121_Text_MarcelDefeat:
 	.string "Oh. Now what happened here?$"
@@ -3321,7 +3322,7 @@ Route121_Text_MarcelPostBattle:
 	.string "first loss. Time to earn it again.$"
 
 Route123_Text_WendyIntro:
-	.string "MAWILE pulls, HYDREIGON pushes. Want to\n"
+	.string "SCIZOR pulls, HYDREIGON pushes. Want to\n"
 	.string "find out how strong you are? I'm the\l"
 	.string "test.$"
 
@@ -3498,7 +3499,7 @@ Route123_Text_DavisPostBattle:
 	.string "You have to keep it a secret!$"
 
 Route123_Text_JazmynIntro:
-	.string "ABSOL sees it coming, SCIZOR punishes\n"
+	.string "ABSOL sees it coming, LUCARIO punishes\n"
 	.string "it. Beating someone strong is how I\l"
 	.string "keep my confidence up.$"
 

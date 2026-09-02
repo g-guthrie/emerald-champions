@@ -153,6 +153,25 @@ def main() -> None:
         "#define B_MISSING_BADGE_CATCH_MALUS     GEN_3" in read("include/config/battle.h"),
         "the badge catch malus must stay off: caps already clamp wild levels",
     )
+    field_move = read("src/field_move.c")
+    require(
+        field_move.count(".hideIfLocked = TRUE,") >= 8
+        and "SpeciesCanLearnFieldMove(" in field_move
+        and "EventScript_NobodyCanUseFieldMove::" in read("data/scripts/field_move_scripts.inc")
+        and "EventScript_NobodyCanSurf" in read("src/field_control_avatar.c")
+        and all(name in read("scripts/render_emerald_champions_ui.py") for name in ("field-move-cut-fallback", "field-move-rock-smash-fallback", "field-move-strength-fallback", "flight-beacon-fly"))
+        and "u32 FieldMove_GetUserSlot(enum FieldMove fieldMove, bool32 doUnlockedCheck)" in field_move
+        and "FieldMove_GetUserSlot(fieldMove, doUnlockedCheck)" in read("src/scrcmd.c")
+        and "FieldMove_GetUserSlot(FIELD_MOVE_SURF, TRUE)" in read("src/field_player_avatar.c")
+        and "IsFieldMoveUnlocked(FIELD_MOVE_FLASH)" in read("src/overworld.c"),
+        "HM field moves must hide until unlocked and then work for any party member; caves light once Flash is unlocked",
+    )
+    require(
+        read("data/scripts/pkmn_center_nurse.inc").count("giveitem ITEM_FLIGHT_BEACON, 1") == 2
+        and "ItemUseOutOfBattle_FlightBeacon" in item_use
+        and "SetFlyMapCancelCallback(" in item_use,
+        "the Flight Beacon must be handed out with the starter tools, back-filled, and open the fly map",
+    )
     player_controller = read("src/battle_controller_player.c")
     require(
         "MoveSelectionDisplayFoeTypes(battler);" in player_controller
@@ -171,6 +190,33 @@ def main() -> None:
         and "WhiteOutReload" not in tutor,
         "Reload must be offered from the Start menu and never from the whiteout screen",
     )
+    ai_util = read("src/battle_ai_util.c")
+    ai_main = read("src/battle_ai_main.c")
+    require(
+        "enum Move GetLockedInMove(enum BattlerId battler)" in ai_util
+        and ai_util.count("locked = GetLockedInMove(opposingBattler)") == 2,
+        "Every AI must treat an Encore lock as certain knowledge of the target's move",
+    )
+    require(
+        "IsTargetCertainToBlockWithProtect(battlerAtk, battlerDef, move)" in ai_main,
+        "AI must not attack into a Protect that cannot fail",
+    )
+    party = read("src/data/trainers.party")
+    ai_lines = {line for line in party.splitlines() if line.startswith("AI: ")}
+    require(ai_lines, "trainers.party declares AI flags")
+    # "Assumptions" is AI_FLAG_ASSUMPTIONS: Assume Stab, Assume Status Moves and
+    # Weigh Ability Prediction. Every trainer reads held items, unrevealed status
+    # moves and likely abilities; tiers differ only in switching and prediction.
+    floor = ("Assumptions", "Hp Aware", "Smart Mon Choices", "Try To 2HKO")
+    dumb = sorted(
+        line for line in ai_lines
+        if "Smart Trainer" not in line and not all(flag in line for flag in floor)
+    )
+    require(not dumb, f"no campaign trainer may sit below the competent AI floor: {dumb[:3]}")
+    bosses = sorted(line for line in ai_lines if "Smart Trainer" in line)
+    require(all("Assumptions" in line and "Prediction" in line for line in bosses),
+            "every boss keeps Assumptions and the full Prediction set")
+
     nurse = read("data/scripts/pkmn_center_nurse.inc")
     birch_lab = read("data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc")
     items = read("src/data/items.h")

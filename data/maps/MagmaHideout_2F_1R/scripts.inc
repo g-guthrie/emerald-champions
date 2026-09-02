@@ -36,7 +36,7 @@ MagmaHideout_2F_1R_Text_Grunt14PostBattle:
 
 MagmaHideout_2F_1R_Text_Grunt3Intro:
 	.string "Hold it! You think I'll just let you\n"
-	.string "stroll past a CLAYDOL and an ARBOK?$"
+	.string "stroll past a CLAYDOL and a GARBODOR?$"
 
 MagmaHideout_2F_1R_Text_Grunt3Defeat:
 	.string "Ooh wow! Okay. I concede.$"

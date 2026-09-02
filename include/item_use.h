@@ -38,6 +38,8 @@ void ItemUseOutOfBattle_Honey(u8 taskId);
 void ItemUseOutOfBattle_PokeVial(u8 taskId);
 void ItemUseOutOfBattle_Leveler(u8 taskId);
 void ItemUseOutOfBattle_RepelSpray(u8 taskId);
+void ItemUseOutOfBattle_FlightBeacon(u8 taskId);
+void OpenFlyMapForFlightBeacon(void (*cancelCallback)(void));
 void ItemUseOutOfBattle_CannotUse(u8 taskId);
 void ItemUseOutOfBattle_ExpShare(u8 taskId);
 void ItemUseInBattle_BagMenu(u8 taskId);

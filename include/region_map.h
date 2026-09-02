@@ -2,6 +2,7 @@
 #define GUARD_REGION_MAP_H
 
 #include "bg.h"
+#include "main.h"
 
 // Exported type declarations
 #define MAP_NAME_LENGTH 16
@@ -131,6 +132,7 @@ mapsec_u16_t CorrectSpecialMapSecId(mapsec_u16_t mapSecId);
 void ShowRegionMapForPokedexAreaScreen(struct RegionMap *regionMap);
 void PokedexAreaScreen_UpdateRegionMapVariablesAndVideoRegs(s16 x, s16 y);
 void CB2_OpenFlyMap(void);
+void SetFlyMapCancelCallback(MainCallback callback);
 bool8 IsRegionMapZoomed(void);
 void TrySetPlayerIconBlink(void);
 void BlendRegionMap(u16 color, u32 coeff);

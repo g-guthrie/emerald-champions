@@ -16149,6 +16149,22 @@ const struct ItemInfo gItemsInfo[] =
         .iconPalette = gItemIconPalette_MaxRepel,
     },
 
+    [ITEM_FLIGHT_BEACON] =
+    {
+        .name = ITEM_NAME("Flight Beacon"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "Calls a flier to\n"
+            "carry you. Needs\n"
+            "the FEATHER BADGE."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_FlightBeacon,
+        .iconPic = gItemIcon_PokeFlute,
+        .iconPalette = gItemIconPalette_PokeFlute,
+    },
+
     [ITEM_MAGMA_STONE] =
     {
         .name = ITEM_NAME("Magma Stone"),

@@ -8,6 +8,8 @@
 #include "difficulty.h"
 #include "emerald_champions_battle_sets.h"
 #include "event_data.h"
+#include "field_move.h"
+#include "field_player_avatar.h"
 #include "field_specials.h"
 #include "gym_leader_rematch.h"
 #include "item.h"
@@ -1868,4 +1870,48 @@ TEST("Emerald Champions Stat Point editor reports the next stat breakpoint")
     SetMonData(mon, MON_DATA_HP_EV, &points);
     CalculateMonStats(mon);
     EXPECT_EQ(GetEmeraldChampionsStatPointBreakpoint(mon, 0, &delta, &value), EC_STAT_BREAKPOINT_STAT_MAXED);
+}
+
+TEST("Emerald Champions field moves need the badge and a party member that could learn them")
+{
+    struct Pokemon *party = gParties[B_TRAINER_PLAYER];
+
+    ZeroPlayerPartyMons();
+    CreateMon(&party[0], SPECIES_MAGIKARP, 14, 0, OTID_STRUCT_PLAYER_ID);
+    CreateMon(&party[1], SPECIES_MARILL, 14, 0, OTID_STRUCT_PLAYER_ID);
+    SetMonMoveSlot(&party[1], MOVE_SURF, 0);
+    CalculatePlayerPartyCount();
+
+    FlagClear(FLAG_BADGE01_GET);
+    FlagClear(FLAG_RECEIVED_HM_CUT);
+    FlagClear(FLAG_BADGE05_GET);
+    FlagClear(FLAG_RECEIVED_HM_SURF);
+    // Locked: nobody, even though Marill knows Surf.
+    EXPECT_EQ(FieldMove_GetUserSlot(FIELD_MOVE_SURF, TRUE), PARTY_SIZE);
+    EXPECT_EQ(PartyHasMonWithSurf(), FALSE);
+
+    FlagSet(FLAG_BADGE05_GET);
+    FlagSet(FLAG_RECEIVED_HM_SURF);
+    // Unlocked: the Pokémon that knows the move is preferred.
+    EXPECT_EQ(FieldMove_GetUserSlot(FIELD_MOVE_SURF, TRUE), 1);
+    EXPECT_EQ(PartyHasMonWithSurf(), TRUE);
+
+    FlagSet(FLAG_BADGE01_GET);
+    FlagSet(FLAG_RECEIVED_HM_CUT);
+    // Unlocked, but neither Magikarp nor Marill could ever learn Cut.
+    EXPECT_EQ(FieldMove_GetUserSlot(FIELD_MOVE_CUT, TRUE), PARTY_SIZE);
+    // A party member that could learn it (without knowing it) does it.
+    CreateMon(&party[0], SPECIES_ZIGZAGOON, 14, 0, OTID_STRUCT_PLAYER_ID);
+    EXPECT_EQ(FieldMove_GetUserSlot(FIELD_MOVE_CUT, TRUE), 0);
+    // Obstacle moves never show in the party menu, even unlocked; the
+    // non-obstacle ones still do.
+    EXPECT_EQ(FieldMove_IsVisible(FIELD_MOVE_CUT), FALSE);
+    EXPECT_EQ(FieldMove_IsVisible(FIELD_MOVE_SURF), FALSE);
+    EXPECT_EQ(FieldMove_IsVisible(FIELD_MOVE_WATERFALL), FALSE);
+    EXPECT_EQ(FieldMove_IsVisible(FIELD_MOVE_SWEET_SCENT), TRUE);
+
+    FlagClear(FLAG_BADGE01_GET);
+    FlagClear(FLAG_RECEIVED_HM_CUT);
+    FlagClear(FLAG_BADGE05_GET);
+    FlagClear(FLAG_RECEIVED_HM_SURF);
 }

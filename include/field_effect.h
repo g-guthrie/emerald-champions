@@ -15,6 +15,8 @@ u32 FieldEffectStart(u8 id);
 bool8 FieldEffectActiveListContains(u8 id);
 void FieldEffectActiveListClear(void);
 void ReturnToFieldFromFlyMapSelect(void);
+extern enum Species gFieldMoveShowMonSpeciesOverride;
+void FieldMoveShowMon_ClearSpeciesOverride(void);
 void FieldCallback_UseFly(void);
 u8 AddNewGameBirchObject(s16 x, s16 y, u8 subpriority);
 void FieldEffectStop(struct Sprite *sprite, u8 id);

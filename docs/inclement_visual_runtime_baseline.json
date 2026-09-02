@@ -1276,7 +1276,7 @@
     "furfrou-trims": {
       "frames": 700,
       "keys": [],
-      "pixel_sha256": "acfa16e345fd32a4d5c4a059540af763870346644ee242ff229f7a20a403ae64",
+      "pixel_sha256": "c70ae4d6df72dfd062ec9a4b718a66fb162461de8aec9e762cba2f0517ca8eac",
       "verified_runtime_state": true
     },
     "furfrou-trims-b-cancel": {
@@ -1288,7 +1288,7 @@
           "B"
         ]
       ],
-      "pixel_sha256": "ce3eae2721a751ae6f36ffc91a6c093480ae2f47a3eac9cc924a69b290ec2514",
+      "pixel_sha256": "3c637efc11bf0b03bee1deea80390033ca1ded13baf01fbccb30bcdeaf18bb7d",
       "verified_runtime_state": true
     },
     "furfrou-trims-back": {
@@ -1350,7 +1350,7 @@
           "A"
         ]
       ],
-      "pixel_sha256": "9bbe53e97ca4d1da010677c0cf03a6a821ca98a2bbb552ba95ee2f2a2357f9b7",
+      "pixel_sha256": "ce3eae2721a751ae6f36ffc91a6c093480ae2f47a3eac9cc924a69b290ec2514",
       "verified_runtime_state": true
     },
     "furfrou-trims-scrolled": {
@@ -1453,7 +1453,7 @@
           "A"
         ]
       ],
-      "pixel_sha256": "d590d353fd3191bfdb103fb47245445379c4c4c1bafea203ee14d36ac1781a19",
+      "pixel_sha256": "44eb4d744a47ef61559689ec2bbc2469f3692fd7da220a17f7323d2ab64cdca2",
       "verified_runtime_state": true
     },
     "heal-whiteout-ever-grande-city": {
@@ -1521,7 +1521,7 @@
           "A"
         ]
       ],
-      "pixel_sha256": "1965f3fd3613d8d769d0d6e24d29ed2b1ce126aec1bf2285847fc4a69d71a41b",
+      "pixel_sha256": "398f2521705df18675f115ff30849f5aeaa331d26c5006948087c66ddc7aa7fc",
       "verified_runtime_state": true
     },
     "heal-whiteout-lavaridge-town": {
@@ -1606,7 +1606,7 @@
           "A"
         ]
       ],
-      "pixel_sha256": "e59eb0cf9d71b2b96b73dc591c9ee550ae138502e9307137022b1d0208b86ed0",
+      "pixel_sha256": "359f370d6d4f652b0437ea4ca46dd26596b1169721d4c45f243872272adb7b35",
       "verified_runtime_state": true
     },
     "heal-whiteout-littleroot-town-mays-house-2f": {
@@ -1623,7 +1623,7 @@
           "A"
         ]
       ],
-      "pixel_sha256": "e59eb0cf9d71b2b96b73dc591c9ee550ae138502e9307137022b1d0208b86ed0",
+      "pixel_sha256": "359f370d6d4f652b0437ea4ca46dd26596b1169721d4c45f243872272adb7b35",
       "verified_runtime_state": true
     },
     "heal-whiteout-mauville-city": {
@@ -1640,7 +1640,7 @@
           "A"
         ]
       ],
-      "pixel_sha256": "b0582dc6c87f5e29562535dc42ac2e9b240d134a537e60737ce367155d53a8ac",
+      "pixel_sha256": "ecc59bbc70a45df962782db2cb13622b6da9b341afefccdf7d06be52d5a81466",
       "verified_runtime_state": true
     },
     "heal-whiteout-mossdeep-city": {
@@ -1657,7 +1657,7 @@
           "A"
         ]
       ],
-      "pixel_sha256": "c82359e625941d4cc3de6e9420e95b24a87c1915c3c1333e86ab16696ee0ceb0",
+      "pixel_sha256": "78193af0ebbb4dc042e667e39d5993adb1ee645cb4dcae50b2670a699ae334e5",
       "verified_runtime_state": true
     },
     "heal-whiteout-oldale-town": {
@@ -1708,7 +1708,7 @@
           "A"
         ]
       ],
-      "pixel_sha256": "361c5d56d75956960a8d8374027bf019798b2efe370f1c3bab5c788d8c611de4",
+      "pixel_sha256": "fd821364257086dcb431b6e9a0af45b67773d3d0053894776f02e05643d27428",
       "verified_runtime_state": true
     },
     "heal-whiteout-rustboro-city": {
@@ -1725,7 +1725,7 @@
           "A"
         ]
       ],
-      "pixel_sha256": "b4b3e6c884137c7d70e833b4c74061214796d72bd6222fc97b55324ba09cfe1c",
+      "pixel_sha256": "2a55f7f64524d1b31925960588f824c97973561318e5d82172245246c48b3e04",
       "verified_runtime_state": true
     },
     "heal-whiteout-slateport-city": {
@@ -1759,7 +1759,7 @@
           "A"
         ]
       ],
-      "pixel_sha256": "c91d7f2ea7df6490e10f6d94fca9b60c09be8f55ba4d0d41abaa752ae48695e3",
+      "pixel_sha256": "bb996a5e384f9bfb4074b73bcd41494ab79a305350afd7ed662a89664cfba86c",
       "verified_runtime_state": true
     },
     "heal-whiteout-verdanturf-town": {
@@ -1776,7 +1776,7 @@
           "A"
         ]
       ],
-      "pixel_sha256": "f35fe70853b33771586e5b3071713eeec36331544235e2cd9b220fcf2f76f916",
+      "pixel_sha256": "0bb92613eb09b640b3f98aff6dc79023751a008120b3111983dc121351fe9638",
       "verified_runtime_state": true
     },
     "move-specialist-battle-set-party": {

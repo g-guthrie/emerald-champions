@@ -20,6 +20,7 @@
 #include "field_effect_helpers.h"
 #include "field_message_box.h"
 #include "field_player_avatar.h"
+#include "field_move.h"
 #include "field_screen_effect.h"
 #include "field_special_scene.h"
 #include "field_specials.h"
@@ -1113,7 +1114,9 @@ void SetDefaultFlashLevel(void)
 {
     if (!gMapHeader.cave)
         gSaveBlock1Ptr->flashLevel = 0;
-    else if (FlagGet(FLAG_SYS_USE_FLASH))
+    // Emerald Champions: once Flash is unlocked every cave is lit on entry, as
+    // if Flash had been used, so no party member has to carry it.
+    else if (FlagGet(FLAG_SYS_USE_FLASH) || IsFieldMoveUnlocked(FIELD_MOVE_FLASH))
         gSaveBlock1Ptr->flashLevel = 1;
     else
         gSaveBlock1Ptr->flashLevel = gMaxFlashLevel - 1;

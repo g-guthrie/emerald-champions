@@ -35,7 +35,7 @@ MagmaHideout_2F_2R_Text_Grunt15PostBattle:
 	.string "think he does either.$"
 
 MagmaHideout_2F_2R_Text_Grunt6Intro:
-	.string "I used to hate this heat. Then HEATRAN\n"
+	.string "I used to hate this heat. Then MAGMORTAR\n"
 	.string "taught me to wear it like armor.$"
 
 MagmaHideout_2F_2R_Text_Grunt6Defeat:

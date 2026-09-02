@@ -34,6 +34,7 @@ Movement_CutTreeDown:
 	step_end
 
 EventScript_CheckTreeCantCut::
+	goto_if_eq VAR_0x8005, 1, EventScript_NobodyCanUseFieldMove
 	msgbox Text_CantCut, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -204,6 +205,7 @@ Movement_SmashRock:
 	step_end
 
 EventScript_CantSmashRock::
+	goto_if_eq VAR_0x8005, 1, EventScript_NobodyCanUseFieldMove
 	msgbox Text_CantSmash, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -249,6 +251,7 @@ EventScript_ActivateStrength::
 	end
 
 EventScript_CantStrength::
+	goto_if_eq VAR_0x8005, 1, EventScript_NobodyCanUseFieldMove
 	msgbox Text_CantStrength, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -299,6 +302,7 @@ EventScript_CannotUseWaterfall::
 	lockall
 
 EventScript_CantWaterfall::
+	goto_if_eq VAR_0x8005, 1, EventScript_NobodyCanUseFieldMove
 	msgbox Text_CantWaterfall, MSGBOX_DEFAULT
 
 EventScript_EndWaterfall::
@@ -335,6 +339,7 @@ EventScript_UseDive::
 	end
 
 EventScript_CantDive::
+	goto_if_eq VAR_0x8005, 1, EventScript_NobodyCanUseFieldMove
 	msgbox Text_CantDive, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -360,6 +365,7 @@ EventScript_UseDiveUnderwater::
 
 EventScript_CantSurface::
 	lockall
+	goto_if_eq VAR_0x8005, 1, EventScript_NobodyCanUseFieldMove
 	msgbox Text_CantSurface, MSGBOX_DEFAULT
 	goto EventScript_EndSurface
 	end
@@ -474,3 +480,20 @@ Text_MonUsedRockClimb:
 Text_CantRockClimb:
 	.string "The cliff is steep.\n"
 	.string "A Pokémon may be able to climb it.$"
+
+@ Emerald Champions: a field move is unlocked by its badge, but somebody in
+@ the party still has to be able to learn it. checkfieldmove sets VAR_0x8005
+@ to 1 (and STR_VAR_1 to the move name) when the move is unlocked and nobody
+@ qualifies, so the obstacle says so instead of pretending it is locked.
+EventScript_NobodyCanUseFieldMove::
+	msgbox Text_NobodyCanUseFieldMove, MSGBOX_DEFAULT
+	releaseall
+	end
+
+EventScript_NobodyCanSurf::
+	lockall
+	buffermovename STR_VAR_1, MOVE_SURF
+	goto EventScript_NobodyCanUseFieldMove
+
+Text_NobodyCanUseFieldMove:
+	.string "Nobody in your party can use\n{STR_VAR_1}.$"

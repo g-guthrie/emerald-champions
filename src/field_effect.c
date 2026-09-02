@@ -2947,6 +2947,16 @@ bool8 FldEff_FieldMoveShowMon(void)
 
 #define SHOW_MON_CRY_NO_DUCKING (1 << 31)
 
+// Emerald Champions: the Flight Beacon summons a flier that need not be in
+// the party, so the next field-move showcase can be told which species to
+// show. Consumed on use; cleared if the fly map is cancelled.
+EWRAM_DATA enum Species gFieldMoveShowMonSpeciesOverride = SPECIES_NONE;
+
+void FieldMoveShowMon_ClearSpeciesOverride(void)
+{
+    gFieldMoveShowMonSpeciesOverride = SPECIES_NONE;
+}
+
 bool8 FldEff_FieldMoveShowMonInit(void)
 {
     struct Pokemon *pokemon;
@@ -2955,6 +2965,13 @@ bool8 FldEff_FieldMoveShowMonInit(void)
     gFieldEffectArguments[0] = GetMonData(pokemon, MON_DATA_SPECIES);
     gFieldEffectArguments[1] = GetMonData(pokemon, MON_DATA_IS_SHINY);
     gFieldEffectArguments[2] = GetMonData(pokemon, MON_DATA_PERSONALITY);
+    if (gFieldMoveShowMonSpeciesOverride != SPECIES_NONE)
+    {
+        gFieldEffectArguments[0] = gFieldMoveShowMonSpeciesOverride;
+        gFieldEffectArguments[1] = FALSE;
+        gFieldEffectArguments[2] = 0;
+        gFieldMoveShowMonSpeciesOverride = SPECIES_NONE;
+    }
     gFieldEffectArguments[0] |= noDucking;
     FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON);
     FieldEffectActiveListRemove(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
