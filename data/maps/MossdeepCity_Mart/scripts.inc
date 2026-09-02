@@ -22,7 +22,6 @@ MossdeepCity_Mart_Pokemart:
 	.2byte ITEM_MAX_REPEL
 	.2byte ITEM_TIMER_BALL
 	.2byte ITEM_QUICK_BALL
-	.2byte ITEM_RARE_CANDY
 	pokemartlistend
 
 MossdeepCity_Mart_EventScript_Woman::

@@ -17,6 +17,26 @@ from verify_trainer_ability_legality import (
 
 
 ROOT = Path(__file__).resolve().parents[1]
+EXACT_INCLEMENT_PHYSICAL = {
+    "OBJ_EVENT_GFX_INCLEMENT_ARTICUNO": ("ARTICUNO", "MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM"),
+    "OBJ_EVENT_GFX_INCLEMENT_ZAPDOS": ("ZAPDOS", "MAP_NEW_MAUVILLE_INSIDE"),
+    "OBJ_EVENT_GFX_INCLEMENT_MOLTRES": ("MOLTRES", "MAP_EMBER_PATH"),
+    "OBJ_EVENT_GFX_INCLEMENT_MEWTWO": ("MEWTWO", "MAP_ALTERING_CAVE_B1F"),
+    "OBJ_EVENT_GFX_INCLEMENT_JIRACHI": ("JIRACHI", "MAP_METEOR_FALLS_JIRACHIS_ROOM"),
+    "OBJ_EVENT_GFX_INCLEMENT_HEATRAN": ("HEATRAN", "MAP_SCORCHED_SLAB_HEATRANS_ROOM"),
+    "OBJ_EVENT_GFX_INCLEMENT_DIANCIE": ("DIANCIE", "MAP_CAVE_OF_ORIGIN_DIANCIES_ROOM"),
+    "OBJ_EVENT_GFX_REGIGIGAS_STATUE": ("REGIGIGAS", "MAP_SEALED_CHAMBER_INNER_ROOM"),
+}
+SCRIPTED_VISIBLE_ROOTS = {
+    "MAGEARNA": (
+        "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
+        ("EC_SIGN_MAGEARNA_ID", "TryGiveSelectedLegendarySignReward", "FLAG_EC_CAUGHT_MAGEARNA"),
+    ),
+    "PECHARUNT": (
+        "data/maps/MtPyre_6F/scripts.inc",
+        ("MtPyre_6F_EventScript_Pecharunt", "CreateSelectedLegendarySignEncounter", "FLAG_EC_CAUGHT_PECHARUNT"),
+    ),
+}
 
 
 def read(path: str) -> str:
@@ -51,6 +71,33 @@ def main() -> None:
     flags = read("include/constants/flags.h")
     migration = read("src/overworld.c")
     definitions = read("src/data/pokemon/legendary_signs.h")
+
+    # The Frontier's architecture and amenities remain explorable, but every
+    # live challenge desk must enter the Showdown-derived Doubles Circuit.
+    # Native Gen 3 facility generators are retained only as inert engine code.
+    frontier_lobbies = (
+        "BattleFrontier_BattleArenaLobby",
+        "BattleFrontier_BattleDomeLobby",
+        "BattleFrontier_BattleFactoryLobby",
+        "BattleFrontier_BattlePalaceLobby",
+        "BattleFrontier_BattlePikeLobby",
+        "BattleFrontier_BattlePyramidLobby",
+        "BattleFrontier_BattleTowerLobby",
+    )
+    challenge_desks = []
+    for map_name in frontier_lobbies:
+        payload = json.loads(read(f"data/maps/{map_name}/map.json"))
+        for obj in payload.get("object_events", []):
+            if "ATTENDANT" not in obj.get("local_id", ""):
+                continue
+            challenge_desks.append((map_name, obj["local_id"], obj.get("script")))
+    require(len(challenge_desks) == 13, f"Frontier challenge-desk inventory drifted: {challenge_desks}")
+    require(
+        all(script == "BattleFrontier_BattleTowerLobby_EventScript_ChampionsCircuit"
+            for _, _, script in challenge_desks),
+        "a live Frontier desk still launches a native Gen 3 facility: "
+        + repr([row for row in challenge_desks if row[2] != "BattleFrontier_BattleTowerLobby_EventScript_ChampionsCircuit"]),
+    )
 
     require(manifest["source_commit"] == "bb179fbf8449e3c31632bd56f671ffb4404fa6e7", "Showdown source commit drifted")
     require(manifest["variant_count"] == 311, "Showdown variant count drifted")
@@ -158,11 +205,43 @@ def main() -> None:
         "Circuit templates request configured-out Abilities:\n" + "\n".join(illegal_circuit_abilities),
     )
 
+    legendary_runtime = read("src/legendary_signs.c")
+    relic_contracts = {
+        "SPECIES_GROUDON": {"ITEM_RED_ORB"},
+        "SPECIES_KYOGRE": {"ITEM_BLUE_ORB"},
+        "SPECIES_ZACIAN": {"ITEM_RUSTED_SWORD"},
+        "SPECIES_ZAMAZENTA": {"ITEM_RUSTED_SHIELD"},
+        "SPECIES_OGERPON_TEAL": {
+            "ITEM_WELLSPRING_MASK", "ITEM_HEARTHFLAME_MASK", "ITEM_CORNERSTONE_MASK",
+        },
+        "SPECIES_ARCEUS": {
+            "ITEM_FLAME_PLATE", "ITEM_SPLASH_PLATE", "ITEM_ZAP_PLATE",
+            "ITEM_MEADOW_PLATE", "ITEM_ICICLE_PLATE", "ITEM_FIST_PLATE",
+            "ITEM_TOXIC_PLATE", "ITEM_EARTH_PLATE", "ITEM_SKY_PLATE",
+            "ITEM_MIND_PLATE", "ITEM_INSECT_PLATE", "ITEM_STONE_PLATE",
+            "ITEM_SPOOKY_PLATE", "ITEM_DRACO_PLATE", "ITEM_DREAD_PLATE",
+            "ITEM_IRON_PLATE", "ITEM_PIXIE_PLATE",
+        },
+    }
+    for species, items in relic_contracts.items():
+        case = legendary_runtime.split(f"case {species}:", 1)
+        require(len(case) == 2, f"{species} has no associated relic grant")
+        body = case[1].split("break;", 1)[0]
+        if species == "SPECIES_ARCEUS":
+            body += legendary_runtime.split("sArceusPlates[]", 1)[1].split("};", 1)[0]
+        require(items <= set(re.findall(r"ITEM_[A-Z0-9_]+", body)),
+                f"{species} is missing relics: {sorted(items - set(re.findall(r'ITEM_[A-Z0-9_]+', body)))}")
+    require(
+        "CheckBagHasItem(item, 1) || CheckPCHasItem(item, 1)" in legendary_runtime
+        and "AddBagItem(item, 1)" in legendary_runtime
+        and "AddPCItem(item, 1)" in legendary_runtime,
+        "legendary relic delivery is not idempotent and Bag/PC safe",
+    )
+
     sign_ids = re.findall(r"(?:WILD|VISIBLE|OTHER)_SIGN\((LEGENDARY_SIGN_[A-Z0-9_]+)", definitions)
     require(len(sign_ids) == 82 and len(set(sign_ids)) == 82, "Legendary Sign definitions are incomplete or duplicated")
     require("MIRAGE_TOWER" not in definitions, "a Sign still depends on collapsible Mirage Tower")
     require("SAFARI_ZONE" not in definitions, "a Sign still requires Safari capture rules")
-    legendary_runtime = read("src/legendary_signs.c")
     conditional_ids = set(re.findall(r"(?m)^WILD_SIGN\((LEGENDARY_SIGN_[A-Z0-9_]+)", definitions))
     location_switch = re.search(
         r"static const u8 \*GetLegendarySignLocationName\(.*?\n\}",
@@ -187,9 +266,9 @@ def main() -> None:
     require("SPECIES_MANAPHY" in read("src/daycare.c"), "Manaphy and Ditto breeding gate is missing")
     require("FLAG_HIDE_LEGENDARY_SIGN_DARKRAI" in read("data/scripts/new_game.inc"), "visible Sign reset flags are missing")
 
-    # Every visible Sign is a physical, persistent encounter rather than a
-    # dossier-only promise.  Derive this from the live definition table so a
-    # newly added visible quest cannot silently omit its map object or script.
+    # Inclement's exact physical roster remains the entire production
+    # overworld roster. Magearna and Pecharunt deliberately use an existing NPC
+    # and tombstone interaction, respectively, rather than adding species props.
     map_rows = {}
     for map_path in (ROOT / "data/maps").glob("*/map.json"):
         row = json.loads(map_path.read_text())
@@ -202,16 +281,28 @@ def main() -> None:
         r"VISIBLE_SIGN\((LEGENDARY_SIGN_[A-Z0-9_]+), ([A-Z0-9_]+), ([A-Z0-9_]+),",
         definitions,
     )
-    require(len(visible_rows) == 25, "visible Legendary Sign count drifted")
+    require(len(visible_rows) == 6, "visible Legendary Sign count drifted")
     for sign_id, species, map_name in visible_rows:
         map_id = f"MAP_{map_name}"
         require(map_id in map_rows, f"{sign_id} points at missing {map_id}")
         map_path, map_row = map_rows[map_id]
+        if species in SCRIPTED_VISIBLE_ROOTS:
+            relative, tokens = SCRIPTED_VISIBLE_ROOTS[species]
+            scripts = read(relative)
+            require(all(token in scripts for token in tokens),
+                    f"{sign_id} scripted visible root is incomplete in {relative}")
+            continue
+        graphics_id = next(
+            (gfx for gfx, (fixed_species, fixed_map) in EXACT_INCLEMENT_PHYSICAL.items()
+             if fixed_species == species and fixed_map == map_id),
+            None,
+        )
+        require(graphics_id is not None, f"{sign_id} is not an approved Inclement physical encounter")
         matching_objects = [
             obj for obj in map_row.get("object_events", [])
-            if obj.get("graphics_id") == f"OBJ_EVENT_GFX_SPECIES({species})"
+            if obj.get("graphics_id") == graphics_id
         ]
-        require(len(matching_objects) == 1, f"{sign_id} needs exactly one {species} overworld object")
+        require(len(matching_objects) == 1, f"{sign_id} needs exactly one fixed {species} object")
         obj = matching_objects[0]
         require(obj.get("flag") not in (None, "0"), f"{sign_id} has no persistent hide/catch flag")
         require(obj.get("local_id"), f"{sign_id} has no stable local object ID")
@@ -225,16 +316,20 @@ def main() -> None:
             obj["local_id"],
         ):
             require(token in scripts, f"{sign_id} encounter script is missing {token}")
-        sprite = ROOT / "graphics/pokemon" / species.lower() / "overworld.png"
-        verify_overworld_sprite(sprite, sign_id)
 
     physical_encounters = []
     for map_id, (map_path, map_row) in map_rows.items():
         for obj in map_row.get("object_events", []):
-            match = re.fullmatch(r"OBJ_EVENT_GFX_SPECIES\(([^)]+)\)", obj.get("graphics_id", ""))
-            if match and match.group(1) not in {"CARBINK", "CHANSEY"}:
-                physical_encounters.append((map_id, map_path, match.group(1), obj))
-    require(len(physical_encounters) == 32, "physical one-off Pokémon encounter count drifted")
+            graphics_id = obj.get("graphics_id", "")
+            if graphics_id in EXACT_INCLEMENT_PHYSICAL:
+                species, expected_map = EXACT_INCLEMENT_PHYSICAL[graphics_id]
+                require(map_id == expected_map, f"{species} moved from its exact Inclement map")
+                physical_encounters.append((map_id, map_path, species, obj))
+            require(
+                not re.fullmatch(r"OBJ_EVENT_GFX_SPECIES\(([^)]+)\)", graphics_id),
+                f"{map_id} reintroduced a non-Inclement physical species prop: {graphics_id}",
+            )
+    require(len(physical_encounters) == 8, "exact Inclement physical encounter count drifted")
     require(
         len({species for _map_id, _map_path, species, _obj in physical_encounters}) == len(physical_encounters),
         "a supposedly one-off overworld species is represented by multiple physical encounters",
@@ -259,10 +354,8 @@ def main() -> None:
         require(local_id, f"{context} has no stable local object ID")
         require(object_flag not in (None, "0"), f"{context} has no persistent object flag")
         require(object_flag in flags_header, f"{context} uses an undefined object flag")
-        require(
-            obj.get("movement_type") == "MOVEMENT_TYPE_FACE_DOWN",
-            f"{context} can wander away from its authored encounter position",
-        )
+        require(obj.get("movement_type") in {"MOVEMENT_TYPE_NONE", "MOVEMENT_TYPE_FACE_DOWN"},
+                f"{context} can wander away from its authored encounter position")
         scripts = (map_path.parent / "scripts.inc").read_text()
         require(f"{script_label}::" in scripts, f"{context} script label is missing")
         require("BattleSetup_StartLegendaryBattle" in scripts, f"{context} never starts a legendary battle")
@@ -271,56 +364,8 @@ def main() -> None:
             object_flag in scripts or object_flag in legendary_runtime,
             f"{context} hide/catch flag is never synchronized",
         )
-        sprite = ROOT / "graphics/pokemon" / species.lower() / "overworld.png"
-        verify_overworld_sprite(sprite, context)
-
-    require("OBJ_EVENT_GFX_SPECIES(DARKRAI)" in read("data/maps/MtPyre_Summit/map.json"), "Darkrai overworld object is missing")
-    require("OBJ_EVENT_GFX_SPECIES(CRESSELIA)" in read("data/maps/MeteorFalls_B1F_2R/map.json"), "Cresselia overworld object is missing")
-    require("OBJ_EVENT_GFX_SPECIES(DIALGA)" in read("data/maps/MeteorFalls_B1F_1R/map.json"), "Dialga overworld object is missing")
-    require("OBJ_EVENT_GFX_SPECIES(LANDORUS)" in read("data/maps/Route111_RuinsExterior/map.json"), "Landorus overworld object is missing")
-    require("OBJ_EVENT_GFX_SPECIES(THUNDURUS)" in read("data/maps/Route110/map.json"), "Thundurus overworld object is missing")
-    require("OBJ_EVENT_GFX_SPECIES(TORNADUS)" in read("data/maps/Route119/map.json"), "Tornadus overworld object is missing")
-    require(
-        "VISIBLE_SIGN(LEGENDARY_SIGN_THUNDURUS, THUNDURUS, ROUTE110, 3, 1, MANECTRIC, FLAG_BADGE03_GET)"
-        in definitions,
-        "Thundurus is not a visible early-midgame Route 110 encounter",
-    )
-    require(
-        "VISIBLE_SIGN(LEGENDARY_SIGN_TORNADUS, TORNADUS, ROUTE119, 5, 1, CASTFORM, FLAG_BADGE05_GET)"
-        in definitions,
-        "Tornadus is not a visible midgame Route 119 encounter",
-    )
-    for map_id, species in (("MAP_ROUTE110", "THUNDURUS"), ("MAP_ROUTE119", "TORNADUS")):
-        _, map_row = map_rows[map_id]
-        obj = next(
-            row for row in map_row["object_events"]
-            if row.get("graphics_id") == f"OBJ_EVENT_GFX_SPECIES({species})"
-        )
-        layout = layouts[map_row["layout"]]
-        width = layout["width"]
-        height = layout["height"]
-        blocks = (ROOT / layout["blockdata_filepath"]).read_bytes()
-
-        def block_value(x: int, y: int) -> int:
-            offset = 2 * (y * width + x)
-            return int.from_bytes(blocks[offset:offset + 2], "little")
-
-        value = block_value(obj["x"], obj["y"])
-        require((value >> 10) & 3 == 0, f"{species} is standing on an impassable map block")
-        open_neighbors = 0
-        for x, y in (
-            (obj["x"] - 1, obj["y"]), (obj["x"] + 1, obj["y"]),
-            (obj["x"], obj["y"] - 1), (obj["x"], obj["y"] + 1),
-        ):
-            if 0 <= x < width and 0 <= y < height and ((block_value(x, y) >> 10) & 3) == 0:
-                open_neighbors += 1
-        require(open_neighbors >= 3, f"{species} blocks a narrow route corridor")
-    require("OBJ_EVENT_GFX_SPECIES(REGIGIGAS)" in read("data/maps/SealedChamber_InnerRoom/map.json"), "giant Regigigas object is missing")
-    require("SIZE_64x64" in read("src/data/pokemon/species_info/gen_4_families.h"), "Regigigas is not using its giant overworld size")
-    require(
-        verify_overworld_sprite(ROOT / "graphics/pokemon/regigigas/overworld.png", "REGIGIGAS") == (384, 64),
-        "Regigigas does not use the complete giant 64x64 overworld sheet",
-    )
+    require("OBJ_EVENT_GFX_REGIGIGAS_STATUE" in read("data/maps/SealedChamber_InnerRoom/map.json"),
+            "Inclement's giant Regigigas statue is missing")
     require("VAR_LEGENDARY_SIGNS_UNLOCKED_5" in legendary_runtime, "all 82 Sign bits are not persisted")
     require(
         "GetEggSpecies(partySpecies) == requestedRoot"

@@ -1,6 +1,16 @@
 SootopolisCity_House2_MapScripts::
 	.byte 0
 
+SootopolisCity_House2_EventScript_MoveSpecialist::
+	msgbox SootopolisCity_House2_Text_MoveSpecialist, MSGBOX_NPC
+	end
+
+SootopolisCity_House2_Text_MoveSpecialist:
+	.string "I once taught DRACO METEOR only to\n"
+	.string "DRAGONS that trusted their TRAINER.\p"
+	.string "The CENTER specialist now handles\n"
+	.string "every legal competitive move.$"
+
 SootopolisCity_House2_EventScript_ExpertF::
 	lock
 	faceplayer
@@ -31,4 +41,3 @@ SootopolisCity_House2_Text_YesTwoOrbsSideBySide:
 SootopolisCity_House2_Text_OughtToVisitAndSee:
 	.string "Is that so?\n"
 	.string "Perhaps you ought to visit and see…$"
-

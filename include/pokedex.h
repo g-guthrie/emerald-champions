@@ -26,4 +26,8 @@ u8* ConvertMonHeightToString(u32 height);
 u8* ConvertMonWeightToString(u32 weight);
 bool32 ShouldSkipPokedexListEntry(enum NationalDexOrder dexNum);
 
+#if EC_HEADLESS_FIXTURES
+bool32 IsPokedexHeadlessOnScreen(u32 currentPage, u32 selectedScreen, bool32 searchResults);
+#endif
+
 #endif // GUARD_POKEDEX_H

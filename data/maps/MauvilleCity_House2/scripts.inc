@@ -1,6 +1,16 @@
 MauvilleCity_House2_MapScripts::
 	.byte 0
 
+MauvilleCity_House2_EventScript_MoveSpecialist::
+	msgbox MauvilleCity_House2_Text_MoveSpecialist, MSGBOX_NPC
+	end
+
+MauvilleCity_House2_Text_MoveSpecialist:
+	.string "I studied the PLEDGE moves and the\n"
+	.string "three ultimate starter techniques.\p"
+	.string "The POKéMON CENTER specialist can\n"
+	.string "teach all six now, free of charge.$"
+
 MauvilleCity_House2_EventScript_Woman::
 	lock
 	faceplayer
@@ -63,4 +73,3 @@ MauvilleCity_House2_Text_ThatsDisappointing:
 	.string "Oh, that's disappointing.\p"
 	.string "A COIN CASE is needed for the\n"
 	.string "GAME CORNER.$"
-

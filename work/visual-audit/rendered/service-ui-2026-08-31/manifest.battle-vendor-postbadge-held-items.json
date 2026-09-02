@@ -1,0 +1,42 @@
+{
+  "elf": "/Users/gguthrie/Projects/ec-ui-build.YKIy6o/pokeemerald-headless.elf",
+  "param_symbol": "0x0200195c",
+  "rendered": [
+    {
+      "frames": 900,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          360,
+          2,
+          "A"
+        ],
+        [
+          600,
+          2,
+          "A"
+        ]
+      ],
+      "name": "battle-vendor-postbadge-held-items",
+      "param": 1,
+      "png_sha256": "e709bd394140441d5dd8df13c740e47b1cc450a3e00f44a29455e68856784829",
+      "scenario_id": 5,
+      "screenshot": "work/visual-audit/rendered/service-ui-2026-08-31/battle-vendor-postbadge-held-items.png",
+      "verified_runtime_state": false,
+      "video_hash": "88609da8e2cd005e"
+    }
+  ],
+  "rom": "/Users/gguthrie/Projects/ec-ui-build.YKIy6o/pokeemerald-headless.gba",
+  "rom_sha256": "6ec617e857c1853721d862545fe0e29d783938b5332a62e5defb28c0045f9d3a",
+  "scenario_symbol": "0x0200196c",
+  "schema_version": 1
+}

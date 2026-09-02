@@ -22,7 +22,6 @@ SootopolisCity_Mart_Pokemart:
 	.2byte ITEM_TIMER_BALL
 	.2byte ITEM_QUICK_BALL
 	.2byte ITEM_SHADOW_MAIL
-	.2byte ITEM_RARE_CANDY
 	pokemartlistend
 
 SootopolisCity_Mart_EventScript_FatMan::

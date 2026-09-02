@@ -1,6 +1,15 @@
 RustboroCity_Mart_MapScripts::
 	.byte 0
 
+RustboroCity_Mart_EventScript_MoveSpecialist::
+	msgbox RustboroCity_Mart_Text_MoveSpecialist, MSGBOX_NPC
+	end
+
+RustboroCity_Mart_Text_MoveSpecialist:
+	.string "FALSE SWIPE used to be my special TM.\p"
+	.string "The POKéMON CENTER specialist now\n"
+	.string "teaches it whenever it is legal.$"
+
 RustboroCity_Mart_EventScript_Clerk::
 	lock
 	faceplayer
@@ -28,7 +37,6 @@ RustboroCity_Mart_Pokemart_Basic:
 	.2byte ITEM_HEAL_BALL
 	.2byte ITEM_NEST_BALL
 	.2byte ITEM_LUXURY_BALL
-	.2byte ITEM_RARE_CANDY
 	pokemartlistend
 
 RustboroCity_Mart_EventScript_PokemartExpanded::
@@ -51,7 +59,6 @@ RustboroCity_Mart_Pokemart_Expanded:
 	.2byte ITEM_DUSK_BALL
 	.2byte ITEM_QUICK_BALL
 	.2byte ITEM_LUXURY_BALL
-	.2byte ITEM_RARE_CANDY
 	pokemartlistend
 
 RustboroCity_Mart_EventScript_PokefanF::

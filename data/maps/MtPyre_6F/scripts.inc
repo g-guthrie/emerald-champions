@@ -72,7 +72,9 @@ MtPyre_6F_Text_CedricPostBattle:
 
 MtPyre_6F_EventScript_Pecharunt::
 	lock
-	faceplayer
+	setvar VAR_0x8004, EC_SIGN_PECHARUNT_ID
+	special GetSelectedLegendarySignState
+	goto_if_eq VAR_RESULT, 2, MtPyre_6F_EventScript_PecharuntQuiet
 	setvar VAR_0x8004, 64
 	special GetSelectedLegendarySignState
 	goto_if_ne VAR_RESULT, 2, MtPyre_6F_EventScript_PecharuntDormant
@@ -84,10 +86,13 @@ MtPyre_6F_EventScript_Pecharunt::
 	goto_if_ne VAR_RESULT, 2, MtPyre_6F_EventScript_PecharuntDormant
 	setvar VAR_0x8004, EC_SIGN_PECHARUNT_ID
 	special TryUnlockSelectedLegendarySign
-	goto_if_eq VAR_RESULT, 0, MtPyre_6F_EventScript_PecharuntStoryLocked
-	goto_if_eq VAR_RESULT, 1, MtPyre_6F_EventScript_PecharuntNeedsOkidogi
-	goto_if_eq VAR_RESULT, 4, MtPyre_6F_EventScript_PecharuntCaught
+	goto_if_eq VAR_RESULT, 0, MtPyre_6F_EventScript_PecharuntDormant
+	goto_if_eq VAR_RESULT, 1, MtPyre_6F_EventScript_PecharuntNeedsPartner
 	msgbox MtPyre_6F_Text_PecharuntAwakens, MSGBOX_DEFAULT
+	waitse
+	playmoncry SPECIES_PECHARUNT, CRY_MODE_ENCOUNTER
+	delay 40
+	waitmoncry
 	setvar VAR_0x8004, EC_SIGN_PECHARUNT_ID
 	special CreateSelectedLegendarySignEncounter
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
@@ -104,19 +109,18 @@ MtPyre_6F_EventScript_PecharuntDormant::
 	release
 	end
 
-MtPyre_6F_EventScript_PecharuntStoryLocked::
-	msgbox MtPyre_6F_Text_PecharuntStoryLocked, MSGBOX_DEFAULT
+MtPyre_6F_EventScript_PecharuntNeedsPartner::
+	msgbox MtPyre_6F_Text_PecharuntNeedsPartner, MSGBOX_DEFAULT
 	release
 	end
 
-MtPyre_6F_EventScript_PecharuntNeedsOkidogi::
-	msgbox MtPyre_6F_Text_PecharuntNeedsOkidogi, MSGBOX_DEFAULT
+MtPyre_6F_EventScript_PecharuntQuiet::
+	msgbox MtPyre_6F_Text_PecharuntQuiet, MSGBOX_DEFAULT
 	release
 	end
 
 MtPyre_6F_EventScript_PecharuntCaught::
 	setflag FLAG_EC_CAUGHT_PECHARUNT
-	removeobject LOCALID_EC_PECHARUNT
 	release
 	end
 
@@ -126,22 +130,22 @@ MtPyre_6F_Text_PecharuntDormant:
 	.string "Catch all three challengers before\n"
 	.string "returning to this poisoned shrine.$"
 
-MtPyre_6F_Text_PecharuntStoryLocked:
-	.string "All three masks are lit, but the violet\n"
-	.string "SIGN still rejects the challenge.\p"
-	.string "Return as HOENN's CHAMPION.$"
-
-MtPyre_6F_Text_PecharuntNeedsOkidogi:
-	.string "The three masks turn toward OKIDOGI.\p"
-	.string "Bring that partner here to call their\n"
-	.string "hidden master from the shrine.$"
+MtPyre_6F_Text_PecharuntNeedsPartner:
+	.string "All three masks are lit, but the dog\n"
+	.string "mark still reaches toward OKIDOGI.\p"
+	.string "Bring its family here to finish the\n"
+	.string "poisoned shrine's ritual.$"
 
 MtPyre_6F_Text_PecharuntAwakens:
-	.string "The three masks flare, and the shrine's\n"
-	.string "hidden master rolls into view!$"
+	.string "The three masks flare! A poisoned mist\n"
+	.string "spills from the tombstone--PECHARUNT!$"
+
+MtPyre_6F_Text_PecharuntQuiet:
+	.string "The tombstone is still. Three faded\n"
+	.string "masks record the trial you completed.$"
 
 MtPyre_6F_Text_PecharuntRemains:
-	.string "PECHARUNT settles back onto the shrine.\n"
+	.string "The mist retreats into the tombstone.\n"
 	.string "The three masks remain lit.$"
 
 

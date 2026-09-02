@@ -1,0 +1,36 @@
+{
+  "elf": "/Users/gguthrie/Projects/ec-ui-build.YKIy6o/pokeemerald-headless.elf",
+  "param_symbol": "0x0200195c",
+  "rendered": [
+    {
+      "frames": 520,
+      "keys": [
+        [
+          210,
+          2,
+          "A"
+        ],
+        [
+          250,
+          2,
+          "DOWN"
+        ],
+        [
+          290,
+          2,
+          "A"
+        ]
+      ],
+      "name": "ability-menu",
+      "png_sha256": "46764e2c2d30efa603a0add7cbe9167fd22ae380c96201a9b7a1ad99aedcce13",
+      "scenario_id": 3,
+      "screenshot": "work/visual-audit/rendered/service-ui-2026-08-31/ability-menu.png",
+      "verified_runtime_state": false,
+      "video_hash": "5463dbe9577f073d"
+    }
+  ],
+  "rom": "/Users/gguthrie/Projects/ec-ui-build.YKIy6o/pokeemerald-headless.gba",
+  "rom_sha256": "5190b12c178d806954cc1cf220432386515fd3999494473e2dd91d0fb1248b82",
+  "scenario_symbol": "0x0200196c",
+  "schema_version": 1
+}

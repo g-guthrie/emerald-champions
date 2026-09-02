@@ -1246,6 +1246,23 @@ AI_DOUBLE_BATTLE_TEST("AI sets up terrain for its ally")
     }
 }
 
+AI_DOUBLE_BATTLE_TEST("AI terrain decisions preserve the setter's opinion when its ally disagrees")
+{
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_ELECTRIC_TERRAIN) == EFFECT_TERRAIN);
+        ASSUME(GetMoveEffect(MOVE_GRASSY_TERRAIN) == EFFECT_TERRAIN);
+        ASSUME(GetMoveEffect(MOVE_RISING_VOLTAGE) == EFFECT_TERRAIN_BOOST);
+        TIE_BREAK_SCORE(RNG_AI_SCORE_TIE_DOUBLES_MOVE, SCORE_TIE_CHOSEN, 1);
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_DOUBLE_BATTLE);
+        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_RISING_VOLTAGE); }
+        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_TACKLE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_ELECTRIC_TERRAIN, MOVE_GRASSY_TERRAIN, MOVE_ENERGY_BALL); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_RISING_VOLTAGE, MOVE_TACKLE); }
+    } WHEN {
+        TURN { EXPECT_MOVE(opponentLeft, MOVE_GRASSY_TERRAIN); }
+    }
+}
+
 AI_DOUBLE_BATTLE_TEST("AI uses After You to set up Trick Room")
 {
     enum Move move;
@@ -1294,6 +1311,28 @@ AI_DOUBLE_BATTLE_TEST("AI uses Trick Room intelligently")
         OPPONENT(SPECIES_INDEEDEE) { Ability(ability); Speed(3); Moves(MOVE_TRICK_ROOM, MOVE_PSYCHIC); }
     } WHEN {
         if (move == MOVE_DRAINING_KISS && ability != ABILITY_PSYCHIC_SURGE && speed > 3)
+            TURN { EXPECT_MOVE(opponentRight, MOVE_TRICK_ROOM); }
+        else
+            TURN { NOT_EXPECT_MOVE(opponentRight, MOVE_TRICK_ROOM); }
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("AI Trick Room decisions compare a right-side setter with its earlier-slot ally")
+{
+    u32 partnerSpeed;
+
+    PARAMETRIZE { partnerSpeed = 1; }
+    PARAMETRIZE { partnerSpeed = 5; }
+
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_TRICK_ROOM) == EFFECT_TRICK_ROOM);
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_DOUBLE_BATTLE);
+        PLAYER(SPECIES_WOBBUFFET) { Speed(4); }
+        PLAYER(SPECIES_WOBBUFFET) { Speed(4); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(partnerSpeed); Moves(MOVE_PSYCHIC); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(2); Moves(MOVE_TRICK_ROOM, MOVE_PSYCHIC); }
+    } WHEN {
+        if (partnerSpeed < 4)
             TURN { EXPECT_MOVE(opponentRight, MOVE_TRICK_ROOM); }
         else
             TURN { NOT_EXPECT_MOVE(opponentRight, MOVE_TRICK_ROOM); }

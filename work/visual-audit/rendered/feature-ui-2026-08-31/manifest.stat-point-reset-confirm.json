@@ -1,0 +1,91 @@
+{
+  "elf": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/docker-output/pokeemerald-headless.elf",
+  "param_symbol": "0x0200195c",
+  "rendered": [
+    {
+      "frames": 1580,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          360,
+          2,
+          "DOWN"
+        ],
+        [
+          400,
+          2,
+          "A"
+        ],
+        [
+          560,
+          2,
+          "A"
+        ],
+        [
+          760,
+          2,
+          "A"
+        ],
+        [
+          980,
+          2,
+          "A"
+        ],
+        [
+          1080,
+          2,
+          "DOWN"
+        ],
+        [
+          1120,
+          2,
+          "DOWN"
+        ],
+        [
+          1160,
+          2,
+          "DOWN"
+        ],
+        [
+          1200,
+          2,
+          "DOWN"
+        ],
+        [
+          1240,
+          2,
+          "DOWN"
+        ],
+        [
+          1280,
+          2,
+          "DOWN"
+        ],
+        [
+          1360,
+          2,
+          "A"
+        ]
+      ],
+      "name": "stat-point-reset-confirm",
+      "png_sha256": "aae318113a7ef142bc1060b7df13f78418cd647bc3a9bce890037f5025dab717",
+      "scenario_id": 6,
+      "screenshot": "work/visual-audit/rendered/feature-ui-2026-08-31/stat-point-reset-confirm.png",
+      "verified_runtime_state": false,
+      "video_hash": "91ea0382c4623891"
+    }
+  ],
+  "rom": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/docker-output/pokeemerald-headless.gba",
+  "rom_sha256": "5bffe19f5d93cf9ce4e63053296f09d9d6d2b9c7c620f38dad6e49f65199ec40",
+  "scenario_symbol": "0x0200196c",
+  "schema_version": 1
+}

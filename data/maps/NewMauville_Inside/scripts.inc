@@ -185,8 +185,12 @@ NewMauville_Inside_EventScript_RotomEncounter::
 	playmoncry SPECIES_ROTOM, CRY_MODE_ENCOUNTER
 	delay 40
 	waitmoncry
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
+	waitmovement 0
 	playse SE_PIN
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark
+	waitmovement 0
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_Delay48
 	waitmovement 0
 	msgbox NewMauville_Inside_Text_RotomAppears, MSGBOX_DEFAULT
 	setvar VAR_0x8004, SPECIES_ROTOM
@@ -424,69 +428,6 @@ NewMauville_Inside_Text_ZapdosAwakens:
 
 NewMauville_Inside_Text_ZapdosRemains:
 	.string "The SIGN remains bright. ZAPDOS\n"
-	.string "will accept another challenge.$"
-
-
-.set EC_SIGN_MELTAN_ID, 60
-
-NewMauville_Inside_EventScript_Meltan::
-	lock
-	faceplayer
-	setvar VAR_0x8004, EC_SIGN_MELTAN_ID
-	special TryUnlockSelectedLegendarySign
-	goto_if_eq VAR_RESULT, 0, NewMauville_Inside_EventScript_MeltanDormant
-	goto_if_eq VAR_RESULT, 1, NewMauville_Inside_EventScript_MeltanNeedsPartner
-	goto_if_eq VAR_RESULT, 4, NewMauville_Inside_EventScript_MeltanCleanup
-	msgbox NewMauville_Inside_Text_MeltanAwakens, MSGBOX_DEFAULT
-	waitse
-	playmoncry SPECIES_MELTAN, CRY_MODE_ENCOUNTER
-	delay 40
-	waitmoncry
-	setvar VAR_0x8004, EC_SIGN_MELTAN_ID
-	special CreateSelectedLegendarySignEncounter
-	setflag FLAG_SYS_CTRL_OBJ_DELETE
-	special BattleSetup_StartLegendaryBattle
-	clearflag FLAG_SYS_CTRL_OBJ_DELETE
-	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, NewMauville_Inside_EventScript_MeltanCaught
-	msgbox NewMauville_Inside_Text_MeltanRemains, MSGBOX_DEFAULT
-	release
-	end
-
-NewMauville_Inside_EventScript_MeltanDormant::
-	msgbox NewMauville_Inside_Text_MeltanDormant, MSGBOX_DEFAULT
-	release
-	end
-
-NewMauville_Inside_EventScript_MeltanNeedsPartner::
-	msgbox NewMauville_Inside_Text_MeltanNeedsPartner, MSGBOX_DEFAULT
-	release
-	end
-
-NewMauville_Inside_EventScript_MeltanCaught::
-	setflag FLAG_EC_CAUGHT_MELTAN
-NewMauville_Inside_EventScript_MeltanCleanup::
-	setflag FLAG_EC_CAUGHT_MELTAN
-	removeobject LOCALID_EC_MELTAN
-	release
-	end
-
-NewMauville_Inside_Text_MeltanDormant:
-	.string "A CHAMPION'S SIGN marks a metal conduit.\p"
-	.string "Its light is dormant. HOENN's story\n"
-	.string "has not yet reached this place.$"
-
-NewMauville_Inside_Text_MeltanNeedsPartner:
-	.string "The SIGN sketches MAGNETON.\p"
-	.string "Bring that POKéMON's family here, and\n"
-	.string "the hidden challenger may answer.$"
-
-NewMauville_Inside_Text_MeltanAwakens:
-	.string "The CHAMPION'S SIGN erupts with light!\n"
-	.string "MELTAN answers the challenge!$"
-
-NewMauville_Inside_Text_MeltanRemains:
-	.string "The SIGN remains bright. MELTAN\n"
 	.string "will accept another challenge.$"
 
 

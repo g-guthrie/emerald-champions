@@ -55,4 +55,8 @@ void ShowSelectMovePokemonSummaryScreen(struct Pokemon *mons, u8 monIndex, void 
 u8 GetMoveSlotToReplace(void);
 void SummaryScreen_SetAnimDelayTaskId(u8 taskId);
 
+#if EC_HEADLESS_FIXTURES
+bool32 IsPokemonSummaryHeadlessOnPage(u32 page, bool32 moveDetailsOpen);
+#endif
+
 #endif // GUARD_POKEMON_SUMMARY_SCREEN_H

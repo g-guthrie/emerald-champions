@@ -1,14 +1,16 @@
 # Competitive battle-set migration
 
-The move tutor and ordinary wild-catch pipeline now share one executable,
-doubles-first corpus against the current Emerald Champions data model.
+The move tutor and ordinary wild-catch pipeline share one executable,
+doubles-first data model with separate named Doubles and Singles catalogs.
 
 ## Runtime corpus
 
-- Authored defaults: 1,258
-- Alternatives: 1,361 (274 preserved/source-backed plus 1,087 legal
+- Doubles defaults: 1,258
+- Doubles alternatives: 1,361 (274 preserved/source-backed plus 1,087 legal
   second-role syntheses)
-- Total executable presets: 2,619
+- Singles defaults: 1,258
+- Singles alternatives: 1,434
+- Total executable presets: 5,311 (2,619 Doubles; 2,692 Singles)
 - Non-Mega orientations: 2,524; every one of the 1,258 direct species/form
   rows exposes at least two choices before Mega access
 - Parsed wild-table species: 616, all covered (592 species/forms across
@@ -16,8 +18,8 @@ doubles-first corpus against the current Emerald Champions data model.
 - Every valid ordinary species and form resolves to a preset. Cosmetic, Totem,
   and temporary battle forms inherit the first authored preset in their native
   form table; regional and mechanically distinct forms have direct entries.
-- A fail-closed generation and verification contract rejects any direct row
-  with fewer than two non-Mega choices. It also rejects renamed roles,
+- A fail-closed generation and verification contract rejects either format
+  when a direct row has fewer than two non-Mega choices. It also rejects unnamed roles,
   move-order shuffles, and item-only pseudo-alternatives. Narrow species such
   as Ditto and Unown use materially different Ability or nature/Stat Point
   orientations without inventing moves they cannot learn.
@@ -52,9 +54,15 @@ until the Mega Ring is owned, and never grant their stone.
 - Every serviced Pokemon Center offers `Build a Battle Set` and the complete
   historical legal move relearner. Known moves are excluded from its menu, so
   a no-move Mew exposes 372 choices and the default four-move Mew exposes 368.
-- Applying a set replaces moves, nature, Ability, Stat Points, and ordinary
+- The native format chooser exposes named Doubles and Singles sets. Applying a
+  set replaces moves, nature, Ability, Stat Points, perfect-IV backing data, and ordinary
   held item. The prior ordinary held item disappears; protected progression
   items are never overwritten.
+- A free native Stat Point editor allows 0-32 points per stat and 66 total.
+  IVs are not a player-facing grind: Champions calculation treats them as
+  perfect, and presets normalize their stored values to 31.
+- Successful evolution silently applies the evolved species' first non-Mega
+  Doubles recommendation while preserving protected held items.
 - Ordinary wild Pokemon choose uniformly among their available non-Mega sets.
   The selected nature, Ability, moves, Stat Points, and item survive capture.
 - Legendary, Mythical, Mega, Primal, Ultra, Gigantamax, Tera, and invalid
@@ -67,7 +75,8 @@ until the Mega Ring is owned, and never grant their stone.
   bytes. The resulting fixture used 27,252,028 ROM bytes (81.22%), 227,500
   EWRAM bytes (86.78%), and 28,376 IWRAM bytes (86.60%). These are measured
   integration bounds, not a substitute for the final production release link.
-- Static corpus and wild-coverage verifier: 2,619 presets, 95 Mega roles across
+- Static corpus and wild-coverage verifier: 5,311 presets, at least two
+  non-Mega roles per format for every direct species/form, 95 Mega orientations across
   92 stones, and all 616 parsed wild-table species/forms covered
 - Focused all-species/form, reviewed move-access, prepared-story-gift,
   item-protection, wild-pool, Mega-tutor, staged-Zygarde, and Circuit tests are

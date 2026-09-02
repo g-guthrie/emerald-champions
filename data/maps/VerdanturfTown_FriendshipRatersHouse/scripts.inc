@@ -1,6 +1,51 @@
 VerdanturfTown_FriendshipRatersHouse_MapScripts::
 	.byte 0
 
+VerdanturfTown_FriendshipRatersHouse_EventScript_Trader::
+	lock
+	faceplayer
+	goto_if_set FLAG_EC_VERDANTURF_HAPPINY_TRADE, VerdanturfTown_FriendshipRatersHouse_EventScript_TradeCompleted
+	ingame_trade INGAME_TRADE_HAPPINY, VerdanturfTown_FriendshipRatersHouse_Text_TradeHappiny, VerdanturfTown_FriendshipRatersHouse_EventScript_DeclineTrade, VerdanturfTown_FriendshipRatersHouse_EventScript_NotRequestedMon, VerdanturfTown_FriendshipRatersHouse_Text_TradeComplete
+	setflag FLAG_EC_VERDANTURF_HAPPINY_TRADE
+	release
+	end
+
+VerdanturfTown_FriendshipRatersHouse_EventScript_DeclineTrade::
+	msgbox VerdanturfTown_FriendshipRatersHouse_Text_TradeDeclined, MSGBOX_DEFAULT
+	release
+	end
+
+VerdanturfTown_FriendshipRatersHouse_EventScript_NotRequestedMon::
+	bufferspeciesname STR_VAR_1, VAR_0x8009
+	msgbox VerdanturfTown_FriendshipRatersHouse_Text_NeedRequestedMon, MSGBOX_DEFAULT
+	release
+	end
+
+VerdanturfTown_FriendshipRatersHouse_EventScript_TradeCompleted::
+	msgbox VerdanturfTown_FriendshipRatersHouse_Text_HappinyDoingWell, MSGBOX_DEFAULT
+	release
+	end
+
+VerdanturfTown_FriendshipRatersHouse_Text_TradeHappiny:
+	.string "This {STR_VAR_2} needs a caring\n"
+	.string "TRAINER. Trade a {STR_VAR_1} for it?$"
+
+VerdanturfTown_FriendshipRatersHouse_Text_TradeComplete:
+	.string "Thank you. Friendship is the best\n"
+	.string "training HAPPINY can receive.$"
+
+VerdanturfTown_FriendshipRatersHouse_Text_TradeDeclined:
+	.string "That's all right. A trade should never\n"
+	.string "be rushed.$"
+
+VerdanturfTown_FriendshipRatersHouse_Text_NeedRequestedMon:
+	.string "That isn't a {STR_VAR_1}. Please bring\n"
+	.string "the partner we discussed.$"
+
+VerdanturfTown_FriendshipRatersHouse_Text_HappinyDoingWell:
+	.string "Your friendship tells me HAPPINY found\n"
+	.string "the right TRAINER.$"
+
 VerdanturfTown_FriendshipRatersHouse_EventScript_FriendshipRater::
 	lock
 	faceplayer
@@ -101,4 +146,3 @@ VerdanturfTown_FriendshipRatersHouse_Text_DetestsYou:
 
 VerdanturfTown_FriendshipRatersHouse_Text_Pikachu:
 	.string "PIKACHU: Pika pika!$"
-

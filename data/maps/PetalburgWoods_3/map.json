@@ -15,6 +15,32 @@
   "connections": 0,
   "object_events": [
     {
+      "graphics_id": "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
+      "x": 22,
+      "y": 26,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_SWEET_APPLE",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_EC_ITEM_WOODS3_SWEET_APPLE"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
+      "x": 22,
+      "y": 16,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_TART_APPLE",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_EC_ITEM_WOODS3_TART_APPLE"
+    },
+    {
       "graphics_id": "OBJ_EVENT_GFX_CUTTABLE_TREE",
       "x": 32,
       "y": 22,
@@ -67,70 +93,17 @@
       "flag": "FLAG_TEMP_14"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
       "x": 38,
       "y": 9,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "ITEM_BEEDRILLITE",
       "script": "Common_EventScript_FindItem",
       "flag": "FLAG_EC_ITEM_WOODS3_BEEDRILLITE"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 22,
-      "y": 26,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_SWEET_APPLE",
-      "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_EC_ITEM_WOODS3_SWEET_APPLE"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 22,
-      "y": 16,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_TART_APPLE",
-      "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_EC_ITEM_WOODS3_TART_APPLE"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_SPECIES(CELEBI)",
-      "x": 44,
-      "y": 41,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "PetalburgWoods_3_EventScript_Celebi",
-      "flag": "FLAG_EC_CAUGHT_CELEBI",
-      "local_id": "LOCALID_EC_CELEBI"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_CAMPER",
-      "x": 8,
-      "y": 32,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "PetalburgWoods_3_EventScript_Ranger",
-      "flag": "0"
     }
   ],
   "warp_events": [

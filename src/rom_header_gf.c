@@ -160,11 +160,15 @@ __attribute__((section(".text.header_gf"))) USED static const struct GFRomHeader
     .gcnLinkFlagsOffset = offsetof(struct SaveBlock2, gcnLinkFlags),
     .gameClearFlag = FLAG_SYS_GAME_CLEAR,
     .ribbonFlag = FLAG_SYS_RIBBON_GET,
-    .bagCountItems = BAG_ITEMS_COUNT,
-    .bagCountKeyItems = BAG_KEYITEMS_COUNT,
-    .bagCountPokeballs = BAG_POKEBALLS_COUNT,
-    .bagCountTMHMs = BAG_TMHM_COUNT,
-    .bagCountBerries = BAG_BERRIES_COUNT,
+    // The GCN header describes the contiguous legacy arrays at SaveBlock1's
+    // canonical bag offset. Expanded pocket overflows are intentionally not
+    // exposed as if they were contiguous, which would make link tools walk
+    // into adjacent save data.
+    .bagCountItems = BAG_LEGACY_ITEMS_COUNT,
+    .bagCountKeyItems = BAG_LEGACY_KEYITEMS_COUNT,
+    .bagCountPokeballs = BAG_LEGACY_POKEBALLS_COUNT,
+    .bagCountTMHMs = BAG_LEGACY_TMHM_COUNT,
+    .bagCountBerries = BAG_LEGACY_BERRIES_COUNT,
     .pcItemsCount = PC_ITEMS_COUNT,
     .pcItemsOffset = offsetof(struct SaveBlock1, pcItems),
     .giftRibbonsOffset = offsetof(struct SaveBlock1, giftRibbons),

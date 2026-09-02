@@ -15,6 +15,19 @@
   "connections": 0,
   "object_events": [
     {
+      "graphics_id": "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
+      "x": 12,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_MAGMARIZER",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_EC_ITEM_EMBER_MAGMARIZER"
+    },
+    {
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 34,
       "y": 4,
@@ -26,6 +39,19 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_StrengthBoulder",
       "flag": "FLAG_TEMP_11"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
+      "x": 36,
+      "y": 2,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_BLAZIKENITE",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_EC_ITEM_EMBER_BLAZIKENITE"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
@@ -54,46 +80,7 @@
       "flag": "FLAG_TEMP_12"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 36,
-      "y": 2,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_BLAZIKENITE",
-      "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_EC_ITEM_EMBER_BLAZIKENITE"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 12,
-      "y": 10,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_MAGMARIZER",
-      "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_EC_ITEM_EMBER_MAGMARIZER"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 25,
-      "y": 35,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_RARE_CANDY",
-      "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_EC_ITEM_EMBER_RARE_CANDY"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_SPECIES(MOLTRES)",
+      "graphics_id": "OBJ_EVENT_GFX_INCLEMENT_MOLTRES",
       "x": 21,
       "y": 14,
       "elevation": 3,
@@ -105,19 +92,6 @@
       "script": "EmberPath_EventScript_Moltres",
       "flag": "FLAG_EC_CAUGHT_MOLTRES",
       "local_id": "LOCALID_EC_MOLTRES"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_HIKER",
-      "x": 8,
-      "y": 36,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "EmberPath_EventScript_Warden",
-      "flag": "0"
     }
   ],
   "warp_events": [
@@ -137,6 +111,15 @@
     }
   ],
   "coord_events": [],
-  "bg_events": [],
+  "bg_events": [
+    {
+      "type": "hidden_item",
+      "x": 9,
+      "y": 38,
+      "elevation": 3,
+      "item": "ITEM_MAGMARIZER",
+      "flag": "FLAG_EC_HIDDEN_ITEM_EMBER_PATH_MAGMARIZER"
+    }
+  ],
   "region": "REGION_HOENN"
 }

@@ -428,6 +428,18 @@ FINAL_DISTINCT_GROUPS = (
     ("MAP_ALTERING_CAVE_1F", "MAP_ALTERING_CAVE_B1F"),
 )
 
+# These restored late-campaign caves previously inherited placeholder level
+# 2-4 tables even though their species, trainers, and access gates are all
+# late-game.  Pin every method to the authored 41-43 band so future table
+# rewrites cannot silently recreate that mismatch.
+RESTORED_LATE_CAVE_LEVEL_MAPS = {
+    "MAP_ALTERING_CAVE_1F",
+    "MAP_ALTERING_CAVE_B1F",
+    "MAP_SCORCHED_SLAB_B1F",
+    "MAP_SCORCHED_SLAB_B2F",
+    "MAP_SCORCHED_SLAB_HEATRANS_ROOM",
+}
+
 
 def require(condition: bool, message: str) -> None:
     if not condition:
@@ -849,6 +861,20 @@ def check() -> None:
             require(0 < method.get("encounter_rate", 0) <= 100,
                     f"{map_name} {method_name}: invalid encounter rate {method.get('encounter_rate')}")
 
+    for map_name in RESTORED_LATE_CAVE_LEVEL_MAPS:
+        for method_name, method in by_map[map_name].items():
+            if not method_name.endswith("_mons") or not isinstance(method, dict):
+                continue
+            levels = {
+                level
+                for mon in method.get("mons", [])
+                for level in (mon["min_level"], mon["max_level"])
+            }
+            require(
+                levels <= {41, 42, 43} and levels,
+                f"{map_name} {method_name}: restored late-cave levels escaped 41-43: {sorted(levels)}",
+            )
+
     for (map_name, method_name, slot), species in STARTER_REPLACEMENTS.items():
         require(by_map[map_name][method_name]["mons"][slot]["species"] == species,
                 f"{map_name} {method_name}[{slot}] lost {species}")
@@ -932,6 +958,7 @@ def check() -> None:
     print(f"PASS: {len(MIDGAME_BIOME_ANCHORS)} midgame anchors, {len(MIDGAME_TROPHY_POLICY)} trophies, and 5 one-time Signs are pinned")
     print(f"PASS: {len(FINAL_BIOME_ANCHORS)} final anchors, {len(FINAL_TROPHY_POLICY)} trophies, and 7 one-time Signs are pinned")
     print("PASS: no ordinary fossil family or non-UB named legendary leaks into the curated ecosystems")
+    print(f"PASS: {len(RESTORED_LATE_CAVE_LEVEL_MAPS)} restored late caves keep every encounter method at Lv. 41-43")
 
 
 def main() -> None:

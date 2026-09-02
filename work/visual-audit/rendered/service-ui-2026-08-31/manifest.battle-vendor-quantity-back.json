@@ -1,0 +1,56 @@
+{
+  "elf": "/Users/gguthrie/Projects/ec-ui-build.YKIy6o/pokeemerald-headless.elf",
+  "param_symbol": "0x0200195c",
+  "rendered": [
+    {
+      "frames": 1480,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          360,
+          2,
+          "A"
+        ],
+        [
+          460,
+          2,
+          "A"
+        ],
+        [
+          800,
+          2,
+          "A"
+        ],
+        [
+          1080,
+          2,
+          "A"
+        ],
+        [
+          1320,
+          2,
+          "B"
+        ]
+      ],
+      "name": "battle-vendor-quantity-back",
+      "png_sha256": "8857f25acc2bd29ae1c61158e5a3d7e1731dc6eb89538340e4aeecabdc146bf4",
+      "scenario_id": 5,
+      "screenshot": "work/visual-audit/rendered/service-ui-2026-08-31/battle-vendor-quantity-back.png",
+      "verified_runtime_state": false,
+      "video_hash": "616f163977663cd1"
+    }
+  ],
+  "rom": "/Users/gguthrie/Projects/ec-ui-build.YKIy6o/pokeemerald-headless.gba",
+  "rom_sha256": "4ab9ab799eb18e8e98db37ab92aae86e4b3b9c8f986028ae221d260f199b65d2",
+  "scenario_symbol": "0x0200196c",
+  "schema_version": 1
+}

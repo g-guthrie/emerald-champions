@@ -55,6 +55,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_RUSTBORO_GYM_GUIDE",
       "graphics_id": "OBJ_EVENT_GFX_MAN_2",
       "x": 3,
       "y": 18,
@@ -97,7 +98,44 @@
       "dest_warp_id": "0"
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 4,
+      "y": 19,
+      "elevation": 0,
+      "var": "VAR_RUSTBORO_GYM_GUIDE_STATE",
+      "var_value": "0",
+      "script": "RustboroCity_Gym_EventScript_GuideTrigger1"
+    },
+    {
+      "type": "trigger",
+      "x": 5,
+      "y": 18,
+      "elevation": 0,
+      "var": "VAR_RUSTBORO_GYM_GUIDE_STATE",
+      "var_value": "0",
+      "script": "RustboroCity_Gym_EventScript_GuideTrigger2"
+    },
+    {
+      "type": "trigger",
+      "x": 6,
+      "y": 18,
+      "elevation": 0,
+      "var": "VAR_RUSTBORO_GYM_GUIDE_STATE",
+      "var_value": "0",
+      "script": "RustboroCity_Gym_EventScript_GuideTrigger3"
+    },
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 19,
+      "elevation": 0,
+      "var": "VAR_RUSTBORO_GYM_GUIDE_STATE",
+      "var_value": "0",
+      "script": "RustboroCity_Gym_EventScript_GuideTrigger4"
+    }
+  ],
   "bg_events": [
     {
       "type": "sign",

@@ -1,0 +1,31 @@
+{
+  "elf": "/Users/gguthrie/Projects/ec-ui-build.YKIy6o/pokeemerald-headless.elf",
+  "param_symbol": "0x0200195c",
+  "rendered": [
+    {
+      "frames": 1220,
+      "keys": [
+        [
+          700,
+          2,
+          "B"
+        ],
+        [
+          1040,
+          2,
+          "B"
+        ]
+      ],
+      "name": "all-legal-move-give-up-no",
+      "png_sha256": "9fa28caa99b48079f75fad7f519262473c6d50c8368c32a795764442ba62f0a4",
+      "scenario_id": 13,
+      "screenshot": "work/visual-audit/rendered/service-ui-2026-08-31/all-legal-move-give-up-no.png",
+      "verified_runtime_state": false,
+      "video_hash": "98602e399858c943"
+    }
+  ],
+  "rom": "/Users/gguthrie/Projects/ec-ui-build.YKIy6o/pokeemerald-headless.gba",
+  "rom_sha256": "ded16fc8efeced93de9f65f22312ee42541db96dc352fc1d9024d7df7bdb3d69",
+  "scenario_symbol": "0x0200196c",
+  "schema_version": 1
+}

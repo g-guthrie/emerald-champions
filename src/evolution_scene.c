@@ -8,6 +8,7 @@
 #include "event_data.h"
 #include "evolution_scene.h"
 #include "evolution_graphics.h"
+#include "emerald_champions_battle_sets.h"
 #include "gpu_regs.h"
 #include "item.h"
 #include "link.h"
@@ -588,6 +589,7 @@ static void CreateShedinja(enum Species preEvoSpecies, enum Species postEvoSpeci
             data = MAIL_NONE;
             SetMonData(&gParties[B_TRAINER_PLAYER][gPartiesCount[B_TRAINER_PLAYER]], MON_DATA_MAIL, &data);
 
+            ApplyEmeraldChampionsRecommendedEvolutionSet(shedinja);
             CalculateMonStats(&gParties[B_TRAINER_PLAYER][gPartiesCount[B_TRAINER_PLAYER]]);
             CalculatePlayerPartyCount();
 
@@ -837,7 +839,10 @@ static void Task_EvolutionScene(u8 taskId)
             }
 
             if (!gTasks[taskId].tEvoWasStopped)
+            {
+                ApplyEmeraldChampionsRecommendedEvolutionSet(mon);
                 CreateShedinja(gTasks[taskId].tPreEvoSpecies, gTasks[taskId].tPostEvoSpecies, mon);
+            }
 
             DestroyTask(taskId);
             FreeMonSpritesGfx();
@@ -1251,6 +1256,8 @@ static void Task_TradeEvolutionScene(u8 taskId)
     case T_EVOSTATE_END:
         if (!IsTextPrinterActiveOnWindow(0))
         {
+            if (!gTasks[taskId].tEvoWasStopped)
+                ApplyEmeraldChampionsRecommendedEvolutionSet(mon);
             DestroyTask(taskId);
             FREE_AND_SET_NULL(sEvoStructPtr);
             gTextFlags.useAlternateDownArrow = FALSE;

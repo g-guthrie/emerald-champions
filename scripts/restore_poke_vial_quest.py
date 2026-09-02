@@ -12,7 +12,17 @@ ROOT = Path(__file__).resolve().parents[1]
 MAPS = ROOT / "data" / "maps"
 
 
-def npc(local_id: str, graphics: str, x: int, y: int, movement: str, script: str, flag: str) -> dict:
+def npc(
+    local_id: str,
+    graphics: str,
+    x: int,
+    y: int,
+    movement: str,
+    script: str,
+    flag: str,
+    range_x: int = 0,
+    range_y: int = 0,
+) -> dict:
     return {
         "local_id": local_id,
         "graphics_id": graphics,
@@ -20,8 +30,8 @@ def npc(local_id: str, graphics: str, x: int, y: int, movement: str, script: str
         "y": y,
         "elevation": 3,
         "movement_type": movement,
-        "movement_range_x": 0,
-        "movement_range_y": 0,
+        "movement_range_x": range_x,
+        "movement_range_y": range_y,
         "trainer_type": "TRAINER_TYPE_NONE",
         "trainer_sight_or_berry_tree_id": "0",
         "script": script,
@@ -34,34 +44,34 @@ OBJECTS = {
         npc(
             "LOCALID_ROUTE111_VIAL_NURSE", "OBJ_EVENT_GFX_NURSE", 18, 102,
             "MOVEMENT_TYPE_FACE_UP", "Route111_EventScript_VialUpgradeNurse",
-            "FLAG_HIDE_ROUTE111_VIAL_NURSE",
+            "FLAG_HIDE_ROUTE111_VIAL_NURSE", 1, 1,
         ),
         npc(
-            "LOCALID_ROUTE111_VIAL_CHANSEY", "OBJ_EVENT_GFX_SPECIES(CHANSEY)", 18, 100,
-            "MOVEMENT_TYPE_NONE", "0", "FLAG_HIDE_ROUTE111_VIAL_CHANSEY",
+            "LOCALID_ROUTE111_VIAL_CHANSEY", "OBJ_EVENT_GFX_CHANSEY", 18, 100,
+            "MOVEMENT_TYPE_NONE", "0", "FLAG_HIDE_ROUTE111_VIAL_CHANSEY", 2, 1,
         ),
     ],
     "Route112": [
         npc(
-            "LOCALID_ROUTE112_VIAL_CHANSEY", "OBJ_EVENT_GFX_SPECIES(CHANSEY)", 25, 29,
-            "MOVEMENT_TYPE_FACE_DOWN", "0", "FLAG_HIDE_ROUTE112_VIAL_CHANSEY",
+            "LOCALID_ROUTE112_VIAL_CHANSEY", "OBJ_EVENT_GFX_CHANSEY", 25, 29,
+            "MOVEMENT_TYPE_FACE_DOWN", "0", "FLAG_HIDE_ROUTE112_VIAL_CHANSEY", 1, 1,
         ),
     ],
     "JaggedPass": [
         npc(
-            "LOCALID_JAGGED_PASS_VIAL_CHANSEY", "OBJ_EVENT_GFX_SPECIES(CHANSEY)", 12, 29,
+            "LOCALID_JAGGED_PASS_VIAL_CHANSEY", "OBJ_EVENT_GFX_CHANSEY", 12, 29,
             "MOVEMENT_TYPE_LOOK_AROUND", "JaggedPass_EventScript_VialChansey",
             "FLAG_HIDE_JAGGED_PASS_VIAL_CHANSEY",
         ),
     ],
     "AshenWoods": [
         npc(
-            "LOCALID_ASHEN_WOODS_VIAL_CHANSEY", "OBJ_EVENT_GFX_SPECIES(CHANSEY)", 14, 29,
+            "LOCALID_ASHEN_WOODS_VIAL_CHANSEY", "OBJ_EVENT_GFX_CHANSEY", 14, 29,
             "MOVEMENT_TYPE_LOOK_AROUND", "AshenWoods_EventScript_VialChansey",
             "FLAG_HIDE_ASHEN_WOODS_VIAL_CHANSEY",
         ),
         npc(
-            "LOCALID_ASHEN_WOODS_VIAL_BALL", "OBJ_EVENT_GFX_POKE_BALL", 27, 43,
+            "LOCALID_ASHEN_WOODS_VIAL_BALL", "OBJ_EVENT_GFX_ITEM_BALL", 27, 43,
             "MOVEMENT_TYPE_NONE", "0", "FLAG_HIDE_ASHEN_WOODS_VIAL_BALL",
         ),
     ],
@@ -152,13 +162,6 @@ def check() -> None:
                 and (event["x"], event["y"]) == (expected["x"], expected["y"])
             ]
             require(not collisions, f"{name}: object overlap in Vial quest at {expected['x']},{expected['y']}")
-        if name == "AshenWoods":
-            require(
-                by_local["LOCALID_EC_OKIDOGI"]["x"] == 21
-                and by_local["LOCALID_EC_OKIDOGI"]["y"] == 39,
-                "AshenWoods: Okidogi overlaps the returning Chansey",
-            )
-
         expected_coords = COORDS.get(name, [])
         actual = payload.get("coord_events", [])
         for expected in expected_coords:

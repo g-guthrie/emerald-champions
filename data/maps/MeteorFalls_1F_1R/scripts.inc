@@ -2,8 +2,20 @@ MeteorFalls_1F_1R_MapScripts::
 	map_script MAP_SCRIPT_ON_LOAD, MeteorFalls_1F_1R_OnLoad
 	.byte 0
 
+MeteorFalls_1F_1R_EventScript_RivalTalkAfterBattle::
+	msgbox MeteorFalls_1F_1R_Text_RivalAfterBattleRestored, MSGBOX_NPC
+	end
+
+MeteorFalls_1F_1R_Text_RivalAfterBattleRestored:
+	.string "MAGMA took the METEORITE toward\n"
+	.string "MT. CHIMNEY. We have to follow.\p"
+	.string "Their plan is bigger than COZMO.$"
+
 MeteorFalls_1F_1R_OnLoad:
 	call_if_set FLAG_SYS_GAME_CLEAR, MeteorFalls_1F_1R_EventScript_OpenStevensCave
+	@ The restored rival object uses OBJ_EVENT_GFX_VAR_0, so resolve it here
+	@ exactly as Inclement does instead of inheriting the previous map's value.
+	call Common_EventScript_SetupRivalGfxId
 	end
 
 MeteorFalls_1F_1R_EventScript_OpenStevensCave::
@@ -19,12 +31,18 @@ MeteorFalls_1F_1R_EventScript_MagmaStealsMeteoriteScene::
 	applymovement LOCALID_PLAYER, Common_Movement_FaceDown
 	waitmovement 0
 	delay 30
-	applymovement LOCALID_METEOR_FALLS_MAGMA_GRUNT_1, Common_Movement_WalkInPlaceDown
+	@ Inclement's restored placement puts Magma on the lower floor. Bring the
+	@ player down the ramp so every later path stays on passable tiles.
+	applymovement LOCALID_PLAYER, MeteorFalls_1F_1R_Movement_PlayerWalkDown2
+	waitmovement 0
+	applymovement LOCALID_METEOR_FALLS_RIVAL, Common_Movement_WalkInPlaceFasterLeft
+	applymovement LOCALID_METEOR_FALLS_MAGMA_GRUNT_1, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_METEOR_FALLS_MAGMA_GRUNT_2, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	msgbox MeteorFalls_1F_1R_Text_WithThisMeteorite, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_METEOR_FALLS_MAGMA_GRUNT_1, Common_Movement_WalkInPlaceFasterUp
-	applymovement LOCALID_METEOR_FALLS_MAGMA_GRUNT_2, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_METEOR_FALLS_MAGMA_GRUNT_1, MeteorFalls_1F_1R_Movement_MagmaGruntStepForward
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	playse SE_PIN
 	applymovement LOCALID_METEOR_FALLS_MAGMA_GRUNT_1, Common_Movement_ExclamationMark
@@ -34,11 +52,12 @@ MeteorFalls_1F_1R_EventScript_MagmaStealsMeteoriteScene::
 	msgbox MeteorFalls_1F_1R_Text_DontExpectMercyFromMagma, MSGBOX_DEFAULT
 	closemessage
 	trainerbattle_double_two_trainers TRAINER_COURTNEY_METEOR_FALLS, MeteorFalls_1F_1R_Text_CourtneyDefeat, TRAINER_GRUNT_METEOR_FALLS, MeteorFalls_1F_1R_Text_GruntDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	applymovement LOCALID_METEOR_FALLS_MAGMA_GRUNT_1, MeteorFalls_1F_1R_Movement_MagmaGruntApproachPlayer
+	applymovement LOCALID_METEOR_FALLS_MAGMA_GRUNT_1, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	msgbox MeteorFalls_1F_1R_Text_HoldItRightThereMagma, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
+	applymovement LOCALID_METEOR_FALLS_RIVAL, Common_Movement_WalkInPlaceFasterLeft
 	applymovement LOCALID_METEOR_FALLS_MAGMA_GRUNT_1, Common_Movement_WalkInPlaceFasterLeft
 	applymovement LOCALID_METEOR_FALLS_MAGMA_GRUNT_2, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
@@ -50,12 +69,10 @@ MeteorFalls_1F_1R_EventScript_MagmaStealsMeteoriteScene::
 	applymovement LOCALID_METEOR_FALLS_AQUA_GRUNT_1, MeteorFalls_1F_1R_Movement_AquaGrunt1Arrive
 	applymovement LOCALID_METEOR_FALLS_AQUA_GRUNT_2, MeteorFalls_1F_1R_Movement_AquaGrunt2Arrive
 	waitmovement 0
-	applymovement LOCALID_METEOR_FALLS_MAGMA_GRUNT_1, Common_Movement_WalkInPlaceFasterLeft
-	applymovement LOCALID_METEOR_FALLS_MAGMA_GRUNT_2, Common_Movement_WalkInPlaceFasterLeft
-	waitmovement 0
 	msgbox MeteorFalls_1F_1R_Text_BeSeeingYouTeamAqua, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_PLAYER, MeteorFalls_1F_1R_Movement_PushPlayerOutOfWay
+	applymovement LOCALID_METEOR_FALLS_RIVAL, MeteorFalls_1F_1R_Movement_PushPlayerOutOfWay
 	applymovement LOCALID_METEOR_FALLS_MAGMA_GRUNT_1, MeteorFalls_1F_1R_Movement_MagmaGrunt1Exit
 	applymovement LOCALID_METEOR_FALLS_MAGMA_GRUNT_2, MeteorFalls_1F_1R_Movement_MagmaGrunt2Exit
 	waitmovement 0
@@ -63,22 +80,27 @@ MeteorFalls_1F_1R_EventScript_MagmaStealsMeteoriteScene::
 	removeobject LOCALID_METEOR_FALLS_MAGMA_GRUNT_2
 	applymovement LOCALID_METEOR_FALLS_ARCHIE, MeteorFalls_1F_1R_Movement_ArchieApproachPlayer
 	waitmovement 0
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
+	applymovement LOCALID_METEOR_FALLS_RIVAL, Common_Movement_WalkInPlaceFasterLeft
+	waitmovement 0
 	msgbox MeteorFalls_1F_1R_Text_ArchieSeenYouBefore, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_METEOR_FALLS_AQUA_GRUNT_1, MeteorFalls_1F_1R_Movement_AquaGrunt1ApproachArchie
 	applymovement LOCALID_METEOR_FALLS_AQUA_GRUNT_2, MeteorFalls_1F_1R_Movement_AquaGrunt2ApproachArchie
 	waitmovement 0
 	msgbox MeteorFalls_1F_1R_Text_BossWeShouldChaseMagma, MSGBOX_DEFAULT
-	applymovement LOCALID_METEOR_FALLS_ARCHIE, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_METEOR_FALLS_ARCHIE, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	msgbox MeteorFalls_1F_1R_Text_ArchieYesNoTellingWhatMagmaWillDo, MSGBOX_DEFAULT
-	applymovement LOCALID_METEOR_FALLS_ARCHIE, Common_Movement_WalkInPlaceFasterLeft
+	applymovement LOCALID_METEOR_FALLS_ARCHIE, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	msgbox MeteorFalls_1F_1R_Text_ArchieFarewell, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_METEOR_FALLS_ARCHIE, MeteorFalls_1F_1R_Movement_ArchieExit
 	applymovement LOCALID_METEOR_FALLS_AQUA_GRUNT_1, MeteorFalls_1F_1R_Movement_AquaGrunt1Exit
 	applymovement LOCALID_METEOR_FALLS_AQUA_GRUNT_2, MeteorFalls_1F_1R_Movement_AquaGrunt2Exit
+	applymovement LOCALID_PLAYER, MeteorFalls_1F_1R_Movement_WatchAquaLeave
+	applymovement LOCALID_METEOR_FALLS_RIVAL, MeteorFalls_1F_1R_Movement_WatchAquaLeave
 	waitmovement 0
 	fadedefaultbgm
 	removeobject LOCALID_METEOR_FALLS_ARCHIE
@@ -91,15 +113,26 @@ MeteorFalls_1F_1R_EventScript_MagmaStealsMeteoriteScene::
 	releaseall
 	end
 
-MeteorFalls_1F_1R_Movement_MagmaGruntApproachPlayer:
+@ Every path below was walked against the Inclement Emerald v1.13 layout that
+@ this map now uses: Magma stands at (11,20)/(12,21), Aqua enters from (4,20)
+@ and (4,21), and every exit climbs the (14,19) ramp before the row-18 corridor.
+MeteorFalls_1F_1R_Movement_PlayerWalkDown2:
+	walk_down
+	walk_down
+	step_end
+
+MeteorFalls_1F_1R_Movement_MagmaGruntStepForward:
 	walk_right
-	walk_right
-	walk_in_place_faster_up
+	walk_in_place_faster_right
 	step_end
 
 MeteorFalls_1F_1R_Movement_MagmaGrunt1Exit:
+	delay_16
+	walk_fast_right
+	walk_fast_right
 	walk_fast_up
 	walk_fast_up
+	walk_fast_right
 	walk_fast_right
 	walk_fast_right
 	walk_fast_right
@@ -110,9 +143,12 @@ MeteorFalls_1F_1R_Movement_MagmaGrunt1Exit:
 	step_end
 
 MeteorFalls_1F_1R_Movement_MagmaGrunt2Exit:
+	walk_fast_right
+	walk_fast_up
+	walk_fast_right
 	walk_fast_up
 	walk_fast_up
-	walk_fast_up
+	walk_fast_right
 	walk_fast_right
 	walk_fast_right
 	walk_fast_right
@@ -151,71 +187,98 @@ MeteorFalls_1F_1R_Movement_AquaGrunt2Arrive:
 	walk_right
 	step_end
 
-MeteorFalls_1F_1R_Movement_ArchieExit:
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	step_end
-
 MeteorFalls_1F_1R_Movement_ArchieApproachPlayer:
-	walk_right
-	walk_right
-	walk_up
-	walk_up
-	walk_in_place_faster_left
-	step_end
-
-MeteorFalls_1F_1R_Movement_AquaGrunt1Exit:
-	walk_up
-	walk_up
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
 	walk_right
 	walk_right
 	step_end
 
 MeteorFalls_1F_1R_Movement_AquaGrunt1ApproachArchie:
 	walk_right
-	walk_right
-	walk_right
-	walk_in_place_faster_up
-	step_end
-
-MeteorFalls_1F_1R_Movement_AquaGrunt2Exit:
-	walk_up
-	walk_up
-	walk_up
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
 	step_end
 
 MeteorFalls_1F_1R_Movement_AquaGrunt2ApproachArchie:
 	walk_right
+	step_end
+
+MeteorFalls_1F_1R_Movement_ArchieExit:
+	walk_up
 	walk_right
 	walk_right
-	walk_in_place_faster_up
+	walk_up
+	walk_up
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	step_end
+
+MeteorFalls_1F_1R_Movement_AquaGrunt1Exit:
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_up
+	walk_up
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	step_end
+
+MeteorFalls_1F_1R_Movement_AquaGrunt2Exit:
+	walk_right
+	walk_right
+	walk_up
+	walk_right
+	walk_right
+	walk_up
+	walk_up
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 MeteorFalls_1F_1R_Movement_PushPlayerOutOfWay:
-	walk_in_place_faster_down
+	walk_in_place_faster_left
 	delay_4
-	walk_in_place_faster_right
+	walk_in_place_faster_up
 	lock_facing_direction
-	walk_left
+	walk_down
 	unlock_facing_direction
 	face_right
+	step_end
+
+MeteorFalls_1F_1R_Movement_WatchAquaLeave:
+	delay_16
+	delay_16
+	walk_in_place_faster_up
+	delay_16
+	delay_16
+	walk_in_place_faster_right
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
 	step_end
 
 MeteorFalls_1F_1R_EventScript_ProfCozmo::

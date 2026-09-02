@@ -160,8 +160,8 @@
       "x": 19,
       "y": 5,
       "elevation": 3,
-      "item": "ITEM_RARE_CANDY",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE6_RARE_CANDY",
+      "item": "ITEM_ULTRA_BALL",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE6_ULTRA_BALL",
       "quantity": 1,
       "underfoot": false
     }

@@ -341,7 +341,10 @@ enum __attribute__((packed)) Ability
     ABILITY_317 = 317,
     ABILITY_SPICY_SPRAY = 318,
     ABILITIES_COUNT_GEN9,
-    ABILITIES_COUNT = ABILITIES_COUNT_GEN9,
+
+    // Emerald Champions extensions retained from Inclement Emerald.
+    ABILITY_BLITZ_BOXER = ABILITIES_COUNT_GEN9,
+    ABILITIES_COUNT,
 };
 
 #endif  // GUARD_CONSTANTS_ABILITIES_H

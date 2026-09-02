@@ -6715,7 +6715,9 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .levelUpLearnset = sGimmighoulLevelUpLearnset,
         .teachableLearnset = sGimmighoulTeachableLearnset,
         .formSpeciesIdTable = sGimmighoulFormSpeciesIdTable,
-        .evolutions = EVOLUTION({EVO_LEVEL, 0, SPECIES_GHOLDENGO, CONDITIONS({IF_BAG_ITEM_COUNT, ITEM_GIMMIGHOUL_COIN, 999})}),
+        // The campaign has no coin-grind loop; the Leveler supplies the same
+        // deterministic evolution access as every other competitive family.
+        .evolutions = EVOLUTION({EVO_LEVEL, 45, SPECIES_GHOLDENGO}),
     },
 
     [SPECIES_GIMMIGHOUL_ROAMING] =
@@ -6771,7 +6773,9 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .levelUpLearnset = sGimmighoulLevelUpLearnset,
         .teachableLearnset = sGimmighoulTeachableLearnset,
         .formSpeciesIdTable = sGimmighoulFormSpeciesIdTable,
-        .evolutions = EVOLUTION({EVO_LEVEL, 0, SPECIES_GHOLDENGO, CONDITIONS({IF_BAG_ITEM_COUNT, ITEM_GIMMIGHOUL_COIN, 999})}),
+        // The campaign has no coin-grind loop; the Leveler supplies the same
+        // deterministic evolution access as every other competitive family.
+        .evolutions = EVOLUTION({EVO_LEVEL, 45, SPECIES_GHOLDENGO}),
     },
 
     [SPECIES_GHOLDENGO] =

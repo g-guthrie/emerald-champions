@@ -539,17 +539,6 @@ Route111_Text_VialThanks:
 	.string "Poké Centers will now refill your\n"
 	.string "Poké Vial with two full charges.$"
 
-Route111_EventScript_RockSmashTipFatMan::
-	lockall
-	applymovement LOCALID_ROUTE111_ROCK_SMASH_MAN, Common_Movement_FacePlayer
-	waitmovement 0
-	msgbox Route111_Text_MauvilleUncleToldMeToTakeRockSmash, MSGBOX_DEFAULT
-	closemessage
-	applymovement LOCALID_ROUTE111_ROCK_SMASH_MAN, Common_Movement_FaceOriginalDirection
-	waitmovement 0
-	releaseall
-	end
-
 Route111_EventScript_Drew::
 	trainerbattle_double TRAINER_DREW, Route111_Text_DrewIntro, Route111_Text_DrewDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route111_Text_DrewPostBattle, MSGBOX_AUTOCLOSE

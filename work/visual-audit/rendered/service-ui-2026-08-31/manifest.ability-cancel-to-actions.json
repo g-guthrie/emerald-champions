@@ -1,0 +1,46 @@
+{
+  "elf": "/Users/gguthrie/Projects/ec-ui-build.YKIy6o/pokeemerald-headless.elf",
+  "param_symbol": "0x0200195c",
+  "rendered": [
+    {
+      "frames": 720,
+      "keys": [
+        [
+          210,
+          2,
+          "A"
+        ],
+        [
+          250,
+          2,
+          "DOWN"
+        ],
+        [
+          290,
+          2,
+          "A"
+        ],
+        [
+          560,
+          2,
+          "UP"
+        ],
+        [
+          600,
+          2,
+          "A"
+        ]
+      ],
+      "name": "ability-cancel-to-actions",
+      "png_sha256": "925dfca833797295360cabbd26fbe97f912a12cdcca358693a99708cd6f5ead3",
+      "scenario_id": 3,
+      "screenshot": "work/visual-audit/rendered/service-ui-2026-08-31/ability-cancel-to-actions.png",
+      "verified_runtime_state": false,
+      "video_hash": "e040a3facf06ef68"
+    }
+  ],
+  "rom": "/Users/gguthrie/Projects/ec-ui-build.YKIy6o/pokeemerald-headless.gba",
+  "rom_sha256": "5190b12c178d806954cc1cf220432386515fd3999494473e2dd91d0fb1248b82",
+  "scenario_symbol": "0x0200196c",
+  "schema_version": 1
+}

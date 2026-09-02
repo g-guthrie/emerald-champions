@@ -2,19 +2,65 @@ AlteringCave_B1F_MapScripts::
 	.byte 0
 
 AlteringCave_B1F_EventScript_Leaf::
-	trainerbattle_double TRAINER_LEAF_ALTERING_CAVE, AlteringCave_B1F_Text_LeafIntro, AlteringCave_B1F_Text_LeafDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	lockall
+	playse SE_PIN
+	applymovement LOCALID_EC_LEAF, Common_Movement_ExclamationMark
+	waitmovement 0
+	applymovement LOCALID_EC_LEAF, Common_Movement_WalkInPlaceFasterDown
+	waitmovement 0
+	delay 40
+	msgbox AlteringCave_B1F_Text_LeafIntro, MSGBOX_DEFAULT
+	closemessage
+	applymovement LOCALID_EC_LEAF, AlteringCave_B1F_Movement_LeafApproach
+	applymovement LOCALID_PLAYER, AlteringCave_B1F_Movement_PlayerApproach
+	waitmovement 0
+	trainerbattle_no_intro_double TRAINER_LEAF_ALTERING_CAVE, AlteringCave_B1F_Text_LeafDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	checkitem ITEM_CATCHING_CHARM, 1
-	goto_if_eq VAR_RESULT, TRUE, AlteringCave_B1F_EventScript_LeafAfter
+	goto_if_eq VAR_RESULT, TRUE, AlteringCave_B1F_EventScript_LeafComplete
 	giveitem ITEM_CATCHING_CHARM
 	goto_if_eq VAR_RESULT, FALSE, AlteringCave_B1F_EventScript_LeafBagFull
-AlteringCave_B1F_EventScript_LeafAfter::
-	msgbox AlteringCave_B1F_Text_LeafAfter, MSGBOX_AUTOCLOSE
+AlteringCave_B1F_EventScript_LeafComplete::
+	msgbox AlteringCave_B1F_Text_LeafAfter, MSGBOX_DEFAULT
+	closemessage
+	applymovement LOCALID_PLAYER, AlteringCave_B1F_Movement_PlayerGiveWay
+	applymovement LOCALID_EC_LEAF, AlteringCave_B1F_Movement_LeafLeaves
+	waitmovement 0
+	setflag FLAG_EC_DEFEATED_LEAF_ALTERING_CAVE
+	removeobject LOCALID_EC_LEAF
+	setvar VAR_TEMP_0, 1
+	releaseall
 	end
 
 AlteringCave_B1F_EventScript_LeafBagFull::
 	msgbox AlteringCave_B1F_Text_LeafBagFull, MSGBOX_DEFAULT
-	release
+	releaseall
 	end
+
+AlteringCave_B1F_Movement_LeafApproach:
+	walk_down
+	step_end
+
+AlteringCave_B1F_Movement_PlayerApproach:
+	walk_up
+	step_end
+
+AlteringCave_B1F_Movement_PlayerGiveWay:
+	walk_left
+	walk_in_place_fast_right
+	step_end
+
+AlteringCave_B1F_Movement_LeafLeaves:
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	step_end
 
 AlteringCave_B1F_Text_LeafIntro:
 	.string "I followed the distortions here from\n"

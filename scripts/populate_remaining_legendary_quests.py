@@ -38,25 +38,30 @@ def obj(species: str, x: int, y: int, script: str, flag: str, local_id: str) -> 
     }
 
 
+def fixed_obj(graphics_id: str, x: int, y: int, script: str, flag: str, local_id: str) -> dict:
+    row = obj("NONE", x, y, script, flag, local_id)
+    row["graphics_id"] = graphics_id
+    row["movement_type"] = "MOVEMENT_TYPE_NONE"
+    return row
+
+
 QUESTS = {
     "ShoalCave_LowTideIceRoom": [
         ("ARTICUNO", 8, 8, 53, "FROSLASS", "FLAG_EC_CAUGHT_ARTICUNO", "the ice altar"),
     ],
     "NewMauville_Inside": [
         ("ZAPDOS", 33, 15, 69, "MANECTRIC", "FLAG_EC_CAUGHT_ZAPDOS", "the silent generator"),
-        ("MELTAN", 37, 7, 60, "MAGNETON", "FLAG_EC_CAUGHT_MELTAN", "the liquid-metal conduit"),
-    ],
-    "RustboroCity_DevonCorp_2F": [
-        ("MAGEARNA", 8, 7, 58, "DIANCIE", "FLAG_EC_CAUGHT_MAGEARNA", "DEVON's sealed prototype"),
     ],
 }
 
+INCLEMENT_OBJECT_GFX = {
+    "ARTICUNO": "OBJ_EVENT_GFX_INCLEMENT_ARTICUNO",
+    "ZAPDOS": "OBJ_EVENT_GFX_INCLEMENT_ZAPDOS",
+}
+
 CUSTOM_OBJECTS = {
-    "MtPyre_6F": [
-        obj("PECHARUNT", 8, 8, "MtPyre_6F_EventScript_Pecharunt", "FLAG_EC_CAUGHT_PECHARUNT", "LOCALID_EC_PECHARUNT"),
-    ],
     "SealedChamber_InnerRoom": [
-        obj("REGIGIGAS", 10, 12, "SealedChamber_InnerRoom_EventScript_RegigigasEC", "FLAG_EC_CAUGHT_REGIGIGAS", "LOCALID_EC_REGIGIGAS"),
+        fixed_obj("OBJ_EVENT_GFX_REGIGIGAS_STATUE", 10, 12, "SealedChamber_InnerRoom_EventScript_RegigigasEC", "FLAG_EC_CAUGHT_REGIGIGAS", "LOCALID_EC_REGIGIGAS"),
     ],
 }
 
@@ -139,7 +144,9 @@ def custom_scripts() -> dict[str, str]:
 
 MtPyre_6F_EventScript_Pecharunt::
 \tlock
-\tfaceplayer
+\tsetvar VAR_0x8004, EC_SIGN_PECHARUNT_ID
+\tspecial GetSelectedLegendarySignState
+\tgoto_if_eq VAR_RESULT, 2, MtPyre_6F_EventScript_PecharuntQuiet
 \tsetvar VAR_0x8004, 64
 \tspecial GetSelectedLegendarySignState
 \tgoto_if_ne VAR_RESULT, 2, MtPyre_6F_EventScript_PecharuntDormant
@@ -151,7 +158,13 @@ MtPyre_6F_EventScript_Pecharunt::
 \tgoto_if_ne VAR_RESULT, 2, MtPyre_6F_EventScript_PecharuntDormant
 \tsetvar VAR_0x8004, EC_SIGN_PECHARUNT_ID
 \tspecial TryUnlockSelectedLegendarySign
+\tgoto_if_eq VAR_RESULT, 0, MtPyre_6F_EventScript_PecharuntDormant
+\tgoto_if_eq VAR_RESULT, 1, MtPyre_6F_EventScript_PecharuntNeedsPartner
 \tmsgbox MtPyre_6F_Text_PecharuntAwakens, MSGBOX_DEFAULT
+\twaitse
+\tplaymoncry SPECIES_PECHARUNT, CRY_MODE_ENCOUNTER
+\tdelay 40
+\twaitmoncry
 \tsetvar VAR_0x8004, EC_SIGN_PECHARUNT_ID
 \tspecial CreateSelectedLegendarySignEncounter
 \tsetflag FLAG_SYS_CTRL_OBJ_DELETE
@@ -168,9 +181,18 @@ MtPyre_6F_EventScript_PecharuntDormant::
 \trelease
 \tend
 
+MtPyre_6F_EventScript_PecharuntNeedsPartner::
+\tmsgbox MtPyre_6F_Text_PecharuntNeedsPartner, MSGBOX_DEFAULT
+\trelease
+\tend
+
+MtPyre_6F_EventScript_PecharuntQuiet::
+\tmsgbox MtPyre_6F_Text_PecharuntQuiet, MSGBOX_DEFAULT
+\trelease
+\tend
+
 MtPyre_6F_EventScript_PecharuntCaught::
 \tsetflag FLAG_EC_CAUGHT_PECHARUNT
-\tremoveobject LOCALID_EC_PECHARUNT
 \trelease
 \tend
 
@@ -180,12 +202,22 @@ MtPyre_6F_Text_PecharuntDormant:
 \t.string "Catch all three challengers before\\n"
 \t.string "returning to this poisoned shrine.$"
 
+MtPyre_6F_Text_PecharuntNeedsPartner:
+\t.string "All three masks are lit, but the dog\\n"
+\t.string "mark still reaches toward OKIDOGI.\\p"
+\t.string "Bring its family here to finish the\\n"
+\t.string "poisoned shrine's ritual.$"
+
 MtPyre_6F_Text_PecharuntAwakens:
-\t.string "The three masks flare, and the shrine's\\n"
-\t.string "hidden master rolls into view!$"
+\t.string "The three masks flare! A poisoned mist\\n"
+\t.string "spills from the tombstone--PECHARUNT!$"
+
+MtPyre_6F_Text_PecharuntQuiet:
+\t.string "The tombstone is still. Three faded\\n"
+\t.string "masks record the trial you completed.$"
 
 MtPyre_6F_Text_PecharuntRemains:
-\t.string "PECHARUNT settles back onto the shrine.\\n"
+\t.string "The mist retreats into the tombstone.\\n"
 \t.string "The three masks remain lit.$"
 
 """,
@@ -193,17 +225,22 @@ MtPyre_6F_Text_PecharuntRemains:
 
 SealedChamber_InnerRoom_EventScript_RegigigasEC::
 \tlock
-\tfaceplayer
-\tgoto_if_unset FLAG_BADGE07_GET, SealedChamber_InnerRoom_EventScript_RegigigasECDormant
+\tmsgbox SealedChamber_InnerRoom_Text_RegigigasStatue, MSGBOX_DEFAULT
+\tclosemessage
+\tbraillemsgbox SealedChamber_InnerRoom_Braille_Regigigas
 \tsetvar VAR_0x8004, SPECIES_REGICE
 \tspecial DoesPlayerPartyHaveSelectedSpeciesFamily
-\tgoto_if_eq VAR_RESULT, FALSE, SealedChamber_InnerRoom_EventScript_RegigigasECNeedsRegis
+\tgoto_if_eq VAR_RESULT, FALSE, SealedChamber_InnerRoom_EventScript_RegigigasStatue
 \tsetvar VAR_0x8004, SPECIES_REGIROCK
 \tspecial DoesPlayerPartyHaveSelectedSpeciesFamily
-\tgoto_if_eq VAR_RESULT, FALSE, SealedChamber_InnerRoom_EventScript_RegigigasECNeedsRegis
+\tgoto_if_eq VAR_RESULT, FALSE, SealedChamber_InnerRoom_EventScript_RegigigasStatue
 \tsetvar VAR_0x8004, SPECIES_REGISTEEL
 \tspecial DoesPlayerPartyHaveSelectedSpeciesFamily
-\tgoto_if_eq VAR_RESULT, FALSE, SealedChamber_InnerRoom_EventScript_RegigigasECNeedsRegis
+\tgoto_if_eq VAR_RESULT, FALSE, SealedChamber_InnerRoom_EventScript_RegigigasStatue
+\twaitse
+\tplaymoncry SPECIES_REGIGIGAS, CRY_MODE_ENCOUNTER
+\tdelay 40
+\twaitmoncry
 \tsetvar VAR_0x8004, EC_SIGN_REGIGIGAS_ID
 \tspecial TryUnlockSelectedLegendarySign
 \tmsgbox SealedChamber_InnerRoom_Text_RegigigasECAwakens, MSGBOX_DEFAULT
@@ -218,13 +255,7 @@ SealedChamber_InnerRoom_EventScript_RegigigasEC::
 \trelease
 \tend
 
-SealedChamber_InnerRoom_EventScript_RegigigasECDormant::
-\tmsgbox SealedChamber_InnerRoom_Text_RegigigasECDormant, MSGBOX_DEFAULT
-\trelease
-\tend
-
-SealedChamber_InnerRoom_EventScript_RegigigasECNeedsRegis::
-\tmsgbox SealedChamber_InnerRoom_Text_RegigigasECNeedsRegis, MSGBOX_DEFAULT
+SealedChamber_InnerRoom_EventScript_RegigigasStatue::
 \trelease
 \tend
 
@@ -234,13 +265,10 @@ SealedChamber_InnerRoom_EventScript_RegigigasECCaught::
 \trelease
 \tend
 
-SealedChamber_InnerRoom_Text_RegigigasECDormant:
-\t.string "The giant statue is silent. Seven BADGES\\n"
-\t.string "are needed to read its final seal.$"
-
-SealedChamber_InnerRoom_Text_RegigigasECNeedsRegis:
-\t.string "Braille names REGIROCK, REGICE, and\\n"
-\t.string "REGISTEEL. Bring all three in your party.$"
+SealedChamber_InnerRoom_Text_RegigigasStatue:
+\t.string "It's a statue of a Pokémon.\\n"
+\t.string "It exudes tremendous power…\\p"
+\t.string "There's something engraved on it…$"
 
 SealedChamber_InnerRoom_Text_RegigigasECAwakens:
 \t.string "The three REGIS answer together!\\n"
@@ -262,7 +290,7 @@ def strip_generated_block(text: str) -> str:
 def main() -> None:
     layout_rows = {row["id"]: row for row in load(ROOT / "data/layouts/layouts.json")["layouts"]}
     custom = custom_scripts()
-    maps = set(QUESTS) | set(CUSTOM_OBJECTS)
+    maps = set(QUESTS) | set(CUSTOM_OBJECTS) | set(custom)
     object_count = 0
 
     for map_name in sorted(maps):
@@ -277,9 +305,13 @@ def main() -> None:
             if row.get("local_id") not in remove_ids
         ]
         for species, x, y, sign_id, required, flag, place in QUESTS.get(map_name, []):
-            payload["object_events"].append(obj(
-                species, x, y, f"{map_name}_EventScript_{title(species)}", flag, f"LOCALID_EC_{species}"
-            ))
+            event = obj(species, x, y, f"{map_name}_EventScript_{title(species)}", flag, f"LOCALID_EC_{species}")
+            if species in INCLEMENT_OBJECT_GFX:
+                event["graphics_id"] = INCLEMENT_OBJECT_GFX[species]
+                event["movement_type"] = "MOVEMENT_TYPE_NONE"
+            if species == "ARTICUNO":
+                event["elevation"] = 4
+            payload["object_events"].append(event)
         payload["object_events"].extend(CUSTOM_OBJECTS.get(map_name, []))
 
         layout = layout_rows[payload["layout"]]

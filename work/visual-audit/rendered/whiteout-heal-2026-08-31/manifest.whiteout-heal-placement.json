@@ -1,0 +1,32 @@
+{
+  "elf": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/docker-output/pokeemerald-headless.elf",
+  "param_symbol": "0x0200195c",
+  "rendered": [
+    {
+      "frames": 1280,
+      "keys": [
+        [
+          900,
+          2,
+          "A"
+        ],
+        [
+          1160,
+          2,
+          "A"
+        ]
+      ],
+      "name": "whiteout-heal-placement",
+      "param": 2,
+      "png_sha256": "88943c65071877dd9fbb3525003b9b334a55bdebcfcf7c56eefb15837495f978",
+      "scenario_id": 1,
+      "screenshot": "work/visual-audit/rendered/whiteout-heal-2026-08-31/whiteout-heal-placement.png",
+      "verified_runtime_state": false,
+      "video_hash": "06e0068022eeab14"
+    }
+  ],
+  "rom": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/docker-output/pokeemerald-headless.gba",
+  "rom_sha256": "4bcaa86905b121950a6e3ae2c93a023897ce830b557b7a6e469972caac5eede0",
+  "scenario_symbol": "0x0200196c",
+  "schema_version": 1
+}

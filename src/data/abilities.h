@@ -2550,4 +2550,11 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
         .name = _("Spicy Spray"),
         .description = COMPOUND_STRING("Burns the foe when damaged."),
     },
+
+    [ABILITY_BLITZ_BOXER] =
+    {
+        .name = _("Blitz Boxer"),
+        .description = COMPOUND_STRING("Punching moves gain priority."),
+        .aiRating = 9,
+    },
 };

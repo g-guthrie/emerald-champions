@@ -4,6 +4,37 @@ Route114_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route114_OnFrame
 	.byte 0
 
+Route114_EventScript_GoodRodFisherman::
+	lock
+	faceplayer
+	goto_if_set FLAG_RECEIVED_GOOD_ROD, Route114_EventScript_GoodRodAlreadyReceived
+	msgbox Route114_Text_GoodRodOffer, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, Route114_EventScript_GoodRodDeclined
+	giveitem ITEM_GOOD_ROD
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_RECEIVED_GOOD_ROD
+Route114_EventScript_GoodRodAlreadyReceived::
+	msgbox Route114_Text_GoodRodAdvice, MSGBOX_DEFAULT
+	release
+	end
+
+Route114_EventScript_GoodRodDeclined::
+	msgbox Route114_Text_GoodRodDeclined, MSGBOX_DEFAULT
+	release
+	end
+
+Route114_Text_GoodRodOffer:
+	.string "These pools hide stronger partners than\n"
+	.string "an OLD ROD can reach. Take my GOOD ROD?$"
+
+Route114_Text_GoodRodAdvice:
+	.string "A GOOD ROD opens another layer of each\n"
+	.string "route's encounter pool. Try every shore.$"
+
+Route114_Text_GoodRodDeclined:
+	.string "Come back if you decide to explore\n"
+	.string "what waits below the surface.$"
+
 Route114_OnTransition:
 	call_if_eq VAR_SHOULD_END_ABNORMAL_WEATHER, 1, AbnormalWeather_EventScript_HideMapNamePopup
 	call_if_eq VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_ROUTE_114_NORTH, AbnormalWeather_StartGroudonWeather

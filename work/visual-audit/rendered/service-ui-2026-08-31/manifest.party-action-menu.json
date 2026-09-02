@@ -1,0 +1,26 @@
+{
+  "elf": "/Users/gguthrie/Projects/ec-ui-build.YKIy6o/pokeemerald-headless.elf",
+  "param_symbol": "0x0200195c",
+  "rendered": [
+    {
+      "frames": 245,
+      "keys": [
+        [
+          210,
+          2,
+          "A"
+        ]
+      ],
+      "name": "party-action-menu",
+      "png_sha256": "c0549617e0b3a662d27b39cf6296135fb2fb8e60718ed8a21edff83140282a19",
+      "scenario_id": 3,
+      "screenshot": "work/visual-audit/rendered/service-ui-2026-08-31/party-action-menu.png",
+      "verified_runtime_state": false,
+      "video_hash": "6377deb3c5476e26"
+    }
+  ],
+  "rom": "/Users/gguthrie/Projects/ec-ui-build.YKIy6o/pokeemerald-headless.gba",
+  "rom_sha256": "5190b12c178d806954cc1cf220432386515fd3999494473e2dd91d0fb1248b82",
+  "scenario_symbol": "0x0200196c",
+  "schema_version": 1
+}

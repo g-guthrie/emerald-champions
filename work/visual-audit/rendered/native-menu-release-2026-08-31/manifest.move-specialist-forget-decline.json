@@ -1,0 +1,71 @@
+{
+  "elf": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/docker-output/pokeemerald-headless.elf",
+  "param_symbol": "0x0200195c",
+  "rendered": [
+    {
+      "frames": 1300,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          380,
+          2,
+          "DOWN"
+        ],
+        [
+          420,
+          2,
+          "DOWN"
+        ],
+        [
+          460,
+          2,
+          "DOWN"
+        ],
+        [
+          500,
+          2,
+          "A"
+        ],
+        [
+          650,
+          2,
+          "A"
+        ],
+        [
+          800,
+          2,
+          "A"
+        ],
+        [
+          1000,
+          2,
+          "A"
+        ],
+        [
+          1200,
+          2,
+          "B"
+        ]
+      ],
+      "name": "move-specialist-forget-decline",
+      "png_sha256": "19bf306cc0e285d41ca17bccfee3ed6bb378df0a147df5ed0d17e938bc7b99a3",
+      "scenario_id": 6,
+      "screenshot": "work/visual-audit/rendered/native-menu-release-2026-08-31/move-specialist-forget-decline.png",
+      "verified_runtime_state": false,
+      "video_hash": "1a53d4b73bb4beba"
+    }
+  ],
+  "rom": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/docker-output/pokeemerald-headless.gba",
+  "rom_sha256": "17dbb57b2727a91aa2dd6a4351a5fc4c6f67cee65b9082af081b40cc3e2fd5cb",
+  "scenario_symbol": "0x0200196c",
+  "schema_version": 1
+}

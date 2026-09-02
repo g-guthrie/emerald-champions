@@ -266,31 +266,17 @@
       "flag": "0"
     },
     {
-      "local_id": "LOCALID_EC_THUNDURUS",
-      "graphics_id": "OBJ_EVENT_GFX_SPECIES(THUNDURUS)",
-      "x": 6,
-      "y": 13,
+      "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
+      "x": 32,
+      "y": 16,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route110_EventScript_Thundurus",
-      "flag": "FLAG_EC_CAUGHT_THUNDURUS"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 30,
-      "y": 69,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_FAST_BALL",
+      "trainer_sight_or_berry_tree_id": "ITEM_ULTRA_BALL",
       "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ITEM_ROUTE_110_FAST_BALL"
+      "flag": "FLAG_EC_ITEM_ROUTE110_ULTRA_BALL"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -301,9 +287,9 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_RARE_CANDY",
+      "trainer_sight_or_berry_tree_id": "ITEM_ULTRA_BALL",
       "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ITEM_ROUTE_110_RARE_CANDY"
+      "flag": "FLAG_ITEM_ROUTE_110_ULTRA_BALL"
     },
     {
       "local_id": "LOCALID_CHALLENGE_BIKER",
@@ -524,42 +510,42 @@
       "y": 24,
       "elevation": 3,
       "dest_map": "MAP_NEW_MAUVILLE_ENTRANCE",
-      "dest_warp_id": "0"
+      "dest_warp_id": 0
     },
     {
       "x": 11,
       "y": 66,
       "elevation": 0,
       "dest_map": "MAP_ROUTE110_TRICK_HOUSE_ENTRANCE",
-      "dest_warp_id": "0"
+      "dest_warp_id": 0
     },
     {
       "x": 15,
       "y": 16,
       "elevation": 0,
-      "dest_map": "MAP_ROUTE110_SEASIDE_CYCLING_ROAD_NORTH_ENTRANCE",
-      "dest_warp_id": "0"
+      "dest_map": "MAP_ROUTE110_SEASIDE_CYCLING_ROAD_SOUTH_ENTRANCE",
+      "dest_warp_id": 0
     },
     {
       "x": 18,
       "y": 16,
       "elevation": 0,
-      "dest_map": "MAP_ROUTE110_SEASIDE_CYCLING_ROAD_NORTH_ENTRANCE",
-      "dest_warp_id": "2"
+      "dest_map": "MAP_ROUTE110_SEASIDE_CYCLING_ROAD_SOUTH_ENTRANCE",
+      "dest_warp_id": 2
     },
     {
       "x": 16,
       "y": 88,
       "elevation": 0,
-      "dest_map": "MAP_ROUTE110_SEASIDE_CYCLING_ROAD_SOUTH_ENTRANCE",
-      "dest_warp_id": "0"
+      "dest_map": "MAP_ROUTE110_SEASIDE_CYCLING_ROAD_NORTH_ENTRANCE",
+      "dest_warp_id": 0
     },
     {
       "x": 19,
       "y": 88,
       "elevation": 0,
-      "dest_map": "MAP_ROUTE110_SEASIDE_CYCLING_ROAD_SOUTH_ENTRANCE",
-      "dest_warp_id": "2"
+      "dest_map": "MAP_ROUTE110_SEASIDE_CYCLING_ROAD_NORTH_ENTRANCE",
+      "dest_warp_id": 2
     }
   ],
   "coord_events": [

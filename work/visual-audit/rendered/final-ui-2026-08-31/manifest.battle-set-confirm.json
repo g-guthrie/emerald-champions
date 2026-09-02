@@ -1,0 +1,66 @@
+{
+  "elf": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/docker-output/pokeemerald-headless.elf",
+  "param_symbol": "0x0200195c",
+  "rendered": [
+    {
+      "frames": 1450,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          380,
+          2,
+          "A"
+        ],
+        [
+          520,
+          2,
+          "A"
+        ],
+        [
+          650,
+          2,
+          "A"
+        ],
+        [
+          760,
+          2,
+          "A"
+        ],
+        [
+          900,
+          2,
+          "A"
+        ],
+        [
+          1040,
+          2,
+          "A"
+        ],
+        [
+          1260,
+          2,
+          "A"
+        ]
+      ],
+      "name": "battle-set-confirm",
+      "png_sha256": "b9f06cd3e97f47643d832b4f58ac15c9ec95ae71cdbdd2680185fb56c7b7129a",
+      "scenario_id": 6,
+      "screenshot": "work/visual-audit/rendered/final-ui-2026-08-31/battle-set-confirm.png",
+      "verified_runtime_state": false,
+      "video_hash": "e752fa599b404fb8"
+    }
+  ],
+  "rom": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/docker-output/pokeemerald-headless.gba",
+  "rom_sha256": "cefd16ea1208155db9d201c177b56ef9ff9a8f08bf5e3a0aebff3302cbb0c8c3",
+  "scenario_symbol": "0x0200196c",
+  "schema_version": 1
+}

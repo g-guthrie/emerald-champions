@@ -32,13 +32,24 @@ extern const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets
 extern const u8 *const gEmeraldChampionsDefaultBattleSetNames[NUM_SPECIES];
 extern const struct EmeraldChampionsBattleSetRange gEmeraldChampionsBattleSetRanges[NUM_SPECIES];
 extern const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternatives[];
+extern const struct EmeraldChampionsBattleSet gEmeraldChampionsSinglesDefaultBattleSets[NUM_SPECIES];
+extern const u8 *const gEmeraldChampionsSinglesDefaultBattleSetNames[NUM_SPECIES];
+extern const struct EmeraldChampionsBattleSetRange gEmeraldChampionsSinglesBattleSetRanges[NUM_SPECIES];
+extern const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsSinglesBattleSetAlternatives[];
 
 u8 GetEmeraldChampionsBattleSetCount(struct Pokemon *mon);
+u8 GetEmeraldChampionsBattleSetCountForFormat(struct Pokemon *mon, u8 format);
 const u8 *GetEmeraldChampionsBattleSetName(struct Pokemon *mon, u8 choice);
+const u8 *GetEmeraldChampionsBattleSetNameForFormat(struct Pokemon *mon, u8 choice, u8 format);
 enum Item GetEmeraldChampionsBattleSetItem(struct Pokemon *mon, u8 choice);
+enum Item GetEmeraldChampionsBattleSetItemForFormat(struct Pokemon *mon, u8 choice, u8 format);
 enum Item GetEmeraldChampionsBattleSetRequiredItem(struct Pokemon *mon, u8 choice);
+enum Item GetEmeraldChampionsBattleSetRequiredItemForFormat(struct Pokemon *mon, u8 choice, u8 format);
 s16 GetEmeraldChampionsCurrentBattleSetChoice(struct Pokemon *mon);
+s16 GetEmeraldChampionsCurrentBattleSetChoiceForFormat(struct Pokemon *mon, u8 format);
 u8 ApplyEmeraldChampionsBattleSetChoice(struct Pokemon *mon, u8 choice);
+u8 ApplyEmeraldChampionsBattleSetChoiceForFormat(struct Pokemon *mon, u8 choice, u8 format);
+u8 ApplyEmeraldChampionsRecommendedEvolutionSet(struct Pokemon *mon);
 u8 ApplyEmeraldChampionsRandomWildSet(struct Pokemon *mon);
 u8 ApplyEmeraldChampionsRandomNonMegaSet(struct Pokemon *mon);
 u8 GetEmeraldChampionsRawBattleSetCount(enum Species species);

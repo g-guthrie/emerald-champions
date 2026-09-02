@@ -1,5 +1,12 @@
 RustboroCity_Gym_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, RustboroCity_Gym_OnTransition
 	.byte 0
+
+RustboroCity_Gym_OnTransition:
+	goto_if_unset FLAG_BADGE01_GET, RustboroCity_Gym_EventScript_GuideStateReady
+	setvar VAR_RUSTBORO_GYM_GUIDE_STATE, 1
+RustboroCity_Gym_EventScript_GuideStateReady:
+	end
 
 RustboroCity_Gym_EventScript_Roxanne::
 	trainerbattle_double TRAINER_ROXANNE_1, RustboroCity_Gym_Text_RoxanneIntro, RustboroCity_Gym_Text_RoxanneDefeat, EmeraldChampions_Text_NeedTwoPokemon, RustboroCity_Gym_EventScript_RoxanneDefeated, NO_MUSIC
@@ -117,6 +124,162 @@ RustboroCity_Gym_EventScript_RegisterRoxanne::
 	clearflag FLAG_ENABLE_ROXANNE_FIRST_CALL
 	releaseall
 	end
+
+RustboroCity_Gym_EventScript_GuideTrigger1::
+	lockall
+	setvar VAR_TEMP_1, 1
+	playse SE_PIN
+	applymovement LOCALID_RUSTBORO_GYM_GUIDE, Common_Movement_ExclamationMark
+	waitmovement 0
+	applymovement LOCALID_RUSTBORO_GYM_GUIDE, Common_Movement_Delay48
+	waitmovement 0
+	applymovement LOCALID_RUSTBORO_GYM_GUIDE, RustboroCity_Gym_Movement_GuideApproach1
+	waitmovement 0
+	goto RustboroCity_Gym_EventScript_GuideIntroduction
+
+RustboroCity_Gym_EventScript_GuideTrigger2::
+	lockall
+	setvar VAR_TEMP_1, 2
+	playse SE_PIN
+	applymovement LOCALID_RUSTBORO_GYM_GUIDE, Common_Movement_ExclamationMark
+	waitmovement 0
+	applymovement LOCALID_RUSTBORO_GYM_GUIDE, Common_Movement_Delay48
+	waitmovement 0
+	applymovement LOCALID_RUSTBORO_GYM_GUIDE, RustboroCity_Gym_Movement_GuideApproach2
+	waitmovement 0
+	applymovement LOCALID_PLAYER, RustboroCity_Gym_Movement_PlayerFaceLeft
+	waitmovement 0
+	goto RustboroCity_Gym_EventScript_GuideIntroduction
+
+RustboroCity_Gym_EventScript_GuideTrigger3::
+	lockall
+	setvar VAR_TEMP_1, 3
+	playse SE_PIN
+	applymovement LOCALID_RUSTBORO_GYM_GUIDE, Common_Movement_ExclamationMark
+	waitmovement 0
+	applymovement LOCALID_RUSTBORO_GYM_GUIDE, Common_Movement_Delay48
+	waitmovement 0
+	applymovement LOCALID_RUSTBORO_GYM_GUIDE, RustboroCity_Gym_Movement_GuideApproach3
+	waitmovement 0
+	goto RustboroCity_Gym_EventScript_GuideIntroduction
+
+RustboroCity_Gym_EventScript_GuideTrigger4::
+	lockall
+	setvar VAR_TEMP_1, 4
+	playse SE_PIN
+	applymovement LOCALID_RUSTBORO_GYM_GUIDE, Common_Movement_ExclamationMark
+	waitmovement 0
+	applymovement LOCALID_RUSTBORO_GYM_GUIDE, Common_Movement_Delay48
+	waitmovement 0
+	applymovement LOCALID_PLAYER, RustboroCity_Gym_Movement_PlayerFaceLeft
+	applymovement LOCALID_RUSTBORO_GYM_GUIDE, RustboroCity_Gym_Movement_GuideApproach4
+	waitmovement 0
+	applymovement LOCALID_PLAYER, RustboroCity_Gym_Movement_PlayerFaceUp
+	waitmovement 0
+	goto RustboroCity_Gym_EventScript_GuideIntroduction
+
+RustboroCity_Gym_EventScript_GuideIntroduction::
+	msgbox RustboroCity_Gym_Text_GuideIntroduction, MSGBOX_DEFAULT
+	giveitem ITEM_FRESH_WATER, 5
+	goto_if_eq VAR_RESULT, FALSE, RustboroCity_Gym_EventScript_GuideBagFull
+	setvar VAR_RUSTBORO_GYM_GUIDE_STATE, 1
+	goto_if_eq VAR_TEMP_1, 1, RustboroCity_Gym_EventScript_GuideReturn1
+	goto_if_eq VAR_TEMP_1, 2, RustboroCity_Gym_EventScript_GuideReturn2
+	goto_if_eq VAR_TEMP_1, 3, RustboroCity_Gym_EventScript_GuideReturn3
+	goto RustboroCity_Gym_EventScript_GuideReturn4
+
+RustboroCity_Gym_EventScript_GuideBagFull::
+	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
+	releaseall
+	end
+
+RustboroCity_Gym_EventScript_GuideReturn1::
+	applymovement LOCALID_RUSTBORO_GYM_GUIDE, RustboroCity_Gym_Movement_GuideReturn1
+	waitmovement 0
+	releaseall
+	end
+
+RustboroCity_Gym_EventScript_GuideReturn2::
+	applymovement LOCALID_RUSTBORO_GYM_GUIDE, RustboroCity_Gym_Movement_GuideReturn2
+	waitmovement 0
+	releaseall
+	end
+
+RustboroCity_Gym_EventScript_GuideReturn3::
+	applymovement LOCALID_RUSTBORO_GYM_GUIDE, RustboroCity_Gym_Movement_GuideReturn3
+	waitmovement 0
+	releaseall
+	end
+
+RustboroCity_Gym_EventScript_GuideReturn4::
+	applymovement LOCALID_RUSTBORO_GYM_GUIDE, RustboroCity_Gym_Movement_GuideReturn4
+	waitmovement 0
+	releaseall
+	end
+
+RustboroCity_Gym_Movement_GuideApproach1:
+	walk_down
+	face_right
+	step_end
+
+RustboroCity_Gym_Movement_GuideApproach2:
+	walk_right
+	step_end
+
+RustboroCity_Gym_Movement_GuideApproach3:
+	walk_right
+	walk_right
+	step_end
+
+RustboroCity_Gym_Movement_GuideApproach4:
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	face_down
+	step_end
+
+RustboroCity_Gym_Movement_PlayerFaceLeft:
+	face_left
+	step_end
+
+RustboroCity_Gym_Movement_PlayerFaceUp:
+	face_up
+	step_end
+
+RustboroCity_Gym_Movement_GuideReturn1:
+	walk_up
+	face_down
+	step_end
+
+RustboroCity_Gym_Movement_GuideReturn2:
+	walk_left
+	face_down
+	step_end
+
+RustboroCity_Gym_Movement_GuideReturn3:
+	walk_left
+	walk_left
+	face_down
+	step_end
+
+RustboroCity_Gym_Movement_GuideReturn4:
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	face_down
+	step_end
+
+RustboroCity_Gym_Text_GuideIntroduction:
+	.string "Yo! Welcome to your first GYM exam.\p"
+	.string "ROXANNE battles with a full doubles team.\n"
+	.string "Her students teach the pieces: field\l"
+	.string "control, redirection, and reverse speed.\p"
+	.string "Read each pair before attacking, and\n"
+	.string "bring answers instead of one favorite.\p"
+	.string "Take these FRESH WATERS for the road.\n"
+	.string "Come see me after you earn the BADGE!$"
 
 RustboroCity_Gym_Text_GymGuideAdvice:
 	.string "Yo, how's it going?\p"

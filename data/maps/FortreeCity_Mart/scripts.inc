@@ -23,7 +23,6 @@ FortreeCity_Mart_Pokemart:
 	.2byte ITEM_REVIVE
 	.2byte ITEM_SUPER_REPEL
 	.2byte ITEM_WOOD_MAIL
-	.2byte ITEM_RARE_CANDY
 	pokemartlistend
 
 FortreeCity_Mart_EventScript_Woman::
@@ -85,6 +84,6 @@ FortreeCity_Mart_Text_StockUpOnItems:
 	.string "Better to be safe than sorry!$"
 
 FortreeCity_Mart_Text_RareCandyMakesMonGrow:
-	.string "A RARE CANDY makes a POKéMON grow\n"
-	.string "by up to ten levels at once.\p"
-	.string "It stops cleanly at the current limit.$"
+	.string "The LEVELER raises your whole party to\n"
+	.string "the current level limit at once.\p"
+	.string "It makes training completely optional.$"

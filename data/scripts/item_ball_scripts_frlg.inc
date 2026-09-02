@@ -31,7 +31,7 @@ MtMoon_1F_EventScript_ItemPotion::
 	end
 
 MtMoon_1F_EventScript_ItemRareCandy::
-	finditem ITEM_RARE_CANDY
+	finditem ITEM_ULTRA_BALL
 	end
 
 MtMoon_1F_EventScript_ItemEscapeRope::
@@ -119,7 +119,7 @@ RocketHideout_B2F_EventScript_ItemSuperPotion::
 	end
 
 RocketHideout_B3F_EventScript_ItemRareCandy::
-	finditem ITEM_RARE_CANDY
+	finditem ITEM_ULTRA_BALL
 	end
 
 RocketHideout_B3F_EventScript_ItemTM21::
@@ -159,7 +159,7 @@ PokemonTower_5F_EventScript_ItemNugget::
 	end
 
 PokemonTower_6F_EventScript_ItemRareCandy::
-	finditem ITEM_RARE_CANDY
+	finditem ITEM_ULTRA_BALL
 	end
 
 PokemonTower_6F_EventScript_ItemXAccuracy::
@@ -275,7 +275,7 @@ SilphCo_10F_EventScript_ItemUltraBall::
 	end
 
 SilphCo_10F_EventScript_ItemRareCandy::
-	finditem ITEM_RARE_CANDY
+	finditem ITEM_ULTRA_BALL
 	end
 
 PowerPlant_EventScript_ItemMaxPotion::
@@ -335,7 +335,7 @@ PokemonMansion_B1F_EventScript_ItemSecretKey::
 	end
 
 VictoryRoad_1F_EventScript_ItemRareCandy::
-	finditem ITEM_RARE_CANDY
+	finditem ITEM_ULTRA_BALL
 	end
 
 VictoryRoad_1F_EventScript_ItemTM02::
@@ -399,7 +399,7 @@ CeruleanCave_B1F_EventScript_ItemUltraBall::
 	end
 
 FuchsiaCity_WardensHouse_EventScript_ItemRareCandy::
-	finditem ITEM_RARE_CANDY
+	finditem ITEM_ULTRA_BALL
 	end
 
 TwoIsland_EventScript_ItemRevive::
@@ -659,7 +659,7 @@ FiveIsland_LostCave_Room13_EventScript_ItemMaxRevive::
 	end
 
 FiveIsland_LostCave_Room14_EventScript_ItemRareCandy::
-	finditem ITEM_RARE_CANDY
+	finditem ITEM_ULTRA_BALL
 	end
 
 SevenIsland_SevaultCanyon_House_EventScript_ItemLuckyPunch::

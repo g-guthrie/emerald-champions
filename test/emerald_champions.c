@@ -20,6 +20,7 @@
 #include "random.h"
 #include "script_menu.h"
 #include "showdown_champions_circuit.h"
+#include "string_util.h"
 #include "test/battle.h"
 #include "test/test.h"
 #include "text.h"
@@ -329,6 +330,7 @@ TEST("Emerald Champions catch transfers preserve both held-item loadouts")
     gBattleStruct = &sEmeraldChampionsTestBattleStruct;
     ZeroPlayerPartyMons();
     CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_BULBASAUR, 14, 0, OTID_STRUCT_PLAYER_ID);
+    CalculatePlayerPartyCount();
 
     // Catch-and-swap boxes the outgoing mon before the normal end-of-battle
     // restoration pass. Its battle-start item must be restored first.
@@ -513,6 +515,113 @@ TEST("Emerald Champions applies a complete authored battle set")
     EXPECT_EQ(statPointTotal, 66);
 }
 
+TEST("Emerald Champions exposes named Doubles and Singles sets for every direct species")
+{
+    struct Pokemon mon;
+
+    ClearBag();
+    for (enum Species species = SPECIES_BULBASAUR; species < NUM_SPECIES; species++)
+    {
+        if (gEmeraldChampionsDefaultBattleSets[species].moves[0] == MOVE_NONE)
+            continue;
+        CreateMon(&mon, species, 50, 0, OTID_STRUCT_PLAYER_ID);
+        EXPECT_GE(GetEmeraldChampionsBattleSetCountForFormat(&mon, EC_BATTLE_FORMAT_DOUBLES), 2);
+        EXPECT_GE(GetEmeraldChampionsBattleSetCountForFormat(&mon, EC_BATTLE_FORMAT_SINGLES), 1);
+        for (u8 format = 0; format < EC_BATTLE_FORMAT_COUNT; format++)
+        {
+            u8 count = GetEmeraldChampionsBattleSetCountForFormat(&mon, format);
+            for (u8 choice = 0; choice < count; choice++)
+            {
+                const u8 *name = GetEmeraldChampionsBattleSetNameForFormat(&mon, choice, format);
+                EXPECT(StringCompare(name, COMPOUND_STRING("Recommended")) != 0);
+                EXPECT_NE(
+                    ApplyEmeraldChampionsBattleSetChoiceForFormat(&mon, choice, format),
+                    EC_BATTLE_SET_FAILED
+                );
+            }
+        }
+    }
+    ClearBag();
+}
+
+TEST("Emerald Champions evolution applies the evolved Doubles recommendation")
+{
+    struct Pokemon mon;
+    enum Species species = SPECIES_BEAUTIFLY;
+    enum Item protectedItem = ITEM_LINKING_CORD;
+
+    CreateMon(&mon, SPECIES_WURMPLE, 14, 0, OTID_STRUCT_PLAYER_ID);
+    EXPECT_EQ(ApplyEmeraldChampionsBattleSetChoice(&mon, 1), EC_BATTLE_SET_SUCCESS);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_MOVE4), MOVE_TACKLE);
+    SetMonData(&mon, MON_DATA_HELD_ITEM, &protectedItem);
+    SetMonData(&mon, MON_DATA_SPECIES, &species);
+
+    EXPECT_EQ(ApplyEmeraldChampionsRecommendedEvolutionSet(&mon), EC_BATTLE_SET_SUCCESS);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_MOVE1), MOVE_QUIVER_DANCE);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_MOVE2), MOVE_BUG_BUZZ);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_MOVE3), MOVE_AIR_SLASH);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_MOVE4), MOVE_ROOST);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_HELD_ITEM), ITEM_LINKING_CORD);
+    for (u32 stat = 0; stat < NUM_STATS; stat++)
+        EXPECT_EQ(GetMonData(&mon, MON_DATA_HP_IV + stat), MAX_PER_STAT_IVS);
+
+    // Scovillain's raw slot zero is Mega-oriented. Evolution must skip it and
+    // choose the first ordinary campaign role instead.
+    CreateMon(&mon, SPECIES_SCOVILLAIN, 40, 0, OTID_STRUCT_PLAYER_ID);
+    EXPECT_EQ(ApplyEmeraldChampionsRecommendedEvolutionSet(&mon), EC_BATTLE_SET_SUCCESS);
+    EXPECT_NE(GetMonData(&mon, MON_DATA_HELD_ITEM), ITEM_SCOVILLAINITE);
+}
+
+TEST("Emerald Champions Stat Point editor clamps every spread to 32 and 66")
+{
+    static const s32 statPointFields[NUM_STATS] =
+    {
+        MON_DATA_HP_EV, MON_DATA_ATK_EV, MON_DATA_DEF_EV,
+        MON_DATA_SPATK_EV, MON_DATA_SPDEF_EV, MON_DATA_SPEED_EV,
+    };
+    u32 total = 0;
+
+    ZeroPlayerPartyMons();
+    CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_BULBASAUR, 14, 0, OTID_STRUCT_PLAYER_ID);
+    CalculatePlayerPartyCount();
+    EXPECT_EQ(
+        ApplyEmeraldChampionsBattleSetChoice(&gParties[B_TRAINER_PLAYER][0], 0),
+        EC_BATTLE_SET_SUCCESS
+    );
+    gSpecialVar_0x800A = 0;
+    gSpecialVar_0x8005 = STAT_HP;
+    gSpecialVar_0x8006 = 2; // -1
+    AdjustSelectedMonEmeraldChampionsStatPoints();
+    EXPECT_EQ(gSpecialVar_Result, TRUE);
+
+    gSpecialVar_0x8005 = STAT_ATK;
+    gSpecialVar_0x8006 = 7; // Set Maximum, limited by the one free point.
+    AdjustSelectedMonEmeraldChampionsStatPoints();
+    for (u32 stat = 0; stat < NUM_STATS; stat++)
+    {
+        u32 value = GetMonData(
+            &gParties[B_TRAINER_PLAYER][0],
+            statPointFields[stat]
+        );
+        EXPECT_LE(value, 32);
+        total += value;
+    }
+    EXPECT_EQ(total, 66);
+
+    // A capped increase is rejected so the field script can play native
+    // failure feedback instead of silently redrawing an unchanged value.
+    gSpecialVar_0x8005 = STAT_ATK;
+    gSpecialVar_0x8006 = 3; // +1 with no points remaining.
+    AdjustSelectedMonEmeraldChampionsStatPoints();
+    EXPECT_EQ(gSpecialVar_Result, FALSE);
+
+    ResetSelectedMonEmeraldChampionsStatPoints();
+    total = 0;
+    for (u32 stat = 0; stat < NUM_STATS; stat++)
+        total += GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP_EV + stat);
+    EXPECT_EQ(total, 0);
+}
+
 TEST("Emerald Champions protects progression items from preparation services")
 {
     static const enum Item evolutionItems[] =
@@ -605,7 +714,7 @@ TEST("Emerald Champions migrates the exact 81e Sign Circuit and difficulty layou
     FlagSet(FLAG_EC_CAUGHT_ARTICUNO);
     FlagSet(FLAG_RECEIVED_BRAWLY_LUCARIONITE);
     FlagSet(FLAG_EC_ITEM_PRISON_BOTTLE);
-    FlagSet(FLAG_HIDDEN_ITEM_ROUTE_113_RARE_CANDY);
+    FlagSet(FLAG_HIDDEN_ITEM_ROUTE_113_ULTRA_BALL);
     FlagSet(FLAG_ITEM_ROUTE_116_THUNDER_STONE);
 
     MigrateEmeraldChampionsCoreState();
@@ -635,7 +744,7 @@ TEST("Emerald Champions migrates the exact 81e Sign Circuit and difficulty layou
     EXPECT(!FlagGet(FLAG_HIDE_ROUTE111_VIAL_CHANSEY));
     EXPECT(!FlagGet(FLAG_RECEIVED_BRAWLY_LUCARIONITE));
     EXPECT(!FlagGet(FLAG_EC_ITEM_PRISON_BOTTLE));
-    EXPECT(!FlagGet(FLAG_HIDDEN_ITEM_ROUTE_113_RARE_CANDY));
+    EXPECT(!FlagGet(FLAG_HIDDEN_ITEM_ROUTE_113_ULTRA_BALL));
     EXPECT(!FlagGet(FLAG_ITEM_ROUTE_116_THUNDER_STONE));
 
     // The version, not a repurposed flag, makes the migration idempotent.
@@ -660,7 +769,7 @@ TEST("Emerald Champions ambiguous unversioned saves fail safe")
     FlagSet(FLAG_EC_STARTER_ARCHIVE_CHARMANDER);
     FlagSet(FLAG_RECEIVED_GAME_CORNER_POIPOLE);
     FlagSet(FLAG_EC_ITEM_MASTER_BALL);
-    FlagSet(FLAG_HIDDEN_ITEM_ROUTE_113_RARE_CANDY);
+    FlagSet(FLAG_HIDDEN_ITEM_ROUTE_113_ULTRA_BALL);
     FlagSet(FLAG_ITEM_ROUTE_116_THUNDER_STONE);
     for (u32 i = 0; i < ARRAY_COUNT(sEmeraldChampionsTestSignStateVars); i++)
         VarSet(sEmeraldChampionsTestSignStateVars[i], 0xFFFF);
@@ -680,7 +789,7 @@ TEST("Emerald Champions ambiguous unversioned saves fail safe")
     EXPECT(!FlagGet(FLAG_EC_STARTER_ARCHIVE_CHARMANDER));
     EXPECT(!FlagGet(FLAG_RECEIVED_GAME_CORNER_POIPOLE));
     EXPECT(!FlagGet(FLAG_EC_ITEM_MASTER_BALL));
-    EXPECT(!FlagGet(FLAG_HIDDEN_ITEM_ROUTE_113_RARE_CANDY));
+    EXPECT(!FlagGet(FLAG_HIDDEN_ITEM_ROUTE_113_ULTRA_BALL));
     EXPECT(!FlagGet(FLAG_ITEM_ROUTE_116_THUNDER_STONE));
     for (u32 i = 0; i < ARRAY_COUNT(sEmeraldChampionsTestSignStateVars); i++)
         EXPECT_EQ(VarGet(sEmeraldChampionsTestSignStateVars[i]), 0);

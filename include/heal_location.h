@@ -16,5 +16,8 @@ const struct HealLocation *GetHealLocation(u32 index);
 bool32 IsLastHealLocationPlayerHouse();
 void SetWhiteoutRespawnWarpAndHealerNPC(struct WarpData * warp);
 u32 GetHealNpcLocalId(u32 healLocationId);
+#if EC_HEADLESS_FIXTURES
+bool32 IsWhiteoutRespawnHeadlessState(u32 healLocationId);
+#endif
 
 #endif // GUARD_HEAL_LOCATION_H

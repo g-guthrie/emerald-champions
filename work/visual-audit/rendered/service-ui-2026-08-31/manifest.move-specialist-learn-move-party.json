@@ -1,0 +1,46 @@
+{
+  "elf": "/Users/gguthrie/Projects/ec-ui-build.YKIy6o/pokeemerald-headless.elf",
+  "param_symbol": "0x0200195c",
+  "rendered": [
+    {
+      "frames": 900,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          380,
+          2,
+          "DOWN"
+        ],
+        [
+          420,
+          2,
+          "A"
+        ],
+        [
+          560,
+          2,
+          "A"
+        ]
+      ],
+      "name": "move-specialist-learn-move-party",
+      "png_sha256": "14da6eb23acbb6e3463071baea4e2d114b8feca27d642a622e6d6df0734dfaba",
+      "scenario_id": 6,
+      "screenshot": "work/visual-audit/rendered/service-ui-2026-08-31/move-specialist-learn-move-party.png",
+      "verified_runtime_state": false,
+      "video_hash": "cf16b6d8915daeec"
+    }
+  ],
+  "rom": "/Users/gguthrie/Projects/ec-ui-build.YKIy6o/pokeemerald-headless.gba",
+  "rom_sha256": "5190b12c178d806954cc1cf220432386515fd3999494473e2dd91d0fb1248b82",
+  "scenario_symbol": "0x0200196c",
+  "schema_version": 1
+}

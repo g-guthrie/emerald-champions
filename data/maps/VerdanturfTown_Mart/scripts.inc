@@ -1,6 +1,16 @@
 VerdanturfTown_Mart_MapScripts::
 	.byte 0
 
+VerdanturfTown_Mart_EventScript_MoveSpecialist::
+	msgbox VerdanturfTown_Mart_Text_MoveSpecialist, MSGBOX_NPC
+	end
+
+VerdanturfTown_Mart_Text_MoveSpecialist:
+	.string "I used to reward patient POKéMON\n"
+	.string "with the move PAYBACK.\p"
+	.string "The CENTER specialist teaches it now\n"
+	.string "whenever the species can learn it.$"
+
 VerdanturfTown_Mart_EventScript_Clerk::
 	lock
 	faceplayer
@@ -24,7 +34,6 @@ VerdanturfTown_Mart_Pokemart:
 	.2byte ITEM_REPEL
 	.2byte ITEM_LUXURY_BALL
 	.2byte ITEM_FLUFFY_TAIL
-	.2byte ITEM_RARE_CANDY
 	pokemartlistend
 
 VerdanturfTown_Mart_EventScript_Boy::

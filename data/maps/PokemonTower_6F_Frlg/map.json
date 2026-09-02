@@ -70,7 +70,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "PokemonTower_6F_EventScript_ItemRareCandy",
-      "flag": "FLAG_HIDE_POKEMON_TOWER_6F_RARE_CANDY"
+      "flag": "FLAG_HIDE_POKEMON_TOWER_6F_ULTRA_BALL"
     },
     {
       "type": "object",

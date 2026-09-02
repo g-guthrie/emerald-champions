@@ -16,7 +16,6 @@ APPROVED_DUAL_SPEED = {
     "TRAINER_BETHANY",
     "TRAINER_CAMERON_1",
     "TRAINER_CHIP",
-    "TRAINER_EDMOND",
     "TRAINER_LEROY",
 }
 
@@ -31,6 +30,33 @@ LOWERS_SP_ATTACK = {
     "NATURE_IMPISH",
     "NATURE_CAREFUL",
     "NATURE_JOLLY",
+}
+ALTERNATE_DAMAGE_MOVES = {
+    # These moves do not use the user's ordinary Attack or Sp. Atk stat, so
+    # they must not make an otherwise support-only set fail the nature check.
+    "MOVE_BIDE",
+    "MOVE_BODY_PRESS",
+    "MOVE_COUNTER",
+    "MOVE_ENDEAVOR",
+    "MOVE_FINAL_GAMBIT",
+    "MOVE_FOUL_PLAY",
+    "MOVE_METAL_BURST",
+    "MOVE_MIRROR_COAT",
+    "MOVE_NIGHT_SHADE",
+    "MOVE_RUINATION",
+    "MOVE_SEISMIC_TOSS",
+    "MOVE_SUPER_FANG",
+}
+REQUIRED_SMART_AI = {
+    "TRAINER_EDGAR",
+    "TRAINER_CAROLINE",
+}
+SMART_AI_BASELINE = {
+    "Basic Trainer",
+    "Hp Aware",
+    "Smart Mon Choices",
+    "Assume Stab",
+    "Assume Status Moves",
 }
 SUN_SOURCES = {
     "ABILITY_DROUGHT",
@@ -196,6 +222,7 @@ ORB_BENEFIT_ABILITIES = {
 }
 ORB_BENEFIT_MOVES = {"MOVE_FACADE", "MOVE_PSYCHO_SHIFT", "MOVE_SWITCHEROO", "MOVE_TRICK"}
 ABILITY_MOVE_FLAGS = {
+    "ABILITY_BLITZ_BOXER": "punchingMove",
     "ABILITY_IRON_FIST": "punchingMove",
     "ABILITY_LIQUID_VOICE": "soundMove",
     "ABILITY_MEGA_LAUNCHER": "pulseMove",
@@ -274,6 +301,20 @@ def party_blocks() -> dict[str, str]:
     }
 
 
+def fire_species() -> set[str]:
+    result: set[str] = set()
+    for path in sorted((ROOT / "src/data/pokemon/species_info").glob("gen_*_families.h")):
+        text = path.read_text()
+        markers = list(re.finditer(r"\[(SPECIES_[A-Z0-9_]+)\]\s*=\s*\{", text))
+        for index, marker in enumerate(markers):
+            end = markers[index + 1].start() if index + 1 < len(markers) else len(text)
+            body = text[marker.end():end]
+            types = re.search(r"\.types\s*=\s*MON_TYPES\(([^)]*)\)", body)
+            if types is not None and "TYPE_FIRE" in types.group(1):
+                result.add(marker.group(1))
+    return result
+
+
 def mon_blocks(party: str) -> list[str]:
     markers = list(re.finditer(r"(?m)^SPECIES_[A-Z0-9_]+(?: @ ITEM_[A-Z0-9_]+)?$", party))
     return [
@@ -292,8 +333,10 @@ def main() -> None:
     sound_move_set = sound_moves()
     move_types, move_flags, healing_moves, recoil_moves = move_types_and_flags()
     parties = party_blocks()
+    fire_type_species = fire_species()
     failures: list[str] = []
     mon_count = 0
+    all_protect_singles: list[str] = []
 
     dual_speed = {
         trainer for trainer, party in parties.items()
@@ -311,6 +354,10 @@ def main() -> None:
         party_tokens = set(re.findall(r"\b(?:MOVE|ABILITY)_[A-Z0-9_]+\b", party))
         is_single = "Double Battle: No" in party
         ai_flags = field(party, "AI").split(" / ")
+        if trainer in REQUIRED_SMART_AI and not SMART_AI_BASELINE.issubset(ai_flags):
+            failures.append(
+                f"{trainer}: late six-Pokemon Victory Road battle lacks the reviewed smart AI baseline"
+            )
         if (
             "MOVE_BEAT_UP" in party_tokens
             and "ABILITY_JUSTIFIED" in party_tokens
@@ -367,6 +414,8 @@ def main() -> None:
             level = int(field(mon, "Level"))
             physical = [move for move in moves if categories.get(move) == "DAMAGE_CATEGORY_PHYSICAL"]
             special = [move for move in moves if categories.get(move) == "DAMAGE_CATEGORY_SPECIAL"]
+            own_physical = [move for move in physical if move not in ALTERNATE_DAMAGE_MOVES]
+            own_special = [move for move in special if move not in ALTERNATE_DAMAGE_MOVES]
 
             # Attract is matchup-dead against genderless and same-gender foes,
             # so it cannot carry a deterministic campaign puzzle slot.
@@ -392,10 +441,10 @@ def main() -> None:
                     f"{trainer}/{species}: Schooling cannot activate at level {level}"
                 )
 
-            if points.get("Atk") == 32 and physical and not special and nature in LOWERS_ATTACK:
-                failures.append(f"{trainer}/{species}: {nature} lowers its only invested attack category")
-            if points.get("SpA") == 32 and special and not physical and nature in LOWERS_SP_ATTACK:
-                failures.append(f"{trainer}/{species}: {nature} lowers its only invested attack category")
+            if own_physical and not own_special and nature in LOWERS_ATTACK:
+                failures.append(f"{trainer}/{species}: {nature} lowers its only authored attack category")
+            if own_special and not own_physical and nature in LOWERS_SP_ATTACK:
+                failures.append(f"{trainer}/{species}: {nature} lowers its only authored attack category")
 
             item_match = re.search(r"@ (ITEM_[A-Z0-9_]+)", mon.splitlines()[0])
             item = item_match.group(1) if item_match else "ITEM_NONE"
@@ -453,8 +502,14 @@ def main() -> None:
                     failures.append(
                         f"{trainer}/{species}: {item} only self-damages this authored set"
                     )
+            if item == "ITEM_FLAME_ORB" and species in fire_type_species:
+                failures.append(f"{trainer}/{species}: Fire typing prevents Flame Orb from activating")
             if item == "ITEM_ASSAULT_VEST" and any(categories.get(move) == "DAMAGE_CATEGORY_STATUS" for move in moves):
                 failures.append(f"{trainer}/{species}: Assault Vest blocks an authored status move")
+            if ability == "ABILITY_DEFIANT" and item == "ITEM_CLEAR_AMULET":
+                failures.append(f"{trainer}/{species}: Clear Amulet prevents Defiant's authored trigger")
+            if ability == "ABILITY_STALL" and item == "ITEM_IRON_BALL":
+                failures.append(f"{trainer}/{species}: Iron Ball adds no speed effect beyond Stall")
             category_item = {
                 "ITEM_CHOICE_BAND": "DAMAGE_CATEGORY_PHYSICAL",
                 "ITEM_MUSCLE_BAND": "DAMAGE_CATEGORY_PHYSICAL",
@@ -493,12 +548,18 @@ def main() -> None:
                     f"{trainer}/{species}: {sorted(unsupported_charge)} has no Sun or Power Herb"
                 )
 
+        if is_single:
+            mons = mon_blocks(party)
+            if mons and all("MOVE_PROTECT" in mon for mon in mons):
+                all_protect_singles.append(trainer)
+
     require(not failures, f"{len(failures)} trainer runtime-coherence failures:\n" + "\n".join(failures))
     print(
         "PASS: "
         f"{mon_count} trainer Pokemon have coherent attack natures, charge support, "
         "usable Schooling levels, activatable held items, executable fields, and live move-dependent Abilities; "
-        f"{len(dual_speed)} reviewed dual-speed parties remain"
+        f"{len(dual_speed)} reviewed dual-speed parties remain; "
+        f"{len(all_protect_singles)} singles parties still put Protect on every member"
     )
 
 

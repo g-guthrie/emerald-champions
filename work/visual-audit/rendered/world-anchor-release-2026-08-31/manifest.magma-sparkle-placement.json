@@ -1,0 +1,20 @@
+{
+  "elf": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/docker-output/pokeemerald-headless.elf",
+  "param_symbol": "0x02001964",
+  "rendered": [
+    {
+      "frames": 608,
+      "keys": [],
+      "name": "magma-sparkle-placement",
+      "png_sha256": "42c7c18b7466e8cace1ac851b20598abf92d8c691583d22fa3957f7422a96581",
+      "scenario_id": 42,
+      "screenshot": "work/visual-audit/rendered/world-anchor-release-2026-08-31/magma-sparkle-placement.png",
+      "verified_runtime_state": true,
+      "video_hash": "567cc765d755e75e"
+    }
+  ],
+  "rom": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/docker-output/pokeemerald-headless.gba",
+  "rom_sha256": "2e251e0a11f700f504b16c4e0a6708b303cd36f8b969b4db63ff4a369ad57abf",
+  "scenario_symbol": "0x0200196c",
+  "schema_version": 1
+}

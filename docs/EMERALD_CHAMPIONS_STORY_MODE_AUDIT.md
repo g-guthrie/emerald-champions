@@ -105,9 +105,10 @@ failures. That result proves the named mechanics, not campaign playthrough.
   older Root/Claw mid-revival saves.
 - Finite reward scripts are retry-safe. Infinite or duplicate Mega Stone
   rewards were removed, and the 24 overworld Mega Stone pickups are unique.
-- Poké Marts follow campaign progression while every medicine list retains the
-  $1,000 Rare Candy. Free competitive held items remain at the Pokémon Center
-  vendor; berries and transformation/progression items remain excluded.
+- Poké Marts follow campaign progression, and Rare Candy has no acquisition
+  path because the reusable Leveler owns all no-grind leveling. Free
+  competitive held items remain at the Pokémon Center vendor; berries and
+  transformation/progression items remain excluded.
 - X-items were removed from Hoenn shops and world pickups. Those slots now
   hold healing, PP, capture, evolution, or one-time progression rewards.
 - The Game Corner's obsolete TM reward path was replaced by a transactional

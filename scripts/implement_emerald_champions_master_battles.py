@@ -20,6 +20,12 @@ MON_RE = re.compile(
     r"level_offset=(-?\d+) \| ability=(ABILITY_[A-Z0-9_]+) \| "
     r"nature=(NATURE_[A-Z0-9_]+) \| stat_points=([0-9/]+) \| moves=([A-Z0-9_,]+)$"
 )
+SMART_AI_OVERRIDES = {
+    # These are intentionally 6.8 difficulty breathers, but their six-slot
+    # Victory Road weather/role sequences still require coherent move choice.
+    "TRAINER_EDGAR",
+    "TRAINER_CAROLINE",
+}
 
 
 @dataclass
@@ -87,7 +93,9 @@ def read_designs() -> dict[str, Design]:
 
 
 def ai_flags(design: Design) -> str:
-    if design.difficulty >= 9.5:
+    if design.trainer in SMART_AI_OVERRIDES:
+        flags = ["Basic Trainer", "Hp Aware", "Smart Mon Choices", "Assume Stab", "Assume Status Moves"]
+    elif design.difficulty >= 9.5:
         flags = [
             "Smart Trainer", "Prediction", "Know Opponent Party", "Powerful Status",
             "Hp Aware", "Ability Omniscience", "Item Omniscience", "Move Omniscience",
@@ -167,7 +175,9 @@ def implement(through_encounter: int) -> tuple[str, int, list[str]]:
         if design.encounter <= through_encounter
     }
     missing = sorted(expected - seen)
-    return "".join(rendered), applied, missing
+    # Canonical source uses one terminal newline; block rendering may otherwise
+    # accumulate an irrelevant extra blank line at end of file.
+    return "".join(rendered).rstrip() + "\n", applied, missing
 
 
 def main() -> None:

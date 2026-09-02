@@ -84,3 +84,6 @@ work/visual-audit/rendered/move-animations-curated/
 work/visual-audit/rendered/move-animations-smoke/
 work/visual-audit/rendered/overworld-species-smoke/
 work/visual-audit/rendered/grave-site-probe/
+
+# Disposable Docker builder object trees and ELF/GBA copies
+work/docker-output/

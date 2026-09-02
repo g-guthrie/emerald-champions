@@ -93,6 +93,43 @@ STORY_BEATS = {
     "data/maps/EverGrandeCity_ChampionsRoom/scripts.inc": ("Nothing was hidden behind grinding", "FRONTIER waits"),
 }
 
+# Bodies and geometry come from Inclement Emerald v1.13.  Every migrated NPC
+# must now point to an explicit native service or map-specific replacement;
+# the generic fallback is never an acceptable live script.
+INCLEMENT_RESTORED_NPCS = {
+    "DewfordTown": ((8, 18, "DewfordTown_EventScript_GymGuide"),),
+    "DewfordTown_Hall": ((3, 7, "DewfordTown_Hall_EventScript_Trader"),),
+    "FallarborTown_Mart": ((3, 2, "FallarborTown_Mart_EventScript_MoveSpecialist"),),
+    "LilycoveCity": ((41, 15, "LilycoveCity_EventScript_AltarianiteKeeper"),),
+    "MauvilleCity_GameCorner": ((12, 2, "MauvilleCity_GameCorner_EventScript_PrizeCornerPokemon"),),
+    "MauvilleCity_House2": ((7, 4, "MauvilleCity_House2_EventScript_MoveSpecialist"),),
+    "MeteorFalls_1F_1R": ((14, 21, "MeteorFalls_1F_1R_EventScript_RivalTalkAfterBattle"),),
+    "MeteorFalls_1F_2R": ((18, 2, "MeteorFalls_1F_2R_EventScript_MoveSpecialist"),),
+    "Route109": (
+        (13, 19, "Route109_EventScript_SandMound1"),
+        (24, 22, "Route109_EventScript_SandMound2"),
+        (31, 14, "Route109_EventScript_SandMound3"),
+    ),
+    "Route114": ((22, 29, "Route114_EventScript_GoodRodFisherman"),),
+    "Route117_PokemonDayCare": ((9, 6, "Route117_PokemonDayCare_EventScript_TogepiEgg"),),
+    "Route121": (
+        (29, 16, "Route121_EventScript_Nurse"),
+        (29, 17, "Route121_EventScript_Skitty"),
+    ),
+    "RustboroCity": ((17, 21, "RustboroCity_EventScript_RoxanneRestored"),),
+    "RustboroCity_DevonCorp_2F": ((6, 8, "RustboroCity_DevonCorp_2F_EventScript_EeveeResearcher"),),
+    "RustboroCity_Mart": ((5, 2, "RustboroCity_Mart_EventScript_MoveSpecialist"),),
+    "SlateportCity": (
+        (11, 51, "SlateportCity_EventScript_BattleItemScholar"),
+        (11, 43, "SlateportCity_EventScript_IncenseScholar"),
+        (19, 26, "SlateportCity_EventScript_BrawlyRestored"),
+    ),
+    "SlateportCity_PokemonFanClub": ((12, 10, "SlateportCity_PokemonFanClub_EventScript_FurfrouStylist"),),
+    "SootopolisCity_House2": ((6, 3, "SootopolisCity_House2_EventScript_MoveSpecialist"),),
+    "VerdanturfTown_FriendshipRatersHouse": ((7, 4, "VerdanturfTown_FriendshipRatersHouse_EventScript_Trader"),),
+    "VerdanturfTown_Mart": ((8, 2, "VerdanturfTown_Mart_EventScript_MoveSpecialist"),),
+}
+
 
 def require(condition: bool, message: str) -> None:
     if not condition:
@@ -401,6 +438,42 @@ def verify_repurposed_reward_services() -> None:
             "Pacifidlog's evolution-stone timer still has a deleted-TM name")
 
 
+def verify_inclement_restored_npcs() -> None:
+    labels = set()
+    for script_path in (ROOT / "data").rglob("*.inc"):
+        labels.update(re.findall(r"(?m)^([A-Za-z_][A-Za-z0-9_]*)::", script_path.read_text()))
+
+    placeholder_rows = []
+    for map_path in (ROOT / "data/maps").glob("*/map.json"):
+        payload = json.loads(map_path.read_text())
+        for event in payload.get("object_events", []) or []:
+            if event.get("script") == "Common_EventScript_InclementRestoredNPC":
+                placeholder_rows.append((map_path.parent.name, event.get("x"), event.get("y")))
+    require(not placeholder_rows, f"generic Inclement NPC placeholders remain live: {placeholder_rows}")
+
+    for map_name, expected_rows in INCLEMENT_RESTORED_NPCS.items():
+        payload = json.loads((ROOT / f"data/maps/{map_name}/map.json").read_text())
+        objects = payload.get("object_events", []) or []
+        for x, y, script in expected_rows:
+            require(
+                sum(
+                    event.get("x") == x
+                    and event.get("y") == y
+                    and event.get("script") == script
+                    for event in objects
+                ) == 1,
+                f"{map_name}: restored NPC at {x},{y} is not mapped to {script}",
+            )
+            require(script in labels, f"{map_name}: mapped NPC script is undefined: {script}")
+
+    require(
+        "SCROLL_MULTI_FURFROU_TRIMS" in (ROOT / "include/constants/field_specials.h").read_text()
+        and "special ChangeSelectedMonSpecies" in
+            (ROOT / "data/maps/SlateportCity_PokemonFanClub/scripts.inc").read_text(),
+        "the restored Furfrou stylist is not wired to its native trim selector",
+    )
+
+
 def main() -> None:
     combined = "\n".join((ROOT / relative).read_text() for relative in STORY_FILES)
     require("—" not in combined and "–" not in combined, "unsupported dash leaked into story text")
@@ -416,6 +489,13 @@ def main() -> None:
             "full Bag can still lose the Mega Ring")
     require("setflag FLAG_HIDE_GRANITE_CAVE_STEVEN" in steven,
             "Steven does not remain removed after completing his scene")
+
+    magma_finale = (ROOT / "data/maps/MagmaHideout_4F/scripts.inc").read_text()
+    awakening = magma_finale.index("playbgm MUS_ENCOUNTER_MAGMA")
+    for admin in ("TRAINER_COURTNEY_MAGMA_HIDEOUT", "TRAINER_TABITHA_MAGMA_HIDEOUT"):
+        gate = f"goto_if_not_defeated {admin}, MagmaHideout_4F_EventScript_AdminsStillStanding"
+        require(gate in magma_finale and magma_finale.index(gate) < awakening,
+                f"Maxie can awaken Groudon before defeating {admin}")
 
     devon = (ROOT / "data/maps/RustboroCity_DevonCorp_3F/scripts.inc").read_text()
     require("giveitem ITEM_EXP_SHARE" not in devon, "obsolete EXP Share reward remains")
@@ -452,12 +532,14 @@ def main() -> None:
     verify_legendary_sign_completion_guidance()
     verify_stat_point_explanation_replaced_iv_rater()
     verify_repurposed_reward_services()
+    verify_inclement_restored_npcs()
     checked = verify_widths()
     all_static_checked = verify_all_static_widths()
     print("PASS: core Hoenn story preserves Magma/Aqua, Rayquaza, Wallace, and the Frontier")
     print("PASS: Mega and restored-area progression is narratively discoverable")
     print("PASS: Cynthia uses her dedicated overworld sprite and trainer portrait")
     print("PASS: every League room has a one-survivor retirement and retry path")
+    print("PASS: all 25 Inclement NPC bodies have explicit native services or dialogue")
     print(f"PASS: {checked} story dialogue lines fit the native 216px window")
     print(f"PASS: {all_static_checked} literal Hoenn dialogue lines fit the native 216px window")
 

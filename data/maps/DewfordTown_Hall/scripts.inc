@@ -1,6 +1,52 @@
 DewfordTown_Hall_MapScripts::
 	.byte 0
 
+DewfordTown_Hall_EventScript_Trader::
+	lock
+	faceplayer
+	goto_if_set FLAG_EC_DEWFORD_TROPIUS_TRADE, DewfordTown_Hall_EventScript_TradeCompleted
+	ingame_trade INGAME_TRADE_TROPIUS, DewfordTown_Hall_Text_TradeTropius, DewfordTown_Hall_EventScript_DeclineTrade, DewfordTown_Hall_EventScript_NotRequestedMon, DewfordTown_Hall_Text_TradeComplete
+	setflag FLAG_EC_DEWFORD_TROPIUS_TRADE
+	release
+	end
+
+DewfordTown_Hall_EventScript_DeclineTrade::
+	msgbox DewfordTown_Hall_Text_TradeDeclined, MSGBOX_DEFAULT
+	release
+	end
+
+DewfordTown_Hall_EventScript_NotRequestedMon::
+	bufferspeciesname STR_VAR_1, VAR_0x8009
+	msgbox DewfordTown_Hall_Text_NeedRequestedMon, MSGBOX_DEFAULT
+	release
+	end
+
+DewfordTown_Hall_EventScript_TradeCompleted::
+	msgbox DewfordTown_Hall_Text_TropiusDoingWell, MSGBOX_DEFAULT
+	release
+	end
+
+DewfordTown_Hall_Text_TradeTropius:
+	.string "My {STR_VAR_2} longs for a new route.\p"
+	.string "Trade your {STR_VAR_1} for my\n"
+	.string "{STR_VAR_2}?$"
+
+DewfordTown_Hall_Text_TradeComplete:
+	.string "A fair trade! Give {STR_VAR_2} room\n"
+	.string "to spread those broad leaves.$"
+
+DewfordTown_Hall_Text_TradeDeclined:
+	.string "No pressure. Good trades should feel\n"
+	.string "right to both TRAINERS.$"
+
+DewfordTown_Hall_Text_NeedRequestedMon:
+	.string "That isn't a {STR_VAR_1}. I promised\n"
+	.string "my partner an even exchange.$"
+
+DewfordTown_Hall_Text_TropiusDoingWell:
+	.string "How is TROPIUS? DEWFORD's sea breeze\n"
+	.string "never quite suited those leaves.$"
+
 DewfordTown_Hall_EventScript_Girl::
 	lock
 	faceplayer

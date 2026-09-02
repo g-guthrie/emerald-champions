@@ -5,6 +5,11 @@
 #define EC_BATTLE_SET_SUCCESS                1
 #define EC_BATTLE_SET_SPECIAL_ITEM_EQUIPPED  2
 #define EC_BATTLE_SET_MEGA                   3
+#define EC_BATTLE_SET_MEGA_STONE_HELD        4
+
+#define EC_BATTLE_FORMAT_DOUBLES             0
+#define EC_BATTLE_FORMAT_SINGLES             1
+#define EC_BATTLE_FORMAT_COUNT               2
 
 #define EMERALD_CHAMPIONS_MEGA_ONLY          TRUE
 

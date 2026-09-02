@@ -1214,7 +1214,7 @@ void ShowPokemonSummaryScreen(u8 mode, void *mons, u8 monIndex, u8 maxMonIndex, 
     else
         sMonSummaryScreen->isBoxMon = FALSE;
 
-    u32 maxPageIndex = PSS_PAGE_COUNT - (C_HIDE_CONTEST_DATA) ? 2 : 1;
+    u32 maxPageIndex = C_HIDE_CONTEST_DATA ? PSS_PAGE_COUNT - 2 : PSS_PAGE_COUNT - 1;
     switch (mode)
     {
     case SUMMARY_MODE_NORMAL:
@@ -4862,3 +4862,14 @@ static void CB2_PssChangePokemonNickname(void)
 {
     ChangePokemonNicknameWithCallback(CB2_ReturnToSummaryScreenFromNamingScreen);
 }
+
+#if EC_HEADLESS_FIXTURES
+bool32 IsPokemonSummaryHeadlessOnPage(u32 page, bool32 moveDetailsOpen)
+{
+    if (sMonSummaryScreen == NULL || sMonSummaryScreen->currPageIndex != page)
+        return FALSE;
+    if (moveDetailsOpen)
+        return FuncIsActiveTask(Task_HandleInput_MoveSelect);
+    return FuncIsActiveTask(Task_HandleInput);
+}
+#endif

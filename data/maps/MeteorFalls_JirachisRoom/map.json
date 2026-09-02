@@ -15,11 +15,11 @@
   "connections": 0,
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_SPECIES(JIRACHI)",
+      "graphics_id": "OBJ_EVENT_GFX_INCLEMENT_JIRACHI",
       "x": 7,
       "y": 6,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
@@ -27,20 +27,6 @@
       "script": "MeteorFalls_JirachisRoom_EventScript_Jirachi",
       "flag": "FLAG_EC_CAUGHT_JIRACHI",
       "local_id": "LOCALID_EC_JIRACHI"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_SPECIES(COSMOG)",
-      "x": 4,
-      "y": 6,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "MeteorFalls_JirachisRoom_EventScript_Cosmog",
-      "flag": "FLAG_EC_CAUGHT_COSMOG",
-      "local_id": "LOCALID_EC_COSMOG"
     }
   ],
   "warp_events": [

@@ -267,6 +267,23 @@ void LoadPlayerBag(void)
     gLastEncryptionKey = gSaveBlock2Ptr->encryptionKey;
 }
 
+static void ApplyNewEncryptionKeyToLegacyBagItems(u32 newKey)
+{
+    struct Bag *bag = &gSaveBlock1Ptr->bag;
+
+#define REKEY_LEGACY_POCKET(pocket)                                      \
+    for (u32 i = 0; i < ARRAY_COUNT(bag->pocket); i++)                   \
+        ApplyNewEncryptionKeyToHword(&bag->pocket[i].quantity, newKey)
+
+    REKEY_LEGACY_POCKET(items);
+    REKEY_LEGACY_POCKET(keyItems);
+    REKEY_LEGACY_POCKET(pokeBalls);
+    REKEY_LEGACY_POCKET(TMsHMs);
+    REKEY_LEGACY_POCKET(berries);
+
+#undef REKEY_LEGACY_POCKET
+}
+
 void SavePlayerBag(void)
 {
     int i;
@@ -281,8 +298,11 @@ void SavePlayerBag(void)
 
     encryptionKeyBackup = gSaveBlock2Ptr->encryptionKey;
     gSaveBlock2Ptr->encryptionKey = gLastEncryptionKey;
-    ApplyNewEncryptionKeyToBagItems(encryptionKeyBackup);
-    gSaveBlock2Ptr->encryptionKey = encryptionKeyBackup; // updated twice?
+    // LoadPlayerBag backs up only the original five arrays.  Extension and
+    // new-pocket slots already received encryptionKeyBackup when the save
+    // blocks moved, so re-keying every logical pocket here would corrupt them.
+    ApplyNewEncryptionKeyToLegacyBagItems(encryptionKeyBackup);
+    gSaveBlock2Ptr->encryptionKey = encryptionKeyBackup;
 }
 
 void ApplyNewEncryptionKeyToHword(u16 *hWord, u32 newKey)

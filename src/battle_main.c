@@ -4499,6 +4499,10 @@ s32 GetBattleMovePriority(enum BattlerId battler, enum Ability ability, enum Mov
     {
         priority += 3;
     }
+    else if (ability == ABILITY_BLITZ_BOXER && IsPunchingMove(move))
+    {
+        priority++;
+    }
 
     return priority;
 }

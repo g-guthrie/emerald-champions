@@ -1,0 +1,2538 @@
+{
+  "elf": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/docker-output/pokeemerald-headless.elf",
+  "param_symbol": "0x0200195c",
+  "rendered": [
+    {
+      "frames": 1690,
+      "keys": [
+        [
+          200,
+          100,
+          "UP"
+        ],
+        [
+          360,
+          2,
+          "A"
+        ],
+        [
+          1400,
+          2,
+          "A"
+        ],
+        [
+          1480,
+          2,
+          "A"
+        ],
+        [
+          1560,
+          2,
+          "A"
+        ]
+      ],
+      "name": "nurse-heal-facing-machine",
+      "param": 1,
+      "png_sha256": "bbf82956117ca0f1038f8441809b85c49806c0ef8b86451bf1021de57a480f25",
+      "scenario_id": 1,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/nurse-heal-facing-machine.png",
+      "verified_runtime_state": true,
+      "video_hash": "b924981b98da54f6"
+    },
+    {
+      "frames": 1750,
+      "keys": [
+        [
+          200,
+          100,
+          "UP"
+        ],
+        [
+          360,
+          2,
+          "A"
+        ],
+        [
+          1400,
+          2,
+          "A"
+        ],
+        [
+          1480,
+          2,
+          "A"
+        ],
+        [
+          1560,
+          2,
+          "A"
+        ]
+      ],
+      "name": "nurse-heal-tray",
+      "param": 1,
+      "png_sha256": "616db79f85aae99c39270eac74fa513b1b370af1f63f40cc6eea93891da8394f",
+      "scenario_id": 1,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/nurse-heal-tray.png",
+      "verified_runtime_state": true,
+      "video_hash": "5b2b88846cfe9cfd"
+    },
+    {
+      "frames": 1900,
+      "keys": [
+        [
+          200,
+          100,
+          "UP"
+        ],
+        [
+          360,
+          2,
+          "A"
+        ],
+        [
+          1400,
+          2,
+          "A"
+        ],
+        [
+          1480,
+          2,
+          "A"
+        ],
+        [
+          1560,
+          2,
+          "A"
+        ]
+      ],
+      "name": "nurse-heal-return",
+      "param": 1,
+      "png_sha256": "3c65a36cc9460d716b08ac6e349a8a7bf7ea37d4b19ba72ad494d6449f081203",
+      "scenario_id": 1,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/nurse-heal-return.png",
+      "verified_runtime_state": true,
+      "video_hash": "18dc743fa18f0eaf"
+    },
+    {
+      "frames": 300,
+      "keys": [],
+      "name": "party-overview",
+      "png_sha256": "8b6ac22bd35366639bebf49c7a34221173d677caf8b64f65a78aa1afaee39f4d",
+      "scenario_id": 3,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/party-overview.png",
+      "verified_runtime_state": false,
+      "video_hash": "43bdfc7876af9ae5"
+    },
+    {
+      "frames": 245,
+      "keys": [
+        [
+          210,
+          2,
+          "A"
+        ]
+      ],
+      "name": "party-action-menu",
+      "png_sha256": "538cc9d7a2a7be1228284cd6d401561cb2b8c81c2507aa55c01f55a3302c712a",
+      "scenario_id": 3,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/party-action-menu.png",
+      "verified_runtime_state": false,
+      "video_hash": "0166b44c0e1f5516"
+    },
+    {
+      "frames": 520,
+      "keys": [
+        [
+          210,
+          2,
+          "A"
+        ],
+        [
+          250,
+          2,
+          "DOWN"
+        ],
+        [
+          290,
+          2,
+          "A"
+        ]
+      ],
+      "name": "ability-menu",
+      "png_sha256": "133147c018edc0e709bfb012d475d88455c7a2982323675b3b4ea89b082ae311",
+      "scenario_id": 3,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/ability-menu.png",
+      "verified_runtime_state": false,
+      "video_hash": "4b31b5e8c12484b1"
+    },
+    {
+      "frames": 680,
+      "keys": [
+        [
+          210,
+          2,
+          "A"
+        ],
+        [
+          250,
+          2,
+          "DOWN"
+        ],
+        [
+          290,
+          2,
+          "A"
+        ],
+        [
+          560,
+          2,
+          "B"
+        ]
+      ],
+      "name": "ability-back-to-actions",
+      "png_sha256": "386072fd97d2033f63373c1a4eaa3e40f0048772833f5b00fc972d0dcd87c53c",
+      "scenario_id": 3,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/ability-back-to-actions.png",
+      "verified_runtime_state": false,
+      "video_hash": "8f0c4c4391763272"
+    },
+    {
+      "frames": 720,
+      "keys": [
+        [
+          210,
+          2,
+          "A"
+        ],
+        [
+          250,
+          2,
+          "DOWN"
+        ],
+        [
+          290,
+          2,
+          "A"
+        ],
+        [
+          560,
+          2,
+          "UP"
+        ],
+        [
+          600,
+          2,
+          "A"
+        ]
+      ],
+      "name": "ability-cancel-to-actions",
+      "png_sha256": "386072fd97d2033f63373c1a4eaa3e40f0048772833f5b00fc972d0dcd87c53c",
+      "scenario_id": 3,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/ability-cancel-to-actions.png",
+      "verified_runtime_state": false,
+      "video_hash": "8f0c4c4391763272"
+    },
+    {
+      "frames": 680,
+      "keys": [
+        [
+          210,
+          2,
+          "A"
+        ],
+        [
+          250,
+          2,
+          "DOWN"
+        ],
+        [
+          290,
+          2,
+          "A"
+        ],
+        [
+          560,
+          2,
+          "DOWN"
+        ],
+        [
+          600,
+          2,
+          "A"
+        ]
+      ],
+      "name": "ability-applied-message",
+      "png_sha256": "1cc181878a2b5647ffed0a49e03674f3fbd3360bff87dadf676955dd8011ec6f",
+      "scenario_id": 3,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/ability-applied-message.png",
+      "verified_runtime_state": false,
+      "video_hash": "823ecd86405b19dc"
+    },
+    {
+      "frames": 820,
+      "keys": [
+        [
+          210,
+          2,
+          "A"
+        ],
+        [
+          250,
+          2,
+          "DOWN"
+        ],
+        [
+          290,
+          2,
+          "A"
+        ],
+        [
+          560,
+          2,
+          "DOWN"
+        ],
+        [
+          600,
+          2,
+          "A"
+        ],
+        [
+          720,
+          2,
+          "A"
+        ]
+      ],
+      "name": "ability-applied-return",
+      "png_sha256": "538cc9d7a2a7be1228284cd6d401561cb2b8c81c2507aa55c01f55a3302c712a",
+      "scenario_id": 3,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/ability-applied-return.png",
+      "verified_runtime_state": false,
+      "video_hash": "0166b44c0e1f5516"
+    },
+    {
+      "frames": 350,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ]
+      ],
+      "name": "move-specialist-root",
+      "png_sha256": "d6477aac39eb46579259ed4dffba181dc31c343e78b91986c6fca041fe527b75",
+      "scenario_id": 6,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/move-specialist-root.png",
+      "verified_runtime_state": false,
+      "video_hash": "8694e4c89cc9da97"
+    },
+    {
+      "frames": 520,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          380,
+          2,
+          "B"
+        ]
+      ],
+      "name": "move-specialist-root-back",
+      "png_sha256": "8bad63bc5bed637cd308c0a0361e6b7288ca052cab74e358e03a79a6a48b537e",
+      "scenario_id": 6,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/move-specialist-root-back.png",
+      "verified_runtime_state": false,
+      "video_hash": "87ad7febd6e78661"
+    },
+    {
+      "frames": 700,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          380,
+          2,
+          "A"
+        ]
+      ],
+      "name": "move-specialist-party-prompt",
+      "png_sha256": "c28720d646e9235b89a73cdace8c336e90ae7bdbc0177998ce0734c658718149",
+      "scenario_id": 6,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/move-specialist-party-prompt.png",
+      "verified_runtime_state": false,
+      "video_hash": "e1df32d43232ce95"
+    },
+    {
+      "frames": 700,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          380,
+          2,
+          "A"
+        ],
+        [
+          520,
+          2,
+          "A"
+        ]
+      ],
+      "name": "move-specialist-battle-set-party",
+      "png_sha256": "322879f9802be8658a2ddaca5acd3d9d07f63b14fd0f16dcb75b0b761afda904",
+      "scenario_id": 6,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/move-specialist-battle-set-party.png",
+      "verified_runtime_state": false,
+      "video_hash": "fa8c64c1a28dcc09"
+    },
+    {
+      "frames": 880,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          380,
+          2,
+          "A"
+        ],
+        [
+          520,
+          2,
+          "A"
+        ],
+        [
+          740,
+          2,
+          "B"
+        ]
+      ],
+      "name": "move-specialist-party-back",
+      "png_sha256": "d6477aac39eb46579259ed4dffba181dc31c343e78b91986c6fca041fe527b75",
+      "scenario_id": 6,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/move-specialist-party-back.png",
+      "verified_runtime_state": false,
+      "video_hash": "8694e4c89cc9da97"
+    },
+    {
+      "frames": 900,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          380,
+          2,
+          "A"
+        ],
+        [
+          520,
+          2,
+          "A"
+        ],
+        [
+          650,
+          2,
+          "A"
+        ],
+        [
+          760,
+          2,
+          "A"
+        ]
+      ],
+      "name": "battle-set-format",
+      "png_sha256": "56b5e93821846d07f0176ccb07ae57b83ba3728938e225923dd19cdba648dfbb",
+      "scenario_id": 6,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/battle-set-format.png",
+      "verified_runtime_state": false,
+      "video_hash": "e3bdff4e6540439d"
+    },
+    {
+      "frames": 1180,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          380,
+          2,
+          "A"
+        ],
+        [
+          520,
+          2,
+          "A"
+        ],
+        [
+          650,
+          2,
+          "A"
+        ],
+        [
+          760,
+          2,
+          "A"
+        ],
+        [
+          900,
+          2,
+          "A"
+        ],
+        [
+          1040,
+          2,
+          "A"
+        ]
+      ],
+      "name": "battle-set-list",
+      "png_sha256": "ec3287bd805e5ae6beccdf2164cfef7dd8de2bd51ee9b5ee3b997b38d809ef91",
+      "scenario_id": 6,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/battle-set-list.png",
+      "verified_runtime_state": false,
+      "video_hash": "f3e01ce2017c35cd"
+    },
+    {
+      "frames": 1220,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          380,
+          2,
+          "A"
+        ],
+        [
+          520,
+          2,
+          "A"
+        ],
+        [
+          650,
+          2,
+          "A"
+        ],
+        [
+          760,
+          2,
+          "A"
+        ],
+        [
+          860,
+          2,
+          "DOWN"
+        ],
+        [
+          900,
+          2,
+          "A"
+        ],
+        [
+          1060,
+          2,
+          "A"
+        ]
+      ],
+      "name": "battle-set-singles-list",
+      "png_sha256": "33d91169a0043fbf6b9bee2cc73654f0769e790cf36ee9bd68916faff31b28aa",
+      "scenario_id": 6,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/battle-set-singles-list.png",
+      "verified_runtime_state": false,
+      "video_hash": "965bc7d6b981b810"
+    },
+    {
+      "frames": 1400,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          380,
+          2,
+          "A"
+        ],
+        [
+          520,
+          2,
+          "A"
+        ],
+        [
+          650,
+          2,
+          "A"
+        ],
+        [
+          760,
+          2,
+          "A"
+        ],
+        [
+          900,
+          2,
+          "A"
+        ],
+        [
+          1040,
+          2,
+          "A"
+        ],
+        [
+          1240,
+          2,
+          "B"
+        ],
+        [
+          1320,
+          2,
+          "A"
+        ]
+      ],
+      "name": "battle-set-list-back",
+      "png_sha256": "de6876c6482913ee44a10ca4e5bda80eff6c7b9f4728686f2bd7f7fd64219b50",
+      "scenario_id": 6,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/battle-set-list-back.png",
+      "verified_runtime_state": false,
+      "video_hash": "d6cdf280a93c8f8d"
+    },
+    {
+      "frames": 1450,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          380,
+          2,
+          "A"
+        ],
+        [
+          520,
+          2,
+          "A"
+        ],
+        [
+          650,
+          2,
+          "A"
+        ],
+        [
+          760,
+          2,
+          "A"
+        ],
+        [
+          900,
+          2,
+          "A"
+        ],
+        [
+          1040,
+          2,
+          "A"
+        ],
+        [
+          1260,
+          2,
+          "A"
+        ]
+      ],
+      "name": "battle-set-confirm",
+      "png_sha256": "b9f06cd3e97f47643d832b4f58ac15c9ec95ae71cdbdd2680185fb56c7b7129a",
+      "scenario_id": 6,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/battle-set-confirm.png",
+      "verified_runtime_state": false,
+      "video_hash": "e752fa599b404fb8"
+    },
+    {
+      "frames": 1700,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          380,
+          2,
+          "A"
+        ],
+        [
+          520,
+          2,
+          "A"
+        ],
+        [
+          650,
+          2,
+          "A"
+        ],
+        [
+          760,
+          2,
+          "A"
+        ],
+        [
+          900,
+          2,
+          "A"
+        ],
+        [
+          1040,
+          2,
+          "A"
+        ],
+        [
+          1260,
+          2,
+          "A"
+        ],
+        [
+          1480,
+          2,
+          "B"
+        ],
+        [
+          1600,
+          2,
+          "A"
+        ]
+      ],
+      "name": "battle-set-confirm-no",
+      "png_sha256": "56b5e93821846d07f0176ccb07ae57b83ba3728938e225923dd19cdba648dfbb",
+      "scenario_id": 6,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/battle-set-confirm-no.png",
+      "verified_runtime_state": false,
+      "video_hash": "e3bdff4e6540439d"
+    },
+    {
+      "frames": 1700,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          380,
+          2,
+          "A"
+        ],
+        [
+          520,
+          2,
+          "A"
+        ],
+        [
+          650,
+          2,
+          "A"
+        ],
+        [
+          760,
+          2,
+          "A"
+        ],
+        [
+          900,
+          2,
+          "A"
+        ],
+        [
+          1040,
+          2,
+          "A"
+        ],
+        [
+          1260,
+          2,
+          "A"
+        ],
+        [
+          1480,
+          2,
+          "A"
+        ]
+      ],
+      "name": "battle-set-applied",
+      "png_sha256": "de6876c6482913ee44a10ca4e5bda80eff6c7b9f4728686f2bd7f7fd64219b50",
+      "scenario_id": 6,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/battle-set-applied.png",
+      "verified_runtime_state": false,
+      "video_hash": "d6cdf280a93c8f8d"
+    },
+    {
+      "frames": 760,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          360,
+          2,
+          "DOWN"
+        ],
+        [
+          400,
+          2,
+          "A"
+        ],
+        [
+          560,
+          2,
+          "A"
+        ]
+      ],
+      "name": "stat-point-party",
+      "png_sha256": "322879f9802be8658a2ddaca5acd3d9d07f63b14fd0f16dcb75b0b761afda904",
+      "scenario_id": 6,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/stat-point-party.png",
+      "verified_runtime_state": false,
+      "video_hash": "fa8c64c1a28dcc09"
+    },
+    {
+      "frames": 980,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          360,
+          2,
+          "DOWN"
+        ],
+        [
+          400,
+          2,
+          "A"
+        ],
+        [
+          560,
+          2,
+          "A"
+        ],
+        [
+          760,
+          2,
+          "A"
+        ]
+      ],
+      "name": "stat-point-summary",
+      "png_sha256": "631195024f3b63f873f72afb92ffedf7156cbaa3206749eddaa608620763cfcf",
+      "scenario_id": 6,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/stat-point-summary.png",
+      "verified_runtime_state": false,
+      "video_hash": "987ff83e3bd81b2d"
+    },
+    {
+      "frames": 1160,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          360,
+          2,
+          "DOWN"
+        ],
+        [
+          400,
+          2,
+          "A"
+        ],
+        [
+          560,
+          2,
+          "A"
+        ],
+        [
+          760,
+          2,
+          "A"
+        ],
+        [
+          980,
+          2,
+          "A"
+        ]
+      ],
+      "name": "stat-point-list",
+      "png_sha256": "8eb9e9756301747b1e1f97274bc15558adc65e4d2dc472785d9ce221e3209b56",
+      "scenario_id": 6,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/stat-point-list.png",
+      "verified_runtime_state": false,
+      "video_hash": "aafb1d459e7f69dd"
+    },
+    {
+      "frames": 1450,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          360,
+          2,
+          "DOWN"
+        ],
+        [
+          400,
+          2,
+          "A"
+        ],
+        [
+          560,
+          2,
+          "A"
+        ],
+        [
+          760,
+          2,
+          "A"
+        ],
+        [
+          980,
+          2,
+          "A"
+        ],
+        [
+          1180,
+          2,
+          "A"
+        ],
+        [
+          1320,
+          2,
+          "A"
+        ]
+      ],
+      "name": "stat-point-adjust-list",
+      "png_sha256": "5d1ed5a1bf90868e1a41b097a2b1d18750cc11b5f6e890df0f6755614579f76d",
+      "scenario_id": 6,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/stat-point-adjust-list.png",
+      "verified_runtime_state": false,
+      "video_hash": "c4490371ab12d76a"
+    },
+    {
+      "frames": 1660,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          360,
+          2,
+          "DOWN"
+        ],
+        [
+          400,
+          2,
+          "A"
+        ],
+        [
+          560,
+          2,
+          "A"
+        ],
+        [
+          760,
+          2,
+          "A"
+        ],
+        [
+          980,
+          2,
+          "A"
+        ],
+        [
+          1180,
+          2,
+          "A"
+        ],
+        [
+          1320,
+          2,
+          "A"
+        ],
+        [
+          1500,
+          2,
+          "B"
+        ]
+      ],
+      "name": "stat-point-adjust-back",
+      "png_sha256": "631195024f3b63f873f72afb92ffedf7156cbaa3206749eddaa608620763cfcf",
+      "scenario_id": 6,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/stat-point-adjust-back.png",
+      "verified_runtime_state": false,
+      "video_hash": "987ff83e3bd81b2d"
+    },
+    {
+      "frames": 1360,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          360,
+          2,
+          "DOWN"
+        ],
+        [
+          400,
+          2,
+          "A"
+        ],
+        [
+          560,
+          2,
+          "A"
+        ],
+        [
+          760,
+          2,
+          "A"
+        ],
+        [
+          980,
+          2,
+          "A"
+        ],
+        [
+          1180,
+          2,
+          "B"
+        ]
+      ],
+      "name": "stat-point-list-back",
+      "png_sha256": "61721006a557384f012122a0f4266da31baa9c449b0abb92bcebb113a88e9977",
+      "scenario_id": 6,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/stat-point-list-back.png",
+      "verified_runtime_state": false,
+      "video_hash": "191c49d9f40d28d1"
+    },
+    {
+      "frames": 1580,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          360,
+          2,
+          "DOWN"
+        ],
+        [
+          400,
+          2,
+          "A"
+        ],
+        [
+          560,
+          2,
+          "A"
+        ],
+        [
+          760,
+          2,
+          "A"
+        ],
+        [
+          980,
+          2,
+          "A"
+        ],
+        [
+          1080,
+          2,
+          "DOWN"
+        ],
+        [
+          1120,
+          2,
+          "DOWN"
+        ],
+        [
+          1160,
+          2,
+          "DOWN"
+        ],
+        [
+          1200,
+          2,
+          "DOWN"
+        ],
+        [
+          1240,
+          2,
+          "DOWN"
+        ],
+        [
+          1280,
+          2,
+          "DOWN"
+        ],
+        [
+          1360,
+          2,
+          "A"
+        ]
+      ],
+      "name": "stat-point-reset-confirm",
+      "png_sha256": "abcb936a60a8655e41517ac3d616290b46b553d52b4193ec4b3b28e22d3d8b37",
+      "scenario_id": 6,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/stat-point-reset-confirm.png",
+      "verified_runtime_state": false,
+      "video_hash": "de351105cc5e7c5a"
+    },
+    {
+      "frames": 1780,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          360,
+          2,
+          "DOWN"
+        ],
+        [
+          400,
+          2,
+          "A"
+        ],
+        [
+          560,
+          2,
+          "A"
+        ],
+        [
+          760,
+          2,
+          "A"
+        ],
+        [
+          980,
+          2,
+          "A"
+        ],
+        [
+          1080,
+          2,
+          "DOWN"
+        ],
+        [
+          1120,
+          2,
+          "DOWN"
+        ],
+        [
+          1160,
+          2,
+          "DOWN"
+        ],
+        [
+          1200,
+          2,
+          "DOWN"
+        ],
+        [
+          1240,
+          2,
+          "DOWN"
+        ],
+        [
+          1280,
+          2,
+          "DOWN"
+        ],
+        [
+          1360,
+          2,
+          "A"
+        ],
+        [
+          1600,
+          2,
+          "B"
+        ]
+      ],
+      "name": "stat-point-reset-no",
+      "png_sha256": "631195024f3b63f873f72afb92ffedf7156cbaa3206749eddaa608620763cfcf",
+      "scenario_id": 6,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/stat-point-reset-no.png",
+      "verified_runtime_state": false,
+      "video_hash": "987ff83e3bd81b2d"
+    },
+    {
+      "frames": 1780,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          360,
+          2,
+          "DOWN"
+        ],
+        [
+          400,
+          2,
+          "A"
+        ],
+        [
+          560,
+          2,
+          "A"
+        ],
+        [
+          760,
+          2,
+          "A"
+        ],
+        [
+          980,
+          2,
+          "A"
+        ],
+        [
+          1080,
+          2,
+          "DOWN"
+        ],
+        [
+          1120,
+          2,
+          "DOWN"
+        ],
+        [
+          1160,
+          2,
+          "DOWN"
+        ],
+        [
+          1200,
+          2,
+          "DOWN"
+        ],
+        [
+          1240,
+          2,
+          "DOWN"
+        ],
+        [
+          1280,
+          2,
+          "DOWN"
+        ],
+        [
+          1360,
+          2,
+          "A"
+        ],
+        [
+          1600,
+          2,
+          "A"
+        ]
+      ],
+      "name": "stat-point-reset-yes",
+      "png_sha256": "d82842e92f15f434a739632c5389df75fee4e38bf33e50bbc30cf0fb1a276be6",
+      "scenario_id": 6,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/stat-point-reset-yes.png",
+      "verified_runtime_state": false,
+      "video_hash": "bff6952eb84c5662"
+    },
+    {
+      "frames": 900,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          380,
+          2,
+          "DOWN"
+        ],
+        [
+          420,
+          2,
+          "DOWN"
+        ],
+        [
+          460,
+          2,
+          "A"
+        ],
+        [
+          600,
+          2,
+          "A"
+        ]
+      ],
+      "name": "move-specialist-learn-move-party",
+      "png_sha256": "14422f1e6cef6d194bae91c2c2bd04f8f4bcecae2d630f2674bce3f666fe17e9",
+      "scenario_id": 6,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/move-specialist-learn-move-party.png",
+      "verified_runtime_state": false,
+      "video_hash": "2f19769c11032cc9"
+    },
+    {
+      "frames": 1080,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          380,
+          2,
+          "DOWN"
+        ],
+        [
+          420,
+          2,
+          "DOWN"
+        ],
+        [
+          460,
+          2,
+          "A"
+        ],
+        [
+          600,
+          2,
+          "A"
+        ],
+        [
+          940,
+          2,
+          "B"
+        ]
+      ],
+      "name": "move-specialist-learn-move-back",
+      "png_sha256": "d6477aac39eb46579259ed4dffba181dc31c343e78b91986c6fca041fe527b75",
+      "scenario_id": 6,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/move-specialist-learn-move-back.png",
+      "verified_runtime_state": false,
+      "video_hash": "8694e4c89cc9da97"
+    },
+    {
+      "frames": 940,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          380,
+          2,
+          "DOWN"
+        ],
+        [
+          420,
+          2,
+          "DOWN"
+        ],
+        [
+          460,
+          2,
+          "DOWN"
+        ],
+        [
+          500,
+          2,
+          "A"
+        ],
+        [
+          640,
+          2,
+          "A"
+        ],
+        [
+          780,
+          2,
+          "A"
+        ]
+      ],
+      "name": "move-specialist-forget-intro",
+      "png_sha256": "4af421dda914e4e8feae255e3c47b44a6092fe66bb088a13c254d28fbc852de3",
+      "scenario_id": 6,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/move-specialist-forget-intro.png",
+      "verified_runtime_state": false,
+      "video_hash": "712605ffc7ef0db0"
+    },
+    {
+      "frames": 1200,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          380,
+          2,
+          "DOWN"
+        ],
+        [
+          420,
+          2,
+          "DOWN"
+        ],
+        [
+          460,
+          2,
+          "DOWN"
+        ],
+        [
+          500,
+          2,
+          "A"
+        ],
+        [
+          640,
+          2,
+          "A"
+        ],
+        [
+          780,
+          2,
+          "A"
+        ],
+        [
+          1000,
+          2,
+          "B"
+        ],
+        [
+          1100,
+          2,
+          "A"
+        ]
+      ],
+      "name": "move-specialist-forget-decline",
+      "png_sha256": "05cbd11fad2ec41552f2af5b795fa32d59254183b9d87451ae5cbad7ceb96b0a",
+      "scenario_id": 6,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/move-specialist-forget-decline.png",
+      "verified_runtime_state": false,
+      "video_hash": "cea38f1e9ca7c8a2"
+    },
+    {
+      "frames": 1380,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          380,
+          2,
+          "DOWN"
+        ],
+        [
+          420,
+          2,
+          "DOWN"
+        ],
+        [
+          460,
+          2,
+          "DOWN"
+        ],
+        [
+          500,
+          2,
+          "A"
+        ],
+        [
+          640,
+          2,
+          "A"
+        ],
+        [
+          780,
+          2,
+          "A"
+        ],
+        [
+          1000,
+          2,
+          "A"
+        ],
+        [
+          1160,
+          2,
+          "A"
+        ]
+      ],
+      "name": "move-specialist-forget-party",
+      "png_sha256": "05cbd11fad2ec41552f2af5b795fa32d59254183b9d87451ae5cbad7ceb96b0a",
+      "scenario_id": 6,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/move-specialist-forget-party.png",
+      "verified_runtime_state": false,
+      "video_hash": "cea38f1e9ca7c8a2"
+    },
+    {
+      "frames": 1560,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          380,
+          2,
+          "DOWN"
+        ],
+        [
+          420,
+          2,
+          "DOWN"
+        ],
+        [
+          460,
+          2,
+          "DOWN"
+        ],
+        [
+          500,
+          2,
+          "A"
+        ],
+        [
+          640,
+          2,
+          "A"
+        ],
+        [
+          780,
+          2,
+          "A"
+        ],
+        [
+          1000,
+          2,
+          "A"
+        ],
+        [
+          1160,
+          2,
+          "A"
+        ],
+        [
+          1400,
+          2,
+          "B"
+        ]
+      ],
+      "name": "move-specialist-forget-party-back",
+      "png_sha256": "0e44f933a81ce42c772c1c1ef92612de821686c22458b1c84469ef87cc0e6588",
+      "scenario_id": 6,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/move-specialist-forget-party-back.png",
+      "verified_runtime_state": false,
+      "video_hash": "cbbddd1de0df2538"
+    },
+    {
+      "frames": 980,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          380,
+          2,
+          "DOWN"
+        ],
+        [
+          420,
+          2,
+          "DOWN"
+        ],
+        [
+          460,
+          2,
+          "DOWN"
+        ],
+        [
+          500,
+          2,
+          "A"
+        ],
+        [
+          640,
+          2,
+          "A"
+        ],
+        [
+          740,
+          2,
+          "DOWN"
+        ],
+        [
+          780,
+          2,
+          "A"
+        ]
+      ],
+      "name": "move-specialist-rename-prompt",
+      "png_sha256": "7ab875008866711fcab366446212527fe64493bcac6cb2249d4f0d7f48b07c9a",
+      "scenario_id": 6,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/move-specialist-rename-prompt.png",
+      "verified_runtime_state": false,
+      "video_hash": "4548acc94f6c8f0c"
+    },
+    {
+      "frames": 1180,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          380,
+          2,
+          "DOWN"
+        ],
+        [
+          420,
+          2,
+          "DOWN"
+        ],
+        [
+          460,
+          2,
+          "DOWN"
+        ],
+        [
+          500,
+          2,
+          "A"
+        ],
+        [
+          640,
+          2,
+          "A"
+        ],
+        [
+          740,
+          2,
+          "DOWN"
+        ],
+        [
+          780,
+          2,
+          "A"
+        ],
+        [
+          980,
+          2,
+          "A"
+        ]
+      ],
+      "name": "move-specialist-rename-party",
+      "png_sha256": "654e9acca0e66998753e01349bdaa33196ddb9b0d0bd71e8534edc0b92dd93b7",
+      "scenario_id": 6,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/move-specialist-rename-party.png",
+      "verified_runtime_state": false,
+      "video_hash": "9cf91c211afa0de6"
+    },
+    {
+      "frames": 1360,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          380,
+          2,
+          "DOWN"
+        ],
+        [
+          420,
+          2,
+          "DOWN"
+        ],
+        [
+          460,
+          2,
+          "DOWN"
+        ],
+        [
+          500,
+          2,
+          "A"
+        ],
+        [
+          640,
+          2,
+          "A"
+        ],
+        [
+          740,
+          2,
+          "DOWN"
+        ],
+        [
+          780,
+          2,
+          "A"
+        ],
+        [
+          980,
+          2,
+          "A"
+        ],
+        [
+          1200,
+          2,
+          "B"
+        ]
+      ],
+      "name": "move-specialist-rename-back",
+      "png_sha256": "19bf306cc0e285d41ca17bccfee3ed6bb378df0a147df5ed0d17e938bc7b99a3",
+      "scenario_id": 6,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/move-specialist-rename-back.png",
+      "verified_runtime_state": false,
+      "video_hash": "1a53d4b73bb4beba"
+    },
+    {
+      "frames": 650,
+      "keys": [],
+      "name": "all-legal-moves-direct",
+      "png_sha256": "0bc99cfa8759460e657459dc9616fb284d7298191d0c5a2d34bac384058724bf",
+      "scenario_id": 13,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/all-legal-moves-direct.png",
+      "verified_runtime_state": false,
+      "video_hash": "d066d68f222c2cac"
+    },
+    {
+      "frames": 1050,
+      "keys": [
+        [
+          700,
+          2,
+          "A"
+        ]
+      ],
+      "name": "all-legal-move-selected",
+      "png_sha256": "238ec2463705e214cf69f4f54d762df3f41aff49c49a37b4e727e288420cace1",
+      "scenario_id": 13,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/all-legal-move-selected.png",
+      "verified_runtime_state": false,
+      "video_hash": "26a74ec3ba4f8e63"
+    },
+    {
+      "frames": 1250,
+      "keys": [
+        [
+          700,
+          2,
+          "A"
+        ],
+        [
+          1080,
+          2,
+          "B"
+        ]
+      ],
+      "name": "all-legal-move-selected-back",
+      "png_sha256": "0bc99cfa8759460e657459dc9616fb284d7298191d0c5a2d34bac384058724bf",
+      "scenario_id": 13,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/all-legal-move-selected-back.png",
+      "verified_runtime_state": false,
+      "video_hash": "d066d68f222c2cac"
+    },
+    {
+      "frames": 1500,
+      "keys": [
+        [
+          700,
+          2,
+          "A"
+        ],
+        [
+          1080,
+          2,
+          "A"
+        ]
+      ],
+      "name": "all-legal-move-confirmed",
+      "png_sha256": "f1d2c413931ffa27012027cf5b99d5ae86007524fc1fcf1b54bae927f24efaca",
+      "scenario_id": 13,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/all-legal-move-confirmed.png",
+      "verified_runtime_state": false,
+      "video_hash": "46453349d1e00a0b"
+    },
+    {
+      "frames": 1000,
+      "keys": [
+        [
+          700,
+          2,
+          "B"
+        ]
+      ],
+      "name": "all-legal-move-give-up",
+      "png_sha256": "f754c38187458cce82f40abaee18dbc9c4f18f6929d87fed3ffac0fb49bcca43",
+      "scenario_id": 13,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/all-legal-move-give-up.png",
+      "verified_runtime_state": false,
+      "video_hash": "b4914f63437392d4"
+    },
+    {
+      "frames": 1220,
+      "keys": [
+        [
+          700,
+          2,
+          "B"
+        ],
+        [
+          1040,
+          2,
+          "B"
+        ]
+      ],
+      "name": "all-legal-move-give-up-no",
+      "png_sha256": "9fa28caa99b48079f75fad7f519262473c6d50c8368c32a795764442ba62f0a4",
+      "scenario_id": 13,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/all-legal-move-give-up-no.png",
+      "verified_runtime_state": false,
+      "video_hash": "98602e399858c943"
+    },
+    {
+      "frames": 1500,
+      "keys": [
+        [
+          400,
+          1000,
+          "DOWN"
+        ]
+      ],
+      "name": "all-legal-moves-mew-middle",
+      "png_sha256": "5a2f8251a1e752034976e2c3deec352dc60899c7be646d3cb86521bfa647a644",
+      "scenario_id": 14,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/all-legal-moves-mew-middle.png",
+      "verified_runtime_state": false,
+      "video_hash": "0d0b7f982529a987"
+    },
+    {
+      "frames": 3500,
+      "keys": [
+        [
+          400,
+          3000,
+          "DOWN"
+        ]
+      ],
+      "name": "all-legal-moves-mew-final",
+      "png_sha256": "13d476ada27d650564d664b172958a0182bb92e48dab87cf4e02ecf7743b3b6f",
+      "scenario_id": 14,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/all-legal-moves-mew-final.png",
+      "verified_runtime_state": false,
+      "video_hash": "95fdea84cf58d427"
+    },
+    {
+      "frames": 760,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          360,
+          2,
+          "A"
+        ],
+        [
+          460,
+          2,
+          "A"
+        ]
+      ],
+      "name": "battle-vendor",
+      "png_sha256": "a8b6aa5939b51664881b7e3bf146240d8cb5b9d827b2efc3cc1bfc27848b727a",
+      "scenario_id": 5,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/battle-vendor.png",
+      "verified_runtime_state": false,
+      "video_hash": "de0fa9b477ea73e7"
+    },
+    {
+      "frames": 900,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          360,
+          2,
+          "A"
+        ],
+        [
+          460,
+          2,
+          "A"
+        ],
+        [
+          800,
+          2,
+          "B"
+        ]
+      ],
+      "name": "battle-vendor-category-back",
+      "png_sha256": "678375053be1eebce77ac06c7cc55f0e3332f513df2633fa46533cf9a391f3a6",
+      "scenario_id": 5,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/battle-vendor-category-back.png",
+      "verified_runtime_state": false,
+      "video_hash": "f5fdbbce817ed9b8"
+    },
+    {
+      "frames": 620,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          360,
+          2,
+          "A"
+        ]
+      ],
+      "name": "battle-vendor-postbadge-root",
+      "param": 1,
+      "png_sha256": "2c27e7a31bb7f267e6393108655953e688026b5291eb07500d74fa685cd18bd6",
+      "scenario_id": 5,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/battle-vendor-postbadge-root.png",
+      "verified_runtime_state": false,
+      "video_hash": "47cdfa25993edbd0"
+    },
+    {
+      "frames": 900,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          360,
+          2,
+          "A"
+        ],
+        [
+          600,
+          2,
+          "A"
+        ]
+      ],
+      "name": "battle-vendor-postbadge-held-items",
+      "param": 1,
+      "png_sha256": "d724c4d95932138c0183315a5defd7c6ca3c84d925eb1b51921c863f3903c2e6",
+      "scenario_id": 5,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/battle-vendor-postbadge-held-items.png",
+      "verified_runtime_state": false,
+      "video_hash": "b4d48dd0c3ff9fdb"
+    },
+    {
+      "frames": 1040,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          360,
+          2,
+          "A"
+        ],
+        [
+          460,
+          2,
+          "A"
+        ],
+        [
+          800,
+          2,
+          "A"
+        ]
+      ],
+      "name": "battle-vendor-shop",
+      "png_sha256": "a33999f2fd95da3d8a605c5e2742f2dd0d83c04a9766fe8a2be1e458e8c443e7",
+      "scenario_id": 5,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/battle-vendor-shop.png",
+      "verified_runtime_state": false,
+      "video_hash": "944c76cc11f61db1"
+    },
+    {
+      "frames": 1240,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          360,
+          2,
+          "A"
+        ],
+        [
+          460,
+          2,
+          "A"
+        ],
+        [
+          800,
+          2,
+          "A"
+        ],
+        [
+          1080,
+          2,
+          "A"
+        ]
+      ],
+      "name": "battle-vendor-quantity",
+      "png_sha256": "74f69be28ba5a9ff44bd744f6150dfa2b20e9bb896563de30079b53ed5ed7132",
+      "scenario_id": 5,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/battle-vendor-quantity.png",
+      "verified_runtime_state": false,
+      "video_hash": "4d7834bcef3b1ec8"
+    },
+    {
+      "frames": 1300,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          360,
+          2,
+          "A"
+        ],
+        [
+          460,
+          2,
+          "A"
+        ],
+        [
+          800,
+          2,
+          "A"
+        ],
+        [
+          1080,
+          2,
+          "A"
+        ],
+        [
+          1200,
+          2,
+          "UP"
+        ]
+      ],
+      "name": "battle-vendor-quantity-adjusted",
+      "png_sha256": "2518928e63d516e93263db00b957128cff3caabe26222a60220540fdd32141cd",
+      "scenario_id": 5,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/battle-vendor-quantity-adjusted.png",
+      "verified_runtime_state": false,
+      "video_hash": "b11fa035c89e3468"
+    },
+    {
+      "frames": 1480,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          360,
+          2,
+          "A"
+        ],
+        [
+          460,
+          2,
+          "A"
+        ],
+        [
+          800,
+          2,
+          "A"
+        ],
+        [
+          1080,
+          2,
+          "A"
+        ],
+        [
+          1320,
+          2,
+          "B"
+        ]
+      ],
+      "name": "battle-vendor-quantity-back",
+      "png_sha256": "8857f25acc2bd29ae1c61158e5a3d7e1731dc6eb89538340e4aeecabdc146bf4",
+      "scenario_id": 5,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/battle-vendor-quantity-back.png",
+      "verified_runtime_state": false,
+      "video_hash": "616f163977663cd1"
+    },
+    {
+      "frames": 1580,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          360,
+          2,
+          "A"
+        ],
+        [
+          460,
+          2,
+          "A"
+        ],
+        [
+          800,
+          2,
+          "A"
+        ],
+        [
+          1080,
+          2,
+          "A"
+        ],
+        [
+          1320,
+          2,
+          "A"
+        ]
+      ],
+      "name": "battle-vendor-confirm",
+      "png_sha256": "d931e7d0bc4c314da28ec8abdb17fe1a2ac75128a297bf838a5b37aecff663e5",
+      "scenario_id": 5,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/battle-vendor-confirm.png",
+      "verified_runtime_state": false,
+      "video_hash": "a78192ebf0330463"
+    },
+    {
+      "frames": 1760,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          360,
+          2,
+          "A"
+        ],
+        [
+          460,
+          2,
+          "A"
+        ],
+        [
+          800,
+          2,
+          "A"
+        ],
+        [
+          1080,
+          2,
+          "A"
+        ],
+        [
+          1320,
+          2,
+          "A"
+        ],
+        [
+          1540,
+          2,
+          "B"
+        ]
+      ],
+      "name": "battle-vendor-confirm-no",
+      "png_sha256": "8857f25acc2bd29ae1c61158e5a3d7e1731dc6eb89538340e4aeecabdc146bf4",
+      "scenario_id": 5,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/battle-vendor-confirm-no.png",
+      "verified_runtime_state": false,
+      "video_hash": "616f163977663cd1"
+    },
+    {
+      "frames": 3400,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          360,
+          2,
+          "A"
+        ],
+        [
+          460,
+          2,
+          "A"
+        ],
+        [
+          800,
+          2,
+          "A"
+        ],
+        [
+          1080,
+          2,
+          "A"
+        ],
+        [
+          1320,
+          2,
+          "A"
+        ],
+        [
+          1540,
+          2,
+          "A"
+        ]
+      ],
+      "name": "battle-vendor-purchase-success",
+      "png_sha256": "41116455b439be630b718aaaa2003882b3b1bffb5f72dc3134196e13a08f5757",
+      "scenario_id": 5,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/battle-vendor-purchase-success.png",
+      "verified_runtime_state": false,
+      "video_hash": "3385bc33f199cdb4"
+    },
+    {
+      "frames": 1940,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          360,
+          2,
+          "A"
+        ],
+        [
+          460,
+          2,
+          "A"
+        ],
+        [
+          800,
+          2,
+          "A"
+        ],
+        [
+          1080,
+          2,
+          "A"
+        ],
+        [
+          1320,
+          2,
+          "A"
+        ],
+        [
+          1540,
+          2,
+          "A"
+        ],
+        [
+          1820,
+          2,
+          "A"
+        ]
+      ],
+      "name": "battle-vendor-purchase-return",
+      "png_sha256": "8857f25acc2bd29ae1c61158e5a3d7e1731dc6eb89538340e4aeecabdc146bf4",
+      "scenario_id": 5,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-2026-08-31/battle-vendor-purchase-return.png",
+      "verified_runtime_state": false,
+      "video_hash": "616f163977663cd1"
+    }
+  ],
+  "rom": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/docker-output/pokeemerald-headless.gba",
+  "rom_sha256": "cefd16ea1208155db9d201c177b56ef9ff9a8f08bf5e3a0aebff3302cbb0c8c3",
+  "scenario_symbol": "0x0200196c",
+  "schema_version": 1
+}

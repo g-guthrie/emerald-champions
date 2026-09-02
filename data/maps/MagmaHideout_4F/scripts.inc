@@ -3,13 +3,16 @@ MagmaHideout_4F_MapScripts::
 
 MagmaHideout_4F_EventScript_Maxie::
 	lockall
+	goto_if_not_defeated TRAINER_COURTNEY_MAGMA_HIDEOUT, MagmaHideout_4F_EventScript_AdminsStillStanding
+	goto_if_not_defeated TRAINER_TABITHA_MAGMA_HIDEOUT, MagmaHideout_4F_EventScript_AdminsStillStanding
 	playbgm MUS_ENCOUNTER_MAGMA, FALSE
 	msgbox MagmaHideout_4F_Text_MaxieAwakenGroudon, MSGBOX_DEFAULT
 	closemessage
 	delay 20
 	setvar VAR_RESULT, 1
 	playse SE_M_DETECT
-	dofieldeffectsparkle 18, 42, 0
+	getobjectcurrentxy LOCALID_MAGMA_HIDEOUT_4F_MAXIE, CURRENT_POSITION, VAR_0x8004, VAR_0x8005
+	dofieldeffectsparkle VAR_0x8004, VAR_0x8005, 0
 	waitfieldeffect FLDEFF_SPARKLE
 	setvar VAR_RESULT, 1
 	playfanfare MUS_AWAKEN_LEGEND
@@ -25,6 +28,8 @@ MagmaHideout_4F_EventScript_Maxie::
 	applymovement LOCALID_MAGMA_HIDEOUT_4F_GROUDON, MagmaHideout_4F_Movement_GroudonApproach
 	waitmovement 0
 	special FadeOutOrbEffect
+	playmoncry SPECIES_GROUDON, CRY_MODE_ENCOUNTER
+	waitmoncry
 	setvar VAR_0x8004, 1  @ vertical pan
 	setvar VAR_0x8005, 1  @ horizontal pan
 	setvar VAR_0x8006, 8  @ num shakes
@@ -69,6 +74,11 @@ MagmaHideout_4F_EventScript_Maxie::
 	removeobject LOCALID_MAGMA_HIDEOUT_4F_TABITHA
 	setflag FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS
 	fadescreen FADE_FROM_BLACK
+	releaseall
+	end
+
+MagmaHideout_4F_EventScript_AdminsStillStanding::
+	msgbox MagmaHideout_4F_Text_AdminsStillStanding, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -140,6 +150,10 @@ MagmaHideout_4F_Text_CourtneyDefeat:
 MagmaHideout_4F_Text_CourtneyAfter:
 	.string "MAXIE values certainty. You keep proving\n"
 	.string "that adaptation is also measurable.$"
+
+MagmaHideout_4F_Text_AdminsStillStanding:
+	.string "COURTNEY and TABITHA still hold this\n"
+	.string "chamber. Face both before MAXIE.$"
 
 MagmaHideout_4F_Text_Grunt11Intro:
 	.string "I want to see GROUDON, too, but they\n"

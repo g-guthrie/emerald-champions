@@ -2110,6 +2110,9 @@ const u16 gItemIconPalette_PokeshiDoll[] = INCGFX_U16("graphics/items/icon_palet
 const u32 gItemIcon_PokeVial[] = INCGFX_U32("graphics/items/icons/poke_vial.png", ".4bpp.smol");
 const u16 gItemIconPalette_PokeVial[] = INCGFX_U16("graphics/items/icon_palettes/poke_vial.pal", ".gbapal");
 
+const u32 gItemIcon_MagmaStone[] = INCGFX_U32("graphics/items/icons/magma_stone.png", ".4bpp.smol");
+const u16 gItemIconPalette_MagmaStone[] = INCGFX_U16("graphics/items/icon_palettes/magma_stone.pal", ".gbapal");
+
 const u32 gItemIcon_SwapSnack[] = INCGFX_U32("graphics/items/icons/swap_snack.png", ".4bpp.smol");
 const u16 gItemIconPalette_SwapSnack[] = INCGFX_U16("graphics/items/icon_palettes/swap_snack.pal", ".gbapal");
 

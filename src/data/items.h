@@ -16132,6 +16132,22 @@ const struct ItemInfo gItemsInfo[] =
         .iconPic = gItemIcon_RareCandy,
         .iconPalette = gItemIconPalette_RareCandy,
     },
+
+    [ITEM_MAGMA_STONE] =
+    {
+        .name = ITEM_NAME("Magma Stone"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "A stone made from\n"
+            "hardened magma.\n"
+            "It emits heat."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .iconPic = gItemIcon_MagmaStone,
+        .iconPalette = gItemIconPalette_MagmaStone,
+    },
 };
 
 #undef ITEM_NAME

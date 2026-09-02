@@ -92,8 +92,10 @@ struct ItemInfo
 struct ALIGNED(2) BagPocket
 {
     struct ItemSlot *itemSlots;
+    struct ItemSlot *overflowSlots;
     u16 capacity:10;
     enum Pocket id:6;
+    u16 primaryCapacity;
 };
 
 struct TmHmIndexKey
@@ -237,6 +239,7 @@ static inline struct ItemSlot GetBagItemIdAndQuantity(enum Pocket pocketId, u32 
 
 void ApplyNewEncryptionKeyToBagItems(u32 newKey);
 void SetBagItemsPointers(void);
+void MigrateBagPocketsIfNeeded(void);
 u8 *CopyItemName(enum Item itemId, u8 *dst);
 u8 *CopyItemNameHandlePlural(enum Item itemId, u8 *dst, u32 quantity);
 bool32 IsBagPocketNonEmpty(enum Pocket pocketId);

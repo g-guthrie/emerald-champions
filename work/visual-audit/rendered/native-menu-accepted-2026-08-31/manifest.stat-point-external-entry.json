@@ -1,0 +1,32 @@
+{
+  "elf": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/docker-output/pokeemerald-headless.elf",
+  "param_symbol": "0x0200195c",
+  "rendered": [
+    {
+      "frames": 520,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ]
+      ],
+      "name": "stat-point-external-entry",
+      "param": 2,
+      "png_sha256": "1a1a19b7bfeddb3fe1c19a8c77ad2a4e3f26625bb04ea23472a9833b0b2f2672",
+      "scenario_id": 6,
+      "screenshot": "work/visual-audit/rendered/native-menu-accepted-2026-08-31/stat-point-external-entry.png",
+      "verified_runtime_state": false,
+      "video_hash": "f3c39bb180bdd454"
+    }
+  ],
+  "rom": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/docker-output/pokeemerald-headless.gba",
+  "rom_sha256": "a3cbce8b7932cdae0d2334d5cbf5fc6fb1a1eee35ee44fce908bff56fb49e5af",
+  "scenario_symbol": "0x0200196c",
+  "schema_version": 1
+}

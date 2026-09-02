@@ -1,0 +1,76 @@
+{
+  "elf": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/docker-output/pokeemerald-headless.elf",
+  "param_symbol": "0x0200195c",
+  "rendered": [
+    {
+      "frames": 1540,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          380,
+          2,
+          "DOWN"
+        ],
+        [
+          420,
+          2,
+          "DOWN"
+        ],
+        [
+          460,
+          2,
+          "DOWN"
+        ],
+        [
+          500,
+          2,
+          "A"
+        ],
+        [
+          650,
+          2,
+          "A"
+        ],
+        [
+          800,
+          2,
+          "A"
+        ],
+        [
+          1000,
+          2,
+          "A"
+        ],
+        [
+          1200,
+          2,
+          "A"
+        ],
+        [
+          1400,
+          2,
+          "A"
+        ]
+      ],
+      "name": "move-specialist-forget-party",
+      "png_sha256": "322879f9802be8658a2ddaca5acd3d9d07f63b14fd0f16dcb75b0b761afda904",
+      "scenario_id": 6,
+      "screenshot": "work/visual-audit/rendered/native-menu-release-2026-08-31/move-specialist-forget-party.png",
+      "verified_runtime_state": false,
+      "video_hash": "fa8c64c1a28dcc09"
+    }
+  ],
+  "rom": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/docker-output/pokeemerald-headless.gba",
+  "rom_sha256": "17dbb57b2727a91aa2dd6a4351a5fc4c6f67cee65b9082af081b40cc3e2fd5cb",
+  "scenario_symbol": "0x0200196c",
+  "schema_version": 1
+}

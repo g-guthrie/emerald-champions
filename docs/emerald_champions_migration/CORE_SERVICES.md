@@ -14,8 +14,8 @@ acquisition.
   capacity to two, and Route 133 raises it to three.
 - The Leveler raises the party to the current strict cap. Level-up move prompts
   are disabled, while normal evolution handling remains active.
-- Rare Candy costs 1,000 in all twenty-one Hoenn medicine lists and raises up to
-  ten levels without crossing the cap.
+- Rare Candy has no campaign acquisition. The reusable Leveler is the sole
+  no-grind leveling service and stops cleanly at the current cap.
 - All sixteen Hoenn Pokemon Centers have the shared move tutor and held-item
   vendor. The tutor exposes level, pre-evolution, egg, TM, and tutor moves.
 - The free held-item vendor is split into six native categories containing 111

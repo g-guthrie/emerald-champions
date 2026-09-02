@@ -3,6 +3,36 @@ SlateportCity_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, SlateportCity_OnFrame
 	.byte 0
 
+SlateportCity_EventScript_BattleItemScholar::
+	msgbox SlateportCity_Text_BattleItemScholar, MSGBOX_NPC
+	end
+
+SlateportCity_Text_BattleItemScholar:
+	.string "I once sold POWER items here.\p"
+	.string "The left-side vendor in every CENTER\n"
+	.string "now supplies battle items for free.$"
+
+SlateportCity_EventScript_IncenseScholar::
+	msgbox SlateportCity_Text_IncenseScholar, MSGBOX_NPC
+	end
+
+SlateportCity_Text_IncenseScholar:
+	.string "Incense still matters for breeding,\n"
+	.string "but not as a scarce battle tool.\p"
+	.string "Check CENTER vendors and local shops.$"
+
+SlateportCity_EventScript_BrawlyRestored::
+	lock
+	faceplayer
+	msgbox SlateportCity_Text_BrawlyRestored, MSGBOX_DEFAULT
+	release
+	end
+
+SlateportCity_Text_BrawlyRestored:
+	.string "The harbor's tempo is great training.\p"
+	.string "When you're ready, meet me at\n"
+	.string "DEWFORD GYM for a doubles battle.$"
+
 SlateportCity_OnTransition:
 	setvar VAR_SLATEPORT_MUSEUM_1F_STATE, 0
 	call SlateportCity_EventScript_EnterSlateport

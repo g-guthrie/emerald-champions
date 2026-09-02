@@ -95,7 +95,8 @@ bool32 WeatherChecker(enum BattlerId battler, u32 weather, enum FieldEffectOutco
 bool32 TerrainChecker(enum BattlerId battler, enum BattleTerrain terrain, enum FieldEffectOutcome desiredResult)
 {
     enum FieldEffectOutcome result = FIELD_EFFECT_NEUTRAL;
-    enum FieldEffectOutcome firstResult = FIELD_EFFECT_NEUTRAL;
+    enum FieldEffectOutcome actorResult = FIELD_EFFECT_NEUTRAL;
+    enum FieldEffectOutcome partnerResult = FIELD_EFFECT_NEUTRAL;
 
     for (u32 battlerIndex = 0; battlerIndex < gBattlersCount; battlerIndex++)
     {
@@ -119,17 +120,23 @@ bool32 TerrainChecker(enum BattlerId battler, enum BattleTerrain terrain, enum F
         default:
             break;
         }
+
+        if (battlerIndex == battler)
+            actorResult = result;
+        else
+            partnerResult = result;
     }
 
-    if (firstResult != FIELD_EFFECT_NEUTRAL)
-        return (firstResult == result) && (result == desiredResult);
-    return (result == desiredResult);
+    if (actorResult != FIELD_EFFECT_NEUTRAL)
+        return actorResult == desiredResult;
+    return partnerResult == desiredResult;
 }
 
 bool32 FieldStatusChecker(enum BattlerId battler, u32 fieldStatus, enum FieldEffectOutcome desiredResult)
 {
     enum FieldEffectOutcome result = FIELD_EFFECT_NEUTRAL;
-    enum FieldEffectOutcome firstResult = FIELD_EFFECT_NEUTRAL;
+    enum FieldEffectOutcome actorResult = FIELD_EFFECT_NEUTRAL;
+    enum FieldEffectOutcome partnerResult = FIELD_EFFECT_NEUTRAL;
 
     for (u32 battlerIndex = 0; battlerIndex < gBattlersCount; battlerIndex++)
     {
@@ -142,16 +149,18 @@ bool32 FieldStatusChecker(enum BattlerId battler, u32 fieldStatus, enum FieldEff
         if (fieldStatus & STATUS_FIELD_TRICK_ROOM)
             result = BenefitsFromTrickRoom(battlerIndex);
 
-        if (result != FIELD_EFFECT_NEUTRAL)
-        {
-            // Trick room wants both Pokémon to agree, not just one
-            if (fieldStatus & STATUS_FIELD_TRICK_ROOM && battlerIndex == GetBattlerLeftFoe(battler))
-                firstResult = result;
-        }
+        if (battlerIndex == battler)
+            actorResult = result;
+        else
+            partnerResult = result;
     }
-    if (firstResult != FIELD_EFFECT_NEUTRAL)
-        return (firstResult == result) && (result == desiredResult);
-    return (result == desiredResult);
+    if (fieldStatus & STATUS_FIELD_TRICK_ROOM
+     && actorResult != FIELD_EFFECT_NEUTRAL
+     && partnerResult != FIELD_EFFECT_NEUTRAL)
+        return actorResult == partnerResult && actorResult == desiredResult;
+    if (actorResult != FIELD_EFFECT_NEUTRAL)
+        return actorResult == desiredResult;
+    return partnerResult == desiredResult;
 }
 
 static bool32 DoesAbilityBenefitFromWeather(enum Ability ability, u32 weather)

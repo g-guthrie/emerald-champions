@@ -1,0 +1,31 @@
+{
+  "elf": "/Users/gguthrie/Projects/ec-ui-build.YKIy6o/pokeemerald-headless.elf",
+  "param_symbol": "0x0200195c",
+  "rendered": [
+    {
+      "frames": 1250,
+      "keys": [
+        [
+          700,
+          2,
+          "A"
+        ],
+        [
+          1080,
+          2,
+          "B"
+        ]
+      ],
+      "name": "all-legal-move-selected-back",
+      "png_sha256": "0bc99cfa8759460e657459dc9616fb284d7298191d0c5a2d34bac384058724bf",
+      "scenario_id": 13,
+      "screenshot": "work/visual-audit/rendered/service-ui-2026-08-31/all-legal-move-selected-back.png",
+      "verified_runtime_state": false,
+      "video_hash": "d066d68f222c2cac"
+    }
+  ],
+  "rom": "/Users/gguthrie/Projects/ec-ui-build.YKIy6o/pokeemerald-headless.gba",
+  "rom_sha256": "6ec617e857c1853721d862545fe0e29d783938b5332a62e5defb28c0045f9d3a",
+  "scenario_symbol": "0x0200196c",
+  "schema_version": 1
+}

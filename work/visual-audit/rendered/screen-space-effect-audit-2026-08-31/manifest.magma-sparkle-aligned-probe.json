@@ -1,0 +1,21 @@
+{
+  "elf": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/docker-output/pokeemerald-headless.elf",
+  "param_symbol": "0x02001964",
+  "rendered": [
+    {
+      "frames": 608,
+      "keys": [],
+      "name": "magma-sparkle-aligned-probe",
+      "param": 1,
+      "png_sha256": "42c7c18b7466e8cace1ac851b20598abf92d8c691583d22fa3957f7422a96581",
+      "scenario_id": 42,
+      "screenshot": "work/visual-audit/rendered/screen-space-effect-audit-2026-08-31/magma-sparkle-aligned-probe.png",
+      "verified_runtime_state": true,
+      "video_hash": "567cc765d755e75e"
+    }
+  ],
+  "rom": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/docker-output/pokeemerald-headless.gba",
+  "rom_sha256": "c2928b3227afdc330aef85358dc250741abe3183c4ddd050fc784dc52375199a",
+  "scenario_symbol": "0x02001974",
+  "schema_version": 1
+}

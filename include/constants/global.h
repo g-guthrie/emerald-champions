@@ -109,12 +109,27 @@ enum Language
 #define PYRAMID_BAG_ITEMS_COUNT 10
 #define ROAMER_COUNT 1 // Number of maximum concurrent active roamers
 
-// Bag constants
-#define BAG_ITEMS_COUNT 30
-#define BAG_KEYITEMS_COUNT 30
-#define BAG_POKEBALLS_COUNT 16
-#define BAG_TMHM_COUNT 64
-#define BAG_BERRIES_COUNT 46
+// Legacy Emerald bag storage. These counts must not change: keeping the five
+// original arrays byte-for-byte preserves every subsequent SaveBlock1 offset.
+#define BAG_LEGACY_ITEMS_COUNT    30
+#define BAG_LEGACY_KEYITEMS_COUNT 30
+#define BAG_LEGACY_POKEBALLS_COUNT 16
+#define BAG_LEGACY_TMHM_COUNT     64
+#define BAG_LEGACY_BERRIES_COUNT  46
+
+// Inclement Emerald's eight-pocket capacities. Extra slots live in append-only
+// SaveBlock1/SaveBlock3 extensions so existing Emerald Champions saves migrate.
+#define BAG_ITEMS_COUNT      93
+#define BAG_MEDICINE_COUNT   44
+#define BAG_BATTLE_COUNT     180
+#define BAG_TMHM_COUNT       108
+#define BAG_BERRIES_COUNT    66
+#define BAG_POKEBALLS_COUNT  27
+#define BAG_KEYITEMS_COUNT   55
+// Emerald Champions has 92 distinct stones plus the two Primal Orbs. Inclement
+// only needed 70 slots; retaining that capacity would make the archive fail.
+#define BAG_MEGASTONES_PRIMARY_COUNT 90
+#define BAG_MEGASTONES_COUNT         94
 
 // Number of facilities for Ranking Hall.
 // 7 facilities for single mode + tower double mode + tower multi mode.

@@ -1,0 +1,47 @@
+{
+  "elf": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/docker-output/pokeemerald-headless.elf",
+  "param_symbol": "0x0200195c",
+  "rendered": [
+    {
+      "frames": 1750,
+      "keys": [
+        [
+          200,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          1400,
+          2,
+          "A"
+        ],
+        [
+          1480,
+          2,
+          "A"
+        ],
+        [
+          1560,
+          2,
+          "A"
+        ]
+      ],
+      "name": "trainer-hill-nurse-heal-placement",
+      "param": 5,
+      "png_sha256": "6552e1e9a97d8422a9c60c58c2dd5d579c11bc777b51a3ceaa9794760d734503",
+      "scenario_id": 1,
+      "screenshot": "work/visual-audit/rendered/healing-entry-paths-2026-08-31/trainer-hill-nurse-heal-placement.png",
+      "verified_runtime_state": true,
+      "video_hash": "0bf19fd7c6898277"
+    }
+  ],
+  "rom": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/docker-output/pokeemerald-headless.gba",
+  "rom_sha256": "2cb9a9a9fc0d3fa04b3e72aaa1f12002c209362202b671edab19ededeca03744",
+  "scenario_symbol": "0x0200196c",
+  "schema_version": 1
+}

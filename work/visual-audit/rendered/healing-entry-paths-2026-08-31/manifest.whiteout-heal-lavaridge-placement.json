@@ -1,0 +1,32 @@
+{
+  "elf": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/docker-output/pokeemerald-headless.elf",
+  "param_symbol": "0x0200195c",
+  "rendered": [
+    {
+      "frames": 1280,
+      "keys": [
+        [
+          900,
+          2,
+          "A"
+        ],
+        [
+          1160,
+          2,
+          "A"
+        ]
+      ],
+      "name": "whiteout-heal-lavaridge-placement",
+      "param": 6,
+      "png_sha256": "ccf5a44672c455ef7797ee97443b551eee2a35a7d057fde5929b0c93275ef7d2",
+      "scenario_id": 1,
+      "screenshot": "work/visual-audit/rendered/healing-entry-paths-2026-08-31/whiteout-heal-lavaridge-placement.png",
+      "verified_runtime_state": true,
+      "video_hash": "f94c1df6b24977ae"
+    }
+  ],
+  "rom": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/docker-output/pokeemerald-headless.gba",
+  "rom_sha256": "9be9de1e329645fed16fb7ca1539b01eed9cb819079b69dfa39a0ea7edcd7bc3",
+  "scenario_symbol": "0x0200196c",
+  "schema_version": 1
+}

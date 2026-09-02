@@ -19,14 +19,32 @@ EventScript_ObtainItemMessage::
 EventScript_BufferPocketNameAndTryFanfare::
 	switch VAR_RESULT
 	case POCKET_ITEMS,      EventScript_BufferItemsPocket
+	case POCKET_MEDICINE,   EventScript_BufferMedicinePocket
+	case POCKET_BATTLE,     EventScript_BufferBattleItemsPocket
 	case POCKET_KEY_ITEMS,  EventScript_BufferKeyItemsPocket
 	case POCKET_POKE_BALLS, EventScript_BufferPokeballsPocket
 	case POCKET_TM_HM,      EventScript_BufferTMHMsPocket
 	case POCKET_BERRIES,    EventScript_BufferBerriesPocket
+	case POCKET_MEGA_STONES, EventScript_BufferMegaStonesPocket
 	end
 
 EventScript_BufferItemsPocket::
 	bufferstdstring STR_VAR_3, STDSTRING_ITEMS
+	call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedItem
+	return
+
+EventScript_BufferMedicinePocket::
+	bufferstdstring STR_VAR_3, STDSTRING_MEDICINE
+	call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedItem
+	return
+
+EventScript_BufferBattleItemsPocket::
+	bufferstdstring STR_VAR_3, STDSTRING_BATTLE_ITEMS
+	call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedItem
+	return
+
+EventScript_BufferMegaStonesPocket::
+	bufferstdstring STR_VAR_3, STDSTRING_MEGA_STONES
 	call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedItem
 	return
 
@@ -252,14 +270,29 @@ Std_PutItemAway::
 EventScript_BufferPutAwayPocketName::
 	switch VAR_RESULT
 	case POCKET_ITEMS,       EventScript_BufferPutAwayPocketItems
+	case POCKET_MEDICINE,    EventScript_BufferPutAwayPocketMedicine
+	case POCKET_BATTLE,      EventScript_BufferPutAwayPocketBattleItems
 	case POCKET_KEY_ITEMS,   EventScript_BufferPutAwayPocketKeyItems
 	case POCKET_POKE_BALLS,  EventScript_BufferPutAwayPocketPokeBalls
 	case POCKET_TM_HM,     EventScript_BufferPutAwayPocketTMCase
 	case POCKET_BERRIES, EventScript_BufferPutAwayPocketBerryPouch
+	case POCKET_MEGA_STONES, EventScript_BufferPutAwayPocketMegaStones
 	end
 
 EventScript_BufferPutAwayPocketItems::
 	bufferstdstring STR_VAR_3, STDSTRING_ITEMS
+	return
+
+EventScript_BufferPutAwayPocketMedicine::
+	bufferstdstring STR_VAR_3, STDSTRING_MEDICINE
+	return
+
+EventScript_BufferPutAwayPocketBattleItems::
+	bufferstdstring STR_VAR_3, STDSTRING_BATTLE_ITEMS
+	return
+
+EventScript_BufferPutAwayPocketMegaStones::
+	bufferstdstring STR_VAR_3, STDSTRING_MEGA_STONES
 	return
 
 EventScript_BufferPutAwayPocketKeyItems::

@@ -1,0 +1,41 @@
+{
+  "elf": "/Users/gguthrie/Projects/ec-ui-build.YKIy6o/pokeemerald-headless.elf",
+  "param_symbol": "0x0200195c",
+  "rendered": [
+    {
+      "frames": 760,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          360,
+          2,
+          "A"
+        ],
+        [
+          460,
+          2,
+          "A"
+        ]
+      ],
+      "name": "battle-vendor",
+      "png_sha256": "89a049d200d87b67a95c44201e91b7ad6610164e31c05f42967685ecb44bc2bc",
+      "scenario_id": 5,
+      "screenshot": "work/visual-audit/rendered/service-ui-2026-08-31/battle-vendor.png",
+      "verified_runtime_state": false,
+      "video_hash": "e2ffc9f78d1d0bd2"
+    }
+  ],
+  "rom": "/Users/gguthrie/Projects/ec-ui-build.YKIy6o/pokeemerald-headless.gba",
+  "rom_sha256": "5190b12c178d806954cc1cf220432386515fd3999494473e2dd91d0fb1248b82",
+  "scenario_symbol": "0x0200196c",
+  "schema_version": 1
+}

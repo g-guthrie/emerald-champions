@@ -1,6 +1,16 @@
 MeteorFalls_1F_2R_MapScripts::
 	.byte 0
 
+MeteorFalls_1F_2R_EventScript_MoveSpecialist::
+	msgbox MeteorFalls_1F_2R_Text_MoveSpecialist, MSGBOX_NPC
+	end
+
+MeteorFalls_1F_2R_Text_MoveSpecialist:
+	.string "I once guarded the secret of\n"
+	.string "DRAGON ASCENT here.\p"
+	.string "The POKéMON CENTER specialist now\n"
+	.string "teaches every legal move.$"
+
 MeteorFalls_1F_2R_EventScript_Nicolas::
 	trainerbattle_double TRAINER_NICOLAS_1, MeteorFalls_1F_2R_Text_NicolasIntro, MeteorFalls_1F_2R_Text_NicolasDefeat, EmeraldChampions_Text_NeedTwoPokemon, MeteorFalls_1F_2R_EventScript_RegisterNicolas
 	specialvar VAR_RESULT, ShouldTryRematchBattle

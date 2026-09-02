@@ -679,7 +679,8 @@ void CreateWildMon(enum Species species, u8 level)
     GiveMonInitialMoveset(&gParties[B_TRAINER_OPPONENT_A][0]);
     if (!InBattlePike()
      && CurrentBattlePyramidLocation() == PYRAMID_LOCATION_NONE
-     && IsEmeraldChampionsOrdinaryWildSpecies(species))
+     && (IsEmeraldChampionsOrdinaryWildSpecies(species)
+      || IsLegendarySignConditionalWildSpecies(species)))
         ApplyEmeraldChampionsRandomWildSet(&gParties[B_TRAINER_OPPONENT_A][0]);
 }
 

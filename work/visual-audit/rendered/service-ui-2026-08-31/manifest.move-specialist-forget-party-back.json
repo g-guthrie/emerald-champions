@@ -1,0 +1,71 @@
+{
+  "elf": "/Users/gguthrie/Projects/ec-ui-build.YKIy6o/pokeemerald-headless.elf",
+  "param_symbol": "0x0200195c",
+  "rendered": [
+    {
+      "frames": 2900,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          380,
+          2,
+          "DOWN"
+        ],
+        [
+          420,
+          2,
+          "DOWN"
+        ],
+        [
+          460,
+          2,
+          "A"
+        ],
+        [
+          620,
+          2,
+          "A"
+        ],
+        [
+          1750,
+          2,
+          "A"
+        ],
+        [
+          2050,
+          2,
+          "A"
+        ],
+        [
+          2200,
+          2,
+          "A"
+        ],
+        [
+          2650,
+          2,
+          "B"
+        ]
+      ],
+      "name": "move-specialist-forget-party-back",
+      "png_sha256": "30fae410c774aa2e6cee5260dc0f3d5791478863c7648519736c58488b36424c",
+      "scenario_id": 6,
+      "screenshot": "work/visual-audit/rendered/service-ui-2026-08-31/move-specialist-forget-party-back.png",
+      "verified_runtime_state": false,
+      "video_hash": "826c551571cff208"
+    }
+  ],
+  "rom": "/Users/gguthrie/Projects/ec-ui-build.YKIy6o/pokeemerald-headless.gba",
+  "rom_sha256": "ded16fc8efeced93de9f65f22312ee42541db96dc352fc1d9024d7df7bdb3d69",
+  "scenario_symbol": "0x0200196c",
+  "schema_version": 1
+}

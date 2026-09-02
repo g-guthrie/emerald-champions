@@ -3,6 +3,29 @@ RustboroCity_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, RustboroCity_OnFrame
 	.byte 0
 
+RustboroCity_EventScript_RoxanneRestored::
+	lock
+	faceplayer
+	goto_if_set FLAG_BADGE01_GET, RustboroCity_EventScript_RoxanneRestoredAfter
+	msgbox RustboroCity_Text_RoxanneRestoredBefore, MSGBOX_DEFAULT
+	release
+	end
+
+RustboroCity_EventScript_RoxanneRestoredAfter::
+	msgbox RustboroCity_Text_RoxanneRestoredAfter, MSGBOX_DEFAULT
+	release
+	end
+
+RustboroCity_Text_RoxanneRestoredBefore:
+	.string "Stone alone is not a strategy.\p"
+	.string "Study the partners in my GYM, then\n"
+	.string "show me how your own team connects.$"
+
+RustboroCity_Text_RoxanneRestoredAfter:
+	.string "Your STONE BADGE proves you can solve\n"
+	.string "more than a type chart.\p"
+	.string "DEVON may have a task for you next.$"
+
 RustboroCity_OnTransition:
 	setflag FLAG_VISITED_RUSTBORO_CITY
 	call Common_EventScript_SetupRivalGfxId

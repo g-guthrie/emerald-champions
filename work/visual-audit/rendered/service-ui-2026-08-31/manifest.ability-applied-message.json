@@ -1,0 +1,46 @@
+{
+  "elf": "/Users/gguthrie/Projects/ec-ui-build.YKIy6o/pokeemerald-headless.elf",
+  "param_symbol": "0x0200195c",
+  "rendered": [
+    {
+      "frames": 680,
+      "keys": [
+        [
+          210,
+          2,
+          "A"
+        ],
+        [
+          250,
+          2,
+          "DOWN"
+        ],
+        [
+          290,
+          2,
+          "A"
+        ],
+        [
+          560,
+          2,
+          "DOWN"
+        ],
+        [
+          600,
+          2,
+          "A"
+        ]
+      ],
+      "name": "ability-applied-message",
+      "png_sha256": "73aeabdf6a827d75fac475b871a8996d7aaf9a663f971239ec474cfb425c20d2",
+      "scenario_id": 3,
+      "screenshot": "work/visual-audit/rendered/service-ui-2026-08-31/ability-applied-message.png",
+      "verified_runtime_state": false,
+      "video_hash": "2d66a19af32440de"
+    }
+  ],
+  "rom": "/Users/gguthrie/Projects/ec-ui-build.YKIy6o/pokeemerald-headless.gba",
+  "rom_sha256": "5190b12c178d806954cc1cf220432386515fd3999494473e2dd91d0fb1248b82",
+  "scenario_symbol": "0x0200196c",
+  "schema_version": 1
+}

@@ -1,21 +1,10 @@
 MtPyre_Summit_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, MtPyre_Summit_OnTransition
-	map_script MAP_SCRIPT_ON_RESUME, MtPyre_Summit_OnResume
 	.byte 0
 
 .set LEGENDARY_SIGN_CRESSELIA_ID, 8
 .set LEGENDARY_SIGN_DARKRAI_ID, 9
 .set LEGENDARY_SIGN_DIALGA_ID, 10
-
-MtPyre_Summit_OnResume:
-	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, MtPyre_Summit_EventScript_TryRemoveDarkrai
-	end
-
-MtPyre_Summit_EventScript_TryRemoveDarkrai::
-	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
-	removeobject LOCALID_MT_PYRE_SUMMIT_DARKRAI
-	return
 
 MtPyre_Summit_OnTransition:
 	call_if_eq VAR_MT_PYRE_STATE, 2, MtPyre_Summit_EventScript_SetArchieMaxiePositions
@@ -62,6 +51,7 @@ MtPyre_Summit_EventScript_TeamAquaExits::
 	removeobject LOCALID_MT_PYRE_SUMMIT_GRUNT_2
 	removeobject LOCALID_MT_PYRE_SUMMIT_GRUNT_3
 	removeobject LOCALID_MT_PYRE_SUMMIT_GRUNT_4
+	removeobject LOCALID_EC_MATT_MT_PYRE
 	setflag FLAG_HIDE_MT_PYRE_SUMMIT_ARCHIE
 	setflag FLAG_HIDE_MT_PYRE_SUMMIT_TEAM_AQUA
 	fadedefaultbgm
@@ -215,7 +205,6 @@ MtPyre_Summit_EventScript_DarkraiNeedsMusharna::
 	return
 
 MtPyre_Summit_EventScript_DarkraiAwakened::
-	addobject LOCALID_MT_PYRE_SUMMIT_DARKRAI
 	msgbox MtPyre_Summit_Text_DarkraiAwakened, MSGBOX_DEFAULT
 	return
 
@@ -242,7 +231,10 @@ MtPyre_Summit_EventScript_LegendarySignReturn::
 
 MtPyre_Summit_EventScript_Darkrai::
 	lock
-	faceplayer
+	setvar VAR_0x8004, LEGENDARY_SIGN_DARKRAI_ID
+	special GetSelectedLegendarySignState
+	goto_if_eq VAR_RESULT, 0, MtPyre_Summit_EventScript_DarkraiDormant
+	goto_if_eq VAR_RESULT, 2, MtPyre_Summit_EventScript_DarkraiQuiet
 	waitse
 	playmoncry SPECIES_DARKRAI, CRY_MODE_ENCOUNTER
 	delay 40
@@ -262,6 +254,24 @@ MtPyre_Summit_EventScript_DarkraiCaught::
 	release
 	end
 
+MtPyre_Summit_EventScript_DarkraiDormant::
+	msgbox MtPyre_Summit_Text_DarkraiDormant, MSGBOX_DEFAULT
+	release
+	end
+
+MtPyre_Summit_EventScript_DarkraiQuiet::
+	msgbox MtPyre_Summit_Text_DarkraiQuiet, MSGBOX_DEFAULT
+	release
+	end
+
+MtPyre_Summit_Text_DarkraiDormant:
+	.string "The summit air is still. A black SIGN\n"
+	.string "has not yet accepted your challenge.$"
+
+MtPyre_Summit_Text_DarkraiQuiet:
+	.string "The nightmare has lifted. The black\n"
+	.string "SIGN records the trial you completed.$"
+
 MtPyre_Summit_Text_DarkraiNeedsTrainers:
 	.string "A Legendary Sign stains this peak.\p"
 	.string "Face every Trainer within Mt. Pyre,\n"
@@ -274,11 +284,12 @@ MtPyre_Summit_Text_DarkraiNeedsMusharna:
 
 MtPyre_Summit_Text_DarkraiAwakened:
 	.string "The Legendary Sign has awakened!\p"
-	.string "A shadow now waits at the summit.$"
+	.string "Nightmare mist now gathers at the\n"
+	.string "summit's black mark.$"
 
 MtPyre_Summit_Text_DarkraiAwaits:
-	.string "The awakened shadow still waits\n"
-	.string "at the summit.$"
+	.string "Nightmare mist still gathers around\n"
+	.string "the summit's black mark.$"
 
 MtPyre_Summit_Text_DarkraiRemains:
 	.string "The nightmare Sign still waits.\n"

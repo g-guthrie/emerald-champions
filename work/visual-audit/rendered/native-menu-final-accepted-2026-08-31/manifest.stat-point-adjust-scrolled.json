@@ -1,0 +1,96 @@
+{
+  "elf": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/docker-output/pokeemerald-headless.elf",
+  "param_symbol": "0x0200195c",
+  "rendered": [
+    {
+      "frames": 1640,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          360,
+          2,
+          "DOWN"
+        ],
+        [
+          400,
+          2,
+          "A"
+        ],
+        [
+          560,
+          2,
+          "A"
+        ],
+        [
+          760,
+          2,
+          "A"
+        ],
+        [
+          1100,
+          2,
+          "A"
+        ],
+        [
+          1240,
+          2,
+          "DOWN"
+        ],
+        [
+          1280,
+          2,
+          "DOWN"
+        ],
+        [
+          1320,
+          2,
+          "DOWN"
+        ],
+        [
+          1360,
+          2,
+          "DOWN"
+        ],
+        [
+          1400,
+          2,
+          "DOWN"
+        ],
+        [
+          1440,
+          2,
+          "DOWN"
+        ],
+        [
+          1480,
+          2,
+          "DOWN"
+        ],
+        [
+          1520,
+          2,
+          "DOWN"
+        ]
+      ],
+      "name": "stat-point-adjust-scrolled",
+      "png_sha256": "0ef875d3d66d01e9d6f0e572894e93683d5ce20451538bae0025dec4cfa43fca",
+      "scenario_id": 6,
+      "screenshot": "work/visual-audit/rendered/native-menu-final-accepted-2026-08-31/stat-point-adjust-scrolled.png",
+      "verified_runtime_state": false,
+      "video_hash": "6bdbd731c6e58ee5"
+    }
+  ],
+  "rom": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/docker-output/pokeemerald-headless.gba",
+  "rom_sha256": "ba471d0e7f47bbcc1ab2493a078de9b009ef51957a304d8d572e96d83c5506b2",
+  "scenario_symbol": "0x0200196c",
+  "schema_version": 1
+}

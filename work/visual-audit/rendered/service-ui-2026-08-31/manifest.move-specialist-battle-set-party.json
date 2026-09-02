@@ -1,0 +1,41 @@
+{
+  "elf": "/Users/gguthrie/Projects/ec-ui-build.YKIy6o/pokeemerald-headless.elf",
+  "param_symbol": "0x0200195c",
+  "rendered": [
+    {
+      "frames": 700,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          380,
+          2,
+          "A"
+        ],
+        [
+          520,
+          2,
+          "A"
+        ]
+      ],
+      "name": "move-specialist-battle-set-party",
+      "png_sha256": "cdf9d54986858062f1043970b51d79f21d3299aa4539568b4e1de7d9d20add43",
+      "scenario_id": 6,
+      "screenshot": "work/visual-audit/rendered/service-ui-2026-08-31/move-specialist-battle-set-party.png",
+      "verified_runtime_state": false,
+      "video_hash": "fd7fdfbb21ad7346"
+    }
+  ],
+  "rom": "/Users/gguthrie/Projects/ec-ui-build.YKIy6o/pokeemerald-headless.gba",
+  "rom_sha256": "4ab9ab799eb18e8e98db37ab92aae86e4b3b9c8f986028ae221d260f199b65d2",
+  "scenario_symbol": "0x0200196c",
+  "schema_version": 1
+}

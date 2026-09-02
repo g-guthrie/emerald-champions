@@ -38,6 +38,28 @@ NATIVE_ROOTS = {
     "NATIONAL_DEX_HEATRAN": ("data/maps/ScorchedSlab_HeatransRoom/scripts.inc", "SPECIES_HEATRAN"),
     "NATIONAL_DEX_MOLTRES": ("data/maps/EmberPath/scripts.inc", "SPECIES_MOLTRES"),
 }
+FIXED_INCLEMENT_GFX = {
+    "ARTICUNO": "OBJ_EVENT_GFX_INCLEMENT_ARTICUNO",
+    "ZAPDOS": "OBJ_EVENT_GFX_INCLEMENT_ZAPDOS",
+    "MOLTRES": "OBJ_EVENT_GFX_INCLEMENT_MOLTRES",
+    "MEWTWO": "OBJ_EVENT_GFX_INCLEMENT_MEWTWO",
+    "JIRACHI": "OBJ_EVENT_GFX_INCLEMENT_JIRACHI",
+    "HEATRAN": "OBJ_EVENT_GFX_INCLEMENT_HEATRAN",
+    "DIANCIE": "OBJ_EVENT_GFX_INCLEMENT_DIANCIE",
+    "REGIGIGAS": "OBJ_EVENT_GFX_REGIGIGAS_STATUE",
+}
+# These two LEGENDARY_SOURCE_VISIBLE entries intentionally use an existing
+# environmental/NPC interaction instead of placing a species body in the map.
+SCRIPTED_VISIBLE_ROOTS = {
+    "MAGEARNA": (
+        "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
+        ("EC_SIGN_MAGEARNA_ID", "TryGiveSelectedLegendarySignReward", "FLAG_EC_CAUGHT_MAGEARNA"),
+    ),
+    "PECHARUNT": (
+        "data/maps/MtPyre_6F/scripts.inc",
+        ("MtPyre_6F_EventScript_Pecharunt", "CreateSelectedLegendarySignEncounter", "FLAG_EC_CAUGHT_PECHARUNT"),
+    ),
+}
 
 
 def require(condition: bool, message: str) -> None:
@@ -229,9 +251,18 @@ def main() -> None:
             require(len(candidates) == 1, f"{sign_id}: map {map_name} is missing or duplicated")
             map_path = candidates[0]
         payload = json.loads(map_path.read_text())
-        graphics = f"OBJ_EVENT_GFX_SPECIES({species_name})"
-        require(any(row.get("graphics_id") == graphics for row in payload.get("object_events", [])),
-                f"{sign_id}: visible {species_name} object missing from {map_name}")
+        graphics = {
+            f"OBJ_EVENT_GFX_SPECIES({species_name})",
+            FIXED_INCLEMENT_GFX.get(species_name),
+        } - {None}
+        if species_name in SCRIPTED_VISIBLE_ROOTS:
+            relative, tokens = SCRIPTED_VISIBLE_ROOTS[species_name]
+            script = (ROOT / relative).read_text()
+            require(all(token in script for token in tokens),
+                    f"{sign_id}: scripted visible root is incomplete in {relative}")
+        else:
+            require(any(row.get("graphics_id") in graphics for row in payload.get("object_events", [])),
+                    f"{sign_id}: visible {species_name} object missing from {map_name}; expected {sorted(graphics)}")
         visible_species.add("SPECIES_" + species_name)
 
     nonordinary_sign_species = sign_species - {"SPECIES_" + row[2] for row in ordinary_rows}

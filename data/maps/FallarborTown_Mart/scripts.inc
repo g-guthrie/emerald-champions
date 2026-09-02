@@ -1,6 +1,15 @@
 FallarborTown_Mart_MapScripts::
 	.byte 0
 
+FallarborTown_Mart_EventScript_MoveSpecialist::
+	msgbox FallarborTown_Mart_Text_MoveSpecialist, MSGBOX_NPC
+	end
+
+FallarborTown_Mart_Text_MoveSpecialist:
+	.string "I once handed out DRAIN PUNCH as a TM.\p"
+	.string "Now every POKéMON CENTER specialist\n"
+	.string "teaches any legal move for free.$"
+
 FallarborTown_Mart_EventScript_Clerk::
 	lock
 	faceplayer
@@ -19,7 +28,6 @@ FallarborTown_Mart_Pokemart:
 	.2byte ITEM_PARALYZE_HEAL
 	.2byte ITEM_ESCAPE_ROPE
 	.2byte ITEM_SUPER_REPEL
-	.2byte ITEM_RARE_CANDY
 	pokemartlistend
 
 FallarborTown_Mart_EventScript_Woman::

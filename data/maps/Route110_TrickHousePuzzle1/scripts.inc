@@ -22,7 +22,7 @@ Route110_TrickHousePuzzle1_EventScript_FoundScroll::
 	end
 
 Route110_TrickHousePuzzle1_EventScript_Sally::
-	trainerbattle_double TRAINER_SALLY, Route110_TrickHousePuzzle1_Text_SallyIntro, Route110_TrickHousePuzzle1_Text_SallyDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	trainerbattle_single TRAINER_SALLY, Route110_TrickHousePuzzle1_Text_SallyIntro, Route110_TrickHousePuzzle1_Text_SallyDefeat
 	msgbox Route110_TrickHousePuzzle1_Text_SallyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -74,4 +74,3 @@ Route110_TrickHousePuzzle1_Text_RobinDefeat:
 Route110_TrickHousePuzzle1_Text_RobinPostBattle:
 	.string "You're strong!\n"
 	.string "Just who are you?$"
-

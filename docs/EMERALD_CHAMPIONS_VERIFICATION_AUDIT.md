@@ -79,12 +79,14 @@ At audit time, GitHub reported `main` as unprotected and returned no repository 
 
 | Gate | What it actually proves | Boundary |
 |---|---|---|
-| Core services | Difficulty, Leveler/Vial, tutor, Ability menu, 111 free battle items, vendors, Rare Candy, field licenses, and 16 Center layouts retain exact hooks | Structural; does not render or play the menus |
+| Core services | Difficulty, Leveler/Vial, tutor, Ability menu, 111 free battle items, vendors, the absence of Rare Candy acquisition, field licenses, and 16 Center layouts retain exact hooks | Structural; does not render or play the menus |
+| Native field UI | 16 standard Center whiteout cameras, League and Trainer Hill healing paths, 11 literal sparkle anchors, 18 nurse callers, and 116 deterministic UI/world scenarios retain reviewed geometry | Headless rendering and source invariants; subjective timing still needs human play |
+| Visual contracts | Every live Hoenn direct map effect is classified as object-, world-, screen-, or dedicated-map space; all raw field-effect placements are inventoried; camera/world/unclassified-effect mutations must be detected | Relationship and topology gate; novel visual semantics still require a reviewed screenshot |
 | Finite rewards | 47 authored script rewards and map TM replacements remain finite progression rewards | Enumerated producers, not a general economy simulation |
 | Reward economy | Inert vitamins/X items are unobtainable, finite rewards are coherent, world Mega Stones are unique | Policy-specific source scan |
 | Wild distribution | 146 headers on 138 Hoenn wild maps expose 592 unique species/forms and conform to chosen coverage/exclusion rules | Contains design policy; must not freeze rejected early species |
 | Route signs | 32 wayfinding signs call the live method-grouped encounter formatter and percentages remain absent | Wiring/text, not visual rendering |
-| Competitive presets | 1,534 presets, 95 Mega orientations across 92 stones, all 616 parsed wild-table species/forms, move legality references, and generated table alignment | Legality/coverage, not set quality |
+| Competitive presets | 5,311 presets across separate Doubles and Singles catalogs, minimum two non-Mega roles per format, all 92 stones, all 616 parsed wild-table species/forms, move legality, and generated table alignment | Legality/coherence; playtesting still judges set quality |
 | Species stat rebalances | Exact manifest of 102 selective Inclement stat ports plus three paired Mega HP changes; unselected species cannot drift | Exact data parity, not balance quality |
 | Upstream critical fixes | Required source tokens for buried trainers, Keldeo forms, recording disablement, and PC item text remain | Token contracts can be fooled by dead/commented code; runtime tests carry stronger weight |
 | Campaign roster | Champions and Kanto family acquisition graph plus Mega/evolution-item unlock coverage | Reachability graph, not catch-rate or player-time proof |

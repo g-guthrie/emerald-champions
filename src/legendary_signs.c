@@ -5,6 +5,7 @@
 #include "daycare.h"
 #include "emerald_champions_battle_sets.h"
 #include "event_data.h"
+#include "item.h"
 #include "legendary_signs.h"
 #include "pokedex.h"
 #include "pokemon.h"
@@ -33,6 +34,9 @@ static const u8 sSignLocationRoute120[] = _("Route 120");
 static const u8 sSignLocationSeafloorRoom6[] = _("Seafloor Cavern Room 6");
 static const u8 sSignLocationRoute110[] = _("Route 110");
 static const u8 sSignLocationMeteor1F2R[] = _("Meteor Falls' rear cave");
+static const u8 sSignLocationDewfordMeadow[] = _("Dewford Meadow");
+static const u8 sSignLocationAlteringCave[] = _("Altering Cave");
+static const u8 sSignLocationCaveOfOriginB1F[] = _("Cave of Origin B1F");
 static const u8 sSignLocationNewMauville[] = _("New Mauville");
 static const u8 sSignLocationScorchedB2F[] = _("Scorched Slab B2F");
 static const u8 sSignLocationRoute117[] = _("Route 117");
@@ -43,7 +47,9 @@ static const u8 sSignLocationMeteorB1F1R[] = _("Meteor Falls B1F");
 static const u8 sSignLocationVictoryRoad1F[] = _("Victory Road 1F");
 static const u8 sSignLocationPetalburgWoods2[] = _("deep Petalburg Woods");
 static const u8 sSignLocationDesertUnderpass[] = _("Desert Underpass");
+static const u8 sSignLocationSandstrewnB1F[] = _("Sandstrewn Ruins B1F");
 static const u8 sSignLocationAshenWoods[] = _("Ashen Woods");
+static const u8 sSignLocationVerdanturfMeadow[] = _("Verdanturf Meadow");
 static const u8 sSignLocationRoute112[] = _("Route 112");
 static const u8 sSignLocationRoute118[] = _("Route 118");
 static const u8 sSignLocationSeafloorApproach[] = _("Seafloor Cavern");
@@ -70,8 +76,14 @@ static const u8 *GetLegendarySignLocationName(enum LegendarySignId signId)
         return sSignLocationFieryPath;
     case LEGENDARY_SIGN_GIRATINA:
         return sSignLocationMtPyre6F;
+    case LEGENDARY_SIGN_OKIDOGI:
+    case LEGENDARY_SIGN_CHI_YU:
+        return sSignLocationAshenWoods;
+    case LEGENDARY_SIGN_MUNKIDORI:
+    case LEGENDARY_SIGN_MELOETTA:
+        return sSignLocationDewfordMeadow;
     case LEGENDARY_SIGN_HOOPA:
-        return sSignLocationRoute111Desert;
+        return sSignLocationAlteringCave;
     case LEGENDARY_SIGN_LANDORUS:
         return sSignLocationRoute111;
     case LEGENDARY_SIGN_MESPRIT:
@@ -84,8 +96,10 @@ static const u8 *GetLegendarySignLocationName(enum LegendarySignId signId)
     case LEGENDARY_SIGN_THUNDURUS:
         return sSignLocationRoute110;
     case LEGENDARY_SIGN_REGIDRAGO:
+    case LEGENDARY_SIGN_COSMOG:
         return sSignLocationMeteor1F2R;
     case LEGENDARY_SIGN_REGIELEKI:
+    case LEGENDARY_SIGN_MELTAN:
     case LEGENDARY_SIGN_ZEKROM:
     case LEGENDARY_SIGN_ZERAORA:
         return sSignLocationNewMauville;
@@ -101,22 +115,29 @@ static const u8 *GetLegendarySignLocationName(enum LegendarySignId signId)
     case LEGENDARY_SIGN_TORNADUS:
         return sSignLocationRoute119Land;
     case LEGENDARY_SIGN_UXIE:
+    case LEGENDARY_SIGN_CRESSELIA:
+    case LEGENDARY_SIGN_DIALGA:
         return sSignLocationMeteorB1F1R;
     case LEGENDARY_SIGN_VICTINI:
         return sSignLocationVictoryRoad1F;
     case LEGENDARY_SIGN_VIRIZION:
+    case LEGENDARY_SIGN_WO_CHIEN:
         return sSignLocationPetalburgWoods2;
-    case LEGENDARY_SIGN_ZYGARDE:
     case LEGENDARY_SIGN_TING_LU:
         return sSignLocationDesertUnderpass;
-    case LEGENDARY_SIGN_CHI_YU:
-        return sSignLocationAshenWoods;
+    case LEGENDARY_SIGN_ZYGARDE:
+        return sSignLocationSandstrewnB1F;
     case LEGENDARY_SIGN_KUBFU:
         return sSignLocationRoute112;
     case LEGENDARY_SIGN_TYPE_NULL:
         return sSignLocationRoute118;
     case LEGENDARY_SIGN_OGERPON:
         return sSignLocationRoute120;
+    case LEGENDARY_SIGN_ENAMORUS:
+    case LEGENDARY_SIGN_FEZANDIPITI:
+        return sSignLocationVerdanturfMeadow;
+    case LEGENDARY_SIGN_TERAPAGOS:
+        return sSignLocationCaveOfOriginB1F;
     case LEGENDARY_SIGN_MANAPHY:
         return sSignLocationSeafloorApproach;
     case LEGENDARY_SIGN_SUICUNE:
@@ -202,6 +223,12 @@ void UnlockLegendarySign(enum LegendarySignId signId)
     SetLegendaryStateBit(VAR_LEGENDARY_SIGNS_UNLOCKED_0, signId);
     switch (signId)
     {
+    case LEGENDARY_SIGN_ARTICUNO:
+        FlagClear(FLAG_EC_CAUGHT_ARTICUNO);
+        break;
+    case LEGENDARY_SIGN_CELEBI:
+        FlagClear(FLAG_EC_CAUGHT_CELEBI);
+        break;
     case LEGENDARY_SIGN_DARKRAI:
         FlagClear(FLAG_HIDE_LEGENDARY_SIGN_DARKRAI);
         break;
@@ -210,6 +237,33 @@ void UnlockLegendarySign(enum LegendarySignId signId)
         break;
     case LEGENDARY_SIGN_DIALGA:
         FlagClear(FLAG_HIDE_LEGENDARY_SIGN_DIALGA);
+        break;
+    case LEGENDARY_SIGN_HOOPA:
+        FlagClear(FLAG_EC_CAUGHT_HOOPA);
+        break;
+    case LEGENDARY_SIGN_MELOETTA:
+        FlagClear(FLAG_EC_CAUGHT_MELOETTA);
+        break;
+    case LEGENDARY_SIGN_MEWTWO:
+        FlagClear(FLAG_EC_CAUGHT_MEWTWO);
+        break;
+    case LEGENDARY_SIGN_PALKIA:
+        FlagClear(FLAG_EC_CAUGHT_PALKIA);
+        break;
+    case LEGENDARY_SIGN_PECHARUNT:
+        FlagClear(FLAG_EC_CAUGHT_PECHARUNT);
+        break;
+    case LEGENDARY_SIGN_RESHIRAM:
+        FlagClear(FLAG_EC_CAUGHT_RESHIRAM);
+        break;
+    case LEGENDARY_SIGN_SHAYMIN:
+        FlagClear(FLAG_EC_CAUGHT_SHAYMIN);
+        break;
+    case LEGENDARY_SIGN_TERAPAGOS:
+        FlagClear(FLAG_EC_CAUGHT_TERAPAGOS);
+        break;
+    case LEGENDARY_SIGN_ZAPDOS:
+        FlagClear(FLAG_EC_CAUGHT_ZAPDOS);
         break;
     default:
         break;
@@ -232,9 +286,105 @@ bool32 IsLegendarySignOrdinaryWildSpecies(enum Species species)
         && gLegendarySignDefinitions[signId].source == LEGENDARY_SOURCE_ORDINARY_WILD;
 }
 
+bool32 IsLegendarySignConditionalWildSpecies(enum Species species)
+{
+    enum LegendarySignId signId = GetLegendarySignIdBySpecies(species);
+
+    return signId < LEGENDARY_SIGN_COUNT
+        && gLegendarySignDefinitions[signId].source == LEGENDARY_SOURCE_CONDITIONAL_WILD;
+}
+
+static void GiveLegendaryRelicItem(enum Item item)
+{
+    if (CheckBagHasItem(item, 1) || CheckPCHasItem(item, 1))
+        return;
+    if (!AddBagItem(item, 1))
+        AddPCItem(item, 1);
+}
+
+static void GiveLegendaryRelicsForSpecies(enum Species species)
+{
+    static const enum Item sArceusPlates[] =
+    {
+        ITEM_FLAME_PLATE,
+        ITEM_SPLASH_PLATE,
+        ITEM_ZAP_PLATE,
+        ITEM_MEADOW_PLATE,
+        ITEM_ICICLE_PLATE,
+        ITEM_FIST_PLATE,
+        ITEM_TOXIC_PLATE,
+        ITEM_EARTH_PLATE,
+        ITEM_SKY_PLATE,
+        ITEM_MIND_PLATE,
+        ITEM_INSECT_PLATE,
+        ITEM_STONE_PLATE,
+        ITEM_SPOOKY_PLATE,
+        ITEM_DRACO_PLATE,
+        ITEM_DREAD_PLATE,
+        ITEM_IRON_PLATE,
+        ITEM_PIXIE_PLATE,
+    };
+
+    switch (species)
+    {
+    case SPECIES_GROUDON:
+        GiveLegendaryRelicItem(ITEM_RED_ORB);
+        break;
+    case SPECIES_KYOGRE:
+        GiveLegendaryRelicItem(ITEM_BLUE_ORB);
+        break;
+    case SPECIES_ZACIAN:
+        GiveLegendaryRelicItem(ITEM_RUSTED_SWORD);
+        break;
+    case SPECIES_ZAMAZENTA:
+        GiveLegendaryRelicItem(ITEM_RUSTED_SHIELD);
+        break;
+    case SPECIES_OGERPON_TEAL:
+        GiveLegendaryRelicItem(ITEM_WELLSPRING_MASK);
+        GiveLegendaryRelicItem(ITEM_HEARTHFLAME_MASK);
+        GiveLegendaryRelicItem(ITEM_CORNERSTONE_MASK);
+        break;
+    case SPECIES_ARCEUS:
+        for (u32 i = 0; i < ARRAY_COUNT(sArceusPlates); i++)
+            GiveLegendaryRelicItem(sArceusPlates[i]);
+        break;
+    default:
+        break;
+    }
+}
+
+void TryUnlockEligibleVisibleLegendarySignsForCurrentMap(void)
+{
+    u16 currentMap = ((u8)gSaveBlock1Ptr->location.mapGroup << 8) | (u8)gSaveBlock1Ptr->location.mapNum;
+
+    for (enum LegendarySignId signId = 0; signId < LEGENDARY_SIGN_COUNT; signId++)
+    {
+        const struct LegendarySignDefinition *sign = &gLegendarySignDefinitions[signId];
+
+        if (sign->source != LEGENDARY_SOURCE_VISIBLE
+         || sign->mapId != currentMap
+         || IsLegendarySignUnlocked(signId)
+         || IsLegendarySignCaught(signId)
+         || signId == LEGENDARY_SIGN_PECHARUNT
+         || signId == LEGENDARY_SIGN_REGIGIGAS)
+            continue;
+        if (GetBadgeCountForLegendarySigns() < sign->minimumBadges
+         || (sign->requiredFlag != 0 && !FlagGet(sign->requiredFlag))
+         || !PlayerPartyHasSpeciesFamily(sign->requiredSpecies))
+            continue;
+        UnlockLegendarySign(signId);
+    }
+}
+
 void MarkLegendarySignCaughtBySpecies(enum Species species)
 {
     enum LegendarySignId signId = GetLegendarySignIdBySpecies(species);
+
+    // Form-defining relics are earned with their Pokémon, never synthesized
+    // by the free held-item vendor or a tutor preset.  This call is
+    // idempotent across Bag/PC storage and also covers Groudon/Kyogre, whose
+    // canonical Emerald encounters are not Legendary Sign rows.
+    GiveLegendaryRelicsForSpecies(species);
 
     if (signId >= LEGENDARY_SIGN_COUNT)
         return;
@@ -242,6 +392,12 @@ void MarkLegendarySignCaughtBySpecies(enum Species species)
     SetLegendaryStateBit(VAR_LEGENDARY_SIGNS_CAUGHT_0, signId);
     switch (signId)
     {
+    case LEGENDARY_SIGN_ARTICUNO:
+        FlagSet(FLAG_EC_CAUGHT_ARTICUNO);
+        break;
+    case LEGENDARY_SIGN_CELEBI:
+        FlagSet(FLAG_EC_CAUGHT_CELEBI);
+        break;
     case LEGENDARY_SIGN_DARKRAI:
         FlagSet(FLAG_HIDE_LEGENDARY_SIGN_DARKRAI);
         break;
@@ -250,6 +406,33 @@ void MarkLegendarySignCaughtBySpecies(enum Species species)
         break;
     case LEGENDARY_SIGN_DIALGA:
         FlagSet(FLAG_HIDE_LEGENDARY_SIGN_DIALGA);
+        break;
+    case LEGENDARY_SIGN_HOOPA:
+        FlagSet(FLAG_EC_CAUGHT_HOOPA);
+        break;
+    case LEGENDARY_SIGN_MELOETTA:
+        FlagSet(FLAG_EC_CAUGHT_MELOETTA);
+        break;
+    case LEGENDARY_SIGN_MEWTWO:
+        FlagSet(FLAG_EC_CAUGHT_MEWTWO);
+        break;
+    case LEGENDARY_SIGN_PALKIA:
+        FlagSet(FLAG_EC_CAUGHT_PALKIA);
+        break;
+    case LEGENDARY_SIGN_PECHARUNT:
+        FlagSet(FLAG_EC_CAUGHT_PECHARUNT);
+        break;
+    case LEGENDARY_SIGN_RESHIRAM:
+        FlagSet(FLAG_EC_CAUGHT_RESHIRAM);
+        break;
+    case LEGENDARY_SIGN_SHAYMIN:
+        FlagSet(FLAG_EC_CAUGHT_SHAYMIN);
+        break;
+    case LEGENDARY_SIGN_TERAPAGOS:
+        FlagSet(FLAG_EC_CAUGHT_TERAPAGOS);
+        break;
+    case LEGENDARY_SIGN_ZAPDOS:
+        FlagSet(FLAG_EC_CAUGHT_ZAPDOS);
         break;
     default:
         break;
@@ -404,6 +587,7 @@ void CreateSelectedLegendarySignEncounter(void)
         gLegendarySignDefinitions[signId].species,
         GetSignLevel(gLegendarySignDefinitions[signId].levelOffset),
         ITEM_NONE);
+    ApplyEmeraldChampionsRandomNonMegaSet(&gParties[B_TRAINER_OPPONENT_A][0]);
 }
 
 void CreateEmeraldChampionsStaticLegendaryEncounter(void)
@@ -414,6 +598,24 @@ void CreateEmeraldChampionsStaticLegendaryEncounter(void)
     if (species == SPECIES_NONE || species >= NUM_SPECIES)
         return;
     CreateScriptedWildMon(species, GetSignLevel(levelOffset), ITEM_NONE);
+    ApplyEmeraldChampionsRandomNonMegaSet(&gParties[B_TRAINER_OPPONENT_A][0]);
+}
+
+void TryGiveSelectedLegendarySignReward(void)
+{
+    enum LegendarySignId signId = gSpecialVar_0x8004;
+    u8 giveResult;
+
+    gSpecialVar_Result = 0;
+    if (signId >= LEGENDARY_SIGN_COUNT || IsLegendarySignCaught(signId))
+        return;
+    giveResult = GiveLegendarySignReward(
+        gLegendarySignDefinitions[signId].species,
+        GetSignLevel(gLegendarySignDefinitions[signId].levelOffset));
+    if (giveResult == MON_CANT_GIVE)
+        gSpecialVar_Result = 3;
+    else
+        gSpecialVar_Result = giveResult == MON_GIVEN_TO_PARTY ? 1 : 2;
 }
 
 void TryUnlockDarkraiLegendarySign(void)

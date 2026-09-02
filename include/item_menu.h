@@ -124,4 +124,8 @@ void CloseItemMessage(u8 taskId);
 void CB2_ChooseBall(void);
 void SortItemsInBag(struct BagPocket *pocket, enum BagSortOptions type);
 
+#if EC_HEADLESS_FIXTURES
+bool32 IsBagHeadlessOnPocket(enum Pocket pocket);
+#endif
+
 #endif //GUARD_ITEM_MENU_H

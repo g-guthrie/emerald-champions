@@ -53,9 +53,9 @@ The first Pokémon Center visit gives two permanent tools:
 - The Poké Vial restores the full party outside battle. It begins with one charge, refills at every Center, and can be upgraded through optional exploration.
 - The Leveler raises the whole party to the current cap and never runs out.
 
-Every Center also exposes the game's competitive preparation loop. The executable corpus contains 1,534 presets, including 95 Mega orientations covering all 92 campaign stones. The battle-set tutor can apply one of a species' authored doubles sets: four moves, nature, Ability, Stat Points, and ordinary held item. Mega-oriented sets explain the required stone but do not create it. The ordinary move-teaching path remains available. A separate Center vendor gives 111 ordinary competitive held items for free, while berries, Mega Stones, orbs, drives, masks, memories, plates, and other transformation or progression items remain scarce.
+Every Center also exposes the game's competitive preparation loop. The executable corpus contains 5,311 named presets: 2,619 Doubles and 2,692 Singles, with at least two non-Mega roles per format for every direct species/form. The tutor applies four moves where the species can legally know four, nature, Ability, 66 Stat Points, perfect-IV backing data, and an ordinary held item. Mega-oriented sets explain the required stone but never create it. A free native editor then lets the player customize any 0-32-per-stat, 66-total spread. A separate Center vendor gives 111 ordinary competitive held items for free, while berries, Mega Stones, orbs, drives, masks, memories, plates, and other transformation or progression items remain scarce.
 
-Ordinary table wild Pokémon arrive with one of their species' authored competitive sets. If a species has multiple presets, its wild orientations are distributed across those presets. All 616 species/forms parsed from encounter data resolve a non-Mega preset; the current Hoenn campaign distribution exposes 592 unique species/forms through 146 encounter headers on 138 maps. Finite Legendary Signs and temporary battle forms remain on their explicit quest paths rather than entering ordinary randomization. This makes a newly caught ordinary Pokémon immediately legible and useful instead of an unfinished project.
+Ordinary table wild Pokémon arrive with one of their species' authored non-Mega Doubles sets. If a species has multiple Doubles presets, its wild orientations are distributed across those presets. Evolution replaces that prior-stage orientation with the evolved species' first non-Mega Doubles recommendation. All 616 species/forms parsed from encounter data resolve a preset; the current Hoenn campaign distribution exposes 592 unique species/forms through 146 encounter headers on 138 maps. Finite Legendary Signs and temporary battle forms remain on their explicit quest paths rather than entering ordinary randomization. This makes a newly caught ordinary Pokémon immediately legible and useful instead of an unfinished project.
 
 ### Exploration rewards
 
@@ -506,7 +506,7 @@ The full campaign toolkit is now available before Victory Road. No Mega is reser
 
 Waterfall opens Ever Grande. Victory Road contains seventeen optional trainer encounters plus the required Wally battle. Wally is no longer the timid child from Petalburg; his final campaign team is a serious proof that the region's preparation tools are available to rivals as well as the player.
 
-The Pokémon League lobby provides healing, a medicine-and-capture Mart with $1,000 Rare Candy, and the final chance to prepare. The door guard explicitly checks all eight badge flags before opening the League, so its implementation now matches its dialogue without relying on the normal story path to imply the other seven.
+The Pokémon League lobby provides healing, a medicine-and-capture Mart, and the final chance to prepare. The reusable Leveler remains the sole leveling shortcut. The door guard explicitly checks all eight badge flags before opening the League, so its implementation now matches its dialogue without relying on the normal story path to imply the other seven.
 
 ## 38. The Elite Four attrition arc
 
@@ -587,7 +587,7 @@ These battles are separate from the endlessly generated Frontier loop and theref
 
 ## 44. The Champions Circuit and Battle Frontier
 
-The Frontier is the true endless endgame. The native facilities remain, and the Battle Tower lobby also exposes the Champions Circuit.
+The Frontier is the true endless endgame. Its architecture, ferry access, shops, and social spaces remain, but every challenge attendant now enters the Champions Circuit. The old Gen 3 facility generators are retired rather than competing with the game's doubles identity.
 
 The Circuit generates doubles teams inside the ROM from a pinned Pokémon Showdown Champions corpus: 311 species or form variants and 444 role templates. It enforces Species Clause by National Dex family, at most one Mega, type and weakness limits, weather and field compatibility, role-driven moves, and Ability filtering. It retains Showdown Random Doubles item behavior rather than imposing a separate Item Clause.
 

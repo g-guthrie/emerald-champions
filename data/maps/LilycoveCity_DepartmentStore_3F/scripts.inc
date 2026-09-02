@@ -40,7 +40,6 @@ LilycoveCity_DepartmentStore_3F_Pokemart_StatBoosters:
 	.2byte ITEM_ETHER
 	.2byte ITEM_MAX_ETHER
 	.2byte ITEM_ELIXIR
-	.2byte ITEM_RARE_CANDY
 	pokemartlistend
 
 LilycoveCity_DepartmentStore_3F_EventScript_TriathleteM::

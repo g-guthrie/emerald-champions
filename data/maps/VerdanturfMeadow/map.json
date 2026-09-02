@@ -21,68 +21,26 @@
   ],
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
       "x": 7,
       "y": 10,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_RARE_CANDY",
+      "trainer_sight_or_berry_tree_id": "ITEM_ULTRA_BALL",
       "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_EC_ITEM_VERDANTURF_RARE_CANDY"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_SPECIES(SHAYMIN)",
-      "x": 10,
-      "y": 14,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "VerdanturfMeadow_EventScript_Shaymin",
-      "flag": "FLAG_EC_CAUGHT_SHAYMIN",
-      "local_id": "LOCALID_EC_SHAYMIN"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_SPECIES(ENAMORUS)",
-      "x": 4,
-      "y": 12,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "VerdanturfMeadow_EventScript_Enamorus",
-      "flag": "FLAG_EC_CAUGHT_ENAMORUS",
-      "local_id": "LOCALID_EC_ENAMORUS"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_SPECIES(FEZANDIPITI)",
-      "x": 13,
-      "y": 12,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "VerdanturfMeadow_EventScript_Fezandipiti",
-      "flag": "FLAG_EC_CAUGHT_FEZANDIPITI",
-      "local_id": "LOCALID_EC_FEZANDIPITI"
+      "flag": "FLAG_EC_ITEM_VERDANTURF_ULTRA_BALL"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_GIRL_2",
       "x": 12,
       "y": 9,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_type": "MOVEMENT_TYPE_WANDER_DOWN_AND_UP",
       "movement_range_x": 0,
-      "movement_range_y": 0,
+      "movement_range_y": 3,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "VerdanturfMeadow_EventScript_Warden",
@@ -91,6 +49,23 @@
   ],
   "warp_events": [],
   "coord_events": [],
-  "bg_events": [],
+  "bg_events": [
+    {
+      "type": "hidden_item",
+      "x": 4,
+      "y": 15,
+      "elevation": 3,
+      "item": "ITEM_PINK_NECTAR",
+      "flag": "FLAG_EC_HIDDEN_ITEM_VERDANTURF_PINK_NECTAR"
+    },
+    {
+      "type": "hidden_item",
+      "x": 10,
+      "y": 15,
+      "elevation": 3,
+      "item": "ITEM_PURPLE_NECTAR",
+      "flag": "FLAG_EC_HIDDEN_ITEM_VERDANTURF_PURPLE_NECTAR"
+    }
+  ],
   "region": "REGION_HOENN"
 }

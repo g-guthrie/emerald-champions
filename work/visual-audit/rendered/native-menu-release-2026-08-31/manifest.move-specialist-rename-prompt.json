@@ -1,0 +1,61 @@
+{
+  "elf": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/docker-output/pokeemerald-headless.elf",
+  "param_symbol": "0x0200195c",
+  "rendered": [
+    {
+      "frames": 820,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          380,
+          2,
+          "DOWN"
+        ],
+        [
+          420,
+          2,
+          "DOWN"
+        ],
+        [
+          460,
+          2,
+          "DOWN"
+        ],
+        [
+          500,
+          2,
+          "A"
+        ],
+        [
+          650,
+          2,
+          "DOWN"
+        ],
+        [
+          700,
+          2,
+          "A"
+        ]
+      ],
+      "name": "move-specialist-rename-prompt",
+      "png_sha256": "fa52e82cf1946b7b8ea19122ff7c9ca100b6a17d69bf65f2c599c225e6682b7c",
+      "scenario_id": 6,
+      "screenshot": "work/visual-audit/rendered/native-menu-release-2026-08-31/move-specialist-rename-prompt.png",
+      "verified_runtime_state": false,
+      "video_hash": "10681d258f5d4755"
+    }
+  ],
+  "rom": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/docker-output/pokeemerald-headless.gba",
+  "rom_sha256": "17dbb57b2727a91aa2dd6a4351a5fc4c6f67cee65b9082af081b40cc3e2fd5cb",
+  "scenario_symbol": "0x0200196c",
+  "schema_version": 1
+}

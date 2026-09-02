@@ -255,7 +255,6 @@ TrainerHill_Entrance_Pokemart_Basic:
 	.2byte ITEM_ANTIDOTE
 	.2byte ITEM_PARALYZE_HEAL
 	.2byte ITEM_AWAKENING
-	.2byte ITEM_RARE_CANDY
 	pokemartlistend
 
 TrainerHill_Entrance_EventScript_ExpandedPokemart::
@@ -271,7 +270,6 @@ TrainerHill_Entrance_Pokemart_Expanded:
 	.2byte ITEM_FULL_RESTORE
 	.2byte ITEM_FULL_HEAL
 	.2byte ITEM_REVIVE
-	.2byte ITEM_RARE_CANDY
 	pokemartlistend
 
 TrainerHill_Entrance_Text_StillGettingReady:

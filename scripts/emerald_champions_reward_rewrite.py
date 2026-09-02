@@ -21,7 +21,7 @@ class Reward:
 
 
 REWARDS = (
-    Reward("data/scripts/secret_power_tm.inc", "Route111_EventScript_GiveSecretPower", "ITEM_RARE_CANDY"),
+    Reward("data/scripts/secret_power_tm.inc", "Route111_EventScript_GiveSecretPower", "ITEM_ULTRA_BALL"),
     Reward("data/maps/RustboroCity_Gym/scripts.inc", "RustboroCity_Gym_EventScript_GiveRoxanneRewards", "ITEM_AERODACTYLITE"),
     Reward("data/maps/DewfordTown_Gym/scripts.inc", "DewfordTown_Gym_EventScript_GiveLucarionite", "ITEM_LUCARIONITE"),
     Reward("data/maps/DewfordTown_Gym/scripts.inc", "DewfordTown_Gym_EventScript_GiveLucarionite2", "ITEM_LUCARIONITE"),
@@ -89,7 +89,7 @@ PICKUP_STONES = {
 }
 
 FINITE_PICKUPS = {
-    ("data/maps/SSTidalLowerDeck/map.json", "ITEM_LEFTOVERS"): "ITEM_RARE_CANDY",
+    ("data/maps/SSTidalLowerDeck/map.json", "ITEM_LEFTOVERS"): "ITEM_ULTRA_BALL",
     ("data/maps/Route116/map.json", "ITEM_BLACK_GLASSES"): "ITEM_DUSK_STONE",
     ("data/maps/Route116/map.json", "ITEM_X_SPECIAL"): "ITEM_THUNDER_STONE",
     ("data/maps/ShoalCave_LowTideIceRoom/map.json", "ITEM_NEVER_MELT_ICE"): "ITEM_ICE_STONE",
@@ -112,7 +112,7 @@ DIALOGUE = {
     ("data/maps/FortreeCity_Gym/scripts.inc", "FortreeCity_Gym_Text_ExplainAltarianite"): ("Altarianite lets Altaria Mega Evolve.\n", "Let it hold the stone in battle.$"),
     ("data/maps/MossdeepCity_Gym/scripts.inc", "MossdeepCity_Gym_Text_ExplainMetagrossite"): ("Tate: Metagrossite lets Metagross Mega\n", "Evolve. Let it hold the stone.$"),
     ("data/maps/SootopolisCity_Gym_1F/scripts.inc", "SootopolisCity_Gym_1F_Text_ExplainGyaradosite"): ("Gyaradosite lets Gyarados Mega Evolve.\n", "Let it hold the stone in battle.$"),
-    ("data/scripts/secret_power_tm.inc", "Route111_Text_ExplainSecretPower"): ("Center tutors can teach Secret Power.\\p", "Take this Rare Candy for exploring,\n", "and use Secret Power at marked trees.$"),
+    ("data/scripts/secret_power_tm.inc", "Route111_Text_ExplainSecretPower"): ("Center tutors can teach Secret Power.\\p", "Take this Ultra Ball for exploring,\n", "and use Secret Power at marked trees.$"),
     ("data/maps/Route114_FossilManiacsHouse/scripts.inc", "Route114_FossilManiacsHouse_Text_HaveThisToDigLikeMyBrother"): ("My brother dug up this Metal Coat.\\p", "It evolves Onix or Scyther when used.$"),
     ("data/maps/SlateportCity_BattleTentLobby/scripts.inc", "SlateportCity_BattleTentLobby_Text_ExplainPrismScale"): ("A Prism Scale evolves Feebas.\n", "Use it from the Bag when ready.$"),
     ("data/maps/FortreeCity_House2/scripts.inc", "FortreeCity_House2_Text_YourHiddenPowerHasAwoken"): ("Your insight has awoken!\\p", "Take this Dubious Disc for Porygon2.$"),
@@ -126,7 +126,7 @@ DIALOGUE = {
     ("data/maps/RustboroCity_PokemonSchool/scripts.inc", "RustboroCity_PokemonSchool_Text_ExplainSunStone"): ("A Sun Stone evolves certain Pokémon.\n", "Use it from the Bag when ready.$"),
     ("data/maps/ShoalCave_LowTideLowerRoom/scripts.inc", "ShoalCave_LowTideLowerRoom_Text_CanOvercomeColdWithFocus"): ("Your focus overcame the cold!\\p", "Take this Deep Sea Scale.$"),
     ("data/maps/DewfordTown_House2/scripts.inc", "DewfordTown_House2_Text_ExplainReaperCloth"): ("A Reaper Cloth evolves Dusclops.\n", "Use it from the Bag when ready.$"),
-    ("data/scripts/secret_power_tm.inc", "Route111_Text_MakingRoomUseTMToMakeYourOwn"): ("I'm making my own room here with the\n", "POKéMON move SECRET POWER.\\p", "Center tutors can teach it anytime.\n", "Want a RARE CANDY for the road?$"),
+    ("data/scripts/secret_power_tm.inc", "Route111_Text_MakingRoomUseTMToMakeYourOwn"): ("I'm making my own room here with the\n", "POKéMON move SECRET POWER.\\p", "Center tutors can teach it anytime.\n", "Want an ULTRA BALL for the road?$"),
     ("data/maps/Route104/scripts.inc", "Route104_Text_LikeFillingMouthWithSeedsTakeThis"): ("I found this LEAF STONE beneath the\n", "flowers! Some GRASS POKéMON evolve\\l", "when exposed to it. You should have it!$"),
     ("data/maps/Route104/scripts.inc", "Route104_Text_LeafStoneExplanation"): ("That LEAF STONE can evolve certain\n", "GRASS POKéMON. Use it when ready.$"),
     ("data/maps/FallarborTown_CozmosHouse/scripts.inc", "FallarborTown_CozmosHouse_Text_IsThatMeteoriteMayIHaveIt"): ("Oh! Is that the METEORITE TEAM MAGMA\n", "took from METEOR FALLS?\\p", "Please, may I have it? I can offer this\n", "rare DAWN STONE in exchange.$"),
@@ -198,7 +198,7 @@ def write() -> None:
                 for field in ("trainer_sight_or_berry_tree_id", "item"):
                     old = event.get(field)
                     if isinstance(old, str) and old.startswith("ITEM_TM_"):
-                        event[field] = PICKUP_STONES.get(old, "ITEM_RARE_CANDY")
+                        event[field] = PICKUP_STONES.get(old, "ITEM_ULTRA_BALL")
                         changed = True
         if changed:
             target.write_text(json.dumps(payload, indent=2) + "\n")

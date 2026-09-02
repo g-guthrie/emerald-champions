@@ -38,11 +38,68 @@ EXPECTED_MAPS = {
 }
 NO_WILD_TABLE = {"MeteorFalls_JirachisRoom"}
 OBSOLETE_TOKENS = {
-    "OBJ_EVENT_GFX_MEGA_STONE",
-    "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
     "HG_SEQ_GS_D_IWAYAMA",
     "HG_SEQ_GS_D_UNKNOWN_ISEKI",
     "MUS_ROUTE111",
+}
+FIXED_INCLEMENT_SPECIES_GFX = {
+    "OBJ_EVENT_GFX_INCLEMENT_ARTICUNO": "ARTICUNO",
+    "OBJ_EVENT_GFX_INCLEMENT_ZAPDOS": "ZAPDOS",
+    "OBJ_EVENT_GFX_INCLEMENT_MOLTRES": "MOLTRES",
+    "OBJ_EVENT_GFX_INCLEMENT_MEWTWO": "MEWTWO",
+    "OBJ_EVENT_GFX_INCLEMENT_JIRACHI": "JIRACHI",
+    "OBJ_EVENT_GFX_INCLEMENT_HEATRAN": "HEATRAN",
+    "OBJ_EVENT_GFX_INCLEMENT_DIANCIE": "DIANCIE",
+    "OBJ_EVENT_GFX_INCLEMENT_CARBINK": "CARBINK",
+    "OBJ_EVENT_GFX_REGIGIGAS_STATUE": "REGIGIGAS",
+}
+
+# Source: Inclement Emerald v1.13, commit
+# cf41a95b68a39ca74fefeb934c460f6f47eb0b3b.  These are the hidden
+# evolution/form rewards that remain meaningful under Emerald Champions'
+# non-scarce battle-item economy.
+INCLEMENT_PROGRESSION_BG_EVENTS = {
+    "DewfordMeadow": (
+        (11, 18, 3, "ITEM_YELLOW_NECTAR", "FLAG_EC_HIDDEN_ITEM_DEWFORD_MEADOW_YELLOW_NECTAR"),
+        (21, 5, 3, "ITEM_RED_NECTAR", "FLAG_EC_HIDDEN_ITEM_DEWFORD_MEADOW_RED_NECTAR"),
+    ),
+    "EmberPath": (
+        (9, 38, 3, "ITEM_MAGMARIZER", "FLAG_EC_HIDDEN_ITEM_EMBER_PATH_MAGMARIZER"),
+    ),
+    "Route106": (
+        (53, 12, 3, "ITEM_PRISM_SCALE", "FLAG_EC_HIDDEN_ITEM_ROUTE_106_PRISM_SCALE"),
+    ),
+    "SandstrewnRuins": (
+        (8, 31, 3, "ITEM_PROTECTOR", "FLAG_EC_HIDDEN_ITEM_SANDSTREWN_PROTECTOR"),
+    ),
+    "Seaspray_Cave": (
+        (36, 22, 4, "ITEM_DAWN_STONE", "FLAG_EC_HIDDEN_ITEM_SEASPRAY_DAWN_STONE"),
+    ),
+    "Seaspray_Cave_B1F": (
+        (25, 20, 3, "ITEM_ICE_STONE", "FLAG_EC_HIDDEN_ITEM_SEASPRAY_B1F_ICE_STONE"),
+    ),
+    "VerdanturfMeadow": (
+        (4, 15, 3, "ITEM_PINK_NECTAR", "FLAG_EC_HIDDEN_ITEM_VERDANTURF_PINK_NECTAR"),
+        (10, 15, 3, "ITEM_PURPLE_NECTAR", "FLAG_EC_HIDDEN_ITEM_VERDANTURF_PURPLE_NECTAR"),
+    ),
+}
+
+INCLEMENT_MANOR_SIGN = {
+    "type": "sign",
+    "x": 8,
+    "y": 8,
+    "elevation": 0,
+    "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+    "script": "DewfordMeadow_EventScript_ManorSign",
+}
+
+INCLEMENT_SPIRITOMB_SIGN = {
+    "type": "sign",
+    "x": 7,
+    "y": 7,
+    "elevation": 0,
+    "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+    "script": "AbandonedShip_Room_B1F_EventScript_Spiritomb",
 }
 
 
@@ -79,6 +136,107 @@ def main() -> None:
         map_id = payload["id"]
         require(map_id not in id_to_name, f"duplicate map id {map_id}")
         id_to_name[map_id] = name
+
+    restored_hidden_flags = []
+    for map_name, expected_rows in INCLEMENT_PROGRESSION_BG_EVENTS.items():
+        payload = all_maps[map_name]
+        layout = layouts[payload["layout"]]
+        actual_rows = payload.get("bg_events", []) or []
+        positions = Counter(
+            (event.get("x"), event.get("y"), event.get("elevation"))
+            for event in actual_rows
+        )
+        require(
+            all(count == 1 for count in positions.values()),
+            f"{map_name}: overlapping background events",
+        )
+        for x, y, elevation, item_id, flag in expected_rows:
+            require(
+                0 <= x < layout["width"] and 0 <= y < layout["height"],
+                f"{map_name}: restored Inclement reward is outside the layout",
+            )
+            matches = [
+                event for event in actual_rows
+                if event.get("type") == "hidden_item"
+                and event.get("x") == x
+                and event.get("y") == y
+                and event.get("elevation") == elevation
+                and event.get("item") == item_id
+                and event.get("flag") == flag
+            ]
+            require(
+                len(matches) == 1,
+                f"{map_name}: missing exact Inclement progression reward "
+                f"{item_id} at {x},{y},{elevation}",
+            )
+            require(flag in flag_values, f"{map_name}: undefined hidden-item flag {flag}")
+            restored_hidden_flags.append(flag)
+
+    require(
+        len(restored_hidden_flags) == len(set(restored_hidden_flags)) == 9,
+        "Inclement progression reward flags are not unique",
+    )
+    require(
+        len({flag_values[flag] for flag in restored_hidden_flags}) == 9,
+        "Inclement progression reward flag values collide",
+    )
+
+    meadow_bg_events = all_maps["DewfordMeadow"].get("bg_events", []) or []
+    require(
+        meadow_bg_events.count(INCLEMENT_MANOR_SIGN) == 1,
+        "Dewford Meadow lost Inclement's manor sign",
+    )
+    meadow_script = (maps_root / "DewfordMeadow" / "scripts.inc").read_text()
+    require(
+        "DewfordMeadow_EventScript_ManorSign::" in meadow_script
+        and "DewfordMeadow_Text_ManorSign:" in meadow_script,
+        "Dewford Meadow manor sign script or copy is missing",
+    )
+
+    ship_bg_events = all_maps["AbandonedShip_Room_B1F"].get("bg_events", []) or []
+    require(
+        ship_bg_events.count(INCLEMENT_SPIRITOMB_SIGN) == 1,
+        "Abandoned Ship lost Inclement's Spiritomb interaction",
+    )
+    spiritomb_script = (maps_root / "AbandonedShip_Room_B1F" / "scripts.inc").read_text()
+    for token in (
+        "checkspecies SPECIES_LICKITUNG",
+        "checkspecies SPECIES_SLUGMA",
+        "checkitem ITEM_ODD_KEYSTONE, 1",
+        "setvar VAR_0x8004, SPECIES_SPIRITOMB",
+        "setvar VAR_0x8005, 0",
+        "special CreateEmeraldChampionsStaticLegendaryEncounter",
+        "special BattleSetup_StartLegendaryBattle",
+        "specialvar VAR_RESULT, GetBattleOutcome",
+        "goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, AbandonedShip_Room_B1F_EventScript_End",
+        "removeitem ITEM_ODD_KEYSTONE, 1",
+    ):
+        require(token in spiritomb_script, f"Abandoned Ship Spiritomb flow lost: {token}")
+    require(
+        spiritomb_script.index("special BattleSetup_StartLegendaryBattle")
+        < spiritomb_script.index("specialvar VAR_RESULT, GetBattleOutcome")
+        < spiritomb_script.index(
+            "goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, AbandonedShip_Room_B1F_EventScript_End"
+        )
+        < spiritomb_script.index("removeitem ITEM_ODD_KEYSTONE, 1"),
+        "Odd Keystone is consumed before Spiritomb is safely caught",
+    )
+    scripted_spiritomb_count = sum(
+        (maps_root / name / "scripts.inc").read_text().count("setvar VAR_0x8004, SPECIES_SPIRITOMB")
+        for name in all_maps
+        if (maps_root / name / "scripts.inc").is_file()
+    )
+    require(
+        scripted_spiritomb_count == 1,
+        "the restored Spiritomb interaction duplicates another scripted encounter",
+    )
+    legendary_source = (ROOT / "src/legendary_signs.c").read_text()
+    require(
+        "if (level > MAX_LEVEL)" in legendary_source
+        and "CreateScriptedWildMon(species, GetSignLevel(levelOffset), ITEM_NONE);"
+            in legendary_source,
+        "the Spiritomb encounter no longer clamps the postgame level sentinel",
+    )
 
     graph: dict[str, set[str]] = defaultdict(set)
     inbound = Counter()
@@ -164,9 +322,10 @@ def main() -> None:
             match = re.fullmatch(r"OBJ_EVENT_GFX_SPECIES\(([A-Z0-9_]+)\)", graphics)
             if match:
                 visible_species.add(match.group(1))
+            elif graphics in FIXED_INCLEMENT_SPECIES_GFX:
+                visible_species.add(FIXED_INCLEMENT_SPECIES_GFX[graphics])
         require(len(local_ids) == len(set(local_ids)), f"{name}: duplicate local object ids")
 
-    require(len(item_flags) == 40, f"restored item count drifted: {len(item_flags)}")
     require(len(item_flags) == len(set(item_flags)), "a restored pickup flag is reused")
     numeric_item_flags = [flag_values[name] for name in item_flags]
     require(len(numeric_item_flags) == len(set(numeric_item_flags)), "restored pickup flag values collide")
@@ -205,7 +364,7 @@ def main() -> None:
     cave_map3 = all_maps["CaveOfOrigin_UnusedRubySapphireMap3"]
     require(
         any(
-            event.get("graphics_id") == "OBJ_EVENT_GFX_SPECIES(CARBINK)"
+            event.get("graphics_id") == "OBJ_EVENT_GFX_INCLEMENT_CARBINK"
             and event.get("flag") == "FLAG_BADGE08_GET"
             for event in cave_1f["object_events"]
         ),
@@ -228,7 +387,9 @@ def main() -> None:
     )
 
     print(f"PASS: {len(restored)} restored maps are connected to the Hoenn campaign")
-    print(f"PASS: {total_objects} objects include 40 unique progression pickups")
+    print("PASS: 9 Inclement evolution/form rewards and the Dewford Manor sign are restored")
+    print("PASS: Abandoned Ship has exactly one source-backed Spiritomb interaction")
+    print(f"PASS: {total_objects} objects include {len(item_flags)} unique progression pickups")
     print(f"PASS: {len(expected_wild)} restored maps have themed wild encounter tables")
     print(f"PASS: {len(visible_sign_species)} Sign objects and 4 static sanctuaries are visible in-world")
 

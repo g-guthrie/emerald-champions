@@ -210,7 +210,7 @@ def main() -> None:
             "FLAG_ITEM_ROUTE_116_THUNDER_STONE, FLAG_ITEM_SAFARI_ZONE_SOUTH_EAST_BIG_PEARL",
             "FLAG_EC_STARTER_ARCHIVE_BULBASAUR, FLAG_RECEIVED_GAME_CORNER_POIPOLE",
             "sDirectClaimFlags",
-            "sEmeraldChampionsPhysicalSignFlags",
+            "Inclement's inherited static encounters are visible whenever their map",
             "SetEmeraldChampionsPhysicalSignFlags();",
         )),
         "legacy pickup, claim, or physical-object collisions are not reset and reconstructed",
@@ -258,7 +258,21 @@ def main() -> None:
         and "VarSet(VAR_POKE_VIAL_CHARGES, VarGet(VAR_POKE_VIAL_CHARGES) - 1);" in item_use,
         "Poke Vial no longer heals the complete live party and consumes exactly one charge",
     )
-    require(re.search(r"\[ITEM_RARE_CANDY\].*?\.price = 1000,", items, re.S) is not None, "Rare Candy price is not 1,000")
+    # Keep the upstream item enum and handling for engine compatibility, but
+    # Emerald Champions uses the Leveler exclusively.  No live producer may
+    # sell, award, or place a Rare Candy.
+    acquisition_paths = [ROOT / "data"]
+    rare_candy_sources = []
+    for base in acquisition_paths:
+        for path in base.rglob("*"):
+            if path.is_file():
+                try:
+                    source = path.read_text()
+                except UnicodeDecodeError:
+                    continue
+                if "ITEM_RARE_CANDY" in source:
+                    rare_candy_sources.append(str(path.relative_to(ROOT)))
+    require(not rare_candy_sources, f"Rare Candy acquisition paths remain: {rare_candy_sources}")
     route111 = read("data/maps/Route111/scripts.inc")
     route133 = read("data/maps/Route133/scripts.inc")
     require(
@@ -280,7 +294,8 @@ def main() -> None:
         "the normal party menu lacks on-the-fly Ability switching",
     )
     require(
-        "GetEmeraldChampionsBattleSetCount(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x800A]) + 1" in field_specials
+        "GetEmeraldChampionsBattleSetCountForFormat(" in field_specials
+        and "gSpecialVar_0x8007" in field_specials
         and "task->tMaxItemsOnScreen = min(task->tNumItems, 4);" in field_specials
         and "task->tWidth = ConvertPixelWidthToTileWidth(width);" in field_specials
         and "if (task->tLeft + task->tWidth > MAX_MULTICHOICE_WIDTH + 1)" in field_specials,
@@ -327,7 +342,7 @@ def main() -> None:
                 cursor -= 1
             if listed.intersection(medicine):
                 medicine_lists += 1
-                require("ITEM_RARE_CANDY" in listed, f"Medicine mart lacks Rare Candy: {path}")
+                require("ITEM_RARE_CANDY" not in listed, f"Medicine mart still sells obsolete Rare Candy: {path}")
     require(medicine_lists == 21, f"Expected 21 Hoenn medicine lists, found {medicine_lists}")
 
     free_block = field_specials.split("sEmeraldChampionsFreeBattleItems[]", 1)[1].split("};", 1)[0]
@@ -376,7 +391,7 @@ def main() -> None:
     presets = json.loads(read("docs/emerald_champions_battle_sets.json"))
     preset_items = {
         entry[field]
-        for group in ("defaults", "alternatives")
+        for group in ("defaults", "alternatives", "singles_defaults", "singles_alternatives")
         for entry in presets[group]
         for field in ("item", "required_item")
     }

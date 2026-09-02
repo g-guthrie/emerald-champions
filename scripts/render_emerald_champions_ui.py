@@ -9,6 +9,7 @@ import json
 import os
 from pathlib import Path
 import re
+import shlex
 import shutil
 import struct
 import subprocess
@@ -33,11 +34,123 @@ READ_PATTERN = re.compile(
 
 SCENARIOS: dict[str, dict[str, object]] = {
     "center-oldale": {"id": 1, "frames": 600, "keys": []},
+    "nurse-heal-facing-machine": {
+        "id": 1,
+        "param": 1,
+        "frames": 1690,
+        "keys": [
+            (200, 100, "UP"),
+            (360, 2, "A"),
+            (1400, 2, "A"),
+            (1480, 2, "A"),
+            (1560, 2, "A"),
+        ],
+        "verify": True,
+    },
+    "nurse-heal-tray": {
+        "id": 1,
+        "param": 1,
+        "frames": 1750,
+        "keys": [
+            (200, 100, "UP"),
+            (360, 2, "A"),
+            (1400, 2, "A"),
+            (1480, 2, "A"),
+            (1560, 2, "A"),
+        ],
+        "verify": True,
+    },
+    "nurse-heal-return": {
+        "id": 1,
+        "param": 1,
+        "frames": 1900,
+        "keys": [
+            (200, 100, "UP"),
+            (360, 2, "A"),
+            (1400, 2, "A"),
+            (1480, 2, "A"),
+            (1560, 2, "A"),
+        ],
+        "verify": True,
+    },
+    "whiteout-heal-placement": {
+        "id": 1,
+        "param": 2,
+        "frames": 1280,
+        "keys": [(900, 2, "A"), (1160, 2, "A")],
+        "verify": True,
+    },
+    "whiteout-heal-league-placement": {
+        "id": 1,
+        "param": 4,
+        "frames": 1280,
+        "keys": [(900, 2, "A"), (1160, 2, "A")],
+        "verify": True,
+    },
+    "whiteout-heal-lavaridge-placement": {
+        "id": 1,
+        "param": 6,
+        "frames": 1280,
+        "keys": [(900, 2, "A"), (1160, 2, "A")],
+        "verify": True,
+    },
+    "trainer-hill-nurse-heal-placement": {
+        "id": 1,
+        "param": 5,
+        "frames": 1750,
+        "keys": [
+            (200, 2, "UP"),
+            (250, 2, "A"),
+            (1400, 2, "A"),
+            (1480, 2, "A"),
+            (1560, 2, "A"),
+        ],
+        "verify": True,
+    },
     "center-lavaridge": {"id": 2, "frames": 600, "keys": []},
     "ability-menu": {
         "id": 3,
         "frames": 520,
         "keys": [(210, 2, "A"), (250, 2, "DOWN"), (290, 2, "A")],
+    },
+    "ability-back-to-actions": {
+        "id": 3,
+        "frames": 680,
+        "keys": [(210, 2, "A"), (250, 2, "DOWN"), (290, 2, "A"), (560, 2, "B")],
+    },
+    "ability-cancel-to-actions": {
+        "id": 3,
+        "frames": 720,
+        "keys": [
+            (210, 2, "A"),
+            (250, 2, "DOWN"),
+            (290, 2, "A"),
+            (560, 2, "UP"),
+            (600, 2, "A"),
+        ],
+    },
+    "ability-applied-message": {
+        "id": 3,
+        "frames": 680,
+        "keys": [
+            (210, 2, "A"),
+            (250, 2, "DOWN"),
+            (290, 2, "A"),
+            (560, 2, "DOWN"),
+            (600, 2, "A"),
+        ],
+    },
+    "ability-applied-return": {
+        "id": 3,
+        "frames": 820,
+        "keys": [
+            (210, 2, "A"),
+            (250, 2, "DOWN"),
+            (290, 2, "A"),
+            (560, 2, "DOWN"),
+            (600, 2, "A"),
+            (720, 2, "A"),
+        ],
     },
     "party-overview": {"id": 3, "frames": 300, "keys": []},
     "party-action-menu": {"id": 3, "frames": 245, "keys": [(210, 2, "A")]},
@@ -47,16 +160,137 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "frames": 760,
         "keys": [(220, 2, "UP"), (250, 2, "A"), (360, 2, "A"), (460, 2, "A")],
     },
+    "battle-vendor-category-back": {
+        "id": 5,
+        "frames": 900,
+        "keys": [
+            (220, 2, "UP"),
+            (250, 2, "A"),
+            (360, 2, "A"),
+            (460, 2, "A"),
+            (800, 2, "B"),
+        ],
+    },
+    "battle-vendor-postbadge-root": {
+        "id": 5,
+        "param": 1,
+        "frames": 620,
+        "keys": [(220, 2, "UP"), (250, 2, "A"), (360, 2, "A")],
+    },
+    "battle-vendor-postbadge-held-items": {
+        "id": 5,
+        "param": 1,
+        "frames": 900,
+        "keys": [
+            (220, 2, "UP"),
+            (250, 2, "A"),
+            (360, 2, "A"),
+            (600, 2, "A"),
+        ],
+    },
     "battle-vendor-shop": {
         "id": 5,
-        "frames": 1120,
+        "frames": 1040,
         "keys": [
             (220, 2, "UP"),
             (250, 2, "A"),
             (360, 2, "A"),
             (460, 2, "A"),
             (800, 2, "A"),
-            (940, 2, "A"),
+        ],
+    },
+    "battle-vendor-quantity": {
+        "id": 5,
+        "frames": 1240,
+        "keys": [
+            (220, 2, "UP"),
+            (250, 2, "A"),
+            (360, 2, "A"),
+            (460, 2, "A"),
+            (800, 2, "A"),
+            (1080, 2, "A"),
+        ],
+    },
+    "battle-vendor-quantity-adjusted": {
+        "id": 5,
+        "frames": 1300,
+        "keys": [
+            (220, 2, "UP"),
+            (250, 2, "A"),
+            (360, 2, "A"),
+            (460, 2, "A"),
+            (800, 2, "A"),
+            (1080, 2, "A"),
+            (1200, 2, "UP"),
+        ],
+    },
+    "battle-vendor-quantity-back": {
+        "id": 5,
+        "frames": 1480,
+        "keys": [
+            (220, 2, "UP"),
+            (250, 2, "A"),
+            (360, 2, "A"),
+            (460, 2, "A"),
+            (800, 2, "A"),
+            (1080, 2, "A"),
+            (1320, 2, "B"),
+        ],
+    },
+    "battle-vendor-confirm": {
+        "id": 5,
+        "frames": 1580,
+        "keys": [
+            (220, 2, "UP"),
+            (250, 2, "A"),
+            (360, 2, "A"),
+            (460, 2, "A"),
+            (800, 2, "A"),
+            (1080, 2, "A"),
+            (1320, 2, "A"),
+        ],
+    },
+    "battle-vendor-confirm-no": {
+        "id": 5,
+        "frames": 1760,
+        "keys": [
+            (220, 2, "UP"),
+            (250, 2, "A"),
+            (360, 2, "A"),
+            (460, 2, "A"),
+            (800, 2, "A"),
+            (1080, 2, "A"),
+            (1320, 2, "A"),
+            (1540, 2, "B"),
+        ],
+    },
+    "battle-vendor-purchase-success": {
+        "id": 5,
+        "frames": 3400,
+        "keys": [
+            (220, 2, "UP"),
+            (250, 2, "A"),
+            (360, 2, "A"),
+            (460, 2, "A"),
+            (800, 2, "A"),
+            (1080, 2, "A"),
+            (1320, 2, "A"),
+            (1540, 2, "A"),
+        ],
+    },
+    "battle-vendor-purchase-return": {
+        "id": 5,
+        "frames": 1940,
+        "keys": [
+            (220, 2, "UP"),
+            (250, 2, "A"),
+            (360, 2, "A"),
+            (460, 2, "A"),
+            (800, 2, "A"),
+            (1080, 2, "A"),
+            (1320, 2, "A"),
+            (1540, 2, "A"),
+            (1820, 2, "A"),
         ],
     },
     "move-specialist-root": {
@@ -64,21 +298,401 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "frames": 350,
         "keys": [(220, 2, "UP"), (250, 2, "A")],
     },
+    "move-specialist-root-back": {
+        "id": 6,
+        "frames": 520,
+        "keys": [(220, 2, "UP"), (250, 2, "A"), (380, 2, "B")],
+    },
     "move-specialist-party-prompt": {
         "id": 6,
         "frames": 700,
         "keys": [(220, 2, "UP"), (250, 2, "A"), (380, 2, "A")],
     },
+    "move-specialist-battle-set-party": {
+        "id": 6,
+        "frames": 700,
+        "keys": [(220, 2, "UP"), (250, 2, "A"), (380, 2, "A"), (520, 2, "A")],
+    },
+    "move-specialist-party-back": {
+        "id": 6,
+        "frames": 880,
+        "keys": [
+            (220, 2, "UP"),
+            (250, 2, "A"),
+            (380, 2, "A"),
+            (520, 2, "A"),
+            (740, 2, "B"),
+        ],
+    },
     "battle-set-list": {
         "id": 6,
-        "frames": 900,
+        "frames": 1000,
         "keys": [
             (220, 2, "UP"),
             (250, 2, "A"),
             (380, 2, "A"),
             (520, 2, "A"),
             (650, 2, "A"),
+            (850, 2, "A"),
+        ],
+    },
+    "battle-set-format": {
+        "id": 6,
+        "frames": 800,
+        "keys": [
+            (220, 2, "UP"), (250, 2, "A"), (380, 2, "A"),
+            (520, 2, "A"), (650, 2, "A"),
+        ],
+    },
+    "battle-set-singles-list": {
+        "id": 6,
+        "frames": 1000,
+        "keys": [
+            (220, 2, "UP"), (250, 2, "A"), (380, 2, "A"),
+            (520, 2, "A"), (650, 2, "A"),
+            (800, 2, "DOWN"), (850, 2, "A"),
+        ],
+    },
+    "battle-set-list-back": {
+        "id": 6,
+        "frames": 1200,
+        "keys": [
+            (220, 2, "UP"),
+            (250, 2, "A"),
+            (380, 2, "A"),
+            (520, 2, "A"),
+            (650, 2, "A"),
+            (850, 2, "A"),
+            (1050, 2, "B"),
+        ],
+    },
+    "battle-set-confirm": {
+        "id": 6,
+        "frames": 1200,
+        "keys": [
+            (220, 2, "UP"),
+            (250, 2, "A"),
+            (380, 2, "A"),
+            (520, 2, "A"),
+            (650, 2, "A"),
+            (850, 2, "A"),
+            (1050, 2, "A"),
+        ],
+    },
+    "battle-set-confirm-no": {
+        "id": 6,
+        "frames": 1450,
+        "keys": [
+            (220, 2, "UP"),
+            (250, 2, "A"),
+            (380, 2, "A"),
+            (520, 2, "A"),
+            (650, 2, "A"),
+            (850, 2, "A"),
+            (1050, 2, "A"),
+            (1200, 2, "B"),
+        ],
+    },
+    "battle-set-applied": {
+        "id": 6,
+        "frames": 1450,
+        "keys": [
+            (220, 2, "UP"),
+            (250, 2, "A"),
+            (380, 2, "A"),
+            (520, 2, "A"),
+            (650, 2, "A"),
+            (850, 2, "A"),
+            (1050, 2, "A"),
+            (1200, 2, "A"),
+        ],
+    },
+    "stat-point-party": {
+        "id": 6,
+        "frames": 760,
+        "keys": [
+            (220, 2, "UP"), (250, 2, "A"),
+            (360, 2, "DOWN"), (400, 2, "A"), (560, 2, "A"),
+        ],
+    },
+    "stat-point-egg-rejected": {
+        "id": 6,
+        "param": 1,
+        "frames": 940,
+        "keys": [
+            (220, 2, "UP"), (250, 2, "A"),
+            (360, 2, "DOWN"), (400, 2, "A"), (560, 2, "A"),
+            (700, 2, "DOWN"), (760, 2, "A"),
+        ],
+    },
+    "stat-point-external-entry": {
+        "id": 6,
+        "param": 2,
+        "frames": 520,
+        "keys": [(220, 2, "UP"), (250, 2, "A")],
+    },
+    "stat-point-external-exit": {
+        "id": 6,
+        "param": 2,
+        "frames": 900,
+        "keys": [
+            (220, 2, "UP"), (250, 2, "A"),
+            (460, 2, "A"), (700, 2, "B"),
+        ],
+    },
+    "stat-point-list": {
+        "id": 6,
+        "frames": 940,
+        "keys": [
+            (220, 2, "UP"), (250, 2, "A"),
+            (360, 2, "DOWN"), (400, 2, "A"), (560, 2, "A"),
             (760, 2, "A"),
+        ],
+    },
+    "stat-point-list-scrolled": {
+        "id": 6,
+        "frames": 1320,
+        "keys": [
+            (220, 2, "UP"), (250, 2, "A"),
+            (360, 2, "DOWN"), (400, 2, "A"), (560, 2, "A"),
+            (760, 2, "A"),
+            (1000, 2, "DOWN"), (1040, 2, "DOWN"),
+            (1080, 2, "DOWN"), (1120, 2, "DOWN"),
+            (1160, 2, "DOWN"), (1200, 2, "DOWN"),
+        ],
+    },
+    "stat-point-adjust-list": {
+        "id": 6,
+        "frames": 1220,
+        "keys": [
+            (220, 2, "UP"), (250, 2, "A"),
+            (360, 2, "DOWN"), (400, 2, "A"), (560, 2, "A"),
+            (760, 2, "A"), (1100, 2, "A"),
+        ],
+    },
+    "stat-point-adjust-scrolled": {
+        "id": 6,
+        "frames": 1640,
+        "keys": [
+            (220, 2, "UP"), (250, 2, "A"),
+            (360, 2, "DOWN"), (400, 2, "A"), (560, 2, "A"),
+            (760, 2, "A"), (1100, 2, "A"),
+            (1240, 2, "DOWN"), (1280, 2, "DOWN"),
+            (1320, 2, "DOWN"), (1360, 2, "DOWN"),
+            (1400, 2, "DOWN"), (1440, 2, "DOWN"),
+            (1480, 2, "DOWN"), (1520, 2, "DOWN"),
+        ],
+    },
+    "stat-point-adjusted": {
+        "id": 6,
+        "frames": 1460,
+        "keys": [
+            (220, 2, "UP"), (250, 2, "A"),
+            (360, 2, "DOWN"), (400, 2, "A"), (560, 2, "A"),
+            (760, 2, "A"), (1100, 2, "A"),
+            (1240, 2, "DOWN"), (1280, 2, "DOWN"),
+            (1320, 2, "A"),
+        ],
+    },
+    "stat-point-boundary-feedback": {
+        "id": 6,
+        "frames": 1500,
+        "keys": [
+            (220, 2, "UP"), (250, 2, "A"),
+            (360, 2, "DOWN"), (400, 2, "A"), (560, 2, "A"),
+            (760, 2, "A"), (1100, 2, "A"),
+            (1240, 2, "DOWN"), (1280, 2, "DOWN"),
+            (1320, 2, "DOWN"), (1360, 2, "A"),
+        ],
+    },
+    "stat-point-adjust-back": {
+        "id": 6,
+        "frames": 1420,
+        "keys": [
+            (220, 2, "UP"), (250, 2, "A"),
+            (360, 2, "DOWN"), (400, 2, "A"), (560, 2, "A"),
+            (760, 2, "A"), (1100, 2, "A"), (1240, 2, "B"),
+        ],
+    },
+    "stat-point-list-back": {
+        "id": 6,
+        "frames": 1360,
+        "keys": [
+            (220, 2, "UP"), (250, 2, "A"),
+            (360, 2, "DOWN"), (400, 2, "A"), (560, 2, "A"),
+            (760, 2, "A"), (1000, 2, "B"), (1200, 2, "A"),
+        ],
+    },
+    "stat-point-reset-confirm": {
+        "id": 6,
+        "frames": 1380,
+        "keys": [
+            (220, 2, "UP"), (250, 2, "A"),
+            (360, 2, "DOWN"), (400, 2, "A"), (560, 2, "A"),
+            (760, 2, "A"),
+            (1000, 2, "DOWN"), (1040, 2, "DOWN"), (1080, 2, "DOWN"),
+            (1120, 2, "DOWN"), (1160, 2, "DOWN"), (1200, 2, "DOWN"),
+            (1260, 2, "A"),
+        ],
+    },
+    "stat-point-reset-no": {
+        "id": 6,
+        "frames": 1600,
+        "keys": [
+            (220, 2, "UP"), (250, 2, "A"),
+            (360, 2, "DOWN"), (400, 2, "A"), (560, 2, "A"),
+            (760, 2, "A"),
+            (1000, 2, "DOWN"), (1040, 2, "DOWN"), (1080, 2, "DOWN"),
+            (1120, 2, "DOWN"), (1160, 2, "DOWN"), (1200, 2, "DOWN"),
+            (1260, 2, "A"), (1420, 2, "B"),
+        ],
+    },
+    "stat-point-reset-yes": {
+        "id": 6,
+        "frames": 1600,
+        "keys": [
+            (220, 2, "UP"), (250, 2, "A"),
+            (360, 2, "DOWN"), (400, 2, "A"), (560, 2, "A"),
+            (760, 2, "A"),
+            (1000, 2, "DOWN"), (1040, 2, "DOWN"), (1080, 2, "DOWN"),
+            (1120, 2, "DOWN"), (1160, 2, "DOWN"), (1200, 2, "DOWN"),
+            (1260, 2, "A"), (1420, 2, "A"),
+        ],
+    },
+    "stat-point-reset-zero-list": {
+        "id": 6,
+        "frames": 1900,
+        "keys": [
+            (220, 2, "UP"), (250, 2, "A"),
+            (360, 2, "DOWN"), (400, 2, "A"), (560, 2, "A"),
+            (760, 2, "A"),
+            (1000, 2, "DOWN"), (1040, 2, "DOWN"),
+            (1080, 2, "DOWN"), (1120, 2, "DOWN"),
+            (1160, 2, "DOWN"), (1200, 2, "DOWN"),
+            (1260, 2, "A"), (1420, 2, "A"),
+            (1640, 2, "A"),
+        ],
+    },
+    "move-specialist-learn-move-party": {
+        "id": 6,
+        "frames": 900,
+        "keys": [
+            (220, 2, "UP"),
+            (250, 2, "A"),
+            (380, 2, "DOWN"),
+            (420, 2, "DOWN"),
+            (460, 2, "A"),
+            (600, 2, "A"),
+        ],
+    },
+    "move-specialist-learn-move-back": {
+        "id": 6,
+        "frames": 1080,
+        "keys": [
+            (220, 2, "UP"),
+            (250, 2, "A"),
+            (380, 2, "DOWN"),
+            (420, 2, "DOWN"),
+            (460, 2, "A"),
+            (600, 2, "A"),
+            (940, 2, "B"),
+        ],
+    },
+    "move-specialist-forget-intro": {
+        "id": 6,
+        "frames": 800,
+        "keys": [
+            (220, 2, "UP"),
+            (250, 2, "A"),
+            (380, 2, "DOWN"),
+            (420, 2, "DOWN"),
+            (460, 2, "DOWN"),
+            (500, 2, "A"),
+            (650, 2, "A"),
+        ],
+    },
+    "move-specialist-forget-decline": {
+        "id": 6,
+        "frames": 1300,
+        "keys": [
+            (220, 2, "UP"),
+            (250, 2, "A"),
+            (380, 2, "DOWN"),
+            (420, 2, "DOWN"),
+            (460, 2, "DOWN"),
+            (500, 2, "A"), (650, 2, "A"),
+            (800, 2, "A"), (1000, 2, "A"),
+            (1200, 2, "B"),
+        ],
+    },
+    "move-specialist-forget-party": {
+        "id": 6,
+        "frames": 1540,
+        "keys": [
+            (220, 2, "UP"),
+            (250, 2, "A"),
+            (380, 2, "DOWN"),
+            (420, 2, "DOWN"),
+            (460, 2, "DOWN"),
+            (500, 2, "A"), (650, 2, "A"),
+            (800, 2, "A"), (1000, 2, "A"),
+            (1200, 2, "A"), (1400, 2, "A"),
+        ],
+    },
+    "move-specialist-forget-party-back": {
+        "id": 6,
+        "frames": 1780,
+        "keys": [
+            (220, 2, "UP"),
+            (250, 2, "A"),
+            (380, 2, "DOWN"),
+            (420, 2, "DOWN"),
+            (460, 2, "DOWN"),
+            (500, 2, "A"), (650, 2, "A"),
+            (800, 2, "A"), (1000, 2, "A"),
+            (1200, 2, "A"), (1400, 2, "A"), (1600, 2, "B"),
+        ],
+    },
+    "move-specialist-rename-prompt": {
+        "id": 6,
+        "frames": 820,
+        "keys": [
+            (220, 2, "UP"),
+            (250, 2, "A"),
+            (380, 2, "DOWN"),
+            (420, 2, "DOWN"),
+            (460, 2, "DOWN"),
+            (500, 2, "A"),
+            (650, 2, "DOWN"),
+            (700, 2, "A"),
+        ],
+    },
+    "move-specialist-rename-party": {
+        "id": 6,
+        "frames": 1050,
+        "keys": [
+            (220, 2, "UP"),
+            (250, 2, "A"),
+            (380, 2, "DOWN"),
+            (420, 2, "DOWN"),
+            (460, 2, "DOWN"),
+            (500, 2, "A"),
+            (650, 2, "DOWN"), (700, 2, "A"),
+            (900, 2, "A"),
+        ],
+    },
+    "move-specialist-rename-back": {
+        "id": 6,
+        "frames": 1380,
+        "keys": [
+            (220, 2, "UP"),
+            (250, 2, "A"),
+            (380, 2, "DOWN"),
+            (420, 2, "DOWN"),
+            (460, 2, "DOWN"),
+            (500, 2, "A"),
+            (650, 2, "DOWN"), (700, 2, "A"),
+            (900, 2, "A"), (1200, 2, "B"),
         ],
     },
     "all-legal-moves": {
@@ -88,14 +702,12 @@ SCENARIOS: dict[str, dict[str, object]] = {
             (220, 2, "UP"),
             (250, 2, "A"),
             (340, 2, "DOWN"),
-            (380, 2, "A"),
-            (520, 2, "A"),
-            (650, 2, "A"),
+            (380, 2, "DOWN"),
+            (420, 2, "A"),
+            (560, 2, "A"),
+            (700, 2, "A"),
         ],
     },
-    "thundurus": {"id": 7, "frames": 560, "keys": [(280, 2, "UP")]},
-    "tornadus": {"id": 8, "frames": 560, "keys": [(280, 2, "UP")]},
-    "landorus": {"id": 9, "frames": 560, "keys": [(280, 2, "UP")]},
     "game-corner-prizes": {
         "id": 10,
         "frames": 700,
@@ -136,6 +748,31 @@ SCENARIOS: dict[str, dict[str, object]] = {
     },
     "leveler-complete": {"id": 12, "frames": 700, "keys": []},
     "all-legal-moves-direct": {"id": 13, "frames": 650, "keys": []},
+    "all-legal-move-selected": {
+        "id": 13,
+        "frames": 1050,
+        "keys": [(700, 2, "A")],
+    },
+    "all-legal-move-selected-back": {
+        "id": 13,
+        "frames": 1250,
+        "keys": [(700, 2, "A"), (1080, 2, "B")],
+    },
+    "all-legal-move-confirmed": {
+        "id": 13,
+        "frames": 1500,
+        "keys": [(700, 2, "A"), (1080, 2, "A")],
+    },
+    "all-legal-move-give-up": {
+        "id": 13,
+        "frames": 1000,
+        "keys": [(700, 2, "B")],
+    },
+    "all-legal-move-give-up-no": {
+        "id": 13,
+        "frames": 1220,
+        "keys": [(700, 2, "B"), (1040, 2, "B")],
+    },
     "all-legal-moves-mew": {"id": 14, "frames": 650, "keys": []},
     "all-legal-moves-mew-middle": {
         "id": 14,
@@ -199,21 +836,216 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "keys": [(700, 2, "A"), (840, 2, "A")],
     },
     "circuit-room": {"id": 21, "frames": 900, "keys": []},
-    "pokedex": {"id": 23, "frames": 900, "keys": []},
-    "summary-info": {"id": 24, "frames": 900, "keys": []},
-    "summary-skills": {"id": 24, "frames": 1050, "keys": [(800, 2, "RIGHT")]},
+    "pokedex": {"id": 23, "param": 0, "frames": 900, "keys": [], "verify": True},
+    "pokedex-info": {
+        "id": 23,
+        "param": 1,
+        "frames": 1200,
+        "keys": [(900, 2, "A")],
+        "verify": True,
+    },
+    "pokedex-area": {
+        "id": 23,
+        "param": 2,
+        "frames": 1400,
+        "keys": [(900, 2, "A"), (1200, 2, "RIGHT")],
+        "verify": True,
+    },
+    "pokedex-stats": {
+        "id": 23,
+        "param": 3,
+        "frames": 1580,
+        "keys": [(900, 2, "A"), (1200, 2, "RIGHT"), (1380, 2, "RIGHT")],
+        "verify": True,
+    },
+    "pokedex-evolutions": {
+        "id": 23,
+        "param": 4,
+        "frames": 1760,
+        "keys": [
+            (900, 2, "A"),
+            (1200, 2, "RIGHT"),
+            (1380, 2, "RIGHT"),
+            (1560, 2, "RIGHT"),
+        ],
+        "verify": True,
+    },
+    "pokedex-forms": {
+        "id": 23,
+        "param": 5,
+        "frames": 2350,
+        "keys": [
+            (900, 2, "A"),
+            (1200, 2, "RIGHT"),
+            (1380, 2, "RIGHT"),
+            (1560, 2, "RIGHT"),
+            (1900, 2, "START"),
+        ],
+        "verify": True,
+    },
+    "pokedex-cry": {
+        "id": 23,
+        "param": 6,
+        "frames": 2060,
+        "keys": [
+            (900, 2, "A"),
+            (1200, 2, "RIGHT"),
+            (1380, 2, "RIGHT"),
+            (1560, 2, "RIGHT"),
+            (1740, 2, "RIGHT"),
+        ],
+        "verify": True,
+    },
+    "pokedex-size": {
+        "id": 23,
+        "param": 7,
+        "frames": 2240,
+        "keys": [
+            (900, 2, "A"),
+            (1200, 2, "RIGHT"),
+            (1380, 2, "RIGHT"),
+            (1560, 2, "RIGHT"),
+            (1740, 2, "RIGHT"),
+            (1920, 2, "RIGHT"),
+        ],
+        "verify": True,
+    },
+    "pokedex-search": {
+        "id": 23,
+        "param": 8,
+        "frames": 1200,
+        "keys": [(900, 2, "SELECT")],
+        "verify": True,
+    },
+    "pokedex-search-results": {
+        "id": 23,
+        "param": 9,
+        "frames": 3800,
+        "keys": [
+            (900, 2, "SELECT"),
+            (1200, 2, "A"),
+            (1400, 2, "DOWN"),
+            (1550, 2, "DOWN"),
+            (1700, 2, "DOWN"),
+            (1850, 2, "DOWN"),
+            (2000, 2, "DOWN"),
+            (2200, 2, "A"),
+            (2900, 2, "A"),
+        ],
+        "verify": True,
+    },
+    "summary-info": {"id": 24, "param": 0, "frames": 900, "keys": [], "verify": True},
+    "summary-skills": {
+        "id": 24,
+        "param": 1,
+        "frames": 1050,
+        "keys": [(800, 2, "RIGHT")],
+        "verify": True,
+    },
     "summary-moves": {
         "id": 24,
+        "param": 2,
         "frames": 1200,
         "keys": [(800, 2, "RIGHT"), (980, 2, "RIGHT")],
+        "verify": True,
+    },
+    "summary-contest-moves": {
+        "id": 24,
+        "param": 3,
+        "frames": 1500,
+        "keys": [(800, 2, "RIGHT"), (980, 2, "RIGHT"), (1160, 2, "RIGHT")],
+        "verify": True,
     },
     "summary-move-detail": {
         "id": 24,
+        "param": 4,
         "frames": 1400,
         "keys": [(800, 2, "RIGHT"), (980, 2, "RIGHT"), (1160, 2, "A")],
+        "verify": True,
     },
-    "summary-party-roundtrip": {"id": 24, "frames": 1200, "keys": [(820, 2, "B")]},
-    "bag": {"id": 25, "frames": 900, "keys": []},
+    "summary-party-roundtrip": {
+        "id": 24,
+        "param": 5,
+        "frames": 1200,
+        "keys": [(820, 2, "B")],
+        "verify": True,
+    },
+    "bag": {"id": 25, "param": 2, "frames": 650, "keys": [], "verify": True},
+    "bag-tms-hms": {
+        "id": 25,
+        "param": 3,
+        "frames": 800,
+        "keys": [(700, 2, "RIGHT")],
+        "verify": True,
+    },
+    "bag-berries": {
+        "id": 25,
+        "param": 4,
+        "frames": 980,
+        "keys": [(700, 2, "RIGHT"), (880, 2, "RIGHT")],
+        "verify": True,
+    },
+    "bag-poke-balls": {
+        "id": 25,
+        "param": 5,
+        "frames": 1160,
+        "keys": [(700, 2, "RIGHT"), (880, 2, "RIGHT"), (1060, 2, "RIGHT")],
+        "verify": True,
+    },
+    "bag-key-items": {
+        "id": 25,
+        "param": 6,
+        "frames": 1340,
+        "keys": [
+            (700, 2, "RIGHT"),
+            (880, 2, "RIGHT"),
+            (1060, 2, "RIGHT"),
+            (1240, 2, "RIGHT"),
+        ],
+        "verify": True,
+    },
+    "bag-mega-stones": {
+        "id": 25,
+        "param": 7,
+        "frames": 1520,
+        "keys": [
+            (700, 2, "RIGHT"),
+            (880, 2, "RIGHT"),
+            (1060, 2, "RIGHT"),
+            (1240, 2, "RIGHT"),
+            (1420, 2, "RIGHT"),
+        ],
+        "verify": True,
+    },
+    "bag-items": {
+        "id": 25,
+        "param": 0,
+        "frames": 1700,
+        "keys": [
+            (700, 2, "RIGHT"),
+            (880, 2, "RIGHT"),
+            (1060, 2, "RIGHT"),
+            (1240, 2, "RIGHT"),
+            (1420, 2, "RIGHT"),
+            (1600, 2, "RIGHT"),
+        ],
+        "verify": True,
+    },
+    "bag-medicine": {
+        "id": 25,
+        "param": 1,
+        "frames": 1880,
+        "keys": [
+            (700, 2, "RIGHT"),
+            (880, 2, "RIGHT"),
+            (1060, 2, "RIGHT"),
+            (1240, 2, "RIGHT"),
+            (1420, 2, "RIGHT"),
+            (1600, 2, "RIGHT"),
+            (1780, 2, "RIGHT"),
+        ],
+        "verify": True,
+    },
     "frontier-pass": {"id": 26, "frames": 900, "keys": []},
     "frontier-pass-map": {
         "id": 26,
@@ -280,23 +1112,178 @@ SCENARIOS: dict[str, dict[str, object]] = {
     "battle-dome-info-card": {"id": 37, "frames": 1500, "keys": []},
     "contest-results": {"id": 38, "frames": 1800, "keys": []},
     "slot-machine": {"id": 39, "frames": 1200, "keys": []},
-    "fairy-summary-info": {"id": 40, "frames": 900, "keys": []},
-    "fairy-summary-moves": {
+    "fairy-summary-info": {
         "id": 40,
-        "frames": 1200,
-        "keys": [(800, 2, "RIGHT"), (980, 2, "RIGHT")],
-    },
-    "pecharunt-shrine-background": {
-        "id": 41,
-        "param": 12,
-        "frames": 650,
+        "param": 0,
+        "frames": 900,
         "keys": [],
         "verify": True,
-        "fixture_map": "MAP_MT_PYRE_6F",
-        "fixture_species": "SPECIES_PECHARUNT",
-        "player": [11, 8],
+    },
+    "fairy-summary-moves": {
+        "id": 40,
+        "param": 2,
+        "frames": 1200,
+        "keys": [(800, 2, "RIGHT"), (980, 2, "RIGHT")],
+        "verify": True,
+    },
+    "magma-sparkle-placement": {
+        "id": 42,
+        "frames": 608,
+        "keys": [],
+        "trigger_frame": 600,
+        "verify": True,
+    },
+    "furfrou-trims": {
+        "id": 43,
+        "param": 0,
+        "frames": 700,
+        "keys": [],
+        "verify": True,
+    },
+    "furfrou-trims-scrolled": {
+        "id": 43,
+        "param": 1,
+        "frames": 1550,
+        "keys": [
+            (700, 2, "DOWN"),
+            (780, 2, "DOWN"),
+            (860, 2, "DOWN"),
+            (940, 2, "DOWN"),
+            (1020, 2, "DOWN"),
+            (1100, 2, "DOWN"),
+            (1180, 2, "DOWN"),
+            (1260, 2, "DOWN"),
+            (1340, 2, "DOWN"),
+            (1420, 2, "DOWN"),
+        ],
+        "verify": True,
+    },
+    "furfrou-trims-b-cancel": {
+        "id": 43,
+        "param": 2,
+        "frames": 1000,
+        "keys": [(800, 2, "B")],
+        "verify": True,
+    },
+    "furfrou-trims-back": {
+        "id": 43,
+        "param": 3,
+        "frames": 1750,
+        "keys": [
+            (700, 2, "DOWN"),
+            (780, 2, "DOWN"),
+            (860, 2, "DOWN"),
+            (940, 2, "DOWN"),
+            (1020, 2, "DOWN"),
+            (1100, 2, "DOWN"),
+            (1180, 2, "DOWN"),
+            (1260, 2, "DOWN"),
+            (1340, 2, "DOWN"),
+            (1420, 2, "DOWN"),
+            (1550, 2, "A"),
+        ],
+        "verify": True,
+    },
+    "hall-of-fame-record-1": {
+        "id": 45, "param": 1, "frames": 1600, "keys": [],
+        "trigger_frame": 600, "verify": True, "stop_on_observed": True,
+    },
+    "hall-of-fame-record-6": {
+        "id": 45, "param": 6, "frames": 1600, "keys": [],
+        "trigger_frame": 600, "verify": True, "stop_on_observed": True,
+    },
+    "multi-corridor-door-left-open": {
+        "id": 46, "param": 0, "frames": 1000, "keys": [],
+        "trigger_frame": 600, "verify": True, "stop_on_observed": True,
+    },
+    "multi-corridor-door-right-open": {
+        "id": 46, "param": 1, "frames": 1000, "keys": [],
+        "trigger_frame": 600, "verify": True, "stop_on_observed": True,
+    },
+    "multi-corridor-door-left-close": {
+        "id": 46, "param": 2, "frames": 1000, "keys": [],
+        "trigger_frame": 600, "verify": True, "stop_on_observed": True,
+    },
+    "multi-corridor-door-right-close": {
+        "id": 46, "param": 3, "frames": 1000, "keys": [],
+        "trigger_frame": 600, "verify": True, "stop_on_observed": True,
     },
 }
+
+
+SERVICE_UI_SCENARIOS = (
+    "nurse-heal-facing-machine",
+    "nurse-heal-tray",
+    "nurse-heal-return",
+    "whiteout-heal-placement",
+    "whiteout-heal-league-placement",
+    "whiteout-heal-lavaridge-placement",
+    "trainer-hill-nurse-heal-placement",
+    "party-overview",
+    "party-action-menu",
+    "ability-menu",
+    "ability-back-to-actions",
+    "ability-cancel-to-actions",
+    "ability-applied-message",
+    "ability-applied-return",
+    "move-specialist-root",
+    "move-specialist-root-back",
+    "move-specialist-party-prompt",
+    "move-specialist-battle-set-party",
+    "move-specialist-party-back",
+    "battle-set-format",
+    "battle-set-list",
+    "battle-set-singles-list",
+    "battle-set-list-back",
+    "battle-set-confirm",
+    "battle-set-confirm-no",
+    "battle-set-applied",
+    "stat-point-party",
+    "stat-point-egg-rejected",
+    "stat-point-external-entry",
+    "stat-point-external-exit",
+    "stat-point-list",
+    "stat-point-list-scrolled",
+    "stat-point-adjust-list",
+    "stat-point-adjust-scrolled",
+    "stat-point-adjusted",
+    "stat-point-boundary-feedback",
+    "stat-point-adjust-back",
+    "stat-point-list-back",
+    "stat-point-reset-confirm",
+    "stat-point-reset-no",
+    "stat-point-reset-yes",
+    "stat-point-reset-zero-list",
+    "move-specialist-learn-move-party",
+    "move-specialist-learn-move-back",
+    "move-specialist-forget-intro",
+    "move-specialist-forget-decline",
+    "move-specialist-forget-party",
+    "move-specialist-forget-party-back",
+    "move-specialist-rename-prompt",
+    "move-specialist-rename-party",
+    "move-specialist-rename-back",
+    "all-legal-moves-direct",
+    "all-legal-move-selected",
+    "all-legal-move-selected-back",
+    "all-legal-move-confirmed",
+    "all-legal-move-give-up",
+    "all-legal-move-give-up-no",
+    "all-legal-moves-mew-middle",
+    "all-legal-moves-mew-final",
+    "battle-vendor",
+    "battle-vendor-category-back",
+    "battle-vendor-postbadge-root",
+    "battle-vendor-postbadge-held-items",
+    "battle-vendor-shop",
+    "battle-vendor-quantity",
+    "battle-vendor-quantity-adjusted",
+    "battle-vendor-quantity-back",
+    "battle-vendor-confirm",
+    "battle-vendor-confirm-no",
+    "battle-vendor-purchase-success",
+    "battle-vendor-purchase-return",
+)
 
 
 OVERWORLD_FIXTURE_PATTERN = re.compile(
@@ -319,8 +1306,10 @@ def load_overworld_fixtures() -> list[dict[str, object]]:
                 "player": [int(player_x), int(player_y)],
             }
         )
-    if [row["index"] for row in rows] != list(range(1, 33)):
-        raise RuntimeError("overworld fixture rows must be exactly 1..32 in reviewed order")
+    if [row["index"] for row in rows] != list(range(1, len(rows) + 1)):
+        raise RuntimeError("overworld fixture rows must be contiguous in reviewed order")
+    if len(rows) != 8:
+        raise RuntimeError("overworld fixture table must match Inclement's eight physical encounters")
     return rows
 
 
@@ -340,6 +1329,88 @@ for fixture in OVERWORLD_FIXTURES:
         "fixture_species": fixture["species"],
         "player": fixture["player"],
     }
+
+
+def load_hoenn_heal_fixtures() -> list[dict[str, object]]:
+    maps = {
+        data["id"]: data
+        for path in (ROOT / "data/maps").glob("*/map.json")
+        for data in (json.loads(path.read_text()),)
+    }
+    rows = []
+    for index, entry in enumerate(
+        json.loads((ROOT / "src/data/heal_locations.json").read_text())["heal_locations"],
+        1,
+    ):
+        respawn_map = maps.get(entry.get("respawn_map"))
+        if (respawn_map is None or respawn_map.get("region") != "REGION_HOENN"):
+            continue
+        if entry.get("respawn_npc") in (None, "LOCALID_NONE"):
+            continue
+        rows.append({**entry, "heal_location_id": index})
+    if len(rows) != 21:
+        raise RuntimeError(f"expected 21 active Hoenn heal locations, found {len(rows)}")
+    return rows
+
+
+HOENN_HEAL_FIXTURES = load_hoenn_heal_fixtures()
+for fixture in HOENN_HEAL_FIXTURES:
+    slug = str(fixture["id"]).removeprefix("HEAL_LOCATION_").lower().replace("_", "-")
+    name = f"heal-whiteout-{slug}"
+    SCENARIOS[name] = {
+        "id": 44,
+        "param": fixture["heal_location_id"],
+        "frames": 1280,
+        "keys": [(900, 2, "A"), (1160, 2, "A")],
+        "verify": True,
+        "heal_location": fixture["id"],
+        "respawn_map": fixture["respawn_map"],
+        "respawn_npc": fixture["respawn_npc"],
+    }
+
+INCLEMENT_SEAM_SCENARIOS = tuple(dict.fromkeys((
+    "center-oldale",
+    "center-lavaridge",
+    *SERVICE_UI_SCENARIOS,
+    "pokedex",
+    "pokedex-info",
+    "pokedex-area",
+    "pokedex-stats",
+    "pokedex-evolutions",
+    "pokedex-forms",
+    "pokedex-cry",
+    "pokedex-size",
+    "pokedex-search",
+    "pokedex-search-results",
+    "summary-info",
+    "summary-skills",
+    "summary-moves",
+    "summary-contest-moves",
+    "summary-move-detail",
+    "summary-party-roundtrip",
+    "fairy-summary-info",
+    "fairy-summary-moves",
+    "bag",
+    "bag-items",
+    "bag-medicine",
+    "bag-tms-hms",
+    "bag-berries",
+    "bag-poke-balls",
+    "bag-key-items",
+    "bag-mega-stones",
+    "furfrou-trims",
+    "furfrou-trims-scrolled",
+    "furfrou-trims-b-cancel",
+    "furfrou-trims-back",
+    "hall-of-fame-record-1",
+    "hall-of-fame-record-6",
+    "multi-corridor-door-left-open",
+    "multi-corridor-door-right-open",
+    "multi-corridor-door-left-close",
+    "multi-corridor-door-right-close",
+    *(name for name in SCENARIOS if name.startswith("heal-whiteout-")),
+    *(name for name in SCENARIOS if name.startswith("encounter-")),
+)))
 
 
 def fail(message: str) -> None:
@@ -392,7 +1463,6 @@ def find_mgba_prefix() -> Path:
 
 
 def build_runner() -> Path:
-    prefix = find_mgba_prefix()
     output = ROOT / "build/headless/emerald_champions_mgba_runner"
     output.parent.mkdir(parents=True, exist_ok=True)
     newest_input = max(RUNNER_SOURCE.stat().st_mtime_ns, Path(__file__).stat().st_mtime_ns)
@@ -405,14 +1475,31 @@ def build_runner() -> Path:
         "-Wall",
         "-Wextra",
         "-Werror",
-        f"-I{prefix / 'include'}",
         str(RUNNER_SOURCE),
-        f"-L{prefix / 'lib'}",
-        "-lmgba",
-        f"-Wl,-rpath,{prefix / 'lib'}",
-        "-o",
-        str(output),
     ]
+    pkg_config = shutil.which("pkg-config")
+    pkg_flags: list[str] = []
+    if pkg_config is not None:
+        result = subprocess.run(
+            [pkg_config, "--cflags", "--libs", "mgba"],
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.DEVNULL,
+            check=False,
+        )
+        if result.returncode == 0:
+            pkg_flags = shlex.split(result.stdout)
+    if pkg_flags:
+        command.extend(pkg_flags)
+    else:
+        prefix = find_mgba_prefix()
+        command.extend((
+            f"-I{prefix / 'include'}",
+            f"-L{prefix / 'lib'}",
+            "-lmgba",
+            f"-Wl,-rpath,{prefix / 'lib'}",
+        ))
+    command.extend(("-o", str(output)))
     run(command)
     return output
 
@@ -429,7 +1516,7 @@ def resolve_symbol(elf: Path, name: str) -> int:
     fail(f"ELF symbol is missing: {name}")
 
 
-def validate_screenshot_png(path: Path) -> None:
+def validate_screenshot_png(path: Path) -> str:
     data = path.read_bytes()
     if not data.startswith(b"\x89PNG\r\n\x1a\n"):
         fail(f"screenshot output is not PNG: {path}")
@@ -526,6 +1613,17 @@ def validate_screenshot_png(path: Path) -> None:
     ):
         fail(f"scenario produced a uniform blank screenshot: {path}")
 
+    # Hash normalized decoded RGB pixels, not PNG container bytes.  This is
+    # stable across valid encoder/filter/compression differences in CI.
+    pixels = bytearray()
+    for row in rows:
+        if bytes_per_pixel == 3:
+            pixels.extend(row)
+        else:
+            for x in range(0, stride, bytes_per_pixel):
+                pixels.extend(row[x : x + 3])
+    return hashlib.sha256(pixels).hexdigest()
+
 
 def render_one(
     name: str,
@@ -577,7 +1675,7 @@ def render_one(
 
     if not screenshot.is_file():
         fail(f"scenario {name} did not produce a screenshot")
-    validate_screenshot_png(screenshot)
+    pixel_sha256 = validate_screenshot_png(screenshot)
     match = RESULT_PATTERN.search(result.stdout)
     if match is None:
         fail(f"scenario {name} produced no result line: {result.stdout}")
@@ -595,10 +1693,14 @@ def render_one(
         "keys": spec["keys"],
         "video_hash": match.group("video"),
         "png_sha256": hashlib.sha256(screenshot.read_bytes()).hexdigest(),
+        "pixel_sha256": pixel_sha256,
         "screenshot": str(screenshot),
         "verified_runtime_state": bool(spec.get("verify")),
     }
-    for field in ("fixture_map", "fixture_species", "player", "param"):
+    for field in (
+        "fixture_map", "fixture_species", "player", "param",
+        "heal_location", "respawn_map", "respawn_npc",
+    ):
         if field in spec:
             rendered[field] = spec[field]
     return rendered
@@ -606,7 +1708,10 @@ def render_one(
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("scenario", choices=["all", "overworld-encounters", *SCENARIOS])
+    parser.add_argument(
+        "scenario",
+        choices=["all", "service-ui", "inclement-seams", "overworld-encounters", *SCENARIOS],
+    )
     parser.add_argument("--rom", type=Path, default=DEFAULT_ROM)
     parser.add_argument("--elf", type=Path, default=DEFAULT_ELF)
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
@@ -623,6 +1728,10 @@ def main() -> int:
     args.out.mkdir(parents=True, exist_ok=True)
     if args.scenario == "all":
         names = list(SCENARIOS)
+    elif args.scenario == "service-ui":
+        names = list(SERVICE_UI_SCENARIOS)
+    elif args.scenario == "inclement-seams":
+        names = list(INCLEMENT_SEAM_SCENARIOS)
     elif args.scenario == "overworld-encounters":
         names = [name for name in SCENARIOS if name.startswith("encounter-")]
     else:

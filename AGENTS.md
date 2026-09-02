@@ -62,8 +62,18 @@ Run the source/static suite with:
 python3 scripts/verify_emerald_champions_release.py
 ```
 
-That command also requires fresh release artifacts. The curated runtime suite
-is:
+That command also requires fresh release artifacts and a content stamp.
+Release ROMs are compiled in the Docker builder from a copied tree, so after
+`make release` run, inside that same tree:
+
+```sh
+python3 scripts/stamp_release_inputs.py
+```
+
+and copy `pokeemerald-release.inputs.json` out beside the ROM. The verifier
+compares that stamp to the host tree by content; modification times alone
+cannot prove the ROM was built from the current sources. The curated runtime
+suite is:
 
 ```sh
 python3 scripts/run_emerald_champions_runtime_gates.py --jobs "$(sysctl -n hw.ncpu)"

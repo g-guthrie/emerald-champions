@@ -2,6 +2,65 @@ RustboroCity_DevonCorp_2F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, RustboroCity_DevonCorp_2F_OnTransition
 	.byte 0
 
+RustboroCity_DevonCorp_2F_EventScript_EeveeResearcher::
+	lock
+	faceplayer
+	msgbox RustboroCity_DevonCorp_2F_Text_EeveeResearcherOffer, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, RustboroCity_DevonCorp_2F_EventScript_EeveeResearcherExit
+	msgbox RustboroCity_DevonCorp_2F_Text_EeveeResearcherChoose, MSGBOX_DEFAULT
+	special ChoosePartyMon
+	goto_if_ge VAR_0x8004, PARTY_SIZE, RustboroCity_DevonCorp_2F_EventScript_EeveeResearcherExit
+	special IsSelectedMonEgg
+	goto_if_eq VAR_RESULT, TRUE, RustboroCity_DevonCorp_2F_EventScript_EeveeResearcherInvalid
+	specialvar VAR_RESULT, IsSelectedMonEeveelution
+	goto_if_eq VAR_RESULT, FALSE, RustboroCity_DevonCorp_2F_EventScript_EeveeResearcherInvalid
+	bufferpartymonnick STR_VAR_1, VAR_0x8004
+	msgbox RustboroCity_DevonCorp_2F_Text_EeveeResearcherConfirm, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, RustboroCity_DevonCorp_2F_EventScript_EeveeResearcherExit
+	setvar VAR_0x8005, SPECIES_EEVEE
+	fadescreen FADE_TO_BLACK
+	special ChangeSelectedMonSpecies
+	fadescreen FADE_FROM_BLACK
+	msgbox RustboroCity_DevonCorp_2F_Text_EeveeResearcherComplete, MSGBOX_DEFAULT
+	release
+	end
+
+RustboroCity_DevonCorp_2F_EventScript_EeveeResearcherInvalid::
+	msgbox RustboroCity_DevonCorp_2F_Text_EeveeResearcherInvalid, MSGBOX_DEFAULT
+	release
+	end
+
+RustboroCity_DevonCorp_2F_EventScript_EeveeResearcherExit::
+	msgbox RustboroCity_DevonCorp_2F_Text_EeveeResearcherExit, MSGBOX_DEFAULT
+	release
+	end
+
+RustboroCity_DevonCorp_2F_Text_EeveeResearcherOffer:
+	.string "DEVON can safely return an evolved\n"
+	.string "EEVEE to its original form. Try it?$"
+
+RustboroCity_DevonCorp_2F_Text_EeveeResearcherChoose:
+	.string "Choose the EEVEE evolution to return\n"
+	.string "to EEVEE.$"
+
+RustboroCity_DevonCorp_2F_Text_EeveeResearcherConfirm:
+	.string "Return {STR_VAR_1} to EEVEE? Its\n"
+	.string "current moves will be preserved.$"
+
+RustboroCity_DevonCorp_2F_Text_EeveeResearcherComplete:
+	.string "The genetic pattern stabilized.\n"
+	.string "{STR_VAR_1} is EEVEE again.$"
+
+RustboroCity_DevonCorp_2F_Text_EeveeResearcherInvalid:
+	.string "That POKéMON is not an evolved member\n"
+	.string "of EEVEE's family.$"
+
+RustboroCity_DevonCorp_2F_Text_EeveeResearcherExit:
+	.string "The machine will be ready whenever\n"
+	.string "you need it.$"
+
+.set EC_SIGN_MAGEARNA_ID, 58
+
 RustboroCity_DevonCorp_2F_OnTransition:
 	call_if_eq VAR_FOSSIL_RESURRECTION_STATE, 1, RustboroCity_DevonCorp_2F_EventScript_SetFossilReady
 	end
@@ -50,6 +109,10 @@ RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist::
 	lock
 	faceplayer
 	call_if_eq VAR_FOSSIL_RESURRECTION_STATE, 1, RustboroCity_DevonCorp_2F_EventScript_SetFossilReady
+	call RustboroCity_DevonCorp_2F_EventScript_TryMagearnaPrototype
+	goto_if_eq VAR_RESULT, 1, RustboroCity_DevonCorp_2F_EventScript_MagearnaParty
+	goto_if_eq VAR_RESULT, 2, RustboroCity_DevonCorp_2F_EventScript_MagearnaPC
+	goto_if_eq VAR_RESULT, 3, RustboroCity_DevonCorp_2F_EventScript_MagearnaNoRoom
 	msgbox RustboroCity_DevonCorp_2F_Text_LegendarySignResearcherIntro, MSGBOX_DEFAULT
 RustboroCity_DevonCorp_2F_EventScript_CheckLegendarySign::
 	special TryDiscoverEligibleLegendarySign
@@ -62,6 +125,48 @@ RustboroCity_DevonCorp_2F_EventScript_CheckLegendarySign::
 	goto_if_eq VAR_RESULT, 3, RustboroCity_DevonCorp_2F_EventScript_ArceusRewardNoRoom
 	goto_if_eq VAR_RESULT, 4, RustboroCity_DevonCorp_2F_EventScript_ArceusRewardComplete
 	msgbox RustboroCity_DevonCorp_2F_Text_AllLegendarySignsRecorded, MSGBOX_DEFAULT
+	release
+	end
+
+RustboroCity_DevonCorp_2F_EventScript_TryMagearnaPrototype::
+	setvar VAR_RESULT, 0
+	setvar VAR_0x8004, EC_SIGN_MAGEARNA_ID
+	special GetSelectedLegendarySignState
+	goto_if_eq VAR_RESULT, 2, RustboroCity_DevonCorp_2F_EventScript_MagearnaReturn
+	goto_if_unset FLAG_BADGE08_GET, RustboroCity_DevonCorp_2F_EventScript_MagearnaReturn
+	setvar VAR_0x8004, SPECIES_DIANCIE
+	special DoesPlayerPartyHaveSelectedSpeciesFamily
+	goto_if_eq VAR_RESULT, FALSE, RustboroCity_DevonCorp_2F_EventScript_MagearnaReturn
+	setvar VAR_0x8004, EC_SIGN_MAGEARNA_ID
+	special TryUnlockSelectedLegendarySign
+	goto_if_eq VAR_RESULT, 0, RustboroCity_DevonCorp_2F_EventScript_MagearnaReturn
+	goto_if_eq VAR_RESULT, 1, RustboroCity_DevonCorp_2F_EventScript_MagearnaReturn
+	setvar VAR_0x8004, EC_SIGN_MAGEARNA_ID
+	special TryGiveSelectedLegendarySignReward
+	return
+
+RustboroCity_DevonCorp_2F_EventScript_MagearnaReturn::
+	setvar VAR_RESULT, 0
+	return
+
+RustboroCity_DevonCorp_2F_EventScript_MagearnaParty::
+	setflag FLAG_EC_CAUGHT_MAGEARNA
+	playfanfare MUS_OBTAIN_ITEM
+	waitfanfare
+	msgbox RustboroCity_DevonCorp_2F_Text_MagearnaParty, MSGBOX_DEFAULT
+	release
+	end
+
+RustboroCity_DevonCorp_2F_EventScript_MagearnaPC::
+	setflag FLAG_EC_CAUGHT_MAGEARNA
+	playfanfare MUS_OBTAIN_ITEM
+	waitfanfare
+	msgbox RustboroCity_DevonCorp_2F_Text_MagearnaPC, MSGBOX_DEFAULT
+	release
+	end
+
+RustboroCity_DevonCorp_2F_EventScript_MagearnaNoRoom::
+	msgbox RustboroCity_DevonCorp_2F_Text_MagearnaNoRoom, MSGBOX_DEFAULT
 	release
 	end
 
@@ -106,6 +211,20 @@ RustboroCity_DevonCorp_2F_Text_LegendarySignResearcherIntro:
 	.string "returns to the marked place.\p"
 	.string "I can also tune an eligible Sign\n"
 	.string "remotely if you bring its partner here.$"
+
+RustboroCity_DevonCorp_2F_Text_MagearnaParty:
+	.string "DIANCIE's light completes DEVON's\n"
+	.string "sealed mechanical prototype!\p"
+	.string "MAGEARNA awakens and joins your party.$"
+
+RustboroCity_DevonCorp_2F_Text_MagearnaPC:
+	.string "DIANCIE's light completes DEVON's\n"
+	.string "sealed mechanical prototype!\p"
+	.string "MAGEARNA awakens and is sent to your PC.$"
+
+RustboroCity_DevonCorp_2F_Text_MagearnaNoRoom:
+	.string "The sealed prototype answers DIANCIE,\n"
+	.string "but your party and PC have no room.$"
 
 RustboroCity_DevonCorp_2F_Text_LegendarySignAwakened:
 	.string "{STR_VAR_1} resonates with my data!\p"
@@ -612,68 +731,4 @@ RustboroCity_DevonCorp_2F_Text_WhatToWorkOnNext:
 	.string "environment as an engineer.$"
 
 @ BEGIN EMERALD CHAMPIONS LEGENDARY ROOTS
-.set EC_SIGN_MAGEARNA_ID, 58
-
-RustboroCity_DevonCorp_2F_EventScript_Magearna::
-	lock
-	faceplayer
-	setvar VAR_0x8004, EC_SIGN_MAGEARNA_ID
-	special TryUnlockSelectedLegendarySign
-	goto_if_eq VAR_RESULT, 0, RustboroCity_DevonCorp_2F_EventScript_MagearnaDormant
-	goto_if_eq VAR_RESULT, 1, RustboroCity_DevonCorp_2F_EventScript_MagearnaNeedsPartner
-	goto_if_eq VAR_RESULT, 4, RustboroCity_DevonCorp_2F_EventScript_MagearnaCleanup
-	msgbox RustboroCity_DevonCorp_2F_Text_MagearnaAwakens, MSGBOX_DEFAULT
-	waitse
-	playmoncry SPECIES_MAGEARNA, CRY_MODE_ENCOUNTER
-	delay 40
-	waitmoncry
-	setvar VAR_0x8004, EC_SIGN_MAGEARNA_ID
-	special CreateSelectedLegendarySignEncounter
-	setflag FLAG_SYS_CTRL_OBJ_DELETE
-	special BattleSetup_StartLegendaryBattle
-	clearflag FLAG_SYS_CTRL_OBJ_DELETE
-	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, RustboroCity_DevonCorp_2F_EventScript_MagearnaCaught
-	msgbox RustboroCity_DevonCorp_2F_Text_MagearnaRemains, MSGBOX_DEFAULT
-	release
-	end
-
-RustboroCity_DevonCorp_2F_EventScript_MagearnaDormant::
-	msgbox RustboroCity_DevonCorp_2F_Text_MagearnaDormant, MSGBOX_DEFAULT
-	release
-	end
-
-RustboroCity_DevonCorp_2F_EventScript_MagearnaNeedsPartner::
-	msgbox RustboroCity_DevonCorp_2F_Text_MagearnaNeedsPartner, MSGBOX_DEFAULT
-	release
-	end
-
-RustboroCity_DevonCorp_2F_EventScript_MagearnaCaught::
-	setflag FLAG_EC_CAUGHT_MAGEARNA
-RustboroCity_DevonCorp_2F_EventScript_MagearnaCleanup::
-	setflag FLAG_EC_CAUGHT_MAGEARNA
-	removeobject LOCALID_EC_MAGEARNA
-	release
-	end
-
-RustboroCity_DevonCorp_2F_Text_MagearnaDormant:
-	.string "A CHAMPION'S SIGN marks a sealed\n"
-	.string "DEVON prototype.\p"
-	.string "Its light is dormant. HOENN's story\n"
-	.string "has not yet reached this place.$"
-
-RustboroCity_DevonCorp_2F_Text_MagearnaNeedsPartner:
-	.string "The SIGN sketches DIANCIE.\p"
-	.string "Bring that POKéMON's family here, and\n"
-	.string "the hidden challenger may answer.$"
-
-RustboroCity_DevonCorp_2F_Text_MagearnaAwakens:
-	.string "The CHAMPION'S SIGN erupts with light!\n"
-	.string "MAGEARNA answers the challenge!$"
-
-RustboroCity_DevonCorp_2F_Text_MagearnaRemains:
-	.string "The SIGN remains bright. MAGEARNA\n"
-	.string "will accept another challenge.$"
-
-
 @ END EMERALD CHAMPIONS LEGENDARY ROOTS

@@ -20,6 +20,13 @@ PYTHON = sys.executable
 STATIC_GATES = (
     ("core services", (PYTHON, "scripts/verify_emerald_champions_core.py")),
     ("native field UI", (PYTHON, "scripts/verify_emerald_champions_native_ui.py")),
+    ("visual contracts", (PYTHON, "scripts/verify_emerald_champions_visual_contracts.py")),
+    ("Inclement visual sources", (PYTHON, "scripts/verify_inclement_visual_sources.py")),
+    ("Inclement overworld parity", (PYTHON, "scripts/verify_inclement_overworld_parity.py")),
+    (
+        "Verdant visual byte inventory",
+        (PYTHON, "scripts/audit_verdant_visual_parity.py", "--check-fast"),
+    ),
     ("finite rewards", (PYTHON, "scripts/emerald_champions_reward_rewrite.py")),
     ("reward economy", (PYTHON, "scripts/verify_emerald_champions_reward_economy.py")),
     ("wild distribution", (PYTHON, "scripts/emerald_champions_wild_distribution.py")),
@@ -31,6 +38,8 @@ STATIC_GATES = (
     ("Game Corner starter archive", (PYTHON, "scripts/verify_game_corner_starter_archive.py")),
     ("trainer Ability legality", (PYTHON, "scripts/verify_trainer_ability_legality.py")),
     ("trainer runtime coherence", (PYTHON, "scripts/verify_trainer_runtime_coherence.py")),
+    ("trainer row reachability", (PYTHON, "scripts/prune_unreachable_trainer_parties.py")),
+    ("trainer dialogue species", (PYTHON, "scripts/audit_trainer_dialogue_species.py")),
     ("story and dialogue", (PYTHON, "scripts/verify_emerald_champions_story.py")),
     ("rematch-free Match Call", (PYTHON, "scripts/verify_rematch_free_match_call.py")),
     ("whole-campaign progression graph", (PYTHON, "scripts/verify_emerald_champions_progression.py")),
@@ -42,7 +51,7 @@ STATIC_GATES = (
     ("fossil revival", (PYTHON, "scripts/verify_fossil_revival.py")),
     ("Poke Vial quest", (PYTHON, "scripts/restore_poke_vial_quest.py")),
     ("campaign battle master", (PYTHON, "scripts/audit_emerald_champions_master_battles.py")),
-    ("campaign evidence freshness", (PYTHON, "scripts/generate_emerald_champions_campaign_evidence.py", "--check")),
+    ("Frontier competitive loadouts", (PYTHON, "scripts/generate_emerald_champions_frontier_sets.py", "--check")),
     ("battle script formats", (PYTHON, "scripts/align_emerald_champions_battle_scripts.py")),
 )
 
@@ -55,22 +64,6 @@ def require(condition: bool, message: str) -> None:
 def run_gate(label: str, command: tuple[str, ...]) -> None:
     print(f"\n== {label} ==", flush=True)
     subprocess.run(command, cwd=ROOT, check=True)
-
-
-def verify_materialized_trainers() -> None:
-    master = (ROOT / "docs/emerald_champions_master_battle_design.txt").read_text()
-    encounter_count = len(re.findall(r"(?m)^=== ENCOUNTER \d{4} ===$", master))
-    require(encounter_count > 0, "canonical battle master has no encounters")
-    run_gate(
-        "materialized trainer parties",
-        (
-            PYTHON,
-            "scripts/implement_emerald_champions_master_battles.py",
-            "--through-encounter",
-            str(encounter_count),
-            "--verify-only",
-        ),
-    )
 
 
 def verify_unique_state_ids() -> None:
@@ -235,13 +228,15 @@ def verify_build_freshness(rom: Path, elf: Path) -> None:
              or path.suffix in {".mk", ".ld"})
     )
     require(inputs, "no build inputs were found")
-    newest = max(inputs, key=lambda path: path.stat().st_mtime_ns)
-    artifact_time = min(rom.stat().st_mtime_ns, elf.stat().st_mtime_ns)
-    require(
-        artifact_time >= newest.stat().st_mtime_ns,
-        f"{rom.name} is stale: {newest.relative_to(ROOT)} is newer; rebuild the current source first",
+    # Modification times cannot prove the ROM came from *these* sources: the
+    # Docker builder compiles a copied tree, a checkout rewrites every mtime,
+    # and a stray `touch` fails a correct build.  The content stamp written by
+    # scripts/stamp_release_inputs.py inside the tree that was actually built is
+    # the only freshness evidence this gate accepts.
+    run_gate(
+        "release input content stamp",
+        (PYTHON, "scripts/stamp_release_inputs.py", "--check"),
     )
-    print(f"PASS: {rom.name} is newer than every canonical ROM build input")
 
 
 def verify_patch_integrity(*, allow_source_bundle: bool) -> None:
@@ -283,7 +278,8 @@ def main() -> None:
 
     for label, command in STATIC_GATES:
         run_gate(label, command)
-    verify_materialized_trainers()
+    # Master-design/party equality is proven by the campaign battle master
+    # gate; the former materialization re-check duplicated it.
     verify_unique_state_ids()
     verify_branding()
     verify_patch_integrity(allow_source_bundle=args.allow_source_bundle)

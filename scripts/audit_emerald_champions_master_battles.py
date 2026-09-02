@@ -82,6 +82,21 @@ SIGN_SPECIES = {
         (ROOT / "src" / "data" / "pokemon" / "legendary_signs.h").read_text(),
     )
 }
+LEGENDARY_SHOWCASE_ALIASES = {
+    # The acquisition root is the base family, while trainer data uses the
+    # battle-ready Power Construct form explicitly.  Either form is a real
+    # Zygarde showcase; requiring a third base-form copy would be duplication,
+    # not additional campaign coverage.
+    "SPECIES_ZYGARDE": {
+        "SPECIES_ZYGARDE",
+        "SPECIES_ZYGARDE_50",
+        "SPECIES_ZYGARDE_50_POWER_CONSTRUCT",
+        "SPECIES_ZYGARDE_10",
+        "SPECIES_ZYGARDE_10_POWER_CONSTRUCT",
+        "SPECIES_ZYGARDE_COMPLETE",
+        "SPECIES_ZYGARDE_MEGA",
+    },
+}
 
 
 def move_categories() -> dict[str, str]:
@@ -356,6 +371,11 @@ EVOLUTION_LEVEL_REQUIREMENTS = evolution_level_requirements()
 
 SHOWDOWN_DATA = json.loads((ROOT / "docs" / "showdown_champions_learnsets.json").read_text())
 SHOWDOWN_LEARNSETS = {species: set(moves) for species, moves in SHOWDOWN_DATA["learnsets"].items()}
+MOVE_ACCESS_REVIEW = json.loads((ROOT / "docs" / "emerald_champions_move_access_review.json").read_text())
+REVIEWED_MOVE_EXTENSIONS: dict[str, set[str]] = {}
+for _assignment in MOVE_ACCESS_REVIEW["assignments"]:
+    if _assignment["action"] == "retain_inclement_custom_extension":
+        REVIEWED_MOVE_EXTENSIONS.setdefault(_assignment["species"], set()).add(_assignment["move"])
 SHOWDOWN_FORM_SUFFIXES = (
     "50powerconstruct", "10powerconstruct", "powerconstruct", "curly", "droopy", "stretchy",
     "incarnate", "ordinary", "aria", "amped", "midday", "male", "female", "natural",
@@ -378,8 +398,13 @@ def showdown_id_for_species(species: str) -> str | None:
 def pinned_legal_moves(species: str) -> set[str]:
     showdown_id = showdown_id_for_species(species)
     if showdown_id is None:
-        return set()
-    return {move for move_id in SHOWDOWN_LEARNSETS[showdown_id] if (move := MOVES_BY_ID.get(move_id)) is not None}
+        return set(REVIEWED_MOVE_EXTENSIONS.get(species, set()))
+    official = {
+        move
+        for move_id in SHOWDOWN_LEARNSETS[showdown_id]
+        if (move := MOVES_BY_ID.get(move_id)) is not None
+    }
+    return official | REVIEWED_MOVE_EXTENSIONS.get(species, set())
 
 
 GYM_TYPES = {
@@ -945,7 +970,12 @@ def audit(path: Path) -> tuple[list[str], list[str]]:
     missing_megas = sorted(MEGA_STONES - set(all_items))
     if missing_megas:
         errors.append(f"missing Mega showcases: {missing_megas}")
-    missing_signs = sorted(SIGN_SPECIES - set(all_species))
+    used_species = set(all_species)
+    missing_signs = sorted(
+        species
+        for species in SIGN_SPECIES
+        if not (LEGENDARY_SHOWCASE_ALIASES.get(species, {species}) & used_species)
+    )
     if missing_signs:
         errors.append(f"missing legendary showcases: {missing_signs}")
 

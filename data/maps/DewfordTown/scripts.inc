@@ -2,6 +2,15 @@ DewfordTown_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, DewfordTown_OnTransition
 	.byte 0
 
+DewfordTown_EventScript_GymGuide::
+	msgbox DewfordTown_Text_RestoredGymGuide, MSGBOX_NPC
+	end
+
+DewfordTown_Text_RestoredGymGuide:
+	.string "BRAWLY is back at DEWFORD GYM.\p"
+	.string "Bring at least two trained POKéMON.\n"
+	.string "His battle is built for doubles.$"
+
 DewfordTown_OnTransition:
 	setflag FLAG_VISITED_DEWFORD_TOWN
 	end

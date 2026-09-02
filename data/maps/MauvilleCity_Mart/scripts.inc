@@ -25,7 +25,6 @@ MauvilleCity_Mart_Pokemart:
 	.2byte ITEM_QUICK_BALL
 	.2byte ITEM_LUXURY_BALL
 	.2byte ITEM_POKE_TOY
-	.2byte ITEM_RARE_CANDY
 	pokemartlistend
 
 MauvilleCity_Mart_EventScript_ExpertM::

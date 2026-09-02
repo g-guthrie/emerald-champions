@@ -343,6 +343,9 @@ gSpecials::
 	def_special GetContestMultiplayerId
 	def_special ScriptGetPartyMonSpecies
 	def_special IsSelectedMonEgg
+	def_special IsSelectedMonEeveelution
+	def_special IsSelectedMonFurfrou
+	def_special ChangeSelectedMonSpecies
 	def_special Special_HasMoveToRelearn
 	def_special TryInitBattleTowerAwardManObjectEvent
 	def_special MoveOutOfSecretBaseFromOutside
@@ -520,11 +523,16 @@ gSpecials::
 	def_special GetSelectedMonEmeraldChampionsBattleSetCount
 	def_special BufferSelectedMonEmeraldChampionsBattleSetName
 	def_special BufferSelectedMonCurrentEmeraldChampionsBattleSet
+	def_special BufferSelectedMonEmeraldChampionsStatPointSummary
+	def_special BufferSelectedMonEmeraldChampionsStatPointDetail
+	def_special AdjustSelectedMonEmeraldChampionsStatPoints
+	def_special ResetSelectedMonEmeraldChampionsStatPoints
 	def_special TryUnlockSelectedLegendarySign
 	def_special GetSelectedLegendarySignState
 	def_special ShouldShowSelectedLegendarySignObject
 	def_special GetSelectedLegendarySignLevel
 	def_special CreateSelectedLegendarySignEncounter
+	def_special TryGiveSelectedLegendarySignReward
 	def_special CreateEmeraldChampionsStaticLegendaryEncounter
 	def_special DoesPlayerPartyHaveSelectedSpeciesFamily
 	def_special BufferCurrentMapRouteSignSpecies

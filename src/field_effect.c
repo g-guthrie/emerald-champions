@@ -1248,6 +1248,19 @@ static void HallOfFameRecordEffect_WaitForSoundAndEnd(struct Task *task)
     }
 }
 
+#if EC_HEADLESS_FIXTURES
+bool32 IsHallOfFameRecordHeadlessVisible(u32 partyCount)
+{
+    u8 taskId = FindTaskIdByFunc(Task_HallOfFameRecord);
+
+    return taskId != TASK_NONE
+        && gTasks[taskId].tNumMons == partyCount
+        && gTasks[taskId].tState >= 1
+        && gTasks[taskId].tBallSpriteId < MAX_SPRITES
+        && gSprites[gTasks[taskId].tBallSpriteId].inUse;
+}
+#endif
+
 static u8 CreateGlowingPokeballsEffect(s16 numMons, s16 x, s16 y, bool16 playHealSe)
 {
     u8 spriteId;

@@ -1,0 +1,36 @@
+{
+  "elf": "/Users/gguthrie/Projects/ec-ui-build.YKIy6o/pokeemerald-headless.elf",
+  "param_symbol": "0x0200195c",
+  "rendered": [
+    {
+      "frames": 520,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          380,
+          2,
+          "B"
+        ]
+      ],
+      "name": "move-specialist-root-back",
+      "png_sha256": "8bad63bc5bed637cd308c0a0361e6b7288ca052cab74e358e03a79a6a48b537e",
+      "scenario_id": 6,
+      "screenshot": "work/visual-audit/rendered/service-ui-2026-08-31/move-specialist-root-back.png",
+      "verified_runtime_state": false,
+      "video_hash": "87ad7febd6e78661"
+    }
+  ],
+  "rom": "/Users/gguthrie/Projects/ec-ui-build.YKIy6o/pokeemerald-headless.gba",
+  "rom_sha256": "5190b12c178d806954cc1cf220432386515fd3999494473e2dd91d0fb1248b82",
+  "scenario_symbol": "0x0200196c",
+  "schema_version": 1
+}

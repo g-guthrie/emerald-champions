@@ -903,6 +903,7 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
     ChooseAmbientCrySpecies();
     SetDefaultFlashLevel();
     Overworld_ClearSavedMusic();
+    TryUnlockEligibleVisibleLegendarySignsForCurrentMap();
     RunOnTransitionMapScript();
     InitMap();
     CopySecondaryTilesetToVramUsingHeap(gMapHeader.mapLayout);
@@ -973,6 +974,7 @@ static void LoadMapFromWarp(bool32 a1)
         FlagClear(FLAG_SYS_USE_FLASH);
     SetDefaultFlashLevel();
     Overworld_ClearSavedMusic();
+    TryUnlockEligibleVisibleLegendarySignsForCurrentMap();
     RunOnTransitionMapScript();
     UpdateLocationHistoryForRoamer();
     MoveAllRoamersToOtherLocationSets();
@@ -2186,6 +2188,9 @@ static const u16 sEmeraldChampionsSignStateVars[] =
     VAR_LEGENDARY_SIGNS_CAUGHT_5,
 };
 
+// These legacy mirror flags remain part of the save-migration contract even
+// when the corresponding added overworld prop has been removed.  Synchronizing
+// them restores save semantics; it does not recreate an object on any map.
 static const struct EmeraldChampionsPhysicalSignFlag sEmeraldChampionsPhysicalSignFlags[] =
 {
     {LEGENDARY_SIGN_CELEBI,    FLAG_EC_CAUGHT_CELEBI, FALSE},
@@ -2211,6 +2216,9 @@ static void ResetEmeraldChampionsSignState(void)
 
 static void SetEmeraldChampionsPhysicalSignFlags(void)
 {
+    // Inclement's inherited static encounters are visible whenever their map
+    // is reachable. Their ordinary object flags are set only after capture.
+    // Emerald Champions-specific Signs use environmental or wild triggers.
     for (u32 i = 0; i < ARRAY_COUNT(sEmeraldChampionsPhysicalSignFlags); i++)
     {
         const struct EmeraldChampionsPhysicalSignFlag *entry = &sEmeraldChampionsPhysicalSignFlags[i];
@@ -2397,7 +2405,10 @@ void MigrateEmeraldChampionsCoreState(void)
     // This dedicated version is authoritative. In particular, never trust the
     // 0x4C5 flag first: 81e used that same bit for defeated Zygarde.
     if (version == EMERALD_CHAMPIONS_SAVE_VERSION_CURRENT)
+    {
+        SetEmeraldChampionsPhysicalSignFlags();
         return;
+    }
 
     legacyGymMarker = FlagGet(FLAG_UNUSED_0x91E);
     legacyItemMarker = FlagGet(FLAG_UNUSED_0x91F);

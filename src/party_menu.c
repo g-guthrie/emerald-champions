@@ -523,7 +523,8 @@ static u8 CombinedToIndividualPartyId(u8 index);
 static u8 IndividualToCombinedPartyId(u8 index, enum BattlerId battler);
 
 static const u8 sText_askText[] = _("Would you like to change {STR_VAR_1}'s\nability to {STR_VAR_2}?");
-static const u8 sText_doneText[] = _("{STR_VAR_1}'s ability became\n{STR_VAR_2}!{PAUSE_UNTIL_PRESS}");
+static const u8 sText_doneText[] = _("{STR_VAR_1}'s Ability became\n{STR_VAR_2}!{PAUSE_UNTIL_PRESS}");
+static const u8 sText_CancelTitleCase[] = _("Cancel");
 static const u8 sText_LevelerComplete[] = _("Your party reached the current\nlevel cap: Lv. {STR_VAR_1}!{PAUSE_UNTIL_PRESS}");
 static const u8 sText_BasePointsResetToZero[] = _("{STR_VAR_1}'s base points\nwere all reset to zero!{PAUSE_UNTIL_PRESS}");
 static const u8 sText_CannotSendMonToBoxHM[] = _("Cannot send that mon to the box,\nbecause it knows a HM move.{PAUSE_UNTIL_PRESS}");
@@ -2448,8 +2449,8 @@ static void CreateCancelConfirmWindows(bool8 chooseHalf)
         }
         else
         {
-            mainOffset = GetStringCenterAlignXOffset(FONT_SMALL, gText_Cancel2, 48);
-            AddTextPrinterParameterized3(cancelWindowId, FONT_SMALL, mainOffset + offset, 1, sFontColorTable[0], TEXT_SKIP_DRAW, gText_Cancel2);
+            mainOffset = GetStringCenterAlignXOffset(FONT_SMALL, sText_CancelTitleCase, 48);
+            AddTextPrinterParameterized3(cancelWindowId, FONT_SMALL, mainOffset + offset, 1, sFontColorTable[0], TEXT_SKIP_DRAW, sText_CancelTitleCase);
         }
         PutWindowTilemap(cancelWindowId);
         CopyWindowToVram(cancelWindowId, COPYWIN_GFX);
@@ -7200,8 +7201,22 @@ static void DisplayAbilitySelectionWindow(u8 count, const u8 *slots, u8 initialC
     u8 choiceCount = count + 1;
     u8 cursorDimension = GetMenuCursorDimensionByFont(FONT_NORMAL, 0);
     u8 letterSpacing = GetFontAttribute(FONT_NORMAL, FONTATTR_LETTER_SPACING);
+    u32 widestLabel = GetStringWidth(FONT_NORMAL, sText_CancelTitleCase, letterSpacing);
+    u8 windowWidth;
 
-    SetWindowTemplateFields(&window, 2, 12, 19 - (choiceCount * 2), 17, choiceCount * 2, 14, 0x2E9);
+    // Size and right-align the list exactly like the native party action
+    // window: measure the widest Ability name, never narrower than the
+    // 10-tile action popup, and keep the right edge on column 29.
+    for (u8 i = 0; i < count; i++)
+    {
+        enum Ability ability = GetAbilityBySpecies(species, slots[i]);
+        u32 labelWidth = GetStringWidth(FONT_NORMAL, gAbilitiesInfo[ability].name, letterSpacing);
+
+        if (labelWidth > widestLabel)
+            widestLabel = labelWidth;
+    }
+    windowWidth = min(17, max(10, (cursorDimension + widestLabel + 7) / 8 + 1));
+    SetWindowTemplateFields(&window, 2, 29 - windowWidth, 19 - (choiceCount * 2), windowWidth, choiceCount * 2, 14, 0x2E9);
     sPartyMenuInternal->windowId[0] = AddWindow(&window);
     DrawStdFrameWithCustomTileAndPalette(sPartyMenuInternal->windowId[0], FALSE, 0x4F, 13);
 
@@ -7229,7 +7244,7 @@ static void DisplayAbilitySelectionWindow(u8 count, const u8 *slots, u8 initialC
         0,
         sFontColorTable[3],
         0,
-        gText_Cancel2);
+        sText_CancelTitleCase);
 
     InitMenuInUpperLeftCorner(sPartyMenuInternal->windowId[0], choiceCount, initialCursor, FALSE);
     ScheduleBgCopyTilemapToVram(2);
@@ -8967,5 +8982,12 @@ s8 Test_UpdatePartySelectionSingleLayout(s8 slotId, s8 movementDir, bool8 choose
 
     sPartyMenuInternal = savedInternal;
     return slotId;
+}
+#endif
+
+#if EC_HEADLESS_FIXTURES
+bool32 IsPartyMenuHeadlessAwaitingSelection(void)
+{
+    return sPartyMenuInternal != NULL && FuncIsActiveTask(Task_HandleChooseMonInput);
 }
 #endif

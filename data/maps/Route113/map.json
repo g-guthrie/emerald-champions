@@ -451,8 +451,8 @@
       "x": 22,
       "y": 5,
       "elevation": 3,
-      "item": "ITEM_RARE_CANDY",
-      "flag": "FLAG_HIDDEN_ITEM_ROUTE_113_RARE_CANDY"
+      "item": "ITEM_ULTRA_BALL",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE_113_ULTRA_BALL"
     },
     {
       "type": "hidden_item",

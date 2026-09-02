@@ -72,17 +72,22 @@ SealedChamber_InnerRoom_EventScript_BrailleStoryPart6::
 
 SealedChamber_InnerRoom_EventScript_RegigigasEC::
 	lock
-	faceplayer
-	goto_if_unset FLAG_BADGE07_GET, SealedChamber_InnerRoom_EventScript_RegigigasECDormant
+	msgbox SealedChamber_InnerRoom_Text_RegigigasStatue, MSGBOX_DEFAULT
+	closemessage
+	braillemsgbox SealedChamber_InnerRoom_Braille_Regigigas
 	setvar VAR_0x8004, SPECIES_REGICE
 	special DoesPlayerPartyHaveSelectedSpeciesFamily
-	goto_if_eq VAR_RESULT, FALSE, SealedChamber_InnerRoom_EventScript_RegigigasECNeedsRegis
+	goto_if_eq VAR_RESULT, FALSE, SealedChamber_InnerRoom_EventScript_RegigigasStatue
 	setvar VAR_0x8004, SPECIES_REGIROCK
 	special DoesPlayerPartyHaveSelectedSpeciesFamily
-	goto_if_eq VAR_RESULT, FALSE, SealedChamber_InnerRoom_EventScript_RegigigasECNeedsRegis
+	goto_if_eq VAR_RESULT, FALSE, SealedChamber_InnerRoom_EventScript_RegigigasStatue
 	setvar VAR_0x8004, SPECIES_REGISTEEL
 	special DoesPlayerPartyHaveSelectedSpeciesFamily
-	goto_if_eq VAR_RESULT, FALSE, SealedChamber_InnerRoom_EventScript_RegigigasECNeedsRegis
+	goto_if_eq VAR_RESULT, FALSE, SealedChamber_InnerRoom_EventScript_RegigigasStatue
+	waitse
+	playmoncry SPECIES_REGIGIGAS, CRY_MODE_ENCOUNTER
+	delay 40
+	waitmoncry
 	setvar VAR_0x8004, EC_SIGN_REGIGIGAS_ID
 	special TryUnlockSelectedLegendarySign
 	msgbox SealedChamber_InnerRoom_Text_RegigigasECAwakens, MSGBOX_DEFAULT
@@ -97,13 +102,7 @@ SealedChamber_InnerRoom_EventScript_RegigigasEC::
 	release
 	end
 
-SealedChamber_InnerRoom_EventScript_RegigigasECDormant::
-	msgbox SealedChamber_InnerRoom_Text_RegigigasECDormant, MSGBOX_DEFAULT
-	release
-	end
-
-SealedChamber_InnerRoom_EventScript_RegigigasECNeedsRegis::
-	msgbox SealedChamber_InnerRoom_Text_RegigigasECNeedsRegis, MSGBOX_DEFAULT
+SealedChamber_InnerRoom_EventScript_RegigigasStatue::
 	release
 	end
 
@@ -113,13 +112,10 @@ SealedChamber_InnerRoom_EventScript_RegigigasECCaught::
 	release
 	end
 
-SealedChamber_InnerRoom_Text_RegigigasECDormant:
-	.string "The giant statue is silent. Seven BADGES\n"
-	.string "are needed to read its final seal.$"
-
-SealedChamber_InnerRoom_Text_RegigigasECNeedsRegis:
-	.string "Braille names REGIROCK, REGICE, and\n"
-	.string "REGISTEEL. Bring all three in your party.$"
+SealedChamber_InnerRoom_Text_RegigigasStatue:
+	.string "It's a statue of a Pokémon.\n"
+	.string "It exudes tremendous power…\p"
+	.string "There's something engraved on it…$"
 
 SealedChamber_InnerRoom_Text_RegigigasECAwakens:
 	.string "The three REGIS answer together!\n"

@@ -26,7 +26,6 @@ BattleFrontier_Mart_Pokemart:
 	.2byte ITEM_REPEAT_BALL
 	.2byte ITEM_DIVE_BALL
 	.2byte ITEM_LUXURY_BALL
-	.2byte ITEM_RARE_CANDY
 	pokemartlistend
 
 BattleFrontier_Mart_EventScript_OldMan::

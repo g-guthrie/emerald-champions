@@ -1055,6 +1055,7 @@ enum __attribute__((packed)) Item
     // Emerald Champions campaign tools
     ITEM_POKE_VIAL = 874,
     ITEM_LEVELER = 875,
+    ITEM_MAGMA_STONE = 876,
 
     ITEMS_COUNT,
     ITEM_FIELD_ARROW = ITEMS_COUNT,

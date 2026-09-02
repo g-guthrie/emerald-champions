@@ -2221,20 +2221,14 @@ void CreatePokedexList(u8 dexMode, u8 order)
 static void PrintMonDexNum(u8 windowId, u8 fontId, const u8 *str, u8 left, u8 top)
 {
     static const u8 color[3] = { TEXT_COLOR_TRANSPARENT, TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_LIGHT_GRAY };
-    u32 xOffset = 0;
-    if (POKEDEX_PLUS_HGSS)
-        xOffset = 4;
-    AddTextPrinterParameterized4(windowId, fontId, left * 8 - xOffset, (top * 8) + 1, 0, 0, color, TEXT_SKIP_DRAW, str);
+    AddTextPrinterParameterized4(windowId, fontId, left * 8, (top * 8) + 1, 0, 0, color, TEXT_SKIP_DRAW, str);
 }
 
 static void PrintMonName(u8 windowId, u8 fontId, const u8 *str, u8 left, u8 top)
 {
     static const u8 color[3] = { TEXT_COLOR_TRANSPARENT, TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_LIGHT_GRAY };
-    u32 xOffset = 0;
-    if (POKEDEX_PLUS_HGSS)
-        xOffset = 13;
-    fontId = GetFontIdToFit(str, fontId, 0, 50 + xOffset);
-    AddTextPrinterParameterized4(windowId, fontId, left * 8 - xOffset, (top * 8) + 1, 0, 0, color, TEXT_SKIP_DRAW, str);
+    fontId = GetFontIdToFit(str, fontId, 0, 50);
+    AddTextPrinterParameterized4(windowId, fontId, left * 8, (top * 8) + 1, 0, 0, color, TEXT_SKIP_DRAW, str);
 }
 
 // u16 ignored is passed but never used
@@ -2333,18 +2327,24 @@ static void CreateMonListEntry(u8 position, u16 b, u16 ignored)
 void CreateMonDexNum(u16 entryNum, u8 left, u8 top, u16 unused)
 {
     u8 text[7];
-    u16 dexNum, offset = 2;
-    if (POKEDEX_PLUS_HGSS)
-        offset = 0;
+    u16 dexNum;
+    // {NO} occupies two encoded bytes.  Inclement writes the first digit
+    // after both bytes so the list renders as No001 rather than overwriting
+    // the control sequence.
+    u16 offset = 2;
 
     dexNum = sPokedexView->pokedexList[entryNum].dexNum;
     if (sPokedexView->dexMode == DEX_MODE_HOENN)
         dexNum = NationalToRegionalOrder(dexNum);
-    memcpy(text, sText_No0000, ARRAY_COUNT(sText_No0000));
-    if (NATIONAL_DEX_COUNT > 999 && sPokedexView->dexMode != DEX_MODE_HOENN)
+    if (dexNum > 999)
     {
+        memcpy(text, sText_No0000, ARRAY_COUNT(sText_No0000));
         text[offset] = CHAR_0 + dexNum / 1000;
         offset++;
+    }
+    else
+    {
+        memcpy(text, sText_No000, ARRAY_COUNT(sText_No000));
     }
     text[offset++] = CHAR_0 + (dexNum % 1000) / 100;
     text[offset++] = CHAR_0 + ((dexNum % 1000) % 100) / 10;
@@ -2362,14 +2362,10 @@ void CreateMonDexNum(u16 entryNum, u8 left, u8 top, u16 unused)
 
 void CreateCaughtBall(bool16 owned, u8 x, u8 y, u16 unused)
 {
-    u32 xMultiplier = 8;
-    if (POKEDEX_PLUS_HGSS)
-        xMultiplier = 6;
-
     if (owned)
-        BlitBitmapToWindow(0, sCaughtBall_Gfx, x * xMultiplier, y * 8, 8, 16);
+        BlitBitmapToWindow(0, sCaughtBall_Gfx, x * 8, y * 8, 8, 16);
     else
-        FillWindowPixelRect(0, PIXEL_FILL(0), x * xMultiplier, y * 8, 8, 16);
+        FillWindowPixelRect(0, PIXEL_FILL(0), x * 8, y * 8, 8, 16);
 }
 
 u8 CreateMonName(u16 num, u8 left, u8 top)
@@ -5913,3 +5909,13 @@ void LoadSpriteSilhouettePalette(u32 spriteId)
 {
     LoadPalette(sSizeScreenSilhouette_Pal, OBJ_PLTT_ID2(gSprites[spriteId].oam.paletteNum), PLTT_SIZE_4BPP);
 }
+
+#if EC_HEADLESS_FIXTURES
+bool32 IsPokedexHeadlessOnScreen(u32 currentPage, u32 selectedScreen, bool32 searchResults)
+{
+    return sPokedexView != NULL
+        && sPokedexView->currentPage == currentPage
+        && sPokedexView->selectedScreen == selectedScreen
+        && sPokedexView->isSearchResults == searchResults;
+}
+#endif

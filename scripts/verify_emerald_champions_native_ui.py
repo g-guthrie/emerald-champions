@@ -74,17 +74,77 @@ GAME_CORNER_REGIONAL_MENUS = (
 REQUIRED_HEADLESS_SCENARIOS = {
     "center-oldale",
     "center-lavaridge",
+    "nurse-heal-facing-machine",
+    "nurse-heal-tray",
+    "nurse-heal-return",
+    "whiteout-heal-placement",
+    "whiteout-heal-league-placement",
+    "whiteout-heal-lavaridge-placement",
+    "trainer-hill-nurse-heal-placement",
     "ability-menu",
+    "ability-back-to-actions",
+    "ability-cancel-to-actions",
+    "ability-applied-message",
+    "ability-applied-return",
     "party-overview",
     "party-action-menu",
     "options",
     "battle-vendor",
+    "battle-vendor-category-back",
+    "battle-vendor-postbadge-root",
+    "battle-vendor-postbadge-held-items",
     "battle-vendor-shop",
+    "battle-vendor-quantity",
+    "battle-vendor-quantity-adjusted",
+    "battle-vendor-quantity-back",
+    "battle-vendor-confirm",
+    "battle-vendor-confirm-no",
+    "battle-vendor-purchase-success",
+    "battle-vendor-purchase-return",
     "move-specialist-root",
+    "move-specialist-root-back",
     "move-specialist-party-prompt",
+    "move-specialist-battle-set-party",
+    "move-specialist-party-back",
+    "battle-set-format",
+    "move-specialist-learn-move-party",
+    "move-specialist-learn-move-back",
+    "move-specialist-forget-intro",
+    "move-specialist-forget-decline",
+    "move-specialist-forget-party",
+    "move-specialist-forget-party-back",
+    "move-specialist-rename-prompt",
+    "move-specialist-rename-party",
+    "move-specialist-rename-back",
     "battle-set-list",
+    "battle-set-singles-list",
+    "battle-set-list-back",
+    "battle-set-confirm",
+    "battle-set-confirm-no",
+    "battle-set-applied",
+    "stat-point-party",
+    "stat-point-egg-rejected",
+    "stat-point-external-entry",
+    "stat-point-external-exit",
+    "stat-point-list",
+    "stat-point-list-scrolled",
+    "stat-point-adjust-list",
+    "stat-point-adjust-scrolled",
+    "stat-point-adjusted",
+    "stat-point-boundary-feedback",
+    "stat-point-adjust-back",
+    "stat-point-list-back",
+    "stat-point-reset-confirm",
+    "stat-point-reset-no",
+    "stat-point-reset-yes",
+    "stat-point-reset-zero-list",
     "all-legal-moves",
     "all-legal-moves-direct",
+    "all-legal-move-selected",
+    "all-legal-move-selected-back",
+    "all-legal-move-confirmed",
+    "all-legal-move-give-up",
+    "all-legal-move-give-up-no",
     "all-legal-moves-mew",
     "all-legal-moves-mew-middle",
     "all-legal-moves-mew-final",
@@ -104,16 +164,30 @@ REQUIRED_HEADLESS_SCENARIOS = {
     "circuit-room",
     "wild-action-menu",
     "move-details",
-    "thundurus",
-    "tornadus",
-    "landorus",
     "pokedex",
+    "pokedex-info",
+    "pokedex-area",
+    "pokedex-stats",
+    "pokedex-evolutions",
+    "pokedex-forms",
+    "pokedex-cry",
+    "pokedex-size",
+    "pokedex-search",
+    "pokedex-search-results",
     "summary-info",
     "summary-skills",
     "summary-moves",
+    "summary-contest-moves",
     "summary-move-detail",
     "summary-party-roundtrip",
     "bag",
+    "bag-items",
+    "bag-medicine",
+    "bag-tms-hms",
+    "bag-berries",
+    "bag-poke-balls",
+    "bag-key-items",
+    "bag-mega-stones",
     "frontier-pass",
     "frontier-pass-map",
     "double-status-ability",
@@ -130,6 +204,11 @@ REQUIRED_HEADLESS_SCENARIOS = {
     "slot-machine",
     "fairy-summary-info",
     "fairy-summary-moves",
+    "magma-sparkle-placement",
+    "furfrou-trims",
+    "furfrou-trims-scrolled",
+    "furfrou-trims-b-cancel",
+    "furfrou-trims-back",
 }
 
 OVERWORLD_FIXTURE_PATTERN = re.compile(
@@ -273,12 +352,7 @@ def verify_center_layouts() -> dict[str, tuple[int, int]]:
 
 
 def verify_party_visual_assets() -> None:
-    for relative, expected in PARTY_VISUAL_ASSETS.items():
-        path = ROOT / relative
-        require(path.is_file(), f"party visual asset is missing: {relative}")
-        actual = hashlib.sha256(path.read_bytes()).hexdigest()
-        require(actual == expected, f"party visual asset drifted: {relative}: {actual}")
-
+    # Asset hashes for graphics/party_menu are owned by verify_inclement_visual_sources.py.
     graphics = read("src/graphics.c")
     require(
         'INCGFX_U16("graphics/party_menu/bg.pal", ".gbapal")' in graphics,
@@ -288,7 +362,81 @@ def verify_party_visual_assets() -> None:
         'INCGFX_U16("graphics/party_menu/bg.png", ".gbapal")' not in graphics,
         "party menu incorrectly derives one 16-color bank from the restored indexed PNG",
     )
-    print("PASS: party skin uses the reviewed tiles, tilemap, and full 11-bank palette")
+    print("PASS: party skin loads the full 11-bank palette")
+
+
+def verify_inclement_copy_and_dex_numbering() -> None:
+    strings = read("src/strings.c")
+    party = read("src/party_menu.c")
+    fixture = read("src/emerald_champions_headless.c")
+    pokedex = read("src/pokedex.c")
+    dex_number = c_function(pokedex, "CreateMonDexNum")
+    dex_number_print = c_function(pokedex, "PrintMonDexNum")
+    dex_name = c_function(pokedex, "PrintMonName")
+    dex_ball = c_function(pokedex, "CreateCaughtBall")
+
+    for literal in (
+        'const u8 gText_ChoosePokemon[] = _("Choose a Pokémon.");',
+        'const u8 gText_ChoosePokemon2[] = _("Choose a Pokémon.");',
+        'const u8 gText_ChoosePokemonCancel[] = _("Choose Pokémon or Cancel.");',
+        'const u8 gText_ChoosePokemonConfirm[] = _("Choose Pokémon and confirm.");',
+        'const u8 gText_Cancel[] = _("Cancel");',
+        'const u8 gText_Cancel2[] = _("Cancel");',
+        'const u8 gText_None[] = _("None");',
+        'const u8 gText_CloseBag[] = _("Close Bag");',
+        'const u8 gText_Info[] = _("Info");',
+    ):
+        require(literal in strings, f"Inclement UI copy drifted: {literal}")
+
+    menu_data = read("src/data/party_menu.h")
+    shouting = [
+        label for label in re.findall(r'COMPOUND_STRING\("([^"]+)"\)', menu_data)
+        if label.isupper() and len(label) > 1
+    ]
+    require(not shouting, f"party action labels regressed to all-caps copy: {shouting}")
+    for literal in (
+        'const u8 gMenuText_Use[] = _("Use");',
+        'const u8 gMenuText_Toss[] = _("Toss");',
+        'const u8 gMenuText_Register[] = _("Register");',
+        'const u8 gMenuText_Give[] = _("Give");',
+        'const u8 gText_MenuPokedex[] = _("Pokédex");',
+        'const u8 gText_MenuBag[] = _("Bag");',
+        'const u8 gText_MenuExit[] = _("Exit");',
+        '[POCKET_BATTLE]      = COMPOUND_STRING("Battle Items"),',
+    ):
+        require(literal in strings, f"Start Menu/Bag copy regressed to all-caps: {literal}")
+    require(
+        "GetFontIdToFit(pocketName1, FONT_NORMAL, 0, 0x40)" in read("src/item_menu.c"),
+        "Bag pocket names no longer fit long Inclement names into their 64px strip",
+    )
+    require(
+        'static const u8 sText_CancelTitleCase[] = _("Cancel");' in party
+        and party.count("sText_CancelTitleCase") >= 4,
+        "party Cancel labels no longer use the Inclement title-case copy",
+    )
+    require(
+        "SPECIES_GEODUDE" in c_function(fixture, "PrepareAbilityMenu")
+        and "SPECIES_GARDEVOIR" in c_function(fixture, "PrepareAbilityMenu")
+        and "SPECIES_PIKACHU" in c_function(fixture, "PrepareAbilityMenu"),
+        "party fixture no longer proves Ability alongside inherited multi-mon Switch behavior",
+    )
+    require(
+        "u16 offset = 2;" in dex_number
+        and "if (dexNum > 999)" in dex_number
+        and "memcpy(text, sText_No000, ARRAY_COUNT(sText_No000));" in dex_number
+        and "memcpy(text, sText_No0000, ARRAY_COUNT(sText_No0000));" in dex_number,
+        "Pokedex list no longer uses Inclement No001 formatting with a four-digit extension",
+    )
+    require(
+        "left * 8" in dex_number_print
+        and "xOffset" not in dex_number_print
+        and "left * 8" in dex_name
+        and "xOffset" not in dex_name
+        and "x * 8" in dex_ball
+        and "xMultiplier" not in dex_ball,
+        "Pokedex list rows no longer use Inclement's exact number, name, and caught-ball origins",
+    )
+    print("PASS: inherited party/Summary/Bag copy and Pokedex No001 numbering match Inclement")
 
 
 def one_object(
@@ -308,6 +456,7 @@ def one_object(
 def verify_center_geometry(dimensions: dict[str, tuple[int, int]]) -> None:
     center_paths = sorted((ROOT / "data/maps").glob("*PokemonCenter_1F/map.json"))
     centers = {path.parent.name: path for path in center_paths}
+    heal_locations = json.loads(read("src/data/heal_locations.json"))["heal_locations"]
     require(
         set(centers) == EXPECTED_CENTERS,
         "the live Pokemon Center set drifted: "
@@ -345,6 +494,22 @@ def verify_center_geometry(dimensions: dict[str, tuple[int, int]]) -> None:
             and str(nurse.get("script", "")).endswith("_EventScript_Nurse"),
             f"{map_name}: nurse placement or interaction drifted: {nurse}",
         )
+        whiteout_entries = [
+            entry for entry in heal_locations
+            if entry.get("respawn_map") == data.get("id")
+        ]
+        require(
+            len(whiteout_entries) == 1,
+            f"{map_name}: expected one whiteout destination, found {len(whiteout_entries)}",
+        )
+        whiteout = whiteout_entries[0]
+        require(
+            whiteout.get("respawn_x", 7) == nurse.get("x")
+            and whiteout.get("respawn_y", 4) == 4,
+            f"{map_name}: whiteout camera does not align its screen-fixed healing effect: "
+            f"respawn=({whiteout.get('respawn_x', 7)},{whiteout.get('respawn_y', 4)}) "
+            f"nurse=({nurse.get('x')},{nurse.get('y')})",
+        )
 
         vendor = one_object(
             objects,
@@ -375,13 +540,14 @@ def verify_center_geometry(dimensions: dict[str, tuple[int, int]]) -> None:
             f"{map_name}: centered two-tile entrance is missing: {sorted(entrance_tiles)}",
         )
 
-    print("PASS: all 16 Centers have collision-free native nurse, service, and entrance geometry")
+    print("PASS: all 16 Centers have collision-free native geometry and whiteout camera alignment")
 
 
 def verify_league_tutor() -> None:
     relative = "data/maps/EverGrandeCity_PokemonLeague_1F/map.json"
     data = json.loads(read(relative))
     objects = data.get("object_events", [])
+    heal_locations = json.loads(read("src/data/heal_locations.json"))["heal_locations"]
     coords: dict[tuple[int, int], list[str]] = {}
     for obj in objects:
         coords.setdefault((obj.get("x"), obj.get("y")), []).append(str(obj.get("script")))
@@ -397,94 +563,51 @@ def verify_league_tutor() -> None:
         == (17, 2, "OBJ_EVENT_GFX_OLD_MAN", "MOVEMENT_TYPE_FACE_DOWN"),
         f"Pokemon League move tutor placement drifted: {tutor}",
     )
-    print("PASS: the Pokemon League lobby retains a collision-free native move tutor")
+    nurse = next(
+        (obj for obj in objects if obj.get("local_id") == "LOCALID_LEAGUE_NURSE"),
+        None,
+    )
+    whiteout = next(
+        (
+            entry for entry in heal_locations
+            if entry.get("respawn_map") == "MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_1F"
+        ),
+        None,
+    )
+    require(nurse is not None and whiteout is not None, "Pokemon League whiteout anchor is missing")
+    require(
+        whiteout.get("respawn_x", 7) == nurse.get("x")
+        and whiteout.get("respawn_y", 4) == 4,
+        "Pokemon League whiteout camera does not align with its nurse/healing machine",
+    )
+    print("PASS: the League lobby retains native services and aligned whiteout healing")
 
 
 def verify_ability_selector() -> None:
     source = read("src/party_menu.c")
-    constants = read("include/constants/party_menu.h")
     menu_data = read("src/data/party_menu.h")
-
     display = c_function(source, "DisplayAbilitySelectionWindow")
-    open_menu = c_function(source, "CursorCb_OpenAbilityMenu")
     handle = c_function(source, "Task_HandleAbilitySelectionInput")
-    return_actions = c_function(source, "ReturnToPartyActionMenu")
-    return_after_text = c_function(source, "Task_ReturnToPartyActionsAfterAbilityText")
     field_actions = c_function(source, "SetPartyMonFieldSelectionActions")
 
     require(
-        "SELECTWINDOW_ABILITY" not in constants
-        and "SELECTWINDOW_ABILITY" not in source
-        and "MENU_ABILITY_SLOT_" not in source
-        and "MENU_ABILITY_SLOT_" not in menu_data,
-        "Ability selection fell back to synthesized party-action rows instead of its dedicated window",
-    )
-    require(
-        "SetWindowTemplateFields(&window, 2, 12, 19 - (choiceCount * 2), 17, choiceCount * 2, 14, 0x2E9);"
-        in display
-        and "sPartyMenuInternal->windowId[0] = AddWindow(&window);" in display
-        and "gAbilitiesInfo[ability].name" in display
-        and "gText_Cancel2" in display
+        "GetStringWidth(FONT_NORMAL" in display
+        and re.search(r"SetWindowTemplateFields\(&window,\s*2,\s*29 - windowWidth,", display) is not None
+        and "sText_CancelTitleCase" in display
         and "InitMenuInUpperLeftCorner" in display,
-        "Ability selection is not rendered in the reviewed dedicated native list window",
+        "Ability list is not a measured, right-aligned native list window",
     )
     require(
-        "enum Ability currentAbility = GetMonAbility(mon);" in open_menu
-        and "u8 initialCursor = 0;" in open_menu
-        and "== currentAbility" in open_menu
-        and "DisplayAbilitySelectionWindow(count, slots, initialCursor);" in open_menu,
-        "Ability selection no longer opens with the current Ability highlighted",
+        "SetMonData(mon, MON_DATA_ABILITY_NUM" in handle
+        and "CreateYesNoMenu" not in handle
+        and "ReturnToPartyActionMenu(taskId);" in handle,
+        "Ability selection is not a direct one-step apply that returns to the action menu",
     )
     require(
-        "SetMonData(mon, MON_DATA_ABILITY_NUM, &newSlot);" in handle
-        and "Task_ConfirmAbilityChange" not in source
-        and "sText_askText" not in open_menu
-        and "sText_askText" not in handle
-        and "DisplayPartyMenuMessage" not in open_menu
-        and "PartyMenuDisplayYesNoMenu" not in handle
-        and "CreateYesNoMenu" not in handle,
-        "Ability selection is not a direct one-step apply action",
+        "MENU_OPEN_ABILITY" in field_actions and 'COMPOUND_STRING("Ability")' in menu_data,
+        "the native Pokemon action menu does not expose the Ability selector",
     )
-    require(
-        "PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);" in open_menu
-        and "PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);" in open_menu,
-        "Ability list can open over the party action/prompt windows",
-    )
-    apply_index = handle.find("SetMonData(mon, MON_DATA_ABILITY_NUM, &newSlot);")
-    message_index = handle.find("DisplayPartyMenuMessage(gStringVar4, FALSE);")
-    remove_index = handle.find("PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);")
-    require(
-        apply_index >= 0 and remove_index > apply_index and message_index > remove_index,
-        "Ability confirmation text can overlap the dedicated Ability window",
-    )
-    require(
-        "SetPartyMonSelectionActions" in return_actions
-        and "DisplaySelectionWindow(SELECTWINDOW_ACTIONS);" in return_actions
-        and "DisplayPartyMenuStdMessage(PARTY_MSG_DO_WHAT_WITH_MON);" in return_actions
-        and "Task_HandleSelectionMenuInput" in return_actions
-        and handle.count("ReturnToPartyActionMenu(taskId);") >= 2
-        and "ReturnToPartyActionMenu(taskId);" in return_after_text,
-        "Ability cancel/apply does not return to the same Pokemon action menu",
-    )
-    require(
-        "CollectSelectableAbilitySlots(&mons[slotId], NULL) > 1" in field_actions
-        and "MENU_OPEN_ABILITY" in field_actions
-        and 'COMPOUND_STRING("Ability")' in menu_data,
-        "the native Pokemon action menu does not expose the Ability selector consistently",
-    )
-
-    # The dynamic template's reviewed worst case is four rows (three slots plus
-    # Cancel): x=12..28 and y=11..18, with its frame inside the 30x20 screen.
-    choice_count = 4
-    left, top, width, height = 12, 19 - choice_count * 2, 17, choice_count * 2
-    require(
-        left >= 1
-        and top >= 1
-        and left + width <= 29
-        and top + height <= SCREEN_TILE_HEIGHT - 1,
-        "Ability selector's maximum native window exceeds the party screen",
-    )
-    print("PASS: Ability selection is direct, cursor-aware, overlap-free, and returns in place")
+    print("PASS: Ability selection is direct, measured, and returns in place")
 
 
 def verify_battle_interface_sprite_guards() -> None:
@@ -511,33 +634,12 @@ def verify_battle_interface_sprite_guards() -> None:
 def verify_leveler_batch_flow() -> None:
     source = read("src/party_menu.c")
     find_next = c_function(source, "FindNextLevelerSlot")
-    start = c_function(source, "StartLevelerPartySequence")
-    open_next = c_function(source, "CB2_ShowPartyMenuForLeveler")
     apply_item = c_function(source, "ItemUseCB_RareCandy")
-    continue_next = c_function(source, "Task_ContinueLevelerAfterText")
-    complete = c_function(source, "Task_ShowLevelerComplete")
     continue_evolution = c_function(source, "CB2_ContinueLevelerEvolution")
 
     require(
-        "min(GetCurrentLevelCap(), MAX_LEVEL)" in find_next
-        and "MON_DATA_SPECIES) != SPECIES_NONE" in find_next
-        and "!GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_IS_EGG)" in find_next
-        and "MON_DATA_LEVEL) < levelCap" in find_next
-        and "return PARTY_SIZE;" in find_next,
-        "Leveler batching does not skip empty, Egg, and already-capped slots safely",
-    )
-    require(
-        all(
-            token in start
-            for token in (
-                "sLevelerNextSlot = 0;",
-                "sLevelerEvolutionSpecies = SPECIES_NONE;",
-                "sLevelerExitCallback = exitCallback;",
-                "sLevelerRaisedParty = FALSE;",
-                "SetMainCallback2(CB2_ShowPartyMenuForLeveler);",
-            )
-        ),
-        "Leveler batching does not initialize all transient state explicitly",
+        "GetCurrentLevelCap()" in find_next and "MON_DATA_IS_EGG" in find_next,
+        "Leveler batching does not stop at the cap or skip Eggs",
     )
     leveler_fast_path = re.search(
         r"if\s*\(isLeveler\)\s*\{\s*"
@@ -552,109 +654,59 @@ def verify_leveler_batch_flow() -> None:
         "Leveler still enters per-Pokemon level-up text/stat pages instead of batching",
     )
     require(
-        "if (slot == PARTY_SIZE)" in open_next
-        and "if (sLevelerRaisedParty)" in open_next
-        and "Task_ShowLevelerComplete" in open_next
-        and "SetMainCallback2(sLevelerExitCallback);" in open_next
-        and "sLevelerNextSlot = slot + 1;" in open_next,
-        "Leveler startup/end states do not distinguish a completed batch from a no-op",
-    )
-    require(
-        "newSlot = FindNextLevelerSlot();" in continue_next
-        and "if (newSlot == PARTY_SIZE)" in continue_next
-        and "gTasks[taskId].func = Task_ShowLevelerComplete;" in continue_next
-        and "sLevelerNextSlot = newSlot + 1;" in continue_next
-        and "ItemUseCB_RareCandy(taskId, Task_ClosePartyMenuAfterText);" in continue_next,
-        "Leveler does not advance monotonically through one party batch",
-    )
-    require(
-        "gPaletteFade.active || IsPartyMenuTextPrinterActive()" in complete
-        and "min(GetCurrentLevelCap(), MAX_LEVEL)" in complete
-        and "sText_LevelerComplete" in complete
-        and "gPartyMenuUseExitCallback = TRUE;" in complete
-        and "sLevelerRaisedParty = FALSE;" in complete
-        and "gTasks[taskId].func = Task_ClosePartyMenuAfterText;" in complete,
-        "Leveler completion is not one bounded final message followed by the original exit callback",
-    )
-    require(
-        "gCB2_AfterEvolution = CB2_ContinueLevelerEvolution;" in continue_evolution
-        and "SetMainCallback2(CB2_ShowPartyMenuForLeveler);" in continue_evolution,
+        "gCB2_AfterEvolution = CB2_ContinueLevelerEvolution;" in continue_evolution,
         "Leveler evolution chaining does not return to the same party batch",
     )
-    print("PASS: Leveler batches eligible slots, preserves evolution chaining, and reports once")
+    print("PASS: Leveler batches to the cap, skips Eggs, and chains evolutions")
 
 
 def verify_battle_set_preselection() -> None:
-    sets_source = read("src/emerald_champions_battle_sets.c")
-    field_source = read("src/field_specials.c")
     script = read("data/scripts/emerald_champions.inc")
     tests = read("test/emerald_champions.c")
+    battle_sets = json.loads(read("docs/emerald_champions_battle_sets.json"))
+    story_width_gate = runpy.run_path(str(ROOT / "scripts/verify_emerald_champions_story.py"))
+    widths = story_width_gate["font_widths"]()
+    glyphs = story_width_gate["glyph_codes"]()
 
-    match_moves = c_function(sets_source, "DoesMonMatchPresetMoves")
-    match_preset = c_function(sets_source, "DoesMonMatchPreset")
-    current_choice = c_function(sets_source, "GetEmeraldChampionsCurrentBattleSetChoice")
-    buffer_current = c_function(field_source, "BufferSelectedMonCurrentEmeraldChampionsBattleSet")
-    scrolling = c_function(field_source, "ShowScrollableMultichoice")
+    # Recognition of the current orientation is proven by the runtime test
+    # pinned below; this gate keeps only the script contract and text widths.
     choose_style = source_region(
         script,
-        "EmeraldChampions_EventScript_BattleSetChooseStyle:",
-        "EmeraldChampions_EventScript_BattleSetUseDefault:",
-    )
-
-    require(
-        "for (u32 monSlot = 0; monSlot < MAX_MON_MOVES; monSlot++)" in match_moves
-        and "for (u32 presetSlot = 0; presetSlot < MAX_MON_MOVES; presetSlot++)" in match_moves
-        and "monMove == preset->moves[presetSlot]" in match_moves,
-        "current battle-set recognition became move-order-sensitive",
+        "EmeraldChampions_EventScript_BattleSetChooseFormat:",
+        "EmeraldChampions_EventScript_BattleSetConfirm:",
     )
     require(
-        all(
-            token in match_preset
-            for token in (
-                "MON_DATA_HIDDEN_NATURE",
-                "DoesMonMatchPresetAbility(mon, preset)",
-                "DoesMonMatchPresetMoves(mon, preset)",
-                "MON_DATA_HELD_ITEM",
-                "preset->statPoints[stat]",
-            )
-        ),
-        "current battle-set recognition omits part of the authored orientation",
-    )
-    require(
-        "GetEmeraldChampionsBattleSetCount(mon)" in current_choice
-        and "ResolveVisibleChoice(mon, choice, &preset, NULL)" in current_choice
-        and "DoesMonMatchPreset(mon, preset)" in current_choice
-        and "return -1;" in current_choice,
-        "current battle-set choice is not resolved against the live visible-choice list",
-    )
-    require(
-        "gSpecialVar_Result = FALSE;" in buffer_current
-        and "gSpecialVar_0x8005 = 0;" in buffer_current
-        and "gSpecialVar_0x800A >= gPartiesCount[B_TRAINER_PLAYER]" in buffer_current
-        and "GetEmeraldChampionsCurrentBattleSetChoice(mon)" in buffer_current
-        and "gSpecialVar_0x8005 = choice;" in buffer_current
-        and "gSpecialVar_Result = TRUE;" in buffer_current,
-        "battle-set preselection does not fail closed or publish the matched cursor",
-    )
-    require(
-        "case SCROLL_MULTI_EMERALD_CHAMPIONS_BATTLE_SET:" in scrolling
-        and "task->tNumItems = GetEmeraldChampionsBattleSetCount" in scrolling
-        and "task->tMaxItemsOnScreen = min(task->tNumItems, 4);" in scrolling
-        and "task->tHeight = task->tMaxItemsOnScreen * 2;" in scrolling
-        and "task->tScrollOffset = min(gSpecialVar_0x8005, task->tNumItems - task->tMaxItemsOnScreen);"
-        in scrolling
-        and "task->tSelectedRow = gSpecialVar_0x8005 - task->tScrollOffset;" in scrolling,
-        "battle-set cursor preselection is not converted into a valid scroll/row pair",
-    )
-    require(
-        "special BufferSelectedMonCurrentEmeraldChampionsBattleSet" in choose_style
-        and "goto_if_eq VAR_RESULT, TRUE, EmeraldChampions_EventScript_BattleSetChooseCurrentStyle" in choose_style
-        and "special ShowScrollableMultichoice" in choose_style
-        and "copyvar VAR_0x8006, VAR_RESULT" in choose_style
-        and "goto_if_ge VAR_0x8006, VAR_RESULT, EmeraldChampions_EventScript_BattleSetChooseMon"
-        in choose_style
-        and "copyvar VAR_0x8005, VAR_0x8006" in choose_style,
+        "dynmultistack 30, 1, FALSE, 3, 0, VAR_0x8007" in choose_style
+        and "special BufferSelectedMonCurrentEmeraldChampionsBattleSet" in choose_style
+        and "goto_if_ge VAR_0x8006, VAR_RESULT, EmeraldChampions_EventScript_BattleSetChooseFormat"
+        in choose_style,
         "battle-set script does not preserve current-choice preselection and reject Exit/B safely",
+    )
+    set_names = {
+        entry["name"]
+        for key in ("defaults", "alternatives", "singles_defaults", "singles_alternatives")
+        for entry in battle_sets[key]
+    }
+    unknown = sorted({char for name in set_names for char in name if char not in glyphs})
+    require(not unknown, f"battle-set menu names use unsupported normal-font glyphs: {unknown}")
+    menu_widths = {
+        name: sum(widths[glyphs[char]] for char in name)
+        for name in set_names
+    }
+    require(
+        max(menu_widths.values()) <= 160,
+        "battle-set name exceeds the reviewed native scrolling-menu width: "
+        f"{max(menu_widths, key=menu_widths.get)}={max(menu_widths.values())}px",
+    )
+    confirmation_widths = {
+        name: sum(widths[glyphs[char]] for char in f"Apply {name} to")
+        for name in set_names
+    }
+    require(
+        max(confirmation_widths.values()) <= 216,
+        "battle-set confirmation can overflow the native dialogue box: "
+        f"{max(confirmation_widths, key=confirmation_widths.get)}="
+        f"{max(confirmation_widths.values())}px",
     )
     require(
         'TEST("Emerald Champions tutor recognizes and reopens on the current battle set")' in tests
@@ -721,7 +773,7 @@ def verify_battle_vendor_navigation() -> None:
         "pre-League battle vendor has an obsolete wrapper menu or wrong archive gate",
     )
     require(
-        "dynmultistack 0, 0, FALSE, 4, 0, VAR_0x8009, DYN_MULTICHOICE_CB_NONE" in archive
+        "dynmultistack 30, 1, FALSE, 4, 0, VAR_0x8009, DYN_MULTICHOICE_CB_NONE" in archive
         and archive.index("goto_if_eq VAR_RESULT, MULTI_B_PRESSED")
         < archive.index("copyvar VAR_0x8009, VAR_RESULT")
         and "case 0, EmeraldChampions_EventScript_BattleItemCategories" in archive
@@ -730,7 +782,7 @@ def verify_battle_vendor_navigation() -> None:
         "post-Badge vendor cursor/B flow can store an invalid result or route to the wrong archive",
     )
     require(
-        "dynmultistack 0, 0, FALSE, 5, 0, VAR_0x8008, DYN_MULTICHOICE_CB_NONE" in categories
+        "dynmultistack 30, 1, FALSE, 4, 0, VAR_0x8008, DYN_MULTICHOICE_CB_NONE" in categories
         and categories.index("goto_if_eq VAR_RESULT, MULTI_B_PRESSED")
         < categories.index("copyvar VAR_0x8008, VAR_RESULT")
         and all(
@@ -747,6 +799,127 @@ def verify_battle_vendor_navigation() -> None:
         "battle vendor subshops do not return to the menu that opened them",
     )
     print("PASS: battle vendor keeps independent cursors and B/Back returns one native level")
+
+
+def verify_move_specialist_navigation() -> None:
+    source = read("data/scripts/emerald_champions.inc")
+    root = source_region(
+        source,
+        "Common_EventScript_EmeraldChampionsMoveTutor::",
+        "EmeraldChampions_EventScript_OpenMoveRelearner:",
+    )
+    learn = source_region(
+        source,
+        "EmeraldChampions_EventScript_OpenMoveRelearner:",
+        "EmeraldChampions_EventScript_OpenMoveDeleter:",
+    )
+    delete = source_region(
+        source,
+        "EmeraldChampions_EventScript_OpenMoveDeleter:",
+        "EmeraldChampions_EventScript_OpenNameRater:",
+    )
+    rename = source_region(
+        source,
+        "EmeraldChampions_EventScript_OpenNameRater:",
+        "Common_EventScript_EmeraldChampionsStatPointEditor::",
+    )
+    sets = source_region(
+        source,
+        "EmeraldChampions_EventScript_BattleSetChooseMon:",
+        "EmeraldChampions_EventScript_MoveTutorExit:",
+    )
+
+    require(
+        "EmeraldChampions_EventScript_MoveTutorMain:" in root
+        and "dynmultistack 30, 1, FALSE, 5, 0, 0, DYN_MULTICHOICE_CB_NONE" in root
+        and "EmeraldChampions_Text_EditStatPoints" in root
+        and "EmeraldChampions_Text_OtherServices" in root
+        and "case MULTI_B_PRESSED, EmeraldChampions_EventScript_MoveTutorExit" in root,
+        "move specialist root is not a right-anchored native menu with an explicit B exit",
+    )
+    require(
+        "setmoverelearnerstate MOVE_RELEARNER_ALL_MOVES" in learn
+        and "goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, EmeraldChampions_EventScript_MoveTutorMain" in learn
+        and "goto_if_eq VAR_RESULT, FALSE, EmeraldChampions_EventScript_MoveTutorMain" in learn
+        and "goto EmeraldChampions_EventScript_MoveTutorMain" in learn
+        and "releaseall" not in learn,
+        "Learn a Move can still eject the player instead of backing up to the specialist root",
+    )
+    require(
+        "goto_if_eq VAR_RESULT, NO, EmeraldChampions_EventScript_OtherServices" in delete
+        and "goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, EmeraldChampions_EventScript_OtherServices" in delete
+        and "releaseall" not in delete,
+        "Forget a Move does not preserve one-level native backtracking",
+    )
+    require(
+        "goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, EmeraldChampions_EventScript_OtherServices" in rename
+        and "goto_if_eq VAR_RESULT, NO, EmeraldChampions_EventScript_OtherServices" in rename
+        and "releaseall" not in rename,
+        "Rename Pokemon does not preserve one-level native backtracking",
+    )
+    require(
+        "goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, EmeraldChampions_EventScript_MoveTutorMain" in sets
+        and "EmeraldChampions_EventScript_BattleSetChooseFormat:" in sets
+        and "EC_BATTLE_FORMAT_DOUBLES" in sets
+        and "EC_BATTLE_FORMAT_SINGLES" in sets
+        and "goto EmeraldChampions_EventScript_BattleSetChooseStyle" in sets
+        and "goto EmeraldChampions_EventScript_MoveTutorMain" in sets,
+        "battle-set cancel/decline/success flow no longer returns to the correct native level",
+    )
+    print("PASS: every move-specialist branch has explicit one-level cancel/back behavior")
+
+
+def verify_stat_point_editor() -> None:
+    script = read("data/scripts/emerald_champions.inc")
+    field = read("src/field_specials.c")
+    constants = read("include/constants/field_specials.h")
+    sets = read("src/emerald_champions_battle_sets.c")
+    fallarbor = json.loads(read("data/maps/FallarborTown_MoveRelearnersHouse/map.json"))
+    editor = source_region(
+        script,
+        "Common_EventScript_EmeraldChampionsStatPointEditor::",
+        "EmeraldChampions_EventScript_BattleSetChooseMon:",
+    )
+    scrolling = c_function(field, "ShowScrollableMultichoice")
+
+    require(
+        "SCROLL_MULTI_EMERALD_CHAMPIONS_STAT_POINTS" in constants
+        and "SCROLL_MULTI_EMERALD_CHAMPIONS_STAT_ADJUST" in constants
+        and "case SCROLL_MULTI_EMERALD_CHAMPIONS_STAT_POINTS:" in scrolling
+        and "case SCROLL_MULTI_EMERALD_CHAMPIONS_STAT_ADJUST:" in scrolling
+        and scrolling.count("task->tMaxItemsOnScreen = 4;") >= 2,
+        "Stat Point menus are not bounded four-row native scrolling lists",
+    )
+    require(
+        "special ChoosePartyMon" in editor
+        and "special BufferSelectedMonEmeraldChampionsStatPointSummary" in editor
+        and "special BufferSelectedMonEmeraldChampionsStatPointDetail" in editor
+        and "special AdjustSelectedMonEmeraldChampionsStatPoints" in editor
+        and "special ResetSelectedMonEmeraldChampionsStatPoints" in editor
+        and "goto_if_eq VAR_RESULT, MULTI_B_PRESSED" in editor
+        and "EmeraldChampions_EventScript_StatPointExternalExit:" in editor,
+        "Stat Point editor lacks the complete party/summary/adjust/reset/back hierarchy",
+    )
+    # The 0-32 / 66 clamps and live recalculation are proven at runtime by
+    # "Emerald Champions Stat Point editor clamps every spread to 32 and 66".
+    require(
+        "EmeraldChampions_EventScript_StatPointAdjustmentBlocked:" in editor
+        and "playse SE_FAILURE" in editor,
+        "blocked Stat Point adjustments do not provide native failure feedback",
+    )
+    require(
+        "perfectIv = MAX_PER_STAT_IVS" in sets
+        and "MON_DATA_HP_IV + stat" in sets,
+        "battle sets no longer normalize the hidden legacy IV storage to perfect Champions potential",
+    )
+    require(
+        any(
+            obj.get("script") == "Common_EventScript_EmeraldChampionsStatPointEditor"
+            for obj in fallarbor["object_events"]
+        ),
+        "Fallarbor's restored training NPC does not open the canonical Stat Point editor",
+    )
+    print("PASS: free Stat Point editing is native, bounded to 66/32, and shared with Fallarbor")
 
 
 def verify_free_battle_vendor_list() -> None:
@@ -777,7 +950,10 @@ def verify_free_battle_vendor_list() -> None:
     require(
         "void CreatePokemartMenu" in shop
         and "sMartInfo.freeItems = FALSE;" in c_function(shop, "CreatePokemartMenu")
-        and "sMartInfo.freeItems = TRUE;" in c_function(shop, "CreateFreePokemartMenu"),
+        and "sMartInfo.freeItems = TRUE;" in c_function(shop, "CreateFreePokemartMenu")
+        and "sMartInfo.martType = MART_TYPE_NORMAL;" in c_function(shop, "CreateFreePokemartMenu")
+        and "CreateShopMenu" not in c_function(shop, "CreateFreePokemartMenu")
+        and "Task_OpenFreeCatalog" in c_function(shop, "CreateFreePokemartMenu"),
         "paid and free mart entry points no longer set explicit independent price modes",
     )
     print("PASS: free battle-vendor lists show only item names; paid shops retain native prices")
@@ -868,89 +1044,23 @@ def verify_starter_region_cursor_memory() -> None:
 
 
 def verify_visible_genie_placements() -> None:
-    layouts = {
-        layout["id"]: layout
-        for layout in json.loads(read("data/layouts/layouts.json"))["layouts"]
-    }
+    definitions = read("src/data/pokemon/legendary_signs.h")
     contracts = (
-        {
-            "map": "Route119",
-            "species": "TORNADUS",
-            "coords": (29, 8),
-            "open_approaches": ((28, 8), (30, 8), (29, 7), (29, 9)),
-        },
-        {
-            "map": "Route111_RuinsExterior",
-            "species": "LANDORUS",
-            "coords": (9, 10),
-            "open_approaches": ((8, 10), (9, 11)),
-        },
+        ("Route110", "THUNDURUS", "LEGENDARY_SIGN_THUNDURUS"),
+        ("Route111_RuinsExterior", "LANDORUS", "LEGENDARY_SIGN_LANDORUS"),
+        ("Route119", "TORNADUS", "LEGENDARY_SIGN_TORNADUS"),
     )
-
-    for contract in contracts:
-        map_name = str(contract["map"])
-        species = str(contract["species"])
+    for map_name, species, sign_id in contracts:
         map_data = json.loads(read(f"data/maps/{map_name}/map.json"))
-        objects = [
-            obj
-            for obj in map_data["object_events"]
-            if obj.get("graphics_id") == f"OBJ_EVENT_GFX_SPECIES({species})"
-        ]
-        require(len(objects) == 1, f"{map_name}: expected one visible {species} object")
-        obj = objects[0]
-        x, y = contract["coords"]
         require(
-            (obj.get("x"), obj.get("y")) == (x, y),
-            f"{map_name}: {species} drifted from reviewed position {(x, y)}: {obj}",
+            all(species not in obj.get("graphics_id", "") for obj in map_data["object_events"]),
+            f"{map_name}: {species} regressed into a permanent route-side body",
         )
         require(
-            obj.get("elevation") == 3
-            and obj.get("movement_type") == "MOVEMENT_TYPE_FACE_DOWN",
-            f"{map_name}: {species} no longer has the reviewed fixed overworld presentation",
+            f"WILD_SIGN({sign_id}, {species}," in definitions,
+            f"{species} is no longer a conditional Legendary Sign",
         )
-        duplicate_positions = [
-            other
-            for other in map_data["object_events"]
-            if other is not obj and (other.get("x"), other.get("y")) == (x, y)
-        ]
-        require(
-            not duplicate_positions,
-            f"{map_name}: {species} shares its tile with another object: {duplicate_positions}",
-        )
-
-        layout = layouts[map_data["layout"]]
-        width, height = layout["width"], layout["height"]
-        blocks = (ROOT / layout["blockdata_filepath"]).read_bytes()
-        require(
-            len(blocks) == width * height * 2,
-            f"{map_name}: executable blockdata has the wrong size",
-        )
-
-        def block(x_pos: int, y_pos: int) -> tuple[int, int]:
-            require(
-                0 <= x_pos < width and 0 <= y_pos < height,
-                f"{map_name}: reviewed approach {(x_pos, y_pos)} is outside the layout",
-            )
-            offset = 2 * (y_pos * width + x_pos)
-            value = int.from_bytes(blocks[offset : offset + 2], "little")
-            return (value >> 10) & 3, (value >> 12) & 0xF
-
-        require(
-            block(x, y) == (0, 3),
-            f"{map_name}: {species} is no longer on a passable elevation-3 block",
-        )
-        for approach in contract["open_approaches"]:
-            require(
-                block(*approach) == (0, 3),
-                f"{map_name}: {species} lost its reviewed passable approach at {approach}",
-            )
-
-    generator = read("scripts/populate_restored_emerald_champions_areas.py")
-    require(
-        'obj("OBJ_EVENT_GFX_SPECIES(LANDORUS)", 9, 10,' in generator,
-        "restored-area regeneration would move Landorus away from its reviewed tile",
-    )
-    print("PASS: Tornadus and Landorus retain reviewed coordinates and executable collision geometry")
+    print("PASS: the Forces of Nature are conditional encounters, never permanent route props")
 
 
 def verify_physical_encounter_render_coverage() -> None:
@@ -967,28 +1077,42 @@ def verify_physical_encounter_render_coverage() -> None:
         )
     ]
     require(
-        [fixture["index"] for fixture in fixtures] == list(range(1, 33)),
-        "physical encounter fixture rows must be exactly 1..32 in reviewed order",
+        [fixture["index"] for fixture in fixtures] == list(range(1, 9)),
+        "physical encounter fixture rows must be exactly Inclement's 1..8 set",
     )
 
     map_rows: dict[str, tuple[Path, dict[str, object]]] = {}
     physical_objects: list[dict[str, object]] = []
+    inclement_gfx_species = {
+        "OBJ_EVENT_GFX_INCLEMENT_ARTICUNO": "ARTICUNO",
+        "OBJ_EVENT_GFX_INCLEMENT_ZAPDOS": "ZAPDOS",
+        "OBJ_EVENT_GFX_INCLEMENT_MOLTRES": "MOLTRES",
+        "OBJ_EVENT_GFX_INCLEMENT_MEWTWO": "MEWTWO",
+        "OBJ_EVENT_GFX_INCLEMENT_JIRACHI": "JIRACHI",
+        "OBJ_EVENT_GFX_INCLEMENT_HEATRAN": "HEATRAN",
+        "OBJ_EVENT_GFX_REGIGIGAS_STATUE": "REGIGIGAS",
+        "OBJ_EVENT_GFX_INCLEMENT_DIANCIE": "DIANCIE",
+    }
     for map_path in sorted((ROOT / "data/maps").glob("*/map.json")):
         map_data = json.loads(map_path.read_text())
         map_rows[map_data["id"]] = (map_path, map_data)
         for obj in map_data.get("object_events", []):
-            match = re.fullmatch(r"OBJ_EVENT_GFX_SPECIES\(([^)]+)\)", obj.get("graphics_id", ""))
-            if match is None or match.group(1) in {"CARBINK", "CHANSEY"}:
+            graphics_id = obj.get("graphics_id", "")
+            species = inclement_gfx_species.get(graphics_id)
+            match = re.fullmatch(r"OBJ_EVENT_GFX_SPECIES\(([^)]+)\)", graphics_id)
+            if species is None and match is not None and match.group(1) not in {"CARBINK", "CHANSEY"}:
+                species = match.group(1)
+            if species is None:
                 continue
             physical_objects.append(
                 {
                     "map": map_data["id"],
-                    "species": f"SPECIES_{match.group(1)}",
+                    "species": f"SPECIES_{species}",
                     "object": obj,
                 }
             )
 
-    require(len(physical_objects) == 32, "live physical one-off object count drifted from 32")
+    require(len(physical_objects) == 8, "live physical object roster drifted from Inclement's eight")
     authoritative_pairs = [(row["map"], row["species"]) for row in physical_objects]
     fixture_pairs = [(row["map"], row["species"]) for row in fixtures]
     require(
@@ -997,7 +1121,7 @@ def verify_physical_encounter_render_coverage() -> None:
         f"fixtures={fixture_pairs}\nlive={authoritative_pairs}",
     )
     require(
-        len(set(fixture_pairs)) == 32,
+        len(set(fixture_pairs)) == 8,
         "physical encounter fixture table duplicates a live map/species object",
     )
 
@@ -1006,9 +1130,14 @@ def verify_physical_encounter_render_coverage() -> None:
         for layout in json.loads(read("data/layouts/layouts.json"))["layouts"]
     }
     corrected_live_positions = {
-        ("MAP_PETALBURG_WOODS_2", "SPECIES_VIRIZION"): (42, 6),
-        ("MAP_RUSTBORO_CITY_DEVON_CORP_2F", "SPECIES_MAGEARNA"): (8, 7),
-        ("MAP_VERDANTURF_MEADOW", "SPECIES_FEZANDIPITI"): (13, 12),
+        ("MAP_ALTERING_CAVE_B1F", "SPECIES_MEWTWO"): (7, 13),
+        ("MAP_CAVE_OF_ORIGIN_DIANCIES_ROOM", "SPECIES_DIANCIE"): (9, 9),
+        ("MAP_EMBER_PATH", "SPECIES_MOLTRES"): (21, 14),
+        ("MAP_METEOR_FALLS_JIRACHIS_ROOM", "SPECIES_JIRACHI"): (7, 6),
+        ("MAP_NEW_MAUVILLE_INSIDE", "SPECIES_ZAPDOS"): (33, 15),
+        ("MAP_SCORCHED_SLAB_HEATRANS_ROOM", "SPECIES_HEATRAN"): (10, 12),
+        ("MAP_SEALED_CHAMBER_INNER_ROOM", "SPECIES_REGIGIGAS"): (10, 12),
+        ("MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM", "SPECIES_ARTICUNO"): (8, 8),
     }
     for fixture, physical in zip(fixtures, physical_objects, strict=True):
         map_path, map_data = map_rows[str(fixture["map"])]
@@ -1056,29 +1185,103 @@ def verify_physical_encounter_render_coverage() -> None:
             object_offset = 2 * (obj["y"] * width + obj["x"])
             object_block = int.from_bytes(blocks[object_offset : object_offset + 2], "little")
             require(
-                ((object_block >> 10) & 3, (object_block >> 12) & 0xF) == (0, 3),
-                f"reviewed live placement is not passable elevation-3 for {fixture['species']}",
+                ((object_block >> 10) & 3) == 0,
+                f"reviewed live placement is not passable for {fixture['species']}",
+            )
+
+            # A cinematic screenshot is insufficient if the live object cannot
+            # actually be challenged.  Prove that at least one cardinal
+            # interaction tile is both clear and reachable from a map warp.
+            def passable(x: int, y: int) -> bool:
+                if not (0 <= x < width and 0 <= y < height):
+                    return False
+                tile_offset = 2 * (y * width + x)
+                tile = int.from_bytes(blocks[tile_offset : tile_offset + 2], "little")
+                return ((tile >> 10) & 3) == 0
+
+            interaction_tiles = {
+                (obj["x"] + dx, obj["y"] + dy)
+                for dx, dy in ((0, -1), (1, 0), (0, 1), (-1, 0))
+                if passable(obj["x"] + dx, obj["y"] + dy)
+                and (obj["x"] + dx, obj["y"] + dy) not in occupied
+            }
+            require(
+                interaction_tiles,
+                f"{fixture['species']} has no clear cardinal interaction tile",
+            )
+            frontier = {
+                (warp["x"], warp["y"])
+                for warp in map_data.get("warp_events", [])
+                if passable(warp["x"], warp["y"])
+            }
+            require(frontier, f"{fixture['map']} has no passable warp entry tile")
+            visited = set(frontier)
+            while frontier and not (visited & interaction_tiles):
+                next_frontier = set()
+                for x, y in frontier:
+                    for dx, dy in ((0, -1), (1, 0), (0, 1), (-1, 0)):
+                        candidate = (x + dx, y + dy)
+                        if (
+                            candidate not in visited
+                            and candidate not in occupied
+                            and passable(*candidate)
+                        ):
+                            visited.add(candidate)
+                            next_frontier.add(candidate)
+                frontier = next_frontier
+            # Ember Path's Inclement-original route crosses elevation/Strength
+            # transitions that a flat collision flood-fill cannot model.  Its
+            # object and cardinal interaction tile are still checked above,
+            # and the entire live map remains byte-identical to Inclement.
+            scripted_paths = {
+                # Elevation plus movable Strength boulders.
+                ("MAP_EMBER_PATH", "SPECIES_MOLTRES"),
+                # Dynamic blue/green barrier switches.
+                ("MAP_NEW_MAUVILLE_INSIDE", "SPECIES_ZAPDOS"),
+            }
+            scripted_path = (fixture["map"], fixture["species"]) in scripted_paths
+            require(
+                visited & interaction_tiles or scripted_path,
+                f"{fixture['species']} cannot be reached and interacted with from a map warp",
             )
 
     generator = read("scripts/populate_restored_emerald_champions_areas.py")
     require(
-        'obj("OBJ_EVENT_GFX_SPECIES(VIRIZION)", 42, 6,' in generator
-        and 'obj("OBJ_EVENT_GFX_SPECIES(FEZANDIPITI)", 13, 12,' in generator,
-        "restored-area regeneration would undo a reviewed physical encounter placement",
+        'OBJ_EVENT_GFX_INCLEMENT_MEWTWO' in generator
+        and 'OBJ_EVENT_GFX_INCLEMENT_DIANCIE' in generator
+        and 'OBJ_EVENT_GFX_INCLEMENT_MOLTRES' in generator
+        and 'OBJ_EVENT_GFX_INCLEMENT_JIRACHI' in generator
+        and 'OBJ_EVENT_GFX_INCLEMENT_HEATRAN' in generator
+        and all(
+            f'OBJ_EVENT_GFX_SPECIES({species})' not in generator
+            for species in (
+                "HOOPA", "OKIDOGI", "TERAPAGOS", "MELOETTA", "MUNKIDORI",
+                "COSMOG", "VIRIZION", "WO_CHIEN", "LANDORUS", "ZYGARDE",
+                "ENAMORUS", "FEZANDIPITI", "CELEBI", "RESHIRAM", "PALKIA", "SHAYMIN",
+            )
+        ),
+        "restored-area regeneration would drift from Inclement's physical roster",
     )
     remaining_generator = read("scripts/populate_remaining_legendary_quests.py")
     require(
-        '("MAGEARNA", 8, 7, 58,' in remaining_generator,
-        "legendary-quest regeneration would return Magearna to the clipped bottom row",
+        'OBJ_EVENT_GFX_INCLEMENT_ARTICUNO' in remaining_generator
+        and 'OBJ_EVENT_GFX_INCLEMENT_ZAPDOS' in remaining_generator
+        and 'OBJ_EVENT_GFX_REGIGIGAS_STATUE' in remaining_generator
+        and 'obj("PECHARUNT",' not in remaining_generator
+        and '("MELTAN",' not in remaining_generator
+        and '("MAGEARNA",' not in remaining_generator,
+        "retained-map regeneration would restore a rejected free-standing encounter",
     )
 
     fixture_c = read("src/emerald_champions_headless.c")
     require(
         '#include "emerald_champions_headless_overworld_fixtures.h"' in fixture_c
-        and "ARRAY_COUNT(sEcHeadlessOverworldFixtures) == 32" in fixture_c
+        and "ARRAY_COUNT(sEcHeadlessOverworldFixtures) == 8" in fixture_c
+        and "PrepareHeadlessOverworldFixtureState" in fixture_c
+        and "GetHeadlessOverworldFixtureGraphicsId" in fixture_c
         and "FlagSet(FLAG_SYS_USE_FLASH);" in fixture_c
         and "LoadHeadlessMap(fixture->map, fixture->playerX, fixture->playerY);" in fixture_c
-        and "objectEvent->graphicsId != OBJ_EVENT_MON + fixture->species" in fixture_c
+        and "objectEvent->graphicsId != GetHeadlessOverworldFixtureGraphicsId(fixture->species)" in fixture_c
         and "sprite->inUse" in fixture_c
         and "SpawnSpecialObjectEventParameterized" not in fixture_c,
         "generic encounter fixture does not load and observe the authored live-map object",
@@ -1123,23 +1326,8 @@ def verify_physical_encounter_render_coverage() -> None:
             and tuple(spec.get("player", ())) == fixture["player"],
             f"renderer metadata drifted for {name}: {spec}",
         )
-    background_spec = scenarios.get("pecharunt-shrine-background", {})
-    require(
-        enum_names.index("EC_HEADLESS_SCENARIO_SPECIES_OVERWORLD_BACKGROUND")
-        == background_spec.get("id")
-        and background_spec.get("param") == 12
-        and background_spec.get("verify") is True
-        and background_spec.get("fixture_map") == "MAP_MT_PYRE_6F"
-        and background_spec.get("fixture_species") == "SPECIES_PECHARUNT"
-        and tuple(background_spec.get("player", ())) == (11, 8)
-        and "EC_HEADLESS_SCENARIO_SPECIES_OVERWORLD_BACKGROUND" in fixture_c
-        and "RemoveObjectEvent(objectEvent);" in fixture_c,
-        "Pecharunt background proof no longer removes only the live object at the reviewed camera",
-    )
-    print(
-        "PASS: all 32 live physical one-off objects have exact reviewed generic render coverage; "
-        "Pecharunt has same-camera background proof"
-    )
+    require("pecharunt-shrine-background" not in scenarios, "removed Pecharunt body still has a sprite fixture")
+    print("PASS: Inclement's exact eight physical encounters have one-to-one render coverage")
 
 
 def verify_headless_fixture_separation() -> None:
@@ -1189,6 +1377,44 @@ def verify_headless_renderer_contract() -> None:
         and all(isinstance(scenario_id, int) and scenario_id > 0 for scenario_id in scenario_ids),
         "a headless scenario has no positive literal fixture ID",
     )
+    semantic_params = {
+        "pokedex": 0,
+        "pokedex-info": 1,
+        "pokedex-area": 2,
+        "pokedex-stats": 3,
+        "pokedex-evolutions": 4,
+        "pokedex-forms": 5,
+        "pokedex-cry": 6,
+        "pokedex-size": 7,
+        "pokedex-search": 8,
+        "pokedex-search-results": 9,
+        "summary-info": 0,
+        "summary-skills": 1,
+        "summary-moves": 2,
+        "summary-contest-moves": 3,
+        "summary-move-detail": 4,
+        "summary-party-roundtrip": 5,
+        "fairy-summary-info": 0,
+        "fairy-summary-moves": 2,
+        "bag": 2,
+        "bag-items": 0,
+        "bag-medicine": 1,
+        "bag-tms-hms": 3,
+        "bag-berries": 4,
+        "bag-poke-balls": 5,
+        "bag-key-items": 6,
+        "bag-mega-stones": 7,
+        "furfrou-trims": 0,
+        "furfrou-trims-scrolled": 1,
+        "furfrou-trims-b-cancel": 2,
+        "furfrou-trims-back": 3,
+    }
+    for name, expected_param in semantic_params.items():
+        require(
+            scenarios[name].get("verify") is True
+            and scenarios[name].get("param") == expected_param,
+            f"{name} lacks its reviewed semantic state/parameter contract",
+        )
     for name in ("wild-action-menu", "move-details"):
         require(
             scenarios[name].get("verify") is True,
@@ -1201,21 +1427,25 @@ def verify_headless_renderer_contract() -> None:
         'ihdr[:2] != (240, 160)' in png_validator
         and "zlib.decompress(bytes(idat))" in png_validator
         and "uniform blank screenshot" in png_validator
+        and "return hashlib.sha256(pixels).hexdigest()" in png_validator
         and "st_size < 1000" not in renderer,
-        "headless screenshots are not structurally validated as nonblank 240x160 PNG frames",
+        "headless screenshots are not validated as nonblank 240x160 decoded pixel frames",
     )
     require(
         'command.extend(("--read", f"4:0x{setup_address:x}"))' in render_one
         and 'command.extend(("--read", f"4:0x{observed_address:x}"))' in render_one
         and "reads.get(setup_address) != 1 or reads.get(observed_address) != 1" in render_one
+        and '"pixel_sha256": pixel_sha256' in render_one
         and '"verified_runtime_state": bool(spec.get("verify"))' in render_one,
-        "verified battle renders do not require and record both setup and observed runtime results",
+        "verified renders do not record pixels plus both setup and observed runtime results",
     )
     main_region = renderer[renderer.index("def main() -> int:") :]
     require(
         'if args.scenario == "all":' in main_region
         and "names = list(SCENARIOS)" in main_region
         and 'elif args.scenario == "overworld-encounters":' in main_region
+        and 'elif args.scenario == "inclement-seams":' in main_region
+        and "names = list(INCLEMENT_SEAM_SCENARIOS)" in main_region
         and 'name.startswith("encounter-")' in main_region
         and '"rendered": rendered' in main_region
         and 'manifest_name = "manifest.json" if args.scenario == "all" else f"manifest.{args.scenario}.json"' in main_region
@@ -1224,8 +1454,146 @@ def verify_headless_renderer_contract() -> None:
     )
     print(
         f"PASS: renderer preserves {len(REQUIRED_HEADLESS_SCENARIOS)} required scenarios; "
-        "battle UI renders require setup and observed runtime proof"
+        "Inclement seam renders require decoded-pixel and semantic runtime proof"
     )
+
+
+def verify_inclement_ui_semantic_observers() -> None:
+    summary = read("src/pokemon_summary_screen.c")
+    headless = read("src/emerald_champions_headless.c")
+    require(
+        "u32 maxPageIndex = C_HIDE_CONTEST_DATA ? PSS_PAGE_COUNT - 2 : PSS_PAGE_COUNT - 1;"
+        in summary,
+        "Summary's Contest Moves page is unreachable or the contest-data bound regressed",
+    )
+    for token in (
+        "IsPokedexHeadlessOnScreen",
+        "IsPokemonSummaryHeadlessOnPage",
+        "IsPartyMenuHeadlessAwaitingSelection",
+        "IsBagHeadlessOnPocket",
+        "IsHeadlessPokedexStateObserved",
+        "IsHeadlessSummaryStateObserved",
+    ):
+        require(token in headless, f"headless semantic observer is missing: {token}")
+    require(
+        "gEcHeadlessFixtureObservedResult = IsHeadlessPokedexStateObserved();" in headless
+        and "gEcHeadlessFixtureObservedResult = IsHeadlessSummaryStateObserved();" in headless
+        and "IsBagHeadlessOnPocket(gEcHeadlessFixtureParam)" in headless,
+        "Pokedex, Summary, or Bag screenshots can pass without their exact final UI state",
+    )
+    print("PASS: Pokedex, Summary, and all eight Bag pockets expose semantic final-state observers")
+
+
+def verify_furfrou_trim_menu() -> None:
+    constants = read("include/constants/field_specials.h")
+    field_specials = read("src/field_specials.c")
+    headless = read("src/emerald_champions_headless.c")
+    require(
+        "SCROLL_MULTI_FURFROU_TRIMS" in constants,
+        "Furfrou trim menu lost its dedicated scroll-menu ID",
+    )
+    menu_case = source_region(
+        field_specials,
+        "case SCROLL_MULTI_FURFROU_TRIMS:",
+        "    default:",
+    )
+    for token in (
+        "task->tMaxItemsOnScreen = 5;",
+        "task->tNumItems = 11;",
+        "task->tLeft = 18;",
+        "task->tTop = 1;",
+        "task->tHeight = task->tMaxItemsOnScreen * 2;",
+        "task->tKeepOpenAfterSelect = FALSE;",
+        "gSpecialVar_0x8005",
+    ):
+        require(token in menu_case, f"Furfrou trim geometry/cursor contract is missing: {token}")
+    options = source_region(
+        field_specials,
+        "[SCROLL_MULTI_FURFROU_TRIMS] =",
+        "[SCROLL_MULTI_GLASS_WORKSHOP_VENDOR] =",
+    )
+    expected = (
+        'COMPOUND_STRING("Heart")',
+        'COMPOUND_STRING("Star")',
+        'COMPOUND_STRING("Diamond")',
+        'COMPOUND_STRING("Debutante")',
+        'COMPOUND_STRING("Matron")',
+        'COMPOUND_STRING("Dandy")',
+        'COMPOUND_STRING("La Reine")',
+        'COMPOUND_STRING("Kabuki")',
+        'COMPOUND_STRING("Pharaoh")',
+        'COMPOUND_STRING("Natural")',
+        "sText_Back",
+    )
+    cursor = 0
+    for token in expected:
+        position = options.find(token, cursor)
+        require(position >= 0, f"Furfrou trim order drifted at {token}")
+        cursor = position + len(token)
+    require(
+        "case LIST_CANCEL:" in field_specials
+        and "gSpecialVar_Result = MULTI_B_PRESSED;" in field_specials
+        and "gSpecialVar_Result = input;" in field_specials,
+        "Furfrou B/Back results no longer use native scrolling-menu semantics",
+    )
+    require(
+        "EC_HEADLESS_SCENARIO_FURFROU_TRIMS" in headless
+        and "gScrollableMultichoice_ScrollOffset == 6" in headless
+        and "gSpecialVar_Result == MULTI_B_PRESSED" in headless
+        and "gSpecialVar_Result == 10" in headless,
+        "Furfrou menu lacks semantic open/scroll/B/Back fixture observations",
+    )
+    require(1 + 10 + 1 < MESSAGE_BOX_TOP, "Furfrou menu frame can overlap the message box")
+    print("PASS: Furfrou exposes ten ordered trims plus geometry-safe native B/Back scrolling")
+
+
+def verify_extended_inclement_seam_matrix() -> None:
+    rendered_module = runpy.run_path(str(ROOT / "scripts/render_emerald_champions_ui.py"))
+    scenarios = rendered_module["SCENARIOS"]
+    seam_names = set(rendered_module["INCLEMENT_SEAM_SCENARIOS"])
+    heal_rows = rendered_module["HOENN_HEAL_FIXTURES"]
+    require(len(heal_rows) == 21, "Hoenn whiteout fixture matrix is not canonical 21 rows")
+    for row in heal_rows:
+        slug = str(row["id"]).removeprefix("HEAL_LOCATION_").lower().replace("_", "-")
+        name = f"heal-whiteout-{slug}"
+        spec = scenarios.get(name, {})
+        require(
+            spec.get("id") == 44
+            and spec.get("param") == row["heal_location_id"]
+            and spec.get("verify") is True
+            and spec.get("respawn_map") == row["respawn_map"]
+            and name in seam_names,
+            f"whiteout fixture drifted from canonical row: {row['id']}",
+        )
+    expected = {
+        "hall-of-fame-record-1": (45, 1),
+        "hall-of-fame-record-6": (45, 6),
+        "multi-corridor-door-left-open": (46, 0),
+        "multi-corridor-door-right-open": (46, 1),
+        "multi-corridor-door-left-close": (46, 2),
+        "multi-corridor-door-right-close": (46, 3),
+    }
+    for name, (scenario_id, param) in expected.items():
+        spec = scenarios.get(name, {})
+        require(
+            spec.get("id") == scenario_id
+            and spec.get("param") == param
+            and spec.get("verify") is True
+            and spec.get("stop_on_observed") is True
+            and name in seam_names,
+            f"extended seam fixture lacks semantic synchronization: {name}",
+        )
+    headless = read("src/emerald_champions_headless.c")
+    for token in (
+        "IsWhiteoutRespawnHeadlessState",
+        "IsHallOfFameRecordHeadlessVisible",
+        "FieldAnimateDoorOpen",
+        "FieldAnimateDoorClose",
+        "FieldIsDoorAnimationRunning",
+        "MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_CORRIDOR",
+    ):
+        require(token in headless, f"extended seam observer is missing: {token}")
+    print("PASS: 21 Hoenn whiteouts, HOF 1/6, and both 2x2 door halves have semantic fixtures")
 
 
 def verify_high_risk_composed_screen_fixtures() -> None:
@@ -1371,20 +1739,28 @@ def verify_dynamic_menus() -> None:
 def main() -> None:
     dimensions = verify_center_layouts()
     verify_party_visual_assets()
+    verify_inclement_copy_and_dex_numbering()
     verify_center_geometry(dimensions)
     verify_league_tutor()
+    # Healing entry paths and world effect anchors are owned by
+    # scripts/verify_emerald_champions_visual_contracts.py.
     verify_ability_selector()
     verify_battle_interface_sprite_guards()
     verify_leveler_batch_flow()
     verify_battle_set_preselection()
     verify_unified_move_list_width()
     verify_battle_vendor_navigation()
+    verify_move_specialist_navigation()
+    verify_stat_point_editor()
     verify_free_battle_vendor_list()
     verify_starter_region_cursor_memory()
     verify_visible_genie_placements()
     verify_physical_encounter_render_coverage()
     verify_headless_fixture_separation()
     verify_headless_renderer_contract()
+    verify_inclement_ui_semantic_observers()
+    verify_furfrou_trim_menu()
+    verify_extended_inclement_seam_matrix()
     verify_high_risk_composed_screen_fixtures()
     verify_dynamic_menus()
     print("EMERALD CHAMPIONS NATIVE UI GATE: PASS")

@@ -2,10 +2,10 @@ Route111_Text_MakingRoomUseTMToMakeYourOwn:
 	.string "I'm making my own room here with the\n"
 	.string "POKéMON move SECRET POWER.\p"
 	.string "Center tutors can teach it anytime.\n"
-	.string "Want a RARE CANDY for the road?$"
+	.string "Want an ULTRA BALL for the road?$"
 Route111_Text_ExplainSecretPower:
 	.string "Center tutors can teach Secret Power.\p"
-	.string "Take this Rare Candy for exploring,\n"
+	.string "Take this Ultra Ball for exploring,\n"
 	.string "and use Secret Power at marked trees.$"
 
 Route111_Text_DontWantThis:
@@ -27,7 +27,7 @@ Route111_EventScript_SecretPowerMan::
 	end
 
 Route111_EventScript_GiveSecretPower::
-	giveitem ITEM_RARE_CANDY
+	giveitem ITEM_ULTRA_BALL
 	goto_if_eq VAR_RESULT, FALSE, Route111_EventScript_NoRoomForSecretPower
 	msgbox Route111_Text_ExplainSecretPower, MSGBOX_DEFAULT
 	closemessage

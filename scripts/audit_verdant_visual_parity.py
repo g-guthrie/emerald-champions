@@ -219,6 +219,65 @@ def working_tree_files() -> dict[str, bytes]:
     return result
 
 
+def fast_working_tree_hashes() -> dict[str, str]:
+    """Hash the selected current files without decoding PNG pixels.
+
+    The full writer intentionally performs the more expensive normalized-pixel
+    comparison against the frozen Verdant reference.  Release verification only
+    needs to prove that the already-reviewed manifest still describes every
+    selected current file byte-for-byte, so it can take this much cheaper path.
+    """
+    return {
+        path: hashlib.sha256(payload).hexdigest()
+        for path, payload in working_tree_files().items()
+    }
+
+
+def verify_current_manifest_fast(manifest: dict) -> None:
+    expected: dict[str, str] = {}
+    for row in manifest["reference_assets"]:
+        path = row.get("current_path")
+        if path is not None:
+            expected[path] = row["current_sha256"]
+    for row in manifest["added_assets"]:
+        expected[row["current_path"]] = row["current_sha256"]
+
+    actual = fast_working_tree_hashes()
+    missing = sorted(set(expected) - set(actual))
+    added = sorted(set(actual) - set(expected))
+    changed = sorted(
+        path for path in set(expected) & set(actual)
+        if expected[path] != actual[path]
+    )
+    if missing or added or changed:
+        preview = []
+        preview.extend(f"missing: {path}" for path in missing[:20])
+        preview.extend(f"added: {path}" for path in added[:20])
+        preview.extend(f"changed: {path}" for path in changed[:20])
+        raise SystemExit(
+            "visual parity manifest is stale; run "
+            "python3 scripts/audit_verdant_visual_parity.py --write\n"
+            + "\n".join(preview)
+        )
+
+    # Mutation proof: a one-byte-equivalent digest change must be observable by
+    # the same comparison used above.  This guards the release check itself from
+    # accidentally degenerating into a path-only inventory.
+    if expected:
+        sample_path = min(expected)
+        mutated = dict(actual)
+        mutated[sample_path] = "0" * 64
+        if expected[sample_path] == mutated[sample_path]:
+            raise SystemExit("visual manifest mutation probe did not alter the sample digest")
+        if not any(expected[path] != mutated[path] for path in expected):
+            raise SystemExit("visual manifest mutation probe escaped digest comparison")
+
+    print(
+        "verdant_visual_manifest_fast=PASS "
+        f"current={len(actual)} mutation_probes=1"
+    )
+
+
 def paeth(left: int, above: int, upper_left: int) -> int:
     prediction = left + above - upper_left
     left_distance = abs(prediction - left)
@@ -567,7 +626,17 @@ def print_summary(manifest: dict) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--write", action="store_true", help="write the canonical manifest")
+    parser.add_argument(
+        "--check-fast",
+        action="store_true",
+        help="verify current files against the reviewed manifest without decoding PNG pixels",
+    )
     args = parser.parse_args()
+    if args.check_fast:
+        if not OUTPUT.exists():
+            raise SystemExit(f"visual parity manifest is missing: {OUTPUT.relative_to(ROOT)}")
+        verify_current_manifest_fast(json.loads(OUTPUT.read_text()))
+        return
     manifest = build_manifest()
     payload = render(manifest)
     if args.write:

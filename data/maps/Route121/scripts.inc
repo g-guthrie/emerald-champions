@@ -1,6 +1,47 @@
 Route121_MapScripts::
 	.byte 0
 
+Route121_EventScript_Nurse::
+	lock
+	faceplayer
+	msgbox Route121_Text_NurseOffer, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, Route121_EventScript_NurseDeclined
+	closemessage
+	call Common_EventScript_OutOfCenterPartyHeal
+	msgbox Route121_Text_NurseHealed, MSGBOX_DEFAULT
+	release
+	end
+
+Route121_EventScript_NurseDeclined::
+	msgbox Route121_Text_NurseDeclined, MSGBOX_DEFAULT
+	release
+	end
+
+Route121_EventScript_Skitty::
+	lock
+	faceplayer
+	waitse
+	playmoncry SPECIES_SKITTY, CRY_MODE_NORMAL
+	msgbox Route121_Text_RestoredSkitty, MSGBOX_DEFAULT
+	waitmoncry
+	release
+	end
+
+Route121_Text_NurseOffer:
+	.string "MT. PYRE is a long climb. Shall I heal\n"
+	.string "your party before you continue?$"
+
+Route121_Text_NurseHealed:
+	.string "All better. Keep your partners close\n"
+	.string "on the mountain.$"
+
+Route121_Text_NurseDeclined:
+	.string "All right. SKITTY and I will be here\n"
+	.string "if you need us.$"
+
+Route121_Text_RestoredSkitty:
+	.string "SKITTY: Meenya?$"
+
 Route121_EventScript_Woman::
 	msgbox Route121_Text_AheadLoomsMtPyre, MSGBOX_NPC
 	end
@@ -185,4 +226,3 @@ Route121_Text_MtPyrePierSign:
 Route121_Text_SafariZoneSign:
 	.string "“Filled with rare POKéMON!”\n"
 	.string "SAFARI ZONE$"
-

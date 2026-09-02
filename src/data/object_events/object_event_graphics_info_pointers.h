@@ -230,6 +230,18 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Mew;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Red;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Leaf;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Cynthia;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RegigigasStatue;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_InclementArticuno;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_InclementZapdos;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_InclementMoltres;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_InclementMewtwo;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_InclementJirachi;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_InclementHeatran;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_InclementDiancie;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_InclementCarbink;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_InclementItemBall;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GoldItemBall;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MegaStone;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Deoxys;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BirthIslandStone;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Brandon;
@@ -462,7 +474,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_CYCLING_TRIATHLETE_M] =     &gObjectEventGraphicsInfo_CyclingTriathleteM,
     [OBJ_EVENT_GFX_CYCLING_TRIATHLETE_F] =     &gObjectEventGraphicsInfo_CyclingTriathleteF,
     [OBJ_EVENT_GFX_NURSE] =                    &gObjectEventGraphicsInfo_Nurse,
-    [OBJ_EVENT_GFX_ITEM_BALL] =                &gObjectEventGraphicsInfo_PokeBall,
+    [OBJ_EVENT_GFX_ITEM_BALL] =                &gObjectEventGraphicsInfo_InclementItemBall,
     [OBJ_EVENT_GFX_BERRY_TREE] =               &gObjectEventGraphicsInfo_BerryTree,
     [OBJ_EVENT_GFX_BERRY_TREE_EARLY_STAGES] =  &gObjectEventGraphicsInfo_BerryTreeEarlyStages,
     [OBJ_EVENT_GFX_BERRY_TREE_LATE_STAGES] =   &gObjectEventGraphicsInfo_BerryTreeLateStages,
@@ -636,6 +648,17 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_RED] =                      &gObjectEventGraphicsInfo_Red,
     [OBJ_EVENT_GFX_LEAF] =                     &gObjectEventGraphicsInfo_Leaf,
     [OBJ_EVENT_GFX_CYNTHIA] =                  &gObjectEventGraphicsInfo_Cynthia,
+    [OBJ_EVENT_GFX_REGIGIGAS_STATUE] =         &gObjectEventGraphicsInfo_RegigigasStatue,
+    [OBJ_EVENT_GFX_INCLEMENT_ARTICUNO] =       &gObjectEventGraphicsInfo_InclementArticuno,
+    [OBJ_EVENT_GFX_INCLEMENT_ZAPDOS] =         &gObjectEventGraphicsInfo_InclementZapdos,
+    [OBJ_EVENT_GFX_INCLEMENT_MOLTRES] =        &gObjectEventGraphicsInfo_InclementMoltres,
+    [OBJ_EVENT_GFX_INCLEMENT_MEWTWO] =         &gObjectEventGraphicsInfo_InclementMewtwo,
+    [OBJ_EVENT_GFX_INCLEMENT_JIRACHI] =        &gObjectEventGraphicsInfo_InclementJirachi,
+    [OBJ_EVENT_GFX_INCLEMENT_HEATRAN] =        &gObjectEventGraphicsInfo_InclementHeatran,
+    [OBJ_EVENT_GFX_INCLEMENT_DIANCIE] =        &gObjectEventGraphicsInfo_InclementDiancie,
+    [OBJ_EVENT_GFX_INCLEMENT_CARBINK] =        &gObjectEventGraphicsInfo_InclementCarbink,
+    [OBJ_EVENT_GFX_GOLD_ITEM_BALL] =           &gObjectEventGraphicsInfo_GoldItemBall,
+    [OBJ_EVENT_GFX_MEGA_STONE] =               &gObjectEventGraphicsInfo_MegaStone,
     [OBJ_EVENT_GFX_DEOXYS] =                   &gObjectEventGraphicsInfo_Deoxys,
     [OBJ_EVENT_GFX_DEOXYS_TRIANGLE] =          &gObjectEventGraphicsInfo_BirthIslandStone,
     [OBJ_EVENT_GFX_BRANDON] =                  &gObjectEventGraphicsInfo_Brandon,

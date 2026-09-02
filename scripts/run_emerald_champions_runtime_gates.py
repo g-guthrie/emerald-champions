@@ -53,7 +53,8 @@ class RuntimeGate:
 
 
 RUNTIME_GATES = (
-    RuntimeGate("*Champions", 94),
+    RuntimeGate("*Champions", 99),
+    RuntimeGate("Blitz Boxer", 1),
     RuntimeGate("*preparation", 3),
     RuntimeGate("*Item descriptions fit on Bag and Shop Screen", 1),
     RuntimeGate("*Eggs safely inherit", 1),
@@ -92,7 +93,7 @@ RUNTIME_GATES = (
     RuntimeGate("test/save.c", 4),
     RuntimeGate(
         "test/battle/ai/ai_doubles.c",
-        65,
+        67,
     ),
 )
 

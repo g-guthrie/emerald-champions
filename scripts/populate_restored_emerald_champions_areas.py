@@ -47,13 +47,35 @@ def item(x, y, item_id, flag, gfx=None):
             gfx = "OBJ_EVENT_GFX_ITEM_BALL"
         elif "FOSSIL" in item_id or item_id == "ITEM_OLD_AMBER":
             gfx = "OBJ_EVENT_GFX_FOSSIL"
-        elif item_id == "ITEM_RARE_CANDY":
+        elif item_id == "ITEM_ULTRA_BALL":
             gfx = "OBJ_EVENT_GFX_ITEM_BALL"
         else:
             gfx = "OBJ_EVENT_GFX_ITEM_BALL"
     row = obj(gfx, x, y, "Common_EventScript_FindItem", flag)
     row["trainer_sight_or_berry_tree_id"] = item_id
     return row
+
+
+def hidden_item(x, y, elevation, item_id, flag):
+    return {
+        "type": "hidden_item",
+        "x": x,
+        "y": y,
+        "elevation": elevation,
+        "item": item_id,
+        "flag": flag,
+    }
+
+
+def sign(x, y, elevation, script):
+    return {
+        "type": "sign",
+        "x": x,
+        "y": y,
+        "elevation": elevation,
+        "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+        "script": script,
+    }
 
 
 def old_obstacles(map_name):
@@ -185,7 +207,7 @@ ITEMS = {
     "AshenWoods": [
         item(10, 5, "ITEM_PINSIRITE", "FLAG_EC_ITEM_ASHEN_PINSIRITE"),
         item(26, 5, "ITEM_DUSK_STONE", "FLAG_EC_ITEM_ASHEN_DUSK_STONE"),
-        item(26, 43, "ITEM_RARE_CANDY", "FLAG_EC_ITEM_ASHEN_RARE_CANDY"),
+        item(26, 43, "ITEM_ULTRA_BALL", "FLAG_EC_ITEM_ASHEN_ULTRA_BALL"),
     ],
     "DewfordManor_1F": [
         item(1, 11, "ITEM_SABLENITE", "FLAG_EC_ITEM_MANOR_SABLENITE"),
@@ -194,12 +216,12 @@ ITEMS = {
     "DewfordMeadow": [
         item(21, 14, "ITEM_MAWILITE", "FLAG_EC_ITEM_MEADOW_MAWILITE"),
         item(27, 1, "ITEM_SHINY_STONE", "FLAG_EC_ITEM_MEADOW_SHINY_STONE"),
-        item(4, 13, "ITEM_RARE_CANDY", "FLAG_EC_ITEM_MEADOW_RARE_CANDY"),
+        item(4, 13, "ITEM_ULTRA_BALL", "FLAG_EC_ITEM_MEADOW_ULTRA_BALL"),
     ],
     "EmberPath": [
         item(36, 2, "ITEM_BLAZIKENITE", "FLAG_EC_ITEM_EMBER_BLAZIKENITE"),
         item(12, 10, "ITEM_MAGMARIZER", "FLAG_EC_ITEM_EMBER_MAGMARIZER"),
-        item(25, 35, "ITEM_RARE_CANDY", "FLAG_EC_ITEM_EMBER_RARE_CANDY"),
+        item(25, 35, "ITEM_ULTRA_BALL", "FLAG_EC_ITEM_EMBER_ULTRA_BALL"),
     ],
     "PetalburgWoods_2": [
         item(36, 5, "ITEM_SUN_STONE", "FLAG_EC_ITEM_WOODS2_SUN_STONE"),
@@ -224,7 +246,7 @@ ITEMS = {
         item(3, 118, "ITEM_DOME_FOSSIL", "FLAG_EC_ITEM_RUINS_DOME_FOSSIL"),
         item(4, 2, "ITEM_JAW_FOSSIL", "FLAG_EC_ITEM_RUINS_JAW_FOSSIL"),
         item(3, 14, "ITEM_ODD_KEYSTONE", "FLAG_EC_ITEM_RUINS_ODD_KEYSTONE"),
-        item(12, 113, "ITEM_RARE_CANDY", "FLAG_EC_ITEM_RUINS_RARE_CANDY"),
+        item(12, 113, "ITEM_ULTRA_BALL", "FLAG_EC_ITEM_RUINS_ULTRA_BALL"),
     ],
     "ScorchedSlab_B2F": [
         item(23, 22, "ITEM_CHARIZARDITE_X", "FLAG_EC_ITEM_SCORCHED_CHARIZARDITE_X"),
@@ -233,7 +255,7 @@ ITEMS = {
         item(6, 25, "ITEM_BLASTOISINITE", "FLAG_EC_ITEM_SEASPRAY_BLASTOISINITE"),
         item(5, 5, "ITEM_DAWN_STONE", "FLAG_EC_ITEM_SEASPRAY_DAWN_STONE"),
         item(10, 24, "ITEM_LURE_BALL", "FLAG_EC_ITEM_SEASPRAY_LURE_BALL"),
-        item(46, 18, "ITEM_RARE_CANDY", "FLAG_EC_ITEM_SEASPRAY_RARE_CANDY"),
+        item(46, 18, "ITEM_ULTRA_BALL", "FLAG_EC_ITEM_SEASPRAY_ULTRA_BALL"),
     ],
     "Seaspray_Cave_B1F": [
         item(46, 15, "ITEM_KINGS_ROCK", "FLAG_EC_ITEM_SEASPRAY_KINGS_ROCK"),
@@ -241,18 +263,43 @@ ITEMS = {
         item(20, 24, "ITEM_ICE_STONE", "FLAG_EC_ITEM_SEASPRAY_ICE_STONE"),
     ],
     "VerdanturfMeadow": [
-        item(7, 10, "ITEM_RARE_CANDY", "FLAG_EC_ITEM_VERDANTURF_RARE_CANDY"),
+        item(7, 10, "ITEM_ULTRA_BALL", "FLAG_EC_ITEM_VERDANTURF_ULTRA_BALL"),
+    ],
+}
+
+
+# Inclement Emerald v1.13 placed these progression/form rewards invisibly in
+# the restored areas.  They remain useful in Emerald Champions and therefore
+# belong to the canonical regeneration path rather than one-off map edits.
+INCLEMENT_BG_EVENTS = {
+    "DewfordMeadow": [
+        hidden_item(11, 18, 3, "ITEM_YELLOW_NECTAR", "FLAG_EC_HIDDEN_ITEM_DEWFORD_MEADOW_YELLOW_NECTAR"),
+        hidden_item(21, 5, 3, "ITEM_RED_NECTAR", "FLAG_EC_HIDDEN_ITEM_DEWFORD_MEADOW_RED_NECTAR"),
+        sign(8, 8, 0, "DewfordMeadow_EventScript_ManorSign"),
+    ],
+    "EmberPath": [
+        hidden_item(9, 38, 3, "ITEM_MAGMARIZER", "FLAG_EC_HIDDEN_ITEM_EMBER_PATH_MAGMARIZER"),
+    ],
+    "SandstrewnRuins": [
+        hidden_item(8, 31, 3, "ITEM_PROTECTOR", "FLAG_EC_HIDDEN_ITEM_SANDSTREWN_PROTECTOR"),
+    ],
+    "Seaspray_Cave": [
+        hidden_item(36, 22, 4, "ITEM_DAWN_STONE", "FLAG_EC_HIDDEN_ITEM_SEASPRAY_DAWN_STONE"),
+    ],
+    "Seaspray_Cave_B1F": [
+        hidden_item(25, 20, 3, "ITEM_ICE_STONE", "FLAG_EC_HIDDEN_ITEM_SEASPRAY_B1F_ICE_STONE"),
+    ],
+    "VerdanturfMeadow": [
+        hidden_item(4, 15, 3, "ITEM_PINK_NECTAR", "FLAG_EC_HIDDEN_ITEM_VERDANTURF_PINK_NECTAR"),
+        hidden_item(10, 15, 3, "ITEM_PURPLE_NECTAR", "FLAG_EC_HIDDEN_ITEM_VERDANTURF_PURPLE_NECTAR"),
     ],
 }
 
 
 EXTRA_OBJECTS = {
-    "AlteringCave_1F": [
-        obj("OBJ_EVENT_GFX_SPECIES(HOOPA)", 6, 8, "AlteringCave_1F_EventScript_Hoopa", "FLAG_EC_CAUGHT_HOOPA", "LOCALID_EC_HOOPA"),
-    ],
     "AlteringCave_B1F": [
-        obj("OBJ_EVENT_GFX_SPECIES(MEWTWO)", 7, 13, "AlteringCave_B1F_EventScript_Mewtwo", "FLAG_EC_CAUGHT_MEWTWO", "LOCALID_EC_MEWTWO"),
-        obj("OBJ_EVENT_GFX_LEAF", 21, 16, "AlteringCave_B1F_EventScript_Leaf", "0", "LOCALID_EC_LEAF"),
+        obj("OBJ_EVENT_GFX_INCLEMENT_MEWTWO", 7, 13, "AlteringCave_B1F_EventScript_Mewtwo", "FLAG_EC_CAUGHT_MEWTWO", "LOCALID_EC_MEWTWO", "MOVEMENT_TYPE_NONE"),
+        obj("OBJ_EVENT_GFX_LEAF", 21, 16, "AlteringCave_B1F_EventScript_Leaf", "FLAG_EC_DEFEATED_LEAF_ALTERING_CAVE", "LOCALID_EC_LEAF", "MOVEMENT_TYPE_FACE_UP"),
     ],
     "AshenWoods": [
         obj("OBJ_EVENT_GFX_HIKER", 10, 13, "AshenWoods_EventScript_Roman"),
@@ -260,54 +307,35 @@ EXTRA_OBJECTS = {
         obj("OBJ_EVENT_GFX_CAMPER", 12, 22, "AshenWoods_EventScript_Martin"),
         obj("OBJ_EVENT_GFX_MANIAC", 6, 33, "AshenWoods_EventScript_Elmer"),
         obj("OBJ_EVENT_GFX_COOK", 19, 39, "AshenWoods_EventScript_Caretaker"),
-        obj("OBJ_EVENT_GFX_SPECIES(OKIDOGI)", 14, 29, "AshenWoods_EventScript_Okidogi", "FLAG_EC_CAUGHT_OKIDOGI", "LOCALID_EC_OKIDOGI"),
     ],
     "CaveOfOrigin_DianciesRoom": [
-        obj("OBJ_EVENT_GFX_SPECIES(DIANCIE)", 9, 9, "CaveOfOrigin_DianciesRoom_EventScript_Diancie", "FLAG_EC_CAUGHT_DIANCIE", "LOCALID_EC_DIANCIE"),
-        obj("OBJ_EVENT_GFX_SPECIES(TERAPAGOS)", 7, 9, "CaveOfOrigin_DianciesRoom_EventScript_Terapagos", "FLAG_EC_CAUGHT_TERAPAGOS", "LOCALID_EC_TERAPAGOS"),
+        obj("OBJ_EVENT_GFX_INCLEMENT_DIANCIE", 9, 9, "CaveOfOrigin_DianciesRoom_EventScript_Diancie", "FLAG_EC_CAUGHT_DIANCIE", "LOCALID_EC_DIANCIE", "MOVEMENT_TYPE_NONE"),
         obj("OBJ_EVENT_GFX_WALLACE", 13, 9, "CaveOfOrigin_DianciesRoom_EventScript_WallaceExhibition", "0", "LOCALID_EC_WALLACE"),
     ],
     "DewfordManor_1F": [
         obj("OBJ_EVENT_GFX_OLD_MAN", 15, 8, "DewfordManor_1F_EventScript_Historian"),
-        obj("OBJ_EVENT_GFX_SPECIES(MELOETTA)", 8, 8, "DewfordManor_1F_EventScript_Meloetta", "FLAG_EC_CAUGHT_MELOETTA", "LOCALID_EC_MELOETTA"),
-        obj("OBJ_EVENT_GFX_SPECIES(MUNKIDORI)", 13, 8, "DewfordManor_1F_EventScript_Munkidori", "FLAG_EC_CAUGHT_MUNKIDORI", "LOCALID_EC_MUNKIDORI"),
     ],
     "DewfordMeadow": [obj("OBJ_EVENT_GFX_GIRL_2", 12, 9, "DewfordMeadow_EventScript_Warden")],
     "EmberPath": [
-        obj("OBJ_EVENT_GFX_SPECIES(MOLTRES)", 21, 14, "EmberPath_EventScript_Moltres", "FLAG_EC_CAUGHT_MOLTRES", "LOCALID_EC_MOLTRES"),
+        obj("OBJ_EVENT_GFX_INCLEMENT_MOLTRES", 21, 14, "EmberPath_EventScript_Moltres", "FLAG_EC_CAUGHT_MOLTRES", "LOCALID_EC_MOLTRES", "MOVEMENT_TYPE_NONE"),
         obj("OBJ_EVENT_GFX_HIKER", 8, 36, "EmberPath_EventScript_Warden"),
     ],
     "MeteorFalls_JirachisRoom": [
-        obj("OBJ_EVENT_GFX_SPECIES(JIRACHI)", 7, 6, "MeteorFalls_JirachisRoom_EventScript_Jirachi", "FLAG_EC_CAUGHT_JIRACHI", "LOCALID_EC_JIRACHI"),
-        obj("OBJ_EVENT_GFX_SPECIES(COSMOG)", 4, 6, "MeteorFalls_JirachisRoom_EventScript_Cosmog", "FLAG_EC_CAUGHT_COSMOG", "LOCALID_EC_COSMOG"),
+        obj("OBJ_EVENT_GFX_INCLEMENT_JIRACHI", 7, 6, "MeteorFalls_JirachisRoom_EventScript_Jirachi", "FLAG_EC_CAUGHT_JIRACHI", "LOCALID_EC_JIRACHI", "MOVEMENT_TYPE_NONE"),
     ],
     "MirageTower_B1F": [obj("OBJ_EVENT_GFX_OLD_MAN", 4, 7, "MirageTower_B1F_EventScript_Inscription")],
     "PetalburgWoods_2": [
-        obj("OBJ_EVENT_GFX_SPECIES(VIRIZION)", 42, 6, "PetalburgWoods_2_EventScript_Virizion", "FLAG_EC_CAUGHT_VIRIZION", "LOCALID_EC_VIRIZION"),
-        obj("OBJ_EVENT_GFX_SPECIES(WO_CHIEN)", 5, 5, "PetalburgWoods_2_EventScript_WoChien", "FLAG_EC_CAUGHT_WO_CHIEN", "LOCALID_EC_WO_CHIEN"),
         obj("OBJ_EVENT_GFX_BUG_CATCHER", 18, 31, "PetalburgWoods_2_EventScript_Ranger"),
     ],
-    "PetalburgWoods_3": [
-        obj("OBJ_EVENT_GFX_SPECIES(CELEBI)", 44, 41, "PetalburgWoods_3_EventScript_Celebi", "FLAG_EC_CAUGHT_CELEBI", "LOCALID_EC_CELEBI"),
-        obj("OBJ_EVENT_GFX_CAMPER", 8, 32, "PetalburgWoods_3_EventScript_Ranger"),
-    ],
+    "PetalburgWoods_3": [obj("OBJ_EVENT_GFX_CAMPER", 8, 32, "PetalburgWoods_3_EventScript_Ranger")],
     "Route111_RuinsExterior": [
-        obj("OBJ_EVENT_GFX_SPECIES(LANDORUS)", 9, 10, "Route111_RuinsExterior_EventScript_Landorus", "FLAG_EC_CAUGHT_LANDORUS", "LOCALID_EC_LANDORUS"),
         obj("OBJ_EVENT_GFX_MANIAC", 8, 20, "Route111_RuinsExterior_EventScript_Archaeologist"),
     ],
     "SandstrewnRuins": [obj("OBJ_EVENT_GFX_MANIAC", 8, 128, "SandstrewnRuins_EventScript_Archaeologist")],
-    "SandstrewnRuins_B1F": [obj("OBJ_EVENT_GFX_SPECIES(ZYGARDE)", 34, 6, "SandstrewnRuins_B1F_EventScript_Zygarde", "FLAG_EC_CAUGHT_ZYGARDE", "LOCALID_EC_ZYGARDE")],
-    "ScorchedSlab_B2F": [
-        obj("OBJ_EVENT_GFX_SPECIES(RESHIRAM)", 8, 5, "ScorchedSlab_B2F_EventScript_Reshiram", "FLAG_EC_CAUGHT_RESHIRAM", "LOCALID_EC_RESHIRAM"),
-        obj("OBJ_EVENT_GFX_HIKER", 12, 28, "ScorchedSlab_B2F_EventScript_Warden"),
-    ],
-    "ScorchedSlab_HeatransRoom": [obj("OBJ_EVENT_GFX_SPECIES(HEATRAN)", 10, 12, "ScorchedSlab_HeatransRoom_EventScript_Heatran", "FLAG_EC_CAUGHT_HEATRAN", "LOCALID_EC_HEATRAN")],
+    "ScorchedSlab_B2F": [obj("OBJ_EVENT_GFX_HIKER", 12, 28, "ScorchedSlab_B2F_EventScript_Warden")],
+    "ScorchedSlab_HeatransRoom": [obj("OBJ_EVENT_GFX_INCLEMENT_HEATRAN", 10, 12, "ScorchedSlab_HeatransRoom_EventScript_Heatran", "FLAG_EC_CAUGHT_HEATRAN", "LOCALID_EC_HEATRAN", "MOVEMENT_TYPE_NONE")],
     "Seaspray_Cave": [obj("OBJ_EVENT_GFX_SAILOR", 8, 32, "Seaspray_Cave_EventScript_Explorer")],
-    "Seaspray_Cave_B1F": [obj("OBJ_EVENT_GFX_SPECIES(PALKIA)", 40, 7, "Seaspray_Cave_B1F_EventScript_Palkia", "FLAG_EC_CAUGHT_PALKIA", "LOCALID_EC_PALKIA")],
     "VerdanturfMeadow": [
-        obj("OBJ_EVENT_GFX_SPECIES(SHAYMIN)", 10, 14, "VerdanturfMeadow_EventScript_Shaymin", "FLAG_EC_CAUGHT_SHAYMIN", "LOCALID_EC_SHAYMIN"),
-        obj("OBJ_EVENT_GFX_SPECIES(ENAMORUS)", 4, 12, "VerdanturfMeadow_EventScript_Enamorus", "FLAG_EC_CAUGHT_ENAMORUS", "LOCALID_EC_ENAMORUS"),
-        obj("OBJ_EVENT_GFX_SPECIES(FEZANDIPITI)", 13, 12, "VerdanturfMeadow_EventScript_Fezandipiti", "FLAG_EC_CAUGHT_FEZANDIPITI", "LOCALID_EC_FEZANDIPITI"),
         obj("OBJ_EVENT_GFX_GIRL_2", 12, 9, "VerdanturfMeadow_EventScript_Warden"),
     ],
 }
@@ -327,9 +355,13 @@ AlteringCave_1F_Text_Researcher:
     "AlteringCave_B1F": """AlteringCave_B1F_EventScript_Leaf::
 \ttrainerbattle_double TRAINER_LEAF_ALTERING_CAVE, AlteringCave_B1F_Text_LeafIntro, AlteringCave_B1F_Text_LeafDefeat, EmeraldChampions_Text_NeedTwoPokemon
 \tcheckitem ITEM_CATCHING_CHARM, 1
-\tgoto_if_eq VAR_RESULT, TRUE, AlteringCave_B1F_EventScript_LeafAfter
+\tgoto_if_eq VAR_RESULT, TRUE, AlteringCave_B1F_EventScript_LeafComplete
 \tgiveitem ITEM_CATCHING_CHARM
 \tgoto_if_eq VAR_RESULT, FALSE, AlteringCave_B1F_EventScript_LeafBagFull
+AlteringCave_B1F_EventScript_LeafComplete::
+\tsetflag FLAG_EC_DEFEATED_LEAF_ALTERING_CAVE
+\tremoveobject LOCALID_EC_LEAF
+\tsetvar VAR_TEMP_0, 1
 AlteringCave_B1F_EventScript_LeafAfter::
 \tmsgbox AlteringCave_B1F_Text_LeafAfter, MSGBOX_AUTOCLOSE
 \tend
@@ -480,6 +512,14 @@ DewfordMeadow_Text_Warden:
 \t.string "CHAMPION'S SIGNS began shining.\\p"
 \t.string "He says the stones, the legends, and\\n"
 \t.string "the shaking at MT. CHIMNEY are linked.$"
+
+DewfordMeadow_EventScript_ManorSign::
+\tmsgbox DewfordMeadow_Text_ManorSign, MSGBOX_SIGN
+\tend
+
+DewfordMeadow_Text_ManorSign:
+\t.string "DEWFORD MANOR: Once a sea captain's\\n"
+\t.string "escape, now home only to POKéMON.$"
 """,
     "EmberPath": """EmberPath_EventScript_Warden::
 \tmsgbox EmberPath_Text_Warden, MSGBOX_NPC
@@ -541,6 +581,35 @@ ScorchedSlab_B2F_Text_Warden:
 \t.string "HEATRAN guards the earth below. A white\\n"
 \t.string "dragon answers only after time itself.$"
 """,
+    "ScorchedSlab_HeatransRoom": """ScorchedSlab_HeatransRoom_EventScript_MagmaStone::
+\tlock
+\tcheckitem ITEM_MAGMA_STONE, 1
+\tgoto_if_eq VAR_RESULT, TRUE, ScorchedSlab_HeatransRoom_EventScript_PlaceMagmaStone
+\trelease
+\tend
+
+ScorchedSlab_HeatransRoom_EventScript_PlaceMagmaStone::
+\tmsgbox ScorchedSlab_HeatransRoom_Text_PlaceMagmaStone, MSGBOX_YESNO
+\tgoto_if_eq VAR_RESULT, NO, ScorchedSlab_HeatransRoom_EventScript_MagmaStoneEnd
+\tfadescreen FADE_TO_BLACK
+\tclosemessage
+\twaitse
+\tplaymoncry SPECIES_HEATRAN, CRY_MODE_ENCOUNTER
+\tdelay 40
+\twaitmoncry
+\tclearflag FLAG_EC_CAUGHT_HEATRAN
+\taddobject LOCALID_EC_HEATRAN
+\tfadescreen FADE_FROM_BLACK
+\tremoveitem ITEM_MAGMA_STONE
+ScorchedSlab_HeatransRoom_EventScript_MagmaStoneEnd::
+\treleaseall
+\tend
+
+ScorchedSlab_HeatransRoom_Text_PlaceMagmaStone:
+\t.string "The MAGMA STONE is reacting\\n"
+\t.string "to something…\\p"
+\t.string "Will you set it down here?$"
+""",
     "Seaspray_Cave": """Seaspray_Cave_EventScript_Explorer::
 \tmsgbox Seaspray_Cave_Text_Explorer, MSGBOX_NPC
 \tend
@@ -569,32 +638,12 @@ STATIC_LEGENDS = {
 }
 
 VISIBLE_SIGNS = {
-    "AlteringCave_1F": ("LOCALID_EC_HOOPA", "HOOPA", 17, "FLAG_EC_CAUGHT_HOOPA", "UNOWN", "the distortion"),
     "AlteringCave_B1F": ("LOCALID_EC_MEWTWO", "MEWTWO", 61, "FLAG_EC_CAUGHT_MEWTWO", "DITTO", "the deepest distortion"),
-    "AshenWoods": ("LOCALID_EC_OKIDOGI", "OKIDOGI", 64, "FLAG_EC_CAUGHT_OKIDOGI", "MIGHTYENA", "this ash grove"),
-    "CaveOfOrigin_DianciesRoom": ("LOCALID_EC_TERAPAGOS", "TERAPAGOS", 67, "FLAG_EC_CAUGHT_TERAPAGOS", "DIANCIE", "the crystal chamber"),
-    "DewfordManor_1F": ("LOCALID_EC_MELOETTA", "MELOETTA", 59, "FLAG_EC_CAUGHT_MELOETTA", "EXPLOUD", "the abandoned ballroom"),
-    "MeteorFalls_JirachisRoom": ("LOCALID_EC_COSMOG", "COSMOG", 54, "FLAG_EC_CAUGHT_COSMOG", "JIRACHI", "the wishing chamber"),
-    "PetalburgWoods_3": ("LOCALID_EC_CELEBI", "CELEBI", 5, "FLAG_EC_CAUGHT_CELEBI", "BLISSEY", "the timeless grove"),
-    "PetalburgWoods_2": ("LOCALID_EC_VIRIZION", "VIRIZION", 43, "FLAG_EC_CAUGHT_VIRIZION", "BRELOOM", "the deep forest"),
-    "Route111_RuinsExterior": ("LOCALID_EC_LANDORUS", "LANDORUS", 20, "FLAG_EC_CAUGHT_LANDORUS", "CASTFORM", "the desert summit"),
-    "SandstrewnRuins_B1F": ("LOCALID_EC_ZYGARDE", "ZYGARDE", 52, "FLAG_EC_CAUGHT_ZYGARDE", "LANDORUS", "the cells below"),
-    "ScorchedSlab_B2F": ("LOCALID_EC_RESHIRAM", "RESHIRAM", 32, "FLAG_EC_CAUGHT_RESHIRAM", "DIALGA", "the white flame"),
-    "Seaspray_Cave_B1F": ("LOCALID_EC_PALKIA", "PALKIA", 25, "FLAG_EC_CAUGHT_PALKIA", "KINGDRA", "the frozen tide"),
-    "VerdanturfMeadow": ("LOCALID_EC_SHAYMIN", "SHAYMIN", 33, "FLAG_EC_CAUGHT_SHAYMIN", "ROSERADE", "the healing meadow"),
 }
 
 ADDITIONAL_VISIBLE_SIGNS = {
-    "DewfordManor_1F": [
-        ("LOCALID_EC_MUNKIDORI", "MUNKIDORI", 63, "FLAG_EC_CAUGHT_MUNKIDORI", "ORANGURU", "the sealed study"),
-    ],
-    "PetalburgWoods_2": [
-        ("LOCALID_EC_WO_CHIEN", "WO_CHIEN", 68, "FLAG_EC_CAUGHT_WO_CHIEN", "TREVENANT", "the ruined shrine"),
-    ],
-    "VerdanturfMeadow": [
-        ("LOCALID_EC_ENAMORUS", "ENAMORUS", 55, "FLAG_EC_CAUGHT_ENAMORUS", "SHAYMIN", "the recovering meadow"),
-        ("LOCALID_EC_FEZANDIPITI", "FEZANDIPITI", 56, "FLAG_EC_CAUGHT_FEZANDIPITI", "ALTARIA", "the highland breeze"),
-    ],
+    # Deliberately empty: secondary species in shared areas are conditional
+    # wild encounters, not permanent room props.
 }
 
 
@@ -605,7 +654,7 @@ def main() -> None:
         path = ROOT / "data" / "maps" / map_name / "map.json"
         payload = load(path)
         payload["object_events"] = old_obstacles(map_name) + ITEMS.get(map_name, []) + EXTRA_OBJECTS.get(map_name, [])
-        payload["bg_events"] = []
+        payload["bg_events"] = INCLEMENT_BG_EVENTS.get(map_name, [])
         layout = layout_rows[payload["layout"]]
         for event in payload["object_events"]:
             if not (0 <= event["x"] < layout["width"] and 0 <= event["y"] < layout["height"]):

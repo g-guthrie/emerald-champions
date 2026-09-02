@@ -1036,6 +1036,8 @@ extern const u32 gItemIcon_Glimmoranite[];
 extern const u16 gItemIconPalette_Glimmoranite[];
 extern const u32 gItemIcon_PokeVial[];
 extern const u16 gItemIconPalette_PokeVial[];
+extern const u32 gItemIcon_MagmaStone[];
+extern const u16 gItemIconPalette_MagmaStone[];
 
 // Gems
 extern const u32 gItemIcon_TypeGem[];

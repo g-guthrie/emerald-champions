@@ -245,7 +245,7 @@ def verify_inert_item_cleanup() -> None:
     )[0]
     frontier_items = tuple(re.findall(r"\bITEM_[A-Z0-9_]+\b", frontier_shop))
     require(
-        frontier_items[-7:-1] == CAPTURE_VENDOR_ITEMS,
+        frontier_items[-6:] == CAPTURE_VENDOR_ITEMS,
         "Battle Frontier Mart's former vitamin shelf is not a capture shelf",
     )
 

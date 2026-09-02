@@ -30,6 +30,46 @@ JSON_OUTPUT = ROOT / "docs" / "emerald_champions_battle_sets.json"
 C_OUTPUT = ROOT / "src" / "data" / "pokemon" / "emerald_champions_battle_sets.h"
 MOVE_ACCESS_REVIEW = ROOT / "docs" / "emerald_champions_move_access_review.json"
 MOVE_ACCESS_C_OUTPUT = ROOT / "src" / "data" / "pokemon" / "emerald_champions_move_access_review.h"
+SHOWDOWN_SINGLES_SOURCE = ROOT / "docs" / "showdown_champions_random_singles.json"
+SHOWDOWN_GEN9_SINGLES_SOURCE = ROOT / "docs" / "showdown_gen9_random_singles.json"
+
+SINGLES_EXCLUDED_MOVES = {
+    "MOVE_AFTER_YOU", "MOVE_ALLY_SWITCH", "MOVE_AROMATIC_MIST",
+    "MOVE_COACHING", "MOVE_DECORATE", "MOVE_FOLLOW_ME", "MOVE_HEAL_PULSE",
+    "MOVE_HELPING_HAND", "MOVE_HOLD_HANDS", "MOVE_INSTRUCT", "MOVE_LIFE_DEW",
+    "MOVE_QUICK_GUARD", "MOVE_RAGE_POWDER", "MOVE_SPOTLIGHT",
+    "MOVE_WIDE_GUARD",
+}
+
+SINGLES_SETUP_MOVES = (
+    "MOVE_SHELL_SMASH", "MOVE_QUIVER_DANCE", "MOVE_DRAGON_DANCE",
+    "MOVE_VICTORY_DANCE", "MOVE_SHIFT_GEAR", "MOVE_GEOMANCY",
+    "MOVE_TAIL_GLOW", "MOVE_NASTY_PLOT", "MOVE_SWORDS_DANCE",
+    "MOVE_CALM_MIND", "MOVE_BULK_UP", "MOVE_COIL", "MOVE_IRON_DEFENSE",
+)
+
+SINGLES_RECOVERY_MOVES = (
+    "MOVE_RECOVER", "MOVE_ROOST", "MOVE_SLACK_OFF", "MOVE_SHORE_UP",
+    "MOVE_SOFT_BOILED", "MOVE_STRENGTH_SAP", "MOVE_SYNTHESIS",
+    "MOVE_MOONLIGHT", "MOVE_MORNING_SUN", "MOVE_WISH", "MOVE_REST",
+)
+
+SINGLES_UTILITY_MOVES = (
+    "MOVE_STEALTH_ROCK", "MOVE_SPIKES", "MOVE_TOXIC_SPIKES",
+    "MOVE_STICKY_WEB", "MOVE_RAPID_SPIN", "MOVE_MORTAL_SPIN",
+    "MOVE_DEFOG", "MOVE_KNOCK_OFF", "MOVE_TOXIC", "MOVE_WILL_O_WISP",
+    "MOVE_THUNDER_WAVE", "MOVE_GLARE", "MOVE_SLEEP_POWDER", "MOVE_SPORE",
+    "MOVE_LEECH_SEED", "MOVE_SUBSTITUTE", "MOVE_ENCORE", "MOVE_TAUNT",
+    "MOVE_DISABLE", "MOVE_TRICK", "MOVE_SWITCHEROO", "MOVE_ROAR",
+)
+
+SINGLES_DAMAGE_INDEPENDENT_MOVES = {
+    "MOVE_ACID_SPRAY", "MOVE_BODY_PRESS", "MOVE_COUNTER", "MOVE_ELECTROWEB",
+    "MOVE_ENDEAVOR", "MOVE_FAKE_OUT", "MOVE_FEINT", "MOVE_FINAL_GAMBIT",
+    "MOVE_FOUL_PLAY", "MOVE_ICY_WIND", "MOVE_METAL_BURST", "MOVE_MIRROR_COAT",
+    "MOVE_NIGHT_SHADE", "MOVE_NUZZLE", "MOVE_RAPID_SPIN", "MOVE_RUINATION",
+    "MOVE_SALT_CURE", "MOVE_SEISMIC_TOSS", "MOVE_SNARL", "MOVE_SUPER_FANG",
+}
 
 # A second set is useful only when it asks the Pokemon to do something
 # meaningfully different.  These authored role families are intentionally
@@ -196,7 +236,6 @@ ABILITY_ALIASES = {
     ("SPECIES_FENNEKIN", "ABILITY_PYROMANCY"): "ABILITY_BLAZE",
     ("SPECIES_BRAIXEN", "ABILITY_PYROMANCY"): "ABILITY_BLAZE",
     ("SPECIES_DELPHOX", "ABILITY_PYROMANCY"): "ABILITY_BLAZE",
-    ("SPECIES_HITMONCHAN", "ABILITY_BLITZ_BOXER"): "ABILITY_IRON_FIST",
     ("SPECIES_SQUIRTLE", "ABILITY_OVERCOAT"): "ABILITY_RAIN_DISH",
     ("SPECIES_PIDGEY", "ABILITY_NO_GUARD"): "ABILITY_BIG_PECKS",
     ("SPECIES_PIDGEOTTO", "ABILITY_NO_GUARD"): "ABILITY_BIG_PECKS",
@@ -550,6 +589,16 @@ SUPPLEMENTAL_ALTERNATIVE_OVERRIDES = {
         [2, 32, 0, 0, 0, 32],
         "Yache physical attacker and Tailwind setter",
     ),
+    ("SPECIES_HITMONCHAN", "Fake Out Control"): authored_modern_set(
+        "SPECIES_HITMONCHAN",
+        "Fake Out Control",
+        ["MOVE_FAKE_OUT", "MOVE_HELPING_HAND", "MOVE_DRAIN_PUNCH", "MOVE_PROTECT"],
+        "NATURE_JOLLY",
+        "ABILITY_IRON_FIST",
+        "ITEM_SITRUS_BERRY",
+        [32, 0, 2, 0, 0, 32],
+        "distinct doubles Fake Out and Drain Punch control role",
+    ),
 }
 
 # Source-backed sets still need an executable review after import.  These are
@@ -560,6 +609,25 @@ AUDITED_SET_FIELD_OVERRIDES = {
     # Preserve support bulk while putting otherwise wasted offensive Stat
     # Points into HP on fast, damage-independent doubles utility sets.
     ("SPECIES_GOLBAT", "Recommended"): {"stat_points": [32, 0, 2, 0, 0, 32]},
+    ("SPECIES_HITMONCHAN", "Recommended"): {"ability": "ABILITY_BLITZ_BOXER"},
+    ("SPECIES_METAPOD", "Tempo Control"): {"nature": "NATURE_JOLLY"},
+    ("SPECIES_HITMONCHAN", "Fake Out Control"): {
+        "moves": ["MOVE_FAKE_OUT", "MOVE_HELPING_HAND", "MOVE_DRAIN_PUNCH", "MOVE_PROTECT"],
+        "ability": "ABILITY_IRON_FIST",
+        "role": "distinct doubles Fake Out and Drain Punch control role",
+    },
+    ("SPECIES_CHIMCHAR", "Fake Out Control"): {
+        "moves": ["MOVE_FAKE_OUT", "MOVE_HELPING_HAND", "MOVE_FIRE_PUNCH", "MOVE_PROTECT"],
+    },
+    ("SPECIES_MONFERNO", "Fake Out Control"): {
+        "moves": ["MOVE_FAKE_OUT", "MOVE_HELPING_HAND", "MOVE_DRAIN_PUNCH", "MOVE_PROTECT"],
+    },
+    ("SPECIES_GOLETT", "Tempo Control"): {
+        "moves": ["MOVE_ICY_WIND", "MOVE_HELPING_HAND", "MOVE_SHADOW_PUNCH", "MOVE_PROTECT"],
+    },
+    ("SPECIES_CRABRAWLER", "Wide Guard Support"): {
+        "moves": ["MOVE_WIDE_GUARD", "MOVE_HELPING_HAND", "MOVE_DRAIN_PUNCH", "MOVE_PROTECT"],
+    },
     ("SPECIES_LEDIAN", "Recommended"): {"stat_points": [32, 0, 2, 0, 0, 32]},
     ("SPECIES_MISDREAVUS", "Recommended"): {"stat_points": [32, 0, 2, 0, 0, 32]},
     ("SPECIES_RIOLU", "Recommended"): {"stat_points": [32, 0, 2, 0, 0, 32]},
@@ -719,6 +787,65 @@ def handbook_json() -> dict:
 def shorten_name(name: str) -> str:
     name = name.replace(" — ", " ").replace("-Mega", " Mega").strip()
     return name[:23]
+
+
+def compact_role_name(role: str) -> str:
+    """Turn authored prose into a short native menu label."""
+    value = role.replace("—", " ").replace("/", " ")
+    value = re.sub(r"\b(?:distinct|doubles|singles|self-contained|reliable)\b", "", value, flags=re.I)
+    value = re.sub(r"^(?:minimal)\s+", "", value, flags=re.I)
+    value = re.sub(r"\b(?:and|with)\b", "", value, flags=re.I)
+    value = re.sub(r"\s+", " ", value).strip().title()
+    replacements = {
+        "Speed-Control": "Speed Control",
+        "Partner Support": "Support",
+        "Role Synthesis": "Utility",
+        "Role": "Utility",
+    }
+    for old, new in replacements.items():
+        value = value.replace(old, new)
+    if not value or value == "Recommended":
+        value = "Competitive Utility"
+    if len(value) <= 23:
+        return value
+    # Preserve whole words; a clean short label is preferable to a clipped
+    # final word in the native scrolling menu.
+    words: list[str] = []
+    for word in value.split():
+        if len(" ".join([*words, word])) > 23:
+            break
+        words.append(word)
+    return " ".join(words) or value[:23]
+
+
+def name_doubles_defaults(defaults: list[dict]) -> list[dict]:
+    result: list[dict] = []
+    for source in defaults:
+        entry = dict(source)
+        if entry["name"] == "Recommended":
+            entry["name"] = compact_role_name(entry["role"])
+        result.append(entry)
+    return result
+
+
+def repair_retired_ability_labels(entries: list[dict]) -> list[dict]:
+    """Keep exposed names/roles consistent with the Ability actually applied."""
+    result: list[dict] = []
+    for source in entries:
+        entry = dict(source)
+        for (species, retired), replacement in ABILITY_ALIASES.items():
+            if entry["species"] != species or entry["ability"] != replacement:
+                continue
+            retired_name = retired.removeprefix("ABILITY_").replace("_", " ").title()
+            replacement_name = replacement.removeprefix("ABILITY_").replace("_", " ").title()
+            entry["role"] = re.sub(
+                re.escape(retired_name), replacement_name, entry["role"], flags=re.I
+            )
+            entry["name"] = re.sub(
+                re.escape(retired_name), replacement_name, entry["name"], flags=re.I
+            )
+        result.append(entry)
+    return result
 
 
 def normalize_species(species: str) -> str:
@@ -1367,8 +1494,557 @@ def ensure_minimum_non_mega_orientations(
         assert choice is not None, f"no genuinely distinct second orientation for {species}"
         synthesized.append(choice)
         existing.append(choice)
-    assert len(synthesized) == 1087, len(synthesized)
+    # Scovillain now contributes its reviewed ordinary default directly
+    # instead of consuming one emergency synthetic orientation.
+    assert len(synthesized) == 1086, len(synthesized)
     return alternatives + synthesized
+
+
+def complete_battle_sets(defaults: list[dict], alternatives: list[dict]) -> tuple[list[dict], list[dict]]:
+    """Fill every set to four moves unless the species truly lacks four."""
+    metadata = species_build_metadata()
+    move_info = move_metadata()
+    learnables = json.loads((ROOT / "src/data/pokemon/all_learnables.json").read_text())
+    by_species: dict[str, list[dict]] = defaultdict(list)
+    for entry in defaults + alternatives:
+        by_species[entry["species"]].append(entry)
+
+    def complete(source: dict) -> dict:
+        entry = dict(source)
+        moves = list(entry["moves"])
+        if len(moves) >= 4:
+            return entry
+        species = entry["species"]
+        legal = legal_moves_for_species(species, by_species[species], metadata, learnables)
+        if len(legal) < 4:
+            return entry
+        info = metadata.get(species, {})
+        # Preserve the species' authored default vocabulary first. This makes
+        # narrow lines such as Wurmple/Cascoon complete without inventing an
+        # unrelated fourth role.
+        default = next(row for row in defaults if row["species"] == species)
+        candidates = list(default["moves"])
+        physical = ranked_attacks(
+            legal, "DAMAGE_CATEGORY_PHYSICAL", info.get("types", ()), move_info,
+            entry["ability"],
+        )
+        special = ranked_attacks(
+            legal, "DAMAGE_CATEGORY_SPECIAL", info.get("types", ()), move_info,
+            entry["ability"],
+        )
+        candidates.extend(physical if info.get("attack", 0) >= info.get("sp_attack", 0) else special)
+        candidates.extend(special if info.get("attack", 0) >= info.get("sp_attack", 0) else physical)
+        candidates.extend(unique_available(GENERAL_SUPPORT_MOVES, legal))
+        candidates.extend(sorted(legal))
+        for move in candidates:
+            if move not in moves:
+                moves.append(move)
+                if len(moves) == 4:
+                    break
+        assert len(moves) == 4, (species, entry["name"], moves, len(legal))
+        entry["moves"] = moves
+        return entry
+
+    return [complete(entry) for entry in defaults], [complete(entry) for entry in alternatives]
+
+
+def _rank_showdown_single_attacks(
+    pool: set[str],
+    species_types: tuple[str, ...],
+    move_info: dict[str, dict],
+    preferred_type: str,
+) -> list[str]:
+    scored: list[tuple[int, str]] = []
+    for move in pool:
+        info = move_info.get(move)
+        if info is None or info["category"] == "DAMAGE_CATEGORY_STATUS":
+            continue
+        score = info["power"]
+        if info["type"] in species_types:
+            score += 45
+        if preferred_type != "TYPE_NONE" and info["type"] == preferred_type:
+            score += 20
+        if info["priority"] > 0:
+            score += 20
+        if info["accuracy"] and info["accuracy"] < 90:
+            score -= 25
+        scored.append((score, move))
+    return [move for _, move in sorted(scored, key=lambda row: (-row[0], row[1]))]
+
+
+def _choose_showdown_single_moves(
+    template: dict,
+    info: dict,
+    legal: set[str],
+    move_info: dict[str, dict],
+) -> list[str]:
+    pool = {
+        move for move in template["moves"]
+        if move in legal and move not in SINGLES_EXCLUDED_MOVES
+    }
+    role = template["role"]
+    selected: list[str] = []
+
+    def add(move: str) -> None:
+        if move in pool and move not in selected and len(selected) < 4:
+            selected.append(move)
+
+    if "Setup" in role:
+        for move in SINGLES_SETUP_MOVES:
+            if move in pool:
+                add(move)
+                break
+    if role.startswith("Bulky"):
+        for move in SINGLES_RECOVERY_MOVES:
+            if move in pool:
+                add(move)
+                break
+    if "Support" in role:
+        for move in SINGLES_UTILITY_MOVES:
+            add(move)
+            if len(selected) >= 2:
+                break
+
+    ranked = _rank_showdown_single_attacks(
+        pool, info.get("types", ()), move_info, template.get("preferred_type", "TYPE_NONE")
+    )
+    attack_limit = 1 if "Support" in role else 2
+    for move in diverse_attacks(ranked, move_info, attack_limit):
+        add(move)
+
+    # Showdown's movepool encodes deliberate combinations. Prefer setup,
+    # recovery, and utility before merely taking the remaining moves in source
+    # order.
+    for move in (*SINGLES_SETUP_MOVES, *SINGLES_RECOVERY_MOVES, *SINGLES_UTILITY_MOVES):
+        add(move)
+    for move in ranked:
+        add(move)
+    for move in template["moves"]:
+        add(move)
+
+    if len(selected) < 4:
+        fallback = _rank_showdown_single_attacks(
+            legal - SINGLES_EXCLUDED_MOVES,
+            info.get("types", ()),
+            move_info,
+            template.get("preferred_type", "TYPE_NONE"),
+        )
+        for move in fallback:
+            add(move)
+    for move in (*SINGLES_RECOVERY_MOVES, *SINGLES_UTILITY_MOVES, "MOVE_PROTECT"):
+        if move in legal:
+            pool.add(move)
+            add(move)
+    return selected
+
+
+def _single_build(
+    role: str,
+    moves: list[str],
+    info: dict,
+    move_info: dict[str, dict],
+) -> tuple[str, list[int]]:
+    physical = sum(
+        move_info.get(move, {}).get("category") == "DAMAGE_CATEGORY_PHYSICAL"
+        and move not in SINGLES_DAMAGE_INDEPENDENT_MOVES
+        for move in moves
+    )
+    special = sum(
+        move_info.get(move, {}).get("category") == "DAMAGE_CATEGORY_SPECIAL"
+        and move not in SINGLES_DAMAGE_INDEPENDENT_MOVES
+        for move in moves
+    )
+    slow = "MOVE_TRICK_ROOM" in moves or info.get("speed", 0) <= 45
+    support = (
+        any(marker in role for marker in ("Support", "Control", "Utility", "Redirection", "Disruption"))
+        or re.search(r"\bWall\b", role) is not None
+    ) and max(physical, special) <= 1
+    bulky = role.startswith("Bulky")
+    if support:
+        if slow:
+            return ("NATURE_SASSY" if special >= physical else "NATURE_CAREFUL", [32, 0, 17, 0, 17, 0])
+        return ("NATURE_CALM" if special >= physical else "NATURE_CAREFUL", [32, 0, 17, 0, 17, 0])
+    if physical > special:
+        if slow:
+            return "NATURE_BRAVE", [32, 32, 2, 0, 0, 0]
+        if bulky:
+            return "NATURE_ADAMANT", [32, 32, 2, 0, 0, 0]
+        return "NATURE_JOLLY", [2, 32, 0, 0, 0, 32]
+    if slow:
+        return "NATURE_QUIET", [32, 0, 2, 32, 0, 0]
+    if bulky:
+        return "NATURE_MODEST", [32, 0, 2, 32, 0, 0]
+    return "NATURE_TIMID", [2, 0, 0, 32, 0, 32]
+
+
+def _single_item(
+    role: str,
+    moves: list[str],
+    ability: str,
+    info: dict,
+    move_info: dict[str, dict],
+) -> str:
+    if ability in {"ABILITY_GUTS", "ABILITY_FLARE_BOOST"}:
+        return "ITEM_FLAME_ORB"
+    if ability in {"ABILITY_POISON_HEAL", "ABILITY_QUICK_FEET", "ABILITY_TOXIC_BOOST"}:
+        return "ITEM_TOXIC_ORB"
+    if "MOVE_SHELL_SMASH" in moves:
+        return "ITEM_WHITE_HERB"
+    if "MOVE_AURORA_VEIL" in moves or {"MOVE_REFLECT", "MOVE_LIGHT_SCREEN"}.issubset(moves):
+        return "ITEM_LIGHT_CLAY"
+    if ability in {"ABILITY_MAGIC_GUARD", "ABILITY_SHEER_FORCE"} and "Support" not in role:
+        return "ITEM_LIFE_ORB"
+    if role == "Wallbreaker":
+        if any(
+            move_info.get(move, {}).get("category") == "DAMAGE_CATEGORY_STATUS"
+            and move not in {"MOVE_TRANSFORM", "MOVE_TRICK", "MOVE_SWITCHEROO"}
+            for move in moves
+        ):
+            return "ITEM_LIFE_ORB"
+        physical = sum(move_info.get(move, {}).get("category") == "DAMAGE_CATEGORY_PHYSICAL" for move in moves)
+        special = sum(move_info.get(move, {}).get("category") == "DAMAGE_CATEGORY_SPECIAL" for move in moves)
+        return "ITEM_CHOICE_BAND" if physical > special else "ITEM_CHOICE_SPECS"
+    if role in {"Fast Attacker", "Setup Sweeper"}:
+        return "ITEM_LIFE_ORB" if info.get("hp", 0) + info.get("defense", 0) + info.get("sp_defense", 0) >= 210 else "ITEM_FOCUS_SASH"
+    return "ITEM_LEFTOVERS"
+
+
+def _fallback_single_set(
+    base: dict,
+    existing: list[dict],
+    metadata: dict[str, dict],
+    learnables: dict[str, list[str]],
+    move_info: dict[str, dict],
+) -> dict:
+    species = base["species"]
+    info = metadata.get(species, {})
+    legal = legal_moves_for_species(species, existing, metadata, learnables)
+    if species == "SPECIES_SMEARGLE":
+        if "Redirection" in base["name"]:
+            return {
+                "species": species,
+                "name": "Hazard Control",
+                "moves": ["MOVE_SPORE", "MOVE_STEALTH_ROCK", "MOVE_MORTAL_SPIN", "MOVE_TAUNT"],
+                "nature": "NATURE_JOLLY",
+                "ability": base["ability"],
+                "item": "ITEM_FOCUS_SASH",
+                "required_item": "ITEM_NONE",
+                "stat_points": [2, 0, 0, 0, 32, 32],
+                "role": "fast singles hazard control",
+                "source": "Emerald Champions authored Smeargle singles role using Sketch legality",
+            }
+        return {
+            "species": species,
+            "name": "Hazard Disruption",
+            "moves": ["MOVE_SPORE", "MOVE_STICKY_WEB", "MOVE_NUZZLE", "MOVE_PARTING_SHOT"],
+            "nature": "NATURE_JOLLY",
+            "ability": base["ability"],
+            "item": "ITEM_FOCUS_SASH",
+            "required_item": "ITEM_NONE",
+            "stat_points": [2, 0, 0, 0, 32, 32],
+            "role": "fast singles hazard and status disruption",
+            "source": "Emerald Champions authored Smeargle singles role using Sketch legality",
+        }
+    if species == "SPECIES_UNOWN":
+        entry = dict(base)
+        entry["name"] = compact_role_name(base["name"])
+        entry["source"] = "Emerald Champions singles adaptation of Unown's complete legal pool"
+        return entry
+    selected = [
+        move for move in base["moves"]
+        if move not in SINGLES_EXCLUDED_MOVES and move != "MOVE_PROTECT"
+    ]
+    selected = list(dict.fromkeys(selected))[:4]
+    ranked_physical = ranked_attacks(
+        legal, "DAMAGE_CATEGORY_PHYSICAL", info.get("types", ()), move_info, base["ability"]
+    )
+    ranked_special = ranked_attacks(
+        legal, "DAMAGE_CATEGORY_SPECIAL", info.get("types", ()), move_info, base["ability"]
+    )
+    base_physical = sum(
+        move_info.get(move, {}).get("category") == "DAMAGE_CATEGORY_PHYSICAL"
+        for move in selected
+    )
+    base_special = sum(
+        move_info.get(move, {}).get("category") == "DAMAGE_CATEGORY_SPECIAL"
+        for move in selected
+    )
+    if base_physical != base_special:
+        ranked = ranked_physical if base_physical > base_special else ranked_special
+    else:
+        ranked = ranked_physical if info.get("attack", 0) >= info.get("sp_attack", 0) else ranked_special
+    authored_moves = {move for entry in existing for move in entry["moves"]}
+    ranked_authored = [move for move in ranked if move in authored_moves]
+    for move in [*ranked_authored, *ranked, *SINGLES_RECOVERY_MOVES, *SINGLES_UTILITY_MOVES, *SINGLES_SETUP_MOVES, *base["moves"], *sorted(legal)]:
+        if len(selected) >= 4:
+            break
+        if move in legal and move not in SINGLES_EXCLUDED_MOVES and move not in selected:
+            selected.append(move)
+    selected = selected[:4]
+    role = compact_role_name(base["role"])
+    removed_doubles_identity = any(
+        move in SINGLES_EXCLUDED_MOVES and move not in selected
+        for move in base["moves"]
+    )
+    if removed_doubles_identity:
+        setup = next((move for move in SINGLES_SETUP_MOVES if move in selected), None)
+        if setup is not None:
+            role = compact_role_name(
+                setup.removeprefix("MOVE_").replace("_", " ").title() + " Setup"
+            )
+        else:
+            meaningful_physical = sum(
+                move_info.get(move, {}).get("category") == "DAMAGE_CATEGORY_PHYSICAL"
+                and move not in SINGLES_DAMAGE_INDEPENDENT_MOVES
+                for move in selected
+            )
+            meaningful_special = sum(
+                move_info.get(move, {}).get("category") == "DAMAGE_CATEGORY_SPECIAL"
+                and move not in SINGLES_DAMAGE_INDEPENDENT_MOVES
+                for move in selected
+            )
+            role = "Physical Utility" if meaningful_physical > meaningful_special else "Special Utility"
+    nature, points = _single_build(role, selected, info, move_info)
+    return {
+        "species": species,
+        "name": role,
+        "moves": selected,
+        "nature": nature,
+        "ability": base["ability"],
+        "item": base["item"],
+        "required_item": "ITEM_NONE",
+        "stat_points": points,
+        "role": role,
+        "source": "Emerald Champions singles adaptation of the authored competitive default",
+    }
+
+
+def build_singles_sets(defaults: list[dict], alternatives: list[dict]) -> tuple[list[dict], list[dict]]:
+    """Build named singles choices from pinned Showdown roles plus legal fallbacks."""
+    source = json.loads(SHOWDOWN_SINGLES_SOURCE.read_text())
+    gen9_source = json.loads(SHOWDOWN_GEN9_SINGLES_SOURCE.read_text())
+    assert source["source_commit"] == gen9_source["source_commit"] == "bb179fbf8449e3c31632bd56f671ffb4404fa6e7"
+    metadata = species_build_metadata()
+    move_info = move_metadata()
+    learnables = json.loads((ROOT / "src/data/pokemon/all_learnables.json").read_text())
+    existing_by_species: dict[str, list[dict]] = defaultdict(list)
+    for entry in defaults + alternatives:
+        existing_by_species[entry["species"]].append(entry)
+    variants_by_species: dict[str, list[tuple[dict, dict]]] = defaultdict(list)
+    for variant in source["variants"]:
+        variants_by_species[variant["party_species"]].append((variant, source))
+    gen9_variants_by_species: dict[str, list[tuple[dict, dict]]] = defaultdict(list)
+    for variant in gen9_source["variants"]:
+        gen9_variants_by_species[variant["party_species"]].append((variant, gen9_source))
+
+    single_defaults: list[dict] = []
+    single_alternatives: list[dict] = []
+    for default in defaults:
+        species = default["species"]
+        info = metadata.get(species, {})
+        legal = legal_moves_for_species(
+            species, existing_by_species[species], metadata, learnables
+        )
+        choices: list[dict] = []
+        source_variants = list(variants_by_species.get(species, []))
+        if not any(variant["required_item"] == "ITEM_NONE" for variant, _ in source_variants):
+            source_variants.extend(
+                pair for pair in gen9_variants_by_species.get(species, [])
+                if pair[0]["required_item"] == "ITEM_NONE"
+            )
+        for variant, variant_source in source_variants:
+            templates = variant_source["templates"]
+            form_info = metadata.get(variant["form_species"], info)
+            for index in range(variant["template_offset"], variant["template_offset"] + variant["template_count"]):
+                template = templates[index]
+                if variant["required_item"] != "ITEM_NONE" and form_info.get("abilities"):
+                    ability = form_info["abilities"][0]
+                else:
+                    ability = next(
+                        (candidate for candidate in template["abilities"] if candidate in info.get("abilities", ())),
+                        default["ability"],
+                    )
+                moves = _choose_showdown_single_moves(template, form_info, legal, move_info)
+                if len(moves) < min(4, len(legal)):
+                    continue
+                nature, points = _single_build(template["role"], moves, form_info, move_info)
+                required_item = variant["required_item"]
+                if required_item == "ITEM_NONE":
+                    name = compact_role_name(template["role"])
+                    item = _single_item(template["role"], moves, ability, form_info, move_info)
+                else:
+                    suffix = ""
+                    for marker, label in (("megax", "Mega X"), ("megay", "Mega Y"), ("megaz", "Mega Z"), ("mega", "Mega")):
+                        if variant["showdown_id"].endswith(marker):
+                            suffix = label
+                            break
+                    name = compact_role_name(f"{suffix} {template['role']}")
+                    item = "ITEM_NONE"
+                choices.append({
+                    "species": species,
+                    "name": name,
+                    "moves": moves,
+                    "nature": nature,
+                    "ability": ability,
+                    "item": (
+                        "ITEM_NONE"
+                        if required_item != "ITEM_NONE"
+                        else coherent_item(ability, item)
+                    ),
+                    "required_item": required_item,
+                    "stat_points": points,
+                    "role": template["role"],
+                    "source": (
+                        f"{variant_source['source']} ranked role; "
+                        f"commit {variant_source['source_commit']}"
+                    ),
+                })
+
+        represented_mega_items = {
+            entry["required_item"]
+            for entry in choices
+            if entry["required_item"] != "ITEM_NONE"
+        }
+        for doubles_role in existing_by_species[species]:
+            required_item = doubles_role["required_item"]
+            if required_item == "ITEM_NONE" or required_item in represented_mega_items:
+                continue
+            moves = [
+                move for move in doubles_role["moves"]
+                if move not in SINGLES_EXCLUDED_MOVES and move != "MOVE_PROTECT"
+            ]
+            ranked_physical = ranked_attacks(
+                legal, "DAMAGE_CATEGORY_PHYSICAL", info.get("types", ()), move_info,
+                doubles_role["ability"],
+            )
+            ranked_special = ranked_attacks(
+                legal, "DAMAGE_CATEGORY_SPECIAL", info.get("types", ()), move_info,
+                doubles_role["ability"],
+            )
+            for move in [*ranked_physical, *ranked_special, *SINGLES_RECOVERY_MOVES, *SINGLES_UTILITY_MOVES, *doubles_role["moves"]]:
+                if len(moves) >= 4:
+                    break
+                if move in legal and move not in SINGLES_EXCLUDED_MOVES and move not in moves:
+                    moves.append(move)
+            if len(moves) < 4:
+                continue
+            choices.append({
+                "species": species,
+                "name": compact_role_name(doubles_role["name"]),
+                "moves": moves[:4],
+                "nature": doubles_role["nature"],
+                "ability": doubles_role["ability"],
+                "item": "ITEM_NONE",
+                "required_item": required_item,
+                "stat_points": doubles_role["stat_points"],
+                "role": doubles_role["role"],
+                "source": "Emerald Champions Singles adaptation of an authored Mega role",
+            })
+            represented_mega_items.add(required_item)
+
+        if sum(entry["required_item"] == "ITEM_NONE" for entry in choices) < 2:
+            for doubles_role in existing_by_species[species]:
+                if doubles_role["required_item"] != "ITEM_NONE":
+                    continue
+                adapted = _fallback_single_set(
+                    doubles_role,
+                    existing_by_species[species],
+                    metadata,
+                    learnables,
+                    move_info,
+                )
+                identity = (
+                    frozenset(adapted["moves"]), adapted["ability"], adapted["item"],
+                    adapted["nature"], tuple(adapted["stat_points"]),
+                )
+                if any(
+                    identity == (
+                        frozenset(entry["moves"]), entry["ability"], entry["item"],
+                        entry["nature"], tuple(entry["stat_points"]),
+                    )
+                    for entry in choices
+                    if entry["required_item"] == "ITEM_NONE"
+                ):
+                    continue
+                choices.append(adapted)
+                if sum(entry["required_item"] == "ITEM_NONE" for entry in choices) >= 2:
+                    break
+
+        if sum(entry["required_item"] == "ITEM_NONE" for entry in choices) < 2:
+            first = next(entry for entry in choices if entry["required_item"] == "ITEM_NONE")
+            physical = sum(
+                move_info.get(move, {}).get("category") == "DAMAGE_CATEGORY_PHYSICAL"
+                and move not in SINGLES_DAMAGE_INDEPENDENT_MOVES
+                for move in first["moves"]
+            )
+            special = sum(
+                move_info.get(move, {}).get("category") == "DAMAGE_CATEGORY_SPECIAL"
+                and move not in SINGLES_DAMAGE_INDEPENDENT_MOVES
+                for move in first["moves"]
+            )
+            if first["stat_points"][5] == 32:
+                nature = "NATURE_CAREFUL" if physical > special else "NATURE_CALM"
+                points = [32, 0, 17, 0, 17, 0]
+                name = "Bulky Utility"
+            elif physical > special:
+                nature = "NATURE_JOLLY"
+                points = [2, 32, 0, 0, 0, 32]
+                name = "Fast Physical"
+            else:
+                nature = "NATURE_TIMID"
+                points = [2, 0, 0, 32, 0, 32]
+                name = "Fast Special"
+            choices.append({
+                **first,
+                "name": name,
+                "nature": nature,
+                "stat_points": points,
+                "source": "Emerald Champions alternate Singles benchmark spread",
+            })
+
+        non_mega = [entry for entry in choices if entry["required_item"] == "ITEM_NONE"]
+        if not non_mega:
+            fallback = _fallback_single_set(
+                default, existing_by_species[species], metadata, learnables, move_info
+            )
+            choices.insert(0, fallback)
+        else:
+            first = non_mega[0]
+            choices.remove(first)
+            choices.insert(0, first)
+
+        # Eliminate exact duplicate orientations and make every visible label
+        # unambiguous within this species' Singles menu.
+        unique: list[dict] = []
+        seen_orientations: set[tuple] = set()
+        used_names: set[str] = set()
+        for choice in choices:
+            identity = (
+                tuple(choice["moves"]), choice["ability"], choice["item"],
+                choice["required_item"], choice["nature"], tuple(choice["stat_points"]),
+            )
+            if identity in seen_orientations:
+                continue
+            seen_orientations.add(identity)
+            if choice["name"] in used_names:
+                choice = dict(choice)
+                choice["name"] = compact_role_name(
+                    f"{choice['name']} {len(used_names) + 1}"
+                )
+            used_names.add(choice["name"])
+            unique.append(choice)
+        single_defaults.append(unique[0])
+        single_alternatives.extend(unique[1:])
+
+    final_by_species: dict[str, list[dict]] = defaultdict(list)
+    for entry in single_defaults + single_alternatives:
+        final_by_species[entry["species"]].append(entry)
+    missing_second = [
+        species for species, entries in final_by_species.items()
+        if sum(entry["required_item"] == "ITEM_NONE" for entry in entries) < 2
+    ]
+    assert not missing_second, missing_second
+    return single_defaults, single_alternatives
 
 
 def remove_superficial_non_mega_alternatives(
@@ -1578,7 +2254,14 @@ def validate(entries: list[dict]) -> None:
         assert entry["ability"] in abilities, entry["ability"]
         assert entry["item"] in items, entry["item"]
         assert entry["required_item"] in items, entry["required_item"]
-        assert 1 <= len(entry["moves"]) <= 4
+        narrow_move_counts = {
+            "SPECIES_DITTO": 1,
+            "SPECIES_UNOWN": 2,
+        }
+        expected_moves = narrow_move_counts.get(entry["species"], 4)
+        assert len(entry["moves"]) == expected_moves, (
+            entry["species"], entry["name"], entry["moves"], expected_moves
+        )
         assert len(entry["moves"]) == len(set(entry["moves"])), (entry["species"], entry["moves"])
         assert all(move in moves for move in entry["moves"])
         assert len(entry["stat_points"]) == 6
@@ -1599,7 +2282,12 @@ def c_preset(entry: dict, indent: str = "        ") -> list[str]:
     ]
 
 
-def write_c(defaults: list[dict], alternatives: list[dict]) -> None:
+def write_c(
+    defaults: list[dict],
+    alternatives: list[dict],
+    singles_defaults: list[dict],
+    singles_alternatives: list[dict],
+) -> None:
     by_species: dict[str, list[dict]] = {}
     for entry in alternatives:
         by_species.setdefault(entry["species"], []).append(entry)
@@ -1642,6 +2330,61 @@ def write_c(defaults: list[dict], alternatives: list[dict]) -> None:
         lines.append("        },")
         lines.append("    },")
     lines.extend(["};", ""])
+
+    singles_by_species: dict[str, list[dict]] = {}
+    for entry in singles_alternatives:
+        singles_by_species.setdefault(entry["species"], []).append(entry)
+    for entry in singles_defaults:
+        lines.append(
+            f'static const u8 sEmeraldChampionsSinglesSetName_{entry["species"]}[] = _("{entry["name"]}");'
+        )
+    lines.extend([
+        "",
+        "const struct EmeraldChampionsBattleSet gEmeraldChampionsSinglesDefaultBattleSets[NUM_SPECIES] =",
+        "{",
+    ])
+    for entry in singles_defaults:
+        lines.append(f'    [{entry["species"]}] =')
+        lines.append("    {")
+        lines.extend(c_preset(entry))
+        lines.append("    },")
+    lines.extend([
+        "};",
+        "",
+        "const u8 *const gEmeraldChampionsSinglesDefaultBattleSetNames[NUM_SPECIES] =",
+        "{",
+    ])
+    for entry in singles_defaults:
+        lines.append(
+            f'    [{entry["species"]}] = sEmeraldChampionsSinglesSetName_{entry["species"]},'
+        )
+    lines.extend([
+        "};",
+        "",
+        "const struct EmeraldChampionsBattleSetRange gEmeraldChampionsSinglesBattleSetRanges[NUM_SPECIES] =",
+        "{",
+    ])
+    offset = 0
+    for entry in singles_defaults:
+        choices = singles_by_species.get(entry["species"], [])
+        if choices:
+            lines.append(f'    [{entry["species"]}] = {{.offset = {offset}, .count = {len(choices)}}},')
+            offset += len(choices)
+    lines.extend([
+        "};",
+        "",
+        "const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsSinglesBattleSetAlternatives[] =",
+        "{",
+    ])
+    for entry in singles_alternatives:
+        lines.append("    {")
+        lines.append(f'        .name = _("{entry["name"]}"),')
+        lines.append("        .preset =")
+        lines.append("        {")
+        lines.extend(c_preset(entry, "            "))
+        lines.append("        },")
+        lines.append("    },")
+    lines.extend(["};", ""])
     C_OUTPUT.write_text("\n".join(lines))
 
 
@@ -1672,6 +2415,27 @@ def main() -> None:
     present_species = {entry["species"] for entry in defaults}
     handbook_defaults, handbook_alternatives = handbook_supplements(present_species)
     defaults.extend(handbook_defaults)
+    # Scovillain enters through the handbook supplement as a Mega-only row.
+    # Wild defaults must always be immediately usable, while the later Mega
+    # merge keeps the stone-gated role as a separate tutor choice.
+    defaults = [
+        {
+            **authored_modern_set(
+                "SPECIES_SCOVILLAIN",
+                "Rage Powder Support",
+                ["MOVE_RAGE_POWDER", "MOVE_HELPING_HAND", "MOVE_OVERHEAT", "MOVE_PROTECT"],
+                "NATURE_CALM",
+                "ABILITY_MOODY",
+                "ITEM_SITRUS_BERRY",
+                [32, 0, 16, 0, 18, 0],
+                "bulky redirection and Helping Hand support",
+            ),
+            "source": entry["source"],
+        }
+        if entry["species"] == "SPECIES_SCOVILLAIN" and entry["required_item"] != "ITEM_NONE"
+        else entry
+        for entry in defaults
+    ]
     default_species = {entry["species"] for entry in defaults}
     assert len(default_species) == len(defaults), "Species aliases collapsed two default presets"
     raw_alternatives = [
@@ -1695,6 +2459,13 @@ def main() -> None:
     defaults, raw_alternatives = merge_handbook_mega_roles(defaults, raw_alternatives)
     raw_alternatives = remove_superficial_non_mega_alternatives(defaults, raw_alternatives)
     raw_alternatives = ensure_minimum_non_mega_orientations(defaults, raw_alternatives)
+    # Some alternatives are synthesized by the minimum-orientation pass, so
+    # they need the same executable-coherence review after synthesis.
+    raw_alternatives = [apply_audited_set_override(entry) for entry in raw_alternatives]
+    defaults, raw_alternatives = complete_battle_sets(defaults, raw_alternatives)
+    defaults = repair_retired_ability_labels(defaults)
+    raw_alternatives = repair_retired_ability_labels(raw_alternatives)
+    defaults = name_doubles_defaults(defaults)
     alternatives_by_species: dict[str, list[dict]] = {}
     for entry in raw_alternatives:
         alternatives_by_species.setdefault(entry["species"], []).append(entry)
@@ -1703,14 +2474,15 @@ def main() -> None:
         for default in defaults
         for choice in alternatives_by_species.get(default["species"], [])
     ]
-    entries = defaults + alternatives
+    singles_defaults, singles_alternatives = build_singles_sets(defaults, alternatives)
+    entries = defaults + alternatives + singles_defaults + singles_alternatives
     validate(entries)
 
     output = {
-        "schema_version": 2,
+        "schema_version": 3,
         "source_commit": SOURCE_COMMIT,
         "policy": {
-            "format": "doubles-first",
+            "format": "named Doubles and Singles buckets; Doubles remains the wild/evolution default",
             "stat_points": "66 total, 32 maximum per stat",
             "ability": "resolved by Ability identity against current species data",
             "protected_items": "never supplied by a preset",
@@ -1719,15 +2491,21 @@ def main() -> None:
         },
         "default_count": len(defaults),
         "alternative_count": len(alternatives),
+        "singles_default_count": len(singles_defaults),
+        "singles_alternative_count": len(singles_alternatives),
         "set_count": len(entries),
         "defaults": defaults,
         "alternatives": alternatives,
+        "singles_defaults": singles_defaults,
+        "singles_alternatives": singles_alternatives,
     }
     JSON_OUTPUT.write_text(json.dumps(output, indent=2, ensure_ascii=False) + "\n")
-    write_c(defaults, alternatives)
+    write_c(defaults, alternatives, singles_defaults, singles_alternatives)
     write_move_access_review_c()
     print(f"defaults={len(defaults)}")
     print(f"alternatives={len(alternatives)}")
+    print(f"singles_defaults={len(singles_defaults)}")
+    print(f"singles_alternatives={len(singles_alternatives)}")
     print(f"sets={len(entries)}")
 
 

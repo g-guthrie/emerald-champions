@@ -1,6 +1,106 @@
 SlateportCity_PokemonFanClub_MapScripts::
 	.byte 0
 
+SlateportCity_PokemonFanClub_EventScript_FurfrouStylist::
+	lock
+	faceplayer
+	msgbox SlateportCity_PokemonFanClub_Text_FurfrouOffer, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, SlateportCity_PokemonFanClub_EventScript_FurfrouExit
+	msgbox SlateportCity_PokemonFanClub_Text_FurfrouChoose, MSGBOX_DEFAULT
+	special ChoosePartyMon
+	goto_if_ge VAR_0x8004, PARTY_SIZE, SlateportCity_PokemonFanClub_EventScript_FurfrouExit
+	specialvar VAR_RESULT, IsSelectedMonFurfrou
+	goto_if_eq VAR_RESULT, FALSE, SlateportCity_PokemonFanClub_EventScript_FurfrouInvalid
+	copyvar VAR_0x8007, VAR_0x8004
+	setvar VAR_0x8004, SCROLL_MULTI_FURFROU_TRIMS
+	setvar VAR_0x8005, 0
+	special ShowScrollableMultichoice
+	switch VAR_RESULT
+	case 0, SlateportCity_PokemonFanClub_EventScript_FurfrouHeart
+	case 1, SlateportCity_PokemonFanClub_EventScript_FurfrouStar
+	case 2, SlateportCity_PokemonFanClub_EventScript_FurfrouDiamond
+	case 3, SlateportCity_PokemonFanClub_EventScript_FurfrouDebutante
+	case 4, SlateportCity_PokemonFanClub_EventScript_FurfrouMatron
+	case 5, SlateportCity_PokemonFanClub_EventScript_FurfrouDandy
+	case 6, SlateportCity_PokemonFanClub_EventScript_FurfrouLaReine
+	case 7, SlateportCity_PokemonFanClub_EventScript_FurfrouKabuki
+	case 8, SlateportCity_PokemonFanClub_EventScript_FurfrouPharaoh
+	case 9, SlateportCity_PokemonFanClub_EventScript_FurfrouNatural
+	case 10, SlateportCity_PokemonFanClub_EventScript_FurfrouExit
+	case MULTI_B_PRESSED, SlateportCity_PokemonFanClub_EventScript_FurfrouExit
+	goto SlateportCity_PokemonFanClub_EventScript_FurfrouExit
+	end
+
+SlateportCity_PokemonFanClub_EventScript_FurfrouHeart::
+	setvar VAR_0x8005, SPECIES_FURFROU_HEART
+	goto SlateportCity_PokemonFanClub_EventScript_ApplyFurfrouTrim
+SlateportCity_PokemonFanClub_EventScript_FurfrouStar::
+	setvar VAR_0x8005, SPECIES_FURFROU_STAR
+	goto SlateportCity_PokemonFanClub_EventScript_ApplyFurfrouTrim
+SlateportCity_PokemonFanClub_EventScript_FurfrouDiamond::
+	setvar VAR_0x8005, SPECIES_FURFROU_DIAMOND
+	goto SlateportCity_PokemonFanClub_EventScript_ApplyFurfrouTrim
+SlateportCity_PokemonFanClub_EventScript_FurfrouDebutante::
+	setvar VAR_0x8005, SPECIES_FURFROU_DEBUTANTE
+	goto SlateportCity_PokemonFanClub_EventScript_ApplyFurfrouTrim
+SlateportCity_PokemonFanClub_EventScript_FurfrouMatron::
+	setvar VAR_0x8005, SPECIES_FURFROU_MATRON
+	goto SlateportCity_PokemonFanClub_EventScript_ApplyFurfrouTrim
+SlateportCity_PokemonFanClub_EventScript_FurfrouDandy::
+	setvar VAR_0x8005, SPECIES_FURFROU_DANDY
+	goto SlateportCity_PokemonFanClub_EventScript_ApplyFurfrouTrim
+SlateportCity_PokemonFanClub_EventScript_FurfrouLaReine::
+	setvar VAR_0x8005, SPECIES_FURFROU_LA_REINE
+	goto SlateportCity_PokemonFanClub_EventScript_ApplyFurfrouTrim
+SlateportCity_PokemonFanClub_EventScript_FurfrouKabuki::
+	setvar VAR_0x8005, SPECIES_FURFROU_KABUKI
+	goto SlateportCity_PokemonFanClub_EventScript_ApplyFurfrouTrim
+SlateportCity_PokemonFanClub_EventScript_FurfrouPharaoh::
+	setvar VAR_0x8005, SPECIES_FURFROU_PHARAOH
+	goto SlateportCity_PokemonFanClub_EventScript_ApplyFurfrouTrim
+SlateportCity_PokemonFanClub_EventScript_FurfrouNatural::
+	setvar VAR_0x8005, SPECIES_FURFROU
+	goto SlateportCity_PokemonFanClub_EventScript_ApplyFurfrouTrim
+
+SlateportCity_PokemonFanClub_EventScript_ApplyFurfrouTrim::
+	copyvar VAR_0x8004, VAR_0x8007
+	bufferpartymonnick STR_VAR_1, VAR_0x8004
+	fadescreen FADE_TO_BLACK
+	special ChangeSelectedMonSpecies
+	fadescreen FADE_FROM_BLACK
+	msgbox SlateportCity_PokemonFanClub_Text_FurfrouComplete, MSGBOX_DEFAULT
+	release
+	end
+
+SlateportCity_PokemonFanClub_EventScript_FurfrouInvalid::
+	msgbox SlateportCity_PokemonFanClub_Text_FurfrouInvalid, MSGBOX_DEFAULT
+	release
+	end
+
+SlateportCity_PokemonFanClub_EventScript_FurfrouExit::
+	msgbox SlateportCity_PokemonFanClub_Text_FurfrouExit, MSGBOX_DEFAULT
+	release
+	end
+
+SlateportCity_PokemonFanClub_Text_FurfrouOffer:
+	.string "I style every FURFROU trim used by\n"
+	.string "competitive TRAINERS. Want a new cut?$"
+
+SlateportCity_PokemonFanClub_Text_FurfrouChoose:
+	.string "Choose the FURFROU you want styled.$"
+
+SlateportCity_PokemonFanClub_Text_FurfrouComplete:
+	.string "All done! {STR_VAR_1} has a clean\n"
+	.string "new competitive look.$"
+
+SlateportCity_PokemonFanClub_Text_FurfrouInvalid:
+	.string "I can only style FURFROU, including\n"
+	.string "one that already has a trim.$"
+
+SlateportCity_PokemonFanClub_Text_FurfrouExit:
+	.string "Come back whenever FURFROU wants a\n"
+	.string "different look.$"
+
 SlateportCity_PokemonFanClub_EventScript_Chairman::
 	lock
 	faceplayer

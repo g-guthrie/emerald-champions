@@ -75,6 +75,21 @@ def main() -> None:
             "Karrablast solo evolution does not retain Shelmet's identity")
     require("IF_SPECIES_IN_PARTY, SPECIES_KARRABLAST" in (ROOT / "src/data/pokemon/species_info/gen_5_families.h").read_text(),
             "Shelmet solo evolution does not retain Karrablast's identity")
+
+    gen8 = (ROOT / "src/data/pokemon/species_info/gen_8_families.h").read_text()
+    gen9 = (ROOT / "src/data/pokemon/species_info/gen_9_families.h").read_text()
+    require(
+        "EVOLUTION({EVO_LEVEL, 30, SPECIES_ALCREMIE_STRAWBERRY_VANILLA_CREAM})" in gen8,
+        "Milcery lost its deterministic no-item Leveler path",
+    )
+    require(
+        gen9.count("EVOLUTION({EVO_LEVEL, 45, SPECIES_GHOLDENGO})") == 2,
+        "both Gimmighoul forms must retain their deterministic no-coin Leveler path",
+    )
+    require(
+        "IF_BAG_ITEM_COUNT, ITEM_GIMMIGHOUL_COIN" not in gen9,
+        "Gimmighoul silently regained the unavailable 999-coin grind",
+    )
     load = (ROOT / "src/overworld.c").read_text()
     require("CountTotalItemQuantityInBag(ITEM_LINKING_CORD)" in load,
             "older save stacks of Linking Cord are not normalized")
@@ -84,6 +99,7 @@ def main() -> None:
     print(f"PASS: all {len(trade_paths)} trade evolutions have single-player alternatives")
     print(f"PASS: all {len(solo_items)} required evolution items are obtainable")
     print("PASS: the Linking Cord is a reusable key item and paired trades retain their partner requirement")
+    print("PASS: Milcery and both Gimmighoul forms evolve through deterministic Leveler-compatible thresholds")
 
 
 if __name__ == "__main__":

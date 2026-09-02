@@ -1,0 +1,62 @@
+{
+  "elf": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/docker-output/pokeemerald-headless.elf",
+  "param_symbol": "0x0200195c",
+  "rendered": [
+    {
+      "frames": 1180,
+      "keys": [
+        [
+          220,
+          2,
+          "UP"
+        ],
+        [
+          250,
+          2,
+          "A"
+        ],
+        [
+          360,
+          2,
+          "DOWN"
+        ],
+        [
+          400,
+          2,
+          "A"
+        ],
+        [
+          560,
+          2,
+          "A"
+        ],
+        [
+          760,
+          2,
+          "A"
+        ],
+        [
+          900,
+          2,
+          "DOWN"
+        ],
+        [
+          940,
+          2,
+          "A"
+        ]
+      ],
+      "name": "stat-point-egg-rejected",
+      "param": 1,
+      "png_sha256": "880d4f0076f24791f0c50c12895be4654894dd17b95bf490600c67fc2264d089",
+      "scenario_id": 6,
+      "screenshot": "work/visual-audit/rendered/native-menu-accepted-2026-08-31/stat-point-egg-rejected.png",
+      "verified_runtime_state": false,
+      "video_hash": "0c1749cf06580381"
+    }
+  ],
+  "rom": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/docker-output/pokeemerald-headless.gba",
+  "rom_sha256": "a3cbce8b7932cdae0d2334d5cbf5fc6fb1a1eee35ee44fce908bff56fb49e5af",
+  "scenario_symbol": "0x0200196c",
+  "schema_version": 1
+}

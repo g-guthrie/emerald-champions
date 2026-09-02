@@ -33,12 +33,13 @@ Evidence labels are narrow:
 | Poke Vial and capacity quest | SOURCE CHECKED | Native four-map Chansey chase and Route 133 third charge are wired |
 | Reusable Leveler and ten-level Candy | SOURCE CHECKED | Strict-cap behavior, no move interruption, and all 21 medicine lists are checked |
 | Complete legal move tutor | SOURCE CHECKED | Level, pre-evolution, egg, TM, and tutor sources are enabled from the start |
-| Competitive preset selector | SOURCE CHECKED | 1,534 executable presets; 95 Mega orientations across 92 stones; exact nature, Ability, item, moves, and 66 Stat Points |
+| Competitive preset selector | SOURCE CHECKED | 5,311 executable presets: 2,619 Doubles and 2,692 Singles; at least two non-Mega roles per format for every direct species/form; all 92 stones covered |
+| Stat Point editor | SOURCE CHECKED | Free native 0-32-per-stat, 66-total editing in every Center and Fallarbor; IVs remain fixed-perfect |
 | Battle-ready ordinary wild catches | SOURCE CHECKED | All 616 species/forms parsed from encounter data resolve a non-Mega preset |
 | Native Ability switching | SOURCE CHECKED | Party-menu action enumerates unique legal abilities |
 | Free held-item vendor | SOURCE CHECKED | Six categories, 111 ordinary items, all 16 Centers |
 | Berry/progression economy | SOURCE CHECKED | Berries and transformation items excluded; Mega/evolution archives unlock at badge eight |
-| Mart and reward progression | SOURCE CHECKED | Rare Candy appears in 21 medicine lists; 47 scripted rewards plus all map TM pickups are audited |
+| Mart and reward progression | SOURCE CHECKED | Rare Candy has no producer; former slots are capture rewards, and scripted rewards plus map pickups are audited |
 | Single-player evolutions | SOURCE CHECKED | 30 trade evolutions and required evolution items have solo paths |
 
 ## Campaign, story, and encounters

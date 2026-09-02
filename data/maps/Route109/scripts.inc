@@ -4,6 +4,33 @@
 Route109_MapScripts::
 	.byte 0
 
+Route109_EventScript_SandMound1::
+	lockall
+	faceplayer
+	special RockSmashWildEncounter
+	delay 96
+	removeobject LOCALID_ROUTE109_SAND_MOUND_1
+	releaseall
+	end
+
+Route109_EventScript_SandMound2::
+	lockall
+	faceplayer
+	special RockSmashWildEncounter
+	delay 96
+	removeobject LOCALID_ROUTE109_SAND_MOUND_2
+	releaseall
+	end
+
+Route109_EventScript_SandMound3::
+	lockall
+	faceplayer
+	special RockSmashWildEncounter
+	delay 96
+	removeobject LOCALID_ROUTE109_SAND_MOUND_3
+	releaseall
+	end
+
 Route109_EventScript_StartDepartForDewford::
 	call EventScript_BackupMrBrineyLocation
 	setobjectsubpriority LOCALID_ROUTE109_BRINEY, MAP_ROUTE109, 0

@@ -254,6 +254,12 @@ struct NPCFollower
 #include "constants/items.h"
 #define ITEM_FLAGS_COUNT ((ITEMS_COUNT / 8) + ((ITEMS_COUNT % 8) ? 1 : 0))
 
+struct ItemSlot
+{
+    enum Item itemId;
+    u16 quantity;
+};
+
 struct SaveBlock3
 {
 #if OW_USE_FAKE_RTC
@@ -272,6 +278,17 @@ struct SaveBlock3
 #if APRICORN_TREE_COUNT > 0
     u8 apricornTrees[NUM_APRICORN_TREE_BYTES];
 #endif
+    // Inclement-style bag extensions. SaveBlock3 is serialized in the spare
+    // 116-byte chunk of each save sector, so this adds capacity without moving
+    // legacy SaveBlock1 fields.
+    u32 bagPocketLayoutMagic;
+    u32 bagPocketLayoutMagicInverse;
+    struct ItemSlot bagPocketMedicine[BAG_MEDICINE_COUNT];
+    struct ItemSlot bagPocketBattle[BAG_BATTLE_COUNT];
+    struct ItemSlot bagPocketTMHM[BAG_TMHM_COUNT - BAG_LEGACY_TMHM_COUNT];
+    struct ItemSlot bagPocketBerries[BAG_BERRIES_COUNT - BAG_LEGACY_BERRIES_COUNT];
+    struct ItemSlot bagPocketKeyItems[BAG_KEYITEMS_COUNT - BAG_LEGACY_KEYITEMS_COUNT];
+    struct ItemSlot bagPocketMegaStones[BAG_MEGASTONES_PRIMARY_COUNT];
 }; /* max size 1624 bytes */
 
 extern struct SaveBlock3 *gSaveBlock3Ptr;
@@ -623,6 +640,8 @@ struct SaveBlock2
 #endif //FREE_RECORD_MIXING_HALL_RECORDS
     /*0x624*/ u16 contestLinkResults[CONTEST_CATEGORIES_COUNT][CONTESTANT_COUNT];
     /*0x64C*/ struct BattleFrontier frontier;
+    // Append-only overflow keeps the original SaveBlock2 offsets intact.
+    struct ItemSlot bagPocketPokeBalls[BAG_POKEBALLS_COUNT - BAG_LEGACY_POKEBALLS_COUNT];
 }; // sizeof=0xF2C
 
 extern struct SaveBlock2 *gSaveBlock2Ptr;
@@ -671,12 +690,6 @@ struct WarpData
     s8 warpId;
     //u8 padding;
     s16 x, y;
-};
-
-struct ItemSlot
-{
-    enum Item itemId;
-    u16 quantity;
 };
 
 struct Pokeblock
@@ -1085,11 +1098,20 @@ struct ExternalEventFlags
 
 struct Bag
 {
-    struct ItemSlot items[BAG_ITEMS_COUNT];
-    struct ItemSlot keyItems[BAG_KEYITEMS_COUNT];
-    struct ItemSlot pokeBalls[BAG_POKEBALLS_COUNT];
-    struct ItemSlot TMsHMs[BAG_TMHM_COUNT];
-    struct ItemSlot berries[BAG_BERRIES_COUNT];
+    struct ItemSlot items[BAG_LEGACY_ITEMS_COUNT];
+    struct ItemSlot keyItems[BAG_LEGACY_KEYITEMS_COUNT];
+    struct ItemSlot pokeBalls[BAG_LEGACY_POKEBALLS_COUNT];
+    struct ItemSlot TMsHMs[BAG_LEGACY_TMHM_COUNT];
+    struct ItemSlot berries[BAG_LEGACY_BERRIES_COUNT];
+};
+
+// Save-compatible overflow for the two pockets whose extensions fit in the
+// eight bytes remaining at the end of SaveBlock1. This is deliberately
+// append-only; never insert it beside struct Bag.
+struct BagSaveBlock1Extension
+{
+    struct ItemSlot items[BAG_ITEMS_COUNT - BAG_LEGACY_ITEMS_COUNT];
+    struct ItemSlot megaStones[BAG_MEGASTONES_COUNT - BAG_MEGASTONES_PRIMARY_COUNT];
 };
 
 struct SaveBlock1
@@ -1210,6 +1232,7 @@ struct SaveBlock1
     u8 rivalName[PLAYER_NAME_LENGTH + 1];
     struct DaycareMon route5DayCareMon;
 #endif
+    struct BagSaveBlock1Extension bagExtension;
     // sizeof: 0x3???
 };
 

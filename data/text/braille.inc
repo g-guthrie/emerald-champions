@@ -116,6 +116,16 @@ AncientTomb_Braille_ShineInTheMiddle:
 	.braille "WILL, SHINE\n"
 	.braille "IN THE MIDDLE.$"
 
+SealedChamber_InnerRoom_Braille_Regigigas:
+	brailleformat 3, 0, 25, 19, 6, 3
+	.braille "A BODY OF ROCK.\n"
+	.braille "A BODY OF ICE.\n"
+	.braille "A BODY OF STEEL.\n"
+	.braille "WHEN GATHERS\n"
+	.braille "THE THREE, THE\n"
+	.braille "KING SHALL\n"
+	.braille "APPEAR.$"
+
 @ FRLG
 Braille_Text_Up::
 	brailleformat 3, 0, 25, 19, 6, 3
@@ -272,4 +282,3 @@ Braille_Text_WorldWaits::
 Braille_Text_ForYou::
 	brailleformat 3, 0, 25, 19, 6, 3
 	.braille "FOR YOU.$"
-

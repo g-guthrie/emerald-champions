@@ -104,3 +104,14 @@ void SetWhiteoutRespawnWarpAndHealerNPC(struct WarpData *warp)
     gSpecialVar_LastTalked = healNpcLocalId;
     gSpecialVar_0x800B = healNpcLocalId;
 }
+
+#if EC_HEADLESS_FIXTURES
+bool32 IsWhiteoutRespawnHeadlessState(u32 healLocationId)
+{
+    if (healLocationId == HEAL_LOCATION_NONE || healLocationId >= NUM_HEAL_LOCATIONS)
+        return FALSE;
+    return gSaveBlock1Ptr->location.mapGroup == sWhiteoutRespawnHealCenterMapIdxs[healLocationId - 1][0]
+        && gSaveBlock1Ptr->location.mapNum == sWhiteoutRespawnHealCenterMapIdxs[healLocationId - 1][1]
+        && gSpecialVar_0x800B == sWhiteoutRespawnHealerNpcIds[healLocationId - 1];
+}
+#endif

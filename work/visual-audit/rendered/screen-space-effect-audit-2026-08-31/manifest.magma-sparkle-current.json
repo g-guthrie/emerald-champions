@@ -1,0 +1,21 @@
+{
+  "elf": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/docker-output/pokeemerald-headless.elf",
+  "param_symbol": "0x02001964",
+  "rendered": [
+    {
+      "frames": 608,
+      "keys": [],
+      "name": "magma-sparkle-current",
+      "param": 0,
+      "png_sha256": "e5e256fefeb59e4b9ecb2f35ad5b42117fd550e7f909a8ba3c60f080cb75fe6f",
+      "scenario_id": 42,
+      "screenshot": "work/visual-audit/rendered/screen-space-effect-audit-2026-08-31/magma-sparkle-current.png",
+      "verified_runtime_state": true,
+      "video_hash": "9e49b4867d4456d0"
+    }
+  ],
+  "rom": "/Users/gguthrie/Projects/Pok\u00e9mon Emerald Champions/game-source/work/docker-output/pokeemerald-headless.gba",
+  "rom_sha256": "c2928b3227afdc330aef85358dc250741abe3183c4ddd050fc784dc52375199a",
+  "scenario_symbol": "0x02001974",
+  "schema_version": 1
+}
