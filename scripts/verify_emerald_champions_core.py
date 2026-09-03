@@ -349,7 +349,12 @@ def main() -> None:
         current_definition_ids[: len(LEGACY_81E_SIGN_PREFIX)] == LEGACY_81E_SIGN_PREFIX,
         "persisted 81e Legendary Sign definition prefix was reordered",
     )
-    require(battle_setup.count("ApplyTrainerLevelDifficulty(&gParties[B_TRAINER_OPPONENT_") == 2, "Difficulty must affect exactly both enemy trainer parties")
+    # Every place an enemy trainer party is built must apply the difficulty offset to it.
+    # (DoTrainerBattle builds both; the in-battle Restart rebuilds both the same way.)
+    built = battle_setup.count("CreateNPCTrainerParty(&gParties[B_TRAINER_OPPONENT_")
+    scaled = battle_setup.count("ApplyTrainerLevelDifficulty(&gParties[B_TRAINER_OPPONENT_")
+    require(built >= 2 and scaled == built,
+            f"every built enemy trainer party must have difficulty applied (built={built} scaled={scaled})")
     require("P_LEVEL_UP_MOVE_LEARNING    FALSE" in pokemon_config, "Level-up prompts are not disabled")
     battle_util = read("src/battle_util.c")
     require(

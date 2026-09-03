@@ -503,6 +503,21 @@ static void DoTrainerBattle(void)
     TryUpdateGymLeaderRematchFromTrainer();
 }
 
+// Emerald Champions: rebuild the opponent parties exactly the way engaging this
+// trainer did, for the in-battle Restart option. Mirrors DoTrainerBattle() minus the
+// overworld transition and the battle-count stats.
+void EmeraldChampions_RebuildTrainerBattleParties(void)
+{
+    ZeroEnemyPartyMons();
+    CreateNPCTrainerParty(&gParties[B_TRAINER_OPPONENT_A][0], TRAINER_BATTLE_PARAM.opponentA);
+    ApplyTrainerLevelDifficulty(&gParties[B_TRAINER_OPPONENT_A][0]);
+    if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS && !BATTLE_TWO_VS_ONE_OPPONENT)
+    {
+        CreateNPCTrainerParty(&gParties[B_TRAINER_OPPONENT_B][0], TRAINER_BATTLE_PARAM.opponentB);
+        ApplyTrainerLevelDifficulty(&gParties[B_TRAINER_OPPONENT_B][0]);
+    }
+}
+
 static void DoBattlePyramidTrainerHillBattle(void)
 {
     if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)

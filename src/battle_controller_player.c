@@ -244,6 +244,31 @@ static void HandleInputChooseAction(enum BattlerId battler)
     else
         gPlayerDpadHoldFrames = 0;
 
+    // Emerald Champions: R opens the foes' types from the action menu as well, so the
+    // panel is reachable before choosing FIGHT (which is where it is wanted in wild
+    // battles). Closing it repaints the action menu through its normal handler.
+    if (gBattleStruct->foeTypesSubmenu)
+    {
+        if (JOY_NEW(R_BUTTON) || JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
+        {
+            gBattleStruct->foeTypesSubmenu = FALSE;
+            gBattleStruct->descriptionSubmenu = FALSE;
+            FillWindowPixelBuffer(B_WIN_MOVE_DESCRIPTION, PIXEL_FILL(0));
+            ClearStdWindowAndFrame(B_WIN_MOVE_DESCRIPTION, FALSE);
+            CopyWindowToVram(B_WIN_MOVE_DESCRIPTION, COPYWIN_GFX);
+            PlaySE(SE_SELECT);
+            PlayerHandleChooseAction(battler);
+        }
+        return;
+    }
+    if (JOY_NEW(R_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        gBattleStruct->foeTypesSubmenu = TRUE;
+        MoveSelectionDisplayFoeTypes(battler);
+        return;
+    }
+
     if (gBattleStruct->throwBallFromMoveMenu)
     {
         gBattleStruct->throwBallFromMoveMenu = FALSE;

@@ -125,7 +125,6 @@ static void HandleEndTurn_BattleLost(void);
 static void HandleEndTurn_RanFromBattle(void);
 static void HandleEndTurn_MonFled(void);
 static void HandleEndTurn_FinishBattle(void);
-static void HandleRestartBattle(void);
 
 EWRAM_DATA u16 gBattle_BG0_X = 0;
 EWRAM_DATA u16 gBattle_BG0_Y = 0;
@@ -471,33 +470,32 @@ const u8 *const gStatusConditionStringsTable[][2] =
 };
 
 // Emerald Champions: snapshot of the player's party and the battle-usable bag
-// pockets taken when a trainer battle starts, restored on an in-battle restart.
+// pockets taken when a trainer battle starts, restored by the in-battle Restart.
 static EWRAM_DATA struct Pokemon sEcRestartParty[PARTY_SIZE] = {0};
 static EWRAM_DATA struct ItemSlot sEcRestartMedicine[BAG_MEDICINE_COUNT] = {0};
 static EWRAM_DATA struct ItemSlot sEcRestartBattleItems[BAG_BATTLE_COUNT] = {0};
 static EWRAM_DATA bool8 sEcRestartPending = FALSE;
 
-static void EcSnapshotOrRestoreForRestart(void)
+static void EcSnapshotForRestart(void)
 {
-    if (sEcRestartPending)
-    {
-        sEcRestartPending = FALSE;
-        memcpy(&gPlayerParty, sEcRestartParty, sizeof(sEcRestartParty));
-        memcpy(gParties[B_TRAINER_PLAYER], sEcRestartParty, sizeof(sEcRestartParty));
-        memcpy(gSaveBlock3Ptr->bagPocketMedicine, sEcRestartMedicine, sizeof(sEcRestartMedicine));
-        memcpy(gSaveBlock3Ptr->bagPocketBattle, sEcRestartBattleItems, sizeof(sEcRestartBattleItems));
-    }
-    else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-    {
-        memcpy(sEcRestartParty, &gPlayerParty, sizeof(sEcRestartParty));
-        memcpy(sEcRestartMedicine, gSaveBlock3Ptr->bagPocketMedicine, sizeof(sEcRestartMedicine));
-        memcpy(sEcRestartBattleItems, gSaveBlock3Ptr->bagPocketBattle, sizeof(sEcRestartBattleItems));
-    }
+    if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER))
+        return;
+    memcpy(sEcRestartParty, &gPlayerParty, sizeof(sEcRestartParty));
+    memcpy(sEcRestartMedicine, gSaveBlock3Ptr->bagPocketMedicine, sizeof(sEcRestartMedicine));
+    memcpy(sEcRestartBattleItems, gSaveBlock3Ptr->bagPocketBattle, sizeof(sEcRestartBattleItems));
+}
+
+static void EcRestoreForRestart(void)
+{
+    memcpy(&gPlayerParty, sEcRestartParty, sizeof(sEcRestartParty));
+    memcpy(gSaveBlock3Ptr->bagPocketMedicine, sEcRestartMedicine, sizeof(sEcRestartMedicine));
+    memcpy(gSaveBlock3Ptr->bagPocketBattle, sEcRestartBattleItems, sizeof(sEcRestartBattleItems));
+    CalculatePlayerPartyCount();
 }
 
 void CB2_InitBattle(void)
 {
-    EcSnapshotOrRestoreForRestart();
+    EcSnapshotForRestart();
     if (!gTestRunnerEnabled)
         MoveSaveBlocks_ResetHeap();
     AllocateBattleResources();
@@ -4315,12 +4313,15 @@ static void HandleTurnActionSelectionState(void)
                 gBattleStruct->restartQuestionPending = FALSE;
                 if (gBattleResources->bufferB[battler][1] == B_ACTION_NOTHING_FAINTED)
                 {
-                    // Yes: fade out, tear the battle down and start it again.
+                    // Yes: end this battle through the engine's own run/forfeit path
+                    // (which frees everything cleanly), then rebuild it in
+                    // ReturnFromBattleToOverworld.
+                    sEcRestartPending = TRUE;
                     gSelectionBattleScripts[battler] = NULL;
-                    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-                    FadeOutMapMusic(5);
-                    gBattleMainFunc = HandleRestartBattle;
-                    return;
+                    gHitMarker |= HITMARKER_RUN;
+                    gChosenActionByBattler[battler] = B_ACTION_RUN;
+                    gBattleCommunication[battler] = STATE_WAIT_ACTION_CONFIRMED_STANDBY;
+                    break;
                 }
                 // No (or B): ask the usual forfeit question.
                 gSelectionBattleScripts[battler] = BattleScript_QuestionForfeitBattle;
@@ -5265,6 +5266,12 @@ static void HandleEndTurn_RanFromBattle(void)
         gBattlescriptCurrInstr = BattleScript_PrintPlayerForfeited;
         gBattleOutcome = B_OUTCOME_FORFEITED;
     }
+    else if (sEcRestartPending)
+    {
+        // Emerald Champions: restarting costs nothing; skip the forfeit payout.
+        gBattlescriptCurrInstr = BattleScript_RestartBattleNoPenalty;
+        gBattleOutcome = B_OUTCOME_FORFEITED;
+    }
     else if (CanPlayerForfeitNormalTrainerBattle())
     {
         gBattlescriptCurrInstr = BattleScript_ForfeitBattleGaveMoney;
@@ -5297,26 +5304,6 @@ static void HandleEndTurn_MonFled(void)
     gBattlescriptCurrInstr = BattleScript_WildMonFled;
 
     gBattleMainFunc = HandleEndTurn_FinishBattle;
-}
-
-// Emerald Champions: chosen from the Run prompt in a trainer battle. Frees the
-// battle exactly like a finished battle would, then re-enters CB2_InitBattle with
-// the same opponent flags; the pre-battle party and bag snapshot is restored there.
-static void HandleRestartBattle(void)
-{
-    if (gPaletteFade.active)
-        return;
-    memset(&gBattleMons, 0, sizeof(struct BattlePokemon) * MAX_BATTLERS_COUNT);
-    ResetSpriteData();
-    FreeAllWindowBuffers();
-    ZeroEnemyPartyMons();
-    ResetDynamicAiFunctions();
-    FreeMonSpritesGfx();
-    FreeBattleResources();
-    FreeBattleSpritesData();
-    gBattleOutcome = 0;
-    sEcRestartPending = TRUE;
-    SetMainCallback2(CB2_InitBattle);
 }
 
 static void HandleEndTurn_FinishBattle(void)
@@ -5444,6 +5431,7 @@ static void FreeResetData_ReturnToOvOrDoEvolutions(void)
                                   | BATTLE_TYPE_FRONTIER
                                   | BATTLE_TYPE_EREADER_TRAINER
                                   | BATTLE_TYPE_CATCH_TUTORIAL))
+            && !sEcRestartPending
             && (B_EVOLUTION_AFTER_WHITEOUT >= GEN_6
                 || gBattleOutcome == B_OUTCOME_WON
                 || gBattleOutcome == B_OUTCOME_CAUGHT))
@@ -5519,6 +5507,23 @@ static void WaitForEvoSceneToFinish(void)
 
 static void ReturnFromBattleToOverworld(void)
 {
+    // Emerald Champions: the in-battle Restart. The battle has now been torn down by
+    // the engine's own end-of-battle path, so rebuild the opponent exactly as engaging
+    // the trainer did and re-enter CB2_InitBattle, which resets the heap for us.
+    // gMain.callback1 is put back first so the re-init captures the field callback.
+    if (sEcRestartPending)
+    {
+        sEcRestartPending = FALSE;
+        EcRestoreForRestart();
+        EmeraldChampions_RebuildTrainerBattleParties();
+        gBattleOutcome = 0;
+        gMain.inBattle = FALSE;
+        gMain.callback1 = gPreBattleCallback1;
+        m4aSongNumStop(SE_LOW_HEALTH);
+        SetMainCallback2(CB2_InitBattle);
+        return;
+    }
+
     if (!(gBattleTypeFlags & BATTLE_TYPE_LINK))
     {
         CalculatePlayerPartyCount();

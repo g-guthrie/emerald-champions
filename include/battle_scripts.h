@@ -492,6 +492,7 @@ extern const u8 BattleScript_FirstTurnSwitchInEvents[];
 extern const u8 BattleScript_EndTurnEvents[];
 extern const u8 BattleScript_QuestionForfeitBattle[];
 extern const u8 BattleScript_QuestionRestartBattle[];
+extern const u8 BattleScript_RestartBattleNoPenalty[];
 extern const u8 BattleScript_ForfeitBattleGaveMoney[];
 extern const u8 BattleScript_AbilityPopUp[];
 extern const u8 BattleScript_Attackstring[];
