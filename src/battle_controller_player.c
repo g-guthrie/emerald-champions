@@ -680,6 +680,10 @@ void HandleInputChooseMove(enum BattlerId battler)
     u32 canSelectTarget = 0;
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]);
 
+    // Emerald Champions: the action menu's last-used-Ball shortcut also lives on R;
+    // never let its held state swallow R in the move menu (foe types panel).
+    gBattleStruct->ackBallUseBtn = FALSE;
+
     if (JOY_HELD(DPAD_ANY) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
         gPlayerDpadHoldFrames++;
     else

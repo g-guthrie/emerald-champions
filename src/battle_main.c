@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle.h"
+#include "reload_save.h"
 #include "battle_anim.h"
 #include "battle_ai_main.h"
 #include "battle_ai_record.h"
@@ -125,6 +126,7 @@ static void HandleEndTurn_BattleLost(void);
 static void HandleEndTurn_RanFromBattle(void);
 static void HandleEndTurn_MonFled(void);
 static void HandleEndTurn_FinishBattle(void);
+static void HandleReloadLastSaveFromBattle(void);
 
 EWRAM_DATA u16 gBattle_BG0_X = 0;
 EWRAM_DATA u16 gBattle_BG0_Y = 0;
@@ -4053,7 +4055,17 @@ static void HandleTurnActionSelectionState(void)
                 }
                 else if (CanPlayerForfeitNormalTrainerBattle() && gBattleResources->bufferB[battler][1] == B_ACTION_RUN)
                 {
-                    gSelectionBattleScripts[battler] = BattleScript_QuestionForfeitBattle;
+                    // Emerald Champions: Run in a trainer battle first offers a reload of the
+                    // last save (instant retry); declining falls through to the forfeit question.
+                    if (CanReloadLastSave())
+                    {
+                        gBattleStruct->reloadQuestionPending = TRUE;
+                        gSelectionBattleScripts[battler] = BattleScript_QuestionReloadBattle;
+                    }
+                    else
+                    {
+                        gSelectionBattleScripts[battler] = BattleScript_QuestionForfeitBattle;
+                    }
                     gBattleCommunication[battler] = STATE_SELECTION_SCRIPT_MAY_RUN;
                     gBattleStruct->battlerState[battler].selectionScriptFinished = FALSE;
                     gBattleStruct->stateIdAfterSelScript[battler] = STATE_BEFORE_ACTION_CHOSEN;
@@ -4279,6 +4291,23 @@ static void HandleTurnActionSelectionState(void)
             }
             break;
         case STATE_SELECTION_SCRIPT_MAY_RUN:
+            if (gBattleStruct->battlerState[battler].selectionScriptFinished && gBattleStruct->reloadQuestionPending)
+            {
+                gBattleStruct->reloadQuestionPending = FALSE;
+                if (gBattleResources->bufferB[battler][1] == B_ACTION_NOTHING_FAINTED)
+                {
+                    // Yes: fade out and reload the last save.
+                    gSelectionBattleScripts[battler] = NULL;
+                    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+                    gBattleMainFunc = HandleReloadLastSaveFromBattle;
+                    return;
+                }
+                // No (or B): ask the usual forfeit question.
+                gSelectionBattleScripts[battler] = BattleScript_QuestionForfeitBattle;
+                gBattleStruct->battlerState[battler].selectionScriptFinished = FALSE;
+                gBattleResources->bufferB[battler][1] = B_ACTION_RUN;
+                break;
+            }
             if (gBattleStruct->battlerState[battler].selectionScriptFinished)
             {
                 gSelectionBattleScripts[battler] = NULL;
@@ -5248,6 +5277,14 @@ static void HandleEndTurn_MonFled(void)
     gBattlescriptCurrInstr = BattleScript_WildMonFled;
 
     gBattleMainFunc = HandleEndTurn_FinishBattle;
+}
+
+// Emerald Champions: chosen from the Run prompt in a trainer battle.
+static void HandleReloadLastSaveFromBattle(void)
+{
+    if (gPaletteFade.active)
+        return;
+    ReloadLastSave();
 }
 
 static void HandleEndTurn_FinishBattle(void)
