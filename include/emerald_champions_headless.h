@@ -61,6 +61,7 @@ enum EmeraldChampionsHeadlessScenario
     EC_HEADLESS_SCENARIO_HM_REPLACEMENT,
     EC_HEADLESS_SCENARIO_DEWFORD_GYM_ENTRY,
     EC_HEADLESS_SCENARIO_START_MENU_FULL,
+    EC_HEADLESS_SCENARIO_MAP_SWEEP,
 };
 
 enum EmeraldChampionsHeadlessPokedexState

@@ -133644,7 +133644,7 @@
       "same_path_identical": 96
     }
   },
-  "current_visual_tree_sha256": "904e1a7f7a30cc43d43d5adee55da72994cd2b05ec22f28f6a760012e6ffbf23",
+  "current_visual_tree_sha256": "3b8facf9996096e22e8214742ac41d833a042e68b27fa13c56a16618b87dfe45",
   "policy_version": 1,
   "reference_assets": [
     {
@@ -144056,8 +144056,8 @@
     {
       "classification": "changed",
       "current_path": "data/maps/AquaHideout_B1F/map.json",
-      "current_sha256": "7352e72bcfbd8717b23066cb49e0e9e08263c4033eb9098784b01fd992b23df7",
-      "current_size": 8122,
+      "current_sha256": "3040e492abbcb82e608e5f4e1988c1eafac7e478fc7e94511651d7afc85a1d49",
+      "current_size": 8121,
       "group": "map",
       "kind": "map_data",
       "reference_path": "data/maps/AquaHideout_B1F/map.json",
@@ -146388,8 +146388,8 @@
     {
       "classification": "changed",
       "current_path": "data/maps/MirageTower_4F/map.json",
-      "current_sha256": "a22e883e0c910b31571048bc64e2f63c0f6cafd43b2f4276b0c3c530d594488a",
-      "current_size": 1993,
+      "current_sha256": "c16284866b30622bfde892e981afbdfbf245cd6049a77bcdfb0baa4aa1da8e70",
+      "current_size": 1997,
       "group": "map",
       "kind": "map_data",
       "reference_path": "data/maps/MirageTower_4F/map.json",

@@ -1139,6 +1139,25 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
     case EC_HEADLESS_SCENARIO_DEWFORD_GYM_ENTRY:
         LoadHeadlessMap(MAP_DEWFORD_TOWN, 8, 18);
         break;
+    case EC_HEADLESS_SCENARIO_MAP_SWEEP:
+        {
+            static const struct { u16 map; s8 x; s8 y; } sweep[] =
+            {
+#define EC_HEADLESS_MAP_SWEEP(map, x, y) {map, x, y},
+#include "emerald_champions_headless_map_sweep.h"
+#undef EC_HEADLESS_MAP_SWEEP
+            };
+            u32 index = gEcHeadlessFixtureParam;
+            if (index >= ARRAY_COUNT(sweep))
+                index = 0;
+            // Established-save state so story objects are in their normal positions.
+            FlagSet(FLAG_SYS_POKEDEX_GET);
+            FlagSet(FLAG_SYS_POKEMON_GET);
+            FlagSet(FLAG_SYS_POKENAV_GET);
+            LoadHeadlessMap(sweep[index].map, sweep[index].x, sweep[index].y);
+            gEcHeadlessFixtureSetupResult = TRUE;
+        }
+        break;
     case EC_HEADLESS_SCENARIO_START_MENU_FULL:
         // Every Start menu row an established save can show: Pokedex, Pokemon, Bag,
         // PokeNav, Player, Save, Reload, Option, Exit (nine rows, one more than fits).

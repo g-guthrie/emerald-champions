@@ -77,7 +77,7 @@ EmeraldChampions_EventScript_MoveRelearnerNoMoves:
 	goto EmeraldChampions_EventScript_MoveRelearnerChooseMon
 
 EmeraldChampions_EventScript_OpenMoveDeleter:
-	msgbox LilycoveCity_MoveDeletersHouse_Text_ICanMakeMonForgetMove, MSGBOX_YESNO
+	msgbox EmeraldChampions_Text_SpecialistForgetMove, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EmeraldChampions_EventScript_OtherServices
 
 EmeraldChampions_EventScript_MoveDeleterChooseMon:
@@ -761,3 +761,8 @@ EmeraldChampions_Text_ChangeAnotherNature:
 
 EmeraldChampions_Text_NatureEgg:
 	.string "An Egg's Nature can't be changed.$"
+
+EmeraldChampions_Text_SpecialistForgetMove:
+	.string "Forgetting a move clears a slot for\n"
+	.string "something your team needs more.\p"
+	.string "Shall I help a POKéMON forget one?$"

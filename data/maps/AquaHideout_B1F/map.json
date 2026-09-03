@@ -94,7 +94,7 @@
       "flag": "FLAG_HIDE_AQUA_HIDEOUT_B1F_ELECTRODE_1"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 16,
       "y": 10,
       "elevation": 3,

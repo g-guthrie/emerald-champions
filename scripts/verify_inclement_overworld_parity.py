@@ -11,6 +11,16 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+# Visible objects Champions deliberately places where Inclement had none. Each entry is a
+# reviewed decision with its reason, keyed by (graphics, x, y).
+REVIEWED_EXTRA_OBJECTS = {
+    "MirageTower_4F": {
+        ("OBJ_EVENT_GFX_BREAKABLE_ROCK", 6, 7):
+            "vanilla Rock Smash boulder; Inclement had an Aerodactylite sparkle here and "
+            "Champions supplies that stone through the Mega archive instead",
+    },
+}
+
 ITEM_MARKER_GRAPHICS = {
     "OBJ_EVENT_GFX_ITEM_BALL",
     "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
@@ -244,9 +254,11 @@ def main() -> None:
         # markers are excluded here and gated separately by
         # verify_emerald_champions_reward_economy.py. Every NPC, sign and decoration is
         # still compared to Inclement exactly as before.
+        reviewed_extra = REVIEWED_EXTRA_OBJECTS.get(name, {})
         actual_object_events = [
             event for event in actual_object_events
             if event.get("graphics_id") not in ITEM_MARKER_GRAPHICS
+            and (event.get("graphics_id"), event.get("x"), event.get("y")) not in reviewed_extra
         ]
         expected_object_rows = [row for row in expected_object_rows if row[0] not in ITEM_MARKER_GRAPHICS]
         objects = Counter(
