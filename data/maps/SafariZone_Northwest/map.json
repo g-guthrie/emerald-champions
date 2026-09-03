@@ -48,9 +48,9 @@
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_VENUSAURITE",
+      "trainer_sight_or_berry_tree_id": "ITEM_HONEY",
       "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ITEM_SAFARI_ZONE_NORTH_WEST_VENUSAURITE"
+      "flag": "FLAG_ITEM_SAFARI_ZONE_NORTH_WEST_HONEY"
     }
   ],
   "warp_events": [],

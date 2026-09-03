@@ -39,6 +39,7 @@ STATIC_GATES = (
     ("Game Corner starter archive", (PYTHON, "scripts/verify_game_corner_starter_archive.py")),
     ("trainer Ability legality", (PYTHON, "scripts/verify_trainer_ability_legality.py")),
     ("trainer runtime coherence", (PYTHON, "scripts/verify_trainer_runtime_coherence.py")),
+    ("marquee dynamic AI", (PYTHON, "scripts/verify_emerald_champions_dynamic_ai.py")),
     ("trainer row reachability", (PYTHON, "scripts/prune_unreachable_trainer_parties.py")),
     ("trainer dialogue species", (PYTHON, "scripts/audit_trainer_dialogue_species.py")),
     ("story and dialogue", (PYTHON, "scripts/verify_emerald_champions_story.py")),

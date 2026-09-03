@@ -391,7 +391,8 @@ EmeraldChampions_EventScript_BattleVendorMain:
 	@ Let the prior native list window finish clearing before another menu can
 	@ reuse the same BG tiles and briefly erase its frame.
 	delay 1
-	goto_if_set FLAG_BADGE08_GET, EmeraldChampions_EventScript_BattleVendorCompleteArchive
+	checkitem ITEM_MEGA_RING, 1
+	goto_if_eq VAR_RESULT, TRUE, EmeraldChampions_EventScript_BattleVendorCompleteArchive
 	message EmeraldChampions_Text_BattleVendorWelcome
 	waitmessage
 	goto EmeraldChampions_EventScript_BattleItemCategoryChoices
@@ -442,7 +443,8 @@ EmeraldChampions_EventScript_BattleItemCategoryChoices:
 	goto EmeraldChampions_EventScript_BattleItemCategoryBack
 
 EmeraldChampions_EventScript_BattleItemCategoryBack:
-	goto_if_set FLAG_BADGE08_GET, EmeraldChampions_EventScript_BattleVendorMain
+	checkitem ITEM_MEGA_RING, 1
+	goto_if_eq VAR_RESULT, TRUE, EmeraldChampions_EventScript_BattleVendorMain
 	goto EmeraldChampions_EventScript_BattleVendorExit
 
 EmeraldChampions_EventScript_OpenOffenseItems:
@@ -488,8 +490,9 @@ EmeraldChampions_Text_BattleVendorWelcome:
 	.string "Which kind of held item do you need?$"
 
 EmeraldChampions_Text_BattleVendorCompleteWelcome:
-	.string "All eight BADGES! The complete Mega\n"
-	.string "archive is open before the LEAGUE.\p"
+	.string "A MEGA RING! Then the Mega Stone and\n"
+	.string "Evolution archives are open to you.\p"
+	.string "Every stone, every item, free.\n"
 	.string "What does your team need?$"
 
 EmeraldChampions_Text_HeldItems:

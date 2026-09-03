@@ -91,14 +91,14 @@ PICKUP_STONES = {
 FINITE_PICKUPS = {
     ("data/maps/SSTidalLowerDeck/map.json", "ITEM_LEFTOVERS"): "ITEM_ULTRA_BALL",
     ("data/maps/Route116/map.json", "ITEM_BLACK_GLASSES"): "ITEM_DUSK_STONE",
-    ("data/maps/Route116/map.json", "ITEM_X_SPECIAL"): "ITEM_THUNDER_STONE",
+    ("data/maps/Route116/map.json", "ITEM_X_SPECIAL"): "ITEM_LUCARIONITE_Z",
     ("data/maps/ShoalCave_LowTideIceRoom/map.json", "ITEM_NEVER_MELT_ICE"): "ITEM_ICE_STONE",
     ("data/maps/Seaspray_Cave_B1F/map.json", "ITEM_ABOMASITE"): "ITEM_SLOWBRONITE",
     ("data/maps/DewfordManor_1F/map.json", "ITEM_BANETTITE"): "ITEM_SABLENITE",
-    ("data/maps/EmberPath/map.json", "ITEM_CHARIZARDITE_Y"): "ITEM_BLAZIKENITE",
-    ("data/maps/SeafloorCavern_Room9/map.json", "ITEM_GARCHOMPITE"): "ITEM_SHARPEDONITE",
+    ("data/maps/EmberPath/map.json", "ITEM_CHARIZARDITE_Y"): "ITEM_QUICK_BALL",
+    ("data/maps/SeafloorCavern_Room9/map.json", "ITEM_GARCHOMPITE"): "ITEM_MASTER_BALL",
     ("data/maps/Route111_RuinsExterior/map.json", "ITEM_MEDICHAMITE"): "ITEM_STEELIXITE",
-    ("data/maps/ScorchedSlab_B2F/map.json", "ITEM_TYRANITARITE"): "ITEM_CHARIZARDITE_X",
+    ("data/maps/ScorchedSlab_B2F/map.json", "ITEM_TYRANITARITE"): "ITEM_BEAST_BALL",
     ("data/maps/SandstrewnRuins/map.json", "ITEM_OLD_AMBER"): "ITEM_BLACK_AUGURITE",
 }
 

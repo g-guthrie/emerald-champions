@@ -709,7 +709,7 @@ TEST("Emerald Champions migrates the exact 81e Sign Circuit and difficulty layou
     FlagSet(FLAG_RECEIVED_BRAWLY_LUCARIONITE);
     FlagSet(FLAG_EC_ITEM_PRISON_BOTTLE);
     FlagSet(FLAG_HIDDEN_ITEM_ROUTE_113_ULTRA_BALL);
-    FlagSet(FLAG_ITEM_ROUTE_116_THUNDER_STONE);
+    FlagSet(FLAG_ITEM_ROUTE_116_LUCARIONITE_Z);
 
     MigrateEmeraldChampionsCoreState();
 
@@ -739,7 +739,7 @@ TEST("Emerald Champions migrates the exact 81e Sign Circuit and difficulty layou
     EXPECT(!FlagGet(FLAG_RECEIVED_BRAWLY_LUCARIONITE));
     EXPECT(!FlagGet(FLAG_EC_ITEM_PRISON_BOTTLE));
     EXPECT(!FlagGet(FLAG_HIDDEN_ITEM_ROUTE_113_ULTRA_BALL));
-    EXPECT(!FlagGet(FLAG_ITEM_ROUTE_116_THUNDER_STONE));
+    EXPECT(!FlagGet(FLAG_ITEM_ROUTE_116_LUCARIONITE_Z));
 
     // The version, not a repurposed flag, makes the migration idempotent.
     SetCurrentDifficultyLevel(DIFFICULTY_NORMAL);
@@ -764,7 +764,7 @@ TEST("Emerald Champions ambiguous unversioned saves fail safe")
     FlagSet(FLAG_RECEIVED_GAME_CORNER_POIPOLE);
     FlagSet(FLAG_EC_ITEM_MASTER_BALL);
     FlagSet(FLAG_HIDDEN_ITEM_ROUTE_113_ULTRA_BALL);
-    FlagSet(FLAG_ITEM_ROUTE_116_THUNDER_STONE);
+    FlagSet(FLAG_ITEM_ROUTE_116_LUCARIONITE_Z);
     for (u32 i = 0; i < ARRAY_COUNT(sEmeraldChampionsTestSignStateVars); i++)
         VarSet(sEmeraldChampionsTestSignStateVars[i], 0xFFFF);
     SetCurrentDifficultyLevel(DIFFICULTY_EASY);
@@ -784,7 +784,7 @@ TEST("Emerald Champions ambiguous unversioned saves fail safe")
     EXPECT(!FlagGet(FLAG_RECEIVED_GAME_CORNER_POIPOLE));
     EXPECT(!FlagGet(FLAG_EC_ITEM_MASTER_BALL));
     EXPECT(!FlagGet(FLAG_HIDDEN_ITEM_ROUTE_113_ULTRA_BALL));
-    EXPECT(!FlagGet(FLAG_ITEM_ROUTE_116_THUNDER_STONE));
+    EXPECT(!FlagGet(FLAG_ITEM_ROUTE_116_LUCARIONITE_Z));
     for (u32 i = 0; i < ARRAY_COUNT(sEmeraldChampionsTestSignStateVars); i++)
         EXPECT_EQ(VarGet(sEmeraldChampionsTestSignStateVars[i]), 0);
     EXPECT_EQ(VarGet(VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS), 0);

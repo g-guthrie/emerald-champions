@@ -78,7 +78,7 @@ class RuntimeGate:
 
 
 RUNTIME_GATES = (
-    RuntimeGate("*Champions", 103),
+    RuntimeGate("*Champions", 109),
     RuntimeGate("Blitz Boxer", 1),
     RuntimeGate("*preparation", 3),
     RuntimeGate("*Item descriptions fit on Bag and Shop Screen", 1),
@@ -290,6 +290,7 @@ RUNTIME_GATES = (
         timeout_seconds=600,
     ),
     RuntimeGate("test/battle/ai/gimmick_mega.c", 1, timeout_seconds=600),
+    RuntimeGate("test/battle/ai/emerald_champions_dynamic.c", 6, timeout_seconds=600),
     RuntimeGate(
         "test/battle/ai/gimmick_z_move.c",
         20,

@@ -768,7 +768,7 @@ def verify_battle_vendor_navigation() -> None:
         "battle vendor does not initialize category/archive cursors per conversation",
     )
     require(
-        "goto_if_set FLAG_BADGE08_GET, EmeraldChampions_EventScript_BattleVendorCompleteArchive" in main
+        "checkitem ITEM_MEGA_RING, 1" in main and "goto_if_eq VAR_RESULT, TRUE, EmeraldChampions_EventScript_BattleVendorCompleteArchive" in main
         and "goto EmeraldChampions_EventScript_BattleItemCategoryChoices" in main,
         "pre-League battle vendor has an obsolete wrapper menu or wrong archive gate",
     )
@@ -789,7 +789,7 @@ def verify_battle_vendor_navigation() -> None:
             f"case {index}, EmeraldChampions_EventScript_Open{name}Items" in categories
             for index, name in enumerate(("Offense", "Defense", "Field", "Type", "Gem", "Species"))
         )
-        and "goto_if_set FLAG_BADGE08_GET, EmeraldChampions_EventScript_BattleVendorMain" in categories
+        and "goto_if_eq VAR_RESULT, TRUE, EmeraldChampions_EventScript_BattleVendorMain" in categories
         and "goto EmeraldChampions_EventScript_BattleVendorExit" in categories,
         "battle-item categories do not preserve a valid cursor or implement native B/Back behavior",
     )

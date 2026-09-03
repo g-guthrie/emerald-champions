@@ -241,8 +241,9 @@ FortreeCity_Gym_Text_ReceivedFeatherBadge:
 FortreeCity_Gym_Text_ExplainFeatherBadgeTakeThis:
 	.string "The FEATHER BADGE lets your LEVELER\n"
 	.string "train a party up to Lv. 60.\p"
-	.string "It also enables FLY outside\n"
-	.string "of battle.\p"
+	.string "It also enables FLY outside of battle.\n"
+	.string "Your FLIGHT BEACON works from now on.\l"
+	.string "Use it from the BAG to reach any town.\p"
 	.string "And this…\n"
 	.string "This is a gift from me.$"
 FortreeCity_Gym_Text_ExplainAltarianite:

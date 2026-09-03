@@ -1,6 +1,6 @@
 {
-  "inputs_sha256": "fac9b0ec782e4345bbe73851a10610c175081caf9b3b123d6df844c99f54af5e",
-  "input_count": 29797,
+  "inputs_sha256": "789008370f4a16495c9bf8adceee3c494cb36de328693bac11da03d2e242bd2c",
+  "input_count": 29800,
   "artifact": "pokeemerald-test.elf",
-  "artifact_sha256": "25bc7dfc0c26a4133674c855fa5bc1310034fb5d0fed9d4288f615983d082c2c"
+  "artifact_sha256": "1bcd43e1e70fb54f065678fa8fe0d745cfe20b1116f110dee4a6f8e78c2c6bd7"
 }

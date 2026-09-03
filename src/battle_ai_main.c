@@ -7,6 +7,7 @@
 #include "battle_ai_items.h"
 #include "battle_ai_switch.h"
 #include "battle_ai_main.h"
+#include "emerald_champions_ai.h"
 #include "battle_ai_record.h"
 #include "battle_stat_change.h"
 #include "battle_controllers.h"
@@ -319,6 +320,11 @@ static u64 GetAiFlags(u16 trainerId, enum BattlerId battler)
 
 void BattleAI_SetupFlags(void)
 {
+    // Campaign bosses can opt into one focused scoring profile by trainer ID.
+    // A script-set function remains authoritative for special one-off scenes.
+    if (sDynamicAiFunc == NULL && gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+        sDynamicAiFunc = GetEmeraldChampionsDynamicAiFunc(TRAINER_BATTLE_PARAM.opponentA);
+
     if (IsAiVsAiBattle())
         gAiThinkingStruct->aiFlags[B_BATTLER_0] = GetAiFlags(gPartnerTrainerId, B_BATTLER_0);
     else
@@ -6910,4 +6916,9 @@ void ResetDynamicAiFunctions(void)
 {
     sDynamicAiFunc = NULL;
     gDynamicAiSwitchFunc = NULL;
+}
+
+void BattleAI_SetDynamicFunc(AiScoreFunc func)
+{
+    sDynamicAiFunc = func;
 }

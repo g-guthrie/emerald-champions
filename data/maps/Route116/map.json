@@ -113,9 +113,9 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_ETHER",
+      "trainer_sight_or_berry_tree_id": "ITEM_LUCARIONITE",
       "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ITEM_ROUTE_116_ETHER"
+      "flag": "FLAG_ITEM_ROUTE_116_LUCARIONITE"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -126,9 +126,9 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_REPEL",
+      "trainer_sight_or_berry_tree_id": "ITEM_STARAPTITE",
       "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ITEM_ROUTE_116_REPEL"
+      "flag": "FLAG_ITEM_ROUTE_116_STARAPTITE"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
@@ -218,9 +218,9 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_GREAT_BALL",
+      "trainer_sight_or_berry_tree_id": "ITEM_GARCHOMPITE_Z",
       "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ITEM_ROUTE_116_GREAT_BALL"
+      "flag": "FLAG_ITEM_ROUTE_116_GARCHOMPITE_Z"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_LASS",
@@ -283,9 +283,9 @@
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_THUNDER_STONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_LUCARIONITE_Z",
       "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ITEM_ROUTE_116_THUNDER_STONE"
+      "flag": "FLAG_ITEM_ROUTE_116_LUCARIONITE_Z"
     },
     {
       "local_id": "LOCALID_ROUTE116_WANDAS_BF",
@@ -349,9 +349,9 @@
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_POTION",
+      "trainer_sight_or_berry_tree_id": "ITEM_MEOWSTICITE",
       "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ITEM_ROUTE_116_POTION"
+      "flag": "FLAG_ITEM_ROUTE_116_MEOWSTICITE"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_CUTTABLE_TREE",

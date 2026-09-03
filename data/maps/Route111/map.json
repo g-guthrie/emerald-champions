@@ -267,9 +267,9 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_TYRANITARITE",
+      "trainer_sight_or_berry_tree_id": "ITEM_DRAMPANITE",
       "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ITEM_ROUTE_111_TYRANITARITE"
+      "flag": "FLAG_ITEM_ROUTE_111_DRAMPANITE"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
@@ -375,9 +375,9 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_EXCADRITE",
+      "trainer_sight_or_berry_tree_id": "ITEM_ALTARIANITE",
       "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_EC_ITEM_ROUTE111_EXCADRITE"
+      "flag": "FLAG_EC_ITEM_ROUTE111_ALTARIANITE"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_PICNICKER",

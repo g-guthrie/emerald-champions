@@ -222,6 +222,9 @@ SootopolisCity_Gym_1F_Text_ExplainRainBadgeTakeThis:
 	.string "a party up to Lv. 80.\p"
 	.string "It also enables WATERFALL to scale\n"
 	.string "walls of cascading water.\p"
+	.string "With all eight BADGES, the VENDOR in\n"
+	.string "every POKéMON CENTER opens the complete\l"
+	.string "MEGA STONE archive. Go and see.\p"
 	.string "And, so that you never forget the\n"
 	.string "battle we shared, take this…$"
 SootopolisCity_Gym_1F_Text_ExplainGyaradosite:

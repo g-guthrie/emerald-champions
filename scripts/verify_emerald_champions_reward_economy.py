@@ -109,10 +109,7 @@ FRONTIER_EVOLUTION_ITEMS = (
 UNIQUE_WORLD_STONE_REPLACEMENTS = {
     "Seaspray_Cave_B1F": "ITEM_SLOWBRONITE",
     "DewfordManor_1F": "ITEM_SABLENITE",
-    "EmberPath": "ITEM_BLAZIKENITE",
-    "SeafloorCavern_Room9": "ITEM_SHARPEDONITE",
     "Route111_RuinsExterior": "ITEM_STEELIXITE",
-    "ScorchedSlab_B2F": "ITEM_CHARIZARDITE_X",
 }
 
 
@@ -184,9 +181,9 @@ def verify_inert_item_cleanup() -> None:
     item = next(
         obj["trainer_sight_or_berry_tree_id"]
         for obj in route["object_events"]
-        if obj.get("flag") == "FLAG_ITEM_ROUTE_116_THUNDER_STONE"
+        if obj.get("flag") == "FLAG_ITEM_ROUTE_116_LUCARIONITE_Z"
     )
-    require(item == "ITEM_THUNDER_STONE", "Route 116's obsolete X Special was not replaced")
+    require(item == "ITEM_LUCARIONITE_Z", "Route 116's obsolete X Special was not replaced")
     lavaridge = read("data/maps/LavaridgeTown_Mart/scripts.inc")
     require("Use X SPEED" not in lavaridge and "don't allow items" in lavaridge,
             "Lavaridge still teaches an unusable X-item instead of the Bag rule")

@@ -110,6 +110,7 @@ void Ai_UpdateSwitchInData(enum BattlerId battler);
 void Ai_UpdateFaintData(enum BattlerId battler);
 void SetAiLogicDataForTurn(struct AiLogicData *aiData);
 void ResetDynamicAiFunctions(void);
+void BattleAI_SetDynamicFunc(AiScoreFunc func);
 void AI_TrySwitchOrUseItem(enum BattlerId battler);
 void CalcBattlerAiMovesData(struct AiLogicData *aiData, enum BattlerId battlerAtk, enum BattlerId battlerDef, u32 weather, enum BattleTerrain terrain);
 void AIDebugTimerStart(void);

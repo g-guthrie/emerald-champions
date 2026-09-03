@@ -17,6 +17,11 @@ GraniteCave_StevensRoom_EventScript_CheckKnuckleBadge::
 	msgbox GraniteCave_StevensRoom_Text_ThankYouTakeThis, MSGBOX_DEFAULT
 	giveitem ITEM_MEGA_RING
 	goto_if_eq VAR_RESULT, FALSE, GraniteCave_StevensRoom_EventScript_BagFull
+	msgbox GraniteCave_StevensRoom_Text_StarterStones, MSGBOX_DEFAULT
+	giveitem ITEM_SCEPTILITE
+	giveitem ITEM_BLAZIKENITE
+	giveitem ITEM_SWAMPERTITE
+	msgbox GraniteCave_StevensRoom_Text_ArchiveOpen, MSGBOX_DEFAULT
 
 GraniteCave_StevensRoom_EventScript_RegisterSteven::
 	goto_if_set FLAG_REGISTERED_STEVEN_POKENAV, GraniteCave_StevensRoom_EventScript_Finish
@@ -110,6 +115,16 @@ GraniteCave_StevensRoom_Text_ThankYouTakeThis:
 	.string "lets one partner Mega Evolve in battle.\p"
 	.string "The RING and those CHAMPION'S SIGNS\n"
 	.string "answer to the same bond.$"
+
+GraniteCave_StevensRoom_Text_StarterStones:
+	.string "Your starter should be first. Take\n"
+	.string "all three of the HOENN starter stones.$"
+
+GraniteCave_StevensRoom_Text_ArchiveOpen:
+	.string "And now that you hold a RING, every\n"
+	.string "POKéMON CENTER'S VENDOR will open\l"
+	.string "the full Mega Stone archive to you.\p"
+	.string "Every stone, free. Build what you like.$"
 
 GraniteCave_StevensRoom_Text_ReturnWithKnuckleBadge:
 	.string "The LETTER confirms what I feared:\n"

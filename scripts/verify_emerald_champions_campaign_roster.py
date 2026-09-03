@@ -248,8 +248,8 @@ def main() -> None:
     mega_archive = (ROOT / "src/data/emerald_champions_mega_stones.h").read_text()
     evolution_archive = (ROOT / "src/data/emerald_champions_evolution_items.h").read_text()
     require(
-        "goto_if_set FLAG_BADGE08_GET, EmeraldChampions_EventScript_BattleVendorCompleteArchive" in scripts,
-        "complete team-building archives are not available before the League",
+        "checkitem ITEM_MEGA_RING, 1" in scripts and "goto_if_eq VAR_RESULT, TRUE, EmeraldChampions_EventScript_BattleVendorCompleteArchive" in scripts,
+        "complete team-building archives are not available once the Mega Ring is held",
     )
     required_mega_items = {
         variant["required_item"] for variant in manifest["variants"]

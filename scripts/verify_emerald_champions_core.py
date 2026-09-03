@@ -327,7 +327,7 @@ def main() -> None:
         all(token in overworld for token in (
             "FLAG_EC_ITEM_PRISON_BOTTLE, FLAG_EC_RECEIVED_ROXANNE_AERODACTYLITE",
             "FLAG_HIDDEN_ITEMS_START, FLAG_UNUSED_0x2BB",
-            "FLAG_ITEM_ROUTE_116_THUNDER_STONE, FLAG_ITEM_SAFARI_ZONE_SOUTH_EAST_BIG_PEARL",
+            "FLAG_ITEM_ROUTE_116_LUCARIONITE_Z, FLAG_ITEM_SAFARI_ZONE_SOUTH_EAST_BIG_PEARL",
             "FLAG_EC_STARTER_ARCHIVE_BULBASAUR, FLAG_RECEIVED_GAME_CORNER_POIPOLE",
             "sDirectClaimFlags",
             "Inclement's inherited static encounters are visible whenever their map",

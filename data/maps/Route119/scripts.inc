@@ -505,8 +505,10 @@ Route119_Text_MayPresentForYou:
 	.string "Here. I have a present for you.$"
 
 Route119_Text_MayExplainFly:
-	.string "MAY: Use FLY once you hold the FEATHER\n"
-	.string "BADGE. Any town you've seen, instantly.\p"
+	.string "MAY: Your FLIGHT BEACON turns on once\n"
+	.string "you hold the FEATHER BADGE.\p"
+	.string "Use it from the BAG. Any town you've\n"
+	.string "seen, instantly.\p"
 	.string "Go home sometime. Mom asks about you.\p"
 	.string "Maybe we'll meet at the LEAGUE!$"
 
@@ -533,8 +535,10 @@ Route119_Text_BrendanIllGiveYouThis:
 	.string "Here. Try this out.$"
 
 Route119_Text_BrendanExplainFly:
-	.string "BRENDAN: Use FLY once you have the\n"
-	.string "FORTREE BADGE. Any town you've seen.\p"
+	.string "BRENDAN: Your FLIGHT BEACON turns on\n"
+	.string "once you hold the FEATHER BADGE.\p"
+	.string "Use it from the BAG. Any town you've\n"
+	.string "seen, instantly.\p"
 	.string "I'm off. The SIGNS won't catalog\n"
 	.string "themselves.$"
 

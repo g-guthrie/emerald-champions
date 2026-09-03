@@ -2647,9 +2647,9 @@
             1,
             1,
             "TRAINER_TYPE_NONE",
-            "ITEM_SWAMPERTITE",
+            "ITEM_MASTER_BALL",
             "Common_EventScript_FindItem",
-            "FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_1_SWAMPERTITE",
+            "FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_1_MASTER_BALL",
             null
           ],
           [
@@ -6160,9 +6160,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_MALAMARITE",
+            "ITEM_MASTER_BALL",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_AQUA_HIDEOUT_B1F_MALAMARITE",
+            "FLAG_EC_ITEM_AQUA_HIDEOUT_B1F_MASTER_BALL",
             null
           ],
           [
@@ -7348,9 +7348,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_SCOLIPITE",
+            "ITEM_QUICK_BALL",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_ASHEN_SCOLIPITE",
+            "FLAG_EC_ITEM_ASHEN_QUICK_BALL",
             null
           ],
           [
@@ -7418,9 +7418,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_PINSIRITE",
+            "ITEM_HONEY",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_ASHEN_PINSIRITE",
+            "FLAG_EC_ITEM_ASHEN_HONEY",
             null
           ],
           [
@@ -27732,9 +27732,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_GARCHOMPITE_Z",
+            "ITEM_MASTER_BALL",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_EMBER_GARCHOMPITE_Z",
+            "FLAG_EC_ITEM_EMBER_MASTER_BALL",
             null
           ]
         ],
@@ -27849,9 +27849,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_LUCARIONITE_Z",
+            "ITEM_DUSK_BALL",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_WOODS2_LUCARIONITE_Z",
+            "FLAG_EC_ITEM_WOODS2_DUSK_BALL",
             null
           ],
           [
@@ -30452,9 +30452,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_BLAZIKENITE",
+            "ITEM_QUICK_BALL",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_EMBER_BLAZIKENITE",
+            "FLAG_EC_ITEM_EMBER_QUICK_BALL",
             null
           ],
           [
@@ -30640,9 +30640,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_BAXCALIBRITE",
+            "ITEM_BEAST_BALL",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_EVER_GRANDE_BAXCALIBRITE",
+            "FLAG_EC_ITEM_EVER_GRANDE_BEAST_BALL",
             null
           ]
         ],
@@ -35581,9 +35581,9 @@
             1,
             1,
             "TRAINER_TYPE_NONE",
-            "ITEM_FIRE_STONE",
+            "ITEM_CAMERUPTITE",
             "Common_EventScript_FindItem",
-            "FLAG_ITEM_FIERY_PATH_FIRE_STONE",
+            "FLAG_ITEM_FIERY_PATH_CAMERUPTITE",
             null
           ],
           [
@@ -38617,9 +38617,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_POKE_BALL",
+            "ITEM_ALAKAZITE",
             "Common_EventScript_FindItem",
-            "FLAG_ITEM_GRANITE_CAVE_B1F_POKE_BALL",
+            "FLAG_ITEM_GRANITE_CAVE_B1F_ALAKAZITE",
             null
           ]
         ],
@@ -39051,9 +39051,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_ULTRA_BALL",
+            "ITEM_GLIMMORANITE",
             "Common_EventScript_FindItem",
-            "FLAG_ITEM_GRANITE_CAVE_B2F_ULTRA_BALL",
+            "FLAG_ITEM_GRANITE_CAVE_B2F_GLIMMORANITE",
             null
           ],
           [
@@ -40015,9 +40015,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_BURN_HEAL",
+            "ITEM_ABSOLITE",
             "Common_EventScript_FindItem",
-            "FLAG_ITEM_JAGGED_PASS_BURN_HEAL",
+            "FLAG_ITEM_JAGGED_PASS_ABSOLITE",
             null
           ],
           [
@@ -40293,8 +40293,8 @@
             3,
             null,
             null,
-            "ITEM_GREAT_BALL",
-            "FLAG_HIDDEN_ITEM_JAGGED_PASS_GREAT_BALL"
+            "ITEM_SCOVILLAINITE",
+            "FLAG_HIDDEN_ITEM_JAGGED_PASS_SCOVILLAINITE"
           ],
           [
             "hidden_item",
@@ -40303,8 +40303,8 @@
             3,
             null,
             null,
-            "ITEM_FULL_HEAL",
-            "FLAG_HIDDEN_ITEM_JAGGED_PASS_FULL_HEAL"
+            "ITEM_SCRAFTINITE",
+            "FLAG_HIDDEN_ITEM_JAGGED_PASS_SCRAFTINITE"
           ]
         ]
       }
@@ -61495,9 +61495,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_DRAGONINITE",
+            "ITEM_MASTER_BALL",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_METEOR_FALLS_1F_2R_DRAGONINITE",
+            "FLAG_EC_ITEM_METEOR_FALLS_1F_2R_MASTER_BALL",
             null
           ]
         ],
@@ -61682,9 +61682,9 @@
             1,
             1,
             "TRAINER_TYPE_NONE",
-            "ITEM_SALAMENCITE",
+            "ITEM_BEAST_BALL",
             "Common_EventScript_FindItem",
-            "FLAG_ITEM_METEOR_FALLS_B1F_2R_SALAMENCITE",
+            "FLAG_ITEM_METEOR_FALLS_B1F_2R_BEAST_BALL",
             null
           ]
         ],
@@ -63016,9 +63016,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_GALLADITE",
+            "ITEM_QUICK_BALL",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_MOSSDEEP_CITY_GALLADITE",
+            "FLAG_EC_ITEM_MOSSDEEP_CITY_QUICK_BALL",
             null
           ],
           [
@@ -70593,9 +70593,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_GARDEVOIRITE",
+            "ITEM_DUSK_BALL",
             "Common_EventScript_FindItem",
-            "FLAG_ITEM_MT_PYRE_EXTERIOR_GARDEVOIRITE",
+            "FLAG_ITEM_MT_PYRE_EXTERIOR_DUSK_BALL",
             null
           ],
           [
@@ -71147,9 +71147,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_CHIMECHITE",
+            "ITEM_BEAST_BALL",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_MT_PYRE_SUMMIT_CHIMECHITE",
+            "FLAG_EC_ITEM_MT_PYRE_SUMMIT_BEAST_BALL",
             null
           ],
           [
@@ -73078,9 +73078,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_EELEKTROSSITE",
+            "ITEM_QUICK_BALL",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_NEW_MAUVILLE_EELEKTROSSITE",
+            "FLAG_EC_ITEM_NEW_MAUVILLE_QUICK_BALL",
             null
           ],
           [
@@ -79992,9 +79992,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_MOON_BALL",
+            "ITEM_HERACRONITE",
             "Common_EventScript_FindItem",
-            "FLAG_ITEM_PETALBURG_WOODS_MOON_BALL",
+            "FLAG_ITEM_PETALBURG_WOODS_HERACRONITE",
             null
           ],
           [
@@ -80034,9 +80034,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_GREAT_BALL",
+            "ITEM_SCOLIPITE",
             "Common_EventScript_FindItem",
-            "FLAG_ITEM_PETALBURG_WOODS_GREAT_BALL",
+            "FLAG_ITEM_PETALBURG_WOODS_SCOLIPITE",
             null
           ],
           [
@@ -85073,9 +85073,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_CRABOMINITE",
+            "ITEM_DUSK_BALL",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_ROUTE105_CRABOMINITE",
+            "FLAG_EC_ITEM_ROUTE105_DUSK_BALL",
             null
           ],
           [
@@ -89064,9 +89064,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_ULTRA_BALL",
+            "ITEM_MEGANIUMITE",
             "Common_EventScript_FindItem",
-            "FLAG_ITEM_ROUTE_110_ULTRA_BALL",
+            "FLAG_ITEM_ROUTE_110_MEGANIUMITE",
             null
           ],
           [
@@ -89078,9 +89078,9 @@
             1,
             1,
             "TRAINER_TYPE_NONE",
-            "ITEM_ELIXIR",
+            "ITEM_FERALIGITE",
             "Common_EventScript_FindItem",
-            "FLAG_ITEM_ROUTE_110_ELIXIR",
+            "FLAG_ITEM_ROUTE_110_FERALIGITE",
             null
           ],
           [
@@ -89134,9 +89134,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_RAICHUNITE_X",
+            "ITEM_DUSK_BALL",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_ROUTE110_RAICHUNITE_X",
+            "FLAG_EC_ITEM_ROUTE110_DUSK_BALL",
             null
           ],
           [
@@ -89596,8 +89596,8 @@
             3,
             null,
             null,
-            "ITEM_GREAT_BALL",
-            "FLAG_HIDDEN_ITEM_ROUTE_110_GREAT_BALL"
+            "ITEM_CHARIZARDITE_X",
+            "FLAG_HIDDEN_ITEM_ROUTE_110_CHARIZARDITE_X"
           ],
           [
             "hidden_item",
@@ -89606,8 +89606,8 @@
             3,
             null,
             null,
-            "ITEM_REVIVE",
-            "FLAG_HIDDEN_ITEM_ROUTE_110_REVIVE"
+            "ITEM_EMBOARITE",
+            "FLAG_HIDDEN_ITEM_ROUTE_110_EMBOARITE"
           ],
           [
             "hidden_item",
@@ -89616,8 +89616,8 @@
             3,
             null,
             null,
-            "ITEM_FULL_HEAL",
-            "FLAG_HIDDEN_ITEM_ROUTE_110_FULL_HEAL"
+            "ITEM_DELPHOXITE",
+            "FLAG_HIDDEN_ITEM_ROUTE_110_DELPHOXITE"
           ],
           [
             "hidden_item",
@@ -89626,8 +89626,8 @@
             3,
             null,
             null,
-            "ITEM_POKE_BALL",
-            "FLAG_HIDDEN_ITEM_ROUTE_110_POKE_BALL"
+            "ITEM_EELEKTROSSITE",
+            "FLAG_HIDDEN_ITEM_ROUTE_110_EELEKTROSSITE"
           ],
           [
             "secret_base",
@@ -92666,9 +92666,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_CLEFABLITE",
+            "ITEM_MASTER_BALL",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_TRICK_HOUSE_PUZZLE5_CLEFABLITE",
+            "FLAG_EC_ITEM_TRICK_HOUSE_PUZZLE5_MASTER_BALL",
             null
           ],
           [
@@ -95633,9 +95633,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_EXCADRITE",
+            "ITEM_ALTARIANITE",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_ROUTE111_EXCADRITE",
+            "FLAG_EC_ITEM_ROUTE111_ALTARIANITE",
             null
           ],
           [
@@ -95647,9 +95647,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_TYRANITARITE",
+            "ITEM_DRAMPANITE",
             "Common_EventScript_FindItem",
-            "FLAG_ITEM_ROUTE_111_TYRANITARITE",
+            "FLAG_ITEM_ROUTE_111_DRAMPANITE",
             null
           ],
           [
@@ -98048,9 +98048,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_NUGGET",
+            "ITEM_SKARMORITE",
             "Common_EventScript_FindItem",
-            "FLAG_ITEM_ROUTE_112_NUGGET",
+            "FLAG_ITEM_ROUTE_112_SKARMORITE",
             null
           ],
           [
@@ -102272,9 +102272,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_HEAL_POWDER",
+            "ITEM_AUDINITE",
             "Common_EventScript_FindItem",
-            "FLAG_ITEM_ROUTE_115_HEAL_POWDER",
+            "FLAG_ITEM_ROUTE_115_AUDINITE",
             null
           ],
           [
@@ -102286,9 +102286,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_SUPER_POTION",
+            "ITEM_LOPUNNITE",
             "Common_EventScript_FindItem",
-            "FLAG_ITEM_ROUTE_115_SUPER_POTION",
+            "FLAG_ITEM_ROUTE_115_LOPUNNITE",
             null
           ],
           [
@@ -102300,9 +102300,9 @@
             1,
             1,
             "TRAINER_TYPE_NONE",
-            "ITEM_PP_UP",
+            "ITEM_RAICHUNITE_Y",
             "Common_EventScript_FindItem",
-            "FLAG_ITEM_ROUTE_115_PP_UP",
+            "FLAG_ITEM_ROUTE_115_RAICHUNITE_Y",
             null
           ],
           [
@@ -102314,9 +102314,9 @@
             1,
             1,
             "TRAINER_TYPE_NONE",
-            "ITEM_GREAT_BALL",
+            "ITEM_PYROARITE",
             "Common_EventScript_FindItem",
-            "FLAG_ITEM_ROUTE_115_GREAT_BALL",
+            "FLAG_ITEM_ROUTE_115_PYROARITE",
             null
           ],
           [
@@ -102370,9 +102370,9 @@
             1,
             1,
             "TRAINER_TYPE_NONE",
-            "ITEM_DUSK_BALL",
+            "ITEM_VICTREEBELITE",
             "Common_EventScript_FindItem",
-            "FLAG_ITEM_ROUTE_115_DUSK_BALL",
+            "FLAG_ITEM_ROUTE_115_VICTREEBELITE",
             null
           ],
           [
@@ -103647,9 +103647,9 @@
             1,
             1,
             "TRAINER_TYPE_NONE",
-            "ITEM_THUNDER_STONE",
+            "ITEM_LUCARIONITE_Z",
             "Common_EventScript_FindItem",
-            "FLAG_ITEM_ROUTE_116_THUNDER_STONE",
+            "FLAG_ITEM_ROUTE_116_LUCARIONITE_Z",
             null
           ],
           [
@@ -103689,9 +103689,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_REPEL",
+            "ITEM_STARAPTITE",
             "Common_EventScript_FindItem",
-            "FLAG_ITEM_ROUTE_116_REPEL",
+            "FLAG_ITEM_ROUTE_116_STARAPTITE",
             null
           ],
           [
@@ -103703,9 +103703,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_ETHER",
+            "ITEM_LUCARIONITE",
             "Common_EventScript_FindItem",
-            "FLAG_ITEM_ROUTE_116_ETHER",
+            "FLAG_ITEM_ROUTE_116_LUCARIONITE",
             null
           ],
           [
@@ -103717,9 +103717,9 @@
             1,
             1,
             "TRAINER_TYPE_NONE",
-            "ITEM_POTION",
+            "ITEM_MEOWSTICITE",
             "Common_EventScript_FindItem",
-            "FLAG_ITEM_ROUTE_116_POTION",
+            "FLAG_ITEM_ROUTE_116_MEOWSTICITE",
             null
           ],
           [
@@ -103731,9 +103731,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_GREAT_BALL",
+            "ITEM_GARCHOMPITE_Z",
             "Common_EventScript_FindItem",
-            "FLAG_ITEM_ROUTE_116_GREAT_BALL",
+            "FLAG_ITEM_ROUTE_116_GARCHOMPITE_Z",
             null
           ],
           [
@@ -104987,9 +104987,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_GREAT_BALL",
+            "ITEM_CHESNAUGHTITE",
             "Common_EventScript_FindItem",
-            "FLAG_ITEM_ROUTE_117_GREAT_BALL",
+            "FLAG_ITEM_ROUTE_117_CHESNAUGHTITE",
             null
           ],
           [
@@ -105001,9 +105001,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_REVIVE",
+            "ITEM_GRENINJITE",
             "Common_EventScript_FindItem",
-            "FLAG_ITEM_ROUTE_117_REVIVE",
+            "FLAG_ITEM_ROUTE_117_GRENINJITE",
             null
           ],
           [
@@ -105113,9 +105113,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_AMPHAROSITE",
+            "ITEM_QUICK_BALL",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_ROUTE117_AMPHAROSITE",
+            "FLAG_EC_ITEM_ROUTE117_QUICK_BALL",
             null
           ],
           [
@@ -105285,8 +105285,8 @@
             3,
             null,
             null,
-            "ITEM_REPEL",
-            "FLAG_HIDDEN_ITEM_ROUTE_117_REPEL"
+            "ITEM_CHARIZARDITE_Y",
+            "FLAG_HIDDEN_ITEM_ROUTE_117_CHARIZARDITE_Y"
           ],
           [
             "sign",
@@ -106162,9 +106162,9 @@
             1,
             1,
             "TRAINER_TYPE_NONE",
-            "ITEM_HYPER_POTION",
+            "ITEM_SCIZORITE",
             "Common_EventScript_FindItem",
-            "FLAG_ITEM_ROUTE_118_HYPER_POTION",
+            "FLAG_ITEM_ROUTE_118_SCIZORITE",
             null
           ],
           [
@@ -107858,9 +107858,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_DRAGALGITE",
+            "ITEM_QUICK_BALL",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_ROUTE119_DRAGALGITE",
+            "FLAG_EC_ITEM_ROUTE119_QUICK_BALL",
             null
           ],
           [
@@ -111403,9 +111403,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_NUGGET",
+            "ITEM_GENGARITE",
             "Common_EventScript_FindItem",
-            "FLAG_ITEM_ROUTE_120_NUGGET",
+            "FLAG_ITEM_ROUTE_120_GENGARITE",
             null
           ],
           [
@@ -111417,9 +111417,9 @@
             1,
             1,
             "TRAINER_TYPE_NONE",
-            "ITEM_NEST_BALL",
+            "ITEM_ZERAORITE",
             "Common_EventScript_FindItem",
-            "FLAG_ITEM_ROUTE_120_NEST_BALL",
+            "FLAG_ITEM_ROUTE_120_ZERAORITE",
             null
           ],
           [
@@ -111613,9 +111613,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_FULL_HEAL",
+            "ITEM_KANGASKHANITE",
             "Common_EventScript_FindItem",
-            "FLAG_ITEM_ROUTE_120_FULL_HEAL",
+            "FLAG_ITEM_ROUTE_120_KANGASKHANITE",
             null
           ],
           [
@@ -116928,9 +116928,9 @@
             1,
             1,
             "TRAINER_TYPE_NONE",
-            "ITEM_BARBARACITE",
+            "ITEM_METAGROSSITE",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_ROUTE124_BARBARACITE",
+            "FLAG_EC_ITEM_ROUTE124_METAGROSSITE",
             null
           ],
           [
@@ -119925,9 +119925,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_GOLISOPITE",
+            "ITEM_BEAST_BALL",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_ROUTE131_GOLISOPITE",
+            "FLAG_EC_ITEM_ROUTE131_BEAST_BALL",
             null
           ],
           [
@@ -129193,9 +129193,9 @@
             1,
             1,
             "TRAINER_TYPE_NONE",
-            "ITEM_VENUSAURITE",
+            "ITEM_HONEY",
             "Common_EventScript_FindItem",
-            "FLAG_ITEM_SAFARI_ZONE_NORTH_WEST_VENUSAURITE",
+            "FLAG_ITEM_SAFARI_ZONE_NORTH_WEST_HONEY",
             null
           ],
           [
@@ -129598,9 +129598,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_HERACRONITE",
+            "ITEM_HONEY",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_SAFARI_ZONE_SOUTH_HERACRONITE",
+            "FLAG_EC_ITEM_SAFARI_ZONE_SOUTH_HONEY",
             null
           ],
           [
@@ -131387,9 +131387,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_CHARIZARDITE_Y",
+            "ITEM_MASTER_BALL",
             "Common_EventScript_FindItem",
-            "FLAG_ITEM_SCORCHED_SLAB_CHARIZARDITE_Y",
+            "FLAG_ITEM_SCORCHED_SLAB_MASTER_BALL",
             null
           ]
         ],
@@ -131673,9 +131673,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_CHARIZARDITE_X",
+            "ITEM_BEAST_BALL",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_SCORCHED_CHARIZARDITE_X",
+            "FLAG_EC_ITEM_SCORCHED_BEAST_BALL",
             null
           ],
           [
@@ -133514,9 +133514,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_GLIMMORANITE",
+            "ITEM_DUSK_BALL",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_SEAFLOOR_CAVERN_ROOM6_GLIMMORANITE",
+            "FLAG_EC_ITEM_SEAFLOOR_CAVERN_ROOM6_DUSK_BALL",
             null
           ]
         ],
@@ -134308,9 +134308,9 @@
             1,
             1,
             "TRAINER_TYPE_NONE",
-            "ITEM_SHARPEDONITE",
+            "ITEM_MASTER_BALL",
             "Common_EventScript_FindItem",
-            "FLAG_ITEM_SEAFLOOR_CAVERN_ROOM_9_SHARPEDONITE",
+            "FLAG_ITEM_SEAFLOOR_CAVERN_ROOM_9_MASTER_BALL",
             null
           ],
           [
@@ -153407,9 +153407,9 @@
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_STARMINITE",
+            "ITEM_QUICK_BALL",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_SLATEPORT_CITY_STARMINITE",
+            "FLAG_EC_ITEM_SLATEPORT_CITY_QUICK_BALL",
             null
           ],
           [
@@ -167587,9 +167587,9 @@
             1,
             1,
             "TRAINER_TYPE_NONE",
-            "ITEM_MAX_ELIXIR",
+            "ITEM_ZYGARDITE",
             "Common_EventScript_FindItem",
-            "FLAG_ITEM_VICTORY_ROAD_1F_MAX_ELIXIR",
+            "FLAG_ITEM_VICTORY_ROAD_1F_ZYGARDITE",
             null
           ],
           [
@@ -167643,9 +167643,9 @@
             1,
             1,
             "TRAINER_TYPE_NONE",
-            "ITEM_PP_UP",
+            "ITEM_DARKRANITE",
             "Common_EventScript_FindItem",
-            "FLAG_ITEM_VICTORY_ROAD_1F_PP_UP",
+            "FLAG_ITEM_VICTORY_ROAD_1F_DARKRANITE",
             null
           ],
           [
@@ -168432,9 +168432,9 @@
             1,
             1,
             "TRAINER_TYPE_NONE",
-            "ITEM_ALAKAZITE",
+            "ITEM_ULTRA_BALL",
             "Common_EventScript_FindItem",
-            "FLAG_ITEM_VICTORY_ROAD_B1F_ALAKAZITE",
+            "FLAG_ITEM_VICTORY_ROAD_B1F_ULTRA_BALL",
             null
           ],
           [

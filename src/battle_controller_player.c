@@ -1762,12 +1762,15 @@ static void TryMoveSelectionDisplayMoveDescription(enum BattlerId battler)
 }
 
 // Emerald Champions: the same panel as the move description, listing each
-// opposing Pokémon and its current types ("Wingull   Water/Flying"). Opened
-// with R during move selection; it is deliberately unadvertised.
+// opposing Pokémon and its current types ("Wingull        Water/Flying").
+// Opened with R during move selection (Birch mentions it). The types are
+// right-aligned to the panel edge: the panel is 144 px wide in FONT_NARROW,
+// the widest species name is 59 px and the widest type pair 82 px, so the
+// two never collide and nothing runs off the right side.
 static void MoveSelectionDisplayFoeTypes(enum BattlerId battler)
 {
-    static const u8 sText_TypeColumn[] = _("{CLEAR_TO 96}");
     static const u8 sText_TypeSlash[] = _("/");
+    const u32 panelWidth = GetWindowAttribute(B_WIN_MOVE_DESCRIPTION, WINDOW_WIDTH) * 8;
     u8 *text = gDisplayedStringBattle;
     u32 lines = 0;
 
@@ -1777,20 +1780,29 @@ static void MoveSelectionDisplayFoeTypes(enum BattlerId battler)
     for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
     {
         enum Type types[3];
+        u8 typeText[32];
+        u32 typeWidth, column;
 
         if (GetBattlerSide(foe) == GetBattlerSide(battler) || !IsBattlerAlive(foe))
             continue;
+        GetBattlerTypes(foe, FALSE, types);
+        StringCopy(typeText, gTypesInfo[types[0]].name);
+        if (types[1] != types[0] && types[1] != TYPE_MYSTERY)
+        {
+            StringAppend(typeText, sText_TypeSlash);
+            StringAppend(typeText, gTypesInfo[types[1]].name);
+        }
+        typeWidth = GetStringWidth(FONT_NARROW, typeText, 0);
+        column = panelWidth > typeWidth + 2 ? panelWidth - typeWidth - 2 : 0;
+
         if (lines++ > 0)
             text = StringAppend(text, gText_NewLine);
         text = StringAppend(text, GetSpeciesName(gBattleMons[foe].species));
-        text = StringAppend(text, sText_TypeColumn);
-        GetBattlerTypes(foe, FALSE, types);
-        text = StringAppend(text, gTypesInfo[types[0]].name);
-        if (types[1] != types[0] && types[1] != TYPE_MYSTERY)
-        {
-            text = StringAppend(text, sText_TypeSlash);
-            text = StringAppend(text, gTypesInfo[types[1]].name);
-        }
+        *text++ = EXT_CTRL_CODE_BEGIN;
+        *text++ = EXT_CTRL_CODE_CLEAR_TO;
+        *text++ = column;
+        *text = EOS;
+        text = StringAppend(text, typeText);
     }
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_DESCRIPTION);
     CopyWindowToVram(B_WIN_MOVE_DESCRIPTION, COPYWIN_FULL);
