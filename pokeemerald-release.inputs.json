@@ -1,6 +1,6 @@
 {
-  "inputs_sha256": "12e52f1808c814156a1b8fd0b85ce9445ef442770b2ab075d622b9305bd1dc14",
+  "inputs_sha256": "298afcef5ec7e03ac8c8f5d6ab4281ca18c51dfb3bef429a32ddad6be986331e",
   "input_count": 28766,
   "artifact": "pokeemerald-release.gba",
-  "artifact_sha256": "ec608c9af05d622685e3bc50d3506b1c5eb16aacd14b185f6072e298476060e7"
+  "artifact_sha256": "25689581ad2840bedac028f78333757e606c30aeee23100bec3ae3e252295bc8"
 }

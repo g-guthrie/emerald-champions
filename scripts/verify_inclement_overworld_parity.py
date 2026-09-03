@@ -21,6 +21,20 @@ REVIEWED_EXTRA_OBJECTS = {
     },
 }
 
+# Visible Inclement objects Champions deliberately removes, keyed by (graphics, x, y).
+REVIEWED_MISSING_OBJECTS = {
+    "SlateportCity": {
+        ("OBJ_EVENT_GFX_BRAWLY", 19, 26):
+            "Inclement parked Brawly in the museum queue so Slateport opened before the "
+            "Knuckle Badge; Champions keeps Brawly in his Gym because Slateport trainers "
+            "are authored at chapter cap 30 (two badges)",
+    },
+    "DewfordTown": {
+        ("OBJ_EVENT_GFX_MAN_2", 8, 18):
+            "the guide who blocked the Gym door while Brawly was in Slateport",
+    },
+}
+
 ITEM_MARKER_GRAPHICS = {
     "OBJ_EVENT_GFX_ITEM_BALL",
     "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
@@ -260,7 +274,13 @@ def main() -> None:
             if event.get("graphics_id") not in ITEM_MARKER_GRAPHICS
             and (event.get("graphics_id"), event.get("x"), event.get("y")) not in reviewed_extra
         ]
-        expected_object_rows = [row for row in expected_object_rows if row[0] not in ITEM_MARKER_GRAPHICS]
+        reviewed_missing = REVIEWED_MISSING_OBJECTS.get(name, {})
+        fields = manifest["visual_object_fields"]
+        gx, gy = fields.index("x"), fields.index("y")
+        expected_object_rows = [
+            row for row in expected_object_rows
+            if row[0] not in ITEM_MARKER_GRAPHICS and (row[0], row[gx], row[gy]) not in reviewed_missing
+        ]
         objects = Counter(
             normalize_object([event.get(field) for field in manifest["visual_object_fields"]])
             for event in actual_object_events

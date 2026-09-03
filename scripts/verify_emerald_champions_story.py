@@ -97,7 +97,6 @@ STORY_BEATS = {
 # must now point to an explicit native service or map-specific replacement;
 # the generic fallback is never an acceptable live script.
 INCLEMENT_RESTORED_NPCS = {
-    "DewfordTown": ((8, 18, "DewfordTown_EventScript_GymGuide"),),
     "DewfordTown_Hall": ((3, 7, "DewfordTown_Hall_EventScript_Trader"),),
     "FallarborTown_Mart": ((3, 2, "FallarborTown_Mart_EventScript_MoveSpecialist"),),
     "LilycoveCity": ((41, 15, "LilycoveCity_EventScript_AltarianiteKeeper"),),
@@ -122,8 +121,6 @@ INCLEMENT_RESTORED_NPCS = {
     "SlateportCity": (
         (11, 51, "SlateportCity_EventScript_BattleItemScholar"),
         (11, 43, "SlateportCity_EventScript_IncenseScholar"),
-        # Inclement lifecycle: Brawly waits in the Slateport crowd and leaves once found.
-        (19, 26, "SlateportCity_EventScript_Brawly"),
     ),
     "SlateportCity_PokemonFanClub": ((12, 10, "SlateportCity_PokemonFanClub_EventScript_FurfrouStylist"),),
     "SootopolisCity_House2": ((6, 3, "SootopolisCity_House2_EventScript_MoveSpecialist"),),

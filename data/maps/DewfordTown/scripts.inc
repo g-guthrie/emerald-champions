@@ -2,16 +2,6 @@ DewfordTown_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, DewfordTown_OnTransition
 	.byte 0
 
-DewfordTown_EventScript_GymGuide::
-	msgbox DewfordTown_Text_BrawlyInSlateport, MSGBOX_NPC
-	end
-
-DewfordTown_Text_BrawlyInSlateport:
-	.string "Hey, Champ-to-be!\p"
-	.string "BRAWLY, the GYM LEADER here, went\n"
-	.string "to SLATEPORT CITY and hasn't returned.\p"
-	.string "If you're after a battle, you'll have\n"
-	.string "to go find him.$"
 
 DewfordTown_OnTransition:
 	setflag FLAG_VISITED_DEWFORD_TOWN
@@ -20,9 +10,14 @@ DewfordTown_OnTransition:
 DewfordTown_EventScript_Briney::
 	lock
 	faceplayer
-	@ Inclement gates sailing on the Letter alone: the player must be able to reach
-	@ Slateport to find Brawly, who is not in his Gym yet.
+	@ Emerald Champions keeps vanilla order: Slateport (chapter cap 30) opens only
+	@ after the Letter, the Knuckle Badge and Steven's Mega Ring. Inclement's
+	@ "find Brawly in the Slateport crowd" detour let a one-badge player (cap 20)
+	@ into cap-30 trainers, so Brawly is in his Gym from the start.
 	goto_if_unset FLAG_DELIVERED_STEVEN_LETTER, DewfordTown_EventScript_ReturnToPetalburgPrompt
+	goto_if_unset FLAG_BADGE02_GET, DewfordTown_EventScript_KnuckleBadgePrompt
+	checkitem ITEM_MEGA_RING, 1
+	goto_if_eq VAR_RESULT, FALSE, DewfordTown_EventScript_MegaRingPrompt
 	message DewfordTown_Text_WhereAreWeBound
 	waitmessage
 	multichoicedefault 21, 6, MULTI_BRINEY_ON_DEWFORD, 2, FALSE

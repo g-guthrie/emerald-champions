@@ -133644,7 +133644,7 @@
       "same_path_identical": 96
     }
   },
-  "current_visual_tree_sha256": "3b8facf9996096e22e8214742ac41d833a042e68b27fa13c56a16618b87dfe45",
+  "current_visual_tree_sha256": "6ac586433fc4466e452e0ad7f6555b8abc7458b07cffe7ee28731063aa65cbab",
   "policy_version": 1,
   "reference_assets": [
     {
@@ -145068,8 +145068,8 @@
     {
       "classification": "changed",
       "current_path": "data/maps/DewfordTown/map.json",
-      "current_sha256": "7f67ff84f4ee5ee4fd0331cb73f22e438e1991d4045c177554c4012794927915",
-      "current_size": 4927,
+      "current_sha256": "be019bc420c6f03c4423ddd68c6da5c70df4e90f8aa7856303c555fdeac70180",
+      "current_size": 4528,
       "group": "map",
       "kind": "map_data",
       "reference_path": "data/maps/DewfordTown/map.json",
@@ -148962,8 +148962,8 @@
     {
       "classification": "changed",
       "current_path": "data/maps/SlateportCity/map.json",
-      "current_sha256": "2073d975fdfcd474fc761039cd726834119de3bddd9e7f6154ca7b4f2734f1a8",
-      "current_size": 22172,
+      "current_sha256": "a78e582800b1c16bcf6e677c0514b0181c199ab1ce3352ac189ddc92e1df6471",
+      "current_size": 21765,
       "group": "map",
       "kind": "map_data",
       "reference_path": "data/maps/SlateportCity/map.json",
