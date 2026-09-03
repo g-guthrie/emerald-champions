@@ -18,7 +18,8 @@ Design offsets: a trainer above the player's cap by up to OFFSET_ALLOWED[class] 
 (gym leaders +5, rivals/admins +3, ordinary +2).  Only larger gaps are reported.
 
 Gates encoded (read from data/maps/*/scripts.inc, 2026-09-03):
-  * Briney -> Slateport: Letter + Knuckle Badge + Mega Ring.
+  * Briney -> Slateport: Steven's Letter (Inclement order; Brawly waits in the Slateport museum queue).
+  * Route 110 north out of Slateport: Knuckle Badge (road worker).
   * Route 111 north of y=97, Route 112-114, Fiery Path, Meteor Falls, Mt. Chimney, Jagged Pass,
     Lavaridge: road worker until the Dynamo Badge.
   * Desert: Go-Goggles (Flannery).  Ember Path/Ashen Woods: Strength (Heat Badge).
@@ -37,7 +38,7 @@ EARLIEST_BADGES = {
     "Route101": 0, "Route102": 0, "Route103": 0, "Route104": 0, "PetalburgWoods": 0, "PetalburgCity": 0,
     "RustboroCity": 0, "Route115": 0, "Route116": 0, "RusturfTunnel": 1, "OldaleTown": 0, "LittlerootTown": 0,
     "Route106": 1, "DewfordTown": 1, "GraniteCave": 1, "DewfordMeadow": 1, "DewfordManor": 1, "Route105": 5,
-    "Route109": 2, "SlateportCity": 2, "Route110": 2, "MauvilleCity": 2, "Route117": 2, "VerdanturfTown": 2,
+    "Route109": 1, "SlateportCity": 1, "Route110": 2, "MauvilleCity": 2, "Route117": 2, "VerdanturfTown": 2,
     "VerdanturfMeadow": 2, "Route111": 2, "Route118": 2, "Seaspray_Cave": 2, "NewMauville": 3,
     "Route112": 3, "FieryPath": 3, "Route113": 3, "FallarborTown": 3, "Route114": 3, "MeteorFalls": 3,
     "MtChimney": 3, "JaggedPass": 3, "LavaridgeTown": 3,

@@ -35,7 +35,7 @@ failures. That result proves the named mechanics, not campaign playthrough.
 
 ## Progression defects corrected
 
-- Briney's Slateport service now requires Brawly and the actual Mega Ring.
+- Briney sails to Slateport after Steven's Letter (Inclement order: Brawly waits in the Slateport museum queue). Slateport, Route 109 and the Seashore House are authored at chapter cap 20; a road worker closes Route 110 until the Knuckle Badge and another closes Route 111 north until the Dynamo Badge.
 - The Devon Mega reward checks the actual Mega Ring rather than a proxy flag.
 - The National Dex is available from the initial Pokédex; the postgame scene
   is now a research sync instead of a contradictory unlock.

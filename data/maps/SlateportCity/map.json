@@ -558,6 +558,32 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "SlateportCity_EventScript_Greta",
       "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_BRAWLY",
+      "x": 19,
+      "y": 26,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SlateportCity_EventScript_Brawly",
+      "flag": "FLAG_HIDE_SLATEPORT_CITY_BRAWLY"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_MAN_4",
+      "x": 18,
+      "y": 3,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SlateportCity_EventScript_KnuckleGuard",
+      "flag": "FLAG_HIDE_SLATEPORT_CITY_KNUCKLE_GUARD"
     }
   ],
   "warp_events": [
@@ -648,6 +674,42 @@
       "var": "VAR_SLATEPORT_OUTSIDE_MUSEUM_STATE",
       "var_value": "2",
       "script": "SlateportCity_EventScript_ScottBattleTentScene"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 3,
+      "elevation": 3,
+      "var": "VAR_TEMP_4",
+      "var_value": "0",
+      "script": "SlateportCity_EventScript_KnuckleGuardTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 17,
+      "y": 3,
+      "elevation": 3,
+      "var": "VAR_TEMP_4",
+      "var_value": "0",
+      "script": "SlateportCity_EventScript_KnuckleGuardTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 19,
+      "y": 3,
+      "elevation": 3,
+      "var": "VAR_TEMP_4",
+      "var_value": "0",
+      "script": "SlateportCity_EventScript_KnuckleGuardTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 20,
+      "y": 3,
+      "elevation": 3,
+      "var": "VAR_TEMP_4",
+      "var_value": "0",
+      "script": "SlateportCity_EventScript_KnuckleGuardTrigger"
     }
   ],
   "bg_events": [

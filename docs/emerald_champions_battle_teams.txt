@@ -342,100 +342,100 @@ PAWMO @LIFE_ORB IRON_FIST JOLLY PS 2 | THUNDER_PUNCH, MACH_PUNCH, KNOCK_OFF, PRO
 HITMONCHAN @ASSAULT_VEST IRON_FIST ADAMANT PB 3 | DRAIN_PUNCH, MACH_PUNCH, ICE_PUNCH, THUNDER_PUNCH
 PASSIMIAN @CHOICE_SCARF DEFIANT JOLLY PS 3 | CLOSE_COMBAT, KNOCK_OFF, U_TURN, ROCK_SLIDE
 HAWLUCHA @WHITE_HERB UNBURDEN JOLLY PS 5 | CLOSE_COMBAT, ACROBATICS, SWORDS_DANCE, PROTECT
-# ---- E0041 Route109 cap=30 Dynamo Badge
+# ---- E0041 Route109 cap=20 Knuckle Badge
 ## E0041 TRAINER_HUEY class=regular
-plan: Huey's singles run: Drizzle Pelipper opens the rain, Swift Swim Poliwhirl Hypnotizes and punches, and Guts Machoke closes with Facade.
-crack: Electric answers the first two, Flying and Psychic answer Machoke, and the rain runs out if the player stalls Pelipper with Protect.
-PELIPPER @DAMP_ROCK DRIZZLE MODEST SS -1 | HURRICANE, SURF, U_TURN, ROOST
-POLIWHIRL @EVIOLITE SWIFT_SWIM ADAMANT PB -1 | WATERFALL, BRICK_BREAK, HYPNOSIS, ICE_PUNCH
-MACHOKE @FLAME_ORB GUTS ADAMANT PB 0 | FACADE, CLOSE_COMBAT, KNOCK_OFF, BULLET_PUNCH
-# ---- E0042 Route109 cap=30 Dynamo Badge
+plan: Huey's singles run: Rain Dish Wingull opens the rain and Roosts, Adaptability Corphish Aqua Jets under it, and Guts Machop closes with Facade.
+crack: Electric answers the first two, Flying and Psychic answer Machop, and the rain runs out if the player stalls Wingull with Protect.
+WINGULL @DAMP_ROCK RAIN_DISH MODEST SS -1 | RAIN_DANCE, HURRICANE, ICY_WIND, ROOST
+CORPHISH @EVIOLITE ADAPTABILITY ADAMANT PS -1 | AQUA_JET, CRABHAMMER, KNOCK_OFF, PROTECT
+MACHOP @FLAME_ORB GUTS ADAMANT PB 0 | FACADE, BRICK_BREAK, KNOCK_OFF, BULLET_PUNCH
+# ---- E0042 Route109 cap=20 Knuckle Badge
 ## E0042 TRAINER_HAILEY class=regular
-plan: Flaaffy sets both screens and Electrowebs, Huge Power Azumarill and Palpitoad pressure behind them, and Wartortle Shell Smashes once the field is slow.
+plan: Flaaffy sets both screens and Electrowebs, Huge Power Marill and Tympole pressure behind them, and Wartortle Shell Smashes once the field is slow.
 crack: Screen Cleaner, Brick Break or Defog erase the screens, Grass and Electric hit the Water types, and Wartortle after a Smash dies to any strong hit.
 FLAAFFY @LIGHT_CLAY STATIC BOLD WS -2 | LIGHT_SCREEN, REFLECT, ELECTROWEB, THUNDERBOLT
-AZUMARILL @SITRUS_BERRY HUGE_POWER ADAMANT PB -1 | AQUA_JET, PLAY_ROUGH, KNOCK_OFF, PROTECT
-PALPITOAD @EVIOLITE WATER_ABSORB MODEST SB -1 | MUDDY_WATER, EARTH_POWER, SLUDGE_BOMB, PROTECT
+MARILL @SITRUS_BERRY HUGE_POWER ADAMANT PB -1 | AQUA_JET, PLAY_ROUGH, BRICK_BREAK, PROTECT
+TYMPOLE @EVIOLITE WATER_ABSORB MODEST SB -1 | MUDDY_WATER, EARTH_POWER, SLUDGE_BOMB, PROTECT
 WARTORTLE @WHITE_HERB TORRENT MODEST SS 0 | SHELL_SMASH, HYDRO_PUMP, ICE_BEAM, PROTECT
-# ---- E0043 Route109 cap=30 Dynamo Badge
+# ---- E0043 Route109 cap=20 Knuckle Badge
 ## E0043 TRAINER_EDMOND class=regular
-plan: Edmond's Koffing switches off every Ability on the field with Neutralizing Gas, so Choice Scarf Reckless Staravia and Sheer Force Kingler face no Intimidate, Sturdy or Levitate.
+plan: Edmond's Koffing switches off every Ability on the field with Neutralizing Gas, so Choice Scarf Reckless Staravia and Sheer Force Krabby face no Intimidate, Sturdy or Levitate.
 crack: Psychic and Ground hit Koffing, Rock and Electric hit the other two, and Staravia locked into Brave Bird kills itself with recoil.
 KOFFING @EVIOLITE NEUTRALIZING_GAS BOLD WD -1 | SLUDGE_BOMB, WILL_O_WISP, CLEAR_SMOG, PROTECT
 STARAVIA @CHOICE_SCARF RECKLESS ADAMANT PS 0 | BRAVE_BIRD, DOUBLE_EDGE, U_TURN, QUICK_ATTACK
-KINGLER @LIFE_ORB SHEER_FORCE ADAMANT PS -1 | CRABHAMMER, ROCK_SLIDE, X_SCISSOR, PROTECT
-# ---- E0044 Route109 cap=30 Dynamo Badge
+KRABBY @LIFE_ORB SHEER_FORCE ADAMANT PS -1 | CRABHAMMER, ROCK_SLIDE, X_SCISSOR, PROTECT
+# ---- E0044 Route109 cap=20 Knuckle Badge
 ## E0044 TRAINER_RICKY_1 class=casual
-plan: Ricky's singles: Wooper Yawns and Recovers, and Strong Jaw Drednaw bites.
-crack: Grass hits Wooper four times over, and Drednaw is slow enough that Fighting or Grass gets there first.
+plan: Ricky's singles: Wooper Yawns and Recovers, and Strong Jaw Chewtle bites.
+crack: Grass hits Wooper four times over, and Chewtle is slow enough that Fighting or Grass gets there first.
 WOOPER @EVIOLITE WATER_ABSORB IMPISH WD -3 | LIQUIDATION, EARTHQUAKE, YAWN, RECOVER
-DREDNAW @LIFE_ORB STRONG_JAW ADAMANT PS -2 | LIQUIDATION, CRUNCH, ROCK_TOMB, PROTECT
-# ---- E0045 Route109 cap=30 Dynamo Badge
+CHEWTLE @LIFE_ORB STRONG_JAW ADAMANT PS -2 | LIQUIDATION, CRUNCH, ICE_FANG, PROTECT
+# ---- E0045 Route109 cap=20 Knuckle Badge
 ## E0045 TRAINER_LOLA_1 class=regular
-plan: Lola's sunshine: Cherrim sets sun and Helping Hands, Chlorophyll Leafeon doubles its speed, and Soul Heart Luvdisc gets stronger with every knockout.
+plan: Lola's sunshine: Cherubi sets sun and Helping Hands, Chlorophyll Leafeon doubles its speed, and Soul Heart Luvdisc gets stronger with every knockout.
 crack: Rain or Rock removes the sun plan, Fire and Flying hit the Grass types, and Electric ends Luvdisc.
 LUVDISC @FOCUS_SASH SOUL_HEART TIMID SS -1 | ICY_WIND, DRAINING_KISS, HYDRO_PUMP, PROTECT
-CHERRIM @HEAT_ROCK FLOWER_GIFT MODEST SS -1 | SUNNY_DAY, WEATHER_BALL, ENERGY_BALL, HELPING_HAND
+CHERUBI @HEAT_ROCK CHLOROPHYLL MODEST SS -1 | SUNNY_DAY, ENERGY_BALL, DAZZLING_GLEAM, HELPING_HAND
 LEAFEON @LIFE_ORB CHLOROPHYLL ADAMANT PS 0 | LEAF_BLADE, DOUBLE_EDGE, X_SCISSOR, QUICK_ATTACK
-# ---- E0046 Route109 cap=30 Dynamo Badge
+# ---- E0046 Route109 cap=20 Knuckle Badge
 ## E0046 TRAINER_CHANDLER class=regular
-plan: Chandler hatched a Phione: it sets rain and Surfs beside Water Absorb Lanturn, which heals off every wave, while Swift Swim Floatzel Wave Crashes.
-crack: Grass hits all three, Electric hits Phione and Floatzel, and Lanturn absorbs only Water, not Grass Knot.
+plan: Chandler hatched a Phione: it sets rain and Surfs beside Water Absorb Chinchou, which heals off every wave, while Swift Swim Buizel Aqua Jets.
+crack: Grass hits all three, Electric hits Phione and Buizel, and Chinchou absorbs only Water, not Grass Knot.
 PHIONE @DAMP_ROCK HYDRATION MODEST SS -1 | RAIN_DANCE, SURF, ICE_BEAM, REST
-LANTURN @ASSAULT_VEST WATER_ABSORB MODEST SB -1 | SURF, THUNDERBOLT, ICE_BEAM, VOLT_SWITCH
-FLOATZEL @LIFE_ORB SWIFT_SWIM JOLLY PS 0 | WAVE_CRASH, ICE_PUNCH, CRUNCH, PROTECT
-# ---- E0047 Route109_SeashoreHouse cap=30 Dynamo Badge
+CHINCHOU @ASSAULT_VEST WATER_ABSORB MODEST SB -1 | SURF, DISCHARGE, ICE_BEAM, CHARGE_BEAM
+BUIZEL @LIFE_ORB SWIFT_SWIM JOLLY PS 0 | LIQUIDATION, AQUA_JET, ICE_PUNCH, PROTECT
+# ---- E0047 Route109_SeashoreHouse cap=20 Knuckle Badge
 ## E0047 TRAINER_DWAYNE class=casual
-plan: Dwayne's singles: Magmar burns with Flamethrower and Jynx Lovely Kisses.
-crack: Water and Rock end Magmar, Fire and Steel end Jynx, and a Lum Berry answers the Kiss.
-MAGMAR @EVIOLITE FLAME_BODY MODEST SS 0 | FLAMETHROWER, PSYCHIC, FOCUS_BLAST, PROTECT
-JYNX @FOCUS_SASH DRY_SKIN TIMID SS 0 | ICE_BEAM, PSYCHIC, LOVELY_KISS, PROTECT
-# ---- E0048 Route109_SeashoreHouse cap=30 Dynamo Badge
+plan: Dwayne's singles: Magby burns with Flamethrower and Smoochum Fake Outs into Ice Beam.
+crack: Water and Rock end Magby, Fire and Steel end Smoochum, and Inner Focus ignores the Fake Out.
+MAGBY @EVIOLITE FLAME_BODY MODEST SS 0 | FLAMETHROWER, CLEAR_SMOG, CONFUSE_RAY, PROTECT
+SMOOCHUM @FOCUS_SASH FOREWARN TIMID SS 0 | ICE_BEAM, PSYCHIC, FAKE_OUT, PROTECT
+# ---- E0048 Route109_SeashoreHouse cap=20 Knuckle Badge
 ## E0048 TRAINER_JOHANNA class=regular
-plan: Johanna's elegance: Roselia Sleep Powders, Pixilate Sylveon spreads Hyper Voice, and Competitive Milotic punishes any Intimidate.
-crack: Steel and Poison wall Sylveon, Fire and Flying hit Roselia, and Electric or Grass drops Milotic; never Intimidate the Milotic.
-ROSELIA @FOCUS_SASH NATURAL_CURE TIMID SS -1 | SLEEP_POWDER, GIGA_DRAIN, SLUDGE_BOMB, PROTECT
-SYLVEON @THROAT_SPRAY PIXILATE MODEST SS -1 | HYPER_VOICE, PSYSHOCK, MYSTICAL_FIRE, PROTECT
-MILOTIC @LEFTOVERS COMPETITIVE BOLD WD 0 | MUDDY_WATER, ICE_BEAM, RECOVER, PROTECT
-# ---- E0049 Route109_SeashoreHouse cap=30 Dynamo Badge
+plan: Johanna's elegance: Budew Sleep Powders, Pixilate Sylveon spreads Hyper Voice, and Adaptability Feebas hides a real Dragon Pulse behind its Eviolite.
+crack: Steel and Poison wall Sylveon, Fire and Flying hit Budew, and Electric or Grass drops Feebas.
+BUDEW @FOCUS_SASH NATURAL_CURE TIMID SS -1 | SLEEP_POWDER, GIGA_DRAIN, SLUDGE_BOMB, PROTECT
+SYLVEON @THROAT_SPRAY PIXILATE MODEST SS -1 | HYPER_VOICE, DRAINING_KISS, SHADOW_BALL, PROTECT
+FEEBAS @EVIOLITE ADAPTABILITY MODEST SS 0 | MUDDY_WATER, ICE_BEAM, DRAGON_PULSE, PROTECT
+# ---- E0049 Route109_SeashoreHouse cap=20 Knuckle Badge
 ## E0049 TRAINER_SIMON class=regular
-plan: Simon's slow tanks: Unaware Quagsire ignores boosts, Stamina Mudsdale grows tougher, and Prinplup's Icy Wind keeps everyone slower than they are.
-crack: Grass hits Quagsire for quadruple, Water and Grass hit Mudsdale, and special attacks ignore Stamina entirely.
-QUAGSIRE @LEFTOVERS UNAWARE RELAXED WD -1 | LIQUIDATION, STOMPING_TANTRUM, YAWN, RECOVER
-MUDSDALE @ASSAULT_VEST STAMINA ADAMANT PB 0 | HIGH_HORSEPOWER, HEAVY_SLAM, ROCK_SLIDE, CLOSE_COMBAT
+plan: Simon's slow tanks: Unaware Quagsire ignores boosts, Stamina Mudbray grows tougher, and Prinplup's Icy Wind keeps everyone slower than they are.
+crack: Grass hits Quagsire for quadruple, Water and Grass hit Mudbray, and special attacks ignore Stamina entirely.
+QUAGSIRE @LEFTOVERS UNAWARE RELAXED WD 0 | LIQUIDATION, EARTHQUAKE, YAWN, RECOVER
+MUDBRAY @EVIOLITE STAMINA ADAMANT PB 0 | HIGH_HORSEPOWER, HEAVY_SLAM, ROCK_SLIDE, CLOSE_COMBAT
 PRINPLUP @FOCUS_SASH COMPETITIVE MODEST SS -1 | HYDRO_PUMP, ICE_BEAM, ICY_WIND, PROTECT
-# ---- E0050 SlateportCity_OceanicMuseum_2F cap=30 Dynamo Badge
+# ---- E0050 SlateportCity_OceanicMuseum_2F cap=20 Knuckle Badge
 ## E0050 TRAINER_GRUNT_MUSEUM_1 class=grunt
-plan: Golbat Taunts and U-turns while Speed Boost Sharpedo snowballs and Gluttony Alolan Raticate chips with Super Fang and Sucker Punch.
-crack: Electric and Rock hit Golbat and Sharpedo, Fighting flattens Raticate, and Sharpedo folds to any hit once it is targeted.
-GOLBAT @EVIOLITE INNER_FOCUS JOLLY PS 0 | BRAVE_BIRD, POISON_FANG, TAUNT, U_TURN
-SHARPEDO @LIFE_ORB SPEED_BOOST ADAMANT PS 0 | CRUNCH, WATERFALL, ICE_FANG, PROTECT
-RATICATE_ALOLA @FIGY_BERRY GLUTTONY ADAMANT PB -1 | SUPER_FANG, CRUNCH, SUCKER_PUNCH, TAUNT
-# ---- E0051 SlateportCity_OceanicMuseum_2F cap=30 Dynamo Badge · Oceanic Museum story
+plan: Zubat Taunts and U-turns while Speed Boost Carvanha snowballs and Gluttony Alolan Rattata chips with Super Fang and Sucker Punch.
+crack: Electric and Rock hit Zubat and Carvanha, Fighting flattens Rattata, and Carvanha folds to any hit once it is targeted.
+ZUBAT @EVIOLITE INNER_FOCUS JOLLY PS 0 | BRAVE_BIRD, POISON_FANG, TAUNT, U_TURN
+CARVANHA @LIFE_ORB SPEED_BOOST ADAMANT PS 0 | CRUNCH, LIQUIDATION, ICE_FANG, PROTECT
+RATTATA_ALOLA @FIGY_BERRY GLUTTONY ADAMANT PB -1 | SUPER_FANG, CRUNCH, SUCKER_PUNCH, TAUNT
+# ---- E0051 SlateportCity_OceanicMuseum_2F cap=20 Knuckle Badge · Oceanic Museum story
 ## E0051 TRAINER_GRUNT_MUSEUM_2 class=grunt
 plan: Alolan Grimer Knocks Off items and blocks, Mega Launcher Clauncher fires Aura Sphere and Water Pulse, and Sheer Force Croconaw punches with a Life Orb.
 crack: Ground and Psychic hit Grimer, Electric and Grass hit the Water pair, and Croconaw's Life Orb burns it down while it swings.
 GRIMER_ALOLA @ASSAULT_VEST POISON_TOUCH ADAMANT PB 0 | KNOCK_OFF, POISON_JAB, SHADOW_SNEAK, ICE_PUNCH
 CLAUNCHER @EXPERT_BELT MEGA_LAUNCHER MODEST SS -1 | WATER_PULSE, AURA_SPHERE, ICE_BEAM, PROTECT
 CROCONAW @LIFE_ORB SHEER_FORCE ADAMANT PS 0 | WATERFALL, ICE_PUNCH, CRUNCH, PROTECT
-# ---- E0052 SlateportCity_OceanicMuseum_2F cap=30 Dynamo Badge
+# ---- E0052 SlateportCity_OceanicMuseum_2F cap=20 Knuckle Badge
 ## E0052 TRAINER_ARCHIE_SLATEPORT class=leader
-plan: Archie's rain: Drizzle Pelipper brings Tailwind and Wide Guard, Swift Swim Ludicolo Fake Outs and fires Hydro Pump, Adaptability Crawdaunt Swords Dances behind a Sash, Tentacruel controls speed, Crobat Taunts, and Mega Sharpedo's Strong Jaw Crunch closes.
-crack: Electric hits five of the six, Grass hits the Water core, Tailwind and rain both run out if the player stalls, and Crawdaunt at plus two is still frail once its Sash is gone.
-PELIPPER @DAMP_ROCK DRIZZLE BOLD WS 1 | HURRICANE, WEATHER_BALL, TAILWIND, WIDE_GUARD
-LUDICOLO @LIFE_ORB SWIFT_SWIM MODEST SS 2 | FAKE_OUT, HYDRO_PUMP, GIGA_DRAIN, ICE_BEAM
-CRAWDAUNT @FOCUS_SASH ADAPTABILITY ADAMANT PS 2 | CRABHAMMER, KNOCK_OFF, AQUA_JET, SWORDS_DANCE
-TENTACRUEL @BLACK_SLUDGE CLEAR_BODY TIMID SS 3 | HYDRO_PUMP, SLUDGE_BOMB, ICY_WIND, PROTECT
-CROBAT @SITRUS_BERRY INNER_FOCUS JOLLY PS 3 | BRAVE_BIRD, CROSS_POISON, TAUNT, U_TURN
-SHARPEDO @SHARPEDONITE SPEED_BOOST ADAMANT PS 4 | CRUNCH, WATERFALL, ICE_FANG, PROTECT
-# ---- E0053 SlateportCity cap=30 Dynamo Badge
+plan: Archie's rain: Rain Dish Wingull brings the weather and Roosts, Swift Swim Lombre Fake Outs and fires Hydro Pump, Adaptability Corphish Dragon Dances behind a Sash, Tentacool controls speed, Golbat Taunts, and Speed Boost Carvanha's Crunch closes once nothing outspeeds it.
+crack: Electric hits five of the six, Grass hits the Water core, rain runs out if the player stalls, and Corphish at plus one is still frail once its Sash is gone.
+WINGULL @DAMP_ROCK RAIN_DISH BOLD WS 1 | RAIN_DANCE, HURRICANE, ICY_WIND, ROOST
+LOMBRE @LIFE_ORB SWIFT_SWIM MODEST SS 2 | FAKE_OUT, HYDRO_PUMP, GIGA_DRAIN, ICE_BEAM
+CORPHISH @FOCUS_SASH ADAPTABILITY ADAMANT PS 2 | CRABHAMMER, KNOCK_OFF, AQUA_JET, DRAGON_DANCE
+TENTACOOL @BLACK_SLUDGE CLEAR_BODY TIMID SS 3 | HYDRO_PUMP, ICY_WIND, KNOCK_OFF, PROTECT
+GOLBAT @SITRUS_BERRY INNER_FOCUS JOLLY PS 3 | BRAVE_BIRD, POISON_FANG, TAUNT, U_TURN
+CARVANHA @EXPERT_BELT SPEED_BOOST ADAMANT PS 4 | CRUNCH, LIQUIDATION, ICE_FANG, PROTECT
+# ---- E0053 SlateportCity cap=20 Knuckle Badge
 ## E0053 TRAINER_GRETA_SLATEPORT class=brain
-plan: Greta's Frontier preview: Choice Scarf Moxie Heracross snowballs, Umbreon Wishes and Snarls, Wonder Guard Shedinja walls anything without the right coverage, and Levitate Haunter controls speed with Icy Wind.
-crack: Flying hits Heracross, Fighting hits Umbreon, Shedinja dies to Fire, Rock, Ghost, Dark, Flying, burn, poison or sand, and Haunter is frail.
+plan: Greta's Frontier preview: Choice Scarf Moxie Heracross snowballs, Umbreon Wishes and Snarls, Wonder Guard Shedinja walls anything without the right coverage, and Levitate Gastly controls speed with Icy Wind.
+crack: Flying hits Heracross, Fighting hits Umbreon, Shedinja dies to Fire, Rock, Ghost, Dark, Flying, burn, poison or sand, and Gastly is frail.
 HERACROSS @CHOICE_SCARF MOXIE JOLLY PS 2 | CLOSE_COMBAT, MEGAHORN, ROCK_SLIDE, KNOCK_OFF
 UMBREON @LEFTOVERS INNER_FOCUS CALM WS 1 | FOUL_PLAY, SNARL, WISH, PROTECT
 SHEDINJA @FOCUS_SASH WONDER_GUARD ADAMANT PS 1 | SHADOW_SNEAK, X_SCISSOR, WILL_O_WISP, PROTECT
-HAUNTER @LIFE_ORB LEVITATE TIMID SS 3 | SHADOW_BALL, SLUDGE_BOMB, ICY_WIND, PROTECT
+GASTLY @LIFE_ORB LEVITATE TIMID SS 3 | SHADOW_BALL, SLUDGE_BOMB, ICY_WIND, PROTECT
 # ---- E0054 Route110 cap=30 Dynamo Badge
 ## E0054 TRAINER_ISABEL_1 class=regular
 plan: The Pokefans bring their pampered pets: Normalize Delcatty paralyzes Ground types, Wigglytuff and Audino spread Hyper Voice, Clefable redirects, and Granbull and Boltund bite.
@@ -2702,7 +2702,7 @@ crack: Electric and Rock hit Crobat, Electric and Grass hit Clawitzer, Ground an
 CROBAT @BLACK_SLUDGE INFILTRATOR JOLLY PS -1 | BRAVE_BIRD, CROSS_POISON, TAUNT, U_TURN
 CLAWITZER @LIFE_ORB MEGA_LAUNCHER MODEST SS -1 | WATER_PULSE, AURA_SPHERE, DARK_PULSE, PROTECT
 MUK_ALOLA @FIGY_BERRY GLUTTONY BRAVE PB -1 | KNOCK_OFF, POISON_JAB, CURSE, PROTECT
-EELEKTROSS @CLEAR_AMULET LEVITATE ADAMANT PS -1 | WILD_CHARGE, CRUNCH, ROCK_SLIDE, PROTECT
+EELEKTROSS @EELEKTROSSITE LEVITATE ADAMANT PS -1 | WILD_CHARGE, CRUNCH, ROCK_SLIDE, PROTECT
 # ---- E0346 AquaHideout_B2F cap=60 Mind Badge
 ## E0346 TRAINER_GRUNT_AQUA_HIDEOUT_6 class=grunt
 plan: Dry Skin Toxicroak Fake Outs, Regenerator Toxapex Hazes and Wide Guards, schooled Wishiwashi spreads Muddy Water, and Falinks commits with No Retreat.
@@ -3542,8 +3542,8 @@ KYOGRE @BLUE_ORB DRIZZLE MODEST SS 3 | ORIGIN_PULSE, ICE_BEAM, THUNDER, PROTECT
 GOODRA @LEFTOVERS HYDRATION MODEST SS 1 | DRAGON_PULSE, SLUDGE_BOMB, THUNDER, PROTECT
 TENTACRUEL @BLACK_SLUDGE RAIN_DISH TIMID SS 1 | HYDRO_PUMP, SLUDGE_BOMB, ICY_WIND, PROTECT
 POLIWRATH @LIFE_ORB SWIFT_SWIM ADAMANT PS 1 | WATERFALL, CLOSE_COMBAT, ROCK_SLIDE, PROTECT
-SHARPEDO @FOCUS_SASH SPEED_BOOST ADAMANT PS 2 | CRUNCH, LIQUIDATION, ICE_FANG, PROTECT
-EELEKTROSS @EELEKTROSSITE LEVITATE ADAMANT PS 2 | WILD_CHARGE, CRUNCH, ROCK_SLIDE, PROTECT
+SHARPEDO @SHARPEDONITE SPEED_BOOST ADAMANT PS 2 | CRUNCH, LIQUIDATION, ICE_FANG, PROTECT
+EELEKTROSS @FOCUS_SASH LEVITATE ADAMANT PS 2 | WILD_CHARGE, CRUNCH, ROCK_SLIDE, PROTECT
 # ---- E0459 SootopolisCity_Gym_B1F cap=70 Rain Badge
 ## E0459 TRAINER_ANDREA class=gym
 plan: Andrea's Sootopolis opener: Skill Link Cloyster Shell Smashes, Floatzel Wave Crashes, Jellicent Water Spouts, and Simipour Nasty Plots.

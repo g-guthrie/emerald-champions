@@ -68,8 +68,8 @@
   "semantic_summary": {
     "objects_exact_maps": 232,
     "objects_adapted_maps": 308,
-    "coord_events_exact_maps": 526,
-    "coord_events_adapted_maps": 14,
+    "coord_events_exact_maps": 525,
+    "coord_events_adapted_maps": 15,
     "bg_events_exact_maps": 478,
     "bg_events_adapted_maps": 62
   },
@@ -28410,6 +28410,20 @@
             "0",
             "DewfordTown_EventScript_OldRodFisherman",
             "0",
+            null
+          ],
+          [
+            "OBJ_EVENT_GFX_MAN_2",
+            8,
+            18,
+            3,
+            "MOVEMENT_TYPE_NONE",
+            0,
+            0,
+            "TRAINER_TYPE_NONE",
+            "0",
+            "DewfordTown_EventScript_GymGuide",
+            "FLAG_HIDE_SLATEPORT_CITY_BRAWLY",
             null
           ],
           [
@@ -153271,6 +153285,20 @@
             "LOCALID_SLATEPORT_GRUNT_2"
           ],
           [
+            "OBJ_EVENT_GFX_BRAWLY",
+            19,
+            26,
+            3,
+            "MOVEMENT_TYPE_FACE_RIGHT",
+            0,
+            0,
+            "TRAINER_TYPE_NONE",
+            "0",
+            "SlateportCity_EventScript_Brawly",
+            "FLAG_HIDE_SLATEPORT_CITY_BRAWLY",
+            null
+          ],
+          [
             "OBJ_EVENT_GFX_CAMERAMAN",
             29,
             13,
@@ -153394,6 +153422,20 @@
             "0",
             "SlateportCity_EventScript_Man2",
             "0",
+            null
+          ],
+          [
+            "OBJ_EVENT_GFX_MAN_4",
+            18,
+            3,
+            3,
+            "MOVEMENT_TYPE_FACE_DOWN",
+            0,
+            0,
+            "TRAINER_TYPE_NONE",
+            "0",
+            "SlateportCity_EventScript_KnuckleGuard",
+            "FLAG_HIDE_SLATEPORT_CITY_KNUCKLE_GUARD",
             null
           ],
           [
@@ -153663,7 +153705,7 @@
             null
           ]
         ],
-        "coord_events_classification": "exact",
+        "coord_events_classification": "adapted",
         "source_coord_events": [
           [
             "trigger",
@@ -153684,6 +153726,42 @@
             "VAR_SLATEPORT_OUTSIDE_MUSEUM_STATE",
             "2",
             "SlateportCity_EventScript_ScottBattleTentScene"
+          ],
+          [
+            "trigger",
+            16,
+            3,
+            3,
+            "VAR_TEMP_4",
+            "0",
+            "SlateportCity_EventScript_KnuckleGuardTrigger"
+          ],
+          [
+            "trigger",
+            17,
+            3,
+            3,
+            "VAR_TEMP_4",
+            "0",
+            "SlateportCity_EventScript_KnuckleGuardTrigger"
+          ],
+          [
+            "trigger",
+            19,
+            3,
+            3,
+            "VAR_TEMP_4",
+            "0",
+            "SlateportCity_EventScript_KnuckleGuardTrigger"
+          ],
+          [
+            "trigger",
+            20,
+            3,
+            3,
+            "VAR_TEMP_4",
+            "0",
+            "SlateportCity_EventScript_KnuckleGuardTrigger"
           ]
         ],
         "bg_events_classification": "exact",

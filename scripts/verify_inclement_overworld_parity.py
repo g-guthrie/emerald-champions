@@ -14,6 +14,11 @@ ROOT = Path(__file__).resolve().parents[1]
 # Visible objects Champions deliberately places where Inclement had none. Each entry is a
 # reviewed decision with its reason, keyed by (graphics, x, y).
 REVIEWED_EXTRA_OBJECTS = {
+    "SlateportCity": {
+        ("OBJ_EVENT_GFX_MAN_4", 18, 3):
+            "Champions road worker who closes Route 110 (cap-30 chapter) until the Knuckle "
+            "Badge; Inclement sends the player to Slateport before Brawly and never gated it",
+    },
     "Route111": {
         ("OBJ_EVENT_GFX_MAN_4", 16, 97):
             "Champions road worker who closes Route 111 north (cap-40 chapter) until the "
@@ -23,20 +28,6 @@ REVIEWED_EXTRA_OBJECTS = {
         ("OBJ_EVENT_GFX_BREAKABLE_ROCK", 6, 7):
             "vanilla Rock Smash boulder; Inclement had an Aerodactylite sparkle here and "
             "Champions supplies that stone through the Mega archive instead",
-    },
-}
-
-# Visible Inclement objects Champions deliberately removes, keyed by (graphics, x, y).
-REVIEWED_MISSING_OBJECTS = {
-    "SlateportCity": {
-        ("OBJ_EVENT_GFX_BRAWLY", 19, 26):
-            "Inclement parked Brawly in the museum queue so Slateport opened before the "
-            "Knuckle Badge; Champions keeps Brawly in his Gym because Slateport trainers "
-            "are authored at chapter cap 30 (two badges)",
-    },
-    "DewfordTown": {
-        ("OBJ_EVENT_GFX_MAN_2", 8, 18):
-            "the guide who blocked the Gym door while Brawly was in Slateport",
     },
 }
 
@@ -279,13 +270,7 @@ def main() -> None:
             if event.get("graphics_id") not in ITEM_MARKER_GRAPHICS
             and (event.get("graphics_id"), event.get("x"), event.get("y")) not in reviewed_extra
         ]
-        reviewed_missing = REVIEWED_MISSING_OBJECTS.get(name, {})
-        fields = manifest["visual_object_fields"]
-        gx, gy = fields.index("x"), fields.index("y")
-        expected_object_rows = [
-            row for row in expected_object_rows
-            if row[0] not in ITEM_MARKER_GRAPHICS and (row[0], row[gx], row[gy]) not in reviewed_missing
-        ]
+        expected_object_rows = [row for row in expected_object_rows if row[0] not in ITEM_MARKER_GRAPHICS]
         objects = Counter(
             normalize_object([event.get(field) for field in manifest["visual_object_fields"]])
             for event in actual_object_events

@@ -1635,8 +1635,8 @@ physical_group_id: BATTLE_037_ROUTE_109_HUEY
 proposed_encounter_id: BATTLE_037_ROUTE_109_HUEY
 campaign_order: 41
 atlas_ordinal: 41
-chapter: Dynamo Badge
-strict_cap: 30
+chapter: Knuckle Badge
+strict_cap: 20
 location: Route109
 requirement: optional single
 status: master_audited_ready_for_implementation
@@ -1646,12 +1646,12 @@ difficulty_observed: UNPLAYED
 fatigue_role: ordinary_standard
 battle_class: regular
 ai_profile: sharp
-primary_question: Can the player beat this regular team (Pelipper, Poliwhirl, Machoke) on its own terms: Huey's singles run: Drizzle Pelipper opens the rain, Swift Swim Poliwhirl Hypnotizes and punches, and Guts Machoke closes with Facade.
-theme_and_tempo: Huey's singles run: Drizzle Pelipper opens the rain, Swift Swim Poliwhirl Hypnotizes and punches, and Guts Machoke closes with Facade.
-intentional_weakness: Electric answers the first two, Flying and Psychic answer Machoke, and the rain runs out if the player stalls Pelipper with Protect.
-first_loss_lesson: Electric answers the first two, Flying and Psychic answer Machoke, and the rain runs out if the player stalls Pelipper with Protect.
-strongest_part: Huey's singles run: Drizzle Pelipper opens the rain, Swift Swim Poliwhirl Hypnotizes and punches, and Guts Machoke closes with Facade.
-weakest_link: Electric answers the first two, Flying and Psychic answer Machoke, and the rain runs out if the player stalls Pelipper with Protect.
+primary_question: Can the player beat this regular team (Wingull, Corphish, Machop) on its own terms: Huey's singles run: Rain Dish Wingull opens the rain and Roosts, Adaptability Corphish Aqua Jets under it, and Guts Machop closes with Facade.
+theme_and_tempo: Huey's singles run: Rain Dish Wingull opens the rain and Roosts, Adaptability Corphish Aqua Jets under it, and Guts Machop closes with Facade.
+intentional_weakness: Electric answers the first two, Flying and Psychic answer Machop, and the rain runs out if the player stalls Wingull with Protect.
+first_loss_lesson: Electric answers the first two, Flying and Psychic answer Machop, and the rain runs out if the player stalls Wingull with Protect.
+strongest_part: Huey's singles run: Rain Dish Wingull opens the rain and Roosts, Adaptability Corphish Aqua Jets under it, and Guts Machop closes with Facade.
+weakest_link: Electric answers the first two, Flying and Psychic answer Machop, and the rain runs out if the player stalls Wingull with Protect.
 competitive_references: Hand-authored 2026-09 campaign rebuild against the pinned Champions learnsets
 dialogue_status: implemented_and_width_checked
 reservation_status: hand-authored; species, Mega and legendary placement tracked in docs/emerald_champions_battle_teams.txt
@@ -1661,9 +1661,9 @@ branches:
 trainer_id: TRAINER_HUEY
 format: single
 team:
-  1. SPECIES_PELIPPER @ ITEM_DAMP_ROCK | level_offset=-1 | ability=ABILITY_DRIZZLE | nature=NATURE_MODEST | stat_points=2/0/0/32/0/32 | moves=MOVE_HURRICANE,MOVE_SURF,MOVE_U_TURN,MOVE_ROOST
-  2. SPECIES_POLIWHIRL @ ITEM_EVIOLITE | level_offset=-1 | ability=ABILITY_SWIFT_SWIM | nature=NATURE_ADAMANT | stat_points=32/32/2/0/0/0 | moves=MOVE_WATERFALL,MOVE_BRICK_BREAK,MOVE_HYPNOSIS,MOVE_ICE_PUNCH
-  3. SPECIES_MACHOKE @ ITEM_FLAME_ORB | level_offset=0 | ability=ABILITY_GUTS | nature=NATURE_ADAMANT | stat_points=32/32/2/0/0/0 | moves=MOVE_FACADE,MOVE_CLOSE_COMBAT,MOVE_KNOCK_OFF,MOVE_BULLET_PUNCH
+  1. SPECIES_WINGULL @ ITEM_DAMP_ROCK | level_offset=-1 | ability=ABILITY_RAIN_DISH | nature=NATURE_MODEST | stat_points=2/0/0/32/0/32 | moves=MOVE_RAIN_DANCE,MOVE_HURRICANE,MOVE_ICY_WIND,MOVE_ROOST
+  2. SPECIES_CORPHISH @ ITEM_EVIOLITE | level_offset=-1 | ability=ABILITY_ADAPTABILITY | nature=NATURE_ADAMANT | stat_points=2/32/0/0/0/32 | moves=MOVE_AQUA_JET,MOVE_CRABHAMMER,MOVE_KNOCK_OFF,MOVE_PROTECT
+  3. SPECIES_MACHOP @ ITEM_FLAME_ORB | level_offset=0 | ability=ABILITY_GUTS | nature=NATURE_ADAMANT | stat_points=32/32/2/0/0/0 | moves=MOVE_FACADE,MOVE_BRICK_BREAK,MOVE_KNOCK_OFF,MOVE_BULLET_PUNCH
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -1672,8 +1672,8 @@ physical_group_id: BATTLE_038_ROUTE_109_HAILEY
 proposed_encounter_id: BATTLE_038_ROUTE_109_HAILEY
 campaign_order: 42
 atlas_ordinal: 42
-chapter: Dynamo Badge
-strict_cap: 30
+chapter: Knuckle Badge
+strict_cap: 20
 location: Route109
 requirement: optional double
 status: master_audited_ready_for_implementation
@@ -1683,11 +1683,11 @@ difficulty_observed: UNPLAYED
 fatigue_role: ordinary_standard
 battle_class: regular
 ai_profile: sharp
-primary_question: Can the player beat this regular team (Flaaffy, Azumarill, Palpitoad, Wartortle) on its own terms: Flaaffy sets both screens and Electrowebs, Huge Power Azumarill and Palpitoad pressure behind them, and Wartortle Shell Smashes once the field is slow.
-theme_and_tempo: Flaaffy sets both screens and Electrowebs, Huge Power Azumarill and Palpitoad pressure behind them, and Wartortle Shell Smashes once the field is slow.
+primary_question: Can the player beat this regular team (Flaaffy, Marill, Tympole, Wartortle) on its own terms: Flaaffy sets both screens and Electrowebs, Huge Power Marill and Tympole pressure behind them, and Wartortle Shell Smashes once the field is slow.
+theme_and_tempo: Flaaffy sets both screens and Electrowebs, Huge Power Marill and Tympole pressure behind them, and Wartortle Shell Smashes once the field is slow.
 intentional_weakness: Screen Cleaner, Brick Break or Defog erase the screens, Grass and Electric hit the Water types, and Wartortle after a Smash dies to any strong hit.
 first_loss_lesson: Screen Cleaner, Brick Break or Defog erase the screens, Grass and Electric hit the Water types, and Wartortle after a Smash dies to any strong hit.
-strongest_part: Flaaffy sets both screens and Electrowebs, Huge Power Azumarill and Palpitoad pressure behind them, and Wartortle Shell Smashes once the field is slow.
+strongest_part: Flaaffy sets both screens and Electrowebs, Huge Power Marill and Tympole pressure behind them, and Wartortle Shell Smashes once the field is slow.
 weakest_link: Screen Cleaner, Brick Break or Defog erase the screens, Grass and Electric hit the Water types, and Wartortle after a Smash dies to any strong hit.
 competitive_references: Hand-authored 2026-09 campaign rebuild against the pinned Champions learnsets
 dialogue_status: implemented_and_width_checked
@@ -1699,8 +1699,8 @@ trainer_id: TRAINER_HAILEY
 format: double
 team:
   1. SPECIES_FLAAFFY @ ITEM_LIGHT_CLAY | level_offset=-2 | ability=ABILITY_STATIC | nature=NATURE_BOLD | stat_points=32/0/2/0/32/0 | moves=MOVE_LIGHT_SCREEN,MOVE_REFLECT,MOVE_ELECTROWEB,MOVE_THUNDERBOLT
-  2. SPECIES_AZUMARILL @ ITEM_SITRUS_BERRY | level_offset=-1 | ability=ABILITY_HUGE_POWER | nature=NATURE_ADAMANT | stat_points=32/32/2/0/0/0 | moves=MOVE_AQUA_JET,MOVE_PLAY_ROUGH,MOVE_KNOCK_OFF,MOVE_PROTECT
-  3. SPECIES_PALPITOAD @ ITEM_EVIOLITE | level_offset=-1 | ability=ABILITY_WATER_ABSORB | nature=NATURE_MODEST | stat_points=32/0/2/32/0/0 | moves=MOVE_MUDDY_WATER,MOVE_EARTH_POWER,MOVE_SLUDGE_BOMB,MOVE_PROTECT
+  2. SPECIES_MARILL @ ITEM_SITRUS_BERRY | level_offset=-1 | ability=ABILITY_HUGE_POWER | nature=NATURE_ADAMANT | stat_points=32/32/2/0/0/0 | moves=MOVE_AQUA_JET,MOVE_PLAY_ROUGH,MOVE_BRICK_BREAK,MOVE_PROTECT
+  3. SPECIES_TYMPOLE @ ITEM_EVIOLITE | level_offset=-1 | ability=ABILITY_WATER_ABSORB | nature=NATURE_MODEST | stat_points=32/0/2/32/0/0 | moves=MOVE_MUDDY_WATER,MOVE_EARTH_POWER,MOVE_SLUDGE_BOMB,MOVE_PROTECT
   4. SPECIES_WARTORTLE @ ITEM_WHITE_HERB | level_offset=0 | ability=ABILITY_TORRENT | nature=NATURE_MODEST | stat_points=2/0/0/32/0/32 | moves=MOVE_SHELL_SMASH,MOVE_HYDRO_PUMP,MOVE_ICE_BEAM,MOVE_PROTECT
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
@@ -1710,8 +1710,8 @@ physical_group_id: BATTLE_039_ROUTE_109_EDMOND
 proposed_encounter_id: BATTLE_039_ROUTE_109_EDMOND
 campaign_order: 43
 atlas_ordinal: 43
-chapter: Dynamo Badge
-strict_cap: 30
+chapter: Knuckle Badge
+strict_cap: 20
 location: Route109
 requirement: optional double
 status: master_audited_ready_for_implementation
@@ -1721,11 +1721,11 @@ difficulty_observed: UNPLAYED
 fatigue_role: ordinary_standard
 battle_class: regular
 ai_profile: sharp
-primary_question: Can the player beat this regular team (Koffing, Staravia, Kingler) on its own terms: Edmond's Koffing switches off every Ability on the field with Neutralizing Gas, so Choice Scarf Reckless Staravia and Sheer Force Kingler face no Intimidate, Sturdy or Levitate.
-theme_and_tempo: Edmond's Koffing switches off every Ability on the field with Neutralizing Gas, so Choice Scarf Reckless Staravia and Sheer Force Kingler face no Intimidate, Sturdy or Levitate.
+primary_question: Can the player beat this regular team (Koffing, Staravia, Krabby) on its own terms: Edmond's Koffing switches off every Ability on the field with Neutralizing Gas, so Choice Scarf Reckless Staravia and Sheer Force Krabby face no Intimidate, Sturdy or Levitate.
+theme_and_tempo: Edmond's Koffing switches off every Ability on the field with Neutralizing Gas, so Choice Scarf Reckless Staravia and Sheer Force Krabby face no Intimidate, Sturdy or Levitate.
 intentional_weakness: Psychic and Ground hit Koffing, Rock and Electric hit the other two, and Staravia locked into Brave Bird kills itself with recoil.
 first_loss_lesson: Psychic and Ground hit Koffing, Rock and Electric hit the other two, and Staravia locked into Brave Bird kills itself with recoil.
-strongest_part: Edmond's Koffing switches off every Ability on the field with Neutralizing Gas, so Choice Scarf Reckless Staravia and Sheer Force Kingler face no Intimidate, Sturdy or Levitate.
+strongest_part: Edmond's Koffing switches off every Ability on the field with Neutralizing Gas, so Choice Scarf Reckless Staravia and Sheer Force Krabby face no Intimidate, Sturdy or Levitate.
 weakest_link: Psychic and Ground hit Koffing, Rock and Electric hit the other two, and Staravia locked into Brave Bird kills itself with recoil.
 competitive_references: Hand-authored 2026-09 campaign rebuild against the pinned Champions learnsets
 dialogue_status: implemented_and_width_checked
@@ -1738,7 +1738,7 @@ format: double
 team:
   1. SPECIES_KOFFING @ ITEM_EVIOLITE | level_offset=-1 | ability=ABILITY_NEUTRALIZING_GAS | nature=NATURE_BOLD | stat_points=32/0/32/0/2/0 | moves=MOVE_SLUDGE_BOMB,MOVE_WILL_O_WISP,MOVE_CLEAR_SMOG,MOVE_PROTECT
   2. SPECIES_STARAVIA @ ITEM_CHOICE_SCARF | level_offset=0 | ability=ABILITY_RECKLESS | nature=NATURE_ADAMANT | stat_points=2/32/0/0/0/32 | moves=MOVE_BRAVE_BIRD,MOVE_DOUBLE_EDGE,MOVE_U_TURN,MOVE_QUICK_ATTACK
-  3. SPECIES_KINGLER @ ITEM_LIFE_ORB | level_offset=-1 | ability=ABILITY_SHEER_FORCE | nature=NATURE_ADAMANT | stat_points=2/32/0/0/0/32 | moves=MOVE_CRABHAMMER,MOVE_ROCK_SLIDE,MOVE_X_SCISSOR,MOVE_PROTECT
+  3. SPECIES_KRABBY @ ITEM_LIFE_ORB | level_offset=-1 | ability=ABILITY_SHEER_FORCE | nature=NATURE_ADAMANT | stat_points=2/32/0/0/0/32 | moves=MOVE_CRABHAMMER,MOVE_ROCK_SLIDE,MOVE_X_SCISSOR,MOVE_PROTECT
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -1747,8 +1747,8 @@ physical_group_id: BATTLE_040_ROUTE_109_RICKY
 proposed_encounter_id: BATTLE_040_ROUTE_109_RICKY
 campaign_order: 44
 atlas_ordinal: 44
-chapter: Dynamo Badge
-strict_cap: 30
+chapter: Knuckle Badge
+strict_cap: 20
 location: Route109
 requirement: optional single
 rematch_policy: first_campaign_encounter_only; later Match Call tiers excluded
@@ -1759,12 +1759,12 @@ difficulty_observed: UNPLAYED
 fatigue_role: ordinary_breather
 battle_class: casual
 ai_profile: sharp
-primary_question: Can the player beat this casual team (Wooper, Drednaw) on its own terms: Ricky's singles: Wooper Yawns and Recovers, and Strong Jaw Drednaw bites.
-theme_and_tempo: Ricky's singles: Wooper Yawns and Recovers, and Strong Jaw Drednaw bites.
-intentional_weakness: Grass hits Wooper four times over, and Drednaw is slow enough that Fighting or Grass gets there first.
-first_loss_lesson: Grass hits Wooper four times over, and Drednaw is slow enough that Fighting or Grass gets there first.
-strongest_part: Ricky's singles: Wooper Yawns and Recovers, and Strong Jaw Drednaw bites.
-weakest_link: Grass hits Wooper four times over, and Drednaw is slow enough that Fighting or Grass gets there first.
+primary_question: Can the player beat this casual team (Wooper, Chewtle) on its own terms: Ricky's singles: Wooper Yawns and Recovers, and Strong Jaw Chewtle bites.
+theme_and_tempo: Ricky's singles: Wooper Yawns and Recovers, and Strong Jaw Chewtle bites.
+intentional_weakness: Grass hits Wooper four times over, and Chewtle is slow enough that Fighting or Grass gets there first.
+first_loss_lesson: Grass hits Wooper four times over, and Chewtle is slow enough that Fighting or Grass gets there first.
+strongest_part: Ricky's singles: Wooper Yawns and Recovers, and Strong Jaw Chewtle bites.
+weakest_link: Grass hits Wooper four times over, and Chewtle is slow enough that Fighting or Grass gets there first.
 competitive_references: Hand-authored 2026-09 campaign rebuild against the pinned Champions learnsets
 dialogue_status: implemented_and_width_checked
 reservation_status: hand-authored; species, Mega and legendary placement tracked in docs/emerald_champions_battle_teams.txt
@@ -1775,7 +1775,7 @@ trainer_id: TRAINER_RICKY_1
 format: single
 team:
   1. SPECIES_WOOPER @ ITEM_EVIOLITE | level_offset=-3 | ability=ABILITY_WATER_ABSORB | nature=NATURE_IMPISH | stat_points=32/0/32/0/2/0 | moves=MOVE_LIQUIDATION,MOVE_EARTHQUAKE,MOVE_YAWN,MOVE_RECOVER
-  2. SPECIES_DREDNAW @ ITEM_LIFE_ORB | level_offset=-2 | ability=ABILITY_STRONG_JAW | nature=NATURE_ADAMANT | stat_points=2/32/0/0/0/32 | moves=MOVE_LIQUIDATION,MOVE_CRUNCH,MOVE_ROCK_TOMB,MOVE_PROTECT
+  2. SPECIES_CHEWTLE @ ITEM_LIFE_ORB | level_offset=-2 | ability=ABILITY_STRONG_JAW | nature=NATURE_ADAMANT | stat_points=2/32/0/0/0/32 | moves=MOVE_LIQUIDATION,MOVE_CRUNCH,MOVE_ICE_FANG,MOVE_PROTECT
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -1784,8 +1784,8 @@ physical_group_id: BATTLE_041_ROUTE_109_LOLA
 proposed_encounter_id: BATTLE_041_ROUTE_109_LOLA
 campaign_order: 45
 atlas_ordinal: 45
-chapter: Dynamo Badge
-strict_cap: 30
+chapter: Knuckle Badge
+strict_cap: 20
 location: Route109
 requirement: optional double
 rematch_policy: first_campaign_encounter_only; later Match Call tiers excluded
@@ -1796,11 +1796,11 @@ difficulty_observed: UNPLAYED
 fatigue_role: ordinary_standard
 battle_class: regular
 ai_profile: sharp
-primary_question: Can the player beat this regular team (Luvdisc, Cherrim, Leafeon) on its own terms: Lola's sunshine: Cherrim sets sun and Helping Hands, Chlorophyll Leafeon doubles its speed, and Soul Heart Luvdisc gets stronger with every knockout.
-theme_and_tempo: Lola's sunshine: Cherrim sets sun and Helping Hands, Chlorophyll Leafeon doubles its speed, and Soul Heart Luvdisc gets stronger with every knockout.
+primary_question: Can the player beat this regular team (Luvdisc, Cherubi, Leafeon) on its own terms: Lola's sunshine: Cherubi sets sun and Helping Hands, Chlorophyll Leafeon doubles its speed, and Soul Heart Luvdisc gets stronger with every knockout.
+theme_and_tempo: Lola's sunshine: Cherubi sets sun and Helping Hands, Chlorophyll Leafeon doubles its speed, and Soul Heart Luvdisc gets stronger with every knockout.
 intentional_weakness: Rain or Rock removes the sun plan, Fire and Flying hit the Grass types, and Electric ends Luvdisc.
 first_loss_lesson: Rain or Rock removes the sun plan, Fire and Flying hit the Grass types, and Electric ends Luvdisc.
-strongest_part: Lola's sunshine: Cherrim sets sun and Helping Hands, Chlorophyll Leafeon doubles its speed, and Soul Heart Luvdisc gets stronger with every knockout.
+strongest_part: Lola's sunshine: Cherubi sets sun and Helping Hands, Chlorophyll Leafeon doubles its speed, and Soul Heart Luvdisc gets stronger with every knockout.
 weakest_link: Rain or Rock removes the sun plan, Fire and Flying hit the Grass types, and Electric ends Luvdisc.
 competitive_references: Hand-authored 2026-09 campaign rebuild against the pinned Champions learnsets
 dialogue_status: implemented_and_width_checked
@@ -1812,7 +1812,7 @@ trainer_id: TRAINER_LOLA_1
 format: double
 team:
   1. SPECIES_LUVDISC @ ITEM_FOCUS_SASH | level_offset=-1 | ability=ABILITY_SOUL_HEART | nature=NATURE_TIMID | stat_points=2/0/0/32/0/32 | moves=MOVE_ICY_WIND,MOVE_DRAINING_KISS,MOVE_HYDRO_PUMP,MOVE_PROTECT
-  2. SPECIES_CHERRIM @ ITEM_HEAT_ROCK | level_offset=-1 | ability=ABILITY_FLOWER_GIFT | nature=NATURE_MODEST | stat_points=2/0/0/32/0/32 | moves=MOVE_SUNNY_DAY,MOVE_WEATHER_BALL,MOVE_ENERGY_BALL,MOVE_HELPING_HAND
+  2. SPECIES_CHERUBI @ ITEM_HEAT_ROCK | level_offset=-1 | ability=ABILITY_CHLOROPHYLL | nature=NATURE_MODEST | stat_points=2/0/0/32/0/32 | moves=MOVE_SUNNY_DAY,MOVE_ENERGY_BALL,MOVE_DAZZLING_GLEAM,MOVE_HELPING_HAND
   3. SPECIES_LEAFEON @ ITEM_LIFE_ORB | level_offset=0 | ability=ABILITY_CHLOROPHYLL | nature=NATURE_ADAMANT | stat_points=2/32/0/0/0/32 | moves=MOVE_LEAF_BLADE,MOVE_DOUBLE_EDGE,MOVE_X_SCISSOR,MOVE_QUICK_ATTACK
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
@@ -1822,8 +1822,8 @@ physical_group_id: BATTLE_042_ROUTE_109_CHANDLER
 proposed_encounter_id: BATTLE_042_ROUTE_109_CHANDLER
 campaign_order: 46
 atlas_ordinal: 46
-chapter: Dynamo Badge
-strict_cap: 30
+chapter: Knuckle Badge
+strict_cap: 20
 location: Route109
 requirement: optional double
 status: master_audited_ready_for_implementation
@@ -1833,12 +1833,12 @@ difficulty_observed: UNPLAYED
 fatigue_role: ordinary_standard
 battle_class: regular
 ai_profile: sharp
-primary_question: Can the player beat this regular team (Phione, Lanturn, Floatzel) on its own terms: Chandler hatched a Phione: it sets rain and Surfs beside Water Absorb Lanturn, which heals off every wave, while Swift Swim Floatzel Wave Crashes.
-theme_and_tempo: Chandler hatched a Phione: it sets rain and Surfs beside Water Absorb Lanturn, which heals off every wave, while Swift Swim Floatzel Wave Crashes.
-intentional_weakness: Grass hits all three, Electric hits Phione and Floatzel, and Lanturn absorbs only Water, not Grass Knot.
-first_loss_lesson: Grass hits all three, Electric hits Phione and Floatzel, and Lanturn absorbs only Water, not Grass Knot.
-strongest_part: Chandler hatched a Phione: it sets rain and Surfs beside Water Absorb Lanturn, which heals off every wave, while Swift Swim Floatzel Wave Crashes.
-weakest_link: Grass hits all three, Electric hits Phione and Floatzel, and Lanturn absorbs only Water, not Grass Knot.
+primary_question: Can the player beat this regular team (Phione, Chinchou, Buizel) on its own terms: Chandler hatched a Phione: it sets rain and Surfs beside Water Absorb Chinchou, which heals off every wave, while Swift Swim Buizel Aqua Jets.
+theme_and_tempo: Chandler hatched a Phione: it sets rain and Surfs beside Water Absorb Chinchou, which heals off every wave, while Swift Swim Buizel Aqua Jets.
+intentional_weakness: Grass hits all three, Electric hits Phione and Buizel, and Chinchou absorbs only Water, not Grass Knot.
+first_loss_lesson: Grass hits all three, Electric hits Phione and Buizel, and Chinchou absorbs only Water, not Grass Knot.
+strongest_part: Chandler hatched a Phione: it sets rain and Surfs beside Water Absorb Chinchou, which heals off every wave, while Swift Swim Buizel Aqua Jets.
+weakest_link: Grass hits all three, Electric hits Phione and Buizel, and Chinchou absorbs only Water, not Grass Knot.
 competitive_references: Hand-authored 2026-09 campaign rebuild against the pinned Champions learnsets
 dialogue_status: implemented_and_width_checked
 reservation_status: hand-authored; species, Mega and legendary placement tracked in docs/emerald_champions_battle_teams.txt
@@ -1849,8 +1849,8 @@ trainer_id: TRAINER_CHANDLER
 format: double
 team:
   1. SPECIES_PHIONE @ ITEM_DAMP_ROCK | level_offset=-1 | ability=ABILITY_HYDRATION | nature=NATURE_MODEST | stat_points=2/0/0/32/0/32 | moves=MOVE_RAIN_DANCE,MOVE_SURF,MOVE_ICE_BEAM,MOVE_REST
-  2. SPECIES_LANTURN @ ITEM_ASSAULT_VEST | level_offset=-1 | ability=ABILITY_WATER_ABSORB | nature=NATURE_MODEST | stat_points=32/0/2/32/0/0 | moves=MOVE_SURF,MOVE_THUNDERBOLT,MOVE_ICE_BEAM,MOVE_VOLT_SWITCH
-  3. SPECIES_FLOATZEL @ ITEM_LIFE_ORB | level_offset=0 | ability=ABILITY_SWIFT_SWIM | nature=NATURE_JOLLY | stat_points=2/32/0/0/0/32 | moves=MOVE_WAVE_CRASH,MOVE_ICE_PUNCH,MOVE_CRUNCH,MOVE_PROTECT
+  2. SPECIES_CHINCHOU @ ITEM_ASSAULT_VEST | level_offset=-1 | ability=ABILITY_WATER_ABSORB | nature=NATURE_MODEST | stat_points=32/0/2/32/0/0 | moves=MOVE_SURF,MOVE_DISCHARGE,MOVE_ICE_BEAM,MOVE_CHARGE_BEAM
+  3. SPECIES_BUIZEL @ ITEM_LIFE_ORB | level_offset=0 | ability=ABILITY_SWIFT_SWIM | nature=NATURE_JOLLY | stat_points=2/32/0/0/0/32 | moves=MOVE_LIQUIDATION,MOVE_AQUA_JET,MOVE_ICE_PUNCH,MOVE_PROTECT
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -1859,8 +1859,8 @@ physical_group_id: BATTLE_043_SEASHORE_HOUSE_DWAYNE
 proposed_encounter_id: BATTLE_043_SEASHORE_HOUSE_DWAYNE
 campaign_order: 47
 atlas_ordinal: 47
-chapter: Dynamo Badge
-strict_cap: 30
+chapter: Knuckle Badge
+strict_cap: 20
 location: Route109_SeashoreHouse
 requirement: optional single
 status: master_audited_ready_for_implementation
@@ -1870,12 +1870,12 @@ difficulty_observed: UNPLAYED
 fatigue_role: ordinary_breather
 battle_class: casual
 ai_profile: sharp
-primary_question: Can the player beat this casual team (Magmar, Jynx) on its own terms: Dwayne's singles: Magmar burns with Flamethrower and Jynx Lovely Kisses.
-theme_and_tempo: Dwayne's singles: Magmar burns with Flamethrower and Jynx Lovely Kisses.
-intentional_weakness: Water and Rock end Magmar, Fire and Steel end Jynx, and a Lum Berry answers the Kiss.
-first_loss_lesson: Water and Rock end Magmar, Fire and Steel end Jynx, and a Lum Berry answers the Kiss.
-strongest_part: Dwayne's singles: Magmar burns with Flamethrower and Jynx Lovely Kisses.
-weakest_link: Water and Rock end Magmar, Fire and Steel end Jynx, and a Lum Berry answers the Kiss.
+primary_question: Can the player beat this casual team (Magby, Smoochum) on its own terms: Dwayne's singles: Magby burns with Flamethrower and Smoochum Fake Outs into Ice Beam.
+theme_and_tempo: Dwayne's singles: Magby burns with Flamethrower and Smoochum Fake Outs into Ice Beam.
+intentional_weakness: Water and Rock end Magby, Fire and Steel end Smoochum, and Inner Focus ignores the Fake Out.
+first_loss_lesson: Water and Rock end Magby, Fire and Steel end Smoochum, and Inner Focus ignores the Fake Out.
+strongest_part: Dwayne's singles: Magby burns with Flamethrower and Smoochum Fake Outs into Ice Beam.
+weakest_link: Water and Rock end Magby, Fire and Steel end Smoochum, and Inner Focus ignores the Fake Out.
 competitive_references: Hand-authored 2026-09 campaign rebuild against the pinned Champions learnsets
 dialogue_status: implemented_and_width_checked
 reservation_status: hand-authored; species, Mega and legendary placement tracked in docs/emerald_champions_battle_teams.txt
@@ -1885,8 +1885,8 @@ branches:
 trainer_id: TRAINER_DWAYNE
 format: single
 team:
-  1. SPECIES_MAGMAR @ ITEM_EVIOLITE | level_offset=0 | ability=ABILITY_FLAME_BODY | nature=NATURE_MODEST | stat_points=2/0/0/32/0/32 | moves=MOVE_FLAMETHROWER,MOVE_PSYCHIC,MOVE_FOCUS_BLAST,MOVE_PROTECT
-  2. SPECIES_JYNX @ ITEM_FOCUS_SASH | level_offset=0 | ability=ABILITY_DRY_SKIN | nature=NATURE_TIMID | stat_points=2/0/0/32/0/32 | moves=MOVE_ICE_BEAM,MOVE_PSYCHIC,MOVE_LOVELY_KISS,MOVE_PROTECT
+  1. SPECIES_MAGBY @ ITEM_EVIOLITE | level_offset=0 | ability=ABILITY_FLAME_BODY | nature=NATURE_MODEST | stat_points=2/0/0/32/0/32 | moves=MOVE_FLAMETHROWER,MOVE_CLEAR_SMOG,MOVE_CONFUSE_RAY,MOVE_PROTECT
+  2. SPECIES_SMOOCHUM @ ITEM_FOCUS_SASH | level_offset=0 | ability=ABILITY_FOREWARN | nature=NATURE_TIMID | stat_points=2/0/0/32/0/32 | moves=MOVE_ICE_BEAM,MOVE_PSYCHIC,MOVE_FAKE_OUT,MOVE_PROTECT
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -1895,8 +1895,8 @@ physical_group_id: BATTLE_044_SEASHORE_HOUSE_JOHANNA
 proposed_encounter_id: BATTLE_044_SEASHORE_HOUSE_JOHANNA
 campaign_order: 48
 atlas_ordinal: 48
-chapter: Dynamo Badge
-strict_cap: 30
+chapter: Knuckle Badge
+strict_cap: 20
 location: Route109_SeashoreHouse
 requirement: optional double
 status: master_audited_ready_for_implementation
@@ -1906,12 +1906,12 @@ difficulty_observed: UNPLAYED
 fatigue_role: ordinary_standard
 battle_class: regular
 ai_profile: sharp
-primary_question: Can the player beat this regular team (Roselia, Sylveon, Milotic) on its own terms: Johanna's elegance: Roselia Sleep Powders, Pixilate Sylveon spreads Hyper Voice, and Competitive Milotic punishes any Intimidate.
-theme_and_tempo: Johanna's elegance: Roselia Sleep Powders, Pixilate Sylveon spreads Hyper Voice, and Competitive Milotic punishes any Intimidate.
-intentional_weakness: Steel and Poison wall Sylveon, Fire and Flying hit Roselia, and Electric or Grass drops Milotic; never Intimidate the Milotic.
-first_loss_lesson: Steel and Poison wall Sylveon, Fire and Flying hit Roselia, and Electric or Grass drops Milotic; never Intimidate the Milotic.
-strongest_part: Johanna's elegance: Roselia Sleep Powders, Pixilate Sylveon spreads Hyper Voice, and Competitive Milotic punishes any Intimidate.
-weakest_link: Steel and Poison wall Sylveon, Fire and Flying hit Roselia, and Electric or Grass drops Milotic; never Intimidate the Milotic.
+primary_question: Can the player beat this regular team (Budew, Sylveon, Feebas) on its own terms: Johanna's elegance: Budew Sleep Powders, Pixilate Sylveon spreads Hyper Voice, and Adaptability Feebas hides a real Dragon Pulse behind its Eviolite.
+theme_and_tempo: Johanna's elegance: Budew Sleep Powders, Pixilate Sylveon spreads Hyper Voice, and Adaptability Feebas hides a real Dragon Pulse behind its Eviolite.
+intentional_weakness: Steel and Poison wall Sylveon, Fire and Flying hit Budew, and Electric or Grass drops Feebas.
+first_loss_lesson: Steel and Poison wall Sylveon, Fire and Flying hit Budew, and Electric or Grass drops Feebas.
+strongest_part: Johanna's elegance: Budew Sleep Powders, Pixilate Sylveon spreads Hyper Voice, and Adaptability Feebas hides a real Dragon Pulse behind its Eviolite.
+weakest_link: Steel and Poison wall Sylveon, Fire and Flying hit Budew, and Electric or Grass drops Feebas.
 competitive_references: Hand-authored 2026-09 campaign rebuild against the pinned Champions learnsets
 dialogue_status: implemented_and_width_checked
 reservation_status: hand-authored; species, Mega and legendary placement tracked in docs/emerald_champions_battle_teams.txt
@@ -1921,9 +1921,9 @@ branches:
 trainer_id: TRAINER_JOHANNA
 format: double
 team:
-  1. SPECIES_ROSELIA @ ITEM_FOCUS_SASH | level_offset=-1 | ability=ABILITY_NATURAL_CURE | nature=NATURE_TIMID | stat_points=2/0/0/32/0/32 | moves=MOVE_SLEEP_POWDER,MOVE_GIGA_DRAIN,MOVE_SLUDGE_BOMB,MOVE_PROTECT
-  2. SPECIES_SYLVEON @ ITEM_THROAT_SPRAY | level_offset=-1 | ability=ABILITY_PIXILATE | nature=NATURE_MODEST | stat_points=2/0/0/32/0/32 | moves=MOVE_HYPER_VOICE,MOVE_PSYSHOCK,MOVE_MYSTICAL_FIRE,MOVE_PROTECT
-  3. SPECIES_MILOTIC @ ITEM_LEFTOVERS | level_offset=0 | ability=ABILITY_COMPETITIVE | nature=NATURE_BOLD | stat_points=32/0/32/0/2/0 | moves=MOVE_MUDDY_WATER,MOVE_ICE_BEAM,MOVE_RECOVER,MOVE_PROTECT
+  1. SPECIES_BUDEW @ ITEM_FOCUS_SASH | level_offset=-1 | ability=ABILITY_NATURAL_CURE | nature=NATURE_TIMID | stat_points=2/0/0/32/0/32 | moves=MOVE_SLEEP_POWDER,MOVE_GIGA_DRAIN,MOVE_SLUDGE_BOMB,MOVE_PROTECT
+  2. SPECIES_SYLVEON @ ITEM_THROAT_SPRAY | level_offset=-1 | ability=ABILITY_PIXILATE | nature=NATURE_MODEST | stat_points=2/0/0/32/0/32 | moves=MOVE_HYPER_VOICE,MOVE_DRAINING_KISS,MOVE_SHADOW_BALL,MOVE_PROTECT
+  3. SPECIES_FEEBAS @ ITEM_EVIOLITE | level_offset=0 | ability=ABILITY_ADAPTABILITY | nature=NATURE_MODEST | stat_points=2/0/0/32/0/32 | moves=MOVE_MUDDY_WATER,MOVE_ICE_BEAM,MOVE_DRAGON_PULSE,MOVE_PROTECT
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -1932,8 +1932,8 @@ physical_group_id: BATTLE_045_SEASHORE_HOUSE_SIMON
 proposed_encounter_id: BATTLE_045_SEASHORE_HOUSE_SIMON
 campaign_order: 49
 atlas_ordinal: 49
-chapter: Dynamo Badge
-strict_cap: 30
+chapter: Knuckle Badge
+strict_cap: 20
 location: Route109_SeashoreHouse
 requirement: optional double
 status: master_audited_ready_for_implementation
@@ -1943,12 +1943,12 @@ difficulty_observed: UNPLAYED
 fatigue_role: ordinary_standard
 battle_class: regular
 ai_profile: sharp
-primary_question: Can the player beat this regular team (Quagsire, Mudsdale, Prinplup) on its own terms: Simon's slow tanks: Unaware Quagsire ignores boosts, Stamina Mudsdale grows tougher, and Prinplup's Icy Wind keeps everyone slower than they are.
-theme_and_tempo: Simon's slow tanks: Unaware Quagsire ignores boosts, Stamina Mudsdale grows tougher, and Prinplup's Icy Wind keeps everyone slower than they are.
-intentional_weakness: Grass hits Quagsire for quadruple, Water and Grass hit Mudsdale, and special attacks ignore Stamina entirely.
-first_loss_lesson: Grass hits Quagsire for quadruple, Water and Grass hit Mudsdale, and special attacks ignore Stamina entirely.
-strongest_part: Simon's slow tanks: Unaware Quagsire ignores boosts, Stamina Mudsdale grows tougher, and Prinplup's Icy Wind keeps everyone slower than they are.
-weakest_link: Grass hits Quagsire for quadruple, Water and Grass hit Mudsdale, and special attacks ignore Stamina entirely.
+primary_question: Can the player beat this regular team (Quagsire, Mudbray, Prinplup) on its own terms: Simon's slow tanks: Unaware Quagsire ignores boosts, Stamina Mudbray grows tougher, and Prinplup's Icy Wind keeps everyone slower than they are.
+theme_and_tempo: Simon's slow tanks: Unaware Quagsire ignores boosts, Stamina Mudbray grows tougher, and Prinplup's Icy Wind keeps everyone slower than they are.
+intentional_weakness: Grass hits Quagsire for quadruple, Water and Grass hit Mudbray, and special attacks ignore Stamina entirely.
+first_loss_lesson: Grass hits Quagsire for quadruple, Water and Grass hit Mudbray, and special attacks ignore Stamina entirely.
+strongest_part: Simon's slow tanks: Unaware Quagsire ignores boosts, Stamina Mudbray grows tougher, and Prinplup's Icy Wind keeps everyone slower than they are.
+weakest_link: Grass hits Quagsire for quadruple, Water and Grass hit Mudbray, and special attacks ignore Stamina entirely.
 competitive_references: Hand-authored 2026-09 campaign rebuild against the pinned Champions learnsets
 dialogue_status: implemented_and_width_checked
 reservation_status: hand-authored; species, Mega and legendary placement tracked in docs/emerald_champions_battle_teams.txt
@@ -1958,8 +1958,8 @@ branches:
 trainer_id: TRAINER_SIMON
 format: double
 team:
-  1. SPECIES_QUAGSIRE @ ITEM_LEFTOVERS | level_offset=-1 | ability=ABILITY_UNAWARE | nature=NATURE_RELAXED | stat_points=32/0/32/0/2/0 | moves=MOVE_LIQUIDATION,MOVE_STOMPING_TANTRUM,MOVE_YAWN,MOVE_RECOVER
-  2. SPECIES_MUDSDALE @ ITEM_ASSAULT_VEST | level_offset=0 | ability=ABILITY_STAMINA | nature=NATURE_ADAMANT | stat_points=32/32/2/0/0/0 | moves=MOVE_HIGH_HORSEPOWER,MOVE_HEAVY_SLAM,MOVE_ROCK_SLIDE,MOVE_CLOSE_COMBAT
+  1. SPECIES_QUAGSIRE @ ITEM_LEFTOVERS | level_offset=0 | ability=ABILITY_UNAWARE | nature=NATURE_RELAXED | stat_points=32/0/32/0/2/0 | moves=MOVE_LIQUIDATION,MOVE_EARTHQUAKE,MOVE_YAWN,MOVE_RECOVER
+  2. SPECIES_MUDBRAY @ ITEM_EVIOLITE | level_offset=0 | ability=ABILITY_STAMINA | nature=NATURE_ADAMANT | stat_points=32/32/2/0/0/0 | moves=MOVE_HIGH_HORSEPOWER,MOVE_HEAVY_SLAM,MOVE_ROCK_SLIDE,MOVE_CLOSE_COMBAT
   3. SPECIES_PRINPLUP @ ITEM_FOCUS_SASH | level_offset=-1 | ability=ABILITY_COMPETITIVE | nature=NATURE_MODEST | stat_points=2/0/0/32/0/32 | moves=MOVE_HYDRO_PUMP,MOVE_ICE_BEAM,MOVE_ICY_WIND,MOVE_PROTECT
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
@@ -1969,8 +1969,8 @@ physical_group_id: BATTLE_046_SLATEPORT_MUSEUM_AQUA_GRUNT_1
 proposed_encounter_id: BATTLE_046_SLATEPORT_MUSEUM_AQUA_GRUNT_1
 campaign_order: 50
 atlas_ordinal: 50
-chapter: Dynamo Badge
-strict_cap: 30
+chapter: Knuckle Badge
+strict_cap: 20
 location: SlateportCity_OceanicMuseum_2F
 requirement: required scripted
 status: master_audited_ready_for_implementation
@@ -1980,12 +1980,12 @@ difficulty_observed: UNPLAYED
 fatigue_role: ordinary_standard
 battle_class: grunt
 ai_profile: sharp
-primary_question: Can the player beat this grunt team (Golbat, Sharpedo, Raticate Alola) on its own terms: Golbat Taunts and U-turns while Speed Boost Sharpedo snowballs and Gluttony Alolan Raticate chips with Super Fang and Sucker Punch.
-theme_and_tempo: Golbat Taunts and U-turns while Speed Boost Sharpedo snowballs and Gluttony Alolan Raticate chips with Super Fang and Sucker Punch.
-intentional_weakness: Electric and Rock hit Golbat and Sharpedo, Fighting flattens Raticate, and Sharpedo folds to any hit once it is targeted.
-first_loss_lesson: Electric and Rock hit Golbat and Sharpedo, Fighting flattens Raticate, and Sharpedo folds to any hit once it is targeted.
-strongest_part: Golbat Taunts and U-turns while Speed Boost Sharpedo snowballs and Gluttony Alolan Raticate chips with Super Fang and Sucker Punch.
-weakest_link: Electric and Rock hit Golbat and Sharpedo, Fighting flattens Raticate, and Sharpedo folds to any hit once it is targeted.
+primary_question: Can the player beat this grunt team (Zubat, Carvanha, Rattata Alola) on its own terms: Zubat Taunts and U-turns while Speed Boost Carvanha snowballs and Gluttony Alolan Rattata chips with Super Fang and Sucker Punch.
+theme_and_tempo: Zubat Taunts and U-turns while Speed Boost Carvanha snowballs and Gluttony Alolan Rattata chips with Super Fang and Sucker Punch.
+intentional_weakness: Electric and Rock hit Zubat and Carvanha, Fighting flattens Rattata, and Carvanha folds to any hit once it is targeted.
+first_loss_lesson: Electric and Rock hit Zubat and Carvanha, Fighting flattens Rattata, and Carvanha folds to any hit once it is targeted.
+strongest_part: Zubat Taunts and U-turns while Speed Boost Carvanha snowballs and Gluttony Alolan Rattata chips with Super Fang and Sucker Punch.
+weakest_link: Electric and Rock hit Zubat and Carvanha, Fighting flattens Rattata, and Carvanha folds to any hit once it is targeted.
 competitive_references: Hand-authored 2026-09 campaign rebuild against the pinned Champions learnsets
 dialogue_status: implemented_and_width_checked
 reservation_status: hand-authored; species, Mega and legendary placement tracked in docs/emerald_champions_battle_teams.txt
@@ -1995,9 +1995,9 @@ branches:
 trainer_id: TRAINER_GRUNT_MUSEUM_1
 format: double
 team:
-  1. SPECIES_GOLBAT @ ITEM_EVIOLITE | level_offset=0 | ability=ABILITY_INNER_FOCUS | nature=NATURE_JOLLY | stat_points=2/32/0/0/0/32 | moves=MOVE_BRAVE_BIRD,MOVE_POISON_FANG,MOVE_TAUNT,MOVE_U_TURN
-  2. SPECIES_SHARPEDO @ ITEM_LIFE_ORB | level_offset=0 | ability=ABILITY_SPEED_BOOST | nature=NATURE_ADAMANT | stat_points=2/32/0/0/0/32 | moves=MOVE_CRUNCH,MOVE_WATERFALL,MOVE_ICE_FANG,MOVE_PROTECT
-  3. SPECIES_RATICATE_ALOLA @ ITEM_FIGY_BERRY | level_offset=-1 | ability=ABILITY_GLUTTONY | nature=NATURE_ADAMANT | stat_points=32/32/2/0/0/0 | moves=MOVE_SUPER_FANG,MOVE_CRUNCH,MOVE_SUCKER_PUNCH,MOVE_TAUNT
+  1. SPECIES_ZUBAT @ ITEM_EVIOLITE | level_offset=0 | ability=ABILITY_INNER_FOCUS | nature=NATURE_JOLLY | stat_points=2/32/0/0/0/32 | moves=MOVE_BRAVE_BIRD,MOVE_POISON_FANG,MOVE_TAUNT,MOVE_U_TURN
+  2. SPECIES_CARVANHA @ ITEM_LIFE_ORB | level_offset=0 | ability=ABILITY_SPEED_BOOST | nature=NATURE_ADAMANT | stat_points=2/32/0/0/0/32 | moves=MOVE_CRUNCH,MOVE_LIQUIDATION,MOVE_ICE_FANG,MOVE_PROTECT
+  3. SPECIES_RATTATA_ALOLA @ ITEM_FIGY_BERRY | level_offset=-1 | ability=ABILITY_GLUTTONY | nature=NATURE_ADAMANT | stat_points=32/32/2/0/0/0 | moves=MOVE_SUPER_FANG,MOVE_CRUNCH,MOVE_SUCKER_PUNCH,MOVE_TAUNT
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -2006,8 +2006,8 @@ physical_group_id: BATTLE_047_SLATEPORT_MUSEUM_AQUA_GRUNT_2
 proposed_encounter_id: BATTLE_047_SLATEPORT_MUSEUM_AQUA_GRUNT_2
 campaign_order: 51
 atlas_ordinal: 51
-chapter: Dynamo Badge · Oceanic Museum story
-strict_cap: 30
+chapter: Knuckle Badge · Oceanic Museum story
+strict_cap: 20
 location: SlateportCity_OceanicMuseum_2F
 requirement: required scripted attrition
 status: master_audited_ready_for_implementation
@@ -2043,8 +2043,8 @@ physical_group_id: BATTLE_048_SLATEPORT_MUSEUM_ARCHIE
 proposed_encounter_id: BATTLE_048_SLATEPORT_MUSEUM_ARCHIE
 campaign_order: 52
 atlas_ordinal: 52
-chapter: Dynamo Badge
-strict_cap: 30
+chapter: Knuckle Badge
+strict_cap: 20
 location: SlateportCity_OceanicMuseum_2F
 requirement: required boss
 status: master_audited_ready_for_implementation
@@ -2054,12 +2054,12 @@ difficulty_observed: UNPLAYED
 fatigue_role: marquee_boss
 battle_class: leader
 ai_profile: master
-primary_question: Can the player beat this leader team (Pelipper, Ludicolo, Crawdaunt, Tentacruel, Crobat, Sharpedo) on its own terms: Archie's rain: Drizzle Pelipper brings Tailwind and Wide Guard, Swift Swim Ludicolo Fake Outs and fires Hydro Pump, Adaptability Crawdaunt Swords Dances behind a Sash, Tentacruel controls speed, Crobat Taunts, and Mega Sharpedo's Strong Jaw Crunch closes.
-theme_and_tempo: Archie's rain: Drizzle Pelipper brings Tailwind and Wide Guard, Swift Swim Ludicolo Fake Outs and fires Hydro Pump, Adaptability Crawdaunt Swords Dances behind a Sash, Tentacruel controls speed, Crobat Taunts, and Mega Sharpedo's Strong Jaw Crunch closes.
-intentional_weakness: Electric hits five of the six, Grass hits the Water core, Tailwind and rain both run out if the player stalls, and Crawdaunt at plus two is still frail once its Sash is gone.
-first_loss_lesson: Electric hits five of the six, Grass hits the Water core, Tailwind and rain both run out if the player stalls, and Crawdaunt at plus two is still frail once its Sash is gone.
-strongest_part: Archie's rain: Drizzle Pelipper brings Tailwind and Wide Guard, Swift Swim Ludicolo Fake Outs and fires Hydro Pump, Adaptability Crawdaunt Swords Dances behind a Sash, Tentacruel controls speed, Crobat Taunts, and Mega Sharpedo's Strong Jaw Crunch closes.
-weakest_link: Electric hits five of the six, Grass hits the Water core, Tailwind and rain both run out if the player stalls, and Crawdaunt at plus two is still frail once its Sash is gone.
+primary_question: Can the player beat this leader team (Wingull, Lombre, Corphish, Tentacool, Golbat, Carvanha) on its own terms: Archie's rain: Rain Dish Wingull brings the weather and Roosts, Swift Swim Lombre Fake Outs and fires Hydro Pump, Adaptability Corphish Dragon Dances behind a Sash, Tentacool controls speed, Golbat Taunts, and Speed Boost Carvanha's Crunch closes once nothing outspeeds it.
+theme_and_tempo: Archie's rain: Rain Dish Wingull brings the weather and Roosts, Swift Swim Lombre Fake Outs and fires Hydro Pump, Adaptability Corphish Dragon Dances behind a Sash, Tentacool controls speed, Golbat Taunts, and Speed Boost Carvanha's Crunch closes once nothing outspeeds it.
+intentional_weakness: Electric hits five of the six, Grass hits the Water core, rain runs out if the player stalls, and Corphish at plus one is still frail once its Sash is gone.
+first_loss_lesson: Electric hits five of the six, Grass hits the Water core, rain runs out if the player stalls, and Corphish at plus one is still frail once its Sash is gone.
+strongest_part: Archie's rain: Rain Dish Wingull brings the weather and Roosts, Swift Swim Lombre Fake Outs and fires Hydro Pump, Adaptability Corphish Dragon Dances behind a Sash, Tentacool controls speed, Golbat Taunts, and Speed Boost Carvanha's Crunch closes once nothing outspeeds it.
+weakest_link: Electric hits five of the six, Grass hits the Water core, rain runs out if the player stalls, and Corphish at plus one is still frail once its Sash is gone.
 competitive_references: Hand-authored 2026-09 campaign rebuild against the pinned Champions learnsets
 dialogue_status: implemented_and_width_checked
 reservation_status: hand-authored; species, Mega and legendary placement tracked in docs/emerald_champions_battle_teams.txt
@@ -2069,12 +2069,12 @@ branches:
 trainer_id: TRAINER_ARCHIE_SLATEPORT
 format: double
 team:
-  1. SPECIES_PELIPPER @ ITEM_DAMP_ROCK | level_offset=1 | ability=ABILITY_DRIZZLE | nature=NATURE_BOLD | stat_points=32/0/2/0/32/0 | moves=MOVE_HURRICANE,MOVE_WEATHER_BALL,MOVE_TAILWIND,MOVE_WIDE_GUARD
-  2. SPECIES_LUDICOLO @ ITEM_LIFE_ORB | level_offset=2 | ability=ABILITY_SWIFT_SWIM | nature=NATURE_MODEST | stat_points=2/0/0/32/0/32 | moves=MOVE_FAKE_OUT,MOVE_HYDRO_PUMP,MOVE_GIGA_DRAIN,MOVE_ICE_BEAM
-  3. SPECIES_CRAWDAUNT @ ITEM_FOCUS_SASH | level_offset=2 | ability=ABILITY_ADAPTABILITY | nature=NATURE_ADAMANT | stat_points=2/32/0/0/0/32 | moves=MOVE_CRABHAMMER,MOVE_KNOCK_OFF,MOVE_AQUA_JET,MOVE_SWORDS_DANCE
-  4. SPECIES_TENTACRUEL @ ITEM_BLACK_SLUDGE | level_offset=3 | ability=ABILITY_CLEAR_BODY | nature=NATURE_TIMID | stat_points=2/0/0/32/0/32 | moves=MOVE_HYDRO_PUMP,MOVE_SLUDGE_BOMB,MOVE_ICY_WIND,MOVE_PROTECT
-  5. SPECIES_CROBAT @ ITEM_SITRUS_BERRY | level_offset=3 | ability=ABILITY_INNER_FOCUS | nature=NATURE_JOLLY | stat_points=2/32/0/0/0/32 | moves=MOVE_BRAVE_BIRD,MOVE_CROSS_POISON,MOVE_TAUNT,MOVE_U_TURN
-  6. SPECIES_SHARPEDO @ ITEM_SHARPEDONITE | level_offset=4 | ability=ABILITY_SPEED_BOOST | nature=NATURE_ADAMANT | stat_points=2/32/0/0/0/32 | moves=MOVE_CRUNCH,MOVE_WATERFALL,MOVE_ICE_FANG,MOVE_PROTECT
+  1. SPECIES_WINGULL @ ITEM_DAMP_ROCK | level_offset=1 | ability=ABILITY_RAIN_DISH | nature=NATURE_BOLD | stat_points=32/0/2/0/32/0 | moves=MOVE_RAIN_DANCE,MOVE_HURRICANE,MOVE_ICY_WIND,MOVE_ROOST
+  2. SPECIES_LOMBRE @ ITEM_LIFE_ORB | level_offset=2 | ability=ABILITY_SWIFT_SWIM | nature=NATURE_MODEST | stat_points=2/0/0/32/0/32 | moves=MOVE_FAKE_OUT,MOVE_HYDRO_PUMP,MOVE_GIGA_DRAIN,MOVE_ICE_BEAM
+  3. SPECIES_CORPHISH @ ITEM_FOCUS_SASH | level_offset=2 | ability=ABILITY_ADAPTABILITY | nature=NATURE_ADAMANT | stat_points=2/32/0/0/0/32 | moves=MOVE_CRABHAMMER,MOVE_KNOCK_OFF,MOVE_AQUA_JET,MOVE_DRAGON_DANCE
+  4. SPECIES_TENTACOOL @ ITEM_BLACK_SLUDGE | level_offset=3 | ability=ABILITY_CLEAR_BODY | nature=NATURE_TIMID | stat_points=2/0/0/32/0/32 | moves=MOVE_HYDRO_PUMP,MOVE_ICY_WIND,MOVE_KNOCK_OFF,MOVE_PROTECT
+  5. SPECIES_GOLBAT @ ITEM_SITRUS_BERRY | level_offset=3 | ability=ABILITY_INNER_FOCUS | nature=NATURE_JOLLY | stat_points=2/32/0/0/0/32 | moves=MOVE_BRAVE_BIRD,MOVE_POISON_FANG,MOVE_TAUNT,MOVE_U_TURN
+  6. SPECIES_CARVANHA @ ITEM_EXPERT_BELT | level_offset=4 | ability=ABILITY_SPEED_BOOST | nature=NATURE_ADAMANT | stat_points=2/32/0/0/0/32 | moves=MOVE_CRUNCH,MOVE_LIQUIDATION,MOVE_ICE_FANG,MOVE_PROTECT
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -2083,8 +2083,8 @@ physical_group_id: PHYSICAL_SLATEPORTCITY_0707
 proposed_encounter_id: BATTLE_181_SLATEPORT_GRETA
 campaign_order: 53
 atlas_ordinal: 53
-chapter: Dynamo Badge
-strict_cap: 30
+chapter: Knuckle Badge
+strict_cap: 20
 location: SlateportCity
 requirement: optional
 status: master_audited_ready_for_implementation
@@ -2094,12 +2094,12 @@ difficulty_observed: UNPLAYED
 fatigue_role: notable_optional_or_route_ace
 battle_class: brain
 ai_profile: master
-primary_question: Can the player beat this brain team (Heracross, Umbreon, Shedinja, Haunter) on its own terms: Greta's Frontier preview: Choice Scarf Moxie Heracross snowballs, Umbreon Wishes and Snarls, Wonder Guard Shedinja walls anything without the right coverage, and Levitate Haunter controls speed with Icy Wind.
-theme_and_tempo: Greta's Frontier preview: Choice Scarf Moxie Heracross snowballs, Umbreon Wishes and Snarls, Wonder Guard Shedinja walls anything without the right coverage, and Levitate Haunter controls speed with Icy Wind.
-intentional_weakness: Flying hits Heracross, Fighting hits Umbreon, Shedinja dies to Fire, Rock, Ghost, Dark, Flying, burn, poison or sand, and Haunter is frail.
-first_loss_lesson: Flying hits Heracross, Fighting hits Umbreon, Shedinja dies to Fire, Rock, Ghost, Dark, Flying, burn, poison or sand, and Haunter is frail.
-strongest_part: Greta's Frontier preview: Choice Scarf Moxie Heracross snowballs, Umbreon Wishes and Snarls, Wonder Guard Shedinja walls anything without the right coverage, and Levitate Haunter controls speed with Icy Wind.
-weakest_link: Flying hits Heracross, Fighting hits Umbreon, Shedinja dies to Fire, Rock, Ghost, Dark, Flying, burn, poison or sand, and Haunter is frail.
+primary_question: Can the player beat this brain team (Heracross, Umbreon, Shedinja, Gastly) on its own terms: Greta's Frontier preview: Choice Scarf Moxie Heracross snowballs, Umbreon Wishes and Snarls, Wonder Guard Shedinja walls anything without the right coverage, and Levitate Gastly controls speed with Icy Wind.
+theme_and_tempo: Greta's Frontier preview: Choice Scarf Moxie Heracross snowballs, Umbreon Wishes and Snarls, Wonder Guard Shedinja walls anything without the right coverage, and Levitate Gastly controls speed with Icy Wind.
+intentional_weakness: Flying hits Heracross, Fighting hits Umbreon, Shedinja dies to Fire, Rock, Ghost, Dark, Flying, burn, poison or sand, and Gastly is frail.
+first_loss_lesson: Flying hits Heracross, Fighting hits Umbreon, Shedinja dies to Fire, Rock, Ghost, Dark, Flying, burn, poison or sand, and Gastly is frail.
+strongest_part: Greta's Frontier preview: Choice Scarf Moxie Heracross snowballs, Umbreon Wishes and Snarls, Wonder Guard Shedinja walls anything without the right coverage, and Levitate Gastly controls speed with Icy Wind.
+weakest_link: Flying hits Heracross, Fighting hits Umbreon, Shedinja dies to Fire, Rock, Ghost, Dark, Flying, burn, poison or sand, and Gastly is frail.
 competitive_references: Hand-authored 2026-09 campaign rebuild against the pinned Champions learnsets
 dialogue_status: master_intent_authored_exact_lines_pending
 reservation_status: hand-authored; species, Mega and legendary placement tracked in docs/emerald_champions_battle_teams.txt
@@ -2112,7 +2112,7 @@ team:
   1. SPECIES_HERACROSS @ ITEM_CHOICE_SCARF | level_offset=2 | ability=ABILITY_MOXIE | nature=NATURE_JOLLY | stat_points=2/32/0/0/0/32 | moves=MOVE_CLOSE_COMBAT,MOVE_MEGAHORN,MOVE_ROCK_SLIDE,MOVE_KNOCK_OFF
   2. SPECIES_UMBREON @ ITEM_LEFTOVERS | level_offset=1 | ability=ABILITY_INNER_FOCUS | nature=NATURE_CALM | stat_points=32/0/2/0/32/0 | moves=MOVE_FOUL_PLAY,MOVE_SNARL,MOVE_WISH,MOVE_PROTECT
   3. SPECIES_SHEDINJA @ ITEM_FOCUS_SASH | level_offset=1 | ability=ABILITY_WONDER_GUARD | nature=NATURE_ADAMANT | stat_points=2/32/0/0/0/32 | moves=MOVE_SHADOW_SNEAK,MOVE_X_SCISSOR,MOVE_WILL_O_WISP,MOVE_PROTECT
-  4. SPECIES_HAUNTER @ ITEM_LIFE_ORB | level_offset=3 | ability=ABILITY_LEVITATE | nature=NATURE_TIMID | stat_points=2/0/0/32/0/32 | moves=MOVE_SHADOW_BALL,MOVE_SLUDGE_BOMB,MOVE_ICY_WIND,MOVE_PROTECT
+  4. SPECIES_GASTLY @ ITEM_LIFE_ORB | level_offset=3 | ability=ABILITY_LEVITATE | nature=NATURE_TIMID | stat_points=2/0/0/32/0/32 | moves=MOVE_SHADOW_BALL,MOVE_SLUDGE_BOMB,MOVE_ICY_WIND,MOVE_PROTECT
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -13318,7 +13318,7 @@ team:
   1. SPECIES_CROBAT @ ITEM_BLACK_SLUDGE | level_offset=-1 | ability=ABILITY_INFILTRATOR | nature=NATURE_JOLLY | stat_points=2/32/0/0/0/32 | moves=MOVE_BRAVE_BIRD,MOVE_CROSS_POISON,MOVE_TAUNT,MOVE_U_TURN
   2. SPECIES_CLAWITZER @ ITEM_LIFE_ORB | level_offset=-1 | ability=ABILITY_MEGA_LAUNCHER | nature=NATURE_MODEST | stat_points=2/0/0/32/0/32 | moves=MOVE_WATER_PULSE,MOVE_AURA_SPHERE,MOVE_DARK_PULSE,MOVE_PROTECT
   3. SPECIES_MUK_ALOLA @ ITEM_FIGY_BERRY | level_offset=-1 | ability=ABILITY_GLUTTONY | nature=NATURE_BRAVE | stat_points=32/32/2/0/0/0 | moves=MOVE_KNOCK_OFF,MOVE_POISON_JAB,MOVE_CURSE,MOVE_PROTECT
-  4. SPECIES_EELEKTROSS @ ITEM_CLEAR_AMULET | level_offset=-1 | ability=ABILITY_LEVITATE | nature=NATURE_ADAMANT | stat_points=2/32/0/0/0/32 | moves=MOVE_WILD_CHARGE,MOVE_CRUNCH,MOVE_ROCK_SLIDE,MOVE_PROTECT
+  4. SPECIES_EELEKTROSS @ ITEM_EELEKTROSSITE | level_offset=-1 | ability=ABILITY_LEVITATE | nature=NATURE_ADAMANT | stat_points=2/32/0/0/0/32 | moves=MOVE_WILD_CHARGE,MOVE_CRUNCH,MOVE_ROCK_SLIDE,MOVE_PROTECT
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 
@@ -17560,8 +17560,8 @@ team:
   2. SPECIES_GOODRA @ ITEM_LEFTOVERS | level_offset=1 | ability=ABILITY_HYDRATION | nature=NATURE_MODEST | stat_points=2/0/0/32/0/32 | moves=MOVE_DRAGON_PULSE,MOVE_SLUDGE_BOMB,MOVE_THUNDER,MOVE_PROTECT
   3. SPECIES_TENTACRUEL @ ITEM_BLACK_SLUDGE | level_offset=1 | ability=ABILITY_RAIN_DISH | nature=NATURE_TIMID | stat_points=2/0/0/32/0/32 | moves=MOVE_HYDRO_PUMP,MOVE_SLUDGE_BOMB,MOVE_ICY_WIND,MOVE_PROTECT
   4. SPECIES_POLIWRATH @ ITEM_LIFE_ORB | level_offset=1 | ability=ABILITY_SWIFT_SWIM | nature=NATURE_ADAMANT | stat_points=2/32/0/0/0/32 | moves=MOVE_WATERFALL,MOVE_CLOSE_COMBAT,MOVE_ROCK_SLIDE,MOVE_PROTECT
-  5. SPECIES_SHARPEDO @ ITEM_FOCUS_SASH | level_offset=2 | ability=ABILITY_SPEED_BOOST | nature=NATURE_ADAMANT | stat_points=2/32/0/0/0/32 | moves=MOVE_CRUNCH,MOVE_LIQUIDATION,MOVE_ICE_FANG,MOVE_PROTECT
-  6. SPECIES_EELEKTROSS @ ITEM_EELEKTROSSITE | level_offset=2 | ability=ABILITY_LEVITATE | nature=NATURE_ADAMANT | stat_points=2/32/0/0/0/32 | moves=MOVE_WILD_CHARGE,MOVE_CRUNCH,MOVE_ROCK_SLIDE,MOVE_PROTECT
+  5. SPECIES_SHARPEDO @ ITEM_SHARPEDONITE | level_offset=2 | ability=ABILITY_SPEED_BOOST | nature=NATURE_ADAMANT | stat_points=2/32/0/0/0/32 | moves=MOVE_CRUNCH,MOVE_LIQUIDATION,MOVE_ICE_FANG,MOVE_PROTECT
+  6. SPECIES_EELEKTROSS @ ITEM_FOCUS_SASH | level_offset=2 | ability=ABILITY_LEVITATE | nature=NATURE_ADAMANT | stat_points=2/32/0/0/0/32 | moves=MOVE_WILD_CHARGE,MOVE_CRUNCH,MOVE_ROCK_SLIDE,MOVE_PROTECT
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
 

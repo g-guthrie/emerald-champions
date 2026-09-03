@@ -297,33 +297,31 @@ def verify_critical_progression_contracts() -> None:
         "Juan can be defeated before Tate and Liza",
     )
 
-    # Champions order (2026-09-03): Slateport's trainers are authored at chapter cap 30, so
-    # Briney sails there only after Steven's Letter, the Knuckle Badge and the Mega Ring.
-    # Inclement's "find Brawly in the Slateport crowd" detour is deliberately not used:
-    # it let a one-badge player (cap 20) reach cap-30 trainers.
+    # Inclement's order: deliver Steven's Letter, sail to Slateport, find Brawly there,
+    # and only then can his Gym be challenged. Sailing must NOT require his badge.
     dewford = label_block("data/maps/DewfordTown/scripts.inc", "DewfordTown_EventScript_Briney")
     require(
         dewford.index("FLAG_DELIVERED_STEVEN_LETTER") < dewford.index("DewfordTown_Text_WhereAreWeBound"),
         "Slateport sailing is not gated by Steven's Letter",
     )
     require(
-        dewford.index("FLAG_BADGE02_GET") < dewford.index("DewfordTown_Text_WhereAreWeBound")
-        and dewford.index("ITEM_MEGA_RING") < dewford.index("DewfordTown_Text_WhereAreWeBound"),
-        "Slateport sailing must wait for the Knuckle Badge and the Mega Ring (cap-30 trainers)",
+        "FLAG_BADGE02_GET" not in dewford and "ITEM_MEGA_RING" not in dewford,
+        "Slateport sailing still requires Brawly's badge or the Mega Ring, reversing Inclement's story",
     )
+    # The Dewford guide and Slateport Brawly must share one hide flag, so finding him
+    # clears the Gym entrance in the same moment.
     dew_map = (ROOT / "data/maps/DewfordTown/map.json").read_text()
     slate_map = (ROOT / "data/maps/SlateportCity/map.json").read_text()
+    require(
+        dew_map.count("FLAG_HIDE_SLATEPORT_CITY_BRAWLY") == 1
+        and slate_map.count("FLAG_HIDE_SLATEPORT_CITY_BRAWLY") == 1,
+        "the Dewford Gym guide and Slateport Brawly no longer share a hide flag",
+    )
     slate_scripts = (ROOT / "data/maps/SlateportCity/scripts.inc").read_text()
     require(
-        "FLAG_HIDE_SLATEPORT_CITY_BRAWLY" not in dew_map
-        and "FLAG_HIDE_SLATEPORT_CITY_BRAWLY" not in slate_map
-        and "SlateportCity_EventScript_Brawly::" not in slate_scripts,
-        "Brawly must wait in his Gym, not in the Slateport crowd",
-    )
-    gym_map = (ROOT / "data/maps/DewfordTown_Gym/map.json").read_text()
-    require(
-        '"graphics_id": "OBJ_EVENT_GFX_BRAWLY"' in gym_map,
-        "Brawly is missing from the Dewford Gym",
+        "SlateportCity_EventScript_Brawly::" in slate_scripts
+        and "removeobject" in slate_scripts.split("SlateportCity_EventScript_Brawly::", 1)[1][:600],
+        "finding Brawly in Slateport no longer sends him home",
     )
     # Inclement lights Granite Cave B1F/B2F so the Letter is deliverable before Flash.
     for cave in ("GraniteCave_B1F", "GraniteCave_B2F"):

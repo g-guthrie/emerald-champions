@@ -21,8 +21,42 @@ SlateportCity_Text_IncenseScholar:
 	.string "but not as a scarce battle tool.\p"
 	.string "Check CENTER vendors and local shops.$"
 
+@ Inclement: Brawly is waiting in the Slateport crowd. Finding him sends him home,
+@ and removeobject sets FLAG_HIDE_SLATEPORT_CITY_BRAWLY, which is shared with the
+@ Dewford Gym guide, so the Gym entrance clears at the same moment.
+SlateportCity_EventScript_Brawly::
+	lockall
+	msgbox SlateportCity_Text_WhoahLineSoLong, MSGBOX_DEFAULT
+	waitse
+	playse SE_PIN
+	applymovement VAR_LAST_TALKED, Common_Movement_ExclamationMark
+	waitmovement 0
+	applymovement VAR_LAST_TALKED, Common_Movement_Delay48
+	waitmovement 0
+	faceplayer
+	msgbox SlateportCity_Text_LookingForBrawly, MSGBOX_DEFAULT
+	fadescreen FADE_TO_BLACK
+	closemessage
+	removeobject VAR_LAST_TALKED
+	fadescreen FADE_FROM_BLACK
+	releaseall
+	end
+
+SlateportCity_Text_WhoahLineSoLong:
+	.string "Whoah! This line's way too long,\n"
+	.string "dude! What's the deal?$"
+
+SlateportCity_Text_LookingForBrawly:
+	.string "Oh, hey there!\p"
+	.string "Hmm? You're looking for the\n"
+	.string "DEWFORD GYM LEADER?\p"
+	.string "That'd be me, BRAWLY!\p"
+	.string "I'll head back to the GYM right now.\n"
+	.string "Bring two POKéMON. I battle doubles!$"
+
 SlateportCity_OnTransition:
 	setvar VAR_SLATEPORT_MUSEUM_1F_STATE, 0
+	call SlateportCity_EventScript_CheckKnuckleGuard
 	call SlateportCity_EventScript_EnterSlateport
 	call_if_eq VAR_SLATEPORT_CITY_STATE, 1, SlateportCity_EventScript_MovePeopleForSternInterview
 	call_if_eq VAR_SLATEPORT_OUTSIDE_MUSEUM_STATE, 1, SlateportCity_EventScript_SetReadyForScottScene
@@ -1399,3 +1433,43 @@ SlateportCity_Text_GretaDecline:
 SlateportCity_Text_GretaAfter:
 	.string "That GENGARITE marks a contender.\n"
 	.string "Bring it to the BATTLE FRONTIER.$"
+
+@ Emerald Champions: Inclement sends the player to Slateport before the Knuckle
+@ Badge (Brawly waits in the museum queue), so Slateport, Route 109 and the
+@ Seashore House are authored at chapter cap 20. Route 110 and Mauville stay at
+@ cap 30, the Dynamo chapter. A road worker holds the north exit until Brawly is
+@ beaten; the four trigger tiles beside him push the player back.
+SlateportCity_EventScript_CheckKnuckleGuard::
+	goto_if_unset FLAG_BADGE02_GET, SlateportCity_EventScript_CheckKnuckleGuardEnd
+	setflag FLAG_HIDE_SLATEPORT_CITY_KNUCKLE_GUARD
+	setvar VAR_TEMP_4, 1
+SlateportCity_EventScript_CheckKnuckleGuardEnd::
+	return
+
+SlateportCity_EventScript_KnuckleGuard::
+	lock
+	faceplayer
+	msgbox SlateportCity_Text_KnuckleGuardClosed, MSGBOX_DEFAULT
+	release
+	end
+
+SlateportCity_EventScript_KnuckleGuardTrigger::
+	lockall
+	msgbox SlateportCity_Text_KnuckleGuardTrigger, MSGBOX_DEFAULT
+	closemessage
+	applymovement LOCALID_PLAYER, Common_Movement_WalkDown
+	waitmovement 0
+	releaseall
+	end
+
+SlateportCity_Text_KnuckleGuardClosed:
+	.string "ROUTE 110 is closed while the CYCLING\n"
+	.string "ROAD crew resurfaces the trail.\p"
+	.string "The LEAGUE lets certified TRAINERS\n"
+	.string "through. BRAWLY's KNUCKLE BADGE\l"
+	.string "counts. He's around town, I hear.$"
+
+SlateportCity_Text_KnuckleGuardTrigger:
+	.string "Whoa, not past the cones! ROUTE 110\n"
+	.string "is closed until you hold the\l"
+	.string "KNUCKLE BADGE.$"
