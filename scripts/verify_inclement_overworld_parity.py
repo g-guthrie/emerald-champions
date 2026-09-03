@@ -14,6 +14,11 @@ ROOT = Path(__file__).resolve().parents[1]
 # Visible objects Champions deliberately places where Inclement had none. Each entry is a
 # reviewed decision with its reason, keyed by (graphics, x, y).
 REVIEWED_EXTRA_OBJECTS = {
+    "Route111": {
+        ("OBJ_EVENT_GFX_MAN_4", 16, 97):
+            "Champions road worker who closes Route 111 north (cap-40 chapter) until the "
+            "Dynamo Badge; vanilla and Inclement never gated it",
+    },
     "MirageTower_4F": {
         ("OBJ_EVENT_GFX_BREAKABLE_ROCK", 6, 7):
             "vanilla Rock Smash boulder; Inclement had an Aerodactylite sparkle here and "

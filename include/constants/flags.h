@@ -1541,7 +1541,7 @@
 #define FLAG_LANDMARK_EMBER_PATH                    (SYSTEM_FLAGS + 0xA4) // Emerald Champions: PokeNav landmark for a restored Inclement area
 #define FLAG_LANDMARK_ASHEN_WOODS                   (SYSTEM_FLAGS + 0xA5) // Emerald Champions: PokeNav landmark for a restored Inclement area
 #define FLAG_LANDMARK_SANDSTREWN_RUINS              (SYSTEM_FLAGS + 0xA6) // Emerald Champions: PokeNav landmark for a restored Inclement area
-#define FLAG_UNUSED_0x907                           (SYSTEM_FLAGS + 0xA7) // Unused Flag
+#define FLAG_HIDE_ROUTE_111_DYNAMO_GUARD            (SYSTEM_FLAGS + 0xA7) // Emerald Champions: Route 111 north closed until the Dynamo Badge
 #define FLAG_UNUSED_0x908                           (SYSTEM_FLAGS + 0xA8) // Unused Flag
 #define FLAG_UNUSED_0x909                           (SYSTEM_FLAGS + 0xA9) // Unused Flag
 #define FLAG_UNUSED_0x90A                           (SYSTEM_FLAGS + 0xAA) // Unused Flag

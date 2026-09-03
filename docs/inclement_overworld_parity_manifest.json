@@ -95761,6 +95761,20 @@
           ],
           [
             "OBJ_EVENT_GFX_MAN_4",
+            16,
+            97,
+            3,
+            "MOVEMENT_TYPE_FACE_DOWN",
+            0,
+            0,
+            "TRAINER_TYPE_NONE",
+            "0",
+            "Route111_EventScript_DynamoGuard",
+            "FLAG_HIDE_ROUTE_111_DYNAMO_GUARD",
+            null
+          ],
+          [
+            "OBJ_EVENT_GFX_MAN_4",
             20,
             114,
             3,
@@ -96544,6 +96558,15 @@
           ],
           [
             "trigger",
+            15,
+            97,
+            3,
+            "VAR_TEMP_4",
+            "0",
+            "Route111_EventScript_DynamoGuardTrigger"
+          ],
+          [
+            "trigger",
             16,
             39,
             3,
@@ -96589,6 +96612,15 @@
           ],
           [
             "trigger",
+            17,
+            97,
+            3,
+            "VAR_TEMP_4",
+            "0",
+            "Route111_EventScript_DynamoGuardTrigger"
+          ],
+          [
+            "trigger",
             18,
             103,
             0,
@@ -96613,6 +96645,15 @@
             "VAR_TEMP_3",
             "0",
             "Route111_EventScript_ViciousSandstormTriggerLeft"
+          ],
+          [
+            "trigger",
+            18,
+            97,
+            3,
+            "VAR_TEMP_4",
+            "0",
+            "Route111_EventScript_DynamoGuardTrigger"
           ],
           [
             "trigger",

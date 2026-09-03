@@ -11,6 +11,20 @@
 GabbyAndTy_EventScript_UpdateLocation::
 	cleartrainerflag TRAINER_GABBY_AND_TY_6  @ Clear flag for their final party to allow infinite rematches.
 	specialvar VAR_RESULT, GabbyAndTyGetBattleNum
+	@ Emerald Champions: parties 4-6 are authored at chapter cap 60 (Feather Badge).
+	@ Their Route 111 / 118 / 120 spots are walkable at five badges, so the crew stays
+	@ off the road after interview 3 until Winona is beaten, then reappears as normal.
+	goto_if_set FLAG_BADGE06_GET, GabbyAndTy_EventScript_UpdateLocationSwitch
+	goto_if_lt VAR_RESULT, 3, GabbyAndTy_EventScript_UpdateLocationSwitch
+	call GabbyAndTy_EventScript_HideAtRoute120_1
+	call GabbyAndTy_EventScript_HideAtRoute111_2
+	call GabbyAndTy_EventScript_HideAtRoute118_2
+	call GabbyAndTy_EventScript_HideAtRoute120_2
+	call GabbyAndTy_EventScript_HideAtRoute111_3
+	call GabbyAndTy_EventScript_HideAtRoute118_3
+	end
+
+GabbyAndTy_EventScript_UpdateLocationSwitch::
 	switch VAR_RESULT
 	case 0, GabbyAndTy_EventScript_MoveForBattle1
 	case 1, GabbyAndTy_EventScript_MoveForBattle2

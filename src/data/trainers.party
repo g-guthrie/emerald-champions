@@ -1816,36 +1816,36 @@ Double Battle: Yes
 AI: Basic Trainer / Assumptions / Hp Aware / Try To 2HKO / Smart Switching / Smart Mon Choices / Prediction / Pp Stall Prevention / Powerful Status / Know Opponent Party
 
 SPECIES_CHERRIM @ ITEM_HEAT_ROCK
-Level: 54
+Level: 29
 Ability: ABILITY_FLOWER_GIFT
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
 Nature: NATURE_MODEST
 - MOVE_SUNNY_DAY
-- MOVE_WEATHER_BALL
 - MOVE_ENERGY_BALL
+- MOVE_DAZZLING_GLEAM
 - MOVE_HELPING_HAND
 
-SPECIES_SAWSBUCK @ ITEM_LIFE_ORB
-Level: 54
+SPECIES_DEERLING @ ITEM_EVIOLITE
+Level: 29
 Ability: ABILITY_CHLOROPHYLL
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_JOLLY
-- MOVE_HORN_LEECH
 - MOVE_DOUBLE_EDGE
-- MOVE_MEGAHORN
+- MOVE_SEED_BOMB
+- MOVE_DOUBLE_KICK
 - MOVE_PROTECT
 
-SPECIES_ROSERADE @ ITEM_FOCUS_SASH
-Level: 54
+SPECIES_ROSELIA @ ITEM_FOCUS_SASH
+Level: 29
 Ability: ABILITY_NATURAL_CURE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
 Nature: NATURE_TIMID
 - MOVE_SLEEP_POWDER
-- MOVE_LEAF_STORM
-- MOVE_SLUDGE_BOMB
+- MOVE_GIGA_DRAIN
+- MOVE_EXTRASENSORY
 - MOVE_PROTECT
 
 === TRAINER_ROSE_1 ===
@@ -9473,7 +9473,7 @@ Double Battle: Yes
 AI: Basic Trainer / Assumptions / Hp Aware / Try To 2HKO / Smart Switching / Smart Mon Choices / Prediction / Pp Stall Prevention / Powerful Status / Know Opponent Party
 
 SPECIES_DELCATTY @ ITEM_SITRUS_BERRY
-Level: 53
+Level: 28
 Ability: ABILITY_WONDER_SKIN
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -9484,7 +9484,7 @@ Nature: NATURE_JOLLY
 - MOVE_HELPING_HAND
 
 SPECIES_STANTLER @ ITEM_CLEAR_AMULET
-Level: 53
+Level: 28
 Ability: ABILITY_INTIMIDATE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -10526,36 +10526,36 @@ Double Battle: Yes
 AI: Basic Trainer / Assumptions / Hp Aware / Try To 2HKO / Smart Switching / Smart Mon Choices / Prediction / Pp Stall Prevention / Powerful Status / Know Opponent Party
 
 SPECIES_QWILFISH @ ITEM_SITRUS_BERRY
-Level: 53
+Level: 28
 Ability: ABILITY_INTIMIDATE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_JOLLY
-- MOVE_WATERFALL
+- MOVE_LIQUIDATION
 - MOVE_POISON_JAB
 - MOVE_ICY_WIND
 - MOVE_PROTECT
 
 SPECIES_BASCULIN @ ITEM_CHOICE_BAND
-Level: 53
+Level: 28
 Ability: ABILITY_ADAPTABILITY
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
 Nature: NATURE_JOLLY
-- MOVE_WATERFALL
+- MOVE_LIQUIDATION
 - MOVE_AQUA_JET
-- MOVE_ZEN_HEADBUTT
 - MOVE_CRUNCH
+- MOVE_DOUBLE_EDGE
 
-SPECIES_KINGDRA @ ITEM_WISE_GLASSES
-Level: 54
-Ability: ABILITY_DAMP
+SPECIES_SHARPEDO @ ITEM_LIFE_ORB
+Level: 30
+Ability: ABILITY_SPEED_BOOST
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
-Nature: NATURE_MODEST
-- MOVE_HYDRO_PUMP
-- MOVE_DRACO_METEOR
-- MOVE_ICE_BEAM
+EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
+Nature: NATURE_JOLLY
+- MOVE_CRUNCH
+- MOVE_LIQUIDATION
+- MOVE_ICE_FANG
 - MOVE_PROTECT
 
 === TRAINER_IVAN ===
@@ -14209,19 +14209,19 @@ Music: Twins
 Double Battle: Yes
 AI: Basic Trainer / Assumptions / Hp Aware / Try To 2HKO / Smart Switching / Smart Mon Choices / Prediction / Pp Stall Prevention / Powerful Status / Know Opponent Party
 
-SPECIES_TOGEKISS @ ITEM_SITRUS_BERRY
-Level: 54
+SPECIES_TOGETIC @ ITEM_EVIOLITE
+Level: 29
 Ability: ABILITY_SERENE_GRACE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 0 Atk / 2 Def / 0 SpA / 32 SpD / 0 Spe
 Nature: NATURE_CALM
 - MOVE_FOLLOW_ME
-- MOVE_AIR_SLASH
+- MOVE_DAZZLING_GLEAM
 - MOVE_THUNDER_WAVE
 - MOVE_PROTECT
 
 SPECIES_WIGGLYTUFF @ ITEM_THROAT_SPRAY
-Level: 53
+Level: 28
 Ability: ABILITY_COMPETITIVE
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -14232,7 +14232,7 @@ Nature: NATURE_MODEST
 - MOVE_PROTECT
 
 SPECIES_ALAKAZAM @ ITEM_ALAKAZITE
-Level: 55
+Level: 30
 Ability: ABILITY_MAGIC_GUARD
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -21870,7 +21870,7 @@ Double Battle: No
 AI: Basic Trainer / Assumptions / Hp Aware / Try To 2HKO / Smart Switching / Smart Mon Choices / Prediction / Pp Stall Prevention / Powerful Status / Know Opponent Party
 
 SPECIES_ELECTABUZZ @ ITEM_FOCUS_SASH
-Level: 53
+Level: 30
 Ability: ABILITY_VITAL_SPIRIT
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 0 Atk / 0 Def / 32 SpA / 0 SpD / 32 Spe
@@ -21881,7 +21881,7 @@ Nature: NATURE_TIMID
 - MOVE_PSYCHIC
 
 SPECIES_KRICKETUNE @ ITEM_CLEAR_AMULET
-Level: 53
+Level: 28
 Ability: ABILITY_TECHNICIAN
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -21901,7 +21901,7 @@ Double Battle: No
 AI: Basic Trainer / Assumptions / Hp Aware / Try To 2HKO / Smart Switching / Smart Mon Choices / Prediction / Pp Stall Prevention / Powerful Status / Know Opponent Party
 
 SPECIES_SAWK @ ITEM_FIGHTING_GEM
-Level: 53
+Level: 28
 Ability: ABILITY_STURDY
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
@@ -21912,7 +21912,7 @@ Nature: NATURE_ADAMANT
 - MOVE_BULK_UP
 
 SPECIES_THROH @ ITEM_ASSAULT_VEST
-Level: 53
+Level: 28
 Ability: ABILITY_INNER_FOCUS
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 EVs: 32 HP / 32 Atk / 2 Def / 0 SpA / 0 SpD / 0 Spe

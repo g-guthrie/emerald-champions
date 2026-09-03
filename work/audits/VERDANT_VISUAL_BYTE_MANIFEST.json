@@ -133644,7 +133644,7 @@
       "same_path_identical": 96
     }
   },
-  "current_visual_tree_sha256": "6ac586433fc4466e452e0ad7f6555b8abc7458b07cffe7ee28731063aa65cbab",
+  "current_visual_tree_sha256": "d4cf330f162a9c149e27536823e496cbcf2a92817f877e556c7b5f36a0a0925f",
   "policy_version": 1,
   "reference_assets": [
     {
@@ -147532,8 +147532,8 @@
     {
       "classification": "changed",
       "current_path": "data/maps/Route111/map.json",
-      "current_sha256": "7a8cabab853e4c418c7f0cdbff14f95c4fec63549775f4352fe7a15c9dfb2d69",
-      "current_size": 30834,
+      "current_sha256": "057d3b9f86fda41c99e4d7fe38177ae0dd8e0e85a1590241b72fd1d49b3b190d",
+      "current_size": 31837,
       "group": "map",
       "kind": "map_data",
       "reference_path": "data/maps/Route111/map.json",

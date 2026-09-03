@@ -44,6 +44,7 @@ Route111_OnTransition:
 	call_if_eq VAR_MIRAGE_TOWER_STATE, 1, Route111_EventScript_SetFallingPlayerGfx
 	call_if_eq VAR_MIRAGE_TOWER_STATE, 2, Route111_EventScript_SetMirageTowerGone
 	call Route111_EventScript_CheckSetSandstorm
+	call Route111_EventScript_CheckDynamoGuard
 	call GabbyAndTy_EventScript_UpdateLocation
 	call Route111_EventScript_UpdateVialQuestObjects
 	goto_if_not_defeated TRAINER_VICKY, Route111_EventScript_SetWinstratesNotDefeated
@@ -821,3 +822,44 @@ Route111_Text_TrainerHillSign:
 	.string "{RIGHT_ARROW} TRAINER HILL ENTRANCE\p"
 	.string "“Scale the heights, you hot-blooded\n"
 	.string "TRAINERS!”$"
+
+@ Emerald Champions: everything north of this point (Route 111 west lane, Route 112,
+@ Fiery Path, Routes 113-114, Meteor Falls, Mt. Chimney, Lavaridge) is authored at
+@ chapter cap 40, the Dynamo Badge chapter. Vanilla never gated it, so a two-badge
+@ player could walk into cap-40 trainers. A road worker holds the trail until Wattson
+@ certifies the player; the three trigger tiles beside him push the player back.
+Route111_EventScript_CheckDynamoGuard::
+	goto_if_unset FLAG_BADGE03_GET, Route111_EventScript_CheckDynamoGuardEnd
+	setflag FLAG_HIDE_ROUTE_111_DYNAMO_GUARD
+	setvar VAR_TEMP_4, 1
+Route111_EventScript_CheckDynamoGuardEnd::
+	return
+
+Route111_EventScript_DynamoGuard::
+	lock
+	faceplayer
+	msgbox Route111_Text_DynamoGuardClosed, MSGBOX_DEFAULT
+	release
+	end
+
+Route111_EventScript_DynamoGuardTrigger::
+	lockall
+	msgbox Route111_Text_DynamoGuardTrigger, MSGBOX_DEFAULT
+	closemessage
+	applymovement LOCALID_PLAYER, Common_Movement_WalkDown
+	waitmovement 0
+	releaseall
+	end
+
+Route111_Text_DynamoGuardClosed:
+	.string "The trail north is closed for now.\n"
+	.string "The power lines up to LAVARIDGE went\l"
+	.string "down in the last storm.\p"
+	.string "WATTSON's crew is rewiring the route.\n"
+	.string "Once his GYM certifies you with the\l"
+	.string "DYNAMO BADGE, you're cleared to pass.$"
+
+Route111_Text_DynamoGuardTrigger:
+	.string "Hey! Not past the rope. The trail\n"
+	.string "north is closed until WATTSON's crew\l"
+	.string "finishes the power lines.$"

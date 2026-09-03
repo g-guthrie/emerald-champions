@@ -1625,40 +1625,40 @@ plan: Elijah's Sturdy Skarmory sets Tailwind and Body Presses while Moxie Honchk
 crack: Fire and Electric hit Skarmory, Rock and Electric hit Honchkrow, and the Tailwind ends before either becomes a problem.
 SKARMORY @ROCKY_HELMET STURDY IMPISH WD -2 | TAILWIND, BRAVE_BIRD, BODY_PRESS, ROOST
 HONCHKROW @LIFE_ORB MOXIE JOLLY PS -2 | BRAVE_BIRD, SUCKER_PUNCH, NIGHT_SLASH, PROTECT
-# ---- E0210 Route103 cap=55 Feather Badge
+# ---- E0210 Route103 cap=30 Dynamo Badge
 ## E0210 TRAINER_DAISY class=regular
-plan: Daisy's garden in the sun: Cherrim sets it and Helping Hands, Chlorophyll Sawsbuck doubles its speed, and Roserade Sleep Powders.
+plan: Daisy's garden in the sun: Cherrim sets it and Helping Hands, Chlorophyll Deerling doubles its speed behind an Eviolite, and Roselia Sleep Powders.
 crack: Rain or Rock ends the sun, Fire and Flying hit every flower, and Grass types ignore the Sleep Powder.
-CHERRIM @HEAT_ROCK FLOWER_GIFT MODEST SS -1 | SUNNY_DAY, WEATHER_BALL, ENERGY_BALL, HELPING_HAND
-SAWSBUCK @LIFE_ORB CHLOROPHYLL JOLLY PS -1 | HORN_LEECH, DOUBLE_EDGE, MEGAHORN, PROTECT
-ROSERADE @FOCUS_SASH NATURAL_CURE TIMID SS -1 | SLEEP_POWDER, LEAF_STORM, SLUDGE_BOMB, PROTECT
-# ---- E0211 Route103 cap=55 Feather Badge
+CHERRIM @HEAT_ROCK FLOWER_GIFT MODEST SS -1 | SUNNY_DAY, ENERGY_BALL, DAZZLING_GLEAM, HELPING_HAND
+DEERLING @EVIOLITE CHLOROPHYLL JOLLY PS -1 | DOUBLE_EDGE, SEED_BOMB, DOUBLE_KICK, PROTECT
+ROSELIA @FOCUS_SASH NATURAL_CURE TIMID SS -1 | SLEEP_POWDER, GIGA_DRAIN, EXTRASENSORY, PROTECT
+# ---- E0211 Route103 cap=30 Dynamo Badge
 ## E0211 TRAINER_AMY_AND_LIV_1 class=ace
-plan: The twins have grown up: Togekiss Follow Mes and paralyzes, Competitive Wigglytuff spreads Hyper Voice, and Mega Alakazam's Trace and Psychic end things fast.
+plan: The twins are growing up: Togetic Follow Mes and paralyzes, Competitive Wigglytuff spreads Hyper Voice, and Mega Alakazam's Trace and Psychic end things fast.
 crack: Steel and Poison wall the fairies, Dark and Ghost hit Alakazam, and spread moves ignore Follow Me.
-TOGEKISS @SITRUS_BERRY SERENE_GRACE CALM WS -1 | FOLLOW_ME, AIR_SLASH, THUNDER_WAVE, PROTECT
+TOGETIC @EVIOLITE SERENE_GRACE CALM WS -1 | FOLLOW_ME, DAZZLING_GLEAM, THUNDER_WAVE, PROTECT
 WIGGLYTUFF @THROAT_SPRAY COMPETITIVE MODEST SS -2 | HYPER_VOICE, DAZZLING_GLEAM, ICY_WIND, PROTECT
 ALAKAZAM @ALAKAZITE MAGIC_GUARD TIMID SS 0 | PSYCHIC, DAZZLING_GLEAM, ENCORE, PROTECT
-# ---- E0212 Route103 cap=55 Feather Badge
+# ---- E0212 Route103 cap=30 Dynamo Badge
 ## E0212 TRAINER_ANDREW class=regular
-plan: Andrew's Intimidate Qwilfish Icy Winds, Choice Band Basculin Aqua Jets, and Kingdra fires Draco Meteor.
-crack: Electric hits all three, Ground hits Qwilfish, and Dragon or Fairy hits Kingdra.
-QWILFISH @SITRUS_BERRY INTIMIDATE JOLLY PS -2 | WATERFALL, POISON_JAB, ICY_WIND, PROTECT
-BASCULIN @CHOICE_BAND ADAPTABILITY JOLLY PS -2 | WATERFALL, AQUA_JET, ZEN_HEADBUTT, CRUNCH
-KINGDRA @WISE_GLASSES DAMP MODEST SS -1 | HYDRO_PUMP, DRACO_METEOR, ICE_BEAM, PROTECT
-# ---- E0213 Route103 cap=55 Feather Badge
+plan: Andrew's Intimidate Qwilfish Icy Winds, Choice Band Basculin Aqua Jets, and Speed Boost Sharpedo Crunches once it outspeeds the field.
+crack: Electric hits all three, Ground hits Qwilfish, and Fighting or Fairy hits Sharpedo before Speed Boost stacks.
+QWILFISH @SITRUS_BERRY INTIMIDATE JOLLY PS -2 | LIQUIDATION, POISON_JAB, ICY_WIND, PROTECT
+BASCULIN @CHOICE_BAND ADAPTABILITY JOLLY PS -2 | LIQUIDATION, AQUA_JET, CRUNCH, DOUBLE_EDGE
+SHARPEDO @LIFE_ORB SPEED_BOOST JOLLY PS 0 | CRUNCH, LIQUIDATION, ICE_FANG, PROTECT
+# ---- E0213 Route103 cap=30 Dynamo Badge
 ## E0213 TRAINER_MIGUEL_1 class=casual
 plan: Miguel's pets: Wonder Skin Delcatty Fake Outs and paralyzes, and Intimidate Stantler Psyshield Bashes.
 crack: Fighting hits both, and neither has the bulk to take a real hit.
 DELCATTY @SITRUS_BERRY WONDER_SKIN JOLLY PS -2 | FAKE_OUT, THUNDER_WAVE, DOUBLE_EDGE, HELPING_HAND
 STANTLER @CLEAR_AMULET INTIMIDATE JOLLY PS -2 | DOUBLE_EDGE, PSYSHIELD_BASH, THUNDER_WAVE, PROTECT
-# ---- E0214 Route103 cap=55 Feather Badge
+# ---- E0214 Route103 cap=30 Dynamo Badge
 ## E0214 TRAINER_MARCOS class=casual
 plan: Marcos's singles: Electabuzz pivots and Technician Kricketune Taunts.
 crack: Ground hits Electabuzz, Fire and Flying hit Kricketune.
-ELECTABUZZ @FOCUS_SASH VITAL_SPIRIT TIMID SS -2 | THUNDERBOLT, VOLT_SWITCH, FOCUS_BLAST, PSYCHIC
+ELECTABUZZ @FOCUS_SASH VITAL_SPIRIT TIMID SS 0 | THUNDERBOLT, VOLT_SWITCH, FOCUS_BLAST, PSYCHIC
 KRICKETUNE @CLEAR_AMULET TECHNICIAN JOLLY PS -2 | BUG_BITE, AERIAL_ACE, TAUNT, PROTECT
-# ---- E0215 Route103 cap=55 Feather Badge
+# ---- E0215 Route103 cap=30 Dynamo Badge
 ## E0215 TRAINER_RHETT class=casual
 plan: Rhett's singles: Sturdy Sawk Bulk Ups and Throh throws.
 crack: Flying and Psychic hit both, and Sawk's Sturdy breaks on chip damage.
