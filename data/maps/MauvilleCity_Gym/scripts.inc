@@ -358,7 +358,8 @@ MauvilleCity_Gym_Text_RegisteredWattson:
 
 MauvilleCity_Gym_Text_WattsonPostBattle:
 	.string "The next road runs north through ROUTE\n"
-	.string "111. New climates demand new answers.$"
+	.string "111. My crew will wave you past the\l"
+	.string "rope. New climates demand new answers.$"
 
 MauvilleCity_Gym_Text_WattsonGoForthAndEndeavor:
 	.string "Wahahahah!\n"

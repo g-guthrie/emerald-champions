@@ -43,8 +43,8 @@ BattleFrontier_Mart_EventScript_MegaArchive::
 	end
 
 BattleFrontier_Mart_Text_MegaArchive:
-	.string "You reached the Battle Frontier, so\n"
-	.string "the complete Mega archive is open.\p"
+	.string "Every CENTER VENDOR shares one Mega\n"
+	.string "archive with any RING holder.\p"
 	.string "Take any stones your teams need.$"
 
 BattleFrontier_Mart_EventScript_OldWoman::

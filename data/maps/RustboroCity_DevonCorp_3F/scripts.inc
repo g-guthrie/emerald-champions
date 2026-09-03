@@ -280,10 +280,11 @@ RustboroCity_DevonCorp_3F_Text_ThankYouForDeliveringLetter:
 	.string "Let PIDGEOT show you what it can become.$"
 
 RustboroCity_DevonCorp_3F_Text_ExplainPidgeotite:
-	.string "Shops do not stock rare MEGA STONES.\n"
-	.string "Each one marks a discovery or victory.\p"
-	.string "Seek them in HOENN's gyms,\n"
-	.string "ruins, caves, and hidden paths.$"
+	.string "Shops never sell MEGA STONES. Once you\n"
+	.string "hold a RING, every POKéMON CENTER\l"
+	.string "VENDOR lends the whole archive free.\p"
+	.string "The ones in HOENN's gyms, ruins and\n"
+	.string "caves are the originals. Find them.$"
 
 RustboroCity_DevonCorp_3F_Text_NotFamiliarWithTrends:
 	.string "The old records call these marks a\n"

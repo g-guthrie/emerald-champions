@@ -1627,10 +1627,10 @@ SKARMORY @ROCKY_HELMET STURDY IMPISH WD -2 | TAILWIND, BRAVE_BIRD, BODY_PRESS, R
 HONCHKROW @LIFE_ORB MOXIE JOLLY PS -2 | BRAVE_BIRD, SUCKER_PUNCH, NIGHT_SLASH, PROTECT
 # ---- E0210 Route103 cap=30 Dynamo Badge
 ## E0210 TRAINER_DAISY class=regular
-plan: Daisy's garden in the sun: Cherrim sets it and Helping Hands, Chlorophyll Deerling doubles its speed behind an Eviolite, and Roselia Sleep Powders.
+plan: Daisy's garden in the sun: Cherrim sets it and Helping Hands, Chlorophyll Deerling doubles its speed, and Roselia Sleep Powders.
 crack: Rain or Rock ends the sun, Fire and Flying hit every flower, and Grass types ignore the Sleep Powder.
 CHERRIM @HEAT_ROCK FLOWER_GIFT MODEST SS -1 | SUNNY_DAY, ENERGY_BALL, DAZZLING_GLEAM, HELPING_HAND
-DEERLING @EVIOLITE CHLOROPHYLL JOLLY PS -1 | DOUBLE_EDGE, SEED_BOMB, DOUBLE_KICK, PROTECT
+DEERLING @SITRUS_BERRY CHLOROPHYLL JOLLY PS -1 | DOUBLE_EDGE, SEED_BOMB, DOUBLE_KICK, PROTECT
 ROSELIA @FOCUS_SASH NATURAL_CURE TIMID SS -1 | SLEEP_POWDER, GIGA_DRAIN, EXTRASENSORY, PROTECT
 # ---- E0211 Route103 cap=30 Dynamo Badge
 ## E0211 TRAINER_AMY_AND_LIV_1 class=ace

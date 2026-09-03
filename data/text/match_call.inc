@@ -2040,19 +2040,19 @@ MatchCall_Text_Roxanne_Preparing::
 	.string "ROXANNE: Oh, hello, {PLAYER}!\p"
 	.string "I've been hard at work retraining\n"
 	.string "since we met.\p"
-	.string "I will still need some more time\n"
-	.string "before I can reopen the GYM.\p"
-	.string "But when I do, please visit my GYM\n"
-	.string "for a rematch!$"
+	.string "The GYM is quiet now that you've\n"
+	.string "passed through.\p"
+	.string "Come by and tell me about the road\n"
+	.string "ahead sometime!$"
 
 MatchCall_Text_Roxanne_PreparingPostGame::
 	.string "ROXANNE: Is this {PLAYER}?\n"
 	.string "Congratulations!\l"
 	.string "I've been hearing about you!\p"
-	.string "As for me, I need some more time\n"
-	.string "before I can reopen the GYM.\p"
-	.string "But when I do, please visit my GYM\n"
-	.string "for a rematch!$"
+	.string "As for me, I've gone back to teaching\n"
+	.string "at the TRAINERS' SCHOOL.\p"
+	.string "Come by RUSTBORO and tell my class\n"
+	.string "how you did it!$"
 
 MatchCall_Text_Roxanne_RematchReady::
 	.string "ROXANNE: {PLAYER}!\n"

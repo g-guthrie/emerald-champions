@@ -8124,11 +8124,11 @@ difficulty_observed: UNPLAYED
 fatigue_role: ordinary_standard
 battle_class: regular
 ai_profile: sharp
-primary_question: Can the player beat this regular team (Cherrim, Deerling, Roselia) on its own terms: Daisy's garden in the sun: Cherrim sets it and Helping Hands, Chlorophyll Deerling doubles its speed behind an Eviolite, and Roselia Sleep Powders.
-theme_and_tempo: Daisy's garden in the sun: Cherrim sets it and Helping Hands, Chlorophyll Deerling doubles its speed behind an Eviolite, and Roselia Sleep Powders.
+primary_question: Can the player beat this regular team (Cherrim, Deerling, Roselia) on its own terms: Daisy's garden in the sun: Cherrim sets it and Helping Hands, Chlorophyll Deerling doubles its speed, and Roselia Sleep Powders.
+theme_and_tempo: Daisy's garden in the sun: Cherrim sets it and Helping Hands, Chlorophyll Deerling doubles its speed, and Roselia Sleep Powders.
 intentional_weakness: Rain or Rock ends the sun, Fire and Flying hit every flower, and Grass types ignore the Sleep Powder.
 first_loss_lesson: Rain or Rock ends the sun, Fire and Flying hit every flower, and Grass types ignore the Sleep Powder.
-strongest_part: Daisy's garden in the sun: Cherrim sets it and Helping Hands, Chlorophyll Deerling doubles its speed behind an Eviolite, and Roselia Sleep Powders.
+strongest_part: Daisy's garden in the sun: Cherrim sets it and Helping Hands, Chlorophyll Deerling doubles its speed, and Roselia Sleep Powders.
 weakest_link: Rain or Rock ends the sun, Fire and Flying hit every flower, and Grass types ignore the Sleep Powder.
 competitive_references: Hand-authored 2026-09 campaign rebuild against the pinned Champions learnsets
 dialogue_status: implemented native source dialogue; literal width verified; bespoke team-specific rewrite not claimed
@@ -8140,7 +8140,7 @@ trainer_id: TRAINER_DAISY
 format: double
 team:
   1. SPECIES_CHERRIM @ ITEM_HEAT_ROCK | level_offset=-1 | ability=ABILITY_FLOWER_GIFT | nature=NATURE_MODEST | stat_points=2/0/0/32/0/32 | moves=MOVE_SUNNY_DAY,MOVE_ENERGY_BALL,MOVE_DAZZLING_GLEAM,MOVE_HELPING_HAND
-  2. SPECIES_DEERLING @ ITEM_EVIOLITE | level_offset=-1 | ability=ABILITY_CHLOROPHYLL | nature=NATURE_JOLLY | stat_points=2/32/0/0/0/32 | moves=MOVE_DOUBLE_EDGE,MOVE_SEED_BOMB,MOVE_DOUBLE_KICK,MOVE_PROTECT
+  2. SPECIES_DEERLING @ ITEM_SITRUS_BERRY | level_offset=-1 | ability=ABILITY_CHLOROPHYLL | nature=NATURE_JOLLY | stat_points=2/32/0/0/0/32 | moves=MOVE_DOUBLE_EDGE,MOVE_SEED_BOMB,MOVE_DOUBLE_KICK,MOVE_PROTECT
   3. SPECIES_ROSELIA @ ITEM_FOCUS_SASH | level_offset=-1 | ability=ABILITY_NATURAL_CURE | nature=NATURE_TIMID | stat_points=2/0/0/32/0/32 | moves=MOVE_SLEEP_POWDER,MOVE_GIGA_DRAIN,MOVE_EXTRASENSORY,MOVE_PROTECT
 source_note: Hand-authored Emerald Champions team; implementation must match exactly.
 === END ENCOUNTER ===
