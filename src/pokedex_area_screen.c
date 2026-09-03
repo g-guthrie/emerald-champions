@@ -44,6 +44,10 @@
 #define MAP_GROUP_DUNGEONS_FRLG MAP_GROUP(MAP_VIRIDIAN_FOREST)
 #define MAP_GROUP_SPECIAL_AREA MAP_GROUP(MAP_SAFARI_ZONE_NORTHWEST)
 #define MAP_GROUP_SPECIAL_AREA_FRLG MAP_GROUP(MAP_NAVEL_ROCK_EXTERIOR_FRLG)
+// Emerald Champions: the restored Inclement areas live in their own map group.  Two of them
+// (Dewford Meadow, Verdanturf Meadow) have their own cells on the region map and glow like a
+// route; the rest are caves/forests shown with a marker at their MAPSEC entry position.
+#define MAP_GROUP_EMERALD_CHAMPIONS_EXPANSION MAP_GROUP(MAP_ASHEN_WOODS)
 
 #define AREA_SCREEN_WIDTH 32
 #define AREA_SCREEN_HEIGHT 20
@@ -147,6 +151,12 @@ static const u32 sPokedexPlusHGSS_ScreenSelectBarSubmenu_Tilemap[] = INCGFX_U32(
 static void LoadHGSSScreenSelectBarSubmenu(void);
 
 static const enum Species sSpeciesHiddenFromAreaScreen[] = { SPECIES_WYNAUT };
+
+static const mapsec_u16_t sExpansionGlowMapSections[] =
+{
+    MAPSEC_DEWFORD_MEADOW,
+    MAPSEC_VERDANTURF_MEADOW,
+};
 
 static const mapsec_u16_t sMovingRegionMapSections[3] =
 {
@@ -285,6 +295,18 @@ static bool8 DrawAreaGlow(void)
     return TRUE;
 }
 
+static bool32 IsExpansionGlowMapSection(u32 mapSecId)
+{
+    u32 i;
+
+    for (i = 0; i < ARRAY_COUNT(sExpansionGlowMapSections); i++)
+    {
+        if (sExpansionGlowMapSections[i] == mapSecId)
+            return TRUE;
+    }
+    return FALSE;
+}
+
 static void FindMapsWithMon(enum Species species)
 {
     enum RegionMapType currentRegionMapType;
@@ -353,6 +375,12 @@ static void FindMapsWithMon(enum Species species)
             case MAP_GROUP_SPECIAL_AREA:
             case MAP_GROUP_SPECIAL_AREA_FRLG:
                 SetSpecialMapHasMon(gWildMonHeaders[i].mapGroup, gWildMonHeaders[i].mapNum);
+                break;
+            case MAP_GROUP_EMERALD_CHAMPIONS_EXPANSION:
+                if (IsExpansionGlowMapSection(headerSectionId))
+                    SetAreaHasMon(gWildMonHeaders[i].mapGroup, gWildMonHeaders[i].mapNum);
+                else
+                    SetSpecialMapHasMon(gWildMonHeaders[i].mapGroup, gWildMonHeaders[i].mapNum);
                 break;
             }
         }

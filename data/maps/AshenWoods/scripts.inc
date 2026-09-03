@@ -9,6 +9,7 @@ AshenWoods_OnResume:
 	end
 
 AshenWoods_OnTransition:
+	setflag FLAG_LANDMARK_ASHEN_WOODS
 	setflag FLAG_HIDE_ASHEN_WOODS_VIAL_CHANSEY
 	setflag FLAG_HIDE_ASHEN_WOODS_VIAL_BALL
 	call_if_eq VAR_JAGGED_PASS_ASH_WEATHER, 1, AshenWoods_EventScript_SetWeatherAsh

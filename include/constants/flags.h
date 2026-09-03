@@ -1534,13 +1534,13 @@
 #define FLAG_UNUSED_0x8FD                           (SYSTEM_FLAGS + 0x9D) // Unused Flag
 #define FLAG_UNUSED_0x8FE                           (SYSTEM_FLAGS + 0x9E) // Unused Flag
 #define FLAG_UNUSED_0x8FF                           (SYSTEM_FLAGS + 0x9F) // Unused Flag
-#define FLAG_UNUSED_0x900                           (SYSTEM_FLAGS + 0xA0) // Unused Flag
-#define FLAG_UNUSED_0x901                           (SYSTEM_FLAGS + 0xA1) // Unused Flag
-#define FLAG_UNUSED_0x902                           (SYSTEM_FLAGS + 0xA2) // Unused Flag
-#define FLAG_UNUSED_0x903                           (SYSTEM_FLAGS + 0xA3) // Unused Flag
-#define FLAG_UNUSED_0x904                           (SYSTEM_FLAGS + 0xA4) // Unused Flag
-#define FLAG_UNUSED_0x905                           (SYSTEM_FLAGS + 0xA5) // Unused Flag
-#define FLAG_UNUSED_0x906                           (SYSTEM_FLAGS + 0xA6) // Unused Flag
+#define FLAG_LANDMARK_SEASPRAY_CAVE                 (SYSTEM_FLAGS + 0xA0) // Emerald Champions: PokeNav landmark for a restored Inclement area
+#define FLAG_LANDMARK_DEWFORD_MEADOW                (SYSTEM_FLAGS + 0xA1) // Emerald Champions: PokeNav landmark for a restored Inclement area
+#define FLAG_LANDMARK_DEWFORD_MANOR                 (SYSTEM_FLAGS + 0xA2) // Emerald Champions: PokeNav landmark for a restored Inclement area
+#define FLAG_LANDMARK_VERDANTURF_MEADOW             (SYSTEM_FLAGS + 0xA3) // Emerald Champions: PokeNav landmark for a restored Inclement area
+#define FLAG_LANDMARK_EMBER_PATH                    (SYSTEM_FLAGS + 0xA4) // Emerald Champions: PokeNav landmark for a restored Inclement area
+#define FLAG_LANDMARK_ASHEN_WOODS                   (SYSTEM_FLAGS + 0xA5) // Emerald Champions: PokeNav landmark for a restored Inclement area
+#define FLAG_LANDMARK_SANDSTREWN_RUINS              (SYSTEM_FLAGS + 0xA6) // Emerald Champions: PokeNav landmark for a restored Inclement area
 #define FLAG_UNUSED_0x907                           (SYSTEM_FLAGS + 0xA7) // Unused Flag
 #define FLAG_UNUSED_0x908                           (SYSTEM_FLAGS + 0xA8) // Unused Flag
 #define FLAG_UNUSED_0x909                           (SYSTEM_FLAGS + 0xA9) // Unused Flag

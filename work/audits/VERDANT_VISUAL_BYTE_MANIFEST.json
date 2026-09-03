@@ -133453,8 +133453,8 @@
     {
       "classification": "added",
       "current_path": "src/data/region_map/region_map_layout.h",
-      "current_sha256": "591ec8ca686916d53fa531044905c33c5158a7d21c5464290e9a985a01eef894",
-      "current_size": 6544,
+      "current_sha256": "7759bf2c9a37b57a8fbca44f2d05111e799435fc75d52b3e9d5d5b4af80fa132",
+      "current_size": 6567,
       "group": "map",
       "kind": "visual_data",
       "reference_path": null,
@@ -133644,7 +133644,7 @@
       "same_path_identical": 96
     }
   },
-  "current_visual_tree_sha256": "857947a8f12d741d3a74ef9f6cb66afb84a2780ed9a937cd035ec4c485553f58",
+  "current_visual_tree_sha256": "904e1a7f7a30cc43d43d5adee55da72994cd2b05ec22f28f6a760012e6ffbf23",
   "policy_version": 1,
   "reference_assets": [
     {
@@ -144133,8 +144133,8 @@
     {
       "classification": "changed",
       "current_path": "data/maps/AshenWoods/map.json",
-      "current_sha256": "b05c1c59ee375166354d97bb677eb25e2414e30250ea297427df9fdb81be9140",
-      "current_size": 6675,
+      "current_sha256": "3378c75e489f3791019814c16cbee0c8b6abe96ccd8815858b96bba0709f4025",
+      "current_size": 6683,
       "group": "map",
       "kind": "map_data",
       "reference_path": "data/maps/AshenWoods/map.json",
@@ -146157,8 +146157,8 @@
     {
       "classification": "changed",
       "current_path": "data/maps/MagmaHideout_4F/map.json",
-      "current_sha256": "22c3584d509086a3aa7f1634645d482945dd418a0d85389b6b5c06f202545bec",
-      "current_size": 4975,
+      "current_sha256": "3fe3473e7b54dd159eb6a49397034714ed7867611b53e8522cd5ad10c10104a9",
+      "current_size": 4977,
       "group": "map",
       "kind": "map_data",
       "reference_path": "data/maps/MagmaHideout_4F/map.json",

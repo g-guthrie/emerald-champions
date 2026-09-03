@@ -1,5 +1,11 @@
 DewfordMeadow_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, DewfordMeadow_OnTransition
 	.byte 0
+
+DewfordMeadow_OnTransition:
+	@ Emerald Champions: record the landmark so the PokeNav map lists it.
+	setflag FLAG_LANDMARK_DEWFORD_MEADOW
+	end
 
 DewfordMeadow_EventScript_Warden::
 	msgbox DewfordMeadow_Text_Warden, MSGBOX_NPC

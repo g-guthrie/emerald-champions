@@ -644,6 +644,18 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "keys": [(300, 120, "UP")],
         "verify": True,
     },
+    "start-menu-full": {"id": 55, "frames": 700, "keys": [(400, 2, "START")]},
+    "start-menu-scroll-bottom": {
+        "id": 55,
+        "frames": 900,
+        "keys": [(400, 2, "START"), (480, 2, "DOWN"), (492, 2, "DOWN"), (504, 2, "DOWN"), (516, 2, "DOWN"), (528, 2, "DOWN"), (540, 2, "DOWN"), (552, 2, "DOWN"), (564, 2, "DOWN")],
+    },
+    "start-menu-wrap-up": {"id": 55, "frames": 800, "keys": [(400, 2, "START"), (480, 2, "UP")]},
+    "start-menu-wrap-down": {
+        "id": 55,
+        "frames": 900,
+        "keys": [(400, 2, "START"), (480, 2, "DOWN"), (492, 2, "DOWN"), (504, 2, "DOWN"), (516, 2, "DOWN"), (528, 2, "DOWN"), (540, 2, "DOWN"), (552, 2, "DOWN"), (564, 2, "DOWN"), (576, 2, "DOWN")],
+    },
     "wild-action-menu": {
         "id": 15,
         "frames": 1500,
@@ -723,6 +735,13 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "keys": [(900, 2, "A"), (1200, 2, "RIGHT")],
         "verify": True,
     },
+    "pokedex-area-ashen-woods": {"id": 23, "param": 20, "frames": 1400, "keys": [(900, 2, "A"), (1200, 2, "RIGHT")]},
+    "pokedex-area-dewford-meadow": {"id": 23, "param": 21, "frames": 1400, "keys": [(900, 2, "A"), (1200, 2, "RIGHT")]},
+    "pokedex-area-verdanturf-meadow": {"id": 23, "param": 22, "frames": 1400, "keys": [(900, 2, "A"), (1200, 2, "RIGHT")]},
+    "pokedex-area-ashen-woods-late": {"id": 23, "param": 20, "frames": 1460, "keys": [(900, 2, "A"), (1200, 2, "RIGHT")]},
+    "pokedex-area-verdanturf-meadow-late": {"id": 23, "param": 22, "frames": 1460, "keys": [(900, 2, "A"), (1200, 2, "RIGHT")]},
+    "pokedex-area-ashen-woods-b": {"id": 23, "param": 20, "frames": 1413, "keys": [(900, 2, "A"), (1200, 2, "RIGHT")]},
+    "pokedex-area-ashen-woods-c": {"id": 23, "param": 20, "frames": 1426, "keys": [(900, 2, "A"), (1200, 2, "RIGHT")]},
     "pokedex-stats": {
         "id": 23,
         "param": 3,

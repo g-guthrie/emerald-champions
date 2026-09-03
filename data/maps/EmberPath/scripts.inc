@@ -1,5 +1,11 @@
 EmberPath_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, EmberPath_OnTransition
 	.byte 0
+
+EmberPath_OnTransition:
+	@ Emerald Champions: record the landmark so the PokeNav map lists it.
+	setflag FLAG_LANDMARK_EMBER_PATH
+	end
 
 EmberPath_EventScript_Warden::
 	msgbox EmberPath_Text_Warden, MSGBOX_NPC

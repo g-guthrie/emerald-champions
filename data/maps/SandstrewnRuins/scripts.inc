@@ -1,5 +1,11 @@
 SandstrewnRuins_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, SandstrewnRuins_OnTransition
 	.byte 0
+
+SandstrewnRuins_OnTransition:
+	@ Emerald Champions: record the landmark so the PokeNav map lists it.
+	setflag FLAG_LANDMARK_SANDSTREWN_RUINS
+	end
 
 SandstrewnRuins_EventScript_Archaeologist::
 	msgbox SandstrewnRuins_Text_Archaeologist, MSGBOX_NPC

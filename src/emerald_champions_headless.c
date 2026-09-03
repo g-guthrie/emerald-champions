@@ -40,6 +40,7 @@
 #include "play_time.h"
 #include "pokeblock.h"
 #include "pokedex.h"
+#include "save.h"
 #include "pokedex_common.h"
 #include "pokemon.h"
 #include "pokemon_summary_screen.h"
@@ -267,6 +268,12 @@ static void PrepareHmReplacement(void)
     gEcHeadlessFixtureSetupResult = TRUE;
 }
 
+// Params 20-22 seed a single species that lives only in one restored Inclement area, so
+// the Area page proves the region-map marker/glow for the expansion map group.
+#define EC_HEADLESS_POKEDEX_AREA_ASHEN_WOODS       20
+#define EC_HEADLESS_POKEDEX_AREA_DEWFORD_MEADOW    21
+#define EC_HEADLESS_POKEDEX_AREA_VERDANTURF_MEADOW 22
+
 static void PrepareHeadlessPokedex(void)
 {
     static const enum Species species[] =
@@ -278,12 +285,26 @@ static void PrepareHeadlessPokedex(void)
         SPECIES_CHARMELEON,
         SPECIES_CHARIZARD,
     };
+    static const enum Species areaSpecies[] =
+    {
+        [EC_HEADLESS_POKEDEX_AREA_ASHEN_WOODS - 20] = SPECIES_BUZZWOLE,
+        [EC_HEADLESS_POKEDEX_AREA_DEWFORD_MEADOW - 20] = SPECIES_PHEROMOSA,
+        [EC_HEADLESS_POKEDEX_AREA_VERDANTURF_MEADOW - 20] = SPECIES_ALCREMIE,
+    };
+    const enum Species *list = species;
+    u32 count = ARRAY_COUNT(species);
+
+    if (gEcHeadlessFixtureParam >= 20 && gEcHeadlessFixtureParam < 20 + ARRAY_COUNT(areaSpecies))
+    {
+        list = &areaSpecies[gEcHeadlessFixtureParam - 20];
+        count = 1;
+    }
 
     FlagSet(FLAG_SYS_POKEDEX_GET);
     EnableNationalPokedex();
-    for (u32 i = 0; i < ARRAY_COUNT(species); i++)
+    for (u32 i = 0; i < count; i++)
     {
-        enum NationalDexOrder dex = SpeciesToNationalPokedexNum(species[i]);
+        enum NationalDexOrder dex = SpeciesToNationalPokedexNum(list[i]);
 
         GetSetPokedexFlag(dex, FLAG_SET_SEEN);
         if (i != 2)
@@ -1117,6 +1138,15 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
         break;
     case EC_HEADLESS_SCENARIO_DEWFORD_GYM_ENTRY:
         LoadHeadlessMap(MAP_DEWFORD_TOWN, 8, 18);
+        break;
+    case EC_HEADLESS_SCENARIO_START_MENU_FULL:
+        // Every Start menu row an established save can show: Pokedex, Pokemon, Bag,
+        // PokeNav, Player, Save, Reload, Option, Exit (nine rows, one more than fits).
+        FlagSet(FLAG_SYS_POKEDEX_GET);
+        FlagSet(FLAG_SYS_POKEMON_GET);
+        FlagSet(FLAG_SYS_POKENAV_GET);
+        gSaveFileStatus = SAVE_STATUS_OK; // makes the Reload row appear, as on a real save
+        LoadHeadlessMap(MAP_OLDALE_TOWN_POKEMON_CENTER_1F, 7, 6);
         break;
     case EC_HEADLESS_SCENARIO_WILD_ACTION_MENU:
     case EC_HEADLESS_SCENARIO_MOVE_DETAILS:

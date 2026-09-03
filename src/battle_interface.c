@@ -3070,6 +3070,11 @@ void TryToAddMoveInfoWindow(void)
     if (B_MOVE_DESCRIPTION_BUTTON == L_BUTTON && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
         return;
 
+    // Emerald Champions: in a wild battle the same button throws the last used Ball from
+    // the move menu, so the "L = move info" hint would lie; leave it off there.
+    if (B_LAST_USED_BALL == TRUE && B_LAST_USED_BALL_BUTTON == B_MOVE_DESCRIPTION_BUTTON && CanThrowLastUsedBall())
+        return;
+
     LoadSpritePalette(&sSpritePalette_AbilityPopUp);
     if (GetSpriteTileStartByTag(MOVE_INFO_WINDOW_TAG) == 0xFFFF)
         LoadSpriteSheet(&sSpriteSheet_MoveInfoWindow);
@@ -3077,6 +3082,11 @@ void TryToAddMoveInfoWindow(void)
     if (gBattleStruct->moveInfoSpriteId == MAX_SPRITES)
     {
         gBattleStruct->moveInfoSpriteId = CreateSprite(&sSpriteTemplate_MoveInfoWindow, LAST_BALL_WIN_X_0, LAST_USED_WIN_Y + 32, 6);
+        gSprites[gBattleStruct->moveInfoSpriteId].sHide = FALSE;
+    }
+    else
+    {
+        // Still sliding out from a hide: bring it back instead of letting it destroy itself.
         gSprites[gBattleStruct->moveInfoSpriteId].sHide = FALSE;
     }
 }

@@ -24,6 +24,7 @@
 #include "load_save.h"
 #include "main.h"
 #include "menu.h"
+#include "menu_helpers.h"
 #include "new_game.h"
 #include "option_menu.h"
 #include "overworld.h"
@@ -71,7 +72,10 @@ enum
     MENU_ACTION_DEBUG,
     MENU_ACTION_DEXNAV,
     MENU_ACTION_RELOAD_SAVE,
+    MENU_ACTION_COUNT,
 };
+
+#define START_MENU_MAX_VISIBLE 8
 
 // Save status
 enum
@@ -90,8 +94,14 @@ EWRAM_DATA static u8 sSafariBallsWindowId = 0;
 EWRAM_DATA static u8 sBattlePyramidFloorWindowId = 0;
 EWRAM_DATA static u8 sStartMenuCursorPos = 0;
 EWRAM_DATA static u8 sNumStartMenuActions = 0;
-EWRAM_DATA static u8 sCurrentStartMenuActions[9] = {0};
+EWRAM_DATA static u8 sCurrentStartMenuActions[MENU_ACTION_COUNT] = {0};
 EWRAM_DATA static s8 sInitStartMenuData[2] = {0};
+// Emerald Champions: the menu window shows at most START_MENU_MAX_VISIBLE rows and
+// scrolls; with Pokedex, Pokemon, Bag, PokeNav, Player, Save, Reload, Option and
+// Exit the vanilla single-height window ran off the bottom of the screen.
+EWRAM_DATA static u16 sStartMenuScrollOffset = 0;
+EWRAM_DATA static u8 sStartMenuScrollArrowTaskId = 0;
+EWRAM_DATA static bool8 sStartMenuScrollArrowsActive = FALSE;
 
 EWRAM_DATA static u8 (*sSaveDialogCallback)(void) = NULL;
 EWRAM_DATA static u8 sSaveDialogTimer = 0;
@@ -271,6 +281,7 @@ static void BuildMultiPartnerRoomStartMenu(void);
 static void ShowSafariBallsWindow(void);
 static void ShowPyramidFloorWindow(void);
 static void RemoveExtraStartMenuWindows(void);
+static void RemoveStartMenuScrollArrows(void);
 static bool32 PrintStartMenuActions(s8 *pIndex, u32 count);
 static bool32 InitStartMenuStep(void);
 static void InitStartMenu(void);
@@ -482,6 +493,7 @@ static void ShowPyramidFloorWindow(void)
 
 static void RemoveExtraStartMenuWindows(void)
 {
+    RemoveStartMenuScrollArrows();
     if (GetSafariZoneFlag())
     {
         ClearStdWindowAndFrameToTransparent(sSafariBallsWindowId, FALSE);
@@ -495,24 +507,49 @@ static void RemoveExtraStartMenuWindows(void)
     }
 }
 
+static u8 StartMenuVisibleCount(void)
+{
+    return sNumStartMenuActions > START_MENU_MAX_VISIBLE ? START_MENU_MAX_VISIBLE : sNumStartMenuActions;
+}
+
+// Keeps the remembered cursor inside the action list and scrolls the window so the
+// cursor row is visible.
+static void ClampStartMenuScroll(void)
+{
+    u8 visible = StartMenuVisibleCount();
+
+    if (sStartMenuCursorPos >= sNumStartMenuActions)
+        sStartMenuCursorPos = 0;
+    if (sStartMenuScrollOffset > sNumStartMenuActions - visible)
+        sStartMenuScrollOffset = sNumStartMenuActions - visible;
+    if (sStartMenuCursorPos < sStartMenuScrollOffset)
+        sStartMenuScrollOffset = sStartMenuCursorPos;
+    else if (sStartMenuCursorPos >= sStartMenuScrollOffset + visible)
+        sStartMenuScrollOffset = sStartMenuCursorPos - visible + 1;
+}
+
+// Prints `count` visible rows starting at *pIndex (a row index, not an action index).
 static bool32 PrintStartMenuActions(s8 *pIndex, u32 count)
 {
     s8 index = *pIndex;
+    u8 visible = StartMenuVisibleCount();
 
     do
     {
-        if (sStartMenuItems[sCurrentStartMenuActions[index]].func.u8_void == StartMenuPlayerNameCallback)
+        u8 action = sCurrentStartMenuActions[sStartMenuScrollOffset + index];
+
+        if (sStartMenuItems[action].func.u8_void == StartMenuPlayerNameCallback)
         {
-            PrintPlayerNameOnWindow(GetStartMenuWindowId(), sStartMenuItems[sCurrentStartMenuActions[index]].text, 8, (index << 4) + 9);
+            PrintPlayerNameOnWindow(GetStartMenuWindowId(), sStartMenuItems[action].text, 8, (index << 4) + 9);
         }
         else
         {
-            StringExpandPlaceholders(gStringVar4, sStartMenuItems[sCurrentStartMenuActions[index]].text);
+            StringExpandPlaceholders(gStringVar4, sStartMenuItems[action].text);
             AddTextPrinterParameterized(GetStartMenuWindowId(), FONT_NORMAL, gStringVar4, 8, (index << 4) + 9, TEXT_SKIP_DRAW, NULL);
         }
 
         index++;
-        if (index >= sNumStartMenuActions)
+        if (index >= visible)
         {
             *pIndex = index;
             return TRUE;
@@ -524,6 +561,83 @@ static bool32 PrintStartMenuActions(s8 *pIndex, u32 count)
 
     *pIndex = index;
     return FALSE;
+}
+
+static void RemoveStartMenuScrollArrows(void)
+{
+    if (sStartMenuScrollArrowsActive)
+    {
+        RemoveScrollIndicatorArrowPair(sStartMenuScrollArrowTaskId);
+        sStartMenuScrollArrowsActive = FALSE;
+    }
+}
+
+static void AddStartMenuScrollArrows(void)
+{
+    u8 visible = StartMenuVisibleCount();
+
+    RemoveStartMenuScrollArrows();
+    if (sNumStartMenuActions > visible)
+    {
+        // The window sits at tilemap (22,1), 7 tiles wide, (visible * 2 + 2) tiles tall.
+        sStartMenuScrollArrowTaskId = AddScrollIndicatorArrowPairParameterized(
+            SCROLL_ARROW_UP, 22 * 8 + 7 * 4, 1 * 8 + 4, (1 + visible * 2 + 2) * 8 - 4,
+            sNumStartMenuActions - visible, 110, 110, &sStartMenuScrollOffset);
+        sStartMenuScrollArrowsActive = TRUE;
+    }
+}
+
+// Redraws every visible row and the cursor after a scroll.
+static void RedrawStartMenuRows(void)
+{
+    s8 index = 0;
+
+    FillWindowPixelBuffer(GetStartMenuWindowId(), PIXEL_FILL(1));
+    while (!PrintStartMenuActions(&index, StartMenuVisibleCount()))
+        ;
+    InitMenuNormal(GetStartMenuWindowId(), FONT_NORMAL, 0, 9, 16, StartMenuVisibleCount(), sStartMenuCursorPos - sStartMenuScrollOffset);
+    CopyWindowToVram(GetStartMenuWindowId(), COPYWIN_GFX);
+}
+
+static void MoveStartMenuCursor(s8 delta)
+{
+    u8 visible = StartMenuVisibleCount();
+    u8 row = sStartMenuCursorPos - sStartMenuScrollOffset;
+
+    if (delta < 0)
+    {
+        if (sStartMenuCursorPos == 0)
+        {
+            // Wrap to the bottom, scrolling to the last page if needed.
+            sStartMenuCursorPos = sNumStartMenuActions - 1;
+            sStartMenuScrollOffset = sNumStartMenuActions - visible;
+        }
+        else
+        {
+            sStartMenuCursorPos--;
+            if (row == 0)
+                sStartMenuScrollOffset--;
+        }
+    }
+    else
+    {
+        if (sStartMenuCursorPos == sNumStartMenuActions - 1)
+        {
+            sStartMenuCursorPos = 0;
+            sStartMenuScrollOffset = 0;
+        }
+        else
+        {
+            sStartMenuCursorPos++;
+            if (row == visible - 1)
+                sStartMenuScrollOffset++;
+        }
+    }
+
+    if (sNumStartMenuActions > visible)
+        RedrawStartMenuRows();
+    else
+        Menu_MoveCursor(delta);
 }
 
 static bool32 InitStartMenuStep(void)
@@ -541,7 +655,8 @@ static bool32 InitStartMenuStep(void)
         break;
     case 2:
         LoadMessageBoxAndBorderGfx();
-        DrawStdWindowFrame(AddStartMenuWindow(sNumStartMenuActions), FALSE);
+        ClampStartMenuScroll();
+        DrawStdWindowFrame(AddStartMenuWindow(StartMenuVisibleCount()), FALSE);
         sInitStartMenuData[1] = 0;
         sInitStartMenuData[0]++;
         break;
@@ -557,7 +672,8 @@ static bool32 InitStartMenuStep(void)
             sInitStartMenuData[0]++;
         break;
     case 5:
-        sStartMenuCursorPos = InitMenuNormal(GetStartMenuWindowId(), FONT_NORMAL, 0, 9, 16, sNumStartMenuActions, sStartMenuCursorPos);
+        InitMenuNormal(GetStartMenuWindowId(), FONT_NORMAL, 0, 9, 16, StartMenuVisibleCount(), sStartMenuCursorPos - sStartMenuScrollOffset);
+        AddStartMenuScrollArrows();
         CopyWindowToVram(GetStartMenuWindowId(), COPYWIN_MAP);
         return TRUE;
     }
@@ -644,13 +760,13 @@ static bool8 HandleStartMenuInput(void)
     if (JOY_NEW(DPAD_UP))
     {
         PlaySE(SE_SELECT);
-        sStartMenuCursorPos = Menu_MoveCursor(-1);
+        MoveStartMenuCursor(-1);
     }
 
     if (JOY_NEW(DPAD_DOWN))
     {
         PlaySE(SE_SELECT);
-        sStartMenuCursorPos = Menu_MoveCursor(1);
+        MoveStartMenuCursor(1);
     }
 
     if (JOY_NEW(A_BUTTON))
@@ -904,6 +1020,7 @@ static bool8 StartMenuSafariZoneRetireCallback(void)
 static void HideStartMenuDebug(void)
 {
     PlaySE(SE_SELECT);
+    RemoveStartMenuScrollArrows();
     ClearStdWindowAndFrame(GetStartMenuWindowId(), TRUE);
     RemoveStartMenuWindow();
 }
@@ -1124,6 +1241,7 @@ static bool8 SaveErrorTimer(void)
 
 static u8 SaveConfirmSaveCallback(void)
 {
+    RemoveStartMenuScrollArrows();
     ClearStdWindowAndFrame(GetStartMenuWindowId(), FALSE);
     RemoveStartMenuWindow();
     ShowSaveInfoWindow();
@@ -1315,6 +1433,7 @@ static void InitBattlePyramidRetire(void)
 
 static u8 BattlePyramidConfirmRetireCallback(void)
 {
+    RemoveStartMenuScrollArrows();
     ClearStdWindowAndFrame(GetStartMenuWindowId(), FALSE);
     RemoveStartMenuWindow();
     ShowSaveMessage(gText_BattlePyramidConfirmRetire, BattlePyramidRetireYesNoCallback);
@@ -1568,6 +1687,7 @@ void SaveForBattleTowerLink(void)
 
 static void HideStartMenuWindow(void)
 {
+    RemoveStartMenuScrollArrows();
     ClearStdWindowAndFrame(GetStartMenuWindowId(), TRUE);
     RemoveStartMenuWindow();
     ScriptUnfreezeObjectEvents();

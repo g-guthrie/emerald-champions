@@ -1,5 +1,11 @@
 Seaspray_Cave_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, Seaspray_Cave_OnTransition
 	.byte 0
+
+Seaspray_Cave_OnTransition:
+	@ Emerald Champions: record the landmark so the PokeNav map lists it.
+	setflag FLAG_LANDMARK_SEASPRAY_CAVE
+	end
 
 Seaspray_Cave_EventScript_Explorer::
 	msgbox Seaspray_Cave_Text_Explorer, MSGBOX_NPC

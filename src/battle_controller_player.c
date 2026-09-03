@@ -268,6 +268,9 @@ static void HandleInputChooseAction(enum BattlerId battler)
         PlaySE(SE_SELECT);
         // Reuse the native move-description window on the action-menu page.
         // Only its tilemap row changes; BG0 and the action menu stay in place.
+        // The last-used-Ball shortcut sprite sits where the panel opens, so slide
+        // it away first; PlayerHandleChooseAction restores it when the panel closes.
+        TryHideLastUsedBall();
         SetWindowAttribute(B_WIN_MOVE_DESCRIPTION, WINDOW_TILEMAP_TOP, 27);
         OpenFoeTypesSubmenu(battler);
         return;
@@ -934,6 +937,7 @@ void HandleInputChooseMove(enum BattlerId battler)
         {
             gBattleStruct->descriptionSubmenu = FALSE;
             gBattleStruct->foeTypesSubmenu = FALSE;
+            TryToAddMoveInfoWindow();
             if (gCategoryIconSpriteId != 0xFF)
             {
                 DestroySprite(&gSprites[gCategoryIconSpriteId]);
@@ -966,11 +970,14 @@ void HandleInputChooseMove(enum BattlerId battler)
     else if (JOY_NEW(B_MOVE_DESCRIPTION_BUTTON) &&
         !(B_MOVE_DESCRIPTION_BUTTON == L_BUTTON && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A))
     {
+        // The L-button hint sprite overlaps the panel; hide it while the panel is up.
+        TryToHideMoveInfoWindow();
         gBattleStruct->descriptionSubmenu = TRUE;
         TryMoveSelectionDisplayMoveDescription(battler);
     }
     else if (JOY_NEW(R_BUTTON) && !gBattleStruct->zmove.viewing)
     {
+        TryToHideMoveInfoWindow();
         OpenFoeTypesSubmenu(battler);
     }
     else if (JOY_NEW(START_BUTTON))

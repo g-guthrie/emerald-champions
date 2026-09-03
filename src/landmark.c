@@ -58,6 +58,12 @@ static const struct Landmark Landmark_MirageTower = {COMPOUND_STRING("MIRAGE TOW
 static const struct Landmark Landmark_AlteringCave = {COMPOUND_STRING("ALTERING CAVE"), FLAG_LANDMARK_ALTERING_CAVE};
 static const struct Landmark Landmark_DesertUnderpass = {COMPOUND_STRING("DESERT UNDERPASS"), FLAG_LANDMARK_DESERT_UNDERPASS};
 static const struct Landmark Landmark_TrainerHill = {COMPOUND_STRING("TRAINER HILL"), FLAG_LANDMARK_TRAINER_HILL};
+// Emerald Champions: Inclement's restored areas, listed once the player has visited them.
+static const struct Landmark Landmark_SeasprayCave = {COMPOUND_STRING("SEASPRAY CAVE"), FLAG_LANDMARK_SEASPRAY_CAVE};
+static const struct Landmark Landmark_DewfordManor = {COMPOUND_STRING("DEWFORD MANOR"), FLAG_LANDMARK_DEWFORD_MANOR};
+static const struct Landmark Landmark_EmberPath = {COMPOUND_STRING("EMBER PATH"), FLAG_LANDMARK_EMBER_PATH};
+static const struct Landmark Landmark_AshenWoods = {COMPOUND_STRING("ASHEN WOODS"), FLAG_LANDMARK_ASHEN_WOODS};
+static const struct Landmark Landmark_SandstrewnRuins = {COMPOUND_STRING("SANDSTREWN RUINS"), FLAG_LANDMARK_SANDSTREWN_RUINS};
 
 static const struct Landmark *const Landmarks_Route103_2[]  =
 {
@@ -139,6 +145,7 @@ static const struct Landmark *const Landmarks_Route111_2[]  =
 {
     &Landmark_MirageTower,
     &Landmark_Desert,
+    &Landmark_SandstrewnRuins,
     NULL,
 };
 
@@ -161,6 +168,7 @@ static const struct Landmark *const Landmarks_Route112_0[]  =
 {
     &Landmark_FieryPath,
     &Landmark_JaggedPass,
+    &Landmark_EmberPath,
     NULL,
 };
 
@@ -292,6 +300,19 @@ static const struct Landmark *const Landmarks_MtChimney_2[]  =
 {
     &Landmark_CableCar,
     &Landmark_JaggedPass,
+    &Landmark_AshenWoods,
+    NULL,
+};
+
+static const struct Landmark *const Landmarks_Route115_2[]  =
+{
+    &Landmark_SeasprayCave,
+    NULL,
+};
+
+static const struct Landmark *const Landmarks_DewfordMeadow[]  =
+{
+    &Landmark_DewfordManor,
     NULL,
 };
 
@@ -320,6 +341,7 @@ static const struct LandmarkList sLandmarkLists[] =
     {MAPSEC_ROUTE_114, 3, Landmarks_MeteorFalls},
     {MAPSEC_ROUTE_115, 0, Landmarks_MeteorFalls},
     {MAPSEC_ROUTE_115, 1, Landmarks_MeteorFalls},
+    {MAPSEC_ROUTE_115, 2, Landmarks_Route115_2},
     {MAPSEC_ROUTE_116, 1, Landmarks_Route116_1},
     {MAPSEC_ROUTE_116, 2, Landmarks_Route116_2},
     {MAPSEC_ROUTE_117, 2, Landmarks_Route117_2},
@@ -348,6 +370,7 @@ static const struct LandmarkList sLandmarkLists[] =
     {MAPSEC_ROUTE_134, 1, Landmarks_OceanCurrent},
     {MAPSEC_ROUTE_134, 2, Landmarks_Route134_2},
     {MAPSEC_MT_CHIMNEY, 2, Landmarks_MtChimney_2},
+    {MAPSEC_DEWFORD_MEADOW, 0, Landmarks_DewfordMeadow},
     {MAPSEC_NONE, 0, NULL},
 };
 
