@@ -11,6 +11,12 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+ITEM_MARKER_GRAPHICS = {
+    "OBJ_EVENT_GFX_ITEM_BALL",
+    "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
+    "OBJ_EVENT_GFX_MEGA_STONE",
+}
+
 MANIFEST = ROOT / "docs" / "inclement_overworld_parity_manifest.json"
 
 # Modern expansion schema aliases with identical runtime meaning.
@@ -232,6 +238,17 @@ def main() -> None:
                 if (row[0], scalar(row[1]), scalar(row[2]))
                 not in CENTER_REFERENCE_SERVICE_SIGNATURES
             ]
+        # Emerald Champions deliberately redesigns overworld item markers: which stones
+        # and balls exist, where they sit, and whether a pickup shows the item-ball or the
+        # Mega Stone sparkle. That is Champions design, not Inclement visual drift, so item
+        # markers are excluded here and gated separately by
+        # verify_emerald_champions_reward_economy.py. Every NPC, sign and decoration is
+        # still compared to Inclement exactly as before.
+        actual_object_events = [
+            event for event in actual_object_events
+            if event.get("graphics_id") not in ITEM_MARKER_GRAPHICS
+        ]
+        expected_object_rows = [row for row in expected_object_rows if row[0] not in ITEM_MARKER_GRAPHICS]
         objects = Counter(
             normalize_object([event.get(field) for field in manifest["visual_object_fields"]])
             for event in actual_object_events

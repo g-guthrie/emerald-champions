@@ -2399,6 +2399,14 @@ static void ResetAmbiguousEmeraldChampionsState(void)
 void MigrateEmeraldChampionsCoreState(void)
 {
     u16 version = VarGet(VAR_EMERALD_CHAMPIONS_SAVE_VERSION);
+
+    // Emerald Champions: the Dewford Gym guide and Slateport Brawly share one hide
+    // flag (Inclement's lifecycle). A save written before that flag existed which
+    // already holds the Knuckle Badge has finished the scene, so keep both hidden
+    // instead of resurrecting the guide in front of the Gym door.
+    if (FlagGet(FLAG_BADGE02_GET))
+        FlagSet(FLAG_HIDE_SLATEPORT_CITY_BRAWLY);
+
     bool32 legacyGymMarker;
     bool32 legacyItemMarker;
     bool32 legacyDifficultyMarker;

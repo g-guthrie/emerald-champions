@@ -42,7 +42,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
       "x": 23,
       "y": 24,
       "elevation": 3,
@@ -120,6 +120,32 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "JaggedPass_EventScript_VialChansey",
       "flag": "FLAG_HIDE_JAGGED_PASS_VIAL_CHANSEY"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
+      "x": 8,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_SCRAFTINITE",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_HIDDEN_ITEM_JAGGED_PASS_SCRAFTINITE"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
+      "x": 7,
+      "y": 29,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_SCOVILLAINITE",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_HIDDEN_ITEM_JAGGED_PASS_SCOVILLAINITE"
     }
   ],
   "warp_events": [
@@ -248,22 +274,5 @@
       "script": "JaggedPass_EventScript_OpenMagmaHideout"
     }
   ],
-  "bg_events": [
-    {
-      "type": "hidden_item",
-      "x": 8,
-      "y": 10,
-      "elevation": 3,
-      "item": "ITEM_SCRAFTINITE",
-      "flag": "FLAG_HIDDEN_ITEM_JAGGED_PASS_SCRAFTINITE"
-    },
-    {
-      "type": "hidden_item",
-      "x": 7,
-      "y": 29,
-      "elevation": 3,
-      "item": "ITEM_SCOVILLAINITE",
-      "flag": "FLAG_HIDDEN_ITEM_JAGGED_PASS_SCOVILLAINITE"
-    }
-  ]
+  "bg_events": []
 }

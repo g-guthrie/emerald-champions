@@ -122,7 +122,8 @@ INCLEMENT_RESTORED_NPCS = {
     "SlateportCity": (
         (11, 51, "SlateportCity_EventScript_BattleItemScholar"),
         (11, 43, "SlateportCity_EventScript_IncenseScholar"),
-        (19, 26, "SlateportCity_EventScript_BrawlyRestored"),
+        # Inclement lifecycle: Brawly waits in the Slateport crowd and leaves once found.
+        (19, 26, "SlateportCity_EventScript_Brawly"),
     ),
     "SlateportCity_PokemonFanClub": ((12, 10, "SlateportCity_PokemonFanClub_EventScript_FurfrouStylist"),),
     "SootopolisCity_House2": ((6, 3, "SootopolisCity_House2_EventScript_MoveSpecialist"),),

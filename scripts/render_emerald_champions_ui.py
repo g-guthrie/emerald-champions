@@ -631,16 +631,41 @@ SCENARIOS: dict[str, dict[str, object]] = {
         "frames": 3500,
         "keys": [(400, 3000, "DOWN")],
     },
+    "all-legal-hm-replacement": {
+        "id": 53,
+        "frames": 1000,
+        "keys": [(400, 2, "A")],
+        "verify": True,
+        "stop_on_observed": True,
+    },
+    "dewford-gym-entry": {
+        "id": 54,
+        "frames": 1000,
+        "keys": [(300, 120, "UP")],
+        "verify": True,
+    },
     "wild-action-menu": {
         "id": 15,
         "frames": 1500,
         "keys": [(900, 2, "A"), (1100, 2, "A")],
         "verify": True,
     },
+    "wild-foe-types": {
+        "id": 51,
+        "frames": 1500,
+        "keys": [(900, 2, "A"), (1100, 2, "A"), (1300, 2, "R")],
+        "verify": True,
+    },
     "move-details": {
         "id": 16,
         "frames": 1750,
         "keys": [(900, 2, "A"), (1100, 2, "A"), (1400, 2, "A"), (1550, 2, "L")],
+        "verify": True,
+    },
+    "move-foe-types": {
+        "id": 52,
+        "frames": 1750,
+        "keys": [(900, 2, "A"), (1100, 2, "A"), (1400, 2, "A"), (1550, 2, "R")],
         "verify": True,
     },
     "battle-set-current": {

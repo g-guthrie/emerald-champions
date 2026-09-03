@@ -83,6 +83,7 @@ static void MoveSelectionDisplayMoveNames(enum BattlerId battler);
 static void TryMoveSelectionDisplayMoveDescription(enum BattlerId battler);
 static void MoveSelectionDisplayMoveDescription(enum BattlerId battler);
 static void MoveSelectionDisplayFoeTypes(enum BattlerId battler);
+static void OpenFoeTypesSubmenu(enum BattlerId battler);
 static void WaitForMonSelection(enum BattlerId battler);
 static void CompleteWhenChoseItem(enum BattlerId battler);
 static void Task_LaunchLvlUpAnim(u8);
@@ -256,6 +257,7 @@ static void HandleInputChooseAction(enum BattlerId battler)
             FillWindowPixelBuffer(B_WIN_MOVE_DESCRIPTION, PIXEL_FILL(0));
             ClearStdWindowAndFrame(B_WIN_MOVE_DESCRIPTION, FALSE);
             CopyWindowToVram(B_WIN_MOVE_DESCRIPTION, COPYWIN_GFX);
+            SetWindowAttribute(B_WIN_MOVE_DESCRIPTION, WINDOW_TILEMAP_TOP, 47);
             PlaySE(SE_SELECT);
             PlayerHandleChooseAction(battler);
         }
@@ -264,8 +266,10 @@ static void HandleInputChooseAction(enum BattlerId battler)
     if (JOY_NEW(R_BUTTON))
     {
         PlaySE(SE_SELECT);
-        gBattleStruct->foeTypesSubmenu = TRUE;
-        MoveSelectionDisplayFoeTypes(battler);
+        // Reuse the native move-description window on the action-menu page.
+        // Only its tilemap row changes; BG0 and the action menu stay in place.
+        SetWindowAttribute(B_WIN_MOVE_DESCRIPTION, WINDOW_TILEMAP_TOP, 27);
+        OpenFoeTypesSubmenu(battler);
         return;
     }
 
@@ -967,9 +971,7 @@ void HandleInputChooseMove(enum BattlerId battler)
     }
     else if (JOY_NEW(R_BUTTON) && !gBattleStruct->zmove.viewing)
     {
-        gBattleStruct->descriptionSubmenu = TRUE;
-        gBattleStruct->foeTypesSubmenu = TRUE;
-        TryMoveSelectionDisplayMoveDescription(battler);
+        OpenFoeTypesSubmenu(battler);
     }
     else if (JOY_NEW(START_BUTTON))
     {
@@ -1813,6 +1815,13 @@ static void TryMoveSelectionDisplayMoveDescription(enum BattlerId battler)
         MoveSelectionDisplayFoeTypes(battler);
     else if (gBattleStruct->descriptionSubmenu)
         MoveSelectionDisplayMoveDescription(battler);
+}
+
+static void OpenFoeTypesSubmenu(enum BattlerId battler)
+{
+    gBattleStruct->descriptionSubmenu = TRUE;
+    gBattleStruct->foeTypesSubmenu = TRUE;
+    TryMoveSelectionDisplayMoveDescription(battler);
 }
 
 // Emerald Champions: the same panel as the move description, listing each

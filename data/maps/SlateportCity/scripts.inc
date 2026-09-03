@@ -21,17 +21,38 @@ SlateportCity_Text_IncenseScholar:
 	.string "but not as a scarce battle tool.\p"
 	.string "Check CENTER vendors and local shops.$"
 
-SlateportCity_EventScript_BrawlyRestored::
-	lock
+@ Inclement: Brawly is waiting in the Slateport crowd. Finding him sends him home,
+@ and removeobject sets FLAG_HIDE_SLATEPORT_CITY_BRAWLY, which is shared with the
+@ Dewford Gym guide, so the Gym entrance clears at the same moment.
+SlateportCity_EventScript_Brawly::
+	lockall
+	msgbox SlateportCity_Text_WhoahLineSoLong, MSGBOX_DEFAULT
+	waitse
+	playse SE_PIN
+	applymovement VAR_LAST_TALKED, Common_Movement_ExclamationMark
+	waitmovement 0
+	applymovement VAR_LAST_TALKED, Common_Movement_Delay48
+	waitmovement 0
 	faceplayer
-	msgbox SlateportCity_Text_BrawlyRestored, MSGBOX_DEFAULT
-	release
+	msgbox SlateportCity_Text_LookingForBrawly, MSGBOX_DEFAULT
+	fadescreen FADE_TO_BLACK
+	closemessage
+	removeobject VAR_LAST_TALKED
+	fadescreen FADE_FROM_BLACK
+	releaseall
 	end
 
-SlateportCity_Text_BrawlyRestored:
-	.string "The harbor's tempo is great training.\p"
-	.string "When you're ready, meet me at\n"
-	.string "DEWFORD GYM for a doubles battle.$"
+SlateportCity_Text_WhoahLineSoLong:
+	.string "Whoah! This line's way too long,\n"
+	.string "dude! What's the deal?$"
+
+SlateportCity_Text_LookingForBrawly:
+	.string "Oh, hey there!\p"
+	.string "Hmm? You're looking for the\n"
+	.string "DEWFORD GYM LEADER?\p"
+	.string "That'd be me, BRAWLY!\p"
+	.string "I'll head back to the GYM right now.\n"
+	.string "Bring two POKéMON. I battle doubles!$"
 
 SlateportCity_OnTransition:
 	setvar VAR_SLATEPORT_MUSEUM_1F_STATE, 0

@@ -30,7 +30,7 @@
       "flag": "FLAG_HIDE_DESERT_UNDERPASS_FOSSIL"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
+      "graphics_id": "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
       "x": 107,
       "y": 3,
       "elevation": 3,

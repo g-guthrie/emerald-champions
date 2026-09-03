@@ -2666,6 +2666,7 @@ static bool8 CanReplaceMove(void)
 {
     if (sMonSummaryScreen->firstMoveIndex == MAX_MON_MOVES
         || sMonSummaryScreen->newMove == MOVE_NONE
+        || (gRelearnMode == RELEARN_MODE_SCRIPT && gMoveRelearnerState == MOVE_RELEARNER_ALL_MOVES)
         || !CannotForgetMove(sMonSummaryScreen->summary.moves[sMonSummaryScreen->firstMoveIndex]))
         return TRUE;
     else

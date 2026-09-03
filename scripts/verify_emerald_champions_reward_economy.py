@@ -613,6 +613,40 @@ def mega_stone_items() -> set[str]:
     }
 
 
+def verify_item_marker_sprites() -> None:
+    """Every Mega Stone pickup shows the sparkle; nothing else does; none are hidden.
+
+    The Inclement overworld parity gate deliberately ignores item markers because
+    Champions redesigns them, so this is where that layer is protected instead.
+    """
+    stones = mega_stone_items()
+    wrong: list[str] = []
+    hidden: list[str] = []
+    stone_pickups = 0
+    for path in sorted((ROOT / "data/maps").glob("*/map.json")):
+        if path.parent.name.endswith("_Frlg"):
+            continue
+        payload = json.loads(path.read_text())
+        for event in payload.get("object_events", []):
+            if event.get("script") != "Common_EventScript_FindItem":
+                continue
+            gfx = event.get("graphics_id")
+            if gfx == "OBJ_EVENT_GFX_FOSSIL":
+                continue
+            item = event.get("trainer_sight_or_berry_tree_id")
+            is_stone = item in stones
+            if is_stone:
+                stone_pickups += 1
+            if is_stone != (gfx == "OBJ_EVENT_GFX_MEGA_STONE"):
+                wrong.append(f"{path.parent.name}: {item} uses {gfx}")
+        for event in payload.get("bg_events", []):
+            if event.get("type") == "hidden_item" and event.get("item") in stones:
+                hidden.append(f"{path.parent.name}: {event.get('item')}")
+    require(not wrong, "overworld item markers mismatch their items:\n" + "\n".join(wrong[:12]))
+    require(not hidden, "Mega Stones must never be hidden items:\n" + "\n".join(hidden[:12]))
+    print(f"world_item_markers_checked stone_pickups={stone_pickups}")
+
+
 def verify_unique_world_stones() -> None:
     mega_stones = mega_stone_items()
     pickups: list[tuple[str, str, str]] = []
@@ -727,6 +761,7 @@ def main() -> None:
     verify_finite_side_rewards()
     verify_no_redundant_tm_economy()
     verify_frontier_exchange()
+    verify_item_marker_sprites()
     verify_unique_world_stones()
     verify_pickup_flag_names_match_rewards()
     verify_direct_reward_flag_names()

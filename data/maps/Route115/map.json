@@ -144,7 +144,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
       "x": 20,
       "y": 60,
       "elevation": 3,
@@ -157,7 +157,7 @@
       "flag": "FLAG_ITEM_ROUTE_115_LOPUNNITE"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
       "x": 18,
       "y": 7,
       "elevation": 3,
@@ -170,7 +170,7 @@
       "flag": "FLAG_ITEM_ROUTE_115_MEDICHAMITE"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
       "x": 12,
       "y": 14,
       "elevation": 3,
@@ -222,7 +222,7 @@
       "flag": "FLAG_TEMP_11"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
       "x": 31,
       "y": 56,
       "elevation": 3,
@@ -300,7 +300,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
       "x": 26,
       "y": 67,
       "elevation": 3,

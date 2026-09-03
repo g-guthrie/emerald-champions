@@ -241,6 +241,21 @@ def label_block(path: str, label: str) -> str:
 
 
 def verify_critical_progression_contracts() -> None:
+    dewford = load_json(MAPS_ROOT / "DewfordTown" / "map.json")
+    gym_warp = next(
+        warp for warp in dewford["warp_events"]
+        if warp["dest_map"] == "MAP_DEWFORD_TOWN_GYM"
+    )
+    require(
+        not any(
+            event["x"] == gym_warp["x"]
+            and event["y"] == gym_warp["y"] + 1
+            and event.get("flag") in {None, "0"}
+            for event in dewford["object_events"]
+        ),
+        "Dewford's permanent Gym guide blocks the only approach to the Gym warp",
+    )
+
     birch = label_block(
         "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc",
         "LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex",
@@ -282,12 +297,44 @@ def verify_critical_progression_contracts() -> None:
         "Juan can be defeated before Tate and Liza",
     )
 
+    # Inclement's order: deliver Steven's Letter, sail to Slateport, find Brawly there,
+    # and only then can his Gym be challenged. Sailing must NOT require his badge.
     dewford = label_block("data/maps/DewfordTown/scripts.inc", "DewfordTown_EventScript_Briney")
     require(
-        dewford.index("FLAG_BADGE02_GET") < dewford.index("checkitem ITEM_MEGA_RING")
-        < dewford.index("DewfordTown_Text_WhereAreWeBound"),
-        "Slateport sailing is not gated by Brawly and receipt of the Mega Ring",
+        dewford.index("FLAG_DELIVERED_STEVEN_LETTER") < dewford.index("DewfordTown_Text_WhereAreWeBound"),
+        "Slateport sailing is not gated by Steven's Letter",
     )
+    require(
+        "FLAG_BADGE02_GET" not in dewford and "ITEM_MEGA_RING" not in dewford,
+        "Slateport sailing still requires Brawly's badge or the Mega Ring, reversing Inclement's story",
+    )
+    # The Dewford guide and Slateport Brawly must share one hide flag, so finding him
+    # clears the Gym entrance in the same moment.
+    dew_map = (ROOT / "data/maps/DewfordTown/map.json").read_text()
+    slate_map = (ROOT / "data/maps/SlateportCity/map.json").read_text()
+    require(
+        dew_map.count("FLAG_HIDE_SLATEPORT_CITY_BRAWLY") == 1
+        and slate_map.count("FLAG_HIDE_SLATEPORT_CITY_BRAWLY") == 1,
+        "the Dewford Gym guide and Slateport Brawly no longer share a hide flag",
+    )
+    slate_scripts = (ROOT / "data/maps/SlateportCity/scripts.inc").read_text()
+    require(
+        "SlateportCity_EventScript_Brawly::" in slate_scripts
+        and "removeobject" in slate_scripts.split("SlateportCity_EventScript_Brawly::", 1)[1][:600],
+        "finding Brawly in Slateport no longer sends him home",
+    )
+    # Inclement lights Granite Cave B1F/B2F so the Letter is deliverable before Flash.
+    for cave in ("GraniteCave_B1F", "GraniteCave_B2F"):
+        require(
+            "setflashlevel" in (ROOT / f"data/maps/{cave}/scripts.inc").read_text(),
+            f"{cave} lost its ambient light, making Steven's Letter undeliverable before Flash",
+        )
+    # Both Cycling Road entrances must start/reset the Mach Bike challenge.
+    for gate in ("Route110_SeasideCyclingRoadNorthEntrance", "Route110_SeasideCyclingRoadSouthEntrance"):
+        require(
+            "VAR_CYCLING_CHALLENGE_STATE" in (ROOT / f"data/maps/{gate}/scripts.inc").read_text(),
+            f"{gate} no longer initializes the Mach Bike challenge",
+        )
     devon = label_block("data/maps/RustboroCity_DevonCorp_3F/scripts.inc", "RustboroCity_DevonCorp_3F_EventScript_MrStone")
     require("checkitem ITEM_MEGA_RING" in devon, "Devon gives its Mega reward before the player owns the Mega Ring")
     devon_path = ROOT / "data/maps/RustboroCity_DevonCorp_3F/scripts.inc"

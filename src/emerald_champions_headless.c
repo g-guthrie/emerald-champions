@@ -248,6 +248,25 @@ static void PrepareAllLegalMoves(enum Species species)
     SetMainCallback2(CB2_InitLearnMove);
 }
 
+static void PrepareHmReplacement(void)
+{
+    CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_MEW, 30, OTID_STRUCT_PLAYER_ID);
+    SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][0], MOVE_SURF, 0);
+    SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][0], MOVE_PSYCHIC, 1);
+    SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][0], MOVE_ICE_BEAM, 2);
+    SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][0], MOVE_PROTECT, 3);
+    CalculatePlayerPartyCount();
+    gMoveRelearnerState = MOVE_RELEARNER_ALL_MOVES;
+    gRelearnMode = RELEARN_MODE_SCRIPT;
+    ShowSelectMovePokemonSummaryScreen(
+        gParties[B_TRAINER_PLAYER],
+        0,
+        gInitialMainCB2,
+        MOVE_THUNDERBOLT
+    );
+    gEcHeadlessFixtureSetupResult = TRUE;
+}
+
 static void PrepareHeadlessPokedex(void)
 {
     static const enum Species species[] =
@@ -589,6 +608,20 @@ static bool32 IsHeadlessSummaryStateObserved(void)
 
 void EmeraldChampionsHeadlessObserve(void)
 {
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_DEWFORD_GYM_ENTRY)
+    {
+        gEcHeadlessFixtureSetupResult = TRUE;
+        if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_DEWFORD_TOWN_GYM)
+         && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_DEWFORD_TOWN_GYM))
+            gEcHeadlessFixtureObservedResult = TRUE;
+        return;
+    }
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_HM_REPLACEMENT)
+    {
+        if (gSpecialVar_Result == TRUE && gSpecialVar_0x8005 == 0)
+            gEcHeadlessFixtureObservedResult = TRUE;
+        return;
+    }
     if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_HEAL_LOCATION_WHITEOUT)
     {
         bool32 stateMatches = IsWhiteoutRespawnHeadlessState(gEcHeadlessFixtureParam);
@@ -935,6 +968,20 @@ void EmeraldChampionsHeadlessObserve(void)
          && gMoveSelectionCursor[0] == 0)
             gEcHeadlessFixtureObservedResult = TRUE;
         break;
+    case EC_HEADLESS_SCENARIO_WILD_FOE_TYPES:
+        if (gBattle_BG0_Y == DISPLAY_HEIGHT
+         && GetWindowAttribute(B_WIN_MOVE_DESCRIPTION, WINDOW_TILEMAP_TOP) == 27
+         && gBattleStruct->descriptionSubmenu
+         && gBattleStruct->foeTypesSubmenu)
+            gEcHeadlessFixtureObservedResult = TRUE;
+        break;
+    case EC_HEADLESS_SCENARIO_MOVE_FOE_TYPES:
+        if (gBattle_BG0_Y == DISPLAY_HEIGHT * 2
+         && GetWindowAttribute(B_WIN_MOVE_DESCRIPTION, WINDOW_TILEMAP_TOP) == 47
+         && gBattleStruct->descriptionSubmenu
+         && gBattleStruct->foeTypesSubmenu)
+            gEcHeadlessFixtureObservedResult = TRUE;
+        break;
     }
 }
 
@@ -1065,8 +1112,16 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
     case EC_HEADLESS_SCENARIO_ALL_LEGAL_MOVES_MEW:
         PrepareAllLegalMoves(SPECIES_MEW);
         break;
+    case EC_HEADLESS_SCENARIO_HM_REPLACEMENT:
+        PrepareHmReplacement();
+        break;
+    case EC_HEADLESS_SCENARIO_DEWFORD_GYM_ENTRY:
+        LoadHeadlessMap(MAP_DEWFORD_TOWN, 8, 18);
+        break;
     case EC_HEADLESS_SCENARIO_WILD_ACTION_MENU:
     case EC_HEADLESS_SCENARIO_MOVE_DETAILS:
+    case EC_HEADLESS_SCENARIO_WILD_FOE_TYPES:
+    case EC_HEADLESS_SCENARIO_MOVE_FOE_TYPES:
         PrepareHeadlessWildBattle(FALSE);
         break;
     case EC_HEADLESS_SCENARIO_MOVE_ANIMATION:

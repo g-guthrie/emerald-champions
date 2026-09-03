@@ -2682,20 +2682,6 @@
           ],
           [
             "OBJ_EVENT_GFX_ITEM_BALL",
-            41,
-            4,
-            3,
-            "MOVEMENT_TYPE_LOOK_AROUND",
-            0,
-            0,
-            "TRAINER_TYPE_NONE",
-            "ITEM_LUXURY_BALL",
-            "Common_EventScript_FindItem",
-            "FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_6_LUXURY_BALL",
-            null
-          ],
-          [
-            "OBJ_EVENT_GFX_MEGA_STONE",
             31,
             11,
             3,
@@ -2706,6 +2692,20 @@
             "ITEM_WATER_STONE",
             "Common_EventScript_FindItem",
             "FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_3_WATER_STONE",
+            null
+          ],
+          [
+            "OBJ_EVENT_GFX_ITEM_BALL",
+            41,
+            4,
+            3,
+            "MOVEMENT_TYPE_LOOK_AROUND",
+            0,
+            0,
+            "TRAINER_TYPE_NONE",
+            "ITEM_LUXURY_BALL",
+            "Common_EventScript_FindItem",
+            "FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_6_LUXURY_BALL",
             null
           ]
         ],
@@ -2991,7 +2991,7 @@
         ],
         "current_objects": [
           [
-            "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
+            "OBJ_EVENT_GFX_MEGA_STONE",
             4,
             4,
             3,
@@ -3626,7 +3626,7 @@
             null
           ],
           [
-            "OBJ_EVENT_GFX_MEGA_STONE",
+            "OBJ_EVENT_GFX_ITEM_BALL",
             4,
             5,
             3,
@@ -4770,7 +4770,7 @@
             null
           ],
           [
-            "OBJ_EVENT_GFX_ITEM_BALL",
+            "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
             29,
             16,
             3,
@@ -4781,6 +4781,20 @@
             "ITEM_MASTER_BALL",
             "Common_EventScript_FindItem",
             "FLAG_EC_ITEM_MASTER_BALL",
+            null
+          ],
+          [
+            "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
+            9,
+            18,
+            3,
+            "MOVEMENT_TYPE_NONE",
+            0,
+            0,
+            "TRAINER_TYPE_NONE",
+            "ITEM_BEAST_BALL",
+            "Common_EventScript_FindItem",
+            "FLAG_EC_ITEM_ALTERING_BEAST_BALL",
             null
           ],
           [
@@ -4795,20 +4809,6 @@
             "ITEM_PRISON_BOTTLE",
             "Common_EventScript_FindItem",
             "FLAG_EC_ITEM_PRISON_BOTTLE",
-            null
-          ],
-          [
-            "OBJ_EVENT_GFX_ITEM_BALL",
-            9,
-            18,
-            3,
-            "MOVEMENT_TYPE_NONE",
-            0,
-            0,
-            "TRAINER_TYPE_NONE",
-            "ITEM_BEAST_BALL",
-            "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_ALTERING_BEAST_BALL",
             null
           ]
         ],
@@ -6153,6 +6153,20 @@
           ],
           [
             "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
+            15,
+            9,
+            3,
+            "MOVEMENT_TYPE_LOOK_AROUND",
+            1,
+            1,
+            "TRAINER_TYPE_NONE",
+            "ITEM_MASTER_BALL",
+            "Common_EventScript_FindItem",
+            "FLAG_ITEM_AQUA_HIDEOUT_B1F_MASTER_BALL",
+            null
+          ],
+          [
+            "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
             45,
             18,
             3,
@@ -6177,20 +6191,6 @@
             "ITEM_NUGGET",
             "Common_EventScript_FindItem",
             "FLAG_ITEM_AQUA_HIDEOUT_B1F_NUGGET",
-            null
-          ],
-          [
-            "OBJ_EVENT_GFX_ITEM_BALL",
-            15,
-            9,
-            3,
-            "MOVEMENT_TYPE_LOOK_AROUND",
-            1,
-            1,
-            "TRAINER_TYPE_NONE",
-            "ITEM_MASTER_BALL",
-            "Common_EventScript_FindItem",
-            "FLAG_ITEM_AQUA_HIDEOUT_B1F_MASTER_BALL",
             null
           ],
           [
@@ -7369,6 +7369,20 @@
           ],
           [
             "OBJ_EVENT_GFX_ITEM_BALL",
+            10,
+            5,
+            3,
+            "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
+            0,
+            0,
+            "TRAINER_TYPE_NONE",
+            "ITEM_HONEY",
+            "Common_EventScript_FindItem",
+            "FLAG_EC_ITEM_ASHEN_HONEY",
+            null
+          ],
+          [
+            "OBJ_EVENT_GFX_ITEM_BALL",
             26,
             5,
             3,
@@ -7407,20 +7421,6 @@
             "0",
             "AshenWoods_EventScript_Elmer",
             "0",
-            null
-          ],
-          [
-            "OBJ_EVENT_GFX_MEGA_STONE",
-            10,
-            5,
-            3,
-            "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
-            0,
-            0,
-            "TRAINER_TYPE_NONE",
-            "ITEM_HONEY",
-            "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_ASHEN_HONEY",
             null
           ],
           [
@@ -27724,7 +27724,7 @@
             "LOCALID_UNDERPASS_FOSSIL"
           ],
           [
-            "OBJ_EVENT_GFX_MEGA_STONE",
+            "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
             107,
             3,
             3,
@@ -28015,20 +28015,6 @@
         ],
         "current_objects": [
           [
-            "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
-            4,
-            13,
-            3,
-            "MOVEMENT_TYPE_NONE",
-            0,
-            0,
-            "TRAINER_TYPE_NONE",
-            "ITEM_HAWLUCHANITE",
-            "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_MEADOW_HAWLUCHANITE",
-            null
-          ],
-          [
             "OBJ_EVENT_GFX_ITEM_BALL",
             27,
             1,
@@ -28054,6 +28040,20 @@
             "ITEM_MAWILITE",
             "Common_EventScript_FindItem",
             "FLAG_EC_ITEM_MEADOW_MAWILITE",
+            null
+          ],
+          [
+            "OBJ_EVENT_GFX_MEGA_STONE",
+            4,
+            13,
+            3,
+            "MOVEMENT_TYPE_NONE",
+            0,
+            0,
+            "TRAINER_TYPE_NONE",
+            "ITEM_HAWLUCHANITE",
+            "Common_EventScript_FindItem",
+            "FLAG_EC_ITEM_MEADOW_HAWLUCHANITE",
             null
           ]
         ],
@@ -28423,7 +28423,7 @@
             "TRAINER_TYPE_NONE",
             "0",
             "DewfordTown_EventScript_GymGuide",
-            "0",
+            "FLAG_HIDE_SLATEPORT_CITY_BRAWLY",
             null
           ],
           [
@@ -30444,7 +30444,7 @@
             "LOCALID_EC_MOLTRES"
           ],
           [
-            "OBJ_EVENT_GFX_MEGA_STONE",
+            "OBJ_EVENT_GFX_ITEM_BALL",
             36,
             2,
             3,
@@ -30632,7 +30632,7 @@
         ],
         "current_objects": [
           [
-            "OBJ_EVENT_GFX_MEGA_STONE",
+            "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
             23,
             6,
             3,
@@ -35559,20 +35559,6 @@
         ],
         "current_objects": [
           [
-            "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
-            8,
-            3,
-            3,
-            "MOVEMENT_TYPE_LOOK_AROUND",
-            1,
-            1,
-            "TRAINER_TYPE_NONE",
-            "ITEM_HOUNDOOMINITE",
-            "Common_EventScript_FindItem",
-            "FLAG_ITEM_FIERY_PATH_HOUNDOOMINITE",
-            null
-          ],
-          [
             "OBJ_EVENT_GFX_MEGA_STONE",
             7,
             32,
@@ -35584,6 +35570,20 @@
             "ITEM_CAMERUPTITE",
             "Common_EventScript_FindItem",
             "FLAG_ITEM_FIERY_PATH_CAMERUPTITE",
+            null
+          ],
+          [
+            "OBJ_EVENT_GFX_MEGA_STONE",
+            8,
+            3,
+            3,
+            "MOVEMENT_TYPE_LOOK_AROUND",
+            1,
+            1,
+            "TRAINER_TYPE_NONE",
+            "ITEM_HOUNDOOMINITE",
+            "Common_EventScript_FindItem",
+            "FLAG_ITEM_FIERY_PATH_HOUNDOOMINITE",
             null
           ],
           [
@@ -38609,7 +38609,7 @@
             null
           ],
           [
-            "OBJ_EVENT_GFX_ITEM_BALL",
+            "OBJ_EVENT_GFX_MEGA_STONE",
             15,
             21,
             3,
@@ -39044,20 +39044,6 @@
           ],
           [
             "OBJ_EVENT_GFX_ITEM_BALL",
-            29,
-            4,
-            3,
-            "MOVEMENT_TYPE_LOOK_AROUND",
-            0,
-            0,
-            "TRAINER_TYPE_NONE",
-            "ITEM_GLIMMORANITE",
-            "Common_EventScript_FindItem",
-            "FLAG_ITEM_GRANITE_CAVE_B2F_GLIMMORANITE",
-            null
-          ],
-          [
-            "OBJ_EVENT_GFX_MEGA_STONE",
             4,
             4,
             3,
@@ -39068,6 +39054,20 @@
             "ITEM_REPEL",
             "Common_EventScript_FindItem",
             "FLAG_ITEM_GRANITE_CAVE_B2F_REPEL",
+            null
+          ],
+          [
+            "OBJ_EVENT_GFX_MEGA_STONE",
+            29,
+            4,
+            3,
+            "MOVEMENT_TYPE_LOOK_AROUND",
+            0,
+            0,
+            "TRAINER_TYPE_NONE",
+            "ITEM_GLIMMORANITE",
+            "Common_EventScript_FindItem",
+            "FLAG_ITEM_GRANITE_CAVE_B2F_GLIMMORANITE",
             null
           ]
         ],
@@ -40007,20 +40007,6 @@
             null
           ],
           [
-            "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
-            23,
-            24,
-            3,
-            "MOVEMENT_TYPE_LOOK_AROUND",
-            0,
-            0,
-            "TRAINER_TYPE_NONE",
-            "ITEM_ABSOLITE",
-            "Common_EventScript_FindItem",
-            "FLAG_ITEM_JAGGED_PASS_ABSOLITE",
-            null
-          ],
-          [
             "OBJ_EVENT_GFX_HIKER",
             10,
             8,
@@ -40047,6 +40033,48 @@
             "JaggedPass_EventScript_MagmaHideoutGuard",
             "FLAG_HIDE_JAGGED_PASS_MAGMA_GUARD",
             "LOCALID_MAGMA_HIDEOUT_GUARD"
+          ],
+          [
+            "OBJ_EVENT_GFX_MEGA_STONE",
+            23,
+            24,
+            3,
+            "MOVEMENT_TYPE_LOOK_AROUND",
+            0,
+            0,
+            "TRAINER_TYPE_NONE",
+            "ITEM_ABSOLITE",
+            "Common_EventScript_FindItem",
+            "FLAG_ITEM_JAGGED_PASS_ABSOLITE",
+            null
+          ],
+          [
+            "OBJ_EVENT_GFX_MEGA_STONE",
+            7,
+            29,
+            3,
+            "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
+            0,
+            0,
+            "TRAINER_TYPE_NONE",
+            "ITEM_SCOVILLAINITE",
+            "Common_EventScript_FindItem",
+            "FLAG_HIDDEN_ITEM_JAGGED_PASS_SCOVILLAINITE",
+            null
+          ],
+          [
+            "OBJ_EVENT_GFX_MEGA_STONE",
+            8,
+            10,
+            3,
+            "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
+            0,
+            0,
+            "TRAINER_TYPE_NONE",
+            "ITEM_SCRAFTINITE",
+            "Common_EventScript_FindItem",
+            "FLAG_HIDDEN_ITEM_JAGGED_PASS_SCRAFTINITE",
+            null
           ],
           [
             "OBJ_EVENT_GFX_PICNICKER",
@@ -40285,28 +40313,7 @@
             "FLAG_HIDDEN_ITEM_JAGGED_PASS_FULL_HEAL"
           ]
         ],
-        "current_bg_events": [
-          [
-            "hidden_item",
-            7,
-            29,
-            3,
-            null,
-            null,
-            "ITEM_SCOVILLAINITE",
-            "FLAG_HIDDEN_ITEM_JAGGED_PASS_SCOVILLAINITE"
-          ],
-          [
-            "hidden_item",
-            8,
-            10,
-            3,
-            null,
-            null,
-            "ITEM_SCRAFTINITE",
-            "FLAG_HIDDEN_ITEM_JAGGED_PASS_SCRAFTINITE"
-          ]
-        ]
+        "current_bg_events": []
       }
     },
     "LavaridgeTown": {
@@ -56560,6 +56567,20 @@
         ],
         "current_objects": [
           [
+            "OBJ_EVENT_GFX_ITEM_BALL",
+            9,
+            16,
+            0,
+            "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
+            1,
+            1,
+            "TRAINER_TYPE_NONE",
+            "ITEM_NUGGET",
+            "Common_EventScript_FindItem",
+            "FLAG_ITEM_MAGMA_HIDEOUT_3F_1R_NUGGET",
+            null
+          ],
+          [
             "OBJ_EVENT_GFX_MAGMA_MEMBER_F",
             21,
             21,
@@ -56585,20 +56606,6 @@
             "5",
             "MagmaHideout_3F_1R_EventScript_Grunt9",
             "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS",
-            null
-          ],
-          [
-            "OBJ_EVENT_GFX_MEGA_STONE",
-            9,
-            16,
-            0,
-            "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
-            1,
-            1,
-            "TRAINER_TYPE_NONE",
-            "ITEM_NUGGET",
-            "Common_EventScript_FindItem",
-            "FLAG_ITEM_MAGMA_HIDEOUT_3F_1R_NUGGET",
             null
           ]
         ],
@@ -61097,20 +61104,6 @@
             null
           ],
           [
-            "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
-            2,
-            4,
-            3,
-            "MOVEMENT_TYPE_LOOK_AROUND",
-            0,
-            0,
-            "TRAINER_TYPE_NONE",
-            "ITEM_AGGRONITE",
-            "Common_EventScript_FindItem",
-            "FLAG_ITEM_METEOR_FALLS_1F_1R_AGGRONITE",
-            null
-          ],
-          [
             "OBJ_EVENT_GFX_ITEM_BALL",
             26,
             32,
@@ -61165,6 +61158,20 @@
             "0x0",
             "FLAG_HIDE_METEOR_FALLS_TEAM_MAGMA",
             "LOCALID_METEOR_FALLS_MAGMA_GRUNT_1"
+          ],
+          [
+            "OBJ_EVENT_GFX_MEGA_STONE",
+            2,
+            4,
+            3,
+            "MOVEMENT_TYPE_LOOK_AROUND",
+            0,
+            0,
+            "TRAINER_TYPE_NONE",
+            "ITEM_AGGRONITE",
+            "Common_EventScript_FindItem",
+            "FLAG_ITEM_METEOR_FALLS_1F_1R_AGGRONITE",
+            null
           ],
           [
             "OBJ_EVENT_GFX_SCIENTIST_1",
@@ -61473,6 +61480,20 @@
             null
           ],
           [
+            "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
+            11,
+            13,
+            3,
+            "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
+            0,
+            0,
+            "TRAINER_TYPE_NONE",
+            "ITEM_MASTER_BALL",
+            "Common_EventScript_FindItem",
+            "FLAG_EC_ITEM_METEOR_FALLS_1F_2R_MASTER_BALL",
+            null
+          ],
+          [
             "OBJ_EVENT_GFX_MAN_3",
             13,
             2,
@@ -61484,20 +61505,6 @@
             "1",
             "MeteorFalls_1F_2R_EventScript_Nicolas",
             "0",
-            null
-          ],
-          [
-            "OBJ_EVENT_GFX_MEGA_STONE",
-            11,
-            13,
-            3,
-            "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
-            0,
-            0,
-            "TRAINER_TYPE_NONE",
-            "ITEM_MASTER_BALL",
-            "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_METEOR_FALLS_1F_2R_MASTER_BALL",
             null
           ]
         ],
@@ -62924,6 +62931,20 @@
             null
           ],
           [
+            "OBJ_EVENT_GFX_ITEM_BALL",
+            63,
+            35,
+            5,
+            "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
+            0,
+            0,
+            "TRAINER_TYPE_NONE",
+            "ITEM_QUICK_BALL",
+            "Common_EventScript_FindItem",
+            "FLAG_EC_ITEM_MOSSDEEP_CITY_QUICK_BALL",
+            null
+          ],
+          [
             "OBJ_EVENT_GFX_MAGMA_MEMBER_M",
             44,
             23,
@@ -63006,20 +63027,6 @@
             "0x0",
             "FLAG_HIDE_MOSSDEEP_CITY_TEAM_MAGMA",
             "LOCALID_MOSSDEEP_MAXIE"
-          ],
-          [
-            "OBJ_EVENT_GFX_MEGA_STONE",
-            63,
-            35,
-            5,
-            "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
-            0,
-            0,
-            "TRAINER_TYPE_NONE",
-            "ITEM_QUICK_BALL",
-            "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_MOSSDEEP_CITY_QUICK_BALL",
-            null
           ],
           [
             "OBJ_EVENT_GFX_NINJA_BOY",
@@ -70422,20 +70429,6 @@
         ],
         "current_objects": [
           [
-            "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
-            6,
-            9,
-            3,
-            "MOVEMENT_TYPE_LOOK_AROUND",
-            1,
-            1,
-            "TRAINER_TYPE_NONE",
-            "ITEM_BANETTITE",
-            "Common_EventScript_FindItem",
-            "FLAG_ITEM_MT_PYRE_6F_BANETTITE",
-            null
-          ],
-          [
             "OBJ_EVENT_GFX_HEX_MANIAC",
             6,
             3,
@@ -70447,6 +70440,20 @@
             "3",
             "MtPyre_6F_EventScript_Valerie",
             "0",
+            null
+          ],
+          [
+            "OBJ_EVENT_GFX_MEGA_STONE",
+            6,
+            9,
+            3,
+            "MOVEMENT_TYPE_LOOK_AROUND",
+            1,
+            1,
+            "TRAINER_TYPE_NONE",
+            "ITEM_BANETTITE",
+            "Common_EventScript_FindItem",
+            "FLAG_ITEM_MT_PYRE_6F_BANETTITE",
             null
           ],
           [
@@ -70599,7 +70606,7 @@
             null
           ],
           [
-            "OBJ_EVENT_GFX_MEGA_STONE",
+            "OBJ_EVENT_GFX_ITEM_BALL",
             27,
             15,
             3,
@@ -73183,20 +73190,6 @@
           ],
           [
             "OBJ_EVENT_GFX_ITEM_BALL",
-            6,
-            11,
-            3,
-            "MOVEMENT_TYPE_LOOK_AROUND",
-            1,
-            1,
-            "TRAINER_TYPE_NONE",
-            "0",
-            "NewMauville_Inside_EventScript_Voltorb2",
-            "FLAG_HIDE_NEW_MAUVILLE_VOLTORB_2",
-            null
-          ],
-          [
-            "OBJ_EVENT_GFX_MEGA_STONE",
             39,
             4,
             3,
@@ -73207,6 +73200,20 @@
             "ITEM_THUNDER_STONE",
             "Common_EventScript_FindItem",
             "FLAG_ITEM_NEW_MAUVILLE_THUNDER_STONE",
+            null
+          ],
+          [
+            "OBJ_EVENT_GFX_ITEM_BALL",
+            6,
+            11,
+            3,
+            "MOVEMENT_TYPE_LOOK_AROUND",
+            1,
+            1,
+            "TRAINER_TYPE_NONE",
+            "0",
+            "NewMauville_Inside_EventScript_Voltorb2",
+            "FLAG_HIDE_NEW_MAUVILLE_VOLTORB_2",
             null
           ]
         ],
@@ -76928,7 +76935,7 @@
             null
           ],
           [
-            "OBJ_EVENT_GFX_MEGA_STONE",
+            "OBJ_EVENT_GFX_ITEM_BALL",
             3,
             28,
             3,
@@ -79985,20 +79992,6 @@
           ],
           [
             "OBJ_EVENT_GFX_ITEM_BALL",
-            35,
-            20,
-            3,
-            "MOVEMENT_TYPE_FACE_DOWN",
-            0,
-            0,
-            "TRAINER_TYPE_NONE",
-            "ITEM_HERACRONITE",
-            "Common_EventScript_FindItem",
-            "FLAG_ITEM_PETALBURG_WOODS_HERACRONITE",
-            null
-          ],
-          [
-            "OBJ_EVENT_GFX_ITEM_BALL",
             4,
             26,
             3,
@@ -80026,20 +80019,6 @@
             null
           ],
           [
-            "OBJ_EVENT_GFX_ITEM_BALL",
-            45,
-            15,
-            3,
-            "MOVEMENT_TYPE_FACE_DOWN",
-            0,
-            0,
-            "TRAINER_TYPE_NONE",
-            "ITEM_SCOLIPITE",
-            "Common_EventScript_FindItem",
-            "FLAG_ITEM_PETALBURG_WOODS_SCOLIPITE",
-            null
-          ],
-          [
             "OBJ_EVENT_GFX_MAN_2",
             26,
             20,
@@ -80052,6 +80031,34 @@
             "0x0",
             "FLAG_HIDE_PETALBURG_WOODS_DEVON_EMPLOYEE",
             "LOCALID_PETALBURG_WOODS_DEVON_EMPLOYEE"
+          ],
+          [
+            "OBJ_EVENT_GFX_MEGA_STONE",
+            35,
+            20,
+            3,
+            "MOVEMENT_TYPE_FACE_DOWN",
+            0,
+            0,
+            "TRAINER_TYPE_NONE",
+            "ITEM_HERACRONITE",
+            "Common_EventScript_FindItem",
+            "FLAG_ITEM_PETALBURG_WOODS_HERACRONITE",
+            null
+          ],
+          [
+            "OBJ_EVENT_GFX_MEGA_STONE",
+            45,
+            15,
+            3,
+            "MOVEMENT_TYPE_FACE_DOWN",
+            0,
+            0,
+            "TRAINER_TYPE_NONE",
+            "ITEM_SCOLIPITE",
+            "Common_EventScript_FindItem",
+            "FLAG_ITEM_PETALBURG_WOODS_SCOLIPITE",
+            null
           ]
         ],
         "coord_events_classification": "exact",
@@ -84007,6 +84014,20 @@
           ],
           [
             "OBJ_EVENT_GFX_ITEM_BALL",
+            37,
+            22,
+            3,
+            "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
+            1,
+            1,
+            "TRAINER_TYPE_NONE",
+            "ITEM_LOVE_BALL",
+            "Common_EventScript_FindItem",
+            "FLAG_ITEM_ROUTE_104_LOVE_BALL",
+            null
+          ],
+          [
+            "OBJ_EVENT_GFX_ITEM_BALL",
             39,
             15,
             3,
@@ -84045,20 +84066,6 @@
             "7",
             "Route104_EventScript_Haley",
             "0",
-            null
-          ],
-          [
-            "OBJ_EVENT_GFX_MEGA_STONE",
-            37,
-            22,
-            3,
-            "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
-            1,
-            1,
-            "TRAINER_TYPE_NONE",
-            "ITEM_LOVE_BALL",
-            "Common_EventScript_FindItem",
-            "FLAG_ITEM_ROUTE_104_LOVE_BALL",
             null
           ],
           [
@@ -85580,7 +85587,7 @@
             null
           ],
           [
-            "OBJ_EVENT_GFX_MEGA_STONE",
+            "OBJ_EVENT_GFX_ITEM_BALL",
             29,
             14,
             3,
@@ -89057,30 +89064,16 @@
           ],
           [
             "OBJ_EVENT_GFX_ITEM_BALL",
-            26,
-            47,
+            32,
+            16,
             3,
-            "MOVEMENT_TYPE_LOOK_AROUND",
+            "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_MEGANIUMITE",
+            "ITEM_DUSK_BALL",
             "Common_EventScript_FindItem",
-            "FLAG_ITEM_ROUTE_110_MEGANIUMITE",
-            null
-          ],
-          [
-            "OBJ_EVENT_GFX_ITEM_BALL",
-            6,
-            38,
-            3,
-            "MOVEMENT_TYPE_LOOK_AROUND",
-            1,
-            1,
-            "TRAINER_TYPE_NONE",
-            "ITEM_FERALIGITE",
-            "Common_EventScript_FindItem",
-            "FLAG_ITEM_ROUTE_110_FERALIGITE",
+            "FLAG_EC_ITEM_ROUTE110_DUSK_BALL",
             null
           ],
           [
@@ -89127,16 +89120,86 @@
           ],
           [
             "OBJ_EVENT_GFX_MEGA_STONE",
-            32,
-            16,
+            26,
+            47,
+            3,
+            "MOVEMENT_TYPE_LOOK_AROUND",
+            0,
+            0,
+            "TRAINER_TYPE_NONE",
+            "ITEM_MEGANIUMITE",
+            "Common_EventScript_FindItem",
+            "FLAG_ITEM_ROUTE_110_MEGANIUMITE",
+            null
+          ],
+          [
+            "OBJ_EVENT_GFX_MEGA_STONE",
+            33,
+            45,
             3,
             "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_DUSK_BALL",
+            "ITEM_CHARIZARDITE_X",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_ROUTE110_DUSK_BALL",
+            "FLAG_HIDDEN_ITEM_ROUTE_110_CHARIZARDITE_X",
+            null
+          ],
+          [
+            "OBJ_EVENT_GFX_MEGA_STONE",
+            35,
+            39,
+            3,
+            "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
+            0,
+            0,
+            "TRAINER_TYPE_NONE",
+            "ITEM_EMBOARITE",
+            "Common_EventScript_FindItem",
+            "FLAG_HIDDEN_ITEM_ROUTE_110_EMBOARITE",
+            null
+          ],
+          [
+            "OBJ_EVENT_GFX_MEGA_STONE",
+            37,
+            67,
+            3,
+            "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
+            0,
+            0,
+            "TRAINER_TYPE_NONE",
+            "ITEM_DELPHOXITE",
+            "Common_EventScript_FindItem",
+            "FLAG_HIDDEN_ITEM_ROUTE_110_DELPHOXITE",
+            null
+          ],
+          [
+            "OBJ_EVENT_GFX_MEGA_STONE",
+            4,
+            35,
+            3,
+            "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
+            0,
+            0,
+            "TRAINER_TYPE_NONE",
+            "ITEM_EELEKTROSSITE",
+            "Common_EventScript_FindItem",
+            "FLAG_HIDDEN_ITEM_ROUTE_110_EELEKTROSSITE",
+            null
+          ],
+          [
+            "OBJ_EVENT_GFX_MEGA_STONE",
+            6,
+            38,
+            3,
+            "MOVEMENT_TYPE_LOOK_AROUND",
+            1,
+            1,
+            "TRAINER_TYPE_NONE",
+            "ITEM_FERALIGITE",
+            "Common_EventScript_FindItem",
+            "FLAG_ITEM_ROUTE_110_FERALIGITE",
             null
           ],
           [
@@ -89589,46 +89652,6 @@
           ]
         ],
         "current_bg_events": [
-          [
-            "hidden_item",
-            33,
-            45,
-            3,
-            null,
-            null,
-            "ITEM_CHARIZARDITE_X",
-            "FLAG_HIDDEN_ITEM_ROUTE_110_CHARIZARDITE_X"
-          ],
-          [
-            "hidden_item",
-            35,
-            39,
-            3,
-            null,
-            null,
-            "ITEM_EMBOARITE",
-            "FLAG_HIDDEN_ITEM_ROUTE_110_EMBOARITE"
-          ],
-          [
-            "hidden_item",
-            37,
-            67,
-            3,
-            null,
-            null,
-            "ITEM_DELPHOXITE",
-            "FLAG_HIDDEN_ITEM_ROUTE_110_DELPHOXITE"
-          ],
-          [
-            "hidden_item",
-            4,
-            35,
-            3,
-            null,
-            null,
-            "ITEM_EELEKTROSSITE",
-            "FLAG_HIDDEN_ITEM_ROUTE_110_EELEKTROSSITE"
-          ],
           [
             "secret_base",
             16,
@@ -92658,7 +92681,7 @@
         ],
         "current_objects": [
           [
-            "OBJ_EVENT_GFX_ITEM_BALL",
+            "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
             3,
             2,
             3,
@@ -95625,34 +95648,6 @@
             null
           ],
           [
-            "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
-            3,
-            113,
-            3,
-            "MOVEMENT_TYPE_LOOK_AROUND",
-            0,
-            0,
-            "TRAINER_TYPE_NONE",
-            "ITEM_ALTARIANITE",
-            "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_ROUTE111_ALTARIANITE",
-            null
-          ],
-          [
-            "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
-            33,
-            104,
-            3,
-            "MOVEMENT_TYPE_LOOK_AROUND",
-            0,
-            0,
-            "TRAINER_TYPE_NONE",
-            "ITEM_DRAMPANITE",
-            "Common_EventScript_FindItem",
-            "FLAG_ITEM_ROUTE_111_DRAMPANITE",
-            null
-          ],
-          [
             "OBJ_EVENT_GFX_HIKER",
             14,
             56,
@@ -95804,6 +95799,34 @@
             "3",
             "Route111_EventScript_Hayden",
             "0",
+            null
+          ],
+          [
+            "OBJ_EVENT_GFX_MEGA_STONE",
+            3,
+            113,
+            3,
+            "MOVEMENT_TYPE_LOOK_AROUND",
+            0,
+            0,
+            "TRAINER_TYPE_NONE",
+            "ITEM_ALTARIANITE",
+            "Common_EventScript_FindItem",
+            "FLAG_EC_ITEM_ROUTE111_ALTARIANITE",
+            null
+          ],
+          [
+            "OBJ_EVENT_GFX_MEGA_STONE",
+            33,
+            104,
+            3,
+            "MOVEMENT_TYPE_LOOK_AROUND",
+            0,
+            0,
+            "TRAINER_TYPE_NONE",
+            "ITEM_DRAMPANITE",
+            "Common_EventScript_FindItem",
+            "FLAG_ITEM_ROUTE_111_DRAMPANITE",
             null
           ],
           [
@@ -102250,76 +102273,6 @@
             null
           ],
           [
-            "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
-            18,
-            7,
-            3,
-            "MOVEMENT_TYPE_LOOK_AROUND",
-            0,
-            0,
-            "TRAINER_TYPE_NONE",
-            "ITEM_MEDICHAMITE",
-            "Common_EventScript_FindItem",
-            "FLAG_ITEM_ROUTE_115_MEDICHAMITE",
-            null
-          ],
-          [
-            "OBJ_EVENT_GFX_ITEM_BALL",
-            12,
-            14,
-            3,
-            "MOVEMENT_TYPE_LOOK_AROUND",
-            0,
-            0,
-            "TRAINER_TYPE_NONE",
-            "ITEM_AUDINITE",
-            "Common_EventScript_FindItem",
-            "FLAG_ITEM_ROUTE_115_AUDINITE",
-            null
-          ],
-          [
-            "OBJ_EVENT_GFX_ITEM_BALL",
-            20,
-            60,
-            3,
-            "MOVEMENT_TYPE_LOOK_AROUND",
-            0,
-            0,
-            "TRAINER_TYPE_NONE",
-            "ITEM_LOPUNNITE",
-            "Common_EventScript_FindItem",
-            "FLAG_ITEM_ROUTE_115_LOPUNNITE",
-            null
-          ],
-          [
-            "OBJ_EVENT_GFX_ITEM_BALL",
-            26,
-            67,
-            3,
-            "MOVEMENT_TYPE_LOOK_AROUND",
-            1,
-            1,
-            "TRAINER_TYPE_NONE",
-            "ITEM_RAICHUNITE_Y",
-            "Common_EventScript_FindItem",
-            "FLAG_ITEM_ROUTE_115_RAICHUNITE_Y",
-            null
-          ],
-          [
-            "OBJ_EVENT_GFX_ITEM_BALL",
-            31,
-            56,
-            3,
-            "MOVEMENT_TYPE_LOOK_AROUND",
-            1,
-            1,
-            "TRAINER_TYPE_NONE",
-            "ITEM_PYROARITE",
-            "Common_EventScript_FindItem",
-            "FLAG_ITEM_ROUTE_115_PYROARITE",
-            null
-          ],
-          [
             "OBJ_EVENT_GFX_LASS",
             10,
             7,
@@ -102363,6 +102316,48 @@
           ],
           [
             "OBJ_EVENT_GFX_MEGA_STONE",
+            12,
+            14,
+            3,
+            "MOVEMENT_TYPE_LOOK_AROUND",
+            0,
+            0,
+            "TRAINER_TYPE_NONE",
+            "ITEM_AUDINITE",
+            "Common_EventScript_FindItem",
+            "FLAG_ITEM_ROUTE_115_AUDINITE",
+            null
+          ],
+          [
+            "OBJ_EVENT_GFX_MEGA_STONE",
+            18,
+            7,
+            3,
+            "MOVEMENT_TYPE_LOOK_AROUND",
+            0,
+            0,
+            "TRAINER_TYPE_NONE",
+            "ITEM_MEDICHAMITE",
+            "Common_EventScript_FindItem",
+            "FLAG_ITEM_ROUTE_115_MEDICHAMITE",
+            null
+          ],
+          [
+            "OBJ_EVENT_GFX_MEGA_STONE",
+            20,
+            60,
+            3,
+            "MOVEMENT_TYPE_LOOK_AROUND",
+            0,
+            0,
+            "TRAINER_TYPE_NONE",
+            "ITEM_LOPUNNITE",
+            "Common_EventScript_FindItem",
+            "FLAG_ITEM_ROUTE_115_LOPUNNITE",
+            null
+          ],
+          [
+            "OBJ_EVENT_GFX_MEGA_STONE",
             23,
             29,
             3,
@@ -102373,6 +102368,34 @@
             "ITEM_VICTREEBELITE",
             "Common_EventScript_FindItem",
             "FLAG_ITEM_ROUTE_115_VICTREEBELITE",
+            null
+          ],
+          [
+            "OBJ_EVENT_GFX_MEGA_STONE",
+            26,
+            67,
+            3,
+            "MOVEMENT_TYPE_LOOK_AROUND",
+            1,
+            1,
+            "TRAINER_TYPE_NONE",
+            "ITEM_RAICHUNITE_Y",
+            "Common_EventScript_FindItem",
+            "FLAG_ITEM_ROUTE_115_RAICHUNITE_Y",
+            null
+          ],
+          [
+            "OBJ_EVENT_GFX_MEGA_STONE",
+            31,
+            56,
+            3,
+            "MOVEMENT_TYPE_LOOK_AROUND",
+            1,
+            1,
+            "TRAINER_TYPE_NONE",
+            "ITEM_PYROARITE",
+            "Common_EventScript_FindItem",
+            "FLAG_ITEM_ROUTE_115_PYROARITE",
             null
           ],
           [
@@ -103639,20 +103662,6 @@
             null
           ],
           [
-            "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
-            55,
-            12,
-            4,
-            "MOVEMENT_TYPE_LOOK_AROUND",
-            1,
-            1,
-            "TRAINER_TYPE_NONE",
-            "ITEM_LUCARIONITE_Z",
-            "Common_EventScript_FindItem",
-            "FLAG_ITEM_ROUTE_116_LUCARIONITE_Z",
-            null
-          ],
-          [
             "OBJ_EVENT_GFX_HIKER",
             36,
             17,
@@ -103678,62 +103687,6 @@
             "5",
             "Route116_EventScript_Devan",
             "0",
-            null
-          ],
-          [
-            "OBJ_EVENT_GFX_ITEM_BALL",
-            10,
-            17,
-            3,
-            "MOVEMENT_TYPE_LOOK_AROUND",
-            0,
-            0,
-            "TRAINER_TYPE_NONE",
-            "ITEM_STARAPTITE",
-            "Common_EventScript_FindItem",
-            "FLAG_ITEM_ROUTE_116_STARAPTITE",
-            null
-          ],
-          [
-            "OBJ_EVENT_GFX_ITEM_BALL",
-            19,
-            6,
-            3,
-            "MOVEMENT_TYPE_LOOK_AROUND",
-            0,
-            0,
-            "TRAINER_TYPE_NONE",
-            "ITEM_LUCARIONITE",
-            "Common_EventScript_FindItem",
-            "FLAG_ITEM_ROUTE_116_LUCARIONITE",
-            null
-          ],
-          [
-            "OBJ_EVENT_GFX_ITEM_BALL",
-            34,
-            7,
-            0,
-            "MOVEMENT_TYPE_LOOK_AROUND",
-            1,
-            1,
-            "TRAINER_TYPE_NONE",
-            "ITEM_MEOWSTICITE",
-            "Common_EventScript_FindItem",
-            "FLAG_ITEM_ROUTE_116_MEOWSTICITE",
-            null
-          ],
-          [
-            "OBJ_EVENT_GFX_ITEM_BALL",
-            80,
-            8,
-            3,
-            "MOVEMENT_TYPE_LOOK_AROUND",
-            0,
-            0,
-            "TRAINER_TYPE_NONE",
-            "ITEM_GARCHOMPITE_Z",
-            "Common_EventScript_FindItem",
-            "FLAG_ITEM_ROUTE_116_GARCHOMPITE_Z",
             null
           ],
           [
@@ -103776,6 +103729,76 @@
             "0",
             "Route116_EventScript_DevonEmployee",
             "FLAG_HIDE_ROUTE_116_DEVON_EMPLOYEE",
+            null
+          ],
+          [
+            "OBJ_EVENT_GFX_MEGA_STONE",
+            10,
+            17,
+            3,
+            "MOVEMENT_TYPE_LOOK_AROUND",
+            0,
+            0,
+            "TRAINER_TYPE_NONE",
+            "ITEM_STARAPTITE",
+            "Common_EventScript_FindItem",
+            "FLAG_ITEM_ROUTE_116_STARAPTITE",
+            null
+          ],
+          [
+            "OBJ_EVENT_GFX_MEGA_STONE",
+            19,
+            6,
+            3,
+            "MOVEMENT_TYPE_LOOK_AROUND",
+            0,
+            0,
+            "TRAINER_TYPE_NONE",
+            "ITEM_LUCARIONITE",
+            "Common_EventScript_FindItem",
+            "FLAG_ITEM_ROUTE_116_LUCARIONITE",
+            null
+          ],
+          [
+            "OBJ_EVENT_GFX_MEGA_STONE",
+            34,
+            7,
+            0,
+            "MOVEMENT_TYPE_LOOK_AROUND",
+            1,
+            1,
+            "TRAINER_TYPE_NONE",
+            "ITEM_MEOWSTICITE",
+            "Common_EventScript_FindItem",
+            "FLAG_ITEM_ROUTE_116_MEOWSTICITE",
+            null
+          ],
+          [
+            "OBJ_EVENT_GFX_MEGA_STONE",
+            55,
+            12,
+            4,
+            "MOVEMENT_TYPE_LOOK_AROUND",
+            1,
+            1,
+            "TRAINER_TYPE_NONE",
+            "ITEM_LUCARIONITE_Z",
+            "Common_EventScript_FindItem",
+            "FLAG_ITEM_ROUTE_116_LUCARIONITE_Z",
+            null
+          ],
+          [
+            "OBJ_EVENT_GFX_MEGA_STONE",
+            80,
+            8,
+            3,
+            "MOVEMENT_TYPE_LOOK_AROUND",
+            0,
+            0,
+            "TRAINER_TYPE_NONE",
+            "ITEM_GARCHOMPITE_Z",
+            "Common_EventScript_FindItem",
+            "FLAG_ITEM_ROUTE_116_GARCHOMPITE_Z",
             null
           ],
           [
@@ -104980,30 +105003,16 @@
           ],
           [
             "OBJ_EVENT_GFX_ITEM_BALL",
-            16,
+            4,
             18,
             3,
-            "MOVEMENT_TYPE_LOOK_AROUND",
+            "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_CHESNAUGHTITE",
+            "ITEM_QUICK_BALL",
             "Common_EventScript_FindItem",
-            "FLAG_ITEM_ROUTE_117_CHESNAUGHTITE",
-            null
-          ],
-          [
-            "OBJ_EVENT_GFX_ITEM_BALL",
-            9,
-            1,
-            3,
-            "MOVEMENT_TYPE_LOOK_AROUND",
-            0,
-            0,
-            "TRAINER_TYPE_NONE",
-            "ITEM_GRENINJITE",
-            "Common_EventScript_FindItem",
-            "FLAG_ITEM_ROUTE_117_GRENINJITE",
+            "FLAG_EC_ITEM_ROUTE117_QUICK_BALL",
             null
           ],
           [
@@ -105106,16 +105115,44 @@
           ],
           [
             "OBJ_EVENT_GFX_MEGA_STONE",
-            4,
+            16,
+            18,
+            3,
+            "MOVEMENT_TYPE_LOOK_AROUND",
+            0,
+            0,
+            "TRAINER_TYPE_NONE",
+            "ITEM_CHESNAUGHTITE",
+            "Common_EventScript_FindItem",
+            "FLAG_ITEM_ROUTE_117_CHESNAUGHTITE",
+            null
+          ],
+          [
+            "OBJ_EVENT_GFX_MEGA_STONE",
+            3,
             18,
             3,
             "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
             0,
             0,
             "TRAINER_TYPE_NONE",
-            "ITEM_QUICK_BALL",
+            "ITEM_CHARIZARDITE_Y",
             "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_ROUTE117_QUICK_BALL",
+            "FLAG_HIDDEN_ITEM_ROUTE_117_CHARIZARDITE_Y",
+            null
+          ],
+          [
+            "OBJ_EVENT_GFX_MEGA_STONE",
+            9,
+            1,
+            3,
+            "MOVEMENT_TYPE_LOOK_AROUND",
+            0,
+            0,
+            "TRAINER_TYPE_NONE",
+            "ITEM_GRENINJITE",
+            "Common_EventScript_FindItem",
+            "FLAG_ITEM_ROUTE_117_GRENINJITE",
             null
           ],
           [
@@ -105278,16 +105315,6 @@
           ]
         ],
         "current_bg_events": [
-          [
-            "hidden_item",
-            3,
-            18,
-            3,
-            null,
-            null,
-            "ITEM_CHARIZARDITE_Y",
-            "FLAG_HIDDEN_ITEM_ROUTE_117_CHARIZARDITE_Y"
-          ],
           [
             "sign",
             16,
@@ -106154,20 +106181,6 @@
             null
           ],
           [
-            "OBJ_EVENT_GFX_ITEM_BALL",
-            69,
-            7,
-            3,
-            "MOVEMENT_TYPE_LOOK_AROUND",
-            1,
-            1,
-            "TRAINER_TYPE_NONE",
-            "ITEM_SCIZORITE",
-            "Common_EventScript_FindItem",
-            "FLAG_ITEM_ROUTE_118_SCIZORITE",
-            null
-          ],
-          [
             "OBJ_EVENT_GFX_MAN_5",
             17,
             11,
@@ -106207,6 +106220,20 @@
             "3",
             "Route118_EventScript_Perry",
             "0",
+            null
+          ],
+          [
+            "OBJ_EVENT_GFX_MEGA_STONE",
+            69,
+            7,
+            3,
+            "MOVEMENT_TYPE_LOOK_AROUND",
+            1,
+            1,
+            "TRAINER_TYPE_NONE",
+            "ITEM_SCIZORITE",
+            "Common_EventScript_FindItem",
+            "FLAG_ITEM_ROUTE_118_SCIZORITE",
             null
           ],
           [
@@ -107963,6 +107990,20 @@
           ],
           [
             "OBJ_EVENT_GFX_ITEM_BALL",
+            4,
+            96,
+            3,
+            "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
+            0,
+            0,
+            "TRAINER_TYPE_NONE",
+            "ITEM_DUSK_BALL",
+            "Common_EventScript_FindItem",
+            "FLAG_ITEM_ROUTE_119_DUSK_BALL",
+            null
+          ],
+          [
+            "OBJ_EVENT_GFX_ITEM_BALL",
             8,
             18,
             3,
@@ -108099,20 +108140,6 @@
             "5",
             "Route119_EventScript_Phil",
             "0",
-            null
-          ],
-          [
-            "OBJ_EVENT_GFX_MEGA_STONE",
-            4,
-            96,
-            3,
-            "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
-            0,
-            0,
-            "TRAINER_TYPE_NONE",
-            "ITEM_DUSK_BALL",
-            "Common_EventScript_FindItem",
-            "FLAG_ITEM_ROUTE_119_DUSK_BALL",
             null
           ],
           [
@@ -111396,34 +111423,6 @@
           ],
           [
             "OBJ_EVENT_GFX_ITEM_BALL",
-            20,
-            55,
-            3,
-            "MOVEMENT_TYPE_LOOK_AROUND",
-            0,
-            0,
-            "TRAINER_TYPE_NONE",
-            "ITEM_GENGARITE",
-            "Common_EventScript_FindItem",
-            "FLAG_ITEM_ROUTE_120_GENGARITE",
-            null
-          ],
-          [
-            "OBJ_EVENT_GFX_ITEM_BALL",
-            22,
-            13,
-            3,
-            "MOVEMENT_TYPE_LOOK_AROUND",
-            1,
-            1,
-            "TRAINER_TYPE_NONE",
-            "ITEM_ZERAORITE",
-            "Common_EventScript_FindItem",
-            "FLAG_ITEM_ROUTE_120_ZERAORITE",
-            null
-          ],
-          [
-            "OBJ_EVENT_GFX_ITEM_BALL",
             23,
             82,
             5,
@@ -111602,6 +111601,34 @@
             "3",
             "Route120_EventScript_Colin",
             "0",
+            null
+          ],
+          [
+            "OBJ_EVENT_GFX_MEGA_STONE",
+            20,
+            55,
+            3,
+            "MOVEMENT_TYPE_LOOK_AROUND",
+            0,
+            0,
+            "TRAINER_TYPE_NONE",
+            "ITEM_GENGARITE",
+            "Common_EventScript_FindItem",
+            "FLAG_ITEM_ROUTE_120_GENGARITE",
+            null
+          ],
+          [
+            "OBJ_EVENT_GFX_MEGA_STONE",
+            22,
+            13,
+            3,
+            "MOVEMENT_TYPE_LOOK_AROUND",
+            1,
+            1,
+            "TRAINER_TYPE_NONE",
+            "ITEM_ZERAORITE",
+            "Common_EventScript_FindItem",
+            "FLAG_ITEM_ROUTE_120_ZERAORITE",
             null
           ],
           [
@@ -116920,20 +116947,6 @@
         ],
         "current_objects": [
           [
-            "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
-            37,
-            63,
-            3,
-            "MOVEMENT_TYPE_LOOK_AROUND",
-            1,
-            1,
-            "TRAINER_TYPE_NONE",
-            "ITEM_METAGROSSITE",
-            "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_ROUTE124_METAGROSSITE",
-            null
-          ],
-          [
             "OBJ_EVENT_GFX_ITEM_BALL",
             28,
             12,
@@ -116973,6 +116986,20 @@
             "ITEM_YELLOW_SHARD",
             "Common_EventScript_FindItem",
             "FLAG_ITEM_ROUTE_124_YELLOW_SHARD",
+            null
+          ],
+          [
+            "OBJ_EVENT_GFX_MEGA_STONE",
+            37,
+            63,
+            3,
+            "MOVEMENT_TYPE_LOOK_AROUND",
+            1,
+            1,
+            "TRAINER_TYPE_NONE",
+            "ITEM_METAGROSSITE",
+            "Common_EventScript_FindItem",
+            "FLAG_EC_ITEM_ROUTE124_METAGROSSITE",
             null
           ],
           [
@@ -118538,6 +118565,20 @@
             null
           ],
           [
+            "OBJ_EVENT_GFX_ITEM_BALL",
+            64,
+            39,
+            3,
+            "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
+            0,
+            0,
+            "TRAINER_TYPE_NONE",
+            "ITEM_DIVE_BALL",
+            "Common_EventScript_FindItem",
+            "FLAG_ITEM_ROUTE_127_DIVE_BALL",
+            null
+          ],
+          [
             "OBJ_EVENT_GFX_MAN_5",
             15,
             23,
@@ -118549,20 +118590,6 @@
             "2",
             "Route127_EventScript_Aidan",
             "0",
-            null
-          ],
-          [
-            "OBJ_EVENT_GFX_MEGA_STONE",
-            64,
-            39,
-            3,
-            "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
-            0,
-            0,
-            "TRAINER_TYPE_NONE",
-            "ITEM_DIVE_BALL",
-            "Common_EventScript_FindItem",
-            "FLAG_ITEM_ROUTE_127_DIVE_BALL",
             null
           ],
           [
@@ -119917,7 +119944,7 @@
         ],
         "current_objects": [
           [
-            "OBJ_EVENT_GFX_ITEM_BALL",
+            "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
             42,
             20,
             3,
@@ -126989,7 +127016,7 @@
             null
           ],
           [
-            "OBJ_EVENT_GFX_MEGA_STONE",
+            "OBJ_EVENT_GFX_ITEM_BALL",
             30,
             2,
             3,
@@ -128630,6 +128657,20 @@
             null
           ],
           [
+            "OBJ_EVENT_GFX_ITEM_BALL",
+            7,
+            6,
+            3,
+            "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
+            1,
+            1,
+            "TRAINER_TYPE_NONE",
+            "ITEM_NUGGET",
+            "Common_EventScript_FindItem",
+            "FLAG_ITEM_SAFARI_ZONE_NORTH_NUGGET",
+            null
+          ],
+          [
             "OBJ_EVENT_GFX_MAN_4",
             6,
             29,
@@ -128641,20 +128682,6 @@
             "0",
             "SafariZone_North_EventScript_Man",
             "0",
-            null
-          ],
-          [
-            "OBJ_EVENT_GFX_MEGA_STONE",
-            7,
-            6,
-            3,
-            "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
-            1,
-            1,
-            "TRAINER_TYPE_NONE",
-            "ITEM_NUGGET",
-            "Common_EventScript_FindItem",
-            "FLAG_ITEM_SAFARI_ZONE_NORTH_NUGGET",
             null
           ]
         ],
@@ -129016,7 +129043,7 @@
             null
           ],
           [
-            "OBJ_EVENT_GFX_MEGA_STONE",
+            "OBJ_EVENT_GFX_ITEM_BALL",
             8,
             17,
             3,
@@ -131022,20 +131049,6 @@
             null
           ],
           [
-            "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
-            12,
-            113,
-            3,
-            "MOVEMENT_TYPE_LOOK_AROUND",
-            0,
-            0,
-            "TRAINER_TYPE_NONE",
-            "ITEM_GOLURKITE",
-            "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_RUINS_GOLURKITE",
-            null
-          ],
-          [
             "OBJ_EVENT_GFX_ITEM_BALL",
             3,
             14,
@@ -131047,6 +131060,20 @@
             "ITEM_ODD_KEYSTONE",
             "Common_EventScript_FindItem",
             "FLAG_EC_ITEM_RUINS_ODD_KEYSTONE",
+            null
+          ],
+          [
+            "OBJ_EVENT_GFX_MEGA_STONE",
+            12,
+            113,
+            3,
+            "MOVEMENT_TYPE_LOOK_AROUND",
+            0,
+            0,
+            "TRAINER_TYPE_NONE",
+            "ITEM_GOLURKITE",
+            "Common_EventScript_FindItem",
+            "FLAG_EC_ITEM_RUINS_GOLURKITE",
             null
           ],
           [
@@ -131665,7 +131692,7 @@
         ],
         "current_objects": [
           [
-            "OBJ_EVENT_GFX_MEGA_STONE",
+            "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
             23,
             22,
             3,
@@ -133506,7 +133533,7 @@
         ],
         "current_objects": [
           [
-            "OBJ_EVENT_GFX_MEGA_STONE",
+            "OBJ_EVENT_GFX_ITEM_BALL",
             2,
             2,
             3,
@@ -150816,20 +150843,6 @@
         ],
         "current_objects": [
           [
-            "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
-            12,
-            8,
-            3,
-            "MOVEMENT_TYPE_LOOK_AROUND",
-            1,
-            1,
-            "TRAINER_TYPE_NONE",
-            "ITEM_ABOMASITE",
-            "Common_EventScript_FindItem",
-            "FLAG_ITEM_SHOAL_CAVE_ICE_ROOM_ABOMASITE",
-            null
-          ],
-          [
             "OBJ_EVENT_GFX_INCLEMENT_ARTICUNO",
             8,
             8,
@@ -150855,6 +150868,20 @@
             "ITEM_ICE_STONE",
             "Common_EventScript_FindItem",
             "FLAG_ITEM_SHOAL_CAVE_ICE_ROOM_ICE_STONE",
+            null
+          ],
+          [
+            "OBJ_EVENT_GFX_MEGA_STONE",
+            12,
+            8,
+            3,
+            "MOVEMENT_TYPE_LOOK_AROUND",
+            1,
+            1,
+            "TRAINER_TYPE_NONE",
+            "ITEM_ABOMASITE",
+            "Common_EventScript_FindItem",
+            "FLAG_ITEM_SHOAL_CAVE_ICE_ROOM_ABOMASITE",
             null
           ],
           [
@@ -153226,8 +153253,8 @@
             0,
             "TRAINER_TYPE_NONE",
             "0",
-            "SlateportCity_EventScript_BrawlyRestored",
-            "0",
+            "SlateportCity_EventScript_Brawly",
+            "FLAG_HIDE_SLATEPORT_CITY_BRAWLY",
             null
           ],
           [
@@ -153298,6 +153325,20 @@
             "0",
             "SlateportCity_EventScript_Greta",
             "0",
+            null
+          ],
+          [
+            "OBJ_EVENT_GFX_ITEM_BALL",
+            6,
+            54,
+            3,
+            "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
+            0,
+            0,
+            "TRAINER_TYPE_NONE",
+            "ITEM_QUICK_BALL",
+            "Common_EventScript_FindItem",
+            "FLAG_EC_ITEM_SLATEPORT_CITY_QUICK_BALL",
             null
           ],
           [
@@ -153396,20 +153437,6 @@
             "0",
             "SlateportCity_EventScript_DecorClerk",
             "0",
-            null
-          ],
-          [
-            "OBJ_EVENT_GFX_MEGA_STONE",
-            6,
-            54,
-            3,
-            "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
-            0,
-            0,
-            "TRAINER_TYPE_NONE",
-            "ITEM_QUICK_BALL",
-            "Common_EventScript_FindItem",
-            "FLAG_EC_ITEM_SLATEPORT_CITY_QUICK_BALL",
             null
           ],
           [
@@ -164932,7 +164959,7 @@
             null
           ],
           [
-            "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
+            "OBJ_EVENT_GFX_MEGA_STONE",
             7,
             10,
             3,
@@ -167579,20 +167606,6 @@
         ],
         "current_objects": [
           [
-            "OBJ_EVENT_GFX_ITEM_BALL",
-            40,
-            26,
-            3,
-            "MOVEMENT_TYPE_LOOK_AROUND",
-            1,
-            1,
-            "TRAINER_TYPE_NONE",
-            "ITEM_ZYGARDITE",
-            "Common_EventScript_FindItem",
-            "FLAG_ITEM_VICTORY_ROAD_1F_ZYGARDITE",
-            null
-          ],
-          [
             "OBJ_EVENT_GFX_MAN_3",
             27,
             34,
@@ -167646,6 +167659,20 @@
             "ITEM_DARKRANITE",
             "Common_EventScript_FindItem",
             "FLAG_ITEM_VICTORY_ROAD_1F_DARKRANITE",
+            null
+          ],
+          [
+            "OBJ_EVENT_GFX_MEGA_STONE",
+            40,
+            26,
+            3,
+            "MOVEMENT_TYPE_LOOK_AROUND",
+            1,
+            1,
+            "TRAINER_TYPE_NONE",
+            "ITEM_ZYGARDITE",
+            "Common_EventScript_FindItem",
+            "FLAG_ITEM_VICTORY_ROAD_1F_ZYGARDITE",
             null
           ],
           [

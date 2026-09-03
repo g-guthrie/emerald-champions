@@ -175,8 +175,18 @@ def main() -> None:
     player_controller = read("src/battle_controller_player.c")
     require(
         "MoveSelectionDisplayFoeTypes(battler);" in player_controller
-        and "JOY_NEW(R_BUTTON) && !gBattleStruct->zmove.viewing" in player_controller,
-        "R during move selection must show the foes' types in the description panel",
+        and "JOY_NEW(R_BUTTON) && !gBattleStruct->zmove.viewing" in player_controller
+        and "PlaySE(SE_SELECT);\n        // Reuse the native move-description window on the action-menu page."
+            in player_controller
+        and "SetWindowAttribute(B_WIN_MOVE_DESCRIPTION, WINDOW_TILEMAP_TOP, 27);\n        OpenFoeTypesSubmenu(battler);"
+            in player_controller,
+        "R from both action and move selection must show the foes' types without replacing the action menu",
+    )
+    summary_screen = read("src/pokemon_summary_screen.c")
+    require(
+        "gRelearnMode == RELEARN_MODE_SCRIPT && gMoveRelearnerState == MOVE_RELEARNER_ALL_MOVES"
+        in summary_screen,
+        "the all-moves preparation tutor must be able to replace an HM move",
     )
     start_menu = read("src/start_menu.c")
     overworld = read("src/overworld.c")

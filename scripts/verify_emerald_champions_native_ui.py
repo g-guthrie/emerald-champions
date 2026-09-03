@@ -148,6 +148,8 @@ REQUIRED_HEADLESS_SCENARIOS = {
     "all-legal-moves-mew",
     "all-legal-moves-mew-middle",
     "all-legal-moves-mew-final",
+    "all-legal-hm-replacement",
+    "dewford-gym-entry",
     "battle-set-current",
     "game-corner-prizes",
     "game-corner-regions",
@@ -163,7 +165,9 @@ REQUIRED_HEADLESS_SCENARIOS = {
     "circuit-welcome",
     "circuit-room",
     "wild-action-menu",
+    "wild-foe-types",
     "move-details",
+    "move-foe-types",
     "pokedex",
     "pokedex-info",
     "pokedex-area",
@@ -1416,11 +1420,16 @@ def verify_headless_renderer_contract() -> None:
             and scenarios[name].get("param") == expected_param,
             f"{name} lacks its reviewed semantic state/parameter contract",
         )
-    for name in ("wild-action-menu", "move-details"):
+    for name in ("wild-action-menu", "wild-foe-types", "move-details", "move-foe-types"):
         require(
             scenarios[name].get("verify") is True,
             f"{name} can render without runtime proof that its native battle UI was reached",
         )
+    require(
+        scenarios["all-legal-hm-replacement"].get("verify") is True
+        and scenarios["all-legal-hm-replacement"].get("stop_on_observed") is True,
+        "the all-moves tutor HM replacement lacks a synchronized runtime proof",
+    )
 
     render_one = source_region(renderer, "def render_one(", "\ndef main() -> int:")
     png_validator = source_region(renderer, "def validate_screenshot_png(", "\ndef render_one(")

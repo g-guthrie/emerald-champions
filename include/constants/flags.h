@@ -682,7 +682,7 @@
 #define FLAG_EC_RECEIVED_CATCHING_CHARM         0x273
 #define FLAG_EC_RECEIVED_OVAL_CHARM             0x274
 #define FLAG_EC_REPEL_SPRAY_ACTIVE               0x275
-#define FLAG_UNUSED_0x276  0x276 // Unused Flag
+#define FLAG_HIDE_SLATEPORT_CITY_BRAWLY  0x276 // Shared by Slateport Brawly and the Dewford Gym guide (Inclement lifecycle)
 #define FLAG_UNUSED_0x277  0x277 // Unused Flag
 #define FLAG_UNUSED_0x278  0x278 // Unused Flag
 #define FLAG_UNUSED_0x279  0x279 // Unused Flag
