@@ -23,6 +23,8 @@ STATIC_GATES = (
     ("visual contracts", (PYTHON, "scripts/verify_emerald_champions_visual_contracts.py")),
     ("Inclement visual sources", (PYTHON, "scripts/verify_inclement_visual_sources.py")),
     ("Inclement overworld parity", (PYTHON, "scripts/verify_inclement_overworld_parity.py")),
+    ("Inclement story parity", (PYTHON, "scripts/verify_inclement_story_parity.py")),
+    ("map reachability", (PYTHON, "scripts/verify_map_reachability.py")),
     (
         "Verdant visual byte inventory",
         (PYTHON, "scripts/audit_verdant_visual_parity.py", "--check-fast"),

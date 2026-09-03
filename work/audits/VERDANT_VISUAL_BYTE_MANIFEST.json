@@ -133644,7 +133644,7 @@
       "same_path_identical": 96
     }
   },
-  "current_visual_tree_sha256": "5206058ebd2a61de41dedb29da0f15fe7d7fbfc499c04d56d2b09dbff07905ed",
+  "current_visual_tree_sha256": "857947a8f12d741d3a74ef9f6cb66afb84a2780ed9a937cd035ec4c485553f58",
   "policy_version": 1,
   "reference_assets": [
     {
@@ -145398,8 +145398,8 @@
     {
       "classification": "changed",
       "current_path": "data/maps/FallarborTown_MoveRelearnersHouse/map.json",
-      "current_sha256": "c26d01da4e66f3bb0f188e9ed897175cdab381346eaefc30089144a733453b53",
-      "current_size": 1683,
+      "current_sha256": "ae2c21c9a8eb754f5637c47d04523b553aa893539e3a24c8d3ee7378cb6a16b9",
+      "current_size": 1743,
       "group": "map",
       "kind": "map_data",
       "reference_path": "data/maps/FallarborTown_MoveRelearnersHouse/map.json",
@@ -145728,7 +145728,7 @@
     {
       "classification": "changed",
       "current_path": "data/maps/LavaridgeTown_PokemonCenter_1F/map.json",
-      "current_sha256": "1fa21145cf3a23235cd5cadee9e103879f1cdaeec3b0f86ce6a5d7616f837b18",
+      "current_sha256": "1d7f51c03e778c867eba423379c3bdde76557bde25bb6eee63d8a364f984c93f",
       "current_size": 4330,
       "group": "map",
       "kind": "map_data",

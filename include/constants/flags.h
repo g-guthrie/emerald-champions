@@ -683,7 +683,7 @@
 #define FLAG_EC_RECEIVED_OVAL_CHARM             0x274
 #define FLAG_EC_REPEL_SPRAY_ACTIVE               0x275
 #define FLAG_HIDE_SLATEPORT_CITY_BRAWLY  0x276 // Shared by Slateport Brawly and the Dewford Gym guide (Inclement lifecycle)
-#define FLAG_UNUSED_0x277  0x277 // Unused Flag
+#define FLAG_EC_MET_IVY_EVIE  0x277 // Fallarbor training sisters have introduced themselves
 #define FLAG_UNUSED_0x278  0x278 // Unused Flag
 #define FLAG_UNUSED_0x279  0x279 // Unused Flag
 #define FLAG_UNUSED_0x27A  0x27A // Unused Flag

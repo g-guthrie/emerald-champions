@@ -222,6 +222,22 @@ OVERWORLD_FIXTURE_PATTERN = re.compile(
 )
 
 
+def label_block_text(text: str, label: str) -> str:
+    """Return the body of `label` in an assembled script file, or "" if absent."""
+    if not label:
+        return ""
+    marker = f"\n{label}::"
+    start = text.find(marker)
+    if start == -1:
+        marker = f"\n{label}:"
+        start = text.find(marker)
+        if start == -1:
+            return ""
+    start += len(marker)
+    nxt = text.find("\n\n", start)
+    return text[start:] if nxt == -1 else text[start:nxt]
+
+
 def fail(message: str) -> None:
     raise SystemExit(message)
 
@@ -525,18 +541,24 @@ def verify_center_geometry(dimensions: dict[str, tuple[int, int]]) -> None:
             script="Common_EventScript_EmeraldChampionsMoveTutor",
             map_name=map_name,
         )
-        expected_vendor = (2, 2)
-        expected_tutor = (13, 2)
+        # Assert what the player experiences, not a hard-coded tile. Pinning every Center's
+        # vendor to (2,2) is what put Lavaridge's vendor on its second entrance and sealed
+        # that door; verify_map_reachability.py now owns "does not block a warp".
         require(
-            (vendor.get("x"), vendor.get("y"), vendor.get("graphics_id"), vendor.get("movement_type"))
-            == (*expected_vendor, "OBJ_EVENT_GFX_MART_EMPLOYEE", "MOVEMENT_TYPE_FACE_DOWN"),
-            f"{map_name}: battle vendor is not in the reviewed native position: {vendor}",
+            (vendor.get("graphics_id"), vendor.get("movement_type"))
+            == ("OBJ_EVENT_GFX_MART_EMPLOYEE", "MOVEMENT_TYPE_FACE_DOWN"),
+            f"{map_name}: battle vendor has the wrong sprite or facing: {vendor}",
         )
         require(
-            (tutor.get("x"), tutor.get("y"), tutor.get("graphics_id"), tutor.get("movement_type"))
-            == (*expected_tutor, "OBJ_EVENT_GFX_OLD_MAN", "MOVEMENT_TYPE_FACE_DOWN"),
-            f"{map_name}: move tutor is not in the reviewed native position: {tutor}",
+            (tutor.get("graphics_id"), tutor.get("movement_type"))
+            == ("OBJ_EVENT_GFX_OLD_MAN", "MOVEMENT_TYPE_FACE_DOWN"),
+            f"{map_name}: move tutor has the wrong sprite or facing: {tutor}",
         )
+        for role, npc in (("battle vendor", vendor), ("move tutor", tutor)):
+            require(
+                (npc.get("x"), npc.get("y")) not in {(warp.get("x"), warp.get("y")) for warp in warps},
+                f"{map_name}: {role} is standing on a warp tile",
+            )
 
         entrance_tiles = {(warp.get("x"), warp.get("y")) for warp in warps}
         require(
@@ -917,11 +939,23 @@ def verify_stat_point_editor() -> None:
         and "MON_DATA_HP_IV + stat" in sets,
         "battle sets no longer normalize the hidden legacy IV storage to perfect Champions potential",
     )
+    # Assert the behaviour, not the wiring: the NPC must reach the canonical Stat Point
+    # editor either directly or through a map-local wrapper that jumps to it (the wrapper
+    # exists so Ivy and Evie can introduce themselves the first time you meet them).
+    fallarbor_scripts = (ROOT / "data/maps/FallarborTown_MoveRelearnersHouse/scripts.inc").read_text()
+    canonical = "Common_EventScript_EmeraldChampionsStatPointEditor"
+    reaches_editor = False
+    for obj in fallarbor["object_events"]:
+        script = obj.get("script") or ""
+        if script == canonical:
+            reaches_editor = True
+            break
+        block = label_block_text(fallarbor_scripts, script)
+        if block and f"goto {canonical}" in block:
+            reaches_editor = True
+            break
     require(
-        any(
-            obj.get("script") == "Common_EventScript_EmeraldChampionsStatPointEditor"
-            for obj in fallarbor["object_events"]
-        ),
+        reaches_editor,
         "Fallarbor's restored training NPC does not open the canonical Stat Point editor",
     )
     print("PASS: free Stat Point editing is native, bounded to 66/32, and shared with Fallarbor")

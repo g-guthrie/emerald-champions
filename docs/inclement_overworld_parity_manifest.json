@@ -34475,9 +34475,9 @@
             0,
             "TRAINER_TYPE_NONE",
             "0",
-            "Common_EventScript_EmeraldChampionsStatPointEditor",
+            "FallarborTown_MoveRelearnersHouse_EventScript_StatPointTrainer",
             "0",
-            null
+            "LOCALID_STAT_POINT_TRAINER"
           ]
         ],
         "coord_events_classification": "exact",
@@ -42587,7 +42587,7 @@
           ],
           [
             "OBJ_EVENT_GFX_MART_EMPLOYEE",
-            2,
+            1,
             2,
             3,
             "MOVEMENT_TYPE_FACE_DOWN",
