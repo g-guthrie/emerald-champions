@@ -17,10 +17,18 @@ GraniteCave_StevensRoom_EventScript_CheckKnuckleBadge::
 	msgbox GraniteCave_StevensRoom_Text_ThankYouTakeThis, MSGBOX_DEFAULT
 	giveitem ITEM_MEGA_RING
 	goto_if_eq VAR_RESULT, FALSE, GraniteCave_StevensRoom_EventScript_BagFull
-	msgbox GraniteCave_StevensRoom_Text_StarterStones, MSGBOX_DEFAULT
-	giveitem ITEM_SCEPTILITE
-	giveitem ITEM_BLAZIKENITE
-	giveitem ITEM_SWAMPERTITE
+	special GetEmeraldChampionsStarterMegaStone
+	goto_if_eq VAR_RESULT, FALSE, GraniteCave_StevensRoom_EventScript_NoStarterStone
+	msgbox GraniteCave_StevensRoom_Text_StarterStone, MSGBOX_DEFAULT
+	giveitem VAR_0x8004
+	goto_if_eq VAR_0x8005, ITEM_NONE, GraniteCave_StevensRoom_EventScript_ArchiveOpen
+	giveitem VAR_0x8005
+	goto GraniteCave_StevensRoom_EventScript_ArchiveOpen
+
+GraniteCave_StevensRoom_EventScript_NoStarterStone::
+	msgbox GraniteCave_StevensRoom_Text_NoStarterStone, MSGBOX_DEFAULT
+
+GraniteCave_StevensRoom_EventScript_ArchiveOpen::
 	msgbox GraniteCave_StevensRoom_Text_ArchiveOpen, MSGBOX_DEFAULT
 
 GraniteCave_StevensRoom_EventScript_RegisterSteven::
@@ -116,9 +124,13 @@ GraniteCave_StevensRoom_Text_ThankYouTakeThis:
 	.string "The RING and those CHAMPION'S SIGNS\n"
 	.string "answer to the same bond.$"
 
-GraniteCave_StevensRoom_Text_StarterStones:
-	.string "Your starter should be first. Take\n"
-	.string "all three of the HOENN starter stones.$"
+GraniteCave_StevensRoom_Text_StarterStone:
+	.string "Your starter should be first.\n"
+	.string "This is the stone its final form uses.$"
+
+GraniteCave_StevensRoom_Text_NoStarterStone:
+	.string "Your starter's line has no Mega Stone,\n"
+	.string "so let your other partners carry one.$"
 
 GraniteCave_StevensRoom_Text_ArchiveOpen:
 	.string "And now that you hold a RING, every\n"

@@ -131,7 +131,7 @@ MAP_SPECIAL = re.compile(
 # below, so adding one applymovement to a scene must not fail the release.
 MAP_SPECIAL_CALLS_MIN = 900
 MAP_SPECIAL_NAMES_MIN = 240
-MAP_SPECIAL_TOPOLOGY_SHA256 = "2998f2ef34b3fcdf0358b0007a138925d7d6f00672b5959fe669fe02373763af"  # 2026-09-02: Devon 2F Sign ledger (BufferLegendarySignLedger)
+MAP_SPECIAL_TOPOLOGY_SHA256 = "8fd1c7791b51284bcdf33249aa1dc465c5361c84b3309e32e1cd5d226f1eb9eb"  # 2026-09-02: Steven hands out the chosen starter's Mega Stone (GetEmeraldChampionsStarterMegaStone)
 SCRIPTED_WARP_LITERAL_COORDS_MIN = 180
 LITERAL_LOCAL_ID_VISUAL_CALLS_MIN = 1750
 VISUAL_SPECIAL_CLASSIFICATION = {

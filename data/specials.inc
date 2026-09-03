@@ -515,6 +515,7 @@ gSpecials::
 	def_special OpenEmeraldChampionsGemItemMart
 	def_special OpenEmeraldChampionsSpeciesItemMart
 	def_special OpenEmeraldChampionsMegaStoneArchive
+	def_special GetEmeraldChampionsStarterMegaStone
 	def_special OpenEmeraldChampionsEvolutionItemArchive
 	def_special IsEmeraldChampionsGameCornerPokemonClaimed
 	def_special GiveEmeraldChampionsGameCornerPokemon

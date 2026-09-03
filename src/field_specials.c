@@ -675,6 +675,41 @@ void OpenEmeraldChampionsSpeciesItemMart(void)
     ScriptContext_Stop();
 }
 
+// Emerald Champions: the Mega Stone(s) for the player's chosen starter line.
+// VAR_0x8004 = first stone (ITEM_NONE if the line has no Mega), VAR_0x8005 = second (Charizard).
+void GetEmeraldChampionsStarterMegaStone(void)
+{
+    static const struct { enum Species starter; u16 first; u16 second; } sStarterStones[] =
+    {
+        {SPECIES_BULBASAUR,  ITEM_VENUSAURITE,   ITEM_NONE},
+        {SPECIES_CHARMANDER, ITEM_CHARIZARDITE_X, ITEM_CHARIZARDITE_Y},
+        {SPECIES_SQUIRTLE,   ITEM_BLASTOISINITE, ITEM_NONE},
+        {SPECIES_CHIKORITA,  ITEM_MEGANIUMITE,   ITEM_NONE},
+        {SPECIES_TOTODILE,   ITEM_FERALIGITE,    ITEM_NONE},
+        {SPECIES_TREECKO,    ITEM_SCEPTILITE,    ITEM_NONE},
+        {SPECIES_TORCHIC,    ITEM_BLAZIKENITE,   ITEM_NONE},
+        {SPECIES_MUDKIP,     ITEM_SWAMPERTITE,   ITEM_NONE},
+        {SPECIES_TEPIG,      ITEM_EMBOARITE,     ITEM_NONE},
+        {SPECIES_CHESPIN,    ITEM_CHESNAUGHTITE, ITEM_NONE},
+        {SPECIES_FENNEKIN,   ITEM_DELPHOXITE,    ITEM_NONE},
+        {SPECIES_FROAKIE,    ITEM_GRENINJITE,    ITEM_NONE},
+    };
+    enum Species starter = GetStarterPokemonForGeneration(VarGet(VAR_STARTER_MON), VarGet(VAR_STARTER_GEN));
+
+    gSpecialVar_0x8004 = ITEM_NONE;
+    gSpecialVar_0x8005 = ITEM_NONE;
+    for (u32 i = 0; i < ARRAY_COUNT(sStarterStones); i++)
+    {
+        if (sStarterStones[i].starter == starter)
+        {
+            gSpecialVar_0x8004 = sStarterStones[i].first;
+            gSpecialVar_0x8005 = sStarterStones[i].second;
+            break;
+        }
+    }
+    gSpecialVar_Result = gSpecialVar_0x8004 != ITEM_NONE;
+}
+
 void OpenEmeraldChampionsMegaStoneArchive(void)
 {
     CreateFreePokemartMenu(sEmeraldChampionsMegaStones);
