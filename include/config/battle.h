@@ -383,7 +383,7 @@
 #define B_FLAG_VICTORY_CATCH_GUARANTEED 0          // If set, you will be prompted to throw a ball after the encounter has been defeated, guaranteed to catch. You can't capture the encounter in any other way.
 
 #define B_LAST_USED_BALL            TRUE       // If set to TRUE, the "last used Ball" feature from Gen7+ will be implemented
-#define B_LAST_USED_BALL_BUTTON     R_BUTTON   // If last used Ball is implemented, this button (or button combination) will trigger throwing the last used Ball.
+#define B_LAST_USED_BALL_BUTTON     L_BUTTON   // If last used Ball is implemented, this button (or button combination) will trigger throwing the last used Ball.
 #define B_LAST_USED_BALL_CYCLE      TRUE       // If set to TRUE, then holding B_LAST_USED_BALL_BUTTON while pressing the D-Pad cycles through the Balls.
 #define B_CATCH_SWAP_INTO_PARTY     GEN_LATEST // In Gen7+, the option to swap caught Pokémon into the party will appear, allowing you to send a different Pokémon to the Box.
 #define B_CATCH_SWAP_CHECK_HMS      TRUE       // If set to TRUE, the catch swap feature above will prevent returning Pokémon to the Box if they know HMs.

@@ -6337,8 +6337,8 @@ BattleScript_SleepClausePrevents::
 	waitmessage B_WAIT_TIME_LONG
 	return
 
-BattleScript_QuestionReloadBattle::
-	printselectionstring STRINGID_QUESTIONRELOADBATTLE
+BattleScript_QuestionRestartBattle::
+	printselectionstring STRINGID_QUESTIONRESTARTBATTLE
 	forfeityesnobox
 	endselectionscript
 

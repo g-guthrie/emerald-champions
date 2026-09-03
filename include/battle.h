@@ -684,7 +684,8 @@ struct BattleStruct
     u8 snatchedMoveIsUsed:1;
     u8 descriptionSubmenu:1; // For Move Description window in move selection screen
     u8 foeTypesSubmenu:1; // Emerald Champions: the description window is showing the foes' types (R)
-    u8 reloadQuestionPending:1; // Emerald Champions: Run in a trainer battle first asks to reload the last save
+    u8 restartQuestionPending:1; // Emerald Champions: Run in a trainer battle first asks to restart the battle
+    u8 throwBallFromMoveMenu:1; // Emerald Champions: L in the move menu of a wild battle throws the last used Ball
     u8 ackBallUseBtn:1; // Used for the last used ball feature
     u8 ballSwapped:1; // Used for the last used ball feature
     u8 effectsBeforeUsingMoveDone:1; // Mega Evo and Focus Punch/Shell Trap effects.

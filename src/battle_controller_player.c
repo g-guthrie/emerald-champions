@@ -244,6 +244,18 @@ static void HandleInputChooseAction(enum BattlerId battler)
     else
         gPlayerDpadHoldFrames = 0;
 
+    if (gBattleStruct->throwBallFromMoveMenu)
+    {
+        gBattleStruct->throwBallFromMoveMenu = FALSE;
+        if (CanThrowLastUsedBall())
+        {
+            TryHideLastUsedBall();
+            BtlController_EmitTwoReturnValues(battler, B_COMM_TO_ENGINE, B_ACTION_THROW_BALL, 0);
+            BtlController_Complete(battler);
+            return;
+        }
+    }
+
     if (B_LAST_USED_BALL == TRUE && B_LAST_USED_BALL_CYCLE == TRUE
     && !(B_LAST_USED_BALL_BUTTON == L_BUTTON && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A))
     {
@@ -908,6 +920,19 @@ void HandleInputChooseMove(enum BattlerId battler)
             MoveSelectionDisplayPPNumber(battler);
             MoveSelectionDisplayMoveType(battler);
         }
+    }
+    else if (JOY_NEW(B_LAST_USED_BALL_BUTTON) && !gBattleStruct->zmove.viewing && CanThrowLastUsedBall()
+        && !(B_LAST_USED_BALL_BUTTON == L_BUTTON && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A))
+    {
+        // Emerald Champions: in a wild battle L throws the last used Ball straight from
+        // the move menu. Cancel back to the action menu and let it perform the throw.
+        PlaySE(SE_SELECT);
+        gBattleStruct->throwBallFromMoveMenu = TRUE;
+        gBattleStruct->gimmick.playerSelect = FALSE;
+        BtlController_EmitTwoReturnValues(battler, B_COMM_TO_ENGINE, B_ACTION_EXEC_SCRIPT, 0xFFFF);
+        HideGimmickTriggerSprite();
+        BtlController_Complete(battler);
+        TryToHideMoveInfoWindow();
     }
     else if (JOY_NEW(B_MOVE_DESCRIPTION_BUTTON) &&
         !(B_MOVE_DESCRIPTION_BUTTON == L_BUTTON && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A))

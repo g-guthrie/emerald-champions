@@ -1,6 +1,5 @@
 #include "global.h"
 #include "battle.h"
-#include "reload_save.h"
 #include "battle_anim.h"
 #include "battle_ai_main.h"
 #include "battle_ai_record.h"
@@ -126,7 +125,7 @@ static void HandleEndTurn_BattleLost(void);
 static void HandleEndTurn_RanFromBattle(void);
 static void HandleEndTurn_MonFled(void);
 static void HandleEndTurn_FinishBattle(void);
-static void HandleReloadLastSaveFromBattle(void);
+static void HandleRestartBattle(void);
 
 EWRAM_DATA u16 gBattle_BG0_X = 0;
 EWRAM_DATA u16 gBattle_BG0_Y = 0;
@@ -471,8 +470,34 @@ const u8 *const gStatusConditionStringsTable[][2] =
     {gStatusConditionString_LoveJpn, gText_Love}
 };
 
+// Emerald Champions: snapshot of the player's party and the battle-usable bag
+// pockets taken when a trainer battle starts, restored on an in-battle restart.
+static EWRAM_DATA struct Pokemon sEcRestartParty[PARTY_SIZE] = {0};
+static EWRAM_DATA struct ItemSlot sEcRestartMedicine[BAG_MEDICINE_COUNT] = {0};
+static EWRAM_DATA struct ItemSlot sEcRestartBattleItems[BAG_BATTLE_COUNT] = {0};
+static EWRAM_DATA bool8 sEcRestartPending = FALSE;
+
+static void EcSnapshotOrRestoreForRestart(void)
+{
+    if (sEcRestartPending)
+    {
+        sEcRestartPending = FALSE;
+        memcpy(&gPlayerParty, sEcRestartParty, sizeof(sEcRestartParty));
+        memcpy(gParties[B_TRAINER_PLAYER], sEcRestartParty, sizeof(sEcRestartParty));
+        memcpy(gSaveBlock3Ptr->bagPocketMedicine, sEcRestartMedicine, sizeof(sEcRestartMedicine));
+        memcpy(gSaveBlock3Ptr->bagPocketBattle, sEcRestartBattleItems, sizeof(sEcRestartBattleItems));
+    }
+    else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+    {
+        memcpy(sEcRestartParty, &gPlayerParty, sizeof(sEcRestartParty));
+        memcpy(sEcRestartMedicine, gSaveBlock3Ptr->bagPocketMedicine, sizeof(sEcRestartMedicine));
+        memcpy(sEcRestartBattleItems, gSaveBlock3Ptr->bagPocketBattle, sizeof(sEcRestartBattleItems));
+    }
+}
+
 void CB2_InitBattle(void)
 {
+    EcSnapshotOrRestoreForRestart();
     if (!gTestRunnerEnabled)
         MoveSaveBlocks_ResetHeap();
     AllocateBattleResources();
@@ -4055,17 +4080,11 @@ static void HandleTurnActionSelectionState(void)
                 }
                 else if (CanPlayerForfeitNormalTrainerBattle() && gBattleResources->bufferB[battler][1] == B_ACTION_RUN)
                 {
-                    // Emerald Champions: Run in a trainer battle first offers a reload of the
-                    // last save (instant retry); declining falls through to the forfeit question.
-                    if (CanReloadLastSave())
-                    {
-                        gBattleStruct->reloadQuestionPending = TRUE;
-                        gSelectionBattleScripts[battler] = BattleScript_QuestionReloadBattle;
-                    }
-                    else
-                    {
-                        gSelectionBattleScripts[battler] = BattleScript_QuestionForfeitBattle;
-                    }
+                    // Emerald Champions: Run in a trainer battle first offers to restart the
+                    // battle from scratch (no save involved); declining falls through to the
+                    // forfeit question.
+                    gBattleStruct->restartQuestionPending = TRUE;
+                    gSelectionBattleScripts[battler] = BattleScript_QuestionRestartBattle;
                     gBattleCommunication[battler] = STATE_SELECTION_SCRIPT_MAY_RUN;
                     gBattleStruct->battlerState[battler].selectionScriptFinished = FALSE;
                     gBattleStruct->stateIdAfterSelScript[battler] = STATE_BEFORE_ACTION_CHOSEN;
@@ -4291,15 +4310,16 @@ static void HandleTurnActionSelectionState(void)
             }
             break;
         case STATE_SELECTION_SCRIPT_MAY_RUN:
-            if (gBattleStruct->battlerState[battler].selectionScriptFinished && gBattleStruct->reloadQuestionPending)
+            if (gBattleStruct->battlerState[battler].selectionScriptFinished && gBattleStruct->restartQuestionPending)
             {
-                gBattleStruct->reloadQuestionPending = FALSE;
+                gBattleStruct->restartQuestionPending = FALSE;
                 if (gBattleResources->bufferB[battler][1] == B_ACTION_NOTHING_FAINTED)
                 {
-                    // Yes: fade out and reload the last save.
+                    // Yes: fade out, tear the battle down and start it again.
                     gSelectionBattleScripts[battler] = NULL;
                     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-                    gBattleMainFunc = HandleReloadLastSaveFromBattle;
+                    FadeOutMapMusic(5);
+                    gBattleMainFunc = HandleRestartBattle;
                     return;
                 }
                 // No (or B): ask the usual forfeit question.
@@ -5279,12 +5299,24 @@ static void HandleEndTurn_MonFled(void)
     gBattleMainFunc = HandleEndTurn_FinishBattle;
 }
 
-// Emerald Champions: chosen from the Run prompt in a trainer battle.
-static void HandleReloadLastSaveFromBattle(void)
+// Emerald Champions: chosen from the Run prompt in a trainer battle. Frees the
+// battle exactly like a finished battle would, then re-enters CB2_InitBattle with
+// the same opponent flags; the pre-battle party and bag snapshot is restored there.
+static void HandleRestartBattle(void)
 {
     if (gPaletteFade.active)
         return;
-    ReloadLastSave();
+    memset(&gBattleMons, 0, sizeof(struct BattlePokemon) * MAX_BATTLERS_COUNT);
+    ResetSpriteData();
+    FreeAllWindowBuffers();
+    ZeroEnemyPartyMons();
+    ResetDynamicAiFunctions();
+    FreeMonSpritesGfx();
+    FreeBattleResources();
+    FreeBattleSpritesData();
+    gBattleOutcome = 0;
+    sEcRestartPending = TRUE;
+    SetMainCallback2(CB2_InitBattle);
 }
 
 static void HandleEndTurn_FinishBattle(void)
