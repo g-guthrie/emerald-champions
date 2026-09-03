@@ -148,7 +148,7 @@
 #define VAR_ROUTE131_STATE                               0x407E // Unused Var
 #define VAR_ROUTE132_STATE                               0x407F // Unused Var
 #define VAR_ROUTE133_STATE                               0x4080 // Unused Var
-#define VAR_ROUTE134_STATE                               0x4081 // Unused Var
+#define VAR_EC_REPEL_SPRAY_STEPS                         0x4081 // Emerald Champions: Repel Spray steps remaining (was unused VAR_ROUTE134_STATE).
 #define VAR_LITTLEROOT_HOUSES_STATE_MAY                  0x4082
 #define VAR_STARTER_GEN                                  0x4083 // 1=Kanto through 9=Paldea; 0 safely defaults to Hoenn.
 #define VAR_BIRCH_LAB_STATE                              0x4084

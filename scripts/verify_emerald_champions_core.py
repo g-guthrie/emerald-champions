@@ -391,8 +391,10 @@ def main() -> None:
     item_use = read("src/item_use.c")
     require(
         "FlagClear(FLAG_EC_REPEL_SPRAY_ACTIVE);" in item_use
-        and "FlagSet(FLAG_EC_REPEL_SPRAY_ACTIVE);" in item_use,
-        "Repel Spray must be a binary toggle, not a step counter",
+        and "FlagSet(FLAG_EC_REPEL_SPRAY_ACTIVE);" in item_use
+        and "VarSet(VAR_EC_REPEL_SPRAY_STEPS, EC_REPEL_SPRAY_STEPS);" in item_use
+        and "EmeraldChampions_EventScript_RepelSprayWoreOff" in wild,
+        "Repel Spray must run a 500-step counter and offer reuse when it wears off",
     )
     nurse = read("data/scripts/pkmn_center_nurse.inc")
     require(

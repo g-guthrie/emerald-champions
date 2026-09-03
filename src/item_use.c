@@ -109,7 +109,7 @@ static const u8 sText_PokeFluteAwakenedMon[] = _("The POKé FLUTE awakened sleep
 static const u8 sText_PokeVialEmpty[] = _("The Poké Vial is empty.\nRefill it at a Pokémon Center.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_UsedPokeVial[] = _("{PLAYER} used the Poké Vial.\nThe party was fully restored!{PAUSE_UNTIL_PRESS}");
 static const u8 sText_RepelSprayEnded[] = _("\pThe Repel Spray's effect ended.{PAUSE_UNTIL_PRESS}");
-static const u8 sText_RepelSprayOn[] = _("{PLAYER} misted the air.\pWild Pokémon will keep their distance\nuntil the spray is used again.{PAUSE_UNTIL_PRESS}");
+static const u8 sText_RepelSprayOn[] = _("{PLAYER} misted the air.\pWild Pokémon will keep their distance\nfor the next 500 steps.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_RepelSprayOff[] = _("{PLAYER} let the mist settle.\pThe grass stirs. Wild Pokémon are\ncoming back.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_LevelerNoEffect[] = _("Every Pokémon in the party is\nalready at the current level cap.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_FlightBeaconLocked[] = _("The Flight Beacon can't reach a flier\nyet. Earn the FEATHER BADGE first.{PAUSE_UNTIL_PRESS}");
@@ -1506,10 +1506,12 @@ static bool32 CanLevelPartyToCap(void)
     return FALSE;
 }
 
-// Binary toggle: while the spray is active no step-based wild encounter can
-// start anywhere. Deliberate encounters (fishing, Rock Smash, Sweet Scent)
-// still work, so the spray removes grass tax without removing the ability to
-// go looking for a Pokemon on purpose.
+// While the spray is active no step-based wild encounter can start anywhere.
+// It lasts EC_REPEL_SPRAY_STEPS steps (counted down in UpdateRepelCounter),
+// then wears off and asks to be used again. Using it while active turns it
+// off early. Deliberate encounters (fishing, Rock Smash, Sweet Scent) still
+// work, so the spray removes grass tax without removing the ability to go
+// looking for a Pokemon on purpose.
 // Attracting items would otherwise do nothing while the spray suppresses
 // encounters. Cancel the spray for the player and say so, instead of leaving
 // them to wonder why the Lure did not work.
@@ -1518,6 +1520,7 @@ static bool32 TryEndRepelSprayForAttractant(void)
     if (!FlagGet(FLAG_EC_REPEL_SPRAY_ACTIVE))
         return FALSE;
     FlagClear(FLAG_EC_REPEL_SPRAY_ACTIVE);
+    VarSet(VAR_EC_REPEL_SPRAY_STEPS, 0);
     return TRUE;
 }
 
@@ -1539,11 +1542,13 @@ static void Task_StartUseRepelSpray(u8 taskId)
         if (FlagGet(FLAG_EC_REPEL_SPRAY_ACTIVE))
         {
             FlagClear(FLAG_EC_REPEL_SPRAY_ACTIVE);
+            VarSet(VAR_EC_REPEL_SPRAY_STEPS, 0);
             PlaySE(SE_PC_OFF);
         }
         else
         {
             FlagSet(FLAG_EC_REPEL_SPRAY_ACTIVE);
+            VarSet(VAR_EC_REPEL_SPRAY_STEPS, EC_REPEL_SPRAY_STEPS);
             PlaySE(SE_REPEL);
         }
         gTasks[taskId].func = Task_UseRepelSpray;

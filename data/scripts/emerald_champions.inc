@@ -766,3 +766,36 @@ EmeraldChampions_Text_SpecialistForgetMove:
 	.string "Forgetting a move clears a slot for\n"
 	.string "something your team needs more.\p"
 	.string "Shall I help a POKéMON forget one?$"
+
+@ Emerald Champions: the Repel Spray ran out of steps (see UpdateRepelCounter).
+EmeraldChampions_EventScript_RepelSprayWoreOff::
+	lockall
+	msgbox EmeraldChampions_Text_RepelSprayWoreOffUseAgain, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, EmeraldChampions_EventScript_RepelSprayReuse
+	msgbox EmeraldChampions_Text_RepelSprayLeftOff, MSGBOX_DEFAULT
+	closemessage
+	releaseall
+	end
+
+EmeraldChampions_EventScript_RepelSprayReuse::
+	setflag FLAG_EC_REPEL_SPRAY_ACTIVE
+	setvar VAR_EC_REPEL_SPRAY_STEPS, 500
+	playse SE_REPEL
+	waitse
+	msgbox EmeraldChampions_Text_RepelSprayMistedAgain, MSGBOX_DEFAULT
+	closemessage
+	releaseall
+	end
+
+EmeraldChampions_Text_RepelSprayWoreOffUseAgain:
+	.string "The Repel Spray wore off.\n"
+	.string "Use it again?$"
+
+EmeraldChampions_Text_RepelSprayLeftOff:
+	.string "The grass stirs. Wild Pokémon are\n"
+	.string "coming back.$"
+
+EmeraldChampions_Text_RepelSprayMistedAgain:
+	.string "{PLAYER} misted the air again.\p"
+	.string "Wild Pokémon will keep their distance\n"
+	.string "for the next 500 steps.$"

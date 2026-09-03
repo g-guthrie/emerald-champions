@@ -50,9 +50,9 @@ gText_EmeraldChampionsGiveMissingRepelSpray::
 	.string "the Repel Spray!$"
 
 gText_EmeraldChampionsExplainRepelSpray::
-	.string "Use it once and wild Pokémon leave\n"
-	.string "you alone. Use it again and they\l"
-	.string "come back.\p"
+	.string "Use it and wild Pokémon leave you\n"
+	.string "alone for 500 steps. When it wears\l"
+	.string "off, you can mist the air again.\p"
 	.string "Fishing, Rock Smash and Sweet Scent\n"
 	.string "are never blocked.$"
 

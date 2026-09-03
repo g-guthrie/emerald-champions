@@ -16139,8 +16139,8 @@ const struct ItemInfo gItemsInfo[] =
         .price = 0,
         .description = COMPOUND_STRING(
             "Keeps wild Pokémon\n"
-            "away. Use again to\n"
-            "let them return."),
+            "away for 500 steps.\n"
+            "Reusable forever."),
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_FIELD,

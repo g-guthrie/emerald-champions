@@ -38,6 +38,7 @@
 #include "constants/weather.h"
 
 extern const u8 EventScript_SprayWoreOff[];
+extern const u8 EmeraldChampions_EventScript_RepelSprayWoreOff[];
 
 #define MAX_ENCOUNTER_RATE 2880
 
@@ -868,9 +869,9 @@ bool8 StandardWildEncounter(u16 curMetatileBehavior, u16 prevMetatileBehavior)
     if (sWildEncountersDisabled == TRUE)
         return FALSE;
 
-    // Emerald Champions: the Repel Spray is a binary toggle key item. While it
-    // is active, no step-based encounter can start. Fishing, Rock Smash and
-    // Sweet Scent are deliberate actions and are deliberately unaffected.
+    // Emerald Champions: while the Repel Spray is active (500 steps per use,
+    // see UpdateRepelCounter) no step-based encounter can start. Fishing, Rock
+    // Smash and Sweet Scent are deliberate actions and are deliberately unaffected.
     if (FlagGet(FLAG_EC_REPEL_SPRAY_ACTIVE))
         return FALSE;
 
@@ -1254,6 +1255,24 @@ bool8 UpdateRepelCounter(void)
         return FALSE;
     if (InUnionRoom() == TRUE)
         return FALSE;
+
+    // Emerald Champions: Repel Spray countdown. When it reaches zero the spray
+    // wears off and the player is asked whether to mist the air again.
+    if (FlagGet(FLAG_EC_REPEL_SPRAY_ACTIVE))
+    {
+        u16 spraySteps = VarGet(VAR_EC_REPEL_SPRAY_STEPS);
+
+        if (spraySteps == 0) // save from before the counter existed
+            spraySteps = EC_REPEL_SPRAY_STEPS;
+        spraySteps--;
+        VarSet(VAR_EC_REPEL_SPRAY_STEPS, spraySteps);
+        if (spraySteps == 0)
+        {
+            FlagClear(FLAG_EC_REPEL_SPRAY_ACTIVE);
+            ScriptContext_SetupScript(EmeraldChampions_EventScript_RepelSprayWoreOff);
+            return TRUE;
+        }
+    }
 
     if (steps != 0)
     {
