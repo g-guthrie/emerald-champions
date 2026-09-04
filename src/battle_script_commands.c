@@ -77,6 +77,9 @@
 #include "test/battle.h"
 #include "follower_npc.h"
 #include "load_save.h"
+#if EC_HEADLESS_FIXTURES
+#include "emerald_champions_headless.h"
+#endif
 
 // Helper for accessing command arguments and advancing gBattlescriptCurrInstr.
 //
@@ -7826,6 +7829,21 @@ static void FinalizeCapture(void)
     }
 }
 
+#if EC_HEADLESS_FIXTURES
+// Enter the same successful-capture script used by a real guaranteed ball.
+// The fixture owns the synthetic Master Ball; no Bag item is consumed.
+void BattleDebug_CaptureBattle(void)
+{
+    gBattlerAttacker = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
+    gBattlerTarget = GetCatchingBattler();
+    gLastUsedItem = ITEM_MASTER_BALL;
+    gLastThrownBall = ITEM_MASTER_BALL;
+    gBallToDisplay = ITEM_MASTER_BALL;
+    FinalizeCapture();
+    BattleScriptExecute(gBattlescriptCurrInstr);
+}
+#endif
+
 struct BallData
 {
     u16 multiplier;
@@ -8270,6 +8288,16 @@ static void Cmd_givecaughtmon(void)
     switch (state)
     {
     case GIVECAUGHTMON_CHECK_PARTY_SIZE:
+#if EC_HEADLESS_FIXTURES
+        if (EmeraldChampionsHeadlessAutoCaptureActive())
+        {
+            // A full party goes straight through GiveCapturedMonToPlayer's
+            // native PC fallback instead of opening the optional swap menu.
+            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_NO_MESSAGE_SKIP;
+            gBattleCommunication[MULTIUSE_STATE] = GIVECAUGHTMON_GIVE_AND_SHOW_MSG;
+            break;
+        }
+#endif
         if (CalculatePlayerPartyCount() == PARTY_SIZE && B_CATCH_SWAP_INTO_PARTY >= GEN_7)
         {
             PrepareStringBattleWithWait(STRINGID_SENDCAUGHTMONPARTYORBOX, gBattlerAttacker);
@@ -8392,6 +8420,12 @@ static void Cmd_givecaughtmon(void)
             RecordPlayerPartyMonHeldItemForRestoration(emptySlot);
         if (giveResult != MON_CANT_GIVE)
             MarkLegendarySignCaughtBySpecies(GetMonData(caughtMon, MON_DATA_SPECIES));
+#if EC_HEADLESS_FIXTURES
+        if (EmeraldChampionsHeadlessAutoCaptureActive())
+            EmeraldChampionsHeadlessRecordCapture(
+                GetMonData(caughtMon, MON_DATA_SPECIES), giveResult
+            );
+#endif
 
         if (giveResult != MON_GIVEN_TO_PARTY
          && gBattleCommunication[MULTISTRING_CHOOSER] != B_MSG_SWAPPED_INTO_PARTY)
@@ -8460,6 +8494,16 @@ static void Cmd_trysetcaughtmondexflags(void)
 static void Cmd_displaydexinfo(void)
 {
     CMD_ARGS();
+
+#if EC_HEADLESS_FIXTURES
+    if (EmeraldChampionsHeadlessAutoCaptureActive())
+    {
+        // TRYSETCAUGHTMONDEXFLAGS immediately before this command performed
+        // the native Seen/Caught bookkeeping. Only suppress its modal page.
+        gBattlescriptCurrInstr = cmd->nextInstr;
+        return;
+    }
+#endif
 
     u32 caughtBattler = GetCatchingBattler();
     struct Pokemon *mon = GetBattlerMon(caughtBattler);
@@ -8585,6 +8629,15 @@ void BattleDestroyYesNoCursorAt(u8 cursorPosition)
 static void Cmd_trygivecaughtmonnick(void)
 {
     CMD_ARGS();
+
+#if EC_HEADLESS_FIXTURES
+    if (EmeraldChampionsHeadlessAutoCaptureActive())
+    {
+        gBattleCommunication[MULTIUSE_STATE] = 0;
+        gBattlescriptCurrInstr = cmd->nextInstr;
+        return;
+    }
+#endif
 
     switch (gBattleCommunication[MULTIUSE_STATE])
     {

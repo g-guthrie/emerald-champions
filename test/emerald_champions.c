@@ -504,11 +504,11 @@ TEST("Emerald Champions applies a complete authored battle set")
     CreateMon(&mon, SPECIES_BULBASAUR, 14, 0, OTID_STRUCT_PLAYER_ID);
     EXPECT_GE(GetEmeraldChampionsBattleSetCount(&mon), 1);
     EXPECT_EQ(ApplyEmeraldChampionsBattleSetChoice(&mon, 0), EC_BATTLE_SET_SUCCESS);
-    EXPECT_EQ(GetMonData(&mon, MON_DATA_MOVE1), MOVE_GIGA_DRAIN);
-    EXPECT_EQ(GetMonData(&mon, MON_DATA_MOVE2), MOVE_SLUDGE_BOMB);
-    EXPECT_EQ(GetMonData(&mon, MON_DATA_MOVE3), MOVE_SLEEP_POWDER);
-    EXPECT_EQ(GetMonData(&mon, MON_DATA_MOVE4), MOVE_PROTECT);
-    EXPECT_EQ(GetMonData(&mon, MON_DATA_HIDDEN_NATURE), NATURE_MODEST);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_MOVE1), MOVE_GROWTH);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_MOVE2), MOVE_SLEEP_POWDER);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_MOVE3), MOVE_GIGA_DRAIN);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_MOVE4), MOVE_SLUDGE_BOMB);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_HIDDEN_NATURE), NATURE_TIMID);
     EXPECT_EQ(GetMonAbility(&mon), ABILITY_CHLOROPHYLL);
     EXPECT_EQ(GetMonData(&mon, MON_DATA_HELD_ITEM), ITEM_EVIOLITE);
 
@@ -526,7 +526,14 @@ TEST("Emerald Champions exposes named Doubles and Singles sets for every direct 
     {
         if (gEmeraldChampionsDefaultBattleSets[species].moves[0] == MOVE_NONE)
             continue;
+        enum Item formItem = gEmeraldChampionsDefaultBattleSets[species].item;
+
         CreateMon(&mon, species, 50, 0, OTID_STRUCT_PLAYER_ID);
+        // Plate/relic forms only exist while holding the item that defines
+        // them, so a bare mon of that form is not a state the player can
+        // reach. Model the reachable one instead of hiding every set.
+        if (IsEmeraldChampionsProtectedProgressionItem(formItem))
+            SetMonData(&mon, MON_DATA_HELD_ITEM, &formItem);
         EXPECT_GE(GetEmeraldChampionsBattleSetCountForFormat(&mon, EC_BATTLE_FORMAT_DOUBLES), 2);
         EXPECT_GE(GetEmeraldChampionsBattleSetCountForFormat(&mon, EC_BATTLE_FORMAT_SINGLES), 1);
         for (u8 format = 0; format < EC_BATTLE_FORMAT_COUNT; format++)
@@ -554,15 +561,15 @@ TEST("Emerald Champions evolution applies the evolved Doubles recommendation")
 
     CreateMon(&mon, SPECIES_WURMPLE, 14, 0, OTID_STRUCT_PLAYER_ID);
     EXPECT_EQ(ApplyEmeraldChampionsBattleSetChoice(&mon, 1), EC_BATTLE_SET_SUCCESS);
-    EXPECT_EQ(GetMonData(&mon, MON_DATA_MOVE4), MOVE_TACKLE);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_MOVE4), MOVE_STRING_SHOT);
     SetMonData(&mon, MON_DATA_HELD_ITEM, &protectedItem);
     SetMonData(&mon, MON_DATA_SPECIES, &species);
 
     EXPECT_EQ(ApplyEmeraldChampionsRecommendedEvolutionSet(&mon), EC_BATTLE_SET_SUCCESS);
     EXPECT_EQ(GetMonData(&mon, MON_DATA_MOVE1), MOVE_QUIVER_DANCE);
     EXPECT_EQ(GetMonData(&mon, MON_DATA_MOVE2), MOVE_BUG_BUZZ);
-    EXPECT_EQ(GetMonData(&mon, MON_DATA_MOVE3), MOVE_AIR_SLASH);
-    EXPECT_EQ(GetMonData(&mon, MON_DATA_MOVE4), MOVE_ROOST);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_MOVE3), MOVE_AIR_CUTTER);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_MOVE4), MOVE_PROTECT);
     EXPECT_EQ(GetMonData(&mon, MON_DATA_HELD_ITEM), ITEM_LINKING_CORD);
     for (u32 stat = 0; stat < NUM_STATS; stat++)
         EXPECT_EQ(GetMonData(&mon, MON_DATA_HP_IV + stat), MAX_PER_STAT_IVS);
@@ -915,7 +922,7 @@ TEST("Emerald Champions tutor gates Mega roles and never grants their stones")
         EXPECT_EQ(GetEmeraldChampionsBattleSetRequiredItem(&mon, choice), ITEM_NONE);
 
     EXPECT(AddBagItem(ITEM_MEGA_RING, 1));
-    EXPECT_EQ(GetEmeraldChampionsBattleSetCount(&mon), 4);
+    EXPECT_EQ(GetEmeraldChampionsBattleSetCount(&mon), 6);
     for (u8 choice = 0; choice < GetEmeraldChampionsBattleSetCount(&mon); choice++)
     {
         enum Item requiredItem = GetEmeraldChampionsBattleSetRequiredItem(&mon, choice);
@@ -927,7 +934,7 @@ TEST("Emerald Champions tutor gates Mega roles and never grants their stones")
         EXPECT_NE(GetMonData(&mon, MON_DATA_HELD_ITEM), requiredItem);
         EXPECT_EQ(CountTotalItemQuantityInBag(requiredItem), 0);
     }
-    EXPECT_EQ(megaChoices, 2);
+    EXPECT_EQ(megaChoices, 4);
     ClearBag();
 }
 
@@ -1304,7 +1311,8 @@ TEST("Emerald Champions imported battle sets remain legal against current data")
             EXPECT(result == EC_BATTLE_SET_SUCCESS || result == EC_BATTLE_SET_MEGA);
             EXPECT_NE(GetMonAbility(&mon), ABILITY_NONE);
             if (gEmeraldChampionsDefaultBattleSets[species].moves[0] != MOVE_NONE
-             && preset->requiredItem == ITEM_NONE)
+             && preset->requiredItem == ITEM_NONE
+             && preset->requiredMove == MOVE_NONE)
             {
                 if (GetMonAbility(&mon) != preset->ability)
                 {
@@ -1326,7 +1334,7 @@ TEST("Emerald Champions imported battle sets remain legal against current data")
 
 TEST("Emerald Champions reviewed move-access exceptions are natively tutor-accessible")
 {
-    EXPECT_EQ(ARRAY_COUNT(sReviewedMoveAccess), 65);
+    EXPECT_EQ(ARRAY_COUNT(sReviewedMoveAccess), 55);
     for (u32 i = 0; i < ARRAY_COUNT(sReviewedMoveAccess); i++)
     {
         bool32 accessible = SpeciesCanAccessEmeraldChampionsPresetMove(
@@ -1794,6 +1802,7 @@ TEST("Emerald Champions Belly Drum berry sets land on even HP at every level cap
             struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][0];
             s32 choice = -1;
             u32 total = 0;
+            u8 value_restore;
 
             ZeroPlayerPartyMons();
             CreateMon(mon, species[s], sEmeraldChampionsLevelCaps[c], 0, OTID_STRUCT_PLAYER_ID);
@@ -1806,7 +1815,12 @@ TEST("Emerald Champions Belly Drum berry sets land on even HP at every level cap
 
                 for (u32 m = 0; preset != NULL && m < MAX_MON_MOVES; m++)
                     drum |= preset->moves[m] == MOVE_BELLY_DRUM;
-                if (drum && preset->item == ITEM_SITRUS_BERRY)
+                bool32 halfHpBerry = preset != NULL
+                                  && (preset->item == ITEM_SITRUS_BERRY
+                                   || (preset->ability == ABILITY_GLUTTONY
+                                    && gItemsInfo[preset->item].holdEffect == HOLD_EFFECT_CONFUSE_FLAVOR));
+
+                if (drum && halfHpBerry)
                 {
                     choice = i;
                     break;
@@ -1814,8 +1828,41 @@ TEST("Emerald Champions Belly Drum berry sets land on even HP at every level cap
             }
             EXPECT_GE(choice, 0);
             EXPECT_EQ(ApplyEmeraldChampionsBattleSetChoice(mon, choice), EC_BATTLE_SET_SUCCESS);
-            // Belly Drum leaves ceil(maxHP / 2); Sitrus fires at floor(maxHP / 2).
-            EXPECT_EQ(GetMonData(mon, MON_DATA_MAX_HP) % 2, 0);
+            // Belly Drum leaves ceil(maxHP / 2); a half-HP berry fires at
+            // floor(maxHP / 2), so the two meet only on even HP. The
+            // normalizer re-lands the authored spread within the point
+            // budget, so parity is required exactly where some legal HP
+            // value can reach it: a spread already spending the full budget
+            // on other stats has no point to move.
+            {
+                u32 authoredHp = GetMonData(mon, MON_DATA_HP_EV);
+                u32 spent = 0;
+                bool32 parityReachable = FALSE;
+
+                for (u32 stat = 0; stat < NUM_STATS; stat++)
+                    spent += GetMonData(mon, MON_DATA_HP_EV + stat);
+                // The normalizer may only deviate by the amount
+                // GetEmeraldChampionsCurrentBattleSetChoice still recognizes,
+                // so parity is required exactly where that window reaches it.
+                for (u32 points = authoredHp > 2 ? authoredHp - 2 : 0;
+                     points <= authoredHp + 2 && points <= EC_STAT_POINTS_PER_STAT;
+                     points++)
+                {
+                    u8 value = points;
+
+                    if (spent - authoredHp + points > EC_STAT_POINT_BUDGET)
+                        continue;
+                    SetMonData(mon, MON_DATA_HP_EV, &value);
+                    CalculateMonStats(mon);
+                    if ((GetMonData(mon, MON_DATA_MAX_HP) % 2) == 0)
+                        parityReachable = TRUE;
+                }
+                value_restore = authoredHp;
+                SetMonData(mon, MON_DATA_HP_EV, &value_restore);
+                CalculateMonStats(mon);
+                if (parityReachable)
+                    EXPECT_EQ(GetMonData(mon, MON_DATA_MAX_HP) % 2, 0);
+            }
             EXPECT_EQ(GetMonData(mon, MON_DATA_HP), GetMonData(mon, MON_DATA_MAX_HP));
             for (u32 stat = 0; stat < NUM_STATS; stat++)
                 total += GetMonData(mon, MON_DATA_HP_EV + stat);
@@ -1914,4 +1961,152 @@ TEST("Emerald Champions field moves need the badge and a party member that could
     FlagClear(FLAG_RECEIVED_HM_CUT);
     FlagClear(FLAG_BADGE05_GET);
     FlagClear(FLAG_RECEIVED_HM_SURF);
+}
+
+TEST("Emerald Champions removes only the requested quantity across item stacks")
+{
+    ClearBag();
+    struct BagPocket *pocket = &gBagPockets[GetItemPocket(ITEM_POTION)];
+    BagPocket_SetSlotItemIdAndCount(pocket, 0, ITEM_POTION, 3);
+    BagPocket_SetSlotItemIdAndCount(pocket, 2, ITEM_POTION, 5);
+    EXPECT(AddBagItem(ITEM_ANTIDOTE, 2));
+
+    EXPECT(RemoveBagItem(ITEM_POTION, 4));
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_POTION), 4);
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_ANTIDOTE), 2);
+}
+
+TEST("Emerald Champions compacts an emptied stack that is not the last one drained")
+{
+    ClearBag();
+    struct BagPocket *pocket = &gBagPockets[GetItemPocket(ITEM_POTION)];
+    BagPocket_SetSlotItemIdAndCount(pocket, 0, ITEM_POTION, 3);
+    BagPocket_SetSlotItemIdAndCount(pocket, 2, ITEM_POTION, 5);
+
+    // Drains slot 0 completely and slot 2 partially. The emptied slot must not
+    // survive as a hole in front of the stack that is still carrying items.
+    EXPECT(RemoveBagItem(ITEM_POTION, 4));
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_POTION), 4);
+    EXPECT_EQ(BagPocket_GetSlotData(pocket, 0).itemId, ITEM_POTION);
+    EXPECT_EQ(BagPocket_GetSlotData(pocket, 0).quantity, 4);
+}
+
+TEST("Emerald Champions leaves inventory unchanged when an item removal is insufficient")
+{
+    ClearBag();
+    struct BagPocket *pocket = &gBagPockets[GetItemPocket(ITEM_POTION)];
+    BagPocket_SetSlotItemIdAndCount(pocket, 0, ITEM_POTION, 3);
+    BagPocket_SetSlotItemIdAndCount(pocket, 2, ITEM_POTION, 5);
+    EXPECT(AddBagItem(ITEM_ANTIDOTE, 2));
+    struct ItemSlot before[pocket->capacity];
+    for (u32 i = 0; i < pocket->capacity; i++)
+        before[i] = BagPocket_GetSlotData(pocket, i);
+
+    EXPECT(!RemoveBagItem(ITEM_POTION, 9));
+    for (u32 i = 0; i < pocket->capacity; i++)
+    {
+        struct ItemSlot after = BagPocket_GetSlotData(pocket, i);
+        EXPECT_EQ(after.itemId, before[i].itemId);
+        EXPECT_EQ(after.quantity, before[i].quantity);
+    }
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_ANTIDOTE), 2);
+}
+
+TEST("Emerald Champions rejects invalid preset requests without changing held items or Pokemon")
+{
+    static const enum Item items[] = {ITEM_NONE, ITEM_RED_ORB, ITEM_CHARIZARDITE_X};
+    struct Pokemon mon;
+    CreateMon(&mon, SPECIES_CHARIZARD, 50, 0, OTID_STRUCT_PLAYER_ID);
+    u8 invalidChoice = GetEmeraldChampionsRawBattleSetCount(SPECIES_CHARIZARD);
+    EXPECT(GetEmeraldChampionsRawBattleSet(SPECIES_CHARIZARD, invalidChoice) == NULL);
+
+    for (u32 i = 0; i < ARRAY_COUNT(items); i++)
+    {
+        SetMonData(&mon, MON_DATA_HELD_ITEM, &items[i]);
+        struct Pokemon before = mon;
+        EXPECT_EQ(ApplyEmeraldChampionsBattleSetChoiceForFormat(&mon, 0, EC_BATTLE_FORMAT_COUNT), EC_BATTLE_SET_FAILED);
+        EXPECT_EQ(memcmp(&mon, &before, sizeof(mon)), 0);
+        // The raw opponent API forwards a missing preset to ApplyPreset;
+        // invalid visible formats above already fail before that boundary.
+        EXPECT_EQ(ApplyEmeraldChampionsOpponentSet(&mon, invalidChoice), EC_BATTLE_SET_FAILED);
+        EXPECT_EQ(memcmp(&mon, &before, sizeof(mon)), 0);
+    }
+}
+
+TEST("Emerald Champions pending relics survive full stores and never replay discarded rewards")
+{
+    ClearBag();
+    VarSet(VAR_LEGENDARY_RELIC_DELIVERY_0, 0);
+    VarSet(VAR_LEGENDARY_RELIC_DELIVERY_1, 0);
+    struct BagPocket *pocket = &gBagPockets[GetItemPocket(ITEM_RED_ORB)];
+    for (u32 slot = 0; slot < pocket->capacity; slot++)
+        BagPocket_SetSlotItemIdAndCount(pocket, slot, ITEM_SOFT_SAND, 1);
+    for (u32 slot = 0; slot < PC_ITEMS_COUNT; slot++)
+        gSaveBlock1Ptr->pcItems[slot] = (struct ItemSlot){ITEM_SOFT_SAND, 1};
+
+    MarkLegendarySignCaughtBySpecies(SPECIES_GROUDON);
+    EXPECT_EQ(VarGet(VAR_LEGENDARY_RELIC_DELIVERY_0), 1);
+    EXPECT_EQ(VarGet(VAR_LEGENDARY_RELIC_DELIVERY_1), 0x100);
+    EXPECT(!CheckBagHasItem(ITEM_RED_ORB, 1));
+    EXPECT(!CheckPCHasItem(ITEM_RED_ORB, 1));
+    RetryPendingLegendaryRelics();
+    EXPECT_EQ(VarGet(VAR_LEGENDARY_RELIC_DELIVERY_0), 1);
+
+    RemovePCItem(0, 1);
+    RetryPendingLegendaryRelics();
+    EXPECT(CheckPCHasItem(ITEM_RED_ORB, 1));
+    EXPECT_EQ(VarGet(VAR_LEGENDARY_RELIC_DELIVERY_0), 0);
+    for (u32 slot = 0; slot < PC_ITEMS_COUNT; slot++)
+    {
+        if (gSaveBlock1Ptr->pcItems[slot].itemId == ITEM_RED_ORB)
+        {
+            RemovePCItem(slot, 1);
+            break;
+        }
+    }
+    MarkLegendarySignCaughtBySpecies(SPECIES_GROUDON);
+    RetryPendingLegendaryRelics();
+    EXPECT(!CheckBagHasItem(ITEM_RED_ORB, 1));
+    EXPECT(!CheckPCHasItem(ITEM_RED_ORB, 1));
+    EXPECT_EQ(VarGet(VAR_LEGENDARY_RELIC_DELIVERY_0), 0);
+    EXPECT_EQ(VarGet(VAR_LEGENDARY_RELIC_DELIVERY_1), 0x100);
+    ClearBag();
+    memset(gSaveBlock1Ptr->pcItems, 0, sizeof(gSaveBlock1Ptr->pcItems));
+}
+
+TEST("Emerald Champions partial mask grants retry only their saved undelivered items")
+{
+    ClearBag();
+    VarSet(VAR_LEGENDARY_RELIC_DELIVERY_0, 0);
+    VarSet(VAR_LEGENDARY_RELIC_DELIVERY_1, 0);
+    struct BagPocket *pocket = &gBagPockets[GetItemPocket(ITEM_WELLSPRING_MASK)];
+    EXPECT_EQ(GetItemPocket(ITEM_HEARTHFLAME_MASK), pocket->id);
+    EXPECT_EQ(GetItemPocket(ITEM_CORNERSTONE_MASK), pocket->id);
+    for (u32 slot = 1; slot < pocket->capacity; slot++)
+        BagPocket_SetSlotItemIdAndCount(pocket, slot, ITEM_SOFT_SAND, 1);
+    for (u32 slot = 0; slot < PC_ITEMS_COUNT; slot++)
+        gSaveBlock1Ptr->pcItems[slot] = (struct ItemSlot){ITEM_SOFT_SAND, 1};
+
+    MarkLegendarySignCaughtBySpecies(SPECIES_OGERPON_TEAL);
+    EXPECT(CheckBagHasItem(ITEM_WELLSPRING_MASK, 1));
+    EXPECT_EQ(VarGet(VAR_LEGENDARY_RELIC_DELIVERY_0), (1u << 5) | (1u << 6));
+    u16 savedLow = VarGet(VAR_LEGENDARY_RELIC_DELIVERY_0);
+    u16 savedHigh = VarGet(VAR_LEGENDARY_RELIC_DELIVERY_1);
+    VarSet(VAR_LEGENDARY_RELIC_DELIVERY_0, 0);
+    VarSet(VAR_LEGENDARY_RELIC_DELIVERY_1, 0);
+    VarSet(VAR_LEGENDARY_RELIC_DELIVERY_0, savedLow);
+    VarSet(VAR_LEGENDARY_RELIC_DELIVERY_1, savedHigh);
+    EXPECT(RemoveBagItem(ITEM_WELLSPRING_MASK, 1));
+    RemovePCItem(0, 1);
+    RetryPendingLegendaryRelics();
+    EXPECT(CheckBagHasItem(ITEM_HEARTHFLAME_MASK, 1));
+    EXPECT(CheckPCHasItem(ITEM_CORNERSTONE_MASK, 1));
+    EXPECT_EQ(VarGet(VAR_LEGENDARY_RELIC_DELIVERY_0), 0);
+    EXPECT_EQ(VarGet(VAR_LEGENDARY_RELIC_DELIVERY_1), 0x1000);
+    MarkLegendarySignCaughtBySpecies(SPECIES_OGERPON_TEAL);
+    RetryPendingLegendaryRelics();
+    EXPECT(!CheckBagHasItem(ITEM_WELLSPRING_MASK, 1));
+    EXPECT(!CheckPCHasItem(ITEM_WELLSPRING_MASK, 1));
+    ClearBag();
+    memset(gSaveBlock1Ptr->pcItems, 0, sizeof(gSaveBlock1Ptr->pcItems));
 }

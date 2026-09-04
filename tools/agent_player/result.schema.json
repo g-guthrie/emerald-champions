@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Emerald Champions battle difficulty evidence",
+  "type": "object",
+  "required": ["schema_version", "battle_id", "protocol", "raw_runs", "aggregate", "rating"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "battle_id": {"type": "string"},
+    "outcome_basis": {
+      "const": "reported",
+      "description": "Success counts come from evaluator declarations, not independently verified battle outcomes."
+    },
+    "protocol": {
+      "type": "object",
+      "required": ["independent_seed_count", "same_checkpoint", "authored_hard"],
+      "properties": {
+        "independent_seed_count": {"type": "integer", "minimum": 1},
+        "same_checkpoint": {"type": "boolean"},
+        "same_rom": {"type": "boolean"},
+        "same_arsenal": {"type": "boolean"},
+        "authored_hard": {
+          "type": ["boolean", "null"],
+          "description": "Null when difficulty is not established by recorded evidence."
+        },
+        "comparison_protocol_recorded": {"type": "boolean"},
+        "outcome_basis": {"const": "reported"}
+      }
+    },
+    "raw_runs": {"type": "array", "minItems": 1},
+    "aggregate": {
+      "type": "object",
+      "required": ["runs", "wins", "win_rate", "first_plan_success_rate", "distinct_winning_teams"]
+    },
+    "rating": {
+      "type": "object",
+      "required": ["label", "rule", "unbeaten_within_budget"],
+      "properties": {
+        "outcome_basis": {"const": "reported"},
+        "unbeaten_within_budget": {
+          "type": ["boolean", "null"],
+          "description": "Null when budget completion is not established by recorded evidence."
+        }
+      }
+    }
+  }
+}

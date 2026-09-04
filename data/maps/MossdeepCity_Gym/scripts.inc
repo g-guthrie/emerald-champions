@@ -394,10 +394,9 @@ MossdeepCity_Gym_Text_GymGuidePostVictory:
 	.string "You're one great TRAINER!$"
 
 MossdeepCity_Gym_Text_PrestonIntro:
-	.string "JIRACHI's ICY WIND rewrites the speed\n"
-	.string "order. ALAKAZAM ENCOREs your reply.\p"
-	.string "Then SLOWKING's TRICK ROOM finishes\n"
-	.string "what you locked!$"
+	.string "MAGIC GUARD means ALAKAZAM pays no\n"
+	.string "price for anything it does.\p"
+	.string "Hit it directly, or not at all!$"
 
 MossdeepCity_Gym_Text_PrestonDefeat:
 	.string "You refused to repeat yourself!$"
@@ -431,9 +430,9 @@ MossdeepCity_Gym_Text_BlakePostBattle:
 	.string "Bring the fresh one back in later.$"
 
 MossdeepCity_Gym_Text_HannahIntro:
-	.string "SOLROCK sets both screens. AZELF\n"
-	.string "NASTY PLOTS behind them.\p"
-	.string "Break the screens or the growth!$"
+	.string "SHARPNESS cuts half again as deep,\n"
+	.string "and GALLADE swings twice as well.\p"
+	.string "Every blade here is physical!$"
 
 MossdeepCity_Gym_Text_HannahDefeat:
 	.string "You broke the screens first!$"
@@ -443,9 +442,9 @@ MossdeepCity_Gym_Text_HannahPostBattle:
 	.string "turn. Never give AZELF a free one.$"
 
 MossdeepCity_Gym_Text_SamanthaIntro:
-	.string "XATU bounces status and sets TAILWIND.\n"
-	.string "UXIE YAWNS at every switch-in.\p"
-	.string "Each swap costs you. Choose them well!$"
+	.string "GOTHITELLE closes the exit. AZELF\n"
+	.string "plots, and then ends the board.\p"
+	.string "You cannot run from this one!$"
 
 MossdeepCity_Gym_Text_SamanthaDefeat:
 	.string "You barely switched at all!$"
@@ -455,9 +454,9 @@ MossdeepCity_Gym_Text_SamanthaPostBattle:
 	.string "sleep. Attack through XATU instead.$"
 
 MossdeepCity_Gym_Text_MauraIntro:
-	.string "BEHEEYEM's ALLY SWITCH moves my board\n"
-	.string "while you aim. ESPEON bounces status.\p"
-	.string "Target the slot, not the POKéMON!$"
+	.string "SLOWBRO leaves and comes back whole.\n"
+	.string "AMOONGUSS puts you to sleep meanwhile.\p"
+	.string "Out-wait me if you can!$"
 
 MossdeepCity_Gym_Text_MauraDefeat:
 	.string "You aimed where I would be!$"
@@ -467,9 +466,9 @@ MossdeepCity_Gym_Text_MauraPostBattle:
 	.string "Single-target moves gamble against it.$"
 
 MossdeepCity_Gym_Text_SylviaIntro:
-	.string "GOTHITELLE traps you, TRICK ROOM slows\n"
-	.string "you, then ORANGURU INSTRUCTS ERUPTION.\p"
-	.string "Two ERUPTIONS under the sun. Survive!$"
+	.string "TATSUGIRI climbs inside DONDOZO,\n"
+	.string "and what comes out is far worse.\p"
+	.string "Stop the little one first!$"
 
 MossdeepCity_Gym_Text_SylviaDefeat:
 	.string "You silenced the second ERUPTION!$"
@@ -479,9 +478,9 @@ MossdeepCity_Gym_Text_SylviaPostBattle:
 	.string "KO or TAUNT ORANGURU before it teaches.$"
 
 MossdeepCity_Gym_Text_NateIntro:
-	.string "STARMIE covers four types behind\n"
-	.string "GRUMPIG's THUNDER WAVE.\p"
-	.string "Which of the two do you answer first?$"
+	.string "METAGROSS resists half of what you\n"
+	.string "own, and MIMIKYU gets a free turn.\p"
+	.string "Break the disguise early!$"
 
 MossdeepCity_Gym_Text_NateDefeat:
 	.string "You hit the star before it shone!$"
@@ -491,9 +490,10 @@ MossdeepCity_Gym_Text_NatePostBattle:
 	.string "and fragile. Remove the support first.$"
 
 MossdeepCity_Gym_Text_KathleenIntro:
-	.string "HYPNO puts you to sleep, SWOOBAT\n"
-	.string "CALM MINDS into STORED POWER.\p"
-	.string "Every free turn feeds it!$"
+	.string "I am the last door before the twins.\p"
+	.string "LATIAS endures, DRAGAPULT outruns,\n"
+	.string "and TYRANITAR wears you down.\p"
+	.string "Prove you belong in there!$"
 
 MossdeepCity_Gym_Text_KathleenDefeat:
 	.string "You found the move that fed nothing!$"
@@ -515,9 +515,9 @@ MossdeepCity_Gym_Text_CliffordPostBattle:
 	.string "SURFER becomes an ordinary RAICHU.$"
 
 MossdeepCity_Gym_Text_MaceyIntro:
-	.string "JYNX's LOVELY KISS opens the door.\n"
-	.string "DELPHOX NASTY PLOTS behind it.\p"
-	.string "REUNICLUS ignores whatever you try!$"
+	.string "FERROTHORN and TOXAPEX do not fall.\n"
+	.string "DELPHOX takes the item that would help.\p"
+	.string "Bring fire, or bring patience!$"
 
 MossdeepCity_Gym_Text_MaceyDefeat:
 	.string "You attacked through the sleep!$"
@@ -527,9 +527,9 @@ MossdeepCity_Gym_Text_MaceyPostBattle:
 	.string "Remove the sleeper before it moves.$"
 
 MossdeepCity_Gym_Text_NicholasIntro:
-	.string "INDEEDEE pulls your attacks. HATTERENE\n"
-	.string "opens TRICK ROOM behind it.\p"
-	.string "WOBBUFFET returns whatever remains!$"
+	.string "LATIOS moves before you do, and\n"
+	.string "AEGISLASH punishes your reply.\p"
+	.string "Choose your swing carefully!$"
 
 MossdeepCity_Gym_Text_NicholasDefeat:
 	.string "You broke the ROOM through the redirect!$"

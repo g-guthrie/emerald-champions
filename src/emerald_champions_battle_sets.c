@@ -12,6 +12,19 @@
 #include "data/pokemon/emerald_champions_battle_sets.h"
 
 static const u8 sRecommendedSetName[] = _("Recommended");
+
+static bool32 PresetRequiresTransformation(const struct EmeraldChampionsBattleSet *preset)
+{
+    return preset->requiredItem != ITEM_NONE || preset->requiredMove != MOVE_NONE;
+}
+
+static bool32 PresetRequiresOwnedHeldItem(
+    struct Pokemon *mon,
+    const struct EmeraldChampionsBattleSet *preset)
+{
+    return IsEmeraldChampionsProtectedProgressionItem(preset->item)
+        && GetMonData(mon, MON_DATA_HELD_ITEM) != preset->item;
+}
 static const enum Item sEmeraldChampionsEvolutionItems[] =
 {
 #include "data/emerald_champions_evolution_items.h"
@@ -20,6 +33,31 @@ static const enum Item sEmeraldChampionsEvolutionItems[] =
 static bool32 HasMegaAccess(void)
 {
     return CheckBagHasItem(ITEM_MEGA_RING, 1);
+}
+
+// Presets author every in-battle transformation the same way: the set names the
+// transformed Ability and points requiredItem at the key that unlocks it. Mega
+// Evolution uses a stone plus the Ring; Primal Reversion uses the orb itself,
+// which is the relic the campaign already grants with the legendary.
+static bool32 IsBattleSetTransformationItem(enum Item item)
+{
+    if (item == ITEM_NONE)
+        return FALSE;
+    if (gItemsInfo[item].sortType == ITEM_TYPE_MEGA_STONE)
+        return TRUE;
+    return item == ITEM_RED_ORB || item == ITEM_BLUE_ORB;
+}
+
+static bool32 HasTransformationAccess(
+    struct Pokemon *mon,
+    const struct EmeraldChampionsBattleSet *preset)
+{
+    // Move-driven Mega Evolution (Rayquaza) still answers to the Ring.
+    if (preset->requiredItem == ITEM_NONE
+     || gItemsInfo[preset->requiredItem].sortType == ITEM_TYPE_MEGA_STONE)
+        return HasMegaAccess();
+    return CheckBagHasItem(preset->requiredItem, 1)
+        || GetMonData(mon, MON_DATA_HELD_ITEM) == preset->requiredItem;
 }
 
 bool32 IsEmeraldChampionsProtectedProgressionItem(enum Item item)
@@ -284,7 +322,8 @@ static bool32 ResolveVisibleChoice(
             name = alternative->name;
         }
 
-        if (preset->requiredItem != ITEM_NONE && !HasMegaAccess())
+        if ((PresetRequiresTransformation(preset) && !HasTransformationAccess(mon, preset))
+         || PresetRequiresOwnedHeldItem(mon, preset))
             continue;
         if (visibleChoice++ == choice)
         {
@@ -312,7 +351,8 @@ u8 GetEmeraldChampionsBattleSetCountForFormat(struct Pokemon *mon, u8 format)
     for (u8 rawChoice = 0; rawChoice <= range->count; rawChoice++)
     {
         const struct EmeraldChampionsBattleSet *preset = GetRawBattleSetForFormat(species, rawChoice, format);
-        if (preset->requiredItem == ITEM_NONE || HasMegaAccess())
+        if ((!PresetRequiresTransformation(preset) || HasTransformationAccess(mon, preset))
+         && !PresetRequiresOwnedHeldItem(mon, preset))
             count++;
     }
     return count;
@@ -419,16 +459,21 @@ static bool32 DoesMonMatchPresetAbility(struct Pokemon *mon, const struct Emeral
 // the parity, so the authored spread is re-landed wherever the level or the
 // spread changes (preset application, the Leveler) instead of being hand-tuned
 // for one cap.
-static bool32 IsHalfHpBerry(enum Item item)
+static bool32 IsHalfHpBerry(enum Item item, enum Ability ability)
 {
     enum HoldEffect holdEffect = GetItemHoldEffect(item);
 
-    return holdEffect == HOLD_EFFECT_RESTORE_HP || holdEffect == HOLD_EFFECT_RESTORE_PCT_HP;
+    if (holdEffect == HOLD_EFFECT_RESTORE_HP || holdEffect == HOLD_EFFECT_RESTORE_PCT_HP)
+        return TRUE;
+    // The confusion-flavor berries fire at a quarter of max HP, which Belly
+    // Drum never reaches on its own. Gluttony moves that trigger to half,
+    // which is exactly where Belly Drum leaves the user.
+    return holdEffect == HOLD_EFFECT_CONFUSE_FLAVOR && ability == ABILITY_GLUTTONY;
 }
 
 static bool32 DoesPresetWantEvenHp(const struct EmeraldChampionsBattleSet *preset)
 {
-    if (!IsHalfHpBerry(preset->item))
+    if (!IsHalfHpBerry(preset->item, preset->ability))
         return FALSE;
     for (u32 i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -440,7 +485,7 @@ static bool32 DoesPresetWantEvenHp(const struct EmeraldChampionsBattleSet *prese
 
 static bool32 DoesMonWantEvenHp(struct Pokemon *mon)
 {
-    if (!IsHalfHpBerry(GetMonData(mon, MON_DATA_HELD_ITEM)))
+    if (!IsHalfHpBerry(GetMonData(mon, MON_DATA_HELD_ITEM), GetMonAbility(mon)))
         return FALSE;
     for (u32 i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -472,11 +517,14 @@ bool32 TryNormalizeEmeraldChampionsBellyDrumHpParity(struct Pokemon *mon)
         total += GetMonData(mon, MON_DATA_HP_EV + stat);
     currentHp = GetMonData(mon, MON_DATA_HP);
 
+    // The deviation stays inside the tolerance GetEmeraldChampionsCurrentBattleSetChoice
+    // allows, so a parity-corrected party still reads as the authored set.
     for (u32 i = 0; i < ARRAY_COUNT(nudges); i++)
     {
         s32 target = (s32)hpPoints + nudges[i];
+        s32 nudge = nudges[i];
 
-        if (target < 0 || target > EC_STAT_POINTS_PER_STAT || (s32)total + nudges[i] > EC_STAT_POINT_BUDGET)
+        if (target < 0 || target > EC_STAT_POINTS_PER_STAT || (s32)total + nudge > EC_STAT_POINT_BUDGET)
             continue;
         value = target;
         SetMonData(mon, MON_DATA_HP_EV, &value);
@@ -571,14 +619,16 @@ static u8 ApplyPreset(
     enum Species species = GetMonData(mon, MON_DATA_SPECIES);
     enum Species setSpecies = ResolveBattleSetSpecies(species, EC_BATTLE_FORMAT_DOUBLES);
     enum Item currentItem = GetMonData(mon, MON_DATA_HELD_ITEM);
-    bool32 protectedItemHeld = IsEmeraldChampionsProtectedProgressionItem(currentItem)
-                            && currentItem != preset->requiredItem;
+    bool32 protectedItemHeld;
     u32 abilitySlot;
     u8 ppBonuses = 0;
     u8 perfectIv = MAX_PER_STAT_IVS;
 
     if (species == SPECIES_NONE || species == SPECIES_EGG || species >= NUM_SPECIES || preset == NULL)
         return EC_BATTLE_SET_FAILED;
+    protectedItemHeld = IsEmeraldChampionsProtectedProgressionItem(currentItem)
+                     && currentItem != preset->requiredItem
+                     && currentItem != preset->item;
     if (!FindAbilitySlot(species, preset->ability, &abilitySlot))
     {
         // Mega presets name the transformed Ability. The base Pokémon keeps a
@@ -587,11 +637,16 @@ static u8 ApplyPreset(
          && !FindFallbackAbilitySlot(species, &abilitySlot))
             return EC_BATTLE_SET_FAILED;
     }
-    if (IsEmeraldChampionsProtectedProgressionItem(preset->item))
+    if (IsEmeraldChampionsProtectedProgressionItem(preset->item)
+     && !supplyRequiredItem
+     && currentItem != preset->item)
         return EC_BATTLE_SET_FAILED;
     if (preset->requiredItem != ITEM_NONE
-     && (gItemsInfo[preset->requiredItem].sortType != ITEM_TYPE_MEGA_STONE
-      || (requireMegaAccess && !HasMegaAccess())))
+     && !IsBattleSetTransformationItem(preset->requiredItem))
+        return EC_BATTLE_SET_FAILED;
+    if (PresetRequiresTransformation(preset)
+     && requireMegaAccess
+     && !HasTransformationAccess(mon, preset))
         return EC_BATTLE_SET_FAILED;
     if (preserveProtectedItem && protectedItemHeld)
         return EC_BATTLE_SET_SPECIAL_ITEM_EQUIPPED;
@@ -605,6 +660,17 @@ static u8 ApplyPreset(
             if (preset->moves[i] == preset->moves[j])
                 return EC_BATTLE_SET_FAILED;
         }
+    }
+    if (preset->requiredMove != MOVE_NONE)
+    {
+        // The authored requirement must be one of the moves about to be
+        // applied. Check the preset directly because the current mon has not
+        // received those moves yet.
+        bool32 foundRequiredMove = FALSE;
+        for (u32 i = 0; i < MAX_MON_MOVES; i++)
+            foundRequiredMove |= preset->moves[i] == preset->requiredMove;
+        if (!foundRequiredMove)
+            return EC_BATTLE_SET_FAILED;
     }
 
     SetMonData(mon, MON_DATA_PP_BONUSES, &ppBonuses);
@@ -664,7 +730,9 @@ u8 ApplyEmeraldChampionsRecommendedEvolutionSet(struct Pokemon *mon)
         const struct EmeraldChampionsBattleSet *preset =
             GetEmeraldChampionsRawBattleSet(species, choice);
 
-        if (preset != NULL && preset->requiredItem == ITEM_NONE)
+        if (preset != NULL
+         && !PresetRequiresTransformation(preset)
+         && !IsEmeraldChampionsProtectedProgressionItem(preset->item))
             return ApplyPreset(mon, preset, FALSE, FALSE, FALSE, TRUE);
     }
     return EC_BATTLE_SET_FAILED;
@@ -688,7 +756,9 @@ u8 ApplyEmeraldChampionsRandomNonMegaSet(struct Pokemon *mon)
     {
         const struct EmeraldChampionsBattleSet *preset = GetEmeraldChampionsRawBattleSet(species, choice);
 
-        if (preset == NULL || preset->requiredItem != ITEM_NONE)
+        if (preset == NULL
+         || PresetRequiresTransformation(preset)
+         || IsEmeraldChampionsProtectedProgressionItem(preset->item))
             continue;
         if (RandomUniform(RNG_NONE, 0, ++matches - 1) == 0)
             selected = preset;

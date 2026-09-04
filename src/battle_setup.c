@@ -488,7 +488,7 @@ static void DoBattlePikeWildBattle(void)
     TryUpdateGymLeaderRematchFromWild();
 }
 
-static void DoTrainerBattle(void)
+static void CreateTrainerBattleOpponentParties(void)
 {
     CreateNPCTrainerParty(&gParties[B_TRAINER_OPPONENT_A][0], TRAINER_BATTLE_PARAM.opponentA);
     ApplyTrainerLevelDifficulty(&gParties[B_TRAINER_OPPONENT_A][0]);
@@ -497,25 +497,23 @@ static void DoTrainerBattle(void)
         CreateNPCTrainerParty(&gParties[B_TRAINER_OPPONENT_B][0], TRAINER_BATTLE_PARAM.opponentB);
         ApplyTrainerLevelDifficulty(&gParties[B_TRAINER_OPPONENT_B][0]);
     }
+}
+
+static void DoTrainerBattle(void)
+{
+    CreateTrainerBattleOpponentParties();
     CreateBattleStartTask(GetTrainerBattleTransition(), 0);
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_TRAINER_BATTLES);
     TryUpdateGymLeaderRematchFromTrainer();
 }
 
-// Emerald Champions: rebuild the opponent parties exactly the way engaging this
-// trainer did, for the in-battle Restart option. Mirrors DoTrainerBattle() minus the
-// overworld transition and the battle-count stats.
+// Restart uses the same opponent generation without replaying the field
+// transition or incrementing battle-count statistics.
 void EmeraldChampions_RebuildTrainerBattleParties(void)
 {
     ZeroEnemyPartyMons();
-    CreateNPCTrainerParty(&gParties[B_TRAINER_OPPONENT_A][0], TRAINER_BATTLE_PARAM.opponentA);
-    ApplyTrainerLevelDifficulty(&gParties[B_TRAINER_OPPONENT_A][0]);
-    if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS && !BATTLE_TWO_VS_ONE_OPPONENT)
-    {
-        CreateNPCTrainerParty(&gParties[B_TRAINER_OPPONENT_B][0], TRAINER_BATTLE_PARAM.opponentB);
-        ApplyTrainerLevelDifficulty(&gParties[B_TRAINER_OPPONENT_B][0]);
-    }
+    CreateTrainerBattleOpponentParties();
 }
 
 static void DoBattlePyramidTrainerHillBattle(void)
@@ -2447,7 +2445,9 @@ static void ApplyRegionalRivalStarter(struct Pokemon *party, u16 trainerNum)
             const struct EmeraldChampionsBattleSet *preset = GetEmeraldChampionsRawBattleSet(newSpecies, choice);
             bool32 itemUsed = FALSE;
 
-            if (preset == NULL || preset->requiredItem != ITEM_NONE)
+            if (preset == NULL
+             || preset->requiredItem != ITEM_NONE
+             || preset->requiredMove != MOVE_NONE)
                 continue;
             for (u32 other = 0; other < PARTY_SIZE; other++)
             {

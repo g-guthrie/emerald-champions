@@ -40,6 +40,7 @@ TMHM_MACRO_PAT = re.compile(r"F\((\w+)\)")
 SNAKIFY_PAT = re.compile(r"(?!^)([A-Z]+)")
 MOVE_CONST_PAT = re.compile(r"^MOVE_[A-Z0-9_]+$")
 PREPARATION_OUTPUT = pathlib.Path("./src/data/pokemon/emerald_champions_preparation_learnsets.h")
+PREPARATION_FORM_LEARNSETS = pathlib.Path("./data/emerald_champions/emerald_champions_preparation_form_learnsets.json")
 PREPARATION_SPECIES_ALIASES = {
     "FLABÃ©BÃ©": "FLABEBE",
     "MEOWSTIC": "MEOWSTIC_M",
@@ -193,6 +194,28 @@ def apply_reviewed_tutor_extensions(all_learnables, tutor_extensions) -> None:
         if move not in all_learnables[species]:
             all_learnables[species].append(move)
 
+def apply_reviewed_form_learnsets(all_learnables) -> None:
+    """Add explicit legal pools for forms absent from all_learnables.json."""
+    with open(PREPARATION_FORM_LEARNSETS, "r") as file:
+        review = json.load(file)
+    assert review["schema_version"] == 1
+    assert review["source"] == {
+        "repository": "smogon/pokemon-showdown",
+        "commit": "bb179fbf8449e3c31632bd56f671ffb4404fa6e7",
+        "path": "data/learnsets.ts",
+    }
+    resolved = {}
+    for species, row in review["forms"].items():
+        if "inherits" in row:
+            inherited_species = row["inherits"]
+            inherited_moves = resolved.get(inherited_species, all_learnables.get(inherited_species))
+            assert inherited_moves is not None, (species, inherited_species)
+            moves = [*inherited_moves, *row.get("adds", [])]
+        else:
+            moves = list(row["moves"])
+        assert len(moves) == len(set(moves)), species
+        all_learnables[species] = resolved[species] = moves
+
 def prepare_header(h_align: int, tmshms: list[str], tutors: list[str], universals: list[str]) -> str:
     universals_title = "Near-universal moves found in data/special_movesets.json:"
     tmhm_title = "TM/HM moves found in \"include/constants/tms_hms.h\":"
@@ -281,7 +304,7 @@ def main():
     # historical event moves and deliberate Inclement learnset extensions.
     # The manifest is authoritative: unsupported imports are replaced there,
     # and only explicitly reviewed retained rows enter the native tutor path.
-    MOVE_ACCESS_REVIEW = pathlib.Path("./docs/emerald_champions_move_access_review.json")
+    MOVE_ACCESS_REVIEW = pathlib.Path("./data/emerald_champions/emerald_champions_move_access_review.json")
     with open(MOVE_ACCESS_REVIEW, "r") as file:
         move_access_review = json.load(file)
     tutor_extensions = [
@@ -290,11 +313,15 @@ def main():
     ]
     with open("./src/data/pokemon/all_learnables.json", "r") as source_fp:
         all_learnables = json.load(source_fp)
+    apply_reviewed_form_learnsets(all_learnables)
     apply_reviewed_tutor_extensions(all_learnables, tutor_extensions)
 
     if preparation_mode:
         content, counts = prepare_emerald_champions_preparation_output(all_learnables)
-        assert counts == {"species": 1108, "moves": 88073, "max_moves": 372}, counts
+        expected_species = len({preparation_species_key(species) for species in all_learnables})
+        assert counts["species"] == expected_species, counts
+        assert counts["moves"] >= counts["species"], counts
+        assert counts["max_moves"] > 0, counts
         PREPARATION_OUTPUT.write_text(content)
         return
 

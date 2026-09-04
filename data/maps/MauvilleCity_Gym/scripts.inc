@@ -272,8 +272,9 @@ MauvilleCity_Gym_Text_GymGuidePostVictory:
 	.string "You've powered the door open!$"
 
 MauvilleCity_Gym_Text_KirkIntro:
-	.string "PUNK ROCK amplifies sound, and ELECTRIC\n"
-	.string "TERRAIN powers the whole stage!$"
+	.string "PINCURCHIN floors the whole stage,\n"
+	.string "and TOGEDEMARU takes your bolts.\p"
+	.string "Find the current's blind spot!$"
 
 MauvilleCity_Gym_Text_KirkDefeat:
 	.string "You shut down my amplifier!$"
@@ -283,8 +284,9 @@ MauvilleCity_Gym_Text_KirkPostBattle:
 	.string "SNARL and LIGHT SCREEN can quiet it.$"
 
 MauvilleCity_Gym_Text_ShawnIntro:
-	.string "My MINUN completes ANGELO's circuit.\n"
-	.string "PLUS and MINUS amplify each other!$"
+	.string "You saved your EARTHQUAKE for me.\n"
+	.string "Nothing here stands on the ground.\p"
+	.string "Try again, from the air!$"
 
 MauvilleCity_Gym_Text_ShawnDefeat:
 	.string "You broke our live connection…$"
@@ -294,8 +296,9 @@ MauvilleCity_Gym_Text_ShawnPostBattle:
 	.string "ELECTROWEB turn every attack dangerous.$"
 
 MauvilleCity_Gym_Text_BenIntro:
-	.string "TRICK ROOM slows the circuit. BATTERY\n"
-	.string "then amplifies its special current!$"
+	.string "Send current -- LANTURN drinks it.\n"
+	.string "Send water -- HELIOLISK drinks that.\p"
+	.string "What is left in your bag?$"
 
 MauvilleCity_Gym_Text_BenDefeat:
 	.string "You reversed my reverse current!$"
@@ -305,8 +308,9 @@ MauvilleCity_Gym_Text_BenPostBattle:
 	.string "Never race a slow battery on its clock.$"
 
 MauvilleCity_Gym_Text_VivianIntro:
-	.string "VOLT ABSORB, LIGHTNING ROD,\n"
-	.string "MOTOR DRIVE--we redirect our current!$"
+	.string "PLUSLE and MINUN amplify each other\n"
+	.string "just by standing side by side.\p"
+	.string "Split us, or lose to both!$"
 
 MauvilleCity_Gym_Text_VivianDefeat:
 	.string "You found a path around every immunity!$"
@@ -316,8 +320,9 @@ MauvilleCity_Gym_Text_VivianPostBattle:
 	.string "Ability that wants to absorb them.$"
 
 MauvilleCity_Gym_Text_AngeloIntro:
-	.string "My JOLTIK spins the web for SHAWN's\n"
-	.string "circuit. Let's make the board shine!$"
+	.string "JOLTIK's THUNDER does not miss, and\n"
+	.string "TOXTRICITY only gets louder.\p"
+	.string "Accuracy is a luxury. I have it!$"
 
 MauvilleCity_Gym_Text_AngeloDefeat:
 	.string "Our relay lost its charge…$"

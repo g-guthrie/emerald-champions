@@ -25,6 +25,7 @@ import json
 import re
 import sys
 from pathlib import Path
+from item_catalog import free_vendor_items
 
 ROOT = Path(__file__).resolve().parent.parent
 FAILURES: list[str] = []
@@ -49,23 +50,6 @@ def c_array(source: str, label: str) -> list[str]:
     return re.findall(r"ITEM_[A-Z0-9_]+", match.group(1))
 
 
-def free_vendor_items() -> set[str]:
-    source = read("src/field_specials.c")
-    items: set[str] = set()
-    for label in (
-        "sEmeraldChampionsFreeBattleItems",
-        "sEmeraldChampionsOffenseItems",
-        "sEmeraldChampionsDefenseItems",
-        "sEmeraldChampionsFieldItems",
-        "sEmeraldChampionsTypeItems",
-        "sEmeraldChampionsGemItems",
-        "sEmeraldChampionsSpeciesItems",
-    ):
-        items.update(c_array(source, label))
-    items.discard("ITEM_NONE")
-    return items
-
-
 def map_scripts() -> dict[str, str]:
     return {
         str(path.relative_to(ROOT)): path.read_text()
@@ -75,7 +59,7 @@ def map_scripts() -> dict[str, str]:
 
 
 def verify_no_free_vendor_duplicates() -> None:
-    free = free_vendor_items()
+    free = free_vendor_items(ROOT)
     require(len(free) >= 100, f"free vendor lists parsed ({len(free)} items)")
     offenders = []
     for relative, text in map_scripts().items():
@@ -147,8 +131,6 @@ def verify_no_rare_candy() -> None:
         require("ITEM_RARE_CANDY" not in read(relative), f"{relative} awards no Rare Candy")
     offenders = [rel for rel, text in map_scripts().items() if "ITEM_RARE_CANDY" in text]
     require(not offenders, f"no map script gives or sells Rare Candy {offenders}")
-    book = read("docs/EMERALD_CHAMPIONS_CAMPAIGN_BOOK.md")
-    require("sell Rare Candies" not in book, "campaign book no longer claims marts sell Rare Candy")
 
 
 def verify_obsolete_rewards() -> None:

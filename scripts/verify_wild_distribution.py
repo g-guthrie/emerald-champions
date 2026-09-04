@@ -81,7 +81,7 @@ def species_data():
 
 def caps_by_map() -> dict[str, int]:
     # One source of truth: the generator merges the battle master, its fallback
-    # table and docs/wild_route_sheet.json.
+    # table and data/emerald_champions/wild_route_sheet.json.
     import importlib.util
     spec = importlib.util.spec_from_file_location("rebuild", ROOT / "scripts/emerald_champions_rebuild_wild_water.py")
     rebuild = importlib.util.module_from_spec(spec)

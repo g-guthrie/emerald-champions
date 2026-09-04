@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Export a self-contained design brief for an external model (ChatGPT Pro etc.).
 
-Writes docs/chatgpt_battle_design_prompt.txt: the mission, every rule the
+Writes work/exports/chatgpt_battle_design_prompt.txt: the mission, every rule the
 static gates enforce, the exact output format the teams compiler accepts, the
 complete battle list with caps, formats and the current draft teams, the full
 species roster with types, Abilities, base stats and evolution levels, every
@@ -18,7 +18,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 import emerald_champions_teams as teams  # noqa: E402
 import audit_emerald_champions_master_battles as audit  # noqa: E402
 
-OUT = ROOT / "docs" / "chatgpt_battle_design_prompt.txt"
+OUT = ROOT / "work" / "exports" / "chatgpt_battle_design_prompt.txt"
 
 
 def species_roster() -> list[str]:
@@ -297,6 +297,7 @@ Winona 6, Tate & Liza 7, Juan 8.
 
 
 def main() -> None:
+    OUT.parent.mkdir(parents=True, exist_ok=True)
     parts = [PROMPT.strip(), ""]
     parts.append("LEGENDARY AVAILABILITY (when the player can first obtain each legendary)")
     parts.append("-" * 72)

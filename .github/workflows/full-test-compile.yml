@@ -52,7 +52,6 @@ jobs:
             tools/mid2agb/mid2agb
             tools/patchelf/patchelf
             tools/preproc/preproc
-            tools/ramscrgen/ramscrgen
             tools/rsfont/rsfont
             tools/scaninc/scaninc
             tools/trainerproc/trainerproc

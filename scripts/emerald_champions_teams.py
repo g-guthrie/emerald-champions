@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Compile the hand-authored campaign teams file into the battle master.
 
-``docs/emerald_champions_battle_teams.txt`` is the human-authored source of
+``data/emerald_champions/emerald_champions_battle_teams.txt`` is the human-authored source of
 truth for every campaign trainer team.  Each block is one trainer branch:
 
     ## E0002 TRAINER_CALVIN_1 class=regular
@@ -16,8 +16,7 @@ Points accept either six slash-separated values or one of the spreads in
 level cap and is applied verbatim: difficulty comes from levels and team size,
 never from a hidden tier nudge.
 
-The battle class decides the AI profile, the fatigue role and the difficulty
-band recorded in the master.  ``--write`` rewrites the master document's team
+The battle class selects the AI profile. ``--write`` rewrites the master's team
 and design fields in place while preserving every other encounter field
 (ids, chronology, location, caps, dialogue status).  ``--check`` compiles to a
 scratch master and runs the static audit, the trainer implementation and the
@@ -38,8 +37,8 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-TEAMS = ROOT / "docs" / "emerald_champions_battle_teams.txt"
-MASTER = ROOT / "docs" / "emerald_champions_master_battle_design.txt"
+TEAMS = ROOT / "data/emerald_champions/emerald_champions_battle_teams.txt"
+MASTER = ROOT / "data/emerald_champions/emerald_champions_master_battle_design.txt"
 ENCOUNTER_RE = re.compile(r"(?m)^=== ENCOUNTER (\d{4}) ===$")
 BRANCH_RE = re.compile(r"(?m)^--- BRANCH ([A-Z0-9_]+) ---$")
 HEADER_RE = re.compile(r"^## E(\d{4}) (TRAINER_[A-Z0-9_]+)(?:\s+class=([a-z_]+))?\s*$")
@@ -65,30 +64,30 @@ POINT_SPREADS = {
     "MB": "32/16/0/16/0/2",
 }
 
-# class -> (difficulty_target, fatigue_role, ai_profile)
-CLASSES = {
-    "casual": (6.5, "ordinary_breather", "sharp"),
-    "regular": (7.5, "ordinary_standard", "sharp"),
-    "grunt": (7.8, "ordinary_standard", "sharp"),
-    "gym": (7.8, "ordinary_standard", "sharp"),
-    "ace": (8.6, "notable_optional_or_route_ace", "sharp"),
-    "brain": (9.4, "notable_optional_or_route_ace", "master"),
-    "admin": (9.4, "mini_boss_or_exceptional_trainer", "master"),
-    "rival": (9.4, "mini_boss_or_exceptional_trainer", "master"),
-    "boss": (9.4, "notable_optional_or_route_ace", "master"),
-    "leader": (10.0, "marquee_boss", "master"),
-    "elite": (10.0, "marquee_boss", "master"),
+# Per-trainer AI traits.  These append to the class AI profile so a single
+# trainer can be given a personality (hold an ace back, play recklessly, set up
+# on turn one) without changing every trainer that shares its class.  Names are
+# the human form trainerproc turns into AI_FLAG_* constants.
+AI_TRAITS = {
+    "Ace Pokemon", "Double Ace Pokemon", "Risky", "Conservative",
+    "Force Setup First Turn", "Prefer Status Moves", "Prefer Baton Pass",
+    "Prefer Highest Damage Move", "Will Suicide",
 }
-MARQUEE_TOKENS = (
-    "ROXANNE", "BRAWLY", "WATTSON", "FLANNERY", "NORMAN", "WINONA",
-    "TATE_AND_LIZA", "JUAN", "SIDNEY", "PHOEBE", "GLACIA", "DRAKE",
-    "WALLACE", "MAXIE", "ARCHIE", "STEVEN", "CYNTHIA",
-)
-REPLACED_FIELDS = (
-    "difficulty_target", "fatigue_role", "theme_and_tempo", "primary_question",
-    "intentional_weakness", "first_loss_lesson", "strongest_part", "weakest_link",
-    "competitive_references", "reservation_status",
-)
+
+# Preserve the existing class-to-AI behavior without assigning difficulty grades.
+CLASSES = {
+    "casual": "sharp",
+    "regular": "sharp",
+    "grunt": "sharp",
+    "gym": "sharp",
+    "ace": "sharp",
+    "brain": "master",
+    "admin": "master",
+    "rival": "master",
+    "boss": "master",
+    "leader": "master",
+    "elite": "master",
+}
 
 
 @dataclass
@@ -116,6 +115,7 @@ class Branch:
     cls: str
     plan: str
     crack: str
+    ai: list[str] = field(default_factory=list)
     mons: list[Mon] = field(default_factory=list)
     line: int = 0
 
@@ -159,6 +159,13 @@ def read_teams(path: Path = TEAMS) -> list[Branch]:
             continue
         if line.startswith("crack:"):
             current.crack = line[6:].strip()
+            continue
+        if line.startswith("ai:"):
+            wanted = [trait.strip() for trait in line[3:].split(",") if trait.strip()]
+            unknown = [trait for trait in wanted if trait not in AI_TRAITS]
+            if unknown:
+                raise SystemExit(f"{where}: unknown AI trait(s) {unknown}; known: {sorted(AI_TRAITS)}")
+            current.ai = wanted
             continue
         mon = MON_RE.match(line)
         if not mon:
@@ -223,6 +230,9 @@ def split_encounters(text: str) -> tuple[str, list[tuple[int, str]]]:
 
 def render_branch(block_branch: str, branch: Branch) -> str:
     head, _sep, _tail = block_branch.partition("team:\n")
+    head = re.sub(r"(?m)^ai_extra:.*\n", "", head)
+    if branch.ai:
+        head = set_field(head, "ai_extra", ", ".join(branch.ai), after="format")
     lines = [head + "team:"]
     lines.extend(mon.master_line(index) for index, mon in enumerate(branch.mons, 1))
     lines.append("source_note: Hand-authored Emerald Champions team; implementation must match exactly.")
@@ -247,14 +257,10 @@ def compile_master(branches: list[Branch], master_text: str) -> str:
         if len(classes) != 1:
             raise SystemExit(f"encounter {number}: branches disagree on class {sorted(classes)}")
         cls = team[0].cls
-        difficulty, fatigue_role, ai_profile = CLASSES[cls]
-        if any(token in trainer for trainer in trainers for token in MARQUEE_TOKENS):
-            difficulty = 10.0
+        ai_profile = CLASSES[cls]
         lead = team[0]
         names = ", ".join(display(mon.species) for mon in lead.mons)
-        header = set_field(header, "difficulty_target", f"{difficulty:.1f}")
-        header = set_field(header, "fatigue_role", fatigue_role)
-        header = set_field(header, "battle_class", cls, after="fatigue_role")
+        header = set_field(header, "battle_class", cls)
         header = set_field(header, "ai_profile", ai_profile, after="battle_class")
         header = set_field(header, "primary_question", f"Can the player beat this {cls} team ({names}) on its own terms: {lead.plan}")
         header = set_field(header, "theme_and_tempo", lead.plan)
@@ -263,7 +269,7 @@ def compile_master(branches: list[Branch], master_text: str) -> str:
         header = set_field(header, "strongest_part", lead.plan)
         header = set_field(header, "weakest_link", lead.crack)
         header = set_field(header, "competitive_references", "Hand-authored 2026-09 campaign rebuild against the pinned Champions learnsets")
-        header = set_field(header, "reservation_status", "hand-authored; species, Mega and legendary placement tracked in docs/emerald_champions_battle_teams.txt")
+        header = set_field(header, "reservation_status", "hand-authored; species, Mega and legendary placement tracked in data/emerald_champions/emerald_champions_battle_teams.txt")
         pieces = [header]
         for index, mark in enumerate(marks):
             end = marks[index + 1].start() if index + 1 < len(marks) else len(block)
@@ -286,25 +292,21 @@ def display(species: str) -> str:
 
 def seed_from_master(master_text: str) -> str:
     """Emit a teams file that reproduces the current master (bootstrap only)."""
-    sys.path.insert(0, str(ROOT / "scripts"))
-    import implement_emerald_champions_master_battles as impl  # noqa: E402
-
     mon_re = re.compile(
         r"(?m)^  \d+\. SPECIES_([A-Z0-9_]+) @ ITEM_([A-Z0-9_]+) \| level_offset=(-?\d+) \| "
         r"ability=ABILITY_([A-Z0-9_]+) \| nature=NATURE_([A-Z0-9_]+) \| stat_points=([0-9/]+) \| moves=([A-Z0-9_,]+)$"
     )
-    tier_class = {
-        impl.TIER_BREATHER: "casual", impl.TIER_STANDARD: "regular", impl.TIER_TEAM: "grunt",
-        impl.TIER_GYM: "gym", impl.TIER_ACE: "ace", impl.TIER_ADMIN: "admin", impl.TIER_BOSS: "leader",
-    }
     reverse_points = {value: key for key, value in POINT_SPREADS.items()}
     lines = ["#! Emerald Champions hand-authored campaign teams (see scripts/emerald_champions_teams.py)"]
     _prefix, blocks = split_encounters(master_text)
     for number, block in blocks:
         cap = int(line_value(block, "strict_cap"))
         location = line_value(block, "location")
-        role = line_value(block, "fatigue_role")
-        difficulty = float(line_value(block, "difficulty_target"))
+        cls = line_value(block, "battle_class")
+        if cls not in CLASSES:
+            raise ValueError(f"encounter {number}: missing or invalid battle_class {cls!r}")
+        if CLASSES[cls] != line_value(block, "ai_profile"):
+            raise ValueError(f"encounter {number}: battle_class does not preserve its ai_profile")
         marks = list(BRANCH_RE.finditer(block))
         chapter = line_value(block, "chapter")
         lines.append("")
@@ -315,20 +317,10 @@ def seed_from_master(master_text: str) -> str:
             trainer = mark.group(1)
             fmt = line_value(segment, "format")
             mons = mon_re.findall(segment)
-            tier = impl.trainer_tier(trainer, location, role, len(mons), difficulty)
-            cls = tier_class[tier]
-            if tier == impl.TIER_BOSS:
-                trainer_cls = impl.trainer_class(trainer)
-                if trainer_cls == "Rival":
-                    cls = "rival"
-                elif trainer_cls in {"Arena Tycoon", "Pike Queen", "Palace Maven"}:
-                    cls = "brain"
-                elif trainer_cls in {"Elite Four", "Champion"}:
-                    cls = "elite"
-                elif not any(token in trainer for token in MARQUEE_TOKENS):
-                    cls = "boss"
             lines.append(f"## E{number:04d} {trainer} class={cls}")
-            lines.append(f"# {impl.trainer_class(trainer)} / {fmt}")
+            lines.append(f"# {fmt}")
+            if line_value(segment, "ai_extra"):
+                lines.append("ai: " + line_value(segment, "ai_extra"))
             if index == 0:
                 lines.append("plan: " + line_value(block, "theme_and_tempo"))
                 lines.append("crack: " + line_value(block, "intentional_weakness"))

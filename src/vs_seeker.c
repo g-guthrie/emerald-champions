@@ -33,7 +33,7 @@
 #include "constants/trainer_types.h"
 #include "constants/field_effects.h"
 
-// Documentation for the Vs. Seeker can be found in docs/tutorials/vs_seeker.md.
+// Charging configuration is defined in include/config/item.h.
 
 enum
 {

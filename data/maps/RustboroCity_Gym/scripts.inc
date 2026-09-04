@@ -316,9 +316,9 @@ RustboroCity_Gym_Text_GymGuidePostVictory:
 	.string "That's got to feel awesome!$"
 
 RustboroCity_Gym_Text_JoshIntro:
-	.string "NOSEPASS holds the line while ANORITH\n"
-	.string "and ROCKRUFF chip from the sides.\p"
-	.string "Which side will you break first?$"
+	.string "STURDY means BONSLY and SHIELDON\n"
+	.string "always live to swing back.\p"
+	.string "Chip them first, or don't swing!$"
 
 RustboroCity_Gym_Text_JoshDefeat:
 	.string "You broke the wall and the chip!$"
@@ -328,9 +328,9 @@ RustboroCity_Gym_Text_JoshPostBattle:
 	.string "turn. Plan for the turn after it.$"
 
 RustboroCity_Gym_Text_TommyIntro:
-	.string "BONSLY plays dead, ROLYCOLY plays\n"
-	.string "pebble. Neither is what it seems.\p"
-	.string "Look before you swing!$"
+	.string "LILEEP drinks the water you aim at\n"
+	.string "my rocks. SHUCKLE slows your feet.\p"
+	.string "Go on -- find the dry path!$"
 
 RustboroCity_Gym_Text_TommyDefeat:
 	.string "You saw right through them!$"
@@ -340,9 +340,9 @@ RustboroCity_Gym_Text_TommyPostBattle:
 	.string "underestimate a first-badge team.$"
 
 RustboroCity_Gym_Text_MarcIntro:
-	.string "STEALTH ROCK taxes every switch. Then\n"
-	.string "TRICK and CURSED BODY attack your move.\p"
-	.string "Can you preserve a safe way out?$"
+	.string "AMAURA calls the snow, and the veil\n"
+	.string "it raises blunts everything.\p"
+	.string "Break the snow, or break through!$"
 
 RustboroCity_Gym_Text_MarcDefeat:
 	.string "You kept control of your choices!$"

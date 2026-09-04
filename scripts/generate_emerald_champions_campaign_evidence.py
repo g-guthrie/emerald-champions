@@ -10,6 +10,7 @@ and every Legendary Sign acquisition definition from the current source tree.
 from __future__ import annotations
 
 import hashlib
+import argparse
 import re
 import sys
 from collections import Counter, OrderedDict
@@ -18,8 +19,8 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-MASTER = ROOT / "docs" / "emerald_champions_master_battle_design.txt"
-OUTPUT = ROOT / "docs" / "EMERALD_CHAMPIONS_CAMPAIGN_EVIDENCE.txt"
+MASTER = ROOT / "data/emerald_champions/emerald_champions_master_battle_design.txt"
+OUTPUT = ROOT / "work" / "exports" / "EMERALD_CHAMPIONS_CAMPAIGN_EVIDENCE.txt"
 
 
 @dataclass(frozen=True)
@@ -207,8 +208,6 @@ def encounters() -> list[dict[str, object]]:
                 "location": field(block, "location"),
                 "requirement": field(block, "requirement"),
                 "cap": field(block, "strict_cap"),
-                "difficulty": field(block, "difficulty_target"),
-                "fatigue": field(block, "fatigue_role"),
                 "question": field(block, "primary_question"),
                 "first_loss": field(block, "first_loss_lesson"),
                 "strongest": field(block, "strongest_part"),
@@ -320,7 +319,7 @@ def write_report(check: bool = False) -> None:
             "",
             f"[{int(encounter['number']):04d}] {encounter['location']} — {encounter['requirement']}",
             f"  Chapter: {encounter['chapter']}",
-            f"  Cap / target difficulty / fatigue: {encounter['cap']} / {encounter['difficulty']} / {encounter['fatigue']}",
+            f"  Level cap: {encounter['cap']}",
             f"  Battle question: {encounter['question']}",
             f"  First-loss lesson: {encounter['first_loss']}",
             f"  Strongest feature: {encounter['strongest']}",
@@ -429,4 +428,11 @@ def write_report(check: bool = False) -> None:
 
 
 if __name__ == "__main__":
-    write_report(check="--check" in sys.argv[1:])
+    parser = argparse.ArgumentParser(description=__doc__)
+    mode = parser.add_mutually_exclusive_group(required=True)
+    mode.add_argument("--write", action="store_true")
+    mode.add_argument("--check", action="store_true")
+    args = parser.parse_args()
+    if args.write:
+        OUTPUT.parent.mkdir(parents=True, exist_ok=True)
+    write_report(check=args.check)

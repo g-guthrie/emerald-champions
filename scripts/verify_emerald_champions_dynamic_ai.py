@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import sys
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -14,29 +15,29 @@ from emerald_champions_teams import read_teams
 
 PROFILES = {
     "AI_EC_TrickRoomDiscipline": {
-        "TRAINER_ROXANNE_1": {"TRICK_ROOM"},
-        "TRAINER_NORMAN_1": {"TRICK_ROOM"},
-        "TRAINER_TATE_AND_LIZA_1": {"TRICK_ROOM", "ICY_WIND"},
+        "TRAINER_ROXANNE_1",
+        "TRAINER_NORMAN_1",
+        "TRAINER_TATE_AND_LIZA_1",
     },
     "AI_EC_FlanneryAfterYou": {
-        "TRAINER_FLANNERY_1": {"AFTER_YOU", "ERUPTION"},
+        "TRAINER_FLANNERY_1",
     },
     "AI_EC_QuincyTruant": {
-        "TRAINER_QUINCY": {"ENTRAINMENT"},
+        "TRAINER_QUINCY",
     },
     "AI_EC_SnowScreen": {
-        "TRAINER_SHELLY_WEATHER_INSTITUTE": {"AURORA_VEIL"},
-        "TRAINER_GLACIA": {"AURORA_VEIL"},
+        "TRAINER_SHELLY_WEATHER_INSTITUTE",
+        "TRAINER_GLACIA",
     },
     "AI_EC_RedirectionSetup": {
-        "TRAINER_BRAWLY_1": {"FOLLOW_ME"},
-        "TRAINER_WALLY_VR_1": {"FOLLOW_ME"},
-        "TRAINER_WALLY_VR_2": {"FOLLOW_ME"},
-        "TRAINER_LEAF_ALTERING_CAVE": {"RAGE_POWDER"},
-        "TRAINER_CYNTHIA_1": {"FOLLOW_ME"},
+        "TRAINER_BRAWLY_1",
+        "TRAINER_WALLY_VR_1",
+        "TRAINER_WALLY_VR_2",
+        "TRAINER_LEAF_ALTERING_CAVE",
+        "TRAINER_CYNTHIA_1",
     },
     "AI_EC_WallaceTerrain": {
-        "TRAINER_WALLACE": {"HYPNOSIS"},
+        "TRAINER_WALLACE",
     },
 }
 
@@ -51,6 +52,15 @@ def main() -> None:
     ai_main = (ROOT / "src/battle_ai_main.c").read_text()
     runner = (ROOT / "scripts/run_emerald_champions_runtime_gates.py").read_text()
     teams = {branch.trainer: branch for branch in read_teams()}
+    fixtures = (ROOT / "test/battle/ai/emerald_champions_dynamic.c").read_text()
+    # Team moves are authored independently. A profile also reacts to field
+    # conditions introduced by the player; requiring its namesake move on
+    # every assigned team incorrectly rejects those supported situations.
+    dispatch = source.split("AiScoreFunc GetEmeraldChampionsDynamicAiFunc", 1)[1]
+    actual_profiles = {}
+    for cases, profile in re.findall(r"((?:\s*case TRAINER_[A-Z0-9_]+:)+)\s*return (AI_EC_\w+);", dispatch):
+        for trainer in re.findall(r"case (TRAINER_[A-Z0-9_]+):", cases):
+            actual_profiles[trainer] = profile
 
     expected_trainers = {trainer for rows in PROFILES.values() for trainer in rows}
     require(len(expected_trainers) == 13, f"expected 13 reviewed trainers, found {len(expected_trainers)}")
@@ -68,12 +78,11 @@ def main() -> None:
 
     for profile, rows in PROFILES.items():
         require(f"s32 {profile}(" in source, f"missing profile implementation: {profile}")
-        for trainer, required_moves in rows.items():
-            require(f"case {trainer}:" in source, f"{trainer} is not mapped to {profile}")
+        require(f"BattleAI_SetDynamicFunc({profile});" in fixtures,
+                f"{profile} has no controlled runtime scenario")
+        for trainer in rows:
+            require(actual_profiles.get(trainer) == profile, f"{trainer} is not mapped to {profile}")
             require(trainer in teams, f"{trainer} is absent from the team source")
-            actual_moves = {move for mon in teams[trainer].mons for move in mon.moves}
-            require(required_moves <= actual_moves,
-                    f"{trainer}/{profile} lost required moves {sorted(required_moves - actual_moves)}")
 
     mapped_cases = {
         line.strip()[5:-1]

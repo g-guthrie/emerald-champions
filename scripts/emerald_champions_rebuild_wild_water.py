@@ -39,10 +39,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 WILD = ROOT / "src" / "data" / "wild_encounters.json"
-MASTER = ROOT / "docs" / "emerald_champions_master_battle_design.txt"
+MASTER = ROOT / "data/emerald_champions/emerald_champions_master_battle_design.txt"
 SPECIES_H = ROOT / "include" / "constants" / "species.h"
 SIGNS = ROOT / "src" / "data" / "pokemon" / "legendary_signs.h"
-ROUTE_SHEET = ROOT / "docs" / "wild_route_sheet.json"
+ROUTE_SHEET = ROOT / "data/emerald_champions/wild_route_sheet.json"
 
 
 def load_route_sheet() -> dict[str, dict]:
@@ -513,7 +513,7 @@ def main() -> None:
         seen.add(map_id)
         row = sheet.get(map_id)
         if row is None:
-            print(f"WARNING: {map_id} has water but no row in docs/wild_route_sheet.json; using region defaults")
+            print(f"WARNING: {map_id} has water but no row in data/emerald_champions/wild_route_sheet.json; using region defaults")
         region_name = (row or {}).get("region") or REGION_OF.get(map_id, "inland")
         region = REGIONS[region_name]
         cap = caps.get(map_id, 55)

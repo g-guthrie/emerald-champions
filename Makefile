@@ -160,10 +160,13 @@ endif
 CPPFLAGS := $(INCLUDE_CPP_ARGS) -Wno-trigraphs -DMODERN=1 -DTESTING=$(TEST) -D$(GAME_VERSION) -std=gnu17
 CPPFLAGS += -DEC_HEADLESS_FIXTURES=$(EC_HEADLESS_FIXTURES)
 ifeq ($(RELEASE),1)
-	override CPPFLAGS += -DRELEASE
-	ifeq ($(USE_LTO_ON_RELEASE),1)
-		LTO := 1
-	endif
+ifneq ($(EC_HEADLESS_FIXTURES),0)
+$(error EC_HEADLESS_FIXTURES must remain disabled for release builds)
+endif
+override CPPFLAGS += -DRELEASE
+ifeq ($(USE_LTO_ON_RELEASE),1)
+LTO := 1
+endif
 endif
 ARMCC := $(PREFIX)gcc
 PATH_ARMCC := PATH="$(PATH)" $(ARMCC)
@@ -220,7 +223,6 @@ WAV2AGB      := $(TOOLS_DIR)/wav2agb/wav2agb$(EXE)
 MID          := $(TOOLS_DIR)/mid2agb/mid2agb$(EXE)
 SCANINC      := $(TOOLS_DIR)/scaninc/scaninc$(EXE)
 PREPROC      := $(TOOLS_DIR)/preproc/preproc$(EXE)
-RAMSCRGEN    := $(TOOLS_DIR)/ramscrgen/ramscrgen$(EXE)
 FIX          := $(TOOLS_DIR)/gbafix/gbafix$(EXE)
 MAPJSON      := $(TOOLS_DIR)/mapjson/mapjson$(EXE)
 JSONPROC     := $(TOOLS_DIR)/jsonproc/jsonproc$(EXE)
@@ -242,7 +244,8 @@ LEARNSET_HELPERS_DIR := $(TOOLS_DIR)/learnset_helpers
 LEARNSET_HELPERS_DATA_DIR := $(LEARNSET_HELPERS_DIR)/porymoves_files
 LEARNSET_HELPERS_BUILD_DIR := $(LEARNSET_HELPERS_DIR)/build
 ALL_LEARNABLES_JSON := $(DATA_SRC_SUBDIR)/pokemon/all_learnables.json
-MOVE_ACCESS_REVIEW_JSON := docs/emerald_champions_move_access_review.json
+MOVE_ACCESS_REVIEW_JSON := data/emerald_champions/emerald_champions_move_access_review.json
+PREPARATION_FORM_LEARNSETS_JSON := data/emerald_champions/emerald_champions_preparation_form_learnsets.json
 EC_PREPARATION_LEARNSETS := $(DATA_SRC_SUBDIR)/pokemon/emerald_champions_preparation_learnsets.h
 AUTO_GEN_TARGETS += $(EC_PREPARATION_LEARNSETS)
 ALL_TUTORS_JSON := $(LEARNSET_HELPERS_BUILD_DIR)/all_tutors.json
@@ -291,18 +294,20 @@ ifneq (,$(MAKECMDGOALS))
   endif
 endif
 
-.SHELLSTATUS ?= 0
-
 ifeq ($(SETUP_PREREQS),1)
   # If set on: Default target or a rule requiring a scan
   # Forcibly execute `make tools` since we need them for what we are doing.
-  $(foreach line, $(shell $(MAKE) -f make_tools.mk | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
-  ifneq ($(.SHELLSTATUS),0)
+  # GNU Make 3.81 (macOS) has no .SHELLSTATUS. With our pipefail shell,
+  # append a success marker only after the entire prerequisite pipeline passes.
+  TOOLS_SETUP_OUTPUT := $(shell $(MAKE) -f make_tools.mk | sed "s/ /__SPACE__/g" && printf '\n__EC_PREREQUISITES_OK__')
+  $(foreach line, $(filter-out __EC_PREREQUISITES_OK__,$(TOOLS_SETUP_OUTPUT)), $(info $(subst __SPACE__, ,$(line))))
+  ifneq ($(lastword $(TOOLS_SETUP_OUTPUT)),__EC_PREREQUISITES_OK__)
     $(error Errors occurred while building tools. See error messages above for more details)
   endif
   # Oh and also generate mapjson sources before we use `SCANINC`.
-  $(foreach line, $(shell $(MAKE) MAP_VERSION=$(MAP_VERSION) generated | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
-  ifneq ($(.SHELLSTATUS),0)
+  GENERATED_SETUP_OUTPUT := $(shell $(MAKE) MAP_VERSION=$(MAP_VERSION) generated | sed "s/ /__SPACE__/g" && printf '\n__EC_PREREQUISITES_OK__')
+  $(foreach line, $(filter-out __EC_PREREQUISITES_OK__,$(GENERATED_SETUP_OUTPUT)), $(info $(subst __SPACE__, ,$(line))))
+  ifneq ($(lastword $(GENERATED_SETUP_OUTPUT)),__EC_PREREQUISITES_OK__)
     $(error Errors occurred while generating map-related sources. See error messages above for more details)
   endif
 endif
@@ -549,15 +554,6 @@ ifneq ($(NODEP),1)
 -include $(addprefix $(OBJ_DIR)/,$(DATA_ASM_SRCS:.s=.d))
 endif
 
-$(OBJ_DIR)/sym_bss.ld: sym_bss.txt
-	$(RAMSCRGEN) .bss $< ENGLISH > $@
-
-$(OBJ_DIR)/sym_common.ld: sym_common.txt $(C_OBJS) $(wildcard common_syms/*.txt)
-	$(RAMSCRGEN) COMMON $< ENGLISH -c $(C_BUILDDIR),common_syms > $@
-
-$(OBJ_DIR)/sym_ewram.ld: sym_ewram.txt
-	$(RAMSCRGEN) ewram_data $< ENGLISH > $@
-
 TEACHABLE_DEPS := $(ALL_LEARNABLES_JSON) $(MOVE_ACCESS_REVIEW_JSON) $(INCLUDE_DIRS)/constants/tms_hms.h $(INCLUDE_DIRS)/config/pokemon.h $(DATA_SRC_SUBDIR)/pokemon/special_movesets.json $(INCLUDE_DIRS)/config/pokedex_plus_hgss.h $(LEARNSET_HELPERS_DIR)/make_teachables.py
 
 $(LEARNSET_HELPERS_BUILD_DIR):
@@ -575,7 +571,7 @@ $(ALL_TEACHING_TYPES_JSON): $(wildcard $(DATA_SRC_SUBDIR)/pokemon/species_info/*
 $(DATA_SRC_SUBDIR)/pokemon/teachable_learnsets.h: $(TEACHABLE_DEPS) | $(ALL_TUTORS_JSON) $(ALL_TEACHING_TYPES_JSON)
 	python3 $(LEARNSET_HELPERS_DIR)/make_teachables.py $(LEARNSET_HELPERS_BUILD_DIR)
 
-$(EC_PREPARATION_LEARNSETS): $(ALL_LEARNABLES_JSON) $(MOVE_ACCESS_REVIEW_JSON) $(INCLUDE_DIRS)/constants/species.h $(INCLUDE_DIRS)/constants/moves.h $(LEARNSET_HELPERS_DIR)/make_teachables.py
+$(EC_PREPARATION_LEARNSETS): $(ALL_LEARNABLES_JSON) $(MOVE_ACCESS_REVIEW_JSON) $(PREPARATION_FORM_LEARNSETS_JSON) $(INCLUDE_DIRS)/constants/species.h $(INCLUDE_DIRS)/constants/moves.h $(LEARNSET_HELPERS_DIR)/make_teachables.py
 	python3 $(LEARNSET_HELPERS_DIR)/make_teachables.py --preparation
 
 $(DATA_SRC_SUBDIR)/tutor_moves.h: $(DATA_SRC_SUBDIR)/pokemon/special_movesets.json $(MOVE_ACCESS_REVIEW_JSON) | $(ALL_TUTORS_JSON)

@@ -13,7 +13,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 PINNED_COMMIT = "bb179fbf8449e3c31632bd56f671ffb4404fa6e7"
 DEFAULT_SHOWDOWN = Path("/private/tmp/showdown-champions-audit.oiAZXl/repo")
-MANIFEST = ROOT / "docs" / "showdown_champions_random_doubles.json"
+MANIFEST = ROOT / "data/emerald_champions/showdown_champions_random_doubles.json"
 C_OUTPUT = ROOT / "src" / "data" / "pokemon" / "showdown_champions_circuit.h"
 
 ROLES = {

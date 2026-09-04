@@ -25,17 +25,17 @@ Route129_OnFrame:
 	.2byte 0
 
 Route129_EventScript_Chase::
-	trainerbattle_single TRAINER_CHASE, Route129_Text_ChaseIntro, Route129_Text_ChaseDefeat
+	trainerbattle_double TRAINER_CHASE, Route129_Text_ChaseIntro, Route129_Text_ChaseDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route129_Text_ChasePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route129_EventScript_Allison::
-	trainerbattle_single TRAINER_ALLISON, Route129_Text_AllisonIntro, Route129_Text_AllisonDefeat
+	trainerbattle_double TRAINER_ALLISON, Route129_Text_AllisonIntro, Route129_Text_AllisonDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route129_Text_AllisonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route129_EventScript_Reed::
-	trainerbattle_single TRAINER_REED, Route129_Text_ReedIntro, Route129_Text_ReedDefeat
+	trainerbattle_double TRAINER_REED, Route129_Text_ReedIntro, Route129_Text_ReedDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route129_Text_ReedPostBattle, MSGBOX_AUTOCLOSE
 	end
 

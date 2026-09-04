@@ -208,7 +208,7 @@ def kanto_species() -> set[str]:
 
 def main() -> None:
     graph = SpeciesGraph()
-    manifest = json.loads((ROOT / "docs/showdown_champions_random_doubles.json").read_text())
+    manifest = json.loads((ROOT / "data/emerald_champions/showdown_champions_random_doubles.json").read_text())
 
     pre_league_components = {
         graph.find(species) for species in direct_species(pre_league=True)

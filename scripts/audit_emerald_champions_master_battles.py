@@ -7,13 +7,12 @@ import argparse
 import json
 import os
 import re
-import statistics
 from collections import Counter
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_MASTER = ROOT / "docs" / "emerald_champions_master_battle_design.txt"
+DEFAULT_MASTER = ROOT / "data/emerald_champions/emerald_champions_master_battle_design.txt"
 ENCOUNTER_RE = re.compile(r"(?m)^=== ENCOUNTER (\d{4}) ===$")
 BRANCH_RE = re.compile(r"(?m)^--- BRANCH ([A-Z0-9_]+) ---$")
 MON_RE = re.compile(
@@ -263,7 +262,6 @@ def normalized_dossier_fields(
     location: str,
     fmt: str,
     mons: list[tuple[str, str, str, list[str]]],
-    difficulty: float,
 ) -> dict[str, str]:
     lead = mons[0]
     ace = mons[-1]
@@ -298,7 +296,7 @@ def normalized_dossier_fields(
             ),
             "weakest_link": (
                 f"Once the player checks {lead_name}'s opening, the team must earn each later exchange through "
-                f"ordinary singles positioning; that visible seam keeps the {arc} plan fair at difficulty {difficulty:.1f}."
+                "ordinary singles positioning."
             ),
             "reservation_status": (
                 f"spends the {lead_name} to {ace_name} {arc} singles sequence here; "
@@ -341,7 +339,7 @@ def normalized_dossier_fields(
         ),
         "weakest_link": (
             f"If the player breaks the {arcs[0]} layer or removes {lead_name} early, the remaining members must win "
-            f"through ordinary positioning; that intentional seam keeps difficulty {difficulty:.1f} honest."
+            "through ordinary positioning."
         ),
         "reservation_status": (
             f"spends the {lead_name} plus {ace_name} {arc} pairing here; checked against campaign species, "
@@ -370,9 +368,9 @@ def evolution_level_requirements() -> dict[str, int]:
 
 EVOLUTION_LEVEL_REQUIREMENTS = evolution_level_requirements()
 
-SHOWDOWN_DATA = json.loads((ROOT / "docs" / "showdown_champions_learnsets.json").read_text())
+SHOWDOWN_DATA = json.loads((ROOT / "data/emerald_champions/showdown_champions_learnsets.json").read_text())
 SHOWDOWN_LEARNSETS = {species: set(moves) for species, moves in SHOWDOWN_DATA["learnsets"].items()}
-MOVE_ACCESS_REVIEW = json.loads((ROOT / "docs" / "emerald_champions_move_access_review.json").read_text())
+MOVE_ACCESS_REVIEW = json.loads((ROOT / "data/emerald_champions/emerald_champions_move_access_review.json").read_text())
 REVIEWED_MOVE_EXTENSIONS: dict[str, set[str]] = {}
 for _assignment in MOVE_ACCESS_REVIEW["assignments"]:
     if _assignment["action"] == "retain_inclement_custom_extension":
@@ -460,6 +458,10 @@ def species_types() -> dict[str, tuple[str, ...]]:
         "SPECIES_SILVALLY": ("TYPE_NORMAL",),
         "SPECIES_GARDEVOIR": ("TYPE_PSYCHIC", "TYPE_FAIRY"),
         "SPECIES_MINIOR": ("TYPE_ROCK", "TYPE_FLYING"),
+        "SPECIES_WHIMSICOTT": ("TYPE_GRASS", "TYPE_FAIRY"),
+        "SPECIES_ROTOM": ("TYPE_ELECTRIC", "TYPE_GHOST"),
+        "SPECIES_MAGNETON": ("TYPE_ELECTRIC", "TYPE_STEEL"),
+        "SPECIES_TOGEKISS": ("TYPE_FAIRY", "TYPE_FLYING"),
     })
     return result
 
@@ -645,8 +647,6 @@ def audit(path: Path) -> tuple[list[str], list[str]]:
     all_items: list[str] = []
     fingerprint_encounters: dict[tuple, set[int]] = {}
     formats = Counter()
-    difficulties: list[float] = []
-    ordinary_difficulties: list[float] = []
     team_sizes: Counter[int] = Counter()
     encounter_species_sets: list[set[str]] = []
     primary_strategies: list[str] = []
@@ -672,8 +672,8 @@ def audit(path: Path) -> tuple[list[str], list[str]]:
 
     required_fields = (
         "physical_group_id", "proposed_encounter_id", "campaign_order", "chapter",
-        "strict_cap", "location", "requirement", "status", "quality_target",
-        "difficulty_target", "difficulty_observed", "fatigue_role", "primary_question",
+        "strict_cap", "location", "requirement", "status",
+        "primary_question",
         "theme_and_tempo", "intentional_weakness", "first_loss_lesson", "strongest_part",
         "weakest_link", "competitive_references", "dialogue_status", "reservation_status",
         "trainer_ids",
@@ -695,14 +695,6 @@ def audit(path: Path) -> tuple[list[str], list[str]]:
         cap = line_value(block, "strict_cap")
         if not cap.isdigit() or not 1 <= int(cap) <= 100:
             errors.append(f"encounter {encounter_index}: invalid strict cap {cap!r}")
-        try:
-            difficulty = float(line_value(block, "difficulty_target"))
-        except ValueError:
-            errors.append(f"encounter {encounter_index}: invalid difficulty")
-            difficulty = 0.0
-        difficulties.append(difficulty)
-        if any(token in line_value(block, "trainer_ids") for token in MARQUEE_TOKENS) and difficulty != 10.0:
-            errors.append(f"encounter {encounter_index}: marquee boss difficulty must be 10.0, found {difficulty:.1f}")
         trainer_line = set(line_value(block, "trainer_ids").split("; "))
         location = line_value(block, "location")
         marks = list(BRANCH_RE.finditer(block))
@@ -913,7 +905,7 @@ def audit(path: Path) -> tuple[list[str], list[str]]:
                 )
             else:
                 fmt, dossier_mons = dossier_branches[0]
-                expected_fields = normalized_dossier_fields(location, fmt, dossier_mons, difficulty)
+                expected_fields = normalized_dossier_fields(location, fmt, dossier_mons)
                 mismatched_fields = [
                     field for field, expected in expected_fields.items()
                     if line_value(block, field) != expected
@@ -953,8 +945,6 @@ def audit(path: Path) -> tuple[list[str], list[str]]:
                     f"encounter {encounter_index}: {prose_field} names absent effective levels {stale_levels}; "
                     f"branch levels are {sorted(effective_levels)}"
                 )
-        if not any(token in line_value(block, "trainer_ids") for token in MARQUEE_TOKENS + MINIBOSS_TOKENS):
-            ordinary_difficulties.append(difficulty)
 
     if len(all_trainers) != len(set(all_trainers)):
         duplicates = sorted(trainer for trainer, count in Counter(all_trainers).items() if count > 1)
@@ -1026,17 +1016,6 @@ def audit(path: Path) -> tuple[list[str], list[str]]:
             + ", ".join(campaign_bag_users)
         )
 
-    ordinary_bands = Counter(min(9, int(value)) for value in ordinary_difficulties)
-    ordinary_total = len(ordinary_difficulties)
-    low_share = sum(6.0 <= value < 7.0 for value in ordinary_difficulties) / ordinary_total * 100
-    if not 20 <= low_share <= 40:
-        errors.append(f"ordinary 6.x share {low_share:.1f}% is outside fatigue-safe 20-40%")
-    high_share = sum(value >= 9.0 for value in ordinary_difficulties) / ordinary_total * 100
-    if high_share > 12:
-        errors.append(f"ordinary 9.x share {high_share:.1f}% exceeds 12%")
-    if any(value < 6.0 or value > 9.5 for value in ordinary_difficulties):
-        errors.append("ordinary encounter difficulty falls outside 6.0-9.5")
-
     run_start = 0
     while run_start < len(primary_strategies):
         run_end = run_start + 1
@@ -1058,8 +1037,6 @@ def audit(path: Path) -> tuple[list[str], list[str]]:
     usage = Counter(all_species)
     notes.extend([
         f"encounters={len(groups)} branches={branches} formats={dict(formats)} doubles={doubles_pct:.2f}%",
-        f"difficulty mean={statistics.mean(difficulties):.2f} median={statistics.median(difficulties):.1f}",
-        f"ordinary bands={dict(sorted(ordinary_bands.items()))} 6.x={low_share:.1f}% 9.x={high_share:.1f}%",
         f"team sizes={dict(sorted(team_sizes.items()))}",
         f"unique species={len(usage)} top usage={usage.most_common(15)}",
         f"Mega showcases={len(MEGA_STONES - set(missing_megas))}/{len(MEGA_STONES)} legendary showcases={len(SIGN_SPECIES - set(missing_signs))}/{len(SIGN_SPECIES)}",

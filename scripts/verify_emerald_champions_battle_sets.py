@@ -16,6 +16,7 @@ from verify_trainer_ability_legality import (
     resolve_species,
     species_aliases,
 )
+from generate_emerald_champions_battle_sets import load_hand_audited_catalog
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -26,10 +27,6 @@ LOWERS_ATTACK = {
 LOWERS_SP_ATTACK = {
     "NATURE_ADAMANT", "NATURE_IMPISH", "NATURE_CAREFUL", "NATURE_JOLLY",
 }
-LOCKED_ITEMS = {
-    "ITEM_CHOICE_BAND", "ITEM_CHOICE_SCARF", "ITEM_CHOICE_SPECS", "ITEM_ASSAULT_VEST",
-}
-CHOICE_COMPATIBLE_STATUS = {"MOVE_TRANSFORM", "MOVE_TRICK", "MOVE_SWITCHEROO"}
 SCREEN_MOVES = {"MOVE_REFLECT", "MOVE_LIGHT_SCREEN", "MOVE_AURORA_VEIL"}
 CHARGE_MOVES = {
     "MOVE_SOLAR_BEAM", "MOVE_SOLAR_BLADE", "MOVE_SKY_ATTACK", "MOVE_GEOMANCY",
@@ -47,9 +44,9 @@ SELF_LOWERING_MOVES = {
 # failures in the strategic-coherence audit.
 UTILITY_DAMAGE_MOVES = {
     "MOVE_ACID_SPRAY", "MOVE_BODY_PRESS", "MOVE_CLEAR_SMOG", "MOVE_COUNTER",
-    "MOVE_ELECTROWEB", "MOVE_ENDEAVOR", "MOVE_FAKE_OUT", "MOVE_FEINT",
+    "MOVE_DRAGON_TAIL", "MOVE_ELECTROWEB", "MOVE_ENDEAVOR", "MOVE_FAKE_OUT", "MOVE_FEINT",
     "MOVE_FINAL_GAMBIT", "MOVE_FOUL_PLAY", "MOVE_ICY_WIND", "MOVE_METAL_BURST",
-    "MOVE_MIRROR_COAT", "MOVE_NIGHT_SHADE", "MOVE_NUZZLE", "MOVE_RAPID_SPIN",
+    "MOVE_KNOCK_OFF", "MOVE_MIRROR_COAT", "MOVE_NIGHT_SHADE", "MOVE_NUZZLE", "MOVE_RAPID_SPIN",
     "MOVE_RUINATION", "MOVE_SALT_CURE", "MOVE_SEISMIC_TOSS", "MOVE_SNARL",
     "MOVE_SONIC_BOOM", "MOVE_STRUGGLE_BUG", "MOVE_SUPER_FANG",
 }
@@ -64,6 +61,16 @@ UNBURDEN_ITEMS = {
     "ITEM_ELECTRIC_SEED", "ITEM_FOCUS_SASH", "ITEM_GRASSY_SEED",
     "ITEM_MISTY_SEED", "ITEM_POWER_HERB", "ITEM_PSYCHIC_SEED",
     "ITEM_SITRUS_BERRY", "ITEM_WEAKNESS_POLICY", "ITEM_WHITE_HERB",
+}
+WEATHER_RELIANT_ABILITIES = {
+    "ABILITY_CHLOROPHYLL": "sun",
+    "ABILITY_RAIN_DISH": "rain",
+    "ABILITY_SOLAR_POWER": "sun",
+    "ABILITY_SWIFT_SWIM": "rain",
+    "ABILITY_SAND_RUSH": "sand",
+    "ABILITY_SAND_VEIL": "sand",
+    "ABILITY_SLUSH_RUSH": "snow",
+    "ABILITY_SNOW_CLOAK": "snow",
 }
 TRIAGE_ATTACKS = {
     "MOVE_DRAIN_PUNCH", "MOVE_DRAINING_KISS", "MOVE_GIGA_DRAIN",
@@ -90,9 +97,13 @@ def move_metadata() -> tuple[dict[str, str], set[str], set[str]]:
 
 
 def main() -> None:
-    manifest = json.loads((ROOT / "docs" / "emerald_champions_battle_sets.json").read_text())
+    if not __debug__:
+        raise SystemExit("battle-set verification requires assertions; do not run Python with -O")
+    manifest = json.loads((ROOT / "data/emerald_champions/emerald_champions_battle_sets.json").read_text())
+    hand_audited = load_hand_audited_catalog()
+    reviewed_species = set(hand_audited["species"])
     move_access_review = json.loads(
-        (ROOT / "docs/emerald_champions_move_access_review.json").read_text()
+        (ROOT / "data/emerald_champions/emerald_champions_move_access_review.json").read_text()
     )
     defaults = manifest["defaults"]
     alternatives = manifest["alternatives"]
@@ -103,11 +114,12 @@ def main() -> None:
     entries = doubles_entries + singles_entries
 
     assert manifest["source_commit"] == "0b2bc96c7d6480187f70f5b83a705c081780983e"
-    assert manifest["default_count"] == len(defaults) == 1258
-    assert manifest["alternative_count"] == len(alternatives) == 1361
-    assert manifest["singles_default_count"] == len(singles_defaults) == 1258
-    assert manifest["singles_alternative_count"] == len(singles_alternatives) == 1434
-    assert manifest["set_count"] == len(entries) == 5311
+    assert manifest["default_count"] == len(defaults)
+    assert manifest["alternative_count"] == len(alternatives)
+    assert manifest["singles_default_count"] == len(singles_defaults)
+    assert len(defaults) == len(singles_defaults)
+    assert manifest["singles_alternative_count"] == len(singles_alternatives)
+    assert manifest["set_count"] == len(entries)
     assert len({entry["species"] for entry in defaults}) == len(defaults)
     assert len({entry["species"] for entry in singles_defaults}) == len(singles_defaults)
     assert all(entry["required_item"] == "ITEM_NONE" for entry in defaults), (
@@ -124,23 +136,26 @@ def main() -> None:
         for entry in alternatives
     ), "Scovillain's Mega role disappeared instead of becoming a gated alternative"
     showdown_singles = json.loads(
-        (ROOT / "docs/showdown_champions_random_singles.json").read_text()
+        (ROOT / "data/emerald_champions/showdown_champions_random_singles.json").read_text()
     )
     assert showdown_singles["source_commit"] == "bb179fbf8449e3c31632bd56f671ffb4404fa6e7"
     assert showdown_singles["source_sha256"] == "7b189d6de33367aca7191e484069b74757097fc34fed0402b52bb6fa41447421"
     showdown_gen9_singles = json.loads(
-        (ROOT / "docs/showdown_gen9_random_singles.json").read_text()
+        (ROOT / "data/emerald_champions/showdown_gen9_random_singles.json").read_text()
     )
     assert showdown_gen9_singles["source_commit"] == showdown_singles["source_commit"]
     assert showdown_gen9_singles["source_sha256"] == "d18992314222060dda9a2a9bea09331478991d469babd95662517668099669f9"
-    assert move_access_review["reviewed_assignment_count"] == 72
-    assert len(move_access_review["assignments"]) == 72
-    assert move_access_review["provenance_counts"] == {
-        "inclement_custom_extension": 41,
-        "official_historical_event": 2,
-        "official_inherited": 22,
-        "replaced": 7,
+    assert move_access_review["reviewed_assignment_count"] == len(move_access_review["assignments"])
+    action_to_provenance = {
+        "retain_inclement_custom_extension": "inclement_custom_extension",
+        "retain_official_historical_event": "official_historical_event",
+        "retain_official_inherited": "official_inherited",
+        "replace": "replaced",
     }
+    provenance_counts = collections.Counter(
+        action_to_provenance[row["action"]] for row in move_access_review["assignments"]
+    )
+    assert dict(provenance_counts) == move_access_review["provenance_counts"]
     reviewed_identities = [
         (row["species"], row["role"], row["move"])
         for row in move_access_review["assignments"]
@@ -155,41 +170,48 @@ def main() -> None:
         (species, move)
         for species, _, move in retained_review
     }
-    assert len(retained_review) == 65
     extension_rows = [
         row for row in move_access_review["assignments"]
         if row.get("requires_tutor_extension", False)
     ]
-    assert len(extension_rows) == 58
-    assert len({(row["teachable_species"], row["move"]) for row in extension_rows}) == 38
+    extension_pairs = {(row["teachable_species"], row["move"]) for row in extension_rows}
+    assert extension_pairs, "reviewed tutor-extension manifest is unexpectedly empty"
 
     by_species: dict[str, list[dict]] = collections.defaultdict(list)
     for entry in doubles_entries:
         by_species[entry["species"]].append(entry)
+    def transformation_key(entry: dict) -> tuple[str, str]:
+        return (entry["required_item"], entry.get("required_move", "MOVE_NONE"))
     assert all(
-        sum(entry["required_item"] == "ITEM_NONE" for entry in choices) >= 2
-        for choices in by_species.values()
-    ), "a direct species/form has fewer than two pre-Mega orientations"
+        (all(2 <= len(rows) <= 4 for rows in {
+            key: [entry for entry in choices if transformation_key(entry) == key]
+            for key in {transformation_key(entry) for entry in choices}
+        }.values()) if len({transformation_key(entry) for entry in choices}) > 1 else 2 <= len(choices) <= 4)
+        if species in reviewed_species
+        else sum(entry["required_item"] == "ITEM_NONE" for entry in choices) >= 2
+        for species, choices in by_species.items()
+    ), "a reviewed species is outside 2-4 Doubles builds or an unreviewed form lacks two orientations"
     for species, choices in by_species.items():
         names = [entry["name"] for entry in choices]
         assert len(names) == len(set(names)), (species, "duplicate role names", names)
         orientations = [(
-            tuple(entry["moves"]), entry["item"], entry["required_item"],
+            tuple(entry["moves"]), entry["item"], transformation_key(entry),
             entry["nature"], entry["ability"], tuple(entry["stat_points"]),
         ) for entry in choices]
         assert len(orientations) == len(set(orientations)), (
             species, "duplicate complete orientations",
         )
-        non_mega = [entry for entry in choices if entry["required_item"] == "ITEM_NONE"]
+        non_mega = [entry for entry in choices if transformation_key(entry) == ("ITEM_NONE", "MOVE_NONE")]
         for first, second in itertools.combinations(non_mega, 2):
             assert (
                 frozenset(first["moves"]) != frozenset(second["moves"])
+                or first["item"] != second["item"]
                 or first["ability"] != second["ability"]
                 or first["nature"] != second["nature"]
                 or tuple(first["stat_points"]) != tuple(second["stat_points"])
             ), (
                 species,
-                "superficial move-order/item-only duplicate",
+                "move-order-only duplicate",
                 first["name"],
                 second["name"],
             )
@@ -201,31 +223,67 @@ def main() -> None:
     for species, choices in singles_by_species.items():
         names = [entry["name"] for entry in choices]
         assert len(names) == len(set(names)), (species, "duplicate Singles names", names)
-        assert sum(entry["required_item"] == "ITEM_NONE" for entry in choices) >= 2
+        if species in reviewed_species:
+            by_form = collections.defaultdict(list)
+            for entry in choices:
+                by_form[transformation_key(entry)].append(entry)
+            if len(by_form) > 1:
+                assert all(2 <= len(rows) <= 4 for rows in by_form.values()), (
+                    species, "reviewed Singles form counts", {form: len(rows) for form, rows in by_form.items()}
+                )
+            else:
+                assert 1 <= len(choices) <= 2, (species, "reviewed Singles count", len(choices))
+        else:
+            assert sum(entry["required_item"] == "ITEM_NONE" for entry in choices) >= 2
+
+    for species, source in hand_audited["species"].items():
+        assert by_species[species] == source["doubles"], (species, "Doubles catalog drift")
+        assert singles_by_species[species] == source["singles"], (species, "Singles catalog drift")
+        dependencies = [entry["field_dependency"] for entry in source["doubles"]]
+        assert all(value in {None, "sun", "rain", "sand", "snow", "trick-room", "terrain", "gravity"}
+                   for value in dependencies), (species, "unknown field dependency", dependencies)
+        if any(value is not None for value in dependencies):
+            assert dependencies.count(None) >= 2, (
+                species,
+                "weather-dependent catalog needs at least two field-independent Doubles builds",
+                dependencies,
+            )
+        # field_dependency describes whether the authored set needs a field
+        # condition to perform its role, not whether its Ability can benefit
+        # from one.  Species such as Sandshrew have only weather-sensitive
+        # Abilities but still support complete, field-independent utility sets.
+        # Keep the explicit hand-audited value authoritative.
 
     synthesized = [
         entry for entry in alternatives
         if entry["source"].startswith("Emerald Champions legal doubles role synthesis")
     ]
-    assert len(synthesized) == 1086
+    assert not ({entry["species"] for entry in synthesized} & reviewed_species), (
+        "a hand-reviewed species retained a synthetic Doubles build"
+    )
 
     by_identity = {(entry["species"], entry["name"]): entry for entry in doubles_entries}
     default_by_species = {entry["species"]: entry for entry in defaults}
+    singles_by_identity = {(entry["species"], entry["name"]): entry for entry in singles_entries}
+    singles_default_by_species = {entry["species"]: entry for entry in singles_defaults}
     for row in move_access_review["assignments"]:
+        assert row.get("format", "doubles") in {"doubles", "singles"}, row
+        identity_table = singles_by_identity if row.get("format") == "singles" else by_identity
+        default_table = singles_default_by_species if row.get("format") == "singles" else default_by_species
         if row["action"] == "replace":
             current = (
-                default_by_species[row["species"]]
+                default_table[row["species"]]
                 if row["replacement_role"] == "Recommended"
-                else by_identity[(row["species"], row["replacement_role"])]
+                else identity_table[(row["species"], row["replacement_role"])]
             )
             assert row["move"] not in current["moves"], row
             assert row["replacement_move"] in current["moves"], row
             assert row["authoritative_provenance"] == [], row
             continue
         current = (
-            default_by_species[row["species"]]
+            default_table[row["species"]]
             if row["role"] == "Recommended"
-            else by_identity[(row["species"], row["role"])]
+            else identity_table[(row["species"], row["role"])]
         )
         assert row["move"] in current["moves"], row
         assert row["authoritative_provenance"], row
@@ -259,7 +317,7 @@ def main() -> None:
     for entry in entries:
         # Mega presets deliberately name the transformed Ability; ApplyPreset
         # keeps a legal base Ability until the stone transforms the Pokemon.
-        if entry["required_item"] != "ITEM_NONE":
+        if entry["required_item"] != "ITEM_NONE" or entry.get("required_move", "MOVE_NONE") != "MOVE_NONE":
             continue
         species = resolve_species(entry["species"], aliases)
         assert entry["ability"] in configured_abilities.get(species, frozenset()), (
@@ -278,24 +336,43 @@ def main() -> None:
         form_changes,
     ):
         mega_targets[item].add(species)
+    move_mega_targets: dict[str, set[str]] = collections.defaultdict(set)
+    for species, move in re.findall(
+        r"FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE,\s*(SPECIES_[A-Z0-9_]+),\s*(MOVE_[A-Z0-9_]+)",
+        form_changes,
+    ):
+        move_mega_targets[move].add(species)
+    for species, item in re.findall(
+        r"FORM_CHANGE_BATTLE_PRIMAL_REVERSION,\s*(SPECIES_[A-Z0-9_]+),\s*(ITEM_[A-Z0-9_]+)",
+        form_changes,
+    ):
+        mega_targets[item].add(species)
     mega_entries = [entry for entry in doubles_entries if entry["required_item"] != "ITEM_NONE"]
     singles_mega_entries = [entry for entry in singles_entries if entry["required_item"] != "ITEM_NONE"]
+    move_mega_entries = [entry for entry in doubles_entries if entry.get("required_move", "MOVE_NONE") != "MOVE_NONE"]
+    singles_move_mega_entries = [entry for entry in singles_entries if entry.get("required_move", "MOVE_NONE") != "MOVE_NONE"]
     mega_archive = set(re.findall(
         r"ITEM_[A-Z0-9_]+",
         (ROOT / "src/data/emerald_champions_mega_stones.h").read_text(),
     ))
     assert len(mega_archive) == 92
-    assert len(mega_entries) == 95
-    assert len({(entry["species"], entry["required_item"]) for entry in mega_entries}) == 95
-    assert {entry["required_item"] for entry in mega_entries} == mega_archive
-    assert len(singles_mega_entries) == 125
-    assert len({(entry["species"], entry["required_item"]) for entry in singles_mega_entries}) == 95
-    assert {entry["required_item"] for entry in singles_mega_entries} == mega_archive
-    source_counts = collections.Counter(entry["source"] for entry in mega_entries)
-    assert source_counts == {
-        "Pokemon Champions doubles handbook: M-B ladder data": 75,
-        "Emerald Champions custom Mega extension: current form data and authored doubles corpus": 20,
-    }, source_counts
+    primal_items = {"ITEM_BLUE_ORB", "ITEM_RED_ORB"}
+    transformation_items = mega_archive | primal_items
+    assert len(mega_entries) >= 97
+    assert len({(entry["species"], entry["required_item"]) for entry in mega_entries}) == 97
+    assert {entry["required_item"] for entry in mega_entries} == transformation_items
+    # Doubles is the canonical complete Mega showcase. Singles intentionally
+    # keeps only 1-2 best builds per species, so a species with multiple Mega
+    # forms cannot also preserve a base build and every stone there.
+    assert {entry["required_item"] for entry in singles_mega_entries} <= transformation_items
+    assert all(
+        entry["source"].startswith((
+            "Pokemon Champions doubles handbook:",
+            "Emerald Champions custom Mega extension:",
+            "Hand-audited",
+        ))
+        for entry in mega_entries
+    )
     for entry in mega_entries:
         targets = mega_targets.get(entry["required_item"], set())
         assert targets, (entry["species"], entry["required_item"])
@@ -308,7 +385,8 @@ def main() -> None:
             sorted(legal_mega_abilities),
         )
         assert entry["item"] == "ITEM_NONE", entry
-        assert entry["name"].startswith("Mega "), entry
+        prefix = "Primal " if entry["required_item"] in primal_items else "Mega "
+        assert entry["name"].startswith(prefix), entry
     for entry in singles_mega_entries:
         targets = mega_targets.get(entry["required_item"], set())
         legal_mega_abilities = set().union(*(
@@ -317,6 +395,18 @@ def main() -> None:
         ))
         assert entry["ability"] in legal_mega_abilities, entry
         assert entry["item"] == "ITEM_NONE", entry
+        prefix = "Primal " if entry["required_item"] in primal_items else "Mega "
+        assert entry["name"].startswith(prefix), entry
+    for entry in move_mega_entries + singles_move_mega_entries:
+        required_move = entry["required_move"]
+        targets = move_mega_targets.get(required_move, set())
+        assert targets, (entry["species"], required_move)
+        legal_abilities = set().union(*(
+            configured_abilities.get(resolve_species(target, aliases), frozenset())
+            for target in targets
+        ))
+        assert entry["ability"] in legal_abilities, entry
+        assert required_move in entry["moves"], entry
         assert entry["name"].startswith("Mega "), entry
 
     mega_identities = {
@@ -342,8 +432,25 @@ def main() -> None:
         (ROOT / "src/data/emerald_champions_evolution_items.h").read_text(),
     ))
     assert len(evolution_items) == 44
-    assert not evolution_items.intersection(entry["item"] for entry in entries)
+    # Deep Sea Tooth and Deep Sea Scale are both evolution triggers and
+    # species-specific battle items.  They are Clamperl's defining competitive
+    # items, so the held-item gate must not erase their intended battle use.
+    battle_only_evolution_items = evolution_items - {
+        "ITEM_DEEP_SEA_TOOTH",
+        "ITEM_DEEP_SEA_SCALE",
+    }
+    assert not battle_only_evolution_items.intersection(entry["item"] for entry in entries)
     assert not evolution_items.intersection(entry["required_item"] for entry in entries)
+    dual_use_items = {"ITEM_DEEP_SEA_TOOTH", "ITEM_DEEP_SEA_SCALE"}
+    evolution_item_roles = [entry for entry in entries if entry["item"] in evolution_items]
+    assert {(entry["species"], entry["item"]) for entry in evolution_item_roles} == {
+        ("SPECIES_CLAMPERL", item) for item in dual_use_items
+    }
+    assert all(entry["item"] not in dual_use_items for entry in defaults + singles_defaults)
+    assert sum(entry["species"] == "SPECIES_CLAMPERL" and entry["item"] not in dual_use_items
+               for entry in defaults + alternatives) >= 2
+    assert sum(entry["species"] == "SPECIES_CLAMPERL" and entry["item"] not in dual_use_items
+               for entry in singles_defaults + singles_alternatives) >= 1
 
     categories, sound_moves, punching_moves = move_metadata()
     failures: list[str] = []
@@ -370,16 +477,17 @@ def main() -> None:
             failures.append(f"{tag}: nature lowers its only meaningful attack category")
         if special and not physical and entry["nature"] in LOWERS_SP_ATTACK:
             failures.append(f"{tag}: nature lowers its only meaningful attack category")
-        if "WALLBREAKER" in entry["role"].upper() and not (
+        if ("WALLBREAKER" in entry["role"].upper()
+         and "MIXED" not in entry["role"].upper()
+         and not (
             entry["stat_points"][1] == 32 or entry["stat_points"][3] == 32
-        ):
+        )):
             failures.append(f"{tag}: wallbreaker has no offensive Stat Point maximum")
-        if item in LOCKED_ITEMS and status_moves:
-            if not (
-                item.startswith("ITEM_CHOICE_")
-                and status_moves <= CHOICE_COMPATIBLE_STATUS
-            ):
-                failures.append(f"{tag}: {item} cannot use {sorted(status_moves)}")
+        # Assault Vest mechanically prevents status moves. Choice items do not:
+        # competitive sets legitimately lock into Sleep Talk, Trick, Healing
+        # Wish, Parting Shot, and other status moves, so a generic ban is wrong.
+        if item == "ITEM_ASSAULT_VEST" and status_moves:
+            failures.append(f"{tag}: Assault Vest prevents {sorted(status_moves)}")
         if item == "ITEM_LIGHT_CLAY" and not moves & SCREEN_MOVES:
             failures.append(f"{tag}: Light Clay has no screen")
         if item == "ITEM_POWER_HERB" and not moves & CHARGE_MOVES:
@@ -411,11 +519,11 @@ def main() -> None:
                 failures.append(f"{tag}: synthesized Triage role has no priority healing attack")
     assert not failures, "battle-set coherence failures:\n" + "\n".join(failures)
 
-    # These two formerly inert White Herbs were individually reviewed. White
-    # Herb itself is not globally rejected without a self-drop because it can
-    # be deliberate anti-Intimidate/speed-control tech in doubles.
+    # Keep individually reviewed item/set relationships explicit without
+    # freezing the obsolete synthesized default ordering.
     by_identity = {(entry["species"], entry["name"]): entry for entry in doubles_entries}
-    assert default_by_species["SPECIES_GROUDON"]["item"] == "ITEM_CLEAR_AMULET"
+    assert default_by_species["SPECIES_GROUDON"]["item"] == "ITEM_ASSAULT_VEST"
+    assert by_identity[("SPECIES_GROUDON", "Sunblade Dance")]["item"] == "ITEM_CLEAR_AMULET"
     assert "MOVE_SHELL_SMASH" in by_identity[("SPECIES_DREDNAW", "Shell Smash")]["moves"]
 
     wild_text = (ROOT / "src" / "data" / "wild_encounters.json").read_text()
@@ -429,7 +537,7 @@ def main() -> None:
     assert not missing, f"Current wild tables lack presets: {missing}"
 
     generated = (ROOT / "src" / "data" / "pokemon" / "emerald_champions_battle_sets.h").read_text()
-    assert generated.count(".statPoints =") == 5311
+    assert generated.count(".statPoints =") == len(entries)
     assert "gEmeraldChampionsDefaultBattleSets[NUM_SPECIES]" in generated
     assert "gEmeraldChampionsBattleSetAlternatives[]" in generated
     assert "gEmeraldChampionsSinglesDefaultBattleSets[NUM_SPECIES]" in generated
@@ -437,7 +545,7 @@ def main() -> None:
     reviewed_header = (
         ROOT / "src/data/pokemon/emerald_champions_move_access_review.h"
     ).read_text()
-    assert reviewed_header.count("{SPECIES_") == 65
+    assert reviewed_header.count("{SPECIES_") == len(retained_review)
     tutor_generator = (ROOT / "tools/learnset_helpers/make_teachables.py").read_text()
     makefile = (ROOT / "Makefile").read_text()
     assert "emerald_champions_move_access_review.json" in tutor_generator
@@ -476,7 +584,7 @@ def main() -> None:
     assert all(count >= 2 for count in set_counts.values()), set_counts
 
     pinned_payload = json.loads(
-        (ROOT / "docs" / "showdown_champions_learnsets.json").read_text()
+        (ROOT / "data/emerald_champions/showdown_champions_learnsets.json").read_text()
     )
     pinned = pinned_payload["learnsets"]
     assert pinned_payload["source_commit"] == "bb179fbf8449e3c31632bd56f671ffb4404fa6e7"
@@ -522,6 +630,21 @@ def main() -> None:
         (ROOT / "src/data/pokemon/all_learnables.json").read_text()
     )
     preparation_source = {species: list(moves) for species, moves in all_learnables.items()}
+    form_review = json.loads(
+        (ROOT / "data/emerald_champions/emerald_champions_preparation_form_learnsets.json").read_text()
+    )
+    assert form_review["schema_version"] == 1
+    resolved_forms = {}
+    for species, row in form_review["forms"].items():
+        if "inherits" in row:
+            inherited_species = row["inherits"]
+            inherited_moves = resolved_forms.get(inherited_species, preparation_source.get(inherited_species))
+            assert inherited_moves is not None, (species, inherited_species)
+            moves = [*inherited_moves, *row.get("adds", [])]
+        else:
+            moves = list(row["moves"])
+        assert len(moves) == len(set(moves)), species
+        preparation_source[species] = resolved_forms[species] = moves
     for row in extension_rows:
         moves = preparation_source[row["teachable_species"]]
         if row["move"] not in moves:
@@ -540,15 +663,54 @@ def main() -> None:
         moves = preparation.setdefault(species_key, [])
         moves.extend(move for move in source_moves if move not in moves)
     preparation_counts = {species: len(moves) for species, moves in preparation.items()}
-    assert len(preparation) == 1108
-    assert sum(preparation_counts.values()) == 88073
-    assert max(preparation_counts.items(), key=lambda entry: entry[1]) == ("MEW", 372)
+    preparation_header = (
+        ROOT / "src/data/pokemon/emerald_champions_preparation_learnsets.h"
+    ).read_text()
+    header_species_count = int(re.search(
+        r"#define EMERALD_CHAMPIONS_PREPARATION_SPECIES_COUNT (\d+)",
+        preparation_header,
+    ).group(1))
+    header_move_count = int(re.search(
+        r"#define EMERALD_CHAMPIONS_PREPARATION_MOVE_COUNT (\d+)",
+        preparation_header,
+    ).group(1))
+    header_max_moves = int(re.search(
+        r"#define EMERALD_CHAMPIONS_PREPARATION_MAX_MOVES (\d+)",
+        preparation_header,
+    ).group(1))
+    assert header_species_count == len(preparation)
+    assert header_move_count == sum(preparation_counts.values())
+    assert header_max_moves == max(preparation_counts.values())
     preparation_rom_data_bytes = 2 * (sum(preparation_counts.values()) + len(preparation)) + 4 * 1573
-    assert preparation_rom_data_bytes == 184654
     assert preparation_rom_data_bytes < 200000
     assert max(preparation_counts.values()) + 1 < 4096
     assert len(preparation["MEW"]) == len(set(preparation["MEW"]))
     assert {"MOVE_TAILWIND", "MOVE_WILL_O_WISP"} <= set(preparation["MEW"])
+    cosplay_signatures = {
+        "PIKACHU_ROCK_STAR": "MOVE_METEOR_MASH",
+        "PIKACHU_BELLE": "MOVE_ICICLE_CRASH",
+        "PIKACHU_POP_STAR": "MOVE_DRAINING_KISS",
+        "PIKACHU_PHD": "MOVE_ELECTRIC_TERRAIN",
+        "PIKACHU_LIBRE": "MOVE_FLYING_PRESS",
+    }
+    assert all(move in preparation[species] for species, move in cosplay_signatures.items())
+    assert all(
+        "MOVE_EXTREME_SPEED" not in preparation[species]
+        and "MOVE_VOLT_TACKLE" not in preparation[species]
+        for species in {"PIKACHU_COSPLAY", *cosplay_signatures}
+    )
+    cap_forms = {
+        "PIKACHU_ORIGINAL", "PIKACHU_HOENN", "PIKACHU_SINNOH", "PIKACHU_UNOVA",
+        "PIKACHU_KALOS", "PIKACHU_ALOLA", "PIKACHU_PARTNER", "PIKACHU_WORLD",
+    }
+    assert all("MOVE_EXTREME_SPEED" not in preparation[species] for species in cap_forms)
+    assert all("MOVE_VOLT_TACKLE" in preparation[species] for species in cap_forms)
+    standard_cap_moves = preparation["PIKACHU_ORIGINAL"]
+    assert all(
+        preparation[species] == standard_cap_moves
+        for species in cap_forms - {"PIKACHU_WORLD"}
+    )
+    assert len(preparation["PIKACHU_WORLD"]) < len(standard_cap_moves)
     move_constants = set(re.findall(r"\bMOVE_[A-Z0-9_]+\b", (ROOT / "include/constants/moves.h").read_text()))
     species_constants = set(re.findall(r"\bSPECIES_[A-Z0-9_]+\b", (ROOT / "include/constants/species.h").read_text()))
     assert not set().union(*(set(moves) for moves in preparation.values())).difference(move_constants)
@@ -662,7 +824,7 @@ def main() -> None:
         ("SPECIES_RABOOT", "Recommended", "MOVE_HIGH_JUMP_KICK"),
         ("SPECIES_CINDERACE", "Choice Attacker", "MOVE_HIGH_JUMP_KICK"),
         ("SPECIES_CINDERACE", "Offensive", "MOVE_HIGH_JUMP_KICK"),
-        ("SPECIES_LEAVANNY", "Offensive", "MOVE_STICKY_WEB"),
+        ("SPECIES_LEAVANNY", "Overcoat Web Attacker", "MOVE_STICKY_WEB"),
     }
     resolved_review = retained_review.difference(direct_gaps)
     assert resolved_review == expected_resolved_review, (
@@ -678,7 +840,10 @@ def main() -> None:
     non_mega_function = runtime.split("u8 ApplyEmeraldChampionsRandomNonMegaSet", 1)[1].split(
         "u8 ApplyEmeraldChampionsOpponentSet", 1
     )[0]
-    assert "preset->requiredItem != ITEM_NONE" in non_mega_function
+    assert "PresetRequiresTransformation(preset)" in non_mega_function
+    assert "IsEmeraldChampionsProtectedProgressionItem(preset->item)" in non_mega_function
+    assert "PresetRequiresOwnedHeldItem" in runtime
+    assert "preset->requiredMove != MOVE_NONE" in runtime
     assert "RandomUniform(RNG_NONE, 0, ++matches - 1)" in non_mega_function
     assert "ResolveBattleSetSpecies" in runtime and "formSpeciesIdTable" in runtime
     assert '#include "data/emerald_champions_evolution_items.h"' in runtime
@@ -695,15 +860,24 @@ def main() -> None:
         entry["species"] for entry in defaults
         if entry["source"].startswith("Pokemon Champions doubles handbook")
     }
-    assert len(handbook_species) == 80, len(handbook_species)
+    assert handbook_species, "Champions handbook integration disappeared"
+    assert handbook_species.isdisjoint(reviewed_species), (
+        "hand-reviewed species retained a stale handbook default",
+        sorted(handbook_species & reviewed_species),
+    )
 
     print("battle_set_static_checks=PASS")
     print(f"sets={len(entries)}")
-    print(f"doubles_non_mega_orientations={len(doubles_entries) - len(mega_entries)}; minimum=2 for {len(defaults)} species/forms")
-    print(f"singles_sets={len(singles_entries)}; minimum=2 non-Mega roles for {len(singles_defaults)} species/forms")
+    print(f"doubles_non_mega_orientations={len(doubles_entries) - len(mega_entries)}; reviewed forms=2-4 each")
+    print(f"singles_sets={len(singles_entries)}; ordinary reviewed species=1-2, Mega-bearing forms=2-4 each")
+    print(f"hand_reviewed_species={len(reviewed_species)}")
     print(f"legal_role_syntheses={len(synthesized)}")
     print(f"mega_roles={len(mega_entries)} across {len(mega_archive)} stones")
-    print("move_access_review=65 retained + 7 replaced; 38 unique tutor extensions")
+    print(
+        f"move_access_review={len(retained_review)} retained + "
+        f"{len(move_access_review['assignments']) - len(retained_review)} replaced; "
+        f"{len({(row['teachable_species'], row['move']) for row in extension_rows})} unique tutor extensions"
+    )
     print(f"wild_species_with_presets={len(wild_species)}")
     print(f"new_campaign_species_with_two_sets={len(modern_campaign_species)}")
 

@@ -218,7 +218,7 @@ DewfordTown_Gym_EventScript_LauraBrightenRoom::
 	end
 
 DewfordTown_Gym_EventScript_Brenden::
-	trainerbattle_single TRAINER_BRENDEN, DewfordTown_Gym_Text_BrendenIntro, DewfordTown_Gym_Text_BrendenDefeat, DewfordTown_Gym_EventScript_BrendenBrightenRoom
+	trainerbattle_double TRAINER_BRENDEN, DewfordTown_Gym_Text_BrendenIntro, DewfordTown_Gym_Text_BrendenDefeat, EmeraldChampions_Text_NeedTwoPokemon, DewfordTown_Gym_EventScript_BrendenBrightenRoom
 	msgbox DewfordTown_Gym_Text_BrendenPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -228,7 +228,7 @@ DewfordTown_Gym_EventScript_BrendenBrightenRoom::
 	end
 
 DewfordTown_Gym_EventScript_Cristian::
-	trainerbattle_single TRAINER_CRISTIAN, DewfordTown_Gym_Text_CristianIntro, DewfordTown_Gym_Text_CristianDefeat, DewfordTown_Gym_EventScript_CristianBrightenRoom
+	trainerbattle_double TRAINER_CRISTIAN, DewfordTown_Gym_Text_CristianIntro, DewfordTown_Gym_Text_CristianDefeat, EmeraldChampions_Text_NeedTwoPokemon, DewfordTown_Gym_EventScript_CristianBrightenRoom
 	msgbox DewfordTown_Gym_Text_CristianPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -303,8 +303,9 @@ DewfordTown_Gym_Text_GymGuidePostVictory:
 	.string "Your future is bright, too!$"
 
 DewfordTown_Gym_Text_TakaoIntro:
-	.string "FOCUS ENERGY makes every CROSS CHOP\n"
-	.string "dangerous. Stop the stance or race it!$"
+	.string "GRAPPLOCT locks you down. WOBBUFFET\n"
+	.string "makes sure you cannot leave at all.\p"
+	.string "Win here, or do not win!$"
 
 DewfordTown_Gym_Text_TakaoDefeat:
 	.string "You broke my critical window!$"
@@ -314,9 +315,9 @@ DewfordTown_Gym_Text_TakaoPostBattle:
 	.string "rare Dragon waiting behind my fighters.$"
 
 DewfordTown_Gym_Text_JocelynIntro:
-	.string "GUTS turns pain into force, PARTING SHOT\n"
-	.string "steals tempo, and MAGIC BOUNCE reflects\l"
-	.string "careless status. Choose your opening!$"
+	.string "TAILWIND goes up before you move,\n"
+	.string "and everything behind it runs you down.\p"
+	.string "Four turns. Survive them!$"
 
 DewfordTown_Gym_Text_JocelynDefeat:
 	.string "You never fed the pressure I needed!$"
@@ -326,8 +327,9 @@ DewfordTown_Gym_Text_JocelynPostBattle:
 	.string "handing NATU your best status move.$"
 
 DewfordTown_Gym_Text_LauraIntro:
-	.string "FAKE OUT buys one turn for GUTS. Then\n"
-	.string "STAKEOUT punishes a frightened switch!$"
+	.string "FAKE OUT steals the first turn, and\n"
+	.string "GUTS makes my own burn a weapon.\p"
+	.string "Can you afford to blink?$"
 
 DewfordTown_Gym_Text_LauraDefeat:
 	.string "You denied both of my free turns!$"
@@ -337,8 +339,9 @@ DewfordTown_Gym_Text_LauraPostBattle:
 	.string "and never switch on instinct alone.$"
 
 DewfordTown_Gym_Text_LilithIntro:
-	.string "PURE POWER and INTIMIDATE open for me.\n"
-	.string "FLUFFY protects the reserve.$"
+	.string "INTIMIDATE softens you, then SCRAGGY\n"
+	.string "dances into the space it made.\p"
+	.string "Weaken me and I only grow!$"
 
 DewfordTown_Gym_Text_LilithDefeat:
 	.string "You read every discipline correctly!$"
@@ -348,8 +351,9 @@ DewfordTown_Gym_Text_LilithPostBattle:
 	.string "not one trick repeated twice.$"
 
 DewfordTown_Gym_Text_BrendenIntro:
-	.string "SAWK brings direct force, but TIMBURR\n"
-	.string "and CLOBBOPUS hold the other axis.$"
+	.string "SAWK breaks through what should stop\n"
+	.string "it. MACHOP simply never misses.\p"
+	.string "There is no safe angle here!$"
 
 DewfordTown_Gym_Text_BrendenDefeat:
 	.string "You changed answers with the damage!$"
@@ -359,8 +363,9 @@ DewfordTown_Gym_Text_BrendenPostBattle:
 	.string "answer to an entire FIGHTING school.$"
 
 DewfordTown_Gym_Text_CristianIntro:
-	.string "STANCE, precision, committed power--\n"
-	.string "three disciplines, three answers!$"
+	.string "FALINKS strikes its own partner, and\n"
+	.string "JUSTIFIED turns the blow into power.\p"
+	.string "Hurt us and we sharpen!$"
 
 DewfordTown_Gym_Text_CristianDefeat:
 	.string "You changed form without losing focus!$"

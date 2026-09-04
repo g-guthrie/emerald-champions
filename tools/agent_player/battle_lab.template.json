@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "benchmark_mode": "battle_lab",
+  "battle_id": "replace-with-stable-trainer-id",
+  "rom": "work/campaign-playthrough/replace/artifacts/rom-SHA.gba",
+  "elf": "work/campaign-playthrough/replace/artifacts/elf-SHA.elf",
+  "start_checkpoint": {
+    "state": "work/campaign-playthrough/replace/checkpoints/pre-battle.ss1",
+    "metadata": "work/campaign-playthrough/replace/checkpoints/pre-battle.ss1.json"
+  },
+  "arsenal_manifest": "work/agent-player/arsenals/replace-battle.json",
+  "run_dir": "work/agent-player/replace-run-id",
+  "observation_mode": "vision_only",
+  "player_context": "tools/agent_player/player_context.md",
+  "model": {
+    "provider": "manual",
+    "name": "replace-with-model"
+  },
+  "rtc_epoch": 946684800,
+  "seed": 0,
+  "rng_delay_frames": 0,
+  "boot_frames": 1,
+  "step": {
+    "press_frames": 1,
+    "release_frames": 15
+  },
+  "budgets": {
+    "max_actions": 10000,
+    "max_frames": 1000000,
+    "timeout_seconds": 14400,
+    "step_timeout_seconds": 30,
+    "max_deaths": 25
+  },
+  "init_writes": [
+    {
+      "symbol": "gEcHeadlessFixtureActiveScenario",
+      "width": 4,
+      "value": 0
+    }
+  ],
+  "probes": [
+    {
+      "name": "battle_active",
+      "symbol": "gBattleTypeFlags",
+      "width": 4,
+      "role": "battle_active"
+    }
+  ]
+}

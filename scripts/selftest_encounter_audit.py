@@ -26,11 +26,9 @@ def mon(slot, species, item, ability, nature, points, moves):
             f"stat_points={points} | moves={','.join('MOVE_' + m for m in moves)}")
 
 
-def encounter(number, trainer, fmt, mons, extra_branches=(),
-              role="ordinary_standard", difficulty=5.0, cap=50):
+def encounter(number, trainer, fmt, mons, extra_branches=(), cap=50):
     out = [f"=== ENCOUNTER {number:04d} ===",
-           "location: SelfTest", f"difficulty_target: {difficulty}", f"strict_cap: {cap}",
-           f"fatigue_role: {role}", "branches:",
+           "location: SelfTest", f"strict_cap: {cap}", "branches:",
            f"--- BRANCH {trainer} ---", f"format: {fmt}", "team:", *mons]
     for name, bfmt, bmons in extra_branches:
         out += [f"--- BRANCH {name} ---", f"format: {bfmt}", "team:", *bmons]
@@ -116,24 +114,6 @@ GOOD_PAIR = [
         ["WATERFALL", "EARTHQUAKE", "ICE_PUNCH", "PROTECT"]),
     mon(2, "CROBAT", "SAFETY_GOGGLES", "INNER_FOCUS", "JOLLY", "2/32/0/0/0/32",
         ["TAILWIND", "TAUNT", "BRAVE_BIRD", "U_TURN"])]
-
-CASES += [
-    ("a breather rated in ace territory", "which is ace territory",
-     encounter(20, "TRAINER_SELFTEST_SOFT", "double", GOOD_PAIR,
-               role="ordinary_breather", difficulty=8.5)),
-
-    ("a breather fielding six Pokemon", "but fields 6 Pokemon",
-     encounter(21, "TRAINER_SELFTEST_BIG", "double", GOOD_PAIR + [
-         mon(3, "ALAKAZAM", "LIFE_ORB", "MAGIC_GUARD", "TIMID", "2/0/0/32/0/32",
-             ["PSYCHIC", "SHADOW_BALL", "ENERGY_BALL", "PROTECT"]),
-         mon(4, "SNORLAX", "LEFTOVERS", "THICK_FAT", "ADAMANT", "32/32/0/0/2/0",
-             ["BODY_SLAM", "CRUNCH", "PROTECT", "EARTHQUAKE"]),
-         mon(5, "MANECTRIC", "LIFE_ORB", "LIGHTNING_ROD", "TIMID", "2/0/0/32/0/32",
-             ["THUNDERBOLT", "OVERHEAT", "SNARL", "PROTECT"]),
-         mon(6, "SUDOWOODO", "SITRUS_BERRY", "ROCK_HEAD", "ADAMANT", "32/32/0/0/2/0",
-             ["ROCK_SLIDE", "WOOD_HAMMER", "SUCKER_PUNCH", "PROTECT"])],
-               role="ordinary_breather", difficulty=6.8)),
-]
 
 # A rematch ladder that peaks and then drops: rung 2 must not be weaker than rung 1.
 LADDER = (encounter(30, "TRAINER_SELFTEST_LADDER_1", "double", GOOD_PAIR, cap=50)

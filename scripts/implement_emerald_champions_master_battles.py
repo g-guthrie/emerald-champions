@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Apply the campaign battle master to trainerproc source.
 
-Every campaign branch in ``docs/emerald_champions_master_battle_design.txt``
+Every campaign branch in ``data/emerald_champions/emerald_champions_master_battle_design.txt``
 is materialized exactly: species, held item, level (strict cap plus the
 authored offset), Ability, nature, Stat Points and moves.  Nothing here nudges
 levels or trims Stat Points; the authored numbers are the design.
@@ -21,7 +21,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-MASTER = ROOT / "docs" / "emerald_champions_master_battle_design.txt"
+MASTER = ROOT / "data/emerald_champions/emerald_champions_master_battle_design.txt"
 TRAINERS_PARTY = ROOT / "src" / "data" / "trainers.party"
 ENCOUNTER_RE = re.compile(r"(?m)^=== ENCOUNTER (\d{4}) ===$")
 TRAINER_BLOCK_RE = re.compile(r"(?m)^=== (TRAINER_[A-Z0-9_]+) ===$")
@@ -70,6 +70,7 @@ class Design:
     trainer: str
     format: str
     ai_profile: str
+    ai_extra: list[str]
     mons: list[Mon]
 
 
@@ -117,14 +118,19 @@ def read_designs(master: Path = MASTER) -> dict[str, Design]:
                 ))
             if trainer in designs:
                 raise ValueError(f"duplicate trainer design {trainer}")
-            designs[trainer] = Design(encounter_number, trainer, fmt, ai_profile, mons)
+            extra = line_value(branch, "ai_extra")
+            ai_extra = [trait.strip() for trait in extra.split(",") if trait.strip()] if extra else []
+            designs[trainer] = Design(encounter_number, trainer, fmt, ai_profile, ai_extra, mons)
     return designs
 
 
 def ai_flags(design: Design) -> str:
     flags = list(AI_PROFILES[design.ai_profile])
+    for trait in design.ai_extra:
+        if trait not in flags:
+            flags.append(trait)
     moves = {move for mon in design.mons for move in mon.moves}
-    if moves & SUICIDE_MOVES:
+    if moves & SUICIDE_MOVES and "Will Suicide" not in flags:
         flags.append("Will Suicide")
     return " / ".join(flags)
 

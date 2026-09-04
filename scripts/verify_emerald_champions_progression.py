@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Whole-campaign structural and progression contracts for Emerald Champions.
+"""Map/script structure and selected source contracts for Emerald Champions.
 
 This gate inventories every Hoenn map event and every assembled story-script
-reference.  It complements focused feature verifiers: those prove the design
-of a subsystem, while this file proves that the physical campaign can reach
-and invoke the subsystem without dangling maps, warps, labels, or state gates.
+reference. It checks dangling maps, warps, labels, call return types, and selected
+source patterns around progression. It does not solve state-dependent campaign
+reachability or prove that a subsystem is reachable or works at runtime.
 """
 
 from __future__ import annotations
@@ -542,7 +542,8 @@ def main() -> None:
     print(f"PASS: {event_count} physical NPC/trigger/sign events and {warp_count} warps resolve")
     print(f"PASS: {script_refs} control-flow/dialogue/movement references resolve across {script_lines} script lines")
     print(f"PASS: {specialvar_refs} value-returning special calls never read a void C function")
-    print("PASS: critical badge, Mega, League, legendary, and story-item progression contracts hold")
+    print("PASS: selected badge, Mega, League, legendary, and story-item source contracts hold")
+    print("Scope: static references and source patterns only; state-dependent campaign reachability is not verified")
 
 
 if __name__ == "__main__":

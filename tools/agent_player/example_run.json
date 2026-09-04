@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "rom": "pokeemerald-release.gba",
+  "elf": "pokeemerald-release.elf",
+  "run_dir": "work/agent-player/manual-smoke",
+  "observation_mode": "vision_only",
+  "benchmark_mode": "campaign_play",
+  "model": {
+    "provider": "manual",
+    "name": "manual-policy"
+  },
+  "player_context": "tools/agent_player/player_context.md",
+  "rtc_epoch": 946684800,
+  "seed": 0,
+  "boot_frames": 1200,
+  "step": {
+    "press_frames": 1,
+    "release_frames": 15
+  },
+  "budgets": {
+    "max_actions": 1000,
+    "max_frames": 100000,
+    "timeout_seconds": 3600,
+    "step_timeout_seconds": 30,
+    "max_deaths": 100
+  },
+  "probes": [
+    {
+      "name": "battle_active",
+      "symbol": "gBattleTypeFlags",
+      "width": 4,
+      "role": "battle_active",
+      "optional": true
+    }
+  ],
+  "init_writes": []
+}

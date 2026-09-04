@@ -1,8 +1,10 @@
-.macro def_special, ptr:req, requests_effects=0, waitstate=0
+.macro def_special, ptr:req, requests_effects=0, waitstate=0, unused=0
 .if ALLOCATE_SPECIAL_TABLE
 	.global SPECIAL_\ptr
 	.set SPECIAL_\ptr, __special__
-	.if \requests_effects == 0
+	.if \unused
+		.4byte 0
+	.elseif \requests_effects == 0
 		.4byte \ptr
 	.else
 		.4byte \ptr + ROM_SIZE
@@ -508,12 +510,13 @@ gSpecials::
 	def_special GetAbnormalWeatherMapNameAndType
 	def_special GetMartEmployeeObjectEventId
 	def_special OpenEmeraldChampionsBattleItemMart
-	def_special OpenEmeraldChampionsOffenseItemMart
-	def_special OpenEmeraldChampionsDefenseItemMart
-	def_special OpenEmeraldChampionsFieldItemMart
-	def_special OpenEmeraldChampionsTypeItemMart
-	def_special OpenEmeraldChampionsGemItemMart
-	def_special OpenEmeraldChampionsSpeciesItemMart
+	@ Retired category wrappers: preserve all subsequent special IDs.
+	def_special Unused_EmeraldChampionsOffenseItemMart, unused=1
+	def_special Unused_EmeraldChampionsDefenseItemMart, unused=1
+	def_special Unused_EmeraldChampionsFieldItemMart, unused=1
+	def_special Unused_EmeraldChampionsTypeItemMart, unused=1
+	def_special Unused_EmeraldChampionsGemItemMart, unused=1
+	def_special Unused_EmeraldChampionsSpeciesItemMart, unused=1
 	def_special OpenEmeraldChampionsMegaStoneArchive
 	def_special GetEmeraldChampionsStarterMegaStone
 	def_special OpenEmeraldChampionsEvolutionItemArchive

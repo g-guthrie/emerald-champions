@@ -18,7 +18,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-MANIFEST = ROOT / "docs/emerald_champions_stat_rebalances.json"
+MANIFEST = ROOT / "data/emerald_champions/emerald_champions_stat_rebalances.json"
 SPECIES_CONSTANTS = ROOT / "include/constants/species.h"
 FORM_TABLES = ROOT / "src/data/pokemon/form_species_tables.h"
 FIELDS = (

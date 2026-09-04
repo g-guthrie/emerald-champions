@@ -62,7 +62,7 @@ def verify_overworld_sprite(path: Path, context: str) -> tuple[int, int]:
 
 
 def main() -> None:
-    manifest = json.loads(read("docs/showdown_champions_random_doubles.json"))
+    manifest = json.loads(read("data/emerald_champions/showdown_champions_random_doubles.json"))
     generated = read("src/data/pokemon/showdown_champions_circuit.h")
     circuit = read("src/champions_circuit.c")
     circuit_lobby = read("data/maps/BattleFrontier_BattleTowerLobby/scripts.inc")
@@ -105,7 +105,7 @@ def main() -> None:
     require(len(manifest["policy"]["ability_overrides"]) == 9, "Circuit Ability adaptation policy drifted")
     require(generated.count(".partySpecies =") == 311, "generated Showdown variant table is incomplete")
     require(generated.count(".role =") == 444, "generated Showdown template table is incomplete")
-    require("Pokemon Showdown" in read("docs/THIRD_PARTY_NOTICES.md"), "Showdown MIT notice is missing")
+    require("Pokemon Showdown" in read("THIRD_PARTY_NOTICES.md"), "Showdown MIT notice is missing")
     require("gShowdownCircuitVariants" in circuit, "Circuit is not using Showdown's species pool")
     require("gShowdownCircuitTemplates" in circuit, "Circuit is not using Showdown's role templates")
     require("ChooseBaseDex" in circuit and "CandidateAllowed" in circuit, "live Showdown team composition is missing")
@@ -207,30 +207,38 @@ def main() -> None:
 
     legendary_runtime = read("src/legendary_signs.c")
     relic_contracts = {
-        "SPECIES_GROUDON": {"ITEM_RED_ORB"},
-        "SPECIES_KYOGRE": {"ITEM_BLUE_ORB"},
-        "SPECIES_ZACIAN": {"ITEM_RUSTED_SWORD"},
-        "SPECIES_ZAMAZENTA": {"ITEM_RUSTED_SHIELD"},
-        "SPECIES_OGERPON_TEAL": {
+        "SPECIES_GROUDON": ("ITEM_RED_ORB",),
+        "SPECIES_KYOGRE": ("ITEM_BLUE_ORB",),
+        "SPECIES_ZACIAN": ("ITEM_RUSTED_SWORD",),
+        "SPECIES_ZAMAZENTA": ("ITEM_RUSTED_SHIELD",),
+        "SPECIES_OGERPON_TEAL": (
             "ITEM_WELLSPRING_MASK", "ITEM_HEARTHFLAME_MASK", "ITEM_CORNERSTONE_MASK",
-        },
-        "SPECIES_ARCEUS": {
+        ),
+        "SPECIES_ARCEUS": (
             "ITEM_FLAME_PLATE", "ITEM_SPLASH_PLATE", "ITEM_ZAP_PLATE",
             "ITEM_MEADOW_PLATE", "ITEM_ICICLE_PLATE", "ITEM_FIST_PLATE",
             "ITEM_TOXIC_PLATE", "ITEM_EARTH_PLATE", "ITEM_SKY_PLATE",
             "ITEM_MIND_PLATE", "ITEM_INSECT_PLATE", "ITEM_STONE_PLATE",
             "ITEM_SPOOKY_PLATE", "ITEM_DRACO_PLATE", "ITEM_DREAD_PLATE",
             "ITEM_IRON_PLATE", "ITEM_PIXIE_PLATE",
-        },
+        ),
     }
+    relic_items_match = re.search(r"sLegendaryRelicItems\[\]\s*=\s*\{(.*?)\};", legendary_runtime, re.S)
+    relic_groups_match = re.search(r"sLegendaryRelicGrants\[\]\s*=\s*\{(.*?)\};", legendary_runtime, re.S)
+    require(relic_items_match is not None and relic_groups_match is not None,
+            "saved relic delivery tables are missing")
+    relic_items = re.findall(r"ITEM_[A-Z0-9_]+", relic_items_match.group(1))
+    relic_groups = re.findall(r"\{(SPECIES_[A-Z0-9_]+),\s*(\d+),\s*(\d+)\}", relic_groups_match.group(1))
+    # Item and species order is part of save v2's bit layout. Pin it, not
+    # merely the set of rewards, so a harmless-looking reorder fails here.
+    expected_items = [item for items in relic_contracts.values() for item in items]
+    expected_groups = []
+    first = 0
     for species, items in relic_contracts.items():
-        case = legendary_runtime.split(f"case {species}:", 1)
-        require(len(case) == 2, f"{species} has no associated relic grant")
-        body = case[1].split("break;", 1)[0]
-        if species == "SPECIES_ARCEUS":
-            body += legendary_runtime.split("sArceusPlates[]", 1)[1].split("};", 1)[0]
-        require(items <= set(re.findall(r"ITEM_[A-Z0-9_]+", body)),
-                f"{species} is missing relics: {sorted(items - set(re.findall(r'ITEM_[A-Z0-9_]+', body)))}")
+        expected_groups.append((species, str(first), str(len(items))))
+        first += len(items)
+    require(relic_items == expected_items, "saved relic item bit layout changed")
+    require(relic_groups == expected_groups, "saved relic earned-group bit layout changed")
     require(
         "CheckBagHasItem(item, 1) || CheckPCHasItem(item, 1)" in legendary_runtime
         and "AddBagItem(item, 1)" in legendary_runtime

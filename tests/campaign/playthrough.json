@@ -1,0 +1,2016 @@
+{
+  "schema_version": 1,
+  "description": "Draft input-driven traversal of the canonical Inclement Emerald v1.13 story. It is not complete or canonical evidence until every required segment and branch passes. Direct warps and story flag writes are forbidden in the main chain.",
+  "battle_policy": {
+    "trainer": "normal victory cleanup through BattleDebug_WonBattle",
+    "ordinary_wild": "defeat",
+    "capture_only_legendary": "separate real-capture module required"
+  },
+  "segments": [
+    {
+      "id": "main-00-boot-opening",
+      "parent": null,
+      "chapter": "New Game",
+      "frames": 600,
+      "actions": [],
+      "screenshots": [
+        {"at": 599, "name": "animated-opening"}
+      ],
+      "expected": {"battle_serial_min": 0}
+    },
+    {
+      "id": "main-00-title-loop",
+      "parent": "main-00-boot-opening",
+      "chapter": "New Game",
+      "frames": 1200,
+      "actions": [],
+      "screenshots": [
+        {"at": 1199, "name": "title-demo"}
+      ],
+      "expected": {"battle_serial_min": 0}
+    },
+    {
+      "id": "main-00-title-ready",
+      "parent": "main-00-title-loop",
+      "chapter": "New Game",
+      "frames": 700,
+      "actions": [
+        {"at": 60, "duration": 2, "keys": ["START"]},
+        {"at": 300, "duration": 2, "keys": ["START"]}
+      ],
+      "screenshots": [
+        {"at": 699, "name": "select-new-game"}
+      ],
+      "expected": {"battle_serial_min": 0}
+    },
+    {
+      "id": "main-01-new-game-truck",
+      "parent": "main-00-title-ready",
+      "chapter": "New Game",
+      "frames": 500,
+      "actions": [
+        {"at": 30, "duration": 2, "keys": ["SELECT"]}
+      ],
+      "screenshots": [
+        {"at": 499, "name": "inside-moving-truck"}
+      ],
+      "expected": {
+        "map": "MAP_INSIDE_OF_TRUCK",
+        "position": [2, 2],
+        "battle_serial_min": 0
+      }
+    },
+    {
+      "id": "main-01-truck-exit-mom",
+      "parent": "main-01-new-game-truck",
+      "chapter": "New Game",
+      "frames": 1700,
+      "actions": [
+        {"at": 1100, "duration": 180, "keys": ["RIGHT"]}
+      ],
+      "screenshots": [
+        {"at": 700, "name": "truck-door-ready"},
+        {"at": 1699, "name": "mom-arrival-dialogue"}
+      ],
+      "expected": {
+        "map": "MAP_LITTLEROOT_TOWN",
+        "battle_serial_min": 0
+      }
+    },
+    {
+      "id": "main-01-house-upstairs",
+      "parent": "main-01-truck-exit-mom",
+      "chapter": "Moving In",
+      "frames": 3300,
+      "actions": [
+        {"at": 30, "duration": 2, "keys": ["A"]},
+        {"at": 150, "duration": 2, "keys": ["A"]},
+        {"at": 270, "duration": 2, "keys": ["A"]},
+        {"at": 390, "duration": 2, "keys": ["A"]},
+        {"at": 510, "duration": 2, "keys": ["A"]},
+        {"at": 630, "duration": 2, "keys": ["A"]},
+        {"at": 750, "duration": 2, "keys": ["A"]},
+        {"at": 870, "duration": 2, "keys": ["A"]},
+        {"at": 990, "duration": 2, "keys": ["A"]},
+        {"at": 1110, "duration": 2, "keys": ["A"]},
+        {"at": 1230, "duration": 2, "keys": ["A"]},
+        {"at": 1350, "duration": 2, "keys": ["A"]},
+        {"at": 1470, "duration": 2, "keys": ["A"]},
+        {"at": 1590, "duration": 2, "keys": ["A"]},
+        {"at": 1710, "duration": 2, "keys": ["A"]},
+        {"at": 1830, "duration": 2, "keys": ["B"]},
+        {"at": 1920, "duration": 220, "keys": ["UP"]},
+        {"at": 2530, "duration": 2, "keys": ["A"]},
+        {"at": 2630, "duration": 2, "keys": ["A"]},
+        {"at": 2730, "duration": 2, "keys": ["A"]},
+        {"at": 2830, "duration": 2, "keys": ["A"]},
+        {"at": 2930, "duration": 2, "keys": ["A"]},
+        {"at": 3030, "duration": 2, "keys": ["A"]},
+        {"at": 3130, "duration": 2, "keys": ["A"]}
+      ],
+      "screenshots": [
+        {"at": 900, "name": "inside-house-movers"},
+        {"at": 2200, "name": "mom-directs-upstairs"},
+        {"at": 3299, "name": "upstairs-before-clock"}
+      ],
+      "expected": {
+        "map": "MAP_LITTLEROOT_TOWN_MAYS_HOUSE_2F",
+        "position": [1, 2],
+        "battle_serial_min": 0,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-01-clock-open",
+      "parent": "main-01-house-upstairs",
+      "chapter": "Moving In",
+      "frames": 3100,
+      "actions": [
+        {"at": 300, "duration": 28, "keys": ["RIGHT"]},
+        {"at": 730, "duration": 2, "keys": ["UP"]},
+        {"at": 790, "duration": 2, "keys": ["A"]},
+        {"at": 1000, "duration": 2, "keys": ["A"]},
+        {"at": 2230, "duration": 2, "keys": ["A"]}
+      ],
+      "screenshots": [
+        {"at": 900, "name": "clock-stopped-dialogue"},
+        {"at": 3099, "name": "clock-ui-ready"}
+      ],
+      "expected": {
+        "map": "MAP_LITTLEROOT_TOWN_MAYS_HOUSE_2F",
+        "position": [3, 2],
+        "battle_serial_min": 0
+      }
+    },
+    {
+      "id": "main-01-clock-confirm",
+      "parent": "main-01-clock-open",
+      "chapter": "Moving In",
+      "frames": 1200,
+      "actions": [
+        {"at": 30, "duration": 2, "keys": ["A"]},
+        {"at": 200, "duration": 2, "keys": ["UP"]},
+        {"at": 350, "duration": 2, "keys": ["A"]}
+      ],
+      "screenshots": [
+        {"at": 260, "name": "clock-confirm-yes"},
+        {"at": 1199, "name": "mom-enters-room"}
+      ],
+      "interactive_mode": "scripted_tutorial",
+      "battle_automation": "native",
+      "coverage": {
+        "interactive_flows": ["tutorial.new_game_clock"]
+      },
+      "expected": {
+        "map": "MAP_LITTLEROOT_TOWN_MAYS_HOUSE_2F",
+        "position": [3, 2],
+        "battle_serial_min": 0
+      }
+    },
+    {
+      "id": "main-01-room-dialogue-complete",
+      "parent": "main-01-clock-confirm",
+      "chapter": "Moving In",
+      "frames": 2300,
+      "actions": [
+        {"at": 30, "duration": 2, "keys": ["A"]},
+        {"at": 430, "duration": 2, "keys": ["A"]},
+        {"at": 830, "duration": 2, "keys": ["A"]},
+        {"at": 1230, "duration": 2, "keys": ["A"]},
+        {"at": 1830, "duration": 2, "keys": ["A"]}
+      ],
+      "screenshots": [
+        {"at": 1000, "name": "mom-room-dialogue"},
+        {"at": 2299, "name": "room-controls-restored"}
+      ],
+      "expected": {
+        "map": "MAP_LITTLEROOT_TOWN_MAYS_HOUSE_2F",
+        "position": [3, 2],
+        "battle_serial_min": 0,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-01-tv-complete",
+      "parent": "main-01-room-dialogue-complete",
+      "chapter": "Moving In",
+      "frames": 5200,
+      "actions": [
+        {"at": 300, "duration": 28, "keys": ["LEFT"]},
+        {"at": 700, "duration": 20, "keys": ["UP"]},
+        {"at": 1230, "duration": 2, "keys": ["A"]},
+        {"at": 1730, "duration": 2, "keys": ["A"]},
+        {"at": 2230, "duration": 2, "keys": ["A"]},
+        {"at": 2730, "duration": 2, "keys": ["A"]},
+        {"at": 3230, "duration": 2, "keys": ["A"]},
+        {"at": 3730, "duration": 2, "keys": ["A"]},
+        {"at": 4230, "duration": 2, "keys": ["A"]},
+        {"at": 4730, "duration": 2, "keys": ["A"]}
+      ],
+      "screenshots": [
+        {"at": 1000, "name": "mom-calls-from-downstairs"},
+        {"at": 2500, "name": "norman-television-report"},
+        {"at": 5199, "name": "television-scene-complete"}
+      ],
+      "expected": {
+        "map": "MAP_LITTLEROOT_TOWN_MAYS_HOUSE_1F",
+        "position": [6, 5],
+        "battle_serial_min": 0,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-02-own-house-exit",
+      "parent": "main-01-tv-complete",
+      "chapter": "Rival Introduction",
+      "frames": 1000,
+      "actions": [
+        {"at": 30, "duration": 60, "keys": ["RIGHT"]},
+        {"at": 150, "duration": 100, "keys": ["DOWN"]},
+        {"at": 320, "duration": 140, "keys": ["LEFT"]},
+        {"at": 540, "duration": 80, "keys": ["DOWN"]}
+      ],
+      "screenshots": [
+        {"at": 999, "name": "outside-player-house"}
+      ],
+      "expected": {
+        "map": "MAP_LITTLEROOT_TOWN",
+        "position": [14, 9],
+        "battle_serial_min": 0,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-02-rival-house-entry",
+      "parent": "main-02-own-house-exit",
+      "chapter": "Rival Introduction",
+      "frames": 1600,
+      "actions": [
+        {"at": 100, "duration": 140, "keys": ["LEFT"]},
+        {"at": 650, "duration": 20, "keys": ["UP"]}
+      ],
+      "screenshots": [
+        {"at": 500, "name": "outside-rival-house"},
+        {"at": 1599, "name": "rival-parent-greeting"}
+      ],
+      "expected": {
+        "map": "MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F",
+        "position": [8, 8],
+        "battle_serial_min": 0
+      }
+    },
+    {
+      "id": "main-02-rival-parent-complete",
+      "parent": "main-02-rival-house-entry",
+      "chapter": "Rival Introduction",
+      "frames": 3000,
+      "actions": [
+        {"at": 30, "duration": 2, "keys": ["A"]},
+        {"at": 530, "duration": 2, "keys": ["A"]},
+        {"at": 1030, "duration": 2, "keys": ["A"]},
+        {"at": 1530, "duration": 2, "keys": ["A"]},
+        {"at": 2030, "duration": 2, "keys": ["A"]},
+        {"at": 2530, "duration": 2, "keys": ["A"]}
+      ],
+      "screenshots": [
+        {"at": 1000, "name": "rival-parent-dialogue"},
+        {"at": 2999, "name": "rival-parent-complete"}
+      ],
+      "expected": {
+        "map": "MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F",
+        "position": [8, 8],
+        "battle_serial_min": 0,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-02-rival-ball-position",
+      "parent": "main-02-rival-parent-complete",
+      "chapter": "Rival Introduction",
+      "frames": 1600,
+      "actions": [
+        {"at": 200, "duration": 100, "keys": ["UP"]},
+        {"at": 1100, "duration": 60, "keys": ["LEFT"]},
+        {"at": 1380, "duration": 20, "keys": ["DOWN"]}
+      ],
+      "screenshots": [
+        {"at": 900, "name": "rival-bedroom-entry"},
+        {"at": 1599, "name": "rival-pokeball-position"}
+      ],
+      "expected": {
+        "map": "MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F",
+        "position": [3, 3],
+        "battle_serial_min": 0,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-02-region-menu",
+      "parent": "main-02-rival-ball-position",
+      "chapter": "Rival Introduction",
+      "frames": 3300,
+      "actions": [
+        {"at": 30, "duration": 2, "keys": ["A"]},
+        {"at": 530, "duration": 2, "keys": ["A"]},
+        {"at": 1030, "duration": 2, "keys": ["A"]},
+        {"at": 1530, "duration": 2, "keys": ["A"]},
+        {"at": 2030, "duration": 2, "keys": ["A"]},
+        {"at": 2530, "duration": 2, "keys": ["A"]},
+        {"at": 3030, "duration": 2, "keys": ["A"]}
+      ],
+      "screenshots": [
+        {"at": 1800, "name": "rival-explains-regions"},
+        {"at": 3299, "name": "nine-region-menu"}
+      ],
+      "expected": {
+        "map": "MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F",
+        "position": [3, 3],
+        "battle_serial_min": 0
+      }
+    },
+    {
+      "id": "main-02-region-selected",
+      "parent": "main-02-region-menu",
+      "chapter": "Rival Introduction",
+      "frames": 2000,
+      "actions": [
+        {"at": 30, "duration": 2, "keys": ["A"]},
+        {"at": 530, "duration": 2, "keys": ["A"]},
+        {"at": 1030, "duration": 2, "keys": ["A"]},
+        {"at": 1530, "duration": 2, "keys": ["A"]}
+      ],
+      "screenshots": [
+        {"at": 600, "name": "kanto-region-confirmed"},
+        {"at": 1999, "name": "rival-departs"}
+      ],
+      "interactive_mode": "scripted_tutorial",
+      "battle_automation": "native",
+      "coverage": {
+        "interactive_flows": ["tutorial.regional_starter_selection"]
+      },
+      "expected": {
+        "map": "MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F",
+        "position": [3, 3],
+        "battle_serial_min": 0,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-02-rival-house-exit",
+      "parent": "main-02-region-selected",
+      "chapter": "Rival Introduction",
+      "frames": 2200,
+      "actions": [
+        {"at": 200, "duration": 60, "keys": ["RIGHT"]},
+        {"at": 600, "duration": 28, "keys": ["UP"]},
+        {"at": 1400, "duration": 100, "keys": ["DOWN"]}
+      ],
+      "screenshots": [
+        {"at": 1100, "name": "rival-house-downstairs"},
+        {"at": 2199, "name": "rival-house-exit"}
+      ],
+      "expected": {
+        "map": "MAP_LITTLEROOT_TOWN",
+        "position": [5, 9],
+        "battle_serial_min": 0,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-03-north-warning",
+      "parent": "main-02-rival-house-exit",
+      "chapter": "Birch Rescue",
+      "frames": 3000,
+      "actions": [
+        {"at": 200, "duration": 80, "keys": ["RIGHT"]},
+        {"at": 500, "duration": 150, "keys": ["UP"]},
+        {"at": 2000, "duration": 20, "keys": ["RIGHT"]},
+        {"at": 2300, "duration": 40, "keys": ["UP"]}
+      ],
+      "screenshots": [
+        {"at": 1700, "name": "littleroot-north-path"},
+        {"at": 2999, "name": "north-warning-dialogue"}
+      ],
+      "expected": {
+        "map": "MAP_LITTLEROOT_TOWN",
+        "position": [11, 1],
+        "battle_serial_min": 0
+      }
+    },
+    {
+      "id": "main-03-warning-complete",
+      "parent": "main-03-north-warning",
+      "chapter": "Birch Rescue",
+      "frames": 2000,
+      "actions": [
+        {"at": 30, "duration": 2, "keys": ["A"]},
+        {"at": 530, "duration": 2, "keys": ["A"]},
+        {"at": 1030, "duration": 2, "keys": ["A"]},
+        {"at": 1530, "duration": 2, "keys": ["A"]}
+      ],
+      "screenshots": [
+        {"at": 1000, "name": "warning-explanation"},
+        {"at": 1999, "name": "route-open"}
+      ],
+      "expected": {
+        "map": "MAP_LITTLEROOT_TOWN",
+        "position": [11, 1],
+        "battle_serial_min": 0,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-03-rescue-clearing",
+      "parent": "main-03-warning-complete",
+      "chapter": "Birch Rescue",
+      "frames": 2700,
+      "actions": [
+        {"at": 200, "duration": 50, "keys": ["UP"]},
+        {"at": 1230, "duration": 2, "keys": ["A"]},
+        {"at": 1730, "duration": 2, "keys": ["A"]},
+        {"at": 2230, "duration": 2, "keys": ["A"]}
+      ],
+      "screenshots": [
+        {"at": 1000, "name": "birch-calls-for-help"},
+        {"at": 2699, "name": "rescue-clearing-ready"}
+      ],
+      "expected": {
+        "map": "MAP_ROUTE101",
+        "position": [11, 15],
+        "battle_serial_min": 0,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-03-starter-bag",
+      "parent": "main-03-rescue-clearing",
+      "chapter": "Birch Rescue",
+      "frames": 2500,
+      "actions": [
+        {"at": 200, "duration": 50, "keys": ["LEFT"]},
+        {"at": 500, "duration": 2, "keys": ["UP"]},
+        {"at": 1250, "duration": 2, "keys": ["A"]},
+        {"at": 1800, "duration": 2, "keys": ["A"]}
+      ],
+      "screenshots": [
+        {"at": 1000, "name": "birch-field-bag"},
+        {"at": 1500, "name": "charmander-selector"},
+        {"at": 2499, "name": "charmander-confirmation"}
+      ],
+      "expected": {
+        "map": "MAP_ROUTE101",
+        "position": [7, 15],
+        "battle_serial_min": 0
+      }
+    },
+    {
+      "id": "main-03-first-autowin",
+      "parent": "main-03-starter-bag",
+      "chapter": "Birch Rescue",
+      "frames": 3200,
+      "actions": [
+        {"at": 30, "duration": 2, "keys": ["A"]},
+        {"at": 1800, "duration": 2, "keys": ["A"]},
+        {"at": 2200, "duration": 2, "keys": ["A"]},
+        {"at": 2600, "duration": 2, "keys": ["A"]}
+      ],
+      "screenshots": [
+        {"at": 1200, "name": "first-battle-transition"},
+        {"at": 3199, "name": "birch-rescued"}
+      ],
+      "interactive_mode": "scripted_tutorial",
+      "battle_automation": "auto-win",
+      "coverage": {
+        "interactive_flows": ["tutorial.birch_rescue"]
+      },
+      "expected": {
+        "map": "MAP_ROUTE101",
+        "position": [7, 15],
+        "battle_serial_min": 1
+      }
+    },
+    {
+      "id": "main-03-lab-nickname",
+      "parent": "main-03-first-autowin",
+      "chapter": "Birch Rescue",
+      "frames": 3000,
+      "actions": [
+        {"at": 30, "duration": 2, "keys": ["A"]},
+        {"at": 530, "duration": 2, "keys": ["A"]},
+        {"at": 1030, "duration": 2, "keys": ["A"]},
+        {"at": 1530, "duration": 2, "keys": ["A"]},
+        {"at": 2030, "duration": 2, "keys": ["A"]},
+        {"at": 2530, "duration": 2, "keys": ["A"]}
+      ],
+      "screenshots": [
+        {"at": 1600, "name": "birch-lab-starter-dialogue"},
+        {"at": 2999, "name": "nickname-prompt"}
+      ],
+      "expected": {
+        "map": "MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB",
+        "position": [6, 5],
+        "battle_serial_min": 1
+      }
+    },
+    {
+      "id": "main-03-lab-complete",
+      "parent": "main-03-lab-nickname",
+      "chapter": "Birch Rescue",
+      "frames": 3200,
+      "actions": [
+        {"at": 30, "duration": 2, "keys": ["DOWN"]},
+        {"at": 180, "duration": 2, "keys": ["A"]},
+        {"at": 730, "duration": 2, "keys": ["A"]},
+        {"at": 1230, "duration": 2, "keys": ["A"]},
+        {"at": 1730, "duration": 2, "keys": ["A"]},
+        {"at": 2230, "duration": 2, "keys": ["A"]},
+        {"at": 2730, "duration": 2, "keys": ["A"]}
+      ],
+      "screenshots": [
+        {"at": 100, "name": "nickname-no-selected"},
+        {"at": 3199, "name": "birch-lab-controls-restored"}
+      ],
+      "expected": {
+        "map": "MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB",
+        "position": [6, 5],
+        "battle_serial_min": 1,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-04-route101-south",
+      "parent": "main-03-lab-complete",
+      "chapter": "Route 103 Rival",
+      "frames": 1,
+      "semantic_actions": [
+        {"type": "walk_to", "position": [6, 11], "order": "yx"},
+        {"type": "face", "direction": "DOWN"},
+        {"type": "press", "keys": ["DOWN"], "frames": 120},
+        {"type": "wait_stable_overworld"},
+        {"type": "screenshot", "name": "outside-birch-lab"},
+        {"type": "walk_to", "position": [10, 17], "order": "xy"},
+        {"type": "walk_to", "position": [10, 0], "order": "yx"},
+        {"type": "face", "direction": "UP"},
+        {"type": "press", "keys": ["UP"], "frames": 120},
+        {"type": "wait_stable_overworld"},
+        {"type": "walk_to", "position": [10, 14], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "screenshot", "name": "route101-south"}
+      ],
+      "coverage": {
+        "maps": ["MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB", "MAP_LITTLEROOT_TOWN", "MAP_ROUTE101"],
+        "scripts": [],
+        "states": ["VAR_BIRCH_LAB_STATE", "FLAG_DEFEATED_RIVAL_ROUTE103"]
+      },
+      "expected": {
+        "map": "MAP_ROUTE101",
+        "position": [10, 14],
+        "vars": {"VAR_BIRCH_LAB_STATE": 3},
+        "flags": {"FLAG_DEFEATED_RIVAL_ROUTE103": 0},
+        "battle_serial_min": 1,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-04-oldale-arrival",
+      "parent": "main-04-route101-south",
+      "chapter": "Route 103 Rival",
+      "frames": 1,
+      "semantic_actions": [
+        {"type": "walk_to", "position": [7, 14], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [7, 7], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [7, 11], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [19, 11], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [19, 6], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [13, 6], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [13, 2], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [10, 2], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [10, 0], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "face", "direction": "UP"},
+        {"type": "press", "keys": ["UP"], "frames": 120},
+        {"type": "wait_stable_overworld"},
+        {"type": "screenshot", "name": "oldale-first-arrival"}
+      ],
+      "coverage": {
+        "maps": ["MAP_ROUTE101", "MAP_OLDALE_TOWN"],
+        "scripts": ["Route101_OnTransition", "OldaleTown_MapScripts"],
+        "states": ["VAR_BIRCH_LAB_STATE", "FLAG_DEFEATED_RIVAL_ROUTE103"]
+      },
+      "expected": {
+        "map": "MAP_OLDALE_TOWN",
+        "position": [10, 18],
+        "vars": {"VAR_BIRCH_LAB_STATE": 3},
+        "flags": {"FLAG_DEFEATED_RIVAL_ROUTE103": 0},
+        "battle_serial_min": 1,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-04-route103-rival",
+      "parent": "main-04-oldale-arrival",
+      "chapter": "Route 103 Rival",
+      "frames": 1,
+      "semantic_actions": [
+        {"type": "walk_to", "position": [10, 0], "order": "yx"},
+        {"type": "face", "direction": "UP"},
+        {"type": "press", "keys": ["UP"], "frames": 120},
+        {"type": "wait_stable_overworld"},
+        {"type": "walk_to", "position": [14, 13], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [14, 7], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [12, 7], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [12, 6], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [5, 6], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [5, 4], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [10, 4], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "face", "direction": "UP"},
+        {"type": "screenshot", "name": "route103-rival-ready"},
+        {"type": "press", "keys": ["A"], "frames": 90},
+        {"type": "advance_dialogue", "max_presses": 40},
+        {"type": "screenshot", "name": "route103-rival-defeated"}
+      ],
+      "coverage": {
+        "maps": ["MAP_OLDALE_TOWN", "MAP_ROUTE103"],
+        "scripts": ["Route103_EventScript_Rival", "Route103_EventScript_RivalMay", "Route103_EventScript_StartMayBattleTreecko", "Route103_EventScript_AfterMayBattle", "Route103_EventScript_RivalExit", "Route103_EventScript_RivalEnd"],
+        "battles": ["BATTLE_001_ROUTE_103_RIVAL", "TRAINER_MAY_ROUTE_103_TREECKO"],
+        "states": ["FLAG_DEFEATED_RIVAL_ROUTE103", "VAR_BIRCH_LAB_STATE", "VAR_OLDALE_RIVAL_STATE", "FLAG_HIDE_OLDALE_TOWN_RIVAL"]
+      },
+      "expected": {
+        "map": "MAP_ROUTE103",
+        "position": [10, 4],
+        "vars": {"VAR_BIRCH_LAB_STATE": 4, "VAR_OLDALE_RIVAL_STATE": 1},
+        "flags": {"FLAG_DEFEATED_RIVAL_ROUTE103": 1, "FLAG_HIDE_OLDALE_TOWN_RIVAL": 0},
+        "battle_serial_min": 2,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-04-oldale-return",
+      "parent": "main-04-route103-rival",
+      "chapter": "Return to Birch",
+      "frames": 1,
+      "semantic_actions": [
+        {"type": "walk_to", "position": [5, 4], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [5, 6], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [12, 6], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [12, 7], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [14, 7], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [14, 13], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [10, 13], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [10, 21], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "face", "direction": "DOWN"},
+        {"type": "press", "keys": ["DOWN"], "frames": 120},
+        {"type": "wait_stable_overworld"},
+        {"type": "walk_to", "position": [10, 18], "order": "yx"},
+        {"type": "press", "keys": ["DOWN"], "frames": 30},
+        {"type": "advance_dialogue", "max_presses": 20},
+        {"type": "screenshot", "name": "oldale-rival-departed"}
+      ],
+      "coverage": {
+        "maps": ["MAP_ROUTE103", "MAP_OLDALE_TOWN"],
+        "scripts": ["OldaleTown_EventScript_RivalTrigger3", "OldaleTown_EventScript_ShowRivalMessage", "OldaleTown_EventScript_ShowMayMessage", "OldaleTown_EventScript_RivalFinish"],
+        "states": ["VAR_OLDALE_RIVAL_STATE", "FLAG_HIDE_OLDALE_TOWN_RIVAL"]
+      },
+      "expected": {
+        "map": "MAP_OLDALE_TOWN",
+        "vars": {"VAR_OLDALE_RIVAL_STATE": 2, "VAR_BIRCH_LAB_STATE": 4},
+        "flags": {"FLAG_HIDE_OLDALE_TOWN_RIVAL": 1, "FLAG_DEFEATED_RIVAL_ROUTE103": 1},
+        "battle_serial_min": 2,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-04-pokedex",
+      "parent": "main-04-oldale-return",
+      "chapter": "Return to Birch",
+      "frames": 1,
+      "semantic_actions": [
+        {"type": "walk_to", "position": [10, 19], "order": "yx"},
+        {"type": "face", "direction": "DOWN"},
+        {"type": "press", "keys": ["DOWN"], "frames": 120},
+        {"type": "wait_stable_overworld"},
+        {"type": "walk_to", "position": [10, 2], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [13, 2], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [13, 6], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [19, 6], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [19, 11], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [7, 11], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [7, 14], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [10, 14], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [10, 19], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "face", "direction": "DOWN"},
+        {"type": "press", "keys": ["DOWN"], "frames": 120},
+        {"type": "wait_stable_overworld"},
+        {"type": "walk_to", "position": [10, 17], "order": "yx"},
+        {"type": "walk_to", "position": [7, 17], "order": "xy"},
+        {"type": "face", "direction": "UP"},
+        {"type": "press", "keys": ["UP"], "frames": 120},
+        {"type": "screenshot", "name": "birch-pokedex-scene"},
+        {"type": "advance_dialogue", "max_presses": 50},
+        {"type": "screenshot", "name": "national-pokedex-received"}
+      ],
+      "coverage": {
+        "maps": ["MAP_OLDALE_TOWN", "MAP_ROUTE101", "MAP_LITTLEROOT_TOWN", "MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB"],
+        "scripts": ["LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedexEvent", "LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex", "LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex", "LittlerootTown_ProfessorBirchsLab_EventScript_MayGivePokeBalls"],
+        "states": ["VAR_BIRCH_LAB_STATE", "FLAG_ADVENTURE_STARTED", "VAR_OLDALE_TOWN_STATE", "VAR_LITTLEROOT_RIVAL_STATE", "VAR_LITTLEROOT_TOWN_STATE", "FLAG_SYS_POKEDEX_GET", "FLAG_SYS_NATIONAL_DEX", "FLAG_RECEIVED_POKEDEX_FROM_BIRCH"]
+      },
+      "expected": {
+        "map": "MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB",
+        "vars": {"VAR_BIRCH_LAB_STATE": 5, "VAR_OLDALE_TOWN_STATE": 1, "VAR_LITTLEROOT_RIVAL_STATE": 4, "VAR_LITTLEROOT_TOWN_STATE": 3},
+        "flags": {"FLAG_ADVENTURE_STARTED": 1, "FLAG_SYS_POKEDEX_GET": 1, "FLAG_SYS_NATIONAL_DEX": 1, "FLAG_RECEIVED_POKEDEX_FROM_BIRCH": 1},
+        "battle_serial_min": 2,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-04-running-shoes",
+      "parent": "main-04-pokedex",
+      "chapter": "Journey Begins",
+      "frames": 1,
+      "semantic_actions": [
+        {"type": "walk_to", "position": [6, 11], "order": "yx"},
+        {"type": "face", "direction": "DOWN"},
+        {"type": "press", "keys": ["DOWN"], "frames": 120},
+        {"type": "wait_stable_overworld"},
+        {"type": "walk_to", "position": [10, 10], "order": "xy"},
+        {"type": "face", "direction": "UP"},
+        {"type": "press", "keys": ["UP"], "frames": 90},
+        {"type": "screenshot", "name": "mom-running-shoes"},
+        {"type": "advance_dialogue", "max_presses": 30},
+        {"type": "screenshot", "name": "running-shoes-complete"}
+      ],
+      "coverage": {
+        "maps": ["MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB", "MAP_LITTLEROOT_TOWN"],
+        "scripts": ["LittlerootTown_EventScript_GiveRunningShoesTrigger2", "LittlerootTown_EventScript_Mom", "LittlerootTown_EventScript_GiveRunningShoes", "LittlerootTown_EventScript_SetReceivedRunningShoes"],
+        "states": ["VAR_LITTLEROOT_TOWN_STATE", "FLAG_RECEIVED_RUNNING_SHOES", "FLAG_SYS_B_DASH"]
+      },
+      "expected": {
+        "map": "MAP_LITTLEROOT_TOWN",
+        "position": [10, 9],
+        "vars": {"VAR_LITTLEROOT_TOWN_STATE": 4, "VAR_BIRCH_LAB_STATE": 5},
+        "flags": {"FLAG_RECEIVED_RUNNING_SHOES": 1, "FLAG_SYS_B_DASH": 1, "FLAG_ADVENTURE_STARTED": 1},
+        "battle_serial_min": 2,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-05-route102-entry",
+      "parent": "main-04-running-shoes",
+      "chapter": "Route 102 and Petalburg",
+      "frames": 1,
+      "semantic_actions": [
+        {"type": "walk_to", "position": [10, 0], "order": "yx"},
+        {"type": "face", "direction": "UP"},
+        {"type": "press", "keys": ["UP"], "frames": 120},
+        {"type": "wait_stable_overworld"},
+        {"type": "walk_to", "position": [10, 14], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [7, 14], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [7, 7], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [7, 11], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [19, 11], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [19, 6], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [13, 6], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [13, 2], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [10, 2], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [10, 0], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "face", "direction": "UP"},
+        {"type": "press", "keys": ["UP"], "frames": 120},
+        {"type": "wait_stable_overworld"},
+        {"type": "walk_to", "position": [10, 10], "order": "yx"},
+        {"type": "walk_to", "position": [0, 10], "order": "xy"},
+        {"type": "face", "direction": "LEFT"},
+        {"type": "press", "keys": ["LEFT"], "frames": 120},
+        {"type": "wait_stable_overworld"},
+        {"type": "screenshot", "name": "route102-east-entry"}
+      ],
+      "interactive_mode": "capture",
+      "battle_automation": "auto-capture",
+      "coverage": {
+        "maps": ["MAP_LITTLEROOT_TOWN", "MAP_ROUTE101", "MAP_OLDALE_TOWN", "MAP_ROUTE102"],
+        "scripts": ["Route101_OnTransition", "OldaleTown_MapScripts", "Route102_MapScripts"],
+        "states": ["VAR_LITTLEROOT_TOWN_STATE", "FLAG_RECEIVED_RUNNING_SHOES", "FLAG_ADVENTURE_STARTED"],
+        "interactive_flows": ["capture.ordinary_party"]
+      },
+      "expected": {
+        "map": "MAP_ROUTE102",
+        "vars": {"VAR_LITTLEROOT_TOWN_STATE": 4},
+        "flags": {"FLAG_RECEIVED_RUNNING_SHOES": 1, "FLAG_ADVENTURE_STARTED": 1},
+        "battle_serial_min": 4,
+        "capture_serial_min": 1,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-05-route102-calvin",
+      "parent": "main-05-route102-entry",
+      "chapter": "Route 102 and Petalburg",
+      "frames": 1,
+      "semantic_actions": [
+        {"type": "walk_to", "position": [42, 10], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [42, 15], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [33, 15], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "face", "direction": "UP"},
+        {"type": "press", "keys": ["A"], "frames": 90},
+        {"type": "screenshot", "name": "calvin-engaged"},
+        {"type": "advance_dialogue", "max_presses": 20},
+        {"type": "screenshot", "name": "calvin-defeated"}
+      ],
+      "coverage": {
+        "maps": ["MAP_ROUTE102"],
+        "scripts": ["Route102_EventScript_Calvin", "Route102_EventScript_CalvinRegisterMatchCallAfterBattle"],
+        "battles": ["BATTLE_002_ROUTE_102_CALVIN", "TRAINER_CALVIN_1"],
+        "states": []
+      },
+      "expected": {
+        "map": "MAP_ROUTE102",
+        "battle_serial_min": 7,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-05-route102-west",
+      "parent": "main-05-route102-calvin",
+      "chapter": "Route 102 and Petalburg",
+      "frames": 1,
+      "semantic_actions": [
+        {"type": "walk_to", "position": [33, 17], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [20, 17], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "screenshot", "name": "route102-west-path"}
+      ],
+      "coverage": {
+        "maps": ["MAP_ROUTE102"],
+        "scripts": ["Route102_MapScripts"],
+        "states": []
+      },
+      "expected": {
+        "map": "MAP_ROUTE102",
+        "position": [20, 17],
+        "capture_serial_min": 1,
+        "battle_serial_min": 8,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-05-route102-rick",
+      "parent": "main-05-route102-west",
+      "chapter": "Route 102 and Petalburg",
+      "frames": 1,
+      "semantic_actions": [
+        {"type": "walk_to", "position": [25, 17], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [25, 16], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "face", "direction": "UP"},
+        {"type": "screenshot", "name": "rick-ready"},
+        {"type": "press", "keys": ["A"], "frames": 90},
+        {"type": "advance_dialogue", "max_presses": 24},
+        {"type": "screenshot", "name": "rick-defeated"}
+      ],
+      "coverage": {
+        "maps": ["MAP_ROUTE102"],
+        "scripts": ["Route102_EventScript_Rick"],
+        "battles": ["BATTLE_003_ROUTE_102_RICK", "TRAINER_RICK"],
+        "states": [],
+        "labels": ["required_route_trainer_coverage"]
+      },
+      "expected": {
+        "map": "MAP_ROUTE102",
+        "position": [25, 16],
+        "capture_serial_min": 1,
+        "battle_serial_min": 10,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-05-route102-allen",
+      "parent": "main-05-route102-rick",
+      "chapter": "Route 102 and Petalburg",
+      "frames": 1,
+      "semantic_actions": [
+        {"type": "walk_to", "position": [25, 17], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [19, 17], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [19, 10], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [18, 10], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [18, 4], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "face", "direction": "RIGHT"},
+        {"type": "screenshot", "name": "allen-ready"},
+        {"type": "press", "keys": ["A"], "frames": 90},
+        {"type": "advance_dialogue", "max_presses": 24},
+        {"type": "screenshot", "name": "allen-defeated"}
+      ],
+      "coverage": {
+        "maps": ["MAP_ROUTE102"],
+        "scripts": ["Route102_EventScript_Allen"],
+        "battles": ["BATTLE_004_ROUTE_102_ALLEN", "TRAINER_ALLEN"],
+        "states": [],
+        "labels": ["required_route_trainer_coverage"]
+      },
+      "expected": {
+        "map": "MAP_ROUTE102",
+        "position": [18, 4],
+        "capture_serial_min": 1,
+        "battle_serial_min": 11,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-05-route102-tiana",
+      "parent": "main-05-route102-allen",
+      "chapter": "Route 102 and Petalburg",
+      "frames": 1,
+      "semantic_actions": [
+        {"type": "walk_to", "position": [18, 5], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [8, 5], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [8, 6], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "face", "direction": "DOWN"},
+        {"type": "screenshot", "name": "tiana-ready"},
+        {"type": "press", "keys": ["A"], "frames": 90},
+        {"type": "advance_dialogue", "max_presses": 24},
+        {"type": "screenshot", "name": "tiana-defeated"}
+      ],
+      "coverage": {
+        "maps": ["MAP_ROUTE102"],
+        "scripts": ["Route102_EventScript_Tiana"],
+        "battles": ["BATTLE_005_ROUTE_102_TIANA", "TRAINER_TIANA"],
+        "states": [],
+        "labels": ["required_route_trainer_coverage"]
+      },
+      "expected": {
+        "map": "MAP_ROUTE102",
+        "position": [8, 6],
+        "capture_serial_min": 1,
+        "battle_serial_min": 12,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-05-petalburg-entry",
+      "parent": "main-05-route102-tiana",
+      "chapter": "Route 102 and Petalburg",
+      "frames": 1,
+      "semantic_actions": [
+        {"type": "walk_to", "position": [2, 6], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [0, 6], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "face", "direction": "LEFT"},
+        {"type": "press", "keys": ["LEFT"], "frames": 120},
+        {"type": "wait_stable_overworld"},
+        {"type": "screenshot", "name": "petalburg-east-entry"}
+      ],
+      "coverage": {
+        "maps": ["MAP_ROUTE102", "MAP_PETALBURG_CITY"],
+        "scripts": ["PetalburgCity_OnTransition", "PetalburgCity_EventScript_MoveGymBoyToWestEntrance"],
+        "states": ["FLAG_VISITED_PETALBURG_CITY", "VAR_PETALBURG_CITY_STATE", "VAR_PETALBURG_GYM_STATE"]
+      },
+      "expected": {
+        "map": "MAP_PETALBURG_CITY",
+        "vars": {"VAR_PETALBURG_CITY_STATE": 0, "VAR_PETALBURG_GYM_STATE": 0},
+        "flags": {"FLAG_VISITED_PETALBURG_CITY": 1},
+        "capture_serial_min": 1,
+        "battle_serial_min": 12,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-05-petalburg-gym-guide",
+      "parent": "main-05-petalburg-entry",
+      "chapter": "Petalburg and Wally Tutorial",
+      "frames": 1,
+      "semantic_actions": [
+        {"type": "walk_to", "position": [23, 16], "order": "xy"},
+        {"type": "walk_to", "position": [23, 13], "order": "yx"},
+        {"type": "walk_to", "position": [9, 13], "order": "xy"},
+        {"type": "face", "direction": "LEFT"},
+        {"type": "press", "keys": ["LEFT"], "frames": 90},
+        {"type": "advance_dialogue", "max_presses": 30},
+        {"type": "screenshot", "name": "petalburg-gym-guide-complete"}
+      ],
+      "coverage": {
+        "maps": ["MAP_PETALBURG_CITY"],
+        "scripts": ["PetalburgCity_EventScript_ShowGymToPlayer3", "PetalburgCity_EventScript_ShowGymToPlayer", "PetalburgCity_EventScript_LeadPlayerToGym3"],
+        "states": ["VAR_PETALBURG_CITY_STATE", "VAR_PETALBURG_GYM_STATE"],
+        "labels": ["native_flow_required", "never_excluded", "petalburg_gym_guide_tutorial"]
+      },
+      "expected": {
+        "map": "MAP_PETALBURG_CITY",
+        "vars": {"VAR_PETALBURG_CITY_STATE": 0, "VAR_PETALBURG_GYM_STATE": 0},
+        "flags": {"FLAG_VISITED_PETALBURG_CITY": 1},
+        "capture_serial_min": 1,
+        "battle_serial_min": 12,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-05-wally-tutorial-entry",
+      "parent": "main-05-petalburg-gym-guide",
+      "chapter": "Petalburg and Wally Tutorial",
+      "frames": 1,
+      "semantic_actions": [
+        {"type": "walk_to", "position": [15, 9], "order": "yx"},
+        {"type": "face", "direction": "UP"},
+        {"type": "press", "keys": ["UP"], "frames": 120},
+        {"type": "wait_stable_overworld"},
+        {"type": "walk_to", "position": [4, 108], "order": "yx"},
+        {"type": "face", "direction": "UP"},
+        {"type": "screenshot", "name": "norman-wally-setup-ready"},
+        {"type": "press", "keys": ["A"], "frames": 90},
+        {"type": "advance_until_battle", "max_presses": 100, "frames_per_press": 24, "screenshot": "wally-native-catch-tutorial", "screenshot_delay_frames": 180}
+      ],
+      "coverage": {
+        "maps": ["MAP_PETALBURG_CITY", "MAP_PETALBURG_CITY_GYM"],
+        "scripts": ["PetalburgCity_Gym_EventScript_Norman", "PetalburgCity_Gym_EventScript_BeginWallyTutorialNorth", "PetalburgCity_Gym_EventScript_BeginWallyTutorial", "PetalburgCity_EventScript_WallyTutorial"],
+        "tutorials": ["StartWallyTutorialBattle", "BATTLE_TYPE_CATCH_TUTORIAL"],
+        "states": ["VAR_PETALBURG_CITY_STATE", "VAR_PETALBURG_GYM_STATE"],
+        "labels": ["native_flow_required", "never_excluded", "wally_capture_tutorial_entered", "wally_capture_tutorial_rendered"]
+      },
+      "expected": {
+        "capture_serial_min": 1,
+        "battle_serial_min": 12
+      }
+    },
+    {
+      "id": "main-05-wally-tutorial-complete",
+      "parent": "main-05-wally-tutorial-entry",
+      "chapter": "Petalburg and Wally Tutorial",
+      "frames": 1,
+      "semantic_actions": [
+        {"type": "advance_dialogue", "max_presses": 100, "frames_per_press": 90},
+        {"type": "screenshot", "name": "wally-tutorial-return-complete"}
+      ],
+      "interactive_mode": "scripted_tutorial",
+      "battle_automation": "native",
+      "coverage": {
+        "maps": ["MAP_PETALBURG_CITY", "MAP_PETALBURG_CITY_GYM"],
+        "scripts": ["PetalburgCity_EventScript_WallyTutorial", "PetalburgCity_Gym_EventScript_ReturnFromWallyTutorial"],
+        "tutorials": ["StartWallyTutorialBattle", "BATTLE_TYPE_CATCH_TUTORIAL", "WallyHandleChooseAction", "B_ACTION_WALLY_THROW"],
+        "states": ["VAR_PETALBURG_CITY_STATE", "VAR_PETALBURG_GYM_STATE", "FLAG_HIDE_PETALBURG_CITY_WALLY", "FLAG_HIDE_PETALBURG_CITY_WALLYS_MOM", "FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_RIVAL"],
+        "labels": ["native_flow_required", "never_excluded", "wally_capture_tutorial_completed", "native_return_dialogue_completed"],
+        "interactive_flows": ["tutorial.wally_capture"]
+      },
+      "expected": {
+        "map": "MAP_PETALBURG_CITY_GYM",
+        "vars": {"VAR_PETALBURG_CITY_STATE": 3, "VAR_PETALBURG_GYM_STATE": 2},
+        "flags": {"FLAG_HIDE_PETALBURG_CITY_WALLY": 1, "FLAG_HIDE_PETALBURG_CITY_WALLYS_MOM": 1, "FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_RIVAL": 1},
+        "capture_serial_min": 1,
+        "battle_serial_min": 12,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-05-petalburg-west-exit",
+      "parent": "main-05-wally-tutorial-complete",
+      "chapter": "Petalburg and Wally Tutorial",
+      "frames": 1,
+      "semantic_actions": [
+        {"type": "walk_to", "position": [4, 110], "order": "yx"},
+        {"type": "face", "direction": "DOWN"},
+        {"type": "press", "keys": ["DOWN"], "frames": 120},
+        {"type": "wait_stable_overworld"},
+        {"type": "walk_to", "position": [12, 9], "order": "xy"},
+        {"type": "walk_to", "position": [12, 10], "order": "yx"},
+        {"type": "walk_to", "position": [5, 10], "order": "xy"},
+        {"type": "face", "direction": "LEFT"},
+        {"type": "press", "keys": ["LEFT"], "frames": 90},
+        {"type": "advance_dialogue", "max_presses": 24},
+        {"type": "screenshot", "name": "scott-petalburg-complete"},
+        {"type": "walk_to", "position": [2, 10], "order": "xy"},
+        {"type": "walk_to", "position": [2, 12], "order": "yx"},
+        {"type": "walk_to", "position": [1, 12], "order": "xy"},
+        {"type": "face", "direction": "LEFT"},
+        {"type": "screenshot", "name": "route104-west-exit-ready"}
+      ],
+      "coverage": {
+        "maps": ["MAP_PETALBURG_CITY_GYM", "MAP_PETALBURG_CITY"],
+        "scripts": ["PetalburgCity_EventScript_Scott0", "PetalburgCity_EventScript_Scott", "PetalburgCity_EventScript_ScottExit0"],
+        "states": ["VAR_PETALBURG_CITY_STATE", "VAR_PETALBURG_GYM_STATE", "VAR_SCOTT_PETALBURG_ENCOUNTER", "VAR_SCOTT_STATE"],
+        "labels": ["native_flow_required", "petalburg_story_exit", "route104_gate_ready"]
+      },
+      "expected": {
+        "map": "MAP_PETALBURG_CITY",
+        "position": [0, 12],
+        "facing": "WEST",
+        "vars": {"VAR_PETALBURG_CITY_STATE": 3, "VAR_PETALBURG_GYM_STATE": 2, "VAR_SCOTT_PETALBURG_ENCOUNTER": 1, "VAR_SCOTT_STATE": 1},
+        "flags": {"FLAG_HIDE_PETALBURG_CITY_WALLY": 1, "FLAG_VISITED_PETALBURG_CITY": 1},
+        "capture_serial_min": 1,
+        "battle_serial_min": 12,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-06-route104-south-entry",
+      "parent": "main-05-petalburg-west-exit",
+      "chapter": "Route 104 South",
+      "frames": 1,
+      "semantic_actions": [
+        {"type": "press", "keys": ["LEFT"], "frames": 120},
+        {"type": "wait_stable_overworld"},
+        {"type": "screenshot", "name": "route104-south-entry"}
+      ],
+      "coverage": {
+        "maps": ["MAP_PETALBURG_CITY", "MAP_ROUTE104"],
+        "scripts": ["Route104_OnTransition"],
+        "states": ["VAR_PETALBURG_CITY_STATE", "VAR_PETALBURG_GYM_STATE"],
+        "labels": ["native_flow_required", "route_connection", "route104_south"]
+      },
+      "expected": {
+        "map": "MAP_ROUTE104",
+        "vars": {"VAR_PETALBURG_CITY_STATE": 3, "VAR_PETALBURG_GYM_STATE": 2},
+        "flags": {"FLAG_VISITED_PETALBURG_CITY": 1},
+        "capture_serial_min": 1,
+        "battle_serial_min": 12,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-06-route104-billy",
+      "parent": "main-06-route104-south-entry",
+      "chapter": "Route 104 South",
+      "frames": 1,
+      "semantic_actions": [
+        {"type": "walk_to", "position": [29, 62], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [29, 73], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "screenshot", "name": "route104-south-beach"},
+        {"type": "walk_to", "position": [22, 73], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "face", "direction": "LEFT"},
+        {"type": "screenshot", "name": "billy-ready"},
+        {"type": "press", "keys": ["A"], "frames": 90},
+        {"type": "advance_dialogue", "max_presses": 24},
+        {"type": "screenshot", "name": "billy-defeated"}
+      ],
+      "coverage": {
+        "maps": ["MAP_ROUTE104"],
+        "object_scripts": ["Route104_EventScript_Billy"],
+        "trainers": ["TRAINER_BILLY"],
+        "branches": ["BATTLE_006_ROUTE_104_BILLY"],
+        "labels": ["route104_south", "beach_path", "optional_trainer_required_for_complete_campaign"]
+      },
+      "expected": {
+        "map": "MAP_ROUTE104",
+        "position": [22, 73],
+        "capture_serial_min": 1,
+        "battle_serial_min": 15,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-06-route104-darian",
+      "parent": "main-06-route104-billy",
+      "chapter": "Route 104 South",
+      "frames": 1,
+      "semantic_actions": [
+        {"type": "walk_to", "position": [22, 72], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [16, 72], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [16, 59], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "face", "direction": "LEFT"},
+        {"type": "screenshot", "name": "darian-ready"},
+        {"type": "press", "keys": ["A"], "frames": 90},
+        {"type": "advance_dialogue", "max_presses": 24},
+        {"type": "screenshot", "name": "darian-defeated"}
+      ],
+      "coverage": {
+        "maps": ["MAP_ROUTE104"],
+        "object_scripts": ["Route104_EventScript_Darian"],
+        "trainers": ["TRAINER_DARIAN"],
+        "branches": ["BATTLE_007_ROUTE_104_DARIAN"],
+        "labels": ["route104_south", "optional_trainer_required_for_complete_campaign"]
+      },
+      "expected": {
+        "map": "MAP_ROUTE104",
+        "position": [16, 59],
+        "capture_serial_min": 1,
+        "battle_serial_min": 16,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-06-briney-house-landmark",
+      "parent": "main-06-route104-darian",
+      "chapter": "Route 104 South",
+      "frames": 1,
+      "semantic_actions": [
+        {"type": "walk_to", "position": [17, 59], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [17, 51], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "face", "direction": "UP"},
+        {"type": "press", "keys": ["UP"], "frames": 120},
+        {"type": "wait_stable_overworld"},
+        {"type": "screenshot", "name": "briney-house-first-visit"},
+        {"type": "face", "direction": "DOWN"},
+        {"type": "press", "keys": ["DOWN"], "frames": 120},
+        {"type": "wait_stable_overworld"},
+        {"type": "screenshot", "name": "briney-house-exit"}
+      ],
+      "coverage": {
+        "maps": ["MAP_ROUTE104", "MAP_ROUTE104_MR_BRINEYS_HOUSE"],
+        "warps": ["Route104:0", "Route104_MrBrineysHouse:0"],
+        "map_scripts": ["Route104_MrBrineysHouse_OnTransition"],
+        "flags": ["FLAG_LANDMARK_MR_BRINEY_HOUSE"],
+        "vars": ["VAR_BRINEY_HOUSE_STATE"],
+        "labels": ["native_flow_required", "story_system_landmark"]
+      },
+      "expected": {
+        "map": "MAP_ROUTE104",
+        "position": [17, 51],
+        "vars": {"VAR_BRINEY_HOUSE_STATE": 0},
+        "flags": {"FLAG_LANDMARK_MR_BRINEY_HOUSE": 1},
+        "capture_serial_min": 1,
+        "battle_serial_min": 16,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-06-route104-cindy",
+      "parent": "main-06-briney-house-landmark",
+      "chapter": "Route 104 South",
+      "frames": 1,
+      "semantic_actions": [
+        {"type": "walk_to", "position": [21, 51], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [21, 49], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [20, 49], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [20, 47], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [15, 47], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [15, 46], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [12, 46], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [12, 44], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "face", "direction": "LEFT"},
+        {"type": "screenshot", "name": "cindy-ready"},
+        {"type": "press", "keys": ["A"], "frames": 90},
+        {"type": "advance_dialogue", "max_presses": 24},
+        {"type": "screenshot", "name": "cindy-defeated"}
+      ],
+      "coverage": {
+        "maps": ["MAP_ROUTE104"],
+        "object_scripts": ["Route104_EventScript_Cindy"],
+        "trainers": ["TRAINER_CINDY_1"],
+        "branches": ["BATTLE_008_ROUTE_104_CINDY"],
+        "labels": ["route104_south", "optional_trainer_required_for_complete_campaign"]
+      },
+      "expected": {
+        "map": "MAP_ROUTE104",
+        "position": [12, 44],
+        "capture_serial_min": 1,
+        "battle_serial_min": 17,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-06-petalburg-woods-entrance",
+      "parent": "main-06-route104-cindy",
+      "chapter": "Route 104 South",
+      "frames": 1,
+      "semantic_actions": [
+        {"type": "walk_to", "position": [12, 43], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [10, 43], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [10, 39], "order": "yx", "frames_per_step": 8, "allow_battle_interruptions": true},
+        {"type": "face", "direction": "UP"},
+        {"type": "screenshot", "name": "petalburg-woods-south-entrance-ready"}
+      ],
+      "coverage": {
+        "maps": ["MAP_ROUTE104"],
+        "warps": ["Route104:4"],
+        "labels": ["main_story_checkpoint", "petalburg_woods_entrance_ready"]
+      },
+      "expected": {
+        "map": "MAP_ROUTE104",
+        "position": [10, 39],
+        "facing": "NORTH",
+        "flags": {"FLAG_LANDMARK_MR_BRINEY_HOUSE": 1},
+        "capture_serial_min": 1,
+        "battle_serial_min": 17,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-07-petalburg-woods-entry",
+      "parent": "main-06-petalburg-woods-entrance",
+      "chapter": "Petalburg Woods",
+      "frames": 1,
+      "semantic_actions": [
+        {"type": "walk_to", "position": [11, 39], "order": "xy", "frames_per_step": 8},
+        {"type": "step", "direction": "UP", "allow_map_change": true},
+        {"type": "wait_stable_overworld"},
+        {"type": "screenshot", "name": "petalburg-woods-south-entry"}
+      ],
+      "coverage": {
+        "maps": ["MAP_ROUTE104", "MAP_PETALBURG_WOODS"],
+        "warps": ["Route104:5", "PetalburgWoods:3"],
+        "labels": ["main_story_checkpoint", "petalburg_woods_first_pass"]
+      },
+      "expected": {
+        "map": "MAP_PETALBURG_WOODS",
+        "position": [17, 38],
+        "capture_serial_min": 1,
+        "battle_serial_min": 17,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-07-woods-hidden-item-tutorial",
+      "parent": "main-07-petalburg-woods-entry",
+      "chapter": "Petalburg Woods",
+      "frames": 1,
+      "semantic_actions": [
+        {"type": "step", "direction": "UP"},
+        {"type": "walk_to", "position": [19, 37], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [19, 35], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [26, 35], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "interact_object", "local_id": 11, "candidates": [{"position": [27, 34]}, {"position": [28, 34]}, {"position": [29, 34]}, {"position": [30, 34]}, {"position": [31, 34]}, {"position": [32, 34]}, {"position": [33, 34]}, {"position": [27, 35]}, {"position": [28, 35]}, {"position": [29, 35]}, {"position": [30, 35]}, {"position": [31, 35]}, {"position": [32, 35]}, {"position": [33, 35]}, {"position": [32, 33]}, {"position": [33, 33]}], "max_relocations": 8, "frames_per_step": 24, "press_frames": 12, "allow_battle_interruptions": true, "screenshot": "boy2-live-interaction"},
+        {"type": "advance_dialogue", "max_presses": 12},
+        {"type": "screenshot", "name": "boy2-hidden-item-tip"},
+        {"type": "walk_to", "position": [37, 35], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [38, 35], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "interact_tile", "target": [39, 35], "press_frames": 12, "screenshot": "hidden-potion-message"},
+        {"type": "advance_dialogue", "max_presses": 12},
+        {"type": "screenshot", "name": "hidden-potion-collected"}
+      ],
+      "coverage": {
+        "maps": ["MAP_PETALBURG_WOODS"],
+        "object_scripts": ["PetalburgWoods_EventScript_Boy2"],
+        "flags": ["FLAG_HIDDEN_ITEM_PETALBURG_WOODS_POTION"],
+        "items": ["ITEM_POTION"],
+        "labels": ["native_flow_required", "hidden_item_tutorial", "petalburg_woods_first_pass"]
+      },
+      "expected": {
+        "map": "MAP_PETALBURG_WOODS",
+        "position": [38, 35],
+        "flags": {"FLAG_HIDDEN_ITEM_PETALBURG_WOODS_POTION": 1},
+        "capture_serial_min": 1,
+        "battle_serial_min": 17,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-07-woods-lyle-and-paralyze-heal",
+      "parent": "main-07-woods-hidden-item-tutorial",
+      "chapter": "Petalburg Woods",
+      "frames": 1,
+      "semantic_actions": [
+        {"type": "walk_to", "position": [14, 35], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [14, 33], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "interact_tile", "target": [14, 32], "press_frames": 12, "screenshot": "woods-experience-sign-message"},
+        {"type": "advance_dialogue", "max_presses": 12},
+        {"type": "screenshot", "name": "woods-experience-sign"},
+        {"type": "walk_to", "position": [7, 35], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "screenshot", "name": "lyle-defeated"},
+        {"type": "walk_to", "position": [6, 35], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [6, 33], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [4, 33], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [4, 27], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "interact_tile", "target": [4, 26], "press_frames": 12, "screenshot": "paralyze-heal-message"},
+        {"type": "advance_dialogue", "max_presses": 12},
+        {"type": "screenshot", "name": "paralyze-heal-collected"}
+      ],
+      "coverage": {
+        "maps": ["MAP_PETALBURG_WOODS"],
+        "bg_scripts": ["PetalburgWoods_EventScript_Sign1"],
+        "object_scripts": ["PetalburgWoods_EventScript_Lyle", "Common_EventScript_FindItem"],
+        "trainers": ["TRAINER_LYLE"],
+        "branches": ["BATTLE_009_PETALBURG_WOODS_LYLE"],
+        "flags": ["FLAG_ITEM_PETALBURG_WOODS_PARALYZE_HEAL"],
+        "items": ["ITEM_PARALYZE_HEAL"],
+        "labels": ["petalburg_woods_first_pass", "optional_trainer_required_for_complete_campaign"]
+      },
+      "expected": {
+        "map": "MAP_PETALBURG_WOODS",
+        "position": [4, 27],
+        "flags": {"FLAG_ITEM_PETALBURG_WOODS_PARALYZE_HEAL": 1},
+        "capture_serial_min": 1,
+        "battle_serial_min": 18,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-07-woods-aqua-entry",
+      "parent": "main-07-woods-lyle-and-paralyze-heal",
+      "chapter": "Petalburg Woods",
+      "frames": 1,
+      "semantic_actions": [
+        {"type": "walk_to", "position": [9, 27], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [27, 27], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [27, 24], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "screenshot", "name": "devon-researcher-trigger-ready"},
+        {"type": "step", "direction": "UP"},
+        {"type": "advance_until_battle", "max_presses": 100, "frames_per_press": 24, "screenshot": "aqua-grunt-native-battle", "screenshot_delay_frames": 180}
+      ],
+      "coverage": {
+        "maps": ["MAP_PETALBURG_WOODS"],
+        "coord_scripts": ["PetalburgWoods_EventScript_DevonResearcherRight"],
+        "scripts": ["PetalburgWoods_EventScript_DevonResearcherIntro"],
+        "trainers": ["TRAINER_GRUNT_PETALBURG_WOODS"],
+        "branches": ["BATTLE_010_PETALBURG_WOODS_AQUA_GRUNT"],
+        "labels": ["native_flow_required", "main_story_battle", "petalburg_woods_devon_theft"]
+      },
+      "expected": {
+        "capture_serial_min": 1,
+        "battle_serial_min": 18
+      }
+    },
+    {
+      "id": "main-07-woods-aqua-complete",
+      "parent": "main-07-woods-aqua-entry",
+      "chapter": "Petalburg Woods",
+      "frames": 1,
+      "semantic_actions": [
+        {"type": "advance_dialogue", "max_presses": 80, "frames_per_press": 90},
+        {"type": "screenshot", "name": "devon-great-ball-and-state-complete"}
+      ],
+      "coverage": {
+        "maps": ["MAP_PETALBURG_WOODS"],
+        "scripts": ["PetalburgWoods_EventScript_DevonResearcherPostBattle", "PetalburgWoods_EventScript_DevonResearcherFinish", "PetalburgWoods_EventScript_RemoveDevonResearcher"],
+        "trainers": ["TRAINER_GRUNT_PETALBURG_WOODS"],
+        "vars": ["VAR_PETALBURG_WOODS_STATE"],
+        "items": ["ITEM_GREAT_BALL"],
+        "labels": ["native_flow_required", "main_story_battle_completed", "devon_reward"]
+      },
+      "expected": {
+        "map": "MAP_PETALBURG_WOODS",
+        "vars": {"VAR_PETALBURG_WOODS_STATE": 1},
+        "capture_serial_min": 1,
+        "battle_serial_min": 19,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-07-woods-james-and-items",
+      "parent": "main-07-woods-aqua-complete",
+      "chapter": "Petalburg Woods",
+      "frames": 1,
+      "semantic_actions": [
+        {"type": "walk_to", "position": [26, 23], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [26, 19], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [17, 19], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "interact_object", "local_id": 8, "candidates": [{"position": [15, 16]}, {"position": [14, 17]}, {"position": [15, 17]}, {"position": [16, 17]}, {"position": [14, 18]}, {"position": [15, 18]}, {"position": [16, 18]}, {"position": [14, 19]}, {"position": [15, 19]}, {"position": [16, 19]}, {"position": [14, 20]}, {"position": [15, 20]}, {"position": [14, 21]}, {"position": [15, 21]}], "max_relocations": 8, "frames_per_step": 24, "press_frames": 12, "allow_battle_interruptions": true, "screenshot": "boy1-live-interaction"},
+        {"type": "advance_dialogue", "max_presses": 12},
+        {"type": "screenshot", "name": "boy1-grass-tip"},
+        {"type": "walk_to", "position": [5, 19], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "interact_tile", "target": [4, 19], "press_frames": 12, "screenshot": "hidden-poke-ball-message"},
+        {"type": "advance_dialogue", "max_presses": 12},
+        {"type": "screenshot", "name": "hidden-poke-ball-collected"},
+        {"type": "walk_to", "position": [4, 17], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "screenshot", "name": "james-defeated"},
+        {"type": "walk_to", "position": [5, 17], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [5, 13], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [4, 13], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [4, 9], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "interact_tile", "target": [4, 8], "press_frames": 12, "screenshot": "ether-message"},
+        {"type": "advance_dialogue", "max_presses": 12},
+        {"type": "screenshot", "name": "ether-collected"},
+        {"type": "walk_to", "position": [11, 10], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [11, 9], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "interact_tile", "target": [11, 8], "press_frames": 12, "screenshot": "woods-pp-sign-message"},
+        {"type": "advance_dialogue", "max_presses": 12},
+        {"type": "screenshot", "name": "woods-pp-sign"}
+      ],
+      "coverage": {
+        "maps": ["MAP_PETALBURG_WOODS"],
+        "object_scripts": ["PetalburgWoods_EventScript_Boy1", "PetalburgWoods_EventScript_James", "Common_EventScript_FindItem"],
+        "bg_scripts": ["PetalburgWoods_EventScript_Sign2"],
+        "trainers": ["TRAINER_JAMES_1"],
+        "branches": ["BATTLE_011_PETALBURG_WOODS_JAMES"],
+        "flags": ["FLAG_HIDDEN_ITEM_PETALBURG_WOODS_POKE_BALL", "FLAG_ITEM_PETALBURG_WOODS_ETHER"],
+        "items": ["ITEM_POKE_BALL", "ITEM_ETHER"],
+        "labels": ["petalburg_woods_first_pass", "optional_trainer_required_for_complete_campaign"]
+      },
+      "expected": {
+        "map": "MAP_PETALBURG_WOODS",
+        "position": [11, 9],
+        "vars": {"VAR_PETALBURG_WOODS_STATE": 1},
+        "flags": {"FLAG_HIDDEN_ITEM_PETALBURG_WOODS_POKE_BALL": 1, "FLAG_ITEM_PETALBURG_WOODS_ETHER": 1},
+        "capture_serial_min": 1,
+        "battle_serial_min": 20,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-07-woods-north-exit",
+      "parent": "main-07-woods-james-and-items",
+      "chapter": "Petalburg Woods",
+      "frames": 1,
+      "semantic_actions": [
+        {"type": "walk_to", "position": [14, 9], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [14, 6], "order": "yx", "frames_per_step": 8, "allow_battle_interruptions": true},
+        {"type": "step", "direction": "UP"},
+        {"type": "step", "direction": "UP", "allow_map_change": true},
+        {"type": "wait_stable_overworld"},
+        {"type": "screenshot", "name": "route104-north-emergence"}
+      ],
+      "coverage": {
+        "maps": ["MAP_PETALBURG_WOODS", "MAP_ROUTE104"],
+        "warps": ["PetalburgWoods:0", "Route104:2"],
+        "labels": ["main_story_checkpoint", "petalburg_woods_first_pass_complete"]
+      },
+      "expected": {
+        "map": "MAP_ROUTE104",
+        "position": [10, 29],
+        "vars": {"VAR_PETALBURG_WOODS_STATE": 1},
+        "flags": {"FLAG_HIDDEN_ITEM_PETALBURG_WOODS_POTION": 1, "FLAG_ITEM_PETALBURG_WOODS_PARALYZE_HEAL": 1, "FLAG_HIDDEN_ITEM_PETALBURG_WOODS_POKE_BALL": 1, "FLAG_ITEM_PETALBURG_WOODS_ETHER": 1},
+        "capture_serial_min": 1,
+        "battle_serial_min": 20,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-08-route104-winston-haley",
+      "parent": "main-07-woods-north-exit",
+      "chapter": "Route 104 North",
+      "frames": 1,
+      "semantic_actions": [
+        {"type": "walk_to", "position": [10, 27], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [6, 27], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [6, 26], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "interact_object", "local_id": 32, "candidates": [{"position": [6, 26]}, {"position": [4, 26]}, {"position": [5, 25]}, {"position": [5, 27]}], "max_relocations": 2, "press_frames": 12, "screenshot": "route104-boy2-interaction"},
+        {"type": "advance_dialogue", "max_presses": 12},
+        {"type": "walk_to", "position": [20, 26], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [20, 25], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "interact_object", "local_id": 25, "candidates": [{"position": [20, 25]}, {"position": [22, 25]}, {"position": [21, 24]}, {"position": [21, 26]}], "max_relocations": 2, "press_frames": 12, "screenshot": "winston-live-interaction"},
+        {"type": "advance_dialogue", "max_presses": 24},
+        {"type": "screenshot", "name": "winston-defeated"},
+        {"type": "walk_to", "position": [20, 24], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [24, 24], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "screenshot", "name": "haley-defeated"}
+      ],
+      "coverage": {
+        "maps": ["MAP_ROUTE104"],
+        "object_scripts": ["Route104_EventScript_Boy2", "Route104_EventScript_Winston", "Route104_EventScript_Haley"],
+        "trainers": ["TRAINER_WINSTON_1", "TRAINER_HALEY_1"],
+        "branches": ["BATTLE_012_ROUTE_104_WINSTON", "BATTLE_013_ROUTE_104_HALEY"],
+        "flags": ["FLAG_RECEIVED_ROUTE104_LEAF_STONE"],
+        "items": ["ITEM_LEAF_STONE"],
+        "labels": ["route104_north", "all_reachable_trainers"]
+      },
+      "expected": {
+        "map": "MAP_ROUTE104",
+        "position": [24, 24],
+        "flags": {"FLAG_RECEIVED_ROUTE104_LEAF_STONE": 1},
+        "capture_serial_min": 1,
+        "battle_serial_min": 28,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-08-route104-gina-mia",
+      "parent": "main-08-route104-winston-haley",
+      "chapter": "Route 104 North",
+      "frames": 1,
+      "semantic_actions": [
+        {"type": "walk_to", "position": [24, 25], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [27, 25], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [27, 24], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [30, 24], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [30, 16], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [27, 16], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "interact_object", "local_id": 23, "candidates": [{"position": [27, 16]}, {"position": [26, 15]}, {"position": [27, 14]}], "max_relocations": 2, "press_frames": 12, "screenshot": "gina-mia-live-interaction"},
+        {"type": "advance_dialogue", "max_presses": 24},
+        {"type": "screenshot", "name": "gina-mia-defeated"}
+      ],
+      "coverage": {
+        "maps": ["MAP_ROUTE104"],
+        "object_scripts": ["Route104_EventScript_Gina", "Route104_EventScript_Mia"],
+        "trainers": ["TRAINER_GINA_AND_MIA_1"],
+        "branches": ["BATTLE_014_ROUTE_104_GINA_MIA"],
+        "labels": ["route104_north", "all_reachable_trainers"]
+      },
+      "expected": {
+        "map": "MAP_ROUTE104",
+        "position": [27, 16],
+        "capture_serial_min": 1,
+        "battle_serial_min": 29,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-08-route104-flower-shop-entry",
+      "parent": "main-08-route104-gina-mia",
+      "chapter": "Route 104 North",
+      "frames": 1,
+      "semantic_actions": [
+        {"type": "walk_to", "position": [30, 16], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [30, 23], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [18, 23], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "interact_tile", "target": [17, 23], "press_frames": 12, "screenshot": "double-battle-trainer-tip"},
+        {"type": "advance_dialogue", "max_presses": 16},
+        {"type": "walk_to", "position": [18, 24], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [6, 24], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [6, 20], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "interact_tile", "target": [7, 20], "press_frames": 12, "screenshot": "pretty-petal-sign"},
+        {"type": "advance_dialogue", "max_presses": 12},
+        {"type": "walk_to", "position": [5, 19], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "step", "direction": "UP", "allow_map_change": true},
+        {"type": "wait_stable_overworld"},
+        {"type": "screenshot", "name": "pretty-petal-entry"}
+      ],
+      "coverage": {
+        "maps": ["MAP_ROUTE104", "MAP_ROUTE104_PRETTY_PETAL_FLOWER_SHOP"],
+        "bg_scripts": ["Route104_EventScript_TrainerTipsDoubleBattles", "Route104_EventScript_FlowerShopSign"],
+        "warps": ["Route104:1", "Route104_PrettyPetalFlowerShop:0"],
+        "labels": ["route104_north_first_pass", "flower_shop_service"]
+      },
+      "expected": {
+        "map": "MAP_ROUTE104_PRETTY_PETAL_FLOWER_SHOP",
+        "position": [2, 8],
+        "battle_serial_min": 29,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-08-pretty-petal-services",
+      "parent": "main-08-route104-flower-shop-entry",
+      "chapter": "Route 104 Pretty Petal Flower Shop",
+      "frames": 1,
+      "semantic_actions": [
+        {"type": "interact_object", "local_id": 1, "candidates": [{"position": [3, 6]}, {"position": [4, 5]}, {"position": [5, 6]}, {"position": [4, 7]}], "screenshot": "shop-owner-berry-lesson"},
+        {"type": "advance_dialogue", "max_presses": 24},
+        {"type": "walk_to", "position": [3, 4], "order": "yx"},
+        {"type": "interact_object", "local_id": 2, "candidates": [{"position": [5, 3]}, {"position": [6, 2]}, {"position": [6, 3]}, {"position": [6, 4]}, {"position": [7, 3]}, {"position": [7, 4]}, {"position": [8, 3]}, {"position": [8, 4]}, {"position": [9, 3]}], "max_relocations": 128, "retry_failed_pairs": true, "screenshot": "wailmer-pail-gift"},
+        {"type": "advance_dialogue", "max_presses": 24},
+        {"type": "walk_to", "position": [6, 4], "order": "yx"},
+        {"type": "walk_to", "position": [9, 4], "order": "yx"},
+        {"type": "interact_object", "local_id": 3, "candidates": [{"position": [8, 4]}, {"position": [8, 5]}, {"position": [8, 8]}, {"position": [9, 3]}, {"position": [9, 4]}, {"position": [9, 5]}, {"position": [9, 6]}, {"position": [9, 7]}, {"position": [9, 8]}, {"position": [10, 3]}, {"position": [10, 4]}, {"position": [10, 5]}, {"position": [10, 6]}, {"position": [10, 7]}, {"position": [10, 8]}, {"position": [11, 4]}, {"position": [11, 5]}, {"position": [11, 6]}, {"position": [11, 7]}, {"position": [11, 8]}, {"position": [12, 4]}, {"position": [12, 8]}, {"position": [13, 3]}, {"position": [13, 4]}, {"position": [13, 8]}, {"position": [14, 4]}, {"position": [14, 8]}], "max_relocations": 256, "retry_failed_pairs": true, "screenshot": "daily-berry-gift"},
+        {"type": "advance_dialogue", "max_presses": 24},
+        {"type": "walk_to", "position": [9, 8], "order": "yx"},
+        {"type": "walk_to", "position": [4, 8], "order": "xy"},
+        {"type": "walk_to", "position": [4, 7], "order": "yx"},
+        {"type": "walk_to", "position": [2, 7], "order": "xy"},
+        {"type": "step", "direction": "DOWN"},
+        {"type": "step", "direction": "DOWN", "allow_map_change": true},
+        {"type": "wait_stable_overworld"},
+        {"type": "screenshot", "name": "pretty-petal-services-complete"}
+      ],
+      "coverage": {
+        "maps": ["MAP_ROUTE104_PRETTY_PETAL_FLOWER_SHOP", "MAP_ROUTE104"],
+        "object_scripts": ["Route104_PrettyPetalFlowerShop_EventScript_ShopOwner", "Route104_PrettyPetalFlowerShop_EventScript_WailmerPailGirl", "Route104_PrettyPetalFlowerShop_EventScript_RandomBerryGirl"],
+        "flags": ["FLAG_MET_PRETTY_PETAL_SHOP_OWNER", "FLAG_RECEIVED_WAILMER_PAIL", "FLAG_DAILY_FLOWER_SHOP_RECEIVED_BERRY"],
+        "items": ["ITEM_WAILMER_PAIL", "ITEM_CHERI_BERRY", "ITEM_ORAN_BERRY", "ITEM_PECHA_BERRY", "ITEM_RAWST_BERRY", "ITEM_ASPEAR_BERRY", "ITEM_PERSIM_BERRY"],
+        "labels": ["route104_north_first_pass", "flower_shop_service", "daily_service", "dynamic_object_interaction"]
+      },
+      "expected": {
+        "map": "MAP_ROUTE104",
+        "position": [5, 19],
+        "flags": {"FLAG_MET_PRETTY_PETAL_SHOP_OWNER": 1, "FLAG_RECEIVED_WAILMER_PAIL": 1, "FLAG_DAILY_FLOWER_SHOP_RECEIVED_BERRY": 1},
+        "battle_serial_min": 29,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-08-route104-left-berries-and-items",
+      "parent": "main-08-pretty-petal-services",
+      "chapter": "Route 104 North",
+      "frames": 1,
+      "semantic_actions": [
+        {"type": "walk_to", "position": [4, 23], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "interact_object", "local_id": 18, "candidates": [{"position": [4, 23]}, {"position": [3, 22]}, {"position": [2, 23]}, {"position": [3, 24]}], "screenshot": "oran-berry-tree"},
+        {"type": "advance_dialogue", "max_presses": 24},
+        {"type": "walk_to", "position": [4, 25], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "interact_object", "local_id": 20, "candidates": [{"position": [4, 25]}, {"position": [3, 24]}, {"position": [2, 25]}, {"position": [3, 26]}], "screenshot": "cheri-berry-tree-left"},
+        {"type": "advance_dialogue", "max_presses": 24},
+        {"type": "walk_to", "position": [4, 26], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [2, 26], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [2, 10], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [3, 10], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "interact_tile", "target": [3, 9], "press_frames": 12, "screenshot": "hidden-poke-ball"},
+        {"type": "advance_dialogue", "max_presses": 12},
+        {"type": "walk_to", "position": [5, 9], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "interact_object", "local_id": 31, "candidates": [{"position": [5, 9]}, {"position": [4, 8]}, {"position": [6, 8]}, {"position": [5, 7]}], "screenshot": "route104-potion"},
+        {"type": "advance_dialogue", "max_presses": 12},
+        {"type": "walk_to", "position": [7, 7], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "interact_tile", "target": [7, 6], "press_frames": 12, "screenshot": "hidden-super-potion"},
+        {"type": "advance_dialogue", "max_presses": 12},
+        {"type": "screenshot", "name": "route104-left-items-complete"}
+      ],
+      "coverage": {
+        "maps": ["MAP_ROUTE104"],
+        "object_scripts": ["BerryTreeScript", "Common_EventScript_FindItem"],
+        "flags": ["FLAG_HIDDEN_ITEM_ROUTE_104_POKE_BALL", "FLAG_ITEM_ROUTE_104_POTION", "FLAG_HIDDEN_ITEM_ROUTE_104_SUPER_POTION"],
+        "items": ["ITEM_ORAN_BERRY", "ITEM_CHERI_BERRY", "ITEM_POKE_BALL", "ITEM_POTION", "ITEM_SUPER_POTION"],
+        "labels": ["route104_north_first_pass", "berry_harvest", "hidden_item"]
+      },
+      "expected": {
+        "map": "MAP_ROUTE104",
+        "position": [7, 7],
+        "flags": {"FLAG_HIDDEN_ITEM_ROUTE_104_POKE_BALL": 1, "FLAG_ITEM_ROUTE_104_POTION": 1, "FLAG_HIDDEN_ITEM_ROUTE_104_SUPER_POTION": 1},
+        "battle_serial_min": 29,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-08-route104-ivan-berries-and-gifts",
+      "parent": "main-08-route104-left-berries-and-items",
+      "chapter": "Route 104 North",
+      "frames": 1,
+      "semantic_actions": [
+        {"type": "walk_to", "position": [2, 10], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [2, 26], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [4, 26], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [4, 27], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [6, 27], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [6, 26], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [30, 26], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [30, 16], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [24, 16], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [24, 8], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [28, 8], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "interact_object", "local_id": 9, "candidates": [{"position": [28, 8]}], "screenshot": "ivan-native-battle"},
+        {"type": "advance_dialogue", "max_presses": 40},
+        {"type": "screenshot", "name": "ivan-defeated"},
+        {"type": "walk_to", "position": [28, 7], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [23, 7], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [23, 6], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "interact_tile", "target": [23, 5], "press_frames": 12, "screenshot": "route104-rustboro-sign"},
+        {"type": "advance_dialogue", "max_presses": 24},
+        {"type": "walk_to", "position": [34, 7], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "interact_object", "local_id": 10, "candidates": [{"position": [34, 7]}, {"position": [33, 6]}], "screenshot": "cheri-berry-tree-right"},
+        {"type": "advance_dialogue", "max_presses": 24},
+        {"type": "walk_to", "position": [36, 7], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "interact_object", "local_id": 12, "candidates": [{"position": [36, 7]}, {"position": [37, 6]}], "screenshot": "leppa-berry-tree"},
+        {"type": "advance_dialogue", "max_presses": 24},
+        {"type": "walk_to", "position": [36, 8], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "interact_object", "local_id": 16, "candidates": [{"position": [36, 8]}, {"position": [37, 7]}, {"position": [38, 8]}, {"position": [37, 9]}], "screenshot": "chesto-berry-gift"},
+        {"type": "advance_dialogue", "max_presses": 24},
+        {"type": "screenshot", "name": "route104-north-services-complete"}
+      ],
+      "coverage": {
+        "maps": ["MAP_ROUTE104"],
+        "object_scripts": ["Route104_EventScript_Ivan", "BerryTreeScript", "Route104_EventScript_ExpertF"],
+        "bg_scripts": ["Route104_EventScript_RouteSignRustboro"],
+        "trainers": ["TRAINER_IVAN"],
+        "branches": ["BATTLE_015_ROUTE_104_IVAN"],
+        "flags": ["FLAG_RECEIVED_CHESTO_BERRY_ROUTE_104"],
+        "items": ["ITEM_CHERI_BERRY", "ITEM_LEPPA_BERRY", "ITEM_CHESTO_BERRY"],
+        "labels": ["route104_north_first_pass", "optional_trainer_required_for_complete_campaign", "berry_harvest", "dynamic_object_interaction", "deferred_love_ball_until_cut", "deferred_pp_up_until_surf", "deferred_exterior_florist_until_badge03"]
+      },
+      "expected": {
+        "map": "MAP_ROUTE104",
+        "flags": {"FLAG_RECEIVED_CHESTO_BERRY_ROUTE_104": 1},
+        "capture_serial_min": 1,
+        "battle_serial_min": 31,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-08-rustboro-south-checkpoint",
+      "parent": "main-08-route104-ivan-berries-and-gifts",
+      "chapter": "Rustboro City",
+      "frames": 1,
+      "semantic_actions": [
+        {"type": "walk_to", "position": [36, 7], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [16, 7], "order": "xy", "allow_battle_interruptions": true},
+        {"type": "walk_to", "position": [16, 0], "order": "yx", "allow_battle_interruptions": true},
+        {"type": "press", "keys": ["UP"], "frames": 90, "duration": 60},
+        {"type": "wait_stable_overworld"},
+        {"type": "screenshot", "name": "rustboro-south-clean-checkpoint"}
+      ],
+      "coverage": {
+        "maps": ["MAP_ROUTE104", "MAP_RUSTBORO_CITY"],
+        "labels": ["main_story_checkpoint", "route104_north_first_pass_complete", "rustboro_entry"]
+      },
+      "expected": {
+        "map": "MAP_RUSTBORO_CITY",
+        "capture_serial_min": 1,
+        "battle_serial_min": 31,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-09-rustboro-cutters-house",
+      "parent": "main-08-rustboro-south-checkpoint",
+      "chapter": "Rustboro City",
+      "frames": 1,
+      "semantic_actions": [
+        {"type": "walk_to", "position": [12, 56], "order": "xy"},
+        {"type": "walk_to", "position": [12, 53], "order": "yx"},
+        {"type": "walk_to", "position": [11, 53], "order": "xy"},
+        {"type": "walk_to", "position": [11, 43], "order": "yx"},
+        {"type": "walk_to", "position": [9, 43], "order": "xy"},
+        {"type": "walk_to", "position": [9, 39], "order": "yx"},
+        {"type": "step", "direction": "UP"},
+        {"type": "step", "direction": "UP", "allow_map_change": true},
+        {"type": "wait_stable_overworld"},
+        {"type": "interact_object", "local_id": 1, "candidates": [{"position": [7, 6]}, {"position": [6, 5]}, {"position": [7, 4]}], "screenshot": "cut-hm-native-gift"},
+        {"type": "advance_dialogue", "max_presses": 32},
+        {"type": "interact_object", "local_id": 2, "candidates": [{"position": [8, 3]}, {"position": [9, 3]}, {"position": [10, 3]}], "max_relocations": 128, "retry_failed_pairs": true, "frames_per_step": 8, "screenshot": "cutters-house-lass"},
+        {"type": "advance_dialogue", "max_presses": 16},
+        {"type": "walk_to", "position": [5, 7], "order": "yx"},
+        {"type": "step", "direction": "DOWN"},
+        {"type": "step", "direction": "DOWN", "allow_map_change": true},
+        {"type": "wait_stable_overworld"},
+        {"type": "screenshot", "name": "cutters-house-complete"}
+      ],
+      "coverage": {
+        "maps": ["MAP_RUSTBORO_CITY", "MAP_RUSTBORO_CITY_CUTTERS_HOUSE"],
+        "scripts": ["RustboroCity_CuttersHouse_EventScript_Cutter", "RustboroCity_CuttersHouse_EventScript_Lass"],
+        "flags": ["FLAG_RECEIVED_HM_CUT"],
+        "items": ["ITEM_HM_CUT"],
+        "labels": ["rustboro_first_visit", "native_field_move_gift"]
+      },
+      "expected": {
+        "map": "MAP_RUSTBORO_CITY",
+        "position": [9, 39],
+        "flags": {"FLAG_RECEIVED_HM_CUT": 1},
+        "battle_serial_min": 31,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-09-rustboro-pokemon-center",
+      "parent": "main-09-rustboro-cutters-house",
+      "chapter": "Rustboro City",
+      "frames": 1,
+      "interactive_mode": "stateful_service",
+      "battle_automation": "native",
+      "semantic_actions": [
+        {"type": "walk_to", "position": [12, 39], "order": "xy"},
+        {"type": "interact_tile", "target": [12, 38], "screenshot": "cutters-house-sign"},
+        {"type": "advance_dialogue", "max_presses": 12},
+        {"type": "walk_to", "position": [16, 40], "order": "xy"},
+        {"type": "walk_to", "position": [16, 39], "order": "yx"},
+        {"type": "step", "direction": "UP"},
+        {"type": "step", "direction": "UP", "allow_map_change": true},
+        {"type": "wait_stable_overworld"},
+        {"type": "walk_to", "position": [8, 4], "order": "yx"},
+        {"type": "face", "direction": "UP"},
+        {"type": "press", "keys": ["A"], "frames": 20, "duration": 4},
+        {"type": "screenshot", "name": "rustboro-native-heal"},
+        {"type": "advance_dialogue", "max_presses": 40},
+        {"type": "interact_object", "local_id": 2, "candidates": [{"position": [4, 7], "waypoints": [[8, 7], [4, 7]]}], "screenshot": "center-man"},
+        {"type": "advance_dialogue", "max_presses": 16},
+        {"type": "interact_object", "local_id": 3, "candidates": [{"position": [3, 4]}, {"position": [4, 4]}, {"position": [5, 4]}, {"position": [6, 4]}, {"position": [7, 4]}, {"position": [3, 5]}, {"position": [7, 5]}, {"position": [3, 6]}, {"position": [4, 6]}, {"position": [5, 6]}, {"position": [6, 6]}, {"position": [7, 6]}], "max_relocations": 128, "retry_failed_pairs": true, "frames_per_step": 8, "screenshot": "center-boy"},
+        {"type": "advance_dialogue", "max_presses": 16},
+        {"type": "interact_object", "local_id": 4, "candidates": [{"position": [11, 7]}, {"position": [12, 6]}], "screenshot": "center-girl"},
+        {"type": "advance_dialogue", "max_presses": 16},
+        {"type": "walk_to", "position": [1, 4], "order": "yx"},
+        {"type": "face", "direction": "UP"},
+        {"type": "press", "keys": ["A"], "frames": 20, "duration": 4},
+        {"type": "press", "keys": ["A"], "frames": 90, "duration": 4},
+        {"type": "screenshot", "name": "center-ball-mart-open"},
+        {"type": "press", "keys": ["B"], "frames": 120, "duration": 8},
+        {"type": "press", "keys": ["B"], "frames": 120, "duration": 8},
+        {"type": "wait_stable_overworld"},
+        {"type": "walk_to", "position": [2, 4], "order": "xy"},
+        {"type": "face", "direction": "UP"},
+        {"type": "press", "keys": ["A"], "frames": 20, "duration": 4},
+        {"type": "screenshot", "name": "center-battle-vendor-open"},
+        {"type": "press", "keys": ["UP"], "frames": 40, "duration": 8},
+        {"type": "press", "keys": ["A"], "frames": 90, "duration": 4},
+        {"type": "press", "keys": ["B"], "frames": 20, "duration": 2},
+        {"type": "press", "keys": ["B"], "frames": 20, "duration": 2},
+        {"type": "press", "keys": ["B"], "frames": 20, "duration": 2},
+        {"type": "wait_stable_overworld"},
+        {"type": "walk_to", "position": [13, 4], "order": "xy"},
+        {"type": "face", "direction": "UP"},
+        {"type": "press", "keys": ["A"], "frames": 20, "duration": 4},
+        {"type": "screenshot", "name": "center-move-tutor-open"},
+        {"type": "press", "keys": ["DOWN"], "frames": 40, "duration": 8},
+        {"type": "press", "keys": ["DOWN"], "frames": 40, "duration": 8},
+        {"type": "press", "keys": ["DOWN"], "frames": 40, "duration": 8},
+        {"type": "press", "keys": ["DOWN"], "frames": 40, "duration": 8},
+        {"type": "press", "keys": ["DOWN"], "frames": 40, "duration": 8},
+        {"type": "press", "keys": ["A"], "frames": 90, "duration": 4},
+        {"type": "press", "keys": ["B"], "frames": 20, "duration": 2},
+        {"type": "press", "keys": ["B"], "frames": 20, "duration": 2},
+        {"type": "press", "keys": ["B"], "frames": 20, "duration": 2},
+        {"type": "wait_stable_overworld"},
+        {"type": "walk_to", "position": [8, 6], "order": "xy"},
+        {"type": "walk_to", "position": [8, 7], "order": "yx"},
+        {"type": "step", "direction": "DOWN"},
+        {"type": "step", "direction": "DOWN", "allow_map_change": true},
+        {"type": "wait_stable_overworld"},
+        {"type": "screenshot", "name": "rustboro-center-complete"}
+      ],
+      "coverage": {
+        "maps": ["MAP_RUSTBORO_CITY", "MAP_RUSTBORO_CITY_POKEMON_CENTER_1F"],
+        "scripts": ["RustboroCity_PokemonCenter_1F_EventScript_Nurse", "RustboroCity_PokemonCenter_1F_EventScript_Man", "RustboroCity_PokemonCenter_1F_EventScript_Boy", "RustboroCity_PokemonCenter_1F_EventScript_Girl", "RustboroCity_PokemonCenter_1F_EventScript_Clerk2", "Common_EventScript_EmeraldChampionsBattleVendor", "Common_EventScript_EmeraldChampionsMoveTutor"],
+        "interactive_flows": ["service.battle_preparation_center"],
+        "labels": ["rustboro_first_visit", "native_heal", "native_shop", "native_battle_vendor", "native_move_tutor"]
+      },
+      "expected": {
+        "map": "MAP_RUSTBORO_CITY",
+        "position": [16, 39],
+        "flags": {"FLAG_RECEIVED_HM_CUT": 1},
+        "battle_serial_min": 31,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-09-rustboro-mart",
+      "parent": "main-09-rustboro-pokemon-center",
+      "chapter": "Rustboro City",
+      "frames": 1,
+      "semantic_actions": [
+        {"type": "walk_to", "position": [16, 42], "order": "yx"},
+        {"type": "walk_to", "position": [14, 42], "order": "xy"},
+        {"type": "walk_to", "position": [14, 46], "order": "yx"},
+        {"type": "walk_to", "position": [16, 46], "order": "xy"},
+        {"type": "walk_to", "position": [16, 47], "order": "yx"},
+        {"type": "walk_to", "position": [16, 46], "order": "yx"},
+        {"type": "step", "direction": "UP"},
+        {"type": "step", "direction": "UP", "allow_map_change": true},
+        {"type": "wait_stable_overworld"},
+        {"type": "interact_object", "local_id": 2, "candidates": [{"position": [3, 6]}], "screenshot": "mart-boy"},
+        {"type": "advance_dialogue", "max_presses": 16},
+        {"type": "walk_to", "position": [3, 7], "order": "yx"},
+        {"type": "walk_to", "position": [9, 7], "order": "xy"},
+        {"type": "interact_object", "local_id": 3, "candidates": [{"position": [9, 3]}, {"position": [9, 4]}, {"position": [9, 5]}], "max_relocations": 128, "retry_failed_pairs": true, "frames_per_step": 8, "screenshot": "mart-pokefan"},
+        {"type": "advance_dialogue", "max_presses": 16},
+        {"type": "interact_object", "local_id": 4, "candidates": [{"position": [8, 3]}, {"position": [7, 2]}, {"position": [9, 2]}], "screenshot": "mart-bug-catcher"},
+        {"type": "advance_dialogue", "max_presses": 16},
+        {"type": "walk_to", "position": [9, 3], "order": "yx"},
+        {"type": "interact_object", "local_id": 5, "candidates": [{"position": [4, 2]}, {"position": [4, 3]}, {"position": [4, 4]}, {"position": [4, 5]}, {"position": [5, 6]}, {"position": [6, 2]}, {"position": [6, 3]}, {"position": [6, 4]}, {"position": [6, 5]}], "max_relocations": 128, "retry_failed_pairs": true, "frames_per_step": 8, "screenshot": "mart-move-specialist"},
+        {"type": "advance_dialogue", "max_presses": 16},
+        {"type": "walk_to", "position": [6, 3], "order": "yx"},
+        {"type": "walk_to", "position": [3, 3], "order": "xy"},
+        {"type": "face", "direction": "LEFT"},
+        {"type": "press", "keys": ["A"], "frames": 20, "duration": 4},
+        {"type": "screenshot", "name": "rustboro-mart-greeting"},
+        {"type": "press", "keys": ["A"], "frames": 90, "duration": 4},
+        {"type": "screenshot", "name": "rustboro-mart-native-list"},
+        {"type": "press", "keys": ["B"], "frames": 120, "duration": 8},
+        {"type": "press", "keys": ["B"], "frames": 120, "duration": 8},
+        {"type": "wait_stable_overworld"},
+        {"type": "walk_to", "position": [3, 6], "order": "yx"},
+        {"type": "walk_to", "position": [3, 7], "order": "yx"},
+        {"type": "step", "direction": "DOWN", "allow_map_change": true},
+        {"type": "wait_stable_overworld"},
+        {"type": "screenshot", "name": "rustboro-mart-complete"}
+      ],
+      "coverage": {
+        "maps": ["MAP_RUSTBORO_CITY", "MAP_RUSTBORO_CITY_MART"],
+        "scripts": ["RustboroCity_Mart_EventScript_Clerk", "RustboroCity_Mart_EventScript_Boy", "RustboroCity_Mart_EventScript_PokefanF", "RustboroCity_Mart_EventScript_BugCatcher", "RustboroCity_Mart_EventScript_MoveSpecialist"],
+        "labels": ["rustboro_first_visit", "native_shop"]
+      },
+      "expected": {
+        "map": "MAP_RUSTBORO_CITY",
+        "position": [16, 46],
+        "flags": {"FLAG_RECEIVED_HM_CUT": 1},
+        "battle_serial_min": 31,
+        "stable_overworld": true
+      }
+    },
+    {
+      "id": "main-09-rustboro-flat2",
+      "parent": "main-09-rustboro-mart",
+      "chapter": "Rustboro City Residential",
+      "frames": 1,
+      "semantic_actions": [
+        {"type": "walk_to", "position": [16, 47], "order": "yx"},
+        {"type": "walk_to", "position": [10, 47], "order": "xy"},
+        {"type": "walk_to", "position": [10, 52], "order": "yx"},
+        {"type": "walk_to", "position": [5, 53], "order": "xy"},
+        {"type": "walk_to", "position": [5, 52], "order": "yx"},
+        {"type": "step", "direction": "UP"},
+        {"type": "step", "direction": "UP", "allow_map_change": true},
+        {"type": "wait_stable_overworld"},
+        {"type": "interact_object", "local_id": 2, "candidates": [{"position": [8, 5]}, {"position": [7, 4]}], "screenshot": "flat2-old-woman"},
+        {"type": "advance_dialogue", "max_presses": 16},
+        {"type": "interact_object", "local_id": 1, "candidates": [{"position": [11, 5], "waypoints": [[7, 5], [11, 5]]}, {"position": [12, 4], "waypoints": [[7, 5], [12, 5], [12, 4]]}], "screenshot": "flat2-skitty"},
+        {"type": "advance_dialogue", "max_presses": 16},
+        {"type": "walk_to", "position": [7, 5], "order": "xy"},
+        {"type": "walk_to", "position": [7, 8], "order": "yx"},
+        {"type": "walk_to", "position": [3, 8], "order": "xy"},
+        {"type": "walk_to", "position": [3, 2], "order": "yx"},
+        {"type": "step", "direction": "UP", "allow_map_change": true},
+        {"type": "wait_stable_overworld"},
+        {"type": "walk_to", "position": [3, 4], "order": "yx"},
+        {"type": "interact_object", "local_id": 3, "candidates": [{"position": [0, 4]}, {"position": [1, 4]}, {"position": [2, 4]}, {"position": [3, 4]}, {"position": [4, 4]}, {"position": [0, 6]}, {"position": [1, 6]}, {"position": [2, 6]}, {"position": [3, 6]}, {"position": [4, 6]}], "max_relocations": 256, "retry_failed_pairs": true, "frames_per_step": 8, "screenshot": "flat2-metal-coat-gift"},
+        {"type": "advance_dialogue", "max_presses": 28},
+        {"type": "walk_to", "position": [3, 8], "order": "yx"},
+        {"type": "walk_to", "position": [8, 8], "order": "xy"},
+        {"type": "interact_object", "local_id": 2, "candidates": [{"position": [6, 2]}, {"position": [6, 3]}, {"position": [6, 4]}, {"position": [7, 2]}, {"position": [7, 4]}, {"position": [8, 2]}, {"position": [8, 3]}, {"position": [8, 4]}, {"position": [9, 2]}, {"position": [9, 4]}, {"position": [10, 3]}], "max_relocations": 256, "retry_failed_pairs": true, "frames_per_step": 8, "screenshot": "flat2-premier-ball-gift"},
+        {"type": "advance_dialogue", "max_presses": 28},
+        {"type": "interact_object", "local_id": 1, "candidates": [{"position": [10, 4]}, {"position": [11, 5]}], "screenshot": "flat2-old-man"},
+        {"type": "advance_dialogue", "max_presses": 16},
+        {"type": "walk_to", "position": [8, 8], "order": "yx"},
+        {"type": "walk_to", "position": [1, 8], "order": "xy"},
+        {"type": "walk_to", "position": [1, 2], "order": "yx"},
+        {"type": "step", "direction": "UP", "allow_map_change": true},
+        {"type": "wait_stable_overworld"},
+        {"type": "walk_to", "position": [3, 8], "order": "yx"},
+        {"type": "walk_to", "position": [8, 8], "order": "xy"},
+        {"type": "interact_object", "local_id": 1, "candidates": [{"position": [5, 2]}, {"position": [5, 3]}, {"position": [5, 4]}, {"position": [6, 2]}, {"position": [6, 4]}, {"position": [7, 2]}, {"position": [7, 4]}, {"position": [8, 2]}, {"position": [8, 3]}, {"position": [8, 4]}, {"position": [9, 2]}, {"position": [9, 3]}, {"position": [9, 4]}], "max_relocations": 256, "retry_failed_pairs": true, "frames_per_step": 8, "screenshot": "flat2-third-floor-employee"},
+        {"type": "advance_dialogue", "max_presses": 16},
+        {"type": "interact_object", "local_id": 2, "candidates": [{"position": [11, 2]}, {"position": [12, 3]}, {"position": [13, 2]}], "screenshot": "flat2-third-floor-woman"},
+        {"type": "advance_dialogue", "max_presses": 16},
+        {"type": "walk_to", "position": [8, 8], "order": "yx"},
+        {"type": "walk_to", "position": [1, 8], "order": "xy"},
+        {"type": "walk_to", "position": [1, 2], "order": "yx"},
+        {"type": "step", "direction": "UP", "allow_map_change": true},
+        {"type": "wait_stable_overworld"},
+        {"type": "walk_to", "position": [3, 2], "order": "xy"},
+        {"type": "step", "direction": "UP", "allow_map_change": true},
+        {"type": "wait_stable_overworld"},
+        {"type": "walk_to", "position": [3, 7], "order": "yx"},
+        {"type": "step", "direction": "DOWN"},
+        {"type": "step", "direction": "DOWN", "allow_map_change": true},
+        {"type": "wait_stable_overworld"},
+        {"type": "screenshot", "name": "rustboro-flat2-complete"}
+      ],
+      "coverage": {
+        "maps": ["MAP_RUSTBORO_CITY", "MAP_RUSTBORO_CITY_FLAT2_1F", "MAP_RUSTBORO_CITY_FLAT2_2F", "MAP_RUSTBORO_CITY_FLAT2_3F"],
+        "scripts": ["RustboroCity_Flat2_1F_EventScript_Skitty", "RustboroCity_Flat2_1F_EventScript_OldWoman", "RustboroCity_Flat2_2F_EventScript_OldMan", "RustboroCity_Flat2_2F_EventScript_NinjaBoy", "RustboroCity_Flat2_2F_EventScript_GiveFloatStone", "RustboroCity_Flat2_3F_EventScript_DevonEmployee", "RustboroCity_Flat2_3F_EventScript_Woman"],
+        "flags": ["FLAG_RECEIVED_PREMIER_BALL_RUSTBORO", "FLAG_ITEM_RUSTBORO_FLOAT_STONE"],
+        "items": ["ITEM_PREMIER_BALL", "ITEM_METAL_COAT"],
+        "labels": ["rustboro_first_visit", "residential_completion", "native_item_gifts"]
+      },
+      "expected": {
+        "map": "MAP_RUSTBORO_CITY",
+        "position": [5, 52],
+        "flags": {"FLAG_RECEIVED_PREMIER_BALL_RUSTBORO": 1, "FLAG_ITEM_RUSTBORO_FLOAT_STONE": 1},
+        "battle_serial_min": 31,
+        "stable_overworld": true
+      }
+    }
+  ]
+}

@@ -68,7 +68,7 @@
 #define OW_FOLLOWERS_SCRIPT_MOVEMENT   TRUE       // If TRUE, follower Pokémon only go back to their Poké Ball if a non-player collides with them by setting the FLAG_SAFE_FOLLOWER_MOVEMENT flag by default.
 // Follower Pokémon Restrictions
 // If set, the only Pokémon allowed to follow you will be those matching species, met location, and/or met level; These accept vars, too: VAR_TEMP_1, etc
-// For examples, see "docs/tutorials/how_to_new_pokemon.md"
+// Species definitions and overworld graphics are maintained under src/data/.
 #define OW_FOLLOWERS_ALLOWED_SPECIES (0)
 #define OW_FOLLOWERS_ALLOWED_MET_LVL (0)
 #define OW_FOLLOWERS_ALLOWED_MET_LOC (0)
@@ -117,8 +117,6 @@
 // Map pop-up config
 #define OW_POPUP_GENERATION        GEN_3    // Different generations display location names in overworld pop-ups differently.
                                             // Only choices are GEN_3 and GEN_5, all others will default to Gen3 pop-ups.
-                                            // Due to changes in project scope, as detailed in docs/team_procedures/scope.md,
-                                            // no other overworld popups will be implemented in expansion.
 
 // Gen5 map pop-up config
 // Constants

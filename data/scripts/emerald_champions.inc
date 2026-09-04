@@ -420,56 +420,28 @@ EmeraldChampions_EventScript_BattleItemCategories:
 	waitmessage
 
 EmeraldChampions_EventScript_BattleItemCategoryChoices:
-	dynmultipush EmeraldChampions_Text_OffenseItems, 0
-	dynmultipush EmeraldChampions_Text_DefenseItems, 1
-	dynmultipush EmeraldChampions_Text_FieldItems, 2
-	dynmultipush EmeraldChampions_Text_TypeItems, 3
-	dynmultipush EmeraldChampions_Text_GemItems, 4
-	dynmultipush EmeraldChampions_Text_SpeciesItems, 5
-	dynmultipush EmeraldChampions_Text_Back, 6
+	dynmultipush EmeraldChampions_Text_OffenseItems, EC_BATTLE_ITEM_CATEGORY_OFFENSE
+	dynmultipush EmeraldChampions_Text_DefenseItems, EC_BATTLE_ITEM_CATEGORY_DEFENSE
+	dynmultipush EmeraldChampions_Text_FieldItems, EC_BATTLE_ITEM_CATEGORY_FIELD
+	dynmultipush EmeraldChampions_Text_TypeItems, EC_BATTLE_ITEM_CATEGORY_TYPE
+	dynmultipush EmeraldChampions_Text_GemItems, EC_BATTLE_ITEM_CATEGORY_GEM
+	dynmultipush EmeraldChampions_Text_SpeciesItems, EC_BATTLE_ITEM_CATEGORY_SPECIES
+	dynmultipush EmeraldChampions_Text_Back, EC_BATTLE_ITEM_CATEGORY_COUNT
 	@ Four visible rows keep the lower scroll arrow comfortably above the
 	@ native message box while preserving the category cursor between visits.
 	dynmultistack 30, 1, FALSE, 4, 0, VAR_0x8008, DYN_MULTICHOICE_CB_NONE
 	closemessage
 	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, EmeraldChampions_EventScript_BattleItemCategoryBack
 	copyvar VAR_0x8008, VAR_RESULT
-	switch VAR_RESULT
-	case 0, EmeraldChampions_EventScript_OpenOffenseItems
-	case 1, EmeraldChampions_EventScript_OpenDefenseItems
-	case 2, EmeraldChampions_EventScript_OpenFieldItems
-	case 3, EmeraldChampions_EventScript_OpenTypeItems
-	case 4, EmeraldChampions_EventScript_OpenGemItems
-	case 5, EmeraldChampions_EventScript_OpenSpeciesItems
-	goto EmeraldChampions_EventScript_BattleItemCategoryBack
+	goto_if_ge VAR_RESULT, EC_BATTLE_ITEM_CATEGORY_COUNT, EmeraldChampions_EventScript_BattleItemCategoryBack
+	copyvar VAR_0x8004, VAR_RESULT
+	special OpenEmeraldChampionsBattleItemMart
+	goto EmeraldChampions_EventScript_BattleItemCategories
 
 EmeraldChampions_EventScript_BattleItemCategoryBack:
 	checkitem ITEM_MEGA_RING, 1
 	goto_if_eq VAR_RESULT, TRUE, EmeraldChampions_EventScript_BattleVendorMain
 	goto EmeraldChampions_EventScript_BattleVendorExit
-
-EmeraldChampions_EventScript_OpenOffenseItems:
-	special OpenEmeraldChampionsOffenseItemMart
-	goto EmeraldChampions_EventScript_BattleItemCategories
-
-EmeraldChampions_EventScript_OpenDefenseItems:
-	special OpenEmeraldChampionsDefenseItemMart
-	goto EmeraldChampions_EventScript_BattleItemCategories
-
-EmeraldChampions_EventScript_OpenFieldItems:
-	special OpenEmeraldChampionsFieldItemMart
-	goto EmeraldChampions_EventScript_BattleItemCategories
-
-EmeraldChampions_EventScript_OpenTypeItems:
-	special OpenEmeraldChampionsTypeItemMart
-	goto EmeraldChampions_EventScript_BattleItemCategories
-
-EmeraldChampions_EventScript_OpenGemItems:
-	special OpenEmeraldChampionsGemItemMart
-	goto EmeraldChampions_EventScript_BattleItemCategories
-
-EmeraldChampions_EventScript_OpenSpeciesItems:
-	special OpenEmeraldChampionsSpeciesItemMart
-	goto EmeraldChampions_EventScript_BattleItemCategories
 
 EmeraldChampions_EventScript_OpenMegaArchive:
 	special OpenEmeraldChampionsMegaStoneArchive

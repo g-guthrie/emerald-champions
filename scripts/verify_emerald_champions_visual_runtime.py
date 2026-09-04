@@ -13,7 +13,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 RENDERER = ROOT / "scripts" / "render_emerald_champions_ui.py"
-BASELINE = ROOT / "docs" / "inclement_visual_runtime_baseline.json"
+BASELINE = ROOT / "tests/headless/inclement_visual_runtime_baseline.json"
 
 
 def require(condition: bool, message: str) -> None:

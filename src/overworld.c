@@ -2421,6 +2421,15 @@ void MigrateEmeraldChampionsCoreState(void)
         return;
     }
 
+    InitializeLegendaryRelicDeliveryState();
+    if (version == 1)
+    {
+        // v1 has the current layout; only the newly owned relic vars need init.
+        SetEmeraldChampionsPhysicalSignFlags();
+        VarSet(VAR_EMERALD_CHAMPIONS_SAVE_VERSION, EMERALD_CHAMPIONS_SAVE_VERSION_CURRENT);
+        return;
+    }
+
     legacyGymMarker = FlagGet(FLAG_UNUSED_0x91E);
     legacyItemMarker = FlagGet(FLAG_UNUSED_0x91F);
     legacyDifficultyMarker = FlagGet(FLAG_EC_CAUGHT_SHAYMIN);

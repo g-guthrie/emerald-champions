@@ -99,7 +99,7 @@ LavaridgeTown_Gym_1F_EventScript_FlanneryRematch::
 	end
 
 LavaridgeTown_Gym_1F_EventScript_Cole::
-	trainerbattle_lavaridge LOCALID_COLE, TRAINER_COLE, LavaridgeTown_Gym_1F_Text_ColeIntro, LavaridgeTown_Gym_1F_Text_ColeDefeat, LavaridgeTown_Gym_EventScript_CheckTrainerScript
+	trainerbattle_lavaridge_double LOCALID_COLE, TRAINER_COLE, LavaridgeTown_Gym_1F_Text_ColeIntro, LavaridgeTown_Gym_1F_Text_ColeDefeat, EmeraldChampions_Text_NeedTwoPokemon, LavaridgeTown_Gym_EventScript_CheckTrainerScript
 	end
 
 LavaridgeTown_Gym_EventScript_CheckTrainerScript::
@@ -115,7 +115,7 @@ LavaridgeTown_Gym_1F_EventScript_Axle::
 	end
 
 LavaridgeTown_Gym_B1F_EventScript_Keegan::
-	trainerbattle_lavaridge LOCALID_KEEGAN, TRAINER_KEEGAN, LavaridgeTown_Gym_B1F_Text_KeeganIntro, LavaridgeTown_Gym_B1F_Text_KeeganDefeat, LavaridgeTown_Gym_EventScript_CheckTrainerScript
+	trainerbattle_lavaridge_double LOCALID_KEEGAN, TRAINER_KEEGAN, LavaridgeTown_Gym_B1F_Text_KeeganIntro, LavaridgeTown_Gym_B1F_Text_KeeganDefeat, EmeraldChampions_Text_NeedTwoPokemon, LavaridgeTown_Gym_EventScript_CheckTrainerScript
 	msgbox LavaridgeTown_Gym_B1F_Text_KeeganPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -196,7 +196,8 @@ LavaridgeTown_Gym_1F_Text_GymGuidePostVictory:
 
 LavaridgeTown_Gym_1F_Text_ColeIntro:
 	.string "Owowowowow!\n"
-	.string "Yikes, it's hot!$"
+	.string "Yikes, it's hot!\p"
+	.string "Touch us, and you will feel it!$"
 
 LavaridgeTown_Gym_1F_Text_ColeDefeat:
 	.string "I'm blinded by sweat in my eyes…$"
@@ -209,7 +210,8 @@ LavaridgeTown_Gym_1F_Text_ColePostBattle:
 
 LavaridgeTown_Gym_1F_Text_AxleIntro:
 	.string "I'm trying to relieve my stress.\n"
-	.string "Don't come along and stress me out!$"
+	.string "Don't come along and stress me out!\p"
+	.string "Hit me hard. I only grow!$"
 
 LavaridgeTown_Gym_1F_Text_AxleDefeat:
 	.string "I hope FLANNERY flames you good!$"
@@ -225,7 +227,8 @@ LavaridgeTown_Gym_B1F_Text_KeeganIntro:
 	.string "wouldn't you?\p"
 	.string "But you should know that maintaining\n"
 	.string "your willpower is an important ability\l"
-	.string "for all TRAINERS.$"
+	.string "for all TRAINERS.\p"
+	.string "My own poison is my fuel!$"
 
 LavaridgeTown_Gym_B1F_Text_KeeganDefeat:
 	.string "Play with fire, and be burned…$"
@@ -238,7 +241,8 @@ LavaridgeTown_Gym_B1F_Text_KeeganPostBattle:
 
 LavaridgeTown_Gym_1F_Text_GeraldIntro:
 	.string "Can your POKéMON withstand\n"
-	.string "392-degree heat?$"
+	.string "392-degree heat?\p"
+	.string "SUNNY DAY first. Then we run!$"
 
 LavaridgeTown_Gym_1F_Text_GeraldDefeat:
 	.string "It didn't burn hotly enough…$"
@@ -251,7 +255,8 @@ LavaridgeTown_Gym_1F_Text_GeraldPostBattle:
 
 LavaridgeTown_Gym_1F_Text_DanielleIntro:
 	.string "Um…\n"
-	.string "Okay, I'll battle with you.$"
+	.string "Okay, I'll battle with you.\p"
+	.string "Dance, and ORICORIO dances too!$"
 
 LavaridgeTown_Gym_1F_Text_DanielleDefeat:
 	.string "Oh, but you're too strong.$"
@@ -262,7 +267,8 @@ LavaridgeTown_Gym_1F_Text_DaniellePostBattle:
 
 LavaridgeTown_Gym_B1F_Text_JaceIntro:
 	.string "Come on, get with it!\n"
-	.string "Let's go before my feelings cool!$"
+	.string "Let's go before my feelings cool!\p"
+	.string "My poison reaches even STEEL!$"
 
 LavaridgeTown_Gym_B1F_Text_JaceDefeat:
 	.string "It's so hot, and yet my heart is\n"
@@ -275,7 +281,8 @@ LavaridgeTown_Gym_B1F_Text_JacePostBattle:
 
 LavaridgeTown_Gym_B1F_Text_JeffIntro:
 	.string "See how the flames blaze wildly?\n"
-	.string "They flare in anticipation of my win!$"
+	.string "They flare in anticipation of my win!\p"
+	.string "I move first. Always!$"
 
 LavaridgeTown_Gym_B1F_Text_JeffDefeat:
 	.string "Something didn't go right.$"
@@ -287,7 +294,8 @@ LavaridgeTown_Gym_B1F_Text_JeffPostBattle:
 
 LavaridgeTown_Gym_B1F_Text_EliIntro:
 	.string "As much as I love mountains,\n"
-	.string "I especially love volcanoes.$"
+	.string "I especially love volcanoes.\p"
+	.string "Nothing here stands where you aim!$"
 
 LavaridgeTown_Gym_B1F_Text_EliDefeat:
 	.string "Well, it seems to me I lost without\n"

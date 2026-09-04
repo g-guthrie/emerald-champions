@@ -18,13 +18,13 @@ DATASETS = {
         "source_file": "data/random-battles/champions/sets.json",
         "source_sha256": "7b189d6de33367aca7191e484069b74757097fc34fed0402b52bb6fa41447421",
         "source_name": "Pokemon Showdown Champions random singles",
-        "output": ROOT / "docs" / "showdown_champions_random_singles.json",
+        "output": ROOT / "data/emerald_champions/showdown_champions_random_singles.json",
     },
     "gen9": {
         "source_file": "data/random-battles/gen9/sets.json",
         "source_sha256": "d18992314222060dda9a2a9bea09331478991d469babd95662517668099669f9",
         "source_name": "Pokemon Showdown Gen 9 random singles",
-        "output": ROOT / "docs" / "showdown_gen9_random_singles.json",
+        "output": ROOT / "data/emerald_champions/showdown_gen9_random_singles.json",
     },
 }
 

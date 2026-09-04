@@ -7,6 +7,7 @@ import json
 import re
 from collections import Counter
 from pathlib import Path
+from item_catalog import free_vendor_items
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -592,9 +593,7 @@ def verify_frontier_exchange() -> None:
     require(all(price > 0 for _, price in priced), "Frontier reward bypasses the BP economy")
     require(not any("_BERRY" in item for item in expected_items), "Frontier exchange makes berries non-scarce")
 
-    field_specials = read("src/field_specials.c")
-    free_block = field_specials.split("sEmeraldChampionsFreeBattleItems[]", 1)[1].split("};", 1)[0]
-    free_items = set(re.findall(r"ITEM_[A-Z0-9_]+", free_block))
+    free_items = free_vendor_items(ROOT)
     require(not free_items.intersection(expected_items),
             "Frontier charges BP for an item already free at every Center")
     protected = mega_stone_items() | {"ITEM_RED_ORB", "ITEM_BLUE_ORB"}

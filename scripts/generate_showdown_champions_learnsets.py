@@ -14,7 +14,7 @@ from pathlib import Path
 
 PINNED_COMMIT = "bb179fbf8449e3c31632bd56f671ffb4404fa6e7"
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_OUTPUT = ROOT / "docs" / "showdown_champions_learnsets.json"
+DEFAULT_OUTPUT = ROOT / "data/emerald_champions/showdown_champions_learnsets.json"
 
 
 def top_level_entries(path: Path) -> dict[str, str]:
@@ -103,7 +103,7 @@ def main() -> None:
         "schema_version": 1,
         "source": "smogon/pokemon-showdown",
         "source_commit": commit,
-        "license": "MIT; see docs/THIRD_PARTY_NOTICES.md",
+        "license": "MIT; see THIRD_PARTY_NOTICES.md",
         "policy": "Champions mod overrides for supported species; each other species uses its most recent official mainline generation in Showdown; forms and evolved species inherit legal moves from their base form and pre-evolution chains.",
         "source_files": {
             str(path.relative_to(showdown)): hashlib.sha256(path.read_bytes()).hexdigest()

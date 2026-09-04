@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "encounters": [
+    {
+      "id": "route102-calvin",
+      "campaign_segment": "main-05-route102-calvin",
+      "trainer_ids": ["TRAINER_CALVIN_1"],
+      "pre_battle_action_count": 4,
+      "engage_actions": [
+        {"type": "press", "keys": ["A"], "frames": 90},
+        {"type": "advance_until_battle", "max_presses": 20, "screenshot": "battle-entry"}
+      ]
+    }
+  ]
+}

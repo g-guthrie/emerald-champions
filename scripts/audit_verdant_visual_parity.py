@@ -23,7 +23,7 @@ from pathlib import Path, PurePosixPath
 
 ROOT = Path(__file__).resolve().parents[1]
 REFERENCE_COMMIT = "81e288b51995c59c1dbc640f77907b8120788bc9"
-OUTPUT = ROOT / "work/audits/VERDANT_VISUAL_BYTE_MANIFEST.json"
+OUTPUT = ROOT / "tests/reference/verdant_visual_byte_manifest.json"
 POLICY_VERSION = 1
 
 GRAPHIC_SUFFIXES = {".png", ".pal", ".gbapal", ".bin", ".tilemap", ".4bpp", ".8bpp", ".inc"}

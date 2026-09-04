@@ -2,7 +2,7 @@ Route132_MapScripts::
 	.byte 0
 
 Route132_EventScript_Gilbert::
-	trainerbattle_single TRAINER_GILBERT, Route132_Text_GilbertIntro, Route132_Text_GilbertDefeat
+	trainerbattle_double TRAINER_GILBERT, Route132_Text_GilbertIntro, Route132_Text_GilbertDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route132_Text_GilbertPostBattle, MSGBOX_AUTOCLOSE
 	end
 

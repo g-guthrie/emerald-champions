@@ -15,6 +15,8 @@ import re
 import runpy
 from pathlib import Path
 
+from item_catalog import battle_item_categories
+
 
 ROOT = Path(__file__).resolve().parents[1]
 SCREEN_TILE_HEIGHT = 20
@@ -689,7 +691,7 @@ def verify_leveler_batch_flow() -> None:
 def verify_battle_set_preselection() -> None:
     script = read("data/scripts/emerald_champions.inc")
     tests = read("test/emerald_champions.c")
-    battle_sets = json.loads(read("docs/emerald_champions_battle_sets.json"))
+    battle_sets = json.loads(read("data/emerald_champions/emerald_champions_battle_sets.json"))
     story_width_gate = runpy.run_path(str(ROOT / "scripts/verify_emerald_champions_story.py"))
     widths = story_width_gate["font_widths"]()
     glyphs = story_width_gate["glyph_codes"]()
@@ -781,11 +783,11 @@ def verify_battle_vendor_navigation() -> None:
     categories = source_region(
         source,
         "EmeraldChampions_EventScript_BattleItemCategories:",
-        "EmeraldChampions_EventScript_OpenOffenseItems:",
+        "EmeraldChampions_EventScript_OpenMegaArchive:",
     )
     item_returns = source_region(
         source,
-        "EmeraldChampions_EventScript_OpenOffenseItems:",
+        "EmeraldChampions_EventScript_OpenMegaArchive:",
         "EmeraldChampions_EventScript_BattleVendorExit:",
     )
 
@@ -811,18 +813,33 @@ def verify_battle_vendor_navigation() -> None:
         "dynmultistack 30, 1, FALSE, 4, 0, VAR_0x8008, DYN_MULTICHOICE_CB_NONE" in categories
         and categories.index("goto_if_eq VAR_RESULT, MULTI_B_PRESSED")
         < categories.index("copyvar VAR_0x8008, VAR_RESULT")
-        and all(
-            f"case {index}, EmeraldChampions_EventScript_Open{name}Items" in categories
-            for index, name in enumerate(("Offense", "Defense", "Field", "Type", "Gem", "Species"))
-        )
+        and re.findall(
+            r"dynmultipush EmeraldChampions_Text_\w+Items, (EC_BATTLE_ITEM_CATEGORY_\w+)", categories
+        ) == list(battle_item_categories(ROOT))
+        and "dynmultipush EmeraldChampions_Text_Back, EC_BATTLE_ITEM_CATEGORY_COUNT" in categories
+        and categories.index("goto_if_ge VAR_RESULT, EC_BATTLE_ITEM_CATEGORY_COUNT")
+        < categories.index("copyvar VAR_0x8004, VAR_RESULT")
+        < categories.index("special OpenEmeraldChampionsBattleItemMart")
+        and "goto EmeraldChampions_EventScript_BattleItemCategories" in categories
         and "goto_if_eq VAR_RESULT, TRUE, EmeraldChampions_EventScript_BattleVendorMain" in categories
         and "goto EmeraldChampions_EventScript_BattleVendorExit" in categories,
         "battle-item categories do not preserve a valid cursor or implement native B/Back behavior",
     )
     require(
-        item_returns.count("goto EmeraldChampions_EventScript_BattleItemCategories") == 6
-        and item_returns.count("goto EmeraldChampions_EventScript_BattleVendorMain") == 2,
+        item_returns.count("goto EmeraldChampions_EventScript_BattleVendorMain") == 2,
         "battle vendor subshops do not return to the menu that opened them",
+    )
+    dispatcher = source_region(
+        read("src/field_specials.c"),
+        "void OpenEmeraldChampionsBattleItemMart(void)",
+        "// Emerald Champions: the Mega Stone(s)",
+    )
+    require(
+        "u16 category = gSpecialVar_0x8004;" in dispatcher
+        and re.search(r"if \(category >= ARRAY_COUNT\(sEmeraldChampionsBattleItemCategories\)\)\s*return;", dispatcher)
+        and "CreateFreePokemartMenu(sEmeraldChampionsBattleItemCategories[category]);" in dispatcher
+        and "ScriptContext_Stop();" in dispatcher,
+        "shared battle mart does not validate and dispatch the selected category",
     )
     print("PASS: battle vendor keeps independent cursors and B/Back returns one native level")
 
@@ -1284,34 +1301,6 @@ def verify_physical_encounter_render_coverage() -> None:
                 f"{fixture['species']} cannot be reached and interacted with from a map warp",
             )
 
-    generator = read("scripts/populate_restored_emerald_champions_areas.py")
-    require(
-        'OBJ_EVENT_GFX_INCLEMENT_MEWTWO' in generator
-        and 'OBJ_EVENT_GFX_INCLEMENT_DIANCIE' in generator
-        and 'OBJ_EVENT_GFX_INCLEMENT_MOLTRES' in generator
-        and 'OBJ_EVENT_GFX_INCLEMENT_JIRACHI' in generator
-        and 'OBJ_EVENT_GFX_INCLEMENT_HEATRAN' in generator
-        and all(
-            f'OBJ_EVENT_GFX_SPECIES({species})' not in generator
-            for species in (
-                "HOOPA", "OKIDOGI", "TERAPAGOS", "MELOETTA", "MUNKIDORI",
-                "COSMOG", "VIRIZION", "WO_CHIEN", "LANDORUS", "ZYGARDE",
-                "ENAMORUS", "FEZANDIPITI", "CELEBI", "RESHIRAM", "PALKIA", "SHAYMIN",
-            )
-        ),
-        "restored-area regeneration would drift from Inclement's physical roster",
-    )
-    remaining_generator = read("scripts/populate_remaining_legendary_quests.py")
-    require(
-        'OBJ_EVENT_GFX_INCLEMENT_ARTICUNO' in remaining_generator
-        and 'OBJ_EVENT_GFX_INCLEMENT_ZAPDOS' in remaining_generator
-        and 'OBJ_EVENT_GFX_REGIGIGAS_STATUE' in remaining_generator
-        and 'obj("PECHARUNT",' not in remaining_generator
-        and '("MELTAN",' not in remaining_generator
-        and '("MAGEARNA",' not in remaining_generator,
-        "retained-map regeneration would restore a rejected free-standing encounter",
-    )
-
     fixture_c = read("src/emerald_champions_headless.c")
     require(
         '#include "emerald_champions_headless_overworld_fixtures.h"' in fixture_c
@@ -1380,7 +1369,12 @@ def verify_headless_fixture_separation() -> None:
         == 1,
         "the explicit fixture setting is not passed to every C translation unit",
     )
+    require(
+        "EC_HEADLESS_FIXTURES must remain disabled for release builds" in makefile,
+        "release builds do not reject headless fixture code",
+    )
     require_headless_references_guarded("src/main.c")
+    require_headless_references_guarded("src/battle_main.c")
     require_headless_references_guarded("src/emerald_champions_headless.c")
     require_headless_references_guarded("include/emerald_champions_headless.h")
 

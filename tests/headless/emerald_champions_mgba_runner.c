@@ -16,6 +16,7 @@
 #include <mgba/core/config.h>
 #include <mgba/core/interface.h>
 #include <mgba/core/log.h>
+#include <mgba/core/serialize.h>
 #include <mgba/gba/core.h>
 #include <mgba/internal/gba/gba.h>
 #include <mgba/internal/gba/input.h>
@@ -23,6 +24,7 @@
 #include <mgba-util/vfs.h>
 
 #define MAX_EVENTS 512
+#define MAX_WATCHES 16
 #define DEFAULT_RTC_EPOCH 946684800LL
 
 struct KeyEvent
@@ -61,11 +63,25 @@ struct StopCondition
     uint32_t value;
 };
 
+struct ScreenshotWatch
+{
+    unsigned width;
+    unsigned delay;
+    uint32_t address;
+    uint32_t lastValue;
+    uint32_t pendingValue;
+    unsigned pendingFrame;
+    bool pending;
+    const char *prefix;
+};
+
 struct Options
 {
     const char *romPath;
     const char *savePath;
     const char *saveOutPath;
+    const char *stateInPath;
+    const char *stateOutPath;
     const char *screenshotPath;
     unsigned frames;
     int64_t rtcEpoch;
@@ -77,10 +93,13 @@ struct Options
     unsigned readCount;
     struct ScreenshotEvent screenshotEvents[MAX_EVENTS];
     unsigned screenshotEventCount;
+    struct ScreenshotWatch screenshotWatches[MAX_WATCHES];
+    unsigned screenshotWatchCount;
     struct StopCondition stop;
 };
 
 static bool ParseUnsigned(const char *text, uint32_t *value);
+static bool IsValidWidth(unsigned width);
 
 static void QuietLog(struct mLogger *logger, int category, enum mLogLevel level,
                      const char *format, va_list args)
@@ -98,8 +117,12 @@ static void Usage(const char *program)
             "usage: %s --rom FILE --frames N [options]\n"
             "  --save FILE                 attach a writable scratch save copy\n"
             "  --save-out FILE             dump final emulated save data\n"
+            "  --state-in FILE             load an exact-ROM mGBA state after reset\n"
+            "  --state-out FILE            write an exact-ROM mGBA state at exit\n"
             "  --screenshot FILE           write the final video frame as PNG\n"
             "  --screenshot-at FRAME:FILE  write an intermediate video frame as PNG\n"
+            "  --screenshot-on-change WIDTH:ADDR:DELAY:PREFIX\n"
+            "                              write PREFIX-FRAME-VALUE.png after a change\n"
             "  --rtc UNIX_SECONDS          fixed RTC epoch (default: 2000-01-01 UTC)\n"
             "  --key FRAME:DURATION:KEYS   hold comma-separated keys\n"
             "  --write FRAME:WIDTH:ADDR:VALUE\n"
@@ -121,6 +144,36 @@ static bool ParseScreenshotEvent(char *text, struct ScreenshotEvent *event)
         return false;
     event->frame = frame;
     event->path = separator + 1;
+    return true;
+}
+
+static bool ParseScreenshotWatch(char *text, struct ScreenshotWatch *watch)
+{
+    char *first = strchr(text, ':');
+    char *second;
+    char *third;
+    uint32_t width;
+    uint32_t delay;
+
+    if (first == NULL || first == text || first[1] == '\0')
+        return false;
+    *first = '\0';
+    second = strchr(first + 1, ':');
+    if (second == NULL || second == first + 1 || second[1] == '\0')
+        return false;
+    *second = '\0';
+    third = strchr(second + 1, ':');
+    if (third == NULL || third == second + 1 || third[1] == '\0')
+        return false;
+    *third = '\0';
+    if (!ParseUnsigned(text, &width)
+     || !IsValidWidth(width)
+     || !ParseUnsigned(first + 1, &watch->address)
+     || !ParseUnsigned(second + 1, &delay))
+        return false;
+    watch->width = width;
+    watch->delay = delay;
+    watch->prefix = third + 1;
     return true;
 }
 
@@ -335,12 +388,22 @@ static bool ParseOptions(int argc, char **argv, struct Options *options)
             options->savePath = argv[++i];
         else if (strcmp(argv[i], "--save-out") == 0 && i + 1 < argc)
             options->saveOutPath = argv[++i];
+        else if (strcmp(argv[i], "--state-in") == 0 && i + 1 < argc)
+            options->stateInPath = argv[++i];
+        else if (strcmp(argv[i], "--state-out") == 0 && i + 1 < argc)
+            options->stateOutPath = argv[++i];
         else if (strcmp(argv[i], "--screenshot") == 0 && i + 1 < argc)
             options->screenshotPath = argv[++i];
         else if (strcmp(argv[i], "--screenshot-at") == 0 && i + 1 < argc)
         {
             if (options->screenshotEventCount >= MAX_EVENTS
              || !ParseScreenshotEvent(argv[++i], &options->screenshotEvents[options->screenshotEventCount++]))
+                return false;
+        }
+        else if (strcmp(argv[i], "--screenshot-on-change") == 0 && i + 1 < argc)
+        {
+            if (options->screenshotWatchCount >= MAX_WATCHES
+             || !ParseScreenshotWatch(argv[++i], &options->screenshotWatches[options->screenshotWatchCount++]))
                 return false;
         }
         else if (strcmp(argv[i], "--rtc") == 0 && i + 1 < argc)
@@ -424,6 +487,30 @@ static bool WriteSaveData(struct mCore *core, const char *path, size_t *sizeOut)
     if (vf == NULL)
         return false;
     success = GBASavedataClone(savedata, vf);
+    success = vf->close(vf) && success;
+    return success;
+}
+
+static bool LoadState(struct mCore *core, const char *path)
+{
+    struct VFile *vf = VFileOpen(path, O_RDONLY);
+    bool success;
+
+    if (vf == NULL)
+        return false;
+    success = mCoreLoadStateNamed(core, vf, SAVESTATE_ALL);
+    vf->close(vf);
+    return success;
+}
+
+static bool WriteState(struct mCore *core, const char *path)
+{
+    struct VFile *vf = VFileOpen(path, O_WRONLY | O_CREAT | O_TRUNC);
+    bool success;
+
+    if (vf == NULL)
+        return false;
+    success = mCoreSaveStateNamed(core, vf, SAVESTATE_ALL);
     success = vf->close(vf) && success;
     return success;
 }
@@ -522,6 +609,17 @@ int main(int argc, char **argv)
         result = 5;
         goto cleanup;
     }
+    if (options.stateInPath != NULL && !LoadState(core, options.stateInPath))
+    {
+        fprintf(stderr, "failed to load state: %s\n", options.stateInPath);
+        result = 9;
+        goto cleanup;
+    }
+    for (i = 0; i < options.screenshotWatchCount; i++)
+        options.screenshotWatches[i].lastValue = ReadMemory(
+            core,
+            options.screenshotWatches[i].width,
+            options.screenshotWatches[i].address);
 
     for (frame = 0; frame < options.frames; frame++)
     {
@@ -553,6 +651,34 @@ int main(int argc, char **argv)
                 goto cleanup;
             }
         }
+        for (i = 0; i < options.screenshotWatchCount; i++)
+        {
+            struct ScreenshotWatch *watch = &options.screenshotWatches[i];
+            uint32_t value = ReadMemory(core, watch->width, watch->address);
+
+            if (value != watch->lastValue)
+            {
+                watch->lastValue = value;
+                watch->pendingValue = value;
+                watch->pendingFrame = frame + watch->delay;
+                watch->pending = true;
+            }
+            if (watch->pending && frame >= watch->pendingFrame)
+            {
+                char path[PATH_MAX];
+                int length = snprintf(path, sizeof(path), "%s-%06u-%08" PRIx32 ".png",
+                                      watch->prefix, frame, watch->pendingValue);
+                if (length < 0 || (size_t)length >= sizeof(path) || !WriteScreenshot(core, path))
+                {
+                    fprintf(stderr, "failed to write watched screenshot at frame %u\n", frame);
+                    result = 7;
+                    goto cleanup;
+                }
+                printf("WATCH frame=%u address=%08" PRIx32 " value=%08" PRIx32 " screenshot=%s\n",
+                       frame, watch->address, watch->pendingValue, path);
+                watch->pending = false;
+            }
+        }
 
         if (options.stop.enabled)
         {
@@ -575,6 +701,12 @@ int main(int argc, char **argv)
     {
         fprintf(stderr, "failed to write save data: %s\n", options.saveOutPath);
         result = 8;
+        goto cleanup;
+    }
+    if (options.stateOutPath != NULL && !WriteState(core, options.stateOutPath))
+    {
+        fprintf(stderr, "failed to write state: %s\n", options.stateOutPath);
+        result = 10;
         goto cleanup;
     }
 

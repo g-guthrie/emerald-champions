@@ -5,8 +5,11 @@
 #include "gpu_regs.h"
 #include "international_string_util.h"
 #include "main.h"
+#include "main_menu.h"
 #include "menu.h"
+#include "overworld.h"
 #include "palette.h"
+#include "save.h"
 #include "scanline_effect.h"
 #include "sprite.h"
 #include "strings.h"
@@ -158,12 +161,23 @@ static void VBlankCB(void)
     TransferPlttBuffer();
 }
 
+static void PrepareDifficultyForOptionMenu(void)
+{
+    // The title screen has already loaded the save, but Continue has not run
+    // its migration yet. Legacy saves store Sign bits in the difficulty var.
+    // Convert that layout before this menu can read or write the live option.
+    if (gMain.savedCallback == CB2_ReinitMainMenu
+     && (gSaveFileStatus == SAVE_STATUS_OK || gSaveFileStatus == SAVE_STATUS_ERROR))
+        MigrateEmeraldChampionsCoreState();
+}
+
 void CB2_InitOptionMenu(void)
 {
     switch (gMain.state)
     {
     default:
     case 0:
+        PrepareDifficultyForOptionMenu();
         SetVBlankCallback(NULL);
         gMain.state++;
         break;

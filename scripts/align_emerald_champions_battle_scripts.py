@@ -9,7 +9,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-MASTER = ROOT / "docs" / "emerald_champions_master_battle_design.txt"
+MASTER = ROOT / "data/emerald_champions/emerald_champions_master_battle_design.txt"
 NEED_TWO = "EmeraldChampions_Text_NeedTwoPokemon"
 BRANCH_RE = re.compile(
     r"--- BRANCH (TRAINER_[A-Z0-9_]+) ---.*?^format: (single|double|multi)$",

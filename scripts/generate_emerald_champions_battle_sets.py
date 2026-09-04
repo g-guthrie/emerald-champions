@@ -3,6 +3,8 @@
 
 from __future__ import annotations
 
+import copy
+import argparse
 import json
 import re
 import subprocess
@@ -22,16 +24,46 @@ ROOT = Path(__file__).resolve().parents[1]
 # corpora.  Keeping the object reachable makes preset generation reproducible
 # in clean clones and CI.
 SOURCE_COMMIT = "0b2bc96c7d6480187f70f5b83a705c081780983e"
+# These three are read out of SOURCE_COMMIT with `git show`, so they must keep
+# the paths that commit recorded. Moving the working-tree corpora to
+# data/emerald_champions/ did not rewrite history.
 DEFAULT_SOURCE = "docs/verdant_battle_set_presets.json"
 ALTERNATIVE_SOURCE = "docs/verdant_multi_battle_sets.json"
 HANDBOOK_SOURCE = "docs/pokemon_champions_handbook_sets.json"
 HANDBOOK_SHA256 = "a6a98dd09849c80c46e4d39b3fdaac161f56d80c69fdf8422bd4b7596cb714d5"
-JSON_OUTPUT = ROOT / "docs" / "emerald_champions_battle_sets.json"
+JSON_OUTPUT = ROOT / "data/emerald_champions/emerald_champions_battle_sets.json"
 C_OUTPUT = ROOT / "src" / "data" / "pokemon" / "emerald_champions_battle_sets.h"
-MOVE_ACCESS_REVIEW = ROOT / "docs" / "emerald_champions_move_access_review.json"
+MOVE_ACCESS_REVIEW = ROOT / "data/emerald_champions/emerald_champions_move_access_review.json"
 MOVE_ACCESS_C_OUTPUT = ROOT / "src" / "data" / "pokemon" / "emerald_champions_move_access_review.h"
-SHOWDOWN_SINGLES_SOURCE = ROOT / "docs" / "showdown_champions_random_singles.json"
-SHOWDOWN_GEN9_SINGLES_SOURCE = ROOT / "docs" / "showdown_gen9_random_singles.json"
+HAND_AUDITED_SOURCE = ROOT / "data/emerald_champions/emerald_champions_hand_audited_battle_sets.json"
+SHOWDOWN_SINGLES_SOURCE = ROOT / "data/emerald_champions/showdown_champions_random_singles.json"
+SHOWDOWN_GEN9_SINGLES_SOURCE = ROOT / "data/emerald_champions/showdown_gen9_random_singles.json"
+
+
+def load_hand_audited_catalog() -> dict:
+    """Load explicit reviews and resolve only named, mechanically identical aliases."""
+    source = json.loads(HAND_AUDITED_SOURCE.read_text())
+    assert source["schema_version"] == 1
+    assert source["review_order"] == list(source["species"])
+    resolved = {}
+    for species, review in source["species"].items():
+        if "inherits_species" not in review:
+            resolved[species] = review
+            continue
+        parent_species = review["inherits_species"]
+        assert parent_species in resolved, (species, parent_species)
+        assert set(review) == {"inherits_species", "references"}, species
+        inherited = copy.deepcopy(resolved[parent_species])
+        inherited["references"] = review["references"]
+        for format_name in ("doubles", "singles"):
+            for entry in inherited[format_name]:
+                entry["species"] = species
+                entry["source"] = (
+                    f"Hand-audited mechanical alias of {parent_species}: {entry['source']}"
+                )
+        resolved[species] = inherited
+    source["species"] = resolved
+    return source
 
 SINGLES_EXCLUDED_MOVES = {
     "MOVE_AFTER_YOU", "MOVE_ALLY_SWITCH", "MOVE_AROMATIC_MIST",
@@ -482,7 +514,11 @@ SUPPLEMENTAL_DEFAULTS.extend([
 # Regional and battle-distinct forms not separated into their own National
 # Dex entries in the handbook still need an exact legal doubles identity.
 SUPPLEMENTAL_DEFAULTS.extend([
+    authored_modern_set("SPECIES_DIALGA_ORIGIN", "Origin Crystal Offense", ["MOVE_DRACO_METEOR", "MOVE_FLASH_CANNON", "MOVE_EARTH_POWER", "MOVE_PROTECT"], "NATURE_MODEST", "ABILITY_TELEPATHY", "ITEM_ADAMANT_CRYSTAL", [32, 0, 2, 32, 0, 0], "Adamant Crystal Origin special attacker"),
+    authored_modern_set("SPECIES_PALKIA_ORIGIN", "Origin Globe Attacker", ["MOVE_HYDRO_PUMP", "MOVE_SPACIAL_REND", "MOVE_EARTH_POWER", "MOVE_PROTECT"], "NATURE_TIMID", "ABILITY_TELEPATHY", "ITEM_LUSTROUS_GLOBE", [2, 0, 0, 32, 0, 32], "Lustrous Globe Origin special attacker"),
+    authored_modern_set("SPECIES_GIRATINA_ORIGIN", "Origin Special Control", ["MOVE_DRACO_METEOR", "MOVE_HEX", "MOVE_ICY_WIND", "MOVE_PROTECT"], "NATURE_MODEST", "ABILITY_LEVITATE", "ITEM_GRISEOUS_CORE", [32, 0, 0, 32, 2, 0], "Griseous Core Origin special control"),
     authored_modern_set("SPECIES_VOLTORB_HISUI", "Fast Seed Support", ["MOVE_ELECTROWEB", "MOVE_GIGA_DRAIN", "MOVE_LEECH_SEED", "MOVE_PROTECT"], "NATURE_TIMID", "ABILITY_SOUNDPROOF", "ITEM_EVIOLITE", [2, 0, 0, 32, 0, 32], "fast Grass and Electric support"),
+    authored_modern_set("SPECIES_WOOPER_PALDEA", "Water Absorb", ["MOVE_ACID_SPRAY", "MOVE_YAWN", "MOVE_HELPING_HAND", "MOVE_PROTECT"], "NATURE_CALM", "ABILITY_WATER_ABSORB", "ITEM_EVIOLITE", [32, 0, 2, 0, 32, 0], "Water-immune special support"),
     authored_modern_set("SPECIES_ELECTRODE_HISUI", "Chloroblast Pivot", ["MOVE_CHLOROBLAST", "MOVE_ELECTROWEB", "MOVE_VOLT_SWITCH", "MOVE_TAUNT"], "NATURE_TIMID", "ABILITY_SOUNDPROOF", "ITEM_FOCUS_SASH", [2, 0, 0, 32, 0, 32], "fast special pivot and speed control"),
     authored_modern_set("SPECIES_LILLIGANT_HISUI", "Victory Dance", ["MOVE_VICTORY_DANCE", "MOVE_CLOSE_COMBAT", "MOVE_LEAF_BLADE", "MOVE_SLEEP_POWDER"], "NATURE_JOLLY", "ABILITY_CHLOROPHYLL", "ITEM_FOCUS_SASH", [2, 32, 0, 0, 0, 32], "sleep pressure and physical setup"),
     authored_modern_set("SPECIES_BRAVIARY_HISUI", "Tinted Lens", ["MOVE_ESPER_WING", "MOVE_AIR_SLASH", "MOVE_HEAT_WAVE", "MOVE_PROTECT"], "NATURE_MODEST", "ABILITY_TINTED_LENS", "ITEM_LIFE_ORB", [2, 0, 0, 32, 0, 32], "Tinted Lens special attacker"),
@@ -764,6 +800,60 @@ def apply_audited_set_override(entry: dict) -> dict:
     result = {**entry, **changes}
     result["audit_note"] = "Emerald Champions executable set-coherence review"
     return result
+
+
+def apply_hand_audited_species_sets(
+    defaults: list[dict],
+    alternatives: list[dict],
+    singles_defaults: list[dict],
+    singles_alternatives: list[dict],
+) -> tuple[list[dict], list[dict], list[dict], list[dict]]:
+    """Replace reviewed species with their explicit, hand-authored catalogs."""
+    source = load_hand_audited_catalog()
+    reviewed = source["species"]
+
+    def replace(
+        current_defaults: list[dict],
+        current_alternatives: list[dict],
+        format_name: str,
+        minimum: int,
+        maximum: int,
+    ) -> tuple[list[dict], list[dict]]:
+        existing = defaultdict(list)
+        for entry in current_alternatives:
+            existing[entry["species"]].append(entry)
+
+        output_defaults = []
+        output_alternatives = []
+        found = set()
+        for default in current_defaults:
+            species = default["species"]
+            if species in reviewed:
+                choices = reviewed[species][format_name]
+                by_form = defaultdict(list)
+                for choice in choices:
+                    by_form[(choice["required_item"], choice.get("required_move", "MOVE_NONE"))].append(choice)
+                if len(by_form) > 1:
+                    assert all(2 <= len(form_choices) <= 4 for form_choices in by_form.values()), (
+                        species, format_name, {form: len(rows) for form, rows in by_form.items()}
+                    )
+                else:
+                    assert minimum <= len(choices) <= maximum, (species, format_name, len(choices))
+                assert all(entry["species"] == species for entry in choices)
+                output_defaults.append(choices[0])
+                output_alternatives.extend(choices[1:])
+                found.add(species)
+            else:
+                output_defaults.append(default)
+                output_alternatives.extend(existing[species])
+        assert found == set(reviewed), (format_name, sorted(set(reviewed) - found))
+        return output_defaults, output_alternatives
+
+    defaults, alternatives = replace(defaults, alternatives, "doubles", 2, 4)
+    singles_defaults, singles_alternatives = replace(
+        singles_defaults, singles_alternatives, "singles", 1, 2
+    )
+    return defaults, alternatives, singles_defaults, singles_alternatives
 
 
 def git_json(path: str) -> dict:
@@ -1494,10 +1584,15 @@ def ensure_minimum_non_mega_orientations(
         assert choice is not None, f"no genuinely distinct second orientation for {species}"
         synthesized.append(choice)
         existing.append(choice)
-    # Scovillain now contributes its reviewed ordinary default directly
-    # instead of consuming one emergency synthetic orientation.
-    assert len(synthesized) == 1086, len(synthesized)
-    return alternatives + synthesized
+    completed = alternatives + synthesized
+    completed_by_species: dict[str, list[dict]] = defaultdict(list)
+    for entry in defaults + completed:
+        completed_by_species[entry["species"]].append(entry)
+    assert all(
+        sum(entry["required_item"] == "ITEM_NONE" for entry in completed_by_species[default["species"]]) >= 2
+        for default in defaults
+    ), "a direct species/form lacks two non-Mega orientations"
+    return completed
 
 
 def complete_battle_sets(defaults: list[dict], alternatives: list[dict]) -> tuple[list[dict], list[dict]]:
@@ -2254,6 +2349,9 @@ def validate(entries: list[dict]) -> None:
         assert entry["ability"] in abilities, entry["ability"]
         assert entry["item"] in items, entry["item"]
         assert entry["required_item"] in items, entry["required_item"]
+        if entry.get("required_move", "MOVE_NONE") != "MOVE_NONE":
+            assert entry["required_move"] in moves, entry["required_move"]
+            assert entry["required_move"] in entry["moves"], entry
         narrow_move_counts = {
             "SPECIES_DITTO": 1,
             "SPECIES_UNOWN": 2,
@@ -2276,18 +2374,19 @@ def c_preset(entry: dict, indent: str = "        ") -> list[str]:
         indent + ".moves = {" + ", ".join(moves) + "},",
         indent + f'.item = {entry["item"]},',
         indent + f'.requiredItem = {entry["required_item"]},',
+        indent + f'.requiredMove = {entry.get("required_move", "MOVE_NONE")},',
         indent + f'.nature = {entry["nature"]},',
         indent + f'.ability = {entry["ability"]},',
         indent + f".statPoints = {{{points}}},",
     ]
 
 
-def write_c(
+def render_c(
     defaults: list[dict],
     alternatives: list[dict],
     singles_defaults: list[dict],
     singles_alternatives: list[dict],
-) -> None:
+) -> str:
     by_species: dict[str, list[dict]] = {}
     for entry in alternatives:
         by_species.setdefault(entry["species"], []).append(entry)
@@ -2385,14 +2484,14 @@ def write_c(
         lines.append("        },")
         lines.append("    },")
     lines.extend(["};", ""])
-    C_OUTPUT.write_text("\n".join(lines))
+    return "\n".join(lines)
 
 
-def write_move_access_review_c() -> None:
+def render_move_access_review_c() -> str:
     review = json.loads(MOVE_ACCESS_REVIEW.read_text())
     retained = [row for row in review["assignments"] if row["action"] != "replace"]
-    assert len(review["assignments"]) == 72
-    assert len(retained) == 65
+    assert review["reviewed_assignment_count"] == len(review["assignments"])
+    assert retained
     lines = [
         "// Generated by scripts/generate_emerald_champions_battle_sets.py. Do not edit by hand.",
     ]
@@ -2401,10 +2500,17 @@ def write_move_access_review_c() -> None:
         for row in retained
     )
     lines.append("")
-    MOVE_ACCESS_C_OUTPUT.write_text("\n".join(lines))
+    return "\n".join(lines)
 
 
 def main() -> None:
+    if not __debug__:
+        raise SystemExit("battle-set generation requires assertions; do not run Python with -O")
+    parser = argparse.ArgumentParser(description=__doc__)
+    mode = parser.add_mutually_exclusive_group(required=True)
+    mode.add_argument("--write", action="store_true")
+    mode.add_argument("--check", action="store_true")
+    args = parser.parse_args()
     default_source = git_json(DEFAULT_SOURCE)
     alternative_source = git_json(ALTERNATIVE_SOURCE)
     default_names = alternative_source.get("default_names", {})
@@ -2475,6 +2581,9 @@ def main() -> None:
         for choice in alternatives_by_species.get(default["species"], [])
     ]
     singles_defaults, singles_alternatives = build_singles_sets(defaults, alternatives)
+    defaults, alternatives, singles_defaults, singles_alternatives = apply_hand_audited_species_sets(
+        defaults, alternatives, singles_defaults, singles_alternatives
+    )
     entries = defaults + alternatives + singles_defaults + singles_alternatives
     validate(entries)
 
@@ -2499,9 +2608,20 @@ def main() -> None:
         "singles_defaults": singles_defaults,
         "singles_alternatives": singles_alternatives,
     }
-    JSON_OUTPUT.write_text(json.dumps(output, indent=2, ensure_ascii=False) + "\n")
-    write_c(defaults, alternatives, singles_defaults, singles_alternatives)
-    write_move_access_review_c()
+    rendered = {
+        JSON_OUTPUT: json.dumps(output, indent=2, ensure_ascii=False) + "\n",
+        C_OUTPUT: render_c(defaults, alternatives, singles_defaults, singles_alternatives),
+        MOVE_ACCESS_C_OUTPUT: render_move_access_review_c(),
+    }
+    if args.check:
+        stale = [str(path.relative_to(ROOT)) for path, text in rendered.items()
+                 if not path.is_file() or path.read_text() != text]
+        if stale:
+            raise SystemExit("generated battle-set outputs are stale: " + ", ".join(stale))
+        print("PASS: generated battle-set outputs match current canonical inputs byte-for-byte")
+    else:
+        for path, text in rendered.items():
+            path.write_text(text)
     print(f"defaults={len(defaults)}")
     print(f"alternatives={len(alternatives)}")
     print(f"singles_defaults={len(singles_defaults)}")

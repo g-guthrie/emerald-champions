@@ -266,121 +266,6 @@ static bool32 IsEmeraldChampionsInitialStarter(enum Species species)
         VarGet(VAR_STARTER_GEN));
 }
 
-static const u16 sEmeraldChampionsFreeBattleItems[] =
-{
-    ITEM_BRIGHT_POWDER,
-    ITEM_WHITE_HERB,
-    ITEM_QUICK_CLAW,
-    ITEM_MENTAL_HERB,
-    ITEM_CHOICE_BAND,
-    ITEM_FOCUS_BAND,
-    ITEM_SCOPE_LENS,
-    ITEM_LEFTOVERS,
-    ITEM_POWER_HERB,
-    ITEM_CHOICE_SCARF,
-    ITEM_CHOICE_SPECS,
-    ITEM_FOCUS_SASH,
-    ITEM_WIDE_LENS,
-    ITEM_ZOOM_LENS,
-    ITEM_METRONOME,
-    ITEM_MUSCLE_BAND,
-    ITEM_WISE_GLASSES,
-    ITEM_EXPERT_BELT,
-    ITEM_LIGHT_CLAY,
-    ITEM_DAMP_ROCK,
-    ITEM_HEAT_ROCK,
-    ITEM_SMOOTH_ROCK,
-    ITEM_ICY_ROCK,
-    ITEM_LIFE_ORB,
-    ITEM_TOXIC_ORB,
-    ITEM_FLAME_ORB,
-    ITEM_BLACK_SLUDGE,
-    ITEM_SHED_SHELL,
-    ITEM_EVIOLITE,
-    ITEM_ROCKY_HELMET,
-    ITEM_AIR_BALLOON,
-    ITEM_RED_CARD,
-    ITEM_EJECT_BUTTON,
-    ITEM_ABSORB_BULB,
-    ITEM_CELL_BATTERY,
-    ITEM_LUMINOUS_MOSS,
-    ITEM_SNOWBALL,
-    ITEM_WEAKNESS_POLICY,
-    ITEM_ASSAULT_VEST,
-    ITEM_SAFETY_GOGGLES,
-    ITEM_ADRENALINE_ORB,
-    ITEM_TERRAIN_EXTENDER,
-    ITEM_PROTECTIVE_PADS,
-    ITEM_ELECTRIC_SEED,
-    ITEM_PSYCHIC_SEED,
-    ITEM_MISTY_SEED,
-    ITEM_GRASSY_SEED,
-    ITEM_THROAT_SPRAY,
-    ITEM_EJECT_PACK,
-    ITEM_HEAVY_DUTY_BOOTS,
-    ITEM_BLUNDER_POLICY,
-    ITEM_ROOM_SERVICE,
-    ITEM_UTILITY_UMBRELLA,
-    ITEM_CLEAR_AMULET,
-    ITEM_COVERT_CLOAK,
-    ITEM_LOADED_DICE,
-    ITEM_PUNCHING_GLOVE,
-    ITEM_ABILITY_SHIELD,
-    ITEM_MIRROR_HERB,
-    ITEM_BOOSTER_ENERGY,
-    ITEM_BINDING_BAND,
-    ITEM_GRIP_CLAW,
-    ITEM_BIG_ROOT,
-    ITEM_SHELL_BELL,
-    ITEM_FLOAT_STONE,
-    ITEM_RING_TARGET,
-    ITEM_IRON_BALL,
-    ITEM_LAGGING_TAIL,
-    ITEM_DESTINY_KNOT,
-    ITEM_SOUL_DEW,
-    ITEM_THICK_CLUB,
-    ITEM_LEEK,
-    ITEM_LIGHT_BALL,
-    ITEM_LUCKY_PUNCH,
-    ITEM_METAL_POWDER,
-    ITEM_QUICK_POWDER,
-    ITEM_SILK_SCARF,
-    ITEM_BLACK_BELT,
-    ITEM_SHARP_BEAK,
-    ITEM_POISON_BARB,
-    ITEM_SOFT_SAND,
-    ITEM_HARD_STONE,
-    ITEM_SILVER_POWDER,
-    ITEM_SPELL_TAG,
-    ITEM_CHARCOAL,
-    ITEM_MYSTIC_WATER,
-    ITEM_MIRACLE_SEED,
-    ITEM_MAGNET,
-    ITEM_NEVER_MELT_ICE,
-    ITEM_TWISTED_SPOON,
-    ITEM_DRAGON_FANG,
-    ITEM_BLACK_GLASSES,
-    ITEM_FAIRY_FEATHER,
-    ITEM_NORMAL_GEM,
-    ITEM_FIRE_GEM,
-    ITEM_WATER_GEM,
-    ITEM_ELECTRIC_GEM,
-    ITEM_GRASS_GEM,
-    ITEM_ICE_GEM,
-    ITEM_FIGHTING_GEM,
-    ITEM_POISON_GEM,
-    ITEM_GROUND_GEM,
-    ITEM_FLYING_GEM,
-    ITEM_PSYCHIC_GEM,
-    ITEM_BUG_GEM,
-    ITEM_ROCK_GEM,
-    ITEM_GHOST_GEM,
-    ITEM_DRAGON_GEM,
-    ITEM_DARK_GEM,
-    ITEM_STEEL_GEM,
-    ITEM_FAIRY_GEM,
-    ITEM_NONE,
-};
 
 static const u16 sEmeraldChampionsOffenseItems[] =
 {
@@ -523,6 +408,17 @@ static const u16 sEmeraldChampionsSpeciesItems[] =
     ITEM_NONE,
 };
 
+
+static const u16 *const sEmeraldChampionsBattleItemCategories[] =
+{
+    [EC_BATTLE_ITEM_CATEGORY_OFFENSE] = sEmeraldChampionsOffenseItems,
+    [EC_BATTLE_ITEM_CATEGORY_DEFENSE] = sEmeraldChampionsDefenseItems,
+    [EC_BATTLE_ITEM_CATEGORY_FIELD] = sEmeraldChampionsFieldItems,
+    [EC_BATTLE_ITEM_CATEGORY_TYPE] = sEmeraldChampionsTypeItems,
+    [EC_BATTLE_ITEM_CATEGORY_GEM] = sEmeraldChampionsGemItems,
+    [EC_BATTLE_ITEM_CATEGORY_SPECIES] = sEmeraldChampionsSpeciesItems,
+};
+
 static const u16 sEmeraldChampionsMegaStones[] =
 {
 #include "data/emerald_champions_mega_stones.h"
@@ -635,43 +531,11 @@ u8 GiveEmeraldChampionsPreparedPokemonForTesting(enum Species species, u8 level)
 
 void OpenEmeraldChampionsBattleItemMart(void)
 {
-    CreateFreePokemartMenu(sEmeraldChampionsFreeBattleItems);
-    ScriptContext_Stop();
-}
+    u16 category = gSpecialVar_0x8004;
 
-void OpenEmeraldChampionsOffenseItemMart(void)
-{
-    CreateFreePokemartMenu(sEmeraldChampionsOffenseItems);
-    ScriptContext_Stop();
-}
-
-void OpenEmeraldChampionsDefenseItemMart(void)
-{
-    CreateFreePokemartMenu(sEmeraldChampionsDefenseItems);
-    ScriptContext_Stop();
-}
-
-void OpenEmeraldChampionsFieldItemMart(void)
-{
-    CreateFreePokemartMenu(sEmeraldChampionsFieldItems);
-    ScriptContext_Stop();
-}
-
-void OpenEmeraldChampionsTypeItemMart(void)
-{
-    CreateFreePokemartMenu(sEmeraldChampionsTypeItems);
-    ScriptContext_Stop();
-}
-
-void OpenEmeraldChampionsGemItemMart(void)
-{
-    CreateFreePokemartMenu(sEmeraldChampionsGemItems);
-    ScriptContext_Stop();
-}
-
-void OpenEmeraldChampionsSpeciesItemMart(void)
-{
-    CreateFreePokemartMenu(sEmeraldChampionsSpeciesItems);
+    if (category >= ARRAY_COUNT(sEmeraldChampionsBattleItemCategories))
+        return;
+    CreateFreePokemartMenu(sEmeraldChampionsBattleItemCategories[category]);
     ScriptContext_Stop();
 }
 

@@ -9975,16 +9975,35 @@ bool32 AreMultiPartiesFullTeams(void)
         return FALSE;
     }
 #else
-    enum DifficultyLevel difficulty = GetCurrentDifficultyLevel();
-
     if (B_MULTI_HALF_TEAMS
      || TRAINER_BATTLE_PARAM.opponentA == TRAINER_LINK_OPPONENT
-     || gBattleTypeFlags & BATTLE_TYPE_TOWER_LINK_MULTI
-     || (gTrainers[difficulty][TRAINER_BATTLE_PARAM.opponentA].multiTeamSize == MULTI_TEAM_SIZE_HALF)
-     || (gTrainers[difficulty][TRAINER_BATTLE_PARAM.opponentB].multiTeamSize == MULTI_TEAM_SIZE_HALF))
+     || gBattleTypeFlags & BATTLE_TYPE_TOWER_LINK_MULTI)
     {
         gSpecialVar_Result = FALSE;
         return FALSE;
+    }
+
+    // Resolve the same trainer definition used to generate each party. Easy
+    // and Hard can use the Normal row; empty difficulty rows are not metadata.
+    // Facility/link IDs belong to other tables, and opponentB is not always set.
+    if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+     && !(gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK)))
+    {
+        const u16 trainerIds[] = {TRAINER_BATTLE_PARAM.opponentA, TRAINER_BATTLE_PARAM.opponentB};
+        u32 count = (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS) ? 2 : 1;
+
+        for (u32 i = 0; i < count; i++)
+        {
+            u16 trainerId = trainerIds[i];
+
+            if (trainerId == TRAINER_NONE || trainerId >= TRAINERS_COUNT || IsSpecialTrainer(trainerId))
+                continue;
+            if (GetTrainerStructFromId(trainerId)->multiTeamSize == MULTI_TEAM_SIZE_HALF)
+            {
+                gSpecialVar_Result = FALSE;
+                return FALSE;
+            }
+        }
     }
 #endif
 

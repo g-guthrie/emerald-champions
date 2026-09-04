@@ -122,6 +122,8 @@ extern const struct LegendarySignDefinition gLegendarySignDefinitions[LEGENDARY_
 bool32 IsLegendarySignUnlocked(enum LegendarySignId signId);
 bool32 IsLegendarySignCaught(enum LegendarySignId signId);
 void UnlockLegendarySign(enum LegendarySignId signId);
+void InitializeLegendaryRelicDeliveryState(void);
+void RetryPendingLegendaryRelics(void);
 void MarkLegendarySignCaughtBySpecies(enum Species species);
 enum LegendarySignId GetLegendarySignIdBySpecies(enum Species species);
 bool32 TryGetLegendarySignWildOverride(enum WildPokemonArea area, enum Species *species, u8 *level);

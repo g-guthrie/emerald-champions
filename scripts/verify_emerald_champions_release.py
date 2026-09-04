@@ -15,6 +15,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PYTHON = sys.executable
+sys.path.insert(0, str(ROOT / "scripts"))
+from rom_artifacts import verify_rom_elf_pair
 
 
 STATIC_GATES = (
@@ -24,7 +26,7 @@ STATIC_GATES = (
     ("Inclement visual sources", (PYTHON, "scripts/verify_inclement_visual_sources.py")),
     ("Inclement overworld parity", (PYTHON, "scripts/verify_inclement_overworld_parity.py")),
     ("Inclement story parity", (PYTHON, "scripts/verify_inclement_story_parity.py")),
-    ("map reachability", (PYTHON, "scripts/verify_map_reachability.py")),
+    ("local warp collision regressions", (PYTHON, "scripts/verify_map_reachability.py")),
     ("NPC script integrity", (PYTHON, "scripts/verify_npc_script_integrity.py")),
     (
         "Verdant visual byte inventory",
@@ -47,7 +49,7 @@ STATIC_GATES = (
     ("trainer dialogue species", (PYTHON, "scripts/audit_trainer_dialogue_species.py")),
     ("story and dialogue", (PYTHON, "scripts/verify_emerald_champions_story.py")),
     ("rematch-free Match Call", (PYTHON, "scripts/verify_rematch_free_match_call.py")),
-    ("whole-campaign progression graph", (PYTHON, "scripts/verify_emerald_champions_progression.py")),
+    ("map and script structure with selected progression contracts", (PYTHON, "scripts/verify_emerald_champions_progression.py")),
     ("legendary availability", (PYTHON, "scripts/verify_legendary_availability.py")),
     ("legendary signs and Circuit", (PYTHON, "scripts/verify_legendary_signs_and_circuit.py")),
     ("regional starters", (PYTHON, "scripts/verify_regional_starters.py")),
@@ -186,11 +188,25 @@ def gba_header_checksum(data: bytes) -> int:
     return (-(sum(data[0xA0:0xBD]) + 0x19)) & 0xFF
 
 
+def verify_release_symbols(symbols: str) -> None:
+    # These compiled interfaces change boot behavior or permit fixture/agent
+    # mutation. The ordinary release keeps only the disabled test-runner stub.
+    forbidden_prefixes = (
+        "CB2_EmeraldChampionsHeadlessFixture", "EmeraldChampionsHeadlessObserve",
+        "EmeraldChampionsAgentPrepPoll", "gEcHeadless", "gEcAgentPrep",
+        "CB2_TestRunner", "gTestRunnerState", "gTestRunnerHeadless",
+    )
+    names = re.findall(r"(?m)^[0-9a-fA-F]+\s+\w\s+(\S+)$", symbols)
+    forbidden = sorted(name for name in names if name.startswith(forbidden_prefixes))
+    require(not forbidden, f"release ELF contains test/fixture interfaces: {forbidden}")
+
+
 def elf_memory(elf: Path) -> tuple[int, int, int]:
     nm = shutil.which("arm-none-eabi-nm")
     size = shutil.which("arm-none-eabi-size")
     require(nm is not None and size is not None, "arm-none-eabi-nm/size are required for release verification")
     symbols = subprocess.check_output((nm, "-n", str(elf)), text=True)
+    verify_release_symbols(symbols)
     match = re.search(r"(?m)^([0-9a-fA-F]+)\s+\w\s+__rom_end$", symbols)
     require(match is not None, "ELF lacks __rom_end")
     rom_used = int(match.group(1), 16) - 0x08000000
@@ -208,6 +224,7 @@ def elf_memory(elf: Path) -> tuple[int, int, int]:
 def verify_rom(rom: Path, elf: Path) -> None:
     require(rom.is_file(), f"release ROM is missing: {rom}")
     require(elf.is_file(), f"release ELF is missing: {elf}")
+    verify_rom_elf_pair(rom, elf)
     data = rom.read_bytes()
     require(len(data) == 32 * 1024 * 1024, f"ROM is not exactly 32 MiB: {len(data)} bytes")
     require(data[0xA0:0xAC] == b"EM CHAMPIONS", f"wrong ROM title: {data[0xA0:0xAC]!r}")
@@ -233,27 +250,15 @@ def verify_build_freshness(rom: Path, elf: Path) -> None:
     require(rom.name.replace(".gba", ".elf") == elf.name, "ROM and ELF names do not describe the same build")
     require(rom.is_file() and elf.is_file(), f"release artifacts are missing: {rom}, {elf}")
 
-    inputs: list[Path] = []
-    for directory in ("src", "data", "include", "asm", "graphics", "sound", "libagbsyscall"):
-        inputs.extend(
-            path for path in (ROOT / directory).rglob("*")
-            if path.is_file() and not path.name.startswith("._")
-        )
-    inputs.extend(
-        path for path in ROOT.iterdir()
-        if path.is_file()
-        and (path.name in {"Makefile", "config.mk", "make_tools.mk", "charmap.txt"}
-             or path.suffix in {".mk", ".ld"})
-    )
-    require(inputs, "no build inputs were found")
     # Modification times cannot prove the ROM came from *these* sources: the
     # Docker builder compiles a copied tree, a checkout rewrites every mtime,
     # and a stray `touch` fails a correct build.  The content stamp written by
     # scripts/stamp_release_inputs.py inside the tree that was actually built is
-    # the only freshness evidence this gate accepts.
+    # required integrity evidence; a successful build remains a separate step.
     run_gate(
         "release input content stamp",
-        (PYTHON, "scripts/stamp_release_inputs.py", "--check"),
+        (PYTHON, "scripts/stamp_release_inputs.py", "--check", "--stamp",
+         str(rom.with_suffix(".inputs.json"))),
     )
 
 

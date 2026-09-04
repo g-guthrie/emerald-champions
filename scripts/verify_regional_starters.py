@@ -78,7 +78,7 @@ def main() -> None:
     require("ApplyEmeraldChampionsOpponentSet(&gParties[B_TRAINER_PLAYER][0], 0)" in setup,
             "the player's starter is not battle-ready")
 
-    presets = json.loads((ROOT / "docs" / "emerald_champions_battle_sets.json").read_text())
+    presets = json.loads((ROOT / "data/emerald_champions/emerald_champions_battle_sets.json").read_text())
     preset_species = {entry["species"].removeprefix("SPECIES_") for entry in presets["defaults"]}
     all_stages = {species for trio in TRIOS for species in trio} | {species for family in EVOLUTIONS for species in family}
     require(all_stages <= preset_species, f"starter stages lack battle sets: {sorted(all_stages - preset_species)}")

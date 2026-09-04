@@ -288,8 +288,9 @@ static inline const struct Trainer *GetTrainerStructFromId(u16 trainerId)
     }
     else
     {
+        trainerId = SanitizeTrainerId(trainerId);
         difficulty = GetTrainerDifficultyLevel(trainerId);
-        return &gTrainers[difficulty][SanitizeTrainerId(trainerId)];
+        return &gTrainers[difficulty][trainerId];
     }
 }
 

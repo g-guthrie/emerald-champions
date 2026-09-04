@@ -1,5 +1,5 @@
 // Champions random-doubles generation ported from Pokemon Showdown commit
-// bb179fbf8449e3c31632bd56f671ffb4404fa6e7. See docs/THIRD_PARTY_NOTICES.md.
+// bb179fbf8449e3c31632bd56f671ffb4404fa6e7. See THIRD_PARTY_NOTICES.md.
 #include "global.h"
 #include "battle.h"
 #include "battle_frontier.h"

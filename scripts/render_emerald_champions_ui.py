@@ -407,6 +407,116 @@ SCENARIOS: dict[str, dict[str, object]] = {
             (1200, 2, "A"),
         ],
     },
+    "battle-set-long-top": {
+        "id": 57, "param": 0, "frames": 900, "trigger_frame": 600,
+        "keys": [], "verify": True,
+    },
+    "battle-set-long-middle": {
+        "id": 57, "param": 1, "frames": 1300, "trigger_frame": 600,
+        "keys": [(800, 2, "DOWN"), (900, 2, "DOWN"), (1000, 2, "DOWN"), (1100, 2, "DOWN")],
+        "verify": True,
+    },
+    "battle-set-long-bottom": {
+        "id": 57, "param": 2, "frames": 1500, "trigger_frame": 600,
+        "keys": [
+            (800, 2, "DOWN"), (900, 2, "DOWN"), (1000, 2, "DOWN"),
+            (1100, 2, "DOWN"), (1200, 2, "DOWN"), (1300, 2, "DOWN"),
+        ],
+        "verify": True,
+    },
+    "capture-to-party": {
+        "id": 59,
+        "frames": 3000,
+        "keys": [
+            (500, 2, "A"), (700, 2, "A"), (900, 2, "A"),
+            (1100, 2, "A"), (1300, 2, "A"), (1500, 2, "A"),
+            (1700, 2, "A"), (1900, 2, "A"), (2100, 2, "A"),
+            (2300, 2, "A"), (2500, 2, "A"), (2700, 2, "A"),
+        ],
+        "verify": True,
+    },
+    "capture-to-pc": {
+        "id": 60,
+        "frames": 3000,
+        "keys": [
+            (500, 2, "A"), (700, 2, "A"), (900, 2, "A"),
+            (1100, 2, "A"), (1300, 2, "A"), (1500, 2, "A"),
+            (1700, 2, "A"), (1900, 2, "A"), (2100, 2, "A"),
+            (2300, 2, "A"), (2500, 2, "A"), (2700, 2, "A"),
+        ],
+        "verify": True,
+    },
+    "capture-quest-diancie": {
+        "id": 61,
+        "frames": 4200,
+        "keys": [
+            (300, 20, "UP"), (380, 2, "A"),
+            (600, 2, "A"), (800, 2, "A"), (1000, 2, "A"),
+            (1200, 2, "A"), (1400, 2, "A"), (1600, 2, "A"),
+            (1800, 2, "A"), (2000, 2, "A"), (2200, 2, "A"),
+            (2400, 2, "A"), (2600, 2, "A"), (2800, 2, "A"),
+            (3000, 2, "A"), (3200, 2, "A"), (3400, 2, "A"),
+            (3600, 2, "A"), (3800, 2, "A"), (4000, 2, "A"),
+        ],
+        "verify": True,
+    },
+    "capture-quest-registeel": {
+        "id": 62,
+        "frames": 4200,
+        "keys": [
+            (300, 20, "UP"), (380, 2, "A"),
+            (600, 2, "A"), (800, 2, "A"), (1000, 2, "A"),
+            (1200, 2, "A"), (1400, 2, "A"), (1600, 2, "A"),
+            (1800, 2, "A"), (2000, 2, "A"), (2200, 2, "A"),
+            (2400, 2, "A"), (2600, 2, "A"), (2800, 2, "A"),
+            (3000, 2, "A"), (3200, 2, "A"), (3400, 2, "A"),
+            (3600, 2, "A"), (3800, 2, "A"), (4000, 2, "A"),
+        ],
+        "verify": True,
+    },
+    "capture-quest-latios": {
+        "id": 63,
+        "frames": 5000,
+        "keys": [
+            (300, 20, "UP"), (380, 2, "A"),
+            (600, 2, "A"), (800, 2, "A"), (1000, 2, "A"),
+            (1200, 2, "A"), (1400, 2, "A"), (1600, 2, "A"),
+            (1800, 2, "A"), (2000, 2, "A"), (2200, 2, "A"),
+            (2400, 2, "A"), (2600, 2, "A"), (2800, 2, "A"),
+            (3000, 2, "A"), (3200, 2, "A"), (3400, 2, "A"),
+            (3600, 2, "A"), (3800, 2, "A"), (4000, 2, "A"),
+            (4200, 2, "A"), (4400, 2, "A"), (4600, 2, "A"),
+            (4800, 2, "A"),
+        ],
+        "verify": True,
+    },
+    "capture-ordinary-first": {
+        "id": 64,
+        "frames": 3200,
+        "keys": [
+            (500, 2, "A"), (700, 2, "A"), (900, 2, "A"),
+            (1100, 2, "A"), (1300, 2, "A"), (1500, 2, "A"),
+            (1700, 2, "A"), (1900, 2, "A"), (2100, 2, "A"),
+            (2300, 2, "A"), (2500, 2, "A"), (2700, 2, "A"),
+            (2900, 2, "A"), (3100, 2, "A"),
+        ],
+        "verify": True,
+    },
+    "roxanne-victory": {
+        "id": 65,
+        "frames": 6500,
+        "keys": [(300, 20, "UP"), (380, 2, "A")],
+        "repeat_key": (420, 6460, 40, 2, "A"),
+        "verify": True,
+    },
+    "first-center-acquisition": {
+        "id": 66,
+        "frames": 7500,
+        "keys": [(300, 20, "UP"), (380, 2, "A")],
+        "repeat_key": (420, 7460, 40, 2, "A"),
+        "verify": True,
+        "stop_on_observed": True,
+    },
     "nature-list": {
         "id": 6, "frames": 940,
         "keys": [(220, 100, "UP"), (250, 2, "A"), (360, 2, "DOWN"), (400, 2, "A"), (560, 2, "A"), (760, 2, "A")],
@@ -1101,21 +1211,21 @@ SCENARIOS: dict[str, dict[str, object]] = {
     },
     # Field moves without HM carriers: a Zigzagoon that could learn the move
     # (but does not know it) performs it once the badge is held. UP turns to
-    # face the obstacle, A talks to it, A confirms; the observer latches the
-    # "used <move>!" showcase.
+    # face the obstacle; A advances the obstacle text, confirms Yes, and
+    # dismisses the used-move text where required before the showcase starts.
     "field-move-cut-fallback": {
         "id": 47, "frames": 900,
-        "keys": [(200, 2, "UP"), (260, 2, "A"), (420, 2, "A")],
+        "keys": [(200, 2, "UP"), (260, 2, "A"), (420, 2, "A"), (580, 2, "A"), (740, 2, "A")],
         "verify": True, "stop_on_observed": True,
     },
     "field-move-rock-smash-fallback": {
         "id": 48, "frames": 900,
-        "keys": [(200, 2, "UP"), (260, 2, "A"), (420, 2, "A")],
+        "keys": [(200, 2, "UP"), (260, 2, "A"), (420, 2, "A"), (580, 2, "A"), (740, 2, "A")],
         "verify": True, "stop_on_observed": True,
     },
     "field-move-strength-fallback": {
         "id": 49, "frames": 900,
-        "keys": [(200, 2, "UP"), (260, 2, "A"), (420, 2, "A")],
+        "keys": [(200, 2, "UP"), (260, 2, "A"), (420, 2, "A"), (580, 2, "A")],
         "verify": True, "stop_on_observed": True,
     },
     # The Flight Beacon: the trigger opens the fly map, A picks the current
@@ -1160,6 +1270,9 @@ SERVICE_UI_SCENARIOS = (
     "battle-set-confirm",
     "battle-set-confirm-no",
     "battle-set-applied",
+    "battle-set-long-top",
+    "battle-set-long-middle",
+    "battle-set-long-bottom",
     "stat-point-party",
     "stat-point-egg-rejected",
     "stat-point-external-entry",
@@ -1564,6 +1677,10 @@ def render_one(
     out: Path,
 ) -> dict[str, object]:
     screenshot = out / f"{name}.png"
+    keys = list(spec["keys"])
+    if "repeat_key" in spec:
+        start, stop, step, duration, repeated = spec["repeat_key"]
+        keys.extend((frame, duration, repeated) for frame in range(start, stop, step))
     with tempfile.TemporaryDirectory(prefix="emerald-champions-render-") as scratch_dir:
         scratch = Path(scratch_dir)
         scratch_rom = scratch / "Emerald Champions Headless.gba"
@@ -1589,8 +1706,8 @@ def render_one(
                 str(screenshot),
             )
         )
-        for frame, duration, keys in spec["keys"]:
-            command.extend(("--key", f"{frame}:{duration}:{keys}"))
+        for frame, duration, pressed in keys:
+            command.extend(("--key", f"{frame}:{duration}:{pressed}"))
         if spec.get("verify"):
             command.extend(("--read", f"4:0x{setup_address:x}"))
             command.extend(("--read", f"4:0x{observed_address:x}"))
@@ -1615,7 +1732,7 @@ def render_one(
         "name": name,
         "scenario_id": spec["id"],
         "frames": spec["frames"],
-        "keys": spec["keys"],
+        "keys": keys,
         "video_hash": match.group("video"),
         "png_sha256": hashlib.sha256(screenshot.read_bytes()).hexdigest(),
         "pixel_sha256": pixel_sha256,

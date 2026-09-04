@@ -9,9 +9,11 @@
 #include "battle_interface.h"
 #include "battle_main.h"
 #include "battle_setup.h"
+#include "caps.h"
 #include "champions_circuit.h"
 #include "emerald_champions_headless.h"
 #include "emerald_champions_battle_sets.h"
+#include "emerald_champions_agent_prep.h"
 #include "coins.h"
 #include "contest.h"
 #include "contest_util.h"
@@ -20,6 +22,7 @@
 #include "load_save.h"
 #include "event_object_movement.h"
 #include "field_effect.h"
+#include "field_player_avatar.h"
 #include "field_specials.h"
 #include "field_door.h"
 #include "field_screen_effect.h"
@@ -77,13 +80,118 @@ EWRAM_DATA volatile u32 gEcHeadlessFixtureSetupResult = FALSE;
 EWRAM_DATA volatile u32 gEcHeadlessFixtureObservedResult = FALSE;
 EWRAM_DATA volatile u32 gEcHeadlessFixtureParam = MOVE_NONE;
 EWRAM_DATA volatile u32 gEcHeadlessFixtureTrigger = FALSE;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignBattleSerial = 0;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignLastBattleType = 0;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignLastOpponentA = TRAINER_NONE;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignLastOpponentB = TRAINER_NONE;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignMapId = 0;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignMapGroup = 0;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignMapNum = 0;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignPlayerX = 0;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignPlayerY = 0;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignPlayerFacing = DIR_NONE;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignControlsLocked = 0;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignScriptEnabled = 0;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignInBattle = FALSE;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignQueryKind = EC_HEADLESS_CAMPAIGN_QUERY_NONE;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignQueryId = 0;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignQueryValue = 0;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignQueryObjectActive = FALSE;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignQueryObjectX = 0;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignQueryObjectY = 0;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignCaptureSerial = 0;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignLastCapturedSpecies = SPECIES_NONE;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignLastCaptureResult = 0;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignCaptureBookkeepingValid = FALSE;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignLastResolution = EC_HEADLESS_BATTLE_NATIVE;
 static EWRAM_DATA u8 sEcHeadlessName[POKEMON_NAME_LENGTH + 1] = {0};
 static EWRAM_DATA u16 sEcHeadlessObservedDelay = 0;
 static EWRAM_DATA bool8 sEcHeadlessFurfrouMenuOpened = FALSE;
+static EWRAM_DATA bool8 sEcHeadlessAutoCaptureInProgress = FALSE;
 static const u8 sEcHeadlessPlayerName[] = _("BRENDAN");
 extern void gInitialMainCB2(void);
 extern const u8 Common_EventScript_ChooseStarterRegion[];
 extern void CallBattleDomeFunction(void);
+
+bool32 EmeraldChampionsHeadlessBattleAutomationActive(void)
+{
+    return gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CAMPAIGN_AUTOWIN
+        || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CAPTURE_TO_PARTY
+        || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CAPTURE_TO_PC
+        || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CAPTURE_QUEST_DIANCIE
+        || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CAPTURE_QUEST_REGISTEEL
+        || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CAPTURE_QUEST_LATIOS
+        || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CAPTURE_ORDINARY_FIRST
+        || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_ROXANNE_VICTORY
+        || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_FIRST_CENTER_ACQUISITION;
+}
+
+bool32 EmeraldChampionsHeadlessAutoCaptureActive(void)
+{
+    return EmeraldChampionsHeadlessBattleAutomationActive()
+        && sEcHeadlessAutoCaptureInProgress;
+}
+
+enum EmeraldChampionsHeadlessBattleResolution EmeraldChampionsHeadlessGetBattleResolution(void)
+{
+    if (gBattleTypeFlags & (BATTLE_TYPE_LINK
+                          | BATTLE_TYPE_RECORDED
+                          | BATTLE_TYPE_RECORDED_LINK
+                          | BATTLE_TYPE_CATCH_TUTORIAL
+                          | BATTLE_TYPE_POKEDUDE))
+        return EC_HEADLESS_BATTLE_NATIVE;
+    if (gBattleTypeFlags & (BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_ROAMER))
+        return EC_HEADLESS_BATTLE_CAPTURE;
+    if ((gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CAMPAIGN_AUTOWIN
+      || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CAPTURE_ORDINARY_FIRST)
+     && !(gBattleTypeFlags & (BATTLE_TYPE_TRAINER
+                           | BATTLE_TYPE_SAFARI
+                           | BATTLE_TYPE_GHOST
+                           | BATTLE_TYPE_FIRST_BATTLE))
+     && !(gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER))
+     && CalculatePlayerPartyCount() < 2)
+        return EC_HEADLESS_BATTLE_CAPTURE;
+    return EC_HEADLESS_BATTLE_WIN;
+}
+
+void EmeraldChampionsHeadlessBeginAutoCapture(void)
+{
+    sEcHeadlessAutoCaptureInProgress = TRUE;
+}
+
+void EmeraldChampionsHeadlessRecordCapture(enum Species species, u32 result)
+{
+    bool32 delivered = FALSE;
+
+    if (result == MON_GIVEN_TO_PARTY)
+    {
+        for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+        {
+            if (GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_SPECIES) == species)
+                delivered = TRUE;
+        }
+    }
+    else if (result == MON_GIVEN_TO_PC)
+    {
+        for (u32 box = 0; box < TOTAL_BOXES_COUNT && !delivered; box++)
+        {
+            for (u32 slot = 0; slot < IN_BOX_COUNT; slot++)
+            {
+                if (GetBoxMonData(&gPokemonStoragePtr->boxes[box][slot], MON_DATA_SPECIES) == species)
+                {
+                    delivered = TRUE;
+                    break;
+                }
+            }
+        }
+    }
+    gEcHeadlessCampaignLastCapturedSpecies = species;
+    gEcHeadlessCampaignLastCaptureResult = result;
+    gEcHeadlessCampaignCaptureBookkeepingValid = delivered
+        && GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT);
+    gEcHeadlessCampaignCaptureSerial++;
+    sEcHeadlessAutoCaptureInProgress = FALSE;
+}
 
 struct EcHeadlessOverworldFixture
 {
@@ -398,6 +506,27 @@ static void PrepareHeadlessWildBattle(bool32 isDouble)
     SetMainCallback2(CB2_InitBattle);
 }
 
+static void PrepareHeadlessCaptureBattle(bool32 fullParty)
+{
+    SetWarpDestination(MAP_GROUP(MAP_ROUTE101), MAP_NUM(MAP_ROUTE101), WARP_ID_NONE, 8, 12);
+    WarpIntoMap();
+    InitMap();
+    ZeroPlayerPartyMons();
+    ZeroEnemyPartyMons();
+    for (u32 i = 0; i < (fullParty ? PARTY_SIZE : 1); i++)
+    {
+        CreateHealthyHeadlessMon(
+            &gParties[B_TRAINER_PLAYER][i], SPECIES_GEODUDE, 30,
+            OTID_STRUCT_PLAYER_ID
+        );
+    }
+    CalculatePlayerPartyCount();
+    CreateWildMon(SPECIES_DIANCIE, 50);
+    gBattleTypeFlags = BATTLE_TYPE_LEGENDARY;
+    gMain.savedCallback = gInitialMainCB2;
+    SetMainCallback2(CB2_InitBattle);
+}
+
 static void SetHeadlessStatus(struct Pokemon *mon, u32 status)
 {
     SetMonData(mon, MON_DATA_STATUS, &status);
@@ -629,6 +758,174 @@ static bool32 IsHeadlessSummaryStateObserved(void)
 
 void EmeraldChampionsHeadlessObserve(void)
 {
+    EmeraldChampionsAgentPrepPoll();
+    if (EmeraldChampionsHeadlessBattleAutomationActive())
+    {
+        if (!gMain.inBattle)
+            sEcHeadlessAutoCaptureInProgress = FALSE;
+        gEcHeadlessFixtureSetupResult = TRUE;
+        gEcHeadlessCampaignInBattle = gMain.inBattle;
+        if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_FLAG)
+            gEcHeadlessCampaignQueryValue = FlagGet(gEcHeadlessCampaignQueryId);
+        else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_VAR)
+            gEcHeadlessCampaignQueryValue = VarGet(gEcHeadlessCampaignQueryId);
+        else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_OBJECT
+              && gMain.callback2 == CB2_Overworld)
+        {
+            u8 objectEventId = GetObjectEventIdByLocalIdAndMap(
+                gEcHeadlessCampaignQueryId,
+                gSaveBlock1Ptr->location.mapNum,
+                gSaveBlock1Ptr->location.mapGroup
+            );
+
+            gEcHeadlessCampaignQueryObjectActive = objectEventId < OBJECT_EVENTS_COUNT
+                && gObjectEvents[objectEventId].active;
+            if (gEcHeadlessCampaignQueryObjectActive)
+            {
+                gEcHeadlessCampaignQueryObjectX =
+                    gObjectEvents[objectEventId].currentCoords.x - MAP_OFFSET;
+                gEcHeadlessCampaignQueryObjectY =
+                    gObjectEvents[objectEventId].currentCoords.y - MAP_OFFSET;
+            }
+            else
+            {
+                gEcHeadlessCampaignQueryObjectX = 0;
+                gEcHeadlessCampaignQueryObjectY = 0;
+            }
+            gEcHeadlessCampaignQueryValue = gEcHeadlessCampaignQueryObjectActive;
+        }
+        else
+        {
+            gEcHeadlessCampaignQueryValue = 0;
+            gEcHeadlessCampaignQueryObjectActive = FALSE;
+            gEcHeadlessCampaignQueryObjectX = 0;
+            gEcHeadlessCampaignQueryObjectY = 0;
+        }
+
+        if (gMain.callback2 == CB2_Overworld)
+        {
+            gEcHeadlessCampaignMapId = (gSaveBlock1Ptr->location.mapGroup << 8)
+                | gSaveBlock1Ptr->location.mapNum;
+            gEcHeadlessCampaignMapGroup = gSaveBlock1Ptr->location.mapGroup;
+            gEcHeadlessCampaignMapNum = gSaveBlock1Ptr->location.mapNum;
+            gEcHeadlessCampaignPlayerX = gSaveBlock1Ptr->pos.x;
+            gEcHeadlessCampaignPlayerY = gSaveBlock1Ptr->pos.y;
+            gEcHeadlessCampaignPlayerFacing = GetPlayerFacingDirection();
+            gEcHeadlessCampaignControlsLocked = ArePlayerFieldControlsLocked();
+            gEcHeadlessCampaignScriptEnabled = ScriptContext_IsEnabled();
+        }
+        else
+        {
+            gEcHeadlessCampaignControlsLocked = TRUE;
+            gEcHeadlessCampaignScriptEnabled = TRUE;
+        }
+        if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CAPTURE_TO_PARTY)
+        {
+            gEcHeadlessFixtureObservedResult =
+                gEcHeadlessCampaignBattleSerial == 1
+                && gEcHeadlessCampaignCaptureSerial == 1
+                && gEcHeadlessCampaignLastCapturedSpecies == SPECIES_DIANCIE
+                && gEcHeadlessCampaignLastCaptureResult == MON_GIVEN_TO_PARTY
+                && gEcHeadlessCampaignCaptureBookkeepingValid;
+        }
+        else if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CAPTURE_TO_PC)
+        {
+            gEcHeadlessFixtureObservedResult =
+                gEcHeadlessCampaignBattleSerial == 1
+                && gEcHeadlessCampaignCaptureSerial == 1
+                && gEcHeadlessCampaignLastCapturedSpecies == SPECIES_DIANCIE
+                && gEcHeadlessCampaignLastCaptureResult == MON_GIVEN_TO_PC
+                && gEcHeadlessCampaignCaptureBookkeepingValid;
+        }
+        else if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CAPTURE_QUEST_DIANCIE)
+        {
+            gEcHeadlessFixtureObservedResult =
+                gEcHeadlessCampaignBattleSerial == 1
+                && gEcHeadlessCampaignCaptureSerial == 1
+                && gEcHeadlessCampaignLastCapturedSpecies == SPECIES_DIANCIE
+                && gEcHeadlessCampaignLastCaptureResult == MON_GIVEN_TO_PARTY
+                && gEcHeadlessCampaignCaptureBookkeepingValid
+                && FlagGet(FLAG_EC_CAUGHT_DIANCIE);
+        }
+        else if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CAPTURE_QUEST_REGISTEEL)
+        {
+            gEcHeadlessFixtureObservedResult =
+                gEcHeadlessCampaignBattleSerial == 1
+                && gEcHeadlessCampaignCaptureSerial == 1
+                && gEcHeadlessCampaignLastCapturedSpecies == SPECIES_REGISTEEL
+                && gEcHeadlessCampaignCaptureBookkeepingValid
+                && FlagGet(FLAG_DEFEATED_REGISTEEL);
+        }
+        else if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CAPTURE_QUEST_LATIOS)
+        {
+            gEcHeadlessFixtureObservedResult =
+                gEcHeadlessCampaignBattleSerial == 1
+                && gEcHeadlessCampaignCaptureSerial == 1
+                && gEcHeadlessCampaignLastCapturedSpecies == SPECIES_LATIOS
+                && gEcHeadlessCampaignCaptureBookkeepingValid
+                && FlagGet(FLAG_CAUGHT_LATIAS_OR_LATIOS);
+        }
+        else if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CAPTURE_ORDINARY_FIRST)
+        {
+            gEcHeadlessFixtureObservedResult =
+                gEcHeadlessCampaignBattleSerial == 1
+                && gEcHeadlessCampaignCaptureSerial == 1
+                && !(gEcHeadlessCampaignLastBattleType
+                    & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_CATCH_TUTORIAL))
+                && gEcHeadlessCampaignLastCapturedSpecies == SPECIES_POOCHYENA
+                && gEcHeadlessCampaignLastCaptureResult == MON_GIVEN_TO_PARTY
+                && gEcHeadlessCampaignCaptureBookkeepingValid;
+        }
+        else if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_ROXANNE_VICTORY)
+        {
+            gEcHeadlessFixtureObservedResult =
+                gEcHeadlessCampaignBattleSerial == 1
+                && gEcHeadlessCampaignLastResolution == EC_HEADLESS_BATTLE_WIN
+                && FlagGet(FLAG_BADGE01_GET)
+                && FlagGet(FLAG_DEFEATED_RUSTBORO_GYM)
+                && FlagGet(FLAG_EC_RECEIVED_ROXANNE_AERODACTYLITE)
+                && FlagGet(FLAG_RECEIVED_ROXANNE_OLD_AMBER)
+                && HasTrainerBeenFought(TRAINER_ROXANNE_1)
+                && GetCurrentLevelCap() == 20
+                && CheckBagHasItem(ITEM_AERODACTYLITE, 1)
+                && CheckBagHasItem(ITEM_OLD_AMBER, 1)
+                && VarGet(VAR_RUSTBORO_CITY_STATE) == 1
+                && !gMain.inBattle
+                && gMain.callback2 == CB2_Overworld
+                && !ArePlayerFieldControlsLocked()
+                && !ScriptContext_IsEnabled();
+        }
+        else if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_FIRST_CENTER_ACQUISITION)
+        {
+            u32 checks = 0;
+
+#define EC_CENTER_CHECK(bit, condition) if (condition) checks |= 1u << (bit)
+            EC_CENTER_CHECK(0, gEcHeadlessCampaignBattleSerial == 0);
+            EC_CENTER_CHECK(1, gEcHeadlessCampaignCaptureSerial == 0);
+            EC_CENTER_CHECK(2, FlagGet(FLAG_SYS_POKEDEX_GET));
+            EC_CENTER_CHECK(3, FlagGet(FLAG_SYS_POKEMON_GET));
+            EC_CENTER_CHECK(4, !FlagGet(FLAG_BADGE01_GET));
+            EC_CENTER_CHECK(5, CheckBagHasItem(ITEM_POKE_VIAL, 1));
+            EC_CENTER_CHECK(6, CheckBagHasItem(ITEM_LEVELER, 1));
+            EC_CENTER_CHECK(7, CheckBagHasItem(ITEM_REPEL_SPRAY, 1));
+            EC_CENTER_CHECK(8, CheckBagHasItem(ITEM_FLIGHT_BEACON, 1));
+            EC_CENTER_CHECK(9, VarGet(VAR_POKE_VIAL_MAX_CHARGES) == 1);
+            EC_CENTER_CHECK(10, VarGet(VAR_POKE_VIAL_CHARGES) == 1);
+            EC_CENTER_CHECK(11, VarGet(VAR_RUSTBORO_CITY_STATE) == 0);
+            EC_CENTER_CHECK(12, VarGet(VAR_PETALBURG_GYM_STATE) == 0);
+            EC_CENTER_CHECK(13, GetGameStat(GAME_STAT_USED_POKECENTER) == 1);
+            EC_CENTER_CHECK(14, GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP)
+                == GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MAX_HP));
+            EC_CENTER_CHECK(15, GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_STATUS) == 0);
+            EC_CENTER_CHECK(16, !gMain.inBattle && gMain.callback2 == CB2_Overworld);
+            EC_CENTER_CHECK(17, !ArePlayerFieldControlsLocked() && !ScriptContext_IsEnabled());
+#undef EC_CENTER_CHECK
+            gEcHeadlessCampaignQueryValue = checks;
+            gEcHeadlessFixtureObservedResult = checks == (1u << 18) - 1;
+        }
+        return;
+    }
+
     if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_DEWFORD_GYM_ENTRY)
     {
         gEcHeadlessFixtureSetupResult = TRUE;
@@ -746,6 +1043,37 @@ void EmeraldChampionsHeadlessObserve(void)
                 && gSpecialVar_Result == 10;
             break;
         }
+        return;
+    }
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_BATTLE_SET_LONG_LIST)
+    {
+        bool32 menuActive;
+        u16 expectedOffset;
+
+        if (gEcHeadlessFixtureTrigger
+         && !gEcHeadlessFixtureSetupResult
+         && gMain.callback2 == CB2_Overworld)
+        {
+            gEcHeadlessFixtureTrigger = FALSE;
+            gSpecialVar_0x800A = 0;
+            gSpecialVar_0x8007 = EC_BATTLE_FORMAT_DOUBLES;
+            gSpecialVar_0x8004 = SCROLL_MULTI_EMERALD_CHAMPIONS_BATTLE_SET;
+            gSpecialVar_0x8005 = 0;
+            ScriptContext_Stop();
+            ShowScrollableMultichoice();
+            gEcHeadlessFixtureSetupResult = TRUE;
+        }
+        menuActive = IsScrollableMultichoiceHeadlessActive(
+            SCROLL_MULTI_EMERALD_CHAMPIONS_BATTLE_SET
+        );
+        expectedOffset = gEcHeadlessFixtureParam == EC_HEADLESS_BATTLE_SET_LIST_BOTTOM
+            ? 3
+            : gEcHeadlessFixtureParam == EC_HEADLESS_BATTLE_SET_LIST_MIDDLE ? 2 : 0;
+        gEcHeadlessFixtureObservedResult = menuActive
+            && GetEmeraldChampionsBattleSetCountForFormat(
+                &gParties[B_TRAINER_PLAYER][0], EC_BATTLE_FORMAT_DOUBLES
+            ) == 6
+            && gScrollableMultichoice_ScrollOffset == expectedOffset;
         return;
     }
     if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_POKEDEX)
@@ -1022,7 +1350,143 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
     gEcHeadlessFixtureTrigger = FALSE;
     sEcHeadlessObservedDelay = 0;
     sEcHeadlessFurfrouMenuOpened = FALSE;
+
+    if (scenario == EC_HEADLESS_SCENARIO_CAMPAIGN_AUTOWIN)
+    {
+        gEcHeadlessCampaignBattleSerial = 0;
+        gEcHeadlessCampaignLastBattleType = 0;
+        gEcHeadlessCampaignLastOpponentA = TRAINER_NONE;
+        gEcHeadlessCampaignLastOpponentB = TRAINER_NONE;
+        gEcHeadlessCampaignMapId = 0;
+        gEcHeadlessCampaignMapGroup = 0;
+        gEcHeadlessCampaignMapNum = 0;
+        gEcHeadlessCampaignPlayerX = 0;
+        gEcHeadlessCampaignPlayerY = 0;
+        gEcHeadlessCampaignPlayerFacing = DIR_NONE;
+        gEcHeadlessCampaignControlsLocked = TRUE;
+        gEcHeadlessCampaignScriptEnabled = TRUE;
+        gEcHeadlessCampaignInBattle = FALSE;
+        gEcHeadlessCampaignQueryKind = EC_HEADLESS_CAMPAIGN_QUERY_NONE;
+        gEcHeadlessCampaignQueryId = 0;
+        gEcHeadlessCampaignQueryValue = 0;
+        gEcHeadlessCampaignQueryObjectActive = FALSE;
+        gEcHeadlessCampaignQueryObjectX = 0;
+        gEcHeadlessCampaignQueryObjectY = 0;
+        gEcHeadlessCampaignCaptureSerial = 0;
+        gEcHeadlessCampaignLastCapturedSpecies = SPECIES_NONE;
+        gEcHeadlessCampaignLastCaptureResult = MON_CANT_GIVE;
+        gEcHeadlessCampaignCaptureBookkeepingValid = FALSE;
+        gEcHeadlessCampaignLastResolution = EC_HEADLESS_BATTLE_NATIVE;
+        sEcHeadlessAutoCaptureInProgress = FALSE;
+        gEcHeadlessFixtureSetupResult = TRUE;
+        SetMainCallback2(gInitialMainCB2);
+        return;
+    }
+
     PrepareHeadlessNewGame();
+
+    if (scenario == EC_HEADLESS_SCENARIO_CAPTURE_TO_PARTY
+     || scenario == EC_HEADLESS_SCENARIO_CAPTURE_TO_PC)
+    {
+        gEcHeadlessCampaignBattleSerial = 0;
+        gEcHeadlessCampaignCaptureSerial = 0;
+        gEcHeadlessCampaignLastCapturedSpecies = SPECIES_NONE;
+        gEcHeadlessCampaignLastCaptureResult = MON_CANT_GIVE;
+        gEcHeadlessCampaignCaptureBookkeepingValid = FALSE;
+        sEcHeadlessAutoCaptureInProgress = FALSE;
+        PrepareHeadlessCaptureBattle(scenario == EC_HEADLESS_SCENARIO_CAPTURE_TO_PC);
+        return;
+    }
+    if (scenario == EC_HEADLESS_SCENARIO_CAPTURE_QUEST_DIANCIE)
+    {
+        gEcHeadlessCampaignBattleSerial = 0;
+        gEcHeadlessCampaignCaptureSerial = 0;
+        gEcHeadlessCampaignLastCapturedSpecies = SPECIES_NONE;
+        gEcHeadlessCampaignLastCaptureResult = MON_CANT_GIVE;
+        gEcHeadlessCampaignCaptureBookkeepingValid = FALSE;
+        sEcHeadlessAutoCaptureInProgress = FALSE;
+        PrepareHeadlessOverworldFixtureState(SPECIES_DIANCIE);
+        CreateHealthyHeadlessMon(
+            &gParties[B_TRAINER_PLAYER][0], SPECIES_GEODUDE, 70,
+            OTID_STRUCT_PLAYER_ID
+        );
+        CalculatePlayerPartyCount();
+        LoadHeadlessMap(MAP_CAVE_OF_ORIGIN_DIANCIES_ROOM, 9, 11);
+        return;
+    }
+    if (scenario == EC_HEADLESS_SCENARIO_CAPTURE_QUEST_REGISTEEL
+     || scenario == EC_HEADLESS_SCENARIO_CAPTURE_QUEST_LATIOS)
+    {
+        gEcHeadlessCampaignBattleSerial = 0;
+        gEcHeadlessCampaignCaptureSerial = 0;
+        gEcHeadlessCampaignLastCapturedSpecies = SPECIES_NONE;
+        gEcHeadlessCampaignLastCaptureResult = MON_CANT_GIVE;
+        gEcHeadlessCampaignCaptureBookkeepingValid = FALSE;
+        sEcHeadlessAutoCaptureInProgress = FALSE;
+        CreateHealthyHeadlessMon(
+            &gParties[B_TRAINER_PLAYER][0], SPECIES_GEODUDE, 70,
+            OTID_STRUCT_PLAYER_ID
+        );
+        CalculatePlayerPartyCount();
+        if (scenario == EC_HEADLESS_SCENARIO_CAPTURE_QUEST_REGISTEEL)
+            LoadHeadlessMap(MAP_ANCIENT_TOMB, 8, 8);
+        else
+        {
+            FlagSet(FLAG_ENABLE_SHIP_SOUTHERN_ISLAND);
+            LoadHeadlessMap(MAP_SOUTHERN_ISLAND_INTERIOR, 13, 12);
+        }
+        return;
+    }
+    if (scenario == EC_HEADLESS_SCENARIO_CAPTURE_ORDINARY_FIRST)
+    {
+        gEcHeadlessCampaignBattleSerial = 0;
+        gEcHeadlessCampaignCaptureSerial = 0;
+        gEcHeadlessCampaignLastCapturedSpecies = SPECIES_NONE;
+        gEcHeadlessCampaignLastCaptureResult = MON_CANT_GIVE;
+        gEcHeadlessCampaignCaptureBookkeepingValid = FALSE;
+        PrepareHeadlessWildBattle(FALSE);
+        gBattleTypeFlags = 0;
+        return;
+    }
+    if (scenario == EC_HEADLESS_SCENARIO_ROXANNE_VICTORY)
+    {
+        gEcHeadlessCampaignBattleSerial = 0;
+        gEcHeadlessCampaignLastResolution = EC_HEADLESS_BATTLE_NATIVE;
+        CreateHealthyHeadlessMon(
+            &gParties[B_TRAINER_PLAYER][0], SPECIES_GEODUDE, 14,
+            OTID_STRUCT_PLAYER_ID
+        );
+        CreateHealthyHeadlessMon(
+            &gParties[B_TRAINER_PLAYER][1], SPECIES_TREECKO, 14,
+            OTID_STRUCT_PLAYER_ID
+        );
+        CalculatePlayerPartyCount();
+        LoadHeadlessMap(MAP_RUSTBORO_CITY_GYM, 5, 3);
+        return;
+    }
+    if (scenario == EC_HEADLESS_SCENARIO_FIRST_CENTER_ACQUISITION)
+    {
+        u32 hp = 1;
+        u32 status = STATUS1_POISON;
+
+        gEcHeadlessCampaignBattleSerial = 0;
+        gEcHeadlessCampaignCaptureSerial = 0;
+        FlagSet(FLAG_SYS_POKEDEX_GET);
+        FlagSet(FLAG_SYS_POKEMON_GET);
+        CreateHealthyHeadlessMon(
+            &gParties[B_TRAINER_PLAYER][0], SPECIES_TREECKO, 10,
+            OTID_STRUCT_PLAYER_ID
+        );
+        CreateHealthyHeadlessMon(
+            &gParties[B_TRAINER_PLAYER][1], SPECIES_POOCHYENA, 8,
+            OTID_STRUCT_PLAYER_ID
+        );
+        SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP, &hp);
+        SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_STATUS, &status);
+        CalculatePlayerPartyCount();
+        LoadHeadlessMap(MAP_OLDALE_TOWN_POKEMON_CENTER_1F, 8, 3);
+        return;
+    }
 
     switch (scenario)
     {
@@ -1157,6 +1621,17 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
             LoadHeadlessMap(sweep[index].map, sweep[index].x, sweep[index].y);
             gEcHeadlessFixtureSetupResult = TRUE;
         }
+        break;
+    case EC_HEADLESS_SCENARIO_BATTLE_SET_LONG_LIST:
+        AddBagItem(ITEM_MEGA_RING, 1);
+        CreateHealthyHeadlessMon(
+            &gParties[B_TRAINER_PLAYER][0],
+            SPECIES_CHARIZARD,
+            50,
+            OTID_STRUCT_PLAYER_ID
+        );
+        CalculatePlayerPartyCount();
+        LoadHeadlessMap(MAP_OLDALE_TOWN_POKEMON_CENTER_1F, 8, 7);
         break;
     case EC_HEADLESS_SCENARIO_START_MENU_FULL:
         // Every Start menu row an established save can show: Pokedex, Pokemon, Bag,

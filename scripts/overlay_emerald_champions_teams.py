@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Overlay hand-authored team blocks onto docs/emerald_champions_battle_teams.txt by trainer id."""
+"""Overlay hand-authored team blocks onto data/emerald_champions/emerald_champions_battle_teams.txt by trainer id."""
 import re, sys
 from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
-TEAMS = ROOT / "docs" / "emerald_champions_battle_teams.txt"
+TEAMS = ROOT / "data/emerald_champions/emerald_champions_battle_teams.txt"
 HEAD = re.compile(r"^## E(\d{4}) (TRAINER_[A-Z0-9_]+)")
 def blocks(text):
     out, cur = {}, None

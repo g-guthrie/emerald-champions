@@ -16,7 +16,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_OUTPUT = ROOT / "docs" / "inclement_overworld_parity_manifest.json"
+DEFAULT_OUTPUT = ROOT / "tests/reference/inclement_overworld_parity_manifest.json"
 VISUAL_OBJECT_FIELDS = (
     "graphics_id",
     "x",

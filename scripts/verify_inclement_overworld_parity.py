@@ -37,7 +37,7 @@ ITEM_MARKER_GRAPHICS = {
     "OBJ_EVENT_GFX_MEGA_STONE",
 }
 
-MANIFEST = ROOT / "docs" / "inclement_overworld_parity_manifest.json"
+MANIFEST = ROOT / "tests/reference/inclement_overworld_parity_manifest.json"
 
 # Modern expansion schema aliases with identical runtime meaning.
 GFX_ALIASES = {

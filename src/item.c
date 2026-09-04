@@ -495,46 +495,37 @@ bool32 AddBagItem(enum Item itemId, u16 count)
 
 static bool32 NONNULL BagPocket_RemoveItem(struct BagPocket *pocket, enum Item itemId, u16 count)
 {
-    u32 itemLookupIndex, itemRemoveIndex = 0, totalQuantity = 0;
-    struct ItemSlot tempItem;
-    u16 *tempPocketSlotQuantities = AllocZeroed(sizeof(u16) * pocket->capacity);
+    bool32 compact = count == 0;
 
-    for (itemLookupIndex = 0; itemLookupIndex < pocket->capacity && totalQuantity < count; itemLookupIndex++)
+    // Preflight before any mutation so an insufficient request is atomic.
+    if (!BagPocket_CheckHasItem(pocket, itemId, count))
+        return FALSE;
+
+    if (CurMapIsSecretBase() == TRUE)
     {
-        tempItem = BagPocket_GetSlotData(pocket, itemLookupIndex);
-        if (tempItem.itemId == itemId)
-        {
-            // Index for the next loop - where we should start removing items
-            if (!itemRemoveIndex)
-                itemRemoveIndex = itemLookupIndex + 1;
-
-            // Gather quantities (+ 1 to tempPocketSlotQuantities so that even if setting to 0 we know which indices to target)
-            totalQuantity += tempItem.quantity;
-            tempPocketSlotQuantities[itemLookupIndex] = (tempItem.quantity <= count ? 0 : tempItem.quantity - count) + 1;
-        }
+        VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | SECRET_BASE_USED_BAG);
+        VarSet(VAR_SECRET_BASE_LAST_ITEM_USED, itemId);
     }
 
-    if (totalQuantity >= count) // We have enough of the item
+    for (u32 i = 0; i < pocket->capacity && count > 0; i++)
     {
-        if (CurMapIsSecretBase() == TRUE)
-        {
-            VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | SECRET_BASE_USED_BAG);
-            VarSet(VAR_SECRET_BASE_LAST_ITEM_USED, itemId);
-        }
+        struct ItemSlot slot = BagPocket_GetSlotData(pocket, i);
+        if (slot.itemId != itemId)
+            continue;
 
-        // Update the quantities correctly with the items removed
-        for (--itemRemoveIndex; itemRemoveIndex < itemLookupIndex; itemRemoveIndex++)
-        {
-            if (tempPocketSlotQuantities[itemRemoveIndex] > 0)
-                BagPocket_SetSlotItemIdAndCount(pocket, itemRemoveIndex, itemId, tempPocketSlotQuantities[itemRemoveIndex] - 1);
-        }
+        u16 removed = min(count, slot.quantity);
+        slot.quantity -= removed;
+        count -= removed;
+        BagPocket_SetSlotData(pocket, i, slot);
+        // Any stack emptied along the way leaves a hole, not just the last one.
+        compact |= slot.quantity == 0;
     }
 
-    if (totalQuantity == count)
+    // Preserve existing slot order unless the final consumed stack was emptied
+    // (or this was the existing zero-count compaction operation).
+    if (compact)
         BagPocket_CompactItems(pocket);
-
-    Free(tempPocketSlotQuantities);
-    return totalQuantity >= count;
+    return TRUE;
 }
 
 bool32 RemoveBagItem(enum Item itemId, u16 count)

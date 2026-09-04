@@ -334,62 +334,97 @@ bool32 IsLegendarySignConditionalWildSpecies(enum Species species)
         && gLegendarySignDefinitions[signId].source == LEGENDARY_SOURCE_CONDITIONAL_WILD;
 }
 
-static void GiveLegendaryRelicItem(enum Item item)
+// Saved bit indices are append-only: 0-23 are undelivered relics and
+// 24-29 mark species whose one-time relic grant has already been earned.
+static const enum Item sLegendaryRelicItems[] =
 {
-    if (CheckBagHasItem(item, 1) || CheckPCHasItem(item, 1))
-        return;
-    if (!AddBagItem(item, 1))
-        AddPCItem(item, 1);
+    ITEM_RED_ORB, ITEM_BLUE_ORB, ITEM_RUSTED_SWORD, ITEM_RUSTED_SHIELD,
+    ITEM_WELLSPRING_MASK, ITEM_HEARTHFLAME_MASK, ITEM_CORNERSTONE_MASK,
+    ITEM_FLAME_PLATE, ITEM_SPLASH_PLATE, ITEM_ZAP_PLATE, ITEM_MEADOW_PLATE,
+    ITEM_ICICLE_PLATE, ITEM_FIST_PLATE, ITEM_TOXIC_PLATE, ITEM_EARTH_PLATE,
+    ITEM_SKY_PLATE, ITEM_MIND_PLATE, ITEM_INSECT_PLATE, ITEM_STONE_PLATE,
+    ITEM_SPOOKY_PLATE, ITEM_DRACO_PLATE, ITEM_DREAD_PLATE, ITEM_IRON_PLATE,
+    ITEM_PIXIE_PLATE,
+};
+
+static const struct
+{
+    enum Species species;
+    u8 firstItem;
+    u8 itemCount;
+} sLegendaryRelicGrants[] =
+{
+    {SPECIES_GROUDON, 0, 1},
+    {SPECIES_KYOGRE, 1, 1},
+    {SPECIES_ZACIAN, 2, 1},
+    {SPECIES_ZAMAZENTA, 3, 1},
+    {SPECIES_OGERPON_TEAL, 4, 3},
+    {SPECIES_ARCEUS, 7, 17},
+};
+
+#define LEGENDARY_RELIC_EARNED_SHIFT 24
+
+static u32 GetLegendaryRelicDeliveryState(void)
+{
+    return VarGet(VAR_LEGENDARY_RELIC_DELIVERY_0)
+         | ((u32)VarGet(VAR_LEGENDARY_RELIC_DELIVERY_1) << 16);
+}
+
+static void SetLegendaryRelicDeliveryState(u32 state)
+{
+    VarSet(VAR_LEGENDARY_RELIC_DELIVERY_0, state & 0xFFFF);
+    VarSet(VAR_LEGENDARY_RELIC_DELIVERY_1, state >> 16);
+}
+
+static bool32 GiveLegendaryRelicItem(enum Item item)
+{
+    return CheckBagHasItem(item, 1) || CheckPCHasItem(item, 1)
+        || AddBagItem(item, 1) || AddPCItem(item, 1);
+}
+
+// Migration never creates pending rewards from historical ownership. It only
+// prevents a repeated caught-marker call from recreating discarded old relics.
+void InitializeLegendaryRelicDeliveryState(void)
+{
+    u32 state = 0;
+    for (u32 group = 0; group < ARRAY_COUNT(sLegendaryRelicGrants); group++)
+    {
+        if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(sLegendaryRelicGrants[group].species), FLAG_GET_CAUGHT))
+            state |= 1u << (LEGENDARY_RELIC_EARNED_SHIFT + group);
+    }
+    SetLegendaryRelicDeliveryState(state);
+}
+
+void RetryPendingLegendaryRelics(void)
+{
+    u32 state = GetLegendaryRelicDeliveryState();
+    for (u32 item = 0; item < ARRAY_COUNT(sLegendaryRelicItems); item++)
+    {
+        if ((state & (1u << item)) && GiveLegendaryRelicItem(sLegendaryRelicItems[item]))
+            state &= ~(1u << item);
+    }
+    SetLegendaryRelicDeliveryState(state);
 }
 
 static void GiveLegendaryRelicsForSpecies(enum Species species)
 {
-    static const enum Item sArceusPlates[] =
+    u32 state = GetLegendaryRelicDeliveryState();
+    for (u32 group = 0; group < ARRAY_COUNT(sLegendaryRelicGrants); group++)
     {
-        ITEM_FLAME_PLATE,
-        ITEM_SPLASH_PLATE,
-        ITEM_ZAP_PLATE,
-        ITEM_MEADOW_PLATE,
-        ITEM_ICICLE_PLATE,
-        ITEM_FIST_PLATE,
-        ITEM_TOXIC_PLATE,
-        ITEM_EARTH_PLATE,
-        ITEM_SKY_PLATE,
-        ITEM_MIND_PLATE,
-        ITEM_INSECT_PLATE,
-        ITEM_STONE_PLATE,
-        ITEM_SPOOKY_PLATE,
-        ITEM_DRACO_PLATE,
-        ITEM_DREAD_PLATE,
-        ITEM_IRON_PLATE,
-        ITEM_PIXIE_PLATE,
-    };
-
-    switch (species)
-    {
-    case SPECIES_GROUDON:
-        GiveLegendaryRelicItem(ITEM_RED_ORB);
-        break;
-    case SPECIES_KYOGRE:
-        GiveLegendaryRelicItem(ITEM_BLUE_ORB);
-        break;
-    case SPECIES_ZACIAN:
-        GiveLegendaryRelicItem(ITEM_RUSTED_SWORD);
-        break;
-    case SPECIES_ZAMAZENTA:
-        GiveLegendaryRelicItem(ITEM_RUSTED_SHIELD);
-        break;
-    case SPECIES_OGERPON_TEAL:
-        GiveLegendaryRelicItem(ITEM_WELLSPRING_MASK);
-        GiveLegendaryRelicItem(ITEM_HEARTHFLAME_MASK);
-        GiveLegendaryRelicItem(ITEM_CORNERSTONE_MASK);
-        break;
-    case SPECIES_ARCEUS:
-        for (u32 i = 0; i < ARRAY_COUNT(sArceusPlates); i++)
-            GiveLegendaryRelicItem(sArceusPlates[i]);
-        break;
-    default:
-        break;
+        u32 earned = 1u << (LEGENDARY_RELIC_EARNED_SHIFT + group);
+        if (sLegendaryRelicGrants[group].species != species || (state & earned))
+            continue;
+        state |= earned;
+        for (u32 item = sLegendaryRelicGrants[group].firstItem;
+             item < sLegendaryRelicGrants[group].firstItem + sLegendaryRelicGrants[group].itemCount;
+             item++)
+        {
+            // Only a real acquisition with failed insertion creates debt.
+            if (!GiveLegendaryRelicItem(sLegendaryRelicItems[item]))
+                state |= 1u << item;
+        }
+        SetLegendaryRelicDeliveryState(state);
+        return;
     }
 }
 
@@ -422,7 +457,7 @@ void MarkLegendarySignCaughtBySpecies(enum Species species)
 
     // Form-defining relics are earned with their Pokémon, never synthesized
     // by the free held-item vendor or a tutor preset.  This call is
-    // idempotent across Bag/PC storage and also covers Groudon/Kyogre, whose
+    // earned once and persists any undelivered items, including Groudon/Kyogre, whose
     // canonical Emerald encounters are not Legendary Sign rows.
     GiveLegendaryRelicsForSpecies(species);
 
@@ -756,7 +791,9 @@ static bool32 ApplyNonMegaGiftSet(struct Pokemon *mon)
     {
         const struct EmeraldChampionsBattleSet *preset = GetEmeraldChampionsRawBattleSet(species, choice);
 
-        if (preset == NULL || preset->requiredItem != ITEM_NONE)
+        if (preset == NULL
+         || preset->requiredItem != ITEM_NONE
+         || preset->requiredMove != MOVE_NONE)
             continue;
         if (RandomUniform(RNG_NONE, 0, ++matches - 1) == 0)
             selected = choice;

@@ -62,14 +62,16 @@ AI_SINGLE_BATTLE_TEST("AI prefers moves with better accuracy, but only if they b
     // Mega Kick and Slam both have lower accuracy. Gust and Scratch both have 100, so AI can choose either of them.
     PARAMETRIZE { move1 = MOVE_MEGA_KICK; move2 = MOVE_SLAM; move3 = MOVE_SCRATCH; move4 = MOVE_GUST; hp = 5; expectedMove = MOVE_GUST; expectedMove2 = MOVE_SCRATCH; turns = 1; }
     // All moves hit with No guard ability
-    PARAMETRIZE { move1 = MOVE_MEGA_KICK; move2 = MOVE_GUST; hp = 5; expectedMove = MOVE_MEGA_KICK; expectedMove2 = MOVE_GUST; turns = 1; }
+    PARAMETRIZE { abilityAtk = ABILITY_NO_GUARD; move1 = MOVE_MEGA_KICK; move2 = MOVE_GUST; hp = 5; expectedMove = MOVE_MEGA_KICK; expectedMove2 = MOVE_GUST; turns = 1; }
     // Tests to compare move that always hits and a beneficial effect. A move with higher acc should be chosen in this case.
     PARAMETRIZE { move1 = MOVE_SHOCK_WAVE; move2 = MOVE_ICY_WIND; hp = 5; expectedMove = MOVE_SHOCK_WAVE; turns = 1; }
     PARAMETRIZE { move1 = MOVE_SHOCK_WAVE; move2 = MOVE_ICY_WIND; move3 = MOVE_THUNDERBOLT; hp = 5; expectedMove = MOVE_SHOCK_WAVE; expectedMove2 = MOVE_THUNDERBOLT; turns = 1; }
 
     GIVEN {
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
-        PLAYER(SPECIES_WOBBUFFET) { HP(hp); }
+        // Fixed combat stats isolate the accuracy/KO comparison from IV rules.
+        // Strength deals 133 at the test's minimum roll; Mega Kick deals 199.
+        PLAYER(SPECIES_WOBBUFFET) { Level(100); MaxHP(490); HP(hp); Defense(121); SpDefense(121); }
         PLAYER(SPECIES_WOBBUFFET);
         ASSUME(GetMoveAccuracy(MOVE_SWIFT) == 0);
         ASSUME(GetMovePower(MOVE_SLAM) == GetMovePower(MOVE_STRENGTH));
@@ -90,7 +92,7 @@ AI_SINGLE_BATTLE_TEST("AI prefers moves with better accuracy, but only if they b
         ASSUME(GetMoveCategory(MOVE_ICY_WIND) == DAMAGE_CATEGORY_SPECIAL);
         ASSUME(GetMoveCategory(MOVE_THUNDERBOLT) == DAMAGE_CATEGORY_SPECIAL);
         ASSUME(GetMoveCategory(MOVE_GUST) == DAMAGE_CATEGORY_SPECIAL);
-        OPPONENT(SPECIES_EXPLOUD) { Moves(move1, move2, move3, move4); Ability(abilityAtk); SpAttack(50); } // Low Sp.Atk, so Swift deals less damage than Strength.
+        OPPONENT(SPECIES_EXPLOUD) { Level(100); Attack(187); Moves(move1, move2, move3, move4); Ability(abilityAtk); SpAttack(50); } // Low Sp.Atk, so Swift deals less damage than Strength.
     } WHEN {
             switch (turns)
             {
@@ -119,6 +121,8 @@ AI_SINGLE_BATTLE_TEST("AI prefers moves with better accuracy, but only if they b
                 break;
             }
     } SCENE {
+        if (turns > 1)
+            HP_BAR(player, damage: 133);
         MESSAGE("Wobbuffet fainted!");
     }
 }
@@ -128,13 +132,13 @@ AI_SINGLE_BATTLE_TEST("AI prefers moves which deal more damage instead of moves 
     u8 turns = 0;
     enum Move move1 = MOVE_NONE, move2 = MOVE_NONE, move3 = MOVE_NONE, move4 = MOVE_NONE;
     enum Move expectedMove;
-    enum Ability abilityAtk, abilityDef;
+    enum Ability abilityAtk, abilityDef = ABILITY_NONE;
 
     abilityAtk = ABILITY_NONE;
 
     // Scald and Poison Jab take 3 hits, Waterfall takes 2.
     PARAMETRIZE { move1 = MOVE_WATERFALL; move2 = MOVE_SCALD; move3 = MOVE_POISON_JAB; move4 = MOVE_WATER_GUN; expectedMove = MOVE_WATERFALL; turns = 2; }
-    // Poison Jab takes 3 hits, Water gun 5. Immunity so there's no poison chip damage.
+    // Poison Jab takes 3 hits; Water Gun needs more. Immunity excludes poison chip.
     PARAMETRIZE { move1 = MOVE_POISON_JAB; move2 = MOVE_WATER_GUN; expectedMove = MOVE_POISON_JAB; abilityDef = ABILITY_IMMUNITY; turns = 3; }
 
     GIVEN {
@@ -144,9 +148,11 @@ AI_SINGLE_BATTLE_TEST("AI prefers moves which deal more damage instead of moves 
         ASSUME(GetMoveCategory(MOVE_WATER_GUN) == DAMAGE_CATEGORY_SPECIAL);
         ASSUME(GetSpeciesBaseAttack(SPECIES_NIDOQUEEN) == 92); // Gen 5's 82 Base Attack causes the test to fail
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
-        PLAYER(SPECIES_TYPHLOSION) { Ability(abilityDef); }
+        // Waterfall's minimum 136 damage guarantees two hits; Poison Jab
+        // and Scald require three against this fixed 266-HP target.
+        PLAYER(SPECIES_TYPHLOSION) { Level(100); MaxHP(266); HP(266); Defense(161); SpDefense(175); Ability(abilityDef); }
         PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_NIDOQUEEN) { Moves(move1, move2, move3, move4); Ability(abilityAtk); }
+        OPPONENT(SPECIES_NIDOQUEEN) { Level(100); Attack(189); SpAttack(155); Moves(move1, move2, move3, move4); Ability(abilityAtk); }
     } WHEN {
             switch (turns)
             {
@@ -161,6 +167,7 @@ AI_SINGLE_BATTLE_TEST("AI prefers moves which deal more damage instead of moves 
                 break;
             }
     } SCENE {
+        HP_BAR(player, damage: expectedMove == MOVE_WATERFALL ? 136 : 102);
         MESSAGE("Typhlosion fainted!");
     }
 }
@@ -202,9 +209,11 @@ AI_SINGLE_BATTLE_TEST("AI prefers a weaker move over one with a downside effect 
         ASSUME(GetMovePower(MOVE_FLAMETHROWER) == 90); // In Gen 5, it's 95
         ASSUME(GetMovePower(MOVE_OVERHEAT) == 130); // In Gen 5, it's 140.
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
-        PLAYER(SPECIES_WOBBUFFET) { HP(hp); }
+        // Minimum rolls: Flamethrower 178, Overheat 258. The 320-HP case
+        // takes two turns either way; only Overheat can KO the 250-HP case.
+        PLAYER(SPECIES_WOBBUFFET) { Level(100); HP(hp); SpDefense(121); }
         PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_TYPHLOSION) { Moves(move1, move2, move3, move4); }
+        OPPONENT(SPECIES_TYPHLOSION) { Level(100); SpAttack(223); Moves(move1, move2, move3, move4); }
     } WHEN {
         switch (turns)
         {
@@ -217,6 +226,8 @@ AI_SINGLE_BATTLE_TEST("AI prefers a weaker move over one with a downside effect 
             break;
         }
     } SCENE {
+        if (turns == 2)
+            HP_BAR(player, damage: 178);
         MESSAGE("Wobbuffet fainted!");
     }
 }
@@ -242,9 +253,11 @@ AI_SINGLE_BATTLE_TEST("AI can choose a status move that boosts the attack by two
         ASSUME(GetMoveCategory(MOVE_STRENGTH) == DAMAGE_CATEGORY_PHYSICAL);
         ASSUME(GetMoveCategory(MOVE_HORN_ATTACK) == DAMAGE_CATEGORY_PHYSICAL);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
-        PLAYER(SPECIES_WOBBUFFET) { HP(277); }
+        // Minimum Strength damage is 139, or 277 after Swords Dance: both
+        // allowed first-turn choices must produce the scheduled turn-two KO.
+        PLAYER(SPECIES_WOBBUFFET) { Level(100); HP(277); Defense(121); }
         PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_KANGASKHAN) { Moves(MOVE_STRENGTH, MOVE_HORN_ATTACK, MOVE_SWORDS_DANCE); }
+        OPPONENT(SPECIES_KANGASKHAN) { Level(100); Attack(195); Moves(MOVE_STRENGTH, MOVE_HORN_ATTACK, MOVE_SWORDS_DANCE); }
     } WHEN {
         TURN { EXPECT_MOVES(opponent, MOVE_STRENGTH, MOVE_SWORDS_DANCE); }
         TURN { EXPECT_MOVE(opponent, MOVE_STRENGTH); SEND_OUT(player, 1); }
@@ -343,15 +356,23 @@ AI_SINGLE_BATTLE_TEST("AI won't use ground type attacks against flying type Poke
     GIVEN {
         ASSUME(GetMoveCategory(MOVE_EARTHQUAKE) == DAMAGE_CATEGORY_PHYSICAL); // Otherwise, it doesn't KO Crobat
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
-        PLAYER(SPECIES_CROBAT);
-        PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_NIDOQUEEN) { Moves(MOVE_EARTHQUAKE, MOVE_SCRATCH, MOVE_POISON_STING, MOVE_GUST); }
+        // Two minimum-roll Scratches (34 each) leave 212 HP; grounded
+        // Earthquake then guarantees the scheduled KO (minimum 248).
+        // Explicit speeds make the Gravity message precede turn two's hit;
+        // otherwise the recording's inferred speeds can order it afterward.
+        PLAYER(SPECIES_CROBAT) { Level(100); MaxHP(280); HP(280); Defense(165); SpDefense(165); Speed(300); }
+        PLAYER(SPECIES_WOBBUFFET) { Speed(200); }
+        OPPONENT(SPECIES_NIDOQUEEN) { Level(100); Attack(189); SpAttack(155); Speed(100); Moves(MOVE_EARTHQUAKE, MOVE_SCRATCH, MOVE_POISON_STING, MOVE_GUST); }
     } WHEN {
         TURN { NOT_EXPECT_MOVE(opponent, MOVE_EARTHQUAKE); }
         TURN { MOVE(player, MOVE_GRAVITY); NOT_EXPECT_MOVE(opponent, MOVE_EARTHQUAKE); }
         TURN { EXPECT_MOVE(opponent, MOVE_EARTHQUAKE); SEND_OUT(player, 1); }
     } SCENE {
+        HP_BAR(player, damage: 34);
         MESSAGE("Gravity intensified!");
+        HP_BAR(player, damage: 34);
+        HP_BAR(player, damage: 212);
+        MESSAGE("Crobat fainted!");
     }
 }
 
@@ -414,8 +435,10 @@ AI_SINGLE_BATTLE_TEST("First Impression is preferred on the first turn of the sp
 {
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_FIRST_IMPRESSION) == EFFECT_FIRST_TURN_ONLY);
-        ASSUME(GetMovePower(MOVE_FIRST_IMPRESSION) == 90);
-        ASSUME(GetMovePower(MOVE_LUNGE) == 80);
+        ASSUME(GetMovePower(MOVE_FIRST_IMPRESSION) > GetMovePower(MOVE_LUNGE));
+        ASSUME(GetMoveType(MOVE_FIRST_IMPRESSION) == GetMoveType(MOVE_LUNGE));
+        ASSUME(GetMoveCategory(MOVE_FIRST_IMPRESSION) == GetMoveCategory(MOVE_LUNGE));
+        ASSUME(GetMovePriority(MOVE_FIRST_IMPRESSION) > GetMovePriority(MOVE_LUNGE));
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_KANGASKHAN);
         OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_FIRST_IMPRESSION, MOVE_LUNGE); }
@@ -436,8 +459,11 @@ AI_SINGLE_BATTLE_TEST("First Impression is not chosen if it's blocked by certain
 
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_FIRST_IMPRESSION) == EFFECT_FIRST_TURN_ONLY);
-        ASSUME(GetMovePower(MOVE_FIRST_IMPRESSION) == 90);
-        ASSUME(GetMovePower(MOVE_LUNGE) == 80);
+        ASSUME(GetMovePower(MOVE_FIRST_IMPRESSION) > GetMovePower(MOVE_LUNGE));
+        ASSUME(GetMoveType(MOVE_FIRST_IMPRESSION) == GetMoveType(MOVE_LUNGE));
+        ASSUME(GetMoveCategory(MOVE_FIRST_IMPRESSION) == GetMoveCategory(MOVE_LUNGE));
+        ASSUME(GetMovePriority(MOVE_FIRST_IMPRESSION) > 0);
+        ASSUME(GetMovePriority(MOVE_LUNGE) == 0);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT);
         PLAYER(species) { Ability(ability); }
         OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_FIRST_IMPRESSION, MOVE_LUNGE); }
@@ -606,19 +632,29 @@ AI_SINGLE_BATTLE_TEST("AI uses a guaranteed KO move instead of the move with the
         ASSUME(GetMoveType(MOVE_SLASH) == GetMoveType(MOVE_STRENGTH));
         ASSUME(GetMoveCategory(MOVE_SLASH) == GetMoveCategory(MOVE_STRENGTH));
         AI_FLAGS(flags);
-        PLAYER(SPECIES_WOBBUFFET) { HP(225); }
-        OPPONENT(SPECIES_ABSOL) { Ability(ABILITY_SUPER_LUCK); Moves(MOVE_SLASH, MOVE_STRENGTH); }
+        TIE_BREAK_SCORE(RNG_AI_SCORE_TIE_SINGLES, SCORE_TIE_LO, 0);
+        // Slash: 98..116 damage; Strength: 112..132. First Slash leaves 110:
+        // both can KO at the AI's max roll, but only Strength guarantees it.
+        PLAYER(SPECIES_WOBBUFFET) { Level(100); MaxHP(208); HP(208); Defense(152); Speed(100); Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_ABSOL) { Level(100); Attack(296); Speed(200); Ability(ABILITY_SUPER_LUCK); Moves(MOVE_SLASH, MOVE_STRENGTH); }
     } WHEN {
-        TURN { EXPECT_MOVE(opponent, MOVE_SLASH); }
+        TURN { SCORE_EQ(opponent, MOVE_SLASH, MOVE_STRENGTH); EXPECT_MOVE(opponent, MOVE_SLASH); }
         if (flags & AI_FLAG_TRY_TO_FAINT)
-            TURN { EXPECT_MOVE(opponent, MOVE_STRENGTH); }
+            TURN { SCORE_GT(opponent, MOVE_STRENGTH, MOVE_SLASH); EXPECT_MOVE(opponent, MOVE_STRENGTH); }
         else
-            TURN { EXPECT_MOVE(opponent, MOVE_SLASH); }
+            TURN { SCORE_EQ(opponent, MOVE_SLASH, MOVE_STRENGTH); EXPECT_MOVE(opponent, MOVE_SLASH); }
     } SCENE {
+        HP_BAR(player, damage: 98);
         if (flags & AI_FLAG_TRY_TO_FAINT)
+        {
+            HP_BAR(player, hp: 0);
             MESSAGE("Wobbuffet fainted!");
+        }
         else
+        {
+            HP_BAR(player, hp: 12);
             NOT MESSAGE("Wobbuffet fainted!");
+        }
     }
 }
 
@@ -864,10 +900,15 @@ AI_SINGLE_BATTLE_TEST("Move scoring comparison properly awards bonus point to be
         ASSUME(GetMoveAdditionalEffectCount(MOVE_ORIGIN_PULSE) == 0);
         ASSUME(GetMoveAccuracy(MOVE_WATER_SPOUT) > GetMoveAccuracy(MOVE_THUNDER));
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY);
-        PLAYER(SPECIES_WAILORD) { Level(50); }
-        OPPONENT(SPECIES_WAILORD) { Moves(MOVE_THUNDER, MOVE_WATER_SPOUT, MOVE_WATER_GUN, MOVE_SURF); }
+        // Full-health Spout deals 204..241, versus at most 145 from Surf.
+        // At 180 HP, Spout and Thunder can KO; the other choices cannot.
+        PLAYER(SPECIES_WAILORD) { Level(50); MaxHP(180); HP(180); SpDefense(85); }
+        OPPONENT(SPECIES_WAILORD) { Level(100); SpAttack(216); Moves(MOVE_THUNDER, MOVE_WATER_SPOUT, MOVE_WATER_GUN, MOVE_SURF); }
     } WHEN {
         TURN { EXPECT_MOVE(opponent, MOVE_WATER_SPOUT); }
+    } SCENE {
+        HP_BAR(player, hp: 0);
+        MESSAGE("Wailord fainted!");
     }
 }
 
@@ -881,22 +922,6 @@ AI_SINGLE_BATTLE_TEST("AI will stop setting up at +4")
         TURN { MOVE(player, MOVE_CELEBRATE); EXPECT_MOVE(opponent, MOVE_IRON_DEFENSE); }
         TURN { MOVE(player, MOVE_CELEBRATE); EXPECT_MOVE(opponent, MOVE_IRON_DEFENSE); }
         TURN { MOVE(player, MOVE_CELEBRATE); EXPECT_MOVE(opponent, MOVE_TACKLE); }
-    }
-}
-
-AI_SINGLE_BATTLE_TEST("Move scoring comparison properly awards bonus point to best OHKO move")
-{
-    GIVEN {
-        ASSUME(MoveHasAdditionalEffect(MOVE_THUNDER, MOVE_EFFECT_PARALYSIS));
-        ASSUME(GetMoveAdditionalEffectCount(MOVE_WATER_SPOUT) == 0);
-        ASSUME(GetMoveAdditionalEffectCount(MOVE_WATER_GUN) == 0);
-        ASSUME(GetMoveAdditionalEffectCount(MOVE_ORIGIN_PULSE) == 0);
-        ASSUME(GetMoveAccuracy(MOVE_WATER_SPOUT) > GetMoveAccuracy(MOVE_THUNDER));
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY);
-        PLAYER(SPECIES_WAILORD) { Level(50); }
-        OPPONENT(SPECIES_WAILORD) { Moves(MOVE_THUNDER, MOVE_WATER_SPOUT, MOVE_WATER_GUN, MOVE_SURF); }
-    } WHEN {
-        TURN { EXPECT_MOVE(opponent, MOVE_WATER_SPOUT); }
     }
 }
 

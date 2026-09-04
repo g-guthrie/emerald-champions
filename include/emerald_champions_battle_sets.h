@@ -11,6 +11,7 @@ struct EmeraldChampionsBattleSet
     enum Move moves[MAX_MON_MOVES];
     enum Item item;
     enum Item requiredItem;
+    enum Move requiredMove;
     u8 nature;
     enum Ability ability;
     u8 statPoints[NUM_STATS];

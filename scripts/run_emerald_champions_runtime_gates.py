@@ -27,30 +27,33 @@ ANSI = re.compile(r"\x1b\[[0-9;]*m")
 SUMMARY = re.compile(
     r"^- (?:Tests )?(FAILED|EXPECTED_FAIL_PASSING|KNOWN_FAILING|"
     r"ASSUMPTIONS_FAILED|TO_DO|KNOWN_FAILING_PASSING|EXPECT_FAILING|"
-    r"PASSED|TOTAL):\s+(\d+)",
-    re.MULTILINE,
+    r"PASSED|TOTAL):[ \t]+(\d+)(?:[ \t]+(.*))?$",
 )
-DEBT_RESULT = re.compile(r"^\[\d+\] (.*): (KNOWN_FAILING|TO_DO)$", re.MULTILINE)
-FAIL_RESULT = re.compile(r"^\[\d+\] (.*): (FAIL|ASSUMPTION_FAIL)$", re.MULTILINE)
-FLAKY_SUFFIX = re.compile(r"\(\d+/\?\)$")
-# PASSES_RANDOMLY tests without a trial suffix in their printed identity.
-FLAKY_IDENTITIES = (
-    "AI_FLAG_PREDICT_MOVE: AI will still attack you when it should",
-    "AI_FLAG_SMART_TERA: AI might tera if it gets saved from a ko (2/2)",
-    # Flips between runs even though AI_FLAG_OMNISCIENT should make Snorlax's
-    # Immunity known: this nondeterminism IS the bug to chase (ability
-    # knowledge under omniscience), see docs/AI_TEST_DEBT.md.
-    "AI avoids toxic when it can not poison target 1/4",
-    # Frame-budget tests: the smart doubles/multi AI sits within +-1 frame of
-    # its ceiling and flips run to run under the host emulator. Tracked in
-    # docs/AI_TEST_DEBT.md; a real regression shows up as several frames.
-    "AI thinking time doesn't explode (singles, no flags)",
-    "AI thinking time doesn't explode (singles, smart)",
-    "AI thinking time doesn't explode (doubles, no flags)",
-    "AI thinking time doesn't explode (doubles, smart)",
-    "AI thinking time doesn't explode (Steven multi)",
-    "AI thinking time doesn't explode (Steven multi, smart)",
-)
+SUMMARY_ANNOTATIONS = {
+    "FAILED": "Add TESTS='X' to run tests with the defined prefix.",
+    "KNOWN_FAILING_PASSING": "Please remove KNOWN_FAILING if these tests intentionally PASS",
+}
+RESULT = re.compile(r"^\[\d+\] (.+): ([A-Z_]+)$")
+# The ROM emits one result per test, not per parameter/trial. Successful
+# tests reset their printed identity to the declaration's base name.
+TRIAL_SUFFIX = re.compile(r" \(\d+/\?\)$")
+EXECUTION_SUFFIX = re.compile(r"(?: \d+/\d+)?(?: \(\d+/(?:\d+|\?)\))?$")
+RESULT_COUNTER = {
+    "PASS": "PASSED",
+    "EXPECTED_FAIL": "EXPECT_FAILING",
+    "KNOWN_FAILING": "KNOWN_FAILING",
+    "KNOWN_FAILING_PASS": "KNOWN_FAILING_PASSING",
+    "EXPECTED_FAIL_PASS": "EXPECTED_FAIL_PASSING",
+    "TO_DO": "TO_DO",
+    "ASSUMPTION_FAIL": "ASSUMPTIONS_FAILED",
+    "FAIL": "FAILED",
+    "UNEXPECTED_FAIL_LINE": "FAILED",
+    "INVALID": "FAILED",
+    "ERROR": "FAILED",
+    "TIMEOUT": "FAILED",
+    "FLAKY": "FAILED",
+    "UNKNOWN": "FAILED",
+}
 TEST_DECLARATION = re.compile(
     r'(?m)^\s*(?:TEST|[A-Z_]+BATTLE_TEST)\s*\(\s*"((?:[^"\\]|\\.)*)"'
 )
@@ -74,11 +77,15 @@ class RuntimeGate:
     # tolerance: a failure not named here still breaks the gate, and a named
     # one that starts passing breaks it too so the list gets trimmed.
     allowed_failing: tuple[str, ...] = ()
+    # Existing intermittent debt is scoped to this filter and may pass or
+    # fail. Only a named '(k/?)' trial index is normalized; other parameters
+    # remain exact. PASSES_RANDOMLY alone never grants an exemption.
+    allowed_intermittent_failing: tuple[str, ...] = ()
     timeout_seconds: int = 180
 
 
 RUNTIME_GATES = (
-    RuntimeGate("*Champions", 109),
+    RuntimeGate("*Champions", 115),
     RuntimeGate("Blitz Boxer", 1),
     RuntimeGate("*preparation", 3),
     RuntimeGate("*Item descriptions fit on Bag and Shop Screen", 1),
@@ -125,19 +132,13 @@ RUNTIME_GATES = (
     # expected damage thresholds assume mainline stats/move data rather than
     # GEN_CHAMPIONS (perfect IVs, Stat Points, Champions move powers); the
     # switch-in, Toxic-vs-Immunity, Chip Away and thinking-time items still
-    # need a real investigation. See docs/AI_TEST_DEBT.md.
+    # need a real investigation. The exact accepted identities below are the
+    # canonical debt ledger; see docs/VERIFICATION.md.
     RuntimeGate(
         "test/battle/ai/ai.c",
-        84,
+        83,  # Removed one byte-identical duplicate OHKO-scoring test.
         maximum_todo=1,
         allowed_todo=("AI doesn't see stomping tantrum as boosted for switch AI if its last move before fainting failed",),
-        allowed_failing=(
-            'AI prefers moves which deal more damage instead of moves which are super-effective but deal less damage 1/2',
-            'AI uses a guaranteed KO move instead of the move with the highest expected damage 1/2',
-            "First Impression is not chosen if it's blocked by certain abilities",
-            "First Impression is preferred on the first turn of the species if it's the best dmg move",
-            'Move scoring comparison properly awards bonus point to best OHKO move',
-        ),
         timeout_seconds=600,
     ),
     RuntimeGate(
@@ -171,7 +172,7 @@ RUNTIME_GATES = (
     RuntimeGate(
         "test/battle/ai/ai_choice.c",
         11,
-        allowed_failing=(
+        allowed_intermittent_failing=(
             "Choiced Pokémon won't switch out if they can still affect one opposing Pokémon in doubles (reversed) 1/2 (1/?)",
         ),
         timeout_seconds=600,
@@ -202,8 +203,9 @@ RUNTIME_GATES = (
     RuntimeGate(
         "test/battle/ai/ai_flag_predict_move.c",
         3,
-        allowed_failing=(
+        allowed_intermittent_failing=(
             "AI won't use Sucker Punch if it expects a move of the same priority bracket and the opponent is faster (1/?)",
+            "AI_FLAG_PREDICT_MOVE: AI will still attack you when it should",
         ),
         timeout_seconds=600,
     ),
@@ -243,8 +245,10 @@ RUNTIME_GATES = (
     RuntimeGate(
         "test/battle/ai/ai_smart_tera.c",
         4,
-        allowed_failing=(
+        allowed_intermittent_failing=(
             'AI_FLAG_SMART_TERA: AI might tera if it gets saved from a ko (2/2)',
+        ),
+        allowed_failing=(
             'AI_FLAG_SMART_TERA: AI will tera if it enables a ko',
         ),
         timeout_seconds=600,
@@ -265,9 +269,13 @@ RUNTIME_GATES = (
     RuntimeGate(
         "test/battle/ai/ai_thinking_time.c",
         6,
-        allowed_failing=(
+        allowed_intermittent_failing=(
+            "AI thinking time doesn't explode (singles, no flags)",
+            "AI thinking time doesn't explode (singles, smart)",
+            "AI thinking time doesn't explode (doubles, no flags)",
             "AI thinking time doesn't explode (Steven multi)",
             "AI thinking time doesn't explode (doubles, smart)",
+            "AI thinking time doesn't explode (Steven multi, smart)",
         ),
         timeout_seconds=600,
     ),
@@ -284,7 +292,7 @@ RUNTIME_GATES = (
     RuntimeGate(
         "test/battle/ai/check_bad_move.c",
         15,
-        allowed_failing=(
+        allowed_intermittent_failing=(
             'AI avoids toxic when it can not poison target 1/4',
         ),
         timeout_seconds=600,
@@ -326,6 +334,7 @@ def run(
     *,
     timeout: int | None = None,
     cwd: Path = ROOT,
+    test_results: bool = False,
 ) -> tuple[str, float]:
     started = time.monotonic()
     try:
@@ -346,26 +355,109 @@ def run(
         fail(f"runtime gate timed out after {timeout}s: {' '.join(command)}")
     elapsed = time.monotonic() - started
     print(result.stdout, end="")
-    # The ROM test harness exits nonzero whenever any selected test fails; the
-    # caller decides whether those failures are tracked debt, so only treat a
-    # nonzero exit as fatal for tooling commands (patchelf, objcopy, ...).
-    if result.returncode != 0 and not command[0].endswith("mgba-rom-test-hydra"):
+    # Hydra uses 1 for test failures and 2 for tooling errors. Signals and
+    # other process failures must never be mistaken for accepted test debt.
+    # Opt in at the call site, not by trusting an executable's filename.
+    if result.returncode not in ((0, 1) if test_results else (0,)):
         fail(f"runtime gate exited {result.returncode}: {' '.join(command)}")
+    if test_results:
+        summary, _ = parse_results(result.stdout)
+        # SkipIsFail is disabled. Assumption failures alone need not exit 1;
+        # TODO tests may. Ordinary failures and unexpected passes must do so.
+        must_fail = any(summary.get(key, 0) for key in (
+            "FAILED", "KNOWN_FAILING_PASSING", "EXPECTED_FAIL_PASSING",
+        ))
+        if must_fail and result.returncode != 1:
+            fail("runtime result failures disagree with Hydra exit status")
+        if result.returncode == 1 and not (must_fail or summary.get("TO_DO", 0)):
+            fail("Hydra exited 1 without a corresponding failing result")
     return result.stdout, elapsed
 
 
-def parse_summary(output: str) -> dict[str, int]:
-    clean = ANSI.sub("", output)
-    return {name: int(value) for name, value in SUMMARY.findall(clean)}
+def parse_results(output: str) -> tuple[dict[str, int], dict[str, str]]:
+    """Reconcile every final result with Hydra's optional nonzero counters.
+
+    Hydra does not expose its command letter for CRASH (which can mean an
+    expected crash or an actual failure). Curated gates fail closed on that
+    ambiguous status until a machine-readable protocol distinguishes it.
+    """
+    summary: dict[str, int] = {}
+    results: dict[str, str] = {}
+    counts = dict.fromkeys(set(RESULT_COUNTER.values()), 0)
+    if not output.endswith("\n"):
+        fail("runtime output is truncated (missing final newline)")
+    for line in ANSI.sub("", output).splitlines():
+        match = SUMMARY.fullmatch(line)
+        if match:
+            name, value, annotation = match.groups()
+            if annotation and annotation != SUMMARY_ANNOTATIONS.get(name):
+                fail(f"malformed runtime summary annotation: {line}")
+            if name in summary:
+                fail(f"duplicate runtime summary: {name}")
+            if "TOTAL" in summary:
+                fail("runtime summary continues after TOTAL")
+            summary[name] = int(value)
+        elif line.startswith("- "):
+            fail(f"malformed or unknown runtime summary: {line}")
+        elif line.startswith("["):
+            match = RESULT.fullmatch(line)
+            if match is None:
+                fail(f"malformed runtime result: {line}")
+            name, status = match.groups()
+            if summary:
+                fail("runtime results appear after the summary started")
+            if status not in RESULT_COUNTER:
+                fail(f"unsupported runtime status {status!r} for {name!r}")
+            if name in results:
+                fail(f"duplicate runtime result identity: {name!r}")
+            if not name.strip() or name == "WAITING...":
+                fail("runtime result has no test identity")
+            results[name] = status
+            counts[RESULT_COUNTER[status]] += 1
+    if "TOTAL" not in summary:
+        fail("runtime output has no TOTAL summary")
+    if summary["TOTAL"] != len(results) or not results:
+        fail(f"runtime TOTAL {summary['TOTAL']} disagrees with {len(results)} named results")
+    for name, count in counts.items():
+        if summary.get(name, 0) != count:
+            fail(f"runtime {name} summary {summary.get(name, 0)} disagrees with {count} named results")
+    return summary, results
 
 
-def parse_debt_identities(output: str) -> tuple[set[str], set[str]]:
-    clean = ANSI.sub("", output)
-    known: set[str] = set()
-    todo: set[str] = set()
-    for name, result in DEBT_RESULT.findall(clean):
-        (known if result == "KNOWN_FAILING" else todo).add(name)
-    return known, todo
+def validate_gate_output(gate: RuntimeGate, output: str) -> dict[str, int]:
+    summary, results = parse_results(output)
+    total = summary["TOTAL"]
+    if total < gate.minimum_total:
+        fail(f"{gate.filter!r} selected {total} tests; expected at least {gate.minimum_total}")
+    invalid = {name: status for name, status in results.items() if status not in (
+        "PASS", "EXPECTED_FAIL", "KNOWN_FAILING", "TO_DO", "FAIL", "ASSUMPTION_FAIL",
+    )}
+    if invalid:
+        fail(f"{gate.filter!r} has unexpected runtime results: {invalid}")
+
+    failing = {name for name, status in results.items() if status in ("FAIL", "ASSUMPTION_FAIL")}
+    allowed = set(gate.allowed_failing)
+    intermittent = {TRIAL_SUFFIX.sub(" (*/?)", name) for name in gate.allowed_intermittent_failing}
+    unexpected = {name for name in failing - allowed if TRIAL_SUFFIX.sub(" (*/?)", name) not in intermittent}
+    if unexpected:
+        fail(f"{gate.filter!r} has new failing tests: {sorted(unexpected)}")
+    if allowed - failing:
+        fail(f"{gate.filter!r} debt items no longer fail or are missing; update allowed_failing: {sorted(allowed - failing)}")
+
+    # Intermittent debt must still execute, even on a passing run. The ROM
+    # strips parameter/trial suffixes from successful result identities.
+    executed = {EXECUTION_SUFFIX.sub("", name) for name in results}
+    missing = {name for name in gate.allowed_intermittent_failing if EXECUTION_SUFFIX.sub("", name) not in executed}
+    if missing:
+        fail(f"{gate.filter!r} intermittent debt tests did not execute: {sorted(missing)}")
+    for status, maximum, accepted in (
+        ("KNOWN_FAILING", gate.maximum_known_failing, gate.allowed_known_failing),
+        ("TO_DO", gate.maximum_todo, gate.allowed_todo),
+    ):
+        identities = {name for name, result in results.items() if result == status}
+        if len(identities) > maximum or identities - set(accepted):
+            fail(f"{gate.filter!r} has unaccepted {status} debt: {sorted(identities)} (maximum {maximum})")
+    return summary
 
 
 def filter_matches(filter_text: str, test_name: str) -> bool:
@@ -446,67 +538,20 @@ def verify_gate(
         [hydra, romtest, objcopy, str(headless_elf)],
         timeout=gate.timeout_seconds,
         cwd=runtime_cwd,
+        test_results=True,
     )
 
-    summary = parse_summary(output)
-    known_identities, todo_identities = parse_debt_identities(output)
-    total = summary.get("TOTAL", 0)
+    summary = validate_gate_output(gate, output)
+    total = summary["TOTAL"]
     known = summary.get("KNOWN_FAILING", 0)
     todo = summary.get("TO_DO", 0)
     failures = summary.get("FAILED", 0)
     assumptions = summary.get("ASSUMPTIONS_FAILED", 0)
-    newly_passing = summary.get("KNOWN_FAILING_PASSING", 0)
-    expected_passing = summary.get("EXPECTED_FAIL_PASSING", 0)
-
-    if total < gate.minimum_total:
-        fail(
-            f"{gate.filter!r} selected {total} tests; expected at least "
-            f"{gate.minimum_total}"
-        )
-    failing_identities = {name for name, _ in FAIL_RESULT.findall(ANSI.sub("", output))}
-    allowed_failing = set(gate.allowed_failing)
-    # PASSES_RANDOMLY tests print a "(k/?)" trial suffix and legitimately flip
-    # between runs; they are debt either way and never gate on their outcome.
-    flaky = {name for name in allowed_failing if FLAKY_SUFFIX.search(name)} | set(FLAKY_IDENTITIES)
-    if failing_identities - allowed_failing - flaky:
-        fail(
-            f"{gate.filter!r} has new failing tests: {sorted(failing_identities - allowed_failing - flaky)}"
-        )
-    if allowed_failing - failing_identities - flaky:
-        fail(
-            f"{gate.filter!r} debt items now pass; remove them from allowed_failing: "
-            f"{sorted(allowed_failing - failing_identities - flaky)}"
-        )
-    if (failures or assumptions) and not allowed_failing:
-        fail(f"{gate.filter!r} has an unexpected runtime result: {summary}")
-    if newly_passing or expected_passing:
-        fail(f"{gate.filter!r} has an unexpected runtime result: {summary}")
-    if known > gate.maximum_known_failing:
-        fail(
-            f"{gate.filter!r} has {known} known failures; maximum accepted is "
-            f"{gate.maximum_known_failing}"
-        )
-    if todo > gate.maximum_todo:
-        fail(
-            f"{gate.filter!r} has {todo} TODO tests; maximum accepted is "
-            f"{gate.maximum_todo}"
-        )
-    unexpected_known = known_identities.difference(gate.allowed_known_failing)
-    unexpected_todo = todo_identities.difference(gate.allowed_todo)
-    if unexpected_known or unexpected_todo:
-        fail(
-            f"{gate.filter!r} replaced an accepted debt item with a new one: "
-            f"known={sorted(unexpected_known)} todo={sorted(unexpected_todo)}"
-        )
-    if len(known_identities) != known or len(todo_identities) != todo:
-        fail(
-            f"{gate.filter!r} summary debt counts do not match named results: "
-            f"summary={summary} known={sorted(known_identities)} "
-            f"todo={sorted(todo_identities)}"
-        )
-
+    label = "PASS WITH DEBT" if known or todo or failures or assumptions or gate.allowed_intermittent_failing else "PASS"
     print(
-        f"PASS: {gate.filter!r}: total={total} known={known} todo={todo} "
+        f"{label}: {gate.filter!r}: total={total} known={known} todo={todo} "
+        f"failures={failures} assumptions={assumptions} "
+        f"intermittent_debt={len(gate.allowed_intermittent_failing)} "
         f"elapsed={elapsed:.2f}s",
         flush=True,
     )
@@ -624,7 +669,7 @@ def main() -> None:
     elapsed = time.monotonic() - started
     print(
         "\nEMERALD CHAMPIONS CURATED RUNTIME GATES: PASS WITH IDENTITY-PINNED DEBT\n"
-        "See docs/AI_TEST_DEBT.md; no unlisted runtime regression was accepted.\n"
+        "See docs/VERIFICATION.md; no unlisted runtime regression was accepted.\n"
         f"build_seconds={build_elapsed:.2f} filter_seconds={test_elapsed:.2f} "
         f"wall_seconds={elapsed:.2f}",
         flush=True,

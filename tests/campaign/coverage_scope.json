@@ -1,0 +1,325 @@
+{
+  "schema_version": 1,
+  "description": "Explicit scope rules for source-derived campaign coverage. Classification is conservative: content not proven by a rule remains campaign_unclassified and is still required until deliberately excluded.",
+  "required_classifications": [
+    "main_story",
+    "optional",
+    "campaign_unclassified"
+  ],
+  "main_story_maps": [
+    "MAP_INSIDE_OF_TRUCK",
+    "MAP_LITTLEROOT_TOWN",
+    "MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F",
+    "MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F",
+    "MAP_LITTLEROOT_TOWN_MAYS_HOUSE_1F",
+    "MAP_LITTLEROOT_TOWN_MAYS_HOUSE_2F",
+    "MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB",
+    "MAP_ROUTE101"
+  ],
+  "optional_groups": [
+    "gMapGroup_SpecialArea",
+    "gMapGroup_EmeraldChampionsExpansion"
+  ],
+  "system_groups": [
+    "gMapGroup_IndoorRoute104Prototype",
+    "gMapGroup_Link_Frlg"
+  ],
+  "excluded_group_suffixes": [
+    "_Frlg"
+  ],
+  "generated_map_prefixes": [
+    "BattlePyramidSquare"
+  ],
+  "generated_maps": [
+    "BattleFrontier_BattlePyramidFloor"
+  ],
+  "system_map_prefixes": [
+    "SecretBase_",
+    "Unused"
+  ],
+  "system_maps": [
+    "BattleColosseum_2P",
+    "BattleColosseum_4P",
+    "TradeCenter",
+    "RecordCorner",
+    "UnionRoom"
+  ],
+  "modules": [
+    {
+      "id": "main.new_game",
+      "classification": "main_story",
+      "evidence": [
+        {"path": "data/maps/Route101/scripts.inc", "contains": "Route101_EventScript_StartBirchRescue"}
+      ]
+    },
+    {
+      "id": "main.route103_rival_and_pokedex",
+      "classification": "main_story",
+      "evidence": [{"path": "data/maps/Route103/scripts.inc", "contains": "Route103_MapScripts"}]
+    },
+    {
+      "id": "main.petalburg_and_wally",
+      "classification": "main_story",
+      "evidence": [{"path": "data/maps/PetalburgCity_Gym/scripts.inc", "contains": "PetalburgCity_Gym_MapScripts"}]
+    },
+    {
+      "id": "main.rustboro_and_devon_goods",
+      "classification": "main_story",
+      "evidence": [{"path": "data/maps/RusturfTunnel/scripts.inc", "contains": "RusturfTunnel_MapScripts"}]
+    },
+    {
+      "id": "main.steven_letter",
+      "classification": "main_story",
+      "evidence": [{"path": "data/maps/GraniteCave_StevensRoom/scripts.inc", "contains": "GraniteCave_StevensRoom_MapScripts"}]
+    },
+    {
+      "id": "main.brawly_and_slateport",
+      "classification": "main_story",
+      "evidence": [{"path": "data/maps/SlateportCity/scripts.inc", "contains": "SlateportCity_MapScripts"}]
+    },
+    {
+      "id": "main.oceanic_museum",
+      "classification": "main_story",
+      "evidence": [{"path": "data/maps/SlateportCity_OceanicMuseum_2F/scripts.inc", "contains": "SlateportCity_OceanicMuseum_2F_MapScripts"}]
+    },
+    {
+      "id": "main.mauville_and_wattson",
+      "classification": "main_story",
+      "evidence": [{"path": "data/maps/MauvilleCity_Gym/scripts.inc", "contains": "MauvilleCity_Gym_MapScripts"}]
+    },
+    {
+      "id": "main.meteor_falls",
+      "classification": "main_story",
+      "evidence": [{"path": "data/maps/MeteorFalls_1F_1R/scripts.inc", "contains": "MeteorFalls_1F_1R_MapScripts"}]
+    },
+    {
+      "id": "main.mt_chimney_and_flannery",
+      "classification": "main_story",
+      "evidence": [{"path": "data/maps/MtChimney/scripts.inc", "contains": "MtChimney_MapScripts"}]
+    },
+    {
+      "id": "main.norman_and_surf",
+      "classification": "main_story",
+      "evidence": [{"path": "data/maps/PetalburgCity_Gym/scripts.inc", "contains": "PetalburgCity_Gym_EventScript_Norman"}]
+    },
+    {
+      "id": "main.weather_institute",
+      "classification": "main_story",
+      "evidence": [{"path": "data/maps/Route119_WeatherInstitute_2F/scripts.inc", "contains": "Route119_WeatherInstitute_2F_MapScripts"}]
+    },
+    {
+      "id": "main.fortree_and_winona",
+      "classification": "main_story",
+      "evidence": [{"path": "data/maps/FortreeCity_Gym/scripts.inc", "contains": "FortreeCity_Gym_MapScripts"}]
+    },
+    {
+      "id": "main.mt_pyre_orbs",
+      "classification": "main_story",
+      "evidence": [{"path": "data/maps/MtPyre_Summit/scripts.inc", "contains": "MtPyre_Summit_MapScripts"}]
+    },
+    {
+      "id": "main.magma_and_aqua_hideouts",
+      "classification": "main_story",
+      "evidence": [{"path": "data/maps/AquaHideout_B2F/scripts.inc", "contains": "AquaHideout_B2F_MapScripts"}]
+    },
+    {
+      "id": "main.mossdeep_and_tate_liza",
+      "classification": "main_story",
+      "evidence": [{"path": "data/maps/MossdeepCity_Gym/scripts.inc", "contains": "MossdeepCity_Gym_MapScripts"}]
+    },
+    {
+      "id": "main.space_center",
+      "classification": "main_story",
+      "evidence": [{"path": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc", "contains": "MossdeepCity_SpaceCenter_2F_MapScripts"}]
+    },
+    {
+      "id": "main.seafloor_cavern",
+      "classification": "main_story",
+      "evidence": [{"path": "data/maps/SeafloorCavern_Room9/scripts.inc", "contains": "SeafloorCavern_Room9_MapScripts"}]
+    },
+    {
+      "id": "main.sootopolis_crisis",
+      "classification": "main_story",
+      "evidence": [{"path": "data/maps/SootopolisCity/scripts.inc", "contains": "SootopolisCity_MapScripts"}]
+    },
+    {
+      "id": "main.sky_pillar_and_rayquaza",
+      "classification": "main_story",
+      "evidence": [{"path": "data/maps/SkyPillar_Top/scripts.inc", "contains": "SkyPillar_Top_MapScripts"}]
+    },
+    {
+      "id": "main.victory_road",
+      "classification": "main_story",
+      "evidence": [{"path": "data/maps/VictoryRoad_1F/scripts.inc", "contains": "VictoryRoad_1F_MapScripts"}]
+    },
+    {
+      "id": "main.elite_four",
+      "classification": "main_story",
+      "evidence": [{"path": "data/maps/EverGrandeCity_SidneysRoom/scripts.inc", "contains": "EverGrandeCity_SidneysRoom_MapScripts"}]
+    },
+    {
+      "id": "main.hall_of_fame",
+      "classification": "main_story",
+      "evidence": [
+        {"path": "data/maps/EverGrandeCity_ChampionsRoom/scripts.inc", "contains": "EverGrandeCity_ChampionsRoom_EventScript"}
+      ]
+    },
+    {
+      "id": "main.postgame_unlock",
+      "classification": "main_story",
+      "evidence": [{"path": "data/scripts/players_house.inc", "contains": "PlayersHouse_1F_EventScript_GetSSTicketAndSeeLatiTV"}]
+    },
+    {
+      "id": "optional.battle_frontier",
+      "classification": "optional",
+      "evidence": [
+        {"path": "data/maps/BattleFrontier_OutsideWest/map.json", "contains": "MAP_BATTLE_FRONTIER_OUTSIDE_WEST"}
+      ]
+    },
+    {
+      "id": "optional.trick_house",
+      "classification": "optional",
+      "evidence": [{"path": "data/maps/Route110_TrickHouseEntrance/scripts.inc", "contains": "Route110_TrickHouseEntrance_MapScripts"}]
+    },
+    {
+      "id": "optional.winstrate_family",
+      "classification": "optional",
+      "evidence": [{"path": "data/maps/Route111/scripts.inc", "contains": "Route111_EventScript_Victor"}]
+    },
+    {
+      "id": "optional.gabby_and_ty",
+      "classification": "optional",
+      "evidence": [{"path": "data/maps/Route111/scripts.inc", "contains": "GabbyAndTy_EventScript_UpdateLocation"}]
+    },
+    {
+      "id": "optional.poke_vial_upgrades",
+      "classification": "optional",
+      "evidence": [{"path": "data/maps/Route111/scripts.inc", "contains": "Route111_EventScript_VialUpgradeNurse"}]
+    },
+    {
+      "id": "optional.daycare_and_breeding",
+      "classification": "optional",
+      "evidence": [{"path": "data/maps/Route117_PokemonDayCare/scripts.inc", "contains": "Route117_PokemonDayCare_MapScripts"}]
+    },
+    {
+      "id": "optional.game_corner",
+      "classification": "optional",
+      "evidence": [{"path": "data/maps/MauvilleCity_GameCorner/scripts.inc", "contains": "MauvilleCity_GameCorner_MapScripts"}]
+    },
+    {
+      "id": "optional.new_mauville",
+      "classification": "optional",
+      "evidence": [{"path": "data/maps/NewMauville_Inside/scripts.inc", "contains": "NewMauville_Inside_MapScripts"}]
+    },
+    {
+      "id": "optional.abandoned_ship",
+      "classification": "optional",
+      "evidence": [{"path": "data/maps/AbandonedShip_CaptainsOffice/scripts.inc", "contains": "AbandonedShip_CaptainsOffice_MapScripts"}]
+    },
+    {
+      "id": "optional.ss_tidal",
+      "classification": "optional",
+      "evidence": [{"path": "data/maps/SSTidalCorridor/scripts.inc", "contains": "SSTidalCorridor_MapScripts"}]
+    },
+    {
+      "id": "optional.safari_zone",
+      "classification": "optional",
+      "evidence": [{"path": "data/maps/SafariZone_North/scripts.inc", "contains": "SafariZone_North_MapScripts"}]
+    },
+    {
+      "id": "optional.contests",
+      "classification": "optional",
+      "evidence": [{"path": "data/maps/LilycoveCity_ContestLobby/scripts.inc", "contains": "LilycoveCity_ContestLobby_MapScripts"}]
+    },
+    {
+      "id": "optional.trainer_hill",
+      "classification": "optional",
+      "evidence": [{"path": "data/maps/TrainerHill_Entrance/scripts.inc", "contains": "TrainerHill_Entrance_MapScripts"}]
+    },
+    {
+      "id": "optional.legendary_signs",
+      "classification": "optional",
+      "evidence": [{"path": "src/legendary_signs.c", "contains": "gLegendarySignDefinitions"}]
+    },
+    {
+      "id": "optional.restored_areas",
+      "classification": "optional",
+      "evidence": [{"path": "data/maps/AshenWoods/scripts.inc", "contains": "AshenWoods_MapScripts"}]
+    },
+    {
+      "id": "optional.champions_circuit",
+      "classification": "optional",
+      "evidence": [{"path": "src/champions_circuit.c", "contains": "ChampionsCircuitBegin"}]
+    },
+    {
+      "id": "optional.regi_quests",
+      "classification": "optional",
+      "evidence": [
+        {"path": "data/maps/DesertRuins/scripts.inc", "contains": "DesertRuins_EventScript_Regirock"},
+        {"path": "data/maps/IslandCave/scripts.inc", "contains": "IslandCave_EventScript_Regice"},
+        {"path": "data/maps/AncientTomb/scripts.inc", "contains": "AncientTomb_EventScript_Registeel"}
+      ]
+    }
+  ],
+  "branches": [
+    {
+      "id": "choice.player_gender",
+      "classification": "main_story",
+      "evidence": [
+        {"path": "src/main_menu.c", "contains": "gSaveBlock2Ptr->playerGender = gender"}
+      ]
+    },
+    {
+      "id": "choice.starter_region",
+      "classification": "main_story",
+      "evidence": [
+        {"path": "data/maps/LittlerootTown_BrendansHouse_2F/scripts.inc", "contains": "Common_EventScript_ChooseStarterRegion"}
+      ]
+    },
+    {
+      "id": "choice.starter_species",
+      "classification": "main_story",
+      "evidence": [
+        {"path": "src/field_specials.c", "contains": "VAR_STARTER_MON"},
+        {"path": "src/field_specials.c", "contains": "VAR_STARTER_GEN"}
+      ]
+    },
+    {
+      "id": "choice.fossil",
+      "classification": "optional",
+      "evidence": [
+        {"path": "data/maps/MirageTower_4F/scripts.inc", "contains": "ITEM_ROOT_FOSSIL"},
+        {"path": "data/maps/MirageTower_4F/scripts.inc", "contains": "ITEM_CLAW_FOSSIL"}
+      ]
+    },
+    {
+      "id": "choice.lati_color",
+      "classification": "optional",
+      "evidence": [
+        {"path": "data/scripts/players_house.inc", "contains": "VAR_ROAMER_POKEMON"}
+      ]
+    },
+    {
+      "id": "world.shoal_tide",
+      "classification": "optional",
+      "evidence": [
+        {"path": "src/time_events.c", "contains": "UpdateShoalTideFlag"}
+      ]
+    },
+    {
+      "id": "world.terra_marine_location",
+      "classification": "optional",
+      "evidence": [
+        {"path": "src/region_map.c", "contains": "GetTerraOrMarineCaveMapSecId"},
+        {"path": "src/region_map.c", "contains": "GetMarineCaveCoords"}
+      ]
+    },
+    {
+      "id": "edge.capture_storage_full",
+      "classification": "optional",
+      "evidence": [
+        {"path": "src/battle_script_commands.c", "contains": "MON_GIVEN_TO_PC"}
+      ]
+    }
+  ]
+}

@@ -193,6 +193,10 @@ WEATHER_SOURCES = {
 WEATHER_SUPPRESSORS = {"ABILITY_CLOUD_NINE", "ABILITY_AIR_LOCK"}
 
 ACROBATICS_TRIGGER_ITEMS = {
+    # Acrobatics' condition is that the holder carries no item, so an empty
+    # slot is the canonical set, not a coherence failure.  Unburden instead
+    # needs an item that actually leaves, so ITEM_NONE is not added to it.
+    "ITEM_NONE",
     "ITEM_FLYING_GEM",
     "ITEM_FOCUS_SASH",
     "ITEM_GRASSY_SEED",
@@ -202,7 +206,7 @@ ACROBATICS_TRIGGER_ITEMS = {
     "ITEM_WEAKNESS_POLICY",
     "ITEM_WHITE_HERB",
 }
-UNBURDEN_TRIGGER_ITEMS = ACROBATICS_TRIGGER_ITEMS | {"ITEM_BUG_GEM"}
+UNBURDEN_TRIGGER_ITEMS = (ACROBATICS_TRIGGER_ITEMS - {"ITEM_NONE"}) | {"ITEM_BUG_GEM"}
 RELIABLE_POISON_MOVES = {
     "MOVE_BANEFUL_BUNKER",
     "MOVE_POISON_GAS",

@@ -415,7 +415,7 @@ static inline bool32 IsControllerRecordedPlayer(enum BattlerId battler)
     return (gBattlerControllerEndFuncs[battler] == RecordedPlayerBufferExecCompleted);
 }
 
-static inline bool32 IsControllerRecordedPartner(enum BattlerId battler)
+bool32 IsControllerRecordedPartner(enum BattlerId battler)
 {
     return (gBattlerControllerEndFuncs[battler] == RecordedPartnerBufferExecCompleted);
 }

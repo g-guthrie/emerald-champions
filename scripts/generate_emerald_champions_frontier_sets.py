@@ -39,7 +39,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SETS = ROOT / "docs" / "emerald_champions_battle_sets.json"
+SETS = ROOT / "data/emerald_champions/emerald_champions_battle_sets.json"
 FRONTIER_MONS = ROOT / "src" / "data" / "battle_frontier" / "battle_frontier_mons.h"
 TENT_MONS = ROOT / "src" / "data" / "battle_frontier" / "battle_tent.h"
 FRONTIER_UTIL = ROOT / "src" / "frontier_util.c"

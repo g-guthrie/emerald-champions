@@ -19,6 +19,7 @@
       "MOVE_BUZZY_BUZZ",
       "MOVE_DRAGON_ASCENT",
       "MOVE_FLOATY_FALL",
+      "MOVE_FOLLOW_ME",
       "MOVE_FREEZY_FROST",
       "MOVE_GLITZY_GLOW",
       "MOVE_RELIC_SONG",

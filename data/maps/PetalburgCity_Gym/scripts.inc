@@ -1326,7 +1326,8 @@ PetalburgCity_Gym_Text_RandallIntro:
 	.string "The ability to attack before the\n"
 	.string "opponent…\p"
 	.string "Just that alone puts me at a great\n"
-	.string "advantage, don't you agree?$"
+	.string "advantage, don't you agree?\p"
+	.string "Five hits a turn. No SASH lives!$"
 
 PetalburgCity_Gym_Text_RandallDefeat:
 	.string "That was a magnificent battle!$"
@@ -1348,7 +1349,8 @@ PetalburgCity_Gym_Text_RandallPostBadge:
 PetalburgCity_Gym_Text_ParkerIntro:
 	.string "This is the CONFUSION ROOM.\p"
 	.string "Let me see how well bonded you are\n"
-	.string "with your POKéMON!$"
+	.string "with your POKéMON!\p"
+	.string "TRICK ROOM. My slowest strike first!$"
 
 PetalburgCity_Gym_Text_ParkerDefeat:
 	.string "I couldn't confuse your team enough…\n"
@@ -1409,7 +1411,8 @@ PetalburgCity_Gym_Text_MaryIntro:
 	.string "Giggle…\n"
 	.string "This is the ACCURACY ROOM.\p"
 	.string "It's pretty nasty when every attack\n"
-	.string "lands without fail.$"
+	.string "lands without fail.\p"
+	.string "Hurt me halfway, and BERSERK answers!$"
 
 PetalburgCity_Gym_Text_MaryDefeat:
 	.string "You were a cut above me…$"
@@ -1430,7 +1433,8 @@ PetalburgCity_Gym_Text_MaryPostBadge:
 
 PetalburgCity_Gym_Text_AlexiaIntro:
 	.string "The higher the DEFENSE, the more\n"
-	.string "reckless I can be in attack.$"
+	.string "reckless I can be in attack.\p"
+	.string "My own poison is the whole point!$"
 
 PetalburgCity_Gym_Text_AlexiaDefeat:
 	.string "Our defenses weren't enough…$"
@@ -1452,7 +1456,8 @@ PetalburgCity_Gym_Text_JodyIntro:
 	.string "Our GYM LEADER told us to go all out\n"
 	.string "and beat you.\p"
 	.string "Even if you happen to be the\n"
-	.string "LEADER's kid!$"
+	.string "LEADER's kid!\p"
+	.string "No tricks in here. Only power!$"
 
 PetalburgCity_Gym_Text_JodyDefeat:
 	.string "But… I went all out!$"

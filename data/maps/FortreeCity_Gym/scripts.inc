@@ -163,9 +163,9 @@ FortreeCity_Gym_Text_JaredPostBattle:
 	.string "Never give a SIMPLE user a free turn.$"
 
 FortreeCity_Gym_Text_EdwardoIntro:
-	.string "DRIFBLIM sets TAILWIND, JUMPLUFF puts\n"
-	.string "you to sleep, STARAPTOR ends the game.\p"
-	.string "Which turn will you spend on which?$"
+	.string "JUMPLUFF puts you to sleep, and\n"
+	.string "HONCHKROW grows with every fall.\p"
+	.string "Give it nothing to feed on!$"
 
 FortreeCity_Gym_Text_EdwardoDefeat:
 	.string "You outlasted my wind…$"
@@ -199,9 +199,9 @@ FortreeCity_Gym_Text_AshleyPostBattle:
 	.string "The sky belongs to whoever set it last.$"
 
 FortreeCity_Gym_Text_HumbertoIntro:
-	.string "GLISCOR heals through poison and sets\n"
-	.string "up. MANDIBUZZ taunts your answer.\p"
-	.string "Then MINIOR breaks its shell!$"
+	.string "GLISCOR heals through its own poison,\n"
+	.string "and CORVIKNIGHT returns what you send.\p"
+	.string "Lower our stats. I dare you!$"
 
 FortreeCity_Gym_Text_HumbertoDefeat:
 	.string "You hit MINIOR before the shell came off!$"
@@ -211,9 +211,9 @@ FortreeCity_Gym_Text_HumbertoPostBattle:
 	.string "FAKE OUT or a spread attack denies it.$"
 
 FortreeCity_Gym_Text_DariusIntro:
-	.string "EMOLGA's LIGHTNING ROD swallows every\n"
-	.string "ELECTRIC move aimed at my birds.\p"
-	.string "Attack through it, if you can!$"
+	.string "TORNADUS raises the TAILWIND before\n"
+	.string "you have taken a single turn.\p"
+	.string "Four turns. Outlast them!$"
 
 FortreeCity_Gym_Text_DariusDefeat:
 	.string "You aimed at the rod itself!$"

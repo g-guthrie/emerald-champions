@@ -6,6 +6,8 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
+from run_emerald_champions_runtime_gates import RUNTIME_GATES, TEST_DECLARATION, curated_test_sources, filter_matches
+
 
 ROOT = Path(__file__).resolve().parents[1]
 STARTERS = (
@@ -65,7 +67,6 @@ def main() -> None:
     menu_constants = (ROOT / "include/constants/script_menu.h").read_text()
     sets = (ROOT / "src/data/pokemon/emerald_champions_battle_sets.h").read_text()
     tests = (ROOT / "test/emerald_champions.c").read_text()
-    runtime_gates = (ROOT / "scripts/run_emerald_champions_runtime_gates.py").read_text()
 
     flag_rows = {}
     for species in STARTERS:
@@ -215,19 +216,23 @@ def main() -> None:
     require(fossil_receive.find("special GiveEmeraldChampionsPreparedPokemon")
             < fossil_receive.find("setvar VAR_FOSSIL_RESURRECTION_STATE, 0"),
             "fossil resurrection state can clear before delivery succeeds")
-    champions_gate = re.search(r'RuntimeGate\("\*Champions",\s*(\d+)\)', runtime_gates)
-    require(champions_gate is not None, "curated Champions runtime gate is missing")
-    champions_declarations = 0
-    declaration = re.compile(
-        r'^\s*(?:TEST|[A-Z_]+BATTLE_TEST)\s*\(\s*"((?:[^"\\]|\\.)*)"',
-        re.M,
-    )
-    for test_source in (ROOT / "test").rglob("*.c"):
-        champions_declarations += sum(
-            "Champions" in name for name in declaration.findall(test_source.read_text(errors="ignore"))
+    test_path = "test/emerald_champions.c"
+    required_tests = {
+        "Emerald Champions Game Corner " + behavior
+        for behavior in (
+            "rejects the initially chosen starter",
+            "delivers a prepared alternate starter transactionally",
+            "rejects a repeated archive claim",
+            "keeps a full-storage claim retryable",
+            "rejects invalid or presetless prizes",
         )
-    require(int(champions_gate.group(1)) == champions_declarations,
-            "curated Champions runtime minimum is stale against its live declarations")
+    }
+    declarations = set(TEST_DECLARATION.findall((ROOT / test_path).read_text()))
+    require(required_tests <= declarations, "required Game Corner runtime cases are missing")
+    require(test_path in curated_test_sources(), "Game Corner tests are not compiled by the curated suite")
+    require(all(any(gate.filter == test_path or filter_matches(gate.filter, name)
+                    for gate in RUNTIME_GATES) for name in required_tests),
+            "required Game Corner cases are not selected for runtime execution")
 
     # Native message boxes safely fit roughly 36 monospace characters.  Keep
     # new prize dialogue at 34 visible characters to preserve a margin.

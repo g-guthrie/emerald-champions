@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "battle_id": "replace-with-stable-trainer-id",
+  "rom_sha256": "replace-with-64-hex-ROM-hash",
+  "checkpoint_state_sha256": "replace-with-64-hex-state-hash",
+  "level_cap": 14,
+  "opponent_dossier": {
+    "trainer_id": "TRAINER_EXAMPLE",
+    "format": "double",
+    "team": ["generated exact opponent team goes here"]
+  },
+  "services": {
+    "leveler": true,
+    "legal_move_tutor": true,
+    "singles_presets": true,
+    "doubles_presets": true,
+    "ability_editor": true,
+    "stat_point_editor": true,
+    "held_item_vendor": true
+  },
+  "mega_access": {
+    "bracelet": false,
+    "legal_stones": []
+  },
+  "pokemon": [
+    {
+      "species": "SPECIES_EXAMPLE",
+      "acquisition": "reachable_map_or_gift_or_static_or_starter",
+      "source_justification": ["source file and gate proving reachability"],
+      "legal_moves_source": "canonical generated legal-move table",
+      "preset_source": "canonical hand-audited preset table"
+    }
+  ],
+  "items": [
+    {
+      "item": "ITEM_EXAMPLE",
+      "source_justification": ["source file and gate proving contemporaneous availability"]
+    }
+  ],
+  "generation_evidence": [
+    "exact source-derived reachability command and output artifact"
+  ]
+}

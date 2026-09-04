@@ -16,7 +16,7 @@ Route131_EventScript_CheckSetAbnormalWeather::
 	return
 
 Route131_EventScript_Richard::
-	trainerbattle_single TRAINER_RICHARD, Route131_Text_RichardIntro, Route131_Text_RichardDefeat
+	trainerbattle_double TRAINER_RICHARD, Route131_Text_RichardIntro, Route131_Text_RichardDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route131_Text_RichardPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -51,7 +51,7 @@ Route131_EventScript_Talia::
 	end
 
 Route131_EventScript_Kevin::
-	trainerbattle_single TRAINER_KEVIN, Route131_Text_KevinIntro, Route131_Text_KevinDefeat
+	trainerbattle_double TRAINER_KEVIN, Route131_Text_KevinIntro, Route131_Text_KevinDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route131_Text_KevinPostBattle, MSGBOX_AUTOCLOSE
 	end
 

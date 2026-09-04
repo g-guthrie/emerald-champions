@@ -7,7 +7,7 @@ Route134_OnResume:
 	end
 
 Route134_EventScript_Jack::
-	trainerbattle_single TRAINER_JACK, Route134_Text_JackIntro, Route134_Text_JackDefeat
+	trainerbattle_double TRAINER_JACK, Route134_Text_JackIntro, Route134_Text_JackDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route134_Text_JackPostBattle, MSGBOX_AUTOCLOSE
 	end
 

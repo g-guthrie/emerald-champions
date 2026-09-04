@@ -6,6 +6,7 @@ from __future__ import annotations
 import json
 import re
 from pathlib import Path
+from item_catalog import battle_item_categories, free_vendor_items
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -515,8 +516,7 @@ def main() -> None:
                 require("ITEM_RARE_CANDY" not in listed, f"Medicine mart still sells obsolete Rare Candy: {path}")
     require(medicine_lists == 21, f"Expected 21 Hoenn medicine lists, found {medicine_lists}")
 
-    free_block = field_specials.split("sEmeraldChampionsFreeBattleItems[]", 1)[1].split("};", 1)[0]
-    free_items = set(re.findall(r"ITEM_[A-Z0-9_]+", free_block))
+    free_items = free_vendor_items(ROOT)
     require(not any("_BERRY" in item for item in free_items), "Berries leaked into the free vendor")
 
     mega_items = set()
@@ -527,23 +527,16 @@ def main() -> None:
         if "HOLD_EFFECT_Z_CRYSTAL" in match.group(2):
             z_crystal_items.add(match.group(1))
     require(not free_items.intersection(mega_items), "Mega Stones leaked into the free vendor")
+    evolution_items = set(re.findall(
+        r"ITEM_[A-Z0-9_]+",
+        read("src/data/emerald_champions_evolution_items.h"),
+    ))
+    require(not free_items.intersection(evolution_items), "Evolution items leaked into the free vendor")
     forbidden_parts = ("_PLATE", "_MEMORY", "_DRIVE", "_MASK", "_Z_CRYSTAL", "TERA_SHARD")
     require(not any(any(part in item for part in forbidden_parts) for item in free_items), "Progression held items leaked into the free vendor")
     require(not free_items.intersection({"ITEM_RED_ORB", "ITEM_BLUE_ORB", "ITEM_RUSTED_SWORD", "ITEM_RUSTED_SHIELD"}), "Transformation items leaked into the free vendor")
 
-    category_names = (
-        "sEmeraldChampionsOffenseItems",
-        "sEmeraldChampionsDefenseItems",
-        "sEmeraldChampionsFieldItems",
-        "sEmeraldChampionsTypeItems",
-        "sEmeraldChampionsGemItems",
-        "sEmeraldChampionsSpeciesItems",
-    )
-    categories = []
-    for name in category_names:
-        block = field_specials.split(f"{name}[]", 1)[1].split("};", 1)[0]
-        categories.append(set(re.findall(r"ITEM_[A-Z0-9_]+", block)) - {"ITEM_NONE"})
-    require(set().union(*categories) == free_items - {"ITEM_NONE"}, "held-item categories do not cover the free vendor exactly")
+    categories = list(battle_item_categories(ROOT).values())
     require(sum(map(len, categories)) == len(set().union(*categories)), "a held item appears in multiple vendor categories")
     require(
         all(token in vendor_scripts for token in (
@@ -558,7 +551,7 @@ def main() -> None:
         "the Pokemon Center held-item category menu is incomplete",
     )
 
-    presets = json.loads(read("docs/emerald_champions_battle_sets.json"))
+    presets = json.loads(read("data/emerald_champions/emerald_champions_battle_sets.json"))
     preset_items = {
         entry[field]
         for group in ("defaults", "alternatives", "singles_defaults", "singles_alternatives")
@@ -570,15 +563,48 @@ def main() -> None:
         not z_crystal_items.intersection(free_items | preset_items | trainer_items),
         "a live campaign loadout enables Z-Moves",
     )
-    preset_protected = mega_items | {
+    preset_protected = mega_items | evolution_items | {
         item for item in preset_items
         if any(part in item for part in forbidden_parts)
     } | {"ITEM_RED_ORB", "ITEM_BLUE_ORB", "ITEM_RUSTED_SWORD", "ITEM_RUSTED_SHIELD"}
     preset_berries = {item for item in preset_items if "_BERRY" in item}
-    ordinary_preset_items = preset_items - preset_protected - preset_berries - {"ITEM_NONE"}
+    preset_entries = [
+        entry
+        for group in ("defaults", "alternatives", "singles_defaults", "singles_alternatives")
+        for entry in presets[group]
+    ]
+    # Held-form items are equipped by the preset itself. Exempt only the
+    # species/item pair required by the engine's form table, not the item in
+    # every preset where it could accidentally appear.
+    held_forms = set(re.findall(
+        r"\{FORM_CHANGE_ITEM_HOLD,\s*(SPECIES_[A-Z0-9_]+),\s*(ITEM_[A-Z0-9_]+)\s*\}",
+        read("src/data/pokemon/form_change_tables.h"),
+    ))
+    ordinary_preset_items = {
+        entry[field]
+        for entry in preset_entries
+        for field in ("item", "required_item")
+        if (entry["species"], entry[field]) not in held_forms
+    } - preset_protected - preset_berries - {"ITEM_NONE"}
     require(
         ordinary_preset_items <= free_items,
         f"competitive presets use unavailable ordinary held items: {sorted(ordinary_preset_items - free_items)}",
+    )
+    evolution_held_roles = {
+        (entry["species"], entry["item"])
+        for entry in preset_entries
+        if entry["item"] in evolution_items
+    }
+    require(
+        evolution_held_roles == {
+            ("SPECIES_CLAMPERL", "ITEM_DEEP_SEA_TOOTH"),
+            ("SPECIES_CLAMPERL", "ITEM_DEEP_SEA_SCALE"),
+        },
+        f"unexpected evolution-item battle roles: {sorted(evolution_held_roles)}",
+    )
+    require(
+        "PresetRequiresOwnedHeldItem" in read("src/emerald_champions_battle_sets.c"),
+        "protected held-item presets are not gated by actual ownership",
     )
 
     print("core_service_static_checks=PASS")

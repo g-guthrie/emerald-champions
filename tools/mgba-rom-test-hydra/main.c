@@ -35,6 +35,15 @@
 
 #define min(a, b) ((a) < (b) ? (a) : (b))
 
+static int RunnerExitCode(int status)
+{
+    if (WIFEXITED(status))
+        return WEXITSTATUS(status);
+    if (WIFSIGNALED(status))
+        return 128 + WTERMSIG(status);
+    return 2;
+}
+
 #ifndef _GNU_SOURCE
 // Very naive implementation of 'memmem' for systems which don't make it
 // available by default.
@@ -810,8 +819,11 @@ int main(int argc, char *argv[])
         }
         if (runners[i].output_buffer_size > 0)
             fwrite(runners[i].output_buffer, 1, runners[i].output_buffer_size, stdout);
-        if (WIFEXITED(wstatus) && WEXITSTATUS(wstatus) > exit_code)
-            exit_code = WEXITSTATUS(wstatus);
+        int runner_exit_code = RunnerExitCode(wstatus);
+        if (!WIFEXITED(wstatus))
+            fprintf(stderr, "runner %d terminated abnormally (status %d)\n", i, wstatus);
+        if (runner_exit_code > exit_code)
+            exit_code = runner_exit_code;
         passes += runners[i].passes;
         expected_fails += runners[i].expected_fails;
         expected_fails_passing += runners[i].expected_fails_passing;

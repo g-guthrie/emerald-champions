@@ -7,10 +7,17 @@
 
 enum DifficultyLevel GetCurrentDifficultyLevel(void)
 {
+    u16 difficulty;
+
     if (!B_VAR_DIFFICULTY)
         return DIFFICULTY_NORMAL;
 
-    return VarGet(B_VAR_DIFFICULTY);
+    difficulty = VarGet(B_VAR_DIFFICULTY);
+    // Loaded state bypasses the setter. Apply the same bound before callers
+    // use this value as an index into the trainer and partner tables.
+    if (difficulty > DIFFICULTY_MAX)
+        difficulty = DIFFICULTY_MAX;
+    return difficulty;
 }
 
 void SetCurrentDifficultyLevel(enum DifficultyLevel desiredDifficulty)
@@ -76,6 +83,9 @@ enum DifficultyLevel GetBattlePartnerDifficultyLevel(u16 partnerId)
     if (partnerId > TRAINER_PARTNER(PARTNER_NONE))
         partnerId -= TRAINER_PARTNER(PARTNER_NONE);
 
+    if (partnerId >= PARTNER_COUNT)
+        return DIFFICULTY_NORMAL;
+
     if (difficulty == DIFFICULTY_NORMAL)
         return DIFFICULTY_NORMAL;
 
@@ -88,6 +98,7 @@ enum DifficultyLevel GetBattlePartnerDifficultyLevel(u16 partnerId)
 enum DifficultyLevel GetTrainerDifficultyLevel(u16 trainerId)
 {
     enum DifficultyLevel difficulty = GetCurrentDifficultyLevel();
+    trainerId = SanitizeTrainerId(trainerId);
 
     if (difficulty == DIFFICULTY_NORMAL)
         return DIFFICULTY_NORMAL;

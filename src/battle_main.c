@@ -12,6 +12,7 @@
 #include "battle_message.h"
 #include "battle_pyramid.h"
 #include "battle_scripts.h"
+#include "battle_script_commands.h"
 #include "battle_setup.h"
 #include "battle_tower.h"
 #include "battle_z_move.h"
@@ -78,6 +79,9 @@
 #include "constants/trainers.h"
 #include "constants/weather.h"
 #include "cable_club.h"
+#if EC_HEADLESS_FIXTURES
+#include "emerald_champions_headless.h"
+#endif
 
 extern const struct BgTemplate gBattleBgTemplates[];
 extern const struct WindowTemplate *const gBattleWindowTemplates[];
@@ -469,27 +473,28 @@ const u8 *const gStatusConditionStringsTable[][2] =
     {gStatusConditionString_LoveJpn, gText_Love}
 };
 
-// Emerald Champions: snapshot of the player's party and the battle-usable bag
-// pockets taken when a trainer battle starts, restored by the in-battle Restart.
+// Preserve both allied parties exactly as they entered the trainer battle.
+// Eligible Champions trainer battles prohibit Bag actions. Their bag needs no
+// rollback, and copying encrypted slots across battle-start key rotation would
+// corrupt quantities. Each Pokemon carries its own independent encryption key.
 static EWRAM_DATA struct Pokemon sEcRestartParty[PARTY_SIZE] = {0};
-static EWRAM_DATA struct ItemSlot sEcRestartMedicine[BAG_MEDICINE_COUNT] = {0};
-static EWRAM_DATA struct ItemSlot sEcRestartBattleItems[BAG_BATTLE_COUNT] = {0};
+static EWRAM_DATA struct Pokemon sEcRestartPartnerParty[PARTY_SIZE] = {0};
 static EWRAM_DATA bool8 sEcRestartPending = FALSE;
 
 static void EcSnapshotForRestart(void)
 {
     if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER))
         return;
-    memcpy(sEcRestartParty, &gPlayerParty, sizeof(sEcRestartParty));
-    memcpy(sEcRestartMedicine, gSaveBlock3Ptr->bagPocketMedicine, sizeof(sEcRestartMedicine));
-    memcpy(sEcRestartBattleItems, gSaveBlock3Ptr->bagPocketBattle, sizeof(sEcRestartBattleItems));
+    memcpy(sEcRestartParty, gParties[B_TRAINER_PLAYER], sizeof(sEcRestartParty));
+    if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
+        memcpy(sEcRestartPartnerParty, gParties[B_TRAINER_PARTNER], sizeof(sEcRestartPartnerParty));
 }
 
 static void EcRestoreForRestart(void)
 {
-    memcpy(&gPlayerParty, sEcRestartParty, sizeof(sEcRestartParty));
-    memcpy(gSaveBlock3Ptr->bagPocketMedicine, sEcRestartMedicine, sizeof(sEcRestartMedicine));
-    memcpy(gSaveBlock3Ptr->bagPocketBattle, sEcRestartBattleItems, sizeof(sEcRestartBattleItems));
+    memcpy(gParties[B_TRAINER_PLAYER], sEcRestartParty, sizeof(sEcRestartParty));
+    if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
+        memcpy(gParties[B_TRAINER_PARTNER], sEcRestartPartnerParty, sizeof(sEcRestartPartnerParty));
     CalculatePlayerPartyCount();
 }
 
@@ -3822,6 +3827,36 @@ enum
 static void HandleTurnActionSelectionState(void)
 {
     s32 i;
+
+#if EC_HEADLESS_FIXTURES
+    enum EmeraldChampionsHeadlessBattleResolution headlessResolution =
+        EmeraldChampionsHeadlessGetBattleResolution();
+    if (EmeraldChampionsHeadlessBattleAutomationActive()
+     && headlessResolution != EC_HEADLESS_BATTLE_NATIVE)
+    {
+        // The native capture script returns here after setting CAUGHT. Route
+        // that completed outcome through the ordinary end-of-battle table
+        // without recording or resolving the battle a second time.
+        if (gBattleOutcome != 0)
+        {
+            BattleDebug_WonBattle();
+            return;
+        }
+        gEcHeadlessCampaignLastBattleType = gBattleTypeFlags;
+        gEcHeadlessCampaignLastOpponentA = TRAINER_BATTLE_PARAM.opponentA;
+        gEcHeadlessCampaignLastOpponentB = TRAINER_BATTLE_PARAM.opponentB;
+        gEcHeadlessCampaignLastResolution = headlessResolution;
+        gEcHeadlessCampaignBattleSerial++;
+        if (headlessResolution == EC_HEADLESS_BATTLE_CAPTURE)
+        {
+            EmeraldChampionsHeadlessBeginAutoCapture();
+            BattleDebug_CaptureBattle();
+        }
+        else
+            BattleDebug_WonBattle();
+        return;
+    }
+#endif
 
     gAiLogicData->reverseBattlerLogicOrder = RandomPercentage(RNG_AI_REVERSE_BATTLER_LOGIC_ORDER, GetConfig(AI_REVERSE_BATTLER_LOGIC_ORDER_CHANCE)) && IsDoubleBattle();
 

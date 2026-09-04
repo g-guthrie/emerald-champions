@@ -12,13 +12,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 
 caps = {}
-master = (ROOT/"docs/emerald_champions_master_battle_design.txt").read_text()
+master = (ROOT/"data/emerald_champions/emerald_champions_master_battle_design.txt").read_text()
 for block in re.split(r"(?m)^=== ENCOUNTER \d{4} ===$", master)[1:]:
     loc = re.search(r"location: (\S+)", block); cap = re.search(r"strict_cap: (\d+)", block)
     if loc and cap:
         key = "MAP_" + re.sub(r"(?<=[a-z0-9])(?=[A-Z])", "_", loc.group(1).rstrip(";")).upper()
         caps.setdefault(key, int(cap.group(1)))
-sheet = json.load(open(ROOT/"docs/wild_route_sheet.json"))
+sheet = json.load(open(ROOT/"data/emerald_champions/wild_route_sheet.json"))
 for k, v in sheet.items():
     if isinstance(v, dict) and "cap" in v: caps.setdefault(k, v["cap"])
 caps.setdefault("MAP_LITTLEROOT_TOWN", 14); caps.setdefault("MAP_OLDALE_TOWN", 14); caps.setdefault("MAP_ROUTE101", 14)

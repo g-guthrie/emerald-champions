@@ -204,7 +204,7 @@
 #define VAR_TRICK_HOUSE_PUZZLE_7_STATE_2                 0x40B6 // Leftover from RS, never set
 #define VAR_SLATEPORT_FAN_CLUB_STATE                     0x40B7
 #define VAR_EMERALD_CHAMPIONS_SAVE_VERSION                0x40B8 // Versioned migration discriminator; unused in 81e/e7 baselines.
-#define EMERALD_CHAMPIONS_SAVE_VERSION_CURRENT            1
+#define EMERALD_CHAMPIONS_SAVE_VERSION_CURRENT            2
 #define VAR_MT_PYRE_STATE                                0x40B9
 #define VAR_NEW_MAUVILLE_STATE                           0x40BA
 #define VAR_RUSTBORO_GYM_GUIDE_STATE                     0x40BB // 0: entrance advice pending, 1: complete
@@ -242,8 +242,8 @@
 #define VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS               0x40DB
 #define VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS                 0x40DC
 #define VAR_GIFT_PICHU_SLOT                              0x40DD
-#define VAR_GIFT_UNUSED_1                                0x40DE // Var is written to, but never read
-#define VAR_GIFT_UNUSED_2                                0x40DF // Var is written to, but never read
+#define VAR_LEGENDARY_RELIC_DELIVERY_0                    0x40DE // Pending relic bits 0-15; initialized by save v2 migration.
+#define VAR_LEGENDARY_RELIC_DELIVERY_1                    0x40DF // Pending bits 16-23 and earned species bits 24-29.
 #define VAR_GIFT_UNUSED_3                                0x40E0 // Var is written to, but never read
 #define VAR_GIFT_UNUSED_4                                0x40E1 // Var is written to, but never read
 #define VAR_GIFT_UNUSED_5                                0x40E2 // Var is written to, but never read

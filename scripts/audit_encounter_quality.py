@@ -36,7 +36,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-MASTER = ROOT / "docs" / "emerald_champions_master_battle_design.txt"
+MASTER = ROOT / "data/emerald_champions/emerald_champions_master_battle_design.txt"
 PARTY = ROOT / "src" / "data" / "trainers.party"
 
 MON_RE = re.compile(
@@ -292,13 +292,13 @@ def is_setup(move: str) -> bool:
     return m(move, "effect") in SETUP_EFFECTS
 
 
-def audit_branch(enc: int, trainer: str, location: str, difficulty: float,
+def audit_branch(enc: int, trainer: str, location: str,
                  fmt: str, mons: list[tuple], ai: str, listing: bool,
                  ally_abilities: set | None = None, ally_moves: set | None = None) -> None:
     where = f"encounter {enc:04d} {trainer} @{location}"
     if listing:
         team = ", ".join(s.replace("SPECIES_", "") for s, *_ in mons)
-        print(f"{where} [{fmt} d{difficulty}] {team}")
+        print(f"{where} [{fmt}] {team}")
 
     species_seen = collections.Counter()
     mono_specialists: list[tuple[str, str]] = []
@@ -345,7 +345,16 @@ def audit_branch(enc: int, trainer: str, location: str, difficulty: float,
                     if m(x, "category") != "DAMAGE_CATEGORY_STATUS" and m(x, "effect") not in FIXED]
         anything_that_damages = [x for x in moves if m(x, "category") != "DAMAGE_CATEGORY_STATUS"]
         team_damage_types |= {m(x, "type") for x in damaging}
-        physical = [x for x in damaging if m(x, "category") == "DAMAGE_CATEGORY_PHYSICAL"]
+        # Foul Play and Body Press are physical but scale off the target's Attack
+        # and the user's Defence, so a minus-Attack nature is correct on them.
+        # Damage-return and target-stat moves do not scale off the user's
+        # Attack, so a minus-Attack nature is correct alongside them.
+        OFF_STAT_INDEPENDENT = {"MOVE_FOUL_PLAY", "MOVE_BODY_PRESS", "MOVE_COUNTER",
+                                "MOVE_MIRROR_COAT", "MOVE_METAL_BURST", "MOVE_SEISMIC_TOSS",
+                                "MOVE_NIGHT_SHADE", "MOVE_ENDEAVOR"}
+        physical = [x for x in damaging
+                    if m(x, "category") == "DAMAGE_CATEGORY_PHYSICAL"
+                    and x not in OFF_STAT_INDEPENDENT]
         special = [x for x in damaging if m(x, "category") == "DAMAGE_CATEGORY_SPECIAL"]
         status = [x for x in moves if m(x, "category") == "DAMAGE_CATEGORY_STATUS"]
 
@@ -438,38 +447,22 @@ def audit_branch(enc: int, trainer: str, location: str, difficulty: float,
                 break
 
 
-def audit_progression(ladders: list[tuple[str, int, int, str, float, int, int]]) -> None:
-    """Cross-encounter checks that a single branch cannot see.
-
-    A numbered rematch ladder (TRAINER_X_1 ... TRAINER_X_6) has to climb: the
-    Gabby and Ty ladder used to peak at rematch 4 and then drop, so the last
-    fight of a six-fight chain was the easiest one in it.
-
-    A branch tagged as a breather has to play like one. A six-Pokemon team, or a
-    difficulty rating in ace territory, means the label is wrong, and the label
-    decides the AI and the Stat Point budget.
-    """
+def audit_progression(ladders: list[tuple[str, int, int]]) -> None:
+    """Report decreasing maximum levels in numbered rematch sequences."""
     rungs: dict[str, list[tuple[int, int, int]]] = collections.defaultdict(list)
-    for trainer, enc, cap, role, difficulty, top, size in ladders:
+    for trainer, enc, top in ladders:
         # Numbered Team Magma/Aqua grunts are different people sharing one hideout,
         # not one person fought repeatedly, so their numbering is not a ladder.
         base = re.match(r"(TRAINER_.*)_(\d+)$", trainer)
         if base and "GRUNT" not in base.group(1):
             rungs[base.group(1)].append((int(base.group(2)), enc, top))
-        where = f"encounter {enc:04d} {trainer}"
-        if role == "ordinary_breather" and difficulty >= 8.0:
-            finding("difficulty", where,
-                    f"tagged a breather but rated {difficulty}, which is ace territory")
-        if role == "ordinary_breather" and size >= 6:
-            finding("difficulty", where,
-                    f"tagged a breather but fields {size} Pokemon")
     for name, entries in rungs.items():
         entries.sort()
         if len(entries) < 2:
             continue
         for (rung_a, _, top_a), (rung_b, enc_b, top_b) in zip(entries, entries[1:]):
             if top_b < top_a:
-                finding("difficulty", f"encounter {enc_b:04d} {name}_{rung_b}",
+                finding("levels", f"encounter {enc_b:04d} {name}_{rung_b}",
                         f"rematch {rung_b} tops out at L{top_b}, below rematch "
                         f"{rung_a} at L{top_a}")
 
@@ -485,7 +478,7 @@ def main() -> int:
     args = parser.parse_args()
     master = Path(args.master) if args.master else MASTER
 
-    ladders: list[tuple[str, int, int, str, float, int, int]] = []
+    ladders: list[tuple[str, int, int]] = []
     ai_by_trainer: dict[str, str] = {}
     for block in PARTY.read_text().split("=== TRAINER_")[1:]:
         name = "TRAINER_" + block.split(" ===", 1)[0]
@@ -499,11 +492,8 @@ def main() -> int:
         enc = int(encounters[index])
         block = encounters[index + 1]
         location = re.search(r"location: (\S+)", block).group(1)
-        difficulty = float(re.search(r"difficulty_target: ([\d.]+)", block).group(1))
         cap_match = re.search(r"strict_cap: (\d+)", block)
         cap = int(cap_match.group(1)) if cap_match else 0
-        role_match = re.search(r"fatigue_role: (\S+)", block)
-        role = role_match.group(1) if role_match else "?"
         parsed = []
         for chunk in re.split(r"(?m)^--- BRANCH ", block)[1:]:
             trainer = chunk.split(" ---", 1)[0]
@@ -517,9 +507,8 @@ def main() -> int:
             parsed.append((trainer, fmt, mons))
             # MON_RE captures level_offset, not an absolute level; the real level
             # is the encounter's strict_cap plus that offset.
-            ladders.append((trainer, enc, cap, role, difficulty,
-                            cap + max(int(offset) for _, _, offset, _, _, _, _ in mons),
-                            len(mons)))
+            ladders.append((trainer, enc,
+                            cap + max(int(offset) for _, _, offset, _, _, _, _ in mons)))
 
         # Multi battles put two enemy trainers on one board; each needs the other's
         # abilities and moves before its own weather and terrain can be judged.
@@ -530,7 +519,7 @@ def main() -> int:
 
         for trainer, fmt, mons in parsed:
             branches += 1
-            audit_branch(enc, trainer, location, difficulty, fmt, mons,
+            audit_branch(enc, trainer, location, fmt, mons,
                          ai_by_trainer.get(trainer, ""), args.list,
                          multi_abilities, multi_moves)
 

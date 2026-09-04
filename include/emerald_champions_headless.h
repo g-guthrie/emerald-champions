@@ -62,6 +62,38 @@ enum EmeraldChampionsHeadlessScenario
     EC_HEADLESS_SCENARIO_DEWFORD_GYM_ENTRY,
     EC_HEADLESS_SCENARIO_START_MENU_FULL,
     EC_HEADLESS_SCENARIO_MAP_SWEEP,
+    EC_HEADLESS_SCENARIO_BATTLE_SET_LONG_LIST,
+    EC_HEADLESS_SCENARIO_CAMPAIGN_AUTOWIN,
+    EC_HEADLESS_SCENARIO_CAPTURE_TO_PARTY,
+    EC_HEADLESS_SCENARIO_CAPTURE_TO_PC,
+    EC_HEADLESS_SCENARIO_CAPTURE_QUEST_DIANCIE,
+    EC_HEADLESS_SCENARIO_CAPTURE_QUEST_REGISTEEL,
+    EC_HEADLESS_SCENARIO_CAPTURE_QUEST_LATIOS,
+    EC_HEADLESS_SCENARIO_CAPTURE_ORDINARY_FIRST,
+    EC_HEADLESS_SCENARIO_ROXANNE_VICTORY,
+    EC_HEADLESS_SCENARIO_FIRST_CENTER_ACQUISITION,
+};
+
+enum EmeraldChampionsHeadlessBattleSetListState
+{
+    EC_HEADLESS_BATTLE_SET_LIST_TOP,
+    EC_HEADLESS_BATTLE_SET_LIST_MIDDLE,
+    EC_HEADLESS_BATTLE_SET_LIST_BOTTOM,
+};
+
+enum EmeraldChampionsHeadlessCampaignQuery
+{
+    EC_HEADLESS_CAMPAIGN_QUERY_NONE,
+    EC_HEADLESS_CAMPAIGN_QUERY_FLAG,
+    EC_HEADLESS_CAMPAIGN_QUERY_VAR,
+    EC_HEADLESS_CAMPAIGN_QUERY_OBJECT,
+};
+
+enum EmeraldChampionsHeadlessBattleResolution
+{
+    EC_HEADLESS_BATTLE_NATIVE,
+    EC_HEADLESS_BATTLE_WIN,
+    EC_HEADLESS_BATTLE_CAPTURE,
 };
 
 enum EmeraldChampionsHeadlessPokedexState
@@ -103,6 +135,35 @@ extern volatile u32 gEcHeadlessFixtureSetupResult;
 extern volatile u32 gEcHeadlessFixtureObservedResult;
 extern volatile u32 gEcHeadlessFixtureParam;
 extern volatile u32 gEcHeadlessFixtureTrigger;
+extern volatile u32 gEcHeadlessCampaignBattleSerial;
+extern volatile u32 gEcHeadlessCampaignLastBattleType;
+extern volatile u32 gEcHeadlessCampaignLastOpponentA;
+extern volatile u32 gEcHeadlessCampaignLastOpponentB;
+extern volatile u32 gEcHeadlessCampaignMapId;
+extern volatile u32 gEcHeadlessCampaignMapGroup;
+extern volatile u32 gEcHeadlessCampaignMapNum;
+extern volatile u32 gEcHeadlessCampaignPlayerX;
+extern volatile u32 gEcHeadlessCampaignPlayerY;
+extern volatile u32 gEcHeadlessCampaignPlayerFacing;
+extern volatile u32 gEcHeadlessCampaignControlsLocked;
+extern volatile u32 gEcHeadlessCampaignScriptEnabled;
+extern volatile u32 gEcHeadlessCampaignInBattle;
+extern volatile u32 gEcHeadlessCampaignQueryKind;
+extern volatile u32 gEcHeadlessCampaignQueryId;
+extern volatile u32 gEcHeadlessCampaignQueryValue;
+extern volatile u32 gEcHeadlessCampaignQueryObjectActive;
+extern volatile u32 gEcHeadlessCampaignQueryObjectX;
+extern volatile u32 gEcHeadlessCampaignQueryObjectY;
+extern volatile u32 gEcHeadlessCampaignCaptureSerial;
+extern volatile u32 gEcHeadlessCampaignLastCapturedSpecies;
+extern volatile u32 gEcHeadlessCampaignLastCaptureResult;
+extern volatile u32 gEcHeadlessCampaignCaptureBookkeepingValid;
+extern volatile u32 gEcHeadlessCampaignLastResolution;
+bool32 EmeraldChampionsHeadlessBattleAutomationActive(void);
+bool32 EmeraldChampionsHeadlessAutoCaptureActive(void);
+enum EmeraldChampionsHeadlessBattleResolution EmeraldChampionsHeadlessGetBattleResolution(void);
+void EmeraldChampionsHeadlessBeginAutoCapture(void);
+void EmeraldChampionsHeadlessRecordCapture(enum Species species, u32 result);
 void CB2_EmeraldChampionsHeadlessFixture(void);
 void EmeraldChampionsHeadlessObserve(void);
 #endif

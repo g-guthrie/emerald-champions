@@ -16,7 +16,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PARTIES = ROOT / "src/data/trainers.party"
-MASTER = ROOT / "docs/emerald_champions_master_battle_design.txt"
+MASTER = ROOT / "data/emerald_champions/emerald_champions_master_battle_design.txt"
 MARKER = re.compile(r"(?m)^=== (TRAINER_[A-Z0-9_]+) ===$")
 
 
