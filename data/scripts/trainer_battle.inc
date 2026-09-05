@@ -195,3 +195,16 @@ EventSnippet_NotEnoughMonsForDoubleBattle::
 	waitbuttonpress
 	release
 	end
+
+@ Checked story doubles must reject before their opening actor choreography.
+@ This uses the same party predicate as the battle command; subsequent attrition
+@ battles retain their explicit allow-single behavior.
+EventScript_CheckStoryDoubleBattleParty::
+	special HasEnoughMonsForDoubleBattle
+	goto_if_ne VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS, EventScript_StoryDoubleBattlePartyRejected
+	return
+
+EventScript_StoryDoubleBattlePartyRejected::
+	msgbox EmeraldChampions_Text_NeedTwoPokemon, MSGBOX_DEFAULT
+	releaseall
+	end

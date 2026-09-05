@@ -67,7 +67,7 @@ SINGLE_BATTLE_TEST("Ultra Burst affects turn order")
         MESSAGE("Necrozma used Celebrate!");
         MESSAGE("The opposing Wobbuffet used Celebrate!");
     } THEN {
-        EXPECT_EQ(player->speed, 263);
+        EXPECT_EQ(player->speed, P_STAT_CALCULATION >= GEN_CHAMPIONS ? 294 : 263);
     }
 }
 

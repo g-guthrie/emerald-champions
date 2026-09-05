@@ -1138,12 +1138,13 @@ static bool32 CanMonSurviveHazardSwitchin(struct SwitchAiContext *switchContext)
     enum Move aiMove;
 
     if (ability == ABILITY_REGENERATOR)
-        battlerHp = (battlerHp * 133) / 100; // Account for Regenerator healing
+        battlerHp = min(gBattleMons[switchContext->battler].maxHP,
+                        battlerHp + gBattleMons[switchContext->battler].maxHP / 3);
 
     hazardDamage = GetSwitchinHazardsDamage(switchContext->battler);
 
     // Battler will faint to hazards, check to see if another mon can clear them
-    if (hazardDamage > battlerHp)
+    if (hazardDamage >= battlerHp)
     {
         for (u32 monIndex = 0; monIndex < switchContext->lastId; monIndex++)
         {

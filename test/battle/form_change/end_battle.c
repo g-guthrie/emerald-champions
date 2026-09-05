@@ -25,10 +25,9 @@ SINGLE_BATTLE_TEST("Zacian returns its Hero Form upon battle end")
     }
 }
 
-SINGLE_BATTLE_TEST("Zacian returns its Hero Form upon battle end")
+SINGLE_BATTLE_TEST("Zacian restores Iron Head while retaining Behemoth Blade PP at battle end")
 {
     GIVEN {
-        ASSUME(GetMovePP(MOVE_BEHEMOTH_BLADE) == 5);
         PLAYER(SPECIES_ZACIAN_HERO) { Item(ITEM_RUSTED_SWORD); Moves(MOVE_IRON_HEAD, MOVE_CELEBRATE); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -36,7 +35,7 @@ SINGLE_BATTLE_TEST("Zacian returns its Hero Form upon battle end")
     } THEN {
         EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_ZACIAN_HERO);
         EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE1), MOVE_IRON_HEAD);
-        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP1), 5); // Behemoth Blade's PP
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP1), CalculatePPWithBonus(MOVE_BEHEMOTH_BLADE, 0, 0));
     }
 }
 
@@ -52,10 +51,9 @@ SINGLE_BATTLE_TEST("Zamazenta returns its Hero Form upon battle end")
     }
 }
 
-SINGLE_BATTLE_TEST("Zamazenta returns its Hero Form upon battle end")
+SINGLE_BATTLE_TEST("Zamazenta restores Iron Head while retaining Behemoth Bash PP at battle end")
 {
     GIVEN {
-        ASSUME(GetMovePP(MOVE_BEHEMOTH_BASH) == 5);
         PLAYER(SPECIES_ZAMAZENTA_HERO) { Item(ITEM_RUSTED_SHIELD); Moves(MOVE_IRON_HEAD, MOVE_CELEBRATE); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -63,7 +61,7 @@ SINGLE_BATTLE_TEST("Zamazenta returns its Hero Form upon battle end")
     } THEN {
         EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_ZAMAZENTA_HERO);
         EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE1), MOVE_IRON_HEAD);
-        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP1), 5); // Behemoth Bash's PP
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP1), CalculatePPWithBonus(MOVE_BEHEMOTH_BASH, 0, 0));
     }
 }
 

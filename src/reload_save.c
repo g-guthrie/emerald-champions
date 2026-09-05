@@ -34,14 +34,11 @@ void ReloadSave(void)
     SetMainCallback2(CB2_ContinueSavedGame);
 }
 
-// Emerald Champions: instant retry from the Start menu and after a lost
-// battle. Only offered while a real save exists on the cart, since reloading
-// an empty or corrupt file would reset the game to defaults.
+// Reload restores the last disk save, independently of battle Retry.
+// SAVE_STATUS_ERROR means loading recovered a valid redundant slot.
 bool32 CanReloadLastSave(void)
 {
-    if (gSaveFileStatus == SAVE_STATUS_CORRUPT)
-        return FALSE;
-    return gSaveFileStatus == SAVE_STATUS_OK || !gDifferentSaveFile;
+    return gSaveFileStatus == SAVE_STATUS_OK || gSaveFileStatus == SAVE_STATUS_ERROR;
 }
 
 void ReloadLastSave(void)

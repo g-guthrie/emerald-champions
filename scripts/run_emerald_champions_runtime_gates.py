@@ -85,7 +85,7 @@ class RuntimeGate:
 
 
 RUNTIME_GATES = (
-    RuntimeGate("*Champions", 115),
+    RuntimeGate("*Champions", 117),
     RuntimeGate("Blitz Boxer", 1),
     RuntimeGate("*preparation", 3),
     RuntimeGate("*Item descriptions fit on Bag and Shop Screen", 1),
@@ -255,9 +255,7 @@ RUNTIME_GATES = (
     ),
     RuntimeGate(
         "test/battle/ai/ai_switching.c",
-        144,
-        maximum_known_failing=1,
-        allowed_known_failing=("AI_SMART_MON_CHOICES: AI sees its own terrain setting ability's effect on failed moves when considering switchin candidates",),
+        147,
         allowed_failing=(
             'AI_FLAG_SMART_SWITCHING: AI will not switch out if Pokemon would faint to hazards unless party member can clear them 1/2',
             'AI_SMART_MON_CHOICES: AI sees its own terrain setting ability when considering switchin candidates',

@@ -497,8 +497,10 @@ static bool32 DoesMonWantEvenHp(struct Pokemon *mon)
 
 bool32 TryNormalizeEmeraldChampionsBellyDrumHpParity(struct Pokemon *mon)
 {
-    static const s8 nudges[] = {1, -1, 2, -2};
+    static const s8 nudges[] = {0, 1, -1, 2, -2};
     u32 hpPoints;
+    u32 anchorHpPoints;
+    s32 choice;
     u32 total = 0;
     u32 currentHp;
     u32 oldMaxHp;
@@ -513,16 +515,29 @@ bool32 TryNormalizeEmeraldChampionsBellyDrumHpParity(struct Pokemon *mon)
         return FALSE;
 
     hpPoints = GetMonData(mon, MON_DATA_HP_EV);
+    anchorHpPoints = hpPoints;
+    choice = GetEmeraldChampionsCurrentBattleSetChoice(mon);
+    if (choice >= 0)
+        anchorHpPoints = GetEmeraldChampionsBattleSetPresetForFormat(
+            mon, choice, EC_BATTLE_FORMAT_DOUBLES)->statPoints[STAT_HP];
+    else
+    {
+        choice = GetEmeraldChampionsCurrentBattleSetChoiceForFormat(mon, EC_BATTLE_FORMAT_SINGLES);
+        if (choice >= 0)
+            anchorHpPoints = GetEmeraldChampionsBattleSetPresetForFormat(
+                mon, choice, EC_BATTLE_FORMAT_SINGLES)->statPoints[STAT_HP];
+    }
     for (u32 stat = 0; stat < NUM_STATS; stat++)
         total += GetMonData(mon, MON_DATA_HP_EV + stat);
     currentHp = GetMonData(mon, MON_DATA_HP);
 
-    // The deviation stays inside the tolerance GetEmeraldChampionsCurrentBattleSetChoice
-    // allows, so a parity-corrected party still reads as the authored set.
+    // Anchor recognized sets to their authored investment. Using the current
+    // investment lets successive Leveler visits accumulate deviations beyond
+    // the recognition tolerance. Custom spreads retain their current anchor.
     for (u32 i = 0; i < ARRAY_COUNT(nudges); i++)
     {
-        s32 target = (s32)hpPoints + nudges[i];
-        s32 nudge = nudges[i];
+        s32 target = (s32)anchorHpPoints + nudges[i];
+        s32 nudge = target - (s32)hpPoints;
 
         if (target < 0 || target > EC_STAT_POINTS_PER_STAT || (s32)total + nudge > EC_STAT_POINT_BUDGET)
             continue;

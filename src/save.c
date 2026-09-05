@@ -6,6 +6,7 @@
 #include "task.h"
 #include "decompress.h"
 #include "load_save.h"
+#include "new_game.h"
 #include "overworld.h"
 #include "hall_of_fame.h"
 #include "item.h"
@@ -500,8 +501,8 @@ static u8 CopySaveSlotData(u16 sectorId, struct SaveSectorLocation *locations)
         ReadFlashSector(i + slotOffset, gReadWriteSector);
 
         id = gReadWriteSector->id;
-        if (id == 0)
-            gLastWrittenSector = i;
+        if (gReadWriteSector->signature != SECTOR_SIGNATURE || id >= NUM_SECTORS_PER_SLOT)
+            continue;
 
         checksum = CalculateChecksum(gReadWriteSector->data, locations[id].size);
 
@@ -509,6 +510,8 @@ static u8 CopySaveSlotData(u16 sectorId, struct SaveSectorLocation *locations)
         if (gReadWriteSector->signature == SECTOR_SIGNATURE && gReadWriteSector->checksum == checksum)
         {
             u16 j;
+            if (id == 0)
+                gLastWrittenSector = i;
             for (j = 0; j < locations[id].size; j++)
                 ((u8 *)locations[id].data)[j] = gReadWriteSector->data[j];
             CopyToSaveBlock3(id, gReadWriteSector);
@@ -536,6 +539,8 @@ static u8 GetSaveValidStatus(const struct SaveSectorLocation *locations)
         if (gReadWriteSector->signature == SECTOR_SIGNATURE)
         {
             signatureValid = TRUE;
+            if (gReadWriteSector->id >= NUM_SECTORS_PER_SLOT)
+                continue;
             checksum = CalculateChecksum(gReadWriteSector->data, locations[gReadWriteSector->id].size);
             if (gReadWriteSector->checksum == checksum)
             {
@@ -568,6 +573,8 @@ static u8 GetSaveValidStatus(const struct SaveSectorLocation *locations)
         if (gReadWriteSector->signature == SECTOR_SIGNATURE)
         {
             signatureValid = TRUE;
+            if (gReadWriteSector->id >= NUM_SECTORS_PER_SLOT)
+                continue;
             checksum = CalculateChecksum(gReadWriteSector->data, locations[gReadWriteSector->id].size);
             if (gReadWriteSector->checksum == checksum)
             {
@@ -782,6 +789,14 @@ u8 TrySavingData(u8 saveType)
     HandleSavingData(saveType);
     if (!gDamagedSaveSectors)
     {
+        // Partial link saves omit the PC and cannot establish a full save.
+        // Publish a new/repaired file only once its full write succeeds;
+        // a failed later attempt must preserve the previous file's status.
+        if (saveType != SAVE_LINK && saveType != SAVE_EREADER)
+        {
+            gSaveFileStatus = SAVE_STATUS_OK;
+            gDifferentSaveFile = FALSE;
+        }
         gSaveAttemptStatus = SAVE_STATUS_OK;
         return SAVE_STATUS_OK;
     }

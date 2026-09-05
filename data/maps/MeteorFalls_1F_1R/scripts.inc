@@ -27,6 +27,7 @@ MeteorFalls_1F_1R_EventScript_OpenStevensCave::
 
 MeteorFalls_1F_1R_EventScript_MagmaStealsMeteoriteScene::
 	lockall
+	call EventScript_CheckStoryDoubleBattleParty
 	playbgm MUS_ENCOUNTER_MAGMA, FALSE
 	applymovement LOCALID_PLAYER, Common_Movement_FaceDown
 	waitmovement 0

@@ -572,7 +572,10 @@ bool32 Ai_IsPriorityBlocked(enum BattlerId battlerAtk, enum BattlerId battlerDef
 
 bool32 AI_CanMoveBeBlockedByTarget(struct DamageContext *ctx)
 {
-    return CanMoveBeBlockedByTarget(ctx, GetBattleMovePriority(ctx->battlerAtk, ctx->abilities[ctx->battlerAtk], ctx->move));
+    s32 priority = GetBattleMovePriority(ctx->battlerAtk, ctx->abilities[ctx->battlerAtk], ctx->move);
+
+    return CanMoveBeBlockedByTarget(ctx, priority)
+        || CanPsychicTerrainProtectTarget(ctx, priority);
 }
 
 // To save computation time this function has 2 variants. One saves, sets and restores battlers, while the other doesn't.
@@ -687,7 +690,7 @@ bool32 IsDamageMoveUnusable(struct DamageContext *ctx)
             return TRUE;
         break;
     case EFFECT_STEEL_ROLLER:
-        if (gFieldTimers.terrain == B_TERRAIN_NONE)
+        if (ctx->terrain == B_TERRAIN_NONE)
             return TRUE;
         break;
     case EFFECT_POLTERGEIST:
@@ -1928,6 +1931,22 @@ u32 AI_GetSwitchinWeather(enum BattlerId battler)
         return B_WEATHER_NONE;
     if (ability == ABILITY_CLOUD_NINE || ability == ABILITY_AIR_LOCK)
         return B_WEATHER_NONE;
+    if (gBattleStruct->overworldWeatherPresent)
+        return gBattleWeather;
+
+    // Primal weather abilities can replace one another, unlike ordinary setters.
+    switch (ability)
+    {
+    case ABILITY_DESOLATE_LAND:
+        return B_WEATHER_SUN_PRIMAL;
+    case ABILITY_PRIMORDIAL_SEA:
+        return B_WEATHER_RAIN_PRIMAL;
+    case ABILITY_DELTA_STREAM:
+        return B_WEATHER_STRONG_WINDS;
+    default:
+        break;
+    }
+
     if (gBattleWeather & B_WEATHER_PRIMAL_ANY)
         return gBattleWeather;
 

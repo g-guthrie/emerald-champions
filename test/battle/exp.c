@@ -1,6 +1,8 @@
 #include "global.h"
 #include "test/battle.h"
 
+#if B_EC_BATTLE_EXP
+
 WILD_BATTLE_TEST("Pokemon gain experience after catching a Pokemon (Gen6+)")
 {
     u8 level = 0;
@@ -234,3 +236,110 @@ AI_ONE_VS_TWO_BATTLE_TEST("Both opponent's Pokemon give experience in battle aga
         EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_EXP), expectedXp);
     }
 }
+
+#else
+
+// Disabled experience is a gameplay contract, including recipients and bonuses
+// that would otherwise gain experience. Keep the enabled-mode tests above.
+WILD_BATTLE_TEST("Disabled battle experience preserves active and Exp Share party members after a wild knockout")
+{
+    enum Item item = ITEM_NONE;
+    PARAMETRIZE { item = ITEM_NONE; }
+    PARAMETRIZE { item = ITEM_LUCKY_EGG; }
+
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Level(1); Item(item); }
+        PLAYER(SPECIES_WYNAUT) { Level(1); Item(ITEM_EXP_SHARE); }
+        OPPONENT(SPECIES_CATERPIE) { Level(10); HP(1); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SCRATCH); }
+    } SCENE {
+        MESSAGE("Wobbuffet used Scratch!");
+        MESSAGE("The wild Caterpie fainted!");
+        NOT EXPERIENCE_BAR(player);
+        NOT MESSAGE("The rest of your team gained EXP. Points thanks to the Exp. Share!");
+    } THEN {
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_EXP), gExperienceTables[gSpeciesInfo[SPECIES_WOBBUFFET].growthRate][1]);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_EXP), gExperienceTables[gSpeciesInfo[SPECIES_WYNAUT].growthRate][1]);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_LEVEL), 1);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_LEVEL), 1);
+    }
+}
+
+WILD_BATTLE_TEST("Disabled battle experience preserves party experience after catching a Pokemon")
+{
+    u32 config = 0;
+    PARAMETRIZE { config = GEN_5; }
+    PARAMETRIZE { config = GEN_6; }
+
+    GIVEN {
+        WITH_CONFIG(B_EXP_CATCH, config);
+        PLAYER(SPECIES_WOBBUFFET) { Level(1); Item(ITEM_LUCKY_EGG); }
+        OPPONENT(SPECIES_CATERPIE) { HP(1); }
+    } WHEN {
+        TURN { USE_ITEM(player, ITEM_ULTRA_BALL, WITH_RNG(RNG_BALLTHROW_SHAKE, 0)); }
+    } SCENE {
+        MESSAGE("You used Ultra Ball!");
+        ANIMATION(ANIM_TYPE_SPECIAL, B_ANIM_BALL_THROW, player);
+        NOT EXPERIENCE_BAR(player);
+    } THEN {
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_EXP), gExperienceTables[gSpeciesInfo[SPECIES_WOBBUFFET].growthRate][1]);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_LEVEL), 1);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_SPECIES), SPECIES_CATERPIE);
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("Disabled battle experience preserves both player Pokemon in trainer doubles")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Level(1); }
+        PLAYER(SPECIES_DITTO) { Level(1); }
+        OPPONENT(SPECIES_BRELOOM) { Moves(MOVE_MEMENTO); }
+        OPPONENT(SPECIES_BRELOOM) { Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { }
+    } THEN {
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_EXP), gExperienceTables[gSpeciesInfo[SPECIES_WOBBUFFET].growthRate][1]);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_EXP), gExperienceTables[gSpeciesInfo[SPECIES_DITTO].growthRate][1]);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_LEVEL), 1);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_LEVEL), 1);
+    }
+}
+
+AI_TWO_VS_ONE_BATTLE_TEST("Disabled battle experience preserves player and partner Pokemon")
+{
+    GIVEN {
+        PLAYER(SPECIES_METAPOD) { Level(1); }
+        PARTNER(SPECIES_DITTO) { Level(1); }
+        OPPONENT(SPECIES_BRELOOM) { Moves(MOVE_MEMENTO); }
+        OPPONENT(SPECIES_BRELOOM) { Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { }
+    } THEN {
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_EXP), gExperienceTables[gSpeciesInfo[SPECIES_METAPOD].growthRate][1]);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PARTNER][0], MON_DATA_EXP), gExperienceTables[gSpeciesInfo[SPECIES_DITTO].growthRate][1]);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_LEVEL), 1);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PARTNER][0], MON_DATA_LEVEL), 1);
+    }
+}
+
+AI_ONE_VS_TWO_BATTLE_TEST("Disabled battle experience preserves party Pokemon after both opposing trainers lose a Pokemon")
+{
+    GIVEN {
+        PLAYER(SPECIES_METAPOD) { Level(1); Speed(3); }
+        PLAYER(SPECIES_WOBBUFFET) { Level(100); Speed(3); }
+        OPPONENT_B(SPECIES_WYNAUT) { Moves(MOVE_MEMENTO); Speed(2); }
+        OPPONENT_B(SPECIES_WYNAUT) { Moves(MOVE_CELEBRATE); Speed(1); }
+        OPPONENT_A(SPECIES_WOBBUFFET) { Moves(MOVE_MEMENTO); Speed(1); }
+        OPPONENT_A(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); Speed(1); }
+    } WHEN {
+        TURN { }
+    } THEN {
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_EXP), gExperienceTables[gSpeciesInfo[SPECIES_METAPOD].growthRate][1]);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_EXP), gExperienceTables[gSpeciesInfo[SPECIES_WOBBUFFET].growthRate][100]);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_LEVEL), 1);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_LEVEL), 100);
+    }
+}
+
+#endif // B_EC_BATTLE_EXP

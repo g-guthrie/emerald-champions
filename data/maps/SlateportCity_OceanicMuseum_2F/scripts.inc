@@ -3,6 +3,7 @@ SlateportCity_OceanicMuseum_2F_MapScripts::
 
 SlateportCity_OceanicMuseum_2F_EventScript_CaptStern::
 	lock
+	call EventScript_CheckStoryDoubleBattleParty
 	faceplayer
 	msgbox SlateportCity_OceanicMuseum_2F_Text_ThankYouForTheParts, MSGBOX_DEFAULT
 	closemessage

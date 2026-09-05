@@ -3,6 +3,7 @@ SeafloorCavern_Room9_MapScripts::
 
 SeafloorCavern_Room9_EventScript_ArchieAwakenKyogre::
 	lockall
+	call EventScript_CheckStoryDoubleBattleParty
 	setvar VAR_0x8004, LOCALID_SEAFLOOR_CAVERN_ARCHIE
 	setvar VAR_0x8005, LOCALID_SEAFLOOR_CAVERN_MAXIE
 	setvar VAR_0x8006, LOCALID_SEAFLOOR_CAVERN_GRUNT_1

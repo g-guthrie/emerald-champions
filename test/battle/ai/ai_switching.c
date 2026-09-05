@@ -2,6 +2,7 @@
 #include "test/battle.h"
 #include "battle_ai_main.h"
 #include "battle_ai_util.h"
+#include "battle_ai_switch.h"
 
 AI_SINGLE_BATTLE_TEST("AI gets baited by Protect Switch tactics") // This behavior is to be fixed.
 {
@@ -2431,7 +2432,6 @@ AI_SINGLE_BATTLE_TEST("AI_SMART_MON_CHOICES: AI sees its own terrain setting abi
 
 AI_SINGLE_BATTLE_TEST("AI_SMART_MON_CHOICES: AI sees its own terrain setting ability's effect on failed moves when considering switchin candidates")
 {
-    KNOWN_FAILING; // Fails because the AI can't currently see the arbitrary terrain passed to AI_CalcDamage in CanAbilityBlockMove
     GIVEN {
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_SMART_MON_CHOICES | AI_FLAG_OMNISCIENT);
         PLAYER(SPECIES_ZIGZAGOON) { Moves(MOVE_PROTECT, MOVE_QUICK_ATTACK); }
@@ -2705,5 +2705,94 @@ AI_SINGLE_BATTLE_TEST("AI can switch out if it loses the 1v1")
         OPPONENT(SPECIES_AGGRON);
     } WHEN {
         TURN { EXPECT_SWITCH(opponent, 1); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_MON_CHOICES: Steel Roller uses simulated switchin terrain")
+{
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_STEEL_ROLLER) == EFFECT_STEEL_ROLLER);
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_SMART_MON_CHOICES);
+        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_STEEL_ROLLER, MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_CELEBRATE); EXPECT_MOVE(opponent, MOVE_CELEBRATE); }
+    } THEN {
+        enum BattlerId battlerAtk = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+        enum BattlerId battlerDef = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
+
+        EXPECT_EQ(gFieldTimers.terrain, B_TERRAIN_NONE);
+        CalcBattlerAiMovesData(gAiLogicData, battlerAtk, battlerDef, AI_GetWeather(), B_TERRAIN_PSYCHIC);
+        EXPECT_GT(gAiLogicData->simulatedDmg[battlerAtk][battlerDef][0].median, 0);
+        EXPECT_EQ(gFieldTimers.terrain, B_TERRAIN_NONE);
+
+        CalcBattlerAiMovesData(gAiLogicData, battlerAtk, battlerDef, AI_GetWeather(), B_TERRAIN_NONE);
+        EXPECT_EQ(gAiLogicData->simulatedDmg[battlerAtk][battlerDef][0].median, 0);
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_MON_CHOICES: Primal switchin weather replaces weather and respects locks")
+{
+    enum Ability ability;
+    u32 expectedWeather;
+
+    PARAMETRIZE { ability = ABILITY_DESOLATE_LAND; expectedWeather = B_WEATHER_SUN_PRIMAL; }
+    PARAMETRIZE { ability = ABILITY_PRIMORDIAL_SEA; expectedWeather = B_WEATHER_RAIN_PRIMAL; }
+    PARAMETRIZE { ability = ABILITY_DELTA_STREAM; expectedWeather = B_WEATHER_STRONG_WINDS; }
+
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_SMART_MON_CHOICES);
+        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_CELEBRATE); EXPECT_MOVE(opponent, MOVE_CELEBRATE); }
+    } THEN {
+        enum BattlerId battler = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+        enum Ability originalAbility = gAiLogicData->abilities[battler];
+        u32 originalWeather = gBattleWeather;
+        gAiLogicData->abilities[battler] = ability;
+
+        gBattleWeather = B_WEATHER_NONE;
+        EXPECT_EQ(AI_GetSwitchinWeather(battler), expectedWeather);
+        gBattleWeather = B_WEATHER_RAIN_PRIMAL;
+        EXPECT_EQ(AI_GetSwitchinWeather(battler), expectedWeather);
+        gBattleWeather = B_WEATHER_SUN_PRIMAL;
+        EXPECT_EQ(AI_GetSwitchinWeather(battler), expectedWeather);
+
+        gBattleStruct->overworldWeatherPresent = TRUE;
+        EXPECT_EQ(AI_GetSwitchinWeather(battler), B_WEATHER_SUN_PRIMAL);
+        gBattleStruct->overworldWeatherPresent = FALSE;
+        gAiLogicData->abilities[battler] = ABILITY_DRIZZLE;
+        EXPECT_EQ(AI_GetSwitchinWeather(battler), B_WEATHER_SUN_PRIMAL);
+
+        gAiLogicData->abilities[battler] = originalAbility;
+        gBattleWeather = originalWeather;
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_SWITCHING: Hazard survival includes exact damage and Regenerator healing")
+{
+    enum Ability ability;
+    u32 hp;
+    bool32 canSwitch;
+
+    PARAMETRIZE { ability = ABILITY_OBLIVIOUS; hp = 12; canSwitch = FALSE; }
+    PARAMETRIZE { ability = ABILITY_OBLIVIOUS; hp = 13; canSwitch = TRUE; }
+    PARAMETRIZE { ability = ABILITY_REGENERATOR; hp = 1; canSwitch = TRUE; }
+
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_SMART_SWITCHING);
+        PLAYER(SPECIES_ZIGZAGOON) { Moves(MOVE_STEALTH_ROCK); }
+        OPPONENT(SPECIES_SLOWPOKE) { Ability(ability); HP(96); MaxHP(96); Moves(MOVE_CELEBRATE, MOVE_SCRATCH); }
+        OPPONENT(SPECIES_PONYTA) { Moves(MOVE_HEADBUTT); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_STEALTH_ROCK); EXPECT_MOVE(opponent, MOVE_SCRATCH); }
+    } THEN {
+        enum BattlerId battler = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+        // Encore supplies a deterministic reason to leave; the survival guard
+        // must reject a lethal return, but account for healing on departure.
+        gBattleMons[battler].hp = hp;
+        gBattleMons[battler].volatiles.encoredMove = MOVE_CELEBRATE;
+        EXPECT_EQ(ShouldSwitch(battler), canSwitch);
     }
 }

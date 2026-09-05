@@ -83,7 +83,7 @@ SINGLE_BATTLE_TEST("Mega Evolution doesn't affect turn order (Gen6)")
         MESSAGE("The opposing Wobbuffet used Celebrate!");
         MESSAGE("Gardevoir used Celebrate!");
     } THEN {
-        EXPECT_EQ(player->speed, 205);
+        EXPECT_EQ(player->speed, P_STAT_CALCULATION >= GEN_CHAMPIONS ? 236 : 205);
     }
 }
 
@@ -99,7 +99,7 @@ SINGLE_BATTLE_TEST("Mega Evolution affects turn order (Gen7+)")
         MESSAGE("Gardevoir used Celebrate!");
         MESSAGE("The opposing Wobbuffet used Celebrate!");
     } THEN {
-        EXPECT_EQ(player->speed, 205);
+        EXPECT_EQ(player->speed, P_STAT_CALCULATION >= GEN_CHAMPIONS ? 236 : 205);
     }
 }
 

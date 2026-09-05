@@ -73,6 +73,7 @@ JaggedPass_EventScript_OpenMagmaHideout::
 JaggedPass_EventScript_MagmaHideoutGuard::
 	lockall
 	goto_if_set FLAG_BEAT_MAGMA_GRUNT_JAGGED_PASS, JaggedPass_EventScript_GuardDefeated
+	call EventScript_CheckStoryDoubleBattleParty
 	waitse
 	playse SE_PIN
 	applymovement LOCALID_MAGMA_HIDEOUT_GUARD, Common_Movement_ExclamationMark

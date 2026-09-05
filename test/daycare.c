@@ -1062,36 +1062,6 @@ TEST("InheritPokeball give eggs born from a male and a ditto a pokeball (gen6)")
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_POKEBALL), BALL_POKE);
 }
 
-TEST("InheritPokeball give eggs born from a male and a ditto a pokeball (gen6)")
-{
-    SetConfig(CONFIG_BALL_INHERITANCE, GEN_6);
-
-    enum PokeBall ball0 = 0;
-    u32 slot = 0;
-    for (enum PokeBall j = BALL_STRANGE; j < POKEBALL_COUNT; j++)
-    {
-        PARAMETRIZE { ball0 = j; slot = 0; }
-        PARAMETRIZE { ball0 = j; slot = 1; }
-    }
-
-    ZeroPlayerPartyMons();
-    memset(&gSaveBlock1Ptr->daycare, 0, sizeof(gSaveBlock1Ptr->daycare));
-
-    gSpecialVar_0x8000 = ball0;
-    RUN_OVERWORLD_SCRIPT(
-        givemon SPECIES_BULBASAUR, 100, gender=MON_MALE, ball=VAR_0x8000;
-        givemon SPECIES_DITTO, 100, gender=MON_GENDERLESS, ball=VAR_0x8000;
-    );
-
-    gSpecialVar_0x8004 = slot;
-    StoreSelectedPokemonInDaycare();
-    gSpecialVar_0x8004 = 0;
-    StoreSelectedPokemonInDaycare();
-    RUN_OVERWORLD_SCRIPT( special GiveEggFromDaycare; );
-
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_POKEBALL), BALL_POKE);
-}
-
 TEST("InheritPokeball give the non-ditto ball to pokemon born from a ditto and another parent (gen7+)")
 {
     SetConfig(CONFIG_BALL_INHERITANCE, GEN_7);

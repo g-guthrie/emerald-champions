@@ -5,6 +5,7 @@ MagmaHideout_4F_EventScript_Maxie::
 	lockall
 	goto_if_not_defeated TRAINER_COURTNEY_MAGMA_HIDEOUT, MagmaHideout_4F_EventScript_AdminsStillStanding
 	goto_if_not_defeated TRAINER_TABITHA_MAGMA_HIDEOUT, MagmaHideout_4F_EventScript_AdminsStillStanding
+	call EventScript_CheckStoryDoubleBattleParty
 	playbgm MUS_ENCOUNTER_MAGMA, FALSE
 	msgbox MagmaHideout_4F_Text_MaxieAwakenGroudon, MSGBOX_DEFAULT
 	closemessage

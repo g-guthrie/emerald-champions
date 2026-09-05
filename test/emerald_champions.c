@@ -938,6 +938,49 @@ TEST("Emerald Champions tutor gates Mega roles and never grants their stones")
     ClearBag();
 }
 
+TEST("Emerald Champions Primal tutor roles require their own orb and preserve owned relics")
+{
+    static const enum Species species[] = {SPECIES_KYOGRE, SPECIES_GROUDON};
+    static const enum Item orbs[] = {ITEM_BLUE_ORB, ITEM_RED_ORB};
+
+    for (u32 s = 0; s < ARRAY_COUNT(species); s++)
+    {
+        struct Pokemon mon;
+        u32 ordinaryCount;
+        u32 primalCount = 0;
+
+        ClearBag();
+        CreateMon(&mon, species[s], 50, 0, OTID_STRUCT_PLAYER_ID);
+        ordinaryCount = GetEmeraldChampionsBattleSetCount(&mon);
+        EXPECT(AddBagItem(ITEM_MEGA_RING, 1));
+        EXPECT(AddBagItem(orbs[1 - s], 1));
+        EXPECT_EQ(GetEmeraldChampionsBattleSetCount(&mon), ordinaryCount);
+        EXPECT(AddBagItem(orbs[s], 1));
+        EXPECT_GT(GetEmeraldChampionsBattleSetCount(&mon), ordinaryCount);
+        for (u32 choice = 0; choice < GetEmeraldChampionsBattleSetCount(&mon); choice++)
+        {
+            if (GetEmeraldChampionsBattleSetRequiredItem(&mon, choice) != orbs[s])
+                continue;
+            primalCount++;
+            EXPECT_EQ(ApplyEmeraldChampionsBattleSetChoice(&mon, choice), EC_BATTLE_SET_MEGA);
+            EXPECT_NE(GetMonData(&mon, MON_DATA_HELD_ITEM), orbs[s]);
+            EXPECT_EQ(CountTotalItemQuantityInBag(orbs[s]), 1);
+            SetMonData(&mon, MON_DATA_HELD_ITEM, &orbs[s]);
+            EXPECT(RemoveBagItem(orbs[s], 1));
+            EXPECT_EQ(ApplyEmeraldChampionsBattleSetChoice(&mon, choice), EC_BATTLE_SET_MEGA_STONE_HELD);
+            EXPECT_EQ(GetMonData(&mon, MON_DATA_HELD_ITEM), orbs[s]);
+            EXPECT_EQ(CountTotalItemQuantityInBag(orbs[s]), 0);
+            EXPECT_EQ(GetEmeraldChampionsCurrentBattleSetChoice(&mon), choice);
+            EXPECT(AddBagItem(orbs[s], 1));
+            enum Item noItem = ITEM_NONE;
+            SetMonData(&mon, MON_DATA_HELD_ITEM, &noItem);
+        }
+        EXPECT_GT(primalCount, 0);
+        EXPECT_EQ(GetEmeraldChampionsBattleSetCount(&mon), ordinaryCount + primalCount);
+    }
+    ClearBag();
+}
+
 TEST("Emerald Champions tutor recognizes and reopens on the current battle set")
 {
     struct Pokemon mon;
@@ -1869,6 +1912,43 @@ TEST("Emerald Champions Belly Drum berry sets land on even HP at every level cap
             EXPECT_LE(total, EC_STAT_POINT_BUDGET);
             // The re-landed spread still reads as the authored set.
             EXPECT_EQ(GetEmeraldChampionsCurrentBattleSetChoice(mon), choice);
+        }
+    }
+}
+
+TEST("Emerald Champions Belly Drum normalization preserves authored sets across successive level caps")
+{
+    static const enum Species species[] = {SPECIES_ZIGZAGOON, SPECIES_AZUMARILL};
+
+    ClearBag();
+    for (u32 s = 0; s < ARRAY_COUNT(species); s++)
+    {
+        struct Pokemon mon;
+        s32 choice = -1;
+
+        CreateMon(&mon, species[s], sEmeraldChampionsLevelCaps[0], 0, OTID_STRUCT_PLAYER_ID);
+        for (u32 i = 0; i < GetEmeraldChampionsBattleSetCount(&mon); i++)
+        {
+            const struct EmeraldChampionsBattleSet *preset =
+                GetEmeraldChampionsBattleSetPresetForFormat(&mon, i, EC_BATTLE_FORMAT_DOUBLES);
+            for (u32 m = 0; m < MAX_MON_MOVES; m++)
+                if (preset->moves[m] == MOVE_BELLY_DRUM)
+                    choice = i;
+        }
+        EXPECT_GE(choice, 0);
+        EXPECT_EQ(ApplyEmeraldChampionsBattleSetChoice(&mon, choice), EC_BATTLE_SET_SUCCESS);
+        for (u32 c = 0; c < ARRAY_COUNT(sEmeraldChampionsLevelCaps); c++)
+        {
+            u32 experience = gExperienceTables[gSpeciesInfo[species[s]].growthRate][sEmeraldChampionsLevelCaps[c]];
+            u32 hp;
+
+            SetMonData(&mon, MON_DATA_EXP, &experience);
+            CalculateMonStats(&mon);
+            hp = GetMonData(&mon, MON_DATA_MAX_HP);
+            SetMonData(&mon, MON_DATA_HP, &hp);
+            TryNormalizeEmeraldChampionsBellyDrumHpParity(&mon);
+            EXPECT_EQ(GetEmeraldChampionsCurrentBattleSetChoice(&mon), choice);
+            EXPECT_EQ(GetMonData(&mon, MON_DATA_HP), GetMonData(&mon, MON_DATA_MAX_HP));
         }
     }
 }
