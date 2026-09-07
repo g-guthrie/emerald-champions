@@ -175,7 +175,7 @@ Route128_Movement_MaxieApproachPlayer:
 	step_end
 
 Route128_EventScript_Isaiah::
-	trainerbattle_single TRAINER_ISAIAH_1, Route128_Text_IsaiahIntro, Route128_Text_IsaiahDefeat, Route128_EventScript_RegisterIsaiah
+	trainerbattle_double TRAINER_ISAIAH_1, Route128_Text_IsaiahIntro, Route128_Text_IsaiahDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route128_EventScript_RegisterIsaiah
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route128_EventScript_RematchIsaiah
 	msgbox Route128_Text_IsaiahPostBattle, MSGBOX_DEFAULT
@@ -191,7 +191,7 @@ Route128_EventScript_RegisterIsaiah::
 	end
 
 Route128_EventScript_RematchIsaiah::
-	trainerbattle_rematch TRAINER_ISAIAH_1, Route128_Text_IsaiahRematchIntro, Route128_Text_IsaiahRematchDefeat
+	trainerbattle_rematch_double TRAINER_ISAIAH_1, Route128_Text_IsaiahRematchIntro, Route128_Text_IsaiahRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route128_Text_IsaiahPostRematch, MSGBOX_AUTOCLOSE
 	end
 
@@ -227,12 +227,11 @@ Route128_EventScript_Ruben::
 	end
 
 Route128_EventScript_Wayne::
-	trainerbattle_double TRAINER_WAYNE, Route128_Text_WayneIntro, Route128_Text_WayneDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route128_Text_WaynePostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route128_Text_WAYNE_LocalConversation, MSGBOX_NPC
 	end
 
 Route128_EventScript_Harrison::
-	trainerbattle_single TRAINER_HARRISON, Route128_Text_HarrisonIntro, Route128_Text_HarrisonDefeat
+	trainerbattle_double TRAINER_HARRISON, Route128_Text_HarrisonIntro, Route128_Text_HarrisonDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route128_Text_HarrisonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -294,9 +293,14 @@ Route128_Text_StevenWholeWorldWillDrown:
 	.string "SOOTOPOLIS might provide answers…$"
 
 Route128_Text_StevenImGoingToSootopolis:
-	.string "{PLAYER}{KUN}…\n"
-	.string "I don't know what you intend to do,\l"
-	.string "but don't do anything reckless.\p"
-	.string "Okay.\n"
-	.string "I'm going to SOOTOPOLIS.$"
+	.string "STEVEN: SURF north to ROUTE 127,\n"
+	.string "then west to ROUTE 126's white crater.\p"
+	.string "Use DIVE along its southern wall.\n"
+	.string "Enter the cavern and surface inside.\p"
+	.string "Meet me in SOOTOPOLIS. We must find\n"
+	.string "the source of this storm.$"
 
+
+Route128_Text_WAYNE_LocalConversation:
+	.string "DHELMISE is not fishing tackle.\n"
+	.string "Important lesson. Expensive rod.$"

@@ -61,7 +61,6 @@ static void CB2_EvolutionSceneUpdate(void);
 static void CB2_TradeEvolutionSceneUpdate(void);
 static void EvoDummyFunc(void);
 static void VBlankCB_EvolutionScene(void);
-static void VBlankCB_TradeEvolutionScene(void);
 static void EvoScene_DoMonAnimAndCry(u8 monSpriteId, enum Species speciesId);
 static bool32 EvoScene_IsMonAnimFinished(u8 monSpriteId);
 static void StartBgAnimation(bool8 isLink);
@@ -411,7 +410,7 @@ static void CB2_TradeEvolutionSceneLoadGraphics(void)
     case 1:
         ResetPaletteFade();
         SetHBlankCallback(EvoDummyFunc);
-        SetVBlankCallback(VBlankCB_TradeEvolutionScene);
+        SetVBlankCallback(VBlankCB_EvolutionScene);
         gMain.state++;
         break;
     case 2:
@@ -527,7 +526,7 @@ void TradeEvolutionScene(struct Pokemon *mon, enum Species postEvoSpecies, u8 pr
 
     gTextFlags.useAlternateDownArrow = TRUE;
 
-    SetVBlankCallback(VBlankCB_TradeEvolutionScene);
+    SetVBlankCallback(VBlankCB_EvolutionScene);
     SetMainCallback2(CB2_TradeEvolutionSceneUpdate);
 }
 
@@ -1501,23 +1500,6 @@ static void VBlankCB_EvolutionScene(void)
     ScanlineEffect_InitHBlankDmaTransfer();
 }
 
-static void VBlankCB_TradeEvolutionScene(void)
-{
-    SetGpuReg(REG_OFFSET_BG0HOFS, gBattle_BG0_X);
-    SetGpuReg(REG_OFFSET_BG0VOFS, gBattle_BG0_Y);
-    SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
-    SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
-    SetGpuReg(REG_OFFSET_BG2HOFS, gBattle_BG2_X);
-    SetGpuReg(REG_OFFSET_BG2VOFS, gBattle_BG2_Y);
-    SetGpuReg(REG_OFFSET_BG3HOFS, gBattle_BG3_X);
-    SetGpuReg(REG_OFFSET_BG3VOFS, gBattle_BG3_Y);
-
-    LoadOam();
-    ProcessSpriteCopyRequests();
-    TransferPlttBuffer();
-    ScanlineEffect_InitHBlankDmaTransfer();
-}
-
 #define tCycleTimer   data[0]
 #define tPalStage     data[1]
 #define tControlStage data[2]
@@ -1686,16 +1668,6 @@ static void StartBgAnimation(bool8 isLink)
 
     CreateTask(Task_UpdateBgPalette, 5);
     CreateBgAnimTask(isLink);
-}
-
-static void UNUSED PauseBgPaletteAnim(void)
-{
-    u8 taskId = FindTaskIdByFunc(Task_UpdateBgPalette);
-
-    if (taskId != TASK_NONE)
-        gTasks[taskId].tPaused = TRUE;
-
-    FillPalette(RGB_BLACK, BG_PLTT_ID(10), PLTT_SIZE_4BPP);
 }
 
 #undef tPaused

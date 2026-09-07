@@ -20,7 +20,8 @@ const u16 gTilesetPalettes_SecretBase[][16] =
     INCGFX_U16("data/tilesets/primary/secret_base/palettes/15.pal", ".gbapal"),
 };
 
-const u32 gTilesetTiles_SecretBaseRedCave[] = INCGFX_U32("data/tilesets/secondary/secret_base/red_cave/tiles.png", ".4bpp", "-num_tiles 83 -Wnum_tiles");
+// Raw tilesets are copied as a full VRAM partition; C zero-fills omitted tiles.
+const u32 gTilesetTiles_SecretBaseRedCave[(NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY) * TILE_SIZE_4BPP / sizeof(u32)] = INCGFX_U32("data/tilesets/secondary/secret_base/red_cave/tiles.png", ".4bpp", "-num_tiles 83 -Wnum_tiles");
 const u16 gTilesetPalettes_SecretBaseRedCave[][16] =
 {
     INCGFX_U16("data/tilesets/secondary/secret_base/red_cave/palettes/00.pal", ".gbapal"),
@@ -827,11 +828,11 @@ const u16 gTilesetPalettes_SecretBaseYellowCave[][16] =
     INCGFX_U16("data/tilesets/secondary/secret_base/yellow_cave/palettes/15.pal", ".gbapal"),
 };
 
-const u32 gTilesetTiles_SecretBaseBrownCave[] = INCGFX_U32("data/tilesets/secondary/secret_base/brown_cave/tiles.png", ".4bpp", "-num_tiles 83 -Wnum_tiles");
-const u32 gTilesetTiles_SecretBaseTree[] = INCGFX_U32("data/tilesets/secondary/secret_base/tree/tiles.png", ".4bpp", "-num_tiles 83 -Wnum_tiles");
-const u32 gTilesetTiles_SecretBaseShrub[] = INCGFX_U32("data/tilesets/secondary/secret_base/shrub/tiles.png", ".4bpp", "-num_tiles 83 -Wnum_tiles");
-const u32 gTilesetTiles_SecretBaseBlueCave[] = INCGFX_U32("data/tilesets/secondary/secret_base/blue_cave/tiles.png", ".4bpp", "-num_tiles 83 -Wnum_tiles");
-const u32 gTilesetTiles_SecretBaseYellowCave[] = INCGFX_U32("data/tilesets/secondary/secret_base/yellow_cave/tiles.png", ".4bpp", "-num_tiles 83 -Wnum_tiles");
+const u32 gTilesetTiles_SecretBaseBrownCave[(NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY) * TILE_SIZE_4BPP / sizeof(u32)] = INCGFX_U32("data/tilesets/secondary/secret_base/brown_cave/tiles.png", ".4bpp", "-num_tiles 83 -Wnum_tiles");
+const u32 gTilesetTiles_SecretBaseTree[(NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY) * TILE_SIZE_4BPP / sizeof(u32)] = INCGFX_U32("data/tilesets/secondary/secret_base/tree/tiles.png", ".4bpp", "-num_tiles 83 -Wnum_tiles");
+const u32 gTilesetTiles_SecretBaseShrub[(NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY) * TILE_SIZE_4BPP / sizeof(u32)] = INCGFX_U32("data/tilesets/secondary/secret_base/shrub/tiles.png", ".4bpp", "-num_tiles 83 -Wnum_tiles");
+const u32 gTilesetTiles_SecretBaseBlueCave[(NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY) * TILE_SIZE_4BPP / sizeof(u32)] = INCGFX_U32("data/tilesets/secondary/secret_base/blue_cave/tiles.png", ".4bpp", "-num_tiles 83 -Wnum_tiles");
+const u32 gTilesetTiles_SecretBaseYellowCave[(NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY) * TILE_SIZE_4BPP / sizeof(u32)] = INCGFX_U32("data/tilesets/secondary/secret_base/yellow_cave/tiles.png", ".4bpp", "-num_tiles 83 -Wnum_tiles");
 
 const u32 gTilesetTiles_InsideOfTruck[] = INCGFX_U32("data/tilesets/secondary/inside_of_truck/tiles.png", ".4bpp.fastSmol", "-num_tiles 62 -Wnum_tiles");
 

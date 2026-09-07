@@ -92,7 +92,6 @@ static void Task_WaitForExitSearchResultsInfoScreen(u8);
 static void Task_ReturnToPokedexFromSearchResults(u8);
 static void Task_ClosePokedexFromSearchResultsStartMenu(u8);
 static bool8 LoadPokedexListPage(u8);
-static void FreeWindowAndBgBuffers(void);
 static bool8 UpdateDexListScroll(u8, u8, u8);
 static u16 TryDoPokedexScroll(u16, u16);
 static void UpdateSelectedMonSpriteId(void);
@@ -137,7 +136,6 @@ static u8* ConvertMonHeightToMetricString(u32 height);
 static u8* ConvertMonWeightToImperialString(u32 weight);
 static u8* ConvertMonWeightToMetricString(u32 weight);
 static u8* ConvertMeasurementToMetricString(u32 num, u32* index);
-static void PrintDecimalNum(u8 windowId, u16 num, u8 left, u8 top);
 static u16 GetNextPosition(u8, u16, u16, u16);
 static u8 LoadSearchMenu(void);
 static void Task_LoadSearchMenu(u8);
@@ -1539,7 +1537,7 @@ void Task_HandlePokedexInput(u8 taskId)
             gSprites[sPokedexView->selectedMonSpriteId].callback = SpriteCB_MoveMonForInfoScreen;
             gTasks[taskId].func = Task_OpenInfoScreenAfterMonMovement;
             PlaySE(SE_PIN);
-            FreeWindowAndBgBuffers();
+            FreeInfoScreenWindowAndBgBuffers();
         }
         else if (JOY_NEW(START_BUTTON))
         {
@@ -1563,7 +1561,7 @@ void Task_HandlePokedexInput(u8 taskId)
             sPokedexView->dexOrderBackup = sPokedexView->dexOrder;
             gTasks[taskId].func = Task_WaitForExitSearch;
             PlaySE(SE_PC_LOGIN);
-            FreeWindowAndBgBuffers();
+            FreeInfoScreenWindowAndBgBuffers();
         }
         else if (JOY_NEW(B_BUTTON))
         {
@@ -1717,7 +1715,7 @@ static void Task_ClosePokedex(u8 taskId)
             gSaveBlock2Ptr->pokedex.mode = DEX_MODE_HOENN;
         gSaveBlock2Ptr->pokedex.order = sPokedexView->dexOrder;
         ClearMonSprites();
-        FreeWindowAndBgBuffers();
+        FreeInfoScreenWindowAndBgBuffers();
         DestroyTask(taskId);
         SetMainCallback2(CB2_ReturnToFieldWithOpenMenu);
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
@@ -1760,7 +1758,7 @@ static void Task_HandleSearchResultsInput(u8 taskId)
             BeginNormalPaletteFade(~a, 0, 0, 0x10, RGB_BLACK);
             gTasks[taskId].func = Task_OpenSearchResultsInfoScreenAfterMonMovement;
             PlaySE(SE_PIN);
-            FreeWindowAndBgBuffers();
+            FreeInfoScreenWindowAndBgBuffers();
         }
         else if (JOY_NEW(START_BUTTON))
         {
@@ -1779,7 +1777,7 @@ static void Task_HandleSearchResultsInput(u8 taskId)
             sPokedexView->screenSwitchState = 0;
             gTasks[taskId].func = Task_WaitForExitSearch;
             PlaySE(SE_PC_LOGIN);
-            FreeWindowAndBgBuffers();
+            FreeInfoScreenWindowAndBgBuffers();
         }
         else if (JOY_NEW(B_BUTTON))
         {
@@ -1909,7 +1907,7 @@ static void Task_ReturnToPokedexFromSearchResults(u8 taskId)
         sPokedexView->dexOrder = sPokedexView->dexOrderBackup;
         gTasks[taskId].func = Task_OpenPokedexMainPage;
         ClearMonSprites();
-        FreeWindowAndBgBuffers();
+        FreeInfoScreenWindowAndBgBuffers();
     }
 }
 
@@ -2036,25 +2034,6 @@ void LoadPokedexBgPalette(bool8 isSearchResults)
     else
         LoadPalette(gPokedexBgNational_Pal + 1, BG_PLTT_ID(0) + 1, PLTT_SIZEOF(6 * 16 - 1));
     LoadPalette(GetOverworldTextboxPalettePtr(), BG_PLTT_ID(15), PLTT_SIZE_4BPP);
-}
-
-static void FreeWindowAndBgBuffers(void)
-{
-    void *tilemapBuffer;
-
-    FreeAllWindowBuffers();
-    tilemapBuffer = GetBgTilemapBuffer(0);
-    if (tilemapBuffer)
-        Free(tilemapBuffer);
-    tilemapBuffer = GetBgTilemapBuffer(1);
-    if (tilemapBuffer)
-        Free(tilemapBuffer);
-    tilemapBuffer = GetBgTilemapBuffer(2);
-    if (tilemapBuffer)
-        Free(tilemapBuffer);
-    tilemapBuffer = GetBgTilemapBuffer(3);
-    if (tilemapBuffer)
-        Free(tilemapBuffer);
 }
 
 bool32 ShouldSkipPokedexListEntry(enum NationalDexOrder dexNum)
@@ -4680,17 +4659,6 @@ static void PrintInfoSubMenuText(u8 windowId, const u8 *str, u8 left, u8 top)
     AddTextPrinterParameterized4(windowId, FONT_NORMAL, left, top, 0, 0, color, TEXT_SKIP_DRAW, str);
 }
 
-static void UNUSED UnusedPrintNum(u8 windowId, u16 num, u8 left, u8 top)
-{
-    u8 str[4];
-
-    str[0] = CHAR_0 + num / 100;
-    str[1] = CHAR_0 + (num % 100) / 10;
-    str[2] = CHAR_0 + (num % 100) % 10;
-    str[3] = EOS;
-    PrintInfoSubMenuText(windowId, str, left, top);
-}
-
 u8 PrintCryScreenSpeciesName(u8 windowId, u16 num, u8 left, u8 top)
 {
     u8 str[POKEMON_NAME_BUFFER_SIZE];
@@ -4715,64 +4683,7 @@ u8 PrintCryScreenSpeciesName(u8 windowId, u16 num, u8 left, u8 top)
     return i;
 }
 
-static void UNUSED UnusedPrintMonName(u8 windowId, const u8 *name, u8 left, u8 top)
-{
-    u8 str[POKEMON_NAME_LENGTH + 1];
-    u8 i;
-    u8 nameLength;
-
-    for (i = 0; i < ARRAY_COUNT(str); i++)
-        str[i] = CHAR_SPACE;
-    for (nameLength = 0; name[nameLength] != CHAR_SPACE && nameLength < ARRAY_COUNT(str); nameLength++)
-        ;
-    for (i = 0; i < nameLength; i++)
-        str[ARRAY_COUNT(str) - nameLength + i] = name[i];
-#ifdef UBFIX
-    str[ARRAY_COUNT(str) - 1] = EOS;
-#else
-    str[ARRAY_COUNT(str)] = EOS;
-#endif
-    PrintInfoSubMenuText(windowId, str, left, top);
-}
-
 // Unused in the English version, used to print height/weight in versions which use metric system.
-static void UNUSED PrintDecimalNum(u8 windowId, u16 num, u8 left, u8 top)
-{
-    u8 str[6];
-    bool8 outputted = FALSE;
-    u8 result;
-
-    result = num / 1000;
-    if (result == 0)
-    {
-        str[0] = CHAR_SPACER;
-        outputted = FALSE;
-    }
-    else
-    {
-        str[0] = CHAR_0 + result;
-        outputted = TRUE;
-    }
-
-    result = (num % 1000) / 100;
-    if (result == 0 && !outputted)
-    {
-        str[1] = CHAR_SPACER;
-        outputted = FALSE;
-    }
-    else
-    {
-        str[1] = CHAR_0 + result;
-        outputted = TRUE;
-    }
-
-    str[2] = CHAR_0 + ((num % 1000) % 100) / 10;
-    str[3] = CHAR_DEC_SEPARATOR;
-    str[4] = CHAR_0 + ((num % 1000) % 100) % 10;
-    str[5] = EOS;
-    PrintInfoSubMenuText(windowId, str, left, top);
-}
-
 // The footprints are drawn on WIN_FOOTPRINT, which uses BG palette 15 (loaded with graphics/text_window/message_box.gbapal)
 // The footprint pixels are stored as 1BPP, and set to the below color index in this palette when converted to 4BPP.
 #define FOOTPRINT_COLOR_IDX  2
@@ -4820,14 +4731,6 @@ void DrawFootprint(u8 windowId, enum Species species)
 }
 
 // Ruby/Sapphire function.
-static void UNUSED RS_DrawFootprint(u16 offset, u16 tileNum)
-{
-    *(u16 *)(VRAM + offset * 0x800 + 0x232) = 0xF000 + tileNum + 0;
-    *(u16 *)(VRAM + offset * 0x800 + 0x234) = 0xF000 + tileNum + 1;
-    *(u16 *)(VRAM + offset * 0x800 + 0x272) = 0xF000 + tileNum + 2;
-    *(u16 *)(VRAM + offset * 0x800 + 0x274) = 0xF000 + tileNum + 3;
-}
-
 static u16 GetNextPosition(u8 direction, u16 position, u16 min, u16 max)
 {
     switch (direction)
@@ -5135,25 +5038,6 @@ static void Task_LoadSearchMenu(u8 taskId)
         }
         break;
     }
-}
-
-static void FreeSearchWindowAndBgBuffers(void)
-{
-    void *tilemapBuffer;
-
-    FreeAllWindowBuffers();
-    tilemapBuffer = GetBgTilemapBuffer(0);
-    if (tilemapBuffer)
-        Free(tilemapBuffer);
-    tilemapBuffer = GetBgTilemapBuffer(1);
-    if (tilemapBuffer)
-        Free(tilemapBuffer);
-    tilemapBuffer = GetBgTilemapBuffer(2);
-    if (tilemapBuffer)
-        Free(tilemapBuffer);
-    tilemapBuffer = GetBgTilemapBuffer(3);
-    if (tilemapBuffer)
-        Free(tilemapBuffer);
 }
 
 void Task_SwitchToSearchMenuTopBar(u8 taskId)
@@ -5491,7 +5375,7 @@ static void Task_ExitSearchWaitForFade(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        FreeSearchWindowAndBgBuffers();
+        FreeInfoScreenWindowAndBgBuffers();
         DestroyTask(taskId);
     }
 }

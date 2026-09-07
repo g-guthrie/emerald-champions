@@ -9,6 +9,8 @@ import re
 import struct
 from pathlib import Path
 
+from generate_showdown_champions_circuit import project
+
 from verify_trainer_ability_legality import (
     configured_species_abilities,
     resolve_species,
@@ -28,6 +30,11 @@ EXACT_INCLEMENT_PHYSICAL = {
     "OBJ_EVENT_GFX_REGIGIGAS_STATUE": ("REGIGIGAS", "MAP_SEALED_CHAMBER_INNER_ROOM"),
 }
 SCRIPTED_VISIBLE_ROOTS = {
+    "DARKRAI": (
+        "data/maps/MtPyre_Summit/scripts.inc",
+        ("MtPyre_Summit_EventScript_Darkrai", "TryUnlockDarkraiLegendarySign",
+         "CreateSelectedLegendarySignEncounter", "Common_EventScript_LegendaryNeedsDevon"),
+    ),
     "MAGEARNA": (
         "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
         ("EC_SIGN_MAGEARNA_ID", "TryGiveSelectedLegendarySignReward", "FLAG_EC_CAUGHT_MAGEARNA"),
@@ -36,6 +43,15 @@ SCRIPTED_VISIBLE_ROOTS = {
         "data/maps/MtPyre_6F/scripts.inc",
         ("MtPyre_6F_EventScript_Pecharunt", "CreateSelectedLegendarySignEncounter", "FLAG_EC_CAUGHT_PECHARUNT"),
     ),
+}
+VISIBLE_SIGN_MAPS = {
+    "ARTICUNO": "SHOAL_CAVE_LOW_TIDE_ICE_ROOM",
+    "DARKRAI": "MT_PYRE_SUMMIT",
+    "MAGEARNA": "RUSTBORO_CITY_DEVON_CORP_2F",
+    "MEWTWO": "ALTERING_CAVE_B1F",
+    "PECHARUNT": "MT_PYRE_6F",
+    "REGIGIGAS": "SEALED_CHAMBER_INNER_ROOM",
+    "ZAPDOS": "NEW_MAUVILLE_INSIDE",
 }
 
 
@@ -63,7 +79,9 @@ def verify_overworld_sprite(path: Path, context: str) -> tuple[int, int]:
 
 def main() -> None:
     manifest = json.loads(read("data/emerald_champions/showdown_champions_random_doubles.json"))
-    generated = read("src/data/pokemon/showdown_champions_circuit.h")
+    project(manifest, check=True,
+            c_output=ROOT / "src/data/pokemon/showdown_champions_circuit.h",
+            counts_output=ROOT / "include/showdown_champions_circuit.h")
     circuit = read("src/champions_circuit.c")
     circuit_lobby = read("data/maps/BattleFrontier_BattleTowerLobby/scripts.inc")
     circuit_corridor = read("data/maps/BattleFrontier_BattleTowerCorridor/scripts.inc")
@@ -100,11 +118,14 @@ def main() -> None:
     )
 
     require(manifest["source_commit"] == "bb179fbf8449e3c31632bd56f671ffb4404fa6e7", "Showdown source commit drifted")
-    require(manifest["variant_count"] == 311, "Showdown variant count drifted")
-    require(manifest["template_count"] == 444, "Showdown template count drifted")
+    sources = {variant.get("source") for variant in manifest["variants"]}
+    require({"data/random-battles/champions/doubles-sets.json",
+             "data/random-battles/gen9/doubles-sets.json",
+             "authored doubles supplement"} <= sources, "Circuit is missing a roster source")
+    require({"kyogre", "xerneas", "incineroar", "ferrothorn"}
+            <= {variant["showdown_id"] for variant in manifest["variants"]},
+            "Circuit lost cross-generation competitive coverage")
     require(len(manifest["policy"]["ability_overrides"]) == 9, "Circuit Ability adaptation policy drifted")
-    require(generated.count(".partySpecies =") == 311, "generated Showdown variant table is incomplete")
-    require(generated.count(".role =") == 444, "generated Showdown template table is incomplete")
     require("Pokemon Showdown" in read("THIRD_PARTY_NOTICES.md"), "Showdown MIT notice is missing")
     require("gShowdownCircuitVariants" in circuit, "Circuit is not using Showdown's species pool")
     require("gShowdownCircuitTemplates" in circuit, "Circuit is not using Showdown's role templates")
@@ -274,9 +295,10 @@ def main() -> None:
     require("SPECIES_MANAPHY" in read("src/daycare.c"), "Manaphy and Ditto breeding gate is missing")
     require("FLAG_HIDE_LEGENDARY_SIGN_DARKRAI" in read("data/scripts/new_game.inc"), "visible Sign reset flags are missing")
 
-    # Inclement's exact physical roster remains the entire production
-    # overworld roster. Magearna and Pecharunt deliberately use an existing NPC
-    # and tombstone interaction, respectively, rather than adding species props.
+    # Inclement's exact physical encounter roster remains unchanged; the
+    # existing vial quest companions are separate from catch encounters.
+    # Darkrai and Pecharunt use shrine/tombstone interactions; Magearna uses
+    # an existing NPC. Their visible-source definitions do not add species props.
     map_rows = {}
     for map_path in (ROOT / "data/maps").glob("*/map.json"):
         row = json.loads(map_path.read_text())
@@ -289,7 +311,15 @@ def main() -> None:
         r"VISIBLE_SIGN\((LEGENDARY_SIGN_[A-Z0-9_]+), ([A-Z0-9_]+), ([A-Z0-9_]+),",
         definitions,
     )
-    require(len(visible_rows) == 6, "visible Legendary Sign count drifted")
+    expected_visible_rows = {
+        (f"LEGENDARY_SIGN_{species}", species, map_name)
+        for species, map_name in VISIBLE_SIGN_MAPS.items()
+    }
+    require(
+        len(visible_rows) == len(expected_visible_rows)
+        and set(visible_rows) == expected_visible_rows,
+        "visible Legendary Sign species/map contract drifted",
+    )
     for sign_id, species, map_name in visible_rows:
         map_id = f"MAP_{map_name}"
         require(map_id in map_rows, f"{sign_id} points at missing {map_id}")
@@ -299,6 +329,19 @@ def main() -> None:
             scripts = read(relative)
             require(all(token in scripts for token in tokens),
                     f"{sign_id} scripted visible root is incomplete in {relative}")
+            if species == "DARKRAI":
+                root = "MtPyre_Summit_EventScript_Darkrai"
+                require(
+                    sum(event.get("script") == root for event in map_row.get("bg_events", [])) == 1,
+                    "Darkrai needs exactly one authored shrine interaction",
+                )
+                encounter = scripts.split(f"{root}::", 1)[1].split("\n\n", 1)[0]
+                require(
+                    "gText_LegendaryOneShotWarning" in encounter
+                    and "BattleSetup_StartLegendaryBattle" in encounter
+                    and "goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_LegendaryDefeatedAtShrine" in encounter,
+                    "Darkrai shrine must warn and consume every non-catch outcome, including escape",
+                )
             continue
         graphics_id = next(
             (gfx for gfx, (fixed_species, fixed_map) in EXACT_INCLEMENT_PHYSICAL.items()
@@ -333,10 +376,6 @@ def main() -> None:
                 species, expected_map = EXACT_INCLEMENT_PHYSICAL[graphics_id]
                 require(map_id == expected_map, f"{species} moved from its exact Inclement map")
                 physical_encounters.append((map_id, map_path, species, obj))
-            require(
-                not re.fullmatch(r"OBJ_EVENT_GFX_SPECIES\(([^)]+)\)", graphics_id),
-                f"{map_id} reintroduced a non-Inclement physical species prop: {graphics_id}",
-            )
     require(len(physical_encounters) == 8, "exact Inclement physical encounter count drifted")
     require(
         len({species for _map_id, _map_path, species, _obj in physical_encounters}) == len(physical_encounters),

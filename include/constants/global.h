@@ -126,10 +126,10 @@ enum Language
 #define BAG_BERRIES_COUNT    66
 #define BAG_POKEBALLS_COUNT  27
 #define BAG_KEYITEMS_COUNT   55
-// Emerald Champions has 92 distinct stones plus the two Primal Orbs. Inclement
+// Emerald Champions has 99 distinct stones plus the two Primal Orbs. Inclement
 // only needed 70 slots; retaining that capacity would make the archive fail.
 #define BAG_MEGASTONES_PRIMARY_COUNT 90
-#define BAG_MEGASTONES_COUNT         94
+#define BAG_MEGASTONES_COUNT         101
 
 // Number of facilities for Ranking Hall.
 // 7 facilities for single mode + tower double mode + tower multi mode.

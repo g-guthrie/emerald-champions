@@ -18,6 +18,17 @@ Historical comparison checks require their pinned Git reference. Required CI fet
 
 ## Runtime tests
 
+Battle-set checks have separate contracts: `generate_emerald_champions_battle_sets.py --check`
+compares materialized tables with the authored catalog; `verify_emerald_champions_battle_sets.py`
+checks coverage, legality, and selected move/item conflicts. Role descriptions and historical
+review-phase ordering are not correctness requirements. The coherence negative controls in
+`tests/test_battle_set_coherence_integrity.py` check that invalid authored combinations fail
+and valid support choices are accepted. These checks do not establish competitive strength.
+
+The native "exposes named Doubles and Singles sets" test enumerates both compiled catalogs,
+including item-gated roles, and verifies visibility and the applied Pokémon state. The
+"imported battle sets remain legal" test separately exercises the doubles opponent API.
+
 ```sh
 python3 scripts/run_emerald_champions_runtime_gates.py --jobs 4
 ```
@@ -38,6 +49,10 @@ Those checks validate particular failure cases, parsers, or extracted production
 | --- | --- | --- |
 | Campaign traversal | [run_emerald_champions_campaign.py](https://github.com/g-guthrie/emerald-champions/blob/main/scripts/run_emerald_champions_campaign.py), [playthrough manifest](https://github.com/g-guthrie/emerald-champions/blob/main/tests/campaign/playthrough.json) | Drives button inputs and checks scripted progress; its fixture automatically resolves ordinary battles. It does not measure combat difficulty. |
 | Independent battle play | [agent_player.py](https://github.com/g-guthrie/emerald-champions/blob/main/tools/agent_player/agent_player.py), [battle_checkpoint_lab.py](https://github.com/g-guthrie/emerald-champions/blob/main/scripts/battle_checkpoint_lab.py) | Starts from checkpoint-bound resources with campaign automation disabled. Existing semantic success records are evaluator reports, not independently inferred wins. |
+
+The campaign runner currently selects `CAMPAIGN_AUTOWIN` for traversal. Per-segment `battle_automation` fields are descriptive legacy metadata, not executable mode controls: `native` there does **not** disable battle automation. Native battle claims require the separate battle pipeline or an explicitly recorded same-ROM diagnostic mode change with readback; screenshots before a battle are insufficient.
+
+Trainer defeat assertions can use test-only aliases such as `FLAG_DEFEATED_TRAINER_TAKAO` in `expected.flags`. The runner derives these from authored `constants/opponents.h` IDs and the reserved trainer flag range; these aliases are not declarations added to the game.
 
 Campaign checkpoints bind state bytes, parent identity, and artifact provenance. Explicit parent-run selection is honored; unrelated future manifest additions can remain compatible when the checkpoint's ancestry is unchanged. [verify_emerald_champions_campaign_run.py](https://github.com/g-guthrie/emerald-champions/blob/main/scripts/verify_emerald_champions_campaign_run.py) compares completed evidence against an explicitly written baseline. Do not update a baseline simply to erase a failure.
 

@@ -5,7 +5,8 @@ FallarborTown_CozmosHouse_EventScript_ProfCozmo::
 	lock
 	faceplayer
 	goto_if_set FLAG_RECEIVED_COZMO_DAWN_STONE, FallarborTown_CozmosHouse_EventScript_GaveMeteorite
-	checkitem ITEM_METEORITE
+	setvar VAR_0x8004, ITEM_METEORITE
+	special CheckEmeraldChampionsHandoffItem
 	goto_if_eq VAR_RESULT, TRUE, FallarborTown_CozmosHouse_EventScript_PlayerHasMeteorite
 	msgbox FallarborTown_CozmosHouse_Text_MeteoriteWillNeverBeMineNow, MSGBOX_DEFAULT
 	release
@@ -20,6 +21,7 @@ FallarborTown_CozmosHouse_EventScript_PlayerHasMeteorite::
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setvar VAR_0x8004, ITEM_METEORITE
 	call Common_EventScript_PlayerHandedOverTheItem
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_MissingHandoffItem
 	setflag FLAG_RECEIVED_COZMO_DAWN_STONE
 	msgbox FallarborTown_CozmosHouse_Text_ReallyGoingToHelpMyResearch, MSGBOX_DEFAULT
 	release
@@ -106,4 +108,3 @@ FallarborTown_CozmosHouse_Text_FeelSorryForCozmo:
 FallarborTown_CozmosHouse_Text_CozmoIsSoHappy:
 	.string "Look at PROF. COZMO…\n"
 	.string "He's so happy! I think it's cute.$"
-

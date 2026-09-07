@@ -110,8 +110,7 @@ Route123_EventScript_Yuki::
 	end
 
 Route123_EventScript_Kindra::
-	trainerbattle_double TRAINER_KINDRA, Route123_Text_KindraIntro, Route123_Text_KindraDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route123_Text_KindraPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route123_Text_KINDRA_LocalConversation, MSGBOX_NPC
 	end
 
 Route123_EventScript_Frederick::
@@ -130,13 +129,12 @@ Route123_EventScript_Ed::
 	end
 
 Route123_EventScript_Kayley::
-	trainerbattle_single TRAINER_KAYLEY, Route123_Text_KayleyIntro, Route123_Text_KayleyDefeat
+	trainerbattle_double TRAINER_KAYLEY, Route123_Text_KayleyIntro, Route123_Text_KayleyDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route123_Text_KayleyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route123_EventScript_Jonas::
-	trainerbattle_single TRAINER_JONAS, Route123_Text_JonasIntro, Route123_Text_JonasDefeat
-	msgbox Route123_Text_JonasPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route123_Text_JONAS_LocalConversation, MSGBOX_NPC
 	end
 
 Route123_EventScript_Jazmyn::
@@ -197,3 +195,11 @@ Route123_Text_RouteSignMtPyre:
 
 Route123_Text_BerryMastersHouse:
 	.string "BERRY MASTER'S HOUSE$"
+
+Route123_Text_KINDRA_LocalConversation:
+	.string "That shadow is following you.\n"
+	.string "Most shadows do. Carry on.$"
+
+Route123_Text_JONAS_LocalConversation:
+	.string "My smoke bomb worked perfectly.\n"
+	.string "Finding my lunch afterward did not.$"

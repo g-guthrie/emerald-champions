@@ -1,0 +1,19 @@
+{
+  "status": "local preview; project-wide release gates blocked",
+  "rom_sha256": "195924b9a97e23b0cc68eeb1c35a8284147f67042604ae8556432c21083ca255",
+  "frontier_runtime_tests_passed": 15,
+  "level_regression_tests_passed": 3,
+  "generated_team_seeds": 2048,
+  "generated_pokemon_in_seed_test": 12288,
+  "host_regressions_passed": 10,
+  "species_forms": 756,
+  "individual_set_templates": 1322,
+  "campaign_roster_followup": "PASS; original 203 Champions families remain the pre-League requirement",
+  "remaining_release_blocks": [
+    "Verdant visual byte inventory: new Mega assets absent from its baseline",
+    "competitive presets: Mega archive count is now 99; gate expects 92",
+    "species stat rebalances: configured species inventory changed",
+    "campaign battle master: seven new Mega Stones have no campaign showcase"
+  ],
+  "deployment": "not published"
+}

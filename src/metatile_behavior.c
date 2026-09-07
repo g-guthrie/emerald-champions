@@ -324,21 +324,6 @@ bool8 MetatileBehavior_IsSouthArrowWarp(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 UNUSED Unref_MetatileBehavior_IsArrowWarp(u8 metatileBehavior)
-{
-    bool32 isArrowWarp = FALSE;
-
-    if (MetatileBehavior_IsEastArrowWarp(metatileBehavior)
-     || MetatileBehavior_IsWestArrowWarp(metatileBehavior)
-     || MetatileBehavior_IsNorthArrowWarp(metatileBehavior)
-     || MetatileBehavior_IsSouthArrowWarp(metatileBehavior))
-    {
-        isArrowWarp = TRUE;
-    }
-
-    return isArrowWarp;
-}
-
 bool8 MetatileBehavior_IsForcedMovementTile(u8 metatileBehavior)
 {
     if ((metatileBehavior >= MB_WALK_EAST && metatileBehavior <= MB_TRICK_HOUSE_PUZZLE_8_FLOOR)
@@ -1761,4 +1746,3 @@ bool8 MetatileBehavior_IsTrainerTowerMonitor(u8 metatileBehavior)
     else
         return FALSE;
 }
-

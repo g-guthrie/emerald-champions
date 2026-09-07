@@ -120,10 +120,20 @@ RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist::
 	goto_if_eq VAR_RESULT, NO, RustboroCity_DevonCorp_2F_EventScript_CheckLegendarySign
 	msgbox gStringVar4, MSGBOX_DEFAULT
 RustboroCity_DevonCorp_2F_EventScript_CheckLegendarySign::
-	special TryDiscoverEligibleLegendarySign
+	special BuildLegendarySignResearchMenu
+	goto_if_eq VAR_RESULT, 0, RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery
+	msgbox RustboroCity_DevonCorp_2F_Text_ChooseResearch, MSGBOX_DEFAULT
+	dynmultistack 0, 1, FALSE, 5, TRUE, 0, DYN_MULTICHOICE_CB_NONE
+	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, RustboroCity_DevonCorp_2F_EventScript_EndResearch
+	copyvar VAR_0x8004, VAR_RESULT
+	special ResearchSelectedLegendarySign
 	goto_if_eq VAR_RESULT, 0, RustboroCity_DevonCorp_2F_EventScript_NoLegendarySignYet
 	goto_if_eq VAR_RESULT, 1, RustboroCity_DevonCorp_2F_EventScript_LegendarySignClue
 	goto_if_eq VAR_RESULT, 2, RustboroCity_DevonCorp_2F_EventScript_LegendarySignAwakened
+	goto_if_eq VAR_RESULT, 3, RustboroCity_DevonCorp_2F_EventScript_LegendarySignAwakened
+	goto RustboroCity_DevonCorp_2F_EventScript_CheckLegendarySign
+
+RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery::
 	special TryGiveArceusLegendarySignMasteryReward
 	goto_if_eq VAR_RESULT, 1, RustboroCity_DevonCorp_2F_EventScript_ArceusRewardParty
 	goto_if_eq VAR_RESULT, 2, RustboroCity_DevonCorp_2F_EventScript_ArceusRewardPC
@@ -143,7 +153,8 @@ RustboroCity_DevonCorp_2F_EventScript_TryMagearnaPrototype::
 	special DoesPlayerPartyHaveSelectedSpeciesFamily
 	goto_if_eq VAR_RESULT, FALSE, RustboroCity_DevonCorp_2F_EventScript_MagearnaReturn
 	setvar VAR_0x8004, EC_SIGN_MAGEARNA_ID
-	special TryUnlockSelectedLegendarySign
+	special ResearchSelectedLegendarySign
+	goto_if_eq VAR_RESULT, 5, Common_EventScript_LegendaryDefeatedAtShrine
 	goto_if_eq VAR_RESULT, 0, RustboroCity_DevonCorp_2F_EventScript_MagearnaReturn
 	goto_if_eq VAR_RESULT, 1, RustboroCity_DevonCorp_2F_EventScript_MagearnaReturn
 	setvar VAR_0x8004, EC_SIGN_MAGEARNA_ID
@@ -196,26 +207,37 @@ RustboroCity_DevonCorp_2F_EventScript_ArceusRewardComplete::
 	end
 
 RustboroCity_DevonCorp_2F_EventScript_LegendarySignAwakened::
-	msgbox RustboroCity_DevonCorp_2F_Text_LegendarySignAwakened, MSGBOX_DEFAULT
+	msgbox gStringVar4, MSGBOX_DEFAULT
 	goto RustboroCity_DevonCorp_2F_EventScript_CheckLegendarySign
 
 RustboroCity_DevonCorp_2F_EventScript_LegendarySignClue::
 	msgbox RustboroCity_DevonCorp_2F_Text_LegendarySignClue, MSGBOX_DEFAULT
-	release
-	end
+	goto RustboroCity_DevonCorp_2F_EventScript_CheckLegendarySign
 
 RustboroCity_DevonCorp_2F_EventScript_NoLegendarySignYet::
 	msgbox RustboroCity_DevonCorp_2F_Text_NoLegendarySignYet, MSGBOX_DEFAULT
 	release
 	end
 
+RustboroCity_DevonCorp_2F_EventScript_EndResearch::
+	release
+	end
+
+RustboroCity_DevonCorp_2F_Text_ChooseResearch:
+	.string "Choose a Sign to research or review.\n"
+	.string "(R) marks a translated Sign.$"
+
 RustboroCity_DevonCorp_2F_Text_LegendarySignResearcherIntro:
 	.string "My dream visualizer detected marks\n"
 	.string "I call LEGENDARY SIGNS.\p"
-	.string "They wake when the right Pokémon\n"
-	.string "returns to the marked place.\p"
-	.string "I can also tune an eligible Sign\n"
-	.string "remotely if you bring its partner here.$"
+	.string "Each Sign needs its own translation\n"
+	.string "here at DEVON before it can answer.\p"
+	.string "Bring me the partner shown in a Sign.\n"
+	.string "I'll help you trace its destination.\p"
+	.string "You have one chance at each legendary.\n"
+	.string "Fleeing or a knockout loses it for good.\p"
+	.string "Save before you seek one if you want\n"
+	.string "the option to reload and try again.$"
 
 RustboroCity_DevonCorp_2F_Text_MagearnaParty:
 	.string "DIANCIE's light completes DEVON's\n"
@@ -231,30 +253,25 @@ RustboroCity_DevonCorp_2F_Text_MagearnaNoRoom:
 	.string "The sealed prototype answers DIANCIE,\n"
 	.string "but your party and PC have no room.$"
 
-RustboroCity_DevonCorp_2F_Text_LegendarySignAwakened:
-	.string "{STR_VAR_1} resonates with my data!\p"
-	.string "A Legendary Sign has awakened.\n"
-	.string "{STR_VAR_2} may now appear at\n"
-	.string "{STR_VAR_3}.$"
-
 RustboroCity_DevonCorp_2F_Text_LegendarySignClue:
-	.string "My next readable Sign points toward\n"
-	.string "{STR_VAR_2} at {STR_VAR_3}.\p"
-	.string "Take {STR_VAR_1} there to wake it,\n"
-	.string "or bring that partner to me.$"
+	.string "{STR_VAR_2}'s Sign points to\n"
+	.string "{STR_VAR_3}.\p"
+	.string "Bring {STR_VAR_1}'s family to me\n"
+	.string "here at DEVON to translate this Sign.$"
 
 RustboroCity_DevonCorp_2F_Text_NoLegendarySignYet:
 	.string "The next Sign is still beyond the\n"
 	.string "progress of your Gym challenge.$"
 
 RustboroCity_DevonCorp_2F_Text_AllLegendarySignsRecorded:
-	.string "Every conditional wild SIGN I can tune\n"
-	.string "remotely is awake.\p"
-	.string "The network also spans visible shrines,\n"
-	.string "rare wild finds, breeding, the GAME\l"
-	.string "CORNER, CIRCUIT rewards, and mastery.\p"
-	.string "Complete every source--including MT.\n"
-	.string "PYRE's three--to call ARCEUS.$"
+	.string "I've translated every Sign that your\n"
+	.string "journey has brought within reach.\p"
+	.string "Return as your Gym challenge and\n"
+	.string "Hoenn's story unfold.\p"
+	.string "Capture every Sign's Pokémon, including\n"
+	.string "MT. PYRE's three, to call ARCEUS.\p"
+	.string "A legendary lost through an escape\n"
+	.string "or knockout leaves that unfinished.$"
 
 RustboroCity_DevonCorp_2F_Text_ArceusRewardParty:
 	.string "Every Legendary Sign is complete!\p"

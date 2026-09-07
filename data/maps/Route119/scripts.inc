@@ -333,7 +333,7 @@ Route119_EventScript_WeatherInstituteSign::
 	end
 
 Route119_EventScript_Brent::
-	trainerbattle_single TRAINER_BRENT, Route119_Text_BrentIntro, Route119_Text_BrentDefeat
+	trainerbattle_double TRAINER_BRENT, Route119_Text_BrentIntro, Route119_Text_BrentDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route119_Text_BrentPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -405,8 +405,7 @@ Route119_EventScript_RematchCatherine::
 	end
 
 Route119_EventScript_Hugh::
-	trainerbattle_double TRAINER_HUGH, Route119_Text_HughIntro, Route119_Text_HughDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route119_Text_HughPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route119_Text_HUGH_LocalConversation, MSGBOX_NPC
 	end
 
 Route119_EventScript_Phil::
@@ -440,8 +439,7 @@ Route119_EventScript_Fabian::
 	end
 
 Route119_EventScript_Dayton::
-	trainerbattle_single TRAINER_DAYTON, Route119_Text_DaytonIntro, Route119_Text_DaytonDefeat
-	msgbox Route119_Text_DaytonPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route119_Text_DAYTON_LocalConversation, MSGBOX_NPC
 	end
 
 Route119_EventScript_Rachel::
@@ -507,6 +505,8 @@ Route119_Text_MayPresentForYou:
 Route119_Text_MayExplainFly:
 	.string "MAY: Your FLIGHT BEACON turns on once\n"
 	.string "you hold the FEATHER BADGE.\p"
+	.string "WINONA awards it at FORTREE GYM.\n"
+	.string "Just follow this road north!\p"
 	.string "Use it from the BAG. Any town you've\n"
 	.string "seen, instantly.\p"
 	.string "Go home sometime. Mom asks about you.\p"
@@ -537,6 +537,8 @@ Route119_Text_BrendanIllGiveYouThis:
 Route119_Text_BrendanExplainFly:
 	.string "BRENDAN: Your FLIGHT BEACON turns on\n"
 	.string "once you hold the FEATHER BADGE.\p"
+	.string "WINONA has it at FORTREE GYM.\n"
+	.string "Follow the road north and earn it!\p"
 	.string "Use it from the BAG. Any town you've\n"
 	.string "seen, instantly.\p"
 	.string "I'm off. The SIGNS won't catalog\n"
@@ -549,8 +551,8 @@ Route119_Text_ScottWayToGoBeSeeingYou:
 	.string "a BIKE.\p"
 	.string "You just beat that TRAINER, didn't you?\n"
 	.string "It was pretty obvious that you did.\p"
-	.string "The kid looked really upset with\n"
-	.string "a face all red from anger.\p"
+	.string "Already planning the next battle,\n"
+	.string "by the look of it. I like that spirit!\p"
 	.string "I sure seem to run into you often.\n"
 	.string "Are you off to FORTREE GYM next?\p"
 	.string "I expect that you'll do well at the GYM.\n"
@@ -619,3 +621,11 @@ Route119_Text_TrainerTipsDecoration:
 	.string "Pick your favorite items and create\n"
 	.string "your very own SECRET BASE exactly the\l"
 	.string "way you want.$"
+
+Route119_Text_HUGH_LocalConversation:
+	.string "Listen to the birds for a while.\n"
+	.string "They have plenty to argue about.$"
+
+Route119_Text_DAYTON_LocalConversation:
+	.string "I brought a campfire starter.\n"
+	.string "The rain brought an opinion.$"

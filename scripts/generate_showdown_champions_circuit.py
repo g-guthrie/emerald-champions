@@ -7,16 +7,21 @@ import argparse
 import hashlib
 import json
 import re
+from collections import defaultdict
 from pathlib import Path
 
 
+from showdown_import import ABILITY_OVERRIDES, PINNED_COMMIT, SOURCE_HASHES, constants, mega_suffix, read_pinned_source, to_id, verify_checkout
+
 ROOT = Path(__file__).resolve().parents[1]
-PINNED_COMMIT = "bb179fbf8449e3c31632bd56f671ffb4404fa6e7"
-DEFAULT_SHOWDOWN = Path("/private/tmp/showdown-champions-audit.oiAZXl/repo")
 MANIFEST = ROOT / "data/emerald_champions/showdown_champions_random_doubles.json"
 C_OUTPUT = ROOT / "src" / "data" / "pokemon" / "showdown_champions_circuit.h"
+COUNTS_OUTPUT = ROOT / "include/showdown_champions_circuit.h"
+SOURCE_FILE = "data/random-battles/champions/doubles-sets.json"
+GEN9_SOURCE_FILE = "data/random-battles/gen9/doubles-sets.json"
 
 ROLES = {
+    "Bulky Protect": "SHOWDOWN_ROLE_BULKY_ATTACKER",
     "Offensive Protect": "SHOWDOWN_ROLE_OFFENSIVE_PROTECT",
     "Doubles Support": "SHOWDOWN_ROLE_SUPPORT",
     "Doubles Bulky Setup": "SHOWDOWN_ROLE_BULKY_SETUP",
@@ -39,42 +44,6 @@ COMPATIBILITY_FLAGS = {
     "snow": "SHOWDOWN_COMPAT_SNOW_SETTER",
 }
 
-# Showdown's pinned Champions data uses the official Ability roster. Emerald
-# Champions deliberately retains a small Inclement-derived rebalance layer, so
-# these replaced Abilities must be translated rather than silently falling
-# back to party Ability slot zero at runtime.
-ABILITY_OVERRIDES = {
-    ("SPECIES_MEGANIUM", "ABILITY_LEAF_GUARD"): "ABILITY_TRIAGE",
-    ("SPECIES_TORTERRA", "ABILITY_SHELL_ARMOR"): "ABILITY_SOLID_ROCK",
-    ("SPECIES_ROTOM_FAN", "ABILITY_LEVITATE"): "ABILITY_MOTOR_DRIVE",
-    ("SPECIES_PYROAR", "ABILITY_UNNERVE"): "ABILITY_COMPETITIVE",
-    ("SPECIES_GOODRA", "ABILITY_SAP_SIPPER"): "ABILITY_GOOEY",
-    ("SPECIES_GOURGEIST", "ABILITY_FRISK"): "ABILITY_INSOMNIA",
-    ("SPECIES_GOURGEIST_SMALL", "ABILITY_FRISK"): "ABILITY_INSOMNIA",
-    ("SPECIES_GOURGEIST_LARGE", "ABILITY_FRISK"): "ABILITY_INSOMNIA",
-    ("SPECIES_GOURGEIST_SUPER", "ABILITY_FRISK"): "ABILITY_INSOMNIA",
-}
-
-
-def to_id(value: str) -> str:
-    return re.sub(r"[^a-z0-9]", "", value.lower())
-
-
-def constants(path: Path, prefix: str) -> dict[str, str]:
-    tokens = set(re.findall(rf"\b{prefix}[A-Z0-9_]+\b", path.read_text()))
-    result: dict[str, str] = {}
-    for token in sorted(tokens):
-        result.setdefault(to_id(token[len(prefix):]), token)
-    return result
-
-
-def mega_suffix(species_id: str) -> str | None:
-    for suffix in ("megax", "megay", "megaz", "mega"):
-        if species_id.endswith(suffix) and species_id != "meganium":
-            return suffix
-    return None
-
-
 def compatibility_flags(species_id: str) -> list[str]:
     flags: list[str] = []
     groups = {
@@ -95,82 +64,151 @@ def compatibility_flags(species_id: str) -> list[str]:
 
 
 def build(showdown_root: Path) -> tuple[dict, str]:
-    source = showdown_root / "data" / "random-battles" / "champions" / "doubles-sets.json"
-    raw_bytes = source.read_bytes()
-    raw = json.loads(raw_bytes)
-    species_map = constants(ROOT / "include" / "constants" / "species.h", "SPECIES_")
-    move_map = constants(ROOT / "include" / "constants" / "moves.h", "MOVE_")
-    ability_map = constants(ROOT / "include" / "constants" / "abilities.h", "ABILITY_")
-    type_map = constants(ROOT / "include" / "constants" / "pokemon.h", "TYPE_")
-    form_text = (ROOT / "src" / "data" / "pokemon" / "form_change_tables.h").read_text()
+    from generate_showdown_champions_learnsets import top_level_entries
+    from generate_emerald_champions_battle_sets import species_build_metadata
+    from verify_trainer_ability_legality import resolve_species, species_aliases
+
+    verify_checkout(showdown_root)
+    sources = {name: read_pinned_source(showdown_root, name)
+               for name in (SOURCE_FILE, GEN9_SOURCE_FILE, "data/pokedex.ts",
+                            "data/random-battles/champions/teams.ts", "data/random-battles/gen9/teams.ts")}
+    raw = json.loads(sources[SOURCE_FILE])
+    origins = dict.fromkeys(raw, SOURCE_FILE)
+    for species, value in json.loads(sources[GEN9_SOURCE_FILE]).items():
+        if species not in raw:
+            raw[species] = value
+            origins[species] = GEN9_SOURCE_FILE
+    pokedex = top_level_entries(sources["data/pokedex.ts"].decode())
+    species_map = constants(ROOT / "include/constants/species.h", "SPECIES_")
+    move_map = constants(ROOT / "include/constants/moves.h", "MOVE_")
+    ability_map = constants(ROOT / "include/constants/abilities.h", "ABILITY_")
+    ability_map.update(asoneglastrier="ABILITY_AS_ONE_ICE_RIDER", asonespectrier="ABILITY_AS_ONE_SHADOW_RIDER")
+    item_map = constants(ROOT / "include/constants/items.h", "ITEM_")
+    type_map = constants(ROOT / "include/constants/pokemon.h", "TYPE_")
+    aliases = species_aliases()
+    metadata = species_build_metadata()
+    form_text = (ROOT / "src/data/pokemon/form_change_tables.h").read_text()
     mega_items = dict(re.findall(
-        r"FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM,\s*(SPECIES_[A-Z0-9_]+),\s*(ITEM_[A-Z0-9_]+)",
-        form_text,
-    ))
+        r"FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM,\s*(SPECIES_[A-Z0-9_]+),\s*(ITEM_[A-Z0-9_]+)", form_text))
+    authored_path = ROOT / "data/emerald_champions/emerald_champions_battle_sets.json"
+    authored = json.loads(authored_path.read_text())
+    authored_by_species = defaultdict(list)
+    for entry in authored["defaults"] + authored["alternatives"]:
+        authored_by_species[resolve_species(entry["species"], aliases)].append(entry)
 
-    variants: list[dict] = []
-    templates: list[dict] = []
-    for species_id, species_data in raw.items():
-        form_species = species_map[species_id]
-        suffix = mega_suffix(species_id)
-        if suffix:
-            base_id = species_id[:-len(suffix)]
-            party_species = species_map[base_id]
-            required_item = mega_items[form_species]
-        else:
-            party_species = form_species
-            required_item = "ITEM_NONE"
+    variants, templates, omitted = [], [], []
+    represented = set()
 
-        offset = len(templates)
-        for source_set in species_data["sets"]:
-            preferred = source_set.get("preferredTypes", [])
-            abilities = [ability_map[to_id(ability)] for ability in source_set.get("abilities", [])]
-            abilities = [ABILITY_OVERRIDES.get((party_species, ability), ability) for ability in abilities]
-            template = {
-                "role": ROLES[source_set["role"]],
-                "moves": [move_map[to_id(move)] for move in source_set["movepool"]],
-                "abilities": abilities,
-                "preferred_type": type_map[to_id(preferred[0])] if preferred else "TYPE_NONE",
-            }
-            templates.append(template)
+    def add_variant(species_id, party, form, item, rows, source):
+        if not rows:
+            return
+        canonical = resolve_species(party, aliases)
+        key = (canonical, form, item)
+        if key in represented:
+            return
+        represented.add(key)
         variants.append({
-            "showdown_id": species_id,
-            "party_species": party_species,
-            "form_species": form_species,
-            "required_item": required_item,
-            "template_offset": offset,
-            "template_count": len(species_data["sets"]),
-            "compatibility_flags": compatibility_flags(species_id),
+            "showdown_id": species_id, "party_species": party,
+            "form_species": form, "required_item": item,
+            "template_offset": len(templates), "template_count": len(rows),
+            "compatibility_flags": compatibility_flags(species_id), "source": source,
         })
+        templates.extend(rows)
 
-    assert len(variants) == 311
-    assert len(templates) == 444
-    assert all(1 <= len(entry["moves"]) <= 8 for entry in templates)
-    assert all(1 <= len(entry["abilities"]) <= 2 for entry in templates)
+    for species_id, species_data in raw.items():
+        if species_id not in species_map:
+            omitted.append({"id": species_id, "reason": "no matching engine form"})
+            continue
+        form = species_map[species_id]
+        suffix = mega_suffix(species_id) if form in mega_items else None
+        party = species_map[species_id[:-len(suffix)]] if suffix else form
+        info = metadata.get(party, {})
+        item = mega_items[form] if suffix else "ITEM_NONE"
+        required = re.search(r'requiredItems?:\s*\[?["\']([^"\']+)', pokedex.get(species_id, ""))
+        if required and not suffix:
+            item = item_map[to_id(required.group(1))]
+        rows = []
+        for source_set in species_data["sets"]:
+            if source_set["role"] == "Tera Blast user":
+                omitted.append({"id": species_id, "reason": "Tera-dependent role; no Tera in this format"})
+                continue
+            abilities = [ABILITY_OVERRIDES.get((party, ability_map[to_id(a)]), ability_map[to_id(a)])
+                         for a in source_set["abilities"]]
+            abilities = [a for a in abilities if a in info.get("abilities", ())]
+            # Unsupported Ability adaptations use the existing authored fallback
+            # below, never an arbitrary Ability unrelated to the upstream role.
+            if not abilities:
+                omitted.append({"id": species_id, "reason": "no configured Ability for role"})
+                continue
+            moves = [move_map[to_id(m)] for m in source_set["movepool"] if to_id(m) != "terablast"]
+            if len(moves) < 4 and len(source_set["movepool"]) >= 4:
+                omitted.append({"id": species_id, "reason": "incomplete role after removing Tera Blast"})
+                continue
+            preferred = source_set.get("preferredTypes", [])
+            rows.append({"role": ROLES[source_set["role"]], "moves": moves,
+                         "abilities": abilities,
+                         "preferred_type": type_map[to_id(preferred[0])] if preferred else "TYPE_NONE"})
+        add_variant(species_id, party, form, item, rows, origins[species_id])
+
+    # Legacy species absent from the two upstream pools retain their reviewed
+    # individual doubles sets. No opponent teams are stored or precomputed.
+    engine_ids = {resolve_species(token, aliases): key for key, token in species_map.items()
+                  if key in pokedex and "baseSpecies:" not in pokedex[key]}
+    present = {resolve_species(v["party_species"], aliases) for v in variants}
+    for species, entries in authored_by_species.items():
+        info = metadata.get(species, {})
+        species_id = engine_ids.get(species, to_id(species.removeprefix("SPECIES_")))
+        body = pokedex.get(species_id, "")
+        if species in present or not info or (info.get("evolves") and species_id not in raw):
+            continue
+        # Cosmetic/battle-only formes are represented by their ordinary owner;
+        # the upstream datasets explicitly select other competitively useful forms.
+        if not body or "battleOnly:" in body or mega_suffix(species_id) or "baseSpecies:" in body:
+            continue
+        rows = []
+        for entry in entries:
+            if entry["required_item"] != "ITEM_NONE" or entry["ability"] not in info["abilities"]:
+                continue
+            rows.append({"role": "SHOWDOWN_ROLE_SUPPORT", "moves": entry["moves"],
+                         "abilities": [entry["ability"]], "preferred_type": "TYPE_NONE",
+                         "authored": True, "item": entry["item"], "nature": entry["nature"],
+                         "stat_points": [entry["stat_points"][i] for i in (0, 1, 2, 5, 3, 4)],
+                         "dependency": "CIRCUIT_DEPENDENCY_" + (entry.get("field_dependency") or "none").upper().replace("-", "_"),
+                         "name": entry["name"]})
+        add_variant(species_id, species, species, "ITEM_NONE", rows, "authored doubles supplement")
+
+    def dex_number(variant):
+        body = pokedex.get(variant["showdown_id"], "")
+        match = re.search(r"num: (\d+)", body)
+        if not match:
+            raise ValueError("missing National Dex identity: " + variant["showdown_id"])
+        return int(match.group(1))
+
+    # The ROM samples families, not forms; its linear family scan requires
+    # contiguous National Dex groups after merging sources.
+    variants.sort(key=lambda v: (dex_number(v), v["showdown_id"]))
     manifest = {
-        "schema_version": 1,
-        "source": "Pokemon Showdown Champions random doubles",
-        "source_commit": PINNED_COMMIT,
-        "source_file": "data/random-battles/champions/doubles-sets.json",
-        "source_sha256": hashlib.sha256(raw_bytes).hexdigest(),
+        "schema_version": 2,
+        "source": "Pokemon Showdown Champions and Gen 9 random doubles with legacy doubles supplements",
+        "source_commit": PINNED_COMMIT, "source_file": SOURCE_FILE,
+        "source_sha256": hashlib.sha256(sources[SOURCE_FILE]).hexdigest(),
+        "source_files": {name: hashlib.sha256(data).hexdigest() for name, data in sources.items()},
+        "supplement_source_sha256": hashlib.sha256(authored_path.read_bytes()).hexdigest(),
         "license": "MIT; copyright 2011-2026 Guangcong Luo and other contributors",
         "policy": {
             "runtime": "teams and moves are selected on demand in the GBA ROM",
-            "adaptations": "Circuit level escalation, Emerald AI, Mega-only selectable gimmick",
-            "ability_overrides": {
-                f"{species}/{ability}": replacement
-                for (species, ability), replacement in sorted(ABILITY_OVERRIDES.items())
-            },
+            "adaptations": "Champions mechanics; no Tera-dependent roles; form items retained; legacy individual doubles sets",
+            "eligibility": "upstream competitive roster plus fully evolved legacy species; no blanket weak unevolved filler",
+            "ability_overrides": {f"{species}/{ability}": replacement
+                for (species, ability), replacement in sorted(ABILITY_OVERRIDES.items())},
         },
-        "variant_count": len(variants),
-        "template_count": len(templates),
-        "variants": variants,
-        "templates": templates,
+        "variant_count": len(variants), "template_count": len(templates),
+        "omitted_roles": omitted, "variants": variants, "templates": templates,
     }
-    return manifest, hashlib.sha256(raw_bytes).hexdigest()
+    return manifest, manifest["source_sha256"]
 
 
-def write_c(manifest: dict) -> None:
+def render_c(manifest: dict) -> str:
     lines = [
         "// Generated by scripts/generate_showdown_champions_circuit.py. Do not edit.",
         "// Derived from Pokemon Showdown at commit " + PINNED_COMMIT + ".",
@@ -198,8 +236,8 @@ def write_c(manifest: dict) -> None:
         "{",
     ])
     for entry in manifest["templates"]:
-        moves = entry["moves"] + ["MOVE_NONE"] * (8 - len(entry["moves"]))
-        abilities = entry["abilities"] + ["ABILITY_NONE"] * (2 - len(entry["abilities"]))
+        moves = entry["moves"] + ["MOVE_NONE"] * (9 - len(entry["moves"]))
+        abilities = entry["abilities"] + ["ABILITY_NONE"] * (3 - len(entry["abilities"]))
         lines.extend([
             "    {",
             "        .moves = {" + ", ".join(moves) + "},",
@@ -208,20 +246,89 @@ def write_c(manifest: dict) -> None:
             f"        .role = {entry['role']},",
             f"        .moveCount = {len(entry['moves'])},",
             f"        .abilityCount = {len(entry['abilities'])},",
+            *( ["        .authored = TRUE,", f"        .item = {entry['item']},",
+                 f"        .nature = {entry['nature']},",
+                 f"        .dependency = {entry['dependency']},",
+                 "        .statPoints = {" + ", ".join(map(str, entry["stat_points"])) + "},"]
+               if entry.get("authored") else [] ),
             "    },",
         ])
     lines.extend(["};", ""])
-    C_OUTPUT.write_text("\n".join(lines))
+    return "\n".join(lines)
+
+
+def validate_manifest(manifest: dict) -> None:
+    if (manifest["source_commit"] != PINNED_COMMIT
+        or manifest["source_file"] != SOURCE_FILE
+        or manifest["source_sha256"] != SOURCE_HASHES[SOURCE_FILE]):
+        raise ValueError("Circuit manifest provenance does not match the pinned source")
+    if manifest.get("schema_version") == 2:
+        for name in (SOURCE_FILE, GEN9_SOURCE_FILE, "data/pokedex.ts",
+                            "data/random-battles/champions/teams.ts", "data/random-battles/gen9/teams.ts"):
+            if manifest.get("source_files", {}).get(name) != SOURCE_HASHES[name]:
+                raise ValueError("Circuit combined source provenance mismatch: " + name)
+    for kind in ("variant", "template"):
+        if manifest[kind + "_count"] != len(manifest[kind + "s"]):
+            raise ValueError(f"Circuit {kind} count does not match its records")
+    for template in manifest["templates"]:
+        if not (1 <= len(template["moves"]) <= 9 and 1 <= len(template["abilities"]) <= 3):
+            raise ValueError("Circuit template exceeds the runtime move/Ability bounds")
+        if len(set(template["moves"])) != len(template["moves"]) or "MOVE_NONE" in template["moves"]:
+            raise ValueError("Circuit template contains duplicate or empty moves")
+        if template.get("authored"):
+            points = template.get("stat_points", [])
+            if len(template["moves"]) > 4 or len(points) != 6 or sum(points) != 66 or any(p < 0 or p > 32 for p in points):
+                raise ValueError("Circuit authored supplement violates the competitive set budget")
+            if template.get("dependency") not in {
+                "CIRCUIT_DEPENDENCY_" + name for name in
+                ("NONE", "RAIN", "SUN", "SAND", "SNOW", "TRICK_ROOM", "TERRAIN", "GRAVITY")
+            }:
+                raise ValueError("Circuit authored supplement has an unknown field dependency")
+    for variant in manifest["variants"]:
+        if not (0 <= variant["template_offset"] < len(manifest["templates"])
+                and 0 < variant["template_count"] <= len(manifest["templates"]) - variant["template_offset"]):
+            raise ValueError("Circuit template range is outside the manifest")
+
+
+def render_counts(manifest: dict, header: str) -> str:
+    counts = ("// Generated counts: scripts/generate_showdown_champions_circuit.py\n"
+              f"#define SHOWDOWN_CIRCUIT_VARIANT_COUNT {len(manifest['variants'])}\n"
+              f"#define SHOWDOWN_CIRCUIT_TEMPLATE_COUNT {len(manifest['templates'])}\n")
+    rendered, matches = re.subn(
+        r"(?m)(?:// Generated counts: scripts/generate_showdown_champions_circuit\.py\n)?"
+        r"#define SHOWDOWN_CIRCUIT_VARIANT_COUNT [^\n]+\n"
+        r"#define SHOWDOWN_CIRCUIT_TEMPLATE_COUNT [^\n]+\n", counts, header)
+    if matches != 1:
+        raise ValueError("Circuit header must have exactly one count declaration pair")
+    return rendered
+
+
+def project(manifest: dict, *, check: bool, c_output: Path = C_OUTPUT, counts_output: Path = COUNTS_OUTPUT) -> None:
+    validate_manifest(manifest)
+    outputs = {c_output: render_c(manifest), counts_output: render_counts(manifest, counts_output.read_text())}
+    if check:
+        stale = [str(path) for path, rendered in outputs.items() if path.read_text() != rendered]
+        if stale:
+            raise ValueError("Circuit generated outputs are stale: " + ", ".join(stale))
+    else:
+        for path, rendered in outputs.items():
+            path.write_text(rendered)
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--showdown-root", type=Path, default=DEFAULT_SHOWDOWN)
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--showdown-root", type=Path, help="explicitly import verified pinned upstream data")
+    mode.add_argument("--check", action="store_true", help="compare local manifest projections without writing")
     args = parser.parse_args()
-    manifest, _ = build(args.showdown_root)
-    MANIFEST.write_text(json.dumps(manifest, indent=2) + "\n")
-    write_c(manifest)
-    print(f"generated {manifest['variant_count']} variants and {manifest['template_count']} templates")
+    if args.showdown_root is not None:
+        manifest, _ = build(args.showdown_root)
+    else:
+        manifest = json.loads(MANIFEST.read_text())
+    project(manifest, check=args.check)
+    if args.showdown_root is not None:
+        MANIFEST.write_text(json.dumps(manifest, indent=2) + "\n")
+    print(f"{'checked' if args.check else 'generated'} {manifest['variant_count']} variants and {manifest['template_count']} templates")
 
 
 if __name__ == "__main__":

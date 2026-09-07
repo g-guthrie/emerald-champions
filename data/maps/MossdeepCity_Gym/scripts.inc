@@ -59,6 +59,7 @@ MossdeepCity_Gym_EventScript_TateAndLiza::
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, MossdeepCity_Gym_EventScript_TateAndLizaRematch
 	goto_if_unset FLAG_RECEIVED_TATE_LIZA_METAGROSSITE, MossdeepCity_Gym_EventScript_GiveMetagrossite2
+	goto_if_lt VAR_MOSSDEEP_SPACE_CENTER_STATE, 3, MossdeepCity_Gym_EventScript_SpaceCenterReminder
 	msgbox MossdeepCity_Gym_Text_TateAndLizaPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -104,6 +105,7 @@ MossdeepCity_Gym_EventScript_GiveMetagrossite2::
 	giveitem ITEM_METAGROSSITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	msgbox MossdeepCity_Gym_Text_ExplainMetagrossite, MSGBOX_DEFAULT
+	call_if_lt VAR_MOSSDEEP_SPACE_CENTER_STATE, 3, MossdeepCity_Gym_EventScript_SpaceCenterHandoff
 	setflag FLAG_RECEIVED_TATE_LIZA_METAGROSSITE
 	release
 	end
@@ -112,6 +114,7 @@ MossdeepCity_Gym_EventScript_GiveMetagrossite::
 	giveitem ITEM_METAGROSSITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 	msgbox MossdeepCity_Gym_Text_ExplainMetagrossite, MSGBOX_DEFAULT
+	call_if_lt VAR_MOSSDEEP_SPACE_CENTER_STATE, 3, MossdeepCity_Gym_EventScript_SpaceCenterHandoff
 	setflag FLAG_RECEIVED_TATE_LIZA_METAGROSSITE
 	return
 
@@ -630,3 +633,18 @@ MossdeepCity_Gym_Text_TateAndLizaRematchNeedTwoMons:
 	.string "LIZA: You brought just one POKéMON!\p"
 	.string "TATE: We need you to bring at least…\n"
 	.string "LIZA: Two POKéMON when you come back.$"
+
+MossdeepCity_Gym_EventScript_SpaceCenterReminder::
+	call MossdeepCity_Gym_EventScript_SpaceCenterHandoff
+	release
+	end
+
+MossdeepCity_Gym_EventScript_SpaceCenterHandoff::
+	msgbox MossdeepCity_Gym_Text_SpaceCenterHandoff, MSGBOX_DEFAULT
+	return
+
+MossdeepCity_Gym_Text_SpaceCenterHandoff:
+	.string "TATE: TEAM MAGMA is after the\n"
+	.string "SPACE CENTER's rocket fuel.\p"
+	.string "LIZA: Please help STEVEN stop them!\n"
+	.string "The SPACE CENTER is east of our GYM.$"

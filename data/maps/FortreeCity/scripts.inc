@@ -100,7 +100,10 @@ FortreeCity_Text_SomethingBlockingGym:
 	.string "I want to go to the POKéMON GYM,\n"
 	.string "but something's blocking the way.\p"
 	.string "After all the bother I went through\n"
-	.string "training on ROUTE 120…$"
+	.string "training on ROUTE 120…\p"
+	.string "STEVEN is on the bridge east of town.\n"
+	.string "He was studying something invisible.\p"
+	.string "Maybe he can help us clear the GYM path!$"
 
 FortreeCity_Text_ThisTimeIllBeatWinona:
 	.string "I've got my pride-and-joy POKéMON\n"

@@ -53,6 +53,7 @@ NavelRock_Bottom_EventScript_Lugia::
 	delay 20
 	setvar VAR_0x8004, SPECIES_LUGIA
 	setvar VAR_0x8005, 0
+	msgbox gText_LegendaryOneShotWarning, MSGBOX_DEFAULT
 	special CreateEmeraldChampionsStaticLegendaryEncounter
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
@@ -71,8 +72,7 @@ NavelRock_Bottom_EventScript_CaughtLugia::
 	end
 
 NavelRock_Bottom_EventScript_DefeatedLugia::
-	setvar VAR_0x8004, SPECIES_LUGIA
-	goto Common_EventScript_LegendaryFlewAway
+	goto Common_EventScript_LegendaryDefeated
 	end
 
 NavelRock_Bottom_EventScript_RanFromLugia::

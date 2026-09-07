@@ -227,62 +227,6 @@ u8 *ConvertIntToDecimalStringN(u8 *dest, s32 value, enum StringConvertMode mode,
     return dest;
 }
 
-u8 *ConvertUIntToDecimalStringN(u8 *dest, u32 value, enum StringConvertMode mode, u8 n)
-{
-    enum { WAITING_FOR_NONZERO_DIGIT, WRITING_DIGITS, WRITING_SPACES } state;
-    s32 powerOfTen;
-    s32 largestPowerOfTen = sPowersOfTen[n - 1];
-
-    state = WAITING_FOR_NONZERO_DIGIT;
-
-    if (mode == STR_CONV_MODE_RIGHT_ALIGN)
-        state = WRITING_SPACES;
-
-    if (mode == STR_CONV_MODE_LEADING_ZEROS)
-        state = WRITING_DIGITS;
-
-    for (powerOfTen = largestPowerOfTen; powerOfTen > 0; powerOfTen /= 10)
-    {
-        u8 c;
-        u16 digit = value / powerOfTen;
-        u32 temp = value - (powerOfTen * digit);
-
-        if (state == WRITING_DIGITS)
-        {
-            u8 *out = dest++;
-
-            if (digit <= 9)
-                c = sDigits[digit];
-            else
-                c = CHAR_QUESTION_MARK;
-
-            *out = c;
-        }
-        else if (digit != 0 || powerOfTen == 1)
-        {
-            u8 *out;
-            state = WRITING_DIGITS;
-            out = dest++;
-
-            if (digit <= 9)
-                c = sDigits[digit];
-            else
-                c = CHAR_QUESTION_MARK;
-
-            *out = c;
-        }
-        else if (state == WRITING_SPACES)
-        {
-            *dest++ = CHAR_SPACER;
-        }
-
-        value = temp;
-    }
-
-    *dest = EOS;
-    return dest;
-}
-
 u8 *ConvertIntToHexStringN(u8 *dest, s32 value, enum StringConvertMode mode, u8 n)
 {
     enum { WAITING_FOR_NONZERO_DIGIT, WRITING_DIGITS, WRITING_SPACES } state;
@@ -390,44 +334,6 @@ u8 *StringExpandPlaceholders(u8 *dest, const u8 *src)
         case CHAR_NEWLINE:
         default:
             *dest++ = c;
-        }
-    }
-}
-
-u8 *StringBraille(u8 *dest, const u8 *src)
-{
-    const u8 setBrailleFont[] = {
-        EXT_CTRL_CODE_BEGIN,
-        EXT_CTRL_CODE_FONT,
-        FONT_BRAILLE,
-        EOS
-    };
-    const u8 gotoLine2[] = {
-        CHAR_NEWLINE,
-        EXT_CTRL_CODE_BEGIN,
-        EXT_CTRL_CODE_SHIFT_DOWN,
-        2,
-        EOS
-    };
-
-    dest = StringCopy(dest, setBrailleFont);
-
-    for (;;)
-    {
-        u8 c = *src++;
-
-        switch (c)
-        {
-        case EOS:
-            *dest = c;
-            return dest;
-        case CHAR_NEWLINE:
-            dest = StringCopy(dest, gotoLine2);
-            break;
-        default:
-            *dest++ = c;
-            *dest++ = c + NUM_BRAILLE_CHARS;
-            break;
         }
     }
 }

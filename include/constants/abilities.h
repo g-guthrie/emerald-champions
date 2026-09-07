@@ -344,6 +344,9 @@ enum __attribute__((packed)) Ability
 
     // Emerald Champions extensions retained from Inclement Emerald.
     ABILITY_BLITZ_BOXER = ABILITIES_COUNT_GEN9,
+    ABILITY_POWER_FISTS,
+    ABILITY_SAND_SONG,
+    ABILITY_PRISM_SCALES,
     ABILITIES_COUNT,
 };
 

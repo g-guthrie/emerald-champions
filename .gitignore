@@ -64,9 +64,6 @@ tools/compresSmol/compresSmol
 tools/compresSmol/compresSmolTilemap
 tools/aif2pcm/aif2pcm
 *.Identifier
-*.smol
-*.fastSmol
-*.smolTM
 __pycache__
 .map_version
 
@@ -88,3 +85,7 @@ work/visual-audit/rendered/grave-site-probe/
 
 # Disposable Docker builder object trees and ELF/GBA copies
 work/docker-output/
+
+# Library build receipts and their atomic temporary files are cache state.
+/libagbsyscall/.assembly-config.json*
+/libagbsyscall/.archive-config.json*

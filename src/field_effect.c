@@ -1016,12 +1016,6 @@ u8 CreateTrainerSprite(enum TrainerPicID trainerPicId, s16 x, s16 y, u8 subprior
     return CreateSprite(&spriteTemplate, x, y, subpriority);
 }
 
-static void UNUSED LoadTrainerGfx_TrainerCard(u8 gender, u16 palOffset, u8 *dest)
-{
-    DecompressDataWithHeaderVram(GetTrainerFrontPicData(gender), dest);
-    LoadPalette(GetTrainerFrontPicPalette(gender), palOffset, PLTT_SIZE_4BPP);
-}
-
 u8 AddNewGameBirchObject(s16 x, s16 y, u8 subpriority)
 {
     LoadSpritePalette(&sSpritePalette_NewGameBirch);

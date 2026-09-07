@@ -1,0 +1,142 @@
+
+== core services ==
+core_service_static_checks=PASS
+pokemon_centers=16
+medicine_mart_lists=21
+free_battle_items=128
+
+== native field UI ==
+PASS: both restored Pokemon Center layouts are exact reviewed 16x9 binaries
+PASS: party skin loads the full 11-bank palette
+PASS: inherited party/Summary/Bag copy and Pokedex No001 numbering match Inclement
+PASS: all 16 Centers have collision-free native geometry and whiteout camera alignment
+PASS: the League lobby retains native services and aligned whiteout healing
+PASS: Ability selection is direct, measured, and returns in place
+PASS: first-screen R-button and move-info paths guard the sprite sentinel
+PASS: Leveler batches to the cap, skips Eggs, and chains evolutions
+PASS: battle-set recognition and cursor preselection use the full current orientation
+PASS: unified move list uses a 16-bit count for Mew's 372 preparation moves
+PASS: battle vendor keeps independent cursors and B/Back returns one native level
+PASS: every move-specialist branch has explicit one-level cancel/back behavior
+PASS: free Stat Point editing is native, bounded to 66/32, and shared with Fallarbor
+PASS: free battle-vendor lists show only item names; paid shops retain native prices
+PASS: both starter-region flows remember only valid selections across native backtracking
+PASS: the Forces of Nature are conditional encounters, never permanent route props
+PASS: Inclement's exact eight physical encounters have one-to-one render coverage
+PASS: headless fixtures default off and all production callback seams compile out
+PASS: renderer preserves 141 required scenarios; Inclement seam renders require decoded-pixel and semantic runtime proof
+PASS: Pokedex, Summary, and all eight Bag pockets expose semantic final-state observers
+PASS: Furfrou exposes ten ordered trims plus geometry-safe native B/Back scrolling
+PASS: 21 Hoenn whiteouts, HOF 1/6, and both 2x2 door halves have semantic fixtures
+PASS: high-risk battle, boot, Pokeblock, Storage, Frontier, and Trainer Card fixtures remain composed
+PASS: 7 live non-debug dynamic menus stay above the bottom textbox; battle categories show at most 5 rows
+EMERALD CHAMPIONS NATIVE UI GATE: PASS
+
+== visual contracts ==
+EMERALD CHAMPIONS VISUAL CONTRACTS: PASS
+registered_maps=957 map_event_records=9693 registered_warps=2696 reviewed_off_map_events=17
+reviewed_unconditional_object_stacks=1
+scripted_warp_coordinates=192 reviewed_dynamic_scripted_warps=2
+literal_local_id_visual_calls=1848 briney_cross_map_calls=12
+map_special_calls=982 map_special_names=259 classified_visual_special_calls=171
+direct_map_effect_calls=5 classified_effects=3
+world_sparkle_anchors=12 healer_destinations=21
+script_world_coordinates=777 reviewed_off_map=1
+shared_nurse_callers=18 fixed_screen_placements=8
+mutation_probes=10 dormant_frlg_findings=1
+INFO dormant FRLG: HEAL_LOCATION_INDIGO_PLATEAU: LOCALID_LEAGUE_NURSE missing from MAP_INDIGO_PLATEAU_POKEMON_CENTER_1F
+
+== compiled map tile compatibility and dynamic inventory ==
+{
+  "status": "compiled_structure_passed_with_unresolved_states",
+  "counts": {
+    "registered_maps": 957,
+    "compiled_hoenn_maps": 540,
+    "dormant_maps": 417,
+    "registered_layouts": 807,
+    "compiled_layouts": 463,
+    "tilesets": 139,
+    "placement_cells": 585957,
+    "compiled_placement_cells": 346343,
+    "used_metatiles_per_layout": 45970,
+    "script_writes": 1416,
+    "script_write_commands": {
+      "setmetatile": 1416
+    },
+    "script_map_state_changes": 267,
+    "unresolved_script_writes": 491,
+    "unresolved_script_writes_possible_hoenn": 166,
+    "script_writes_without_map_context": 46,
+    "errors": 47,
+    "compiled_errors": 0,
+    "dormant_errors": 47,
+    "unresolved_static_ownership": 1
+  }
+}
+
+== Inclement visual sources ==
+PASS: graphics/pokedex/hgss (33 files)
+PASS: graphics/summary_screen (16 files)
+PASS: graphics/party_menu (13 files)
+PASS: graphics/object_events/pics/people/nurse.png
+PASS: Nurse Joy uses Inclement's ten unique frames
+PASS: Nurse Joy uses Inclement's healing choreography
+PASS: high-risk Inclement story choreography is ordered and visible
+PASS: all 53 Emerald door assets and renderer mappings compile to Inclement bytes
+INCLEMENT VISUAL SOURCE GATE: PASS
+
+== Inclement overworld parity ==
+INCLEMENT OVERWORLD PARITY: PASS (540 maps, 2718 visual objects, 1566 tileset assets, semantic adaptations objects=308 coord=15 bg=62, mutation_probes=4, source cf41a95b68a39ca74fefeb934c460f6f47eb0b3b)
+
+== Inclement story parity ==
+Coverage: 540 map object comparisons; 490 callback comparisons; 996 current and 553 reference scripts scanned for flag setters; 2 new maps and 419 new map scripts have no historical counterpart; 0 removed maps and 0 removed map scripts are outside object/callback comparison
+INCLEMENT STORY PARITY: PASS (20 observed reviewed divergences, baseline cf41a95b; selected static checks only)
+
+== local warp collision regressions ==
+Coverage: 540 map pairs compared; 2 new maps checked without a historical counterpart; 0 reference-only maps outside this comparison; 1402 current and 1402 reference warps inspected; 9 current and 9 reference warps unmodeled (border or no collision-free adjacent tile)
+MAP REACHABILITY: PASS (local collision heuristic only; Inclement cf41a95b; campaign reachability not verified)
+
+== NPC script integrity ==
+NPC SCRIPT INTEGRITY: PASS (3972 NPC scripts, 2375 compared against Inclement, 17277 jump targets resolved)
+
+== retired route conversations ==
+PASS: retired route fights preserve NPC placement, dialogue and species showcases
+
+== Verdant visual byte inventory ==
+visual parity manifest is stale; run python3 scripts/audit_verdant_visual_parity.py --write
+added: graphics/items/icon_palettes/butterfrenite.pal
+added: graphics/items/icon_palettes/flygonite.pal
+added: graphics/items/icon_palettes/kingdranite.pal
+added: graphics/items/icon_palettes/kinglerite.pal
+added: graphics/items/icon_palettes/laprasite.pal
+added: graphics/items/icon_palettes/machampite.pal
+added: graphics/items/icon_palettes/miloticite.pal
+added: graphics/items/icons/butterfrenite.png
+added: graphics/items/icons/flygonite.png
+added: graphics/items/icons/kingdranite.png
+added: graphics/items/icons/kinglerite.png
+added: graphics/items/icons/laprasite.png
+added: graphics/items/icons/machampite.png
+added: graphics/items/icons/miloticite.png
+added: graphics/pokemon/butterfree/mega/back.png
+added: graphics/pokemon/butterfree/mega/front.png
+added: graphics/pokemon/butterfree/mega/icon.png
+added: graphics/pokemon/butterfree/mega/normal.pal
+added: graphics/pokemon/butterfree/mega/shiny.pal
+added: graphics/pokemon/flygon/mega/back.png
+changed: src/data/graphics/items.h
+changed: src/data/graphics/pokemon.h
+Traceback (most recent call last):
+  File "/Users/gguthrie/Projects/Pokémon Emerald Champions/game-source/scripts/verify_emerald_champions_release.py", line 317, in <module>
+    main()
+    ~~~~^^
+  File "/Users/gguthrie/Projects/Pokémon Emerald Champions/game-source/scripts/verify_emerald_champions_release.py", line 305, in main
+    run_gate(label, command)
+    ~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Users/gguthrie/Projects/Pokémon Emerald Champions/game-source/scripts/verify_emerald_champions_release.py", line 88, in run_gate
+    subprocess.run(command, cwd=ROOT, check=True)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.6/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 578, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '('/opt/homebrew/opt/python@3.14/bin/python3.14', 'scripts/audit_verdant_visual_parity.py', '--check-fast')' returned non-zero exit status 1.

@@ -543,15 +543,6 @@ static const union AnimCmd *const sAnims_Flygon[] =
     sAnim_FlygonRight
 };
 
-static const struct SpriteTemplate sSpriteTemplate_FlygonLatios =
-{
-    .tileTag = TAG_FLYGON_LATIOS,
-    .paletteTag = TAG_FLYGON_LATIOS,
-    .oam = &sOamData_Flygon,
-    .anims = sAnims_Flygon,
-    .callback = SpriteCB_FlygonLeftHalf
-};
-
 static const struct SpriteTemplate sSpriteTemplate_FlygonLatias =
 {
     .tileTag = TAG_FLYGON_LATIAS,
@@ -1133,16 +1124,6 @@ static void SpriteCB_FlygonRightHalf(struct Sprite *sprite)
 }
 
 // In RS these were for Latios/Latias. In Emerald both are replaced with Flygon and now only 1 is used
-static u8 UNUSED CreateIntroFlygonSprite_Unused(s16 x, s16 y)
-{
-    u8 leftSpriteId = CreateSprite(&sSpriteTemplate_FlygonLatios, x - 32, y, 5);
-    u8 rightSpriteId = CreateSprite(&sSpriteTemplate_FlygonLatios, x + 32, y, 6);
-    gSprites[rightSpriteId].sLeftSpriteId = leftSpriteId;
-    StartSpriteAnim(&gSprites[rightSpriteId], 1);
-    gSprites[rightSpriteId].callback = &SpriteCB_FlygonRightHalf;
-    return leftSpriteId;
-}
-
 
 u8 CreateIntroFlygonSprite(s16 x, s16 y)
 {

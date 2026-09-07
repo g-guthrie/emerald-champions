@@ -48,6 +48,7 @@ SkyPillar_Top_EventScript_Rayquaza::
 	waitmoncry
 	setvar VAR_0x8004, SPECIES_RAYQUAZA
 	setvar VAR_0x8005, 0
+	msgbox gText_LegendaryOneShotWarning, MSGBOX_DEFAULT
 	special CreateEmeraldChampionsStaticLegendaryEncounter
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
@@ -66,8 +67,7 @@ SkyPillar_Top_EventScript_CaughtRayquaza::
 	end
 
 SkyPillar_Top_EventScript_DefeatedRayquaza::
-	setvar VAR_0x8004, SPECIES_RAYQUAZA
-	goto SkyPillar_Top_EventScript_RanFromRayquaza2
+	goto Common_EventScript_LegendaryDefeated
 	end
 
 SkyPillar_Top_EventScript_RanFromRayquaza::

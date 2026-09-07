@@ -33,8 +33,7 @@ Route107_EventScript_Denise::
 	end
 
 Route107_EventScript_Beth::
-	trainerbattle_double TRAINER_BETH, Route107_Text_BethIntro, Route107_Text_BethDefeated, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route107_Text_BethPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route107_Text_BETH_LocalConversation, MSGBOX_NPC
 	end
 
 Route107_EventScript_Lisa::
@@ -48,7 +47,11 @@ Route107_EventScript_Ray::
 	end
 
 Route107_EventScript_Camron::
-	trainerbattle_single TRAINER_CAMRON, Route107_Text_CamronIntro, Route107_Text_CamronDefeated
+	trainerbattle_double TRAINER_CAMRON, Route107_Text_CamronIntro, Route107_Text_CamronDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route107_Text_CamronPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
+Route107_Text_BETH_LocalConversation:
+	.string "I swim for the scenery.\n"
+	.string "The scenery keeps splashing me.$"

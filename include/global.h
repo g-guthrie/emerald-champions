@@ -302,8 +302,9 @@ struct Pokedex
     /*0x04*/ u32 unownPersonality; // set when you first see Unown
     /*0x08*/ u32 spindaPersonality; // set when you first see Spinda
     /*0x0C*/ u32 unknown3;
+    /*0x10*/ u8 lostLegendaryEncounters[16];
 #if FREE_EXTRA_SEEN_FLAGS_SAVEBLOCK2 == FALSE
-    /*0x10*/ u8 filler[0x68]; // Previously Dex Flags, feel free to remove.
+    /*0x20*/ u8 filler[0x58]; // Previously Dex Flags, feel free to remove.
 #endif //FREE_EXTRA_SEEN_FLAGS_SAVEBLOCK2
 };
 
@@ -1105,9 +1106,8 @@ struct Bag
     struct ItemSlot berries[BAG_LEGACY_BERRIES_COUNT];
 };
 
-// Save-compatible overflow for the two pockets whose extensions fit in the
-// eight bytes remaining at the end of SaveBlock1. This is deliberately
-// append-only; never insert it beside struct Bag.
+// Append-only pocket overflow at the end of SaveBlock1. Keep existing item
+// slots in place when extending the Mega archive; never insert this beside Bag.
 struct BagSaveBlock1Extension
 {
     struct ItemSlot items[BAG_ITEMS_COUNT - BAG_LEGACY_ITEMS_COUNT];

@@ -227,15 +227,17 @@ RustboroCity_DevonCorp_3F_EventScript_RareRocksDisplay::
 RustboroCity_DevonCorp_3F_Text_MrStoneIHaveFavor:
 	.string "I'm MR. STONE, president of DEVON.\p"
 	.string "You recovered our GOODS and protected\n"
-	.string "my staff. I owe you the truth.\p"
-	.string "Geometric marks are appearing in caves,\n"
+	.string "my staff. Thank you, {PLAYER}.\p"
+	.string "I fear these thefts are connected to\n"
+	.string "something we don't yet understand.\p"
+	.string "Strange marks have appeared in caves,\n"
 	.string "forests, and ruins across HOENN.\p"
-	.string "They react to strong POKéMON teams, and\n"
-	.string "MAGMA and AQUA are searching for them.\p"
-	.string "Please take this LETTER to STEVEN in\n"
-	.string "DEWFORD. He understands the stones.\p"
-	.string "Then deliver the GOODS to CAPT. STERN\n"
-	.string "in SLATEPORT, as planned.$"
+	.string "They react to strong POKéMON teams.\n"
+	.string "Both MAGMA and AQUA seek them.\p"
+	.string "My son STEVEN studies stones. Please\n"
+	.string "take this LETTER to him in DEWFORD.\p"
+	.string "Then take the GOODS to CAPT. STERN in\n"
+	.string "SLATEPORT. He's still counting on us.$"
 
 RustboroCity_DevonCorp_3F_Text_LetterSentToPC:
 	.string "Your KEY ITEMS pocket is full, so the\n"
@@ -246,27 +248,35 @@ RustboroCity_DevonCorp_3F_Text_LetterNoRoom:
 	.string "Make room, then return to my desk.$"
 
 RustboroCity_DevonCorp_3F_Text_MrStoneWantYouToHaveThis:
-	.string "Take DEVON's newest POKéNAV. Its map\n"
-	.string "will help you follow this disturbance.$"
+	.string "Please take this POKéNAV. You'll need\n"
+	.string "a good map for the journey ahead.$"
 
 RustboroCity_DevonCorp_3F_Text_ReceivedPokenav:
 	.string "{PLAYER} received a POKéNAV.$"
 
 RustboroCity_DevonCorp_3F_Text_MrStoneExplainPokenavRestUp:
-	.string "The POKéNAV carries HOENN's map and\n"
-	.string "keeps you in contact with key Trainers.\p"
-	.string "My researcher on the second floor is\n"
+	.string "The POKéNAV has a map of HOENN and\n"
+	.string "keeps you in touch with key Trainers.\p"
+	.string "Our researcher on the second floor is\n"
 	.string "cataloging the CHAMPION'S SIGNS.\p"
-	.string "Rest here, then travel by DEWFORD.\n"
-	.string "What began as theft may threaten HOENN.$"
+	.string "Have him translate each SIGN before\n"
+	.string "you seek the Pokémon connected to it.\p"
+	.string "Please rest here before you leave.\n"
+	.string "DEWFORD is your next stop.\p"
+	.string "I hope STEVEN can make sense of this\n"
+	.string "before anyone else gets hurt.$"
 
 RustboroCity_DevonCorp_3F_Text_MrStoneGoWithCautionAndCare:
-	.string "Go carefully, {PLAYER}. Keep building\n"
-	.string "a team with more than one answer.$"
+	.string "Go carefully, {PLAYER}. You've already\n"
+	.string "done more for us than I could ask.$"
 
 RustboroCity_DevonCorp_3F_Text_CountingOnYou:
-	.string "STEVEN is in GRANITE CAVE. My researcher\n"
-	.string "downstairs can explain any active SIGN.$"
+	.string "You'll find STEVEN in GRANITE CAVE,\n"
+	.string "near DEWFORD. He often loses track\l"
+	.string "of time when he's studying rocks.\p"
+	.string "Our researcher on the second floor\n"
+	.string "must translate each CHAMPION'S SIGN\l"
+	.string "before its Pokémon will answer.$"
 
 RustboroCity_DevonCorp_3F_Text_StevenAwaitsKnuckleBadge:
 	.string "STEVEN received my LETTER. Good.\p"

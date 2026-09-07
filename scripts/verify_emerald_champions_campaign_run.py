@@ -137,11 +137,23 @@ def normalize_run(run: dict) -> dict:
         assertions = row.get("assertions", {"flags": {}, "vars": {}})
         require(isinstance(assertions, dict), f"{segment}: assertions are invalid")
         normalized_assertions: dict[str, dict] = {}
-        for kind in ("flags", "vars"):
+        expectation = row.get("expected", {})
+        require(isinstance(expectation, dict), f"{segment}: expected contract is invalid")
+        expected_items = expectation.get("items", {})
+        require(isinstance(expected_items, dict), f"{segment}: expected items are invalid")
+        require(isinstance(assertions.get("items", {}), dict), f"{segment}: item assertions are invalid")
+        require(set(assertions.get("items", {})) == set(expected_items),
+                f"{segment}: item assertion coverage differs from expected items")
+        kinds = ("flags", "vars", "items") if expected_items else ("flags", "vars")
+        for kind in kinds:
             values = assertions.get(kind, {})
             require(isinstance(values, dict), f"{segment}: {kind} assertions are invalid")
             for name, assertion in values.items():
                 require(isinstance(assertion, dict), f"{segment}: invalid assertion {name}")
+                if kind == "items":
+                    require(type(expected_items[name]) is int and 0 <= expected_items[name] <= 65535
+                            and assertion.get("expected") == expected_items[name],
+                            f"{segment}: item assertion {name} differs from manifest expectation")
                 require(assertion.get("passed") is True, f"{segment}: failed assertion persisted for {name}")
                 require(type(assertion.get("id")) is int and assertion["id"] >= 0, f"{segment}: assertion {name} lacks an ID")
                 require(type(assertion.get("actual")) is int and type(assertion.get("expected")) is int,

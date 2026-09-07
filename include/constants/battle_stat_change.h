@@ -9,7 +9,6 @@ enum StatChangeResult
 };
 
 #define STAT_CHANGE_NO_FLAGS             0
-#define STAT_CHANGE_ONLY_CHECKING       (1 << 0)
 #define STAT_CHANGE_IGNORE_SELF         (1 << 1)
 #define STAT_CHANGE_IGNORE_MIRROR_ARMOR (1 << 2)
 #define STAT_CHANGE_SILENT_FAILURE      (1 << 3)
@@ -17,7 +16,6 @@ enum StatChangeResult
 #define STAT_CHANGE_SECOND_QUEUE        (1 << 5)
 #define STAT_CHANGE_CERTAIN             (1 << 6)
 #define STAT_CHANGE_ITEM                (1 << 7)
-#define STAT_CHANGE_DEFOG               (1 << 8)
 #define STAT_CHANGE_STICKY_WEB          (1 << 9)
 #define STAT_CHANGE_MIRROR_HERB         (1 << 10)
 #define STAT_CHANGE_OPPORTUNIST         (1 << 11)

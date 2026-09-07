@@ -575,12 +575,12 @@ LittlerootTown_ProfessorBirchsLab_Text_BirchEnjoysRivalsHelpToo:
 	.string "There's a lot of love there.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_LikeYouToHavePokemon:
-	.string "PROF. BIRCH: {PLAYER}, that was more\n"
-	.string "than a rescue. You read the battle.\p"
-	.string "You chose one tradition from nine and\n"
-	.string "trusted its partner immediately.\p"
-	.string "Keep that POKéMON. HOENN rewards\n"
-	.string "Trainers who can build many answers.\p"
+	.string "PROF. BIRCH: {PLAYER}, thank you!\n"
+	.string "I really was in a spot back there.\p"
+	.string "My colleagues sent these POKéMON from\n"
+	.string "nine regions. Quite a welcome to HOENN!\p"
+	.string "That one trusted you when it mattered.\n"
+	.string "I'd like you to keep traveling together.\p"
 	.string "{PLAYER} received the {STR_VAR_1}!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_WhyNotGiveNicknameToMon:
@@ -588,17 +588,17 @@ LittlerootTown_ProfessorBirchsLab_Text_WhyNotGiveNicknameToMon:
 	.string "give a nickname to that {STR_VAR_1}?$"
 
 LittlerootTown_ProfessorBirchsLab_Text_MightBeGoodIdeaToGoSeeRival:
-	.string "{RIVAL} chose the partner with the type\n"
-	.string "advantage and is waiting on ROUTE 103.\p"
-	.string "Stop at OLDALE's POKéMON CENTER first.\n"
-	.string "Its LEVELER brings your partner to the\l"
-	.string "current limit for free. Nobody grinds.\p"
-	.string "Want to see how your first plan holds\n"
-	.string "against an informed opponent?$"
+	.string "{RIVAL} is out studying on ROUTE 103.\n"
+	.string "You should go introduce your partner!\p"
+	.string "{RIVAL}'s POKéMON has the type edge.\n"
+	.string "Visit OLDALE's POKéMON CENTER first.\p"
+	.string "The LEVELER trains your POKéMON to the\n"
+	.string "current level limit, free of charge.\p"
+	.string "Would you like to go find {RIVAL}?$"
 
 LittlerootTown_ProfessorBirchsLab_Text_GetRivalToTeachYou:
-	.string "Good. Losing is information here.\n"
-	.string "Adapt, return, and make {RIVAL} adapt.$"
+	.string "Good! You can learn a lot from a battle,\n"
+	.string "even one you lose. Take care out there!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_DontBeThatWay:
 	.string "PROF. BIRCH: Oh, don't be that way.\n"
@@ -613,26 +613,31 @@ LittlerootTown_ProfessorBirchsLab_Text_BirchRivalGoneHome:
 	.string "you should get some rest at home.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_HeardYouBeatRivalTakePokedex:
-	.string "PROF. BIRCH: {RIVAL} told me the battle\n"
-	.string "forced both of you to think. Perfect.\p"
-	.string "This POKéDEX records every species you\n"
-	.string "meet, not only the ones you catch.\p"
-	.string "Use it as a team-builder's field book.$"
+	.string "PROF. BIRCH: {RIVAL} told me all about\n"
+	.string "your battle! Sounds like quite a match.\p"
+	.string "I have something for your journey. This\n"
+	.string "POKéDEX records each species you meet,\l"
+	.string "even the ones you haven't caught.\p"
+	.string "I can't see all of HOENN from here.\n"
+	.string "Will you tell me what you discover?$"
 
 LittlerootTown_ProfessorBirchsLab_Text_ReceivedPokedex:
 	.string "{PLAYER} received the POKéDEX!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_ExplainPokedex:
-	.string "Every route offers different tools.\n"
-	.string "Read its signs, catch what interests you,\l"
-	.string "and change your team whenever you need.\p"
-	.string "No partner must grind before it matters.\n"
-	.string "Preparation is easy; battles are not.$"
+	.string "Read the signs along each route. They'll\n"
+	.string "help you find the POKéMON living there.\p"
+	.string "Catch the ones that interest you. Try\n"
+	.string "traveling with different companions.\p"
+	.string "The LEVELER helps new teammates catch\n"
+	.string "up. But tough battles still take care\l"
+	.string "and preparation. Look after each other!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_CountlessPokemonAwait:
 	.string "Rare POKéMON live throughout HOENN.\n"
-	.string "Build boldly, explore, and expect every\l"
-	.string "serious Trainer to do the same.$"
+	.string "I wonder which ones you'll meet first?\p"
+	.string "Explore! And remember, the Trainers you\n"
+	.string "meet are learning alongside you.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_MayGotPokedexTooTakeThese:
 	.string "MAY: Oh, wow, {PLAYER}{KUN}!\n"
@@ -641,9 +646,10 @@ LittlerootTown_ProfessorBirchsLab_Text_MayGotPokedexTooTakeThese:
 	.string "I've got something for you, too!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_CatchCutePokemonWithPokeBalls:
-	.string "MAY: These POKé BALLS are for options.\n"
-	.string "Catch widely, then bring the team that\l"
-	.string "answers the battle in front of you.$"
+	.string "MAY: Take these POKé BALLS! I always\n"
+	.string "meet new friends in unexpected places.\p"
+	.string "Catch lots of POKéMON. You can change\n"
+	.string "your team to suit the battles ahead!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_OhYourBagsFull:
 	.string "Oh? Your BAG's full.$"
@@ -659,9 +665,10 @@ LittlerootTown_ProfessorBirchsLab_Text_BrendanGotPokedexTooTakeThese:
 	.string "I'll give you these.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_CatchCoolPokemonWithPokeBalls:
-	.string "BRENDAN: These POKé BALLS are for\n"
-	.string "options. Catch widely, then bring the\l"
-	.string "right six for each battle.$"
+	.string "BRENDAN: Here, take these POKé BALLS.\n"
+	.string "There's more out there than you think.\p"
+	.string "Catch different POKéMON. Then you can\n"
+	.string "choose the right six for each battle.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_HeyYourBagsFull:
 	.string "Hey, your BAG's full.$"

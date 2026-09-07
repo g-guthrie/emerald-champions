@@ -447,6 +447,7 @@ BattleFrontier_BattleTowerLobby_EventScript_ChampionsCircuit::
 	faceplayer
 	goto_if_unset FLAG_SYS_GAME_CLEAR, BattleFrontier_BattleTowerLobby_EventScript_CircuitLocked
 	special ChampionsCircuitTryGiveReward
+	call_if_eq VAR_RESULT, 4, BattleFrontier_BattleTowerLobby_EventScript_CircuitRewardNeedsResearch
 	call_if_eq VAR_RESULT, 1, BattleFrontier_BattleTowerLobby_EventScript_CircuitRewardParty
 	call_if_eq VAR_RESULT, 2, BattleFrontier_BattleTowerLobby_EventScript_CircuitRewardPC
 	goto_if_eq VAR_RESULT, 3, BattleFrontier_BattleTowerLobby_EventScript_CircuitPendingRewardNoRoom
@@ -507,22 +508,25 @@ BattleFrontier_BattleTowerLobby_Text_CircuitWelcome:
 	.string "the CHAMPIONS CIRCUIT.\p"
 	.string "Every match is a full-team Double Battle\n"
 	.string "assembled from competitive roles.\p"
-	.string "Your team becomes Lv. 80. Opponents\n"
-	.string "grow stronger after every victory.\p"
-	.string "Other desks preserve classic formats.$"
+	.string "Your team becomes Lv. 100. Opponents\n"
+	.string "gain one total level after each win.\p"
+	.string "They can climb as high as Lv. 255.\n"
+	.string "Every desk enters this Circuit.$"
 
 BattleFrontier_BattleTowerLobby_Text_CircuitWelcomeBack:
 	.string "Welcome back to the CHAMPIONS CIRCUIT.\n"
 	.string "Are your six Pokémon ready?$"
 
 BattleFrontier_BattleTowerLobby_Text_CircuitEnter:
-	.string "Bring six healthy Pokémon. Held items\n"
+	.string "Your team battles at Lv. 100. Held items\n"
 	.string "and HP return after every match.\p"
-	.string "Begin a new Circuit run?$"
+	.string "Your difficulty sets the starting\n"
+	.string "opponent levels. Begin a new run?$"
 
 BattleFrontier_BattleTowerLobby_Text_CircuitOpponent:
 	.string "Match {STR_VAR_2}: your opponent has\n"
 	.string "prepared {STR_VAR_1}.\p"
+	.string "Their lead is Lv. {STR_VAR_3}.\n"
 	.string "The next battle begins now!$"
 
 BattleFrontier_BattleTowerLobby_Text_CircuitWon:
@@ -556,11 +560,12 @@ BattleFrontier_BattleTowerLobby_Text_CircuitCancel:
 	.string "will be waiting.$"
 
 BattleFrontier_BattleTowerLobby_Text_CircuitLost:
-	.string "Your run ends here. Your original\n"
+	.string "Your streak ends at {STR_VAR_2} wins.\p"
+	.string "Your original\n"
 	.string "team and levels have been restored.$"
 
 BattleFrontier_BattleTowerLobby_Text_CircuitRetire:
-	.string "A wise Champion knows when to stop.\p"
+	.string "Your streak ends at {STR_VAR_2} wins.\p"
 	.string "Your original team and levels have\n"
 	.string "been restored.$"
 
@@ -1526,3 +1531,16 @@ BattleFrontier_BattleTowerLobby_Text_ExplainMultiLinkRules:
 	.string "from those of your friend.\p"
 	.string "You may not interrupt this challenge\n"
 	.string "in the middle, unlike other modes.$"
+
+BattleFrontier_BattleTowerLobby_EventScript_CircuitRewardNeedsResearch::
+	msgbox BattleFrontier_BattleTowerLobby_Text_CircuitRewardNeedsResearch, MSGBOX_DEFAULT
+	setvar VAR_RESULT, 0
+	return
+
+BattleFrontier_BattleTowerLobby_Text_CircuitRewardNeedsResearch:
+	.string "You've earned {STR_VAR_1}'s reward.\p"
+	.string "First, have its Legendary Sign\n"
+	.string "translated by the dream researcher\l"
+	.string "on DEVON CORP.'s second floor.\p"
+	.string "I'll keep the reward while you visit\n"
+	.string "RUSTBORO. Your wins remain recorded.$"

@@ -57,7 +57,7 @@ Route113_EventScript_Dillon::
 	end
 
 Route113_EventScript_Madeline::
-	trainerbattle_single TRAINER_MADELINE_1, Route113_Text_MadelineIntro, Route113_Text_MadelineDefeat, Route113_EventScript_RegisterMadeline
+	trainerbattle_double TRAINER_MADELINE_1, Route113_Text_MadelineIntro, Route113_Text_MadelineDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route113_EventScript_RegisterMadeline
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route113_EventScript_RematchMadeline
 	msgbox Route113_Text_MadelinePostBattle, MSGBOX_DEFAULT
@@ -73,12 +73,12 @@ Route113_EventScript_RegisterMadeline::
 	end
 
 Route113_EventScript_RematchMadeline::
-	trainerbattle_rematch TRAINER_MADELINE_1, Route113_Text_MadelineRematchIntro, Route113_Text_MadelineRematchDefeat
+	trainerbattle_rematch_double TRAINER_MADELINE_1, Route113_Text_MadelineRematchIntro, Route113_Text_MadelineRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route113_Text_MadelinePostRematch, MSGBOX_AUTOCLOSE
 	end
 
 Route113_EventScript_Lao::
-	trainerbattle_single TRAINER_LAO_1, Route113_Text_LaoIntro, Route113_Text_LaoDefeat, Route113_EventScript_RegisterLao
+	trainerbattle_double TRAINER_LAO_1, Route113_Text_LaoIntro, Route113_Text_LaoDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route113_EventScript_RegisterLao
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route113_EventScript_RematchLao
 	msgbox Route113_Text_LaoPostBattle, MSGBOX_DEFAULT
@@ -94,12 +94,12 @@ Route113_EventScript_RegisterLao::
 	end
 
 Route113_EventScript_RematchLao::
-	trainerbattle_rematch TRAINER_LAO_1, Route113_Text_LaoRematchIntro, Route113_Text_LaoRematchDefeat
+	trainerbattle_rematch_double TRAINER_LAO_1, Route113_Text_LaoRematchIntro, Route113_Text_LaoRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route113_Text_LaoPostRematch, MSGBOX_AUTOCLOSE
 	end
 
 Route113_EventScript_Lung::
-	trainerbattle_single TRAINER_LUNG, Route113_Text_LungIntro, Route113_Text_LungDefeat
+	trainerbattle_double TRAINER_LUNG, Route113_Text_LungIntro, Route113_Text_LungDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route113_Text_LungPostBattle, MSGBOX_AUTOCLOSE
 	end
 

@@ -906,12 +906,6 @@ void GetCameraFocusCoords(u16 *x, u16 *y)
     *y = gSaveBlock1Ptr->pos.y + MAP_OFFSET;
 }
 
-static void UNUSED SetCameraCoords(u16 x, u16 y)
-{
-    gSaveBlock1Ptr->pos.x = x;
-    gSaveBlock1Ptr->pos.y = y;
-}
-
 void GetCameraCoords(u16 *x, u16 *y)
 {
     *x = gSaveBlock1Ptr->pos.x;
@@ -966,17 +960,6 @@ static void CopyTilesetToVramUsingHeap(struct Tileset const *tileset, u16 numTil
     }
 }
 
-// Below two are dummied functions from FRLG, used to tint the overworld palettes for the Quest Log
-static void ApplyGlobalTintToPaletteEntries(u16 offset, u16 size)
-{
-
-}
-
-static void UNUSED ApplyGlobalTintToPaletteSlot(u8 slot, u8 count)
-{
-
-}
-
 static void LoadTilesetPalette(struct Tileset const *tileset, u16 destOffset, u16 size, bool8 skipFaded, u32 numPalsInPrimary)
 {
     if (tileset)
@@ -988,7 +971,6 @@ static void LoadTilesetPalette(struct Tileset const *tileset, u16 destOffset, u1
             else
                 LoadPaletteFast(tileset->palettes, destOffset, size);
             gPlttBufferFaded[destOffset] = gPlttBufferUnfaded[destOffset] = RGB_BLACK;
-            ApplyGlobalTintToPaletteEntries(destOffset + 1, (size - 2) >> 1);
         }
         else if (tileset->isSecondary == TRUE)
         {
@@ -1002,7 +984,6 @@ static void LoadTilesetPalette(struct Tileset const *tileset, u16 destOffset, u1
         else
         {
             LoadPalette((const u16 *)tileset->palettes, destOffset, size);
-            ApplyGlobalTintToPaletteEntries(destOffset, size >> 1);
         }
     }
 }

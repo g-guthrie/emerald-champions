@@ -137,6 +137,7 @@ DewfordTown_Gym_EventScript_Brawly::
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, DewfordTown_Gym_EventScript_BrawlyRematch
 	goto_if_unset FLAG_RECEIVED_BRAWLY_LUCARIONITE, DewfordTown_Gym_EventScript_GiveLucarionite2
+	goto_if_set FLAG_HIDE_GRANITE_CAVE_STEVEN, DewfordTown_Gym_EventScript_BrawlyJourneyContinues
 	msgbox DewfordTown_Gym_Text_BrawlyPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -162,6 +163,7 @@ DewfordTown_Gym_EventScript_BrawlyDefeated::
 	closemessage
 	delay 30
 	setflag FLAG_ENABLE_BRAWLY_MATCH_CALL
+	msgbox DewfordTown_Gym_Text_BrawlyPostBattle, MSGBOX_DEFAULT
 	setvar VAR_ROXANNE_CALL_STEP_COUNTER, 0
 	setflag FLAG_ENABLE_ROXANNE_FIRST_CALL
 	release
@@ -375,15 +377,15 @@ DewfordTown_Gym_Text_CristianPostBattle:
 	.string "then contain THROH's committed power.$"
 
 DewfordTown_Gym_Text_BrawlyIntro:
+	.string "Back from SLATEPORT? Right on!\p"
 	.string "I'm BRAWLY, DEWFORD's GYM LEADER!\p"
-	.string "A wave commits when it breaks. My team\n"
-	.string "redirects, sets up, and spends openings.\p"
-	.string "Break the formation before its momentum\n"
-	.string "becomes faster than your answers!$"
+	.string "My team draws attacks aside,\n"
+	.string "then uses the space to set up.\p"
+	.string "Don't give us time to build momentum.\n"
+	.string "Once we're rolling, we're hard to stop!$"
 
 DewfordTown_Gym_Text_BrawlyDefeat:
-	.string "You let my one-use tricks spend\n"
-	.string "themselves, then stopped the final rush!\p"
+	.string "Whoa! You knocked me off balance!\p"
 	.string "Take the KNUCKLE BADGE. You earned it!$"
 
 DewfordTown_Gym_Text_ReceivedKnuckleBadge:
@@ -405,8 +407,10 @@ DewfordTown_Gym_Text_RegisteredBrawly:
 	.string "in the POKéNAV.$"
 
 DewfordTown_Gym_Text_BrawlyPostBattle:
-	.string "STEVEN is studying strange marks inside\n"
-	.string "GRANITE CAVE. Show him that BADGE.$"
+	.string "Return to STEVEN in GRANITE CAVE,\n"
+	.string "northwest of town, for your MEGA RING.\p"
+	.string "Your new BADGE lets you use FLASH\n"
+	.string "to light the way inside.$"
 
 DewfordTown_Gym_Text_GymStatue:
 	.string "DEWFORD TOWN POKéMON GYM$"
@@ -442,3 +446,8 @@ DewfordTown_Gym_Text_BrawlyRematchNeedTwoMons:
 	.string "that can battle.\p"
 	.string "I'm sorry, but I'd like you to come back\n"
 	.string "with at least two POKéMON.$"
+
+DewfordTown_Gym_EventScript_BrawlyJourneyContinues::
+	msgbox DewfordTown_Gym_Text_BrawlyPostRematch, MSGBOX_DEFAULT
+	release
+	end

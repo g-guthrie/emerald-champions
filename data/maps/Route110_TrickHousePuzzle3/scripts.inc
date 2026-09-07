@@ -292,7 +292,7 @@ Route110_TrickHousePuzzle3_EventScript_Justin::
 	end
 
 Route110_TrickHousePuzzle3_EventScript_Martha::
-	trainerbattle_single TRAINER_MARTHA, Route110_TrickHousePuzzle3_Text_MarthaIntro, Route110_TrickHousePuzzle3_Text_MarthaDefeat
+	trainerbattle_double TRAINER_MARTHA, Route110_TrickHousePuzzle3_Text_MarthaIntro, Route110_TrickHousePuzzle3_Text_MarthaDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route110_TrickHousePuzzle3_Text_MarthaPostBattle, MSGBOX_AUTOCLOSE
 	end
 

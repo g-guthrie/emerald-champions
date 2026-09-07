@@ -6,6 +6,7 @@ from __future__ import annotations
 import glob
 import json
 import re
+import struct
 from pathlib import Path
 
 from verify_emerald_champions_campaign_roster import SpeciesGraph, direct_species
@@ -48,9 +49,13 @@ FIXED_INCLEMENT_GFX = {
     "DIANCIE": "OBJ_EVENT_GFX_INCLEMENT_DIANCIE",
     "REGIGIGAS": "OBJ_EVENT_GFX_REGIGIGAS_STATUE",
 }
-# These two LEGENDARY_SOURCE_VISIBLE entries intentionally use an existing
+# These LEGENDARY_SOURCE_VISIBLE entries intentionally use an existing
 # environmental/NPC interaction instead of placing a species body in the map.
 SCRIPTED_VISIBLE_ROOTS = {
+    "DARKRAI": (
+        "data/maps/MtPyre_Summit/scripts.inc",
+        ("MtPyre_Summit_EventScript_Darkrai", "TryUnlockDarkraiLegendarySign", "CreateSelectedLegendarySignEncounter"),
+    ),
     "MAGEARNA": (
         "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
         ("EC_SIGN_MAGEARNA_ID", "TryGiveSelectedLegendarySignReward", "FLAG_EC_CAUGHT_MAGEARNA"),
@@ -65,6 +70,94 @@ SCRIPTED_VISIBLE_ROOTS = {
 def require(condition: bool, message: str) -> None:
     if not condition:
         raise SystemExit(message)
+
+
+def source_block(source: str, marker: str) -> str:
+    """Read one balanced C body, excluding comments before matching."""
+    source = re.sub(r"//[^\n]*|/\*.*?\*/", "", source, flags=re.S)
+    require(marker in source, f"missing executable routing: {marker}")
+    start = source.index("{", source.index(marker))
+    depth = 1
+    end = start + 1
+    while depth and end < len(source):
+        depth += (source[end] == "{") - (source[end] == "}")
+        end += 1
+    require(depth == 0, f"unbalanced executable routing: {marker}")
+    return source[start + 1:end - 1]
+
+
+def verify_tableless_land_route() -> None:
+    wild = (ROOT / "src/wild_encounter.c").read_text()
+    standard = source_block(wild, "bool8 StandardWildEncounter(")
+    quiet = source_block(standard, "if (headerId == HEADER_NONE)")
+    compact = lambda text: re.sub(r"\s+", "", text)
+    require(
+        "headerId=GetCurrentMapWildMonHeaderId();if(headerId==HEADER_NONE)" in compact(standard),
+        "tableless Sign branch is not routed from the current map header lookup",
+    )
+    require(
+        "if(MetatileBehavior_IsLandWildEncounter(curMetatileBehavior)"
+        "&&TryGetLegendarySignWildOverride(WILD_AREA_LAND,&species,&level))"
+        "{CreateWildMon(species,level);BattleSetup_StartWildBattle();returnTRUE;}"
+        in compact(quiet),
+        "tableless land Signs lack their guarded native creation/battle route",
+    )
+    before_header = compact(standard.split("headerId = GetCurrentMapWildMonHeaderId();", 1)[0])
+    require(
+        "if(sWildEncountersDisabled==TRUE)returnFALSE;" in before_header
+        and "if(FlagGet(FLAG_EC_REPEL_SPRAY_ACTIVE))returnFALSE;" in before_header,
+        "tableless Sign routing bypasses standard encounter-disable or Repel Spray guards",
+    )
+
+
+def has_land_encounter_terrain(map_id: str) -> bool:
+    """Match collision-free authored cells to the actual land predicate."""
+    maps = [json.loads(path.read_text()) for path in (ROOT / "data/maps").glob("*/map.json")]
+    map_row = next((row for row in maps if row["id"] == map_id), None)
+    require(map_row is not None, f"tableless Sign map is missing: {map_id}")
+    layout = next(row for row in json.loads((ROOT / "data/layouts/layouts.json").read_text())["layouts"]
+                  if row["id"] == map_row["layout"])
+    require(layout.get("layout_version", "emerald") == "emerald", f"unsupported Sign layout: {map_id}")
+    headers = (ROOT / "src/data/tilesets/headers.h").read_text()
+    tilesets = {name: dict(re.findall(r"\.(\w+)\s*=\s*(\w+)", body))
+                for name, body in re.findall(r"const struct Tileset (\w+)\s*=\s*\{(.*?)\};", headers, re.S)}
+    attributes = {name: (int(bits), path) for bits, name, path in re.findall(
+        r'const u(16|32) (gMetatileAttributes_\w+)\[\] = INCBIN_U(?:16|32)\("([^"]+)"\)',
+        (ROOT / "src/data/tilesets/metatiles.h").read_text())}
+    sheets = []
+    for key in ("primary_tileset", "secondary_tileset"):
+        bits, path = attributes[tilesets[layout[key]]["metatileAttributes"]]
+        require(bits == 16, f"unsupported Sign metatile attributes: {map_id}")
+        sheets.append([value[0] for value in struct.iter_unpack("<H", (ROOT / path).read_bytes())])
+    enum = (ROOT / "include/constants/metatile_behaviors.h").read_text().split("enum {", 1)[1].split("};", 1)[0]
+    enum = re.sub(r"//[^\n]*|/\*.*?\*/", "", enum, flags=re.S)
+    require("=" not in enum, "metatile behavior numbering needs explicit-value parsing")
+    behaviors = {name: index for index, name in enumerate(re.findall(r"\bMB_\w+\b", enum))}
+    runtime = (ROOT / "src/metatile_behavior.c").read_text()
+    for function, flag in (("IsEncounterTile", "HAS_ENCOUNTERS"), ("IsSurfableWaterOrUnderwater", "SURFABLE")):
+        body = source_block(runtime, f"bool8 MetatileBehavior_{function}(")
+        require(
+            f"sTileBitAttributes[metatileBehavior] & TILE_FLAG_{flag}" in body,
+            f"{function} changed; update terrain flag interpretation",
+        )
+    predicate = source_block(runtime, "bool8 MetatileBehavior_IsLandWildEncounter(")
+    require(
+        re.search(r"MetatileBehavior_IsSurfableWaterOrUnderwater\(metatileBehavior\)\s*==\s*FALSE\s*&&\s*"
+                  r"MetatileBehavior_IsEncounterTile\(metatileBehavior\)\s*==\s*TRUE", predicate) is not None,
+        "land encounter predicate changed; update terrain interpretation",
+    )
+    land = {behaviors[name] for name, flags in re.findall(r"\[(MB_\w+)\]\s*=([^,]+),", runtime)
+            if name in behaviors and "TILE_FLAG_HAS_ENCOUNTERS" in flags and "TILE_FLAG_SURFABLE" not in flags}
+    blocked = {(obj["x"], obj["y"]) for key in ("object_events", "warp_events") for obj in map_row.get(key, [])}
+    blocks = list(struct.iter_unpack("<H", (ROOT / layout["blockdata_filepath"]).read_bytes()))
+    require(len(blocks) == layout["width"] * layout["height"], f"invalid Sign map dimensions: {map_id}")
+    for index, (block,) in enumerate(blocks):
+        tile = block & 0x3FF
+        if block & 0xC00 or (index % layout["width"], index // layout["width"]) in blocked:
+            continue
+        if (sheets[tile >= 512][tile if tile < 512 else tile - 512] & 0xFF) in land:
+            return True
+    return False
 
 
 def species_catalog() -> tuple[dict[str, str], dict[str, str], set[str]]:
@@ -218,6 +311,22 @@ def main() -> None:
     )
 
     wild_species, wild_maps = wild_locations()
+    # Ordinary overrides need an active method. HEADER_NONE has a separate,
+    # land-only route, so a map with another header cannot use that exception.
+    for sign_id, map_name, area in re.findall(
+        r"(?m)^WILD_SIGN\((LEGENDARY_SIGN_[A-Z0-9_]+),\s*[A-Z0-9_]+,\s*"
+        r"([A-Z0-9_]+),\s*WILD_AREA_(LAND|WATER|FISHING),",
+        definitions,
+    ):
+        map_id = "MAP_" + map_name
+        method = wild_maps.get(map_id, {}).get(area.lower() + "_mons", {})
+        if method.get("encounter_rate", 0) > 0 and bool(method.get("mons")):
+            continue
+        require(area == "LAND" and map_id not in wild_maps,
+                f"{sign_id}: {map_id} lacks the active {area.lower()} table needed to reach its override")
+        verify_tableless_land_route()
+        require(has_land_encounter_terrain(map_id),
+                f"{sign_id}: {map_id} has no collision-free land encounter terrain for its tableless override")
     require(
         "MAP_SANDSTREWN_RUINS" in wild_species.get("SPECIES_UNOWN", set()),
         "Hoopa prerequisite Unown must have a permanent Hoenn source in Sandstrewn Ruins",

@@ -2911,8 +2911,8 @@
     }
   ],
   "unselected_configured_stats_guard": {
-    "species_count": 1466,
-    "sha256": "48bb4839ede93bf0b26115910881b9cd7edbc97cd7cfee3e3214053578650314",
+    "species_count": 1473,
+    "sha256": "a9643ce7701f3a418b2a0e1413b70ce45b6f3ebb12108a5e13c24beaa5971a2a",
     "purpose": "reject every unmanifested configured base-stat change"
   }
 }

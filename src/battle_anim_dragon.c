@@ -11,7 +11,6 @@ static void AnimOverheatFlame_Step(struct Sprite *);
 static void AnimTask_DragonDanceWaver_Step(u8);
 static void UpdateDragonDanceScanlineEffect(struct Task *);
 static void AnimDragonRush(struct Sprite *sprite);
-static void AnimDragonRushStep(struct Sprite *sprite);
 static void AnimSpinningDracoMeteor(struct Sprite *sprite);
 static void AnimSpinningDracoMeteorFinish(struct Sprite *sprite);
 static void AnimDracoMeteorRock_Step(struct Sprite *sprite);
@@ -331,35 +330,7 @@ static void AnimDragonRush(struct Sprite *sprite)
         sprite->y += gBattleAnimArgs[1];
     }
 
-    sprite->callback = AnimDragonRushStep;
-}
-
-// args[0] - initial x delta
-// args[1] - initial y delta
-// args[2] - x delta to end x
-// args[3] - y delta to end y
-// args[4] - num frames
-// args[5] - sprite anim number
-static void AnimDragonRushStep(struct Sprite *sprite)
-{
-    // These two cases are identical.
-    if (IsOnPlayerSide(gBattleAnimTarget))
-    {
-        sprite->data[1] += sprite->data[0];
-        sprite->data[1] &= 0xFF;
-    }
-    else
-    {
-        sprite->data[1] += sprite->data[0];
-        sprite->data[1] &= 0xFF;
-    }
-
-    sprite->x2 = Cos(sprite->data[1], 20);
-    sprite->y2 = Sin(sprite->data[1], 20);
-    if (sprite->animEnded)
-        DestroyAnimSprite(sprite);
-
-    sprite->data[2]++;
+    sprite->callback = AnimKnockOffStrike_Step;
 }
 
 static void AnimSpinningDracoMeteorFinish(struct Sprite *sprite)

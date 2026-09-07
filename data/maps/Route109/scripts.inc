@@ -407,13 +407,12 @@ Route109_EventScript_David::
 	end
 
 Route109_EventScript_Alice::
-	trainerbattle_single TRAINER_ALICE, Route109_Text_AliceIntro, Route109_Text_AliceDefeated
+	trainerbattle_double TRAINER_ALICE, Route109_Text_AliceIntro, Route109_Text_AliceDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route109_Text_AlicePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route109_EventScript_Huey::
-	trainerbattle_single TRAINER_HUEY, Route109_Text_HueyIntro, Route109_Text_HueyDefeated
-	msgbox Route109_Text_HueyPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route109_Text_HUEY_LocalConversation, MSGBOX_NPC
 	end
 
 Route109_EventScript_Edmond::
@@ -422,7 +421,7 @@ Route109_EventScript_Edmond::
 	end
 
 Route109_EventScript_Ricky::
-	trainerbattle_single TRAINER_RICKY_1, Route109_Text_RickyIntro, Route109_Text_RickyDefeated, Route109_EventScript_RickyRegisterMatchCallAfterBattle
+	trainerbattle_double TRAINER_RICKY_1, Route109_Text_RickyIntro, Route109_Text_RickyDefeated, EmeraldChampions_Text_NeedTwoPokemon, Route109_EventScript_RickyRegisterMatchCallAfterBattle
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route109_EventScript_RickyRematch
 	msgbox Route109_Text_RickyPostBattle, MSGBOX_DEFAULT
@@ -438,7 +437,7 @@ Route109_EventScript_RickyRegisterMatchCallAfterBattle::
 	end
 
 Route109_EventScript_RickyRematch::
-	trainerbattle_rematch TRAINER_RICKY_1, Route109_Text_RickyRematchIntro, Route109_Text_RickyRematchDefeated
+	trainerbattle_rematch_double TRAINER_RICKY_1, Route109_Text_RickyRematchIntro, Route109_Text_RickyRematchDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route109_Text_RickyRematchPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -469,8 +468,7 @@ Route109_EventScript_Austina::
 	end
 
 Route109_EventScript_Gwen::
-	trainerbattle_double TRAINER_GWEN, Route109_Text_GwenIntro, Route109_Text_GwenDefeated, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route109_Text_GwenPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route109_Text_GWEN_LocalConversation, MSGBOX_NPC
 	end
 
 Route109_EventScript_Carter::
@@ -499,8 +497,7 @@ Route109_EventScript_Hailey::
 	end
 
 Route109_EventScript_Elijah::
-	trainerbattle_double TRAINER_ELIJAH, Route109_Text_ElijahIntro, Route109_Text_ElijahDefeated, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route109_Text_ElijahPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route109_Text_ELIJAH_LocalConversation, MSGBOX_NPC
 	end
 
 DewfordTown_Text_BrineyLandedInSlateportDeliverGoods:
@@ -589,3 +586,15 @@ Route109_Text_TrainerTipsSign:
 	.string "always have identical stats.\p"
 	.string "POKéMON raised by TRAINERS are said\n"
 	.string "to grow stronger than wild POKéMON.$"
+
+Route109_Text_HUEY_LocalConversation:
+	.string "My sea legs are excellent.\n"
+	.string "My land legs filed a complaint.$"
+
+Route109_Text_GWEN_LocalConversation:
+	.string "My float has never lost a race.\n"
+	.string "It has never entered one either.$"
+
+Route109_Text_ELIJAH_LocalConversation:
+	.string "A bird overhead means good luck.\n"
+	.string "Usually. Keep your hat on.$"

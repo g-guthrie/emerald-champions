@@ -27503,3 +27503,59 @@ const u32 gObjectEventPic_Substitute[] = INCGFX_COMP("graphics/pokemon/question_
     const u32 gMonFrontPic_Egg[] = INCGFX_U32("graphics/pokemon/egg/anim_front.png", ".4bpp.smol");
     const u16 gMonPalette_Egg[] = INCGFX_U16("graphics/pokemon/egg/normal.pal", ".gbapal");
     const u8 gMonIcon_Egg[] = INCGFX_U8("graphics/pokemon/egg/icon.png", ".4bpp");
+
+#if P_FAMILY_CATERPIE && P_MEGA_EVOLUTIONS
+const u32 gMonFrontPic_ButterfreeMega[] = INCGFX_U32("graphics/pokemon/butterfree/mega/front.png", ".4bpp.smol");
+const u32 gMonBackPic_ButterfreeMega[] = INCGFX_U32("graphics/pokemon/butterfree/mega/back.png", ".4bpp.smol");
+const u16 gMonPalette_ButterfreeMega[] = INCGFX_U16("graphics/pokemon/butterfree/mega/normal.pal", ".gbapal");
+const u16 gMonShinyPalette_ButterfreeMega[] = INCGFX_U16("graphics/pokemon/butterfree/mega/shiny.pal", ".gbapal");
+const u8 gMonIcon_ButterfreeMega[] = INCGFX_U8("graphics/pokemon/butterfree/mega/icon.png", ".4bpp");
+#endif
+
+#if P_FAMILY_MACHOP && P_MEGA_EVOLUTIONS
+const u32 gMonFrontPic_MachampMega[] = INCGFX_U32("graphics/pokemon/machamp/mega/front.png", ".4bpp.smol");
+const u32 gMonBackPic_MachampMega[] = INCGFX_U32("graphics/pokemon/machamp/mega/back.png", ".4bpp.smol");
+const u16 gMonPalette_MachampMega[] = INCGFX_U16("graphics/pokemon/machamp/mega/normal.pal", ".gbapal");
+const u16 gMonShinyPalette_MachampMega[] = INCGFX_U16("graphics/pokemon/machamp/mega/shiny.pal", ".gbapal");
+const u8 gMonIcon_MachampMega[] = INCGFX_U8("graphics/pokemon/machamp/mega/icon.png", ".4bpp");
+#endif
+
+#if P_FAMILY_KRABBY && P_MEGA_EVOLUTIONS
+const u32 gMonFrontPic_KinglerMega[] = INCGFX_U32("graphics/pokemon/kingler/mega/front.png", ".4bpp.smol");
+const u32 gMonBackPic_KinglerMega[] = INCGFX_U32("graphics/pokemon/kingler/mega/back.png", ".4bpp.smol");
+const u16 gMonPalette_KinglerMega[] = INCGFX_U16("graphics/pokemon/kingler/mega/normal.pal", ".gbapal");
+const u16 gMonShinyPalette_KinglerMega[] = INCGFX_U16("graphics/pokemon/kingler/mega/shiny.pal", ".gbapal");
+const u8 gMonIcon_KinglerMega[] = INCGFX_U8("graphics/pokemon/kingler/mega/icon.png", ".4bpp");
+#endif
+
+#if P_FAMILY_LAPRAS && P_MEGA_EVOLUTIONS
+const u32 gMonFrontPic_LaprasMega[] = INCGFX_U32("graphics/pokemon/lapras/mega/front.png", ".4bpp.smol");
+const u32 gMonBackPic_LaprasMega[] = INCGFX_U32("graphics/pokemon/lapras/mega/back.png", ".4bpp.smol");
+const u16 gMonPalette_LaprasMega[] = INCGFX_U16("graphics/pokemon/lapras/mega/normal.pal", ".gbapal");
+const u16 gMonShinyPalette_LaprasMega[] = INCGFX_U16("graphics/pokemon/lapras/mega/shiny.pal", ".gbapal");
+const u8 gMonIcon_LaprasMega[] = INCGFX_U8("graphics/pokemon/lapras/mega/icon.png", ".4bpp");
+#endif
+
+#if P_FAMILY_TRAPINCH && P_MEGA_EVOLUTIONS
+const u32 gMonFrontPic_FlygonMega[] = INCGFX_U32("graphics/pokemon/flygon/mega/front.png", ".4bpp.smol");
+const u32 gMonBackPic_FlygonMega[] = INCGFX_U32("graphics/pokemon/flygon/mega/back.png", ".4bpp.smol");
+const u16 gMonPalette_FlygonMega[] = INCGFX_U16("graphics/pokemon/flygon/mega/normal.pal", ".gbapal");
+const u16 gMonShinyPalette_FlygonMega[] = INCGFX_U16("graphics/pokemon/flygon/mega/shiny.pal", ".gbapal");
+const u8 gMonIcon_FlygonMega[] = INCGFX_U8("graphics/pokemon/flygon/mega/icon.png", ".4bpp");
+#endif
+
+#if P_FAMILY_FEEBAS && P_MEGA_EVOLUTIONS
+const u32 gMonFrontPic_MiloticMega[] = INCGFX_U32("graphics/pokemon/milotic/mega/front.png", ".4bpp.smol");
+const u32 gMonBackPic_MiloticMega[] = INCGFX_U32("graphics/pokemon/milotic/mega/back.png", ".4bpp.smol");
+const u16 gMonPalette_MiloticMega[] = INCGFX_U16("graphics/pokemon/milotic/mega/normal.pal", ".gbapal");
+const u16 gMonShinyPalette_MiloticMega[] = INCGFX_U16("graphics/pokemon/milotic/mega/shiny.pal", ".gbapal");
+const u8 gMonIcon_MiloticMega[] = INCGFX_U8("graphics/pokemon/milotic/mega/icon.png", ".4bpp");
+#endif
+
+#if P_FAMILY_HORSEA && P_MEGA_EVOLUTIONS
+const u32 gMonFrontPic_KingdraMega[] = INCGFX_U32("graphics/pokemon/kingdra/mega/front.png", ".4bpp.smol");
+const u32 gMonBackPic_KingdraMega[] = INCGFX_U32("graphics/pokemon/kingdra/mega/back.png", ".4bpp.smol");
+const u16 gMonPalette_KingdraMega[] = INCGFX_U16("graphics/pokemon/kingdra/mega/normal.pal", ".gbapal");
+const u16 gMonShinyPalette_KingdraMega[] = INCGFX_U16("graphics/pokemon/kingdra/mega/shiny.pal", ".gbapal");
+const u8 gMonIcon_KingdraMega[] = INCGFX_U8("graphics/pokemon/kingdra/mega/icon.png", ".4bpp");
+#endif

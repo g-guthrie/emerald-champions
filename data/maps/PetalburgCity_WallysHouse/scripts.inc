@@ -39,7 +39,13 @@ PetalburgCity_WallysHouse_EventScript_WallysDad::
 	end
 
 PetalburgCity_WallysHouse_EventScript_ReceivedHMSurf::
+	goto_if_unset FLAG_BADGE06_GET, PetalburgCity_WallysHouse_EventScript_RemindFortreeRoute
 	msgbox PetalburgCity_WallysHouse_Text_WallyIsComingHomeSoon, MSGBOX_DEFAULT
+	release
+	end
+
+PetalburgCity_WallysHouse_EventScript_RemindFortreeRoute::
+	msgbox PetalburgCity_WallysHouse_Text_SurfGoAllSortsOfPlaces, MSGBOX_DEFAULT
 	release
 	end
 
@@ -103,8 +109,12 @@ PetalburgCity_WallysHouse_Text_PleaseExcuseUs:
 	.string "I'd really like you to have this.$"
 
 PetalburgCity_WallysHouse_Text_SurfGoAllSortsOfPlaces:
-	.string "If your POKéMON can SURF, you'll be\n"
-	.string "able to go to all sorts of places.$"
+	.string "A partner that can SURF will carry\n"
+	.string "you across water. Head to MAUVILLE.\p"
+	.string "Go east onto ROUTE 118 and cross its\n"
+	.string "river, then take ROUTE 119 north.\p"
+	.string "Beyond the WEATHER INSTITUTE lies\n"
+	.string "FORTREE CITY and WINONA's GYM.$"
 
 PetalburgCity_WallysHouse_Text_WallyIsComingHomeSoon:
 	.string "WALLY's coming home soon.\n"

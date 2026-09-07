@@ -24,6 +24,7 @@ REQUIRED_GENERATOR_INPUTS = (
     "data/emerald_champions/emerald_champions_move_access_review.json",
     "data/emerald_champions/emerald_champions_preparation_form_learnsets.json",
     "scripts/stamp_release_inputs.py",
+    "scripts/update_build_config.py",
 )
 
 
@@ -92,6 +93,7 @@ class StampIntegrityTests(unittest.TestCase):
         inputs = {p.relative_to(ROOT).as_posix() for p in stamp.build_inputs(include_tests=True)}
         for relative in (
             *REQUIRED_GENERATOR_INPUTS,
+            "scripts/export_test_elf.py",
             "tools/learnset_helpers/make_teachables.py",
             "tools/learnset_helpers/porymoves_files/rse.json",
             "tools/wild_encounters/wild_encounters_to_header.py",
@@ -99,6 +101,7 @@ class StampIntegrityTests(unittest.TestCase):
             "tools/mgba-rom-test-hydra/main.c",
             ".gitignore",
             "data/mb_berry_fix.gba",
+            "constants/gba_constants.inc",
             "ld_script_modern.ld", "ld_script_test.ld",
         ):
             with self.subTest(relative=relative):
@@ -106,10 +109,11 @@ class StampIntegrityTests(unittest.TestCase):
 
     def source_fixture(self):
         for directory in ("src", "data", "include", "asm", "graphics", "sound", "libagbsyscall",
-                          "test", "tools/stub", "tools/learnset_helpers", "tools/wild_encounters", "tools/misc"):
+                          "constants", "test", "tools/stub", "tools/learnset_helpers", "tools/wild_encounters", "tools/misc"):
             (self.root / directory).mkdir(parents=True, exist_ok=True)
         files = {
             "src/main.c": "int game_state;\n",
+            "constants/gba_constants.inc": ".equ fixture, 1\n",
             "include/game.h": "extern int game_state;\n",
             "ld_script_modern.ld": "SECTIONS { .ewram : { *(.ewram*) } }\n",
             "ld_script_test.ld": "SECTIONS { .text : { *(.text*) } }\n",
@@ -118,6 +122,7 @@ class StampIntegrityTests(unittest.TestCase):
             "Makefile": "all:\n\t@:\n",
             ".gitignore": "",
             "scripts/run_emerald_champions_runtime_gates.py": "# test selection\n",
+            "scripts/export_test_elf.py": "# filtered export\n",
             **{name: "{}\n" for name in REQUIRED_GENERATOR_INPUTS},
         }
         for name, content in files.items():
@@ -125,10 +130,19 @@ class StampIntegrityTests(unittest.TestCase):
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text(content)
 
+    def test_library_receipts_are_not_authored_inputs(self):
+        self.source_fixture()
+        (self.root / '.gitignore').write_text((ROOT / '.gitignore').read_text())
+        with patch.object(stamp, 'ROOT', self.root):
+            before = stamp.digest_tree()
+            for name in ('.assembly-config.json', '.archive-config.json', '.assembly-config.json.tmp'):
+                (self.root / 'libagbsyscall' / name).write_text('{"cache": true}')
+            self.assertEqual(before, stamp.digest_tree())
+
     def test_actual_input_bytes_change_the_digest_and_invalidate_the_stamp(self):
         self.source_fixture()
         with patch.object(stamp, "ROOT", self.root):
-            for relative in ("src/main.c", "include/game.h", "tools/stub/main.c", "ld_script_modern.ld",
+            for relative in ("src/main.c", "include/game.h", "constants/gba_constants.inc", "tools/stub/main.c", "ld_script_modern.ld",
                              "ld_script_test.ld", *REQUIRED_GENERATOR_INPUTS):
                 with self.subTest(relative=relative):
                     digest, count = stamp.digest_tree()

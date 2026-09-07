@@ -1346,13 +1346,25 @@ Common_EventScript_NameReceivedPartyMon::
 	return
 
 Common_EventScript_PlayerHandedOverTheItem::
+	special TakeEmeraldChampionsHandoffItem
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_NopReturn
 	bufferitemname STR_VAR_1, VAR_0x8004
 	playfanfare MUS_OBTAIN_TMHM
 	message gText_PlayerHandedOverTheItem
 	waitmessage
 	waitfanfare
-	removeitem VAR_0x8004
+	setvar VAR_RESULT, TRUE
 	return
+
+Common_EventScript_MissingHandoffItem::
+	bufferitemname STR_VAR_1, VAR_0x8004
+	msgbox Common_Text_MissingHandoffItem, MSGBOX_DEFAULT
+	releaseall
+	end
+
+Common_Text_MissingHandoffItem:
+	.string "Please bring the {STR_VAR_1}.\n"
+	.string "I can't accept it until you have it.$"
 
 	.include "data/scripts/elite_four.inc"
 	.include "data/scripts/movement.inc"
@@ -1526,8 +1538,40 @@ gText_Sudowoodo_Attacked::
 	.string "WAILMER PAIL!\p"
 	.string "The weird tree attacked!$"
 
+Common_EventScript_LegendaryNeedsDevon::
+	msgbox gText_LegendaryNeedsDevon, MSGBOX_DEFAULT
+	releaseall
+	end
+
+gText_LegendaryNeedsDevon::
+	.string "This Sign needs its own translation.\p"
+	.string "Visit the dream researcher on DEVON\n"
+	.string "CORP.'s second floor in RUSTBORO.\p"
+	.string "Bring the partner shown in this Sign\n"
+	.string "to help him complete the research.$"
+
+gText_LegendaryOneShotWarning::
+	.string "You have one chance to catch this\n"
+	.string "legendary.\p"
+	.string "If you flee or knock it out,\n"
+	.string "it will not return.\p"
+	.string "Only reloading an earlier save\n"
+	.string "will give you another chance.$"
+
+gText_LegendaryDefeated::
+	.string "The legendary has vanished.\n"
+	.string "It will not return.$"
+
+Common_EventScript_LegendaryDefeated::
+	removeobject VAR_LAST_TALKED
+Common_EventScript_LegendaryDefeatedAtShrine::
+	msgbox gText_LegendaryDefeated, MSGBOX_DEFAULT
+	releaseall
+	end
+
 gText_LegendaryFlewAway::
-	.string "The {STR_VAR_1} flew away!$"
+	.string "The {STR_VAR_1} is gone.\n"
+	.string "It will not return.$"
 
 gText_WantWhichFloor::
 	.string "Which floor do you want?$"
@@ -1657,7 +1701,8 @@ EventScript_TryDarkenRuins::
 	return
 
 Text_MonFlewAway::
-	.string "The {STR_VAR_1} flew away!$"
+	.string "The {STR_VAR_1} is gone.\n"
+	.string "It will not return.$"
 
 @ Call for legendary bird trio
 Text_Gyaoo::

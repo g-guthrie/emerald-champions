@@ -37,7 +37,7 @@ enum Direction (*const gGetVectorDirectionFuncs[])(s16, s16, s16, s16) = {
 u8 (*const gMovementTypeFuncs_LookAround[])(struct ObjectEvent *, struct Sprite *) = {
     MovementType_LookAround_Step0,
     MovementType_LookAround_Step1,
-    MovementType_LookAround_Step2,
+    MovementType_Face_SetMediumDelay,
     MovementType_LookAround_Step3,
     MovementType_LookAround_Step4,
 };
@@ -83,7 +83,7 @@ u8 (*const gMovementTypeFuncs_BerryTreeGrowth[])(struct ObjectEvent *, struct Sp
 u8 (*const gMovementTypeFuncs_FaceDownAndUp[])(struct ObjectEvent *, struct Sprite *) = {
     MovementType_FaceDownAndUp_Step0,
     MovementType_FaceDownAndUp_Step1,
-    MovementType_FaceDownAndUp_Step2,
+    MovementType_Face_SetMediumDelay,
     MovementType_FaceDownAndUp_Step3,
     MovementType_FaceDownAndUp_Step4,
 };
@@ -91,7 +91,7 @@ u8 (*const gMovementTypeFuncs_FaceDownAndUp[])(struct ObjectEvent *, struct Spri
 u8 (*const gMovementTypeFuncs_FaceLeftAndRight[])(struct ObjectEvent *, struct Sprite *) = {
     MovementType_FaceLeftAndRight_Step0,
     MovementType_FaceLeftAndRight_Step1,
-    MovementType_FaceLeftAndRight_Step2,
+    MovementType_Face_SetMediumDelay,
     MovementType_FaceLeftAndRight_Step3,
     MovementType_FaceLeftAndRight_Step4,
 };
@@ -99,7 +99,7 @@ u8 (*const gMovementTypeFuncs_FaceLeftAndRight[])(struct ObjectEvent *, struct S
 u8 (*const gMovementTypeFuncs_FaceUpAndLeft[])(struct ObjectEvent *, struct Sprite *) = {
     MovementType_FaceUpAndLeft_Step0,
     MovementType_FaceUpAndLeft_Step1,
-    MovementType_FaceUpAndLeft_Step2,
+    MovementType_Face_SetShortDelay,
     MovementType_FaceUpAndLeft_Step3,
     MovementType_FaceUpAndLeft_Step4,
 };
@@ -109,7 +109,7 @@ const enum Direction gUpAndLeftDirections[] = {DIR_NORTH, DIR_WEST};
 u8 (*const gMovementTypeFuncs_FaceUpAndRight[])(struct ObjectEvent *, struct Sprite *) = {
     MovementType_FaceUpAndRight_Step0,
     MovementType_FaceUpAndRight_Step1,
-    MovementType_FaceUpAndRight_Step2,
+    MovementType_Face_SetShortDelay,
     MovementType_FaceUpAndRight_Step3,
     MovementType_FaceUpAndRight_Step4,
 };
@@ -119,7 +119,7 @@ const enum Direction gUpAndRightDirections[] = {DIR_NORTH, DIR_EAST};
 u8 (*const gMovementTypeFuncs_FaceDownAndLeft[])(struct ObjectEvent *, struct Sprite *) = {
     MovementType_FaceDownAndLeft_Step0,
     MovementType_FaceDownAndLeft_Step1,
-    MovementType_FaceDownAndLeft_Step2,
+    MovementType_Face_SetShortDelay,
     MovementType_FaceDownAndLeft_Step3,
     MovementType_FaceDownAndLeft_Step4,
 };
@@ -129,7 +129,7 @@ const enum Direction gDownAndLeftDirections[] = {DIR_SOUTH, DIR_WEST};
 u8 (*const gMovementTypeFuncs_FaceDownAndRight[])(struct ObjectEvent *, struct Sprite *) = {
     MovementType_FaceDownAndRight_Step0,
     MovementType_FaceDownAndRight_Step1,
-    MovementType_FaceDownAndRight_Step2,
+    MovementType_Face_SetShortDelay,
     MovementType_FaceDownAndRight_Step3,
     MovementType_FaceDownAndRight_Step4,
 };
@@ -139,7 +139,7 @@ const enum Direction gDownAndRightDirections[] = {DIR_SOUTH, DIR_EAST};
 u8 (*const gMovementTypeFuncs_FaceDownUpAndLeft[])(struct ObjectEvent *, struct Sprite *) = {
     MovementType_FaceDownUpAndLeft_Step0,
     MovementType_FaceDownUpAndLeft_Step1,
-    MovementType_FaceDownUpAndLeft_Step2,
+    MovementType_Face_SetShortDelay,
     MovementType_FaceDownUpAndLeft_Step3,
     MovementType_FaceDownUpAndLeft_Step4,
 };
@@ -149,7 +149,7 @@ const enum Direction gDownUpAndLeftDirections[] = {DIR_NORTH, DIR_SOUTH, DIR_WES
 u8 (*const gMovementTypeFuncs_FaceDownUpAndRight[])(struct ObjectEvent *, struct Sprite *) = {
     MovementType_FaceDownUpAndRight_Step0,
     MovementType_FaceDownUpAndRight_Step1,
-    MovementType_FaceDownUpAndRight_Step2,
+    MovementType_Face_SetShortDelay,
     MovementType_FaceDownUpAndRight_Step3,
     MovementType_FaceDownUpAndRight_Step4,
 };
@@ -159,7 +159,7 @@ const enum Direction gDownUpAndRightDirections[] = {DIR_SOUTH, DIR_NORTH, DIR_EA
 u8 (*const gMovementTypeFuncs_FaceUpLeftAndRight[])(struct ObjectEvent *, struct Sprite *) = {
     MovementType_FaceUpLeftAndRight_Step0,
     MovementType_FaceUpLeftAndRight_Step1,
-    MovementType_FaceUpLeftAndRight_Step2,
+    MovementType_Face_SetShortDelay,
     MovementType_FaceUpLeftAndRight_Step3,
     MovementType_FaceUpLeftAndRight_Step4,
 };
@@ -169,7 +169,7 @@ const enum Direction gUpLeftAndRightDirections[] = {DIR_NORTH, DIR_WEST, DIR_EAS
 u8 (*const gMovementTypeFuncs_FaceDownLeftAndRight[])(struct ObjectEvent *, struct Sprite *) = {
     MovementType_FaceDownLeftAndRight_Step0,
     MovementType_FaceDownLeftAndRight_Step1,
-    MovementType_FaceDownLeftAndRight_Step2,
+    MovementType_Face_SetShortDelay,
     MovementType_FaceDownLeftAndRight_Step3,
     MovementType_FaceDownLeftAndRight_Step4,
 };
@@ -421,11 +421,11 @@ bool8 (*const gFollowPlayerMovementFuncs[])(struct ObjectEvent *, struct Sprite 
     [COPY_MOVE_NONE] = FollowablePlayerMovement_Idle,
     [COPY_MOVE_FACE] = FollowablePlayerMovement_Idle,
     [COPY_MOVE_WALK] = FollowablePlayerMovement_Step,
-    [COPY_MOVE_WALK_FAST] = FollowablePlayerMovement_GoSpeed1,
-    [COPY_MOVE_WALK_FASTER] = FollowablePlayerMovement_GoSpeed2,
-    [COPY_MOVE_SLIDE] = FollowablePlayerMovement_Slide,
-    [COPY_MOVE_JUMP_IN_PLACE] = FollowablePlayerMovement_JumpInPlace,
-    [COPY_MOVE_JUMP] = FollowablePlayerMovement_GoSpeed4,
+    [COPY_MOVE_WALK_FAST] = CopyablePlayerMovement_WalkFast,
+    [COPY_MOVE_WALK_FASTER] = CopyablePlayerMovement_WalkFaster,
+    [COPY_MOVE_SLIDE] = CopyablePlayerMovement_Slide,
+    [COPY_MOVE_JUMP_IN_PLACE] = CopyablePlayerMovement_JumpInPlace,
+    [COPY_MOVE_JUMP] = CopyablePlayerMovement_Jump,
     [COPY_MOVE_JUMP2] = FollowablePlayerMovement_Step,
     [COPY_MOVE_WALK_COLLIDE] = FollowablePlayerMovement_Idle,
     [COPY_MOVE_WALK_COLLIDE_SLOW] = FollowablePlayerMovement_Idle,

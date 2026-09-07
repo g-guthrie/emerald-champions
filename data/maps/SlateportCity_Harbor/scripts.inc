@@ -461,13 +461,14 @@ SlateportCity_Harbor_Text_ArchieYouAgainHideoutInLilycove:
 	.string "Fwahahahaha…$"
 
 SlateportCity_Harbor_Text_CaptSternWhyStealMySubmarine:
-	.string "CAPT. STERN: Why…\p"
-	.string "Why would TEAM AQUA steal my\n"
-	.string "SUBMARINE EXPLORER 1?\p"
-	.string "They can't be after the slumbering\n"
-	.string "POKéMON at the bottom of the sea…\p"
-	.string "But even if I were to chase them,\n"
-	.string "I don't stand a chance against them…$"
+	.string "CAPT. STERN: They have my submarine.\n"
+	.string "The cavern charts are aboard, too.\p"
+	.string "ARCHIE named LILYCOVE. Reach the city\n"
+	.string "by heading east from ROUTE 121.\p"
+	.string "Find LILYCOVE's eastern beach. SURF\n"
+	.string "north to TEAM AQUA's cave hideout.\p"
+	.string "Stop their launch before they reach\n"
+	.string "the sleeping POKéMON on the seafloor.$"
 
 SlateportCity_Harbor_Text_TeamAquaLeftNeedDive:
 	.string "CAPT. STERN: Oh, {PLAYER}{KUN}…\p"

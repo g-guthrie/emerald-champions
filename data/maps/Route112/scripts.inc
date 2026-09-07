@@ -103,7 +103,7 @@ Route112_EventScript_Hiker::
 	end
 
 Route112_EventScript_Brice::
-	trainerbattle_single TRAINER_BRICE, Route112_Text_BriceIntro, Route112_Text_BriceDefeat
+	trainerbattle_double TRAINER_BRICE, Route112_Text_BriceIntro, Route112_Text_BriceDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route112_Text_BricePostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -129,13 +129,12 @@ Route112_EventScript_RematchTrent::
 	end
 
 Route112_EventScript_Larry::
-	trainerbattle_single TRAINER_LARRY, Route112_Text_LarryIntro, Route112_Text_LarryDefeat
+	trainerbattle_double TRAINER_LARRY, Route112_Text_LarryIntro, Route112_Text_LarryDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route112_Text_LarryPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route112_EventScript_Carol::
-	trainerbattle_single TRAINER_CAROL, Route112_Text_CarolIntro, Route112_Text_CarolDefeat
-	msgbox Route112_Text_CarolPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route112_Text_CAROL_LocalConversation, MSGBOX_NPC
 	end
 
 Route112_EventScript_Bryant::
@@ -144,7 +143,7 @@ Route112_EventScript_Bryant::
 	end
 
 Route112_EventScript_Shayla::
-	trainerbattle_single TRAINER_SHAYLA, Route112_Text_ShaylaIntro, Route112_Text_ShaylaDefeat
+	trainerbattle_double TRAINER_SHAYLA, Route112_Text_ShaylaIntro, Route112_Text_ShaylaDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route112_Text_ShaylaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -183,3 +182,7 @@ Route112_Text_MtChimneySign:
 Route112_Text_RouteSignLavaridge:
 	.string "ROUTE 112\n"
 	.string "{LEFT_ARROW} LAVARIDGE TOWN$"
+
+Route112_Text_CAROL_LocalConversation:
+	.string "The mountain is lovely today.\n"
+	.string "My sandwich is now toast.$"

@@ -298,11 +298,13 @@ PetalburgCity_Gym_EventScript_NormanOneBadge::
 
 PetalburgCity_Gym_EventScript_NormanTwoBadges::
 	msgbox PetalburgCity_Gym_Text_YouHaveGottenStronger, MSGBOX_DEFAULT
+	msgbox PetalburgCity_Gym_Text_NextGymMauville, MSGBOX_DEFAULT
 	release
 	end
 
 PetalburgCity_Gym_EventScript_NormanThreeBadges::
 	msgbox PetalburgCity_Gym_Text_YouHaveGottenStronger, MSGBOX_DEFAULT
+	msgbox PetalburgCity_Gym_Text_NextGymLavaridge, MSGBOX_DEFAULT
 	release
 	end
 
@@ -1204,8 +1206,8 @@ PetalburgCity_Gym_Text_DadGoCollectBadges:
 	.string "DAD: Now…\p"
 	.string "{PLAYER}, if you want to become a\n"
 	.string "strong TRAINER, here's my advice.\p"
-	.string "Head for RUSTBORO CITY beyond this\n"
-	.string "town.\p"
+	.string "Head west to ROUTE 104, then north\n"
+	.string "through PETALBURG WOODS to RUSTBORO.\p"
 	.string "There, you should challenge\n"
 	.string "the GYM LEADER, ROXANNE.\p"
 	.string "After her, go on to other POKéMON\n"
@@ -1220,6 +1222,8 @@ PetalburgCity_Gym_Text_DadGoCollectBadges:
 PetalburgCity_Gym_Text_NormanGoToRustboro:
 	.string "DAD: Hm? Aren't you going to the\n"
 	.string "POKéMON GYM in RUSTBORO CITY?\p"
+	.string "Follow ROUTE 104 west of town, then\n"
+	.string "head north through PETALBURG WOODS.\p"
 	.string "There's no challenge for me to\n"
 	.string "battle a greenhorn TRAINER.\p"
 	.string "{PLAYER}, I want you to challenge me\n"
@@ -1241,6 +1245,20 @@ PetalburgCity_Gym_Text_YouHaveGottenStronger:
 	.string "stronger.\p"
 	.string "I can tell by the number of BADGES\n"
 	.string "that you've earned.$"
+
+PetalburgCity_Gym_Text_NextGymMauville:
+	.string "WATTSON runs MAUVILLE GYM. From\n"
+	.string "SLATEPORT, follow ROUTE 110 north.\p"
+	.string "Keep going. Bring back four BADGES,\n"
+	.string "and we'll see how far you've come.$"
+
+PetalburgCity_Gym_Text_NextGymLavaridge:
+	.string "FLANNERY runs LAVARIDGE GYM, below\n"
+	.string "MT. CHIMNEY. Travel north of MAUVILLE.\p"
+	.string "The cable car is on ROUTE 112. From\n"
+	.string "the summit, JAGGED PASS leads down.\p"
+	.string "Earn that fourth BADGE, then come home.\n"
+	.string "I'll be waiting here at the GYM.$"
 
 PetalburgCity_Gym_Text_NormanIntro:
 	.string "DAD: Four BADGES brought you back, but\n"

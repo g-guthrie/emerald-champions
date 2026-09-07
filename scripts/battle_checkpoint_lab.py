@@ -17,6 +17,7 @@ from typing import Any
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import run_emerald_champions_campaign as campaign
 import render_emerald_champions_ui as ui
+import native_tools
 from item_catalog import free_vendor_items
 
 
@@ -292,22 +293,10 @@ def load_json(path: Path) -> dict[str, Any]:
 
 
 def nm_symbols(elf: Path) -> dict[str, int]:
-    candidates = (shutil.which("arm-none-eabi-nm"), ROOT / "tools/binutils/bin/arm-none-eabi-nm", Path("/opt/homebrew/bin/arm-none-eabi-nm"))
-    nm = next((str(path) for path in candidates if path and Path(path).is_file()), None)
-    if nm is None:
-        raise LabError("arm-none-eabi-nm is required")
-    result = subprocess.run([nm, "-S", str(elf)], text=True, capture_output=True)
-    if result.returncode:
-        raise LabError(result.stderr.strip())
-    found: dict[str, int] = {}
-    for line in result.stdout.splitlines():
-        fields = line.split()
-        if len(fields) >= 4:
-            try:
-                found[fields[-1]] = int(fields[0], 16)
-            except ValueError:
-                pass
-    return found
+    try:
+        return native_tools.symbols(elf, ROOT)
+    except native_tools.NativeToolError as error:
+        raise LabError(str(error)) from error
 
 
 def runner_reads(runner: Path, rom: Path, state: Path, addresses: list[int]) -> dict[int, int]:

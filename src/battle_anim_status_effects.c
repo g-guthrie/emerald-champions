@@ -15,14 +15,11 @@ extern const struct BattleAnimation gBattleAnimTable[ANIM_TAG_COUNT];
 extern const struct OamData gOamData_AffineOff_ObjNormal_8x8;
 extern const struct OamData gOamData_AffineOff_ObjBlend_64x64;
 
-static void Task_UpdateFlashingCircleImpacts(u8 taskId);
 static void AnimTask_FrozenIceCube_Step1(u8 taskId);
 static void AnimTask_FrozenIceCube_Step2(u8 taskId);
 static void AnimTask_FrozenIceCube_Step3(u8 taskId);
 static void AnimTask_FrozenIceCube_Step4(u8 taskId);
 static void Task_DoStatusAnimation(u8 taskId);
-static void AnimFlashingCircleImpact(struct Sprite *sprite);
-static void AnimFlashingCircleImpact_Step(struct Sprite *sprite);
 
 static const union AnimCmd sAnim_FlickeringOrb[] =
 {
@@ -236,122 +233,6 @@ static const struct SpriteTemplate sFrozenIceCubeSpriteTemplate =
     .paletteTag = ANIM_TAG_ICE_CUBE,
     .oam = &gOamData_AffineOff_ObjBlend_64x64,
 };
-
-static const struct SpriteTemplate sFlashingCircleImpactSpriteTemplate =
-{
-    .tileTag = ANIM_TAG_CIRCLE_IMPACT,
-    .paletteTag = ANIM_TAG_CIRCLE_IMPACT,
-    .oam = &gOamData_AffineOff_ObjNormal_8x8,
-    .callback = AnimFlashingCircleImpact,
-};
-
-static u8 UNUSED Task_FlashingCircleImpacts(enum BattlerId battler, bool8 red)
-{
-    u8 battlerSpriteId = gBattlerSpriteIds[battler];
-    u8 taskId = CreateTask(Task_UpdateFlashingCircleImpacts, 10);
-    u8 spriteId;
-    u8 i;
-
-    LoadCompressedSpriteSheetUsingHeap(&gBattleAnimTable[GET_TRUE_SPRITE_INDEX(ANIM_TAG_CIRCLE_IMPACT)].pic);
-    LoadSpritePalette(&gBattleAnimTable[GET_TRUE_SPRITE_INDEX(ANIM_TAG_CIRCLE_IMPACT)].palette);
-    gTasks[taskId].data[0] = battler;
-    if (red)
-    {
-        gTasks[taskId].data[1] = RGB_RED;
-        for (i = 0; i < 10; i++)
-        {
-            spriteId = CreateSprite(&sFlashingCircleImpactSpriteTemplate, gSprites[battlerSpriteId].x, gSprites[battlerSpriteId].y + 32, 0);
-            gSprites[spriteId].data[0] = i * 51;
-            gSprites[spriteId].data[1] = -256;
-            gSprites[spriteId].invisible = TRUE;
-            if (i > 4)
-                gSprites[spriteId].data[6] = 21;
-        }
-    }
-    else
-    {
-        gTasks[taskId].data[1] = RGB_BLUE;
-        for (i = 0; i < 10; i++)
-        {
-            spriteId = CreateSprite(&sFlashingCircleImpactSpriteTemplate, gSprites[battlerSpriteId].x, gSprites[battlerSpriteId].y - 32, 0);
-            gSprites[spriteId].data[0] = i * 51;
-            gSprites[spriteId].data[1] = 256;
-            gSprites[spriteId].invisible = TRUE;
-            if (i > 4)
-                gSprites[spriteId].data[6] = 21;
-        }
-    }
-    gSprites[spriteId].data[7] = 1;
-    return taskId;
-}
-
-static void Task_UpdateFlashingCircleImpacts(u8 taskId)
-{
-    if (gTasks[taskId].data[2] == 2)
-    {
-        gTasks[taskId].data[2] = 0;
-        BlendPalette(OBJ_PLTT_ID(gTasks[taskId].data[0]), 16, gTasks[taskId].data[4], gTasks[taskId].data[1]);
-        if (gTasks[taskId].data[5] == 0)
-        {
-            gTasks[taskId].data[4]++;
-            if (gTasks[taskId].data[4] > 8)
-                gTasks[taskId].data[5] ^= 1;
-        }
-        else
-        {
-            u16 var = gTasks[taskId].data[4];
-
-            gTasks[taskId].data[4]--;
-            if (gTasks[taskId].data[4] < 0)
-            {
-                gTasks[taskId].data[4] = var;
-                gTasks[taskId].data[5] ^= 1;
-                gTasks[taskId].data[3]++;
-                if (gTasks[taskId].data[3] == 2)
-                    DestroyTask(taskId);
-            }
-        }
-    }
-    else
-    {
-        gTasks[taskId].data[2]++;
-    }
-}
-
-static void AnimFlashingCircleImpact(struct Sprite *sprite)
-{
-    if (sprite->data[6] == 0)
-    {
-        sprite->invisible = FALSE;
-        sprite->callback = AnimFlashingCircleImpact_Step;
-        AnimFlashingCircleImpact_Step(sprite);
-    }
-    else
-    {
-        sprite->data[6]--;
-    }
-}
-
-static void AnimFlashingCircleImpact_Step(struct Sprite *sprite)
-{
-    sprite->x2 = Cos(sprite->data[0], 32);
-    sprite->y2 = Sin(sprite->data[0], 8);
-    if (sprite->data[0] < 128)
-        sprite->subpriority = 29;
-    else
-        sprite->subpriority = 31;
-    sprite->data[0] = (sprite->data[0] + 8) & 0xFF;
-    sprite->data[5] += sprite->data[1];
-    sprite->y2 += sprite->data[5] >> 8;
-    sprite->data[2]++;
-    if (sprite->data[2] == 52)
-    {
-        if (sprite->data[7])
-            DestroySpriteAndFreeResources(sprite);
-        else
-            DestroySprite(sprite);
-    }
-}
 
 void AnimTask_FrozenIceCubeAttacker(u8 taskId)
 {

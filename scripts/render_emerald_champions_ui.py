@@ -9,13 +9,14 @@ import json
 import os
 from pathlib import Path
 import re
-import shlex
 import shutil
 import struct
 import subprocess
 import tempfile
 import zlib
 
+
+import native_tools
 
 ROOT = Path(__file__).resolve().parents[1]
 RUNNER_SOURCE = ROOT / "tests/headless/emerald_champions_mgba_runner.c"
@@ -1477,84 +1478,24 @@ def require_resident_file(path: Path, label: str) -> Path:
     return path
 
 
-def find_mgba_prefix() -> Path:
-    candidates: list[Path] = []
-    if os.environ.get("MGBA_PREFIX"):
-        candidates.append(Path(os.environ["MGBA_PREFIX"]))
-    brew = shutil.which("brew")
-    if brew:
-        result = subprocess.run(
-            [brew, "--prefix", "mgba"], text=True, capture_output=True, check=False
-        )
-        if result.returncode == 0 and result.stdout.strip():
-            candidates.append(Path(result.stdout.strip()))
-    candidates.extend((Path("/opt/homebrew/opt/mgba"), Path("/usr/local/opt/mgba")))
-    # Ubuntu's libmgba-dev installs headers under /usr/include and the shared
-    # library in a multiarch directory such as /usr/lib/x86_64-linux-gnu.
-    candidates.append(Path("/usr"))
-    for candidate in candidates:
-        lib_dir = candidate / "lib"
-        libraries = list(lib_dir.glob("libmgba*")) + list(lib_dir.glob("*/libmgba*"))
-        if (candidate / "include/mgba/core/core.h").is_file() and libraries:
-            return candidate.resolve()
-    fail("native libmGBA headers/library are unavailable; set MGBA_PREFIX")
-
-
 def build_runner() -> Path:
-    output = ROOT / "build/headless/emerald_champions_mgba_runner"
-    output.parent.mkdir(parents=True, exist_ok=True)
-    newest_input = max(RUNNER_SOURCE.stat().st_mtime_ns, Path(__file__).stat().st_mtime_ns)
-    if output.is_file() and output.stat().st_mtime_ns >= newest_input:
-        return output
-    command = [
-        os.environ.get("CC", "cc"),
-        "-std=c11",
-        "-O2",
-        "-Wall",
-        "-Wextra",
-        "-Werror",
-        str(RUNNER_SOURCE),
-    ]
-    pkg_config = shutil.which("pkg-config")
-    pkg_flags: list[str] = []
-    if pkg_config is not None:
-        result = subprocess.run(
-            [pkg_config, "--cflags", "--libs", "mgba"],
-            text=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.DEVNULL,
-            check=False,
-        )
-        if result.returncode == 0:
-            pkg_flags = shlex.split(result.stdout)
-    if pkg_flags:
-        command.extend(pkg_flags)
-    else:
-        prefix = find_mgba_prefix()
-        command.extend((
-            f"-I{prefix / 'include'}",
-            f"-L{prefix / 'lib'}",
-            "-lmgba",
-            f"-Wl,-rpath,{prefix / 'lib'}",
-        ))
-    command.extend(("-o", str(output)))
-    run(command)
-    return output
+    try:
+        return native_tools.build_runner(RUNNER_SOURCE, ROOT / "build/headless/emerald_champions_mgba_runner")
+    except native_tools.NativeToolError as error:
+        fail(str(error))
 
 
 def resolve_symbol(elf: Path, name: str) -> int:
-    nm = shutil.which("arm-none-eabi-nm")
-    if nm is None:
-        fail("arm-none-eabi-nm is required")
-    result = run([nm, "-S", str(elf)])
-    for line in result.stdout.splitlines():
-        fields = line.split()
-        if fields and fields[-1] == name:
-            return int(fields[0], 16)
-    fail(f"ELF symbol is missing: {name}")
+    try:
+        found = native_tools.symbols(elf, ROOT, first=True)
+    except native_tools.NativeToolError as error:
+        fail(str(error))
+    if name not in found:
+        fail(f"ELF symbol is missing: {name}")
+    return found[name]
 
 
-def validate_screenshot_png(path: Path) -> str:
+def validate_screenshot_png(path: Path, *, allow_uniform: bool = False) -> str:
     data = path.read_bytes()
     if not data.startswith(b"\x89PNG\r\n\x1a\n"):
         fail(f"screenshot output is not PNG: {path}")
@@ -1644,7 +1585,9 @@ def validate_screenshot_png(path: Path) -> str:
         rows.append(row)
 
     first_pixel = bytes(rows[0][:bytes_per_pixel])
-    if all(
+    # Captured transition frames may be a legitimate full-screen fade. Final
+    # scenario/checkpoint callers retain the nonblank requirement by default.
+    if not allow_uniform and all(
         bytes(row[x : x + bytes_per_pixel]) == first_pixel
         for row in rows
         for x in range(0, stride, bytes_per_pixel)

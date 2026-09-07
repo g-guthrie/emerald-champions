@@ -107,8 +107,7 @@ Route121_Movement_Grunt3Exit:
 	step_end
 
 Route121_EventScript_Vanessa::
-	trainerbattle_double TRAINER_VANESSA, Route121_Text_VanessaIntro, Route121_Text_VanessaDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route121_Text_VanessaPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route121_Text_VANESSA_LocalConversation, MSGBOX_NPC
 	end
 
 Route121_EventScript_Walter::
@@ -133,7 +132,7 @@ Route121_EventScript_RematchWalter::
 	end
 
 Route121_EventScript_Tammy::
-	trainerbattle_single TRAINER_TAMMY, Route121_Text_TammyIntro, Route121_Text_TammyDefeat
+	trainerbattle_double TRAINER_TAMMY, Route121_Text_TammyIntro, Route121_Text_TammyDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route121_Text_TammyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -226,3 +225,7 @@ Route121_Text_MtPyrePierSign:
 Route121_Text_SafariZoneSign:
 	.string "“Filled with rare POKéMON!”\n"
 	.string "SAFARI ZONE$"
+
+Route121_Text_VANESSA_LocalConversation:
+	.string "My POKéMON posed for a portrait.\n"
+	.string "The artist requested hazard pay.$"

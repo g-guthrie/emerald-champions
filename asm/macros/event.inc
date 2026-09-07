@@ -841,9 +841,10 @@
 	trainerbattle OBJ_ID_NONE, \trainer_a, NULL, \lose_text_a, NULL, OBJ_ID_NONE, \trainer_b, NULL, \lose_text_b, NULL, NULL, NULL, FALSE, TRUE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE
 	.endm
 
-	@ Starts a checked Double Battle against two opposing trainers.
+	@ Starts a checked, scripted Double Battle against two opposing trainers.
+	@ Dialogue and facing are handled by the scene; resume it after victory.
 	.macro trainerbattle_double_two_trainers trainer_a:req, lose_text_a:req, trainer_b:req, lose_text_b:req, not_enough_pkmn_text:req
-	trainerbattle OBJ_ID_NONE, \trainer_a, NULL, \lose_text_a, NULL, OBJ_ID_NONE, \trainer_b, NULL, \lose_text_b, NULL, NULL, \not_enough_pkmn_text, TRUE, TRUE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE
+	trainerbattle OBJ_ID_NONE, \trainer_a, NULL, \lose_text_a, NULL, OBJ_ID_NONE, \trainer_b, NULL, \lose_text_b, NULL, NULL, \not_enough_pkmn_text, TRUE, TRUE, FALSE, FALSE, TRUE, FALSE, FALSE, TRUE
 	.endm
 
 	@ Starts a trainer battle with victory text if the player loses. If flags is nonzero, the player will be healed after battle (and its assumed to be the tutorial battle)

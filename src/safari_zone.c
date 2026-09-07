@@ -182,17 +182,6 @@ void GetPokeblockFeederWithinRange(void)
     gSpecialVar_Result = -1;
 }
 
-// unused
-struct Pokeblock *SafariZoneGetPokeblockInFront(void)
-{
-    GetPokeblockFeederInFront();
-
-    if (gSpecialVar_Result == 0xFFFF)
-        return NULL;
-    else
-        return &sPokeblockFeeders[gSpecialVar_Result].pokeblock;
-}
-
 struct Pokeblock *SafariZoneGetActivePokeblock(void)
 {
     GetPokeblockFeederWithinRange();

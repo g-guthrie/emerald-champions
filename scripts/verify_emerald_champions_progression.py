@@ -13,11 +13,12 @@ import json
 import re
 from pathlib import Path
 
+from verify_emerald_champions_visual_contracts import registered_map_names, verify_map_event_geometry
+
 
 ROOT = Path(__file__).resolve().parents[1]
 MAPS_ROOT = ROOT / "data/maps"
 NULL_SCRIPT_REFS = {None, "0", "0x0", "NULL"}
-DYNAMIC_MAPS = {"MAP_DYNAMIC"}
 
 
 def require(condition: bool, message: str) -> None:
@@ -30,15 +31,7 @@ def load_json(path: Path) -> dict:
 
 
 def hoenn_map_names() -> list[str]:
-    groups = load_json(MAPS_ROOT / "map_groups.json")
-    names = [
-        map_name
-        for group_name in groups["group_order"]
-        for map_name in groups[group_name]
-        if "_Frlg" not in map_name
-    ]
-    require(len(names) == len(set(names)), "Hoenn map group contains duplicate map names")
-    return names
+    return [name for name in registered_map_names() if "_Frlg" not in name]
 
 
 def assembled_sources(map_names: list[str]) -> list[Path]:
@@ -74,78 +67,26 @@ def label_index(paths: list[Path]) -> dict[str, tuple[Path, int]]:
 
 
 def verify_map_data(map_names: list[str], labels: dict[str, tuple[Path, int]]) -> tuple[int, int]:
+    verify_map_event_geometry()
     layouts = {
         row["id"]: row
         for row in load_json(ROOT / "data/layouts/layouts.json")["layouts"]
     }
-    maps = {name: load_json(MAPS_ROOT / name / "map.json") for name in map_names}
-    by_id: dict[str, str] = {}
     event_count = 0
     warp_count = 0
-
-    for name, payload in maps.items():
-        map_id = payload["id"]
-        require(map_id not in by_id, f"duplicate Hoenn map id {map_id}")
-        by_id[map_id] = name
-        require(payload["layout"] in layouts, f"{name}: missing layout {payload['layout']}")
+    for name in map_names:
+        payload = load_json(MAPS_ROOT / name / "map.json")
         layout = layouts[payload["layout"]]
-        width, height = layout["width"], layout["height"]
         for asset_key in ("border_filepath", "blockdata_filepath"):
             asset = ROOT / layout[asset_key]
             require(asset.is_file() and asset.stat().st_size > 0, f"{name}: missing layout asset {asset}")
-
-        local_ids = [
-            event["local_id"]
-            for event in payload.get("object_events", []) or []
-            if event.get("local_id")
-        ]
-        require(len(local_ids) == len(set(local_ids)), f"{name}: duplicate object local ids")
-
         for section in ("object_events", "coord_events", "bg_events"):
-            for index, event in enumerate(payload.get(section, []) or []):
+            for index, event in enumerate(payload.get(section) or []):
                 event_count += 1
                 script = event.get("script")
                 if script not in NULL_SCRIPT_REFS:
                     require(script in labels, f"{name}:{section}[{index}]: missing script label {script}")
-                if section in {"object_events", "coord_events"}:
-                    require(
-                        0 <= event["x"] < width and 0 <= event["y"] < height,
-                        f"{name}:{section}[{index}] outside {width}x{height} at {event['x']},{event['y']}",
-                    )
-                else:
-                    # A handful of native signs live on the one-tile border,
-                    # but even inert/null background entries must belong to
-                    # the map rather than surviving as out-of-layout debris.
-                    require(
-                        0 <= event["x"] <= width and 0 <= event["y"] <= height,
-                        f"{name}:{section}[{index}] far outside {width}x{height} at {event['x']},{event['y']}",
-                    )
-
-        for index, warp in enumerate(payload.get("warp_events", []) or []):
-            warp_count += 1
-            require(
-                0 <= warp["x"] <= width + 1 and 0 <= warp["y"] <= height + 1,
-                f"{name}:warp[{index}] far outside {width}x{height} at {warp['x']},{warp['y']}",
-            )
-        for index, connection in enumerate(payload.get("connections", []) or []):
-            require(connection["map"] in by_id or connection["map"] in {
-                other["id"] for other in maps.values()
-            }, f"{name}:connection[{index}] targets missing map {connection['map']}")
-
-    # Validate destinations only after the complete map-id index exists.
-    for name, payload in maps.items():
-        for index, warp in enumerate(payload.get("warp_events", []) or []):
-            destination = warp["dest_map"]
-            destination_index = str(warp["dest_warp_id"])
-            if destination in DYNAMIC_MAPS:
-                continue
-            require(destination in by_id, f"{name}:warp[{index}] targets missing map {destination}")
-            if destination_index.isdigit():
-                destination_warps = maps[by_id[destination]].get("warp_events", []) or []
-                require(
-                    int(destination_index) < len(destination_warps),
-                    f"{name}:warp[{index}] targets {destination} warp {destination_index}, table has {len(destination_warps)}",
-                )
+        warp_count += len(payload.get("warp_events") or [])
 
     includes = (ROOT / "data/event_scripts.s").read_text()
     for map_name in map_names:
@@ -323,12 +264,19 @@ def verify_critical_progression_contracts() -> None:
         and "removeobject" in slate_scripts.split("SlateportCity_EventScript_Brawly::", 1)[1][:600],
         "finding Brawly in Slateport no longer sends him home",
     )
-    # Inclement lights Granite Cave B1F/B2F so the Letter is deliverable before Flash.
+    # Both floors retain ambient visibility without overriding native Flash.
     for cave in ("GraniteCave_B1F", "GraniteCave_B2F"):
         require(
-            "setflashlevel" in (ROOT / f"data/maps/{cave}/scripts.inc").read_text(),
-            f"{cave} lost its ambient light, making Steven's Letter undeliverable before Flash",
+            "special SetGraniteCaveFlashLevel" in (ROOT / f"data/maps/{cave}/scripts.inc").read_text(),
+            f"{cave} lost its shared ambient/native Flash helper",
         )
+    flash_helper = (ROOT / "src/field_specials.c").read_text().split(
+        "void SetGraniteCaveFlashLevel(void)", 1
+    )[-1].split("\n}", 1)[0]
+    require(
+        re.search(r"SetDefaultFlashLevel\(\);\s*if \(GetFlashLevel\(\) > 4\)\s*SetFlashLevel\(4\);", flash_helper),
+        "Granite lighting must preserve native Flash and cap only the darker ambient fallback",
+    )
     # Both Cycling Road entrances must start/reset the Mach Bike challenge.
     for gate in ("Route110_SeasideCyclingRoadNorthEntrance", "Route110_SeasideCyclingRoadSouthEntrance"):
         require(
@@ -473,7 +421,7 @@ def verify_critical_progression_contracts() -> None:
     for branch in ("goto_if_eq VAR_RESULT, 0", "goto_if_eq VAR_RESULT, 1"):
         require(branch in pecharunt, f"Pecharunt ignores prerequisite result: {branch}")
 
-    capture_only = {
+    one_shot_encounters = {
         "data/maps/DesertRuins/scripts.inc": ("Regirock", "DesertRuins_EventScript_DefeatedRegirock", "FLAG_DEFEATED_REGIROCK"),
         "data/maps/AncientTomb/scripts.inc": ("Registeel", "AncientTomb_EventScript_DefeatedRegisteel", "FLAG_DEFEATED_REGISTEEL"),
         "data/maps/IslandCave/scripts.inc": ("Regice", "IslandCave_EventScript_DefeatedRegice", "FLAG_DEFEATED_REGICE"),
@@ -486,11 +434,42 @@ def verify_critical_progression_contracts() -> None:
         "data/maps/FarawayIsland_Interior/scripts.inc": ("Mew", "FarawayIsland_Interior_EventScript_MewDefeated", "FLAG_DEFEATED_MEW"),
         "data/maps/BirthIsland_Exterior/scripts.inc": ("Deoxys", "BirthIsland_Exterior_EventScript_DefeatedDeoxys", "FLAG_DEFEATED_DEOXYS"),
     }
-    for path, (name, defeated_label, terminal_flag) in capture_only.items():
+    for path, (name, defeated_label, terminal_flag) in one_shot_encounters.items():
         text = (ROOT / path).read_text()
-        require("B_OUTCOME_CAUGHT" in text, f"{path}: {name} has no capture-only branch")
+        branches = dict(re.findall(
+            r"goto_if_eq VAR_RESULT, (B_OUTCOME_\w+), (\w+)", text
+        ))
+        require(branches.get("B_OUTCOME_WON") == defeated_label,
+                f"{path}: {name} KO does not reach its terminal defeat handler")
+        require("B_OUTCOME_CAUGHT" in branches,
+                f"{path}: {name} has no distinct capture branch")
+        caught = label_block(path, branches["B_OUTCOME_CAUGHT"])
+        capture_flag = {
+            "Lati": "FLAG_CAUGHT_LATIAS_OR_LATIOS", "HoOh": "FLAG_CAUGHT_HO_OH",
+            "Lugia": "FLAG_CAUGHT_LUGIA", "Mew": "FLAG_CAUGHT_MEW",
+            "Deoxys": "FLAG_BATTLED_DEOXYS",
+        }.get(name, terminal_flag)
+        require(f"setflag {capture_flag}" in caught,
+                f"{path}: {name} capture no longer records its completion flag")
         defeated = label_block(path, defeated_label)
-        require(terminal_flag not in defeated, f"{path}: knocking out {name} still sets terminal flag")
+        require("goto Common_EventScript_LegendaryDefeated" in defeated,
+                f"{path}: {name} KO no longer removes the encounter")
+        for outcome in ("B_OUTCOME_RAN", "B_OUTCOME_PLAYER_TELEPORTED"):
+            require(outcome in branches, f"{path}: {name} ignores escape outcome {outcome}")
+            escaped = label_block(path, branches[outcome])
+            if name == "Rayquaza":
+                require("goto SkyPillar_Top_EventScript_RanFromRayquaza2" in escaped,
+                        f"{path}: Rayquaza escape bypasses its removal handler")
+                escaped += label_block(path, "SkyPillar_Top_EventScript_RanFromRayquaza2")
+                require("removeobject VAR_LAST_TALKED" in escaped,
+                        f"{path}: escaped Rayquaza remains physically present")
+            else:
+                require("goto Common_EventScript_LegendaryFlewAway" in escaped,
+                        f"{path}: escaped {name} no longer reaches physical removal")
+            for failed in (defeated, escaped):
+                require("MarkLegendarySignCaught" not in failed
+                        and "setflag FLAG_CAUGHT_" not in failed,
+                        f"{path}: failed {name} encounter incorrectly records capture")
         require("CreateEmeraldChampionsStaticLegendaryEncounter" in text or "seteventmon SPECIES_LAT" in text,
                 f"{path}: {name} is not scaled to its campaign milestone")
         if name == "Lati":
@@ -498,6 +477,39 @@ def verify_critical_progression_contracts() -> None:
                 "seteventmon SPECIES_LATIOS, 100" in text and "seteventmon SPECIES_LATIAS, 100" in text,
                 "Southern Island Lati encounter is below the postgame cap",
             )
+
+    # Map terminal flags mean physical consumption, not capture ownership.
+    # The shared battle lifecycle persists failures before map scripts resume.
+    for label in ("Common_EventScript_LegendaryDefeated", "Common_EventScript_LegendaryFlewAway"):
+        require("removeobject VAR_LAST_TALKED" in label_block("data/event_scripts.s", label),
+                f"{label}: failed one-shot encounter remains physically present")
+    signs = (ROOT / "src/legendary_signs.c").read_text()
+    lost = signs[signs.index("void MarkLegendaryEncounterLost("):signs.index("bool32 IsLegendarySignOrdinaryWildSpecies(")]
+    require("lostLegendaryEncounters[index / 8] |= 1u << (index % 8)" in lost
+            and "FlagSet(sNativeLegendaryDefeatedFlags[nativeIndex])" in lost
+            and "FlagSet(sNativeLegendaryHideFlags[nativeIndex])" in lost,
+            "failed legendary encounters no longer persist loss and native physical removal")
+    require("VAR_LEGENDARY_SIGNS_CAUGHT_0" not in lost
+            and "MarkLegendarySignCaught" not in lost
+            and "FLAG_CAUGHT_" not in lost,
+            "legendary loss incorrectly grants capture ownership")
+    native_flags = signs[signs.index("static const u16 sNativeLegendaryDefeatedFlags"):signs.index("static const u16 sNativeLegendaryHideFlags")]
+    for name, _, flag in one_shot_encounters.values():
+        require(flag in (lost if name == "Lati" else native_flags),
+                f"{name}: loss no longer consumes its native terminal flag")
+    battle_util = (ROOT / "src/battle_util.c").read_text()
+    record_loss = battle_util[battle_util.index("void RecordFailedLegendaryEncounters("):battle_util.index("void SetValuesOnFaint(")]
+    require("if (!IsPersistentWildEncounter() || gBattleOutcome == B_OUTCOME_CAUGHT)" in record_loss
+            and "GetBattlerSide(battler) == B_SIDE_OPPONENT" in record_loss
+            and "MarkLegendaryEncounterLost(GetMonData(GetBattlerMon(battler), MON_DATA_SPECIES))" in record_loss,
+            "battle completion does not distinguish persistent failed encounters from captures")
+    require(re.findall(r"B_OUTCOME_\w+", record_loss) == ["B_OUTCOME_CAUGHT"],
+            "failed encounter recording excludes a terminal KO or escape outcome")
+    battle_main = (ROOT / "src/battle_main.c").read_text()
+    finish = battle_main[battle_main.index("static void HandleEndTurn_FinishBattle(void)\n{"):]
+    require("RecordFailedLegendaryEncounters();" in finish
+            and finish.index("RecordFailedLegendaryEncounters();") < finish.index("gBattleTypeFlags"),
+            "battle completion skips persistent loss before returning to the field")
 
     for path, item, progress_token in (
         ("data/maps/RustboroCity_CuttersHouse/scripts.inc", "ITEM_HM_CUT", "FLAG_RECEIVED_HM_CUT"),

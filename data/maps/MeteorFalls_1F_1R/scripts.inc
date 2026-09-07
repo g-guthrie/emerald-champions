@@ -9,7 +9,8 @@ MeteorFalls_1F_1R_EventScript_RivalTalkAfterBattle::
 MeteorFalls_1F_1R_Text_RivalAfterBattleRestored:
 	.string "MAGMA took the METEORITE toward\n"
 	.string "MT. CHIMNEY. We have to follow.\p"
-	.string "Their plan is bigger than COZMO.$"
+	.string "Take ROUTE 112's cable car\n"
+	.string "up to the summit.$"
 
 MeteorFalls_1F_1R_OnLoad:
 	call_if_set FLAG_SYS_GAME_CLEAR, MeteorFalls_1F_1R_EventScript_OpenStevensCave
@@ -349,6 +350,7 @@ MeteorFalls_1F_1R_Text_ArchieYesNoTellingWhatMagmaWillDo:
 
 MeteorFalls_1F_1R_Text_ArchieFarewell:
 	.string "ARCHIE: {PLAYER}, come to MT. CHIMNEY.\n"
+	.string "Take the cable car on ROUTE 112.\p"
 	.string "You have already changed this race.$"
 
 MeteorFalls_1F_1R_Text_MeetProfCozmo:
@@ -365,4 +367,6 @@ MeteorFalls_1F_1R_Text_WhatsTeamMagmaDoingAtMtChimney:
 	.string "PROF. COZMO: The METEORITE and the\n"
 	.string "fault line share one resonance.\p"
 	.string "Please stop MAGMA before they force the\n"
-	.string "entire network awake.$"
+	.string "entire network awake.\p"
+	.string "ROUTE 112's cable car will take you\n"
+	.string "to MT. CHIMNEY's summit.$"

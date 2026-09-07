@@ -2557,4 +2557,23 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("Punching moves gain priority."),
         .aiRating = 9,
     },
+    [ABILITY_POWER_FISTS] =
+    {
+        .name = _("Power Fists"),
+        .description = COMPOUND_STRING("Boosted punches hit Sp. Def."),
+        .aiRating = 8,
+    },
+    [ABILITY_SAND_SONG] =
+    {
+        .name = _("Sand Song"),
+        .description = COMPOUND_STRING("Sound moves become Ground."),
+        .aiRating = 6,
+    },
+    [ABILITY_PRISM_SCALES] =
+    {
+        .name = _("Prism Scales"),
+        .description = COMPOUND_STRING("Reduces special damage by 30%."),
+        .aiRating = 7,
+        .breakable = TRUE,
+    },
 };

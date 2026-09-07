@@ -80,7 +80,8 @@ Route119_WeatherInstitute_1F_Text_Grunt1Defeat:
 Route119_WeatherInstitute_1F_Text_Grunt1PostBattle:
 	.string "The maps show weather and the SIGNS\n"
 	.string "moving together.\p"
-	.string "That is why ARCHIE came.$"
+	.string "SHELLY took the researchers upstairs.\n"
+	.string "She wants their readings for ARCHIE.$"
 
 Route119_WeatherInstitute_1F_Text_Grunt4Intro:
 	.string "You crossed the flooded grass alone?\n"
@@ -92,11 +93,13 @@ Route119_WeatherInstitute_1F_Text_Grunt4Defeat:
 
 Route119_WeatherInstitute_1F_Text_Grunt4PostBattle:
 	.string "The bed restores exhausted teams.\n"
-	.string "Use it. The pressure rises upstairs.$"
+	.string "Use it. SHELLY is upstairs with the\l"
+	.string "researchers. That is your next front.$"
 
 Route119_WeatherInstitute_1F_Text_EveryoneWentUpstairs:
-	.string "While I was sleeping, everyone went\n"
-	.string "upstairs!$"
+	.string "Those AQUA people took the researchers\n"
+	.string "upstairs while I was asleep!\p"
+	.string "Can you go up and help them?$"
 
 Route119_WeatherInstitute_1F_Text_WowYoureStrong:
 	.string "Wow, you're really strong!\p"

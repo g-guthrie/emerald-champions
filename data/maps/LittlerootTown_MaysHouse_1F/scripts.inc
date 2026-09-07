@@ -365,7 +365,9 @@ RivalsHouse_1F_Text_MayWhoAreYou:
 	.string "He studies how Trainers from different\n"
 	.string "regions build around their partners.\p"
 	.string "For today's fieldwork, he packed all\n"
-	.string "nine regional starter trios.$"
+	.string "nine regional starter trios.\p"
+	.string "He went to ROUTE 101, north of town.\n"
+	.string "Go introduce yourself before he leaves!$"
 
 RivalsHouse_1F_Text_BrendanWhoAreYou:
 	.string "You're {PLAYER}, right?\n"
@@ -375,7 +377,9 @@ RivalsHouse_1F_Text_BrendanWhoAreYou:
 	.string "He studies how Trainers from different\n"
 	.string "regions build around their partners.\p"
 	.string "For today's fieldwork, he packed all\n"
-	.string "nine regional starter trios.$"
+	.string "nine regional starter trios.\p"
+	.string "He went to ROUTE 101, north of town.\n"
+	.string "Go introduce yourself before he leaves!$"
 
 RivalsHouse_1F_Text_DoYouHavePokemon:
 	.string "Hi, neighbor!\p"

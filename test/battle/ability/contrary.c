@@ -160,31 +160,40 @@ SINGLE_BATTLE_TEST("Contrary lowers a stat after using a move which would normal
 SINGLE_BATTLE_TEST("Contrary raises a stat after using a move which would normally lower it: Growl", s16 damage)
 {
     enum Ability ability;
-    PARAMETRIZE { ability = ABILITY_CONTRARY; }
-    PARAMETRIZE { ability = ABILITY_TANGLED_FEET; }
+    bool32 reference;
+    PARAMETRIZE { ability = ABILITY_CONTRARY; reference = FALSE; }
+    PARAMETRIZE { ability = ABILITY_TANGLED_FEET; reference = FALSE; }
+    PARAMETRIZE { ability = ABILITY_CONTRARY; reference = TRUE; }
+    PARAMETRIZE { ability = ABILITY_TANGLED_FEET; reference = TRUE; }
     GIVEN {
         ASSUME_STAT_CHANGE(MOVE_GROWL, attack: -1);
+        ASSUME(GetMoveCategory(MOVE_SCRATCH) == DAMAGE_CATEGORY_PHYSICAL);
         PLAYER(SPECIES_WOBBUFFET) { Speed(3); }
-        OPPONENT(SPECIES_SPINDA) { Ability(ability); Speed(2); }
+        // At +1, 120 Attack becomes 180; at -1 it becomes 80.
+        // Control battles use those raw values without a stat change.
+        OPPONENT(SPECIES_SPINDA) {
+            Ability(ability);
+            Speed(2);
+            Attack(reference ? (ability == ABILITY_CONTRARY ? 180 : 80) : 120);
+        }
     } WHEN {
-        TURN { MOVE(player, MOVE_GROWL); MOVE(opponent, MOVE_SCRATCH); }
+        TURN { MOVE(player, reference ? MOVE_CELEBRATE : MOVE_GROWL); MOVE(opponent, MOVE_SCRATCH); }
     } SCENE {
-        MESSAGE("Wobbuffet used Growl!");
-        if (ability == ABILITY_CONTRARY) {
-            // ABILITY_POPUP(opponent, ABILITY_CONTRARY);
+        if (!reference) {
+            MESSAGE("Wobbuffet used Growl!");
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-            MESSAGE("The opposing Spinda's Attack rose!");
+            if (ability == ABILITY_CONTRARY)
+                MESSAGE("The opposing Spinda's Attack rose!");
+            else
+                MESSAGE("The opposing Spinda's Attack fell!");
         }
-        else {
-            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-            MESSAGE("The opposing Spinda's Attack fell!");
-        }
-
         MESSAGE("The opposing Spinda used Scratch!");
         HP_BAR(player, captureDamage: &results[i].damage);
-    }
-    FINALLY {
-        EXPECT_MUL_EQ(results[1].damage, Q_4_12(2.125), results[0].damage);
+    } THEN {
+        EXPECT_EQ(opponent->statStages[STAT_ATK], DEFAULT_STAT_STAGE + (reference ? 0 : ability == ABILITY_CONTRARY ? 1 : -1));
+    } FINALLY {
+        EXPECT_EQ(results[0].damage, results[2].damage);
+        EXPECT_EQ(results[1].damage, results[3].damage);
     }
 }
 

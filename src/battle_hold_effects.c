@@ -23,7 +23,6 @@ bool32 IsOnAttackerAfterHitActivation(enum HoldEffect holdEffect)  { return gHol
 bool32 IsSprayLeppaBlunderActivation(enum HoldEffect holdEffect)   { return gHoldEffectsInfo[holdEffect].sprayLeppaBlunder; }
 bool32 IsLifeOrbShellBellActivation(enum HoldEffect holdEffect)    { return gHoldEffectsInfo[holdEffect].lifeOrbShellBell; }
 bool32 IsLeftoversActivation(enum HoldEffect holdEffect)           { return gHoldEffectsInfo[holdEffect].leftovers; }
-bool32 IsOrbsActivation(enum HoldEffect holdEffect)                { return gHoldEffectsInfo[holdEffect].orbs; }
 bool32 IsOnEffectActivation(enum HoldEffect holdEffect)            { return gHoldEffectsInfo[holdEffect].onEffect; }
 bool32 IsOnBerryActivation(enum HoldEffect holdEffect)             { return GetItemPocket(gLastUsedItem) == POCKET_BERRIES; }
 bool32 IsOnFlingActivation(enum HoldEffect holdEffect)             { return gHoldEffectsInfo[holdEffect].onFling; }
@@ -239,14 +238,14 @@ static enum ItemEffect TryWeaknessPolicy(enum BattlerId battlerDef)
     return effect;
 }
 
-static enum ItemEffect TrySnowball(enum BattlerId battlerDef)
+static enum ItemEffect TryRaiseStatOnTypeHit(enum BattlerId battlerDef, enum Type type, enum Stat stat)
 {
     enum ItemEffect effect = ITEM_NO_EFFECT;
 
     if (IsBattlerTurnDamaged(battlerDef, EXCLUDING_SUBSTITUTES)
-     && GetBattleMoveType(gCurrentMove) == TYPE_ICE)
+     && GetBattleMoveType(gCurrentMove) == type)
     {
-        SetStatChange(battlerDef, STAT_ATK, 1);
+        SetStatChange(battlerDef, stat, 1);
         BattleScriptCall(BattleScript_ItemStatChange);
         effect = ITEM_STATS_CHANGE;
     }
@@ -254,65 +253,20 @@ static enum ItemEffect TrySnowball(enum BattlerId battlerDef)
     return effect;
 }
 
-static enum ItemEffect TryLuminousMoss(enum BattlerId battlerDef)
-{
-    enum ItemEffect effect = ITEM_NO_EFFECT;
-
-    if (IsBattlerTurnDamaged(battlerDef, EXCLUDING_SUBSTITUTES)
-     && GetBattleMoveType(gCurrentMove) == TYPE_WATER)
-    {
-        SetStatChange(battlerDef, STAT_SPDEF, 1);
-        BattleScriptCall(BattleScript_ItemStatChange);
-        effect = ITEM_STATS_CHANGE;
-    }
-
-    return effect;
-}
-
-static enum ItemEffect TryCellBattery(enum BattlerId battlerDef)
-{
-    enum ItemEffect effect = ITEM_NO_EFFECT;
-
-    if (IsBattlerTurnDamaged(battlerDef, EXCLUDING_SUBSTITUTES)
-     && GetBattleMoveType(gCurrentMove) == TYPE_ELECTRIC)
-    {
-        SetStatChange(battlerDef, STAT_ATK, 1);
-        BattleScriptCall(BattleScript_ItemStatChange);
-        effect = ITEM_STATS_CHANGE;
-    }
-
-    return effect;
-}
-
-static enum ItemEffect TryAbsorbBulb(enum BattlerId battlerDef)
-{
-    enum ItemEffect effect = ITEM_NO_EFFECT;
-
-    if (IsBattlerTurnDamaged(battlerDef, EXCLUDING_SUBSTITUTES)
-     && GetBattleMoveType(gCurrentMove) == TYPE_WATER)
-    {
-        SetStatChange(battlerDef, STAT_SPATK, 1);
-        BattleScriptCall(BattleScript_ItemStatChange);
-        effect = ITEM_STATS_CHANGE;
-    }
-
-    return effect;
-}
-
-static enum ItemEffect TryJabocaBerry(enum BattlerId battlerDef, enum BattlerId battlerAtk, enum Item item)
+static enum ItemEffect TryRetaliationBerry(enum BattlerId battlerDef, enum BattlerId battlerAtk, enum Item item, enum DamageCategory category)
 {
     enum ItemEffect effect = ITEM_NO_EFFECT;
 
     if (IsBattlerAlive(battlerAtk)
      && IsBattlerTurnDamaged(battlerDef, EXCLUDING_SUBSTITUTES)
      && GetMoveEffect(gCurrentMove) != EFFECT_FUTURE_SIGHT
-     && IsBattleMovePhysical(gCurrentMove)
+     && GetBattleMoveCategory(gCurrentMove) == category
      && !IsAbilityAndRecord(battlerAtk, GetBattlerAbility(battlerAtk), ABILITY_MAGIC_GUARD))
     {
-        s32 jabocaDamage = GetNonDynamaxMaxHP(battlerAtk) / 8;
+        s32 damage = GetNonDynamaxMaxHP(battlerAtk) / 8;
         if (GetBattlerAbility(battlerDef) == ABILITY_RIPEN)
-            jabocaDamage *= 2;
-        SetPassiveDamageAmount(battlerAtk, jabocaDamage);
+            damage *= 2;
+        SetPassiveDamageAmount(battlerAtk, damage);
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_HURT_BY_ITEM;
         BattleScriptCall(BattleScript_JabocaRowapBerryActivates);
         PREPARE_ITEM_BUFFER(gBattleTextBuff1, item);
@@ -322,30 +276,7 @@ static enum ItemEffect TryJabocaBerry(enum BattlerId battlerDef, enum BattlerId 
     return effect;
 }
 
-static enum ItemEffect TryRowapBerry(enum BattlerId battlerDef, enum BattlerId battlerAtk, enum Item item)
-{
-    enum ItemEffect effect = ITEM_NO_EFFECT;
-
-    if (IsBattlerAlive(battlerAtk)
-     && IsBattlerTurnDamaged(battlerDef, EXCLUDING_SUBSTITUTES)
-     && GetMoveEffect(gCurrentMove) != EFFECT_FUTURE_SIGHT
-     && IsBattleMoveSpecial(gCurrentMove)
-     && !IsAbilityAndRecord(battlerAtk, GetBattlerAbility(battlerAtk), ABILITY_MAGIC_GUARD))
-    {
-        s32 rowapDamage = GetNonDynamaxMaxHP(battlerAtk) / 8;
-        if (GetBattlerAbility(battlerDef) == ABILITY_RIPEN)
-            rowapDamage *= 2;
-        SetPassiveDamageAmount(battlerAtk, rowapDamage);
-        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_HURT_BY_ITEM;
-        BattleScriptCall(BattleScript_JabocaRowapBerryActivates);
-        PREPARE_ITEM_BUFFER(gBattleTextBuff1, item);
-        effect = ITEM_HP_CHANGE;
-    }
-
-    return effect;
-}
-
-static enum ItemEffect TrySetEnigmaBerry(enum BattlerId battlerDef, enum BattlerId battlerAtk)
+static enum ItemEffect TrySetEnigmaBerry(enum BattlerId battlerDef)
 {
     enum ItemEffect effect = ITEM_NO_EFFECT;
 
@@ -382,7 +313,7 @@ static enum ItemEffect TryBlunderPolicy(enum BattlerId battlerAtk)
     return effect;
 }
 
-static enum ItemEffect TryMentalHerb(enum BattlerId battler, ActivationTiming timing)
+static enum ItemEffect TryMentalHerb(enum BattlerId battler)
 {
     enum ItemEffect effect = ITEM_NO_EFFECT;
     gBattleCommunication[MULTISTRING_CHOOSER] = 0;
@@ -462,7 +393,7 @@ static enum ItemEffect TryThroatSpray(enum BattlerId battlerAtk)
     return effect;
 }
 
-static enum ItemEffect DamagedStatBoostBerryEffect(enum BattlerId battlerDef, enum BattlerId battlerAtk, enum Stat statId, enum DamageCategory category)
+static enum ItemEffect DamagedStatBoostBerryEffect(enum BattlerId battlerDef, enum Stat statId, enum DamageCategory category)
 {
     enum ItemEffect effect = ITEM_NO_EFFECT;
 
@@ -628,44 +559,14 @@ static enum ItemEffect TryBlackSludgeDamage(enum BattlerId battler, enum HoldEff
     return effect;
 }
 
-static enum ItemEffect TryCureParalysis(enum BattlerId battler)
+static enum ItemEffect TryCureStatusMask(enum BattlerId battler, u32 statusMask, u32 clearMask, u32 message)
 {
     enum ItemEffect effect = ITEM_NO_EFFECT;
 
-    if (gBattleMons[battler].status1 & STATUS1_PARALYSIS)
+    if (gBattleMons[battler].status1 & statusMask)
     {
-        gBattleMons[battler].status1 &= ~STATUS1_PARALYSIS;
-        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_CURED_PARALYSIS;
-        BattleScriptCall(BattleScript_BerryCureStatusRet);
-        effect = ITEM_STATUS_CHANGE;
-    }
-
-    return effect;
-}
-
-static enum ItemEffect TryCurePoison(enum BattlerId battler)
-{
-    enum ItemEffect effect = ITEM_NO_EFFECT;
-
-    if (gBattleMons[battler].status1 & STATUS1_PSN_ANY)
-    {
-        gBattleMons[battler].status1 &= ~(STATUS1_PSN_ANY | STATUS1_TOXIC_COUNTER);
-        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_CURED_POISON;
-        BattleScriptCall(BattleScript_BerryCureStatusRet);
-        effect = ITEM_STATUS_CHANGE;
-    }
-
-    return effect;
-}
-
-static enum ItemEffect TryCureBurn(enum BattlerId battler)
-{
-    enum ItemEffect effect = ITEM_NO_EFFECT;
-
-    if (gBattleMons[battler].status1 & STATUS1_BURN)
-    {
-        gBattleMons[battler].status1 &= ~STATUS1_BURN;
-        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_CURED_BURN;
+        gBattleMons[battler].status1 &= ~clearMask;
+        gBattleCommunication[MULTISTRING_CHOOSER] = message;
         BattleScriptCall(BattleScript_BerryCureStatusRet);
         effect = ITEM_STATUS_CHANGE;
     }
@@ -1061,40 +962,40 @@ enum ItemEffect ItemBattleEffects(enum BattlerId itemBattler, enum BattlerId bat
         effect = TryWeaknessPolicy(itemBattler);
         break;
     case HOLD_EFFECT_SNOWBALL:
-        effect = TrySnowball(itemBattler);
+        effect = TryRaiseStatOnTypeHit(itemBattler, TYPE_ICE, STAT_ATK);
         break;
     case HOLD_EFFECT_LUMINOUS_MOSS:
-        effect = TryLuminousMoss(itemBattler);
+        effect = TryRaiseStatOnTypeHit(itemBattler, TYPE_WATER, STAT_SPDEF);
         break;
     case HOLD_EFFECT_CELL_BATTERY:
-        effect = TryCellBattery(itemBattler);
+        effect = TryRaiseStatOnTypeHit(itemBattler, TYPE_ELECTRIC, STAT_ATK);
         break;
     case HOLD_EFFECT_ABSORB_BULB:
-        effect = TryAbsorbBulb(itemBattler);
+        effect = TryRaiseStatOnTypeHit(itemBattler, TYPE_WATER, STAT_SPATK);
         break;
     case HOLD_EFFECT_JABOCA_BERRY:
-        effect = TryJabocaBerry(itemBattler, battler, item);
+        effect = TryRetaliationBerry(itemBattler, battler, item, DAMAGE_CATEGORY_PHYSICAL);
         break;
     case HOLD_EFFECT_ROWAP_BERRY:
-        effect = TryRowapBerry(itemBattler, battler, item);
+        effect = TryRetaliationBerry(itemBattler, battler, item, DAMAGE_CATEGORY_SPECIAL);
         break;
     case HOLD_EFFECT_ENIGMA_BERRY: // consume and heal if hit by super effective move
-        effect = TrySetEnigmaBerry(itemBattler, battler);
+        effect = TrySetEnigmaBerry(itemBattler);
         break;
     case HOLD_EFFECT_BLUNDER_POLICY:
         effect = TryBlunderPolicy(itemBattler);
         break;
     case HOLD_EFFECT_MENTAL_HERB:
-        effect = TryMentalHerb(itemBattler, timing);
+        effect = TryMentalHerb(itemBattler);
         break;
     case HOLD_EFFECT_THROAT_SPRAY:
         effect = TryThroatSpray(itemBattler);
         break;
     case HOLD_EFFECT_KEE_BERRY:  // consume and boost defense if used physical move
-        effect = DamagedStatBoostBerryEffect(itemBattler, battler, STAT_DEF, DAMAGE_CATEGORY_PHYSICAL);
+        effect = DamagedStatBoostBerryEffect(itemBattler, STAT_DEF, DAMAGE_CATEGORY_PHYSICAL);
         break;
     case HOLD_EFFECT_MARANGA_BERRY:  // consume and boost sp. defense if used special move
-        effect = DamagedStatBoostBerryEffect(itemBattler, battler, STAT_SPDEF, DAMAGE_CATEGORY_SPECIAL);
+        effect = DamagedStatBoostBerryEffect(itemBattler, STAT_SPDEF, DAMAGE_CATEGORY_SPECIAL);
         break;
     case HOLD_EFFECT_SHELL_BELL:
         effect = TryShellBell(itemBattler);
@@ -1124,13 +1025,13 @@ enum ItemEffect ItemBattleEffects(enum BattlerId itemBattler, enum BattlerId bat
             effect = TryBlackSludgeDamage(itemBattler, holdEffect);
         break;
     case HOLD_EFFECT_CURE_PAR: // Cheri Berry
-        effect = TryCureParalysis(itemBattler);
+        effect = TryCureStatusMask(itemBattler, STATUS1_PARALYSIS, STATUS1_PARALYSIS, B_MSG_CURED_PARALYSIS);
         break;
     case HOLD_EFFECT_CURE_PSN: // Pecha Berry
-        effect = TryCurePoison(itemBattler);
+        effect = TryCureStatusMask(itemBattler, STATUS1_PSN_ANY, STATUS1_PSN_ANY | STATUS1_TOXIC_COUNTER, B_MSG_CURED_POISON);
         break;
     case HOLD_EFFECT_CURE_BRN: // Rawst Berry
-        effect = TryCureBurn(itemBattler);
+        effect = TryCureStatusMask(itemBattler, STATUS1_BURN, STATUS1_BURN, B_MSG_CURED_BURN);
         break;
     case HOLD_EFFECT_CURE_FRZ: // Aspear Berry
         effect = TryCureFreezeOrFrostbite(itemBattler);

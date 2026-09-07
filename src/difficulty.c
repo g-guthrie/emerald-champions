@@ -118,8 +118,7 @@ void Script_IncreaseDifficulty(void)
 
     currentDifficulty = GetCurrentDifficultyLevel();
 
-    if (currentDifficulty++ > DIFFICULTY_MAX)
-        return;
+    currentDifficulty++;
 
     Script_RequestEffects(SCREFF_V1);
     Script_RequestWriteVar(B_VAR_DIFFICULTY);

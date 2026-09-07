@@ -16,7 +16,6 @@ import hashlib
 import json
 import os
 import re
-import shlex
 import shutil
 import subprocess
 import sys
@@ -29,6 +28,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "scripts"))
 from rom_artifacts import verify_rom_elf_pair
+import native_tools
 
 RUNNER_SOURCE = ROOT / "tests/headless/emerald_champions_mgba_runner.c"
 DEFAULT_RUNNER = ROOT / "build/headless/emerald_champions_mgba_runner"
@@ -118,58 +118,17 @@ def require_file(path: Path, label: str) -> Path:
 
 
 def build_runner() -> Path:
-    output = DEFAULT_RUNNER
-    if output.is_file() and output.stat().st_mtime_ns >= RUNNER_SOURCE.stat().st_mtime_ns:
-        return output
-    output.parent.mkdir(parents=True, exist_ok=True)
-    command = [os.environ.get("CC", "cc"), "-std=c11", "-O2", "-Wall", "-Wextra", "-Werror", str(RUNNER_SOURCE)]
-    pkg_config = shutil.which("pkg-config")
-    flags: list[str] = []
-    if pkg_config:
-        result = subprocess.run([pkg_config, "--cflags", "--libs", "mgba"], text=True, capture_output=True)
-        if result.returncode == 0:
-            flags = shlex.split(result.stdout)
-    if not flags:
-        prefixes = [Path(os.environ["MGBA_PREFIX"])] if os.environ.get("MGBA_PREFIX") else []
-        prefixes += [Path("/opt/homebrew/opt/mgba"), Path("/usr/local/opt/mgba"), Path("/usr")]
-        for prefix in prefixes:
-            if (prefix / "include/mgba/core/core.h").is_file():
-                flags = [f"-I{prefix / 'include'}", f"-L{prefix / 'lib'}", "-lmgba", f"-Wl,-rpath,{prefix / 'lib'}"]
-                break
-    if not flags:
-        raise HarnessError("native libmGBA development files unavailable; set MGBA_PREFIX")
-    command += flags + ["-o", str(output)]
-    result = subprocess.run(command, text=True, capture_output=True)
-    if result.returncode != 0:
-        raise HarnessError(f"failed to build native runner:\n{result.stdout}{result.stderr}")
-    return output
-
-
-def find_nm() -> str:
-    candidates = [
-        shutil.which("arm-none-eabi-nm"),
-        str(ROOT / "tools/binutils/bin/arm-none-eabi-nm"),
-        "/opt/homebrew/bin/arm-none-eabi-nm",
-    ]
-    for candidate in candidates:
-        if candidate and Path(candidate).is_file():
-            return candidate
-    raise HarnessError("arm-none-eabi-nm is required for symbol probes")
+    try:
+        return native_tools.build_runner(RUNNER_SOURCE, DEFAULT_RUNNER)
+    except native_tools.NativeToolError as error:
+        raise HarnessError(str(error)) from error
 
 
 def symbols(elf: Path) -> dict[str, int]:
-    result = subprocess.run([find_nm(), "-S", str(elf)], text=True, capture_output=True)
-    if result.returncode != 0:
-        raise HarnessError(f"cannot inspect ELF symbols: {result.stderr.strip()}")
-    found: dict[str, int] = {}
-    for line in result.stdout.splitlines():
-        fields = line.split()
-        if len(fields) >= 4:
-            try:
-                found[fields[-1]] = int(fields[0], 16)
-            except ValueError:
-                pass
-    return found
+    try:
+        return native_tools.symbols(elf, ROOT)
+    except native_tools.NativeToolError as error:
+        raise HarnessError(str(error)) from error
 
 
 def resolve_game_constants(names: list[str]) -> dict[str, int]:

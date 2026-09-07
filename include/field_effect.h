@@ -54,7 +54,6 @@ void MultiplyPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b);
 void FreeResourcesAndDestroySprite(struct Sprite *sprite, u8 spriteId);
 u8 CreateMonSprite_PicBox(enum Species species, s16 x, s16 y, u8 subpriority);
 void StartEscapeRopeFieldEffect(void);
-void FieldEffectFreeGraphicsResources(struct Sprite *sprite);
 bool8 IsRockClimbActive(void);
 #if EC_HEADLESS_FIXTURES
 bool32 IsHallOfFameRecordHeadlessVisible(u32 partyCount);

@@ -11,13 +11,11 @@ Route124_EventScript_HuntersHouseSign::
 	end
 
 Route124_EventScript_Spencer::
-	trainerbattle_single TRAINER_SPENCER, Route124_Text_SpencerIntro, Route124_Text_SpencerDefeat
-	msgbox Route124_Text_SpencerPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route124_Text_SPENCER_LocalConversation, MSGBOX_NPC
 	end
 
 Route124_EventScript_Roland::
-	trainerbattle_single TRAINER_ROLAND, Route124_Text_RolandIntro, Route124_Text_RolandDefeat
-	msgbox Route124_Text_RolandPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route124_Text_ROLAND_LocalConversation, MSGBOX_NPC
 	end
 
 Route124_EventScript_Jenny::
@@ -47,8 +45,7 @@ Route124_EventScript_Grace::
 	end
 
 Route124_EventScript_Chad::
-	trainerbattle_double TRAINER_CHAD, Route124_Text_ChadIntro, Route124_Text_ChadDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route124_Text_ChadPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route124_Text_CHAD_LocalConversation, MSGBOX_NPC
 	end
 
 Route124_EventScript_Lila::
@@ -90,15 +87,27 @@ Route124_EventScript_RematchRoy::
 	end
 
 Route124_EventScript_Declan::
-	trainerbattle_single TRAINER_DECLAN, Route124_Text_DeclanIntro, Route124_Text_DeclanDefeat
+	trainerbattle_double TRAINER_DECLAN, Route124_Text_DeclanIntro, Route124_Text_DeclanDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route124_Text_DeclanPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route124_EventScript_Isabella::
-	trainerbattle_single TRAINER_ISABELLA, Route124_Text_IsabellaIntro, Route124_Text_IsabellaDefeat
+	trainerbattle_double TRAINER_ISABELLA, Route124_Text_IsabellaIntro, Route124_Text_IsabellaDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route124_Text_IsabellaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route124_Text_HuntersHouse:
 	.string "HUNTER'S HOUSE$"
 
+
+Route124_Text_SPENCER_LocalConversation:
+	.string "I keep a map in my swim trunks.\n"
+	.string "It is mostly ocean now.$"
+
+Route124_Text_ROLAND_LocalConversation:
+	.string "CLAWITZER is a powerful swimmer.\n"
+	.string "The brakes could use some work.$"
+
+Route124_Text_CHAD_LocalConversation:
+	.string "STOUTLAND found my lost goggles.\n"
+	.string "I was wearing them. Good dog.$"

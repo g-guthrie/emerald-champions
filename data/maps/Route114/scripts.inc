@@ -123,8 +123,7 @@ Route114_EventScript_Shane::
 	end
 
 Route114_EventScript_Nancy::
-	trainerbattle_double TRAINER_NANCY, Route114_Text_NancyIntro, Route114_Text_NancyDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route114_Text_NancyPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route114_Text_NANCY_LocalConversation, MSGBOX_NPC
 	end
 
 Route114_EventScript_Steve::
@@ -170,7 +169,7 @@ Route114_EventScript_RematchBernie::
 	end
 
 Route114_EventScript_Claude::
-	trainerbattle_single TRAINER_CLAUDE, Route114_Text_ClaudeIntro, Route114_Text_ClaudeDefeat
+	trainerbattle_double TRAINER_CLAUDE, Route114_Text_ClaudeIntro, Route114_Text_ClaudeDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route114_Text_ClaudePostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -225,3 +224,7 @@ Route114_Text_FossilManiacsHouseSign:
 
 Route114_Text_LanettesHouse:
 	.string "LANETTE'S HOUSE$"
+
+Route114_Text_NANCY_LocalConversation:
+	.string "I packed for every weather.\n"
+	.string "My bag weighs more than I do.$"

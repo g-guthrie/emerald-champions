@@ -37,20 +37,36 @@ TEST("Keldeo follows Secret Sword form changes in party and PC movesets")
 
 TEST("Emerald Champions Keldeo presets match their Secret Sword form")
 {
+    static const enum Species forms[] = {SPECIES_KELDEO_ORDINARY, SPECIES_KELDEO_RESOLUTE};
     struct Pokemon mon;
-    CreateMon(&mon, SPECIES_KELDEO_ORDINARY, 40, 0, OTID_STRUCT_PLAYER_ID);
-    EXPECT_NE(ApplyEmeraldChampionsBattleSetChoice(&mon, 0), EC_BATTLE_SET_FAILED);
-    EXPECT_EQ(GetMonData(&mon, MON_DATA_SPECIES), SPECIES_KELDEO_RESOLUTE);
-    EXPECT(MonKnowsMove(&mon, MOVE_SECRET_SWORD));
 
-    CreateMon(&mon, SPECIES_KELDEO_ORDINARY, 40, 0, OTID_STRUCT_PLAYER_ID);
-    EXPECT_NE(ApplyEmeraldChampionsBattleSetChoice(&mon, 1), EC_BATTLE_SET_FAILED);
-    EXPECT_EQ(GetMonData(&mon, MON_DATA_SPECIES), SPECIES_KELDEO_ORDINARY);
-    EXPECT(!MonKnowsMove(&mon, MOVE_SECRET_SWORD));
+    for (u32 form = 0; form < ARRAY_COUNT(forms); form++)
+    {
+        for (u8 format = 0; format < EC_BATTLE_FORMAT_COUNT; format++)
+        {
+            CreateMon(&mon, forms[form], 40, 0, OTID_STRUCT_PLAYER_ID);
+            u8 count = GetEmeraldChampionsBattleSetCountForFormat(&mon, format);
+            EXPECT_GT(count, 0);
+            for (u8 choice = 0; choice < count; choice++)
+            {
+                bool32 wantsSecretSword = FALSE;
+                CreateMon(&mon, forms[form], 40, 0, OTID_STRUCT_PLAYER_ID);
+                const struct EmeraldChampionsBattleSet *preset =
+                    GetEmeraldChampionsBattleSetPresetForFormat(&mon, choice, format);
+                EXPECT(preset != NULL);
+                for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
+                    wantsSecretSword |= preset->moves[slot] == MOVE_SECRET_SWORD;
 
-    // Wild Keldeo can roll either authored orientation. Its native form must
-    // follow the resulting moveset instead of being forced Resolute when the
-    // selected orientation does not know Secret Sword.
+                EXPECT_NE(ApplyEmeraldChampionsBattleSetChoiceForFormat(&mon, choice, format), EC_BATTLE_SET_FAILED);
+                EXPECT_EQ(MonKnowsMove(&mon, MOVE_SECRET_SWORD), wantsSecretSword);
+                EXPECT_EQ(GetMonData(&mon, MON_DATA_SPECIES),
+                          wantsSecretSword ? SPECIES_KELDEO_RESOLUTE : SPECIES_KELDEO_ORDINARY);
+            }
+        }
+    }
+
+    // Wild Keldeo's native form must follow the resulting moveset, including
+    // Ordinary presets that do not contain Secret Sword.
     SeedRng(0x4B454C44);
     for (u32 i = 0; i < 32; i++)
     {

@@ -1614,7 +1614,8 @@ SootopolisCity_Text_KnowWhatsNeededToHelpHim:
 	.string "needed to help him…$"
 
 SootopolisCity_Text_NeverBeenToSkyPillar:
-	.string "STEVEN: The SKY PILLAR…\p"
+	.string "STEVEN: SKY PILLAR is on the north side\n"
+	.string "of ROUTE 131, east of PACIFIDLOG.\p"
 	.string "The oldest SIGN in HOENN should be there,\n"
 	.string "and no one has read it in centuries.$"
 
@@ -1653,9 +1654,9 @@ SootopolisCity_Text_ThankYouForHelpAcceptThis:
 SootopolisCity_Text_ExplainWaterfallGoToGym:
 	.string "That HIDDEN MACHINE contains\n"
 	.string "WATERFALL.\p"
-	.string "If you have the RAIN BADGE, a POKéMON\n"
-	.string "that has learned that HM move can\l"
-	.string "force its way up waterfalls.\p"
+	.string "With the RAIN BADGE, a party member\n"
+	.string "that can learn WATERFALL can climb\l"
+	.string "waterfalls without being taught it.\p"
 	.string "And where does one get the RAIN BADGE?\n"
 	.string "You know, don't you?\p"
 	.string "That's right! You have to beat\n"
@@ -1664,5 +1665,5 @@ SootopolisCity_Text_ExplainWaterfallGoToGym:
 	.string "that door.$"
 
 SootopolisCity_Text_DazzledByMentor:
-	.string "WALLACE: JUAN's Gym is the final authored\n"
-	.string "test before the LEAGUE. Expect no mercy.$"
+	.string "WALLACE: JUAN's Gym is the final test\n"
+	.string "before the LEAGUE. Expect no mercy.$"

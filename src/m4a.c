@@ -40,10 +40,6 @@ u32 MidiKeyToFreq(struct WaveData *wav, u8 key, u8 fineAdjust)
     return umul3232H32(wav->freq, val1 + umul3232H32(val2 - val1, fineAdjustShifted));
 }
 
-static void UNUSED UnusedDummyFunc(void)
-{
-}
-
 void MPlayContinue(struct MusicPlayerInfo *mplayInfo)
 {
     if (mplayInfo->ident == ID_NUMBER)
@@ -132,21 +128,6 @@ void m4aSongNumStartOrChange(u16 n)
     }
 }
 
-static void UNUSED m4aSongNumStartOrContinue(u16 n)
-{
-    const struct MusicPlayer *mplayTable = gMPlayTable;
-    const struct Song *songTable = gSongTable;
-    const struct Song *song = &songTable[n];
-    const struct MusicPlayer *mplay = &mplayTable[song->ms];
-
-    if (mplay->info->songHeader != song->header)
-        MPlayStart(mplay->info, song->header);
-    else if ((mplay->info->status & MUSICPLAYER_STATUS_TRACK) == 0)
-        MPlayStart(mplay->info, song->header);
-    else if (mplay->info->status & MUSICPLAYER_STATUS_PAUSE)
-        MPlayContinue(mplay->info);
-}
-
 void m4aSongNumStop(u16 n)
 {
     const struct MusicPlayer *mplayTable = gMPlayTable;
@@ -156,17 +137,6 @@ void m4aSongNumStop(u16 n)
 
     if (mplay->info->songHeader == song->header)
         m4aMPlayStop(mplay->info);
-}
-
-static void UNUSED m4aSongNumContinue(u16 n)
-{
-    const struct MusicPlayer *mplayTable = gMPlayTable;
-    const struct Song *songTable = gSongTable;
-    const struct Song *song = &songTable[n];
-    const struct MusicPlayer *mplay = &mplayTable[song->ms];
-
-    if (mplay->info->songHeader == song->header)
-        MPlayContinue(mplay->info);
 }
 
 void m4aMPlayAllStop(void)
@@ -309,11 +279,6 @@ void MPlayExtender(struct CgbChannel *cgbChans)
     cgbChans[3].panMask = 0x88;
 
     soundInfo->ident = ident;
-}
-
-static void UNUSED MusicPlayerJumpTableCopy(void)
-{
-    asm("swi 0x2A");
 }
 
 void ClearChain(void *x)
@@ -1290,17 +1255,6 @@ void m4aMPlayPanpotControl(struct MusicPlayerInfo *mplayInfo, u16 trackBits, s8 
     }
 
     mplayInfo->ident = ID_NUMBER;
-}
-
-void ClearModM(struct MusicPlayerTrack *track)
-{
-    track->lfoSpeedC = 0;
-    track->modM = 0;
-
-    if (track->modT == 0)
-        track->flags |= MPT_FLG_PITCHG;
-    else
-        track->flags |= MPT_FLG_VOLCHG;
 }
 
 #define MEMACC_COND_JUMP(cond) \

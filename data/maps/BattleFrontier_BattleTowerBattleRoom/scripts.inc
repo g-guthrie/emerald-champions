@@ -59,6 +59,7 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_CircuitNext::
 	waitmovement 0
 	msgbox BattleFrontier_BattleTowerBattleRoom_Text_CircuitBattlePoints, MSGBOX_DEFAULT
 	special ChampionsCircuitTryGiveReward
+	call_if_eq VAR_RESULT, 4, BattleFrontier_BattleTowerLobby_EventScript_CircuitRewardNeedsResearch
 	call_if_eq VAR_RESULT, 1, BattleFrontier_BattleTowerLobby_EventScript_CircuitRewardParty
 	call_if_eq VAR_RESULT, 2, BattleFrontier_BattleTowerLobby_EventScript_CircuitRewardPC
 	call_if_eq VAR_RESULT, 3, BattleFrontier_BattleTowerLobby_EventScript_CircuitRewardNoRoom

@@ -85,7 +85,13 @@ SootopolisCity_Gym_1F_EventScript_Juan::
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, SootopolisCity_Gym_1F_EventScript_JuanRematch
 	goto_if_unset FLAG_RECEIVED_JUAN_GYARADOSITE, SootopolisCity_Gym_1F_EventScript_GiveGyaradosite2
+	goto_if_set FLAG_SYS_GAME_CLEAR, SootopolisCity_Gym_1F_EventScript_JuanAfterLeague
 	msgbox SootopolisCity_Gym_1F_Text_JuanPostBattle, MSGBOX_DEFAULT
+	release
+	end
+
+SootopolisCity_Gym_1F_EventScript_JuanAfterLeague::
+	msgbox SootopolisCity_Gym_1F_Text_JuanPostRematch, MSGBOX_DEFAULT
 	release
 	end
 
@@ -229,7 +235,9 @@ SootopolisCity_Gym_1F_Text_ExplainRainBadgeTakeThis:
 	.string "battle we shared, take this…$"
 SootopolisCity_Gym_1F_Text_ExplainGyaradosite:
 	.string "Gyaradosite lets Gyarados Mega Evolve.\n"
-	.string "Let it hold the stone in battle.$"
+	.string "Let it hold the stone in battle.\p"
+	.string "SURF east from ROUTE 128 to EVER GRANDE.\n"
+	.string "Use WATERFALL at the city's entrance.$"
 
 SootopolisCity_Gym_1F_Text_RegisteredJuan:
 	.string "Registered GYM LEADER JUAN\n"
@@ -238,6 +246,8 @@ SootopolisCity_Gym_1F_Text_RegisteredJuan:
 SootopolisCity_Gym_1F_Text_JuanPostBattle:
 	.string "Eight BADGES open EVER GRANDE. Its\n"
 	.string "challenge is five master teams in a row.\p"
+	.string "SURF east from ROUTE 128 to EVER GRANDE.\n"
+	.string "Use WATERFALL at the city's entrance.\p"
 	.string "You may heal with your BAG between rooms,\n"
 	.string "but never use items inside their battles.$"
 

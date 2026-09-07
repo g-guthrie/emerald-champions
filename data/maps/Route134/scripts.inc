@@ -27,8 +27,7 @@ Route134_EventScript_Aaron::
 	end
 
 Route134_EventScript_Hitoshi::
-	trainerbattle_double TRAINER_HITOSHI, Route134_Text_HitoshiIntro, Route134_Text_HitoshiDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route134_Text_HitoshiPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route134_Text_HITOSHI_LocalConversation, MSGBOX_NPC
 	end
 
 Route134_EventScript_Hudson::
@@ -51,3 +50,7 @@ Route134_EventScript_Kelvin::
 	msgbox Route134_Text_KelvinPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
+Route134_Text_HITOSHI_LocalConversation:
+	.string "Even MACHAMP takes a rest day.\n"
+	.string "It rests four arms. I rest two.$"

@@ -322,9 +322,10 @@ PetalburgWoods_Text_NotAOneToBeFound:
 	.string "Not a one to be found…$"
 
 PetalburgWoods_Text_HaveYouSeenShroomish:
-	.string "Hello, have you seen any POKéMON\n"
-	.string "called SHROOMISH around here?\p"
-	.string "I really love that POKéMON.$"
+	.string "Oh, hello! Have you seen a SHROOMISH\n"
+	.string "around here? I've always loved them.\p"
+	.string "I'm on my way back to DEVON in RUSTBORO.\n"
+	.string "I thought I could spare a little time…$"
 
 PetalburgWoods_Text_IWasGoingToAmbushYou:
 	.string "I was going to ambush you, but you\n"
@@ -337,9 +338,9 @@ PetalburgWoods_Text_HandOverThosePapers:
 	.string "Hand over those papers!$"
 
 PetalburgWoods_Text_YouHaveToHelpMe:
-	.string "Aiyeeeh!\p"
-	.string "You're a POKéMON TRAINER, aren't you?\n"
-	.string "You've got to help me, please!$"
+	.string "Please, help me!\p"
+	.string "These papers belong to DEVON. I can't\n"
+	.string "let him take them!$"
 
 PetalburgWoods_Text_NoOneCrossesTeamAqua:
 	.string "Hunh? What do you think you're doing?\n"
@@ -362,21 +363,20 @@ PetalburgWoods_Text_YouveGotSomeNerve:
 	.string "I'll let you go today!$"
 
 PetalburgWoods_Text_ThatWasAwfullyClose:
-	.string "Whew…\n"
-	.string "That was awfully close!\p"
-	.string "Thanks to you, he didn't rob me of\n"
-	.string "these important papers.\p"
-	.string "I know, I'll give you a GREAT BALL as\n"
-	.string "my thanks!$"
+	.string "Whew… I thought he'd caught me.\n"
+	.string "Thank you for standing up to him.\p"
+	.string "I must get these papers back to DEVON.\n"
+	.string "But first, take this GREAT BALL.\p"
+	.string "It's the least I can do!$"
 
 PetalburgWoods_Text_TeamAquaAfterSomethingInRustboro:
-	.string "Didn't that TEAM AQUA thug say\n"
-	.string "they were after something in\l"
-	.string "RUSTBORO, too?$"
+	.string "He said TEAM AQUA was after something\n"
+	.string "in RUSTBORO, too, didn't he?\p"
+	.string "My colleagues could be in trouble.$"
 
 PetalburgWoods_Text_ICantBeWastingTime:
-	.string "Uh-oh! It's a crisis!\n"
-	.string "I can't be wasting time!$"
+	.string "I need to warn everyone at DEVON.\n"
+	.string "No more looking for SHROOMISH today!$"
 
 PetalburgWoods_Text_YoureLoadedWithItems:
 	.string "You're loaded with items.\n"

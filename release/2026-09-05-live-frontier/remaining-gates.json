@@ -1,0 +1,126 @@
+[
+  {
+    "gate": "finite rewards",
+    "exit_code": 0
+  },
+  {
+    "gate": "reward economy",
+    "exit_code": 0
+  },
+  {
+    "gate": "interaction rewards",
+    "exit_code": 0
+  },
+  {
+    "gate": "authored wild distribution",
+    "exit_code": 0
+  },
+  {
+    "gate": "route signs",
+    "exit_code": 0
+  },
+  {
+    "gate": "competitive presets",
+    "exit_code": 1
+  },
+  {
+    "gate": "species stat rebalances",
+    "exit_code": 1
+  },
+  {
+    "gate": "upstream critical fixes",
+    "exit_code": 0
+  },
+  {
+    "gate": "campaign roster",
+    "exit_code": 1
+  },
+  {
+    "gate": "Game Corner starter archive",
+    "exit_code": 0
+  },
+  {
+    "gate": "trainer Ability legality",
+    "exit_code": 0
+  },
+  {
+    "gate": "trainer runtime coherence",
+    "exit_code": 0
+  },
+  {
+    "gate": "marquee dynamic AI",
+    "exit_code": 0
+  },
+  {
+    "gate": "trainer row reachability",
+    "exit_code": 0
+  },
+  {
+    "gate": "trainer dialogue species",
+    "exit_code": 0
+  },
+  {
+    "gate": "story and dialogue",
+    "exit_code": 0
+  },
+  {
+    "gate": "rematch-free Match Call",
+    "exit_code": 0
+  },
+  {
+    "gate": "map and script structure with selected progression contracts",
+    "exit_code": 0
+  },
+  {
+    "gate": "legendary availability",
+    "exit_code": 0
+  },
+  {
+    "gate": "legendary signs and Circuit",
+    "exit_code": 0
+  },
+  {
+    "gate": "regional starters",
+    "exit_code": 0
+  },
+  {
+    "gate": "restored world",
+    "exit_code": 0
+  },
+  {
+    "gate": "single-player evolutions",
+    "exit_code": 0
+  },
+  {
+    "gate": "fossil revival",
+    "exit_code": 0
+  },
+  {
+    "gate": "campaign battle master",
+    "exit_code": 1
+  },
+  {
+    "gate": "battle master regenerates byte-for-byte",
+    "exit_code": 0
+  },
+  {
+    "gate": "per-encounter quality audit self-test",
+    "exit_code": 0
+  },
+  {
+    "gate": "per-encounter quality audit",
+    "exit_code": 0
+  },
+  {
+    "gate": "Frontier competitive loadouts",
+    "exit_code": 0
+  },
+  {
+    "gate": "local-ID sprite bindings",
+    "exit_code": 0
+  },
+  {
+    "gate": "battle script formats",
+    "exit_code": 0
+  }
+]

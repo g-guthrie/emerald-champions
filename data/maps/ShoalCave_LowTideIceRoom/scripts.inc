@@ -9,6 +9,8 @@ ShoalCave_LowTideIceRoom_EventScript_Articuno::
 	faceplayer
 	setvar VAR_0x8004, EC_SIGN_ARTICUNO_ID
 	special TryUnlockSelectedLegendarySign
+	goto_if_eq VAR_RESULT, 6, Common_EventScript_LegendaryNeedsDevon
+	goto_if_eq VAR_RESULT, 5, Common_EventScript_LegendaryDefeatedAtShrine
 	goto_if_eq VAR_RESULT, 0, ShoalCave_LowTideIceRoom_EventScript_ArticunoDormant
 	goto_if_eq VAR_RESULT, 1, ShoalCave_LowTideIceRoom_EventScript_ArticunoNeedsPartner
 	goto_if_eq VAR_RESULT, 4, ShoalCave_LowTideIceRoom_EventScript_ArticunoCleanup
@@ -18,14 +20,14 @@ ShoalCave_LowTideIceRoom_EventScript_Articuno::
 	delay 40
 	waitmoncry
 	setvar VAR_0x8004, EC_SIGN_ARTICUNO_ID
+	msgbox gText_LegendaryOneShotWarning, MSGBOX_DEFAULT
 	special CreateSelectedLegendarySignEncounter
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, ShoalCave_LowTideIceRoom_EventScript_ArticunoCaught
-	msgbox ShoalCave_LowTideIceRoom_Text_ArticunoRemains, MSGBOX_DEFAULT
-	release
+	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_LegendaryDefeated
+	goto ShoalCave_LowTideIceRoom_EventScript_ArticunoCaught
 	end
 
 ShoalCave_LowTideIceRoom_EventScript_ArticunoDormant::
@@ -53,16 +55,14 @@ ShoalCave_LowTideIceRoom_Text_ArticunoDormant:
 
 ShoalCave_LowTideIceRoom_Text_ArticunoNeedsPartner:
 	.string "The SIGN sketches FROSLASS.\p"
-	.string "Bring that POKéMON's family here, and\n"
-	.string "the hidden challenger may answer.$"
+	.string "Bring that POKéMON's family to the\n"
+	.string "dream researcher at DEVON CORP. 2F\l"
+	.string "in RUSTBORO to translate this Sign.$"
 
 ShoalCave_LowTideIceRoom_Text_ArticunoAwakens:
 	.string "The CHAMPION'S SIGN erupts with light!\n"
 	.string "ARTICUNO answers the challenge!$"
 
-ShoalCave_LowTideIceRoom_Text_ArticunoRemains:
-	.string "The SIGN remains bright. ARTICUNO\n"
-	.string "will accept another challenge.$"
 
 
 @ END EMERALD CHAMPIONS LEGENDARY ROOTS

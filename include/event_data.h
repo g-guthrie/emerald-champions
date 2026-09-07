@@ -16,7 +16,6 @@ void EnableResetRTC(void);
 bool32 CanResetRTC(void);
 u16 *GetVarPointer(u16 id);
 u16 VarGet(u16 id);
-u16 VarGetIfExist(u16 id);
 bool8 VarSet(u16 id, u16 value);
 u16 VarGetObjectEventGraphicsId(u8 id);
 u8 *GetFlagPointer(u16 id);

@@ -90,16 +90,21 @@ SealedChamber_InnerRoom_EventScript_RegigigasEC::
 	waitmoncry
 	setvar VAR_0x8004, EC_SIGN_REGIGIGAS_ID
 	special TryUnlockSelectedLegendarySign
+	goto_if_eq VAR_RESULT, 6, Common_EventScript_LegendaryNeedsDevon
+	goto_if_eq VAR_RESULT, 5, Common_EventScript_LegendaryDefeatedAtShrine
+	goto_if_eq VAR_RESULT, 0, SealedChamber_InnerRoom_EventScript_RegigigasStatue
+	goto_if_eq VAR_RESULT, 1, SealedChamber_InnerRoom_EventScript_RegigigasStatue
+	goto_if_eq VAR_RESULT, 4, SealedChamber_InnerRoom_EventScript_RegigigasECCaught
 	msgbox SealedChamber_InnerRoom_Text_RegigigasECAwakens, MSGBOX_DEFAULT
 	setvar VAR_0x8004, EC_SIGN_REGIGIGAS_ID
+	msgbox gText_LegendaryOneShotWarning, MSGBOX_DEFAULT
 	special CreateSelectedLegendarySignEncounter
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, SealedChamber_InnerRoom_EventScript_RegigigasECCaught
-	msgbox SealedChamber_InnerRoom_Text_RegigigasECRemains, MSGBOX_DEFAULT
-	release
+	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_LegendaryDefeated
+	goto SealedChamber_InnerRoom_EventScript_RegigigasECCaught
 	end
 
 SealedChamber_InnerRoom_EventScript_RegigigasStatue::
@@ -121,9 +126,6 @@ SealedChamber_InnerRoom_Text_RegigigasECAwakens:
 	.string "The three REGIS answer together!\n"
 	.string "The colossal statue begins to move!$"
 
-SealedChamber_InnerRoom_Text_RegigigasECRemains:
-	.string "REGIGIGAS returns to its stone stance.\n"
-	.string "The three seals remain open.$"
 
 
 @ END EMERALD CHAMPIONS LEGENDARY ROOTS

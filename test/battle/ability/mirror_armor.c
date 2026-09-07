@@ -144,11 +144,16 @@ SINGLE_BATTLE_TEST("Mirror Armor doesn't lower the stat of the attacking Pokemon
     }
 }
 
-// This behaviour needs to be verified in the actual games. Currently it's written to follow Showdown's logic.
-DOUBLE_BATTLE_TEST("Mirror Armor lowers Speed of the partner Pokemon after Court Change was used by the opponent after it set up Sticky Web")
+DOUBLE_BATTLE_TEST("Mirror Armor applies the configured Sticky Web reflection rule after Court Change and Ally Switch")
 {
-    KNOWN_FAILING;
+    u32 config;
+    bool32 swap;
+    PARAMETRIZE { config = GEN_8; swap = FALSE; }
+    PARAMETRIZE { config = GEN_9; swap = FALSE; }
+    PARAMETRIZE { config = GEN_8; swap = TRUE; }
+    PARAMETRIZE { config = GEN_9; swap = TRUE; }
     GIVEN {
+        WITH_CONFIG(B_MIRROR_ARMOR_STICKY_WEB, config);
         ASSUME(GetMoveEffect(MOVE_STICKY_WEB) == EFFECT_STICKY_WEB);
         ASSUME(GetMoveEffect(MOVE_COURT_CHANGE) == EFFECT_COURT_CHANGE);
         PLAYER(SPECIES_WOBBUFFET);
@@ -160,7 +165,12 @@ DOUBLE_BATTLE_TEST("Mirror Armor lowers Speed of the partner Pokemon after Court
     } WHEN {
         TURN { MOVE(playerLeft, MOVE_STICKY_WEB); }
         TURN { MOVE(opponentLeft, MOVE_COURT_CHANGE); }
-        TURN { SWITCH(playerRight, 2); }
+        if (swap) {
+            TURN { MOVE(playerLeft, MOVE_ALLY_SWITCH); }
+            TURN { SWITCH(playerLeft, 2); }
+        } else {
+            TURN { SWITCH(playerRight, 2); }
+        }
         TURN {}
     } SCENE {
         MESSAGE("Wobbuffet used Sticky Web!");
@@ -168,9 +178,19 @@ DOUBLE_BATTLE_TEST("Mirror Armor lowers Speed of the partner Pokemon after Court
         MESSAGE("The opposing Wynaut swapped the battle effects affecting each side of the field!");
         SEND_IN_MESSAGE("Corviknight");
         MESSAGE("Corviknight was caught in a sticky web!");
-        ABILITY_POPUP(playerRight, ABILITY_MIRROR_ARMOR);
-        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
-        MESSAGE("Wobbuffet's Speed fell!");
+        ABILITY_POPUP(swap ? playerLeft : playerRight, ABILITY_MIRROR_ARMOR);
+        if (config == GEN_8) {
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, swap ? playerRight : playerLeft);
+            MESSAGE("Wobbuffet's Speed fell!");
+        } else {
+            NONE_OF {
+                ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
+                ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
+            }
+        }
+    } THEN {
+        EXPECT_EQ((swap ? playerRight : playerLeft)->statStages[STAT_SPEED], DEFAULT_STAT_STAGE - (config == GEN_8));
+        EXPECT_EQ((swap ? playerLeft : playerRight)->statStages[STAT_SPEED], DEFAULT_STAT_STAGE);
     }
 }
 

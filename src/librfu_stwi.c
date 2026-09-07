@@ -362,16 +362,6 @@ void STWI_send_DisconnectREQ(u8 unk)
     }
 }
 
-void STWI_send_TestModeREQ(u8 unk0, u8 unk1)
-{
-    if (!STWI_init(ID_TEST_MODE_REQ))
-    {
-        gSTWIStatus->reqLength = 1;
-        gSTWIStatus->txPacket->rfuPacket32.data[0] = unk0 | (unk1 << 8);
-        STWI_start_Command();
-    }
-}
-
 void STWI_send_CPR_StartREQ(u16 unk0, u16 unk1, u8 unk2)
 {
     u32 *packetData;

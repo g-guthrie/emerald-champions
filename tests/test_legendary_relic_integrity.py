@@ -16,7 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 class LegendaryRelicIntegrity(unittest.TestCase):
     def test_earned_pending_rewards_and_retry(self):
         source = (ROOT / 'src/legendary_signs.c').read_text()
-        grant = source[source.index('static const enum Item sLegendaryRelicItems'):source.index('void TryUnlockEligibleVisibleLegendarySignsForCurrentMap')]
+        grant = source[source.index('static const enum Item sLegendaryRelicItems'):source.index('void MarkLegendarySignCaughtBySpecies(')]
         reward = source[source.index('u8 GiveLegendarySignReward('):source.index('void TryGiveArceusLegendarySignMasteryReward(')]
         items = sorted(set(re.findall(r'\bITEM_[A-Z_]+', grant)))
         species = sorted(set(re.findall(r'\bSPECIES_[A-Z_]+', grant)))
@@ -33,9 +33,10 @@ typedef uint8_t bool8;
 #define FALSE 0
 #define ARRAY_COUNT(a) (sizeof(a) / sizeof((a)[0]))
 #define PC_ITEMS_COUNT 32
-#define MON_CANT_GIVE 0
-#define MON_GIVEN_TO_PARTY 1
-#define MON_GIVEN_TO_PC 2
+#define MON_GIVEN_TO_PARTY 0
+#define MON_GIVEN_TO_PC 1
+#define MON_CANT_GIVE 2
+#define LEGENDARY_REWARD_UNAVAILABLE 3
 #define OTID_STRUCT_PLAYER_ID 0
 #define FLAG_SET_SEEN 0
 #define FLAG_SET_CAUGHT 1
@@ -52,6 +53,7 @@ static struct Save *gSaveBlock1Ptr = &save;
 static struct ItemSlot bag[32];
 static unsigned bagCapacity, pcCapacity, delivered, caught, dex, deliveryCalls;
 static int deliveryResult;
+static bool32 acquisitionAllowed;
 struct Pokemon { enum Species species; enum Item heldItem; };
 static struct Pokemon deliveredMon;
 static u16 vars[2];
@@ -84,11 +86,12 @@ static int RemoveBagItem(enum Item item,unsigned n) {
     return 0;
 }
 static unsigned Random32(void) {return 42;}
+static bool32 CanAcquireLegendarySignSpecies(enum Species species) {return acquisitionAllowed;}
 static void CreateMon(struct Pokemon *p,enum Species s,u8 level,unsigned rng,unsigned ot) {*p=(struct Pokemon){s,ITEM_NONE};}
 static void ApplyNonMegaGiftSet(struct Pokemon *p) {p->heldItem=ITEM_OTHER;}
 static u8 GiveCapturedMonToPlayer(struct Pokemon *p) {
     deliveryCalls++;
-    if(deliveryResult) {delivered++; deliveredMon=*p;}
+    if(deliveryResult != MON_CANT_GIVE) {delivered++; deliveredMon=*p;}
     return deliveryResult;
 }
 static void HandleSetPokedexFlagFromMon(struct Pokemon *p,unsigned flag) {dex++;}
@@ -106,6 +109,7 @@ static void MarkLegendarySignCaughtBySpecies(enum Species species) {
 static void Reset(unsigned b,unsigned p,int result) {
     memset(bag,0,sizeof bag);memset(&save,0,sizeof save);
     bagCapacity=b;pcCapacity=p;deliveryResult=result;
+    acquisitionAllowed=TRUE;
     delivered=caught=dex=deliveryCalls=0;
     memset(vars,0,sizeof vars);memset(ownedSpecies,0,sizeof ownedSpecies);
 }
@@ -113,6 +117,12 @@ static unsigned Total(void) {
     unsigned n=0;for(unsigned i=0;i<32;i++)n+=bag[i].quantity+save.pcItems[i].quantity;return n;
 }
 int main(void) {
+    // Research/loss rejection is distinct from storage failure and earns nothing.
+    Reset(32,32,MON_GIVEN_TO_PARTY);
+    acquisitionAllowed=FALSE;
+    assert(GiveLegendarySignReward(SPECIES_ZACIAN,50)==LEGENDARY_REWARD_UNAVAILABLE);
+    assert(!deliveryCalls && !delivered && !caught && !dex && !Total());
+    assert(!GetLegendaryRelicDeliveryState());
     // Full item stores preserve an earned gift as pending; held item is untouched.
     Reset(0,0,MON_GIVEN_TO_PARTY);
     assert(GiveLegendarySignReward(SPECIES_ZACIAN,50)==MON_GIVEN_TO_PARTY);

@@ -96,6 +96,7 @@ IslandCave_EventScript_Regice::
 	waitmoncry
 	setvar VAR_0x8004, SPECIES_REGICE
 	setvar VAR_0x8005, 0
+	msgbox gText_LegendaryOneShotWarning, MSGBOX_DEFAULT
 	special CreateEmeraldChampionsStaticLegendaryEncounter
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special StartRegiBattle
@@ -114,8 +115,7 @@ IslandCave_EventScript_CaughtRegice::
 	end
 
 IslandCave_EventScript_DefeatedRegice::
-	msgbox IslandCave_Text_RegiceStillAwaitsCapture, MSGBOX_DEFAULT
-	release
+	goto Common_EventScript_LegendaryDefeated
 	end
 
 IslandCave_EventScript_RanFromRegice::
@@ -123,6 +123,3 @@ IslandCave_EventScript_RanFromRegice::
 	goto Common_EventScript_LegendaryFlewAway
 	end
 
-IslandCave_Text_RegiceStillAwaitsCapture:
-	.string "REGICE reforms its body again.\p"
-	.string "It still awaits a true capture.$"

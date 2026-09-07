@@ -58,14 +58,14 @@ CaveOfOrigin_DianciesRoom_EventScript_Diancie::
 	waitmoncry
 	setvar VAR_0x8004, SPECIES_DIANCIE
 	setvar VAR_0x8005, 2
+	msgbox gText_LegendaryOneShotWarning, MSGBOX_DEFAULT
 	special CreateEmeraldChampionsStaticLegendaryEncounter
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, CaveOfOrigin_DianciesRoom_EventScript_DiancieCaught
-	msgbox CaveOfOrigin_DianciesRoom_Text_DiancieRemains, MSGBOX_DEFAULT
-	release
+	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_LegendaryDefeated
+	goto CaveOfOrigin_DianciesRoom_EventScript_DiancieCaught
 	end
 
 CaveOfOrigin_DianciesRoom_EventScript_DiancieCaught::
@@ -74,6 +74,3 @@ CaveOfOrigin_DianciesRoom_EventScript_DiancieCaught::
 	release
 	end
 
-CaveOfOrigin_DianciesRoom_Text_DiancieRemains:
-	.string "DIANCIE accepts the challenge, but the\n"
-	.string "sanctuary will hold its place for you.$"

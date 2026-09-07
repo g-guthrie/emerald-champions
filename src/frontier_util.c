@@ -587,11 +587,11 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][FRONTIER_PARTY_SIZ
             },
             {
                 .species = SPECIES_STEELIX,
-                .heldItem = ITEM_SITRUS_BERRY,
+                .heldItem = ITEM_LEFTOVERS,
                 .fixedIV = MAX_PER_STAT_IVS,
-                .nature = NATURE_BRAVE,
-                .evs = {32, 32, 2, 0, 0, 0},
-                .moves = {MOVE_HIGH_HORSEPOWER, MOVE_HEAVY_SLAM, MOVE_WIDE_GUARD, MOVE_PROTECT},
+                .nature = NATURE_CAREFUL,
+                .evs = {32, 0, 2, 0, 0, 32},
+                .moves = {MOVE_STEALTH_ROCK, MOVE_WIDE_GUARD, MOVE_HIGH_HORSEPOWER, MOVE_PROTECT},
             },
             {
                 .species = SPECIES_GYARADOS,
@@ -2848,35 +2848,6 @@ u16 GetRandomScaledFrontierTrainerId(u8 challengeNum, u8 battleNum)
     }
 
     return trainerId;
-}
-
-static void UNUSED GetRandomScaledFrontierTrainerIdRange(u8 challengeNum, u8 battleNum, u16 *trainerIdPtr, u8 *rangePtr)
-{
-    u16 trainerId, range;
-
-    if (challengeNum <= 7)
-    {
-        if (battleNum == FRONTIER_STAGES_PER_CHALLENGE - 1)
-        {
-            // The last battle in each challenge has a jump in difficulty, pulls from a table with higher ranges
-            range = (sFrontierTrainerIdRangesHard[challengeNum][1] - sFrontierTrainerIdRangesHard[challengeNum][0]) + 1;
-            trainerId = sFrontierTrainerIdRangesHard[challengeNum][0];
-        }
-        else
-        {
-            range = (sFrontierTrainerIdRanges[challengeNum][1] - sFrontierTrainerIdRanges[challengeNum][0]) + 1;
-            trainerId = sFrontierTrainerIdRanges[challengeNum][0];
-        }
-    }
-    else
-    {
-        // After challenge 7, trainer IDs always come from the last, hardest range, which is the same for both trainer ID tables
-        range = (sFrontierTrainerIdRanges[7][1] - sFrontierTrainerIdRanges[7][0]) + 1;
-        trainerId = sFrontierTrainerIdRanges[7][0];
-    }
-
-    *trainerIdPtr = trainerId;
-    *rangePtr = range;
 }
 
 void SetBattleFacilityTrainerGfxId(u16 trainerId, u8 tempVarId)

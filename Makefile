@@ -126,6 +126,7 @@ ifeq ($(RELEASE),1)
   OBJ_DIR := $(OBJ_DIR_NAME_RELEASE)
 endif
 ELF := $(ROM:.gba=.elf)
+UNFILTERED_TESTELF := $(OBJ_DIR)/$(notdir $(TESTELF))
 MAP := $(ROM:.gba=.map)
 SYM := $(ROM:.gba=.sym)
 
@@ -170,7 +171,7 @@ endif
 endif
 ARMCC := $(PREFIX)gcc
 PATH_ARMCC := PATH="$(PATH)" $(ARMCC)
-CC1 := $(shell $(PATH_ARMCC) --print-prog-name=cc1) -quiet
+CC1 = $(shell $(PATH_ARMCC) --print-prog-name=cc1) -quiet
 
 override CFLAGS += -mthumb -mthumb-interwork -O$(O_LEVEL) -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -Wno-pointer-to-int-cast -std=gnu17 -Werror -Wall -Wno-strict-aliasing -Wno-attribute-alias -Woverride-init -Wnonnull -Wenum-conversion
 
@@ -196,8 +197,10 @@ ifeq ($(DEPRECATED_ERROR),0)
   endif
 endif
 
-LIBPATH := -L "$(dir $(shell $(PATH_ARMCC) -mthumb -print-file-name=libgcc.a))" -L "$(dir $(shell $(PATH_ARMCC) -mthumb -print-file-name=libnosys.a))" -L "$(dir $(shell $(PATH_ARMCC) -mthumb -print-file-name=libc.a))"
-LIB := $(LIBPATH) -lc -lnosys -lgcc -L../../libagbsyscall -lagbsyscall
+LIBPATH = -L "$(dir $(shell $(PATH_ARMCC) -mthumb -print-file-name=libgcc.a))" -L "$(dir $(shell $(PATH_ARMCC) -mthumb -print-file-name=libnosys.a))" -L "$(dir $(shell $(PATH_ARMCC) -mthumb -print-file-name=libc.a))"
+LIB = $(LIBPATH) -lc -lnosys -lgcc -L../../libagbsyscall -lagbsyscall
+# Lazy toolchain probes must not be expanded as inherited shell environment.
+unexport CC1 LIBPATH LIB
 # Enable debug info if set
 ifeq ($(DINFO),1)
   override CFLAGS += -g
@@ -365,17 +368,18 @@ LD_SCRIPT_TEST := ld_script_test.ld
 $(OBJ_DIR)/ld_script_test.ld: $(LD_SCRIPT_TEST)
 	cd $(OBJ_DIR) && sed "s#tools/#../../tools/#g" ../../$(LD_SCRIPT_TEST) > ld_script_test.ld
 
-$(TESTELF): $(OBJ_DIR)/ld_script_test.ld $(OBJS) $(TEST_OBJS) libagbsyscall tools check-tools
-	@echo "cd $(OBJ_DIR) && $(LD) -T ld_script_test.ld -o ../../$@ <objects> <test-objects> <lib>"
-	@cd $(OBJ_DIR) && $(LD) $(TESTLDFLAGS) -T ld_script_test.ld -o ../../$@ $(OBJS_REL) $(TEST_OBJS_REL) $(LIB)
+$(UNFILTERED_TESTELF): $(OBJ_DIR)/ld_script_test.ld $(OBJS) $(TEST_OBJS) $(OBJ_DIR)/.test-link-config.json
+	@echo "cd $(OBJ_DIR) && $(LD) -T ld_script_test.ld -o $(notdir $@) <objects> <test-objects> <lib>"
+	@cd $(OBJ_DIR) && $(LD) $(TESTLDFLAGS) -T ld_script_test.ld -o $(notdir $@) $(OBJS_REL) $(TEST_OBJS_REL) $(LIB)
 	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) -d0 --silent
-	$(PATCHELF) $(TESTELF) gTestRunnerArgv "$(TESTS:%*=%)\0"
 
-# The test filter lives in a fixed-size post-link buffer.  Re-patch that
-# buffer for every invocation instead of deleting and relinking the complete
-# test ELF whenever CI advances to the next curated filter.
+$(TESTELF): $(UNFILTERED_TESTELF) FORCE_TEST_EXPORT | check-tools
+	@python3 scripts/export_test_elf.py $(UNFILTERED_TESTELF) $@ --receipt=$(OBJ_DIR)/.test-filter.json --patchelf=$(call shell_quote,$(PATCHELF)) --filter=$(call shell_quote,$(TESTS:%*=%))
+
+# Filter export validates actual bytes, so direct/check/direct requests stay
+# coherent even when an earlier command patched the public test image.
 patch-test-filter: $(TESTELF)
-	$(PATCHELF) $(TESTELF) gTestRunnerArgv "$(TESTS:%*=%)\0"
+	@:
 
 ifeq ($(GITHUB_REPOSITORY_OWNER),rh-hideout)
 TEST_SKIP_IS_FAIL := \x01
@@ -474,85 +478,42 @@ clean-teachables: clean-teachables_intermediates
 	rm -f $(ALL_LEARNABLES_JSON)
 	@touch $(C_SUBDIR)/pokemon.c
 
-$(C_BUILDDIR)/librfu_intr.o: CFLAGS := -mthumb-interwork -O2 -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -fno-toplevel-reorder -Wno-pointer-to-int-cast
-$(C_BUILDDIR)/berry_crush.o: override CFLAGS += -Wno-address-of-packed-member
-$(C_BUILDDIR)/agb_flash.o: override CFLAGS += -fno-toplevel-reorder
-$(C_BUILDDIR)/pokedex_plus_hgss.o: CFLAGS := -mthumb -mthumb-interwork -O2 -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -Wno-pointer-to-int-cast -std=gnu17 -Werror -Wall -Wno-strict-aliasing -Wno-attribute-alias -Woverride-init
-# Annoyingly we can't turn this on just for src/data/trainers.h
-$(C_BUILDDIR)/data.o: CFLAGS += -fno-show-column -fno-diagnostics-show-caret
+# Freeze global settings before any object can lend target-specific CFLAGS to
+# the shared receipt. Per-target overrides and recipes live in compile_rules.mk.
+CONFIG_CPPFLAGS := $(CPPFLAGS)
+CONFIG_CFLAGS := $(CFLAGS)
+CONFIG_ASFLAGS := $(ASFLAGS)
+CONFIG_SCANFLAGS := $(INCLUDE_SCANINC_ARGS)
+CONFIG_KEEP_TEMPS := $(KEEP_TEMPS)
+CONFIG_CPP := $(CPP)
+CONFIG_AS := $(AS)
+CONFIG_ARMCC := $(ARMCC)
+CONFIG_PREPROC := $(PREPROC)
+CONFIG_SCANINC := $(SCANINC)
+CONFIG_SCAN_TOOL = $(if $(filter 1,$(NODEP)),,--tool=$(call shell_quote,$(CONFIG_SCANINC)))
+OBJECT_CONFIG := $(OBJ_DIR)/.objects-config.json
+BUILD_CONFIG_HELPER := scripts/update_build_config.py
+shell_quote = '$(subst ','"'"',$(1))'
 
-# Needed for parity with pret
-$(C_BUILDDIR)/graphics.o: override CFLAGS += -Wno-missing-braces
+.PHONY: FORCE_BUILD_CONFIG FORCE_TEST_EXPORT
+FORCE_BUILD_CONFIG:
+FORCE_TEST_EXPORT:
 
-# Dependency rules (for the *.c & *.s sources to .o files)
-# Have to be explicit or else missing files won't be reported.
-$(C_BUILDDIR)/move_relearner.o: $(C_SUBDIR)/move_relearner.c $(DATA_SRC_SUBDIR)/tutor_moves.h $(EC_PREPARATION_LEARNSETS)
-$(C_BUILDDIR)/pokemon.o: $(C_SUBDIR)/pokemon.c $(DATA_SRC_SUBDIR)/pokemon/teachable_learnsets.h
+$(OBJECT_CONFIG): FORCE_BUILD_CONFIG
+	@python3 $(BUILD_CONFIG_HELPER) $@ --value=$(call shell_quote,CPPFLAGS=$(CONFIG_CPPFLAGS)) --value=$(call shell_quote,CFLAGS=$(CONFIG_CFLAGS)) --value=$(call shell_quote,ASFLAGS=$(CONFIG_ASFLAGS)) --value=$(call shell_quote,SCANFLAGS=$(CONFIG_SCANFLAGS)) --value=$(call shell_quote,KEEP_TEMPS=$(CONFIG_KEEP_TEMPS)) --value=$(call shell_quote,SHELL=$(SHELL)) --tool=$(call shell_quote,$(CONFIG_ARMCC)) --tool=$(call shell_quote,$(CC1)) --tool=$(call shell_quote,$(CONFIG_CPP)) --tool=$(call shell_quote,$(CONFIG_AS)) --tool=$(call shell_quote,$(CONFIG_PREPROC)) $(CONFIG_SCAN_TOOL) --file=compile_rules.mk --file=map_data_rules.mk --file=audio_rules.mk --file=charmap.txt --env=CPATH --env=C_INCLUDE_PATH --env=COMPILER_PATH --env=GCC_EXEC_PREFIX --env=SOURCE_DATE_EPOCH
 
-# As a side effect, they're evaluated immediately instead of when the rule is invoked.
-# It doesn't look like $(shell) can be deferred so there might not be a better way (Icedude_907: there is soon).
-
-$(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.c
-ifneq ($(KEEP_TEMPS),1)
-	@echo "$(CC1) <flags> -o $@ $<"
-	@$(CPP) $(CPPFLAGS) $< | $(PREPROC) -i -g $(ASSETS_DIR_NAME) $< charmap.txt | $(CC1) $(CFLAGS) -o - - | cat - <(echo -e ".text\n\t.align\t2, 0") | $(AS) $(ASFLAGS) -o $@ -
-else
-	@$(CPP) $(CPPFLAGS) $< -o $(C_BUILDDIR)/$*.i
-	@$(PREPROC) -g $(ASSETS_DIR_NAME) $(C_BUILDDIR)/$*.i charmap.txt | $(CC1) $(CFLAGS) -o $(C_BUILDDIR)/$*.s
-	@echo -e ".text\n\t.align\t2, 0\n" >> $(C_BUILDDIR)/$*.s
-	$(AS) $(ASFLAGS) -o $@ $(C_BUILDDIR)/$*.s
-endif
-
-$(C_BUILDDIR)/%.d: $(C_SUBDIR)/%.c
-	$(SCANINC) -M $@ -g $(ASSETS_DIR_NAME) $(INCLUDE_SCANINC_ARGS) -I tools/agbcc/include $<
-
-ifneq ($(NODEP),1)
--include $(ALL_TUTORS_JSON), $(ALL_TEACHING_TYPES_JSON),
--include $(addprefix $(OBJ_DIR)/,$(C_SRCS:.c=.d))
-endif
-
+$(OBJS): $(OBJECT_CONFIG)
 ifeq ($(TEST),1)
-$(TEST_BUILDDIR)/%.o: $(TEST_SUBDIR)/%.c
-	@echo "$(CC1) <flags> -o $@ $<"
-	@$(CPP) $(CPPFLAGS) $< | $(PREPROC) -i -g $(ASSETS_DIR_NAME) $< charmap.txt | $(CC1) $(CFLAGS) -o - - | cat - <(echo -e ".text\n\t.align\t2, 0") | $(AS) $(ASFLAGS) -o $@ -
-
-$(TEST_BUILDDIR)/%.d: $(TEST_SUBDIR)/%.c
-	$(SCANINC) -M $@ -g $(ASSETS_DIR_NAME) $(INCLUDE_SCANINC_ARGS) -I tools/agbcc/include $<
-
+$(TEST_OBJS): $(OBJECT_CONFIG)
+endif
 ifneq ($(NODEP),1)
--include $(addprefix $(OBJ_DIR)/,$(TEST_SRCS:.c=.d))
+$(OBJS:.o=.d): $(OBJECT_CONFIG)
+ifeq ($(TEST),1)
+$(TEST_OBJS:.o=.d): $(OBJECT_CONFIG)
 endif
 endif
 
-$(ASM_BUILDDIR)/%.o: $(ASM_SUBDIR)/%.s
-	$(AS) $(ASFLAGS) -o $@ $<
-
-$(ASM_BUILDDIR)/%.d: $(ASM_SUBDIR)/%.s
-	$(SCANINC) -M $@ -g $(ASSETS_DIR_NAME) $(INCLUDE_SCANINC_ARGS) -I "" $<
-
-ifneq ($(NODEP),1)
--include $(addprefix $(OBJ_DIR)/,$(ASM_SRCS:.s=.d))
-endif
-
-$(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.s
-	$(PREPROC) $< charmap.txt | $(CPP) $(CPPFLAGS) $(INCLUDE_SCANINC_ARGS) - | $(PREPROC) -ie $< charmap.txt | $(AS) $(ASFLAGS) -o $@
-
-$(C_BUILDDIR)/%.d: $(C_SUBDIR)/%.s
-	$(SCANINC) -M $@ -g $(ASSETS_DIR_NAME) $(INCLUDE_SCANINC_ARGS) -I "" $<
-
-ifneq ($(NODEP),1)
--include $(addprefix $(OBJ_DIR)/,$(C_ASM_SRCS:.s=.d))
-endif
-
-$(DATA_ASM_BUILDDIR)/%.o: $(DATA_ASM_SUBDIR)/%.s
-	$(PREPROC) -s $< charmap.txt | $(CPP) $(CPPFLAGS) $(INCLUDE_SCANINC_ARGS) - | $(PREPROC) -ie $< charmap.txt | $(AS) $(ASFLAGS) -o $@
-
-$(DATA_ASM_BUILDDIR)/%.d: $(DATA_ASM_SUBDIR)/%.s
-	$(SCANINC) -M $@ -g $(ASSETS_DIR_NAME) $(INCLUDE_SCANINC_ARGS) -I "" $<
-
-ifneq ($(NODEP),1)
--include $(addprefix $(OBJ_DIR)/,$(DATA_ASM_SRCS:.s=.d))
-endif
+include compile_rules.mk
 
 TEACHABLE_DEPS := $(ALL_LEARNABLES_JSON) $(MOVE_ACCESS_REVIEW_JSON) $(INCLUDE_DIRS)/constants/tms_hms.h $(INCLUDE_DIRS)/config/pokemon.h $(DATA_SRC_SUBDIR)/pokemon/special_movesets.json $(INCLUDE_DIRS)/config/pokedex_plus_hgss.h $(LEARNSET_HELPERS_DIR)/make_teachables.py
 
@@ -589,14 +550,14 @@ libagbsyscall:
 ifneq ($(LTO),0)
 LDFLAGS := -march=armv4t -mabi=apcs-gnu -mcpu=arm7tdmi -Xlinker -Map=../../$(MAP) -Xlinker --print-memory-usage -Xassembler -meabi=5 -Xassembler -march=armv4t -Xassembler -mcpu=arm7tdmi -Xlinker --gc-sections
 LDFLAGS += -Xlinker -flto=auto
-$(ELF): $(LD_SCRIPT) $(OBJS) libagbsyscall
+$(ELF): $(LD_SCRIPT) $(OBJS) $(OBJ_DIR)/.link-config.json
 	@echo "cd $(OBJ_DIR) && $(ARMCC) $(LDFLAGS) -T ../../$< -o ../../$@ <objs> <libs>"
 	+@cd $(OBJ_DIR) && $(ARMCC) $(LDFLAGS) -T ../../$< -o ../../$@ $(OBJS_REL) $(LIB)
 	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
 else
 # Output .map file, memory usage readout and gc sections to clean-up unused data
 LDFLAGS = -Map ../../$(MAP) --print-memory-usage --gc-sections
-$(ELF): $(LD_SCRIPT) $(OBJS) libagbsyscall
+$(ELF): $(LD_SCRIPT) $(OBJS) $(OBJ_DIR)/.link-config.json
 	@cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ../../$<  -o ../../$@ $(OBJS_REL) $(LIB) | cat
 	@echo "cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ../../$< -o ../../$@ <objs> <libs> | cat"
 	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
@@ -613,3 +574,11 @@ leafgreen: all
 # Symbol file (`make syms`)
 $(SYM): $(ELF)
 	$(OBJDUMP) -t $< | sort -u | grep -E "^0[2389]" | $(PERL) -p -e 's/^(\w{8}) (\w).{6} \S+\t(\w{8}) (\S+)$$/\1 \2 \3 \4/g' > $@
+
+# Library builds are order-only here: their content identity, not a phony
+# prerequisite, decides whether the linked images need rebuilding.
+$(OBJ_DIR)/.link-config.json: FORCE_BUILD_CONFIG | libagbsyscall
+	@python3 $(BUILD_CONFIG_HELPER) $@ --value=$(call shell_quote,LDFLAGS=$(LDFLAGS)) --value=$(call shell_quote,LIB=$(LIB)) --value=$(call shell_quote,OBJECTS=$(OBJS_REL)) --value=$(call shell_quote,LTO=$(LTO)) --value=$(call shell_quote,HEADER=$(TITLE)|$(GAME_CODE)|$(MAKER_CODE)|$(REVISION)) --tool=$(call shell_quote,$(LD)) --tool=$(call shell_quote,$(ARMCC)) --tool=$(call shell_quote,$(FIX)) --file=Makefile --file=$(LD_SCRIPT) --libraries=$(call shell_quote,$(LIB)) --library-directory=$(OBJ_DIR) --env=LIBRARY_PATH --env=COMPILER_PATH --env=GCC_EXEC_PREFIX
+
+$(OBJ_DIR)/.test-link-config.json: FORCE_BUILD_CONFIG | libagbsyscall tools check-tools
+	@python3 $(BUILD_CONFIG_HELPER) $@ --value=$(call shell_quote,TESTLDFLAGS=$(TESTLDFLAGS)) --value=$(call shell_quote,LIB=$(LIB)) --value=$(call shell_quote,OBJECTS=$(OBJS_REL)|$(TEST_OBJS_REL)) --value=$(call shell_quote,HEADER=$(TITLE)|$(GAME_CODE)|$(MAKER_CODE)|$(REVISION)) --tool=$(call shell_quote,$(LD)) --tool=$(call shell_quote,$(FIX)) --file=Makefile --file=$(LD_SCRIPT_TEST) --libraries=$(call shell_quote,$(LIB)) --library-directory=$(OBJ_DIR) --env=LIBRARY_PATH

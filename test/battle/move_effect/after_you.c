@@ -57,8 +57,10 @@ DOUBLE_BATTLE_TEST("After You calculates correct turn order if only one Pokémon
     GIVEN {
         PLAYER(SPECIES_GRENINJA) { Speed(120); }
         PLAYER(SPECIES_REGIROCK) { Speed(10); }
-        OPPONENT(SPECIES_PIDGEOT) { Speed(100); }
-        OPPONENT(SPECIES_DRAGONITE) { Speed(60); }
+        // This tests turn order after a faint, not Stone Edge's damage under
+        // a particular generation's species stats. Force one KO and one survivor.
+        OPPONENT(SPECIES_PIDGEOT) { HP(1); Speed(100); }
+        OPPONENT(SPECIES_DRAGONITE) { Defense(500); Speed(60); }
     } WHEN {
         TURN {
             MOVE(playerLeft, MOVE_AFTER_YOU, target: playerRight);

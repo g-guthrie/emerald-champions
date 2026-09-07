@@ -209,6 +209,11 @@ def kanto_species() -> set[str]:
 def main() -> None:
     graph = SpeciesGraph()
     manifest = json.loads((ROOT / "data/emerald_champions/showdown_champions_random_doubles.json").read_text())
+    # This contract concerns the original Champions campaign roster. Expanding
+    # postgame opponents must not require postgame legendaries before the League.
+    champions_variants = [variant for variant in manifest["variants"]
+                          if variant["source"] == manifest["source_file"]]
+    require(champions_variants, "Champions campaign roster source is missing")
 
     pre_league_components = {
         graph.find(species) for species in direct_species(pre_league=True)
@@ -216,11 +221,11 @@ def main() -> None:
     }
     champions_components = {
         graph.find(variant["party_species"])
-        for variant in manifest["variants"]
+        for variant in champions_variants
     }
     missing_champions = champions_components - pre_league_components
     representatives = {}
-    for variant in manifest["variants"]:
+    for variant in champions_variants:
         representatives.setdefault(graph.find(variant["party_species"]), variant["party_species"])
     require(
         not missing_champions,
@@ -252,12 +257,13 @@ def main() -> None:
         "complete team-building archives are not available once the Mega Ring is held",
     )
     required_mega_items = {
-        variant["required_item"] for variant in manifest["variants"]
+        variant["required_item"] for variant in champions_variants
         if variant["required_item"] != "ITEM_NONE"
+        and variant["form_species"] != variant["party_species"]
     }
     require(
         required_mega_items <= set(re.findall(r"ITEM_[A-Z0-9_]+", mega_archive)),
-        "Champions Mega Stones missing from the badge-eight archive: "
+        "Champions Mega Stones missing from the Mega Ring archive: "
         + ", ".join(sorted(required_mega_items - set(re.findall(r"ITEM_[A-Z0-9_]+", mega_archive)))),
     )
     all_species_info = "\n".join(
@@ -282,8 +288,8 @@ def main() -> None:
 
     print(f"PASS: all {len(champions_components)} Champions families are obtainable before the League")
     print(f"PASS: all {len({graph.find(species) for species in kanto})} original Kanto families are obtainable")
-    print(f"PASS: {len(required_mega_items)} Champions Mega Stones unlock with badge eight")
-    print(f"PASS: {len(required_evolution_items)} evolution items unlock with badge eight")
+    print(f"PASS: {len(required_mega_items)} Champions Mega Stones are present in the Mega Ring archive")
+    print(f"PASS: {len(required_evolution_items)} evolution items are present in the Mega Ring archive")
 
 
 if __name__ == "__main__":

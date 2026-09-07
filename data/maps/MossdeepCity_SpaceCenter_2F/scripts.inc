@@ -489,6 +489,7 @@ MossdeepCity_SpaceCenter_2F_Text_MaxieWeWillGiveUp:
 MossdeepCity_SpaceCenter_2F_Text_StevenThankYouComeSeeMeAtHome:
 	.string "STEVEN: That was true doubles play: each\n"
 	.string "of us made the other's options better.\p"
-	.string "Come to my home here in MOSSDEEP. I have\n"
-	.string "a reward and data on a hidden chamber\l"
-	.string "in METEOR FALLS.$"
+	.string "Come to my home west of the GYM.\n"
+	.string "I have the HM DIVE for you.\p"
+	.string "We can use it to follow AQUA's\n"
+	.string "stolen submarine.$"

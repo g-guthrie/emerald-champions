@@ -74,6 +74,7 @@ MtPyre_6F_EventScript_Pecharunt::
 	lock
 	setvar VAR_0x8004, EC_SIGN_PECHARUNT_ID
 	special GetSelectedLegendarySignState
+	goto_if_eq VAR_RESULT, 3, Common_EventScript_LegendaryDefeatedAtShrine
 	goto_if_eq VAR_RESULT, 2, MtPyre_6F_EventScript_PecharuntQuiet
 	setvar VAR_0x8004, 64
 	special GetSelectedLegendarySignState
@@ -86,6 +87,8 @@ MtPyre_6F_EventScript_Pecharunt::
 	goto_if_ne VAR_RESULT, 2, MtPyre_6F_EventScript_PecharuntDormant
 	setvar VAR_0x8004, EC_SIGN_PECHARUNT_ID
 	special TryUnlockSelectedLegendarySign
+	goto_if_eq VAR_RESULT, 6, Common_EventScript_LegendaryNeedsDevon
+	goto_if_eq VAR_RESULT, 5, Common_EventScript_LegendaryDefeatedAtShrine
 	goto_if_eq VAR_RESULT, 0, MtPyre_6F_EventScript_PecharuntDormant
 	goto_if_eq VAR_RESULT, 1, MtPyre_6F_EventScript_PecharuntNeedsPartner
 	msgbox MtPyre_6F_Text_PecharuntAwakens, MSGBOX_DEFAULT
@@ -94,14 +97,14 @@ MtPyre_6F_EventScript_Pecharunt::
 	delay 40
 	waitmoncry
 	setvar VAR_0x8004, EC_SIGN_PECHARUNT_ID
+	msgbox gText_LegendaryOneShotWarning, MSGBOX_DEFAULT
 	special CreateSelectedLegendarySignEncounter
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, MtPyre_6F_EventScript_PecharuntCaught
-	msgbox MtPyre_6F_Text_PecharuntRemains, MSGBOX_DEFAULT
-	release
+	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_LegendaryDefeatedAtShrine
+	goto MtPyre_6F_EventScript_PecharuntCaught
 	end
 
 MtPyre_6F_EventScript_PecharuntDormant::
@@ -133,8 +136,10 @@ MtPyre_6F_Text_PecharuntDormant:
 MtPyre_6F_Text_PecharuntNeedsPartner:
 	.string "All three masks are lit, but the dog\n"
 	.string "mark still reaches toward OKIDOGI.\p"
-	.string "Bring its family here to finish the\n"
-	.string "poisoned shrine's ritual.$"
+	.string "Bring its family to the dream\n"
+	.string "researcher at DEVON CORP. 2F.\p"
+	.string "Translate PECHARUNT's Sign in RUSTBORO,\n"
+	.string "then return to this shrine.$"
 
 MtPyre_6F_Text_PecharuntAwakens:
 	.string "The three masks flare! A poisoned mist\n"
@@ -144,9 +149,6 @@ MtPyre_6F_Text_PecharuntQuiet:
 	.string "The tombstone is still. Three faded\n"
 	.string "masks record the trial you completed.$"
 
-MtPyre_6F_Text_PecharuntRemains:
-	.string "The mist retreats into the tombstone.\n"
-	.string "The three masks remain lit.$"
 
 
 @ END EMERALD CHAMPIONS LEGENDARY ROOTS

@@ -618,10 +618,10 @@ u32 BattleAI_ChooseMoveIndex(enum BattlerId battler)
     return chosen.moveIndex;
 }
 
-static void CopyBattlerDataToAIParty(u32 bPosition, enum BattleTrainer trainer)
+static void CopyBattlerDataToAIParty(u32 bPosition)
 {
     enum BattlerId battler = GetBattlerAtPosition(bPosition);
-    struct AiPartyMon *aiMon = &gAiPartyData->mons[trainer][gBattlerPartyIndexes[battler]];
+    struct AiPartyMon *aiMon = GetBattlerAiPartyMon(battler);
     struct BattlePokemon *bMon = &gBattleMons[battler];
 
     aiMon->species = bMon->species;
@@ -646,15 +646,15 @@ void Ai_InitPartyStruct(void)
         gAiPartyData->count[trainer] = TrainerHasParty(trainer) ? CalculatePartyCount(trainer) : 0;
 
     // Save first 2 or 4(in doubles) mons
-    CopyBattlerDataToAIParty(B_POSITION_PLAYER_LEFT, GetTrainerFromBattlePosition(B_POSITION_PLAYER_LEFT));
+    CopyBattlerDataToAIParty(B_POSITION_PLAYER_LEFT);
     if (IsDoubleBattle())
-        CopyBattlerDataToAIParty(B_POSITION_PLAYER_RIGHT, GetTrainerFromBattlePosition(B_POSITION_PLAYER_RIGHT));
+        CopyBattlerDataToAIParty(B_POSITION_PLAYER_RIGHT);
 
     // If player's partner is AI, save opponent mons
     if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
     {
-        CopyBattlerDataToAIParty(B_POSITION_OPPONENT_LEFT, GetTrainerFromBattlePosition(B_POSITION_OPPONENT_LEFT));
-        CopyBattlerDataToAIParty(B_POSITION_OPPONENT_RIGHT, GetTrainerFromBattlePosition(B_POSITION_OPPONENT_RIGHT));
+        CopyBattlerDataToAIParty(B_POSITION_OPPONENT_LEFT);
+        CopyBattlerDataToAIParty(B_POSITION_OPPONENT_RIGHT);
     }
 
     // Find fainted mons
@@ -695,39 +695,30 @@ void Ai_InitPartyStruct(void)
 
 void Ai_UpdateSwitchInData(enum BattlerId battler)
 {
-    enum BattleTrainer trainer = GetBattlerTrainer(battler);
-    struct AiPartyMon *aiMon = &gAiPartyData->mons[trainer][gBattlerPartyIndexes[battler]];
+    struct AiPartyMon *aiMon = GetBattlerAiPartyMon(battler);
+
+    // Active history belongs to the incoming Pokemon, even on a repeat visit.
+    ClearBattlerHistory(battler);
 
     // See if the switched-in mon has been already in battle
     if (aiMon->wasSentInBattle)
     {
-        if (aiMon->ability)
-            gBattleHistory->abilities[battler] = aiMon->ability;
-        if (aiMon->heldEffect)
-            gBattleHistory->itemEffects[battler] = aiMon->heldEffect;
-        for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
-        {
-            if (aiMon->moves[moveIndex])
-                gBattleHistory->usedMoves[battler][moveIndex] = aiMon->moves[moveIndex];
-        }
+        gBattleHistory->abilities[battler] = aiMon->ability;
+        gBattleHistory->itemEffects[battler] = aiMon->heldEffect;
+        memcpy(gBattleHistory->usedMoves[battler], aiMon->moves, sizeof(gBattleHistory->usedMoves[battler]));
         aiMon->switchInCount++;
         aiMon->status = gBattleMons[battler].status1; // Copy status, because it could've been changed in battle.
     }
-    else // If not, copy the newly switched-in mon in battle and clear battle history.
+    else // First sighting: initialize the persistent party record.
     {
-        ClearBattlerMoveHistory(battler);
-        ClearBattlerAbilityHistory(battler);
-        ClearBattlerItemEffectHistory(battler);
-        CopyBattlerDataToAIParty(GetBattlerPosition(battler), trainer);
+        CopyBattlerDataToAIParty(GetBattlerPosition(battler));
     }
 }
 
 void Ai_UpdateFaintData(enum BattlerId battler)
 {
-    struct AiPartyMon *aiMon = &gAiPartyData->mons[GetBattlerSide(battler)][gBattlerPartyIndexes[battler]];
-    ClearBattlerMoveHistory(battler);
-    ClearBattlerAbilityHistory(battler);
-    ClearBattlerItemEffectHistory(battler);
+    struct AiPartyMon *aiMon = GetBattlerAiPartyMon(battler);
+    ClearBattlerHistory(battler);
     aiMon->isFainted = TRUE;
 }
 
@@ -2200,7 +2191,11 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
     case EFFECT_FOLLOW_ME:
         if (!hasPartner
           || DoesPartnerHaveSameMoveEffect(GetPartnerBattler(battlerAtk), battlerDef, move, aiData->partnerMove)
-          || (aiData->partnerMove != MOVE_NONE && IsBattleMoveStatus(aiData->partnerMove))
+          // Unlike Helping Hand, redirection is useful while a partner sets
+          // up or recovers. Only single-Pokemon protection is redundant;
+          // Wide Guard can still need cover against single-target attacks.
+          || (GetMoveEffect(aiData->partnerMove) == EFFECT_PROTECT
+              && GetProtectType(GetMoveProtectMethod(aiData->partnerMove)) == PROTECT_TYPE_SINGLE)
           || gBattleStruct->monToSwitchIntoId[GetPartnerBattler(battlerAtk)] != PARTY_SIZE)
             ADJUST_SCORE(-20);
         break;
@@ -6866,28 +6861,6 @@ static s32 AI_FirstBattle(enum BattlerId battlerAtk, enum BattlerId battlerDef, 
 
 // Dynamic AI Functions
 // For specific battle scenarios
-
-// Example - prefer attacking opposite foe in a tag battle
-s32 AI_TagBattlePreferFoe(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move, s32 score)
-{
-    if (!(gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER))
-    {
-        /* not a partner battle */
-        return score;
-    }
-    else if (!IsBattlerAlive(GetOppositeBattler(battlerAtk)) || !IsBattlerAlive(GetPartnerBattler(GetOppositeBattler(battlerAtk))))
-    {
-        /* partner is defeated so attack normally */
-        return score;
-    }
-    else if (battlerDef == GetOppositeBattler(battlerAtk))
-    {
-        /* attacking along the diagonal */
-        ADJUST_SCORE(-20);
-    }
-
-    return score;
-}
 
 static s32 AI_DynamicFunc(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move, s32 score)
 {

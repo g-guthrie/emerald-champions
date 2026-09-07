@@ -1,4 +1,5 @@
 #include "global.h"
+#include "champions_circuit.h"
 #include "malloc.h"
 #include "apprentice.h"
 #include "battle.h"
@@ -1386,6 +1387,12 @@ void CalculateMonStatsCont(struct Pokemon *mon, bool32 updateSpeedStat)
     s32 level = GetLevelFromMonExp(mon);
     s32 newMaxHP;
 
+    // Circuit opponents have battle-only levels above the boxed EXP ceiling.
+    // Preserve them through Mega/form stat recalculation without changing the
+    // save layout, player leveling, experience tables, or ordinary wild battles.
+    if (mon->level > MAX_LEVEL && IsChampionsCircuitOpponent(mon))
+        level = mon->level;
+
     u8 nature = GetMonData(mon, MON_DATA_HIDDEN_NATURE);
 
     SetMonData(mon, MON_DATA_LEVEL, &level);
@@ -1661,45 +1668,6 @@ void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon) //Credit: AsparagusEdua
         u32 pp = CalculatePPWithBonus(moves[i], ppBonuses, i);
         SetBoxMonData(boxMon, MON_DATA_PP1 + i, &pp);
     }
-}
-
-void GiveMonDefaultMove(struct Pokemon *mon, u32 slot)
-{
-    GiveBoxMonDefaultMove(&mon->box, slot);
-}
-
-void GiveBoxMonDefaultMove(struct BoxPokemon *boxMon, u32 slot)
-{
-    enum Move move = MOVE_NONE;
-    enum Species species = GetBoxMonData(boxMon, MON_DATA_SPECIES);
-    const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species);
-    s32 level = GetLevelFromBoxMonExp(boxMon);
-    for (u32 i = 0; learnset[i].move != LEVEL_UP_MOVE_END; i++)
-    {
-        s32 j;
-        bool32 alreadyKnown = FALSE;
-
-        if (learnset[i].level > level)
-            break;
-        if (learnset[i].level == 0)
-            continue;
-
-        for (j = 0; j < slot; j++)
-        {
-            if (GetBoxMonData(boxMon, MON_DATA_MOVE1 + j) == learnset[i].move)
-            {
-                alreadyKnown = TRUE;
-                break;
-            }
-        }
-        if (!alreadyKnown)
-            move = learnset[i].move;
-    }
-
-    SetBoxMonData(boxMon, MON_DATA_MOVE1 + slot, &move);
-    u8 ppBonuses = GetBoxMonData(boxMon, MON_DATA_PP_BONUSES);
-    u32 pp = CalculatePPWithBonus(move, ppBonuses, slot);
-    SetBoxMonData(boxMon, MON_DATA_PP1 + slot, &pp);
 }
 
 enum Move MonTryLearningNewMoveAtLevel(struct Pokemon *mon, bool32 firstMove, u32 level)
@@ -3062,12 +3030,6 @@ u8 CalculatePlayerPartyCount(void)
 {
     gPartiesCount[B_TRAINER_PLAYER] = CalculatePartyCount(B_TRAINER_PLAYER);
     return gPartiesCount[B_TRAINER_PLAYER];
-}
-
-u8 CalculatePartnerPartyCount(void)
-{
-    gPartiesCount[B_TRAINER_PARTNER] = CalculatePartyCount(B_TRAINER_PARTNER);
-    return gPartiesCount[B_TRAINER_PARTNER];
 }
 
 u8 CalculateEnemyPartyCount(void)
@@ -5641,30 +5603,6 @@ void BattleAnimateBackSprite(struct Sprite *sprite, enum Species species)
 
 // Identical to GetOpposingLinkMultiBattlerId but for the player
 // "rightSide" from that team's perspective, i.e. B_POSITION_*_RIGHT
-static u8 UNUSED GetOwnOpposingLinkMultiBattlerId(bool8 rightSide)
-{
-    s32 i;
-    s32 battler = 0;
-    u8 multiplayerId = GetMultiplayerId();
-    switch (gLinkPlayers[multiplayerId].id)
-    {
-    case 0:
-    case 2:
-        battler = rightSide ? 3 : 1;
-        break;
-    case 1:
-    case 3:
-        battler = rightSide ? 2 : 0;
-        break;
-    }
-    for (i = 0; i < MAX_LINK_PLAYERS; i++)
-    {
-        if (gLinkPlayers[i].id == (s16)battler)
-            break;
-    }
-    return i;
-}
-
 u8 GetOpposingLinkMultiBattlerId(bool8 rightSide, u8 multiplayerId)
 {
     s32 i;
@@ -5974,17 +5912,6 @@ static enum Species GetFormChangeTargetSpeciesBoxMonWithMove(struct BoxPokemon *
 }
 
 // Returns the current species if no form change is possible
-enum Species GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *boxMon, enum FormChanges method)
-{
-    return GetFormChangeTargetSpeciesBoxMonWithMove(boxMon, method, MOVE_NONE);
-}
-
-// Returns the current species if no form change is possible
-enum Species GetFormChangeTargetSpecies(struct Pokemon *mon, enum FormChanges method)
-{
-    return GetFormChangeTargetSpeciesBoxMon(&mon->box, method);
-}
-
 enum Species GetFormChangeTargetSpecies_Internal(struct FormChangeContext ctx)
 {
     u32 i;

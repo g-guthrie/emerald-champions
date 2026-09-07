@@ -146,7 +146,6 @@ static void AnimMoveWorrySeed(struct Sprite *);
 static void AnimMoveSmallCloud(struct Sprite *);
 static void AnimGrassKnotStep(struct Sprite *);
 static void AnimGrassKnot(struct Sprite *);
-static void AnimWoodHammerSmall(struct Sprite *);
 static void AnimWoodHammerBig(struct Sprite *);
 static void AnimWoodHammerHammer(struct Sprite *);
 static void AnimWoodHammerHammer_WaitForPunch(struct Sprite *);
@@ -2751,7 +2750,7 @@ const struct SpriteTemplate gWoodHammerSmallSpriteTemplate =
     .paletteTag = ANIM_TAG_WOOD_HAMMER,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gWoodHammerSmallAnims,
-    .callback = AnimWoodHammerSmall,
+    .callback = AnimRockFragment,
 };
 
 const struct SpriteTemplate gWoodHammerHammerSpriteTemplate =
@@ -2941,32 +2940,6 @@ static void AnimWoodHammerBig(struct Sprite *sprite)
         StartSpriteAffineAnim(sprite, 1);
 
     TranslateAnimSpriteToTargetMonLocation(sprite);
-}
-
-static void AnimWoodHammerSmall(struct Sprite *sprite)
-{
-    StartSpriteAnim(sprite, gBattleAnimArgs[5]);
-    AnimateSprite(sprite);
-
-    if (!IsOnPlayerSide(gBattleAnimAttacker))
-        sprite->x -= gBattleAnimArgs[0];
-    else
-        sprite->x += gBattleAnimArgs[0];
-
-    sprite->y += gBattleAnimArgs[1];
-
-    sprite->data[0] = gBattleAnimArgs[4];
-    sprite->data[1] = sprite->x;
-    sprite->data[2] = sprite->x + gBattleAnimArgs[2];
-    sprite->data[3] = sprite->y;
-    sprite->data[4] = sprite->y + gBattleAnimArgs[3];
-
-    InitSpriteDataForLinearTranslation(sprite);
-    sprite->data[3] = 0;
-    sprite->data[4] = 0;
-
-    sprite->callback = TranslateSpriteLinearFixedPoint;
-    StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
 }
 
 #define HAMMER_X_OFFSET 40
@@ -5209,39 +5182,6 @@ static void AnimSlice_Step(struct Sprite *sprite)
     }
 }
 
-static void UNUSED UnusedFlickerAnim(struct Sprite *sprite)
-{
-    if (sprite->data[2] > 1)
-    {
-        if (sprite->data[3] & 1)
-        {
-            sprite->invisible = FALSE;
-            gSprites[sprite->data[0]].invisible = FALSE;
-            gSprites[sprite->data[1]].invisible = FALSE;
-        }
-        else
-        {
-            sprite->invisible = TRUE;
-            gSprites[sprite->data[0]].invisible = TRUE;
-            gSprites[sprite->data[1]].invisible = TRUE;
-        }
-
-        sprite->data[2] = 0;
-        sprite->data[3]++;
-    }
-    else
-    {
-        sprite->data[2]++;
-    }
-
-    if (sprite->data[3] == 10)
-    {
-        DestroySprite(&gSprites[sprite->data[0]]);
-        DestroySprite(&gSprites[sprite->data[1]]);
-        DestroyAnimSprite(sprite);
-    }
-}
-
 static void AnimCirclingMusicNote(struct Sprite *sprite)
 {
     CMD_ARGS(unk0, unk1, unk2, unk3, unk4, unk5);
@@ -6273,30 +6213,6 @@ void AnimTask_Conversion2AlphaBlend(u8 taskId)
     }
 }
 
-static void UNUSED AnimTask_HideBattlersHealthbox(u8 taskId)
-{
-    CMD_ARGS(unk0, unk1);
-
-    for (enum BattlerId i = 0; i < gBattlersCount; i++)
-    {
-        if (cmd->unk0 == TRUE && IsOnPlayerSide(i))
-            SetHealthboxSpriteInvisible(gHealthboxSpriteIds[i]);
-
-        if (cmd->unk1 == TRUE && !IsOnPlayerSide(i))
-            SetHealthboxSpriteInvisible(gHealthboxSpriteIds[i]);
-    }
-
-    DestroyAnimVisualTask(taskId);
-}
-
-static void UNUSED AnimTask_ShowBattlersHealthbox(u8 taskId)
-{
-    for (enum BattlerId i = 0; i < gBattlersCount; i++)
-        SetHealthboxSpriteVisible(gHealthboxSpriteIds[i]);
-
-    DestroyAnimVisualTask(taskId);
-}
-
 // args[0] - sprite x
 // args[1] - sprite y
 static void AnimMoon(struct Sprite *sprite)
@@ -6636,20 +6552,17 @@ static void ReloadBattlerSprites(enum BattlerId battler, struct Pokemon *party)
     }
 }
 
-#define TRY_SIDE_TIMER_BATTLER_ID_SWAP(battlerAtk, battlerPartner, side, field)    \
-    if (gSideTimers[side].field == battlerAtk)                      \
-        gSideTimers[side].field = battlerPartner;                   \
-    else if (gSideTimers[side].field == battlerPartner)             \
-        gSideTimers[side].field = battlerAtk;
-
 static void TrySwapStickyWebBattlerId(enum BattlerId battlerAtk, enum BattlerId battlerPartner)
 {
-    u32 oppSide = GetBattlerSide(GetOppositeBattler(battlerAtk));
-
-    // if we've set sticky web on the opposing side, need to swap stickyWebBattlerId for mirror armor
-    TRY_SIDE_TIMER_BATTLER_ID_SWAP(battlerAtk, battlerPartner, oppSide, stickyWebBattlerId);
+    // Court Change can move a hazard onto its setter's own side.
+    for (u32 side = 0; side < NUM_BATTLE_SIDES; side++)
+    {
+        if (gSideTimers[side].stickyWebBattlerId == battlerAtk)
+            gSideTimers[side].stickyWebBattlerId = battlerPartner;
+        else if (gSideTimers[side].stickyWebBattlerId == battlerPartner)
+            gSideTimers[side].stickyWebBattlerId = battlerAtk;
+    }
 }
-#undef TRY_SIDE_TIMER_BATTLER_ID_SWAP
 
 static void TrySwapWishBattlerIds(enum BattlerId battlerAtk, enum BattlerId battlerPartner)
 {

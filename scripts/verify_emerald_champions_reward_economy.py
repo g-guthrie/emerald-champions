@@ -743,6 +743,9 @@ def verify_direct_reward_flag_names() -> None:
             if (path.parent.name, match.group(1)) in generic_state_exceptions:
                 continue
             for item in items:
+                # Both mutually exclusive bike gifts share one saved receipt flag.
+                if item in {"ITEM_MACH_BIKE", "ITEM_ACRO_BIKE"} and "FLAG_RECEIVED_BIKE" in flags:
+                    continue
                 if not any(item.removeprefix("ITEM_") in flag for flag in flags):
                     mismatches.append(
                         f"{path.parent.name}:{match.group(1)} gives {item} but records {flags}"

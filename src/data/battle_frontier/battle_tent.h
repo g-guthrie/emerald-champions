@@ -964,7 +964,7 @@ const struct TrainerMon gSlateportBattleTentMons[NUM_SLATEPORT_TENT_MONS] =
         .species = SPECIES_VOLTORB,
         .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_VOLT_SWITCH, MOVE_TAUNT},
         .heldItem = ITEM_LIGHT_CLAY,
-        .ev = TRAINER_PARTY_EVS(2, 0, 0, 32, 32, 0),
+        .ev = TRAINER_PARTY_EVS(32, 0, 2, 32, 0, 0),
         .nature = NATURE_TIMID,
         .ability = ABILITY_AFTERMATH,
         .ball = BALL_POKE
@@ -2236,11 +2236,11 @@ const struct TrainerMon gVerdanturfBattleTentMons[NUM_VERDANTURF_TENT_MONS] =
     },
     [VERDANTURF_TENT_MON_VOLTORB] = {
         .species = SPECIES_VOLTORB,
-        .moves = {MOVE_DISCHARGE, MOVE_SIGNAL_BEAM, MOVE_SWIFT, MOVE_PROTECT},
-        .heldItem = ITEM_FOCUS_SASH,
-        .ev = TRAINER_PARTY_EVS(2, 0, 0, 32, 32, 0),
+        .moves = {MOVE_ELECTROWEB, MOVE_EERIE_IMPULSE, MOVE_HELPING_HAND, MOVE_PROTECT},
+        .heldItem = ITEM_EVIOLITE,
+        .ev = TRAINER_PARTY_EVS(32, 0, 2, 32, 0, 0),
         .nature = NATURE_TIMID,
-        .ability = ABILITY_AFTERMATH,
+        .ability = ABILITY_SOUNDPROOF,
         .ball = BALL_POKE
     },
     [VERDANTURF_TENT_MON_MAGNEMITE] = {
@@ -3099,11 +3099,11 @@ const struct TrainerMon gFallarborBattleTentMons[NUM_FALLARBOR_TENT_MONS] =
     },
     [FALLARBOR_TENT_MON_VOLTORB] = {
         .species = SPECIES_VOLTORB,
-        .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_VOLT_SWITCH, MOVE_TAUNT},
-        .heldItem = ITEM_LIGHT_CLAY,
+        .moves = {MOVE_RAIN_DANCE, MOVE_THUNDER, MOVE_ELECTROWEB, MOVE_PROTECT},
+        .heldItem = ITEM_DAMP_ROCK,
         .ev = TRAINER_PARTY_EVS(2, 0, 0, 32, 32, 0),
         .nature = NATURE_TIMID,
-        .ability = ABILITY_AFTERMATH,
+        .ability = ABILITY_STATIC,
         .ball = BALL_POKE
     },
     [FALLARBOR_TENT_MON_WHISMUR] = {

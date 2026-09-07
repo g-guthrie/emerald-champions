@@ -60,6 +60,5 @@ void ContestLiveUpdates_SetLoserData(u8 flag, u8 loser);
 void ResetGabbyAndTy(void);
 u8 CheckForPlayersHouseNews(void);
 bool8 IsGabbyAndTyShowOnTheAir(void);
-void TryPutTrainerFanClubOnAir(void);
 
 #endif //GUARD_TV_H

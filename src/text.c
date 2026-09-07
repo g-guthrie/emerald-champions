@@ -385,68 +385,6 @@ bool16 AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, 
     return AddTextPrinter(&printerTemplate, speed, callback);
 }
 
-bool16 AddSpriteTextPrinterParameterized(u8 spriteId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, TextPrinterCallback callback)
-{
-    struct TextPrinterTemplate printerTemplate;
-
-    printerTemplate.currentChar = str;
-    printerTemplate.type = SPRITE_TEXT_PRINTER;
-    printerTemplate.spriteId = spriteId;
-    printerTemplate.fontId = fontId;
-    printerTemplate.x = x;
-    printerTemplate.y = y;
-    printerTemplate.currentX = x;
-    printerTemplate.currentY = y;
-    printerTemplate.letterSpacing = gFonts[fontId].letterSpacing;
-    printerTemplate.lineSpacing = gFonts[fontId].lineSpacing;
-    printerTemplate.color = gFonts[fontId].color;
-    return AddTextPrinter(&printerTemplate, speed, callback);
-}
-
-void AddSpriteTextPrinterParameterized3(u8 spriteId, u8 fontId, u8 left, u8 top, const u8 *color, s8 speed, const u8 *str)
-{
-    struct TextPrinterTemplate printer;
-
-    printer.currentChar = str;
-    printer.type = SPRITE_TEXT_PRINTER;
-    printer.spriteId = spriteId;
-    printer.fontId = fontId;
-    printer.x = left;
-    printer.y = top;
-    printer.currentX = printer.x;
-    printer.currentY = printer.y;
-    printer.letterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
-    printer.lineSpacing = GetFontAttribute(fontId, FONTATTR_LINE_SPACING);
-    printer.color.background = color[0];
-    printer.color.foreground = color[1];
-    printer.color.shadow = color[2];
-    printer.color.accent = color[0];
-
-    AddTextPrinter(&printer, speed, NULL);
-}
-
-void AddSpriteTextPrinterParameterized4(u8 spriteId, u8 fontId, u8 left, u8 top, u8 letterSpacing, u8 lineSpacing, const u8 *color, s8 speed, const u8 *str)
-{
-    struct TextPrinterTemplate printer;
-
-    printer.currentChar = str;
-    printer.type = SPRITE_TEXT_PRINTER;
-    printer.spriteId = spriteId;
-    printer.fontId = fontId;
-    printer.x = left;
-    printer.y = top;
-    printer.currentX = printer.x;
-    printer.currentY = printer.y;
-    printer.letterSpacing = letterSpacing;
-    printer.lineSpacing = lineSpacing;
-    printer.color.background = color[0];
-    printer.color.foreground = color[1];
-    printer.color.shadow = color[2];
-    printer.color.accent = color[0];
-
-    AddTextPrinter(&printer, speed, NULL);
-}
-
 void AddSpriteTextPrinterParameterized6(u8 spriteId, u8 fontId, u8 left, u8 top, u8 letterSpacing, u8 lineSpacing, const union TextColor color, s8 speed, const u8 *str)
 {
     struct TextPrinterTemplate printer;
@@ -614,23 +552,6 @@ bool32 IsTextPrinterActiveOnWindow(u32 windowId)
     return FALSE;
 }
 
-bool32 IsTextPrinterActiveOnSprite(u32 spriteId)
-{
-    struct TextPrinter *currentPrinter = sFirstTextPrinter;
-
-    while (currentPrinter != NULL)
-    {
-        if (currentPrinter->printerTemplate.type == SPRITE_TEXT_PRINTER
-         && currentPrinter->printerTemplate.firstSprite == spriteId)
-        {
-            return currentPrinter->active;
-        }
-        currentPrinter = currentPrinter->nextPrinter;
-    }
-
-    return FALSE;
-}
-
 static u32 RenderFont(struct TextPrinter *textPrinter)
 {
     u32 ret;
@@ -723,24 +644,6 @@ void DecompressGlyphTile(const void *src_, void *dest_)
 
     temp = *(src++);
     *(dest++) = (sFontHalfRowLookupTable[temp & 0xFF] << 16) | (sFontHalfRowLookupTable[temp >> 8]);
-}
-
-static u8 UNUSED GetLastTextColor(enum TextColorType colorType)
-{
-    switch (colorType)
-    {
-    case TEXT_COLOR_TYPE_FOREGROUND:
-        return sLastTextColor.foreground;
-    case TEXT_COLOR_TYPE_HIGHLIGHT:
-    case TEXT_COLOR_TYPE_BACKGROUND:
-        return sLastTextColor.background;
-    case TEXT_COLOR_TYPE_SHADOW:
-        return sLastTextColor.shadow;
-    case TEXT_COLOR_TYPE_ACCENT:
-        return sLastTextColor.accent;
-    default:
-        return TEXT_COLOR_TRANSPARENT;
-    }
 }
 
 static u32 OffsetCurrGlyph(u32 shiftWidth)
@@ -1696,99 +1599,6 @@ static u16 RenderText(struct TextPrinter *textPrinter)
 
 #undef nextX
 #undef nextY
-
-static u32 UNUSED GetStringWidthFixedWidthFont(const u8 *str, u8 fontId, u8 letterSpacing)
-{
-    int i;
-    u8 width;
-    int temp;
-    int temp2;
-    u8 line;
-    int strPos;
-    u8 lineWidths[8];
-    const u8 *strLocal;
-
-    for (i = 0; i < (int)ARRAY_COUNT(lineWidths); i++)
-        lineWidths[i] = 0;
-
-    width = 0;
-    line = 0;
-    strLocal = str;
-    strPos = 0;
-
-    do
-    {
-        temp = strLocal[strPos++];
-        switch (temp)
-        {
-        case CHAR_NEWLINE:
-        case EOS:
-            lineWidths[line] = width;
-            width = 0;
-            line++;
-            break;
-        case EXT_CTRL_CODE_BEGIN:
-            temp2 = strLocal[strPos++];
-            switch (temp2)
-            {
-            case EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW:
-            case EXT_CTRL_CODE_TEXT_COLORS:
-                ++strPos;
-            case EXT_CTRL_CODE_PLAY_BGM:
-            case EXT_CTRL_CODE_PLAY_SE:
-                ++strPos;
-            case EXT_CTRL_CODE_BACKGROUND:
-            case EXT_CTRL_CODE_COLOR:
-            case EXT_CTRL_CODE_SHADOW:
-            case EXT_CTRL_CODE_ACCENT:
-            case EXT_CTRL_CODE_HIGHLIGHT:
-            case EXT_CTRL_CODE_PALETTE:
-            case EXT_CTRL_CODE_FONT:
-            case EXT_CTRL_CODE_PAUSE:
-            case EXT_CTRL_CODE_ESCAPE:
-            case EXT_CTRL_CODE_SHIFT_RIGHT:
-            case EXT_CTRL_CODE_SHIFT_DOWN:
-            case EXT_CTRL_CODE_CLEAR:
-            case EXT_CTRL_CODE_SKIP:
-            case EXT_CTRL_CODE_CLEAR_TO:
-            case EXT_CTRL_CODE_MIN_LETTER_SPACING:
-            case EXT_CTRL_CODE_SPEAKER:
-                ++strPos;
-                break;
-            case EXT_CTRL_CODE_RESET_FONT:
-            case EXT_CTRL_CODE_PAUSE_UNTIL_PRESS:
-            case EXT_CTRL_CODE_WAIT_SE:
-            case EXT_CTRL_CODE_FILL_WINDOW:
-            case EXT_CTRL_CODE_JPN:
-            case EXT_CTRL_CODE_ENG:
-            default:
-                break;
-            }
-            break;
-        case CHAR_DYNAMIC:
-        case PLACEHOLDER_BEGIN:
-            ++strPos;
-            break;
-        case CHAR_PROMPT_SCROLL:
-        case CHAR_PROMPT_CLEAR:
-            break;
-        case CHAR_KEYPAD_ICON:
-        case CHAR_EXTRA_SYMBOL:
-            ++strPos;
-        default:
-            ++width;
-            break;
-        }
-    } while (temp != EOS);
-
-    for (width = 0, strPos = 0; strPos < 8; ++strPos)
-    {
-        if (width < lineWidths[strPos])
-            width = lineWidths[strPos];
-    }
-
-    return (u8)(GetFontAttribute(fontId, FONTATTR_MAX_LETTER_WIDTH) + letterSpacing) * width;
-}
 
 static u32 (*GetFontWidthFunc(u8 fontId))(u16, bool32)
 {

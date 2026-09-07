@@ -575,7 +575,7 @@ EmeraldChampions_Text_ConfirmBattleSet:
 	.string "{STR_VAR_1}?$"
 
 EmeraldChampions_Text_ConfirmMegaBattleSet:
-	.string "Required stone:\n"
+	.string "Required item:\n"
 	.string "{STR_VAR_3}.\p"
 	.string "Apply this set without it?$"
 
@@ -584,12 +584,14 @@ EmeraldChampions_Text_BattleSetSuccess:
 	.string "Its full build was updated.$"
 
 EmeraldChampions_Text_MegaBattleSetSuccess:
-	.string "{STR_VAR_1}'s Mega set is ready!\p"
-	.string "No stone was supplied.\n"
+	.string "{STR_VAR_1}'s transformation\n"
+	.string "set is ready!\p"
+	.string "No item was supplied.\n"
 	.string "Required: {STR_VAR_3}.$"
 
 EmeraldChampions_Text_MegaBattleSetHeldSuccess:
-	.string "{STR_VAR_1}'s Mega set is ready!\n"
+	.string "{STR_VAR_1}'s transformation\n"
+	.string "set is ready!\p"
 	.string "It kept its {STR_VAR_3}.$"
 
 EmeraldChampions_Text_PrepareAnotherBattleSet:

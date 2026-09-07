@@ -110,7 +110,7 @@ gSpecials::
 	def_special GetContestMonCondition
 	def_special HasMonWonThisContestBefore
 	def_special GiveMonContestRibbon
-	def_special IsContestDebugActive
+	def_special Unused_IsContestDebugActive, unused=1
 	def_special GiveMonArtistRibbon
 	def_special TryContestGModeLinkup, waitstate=1
 	def_special SaveGame, waitstate=1
@@ -543,7 +543,7 @@ gSpecials::
 	def_special DoesPlayerPartyHaveSelectedSpeciesFamily
 	def_special BufferCurrentMapRouteSignSpecies
 	def_special TryUnlockDarkraiLegendarySign
-	def_special TryDiscoverEligibleLegendarySign
+	def_special BuildLegendarySignResearchMenu
 	def_special BufferLegendarySignLedger
 	def_special TryGiveArceusLegendarySignMasteryReward
 	def_special ChampionsCircuitCanEnter
@@ -683,3 +683,9 @@ gSpecials::
 	def_special UpdateTrainerCardPhotoIcons
 	def_special StickerManGetBragFlags
 	def_special CheckAddCoins
+	def_special CheckEmeraldChampionsHandoffItem
+	def_special TakeEmeraldChampionsHandoffItem
+	def_special GiveEmeraldChampionsStarterMegaStones
+	def_special SetGraniteCaveFlashLevel
+
+	def_special ResearchSelectedLegendarySign

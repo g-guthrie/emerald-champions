@@ -124,9 +124,9 @@ JaggedPass_EventScript_VialChanseyShove::
 	waitmoncry
 	applymovement LOCALID_JAGGED_PASS_VIAL_CHANSEY, JaggedPass_Movement_VialChanseyShove
 	applymovement LOCALID_PLAYER, JaggedPass_Movement_VialPlayerShove
-	waitmovement 0
-	applymovement LOCALID_JAGGED_PASS_VIAL_CHANSEY, JaggedPass_Movement_VialChanseyEscape
-	waitmovement 0
+	waitmovement LOCALID_PLAYER
+	@ The shove movement already includes Blob's complete escape path.
+	waitmovement LOCALID_JAGGED_PASS_VIAL_CHANSEY
 
 JaggedPass_EventScript_VialChanseyGone::
 	setvar VAR_CHANSEY_NURSE_STATE, 3
@@ -182,7 +182,7 @@ JaggedPass_Text_VialChanseyAshenWoods:
 	.string "The HEAL BALL is still warm.$"
 
 JaggedPass_EventScript_Eric::
-	trainerbattle_single TRAINER_ERIC, JaggedPass_Text_EricIntro, JaggedPass_Text_EricDefeat
+	trainerbattle_double TRAINER_ERIC, JaggedPass_Text_EricIntro, JaggedPass_Text_EricDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox JaggedPass_Text_EricPostBattle, MSGBOX_AUTOCLOSE
 	end
 

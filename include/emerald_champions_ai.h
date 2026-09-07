@@ -10,6 +10,5 @@ s32 AI_EC_FlanneryAfterYou(u32 battlerAtkRaw, u32 battlerDefRaw, u32 moveRaw, s3
 s32 AI_EC_QuincyTruant(u32 battlerAtkRaw, u32 battlerDefRaw, u32 moveRaw, s32 score);
 s32 AI_EC_SnowScreen(u32 battlerAtkRaw, u32 battlerDefRaw, u32 moveRaw, s32 score);
 s32 AI_EC_RedirectionSetup(u32 battlerAtkRaw, u32 battlerDefRaw, u32 moveRaw, s32 score);
-s32 AI_EC_WallaceTerrain(u32 battlerAtkRaw, u32 battlerDefRaw, u32 moveRaw, s32 score);
 
 #endif // GUARD_EMERALD_CHAMPIONS_AI_H

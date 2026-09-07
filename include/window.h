@@ -60,7 +60,6 @@ void FreeAllWindowBuffers(void);
 void CopyWindowToVram(u32 windowId, u32 mode);
 void CopyWindowRectToVram(u32 windowId, u32 mode, u32 x, u32 y, u32 w, u32 h);
 void PutWindowTilemap(u32 windowId);
-void PutWindowRectTilemapOverridePalette(u32 windowId, u8 x, u8 y, u8 width, u8 height, u8 palette);
 void ClearWindowTilemap(u32 windowId);
 void PutWindowRectTilemap(u32 windowId, u8 x, u8 y, u8 width, u8 height);
 void BlitBitmapToWindow(u32 windowId, const u8 *pixels, u16 x, u16 y, u16 width, u16 height);

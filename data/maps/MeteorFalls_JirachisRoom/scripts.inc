@@ -10,14 +10,14 @@ MeteorFalls_JirachisRoom_EventScript_Jirachi::
 	waitmoncry
 	setvar VAR_0x8004, SPECIES_JIRACHI
 	setvar VAR_0x8005, 2
+	msgbox gText_LegendaryOneShotWarning, MSGBOX_DEFAULT
 	special CreateEmeraldChampionsStaticLegendaryEncounter
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, MeteorFalls_JirachisRoom_EventScript_JirachiCaught
-	msgbox MeteorFalls_JirachisRoom_Text_JirachiRemains, MSGBOX_DEFAULT
-	release
+	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_LegendaryDefeated
+	goto MeteorFalls_JirachisRoom_EventScript_JirachiCaught
 	end
 
 MeteorFalls_JirachisRoom_EventScript_JirachiCaught::
@@ -26,6 +26,3 @@ MeteorFalls_JirachisRoom_EventScript_JirachiCaught::
 	release
 	end
 
-MeteorFalls_JirachisRoom_Text_JirachiRemains:
-	.string "JIRACHI accepts the challenge, but the\n"
-	.string "sanctuary will hold its place for you.$"

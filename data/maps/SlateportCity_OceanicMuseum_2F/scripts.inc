@@ -4,6 +4,9 @@ SlateportCity_OceanicMuseum_2F_MapScripts::
 SlateportCity_OceanicMuseum_2F_EventScript_CaptStern::
 	lock
 	call EventScript_CheckStoryDoubleBattleParty
+	setvar VAR_0x8004, ITEM_DEVON_PARTS
+	special CheckEmeraldChampionsHandoffItem
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_MissingHandoffItem
 	faceplayer
 	msgbox SlateportCity_OceanicMuseum_2F_Text_ThankYouForTheParts, MSGBOX_DEFAULT
 	closemessage
@@ -71,7 +74,9 @@ SlateportCity_OceanicMuseum_2F_EventScript_CaptStern::
 	msgbox SlateportCity_OceanicMuseum_2F_Text_SternThankYouForSavingUs, MSGBOX_DEFAULT
 	setvar VAR_0x8004, ITEM_DEVON_PARTS
 	call Common_EventScript_PlayerHandedOverTheItem
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_MissingHandoffItem
 	msgbox SlateportCity_OceanicMuseum_2F_Text_SternIveGotToGo, MSGBOX_DEFAULT
+	call_if_unset FLAG_BADGE02_GET, SlateportCity_OceanicMuseum_2F_EventScript_BrawlyHandoff
 	closemessage
 	fadescreen FADE_TO_BLACK
 	playfanfare MUS_HEAL
@@ -88,6 +93,11 @@ SlateportCity_OceanicMuseum_2F_EventScript_CaptStern::
 	fadescreen FADE_FROM_BLACK
 	release
 	end
+
+SlateportCity_OceanicMuseum_2F_EventScript_BrawlyHandoff::
+	msgbox SlateportCity_OceanicMuseum_2F_Text_BrawlyHandoff, MSGBOX_DEFAULT
+	call SlateportCity_EventScript_LocateBrawly
+	return
 
 SlateportCity_OceanicMuseum_2F_EventScript_ReadyRegisterBirch::
 	setvar VAR_REGISTER_BIRCH_STATE, 1
@@ -272,8 +282,9 @@ SlateportCity_OceanicMuseum_2F_EventScript_MuseumPatron3::
 	end
 
 SlateportCity_OceanicMuseum_2F_Text_ThankYouForTheParts:
-	.string "I'm STERN. Those DEVON parts will let\n"
-	.string "us map pressure beneath the seafloor.\p"
+	.string "I'm STERN. You brought DEVON's parts!\p"
+	.string "They'll let us measure pressure\n"
+	.string "deep beneath the seafloor.\p"
 	.string "The tides have shifted since strange\n"
 	.string "marks began shining across HOENN.$"
 
@@ -290,60 +301,62 @@ SlateportCity_OceanicMuseum_2F_Text_WereTeamAqua:
 	.string "the people who understand the sea!$"
 
 SlateportCity_OceanicMuseum_2F_Text_Grunt1Defeat:
-	.string "You broke our opening current!$"
+	.string "That wasn't supposed to happen!$"
 
 SlateportCity_OceanicMuseum_2F_Text_BossGoingToBeFurious:
-	.string "The handoff failed. ARCHIE will want to\n"
-	.string "know how you read it so quickly.$"
+	.string "The boss is going to hear about this…$"
 
 SlateportCity_OceanicMuseum_2F_Text_LetMeTakeCareOfThis:
-	.string "You committed too early. Fall back.\n"
-	.string "I will change the angle of attack.$"
+	.string "Move aside.\n"
+	.string "I'll get those parts myself!$"
 
 SlateportCity_OceanicMuseum_2F_Text_Grunt2Defeat:
-	.string "You adapted again…$"
+	.string "I can't stop this kid!$"
 
 SlateportCity_OceanicMuseum_2F_Text_MeddlingKid:
-	.string "Two formations failed, and the parts are\n"
-	.string "still with STERN.\p"
-	.string "We underestimated your independence.$"
+	.string "We still don't have the parts.\n"
+	.string "What are we going to tell ARCHIE?$"
 
 SlateportCity_OceanicMuseum_2F_Text_CameToSeeWhatsTakingSoLong:
-	.string "Two trained crews, stopped by one new\n"
-	.string "Trainer? Then I will test you myself.$"
+	.string "That's enough. You two, stand back.\n"
+	.string "I'll deal with this.$"
 
 SlateportCity_OceanicMuseum_2F_Text_ArchieWarning:
 	.string "I'm ARCHIE, leader of TEAM AQUA.\p"
-	.string "Land divides life into borders. The sea\n"
-	.string "connects it, changes it, sets it free.\p"
-	.string "STERN's parts can trace the deep current\n"
-	.string "that is waking HOENN's ancient marks.\p"
-	.string "MAXIE wants to lock that power beneath\n"
-	.string "more land. I intend to let it flow.\p"
-	.string "You already beat my crews, so no empty\n"
-	.string "threat: show me your answer in battle.$"
+	.string "The sea doesn't care for borders.\n"
+	.string "Life moves where the water carries it.\p"
+	.string "Those parts can trace the deep current\n"
+	.string "waking HOENN's ancient marks.\p"
+	.string "MAXIE would bury that power\n"
+	.string "under more land. I intend to let it flow.\p"
+	.string "Hand them over, or stand and fight!$"
 
 SlateportCity_OceanicMuseum_2F_Text_ArchieDefeat:
-	.string "What?! You broke every handoff\n"
-	.string "and stopped my advance?$"
+	.string "Tch! I underestimated you.$"
 
 SlateportCity_OceanicMuseum_2F_Text_ArchieDefeated:
-	.string "You changed course faster than I did.\n"
-	.string "Good. Keep the parts for now.\p"
-	.string "AQUA will find the current without them.\n"
-	.string "When we meet again, the sea will answer.$"
+	.string "Keep them, then.\n"
+	.string "AQUA won't turn back for one Trainer.\p"
+	.string "We'll find that current with or without\n"
+	.string "your precious instruments.$"
 
 SlateportCity_OceanicMuseum_2F_Text_SternThankYouForSavingUs:
-	.string "STERN: {PLAYER}, you protected us and\n"
-	.string "proved ARCHIE can be beaten. Thank you.\p"
+	.string "{PLAYER}, thank you.\n"
+	.string "You kept us and the parts safe.\p"
 	.string "These parts may reveal why the ocean\n"
 	.string "and the CHAMPION'S SIGNS move together.$"
 
 SlateportCity_OceanicMuseum_2F_Text_SternIveGotToGo:
-	.string "We sail immediately. If AQUA reaches the\n"
-	.string "seafloor first, this becomes a race.\p"
-	.string "Study the exhibits. HOENN's old balance\n"
-	.string "is written in land, sea, and sky.$"
+	.string "I'll get these instruments to the ship.\n"
+	.string "We can't let AQUA reach the depths first.\p"
+	.string "After DEWFORD GYM, follow ROUTE 110\n"
+	.string "north to MAUVILLE CITY.\p"
+	.string "WATTSON keeps the city running.\n"
+	.string "His GYM should give you a challenge!$"
+
+SlateportCity_OceanicMuseum_2F_Text_BrawlyHandoff:
+	.string "But earn BRAWLY's BADGE first.\n"
+	.string "Then you can head north.$"
 
 SlateportCity_OceanicMuseum_2F_Text_RemindsMeOfAbandonedShip:
 	.string "I saw a model of a ship here.\p"

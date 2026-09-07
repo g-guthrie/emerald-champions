@@ -121,6 +121,10 @@ extern const struct LegendarySignDefinition gLegendarySignDefinitions[LEGENDARY_
 
 bool32 IsLegendarySignUnlocked(enum LegendarySignId signId);
 bool32 IsLegendarySignCaught(enum LegendarySignId signId);
+bool32 IsLegendaryEncounterLost(enum Species species);
+bool32 IsOneShotLegendarySpecies(enum Species species);
+bool32 CanAcquireLegendarySignSpecies(enum Species species);
+void MarkLegendaryEncounterLost(enum Species species);
 void UnlockLegendarySign(enum LegendarySignId signId);
 void InitializeLegendaryRelicDeliveryState(void);
 void RetryPendingLegendaryRelics(void);
@@ -130,7 +134,6 @@ bool32 TryGetLegendarySignWildOverride(enum WildPokemonArea area, enum Species *
 bool32 PlayerPartyHasSpeciesFamily(enum Species species);
 bool32 IsLegendarySignOrdinaryWildSpecies(enum Species species);
 bool32 IsLegendarySignConditionalWildSpecies(enum Species species);
-void TryUnlockEligibleVisibleLegendarySignsForCurrentMap(void);
 void DoesPlayerPartyHaveSelectedSpeciesFamily(void);
 void TryUnlockSelectedLegendarySign(void);
 u16 GetSelectedLegendarySignState(void);
@@ -140,8 +143,10 @@ void CreateSelectedLegendarySignEncounter(void);
 void TryGiveSelectedLegendarySignReward(void);
 void CreateEmeraldChampionsStaticLegendaryEncounter(void);
 void TryUnlockDarkraiLegendarySign(void);
-void TryDiscoverEligibleLegendarySign(void);
+void BuildLegendarySignResearchMenu(void);
+void ResearchSelectedLegendarySign(void);
 void TryGiveArceusLegendarySignMasteryReward(void);
 u8 GiveLegendarySignReward(enum Species species, u8 level);
+#define LEGENDARY_REWARD_UNAVAILABLE 3
 
 #endif // GUARD_LEGENDARY_SIGNS_H

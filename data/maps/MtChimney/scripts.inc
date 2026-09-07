@@ -412,7 +412,7 @@ MtChimney_EventScript_Tabitha::
 	end
 
 MtChimney_EventScript_Grunt2::
-	trainerbattle_single TRAINER_GRUNT_MT_CHIMNEY_2, MtChimney_Text_Grunt2Intro, MtChimney_Text_Grunt2Defeat
+	trainerbattle_double TRAINER_GRUNT_MT_CHIMNEY_2, MtChimney_Text_Grunt2Intro, MtChimney_Text_Grunt2Defeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox MtChimney_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -517,7 +517,7 @@ MtChimney_EventScript_Shirley::
 	end
 
 MtChimney_EventScript_Grunt1::
-	trainerbattle_single TRAINER_GRUNT_MT_CHIMNEY_1, MtChimney_Text_Grunt1Intro, MtChimney_Text_Grunt1Defeat
+	trainerbattle_double TRAINER_GRUNT_MT_CHIMNEY_1, MtChimney_Text_Grunt1Intro, MtChimney_Text_Grunt1Defeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox MtChimney_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -653,6 +653,10 @@ MtChimney_Text_ArchieThankYou:
 	.string "ARCHIE: You stopped him. I owe you that.\p"
 	.string "But do not confuse AQUA with MAGMA. We\n"
 	.string "would free the old current, not cage it.\p"
+	.string "Take JAGGED PASS down to LAVARIDGE.\n"
+	.string "Your next GYM is there.\p"
+	.string "That METEORITE is still in the machine.\n"
+	.string "COZMO in FALLARBOR may want it back.\p"
 	.string "If you stand in our way again, I will\n"
 	.string "expect an even better battle.$"
 

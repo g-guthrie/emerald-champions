@@ -817,30 +817,6 @@ void RequestSpriteCopy(const u8 *src, u8 *dest, u16 size)
     }
 }
 
-void CopyFromSprites(u8 *dest)
-{
-    u32 i;
-    u8 *src = (u8 *)gSprites;
-    for (i = 0; i < sizeof(struct Sprite) * MAX_SPRITES; i++)
-    {
-        *dest = *src;
-        dest++;
-        src++;
-    }
-}
-
-void CopyToSprites(u8 *src)
-{
-    u32 i;
-    u8 *dest = (u8 *)gSprites;
-    for (i = 0; i < sizeof(struct Sprite) * MAX_SPRITES; i++)
-    {
-        *dest = *src;
-        src++;
-        dest++;
-    }
-}
-
 void ResetAllSprites(void)
 {
     u32 i;
@@ -1933,30 +1909,15 @@ static u32 UpdateFillSpanY(u32 spriteId, u32 spriteHeight, u32 top, u32 height)
     return height;
 }
 
-enum SpriteFillMode
-{
-    SPRITE_FILL_COLOR,
-    SPRITE_FILL_EXISTING_SPRITE,
-    SPRITE_FILL_PROVIDED_SPRITE,
-};
-
-union FillInput
-{
-    u32 color;
-    u32 *spriteSrc;
-};
-
 #define CURRENT_SPRITE_POS ((spriteY / 8) * spriteWidth + spriteX + spriteY % 8)
 #define BITS_PER_PIXEL 4
 #define PIXELS_PER_TILE 8
 
-static void FillSpriteRect(u32 spriteId, u32 left, u32 top, u32 width, u32 height, enum SpriteFillMode mode, union FillInput input)
+static void FillSpriteRect(u32 spriteId, u32 left, u32 top, u32 width, u32 height, bool32 isColor, u32 color)
 {
     //  Check if area spans more than 1 sprite
     u32 spriteWidth = GetSpriteWidth(&gSprites[spriteId]);
     u32 spriteHeight = GetSpriteHeight(&gSprites[spriteId]);
-    u32 color = 0;
-    bool32 isColor = FALSE;
 
     // Bit masks for fast modulus division, this is posible
     // since all posible values for the sprite
@@ -1966,21 +1927,10 @@ static void FillSpriteRect(u32 spriteId, u32 left, u32 top, u32 width, u32 heigh
 
     u32 *src = NULL;
 
-    switch (mode)
-    {
-    case SPRITE_FILL_COLOR:
-        color = input.color * 0x11111111;
-        isColor = TRUE;
-        break;
-    case SPRITE_FILL_EXISTING_SPRITE:
+    if (isColor)
+        color *= 0x11111111;
+    else
         src = GetSrcPtrFromSprite(&gSprites[spriteId]);
-        isColor = FALSE;
-        break;
-    case SPRITE_FILL_PROVIDED_SPRITE:
-        src = input.spriteSrc;
-        isColor = FALSE;
-        break;
-    }
 
     //  Check if only one sprite is being filled
     if (left + width > spriteWidth || top + height > spriteHeight)
@@ -2038,65 +1988,43 @@ static void FillSpriteRect(u32 spriteId, u32 left, u32 top, u32 width, u32 heigh
             dstMask = ~srcMask;
         }
 
-        if (currWidth == PIXELS_PER_TILE)
+        for (u32 row = 0; row < height; row++)
         {
-            //  Separate out the case that doesn't need to mask the pixels
-            for (u32 row = 0; row < height; row++)
+            u32 spriteX = (currStart - (currStart % PIXELS_PER_TILE)) & widthMask;
+            u32 spriteY = (top + row) & heightMask;
+            if (currWidth == PIXELS_PER_TILE)
             {
-                u32 spriteX = (currStart - (currStart % PIXELS_PER_TILE)) & widthMask;
-                u32 spriteY = (top + row) & heightMask;
+                // Full tiles do not need to read or mask the destination.
                 if (isColor)
                     tiles[CURRENT_SPRITE_POS] = color;
                 else
                     tiles[CURRENT_SPRITE_POS] = src[CURRENT_SPRITE_POS];
-
-                if (row == height - 1)
-                {
-                    currSpriteId = spriteId;
-                    tiles = (u32 *)((OBJ_VRAM0) + gSprites[currSpriteId].oam.tileNum * TILE_SIZE_4BPP);
-                    if (!isColor)
-                        src = GetSrcPtrFromSprite(&gSprites[currSpriteId]);
-                }
-                else if (((top + row) & heightMask) == heightMask)
-                {
-                    //  Switch sprite along Y-axis
-                    currSpriteId = gSprites[currSpriteId].nextY;
-                    tiles = (u32 *)((OBJ_VRAM0) + gSprites[currSpriteId].oam.tileNum * TILE_SIZE_4BPP);
-                    if (!isColor)
-                        src = GetSrcPtrFromSprite(&gSprites[currSpriteId]);
-                }
             }
-        }
-        else
-        {
-            //  Mask these since it's needed
-            for (u32 row = 0; row < height; row++)
+            else
             {
-                u32 spriteX = (currStart - (currStart % PIXELS_PER_TILE)) & widthMask;
-                u32 spriteY = (top + row) & heightMask;
                 u32 orig = tiles[CURRENT_SPRITE_POS] & dstMask;
                 u32 new;
                 if (isColor)
                     new = color & srcMask;
                 else
                     new = src[CURRENT_SPRITE_POS] & srcMask;
-
                 tiles[CURRENT_SPRITE_POS] = orig | new;
-                if (row == height - 1)
-                {
-                    currSpriteId = spriteId;
-                    tiles = (u32 *)((OBJ_VRAM0) + gSprites[currSpriteId].oam.tileNum * TILE_SIZE_4BPP);
-                    if (!isColor)
-                        src = GetSrcPtrFromSprite(&gSprites[currSpriteId]);
-                }
-                else if (((top + row) & heightMask) == heightMask)
-                {
-                    //  Switch sprite along Y-axis
-                    currSpriteId = gSprites[currSpriteId].nextY;
-                    tiles = (u32 *)((OBJ_VRAM0) + gSprites[currSpriteId].oam.tileNum * TILE_SIZE_4BPP);
-                    if (!isColor)
-                        src = GetSrcPtrFromSprite(&gSprites[currSpriteId]);
-                }
+            }
+
+            if (row == height - 1)
+            {
+                currSpriteId = spriteId;
+                tiles = (u32 *)((OBJ_VRAM0) + gSprites[currSpriteId].oam.tileNum * TILE_SIZE_4BPP);
+                if (!isColor)
+                    src = GetSrcPtrFromSprite(&gSprites[currSpriteId]);
+            }
+            else if (((top + row) & heightMask) == heightMask)
+            {
+                //  Switch sprite along Y-axis
+                currSpriteId = gSprites[currSpriteId].nextY;
+                tiles = (u32 *)((OBJ_VRAM0) + gSprites[currSpriteId].oam.tileNum * TILE_SIZE_4BPP);
+                if (!isColor)
+                    src = GetSrcPtrFromSprite(&gSprites[currSpriteId]);
             }
         }
 
@@ -2112,23 +2040,12 @@ static void FillSpriteRect(u32 spriteId, u32 left, u32 top, u32 width, u32 heigh
 
 void FillSpriteRectColor(u32 spriteId, u32 left, u32 top, u32 width, u32 height, u32 color)
 {
-    union FillInput input;
-    input.color = color;
-    FillSpriteRect(spriteId, left, top, width, height, SPRITE_FILL_COLOR, input);
+    FillSpriteRect(spriteId, left, top, width, height, TRUE, color);
 }
 
 void FillSpriteRectSprite(u32 spriteId, u32 left, u32 top, u32 width, u32 height)
 {
-    union FillInput input;
-    input.spriteSrc = NULL;
-    FillSpriteRect(spriteId, left, top, width, height, SPRITE_FILL_EXISTING_SPRITE, input);
-}
-
-void FillSpriteRectSpriteWithSprite(u32 spriteId, u32 left, u32 top, u32 width, u32 height, u32 *sprite)
-{
-    union FillInput input;
-    input.spriteSrc = sprite;
-    FillSpriteRect(spriteId, left, top, width, height, SPRITE_FILL_PROVIDED_SPRITE, input);
+    FillSpriteRect(spriteId, left, top, width, height, FALSE, 0);
 }
 
 static void StorePointerInSpriteData(struct Sprite *sprite, const u32 *ptr)

@@ -290,7 +290,6 @@ void SetWirelessCommType1(void);
 void CheckShouldAdvanceLinkState(void);
 void SetCloseLinkCallback(void);
 bool8 HandleLinkConnection(void);
-void SetLinkDebugValues(u32 seed, u32 flags);
 void SetBerryBlenderLinkCallback(void);
 void SetSuppressLinkErrorMessage(bool8 flag);
 void ConvertLinkPlayerName(struct LinkPlayer *player);
@@ -305,10 +304,8 @@ void SetWirelessCommType0(void);
 bool32 IsLinkRecvQueueAtOverworldMax(void);
 
 extern u16 gLinkPartnersHeldKeys[6];
-extern u32 gLinkDebugSeed;
 extern struct LinkPlayerBlock gLocalLinkPlayerBlock;
 extern bool8 gLinkErrorOccurred;
-extern u32 gLinkDebugFlags;
 extern bool8 gRemoteLinkPlayersNotReceived[MAX_LINK_PLAYERS];
 extern u8 gBlockReceivedStatus[MAX_LINK_PLAYERS];
 extern u16 gLinkHeldKeys;

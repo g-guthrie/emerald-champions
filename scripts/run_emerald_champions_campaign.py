@@ -192,6 +192,51 @@ def parse_map_ids() -> dict[str, int]:
     return {name: (int(group) << 8) | int(number) for name, number, group in rows}
 
 
+def parse_item_constants(compiler: str) -> dict[str, int]:
+    """Let C resolve the actual item enum, including generated members and aliases."""
+    command = [compiler, "-E", "-P", "-Iinclude", "-include", "constants/items.h", "-x", "c", "/dev/null"]
+    expanded = subprocess.run(command, cwd=ROOT, text=True, capture_output=True, check=False)
+    if expanded.returncode != 0:
+        fail("failed to preprocess campaign item enum:\n" + expanded.stderr)
+    enum = re.search(r"enum\b[^{};]*\bItem\s*\{([^}]+)\}", expanded.stdout, re.S)
+    if enum is None:
+        fail("campaign constants lack enum Item")
+    names = re.findall(r"(?:^|,)\s*(ITEM_[A-Z0-9_]+)\s*(?==|,|$)", enum[1])
+    if not names or len(names) != len(set(names)):
+        fail("campaign item enum has missing or duplicate members")
+    source = '#include <stdio.h>\n#include "constants/items.h"\nint main(void) {\n'
+    source += ''.join(f'printf("{name} %u\\n", (unsigned){name});\n' for name in names)
+    source += 'return 0; }\n'
+    with tempfile.TemporaryDirectory(prefix="ec-campaign-items-") as directory:
+        executable = Path(directory) / "items"
+        built = subprocess.run([compiler, "-Iinclude", "-x", "c", "-", "-o", str(executable)],
+                               cwd=ROOT, input=source, text=True, capture_output=True, check=False)
+        if built.returncode != 0:
+            fail("failed to resolve campaign item enum:\n" + built.stderr)
+        result = subprocess.run([str(executable)], text=True, capture_output=True, check=True)
+    values = {name: int(value) for name, value in (line.split() for line in result.stdout.splitlines())}
+    if set(values) != set(names):
+        fail("campaign item constant output is incomplete")
+    return values
+
+
+def trainer_defeat_flag_aliases(
+    trainer_ids: dict[str, int], flag_start: int, flag_end: int, declared_names: set[str],
+) -> dict[str, int]:
+    """Test-only aliases for the production trainer flag offset, not game declarations."""
+    if flag_end < flag_start:
+        fail("invalid reserved trainer flag range")
+    aliases = {}
+    for name, trainer_id in trainer_ids.items():
+        if trainer_id <= 0 or trainer_id > flag_end - flag_start:
+            continue
+        alias = f"FLAG_DEFEATED_{name}"
+        if alias in declared_names:
+            fail(f"derived trainer flag alias collides with a declaration: {alias}")
+        aliases[alias] = flag_start + trainer_id
+    return aliases
+
+
 def parse_numeric_constants() -> dict[str, int]:
     """Resolve the configured flag, variable, and direction constants."""
     compiler = shutil.which("cc") or shutil.which("clang") or shutil.which("gcc")
@@ -253,6 +298,16 @@ def parse_numeric_constants() -> dict[str, int]:
                 evaluate(name)
             except (SyntaxError, ValueError):
                 pass
+    # Only authored opponent IDs qualify; trainers.h also declares unrelated IDs.
+    opponent_names = re.findall(
+        r"^#define\s+(TRAINER_[A-Z0-9_]+)\s+",
+        (ROOT / "include/constants/opponents.h").read_text(), re.M,
+    )
+    trainer_ids = {name: evaluate(name) for name in opponent_names if name in expressions}
+    resolved.update(trainer_defeat_flag_aliases(
+        trainer_ids, evaluate("TRAINER_FLAGS_START"), evaluate("TRAINER_FLAGS_END"), set(expressions),
+    ))
+    resolved.update(parse_item_constants(compiler))
     return resolved
 
 
@@ -287,7 +342,7 @@ def load_manifest(path: Path) -> dict[str, object]:
         expected = segment.get("expected", {})
         if not isinstance(expected, dict):
             fail(f"{segment['id']}: expected must be an object")
-        for field in ("flags", "vars"):
+        for field in ("flags", "vars", "items"):
             if field in expected and not isinstance(expected[field], dict):
                 fail(f"{segment['id']}: expected.{field} must be an object")
         prior.add(segment["id"])
@@ -350,7 +405,7 @@ def validate_manifest_symbols(
         map_name = expected.get("map")
         if map_name is not None and map_name not in map_ids:
             fail(f"{segment['id']}: unknown map {map_name}")
-        for field, prefix in (("flags", "FLAG_"), ("vars", "VAR_")):
+        for field, prefix in (("flags", "FLAG_"), ("vars", "VAR_"), ("items", "ITEM_")):
             for name, wanted in expected.get(field, {}).items():
                 if not isinstance(name, str) or not name.startswith(prefix) or name not in constants:
                     fail(f"{segment['id']}: unknown {field[:-1]} constant {name}")
@@ -358,6 +413,8 @@ def validate_manifest_symbols(
                     fail(f"{segment['id']}: flag assertion {name} must be boolean")
                 if field == "vars" and not isinstance(wanted, int):
                     fail(f"{segment['id']}: variable assertion {name} must be an integer")
+                if field == "items" and (type(wanted) is not int or not 0 <= wanted <= 65535):
+                    fail(f"{segment['id']}: item assertion {name} must be an integer quantity from 0 to 65535")
 
 
 def state_metadata_path(state: Path) -> Path:
@@ -595,9 +652,15 @@ def query_campaign_value(
         writes=[
             (0, 4, addresses["gEcHeadlessCampaignQueryId"], identifier),
             (0, 4, addresses["gEcHeadlessCampaignQueryKind"], kind),
+            # Old fixture ROMs do not implement item queries. Poison the reply
+            # so an unchanged earlier flag/var result cannot become item proof.
+            *([(0, 4, addresses["gEcHeadlessCampaignQueryValue"], 0xFFFFFFFF)] if kind == 4 else []),
         ],
     )
-    return telemetry["gEcHeadlessCampaignQueryValue"], telemetry
+    value = telemetry["gEcHeadlessCampaignQueryValue"]
+    if kind == 4 and value == 0xFFFFFFFF:
+        fail("fixture ROM did not answer native item quantity query")
+    return value, telemetry
 
 
 def query_campaign_object(
@@ -662,10 +725,27 @@ def apply_semantic_actions(
         with adaptive_trace_path.open("a") as handle:
             handle.write(json.dumps(row, sort_keys=True) + "\n")
 
+    def capture(name: str, *, transient: bool = False) -> None:
+        nonlocal telemetry
+        if not re.fullmatch(r"[A-Za-z0-9_-]+", name):
+            fail(f"{segment['id']}: invalid screenshot name {name!r}")
+        shot = screenshot_dir / f"{name}.png"
+        telemetry, _ = run_state_chunk(
+            runner=runner, rom=rom, state=state, addresses=addresses,
+            frames=1, screenshot=shot,
+        )
+        row = {"action": f"screenshot:{name}", "path": str(shot), "after": telemetry.copy(), "transient": transient}
+        trace.append(row)
+        with adaptive_trace_path.open("a") as handle:
+            handle.write(json.dumps(row, sort_keys=True) + "\n")
+
     for index, action in enumerate(segment.get("semantic_actions", [])):
         if not isinstance(action, dict) or not isinstance(action.get("type"), str):
             fail(f"{segment['id']}: semantic action {index} must have a type")
         action_type = action["type"]
+        observe_action = action_type in ("press", "step", "interact_object", "interact_tile")
+        if observe_action:
+            capture(f"review-action-{index}-before", transient=True)
         if action_type == "press":
             keys = action.get("keys")
             if not isinstance(keys, list) or not keys:
@@ -693,6 +773,11 @@ def apply_semantic_actions(
                 )
             for press in range(int(action.get("max_presses", 40))):
                 advance(f"dialogue-A-{press + 1}", int(action.get("frames_per_press", 90)), "A")
+                capture_name = action.get("capture_presses", {}).get(str(press + 1))
+                if capture_name is None and press in (0, 2, 5, 11):
+                    capture_name = f"review-dialogue-{index}-{press + 1}"
+                if capture_name is not None:
+                    capture(str(capture_name), transient=True)
                 if is_stable_overworld(telemetry):
                     advance("dialogue-stability-confirm", int(action.get("settle_frames", 30)))
                     if is_stable_overworld(telemetry):
@@ -730,7 +815,8 @@ def apply_semantic_actions(
             direction = str(action.get("direction", "")).upper()
             if direction not in directions:
                 fail(f"{segment['id']}: invalid facing direction {direction}")
-            advance(f"face:{direction}", int(action.get("frames", 24)), direction)
+            if telemetry["gEcHeadlessCampaignPlayerFacing"] != directions[direction][2]:
+                advance(f"face:{direction}", int(action.get("frames", 24)), direction)
             if telemetry["gEcHeadlessCampaignPlayerFacing"] != directions[direction][2]:
                 fail(f"{segment['id']}: failed to face {direction}")
         elif action_type == "step":
@@ -743,6 +829,7 @@ def apply_semantic_actions(
                 telemetry["gEcHeadlessCampaignPlayerX"],
                 telemetry["gEcHeadlessCampaignPlayerY"],
             )
+            moved_while_turning = False
             if telemetry["gEcHeadlessCampaignPlayerFacing"] != directions[direction][2]:
                 advance(
                     f"step-face:{direction}",
@@ -754,16 +841,22 @@ def apply_semantic_actions(
                     telemetry["gEcHeadlessCampaignPlayerX"],
                     telemetry["gEcHeadlessCampaignPlayerY"],
                 )
-                if telemetry["gEcHeadlessCampaignMapId"] != start_map or faced_position != start_position:
-                    fail(f"{segment['id']}: facing phase of step {direction} displaced the player")
-                if telemetry["gEcHeadlessCampaignPlayerFacing"] != directions[direction][2]:
+                moved_while_turning = (
+                    telemetry["gEcHeadlessCampaignMapId"] != start_map
+                    or faced_position != start_position
+                )
+                if not moved_while_turning and telemetry["gEcHeadlessCampaignPlayerFacing"] != directions[direction][2]:
                     fail(f"{segment['id']}: facing phase of step {direction} did not turn the player")
-            advance(
-                f"step-move:{direction}",
-                int(action.get("move_frames", 30)),
-                direction,
-                int(action.get("move_duration", 2)),
-            )
+            # Depending on the avatar's movement state, the first input can
+            # turn and step together. Validate that result below rather than
+            # pressing again and accidentally requesting a second step.
+            if not moved_while_turning:
+                advance(
+                    f"step-move:{direction}",
+                    int(action.get("move_frames", 30)),
+                    direction,
+                    int(action.get("move_duration", 2)),
+                )
             allow_map_change = bool(action.get("allow_map_change", False))
             if allow_map_change:
                 for _ in range(int(action.get("max_transition_chunks", 20))):
@@ -821,10 +914,13 @@ def apply_semantic_actions(
                                 f"{segment['id']}: lost stable overworld walking "
                                 f"{direction} at {before} toward {target}"
                             )
+                        capture(f"walk-scene-{index}-{steps}-before", transient=True)
                         consecutive = 0
                         for interruption_press in range(
                             int(action.get("max_interruption_presses", 40))
                         ):
+                            if interruption_press in (2, 8):
+                                capture(f"walk-scene-{index}-{steps}-during-{interruption_press}", transient=True)
                             if is_stable_overworld(telemetry):
                                 advance(
                                     f"walk-interruption-stability-{interruption_press + 1}",
@@ -845,6 +941,7 @@ def apply_semantic_actions(
                                 f"{segment['id']}: battle interruption did not return "
                                 "to stable overworld"
                             )
+                        capture(f"walk-scene-{index}-{steps}-after")
                         if telemetry["gEcHeadlessCampaignBattleSerial"] <= battle_serial_before:
                             fail(
                                 f"{segment['id']}: allowed walking interruption did not "
@@ -1149,19 +1246,48 @@ def apply_semantic_actions(
                 with adaptive_trace_path.open("a") as handle:
                     handle.write(json.dumps(row, sort_keys=True) + "\n")
         elif action_type == "screenshot":
-            name = str(action.get("name", f"semantic-{index:03d}"))
-            shot = screenshot_dir / f"{name}.png"
-            telemetry, _ = run_state_chunk(
-                runner=runner, rom=rom, state=state, addresses=addresses,
-                frames=1, screenshot=shot,
-            )
-            row = {"action": f"screenshot:{name}", "path": str(shot), "after": telemetry.copy()}
-            trace.append(row)
-            with adaptive_trace_path.open("a") as handle:
-                handle.write(json.dumps(row, sort_keys=True) + "\n")
+            capture(str(action.get("name", f"semantic-{index:03d}")))
         else:
             fail(f"{segment['id']}: unknown semantic action type {action_type}")
+        if observe_action:
+            capture(f"review-action-{index}-after", transient=True)
     return telemetry, trace
+
+
+def assert_campaign_state(segment, *, telemetry, runner, rom, state, addresses, map_ids, constants):
+    """Validate native state for ordinary segments and cartridge-save imports."""
+    segment_id = str(segment['id'])
+    expected = segment.get("expected", {})
+    assertion_results: dict[str, dict[str, dict[str, object]]] = {"flags": {}, "vars": {}, "items": {}}
+    for kind_name, query_kind in (("flags", 1), ("vars", 2), ("items", 4)):
+        requested = expected.get(kind_name, {}) if isinstance(expected, dict) else {}
+        if not isinstance(requested, dict):
+            fail(f"{segment_id}: expected.{kind_name} must be an object")
+        for constant_name, wanted in requested.items():
+            if constant_name not in constants:
+                fail(f"{segment_id}: unknown {kind_name[:-1]} constant {constant_name}")
+            actual, telemetry = query_campaign_value(
+                kind=query_kind,
+                identifier=constants[constant_name],
+                runner=runner,
+                rom=rom,
+                state=state,
+                addresses=addresses,
+            )
+            wanted_value = int(wanted) if kind_name == "flags" else wanted
+            assertion_results[kind_name][constant_name] = {
+                "id": constants[constant_name],
+                "expected": wanted_value,
+                "actual": actual,
+                "passed": actual == wanted_value,
+            }
+            if actual != wanted_value:
+                fail(
+                    f"{segment_id}: expected {constant_name}={wanted_value}, observed {actual}"
+                )
+    validate_expected(segment, telemetry, map_ids)
+
+    return telemetry, assertion_results
 
 
 def run_segment(
@@ -1266,34 +1392,10 @@ def run_segment(
         )
 
     expected = segment.get("expected", {})
-    assertion_results: dict[str, dict[str, dict[str, object]]] = {"flags": {}, "vars": {}}
-    for kind_name, query_kind in (("flags", 1), ("vars", 2)):
-        requested = expected.get(kind_name, {}) if isinstance(expected, dict) else {}
-        if not isinstance(requested, dict):
-            fail(f"{segment_id}: expected.{kind_name} must be an object")
-        for constant_name, wanted in requested.items():
-            if constant_name not in constants:
-                fail(f"{segment_id}: unknown {kind_name[:-1]} constant {constant_name}")
-            actual, telemetry = query_campaign_value(
-                kind=query_kind,
-                identifier=constants[constant_name],
-                runner=runner,
-                rom=rom,
-                state=state_out,
-                addresses=addresses,
-            )
-            wanted_value = int(wanted) if kind_name == "flags" else wanted
-            assertion_results[kind_name][constant_name] = {
-                "id": constants[constant_name],
-                "expected": wanted_value,
-                "actual": actual,
-                "passed": actual == wanted_value,
-            }
-            if actual != wanted_value:
-                fail(
-                    f"{segment_id}: expected {constant_name}={wanted_value}, observed {actual}"
-                )
-    validate_expected(segment, telemetry, map_ids)
+    telemetry, assertion_results = assert_campaign_state(
+        segment, telemetry=telemetry, runner=runner, rom=rom, state=state_out,
+        addresses=addresses, map_ids=map_ids, constants=constants,
+    )
 
     if segment.get("semantic_actions"):
         telemetry, _ = run_state_chunk(
@@ -1325,6 +1427,8 @@ def run_segment(
         for row in semantic_trace
         if row["action"].startswith("screenshot:")
     )
+    transient_paths = {row["path"] for row in semantic_trace
+                       if row["action"].startswith("screenshot:") and row.get("transient") is True}
     image_rows = []
     for screenshot in dict.fromkeys(screenshots):
         if not screenshot.is_file():
@@ -1333,7 +1437,9 @@ def run_segment(
             {
                 "path": str(screenshot),
                 "png_sha256": sha256(screenshot),
-                "pixel_sha256": ui.validate_screenshot_png(screenshot),
+                "pixel_sha256": ui.validate_screenshot_png(
+                    screenshot, allow_uniform=screenshot != final_screenshot and str(screenshot) in transient_paths),
+                "transient_observation": screenshot != final_screenshot and str(screenshot) in transient_paths,
             }
         )
 
@@ -1352,11 +1458,80 @@ def run_segment(
         "watched_transitions": watched,
         "semantic_trace": semantic_trace,
         "assertions": assertion_results,
+        "expected": expected,
         "screenshots": image_rows,
         "coverage": segment.get("coverage", {}),
     }
     state_metadata_path(state_out).write_text(json.dumps(metadata, indent=2, sort_keys=True) + "\n")
     return state_out, metadata
+
+
+def validate_save_import_metadata(save, metadata, parent):
+    if metadata.get("schema_version") != 1 or metadata.get("segment") != parent:
+        fail("imported save evidence must name the selected segment's earned parent")
+    if metadata.get("save_sha256") != sha256(save):
+        fail("imported battery save differs from its earned checkpoint evidence")
+    source_rom = metadata.get("artifact_evidence", {}).get("rom", {})
+    if not re.fullmatch(r"[0-9a-f]{64}", str(metadata.get("rom_sha256", ""))):
+        fail("imported save has an invalid source-ROM identity")
+    if source_rom.get("verified_immutable") is not True or source_rom.get("snapshot_sha256") != metadata.get("rom_sha256"):
+        fail("imported save lacks finalized source-ROM provenance")
+    expected = metadata.get("expected")
+    if not isinstance(expected, dict) or not expected.get("stable_overworld") or "map" not in expected or "position" not in expected:
+        fail("imported save requires a stable, located earned checkpoint contract")
+    for kind in ("flags", "vars", "items"):
+        for name, value in expected.get(kind, {}).items():
+            recorded = metadata.get("assertions", {}).get(kind, {}).get(name, {})
+            if recorded.get("passed") is not True or recorded.get("actual") != value:
+                fail(f"imported save lacks successful earned assertion {name}")
+
+
+def import_battery_save(save_source, evidence_source, parent, *, runner, rom, addresses,
+                        scenario_id, map_ids, constants, artifact_evidence, out):
+    """Cold boot a scratch battery copy, then create a new, explicitly restored parent.
+
+    This never loads the old ROM's emulator state or writes gameplay progress.
+    The only memory write before Continue selects the test observation scenario.
+    """
+    directory = out / "native-save-import"
+    directory.mkdir(parents=True, exist_ok=True)
+    save, save_evidence = snapshot_artifact(save_source, directory / "artifacts", "save")
+    evidence, metadata_evidence = snapshot_artifact(evidence_source, directory / "artifacts", "checkpoint-evidence")
+    metadata = json.loads(evidence.read_text())
+    validate_save_import_metadata(save, metadata, parent)
+    validate_checkpoint_ancestry(parent, metadata["artifact_evidence"]["manifest"], artifact_evidence["manifest"], metadata.get("parent"))
+    state = directory / f"{parent}.ss1"
+    screenshot = directory / "native-continue.png"
+    with tempfile.TemporaryDirectory(prefix="ec-native-continue-") as temporary:
+        scratch = Path(temporary) / "earned.sav"
+        shutil.copy2(save, scratch)
+        scratch.chmod(0o600)
+        command = [str(runner), "--rom", str(rom), "--save", str(scratch), "--frames", "4000",
+                   "--rtc", "946684800", "--state-out", str(state), "--screenshot", str(screenshot),
+                   "--write", f"60:4:0x{addresses['gEcHeadlessFixtureScenario']:x}:{scenario_id}"]
+        for frame, key in ((1860, "START"), (2160, "START"), (2700, "START"), (3400, "A")):
+            command.extend(("--key", f"{frame}:2:{key}"))
+        for address in addresses.values():
+            command.extend(("--read", f"4:0x{address:x}"))
+        completed = ui.run(command)
+    telemetry = telemetry_from_stdout(completed.stdout, addresses)
+    telemetry, assertions = assert_campaign_state(
+        {"id": "native-continue", "expected": metadata["expected"]}, telemetry=telemetry,
+        runner=runner, rom=rom, state=state, addresses=addresses, map_ids=map_ids, constants=constants,
+    )
+    imported = {"kind": "native_battery_continue", "source_parent_segment": parent,
+                "source_rom_sha256": metadata["rom_sha256"], "save": verify_artifact_snapshot(save_evidence),
+                "checkpoint_evidence": verify_artifact_snapshot(metadata_evidence), "command": command,
+                "screenshot": str(screenshot), "pixel_sha256": ui.validate_screenshot_png(screenshot),
+                "assertions": assertions, "telemetry": telemetry}
+    restored = {"schema_version": 1, "segment": parent, "parent": metadata.get("parent"),
+                "rom_sha256": sha256(rom), "artifact_evidence": artifact_evidence,
+                "state": str(state), "state_sha256": sha256(state),
+                "save": str(save), "save_sha256": sha256(save), "expected": metadata["expected"],
+                "assertions": assertions, "telemetry": telemetry, "native_save_import": imported}
+    write_json_atomic(state_metadata_path(state), restored)
+    write_json_atomic(directory / "import.json", imported)
+    return state, imported
 
 
 def write_failure_bundle(
@@ -1408,9 +1583,15 @@ def main() -> int:
         "--parent-run",
         help="read missing parent checkpoints from this named targeted run",
     )
+    parser.add_argument("--import-save", type=Path, help="earned battery save to cold-boot before --start")
+    parser.add_argument("--import-evidence", type=Path, help="earned checkpoint JSON that binds the imported save")
     parser.add_argument("--list", action="store_true")
     parser.add_argument("--validate-only", action="store_true")
     args = parser.parse_args()
+    if (args.import_save is None) != (args.import_evidence is None):
+        fail("--import-save and --import-evidence must be supplied together")
+    if args.import_save is not None and (args.start is None or args.parent_run is not None or args.suite is not None):
+        fail("battery import requires --start and cannot use a parent emulator run or suite")
 
     source_manifest = ui.require_resident_file(args.manifest, "campaign playthrough manifest")
     manifest_snapshot: Path | None = None
@@ -1478,7 +1659,8 @@ def main() -> int:
     source_rom = ui.require_resident_file(args.rom, "campaign playthrough ROM")
     source_elf = ui.require_resident_file(args.elf, "campaign playthrough ELF")
     run_out.mkdir(parents=True, exist_ok=True)
-    artifact_dir = run_out / "artifacts"
+    # Named runs share immutable ROM/ELF snapshots, just like manifests.
+    artifact_dir = args.out / "artifacts"
     rom, rom_artifact = snapshot_artifact(source_rom, artifact_dir, "rom")
     elf, elf_artifact = snapshot_artifact(source_elf, artifact_dir, "elf")
     try:
@@ -1498,10 +1680,24 @@ def main() -> int:
     scenario_id = parse_scenario_id()
     trace_path = run_out / "trace.jsonl"
     trace_path.unlink(missing_ok=True)
+    imported_state = None
+    save_import = None
+    if args.import_save is not None:
+        imported_parent = selected_segments[0].get("parent")
+        if not isinstance(imported_parent, str):
+            fail("battery import requires an earned parent segment")
+        imported_state, save_import = import_battery_save(
+            args.import_save, args.import_evidence, imported_parent, runner=runner, rom=rom,
+            addresses=addresses, scenario_id=scenario_id, map_ids=map_ids, constants=constants,
+            artifact_evidence={"rom": rom_artifact, "elf": elf_artifact, "manifest": manifest_artifact}, out=run_out,
+        )
+        print(f"PASS native Continue: restored earned {imported_parent} from cartridge save")
     rows = []
     for segment in selected_segments:
         parent = segment.get("parent")
-        if parent is None:
+        if not rows and imported_state is not None:
+            state_in = imported_state
+        elif parent is None:
             state_in = None
         else:
             state_in = select_parent_checkpoint(
@@ -1568,6 +1764,8 @@ def main() -> int:
             if not full_run:
                 update_run_index(args.out / "runs" / "index.json", run_id, failure_summary)
             fail(f"{segment['id']}: failure bundle written to {failure_dir}: {error}")
+        if not rows and save_import is not None:
+            row["native_save_import"] = save_import
         rows.append(row)
         with trace_path.open("a") as trace:
             trace.write(json.dumps(row, sort_keys=True) + "\n")
@@ -1582,6 +1780,9 @@ def main() -> int:
         rom_artifact = verify_artifact_snapshot(rom_artifact)
         elf_artifact = verify_artifact_snapshot(elf_artifact)
         manifest_artifact = verify_artifact_snapshot(manifest_artifact)
+        if save_import is not None:
+            save_import["save"] = verify_artifact_snapshot(save_import["save"])
+            save_import["checkpoint_evidence"] = verify_artifact_snapshot(save_import["checkpoint_evidence"])
     except (OSError, RuntimeError) as error:
         race_summary = {
             "schema_version": 1,
@@ -1634,6 +1835,7 @@ def main() -> int:
                 "elf": str(elf),
                 "elf_sha256": elf_hash,
                 "artifact_evidence": final_artifact_evidence,
+                "native_save_import": save_import,
                 "segments": rows,
             }
     write_json_atomic(latest_run, run_payload)

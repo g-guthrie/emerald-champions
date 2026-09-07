@@ -13,7 +13,7 @@ Route110_TrickHousePuzzle4_EventScript_FoundScroll::
 	end
 
 Route110_TrickHousePuzzle4_EventScript_Cora::
-	trainerbattle_single TRAINER_CORA, Route110_TrickHousePuzzle4_Text_CoraIntro, Route110_TrickHousePuzzle4_Text_CoraDefeat
+	trainerbattle_double TRAINER_CORA, Route110_TrickHousePuzzle4_Text_CoraIntro, Route110_TrickHousePuzzle4_Text_CoraDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route110_TrickHousePuzzle4_Text_CoraPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -23,7 +23,7 @@ Route110_TrickHousePuzzle4_EventScript_Yuji::
 	end
 
 Route110_TrickHousePuzzle4_EventScript_Paula::
-	trainerbattle_single TRAINER_PAULA, Route110_TrickHousePuzzle4_Text_PaulaIntro, Route110_TrickHousePuzzle4_Text_PaulaDefeat
+	trainerbattle_double TRAINER_PAULA, Route110_TrickHousePuzzle4_Text_PaulaIntro, Route110_TrickHousePuzzle4_Text_PaulaDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route110_TrickHousePuzzle4_Text_PaulaPostBattle, MSGBOX_AUTOCLOSE
 	end
 

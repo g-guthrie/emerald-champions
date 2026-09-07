@@ -47,6 +47,9 @@ static const struct FormChange sBlastoiseFormChangeTable[] =
 #if P_FAMILY_CATERPIE
 static const struct FormChange sButterfreeFormChangeTable[] =
 {
+#if P_MEGA_EVOLUTIONS
+    {FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM, SPECIES_BUTTERFREE_MEGA, ITEM_BUTTERFRENITE},
+#endif
 #if P_GIGANTAMAX_FORMS
     {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_BUTTERFREE_GMAX},
 #endif
@@ -141,6 +144,9 @@ static const struct FormChange sAlakazamFormChangeTable[] =
 #if P_FAMILY_MACHOP
 static const struct FormChange sMachampFormChangeTable[] =
 {
+#if P_MEGA_EVOLUTIONS
+    {FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM, SPECIES_MACHAMP_MEGA, ITEM_MACHAMPITE},
+#endif
 #if P_GIGANTAMAX_FORMS
     {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_MACHAMP_GMAX},
 #endif
@@ -206,6 +212,9 @@ static const struct FormChange sSteelixFormChangeTable[] =
 #if P_FAMILY_KRABBY
 static const struct FormChange sKinglerFormChangeTable[] =
 {
+#if P_MEGA_EVOLUTIONS
+    {FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM, SPECIES_KINGLER_MEGA, ITEM_KINGLERITE},
+#endif
 #if P_GIGANTAMAX_FORMS
     {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_KINGLER_GMAX},
 #endif
@@ -280,6 +289,9 @@ static const struct FormChange sGyaradosFormChangeTable[] =
 #if P_FAMILY_LAPRAS
 static const struct FormChange sLaprasFormChangeTable[] =
 {
+#if P_MEGA_EVOLUTIONS
+    {FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM, SPECIES_LAPRAS_MEGA, ITEM_LAPRASITE},
+#endif
 #if P_GIGANTAMAX_FORMS
     {FORM_CHANGE_BATTLE_GIGANTAMAX, SPECIES_LAPRAS_GMAX},
 #endif
@@ -2181,3 +2193,39 @@ static const struct FormChange sTerapagosFormChangeTable[] =
 
 #undef WHEN_LEARNED
 #undef WHEN_FORGOTTEN
+
+#if P_FAMILY_TRAPINCH
+static const struct FormChange sFlygonFormChangeTable[] =
+{
+#if P_MEGA_EVOLUTIONS
+    {FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM, SPECIES_FLYGON_MEGA, ITEM_FLYGONITE},
+#endif
+    {FORM_CHANGE_FAINT, SPECIES_FLYGON},
+    {FORM_CHANGE_END_BATTLE, SPECIES_FLYGON},
+    {FORM_CHANGE_TERMINATOR},
+};
+#endif
+
+#if P_FAMILY_FEEBAS
+static const struct FormChange sMiloticFormChangeTable[] =
+{
+#if P_MEGA_EVOLUTIONS
+    {FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM, SPECIES_MILOTIC_MEGA, ITEM_MILOTICITE},
+#endif
+    {FORM_CHANGE_FAINT, SPECIES_MILOTIC},
+    {FORM_CHANGE_END_BATTLE, SPECIES_MILOTIC},
+    {FORM_CHANGE_TERMINATOR},
+};
+#endif
+
+#if P_FAMILY_HORSEA
+static const struct FormChange sKingdraFormChangeTable[] =
+{
+#if P_MEGA_EVOLUTIONS
+    {FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM, SPECIES_KINGDRA_MEGA, ITEM_KINGDRANITE},
+#endif
+    {FORM_CHANGE_FAINT, SPECIES_KINGDRA},
+    {FORM_CHANGE_END_BATTLE, SPECIES_KINGDRA},
+    {FORM_CHANGE_TERMINATOR},
+};
+#endif

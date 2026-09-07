@@ -6,6 +6,7 @@
 #include "battle_ai_field_statuses.h"
 #include "battle_ai_util.h"
 #include "battle_ai_main.h"
+#include "battle_ai_record.h"
 #include "battle_stat_change.h"
 #include "battle_controllers.h"
 #include "battle_factory.h"
@@ -415,7 +416,7 @@ void SetBattlerData(enum BattlerId battlerId)
     if (!BattlerHasAi(battlerId) && gAiThinkingStruct->saved[battlerId].saved)
     {
         enum Species species, illusionSpecies;
-        enum BattleSide side = GetBattlerSide(battlerId);
+        const struct AiPartyMon *aiMon = GetBattlerAiPartyMon(battlerId);
 
         // Simulate Illusion
         species = gBattleMons[battlerId].species;
@@ -432,9 +433,10 @@ void SetBattlerData(enum BattlerId battlerId)
             species = illusionSpecies;
         }
 
-        // Use the known battler's ability.
-        if (gAiPartyData->mons[side][gBattlerPartyIndexes[battlerId]].ability != ABILITY_NONE)
-            gBattleMons[battlerId].ability = gAiPartyData->mons[side][gBattlerPartyIndexes[battlerId]].ability;
+        // Temporary changes use active knowledge, not the permanent party record.
+        enum Ability recordedAbility = GetRecordedAbility(battlerId);
+        if (recordedAbility != ABILITY_NONE)
+            gBattleMons[battlerId].ability = recordedAbility;
         // Check if mon can only have one ability.
         else if (GetSpeciesAbility(species, 1) == ABILITY_NONE
                 || GetSpeciesAbility(species, 1) == GetSpeciesAbility(species, 0))
@@ -443,12 +445,12 @@ void SetBattlerData(enum BattlerId battlerId)
         else
             gBattleMons[battlerId].ability = ABILITY_NONE;
 
-        if (gAiPartyData->mons[side][gBattlerPartyIndexes[battlerId]].heldEffect == 0)
+        if (aiMon->heldEffect == 0)
             gBattleMons[battlerId].item = ITEM_NONE;
 
         for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
         {
-            if (gAiPartyData->mons[side][gBattlerPartyIndexes[battlerId]].moves[moveIndex] == 0)
+            if (GetRecordedMove(battlerId, moveIndex) == MOVE_NONE)
                 gBattleMons[battlerId].moves[moveIndex] = MOVE_NONE;
         }
     }
@@ -1827,8 +1829,8 @@ enum Ability AI_DecideKnownAbilityForTurn(enum BattlerId battlerId)
     if (knownAbility == ABILITY_NONE)
         return knownAbility;
 
-    if (gAiPartyData->mons[GetBattlerSide(battlerId)][gBattlerPartyIndexes[battlerId]].ability != ABILITY_NONE)
-        return gAiPartyData->mons[GetBattlerSide(battlerId)][gBattlerPartyIndexes[battlerId]].ability;
+    if (GetRecordedAbility(battlerId) != ABILITY_NONE)
+        return GetRecordedAbility(battlerId);
 
     // Abilities that prevent fleeing - treat as always known
     if (knownAbility == ABILITY_SHADOW_TAG || knownAbility == ABILITY_MAGNET_PULL || knownAbility == ABILITY_ARENA_TRAP)
@@ -1861,7 +1863,7 @@ enum HoldEffect AI_DecideHoldEffectForTurn(enum BattlerId battlerId)
         return holdEffect;
 
     if (!IsAiBattlerAware(battlerId) && !IsAiFlagPresent(AI_FLAG_ITEM_OMNISCIENCE))
-        holdEffect = gAiPartyData->mons[GetBattlerSide(battlerId)][gBattlerPartyIndexes[battlerId]].heldEffect;
+        holdEffect = GetBattlerAiPartyMon(battlerId)->heldEffect;
     else
         holdEffect = GetBattlerHoldEffectIgnoreNegation(battlerId);
 
@@ -3725,38 +3727,6 @@ bool32 ShouldBurn(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Abi
         return TRUE;
 }
 
-bool32 ShouldFreezeOrFrostbite(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Ability abilityDef)
-{
-    if (!B_USE_FROSTBITE)
-    {
-        if (CanBeFrozen(battlerAtk, battlerDef, abilityDef))
-        {
-            if (battlerAtk == battlerDef) // Targeting self
-                return FALSE;
-            else
-                return TRUE;
-        }
-        return FALSE;
-    }
-    else
-    {
-        // Battler can be frostbitten and has move/ability that synergizes with being frostbitten
-        if (CanBeFrozen(battlerAtk, battlerDef, abilityDef)
-            && DoesBattlerBenefitFromAllVolatileStatus(battlerDef, abilityDef))
-        {
-            if (battlerAtk == battlerDef) // Targeting self
-                return TRUE;
-            else
-                return FALSE;
-        }
-
-        if (battlerAtk == battlerDef)
-            return FALSE;
-        else
-            return TRUE;
-    }
-}
-
 bool32 ShouldParalyze(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Ability abilityDef)
 {
     // Battler can be paralyzed and has move/ability that synergizes with being paralyzed
@@ -4480,17 +4450,6 @@ bool32 PartnerMoveEffectIs(enum BattlerId battlerAtkPartner, enum Move partnerMo
     if (partnerMove != MOVE_NONE && GetMoveEffect(partnerMove) == effectCheck)
         return TRUE;
 
-    return FALSE;
-}
-
-//PARTNER_MOVE_IS_TAILWIND_TRICKROOM
-bool32 PartnerMoveIs(enum BattlerId battlerAtkPartner, enum Move partnerMove, enum Move moveCheck)
-{
-    if (!HasPartner(battlerAtkPartner))
-        return FALSE;
-
-    if (partnerMove != MOVE_NONE && partnerMove == moveCheck)
-        return TRUE;
     return FALSE;
 }
 
@@ -6379,23 +6338,11 @@ bool32 IsPartyMonPlannedToBeSwitchedInByPartner(u32 partyIndex, enum BattlerId b
 
 s32 AI_GetAdjustedStatStage(enum BattlerId battler, enum Move move, s32 stage)
 {
-    if (GetMoveEffect(move) == EFFECT_GROWTH
-     && GetAttackerWeather(gAiLogicData->holdEffects[battler], gAiLogicData->abilities[battler], AI_GetWeather()) & B_WEATHER_SUN)
-        stage = 2;
+    enum Ability ability = gAiLogicData->abilities[battler];
+    bool32 growthInSun = GetMoveEffect(move) == EFFECT_GROWTH
+        && (GetAttackerWeather(gAiLogicData->holdEffects[battler], ability, AI_GetWeather()) & B_WEATHER_SUN);
 
-    if (stage == STAT_CHANGE_FORCE_MAX)
-        stage = 12;
-
-    switch (gAiLogicData->abilities[battler])
-    {
-    case ABILITY_CONTRARY:
-        return (stage * -1);
-        break;
-    case ABILITY_SIMPLE:
-        return (stage * 2);
-    default:
-        return stage;
-    }
+    return GetAdjustedStatStage(stage, ability, growthInSun);
 }
 
 // For user and Foe

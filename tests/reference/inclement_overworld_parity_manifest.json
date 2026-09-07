@@ -7071,7 +7071,7 @@
           3
         ],
         [
-          "OBJ_EVENT_GFX_CHANSEY",
+          "OBJ_EVENT_GFX_SPECIES(CHANSEY)",
           14,
           29,
           3,
@@ -7312,20 +7312,6 @@
             null
           ],
           [
-            "OBJ_EVENT_GFX_CHANSEY",
-            14,
-            29,
-            3,
-            "MOVEMENT_TYPE_LOOK_AROUND",
-            0,
-            0,
-            "TRAINER_TYPE_NONE",
-            "0",
-            "AshenWoods_EventScript_VialChansey",
-            "FLAG_HIDE_ASHEN_WOODS_VIAL_CHANSEY",
-            "LOCALID_ASHEN_WOODS_VIAL_CHANSEY"
-          ],
-          [
             "OBJ_EVENT_GFX_COOK",
             19,
             39,
@@ -7436,6 +7422,20 @@
             "AshenWoods_EventScript_Alannah",
             "0",
             null
+          ],
+          [
+            "OBJ_EVENT_GFX_SPECIES(CHANSEY)",
+            14,
+            29,
+            3,
+            "MOVEMENT_TYPE_LOOK_AROUND",
+            0,
+            0,
+            "TRAINER_TYPE_NONE",
+            "0",
+            "AshenWoods_EventScript_VialChansey",
+            "FLAG_HIDE_ASHEN_WOODS_VIAL_CHANSEY",
+            "LOCALID_ASHEN_WOODS_VIAL_CHANSEY"
           ]
         ],
         "coord_events_classification": "adapted",
@@ -39784,7 +39784,7 @@
           0
         ],
         [
-          "OBJ_EVENT_GFX_CHANSEY",
+          "OBJ_EVENT_GFX_SPECIES(CHANSEY)",
           12,
           29,
           3,
@@ -39979,20 +39979,6 @@
             null
           ],
           [
-            "OBJ_EVENT_GFX_CHANSEY",
-            12,
-            29,
-            3,
-            "MOVEMENT_TYPE_LOOK_AROUND",
-            0,
-            0,
-            "TRAINER_TYPE_NONE",
-            "0",
-            "JaggedPass_EventScript_VialChansey",
-            "FLAG_HIDE_JAGGED_PASS_VIAL_CHANSEY",
-            "LOCALID_JAGGED_PASS_VIAL_CHANSEY"
-          ],
-          [
             "OBJ_EVENT_GFX_CYCLING_TRIATHLETE_M",
             18,
             25,
@@ -40103,6 +40089,20 @@
             "JaggedPass_EventScript_Autumn",
             "0",
             null
+          ],
+          [
+            "OBJ_EVENT_GFX_SPECIES(CHANSEY)",
+            12,
+            29,
+            3,
+            "MOVEMENT_TYPE_LOOK_AROUND",
+            0,
+            0,
+            "TRAINER_TYPE_NONE",
+            "0",
+            "JaggedPass_EventScript_VialChansey",
+            "FLAG_HIDE_JAGGED_PASS_VIAL_CHANSEY",
+            "LOCALID_JAGGED_PASS_VIAL_CHANSEY"
           ]
         ],
         "coord_events_classification": "exact",
@@ -40995,7 +40995,7 @@
           12,
           3,
           "MAP_LAVARIDGE_TOWN_GYM_B1F",
-          23
+          0
         ],
         [
           12,
@@ -41030,7 +41030,7 @@
           6,
           3,
           "MAP_LAVARIDGE_TOWN_GYM_B1F",
-          21
+          23
         ],
         [
           2,
@@ -41409,7 +41409,43 @@
             null
           ]
         ]
-      }
+      },
+      "reviewed_warp_adaptations": [
+        {
+          "source": [
+            14,
+            6,
+            3,
+            "MAP_LAVARIDGE_TOWN_GYM_B1F",
+            21
+          ],
+          "current": [
+            14,
+            6,
+            3,
+            "MAP_LAVARIDGE_TOWN_GYM_B1F",
+            23
+          ],
+          "reason": "Connect the final upper-right drop to the isolated lower chamber and its vent to Flannery; natural route and structural reachability audited in work/campaign-playthrough/resume-2026-09-05/tuned/gym-routing."
+        },
+        {
+          "source": [
+            12,
+            12,
+            3,
+            "MAP_LAVARIDGE_TOWN_GYM_B1F",
+            23
+          ],
+          "current": [
+            12,
+            12,
+            3,
+            "MAP_LAVARIDGE_TOWN_GYM_B1F",
+            0
+          ],
+          "reason": "The leader-room exit returns to the entrance-side basement vent, completing the route out of the previously isolated room pair."
+        }
+      ]
     },
     "LavaridgeTown_Gym_B1F": {
       "layout": "LAYOUT_LAVARIDGE_TOWN_GYM_B1F",
@@ -82625,8 +82661,8 @@
             "MOVEMENT_TYPE_WALK_DOWN_AND_UP",
             0,
             1,
-            "TRAINER_TYPE_NORMAL",
-            "3",
+            "TRAINER_TYPE_NONE",
+            "0",
             "Route103_EventScript_Andrew",
             "0",
             null
@@ -82681,8 +82717,8 @@
             "MOVEMENT_TYPE_FACE_UP",
             1,
             1,
-            "TRAINER_TYPE_NORMAL",
-            "2",
+            "TRAINER_TYPE_NONE",
+            "0",
             "Route103_EventScript_Marcos",
             "0",
             null
@@ -82723,8 +82759,8 @@
             "MOVEMENT_TYPE_WALK_DOWN_AND_UP",
             1,
             3,
-            "TRAINER_TYPE_NORMAL",
-            "5",
+            "TRAINER_TYPE_NONE",
+            "0",
             "Route103_EventScript_Isabelle",
             "0",
             null
@@ -82737,8 +82773,8 @@
             "MOVEMENT_TYPE_WALK_UP_AND_DOWN",
             1,
             3,
-            "TRAINER_TYPE_NORMAL",
-            "5",
+            "TRAINER_TYPE_NONE",
+            "0",
             "Route103_EventScript_Pete",
             "0",
             null
@@ -85149,8 +85185,8 @@
             "MOVEMENT_TYPE_WALK_LEFT_AND_RIGHT",
             7,
             0,
-            "TRAINER_TYPE_NORMAL",
-            "3",
+            "TRAINER_TYPE_NONE",
+            "0",
             "Route105_EventScript_Dominik",
             "0",
             null
@@ -85622,8 +85658,8 @@
             "MOVEMENT_TYPE_WALK_LEFT_AND_RIGHT",
             4,
             0,
-            "TRAINER_TYPE_NORMAL",
-            "3",
+            "TRAINER_TYPE_NONE",
+            "0",
             "Route106_EventScript_Douglas",
             "0",
             null
@@ -85960,8 +85996,8 @@
             "MOVEMENT_TYPE_WALK_IN_PLACE_UP",
             1,
             1,
-            "TRAINER_TYPE_NORMAL",
-            "5",
+            "TRAINER_TYPE_NONE",
+            "0",
             "Route107_EventScript_Beth",
             "0",
             null
@@ -86308,8 +86344,8 @@
             "MOVEMENT_TYPE_ROTATE_CLOCKWISE",
             0,
             0,
-            "TRAINER_TYPE_NORMAL",
-            "3",
+            "TRAINER_TYPE_NONE",
+            "0",
             "Route108_EventScript_Matthew",
             "0",
             null
@@ -86322,8 +86358,8 @@
             "MOVEMENT_TYPE_WALK_SEQUENCE_UP_LEFT_DOWN_RIGHT",
             3,
             3,
-            "TRAINER_TYPE_NORMAL",
-            "3",
+            "TRAINER_TYPE_NONE",
+            "0",
             "Route108_EventScript_Jerome",
             "0",
             null
@@ -87180,8 +87216,8 @@
             "MOVEMENT_TYPE_WALK_SLOWLY_IN_PLACE_RIGHT",
             1,
             1,
-            "TRAINER_TYPE_NORMAL",
-            "3",
+            "TRAINER_TYPE_NONE",
+            "0",
             "Route109_EventScript_Elijah",
             "0",
             null
@@ -87236,8 +87272,8 @@
             "MOVEMENT_TYPE_FACE_DOWN",
             0,
             0,
-            "TRAINER_TYPE_NORMAL",
-            "1",
+            "TRAINER_TYPE_NONE",
+            "0",
             "Route109_EventScript_Huey",
             "0",
             null
@@ -87348,8 +87384,8 @@
             "MOVEMENT_TYPE_FACE_DOWN_AND_UP",
             0,
             0,
-            "TRAINER_TYPE_NORMAL",
-            "3",
+            "TRAINER_TYPE_NONE",
+            "0",
             "Route109_EventScript_Gwen",
             "0",
             null
@@ -89056,8 +89092,8 @@
             "MOVEMENT_TYPE_FACE_DOWN",
             0,
             0,
-            "TRAINER_TYPE_NORMAL",
-            "1",
+            "TRAINER_TYPE_NONE",
+            "0",
             "Route110_EventScript_Dale",
             "0",
             null
@@ -89268,7 +89304,7 @@
             0,
             "TRAINER_TYPE_NONE",
             "0",
-            "0x0",
+            "Route110_EventScript_RivalTalk",
             "FLAG_HIDE_ROUTE_110_RIVAL",
             "LOCALID_ROUTE110_RIVAL"
           ],
@@ -94448,7 +94484,7 @@
           1
         ],
         [
-          "OBJ_EVENT_GFX_CHANSEY",
+          "OBJ_EVENT_GFX_SPECIES(CHANSEY)",
           18,
           100,
           3,
@@ -95592,20 +95628,6 @@
             null
           ],
           [
-            "OBJ_EVENT_GFX_CHANSEY",
-            18,
-            100,
-            3,
-            "MOVEMENT_TYPE_NONE",
-            2,
-            1,
-            "TRAINER_TYPE_NONE",
-            "0",
-            "0",
-            "FLAG_HIDE_ROUTE111_VIAL_CHANSEY",
-            "LOCALID_ROUTE111_VIAL_CHANSEY"
-          ],
-          [
             "OBJ_EVENT_GFX_EXPERT_F",
             13,
             113,
@@ -95865,8 +95887,8 @@
             "MOVEMENT_TYPE_FACE_LEFT_AND_RIGHT",
             0,
             0,
-            "TRAINER_TYPE_NORMAL",
-            "2",
+            "TRAINER_TYPE_NONE",
+            "0",
             "Route111_EventScript_Irene",
             "0",
             null
@@ -95921,8 +95943,8 @@
             "MOVEMENT_TYPE_ROTATE_CLOCKWISE",
             0,
             0,
-            "TRAINER_TYPE_NORMAL",
-            "3",
+            "TRAINER_TYPE_NONE",
+            "0",
             "Route111_EventScript_Becky",
             "0",
             null
@@ -95982,6 +96004,20 @@
             "GabbyAndTy_EventScript_GabbyBattle6",
             "FLAG_HIDE_ROUTE_111_GABBY_AND_TY_3",
             "LOCALID_ROUTE111_GABBY_3"
+          ],
+          [
+            "OBJ_EVENT_GFX_SPECIES(CHANSEY)",
+            18,
+            100,
+            3,
+            "MOVEMENT_TYPE_NONE",
+            2,
+            1,
+            "TRAINER_TYPE_NONE",
+            "0",
+            "0",
+            "FLAG_HIDE_ROUTE111_VIAL_CHANSEY",
+            "LOCALID_ROUTE111_VIAL_CHANSEY"
           ],
           [
             "OBJ_EVENT_GFX_VAR_0",
@@ -97630,7 +97666,7 @@
           0
         ],
         [
-          "OBJ_EVENT_GFX_CHANSEY",
+          "OBJ_EVENT_GFX_SPECIES(CHANSEY)",
           25,
           29,
           3,
@@ -98006,20 +98042,6 @@
             null
           ],
           [
-            "OBJ_EVENT_GFX_CHANSEY",
-            25,
-            29,
-            3,
-            "MOVEMENT_TYPE_FACE_DOWN",
-            1,
-            1,
-            "TRAINER_TYPE_NONE",
-            "0",
-            "0",
-            "FLAG_HIDE_ROUTE112_VIAL_CHANSEY",
-            "LOCALID_ROUTE112_VIAL_CHANSEY"
-          ],
-          [
             "OBJ_EVENT_GFX_HIKER",
             15,
             40,
@@ -98125,11 +98147,25 @@
             "MOVEMENT_TYPE_ROTATE_COUNTERCLOCKWISE",
             0,
             0,
-            "TRAINER_TYPE_NORMAL",
-            "3",
+            "TRAINER_TYPE_NONE",
+            "0",
             "Route112_EventScript_Carol",
             "0",
             null
+          ],
+          [
+            "OBJ_EVENT_GFX_SPECIES(CHANSEY)",
+            25,
+            29,
+            3,
+            "MOVEMENT_TYPE_FACE_DOWN",
+            1,
+            1,
+            "TRAINER_TYPE_NONE",
+            "0",
+            "0",
+            "FLAG_HIDE_ROUTE112_VIAL_CHANSEY",
+            "LOCALID_ROUTE112_VIAL_CHANSEY"
           ],
           [
             "OBJ_EVENT_GFX_WOMAN_2",
@@ -100780,8 +100816,8 @@
             "MOVEMENT_TYPE_LOOK_AROUND",
             0,
             0,
-            "TRAINER_TYPE_NORMAL",
-            "3",
+            "TRAINER_TYPE_NONE",
+            "0",
             "Route114_EventScript_Nancy",
             "0",
             null
@@ -102251,8 +102287,8 @@
             "MOVEMENT_TYPE_FACE_UP_AND_LEFT",
             1,
             1,
-            "TRAINER_TYPE_NORMAL",
-            "4",
+            "TRAINER_TYPE_NONE",
+            "0",
             "Route115_EventScript_Nob",
             "0",
             null
@@ -102307,8 +102343,8 @@
             "MOVEMENT_TYPE_FACE_LEFT",
             1,
             1,
-            "TRAINER_TYPE_NORMAL",
-            "4",
+            "TRAINER_TYPE_NONE",
+            "0",
             "Route115_EventScript_Helene",
             "0",
             null
@@ -102461,8 +102497,8 @@
             "MOVEMENT_TYPE_WALK_SEQUENCE_DOWN_RIGHT_UP_LEFT",
             3,
             3,
-            "TRAINER_TYPE_NORMAL",
-            "2",
+            "TRAINER_TYPE_NONE",
+            "0",
             "Route115_EventScript_Kyra",
             "0",
             null
@@ -103696,8 +103732,8 @@
             "MOVEMENT_TYPE_FACE_DOWN_AND_UP",
             0,
             0,
-            "TRAINER_TYPE_NORMAL",
-            "3",
+            "TRAINER_TYPE_NONE",
+            "0",
             "Route116_EventScript_Karen",
             "0",
             null
@@ -105260,8 +105296,8 @@
             "MOVEMENT_TYPE_WALK_RIGHT_AND_LEFT",
             8,
             0,
-            "TRAINER_TYPE_NORMAL",
-            "4",
+            "TRAINER_TYPE_NONE",
+            "0",
             "Route117_EventScript_Dylan",
             "0",
             null
@@ -106173,7 +106209,7 @@
             "MOVEMENT_TYPE_FACE_DOWN",
             0,
             0,
-            "TRAINER_TYPE_NORMAL",
+            "TRAINER_TYPE_NONE",
             "0",
             "Route118_EventScript_Wade",
             "0",
@@ -106201,8 +106237,8 @@
             "MOVEMENT_TYPE_LOOK_AROUND",
             0,
             0,
-            "TRAINER_TYPE_NORMAL",
-            "2",
+            "TRAINER_TYPE_NONE",
+            "0",
             "Route118_EventScript_Barny",
             "0",
             null
@@ -108135,8 +108171,8 @@
             "MOVEMENT_TYPE_FACE_RIGHT",
             0,
             0,
-            "TRAINER_TYPE_NORMAL",
-            "3",
+            "TRAINER_TYPE_NONE",
+            "0",
             "Route119_EventScript_Hugh",
             "0",
             null
@@ -108149,8 +108185,8 @@
             "MOVEMENT_TYPE_FACE_RIGHT",
             1,
             1,
-            "TRAINER_TYPE_NORMAL",
-            "3",
+            "TRAINER_TYPE_NONE",
+            "0",
             "Route119_EventScript_Dayton",
             "0",
             null
@@ -111442,8 +111478,8 @@
             "MOVEMENT_TYPE_FACE_UP",
             1,
             1,
-            "TRAINER_TYPE_NORMAL",
-            "3",
+            "TRAINER_TYPE_NONE",
+            "0",
             "Route120_EventScript_Callie",
             "0",
             null
@@ -111624,8 +111660,8 @@
             "MOVEMENT_TYPE_FACE_RIGHT",
             0,
             0,
-            "TRAINER_TYPE_NORMAL",
-            "3",
+            "TRAINER_TYPE_NONE",
+            "0",
             "Route120_EventScript_Robert",
             "0",
             null
@@ -111694,8 +111730,8 @@
             "MOVEMENT_TYPE_MOUNTAIN_DISGUISE",
             1,
             1,
-            "TRAINER_TYPE_NORMAL",
-            "3",
+            "TRAINER_TYPE_NONE",
+            "0",
             "Route120_EventScript_Keigo",
             "0",
             null
@@ -111708,8 +111744,8 @@
             "MOVEMENT_TYPE_TREE_DISGUISE",
             1,
             1,
-            "TRAINER_TYPE_NORMAL",
-            "3",
+            "TRAINER_TYPE_NONE",
+            "0",
             "Route120_EventScript_Riley",
             "0",
             null
@@ -113603,8 +113639,8 @@
             "MOVEMENT_TYPE_FACE_LEFT",
             0,
             0,
-            "TRAINER_TYPE_NORMAL",
-            "4",
+            "TRAINER_TYPE_NONE",
+            "0",
             "Route121_EventScript_Vanessa",
             "0",
             null
@@ -115603,8 +115639,8 @@
             "MOVEMENT_TYPE_FACE_DOWN",
             0,
             0,
-            "TRAINER_TYPE_NORMAL",
-            "4",
+            "TRAINER_TYPE_NONE",
+            "0",
             "Route123_EventScript_Kindra",
             "0",
             null
@@ -115743,8 +115779,8 @@
             "MOVEMENT_TYPE_TREE_DISGUISE",
             1,
             1,
-            "TRAINER_TYPE_NORMAL",
-            "1",
+            "TRAINER_TYPE_NONE",
+            "0",
             "Route123_EventScript_Jonas",
             "0",
             null
@@ -117107,8 +117143,8 @@
             "MOVEMENT_TYPE_LOOK_AROUND",
             5,
             0,
-            "TRAINER_TYPE_NORMAL",
-            "3",
+            "TRAINER_TYPE_NONE",
+            "0",
             "Route124_EventScript_Spencer",
             "0",
             null
@@ -117121,8 +117157,8 @@
             "MOVEMENT_TYPE_WALK_RIGHT_AND_LEFT",
             7,
             0,
-            "TRAINER_TYPE_NORMAL",
-            "2",
+            "TRAINER_TYPE_NONE",
+            "0",
             "Route124_EventScript_Chad",
             "0",
             null
@@ -117135,8 +117171,8 @@
             "MOVEMENT_TYPE_WALK_IN_PLACE_RIGHT",
             5,
             3,
-            "TRAINER_TYPE_NORMAL",
-            "7",
+            "TRAINER_TYPE_NONE",
+            "0",
             "Route124_EventScript_Roland",
             "0",
             null
@@ -117684,8 +117720,8 @@
             "MOVEMENT_TYPE_WALK_SEQUENCE_RIGHT_DOWN_LEFT_UP",
             9,
             9,
-            "TRAINER_TYPE_NORMAL",
-            "3",
+            "TRAINER_TYPE_NONE",
+            "0",
             "Route125_EventScript_Sharon",
             "0",
             null
@@ -117726,8 +117762,8 @@
             "MOVEMENT_TYPE_WALK_RIGHT_AND_LEFT",
             0,
             0,
-            "TRAINER_TYPE_NORMAL",
-            "2",
+            "TRAINER_TYPE_NONE",
+            "0",
             "Route125_EventScript_Nolen",
             "0",
             null
@@ -118129,8 +118165,8 @@
             "MOVEMENT_TYPE_WALK_IN_PLACE_LEFT",
             1,
             1,
-            "TRAINER_TYPE_NORMAL",
-            "7",
+            "TRAINER_TYPE_NONE",
+            "0",
             "Route126_EventScript_Isobel",
             "0",
             null
@@ -118185,8 +118221,8 @@
             "MOVEMENT_TYPE_WALK_IN_PLACE_RIGHT",
             1,
             1,
-            "TRAINER_TYPE_NORMAL",
-            "7",
+            "TRAINER_TYPE_NONE",
+            "0",
             "Route126_EventScript_Leonardo",
             "0",
             null
@@ -118543,7 +118579,7 @@
             "MOVEMENT_TYPE_FACE_LEFT",
             1,
             1,
-            "TRAINER_TYPE_NORMAL",
+            "TRAINER_TYPE_NONE",
             "0",
             "Route127_EventScript_Jonah",
             "0",
@@ -118627,8 +118663,8 @@
             "MOVEMENT_TYPE_FACE_LEFT",
             1,
             1,
-            "TRAINER_TYPE_NORMAL",
-            "2",
+            "TRAINER_TYPE_NONE",
+            "0",
             "Route127_EventScript_Aidan",
             "0",
             null
@@ -119092,7 +119128,7 @@
             "MOVEMENT_TYPE_FACE_UP",
             1,
             1,
-            "TRAINER_TYPE_NORMAL",
+            "TRAINER_TYPE_NONE",
             "0",
             "Route128_EventScript_Wayne",
             "0",
@@ -120581,7 +120617,7 @@
       "warps": [],
       "objects": [
         [
-          "OBJ_EVENT_GFX_CHANSEY",
+          "OBJ_EVENT_GFX_SPECIES(CHANSEY)",
           70,
           7,
           3,
@@ -120863,20 +120899,6 @@
         ],
         "current_objects": [
           [
-            "OBJ_EVENT_GFX_CHANSEY",
-            70,
-            7,
-            3,
-            "MOVEMENT_TYPE_FACE_LEFT",
-            2,
-            0,
-            "TRAINER_TYPE_NONE",
-            "0",
-            "Route133_EventScript_VialChansey",
-            "FLAG_HIDE_ROUTE133_VIAL_NURSE",
-            "LOCALID_ROUTE133_VIAL_CHANSEY"
-          ],
-          [
             "OBJ_EVENT_GFX_EXPERT_F",
             56,
             11,
@@ -120989,6 +121011,20 @@
             "LOCALID_ROUTE133_VIAL_NURSE"
           ],
           [
+            "OBJ_EVENT_GFX_SPECIES(CHANSEY)",
+            70,
+            7,
+            3,
+            "MOVEMENT_TYPE_FACE_LEFT",
+            2,
+            0,
+            "TRAINER_TYPE_NONE",
+            "0",
+            "Route133_EventScript_VialChansey",
+            "FLAG_HIDE_ROUTE133_VIAL_NURSE",
+            "LOCALID_ROUTE133_VIAL_CHANSEY"
+          ],
+          [
             "OBJ_EVENT_GFX_SWIMMER_F",
             13,
             3,
@@ -121024,8 +121060,8 @@
             "MOVEMENT_TYPE_WALK_UP_AND_DOWN",
             0,
             2,
-            "TRAINER_TYPE_NORMAL",
-            "3",
+            "TRAINER_TYPE_NONE",
+            "0",
             "Route133_EventScript_Franklin",
             "0",
             null
@@ -121344,8 +121380,8 @@
             "MOVEMENT_TYPE_WALK_LEFT_AND_RIGHT",
             6,
             0,
-            "TRAINER_TYPE_NORMAL",
-            "5",
+            "TRAINER_TYPE_NONE",
+            "0",
             "Route134_EventScript_Hitoshi",
             "0",
             null

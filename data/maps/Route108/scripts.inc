@@ -2,13 +2,11 @@ Route108_MapScripts::
 	.byte 0
 
 Route108_EventScript_Jerome::
-	trainerbattle_single TRAINER_JEROME, Route108_Text_JeromeIntro, Route108_Text_JeromeDefeated
-	msgbox Route108_Text_JeromePostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route108_Text_JEROME_LocalConversation, MSGBOX_NPC
 	end
 
 Route108_EventScript_Matthew::
-	trainerbattle_double TRAINER_MATTHEW, Route108_Text_MatthewIntro, Route108_Text_MatthewDefeated, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route108_Text_MatthewPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route108_Text_MATTHEW_LocalConversation, MSGBOX_NPC
 	end
 
 Route108_EventScript_Tara::
@@ -17,17 +15,17 @@ Route108_EventScript_Tara::
 	end
 
 Route108_EventScript_Missy::
-	trainerbattle_single TRAINER_MISSY, Route108_Text_MissyIntro, Route108_Text_MissyDefeated
+	trainerbattle_double TRAINER_MISSY, Route108_Text_MissyIntro, Route108_Text_MissyDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route108_Text_MissyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route108_EventScript_Carolina::
-	trainerbattle_single TRAINER_CAROLINA, Route108_Text_CarolinaIntro, Route108_Text_CarolinaDefeated
+	trainerbattle_double TRAINER_CAROLINA, Route108_Text_CarolinaIntro, Route108_Text_CarolinaDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route108_Text_CarolinaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route108_EventScript_Cory::
-	trainerbattle_single TRAINER_CORY_1, Route108_Text_CoryIntro, Route108_Text_CoryDefeated, Route108_EventScript_CoryRegisterMatchCallAfterBattle
+	trainerbattle_double TRAINER_CORY_1, Route108_Text_CoryIntro, Route108_Text_CoryDefeated, EmeraldChampions_Text_NeedTwoPokemon, Route108_EventScript_CoryRegisterMatchCallAfterBattle
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route108_EventScript_CoryRematch
 	msgbox Route108_Text_CoryPostBattle, MSGBOX_DEFAULT
@@ -43,7 +41,15 @@ Route108_EventScript_CoryRegisterMatchCallAfterBattle::
 	end
 
 Route108_EventScript_CoryRematch::
-	trainerbattle_rematch TRAINER_CORY_1, Route108_Text_CoryRematchIntro, Route108_Text_CoryRematchDefeated
+	trainerbattle_rematch_double TRAINER_CORY_1, Route108_Text_CoryRematchIntro, Route108_Text_CoryRematchDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route108_Text_CoryRematchPostBattle, MSGBOX_AUTOCLOSE
 	end
 
+
+Route108_Text_JEROME_LocalConversation:
+	.string "I counted every wave out here.\n"
+	.string "Then somebody used SURF.$"
+
+Route108_Text_MATTHEW_LocalConversation:
+	.string "MANTINE makes this look easy.\n"
+	.string "I would also like some wings.$"

@@ -2,6 +2,7 @@
 #include "pokemon.h"
 #include "battle.h"
 #include "daycare.h"
+#include "legendary_signs.h"
 #include "string_util.h"
 #include "caps.h"
 #include "mail.h"
@@ -418,12 +419,6 @@ static u16 PrepareDaycareCostStringForMon(struct DayCare *daycare, u8 slotId)
 void GetDaycareCostAndPrepareString(void)
 {
     gSpecialVar_0x8005 = PrepareDaycareCostStringForMon(&gSaveBlock1Ptr->daycare, gSpecialVar_0x8004);
-}
-
-static void UNUSED Debug_AddDaycareSteps(u16 numSteps)
-{
-    gSaveBlock1Ptr->daycare.mons[0].steps += numSteps;
-    gSaveBlock1Ptr->daycare.mons[1].steps += numSteps;
 }
 
 u8 GetNumLevelsGainedFromDaycare(void)
@@ -1259,6 +1254,11 @@ u8 GetDaycareCompatibilityScore(struct DayCare *daycare)
         eggGroups[i][1] = gSpeciesInfo[species[i]].eggGroups[1];
     }
 
+    if (!IsLegendarySignUnlocked(LEGENDARY_SIGN_PHIONE)
+     && (species[0] == SPECIES_MANAPHY || species[1] == SPECIES_MANAPHY
+      || species[0] == SPECIES_PHIONE || species[1] == SPECIES_PHIONE))
+        return PARENTS_INCOMPATIBLE;
+
     // Manaphy is the one Mythical that breeds a distinct species with Ditto.
     // The species calculation already yields Phione; allow that native pair
     // through the otherwise-correct Undiscovered egg-group gate.
@@ -1325,6 +1325,18 @@ void SetDaycareCompatibilityString(void)
     u8 relationshipScore;
 
     relationshipScore = GetDaycareCompatibilityScoreFromSave();
+    if (!IsLegendarySignUnlocked(LEGENDARY_SIGN_PHIONE))
+    {
+        for (u32 i = 0; i < DAYCARE_MON_COUNT; i++)
+        {
+            enum Species species = GetBoxMonData(&gSaveBlock1Ptr->daycare.mons[i].mon, MON_DATA_SPECIES);
+            if (species == SPECIES_MANAPHY || species == SPECIES_PHIONE)
+            {
+                StringCopy(gStringVar4, COMPOUND_STRING("These Pokémon may hold PHIONE's secret.\pFirst, ask the dream researcher on\nDEVON CORP.'s second floor in RUSTBORO\lto translate PHIONE's Legendary Sign."));
+                return;
+            }
+        }
+    }
     whichString = 0;
     if (relationshipScore == PARENTS_INCOMPATIBLE)
         whichString = 3;

@@ -1,12 +1,4 @@
 TOOLCHAIN := $(DEVKITARM)
-COMPARE ?= 0
-
-# don't use dkP's base_tools anymore
-# because the redefinition of $(CC) conflicts
-# with when we want to use $(CC) to preprocess files
-# thus, manually create the variables for the bin
-# files, or use arm-none-eabi binaries on the system
-# if dkP is not installed on this system
 
 ifneq (,$(TOOLCHAIN))
 ifneq ($(wildcard $(TOOLCHAIN)/bin),)
@@ -15,37 +7,8 @@ endif
 endif
 
 PREFIX := arm-none-eabi-
-OBJCOPY := $(PREFIX)objcopy
 AS := $(PREFIX)as
-LD := $(PREFIX)ld
 AR := $(PREFIX)ar
-
-# note: the makefile must be set up so MODERNCC is never called
-# if MODERN=0
-MODERNCC := $(PREFIX)gcc
-
-ifeq ($(OS),Windows_NT)
-EXE := .exe
-else
-EXE :=
-endif
-
-# use arm-none-eabi-cpp for macOS
-# as macOS's default compiler is clang
-# and clang's preprocessor will warn on \u
-# when preprocessing asm files, expecting a unicode literal
-# we can't unconditionally use arm-none-eabi-cpp
-# as installations which install binutils-arm-none-eabi
-# don't come with it
-ifneq ($(MODERN),1)
-  ifeq ($(shell uname -s),Darwin)
-    CPP := $(PREFIX)cpp
-  else
-    CPP := $(CC) -E
-  endif
-else
-  CPP := $(PREFIX)cpp
-endif
 
 ASFLAGS := -mcpu=arm7tdmi
 ARFLAGS := rc
@@ -95,20 +58,38 @@ SYSCALLS := IntrWait \
             RLUnCompVram
 
 ASM_SRCS := libagbsyscall.s
+ASM_INCLUDES := ../constants/gba_constants.inc ../asm/macros/function.inc
 ASM_OBJS := $(foreach syscall, $(SYSCALLS), $(syscall).o)
 
 LIB := libagbsyscall.a
 
-.PHONY: all clean
+.DELETE_ON_ERROR:
+.PHONY: all clean FORCE
 
 all: $(LIB)
 	@:
 
 clean:
-	rm -f $(LIB) $(ASM_OBJS)
+	rm -f $(LIB) $(ASM_OBJS) $(ASM_CONFIG) $(AR_CONFIG)
 
-$(LIB): $(ASM_OBJS)
-	$(AR) $(ARFLAGS) $@ $^
+# Track effective commands independently so archive-only changes do not assemble.
+ASM_CONFIG := .assembly-config.json
+AR_CONFIG := .archive-config.json
+CONFIG_HELPER := ../scripts/update_build_config.py
+shell_quote = '$(subst ','"'"',$(1))'
+ASSEMBLE = $(AS) $(ASFLAGS) --defsym L_$(*F)=1 -o $@ $<
+ARCHIVE = rm -f $@ && $(AR) $(ARFLAGS) $@ $(ASM_OBJS)
 
-$(ASM_OBJS): libagbsyscall.s
-	$(AS) $(ASFLAGS) --defsym L_$(*F)=1 -o $@ $<
+$(ASM_CONFIG): FORCE
+	@python3 $(CONFIG_HELPER) $@ --tool=$(call shell_quote,$(AS)) --value=$(call shell_quote,$(ASFLAGS)) --value=$(call shell_quote,$(value ASSEMBLE)) $(foreach input,$(ASM_INCLUDES),--file=$(call shell_quote,$(input)))
+
+$(AR_CONFIG): FORCE
+	@python3 $(CONFIG_HELPER) $@ --tool=$(call shell_quote,$(AR)) --value=$(call shell_quote,$(ARFLAGS)) --value=$(call shell_quote,$(value ARCHIVE)) --value=$(call shell_quote,$(ASM_OBJS))
+
+FORCE:
+
+$(LIB): $(ASM_OBJS) $(AR_CONFIG)
+	$(ARCHIVE)
+
+$(ASM_OBJS): libagbsyscall.s $(ASM_INCLUDES) $(ASM_CONFIG)
+	$(ASSEMBLE)

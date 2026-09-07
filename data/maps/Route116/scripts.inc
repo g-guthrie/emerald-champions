@@ -238,7 +238,7 @@ Route116_EventScript_Jose::
 	end
 
 Route116_EventScript_Jerry::
-	trainerbattle_single TRAINER_JERRY_1, Route116_Text_JerryIntro, Route116_Text_JerryDefeat, Route116_EventScript_TryRegisterJerryAfterBattle
+	trainerbattle_double TRAINER_JERRY_1, Route116_Text_JerryIntro, Route116_Text_JerryDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route116_EventScript_TryRegisterJerryAfterBattle
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route116_EventScript_RematchJerry
 	setvar VAR_0x8004, TRAINER_JERRY_1
@@ -274,7 +274,7 @@ Route116_EventScript_RegisterJerry::
 	end
 
 Route116_EventScript_RematchJerry::
-	trainerbattle_rematch TRAINER_JERRY_1, Route116_Text_JerryRematchIntro, Route116_Text_JerryRematchDefeat
+	trainerbattle_rematch_double TRAINER_JERRY_1, Route116_Text_JerryRematchIntro, Route116_Text_JerryRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route116_Text_JerryPostRematch, MSGBOX_AUTOCLOSE
 	end
 
@@ -289,14 +289,7 @@ Route116_EventScript_Janice::
 	end
 
 Route116_EventScript_Karen::
-	trainerbattle_double TRAINER_KAREN_1, Route116_Text_KarenIntro, Route116_Text_KarenDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route116_EventScript_TryRegisterKarenAfterBattle
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route116_EventScript_RematchKaren
-	setvar VAR_0x8004, TRAINER_KAREN_1
-	specialvar VAR_RESULT, IsTrainerRegistered
-	goto_if_eq VAR_RESULT, FALSE, Route116_EventScript_TryRegisterKaren
-	msgbox Route116_Text_KarenPostBattle, MSGBOX_DEFAULT
-	release
+	msgbox Route116_Text_KAREN_1_LocalConversation, MSGBOX_NPC
 	end
 
 Route116_EventScript_TryRegisterKarenAfterBattle::
@@ -325,8 +318,7 @@ Route116_EventScript_RegisterKaren::
 	end
 
 Route116_EventScript_RematchKaren::
-	trainerbattle_rematch_double TRAINER_KAREN_1, Route116_Text_KarenRematchIntro, Route116_Text_KarenRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route116_Text_KarenPostRematch, MSGBOX_AUTOCLOSE
+	msgbox Route116_Text_KAREN_1_LocalConversation, MSGBOX_NPC
 	end
 
 Route116_EventScript_Sarah::
@@ -335,7 +327,7 @@ Route116_EventScript_Sarah::
 	end
 
 Route116_EventScript_Dawson::
-	trainerbattle_single TRAINER_DAWSON, Route116_Text_DawsonIntro, Route116_Text_DawsonDefeat
+	trainerbattle_double TRAINER_DAWSON, Route116_Text_DawsonIntro, Route116_Text_DawsonDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route116_Text_DawsonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -467,3 +459,7 @@ Route116_Text_TrainerTipsBagHasPockets:
 	.string "placed in the appropriate POCKETS.\p"
 	.string "No TRAINER can afford to be without\n"
 	.string "a BAG of their own.$"
+
+Route116_Text_KAREN_1_LocalConversation:
+	.string "I studied type matchups all night.\n"
+	.string "The quiz was on geography.$"

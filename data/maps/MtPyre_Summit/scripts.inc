@@ -176,12 +176,16 @@ MtPyre_Summit_EventScript_OldManNewTale::
 MtPyre_Summit_EventScript_LegendarySign::
 	goto_if_unset FLAG_RECEIVED_RED_OR_BLUE_ORB, MtPyre_Summit_EventScript_LegendarySignReturn
 	special TryUnlockDarkraiLegendarySign
+	goto_if_eq VAR_RESULT, 6, Common_EventScript_LegendaryNeedsDevon
+	goto_if_eq VAR_RESULT, 5, Common_EventScript_LegendaryDefeatedAtShrine
 	goto_if_eq VAR_RESULT, 0, MtPyre_Summit_EventScript_DarkraiNeedsTrainers
 	goto_if_eq VAR_RESULT, 1, MtPyre_Summit_EventScript_DarkraiNeedsMusharna
 	goto_if_eq VAR_RESULT, 2, MtPyre_Summit_EventScript_DarkraiAwakened
 	goto_if_eq VAR_RESULT, 3, MtPyre_Summit_EventScript_DarkraiAwaits
 	setvar VAR_0x8004, LEGENDARY_SIGN_CRESSELIA_ID
 	special TryUnlockSelectedLegendarySign
+	goto_if_eq VAR_RESULT, 6, Common_EventScript_LegendaryNeedsDevon
+	goto_if_eq VAR_RESULT, 5, Common_EventScript_LegendaryDefeatedAtShrine
 	goto_if_eq VAR_RESULT, 2, MtPyre_Summit_EventScript_CresseliaAwakened
 	goto_if_eq VAR_RESULT, 4, MtPyre_Summit_EventScript_TryDialgaSign
 	msgbox MtPyre_Summit_Text_CresseliaAwaits, MSGBOX_DEFAULT
@@ -191,6 +195,8 @@ MtPyre_Summit_EventScript_TryDialgaSign::
 	goto_if_unset FLAG_SYS_GAME_CLEAR, MtPyre_Summit_EventScript_TimeSignDormant
 	setvar VAR_0x8004, LEGENDARY_SIGN_DIALGA_ID
 	special TryUnlockSelectedLegendarySign
+	goto_if_eq VAR_RESULT, 6, Common_EventScript_LegendaryNeedsDevon
+	goto_if_eq VAR_RESULT, 5, Common_EventScript_LegendaryDefeatedAtShrine
 	goto_if_eq VAR_RESULT, 2, MtPyre_Summit_EventScript_DialgaAwakened
 	goto_if_eq VAR_RESULT, 4, MtPyre_Summit_EventScript_DreamChainComplete
 	msgbox MtPyre_Summit_Text_DialgaAwaits, MSGBOX_DEFAULT
@@ -231,23 +237,25 @@ MtPyre_Summit_EventScript_LegendarySignReturn::
 
 MtPyre_Summit_EventScript_Darkrai::
 	lock
-	setvar VAR_0x8004, LEGENDARY_SIGN_DARKRAI_ID
-	special GetSelectedLegendarySignState
+	special TryUnlockDarkraiLegendarySign
+	goto_if_eq VAR_RESULT, 6, Common_EventScript_LegendaryNeedsDevon
+	goto_if_eq VAR_RESULT, 5, Common_EventScript_LegendaryDefeatedAtShrine
 	goto_if_eq VAR_RESULT, 0, MtPyre_Summit_EventScript_DarkraiDormant
-	goto_if_eq VAR_RESULT, 2, MtPyre_Summit_EventScript_DarkraiQuiet
+	goto_if_eq VAR_RESULT, 1, MtPyre_Summit_EventScript_DarkraiDormant
+	goto_if_eq VAR_RESULT, 4, MtPyre_Summit_EventScript_DarkraiQuiet
 	waitse
 	playmoncry SPECIES_DARKRAI, CRY_MODE_ENCOUNTER
 	delay 40
 	waitmoncry
 	setvar VAR_0x8004, LEGENDARY_SIGN_DARKRAI_ID
+	msgbox gText_LegendaryOneShotWarning, MSGBOX_DEFAULT
 	special CreateSelectedLegendarySignEncounter
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, MtPyre_Summit_EventScript_DarkraiCaught
-	msgbox MtPyre_Summit_Text_DarkraiRemains, MSGBOX_DEFAULT
-	release
+	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_LegendaryDefeatedAtShrine
+	goto MtPyre_Summit_EventScript_DarkraiCaught
 	end
 
 MtPyre_Summit_EventScript_DarkraiCaught::
@@ -265,8 +273,10 @@ MtPyre_Summit_EventScript_DarkraiQuiet::
 	end
 
 MtPyre_Summit_Text_DarkraiDormant:
-	.string "The summit air is still. A black SIGN\n"
-	.string "has not yet accepted your challenge.$"
+	.string "The black SIGN is still. Complete all\n"
+	.string "Trainer battles within MT. PYRE.\p"
+	.string "Return with MUSHARNA's family after\n"
+	.string "DEVON translates DARKRAI's Sign.$"
 
 MtPyre_Summit_Text_DarkraiQuiet:
 	.string "The nightmare has lifted. The black\n"
@@ -275,12 +285,15 @@ MtPyre_Summit_Text_DarkraiQuiet:
 MtPyre_Summit_Text_DarkraiNeedsTrainers:
 	.string "A Legendary Sign stains this peak.\p"
 	.string "Face every Trainer within Mt. Pyre,\n"
-	.string "then return with MUSHARNA.$"
+	.string "then take MUSHARNA to DEVON CORP. 2F.\p"
+	.string "Have the dream researcher in RUSTBORO\n"
+	.string "translate DARKRAI's Sign, then return.$"
 
 MtPyre_Summit_Text_DarkraiNeedsMusharna:
 	.string "Every spirit here acknowledges you.\p"
 	.string "But the Sign answers only a dream.\n"
-	.string "Return with MUSHARNA.$"
+	.string "Bring MUSHARNA's family to DEVON's\n"
+	.string "dream researcher, then return here.$"
 
 MtPyre_Summit_Text_DarkraiAwakened:
 	.string "The Legendary Sign has awakened!\p"
@@ -291,9 +304,6 @@ MtPyre_Summit_Text_DarkraiAwaits:
 	.string "Nightmare mist still gathers around\n"
 	.string "the summit's black mark.$"
 
-MtPyre_Summit_Text_DarkraiRemains:
-	.string "The nightmare Sign still waits.\n"
-	.string "DARKRAI will await your return.$"
 
 MtPyre_Summit_Text_CresseliaAwakened:
 	.string "DARKRAI's capture completes one\n"
@@ -334,6 +344,7 @@ MtPyre_Summit_EventScript_OldLadyAfterEmblem::
 	goto_if_set FLAG_RETURNED_RED_OR_BLUE_ORB, MtPyre_Summit_EventScript_OldLadyAfterOrbsReturned
 	call_if_ge VAR_MT_PYRE_STATE, 3, MtPyre_Summit_EventScript_OldLadyOrbsReturned
 	goto_if_set FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN, MtPyre_Summit_EventScript_OldLadyLegendariesAwake
+	goto_if_set FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT, MtPyre_Summit_EventScript_OldLadyAfterMagma
 	msgbox MtPyre_Summit_Text_OrbsHaveBeenTaken, MSGBOX_DEFAULT
 	release
 	end
@@ -685,7 +696,12 @@ MtPyre_Summit_Text_BothOrbsTakenMagmaLeftThis:
 	.string "The CHAMPION'S SIGNS are that seal's\n"
 	.string "outer pattern, spread across HOENN.\p"
 	.string "MAGMA dropped this EMBLEM in its haste.\n"
-	.string "Take it. You may need every path open.$"
+	.string "Take it to their hideout in JAGGED PASS.\p"
+	.string "Use ROUTE 112's cable car to MT. CHIMNEY.\n"
+	.string "Then descend the pass. Carry the EMBLEM\l"
+	.string "near the odd boulder on its east side.\p"
+	.string "It may open the way. Stop MAGMA before\n"
+	.string "they break what the ORBS protected.$"
 
 MtPyre_Summit_Text_MagmaEmblemSentToPC:
 	.string "Your KEY ITEMS pocket is full, so the\n"
@@ -703,7 +719,12 @@ MtPyre_Summit_Text_OrbsHaveBeenTaken:
 	.string "With the ORBS apart, land and sea will\n"
 	.string "pull against the same ancient network.\p"
 	.string "Only the guardian of the sky ever stood\n"
-	.string "outside that struggle.$"
+	.string "outside that struggle.\p"
+	.string "Take the MAGMA EMBLEM to JAGGED PASS.\n"
+	.string "Use ROUTE 112's cable car to MT. CHIMNEY.\l"
+	.string "Then go down to the strange boulder.\p"
+	.string "Find MAGMA's hideout before they undo\n"
+	.string "the seal.$"
 
 MtPyre_Summit_Text_GroudonKyogreAwakened:
 	.string "Oh, my goodness…\p"
@@ -786,3 +807,14 @@ MtPyre_Summit_Text_HoennTrioTale:
 	.string "kind of Champion that Trainer becomes.\p"
 	.string "On the sixth floor, a broken-world mark\n"
 	.string "now sketches DUSKNOIR.$"
+
+MtPyre_Summit_EventScript_OldLadyAfterMagma::
+	msgbox MtPyre_Summit_Text_OrbsApart, MSGBOX_DEFAULT
+	release
+	end
+
+MtPyre_Summit_Text_OrbsApart:
+	.string "With the ORBS apart, land and sea will\n"
+	.string "pull against the same ancient network.\p"
+	.string "Only the guardian of the sky ever stood\n"
+	.string "outside that struggle.$"

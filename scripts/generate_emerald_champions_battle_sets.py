@@ -40,9 +40,20 @@ SHOWDOWN_SINGLES_SOURCE = ROOT / "data/emerald_champions/showdown_champions_rand
 SHOWDOWN_GEN9_SINGLES_SOURCE = ROOT / "data/emerald_champions/showdown_gen9_random_singles.json"
 
 
+def load_hand_audited_source() -> dict:
+    """Load the complete canonical hand-audited owner catalog."""
+    source = json.loads(HAND_AUDITED_SOURCE.read_text())
+    assert source["schema_version"] == 1
+    assert source["review_order"] == list(source["species"])
+    assert len(source["species"]) == 1309
+    assert sum("inherits_species" not in review for review in source["species"].values()) == 1204
+    assert sum("inherits_species" in review for review in source["species"].values()) == 105
+    return source
+
+
 def load_hand_audited_catalog() -> dict:
     """Load explicit reviews and resolve only named, mechanically identical aliases."""
-    source = json.loads(HAND_AUDITED_SOURCE.read_text())
+    source = load_hand_audited_source()
     assert source["schema_version"] == 1
     assert source["review_order"] == list(source["species"])
     resolved = {}
@@ -614,28 +625,6 @@ SUPPLEMENTAL_DEFAULT_OVERRIDES = {
     ),
 }
 
-SUPPLEMENTAL_ALTERNATIVE_OVERRIDES = {
-    ("SPECIES_FLYGON", "Bulky Attacker"): authored_modern_set(
-        "SPECIES_FLYGON",
-        "Bulky Attacker",
-        ["MOVE_PROTECT", "MOVE_SCALE_SHOT", "MOVE_TAILWIND", "MOVE_EARTHQUAKE"],
-        "NATURE_JOLLY",
-        "ABILITY_LEVITATE",
-        "ITEM_YACHE_BERRY",
-        [2, 32, 0, 0, 0, 32],
-        "Yache physical attacker and Tailwind setter",
-    ),
-    ("SPECIES_HITMONCHAN", "Fake Out Control"): authored_modern_set(
-        "SPECIES_HITMONCHAN",
-        "Fake Out Control",
-        ["MOVE_FAKE_OUT", "MOVE_HELPING_HAND", "MOVE_DRAIN_PUNCH", "MOVE_PROTECT"],
-        "NATURE_JOLLY",
-        "ABILITY_IRON_FIST",
-        "ITEM_SITRUS_BERRY",
-        [32, 0, 2, 0, 0, 32],
-        "distinct doubles Fake Out and Drain Punch control role",
-    ),
-}
 
 # Source-backed sets still need an executable review after import.  These are
 # narrowly scoped corrections for configurations that cannot perform their
@@ -644,70 +633,20 @@ SUPPLEMENTAL_ALTERNATIVE_OVERRIDES = {
 AUDITED_SET_FIELD_OVERRIDES = {
     # Preserve support bulk while putting otherwise wasted offensive Stat
     # Points into HP on fast, damage-independent doubles utility sets.
-    ("SPECIES_GOLBAT", "Recommended"): {"stat_points": [32, 0, 2, 0, 0, 32]},
-    ("SPECIES_HITMONCHAN", "Recommended"): {"ability": "ABILITY_BLITZ_BOXER"},
-    ("SPECIES_METAPOD", "Tempo Control"): {"nature": "NATURE_JOLLY"},
-    ("SPECIES_HITMONCHAN", "Fake Out Control"): {
-        "moves": ["MOVE_FAKE_OUT", "MOVE_HELPING_HAND", "MOVE_DRAIN_PUNCH", "MOVE_PROTECT"],
-        "ability": "ABILITY_IRON_FIST",
-        "role": "distinct doubles Fake Out and Drain Punch control role",
-    },
-    ("SPECIES_CHIMCHAR", "Fake Out Control"): {
-        "moves": ["MOVE_FAKE_OUT", "MOVE_HELPING_HAND", "MOVE_FIRE_PUNCH", "MOVE_PROTECT"],
-    },
-    ("SPECIES_MONFERNO", "Fake Out Control"): {
-        "moves": ["MOVE_FAKE_OUT", "MOVE_HELPING_HAND", "MOVE_DRAIN_PUNCH", "MOVE_PROTECT"],
-    },
-    ("SPECIES_GOLETT", "Tempo Control"): {
-        "moves": ["MOVE_ICY_WIND", "MOVE_HELPING_HAND", "MOVE_SHADOW_PUNCH", "MOVE_PROTECT"],
-    },
-    ("SPECIES_CRABRAWLER", "Wide Guard Support"): {
-        "moves": ["MOVE_WIDE_GUARD", "MOVE_HELPING_HAND", "MOVE_DRAIN_PUNCH", "MOVE_PROTECT"],
-    },
-    ("SPECIES_LEDIAN", "Recommended"): {"stat_points": [32, 0, 2, 0, 0, 32]},
-    ("SPECIES_MISDREAVUS", "Recommended"): {"stat_points": [32, 0, 2, 0, 0, 32]},
-    ("SPECIES_RIOLU", "Recommended"): {"stat_points": [32, 0, 2, 0, 0, 32]},
-    ("SPECIES_LIEPARD", "Recommended"): {"stat_points": [32, 0, 2, 0, 0, 32]},
-    ("SPECIES_COTTONEE", "Recommended"): {"stat_points": [32, 0, 2, 0, 0, 32]},
-    ("SPECIES_SOLOSIS", "Recommended"): {"stat_points": [32, 0, 16, 0, 18, 0]},
-    ("SPECIES_DEDENNE", "Recommended"): {"stat_points": [32, 0, 2, 0, 0, 32]},
-    ("SPECIES_NOIBAT", "Recommended"): {"stat_points": [32, 0, 2, 0, 0, 32]},
     ("SPECIES_TOGEDEMARU", "Recommended"): {"stat_points": [32, 0, 2, 0, 0, 32]},
-    ("SPECIES_SCATTERBUG", "Recommended"): {
-        "moves": ["MOVE_RAGE_POWDER", "MOVE_STUN_SPORE", "MOVE_STRING_SHOT", "MOVE_PROTECT"],
-    },
     ("SPECIES_DACHSBUN", "Doubles Support"): {"nature": "NATURE_CAREFUL"},
-    ("SPECIES_SKIDDO", "Recommended"): {
-        "moves": ["MOVE_BULK_UP", "MOVE_HORN_LEECH", "MOVE_STOMPING_TANTRUM", "MOVE_PROTECT"],
-    },
     ("SPECIES_GIMMIGHOUL_ROAMING", "Recommended"): {
         "name": "Dual Screens",
         "moves": ["MOVE_SHADOW_BALL", "MOVE_REFLECT", "MOVE_LIGHT_SCREEN", "MOVE_PROTECT"],
         "item": "ITEM_LIGHT_CLAY",
         "role": "Fast dual-screen support",
     },
-    ("SPECIES_SLIGGOO_HISUI", "Shelter Press"): {
-        "name": "Curse Tank",
-        "moves": ["MOVE_HEAVY_SLAM", "MOVE_BODY_SLAM", "MOVE_CURSE", "MOVE_PROTECT"],
-        "stat_points": [32, 32, 2, 0, 0, 0],
-        "role": "Eviolite Curse physical win condition",
-    },
-    ("SPECIES_ROTOM_FROST", "Recommended"): {
-        "moves": ["MOVE_BLIZZARD", "MOVE_THUNDERBOLT", "MOVE_ELECTROWEB", "MOVE_PROTECT"],
-    },
-    ("SPECIES_ROTOM_FAN", "Recommended"): {
-        "moves": ["MOVE_AIR_SLASH", "MOVE_THUNDERBOLT", "MOVE_ELECTROWEB", "MOVE_PROTECT"],
-    },
 
     # Abilities whose activation condition was impossible in the authored
     # orientation are replaced by a legal, useful Ability for that role.
-    ("SPECIES_EXEGGUTOR_ALOLA", "Recommended"): {"ability": "ABILITY_FRISK"},
-    ("SPECIES_GOODRA", "Special Attacker II"): {"ability": "ABILITY_GOOEY"},
-    ("SPECIES_GOURGEIST", "Trick Room"): {"ability": "ABILITY_INSOMNIA"},
 
     # White Herb must have a trigger; Clear Amulet is Groudon's coherent
     # physical setup item, while Drednaw's set was missing Shell Smash.
-    ("SPECIES_GROUDON", "Recommended"): {"item": "ITEM_CLEAR_AMULET"},
     ("SPECIES_DREDNAW", "Bulky Setup"): {
         "name": "Shell Smash",
         "moves": ["MOVE_SHELL_SMASH", "MOVE_ROCK_SLIDE", "MOVE_LIQUIDATION", "MOVE_PROTECT"],
@@ -717,33 +656,6 @@ AUDITED_SET_FIELD_OVERRIDES = {
     # Choice and Assault Vest roles cannot select Protect.  Each replacement
     # is in the species' current authored learnable pool and preserves the
     # role rather than changing the item to conceal the contradiction.
-    ("SPECIES_DODRIO", "Wallbreaker"): {
-        "moves": ["MOVE_DOUBLE_EDGE", "MOVE_QUICK_ATTACK", "MOVE_BRAVE_BIRD", "MOVE_KNOCK_OFF"],
-    },
-    ("SPECIES_LANTURN", "Bulky Attacker"): {
-        "moves": ["MOVE_VOLT_SWITCH", "MOVE_SCALD", "MOVE_ICE_BEAM", "MOVE_ELECTROWEB"],
-    },
-    ("SPECIES_TYRANITAR", "Choice Attacker"): {
-        "moves": ["MOVE_ROCK_SLIDE", "MOVE_LOW_KICK", "MOVE_ICE_PUNCH", "MOVE_CRUNCH"],
-    },
-    ("SPECIES_FLOATZEL", "Wallbreaker"): {
-        "moves": ["MOVE_AQUA_JET", "MOVE_CLOSE_COMBAT", "MOVE_GIGA_IMPACT", "MOVE_FLIP_TURN"],
-    },
-    ("SPECIES_ELECTIVIRE", "Bulky Attacker"): {
-        "moves": ["MOVE_ELECTROWEB", "MOVE_ICE_PUNCH", "MOVE_WILD_CHARGE", "MOVE_STOMPING_TANTRUM"],
-    },
-    ("SPECIES_ROTOM", "Choice Attacker"): {
-        "moves": ["MOVE_VOLT_SWITCH", "MOVE_THUNDERBOLT", "MOVE_DISCHARGE", "MOVE_TRICK"],
-    },
-    ("SPECIES_BASCULIN", "Wallbreaker"): {
-        "moves": ["MOVE_FLIP_TURN", "MOVE_PSYCHIC_FANGS", "MOVE_AQUA_JET", "MOVE_WAVE_CRASH"],
-    },
-    ("SPECIES_TERRAKION", "Wallbreaker"): {
-        "moves": ["MOVE_CLOSE_COMBAT", "MOVE_ROCK_SLIDE", "MOVE_STONE_EDGE", "MOVE_HIGH_HORSEPOWER"],
-    },
-    ("SPECIES_FLOETTE", "Choice Attacker"): {
-        "moves": ["MOVE_MOONBLAST", "MOVE_DAZZLING_GLEAM", "MOVE_ENERGY_BALL", "MOVE_PSYCHIC"],
-    },
     ("SPECIES_BRUXISH", "Choice Attacker"): {
         "moves": ["MOVE_CRUNCH", "MOVE_PSYCHIC_FANGS", "MOVE_LIQUIDATION", "MOVE_ICE_FANG"],
     },
@@ -761,12 +673,6 @@ AUDITED_SET_FIELD_OVERRIDES = {
     },
 
     # This was the only real attack-category allocation reversal.
-    ("SPECIES_KINGDRA", "Setup Sweeper"): {
-        "name": "Rain Sweeper",
-        "nature": "NATURE_MODEST",
-        "stat_points": [2, 0, 0, 32, 0, 32],
-        "role": "Swift Swim Rain Dance special sweeper",
-    },
 
     # These three handbook roles describe Megas that now exist in the current
     # engine.  Keep them hidden until Mega access, use the transformed Ability,
@@ -809,8 +715,20 @@ def apply_hand_audited_species_sets(
     singles_alternatives: list[dict],
 ) -> tuple[list[dict], list[dict], list[dict], list[dict]]:
     """Replace reviewed species with their explicit, hand-authored catalogs."""
+    excluded_form_targets = {
+        "SPECIES_ZACIAN_CROWNED", "SPECIES_ZAMAZENTA_CROWNED",
+        "SPECIES_OGERPON_WELLSPRING", "SPECIES_OGERPON_HEARTHFLAME",
+        "SPECIES_OGERPON_CORNERSTONE",
+    }
+    # Crowned wolves and Ogerpon masks are selected through their base-owner
+    # transformation groups, never as independently generated encounter rows.
+    current_defaults = [entry for entry in defaults if entry["species"] not in excluded_form_targets]
+    current_alternatives = [entry for entry in alternatives if entry["species"] not in excluded_form_targets]
+    current_singles_defaults = [entry for entry in singles_defaults if entry["species"] not in excluded_form_targets]
+    current_singles_alternatives = [entry for entry in singles_alternatives if entry["species"] not in excluded_form_targets]
     source = load_hand_audited_catalog()
     reviewed = source["species"]
+    raw_reviewed = load_hand_audited_source()["species"]
 
     def replace(
         current_defaults: list[dict],
@@ -826,32 +744,47 @@ def apply_hand_audited_species_sets(
         output_defaults = []
         output_alternatives = []
         found = set()
+        default_species = {entry["species"] for entry in current_defaults}
+        missing_after: dict[str, list[str]] = defaultdict(list)
+        anchor_species = None
+        for species in raw_reviewed:
+            if species in default_species:
+                anchor_species = species
+            else:
+                assert anchor_species is not None, species
+                missing_after[anchor_species].append(species)
+
+        def append_reviewed(species: str) -> None:
+            choices = reviewed[species][format_name]
+            by_form = defaultdict(list)
+            for choice in choices:
+                by_form[(choice["required_item"], choice.get("required_move", "MOVE_NONE"))].append(choice)
+            if len(by_form) > 1:
+                assert all(2 <= len(form_choices) <= 4 for form_choices in by_form.values()), (
+                    species, format_name, {form: len(rows) for form, rows in by_form.items()}
+                )
+            else:
+                assert minimum <= len(choices) <= maximum, (species, format_name, len(choices))
+            assert all(entry["species"] == species for entry in choices)
+            output_defaults.append(choices[0])
+            output_alternatives.extend(choices[1:])
+            found.add(species)
+
         for default in current_defaults:
             species = default["species"]
             if species in reviewed:
-                choices = reviewed[species][format_name]
-                by_form = defaultdict(list)
-                for choice in choices:
-                    by_form[(choice["required_item"], choice.get("required_move", "MOVE_NONE"))].append(choice)
-                if len(by_form) > 1:
-                    assert all(2 <= len(form_choices) <= 4 for form_choices in by_form.values()), (
-                        species, format_name, {form: len(rows) for form, rows in by_form.items()}
-                    )
-                else:
-                    assert minimum <= len(choices) <= maximum, (species, format_name, len(choices))
-                assert all(entry["species"] == species for entry in choices)
-                output_defaults.append(choices[0])
-                output_alternatives.extend(choices[1:])
-                found.add(species)
+                append_reviewed(species)
             else:
                 output_defaults.append(default)
                 output_alternatives.extend(existing[species])
+            for missing_species in missing_after[species]:
+                append_reviewed(missing_species)
         assert found == set(reviewed), (format_name, sorted(set(reviewed) - found))
         return output_defaults, output_alternatives
 
-    defaults, alternatives = replace(defaults, alternatives, "doubles", 2, 4)
+    defaults, alternatives = replace(current_defaults, current_alternatives, "doubles", 2, 4)
     singles_defaults, singles_alternatives = replace(
-        singles_defaults, singles_alternatives, "singles", 1, 2
+        current_singles_defaults, current_singles_alternatives, "singles", 1, 2
     )
     return defaults, alternatives, singles_defaults, singles_alternatives
 
@@ -2494,6 +2427,7 @@ def render_move_access_review_c() -> str:
     assert retained
     lines = [
         "// Generated by scripts/generate_emerald_champions_battle_sets.py. Do not edit by hand.",
+        f"#define EC_REVIEWED_MOVE_ACCESS_COUNT {len(retained)}",
     ]
     lines.extend(
         f'    {{{row["species"]}, {row["move"]}}},'
@@ -2554,12 +2488,6 @@ def main() -> None:
         if entry["species"] in default_species
     )
     raw_alternatives.extend(handbook_alternatives)
-    raw_alternatives = [
-        SUPPLEMENTAL_ALTERNATIVE_OVERRIDES.get(
-            (entry["species"], entry["name"]), entry
-        )
-        for entry in raw_alternatives
-    ]
     defaults = [apply_audited_set_override(entry) for entry in defaults]
     raw_alternatives = [apply_audited_set_override(entry) for entry in raw_alternatives]
     defaults, raw_alternatives = merge_handbook_mega_roles(defaults, raw_alternatives)

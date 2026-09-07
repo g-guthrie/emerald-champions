@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -21,10 +22,19 @@ class BattleCheckpointLabTests(unittest.TestCase):
         manifest = lab.campaign.load_manifest(lab.DEFAULT_MANIFEST)
         recipes = lab.load_json(lab.DEFAULT_RECIPES)
         with tempfile.TemporaryDirectory() as raw:
-            index = lab.checkpoint_index(manifest, recipes, Path(raw))
+            root = Path(raw)
+            master = root / "data/emerald_champions/emerald_champions_master_battle_design.txt"
+            master.parent.mkdir(parents=True)
+            # Deliberately non-contiguous IDs: retiring a battle must change
+            # coverage counts without shifting later encounter identities.
+            master.write_text("=== ENCOUNTER 0001 ===\n--- BRANCH TRAINER_A ---\n"
+                              "=== ENCOUNTER 0003 ===\n--- BRANCH TRAINER_B ---\n"
+                              "--- BRANCH TRAINER_C ---\n")
+            with patch.object(lab, "ROOT", root):
+                index = lab.checkpoint_index(manifest, recipes, root / "out")
         self.assertEqual(index["campaign_trainer_encounter_count"], len(lab.trainer_segments(manifest)))
-        self.assertEqual(index["authored_scope"]["physical_encounters"], 513)
-        self.assertEqual(index["authored_scope"]["trainer_branches"], 561)
+        self.assertEqual(index["authored_scope"]["physical_encounters"], 2)
+        self.assertEqual(index["authored_scope"]["trainer_branches"], 3)
         self.assertTrue(any(row["recipe"] == "route102-calvin" for row in index["encounters"]))
 
     def test_checkpoint_validator_rejects_autowin(self) -> None:

@@ -243,31 +243,6 @@ static void FreeListMenuItems(struct ListMenuItem *items, u32 count)
     Free(items);
 }
 
-static u16 UNUSED GetLengthWithExpandedPlayerName(const u8 *str)
-{
-    u16 length = 0;
-
-    while (*str != EOS)
-    {
-        if (*str == PLACEHOLDER_BEGIN)
-        {
-            str++;
-            if (*str == PLACEHOLDER_ID_PLAYER)
-            {
-                length += StringLength(gSaveBlock2Ptr->playerName);
-                str++;
-            }
-        }
-        else
-        {
-            str++;
-            length++;
-        }
-    }
-
-    return length;
-}
-
 void MultichoiceDynamic_InitStack(u32 capacity)
 {
     AGB_ASSERT(sDynamicMultiChoiceStack == NULL);
@@ -297,12 +272,6 @@ bool32 MultichoiceDynamic_StackFull(void)
     return sDynamicMultiChoiceStack->top == sDynamicMultiChoiceStack->capacity - 1;
 }
 
-bool32 MultichoiceDynamic_StackEmpty(void)
-{
-    AGB_ASSERT(sDynamicMultiChoiceStack != NULL);
-    return sDynamicMultiChoiceStack->top == -1;
-}
-
 u32 MultichoiceDynamic_StackSize(void)
 {
     AGB_ASSERT(sDynamicMultiChoiceStack != NULL);
@@ -316,24 +285,6 @@ void MultichoiceDynamic_PushElement(struct ListMenuItem item)
     if (MultichoiceDynamic_StackFull())
         MultichoiceDynamic_ReallocStack(sDynamicMultiChoiceStack->capacity + MULTICHOICE_DYNAMIC_STACK_INC);
     sDynamicMultiChoiceStack->elements[++sDynamicMultiChoiceStack->top] = item;
-}
-
-struct ListMenuItem *MultichoiceDynamic_PopElement(void)
-{
-    if (sDynamicMultiChoiceStack == NULL)
-        return NULL;
-    if (MultichoiceDynamic_StackEmpty())
-        return NULL;
-    return &sDynamicMultiChoiceStack->elements[sDynamicMultiChoiceStack->top--];
-}
-
-struct ListMenuItem *MultichoiceDynamic_PeekElement(void)
-{
-    if (sDynamicMultiChoiceStack == NULL)
-        return NULL;
-    if (MultichoiceDynamic_StackEmpty())
-        return NULL;
-    return &sDynamicMultiChoiceStack->elements[sDynamicMultiChoiceStack->top];
 }
 
 struct ListMenuItem *MultichoiceDynamic_PeekElementAt(u32 index)

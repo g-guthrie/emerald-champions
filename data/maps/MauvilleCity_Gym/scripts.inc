@@ -79,7 +79,20 @@ MauvilleCity_Gym_EventScript_Wattson::
 	goto_if_eq VAR_RESULT, TRUE, MauvilleCity_Gym_EventScript_WattsonRematch
 	goto_if_unset FLAG_RECEIVED_WATTSON_MANECTITE, MauvilleCity_Gym_EventScript_GiveManectite2
 	goto_if_eq VAR_NEW_MAUVILLE_STATE, 2, MauvilleCity_Gym_EventScript_CompletedNewMauville
+	goto_if_set FLAG_BADGE04_GET, MauvilleCity_Gym_EventScript_WattsonJourneyContinues
+	goto_if_set FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY, MauvilleCity_Gym_EventScript_WattsonLavaridge
+	goto_if_set FLAG_MET_ARCHIE_METEOR_FALLS, MauvilleCity_Gym_EventScript_WattsonMtChimney
 	msgbox MauvilleCity_Gym_Text_WattsonPostBattle, MSGBOX_DEFAULT
+	release
+	end
+
+MauvilleCity_Gym_EventScript_WattsonMtChimney::
+	msgbox MauvilleCity_Gym_Text_WattsonMtChimney, MSGBOX_DEFAULT
+	release
+	end
+
+MauvilleCity_Gym_EventScript_WattsonLavaridge::
+	msgbox MauvilleCity_Gym_Text_WattsonLavaridge, MSGBOX_DEFAULT
 	release
 	end
 
@@ -108,6 +121,7 @@ MauvilleCity_Gym_EventScript_WattsonDefeated::
 	closemessage
 	delay 30
 	setflag FLAG_ENABLE_WATTSON_MATCH_CALL
+	msgbox MauvilleCity_Gym_Text_WattsonPostBattle, MSGBOX_DEFAULT
 	release
 	end
 
@@ -362,9 +376,25 @@ MauvilleCity_Gym_Text_RegisteredWattson:
 	.string "in the POKéNAV.$"
 
 MauvilleCity_Gym_Text_WattsonPostBattle:
-	.string "The next road runs north through ROUTE\n"
-	.string "111. My crew will wave you past the\l"
-	.string "rope. New climates demand new answers.$"
+	.string "Head north on ROUTE 111. My crew\n"
+	.string "will let you through with that BADGE.\p"
+	.string "Turn west onto ROUTE 112 and go\n"
+	.string "through FIERY PATH to ROUTE 113.\p"
+	.string "Follow it west to FALLARBOR TOWN.\n"
+	.string "Ask there about the trouble at\p"
+	.string "METEOR FALLS, down ROUTE 114.$"
+
+MauvilleCity_Gym_Text_WattsonMtChimney:
+	.string "Head north on ROUTE 111, then west\n"
+	.string "onto ROUTE 112.\p"
+	.string "Take the cable car up MT. CHIMNEY.\n"
+	.string "Stop TEAM MAGMA at the crater.$"
+
+MauvilleCity_Gym_Text_WattsonLavaridge:
+	.string "Take ROUTE 112's cable car up\n"
+	.string "MT. CHIMNEY, then descend JAGGED PASS.\p"
+	.string "That leads to LAVARIDGE TOWN.\n"
+	.string "Challenge FLANNERY at the GYM.$"
 
 MauvilleCity_Gym_Text_WattsonGoForthAndEndeavor:
 	.string "Wahahahah!\n"
@@ -407,3 +437,8 @@ MauvilleCity_Gym_Text_WattsonRematchNeedTwoMons:
 	.string "You've only one POKéMON with you!\p"
 	.string "Come see me with two or more\n"
 	.string "POKéMON, all right?$"
+
+MauvilleCity_Gym_EventScript_WattsonJourneyContinues::
+	msgbox MauvilleCity_Gym_Text_WattsonPostRematch, MSGBOX_DEFAULT
+	release
+	end

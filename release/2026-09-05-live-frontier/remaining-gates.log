@@ -1,0 +1,232 @@
+CHECK finite rewards
+PASS: 47 scripted rewards and all map TM pickups are finite progression rewards
+
+CHECK reward economy
+world_item_markers_checked stone_pickups=55
+world_mega_stone_pickups=55 unique=55
+world_pickup_flags=224 hidden_pickup_flags=113 reward_names_match
+direct_reward_flags=97 reward_names_match
+PASS: finite reward economy is coherent and one-time world Mega Stones are unique
+
+CHECK interaction rewards
+PASS: free vendor lists parsed (128 items)
+PASS: no NPC gift or pickup duplicates a free vendor held item []
+PASS: in-game trades apply the competitive preset after legacy Ability/item fields
+PASS: trade table defines INGAME_TRADE_FIDOUGH
+PASS: FIDOUGH: perfect IVs
+PASS: FIDOUGH: requested SPECIES_ZIGZAGOON is catchable
+PASS: FIDOUGH: reward SPECIES_FIDOUGH is trade-exclusive
+PASS: trade table defines INGAME_TRADE_BOMBIRDIER
+PASS: BOMBIRDIER: perfect IVs
+PASS: BOMBIRDIER: requested SPECIES_VOLBEAT is catchable
+PASS: BOMBIRDIER: reward SPECIES_BOMBIRDIER is trade-exclusive
+PASS: trade table defines INGAME_TRADE_CYCLIZAR
+PASS: CYCLIZAR: perfect IVs
+PASS: CYCLIZAR: requested SPECIES_BAGON is catchable
+PASS: CYCLIZAR: reward SPECIES_CYCLIZAR is trade-exclusive
+PASS: trade table defines INGAME_TRADE_TYPE_NULL
+PASS: TYPE_NULL: perfect IVs
+PASS: TYPE_NULL: requested SPECIES_SKITTY is catchable
+PASS: TYPE_NULL: reward SPECIES_TYPE_NULL is trade-exclusive
+PASS: trade table defines INGAME_TRADE_TROPIUS
+PASS: TROPIUS: perfect IVs
+PASS: TROPIUS: requested SPECIES_CROAGUNK is catchable
+PASS: trade table defines INGAME_TRADE_HAPPINY
+PASS: HAPPINY: perfect IVs
+PASS: HAPPINY: requested SPECIES_PYUKUMUKU is catchable
+PASS: HAPPINY: reward SPECIES_HAPPINY is trade-exclusive
+PASS: Champions Circuit victories award Battle Points
+PASS: Circuit room announces the BP award after each win
+PASS: BP exchange still sells items
+PASS: src/trainer_hill.c awards no Rare Candy
+PASS: src/battle_tent.c awards no Rare Candy
+PASS: src/lottery_corner.c awards no Rare Candy
+PASS: src/field_specials.c awards no Rare Candy
+PASS: no map script gives or sells Rare Candy []
+PASS: battle experience is disabled
+PASS: lottery no longer pays an Exp. Share
+PASS: lottery no longer pays medicine
+PASS: no NPC gives an Exp. Share []
+PASS: Trainer Hill prize tables contain no ITEM_ETHER
+PASS: Trainer Hill prize tables contain no ITEM_MAX_POTION
+PASS: Trainer Hill prize tables contain no ITEM_REVIVE
+PASS: Trainer Hill prize tables contain no ITEM_FLUFFY_TAIL
+PASS: Trick House rewards were upgraded (no Smoke Ball, Mega Stone finale)
+PASS: Rustboro flat NPC gives an evolution item instead of a free vendor item
+PASS: Catching Charm is awarded at the Safari Zone
+PASS: Oval Charm is awarded at the Day Care
+PASS: a full Bag cannot permanently lose the Day Care Oval Charm
+PASS: data/maps/AlteringCave_B1F/scripts.inc no longer holds a charm hostage until the postgame
+PASS: data/maps/CaveOfOrigin_DianciesRoom/scripts.inc no longer holds a charm hostage until the postgame
+PASS: FLAG_EC_RECEIVED_CATCHING_CHARM defined
+PASS: FLAG_EC_RECEIVED_OVAL_CHARM defined
+
+All interaction-reward checks passed
+
+CHECK authored wild distribution
+PASS: every Hoenn table has the engine's slot count []
+PASS: table variety floors hold (land 12, surf 5, fishing 7) []
+PASS: no evolved form below its evolution level []
+PASS: table levels respect access tiers []
+PASS: no species floods the region []
+PASS: route sheet covers exactly all generated water maps (sheet-only=[], map-only=[])
+PASS: all surf/fishing tables match the authored route sheet []
+PASS: no starter in Hoenn wild tables []
+PASS: legendary-class wild species all belong to the Sign system []
+PASS: trade-exclusive species stay exclusive
+PASS: runtime clamps every wild level (land/water/rocks and fishing) to the live cap
+PASS: land slot weights are the flattened 14..4 curve, got [14, 12, 11, 10, 9, 9, 8, 7, 6, 5, 5, 4]
+PASS: water and Rock Smash slot weights are the flattened 35..10 curve
+PASS: fishing slot weights are unchanged (100 per rod)
+PASS: land, water and Rock Smash slot weights each sum to 100
+PASS: Sweet Scent reverses the full slot order in every table (land/water/rocks/fishing)
+
+All wild-distribution checks passed
+
+CHECK route signs
+PASS: 32 wayfinding signs show method-grouped live encounters
+
+CHECK competitive presets
+Traceback (most recent call last):
+  File "/Users/gguthrie/Projects/Pokémon Emerald Champions/game-source/scripts/verify_emerald_champions_battle_sets.py", line 953, in <module>
+    main()
+    ~~~~^^
+  File "/Users/gguthrie/Projects/Pokémon Emerald Champions/game-source/scripts/verify_emerald_champions_battle_sets.py", line 468, in main
+    assert len(mega_archive) == 92
+           ^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+CHECK species stat rebalances
+unselected configured species count drifted
+
+CHECK upstream critical fixes
+PASS: critical upstream crash and form-change contracts without runtime coverage
+
+CHECK campaign roster
+Champions families unavailable before the League: SPECIES_ARCEUS, SPECIES_ARTICUNO, SPECIES_ARTICUNO_GALAR, SPECIES_AZELF, SPECIES_BOMBIRDIER, SPECIES_BRUTE_BONNET, SPECIES_CALYREX, SPECIES_CALYREX_ICE, SPECIES_CALYREX_SHADOW, SPECIES_CELEBI, SPECIES_CELESTEELA, SPECIES_CHIEN_PAO, SPECIES_CHI_YU, SPECIES_CLODSIRE, SPECIES_COBALION, SPECIES_CRESSELIA, SPECIES_CYCLIZAR, SPECIES_DACHSBUN, SPECIES_DARKRAI, SPECIES_DEOXYS, SPECIES_DEOXYS_ATTACK, SPECIES_DEOXYS_DEFENSE, SPECIES_DEOXYS_SPEED, SPECIES_DIALGA, SPECIES_ELECTRODE_HISUI, SPECIES_ENAMORUS, SPECIES_ENTEI, SPECIES_ETERNATUS, SPECIES_FEZANDIPITI, SPECIES_GIRATINA, SPECIES_GLASTRIER, SPECIES_GOUGING_FIRE, SPECIES_GROUDON, SPECIES_GUZZLORD, SPECIES_HOOPA, SPECIES_HO_OH, SPECIES_INDEEDEE_F, SPECIES_IRON_BOULDER, SPECIES_IRON_JUGULIS, SPECIES_IRON_LEAVES, SPECIES_IRON_MOTH, SPECIES_IRON_THORNS, SPECIES_IRON_TREADS, SPECIES_KELDEO_ORDINARY, SPECIES_KORAIDON, SPECIES_KYOGRE, SPECIES_KYUREM, SPECIES_KYUREM_BLACK, SPECIES_KYUREM_WHITE, SPECIES_LANDORUS, SPECIES_LATIAS, SPECIES_LATIOS, SPECIES_LUGIA, SPECIES_MAGEARNA, SPECIES_MANAPHY, SPECIES_MARSHADOW, SPECIES_MELMETAL, SPECIES_MELOETTA, SPECIES_MELTAN, SPECIES_MESPRIT, SPECIES_MEW, SPECIES_MEWTWO, SPECIES_MIRAIDON, SPECIES_MOLTRES_GALAR, SPECIES_MUK_ALOLA, SPECIES_MUNKIDORI, SPECIES_NECROZMA, SPECIES_NECROZMA_DAWN_WINGS, SPECIES_OBSTAGOON, SPECIES_OGERPON, SPECIES_OKIDOGI, SPECIES_PALKIA, SPECIES_PECHARUNT, SPECIES_PERRSERKER, SPECIES_PHIONE, SPECIES_RAIKOU, SPECIES_REGIDRAGO, SPECIES_REGIELEKI, SPECIES_REGIGIGAS, SPECIES_RESHIRAM, SPECIES_SANDSLASH_ALOLA, SPECIES_SANDY_SHOCKS, SPECIES_SAWSBUCK, SPECIES_SCREAM_TAIL, SPECIES_SHAYMIN, SPECIES_SILVALLY_NORMAL, SPECIES_SLITHER_WING, SPECIES_SOLGALEO, SPECIES_SPECTRIER, SPECIES_SQUAWKABILLY, SPECIES_SQUAWKABILLY_BLUE, SPECIES_SQUAWKABILLY_WHITE, SPECIES_SQUAWKABILLY_YELLOW, SPECIES_SUICUNE, SPECIES_TAPU_BULU, SPECIES_TAPU_FINI, SPECIES_TAPU_KOKO, SPECIES_TAPU_LELE, SPECIES_TERAPAGOS, SPECIES_TERRAKION, SPECIES_THUNDURUS, SPECIES_TING_LU, SPECIES_TORNADUS, SPECIES_URSHIFU, SPECIES_UXIE, SPECIES_VICTINI, SPECIES_VIRIZION, SPECIES_VOLCANION, SPECIES_WORMADAM_PLANT, SPECIES_WO_CHIEN, SPECIES_XERNEAS_NEUTRAL, SPECIES_XURKITREE, SPECIES_YVELTAL, SPECIES_ZACIAN, SPECIES_ZAMAZENTA, SPECIES_ZAPDOS, SPECIES_ZAPDOS_GALAR, SPECIES_ZARUDE, SPECIES_ZEKROM, SPECIES_ZERAORA, SPECIES_ZYGARDE_50
+
+CHECK Game Corner starter archive
+PASS: all 27 regional starters have independent persistent claim flags
+PASS: initial starter, no-room, preset-failure, payment, and one-time paths are transactional
+PASS: all 29 Pokemon prizes receive a non-Mega competitive preset before party/PC delivery
+PASS: Castform, Beldum, and all Devon fossil gifts use the retry-safe prepared transaction
+PASS: all starter menus and new dialogue fit their native windows
+
+CHECK trainer Ability legality
+PASS: 2027 authored trainer Abilities are legal for the configured species/form tables
+
+CHECK trainer runtime coherence
+PASS: 2027 trainer Pokemon have coherent attack natures, charge support, usable Schooling levels, activatable held items, executable fields, and live move-dependent Abilities; 0 reviewed dual-speed parties remain; 0 singles parties still put Protect on every member
+
+CHECK marquee dynamic AI
+PASS: 5 focused dynamic AI profiles map to 12 reviewed marquee trainers
+
+CHECK trainer row reachability
+PASS: all 516 materialized opponent rows are reachable campaign branches
+
+CHECK trainer dialogue species
+PASS: every live Hoenn trainer species mention matches its materialized party or one of 2 reviewed plot references
+
+CHECK story and dialogue
+PASS: core Hoenn story preserves Magma/Aqua, Rayquaza, Wallace, and the Frontier
+PASS: Mega and restored-area progression is narratively discoverable
+PASS: Cynthia uses her dedicated overworld sprite and trainer portrait
+PASS: every League room has a one-survivor retirement and retry path
+PASS: all 25 Inclement NPC bodies have explicit native services or dialogue
+PASS: 10915 story dialogue lines fit the native 216px window
+PASS: 47721 literal Hoenn dialogue lines fit the native 216px window
+
+CHECK rematch-free Match Call
+PASS: rematches are disabled; 73 retained battle blocks have no physical entry and 73 conditional entries sit behind the false runtime guard; 71 registration prompts and 256 reachable Match Call texts are promise-free
+
+CHECK map and script structure with selected progression contracts
+PASS: 540 Hoenn maps have valid layouts, events, warps, and assembled scripts
+PASS: 4149 physical NPC/trigger/sign events and 1402 warps resolve
+PASS: 18139 control-flow/dialogue/movement references resolve across 105775 script lines
+PASS: 367 value-returning special calls never read a void C function
+PASS: selected badge, Mega, League, legendary, and story-item source contracts hold
+Scope: static references and source patterns only; state-dependent campaign reachability is not verified
+
+CHECK legendary availability
+PASS: all 101 legendary-class families have a Hoenn acquisition root
+PASS: all 82 legendary prerequisite chains terminate
+PASS: 6 visible quests and 7 ordinary-wild roots are wired
+PASS: 12 finite Circuit rewards finish before the win-40 mastery reward
+PASS: all four postgame island passes are obtainable through the native harbor
+
+CHECK legendary signs and Circuit
+Legendary Signs: 82 complete acquisition definitions
+Visible overworld encounters: 8 physical one-off Pokémon
+Showdown Circuit: 756 variants, 1322 templates
+Generated table SHA256: ce11106c8a7b8008520b76089cb548ebb33853d5aea7fec157ccd99033963fbf
+
+CHECK regional starters
+PASS: all nine regional starter trios are selectable
+PASS: all 81 starter stages have competitive presets
+PASS: every rival milestone follows the chosen counter-starter family
+
+CHECK restored world
+PASS: 22 restored maps are connected to the Hoenn campaign
+PASS: 9 Inclement evolution/form rewards and the Dewford Manor sign are restored
+PASS: Abandoned Ship has exactly one source-backed Spiritomb interaction
+PASS: 104 objects include 42 unique progression pickups
+PASS: 21 restored maps have themed wild encounter tables
+PASS: 1 Sign objects and 4 static sanctuaries are visible in-world
+
+CHECK single-player evolutions
+PASS: all 30 trade evolutions have single-player alternatives
+PASS: all 15 required evolution items are obtainable
+PASS: the Linking Cord is a reusable key item and paired trades retain their partner requirement
+PASS: Milcery and both Gimmighoul forms evolve through deterministic Leveler-compatible thresholds
+
+CHECK fossil revival
+PASS: all 11 complete fossils revive repeatably with native selection and safe delivery
+
+CHECK campaign battle master
+INFO: encounters=468 branches=516 formats={'single': 60, 'double': 442, 'multi': 14} doubles=88.37%
+INFO: team sizes={1: 9, 2: 55, 3: 183, 4: 123, 5: 9, 6: 137}
+INFO: unique species=782 top usage=[('SPECIES_MANECTRIC', 22), ('SPECIES_BRELOOM', 21), ('SPECIES_SWELLOW', 19), ('SPECIES_MIMIKYU', 13), ('SPECIES_CAMERUPT', 12), ('SPECIES_CROBAT', 12), ('SPECIES_SALAZZLE', 10), ('SPECIES_SHARPEDO', 10), ('SPECIES_MIGHTYENA', 9), ('SPECIES_HARIYAMA', 9), ('SPECIES_HOUNDOOM', 9), ('SPECIES_LANTURN', 9), ('SPECIES_CLAYDOL', 9), ('SPECIES_NINETALES', 9), ('SPECIES_MILOTIC', 9)]
+INFO: Mega showcases=92/99 legendary showcases=76/76
+INFO: current runtime trainer ids=516 planned restores=0
+INFO: primary strategies={'setup + spread pressure': 44, 'balanced tempo': 68, 'spread pressure': 98, 'rain': 10, 'rain + setup + spread pressure': 3, 'setup': 41, 'Trick Room': 13, 'Tailwind + setup': 10, 'sand + spread pressure': 7, 'snow + setup + spread pressure': 2, 'Trick Room + spread pressure': 15, 'rain + spread pressure': 9, 'Tailwind + setup + spread pressure': 12, 'redirection + setup + spread pressure': 7, 'sun + spread pressure': 11, 'rain + setup': 5, 'redirection + spread pressure': 13, 'redirection': 3, 'Trick Room + Tailwind + spread pressure': 1, 'Tailwind': 14, 'Tailwind + spread pressure': 24, 'sand + setup + spread pressure': 6, 'sun + setup + spread pressure': 3, 'snow': 5, 'Trick Room + setup + spread pressure': 5, 'Tailwind + sun + spread pressure': 5, 'Trick Room + setup': 3, 'Tailwind + rain + spread pressure': 7, 'redirection + setup': 2, 'Tailwind + rain': 3, 'snow + redirection + setup': 1, 'sun + snow + spread pressure': 1, 'Trick Room + sand + spread pressure': 1, 'Tailwind + rain + setup + spread pressure': 2, 'rain + snow + spread pressure': 1, 'Trick Room + redirection': 1, 'Tailwind + redirection': 1, 'Trick Room + sun + spread pressure': 1, 'Tailwind + sand + spread pressure': 1, 'snow + spread pressure': 1, 'snow + redirection': 1, 'rain + redirection': 1, 'Tailwind + rain + setup': 2, 'Tailwind + redirection + setup + spread pressure': 1, 'Tailwind + snow': 1, 'Tailwind + sand + redirection + spread pressure': 1, 'sun + redirection + spread pressure': 1} prior-two species-repeat encounters=13
+INFO: dossier exact loadout blocks=0 facts=0 source-verified dialogue blocks=293
+FAIL: missing Mega showcases: ['ITEM_BUTTERFRENITE', 'ITEM_FLYGONITE', 'ITEM_KINGDRANITE', 'ITEM_KINGLERITE', 'ITEM_LAPRASITE', 'ITEM_MACHAMPITE', 'ITEM_MILOTICITE']
+
+CHECK battle master regenerates byte-for-byte
+implemented_trainer_branches=516 through_encounter=513
+trainer_master_prefix_verification=PASS
+
+CHECK per-encounter quality audit self-test
+  ok      Eviolite on a Pokemon that cannot evolve
+  ok      Belly Drum with no payment
+  ok      weather ability with no setter
+  ok      Solar Beam with no sun
+  ok      team that cannot damage a type at all
+  ok      Assault Vest with a status move
+  ok      Nature that lowers the only attacking stat
+  ok      Stat Points on a stat the set never uses
+  ok      duplicate species on one team
+  ok      Choice item on a set that must switch moves
+  ok      a well-built team produces no findings
+  ok      a rematch ladder that goes backwards
+  ok      a multi battle shares weather across the two trainers
+
+PASS: all 13 audit self-tests hold
+
+CHECK per-encounter quality audit
+
+inspected 516 trainer branches across 468 encounters
+
+findings by group: none
+total findings: 0
+
+CHECK Frontier competitive loadouts
+PASS: Frontier, Tent, and Brain loadouts match the competitive set corpus
+
+CHECK local-ID sprite bindings
+PASS: 160 named local IDs are bound to the sprite family their name promises
+
+CHECK battle script formats
+PASS: all 516 campaign trainer branches use their authored battle format
+
+FAILED ['competitive presets', 'species stat rebalances', 'campaign roster', 'campaign battle master']

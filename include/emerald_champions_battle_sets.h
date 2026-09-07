@@ -51,7 +51,6 @@ u8 GetEmeraldChampionsBattleSetCountForFormat(struct Pokemon *mon, u8 format);
 const u8 *GetEmeraldChampionsBattleSetName(struct Pokemon *mon, u8 choice);
 const u8 *GetEmeraldChampionsBattleSetNameForFormat(struct Pokemon *mon, u8 choice, u8 format);
 const struct EmeraldChampionsBattleSet *GetEmeraldChampionsBattleSetPresetForFormat(struct Pokemon *mon, u8 choice, u8 format);
-enum Item GetEmeraldChampionsBattleSetItem(struct Pokemon *mon, u8 choice);
 enum Item GetEmeraldChampionsBattleSetItemForFormat(struct Pokemon *mon, u8 choice, u8 format);
 enum Item GetEmeraldChampionsBattleSetRequiredItem(struct Pokemon *mon, u8 choice);
 enum Item GetEmeraldChampionsBattleSetRequiredItemForFormat(struct Pokemon *mon, u8 choice, u8 format);

@@ -47,33 +47,13 @@ enum Stat const sAccurateStatOrder[NUM_BATTLE_STATS] =
     STAT_EVASION,
 };
 
-static void SetStrengthSapHealing(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Stat stat)
+static void SetStrengthSapHealing(enum BattlerId battlerAtk, enum BattlerId battlerDef)
 {
-    u32 healAmount = 0;
-    switch (stat)
-    {
-    case STAT_ATK:
-        healAmount = gBattleMons[battlerDef].attack;
-        break;
-    case STAT_DEF:
-        healAmount = gBattleMons[battlerDef].defense;
-        break;
-    case STAT_SPATK:
-        healAmount = gBattleMons[battlerDef].spAttack;
-        break;
-    case STAT_SPDEF:
-        healAmount = gBattleMons[battlerDef].spDefense;
-        break;
-    case STAT_SPEED:
-        healAmount = gBattleMons[battlerDef].speed;
-        break;
-    default:
-        errorf("Illegal stat requested");
-        return;
-    }
+    u32 healAmount = gBattleMons[battlerDef].attack;
+    u32 attackStage = gBattleMons[battlerDef].statStages[STAT_ATK];
 
-    healAmount *= gStatStageRatios[gBattleMons[battlerDef].statStages[stat]][0];
-    healAmount /= gStatStageRatios[gBattleMons[battlerDef].statStages[stat]][1];
+    healAmount *= gStatStageRatios[attackStage][0];
+    healAmount /= gStatStageRatios[attackStage][1];
     gBattleStruct->passiveHpUpdate[battlerAtk] = healAmount;
 }
 
@@ -109,7 +89,7 @@ static bool32 CheckSpecificMoveCondition(struct BattleCalcValues *cv, struct Sta
         }
         else
         {
-            SetStrengthSapHealing(cv->battlerAtk, cv->battlerDef, STAT_ATK);
+            SetStrengthSapHealing(cv->battlerAtk, cv->battlerDef);
             st->additionalEffectTriggers = TRUE;
         }
         break;
@@ -775,30 +755,34 @@ static bool32 IsMirrorArmorReflected(struct BattleCalcValues *cv, struct StatCha
     return FALSE;
 }
 
-// There is a similar function AI_GetAdjustedStatStage that needs to be updated if things are changed here
-static void AdjustStatStage(struct BattleCalcValues *cv, struct StatChange *st)
+s32 GetAdjustedStatStage(s32 stage, enum Ability ability, bool32 growthInSun)
 {
-    if (cv->moveEffect == EFFECT_GROWTH && GetAttackerWeather(cv->holdEffects[cv->battlerDef], cv->abilities[cv->battlerDef], GetWeather()) & B_WEATHER_SUN)
-        st->stage = 2;
+    if (growthInSun)
+        stage = 2;
 
-    if (st->stage == STAT_CHANGE_FORCE_MAX)
-        st->stage = 12;
+    if (stage == STAT_CHANGE_FORCE_MAX)
+        stage = 12;
 
-    switch (cv->abilities[cv->battlerDef])
+    switch (ability)
     {
     case ABILITY_CONTRARY:
-        st->stage = -1 * st->stage;
-        if (!st->onlyChecking)
-            RecordAbilityBattle(cv->battlerDef, cv->abilities[cv->battlerDef]);
-        break;
+        return -stage;
     case ABILITY_SIMPLE:
-        st->stage = 2 * st->stage;
-        if (!st->onlyChecking)
-            RecordAbilityBattle(cv->battlerDef, cv->abilities[cv->battlerDef]);
-        break;
+        return 2 * stage;
     default:
-        break;
+        return stage;
     }
+}
+
+static void AdjustStatStage(struct BattleCalcValues *cv, struct StatChange *st)
+{
+    enum Ability ability = cv->abilities[cv->battlerDef];
+    bool32 growthInSun = cv->moveEffect == EFFECT_GROWTH
+        && (GetAttackerWeather(cv->holdEffects[cv->battlerDef], ability, GetWeather()) & B_WEATHER_SUN);
+
+    st->stage = GetAdjustedStatStage(st->stage, ability, growthInSun);
+    if (!st->onlyChecking && (ability == ABILITY_CONTRARY || ability == ABILITY_SIMPLE))
+        RecordAbilityBattle(cv->battlerDef, ability);
 }
 
 static bool32 CanAbilityPreventStatLoss(enum Ability ability)
@@ -949,7 +933,6 @@ void ClearBothStatChangeQueues(void)
 
 bool32 CompareStat(enum BattlerId battler, enum Stat statId, u32 cmpTo, u32 cmpKind, enum Ability ability)
 {
-    bool32 ret = FALSE;
     u32 statValue = gBattleMons[battler].statStages[statId];
 
     // Because this command is used as a way of checking if a stat can be lowered/raised,
@@ -967,35 +950,8 @@ bool32 CompareStat(enum BattlerId battler, enum Stat statId, u32 cmpTo, u32 cmpK
             cmpTo = MIN_STAT_STAGE;
     }
 
-    switch (cmpKind)
-    {
-    case CMP_EQUAL:
-        if (statValue == cmpTo)
-            ret = TRUE;
-        break;
-    case CMP_NOT_EQUAL:
-        if (statValue != cmpTo)
-            ret = TRUE;
-        break;
-    case CMP_GREATER_THAN:
-        if (statValue > cmpTo)
-            ret = TRUE;
-        break;
-    case CMP_LESS_THAN:
-        if (statValue < cmpTo)
-            ret = TRUE;
-        break;
-    case CMP_COMMON_BITS:
-        if (statValue & cmpTo)
-            ret = TRUE;
-        break;
-    case CMP_NO_COMMON_BITS:
-        if (!(statValue & cmpTo))
-            ret = TRUE;
-        break;
-    }
-
-    return ret;
+    // Stat checks support comparisons, not the script-only bit-index operation.
+    return cmpKind <= CMP_NO_COMMON_BITS && CompareBattleValues(cmpKind, statValue, cmpTo);
 }
 
 static void SetAdditionalEffectsOnStatChange(struct BattleCalcValues *cv, struct StatChange *st)

@@ -10,51 +10,21 @@ import re
 from pathlib import Path
 
 
+from showdown_import import ABILITY_OVERRIDES, PINNED_COMMIT, constants, mega_suffix, read_pinned_source, to_id, verify_checkout
+
 ROOT = Path(__file__).resolve().parents[1]
-PINNED_COMMIT = "bb179fbf8449e3c31632bd56f671ffb4404fa6e7"
-DEFAULT_SHOWDOWN = Path("/private/tmp/showdown-champions-audit.oiAZXl/repo")
 DATASETS = {
     "champions": {
         "source_file": "data/random-battles/champions/sets.json",
-        "source_sha256": "7b189d6de33367aca7191e484069b74757097fc34fed0402b52bb6fa41447421",
         "source_name": "Pokemon Showdown Champions random singles",
         "output": ROOT / "data/emerald_champions/showdown_champions_random_singles.json",
     },
     "gen9": {
         "source_file": "data/random-battles/gen9/sets.json",
-        "source_sha256": "d18992314222060dda9a2a9bea09331478991d469babd95662517668099669f9",
         "source_name": "Pokemon Showdown Gen 9 random singles",
         "output": ROOT / "data/emerald_champions/showdown_gen9_random_singles.json",
     },
 }
-
-# Emerald Champions deliberately retains a small Inclement-derived Ability
-# layer. Translate those identities at import time instead of silently falling
-# back to Ability slot zero in the ROM.
-ABILITY_OVERRIDES = {
-    ("SPECIES_MEGANIUM", "ABILITY_LEAF_GUARD"): "ABILITY_TRIAGE",
-    ("SPECIES_TORTERRA", "ABILITY_SHELL_ARMOR"): "ABILITY_SOLID_ROCK",
-    ("SPECIES_ROTOM_FAN", "ABILITY_LEVITATE"): "ABILITY_MOTOR_DRIVE",
-    ("SPECIES_PYROAR", "ABILITY_UNNERVE"): "ABILITY_COMPETITIVE",
-    ("SPECIES_GOODRA", "ABILITY_SAP_SIPPER"): "ABILITY_GOOEY",
-    ("SPECIES_GOURGEIST", "ABILITY_FRISK"): "ABILITY_INSOMNIA",
-    ("SPECIES_GOURGEIST_SMALL", "ABILITY_FRISK"): "ABILITY_INSOMNIA",
-    ("SPECIES_GOURGEIST_LARGE", "ABILITY_FRISK"): "ABILITY_INSOMNIA",
-    ("SPECIES_GOURGEIST_SUPER", "ABILITY_FRISK"): "ABILITY_INSOMNIA",
-}
-
-
-def to_id(value: str) -> str:
-    return re.sub(r"[^a-z0-9]", "", value.lower())
-
-
-def constants(path: Path, prefix: str) -> dict[str, str]:
-    tokens = set(re.findall(rf"\b{prefix}[A-Z0-9_]+\b", path.read_text()))
-    result: dict[str, str] = {}
-    for token in sorted(tokens):
-        result.setdefault(to_id(token[len(prefix):]), token)
-    return result
-
 
 def aliases(path: Path, prefix: str) -> dict[str, str]:
     return dict(re.findall(
@@ -63,21 +33,10 @@ def aliases(path: Path, prefix: str) -> dict[str, str]:
     ))
 
 
-def mega_suffix(species_id: str) -> str | None:
-    for suffix in ("megax", "megay", "megaz", "mega"):
-        if species_id.endswith(suffix) and species_id != "meganium":
-            return suffix
-    return None
-
-
 def build(showdown_root: Path, dataset: dict) -> dict:
-    source = showdown_root / dataset["source_file"]
-    raw_bytes = source.read_bytes()
+    verify_checkout(showdown_root)
+    raw_bytes = read_pinned_source(showdown_root, dataset["source_file"])
     source_sha256 = hashlib.sha256(raw_bytes).hexdigest()
-    if source_sha256 != dataset["source_sha256"]:
-        raise SystemExit(
-            f"Singles source drifted: {source_sha256} != {dataset['source_sha256']}"
-        )
     raw = json.loads(raw_bytes)
     species_map = constants(ROOT / "include" / "constants" / "species.h", "SPECIES_")
     move_map = constants(ROOT / "include" / "constants" / "moves.h", "MOVE_")
@@ -168,7 +127,7 @@ def build(showdown_root: Path, dataset: dict) -> dict:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--showdown-root", type=Path, default=DEFAULT_SHOWDOWN)
+    parser.add_argument("--showdown-root", type=Path, required=True)
     parser.add_argument("--dataset", choices=sorted(DATASETS), default="champions")
     args = parser.parse_args()
     dataset = DATASETS[args.dataset]

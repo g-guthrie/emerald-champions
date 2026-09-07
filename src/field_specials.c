@@ -405,6 +405,23 @@ static const u16 sEmeraldChampionsSpeciesItems[] =
     ITEM_LUCKY_PUNCH,
     ITEM_METAL_POWDER,
     ITEM_QUICK_POWDER,
+    ITEM_FIGHTING_MEMORY,
+    ITEM_FLYING_MEMORY,
+    ITEM_POISON_MEMORY,
+    ITEM_GROUND_MEMORY,
+    ITEM_ROCK_MEMORY,
+    ITEM_BUG_MEMORY,
+    ITEM_GHOST_MEMORY,
+    ITEM_STEEL_MEMORY,
+    ITEM_FIRE_MEMORY,
+    ITEM_WATER_MEMORY,
+    ITEM_GRASS_MEMORY,
+    ITEM_ELECTRIC_MEMORY,
+    ITEM_PSYCHIC_MEMORY,
+    ITEM_ICE_MEMORY,
+    ITEM_DRAGON_MEMORY,
+    ITEM_DARK_MEMORY,
+    ITEM_FAIRY_MEMORY,
     ITEM_NONE,
 };
 
@@ -486,6 +503,9 @@ static u8 TryGiveEmeraldChampionsGameCornerPokemon(enum Species species, u16 fla
      || FlagGet(flag)
      || (rejectInitialStarter && IsEmeraldChampionsInitialStarter(species)))
         return EC_GAME_CORNER_PRIZE_SET_FAILED;
+
+    if (!CanAcquireLegendarySignSpecies(species))
+        return EC_GAME_CORNER_PRIZE_NEEDS_RESEARCH;
 
     giveResult = TryGiveEmeraldChampionsPreparedPokemon(
         species,
@@ -572,6 +592,95 @@ void GetEmeraldChampionsStarterMegaStone(void)
         }
     }
     gSpecialVar_Result = gSpecialVar_0x8004 != ITEM_NONE;
+}
+
+// Story handoffs consume exactly one item from either player inventory store.
+void CheckEmeraldChampionsHandoffItem(void)
+{
+    gSpecialVar_Result = CheckBagHasItem(gSpecialVar_0x8004, 1)
+        || CheckPCHasItem(gSpecialVar_0x8004, 1);
+}
+
+void TakeEmeraldChampionsHandoffItem(void)
+{
+    enum Item item = gSpecialVar_0x8004;
+    gSpecialVar_Result = FALSE;
+    if (CheckBagHasItem(item, 1))
+    {
+        gSpecialVar_Result = RemoveBagItem(item, 1);
+        return;
+    }
+    for (u32 slot = 0; slot < PC_ITEMS_COUNT; slot++)
+    {
+        if (gSaveBlock1Ptr->pcItems[slot].itemId == item
+            && gSaveBlock1Ptr->pcItems[slot].quantity != 0)
+        {
+            RemovePCItem(slot, 1);
+            CompactPCItems();
+            gSpecialVar_Result = TRUE;
+            return;
+        }
+    }
+}
+
+static bool32 OwnsStevenStarterStone(enum Item item)
+{
+    if (CheckBagHasItem(item, 1) || CheckPCHasItem(item, 1))
+        return TRUE;
+    for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+        if (GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_SPECIES) != SPECIES_NONE
+            && GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_HELD_ITEM) == item)
+            return TRUE;
+    for (u32 box = 0; box < TOTAL_BOXES_COUNT; box++)
+        for (u32 slot = 0; slot < IN_BOX_COUNT; slot++)
+            if (GetBoxMonData(&gPokemonStoragePtr->boxes[box][slot], MON_DATA_SPECIES) != SPECIES_NONE
+                && GetBoxMonData(&gPokemonStoragePtr->boxes[box][slot], MON_DATA_HELD_ITEM) == item)
+                return TRUE;
+    return FALSE;
+}
+
+void GiveEmeraldChampionsStarterMegaStones(void)
+{
+    u16 delivered = VarGet(VAR_STEVEN_STARTER_STONE_DELIVERY);
+    u16 stones[2];
+    bool32 complete = TRUE;
+    // Per-item receipts: 0 = no new delivery, 1 = Bag, 2 = PC.
+    // Keep these separate from the obtained-item presentation's scratch vars.
+    gSpecialVar_0x8009 = 0;
+    gSpecialVar_0x800A = 0;
+    GetEmeraldChampionsStarterMegaStone();
+    stones[0] = gSpecialVar_0x8004;
+    stones[1] = gSpecialVar_0x8005;
+    for (u32 i = 0; i < ARRAY_COUNT(stones); i++)
+    {
+        if (stones[i] == ITEM_NONE || (delivered & (1 << i)))
+            continue;
+        bool32 fulfilled = OwnsStevenStarterStone(stones[i]);
+        u16 destination = 0;
+        if (!fulfilled && AddBagItem(stones[i], 1))
+        {
+            fulfilled = TRUE;
+            destination = 1;
+        }
+        else if (!fulfilled && AddPCItem(stones[i], 1))
+        {
+            fulfilled = TRUE;
+            destination = 2;
+        }
+        if (fulfilled)
+        {
+            delivered |= 1 << i;
+            VarSet(VAR_STEVEN_STARTER_STONE_DELIVERY, delivered);
+        }
+        else
+            complete = FALSE;
+        if (i == 0)
+            gSpecialVar_0x8009 = destination;
+        else
+            gSpecialVar_0x800A = destination;
+    }
+    // Completed bits survive later disposal; only a genuinely pending gift retries.
+    gSpecialVar_Result = complete;
 }
 
 void OpenEmeraldChampionsMegaStoneArchive(void)
@@ -6433,7 +6542,6 @@ void DoPokemonLeagueLightingEffect(void)
             LoadPalette(sEliteFourLightingPalettes[0], BG_PLTT_ID(7), PLTT_SIZE_4BPP);
         }
         data[1] = 0;
-        // ApplyGlobalTintToPaletteSlot(7, 1);
     }
 }
 
@@ -6459,7 +6567,6 @@ static void Task_RunPokemonLeagueLightingEffect(u8 taskId)
             data[0] = sEliteFourLightingTimers[data[1]];
             LoadPalette(sEliteFourLightingPalettes[data[1]], BG_PLTT_ID(7), PLTT_SIZE_4BPP);
         }
-        // ApplyGlobalTintToPaletteSlot(7, 1);
     }
 }
 
@@ -6471,7 +6578,6 @@ static void Task_CancelPokemonLeagueLightingEffect(u8 taskId)
             LoadPalette(sChampionRoomLightingPalettes[8], BG_PLTT_ID(7), PLTT_SIZE_4BPP);
         else
             LoadPalette(sEliteFourLightingPalettes[11], BG_PLTT_ID(7), PLTT_SIZE_4BPP);
-        // ApplyGlobalTintToPaletteSlot(7, 1);
         if (gPaletteFade.active)
         {
             BlendPalettes(0x00000080, 16, RGB_BLACK);
@@ -6744,4 +6850,12 @@ void ChangeSelectedMonSpecies(void)
 
     SetMonData(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004], MON_DATA_SPECIES, &species);
     CalculateMonStats(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004]);
+}
+
+// Keep Inclement's pre-badge visibility without overriding unlocked/manual Flash.
+void SetGraniteCaveFlashLevel(void)
+{
+    SetDefaultFlashLevel();
+    if (GetFlashLevel() > 4)
+        SetFlashLevel(4);
 }

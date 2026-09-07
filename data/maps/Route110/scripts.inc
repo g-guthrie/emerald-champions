@@ -192,8 +192,7 @@ Route110_EventScript_EdwinRematch::
 	end
 
 Route110_EventScript_Dale::
-	trainerbattle_double TRAINER_DALE, Route110_Text_DaleIntro, Route110_Text_DaleDefeated, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route110_Text_DalePostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route110_Text_DALE_LocalConversation, MSGBOX_NPC
 	end
 
 Route110_EventScript_Jacob::
@@ -202,7 +201,7 @@ Route110_EventScript_Jacob::
 	end
 
 Route110_EventScript_Anthony::
-	trainerbattle_single TRAINER_ANTHONY, Route110_Text_AnthonyIntro, Route110_Text_AnthonyDefeated
+	trainerbattle_double TRAINER_ANTHONY, Route110_Text_AnthonyIntro, Route110_Text_AnthonyDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route110_Text_AnthonyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -275,7 +274,7 @@ Route110_EventScript_IsabelRematch::
 	end
 
 Route110_EventScript_Timmy::
-	trainerbattle_single TRAINER_TIMMY, Route110_Text_TimmyIntro, Route110_Text_TimmyDefeated
+	trainerbattle_double TRAINER_TIMMY, Route110_Text_TimmyIntro, Route110_Text_TimmyDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route110_Text_TimmyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -368,8 +367,59 @@ Route110_EventScript_RivalTrigger3::
 	goto Route110_EventScript_RivalScene
 	end
 
+Route110_EventScript_RivalTalk::
+	lockall
+	goto_if_eq VAR_ROUTE110_STATE, 1, Route110_EventScript_RivalSceneComplete
+	call Route110_EventScript_CheckRivalWon
+	goto_if_eq VAR_RESULT, TRUE, Route110_EventScript_RivalRewardRetry
+	msgbox Route110_Text_RivalBeforeBattle, MSGBOX_DEFAULT
+	releaseall
+	end
+
+@ Trainer flags also recognize rewards owed by saves made before this retry path.
+Route110_EventScript_CheckRivalWon::
+	goto_if_defeated TRAINER_MAY_ROUTE_110_TREECKO, Route110_EventScript_RivalAlreadyWon
+	goto_if_defeated TRAINER_MAY_ROUTE_110_TORCHIC, Route110_EventScript_RivalAlreadyWon
+	goto_if_defeated TRAINER_MAY_ROUTE_110_MUDKIP, Route110_EventScript_RivalAlreadyWon
+	goto_if_defeated TRAINER_BRENDAN_ROUTE_110_TREECKO, Route110_EventScript_RivalAlreadyWon
+	goto_if_defeated TRAINER_BRENDAN_ROUTE_110_TORCHIC, Route110_EventScript_RivalAlreadyWon
+	goto_if_defeated TRAINER_BRENDAN_ROUTE_110_MUDKIP, Route110_EventScript_RivalAlreadyWon
+	setvar VAR_RESULT, FALSE
+	return
+
+Route110_EventScript_RivalAlreadyWon::
+	setvar VAR_RESULT, TRUE
+	return
+
+Route110_EventScript_RivalRewardRetry::
+	applymovement LOCALID_ROUTE110_RIVAL, Common_Movement_FacePlayer
+	waitmovement 0
+	setvar VAR_0x8004, ITEM_DOWSING_MACHINE
+	special CheckEmeraldChampionsHandoffItem
+	goto_if_eq VAR_RESULT, TRUE, Route110_EventScript_RivalExit
+	msgbox Route110_Text_RivalRewardRetry, MSGBOX_DEFAULT
+	call Route110_EventScript_GiveItemfinder
+	checkplayergender
+	goto_if_eq VAR_RESULT, MALE, Route110_EventScript_MayExplainRetry
+	msgbox Route110_Text_BrendanExplainItemfinder, MSGBOX_DEFAULT
+	goto Route110_EventScript_RivalExit
+	end
+
+Route110_EventScript_MayExplainRetry::
+	msgbox Route110_Text_MayExplainItemfinder, MSGBOX_DEFAULT
+	goto Route110_EventScript_RivalExit
+	end
+
+Route110_EventScript_RivalSceneComplete::
+	releaseall
+	end
+
 Route110_EventScript_RivalScene::
 	lockall
+	goto_if_eq VAR_ROUTE110_STATE, 1, Route110_EventScript_RivalSceneComplete
+	call Route110_EventScript_CheckRivalWon
+	goto_if_eq VAR_RESULT, TRUE, Route110_EventScript_RivalRewardRetry
+	call EventScript_CheckStoryDoubleBattleParty
 	checkplayergender
 	call_if_eq VAR_RESULT, MALE, Route110_EventScript_PlayMayMusic
 	call_if_eq VAR_RESULT, FEMALE, Route110_EventScript_PlayBrendanMusic
@@ -471,22 +521,25 @@ Route110_EventScript_ArchiveDowsingMachine::
 
 Route110_EventScript_DowsingMachineNoRoom::
 	msgbox Route110_Text_DowsingMachineNoRoom, MSGBOX_DEFAULT
+	savebgm MUS_DUMMY
+	fadedefaultbgm
 	releaseall
 	end
 
 Route110_EventScript_RivalExit::
 	closemessage
-	call_if_eq VAR_0x8008, 1, Route110_EventScript_MoveRival1
-	call_if_eq VAR_0x8008, 2, Route110_EventScript_MoveRival2
-	call_if_eq VAR_0x8008, 3, Route110_EventScript_MoveRival3
+	@ Use the live position, including a reward retry after Save or map reentry.
+	getobjectxy LOCALID_ROUTE110_RIVAL, FALSE, VAR_0x8004, VAR_0x8005
+	call Route110_EventScript_ClearRivalDeparture
+	setobjectxyperm LOCALID_ROUTE110_RIVAL_ON_BIKE, VAR_0x8004, VAR_0x8005
 	setobjectmovementtype LOCALID_ROUTE110_RIVAL, MOVEMENT_TYPE_FACE_RIGHT
 	setobjectmovementtype LOCALID_ROUTE110_RIVAL_ON_BIKE, MOVEMENT_TYPE_FACE_RIGHT
 	removeobject LOCALID_ROUTE110_RIVAL
 	addobject LOCALID_ROUTE110_RIVAL_ON_BIKE
 	delay 45
-	call_if_eq VAR_0x8008, 1, Route110_EventScript_RivalExit1
-	call_if_eq VAR_0x8008, 2, Route110_EventScript_RivalExit2
-	call_if_eq VAR_0x8008, 3, Route110_EventScript_RivalExit3
+	call_if_eq VAR_0x8004, 33, Route110_EventScript_RivalExit1
+	call_if_eq VAR_0x8004, 34, Route110_EventScript_RivalExit2
+	call_if_eq VAR_0x8004, 35, Route110_EventScript_RivalExit3
 	removeobject LOCALID_ROUTE110_RIVAL_ON_BIKE
 	setvar VAR_ROUTE110_STATE, 1
 	savebgm MUS_DUMMY
@@ -524,17 +577,34 @@ Route110_EventScript_RivalExit3::
 	waitmovement 0
 	return
 
-Route110_EventScript_MoveRival1::
-	setobjectxyperm LOCALID_ROUTE110_RIVAL_ON_BIKE, 33, 55
+@ A retry can be initiated from north of the rival. Clear that departure lane
+@ before creating the bike; ordinary south-side trigger approaches do not move.
+Route110_EventScript_ClearRivalDeparture::
+	getplayerxy VAR_0x8006, VAR_0x8007
+	compare VAR_0x8006, VAR_0x8004
+	goto_if_ne Route110_EventScript_RivalDepartureReady
+	compare VAR_0x8007, VAR_0x8005
+	goto_if_ge Route110_EventScript_RivalDepartureReady
+	goto_if_eq VAR_0x8004, 35, Route110_EventScript_RivalDepartureStepLeft
+	applymovement LOCALID_PLAYER, Route110_Movement_RivalDepartureStepRight
+	waitmovement 0
 	return
 
-Route110_EventScript_MoveRival2::
-	setobjectxyperm LOCALID_ROUTE110_RIVAL_ON_BIKE, 34, 55
+Route110_EventScript_RivalDepartureStepLeft::
+	applymovement LOCALID_PLAYER, Route110_Movement_RivalDepartureStepLeft
+	waitmovement 0
+Route110_EventScript_RivalDepartureReady::
 	return
 
-Route110_EventScript_MoveRival3::
-	setobjectxyperm LOCALID_ROUTE110_RIVAL_ON_BIKE, 35, 55
-	return
+Route110_Movement_RivalDepartureStepRight:
+	walk_right
+	walk_in_place_faster_left
+	step_end
+
+Route110_Movement_RivalDepartureStepLeft:
+	walk_left
+	walk_in_place_faster_right
+	step_end
 
 Route110_Movement_RivalApproachPlayer1:
 	walk_down
@@ -784,9 +854,18 @@ Route110_Text_MayTakeThis:
 Route110_Text_MayExplainItemfinder:
 	.string "MAY: That's a DOWSING MACHINE. Hidden\n"
 	.string "items make it sing.\p"
-	.string "Dad says the SIGNS answer the right\n"
-	.string "partner, not the strongest one. Keep\l"
-	.string "catching. I'll find you ahead!$"
+	.string "Have DEVON's researcher translate\n"
+	.string "each SIGN before seeking its partner.\p"
+	.string "I'm heading north to MAUVILLE!\n"
+	.string "WATTSON's GYM is there. See you ahead!$"
+
+Route110_Text_RivalBeforeBattle:
+	.string "Hey, {PLAYER}! Meet me just down\n"
+	.string "the path. I want to see your team!$"
+
+Route110_Text_RivalRewardRetry:
+	.string "I still have that DOWSING MACHINE\n"
+	.string "for you. Here you go!$"
 
 Route110_Text_DowsingMachineSentToPC:
 	.string "Your KEY ITEMS pocket is full, so the\n"
@@ -813,8 +892,10 @@ Route110_Text_BrendanTakeThis:
 Route110_Text_BrendanExplainItemfinder:
 	.string "BRENDAN: DOWSING MACHINE. It hums near\n"
 	.string "items you can't see.\p"
-	.string "The SIGNS Dad studies want the right\n"
-	.string "partner brought to them. Go find some.$"
+	.string "Get each SIGN translated by\n"
+	.string "DEVON's researcher first.\p"
+	.string "Keep north to MAUVILLE CITY.\n"
+	.string "WATTSON's GYM will test your team.$"
 
 Route110_Text_RideBikeAtFullSpeed:
 	.string "Wouldn't it be great to ride a BIKE\n"
@@ -998,3 +1079,7 @@ Route110_Text_KeepAnEyeOutForRival:
 	.string "… … … … … …\p"
 	.string "Well, I had better get going.\n"
 	.string "See you again, {PLAYER}{KUN}!$"
+
+Route110_Text_DALE_LocalConversation:
+	.string "OCTILLERY has eight arms.\n"
+	.string "Still only holds one fishing rod.$"

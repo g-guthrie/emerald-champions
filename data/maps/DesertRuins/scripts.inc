@@ -63,6 +63,7 @@ DesertRuins_EventScript_Regirock::
 	waitmoncry
 	setvar VAR_0x8004, SPECIES_REGIROCK
 	setvar VAR_0x8005, 0
+	msgbox gText_LegendaryOneShotWarning, MSGBOX_DEFAULT
 	special CreateEmeraldChampionsStaticLegendaryEncounter
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special StartRegiBattle
@@ -81,8 +82,7 @@ DesertRuins_EventScript_CaughtRegirock::
 	end
 
 DesertRuins_EventScript_DefeatedRegirock::
-	msgbox DesertRuins_Text_RegirockStillAwaitsCapture, MSGBOX_DEFAULT
-	release
+	goto Common_EventScript_LegendaryDefeated
 	end
 
 DesertRuins_EventScript_RanFromRegirock::
@@ -90,6 +90,3 @@ DesertRuins_EventScript_RanFromRegirock::
 	goto Common_EventScript_LegendaryFlewAway
 	end
 
-DesertRuins_Text_RegirockStillAwaitsCapture:
-	.string "REGIROCK gathers itself again.\p"
-	.string "It still awaits a true capture.$"

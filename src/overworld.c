@@ -231,7 +231,6 @@ EWRAM_DATA static mapsec_u16_t sLastMapSectionId = 0;
 EWRAM_DATA static struct InitialPlayerAvatarState sInitialPlayerAvatarState = {0};
 EWRAM_DATA static enum Species sAmbientCrySpecies = SPECIES_NONE;
 EWRAM_DATA static bool8 sIsAmbientCryWaterMon = FALSE;
-EWRAM_DATA static u8 sHoursOverride = 0; // used to override apparent time of day hours
 EWRAM_DATA struct LinkPlayerObjectEvent gLinkPlayerObjectEvents[4] = {0};
 EWRAM_DATA bool8 gExitStairsMovementDisabled = FALSE;
 EWRAM_DATA bool8 gDisableMapMusicChangeOnMapLoad = MUSIC_DISABLE_OFF;
@@ -571,12 +570,31 @@ void LoadObjEventTemplatesFromHeader(void)
 
 void LoadSaveblockObjEventScripts(void)
 {
-    const struct ObjectEventTemplate *mapHeaderObjTemplates = gMapHeader.events->objectEvents;
     struct ObjectEventTemplate *savObjTemplates = gSaveBlock1Ptr->objectEventTemplates;
-    s32 i;
+    u32 i;
 
     for (i = 0; i < OBJECT_EVENT_TEMPLATES_COUNT; i++)
-        savObjTemplates[i].script = mapHeaderObjTemplates[i].script;
+    {
+        const struct ObjectEventTemplate *template;
+
+        // Continue preserves saved positions and movement; only pointers refresh.
+        savObjTemplates[i].script = NULL;
+        if (i >= gMapHeader.events->objectEventCount)
+            continue;
+
+        template = &gMapHeader.events->objectEvents[i];
+        if (template->kind == OBJ_KIND_CLONE)
+        {
+            const struct MapHeader *connectionMap = Overworld_GetMapHeaderByGroupAndId(
+                template->targetMapGroup, template->targetMapNum);
+            u8 localId = template->targetLocalId;
+
+            if (localId == 0 || localId > connectionMap->events->objectEventCount)
+                continue;
+            template = &connectionMap->events->objectEvents[localId - 1];
+        }
+        savObjTemplates[i].script = template->script;
+    }
 }
 
 static struct ObjectEventTemplate *GetObjectEventTemplate(u8 localId)
@@ -636,7 +654,7 @@ static void ClearDiveAndHoleWarps(void)
     sFixedHoleWarp = sDummyWarpData;
 }
 
-static void SetWarpData(struct WarpData *warp, s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
+static void SetWarpData(struct WarpData *warp, s8 mapGroup, s8 mapNum, s8 warpId, s16 x, s16 y)
 {
     warp->mapGroup = mapGroup;
     warp->mapNum = mapNum;
@@ -715,7 +733,7 @@ void WarpIntoMap(void)
     SetPlayerCoordsFromWarp();
 }
 
-void SetWarpDestination(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
+void SetWarpDestination(s8 mapGroup, s8 mapNum, s8 warpId, s16 x, s16 y)
 {
     SetWarpData(&sWarpDestination, mapGroup, mapNum, warpId, x, y);
 }
@@ -730,7 +748,7 @@ void SetDynamicWarp(s32 unused, s8 mapGroup, s8 mapNum, s8 warpId)
     SetWarpData(&gSaveBlock1Ptr->dynamicWarp, mapGroup, mapNum, warpId, gSaveBlock1Ptr->pos.x, gSaveBlock1Ptr->pos.y);
 }
 
-void SetDynamicWarpWithCoords(s32 unused, s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
+void SetDynamicWarpWithCoords(s32 unused, s8 mapGroup, s8 mapNum, s8 warpId, s16 x, s16 y)
 {
     SetWarpData(&gSaveBlock1Ptr->dynamicWarp, mapGroup, mapNum, warpId, x, y);
 }
@@ -782,7 +800,7 @@ void UpdateEscapeWarp(s16 x, s16 y)
         SetEscapeWarp(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, WARP_ID_NONE, x - MAP_OFFSET, y - MAP_OFFSET + 1);
 }
 
-void SetEscapeWarp(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
+void SetEscapeWarp(s8 mapGroup, s8 mapNum, s8 warpId, s16 x, s16 y)
 {
     SetWarpData(&gSaveBlock1Ptr->escapeWarp, mapGroup, mapNum, warpId, x, y);
 }
@@ -792,7 +810,7 @@ void SetWarpDestinationToEscapeWarp(void)
     sWarpDestination = gSaveBlock1Ptr->escapeWarp;
 }
 
-void SetFixedDiveWarp(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
+void SetFixedDiveWarp(s8 mapGroup, s8 mapNum, s8 warpId, s16 x, s16 y)
 {
     SetWarpData(&sFixedDiveWarp, mapGroup, mapNum, warpId, x, y);
 }
@@ -802,7 +820,7 @@ static void SetWarpDestinationToDiveWarp(void)
     sWarpDestination = sFixedDiveWarp;
 }
 
-void SetFixedHoleWarp(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
+void SetFixedHoleWarp(s8 mapGroup, s8 mapNum, s8 warpId, s16 x, s16 y)
 {
     SetWarpData(&sFixedHoleWarp, mapGroup, mapNum, warpId, x, y);
 }
@@ -904,7 +922,6 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
     ChooseAmbientCrySpecies();
     SetDefaultFlashLevel();
     Overworld_ClearSavedMusic();
-    TryUnlockEligibleVisibleLegendarySignsForCurrentMap();
     RunOnTransitionMapScript();
     InitMap();
     CopySecondaryTilesetToVramUsingHeap(gMapHeader.mapLayout);
@@ -957,7 +974,6 @@ static void LoadMapFromWarp(bool32 a1)
     ClearTempFieldEventData();
     ResetDexNavSearch();
     // reset hours override on every warp
-    sHoursOverride = 0;
     ResetCyclingRoadChallengeData();
     RestartWildEncounterImmunitySteps();
 #if FREE_MATCH_CALL == FALSE
@@ -975,7 +991,6 @@ static void LoadMapFromWarp(bool32 a1)
         FlagClear(FLAG_SYS_USE_FLASH);
     SetDefaultFlashLevel();
     Overworld_ClearSavedMusic();
-    TryUnlockEligibleVisibleLegendarySignsForCurrentMap();
     RunOnTransitionMapScript();
     UpdateLocationHistoryForRoamer();
     MoveAllRoamersToOtherLocationSets();
@@ -1592,11 +1607,6 @@ bool8 IsMapTypeIndoors(enum MapType mapType)
         return FALSE;
 }
 
-mapsec_u8_t GetSavedWarpRegionMapSectionId(void)
-{
-    return Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->dynamicWarp.mapGroup, gSaveBlock1Ptr->dynamicWarp.mapNum)->regionMapSectionId;
-}
-
 mapsec_u8_t GetCurrentRegionMapSectionId(void)
 {
     return Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum)->regionMapSectionId;
@@ -1712,8 +1722,8 @@ void UpdateTimeOfDay(bool32 updateBlend)
 {
     s32 hours, minutes;
     RtcCalcLocalTime();
-    hours = sHoursOverride ? sHoursOverride : gLocalTime.hours;
-    minutes = sHoursOverride ? 0 : gLocalTime.minutes;
+    hours = gLocalTime.hours;
+    minutes = gLocalTime.minutes;
 
     if (IsBetweenHours(hours, MORNING_HOUR_BEGIN, MORNING_HOUR_MIDDLE)) // night->morning
     {
@@ -2225,7 +2235,8 @@ static void SetEmeraldChampionsPhysicalSignFlags(void)
     for (u32 i = 0; i < ARRAY_COUNT(sEmeraldChampionsPhysicalSignFlags); i++)
     {
         const struct EmeraldChampionsPhysicalSignFlag *entry = &sEmeraldChampionsPhysicalSignFlags[i];
-        bool32 caught = IsLegendarySignCaught(entry->signId);
+        bool32 caught = IsLegendarySignCaught(entry->signId)
+                     || IsLegendaryEncounterLost(gLegendarySignDefinitions[entry->signId].species);
         bool32 hide = caught;
 
         if (entry->hiddenUntilUnlocked)
@@ -3466,11 +3477,6 @@ u32 GetCableClubPartnersReady(void)
     return CABLE_SEAT_WAITING;
 }
 
-static bool32 UNUSED IsAnyPlayerExitingCableClub(void)
-{
-    return IsAnyPlayerInLinkState(PLAYER_LINK_STATE_EXITING_ROOM);
-}
-
 u16 SetInCableClubSeat(void)
 {
     SetKeyInterceptCallback(KeyInterCB_SetReady);
@@ -3774,27 +3780,6 @@ static void InitLinkPlayerObjectEventPos(struct ObjectEvent *objEvent, s16 x, s1
     ObjectEventUpdateElevation(objEvent, NULL);
 }
 
-static void UNUSED SetLinkPlayerObjectRange(u8 linkPlayerId, enum Direction dir)
-{
-    if (gLinkPlayerObjectEvents[linkPlayerId].active)
-    {
-        u8 objEventId = gLinkPlayerObjectEvents[linkPlayerId].objEventId;
-        struct ObjectEvent *objEvent = &gObjectEvents[objEventId];
-        linkDirection(objEvent) = dir;
-    }
-}
-
-static void UNUSED DestroyLinkPlayerObject(u8 linkPlayerId)
-{
-    struct LinkPlayerObjectEvent *linkPlayerObjEvent = &gLinkPlayerObjectEvents[linkPlayerId];
-    u8 objEventId = linkPlayerObjEvent->objEventId;
-    struct ObjectEvent *objEvent = &gObjectEvents[objEventId];
-    if (objEvent->spriteId != MAX_SPRITES)
-        DestroySprite(&gSprites[objEvent->spriteId]);
-    linkPlayerObjEvent->active = 0;
-    objEvent->active = 0;
-}
-
 // Returns the spriteId corresponding to this player.
 static u8 GetSpriteForLinkedPlayer(u8 linkPlayerId)
 {
@@ -3823,13 +3808,6 @@ static u8 GetLinkPlayerElevation(u8 linkPlayerId)
     u8 objEventId = gLinkPlayerObjectEvents[linkPlayerId].objEventId;
     struct ObjectEvent *objEvent = &gObjectEvents[objEventId];
     return objEvent->currentElevation;
-}
-
-static s16 UNUSED GetLinkPlayerObjectStepTimer(u8 linkPlayerId)
-{
-    u8 objEventId = gLinkPlayerObjectEvents[linkPlayerId].objEventId;
-    struct ObjectEvent *objEvent = &gObjectEvents[objEventId];
-    return 16 - (s8)objEvent->directionSequenceIndex;
 }
 
 static u8 GetLinkPlayerIdAt(s16 x, s16 y)
@@ -4182,15 +4160,6 @@ static void DestroyItemIconSprite(void)
     FreeSpritePaletteByTag(ITEM_TAG);
     FreeSpriteOamMatrix(&gSprites[sItemIconSpriteId]);
     DestroySprite(&gSprites[sItemIconSpriteId]);
-}
-
-// returns old sHoursOverride
-u16 SetTimeOfDay(u16 hours)
-{
-    u16 oldHours = sHoursOverride;
-    sHoursOverride = hours;
-    gTimeUpdateCounter = 0;
-    return oldHours;
 }
 
 // Credits

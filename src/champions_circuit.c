@@ -29,7 +29,9 @@
 #include "data/pokemon/showdown_champions_circuit.h"
 
 #define CIRCUIT_TEAM_SIZE PARTY_SIZE
-#define CIRCUIT_BASE_LEVEL 80
+#define CIRCUIT_BASE_LEVEL CHAMPIONS_CIRCUIT_BASE_LEVEL
+// Acquisition levels are independent of arena normalization.
+#define CIRCUIT_REWARD_LEVEL 80
 #define CIRCUIT_REWARD_INTERVAL 2
 #define CIRCUIT_MASTERY_WINS 40
 
@@ -46,6 +48,7 @@ struct CircuitTeamDetails
     bool8 defog;
     bool8 rapidSpin;
     bool8 screens;
+    u8 terrain; // Bitmask of B_TERRAIN_* values; the terrain type matters.
     u8 spikes;
 };
 
@@ -59,6 +62,7 @@ struct CircuitGeneratedSet
     u8 nature;
     bool8 zeroAttackIv;
     bool8 zeroSpeedIv;
+    enum CircuitDependency dependency;
 };
 
 struct CircuitTeamState
@@ -168,6 +172,23 @@ bool32 IsChampionsCircuitBattle(void)
     return VarGet(VAR_CHAMPIONS_CIRCUIT_ACTIVE) != 0 && gMain.inBattle;
 }
 
+bool32 IsChampionsCircuitOpponent(const struct Pokemon *mon)
+{
+    if (!VarGet(VAR_CHAMPIONS_CIRCUIT_ACTIVE))
+        return FALSE;
+    for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+        if (mon == &gParties[B_TRAINER_OPPONENT_A][slot])
+            return TRUE;
+    return FALSE;
+}
+
+u8 GetChampionsCircuitOpponentLevel(u16 wins, u32 slot)
+{
+    u32 level = CIRCUIT_BASE_LEVEL - GetTrainerLevelReduction()
+              + wins / PARTY_SIZE + (slot < wins % PARTY_SIZE);
+    return min(CHAMPIONS_CIRCUIT_MAX_LEVEL, level);
+}
+
 static u32 CircuitRandomUniform(u32 lo, u32 hi)
 {
 #if TESTING
@@ -189,10 +210,7 @@ static bool32 MoveInList(enum Move move, const enum Move *list, u32 count)
 
 static bool32 SetHasMove(const struct CircuitGeneratedSet *set, enum Move move)
 {
-    for (u32 i = 0; i < MAX_MON_MOVES; i++)
-        if (set->moves[i] == move)
-            return TRUE;
-    return FALSE;
+    return MoveInList(move, set->moves, MAX_MON_MOVES);
 }
 
 static bool32 TeamHasMove(const struct CircuitTeamState *team, enum Move move)
@@ -222,10 +240,7 @@ static u8 SetMoveCount(const struct CircuitGeneratedSet *set)
 
 static bool32 PoolContains(const struct CircuitMovePool *pool, enum Move move)
 {
-    for (u32 i = 0; i < pool->count; i++)
-        if (pool->moves[i] == move)
-            return TRUE;
-    return FALSE;
+    return MoveInList(move, pool->moves, pool->count);
 }
 
 static void RemovePoolIndex(struct CircuitMovePool *pool, u8 index)
@@ -319,6 +334,44 @@ static void CullSelectedIncompatibilities(
     bool32 hasHazard = SetHasMoveFromList(set, sHazardMoves, ARRAY_COUNT(sHazardMoves));
     bool32 hasPivot = SetHasMoveFromList(set, sPivotMoves, ARRAY_COUNT(sPivotMoves));
     bool32 hasStatus = SetHasMoveFromList(set, sStatusInflictingMoves, ARRAY_COUNT(sStatusInflictingMoves));
+
+    // Showdown's statusMoves / healingwish-switcheroo-trick incompatibility.
+    // Without both directions, Latios can receive Trick + Protect + a Scarf.
+    static const enum Move choiceUtility[] = {MOVE_HEALING_WISH, MOVE_SWITCHEROO, MOVE_TRICK};
+    if (SetHasMoveFromList(set, choiceUtility, ARRAY_COUNT(choiceUtility)))
+    {
+        for (u32 i = pool->count; i > 0; i--)
+            if (GetMoveCategory(pool->moves[i - 1]) == DAMAGE_CATEGORY_STATUS)
+                RemovePoolIndex(pool, i - 1);
+    }
+    else
+    {
+        for (u32 i = 0; i < MAX_MON_MOVES; i++)
+            if (set->moves[i] != MOVE_NONE && GetMoveCategory(set->moves[i]) == DAMAGE_CATEGORY_STATUS)
+                RemovePoolMoves(pool, choiceUtility, ARRAY_COUNT(choiceUtility));
+    }
+
+    // Redundant attacks culled by Champions teams.ts. Preserve alternatives
+    // in the source pool while preventing them from occupying the same set.
+    static const enum Move redundant[][2][4] =
+    {
+        {{MOVE_PSYCHIC, MOVE_PSYCHIC_NOISE}, {MOVE_PSYSHOCK, MOVE_PSYCHIC_NOISE}},
+        {{MOVE_MUDDY_WATER, MOVE_SCALD, MOVE_SURF, MOVE_WATERFALL}, {MOVE_HYDRO_PUMP}},
+        {{MOVE_GIGA_DRAIN, MOVE_HORN_LEECH, MOVE_TROP_KICK}, {MOVE_LEAF_STORM, MOVE_POWER_WHIP, MOVE_WOOD_HAMMER}},
+        {{MOVE_DAZZLING_GLEAM}, {MOVE_ALLURING_VOICE, MOVE_MOONBLAST}},
+        {{MOVE_FIRE_BLAST, MOVE_FLAMETHROWER}, {MOVE_FIERY_DANCE, MOVE_HEAT_WAVE, MOVE_OVERHEAT}},
+        {{MOVE_AURA_SPHERE}, {MOVE_FOCUS_BLAST}},
+        {{MOVE_CLOSE_COMBAT}, {MOVE_DRAIN_PUNCH}},
+        {{MOVE_DRAGON_PULSE, MOVE_FICKLE_BEAM}, {MOVE_DRACO_METEOR}},
+        {{MOVE_RISING_VOLTAGE}, {MOVE_VOLT_TACKLE}},
+        {{MOVE_ROCK_SLIDE}, {MOVE_STONE_EDGE}},
+        {{MOVE_FOUL_PLAY}, {MOVE_KNOCK_OFF}},
+    };
+    for (u32 i = 0; i < ARRAY_COUNT(redundant); i++)
+        for (u32 side = 0; side < 2; side++)
+            for (u32 m = 0; m < 4; m++)
+                if (redundant[i][side][m] != MOVE_NONE && SetHasMove(set, redundant[i][side][m]))
+                    RemovePoolMoves(pool, redundant[i][1 - side], 4);
 
     if (hasSpeedControl)
         RemovePoolMoves(pool, sSpeedControlMoves, ARRAY_COUNT(sSpeedControlMoves));
@@ -435,10 +488,11 @@ static bool32 AddRandomMoveFromList(
     return selected != MOVE_NONE && AddMove(set, pool, selected, template, variant);
 }
 
-static bool32 AddRandomStabMove(
+static bool32 AddRandomDamagingMove(
     struct CircuitGeneratedSet *set,
     struct CircuitMovePool *pool,
-    enum Type wantedType,
+    enum Type type,
+    bool32 matchType,
     const struct ShowdownCircuitTemplate *template,
     const struct ShowdownCircuitVariant *variant)
 {
@@ -450,7 +504,8 @@ static bool32 AddRandomStabMove(
         enum Move move = pool->moves[i];
         if (IsDamagingMove(move)
          && !IsNoStabMove(move)
-         && GetTemplateMoveType(move, template, variant) == wantedType
+         && (matchType ? GetTemplateMoveType(move, template, variant) == type
+                       : type == TYPE_NONE || GetTemplateMoveType(move, template, variant) != type)
          && CircuitRandomUniform(0, ++matches - 1) == 0)
             selected = move;
     }
@@ -475,28 +530,6 @@ static bool32 SetHasDamagingMove(const struct CircuitGeneratedSet *set)
         if (IsDamagingMove(set->moves[i]) && !IsNoStabMove(set->moves[i]))
             return TRUE;
     return FALSE;
-}
-
-static bool32 AddRandomDamagingMove(
-    struct CircuitGeneratedSet *set,
-    struct CircuitMovePool *pool,
-    enum Type excludedType,
-    const struct ShowdownCircuitTemplate *template,
-    const struct ShowdownCircuitVariant *variant)
-{
-    enum Move selected = MOVE_NONE;
-    u32 matches = 0;
-
-    for (u32 i = 0; i < pool->count; i++)
-    {
-        enum Move move = pool->moves[i];
-        if (IsDamagingMove(move)
-         && !IsNoStabMove(move)
-         && (excludedType == TYPE_NONE || GetTemplateMoveType(move, template, variant) != excludedType)
-         && CircuitRandomUniform(0, ++matches - 1) == 0)
-            selected = move;
-    }
-    return selected != MOVE_NONE && AddMove(set, pool, selected, template, variant);
 }
 
 static void CullTeamDuplicateMoves(struct CircuitMovePool *pool, const struct CircuitTeamDetails *details)
@@ -566,15 +599,15 @@ static void BuildShowdownMoveset(
     }
 
     if (!SetHasDamagingType(set, type1, template, variant))
-        AddRandomStabMove(set, &pool, type1, template, variant);
+        AddRandomDamagingMove(set, &pool, type1, TRUE, template, variant);
     if (type2 != type1 && !SetHasDamagingType(set, type2, template, variant))
-        AddRandomStabMove(set, &pool, type2, template, variant);
+        AddRandomDamagingMove(set, &pool, type2, TRUE, template, variant);
     if (template->preferredType != TYPE_NONE && !SetHasDamagingType(set, template->preferredType, template, variant))
-        AddRandomStabMove(set, &pool, template->preferredType, template, variant);
+        AddRandomDamagingMove(set, &pool, template->preferredType, TRUE, template, variant);
     if (!SetHasDamagingMove(set))
     {
-        if (!AddRandomStabMove(set, &pool, type1, template, variant) && type2 != type1)
-            AddRandomStabMove(set, &pool, type2, template, variant);
+        if (!AddRandomDamagingMove(set, &pool, type1, TRUE, template, variant) && type2 != type1)
+            AddRandomDamagingMove(set, &pool, type2, TRUE, template, variant);
     }
 
     if (template->role == SHOWDOWN_ROLE_BULKY_SETUP
@@ -620,7 +653,7 @@ static void BuildShowdownMoveset(
     }
 
     if (!SetHasDamagingMove(set))
-        AddRandomDamagingMove(set, &pool, TYPE_NONE, template, variant);
+        AddRandomDamagingMove(set, &pool, TYPE_NONE, FALSE, template, variant);
     if (template->role != SHOWDOWN_ROLE_SUPPORT
      && template->role != SHOWDOWN_ROLE_BULKY_SETUP
      && template->role != SHOWDOWN_ROLE_BULKY_ATTACKER)
@@ -636,7 +669,7 @@ static void BuildShowdownMoveset(
             }
         }
         if (damagingCount == 1)
-            AddRandomDamagingMove(set, &pool, onlyType, template, variant);
+            AddRandomDamagingMove(set, &pool, onlyType, FALSE, template, variant);
     }
 
     while (SetMoveCount(set) < MAX_MON_MOVES && pool.count != 0)
@@ -655,15 +688,8 @@ static void BuildShowdownMoveset(
             AddMove(set, &pool, MOVE_LIGHT_SCREEN, template, variant);
     }
 
-    // The Showdown data always has at least four moves before culling. This
-    // last fallback preserves a legal four-move set if interacting exclusions
-    // emptied the compact pool more aggressively than the TypeScript oracle.
-    for (u32 i = 0; SetMoveCount(set) < MAX_MON_MOVES && i < template->moveCount; i++)
-    {
-        enum Move move = template->moves[i];
-        if (!SetHasMove(set, move))
-            set->moves[SetMoveCount(set)] = move;
-    }
+    // If culling exhausted this role, the caller rejects it. Reintroducing
+    // removed moves here would silently undo every incompatibility rule.
 }
 
 static bool32 SetHasGrassDamage(
@@ -768,6 +794,29 @@ static enum Item GetTypeBoostingItem(enum Type type)
     return sTypeItems[type];
 }
 
+static enum Item ChooseChoiceItem(const struct CircuitGeneratedSet *set, const struct ShowdownCircuitVariant *variant, bool32 wallbreaker)
+{
+    u32 physical = 0, special = 0;
+    bool32 priority = FALSE;
+    u32 speed = gSpeciesInfo[variant->formSpecies].baseSpeed;
+
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+    {
+        enum Move move = set->moves[i];
+        if (!IsDamagingMove(move))
+            continue;
+        physical += GetMoveCategory(move) == DAMAGE_CATEGORY_PHYSICAL;
+        special += GetMoveCategory(move) == DAMAGE_CATEGORY_SPECIAL;
+        priority |= GetMovePriority(move) > 0;
+    }
+    // Adapted from Gen 9 getDoublesItem's scarfReqs and Choice role branch.
+    if (SetHasMove(set, MOVE_FINAL_GAMBIT)
+     || (!wallbreaker && !priority && set->ability != ABILITY_SPEED_BOOST
+      && speed >= 60 && speed <= 108 && CircuitRandomUniform(0, 1) == 0))
+        return ITEM_CHOICE_SCARF;
+    return physical > special ? ITEM_CHOICE_BAND : ITEM_CHOICE_SPECS;
+}
+
 static enum Item ChooseShowdownItem(
     const struct CircuitGeneratedSet *set,
     const struct ShowdownCircuitTemplate *template,
@@ -781,8 +830,22 @@ static enum Item ChooseShowdownItem(
         return variant->requiredItem;
     if (variant->partySpecies == SPECIES_PIKACHU)
         return ITEM_LIGHT_BALL;
+    if (variant->partySpecies == SPECIES_SMEARGLE)
+        return ITEM_FOCUS_SASH;
+    if (GetSpeciesEvolutions(variant->partySpecies) != NULL
+     && GetSpeciesEvolutions(variant->partySpecies)[0].method != EVOLUTIONS_END)
+        return ITEM_EVIOLITE;
+    if (SetHasMove(set, MOVE_GEOMANCY) || SetHasMove(set, MOVE_METEOR_BEAM)
+     || SetHasMove(set, MOVE_SKY_ATTACK) || SetHasMove(set, MOVE_ELECTRO_SHOT))
+        return ITEM_POWER_HERB;
+    if (ability == ABILITY_GUTS && !SetHasMove(set, MOVE_SLEEP_TALK))
+        return type1 == TYPE_FIRE || type2 == TYPE_FIRE ? ITEM_TOXIC_ORB : ITEM_FLAME_ORB;
+    if (ability == ABILITY_POISON_HEAL)
+        return ITEM_TOXIC_ORB;
+    if (ability == ABILITY_PROTOSYNTHESIS || ability == ABILITY_QUARK_DRIVE)
+        return ITEM_BOOSTER_ENERGY;
     if (template->role == SHOWDOWN_ROLE_CHOICE_ITEM)
-        return ITEM_CHOICE_SCARF;
+        return ChooseChoiceItem(set, variant, FALSE);
     if (ability == ABILITY_CHEEK_POUCH || ability == ABILITY_CUD_CHEW
      || ability == ABILITY_HARVEST || ability == ABILITY_RIPEN
      || SetHasMove(set, MOVE_BELLY_DRUM))
@@ -794,7 +857,7 @@ static enum Item ChooseShowdownItem(
     if (variant->partySpecies == SPECIES_RAMPARDOS && template->role == SHOWDOWN_ROLE_FAST_ATTACKER)
         return ITEM_CHOICE_SCARF;
     if (SetHasMove(set, MOVE_HEALING_WISH) || SetHasMove(set, MOVE_SWITCHEROO) || SetHasMove(set, MOVE_TRICK))
-        return ITEM_CHOICE_SCARF;
+        return ChooseChoiceItem(set, variant, template->role == SHOWDOWN_ROLE_WALLBREAKER);
     if (ability == ABILITY_UNBURDEN)
         return SetHasMove(set, MOVE_CLOSE_COMBAT) || SetHasMove(set, MOVE_LEAF_STORM) ? ITEM_WHITE_HERB : ITEM_SITRUS_BERRY;
     if (SetHasMove(set, MOVE_SHELL_SMASH))
@@ -808,6 +871,9 @@ static enum Item ChooseShowdownItem(
     if (SetHasMove(set, MOVE_REST) && !SetHasMove(set, MOVE_SLEEP_TALK)
      && ability != ABILITY_NATURAL_CURE && ability != ABILITY_SHED_SKIN)
         return ITEM_CHESTO_BERRY;
+    if (gSpeciesInfo[variant->formSpecies].baseSpeed <= 70
+     && (SetHasMove(set, MOVE_FOLLOW_ME) || SetHasMove(set, MOVE_RAGE_POWDER)))
+        return ITEM_ROCKY_HELMET;
     if ((type1 == TYPE_NORMAL || type2 == TYPE_NORMAL)
      && SetHasMove(set, MOVE_DOUBLE_EDGE) && SetHasMove(set, MOVE_FAKE_OUT))
         return ITEM_SILK_SCARF;
@@ -938,12 +1004,17 @@ static bool32 IsBaseDexExhausted(enum NationalDexOrder dex)
     return dex <= NATIONAL_DEX_COUNT && sExhaustedBaseDex[dex];
 }
 
+static bool32 IsMegaVariant(const struct ShowdownCircuitVariant *variant)
+{
+    return gItemsInfo[variant->requiredItem].sortType == ITEM_TYPE_MEGA_STONE;
+}
+
 static bool32 VariantAllowedByMegaState(const struct ShowdownCircuitVariant *variant, bool32 hasMega, bool32 groupHasMega)
 {
     if (hasMega)
-        return variant->requiredItem == ITEM_NONE;
+        return !IsMegaVariant(variant);
     if (groupHasMega)
-        return variant->requiredItem != ITEM_NONE;
+        return IsMegaVariant(variant);
     return TRUE;
 }
 
@@ -951,7 +1022,7 @@ static bool32 GroupHasMega(enum NationalDexOrder dex)
 {
     for (u32 i = 0; i < SHOWDOWN_CIRCUIT_VARIANT_COUNT; i++)
         if (SpeciesToNationalPokedexNum(gShowdownCircuitVariants[i].partySpecies) == dex
-         && gShowdownCircuitVariants[i].requiredItem != ITEM_NONE)
+         && IsMegaVariant(&gShowdownCircuitVariants[i]))
             return TRUE;
     return FALSE;
 }
@@ -1045,7 +1116,7 @@ static bool32 CompatibilityAllowed(const struct CircuitTeamState *team, u16 flag
     return TRUE;
 }
 
-static bool32 CandidateAllowed(const struct CircuitTeamState *team, const struct ShowdownCircuitVariant *variant, bool32 strict)
+static bool32 CandidateAllowed(const struct CircuitTeamState *team, const struct ShowdownCircuitVariant *variant)
 {
     enum Species species = variant->formSpecies;
     enum Type type1 = gSpeciesInfo[species].types[0];
@@ -1057,8 +1128,6 @@ static bool32 CandidateAllowed(const struct CircuitTeamState *team, const struct
         return FALSE;
     if (!CompatibilityAllowed(team, variant->compatibilityFlags))
         return FALSE;
-    if (!strict)
-        return TRUE;
     for (enum Type type = TYPE_NORMAL; type < NUMBER_OF_MON_TYPES; type++)
     {
         uq4_12_t modifier = GetSpeciesTypeModifier(type, species);
@@ -1072,21 +1141,200 @@ static bool32 CandidateAllowed(const struct CircuitTeamState *team, const struct
     return TRUE;
 }
 
+static enum Ability GetCircuitSetAbility(const struct CircuitGeneratedSet *set)
+{
+    const struct ShowdownCircuitVariant *variant = &gShowdownCircuitVariants[set->variantIndex];
+    return IsMegaVariant(variant) ? gSpeciesInfo[variant->formSpecies].abilities[0] : set->ability;
+}
+
 static void UpdateTeamDetails(struct CircuitTeamDetails *details, const struct CircuitGeneratedSet *set)
 {
-    details->rain |= set->ability == ABILITY_DRIZZLE || SetHasMove(set, MOVE_RAIN_DANCE);
-    details->sun |= set->ability == ABILITY_DROUGHT || SetHasMove(set, MOVE_SUNNY_DAY);
-    details->sand |= set->ability == ABILITY_SAND_STREAM;
-    details->snow |= set->ability == ABILITY_SNOW_WARNING || SetHasMove(set, MOVE_SNOWSCAPE) || SetHasMove(set, MOVE_CHILLY_RECEPTION);
+    enum Ability ability = GetCircuitSetAbility(set);
+
+    details->rain |= ability == ABILITY_DRIZZLE || ability == ABILITY_PRIMORDIAL_SEA || SetHasMove(set, MOVE_RAIN_DANCE);
+    details->sun |= ability == ABILITY_DROUGHT || ability == ABILITY_ORICHALCUM_PULSE
+                 || ability == ABILITY_DESOLATE_LAND || SetHasMove(set, MOVE_SUNNY_DAY);
+    details->sand |= ability == ABILITY_SAND_STREAM || SetHasMove(set, MOVE_SANDSTORM);
+    details->snow |= ability == ABILITY_SNOW_WARNING || SetHasMove(set, MOVE_SNOWSCAPE) || SetHasMove(set, MOVE_CHILLY_RECEPTION);
     details->statusCure |= SetHasMove(set, MOVE_HEAL_BELL);
     if (SetHasMove(set, MOVE_SPIKES) || SetHasMove(set, MOVE_CEASELESS_EDGE))
         details->spikes++;
-    details->toxicSpikes |= SetHasMove(set, MOVE_TOXIC_SPIKES) || set->ability == ABILITY_TOXIC_DEBRIS;
+    details->toxicSpikes |= SetHasMove(set, MOVE_TOXIC_SPIKES) || ability == ABILITY_TOXIC_DEBRIS;
     details->stealthRock |= SetHasMove(set, MOVE_STEALTH_ROCK) || SetHasMove(set, MOVE_STONE_AXE);
     details->stickyWeb |= SetHasMove(set, MOVE_STICKY_WEB);
     details->defog |= SetHasMove(set, MOVE_DEFOG);
     details->rapidSpin |= SetHasMove(set, MOVE_RAPID_SPIN) || SetHasMove(set, MOVE_MORTAL_SPIN);
-    details->screens |= SetHasMove(set, MOVE_AURORA_VEIL);
+    details->screens |= SetHasMove(set, MOVE_AURORA_VEIL)
+                     || SetHasMove(set, MOVE_REFLECT) || SetHasMove(set, MOVE_LIGHT_SCREEN);
+    if (ability == ABILITY_ELECTRIC_SURGE || ability == ABILITY_HADRON_ENGINE || SetHasMove(set, MOVE_ELECTRIC_TERRAIN))
+        details->terrain |= (1u << B_TERRAIN_ELECTRIC);
+    if (ability == ABILITY_PSYCHIC_SURGE || SetHasMove(set, MOVE_PSYCHIC_TERRAIN))
+        details->terrain |= (1u << B_TERRAIN_PSYCHIC);
+    if (ability == ABILITY_GRASSY_SURGE || SetHasMove(set, MOVE_GRASSY_TERRAIN))
+        details->terrain |= (1u << B_TERRAIN_GRASSY);
+    if (ability == ABILITY_MISTY_SURGE || SetHasMove(set, MOVE_MISTY_TERRAIN))
+        details->terrain |= (1u << B_TERRAIN_MISTY);
+}
+
+static bool32 TeamHasSpecies(const struct CircuitTeamState *team, enum Species species)
+{
+    for (u32 i = 0; i < team->count; i++)
+        if (gShowdownCircuitVariants[team->sets[i].variantIndex].partySpecies == species)
+            return TRUE;
+    return FALSE;
+}
+
+// Evaluate the selected sets, not only species labels: roles can change an
+// Ability, weather, speed plan, or the partner a Pokemon actually needs.
+static bool32 TeamIsCoherent(const struct CircuitTeamState *team)
+{
+    u32 physical = 0, special = 0, attackers = 0, speedControl = 0, slow = 0, fragile = 0;
+    bool32 trickRoom = TeamHasMove(team, MOVE_TRICK_ROOM);
+    const struct CircuitTeamDetails *d = &team->details;
+
+    if (d->rain + d->sun + d->sand + d->snow > 1)
+        return FALSE;
+    for (u32 i = 0; i < team->count; i++)
+    {
+        const struct CircuitGeneratedSet *set = &team->sets[i];
+        enum Species species = gShowdownCircuitVariants[set->variantIndex].formSpecies;
+        u32 attacks = 0, totalStats = 0;
+        enum Ability ability = GetCircuitSetAbility(set);
+
+        for (u32 stat = 0; stat < NUM_STATS; stat++)
+            totalStats += GetSpeciesBaseStat(species, stat);
+        fragile += totalStats < 420;
+        slow += gSpeciesInfo[species].baseSpeed <= 65;
+        speedControl += SetHasMoveFromList(set, sSpeedControlMoves, ARRAY_COUNT(sSpeedControlMoves));
+        for (u32 m = 0; m < MAX_MON_MOVES; m++)
+        {
+            enum Move move = set->moves[m];
+            if (!IsDamagingMove(move))
+                continue;
+            attacks++;
+            physical += GetMoveCategory(move) == DAMAGE_CATEGORY_PHYSICAL;
+            special += GetMoveCategory(move) == DAMAGE_CATEGORY_SPECIAL;
+        }
+        attackers += attacks != 0;
+        if ((set->dependency == CIRCUIT_DEPENDENCY_RAIN && !d->rain)
+         || (set->dependency == CIRCUIT_DEPENDENCY_SUN && !d->sun)
+         || (set->dependency == CIRCUIT_DEPENDENCY_SAND && !d->sand)
+         || (set->dependency == CIRCUIT_DEPENDENCY_SNOW && !d->snow)
+         || (set->dependency == CIRCUIT_DEPENDENCY_TRICK_ROOM && !trickRoom)
+         || (set->dependency == CIRCUIT_DEPENDENCY_TERRAIN && !d->terrain)
+         || (set->dependency == CIRCUIT_DEPENDENCY_GRAVITY && !TeamHasMove(team, MOVE_GRAVITY)))
+            return FALSE;
+        if (ability == ABILITY_COMMANDER && !TeamHasSpecies(team, SPECIES_DONDOZO))
+            return FALSE;
+        if (SetHasMove(set, MOVE_AURORA_VEIL) && !d->snow)
+            return FALSE;
+        if (SetHasMove(set, MOVE_WEATHER_BALL) && !(d->rain || d->sun || d->sand || d->snow))
+            return FALSE;
+        if ((SetHasMove(set, MOVE_SOLAR_BEAM) || SetHasMove(set, MOVE_SOLAR_BLADE))
+         && !d->sun && set->item != ITEM_POWER_HERB)
+            return FALSE;
+        if (ability == ABILITY_SWIFT_SWIM && !d->rain)
+            return FALSE;
+        if ((ability == ABILITY_CHLOROPHYLL || ability == ABILITY_SOLAR_POWER) && !d->sun)
+            return FALSE;
+        if (ability == ABILITY_SAND_RUSH && !d->sand)
+            return FALSE;
+        if (ability == ABILITY_SLUSH_RUSH && !d->snow)
+            return FALSE;
+        if (ability == ABILITY_SURGE_SURFER && !(d->terrain & (1u << B_TERRAIN_ELECTRIC)))
+            return FALSE;
+        if (SetHasMove(set, MOVE_EXPANDING_FORCE) && !(d->terrain & (1u << B_TERRAIN_PSYCHIC)))
+            return FALSE;
+        if (SetHasMove(set, MOVE_GRASSY_GLIDE) && !(d->terrain & (1u << B_TERRAIN_GRASSY)))
+            return FALSE;
+        if (ability == ABILITY_SCREEN_CLEANER && d->screens)
+            return FALSE;
+    }
+    return attackers >= 4 && physical && special && speedControl && fragile <= 1
+        && (!trickRoom || slow >= 2);
+}
+
+static u32 LeadSupportScore(const struct CircuitGeneratedSet *set)
+{
+    return 3 * SetHasMove(set, MOVE_FAKE_OUT)
+         + 3 * SetHasMove(set, MOVE_TAILWIND)
+         + 2 * (SetHasMove(set, MOVE_FOLLOW_ME) || SetHasMove(set, MOVE_RAGE_POWDER))
+         + (set->ability == ABILITY_INTIMIDATE);
+}
+
+static void ChooseCoherentLeads(struct CircuitTeamState *team)
+{
+    u32 bestA = 0, bestB = 1, bestScore = 0;
+    bool32 foundLead = FALSE;
+    for (u32 a = 0; a < PARTY_SIZE; a++)
+    {
+        for (u32 b = a + 1; b < PARTY_SIZE; b++)
+        {
+            const struct CircuitGeneratedSet *left = &team->sets[a], *right = &team->sets[b];
+            enum Species speciesA = gShowdownCircuitVariants[left->variantIndex].formSpecies;
+            enum Species speciesB = gShowdownCircuitVariants[right->variantIndex].formSpecies;
+            u32 score = LeadSupportScore(left) + LeadSupportScore(right);
+            enum Ability leftAbility = GetCircuitSetAbility(left);
+            enum Ability rightAbility = GetCircuitSetAbility(right);
+            struct CircuitTeamDetails leftField = {0}, rightField = {0};
+            bool32 leftAttacks = FALSE, rightAttacks = FALSE;
+            UpdateTeamDetails(&leftField, left);
+            UpdateTeamDetails(&rightField, right);
+            for (u32 m = 0; m < MAX_MON_MOVES; m++)
+            {
+                leftAttacks |= IsDamagingMove(left->moves[m]) && left->moves[m] != MOVE_FAKE_OUT;
+                rightAttacks |= IsDamagingMove(right->moves[m]) && right->moves[m] != MOVE_FAKE_OUT;
+            }
+            // A pair of support-only leads must not outrank every attacker.
+            if (!leftAttacks && !rightAttacks)
+                continue;
+            if ((leftField.rain && rightAbility == ABILITY_SWIFT_SWIM)
+             || (rightField.rain && leftAbility == ABILITY_SWIFT_SWIM)
+             || (leftField.sun && rightAbility == ABILITY_CHLOROPHYLL)
+             || (rightField.sun && leftAbility == ABILITY_CHLOROPHYLL)
+             || (leftField.sand && rightAbility == ABILITY_SAND_RUSH)
+             || (rightField.sand && leftAbility == ABILITY_SAND_RUSH)
+             || (leftField.snow && rightAbility == ABILITY_SLUSH_RUSH)
+             || (rightField.snow && leftAbility == ABILITY_SLUSH_RUSH)
+             || ((leftField.terrain & (1u << B_TERRAIN_ELECTRIC)) && rightAbility == ABILITY_SURGE_SURFER)
+             || ((rightField.terrain & (1u << B_TERRAIN_ELECTRIC)) && leftAbility == ABILITY_SURGE_SURFER)
+             || ((leftField.terrain & (1u << B_TERRAIN_PSYCHIC)) && SetHasMove(right, MOVE_EXPANDING_FORCE))
+             || ((rightField.terrain & (1u << B_TERRAIN_PSYCHIC)) && SetHasMove(left, MOVE_EXPANDING_FORCE)))
+                score += 6;
+            // Retain a healthy last-party disguise for Illusion users.
+            if (leftAbility == ABILITY_ILLUSION || rightAbility == ABILITY_ILLUSION)
+                continue;
+            if (SetHasMove(left, MOVE_TRICK_ROOM) && gSpeciesInfo[speciesB].baseSpeed <= 65)
+                score += 5;
+            if (SetHasMove(right, MOVE_TRICK_ROOM) && gSpeciesInfo[speciesA].baseSpeed <= 65)
+                score += 5;
+            if ((leftAbility == ABILITY_COMMANDER && speciesB == SPECIES_DONDOZO)
+             || (rightAbility == ABILITY_COMMANDER && speciesA == SPECIES_DONDOZO))
+                score += 12;
+            if (!foundLead || score > bestScore)
+            {
+                foundLead = TRUE;
+                bestScore = score;
+                bestA = a;
+                bestB = b;
+            }
+        }
+    }
+    // Opponent party creation reverses the selected order.
+    struct CircuitGeneratedSet swap = team->sets[PARTY_SIZE - 1];
+    team->sets[PARTY_SIZE - 1] = team->sets[bestA];
+    team->sets[bestA] = swap;
+    if (bestB == PARTY_SIZE - 1)
+        bestB = bestA;
+    swap = team->sets[PARTY_SIZE - 2];
+    team->sets[PARTY_SIZE - 2] = team->sets[bestB];
+    team->sets[bestB] = swap;
+    if (team->sets[0].ability == ABILITY_ILLUSION)
+    {
+        swap = team->sets[0];
+        team->sets[0] = team->sets[1];
+        team->sets[1] = swap;
+    }
 }
 
 static void AddSetToTeamState(struct CircuitTeamState *team, struct CircuitGeneratedSet *set)
@@ -1112,11 +1360,11 @@ static void AddSetToTeamState(struct CircuitTeamState *team, struct CircuitGener
     if (IsFreezeDryWeak(species))
         team->freezeDryWeakCount++;
     team->compatibilityFlags |= variant->compatibilityFlags;
-    team->hasMega |= variant->requiredItem != ITEM_NONE;
+    team->hasMega |= IsMegaVariant(variant);
     UpdateTeamDetails(&team->details, set);
 }
 
-static bool32 GenerateShowdownTeam(struct CircuitTeamState *team, bool32 strict)
+static bool32 GenerateShowdownTeam(struct CircuitTeamState *team)
 {
     memset(sExhaustedBaseDex, 0, sizeof(sExhaustedBaseDex));
     memset(team, 0, sizeof(*team));
@@ -1136,20 +1384,37 @@ static bool32 GenerateShowdownTeam(struct CircuitTeamState *team, bool32 strict)
         variant = &gShowdownCircuitVariants[variantIndex];
         if (dex == SpeciesToNationalPokedexNum(SPECIES_ZOROARK) && team->count < 1)
             continue;
-        if (!CandidateAllowed(team, variant, strict))
+        if (!CandidateAllowed(team, variant))
             continue;
 
         templateIndex = variant->templateOffset
                       + CircuitRandomUniform(0, variant->templateCount - 1);
         template = &gShowdownCircuitTemplates[templateIndex];
         set.variantIndex = variantIndex;
-        BuildShowdownMoveset(&set, template, variant, &team->details);
-        set.ability = ChooseShowdownAbility(&set, template, variant, &team->details);
-        set.item = ChooseShowdownItem(&set, template, variant);
-        SetShowdownStatPoints(&set, template);
+        set.dependency = template->dependency;
+        if (template->authored)
+        {
+            memcpy(set.moves, template->moves, sizeof(set.moves));
+            set.ability = template->abilities[0];
+            set.item = template->item;
+            set.nature = template->nature;
+            memcpy(set.statPoints, template->statPoints, sizeof(set.statPoints));
+        }
+        else
+        {
+            BuildShowdownMoveset(&set, template, variant, &team->details);
+            if (SetMoveCount(&set) < min(MAX_MON_MOVES, template->moveCount))
+                continue;
+            set.ability = ChooseShowdownAbility(&set, template, variant, &team->details);
+            set.item = ChooseShowdownItem(&set, template, variant);
+            SetShowdownStatPoints(&set, template);
+        }
         AddSetToTeamState(team, &set);
     }
-    return team->count == CIRCUIT_TEAM_SIZE;
+    if (team->count != CIRCUIT_TEAM_SIZE || !TeamIsCoherent(team))
+        return FALSE;
+    ChooseCoherentLeads(team);
+    return TRUE;
 }
 
 static bool32 FindAbilitySlot(enum Species species, enum Ability ability, u32 *slot)
@@ -1165,15 +1430,70 @@ static bool32 FindAbilitySlot(enum Species species, enum Ability ability, u32 *s
     return FALSE;
 }
 
+static void OptimizeCircuitBellyDrumHp(struct CircuitGeneratedSet *set, enum Species species, u8 level)
+{
+    // Champions fixes IVs at 31. At level 100, ordinary HP investments all
+    // yield odd HP except 32 points (whose investment caps at 63). Therefore
+    // simply lowering an IV, as mainline randbats do, cannot fix the berry.
+    static const u8 donors[] = {STAT_SPATK, STAT_SPDEF, STAT_DEF, STAT_ATK, STAT_SPEED};
+    static const u8 recipients[] = {STAT_SPEED, STAT_ATK, STAT_DEF, STAT_SPDEF, STAT_SPATK};
+    if (set->item != ITEM_SITRUS_BERRY || !SetHasMove(set, MOVE_BELLY_DRUM))
+        return;
+    for (s32 distance = 0; distance <= 32; distance++)
+    {
+        for (s32 direction = -1; direction <= 1; direction += 2)
+        {
+            s32 hpPoints = set->statPoints[STAT_HP] + direction * distance;
+            s32 remaining = direction * distance;
+            u8 points[NUM_STATS];
+            u32 hp;
+            if (hpPoints < 0 || hpPoints > 32)
+                continue;
+            hp = ((2 * GetSpeciesBaseHP(species) + 31 + min(2 * hpPoints, 63)) * level) / 100 + level + 10;
+            if (hp & 1)
+                continue;
+            memcpy(points, set->statPoints, sizeof(points));
+            points[STAT_HP] = hpPoints;
+            for (u32 i = 0; i < ARRAY_COUNT(donors) && remaining; i++)
+            {
+                u32 stat = remaining > 0 ? donors[i] : recipients[i];
+                if (remaining > 0)
+                {
+                    u32 transfer = min(remaining, points[stat]);
+                    points[stat] -= transfer;
+                    remaining -= transfer;
+                }
+                else
+                {
+                    u32 transfer = min(-remaining, 32 - points[stat]);
+                    points[stat] += transfer;
+                    remaining += transfer;
+                }
+            }
+            if (remaining == 0)
+            {
+                memcpy(set->statPoints, points, sizeof(points));
+                return;
+            }
+        }
+    }
+}
+
 static void CreateCircuitMon(struct Pokemon *mon, const struct CircuitGeneratedSet *set, u8 level)
 {
     const struct ShowdownCircuitVariant *variant = &gShowdownCircuitVariants[set->variantIndex];
+    struct CircuitGeneratedSet optimized = *set;
     u8 ppBonuses = 0;
     u8 iv = MAX_PER_STAT_IVS;
     u32 abilitySlot = 0;
     u8 nature = set->nature;
 
-    CreateMon(mon, variant->partySpecies, level, Random32(), OTID_STRUCT_RANDOM_NO_SHINY);
+    OptimizeCircuitBellyDrumHp(&optimized, variant->partySpecies, level);
+    set = &optimized;
+
+    // Never index a level-100 experience table with an overlevel opponent.
+    CreateMon(mon, variant->partySpecies, min(level, MAX_LEVEL), Random32(), OTID_STRUCT_RANDOM_NO_SHINY);
+    SetMonData(mon, MON_DATA_LEVEL, &level);
     for (u32 stat = 0; stat < NUM_STATS; stat++)
         SetMonData(mon, MON_DATA_HP_IV + stat, &iv);
     if (set->zeroAttackIv)
@@ -1256,14 +1576,10 @@ void ChampionsCircuitGenerateOpponent(void)
 {
     struct CircuitTeamState team;
     u16 wins = VarGet(VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS);
-    u8 baseLevel = min(MAX_LEVEL, CIRCUIT_BASE_LEVEL + wins / PARTY_SIZE);
-    u8 boostedSlots = wins % PARTY_SIZE;
     bool32 generated = FALSE;
 
-    for (u32 attempt = 0; attempt < 8 && !generated; attempt++)
-        generated = GenerateShowdownTeam(&team, TRUE);
-    for (u32 attempt = 0; attempt < 4 && !generated; attempt++)
-        generated = GenerateShowdownTeam(&team, FALSE);
+    for (u32 attempt = 0; attempt < 64 && !generated; attempt++)
+        generated = GenerateShowdownTeam(&team);
     if (!generated)
     {
         gSpecialVar_Result = 0;
@@ -1275,12 +1591,9 @@ void ChampionsCircuitGenerateOpponent(void)
     // preserves its lead/Illusion convention.
     for (u32 slot = 0; slot < PARTY_SIZE; slot++)
     {
-        u8 level = baseLevel;
-        if (slot < boostedSlots && level < MAX_LEVEL)
-            level++;
+        u8 level = GetChampionsCircuitOpponentLevel(wins, slot);
         CreateCircuitMon(&gParties[B_TRAINER_OPPONENT_A][slot], &team.sets[PARTY_SIZE - 1 - slot], level);
     }
-    ApplyTrainerLevelDifficulty(&gParties[B_TRAINER_OPPONENT_A][0]);
     CalculateEnemyPartyCount();
     if (team.details.rain)
         StringCopy(gStringVar1, sCircuitStyleRain);
@@ -1294,7 +1607,8 @@ void ChampionsCircuitGenerateOpponent(void)
         StringCopy(gStringVar1, sCircuitStyleTrickRoom);
     else
         StringCopy(gStringVar1, sCircuitStyleShowdown);
-    ConvertIntToDecimalStringN(gStringVar2, wins + 1, STR_CONV_MODE_LEFT_ALIGN, 3);
+    ConvertIntToDecimalStringN(gStringVar2, (u32)wins + 1, STR_CONV_MODE_LEFT_ALIGN, 5);
+    ConvertIntToDecimalStringN(gStringVar3, GetChampionsCircuitOpponentLevel(wins, 0), STR_CONV_MODE_LEFT_ALIGN, 3);
     gSpecialVar_Result = PARTY_SIZE;
 }
 
@@ -1338,7 +1652,7 @@ void ChampionsCircuitHandleBattleResult(void)
             VarSet(VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, wins + 1);
         if (total != 0xFFFF)
             VarSet(VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS, total + 1);
-        points = AwardCircuitBattlePoints(wins, total + 1);
+        points = AwardCircuitBattlePoints(wins, min((u32)total + 1, 0xFFFF));
         ConvertIntToDecimalStringN(gStringVar3, points, STR_CONV_MODE_LEFT_ALIGN, 2);
         HealPlayerParty();
         gSpecialVar_Result = TRUE;
@@ -1368,7 +1682,13 @@ void ChampionsCircuitTryGiveReward(void)
         rewardIndex++;
         if (wins < rewardIndex * CIRCUIT_REWARD_INTERVAL || IsLegendarySignCaught(signId))
             continue;
-        giveResult = GiveLegendarySignReward(sign->species, CIRCUIT_BASE_LEVEL);
+        giveResult = GiveLegendarySignReward(sign->species, CIRCUIT_REWARD_LEVEL);
+        if (giveResult == LEGENDARY_REWARD_UNAVAILABLE)
+        {
+            StringCopy(gStringVar1, GetSpeciesName(sign->species));
+            gSpecialVar_Result = 4;
+            return;
+        }
         if (giveResult == MON_CANT_GIVE)
         {
             gSpecialVar_Result = 3;
@@ -1386,7 +1706,13 @@ void ChampionsCircuitTryGiveReward(void)
         for (enum LegendarySignId signId = 0; signId < LEGENDARY_SIGN_COUNT; signId++)
             if (gLegendarySignDefinitions[signId].source == LEGENDARY_SOURCE_CIRCUIT && !IsLegendarySignCaught(signId))
                 return;
-        giveResult = GiveLegendarySignReward(SPECIES_ETERNATUS, CIRCUIT_BASE_LEVEL);
+        giveResult = GiveLegendarySignReward(SPECIES_ETERNATUS, CIRCUIT_REWARD_LEVEL);
+        if (giveResult == LEGENDARY_REWARD_UNAVAILABLE)
+        {
+            StringCopy(gStringVar1, GetSpeciesName(SPECIES_ETERNATUS));
+            gSpecialVar_Result = 4;
+            return;
+        }
         if (giveResult == MON_CANT_GIVE)
         {
             gSpecialVar_Result = 3;
@@ -1399,6 +1725,7 @@ void ChampionsCircuitTryGiveReward(void)
 
 void ChampionsCircuitEnd(void)
 {
+    ConvertIntToDecimalStringN(gStringVar2, VarGet(VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS), STR_CONV_MODE_LEFT_ALIGN, 5);
     if (VarGet(VAR_CHAMPIONS_CIRCUIT_ACTIVE))
     {
         LoadPlayerParty();

@@ -79,15 +79,20 @@ COHESION_FILES = [
 ]
 DIALOGUE_FILES = tuple(dict.fromkeys(STORY_FILES + COHESION_FILES))
 STORY_BEATS = {
-    "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc": ("one tradition from nine", "Preparation is easy"),
     "data/maps/RustboroCity_DevonCorp_3F/scripts.inc": ("CHAMPION'S SIGNS", "ITEM_PIDGEOTITE"),
     "data/maps/GraniteCave_StevensRoom/scripts.inc": ("FLAG_BADGE02_GET", "ITEM_MEGA_RING", "CHAMPION'S SIGNS"),
     "data/maps/SlateportCity_OceanicMuseum_2F/scripts.inc": ("the sea", "trace the deep current"),
     "data/maps/MtChimney/scripts.inc": ("stable, permanent field", "fault line"),
     "data/maps/MagmaHideout_4F/scripts.inc": ("GROUDON", "my plan did"),
-    "data/maps/Route119_WeatherInstitute_2F/scripts.inc": ("ROUTE 111", "SCORCHED SLAB", "SEASPRAY"),
+    "data/maps/Route119_WeatherInstitute_2F/scripts.inc": (
+        "Before each SIGN's challenge", "DEVON's researchers in RUSTBORO",
+        "The northern bridge is clear now", "Follow ROUTE 119 to FORTREE's GYM",
+    ),
     "data/maps/MtPyre_Summit/scripts.inc": ("network of", "RAYQUAZA"),
-    "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc": ("partners", "METEOR FALLS"),
+    "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc": (
+        "partners", "Come to my home west of the GYM", "I have the HM DIVE for you",
+        "stolen submarine",
+    ),
     "data/maps/SeafloorCavern_Room9/scripts.inc": ("KYOGRE", "We never understood the ORBS"),
     "data/maps/SootopolisCity/scripts.inc": ("RAYQUAZA", "restored their relationship"),
     "data/maps/EverGrandeCity_ChampionsRoom/scripts.inc": ("Nothing was hidden behind grinding", "FRONTIER waits"),
@@ -385,24 +390,14 @@ def verify_legendary_sign_completion_guidance() -> None:
         devon,
         re.DOTALL,
     )
-    require(block is not None, "Devon's exhausted conditional-Sign guidance is missing")
+    require(block is not None, "Devon's research-completion guidance is missing")
     guidance = block.group("body")
-    require("Every wild Legendary Sign is awake" not in guidance,
-            "Devon still claims every wild Sign is awake after checking only conditional-wild Signs")
-    for phrase in (
-        "conditional wild SIGN",
-        "visible shrines",
-        "rare wild finds",
-        "breeding",
-        "GAME",
-        "CORNER",
-        "CIRCUIT rewards",
-        "mastery",
-        "MT.",
-        "PYRE's three",
-        "ARCEUS",
-    ):
-        require(phrase in guidance, f"Devon's Sign-completion guidance omits {phrase!r}")
+    # Devon now researches all acquisition sources individually. The old
+    # conditional-only completion message must not be required or restored.
+    require("BuildLegendarySignResearchMenu" in devon and "ResearchSelectedLegendarySign" in devon,
+            "Devon is missing the individual Sign research flow")
+    for phrase in ("Gym challenge", "Hoenn's story", "PYRE's three", "ARCEUS", "knockout", "unfinished"):
+        require(phrase in guidance, f"Devon's research-completion guidance omits {phrase!r}")
 
 
 def verify_stat_point_explanation_replaced_iv_rater() -> None:
@@ -482,6 +477,30 @@ def main() -> None:
         text = (ROOT / relative).read_text()
         for phrase in phrases:
             require(phrase in text, f"{relative}: missing story beat {phrase!r}")
+
+    birch = (ROOT / "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc").read_text()
+    def birch_block(suffix: str) -> str:
+        label = "LittlerootTown_ProfessorBirchsLab_" + suffix
+        match = re.search(r"(?m)^" + re.escape(label) + r"::?\n(.*?)(?=\n\S|\Z)", birch, re.S)
+        require(match is not None, f"Birch opening block is missing: {label}")
+        return match.group(1)
+
+    # Check executable handoffs and useful navigation rather than fixing the
+    # professor's voice to one particular sentence.
+    grant = birch_block("EventScript_GivePokedex")
+    for suffix in ("HeardYouBeatRivalTakePokedex", "ExplainPokedex"):
+        require("msgbox LittlerootTown_ProfessorBirchsLab_Text_" + suffix in grant,
+                f"Birch's Pokedex handoff no longer shows {suffix}")
+        require(".string" in birch_block("Text_" + suffix), f"Birch dialogue is empty: {suffix}")
+    require("call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex" in grant,
+            "Birch's Pokedex conversation no longer awards the Pokedex")
+    require("setflag FLAG_SYS_POKEDEX_GET" in birch_block("EventScript_ReceivePokedex"),
+            "Birch's Pokedex award no longer unlocks the Pokedex")
+    directions = birch_block("Text_MightBeGoodIdeaToGoSeeRival")
+    for hint in ("LEVELER", "OLDALE", "ROUTE 103"):
+        require(hint in directions, f"Birch's first-journey guidance lost {hint}")
+    require("msgbox LittlerootTown_ProfessorBirchsLab_Text_MightBeGoodIdeaToGoSeeRival" in birch,
+            "Birch's first-journey guidance is no longer linked")
 
     steven = (ROOT / "data/maps/GraniteCave_StevensRoom/scripts.inc").read_text()
     require(steven.index("goto_if_unset FLAG_BADGE02_GET") < steven.index("giveitem ITEM_MEGA_RING"),

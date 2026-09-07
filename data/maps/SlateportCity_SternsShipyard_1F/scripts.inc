@@ -63,32 +63,24 @@ SlateportCity_SternsShipyard_1F_EventScript_Briney::
 	end
 
 SlateportCity_SternsShipyard_1F_Text_CantMakeHeadsOrTails:
-	.string "Umm… If this goes here, and that\n"
-	.string "goes over there…\p"
-	.string "Then where does this thing go?\n"
-	.string "And what about that doohickey?\p"
-	.string "Aaargh! I can't make heads or tails\n"
-	.string "of this!$"
+	.string "The hull fits. The engine fits.\n"
+	.string "So why won't these measurements agree?\p"
+	.string "If I move this here…\n"
+	.string "No, then that won't fit!$"
 
 SlateportCity_SternsShipyard_1F_Text_MeetDockDeliverToStern:
-	.string "Hm?\n"
-	.string "Hi, I'm DOCK.\p"
-	.string "CAPT. STERN commissioned me to\n"
-	.string "design a ferry.\p"
-	.string "Oh! That there…\n"
-	.string "Are they DEVON GOODS?\p"
-	.string "But, hmm…\n"
-	.string "This won't do…\p"
-	.string "CAPT. STERN went off somewhere.\n"
-	.string "He said he had some work to do.\p"
-	.string "Could I get you to go find CAPT.\n"
-	.string "STERN and deliver that to him?$"
+	.string "Hm? Oh, sorry. I'm DOCK.\n"
+	.string "CAPT. STERN asked me to design a ferry.\p"
+	.string "Are those the DEVON GOODS?\n"
+	.string "He's been waiting for them.\p"
+	.string "He's at the OCEANIC MUSEUM.\n"
+	.string "Take the parcel straight to him.$"
 
 SlateportCity_SternsShipyard_1F_Text_CouldYouFindStern:
-	.string "DOCK: Where could CAPT. STERN have\n"
-	.string "gone off to?\p"
-	.string "Could you go find CAPT. STERN and\n"
-	.string "deliver that parcel to him?$"
+	.string "DOCK: Try the OCEANIC MUSEUM.\n"
+	.string "CAPT. STERN needs that parcel.\p"
+	.string "I'll be here, arguing with\n"
+	.string "these measurements…$"
 
 SlateportCity_SternsShipyard_1F_Text_CouldUseAdviceFromVeteran:
 	.string "DOCK: Shipbuilding is an art.\p"

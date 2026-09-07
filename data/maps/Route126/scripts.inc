@@ -7,7 +7,7 @@ Route126_OnTransition:
 	end
 
 Route126_EventScript_Barry::
-	trainerbattle_single TRAINER_BARRY, Route126_Text_BarryIntro, Route126_Text_BarryDefeat
+	trainerbattle_double TRAINER_BARRY, Route126_Text_BarryIntro, Route126_Text_BarryDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route126_Text_BarryPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -27,13 +27,11 @@ Route126_EventScript_Brenda::
 	end
 
 Route126_EventScript_Leonardo::
-	trainerbattle_double TRAINER_LEONARDO, Route126_Text_LeonardoIntro, Route126_Text_LeonardoDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route126_Text_LeonardoPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route126_Text_LEONARDO_LocalConversation, MSGBOX_NPC
 	end
 
 Route126_EventScript_Isobel::
-	trainerbattle_single TRAINER_ISOBEL, Route126_Text_IsobelIntro, Route126_Text_IsobelDefeat
-	msgbox Route126_Text_IsobelPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route126_Text_ISOBEL_LocalConversation, MSGBOX_NPC
 	end
 
 Route126_EventScript_Sienna::
@@ -62,3 +60,11 @@ Route126_EventScript_RematchPablo::
 	msgbox Route126_Text_PabloPostRematch, MSGBOX_AUTOCLOSE
 	end
 
+
+Route126_Text_LEONARDO_LocalConversation:
+	.string "I was racing a FLOATZEL.\n"
+	.string "Now I am enjoying a quiet swim.$"
+
+Route126_Text_ISOBEL_LocalConversation:
+	.string "My warm-up was a little long.\n"
+	.string "I think I crossed a time zone.$"

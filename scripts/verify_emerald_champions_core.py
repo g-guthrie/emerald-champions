@@ -11,6 +11,20 @@ from item_catalog import battle_item_categories, free_vendor_items
 
 ROOT = Path(__file__).resolve().parents[1]
 
+
+def map_source_paths(root: Path):
+    """Read authored map sources, excluding binary assets and transfer metadata."""
+    for path in sorted(root.rglob("*")):
+        relative = path.relative_to(root)
+        if (path.is_file() and path.suffix in {".inc", ".s", ".json"}
+                and not any(part.startswith(".") or "_Frlg" in part for part in relative.parts)):
+            yield path
+
+
+def read_map_sources(root: Path) -> str:
+    # Invalid UTF-8 in an actual source is still an error, not a skipped check.
+    return "\n".join(path.read_text(encoding="utf-8") for path in map_source_paths(root))
+
 # Persisted by the 81e288b51995c59c1dbc640f77907b8120788bc9 save
 # contract. These ordinals are data, not merely names: the runtime migration
 # copies their bits into the current append-only Sign fields.
@@ -282,11 +296,7 @@ def main() -> None:
         "Dynamax:" not in trainers and "Gigantamax:" not in trainers and "Tera Type:" not in trainers,
         "an authored campaign trainer uses a non-Mega gimmick",
     )
-    active_hoenn_source = "\n".join(
-        path.read_text()
-        for path in (ROOT / "data/maps").glob("*/**/*")
-        if path.is_file() and "_Frlg" not in path.parts[-2]
-    )
+    active_hoenn_source = read_map_sources(ROOT / "data/maps")
     for inaccessible_gimmick_item in ("ITEM_Z_POWER_RING", "ITEM_DYNAMAX_BAND", "ITEM_TERA_ORB"):
         require(
             inaccessible_gimmick_item not in active_hoenn_source,
@@ -521,11 +531,14 @@ def main() -> None:
 
     mega_items = set()
     z_crystal_items = set()
+    memory_items = set()
     for match in re.finditer(r"\[(ITEM_[A-Z0-9_]+)\]\s*=\s*\{(.*?)\n\s*\},", items, re.S):
         if "HOLD_EFFECT_MEGA_STONE" in match.group(2):
             mega_items.add(match.group(1))
         if "HOLD_EFFECT_Z_CRYSTAL" in match.group(2):
             z_crystal_items.add(match.group(1))
+        if re.search(r"\.sortType\s*=\s*ITEM_TYPE_MEMORY\b", match.group(2)):
+            memory_items.add(match.group(1))
     require(not free_items.intersection(mega_items), "Mega Stones leaked into the free vendor")
     evolution_items = set(re.findall(
         r"ITEM_[A-Z0-9_]+",
@@ -533,7 +546,11 @@ def main() -> None:
     ))
     require(not free_items.intersection(evolution_items), "Evolution items leaked into the free vendor")
     forbidden_parts = ("_PLATE", "_MEMORY", "_DRIVE", "_MASK", "_Z_CRYSTAL", "TERA_SHARD")
-    require(not any(any(part in item for part in forbidden_parts) for item in free_items), "Progression held items leaked into the free vendor")
+    # Memories are deliberately stocked, but remain protected by preset ownership.
+    # Derive this exception from the item table rather than allowing any *_MEMORY name.
+    require(not any(any(part in item for part in forbidden_parts) for item in free_items - memory_items), "Progression held items leaked into the free vendor")
+    require(memory_items and memory_items <= set(battle_item_categories(ROOT)["EC_BATTLE_ITEM_CATEGORY_SPECIES"]),
+            "Silvally Memories are missing from the species-item vendor")
     require(not free_items.intersection({"ITEM_RED_ORB", "ITEM_BLUE_ORB", "ITEM_RUSTED_SWORD", "ITEM_RUSTED_SHIELD"}), "Transformation items leaked into the free vendor")
 
     categories = list(battle_item_categories(ROOT).values())
@@ -610,7 +627,7 @@ def main() -> None:
     print("core_service_static_checks=PASS")
     print(f"pokemon_centers={len(target_centers)}")
     print(f"medicine_mart_lists={medicine_lists}")
-    print(f"free_battle_items={len(free_items) - 1}")
+    print(f"free_battle_items={len(free_items)}")
 
 
 if __name__ == "__main__":

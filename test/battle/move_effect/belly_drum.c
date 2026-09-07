@@ -6,16 +6,23 @@ ASSUMPTIONS
     ASSUME(GetMoveEffect(MOVE_BELLY_DRUM) == EFFECT_BELLY_DRUM);
 }
 
-SINGLE_BATTLE_TEST("Belly Drum cuts the user's HP in half")
+SINGLE_BATTLE_TEST("Belly Drum costs half maximum HP, rounded down")
 {
+    u32 maxHP;
+    u32 hp;
+    PARAMETRIZE { maxHP = 100; hp = 100; }
+    PARAMETRIZE { maxHP = 101; hp = 101; }
+    PARAMETRIZE { maxHP = 100; hp = 75; }
+    PARAMETRIZE { maxHP = 101; hp = 76; }
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WOBBUFFET) { MaxHP(maxHP); HP(hp); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_BELLY_DRUM); }
     } SCENE {
-        s32 maxHP = GetMonData(&PLAYER_PARTY[0], MON_DATA_MAX_HP);
-        HP_BAR(player, hp: maxHP / 2);
+        HP_BAR(player, damage: 50);
+    } THEN {
+        EXPECT_EQ(player->hp, hp - 50);
     }
 }
 
@@ -210,7 +217,7 @@ SINGLE_BATTLE_TEST("Belly Drum deducts HP if the user has Contrary and is at -6"
 
         ANIMATION(ANIM_TYPE_MOVE, MOVE_BELLY_DRUM, player);
         s32 maxHP = GetMonData(&PLAYER_PARTY[0], MON_DATA_MAX_HP);
-        HP_BAR(player, hp: maxHP / 2);
+        HP_BAR(player, damage: maxHP / 2);
         MESSAGE("Serperior cut its own HP and maximized its Attack!");
     }
 }

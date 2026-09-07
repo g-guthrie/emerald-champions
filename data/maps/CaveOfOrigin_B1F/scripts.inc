@@ -105,6 +105,8 @@ CaveOfOrigin_B1F_Text_WellHeadToSkyPillar:
 	.string "Of course. Above the sea and the land\n"
 	.string "both. That is where the sky would keep\l"
 	.string "its oldest SIGN!\p"
-	.string "{PLAYER}{KUN}, there's not a moment to\n"
-	.string "lose. To the SKY PILLAR!$"
+	.string "From ROUTE 128, SURF south, then west\n"
+	.string "through ROUTES 129 and 130 to ROUTE 131.\p"
+	.string "SKY PILLAR is on its north side, east\n"
+	.string "of PACIFIDLOG. I will open the way!$"
 

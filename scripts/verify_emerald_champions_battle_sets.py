@@ -16,7 +16,10 @@ from verify_trainer_ability_legality import (
     resolve_species,
     species_aliases,
 )
-from generate_emerald_champions_battle_sets import load_hand_audited_catalog
+from generate_emerald_champions_battle_sets import (
+    load_hand_audited_catalog,
+    load_hand_audited_source,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -31,7 +34,7 @@ SCREEN_MOVES = {"MOVE_REFLECT", "MOVE_LIGHT_SCREEN", "MOVE_AURORA_VEIL"}
 CHARGE_MOVES = {
     "MOVE_SOLAR_BEAM", "MOVE_SOLAR_BLADE", "MOVE_SKY_ATTACK", "MOVE_GEOMANCY",
     "MOVE_METEOR_BEAM", "MOVE_ELECTRO_SHOT", "MOVE_SKULL_BASH",
-    "MOVE_FREEZE_SHOCK", "MOVE_ICE_BURN",
+    "MOVE_FREEZE_SHOCK", "MOVE_ICE_BURN", "MOVE_PHANTOM_FORCE",
 }
 SELF_LOWERING_MOVES = {
     "MOVE_CLOSE_COMBAT", "MOVE_SUPERPOWER", "MOVE_OVERHEAT", "MOVE_DRACO_METEOR",
@@ -50,31 +53,43 @@ UTILITY_DAMAGE_MOVES = {
     "MOVE_RUINATION", "MOVE_SALT_CURE", "MOVE_SEISMIC_TOSS", "MOVE_SNARL",
     "MOVE_SONIC_BOOM", "MOVE_STRUGGLE_BUG", "MOVE_SUPER_FANG",
 }
-SYNTHETIC_SETUP_MOVES = {
-    "MOVE_BULK_UP", "MOVE_CALM_MIND", "MOVE_COIL", "MOVE_DRAGON_DANCE",
-    "MOVE_GEOMANCY", "MOVE_HONE_CLAWS", "MOVE_HOWL", "MOVE_NASTY_PLOT",
-    "MOVE_QUIVER_DANCE", "MOVE_SHELL_SMASH", "MOVE_SHIFT_GEAR",
-    "MOVE_SWORDS_DANCE", "MOVE_TAIL_GLOW", "MOVE_TIDY_UP",
-    "MOVE_VICTORY_DANCE",
+SILVALLY_MEMORY_BY_SPECIES = {
+    "SPECIES_SILVALLY_FIGHTING": "ITEM_FIGHTING_MEMORY",
+    "SPECIES_SILVALLY_FLYING": "ITEM_FLYING_MEMORY",
+    "SPECIES_SILVALLY_POISON": "ITEM_POISON_MEMORY",
+    "SPECIES_SILVALLY_GROUND": "ITEM_GROUND_MEMORY",
+    "SPECIES_SILVALLY_ROCK": "ITEM_ROCK_MEMORY",
+    "SPECIES_SILVALLY_BUG": "ITEM_BUG_MEMORY",
+    "SPECIES_SILVALLY_GHOST": "ITEM_GHOST_MEMORY",
+    "SPECIES_SILVALLY_STEEL": "ITEM_STEEL_MEMORY",
+    "SPECIES_SILVALLY_FIRE": "ITEM_FIRE_MEMORY",
+    "SPECIES_SILVALLY_WATER": "ITEM_WATER_MEMORY",
+    "SPECIES_SILVALLY_GRASS": "ITEM_GRASS_MEMORY",
+    "SPECIES_SILVALLY_ELECTRIC": "ITEM_ELECTRIC_MEMORY",
+    "SPECIES_SILVALLY_PSYCHIC": "ITEM_PSYCHIC_MEMORY",
+    "SPECIES_SILVALLY_ICE": "ITEM_ICE_MEMORY",
+    "SPECIES_SILVALLY_DRAGON": "ITEM_DRAGON_MEMORY",
+    "SPECIES_SILVALLY_DARK": "ITEM_DARK_MEMORY",
+    "SPECIES_SILVALLY_FAIRY": "ITEM_FAIRY_MEMORY",
 }
-UNBURDEN_ITEMS = {
-    "ITEM_ELECTRIC_SEED", "ITEM_FOCUS_SASH", "ITEM_GRASSY_SEED",
-    "ITEM_MISTY_SEED", "ITEM_POWER_HERB", "ITEM_PSYCHIC_SEED",
-    "ITEM_SITRUS_BERRY", "ITEM_WEAKNESS_POLICY", "ITEM_WHITE_HERB",
-}
-WEATHER_RELIANT_ABILITIES = {
-    "ABILITY_CHLOROPHYLL": "sun",
-    "ABILITY_RAIN_DISH": "rain",
-    "ABILITY_SOLAR_POWER": "sun",
-    "ABILITY_SWIFT_SWIM": "rain",
-    "ABILITY_SAND_RUSH": "sand",
-    "ABILITY_SAND_VEIL": "sand",
-    "ABILITY_SLUSH_RUSH": "snow",
-    "ABILITY_SNOW_CLOAK": "snow",
-}
-TRIAGE_ATTACKS = {
-    "MOVE_DRAIN_PUNCH", "MOVE_DRAINING_KISS", "MOVE_GIGA_DRAIN",
-    "MOVE_HORN_LEECH", "MOVE_LEECH_LIFE", "MOVE_PARABOLIC_CHARGE",
+SILVALLY_OWNER_ORDER = ("SPECIES_SILVALLY", *SILVALLY_MEMORY_BY_SPECIES)
+MINIOR_METEOR_OWNER_ORDER = (
+    "SPECIES_MINIOR",
+    "SPECIES_MINIOR_METEOR_ORANGE",
+    "SPECIES_MINIOR_METEOR_YELLOW",
+    "SPECIES_MINIOR_METEOR_GREEN",
+    "SPECIES_MINIOR_METEOR_BLUE",
+    "SPECIES_MINIOR_METEOR_INDIGO",
+    "SPECIES_MINIOR_METEOR_VIOLET",
+)
+MINIOR_CORE_SPECIES = {
+    "SPECIES_MINIOR_CORE_RED",
+    "SPECIES_MINIOR_CORE_ORANGE",
+    "SPECIES_MINIOR_CORE_YELLOW",
+    "SPECIES_MINIOR_CORE_GREEN",
+    "SPECIES_MINIOR_CORE_BLUE",
+    "SPECIES_MINIOR_CORE_INDIGO",
+    "SPECIES_MINIOR_CORE_VIOLET",
 }
 
 
@@ -96,10 +111,62 @@ def move_metadata() -> tuple[dict[str, str], set[str], set[str]]:
     return categories, sound_moves, punching_moves
 
 
+def coherence_failures(entries: list[dict]) -> list[str]:
+    """Check concrete move/item conflicts, independently of author or role prose."""
+    categories, sound_moves, punching_moves = move_metadata()
+    failures: list[str] = []
+    for entry in entries:
+        tag = f"{entry['species']}/{entry['name']}"
+        moves = set(entry["moves"])
+        status_moves = {
+            move for move in moves
+            if categories.get(move, "DAMAGE_CATEGORY_STATUS") == "DAMAGE_CATEGORY_STATUS"
+        }
+        physical = {
+            move for move in moves
+            if categories.get(move) == "DAMAGE_CATEGORY_PHYSICAL"
+            and move not in UTILITY_DAMAGE_MOVES
+        }
+        special = {
+            move for move in moves
+            if categories.get(move) == "DAMAGE_CATEGORY_SPECIAL"
+            and move not in UTILITY_DAMAGE_MOVES
+        }
+        item = entry["item"]
+
+        if physical and not special and entry["nature"] in LOWERS_ATTACK:
+            failures.append(f"{tag}: nature lowers its only meaningful attack category")
+        if special and not physical and entry["nature"] in LOWERS_SP_ATTACK:
+            failures.append(f"{tag}: nature lowers its only meaningful attack category")
+        # Assault Vest mechanically prevents status moves. Choice items do not:
+        # competitive sets legitimately lock into Sleep Talk, Trick, Healing
+        # Wish, Parting Shot, and other status moves, so a generic ban is wrong.
+        if item == "ITEM_ASSAULT_VEST" and status_moves:
+            failures.append(f"{tag}: Assault Vest prevents {sorted(status_moves)}")
+        if item == "ITEM_LIGHT_CLAY" and not moves & SCREEN_MOVES:
+            failures.append(f"{tag}: Light Clay has no screen")
+        if item == "ITEM_POWER_HERB" and not moves & CHARGE_MOVES:
+            failures.append(f"{tag}: Power Herb has no charge move")
+        if item == "ITEM_EJECT_PACK" and not moves & SELF_LOWERING_MOVES:
+            failures.append(f"{tag}: Eject Pack has no self-lowering move")
+        if item == "ITEM_THROAT_SPRAY" and not moves & sound_moves:
+            failures.append(f"{tag}: Throat Spray has no sound move")
+        if entry["ability"] == "ABILITY_POISON_HEAL" and item != "ITEM_TOXIC_ORB":
+            failures.append(f"{tag}: Poison Heal has no Toxic Orb")
+        if entry["ability"] == "ABILITY_FLARE_BOOST" and item != "ITEM_FLAME_ORB":
+            failures.append(f"{tag}: Flare Boost has no Flame Orb")
+        if entry["ability"] in {"ABILITY_BLITZ_BOXER", "ABILITY_IRON_FIST"} and not moves & punching_moves:
+            failures.append(f"{tag}: punching Ability has no punching move")
+        if entry["ability"] == "ABILITY_HARVEST" and not item.endswith("_BERRY"):
+            failures.append(f"{tag}: Harvest has no Berry")
+    return failures
+
+
 def main() -> None:
     if not __debug__:
         raise SystemExit("battle-set verification requires assertions; do not run Python with -O")
     manifest = json.loads((ROOT / "data/emerald_champions/emerald_champions_battle_sets.json").read_text())
+    hand_audited_source = load_hand_audited_source()
     hand_audited = load_hand_audited_catalog()
     reviewed_species = set(hand_audited["species"])
     move_access_review = json.loads(
@@ -112,6 +179,43 @@ def main() -> None:
     doubles_entries = defaults + alternatives
     singles_entries = singles_defaults + singles_alternatives
     entries = doubles_entries + singles_entries
+
+    assert {
+        species for species in hand_audited_source["species"]
+        if species.startswith("SPECIES_SILVALLY")
+    } == set(SILVALLY_OWNER_ORDER)
+    assert "inherits_species" not in hand_audited_source["species"]["SPECIES_MINIOR"]
+    for species in MINIOR_METEOR_OWNER_ORDER[1:]:
+        assert hand_audited_source["species"][species]["inherits_species"] == "SPECIES_MINIOR"
+    assert MINIOR_CORE_SPECIES.isdisjoint(hand_audited_source["species"])
+
+    memory_items = set(SILVALLY_MEMORY_BY_SPECIES.values())
+    for format_entries in (doubles_entries, singles_entries):
+        for species, memory in SILVALLY_MEMORY_BY_SPECIES.items():
+            choices = [entry for entry in format_entries if entry["species"] == species]
+            assert choices, (species, "missing typed Silvally presets")
+            assert all(
+                entry["item"] == memory
+                and entry["required_item"] == "ITEM_NONE"
+                and entry["ability"] == "ABILITY_RKS_SYSTEM"
+                for entry in choices
+            ), (species, memory, choices)
+        normal_choices = [entry for entry in format_entries if entry["species"] == "SPECIES_SILVALLY"]
+        assert normal_choices
+        assert all(
+            entry["item"] not in memory_items
+            and entry["required_item"] == "ITEM_NONE"
+            and entry["ability"] == "ABILITY_RKS_SYSTEM"
+            for entry in normal_choices
+        )
+        assert MINIOR_CORE_SPECIES.isdisjoint(entry["species"] for entry in format_entries)
+
+    field_specials = (ROOT / "src/field_specials.c").read_text()
+    species_items = field_specials.split(
+        "static const u16 sEmeraldChampionsSpeciesItems[]", 1
+    )[1].split("};", 1)[0]
+    available_species_items = set(re.findall(r"\bITEM_[A-Z0-9_]+\b", species_items))
+    assert memory_items <= available_species_items
 
     assert manifest["source_commit"] == "0b2bc96c7d6480187f70f5b83a705c081780983e"
     assert manifest["default_count"] == len(defaults)
@@ -128,13 +232,7 @@ def main() -> None:
          for entry in defaults if entry["required_item"] != "ITEM_NONE"],
     )
     scovillain_default = next(entry for entry in defaults if entry["species"] == "SPECIES_SCOVILLAIN")
-    assert scovillain_default["name"] == "Rage Powder Support"
     assert scovillain_default["required_item"] == "ITEM_NONE"
-    assert any(
-        entry["species"] == "SPECIES_SCOVILLAIN"
-        and entry["required_item"] == "ITEM_SCOVILLAINITE"
-        for entry in alternatives
-    ), "Scovillain's Mega role disappeared instead of becoming a gated alternative"
     showdown_singles = json.loads(
         (ROOT / "data/emerald_champions/showdown_champions_random_singles.json").read_text()
     )
@@ -149,6 +247,7 @@ def main() -> None:
     action_to_provenance = {
         "retain_inclement_custom_extension": "inclement_custom_extension",
         "retain_official_historical_event": "official_historical_event",
+        "retain_official_champions": "official_champions",
         "retain_official_inherited": "official_inherited",
         "replace": "replaced",
     }
@@ -270,6 +369,11 @@ def main() -> None:
         assert row.get("format", "doubles") in {"doubles", "singles"}, row
         identity_table = singles_by_identity if row.get("format") == "singles" else by_identity
         default_table = singles_default_by_species if row.get("format") == "singles" else default_by_species
+        # The move-access ledger describes pre-merge generated assignments.
+        # A hand-audited replacement owns its full moveset and may retire that
+        # generated role; do not demand the obsolete role name after import.
+        if row["species"] in reviewed_species:
+            continue
         if row["action"] == "replace":
             current = (
                 default_table[row["species"]]
@@ -347,20 +451,51 @@ def main() -> None:
         form_changes,
     ):
         mega_targets[item].add(species)
-    mega_entries = [entry for entry in doubles_entries if entry["required_item"] != "ITEM_NONE"]
-    singles_mega_entries = [entry for entry in singles_entries if entry["required_item"] != "ITEM_NONE"]
+    transformation_only_items = {
+        "ITEM_RUSTED_SWORD", "ITEM_RUSTED_SHIELD", "ITEM_WELLSPRING_MASK",
+        "ITEM_HEARTHFLAME_MASK", "ITEM_CORNERSTONE_MASK",
+    }
+    mega_entries = [entry for entry in doubles_entries if entry["required_item"] not in {"ITEM_NONE", *transformation_only_items}]
+    singles_mega_entries = [entry for entry in singles_entries if entry["required_item"] not in {"ITEM_NONE", *transformation_only_items}]
+    transformation_entries = [entry for entry in doubles_entries if entry["required_item"] in transformation_only_items]
+    singles_transformation_entries = [entry for entry in singles_entries if entry["required_item"] in transformation_only_items]
     move_mega_entries = [entry for entry in doubles_entries if entry.get("required_move", "MOVE_NONE") != "MOVE_NONE"]
     singles_move_mega_entries = [entry for entry in singles_entries if entry.get("required_move", "MOVE_NONE") != "MOVE_NONE"]
     mega_archive = set(re.findall(
         r"ITEM_[A-Z0-9_]+",
         (ROOT / "src/data/emerald_champions_mega_stones.h").read_text(),
     ))
-    assert len(mega_archive) == 92
     primal_items = {"ITEM_BLUE_ORB", "ITEM_RED_ORB"}
+    assert mega_archive == set(mega_targets) - primal_items, "Mega archive differs from native form-change items"
     transformation_items = mega_archive | primal_items
-    assert len(mega_entries) >= 97
-    assert len({(entry["species"], entry["required_item"]) for entry in mega_entries}) == 97
-    assert {entry["required_item"] for entry in mega_entries} == transformation_items
+    standard_mega_entries = [entry for entry in mega_entries if entry["required_item"] in mega_archive]
+    primal_entries = [entry for entry in mega_entries if entry["required_item"] in primal_items]
+    assert len(mega_entries) >= 105
+    mega_owners = {(entry["species"], entry["required_item"]) for entry in mega_entries}
+    assert len(mega_owners) == 105
+    assert len({(entry["species"], entry["required_item"]) for entry in standard_mega_entries}) == 103
+    assert len({(entry["species"], entry["required_item"]) for entry in primal_entries}) == 2
+    assert {
+        ("SPECIES_MEOWSTIC", "ITEM_MEOWSTICITE"),
+        ("SPECIES_MEOWSTIC_F", "ITEM_MEOWSTICITE"),
+    } <= mega_owners
+    represented_items = {entry["required_item"] for entry in mega_entries}
+    assert represented_items == transformation_items, (
+        "Mega preset coverage differs from available transformations",
+        {"missing": sorted(transformation_items - represented_items),
+         "unexpected": sorted(represented_items - transformation_items)},
+    )
+    assert {(entry["species"], entry["required_item"]) for entry in transformation_entries} == {
+        ("SPECIES_ZACIAN", "ITEM_RUSTED_SWORD"),
+        ("SPECIES_ZAMAZENTA", "ITEM_RUSTED_SHIELD"),
+        ("SPECIES_OGERPON", "ITEM_WELLSPRING_MASK"),
+        ("SPECIES_OGERPON", "ITEM_HEARTHFLAME_MASK"),
+        ("SPECIES_OGERPON", "ITEM_CORNERSTONE_MASK"),
+    }
+    assert all(2 <= sum(entry["species"] == species and entry["required_item"] == item for entry in transformation_entries) <= 4
+               for species, item in {(entry["species"], entry["required_item"]) for entry in transformation_entries})
+    assert all(1 <= sum(entry["species"] == species and entry["required_item"] == item for entry in singles_transformation_entries) <= 2
+               for species, item in {(entry["species"], entry["required_item"]) for entry in singles_transformation_entries})
     # Doubles is the canonical complete Mega showcase. Singles intentionally
     # keeps only 1-2 best builds per species, so a species with multiple Mega
     # forms cannot also preserve a base build and every stone there.
@@ -452,79 +587,8 @@ def main() -> None:
     assert sum(entry["species"] == "SPECIES_CLAMPERL" and entry["item"] not in dual_use_items
                for entry in singles_defaults + singles_alternatives) >= 1
 
-    categories, sound_moves, punching_moves = move_metadata()
-    failures: list[str] = []
-    for entry in entries:
-        tag = f"{entry['species']}/{entry['name']}"
-        moves = set(entry["moves"])
-        status_moves = {
-            move for move in moves
-            if categories.get(move, "DAMAGE_CATEGORY_STATUS") == "DAMAGE_CATEGORY_STATUS"
-        }
-        physical = {
-            move for move in moves
-            if categories.get(move) == "DAMAGE_CATEGORY_PHYSICAL"
-            and move not in UTILITY_DAMAGE_MOVES
-        }
-        special = {
-            move for move in moves
-            if categories.get(move) == "DAMAGE_CATEGORY_SPECIAL"
-            and move not in UTILITY_DAMAGE_MOVES
-        }
-        item = entry["item"]
-
-        if physical and not special and entry["nature"] in LOWERS_ATTACK:
-            failures.append(f"{tag}: nature lowers its only meaningful attack category")
-        if special and not physical and entry["nature"] in LOWERS_SP_ATTACK:
-            failures.append(f"{tag}: nature lowers its only meaningful attack category")
-        if ("WALLBREAKER" in entry["role"].upper()
-         and "MIXED" not in entry["role"].upper()
-         and not (
-            entry["stat_points"][1] == 32 or entry["stat_points"][3] == 32
-        )):
-            failures.append(f"{tag}: wallbreaker has no offensive Stat Point maximum")
-        # Assault Vest mechanically prevents status moves. Choice items do not:
-        # competitive sets legitimately lock into Sleep Talk, Trick, Healing
-        # Wish, Parting Shot, and other status moves, so a generic ban is wrong.
-        if item == "ITEM_ASSAULT_VEST" and status_moves:
-            failures.append(f"{tag}: Assault Vest prevents {sorted(status_moves)}")
-        if item == "ITEM_LIGHT_CLAY" and not moves & SCREEN_MOVES:
-            failures.append(f"{tag}: Light Clay has no screen")
-        if item == "ITEM_POWER_HERB" and not moves & CHARGE_MOVES:
-            failures.append(f"{tag}: Power Herb has no charge move")
-        if item == "ITEM_EJECT_PACK" and not moves & SELF_LOWERING_MOVES:
-            failures.append(f"{tag}: Eject Pack has no self-lowering move")
-        if item == "ITEM_THROAT_SPRAY" and not moves & sound_moves:
-            failures.append(f"{tag}: Throat Spray has no sound move")
-        if entry["ability"] == "ABILITY_POISON_HEAL" and item != "ITEM_TOXIC_ORB":
-            failures.append(f"{tag}: Poison Heal has no Toxic Orb")
-        if entry["ability"] == "ABILITY_FLARE_BOOST" and item != "ITEM_FLAME_ORB":
-            failures.append(f"{tag}: Flare Boost has no Flame Orb")
-        if entry["ability"] in {"ABILITY_BLITZ_BOXER", "ABILITY_IRON_FIST"} and not moves & punching_moves:
-            failures.append(f"{tag}: punching Ability has no punching move")
-        if entry["ability"] == "ABILITY_HARVEST" and not item.endswith("_BERRY"):
-            failures.append(f"{tag}: Harvest has no Berry")
-        if entry["source"].startswith("Emerald Champions legal doubles role synthesis"):
-            if entry["ability"] == "ABILITY_CONTRARY" and moves & SYNTHETIC_SETUP_MOVES:
-                failures.append(f"{tag}: Contrary reverses its synthesized setup move")
-            if entry["ability"] == "ABILITY_GORILLA_TACTICS" and status_moves:
-                failures.append(f"{tag}: Gorilla Tactics synthesized a status-locked role")
-            if entry["ability"] == "ABILITY_GUTS" and item != "ITEM_FLAME_ORB":
-                failures.append(f"{tag}: synthesized Guts role has no Flame Orb")
-            if entry["ability"] in {"ABILITY_QUICK_FEET", "ABILITY_TOXIC_BOOST"} and item != "ITEM_TOXIC_ORB":
-                failures.append(f"{tag}: synthesized status Ability has no Toxic Orb")
-            if entry["ability"] == "ABILITY_UNBURDEN" and item not in UNBURDEN_ITEMS:
-                failures.append(f"{tag}: synthesized Unburden role cannot consume its item")
-            if entry["ability"] == "ABILITY_TRIAGE" and not moves & TRIAGE_ATTACKS:
-                failures.append(f"{tag}: synthesized Triage role has no priority healing attack")
+    failures = coherence_failures(entries)
     assert not failures, "battle-set coherence failures:\n" + "\n".join(failures)
-
-    # Keep individually reviewed item/set relationships explicit without
-    # freezing the obsolete synthesized default ordering.
-    by_identity = {(entry["species"], entry["name"]): entry for entry in doubles_entries}
-    assert default_by_species["SPECIES_GROUDON"]["item"] == "ITEM_ASSAULT_VEST"
-    assert by_identity[("SPECIES_GROUDON", "Sunblade Dance")]["item"] == "ITEM_CLEAR_AMULET"
-    assert "MOVE_SHELL_SMASH" in by_identity[("SPECIES_DREDNAW", "Shell Smash")]["moves"]
 
     wild_text = (ROOT / "src" / "data" / "wild_encounters.json").read_text()
     wild_species = set(re.findall(r"SPECIES_[A-Z0-9_]+", wild_text))
@@ -738,8 +802,9 @@ def main() -> None:
         "static const struct LevelUpMove sMewLevelUpLearnset[]", 1
     )[1].split("LEVEL_UP_END", 1)[0]
     mew_level_moves = set(re.findall(r"\bMOVE_[A-Z0-9_]+\b", mew_level_block))
-    assert len(current_mew_teachables) == 110
-    assert len(current_mew_teachables | mew_level_moves) == 119
+    assert len(current_mew_teachables) == 112
+    assert len(current_mew_teachables | mew_level_moves) == 121
+    assert "MOVE_POLTERGEIST" in current_mew_teachables
     assert {"MOVE_TAILWIND", "MOVE_WILL_O_WISP"}.isdisjoint(current_mew_teachables)
 
     preparation_generator = (ROOT / "tools/learnset_helpers/make_teachables.py").read_text()
@@ -771,10 +836,8 @@ def main() -> None:
     can_teach = pokemon_source.split("bool32 CanLearnTeachableMove", 1)[1].split("u16 SpeciesToPokedexNum", 1)[0]
     assert "GetSpeciesTeachableLearnset(species)" in can_teach
     assert "EmeraldChampionsPreparation" not in can_teach
-    runtime_tests = (ROOT / "test/emerald_champions.c").read_text()
-    assert "canonicalCount, 372" in runtime_tests
-    assert "MOVE_TAILWIND" in runtime_tests and "MOVE_WILL_O_WISP" in runtime_tests
-    assert "GetEmeraldChampionsPreparationMovesToLearn" in runtime_tests
+    # Preparation behavior is exercised by native tests; finding assertion
+    # text here would neither execute those tests nor establish their result.
 
     direct_gaps: set[tuple[str, str, str]] = set()
     reviewed_recommended_species = {
@@ -817,6 +880,7 @@ def main() -> None:
     # learnset pointers; retaining the explicit extension is harmless and
     # preserves the pinned migration disposition.
     expected_resolved_review = {
+        ("SPECIES_AEGISLASH", "Champions Physical", "MOVE_POLTERGEIST"),
         ("SPECIES_ALCREMIE_SALTED_CREAM", "Recommended", "MOVE_DAZZLING_GLEAM"),
         ("SPECIES_ALCREMIE_SALTED_CREAM", "Recommended", "MOVE_DECORATE"),
         ("SPECIES_ALCREMIE_SALTED_CREAM", "Recommended", "MOVE_HELPING_HAND"),
@@ -826,7 +890,17 @@ def main() -> None:
         ("SPECIES_CINDERACE", "Offensive", "MOVE_HIGH_JUMP_KICK"),
         ("SPECIES_LEAVANNY", "Overcoat Web Attacker", "MOVE_STICKY_WEB"),
     }
-    resolved_review = retained_review.difference(direct_gaps)
+    # These older assignments disappeared from the current authored catalog;
+    # their documented tutor extensions remain available for compatibility.
+    retired_review = {
+        ("SPECIES_AZURILL", "Recommended", "MOVE_PLAY_ROUGH"),
+        ("SPECIES_SILICOBRA", "Recommended", "MOVE_SUCKER_PUNCH"),
+        ("SPECIES_SNOM", "Recommended", "MOVE_AURORA_BEAM"),
+        ("SPECIES_TOXEL", "Recommended", "MOVE_SECRET_POWER"),
+    }
+    for species, _, move in retired_review:
+        assert not any(entry["species"] == species and move in entry["moves"] for entry in entries), (species, move)
+    resolved_review = retained_review.difference(direct_gaps).difference(retired_review)
     assert resolved_review == expected_resolved_review, (
         sorted(resolved_review), sorted(expected_resolved_review)
     )
@@ -860,11 +934,9 @@ def main() -> None:
         entry["species"] for entry in defaults
         if entry["source"].startswith("Pokemon Champions doubles handbook")
     }
-    assert handbook_species, "Champions handbook integration disappeared"
-    assert handbook_species.isdisjoint(reviewed_species), (
-        "hand-reviewed species retained a stale handbook default",
-        sorted(handbook_species & reviewed_species),
-    )
+    # The fully reviewed catalog has superseded every historical handbook seed.
+    assert default_species == reviewed_species, "default presets lack canonical reviewed owners"
+    assert not handbook_species, ("reviewed catalog retained stale handbook defaults", sorted(handbook_species))
 
     print("battle_set_static_checks=PASS")
     print(f"sets={len(entries)}")

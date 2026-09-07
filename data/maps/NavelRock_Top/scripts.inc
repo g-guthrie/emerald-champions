@@ -57,6 +57,7 @@ NavelRock_Top_EventScript_HoOh::
 	special RemoveCameraObject
 	setvar VAR_0x8004, SPECIES_HO_OH
 	setvar VAR_0x8005, 0
+	msgbox gText_LegendaryOneShotWarning, MSGBOX_DEFAULT
 	special CreateEmeraldChampionsStaticLegendaryEncounter
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
@@ -76,8 +77,7 @@ NavelRock_Top_EventScript_CaughtHoOh::
 	end
 
 NavelRock_Top_EventScript_DefeatedHoOh::
-	setvar VAR_0x8004, SPECIES_HO_OH
-	goto Common_EventScript_LegendaryFlewAway
+	goto Common_EventScript_LegendaryDefeated
 	end
 
 NavelRock_Top_EventScript_RanFromHoOh::

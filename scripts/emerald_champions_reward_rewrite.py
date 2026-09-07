@@ -111,7 +111,9 @@ DIALOGUE = {
     ("data/maps/PetalburgCity_Gym/scripts.inc", "PetalburgCity_Gym_Text_ExplainLopunnite"): ("Dad: Lopunnite lets Lopunny Mega Evolve.\n", "Let it hold the stone in battle.$"),
     ("data/maps/FortreeCity_Gym/scripts.inc", "FortreeCity_Gym_Text_ExplainAltarianite"): ("Altarianite lets Altaria Mega Evolve.\n", "Let it hold the stone in battle.$"),
     ("data/maps/MossdeepCity_Gym/scripts.inc", "MossdeepCity_Gym_Text_ExplainMetagrossite"): ("Tate: Metagrossite lets Metagross Mega\n", "Evolve. Let it hold the stone.$"),
-    ("data/maps/SootopolisCity_Gym_1F/scripts.inc", "SootopolisCity_Gym_1F_Text_ExplainGyaradosite"): ("Gyaradosite lets Gyarados Mega Evolve.\n", "Let it hold the stone in battle.$"),
+    ("data/maps/SootopolisCity_Gym_1F/scripts.inc", "SootopolisCity_Gym_1F_Text_ExplainGyaradosite"): (
+        "Gyaradosite lets Gyarados Mega Evolve.\n", "Let it hold the stone in battle.\\p",
+        "SURF east from ROUTE 128 to EVER GRANDE.\n", "Use WATERFALL at the city's entrance.$"),
     ("data/scripts/secret_power_tm.inc", "Route111_Text_ExplainSecretPower"): ("Center tutors can teach Secret Power.\\p", "Take this Ultra Ball for exploring,\n", "and use Secret Power at marked trees.$"),
     ("data/maps/Route114_FossilManiacsHouse/scripts.inc", "Route114_FossilManiacsHouse_Text_HaveThisToDigLikeMyBrother"): ("My brother dug up this Metal Coat.\\p", "It evolves Onix or Scyther when used.$"),
     ("data/maps/SlateportCity_BattleTentLobby/scripts.inc", "SlateportCity_BattleTentLobby_Text_ExplainPrismScale"): ("A Prism Scale evolves Feebas.\n", "Use it from the Bag when ready.$"),

@@ -120,7 +120,7 @@
     },
     {
       "local_id": "LOCALID_ASHEN_WOODS_VIAL_CHANSEY",
-      "graphics_id": "OBJ_EVENT_GFX_CHANSEY",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(CHANSEY)",
       "x": 14,
       "y": 29,
       "elevation": 3,

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "legendary_signs.h"
 #include "battle.h"
 #include "battle_anim.h"
 #include "battle_ai_main.h"
@@ -2584,11 +2585,6 @@ static void SpriteCB_BattleSpriteSlideLeft(struct Sprite *sprite)
             sprite->data[1] = 0;
         }
     }
-}
-
-static void UNUSED SetIdleSpriteCallback(struct Sprite *sprite)
-{
-    sprite->callback = SpriteCB_Idle;
 }
 
 static void SpriteCB_Idle(struct Sprite *sprite)
@@ -5345,6 +5341,8 @@ static void HandleEndTurn_FinishBattle(void)
 {
     if (gCurrentActionFuncId == B_ACTION_TRY_FINISH || gCurrentActionFuncId == B_ACTION_FINISHED)
     {
+        RecordFailedLegendaryEncounters();
+
         if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK
                                   | BATTLE_TYPE_RECORDED_LINK
                                   | BATTLE_TYPE_FIRST_BATTLE
@@ -5575,15 +5573,16 @@ static void ReturnFromBattleToOverworld(void)
 
     if (gBattleTypeFlags & BATTLE_TYPE_ROAMER)
     {
+        bool32 lost = IsLegendaryEncounterLost(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_SPECIES));
         UpdateRoamerHPStatus(&gParties[B_TRAINER_OPPONENT_A][0]);
         ZeroEnemyPartyMons();
 
 #ifndef BUGFIX
         // Bug: When Roar is used by a roamer, gBattleOutcome is B_OUTCOME_PLAYER_TELEPORTED (5),
         // which deactivates the roamer.
-        if ((gBattleOutcome & B_OUTCOME_WON) || gBattleOutcome == B_OUTCOME_CAUGHT)
+        if (lost || (gBattleOutcome & B_OUTCOME_WON) || gBattleOutcome == B_OUTCOME_CAUGHT)
 #else
-        if ((gBattleOutcome == B_OUTCOME_WON) || gBattleOutcome == B_OUTCOME_CAUGHT ||
+        if (lost || (gBattleOutcome == B_OUTCOME_WON) || gBattleOutcome == B_OUTCOME_CAUGHT ||
             gBattleOutcome == B_OUTCOME_DREW)
 #endif
             SetRoamerInactive(gEncounteredRoamerIndex);
@@ -5870,6 +5869,10 @@ enum Type GetDynamicMoveType(struct Pokemon *mon, enum Move move, enum BattlerId
     if (IsSoundMove(move) && ability == ABILITY_LIQUID_VOICE)
     {
         return TYPE_WATER;
+    }
+    else if (IsSoundMove(move) && ability == ABILITY_SAND_SONG)
+    {
+        return TYPE_GROUND;
     }
     else if (moveEffect == EFFECT_AURA_WHEEL
           && species == SPECIES_MORPEKO_HANGRY

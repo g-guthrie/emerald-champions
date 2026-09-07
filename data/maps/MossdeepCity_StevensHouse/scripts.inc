@@ -168,14 +168,17 @@ MossdeepCity_StevensHouse_Text_ExplainDive:
 	.string "When you want to come back up, use\n"
 	.string "DIVE again.\p"
 	.string "In some places, it won't be possible\n"
-	.string "for you to surface, though.$"
+	.string "for you to surface, though.\p"
+	.string "AQUA took the submarine to a cavern.\n"
+	.string "Search south on ROUTE 128.\p"
+	.string "Use DIVE in the dark water to find the\n"
+	.string "SEAFLOOR CAVERN and stop ARCHIE.$"
 
 MossdeepCity_StevensHouse_Text_UnderwateCavernBetweenMossdeepSootopolis:
-	.string "STEVEN: Apparently, there's an\n"
-	.string "underwater cavern between\l"
-	.string "MOSSDEEP and SOOTOPOLIS.\p"
-	.string "You know, the one that CAPT. STERN\n"
-	.string "found in his submarine.$"
+	.string "STEVEN: Search south on ROUTE 128.\n"
+	.string "Use DIVE in the dark water.\p"
+	.string "Find the SEAFLOOR CAVERN where AQUA\n"
+	.string "took the submarine, and stop ARCHIE.$"
 
 MossdeepCity_StevensHouse_Text_TakeBallContainingBeldum:
 	.string "{PLAYER} checked the POKé BALL.\p"

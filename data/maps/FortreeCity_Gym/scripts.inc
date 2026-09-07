@@ -22,6 +22,7 @@ FortreeCity_Gym_EventScript_Winona::
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, FortreeCity_Gym_EventScript_WinonaRematch
 	goto_if_unset FLAG_RECEIVED_WINONA_ALTARIANITE, FortreeCity_Gym_EventScript_GiveAltarianite2
+	goto_if_set FLAG_RECEIVED_RED_OR_BLUE_ORB, FortreeCity_Gym_EventScript_WinonaAfterPyre
 	msgbox FortreeCity_Gym_Text_WinonaPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -54,6 +55,7 @@ FortreeCity_Gym_EventScript_GiveAltarianite2::
 	giveitem ITEM_ALTARIANITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	msgbox FortreeCity_Gym_Text_ExplainAltarianite, MSGBOX_DEFAULT
+	call_if_unset FLAG_RECEIVED_RED_OR_BLUE_ORB, FortreeCity_Gym_EventScript_PyreHandoff
 	setflag FLAG_RECEIVED_WINONA_ALTARIANITE
 	release
 	end
@@ -62,6 +64,7 @@ FortreeCity_Gym_EventScript_GiveAltarianite::
 	giveitem ITEM_ALTARIANITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 	msgbox FortreeCity_Gym_Text_ExplainAltarianite, MSGBOX_DEFAULT
+	call_if_unset FLAG_RECEIVED_RED_OR_BLUE_ORB, FortreeCity_Gym_EventScript_PyreHandoff
 	setflag FLAG_RECEIVED_WINONA_ALTARIANITE
 	return
 
@@ -243,12 +246,19 @@ FortreeCity_Gym_Text_ExplainFeatherBadgeTakeThis:
 	.string "train a party up to Lv. 60.\p"
 	.string "It also enables FLY outside of battle.\n"
 	.string "Your FLIGHT BEACON works from now on.\l"
-	.string "Use it from the BAG to reach any town.\p"
+	.string "Use it from the BAG to revisit towns.\p"
 	.string "And this…\n"
 	.string "This is a gift from me.$"
 FortreeCity_Gym_Text_ExplainAltarianite:
 	.string "Altarianite lets Altaria Mega Evolve.\n"
 	.string "Let it hold the stone in battle.$"
+
+FortreeCity_Gym_Text_PyreHandoff:
+	.string "AQUA has been seen near MT. PYRE.\n"
+	.string "Follow ROUTES 120 and 121 east, then\l"
+	.string "SURF south on ROUTE 122 to find it.\p"
+	.string "Discover what they are disturbing there.\n"
+	.string "The skies over HOENN are unsettled.$"
 
 FortreeCity_Gym_Text_RegisteredWinona:
 	.string "Registered GYM LEADER WINONA\n"
@@ -256,7 +266,11 @@ FortreeCity_Gym_Text_RegisteredWinona:
 
 FortreeCity_Gym_Text_WinonaPostBattle:
 	.string "A flying team is not one species label.\n"
-	.string "It is freedom of position. Remember that.$"
+	.string "It is freedom of position. Remember that.\p"
+	.string "To follow AQUA to MT. PYRE, head east\n"
+	.string "through ROUTES 120 and 121, then SURF\l"
+	.string "south on ROUTE 122.\p"
+	.string "Find what drew them to that quiet place.$"
 
 FortreeCity_Gym_Text_GymStatue:
 	.string "FORTREE CITY POKéMON GYM$"
@@ -299,3 +313,16 @@ FortreeCity_Gym_Text_WinonaRematchNeedTwoMons:
 	.string "POKéMON with you?\p"
 	.string "Please return with two POKéMON\n"
 	.string "at the very least.$"
+
+FortreeCity_Gym_EventScript_WinonaAfterPyre::
+	msgbox FortreeCity_Gym_Text_WinonaAfterPyre, MSGBOX_DEFAULT
+	release
+	end
+
+FortreeCity_Gym_Text_WinonaAfterPyre:
+	.string "A flying team is not one species label.\n"
+	.string "It is freedom of position. Remember that.$"
+
+FortreeCity_Gym_EventScript_PyreHandoff::
+	msgbox FortreeCity_Gym_Text_PyreHandoff, MSGBOX_DEFAULT
+	return

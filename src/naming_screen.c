@@ -191,13 +191,6 @@ static const u16 sKeyboard_Pal[] = INCGFX_U16("graphics/naming_screen/keyboard.p
 static const u16 sRival_Gfx[] = INCGFX_U16("graphics/naming_screen/rival.png", ".4bpp");
 static const u16 sRival_Pal[] = INCGFX_U16("graphics/naming_screen/rival.pal", ".gbapal");
 
-static const u8 *const sTransferredToPCMessages[] =
-{
-    gText_PkmnTransferredSomeonesPC,
-    gText_PkmnTransferredLanettesPC,
-    gText_PkmnTransferredSomeonesPCBoxFull,
-    gText_PkmnTransferredLanettesPCBoxFull
-};
 
 
 static const u8 sText_RivalsName[] = _("RIVAL's NAME?");
@@ -345,7 +338,6 @@ static bool8 MainState_MoveToOKButton(void);
 static bool8 MainState_PressedOKButton(void);
 static bool8 MainState_FadeOut(void);
 static bool8 MainState_Exit(void);
-static void DisplaySentToPCMessage(void);
 static bool8 MainState_WaitSentToPCMessage(void);
 static bool8 MainState_StartPageSwap(void);
 static bool8 MainState_WaitPageSwap(void);
@@ -707,33 +699,6 @@ static bool8 MainState_Exit(void)
         FREE_AND_SET_NULL(sNamingScreen);
     }
     return FALSE;
-}
-
-static UNUSED void DisplaySentToPCMessage(void)
-{
-    u8 stringToDisplay = 0;
-
-    if (!IsDestinationBoxFull())
-    {
-        StringCopy(gStringVar1, GetBoxNamePtr(VarGet(VAR_PC_BOX_TO_SEND_MON)));
-        StringCopy(gStringVar2, sNamingScreen->destBuffer);
-    }
-    else
-    {
-        StringCopy(gStringVar1, GetBoxNamePtr(VarGet(VAR_PC_BOX_TO_SEND_MON)));
-        StringCopy(gStringVar2, sNamingScreen->destBuffer);
-        StringCopy(gStringVar3, GetBoxNamePtr(GetPCBoxToSendMon()));
-        stringToDisplay = 2;
-    }
-
-    if (FlagGet(FLAG_SYS_PC_LANETTE))
-        stringToDisplay++;
-
-    StringExpandPlaceholders(gStringVar4, sTransferredToPCMessages[stringToDisplay]);
-    DrawDialogueFrame(0, FALSE);
-    gTextFlags.canABSpeedUpPrint = TRUE;
-    AddTextPrinterParameterized2(0, FONT_NORMAL, gStringVar4, GetPlayerTextSpeedDelay(), 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
-    CopyWindowToVram(0, COPYWIN_FULL);
 }
 
 static bool8 MainState_WaitSentToPCMessage(void)
@@ -2122,26 +2087,6 @@ static bool8 IsWideLetter(u8 character)
 }
 
 // Debug? Arguments aren't sensible for non-player screens.
-static void UNUSED Debug_NamingScreenPlayer(void)
-{
-    DoNamingScreen(NAMING_SCREEN_PLAYER, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToFieldWithOpenMenu);
-}
-
-static void UNUSED Debug_NamingScreenBox(void)
-{
-    DoNamingScreen(NAMING_SCREEN_BOX, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToFieldWithOpenMenu);
-}
-
-static void UNUSED Debug_NamingScreenCaughtMon(void)
-{
-    DoNamingScreen(NAMING_SCREEN_CAUGHT_MON, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToFieldWithOpenMenu);
-}
-
-static void UNUSED Debug_NamingScreenNickname(void)
-{
-    DoNamingScreen(NAMING_SCREEN_NICKNAME, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToFieldWithOpenMenu);
-}
-
 //--------------------------------------------------
 // Forward-declared variables
 //--------------------------------------------------

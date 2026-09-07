@@ -323,7 +323,9 @@ RivalsHouse_2F_Text_MayWhoAreYou:
 	.string "He studies how Trainers from different\n"
 	.string "regions build around their partners.\p"
 	.string "For today's fieldwork, he packed all\n"
-	.string "nine regional starter trios.$"
+	.string "nine regional starter trios.\p"
+	.string "He went to ROUTE 101, north of town.\n"
+	.string "Go introduce yourself before he leaves!$"
 
 RivalsHouse_2F_Text_MayGettingReady:
 	.string "POKéMON fully restored!\n"
@@ -337,7 +339,9 @@ RivalsHouse_2F_Text_BrendanWhoAreYou:
 	.string "He studies how Trainers from different\n"
 	.string "regions build around their partners.\p"
 	.string "For today's fieldwork, he packed all\n"
-	.string "nine regional starter trios.$"
+	.string "nine regional starter trios.\p"
+	.string "He went to ROUTE 101, north of town.\n"
+	.string "Go introduce yourself before he leaves!$"
 
 RivalsHouse_2F_Text_BrendanGettingReady:
 	.string "POKéMON fully restored…\n"

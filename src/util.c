@@ -92,7 +92,7 @@ void StoreWordInTwoHalfwords(u16 *h, u32 w)
 
 void LoadWordFromTwoHalfwords(u16 *h, u32 *w)
 {
-    *w = h[0] | (s16)h[1] << 16;
+    *w = h[0] | ((u32)h[1] << 16);
 }
 
 void SetBgAffineStruct(struct BgAffineSrcData *src, u32 texX, u32 texY, s16 scrX, s16 scrY, s16 sx, s16 sy, u16 alpha)
@@ -167,7 +167,8 @@ void CopySpriteTiles(u8 shape, u8 size, u8 *tiles, u16 *tilemap, u8 *output)
 
 u16 CalcCRC16(const u8 *data, s32 length)
 {
-    u16 i, j;
+    s32 i;
+    u16 j;
     u16 crc = 0x1121;
 
     for (i = 0; i < length; i++)
@@ -186,7 +187,7 @@ u16 CalcCRC16(const u8 *data, s32 length)
 
 u16 CalcCRC16WithTable(const u8 *data, u32 length)
 {
-    u16 i;
+    u32 i;
     u16 crc = 0x1121;
     u8 byte;
 

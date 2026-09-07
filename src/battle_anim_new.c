@@ -8351,28 +8351,6 @@ static void SpriteCB_LashOutStrike(struct Sprite* sprite)
 //arg 1: Final x-pos
 //arg 2: Movement duration
 //arg 3: Affine anim
-static void SpriteCB_ShellSmashShell(struct Sprite* sprite)
-{
-    //Init Position
-    sprite->x = GetBattlerSpriteCoord2(gBattleAnimAttacker, BATTLER_COORD_X_2) + gBattleAnimArgs[0];
-    sprite->y = GetBattlerSpriteCoord2(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET) + 2; //2 to slightly encompass the entire sprite
-
-    //Prepare linear movement
-    sprite->data[0] = gBattleAnimArgs[2]; //Duration
-    sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2) + gBattleAnimArgs[1];
-    sprite->data[4] = sprite->y;
-    sprite->callback = StartAnimLinearTranslation;
-    StoreSpriteCallbackInData6(sprite, SpriteCB_ShellSmashShell_DestroyDuringFadeOut);
-
-    //Rotate properly
-    StartSpriteAffineAnim(sprite, gBattleAnimArgs[3]);
-}
-
-static void SpriteCB_ShellSmashShell_DestroyDuringFadeOut(struct Sprite* sprite)
-{
-    if (GetGpuReg(REG_OFFSET_BLDALPHA) >= BLDALPHA_BLEND(0, 8)) //Fade out 1/2 done
-        DestroyAnimSprite(sprite);
-}
 */
 
 static void SpriteCB_AnimSpriteOnTargetSideCentre(struct Sprite *sprite)

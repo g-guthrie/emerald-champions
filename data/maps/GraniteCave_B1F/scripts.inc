@@ -7,7 +7,7 @@ GraniteCave_B1F_MapScripts::
 GraniteCave_B1F_SetHoleWarp:
 	@ Inclement gives B1F/B2F a moderate ambient radius so Steven's Letter can be
 	@ delivered before Brawly's badge unlocks Flash.
-	setflashlevel 4
+	special SetGraniteCaveFlashLevel
 	setstepcallback STEP_CB_CRACKED_FLOOR
 	setholewarp MAP_GRANITE_CAVE_B2F
 	end

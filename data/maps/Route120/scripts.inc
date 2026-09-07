@@ -302,11 +302,7 @@ Route120_EventScript_Colin::
 	end
 
 Route120_EventScript_Robert::
-	trainerbattle_double TRAINER_ROBERT_1, Route120_Text_RobertIntro, Route120_Text_RobertDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route120_EventScript_RegisterRobert
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route120_EventScript_RematchRobert
-	msgbox Route120_Text_RobertPostBattle, MSGBOX_DEFAULT
-	release
+	msgbox Route120_Text_ROBERT_1_LocalConversation, MSGBOX_NPC
 	end
 
 Route120_EventScript_RegisterRobert::
@@ -318,8 +314,7 @@ Route120_EventScript_RegisterRobert::
 	end
 
 Route120_EventScript_RematchRobert::
-	trainerbattle_rematch_double TRAINER_ROBERT_1, Route120_Text_RobertRematchIntro, Route120_Text_RobertRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route120_Text_RobertPostRematch, MSGBOX_AUTOCLOSE
+	msgbox Route120_Text_ROBERT_1_LocalConversation, MSGBOX_NPC
 	end
 
 Route120_EventScript_Lorenzo::
@@ -374,13 +369,11 @@ Route120_EventScript_Angelica::
 	end
 
 Route120_EventScript_Keigo::
-	trainerbattle_double TRAINER_KEIGO, Route120_Text_KeigoIntro, Route120_Text_KeigoDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route120_Text_KeigoPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route120_Text_KEIGO_LocalConversation, MSGBOX_NPC
 	end
 
 Route120_EventScript_Riley::
-	trainerbattle_double TRAINER_RILEY, Route120_Text_RileyIntro, Route120_Text_RileyDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route120_Text_RileyPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route120_Text_RILEY_LocalConversation, MSGBOX_NPC
 	end
 
 Route120_EventScript_Leonel::
@@ -389,8 +382,7 @@ Route120_EventScript_Leonel::
 	end
 
 Route120_EventScript_Callie::
-	trainerbattle_double TRAINER_CALLIE, Route120_Text_CallieIntro, Route120_Text_CallieDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route120_Text_CalliePostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route120_Text_CALLIE_LocalConversation, MSGBOX_NPC
 	end
 
 Route120_Text_StevenGreeting:
@@ -448,13 +440,17 @@ Route120_Text_StevenGoodbye:
 	.string "who strive together.\p"
 	.string "WINONA is waiting in FORTREE.\n"
 	.string "Earn her FEATHER BADGE, then the road\l"
-	.string "east is yours.$"
+	.string "east is yours.\p"
+	.string "Use the SCOPE on the obstacle outside\n"
+	.string "her GYM. It should clear your way.$"
 
 Route120_Text_StevenFeatherGate:
 	.string "STEVEN: The road east can wait.\p"
 	.string "WINONA is ready to test you in\n"
 	.string "FORTREE GYM. Return with her\l"
-	.string "FEATHER BADGE.$"
+	.string "FEATHER BADGE.\p"
+	.string "The SCOPE will reveal the POKéMON\n"
+	.string "blocking her GYM. Try it there.$"
 
 Kecleon_Text_SomethingUnseeable:
 	.string "Something unseeable is in the way.$"
@@ -478,3 +474,19 @@ Route120_Text_RouteSignFortree:
 Route120_Text_RouteSign121:
 	.string "{RIGHT_ARROW} ROUTE 121\n"
 	.string "{LEFT_ARROW} ROUTE 120$"
+
+Route120_Text_ROBERT_1_LocalConversation:
+	.string "My bird knows the way home.\n"
+	.string "I am trying not to look jealous.$"
+
+Route120_Text_KEIGO_LocalConversation:
+	.string "You cannot see a true ninja.\n"
+	.string "Please pretend you cannot see me.$"
+
+Route120_Text_RILEY_LocalConversation:
+	.string "I practiced hiding in the grass.\n"
+	.string "The grass had other occupants.$"
+
+Route120_Text_CALLIE_LocalConversation:
+	.string "Every good partner needs a break.\n"
+	.string "Mine insisted I take one first.$"

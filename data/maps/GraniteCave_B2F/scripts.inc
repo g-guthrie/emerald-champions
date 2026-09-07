@@ -5,7 +5,7 @@ GraniteCave_B2F_MapScripts::
 @ Inclement gives B1F/B2F a moderate ambient radius so Steven's Letter can be
 @ delivered before Brawly's badge unlocks Flash.
 GraniteCave_B2F_SetFlashRadius:
-	setflashlevel 4
+	special SetGraniteCaveFlashLevel
 	end
 
 GraniteCave_B2F_EventScript_TimerBallPack::

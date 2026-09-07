@@ -104,12 +104,3 @@ void ConvertRtcToDateTime(struct DateTime *result, struct SiiRtcInfo *rtc)
     result->month = rtc->month;
     result->year = gGen3Epoch.year + rtc->year;
 }
-
-void ConvertTimeToDateTime(struct DateTime *result, struct Time *timeSinceEpoch)
-{
-    result = memcpy(result, &gGen3Epoch, sizeof(struct DateTime));
-    DateTime_AddSeconds(result, timeSinceEpoch->seconds);
-    DateTime_AddMinutes(result, timeSinceEpoch->minutes);
-    DateTime_AddHours(result, timeSinceEpoch->hours);
-    DateTime_AddDays(result, timeSinceEpoch->days);
-}

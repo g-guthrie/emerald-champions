@@ -59,8 +59,7 @@ Route133_Text_VialChansey:
 	.string "Chansey!$"
 
 Route133_EventScript_Franklin::
-	trainerbattle_double TRAINER_FRANKLIN, Route133_Text_FranklinIntro, Route133_Text_FranklinDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route133_Text_FranklinPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route133_Text_FRANKLIN_LocalConversation, MSGBOX_NPC
 	end
 
 Route133_EventScript_Debra::
@@ -92,3 +91,7 @@ Route133_EventScript_Conor::
 	trainerbattle_double TRAINER_CONOR, Route133_Text_ConorIntro, Route133_Text_ConorDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route133_Text_ConorPostBattle, MSGBOX_AUTOCLOSE
 	end
+
+Route133_Text_FRANKLIN_LocalConversation:
+	.string "WALREIN offered me a ride.\n"
+	.string "The seat was colder than expected.$"

@@ -85,6 +85,7 @@ class RuntimeGate:
 
 
 RUNTIME_GATES = (
+    RuntimeGate("test/battle/ai/party_knowledge.c", 6),
     RuntimeGate("*Champions", 117),
     RuntimeGate("Blitz Boxer", 1),
     RuntimeGate("*preparation", 3),
@@ -296,7 +297,9 @@ RUNTIME_GATES = (
         timeout_seconds=600,
     ),
     RuntimeGate("test/battle/ai/gimmick_mega.c", 1, timeout_seconds=600),
-    RuntimeGate("test/battle/ai/emerald_champions_dynamic.c", 6, timeout_seconds=600),
+    RuntimeGate("test/battle/ai/emerald_champions_dynamic.c", 8, timeout_seconds=600),
+    RuntimeGate("test/battle/ability/telepathy.c", 2),
+    RuntimeGate("test/chansey_overworld.c", 1),
     RuntimeGate(
         "test/battle/ai/gimmick_z_move.c",
         20,
@@ -585,10 +588,8 @@ def main() -> None:
         expected_build_elf = (ROOT / "pokeemerald-test.elf").resolve()
         if test_elf != expected_build_elf:
             fail(f"build mode produces {expected_build_elf}; --test-elf requested {test_elf}")
-        # Force one exact relink when the derived source allowlist changes while
-        # retaining all expensive compiled objects and generated assets.
-        test_elf.unlink(missing_ok=True)
-        test_elf.with_name(test_elf.stem + "-headless.elf").unlink(missing_ok=True)
+        # Make's link receipt includes the exact selected object list; its
+        # separate filter export preserves reusable compiled and linked inputs.
         print("== Build shared runtime-test ELF ==", flush=True)
         test_sources = curated_test_sources()
         print(

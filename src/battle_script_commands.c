@@ -2628,37 +2628,9 @@ static void Cmd_jumpifbyte(void)
 
     gBattlescriptCurrInstr = cmd->nextInstr;
 
-    switch (comparison)
-    {
-    case CMP_EQUAL:
-        if (*bytePtr == value)
-            gBattlescriptCurrInstr = jumpInstr;
-        break;
-    case CMP_NOT_EQUAL:
-        if (*bytePtr != value)
-            gBattlescriptCurrInstr = jumpInstr;
-        break;
-    case CMP_GREATER_THAN:
-        if (*bytePtr > value)
-            gBattlescriptCurrInstr = jumpInstr;
-        break;
-    case CMP_LESS_THAN:
-        if (*bytePtr < value)
-            gBattlescriptCurrInstr = jumpInstr;
-        break;
-    case CMP_COMMON_BITS:
-        if (*bytePtr & value)
-            gBattlescriptCurrInstr = jumpInstr;
-        break;
-    case CMP_NO_COMMON_BITS:
-        if (!(*bytePtr & value))
-            gBattlescriptCurrInstr = jumpInstr;
-        break;
-    case CMP_BITMASK:
-        if (*bytePtr & (1 << value))
-            gBattlescriptCurrInstr = jumpInstr;
-        break;
-    }
+    // Unknown comparisons must not read the operand pointer.
+    if (comparison <= CMP_BITMASK && CompareBattleValues(comparison, *bytePtr, value))
+        gBattlescriptCurrInstr = jumpInstr;
 }
 
 static void Cmd_jumpifhalfword(void)
@@ -2672,37 +2644,9 @@ static void Cmd_jumpifhalfword(void)
 
     gBattlescriptCurrInstr = cmd->nextInstr;
 
-    switch (comparison)
-    {
-    case CMP_EQUAL:
-        if (*halfwordPtr == value)
-            gBattlescriptCurrInstr = jumpInstr;
-        break;
-    case CMP_NOT_EQUAL:
-        if (*halfwordPtr != value)
-            gBattlescriptCurrInstr = jumpInstr;
-        break;
-    case CMP_GREATER_THAN:
-        if (*halfwordPtr > value)
-            gBattlescriptCurrInstr = jumpInstr;
-        break;
-    case CMP_LESS_THAN:
-        if (*halfwordPtr < value)
-            gBattlescriptCurrInstr = jumpInstr;
-        break;
-    case CMP_COMMON_BITS:
-        if (*halfwordPtr & value)
-            gBattlescriptCurrInstr = jumpInstr;
-        break;
-    case CMP_NO_COMMON_BITS:
-        if (!(*halfwordPtr & value))
-            gBattlescriptCurrInstr = jumpInstr;
-        break;
-    case CMP_BITMASK:
-        if (*halfwordPtr & (1 << value))
-            gBattlescriptCurrInstr = jumpInstr;
-        break;
-    }
+    // Unknown comparisons must not read the operand pointer.
+    if (comparison <= CMP_BITMASK && CompareBattleValues(comparison, *halfwordPtr, value))
+        gBattlescriptCurrInstr = jumpInstr;
 }
 
 static void Cmd_jumpifword(void)
@@ -2716,83 +2660,27 @@ static void Cmd_jumpifword(void)
 
     gBattlescriptCurrInstr = cmd->nextInstr;
 
-    switch (comparison)
-    {
-    case CMP_EQUAL:
-        if (*wordPtr == value)
-            gBattlescriptCurrInstr = jumpInstr;
-        break;
-    case CMP_NOT_EQUAL:
-        if (*wordPtr != value)
-            gBattlescriptCurrInstr = jumpInstr;
-        break;
-    case CMP_GREATER_THAN:
-        if (*wordPtr > value)
-            gBattlescriptCurrInstr = jumpInstr;
-        break;
-    case CMP_LESS_THAN:
-        if (*wordPtr < value)
-            gBattlescriptCurrInstr = jumpInstr;
-        break;
-    case CMP_COMMON_BITS:
-        if (*wordPtr & value)
-            gBattlescriptCurrInstr = jumpInstr;
-        break;
-    case CMP_NO_COMMON_BITS:
-        if (!(*wordPtr & value))
-            gBattlescriptCurrInstr = jumpInstr;
-        break;
-    case CMP_BITMASK:
-        if (*wordPtr & (1 << value))
-            gBattlescriptCurrInstr = jumpInstr;
-        break;
-    }
+    // Unknown comparisons must not read the operand pointer.
+    if (comparison <= CMP_BITMASK && CompareBattleValues(comparison, *wordPtr, value))
+        gBattlescriptCurrInstr = jumpInstr;
 }
 
 static void Cmd_jumpifarrayequal(void)
 {
     CMD_ARGS(const u8 *array1, const u8 *array2, u8 size, const u8 *jumpInstr);
 
-    const u8 *array1 = cmd->array1;
-    const u8 *array2 = cmd->array2;
-    u32 size = cmd->size;
-    const u8 *jumpInstr = cmd->jumpInstr;
-
-    u8 i;
-    for (i = 0; i < size; i++)
-    {
-        if (*array1 != *array2)
-        {
-            gBattlescriptCurrInstr = cmd->nextInstr;
-            break;
-        }
-        array1++, array2++;
-    }
-
-    if (i == size)
-        gBattlescriptCurrInstr = jumpInstr;
+    if (cmd->size == 0 || memcmp(cmd->array1, cmd->array2, cmd->size) == 0)
+        gBattlescriptCurrInstr = cmd->jumpInstr;
+    else
+        gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_jumpifarraynotequal(void)
 {
     CMD_ARGS(const u8 *array1, const u8 *array2, u8 size, const u8 *jumpInstr);
 
-    u8 equalBytes = 0;
-    const u8 *array1 = cmd->array1;
-    const u8 *array2 = cmd->array2;
-    u32 size = cmd->size;
-    const u8 *jumpInstr = cmd->jumpInstr;
-
-    u8 i;
-    for (i = 0; i < size; i++)
-    {
-        if (*array1 == *array2)
-            equalBytes++;
-        array1++, array2++;
-    }
-
-    if (equalBytes != size)
-        gBattlescriptCurrInstr = jumpInstr;
+    if (cmd->size != 0 && memcmp(cmd->array1, cmd->array2, cmd->size) != 0)
+        gBattlescriptCurrInstr = cmd->jumpInstr;
     else
         gBattlescriptCurrInstr = cmd->nextInstr;
 }
@@ -5064,13 +4952,6 @@ u32 IsAbilityStatusProtected(enum BattlerId battler, enum Ability ability)
     SWAP(sideTimerPlayer->structField, sideTimerOpp->structField, temp);\
 }                                                                       \
 
-#define UPDATE_COURTCHANGED_BATTLER(structField)\
-{                                               \
-    temp = sideTimerPlayer->structField;        \
-    sideTimerPlayer->structField = ((sideTimerOpp->structField) ^ BIT_SIDE);        \
-    sideTimerOpp->structField = (temp ^ BIT_SIDE);        \
-}                                               \
-
 void BS_CourtChangeSwapSideStatuses(void)
 {
     NATIVE_ARGS();
@@ -5106,8 +4987,8 @@ void BS_CourtChangeSwapSideStatuses(void)
     SWAP(sideTimerPlayer->spikesAmount, sideTimerOpp->spikesAmount, temp);
     SWAP(sideTimerPlayer->toxicSpikesAmount, sideTimerOpp->toxicSpikesAmount, temp);
 
-    // Change battler IDs of swapped effects. Needed for the correct string when they expire
-    UPDATE_COURTCHANGED_BATTLER(stickyWebBattlerId);
+    // Move the hazard without changing the identity of its original setter.
+    SWAP(sideTimerPlayer->stickyWebBattlerId, sideTimerOpp->stickyWebBattlerId, temp);
 
     // Track which side originally set the Sticky Web
     SWAP(sideTimerPlayer->stickyWebBattlerSide, sideTimerOpp->stickyWebBattlerSide, temp);
@@ -6064,6 +5945,7 @@ static void Cmd_mimicattackcopy(void)
             PREPARE_MOVE_BUFFER(gBattleTextBuff1, gLastMoves[gBattlerTarget])
 
             gBattleMons[gBattlerAttacker].volatiles.mimickedMoves |= 1u << gCurrMovePos;
+            RecordKnownMove(gBattlerAttacker, gBattleMons[gBattlerAttacker].moves[gCurrMovePos]);
             gBattlescriptCurrInstr = cmd->nextInstr;
         }
         else
@@ -6319,6 +6201,7 @@ static void Cmd_copymovepermanently(void)
 
             gBattleMons[gBattlerAttacker].moves[gCurrMovePos] = gLastPrintedMoves[gBattlerTarget];
             gBattleMons[gBattlerAttacker].pp[gCurrMovePos] = GetMovePP(gLastPrintedMoves[gBattlerTarget]);
+            RecordKnownMove(gBattlerAttacker, gBattleMons[gBattlerAttacker].moves[gCurrMovePos]);
 
             for (i = 0; i < MAX_MON_MOVES; i++)
             {
@@ -12384,13 +12267,6 @@ void BS_ShowItemPopup(void)
     enum BattlerId battler = GetBattlerForBattleScript(cmd->battler);
 
     CreateItemPopUp(battler);
-    gBattlescriptCurrInstr = cmd->nextInstr;
-}
-
-void BS_ShowItemPopupScripting(void)
-{
-    NATIVE_ARGS();
-    CreateItemPopUp(gBattleScripting.battler);
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 

@@ -245,7 +245,7 @@ EverGrandeCity_ChampionsRoom_Text_Defeat:
 	.string "found another answer. Magnificent.$"
 
 EverGrandeCity_ChampionsRoom_Text_PostBattleSpeech:
-	.string "WALLACE: Your final six were not the only\n"
+	.string "WALLACE: Your final team was not the only\n"
 	.string "team that brought you here.\p"
 	.string "Every partner you caught, every puzzle\n"
 	.string "you lost, and every rebuilt plan became\l"

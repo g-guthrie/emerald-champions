@@ -24,14 +24,14 @@ EmberPath_EventScript_Moltres::
 	waitmoncry
 	setvar VAR_0x8004, SPECIES_MOLTRES
 	setvar VAR_0x8005, 1
+	msgbox gText_LegendaryOneShotWarning, MSGBOX_DEFAULT
 	special CreateEmeraldChampionsStaticLegendaryEncounter
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, EmberPath_EventScript_MoltresCaught
-	msgbox EmberPath_Text_MoltresRemains, MSGBOX_DEFAULT
-	release
+	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_LegendaryDefeated
+	goto EmberPath_EventScript_MoltresCaught
 	end
 
 EmberPath_EventScript_MoltresCaught::
@@ -40,6 +40,3 @@ EmberPath_EventScript_MoltresCaught::
 	release
 	end
 
-EmberPath_Text_MoltresRemains:
-	.string "MOLTRES accepts the challenge, but the\n"
-	.string "sanctuary will hold its place for you.$"

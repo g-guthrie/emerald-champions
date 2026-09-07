@@ -116,11 +116,7 @@ Route117_EventScript_RematchLydia::
 	end
 
 Route117_EventScript_Dylan::
-	trainerbattle_double TRAINER_DYLAN_1, Route117_Text_DylanIntro, Route117_Text_DylanDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route117_EventScript_RegisterDylan
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route117_EventScript_RematchDylan
-	msgbox Route117_Text_DylanPostBattle, MSGBOX_DEFAULT
-	release
+	msgbox Route117_Text_DYLAN_1_LocalConversation, MSGBOX_NPC
 	end
 
 Route117_EventScript_RegisterDylan::
@@ -132,8 +128,7 @@ Route117_EventScript_RegisterDylan::
 	end
 
 Route117_EventScript_RematchDylan::
-	trainerbattle_rematch_double TRAINER_DYLAN_1, Route117_Text_DylanRematchIntro, Route117_Text_DylanRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route117_Text_DylanPostRematch, MSGBOX_AUTOCLOSE
+	msgbox Route117_Text_DYLAN_1_LocalConversation, MSGBOX_NPC
 	end
 
 Route117_EventScript_Maria::
@@ -201,7 +196,7 @@ Route117_EventScript_RematchMeg::
 	end
 
 Route117_EventScript_Melina::
-	trainerbattle_single TRAINER_MELINA, Route117_Text_MelinaIntro, Route117_Text_MelinaDefeat
+	trainerbattle_double TRAINER_MELINA, Route117_Text_MelinaIntro, Route117_Text_MelinaDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route117_Text_MelinaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -211,7 +206,7 @@ Route117_EventScript_Brandi::
 	end
 
 Route117_EventScript_Aisha::
-	trainerbattle_single TRAINER_AISHA, Route117_Text_AishaIntro, Route117_Text_AishaDefeat
+	trainerbattle_double TRAINER_AISHA, Route117_Text_AishaIntro, Route117_Text_AishaDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route117_Text_AishaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -240,3 +235,7 @@ Route117_Text_RouteSignMauville:
 Route117_Text_DayCareSign:
 	.string "POKéMON DAY CARE\n"
 	.string "“Let us raise your POKéMON.”$"
+
+Route117_Text_DYLAN_1_LocalConversation:
+	.string "Training tip: take a breath.\n"
+	.string "That is also my swimming plan.$"

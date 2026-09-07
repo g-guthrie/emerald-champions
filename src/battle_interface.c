@@ -538,8 +538,6 @@ static const struct SpriteTemplate sStatusSummaryBallsSpriteTemplates[2] =
     }
 };
 
-static const u8 sEmptyWhiteText_GrayHighlight[] = __("{COLOR WHITE}{BACKGROUND DARK_GRAY}{ACCENT DARK_GRAY}              ");
-static const u8 sEmptyWhiteText_TransparentHighlight[] = __("{COLOR WHITE}{BACKGROUND TRANSPARENT}{ACCENT TRANSPARENT}              ");
 
 enum
 {
@@ -982,79 +980,6 @@ static void PrintHPPercentageOnHealthbox(u32 spriteId, s16 currHp, s16 maxHp, u3
 }
 
 
-// Note: this is only possible to trigger via debug, it was an unused GF function.
-UNUSED static void UpdateOpponentHpTextDoubles(u32 healthboxSpriteId, u32 barSpriteId, s16 value, u8 maxOrCurrent)
-{
-    u8 text[32], *txtPtr;
-    u32 i, var;
-    enum BattlerId battler = gSprites[healthboxSpriteId].hMain_Battler;
-
-    if (gBattleSpritesDataPtr->battlerData[battler].hpNumbersNoBars) // don't print text if only bars are visible
-    {
-        memcpy(text, sEmptyWhiteText_TransparentHighlight, sizeof(sEmptyWhiteText_TransparentHighlight));
-        if (maxOrCurrent == HP_CURRENT)
-            var = 0;
-        else
-            var = 4;
-
-        txtPtr = ConvertIntToDecimalStringN(text + 9, value, STR_CONV_MODE_RIGHT_ALIGN, 3);
-        if (!maxOrCurrent)
-            StringCopy(txtPtr, gText_Slash);
-        RenderTextHandleBold(gMonSpritesGfxPtr->barFontGfx, FONT_BOLD, text);
-
-        for (i = var; i < var + 3; i++)
-        {
-            if (i < 3)
-            {
-                CpuCopy32(&gMonSpritesGfxPtr->barFontGfx[((i - var) * 64) + 32],
-                      (void *)((OBJ_VRAM0) + 32 * (1 + gSprites[barSpriteId].oam.tileNum + i)),
-                      0x20);
-            }
-            else
-            {
-                CpuCopy32(&gMonSpritesGfxPtr->barFontGfx[((i - var) * 64) + 32],
-                      (void *)((OBJ_VRAM0 + 0x20) + 32 * (i + gSprites[barSpriteId].oam.tileNum)),
-                      0x20);
-            }
-        }
-
-        if (maxOrCurrent == HP_CURRENT)
-        {
-            CpuCopy32(&gMonSpritesGfxPtr->barFontGfx[224],
-                      (void *)((OBJ_VRAM0) + ((gSprites[barSpriteId].oam.tileNum + 4) * TILE_SIZE_4BPP)),
-                      0x20);
-            CpuFill32(0, (void *)((OBJ_VRAM0) + (gSprites[barSpriteId].oam.tileNum * TILE_SIZE_4BPP)), 0x20);
-        }
-    }
-}
-
-// Same with this one.
-UNUSED static void UpdateOpponentHpTextSingles(u32 healthboxSpriteId, s16 value, u32 maxOrCurrent)
-{
-    u8 text[32];
-    u32 var, i;
-    enum BattlerId battler = gSprites[healthboxSpriteId].hMain_Battler;
-
-    memcpy(text, sEmptyWhiteText_GrayHighlight, sizeof(sEmptyWhiteText_GrayHighlight));
-    if (gBattleSpritesDataPtr->battlerData[battler].hpNumbersNoBars) // don't print text if only bars are visible
-    {
-        if (maxOrCurrent == HP_CURRENT)
-            var = 21;
-        else
-            var = 49;
-
-        ConvertIntToDecimalStringN(text + 6, value, STR_CONV_MODE_LEADING_ZEROS, 3);
-        RenderTextHandleBold(gMonSpritesGfxPtr->barFontGfx, FONT_BOLD, text);
-
-        for (i = 0; i < 3; i++)
-        {
-            CpuCopy32(&gMonSpritesGfxPtr->barFontGfx[i * 64 + 32],
-                      (void *)((OBJ_VRAM0) + TILE_SIZE_4BPP * (gSprites[healthboxSpriteId].oam.tileNum + var + i)),
-                      0x20);
-        }
-    }
-}
-
 static bool32 ShouldShowHealthbar(enum BattlerId battler)
 {
     enum BattleCoordTypes coords = GetBattlerCoordsIndex(battler);
@@ -1148,72 +1073,6 @@ static void UpdateHpTextInHealthboxInDoubles(u32 healthboxSpriteId, u32 maxOrCur
             // Erases HP bar leftover.
             FillHealthboxObject((void *)(OBJ_VRAM0) + (gSprites[barSpriteId].oam.tileNum * TILE_SIZE_4BPP), 0, 2);
 
-        }
-    }
-}
-
-// Prints mon's nature, catch and flee rate. Probably used to test pokeblock-related features.
-UNUSED static void PrintSafariMonInfo(u8 healthboxSpriteId, struct Pokemon *mon)
-{
-    u8 text[23];
-    s32 j, spriteTileNum;
-    u8 *barFontGfx;
-    u8 i, var, nature, healthBarSpriteId;
-
-    memcpy(text, sEmptyWhiteText_GrayHighlight, sizeof(sEmptyWhiteText_GrayHighlight));
-    barFontGfx = &gMonSpritesGfxPtr->barFontGfx[0x520 + (GetBattlerPosition(gSprites[healthboxSpriteId].hMain_Battler) * 384)];
-    var = 5;
-    nature = GetNature(mon);
-    StringCopy(&text[9], gNaturesInfo[nature].name);
-    RenderTextHandleBold(barFontGfx, FONT_BOLD, text);
-
-    for (j = 9, i = 0; i < var; i++, j++)
-    {
-        u8 elementId;
-
-        if ((text[j] >= 55 && text[j] <= 74) || (text[j] >= 135 && text[j] <= 154))
-            elementId = 44;
-        else if ((text[j] >= 75 && text[j] <= 79) || (text[j] >= 155 && text[j] <= 159))
-            elementId = 45;
-        else
-            elementId = 43;
-
-        CpuCopy32(GetHealthboxElementGfxPtr(elementId), barFontGfx + (i * 64), 0x20);
-    }
-
-    for (j = 1; j < var + 1; j++)
-    {
-        spriteTileNum = (gSprites[healthboxSpriteId].oam.tileNum + (j - (j / 8 * 8)) + (j / 8 * 64)) * TILE_SIZE_4BPP;
-        CpuCopy32(barFontGfx, (void *)(OBJ_VRAM0) + (spriteTileNum), 0x20);
-        barFontGfx += 0x20;
-
-        spriteTileNum = (8 + gSprites[healthboxSpriteId].oam.tileNum + (j - (j / 8 * 8)) + (j / 8 * 64)) * TILE_SIZE_4BPP;
-        CpuCopy32(barFontGfx, (void *)(OBJ_VRAM0) + (spriteTileNum), 0x20);
-        barFontGfx += 0x20;
-    }
-
-    healthBarSpriteId = gSprites[healthboxSpriteId].hMain_HealthBarSpriteId;
-    ConvertIntToDecimalStringN(&text[9], gBattleStruct->safariCatchFactor, STR_CONV_MODE_RIGHT_ALIGN, 2);
-    ConvertIntToDecimalStringN(&text[12], gBattleStruct->safariEscapeFactor, STR_CONV_MODE_RIGHT_ALIGN, 2);
-    text[5] = TEXT_COLOR_TRANSPARENT;
-    text[8] = TEXT_COLOR_TRANSPARENT;
-    text[11] = CHAR_SLASH;
-    RenderTextHandleBold(gMonSpritesGfxPtr->barFontGfx, FONT_BOLD, text);
-
-    j = healthBarSpriteId; // Needed to match for some reason.
-    for (j = 0; j < 5; j++)
-    {
-        if (j <= 1)
-        {
-            CpuCopy32(&gMonSpritesGfxPtr->barFontGfx[0x40 * j + 0x20],
-                      (void *)(OBJ_VRAM0) + (gSprites[healthBarSpriteId].oam.tileNum + 2 + j) * TILE_SIZE_4BPP,
-                      32);
-        }
-        else
-        {
-            CpuCopy32(&gMonSpritesGfxPtr->barFontGfx[0x40 * j + 0x20],
-                      (void *)(OBJ_VRAM0 + 0xC0) + (j + gSprites[healthBarSpriteId].oam.tileNum) * TILE_SIZE_4BPP,
-                      32);
         }
     }
 }

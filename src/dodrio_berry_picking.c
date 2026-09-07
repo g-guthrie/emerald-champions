@@ -2842,26 +2842,6 @@ static void GetScoreResults(struct DodrioGame_ScoreResults *dst, u8 playerId)
 }
 
 // Returns where the specified player's score ranks, 0 being first (highest score)
-static u8 UNUSED GetScoreRanking(u8 playerId)
-{
-    u8 i, ranking = 0;
-    u8 numPlayers = sGame->numPlayers;
-    u32 playersScore;
-    u32 scores[MAX_RFU_PLAYERS] = {0};
-
-    for (i = 0; i < numPlayers; i++)
-        scores[i] = GetScore(i);
-
-    playersScore = scores[playerId];
-    for (i = 0; i < MAX_RFU_PLAYERS; i++)
-    {
-        if (i != playerId && playersScore < scores[i])
-            ranking++;
-    }
-
-    return ranking;
-}
-
 enum {
     PRIZE_RECEIVED,
     PRIZE_FILLED_BAG,
@@ -3027,72 +3007,6 @@ static void PrintRecordsText(u8 windowId, s32 width)
 }
 
 // Debug functions?
-static const u16 sDebug_BerryResults[MAX_RFU_PLAYERS][4] =
-{
-    {
-        [BERRY_BLUE]   = MAX_BERRIES,
-        [BERRY_GREEN]  = 0,
-        [BERRY_GOLD]   = 90,
-        [BERRY_MISSED] = MAX_BERRIES
-    },
-    {
-        [BERRY_BLUE]   = MAX_BERRIES,
-        [BERRY_GREEN]  = MAX_BERRIES,
-        [BERRY_GOLD]   = 70,
-        [BERRY_MISSED] = MAX_BERRIES
-    },
-    {
-        [BERRY_BLUE]   = MAX_BERRIES,
-        [BERRY_GREEN]  = 0,
-        [BERRY_GOLD]   = MAX_BERRIES,
-        [BERRY_MISSED] = 0
-    },
-    {
-        [BERRY_BLUE]   = MAX_BERRIES,
-        [BERRY_GREEN]  = MAX_BERRIES,
-        [BERRY_GOLD]   = 60,
-        [BERRY_MISSED] = 0
-    },
-    {
-        [BERRY_BLUE]   = MAX_BERRIES,
-        [BERRY_GREEN]  = MAX_BERRIES,
-        [BERRY_GOLD]   = MAX_BERRIES,
-        [BERRY_MISSED] = 0
-    },
-};
-
-static const u8 sJPText_Vowels[] = _("あいうえおかき");
-static const u8 sText_Letters[] = _("ABCDEFG");
-static const u8 sText_Digits[] = _("0123456");
-
-static const u8 *const sDebug_PlayerNames[] =
-{
-    sJPText_Vowels,
-    sJPText_Vowels,
-    sJPText_Vowels,
-    sText_Letters,
-    sText_Digits
-};
-
-static void UNUSED Debug_UpdateNumPlayers(void)
-{
-    sGame->numPlayers = GetLinkPlayerCount();
-}
-
-static void UNUSED Debug_SetPlayerNamesAndResults(void)
-{
-    u8 i, playerId;
-
-    for (playerId = sGame->numPlayers; playerId < ARRAY_COUNT(sDebug_PlayerNames); playerId++)
-        StringCopy(gLinkPlayers[playerId].name, sDebug_PlayerNames[playerId]);
-
-    sGame->numPlayers = MAX_RFU_PLAYERS;
-    for (i = 0; i < NUM_BERRY_TYPES; i++)
-    {
-        for (playerId = 0; playerId < sGame->numPlayers; playerId++)
-            sGame->berryResults[playerId][i] = sDebug_BerryResults[playerId][i];
-    }
-}
 
 struct ReadyToStartPacket
 {
@@ -4250,12 +4164,6 @@ static void SetBerryYPos(u8 id, u8 y)
 static void SetBerryAnim(u16 id, u8 animNum)
 {
     StartSpriteAnim(&gSprites[*sBerrySpriteIds[id]], animNum);
-}
-
-static void UNUSED UnusedSetSpritePos(u8 spriteId)
-{
-    gSprites[spriteId].x = 20 * spriteId + 50;
-    gSprites[spriteId].y = 50;
 }
 
 // Gamefreak made a mistake there and goes out of bounds for the data array as it holds 8 elements

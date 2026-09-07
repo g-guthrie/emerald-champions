@@ -307,16 +307,16 @@ Route119_WeatherInstitute_2F_Text_PlayerReceivedCastform:
 	.string "{PLAYER} received CASTFORM!$"
 
 Route119_WeatherInstitute_2F_Text_PokemonChangesWithWeather:
-	.string "CASTFORM changes with the weather. Bring\n"
-	.string "it to ROUTE 111's restored desert ruins.\p"
-	.string "A CHAMPION'S SIGN there may recognize a\n"
-	.string "Trainer who can master every forecast.$"
+	.string "CASTFORM changes with the weather.\n"
+	.string "Let it show you what a storm can do.\p"
+	.string "Before each SIGN's challenge, visit\n"
+	.string "DEVON's researchers in RUSTBORO.$"
 
 Route119_WeatherInstitute_2F_Text_RevealGlassPurpose:
 	.string "This REVEAL GLASS changes the forms of\n"
 	.string "TORNADUS, THUNDURUS, and LANDORUS.\p"
-	.string "Their SIGNS are already stirring across\n"
-	.string "HOENN. Test both forms in your teams.$"
+	.string "The northern bridge is clear now.\n"
+	.string "Follow ROUTE 119 to FORTREE's GYM.$"
 
 Route119_WeatherInstitute_2F_Text_RevealGlassBagFull:
 	.string "The REVEAL GLASS is ready for you, but\n"
@@ -324,11 +324,12 @@ Route119_WeatherInstitute_2F_Text_RevealGlassBagFull:
 	.string "Make room, then speak with me again.$"
 
 Route119_WeatherInstitute_2F_Text_ChangingWeatherRidiculous:
-	.string "Our instruments show one network linking\n"
-	.string "MT. CHIMNEY, SCORCHED SLAB, SEASPRAY\l"
-	.string "CAVE, and the desert ruins.\p"
-	.string "Humans are not changing the weather.\n"
-	.string "They are waking what once balanced it.$"
+	.string "Our instruments still trace that old\n"
+	.string "network beneath HOENN.\p"
+	.string "Report to DEVON's lab in RUSTBORO\n"
+	.string "before each SIGN you want to challenge.\p"
+	.string "The road north leads to FORTREE.\n"
+	.string "You're welcome to rest here on the way.$"
 
 Route119_WeatherInstitute_2F_Text_GroudonWeather:
 	.string "I track weather patterns over\n"

@@ -1,3 +1,4 @@
+
 @ 'requests_effects' should be set to 1 if the command contains a call
 @ to 'Script_RequestEffects', which allows it to be analyzed with
 @ 'RunScriptImmediatelyUntilEffect'.

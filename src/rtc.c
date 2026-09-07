@@ -242,51 +242,6 @@ void RtcReset(void)
     RtcRestoreInterrupts();
 }
 
-static void UNUSED FormatDecimalTime(u8 *dest, s32 hour, s32 minute, s32 second)
-{
-    dest = ConvertIntToDecimalStringN(dest, hour, STR_CONV_MODE_LEADING_ZEROS, 2);
-    *dest++ = CHAR_COLON;
-    dest = ConvertIntToDecimalStringN(dest, minute, STR_CONV_MODE_LEADING_ZEROS, 2);
-    *dest++ = CHAR_COLON;
-    dest = ConvertIntToDecimalStringN(dest, second, STR_CONV_MODE_LEADING_ZEROS, 2);
-    *dest = EOS;
-}
-
-static void UNUSED FormatHexTime(u8 *dest, s32 hour, s32 minute, s32 second)
-{
-    dest = ConvertIntToHexStringN(dest, hour, STR_CONV_MODE_LEADING_ZEROS, 2);
-    *dest++ = CHAR_COLON;
-    dest = ConvertIntToHexStringN(dest, minute, STR_CONV_MODE_LEADING_ZEROS, 2);
-    *dest++ = CHAR_COLON;
-    dest = ConvertIntToHexStringN(dest, second, STR_CONV_MODE_LEADING_ZEROS, 2);
-    *dest = EOS;
-}
-
-static void UNUSED FormatHexRtcTime(u8 *dest)
-{
-    FormatHexTime(dest, sRtc.hour, sRtc.minute, sRtc.second);
-}
-
-static void UNUSED FormatDecimalDate(u8 *dest, s32 year, s32 month, s32 day)
-{
-    dest = ConvertIntToDecimalStringN(dest, year, STR_CONV_MODE_LEADING_ZEROS, 4);
-    *dest++ = CHAR_HYPHEN;
-    dest = ConvertIntToDecimalStringN(dest, month, STR_CONV_MODE_LEADING_ZEROS, 2);
-    *dest++ = CHAR_HYPHEN;
-    dest = ConvertIntToDecimalStringN(dest, day, STR_CONV_MODE_LEADING_ZEROS, 2);
-    *dest = EOS;
-}
-
-static void UNUSED FormatHexDate(u8 *dest, s32 year, s32 month, s32 day)
-{
-    dest = ConvertIntToHexStringN(dest, year, STR_CONV_MODE_LEADING_ZEROS, 4);
-    *dest++ = CHAR_HYPHEN;
-    dest = ConvertIntToHexStringN(dest, month, STR_CONV_MODE_LEADING_ZEROS, 2);
-    *dest++ = CHAR_HYPHEN;
-    dest = ConvertIntToHexStringN(dest, day, STR_CONV_MODE_LEADING_ZEROS, 2);
-    *dest = EOS;
-}
-
 void RtcCalcTimeDifference(struct SiiRtcInfo *rtc, struct Time *result, struct Time *t)
 {
     u16 days = RtcGetDayCount(rtc);
@@ -416,42 +371,6 @@ void FormatDecimalTimeWithoutSeconds(u8 *txtPtr, s8 hour, s8 minute, bool32 is24
 
     *txtPtr++ = EOS;
     *txtPtr = EOS;
-}
-
-u16 GetFullYear(void)
-{
-    struct DateTime dateTime;
-    RtcCalcLocalTime();
-    ConvertTimeToDateTime(&dateTime, &gLocalTime);
-
-    return dateTime.year;
-}
-
-enum Month GetMonth(void)
-{
-    struct DateTime dateTime;
-    RtcCalcLocalTime();
-    ConvertTimeToDateTime(&dateTime, &gLocalTime);
-
-    return dateTime.month;
-}
-
-u8 GetDay(void)
-{
-    struct DateTime dateTime;
-    RtcCalcLocalTime();
-    ConvertTimeToDateTime(&dateTime, &gLocalTime);
-
-    return dateTime.day;
-}
-
-enum Weekday GetDayOfWeek(void)
-{
-    struct DateTime dateTime;
-    RtcCalcLocalTime();
-    ConvertTimeToDateTime(&dateTime, &gLocalTime);
-
-    return dateTime.dayOfWeek;
 }
 
 enum TimeOfDay GenConfigTimeOfDay(enum TimeOfDay timeOfDay)

@@ -364,8 +364,10 @@ NewMauville_Inside_Text_RotomCaught:
 	.string "ROTOM between all five appliances.\p"
 	.string "Faint conduits sketch REGISTEEL,\n"
 	.string "MANECTRIC, and DIALGA.\p"
-	.string "Bringing those families here may wake\n"
-	.string "other challengers in the plant.$"
+	.string "Bring them to the dream researcher\n"
+	.string "at DEVON CORP. 2F in RUSTBORO.\p"
+	.string "Research each Sign before returning\n"
+	.string "to find its challenger here.$"
 
 @ BEGIN EMERALD CHAMPIONS LEGENDARY ROOTS
 .set EC_SIGN_ZAPDOS_ID, 69
@@ -375,6 +377,8 @@ NewMauville_Inside_EventScript_Zapdos::
 	faceplayer
 	setvar VAR_0x8004, EC_SIGN_ZAPDOS_ID
 	special TryUnlockSelectedLegendarySign
+	goto_if_eq VAR_RESULT, 6, Common_EventScript_LegendaryNeedsDevon
+	goto_if_eq VAR_RESULT, 5, Common_EventScript_LegendaryDefeatedAtShrine
 	goto_if_eq VAR_RESULT, 0, NewMauville_Inside_EventScript_ZapdosDormant
 	goto_if_eq VAR_RESULT, 1, NewMauville_Inside_EventScript_ZapdosNeedsPartner
 	goto_if_eq VAR_RESULT, 4, NewMauville_Inside_EventScript_ZapdosCleanup
@@ -384,14 +388,14 @@ NewMauville_Inside_EventScript_Zapdos::
 	delay 40
 	waitmoncry
 	setvar VAR_0x8004, EC_SIGN_ZAPDOS_ID
+	msgbox gText_LegendaryOneShotWarning, MSGBOX_DEFAULT
 	special CreateSelectedLegendarySignEncounter
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, NewMauville_Inside_EventScript_ZapdosCaught
-	msgbox NewMauville_Inside_Text_ZapdosRemains, MSGBOX_DEFAULT
-	release
+	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_LegendaryDefeated
+	goto NewMauville_Inside_EventScript_ZapdosCaught
 	end
 
 NewMauville_Inside_EventScript_ZapdosDormant::
@@ -419,16 +423,14 @@ NewMauville_Inside_Text_ZapdosDormant:
 
 NewMauville_Inside_Text_ZapdosNeedsPartner:
 	.string "The SIGN sketches MANECTRIC.\p"
-	.string "Bring that POKéMON's family here, and\n"
-	.string "the hidden challenger may answer.$"
+	.string "Bring that POKéMON's family to the\n"
+	.string "dream researcher at DEVON CORP. 2F\l"
+	.string "in RUSTBORO to translate this Sign.$"
 
 NewMauville_Inside_Text_ZapdosAwakens:
 	.string "The CHAMPION'S SIGN erupts with light!\n"
 	.string "ZAPDOS answers the challenge!$"
 
-NewMauville_Inside_Text_ZapdosRemains:
-	.string "The SIGN remains bright. ZAPDOS\n"
-	.string "will accept another challenge.$"
 
 
 @ END EMERALD CHAMPIONS LEGENDARY ROOTS

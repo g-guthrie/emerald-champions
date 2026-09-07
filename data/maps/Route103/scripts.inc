@@ -241,8 +241,7 @@ Route103_EventScript_LivRematch::
 	end
 
 Route103_EventScript_Andrew::
-	trainerbattle_double TRAINER_ANDREW, Route103_Text_AndrewIntro, Route103_Text_AndrewDefeated, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route103_Text_AndrewPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route103_Text_ANDREW_LocalConversation, MSGBOX_NPC
 	end
 
 Route103_EventScript_Miguel::
@@ -267,23 +266,20 @@ Route103_EventScript_MiguelRematch::
 	end
 
 Route103_EventScript_Marcos::
-	trainerbattle_single TRAINER_MARCOS, Route103_Text_MarcosIntro, Route103_Text_MarcosDefeated
-	msgbox Route103_Text_MarcosPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route103_Text_MARCOS_LocalConversation, MSGBOX_NPC
 	end
 
 Route103_EventScript_Rhett::
-	trainerbattle_single TRAINER_RHETT, Route103_Text_RhettIntro, Route103_Text_RhettDefeated
+	trainerbattle_double TRAINER_RHETT, Route103_Text_RhettIntro, Route103_Text_RhettDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route103_Text_RhettPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route103_EventScript_Pete::
-	trainerbattle_single TRAINER_PETE, Route103_Text_PeteIntro, Route103_Text_PeteDefeated
-	msgbox Route103_Text_PetePostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route103_Text_PETE_LocalConversation, MSGBOX_NPC
 	end
 
 Route103_EventScript_Isabelle::
-	trainerbattle_double TRAINER_ISABELLE, Route103_Text_IsabelleIntro, Route103_Text_IsabelleDefeated, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route103_Text_IsabellePostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route103_Text_ISABELLE_LocalConversation, MSGBOX_NPC
 	end
 
 Route103_Text_MayRoute103Pokemon:
@@ -292,44 +288,41 @@ Route103_Text_MayRoute103Pokemon:
 
 Route103_Text_MayLetsBattle:
 	.string "MAY: There you are, {PLAYER}{KUN}!\p"
-	.string "I chose the partner that counters yours\n"
-	.string "on purpose. Dad wanted you to face an\l"
-	.string "informed opponent from battle one.\p"
-	.string "You used the CENTER's LEVELER, right?\n"
-	.string "Good. Then show me your first plan!$"
+	.string "Dad said you helped him out. I wanted to\n"
+	.string "meet the POKéMON that was with you!\p"
+	.string "Mine has the type advantage, though.\n"
+	.string "Did you use OLDALE's LEVELER?\p"
+	.string "Let's see how we do together!$"
 
 Route103_Text_MayDefeated:
-	.string "You found the answer anyway!$"
+	.string "We lost! You two make a good team!$"
 
 Route103_Text_MayTimeToHeadBack:
-	.string "MAY: You didn't trade hits into the type\n"
-	.string "chart. You read my set and went around.\p"
-	.string "Now I know why Dad has his eye on you.\p"
-	.string "Let's head back to the LAB. He has\n"
-	.string "something for a Trainer who thinks.$"
+	.string "MAY: I thought I had the advantage!\n"
+	.string "I guess there's more to learn.\p"
+	.string "Come on, let's head back to the LAB.\n"
+	.string "Dad will want to hear about this!$"
 
 Route103_Text_BrendanRoute103Pokemon:
 	.string "BRENDAN: Okay, so it's this one and\n"
 	.string "that one that live on ROUTE 103…$"
 
 Route103_Text_BrendanLetsBattle:
-	.string "BRENDAN: Took you long enough, {PLAYER}.\p"
-	.string "I trained the partner that beats yours.\n"
-	.string "Dad wanted your first opponent to know\l"
-	.string "exactly what it was doing.\p"
-	.string "You hit the LEVELER in OLDALE, right?\n"
-	.string "Then no excuses. Show me yours.$"
+	.string "BRENDAN: Hey, {PLAYER}. Dad told me\n"
+	.string "you got him out of trouble.\p"
+	.string "Let's see your POKéMON in a battle.\n"
+	.string "Mine has the type advantage!\p"
+	.string "You tried the LEVELER in OLDALE, right?\n"
+	.string "Then let's get started.$"
 
 Route103_Text_BrendanDefeated:
-	.string "Huh. You had an answer for that.$"
+	.string "Huh. We still have work to do.$"
 
 Route103_Text_BrendanTimeToHeadBack:
-	.string "BRENDAN: You didn't just swing into the\n"
-	.string "type chart. You read the set first.\p"
-	.string "Fine. I get why Dad keeps talking about\n"
-	.string "you now.\p"
-	.string "Come back to the LAB. He's got something\n"
-	.string "for Trainers who plan.$"
+	.string "BRENDAN: All right, you earned that win.\n"
+	.string "Type advantage isn't enough, is it?\p"
+	.string "Let's head back to the LAB. Dad wanted\n"
+	.string "to see you when we were done.$"
 
 Route103_Text_ShouldHaveBroughtPotion:
 	.string "My POKéMON is staggeringly tired…\n"
@@ -344,3 +337,19 @@ Route103_Text_RouteSign:
 	.string "ROUTE 103\n"
 	.string "{DOWN_ARROW} OLDALE TOWN$"
 
+
+Route103_Text_ANDREW_LocalConversation:
+	.string "The fish are ignoring my bait.\n"
+	.string "I may have offended the chef.$"
+
+Route103_Text_MARCOS_LocalConversation:
+	.string "I wrote a song about this river.\n"
+	.string "It has a very strong current.$"
+
+Route103_Text_PETE_LocalConversation:
+	.string "Swimming is all about timing.\n"
+	.string "So is remembering to breathe.$"
+
+Route103_Text_ISABELLE_LocalConversation:
+	.string "I found a shell for my collection.\n"
+	.string "It objected and walked away.$"

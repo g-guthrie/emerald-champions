@@ -948,6 +948,8 @@ LittlerootTown_Text_ComeHomeIfAnythingHappens:
 	.string "To think that you have your very own\n"
 	.string "POKéMON now…\l"
 	.string "Your father will be overjoyed.\p"
+	.string "He's at the GYM in PETALBURG CITY.\n"
+	.string "Go west from OLDALE along ROUTE 102.\p"
 	.string "…But please be careful.\n"
 	.string "If anything happens, you can come home.\p"
 	.string "Go on, go get them, honey!$"

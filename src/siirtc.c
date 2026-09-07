@@ -289,46 +289,6 @@ bool8 SiiRtcGetTime(struct SiiRtcInfo *rtc)
     return TRUE;
 }
 
-static bool8 UNUSED SiiRtcSetAlarm(struct SiiRtcInfo *rtc)
-{
-    u8 i;
-    u8 alarmData[2];
-
-    if (sLocked == TRUE)
-        return FALSE;
-
-    sLocked = TRUE;
-
-    // Decode BCD.
-    alarmData[0] = (rtc->alarmHour & 0xF) + 10 * ((rtc->alarmHour >> 4) & 0xF);
-
-    // The AM/PM flag must be set correctly even in 24-hour mode.
-
-    if (alarmData[0] < 12)
-        alarmData[0] = rtc->alarmHour | ALARM_AM;
-    else
-        alarmData[0] = rtc->alarmHour | ALARM_PM;
-
-    alarmData[1] = rtc->alarmMinute;
-
-    GPIO_PORT_DATA = SCK_HI;
-    GPIO_PORT_DATA = SCK_HI | CS_HI;
-
-    GPIOPortDirection = DIR_ALL_OUT; // Why is this the only instance that uses a symbol?
-
-    WriteCommand(CMD_ALARM | WR);
-
-    for (i = 0; i < 2; i++)
-        WriteData(alarmData[i]);
-
-    GPIO_PORT_DATA = SCK_HI;
-    GPIO_PORT_DATA = SCK_HI;
-
-    sLocked = FALSE;
-
-    return TRUE;
-}
-
 static int WriteCommand(u8 value)
 {
     u8 i;

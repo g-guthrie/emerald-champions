@@ -36,8 +36,7 @@ Route105_EventScript_Luis::
 	end
 
 Route105_EventScript_Dominik::
-	trainerbattle_double TRAINER_DOMINIK, Route105_Text_DominikIntro, Route105_Text_DominikDefeated, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route105_Text_DominikPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route105_Text_DOMINIK_LocalConversation, MSGBOX_NPC
 	end
 
 Route105_EventScript_Beverly::
@@ -46,7 +45,7 @@ Route105_EventScript_Beverly::
 	end
 
 Route105_EventScript_Imani::
-	trainerbattle_single TRAINER_IMANI, Route105_Text_ImaniIntro, Route105_Text_ImaniDefeated
+	trainerbattle_double TRAINER_IMANI, Route105_Text_ImaniIntro, Route105_Text_ImaniDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route105_Text_ImaniPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -95,3 +94,7 @@ Route104_Text_DadPokenavCall:
 Route104_Text_RegisteredDadInPokenav:
 	.string "Registered DAD NORMAN\n"
 	.string "in the POKéNAV.$"
+
+Route105_Text_DOMINIK_LocalConversation:
+	.string "I challenged the current.\n"
+	.string "It swept the entire match.$"

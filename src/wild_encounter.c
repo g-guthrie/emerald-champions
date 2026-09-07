@@ -712,7 +712,7 @@ bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, enum WildPok
     enum Species species;
 
     // An awakened Sign augments the native table until that single specimen
-    // is caught. A successful roll bypasses repel and lead filters so the
+    // is caught or lost. A successful roll bypasses lead filters so the
     // quest result cannot be silently discarded.
     if (TryGetLegendarySignWildOverride(area, &species, &level))
     {
@@ -762,6 +762,9 @@ bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, enum WildPok
     case WILD_AREA_HIDDEN:
         break;
     }
+
+    if (!CanAcquireLegendarySignSpecies(wildMonInfo->wildPokemon[wildMonIndex].species))
+        return FALSE;
 
     level = ChooseWildMonLevel(wildMonInfo->wildPokemon, wildMonIndex, area);
     if (IsLegendarySignOrdinaryWildSpecies(wildMonInfo->wildPokemon[wildMonIndex].species))
@@ -860,6 +863,17 @@ bool8 AreLegendariesInSootopolisPreventingEncounters(void)
     return FlagGet(FLAG_LEGENDARIES_IN_SOOTOPOLIS);
 }
 
+// Imported underwater areas may author a full twelve-slot seabed roster.
+// Keep its land-slot distribution instead of treating it as a five-slot Surf table.
+static bool32 UsesLandEncounterTable(u32 headerId, u16 behavior)
+{
+    if (MetatileBehavior_IsLandWildEncounter(behavior))
+        return TRUE;
+    return gMapHeader.mapType == MAP_TYPE_UNDERWATER
+        && MetatileBehavior_IsWaterWildEncounter(behavior)
+        && GetRouteSignInfo(headerId, WILD_AREA_LAND) != NULL;
+}
+
 bool8 StandardWildEncounter(u16 curMetatileBehavior, u16 prevMetatileBehavior)
 {
     u32 headerId;
@@ -878,6 +892,19 @@ bool8 StandardWildEncounter(u16 curMetatileBehavior, u16 prevMetatileBehavior)
     headerId = GetCurrentMapWildMonHeaderId();
     if (headerId == HEADER_NONE)
     {
+        // Quiet rooms can host a researched Sign without an ordinary roster.
+        // The shared override checks this map, research, and caught/lost state.
+        enum Species species;
+        u8 level;
+
+        if (MetatileBehavior_IsLandWildEncounter(curMetatileBehavior)
+         && TryGetLegendarySignWildOverride(WILD_AREA_LAND, &species, &level))
+        {
+            CreateWildMon(species, level);
+            BattleSetup_StartWildBattle();
+            return TRUE;
+        }
+
         if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_WILD_MONS)
         {
             headerId = GetBattlePikeWildMonHeaderId();
@@ -914,7 +941,7 @@ bool8 StandardWildEncounter(u16 curMetatileBehavior, u16 prevMetatileBehavior)
     }
     else
     {
-        if (MetatileBehavior_IsLandWildEncounter(curMetatileBehavior) == TRUE)
+        if (UsesLandEncounterTable(headerId, curMetatileBehavior))
         {
             timeOfDay = GetTimeOfDayForEncounters(headerId, WILD_AREA_LAND);
 
@@ -1091,7 +1118,7 @@ static bool8 SweetScentWildEncounterInner(void)
     }
     else
     {
-        if (MetatileBehavior_IsLandWildEncounter(MapGridGetMetatileBehaviorAt(x, y)) == TRUE)
+        if (UsesLandEncounterTable(headerId, MapGridGetMetatileBehaviorAt(x, y)))
         {
             timeOfDay = GetTimeOfDayForEncounters(headerId, WILD_AREA_LAND);
 

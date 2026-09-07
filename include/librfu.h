@@ -620,7 +620,6 @@ void STWI_send_CP_EndREQ(void);
 void STWI_send_DataTxREQ(const void *in, u8 size);
 void STWI_send_DataTxAndChangeREQ(const void *in, u8 size);
 void STWI_send_DisconnectREQ(u8 unk);
-void STWI_send_TestModeREQ(u8 unk0, u8 unk1);
 void STWI_send_CPR_StartREQ(u16 unk0, u16 unk1, u8 unk2);
 void STWI_send_CPR_PollingREQ(void);
 void STWI_send_CPR_EndREQ(void);

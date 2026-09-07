@@ -13,6 +13,7 @@
 #include "graphics.h"
 #include "international_string_util.h"
 #include "item.h"
+#include "legendary_signs.h"
 #include "link.h"
 #include "menu.h"
 #include "palette.h"
@@ -89,6 +90,8 @@ static const u8 sText_PlayerDefeatedLinkTrainerTrainer1[] = _("You defeated {B_T
 static const u8 sText_OpponentMon1Appeared[] = _("{B_OPPONENT_MON1_NAME} appeared!\p");
 static const u8 sText_WildPkmnAppeared[] = _("You encountered a wild {B_OPPONENT_MON1_NAME}!\p");
 static const u8 sText_LegendaryPkmnAppeared[] = _("You encountered a wild {B_OPPONENT_MON1_NAME}!\p");
+static const u8 sText_OneShotLegendaryAppeared[] = _("You encountered a wild {B_OPPONENT_MON1_NAME}!\pFleeing or a knockout ends your chance.\nOnly an earlier save lets you try again.\p");
+static const u8 sText_TwoWildWithLegendaryAppeared[] = _("Oh! A wild {B_OPPONENT_MON1_NAME} and {B_OPPONENT_MON2_NAME} appeared!\pFleeing or a knockout loses a legendary.\nOnly an earlier save lets you try again.\p");
 static const u8 sText_WildPkmnAppearedPause[] = _("You encountered a wild {B_OPPONENT_MON1_NAME}!{PAUSE 127}");
 static const u8 sText_TwoWildPkmnAppeared[] = _("Oh! A wild {B_OPPONENT_MON1_NAME} and {B_OPPONENT_MON2_NAME} appeared!\p");
 static const u8 sText_GhostAppearedCantId[] = _("The GHOST appeared!\pDarn!\nThe GHOST can't be ID'd!\p");
@@ -2509,6 +2512,12 @@ void BufferStringBattle(enum StringID stringID, enum BattlerId battler)
                 stringPtr = sText_GhostAppearedCantId;
             else if (gBattleTypeFlags & BATTLE_TYPE_GHOST)
                 stringPtr = sText_TheGhostAppeared;
+            else if (!(gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_CATCH_TUTORIAL))
+                 && (IsOneShotLegendarySpecies(GetMonData(GetBattlerMon(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT)), MON_DATA_SPECIES))
+                  || (IsDoubleBattle() && IsValidForBattle(GetBattlerMon(GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)))
+                   && IsOneShotLegendarySpecies(GetMonData(GetBattlerMon(GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)), MON_DATA_SPECIES)))))
+                stringPtr = IsDoubleBattle() && IsValidForBattle(GetBattlerMon(GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)))
+                    ? sText_TwoWildWithLegendaryAppeared : sText_OneShotLegendaryAppeared;
             else if (gBattleTypeFlags & BATTLE_TYPE_LEGENDARY)
                 stringPtr = sText_LegendaryPkmnAppeared;
             else if (IsDoubleBattle() && IsValidForBattle(GetBattlerMon(GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT))))

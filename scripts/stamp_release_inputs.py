@@ -30,8 +30,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 STAMP = ROOT / "pokeemerald-release.inputs.json"
-INPUT_DIRS = ("src", "data", "include", "asm", "graphics", "sound", "libagbsyscall")
-INPUT_FILES = {"Makefile", "config.mk", "make_tools.mk", "charmap.txt", "check_history.sh",
+INPUT_DIRS = ("src", "data", "include", "asm", "constants", "graphics", "sound", "libagbsyscall")
+INPUT_FILES = {"Makefile", "config.mk", "make_tools.mk", "charmap.txt",
                ".gitignore"}
 INPUT_SUFFIXES = {".mk", ".ld"}
 SCHEMA_VERSION = 2
@@ -42,6 +42,11 @@ GENERATOR_INPUTS = (
     "data/emerald_champions/emerald_champions_move_access_review.json",
     "data/emerald_champions/emerald_champions_preparation_form_learnsets.json",
     "scripts/stamp_release_inputs.py",
+    "scripts/update_build_config.py",
+)
+TEST_GENERATOR_INPUTS = (
+    "scripts/run_emerald_champions_runtime_gates.py",
+    "scripts/export_test_elf.py",
 )
 GENERATOR_DIRS = ("learnset_helpers", "wild_encounters", "misc")
 TOOL_SOURCE_SUFFIXES = {".c", ".h", ".cpp", ".hpp", ".py", ".sh", ".pl", ".mk", ".json", ".txt", ".s", ".S", ".inc"}
@@ -117,11 +122,6 @@ def build_inputs(*, include_tests: bool = False) -> list[Path]:
     for path in ROOT.iterdir():
         if path.is_file() and (path.name in INPUT_FILES or path.suffix in INPUT_SUFFIXES):
             paths.append(path)
-    if include_tests:
-        # This script determines the exact source manifest compiled into the
-        # shared test ELF, so changing it invalidates that ELF even when no C
-        # source changed.
-        paths.append(ROOT / "scripts/run_emerald_champions_runtime_gates.py")
     paths = [
         p for p in paths
         if p.is_file() and not p.name.startswith("._")
@@ -149,7 +149,7 @@ def build_inputs(*, include_tests: bool = False) -> list[Path]:
                 continue
             if path.is_file() and (path.name == "Makefile" or path.suffix in TOOL_SOURCE_SUFFIXES):
                 paths.append(path)
-    for relative in GENERATOR_INPUTS:
+    for relative in GENERATOR_INPUTS + (TEST_GENERATOR_INPUTS if include_tests else ()):
         path = ROOT / relative
         if not path.is_file():
             raise ValueError(f"missing build input: {relative}")

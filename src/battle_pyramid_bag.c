@@ -380,11 +380,6 @@ void CB2_PyramidBagMenuFromStartMenu(void)
 }
 
 // CB2_BagMenuFromBattle is used instead
-static void UNUSED OpenBattlePyramidBagInBattle(void)
-{
-    GoToBattlePyramidBagMenu(PYRAMIDBAG_LOC_BATTLE, CB2_SetUpReshowBattleScreenAfterMenu2);
-}
-
 // If the player finishes a round at the Battle Pyramid with insufficient space in their
 // Pyramid Bag to store the party's held items, they may choose items to toss in order to
 // make room.
@@ -1486,11 +1481,6 @@ static void DrawTossNumberWindow(u8 windowId)
 {
     DrawStdFrameWithCustomTileAndPalette(windowId, FALSE, 1, 0xE);
     ScheduleBgCopyTilemapToVram(1);
-}
-
-static u8 UNUSED GetMenuActionWindowId(u8 windowArrayId)
-{
-    return gPyramidBagMenu->windowIds[windowArrayId];
 }
 
 static u8 OpenMenuActionWindowById(u8 windowArrayId)

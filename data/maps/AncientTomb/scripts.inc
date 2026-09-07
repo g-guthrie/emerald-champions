@@ -63,6 +63,7 @@ AncientTomb_EventScript_Registeel::
 	waitmoncry
 	setvar VAR_0x8004, SPECIES_REGISTEEL
 	setvar VAR_0x8005, 0
+	msgbox gText_LegendaryOneShotWarning, MSGBOX_DEFAULT
 	special CreateEmeraldChampionsStaticLegendaryEncounter
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special StartRegiBattle
@@ -81,8 +82,7 @@ AncientTomb_EventScript_CaughtRegisteel::
 	end
 
 AncientTomb_EventScript_DefeatedRegisteel::
-	msgbox AncientTomb_Text_RegisteelStillAwaitsCapture, MSGBOX_DEFAULT
-	release
+	goto Common_EventScript_LegendaryDefeated
 	end
 
 AncientTomb_EventScript_RanFromRegisteel::
@@ -90,6 +90,3 @@ AncientTomb_EventScript_RanFromRegisteel::
 	goto Common_EventScript_LegendaryFlewAway
 	end
 
-AncientTomb_Text_RegisteelStillAwaitsCapture:
-	.string "REGISTEEL steadies itself again.\p"
-	.string "It still awaits a true capture.$"

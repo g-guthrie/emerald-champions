@@ -58,11 +58,7 @@ Route115_EventScript_Koichi::
 	end
 
 Route115_EventScript_Nob::
-	trainerbattle_single TRAINER_NOB_1, Route115_Text_NobIntro, Route115_Text_NobDefeat, Route115_EventScript_RegisterNob
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route115_EventScript_RematchNob
-	msgbox Route115_Text_NobPostBattle, MSGBOX_DEFAULT
-	release
+	msgbox Route115_Text_NOB_1_LocalConversation, MSGBOX_NPC
 	end
 
 Route115_EventScript_RegisterNob::
@@ -74,8 +70,7 @@ Route115_EventScript_RegisterNob::
 	end
 
 Route115_EventScript_RematchNob::
-	trainerbattle_rematch TRAINER_NOB_1, Route115_Text_NobRematchIntro, Route115_Text_NobRematchDefeat
-	msgbox Route115_Text_NobPostRematch, MSGBOX_AUTOCLOSE
+	msgbox Route115_Text_NOB_1_LocalConversation, MSGBOX_NPC
 	end
 
 Route115_EventScript_Cyndy::
@@ -105,8 +100,7 @@ Route115_EventScript_Hector::
 	end
 
 Route115_EventScript_Kyra::
-	trainerbattle_double TRAINER_KYRA, Route115_Text_KyraIntro, Route115_Text_KyraDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route115_Text_KyraPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route115_Text_KYRA_LocalConversation, MSGBOX_NPC
 	end
 
 Route115_EventScript_Jaiden::
@@ -120,8 +114,7 @@ Route115_EventScript_Alix::
 	end
 
 Route115_EventScript_Helene::
-	trainerbattle_single TRAINER_HELENE, Route115_Text_HeleneIntro, Route115_Text_HeleneDefeat
-	msgbox Route115_Text_HelenePostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route115_Text_HELENE_LocalConversation, MSGBOX_NPC
 	end
 
 Route115_EventScript_Marlene::
@@ -142,3 +135,15 @@ Route115_Text_RouteSignRustboro:
 Route115_Text_MeteorFallsSign:
 	.string "METEOR FALLS\n"
 	.string "FALLARBOR TOWN THROUGH HERE$"
+
+Route115_Text_NOB_1_LocalConversation:
+	.string "I punched a rock for training.\n"
+	.string "The rock remains undefeated.$"
+
+Route115_Text_KYRA_LocalConversation:
+	.string "I race my own best time now.\n"
+	.string "She is a very annoying rival.$"
+
+Route115_Text_HELENE_LocalConversation:
+	.string "My coach told me to loosen up.\n"
+	.string "I dropped my entire backpack.$"

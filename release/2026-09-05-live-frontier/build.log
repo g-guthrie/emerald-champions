@@ -1,0 +1,31 @@
+tools/scaninc/scaninc -M build/emerald-release/data/event_scripts.d -g build/assets -I include -I "" data/event_scripts.s
+tools/scaninc/scaninc -M build/emerald-release/src/legendary_signs.d -g build/assets -I include -I tools/agbcc/include src/legendary_signs.c
+tools/scaninc/scaninc -M build/emerald-release/src/emerald_champions_headless.d -g build/assets -I include -I tools/agbcc/include src/emerald_champions_headless.c
+tools/scaninc/scaninc -M build/emerald-release/src/champions_circuit.d -g build/assets -I include -I tools/agbcc/include src/champions_circuit.c
+tools/scaninc/scaninc -M build/emerald-release/src/berry_blender.d -g build/assets -I include -I tools/agbcc/include src/berry_blender.c
+/Users/gguthrie/.local/share/arm-gnu-toolchain-15.2-20260718/Payload/bin/../libexec/gcc/arm-none-eabi/15.2.1/cc1 -quiet <flags> -o build/emerald-release/src/berry_blender.o src/berry_blender.c
+/Users/gguthrie/.local/share/arm-gnu-toolchain-15.2-20260718/Payload/bin/../libexec/gcc/arm-none-eabi/15.2.1/cc1 -quiet <flags> -o build/emerald-release/src/champions_circuit.o src/champions_circuit.c
+/Users/gguthrie/.local/share/arm-gnu-toolchain-15.2-20260718/Payload/bin/../libexec/gcc/arm-none-eabi/15.2.1/cc1 -quiet <flags> -o build/emerald-release/src/emerald_champions_headless.o src/emerald_champions_headless.c
+/Users/gguthrie/.local/share/arm-gnu-toolchain-15.2-20260718/Payload/bin/../libexec/gcc/arm-none-eabi/15.2.1/cc1 -quiet <flags> -o build/emerald-release/src/legendary_signs.o src/legendary_signs.c
+tools/preproc/preproc -s data/event_scripts.s charmap.txt | arm-none-eabi-cpp -iquote include -Wno-trigraphs -DMODERN=1 -DTESTING=0 -DEMERALD -std=gnu17 -DEC_HEADLESS_FIXTURES=0 -DRELEASE -I include - | tools/preproc/preproc -ie data/event_scripts.s charmap.txt | arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -o build/emerald-release/data/event_scripts.o
+cd build/emerald-release && arm-none-eabi-gcc -march=armv4t -mabi=apcs-gnu -mcpu=arm7tdmi -Xlinker -Map=../../pokeemerald-release.map -Xlinker --print-memory-usage -Xassembler -meabi=5 -Xassembler -march=armv4t -Xassembler -mcpu=arm7tdmi -Xlinker --gc-sections -Xlinker -flto=auto -T ../../ld_script_modern.ld -o ../../pokeemerald-release.elf <objs> <libs>
+/Users/gguthrie/.local/share/arm-gnu-toolchain-15.2-20260718/Payload/bin/../lib/gcc/arm-none-eabi/15.2.1/../../../../arm-none-eabi/bin/ld: /Users/gguthrie/.local/share/arm-gnu-toolchain-15.2-20260718/Payload/bin/../lib/gcc/arm-none-eabi/15.2.1/../../../../arm-none-eabi/lib/thumb/nofp//libc.a(libc_a-closer.o): in function `_close_r':
+closer.c:(.text._close_r+0xc): warning: _close is not implemented and will always fail
+/Users/gguthrie/.local/share/arm-gnu-toolchain-15.2-20260718/Payload/bin/../lib/gcc/arm-none-eabi/15.2.1/../../../../arm-none-eabi/bin/ld: /Users/gguthrie/.local/share/arm-gnu-toolchain-15.2-20260718/Payload/bin/../lib/gcc/arm-none-eabi/15.2.1/../../../../arm-none-eabi/lib/thumb/nofp//libc.a(libc_a-closer.o): note: the message above does not take linker garbage collection into account
+/Users/gguthrie/.local/share/arm-gnu-toolchain-15.2-20260718/Payload/bin/../lib/gcc/arm-none-eabi/15.2.1/../../../../arm-none-eabi/bin/ld: /Users/gguthrie/.local/share/arm-gnu-toolchain-15.2-20260718/Payload/bin/../lib/gcc/arm-none-eabi/15.2.1/../../../../arm-none-eabi/lib/thumb/nofp//libc.a(libc_a-lseekr.o): in function `_lseek_r':
+lseekr.c:(.text._lseek_r+0x10): warning: _lseek is not implemented and will always fail
+/Users/gguthrie/.local/share/arm-gnu-toolchain-15.2-20260718/Payload/bin/../lib/gcc/arm-none-eabi/15.2.1/../../../../arm-none-eabi/bin/ld: /Users/gguthrie/.local/share/arm-gnu-toolchain-15.2-20260718/Payload/bin/../lib/gcc/arm-none-eabi/15.2.1/../../../../arm-none-eabi/lib/thumb/nofp//libc.a(libc_a-lseekr.o): note: the message above does not take linker garbage collection into account
+/Users/gguthrie/.local/share/arm-gnu-toolchain-15.2-20260718/Payload/bin/../lib/gcc/arm-none-eabi/15.2.1/../../../../arm-none-eabi/bin/ld: /Users/gguthrie/.local/share/arm-gnu-toolchain-15.2-20260718/Payload/bin/../lib/gcc/arm-none-eabi/15.2.1/../../../../arm-none-eabi/lib/thumb/nofp//libc.a(libc_a-readr.o): in function `_read_r':
+readr.c:(.text._read_r+0x10): warning: _read is not implemented and will always fail
+/Users/gguthrie/.local/share/arm-gnu-toolchain-15.2-20260718/Payload/bin/../lib/gcc/arm-none-eabi/15.2.1/../../../../arm-none-eabi/bin/ld: /Users/gguthrie/.local/share/arm-gnu-toolchain-15.2-20260718/Payload/bin/../lib/gcc/arm-none-eabi/15.2.1/../../../../arm-none-eabi/lib/thumb/nofp//libc.a(libc_a-readr.o): note: the message above does not take linker garbage collection into account
+/Users/gguthrie/.local/share/arm-gnu-toolchain-15.2-20260718/Payload/bin/../lib/gcc/arm-none-eabi/15.2.1/../../../../arm-none-eabi/bin/ld: /Users/gguthrie/.local/share/arm-gnu-toolchain-15.2-20260718/Payload/bin/../lib/gcc/arm-none-eabi/15.2.1/../../../../arm-none-eabi/lib/thumb/nofp//libc.a(libc_a-writer.o): in function `_write_r':
+writer.c:(.text._write_r+0x10): warning: _write is not implemented and will always fail
+/Users/gguthrie/.local/share/arm-gnu-toolchain-15.2-20260718/Payload/bin/../lib/gcc/arm-none-eabi/15.2.1/../../../../arm-none-eabi/bin/ld: /Users/gguthrie/.local/share/arm-gnu-toolchain-15.2-20260718/Payload/bin/../lib/gcc/arm-none-eabi/15.2.1/../../../../arm-none-eabi/lib/thumb/nofp//libc.a(libc_a-writer.o): note: the message above does not take linker garbage collection into account
+/Users/gguthrie/.local/share/arm-gnu-toolchain-15.2-20260718/Payload/bin/../lib/gcc/arm-none-eabi/15.2.1/../../../../arm-none-eabi/bin/ld: warning: ../../pokeemerald-release.elf has a LOAD segment with RWX permissions
+Memory region         Used Size  Region Size  %age Used
+           EWRAM:      232218 B       256 KB     88.58%
+           IWRAM:       28336 B        32 KB     86.47%
+             ROM:    27796368 B        32 MB     82.84%
+tools/gbafix/gbafix pokeemerald-release.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 --silent
+arm-none-eabi-objcopy -O binary pokeemerald-release.elf pokeemerald-release.gba
+tools/gbafix/gbafix pokeemerald-release.gba -p --silent

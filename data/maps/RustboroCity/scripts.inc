@@ -1126,11 +1126,17 @@ RustboroCity_Text_HelpMeIWasRobbed:
 	.string "Help me! I was robbed by TEAM AQUA!\n"
 	.string "I have to get the DEVON GOODS back!\p"
 	.string "If I don't…\n"
-	.string "I'm going to be in serious trouble.$"
+	.string "I'm going to be in serious trouble.\p"
+	.string "He ran east along ROUTE 116!\n"
+	.string "Please check RUSTURF TUNNEL.\p"
+	.string "Bring the GOODS back to me here.\n"
+	.string "I'll wait by the road.$"
 
 RustboroCity_Text_ShadyCharacterTookOffTowardsTunnel:
-	.string "That shady character, I think he took\n"
-	.string "off towards the tunnel over there.$"
+	.string "Follow ROUTE 116 east to\n"
+	.string "RUSTURF TUNNEL. He went that way!\p"
+	.string "Please bring the DEVON GOODS\n"
+	.string "back to me here.$"
 
 RustboroCity_Text_YouGotItThankYou:
 	.string "Oh! How did it go?\n"

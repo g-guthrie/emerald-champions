@@ -131,7 +131,6 @@ void ClearMysteryGiftFlags(void)
 void ClearMysteryGiftVars(void)
 {
     VarSet(VAR_GIFT_PICHU_SLOT, 0);
-    VarSet(VAR_GIFT_UNUSED_3, 0);
     VarSet(VAR_GIFT_UNUSED_4, 0);
     VarSet(VAR_GIFT_UNUSED_5, 0);
     VarSet(VAR_GIFT_UNUSED_6, 0);
@@ -177,14 +176,6 @@ u16 VarGet(u16 id)
     u16 *ptr = GetVarPointer(id);
     if (!ptr)
         return id;
-    return *ptr;
-}
-
-u16 VarGetIfExist(u16 id)
-{
-    u16 *ptr = GetVarPointer(id);
-    if (!ptr)
-        return 65535;
     return *ptr;
 }
 

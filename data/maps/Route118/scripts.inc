@@ -210,17 +210,15 @@ Route118_EventScript_RematchRose::
 	end
 
 Route118_EventScript_Barny::
-	trainerbattle_double TRAINER_BARNY, Route118_Text_BarnyIntro, Route118_Text_BarnyDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route118_Text_BarnyPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route118_Text_BARNY_LocalConversation, MSGBOX_NPC
 	end
 
 Route118_EventScript_Wade::
-	trainerbattle_double TRAINER_WADE, Route118_Text_WadeIntro, Route118_Text_WadeDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route118_Text_WadePostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route118_Text_WADE_LocalConversation, MSGBOX_NPC
 	end
 
 Route118_EventScript_Dalton::
-	trainerbattle_single TRAINER_DALTON_1, Route118_Text_DaltonIntro, Route118_Text_DaltonDefeat, Route118_EventScript_RegisterDalton
+	trainerbattle_double TRAINER_DALTON_1, Route118_Text_DaltonIntro, Route118_Text_DaltonDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route118_EventScript_RegisterDalton
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route118_EventScript_RematchDalton
 	msgbox Route118_Text_DaltonPostBattle, MSGBOX_DEFAULT
@@ -236,7 +234,7 @@ Route118_EventScript_RegisterDalton::
 	end
 
 Route118_EventScript_RematchDalton::
-	trainerbattle_rematch TRAINER_DALTON_1, Route118_Text_DaltonRematchIntro, Route118_Text_DaltonRematchDefeat
+	trainerbattle_rematch_double TRAINER_DALTON_1, Route118_Text_DaltonRematchIntro, Route118_Text_DaltonRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route118_Text_DaltonPostRematch, MSGBOX_AUTOCLOSE
 	end
 
@@ -256,22 +254,17 @@ Route118_EventScript_Deandre::
 	end
 
 Route118_Text_StevenQuestions:
-	.string "STEVEN: Hi, {PLAYER}{KUN}!\p"
-	.string "It's me, STEVEN!\n"
-	.string "We met in the cave near DEWFORD.\p"
-	.string "Have you met many kinds of POKéMON\n"
-	.string "since I last saw you?\p"
-	.string "There are many, many kinds of POKéMON\n"
-	.string "in this wide world of ours.\p"
-	.string "If you wanted to raise only your\n"
-	.string "favorites, that's fine.\p"
-	.string "Perhaps you find it more fun to raise\n"
-	.string "all sorts of POKéMON.\p"
-	.string "As a TRAINER of POKéMON,\n"
-	.string "what do you think?\p"
-	.string "Of course, it's not any of my business.\p"
-	.string "It would be nice if we were to meet\n"
-	.string "again somewhere.$"
+	.string "STEVEN: {PLAYER}{KUN}! Good to see you.\p"
+	.string "Have you found new partners, or stayed\n"
+	.string "with your favorites?\p"
+	.string "Either way, think about how they help\n"
+	.string "one another. That's a team's strength.\p"
+	.string "Head north on ROUTE 119.\n"
+	.string "Visit the WEATHER INSTITUTE on the way.\p"
+	.string "Ask its researchers about the weather.\n"
+	.string "Then challenge WINONA in FORTREE.\p"
+	.string "I'll keep exploring.\n"
+	.string "Let's compare discoveries next time.$"
 
 Route118_Text_YouAgreeGoodRodIsGood:
 	.string "Hmm!\n"
@@ -326,3 +319,11 @@ Route118_Text_RouteSignMauville:
 Route118_Text_RouteSign119:
 	.string "ROUTE 118\n"
 	.string "{UP_ARROW} ROUTE 119$"
+
+Route118_Text_WADE_LocalConversation:
+	.string "That splash was a huge fish!\n"
+	.string "Or my lunch. I hope it was a fish.$"
+
+Route118_Text_BARNY_LocalConversation:
+	.string "WAILORD took the bait once.\n"
+	.string "I am still paying for the rod.$"

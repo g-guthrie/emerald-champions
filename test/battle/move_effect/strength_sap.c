@@ -250,14 +250,15 @@ SINGLE_BATTLE_TEST("Strength Sap will drain users HP if target has Liquid Ooze")
     s32 atkStat;
 
     PARAMETRIZE { atkStat = 100; }
-    PARAMETRIZE { atkStat = 490; } // Checks that attacker can faint with no problems.
+    PARAMETRIZE { atkStat = 490; } // Exact faint.
+    PARAMETRIZE { atkStat = 491; } // Overkill damage is capped by remaining HP.
 
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WOBBUFFET) { HP(490); MaxHP(490); }
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_TENTACOOL) { Attack(atkStat); Ability(ABILITY_LIQUID_OOZE); }
     } WHEN {
-        TURN { MOVE(player, MOVE_STRENGTH_SAP); if (atkStat == 490) { SEND_OUT(player, 1); } }
+        TURN { MOVE(player, MOVE_STRENGTH_SAP); if (atkStat >= 490) { SEND_OUT(player, 1); } }
     } SCENE {
         MESSAGE("Wobbuffet used Strength Sap!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_STRENGTH_SAP, player);
@@ -271,7 +272,7 @@ SINGLE_BATTLE_TEST("Strength Sap will drain users HP if target has Liquid Ooze")
             SEND_IN_MESSAGE("Wobbuffet");
         }
     } THEN {
-        EXPECT_EQ(lostHp, atkStat);
+        EXPECT_EQ(lostHp, min(atkStat, 490));
     }
 }
 

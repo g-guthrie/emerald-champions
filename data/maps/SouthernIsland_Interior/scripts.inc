@@ -91,8 +91,8 @@ SouthernIsland_Interior_EventScript_LatiCaught::
 	end
 
 SouthernIsland_Interior_EventScript_LatiDefeated::
-	copyvar VAR_0x8004, VAR_TEMP_4
-	goto Common_EventScript_LegendaryFlewAway
+	setflag FLAG_DEFEATED_LATIAS_OR_LATIOS
+	goto Common_EventScript_LegendaryDefeated
 	end
 
 SouthernIsland_Interior_EventScript_RanFromLati::

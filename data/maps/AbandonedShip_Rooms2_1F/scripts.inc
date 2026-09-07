@@ -40,7 +40,7 @@ AbandonedShip_Rooms2_1F_EventScript_KiraRematch::
 	end
 
 AbandonedShip_Rooms2_1F_EventScript_Jani::
-	trainerbattle_single TRAINER_JANI, AbandonedShip_Rooms2_1F_Text_JaniIntro, AbandonedShip_Rooms2_1F_Text_JaniDefeat
+	trainerbattle_double TRAINER_JANI, AbandonedShip_Rooms2_1F_Text_JaniIntro, AbandonedShip_Rooms2_1F_Text_JaniDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox AbandonedShip_Rooms2_1F_Text_JaniPostBattle, MSGBOX_AUTOCLOSE
 	end
 

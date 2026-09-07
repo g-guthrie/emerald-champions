@@ -9,9 +9,13 @@ DewfordTown_EventScript_GymGuide::
 DewfordTown_Text_BrawlyInSlateport:
 	.string "Hey, Champ-to-be!\p"
 	.string "BRAWLY, the GYM LEADER here, went\n"
-	.string "to SLATEPORT CITY and hasn't returned.\p"
-	.string "If you're after a battle, you'll have\n"
-	.string "to go find him.$"
+	.string "to SLATEPORT's OCEANIC MUSEUM.\p"
+	.string "Look for him in the queue outside.\n"
+	.string "He needs a nudge to come home!\p"
+	.string "MR. BRINEY can sail you there once\n"
+	.string "you deliver STEVEN's LETTER.\p"
+	.string "Find STEVEN in GRANITE CAVE,\n"
+	.string "northwest of DEWFORD.$"
 
 DewfordTown_OnTransition:
 	setflag FLAG_VISITED_DEWFORD_TOWN
@@ -60,18 +64,7 @@ DewfordTown_EventScript_ReturnToPetalburgPrompt::
 	release
 	end
 
-DewfordTown_EventScript_KnuckleBadgePrompt::
-	msgbox DewfordTown_Text_BrawlyAwaitsBeforeSlateport, MSGBOX_DEFAULT
-	msgbox DewfordTown_Text_SetSailBackToPetalburg, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, DewfordTown_EventScript_SailBackToPetalburg
-	msgbox DewfordTown_Text_JustTellMeWhenYouNeedToSetSail, MSGBOX_DEFAULT
-	release
-	end
 
-DewfordTown_EventScript_MegaRingPrompt::
-	msgbox DewfordTown_Text_StevenStillHasMegaRing, MSGBOX_DEFAULT
-	release
-	end
 
 DewfordTown_EventScript_SailBackToPetalburg::
 	msgbox DewfordTown_Text_PetalburgWereSettingSail2, MSGBOX_DEFAULT
@@ -83,17 +76,7 @@ DewfordTown_EventScript_Woman::
 	msgbox DewfordTown_Text_TinyIslandCommunity, MSGBOX_NPC
 	end
 
-DewfordTown_Text_BrawlyAwaitsBeforeSlateport:
-	.string "You've delivered the LETTER, but BRAWLY\n"
-	.string "still awaits your challenge.\p"
-	.string "Win the KNUCKLE BADGE before we sail\n"
-	.string "on to SLATEPORT.$"
 
-DewfordTown_Text_StevenStillHasMegaRing:
-	.string "That KNUCKLE BADGE should convince\n"
-	.string "STEVEN. Return to him in GRANITE CAVE.\p"
-	.string "We'll sail for SLATEPORT after he gives\n"
-	.string "you the MEGA RING.$"
 
 DewfordTown_EventScript_TownSign::
 	msgbox DewfordTown_Text_TownSign, MSGBOX_SIGN
@@ -702,8 +685,10 @@ DewfordTown_Text_PetalburgWereSettingSail2:
 	.string "PEEKO, we're setting sail, my darling!$"
 
 DewfordTown_Text_GoDeliverIllBeWaiting:
-	.string "MR. BRINEY: Then you go on and deliver\n"
-	.string "the LETTER. I'll be waiting.$"
+	.string "MR. BRINEY: Look for GRANITE CAVE along\n"
+	.string "ROUTE 106. That's where STEVEN went.\p"
+	.string "Take your time with the LETTER. PEEKO\n"
+	.string "and I will keep an eye on the boat!$"
 
 DewfordTown_Text_BrineyLandedInDewford:
 	.string "MR. BRINEY: Ahoy!\n"
@@ -712,8 +697,8 @@ DewfordTown_Text_BrineyLandedInDewford:
 	.string "you want to set sail again!$"
 
 DewfordTown_Text_WhereAreWeBound:
-	.string "MR. BRINEY: Ahoy!\n"
-	.string "For you, I'll go out to sea anytime!\p"
+	.string "MR. BRINEY: Ahoy! The LETTER's delivered,\n"
+	.string "and the sea's still calling us!\p"
 	.string "Now, my friend, where are we bound?$"
 
 DewfordTown_Text_PetalburgWereSettingSail:
@@ -722,9 +707,9 @@ DewfordTown_Text_PetalburgWereSettingSail:
 	.string "PEEKO, we're setting sail, my darling!$"
 
 DewfordTown_Text_SlateportWereSettingSail:
-	.string "MR. BRINEY: SLATEPORT, is it?\p"
-	.string "Anchors aweigh!\n"
-	.string "PEEKO, we're setting sail, my darling!$"
+	.string "MR. BRINEY: SLATEPORT, is it?\n"
+	.string "A fine harbor, and a busy one!\p"
+	.string "Anchors aweigh! PEEKO, we're off!$"
 
 DewfordTown_Text_JustTellMeWhenYouNeedToSetSail:
 	.string "MR. BRINEY: You just tell me whenever\n"

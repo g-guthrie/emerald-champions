@@ -1059,6 +1059,15 @@ enum __attribute__((packed)) Item
     ITEM_REPEL_SPRAY = 877,
     ITEM_FLIGHT_BEACON = 878,
 
+    // Inclement Emerald custom Mega Stones.
+    ITEM_BUTTERFRENITE,
+    ITEM_MACHAMPITE,
+    ITEM_KINGLERITE,
+    ITEM_LAPRASITE,
+    ITEM_FLYGONITE,
+    ITEM_MILOTICITE,
+    ITEM_KINGDRANITE,
+
     ITEMS_COUNT,
     ITEM_FIELD_ARROW = ITEMS_COUNT,
 };

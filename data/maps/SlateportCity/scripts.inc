@@ -43,15 +43,15 @@ SlateportCity_EventScript_Brawly::
 	end
 
 SlateportCity_Text_WhoahLineSoLong:
-	.string "Whoah! This line's way too long,\n"
-	.string "dude! What's the deal?$"
+	.string "Whoa! This line barely moves!\n"
+	.string "I could have paddled home by now.$"
 
 SlateportCity_Text_LookingForBrawly:
-	.string "Oh, hey there!\p"
-	.string "Hmm? You're looking for the\n"
-	.string "DEWFORD GYM LEADER?\p"
-	.string "That'd be me, BRAWLY!\p"
-	.string "I'll head back to the GYM right now.\n"
+	.string "Oh! You came looking for\n"
+	.string "DEWFORD's GYM LEADER?\p"
+	.string "That's me! BRAWLY.\n"
+	.string "Guess I've kept you waiting.\p"
+	.string "I'll head back to DEWFORD right now.\n"
 	.string "Bring two POKéMON. I battle doubles!$"
 
 SlateportCity_OnTransition:
@@ -1450,12 +1450,14 @@ SlateportCity_EventScript_KnuckleGuard::
 	lock
 	faceplayer
 	msgbox SlateportCity_Text_KnuckleGuardClosed, MSGBOX_DEFAULT
+	call SlateportCity_EventScript_LocateBrawly
 	release
 	end
 
 SlateportCity_EventScript_KnuckleGuardTrigger::
 	lockall
 	msgbox SlateportCity_Text_KnuckleGuardTrigger, MSGBOX_DEFAULT
+	call SlateportCity_EventScript_LocateBrawly
 	closemessage
 	applymovement LOCALID_PLAYER, Common_Movement_WalkDown
 	waitmovement 0
@@ -1467,7 +1469,28 @@ SlateportCity_Text_KnuckleGuardClosed:
 	.string "ROAD crew resurfaces the trail.\p"
 	.string "The LEAGUE lets certified TRAINERS\n"
 	.string "through. BRAWLY's KNUCKLE BADGE\l"
-	.string "counts. He's around town, I hear.$"
+	.string "counts.$"
+
+SlateportCity_EventScript_LocateBrawly::
+	goto_if_set FLAG_HIDE_SLATEPORT_CITY_BRAWLY, SlateportCity_EventScript_BrawlyBackInDewford
+	msgbox SlateportCity_Text_BrawlyAtMuseum, MSGBOX_DEFAULT
+	return
+
+SlateportCity_EventScript_BrawlyBackInDewford::
+	msgbox SlateportCity_Text_BrawlyBackInDewford, MSGBOX_DEFAULT
+	return
+
+SlateportCity_Text_BrawlyAtMuseum:
+	.string "BRAWLY is in the queue outside the\n"
+	.string "OCEANIC MUSEUM. Ask him to go home.\p"
+	.string "Then sail back with MR. BRINEY and\n"
+	.string "challenge DEWFORD GYM.$"
+
+SlateportCity_Text_BrawlyBackInDewford:
+	.string "BRAWLY has returned to DEWFORD GYM.\n"
+	.string "Challenge him for the KNUCKLE BADGE.\p"
+	.string "MR. BRINEY's boat is on ROUTE 109,\n"
+	.string "south of SLATEPORT.$"
 
 SlateportCity_Text_KnuckleGuardTrigger:
 	.string "Whoa, not past the cones! ROUTE 110\n"

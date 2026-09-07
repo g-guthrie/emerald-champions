@@ -39,7 +39,6 @@ bool32 IsOnAttackerAfterHitActivation(enum HoldEffect holdEffect);
 bool32 IsSprayLeppaBlunderActivation(enum HoldEffect holdEffect);
 bool32 IsLifeOrbShellBellActivation(enum HoldEffect holdEffect);
 bool32 IsLeftoversActivation(enum HoldEffect holdEffect);
-bool32 IsOrbsActivation(enum HoldEffect holdEffect);
 bool32 IsOnEffectActivation(enum HoldEffect holdEffect);
 bool32 IsForceTriggerItemActivation(enum HoldEffect holdEffect);
 bool32 IsOnBerryActivation(enum HoldEffect holdEffect);

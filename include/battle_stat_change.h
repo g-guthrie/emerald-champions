@@ -6,7 +6,7 @@
 struct StatChange
 {
     const u8 *script;
-    const u8 *moveScript; // I'm pretty sure this is redundant at this point. Will clean up in a follow up
+    const u8 *moveScript; // Follow-up move effect after the queued stat changes.
     struct StatStages *statStageQueue;
 
     enum Stat stat;
@@ -14,9 +14,7 @@ struct StatChange
     u8 statStageAmount;
 
     // Flags
-    u32 passiveStatChange:1;
     u32 certain:1;
-    u32 setFailureFlags:1;
     u32 silentFailure:1;
     u32 onlyChecking:1;
     u32 ignoreMirrorArmored:1;
@@ -24,16 +22,16 @@ struct StatChange
     u32 intimidate:1;
     u32 additionalEffectTriggers:1;
     u32 itemMessage:1;
-    u32 targetMissed:1;
     u32 stickyWeb:1;
     u32 ignoreCertainFailure:1; // for mirror armor and substitute
     u32 mirrorHerbActivation:1;
     u32 opportunistActivation:1;
-    u32 padding:17;
+    u32 padding:20;
 };
 
 extern enum Stat const sAccurateStatOrder[NUM_BATTLE_STATS];
 
+s32 GetAdjustedStatStage(s32 stage, enum Ability ability, bool32 growthInSun);
 bool32 CompareStat(enum BattlerId battler, enum Stat statId, u32 cmpTo, u32 cmpKind, enum Ability ability);
 bool32 CanAnyStatChange(struct BattleCalcValues *cv, struct StatChange *st);
 enum StatChangeResult TryStatChange(struct BattleCalcValues *cv, struct StatChange *st);
@@ -42,10 +40,8 @@ void SetStatChange2(enum BattlerId battler, enum Stat stat, s32 stage);
 void ClearStatChangeValues(void);
 void ClearOtherStatChangeValues(enum BattlerId battler);
 void ClearBothStatChangeQueues(void);
-enum StatChangeResult TrySingleStatChange(struct BattleCalcValues *cv, struct StatChange *st);
 u32 GetStatStage(enum Stat stat, const struct AdditionalEffect *additionalEffect);
 bool32 ShouldDefiantCompetitiveActivate(enum BattlerId battler, enum Ability ability);
-enum MoveResult DoStatChangeResolution(struct BattleCalcValues *cv);
 bool32 CanStatChange(struct BattleCalcValues *cv, struct StatChange *st);
 bool32 IsStatChangeStatusMove(enum Move move, bool32 (*isStatChange)(const struct AdditionalEffect *effect));
 bool32 IsAtkStatUpMove(const struct AdditionalEffect *effect);

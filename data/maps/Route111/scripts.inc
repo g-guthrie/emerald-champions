@@ -285,7 +285,7 @@ Route111_EventScript_Victor::
 
 Route111_EventScript_BattleWinstrates::
 	msgbox Route111_Text_VictorIntro, MSGBOX_DEFAULT
-	trainerbattle_no_intro TRAINER_VICTOR, Route111_Text_VictorDefeat
+	trainerbattle_no_intro_double TRAINER_VICTOR, Route111_Text_VictorDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	applymovement LOCALID_ROUTE111_VICTOR, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	call Route111_EventScript_OpenWinstrateDoor
@@ -303,7 +303,7 @@ Route111_EventScript_BattleWinstrates::
 	waitmovement 0
 	call Route111_EventScript_CloseWinstrateDoor
 	msgbox Route111_Text_VictoriaIntro, MSGBOX_DEFAULT
-	trainerbattle_no_intro TRAINER_VICTORIA, Route111_Text_VictoriaDefeat
+	trainerbattle_no_intro_double_allow_single TRAINER_VICTORIA, Route111_Text_VictoriaDefeat
 	applymovement LOCALID_ROUTE111_VICTORIA, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	call Route111_EventScript_OpenWinstrateDoor
@@ -321,7 +321,7 @@ Route111_EventScript_BattleWinstrates::
 	waitmovement 0
 	call Route111_EventScript_CloseWinstrateDoor
 	msgbox Route111_Text_ViviIntro, MSGBOX_DEFAULT
-	trainerbattle_no_intro TRAINER_VIVI, Route111_Text_ViviDefeat
+	trainerbattle_no_intro_double_allow_single TRAINER_VIVI, Route111_Text_ViviDefeat
 	applymovement LOCALID_ROUTE111_VIVI, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	call Route111_EventScript_OpenWinstrateDoor
@@ -339,7 +339,7 @@ Route111_EventScript_BattleWinstrates::
 	waitmovement 0
 	call Route111_EventScript_CloseWinstrateDoor
 	msgbox Route111_Text_VickyIntro, MSGBOX_DEFAULT
-	trainerbattle_no_intro TRAINER_VICKY, Route111_Text_VickyDefeat
+	trainerbattle_no_intro_double_allow_single TRAINER_VICKY, Route111_Text_VickyDefeat
 	msgbox Route111_Text_VickyPostBattle, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_ROUTE111_VICKY, Common_Movement_WalkInPlaceFasterUp
@@ -556,12 +556,11 @@ Route111_EventScript_Beau::
 	end
 
 Route111_EventScript_Becky::
-	trainerbattle_double TRAINER_BECKY, Route111_Text_BeckyIntro, Route111_Text_BeckyDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route111_Text_BeckyPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route111_Text_BECKY_LocalConversation, MSGBOX_NPC
 	end
 
 Route111_EventScript_Dusty::
-	trainerbattle_single TRAINER_DUSTY_1, Route111_Text_DustyIntro, Route111_Text_DustyDefeat, Route111_EventScript_RegisterDusty
+	trainerbattle_double TRAINER_DUSTY_1, Route111_Text_DustyIntro, Route111_Text_DustyDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route111_EventScript_RegisterDusty
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route111_EventScript_RematchDusty
 	msgbox Route111_Text_DustyPostBattle, MSGBOX_DEFAULT
@@ -577,7 +576,7 @@ Route111_EventScript_RegisterDusty::
 	end
 
 Route111_EventScript_RematchDusty::
-	trainerbattle_rematch TRAINER_DUSTY_1, Route111_Text_DustyRematchIntro, Route111_Text_DustyRematchDefeat
+	trainerbattle_rematch_double TRAINER_DUSTY_1, Route111_Text_DustyRematchIntro, Route111_Text_DustyRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route111_Text_DustyPostRematch, MSGBOX_AUTOCLOSE
 	end
 
@@ -587,12 +586,11 @@ Route111_EventScript_Travis::
 	end
 
 Route111_EventScript_Irene::
-	trainerbattle_single TRAINER_IRENE, Route111_Text_IreneIntro, Route111_Text_IreneDefeat
-	msgbox Route111_Text_IrenePostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route111_Text_IRENE_LocalConversation, MSGBOX_NPC
 	end
 
 Route111_EventScript_Daisuke::
-	trainerbattle_single TRAINER_DAISUKE, Route111_Text_DaisukeIntro, Route111_Text_DaisukeDefeat
+	trainerbattle_double TRAINER_DAISUKE, Route111_Text_DaisukeIntro, Route111_Text_DaisukeDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route111_Text_DaisukePostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -649,7 +647,7 @@ Route111_EventScript_Bianca::
 	end
 
 Route111_EventScript_Tyron::
-	trainerbattle_single TRAINER_TYRON, Route111_Text_TyronIntro, Route111_Text_TyronDefeat
+	trainerbattle_double TRAINER_TYRON, Route111_Text_TyronIntro, Route111_Text_TyronDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route111_Text_TyronPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -659,7 +657,7 @@ Route111_EventScript_Celina::
 	end
 
 Route111_EventScript_Celia::
-	trainerbattle_single TRAINER_CELIA, Route111_Text_CeliaIntro, Route111_Text_CeliaDefeat
+	trainerbattle_double TRAINER_CELIA, Route111_Text_CeliaIntro, Route111_Text_CeliaDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox Route111_Text_CeliaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -863,3 +861,11 @@ Route111_Text_DynamoGuardTrigger:
 	.string "Hey! Not past the rope. The trail\n"
 	.string "north is closed until WATTSON's crew\l"
 	.string "finishes the power lines.$"
+
+Route111_Text_IRENE_LocalConversation:
+	.string "A picnic needs three things:\n"
+	.string "Food, shade, and less SANDSTORM.$"
+
+Route111_Text_BECKY_LocalConversation:
+	.string "I came to admire the desert.\n"
+	.string "The desert came into my shoes.$"

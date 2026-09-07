@@ -442,15 +442,6 @@ void BattleArena_DeductSkillPoints(enum BattlerId battler, enum StringID stringI
     }
 }
 
-static void UNUSED UpdateHPAtStart(enum BattlerId battler)
-{
-    u16 *hpAtStart = gBattleStruct->arenaStartHp;
-
-    hpAtStart[battler] = gBattleMons[battler].hp;
-    if (hpAtStart[GetOppositeBattler(battler)] > gBattleMons[GetOppositeBattler(battler)].hp)
-        hpAtStart[GetOppositeBattler(battler)] = gBattleMons[GetOppositeBattler(battler)].hp;
-}
-
 static void InitArenaChallenge(void)
 {
     bool32 isCurrent;

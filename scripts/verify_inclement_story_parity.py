@@ -35,9 +35,9 @@ REVIEWED_PERMANENT_OBJECTS = {
     ("SlateportCity", "OBJ_EVENT_GFX_GRETA"): "Greta is a Champions overworld trainer",
 }
 
-# B. Champions makes legendaries capture-only through Legendary Signs, so nothing is
-#    ever recorded as having been defeated.
-REVIEWED_DEAD_GATES = {
+# B. Reviewed reasons for the absence of direct script setflag commands.
+REVIEWED_MISSING_SCRIPT_SETTERS = {
+    "FLAG_HIDE_LILYCOVE_MUSEUM_CURATOR": "museum removeobject sets its template hide flag in C; the retired debug setter was unreachable",
     "FLAG_DEFEATED_DEOXYS": "legendaries are capture-only in Champions",
     "FLAG_DEFEATED_HO_OH": "legendaries are capture-only in Champions",
     "FLAG_DEFEATED_LATIAS_OR_LATIOS": "legendaries are capture-only in Champions",
@@ -145,7 +145,7 @@ def verify() -> None:
     set_before = set(re.findall(r"(?m)^\s*setflag\s+(FLAG_[A-Z0-9_]+)", baseline))
     referenced = set(re.findall(r"\bFLAG_[A-Z0-9_]+\b", current))
     for flag in sorted((set_before - set_now) & referenced):
-        if flag not in REVIEWED_DEAD_GATES:
+        if flag not in REVIEWED_MISSING_SCRIPT_SETTERS:
             failures.append(f"B. {flag} remains referenced but lost all inventoried script setflag commands")
         else:
             reviewed += 1

@@ -31,8 +31,7 @@ Route127_EventScript_Donny::
 	end
 
 Route127_EventScript_Jonah::
-	trainerbattle_single TRAINER_JONAH, Route127_Text_JonahIntro, Route127_Text_JonahDefeat
-	msgbox Route127_Text_JonahPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route127_Text_JONAH_LocalConversation, MSGBOX_NPC
 	end
 
 Route127_EventScript_Henry::
@@ -46,8 +45,7 @@ Route127_EventScript_Roger::
 	end
 
 Route127_EventScript_Aidan::
-	trainerbattle_single TRAINER_AIDAN, Route127_Text_AidanIntro, Route127_Text_AidanDefeat
-	msgbox Route127_Text_AidanPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route127_Text_AIDAN_LocalConversation, MSGBOX_NPC
 	end
 
 Route127_EventScript_Athena::
@@ -76,3 +74,11 @@ Route127_EventScript_RematchKoji::
 	msgbox Route127_Text_KojiPostRematch, MSGBOX_AUTOCLOSE
 	end
 
+
+Route127_Text_JONAH_LocalConversation:
+	.string "Fishing teaches patience.\n"
+	.string "This spot has a full curriculum.$"
+
+Route127_Text_AIDAN_LocalConversation:
+	.string "Birds never need a boarding pass.\n"
+	.string "I think they are showing off.$"

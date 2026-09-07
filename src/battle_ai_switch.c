@@ -1295,17 +1295,6 @@ bool32 ShouldSwitchIfLoses1v1(struct SwitchAiContext *switchContext)
     return FALSE;
 }
 
-bool32 ShouldSwitchDynFuncExample(struct SwitchAiContext *switchContext)
-{
-    // Chance to switch if trainer class is Guitarist, perhaps thematic for Jugglers
-    if (GetTrainerClassFromId(TRAINER_BATTLE_PARAM.opponentA) == TRAINER_CLASS_GUITARIST
-        && RandomPercentage(RNG_AI_SWITCH_DYN_FUNC, GetSwitchChance(SHOULD_SWITCH_DYN_FUNC)))
-    {
-        return SetSwitchinAndSwitch(switchContext->battler, PARTY_SIZE);
-    }
-    return FALSE;
-}
-
 static bool32 CanBattlerConsiderSwitch(enum BattlerId battler)
 {
     if (gBattleMons[battler].volatiles.wrapped)

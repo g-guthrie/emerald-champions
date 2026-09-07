@@ -35,17 +35,20 @@ static bool32 HasMegaAccess(void)
     return CheckBagHasItem(ITEM_MEGA_RING, 1);
 }
 
-// Presets author every in-battle transformation the same way: the set names the
-// transformed Ability and points requiredItem at the key that unlocks it. Mega
-// Evolution uses a stone plus the Ring; Primal Reversion uses the orb itself,
-// which is the relic the campaign already grants with the legendary.
+// Transformation presets name the form's Ability and required item. Mega
+// Evolution needs a stone and Ring; Primal, Crowned and Ogerpon mask forms
+// use their own held item. Item classification does not waive ownership.
 static bool32 IsBattleSetTransformationItem(enum Item item)
 {
     if (item == ITEM_NONE)
         return FALSE;
-    if (gItemsInfo[item].sortType == ITEM_TYPE_MEGA_STONE)
+    if (gItemsInfo[item].sortType == ITEM_TYPE_MEGA_STONE
+     || gItemsInfo[item].holdEffect == HOLD_EFFECT_OGERPON_MASK)
         return TRUE;
-    return item == ITEM_RED_ORB || item == ITEM_BLUE_ORB;
+    return item == ITEM_RED_ORB
+        || item == ITEM_BLUE_ORB
+        || item == ITEM_RUSTED_SWORD
+        || item == ITEM_RUSTED_SHIELD;
 }
 
 static bool32 HasTransformationAccess(
@@ -279,7 +282,8 @@ const struct EmeraldChampionsBattleSet *GetEmeraldChampionsRawBattleSet(enum Spe
     return GetRawBattleSetForFormat(species, rawChoice, EC_BATTLE_FORMAT_DOUBLES);
 }
 
-static bool32 ResolveVisibleChoice(
+// With no outputs, count every visible set; otherwise stop at the requested choice.
+static u8 ScanVisibleBattleSets(
     struct Pokemon *mon,
     u8 choice,
     u8 format,
@@ -295,7 +299,7 @@ static bool32 ResolveVisibleChoice(
     u8 visibleChoice = 0;
 
     if (GetRawBattleSetCountForFormat(species, format) == 0)
-        return FALSE;
+        return 0;
 
     setSpecies = ResolveBattleSetSpecies(species, format);
     defaults = GetDefaultSetTable(format);
@@ -304,58 +308,44 @@ static bool32 ResolveVisibleChoice(
     range = &GetSetRangeTable(format)[setSpecies];
     for (u8 rawChoice = 0; rawChoice <= range->count; rawChoice++)
     {
-        const struct EmeraldChampionsBattleSet *preset;
-        const u8 *name;
-
-        if (rawChoice == 0)
-        {
-            preset = &defaults[setSpecies];
-            name = defaultNames[setSpecies] != NULL
-                 ? defaultNames[setSpecies]
-                 : sRecommendedSetName;
-        }
-        else
-        {
-            const struct EmeraldChampionsBattleSetChoice *alternative =
-                &alternatives[range->offset + rawChoice - 1];
-            preset = &alternative->preset;
-            name = alternative->name;
-        }
+        const struct EmeraldChampionsBattleSet *preset = rawChoice == 0
+            ? &defaults[setSpecies]
+            : &alternatives[range->offset + rawChoice - 1].preset;
 
         if ((PresetRequiresTransformation(preset) && !HasTransformationAccess(mon, preset))
          || PresetRequiresOwnedHeldItem(mon, preset))
             continue;
-        if (visibleChoice++ == choice)
+        if (visibleChoice++ == choice && (presetOut != NULL || nameOut != NULL))
         {
             if (presetOut != NULL)
                 *presetOut = preset;
             if (nameOut != NULL)
-                *nameOut = name;
-            return TRUE;
+            {
+                *nameOut = rawChoice == 0
+                    ? defaultNames[setSpecies]
+                    : alternatives[range->offset + rawChoice - 1].name;
+                if (rawChoice == 0 && *nameOut == NULL)
+                    *nameOut = sRecommendedSetName;
+            }
+            return visibleChoice;
         }
     }
-    return FALSE;
+    return visibleChoice;
+}
+
+static bool32 ResolveVisibleChoice(
+    struct Pokemon *mon,
+    u8 choice,
+    u8 format,
+    const struct EmeraldChampionsBattleSet **presetOut,
+    const u8 **nameOut)
+{
+    return ScanVisibleBattleSets(mon, choice, format, presetOut, nameOut) > choice;
 }
 
 u8 GetEmeraldChampionsBattleSetCountForFormat(struct Pokemon *mon, u8 format)
 {
-    enum Species species = GetMonData(mon, MON_DATA_SPECIES);
-    enum Species setSpecies;
-    const struct EmeraldChampionsBattleSetRange *range;
-    u8 count = 0;
-
-    if (GetRawBattleSetCountForFormat(species, format) == 0)
-        return 0;
-    setSpecies = ResolveBattleSetSpecies(species, format);
-    range = &GetSetRangeTable(format)[setSpecies];
-    for (u8 rawChoice = 0; rawChoice <= range->count; rawChoice++)
-    {
-        const struct EmeraldChampionsBattleSet *preset = GetRawBattleSetForFormat(species, rawChoice, format);
-        if ((!PresetRequiresTransformation(preset) || HasTransformationAccess(mon, preset))
-         && !PresetRequiresOwnedHeldItem(mon, preset))
-            count++;
-    }
-    return count;
+    return ScanVisibleBattleSets(mon, 0, format, NULL, NULL);
 }
 
 u8 GetEmeraldChampionsBattleSetCount(struct Pokemon *mon)
@@ -385,21 +375,16 @@ const struct EmeraldChampionsBattleSet *GetEmeraldChampionsBattleSetPresetForFor
 
 enum Item GetEmeraldChampionsBattleSetItemForFormat(struct Pokemon *mon, u8 choice, u8 format)
 {
-    const struct EmeraldChampionsBattleSet *preset = NULL;
-    if (!ResolveVisibleChoice(mon, choice, format, &preset, NULL))
+    const struct EmeraldChampionsBattleSet *preset = GetEmeraldChampionsBattleSetPresetForFormat(mon, choice, format);
+    if (preset == NULL)
         return ITEM_NONE;
     return preset->requiredItem != ITEM_NONE ? preset->requiredItem : preset->item;
 }
 
-enum Item GetEmeraldChampionsBattleSetItem(struct Pokemon *mon, u8 choice)
-{
-    return GetEmeraldChampionsBattleSetItemForFormat(mon, choice, EC_BATTLE_FORMAT_DOUBLES);
-}
-
 enum Item GetEmeraldChampionsBattleSetRequiredItemForFormat(struct Pokemon *mon, u8 choice, u8 format)
 {
-    const struct EmeraldChampionsBattleSet *preset = NULL;
-    if (!ResolveVisibleChoice(mon, choice, format, &preset, NULL))
+    const struct EmeraldChampionsBattleSet *preset = GetEmeraldChampionsBattleSetPresetForFormat(mon, choice, format);
+    if (preset == NULL)
         return ITEM_NONE;
     return preset->requiredItem;
 }
@@ -430,27 +415,28 @@ static bool32 DoesMonMatchPresetMoves(struct Pokemon *mon, const struct EmeraldC
     return TRUE;
 }
 
+// Mega presets name the transformed Ability; application and recognition
+// share the same legal base Ability, including the doubles-default fallback.
+static bool32 FindPresetAbilitySlot(enum Species species, const struct EmeraldChampionsBattleSet *preset, u32 *slot)
+{
+    if (FindAbilitySlot(species, preset->ability, slot))
+        return TRUE;
+    enum Species setSpecies = ResolveBattleSetSpecies(species, EC_BATTLE_FORMAT_DOUBLES);
+    return FindAbilitySlot(species, gEmeraldChampionsDefaultBattleSets[setSpecies].ability, slot)
+        || FindFallbackAbilitySlot(species, slot);
+}
+
 static bool32 DoesMonMatchPresetAbility(struct Pokemon *mon, const struct EmeraldChampionsBattleSet *preset)
 {
     enum Species species = GetMonData(mon, MON_DATA_SPECIES);
-    enum Species setSpecies = ResolveBattleSetSpecies(species, EC_BATTLE_FORMAT_DOUBLES);
     enum Ability actualAbility = GetMonAbility(mon);
     u32 slot;
 
     if (actualAbility == preset->ability)
         return TRUE;
-
-    // Mega sets store the transformed Ability. Before Mega Evolution, applying
-    // one deliberately leaves the base species on the same legal fallback used
-    // by ApplyPreset.
-    if (!FindAbilitySlot(species, preset->ability, &slot))
-    {
-        if (!FindAbilitySlot(species, gEmeraldChampionsDefaultBattleSets[setSpecies].ability, &slot)
-         && !FindFallbackAbilitySlot(species, &slot))
-            return FALSE;
-        return actualAbility == GetAbilityBySpecies(species, slot);
-    }
-    return FALSE;
+    return !FindAbilitySlot(species, preset->ability, &slot)
+        && FindPresetAbilitySlot(species, preset, &slot)
+        && actualAbility == GetAbilityBySpecies(species, slot);
 }
 
 // A set built around Belly Drum and a half-HP berry only works when max HP is
@@ -632,7 +618,6 @@ static u8 ApplyPreset(
     bool32 preserveProtectedItemInPlace)
 {
     enum Species species = GetMonData(mon, MON_DATA_SPECIES);
-    enum Species setSpecies = ResolveBattleSetSpecies(species, EC_BATTLE_FORMAT_DOUBLES);
     enum Item currentItem = GetMonData(mon, MON_DATA_HELD_ITEM);
     bool32 protectedItemHeld;
     u32 abilitySlot;
@@ -644,14 +629,8 @@ static u8 ApplyPreset(
     protectedItemHeld = IsEmeraldChampionsProtectedProgressionItem(currentItem)
                      && currentItem != preset->requiredItem
                      && currentItem != preset->item;
-    if (!FindAbilitySlot(species, preset->ability, &abilitySlot))
-    {
-        // Mega presets name the transformed Ability. The base Pokémon keeps a
-        // legal base Ability until the engine performs Mega Evolution.
-        if (!FindAbilitySlot(species, gEmeraldChampionsDefaultBattleSets[setSpecies].ability, &abilitySlot)
-         && !FindFallbackAbilitySlot(species, &abilitySlot))
-            return EC_BATTLE_SET_FAILED;
-    }
+    if (!FindPresetAbilitySlot(species, preset, &abilitySlot))
+        return EC_BATTLE_SET_FAILED;
     if (IsEmeraldChampionsProtectedProgressionItem(preset->item)
      && !supplyRequiredItem
      && currentItem != preset->item)

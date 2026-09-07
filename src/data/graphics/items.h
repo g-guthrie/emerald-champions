@@ -2118,3 +2118,24 @@ const u16 gItemIconPalette_SwapSnack[] = INCGFX_U16("graphics/items/icon_palette
 
 const u32 gItemIcon_TwiceSpicedRadish[] = INCGFX_U32("graphics/items/icons/twice_spiced_radish.png", ".4bpp.smol");
 const u16 gItemIconPalette_TwiceSpicedRadish[] = INCGFX_U16("graphics/items/icon_palettes/twice_spiced_radish.pal", ".gbapal");
+
+const u32 gItemIcon_Butterfrenite[] = INCGFX_U32("graphics/items/icons/butterfrenite.png", ".4bpp.smol");
+const u16 gItemIconPalette_Butterfrenite[] = INCGFX_U16("graphics/items/icon_palettes/butterfrenite.pal", ".gbapal");
+
+const u32 gItemIcon_Machampite[] = INCGFX_U32("graphics/items/icons/machampite.png", ".4bpp.smol");
+const u16 gItemIconPalette_Machampite[] = INCGFX_U16("graphics/items/icon_palettes/machampite.pal", ".gbapal");
+
+const u32 gItemIcon_Kinglerite[] = INCGFX_U32("graphics/items/icons/kinglerite.png", ".4bpp.smol");
+const u16 gItemIconPalette_Kinglerite[] = INCGFX_U16("graphics/items/icon_palettes/kinglerite.pal", ".gbapal");
+
+const u32 gItemIcon_Laprasite[] = INCGFX_U32("graphics/items/icons/laprasite.png", ".4bpp.smol");
+const u16 gItemIconPalette_Laprasite[] = INCGFX_U16("graphics/items/icon_palettes/laprasite.pal", ".gbapal");
+
+const u32 gItemIcon_Flygonite[] = INCGFX_U32("graphics/items/icons/flygonite.png", ".4bpp.smol");
+const u16 gItemIconPalette_Flygonite[] = INCGFX_U16("graphics/items/icon_palettes/flygonite.pal", ".gbapal");
+
+const u32 gItemIcon_Miloticite[] = INCGFX_U32("graphics/items/icons/miloticite.png", ".4bpp.smol");
+const u16 gItemIconPalette_Miloticite[] = INCGFX_U16("graphics/items/icon_palettes/miloticite.pal", ".gbapal");
+
+const u32 gItemIcon_Kingdranite[] = INCGFX_U32("graphics/items/icons/kingdranite.png", ".4bpp.smol");
+const u16 gItemIconPalette_Kingdranite[] = INCGFX_U16("graphics/items/icon_palettes/kingdranite.pal", ".gbapal");

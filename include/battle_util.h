@@ -53,6 +53,7 @@ struct BattleCalcValues
 
 void HandleAction_ThrowBall(void);
 enum BattleWeather GetBattleWeather(u32 weather);
+bool32 CompareBattleValues(u32 comparison, u32 lhs, u32 rhs);
 bool32 EndOrContinueWeather(void);
 enum DamageCategory GetReflectDamageMoveDamageCategory(enum BattlerId battler, enum Move move);
 bool32 ShouldTeraShellDistortTypeMatchups(struct DamageContext *ctx);
@@ -294,7 +295,6 @@ bool32 IsAnyTargetTurnDamaged(enum BattlerId battlerAtk, enum SubCheck subCheck)
 bool32 IsAnyTargetAffected(void);
 bool32 IsMimikyuDisguised(enum BattlerId battler);
 bool32 IsDoubleSpreadMove(void);
-bool32 IsBattlerInvalidForSpreadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef);
 void SetStartingStatus(enum StartingStatus status);
 void ResetStartingStatuses(void);
 bool32 IsUsableWhileAsleepEffect(enum BattleMoveEffects effect);
@@ -312,6 +312,7 @@ bool32 BattlerJustSwitchedIn(enum BattlerId battler);
 bool32 IsBattlersFirstTurn(enum BattlerId battler);
 struct PartyState *GetBattlerPartyState(enum BattlerId battler);
 void SetValuesOnFaint(enum BattlerId battler);
+void RecordFailedLegendaryEncounters(void);
 bool32 IsVictoryCatch(void);
 bool32 IsVictoryCatchGuaranteed(void);
 bool32 IsBattlerInvolvedInSkyDrop(enum BattlerId battler);

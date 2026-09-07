@@ -49,7 +49,6 @@ static void AnimTask_MistBallFog_Step(u8);
 static void AnimTask_Hail2(u8);
 static bool8 GenerateHailParticle(u8 hailStructId, u8 affineAnimNum, u8 taskId, u8 c);
 static void AvalancheAnim_Step(struct Sprite *sprite);
-static void AvalancheAnim_Step2(struct Sprite *sprite);
 static void AnimSnowflakes(struct Sprite *sprite);
 static void AnimSnowflakes_Step(struct Sprite *sprite);
 
@@ -563,22 +562,7 @@ static void AvalancheAnim_Step(struct Sprite *sprite)
     sprite->data[4] = -70;
     sprite->data[5] = gBattleAnimArgs[2];
 
-    StoreSpriteCallbackInData6(sprite, AvalancheAnim_Step2);
-    sprite->callback = TranslateSpriteInEllipse;
-    sprite->callback(sprite);
-}
-
-static void AvalancheAnim_Step2(struct Sprite *sprite)
-{
-    sprite->x += sprite->data[5];
-
-    sprite->data[0] = 192;
-    sprite->data[1] = sprite->data[5];
-    sprite->data[2] = 4;
-    sprite->data[3] = 32;
-    sprite->data[4] = -24;
-
-    StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
+    StoreSpriteCallbackInData6(sprite, AnimFallingRock_Step);
     sprite->callback = TranslateSpriteInEllipse;
     sprite->callback(sprite);
 }

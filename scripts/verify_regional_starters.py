@@ -73,6 +73,9 @@ def main() -> None:
     require(sum(path.read_text().count("call Common_EventScript_ChooseStarterRegion") for path in house_scripts) == 10,
             "not every valid rival introduction opens the region selector")
     require("ApplyRegionalRivalStarter" in setup, "rival starter override is missing")
+    require("GetTrainerBattleType(trainerNum) == TRAINER_BATTLE_TYPE_SINGLES" in setup
+            and "ApplyEmeraldChampionsBattleSetChoiceForFormat(&party[i], 0, EC_BATTLE_FORMAT_SINGLES)" in setup,
+            "opening regional rival must receive a singles preset instead of ally-only doubles support")
     require("GetMiddleEvolutionForStarter" in setup and "GetFinalEvolutionForStarter" in setup,
             "later rivals do not advance the selected starter family")
     require("ApplyEmeraldChampionsOpponentSet(&gParties[B_TRAINER_PLAYER][0], 0)" in setup,

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "legendary_signs.h"
 #include "battle.h"
 #include "battle_anim.h"
 #include "battle_anim_scripts.h"
@@ -349,6 +350,29 @@ const struct TerrainInfo gBattleTerrainInfo[B_TERRAIN_COUNT] = {
         .endMessage = B_MSG_TERRAIN_END_PSYCHIC,
     },
 };
+
+bool32 CompareBattleValues(u32 comparison, u32 lhs, u32 rhs)
+{
+    switch (comparison)
+    {
+    case CMP_EQUAL:
+        return lhs == rhs;
+    case CMP_NOT_EQUAL:
+        return lhs != rhs;
+    case CMP_GREATER_THAN:
+        return lhs > rhs;
+    case CMP_LESS_THAN:
+        return lhs < rhs;
+    case CMP_COMMON_BITS:
+        return (lhs & rhs) != 0;
+    case CMP_NO_COMMON_BITS:
+        return (lhs & rhs) == 0;
+    case CMP_BITMASK:
+        return rhs < 32 && (lhs & (1u << rhs)) != 0;
+    default:
+        return FALSE;
+    }
+}
 
 bool32 EndOrContinueWeather(void)
 {
@@ -1137,22 +1161,6 @@ enum BattlerId GetBattlerForBattleScript(u8 caseId)
         break;
     }
     return ret;
-}
-
-static void UNUSED MarkAllBattlersForControllerExec(void)
-{
-    enum BattlerId i;
-
-    if (gBattleTypeFlags & BATTLE_TYPE_LINK)
-    {
-        for (i = 0; i < gBattlersCount; i++)
-            MarkBattleControllerMessageOutboundOverLink(i);
-    }
-    else
-    {
-        for (i = 0; i < gBattlersCount; i++)
-            MarkBattleControllerActiveOnLocal(i);
-    }
 }
 
 bool32 IsBattlerMarkedForControllerExec(enum BattlerId battler)
@@ -6573,6 +6581,7 @@ static inline u32 CalcMoveBasePowerAfterModifiers(struct DamageContext *ctx)
            modifier = uq4_12_multiply(modifier, UQ_4_12(1.2));
         break;
     case ABILITY_IRON_FIST:
+    case ABILITY_POWER_FISTS:
         if (IsPunchingMove(move))
            modifier = uq4_12_multiply(modifier, UQ_4_12(1.2));
         break;
@@ -7139,7 +7148,9 @@ static inline u32 CalcDefenseStat(struct DamageContext *ctx)
     def = gBattleMons[battlerDef].defense;
     spDef = gBattleMons[battlerDef].spDefense;
 
-    if (moveEffect == EFFECT_PSYSHOCK || IsBattleMovePhysical(move)) // uses defense stat instead of sp.def
+    // Power Fists retains the punch's attacking stat, but targets Sp. Def.
+    if ((moveEffect == EFFECT_PSYSHOCK || IsBattleMovePhysical(move))
+     && !(ctx->abilities[ctx->battlerAtk] == ABILITY_POWER_FISTS && IsPunchingMove(move)))
     {
         if (gFieldStatuses & STATUS_FIELD_WONDER_ROOM) // the defense stats are swapped
         {
@@ -7562,6 +7573,13 @@ static inline uq4_12_t GetDefenderAbilitiesModifier(struct DamageContext *ctx)
         if (IsBattleMoveSpecial(ctx->move))
         {
             modifier =  UQ_4_12(0.5);
+            recordAbility = TRUE;
+        }
+        break;
+    case ABILITY_PRISM_SCALES:
+        if (IsBattleMoveSpecial(ctx->move))
+        {
+            modifier = UQ_4_12(0.7);
             recordAbility = TRUE;
         }
         break;
@@ -10880,13 +10898,6 @@ bool32 IsDoubleSpreadMove(void)
         && IsSpreadMove(GetBattlerMoveTargetType(gBattlerAttacker, gCurrentMove));
 }
 
-bool32 IsBattlerInvalidForSpreadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef)
-{
-    return battlerDef == battlerAtk
-        || !IsBattlerAlive(battlerDef)
-        || IsBattlerUnaffectedByMove(battlerDef);
-}
-
 bool32 IsAllowedToUseBag(void)
 {
     // Emerald Champions is a competitive puzzle campaign.  Ordinary Trainer
@@ -11215,8 +11226,34 @@ struct PartyState *GetBattlerPartyState(enum BattlerId battler)
     return &gBattleStruct->partyState[GetBattlerTrainer(battler)][gBattlerPartyIndexes[battler]];
 }
 
+static bool32 IsPersistentWildEncounter(void)
+{
+    if (gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_LINK
+         | BATTLE_TYPE_RECORDED_LINK | BATTLE_TYPE_FRONTIER
+         | BATTLE_TYPE_CATCH_TUTORIAL | BATTLE_TYPE_POKEDUDE))
+        return FALSE;
+#if TESTING
+    // Native battle tests use the recorded-action controller.
+    if (gTestRunnerEnabled)
+        return TRUE;
+#endif
+    return !(gBattleTypeFlags & BATTLE_TYPE_RECORDED);
+}
+
+void RecordFailedLegendaryEncounters(void)
+{
+    if (!IsPersistentWildEncounter() || gBattleOutcome == B_OUTCOME_CAUGHT)
+        return;
+    for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+        if (GetBattlerSide(battler) == B_SIDE_OPPONENT)
+            MarkLegendaryEncounterLost(GetMonData(GetBattlerMon(battler), MON_DATA_SPECIES));
+}
+
 void SetValuesOnFaint(enum BattlerId battler)
 {
+    if (GetBattlerSide(battler) == B_SIDE_OPPONENT && IsPersistentWildEncounter())
+        MarkLegendaryEncounterLost(GetMonData(GetBattlerMon(battler), MON_DATA_SPECIES));
+
     gHitMarker |= HITMARKER_FAINTED(battler);
     gBattleStruct->eventState.faintedAction = 0;
     gBattlerFainted = battler;

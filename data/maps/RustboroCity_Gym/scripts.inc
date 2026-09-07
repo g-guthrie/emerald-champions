@@ -14,6 +14,7 @@ RustboroCity_Gym_EventScript_Roxanne::
 	goto_if_eq VAR_RESULT, TRUE, RustboroCity_Gym_EventScript_RoxanneRematch
 	goto_if_unset FLAG_RECEIVED_ROXANNE_OLD_AMBER, RustboroCity_Gym_EventScript_GiveRoxanneRewards
 	goto_if_unset FLAG_EC_RECEIVED_ROXANNE_AERODACTYLITE, RustboroCity_Gym_EventScript_GiveLegacyOldAmber
+	goto_if_set FLAG_BADGE02_GET, RustboroCity_Gym_EventScript_RoxanneJourneyContinues
 	msgbox RustboroCity_Gym_Text_RoxannePostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -43,6 +44,7 @@ RustboroCity_Gym_EventScript_GiveOldAmber::
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_ROXANNE_OLD_AMBER
 	msgbox RustboroCity_Gym_Text_ExplainRoxanneRewards, MSGBOX_DEFAULT
+	msgbox RustboroCity_Gym_Text_RoxannePostBattle, MSGBOX_DEFAULT
 	release
 	end
 
@@ -52,6 +54,7 @@ RustboroCity_Gym_EventScript_GiveLegacyOldAmber::
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_EC_RECEIVED_ROXANNE_AERODACTYLITE
 	msgbox RustboroCity_Gym_Text_ExplainRoxanneRewards, MSGBOX_DEFAULT
+	msgbox RustboroCity_Gym_Text_RoxannePostBattle, MSGBOX_DEFAULT
 	release
 	end
 
@@ -183,15 +186,17 @@ RustboroCity_Gym_EventScript_GuideIntroduction::
 	giveitem ITEM_FRESH_WATER, 5
 	goto_if_eq VAR_RESULT, FALSE, RustboroCity_Gym_EventScript_GuideBagFull
 	setvar VAR_RUSTBORO_GYM_GUIDE_STATE, 1
+	goto RustboroCity_Gym_EventScript_GuideReturn
+
+RustboroCity_Gym_EventScript_GuideBagFull::
+	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
+
+RustboroCity_Gym_EventScript_GuideReturn::
+	closemessage
 	goto_if_eq VAR_TEMP_1, 1, RustboroCity_Gym_EventScript_GuideReturn1
 	goto_if_eq VAR_TEMP_1, 2, RustboroCity_Gym_EventScript_GuideReturn2
 	goto_if_eq VAR_TEMP_1, 3, RustboroCity_Gym_EventScript_GuideReturn3
 	goto RustboroCity_Gym_EventScript_GuideReturn4
-
-RustboroCity_Gym_EventScript_GuideBagFull::
-	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
-	releaseall
-	end
 
 RustboroCity_Gym_EventScript_GuideReturn1::
 	applymovement LOCALID_RUSTBORO_GYM_GUIDE, RustboroCity_Gym_Movement_GuideReturn1
@@ -353,16 +358,18 @@ RustboroCity_Gym_Text_MarcPostBattle:
 
 RustboroCity_Gym_Text_RoxanneIntro:
 	.string "I am ROXANNE, RUSTBORO's GYM LEADER.\p"
-	.string "Rock is not one answer. It is endurance,\n"
-	.string "redirection, reverse speed, and pressure.\p"
-	.string "My students taught you the pieces. Now\n"
-	.string "solve the complete first examination.$"
+	.string "I teach here, but each challenger gives\n"
+	.string "me something new to study.\p"
+	.string "Rock can endure, redirect an attack, or\n"
+	.string "reverse the order of a battle. My\l"
+	.string "students have shown you the pieces.\p"
+	.string "Now, let us put them together.$"
 
 RustboroCity_Gym_Text_RoxanneDefeat:
-	.string "You controlled the room, respected the\n"
-	.string "drain, and kept an answer for my ace.\p"
-	.string "That is understanding, not memorization.\n"
-	.string "Please accept the STONE BADGE.$"
+	.string "There is always more to learn. Even a\n"
+	.string "carefully prepared team can be beaten.\p"
+	.string "You have earned the STONE BADGE.\n"
+	.string "May it be the first of many!$"
 
 RustboroCity_Gym_Text_ReceivedStoneBadge:
 	.string "{PLAYER} received the STONE BADGE\n"
@@ -384,8 +391,9 @@ RustboroCity_Gym_Text_ExplainRoxanneRewards:
 	.string "project.$"
 
 RustboroCity_Gym_Text_RoxannePostBattle:
-	.string "No later Gym will ask the same question.\n"
-	.string "Keep changing the shape of your team.$"
+	.string "Your next GYM is BRAWLY's in DEWFORD.\p"
+	.string "MR. BRINEY sails from his cottage on\n"
+	.string "ROUTE 104, south of PETALBURG WOODS.$"
 
 RustboroCity_Gym_Text_GymStatue:
 	.string "RUSTBORO CITY POKéMON GYM$"
@@ -443,3 +451,8 @@ RustboroCity_Gym_Text_RoxanneRematchNeedTwoMons:
 	.string "You only have one POKéMON with you?\p"
 	.string "Please return with at least one more\n"
 	.string "POKéMON.$"
+
+RustboroCity_Gym_EventScript_RoxanneJourneyContinues::
+	msgbox RustboroCity_Gym_Text_RoxannePostRematch, MSGBOX_DEFAULT
+	release
+	end

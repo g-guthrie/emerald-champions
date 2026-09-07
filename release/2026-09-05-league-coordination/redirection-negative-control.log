@@ -1,0 +1,10 @@
+[0] Emerald Champions redirection covers setup but not redundant protection 1/2: [31mFAIL[0m
+test/battle/ai/emerald_champions_dynamic.c:92: Unmatched SCORE_EQ_VAL Follow Me 100, got 80
+
+  [31mFAILED[0m tests:
+  - [31mtest/battle/ai/emerald_champions_dynamic.c:70[0m: Emerald Champions redirection covers setup but not redundant protection 1/2: 92: Unmatched SCORE_EQ_VAL Follow Me 100, got 80
+
+- Tests [31mFAILED[0m:          1    Add TESTS='X' to run tests with the defined prefix.
+- Tests [34mTOTAL[0m:           1
+
+'Emerald Champions redirection covers setup but not redundant protection' has new failing tests: ['Emerald Champions redirection covers setup but not redundant protection 1/2']

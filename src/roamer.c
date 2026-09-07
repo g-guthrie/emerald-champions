@@ -1,5 +1,6 @@
 #include "global.h"
 #include "event_data.h"
+#include "legendary_signs.h"
 #include "ow_abilities.h"
 #include "pokemon.h"
 #include "random.h"
@@ -141,7 +142,7 @@ bool8 TryAddRoamer(enum Species species, u8 level)
 {
     u8 index = GetFirstInactiveRoamerIndex();
 
-    if (index < ROAMER_COUNT)
+    if (index < ROAMER_COUNT && !IsLegendaryEncounterLost(species))
     {
         // Create the roamer and stop searching
         CreateInitialRoamerMon(index, species, level);
@@ -266,7 +267,8 @@ bool8 TryStartRoamerEncounter(void)
 
     for (i = 0; i < ROAMER_COUNT; i++)
     {
-        if (IsRoamerAt(i, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum) == TRUE && (Random() % 4) == 0)
+        if (!IsLegendaryEncounterLost(ROAMER(i)->species)
+         && IsRoamerAt(i, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum) == TRUE && (Random() % 4) == 0)
         {
             CreateRoamerMonInstance(i);
             gEncounteredRoamerIndex = i;

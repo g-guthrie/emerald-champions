@@ -437,17 +437,6 @@ static void ClearTasksAndGraphicalStructs(void)
     FreeAllSpritePalettes();
 }
 
-static void ResetBgCoordinates(void)
-{
-    ChangeBgX(0, 0, BG_COORD_SET);
-    ChangeBgY(0, 0, BG_COORD_SET);
-    ChangeBgX(1, 0, BG_COORD_SET);
-    ChangeBgY(1, 0, BG_COORD_SET);
-    ChangeBgX(2, 0, BG_COORD_SET);
-    ChangeBgY(2, 0, BG_COORD_SET);
-    ChangeBgX(3, 0, BG_COORD_SET);
-    ChangeBgY(3, 0, BG_COORD_SET);
-}
 
 static void SetDispcntReg(void)
 {
@@ -500,7 +489,7 @@ static void CB2_ShowTrainerHillRecords(void)
         ResetBgsAndClearDma3BusyFlags(0);
         InitBgsFromTemplates(0, sTrainerHillRecordsBgTemplates, ARRAY_COUNT(sTrainerHillRecordsBgTemplates));
         SetBgTilemapBuffer(3, sTilemapBuffer);
-        ResetBgCoordinates();
+        ResetAllBgsCoordinates();
         gMain.state++;
         break;
     case 3:

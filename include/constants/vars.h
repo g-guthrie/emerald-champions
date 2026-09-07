@@ -244,7 +244,7 @@
 #define VAR_GIFT_PICHU_SLOT                              0x40DD
 #define VAR_LEGENDARY_RELIC_DELIVERY_0                    0x40DE // Pending relic bits 0-15; initialized by save v2 migration.
 #define VAR_LEGENDARY_RELIC_DELIVERY_1                    0x40DF // Pending bits 16-23 and earned species bits 24-29.
-#define VAR_GIFT_UNUSED_3                                0x40E0 // Var is written to, but never read
+#define VAR_STEVEN_STARTER_STONE_DELIVERY                 0x40E0 // Fulfilled starter stone gifts, bits 0 and 1.
 #define VAR_GIFT_UNUSED_4                                0x40E1 // Var is written to, but never read
 #define VAR_GIFT_UNUSED_5                                0x40E2 // Var is written to, but never read
 #define VAR_GIFT_UNUSED_6                                0x40E3 // Var is written to, but never read

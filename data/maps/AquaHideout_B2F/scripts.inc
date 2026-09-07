@@ -101,9 +101,13 @@ AquaHideout_B2F_Text_OurBossGotThroughHisPreparations:
 
 AquaHideout_B2F_Text_MattPostBattle:
 	.string "MATT: ARCHIE is headed for a cavern\n"
-	.string "beneath the sea beyond LILYCOVE.\p"
-	.string "You can cross the ocean. Finding one\n"
-	.string "moving current inside it is harder.$"
+	.string "beneath ROUTE 128.\p"
+	.string "Still chasing him? Surf east from\n"
+	.string "LILYCOVE to MOSSDEEP and earn its BADGE.\p"
+	.string "Then ask STEVEN at his house in the\n"
+	.string "northwest of MOSSDEEP about DIVE.\p"
+	.string "By the time you can reach the seafloor,\n"
+	.string "ARCHIE will have what he came for!$"
 
 AquaHideout_B2F_Text_Grunt4Intro:
 	.string "Waiting is part of an ambush. You finally\n"

@@ -130,20 +130,6 @@ s32 AI_EC_RedirectionSetup(u32 battlerAtkRaw, u32 battlerDefRaw, u32 moveRaw, s3
     return score;
 }
 
-s32 AI_EC_WallaceTerrain(u32 battlerAtkRaw, u32 battlerDefRaw, u32 moveRaw, s32 score)
-{
-    enum BattlerId battlerDef = (enum BattlerId)battlerDefRaw;
-    enum Move move = (enum Move)moveRaw;
-
-    (void)battlerAtkRaw;
-
-    if (move == MOVE_HYPNOSIS
-     && gFieldTimers.terrain == B_TERRAIN_MISTY
-     && AI_IsBattlerGrounded(battlerDef))
-        return score + EC_AI_STRONG_REJECTION;
-    return score;
-}
-
 AiScoreFunc GetEmeraldChampionsDynamicAiFunc(u16 trainerId)
 {
     switch (trainerId)
@@ -165,8 +151,6 @@ AiScoreFunc GetEmeraldChampionsDynamicAiFunc(u16 trainerId)
     case TRAINER_LEAF_ALTERING_CAVE:
     case TRAINER_CYNTHIA_1:
         return AI_EC_RedirectionSetup;
-    case TRAINER_WALLACE:
-        return AI_EC_WallaceTerrain;
     default:
         return NULL;
     }

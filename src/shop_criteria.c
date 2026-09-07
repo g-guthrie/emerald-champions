@@ -9,8 +9,6 @@ static EWRAM_DATA const u16 *sDynamicShopItemListRef = NULL;
 
 // Remove the UNUSED if you'll use the functions!
 static UNUSED bool32 ShopCriteriaByBadgeCount(u32 count);
-static UNUSED bool32 ShopCriteriaByFlag(u32 flagId);
-static UNUSED bool32 ShopCriteriaByVar(u32 varId, u32 varValue);
 
 void TryBuildDynamicShopItemList(const u16 **ogItemList, u16 *resultingTotal)
 {
@@ -57,26 +55,6 @@ static UNUSED bool32 ShopCriteriaByBadgeCount(u32 count)
     }
 
     if (badgeCount >= count)
-        return TRUE;
-
-    return FALSE;
-}
-
-// These two below are somewhat identical to ShopCriteriaByBadgeCount
-// but uses only one specific event var/flag check. Useful if you need
-// a specific badge flag instead of just the badge total.
-
-static UNUSED bool32 ShopCriteriaByFlag(u32 flagId)
-{
-    if (FlagGet(flagId))
-        return TRUE;
-
-    return FALSE;
-}
-
-static UNUSED bool32 ShopCriteriaByVar(u32 varId, u32 varValue)
-{
-    if (VarGet(varId) >= varValue)
         return TRUE;
 
     return FALSE;

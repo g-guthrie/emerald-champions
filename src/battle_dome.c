@@ -107,7 +107,6 @@ enum {
     NUM_INFO_CARD_WINDOWS
 };
 
-static u8 GetDomeTrainerMonIvs(u16);
 static void SwapDomeTrainers(int, int, u16 *);
 static void CalcDomeMonStats(const struct TrainerMon *fmon, int level, u8 ivs, int *stats);
 static void CreateDomeOpponentMons(u16);
@@ -2039,7 +2038,7 @@ static void InitDomeTrainers(void)
     {
         monTypesBits = 0;
         rankingScores[i] = 0;
-        ivs = GetDomeTrainerMonIvs(DOME_TRAINERS[i].trainerId);
+        ivs = GetFrontierTrainerFixedIvs(DOME_TRAINERS[i].trainerId);
         for (j = 0; j < FRONTIER_PARTY_SIZE; j++)
         {
             CalcDomeMonStats(&gFacilityTrainerMons[DOME_MONS[i][j]],
@@ -2182,9 +2181,9 @@ static void InitDomeOpponentParty(void)
 static void CreateDomeOpponentMon(u8 monPartyId, u16 tournamentTrainerId, u8 tournamentMonId, u32 otId)
 {
     #ifdef BUGFIX
-    u8 fixedIv = GetDomeTrainerMonIvs(DOME_TRAINERS[tournamentTrainerId].trainerId);
+    u8 fixedIv = GetFrontierTrainerFixedIvs(DOME_TRAINERS[tournamentTrainerId].trainerId);
     #else
-    u8 fixedIv = GetDomeTrainerMonIvs(tournamentTrainerId); // BUG: Using the wrong ID. As a result, all Pokémon have ivs of 3.
+    u8 fixedIv = GetFrontierTrainerFixedIvs(tournamentTrainerId); // BUG: Using the wrong ID. As a result, all Pokémon have ivs of 3.
     #endif
     u8 level = SetFacilityPtrsGetLevel();
 
@@ -2497,32 +2496,6 @@ static int GetTypeEffectivenessPoints(enum Move move, enum Species targetSpecies
     return typePower;
 }
 
-// Duplicate of GetFrontierTrainerFixedIvs
-// NOTE: In CreateDomeOpponentMon a tournament trainer ID (0-15) is passed instead, resulting in all IVs of 3
-//       To fix, see CreateDomeOpponentMon
-static u8 GetDomeTrainerMonIvs(u16 trainerId)
-{
-    u8 fixedIv;
-
-    if (trainerId <= FRONTIER_TRAINER_JILL)         // 0 - 99
-        fixedIv = 3;
-    else if (trainerId <= FRONTIER_TRAINER_CHLOE)   // 100 - 119
-        fixedIv = 6;
-    else if (trainerId <= FRONTIER_TRAINER_SOFIA)   // 120 - 139
-        fixedIv = 9;
-    else if (trainerId <= FRONTIER_TRAINER_JAZLYN)  // 140 - 159
-        fixedIv = 12;
-    else if (trainerId <= FRONTIER_TRAINER_ALISON)  // 160 - 179
-        fixedIv = 15;
-    else if (trainerId <= FRONTIER_TRAINER_LAMAR)   // 180 - 199
-        fixedIv = 18;
-    else if (trainerId <= FRONTIER_TRAINER_TESS)    // 200 - 219
-        fixedIv = 21;
-    else                                            // 220+ (- 299)
-        fixedIv = MAX_PER_STAT_IVS;
-
-    return fixedIv;
-}
 
 static int TournamentIdOfOpponent(int roundId, int trainerId)
 {
@@ -5779,7 +5752,7 @@ static void InitRandomTourneyTreeResults(void)
     {
         monTypesBits = 0;
         statSums[i] = 0;
-        ivs = GetDomeTrainerMonIvs(DOME_TRAINERS[i].trainerId);
+        ivs = GetFrontierTrainerFixedIvs(DOME_TRAINERS[i].trainerId);
         for (j = 0; j < FRONTIER_PARTY_SIZE; j++)
         {
             CalcDomeMonStats(&gFacilityTrainerMons[DOME_MONS[i][j]],

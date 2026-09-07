@@ -418,25 +418,6 @@ static void DoStandardWildBattle(bool32 isDouble)
     TryUpdateGymLeaderRematchFromWild();
 }
 
-void DoStandardWildBattle_Debug(void)
-{
-    LockPlayerFieldControls();
-    FreezeObjectEvents();
-    StopPlayerAvatar();
-    gMain.savedCallback = CB2_EndWildBattle;
-    gBattleTypeFlags = 0;
-    if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
-    {
-        VarSet(VAR_TEMP_PLAYING_PYRAMID_MUSIC, 0);
-        gBattleTypeFlags |= BATTLE_TYPE_PYRAMID;
-    }
-    CreateBattleStartTask_Debug(GetWildBattleTransition(), 0);
-    //IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
-    //IncrementGameStat(GAME_STAT_WILD_BATTLES);
-    //IncrementDailyWildBattles();
-    //TryUpdateGymLeaderRematchFromWild();
-}
-
 void BattleSetup_StartRoamerBattle(void)
 {
     LockPlayerFieldControls();
@@ -2439,6 +2420,12 @@ static void ApplyRegionalRivalStarter(struct Pokemon *party, u16 trainerNum)
         SetMonData(&party[i], MON_DATA_NICKNAME, GetSpeciesName(newSpecies));
         experience = gExperienceTables[gSpeciesInfo[newSpecies].growthRate][level];
         SetMonData(&party[i], MON_DATA_EXP, &experience);
+        // The opening rival is the campaign's one-on-one exception. Doubles
+        // defaults can contain only ally support, so use its singles catalog.
+        if (GetTrainerBattleType(trainerNum) == TRAINER_BATTLE_TYPE_SINGLES
+         && ApplyEmeraldChampionsBattleSetChoiceForFormat(&party[i], 0, EC_BATTLE_FORMAT_SINGLES) == EC_BATTLE_SET_SUCCESS)
+            return;
+
         bool32 applied = FALSE;
         for (u8 choice = 0; choice < GetEmeraldChampionsRawBattleSetCount(newSpecies); choice++)
         {

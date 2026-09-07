@@ -8,10 +8,11 @@
 #include "constants/pokemon.h"
 #include "constants/species.h"
 
-#define SHOWDOWN_CIRCUIT_VARIANT_COUNT 311
-#define SHOWDOWN_CIRCUIT_TEMPLATE_COUNT 444
-#define SHOWDOWN_CIRCUIT_MAX_MOVES 8
-#define SHOWDOWN_CIRCUIT_MAX_ABILITIES 2
+// Generated counts: scripts/generate_showdown_champions_circuit.py
+#define SHOWDOWN_CIRCUIT_VARIANT_COUNT 756
+#define SHOWDOWN_CIRCUIT_TEMPLATE_COUNT 1322
+#define SHOWDOWN_CIRCUIT_MAX_MOVES 9
+#define SHOWDOWN_CIRCUIT_MAX_ABILITIES 3
 
 enum ShowdownCircuitRole
 {
@@ -23,6 +24,18 @@ enum ShowdownCircuitRole
     SHOWDOWN_ROLE_CHOICE_ITEM,
     SHOWDOWN_ROLE_WALLBREAKER,
     SHOWDOWN_ROLE_FAST_ATTACKER,
+};
+
+enum CircuitDependency
+{
+    CIRCUIT_DEPENDENCY_NONE,
+    CIRCUIT_DEPENDENCY_RAIN,
+    CIRCUIT_DEPENDENCY_SUN,
+    CIRCUIT_DEPENDENCY_SAND,
+    CIRCUIT_DEPENDENCY_SNOW,
+    CIRCUIT_DEPENDENCY_TRICK_ROOM,
+    CIRCUIT_DEPENDENCY_TERRAIN,
+    CIRCUIT_DEPENDENCY_GRAVITY,
 };
 
 #define SHOWDOWN_COMPAT_WEB_SETTER     (1 << 0)
@@ -53,6 +66,13 @@ struct ShowdownCircuitTemplate
     enum ShowdownCircuitRole role;
     u8 moveCount;
     u8 abilityCount;
+    // Only roster supplements use a complete authored individual set. Teams
+    // are still composed at runtime, subject to the same compatibility rules.
+    bool8 authored;
+    enum CircuitDependency dependency;
+    enum Item item;
+    u8 nature;
+    u8 statPoints[NUM_STATS];
 };
 
 extern const struct ShowdownCircuitVariant gShowdownCircuitVariants[SHOWDOWN_CIRCUIT_VARIANT_COUNT];

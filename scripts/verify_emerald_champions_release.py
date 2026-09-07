@@ -23,11 +23,16 @@ STATIC_GATES = (
     ("core services", (PYTHON, "scripts/verify_emerald_champions_core.py")),
     ("native field UI", (PYTHON, "scripts/verify_emerald_champions_native_ui.py")),
     ("visual contracts", (PYTHON, "scripts/verify_emerald_champions_visual_contracts.py")),
+    ("compiled map tile compatibility and dynamic inventory", (
+        PYTHON, "scripts/audit/map_integrity.py", "--out",
+        "work/audits/map_tile_inventory.json",
+    )),
     ("Inclement visual sources", (PYTHON, "scripts/verify_inclement_visual_sources.py")),
     ("Inclement overworld parity", (PYTHON, "scripts/verify_inclement_overworld_parity.py")),
     ("Inclement story parity", (PYTHON, "scripts/verify_inclement_story_parity.py")),
     ("local warp collision regressions", (PYTHON, "scripts/verify_map_reachability.py")),
     ("NPC script integrity", (PYTHON, "scripts/verify_npc_script_integrity.py")),
+    ("retired route conversations", (PYTHON, "scripts/verify_route_conversations.py")),
     (
         "Verdant visual byte inventory",
         (PYTHON, "scripts/audit_verdant_visual_parity.py", "--check-fast"),
@@ -56,16 +61,13 @@ STATIC_GATES = (
     ("restored world", (PYTHON, "scripts/verify_restored_emerald_champions_world.py")),
     ("single-player evolutions", (PYTHON, "scripts/verify_solo_evolution_access.py")),
     ("fossil revival", (PYTHON, "scripts/verify_fossil_revival.py")),
-    ("Poke Vial quest", (PYTHON, "scripts/restore_poke_vial_quest.py")),
     ("campaign battle master", (PYTHON, "scripts/audit_emerald_champions_master_battles.py")),
-    # The master is the authored source; trainers.party is generated from it by the
-    # tier system. --verify-only regenerates and compares, so a hand-edit to
-    # trainers.party, or a drift in the AI / Stat Point / level-ceiling tiers, fails
-    # here instead of shipping.
+    # The master materializes the authored loadouts plus encounter metadata.
+    # Compare its trainer output exactly; a direct edit must not bypass authoring.
     ("battle master regenerates byte-for-byte",
      (PYTHON, "scripts/implement_emerald_champions_master_battles.py",
       "--through-encounter", "513", "--verify-only")),
-    # audit_encounter_quality walks all 561 branches for teams that cannot do the
+    # audit_encounter_quality walks every active branch for teams that cannot do the
     # thing they were built to do. selftest_encounter_audit proves its rules still
     # fire, so "zero findings" means the corpus is clean, not that the rules rotted.
     ("per-encounter quality audit self-test", (PYTHON, "scripts/selftest_encounter_audit.py")),
