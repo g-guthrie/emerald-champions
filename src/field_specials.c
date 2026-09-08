@@ -12,6 +12,8 @@
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "emerald_champions_battle_sets.h"
+#include "emerald_champions_opening.h"
+#include "mega_stone_rewards.h"
 #include "fieldmap.h"
 #include "field_camera.h"
 #include "field_effect.h"
@@ -33,6 +35,7 @@
 #include "main.h"
 #include "match_call.h"
 #include "menu.h"
+#include "move.h"
 #include "metatile_behavior.h"
 #include "mystery_gift.h"
 #include "overworld.h"
@@ -83,6 +86,7 @@
 #include "battle_util.h"
 #include "naming_screen.h"
 #include "chooseboxmon.h"
+#include "data/emerald_champions_forms.h"
 
 #define TAG_ITEM_ICON 5500
 
@@ -106,21 +110,16 @@ static const u8 sText_Plus8[] = _("+8");
 static const u8 sText_SetZero[] = _("Set to 0");
 static const u8 sText_SetMaximum[] = _("Set Maximum");
 static const u8 sText_NoPokemonSelected[] = _("No Pokémon was selected.");
-static const u8 sText_StatSummaryPrefix[] = _("Total Stat Points: ");
-static const u8 sText_StatSummarySuffix[] = _("/66.\nChoose a stat to adjust.");
+static const u8 sText_StatSummaryPrefix[] = _("Points used: ");
+static const u8 sText_StatSummarySuffix[] = _("/66\nPoints {RIGHT_ARROW} stat after Nature");
 static const u8 sText_StatCannotAdjust[] = _("That stat cannot be adjusted.");
-static const u8 sText_StatPossessive[] = _("'s ");
 static const u8 sText_StatMenuDivider[] = _("  ");
 static const u8 sText_StatMenuMaximum[] = _("/32");
 static const u8 sText_StatArrow[] = _(" {RIGHT_ARROW} ");
 static const u8 sText_StatColon[] = _(": ");
-static const u8 sText_StatPointsOpen[] = _(" (");
-static const u8 sText_StatPointsClose[] = _("/32)\nTotal ");
-static const u8 sText_StatNextChange[] = _("/66. Next: +");
-static const u8 sText_StatAtMaximum[] = _("/66. At 32.");
-static const u8 sText_StatNoPointsLeft[] = _("/66. No points left.");
-static const u8 sText_StatNoChangeOpen[] = _("/66. +");
-static const u8 sText_StatNoChangeClose[] = _(" changes nothing.");
+static const u8 sText_StatPointsPrefix[] = _("\nPoints: ");
+static const u8 sText_StatPointsLeft[] = _("/32  Left: ");
+static const u8 sText_StatFixedHp[] = _(" (fixed HP)");
 
 static const u8 *const sEmeraldChampionsStatPointNames[] =
 {
@@ -261,9 +260,10 @@ static u16 GetEmeraldChampionsGameCornerPokemonPrizeFlag(enum Species species)
 
 static bool32 IsEmeraldChampionsInitialStarter(enum Species species)
 {
-    return species == GetStarterPokemonForGeneration(
-        VarGet(VAR_STARTER_MON),
-        VarGet(VAR_STARTER_GEN));
+    u16 generation = VarGet(VAR_STARTER_GEN);
+    return species == GetStarterPokemonForGeneration(VarGet(VAR_STARTER_MON), generation)
+        || (HasEmeraldChampionsSecondStarter()
+            && species == GetStarterPokemonForGeneration(VarGet(VAR_EC_SECOND_STARTER) - 1, generation));
 }
 
 
@@ -436,11 +436,7 @@ static const u16 *const sEmeraldChampionsBattleItemCategories[] =
     [EC_BATTLE_ITEM_CATEGORY_SPECIES] = sEmeraldChampionsSpeciesItems,
 };
 
-static const u16 sEmeraldChampionsMegaStones[] =
-{
-#include "data/emerald_champions_mega_stones.h"
-    ITEM_NONE,
-};
+
 
 static const u16 sEmeraldChampionsEvolutionItems[] =
 {
@@ -505,7 +501,7 @@ static u8 TryGiveEmeraldChampionsGameCornerPokemon(enum Species species, u16 fla
         return EC_GAME_CORNER_PRIZE_SET_FAILED;
 
     if (!CanAcquireLegendarySignSpecies(species))
-        return EC_GAME_CORNER_PRIZE_NEEDS_RESEARCH;
+        return EC_GAME_CORNER_PRIZE_ALREADY_CAUGHT;
 
     giveResult = TryGiveEmeraldChampionsPreparedPokemon(
         species,
@@ -559,9 +555,7 @@ void OpenEmeraldChampionsBattleItemMart(void)
     ScriptContext_Stop();
 }
 
-// Emerald Champions: the Mega Stone(s) for the player's chosen starter line.
-// VAR_0x8004 = first stone (ITEM_NONE if the line has no Mega), VAR_0x8005 = second (Charizard).
-void GetEmeraldChampionsStarterMegaStone(void)
+static enum Item GetEmeraldChampionsStarterStoneAtIndex(u32 index)
 {
     static const struct { enum Species starter; u16 first; u16 second; } sStarterStones[] =
     {
@@ -578,20 +572,25 @@ void GetEmeraldChampionsStarterMegaStone(void)
         {SPECIES_FENNEKIN,   ITEM_DELPHOXITE,    ITEM_NONE},
         {SPECIES_FROAKIE,    ITEM_GRENINJITE,    ITEM_NONE},
     };
-    enum Species starter = GetStarterPokemonForGeneration(VarGet(VAR_STARTER_MON), VarGet(VAR_STARTER_GEN));
-
-    gSpecialVar_0x8004 = ITEM_NONE;
-    gSpecialVar_0x8005 = ITEM_NONE;
+    enum Species starter;
+    if (index >= 4 || (index >= 2 && !HasEmeraldChampionsSecondStarter()))
+        return ITEM_NONE;
+    starter = GetStarterPokemonForGeneration(index < 2 ? VarGet(VAR_STARTER_MON)
+        : VarGet(VAR_EC_SECOND_STARTER) - 1, VarGet(VAR_STARTER_GEN));
     for (u32 i = 0; i < ARRAY_COUNT(sStarterStones); i++)
-    {
         if (sStarterStones[i].starter == starter)
-        {
-            gSpecialVar_0x8004 = sStarterStones[i].first;
-            gSpecialVar_0x8005 = sStarterStones[i].second;
-            break;
-        }
-    }
-    gSpecialVar_Result = gSpecialVar_0x8004 != ITEM_NONE;
+            return (index & 1) ? sStarterStones[i].second : sStarterStones[i].first;
+    return ITEM_NONE;
+}
+
+void GetEmeraldChampionsStarterMegaStone(void)
+{
+    gSpecialVar_0x8004 = GetEmeraldChampionsStarterStoneAtIndex(0);
+    gSpecialVar_0x8005 = GetEmeraldChampionsStarterStoneAtIndex(1);
+    gSpecialVar_Result = FALSE;
+    for (u32 i = 0; i < 4; i++)
+        if (GetEmeraldChampionsStarterStoneAtIndex(i) != ITEM_NONE)
+            gSpecialVar_Result = TRUE;
 }
 
 // Story handoffs consume exactly one item from either player inventory store.
@@ -623,70 +622,33 @@ void TakeEmeraldChampionsHandoffItem(void)
     }
 }
 
-static bool32 OwnsStevenStarterStone(enum Item item)
+void GiveEmeraldChampionsStarterMegaStoneAtIndex(void)
 {
-    if (CheckBagHasItem(item, 1) || CheckPCHasItem(item, 1))
-        return TRUE;
-    for (u32 slot = 0; slot < PARTY_SIZE; slot++)
-        if (GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_SPECIES) != SPECIES_NONE
-            && GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_HELD_ITEM) == item)
-            return TRUE;
-    for (u32 box = 0; box < TOTAL_BOXES_COUNT; box++)
-        for (u32 slot = 0; slot < IN_BOX_COUNT; slot++)
-            if (GetBoxMonData(&gPokemonStoragePtr->boxes[box][slot], MON_DATA_SPECIES) != SPECIES_NONE
-                && GetBoxMonData(&gPokemonStoragePtr->boxes[box][slot], MON_DATA_HELD_ITEM) == item)
-                return TRUE;
-    return FALSE;
-}
-
-void GiveEmeraldChampionsStarterMegaStones(void)
-{
+    u32 index = gSpecialVar_0x8008;
+    enum Item item = GetEmeraldChampionsStarterStoneAtIndex(index);
     u16 delivered = VarGet(VAR_STEVEN_STARTER_STONE_DELIVERY);
-    u16 stones[2];
-    bool32 complete = TRUE;
-    // Per-item receipts: 0 = no new delivery, 1 = Bag, 2 = PC.
-    // Keep these separate from the obtained-item presentation's scratch vars.
-    gSpecialVar_0x8009 = 0;
-    gSpecialVar_0x800A = 0;
-    GetEmeraldChampionsStarterMegaStone();
-    stones[0] = gSpecialVar_0x8004;
-    stones[1] = gSpecialVar_0x8005;
-    for (u32 i = 0; i < ARRAY_COUNT(stones); i++)
+    gSpecialVar_0x8004 = item;
+    gSpecialVar_0x8005 = 0;
+    gSpecialVar_Result = TRUE;
+    if (item == ITEM_NONE || (delivered & (1 << index)))
+        return;
+    bool32 fulfilled = OwnsEmeraldChampionsMegaStone(item);
+    for (u32 i = 0; i < index; i++)
+        if ((delivered & (1 << i)) && GetEmeraldChampionsStarterStoneAtIndex(i) == item)
+            fulfilled = TRUE;
+    if (!fulfilled && AddBagItem(item, 1))
     {
-        if (stones[i] == ITEM_NONE || (delivered & (1 << i)))
-            continue;
-        bool32 fulfilled = OwnsStevenStarterStone(stones[i]);
-        u16 destination = 0;
-        if (!fulfilled && AddBagItem(stones[i], 1))
-        {
-            fulfilled = TRUE;
-            destination = 1;
-        }
-        else if (!fulfilled && AddPCItem(stones[i], 1))
-        {
-            fulfilled = TRUE;
-            destination = 2;
-        }
-        if (fulfilled)
-        {
-            delivered |= 1 << i;
-            VarSet(VAR_STEVEN_STARTER_STONE_DELIVERY, delivered);
-        }
-        else
-            complete = FALSE;
-        if (i == 0)
-            gSpecialVar_0x8009 = destination;
-        else
-            gSpecialVar_0x800A = destination;
+        fulfilled = TRUE;
+        gSpecialVar_0x8005 = 1;
     }
-    // Completed bits survive later disposal; only a genuinely pending gift retries.
-    gSpecialVar_Result = complete;
-}
-
-void OpenEmeraldChampionsMegaStoneArchive(void)
-{
-    CreateFreePokemartMenu(sEmeraldChampionsMegaStones);
-    ScriptContext_Stop();
+    else if (!fulfilled && AddPCItem(item, 1))
+    {
+        fulfilled = TRUE;
+        gSpecialVar_0x8005 = 2;
+    }
+    if (fulfilled)
+        VarSet(VAR_STEVEN_STARTER_STONE_DELIVERY, delivered | (1 << index));
+    gSpecialVar_Result = fulfilled;
 }
 
 void OpenEmeraldChampionsEvolutionItemArchive(void)
@@ -890,51 +852,6 @@ static const u8 *BuildEmeraldChampionsStatPointMenuText(u32 stat)
     return text;
 }
 
-// Reports the smallest point increase that changes the stat. A point is worth
-// 2 * level / 100 stat, so below Lv. 50 a single point often changes nothing;
-// the editor shows the next step that does instead of leaving the player to
-// guess. Probes with the real stat calculation and restores the Pokémon, so
-// the answer can never drift from the game.
-enum EmeraldChampionsStatBreakpoint GetEmeraldChampionsStatPointBreakpoint(struct Pokemon *mon, u32 displayStat, u32 *delta, u32 *value)
-{
-    s32 statData = EC_STAT_VALUE_DATA(displayStat);
-    s32 pointsData = EC_STAT_POINT_DATA(displayStat);
-    u32 current = GetMonData(mon, pointsData);
-    u32 remaining = EC_STAT_POINT_BUDGET - min(GetSelectedMonStatPointTotal(mon), EC_STAT_POINT_BUDGET);
-    u32 base = GetMonData(mon, statData);
-    u32 currentHp = GetMonData(mon, MON_DATA_HP);
-    enum EmeraldChampionsStatBreakpoint result = EC_STAT_BREAKPOINT_NO_CHANGE;
-    u8 points;
-
-    *delta = 0;
-    *value = base;
-    if (current >= EC_STAT_POINTS_PER_STAT)
-        return EC_STAT_BREAKPOINT_STAT_MAXED;
-    if (remaining == 0)
-        return EC_STAT_BREAKPOINT_NO_POINTS;
-    remaining = min(remaining, EC_STAT_POINTS_PER_STAT - current);
-    *delta = remaining;
-
-    for (u32 step = 1; step <= remaining; step++)
-    {
-        points = current + step;
-        SetMonData(mon, pointsData, &points);
-        CalculateMonStats(mon);
-        if (GetMonData(mon, statData) > base)
-        {
-            *delta = step;
-            *value = GetMonData(mon, statData);
-            result = EC_STAT_BREAKPOINT_FOUND;
-            break;
-        }
-    }
-    points = current;
-    SetMonData(mon, pointsData, &points);
-    CalculateMonStats(mon);
-    SetMonData(mon, MON_DATA_HP, &currentHp);
-    return result;
-}
-
 void BufferSelectedMonEmeraldChampionsStatPointSummary(void)
 {
     if (gSpecialVar_0x800A >= gPartiesCount[B_TRAINER_PLAYER])
@@ -949,13 +866,12 @@ void BufferSelectedMonEmeraldChampionsStatPointSummary(void)
     StringAppend(gStringVar4, sText_StatSummarySuffix);
 }
 
-// "Zigzagoon's HP: 52 (4/32)" over "Total 44/66. Next: +2 {RIGHT_ARROW} 53".
+// Show the actual stat after Nature and the allocation, without level breakpoints.
 void BufferSelectedMonEmeraldChampionsStatPointDetail(void)
 {
     struct Pokemon *mon;
     u32 stat;
-    u32 delta;
-    u32 value;
+    u32 total;
 
     if (gSpecialVar_0x800A >= gPartiesCount[B_TRAINER_PLAYER]
      || gSpecialVar_0x8005 >= NUM_STATS)
@@ -966,36 +882,16 @@ void BufferSelectedMonEmeraldChampionsStatPointDetail(void)
 
     mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x800A];
     stat = gSpecialVar_0x8005;
-    GetMonNickname(mon, gStringVar1);
-    StringCopy(gStringVar4, gStringVar1);
-    StringAppend(gStringVar4, sText_StatPossessive);
-    StringAppend(gStringVar4, sEmeraldChampionsStatPointNames[stat]);
+    total = GetSelectedMonStatPointTotal(mon);
+    StringCopy(gStringVar4, sEmeraldChampionsStatPointNames[stat]);
     StringAppend(gStringVar4, sText_StatColon);
     AppendStatValue(gStringVar4, GetMonData(mon, EC_STAT_VALUE_DATA(stat)));
-    StringAppend(gStringVar4, sText_StatPointsOpen);
+    if (stat == 0 && HasShedinjaHPHandling(GetMonData(mon, MON_DATA_SPECIES)))
+        StringAppend(gStringVar4, sText_StatFixedHp);
+    StringAppend(gStringVar4, sText_StatPointsPrefix);
     AppendStatPointValue(gStringVar4, GetMonData(mon, EC_STAT_POINT_DATA(stat)));
-    StringAppend(gStringVar4, sText_StatPointsClose);
-    AppendStatPointValue(gStringVar4, GetSelectedMonStatPointTotal(mon));
-    switch (GetEmeraldChampionsStatPointBreakpoint(mon, stat, &delta, &value))
-    {
-    case EC_STAT_BREAKPOINT_FOUND:
-        StringAppend(gStringVar4, sText_StatNextChange);
-        AppendStatPointValue(gStringVar4, delta);
-        StringAppend(gStringVar4, sText_StatArrow);
-        AppendStatValue(gStringVar4, value);
-        break;
-    case EC_STAT_BREAKPOINT_STAT_MAXED:
-        StringAppend(gStringVar4, sText_StatAtMaximum);
-        break;
-    case EC_STAT_BREAKPOINT_NO_POINTS:
-        StringAppend(gStringVar4, sText_StatNoPointsLeft);
-        break;
-    case EC_STAT_BREAKPOINT_NO_CHANGE:
-        StringAppend(gStringVar4, sText_StatNoChangeOpen);
-        AppendStatPointValue(gStringVar4, delta);
-        StringAppend(gStringVar4, sText_StatNoChangeClose);
-        break;
-    }
+    StringAppend(gStringVar4, sText_StatPointsLeft);
+    AppendStatPointValue(gStringVar4, EC_STAT_POINT_BUDGET - min(total, EC_STAT_POINT_BUDGET));
 }
 
 void AdjustSelectedMonEmeraldChampionsStatPoints(void)
@@ -2454,13 +2350,23 @@ void LoadWallyZigzagoon(void)
 
 bool8 IsStarterInParty(void)
 {
-    u8 i;
-    u16 starter = GetStarterPokemon(VarGet(VAR_STARTER_MON));
-    u8 partyCount = CalculatePlayerPartyCount();
-    for (i = 0; i < partyCount; i++)
+    for (u32 slot = 0; slot < CalculatePlayerPartyCount(); slot++)
     {
-        if (GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES_OR_EGG) == starter)
-            return TRUE;
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][slot];
+        if (GetMonData(mon, MON_DATA_IS_EGG))
+            continue;
+        enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+        enum Species root = GetEggSpecies(species);
+        for (u32 partner = 0; partner < (HasEmeraldChampionsSecondStarter() ? 2 : 1); partner++)
+        {
+            u16 choice = partner == 0 ? VarGet(VAR_STARTER_MON) : VarGet(VAR_EC_SECOND_STARTER) - 1;
+            if (root == GetStarterPokemonForGeneration(choice, VarGet(VAR_STARTER_GEN)))
+            {
+                gSpecialVar_0x8005 = choice;
+                StringCopy(gStringVar1, GetSpeciesName(species));
+                return TRUE;
+            }
+        }
     }
     return FALSE;
 }
@@ -6858,4 +6764,273 @@ void SetGraniteCaveFlashLevel(void)
     SetDefaultFlashLevel();
     if (GetFlashLevel() > 4)
         SetFlashLevel(4);
+}
+
+
+static void PushEmeraldChampionsServiceChoice(const u8 *name, u32 id)
+{
+    u8 *text = Alloc(StringLength(name) + 1);
+    StringCopy(text, name);
+    MultichoiceDynamic_PushElement((struct ListMenuItem){text, id});
+}
+
+static bool32 CanReceiveEmeraldChampionsFormGift(u32 gift)
+{
+    if (gift >= ARRAY_COUNT(sEmeraldChampionsFormGifts) || FlagGet(sEmeraldChampionsFormGifts[gift].flag))
+        return FALSE;
+    switch (gift)
+    {
+    case 0: return VarGet(VAR_EC_OPENING_STATE) >= EC_OPENING_COMPLETE;
+    case 1: return TRUE;
+    case 5: return IsLegendarySignCaught(LEGENDARY_SIGN_KUBFU);
+    case 6: return IsLegendarySignCaught(LEGENDARY_SIGN_COSMOG);
+    default: return FlagGet(FLAG_SYS_GAME_CLEAR);
+    }
+}
+
+void BufferEmeraldChampionsFormGift(void)
+{
+    u32 gift = gSpecialVar_0x8004;
+    gSpecialVar_Result = CanReceiveEmeraldChampionsFormGift(gift);
+    if (gift < ARRAY_COUNT(sEmeraldChampionsFormGifts))
+        StringCopy(gStringVar2, sEmeraldChampionsFormGifts[gift].name);
+}
+
+void BuildEmeraldChampionsResearchPartnerChoices(void)
+{
+    gSpecialVar_Result = 0;
+    for (u32 gift = 2; gift < ARRAY_COUNT(sEmeraldChampionsFormGifts); gift++)
+        if (CanReceiveEmeraldChampionsFormGift(gift))
+        {
+            PushEmeraldChampionsServiceChoice(sEmeraldChampionsFormGifts[gift].name, gift);
+            gSpecialVar_Result++;
+        }
+}
+
+void GiveEmeraldChampionsFormGift(void)
+{
+    u32 gift = gSpecialVar_0x8004;
+    struct Pokemon mon;
+    gSpecialVar_Result = MON_CANT_GIVE;
+    if (!CanReceiveEmeraldChampionsFormGift(gift))
+        return;
+    const struct EmeraldChampionsFormGift *entry = &sEmeraldChampionsFormGifts[gift];
+    CreateRandomMon(&mon, entry->species, min(GetCurrentLevelCap(), 25));
+    if (ApplyEmeraldChampionsScriptedSet(&mon, &entry->preset) != EC_BATTLE_SET_SUCCESS)
+        return;
+    u32 partySlot = CalculatePlayerPartyCount();
+    gSpecialVar_Result = GiveScriptedMonToPlayer(&mon, PARTY_SIZE);
+    if (gSpecialVar_Result == MON_GIVEN_TO_PARTY || gSpecialVar_Result == MON_GIVEN_TO_PC)
+    {
+        FlagSet(entry->flag);
+        if (gSpecialVar_Result == MON_GIVEN_TO_PARTY)
+            RecordPlayerPartyMonHeldItemForRestoration(partySlot);
+    }
+}
+
+static struct Pokemon *GetEmeraldChampionsServiceMon(void)
+{
+    if (gSpecialVar_0x800A >= gPartiesCount[B_TRAINER_PLAYER])
+        return NULL;
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x800A];
+    if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_NONE
+        || GetMonData(mon, MON_DATA_IS_EGG) || GetMonData(mon, MON_DATA_SANITY_IS_BAD_EGG))
+        return NULL;
+    return mon;
+}
+
+static const struct EmeraldChampionsAppearance *GetEmeraldChampionsAppearance(enum Species species)
+{
+    for (u32 i = 0; i < ARRAY_COUNT(sEmeraldChampionsAppearances); i++)
+        if (sEmeraldChampionsAppearances[i].species == species)
+            return &sEmeraldChampionsAppearances[i];
+    return NULL;
+}
+
+static const struct { enum Species species; enum Move move; const u8 *name; } sEmeraldChampionsCostumes[] =
+{
+    {SPECIES_PIKACHU_COSPLAY, MOVE_NONE, COMPOUND_STRING("Plain Cosplay")},
+    {SPECIES_PIKACHU_ROCK_STAR, MOVE_METEOR_MASH, COMPOUND_STRING("Rock Star")},
+    {SPECIES_PIKACHU_BELLE, MOVE_ICICLE_CRASH, COMPOUND_STRING("Belle")},
+    {SPECIES_PIKACHU_POP_STAR, MOVE_DRAINING_KISS, COMPOUND_STRING("Pop Star")},
+    {SPECIES_PIKACHU_PHD, MOVE_ELECTRIC_TERRAIN, COMPOUND_STRING("Ph. D.")},
+    {SPECIES_PIKACHU_LIBRE, MOVE_FLYING_PRESS, COMPOUND_STRING("Libre")},
+};
+
+static s32 GetEmeraldChampionsCostume(enum Species species)
+{
+    for (u32 i = 0; i < ARRAY_COUNT(sEmeraldChampionsCostumes); i++)
+        if (sEmeraldChampionsCostumes[i].species == species)
+            return i;
+    return -1;
+}
+
+static const struct { enum Species species; const u8 *name; } sEmeraldChampionsDeoxysForms[] =
+{
+    {SPECIES_DEOXYS_NORMAL, COMPOUND_STRING("Normal")},
+    {SPECIES_DEOXYS_ATTACK, COMPOUND_STRING("Attack")},
+    {SPECIES_DEOXYS_DEFENSE, COMPOUND_STRING("Defense")},
+    {SPECIES_DEOXYS_SPEED, COMPOUND_STRING("Speed")},
+};
+
+static const u8 *GetEmeraldChampionsServiceFormName(enum Species source, enum Species target, u32 mode)
+{
+    if (mode == 0)
+    {
+        const struct EmeraldChampionsAppearance *from = GetEmeraldChampionsAppearance(source);
+        const struct EmeraldChampionsAppearance *to = GetEmeraldChampionsAppearance(target);
+        if (from != NULL && to != NULL && from->group == to->group)
+            return to->name;
+    }
+    else if (mode == 1)
+    {
+        s32 to = GetEmeraldChampionsCostume(target);
+        if (GetEmeraldChampionsCostume(source) >= 0 && to >= 0)
+            return sEmeraldChampionsCostumes[to].name;
+    }
+    else if (mode == 2 && FlagGet(FLAG_SYS_GAME_CLEAR))
+    {
+        bool32 sourceAllowed = FALSE;
+        for (u32 i = 0; i < ARRAY_COUNT(sEmeraldChampionsDeoxysForms); i++)
+            if (sEmeraldChampionsDeoxysForms[i].species == source)
+                sourceAllowed = TRUE;
+        for (u32 i = 0; sourceAllowed && i < ARRAY_COUNT(sEmeraldChampionsDeoxysForms); i++)
+            if (sEmeraldChampionsDeoxysForms[i].species == target)
+                return sEmeraldChampionsDeoxysForms[i].name;
+    }
+    return NULL;
+}
+
+void BuildEmeraldChampionsFormChoices(void)
+{
+    struct Pokemon *mon = GetEmeraldChampionsServiceMon();
+    gSpecialVar_Result = 0;
+    if (mon == NULL)
+        return;
+    enum Species source = GetMonData(mon, MON_DATA_SPECIES);
+    for (enum Species target = 1; target < NUM_SPECIES; target++)
+    {
+        const u8 *name = GetEmeraldChampionsServiceFormName(source, target, gSpecialVar_0x8006);
+        if (name != NULL)
+        {
+            PushEmeraldChampionsServiceChoice(name, target);
+            gSpecialVar_Result++;
+        }
+    }
+}
+
+void PrepareEmeraldChampionsFormSelection(void)
+{
+    struct Pokemon *mon = GetEmeraldChampionsServiceMon();
+    gSpecialVar_Result = FALSE;
+    gSpecialVar_0x8005 = MAX_MON_MOVES;
+    if (mon == NULL)
+        return;
+    enum Species source = GetMonData(mon, MON_DATA_SPECIES);
+    enum Species target = gSpecialVar_0x8008;
+    if ((source == target && GET_BASE_SPECIES_ID(source) != SPECIES_FURFROU)
+        || GetEmeraldChampionsServiceFormName(source, target, gSpecialVar_0x8006) == NULL)
+        return;
+    gSpecialVar_Result = 1;
+    if (gSpecialVar_0x8006 != 1)
+        return;
+    enum Move oldMove = sEmeraldChampionsCostumes[GetEmeraldChampionsCostume(source)].move;
+    enum Move newMove = sEmeraldChampionsCostumes[GetEmeraldChampionsCostume(target)].move;
+    for (u32 i = 0; oldMove != MOVE_NONE && i < MAX_MON_MOVES; i++)
+        if (GetMonData(mon, MON_DATA_MOVE1 + i) == oldMove)
+        {
+            gSpecialVar_0x8005 = i;
+            return;
+        }
+    if (newMove == MOVE_NONE || MonKnowsMove(mon, newMove))
+        return;
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+        if (GetMonData(mon, MON_DATA_MOVE1 + i) == MOVE_NONE)
+        {
+            gSpecialVar_0x8005 = i;
+            return;
+        }
+    gSpecialVar_Result = 2; // Ask the native move-selection screen; nothing is changed yet.
+}
+
+void BufferEmeraldChampionsFormPreview(void)
+{
+    struct Pokemon *mon = GetEmeraldChampionsServiceMon();
+    gSpecialVar_Result = FALSE;
+    if (mon == NULL)
+        return;
+    const u8 *name = GetEmeraldChampionsServiceFormName(GetMonData(mon, MON_DATA_SPECIES),
+        gSpecialVar_0x8008, gSpecialVar_0x8006);
+    if (name == NULL)
+        return;
+    GetMonNickname(mon, gStringVar1);
+    StringCopy(gStringVar2, name);
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_1}: {STR_VAR_2}."));
+    if (gSpecialVar_0x8006 == 1 && gSpecialVar_0x8005 < MAX_MON_MOVES)
+    {
+        enum Move move = sEmeraldChampionsCostumes[GetEmeraldChampionsCostume(gSpecialVar_0x8008)].move;
+        if (WouldPartyLoseSurfByReplacingMove(gSpecialVar_0x800A, gSpecialVar_0x8005, move))
+        {
+            StringCopy(gStringVar4, COMPOUND_STRING("Your party still needs its Surf\ncapability. Choose another move."));
+            return;
+        }
+        enum Move oldMove = GetMonData(mon, MON_DATA_MOVE1 + gSpecialVar_0x8005);
+        StringCopy(gStringVar2, oldMove == MOVE_NONE ? COMPOUND_STRING("Empty slot") : GetMoveName(oldMove));
+        StringCopy(gStringVar3, move == MOVE_NONE || MonKnowsMove(mon, move) ? COMPOUND_STRING("Empty slot") : GetMoveName(move));
+        u8 text[100];
+        StringExpandPlaceholders(text, COMPOUND_STRING("\p{STR_VAR_2} becomes\n{STR_VAR_3}."));
+        StringAppend(gStringVar4, text);
+    }
+    gSpecialVar_Result = TRUE;
+}
+
+void ApplyEmeraldChampionsFormSelection(void)
+{
+    BufferEmeraldChampionsFormPreview();
+    if (!gSpecialVar_Result)
+        return;
+    struct Pokemon *mon = GetEmeraldChampionsServiceMon();
+    enum Species target = gSpecialVar_0x8008;
+    if (gSpecialVar_0x8006 == 1 && gSpecialVar_0x8005 < MAX_MON_MOVES)
+    {
+        enum Move move = sEmeraldChampionsCostumes[GetEmeraldChampionsCostume(target)].move;
+        if (move == MOVE_NONE || MonKnowsMove(mon, move))
+        {
+            enum Move oldMove = GetMonData(mon, MON_DATA_MOVE1 + gSpecialVar_0x8005);
+            DeleteMove(mon, oldMove);
+        }
+        else
+        {
+            RemoveMonPPBonus(mon, gSpecialVar_0x8005);
+            SetMonMoveSlot(mon, move, gSpecialVar_0x8005);
+        }
+    }
+    u16 hp = GetMonData(mon, MON_DATA_HP);
+    SetMonData(mon, MON_DATA_SPECIES, &target);
+    TrySetDayLimitToFormChange(mon);
+    CalculateMonStats(mon);
+    hp = min(hp, GetMonData(mon, MON_DATA_MAX_HP));
+    SetMonData(mon, MON_DATA_HP, &hp);
+}
+
+void BufferEmeraldChampionsBondingPreview(void)
+{
+    struct Pokemon *mon = GetEmeraldChampionsServiceMon();
+    gSpecialVar_Result = mon != NULL && gSpecialVar_0x8008 < 3;
+    if (!gSpecialVar_Result)
+        return;
+    static const u8 values[] = {0, FRIENDSHIP_EVO_THRESHOLD, 255};
+    GetMonNickname(mon, gStringVar1);
+    ConvertIntToDecimalStringN(gStringVar2, values[gSpecialVar_0x8008], STR_CONV_MODE_LEFT_ALIGN, 3);
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Set {STR_VAR_1}'s friendship\nto {STR_VAR_2}?"));
+}
+
+void ApplyEmeraldChampionsBonding(void)
+{
+    BufferEmeraldChampionsBondingPreview();
+    if (gSpecialVar_Result)
+    {
+        static const u8 values[] = {0, FRIENDSHIP_EVO_THRESHOLD, 255};
+        SetMonData(GetEmeraldChampionsServiceMon(), MON_DATA_FRIENDSHIP, &values[gSpecialVar_0x8008]);
+    }
 }

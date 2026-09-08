@@ -35,8 +35,6 @@ AI_DOUBLE_BATTLE_TEST("AI will not try to lower opposing stats if target is prot
     PARAMETRIZE { move = MOVE_GROWL; }
     PARAMETRIZE { move = MOVE_SCREECH; }
     PARAMETRIZE { move = MOVE_SAND_ATTACK; }
-    PARAMETRIZE { move = MOVE_SAND_ATTACK; }
-    PARAMETRIZE { move = MOVE_NOBLE_ROAR; }
     PARAMETRIZE { move = MOVE_NOBLE_ROAR; }
 
     GIVEN {
@@ -333,89 +331,91 @@ AI_SINGLE_BATTLE_TEST("AI penalizes Yawn when target can self-status with Flame/
         }
     }
 }
-
-AI_SINGLE_BATTLE_TEST("AI avoids Thunder Wave when it can not paralyse target")
+AI_SINGLE_BATTLE_TEST("AI rejects impossible status moves without penalizing legal ones")
 {
-    enum Species species;
-    enum Ability ability;
-
-    PARAMETRIZE { species = SPECIES_HITMONLEE; ability = ABILITY_LIMBER; }
-    PARAMETRIZE { species = SPECIES_KOMALA; ability = ABILITY_COMATOSE; }
-    PARAMETRIZE { species = SPECIES_NACLI; ability = ABILITY_PURIFYING_SALT; }
-    PARAMETRIZE { species = SPECIES_PIKACHU; ability = ABILITY_STATIC; }
+    static const struct {
+        enum Move move;
+        enum Species species;
+        enum Ability ability;
+    } cases[] = {
+        { MOVE_TOXIC, SPECIES_SNORLAX, ABILITY_IMMUNITY },
+        { MOVE_TOXIC, SPECIES_BULBASAUR, ABILITY_OVERGROW },
+        { MOVE_HYPNOSIS, SPECIES_HOOTHOOT, ABILITY_INSOMNIA },
+        { MOVE_HYPNOSIS, SPECIES_TAPU_FINI, ABILITY_MISTY_SURGE },
+        { MOVE_WILL_O_WISP, SPECIES_BUIZEL, ABILITY_WATER_VEIL },
+        { MOVE_WILL_O_WISP, SPECIES_CHARMANDER, ABILITY_BLAZE },
+        { MOVE_THUNDER_WAVE, SPECIES_HITMONLEE, ABILITY_LIMBER },
+        { MOVE_THUNDER_WAVE, SPECIES_PIKACHU, ABILITY_STATIC },
+    };
+    u32 sample = 0;
+    bool32 immune = FALSE;
+    for (u32 caseIndex = 0; caseIndex < ARRAY_COUNT(cases); caseIndex++)
+        for (u32 immuneCase = 0; immuneCase < 2; immuneCase++)
+            PARAMETRIZE { sample = caseIndex; immune = immuneCase; }
 
     GIVEN {
-        ASSUME(GetMoveEffect(MOVE_THUNDER_WAVE) == EFFECT_NON_VOLATILE_STATUS);
-        ASSUME(GetMoveNonVolatileStatus(MOVE_THUNDER_WAVE) == MOVE_EFFECT_PARALYSIS);
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT);
-        PLAYER(species) { Ability(ability); }
-        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE, MOVE_THUNDER_WAVE); }
+        // Isolate legality, not a preferred strategy: ties select the status
+        // move in slot zero. A missing immunity check then chooses it and fails.
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_OMNISCIENT);
+        TIE_BREAK_SCORE(RNG_AI_SCORE_TIE_SINGLES, SCORE_TIE_LO, 0);
+        PLAYER(immune ? cases[sample].species : SPECIES_WOBBUFFET) {
+            Ability(immune ? cases[sample].ability : ABILITY_SHADOW_TAG);
+            Moves(MOVE_TACKLE, MOVE_CELEBRATE);
+        }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(cases[sample].move, MOVE_TACKLE); }
     } WHEN {
-        TURN { SCORE_EQ(opponent, MOVE_CELEBRATE, MOVE_THUNDER_WAVE); } // Both get -10
+        TURN {
+            MOVE(player, MOVE_CELEBRATE);
+            EXPECT_MOVE(opponent, immune ? MOVE_TACKLE : cases[sample].move);
+        }
     }
 }
 
-AI_SINGLE_BATTLE_TEST("AI avoids Will-o-Wisp when it can not burn target")
+AI_SINGLE_BATTLE_TEST("AI distinguishes legal and illegal item exchanges")
 {
-    enum Species species;
-    enum Ability ability;
-
-    PARAMETRIZE { species = SPECIES_BUIZEL; ability = ABILITY_WATER_VEIL; }
-    PARAMETRIZE { species = SPECIES_DEWPIDER; ability = ABILITY_WATER_BUBBLE; }
-    PARAMETRIZE { species = SPECIES_KOMALA; ability = ABILITY_COMATOSE; }
-    PARAMETRIZE { species = SPECIES_ARCTIBAX; ability = ABILITY_THERMAL_EXCHANGE; }
-    PARAMETRIZE { species = SPECIES_NACLI; ability = ABILITY_PURIFYING_SALT; }
-    PARAMETRIZE { species = SPECIES_CHARMANDER; ability = ABILITY_BLAZE; }
+    static const struct {
+        enum Move move;
+        enum Item userItem, targetItem;
+        enum Ability targetAbility;
+        bool32 substitute, allowed;
+    } cases[] = {
+        { MOVE_TRICK, ITEM_ORAN_BERRY, ITEM_LEFTOVERS, ABILITY_SHADOW_TAG, FALSE, TRUE },
+        { MOVE_BESTOW, ITEM_ORAN_BERRY, ITEM_NONE, ABILITY_SHADOW_TAG, FALSE, TRUE },
+        { MOVE_TRICK, ITEM_NONE, ITEM_NONE, ABILITY_SHADOW_TAG, FALSE, FALSE },
+        { MOVE_BESTOW, ITEM_NONE, ITEM_NONE, ABILITY_SHADOW_TAG, FALSE, FALSE },
+        { MOVE_BESTOW, ITEM_ORAN_BERRY, ITEM_LEFTOVERS, ABILITY_SHADOW_TAG, FALSE, FALSE },
+        { MOVE_TRICK, ITEM_ORANGE_MAIL, ITEM_NONE, ABILITY_SHADOW_TAG, FALSE, FALSE },
+        { MOVE_TRICK, ITEM_ORAN_BERRY, ITEM_ORANGE_MAIL, ABILITY_SHADOW_TAG, FALSE, FALSE },
+        { MOVE_BESTOW, ITEM_ORANGE_MAIL, ITEM_NONE, ABILITY_SHADOW_TAG, FALSE, FALSE },
+        { MOVE_TRICK, ITEM_ORAN_BERRY, ITEM_LEFTOVERS, ABILITY_STICKY_HOLD, FALSE, FALSE },
+        { MOVE_TRICK, ITEM_ORAN_BERRY, ITEM_LEFTOVERS, ABILITY_SHADOW_TAG, TRUE, FALSE },
+        { MOVE_BESTOW, ITEM_ORAN_BERRY, ITEM_NONE, ABILITY_SHADOW_TAG, TRUE, FALSE },
+    };
+    u32 sample = 0;
+    for (u32 caseIndex = 0; caseIndex < ARRAY_COUNT(cases); caseIndex++)
+        PARAMETRIZE { sample = caseIndex; }
 
     GIVEN {
-        ASSUME(GetMoveEffect(MOVE_WILL_O_WISP) == EFFECT_NON_VOLATILE_STATUS);
-        ASSUME(GetMoveNonVolatileStatus(MOVE_WILL_O_WISP) == MOVE_EFFECT_BURN);
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT);
-        PLAYER(species) { Ability(ability); }
-        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE, MOVE_WILL_O_WISP); }
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_OMNISCIENT);
+        TIE_BREAK_SCORE(RNG_AI_SCORE_TIE_SINGLES, SCORE_TIE_LO, 0);
+        PLAYER(SPECIES_WOBBUFFET) {
+            Speed(20);
+            Item(cases[sample].targetItem);
+            Ability(cases[sample].targetAbility);
+            Moves(MOVE_SUBSTITUTE, MOVE_CELEBRATE);
+        }
+        OPPONENT(SPECIES_WOBBUFFET) {
+            Speed(1);
+            Attack(1);
+            Item(cases[sample].userItem);
+            Moves(cases[sample].move, MOVE_TACKLE);
+        }
     } WHEN {
-        TURN { SCORE_EQ(opponent, MOVE_CELEBRATE, MOVE_WILL_O_WISP); } // Both get -10
-    }
-}
-
-AI_SINGLE_BATTLE_TEST("AI avoids hypnosis when it can not put target to sleep")
-{
-    enum Species species;
-    enum Ability ability;
-
-    PARAMETRIZE { species = SPECIES_HOOTHOOT; ability = ABILITY_INSOMNIA; }
-    PARAMETRIZE { species = SPECIES_MANKEY; ability = ABILITY_VITAL_SPIRIT; }
-    PARAMETRIZE { species = SPECIES_KOMALA; ability = ABILITY_COMATOSE; }
-    PARAMETRIZE { species = SPECIES_NACLI; ability = ABILITY_PURIFYING_SALT; }
-
-    GIVEN {
-        ASSUME(GetMoveEffect(MOVE_HYPNOSIS) == EFFECT_NON_VOLATILE_STATUS);
-        ASSUME(GetMoveNonVolatileStatus(MOVE_HYPNOSIS) == MOVE_EFFECT_SLEEP);
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT);
-        PLAYER(species) { Ability(ability); }
-        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE, MOVE_HYPNOSIS); }
-    } WHEN {
-        TURN { SCORE_EQ(opponent, MOVE_CELEBRATE, MOVE_HYPNOSIS); } // Both get -10
-    }
-}
-
-AI_SINGLE_BATTLE_TEST("AI avoids toxic when it can not poison target")
-{
-    enum Species species;
-    enum Ability ability;
-
-    PARAMETRIZE { species = SPECIES_SNORLAX; ability = ABILITY_IMMUNITY; }
-    PARAMETRIZE { species = SPECIES_KOMALA; ability = ABILITY_COMATOSE; }
-    PARAMETRIZE { species = SPECIES_NACLI; ability = ABILITY_PURIFYING_SALT; }
-    PARAMETRIZE { species = SPECIES_BULBASAUR; ability = ABILITY_OVERGROW; }
-
-    GIVEN {
-        ASSUME(GetMoveEffect(MOVE_TOXIC) == EFFECT_NON_VOLATILE_STATUS);
-        ASSUME(GetMoveNonVolatileStatus(MOVE_TOXIC) == MOVE_EFFECT_TOXIC);
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT);
-        PLAYER(species) { Ability(ability); }
-        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE, MOVE_TOXIC); }
-    } WHEN {
-        TURN { SCORE_EQ(opponent, MOVE_CELEBRATE, MOVE_TOXIC); } // Both get -10
+        if (cases[sample].substitute)
+            TURN { MOVE(player, MOVE_SUBSTITUTE); }
+        TURN {
+            MOVE(player, MOVE_CELEBRATE);
+            EXPECT_MOVE(opponent, cases[sample].allowed ? cases[sample].move : MOVE_TACKLE);
+        }
     }
 }

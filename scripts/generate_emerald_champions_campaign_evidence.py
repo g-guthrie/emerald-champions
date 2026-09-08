@@ -254,15 +254,13 @@ def legendary_rows() -> list[dict[str, str]]:
         line = raw.strip()
         if not line or line.startswith("//") or line.startswith("#"):
             continue
-        macro = re.match(r"(WILD_SIGN|VISIBLE_SIGN|OTHER_SIGN|ORDINARY_WILD_SIGN)\((.*)\),", line)
+        macro = re.match(r"(LANDMARK_SIGN|VISIBLE_SIGN|OTHER_SIGN|ORDINARY_WILD_SIGN)\((.*)\),", line)
         if not macro:
             continue
         kind, body = macro.groups()
         parts = [part.strip() for part in body.split(",")]
         row = {"kind": kind, "line": str(line_number), "id": parts[0], "species": parts[1]}
-        if kind == "WILD_SIGN":
-            row.update(map=parts[2], area=parts[3], odds=parts[4], badges=parts[5], offset=parts[6], required=parts[7], flag=parts[8])
-        elif kind == "VISIBLE_SIGN":
+        if kind in {"LANDMARK_SIGN", "VISIBLE_SIGN"}:
             row.update(map=parts[2], badges=parts[3], offset=parts[4], required=parts[5], flag=parts[6])
         elif kind == "ORDINARY_WILD_SIGN":
             row.update(map=parts[2], badges="0", offset="0", required="NONE", flag="none")
@@ -379,10 +377,10 @@ def write_report(check: bool = False) -> None:
         "",
     ]
     for row in signs:
-        if row["kind"] == "WILD_SIGN":
+        if row["kind"] == "LANDMARK_SIGN":
             detail = (
-                f"conditional wild at {display(row['map'])}; method {row['area']}; odds parameter {row['odds']}; "
-                f"minimum badges {row['badges']}; level offset {row['offset']}; requires {display(row['required'])} and {row['flag']}"
+                f"landmark interaction at {display(row['map'])}; minimum badges {row['badges']}; "
+                f"level offset {row['offset']}; discovery connection {display(row['required'])}; {row['flag']}"
             )
         elif row["kind"] == "VISIBLE_SIGN":
             detail = (

@@ -43,6 +43,9 @@ struct TrainerHillChallenge
 
 extern u32 *gTrainerHillVBlankCounter;
 
+extern const u8 TrainerHill_EventScript_GenerationFailed[];
+void TrainerHillHasPendingPrize(void);
+void AbortTrainerHillChallenge(void);
 void CallTrainerHillFunction(void);
 void ResetTrainerHillResults(void);
 enum TrainerClassID GetTrainerHillOpponentClass(u16 trainerId);
@@ -64,8 +67,7 @@ u16 LocalIdToHillTrainerId(u8 localId);
 bool8 GetHillTrainerFlag(u8 objectEventId);
 void SetHillTrainerFlag(void);
 const u8 *GetTrainerHillTrainerScript(void);
-void FillHillTrainerParty(void);
-void FillHillTrainersParties(void);
+bool32 FillHillTrainersParties(void);
 u8 GetTrainerEncounterMusicIdInTrainerHill(u16 trainerId);
 u8 GetNumFloorsInTrainerHillChallenge(void);
 void TryLoadTrainerHillEReaderPalette(void);

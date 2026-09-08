@@ -4,6 +4,8 @@
 #include "battle.h"
 #include "battle_frontier.h"
 #include "battle_util.h"
+#include "battle_tent.h"
+#include "caps.h"
 #include "champions_circuit.h"
 #include "data.h"
 #include "difficulty.h"
@@ -85,6 +87,12 @@ struct CircuitMovePool
 };
 
 static EWRAM_DATA bool8 sExhaustedBaseDex[NATIONAL_DEX_COUNT + 1];
+static EWRAM_DATA bool8 sTentActive;
+static EWRAM_DATA u8 sTentId;
+static EWRAM_DATA u8 sTentWins;
+static EWRAM_DATA u8 sTentCap;
+
+static const u8 sCircuitRecordUnrecorded[] = _("--");
 
 static const u8 sCircuitStyleShowdown[] = _("a balanced doubles team");
 static const u8 sCircuitStyleRain[] = _("a rain offense team");
@@ -1430,66 +1438,13 @@ static bool32 FindAbilitySlot(enum Species species, enum Ability ability, u32 *s
     return FALSE;
 }
 
-static void OptimizeCircuitBellyDrumHp(struct CircuitGeneratedSet *set, enum Species species, u8 level)
-{
-    // Champions fixes IVs at 31. At level 100, ordinary HP investments all
-    // yield odd HP except 32 points (whose investment caps at 63). Therefore
-    // simply lowering an IV, as mainline randbats do, cannot fix the berry.
-    static const u8 donors[] = {STAT_SPATK, STAT_SPDEF, STAT_DEF, STAT_ATK, STAT_SPEED};
-    static const u8 recipients[] = {STAT_SPEED, STAT_ATK, STAT_DEF, STAT_SPDEF, STAT_SPATK};
-    if (set->item != ITEM_SITRUS_BERRY || !SetHasMove(set, MOVE_BELLY_DRUM))
-        return;
-    for (s32 distance = 0; distance <= 32; distance++)
-    {
-        for (s32 direction = -1; direction <= 1; direction += 2)
-        {
-            s32 hpPoints = set->statPoints[STAT_HP] + direction * distance;
-            s32 remaining = direction * distance;
-            u8 points[NUM_STATS];
-            u32 hp;
-            if (hpPoints < 0 || hpPoints > 32)
-                continue;
-            hp = ((2 * GetSpeciesBaseHP(species) + 31 + min(2 * hpPoints, 63)) * level) / 100 + level + 10;
-            if (hp & 1)
-                continue;
-            memcpy(points, set->statPoints, sizeof(points));
-            points[STAT_HP] = hpPoints;
-            for (u32 i = 0; i < ARRAY_COUNT(donors) && remaining; i++)
-            {
-                u32 stat = remaining > 0 ? donors[i] : recipients[i];
-                if (remaining > 0)
-                {
-                    u32 transfer = min(remaining, points[stat]);
-                    points[stat] -= transfer;
-                    remaining -= transfer;
-                }
-                else
-                {
-                    u32 transfer = min(-remaining, 32 - points[stat]);
-                    points[stat] += transfer;
-                    remaining += transfer;
-                }
-            }
-            if (remaining == 0)
-            {
-                memcpy(set->statPoints, points, sizeof(points));
-                return;
-            }
-        }
-    }
-}
-
 static void CreateCircuitMon(struct Pokemon *mon, const struct CircuitGeneratedSet *set, u8 level)
 {
     const struct ShowdownCircuitVariant *variant = &gShowdownCircuitVariants[set->variantIndex];
-    struct CircuitGeneratedSet optimized = *set;
     u8 ppBonuses = 0;
     u8 iv = MAX_PER_STAT_IVS;
     u32 abilitySlot = 0;
     u8 nature = set->nature;
-
-    OptimizeCircuitBellyDrumHp(&optimized, variant->partySpecies, level);
-    set = &optimized;
 
     // Never index a level-100 experience table with an overlevel opponent.
     CreateMon(mon, variant->partySpecies, min(level, MAX_LEVEL), Random32(), OTID_STRUCT_RANDOM_NO_SHINY);
@@ -1527,12 +1482,11 @@ static void CreateCircuitMon(struct Pokemon *mon, const struct CircuitGeneratedS
     CalculateMonStats(mon);
 }
 
-static void NormalizeCircuitPlayerParty(void)
+static void NormalizeCircuitPlayerParty(u8 level)
 {
     for (u32 i = 0; i < PARTY_SIZE; i++)
     {
         enum Species species = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES_OR_EGG);
-        u8 level = CIRCUIT_BASE_LEVEL;
         u32 exp;
 
         if (species == SPECIES_NONE || species == SPECIES_EGG)
@@ -1556,6 +1510,8 @@ void ChampionsCircuitCanEnter(void)
     for (u32 i = 0; i < PARTY_SIZE; i++)
     {
         if (GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES_OR_EGG) == SPECIES_EGG
+         || GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SANITY_IS_BAD_EGG)
+         || !IsSpeciesEnabled(GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES))
          || GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_HP) == 0)
         {
             gSpecialVar_Result = FALSE;
@@ -1569,13 +1525,12 @@ void ChampionsCircuitBegin(void)
     SavePlayerParty();
     VarSet(VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, 0);
     VarSet(VAR_CHAMPIONS_CIRCUIT_ACTIVE, TRUE);
-    NormalizeCircuitPlayerParty();
+    NormalizeCircuitPlayerParty(CIRCUIT_BASE_LEVEL);
 }
 
-void ChampionsCircuitGenerateOpponent(void)
+static bool32 GenerateCompetitionOpponent(u16 wins, u8 fixedLevel)
 {
     struct CircuitTeamState team;
-    u16 wins = VarGet(VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS);
     bool32 generated = FALSE;
 
     for (u32 attempt = 0; attempt < 64 && !generated; attempt++)
@@ -1583,7 +1538,7 @@ void ChampionsCircuitGenerateOpponent(void)
     if (!generated)
     {
         gSpecialVar_Result = 0;
-        return;
+        return FALSE;
     }
 
     ZeroEnemyPartyMons();
@@ -1591,7 +1546,7 @@ void ChampionsCircuitGenerateOpponent(void)
     // preserves its lead/Illusion convention.
     for (u32 slot = 0; slot < PARTY_SIZE; slot++)
     {
-        u8 level = GetChampionsCircuitOpponentLevel(wins, slot);
+        u8 level = fixedLevel ? fixedLevel : GetChampionsCircuitOpponentLevel(wins, slot);
         CreateCircuitMon(&gParties[B_TRAINER_OPPONENT_A][slot], &team.sets[PARTY_SIZE - 1 - slot], level);
     }
     CalculateEnemyPartyCount();
@@ -1608,8 +1563,84 @@ void ChampionsCircuitGenerateOpponent(void)
     else
         StringCopy(gStringVar1, sCircuitStyleShowdown);
     ConvertIntToDecimalStringN(gStringVar2, (u32)wins + 1, STR_CONV_MODE_LEFT_ALIGN, 5);
-    ConvertIntToDecimalStringN(gStringVar3, GetChampionsCircuitOpponentLevel(wins, 0), STR_CONV_MODE_LEFT_ALIGN, 3);
+    ConvertIntToDecimalStringN(gStringVar3, fixedLevel ? fixedLevel : GetChampionsCircuitOpponentLevel(wins, 0), STR_CONV_MODE_LEFT_ALIGN, 3);
     gSpecialVar_Result = PARTY_SIZE;
+    return TRUE;
+}
+
+void ChampionsCircuitGenerateOpponent(void)
+{
+    GenerateCompetitionOpponent(VarGet(VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS), 0);
+}
+
+bool32 CreateChampionsExhibitionParty(u8 level)
+{
+    return GenerateCompetitionOpponent(0, level);
+}
+
+bool32 IsChampionsTentBattle(void)
+{
+    return sTentActive && gMain.inBattle;
+}
+
+void ChampionsTentCanEnter(void)
+{
+    ChampionsCircuitCanEnter();
+}
+
+void ChampionsTentBegin(void)
+{
+    SavePlayerParty();
+    sTentId = gSpecialVar_0x8004;
+    sTentWins = 0;
+    sTentCap = min(MAX_LEVEL, GetCurrentLevelCap());
+    sTentActive = TRUE;
+    NormalizeCircuitPlayerParty(sTentCap);
+}
+
+void ChampionsTentGenerateOpponent(void)
+{
+    GenerateCompetitionOpponent(sTentWins, max(1, sTentCap - GetTrainerLevelReduction()));
+}
+
+void ChampionsTentHandleBattleResult(void)
+{
+    gSpecialVar_Result = 0;
+    if (!sTentActive || gBattleOutcome != B_OUTCOME_WON)
+        return;
+    HealPlayerParty();
+    sTentWins++;
+    if (sTentWins == 3)
+    {
+        SetChampionsTentPrize(sTentId);
+        gSpecialVar_Result = 2;
+    }
+    else
+    {
+        gSpecialVar_Result = 1;
+    }
+}
+
+void ChampionsTentEnd(void)
+{
+    if (sTentActive)
+    {
+        LoadPlayerParty();
+        CalculatePlayerPartyCount();
+        sTentActive = FALSE;
+    }
+    gSpecialVar_0x8004 = sTentId;
+}
+
+void ChampionsCircuitBufferRecord(void)
+{
+    u16 best = VarGet(VAR_EC_CIRCUIT_BEST_WINS);
+    ConvertIntToDecimalStringN(gStringVar1, VarGet(VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS), STR_CONV_MODE_LEFT_ALIGN, 5);
+    if (best != 0)
+        ConvertIntToDecimalStringN(gStringVar2, best, STR_CONV_MODE_LEFT_ALIGN, 5);
+    else
+        StringCopy(gStringVar2, sCircuitRecordUnrecorded);
+    ConvertIntToDecimalStringN(gStringVar3, VarGet(VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS), STR_CONV_MODE_LEFT_ALIGN, 5);
 }
 
 // Every Circuit victory funds the Battle Point exchange. The old Frontier
@@ -1650,6 +1681,7 @@ void ChampionsCircuitHandleBattleResult(void)
 
         if (wins != 0xFFFF)
             VarSet(VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, wins + 1);
+        VarSet(VAR_EC_CIRCUIT_BEST_WINS, max(VarGet(VAR_EC_CIRCUIT_BEST_WINS), VarGet(VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS)));
         if (total != 0xFFFF)
             VarSet(VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS, total + 1);
         points = AwardCircuitBattlePoints(wins, min((u32)total + 1, 0xFFFF));

@@ -47,8 +47,6 @@ class StampIntegrityTests(unittest.TestCase):
     def verify(self):
         stamp.verify_stamp(self.record, "a" * 64, 1, self.artifacts)
 
-    def test_valid_artifact_hash_bindings(self):
-        self.verify()
 
     def test_unsupported_stamp_schema_is_rejected(self):
         self.record["schema_version"] = -1

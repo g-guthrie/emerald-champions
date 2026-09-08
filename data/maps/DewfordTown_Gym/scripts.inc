@@ -285,48 +285,57 @@ DewfordTown_Gym_EventScript_GymStatue::
 	end
 
 DewfordTown_Gym_Text_GymGuideAdvice:
-	.string "Hey, how's it going, CHAMPION-\n"
-	.string "bound {PLAYER}?\p"
-	.string "DEWFORD's GYM LEADER BRAWLY commands\n"
-	.string "FIGHTING-type POKéMON.\p"
-	.string "Going against him with NORMAL-type\n"
-	.string "POKéMON is asking for trouble.\p"
-	.string "FIGHTING POKéMON will lay a serious\n"
-	.string "smack down on NORMAL POKéMON,\l"
-	.string "so be careful!\p"
-	.string "What's worse, the GYM is as dark as\n"
-	.string "the ocean floor.\p"
-	.string "But it will get brighter after defeating\n"
-	.string "the TRAINERS in your way.\p"
-	.string "Hey, okay, go for it!$"
+	.string "BRAWLY brings a powerful Fighting\n"
+	.string "team, but his partners do more\n"
+	.string "than attack.\p"
+	.string "PACHIRISU draws single-target\n"
+	.string "moves aside. His fighters use\n"
+	.string "speed, priority and support to\n"
+	.string "create openings.\p"
+	.string "Normal Pokémon risk Fighting\n"
+	.string "damage, but a useful support role\n"
+	.string "can still earn a place on your\n"
+	.string "team.\p"
+	.string "The GYM grows brighter as you\n"
+	.string "defeat its trainers. Make every\n"
+	.string "action count!$"
 
 DewfordTown_Gym_Text_GymGuidePostVictory:
 	.string "Whoah! It's turned too bright in here!\p"
 	.string "Your future is bright, too!$"
 
 DewfordTown_Gym_Text_TakaoIntro:
-	.string "GRAPPLOCT locks you down. WOBBUFFET\n"
-	.string "makes sure you cannot leave at all.\p"
-	.string "Win here, or do not win!$"
+	.string "GRAPPLOCT can hold a target in\n"
+	.string "place. WOBBUFFET makes switching\n"
+	.string "difficult too.\p"
+	.string "Let us see how you handle the\n"
+	.string "pressure!$"
 
 DewfordTown_Gym_Text_TakaoDefeat:
-	.string "You broke my critical window!$"
+	.string "You won a tough battle!$"
 
 DewfordTown_Gym_Text_TakaoPostBattle:
-	.string "Preserve FAIRY or ICE pressure for the\n"
-	.string "rare Dragon waiting behind my fighters.$"
+	.string "HITMONLEE's WHITE HERB can clear\n"
+	.string "its stat drops and activate\n"
+	.string "UNBURDEN.\p"
+	.string "Speed can change in the middle of\n"
+	.string "a turn. Watch the whole board.$"
 
 DewfordTown_Gym_Text_JocelynIntro:
-	.string "TAILWIND goes up before you move,\n"
-	.string "and everything behind it runs you down.\p"
-	.string "Four turns. Survive them!$"
+	.string "TAILWIND can change the race in an\n"
+	.string "instant.\p"
+	.string "Four turns of pressure. Can your\n"
+	.string "team handle them?$"
 
 DewfordTown_Gym_Text_JocelynDefeat:
-	.string "You never fed the pressure I needed!$"
+	.string "You took this battle!$"
 
 DewfordTown_Gym_Text_JocelynPostBattle:
-	.string "Attack around MAGIC BOUNCE instead of\n"
-	.string "handing NATU your best status move.$"
+	.string "TAILWIND lasts four turns.\n"
+	.string "BRELOOM's POISON HEAL can keep it\n"
+	.string "going while the field changes.\p"
+	.string "Plan for the partners still in\n"
+	.string "reserve.$"
 
 DewfordTown_Gym_Text_LauraIntro:
 	.string "FAKE OUT steals the first turn, and\n"
@@ -334,7 +343,7 @@ DewfordTown_Gym_Text_LauraIntro:
 	.string "Can you afford to blink?$"
 
 DewfordTown_Gym_Text_LauraDefeat:
-	.string "You denied both of my free turns!$"
+	.string "That was a hard-fought win!$"
 
 DewfordTown_Gym_Text_LauraPostBattle:
 	.string "Blank FAKE OUT, pressure the Flame Orb,\n"
@@ -346,7 +355,7 @@ DewfordTown_Gym_Text_LilithIntro:
 	.string "Weaken me and I only grow!$"
 
 DewfordTown_Gym_Text_LilithDefeat:
-	.string "You read every discipline correctly!$"
+	.string "You brought a winning team!$"
 
 DewfordTown_Gym_Text_LilithPostBattle:
 	.string "A paired battle is two complete teams,\n"
@@ -358,7 +367,7 @@ DewfordTown_Gym_Text_BrendenIntro:
 	.string "There is no safe angle here!$"
 
 DewfordTown_Gym_Text_BrendenDefeat:
-	.string "You changed answers with the damage!$"
+	.string "We gave it everything!$"
 
 DewfordTown_Gym_Text_BrendenPostBattle:
 	.string "Do not let one physical wall become your\n"
@@ -370,11 +379,14 @@ DewfordTown_Gym_Text_CristianIntro:
 	.string "Hurt us and we sharpen!$"
 
 DewfordTown_Gym_Text_CristianDefeat:
-	.string "You changed form without losing focus!$"
+	.string "Our formation could not hold!$"
 
 DewfordTown_Gym_Text_CristianPostBattle:
-	.string "Stop RIOLU's stance, respect the LEEK,\n"
-	.string "then contain THROH's committed power.$"
+	.string "FALINKS can power up JUSTIFIED\n"
+	.string "before its partner attacks.\p"
+	.string "GALLADE and LUCARIO can both use\n"
+	.string "that opening. Always check who is\n"
+	.string "active.$"
 
 DewfordTown_Gym_Text_BrawlyIntro:
 	.string "Back from SLATEPORT? Right on!\p"

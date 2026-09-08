@@ -1,4 +1,4 @@
-"""Exercise every land and Dive slot roll and enforce the 4% minimum."""
+"""Exercise every land and Dive slot roll against the currently authored weights."""
 import json
 import re
 import shutil
@@ -36,7 +36,7 @@ static bool8 sSweetScentInverted;
 static unsigned Random(void) { return nextRoll; }
 ''' + defines + "\n" + selector + r'''
 int main(void) {
-    const unsigned expected[12] = {14,12,11,10,9,9,8,7,6,5,5,4};
+    const unsigned expected[12] = {CURRENT_RATES};
     for (unsigned dive = 0; dive < 2; dive++) {
         gMapHeader.mapType = dive ? MAP_TYPE_UNDERWATER : 1;
         for (unsigned reversed = 0; reversed < 2; reversed++) {
@@ -53,6 +53,7 @@ int main(void) {
     }
 }
 '''
+        harness = harness.replace("CURRENT_RATES", ",".join(map(str, rates)))
         with tempfile.TemporaryDirectory() as folder:
             path = Path(folder)
             (path / "check.c").write_text(harness)

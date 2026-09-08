@@ -2491,7 +2491,7 @@ static u32 DoesPartyHaveBattleReadyMons(enum BattleTrainer trainer)
     return FALSE;
 }
 
-static bool32 WillPlayerWhiteOutIfPartnerWinsAlone()
+bool32 WillPlayerWhiteOutIfPartnerWinsAlone(void)
 {
     if (GetConfig(B_MULTI_BATTLE_WHITEOUT) <= GEN_3)
         return TRUE;

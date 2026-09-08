@@ -111,7 +111,7 @@ static const u8 sText_UsedPokeVial[] = _("{PLAYER} used the Poké Vial.\nThe par
 static const u8 sText_RepelSprayEnded[] = _("\pThe Repel Spray's effect ended.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_RepelSprayOn[] = _("{PLAYER} misted the air.\pWild Pokémon will keep their distance\nfor the next 500 steps.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_RepelSprayOff[] = _("{PLAYER} let the mist settle.\pThe grass stirs. Wild Pokémon are\ncoming back.{PAUSE_UNTIL_PRESS}");
-static const u8 sText_LevelerNoEffect[] = _("Every Pokémon in the party is\nalready at the current level cap.{PAUSE_UNTIL_PRESS}");
+static const u8 sText_LevelerNoEffect[] = _("Your party is at the current cap.\nNo Pokémon is ready to evolve.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_FlightBeaconLocked[] = _("The Flight Beacon can't reach a flier\nyet. Earn the FEATHER BADGE first.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_FlightBeaconCantHere[] = _("A flier can't pick you up here.{PAUSE_UNTIL_PRESS}");
 
@@ -1493,13 +1493,9 @@ static void ItemUseOnFieldCB_PokeVial(u8 taskId)
 
 static bool32 CanLevelPartyToCap(void)
 {
-    u32 levelCap = min(GetCurrentLevelCap(), MAX_LEVEL);
-
     for (u32 i = 0; i < gPartiesCount[B_TRAINER_PLAYER]; i++)
     {
-        if (GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES) != SPECIES_NONE
-         && !GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_IS_EGG)
-         && GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_LEVEL) < levelCap)
+        if (IsMonEligibleForLeveler(&gParties[B_TRAINER_PLAYER][i]))
             return TRUE;
     }
 

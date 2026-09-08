@@ -245,12 +245,12 @@ static void HandleInputChooseAction(enum BattlerId battler)
     else
         gPlayerDpadHoldFrames = 0;
 
-    // Emerald Champions: R opens the foes' types from the action menu as well, so the
+    // Emerald Champions: L opens the foes' types from the action menu as well, so the
     // panel is reachable before choosing FIGHT (which is where it is wanted in wild
     // battles). Closing it repaints the action menu through its normal handler.
     if (gBattleStruct->foeTypesSubmenu)
     {
-        if (JOY_NEW(R_BUTTON) || JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
+        if (JOY_NEW(L_BUTTON) || JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
         {
             gBattleStruct->foeTypesSubmenu = FALSE;
             gBattleStruct->descriptionSubmenu = FALSE;
@@ -263,7 +263,7 @@ static void HandleInputChooseAction(enum BattlerId battler)
         }
         return;
     }
-    if (JOY_NEW(R_BUTTON))
+    if (JOY_NEW(L_BUTTON) && gSaveBlock2Ptr->optionsButtonMode != OPTIONS_BUTTON_MODE_L_EQUALS_A)
     {
         PlaySE(SE_SELECT);
         // Reuse the native move-description window on the action-menu page.
@@ -933,7 +933,7 @@ void HandleInputChooseMove(enum BattlerId battler)
     }
     else if (gBattleStruct->descriptionSubmenu)
     {
-        if (JOY_NEW(B_MOVE_DESCRIPTION_BUTTON) || JOY_NEW(R_BUTTON) || JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
+        if (JOY_NEW(B_MOVE_DESCRIPTION_BUTTON) || JOY_NEW(L_BUTTON) || JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
         {
             gBattleStruct->descriptionSubmenu = FALSE;
             gBattleStruct->foeTypesSubmenu = FALSE;
@@ -957,7 +957,7 @@ void HandleInputChooseMove(enum BattlerId battler)
     else if (JOY_NEW(B_LAST_USED_BALL_BUTTON) && !gBattleStruct->zmove.viewing && CanThrowLastUsedBall()
         && !(B_LAST_USED_BALL_BUTTON == L_BUTTON && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A))
     {
-        // Emerald Champions: in a wild battle L throws the last used Ball straight from
+        // Emerald Champions: in a wild battle R throws the last used Ball straight from
         // the move menu. Cancel back to the action menu and let it perform the throw.
         PlaySE(SE_SELECT);
         gBattleStruct->throwBallFromMoveMenu = TRUE;
@@ -970,12 +970,13 @@ void HandleInputChooseMove(enum BattlerId battler)
     else if (JOY_NEW(B_MOVE_DESCRIPTION_BUTTON) &&
         !(B_MOVE_DESCRIPTION_BUTTON == L_BUTTON && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A))
     {
-        // The L-button hint sprite overlaps the panel; hide it while the panel is up.
+        // The R-button hint sprite overlaps the panel; hide it while the panel is up.
         TryToHideMoveInfoWindow();
         gBattleStruct->descriptionSubmenu = TRUE;
         TryMoveSelectionDisplayMoveDescription(battler);
     }
-    else if (JOY_NEW(R_BUTTON) && !gBattleStruct->zmove.viewing)
+    else if (JOY_NEW(L_BUTTON) && !gBattleStruct->zmove.viewing
+        && gSaveBlock2Ptr->optionsButtonMode != OPTIONS_BUTTON_MODE_L_EQUALS_A)
     {
         TryToHideMoveInfoWindow();
         OpenFoeTypesSubmenu(battler);
@@ -1129,7 +1130,7 @@ void HandleMoveSwitching(enum BattlerId battler)
         MoveSelectionDestroyCursorAt(gMultiUsePlayerCursor);
         MoveSelectionCreateCursorAt(gMoveSelectionCursor[battler], 0);
 
-        if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
+        if (IS_FRLG && gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
             gBattlerControllerFuncs[battler] = OakOldManHandleInputChooseMove;
         else
             gBattlerControllerFuncs[battler] = HandleInputChooseMove;
@@ -1783,7 +1784,7 @@ static void OpenFoeTypesSubmenu(enum BattlerId battler)
 
 // Emerald Champions: the same panel as the move description, listing each
 // opposing Pokémon and its current types ("Wingull        Water/Flying").
-// Opened with R during move selection (Birch mentions it). The types are
+// Opened with L during move selection (Birch mentions it). The types are
 // right-aligned to the panel edge: the panel is 144 px wide in FONT_NARROW,
 // the widest species name is 59 px and the widest type pair 82 px, so the
 // two never collide and nothing runs off the right side.

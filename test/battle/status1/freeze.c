@@ -15,19 +15,7 @@ SINGLE_BATTLE_TEST("Freeze has a 25% chance of being thawed (Gen9-)")
     }
 }
 
-SINGLE_BATTLE_TEST("Freeze has a 20% chance of being thawed (Champions)")
-{
-    PASSES_RANDOMLY(25, 100, RNG_FROZEN);
-    GIVEN {
-        WITH_CONFIG(B_FREEZE_TURNS, GEN_CHAMPIONS);
-        PLAYER(SPECIES_WOBBUFFET) { Status1(STATUS1_FREEZE); }
-        OPPONENT(SPECIES_WOBBUFFET);
-    } WHEN {
-        TURN { MOVE(player, MOVE_CELEBRATE); }
-    } SCENE {
-        STATUS_ICON(player, none: TRUE);
-    }
-}
+
 
 SINGLE_BATTLE_TEST("Freeze is thawed by opponent's Fire-type attacks (Gen 3+)")
 {

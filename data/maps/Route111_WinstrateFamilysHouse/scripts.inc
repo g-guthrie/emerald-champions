@@ -13,15 +13,15 @@ Route111_WinstrateFamilysHouse_EventScript_Victoria::
 	lock
 	faceplayer
 	setvar VAR_0x8008, LOCALID_WINSTRATE_HOUSE_VICTORIA
-	goto_if_set FLAG_RECEIVED_WINSTRATE_KANGASKHANITE, Route111_WinstrateFamilysHouse_EventScript_ReceivedKangaskhanite
-	msgbox Route111_WinstrateFamilysHouse_Text_LikeYouToHaveKangaskhanite, MSGBOX_DEFAULT
-	giveitem ITEM_KANGASKHANITE
+	goto_if_set FLAG_EC_WINSTRATE_GARDEN_BERRIES, Route111_WinstrateFamilysHouse_EventScript_ReceivedBerries
+	msgbox Route111_WinstrateFamilysHouse_Text_LikeYouToHaveBerries, MSGBOX_DEFAULT
+	giveitem ITEM_RAZZ_BERRY, 5
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_WINSTRATE_KANGASKHANITE
+	setflag FLAG_EC_WINSTRATE_GARDEN_BERRIES
 	goto Route111_WinstrateFamilysHouse_EventScript_FaceOriginalDirection
 	end
 
-Route111_WinstrateFamilysHouse_EventScript_ReceivedKangaskhanite::
+Route111_WinstrateFamilysHouse_EventScript_ReceivedBerries::
 	msgbox Route111_WinstrateFamilysHouse_Text_PassionateAboutBattles, MSGBOX_DEFAULT
 	goto Route111_WinstrateFamilysHouse_EventScript_FaceOriginalDirection
 	end
@@ -64,15 +64,15 @@ Route111_WinstrateFamilysHouse_Text_MySonIsStrongerThanYou:
 	.string "He even took the POKéMON LEAGUE\n"
 	.string "challenge, I'll have you know.$"
 
-Route111_WinstrateFamilysHouse_Text_LikeYouToHaveKangaskhanite:
+Route111_WinstrateFamilysHouse_Text_LikeYouToHaveBerries:
 	.string "You defeated all four of us without\n"
 	.string "a chance to rest. That's remarkable!\p"
-	.string "Our family guarded this KANGASKHANITE.\n"
-	.string "A Trainer like you has earned it.$"
+	.string "Take these berries from our garden.\n"
+	.string "You have earned a little harvest.$"
 
 Route111_WinstrateFamilysHouse_Text_PassionateAboutBattles:
-	.string "KANGASKHANITE suits a Trainer who can\n"
-	.string "survive a whole family without resting.$"
+	.string "Plant those berries or save them for\n"
+	.string "the BERRY MASTER on ROUTE 123.$"
 
 Route111_WinstrateFamilysHouse_Text_StrongerFamilyMembers:
 	.string "Mommy is stronger than Daddy.\p"

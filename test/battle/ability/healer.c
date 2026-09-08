@@ -98,4 +98,3 @@ DOUBLE_BATTLE_TEST("Healer cures status condition before burn or poison damage i
 }
 
 // Triple battles
-TO_DO_BATTLE_TEST("Healer has a 30% chance of curing each of its ally's status conditions independently");

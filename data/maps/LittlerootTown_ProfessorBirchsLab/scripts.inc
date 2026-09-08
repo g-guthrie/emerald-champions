@@ -5,7 +5,6 @@ LittlerootTown_ProfessorBirchsLab_MapScripts::
 	.byte 0
 
 	@ State descriptions for VAR_BIRCH_POSTGAME_RESEARCH_STATE
-	@ The numeric states are preserved for old-save compatibility.
 	@ 1: Beat Elite Four, final field-note sync ready
 	@ 2: Synchronized the postgame research notes
 	@ 3: Left lab after the research sync
@@ -23,7 +22,6 @@ LittlerootTown_ProfessorBirchsLab_MapScripts::
 LittlerootTown_ProfessorBirchsLab_OnTransition:
 	call Common_EventScript_SetupRivalGfxId
 	call ProfBirch_EventScript_UpdateLocation
-	call_if_ge VAR_BIRCH_POSTGAME_RESEARCH_STATE, 6, LittlerootTown_ProfessorBirchsLab_EventScript_MigrateLegacyResearchReward
 	goto_if_ge VAR_BIRCH_POSTGAME_RESEARCH_STATE, 6, LittlerootTown_ProfessorBirchsLab_EventScript_SetAfterResearchRewardLayout
 	goto_if_ge VAR_BIRCH_POSTGAME_RESEARCH_STATE, 4, LittlerootTown_ProfessorBirchsLab_EventScript_SetResearchRewardLayout
 	goto_if_eq VAR_BIRCH_POSTGAME_RESEARCH_STATE, 3, LittlerootTown_ProfessorBirchsLab_EventScript_CheckReadyForResearchReward
@@ -49,27 +47,6 @@ LittlerootTown_ProfessorBirchsLab_EventScript_SetAfterResearchRewardLayout::
 	setobjectmovementtype LOCALID_BIRCHS_LAB_RIVAL, MOVEMENT_TYPE_WANDER_UP_AND_DOWN
 	setobjectxyperm LOCALID_BIRCHS_LAB_RIVAL, 5, 10
 	end
-
-@ State 6 used to mean that an old save had claimed one Johto starter.  The
-@ value remains valid, but those players must still be able to claim the new
-@ finite research tools.  Key Items cannot be discarded, so owning all five is
-@ a durable completion marker and needs no additional flag.
-LittlerootTown_ProfessorBirchsLab_EventScript_MigrateLegacyResearchReward::
-	checkitem ITEM_DNA_SPLICERS, 1
-	goto_if_eq VAR_RESULT, FALSE, LittlerootTown_ProfessorBirchsLab_EventScript_ReopenResearchReward
-	checkitem ITEM_ZYGARDE_CUBE, 1
-	goto_if_eq VAR_RESULT, FALSE, LittlerootTown_ProfessorBirchsLab_EventScript_ReopenResearchReward
-	checkitem ITEM_N_SOLARIZER, 1
-	goto_if_eq VAR_RESULT, FALSE, LittlerootTown_ProfessorBirchsLab_EventScript_ReopenResearchReward
-	checkitem ITEM_N_LUNARIZER, 1
-	goto_if_eq VAR_RESULT, FALSE, LittlerootTown_ProfessorBirchsLab_EventScript_ReopenResearchReward
-	checkitem ITEM_REINS_OF_UNITY, 1
-	goto_if_eq VAR_RESULT, FALSE, LittlerootTown_ProfessorBirchsLab_EventScript_ReopenResearchReward
-	return
-
-LittlerootTown_ProfessorBirchsLab_EventScript_ReopenResearchReward::
-	setvar VAR_BIRCH_POSTGAME_RESEARCH_STATE, 5
-	return
 
 LittlerootTown_ProfessorBirchsLab_OnWarp:
 	map_script_2 VAR_BIRCH_LAB_STATE, 2, LittlerootTown_ProfessorBirchsLab_EventScript_SetPlayerPosForReceiveStarter
@@ -116,43 +93,51 @@ LittlerootTown_ProfessorBirchsLab_OnFrame:
 	map_script_2 VAR_BIRCH_POSTGAME_RESEARCH_STATE, 4, LittlerootTown_ProfessorBirchsLab_EventScript_OfferResearchReward
 	.2byte 0
 
-@ The starter is technically given prior to this on Route 101 by special ChooseStarter
-@ This is just where the game tells you its yours and lets you nickname it
+@ Both permanent partners are already owned before the rescue.
 LittlerootTown_ProfessorBirchsLab_EventScript_GiveStarterEvent::
 	lockall
-	bufferleadmonspeciesname STR_VAR_1
-	message LittlerootTown_ProfessorBirchsLab_Text_LikeYouToHavePokemon
-	waitmessage
-	playfanfare MUS_OBTAIN_ITEM
-	waitfanfare
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_WhyNotGiveNicknameToMon, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, LittlerootTown_ProfessorBirchsLab_EventScript_NicknameStarter
-	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_GoSeeRival
-	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_NicknameStarter::
-	setvar VAR_0x8004, 0
-	call Common_EventScript_NameReceivedPartyMon
-	goto LittlerootTown_ProfessorBirchsLab_EventScript_GoSeeRival
-	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_GoSeeRival::
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_MightBeGoodIdeaToGoSeeRival, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, LittlerootTown_ProfessorBirchsLab_EventScript_AgreeToSeeRival
-	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_DeclineSeeingRival
-	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_AgreeToSeeRival::
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_GetRivalToTeachYou, MSGBOX_DEFAULT
-	clearflag FLAG_HIDE_ROUTE_101_BOY
 	setvar VAR_BIRCH_LAB_STATE, 3
+	special BufferEmeraldChampionsStarterNames
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_YourTwoPartners, MSGBOX_DEFAULT
+	setvar VAR_0x8004, 0
+	special SelectEmeraldChampionsStarterForNaming
+	call_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_OfferOpeningNickname
+	setvar VAR_0x8004, 1
+	special SelectEmeraldChampionsStarterForNaming
+	call_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_OfferOpeningNickname
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_OpeningSupplies
+
+LittlerootTown_ProfessorBirchsLab_EventScript_OfferOpeningNickname::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_NameOpeningPartner, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, Common_EventScript_NopReturn
+	call Common_EventScript_NameReceivedPartyMon
+	return
+
+LittlerootTown_ProfessorBirchsLab_EventScript_OpeningSupplies::
+	setvar VAR_BIRCH_LAB_STATE, 3
+	goto_if_set FLAG_RECEIVED_POKEDEX_FROM_BIRCH, LittlerootTown_ProfessorBirchsLab_EventScript_OpeningBalls
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_OpeningDex, MSGBOX_DEFAULT
+	call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex
+
+LittlerootTown_ProfessorBirchsLab_EventScript_OpeningBalls::
+	special GiveEmeraldChampionsOpeningBalls
+	goto_if_eq VAR_RESULT, 0, LittlerootTown_ProfessorBirchsLab_EventScript_OpeningSuppliesFull
+	goto_if_eq VAR_RESULT, 2, LittlerootTown_ProfessorBirchsLab_EventScript_OpeningBallsInPC
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_OpeningBalls, MSGBOX_DEFAULT
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_OpeningReady
+
+LittlerootTown_ProfessorBirchsLab_EventScript_OpeningBallsInPC::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_OpeningBallsInPC, MSGBOX_DEFAULT
+
+LittlerootTown_ProfessorBirchsLab_EventScript_OpeningReady::
+	clearflag FLAG_HIDE_ROUTE_101_BOY
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_OpeningReady, MSGBOX_DEFAULT
 	releaseall
 	end
 
-LittlerootTown_ProfessorBirchsLab_EventScript_DeclineSeeingRival::
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_DontBeThatWay, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, LittlerootTown_ProfessorBirchsLab_EventScript_AgreeToSeeRival
-	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_DeclineSeeingRival
+LittlerootTown_ProfessorBirchsLab_EventScript_OpeningSuppliesFull::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_OpeningSuppliesFull, MSGBOX_DEFAULT
+	releaseall
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedexEvent::
@@ -282,6 +267,8 @@ LittlerootTown_ProfessorBirchsLab_Movement_PlayerEnterLabForResearchReward:
 LittlerootTown_ProfessorBirchsLab_EventScript_Aide::
 	lock
 	faceplayer
+	goto_if_eq VAR_EC_OPENING_STATE, EC_OPENING_RESCUE_WON, LittlerootTown_ProfessorBirchsLab_EventScript_OpeningSupplies
+	call Common_EventScript_EmeraldChampionsResearchPartners
 	goto_if_ge VAR_BIRCH_LAB_STATE, 3, LittlerootTown_ProfessorBirchsLab_EventScript_AideReceivedStarter
 	goto_if_set FLAG_BIRCH_AIDE_MET, LittlerootTown_ProfessorBirchsLab_EventScript_AideAlreadyMet
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_BirchAwayOnFieldwork, MSGBOX_DEFAULT
@@ -298,16 +285,6 @@ LittlerootTown_ProfessorBirchsLab_EventScript_AideReceivedStarter::
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_BirchEnjoysRivalsHelpToo, MSGBOX_DEFAULT
 	release
 	end
-
-@ The three historical Johto-starter objects remain hidden in map data so old
-@ save/object IDs stay stable.  If a debug or legacy state exposes one, it now
-@ resumes the same finite research reward instead of reviving deleted content.
-LittlerootTown_ProfessorBirchsLab_EventScript_Cyndaquil::
-LittlerootTown_ProfessorBirchsLab_EventScript_Totodile::
-LittlerootTown_ProfessorBirchsLab_EventScript_Chikorita::
-	lock
-	faceplayer
-	goto LittlerootTown_ProfessorBirchsLab_EventScript_ResearchRewardWaiting
 
 LittlerootTown_ProfessorBirchsLab_EventScript_ResearchRewardWaiting::
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_ResearchRewardWaiting, MSGBOX_DEFAULT
@@ -359,6 +336,8 @@ LittlerootTown_ProfessorBirchsLab_EventScript_ResearchRewardBagFull::
 LittlerootTown_ProfessorBirchsLab_EventScript_Birch::
 	lock
 	faceplayer
+	goto_if_eq VAR_EC_OPENING_STATE, EC_OPENING_RESCUE_WON, LittlerootTown_ProfessorBirchsLab_EventScript_OpeningSupplies
+	call Common_EventScript_EmeraldChampionsResearchPartners
 	goto_if_eq VAR_BIRCH_POSTGAME_RESEARCH_STATE, 5, LittlerootTown_ProfessorBirchsLab_EventScript_ResearchRewardWaiting
 	goto_if_eq VAR_BIRCH_POSTGAME_RESEARCH_STATE, 2, LittlerootTown_ProfessorBirchsLab_EventScript_GrassyPatchWaiting
 	goto_if_unset FLAG_HAS_MATCH_CALL, LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister
@@ -395,40 +374,15 @@ EventScript_RegisterProfBirch::
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex::
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_HeardYouBeatRivalTakePokedex, MSGBOX_DEFAULT
-	call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_ExplainPokedex, MSGBOX_DEFAULT
-	closemessage
-	applymovement LOCALID_BIRCHS_LAB_RIVAL, LittlerootTown_ProfessorBirchsLab_Movement_RivalApproachPlayer
-	waitmovement 0
-	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
-	waitmovement 0
-	checkplayergender
-	call_if_eq VAR_RESULT, MALE, LittlerootTown_ProfessorBirchsLab_EventScript_MayGivePokeBalls
-	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_ProfessorBirchsLab_EventScript_BrendanGivePokeBalls
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_OpeningDebrief, MSGBOX_DEFAULT
 	setvar VAR_BIRCH_LAB_STATE, 5
+	setvar VAR_EC_OPENING_STATE, EC_OPENING_COMPLETE
 	setflag FLAG_ADVENTURE_STARTED
 	setvar VAR_OLDALE_TOWN_STATE, 1
 	setvar VAR_LITTLEROOT_RIVAL_STATE, 4
 	setvar VAR_LITTLEROOT_TOWN_STATE, 3
 	releaseall
 	end
-
-LittlerootTown_ProfessorBirchsLab_EventScript_MayGivePokeBalls::
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_MayGotPokedexTooTakeThese, MSGBOX_DEFAULT
-	giveitem ITEM_POKE_BALL, 5
-	call_if_eq VAR_RESULT, FALSE, LittlerootTown_ProfessorBirchsLab_EventScript_MayNoRoomForPokeBalls
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_CatchCutePokemonWithPokeBalls, MSGBOX_DEFAULT
-	setvar VAR_RESULT, 0
-	return
-
-LittlerootTown_ProfessorBirchsLab_EventScript_BrendanGivePokeBalls::
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_BrendanGotPokedexTooTakeThese, MSGBOX_DEFAULT
-	giveitem ITEM_POKE_BALL, 5
-	call_if_eq VAR_RESULT, FALSE, LittlerootTown_ProfessorBirchsLab_EventScript_BrendanNoRoomForPokeBalls
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_CatchCoolPokemonWithPokeBalls, MSGBOX_DEFAULT
-	setvar VAR_RESULT, 1
-	return
 
 LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex::
 	playfanfare MUS_OBTAIN_ITEM
@@ -809,3 +763,40 @@ LittlerootTown_ProfessorBirchsLab_Text_ScottAboardSSTidalCall:
 	.string "we meet. I'll be waiting!\p"
 	.string "… … … … … …\n"
 	.string "… … … … … Click!$"
+
+LittlerootTown_ProfessorBirchsLab_Text_YourTwoPartners:
+	.string "You and both POKéMON saved me.\p"
+	.string "I would like {STR_VAR_1} and\n"
+	.string "{STR_VAR_2} to stay with you.$"
+
+LittlerootTown_ProfessorBirchsLab_Text_NameOpeningPartner:
+	.string "Would you like to nickname\n"
+	.string "{STR_VAR_1}?$"
+
+LittlerootTown_ProfessorBirchsLab_Text_OpeningDex:
+	.string "Take this POKéDEX. There are many\n"
+	.string "more partners waiting out there!$"
+
+LittlerootTown_ProfessorBirchsLab_Text_OpeningBalls:
+	.string "You received 20 POKé BALLS!$"
+
+LittlerootTown_ProfessorBirchsLab_Text_OpeningBallsInPC:
+	.string "Your 20 POKé BALLS were sent\n"
+	.string "to the item PC.$"
+
+LittlerootTown_ProfessorBirchsLab_Text_OpeningReady:
+	.string "Oldale's Center can prepare any\n"
+	.string "team you want, all for free.\p"
+	.string "Catch more partners, try your ideas,\n"
+	.string "then meet {RIVAL} on ROUTE 103.$"
+
+LittlerootTown_ProfessorBirchsLab_Text_OpeningSuppliesFull:
+	.string "Your field supplies are waiting.\p"
+	.string "Make room in your Bag or item PC,\n"
+	.string "then speak to me or the aide.$"
+
+LittlerootTown_ProfessorBirchsLab_Text_OpeningDebrief:
+	.string "Welcome back! I am glad you both\n"
+	.string "gave that battle everything.\p"
+	.string "Keep finding partners and making\n"
+	.string "the team your own!$"

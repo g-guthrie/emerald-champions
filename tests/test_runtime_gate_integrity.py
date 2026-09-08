@@ -16,7 +16,7 @@ FAIL = "[00] existing debt 1/2: FAIL\n- Tests FAILED: 1\n- Tests TOTAL: 1\n"
 
 class RuntimeResultIntegrityTests(unittest.TestCase):
     def validate(self, output, **kwargs):
-        return runtime.validate_gate_output(runtime.RuntimeGate("*", 1, **kwargs), output)
+        return runtime.validate_gate_output(runtime.RuntimeGate("*", **kwargs), output)
 
     def test_pass_with_omitted_zero_counters(self):
         self.assertEqual(self.validate(PASS)["TOTAL"], 1)
@@ -167,12 +167,6 @@ class RuntimeResultIntegrityTests(unittest.TestCase):
             with self.subTest(status=status), self.assertRaisesRegex(SystemExit, "unexpected runtime"):
                 self.validate(output)
 
-    def test_minimum_selection_is_enforced(self):
-        gate = runtime.RuntimeGate("*", 2)
-        valid = "[00] first: PASS\n[01] second: PASS\n- Tests PASSED: 2\n- Tests TOTAL: 2\n"
-        runtime.validate_gate_output(gate, valid)
-        with self.assertRaisesRegex(SystemExit, "expected at least 2"):
-            runtime.validate_gate_output(gate, PASS)
 
 
 class RuntimeProcessIntegrityTests(unittest.TestCase):
@@ -218,7 +212,7 @@ class RuntimeProcessIntegrityTests(unittest.TestCase):
 
     def test_verified_accepted_debt_is_reported_explicitly(self):
         captured = io.StringIO()
-        gate = runtime.RuntimeGate("*", 1, allowed_failing=("existing debt 1/2",))
+        gate = runtime.RuntimeGate("*", allowed_failing=("existing debt 1/2",))
         with patch.object(runtime.shutil, "copyfile"), patch.object(runtime, "run", side_effect=[("", 0), (FAIL, 0.25)]):
             with contextlib.redirect_stdout(captured):
                 runtime.verify_gate(gate, test_elf=Path("test.elf"), headless_elf=Path("headless.elf"),

@@ -1,5 +1,5 @@
 #include "global.h"
-#include "legendary_signs.h"
+#include "emerald_champions_opening.h"
 #include "battle.h"
 #include "battle_anim.h"
 #include "battle_ai_main.h"
@@ -484,7 +484,7 @@ static EWRAM_DATA bool8 sEcRestartPending = FALSE;
 
 static void EcSnapshotForRestart(void)
 {
-    if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER))
+    if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER) && !IsEmeraldChampionsBirchRescueBattle())
         return;
     memcpy(sEcRestartParty, gParties[B_TRAINER_PLAYER], sizeof(sEcRestartParty));
     if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
@@ -3717,7 +3717,9 @@ u8 IsRunningFromBattleImpossible(enum BattlerId battler)
 
     gPotentialItemEffectBattler = battler;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE) // Cannot ever run from saving Birch's battle.
+    if (IsEmeraldChampionsBirchRescueBattle())
+        return BATTLE_RUN_SUCCESS;
+    if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
     {
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_DONT_LEAVE_BIRCH;
         return BATTLE_RUN_FORBIDDEN;
@@ -4542,7 +4544,7 @@ s32 GetChosenMovePriority(enum BattlerId battler, enum Ability ability)
     return GetBattleMovePriority(battler, ability, move);
 }
 
-s32 GetBattleMovePriority(enum BattlerId battler, enum Ability ability, enum Move move)
+static s32 GetMovePriorityInternal(enum BattlerId battler, enum Ability ability, enum Move move, bool32 record)
 {
     s32 priority = 0;
 
@@ -4565,14 +4567,18 @@ s32 GetBattleMovePriority(enum BattlerId battler, enum Ability ability, enum Mov
     {
         priority++;
     }
-    else if (IsBattleMoveStatus(move) && IsAbilityAndRecord(battler, ability, ABILITY_PRANKSTER))
+    else if (IsBattleMoveStatus(move) && ability == ABILITY_PRANKSTER)
     {
-        gProtectStructs[battler].pranksterElevated = 1;
+        if (record)
+        {
+            IsAbilityAndRecord(battler, ability, ABILITY_PRANKSTER);
+            gProtectStructs[battler].pranksterElevated = 1;
+        }
         priority++;
     }
     else if (GetMoveEffect(move) == EFFECT_GRASSY_GLIDE
           && IsGrassyTerrainAffected(battler, ability, GetBattlerHoldEffect(battler), gFieldTimers.terrain)
-          && GetActiveGimmick(gBattlerAttacker) != GIMMICK_DYNAMAX && !IsGimmickSelected(battler, GIMMICK_DYNAMAX))
+          && GetActiveGimmick(battler) != GIMMICK_DYNAMAX && (!record || !IsGimmickSelected(battler, GIMMICK_DYNAMAX)))
     {
         priority++;
     }
@@ -4586,6 +4592,16 @@ s32 GetBattleMovePriority(enum BattlerId battler, enum Ability ability, enum Mov
     }
 
     return priority;
+}
+
+s32 GetBattleMovePriority(enum BattlerId battler, enum Ability ability, enum Move move)
+{
+    return GetMovePriorityInternal(battler, ability, move, TRUE);
+}
+
+s32 AI_GetMovePriority(enum BattlerId battler, enum Ability ability, enum Move move)
+{
+    return GetMovePriorityInternal(battler, ability, move, FALSE);
 }
 
 s32 GetWhichBattlerFasterArgs(struct BattleCalcValues *calcValues, bool32 ignoreChosenMoves, u32 speedBattler1, u32 speedBattler2, s32 priority1, s32 priority2)
@@ -5276,7 +5292,7 @@ static void HandleEndTurn_BattleLost(void)
         {
             gBattleCommunication[MULTISTRING_CHOOSER] = 0;
         }
-        gBattlescriptCurrInstr = BattleScript_LocalBattleLost;
+        gBattlescriptCurrInstr = IsEmeraldChampionsBirchRescueBattle() ? BattleScript_RestartBattleNoPenalty : BattleScript_LocalBattleLost;
     }
 
     gBattleMainFunc = HandleEndTurn_FinishBattle;
@@ -5297,7 +5313,7 @@ static void HandleEndTurn_RanFromBattle(void)
         gBattlescriptCurrInstr = BattleScript_PrintPlayerForfeited;
         gBattleOutcome = B_OUTCOME_FORFEITED;
     }
-    else if (sEcRestartPending)
+    else if (sEcRestartPending || IsEmeraldChampionsBirchRescueBattle())
     {
         // Emerald Champions: restarting costs nothing; skip the forfeit payout.
         gBattlescriptCurrInstr = BattleScript_RestartBattleNoPenalty;
@@ -5341,7 +5357,6 @@ static void HandleEndTurn_FinishBattle(void)
 {
     if (gCurrentActionFuncId == B_ACTION_TRY_FINISH || gCurrentActionFuncId == B_ACTION_FINISHED)
     {
-        RecordFailedLegendaryEncounters();
 
         if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK
                                   | BATTLE_TYPE_RECORDED_LINK
@@ -5517,6 +5532,19 @@ static void TryEvolvePokemon(void)
                 species = GetEvolutionTargetSpecies(&gParties[B_TRAINER_PLAYER][i], mode, evolutionItemArg, NULL, &canStopEvo, CHECK_EVO);
             }
 
+            if (species == SPECIES_NONE
+             && (gBattleOutcome == B_OUTCOME_WON || gBattleOutcome == B_OUTCOME_CAUGHT)
+             && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED | BATTLE_TYPE_RECORDED_LINK
+                 | BATTLE_TYPE_FRONTIER | BATTLE_TYPE_TRAINER_HILL | BATTLE_TYPE_EREADER_TRAINER
+                 | BATTLE_TYPE_FIRST_BATTLE | BATTLE_TYPE_CATCH_TUTORIAL | BATTLE_TYPE_SAFARI))
+             && GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_HP) != 0
+             && !GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_IS_EGG))
+            {
+                mode = EVO_MODE_BATTLE_READY;
+                evolutionItemArg = ITEM_NONE;
+                species = GetEvolutionTargetSpecies(&gParties[B_TRAINER_PLAYER][i], mode, evolutionItemArg, NULL, &canStopEvo, CHECK_EVO);
+            }
+
             if (species != SPECIES_NONE)
             {
                 CloseMainBattleScreen();
@@ -5548,7 +5576,10 @@ static void ReturnFromBattleToOverworld(void)
     {
         sEcRestartPending = FALSE;
         EcRestoreForRestart();
-        EmeraldChampions_RebuildTrainerBattleParties();
+        if (IsEmeraldChampionsBirchRescueBattle())
+            CreateEmeraldChampionsBirchRescueParty();
+        else
+            EmeraldChampions_RebuildTrainerBattleParties();
         gBattleOutcome = 0;
         gMain.inBattle = FALSE;
         gMain.callback1 = gPreBattleCallback1;
@@ -5556,6 +5587,9 @@ static void ReturnFromBattleToOverworld(void)
         SetMainCallback2(CB2_InitBattle);
         return;
     }
+
+    if (IsEmeraldChampionsBirchRescueBattle() && gBattleOutcome != B_OUTCOME_WON)
+        EcRestoreForRestart();
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_LINK))
     {
@@ -5573,18 +5607,12 @@ static void ReturnFromBattleToOverworld(void)
 
     if (gBattleTypeFlags & BATTLE_TYPE_ROAMER)
     {
-        bool32 lost = IsLegendaryEncounterLost(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_SPECIES));
         UpdateRoamerHPStatus(&gParties[B_TRAINER_OPPONENT_A][0]);
         ZeroEnemyPartyMons();
 
-#ifndef BUGFIX
-        // Bug: When Roar is used by a roamer, gBattleOutcome is B_OUTCOME_PLAYER_TELEPORTED (5),
-        // which deactivates the roamer.
-        if (lost || (gBattleOutcome & B_OUTCOME_WON) || gBattleOutcome == B_OUTCOME_CAUGHT)
-#else
-        if (lost || (gBattleOutcome == B_OUTCOME_WON) || gBattleOutcome == B_OUTCOME_CAUGHT ||
-            gBattleOutcome == B_OUTCOME_DREW)
-#endif
+        // A failed attempt never retires a roaming legendary. Its saved HP
+        // is restored on the next encounter if it fainted.
+        if (gBattleOutcome == B_OUTCOME_CAUGHT)
             SetRoamerInactive(gEncounteredRoamerIndex);
     }
 
@@ -5989,7 +6017,7 @@ bool32 CanPlayerForfeitNormalTrainerBattle(void)
     if (gBattleTypeFlags & BATTLE_TYPE_RECORDED_INVALID)
         return FALSE;
 
-    return (gBattleTypeFlags & BATTLE_TYPE_TRAINER);
+    return (gBattleTypeFlags & BATTLE_TYPE_TRAINER) || IsEmeraldChampionsBirchRescueBattle();
 }
 
 bool32 DidPlayerForfeitNormalTrainerBattle(void)

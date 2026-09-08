@@ -263,7 +263,7 @@ static void HandleCancelActivity(bool32);
 static s32 ListMenuHandler_AllItemsAvailable(u8 *, u8 *, u8 *, const struct WindowTemplate *, const struct ListMenuTemplate *);
 static s32 TradeBoardMenuHandler(u8 *, u8 *, u8 *, u8 *, const struct WindowTemplate *, const struct ListMenuTemplate *, struct RfuPlayerList *);
 static s32 GetIndexOfNthTradeBoardOffer(struct RfuPlayer *, s32);
-static bool32 HasAtLeastTwoMonsOfLevel30OrLower(void);
+static const u8 sText_ChampionsDoublesDesk[] = _("For DOUBLE BATTLES, please use the\nDirect Corner. Choose Double or Multi.");
 static u32 GetResponseIdx_InviteToURoomActivity(s32);
 static void ViewURoomPartnerTrainerCard(u8 *, struct WirelessLink_URoom *, bool8);
 static void GetURoomActivityRejectMsg(u8 *, s32, u32);
@@ -1614,7 +1614,14 @@ static void CB2_TransitionToCableClub(void)
         break;
     case 1:
         if (!FuncIsActiveTask(Task_ExchangeCards))
-            SetMainCallback2(CB2_ReturnToFieldCableClub);
+        {
+            u32 service = VarGet(VAR_CABLE_CLUB_STATE);
+            if ((service == USING_SINGLE_BATTLE || service == USING_DOUBLE_BATTLE || service == USING_MULTI_BATTLE)
+             && !AreChampionsLinkPeersCompatible(service))
+                AbortChampionsLinkBattle();
+            else
+                SetMainCallback2(CB2_ReturnToFieldCableClub);
+        }
         break;
     }
 
@@ -1628,6 +1635,10 @@ static void CreateTrainerCardInBuffer(void *dest, bool32 setWonderCard)
 {
     struct TrainerCard *card = (struct TrainerCard *)dest;
     TrainerCard_GenerateCardForLinkPlayer(card);
+    if (gPlayerCurrActivity == ACTIVITY_BATTLE_DOUBLE)
+        PrepareChampionsLinkBattleCard(card, USING_DOUBLE_BATTLE);
+    else if (gPlayerCurrActivity == ACTIVITY_BATTLE_MULTI)
+        PrepareChampionsLinkBattleCard(card, USING_MULTI_BATTLE);
 
     // Below field is re-used, to be read by Task_ExchangeCards
     if (setWonderCard)
@@ -1658,10 +1669,12 @@ static void Task_StartActivity(u8 taskId)
     {
     case ACTIVITY_BATTLE_SINGLE | IN_UNION_ROOM:
     case ACTIVITY_ACCEPT | IN_UNION_ROOM:
-        CleanupOverworldWindowsAndTilemaps();
-        gMain.savedCallback = CB2_UnionRoomBattle;
-        InitChooseHalfPartyForBattle(3);
-        break;
+        CloseLink();
+        SetMainCallback2(CB2_ReturnToField);
+        DestroyTask(taskId);
+        gSpecialVar_Result = LINKUP_INCOMPATIBLE_BATTLE;
+        UnlockPlayerFieldControls();
+        return;
     case ACTIVITY_BATTLE_SINGLE:
         CleanupOverworldWindowsAndTilemaps();
         CreateTrainerCardInBuffer(gBlockSendBuffer, TRUE);
@@ -1751,6 +1764,14 @@ static void Task_RunScriptAndFadeToActivity(u8 taskId)
     switch (data[0])
     {
     case 0:
+        if (gPlayerCurrActivity == ACTIVITY_BATTLE_SINGLE)
+        {
+            CloseLink();
+            gSpecialVar_Result = LINKUP_INCOMPATIBLE_BATTLE;
+            ScriptContext_Enable();
+            DestroyTask(taskId);
+            return;
+        }
         gSpecialVar_Result = LINKUP_SUCCESS;
         switch (gPlayerCurrActivity)
         {
@@ -2725,9 +2746,9 @@ static void Task_RunUnionRoom(u8 taskId)
                 {
                     gPlayerCurrActivity = input;
                     sPlayerActivityGroupSize = (u32)input >> 8; // Extract capacity from sInviteToActivityMenuItems
-                    if (gPlayerCurrActivity == (ACTIVITY_BATTLE_SINGLE | IN_UNION_ROOM) && !HasAtLeastTwoMonsOfLevel30OrLower())
+                    if (gPlayerCurrActivity == (ACTIVITY_BATTLE_SINGLE | IN_UNION_ROOM))
                     {
-                        ScheduleFieldMessageWithFollowupState(UR_STATE_DO_SOMETHING_PROMPT, sText_NeedTwoMonsOfLevel30OrLower1);
+                        ScheduleFieldMessageWithFollowupState(UR_STATE_DO_SOMETHING_PROMPT, sText_ChampionsDoublesDesk);
                     }
                     else
                     {
@@ -2945,18 +2966,10 @@ static void Task_RunUnionRoom(u8 taskId)
             taskData[3] = 0;
             if (gPlayerCurrActivity == (ACTIVITY_BATTLE_SINGLE | IN_UNION_ROOM))
             {
-                if (!HasAtLeastTwoMonsOfLevel30OrLower())
-                {
-                    uroom->playerSendBuffer[0] = ACTIVITY_DECLINE | IN_UNION_ROOM;
-                    Rfu_SendPacket(uroom->playerSendBuffer);
-                    uroom->state = UR_STATE_DECLINE_ACTIVITY_REQUEST;
-                    StringCopy(gStringVar4, sText_NeedTwoMonsOfLevel30OrLower2);
-                }
-                else
-                {
-                    Rfu_SendPacket(uroom->playerSendBuffer);
-                    uroom->state = UR_STATE_PRINT_START_ACTIVITY_MSG;
-                }
+                uroom->playerSendBuffer[0] = ACTIVITY_DECLINE | IN_UNION_ROOM;
+                Rfu_SendPacket(uroom->playerSendBuffer);
+                uroom->state = UR_STATE_DECLINE_ACTIVITY_REQUEST;
+                StringCopy(gStringVar4, sText_ChampionsDoublesDesk);
             }
             else if (gPlayerCurrActivity == (ACTIVITY_CARD | IN_UNION_ROOM))
             {
@@ -4318,23 +4331,6 @@ bool32 InUnionRoom(void)
         ? TRUE : FALSE;
 }
 
-static bool32 HasAtLeastTwoMonsOfLevel30OrLower(void)
-{
-    s32 i;
-    s32 count = 0;
-
-    for (i = 0; i < gPartiesCount[B_TRAINER_PLAYER]; i++)
-    {
-        if (GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_LEVEL) <= UNION_ROOM_MAX_LEVEL
-         && GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES_OR_EGG) != SPECIES_EGG)
-            count++;
-    }
-
-    if (count > 1)
-        return TRUE;
-    else
-        return FALSE;
-}
 
 static void ResetUnionRoomTrade(struct UnionRoomTrade *trade)
 {

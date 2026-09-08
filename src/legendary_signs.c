@@ -5,6 +5,7 @@
 #include "daycare.h"
 #include "emerald_champions_battle_sets.h"
 #include "event_data.h"
+#include "event_object_movement.h"
 #include "item.h"
 #include "malloc.h"
 #include "script_menu.h"
@@ -12,6 +13,8 @@
 #include "pokedex.h"
 #include "pokemon.h"
 #include "random.h"
+#include "roamer.h"
+#include "battle.h"
 #include "script_pokemon_util.h"
 #include "string_util.h"
 #include "constants/characters.h"
@@ -67,6 +70,9 @@ static const u8 sSignLocationMtPyreSummit[] = _("Mt. Pyre's summit");
 static const u8 sSignLocationSealedChamber[] = _("the Sealed Chamber");
 static const u8 sSignLocationAlteringB1F[] = _("Altering Cave B1F");
 static const u8 sSignLocationEmberPath[] = _("Ember Path");
+static EWRAM_DATA u8 sRestingSigns[(LEGENDARY_SIGN_COUNT + 7) / 8];
+static EWRAM_DATA u16 sEncounterSignPlusOne;
+
 static const u8 sSignLocationUnknown[] = _("an unknown place");
 
 static const u8 *GetLegendarySignLocationName(enum LegendarySignId signId)
@@ -86,6 +92,12 @@ static const u8 *GetLegendarySignLocationName(enum LegendarySignId signId)
     }
     switch (signId)
     {
+    case LEGENDARY_SIGN_ARTICUNO_GALAR:
+        return sSignLocationRoute120;
+    case LEGENDARY_SIGN_ZAPDOS_GALAR:
+        return sSignLocationRoute112;
+    case LEGENDARY_SIGN_MOLTRES_GALAR:
+        return sSignLocationMtPyreExterior;
     case LEGENDARY_SIGN_DARKRAI:
         return sSignLocationMtPyreSummit;
     case LEGENDARY_SIGN_MAGEARNA:
@@ -249,46 +261,6 @@ static u8 GetBadgeCountForLegendarySigns(void)
     return count;
 }
 
-#define SIGN_LEDGER_MAX_ENTRIES 9
-
-static const u8 sText_LedgerAt[] = _(" waits at\n");
-static const u8 sText_LedgerPage[] = _("\p");
-static const u8 sText_LedgerMore[] = _("…and more SIGNS are awake elsewhere.");
-static const u8 sText_LedgerEnd[] = _(".");
-
-// Builds a readable list of every awakened, uncaught Sign into gStringVar4
-// (one "SPECIES waits at\nLOCATION." page per Sign) and returns the count in
-// gSpecialVar_Result, so the player can always find out what is pending
-// without walking the whole region.
-void BufferLegendarySignLedger(void)
-{
-    u8 *end = gStringVar4;
-    u32 count = 0;
-
-    *end = EOS;
-    for (enum LegendarySignId signId = 0; signId < LEGENDARY_SIGN_COUNT; signId++)
-    {
-        if (!IsLegendarySignUnlocked(signId) || IsLegendarySignCaught(signId)
-         || IsLegendaryEncounterLost(gLegendarySignDefinitions[signId].species))
-            continue;
-        if (count == SIGN_LEDGER_MAX_ENTRIES)
-        {
-            end = StringAppend(end, sText_LedgerPage);
-            StringAppend(end, sText_LedgerMore);
-            count++;
-            break;
-        }
-        if (count != 0)
-            end = StringAppend(end, sText_LedgerPage);
-        end = StringAppend(end, GetSpeciesName(gLegendarySignDefinitions[signId].species));
-        end = StringAppend(end, sText_LedgerAt);
-        end = StringAppend(end, GetLegendarySignLocationName(signId));
-        end = StringAppend(end, sText_LedgerEnd);
-        count++;
-    }
-    gSpecialVar_Result = count;
-}
-
 bool32 IsLegendarySignUnlocked(enum LegendarySignId signId)
 {
     return GetLegendaryStateBit(VAR_LEGENDARY_SIGNS_UNLOCKED_0, signId);
@@ -330,13 +302,23 @@ void UnlockLegendarySign(enum LegendarySignId signId)
     u16 objectFlag = GetLegendarySignObjectFlag(signId);
 
     SetLegendaryStateBit(VAR_LEGENDARY_SIGNS_UNLOCKED_0, signId);
-    if (objectFlag != 0 && !IsLegendarySignCaught(signId)
-     && !IsLegendaryEncounterLost(gLegendarySignDefinitions[signId].species))
+    if (objectFlag != 0 && !IsLegendarySignCaught(signId))
         FlagClear(objectFlag);
 }
 
 enum LegendarySignId GetLegendarySignIdBySpecies(enum Species species)
 {
+    species = SanitizeSpeciesId(species);
+    for (enum LegendarySignId signId = 0; signId < LEGENDARY_SIGN_COUNT; signId++)
+        if (gLegendarySignDefinitions[signId].species == species)
+            return signId;
+
+    // Registered regional discoveries are independent; interchangeable
+    // battle and item forms still complete their original discovery.
+    if (gSpeciesInfo[species].isAlolanForm || gSpeciesInfo[species].isGalarianForm
+     || gSpeciesInfo[species].isHisuianForm || gSpeciesInfo[species].isPaldeanForm)
+        return LEGENDARY_SIGN_COUNT;
+    species = GET_BASE_SPECIES_ID(species);
     for (enum LegendarySignId signId = 0; signId < LEGENDARY_SIGN_COUNT; signId++)
         if (gLegendarySignDefinitions[signId].species == species)
             return signId;
@@ -354,96 +336,76 @@ static const enum Species sNativeLegendaryEncounters[] =
     SPECIES_MEW, SPECIES_DEOXYS, SPECIES_JIRACHI, SPECIES_DIANCIE,
     SPECIES_HEATRAN, SPECIES_MOLTRES,
 };
-// These existing event flags control physical presence, not Pokédex capture.
-static const u16 sNativeLegendaryDefeatedFlags[] =
+STATIC_ASSERT(LEGENDARY_SIGN_COUNT <= 96, LegendarySignCapacity);
+
+static bool32 HasCaughtSpeciesFamily(enum Species species)
 {
-    FLAG_DEFEATED_GROUDON, FLAG_DEFEATED_KYOGRE, FLAG_DEFEATED_RAYQUAZA,
-    FLAG_DEFEATED_REGIROCK, FLAG_DEFEATED_REGICE, FLAG_DEFEATED_REGISTEEL,
-    0, 0, FLAG_DEFEATED_LUGIA, FLAG_DEFEATED_HO_OH,
-    FLAG_DEFEATED_MEW, FLAG_DEFEATED_DEOXYS,
-    FLAG_EC_CAUGHT_JIRACHI, FLAG_EC_CAUGHT_DIANCIE,
-    FLAG_EC_CAUGHT_HEATRAN, FLAG_EC_CAUGHT_MOLTRES,
-};
-static const u16 sNativeLegendaryHideFlags[] =
-{
-    FLAG_HIDE_TERRA_CAVE_GROUDON, FLAG_HIDE_MARINE_CAVE_KYOGRE,
-    FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA_STILL,
-    FLAG_HIDE_REGIROCK, FLAG_HIDE_REGICE, FLAG_HIDE_REGISTEEL,
-    0, 0, FLAG_HIDE_LUGIA, FLAG_HIDE_HO_OH, FLAG_HIDE_MEW, FLAG_HIDE_DEOXYS,
-    FLAG_EC_CAUGHT_JIRACHI, FLAG_EC_CAUGHT_DIANCIE,
-    FLAG_EC_CAUGHT_HEATRAN, FLAG_EC_CAUGHT_MOLTRES,
-};
-STATIC_ASSERT(ARRAY_COUNT(sNativeLegendaryDefeatedFlags) == ARRAY_COUNT(sNativeLegendaryEncounters), LegendaryDefeatFlags);
-STATIC_ASSERT(ARRAY_COUNT(sNativeLegendaryHideFlags) == ARRAY_COUNT(sNativeLegendaryEncounters), LegendaryHideFlags);
-STATIC_ASSERT(LEGENDARY_SIGN_COUNT <= 96, LegendaryDefeatSignCapacity);
-STATIC_ASSERT(ARRAY_COUNT(sNativeLegendaryEncounters) <= 32, LegendaryDefeatNativeCapacity);
-
-static u32 GetLegendaryEncounterLossIndex(enum Species species)
-{
-    enum LegendarySignId signId;
-
-    if (species == SPECIES_NONE || species >= NUM_SPECIES)
-        return 128;
-    species = GET_BASE_SPECIES_ID(species);
-    if (!gSpeciesInfo[species].isRestrictedLegendary
-     && !gSpeciesInfo[species].isSubLegendary
-     && !gSpeciesInfo[species].isMythical
-     && !gSpeciesInfo[species].isUltraBeast)
-        return 128;
-    species = GetEggSpecies(species);
-    signId = GetLegendarySignIdBySpecies(species);
-    if (signId < LEGENDARY_SIGN_COUNT)
-        return signId;
-    for (u32 i = 0; i < ARRAY_COUNT(sNativeLegendaryEncounters); i++)
-        if (sNativeLegendaryEncounters[i] == species)
-            return 96 + i;
-    return 128;
-}
-
-bool32 IsLegendaryEncounterLost(enum Species species)
-{
-    u32 index = GetLegendaryEncounterLossIndex(species);
-
-    return index < 128
-        && (gSaveBlock2Ptr->pokedex.lostLegendaryEncounters[index / 8] & (1u << (index % 8)));
-}
-
-bool32 IsOneShotLegendarySpecies(enum Species species)
-{
-    return GetLegendaryEncounterLossIndex(species) < 128;
-}
-
-void MarkLegendaryEncounterLost(enum Species species)
-{
-    u32 index = GetLegendaryEncounterLossIndex(species);
-
-    if (index < 128)
+    if (species == SPECIES_NONE || PlayerPartyHasSpeciesFamily(species))
+        return TRUE;
+    enum Species root = GetEggSpecies(species);
+    for (enum Species candidate = 1; candidate < NUM_SPECIES; candidate++)
     {
-        gSaveBlock2Ptr->pokedex.lostLegendaryEncounters[index / 8] |= 1u << (index % 8);
-        if (index < LEGENDARY_SIGN_COUNT)
-        {
-            u16 objectFlag = GetLegendarySignObjectFlag(index);
-            if (objectFlag != 0)
-                FlagSet(objectFlag);
-        }
-        else if (index >= 96)
-        {
-            u32 nativeIndex = index - 96;
-            if (nativeIndex == 0 || nativeIndex == 1)
-                VarSet(VAR_SHOULD_END_ABNORMAL_WEATHER, 1);
-            if (sNativeLegendaryDefeatedFlags[nativeIndex] != 0)
-                FlagSet(sNativeLegendaryDefeatedFlags[nativeIndex]);
-            if (sNativeLegendaryHideFlags[nativeIndex] != 0)
-                FlagSet(sNativeLegendaryHideFlags[nativeIndex]);
-            // The TV choice roams; only the other species owns Southern Island.
-            if ((nativeIndex == 6 && VarGet(VAR_ROAMER_POKEMON) != 0)
-             || (nativeIndex == 7 && VarGet(VAR_ROAMER_POKEMON) == 0))
-            {
-                FlagSet(FLAG_DEFEATED_LATIAS_OR_LATIOS);
-                FlagSet(FLAG_HIDE_SOUTHERN_ISLAND_UNCHOSEN_EON_DUO_MON);
-            }
-        }
+        if (GET_BASE_SPECIES_ID(candidate) != candidate || gSpeciesInfo[candidate].baseHP == 0)
+            continue;
+        if (GetEggSpecies(candidate) == root
+         && GetSetPokedexFlag(SpeciesToNationalPokedexNum(candidate), FLAG_GET_CAUGHT))
+            return TRUE;
     }
+    return FALSE;
+}
+
+static bool32 MeetsSignProgression(enum LegendarySignId id)
+{
+    const struct LegendarySignDefinition *sign = &gLegendarySignDefinitions[id];
+    return GetBadgeCountForLegendarySigns() >= sign->minimumBadges
+        && (sign->requiredFlag == 0 || FlagGet(sign->requiredFlag));
+}
+
+static bool32 MeetsSignDiscovery(enum LegendarySignId id)
+{
+    if (IsLegendarySignUnlocked(id))
+        return TRUE;
+    if (id == LEGENDARY_SIGN_REGIGIGAS)
+        return PlayerPartyHasSpeciesFamily(SPECIES_REGIROCK)
+            && PlayerPartyHasSpeciesFamily(SPECIES_REGICE)
+            && PlayerPartyHasSpeciesFamily(SPECIES_REGISTEEL);
+    if (id == LEGENDARY_SIGN_PECHARUNT)
+        return IsLegendarySignCaught(LEGENDARY_SIGN_OKIDOGI)
+            && IsLegendarySignCaught(LEGENDARY_SIGN_MUNKIDORI)
+            && IsLegendarySignCaught(LEGENDARY_SIGN_FEZANDIPITI);
+    return HasCaughtSpeciesFamily(gLegendarySignDefinitions[id].requiredSpecies);
+}
+
+static bool32 IsSignResting(enum LegendarySignId id)
+{
+    return (sRestingSigns[id / 8] & (1u << (id % 8))) != 0;
+}
+
+void ResetLegendaryEncounterVisits(void)
+{
+    memset(sRestingSigns, 0, sizeof(sRestingSigns));
+    sEncounterSignPlusOne = 0;
+}
+
+// Script removeobject also saves the object's hide flag. A failed encounter
+// must disappear only from the live map, so re-entry can recreate it.
+void HideRestingLegendaryObject(void)
+{
+    u8 objectId;
+    if (!TryGetObjectEventIdByLocalIdAndMap(gSpecialVar_LastTalked,
+        gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectId))
+        RemoveObjectEvent(&gObjectEvents[objectId]);
+}
+
+void FinishLegendaryLandmarkEncounter(void)
+{
+    if (sEncounterSignPlusOne != 0 && sEncounterSignPlusOne <= LEGENDARY_SIGN_COUNT
+     && gBattleOutcome != B_OUTCOME_CAUGHT)
+    {
+        u16 id = sEncounterSignPlusOne - 1;
+        sRestingSigns[id / 8] |= 1u << (id % 8);
+    }
+    sEncounterSignPlusOne = 0;
 }
 
 bool32 IsLegendarySignOrdinaryWildSpecies(enum Species species)
@@ -456,21 +418,12 @@ bool32 IsLegendarySignOrdinaryWildSpecies(enum Species species)
 
 bool32 CanAcquireLegendarySignSpecies(enum Species species)
 {
-    enum LegendarySignId signId = GetLegendarySignIdBySpecies(species);
-
-    if (IsLegendaryEncounterLost(species))
-        return FALSE;
-    return signId >= LEGENDARY_SIGN_COUNT
-        || (IsLegendarySignUnlocked(signId) && !IsLegendarySignCaught(signId));
+    enum LegendarySignId id = GetLegendarySignIdBySpecies(species);
+    return id >= LEGENDARY_SIGN_COUNT
+        || (!IsLegendarySignCaught(id) && MeetsSignProgression(id) && MeetsSignDiscovery(id));
 }
 
-bool32 IsLegendarySignConditionalWildSpecies(enum Species species)
-{
-    enum LegendarySignId signId = GetLegendarySignIdBySpecies(species);
 
-    return signId < LEGENDARY_SIGN_COUNT
-        && gLegendarySignDefinitions[signId].source == LEGENDARY_SOURCE_CONDITIONAL_WILD;
-}
 
 // Saved bit indices are append-only: 0-23 are undelivered relics and
 // 24-29 mark species whose one-time relic grant has already been earned.
@@ -520,19 +473,6 @@ static bool32 GiveLegendaryRelicItem(enum Item item)
         || AddBagItem(item, 1) || AddPCItem(item, 1);
 }
 
-// Migration never creates pending rewards from historical ownership. It only
-// prevents a repeated caught-marker call from recreating discarded old relics.
-void InitializeLegendaryRelicDeliveryState(void)
-{
-    u32 state = 0;
-    for (u32 group = 0; group < ARRAY_COUNT(sLegendaryRelicGrants); group++)
-    {
-        if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(sLegendaryRelicGrants[group].species), FLAG_GET_CAUGHT))
-            state |= 1u << (LEGENDARY_RELIC_EARNED_SHIFT + group);
-    }
-    SetLegendaryRelicDeliveryState(state);
-}
-
 void RetryPendingLegendaryRelics(void)
 {
     u32 state = GetLegendaryRelicDeliveryState();
@@ -568,6 +508,7 @@ static void GiveLegendaryRelicsForSpecies(enum Species species)
 
 void MarkLegendarySignCaughtBySpecies(enum Species species)
 {
+    species = SanitizeSpeciesId(species);
     enum LegendarySignId signId = GetLegendarySignIdBySpecies(species);
     u16 objectFlag;
 
@@ -575,7 +516,7 @@ void MarkLegendarySignCaughtBySpecies(enum Species species)
     // by the free held-item vendor or a tutor preset.  This call is
     // earned once and persists any undelivered items, including Groudon/Kyogre, whose
     // canonical Emerald encounters are not Legendary Sign rows.
-    GiveLegendaryRelicsForSpecies(species);
+    GiveLegendaryRelicsForSpecies(GET_BASE_SPECIES_ID(species));
 
     if (signId >= LEGENDARY_SIGN_COUNT)
         return;
@@ -624,92 +565,47 @@ static u8 GetSignLevel(s8 offset)
     return level;
 }
 
-bool32 TryGetLegendarySignWildOverride(enum WildPokemonArea area, enum Species *species, u8 *level)
-{
-    u16 currentMap = ((u8)gSaveBlock1Ptr->location.mapGroup << 8) | (u8)gSaveBlock1Ptr->location.mapNum;
 
-    for (enum LegendarySignId signId = 0; signId < LEGENDARY_SIGN_COUNT; signId++)
-    {
-        const struct LegendarySignDefinition *sign = &gLegendarySignDefinitions[signId];
-
-        if (sign->source != LEGENDARY_SOURCE_CONDITIONAL_WILD
-         || sign->mapId != currentMap
-         || sign->area != area
-         || IsLegendarySignCaught(signId)
-         || IsLegendaryEncounterLost(sign->species))
-            continue;
-
-        if (!IsLegendarySignUnlocked(signId))
-            continue;
-        if (RandomUniform(RNG_NONE, 0, 99) >= sign->chance)
-            continue;
-
-        *species = sign->species;
-        *level = GetSignLevel(sign->levelOffset);
-        return TRUE;
-    }
-    return FALSE;
-}
 
 void TryUnlockSelectedLegendarySign(void)
 {
-    enum LegendarySignId signId = gSpecialVar_0x8004;
-    const struct LegendarySignDefinition *sign;
-
+    enum LegendarySignId id = gSpecialVar_0x8004;
     gSpecialVar_Result = 0;
-    if (signId >= LEGENDARY_SIGN_COUNT)
+    if (id >= LEGENDARY_SIGN_COUNT)
         return;
-    sign = &gLegendarySignDefinitions[signId];
-    if (IsLegendaryEncounterLost(sign->species))
-    {
-        gSpecialVar_Result = 5;
-        return;
-    }
-    if (IsLegendarySignCaught(signId))
-    {
+    if (IsLegendarySignCaught(id))
         gSpecialVar_Result = 4;
+    else if (!MeetsSignProgression(id))
         return;
-    }
-    if (IsLegendarySignUnlocked(signId))
-    {
-        gSpecialVar_Result = 3;
-        return;
-    }
-    if (GetBadgeCountForLegendarySigns() < sign->minimumBadges
-     || (sign->requiredFlag != 0 && !FlagGet(sign->requiredFlag)))
-        return;
-    if (!PlayerPartyHasSpeciesFamily(sign->requiredSpecies))
-    {
+    else if (!MeetsSignDiscovery(id))
         gSpecialVar_Result = 1;
-        return;
+    else if (IsSignResting(id))
+        gSpecialVar_Result = 5;
+    else
+    {
+        gSpecialVar_Result = IsLegendarySignUnlocked(id) ? 3 : 2;
+        UnlockLegendarySign(id);
     }
-    gSpecialVar_Result = 6; // Return to Devon to research this individual Sign.
 }
 
 u16 GetSelectedLegendarySignState(void)
 {
-    enum LegendarySignId signId = gSpecialVar_0x8004;
-
-    if (signId < LEGENDARY_SIGN_COUNT
-     && IsLegendaryEncounterLost(gLegendarySignDefinitions[signId].species))
-        gSpecialVar_Result = 3;
-    else if (signId >= LEGENDARY_SIGN_COUNT || !IsLegendarySignUnlocked(signId))
+    enum LegendarySignId id = gSpecialVar_0x8004;
+    if (id >= LEGENDARY_SIGN_COUNT)
         gSpecialVar_Result = 0;
-    else if (IsLegendarySignCaught(signId))
+    else if (IsLegendarySignCaught(id))
         gSpecialVar_Result = 2;
+    else if (CanAcquireLegendarySignSpecies(gLegendarySignDefinitions[id].species))
+        gSpecialVar_Result = IsSignResting(id) ? 3 : 1;
     else
-        gSpecialVar_Result = 1;
+        gSpecialVar_Result = 0;
     return gSpecialVar_Result;
 }
 
 u16 ShouldShowSelectedLegendarySignObject(void)
 {
-    enum LegendarySignId signId = gSpecialVar_0x8004;
-
-    gSpecialVar_Result = signId < LEGENDARY_SIGN_COUNT
-                      && IsLegendarySignUnlocked(signId)
-                      && !IsLegendarySignCaught(signId)
-                      && !IsLegendaryEncounterLost(gLegendarySignDefinitions[signId].species);
+    enum LegendarySignId id = gSpecialVar_0x8004;
+    gSpecialVar_Result = id < LEGENDARY_SIGN_COUNT && !IsLegendarySignCaught(id);
     return gSpecialVar_Result;
 }
 
@@ -726,15 +622,20 @@ u16 GetSelectedLegendarySignLevel(void)
 
 void CreateSelectedLegendarySignEncounter(void)
 {
-    enum LegendarySignId signId = gSpecialVar_0x8004;
-
-    if (signId >= LEGENDARY_SIGN_COUNT)
+    enum LegendarySignId id = gSpecialVar_0x8004;
+    gSpecialVar_Result = FALSE;
+    if (id >= LEGENDARY_SIGN_COUNT || IsSignResting(id)
+     || !CanAcquireLegendarySignSpecies(gLegendarySignDefinitions[id].species))
         return;
-    CreateScriptedWildMon(
-        gLegendarySignDefinitions[signId].species,
-        GetSignLevel(gLegendarySignDefinitions[signId].levelOffset),
-        ITEM_NONE);
+    u16 map = ((u8)gSaveBlock1Ptr->location.mapGroup << 8) | (u8)gSaveBlock1Ptr->location.mapNum;
+    if (gLegendarySignDefinitions[id].mapId != map)
+        return;
+    sEncounterSignPlusOne = id + 1;
+    UnlockLegendarySign(id);
+    CreateScriptedWildMon(gLegendarySignDefinitions[id].species,
+        GetSignLevel(gLegendarySignDefinitions[id].levelOffset), ITEM_NONE);
     ApplyEmeraldChampionsRandomNonMegaSet(&gParties[B_TRAINER_OPPONENT_A][0]);
+    gSpecialVar_Result = TRUE;
 }
 
 void CreateEmeraldChampionsStaticLegendaryEncounter(void)
@@ -769,120 +670,231 @@ void TryGiveSelectedLegendarySignReward(void)
 
 void TryUnlockDarkraiLegendarySign(void)
 {
-    static const u16 sMtPyreTrainers[] =
-    {
-        TRAINER_MARK,
-        TRAINER_DEZ_AND_LUKE,
-        TRAINER_LEAH,
-        TRAINER_ZANDER,
-        TRAINER_WILLIAM,
-        TRAINER_KAYLA,
-        TRAINER_GABRIELLE_1,
-        TRAINER_ATSUSHI,
-        TRAINER_TASHA,
-        TRAINER_VALERIE_1,
-        TRAINER_CEDRIC,
-        TRAINER_GRUNT_MT_PYRE_1,
-        TRAINER_GRUNT_MT_PYRE_2,
-        TRAINER_GRUNT_MT_PYRE_3,
-        TRAINER_GRUNT_MT_PYRE_4,
-        TRAINER_MATT_MT_PYRE,
-    };
+    gSpecialVar_0x8004 = LEGENDARY_SIGN_DARKRAI;
+    TryUnlockSelectedLegendarySign();
+}
 
-    gSpecialVar_Result = 0;
-    if (IsLegendaryEncounterLost(SPECIES_DARKRAI))
+static const u8 *const sNativeLegendaryLocations[] =
+{
+    COMPOUND_STRING("Terra Cave"), COMPOUND_STRING("Marine Cave"),
+    COMPOUND_STRING("Sky Pillar's summit"), COMPOUND_STRING("the Desert Ruins"),
+    COMPOUND_STRING("the Island Cave"), COMPOUND_STRING("the Ancient Tomb"),
+    COMPOUND_STRING("Hoenn's routes / Southern Island"), COMPOUND_STRING("Hoenn's routes / Southern Island"),
+    COMPOUND_STRING("Navel Rock's lower chamber"), COMPOUND_STRING("Navel Rock's summit"),
+    COMPOUND_STRING("Faraway Island"), COMPOUND_STRING("Birth Island"),
+    COMPOUND_STRING("Jirachi's room in Meteor Falls"), COMPOUND_STRING("Diancie's room in Cave of Origin"),
+    COMPOUND_STRING("Heatran's room in Scorched Slab"), COMPOUND_STRING("Ember Path"),
+};
+STATIC_ASSERT(ARRAY_COUNT(sNativeLegendaryLocations) == ARRAY_COUNT(sNativeLegendaryEncounters), LegendaryGuideLocations);
+
+static const u8 *GetLegendaryDisplayName(enum Species species)
+{
+    switch (species)
     {
-        gSpecialVar_Result = 5;
-        return;
+    case SPECIES_ARTICUNO_GALAR: return COMPOUND_STRING("Galarian Articuno");
+    case SPECIES_ZAPDOS_GALAR: return COMPOUND_STRING("Galarian Zapdos");
+    case SPECIES_MOLTRES_GALAR: return COMPOUND_STRING("Galarian Moltres");
+    default: return GetSpeciesName(species);
     }
-    if (IsLegendarySignCaught(LEGENDARY_SIGN_DARKRAI))
+}
+
+static bool32 HasCaughtNativeLegendary(enum Species species)
+{
+    return species == SPECIES_MOLTRES ? FlagGet(FLAG_EC_CAUGHT_MOLTRES)
+        : GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT);
+}
+
+static void AddLegendaryGuideEntry(u16 id, enum Species species, const u8 *status)
+{
+    struct ListMenuItem item;
+    const u8 *name = GetLegendaryDisplayName(species);
+    u8 *text = Alloc(StringLength(name) + StringLength(status) + 1);
+    if (text == NULL)
+        return;
+    StringCopy(text, name);
+    StringAppend(text, status);
+    item.name = text;
+    item.id = id;
+    MultichoiceDynamic_PushElement(item);
+    gSpecialVar_Result++;
+}
+
+static const u8 *GetLegendaryGuideStatus(enum LegendarySignId id)
+{
+    if (IsLegendarySignCaught(id))
+        return COMPOUND_STRING(" (Caught)");
+    if (!MeetsSignProgression(id))
+        return COMPOUND_STRING(" (Later)");
+    if (!MeetsSignDiscovery(id))
+        return COMPOUND_STRING(" (Clue)");
+    switch (gLegendarySignDefinitions[id].source)
     {
-        gSpecialVar_Result = 4;
-        return;
+    case LEGENDARY_SOURCE_CIRCUIT:
+    case LEGENDARY_SOURCE_MASTERY:
+    case LEGENDARY_SOURCE_GAME_CORNER:
+    case LEGENDARY_SOURCE_BREEDING:
+        return COMPOUND_STRING(" (Lead)");
+    default:
+        return IsSignResting(id) ? COMPOUND_STRING(" (Resting)") : COMPOUND_STRING(" (Ready)");
     }
-    if (!FlagGet(FLAG_RECEIVED_RED_OR_BLUE_ORB))
-        return;
-    for (u32 i = 0; i < ARRAY_COUNT(sMtPyreTrainers); i++)
-        if (!HasTrainerBeenFought(sMtPyreTrainers[i]))
-            return;
-    if (!PlayerPartyHasSpeciesFamily(SPECIES_MUSHARNA))
-    {
-        gSpecialVar_Result = 1;
-        return;
-    }
-    gSpecialVar_Result = IsLegendarySignUnlocked(LEGENDARY_SIGN_DARKRAI) ? 3 : 6;
 }
 
 void BuildLegendarySignResearchMenu(void)
 {
-    u8 badgeCount = GetBadgeCountForLegendarySigns();
-
     gSpecialVar_Result = 0;
-    for (enum LegendarySignId signId = 0; signId < LEGENDARY_SIGN_COUNT; signId++)
+    // A scrollable entry per encounter replaces the truncated nine-Sign ledger.
+    // Future and completed leads stay inspectable; this menu grants no access.
+    for (enum LegendarySignId id = 0; id < LEGENDARY_SIGN_COUNT; id++)
+        AddLegendaryGuideEntry(id, gLegendarySignDefinitions[id].species, GetLegendaryGuideStatus(id));
+    for (u32 i = 0; i < ARRAY_COUNT(sNativeLegendaryEncounters); i++)
     {
-        const struct LegendarySignDefinition *sign = &gLegendarySignDefinitions[signId];
-        struct ListMenuItem item;
-        u8 *name;
+        enum Species species = sNativeLegendaryEncounters[i];
+        bool32 caught = HasCaughtNativeLegendary(species);
+        AddLegendaryGuideEntry(LEGENDARY_SIGN_COUNT + i, species,
+            caught ? COMPOUND_STRING(" (Caught)") : COMPOUND_STRING(" (Lead)"));
+    }
+}
 
-        // These two are researched and delivered personally by this scientist.
-        if (signId == LEGENDARY_SIGN_MAGEARNA || signId == LEGENDARY_SIGN_ARCEUS
-         || IsLegendarySignCaught(signId)
-         || IsLegendaryEncounterLost(sign->species)
-         || badgeCount < sign->minimumBadges
-         || (sign->requiredFlag != 0 && !FlagGet(sign->requiredFlag)))
-            continue;
-        name = Alloc(StringLength(GetSpeciesName(sign->species)) + 5);
-        StringCopy(name, GetSpeciesName(sign->species));
-        if (IsLegendarySignUnlocked(signId))
-            StringAppend(name, COMPOUND_STRING(" (R)"));
-        item.name = name;
-        item.id = signId;
+void BuildLocalLegendarySignMenu(void)
+{
+    u16 map = ((u8)gSaveBlock1Ptr->location.mapGroup << 8) | (u8)gSaveBlock1Ptr->location.mapNum;
+    gSpecialVar_Result = 0;
+    for (enum LegendarySignId id = 0; id < LEGENDARY_SIGN_COUNT; id++)
+    {
+        const struct LegendarySignDefinition *sign = &gLegendarySignDefinitions[id];
+        if (sign->source == LEGENDARY_SOURCE_LANDMARK && sign->mapId == map)
+            AddLegendaryGuideEntry(id, sign->species, GetLegendaryGuideStatus(id));
+    }
+    struct ListMenuItem item;
+    item.name = Alloc(sizeof("Other legendary leads"));
+    if (item.name != NULL)
+    {
+        StringCopy((u8 *)item.name, COMPOUND_STRING("Other legendary leads"));
+        item.id = 0xFFFE;
         MultichoiceDynamic_PushElement(item);
         gSpecialVar_Result++;
     }
 }
 
+static void BufferNativeLegendaryLead(u32 index)
+{
+    enum Species species = sNativeLegendaryEncounters[index];
+    StringCopy(gStringVar2, GetSpeciesName(species));
+    StringCopy(gStringVar3, sNativeLegendaryLocations[index]);
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_2}\n{STR_VAR_3}."));
+    if (HasCaughtNativeLegendary(species))
+    {
+        StringAppend(gStringVar4, COMPOUND_STRING("\pCaught! This discovery is recorded."));
+        return;
+    }
+    if (species == SPECIES_GROUDON || species == SPECIES_KYOGRE)
+        StringAppend(gStringVar4, COMPOUND_STRING("\pAfter becoming Champion, ask the\nWeather Institute about unusual\lweather. Follow the report to a cave."));
+    else if (species == SPECIES_RAYQUAZA)
+        StringAppend(gStringVar4, COMPOUND_STRING("\pReturn to the summit after resolving\nthe crisis in Sootopolis."));
+    else if (species == SPECIES_REGIROCK || species == SPECIES_REGICE || species == SPECIES_REGISTEEL)
+        StringAppend(gStringVar4, COMPOUND_STRING("\pTake WAILORD and RELICANTH to the\nSealed Chamber on Route 134.\pRead its inscriptions to open the\nthree ruins, then solve each puzzle."));
+    else if (species == SPECIES_LATIAS || species == SPECIES_LATIOS)
+        StringAppend(gStringVar4, COMPOUND_STRING("\pAfter the League, the TV report\nstarts one roaming across Hoenn.\pThe other waits at Southern Island.\nAsk at the ferry about island trips."));
+    else if (species == SPECIES_HEATRAN)
+        StringAppend(gStringVar4, COMPOUND_STRING("\pPlace the MAGMA STONE in its room\nto awaken HEATRAN."));
+    else if (species == SPECIES_MEW)
+        StringAppend(gStringVar4, COMPOUND_STRING("\pFollow MEW through the island's grass\nand approach when you find it."));
+    else if (species == SPECIES_DEOXYS)
+        StringAppend(gStringVar4, COMPOUND_STRING("\pFollow the moving triangle with as\nfew steps as possible."));
+    else
+        StringAppend(gStringVar4, COMPOUND_STRING("\pExplore this place and approach the\nlegendary when you find it."));
+    StringAppend(gStringVar4, COMPOUND_STRING("\pIf it escapes or faints, leave the\narea and return for another try."));
+}
+
 void ResearchSelectedLegendarySign(void)
 {
-    enum LegendarySignId signId = gSpecialVar_0x8004;
-    const struct LegendarySignDefinition *sign;
-
-    TryUnlockSelectedLegendarySign();
-    if (signId >= LEGENDARY_SIGN_COUNT)
+    u16 selection = gSpecialVar_0x8004;
+    gSpecialVar_Result = 0;
+    if (selection >= LEGENDARY_SIGN_COUNT)
+    {
+        if (selection < LEGENDARY_SIGN_COUNT + ARRAY_COUNT(sNativeLegendaryEncounters))
+            BufferNativeLegendaryLead(selection - LEGENDARY_SIGN_COUNT);
         return;
-    sign = &gLegendarySignDefinitions[signId];
-    StringCopy(gStringVar1, sign->requiredSpecies == SPECIES_NONE
-        ? COMPOUND_STRING("Your research") : GetSpeciesName(sign->requiredSpecies));
-    StringCopy(gStringVar2, GetSpeciesName(sign->species));
-    StringCopy(gStringVar3, GetLegendarySignLocationName(signId));
-    gSpecialVar_0x8005 = sign->source;
+    }
+    enum LegendarySignId id = selection;
+    const struct LegendarySignDefinition *sign = &gLegendarySignDefinitions[id];
+    StringCopy(gStringVar1, GetSpeciesName(sign->requiredSpecies));
+    StringCopy(gStringVar2, GetLegendaryDisplayName(sign->species));
+    StringCopy(gStringVar3, GetLegendarySignLocationName(id));
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_2}\n{STR_VAR_3}."));
+    if (IsLegendarySignCaught(id))
+    {
+        StringAppend(gStringVar4, COMPOUND_STRING("\pCaught! This discovery is recorded."));
+        gSpecialVar_Result = 4;
+        return;
+    }
+    if (!MeetsSignProgression(id))
+    {
+        if (GetBadgeCountForLegendarySigns() < sign->minimumBadges)
+        {
+            ConvertIntToDecimalStringN(gStringVar1, sign->minimumBadges, STR_CONV_MODE_LEFT_ALIGN, 1);
+            u8 buffer[80];
+            StringExpandPlaceholders(buffer, COMPOUND_STRING("\pThis Sign answers a Trainer with\n{STR_VAR_1} Gym Badges."));
+            StringAppend(gStringVar4, buffer);
+        }
+        if (sign->requiredFlag == FLAG_SYS_GAME_CLEAR && !FlagGet(FLAG_SYS_GAME_CLEAR))
+            StringAppend(gStringVar4, COMPOUND_STRING("\pFirst, become Hoenn's Champion."));
+        else if (sign->requiredFlag == FLAG_RECEIVED_RED_OR_BLUE_ORB && !FlagGet(sign->requiredFlag))
+            StringAppend(gStringVar4, COMPOUND_STRING("\pFirst, help the elders at Mt. Pyre\nand receive their Orb."));
+        return;
+    }
+    if (!MeetsSignDiscovery(id))
+    {
+        if (id == LEGENDARY_SIGN_REGIGIGAS)
+            StringAppend(gStringVar4, COMPOUND_STRING("\pBring REGIROCK, REGICE and REGISTEEL\ntogether to the statue."));
+        else if (id == LEGENDARY_SIGN_PECHARUNT)
+            StringAppend(gStringVar4, COMPOUND_STRING("\pCatch OKIDOGI, MUNKIDORI and\nFEZANDIPITI, then inspect the shrine."));
+        else
+        {
+            u8 buffer[180];
+            StringExpandPlaceholders(buffer, COMPOUND_STRING("\pA clue points to this family:\n{STR_VAR_1}.\pBefriend a member of that family.\nA caught Pokédex entry is enough;\lyour partner can stay in the PC."));
+            StringAppend(gStringVar4, buffer);
+        }
+        gSpecialVar_Result = 1;
+        return;
+    }
     switch (sign->source)
     {
     case LEGENDARY_SOURCE_GAME_CORNER:
-        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_2}'s Sign is translated.\pAsk the Pokémon prize counter at\nMauville's Game Corner about it."));
-        break;
+        StringAppend(gStringVar4, COMPOUND_STRING("\pAsk the Pokémon prize counter at\nMauville's Game Corner."));
+        return;
     case LEGENDARY_SOURCE_CIRCUIT:
+        StringAppend(gStringVar4, COMPOUND_STRING("\pEarn its Champions Circuit milestone\nat the Battle Frontier's Battle Tower.\pLifetime wins count. The attendant\nkeeps an earned reward until claimed."));
+        return;
     case LEGENDARY_SOURCE_MASTERY:
-        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_2}'s Sign is translated.\pEarn its Champions Circuit milestone\nat the Battle Frontier's Battle Tower.\pThe attendant will keep your earned\nreward until you return to claim it."));
-        break;
+        StringAppend(gStringVar4, id == LEGENDARY_SIGN_ARCEUS
+            ? COMPOUND_STRING("\pComplete all the other Legendary\nSigns, then visit Devon's researcher.")
+            : COMPOUND_STRING("\pWin 40 Circuit battles in total and\nclaim its other legendary rewards."));
+        return;
     case LEGENDARY_SOURCE_BREEDING:
-        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_2}'s Sign is translated.\pLeave MANAPHY and DITTO at the\nDay Care on Route 117.\pTheir Egg can now carry PHIONE."));
-        break;
+        StringAppend(gStringVar4, COMPOUND_STRING("\pLeave MANAPHY and DITTO together\nat Route 117's Day Care.\pHatch their Egg to meet PHIONE."));
+        return;
+    case LEGENDARY_SOURCE_ORDINARY_WILD:
+        StringAppend(gStringVar4, COMPOUND_STRING("\pSearch the wild Pokémon in this area.\nNo research visit is needed."));
+        return;
     default:
-        StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_2}'s Sign is translated.\pReturn to\n{STR_VAR_3}.\pThe Sign can now answer you there."));
-        if (signId == LEGENDARY_SIGN_DARKRAI)
-            StringAppend(gStringVar4, COMPOUND_STRING("\pComplete every Trainer battle within\nMt. Pyre, then speak to the old man\lwith MUSHARNA's family in your party."));
-        else if (signId == LEGENDARY_SIGN_REGIGIGAS)
-            StringAppend(gStringVar4, COMPOUND_STRING("\pTake REGIROCK, REGICE, and REGISTEEL\nto the statue in the inner chamber."));
-        else if (signId == LEGENDARY_SIGN_PECHARUNT)
-            StringAppend(gStringVar4, COMPOUND_STRING("\pFirst capture OKIDOGI, MUNKIDORI,\nand FEZANDIPITI. Then return to\lthe shrine with OKIDOGI's family."));
         break;
     }
-    if (gSpecialVar_Result == 6)
+    if (id == LEGENDARY_SIGN_MAGEARNA)
     {
-        UnlockLegendarySign(signId);
-        gSpecialVar_Result = 2;
+        StringAppend(gStringVar4, COMPOUND_STRING("\pSpeak to Devon's dream researcher\nabout his mechanical prototype."));
+        return;
     }
+    if (IsSignResting(id))
+    {
+        StringAppend(gStringVar4, COMPOUND_STRING("\pResting after your last encounter.\nLeave this area and return to retry."));
+        gSpecialVar_Result = 5;
+        return;
+    }
+    StringAppend(gStringVar4, sign->source == LEGENDARY_SOURCE_LANDMARK
+        ? COMPOUND_STRING("\pReady! Inspect the marked stone\nin this area to meet this Pokémon.")
+        : COMPOUND_STRING("\pReady! Approach the Pokémon or\ninspect its shrine in this area."));
+    gSpecialVar_Result = 2;
 }
 
 static bool32 ApplyNonMegaGiftSet(struct Pokemon *mon)

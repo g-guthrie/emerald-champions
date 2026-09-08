@@ -80,8 +80,6 @@
 
 extern enum Item gSpecialVar_ItemId;
 
-#define FRIENDSHIP_EVO_THRESHOLD ((P_FRIENDSHIP_EVO_THRESHOLD >= GEN_8) ? 160 : 220)
-
 struct SpeciesItem
 {
     enum Species species;
@@ -1419,23 +1417,19 @@ void CalculateMonStatsCont(struct Pokemon *mon, bool32 updateSpeedStat)
             continue;
 
         u8 baseStat = GetSpeciesBaseStat(species, i);
-        s32 statInvestment;
+        s32 n;
 
         if (P_STAT_CALCULATION >= GEN_CHAMPIONS)
         {
-            // Emerald Champions: one Stat Point is worth two investment (eight
-            // vanilla EVs), so a point is exactly one stat at Lv. 50 and two
-            // at Lv. 100. The cap of 63 keeps 32 points equal to a 252 EV
-            // spread.
+            // Stat Points are a fixed bonus at every level, before Nature.
             iv[i] = MAX_PER_STAT_IVS;
-            statInvestment = min(2 * ev[i], 63);
+            n = ((2 * baseStat + iv[i]) * level) / 100 + 5 + ev[i];
         }
         else
         {
-            statInvestment = ev[i] / 4;
+            n = ((2 * baseStat + iv[i] + ev[i] / 4) * level) / 100 + 5;
         }
 
-        s32 n = (((2 * baseStat + iv[i] + statInvestment) * level) / 100) + 5;
         n = ModifyStatByNature(nature, n, i);
         if (B_FRIENDSHIP_BOOST == TRUE)
             n = n + ((n * 10 * friendship) / (MAX_FRIENDSHIP * 100));
@@ -1453,20 +1447,15 @@ void CalculateMonStatsCont(struct Pokemon *mon, bool32 updateSpeedStat)
     }
     else
     {
-        s32 statInvestment;
-
         if (P_STAT_CALCULATION >= GEN_CHAMPIONS)
         {
             iv[STAT_HP] = MAX_PER_STAT_IVS;
-            statInvestment = min(2 * ev[STAT_HP], 63);
+            newMaxHP = ((2 * GetSpeciesBaseHP(species) + iv[STAT_HP]) * level) / 100 + level + 10 + ev[STAT_HP];
         }
         else
         {
-            statInvestment = ev[STAT_HP] / 4;
+            newMaxHP = ((2 * GetSpeciesBaseHP(species) + iv[STAT_HP] + ev[STAT_HP] / 4) * level) / 100 + level + 10;
         }
-
-        s32 n = 2 * GetSpeciesBaseHP(species) + iv[STAT_HP];
-        newMaxHP = (((n + statInvestment) * level) / 100) + level + 10;
     }
 
     gBattleScripting.levelUpHP = newMaxHP - oldMaxHP;
@@ -4107,7 +4096,7 @@ bool32 DoesMonMeetAdditionalConditions(struct Pokemon *mon, const struct Evoluti
     u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, 0);
     u16 upperPersonality = personality >> 16;
     u32 weather = GetCurrentWeather();
-    u32 nature = GetNature(mon);
+    u32 nature = GetMonData(mon, MON_DATA_HIDDEN_NATURE);
     bool32 removeHoldItem = FALSE;
     enum Item removeBagItem = ITEM_NONE;
     u32 removeBagItemCount = 0;
@@ -4417,6 +4406,14 @@ bool32 DoesMonMeetAdditionalConditions(struct Pokemon *mon, const struct Evoluti
     return TRUE;
 }
 
+bool32 IsMonEligibleForLeveler(struct Pokemon *mon)
+{
+    return GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE
+        && !GetMonData(mon, MON_DATA_IS_EGG)
+        && (GetMonData(mon, MON_DATA_LEVEL) < min(GetCurrentLevelCap(), MAX_LEVEL)
+            || GetEvolutionTargetSpecies(mon, EVO_MODE_NORMAL, ITEM_NONE, NULL, NULL, CHECK_EVO) != SPECIES_NONE);
+}
+
 enum Species GetEvolutionTargetSpecies(struct Pokemon *mon, enum EvolutionMode mode, enum Item evolutionItem, struct Pokemon *tradePartner, bool32 *canStopEvo, enum EvoState evoState)
 {
     int i;
@@ -4442,6 +4439,7 @@ enum Species GetEvolutionTargetSpecies(struct Pokemon *mon, enum EvolutionMode m
     {
     case EVO_MODE_NORMAL:
     case EVO_MODE_BATTLE_ONLY:
+    case EVO_MODE_BATTLE_READY:
         for (i = 0; evolutions[i].method != EVOLUTIONS_END; i++)
         {
             bool32 conditionsMet = FALSE;
@@ -4452,11 +4450,11 @@ enum Species GetEvolutionTargetSpecies(struct Pokemon *mon, enum EvolutionMode m
             switch (evolutions[i].method)
             {
             case EVO_LEVEL:
-                if (evolutions[i].param <= level)
+                if (mode != EVO_MODE_BATTLE_READY && evolutions[i].param <= level)
                     conditionsMet = TRUE;
                 break;
             case EVO_LEVEL_BATTLE_ONLY:
-                if (mode == EVO_MODE_BATTLE_ONLY && evolutions[i].param <= level)
+                if ((mode == EVO_MODE_BATTLE_ONLY || mode == EVO_MODE_BATTLE_READY) && evolutions[i].param <= level)
                     conditionsMet = TRUE;
                 break;
             }

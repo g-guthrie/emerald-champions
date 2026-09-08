@@ -87,6 +87,17 @@ struct AiCalcValues
     enum BattleTerrain terrain:8;
     enum Gimmick gimmickAtk:8;
     enum Gimmick gimmickDef:8;
+    u8 skipStrikes; // Caller already resolved these strikes into a damage-blocking state.
+    u8 strikeLimit; // Zero: all remaining strikes; one: evaluate only the next strike.
+};
+
+// A rational hit-and-KO chance. exact is false for unresolved multihit or
+// variable-power distributions; callers must not treat those as certainty.
+struct AiKOChance
+{
+    u32 numerator;
+    u32 denominator;
+    bool32 exact;
 };
 
 static inline bool32 IsMoveUnusable(u32 moveIndex, enum Move move, u32 moveLimitations)
@@ -122,6 +133,14 @@ bool32 AI_BattlerAtMaxHp(enum BattlerId battler);
 u32 GetHealthPercentage(enum BattlerId battler);
 bool32 AI_CanBattlerEscape(enum BattlerId battler);
 bool32 IsBattlerTrapped(enum BattlerId battlerAtk, enum BattlerId battlerDef);
+s32 AI_GetMovePriority(enum BattlerId battler, enum Ability ability, enum Move move);
+u32 GetLeechSeedDamage(enum BattlerId battler);
+u32 GetNightmareDamage(enum BattlerId battler);
+u32 GetCurseDamage(enum BattlerId battler);
+u32 GetTrapDamage(enum BattlerId battler);
+u32 GetPoisonDamage(enum BattlerId battler);
+u32 GetWeatherDamage(enum BattlerId battler);
+
 s32 AI_WhoStrikesFirst(enum BattlerId battlerAI, enum BattlerId battler, enum Move aiMoveConsidered, enum Move playerMoveConsidered, enum ConsiderPriority considerPriority);
 bool32 CanTargetFaintAi(enum BattlerId battlerDef, enum BattlerId battlerAtk);
 u32 NoOfHitsForTargetToFaintBattler(enum BattlerId battlerDef, enum BattlerId battlerAtk, enum DamageCalcContext calcContext, enum AiConsiderEndure considerEndure);
@@ -184,7 +203,12 @@ bool32 AI_CanMoveBeBlockedByTarget(struct DamageContext *ctx);
 enum MoveComparisonResult CompareMoveEffects(enum Move move1, enum Move move2, enum BattlerId battlerAtk, enum BattlerId battlerDef, s32 noOfHitsToKo);
 struct SimulatedDamage AI_CalcDamageSaveBattlers(enum Move move, enum BattlerId battlerAtk, enum BattlerId battlerDef, uq4_12_t *typeEffectiveness, enum Gimmick gimmickAtk, enum Gimmick gimmickDef);
 bool32 IsAdditionalEffectBlocked(enum BattlerId battlerAtk, enum Ability abilityAtk, enum BattlerId battlerDef, enum Ability abilityDef, enum Move move);
+bool32 AI_ApplyMegaForm(enum BattlerId battler);
 struct SimulatedDamage AI_CalcDamage(struct AiCalcValues *aiCalc, enum BattlerId battlerAtk, enum BattlerId battlerDef);
+bool32 AI_MoveAlwaysCrits(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move);
+u32 AI_GetBeatUpHitCount(enum BattlerId battlerAtk);
+struct AiKOChance AI_CalcKOChance(struct AiCalcValues *aiCalc, enum BattlerId battlerAtk, enum BattlerId battlerDef, u32 hp);
+struct SimulatedDamage AI_CalcDamageAfterBerry(struct AiCalcValues *aiCalc, enum BattlerId battlerAtk, enum BattlerId battlerDef);
 bool32 AI_IsDamagedByRecoil(enum BattlerId battler);
 u32 GetNoOfHitsToKO(u32 dmg, s32 hp);
 u32 GetNoOfHitsToKOBattlerDmg(u32 dmg, enum BattlerId battlerDef);
@@ -230,6 +254,7 @@ bool32 ShouldSetTerrain(enum BattlerId battler, enum BattleTerrain terrain);
 bool32 ShouldClearTerrain(enum BattlerId battler, enum BattleTerrain terrain);
 bool32 ShouldSetFieldStatus(enum BattlerId battler, u32 fieldStatus);
 bool32 ShouldClearFieldStatus(enum BattlerId battler, u32 fieldStatus);
+bool32 CanRefreshTrickRoom(enum BattlerId battler);
 bool32 HasSleepMoveWithLowAccuracy(enum BattlerId battlerAtk, enum BattlerId battlerDef);
 bool32 HasHealingEffect(enum BattlerId battler);
 bool32 IsTrappingMove(enum Move move);

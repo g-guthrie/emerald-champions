@@ -36,6 +36,10 @@ OldaleTown_EventScript_Girl::
 OldaleTown_EventScript_MartEmployee::
 	lock
 	faceplayer
+	special TopUpEmeraldChampionsOpeningBalls
+	goto_if_ne VAR_RESULT, 0, OldaleTown_EventScript_OpeningBallSupplies
+
+OldaleTown_EventScript_MartEmployeeContinue::
 	goto_if_set FLAG_RECEIVED_POTION_OLDALE, OldaleTown_EventScript_ExplainPotion
 	goto_if_set FLAG_TEMP_1, OldaleTown_EventScript_ExplainPotion
 	setflag FLAG_TEMP_1
@@ -47,6 +51,16 @@ OldaleTown_EventScript_MartEmployee::
 	case DIR_NORTH, OldaleTown_EventScript_GoToMartNorth
 	case DIR_EAST, OldaleTown_EventScript_GoToMartEast
 	end
+
+OldaleTown_EventScript_OpeningBallSupplies::
+	msgbox OldaleTown_Text_OpeningBallSupplies, MSGBOX_DEFAULT
+	goto OldaleTown_EventScript_MartEmployeeContinue
+
+OldaleTown_Text_OpeningBallSupplies:
+	.string "Your field supplies are topped up!\n"
+	.string "Check your Bag or item PC.\p"
+	.string "Try more partners before your\n"
+	.string "first battle with the PROF.'s kid.$"
 
 OldaleTown_EventScript_GoToMartSouth::
 	applymovement LOCALID_OLDALE_MART_EMPLOYEE, OldaleTown_Movement_EmployeeSouth
@@ -394,4 +408,3 @@ OldaleTown_Text_BrendanLetsGoBack:
 OldaleTown_Text_TownSign:
 	.string "OLDALE TOWN\n"
 	.string "“Where things start off scarce.”$"
-

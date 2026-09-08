@@ -12,6 +12,7 @@ from pathlib import Path
 
 
 from showdown_import import ABILITY_OVERRIDES, PINNED_COMMIT, SOURCE_HASHES, constants, mega_suffix, read_pinned_source, to_id, verify_checkout
+from verify_trainer_ability_legality import configured_species_abilities, resolve_species, species_aliases
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "data/emerald_champions/showdown_champions_random_doubles.json"
@@ -66,8 +67,6 @@ def compatibility_flags(species_id: str) -> list[str]:
 def build(showdown_root: Path) -> tuple[dict, str]:
     from generate_showdown_champions_learnsets import top_level_entries
     from generate_emerald_champions_battle_sets import species_build_metadata
-    from verify_trainer_ability_legality import resolve_species, species_aliases
-
     verify_checkout(showdown_root)
     sources = {name: read_pinned_source(showdown_root, name)
                for name in (SOURCE_FILE, GEN9_SOURCE_FILE, "data/pokedex.ts",
@@ -277,17 +276,29 @@ def validate_manifest(manifest: dict) -> None:
             raise ValueError("Circuit template contains duplicate or empty moves")
         if template.get("authored"):
             points = template.get("stat_points", [])
-            if len(template["moves"]) > 4 or len(points) != 6 or sum(points) != 66 or any(p < 0 or p > 32 for p in points):
+            if len(template["moves"]) > 4 or len(points) != 6 or sum(points) > 66 or any(type(p) is not int or p < 0 or p > 32 for p in points):
                 raise ValueError("Circuit authored supplement violates the competitive set budget")
             if template.get("dependency") not in {
                 "CIRCUIT_DEPENDENCY_" + name for name in
                 ("NONE", "RAIN", "SUN", "SAND", "SNOW", "TRICK_ROOM", "TERRAIN", "GRAVITY")
             }:
                 raise ValueError("Circuit authored supplement has an unknown field dependency")
+    configured_abilities = configured_species_abilities()
+    aliases = species_aliases()
     for variant in manifest["variants"]:
         if not (0 <= variant["template_offset"] < len(manifest["templates"])
                 and 0 < variant["template_count"] <= len(manifest["templates"]) - variant["template_offset"]):
             raise ValueError("Circuit template range is outside the manifest")
+        legal = configured_abilities.get(resolve_species(variant["party_species"], aliases), frozenset())
+        start = variant["template_offset"]
+        stop = start + variant["template_count"]
+        for index, template in enumerate(manifest["templates"][start:stop], start):
+            illegal = set(template["abilities"]) - legal
+            if illegal:
+                raise ValueError(
+                    f"Circuit {variant['party_species']} template {index} requests "
+                    f"unconfigured Abilities: {', '.join(sorted(illegal))}"
+                )
 
 
 def render_counts(manifest: dict, header: str) -> str:

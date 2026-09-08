@@ -140,10 +140,14 @@ Route113_Text_AshCanBeFashionedIntoGlass:
 	.string "It can be fashioned into glass.$"
 
 Route113_Text_FunWalkingThroughAsh:
-	.string "It's fun walking through the volcano's\n"
-	.string "ashes on the ground and grass.\p"
-	.string "You can see where you walked--it's\n"
-	.string "really neat!$"
+	.string "PAWNIARD leave little tracks in the ash.\n"
+	.string "They become BISHARP at Lv. 52.\p"
+	.string "Let BISHARP hold a LEADER'S CREST,\n"
+	.string "then level it up for KINGAMBIT.\l"
+	.string "The crest is used up when it evolves.\p"
+	.string "The free Evolution Items archive has\n"
+	.string "crests. Show a battle supplier your\l"
+	.string "MEGA RING to open the archive.$"
 
 Route113_Text_RouteSign111:
 	.string "ROUTE 113\n"

@@ -39,6 +39,32 @@
       "trainer_sight_or_berry_tree_id": "ITEM_SABLENITE",
       "script": "Common_EventScript_FindItem",
       "flag": "FLAG_EC_ITEM_MANOR_SABLENITE"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
+      "x": 3,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_BANETTITE",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_ITEM_MT_PYRE_6F_BANETTITE"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
+      "x": 3,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "ITEM_CHANDELURITE",
+      "script": "Common_EventScript_FindItem",
+      "flag": "FLAG_EC_ITEM_ROUTE121_CHANDELURITE"
     }
   ],
   "warp_events": [

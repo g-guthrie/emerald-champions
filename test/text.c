@@ -240,7 +240,9 @@ TEST("Item names fit on Shop Screen")
 TEST("Item descriptions fit on Bag and Shop Screen")
 {
     u32 i;
-    const u32 fontId = FONT_NORMAL, widthPx = 102;
+    // Both description windows are 14 tiles wide and print at x = 3 with
+    // FONT_NORMAL and zero letter spacing (item_menu.c and shop.c).
+    const u32 fontId = FONT_NORMAL, widthPx = 14 * 8 - 3;
     enum Item item = ITEM_NONE;
     for (i = 1; i < ITEMS_COUNT; i++)
     {

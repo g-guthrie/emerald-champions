@@ -6,14 +6,7 @@ BattleFrontier_Lounge3_MapScripts::
 	.set BET_AMOUNT_15, 15
 
 BattleFrontier_Lounge3_EventScript_Gambler::
-	lock
-	faceplayer
-	goto_if_set FLAG_MET_BATTLE_FRONTIER_GAMBLER, BattleFrontier_Lounge3_EventScript_AlreadyMetGambler
-	call BattleFrontier_Lounge3_EventScript_CountSilverSymbols
-	goto_if_le VAR_0x8004, 2, BattleFrontier_Lounge3_EventScript_NotEnoughSilverSymbols
-	setflag FLAG_MET_BATTLE_FRONTIER_GAMBLER
-	msgbox BattleFrontier_Lounge3_Text_YouLookToughExplainGambling, MSGBOX_DEFAULT
-	goto BattleFrontier_Lounge3_EventScript_AskToEnterChallenge
+	msgbox BattleFrontier_Lounge3_Text_CurrentObserver, MSGBOX_NPC
 	end
 
 BattleFrontier_Lounge3_EventScript_AskToEnterChallenge::
@@ -466,3 +459,10 @@ BattleFrontier_Lounge3_Text_ShouldBeTakingChallenges::
 	.string "Those TRAINERS…\n"
 	.string "What are they doing?\l"
 	.string "They should be taking challenges.$"
+
+BattleFrontier_Lounge3_Text_CurrentObserver::
+	.string "I used to wager on the old\n"
+	.string "Frontier events.\p"
+	.string "Now I watch the CIRCUIT and argue\n"
+	.string "about teams. It's cheaper...\l"
+	.string "usually.$"

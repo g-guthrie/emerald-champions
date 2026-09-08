@@ -173,7 +173,6 @@ TEST("Champions stat calculation uses perfect IVs and Stat Points")
     u32 nature = NATURE_HARDY;
     u32 friendship = 0;
     u32 level = 50;
-    u32 investment = min(2 * statPoints, 63);
     u32 expectedHp;
     u32 expectedAttack;
 
@@ -185,12 +184,54 @@ TEST("Champions stat calculation uses perfect IVs and Stat Points")
     SetMonData(&mon, MON_DATA_ATK_EV, &statPoints);
     CalculateMonStats(&mon);
 
-    expectedHp = ((2 * GetSpeciesBaseHP(SPECIES_WOBBUFFET) + MAX_PER_STAT_IVS + investment) * level) / 100 + level + 10;
-    expectedAttack = ((2 * GetSpeciesBaseAttack(SPECIES_WOBBUFFET) + MAX_PER_STAT_IVS + investment) * level) / 100 + 5;
+    expectedHp = ((2 * GetSpeciesBaseHP(SPECIES_WOBBUFFET) + MAX_PER_STAT_IVS) * level) / 100 + level + 10 + statPoints;
+    expectedAttack = ((2 * GetSpeciesBaseAttack(SPECIES_WOBBUFFET) + MAX_PER_STAT_IVS) * level) / 100 + 5 + statPoints;
     EXPECT_EQ(GetMonData(&mon, MON_DATA_MAX_HP), expectedHp);
     EXPECT_EQ(GetMonData(&mon, MON_DATA_ATK), expectedAttack);
     EXPECT_EQ(GetMonData(&mon, MON_DATA_HP_IV), zero);
     EXPECT_EQ(GetMonData(&mon, MON_DATA_ATK_IV), zero);
+}
+
+TEST("Champions fixed Stat Points apply before Nature at every level")
+{
+    struct Pokemon mon;
+    u32 level;
+    u32 points;
+    u32 nature;
+    u32 zero = 0;
+    u32 neutral = NATURE_HARDY;
+    u32 base;
+    PARAMETRIZE { level = 5; points = 1; nature = NATURE_ADAMANT; }
+    PARAMETRIZE { level = 10; points = 10; nature = NATURE_MODEST; }
+    PARAMETRIZE { level = 25; points = 32; nature = NATURE_HARDY; }
+    PARAMETRIZE { level = 50; points = 32; nature = NATURE_ADAMANT; }
+    PARAMETRIZE { level = 100; points = 32; nature = NATURE_MODEST; }
+    ASSUME(P_STAT_CALCULATION >= GEN_CHAMPIONS);
+    CreateMonWithIVs(&mon, SPECIES_WOBBUFFET, level, 0, OTID_STRUCT_PRESET(0), zero);
+    SetMonData(&mon, MON_DATA_HIDDEN_NATURE, &neutral);
+    SetMonData(&mon, MON_DATA_FRIENDSHIP, &zero);
+    SetMonData(&mon, MON_DATA_ATK_EV, &zero);
+    CalculateMonStats(&mon);
+    base = GetMonData(&mon, MON_DATA_ATK);
+    SetMonData(&mon, MON_DATA_ATK_EV, &points);
+    SetMonData(&mon, MON_DATA_HIDDEN_NATURE, &nature);
+    CalculateMonStats(&mon);
+    if (nature == NATURE_ADAMANT)
+        EXPECT_EQ(GetMonData(&mon, MON_DATA_ATK), (base + points) * 110 / 100);
+    else if (nature == NATURE_MODEST)
+        EXPECT_EQ(GetMonData(&mon, MON_DATA_ATK), (base + points) * 90 / 100);
+    else
+        EXPECT_EQ(GetMonData(&mon, MON_DATA_ATK), base + points);
+}
+
+TEST("Champions fixed Stat Points preserve Shedinja HP")
+{
+    struct Pokemon mon;
+    u32 points = 32;
+    CreateMon(&mon, SPECIES_SHEDINJA, 10, 0, OTID_STRUCT_PRESET(0));
+    SetMonData(&mon, MON_DATA_HP_EV, &points);
+    CalculateMonStats(&mon);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_MAX_HP), 1);
 }
 
 TEST("Champions PP calculation caps base PP and does not use PP Ups")

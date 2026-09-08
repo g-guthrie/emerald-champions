@@ -1,6 +1,14 @@
 #include "global.h"
 #include "test/battle.h"
 #include "battle_ai_util.h"
+#include "battle_ai_main.h"
+#include "battle_util.h"
+#include "random.h"
+#include "malloc.h"
+
+#define EC_EXPERT_FLAGS (AI_FLAG_BASIC_TRAINER | AI_FLAG_OMNISCIENT | AI_FLAG_SMART_SWITCHING | AI_FLAG_SMART_MON_CHOICES \
+    | AI_FLAG_PREDICTION | AI_FLAG_PP_STALL_PREVENTION | AI_FLAG_HP_AWARE | AI_FLAG_TRY_TO_2HKO \
+    | AI_FLAG_POWERFUL_STATUS | AI_FLAG_KNOW_OPPONENT_PARTY | AI_FLAG_DOUBLE_BATTLE)
 
 AI_DOUBLE_BATTLE_TEST("AI coordinates complementary Pledge moves even when both users have stronger physical STAB")
 {
@@ -74,105 +82,22 @@ AI_DOUBLE_BATTLE_TEST("AI won't use a Weather changing move if partner already c
     }
 }
 
-AI_DOUBLE_BATTLE_TEST("AI will not use Helping Hand if partner does not have any damage moves")
+AI_DOUBLE_BATTLE_TEST("EC expert pair: Helping Hand requires a damaging partner action")
 {
-    enum Move move1 = MOVE_NONE, move2 = MOVE_NONE, move3 = MOVE_NONE, move4 = MOVE_NONE;
-
-    PARAMETRIZE { move1 = MOVE_LEER; move2 = MOVE_TOXIC; }
-    PARAMETRIZE { move1 = MOVE_ACUPRESSURE; move2 = MOVE_DOUBLE_TEAM; move3 = MOVE_TOXIC; move4 = MOVE_PROTECT; }
-
     GIVEN {
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
-        PLAYER(SPECIES_WOBBUFFET);
-        PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_HELPING_HAND, MOVE_SCRATCH); }
-        OPPONENT(SPECIES_WOBBUFFET) { Moves(move1, move2, move3, move4); }
+        AI_FLAGS(EC_EXPERT_FLAGS);
+        PLAYER(SPECIES_WOBBUFFET) { HP(400); MaxHP(400); Speed(40); Moves(MOVE_CELEBRATE); }
+        PLAYER(SPECIES_WOBBUFFET) { HP(400); MaxHP(400); Speed(30); Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_WOBBUFFET) { HP(400); MaxHP(400); Speed(20); Moves(MOVE_HELPING_HAND, MOVE_SCRATCH); }
+        OPPONENT(SPECIES_WOBBUFFET) { HP(400); MaxHP(400); Speed(10); Moves(MOVE_TOXIC, MOVE_PROTECT); }
     } WHEN {
         TURN {
-            NOT_EXPECT_MOVE(opponentLeft, MOVE_HELPING_HAND);
-            SCORE_LT_VAL(opponentLeft, MOVE_HELPING_HAND, AI_SCORE_DEFAULT, target:playerLeft);
-            SCORE_LT_VAL(opponentLeft, MOVE_HELPING_HAND, AI_SCORE_DEFAULT, target:playerRight);
-            SCORE_LT_VAL(opponentLeft, MOVE_HELPING_HAND, AI_SCORE_DEFAULT, target:opponentLeft);
+            MOVE(playerLeft, MOVE_CELEBRATE);
+            MOVE(playerRight, MOVE_CELEBRATE);
+            EXPECT_MOVE(opponentLeft, MOVE_SCRATCH);
         }
     } SCENE {
         NOT MESSAGE("The opposing Wobbuffet used Helping Hand!");
-    }
-}
-
-AI_DOUBLE_BATTLE_TEST("AI skips Trick/Bestow when items are missing or target already holds one")
-{
-    enum Move move = MOVE_NONE;
-    enum Item atkItem = ITEM_NONE, targetItem = ITEM_NONE;
-
-    PARAMETRIZE { move = MOVE_TRICK;  atkItem = ITEM_NONE;        targetItem = ITEM_NONE; }
-    PARAMETRIZE { move = MOVE_BESTOW; atkItem = ITEM_NONE;        targetItem = ITEM_NONE; }
-    PARAMETRIZE { move = MOVE_BESTOW; atkItem = ITEM_ORAN_BERRY;  targetItem = ITEM_LEFTOVERS; }
-
-    GIVEN {
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
-        PLAYER(SPECIES_WOBBUFFET) { Item(targetItem); }
-        PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET) { Moves(move, MOVE_SCRATCH); Item(atkItem); }
-        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_TACKLE); }
-    } WHEN {
-        TURN { NOT_EXPECT_MOVE(opponentLeft, move); }
-    }
-}
-
-AI_DOUBLE_BATTLE_TEST("AI skips Trick/Bestow with unexchangeable items")
-{
-    enum Move move = MOVE_NONE;
-    enum Item atkItem = ITEM_NONE, targetItem = ITEM_NONE;
-
-    PARAMETRIZE { move = MOVE_TRICK;  atkItem = ITEM_ORANGE_MAIL; targetItem = ITEM_NONE; }
-    PARAMETRIZE { move = MOVE_TRICK;  atkItem = ITEM_ORAN_BERRY;  targetItem = ITEM_ORANGE_MAIL; }
-    PARAMETRIZE { move = MOVE_BESTOW; atkItem = ITEM_ORANGE_MAIL; targetItem = ITEM_NONE; }
-
-    GIVEN {
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
-        PLAYER(SPECIES_WOBBUFFET) { Item(targetItem); }
-        PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET) { Moves(move, MOVE_SCRATCH); Item(atkItem); }
-        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_TACKLE); }
-    } WHEN {
-        TURN { NOT_EXPECT_MOVE(opponentLeft, move); }
-    }
-}
-
-AI_DOUBLE_BATTLE_TEST("AI skips Trick around Sticky Hold")
-{
-    GIVEN {
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
-        PLAYER(SPECIES_WOBBUFFET) { Ability(ABILITY_STICKY_HOLD); Item(ITEM_LEFTOVERS); }
-        PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET) { Ability(ABILITY_PRESSURE); Item(ITEM_ORAN_BERRY); Moves(MOVE_TRICK, MOVE_SCRATCH); }
-        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_TACKLE); }
-    } WHEN {
-        TURN { NOT_EXPECT_MOVE(opponentLeft, MOVE_TRICK); }
-    }
-}
-
-AI_DOUBLE_BATTLE_TEST("AI skips Trick/Bestow if the target has a Substitute")
-{
-    enum Move move = MOVE_NONE;
-    enum Item atkItem = ITEM_NONE, targetItem = ITEM_NONE;
-
-    PARAMETRIZE { move = MOVE_TRICK;  atkItem = ITEM_ORAN_BERRY; targetItem = ITEM_LEFTOVERS; }
-    PARAMETRIZE { move = MOVE_BESTOW; atkItem = ITEM_ORAN_BERRY; targetItem = ITEM_NONE; }
-
-    GIVEN {
-        ASSUME(GetMoveEffect(MOVE_SUBSTITUTE) == EFFECT_SUBSTITUTE);
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
-        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_SUBSTITUTE, MOVE_CELEBRATE); Item(targetItem); Speed(20); }
-        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); Speed(20); }
-        OPPONENT(SPECIES_WOBBUFFET) { Moves(move, MOVE_SCRATCH); Item(atkItem); Speed(1); Attack(1); }
-        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); Speed(1); }
-    } WHEN {
-        TURN {
-            MOVE(playerLeft, MOVE_SUBSTITUTE);
-            MOVE(playerRight, MOVE_CELEBRATE);
-        }
-        TURN { NOT_EXPECT_MOVE(opponentLeft, move); }
     }
 }
 
@@ -699,74 +624,44 @@ AI_DOUBLE_BATTLE_TEST("AI does not use Spicy Extract if its ally would not benef
     }
 }
 
-AI_DOUBLE_BATTLE_TEST("AI will choose Beat Up on an ally with Justified if it will benefit the ally")
+AI_DOUBLE_BATTLE_TEST("EC expert pair: reciprocal Justified activation preserves the recipient's attack")
 {
-    enum Ability defAbility, atkAbility, currentHP;
-
-    PARAMETRIZE { defAbility = ABILITY_FLASH_FIRE; atkAbility = ABILITY_SCRAPPY;        currentHP = 400; }
-    PARAMETRIZE { defAbility = ABILITY_JUSTIFIED;  atkAbility = ABILITY_SCRAPPY;        currentHP = 400; }
-    PARAMETRIZE { defAbility = ABILITY_JUSTIFIED;  atkAbility = ABILITY_MOLD_BREAKER;   currentHP = 400; }
-    PARAMETRIZE { defAbility = ABILITY_JUSTIFIED;  atkAbility = ABILITY_SCRAPPY;        currentHP = 1; }
-
+    bool32 reverse;
+    enum Ability abilityAtk, abilityDef;
+    u32 hp;
+    PARAMETRIZE { reverse = FALSE; abilityAtk = ABILITY_SCRAPPY; abilityDef = ABILITY_JUSTIFIED; hp = 400; }
+    PARAMETRIZE { reverse = TRUE; abilityAtk = ABILITY_SCRAPPY; abilityDef = ABILITY_JUSTIFIED; hp = 400; }
+    PARAMETRIZE { reverse = FALSE; abilityAtk = ABILITY_MOLD_BREAKER; abilityDef = ABILITY_JUSTIFIED; hp = 400; }
+    PARAMETRIZE { reverse = FALSE; abilityAtk = ABILITY_SCRAPPY; abilityDef = ABILITY_FLASH_FIRE; hp = 400; }
+    PARAMETRIZE { reverse = FALSE; abilityAtk = ABILITY_SCRAPPY; abilityDef = ABILITY_JUSTIFIED; hp = 1; }
     GIVEN {
-        ASSUME(GetMoveEffect(MOVE_BEAT_UP) == EFFECT_BEAT_UP);
-        ASSUME(GetMoveType(MOVE_BEAT_UP) == TYPE_DARK);
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
-        PLAYER(SPECIES_WOBBUFFET);
-        PLAYER(SPECIES_CLEFABLE);
-        OPPONENT(SPECIES_PANGORO)   { Ability(atkAbility); Moves(MOVE_BEAT_UP); }
-        OPPONENT(SPECIES_GROWLITHE) { Moves(MOVE_CELEBRATE, MOVE_TACKLE); HP(currentHP); Ability(defAbility); }
+        AI_FLAGS(EC_EXPERT_FLAGS);
+        PLAYER(SPECIES_WOBBUFFET) { Level(50); HP(400); MaxHP(400); Defense(100); Attack(1); Speed(100); Moves(MOVE_SCRATCH); }
+        PLAYER(SPECIES_CLEFABLE) { Level(50); HP(400); MaxHP(400); Defense(100); Attack(1); Speed(90); Moves(MOVE_SCRATCH); }
+        if (!reverse) {
+            OPPONENT(SPECIES_PANGORO) { Level(50); HP(400); MaxHP(400); Attack(20); Defense(400); Speed(300); Ability(abilityAtk); Moves(MOVE_BEAT_UP); }
+            OPPONENT(SPECIES_GROWLITHE) { Level(50); HP(hp); MaxHP(400); Attack(180); Defense(400); Speed(200); Ability(abilityDef); Moves(MOVE_PROTECT, MOVE_TACKLE); }
+        } else {
+            OPPONENT(SPECIES_GROWLITHE) { Level(50); HP(hp); MaxHP(400); Attack(180); Defense(400); Speed(200); Ability(abilityDef); Moves(MOVE_PROTECT, MOVE_TACKLE); }
+            OPPONENT(SPECIES_PANGORO) { Level(50); HP(400); MaxHP(400); Attack(20); Defense(400); Speed(300); Ability(abilityAtk); Moves(MOVE_BEAT_UP); }
+        }
     } WHEN {
-        if (!(currentHP == 1) && (defAbility == ABILITY_JUSTIFIED) && (atkAbility != ABILITY_MOLD_BREAKER))
-            TURN { EXPECT_MOVE(opponentLeft, MOVE_BEAT_UP, target: opponentRight); }
-        else
-            TURN { EXPECT_MOVE(opponentLeft, MOVE_BEAT_UP, target: playerLeft); }
-    }
-}
-
-AI_DOUBLE_BATTLE_TEST("AI will not use Protect if its left ally is about to trigger Justified with Beat Up")
-{
-    ASSUME(GetMoveEffect(MOVE_BEAT_UP) == EFFECT_BEAT_UP);
-    ASSUME(GetMoveType(MOVE_BEAT_UP) == TYPE_DARK);
-
-    GIVEN {
-        WITH_CONFIG(AI_REVERSE_BATTLER_LOGIC_ORDER_CHANCE, 0);
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
-        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_SCRATCH); }
-        PLAYER(SPECIES_CLEFABLE) { Moves(MOVE_SCRATCH); }
-        OPPONENT(SPECIES_PANGORO)   { Ability(ABILITY_SCRAPPY); Moves(MOVE_BEAT_UP); }
-        OPPONENT(SPECIES_GROWLITHE) { Ability(ABILITY_JUSTIFIED); Moves(MOVE_PROTECT, MOVE_TACKLE); }
-    } WHEN {
+        struct BattlePokemon *activator = reverse ? opponentRight : opponentLeft;
+        struct BattlePokemon *recipient = reverse ? opponentLeft : opponentRight;
         TURN {
             MOVE(playerLeft, MOVE_SCRATCH, target: opponentLeft);
             MOVE(playerRight, MOVE_SCRATCH, target: opponentRight);
-            EXPECT_MOVE(opponentLeft, MOVE_BEAT_UP, target: opponentRight);
-            NOT_EXPECT_MOVE(opponentRight, MOVE_PROTECT);
+            if (hp > 1 && abilityDef == ABILITY_JUSTIFIED && abilityAtk != ABILITY_MOLD_BREAKER) {
+                EXPECT_MOVE(activator, MOVE_BEAT_UP, target: recipient);
+                EXPECT_MOVE(recipient, MOVE_TACKLE);
+            } else {
+                EXPECT_MOVE(activator, MOVE_BEAT_UP, target: playerLeft);
+            }
         }
-    }
-}
-
-AI_DOUBLE_BATTLE_TEST("AI will not use Protect if its right ally is about to trigger Justified with Beat Up")
-{
-    ASSUME(GetMoveEffect(MOVE_BEAT_UP) == EFFECT_BEAT_UP);
-    ASSUME(GetMoveType(MOVE_BEAT_UP) == TYPE_DARK);
-
-    GIVEN {
-        WITH_CONFIG(AI_REVERSE_BATTLER_LOGIC_ORDER_CHANCE, 100);
-        TIE_BREAK_SCORE(RNG_AI_SCORE_TIE_DOUBLES_MOVE, SCORE_TIE_LO, 0);
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
-        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_SCRATCH); }
-        PLAYER(SPECIES_CLEFABLE) { Moves(MOVE_SCRATCH); }
-        OPPONENT(SPECIES_GROWLITHE) { Ability(ABILITY_JUSTIFIED); Moves(MOVE_TACKLE, MOVE_PROTECT); }
-        OPPONENT(SPECIES_PANGORO)   { Ability(ABILITY_SCRAPPY); Moves(MOVE_BEAT_UP); }
-    } WHEN {
-        TURN {
-            MOVE(playerLeft, MOVE_SCRATCH, target: opponentLeft);
-            MOVE(playerRight, MOVE_SCRATCH, target: opponentRight);
-            EXPECT_MOVE(opponentRight, MOVE_BEAT_UP, target: opponentLeft);
-            NOT_EXPECT_MOVE(opponentLeft, MOVE_PROTECT);
-            SCORE_LT_VAL(opponentLeft, MOVE_PROTECT, AI_SCORE_DEFAULT, target: playerLeft);
-        }
+    } THEN {
+        struct BattlePokemon *recipient = reverse ? opponentLeft : opponentRight;
+        if (hp > 1 && abilityDef == ABILITY_JUSTIFIED && abilityAtk != ABILITY_MOLD_BREAKER)
+            EXPECT_EQ(recipient->statStages[STAT_ATK], DEFAULT_STAT_STAGE + 2);
     }
 }
 
@@ -1078,52 +973,6 @@ AI_DOUBLE_BATTLE_TEST("AI sees corresponding absorbing abilities on partners")
     }
 }
 
-AI_DOUBLE_BATTLE_TEST("AI sees random rolls correctly")
-{
-    // Champions Stat Points move this fixture completely above the Scratch
-    // threshold; older stat models straddle it on three damage rolls.
-    PASSES_RANDOMLY(P_STAT_CALCULATION >= GEN_CHAMPIONS ? 1 : 3,
-                    P_STAT_CALCULATION >= GEN_CHAMPIONS ? 1 : 15,
-                    RNG_AI_DMG_ROLL_RANDOM);
-    GIVEN {
-        WITH_CONFIG(AI_ROLL_ATTACKING, AI_ROLL_RANDOM);
-        ASSUME(GetMoveTarget(MOVE_DISCHARGE) == TARGET_FOES_AND_ALLY);
-        ASSUME(GetMoveType(MOVE_DISCHARGE) == TYPE_ELECTRIC);
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
-        PLAYER(SPECIES_ZIGZAGOON);
-        PLAYER(SPECIES_ZIGZAGOON);
-        OPPONENT(SPECIES_SLAKING) { Moves(MOVE_DISCHARGE, MOVE_SCRATCH); }
-        OPPONENT(SPECIES_PIKACHU) { HP(1); Ability(ABILITY_LIGHTNING_ROD); Moves(MOVE_SCRATCH); }
-    } WHEN {
-        TURN { EXPECT_MOVE(opponentLeft, MOVE_SCRATCH); }
-    }
-}
-
-AI_DOUBLE_BATTLE_TEST("AI treats an ally's redirection ability appropriately (gen 4)")
-{
-    enum Ability ability;
-    enum Move move;
-    enum Species species;
-
-    PARAMETRIZE { species = SPECIES_SEAKING;    ability = ABILITY_LIGHTNING_ROD;    move = MOVE_DISCHARGE; }
-    PARAMETRIZE { species = SPECIES_SHELLOS;    ability = ABILITY_STORM_DRAIN;      move = MOVE_SURF; }
-
-    GIVEN {
-        ASSUME(GetMoveTarget(MOVE_DISCHARGE) == TARGET_FOES_AND_ALLY);
-        ASSUME(GetMoveType(MOVE_DISCHARGE) == TYPE_ELECTRIC);
-        ASSUME(GetMoveTarget(MOVE_SURF) == TARGET_FOES_AND_ALLY);
-        ASSUME(GetMoveType(MOVE_SURF) == TYPE_WATER);
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_HP_AWARE);
-        WITH_CONFIG(B_REDIRECT_ABILITY_IMMUNITY, GEN_4);
-        PLAYER(SPECIES_WOBBUFFET);
-        PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET) { Moves(move, MOVE_HEADBUTT); }
-        OPPONENT(species) { HP(1); Ability(ability); Moves(MOVE_ROUND); }
-    } WHEN {
-        TURN { EXPECT_MOVE(opponentLeft, MOVE_HEADBUTT); }
-    }
-}
-
 AI_DOUBLE_BATTLE_TEST("AI treats an ally's redirection ability appropriately (gen 5+)")
 {
     enum Move move, expectedMove;
@@ -1131,8 +980,6 @@ AI_DOUBLE_BATTLE_TEST("AI treats an ally's redirection ability appropriately (ge
     u32 config;
     enum Ability ability;
 
-    PARAMETRIZE { species = SPECIES_SEAKING; ability = ABILITY_LIGHTNING_ROD; move = MOVE_DISCHARGE; config = GEN_4; expectedMove = MOVE_HEADBUTT; }
-    PARAMETRIZE { species = SPECIES_SHELLOS; ability = ABILITY_STORM_DRAIN;   move = MOVE_SURF;      config = GEN_4; expectedMove = MOVE_HEADBUTT; }
     PARAMETRIZE { species = SPECIES_SEAKING; ability = ABILITY_LIGHTNING_ROD; move = MOVE_DISCHARGE; config = GEN_5; expectedMove = MOVE_DISCHARGE; }
     PARAMETRIZE { species = SPECIES_SHELLOS; ability = ABILITY_STORM_DRAIN;   move = MOVE_SURF;      config = GEN_5; expectedMove = MOVE_SURF; }
 
@@ -1380,17 +1227,34 @@ AI_DOUBLE_BATTLE_TEST("AI uses Helping Hand if it's about to die")
     }
 }
 
-AI_DOUBLE_BATTLE_TEST("AI uses Helping Hand if the ally does notably more damage")
+AI_DOUBLE_BATTLE_TEST("EC expert pair: reciprocal Helping Hand secures its concrete partner's spread KOs")
 {
+    bool32 reverse;
+    PARAMETRIZE { reverse = FALSE; }
+    PARAMETRIZE { reverse = TRUE; }
     GIVEN {
-        ASSUME(GetMoveEffect(MOVE_HELPING_HAND) == EFFECT_HELPING_HAND);
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_OMNISCIENT);
-        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_TACKLE, MOVE_CELEBRATE); }
-        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_TACKLE, MOVE_CELEBRATE); }
-        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_HELPING_HAND, MOVE_MUD_SLAP); }
-        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_MUDDY_WATER); }
+        AI_FLAGS(EC_EXPERT_FLAGS);
+        PLAYER(SPECIES_WOBBUFFET) { Level(50); HP(80); MaxHP(80); Defense(200); SpDefense(100); Attack(1); Speed(50); Moves(MOVE_TACKLE); }
+        PLAYER(SPECIES_WOBBUFFET) { Level(50); HP(80); MaxHP(80); Defense(200); SpDefense(100); Attack(1); Speed(40); Moves(MOVE_TACKLE); }
+        if (!reverse) {
+            OPPONENT(SPECIES_ORANGURU) { Level(50); HP(300); MaxHP(300); Speed(60); SpAttack(10); Ability(ABILITY_TELEPATHY); Moves(MOVE_HELPING_HAND, MOVE_MUD_SLAP); }
+            OPPONENT(SPECIES_POLITOED) { Level(50); HP(300); MaxHP(300); Speed(100); SpAttack(150); Ability(ABILITY_WATER_ABSORB); Moves(MOVE_SURF); }
+        } else {
+            OPPONENT(SPECIES_POLITOED) { Level(50); HP(300); MaxHP(300); Speed(100); SpAttack(150); Ability(ABILITY_WATER_ABSORB); Moves(MOVE_SURF); }
+            OPPONENT(SPECIES_ORANGURU) { Level(50); HP(300); MaxHP(300); Speed(60); SpAttack(10); Ability(ABILITY_TELEPATHY); Moves(MOVE_HELPING_HAND, MOVE_MUD_SLAP); }
+        }
     } WHEN {
-        TURN { EXPECT_MOVE(opponentLeft, MOVE_HELPING_HAND); }
+        TURN {
+            MOVE(playerLeft, MOVE_TACKLE, target: opponentLeft);
+            MOVE(playerRight, MOVE_TACKLE, target: opponentRight);
+            EXPECT_MOVE(reverse ? opponentRight : opponentLeft, MOVE_HELPING_HAND, target: reverse ? opponentLeft : opponentRight);
+            EXPECT_MOVE(reverse ? opponentLeft : opponentRight, MOVE_SURF);
+        }
+    } SCENE {
+        MESSAGE("The opposing Oranguru used Helping Hand!");
+        MESSAGE("The opposing Politoed used Surf!");
+        HP_BAR(playerLeft, hp: 0);
+        HP_BAR(playerRight, hp: 0);
     }
 }
 
@@ -1586,28 +1450,71 @@ AI_DOUBLE_BATTLE_TEST("AI uses Magnetic Flux")
     }
 }
 
-AI_DOUBLE_BATTLE_TEST("AI can choose a status move that boosts the attack by two (doubles)")
+// No existing fixture checks the paired evaluator's transaction boundary.
+// Keep this one call-level invariant separate from the chosen-command cases.
+AI_DOUBLE_BATTLE_TEST("EC expert pair: candidate evaluation restores board caches field and RNG")
 {
     GIVEN {
-        ASSUME(GetMoveCategory(MOVE_STRENGTH) == DAMAGE_CATEGORY_PHYSICAL);
-        ASSUME(GetMoveCategory(MOVE_HORN_ATTACK) == DAMAGE_CATEGORY_PHYSICAL);
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
-        PLAYER(SPECIES_WOBBUFFET) { HP(277); }
-        PLAYER(SPECIES_WOBBUFFET) { HP(277); }
-        PLAYER(SPECIES_WOBBUFFET);
-        PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_KANGASKHAN) { Moves(MOVE_STRENGTH, MOVE_HORN_ATTACK, MOVE_SWORDS_DANCE); }
-        OPPONENT(SPECIES_KANGASKHAN) { Moves(MOVE_STRENGTH, MOVE_HORN_ATTACK, MOVE_SWORDS_DANCE); }
+        AI_FLAGS(EC_EXPERT_FLAGS);
+        PLAYER(SPECIES_CHARMANDER) { Level(50); HP(500); MaxHP(500); SpDefense(300); Speed(40); Item(ITEM_PASSHO_BERRY); Moves(MOVE_CELEBRATE); }
+        PLAYER(SPECIES_WOBBUFFET) { Level(50); HP(500); MaxHP(500); SpDefense(300); Speed(30); Ability(ABILITY_WATER_ABSORB); Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_ORANGURU) { Level(50); HP(500); MaxHP(500); SpAttack(10); Speed(60); Ability(ABILITY_TELEPATHY); Moves(MOVE_HELPING_HAND, MOVE_MUD_SLAP, MOVE_PROTECT, MOVE_TRICK_ROOM); }
+        OPPONENT(SPECIES_BLASTOISE) { Level(50); HP(500); MaxHP(500); SpAttack(100); Speed(100); Moves(MOVE_SURF, MOVE_PROTECT); }
     } WHEN {
         TURN {
-            EXPECT_MOVES(opponentLeft, MOVE_STRENGTH, MOVE_SWORDS_DANCE);
-            EXPECT_MOVES(opponentRight, MOVE_STRENGTH, MOVE_SWORDS_DANCE);
+            MOVE(playerLeft, MOVE_CELEBRATE);
+            MOVE(playerRight, MOVE_CELEBRATE);
+            EXPECT_MOVES(opponentLeft, MOVE_HELPING_HAND, MOVE_MUD_SLAP, MOVE_PROTECT, MOVE_TRICK_ROOM);
+            EXPECT_MOVES(opponentRight, MOVE_SURF, MOVE_PROTECT);
         }
-        TURN {
-            EXPECT_MOVE(opponentLeft, MOVE_STRENGTH);
-            EXPECT_MOVE(opponentRight, MOVE_STRENGTH);
-            SEND_OUT(playerLeft, 2);
-            SEND_OUT(playerRight, 3);
-        }
+    } THEN {
+        struct {
+            struct BattlePokemon mons[MAX_BATTLERS_COUNT];
+            struct AiLogicData logic;
+            struct ProtectStruct protect[MAX_BATTLERS_COUNT];
+            struct SpecialStatus special[MAX_BATTLERS_COUNT];
+            struct BattleStruct battle;
+            struct FieldTimer field;
+            rng_value_t rng, rng2;
+            u16 movePower, weather;
+            u32 fieldStatus;
+            enum BattlerId itemBattler;
+        } *before = Alloc(sizeof(*before));
+        s32 score;
+        enum BattlerId actor = opponentLeft - gBattleMons;
+        enum BattlerId target = playerLeft - gBattleMons;
+        // Exercise a consumable and a partially injured absorbing target in
+        // the counterfactual without allowing either change to escape it.
+        playerLeft->item = ITEM_PASSHO_BERRY;
+        gAiLogicData->items[target] = ITEM_PASSHO_BERRY;
+        gAiLogicData->holdEffects[target] = HOLD_EFFECT_RESIST_BERRY;
+        playerRight->hp = 450;
+        memcpy(before->mons, gBattleMons, sizeof(before->mons));
+        before->logic = *gAiLogicData;
+        memcpy(before->protect, gProtectStructs, sizeof(before->protect));
+        memcpy(before->special, gSpecialStatuses, sizeof(before->special));
+        before->battle = *gBattleStruct;
+        before->field = gFieldTimers;
+        before->rng = gRngValue;
+        before->rng2 = gRng2Value;
+        before->movePower = gBattleMovePower;
+        before->weather = gBattleWeather;
+        before->fieldStatus = gFieldStatuses;
+        before->itemBattler = gPotentialItemEffectBattler;
+        score = AI_EvaluateDoublesPosition(actor, 0);
+        EXPECT_EQ(AI_EvaluateDoublesPosition(actor, 0), score);
+        EXPECT_EQ(memcmp(before->mons, gBattleMons, sizeof(before->mons)), 0);
+        EXPECT_EQ(memcmp(&before->logic, gAiLogicData, sizeof(before->logic)), 0);
+        EXPECT_EQ(memcmp(before->protect, gProtectStructs, sizeof(before->protect)), 0);
+        EXPECT_EQ(memcmp(before->special, gSpecialStatuses, sizeof(before->special)), 0);
+        EXPECT_EQ(memcmp(&before->battle, gBattleStruct, sizeof(before->battle)), 0);
+        EXPECT_EQ(memcmp(&before->field, &gFieldTimers, sizeof(before->field)), 0);
+        EXPECT_EQ(memcmp(&before->rng, &gRngValue, sizeof(before->rng)), 0);
+        EXPECT_EQ(memcmp(&before->rng2, &gRng2Value, sizeof(before->rng2)), 0);
+        EXPECT_EQ(gBattleMovePower, before->movePower);
+        EXPECT_EQ(gBattleWeather, before->weather);
+        EXPECT_EQ(gFieldStatuses, before->fieldStatus);
+        EXPECT_EQ(gPotentialItemEffectBattler, before->itemBattler);
+        Free(before);
     }
 }

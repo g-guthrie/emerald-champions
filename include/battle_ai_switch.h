@@ -77,6 +77,17 @@ struct SwitchAiContext
 typedef bool32 (*AiSwitchFunc)(struct SwitchAiContext*);
 extern AiSwitchFunc gDynamicAiSwitchFunc;
 
+struct SwitchCandidateSnapshot;
+struct SwitchCandidateSnapshot *AI_SaveCandidateState(void);
+void AI_CaptureCandidateState(struct SwitchCandidateSnapshot *state);
+void AI_RestoreCandidateState(const struct SwitchCandidateSnapshot *state);
+void AI_FreeCandidateState(struct SwitchCandidateSnapshot *state);
+bool32 AI_ApplyMegaCandidate(enum BattlerId battler, bool32 calculateMoves);
+void AI_RefreshCandidateFieldEffects(void);
+// Leaves an entry-adjusted hypothetical board; the caller restores its snapshot.
+// Pair evaluation calculates moves once after all entries/Mega changes are complete.
+void AI_LoadSwitchCandidate(enum BattlerId battler, u32 partyIndex, bool32 calculateMoves);
+void AI_LoadSwitchCandidatePair(enum BattlerId battler, u32 partyIndex, enum BattlerId partner, u32 partnerPartyIndex, bool32 calculateMoves);
 u32 GetMostSuitableMonToSwitchInto(enum BattlerId battler, enum SwitchType switchType);
 bool32 ShouldSwitch(enum BattlerId battler);
 void ModifySwitchAfterMoveScoring(enum BattlerId battler);

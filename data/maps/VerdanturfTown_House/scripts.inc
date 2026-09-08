@@ -23,3 +23,20 @@ VerdanturfTown_House_Text_DefeatEliteFourInARow:
 	.string "to begin your challenge again from the\l"
 	.string "first one.$"
 
+
+VerdanturfTown_House_EventScript_MegaGift_GALLADITE::
+	goto_if_set FLAG_EC_MEGA_GIFT_GALLADITE, VerdanturfTown_House_EventScript_Woman2
+	lock
+	faceplayer
+	msgbox VerdanturfTown_House_EventScript_MegaGift_GALLADITE_Text, MSGBOX_DEFAULT
+	giveitem ITEM_GALLADITE
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_EC_MEGA_GIFT_GALLADITE
+	release
+	goto VerdanturfTown_House_EventScript_Woman2
+
+VerdanturfTown_House_EventScript_MegaGift_GALLADITE_Text:
+	.string "Strength can be quiet. A Gallade\n"
+	.string "uses its blades to protect others.\p"
+	.string "I think this stone belongs with\n"
+	.string "someone who understands that.$"

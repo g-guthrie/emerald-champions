@@ -25,8 +25,8 @@ CableClub_Text_CloseThisMenu:
 	.string "Close this menu.$"
 
 CableClub_Text_NeedTwoMonsForDoubleBattle:
-	.string "For a DOUBLE BATTLE, you must\n"
-	.string "have at least two POKéMON.$"
+	.string "For a DOUBLE BATTLE, bring at\n"
+	.string "least four healthy POKéMON.$"
 
 CableClub_Text_NeedTwoMonsToTrade:
 	.string "For trading, you must have at\n"
@@ -355,19 +355,14 @@ CableClub_Text_UseBerryCrush:
 	.string "BERRY CRUSH System?$"
 
 CableClub_Text_ExplainBattleModes:
-	.string "There are three Battle Modes.\p"
-	.string "SINGLE BATTLE is for two TRAINERS\n"
-	.string "with one or more POKéMON each.\p"
-	.string "Each TRAINER can have one POKéMON\n"
-	.string "in battle at a time.\p"
-	.string "DOUBLE BATTLE is for two TRAINERS\n"
-	.string "with two or more POKéMON each.\p"
-	.string "Each TRAINER will send out two\n"
-	.string "POKéMON in battle at a time.\p"
-	.string "MULTI BATTLE is for four TRAINERS\n"
-	.string "with one or more POKéMON each.\p"
-	.string "Each TRAINER can have one POKéMON\n"
-	.string "in battle at a time.$"
+	.string "DOUBLE BATTLE is for two TRAINERS,\n"
+	.string "each with at least four healthy\l"
+	.string "POKéMON. EGGS cannot enter.\p"
+	.string "MULTI BATTLE is for four TRAINERS.\n"
+	.string "Each selects three POKéMON; two\l"
+	.string "TRAINERS form a team of six.\p"
+	.string "Use the same game revision and\n"
+	.string "choose the same battle format.$"
 
 CableClub_Text_ChooseGroupLeaderOfTwo:
 	.string "Please decide which of you two\n"
@@ -485,3 +480,20 @@ CableClub_Text_ExplainWirelessClub:
 CableClub_Text_HopeYouEnjoyWirelessSystem:
 	.string "I hope you enjoy the Wireless\n"
 	.string "Communication System.$"
+
+CableClub_Text_RetiredSingleBattle::
+	.string "This desk hosts DOUBLE BATTLES.\n"
+	.string "Please choose Double or Multi.$"
+
+CableClub_Text_LinkPartyRequirements::
+	.string "DOUBLE BATTLE needs four healthy\n"
+	.string "POKéMON per TRAINER.\p"
+	.string "For MULTI, each TRAINER brings\n"
+	.string "three. EGGS cannot enter.$"
+
+CableClub_Text_IncompatibleLinkBattle::
+	.string "These battle teams or formats\n"
+	.string "aren't compatible.\p"
+	.string "Use the same game revision. For\n"
+	.string "DOUBLE, bring four healthy POKéMON;\l"
+	.string "for MULTI, bring three each.$"

@@ -1,6 +1,12 @@
+Common_EventScript_EmeraldChampionsOpeningPrep::
+	setvar VAR_UNUSED_0x8014, 1
+	goto EmeraldChampions_EventScript_InitializePrep
+
 Common_EventScript_EmeraldChampionsMoveTutor::
+	setvar VAR_UNUSED_0x8014, 0
 	lockall
 	faceplayer
+EmeraldChampions_EventScript_InitializePrep:
 	setvar VAR_0x8007, EC_BATTLE_FORMAT_DOUBLES
 	setvar VAR_0x8009, 0
 	setvar VAR_0x800B, 0
@@ -33,13 +39,15 @@ EmeraldChampions_EventScript_OtherServices:
 	waitmessage
 	dynmultipush EmeraldChampions_Text_ForgetMove, 0
 	dynmultipush EmeraldChampions_Text_RenamePokemon, 1
-	dynmultipush EmeraldChampions_Text_Back, 2
-	dynmultistack 30, 1, FALSE, 3, 0, 0, DYN_MULTICHOICE_CB_NONE
+	dynmultipush EmeraldChampions_Text_Bonding, 2
+	dynmultipush EmeraldChampions_Text_Back, 3
+	dynmultistack 30, 1, FALSE, 4, 0, 0, DYN_MULTICHOICE_CB_NONE
 	closemessage
 	switch VAR_RESULT
 	case 0, EmeraldChampions_EventScript_OpenMoveDeleter
 	case 1, EmeraldChampions_EventScript_OpenNameRater
-	case 2, EmeraldChampions_EventScript_MoveTutorMain
+	case 2, EmeraldChampions_EventScript_SpecialistBonding
+	case 3, EmeraldChampions_EventScript_MoveTutorMain
 	case MULTI_B_PRESSED, EmeraldChampions_EventScript_MoveTutorMain
 
 EmeraldChampions_EventScript_OpenMoveRelearner:
@@ -378,12 +386,19 @@ EmeraldChampions_EventScript_BattleSetSpecialItem:
 
 EmeraldChampions_EventScript_MoveTutorExit:
 	msgbox EmeraldChampions_Text_MoveTutorGoodbye, MSGBOX_DEFAULT
+	goto_if_eq VAR_UNUSED_0x8014, 1, EmeraldChampions_EventScript_ReturnService
 	releaseall
 	end
 
+Common_EventScript_EmeraldChampionsOpeningItems::
+	setvar VAR_UNUSED_0x8014, 1
+	goto EmeraldChampions_EventScript_InitializeItems
+
 Common_EventScript_EmeraldChampionsBattleVendor::
+	setvar VAR_UNUSED_0x8014, 0
 	lock
 	faceplayer
+EmeraldChampions_EventScript_InitializeItems:
 	setvar VAR_0x8008, 0
 	setvar VAR_0x8009, 0
 
@@ -401,17 +416,15 @@ EmeraldChampions_EventScript_BattleVendorCompleteArchive:
 	message EmeraldChampions_Text_BattleVendorCompleteWelcome
 	waitmessage
 	dynmultipush EmeraldChampions_Text_HeldItems, 0
-	dynmultipush EmeraldChampions_Text_MegaArchive, 1
-	dynmultipush EmeraldChampions_Text_EvolutionArchive, 2
-	dynmultipush EmeraldChampions_Text_Exit, 3
+	dynmultipush EmeraldChampions_Text_EvolutionArchive, 1
+	dynmultipush EmeraldChampions_Text_Exit, 2
 	dynmultistack 30, 1, FALSE, 4, 0, VAR_0x8009, DYN_MULTICHOICE_CB_NONE
 	closemessage
 	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, EmeraldChampions_EventScript_BattleVendorExit
 	copyvar VAR_0x8009, VAR_RESULT
 	switch VAR_RESULT
 	case 0, EmeraldChampions_EventScript_BattleItemCategories
-	case 1, EmeraldChampions_EventScript_OpenMegaArchive
-	case 2, EmeraldChampions_EventScript_OpenEvolutionArchive
+	case 1, EmeraldChampions_EventScript_OpenEvolutionArchive
 	goto EmeraldChampions_EventScript_BattleVendorExit
 
 EmeraldChampions_EventScript_BattleItemCategories:
@@ -443,16 +456,13 @@ EmeraldChampions_EventScript_BattleItemCategoryBack:
 	goto_if_eq VAR_RESULT, TRUE, EmeraldChampions_EventScript_BattleVendorMain
 	goto EmeraldChampions_EventScript_BattleVendorExit
 
-EmeraldChampions_EventScript_OpenMegaArchive:
-	special OpenEmeraldChampionsMegaStoneArchive
-	goto EmeraldChampions_EventScript_BattleVendorMain
-
 EmeraldChampions_EventScript_OpenEvolutionArchive:
 	special OpenEmeraldChampionsEvolutionItemArchive
 	goto EmeraldChampions_EventScript_BattleVendorMain
 
 EmeraldChampions_EventScript_BattleVendorExit:
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	goto_if_eq VAR_UNUSED_0x8014, 1, EmeraldChampions_EventScript_ReturnService
 	release
 	end
 
@@ -462,16 +472,13 @@ EmeraldChampions_Text_BattleVendorWelcome:
 	.string "Which kind of held item do you need?$"
 
 EmeraldChampions_Text_BattleVendorCompleteWelcome:
-	.string "A MEGA RING! Then the Mega Stone and\n"
-	.string "Evolution archives are open to you.\p"
-	.string "Every stone, every item, free.\n"
-	.string "What does your team need?$"
+	.string "Your RING opens the Evolution Items\n"
+	.string "archive. Those items are free!\p"
+	.string "For Mega Stones, explore HOENN and\n"
+	.string "get to know the people who live here.$"
 
 EmeraldChampions_Text_HeldItems:
 	.string "Held Items$"
-
-EmeraldChampions_Text_MegaArchive:
-	.string "Mega Stone Archive$"
 
 EmeraldChampions_Text_EvolutionArchive:
 	.string "Evolution Items$"
@@ -547,8 +554,8 @@ EmeraldChampions_Text_Singles:
 	.string "Singles$"
 
 EmeraldChampions_Text_ChooseStatPointMon:
-	.string "Choose a Pokémon whose Stat Points\n"
-	.string "you want to customize.$"
+	.string "Each point adds +1 before Nature.\n"
+	.string "Whose stats should we adjust?$"
 
 EmeraldChampions_Text_ResetStatPoints:
 	.string "Reset all six Stat Points to zero?$"
@@ -696,8 +703,8 @@ EmeraldChampions_Text_ChooseStarterRegion:
 EmeraldChampions_Text_StarterRegionChosen:
 	.string "{STR_VAR_1}! Great choice!\p"
 	.string "Dad packed that trio in his field bag.\n"
-	.string "Whichever partner you choose, I'll train\l"
-	.string "the one with the type advantage.$"
+	.string "Choose two partners. I'll train\l"
+	.string "the partner you leave with Dad.$"
 
 EmeraldChampions_Text_StarterRegionKanto:
 	.string "Kanto$"
@@ -773,3 +780,237 @@ EmeraldChampions_Text_RepelSprayMistedAgain:
 	.string "{PLAYER} misted the air again.\p"
 	.string "Wild Pokémon will keep their distance\n"
 	.string "for the next 500 steps.$"
+
+
+@ These continuations run under their caller's lock and return to that caller.
+Common_EventScript_EmeraldChampionsFormGift::
+	copyvar VAR_0x8007, VAR_0x8004
+	special BufferEmeraldChampionsFormGift
+	goto_if_eq VAR_RESULT, FALSE, EmeraldChampions_EventScript_ReturnService
+	call_if_eq VAR_0x8007, 2, EmeraldChampions_EventScript_BattleBondInfo
+	call_if_eq VAR_0x8007, 3, EmeraldChampions_EventScript_PartnerInfo
+	call_if_eq VAR_0x8007, 4, EmeraldChampions_EventScript_PartnerInfo
+	call_if_eq VAR_0x8007, 5, EmeraldChampions_EventScript_KubfuInfo
+	call_if_eq VAR_0x8007, 6, EmeraldChampions_EventScript_CosmogInfo
+	msgbox EmeraldChampions_Text_FormGiftOffer, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EmeraldChampions_EventScript_ReturnService
+	copyvar VAR_0x8004, VAR_0x8007
+	special GiveEmeraldChampionsFormGift
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, EmeraldChampions_EventScript_FormGiftPC
+	goto_if_ne VAR_RESULT, MON_GIVEN_TO_PARTY, EmeraldChampions_EventScript_FormGiftFull
+	playfanfare MUS_OBTAIN_ITEM
+	waitfanfare
+	msgbox EmeraldChampions_Text_FormGiftParty, MSGBOX_DEFAULT
+	return
+
+EmeraldChampions_EventScript_FormGiftPC:
+	playfanfare MUS_OBTAIN_ITEM
+	waitfanfare
+	msgbox EmeraldChampions_Text_FormGiftPC, MSGBOX_DEFAULT
+	return
+
+EmeraldChampions_EventScript_FormGiftFull:
+	msgbox EmeraldChampions_Text_FormGiftFull, MSGBOX_DEFAULT
+	return
+
+Common_EventScript_EmeraldChampionsResearchPartners::
+	special BuildEmeraldChampionsResearchPartnerChoices
+	goto_if_eq VAR_RESULT, 0, EmeraldChampions_EventScript_ReturnService
+	message EmeraldChampions_Text_ResearchPartners
+	waitmessage
+	dynmultipush EmeraldChampions_Text_Back, 7
+	dynmultistack 30, 1, FALSE, 5, 0, 0, DYN_MULTICHOICE_CB_NONE
+	closemessage
+	goto_if_ge VAR_RESULT, 7, EmeraldChampions_EventScript_ReturnService
+	copyvar VAR_0x8004, VAR_RESULT
+	call Common_EventScript_EmeraldChampionsFormGift
+	goto Common_EventScript_EmeraldChampionsResearchPartners
+
+Common_EventScript_EmeraldChampionsContestServices::
+	message EmeraldChampions_Text_ContestServices
+	waitmessage
+	dynmultipush EmeraldChampions_Text_Appearance, 0
+	dynmultipush EmeraldChampions_Text_CosplayPartner, 1
+	dynmultipush EmeraldChampions_Text_CostumeLessons, 2
+	dynmultipush EmeraldChampions_Text_Back, 3
+	dynmultistack 30, 1, FALSE, 4, 0, 0, DYN_MULTICHOICE_CB_NONE
+	closemessage
+	goto_if_ge VAR_RESULT, 3, EmeraldChampions_EventScript_ReturnService
+	goto_if_eq VAR_RESULT, 1, EmeraldChampions_EventScript_CosplayGift
+	setvar VAR_0x8006, 0
+	goto_if_eq VAR_RESULT, 0, EmeraldChampions_EventScript_ContestAppearance
+	setvar VAR_0x8006, 1
+	call EmeraldChampions_EventScript_FormChooseMon
+	goto Common_EventScript_EmeraldChampionsContestServices
+
+EmeraldChampions_EventScript_ContestAppearance:
+	msgbox EmeraldChampions_Text_AppearanceInfo, MSGBOX_DEFAULT
+	call EmeraldChampions_EventScript_FormChooseMon
+	goto Common_EventScript_EmeraldChampionsContestServices
+
+EmeraldChampions_EventScript_CosplayGift:
+	setvar VAR_0x8004, 1
+	call Common_EventScript_EmeraldChampionsFormGift
+	goto Common_EventScript_EmeraldChampionsContestServices
+
+Common_EventScript_EmeraldChampionsDeoxysResearch::
+	goto_if_unset FLAG_SYS_GAME_CLEAR, EmeraldChampions_EventScript_ReturnService
+	msgbox EmeraldChampions_Text_DeoxysResearch, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EmeraldChampions_EventScript_ReturnService
+	setvar VAR_0x8006, 2
+	goto EmeraldChampions_EventScript_FormChooseMon
+
+EmeraldChampions_EventScript_FormChooseMon:
+	msgbox EmeraldChampions_Text_FormChooseMon, MSGBOX_DEFAULT
+	special ChoosePartyMon
+	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, EmeraldChampions_EventScript_ReturnService
+	copyvar VAR_0x800A, VAR_0x8004
+	special BuildEmeraldChampionsFormChoices
+	goto_if_eq VAR_RESULT, 0, EmeraldChampions_EventScript_FormUnavailable
+	message EmeraldChampions_Text_FormChooseTarget
+	waitmessage
+	dynmultipush EmeraldChampions_Text_Back, 0
+	dynmultistack 30, 1, FALSE, 5, 0, 0, DYN_MULTICHOICE_CB_NONE
+	closemessage
+	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, EmeraldChampions_EventScript_FormChooseMon
+	goto_if_eq VAR_RESULT, 0, EmeraldChampions_EventScript_FormChooseMon
+	copyvar VAR_0x8008, VAR_RESULT
+	special PrepareEmeraldChampionsFormSelection
+	goto_if_eq VAR_RESULT, FALSE, EmeraldChampions_EventScript_FormChooseMon
+	goto_if_eq VAR_RESULT, 2, EmeraldChampions_EventScript_CostumeChooseMove
+	goto EmeraldChampions_EventScript_FormPreview
+
+EmeraldChampions_EventScript_CostumeChooseMove:
+	msgbox LilycoveCity_MoveDeletersHouse_Text_WhichMoveShouldBeForgotten, MSGBOX_DEFAULT
+	copyvar VAR_0x8004, VAR_0x800A
+	fadescreen FADE_TO_BLACK
+	special MoveDeleterChooseMoveToForget
+	fadescreen FADE_FROM_BLACK
+	goto_if_eq VAR_0x8005, MAX_MON_MOVES, EmeraldChampions_EventScript_FormChooseMon
+
+EmeraldChampions_EventScript_FormPreview:
+	special BufferEmeraldChampionsFormPreview
+	goto_if_eq VAR_RESULT, FALSE, EmeraldChampions_EventScript_FormBlocked
+	msgbox gStringVar4, MSGBOX_DEFAULT
+	msgbox EmeraldChampions_Text_ConfirmFormChange, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EmeraldChampions_EventScript_FormChooseMon
+	special ApplyEmeraldChampionsFormSelection
+	goto_if_eq VAR_RESULT, FALSE, EmeraldChampions_EventScript_FormBlocked
+	playfanfare MUS_LEVEL_UP
+	waitfanfare
+	msgbox EmeraldChampions_Text_FormChanged, MSGBOX_DEFAULT
+	goto EmeraldChampions_EventScript_FormChooseMon
+
+EmeraldChampions_EventScript_FormBlocked:
+	msgbox gStringVar4, MSGBOX_DEFAULT
+	goto EmeraldChampions_EventScript_FormChooseMon
+
+EmeraldChampions_EventScript_FormUnavailable:
+	msgbox EmeraldChampions_Text_FormUnavailable, MSGBOX_DEFAULT
+	goto EmeraldChampions_EventScript_FormChooseMon
+
+EmeraldChampions_EventScript_SpecialistBonding:
+	call Common_EventScript_EmeraldChampionsBonding
+	goto EmeraldChampions_EventScript_OtherServices
+
+Common_EventScript_EmeraldChampionsBonding::
+	msgbox EmeraldChampions_Text_BondingChooseMon, MSGBOX_DEFAULT
+	special ChoosePartyMon
+	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, EmeraldChampions_EventScript_ReturnService
+	copyvar VAR_0x800A, VAR_0x8004
+	setvar VAR_0x8008, 0
+	special BufferEmeraldChampionsBondingPreview
+	goto_if_eq VAR_RESULT, FALSE, EmeraldChampions_EventScript_BondingUnavailable
+	message EmeraldChampions_Text_BondingValues
+	waitmessage
+	dynmultipush EmeraldChampions_Text_BondingLow, 0
+	dynmultipush EmeraldChampions_Text_BondingThreshold, 1
+	dynmultipush EmeraldChampions_Text_BondingMaximum, 2
+	dynmultipush EmeraldChampions_Text_Back, 3
+	dynmultistack 30, 1, FALSE, 4, 0, 0, DYN_MULTICHOICE_CB_NONE
+	closemessage
+	goto_if_ge VAR_RESULT, 3, Common_EventScript_EmeraldChampionsBonding
+	copyvar VAR_0x8008, VAR_RESULT
+	special BufferEmeraldChampionsBondingPreview
+	msgbox gStringVar4, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, Common_EventScript_EmeraldChampionsBonding
+	special ApplyEmeraldChampionsBonding
+	msgbox EmeraldChampions_Text_BondingDone, MSGBOX_DEFAULT
+	goto Common_EventScript_EmeraldChampionsBonding
+
+EmeraldChampions_EventScript_BondingUnavailable:
+	msgbox EmeraldChampions_Text_BondingUnavailable, MSGBOX_DEFAULT
+	goto Common_EventScript_EmeraldChampionsBonding
+
+EmeraldChampions_EventScript_ReturnService:
+	return
+
+EmeraldChampions_EventScript_BattleBondInfo:
+	msgbox EmeraldChampions_Text_BattleBondInfo, MSGBOX_DEFAULT
+	return
+EmeraldChampions_EventScript_PartnerInfo:
+	msgbox EmeraldChampions_Text_PartnerInfo, MSGBOX_DEFAULT
+	return
+EmeraldChampions_EventScript_KubfuInfo:
+	msgbox EmeraldChampions_Text_KubfuInfo, MSGBOX_DEFAULT
+	return
+EmeraldChampions_EventScript_CosmogInfo:
+	msgbox EmeraldChampions_Text_CosmogInfo, MSGBOX_DEFAULT
+	return
+
+EmeraldChampions_Text_FormGiftOffer:
+	.string "Would you like this prepared\n{STR_VAR_2} to join you?$"
+EmeraldChampions_Text_FormGiftParty:
+	.string "Your new partner joined your party!$"
+EmeraldChampions_Text_FormGiftPC:
+	.string "Your new partner was sent to the PC!$"
+EmeraldChampions_Text_FormGiftFull:
+	.string "Your party and PC need room first.\nI'll keep your partner here for you.$"
+EmeraldChampions_Text_ResearchPartners:
+	.string "Which research partner interests you?$"
+EmeraldChampions_Text_BattleBondInfo:
+	.string "Battle Bond boosts Attack, Sp. Atk\nand Speed once after a knockout.\pThis GRENINJA keeps its usual form.$"
+EmeraldChampions_Text_PartnerInfo:
+	.string "This special partner has enhanced\nstats and cannot evolve.$"
+EmeraldChampions_Text_KubfuInfo:
+	.string "A Dark Scroll and a Water Scroll\nlead KUBFU to different styles.\pThis second partner lets you explore\nboth paths with your original KUBFU.$"
+EmeraldChampions_Text_CosmogInfo:
+	.string "COSMOEM evolves into SOLGALEO by day\nor LUNALA at night.\pThis second COSMOG lets you explore\nboth paths. Use your Leveler when ready.$"
+EmeraldChampions_Text_ContestServices:
+	.string "Would you like help with your\npartner's appearance or costume?$"
+EmeraldChampions_Text_Appearance:
+	.string "Appearance$"
+EmeraldChampions_Text_CosplayPartner:
+	.string "Cosplay partner$"
+EmeraldChampions_Text_CostumeLessons:
+	.string "Costume lessons$"
+EmeraldChampions_Text_AppearanceInfo:
+	.string "I style matching colors and trims\nwithout changing your partner's build.\pFURFROU trims return to normal with\ntime or storage. Fresh trims are free.\pMINIOR keeps its meteor shell here;\nits matching core appears in battle.$"
+EmeraldChampions_Text_DeoxysResearch:
+	.string "Would you like to study your DEOXYS\nwith our form-changing equipment?$"
+EmeraldChampions_Text_FormChooseMon:
+	.string "Which partner would you like to study?$"
+EmeraldChampions_Text_FormChooseTarget:
+	.string "Which appearance or form?$"
+EmeraldChampions_Text_ConfirmFormChange:
+	.string "Make this change?$"
+EmeraldChampions_Text_FormChanged:
+	.string "Your partner's new look is ready!$"
+EmeraldChampions_Text_FormUnavailable:
+	.string "That partner isn't part of this\nservice. Choose another Pokémon.$"
+EmeraldChampions_Text_Bonding:
+	.string "Bonding$"
+EmeraldChampions_Text_BondingChooseMon:
+	.string "Whose friendship would you like\nto adjust?$"
+EmeraldChampions_Text_BondingValues:
+	.string "Choose a friendship value.$"
+EmeraldChampions_Text_BondingLow:
+	.string "Low (0)$"
+EmeraldChampions_Text_BondingThreshold:
+	.string "Evolution threshold$"
+EmeraldChampions_Text_BondingMaximum:
+	.string "Maximum (255)$"
+EmeraldChampions_Text_BondingDone:
+	.string "Friendship is set. Your Leveler can\nhelp when evolution conditions are met.$"
+EmeraldChampions_Text_BondingUnavailable:
+	.string "Please choose a Pokémon, not an Egg.$"

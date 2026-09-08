@@ -130,6 +130,7 @@ BattleFrontier_OutsideEast_EventScript_WaterSudowoodo::
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	dowildbattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+	special FinishLegendaryLandmarkEncounter
 	specialvar VAR_RESULT, GetBattleOutcome
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, BattleFrontier_OutsideEast_EventScript_DefeatedSudowoodo
 	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, BattleFrontier_OutsideEast_EventScript_DefeatedSudowoodo
@@ -244,9 +245,9 @@ BattleFrontier_OutsideEast_Text_BattleArenaSign:
 	.string "Let the toughest teams gather!$"
 
 BattleFrontier_OutsideEast_Text_BattlePyramidSign:
-	.string "This is the BATTLE PYRAMID!\n"
-	.string "Advance through the Battle Quest!$"
-
+	.string "BATTLE PYRAMID\p"
+	.string "CHAMPIONS CIRCUIT RECEPTION\n"
+	.string "Central arena: BATTLE TOWER$"
 BattleFrontier_OutsideEast_Text_RankingHallSign:
 	.string "BATTLE FRONTIER RANKING HALL\n"
 	.string "Set your sights on new records!$"
@@ -270,18 +271,15 @@ BattleFrontier_OutsideEast_Text_ConquerLeagueAndFrontier:
 	.string "if she will be friends with me!$"
 
 BattleFrontier_OutsideEast_Text_PyramidTooHarsh:
-	.string "The BATTLE PYRAMID's too harsh!\n"
-	.string "I just can't make it to the top!\p"
-	.string "Since I'm out of options, maybe I can\n"
-	.string "climb the outside…$"
-
+	.string "The CIRCUIT is too harsh! I keep\n"
+	.string "losing at the same point.\p"
+	.string "Maybe I should change my plan\n"
+	.string "instead of climbing this pyramid.$"
 BattleFrontier_OutsideEast_Text_ThriveInDarkness:
-	.string "I thrive in darkness…\n"
-	.string "Yes… What is worthy of me?\l"
-	.string "None other than the BATTLE PYRAMID…\p"
-	.string "What say you to wandering in darkness\n"
-	.string "and in utter and total desperation?$"
-
+	.string "I thrive in darkness...\p"
+	.string "A quiet pyramid, a difficult team\n"
+	.string "to build, and nobody interrupting\l"
+	.string "my thoughts...$"
 BattleFrontier_OutsideEast_Text_PutTogetherUltimateTeam:
 	.string "I didn't sleep for a week, but then\n"
 	.string "I put together the ultimate team!\p"
@@ -306,14 +304,11 @@ BattleFrontier_OutsideEast_Text_ZigzagoonLooksVacant:
 	.string "ZIGZAGOON looks vacant…$"
 
 BattleFrontier_OutsideEast_Text_PeopleCallMeBusybody:
-	.string "People call me a busybody,\n"
-	.string "but I can't help it.\p"
-	.string "Your hat's on crooked!\n"
-	.string "Oh, no, trash on the ground!\l"
-	.string "Oops, it's almost dinnertime!\p"
-	.string "I don't know if I can stand to just\n"
-	.string "watch at the BATTLE PALACE…$"
-
+	.string "People call me a busybody. I keep\n"
+	.string "spotting something to fix!\p"
+	.string "That habit helps in doubles. There\n"
+	.string "are two sides of the board to\l"
+	.string "watch at once.$"
 BattleFrontier_OutsideEast_Text_OnceBeatGymLeader:
 	.string "I may not look that impressive now,\n"
 	.string "but I once beat a GYM LEADER.\p"
@@ -396,16 +391,11 @@ BattleFrontier_OutsideEast_Text_CanDoAnythingWithYou:
 	.string "With you by my side, I can do anything.$"
 
 BattleFrontier_OutsideEast_Text_PowerOfOurLoveWillOvercome:
-	.string "Ooh, darling, you are so wonderful!\p"
-	.string "Ooh, I just can't wait anymore!\p"
-	.string "Let's go to a MULTI BATTLE ROOM\n"
-	.string "right this instant!\p"
-	.string "If we get together in the BATTLE SALON,\n"
-	.string "the power of our love will overcome\l"
-	.string "everyone we meet.\p"
-	.string "Why, before us, darling, everything\n"
-	.string "will topple like dominoes!$"
-
+	.string "Let's sit down and build a team\n"
+	.string "together, darling!\p"
+	.string "Six partners that support one\n"
+	.string "another. Then we can each see how\l"
+	.string "far our plan goes!$"
 BattleFrontier_OutsideEast_Text_FrontierNotExclusivelyForToughTrainers:
 	.string "The BATTLE FRONTIER isn't exclusively\n"
 	.string "for tough TRAINERS.\p"

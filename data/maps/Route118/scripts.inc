@@ -306,12 +306,12 @@ Route118_Text_MagikarpGuyDecline:
 	.string "No hurry. The river and my team will wait.$"
 
 Route118_Text_CanCrossRiversWithSurf:
-	.string "Even if there isn't a boat, you can\n"
-	.string "cross rivers and the sea if you have\l"
-	.string "a POKéMON that knows SURF.\p"
-	.string "POKéMON can be counted on to do so\n"
-	.string "much!$"
-
+	.string "With SURF registered and the\n"
+	.string "BALANCE BADGE, a compatible party\l"
+	.string "member can cross water.\p"
+	.string "It doesn't need SURF in its battle\n"
+	.string "moveset. Partners can help in more\l"
+	.string "ways than one!$"
 Route118_Text_RouteSignMauville:
 	.string "ROUTE 118\n"
 	.string "{LEFT_ARROW} MAUVILLE CITY$"

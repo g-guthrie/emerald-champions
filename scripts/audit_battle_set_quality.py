@@ -1,12 +1,9 @@
 #!/usr/bin/env python3
 """Audit the competitive quality of every Emerald Champions battle set.
 
-The existing gate (verify_emerald_champions_battle_sets.py) proves a set is
-*legal and coherent*: the item has a trigger, the Ability can activate, the
-nature does not lower the only attack stat it uses.  It does not ask whether
-the set is any *good*.  This audit does: it compares each configuration
-against the species' full legal pool and its own base stats, and reports the
-places where a strictly better choice was available.
+Optional strategy heuristics only. Current generator checks establish structural
+and configured-ability validity. This report does not prove one strategy is
+strictly better and must never veto deliberate team authoring.
 
 Usage:
     audit_battle_set_quality.py --start 1 --count 100

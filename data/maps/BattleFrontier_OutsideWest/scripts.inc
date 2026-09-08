@@ -306,9 +306,9 @@ BattleFrontier_OutsideWest_Text_BattleFactorySign:
 	.string "Seek out the toughest POKéMON!$"
 
 BattleFrontier_OutsideWest_Text_BattlePikeSign:
-	.string "This is the BATTLE PIKE!\n"
-	.string "Choose one of three paths!$"
-
+	.string "BATTLE PIKE\p"
+	.string "CHAMPIONS CIRCUIT RECEPTION\n"
+	.string "Central arena: BATTLE TOWER$"
 BattleFrontier_OutsideWest_Text_ThisIsBattleTower:
 	.string "This is the BATTLE TOWER.\p"
 	.string "TRAINERS bring their best-raised\n"
@@ -372,23 +372,20 @@ BattleFrontier_OutsideWest_Text_OnlyToughTrainersBroughtHere:
 	.string "know about the BATTLE FRONTIER.$"
 
 BattleFrontier_OutsideWest_Text_SureWeCanChallengeWithNoMons:
-	.string "Hey, bro…\p"
-	.string "Are you sure we can make challenges\n"
-	.string "even if we don't have any POKéMON?$"
-
+	.string "Hey, bro... We need six Pokémon\n"
+	.string "for the CIRCUIT.\p"
+	.string "Let's visit the CENTER and finish\n"
+	.string "our team first.$"
 BattleFrontier_OutsideWest_Text_BigGuySaidIllLendYouMons:
-	.string "Uh…\n"
-	.string "I'm sure it'll be okay.\p"
-	.string "I think…\p"
-	.string "But remember that big scary guy?\n"
-	.string "He said, “I'll lend you POKéMON!”$"
-
+	.string "That big fellow showed me how to\n"
+	.string "prepare a set at the CENTER.\p"
+	.string "He said the team still needs to be\n"
+	.string "ours. Fair enough!$"
 BattleFrontier_OutsideWest_Text_WhosRaisingThoseRentalMons:
-	.string "That's the BATTLE FACTORY.\n"
-	.string "You can rent strong POKéMON there.\p"
-	.string "But it makes me wonder.\n"
-	.string "Who's raising those rental POKéMON?$"
-
+	.string "That's the BATTLE FACTORY. Its\n"
+	.string "desk also enters the CIRCUIT.\p"
+	.string "Who prepares all those opposing\n"
+	.string "teams? I'd like to compare notes!$"
 BattleFrontier_OutsideWest_Text_ScaredOfPikeBecauseSeviper:
 	.string "I'm scared of going into the BATTLE\n"
 	.string "PIKE because of SEVIPER…\p"
@@ -402,27 +399,19 @@ BattleFrontier_OutsideWest_Text_LetsPlayRockPaperScissors:
 	.string "… … … … … …$"
 
 BattleFrontier_OutsideWest_Text_WonIllTakePikeChallenge:
-	.string "Yay! I won!\n"
-	.string "I will take the BATTLE PIKE challenge!$"
-
+	.string "I won! I'll register at the PIKE\n"
+	.string "and start another Circuit run!$"
 BattleFrontier_OutsideWest_Text_LostIllPutOffPikeChallenge:
-	.string "Oh, no…\n"
-	.string "I lost.\p"
-	.string "I guess I'm not very lucky today.\n"
-	.string "I'll put off my BATTLE PIKE challenge\l"
-	.string "until tomorrow.$"
-
+	.string "I lost. Maybe that's my cue to\n"
+	.string "review my team before the CIRCUIT.$"
 BattleFrontier_OutsideWest_Text_ChooseFishingOverBattling:
-	.string "I believe I'm the only person here who,\n"
-	.string "for some unknown reason, would choose\l"
-	.string "fishing over battling.\p"
-	.string "Huh? You can't catch anything here?\n"
-	.string "That's disappointing…$"
-
+	.string "I came to fish instead of battle.\p"
+	.string "I'll try the water and see what\n"
+	.string "bites. A good partner can be its\l"
+	.string "own reward.$"
 BattleFrontier_OutsideWest_Text_KeepBattlingUntilIGetSymbol:
-	.string "Today, I'm going to keep battling, no\n"
-	.string "matter what, until I get a Symbol.$"
-
+	.string "I'm going to keep battling until I\n"
+	.string "beat my best Circuit streak!$"
 BattleFrontier_OutsideWest_Text_YoureOffToChallengeDome:
 	.string "Oh? You're off to challenge\n"
 	.string "the BATTLE DOME?\p"

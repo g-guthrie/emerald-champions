@@ -9,6 +9,7 @@
 #include "field_message_box.h"
 #include "field_specials.h"
 #include "field_weather.h"
+#include "field_screen_effect.h"
 #include "international_string_util.h"
 #include "link.h"
 #include "link_rfu.h"
@@ -34,6 +35,94 @@
 #include "constants/cable_club.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"
+
+// Use the existing link-card payload for this native battle rules revision.
+// Protocol service IDs and all nonbattle card exchanges remain unchanged.
+#define CHAMPIONS_LINK_RULES 0xE0
+
+static enum Species GetChampionsLinkEligibleSpecies(u32 slot)
+{
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][slot];
+    enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+
+    if (species == SPECIES_NONE || !IsSpeciesEnabled(species)
+     || GetMonData(mon, MON_DATA_IS_EGG) || GetMonData(mon, MON_DATA_SANITY_IS_BAD_EGG)
+     || GetMonData(mon, MON_DATA_HP) == 0)
+        return SPECIES_NONE;
+    return species;
+}
+
+void CheckChampionsLinkBattleParty(void)
+{
+    u32 count = 0;
+    u32 required = gSpecialVar_0x8004 == USING_DOUBLE_BATTLE ? 4 : 3;
+
+    gSpecialVar_Result = FALSE;
+    if (gSpecialVar_0x8004 != USING_DOUBLE_BATTLE && gSpecialVar_0x8004 != USING_MULTI_BATTLE)
+        return;
+    for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+        count += GetChampionsLinkEligibleSpecies(slot) != SPECIES_NONE;
+    gSpecialVar_Result = count >= required;
+}
+
+void PrepareChampionsLinkBattleCard(struct TrainerCard *card, u32 service)
+{
+    if (service != USING_DOUBLE_BATTLE && service != USING_MULTI_BATTLE)
+        return;
+    card->unused = CHAMPIONS_LINK_RULES | service;
+    for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+        card->monSpecies[slot] = GetChampionsLinkEligibleSpecies(slot);
+}
+
+bool32 AreChampionsLinkPeersCompatible(u32 service)
+{
+    u32 required;
+    u32 players = GetLinkPlayerCount();
+
+    if (service != USING_DOUBLE_BATTLE && service != USING_MULTI_BATTLE)
+        return FALSE;
+    required = service == USING_DOUBLE_BATTLE ? 4 : 3;
+    if (players != (service == USING_DOUBLE_BATTLE ? 2 : 4))
+        return FALSE;
+    for (u32 player = 0; player < players; player++)
+    {
+        u32 count = 0;
+        if (gLinkPlayers[player].version != GAME_VERSION
+         || gTrainerCards[player].unused != (CHAMPIONS_LINK_RULES | service))
+            return FALSE;
+        for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+        {
+            enum Species species = gTrainerCards[player].monSpecies[slot];
+            if (species != SPECIES_NONE && species != SPECIES_EGG && IsSpeciesEnabled(species))
+                count++;
+        }
+        if (count < required)
+            return FALSE;
+    }
+    return TRUE;
+}
+
+static void PrepareCableClubBattleCard(struct TrainerCard *card)
+{
+    if (gLinkType == LINKTYPE_DOUBLE_BATTLE)
+        PrepareChampionsLinkBattleCard(card, USING_DOUBLE_BATTLE);
+    else if (gLinkType == LINKTYPE_MULTI_BATTLE)
+        PrepareChampionsLinkBattleCard(card, USING_MULTI_BATTLE);
+    else if (gLinkType == LINKTYPE_BATTLE_TOWER_50 || gLinkType == LINKTYPE_BATTLE_TOWER_OPEN)
+        for (u32 slot = 0; slot < FRONTIER_MULTI_PARTY_SIZE; slot++)
+        {
+            u32 selection = gSelectedOrderFromParty[slot];
+            card->monSpecies[slot] = selection > 0 && selection <= PARTY_SIZE
+                ? GetMonData(&gParties[B_TRAINER_PLAYER][selection - 1], MON_DATA_SPECIES) : SPECIES_NONE;
+        }
+}
+
+static void Task_RejectChampionsLinkBattle(u8 taskId)
+{
+    gSpecialVar_Result = LINKUP_INCOMPATIBLE_BATTLE;
+    ScriptContext_Enable();
+    DestroyTask(taskId);
+}
 
 static const struct WindowTemplate sWindowTemplate_LinkPlayerCount = {
     .bg = 0,
@@ -362,8 +451,7 @@ static void Task_LinkupExchangeDataWithLeader(u8 taskId)
         SaveLinkPlayers(gFieldLinkPlayerCount);
         card = (struct TrainerCard *)gBlockSendBuffer;
         TrainerCard_GenerateCardForLinkPlayer(card);
-        card->monSpecies[0] = GetMonData(&gParties[B_TRAINER_PLAYER][gSelectedOrderFromParty[0] - 1], MON_DATA_SPECIES);
-        card->monSpecies[1] = GetMonData(&gParties[B_TRAINER_PLAYER][gSelectedOrderFromParty[1] - 1], MON_DATA_SPECIES);
+        PrepareCableClubBattleCard(card);
         gTasks[taskId].func = Task_LinkupAwaitTrainerCardData;
     }
 }
@@ -410,8 +498,7 @@ static void Task_LinkupCheckStatusAfterConfirm(u8 taskId)
         SaveLinkPlayers(gFieldLinkPlayerCount);
         card = (struct TrainerCard *)gBlockSendBuffer;
         TrainerCard_GenerateCardForLinkPlayer(card);
-        card->monSpecies[0] = GetMonData(&gParties[B_TRAINER_PLAYER][gSelectedOrderFromParty[0] - 1], MON_DATA_SPECIES);
-        card->monSpecies[1] = GetMonData(&gParties[B_TRAINER_PLAYER][gSelectedOrderFromParty[1] - 1], MON_DATA_SPECIES);
+        PrepareCableClubBattleCard(card);
         gTasks[taskId].func = Task_LinkupAwaitTrainerCardData;
         SendBlockRequest(BLOCK_REQ_SIZE_100);
     }
@@ -462,6 +549,14 @@ static void FinishLinkup(u16 *linkupStatus, u32 taskId)
 
     if (*linkupStatus == LINKUP_SUCCESS)
     {
+        if ((gLinkType == LINKTYPE_DOUBLE_BATTLE || gLinkType == LINKTYPE_MULTI_BATTLE)
+         && !AreChampionsLinkPeersCompatible(gLinkType == LINKTYPE_DOUBLE_BATTLE ? USING_DOUBLE_BATTLE : USING_MULTI_BATTLE))
+        {
+            *linkupStatus = LINKUP_INCOMPATIBLE_BATTLE;
+            SetCloseLinkCallback();
+            gTasks[taskId].func = Task_StopLinkup;
+            return;
+        }
         if (gLinkType == LINKTYPE_BATTLE_TOWER_50 || gLinkType == LINKTYPE_BATTLE_TOWER_OPEN)
         {
             if (AreBattleTowerLinkSpeciesSame(trainerCards[0].monSpecies, trainerCards[1].monSpecies))
@@ -566,9 +661,8 @@ void TryBattleLinkup(void)
     switch (gSpecialVar_0x8004)
     {
     case USING_SINGLE_BATTLE:
-        minPlayers = 2;
-        gLinkType = LINKTYPE_SINGLE_BATTLE;
-        break;
+        CreateTask(Task_RejectChampionsLinkBattle, 80);
+        return;
     case USING_DOUBLE_BATTLE:
         minPlayers = 2;
         gLinkType = LINKTYPE_DOUBLE_BATTLE;
@@ -1023,6 +1117,17 @@ void CleanupLinkRoomState(void)
     SetWarpDestinationToDynamicWarp(WARP_ID_DYNAMIC);
 }
 
+void AbortChampionsLinkBattle(void)
+{
+    CloseLink();
+    CleanupLinkRoomState();
+    VarSet(VAR_CABLE_CLUB_STATE, USING_REJECTED_BATTLE);
+    WarpIntoMap();
+    gSpecialVar_Result = LINKUP_INCOMPATIBLE_BATTLE;
+    gFieldCallback = FieldCB_DefaultWarpExit;
+    SetMainCallback2(CB2_LoadMap);
+}
+
 void ExitLinkRoom(void)
 {
     QueueExitLinkRoomKey();
@@ -1163,6 +1268,28 @@ void UNUSED Script_StartWiredTrade(void)
 
 void ColosseumPlayerSpotTriggered(void)
 {
+    u32 service = VarGet(VAR_CABLE_CLUB_STATE);
+    bool32 validSelection = TRUE;
+
+    if (service == USING_MULTI_BATTLE)
+        for (u32 slot = 0; slot < 3; slot++)
+        {
+            u32 selection = gSelectedOrderFromParty[slot];
+            if (selection == 0 || selection > PARTY_SIZE
+             || GetChampionsLinkEligibleSpecies(selection - 1) == SPECIES_NONE)
+                validSelection = FALSE;
+            for (u32 earlier = 0; earlier < slot; earlier++)
+                if (selection == gSelectedOrderFromParty[earlier])
+                    validSelection = FALSE;
+        }
+    gSpecialVar_0x8004 = service;
+    CheckChampionsLinkBattleParty();
+    if (!gSpecialVar_Result || !validSelection || !AreChampionsLinkPeersCompatible(service))
+    {
+        AbortChampionsLinkBattle();
+        return;
+    }
+    gSpecialVar_0x8004 = service;
     gLinkType = LINKTYPE_BATTLE;
 
     if (gWirelessCommType)

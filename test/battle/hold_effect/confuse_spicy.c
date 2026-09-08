@@ -14,11 +14,11 @@ SINGLE_BATTLE_TEST("Confusion berries wait until quarter HP without Gluttony aft
         PLAYER(SPECIES_ZIGZAGOON) { Ability(ABILITY_PICKUP); Nature(NATURE_HARDY); MaxHP(96); HP(96); Speed(100); Item(item); }
         OPPONENT(SPECIES_WOBBUFFET) { Level(24); Speed(1); }
     } WHEN {
-        TURN { MOVE(player, MOVE_BELLY_DRUM); MOVE(opponent, MOVE_NIGHT_SHADE); }
+        TURN { MOVE(player, MOVE_BELLY_DRUM); MOVE(opponent, MOVE_SEISMIC_TOSS); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_BELLY_DRUM, player);
         HP_BAR(player, hp: 48);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_NIGHT_SHADE, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SEISMIC_TOSS, opponent);
         HP_BAR(player, hp: 24);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_BERRY, player);
         HP_BAR(player, hp: 56);
@@ -28,5 +28,3 @@ SINGLE_BATTLE_TEST("Confusion berries wait until quarter HP without Gluttony aft
         EXPECT_EQ(gBattleMons[battler].item, ITEM_NONE);
     }
 }
-
-TO_DO_BATTLE_TEST("Figy Berry confuses a Pokemon whose nature dislikes spicy food")

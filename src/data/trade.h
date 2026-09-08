@@ -1231,7 +1231,7 @@ static const struct InGameTrade sIngameTrades[] =
     [INGAME_TRADE_HAPPINY] =
     {
         .nickname = _("HAPPY"),
-        .species = SPECIES_HAPPINY,
+        .species = SPECIES_CHANSEY,
         .ivs = {31, 31, 31, 31, 31, 31},
         .abilityNum = 0,
         .otId = 46285,
@@ -1242,7 +1242,7 @@ static const struct InGameTrade sIngameTrades[] =
         .otName = _("SKYLAR"),
         .otGender = MALE,
         .sheen = 10,
-        .requestedSpecies = SPECIES_PYUKUMUKU
+        .requestedSpecies = SPECIES_IGGLYBUFF
     }
 };
 

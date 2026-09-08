@@ -34,11 +34,6 @@ BattleFrontier_BattleTowerLobby_EventScript_PlayerFaceNorth::
 	end
 
 BattleFrontier_BattleTowerLobby_OnFrame:
-	map_script_2 VAR_TEMP_CHALLENGE_STATUS, 0, BattleFrontier_BattleTowerLobby_EventScript_GetChallengeStatus
-	map_script_2 VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_SAVING, BattleFrontier_BattleTowerLobby_EventScript_QuitWithoutSaving
-	map_script_2 VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_PAUSED, BattleFrontier_BattleTowerLobby_EventScript_ResumeChallenge
-	map_script_2 VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_WON, BattleFrontier_BattleTowerLobby_EventScript_WonChallenge
-	map_script_2 VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST, BattleFrontier_BattleTowerLobby_EventScript_LostChallenge
 	.2byte 0
 
 BattleFrontier_BattleTowerLobby_EventScript_GetChallengeStatus::
@@ -447,7 +442,7 @@ BattleFrontier_BattleTowerLobby_EventScript_ChampionsCircuit::
 	faceplayer
 	goto_if_unset FLAG_SYS_GAME_CLEAR, BattleFrontier_BattleTowerLobby_EventScript_CircuitLocked
 	special ChampionsCircuitTryGiveReward
-	call_if_eq VAR_RESULT, 4, BattleFrontier_BattleTowerLobby_EventScript_CircuitRewardNeedsResearch
+	call_if_eq VAR_RESULT, 4, BattleFrontier_BattleTowerLobby_EventScript_CircuitRewardPending
 	call_if_eq VAR_RESULT, 1, BattleFrontier_BattleTowerLobby_EventScript_CircuitRewardParty
 	call_if_eq VAR_RESULT, 2, BattleFrontier_BattleTowerLobby_EventScript_CircuitRewardPC
 	goto_if_eq VAR_RESULT, 3, BattleFrontier_BattleTowerLobby_EventScript_CircuitPendingRewardNoRoom
@@ -504,15 +499,15 @@ BattleFrontier_BattleTowerLobby_EventScript_CircuitCancel::
 	end
 
 BattleFrontier_BattleTowerLobby_Text_CircuitWelcome:
-	.string "This is the FRONTIER's premier challenge:\n"
-	.string "the CHAMPIONS CIRCUIT.\p"
-	.string "Every match is a full-team Double Battle\n"
-	.string "assembled from competitive roles.\p"
-	.string "Your team becomes Lv. 100. Opponents\n"
-	.string "gain one total level after each win.\p"
-	.string "They can climb as high as Lv. 255.\n"
-	.string "Every desk enters this Circuit.$"
-
+	.string "Welcome to the CHAMPIONS CIRCUIT!\p"
+	.string "Every match is a full-team Double\n"
+	.string "Battle with a competitive\l"
+	.string "opponent.\p"
+	.string "Your team battles at Lv. 100.\n"
+	.string "Opponents grow stronger as your\l"
+	.string "run continues, up to Lv. 255.\p"
+	.string "Every Frontier desk registers you\n"
+	.string "for the central Tower arena.$"
 BattleFrontier_BattleTowerLobby_Text_CircuitWelcomeBack:
 	.string "Welcome back to the CHAMPIONS CIRCUIT.\n"
 	.string "Are your six Pokémon ready?$"
@@ -629,35 +624,23 @@ BattleFrontier_BattleTowerLobby_EventScript_Boy::
 	end
 
 BattleFrontier_BattleTowerLobby_EventScript_ShowSinglesResults::
-	lockall
-	frontier_results FRONTIER_FACILITY_TOWER, FRONTIER_MODE_SINGLES
-	waitbuttonpress
-	special RemoveRecordsWindow
-	releaseall
+	special ChampionsCircuitBufferRecord
+	msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN
 	end
 
 BattleFrontier_BattleTowerLobby_EventScript_ShowDoublesResults::
-	lockall
-	frontier_results FRONTIER_FACILITY_TOWER, FRONTIER_MODE_DOUBLES
-	waitbuttonpress
-	special RemoveRecordsWindow
-	releaseall
+	special ChampionsCircuitBufferRecord
+	msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN
 	end
 
 BattleFrontier_BattleTowerLobby_EventScript_ShowMultisResults::
-	lockall
-	frontier_results FRONTIER_FACILITY_TOWER, FRONTIER_MODE_MULTIS
-	waitbuttonpress
-	special RemoveRecordsWindow
-	releaseall
+	special ChampionsCircuitBufferRecord
+	msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN
 	end
 
 BattleFrontier_BattleTowerLobby_EventScript_ShowLinkMultisResults::
-	lockall
-	frontier_results FRONTIER_FACILITY_TOWER, FRONTIER_MODE_LINK_MULTIS
-	waitbuttonpress
-	special RemoveRecordsWindow
-	releaseall
+	special ChampionsCircuitBufferRecord
+	msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN
 	end
 
 BattleFrontier_BattleTowerLobby_EventScript_NotEnoughValidMons::
@@ -1015,9 +998,7 @@ BattleFrontier_BattleTowerLobby_EventScript_WirelessLinkSuccessful::
 	end
 
 BattleFrontier_BattleTowerLobby_EventScript_RulesBoard::
-	lockall
-	msgbox BattleFrontier_BattleTowerLobby_Text_RulesAreListed, MSGBOX_DEFAULT
-	goto BattleFrontier_BattleTowerLobby_EventScript_ReadRulesBoard
+	msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRules, MSGBOX_SIGN
 	end
 
 BattleFrontier_BattleTowerLobby_EventScript_ReadRulesBoard::
@@ -1161,12 +1142,11 @@ BattleFrontier_BattleTowerLobby_Text_WinsInRowRecorded:
 	.string "an embarrassing way!$"
 
 BattleFrontier_BattleTowerLobby_Text_CanLeaveUntilLossOrSevenWins:
-	.string "Once you've entered the BATTLE TOWER,\n"
-	.string "you can't leave until you either lose\l"
-	.string "or you beat seven TRAINERS in a row.\p"
-	.string "You'd best be certain that you're up\n"
-	.string "to the challenge.$"
-
+	.string "The CIRCUIT restores your team\n"
+	.string "after each match.\p"
+	.string "You may continue or leave then. A\n"
+	.string "strong run deserves another\l"
+	.string "well-prepared decision.$"
 @ Unused
 BattleFrontier_BattleTowerLobby_Text_DoubleBattleRoomConstruction:
 	.string "Welcome to the BATTLE TOWER\n"
@@ -1532,15 +1512,34 @@ BattleFrontier_BattleTowerLobby_Text_ExplainMultiLinkRules:
 	.string "You may not interrupt this challenge\n"
 	.string "in the middle, unlike other modes.$"
 
-BattleFrontier_BattleTowerLobby_EventScript_CircuitRewardNeedsResearch::
-	msgbox BattleFrontier_BattleTowerLobby_Text_CircuitRewardNeedsResearch, MSGBOX_DEFAULT
+BattleFrontier_BattleTowerLobby_EventScript_CircuitRewardPending::
+	msgbox BattleFrontier_BattleTowerLobby_Text_CircuitRewardPending, MSGBOX_DEFAULT
 	setvar VAR_RESULT, 0
 	return
 
-BattleFrontier_BattleTowerLobby_Text_CircuitRewardNeedsResearch:
-	.string "You've earned {STR_VAR_1}'s reward.\p"
-	.string "First, have its Legendary Sign\n"
-	.string "translated by the dream researcher\l"
-	.string "on DEVON CORP.'s second floor.\p"
-	.string "I'll keep the reward while you visit\n"
-	.string "RUSTBORO. Your wins remain recorded.$"
+BattleFrontier_BattleTowerLobby_Text_CircuitRewardPending:
+	.string "Your reward remains recorded.\p"
+	.string "Review this Pokémon's legendary lead\n"
+	.string "for any remaining conditions.\p"
+	.string "Your wins will not be lost.$"
+
+BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRules::
+	.string "CHAMPIONS CIRCUIT\p"
+	.string "Bring six healthy Pokémon and no\n"
+	.string "Eggs. Every match is doubles; you\l"
+	.string "control your own team.\p"
+	.string "Your team battles at Lv. 100.\n"
+	.string "Opponent levels begin from your\l"
+	.string "difficulty and rise with wins.\p"
+	.string "After each battle, your party and\n"
+	.string "held items are restored. You can\l"
+	.string "leave between matches.\p"
+	.string "Every Frontier desk registers you\n"
+	.string "for the central Tower arena.\l"
+	.string "Milestone rewards remain recorded.$"
+
+BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord::
+	.string "CHAMPIONS CIRCUIT\p"
+	.string "Current run: {STR_VAR_1}\p"
+	.string "Best recorded: {STR_VAR_2}\p"
+	.string "Total wins: {STR_VAR_3}$"

@@ -17,7 +17,7 @@ class BattleSetAbilityIntegrity(unittest.TestCase):
         source = (ROOT / 'src/emerald_champions_battle_sets.c').read_text()
         find = source[source.index('static bool32 FindAbilitySlot('):source.index('static bool32 IsValidBattleFormat(')]
         start = source.index('static bool32 FindPresetAbilitySlot(') if 'static bool32 FindPresetAbilitySlot(' in source else source.index('static bool32 DoesMonMatchPresetAbility(')
-        match = source[start:source.index('// A set built around Belly Drum')]
+        match = source[start:source.index('static bool32 DoesItemNeedEvenHp(')]
         apply = source[source.index('static u8 ApplyPreset('):]
         apply = apply[:apply.index('    if (IsEmeraldChampionsProtectedProgressionItem(preset->item)')]
         apply += '    return abilitySlot;\n}\n'

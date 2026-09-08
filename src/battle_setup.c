@@ -39,6 +39,7 @@
 #include "secret_base.h"
 #include "sound.h"
 #include "starter_choose.h"
+#include "emerald_champions_opening.h"
 #include "strings.h"
 #include "string_util.h"
 #include "task.h"
@@ -1005,12 +1006,12 @@ void ChooseStarter(void)
 
 static void CB2_GiveStarter(void)
 {
-    u16 starterMon;
+    gSpecialVar_Result = GiveEmeraldChampionsStarterPair(gSpecialVar_Result, gSpecialVar_0x8004);
+    SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
+}
 
-    *GetVarPointer(VAR_STARTER_MON) = gSpecialVar_Result;
-    starterMon = GetStarterPokemon(gSpecialVar_Result);
-    ScriptGiveMon(starterMon, 5, ITEM_NONE);
-    ApplyEmeraldChampionsOpponentSet(&gParties[B_TRAINER_PLAYER][0], 0);
+void StartEmeraldChampionsBirchRescue(void)
+{
     ResetTasks();
     PlayBattleBGM();
     SetMainCallback2(CB2_StartFirstBattle);
@@ -1024,7 +1025,7 @@ static void CB2_StartFirstBattle(void)
 
     if (IsBattleTransitionDone() == TRUE)
     {
-        gBattleTypeFlags = BATTLE_TYPE_FIRST_BATTLE;
+        gBattleTypeFlags = BATTLE_TYPE_FIRST_BATTLE | BATTLE_TYPE_DOUBLE;
         gMain.savedCallback = CB2_EndFirstBattle;
         FreeAllWindowBuffers();
         SetMainCallback2(CB2_InitBattle);
@@ -1492,13 +1493,16 @@ void BattleSetup_StartTrainerBattle(void)
     }
     else if (InTrainerHillChallenge())
     {
-        gBattleTypeFlags |= BATTLE_TYPE_TRAINER_HILL;
-
-        if (gNoOfApproachingTrainers == 2)
-            FillHillTrainersParties();
-        else
-            FillHillTrainerParty();
-
+        gBattleTypeFlags |= BATTLE_TYPE_TRAINER_HILL | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_TWO_OPPONENTS;
+        TRAINER_BATTLE_PARAM.opponentB = TRAINER_BATTLE_PARAM.opponentA == 1 ? 2 : 1;
+        if (!FillHillTrainersParties())
+        {
+            AbortTrainerHillChallenge();
+            gNoOfApproachingTrainers = 0;
+            ScriptContext_SetupScript(TrainerHill_EventScript_GenerationFailed);
+            ScriptContext_Enable();
+            return;
+        }
         SetHillTrainerFlag();
     }
     else if (GetTrainerBattleType(TRAINER_BATTLE_PARAM.opponentA) == TRAINER_BATTLE_TYPE_DOUBLES)
@@ -2392,7 +2396,7 @@ static void ApplyRegionalRivalStarter(struct Pokemon *party, u16 trainerNum)
         return;
 
     baseSpecies = GetStarterPokemonForGeneration(
-        (VarGet(VAR_STARTER_MON) + 1) % 3,
+        GetEmeraldChampionsRivalStarterIndex(),
         VarGet(VAR_STARTER_GEN));
     for (u32 i = 0; i < PARTY_SIZE; i++)
     {
@@ -2420,46 +2424,7 @@ static void ApplyRegionalRivalStarter(struct Pokemon *party, u16 trainerNum)
         SetMonData(&party[i], MON_DATA_NICKNAME, GetSpeciesName(newSpecies));
         experience = gExperienceTables[gSpeciesInfo[newSpecies].growthRate][level];
         SetMonData(&party[i], MON_DATA_EXP, &experience);
-        // The opening rival is the campaign's one-on-one exception. Doubles
-        // defaults can contain only ally support, so use its singles catalog.
-        if (GetTrainerBattleType(trainerNum) == TRAINER_BATTLE_TYPE_SINGLES
-         && ApplyEmeraldChampionsBattleSetChoiceForFormat(&party[i], 0, EC_BATTLE_FORMAT_SINGLES) == EC_BATTLE_SET_SUCCESS)
-            return;
-
-        bool32 applied = FALSE;
-        for (u8 choice = 0; choice < GetEmeraldChampionsRawBattleSetCount(newSpecies); choice++)
-        {
-            const struct EmeraldChampionsBattleSet *preset = GetEmeraldChampionsRawBattleSet(newSpecies, choice);
-            bool32 itemUsed = FALSE;
-
-            if (preset == NULL
-             || preset->requiredItem != ITEM_NONE
-             || preset->requiredMove != MOVE_NONE)
-                continue;
-            for (u32 other = 0; other < PARTY_SIZE; other++)
-            {
-                if (other != i
-                 && preset->item != ITEM_NONE
-                 && GetMonData(&party[other], MON_DATA_HELD_ITEM) == preset->item)
-                {
-                    itemUsed = TRUE;
-                    break;
-                }
-            }
-            if (!itemUsed)
-            {
-                applied = ApplyEmeraldChampionsOpponentSet(&party[i], choice) != EC_BATTLE_SET_FAILED;
-                if (applied)
-                    break;
-            }
-        }
-        if (!applied)
-        {
-            enum Item noItem = ITEM_NONE;
-
-            ApplyEmeraldChampionsOpponentSet(&party[i], 0);
-            SetMonData(&party[i], MON_DATA_HELD_ITEM, &noItem);
-        }
+        ApplyEmeraldChampionsRegionalRivalSet(party, i, stage == 0);
         CalculateMonStats(&party[i]);
         return;
     }

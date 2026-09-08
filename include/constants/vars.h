@@ -203,8 +203,7 @@
 #define VAR_TRICK_HOUSE_ENTER_FROM_CORRIDOR              0x40B5
 #define VAR_TRICK_HOUSE_PUZZLE_7_STATE_2                 0x40B6 // Leftover from RS, never set
 #define VAR_SLATEPORT_FAN_CLUB_STATE                     0x40B7
-#define VAR_EMERALD_CHAMPIONS_SAVE_VERSION                0x40B8 // Versioned migration discriminator; unused in 81e/e7 baselines.
-#define EMERALD_CHAMPIONS_SAVE_VERSION_CURRENT            2
+#define VAR_UNUSED_0x40B8                                0x40B8
 #define VAR_MT_PYRE_STATE                                0x40B9
 #define VAR_NEW_MAUVILLE_STATE                           0x40BA
 #define VAR_RUSTBORO_GYM_GUIDE_STATE                     0x40BB // 0: entrance advice pending, 1: complete
@@ -242,12 +241,12 @@
 #define VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS               0x40DB
 #define VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS                 0x40DC
 #define VAR_GIFT_PICHU_SLOT                              0x40DD
-#define VAR_LEGENDARY_RELIC_DELIVERY_0                    0x40DE // Pending relic bits 0-15; initialized by save v2 migration.
+#define VAR_LEGENDARY_RELIC_DELIVERY_0                    0x40DE // Pending relic delivery bits 0-15.
 #define VAR_LEGENDARY_RELIC_DELIVERY_1                    0x40DF // Pending bits 16-23 and earned species bits 24-29.
-#define VAR_STEVEN_STARTER_STONE_DELIVERY                 0x40E0 // Fulfilled starter stone gifts, bits 0 and 1.
-#define VAR_GIFT_UNUSED_4                                0x40E1 // Var is written to, but never read
-#define VAR_GIFT_UNUSED_5                                0x40E2 // Var is written to, but never read
-#define VAR_GIFT_UNUSED_6                                0x40E3 // Var is written to, but never read
+#define VAR_STEVEN_STARTER_STONE_DELIVERY                 0x40E0 // Starter stone receipts: first family bits 0/1, second family bits 2/3.
+#define VAR_EC_SECOND_STARTER                         0x40E1 // 0 unset; second regional starter index + 1.
+#define VAR_EC_OPENING_STATE                         0x40E2 // EC_OPENING_* transaction state.
+#define VAR_EC_CIRCUIT_BEST_WINS                         0x40E3 // Best observed Circuit streak; 0 means no record yet.
 #define VAR_GIFT_UNUSED_7                                0x40E4 // var is written to, but never read
 #define VAR_CHAMPIONS_CIRCUIT_ACTIVE                     0x40E5
 #define VAR_DAILY_SLOTS                                  0x40E6

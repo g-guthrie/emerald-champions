@@ -69,7 +69,8 @@ Route119_EventScript_PlayBrendanMusic::
 
 Route119_EventScript_BattleMay::
 	msgbox Route119_Text_MayIntro, MSGBOX_DEFAULT
-	switch VAR_STARTER_MON
+	special BufferEmeraldChampionsRivalBranch
+	switch VAR_RESULT
 	case 0, Route119_EventScript_BattleMayTreecko
 	case 1, Route119_EventScript_BattleMayTorchic
 	case 2, Route119_EventScript_BattleMayMudkip
@@ -99,7 +100,8 @@ Route119_EventScript_DefeatedMay::
 
 Route119_EventScript_BattleBrendan::
 	msgbox Route119_Text_BrendanIntro, MSGBOX_DEFAULT
-	switch VAR_STARTER_MON
+	special BufferEmeraldChampionsRivalBranch
+	switch VAR_RESULT
 	case 0, Route119_EventScript_BattleBrendanTreecko
 	case 1, Route119_EventScript_BattleBrendanTorchic
 	case 2, Route119_EventScript_BattleBrendanMudkip
@@ -498,10 +500,9 @@ Route119_Text_MayDefeat:
 	.string "You changed plans mid-storm!$"
 
 Route119_Text_MayPresentForYou:
-	.string "MAY: I worried the BADGE road would\n"
-	.string "harden you into one team. It didn't.\p"
+	.string "MAY: Your partners came through\n"
+	.string "that battle together.\p"
 	.string "Here. I have a present for you.$"
-
 Route119_Text_MayExplainFly:
 	.string "MAY: Your FLIGHT BEACON turns on once\n"
 	.string "you hold the FEATHER BADGE.\p"
@@ -610,9 +611,9 @@ Route119_Text_RouteSignFortree:
 
 Route119_Text_WeatherInstitute:
 	.string "WEATHER INSTITUTE\p"
-	.string "FIELD NOTE: CASTFORM may wake the\n"
-	.string "storm Champion near FORTREE.$"
-
+	.string "FIELD NOTE: Inspect this route's\n"
+	.string "marked stone with the BALANCE\l"
+	.string "BADGE. A storm may answer.$"
 Route119_Text_TrainerTipsDecoration:
 	.string "TRAINER TIPS\p"
 	.string "Up to sixteen decorations and\n"

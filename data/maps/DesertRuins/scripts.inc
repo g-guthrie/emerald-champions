@@ -63,11 +63,11 @@ DesertRuins_EventScript_Regirock::
 	waitmoncry
 	setvar VAR_0x8004, SPECIES_REGIROCK
 	setvar VAR_0x8005, 0
-	msgbox gText_LegendaryOneShotWarning, MSGBOX_DEFAULT
 	special CreateEmeraldChampionsStaticLegendaryEncounter
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special StartRegiBattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+	special FinishLegendaryLandmarkEncounter
 	specialvar VAR_RESULT, GetBattleOutcome
 	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, DesertRuins_EventScript_CaughtRegirock
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, DesertRuins_EventScript_DefeatedRegirock
@@ -82,7 +82,7 @@ DesertRuins_EventScript_CaughtRegirock::
 	end
 
 DesertRuins_EventScript_DefeatedRegirock::
-	goto Common_EventScript_LegendaryDefeated
+	goto Common_EventScript_LegendaryResting
 	end
 
 DesertRuins_EventScript_RanFromRegirock::

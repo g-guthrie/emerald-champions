@@ -282,20 +282,9 @@ SecretBase_EventScript_PutAwayDecorationEnd::
 	end
 
 SecretBase_EventScript_RecordMixTrainer::
-	special GetSecretBaseOwnerAndState
-	goto_if_eq VAR_0x8004, 0, SecretBase_EventScript_Trainer0
-	goto_if_eq VAR_0x8004, 1, SecretBase_EventScript_Trainer1
-	goto_if_eq VAR_0x8004, 2, SecretBase_EventScript_Trainer2
-	goto_if_eq VAR_0x8004, 3, SecretBase_EventScript_Trainer3
-	goto_if_eq VAR_0x8004, 4, SecretBase_EventScript_Trainer4
-	goto_if_eq VAR_0x8004, 5, SecretBase_EventScript_Trainer5
-	goto_if_eq VAR_0x8004, 6, SecretBase_EventScript_Trainer6
-	goto_if_eq VAR_0x8004, 7, SecretBase_EventScript_Trainer7
-	goto_if_eq VAR_0x8004, 8, SecretBase_EventScript_Trainer8
-	goto_if_eq VAR_0x8004, 9, SecretBase_EventScript_Trainer9
+	msgbox SecretBase_Text_RetiredOwnerBattle, MSGBOX_NPC
 	end
 
-@ VAR_RESULT is initially set by GetSecretBaseOwnerAndState
 SecretBase_EventScript_Trainer0::
 	lock
 	faceplayer
@@ -636,15 +625,7 @@ SecretBase_EventScript_Trainer9PostBattle::
 	end
 
 SecretBase_EventScript_BattleTrainer::
-	special PrepSecretBaseBattleFlags
-	setvar VAR_0x8004, SPECIAL_BATTLE_SECRET_BASE
-	setvar VAR_0x8005, 0
-	special DoSpecialTrainerBattle
-	call_if_eq VAR_RESULT, B_OUTCOME_DREW, SecretBase_EventScript_DrewSecretBaseBattle
-	call_if_eq VAR_RESULT, B_OUTCOME_WON, SecretBase_EventScript_WonSecretBaseBattle
-	call_if_eq VAR_RESULT, B_OUTCOME_LOST, SecretBase_EventScript_LostSecretBaseBattle
-	special HealPlayerParty
-	callnative UpdateFollowingPokemon
+	msgbox SecretBase_Text_RetiredOwnerBattle, MSGBOX_DEFAULT
 	release
 	end
 
@@ -734,3 +715,9 @@ SecretBase_Text_WouldYouLikeToMoveBases:
 SecretBase_Text_MovingCompletedUseSecretPower:
 	.string "Moving completed.\p"
 	.string "Would you like to use the SECRET POWER?$"
+
+SecretBase_Text_RetiredOwnerBattle::
+	.string "Welcome to my SECRET BASE!\n"
+	.string "Make yourself at home.\p"
+	.string "For a DOUBLE BATTLE, visit a BATTLE\n"
+	.string "TENT or the CHAMPIONS CIRCUIT.$"

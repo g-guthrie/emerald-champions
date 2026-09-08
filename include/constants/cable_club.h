@@ -11,6 +11,7 @@
 #define USING_BERRY_CRUSH    7
 #define USING_MINIGAME       8
 #define USING_BATTLE_TOWER   9
+#define USING_REJECTED_BATTLE 10 // Local return state; never a link protocol value.
 
 // Return states for the group of specials that use CreateLinkupTask
 // A few also used by TryBecomeLinkLeader and TryJoinLinkGroup
@@ -27,6 +28,7 @@
 #define LINKUP_FAILED_CONTEST_GMODE 10
 #define LINKUP_FAILED_BATTLE_TOWER  11
 #define LINKUP_FOREIGN_GAME         12
+#define LINKUP_INCOMPATIBLE_BATTLE  13
 
 #define CABLE_SEAT_WAITING 0
 #define CABLE_SEAT_SUCCESS 1

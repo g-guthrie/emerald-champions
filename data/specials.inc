@@ -517,7 +517,7 @@ gSpecials::
 	def_special Unused_EmeraldChampionsTypeItemMart, unused=1
 	def_special Unused_EmeraldChampionsGemItemMart, unused=1
 	def_special Unused_EmeraldChampionsSpeciesItemMart, unused=1
-	def_special OpenEmeraldChampionsMegaStoneArchive
+	def_special Unused_EmeraldChampionsMegaStoneArchive, unused=1
 	def_special GetEmeraldChampionsStarterMegaStone
 	def_special OpenEmeraldChampionsEvolutionItemArchive
 	def_special IsEmeraldChampionsGameCornerPokemonClaimed
@@ -544,7 +544,7 @@ gSpecials::
 	def_special BufferCurrentMapRouteSignSpecies
 	def_special TryUnlockDarkraiLegendarySign
 	def_special BuildLegendarySignResearchMenu
-	def_special BufferLegendarySignLedger
+	def_special BuildLocalLegendarySignMenu
 	def_special TryGiveArceusLegendarySignMasteryReward
 	def_special ChampionsCircuitCanEnter
 	def_special ChampionsCircuitBegin
@@ -553,6 +553,31 @@ gSpecials::
 	def_special ChampionsCircuitHandleBattleResult
 	def_special ChampionsCircuitTryGiveReward
 	def_special ChampionsCircuitEnd
+	def_special ChampionsCircuitBufferRecord
+	def_special ChampionsTentCanEnter
+	def_special ChampionsTentBegin
+	def_special ChampionsTentGenerateOpponent
+	def_special ChampionsTentHandleBattleResult
+	def_special ChampionsTentEnd
+	def_special ChampionsTentTryGivePrize
+	def_special TrainerHillHasPendingPrize
+	def_special CheckChampionsLinkBattleParty
+	def_special BufferEmeraldChampionsFormGift
+	def_special BuildEmeraldChampionsResearchPartnerChoices
+	def_special GiveEmeraldChampionsFormGift
+	def_special BuildEmeraldChampionsFormChoices
+	def_special PrepareEmeraldChampionsFormSelection
+	def_special BufferEmeraldChampionsFormPreview
+	def_special ApplyEmeraldChampionsFormSelection
+	def_special BufferEmeraldChampionsBondingPreview
+	def_special ApplyEmeraldChampionsBonding
+	def_special StartEmeraldChampionsBirchRescue, waitstate=1
+	def_special BufferEmeraldChampionsRivalBranch
+	def_special GiveEmeraldChampionsOpeningBalls
+	def_special TopUpEmeraldChampionsOpeningBalls
+	def_special BufferEmeraldChampionsStarterNames
+	def_special SelectEmeraldChampionsStarterForNaming
+	def_special GiveEmeraldChampionsStarterMegaStoneAtIndex
 	def_special SaveForBattleTowerLink, waitstate=1
 	def_special Unused_SetWeatherSunny
 	def_special SetUnlockedPokedexFlags
@@ -685,7 +710,14 @@ gSpecials::
 	def_special CheckAddCoins
 	def_special CheckEmeraldChampionsHandoffItem
 	def_special TakeEmeraldChampionsHandoffItem
-	def_special GiveEmeraldChampionsStarterMegaStones
 	def_special SetGraniteCaveFlashLevel
 
 	def_special ResearchSelectedLegendarySign
+
+	def_special CountEmeraldChampionsGardenBerries
+	def_special TradeEmeraldChampionsGardenBerries
+
+	def_special Unused_CountDaycareHatchedSpecies, unused=1
+
+	def_special FinishLegendaryLandmarkEncounter
+	def_special HideRestingLegendaryObject

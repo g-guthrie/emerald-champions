@@ -776,19 +776,19 @@ SCENARIOS: dict[str, dict[str, object]] = {
     "wild-foe-types": {
         "id": 51,
         "frames": 1500,
-        "keys": [(900, 2, "A"), (1100, 2, "A"), (1300, 2, "R")],
+        "keys": [(900, 2, "A"), (1100, 2, "A"), (1300, 2, "L")],
         "verify": True,
     },
     "move-details": {
         "id": 16,
         "frames": 1750,
-        "keys": [(900, 2, "A"), (1100, 2, "A"), (1400, 2, "A"), (1550, 2, "L")],
+        "keys": [(900, 2, "A"), (1100, 2, "A"), (1400, 2, "A"), (1550, 2, "R")],
         "verify": True,
     },
     "move-foe-types": {
         "id": 52,
         "frames": 1750,
-        "keys": [(900, 2, "A"), (1100, 2, "A"), (1400, 2, "A"), (1550, 2, "R")],
+        "keys": [(900, 2, "A"), (1100, 2, "A"), (1400, 2, "A"), (1550, 2, "L")],
         "verify": True,
     },
     "battle-set-current": {

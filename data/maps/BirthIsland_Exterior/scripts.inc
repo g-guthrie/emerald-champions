@@ -82,11 +82,11 @@ BirthIsland_Exterior_EventScript_Deoxys::
 	setvar VAR_LAST_TALKED, LOCALID_BIRTH_ISLAND_DEOXYS
 	setvar VAR_0x8004, SPECIES_DEOXYS_NORMAL
 	setvar VAR_0x8005, 0
-	msgbox gText_LegendaryOneShotWarning, MSGBOX_DEFAULT
 	special CreateEmeraldChampionsStaticLegendaryEncounter
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+	special FinishLegendaryLandmarkEncounter
 	specialvar VAR_RESULT, GetBattleOutcome
 	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, BirthIsland_Exterior_EventScript_CaughtDeoxys
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, BirthIsland_Exterior_EventScript_DefeatedDeoxys
@@ -101,7 +101,7 @@ BirthIsland_Exterior_EventScript_CaughtDeoxys::
 	end
 
 BirthIsland_Exterior_EventScript_DefeatedDeoxys::
-	goto Common_EventScript_LegendaryDefeated
+	goto Common_EventScript_LegendaryResting
 	end
 
 BirthIsland_Exterior_EventScript_RanFromDeoxys::

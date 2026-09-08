@@ -188,11 +188,11 @@ Route123_Text_RouteSign:
 	.string "{LEFT_ARROW} ROUTE 118$"
 
 Route123_Text_RouteSignMtPyre:
-	.string "{UP_ARROW} MT. PYRE\n"
-	.string "“Forbidden to the faint of heart.”\p"
-	.string "A horned ward below the words resembles\n"
-	.string "TAUROS.$"
-
+	.string "{UP_ARROW} MT. PYRE Forbidden to\n"
+	.string "the faint of heart.\p"
+	.string "A guardian's mark stands among\n"
+	.string "these fields. Return with the\l"
+	.string "FEATHER BADGE and inspect it.$"
 Route123_Text_BerryMastersHouse:
 	.string "BERRY MASTER'S HOUSE$"
 

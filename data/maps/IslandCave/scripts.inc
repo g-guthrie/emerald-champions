@@ -96,11 +96,11 @@ IslandCave_EventScript_Regice::
 	waitmoncry
 	setvar VAR_0x8004, SPECIES_REGICE
 	setvar VAR_0x8005, 0
-	msgbox gText_LegendaryOneShotWarning, MSGBOX_DEFAULT
 	special CreateEmeraldChampionsStaticLegendaryEncounter
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special StartRegiBattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+	special FinishLegendaryLandmarkEncounter
 	specialvar VAR_RESULT, GetBattleOutcome
 	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, IslandCave_EventScript_CaughtRegice
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, IslandCave_EventScript_DefeatedRegice
@@ -115,7 +115,7 @@ IslandCave_EventScript_CaughtRegice::
 	end
 
 IslandCave_EventScript_DefeatedRegice::
-	goto Common_EventScript_LegendaryDefeated
+	goto Common_EventScript_LegendaryResting
 	end
 
 IslandCave_EventScript_RanFromRegice::

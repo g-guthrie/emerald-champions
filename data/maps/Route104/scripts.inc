@@ -141,7 +141,8 @@ Route104_EventScript_MayAskToBattle::
 
 Route104_EventScript_BattleMay::
 	msgbox Route104_Text_MayIntro, MSGBOX_DEFAULT
-	switch VAR_STARTER_MON
+	special BufferEmeraldChampionsRivalBranch
+	switch VAR_RESULT
 	case 0, Route104_EventScript_BattleMayTreecko
 	case 1, Route104_EventScript_BattleMayTorchic
 	case 2, Route104_EventScript_BattleMayMudkip
@@ -213,7 +214,8 @@ Route104_EventScript_BrendanAskToBattle::
 
 Route104_EventScript_BattleBrendan::
 	msgbox Route104_Text_BrendanIntro, MSGBOX_DEFAULT
-	switch VAR_STARTER_MON
+	special BufferEmeraldChampionsRivalBranch
+	switch VAR_RESULT
 	case 0, Route104_EventScript_BattleBrendanTreecko
 	case 1, Route104_EventScript_BattleBrendanTorchic
 	case 2, Route104_EventScript_BattleBrendanMudkip
@@ -1044,27 +1046,20 @@ Route104_Text_MrBrineysCottage:
 	.string "MR. BRINEY'S COTTAGE$"
 
 Route104_Text_RouteSignPetalburg:
-	.string "ROUTE 1O4\n"
-	.string "{RIGHT_ARROW} PETALBURG CITY$"
-
+	.string "ROUTE 104 {RIGHT_ARROW} PETALBURG\n"
+	.string "CITY$"
 Route104_Text_RouteSignRustboro:
-	.string "ROUTE 1O4\n"
-	.string "{UP_ARROW} RUSTBORO CITY$"
-
+	.string "ROUTE 104 {UP_ARROW} RUSTBORO CITY$"
 Route104_Text_PrettyPetalFlowShop:
 	.string "PRETTY PETAL FLOWER SHOP$"
 
 Route104_Text_TrainerTipsDoubleBattles:
 	.string "TRAINER TIPS\p"
-	.string "In the HOENN region there are pairs\n"
-	.string "of TRAINERS who challenge others\l"
-	.string "for 2-on-2 POKéMON battles called\l"
-	.string "DOUBLE BATTLES.\p"
-	.string "In a DOUBLE BATTLE, the TRAINER must\n"
-	.string "send out two POKéMON, the one at the\l"
-	.string "left of the list and the top one.\l"
-	.string "Watch how POKéMON are lined up.$"
-
+	.string "Trainer battles in HOENN are\n"
+	.string "DOUBLE BATTLES. Prepare your first\l"
+	.string "two partners together.\p"
+	.string "A good opening pair gives each\n"
+	.string "POKéMON room to do its job.$"
 Route104_Text_MayWeShouldRegister:
 	.string "MAY: Oh, hi, {PLAYER}{KUN}!\p"
 	.string "DEVON upgraded your POKéNAV with\n"
@@ -1096,9 +1091,10 @@ Route104_Text_MayLetsBattle:
 	.string "How about a little battle here?$"
 
 Route104_Text_MayIntro:
-	.string "MAY: {PLAYER}{KUN}! Two badges' worth of\n"
-	.string "catching between us now. Show me!$"
-
+	.string "MAY: {PLAYER}{KUN}! We've both\n"
+	.string "found new partners since ROUTE\l"
+	.string "103.\p"
+	.string "Show me how your team works!$"
 Route104_Text_MayDefeat:
 	.string "Yikes! You read that faster than me!$"
 

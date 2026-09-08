@@ -114,24 +114,7 @@ RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist::
 	goto_if_eq VAR_RESULT, 2, RustboroCity_DevonCorp_2F_EventScript_MagearnaPC
 	goto_if_eq VAR_RESULT, 3, RustboroCity_DevonCorp_2F_EventScript_MagearnaNoRoom
 	msgbox RustboroCity_DevonCorp_2F_Text_LegendarySignResearcherIntro, MSGBOX_DEFAULT
-	special BufferLegendarySignLedger
-	goto_if_eq VAR_RESULT, 0, RustboroCity_DevonCorp_2F_EventScript_CheckLegendarySign
-	msgbox RustboroCity_DevonCorp_2F_Text_ReviewAwakenedSigns, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, RustboroCity_DevonCorp_2F_EventScript_CheckLegendarySign
-	msgbox gStringVar4, MSGBOX_DEFAULT
-RustboroCity_DevonCorp_2F_EventScript_CheckLegendarySign::
-	special BuildLegendarySignResearchMenu
-	goto_if_eq VAR_RESULT, 0, RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery
-	msgbox RustboroCity_DevonCorp_2F_Text_ChooseResearch, MSGBOX_DEFAULT
-	dynmultistack 0, 1, FALSE, 5, TRUE, 0, DYN_MULTICHOICE_CB_NONE
-	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, RustboroCity_DevonCorp_2F_EventScript_EndResearch
-	copyvar VAR_0x8004, VAR_RESULT
-	special ResearchSelectedLegendarySign
-	goto_if_eq VAR_RESULT, 0, RustboroCity_DevonCorp_2F_EventScript_NoLegendarySignYet
-	goto_if_eq VAR_RESULT, 1, RustboroCity_DevonCorp_2F_EventScript_LegendarySignClue
-	goto_if_eq VAR_RESULT, 2, RustboroCity_DevonCorp_2F_EventScript_LegendarySignAwakened
-	goto_if_eq VAR_RESULT, 3, RustboroCity_DevonCorp_2F_EventScript_LegendarySignAwakened
-	goto RustboroCity_DevonCorp_2F_EventScript_CheckLegendarySign
+	goto RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery
 
 RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery::
 	special TryGiveArceusLegendarySignMasteryReward
@@ -139,25 +122,14 @@ RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery::
 	goto_if_eq VAR_RESULT, 2, RustboroCity_DevonCorp_2F_EventScript_ArceusRewardPC
 	goto_if_eq VAR_RESULT, 3, RustboroCity_DevonCorp_2F_EventScript_ArceusRewardNoRoom
 	goto_if_eq VAR_RESULT, 4, RustboroCity_DevonCorp_2F_EventScript_ArceusRewardComplete
-	msgbox RustboroCity_DevonCorp_2F_Text_AllLegendarySignsRecorded, MSGBOX_DEFAULT
-	release
-	end
+	goto Common_EventScript_LegendaryGuide
 
 RustboroCity_DevonCorp_2F_EventScript_TryMagearnaPrototype::
-	setvar VAR_RESULT, 0
 	setvar VAR_0x8004, EC_SIGN_MAGEARNA_ID
-	special GetSelectedLegendarySignState
-	goto_if_eq VAR_RESULT, 2, RustboroCity_DevonCorp_2F_EventScript_MagearnaReturn
-	goto_if_unset FLAG_BADGE08_GET, RustboroCity_DevonCorp_2F_EventScript_MagearnaReturn
-	setvar VAR_0x8004, SPECIES_DIANCIE
-	special DoesPlayerPartyHaveSelectedSpeciesFamily
-	goto_if_eq VAR_RESULT, FALSE, RustboroCity_DevonCorp_2F_EventScript_MagearnaReturn
-	setvar VAR_0x8004, EC_SIGN_MAGEARNA_ID
-	special ResearchSelectedLegendarySign
-	goto_if_eq VAR_RESULT, 5, Common_EventScript_LegendaryDefeatedAtShrine
+	special TryUnlockSelectedLegendarySign
 	goto_if_eq VAR_RESULT, 0, RustboroCity_DevonCorp_2F_EventScript_MagearnaReturn
 	goto_if_eq VAR_RESULT, 1, RustboroCity_DevonCorp_2F_EventScript_MagearnaReturn
-	setvar VAR_0x8004, EC_SIGN_MAGEARNA_ID
+	goto_if_eq VAR_RESULT, 4, RustboroCity_DevonCorp_2F_EventScript_MagearnaReturn
 	special TryGiveSelectedLegendarySignReward
 	return
 
@@ -198,80 +170,36 @@ RustboroCity_DevonCorp_2F_EventScript_ArceusRewardPC::
 
 RustboroCity_DevonCorp_2F_EventScript_ArceusRewardNoRoom::
 	msgbox RustboroCity_DevonCorp_2F_Text_ArceusRewardNoRoom, MSGBOX_DEFAULT
-	release
-	end
+	goto Common_EventScript_LegendaryGuide
 
 RustboroCity_DevonCorp_2F_EventScript_ArceusRewardComplete::
 	msgbox RustboroCity_DevonCorp_2F_Text_ArceusRewardComplete, MSGBOX_DEFAULT
-	release
-	end
-
-RustboroCity_DevonCorp_2F_EventScript_LegendarySignAwakened::
-	msgbox gStringVar4, MSGBOX_DEFAULT
-	goto RustboroCity_DevonCorp_2F_EventScript_CheckLegendarySign
-
-RustboroCity_DevonCorp_2F_EventScript_LegendarySignClue::
-	msgbox RustboroCity_DevonCorp_2F_Text_LegendarySignClue, MSGBOX_DEFAULT
-	goto RustboroCity_DevonCorp_2F_EventScript_CheckLegendarySign
-
-RustboroCity_DevonCorp_2F_EventScript_NoLegendarySignYet::
-	msgbox RustboroCity_DevonCorp_2F_Text_NoLegendarySignYet, MSGBOX_DEFAULT
-	release
-	end
-
-RustboroCity_DevonCorp_2F_EventScript_EndResearch::
-	release
-	end
-
-RustboroCity_DevonCorp_2F_Text_ChooseResearch:
-	.string "Choose a Sign to research or review.\n"
-	.string "(R) marks a translated Sign.$"
+	goto Common_EventScript_LegendaryGuide
 
 RustboroCity_DevonCorp_2F_Text_LegendarySignResearcherIntro:
-	.string "My dream visualizer detected marks\n"
-	.string "I call LEGENDARY SIGNS.\p"
-	.string "Each Sign needs its own translation\n"
-	.string "here at DEVON before it can answer.\p"
-	.string "Bring me the partner shown in a Sign.\n"
-	.string "I'll help you trace its destination.\p"
-	.string "You have one chance at each legendary.\n"
-	.string "Fleeing or a knockout loses it for good.\p"
-	.string "Save before you seek one if you want\n"
-	.string "the option to reload and try again.$"
+	.string "HOENN is full of LEGENDARY SIGNS.\n"
+	.string "You can follow them at your own pace.\p"
+	.string "Inspect marked stones and strange\n"
+	.string "shrines as you explore. They can\l"
+	.string "answer without a visit to DEVON.\p"
+	.string "If a legendary escapes or faints,\n"
+	.string "leave its area and return to try again.\p"
+	.string "I keep leads for every discovery,\n"
+	.string "including ones you have completed.$"
 
 RustboroCity_DevonCorp_2F_Text_MagearnaParty:
-	.string "DIANCIE's light completes DEVON's\n"
+	.string "Your discovery completes DEVON's\n"
 	.string "sealed mechanical prototype!\p"
 	.string "MAGEARNA awakens and joins your party.$"
 
 RustboroCity_DevonCorp_2F_Text_MagearnaPC:
-	.string "DIANCIE's light completes DEVON's\n"
+	.string "Your discovery completes DEVON's\n"
 	.string "sealed mechanical prototype!\p"
 	.string "MAGEARNA awakens and is sent to your PC.$"
 
 RustboroCity_DevonCorp_2F_Text_MagearnaNoRoom:
 	.string "The sealed prototype answers DIANCIE,\n"
 	.string "but your party and PC have no room.$"
-
-RustboroCity_DevonCorp_2F_Text_LegendarySignClue:
-	.string "{STR_VAR_2}'s Sign points to\n"
-	.string "{STR_VAR_3}.\p"
-	.string "Bring {STR_VAR_1}'s family to me\n"
-	.string "here at DEVON to translate this Sign.$"
-
-RustboroCity_DevonCorp_2F_Text_NoLegendarySignYet:
-	.string "The next Sign is still beyond the\n"
-	.string "progress of your Gym challenge.$"
-
-RustboroCity_DevonCorp_2F_Text_AllLegendarySignsRecorded:
-	.string "I've translated every Sign that your\n"
-	.string "journey has brought within reach.\p"
-	.string "Return as your Gym challenge and\n"
-	.string "Hoenn's story unfold.\p"
-	.string "Capture every Sign's Pokémon, including\n"
-	.string "MT. PYRE's three, to call ARCEUS.\p"
-	.string "A legendary lost through an escape\n"
-	.string "or knockout leaves that unfinished.$"
 
 RustboroCity_DevonCorp_2F_Text_ArceusRewardParty:
 	.string "Every Legendary Sign is complete!\p"
@@ -755,6 +683,20 @@ RustboroCity_DevonCorp_2F_Text_WhatToWorkOnNext:
 @ BEGIN EMERALD CHAMPIONS LEGENDARY ROOTS
 @ END EMERALD CHAMPIONS LEGENDARY ROOTS
 
-RustboroCity_DevonCorp_2F_Text_ReviewAwakenedSigns:
-	.string "Some awakened SIGNS are still waiting\n"
-	.string "for you. Review the list?$"
+RustboroCity_DevonCorp_2F_EventScript_MegaGift_MAGEARNITE::
+	goto_if_unset FLAG_BADGE08_GET, RustboroCity_DevonCorp_2F_EventScript_BallScientist
+	goto_if_set FLAG_EC_MEGA_GIFT_MAGEARNITE, RustboroCity_DevonCorp_2F_EventScript_BallScientist
+	lock
+	faceplayer
+	msgbox RustboroCity_DevonCorp_2F_EventScript_MegaGift_MAGEARNITE_Text, MSGBOX_DEFAULT
+	giveitem ITEM_MAGEARNITE
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_EC_MEGA_GIFT_MAGEARNITE
+	release
+	goto RustboroCity_DevonCorp_2F_EventScript_BallScientist
+
+RustboroCity_DevonCorp_2F_EventScript_MegaGift_MAGEARNITE_Text:
+	.string "Eight badges! You have seen things\n"
+	.string "our laboratory can only dream of.\p"
+	.string "This stone responds to Magearna.\n"
+	.string "Perhaps you can learn why.$"

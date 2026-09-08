@@ -4,6 +4,12 @@
 #include "task.h"
 #include "constants/cable_club.h"
 
+struct TrainerCard;
+
+void CheckChampionsLinkBattleParty(void);
+void PrepareChampionsLinkBattleCard(struct TrainerCard *card, u32 service);
+bool32 AreChampionsLinkPeersCompatible(u32 service);
+void AbortChampionsLinkBattle(void);
 void CreateTask_EnterCableClubSeat(TaskFunc followupFunc);
 u8 CreateTask_ReestablishCableClubLink(void);
 void CB2_ReturnFromCableClubBattle(void);

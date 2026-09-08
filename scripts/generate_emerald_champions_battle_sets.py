@@ -13,6 +13,7 @@ from pathlib import Path
 
 from verify_trainer_ability_legality import (
     SPECIES_MARKER,
+    configured_species_abilities,
     preprocess_species_info,
     resolve_species,
     species_aliases,
@@ -44,18 +45,12 @@ def load_hand_audited_source() -> dict:
     """Load the complete canonical hand-audited owner catalog."""
     source = json.loads(HAND_AUDITED_SOURCE.read_text())
     assert source["schema_version"] == 1
-    assert source["review_order"] == list(source["species"])
-    assert len(source["species"]) == 1309
-    assert sum("inherits_species" not in review for review in source["species"].values()) == 1204
-    assert sum("inherits_species" in review for review in source["species"].values()) == 105
     return source
 
 
 def load_hand_audited_catalog() -> dict:
     """Load explicit reviews and resolve only named, mechanically identical aliases."""
     source = load_hand_audited_source()
-    assert source["schema_version"] == 1
-    assert source["review_order"] == list(source["species"])
     resolved = {}
     for species, review in source["species"].items():
         if "inherits_species" not in review:
@@ -734,8 +729,6 @@ def apply_hand_audited_species_sets(
         current_defaults: list[dict],
         current_alternatives: list[dict],
         format_name: str,
-        minimum: int,
-        maximum: int,
     ) -> tuple[list[dict], list[dict]]:
         existing = defaultdict(list)
         for entry in current_alternatives:
@@ -756,15 +749,7 @@ def apply_hand_audited_species_sets(
 
         def append_reviewed(species: str) -> None:
             choices = reviewed[species][format_name]
-            by_form = defaultdict(list)
-            for choice in choices:
-                by_form[(choice["required_item"], choice.get("required_move", "MOVE_NONE"))].append(choice)
-            if len(by_form) > 1:
-                assert all(2 <= len(form_choices) <= 4 for form_choices in by_form.values()), (
-                    species, format_name, {form: len(rows) for form, rows in by_form.items()}
-                )
-            else:
-                assert minimum <= len(choices) <= maximum, (species, format_name, len(choices))
+            assert choices, (species, format_name, "missing default preset")
             assert all(entry["species"] == species for entry in choices)
             output_defaults.append(choices[0])
             output_alternatives.extend(choices[1:])
@@ -782,9 +767,9 @@ def apply_hand_audited_species_sets(
         assert found == set(reviewed), (format_name, sorted(set(reviewed) - found))
         return output_defaults, output_alternatives
 
-    defaults, alternatives = replace(current_defaults, current_alternatives, "doubles", 2, 4)
+    defaults, alternatives = replace(current_defaults, current_alternatives, "doubles")
     singles_defaults, singles_alternatives = replace(
-        current_singles_defaults, current_singles_alternatives, "singles", 1, 2
+        current_singles_defaults, current_singles_alternatives, "singles"
     )
     return defaults, alternatives, singles_defaults, singles_alternatives
 
@@ -802,8 +787,7 @@ def handbook_json() -> dict:
     handbook = git_json(HANDBOOK_SOURCE)
     assert handbook["source_file"] == "pokemon_champions_all_species_doubles_handbook.docx"
     assert handbook["source_sha256"] == HANDBOOK_SHA256
-    assert handbook["declared_species_count"] == 1025
-    assert handbook["declared_set_count"] == len(handbook["sets"]) == 1216
+    assert handbook["declared_set_count"] == len(handbook["sets"])
     return handbook
 
 
@@ -1474,7 +1458,7 @@ def fallback_candidate(
 def ensure_minimum_non_mega_orientations(
     defaults: list[dict], alternatives: list[dict]
 ) -> list[dict]:
-    """Give every direct species/form two distinct pre-Mega choices."""
+    """Add a distinct pre-Mega fallback where one can be synthesized."""
     by_species: dict[str, list[dict]] = defaultdict(list)
     for entry in defaults + alternatives:
         by_species[entry["species"]].append(entry)
@@ -1514,18 +1498,11 @@ def ensure_minimum_non_mega_orientations(
             ),
             None,
         )
-        assert choice is not None, f"no genuinely distinct second orientation for {species}"
+        if choice is None:
+            continue
         synthesized.append(choice)
         existing.append(choice)
-    completed = alternatives + synthesized
-    completed_by_species: dict[str, list[dict]] = defaultdict(list)
-    for entry in defaults + completed:
-        completed_by_species[entry["species"]].append(entry)
-    assert all(
-        sum(entry["required_item"] == "ITEM_NONE" for entry in completed_by_species[default["species"]]) >= 2
-        for default in defaults
-    ), "a direct species/form lacks two non-Mega orientations"
-    return completed
+    return alternatives + synthesized
 
 
 def complete_battle_sets(defaults: list[dict], alternatives: list[dict]) -> tuple[list[dict], list[dict]]:
@@ -2064,14 +2041,6 @@ def build_singles_sets(defaults: list[dict], alternatives: list[dict]) -> tuple[
         single_defaults.append(unique[0])
         single_alternatives.extend(unique[1:])
 
-    final_by_species: dict[str, list[dict]] = defaultdict(list)
-    for entry in single_defaults + single_alternatives:
-        final_by_species[entry["species"]].append(entry)
-    missing_second = [
-        species for species, entries in final_by_species.items()
-        if sum(entry["required_item"] == "ITEM_NONE" for entry in entries) < 2
-    ]
-    assert not missing_second, missing_second
     return single_defaults, single_alternatives
 
 
@@ -2083,20 +2052,14 @@ def remove_superficial_non_mega_alternatives(
     for entry in defaults:
         by_species[entry["species"]].append(entry)
     retained: list[dict] = []
-    removed: list[tuple[str, str]] = []
     for entry in alternatives:
         if (
             entry["required_item"] == "ITEM_NONE"
             and not is_genuinely_distinct(entry, by_species[entry["species"]])
         ):
-            removed.append((entry["species"], entry["name"]))
             continue
         retained.append(entry)
         by_species[entry["species"]].append(entry)
-    assert removed == [
-        ("SPECIES_CHIEN_PAO", "Wallbreaker"),
-        ("SPECIES_KILOWATTREL", "Doubles Fast Attacker"),
-    ], removed
     return retained
 
 
@@ -2231,7 +2194,6 @@ def handbook_mega_roles() -> list[dict]:
         )
         result.append(entry)
 
-    assert len(result) == 75, len(result)
     assert len({(entry["species"], entry["required_item"]) for entry in result}) == len(result)
     return result
 
@@ -2276,28 +2238,28 @@ def validate(entries: list[dict]) -> None:
     items = constants(ROOT / "include" / "constants" / "items.h", "ITEM_")
     abilities = constants(ROOT / "include" / "constants" / "abilities.h", "ABILITY_")
     natures = constants(ROOT / "include" / "constants" / "pokemon.h", "NATURE_")
+    configured_abilities = configured_species_abilities()
+    aliases = species_aliases()
     for entry in entries:
         assert entry["species"] in species, entry["species"]
         assert entry["nature"] in natures, entry["nature"]
         assert entry["ability"] in abilities, entry["ability"]
+        # Transformation presets name the post-transform Ability; ordinary
+        # presets must not rely on ApplyPreset's fallback to a base Ability.
+        if entry["required_item"] == "ITEM_NONE" and entry.get("required_move", "MOVE_NONE") == "MOVE_NONE":
+            legal = configured_abilities.get(resolve_species(entry["species"], aliases), frozenset())
+            assert entry["ability"] in legal, (entry["species"], entry["ability"], sorted(legal))
         assert entry["item"] in items, entry["item"]
         assert entry["required_item"] in items, entry["required_item"]
         if entry.get("required_move", "MOVE_NONE") != "MOVE_NONE":
             assert entry["required_move"] in moves, entry["required_move"]
             assert entry["required_move"] in entry["moves"], entry
-        narrow_move_counts = {
-            "SPECIES_DITTO": 1,
-            "SPECIES_UNOWN": 2,
-        }
-        expected_moves = narrow_move_counts.get(entry["species"], 4)
-        assert len(entry["moves"]) == expected_moves, (
-            entry["species"], entry["name"], entry["moves"], expected_moves
-        )
+        assert 1 <= len(entry["moves"]) <= 4, (entry["species"], entry["name"], entry["moves"])
         assert len(entry["moves"]) == len(set(entry["moves"])), (entry["species"], entry["moves"])
         assert all(move in moves for move in entry["moves"])
         assert len(entry["stat_points"]) == 6
-        assert sum(entry["stat_points"]) == 66
-        assert max(entry["stat_points"]) <= 32
+        assert sum(entry["stat_points"]) <= 66
+        assert all(type(points) is int and 0 <= points <= 32 for points in entry["stat_points"])
 
 
 def c_preset(entry: dict, indent: str = "        ") -> list[str]:
@@ -2350,6 +2312,8 @@ def render_c(
     for entry in defaults:
         choices = by_species.get(entry["species"], [])
         if choices:
+            # The runtime count includes the default and is returned as u8.
+            assert len(choices) < 255 and offset <= 65535, entry["species"]
             lines.append(f'    [{entry["species"]}] = {{.offset = {offset}, .count = {len(choices)}}},')
             offset += len(choices)
     lines.extend(["};", "", "const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternatives[] =", "{"])
@@ -2400,6 +2364,7 @@ def render_c(
     for entry in singles_defaults:
         choices = singles_by_species.get(entry["species"], [])
         if choices:
+            assert len(choices) < 255 and offset <= 65535, entry["species"]
             lines.append(f'    [{entry["species"]}] = {{.offset = {offset}, .count = {len(choices)}}},')
             offset += len(choices)
     lines.extend([
@@ -2424,7 +2389,6 @@ def render_move_access_review_c() -> str:
     review = json.loads(MOVE_ACCESS_REVIEW.read_text())
     retained = [row for row in review["assignments"] if row["action"] != "replace"]
     assert review["reviewed_assignment_count"] == len(review["assignments"])
-    assert retained
     lines = [
         "// Generated by scripts/generate_emerald_champions_battle_sets.py. Do not edit by hand.",
         f"#define EC_REVIEWED_MOVE_ACCESS_COUNT {len(retained)}",

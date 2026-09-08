@@ -63,11 +63,11 @@ AncientTomb_EventScript_Registeel::
 	waitmoncry
 	setvar VAR_0x8004, SPECIES_REGISTEEL
 	setvar VAR_0x8005, 0
-	msgbox gText_LegendaryOneShotWarning, MSGBOX_DEFAULT
 	special CreateEmeraldChampionsStaticLegendaryEncounter
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special StartRegiBattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+	special FinishLegendaryLandmarkEncounter
 	specialvar VAR_RESULT, GetBattleOutcome
 	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, AncientTomb_EventScript_CaughtRegisteel
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, AncientTomb_EventScript_DefeatedRegisteel
@@ -82,7 +82,7 @@ AncientTomb_EventScript_CaughtRegisteel::
 	end
 
 AncientTomb_EventScript_DefeatedRegisteel::
-	goto Common_EventScript_LegendaryDefeated
+	goto Common_EventScript_LegendaryResting
 	end
 
 AncientTomb_EventScript_RanFromRegisteel::

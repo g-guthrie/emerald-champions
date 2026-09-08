@@ -1,5 +1,4 @@
 VerdanturfTown_BattleTentLobby_MapScripts::
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, VerdanturfTown_BattleTentLobby_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, VerdanturfTown_BattleTentLobby_OnWarp
 	.byte 0
 
@@ -104,10 +103,10 @@ VerdanturfTown_BattleTentLobby_EventScript_ResumeChallenge::
 VerdanturfTown_BattleTentLobby_EventScript_Attendant::
 	lock
 	faceplayer
-	verdanturftent_getprize
-	goto_if_ne VAR_RESULT, ITEM_NONE, VerdanturfTown_BattleTentLobby_EventScript_PrizeWaiting
-	special SavePlayerParty
-	msgbox VerdanturfTown_BattleTentLobby_Text_WelcomeToBattleTent, MSGBOX_DEFAULT
+	setvar VAR_0x8004, 1
+	msgbox VerdanturfTown_BattleTentLobby_Text_ExhibitionWelcome, MSGBOX_DEFAULT
+	goto ChampionsTent_EventScript_Attendant
+
 VerdanturfTown_BattleTentLobby_EventScript_AskEnterChallenge::
 	message VerdanturfTown_BattleTentLobby_Text_TakeChallenge
 	waitmessage
@@ -268,9 +267,7 @@ VerdanturfTown_BattleTentLobby_EventScript_LittleBoy::
 	end
 
 VerdanturfTown_BattleTentLobby_EventScript_RulesBoard::
-	lockall
-	msgbox VerdanturfTown_BattleTentLobby_Text_RulesAreListed, MSGBOX_DEFAULT
-	goto VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard
+	msgbox VerdanturfTown_BattleTentLobby_Text_ExhibitionRules, MSGBOX_SIGN
 	end
 
 VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard::
@@ -324,17 +321,11 @@ VerdanturfTown_BattleTentLobby_EventScript_ExitRules::
 	end
 
 VerdanturfTown_BattleTentLobby_Text_MonsReluctantToUseDislikedMoves:
-	.string "If it doesn't like a certain move,\n"
-	.string "a POKéMON will be reluctant to use it.\p"
-	.string "It doesn't matter how strong it is,\n"
-	.string "either.\p"
-	.string "For example, a POKéMON with a GENTLE\n"
-	.string "nature probably won't enjoy hurting\l"
-	.string "its opponents.\p"
-	.string "If it can't seem to live up to its\n"
-	.string "potential, it's probably failing at\l"
-	.string "using a disliked move against its will.$"
-
+	.string "Natures change stats, not which\n"
+	.string "moves your Pokémon will obey.\p"
+	.string "You command both partners here. A\n"
+	.string "quiet Pokémon can have a very\l"
+	.string "aggressive battle set.$"
 VerdanturfTown_BattleTentLobby_Text_GentleMonsScaryIfAngry:
 	.string "My big sister is gentle usually.\n"
 	.string "But when she gets angry,\l"
@@ -374,3 +365,25 @@ VerdanturfTown_BattleTentLobby_Text_ScottVisitRegularly:
 	.string "SCOTT: I visit here regularly in hopes\n"
 	.string "of seeing tough TRAINERS in action\l"
 	.string "in whatever the situation.$"
+
+VerdanturfTown_BattleTentLobby_Text_ExhibitionWelcome::
+	.string "Bring a team that supports each\n"
+	.string "partner through a hard match.\p"
+	.string "This is a six-Pokémon doubles\n"
+	.string "exhibition. You command every move\l"
+	.string "and switch.\p"
+	.string "Your team uses the current cap.\n"
+	.string "Difficulty sets opponent levels.\l"
+	.string "Enter with six healthy partners?$"
+
+VerdanturfTown_BattleTentLobby_Text_ExhibitionRules::
+	.string "LOCAL DOUBLES EXHIBITIONS\p"
+	.string "Bring six healthy Pokémon, with no\n"
+	.string "Eggs. Prepare freely before\l"
+	.string "entering.\p"
+	.string "Three victories earn one local\n"
+	.string "prize. Your party is restored\l"
+	.string "after each exhibition.\p"
+	.string "These results are separate from\n"
+	.string "the CHAMPIONS CIRCUIT. You return\l"
+	.string "to this lobby afterward.$"

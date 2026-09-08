@@ -40,10 +40,6 @@ enum MoveComparisonResult
 #define SLOW_KILL      4 // AI is slower and faints target
 #define LAST_CHANCE    2 // AI faints to target. It should try and do damage with a priority move
 
-// AI_Risky
-#define STRONG_RISKY_EFFECT     3
-#define AVERAGE_RISKY_EFFECT    2
-
 #include "test_runner.h"
 
 // Logs for debugging AI tests.
@@ -104,6 +100,10 @@ void BattleAI_SetupAIData(u8 defaultScoreMoves, enum BattlerId battler);
 void BattleAI_SetupItems(void);
 void BattleAI_SetupFlags(void);
 void ComputeAiBattlerDecisions(enum BattlerId battler);
+bool32 AI_ComputeDoublesDecisions(enum BattlerId battler);
+s32 AI_EvaluateDoublesPosition(enum BattlerId battler, u32 noActionMask);
+s32 AI_ScoreMoveAgainstTarget(enum BattlerId battler, enum BattlerId target, u32 moveIndex);
+u32 AI_GetMoveAccuracy(struct AiLogicData *aiData, enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move);
 u32 BattleAI_ChooseMoveIndex(enum BattlerId battler);
 void Ai_InitPartyStruct(void);
 void Ai_UpdateSwitchInData(enum BattlerId battler);

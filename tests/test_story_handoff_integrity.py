@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 class StoryHandoffIntegrity(unittest.TestCase):
     def test_inventory_consumption_and_durable_starter_rewards(self):
         source = (ROOT / 'src/field_specials.c').read_text()
-        helpers = source[source.index('void CheckEmeraldChampionsHandoffItem(void)'):source.index('void OpenEmeraldChampionsMegaStoneArchive(void)')]
+        helpers = source[source.index('void CheckEmeraldChampionsHandoffItem(void)'):source.index('void OpenEmeraldChampionsEvolutionItemArchive(void)')]
         harness = r'''
 #include <assert.h>
 #include <stdint.h>

@@ -508,11 +508,10 @@ MauvilleCity_Text_WallyHereICome:
 	.string "Okay. Here I come!$"
 
 MauvilleCity_Text_WallyDefeat:
-	.string "WALLY: … … … … … … …\p"
-	.string "My wind never came. You took the lead\n"
-	.string "before it mattered.\p"
-	.string "I lost…$"
-
+	.string "WALLY: ...\p"
+	.string "I had a plan for every partner.\n"
+	.string "You still found your way through.\p"
+	.string "I lost...$"
 MauvilleCity_Text_WallyIllGoBackToVerdanturf:
 	.string "WALLY: UNCLE… I'll go back to\n"
 	.string "VERDANTURF.\p"
@@ -592,7 +591,10 @@ MauvilleCity_Text_WattsonWontBeChallenge:
 	.string "The entrance to NEW MAUVILLE is just\n"
 	.string "a short SURF away from ROUTE 110.\p"
 	.string "That's it, then, you have my trust!\n"
-	.string "Wahahahaha!$"
+	.string "Wahahahaha!\p"
+	.string "WATTSON: If you find MELTAN, level it\n"
+	.string "up in NEW MAUVILLE to get MELMETAL.\l"
+	.string "The generator can be on or off!$"
 MauvilleCity_Text_WattsonThanksTakeElectirizer:
 	.string "WATTSON: Wahahahaha! I knew I'd made\n"
 	.string "the right choice asking you!\p"
@@ -602,7 +604,10 @@ MauvilleCity_Text_WattsonThanksTakeElectirizer:
 MauvilleCity_Text_WattsonYoungTakeCharge:
 	.string "WATTSON: Wahahahaha!\p"
 	.string "It pleases me to no end to see\n"
-	.string "the young step up and take charge!$"
+	.string "the young step up and take charge!\p"
+	.string "WATTSON: If you find MELTAN, level it\n"
+	.string "up in NEW MAUVILLE to get MELMETAL.\l"
+	.string "The generator can be on or off!$"
 
 MauvilleCity_Text_NurseHurtMonBackToHealth:
 	.string "You know, it's cool to have POKéMON\n"

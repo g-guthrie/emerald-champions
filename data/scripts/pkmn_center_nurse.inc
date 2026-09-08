@@ -17,7 +17,9 @@ Common_EventScript_PkmnCenterNurse::
 	msgbox gText_EmeraldChampionsGiveFlightBeacon, MSGBOX_DEFAULT
 	giveitem ITEM_FLIGHT_BEACON, 1
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	msgbox gText_EmeraldChampionsExplainTools, MSGBOX_DEFAULT
+	message gText_EmeraldChampionsExplainTools
+	waitmessage
+	waitbuttonpress
 	goto EventScript_PkmnCenterNurse_Main
 
 EventScript_PkmnCenterNurse_HasVial::

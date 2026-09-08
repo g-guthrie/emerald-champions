@@ -199,6 +199,7 @@ NewMauville_Inside_EventScript_RotomEncounter::
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+	special FinishLegendaryLandmarkEncounter
 	specialvar VAR_RESULT, GetBattleOutcome
 	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, NewMauville_Inside_EventScript_RotomCaught
 	setvar VAR_NEW_MAUVILLE_STATE, 5
@@ -264,6 +265,7 @@ NewMauville_Inside_EventScript_Voltorb1::
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	dowildbattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+	special FinishLegendaryLandmarkEncounter
 	specialvar VAR_RESULT, GetBattleOutcome
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, NewMauville_Inside_EventScript_DefeatedVoltorb1
 	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, NewMauville_Inside_EventScript_DefeatedVoltorb1
@@ -288,6 +290,7 @@ NewMauville_Inside_EventScript_Voltorb2::
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	dowildbattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+	special FinishLegendaryLandmarkEncounter
 	specialvar VAR_RESULT, GetBattleOutcome
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, NewMauville_Inside_EventScript_DefeatedVoltorb2
 	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, NewMauville_Inside_EventScript_DefeatedVoltorb2
@@ -312,6 +315,7 @@ NewMauville_Inside_EventScript_Voltorb3::
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	dowildbattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+	special FinishLegendaryLandmarkEncounter
 	specialvar VAR_RESULT, GetBattleOutcome
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, NewMauville_Inside_EventScript_DefeatedVoltorb3
 	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, NewMauville_Inside_EventScript_DefeatedVoltorb3
@@ -359,16 +363,16 @@ NewMauville_Inside_Text_RotomRemains:
 	.string "It is still waiting for your answer.$"
 
 NewMauville_Inside_Text_RotomCaught:
-	.string "The generator finally falls silent.\p"
-	.string "The ROTOM CATALOG nearby can change\n"
-	.string "ROTOM between all five appliances.\p"
-	.string "Faint conduits sketch REGISTEEL,\n"
-	.string "MANECTRIC, and DIALGA.\p"
-	.string "Bring them to the dream researcher\n"
-	.string "at DEVON CORP. 2F in RUSTBORO.\p"
-	.string "Research each Sign before returning\n"
-	.string "to find its challenger here.$"
-
+	.string "The generator finally falls\n"
+	.string "silent.\p"
+	.string "The ROTOM CATALOG nearby changes\n"
+	.string "ROTOM into its five appliances.\p"
+	.string "Inspect the plant's marked stone\n"
+	.string "for other unusual discoveries.\p"
+	.string "REGIELEKI responds to REGISTEEL.\n"
+	.string "DEVON can explain that clue and\l"
+	.string "the conditions for the other\l"
+	.string "SIGNS.$"
 @ BEGIN EMERALD CHAMPIONS LEGENDARY ROOTS
 .set EC_SIGN_ZAPDOS_ID, 69
 
@@ -377,8 +381,7 @@ NewMauville_Inside_EventScript_Zapdos::
 	faceplayer
 	setvar VAR_0x8004, EC_SIGN_ZAPDOS_ID
 	special TryUnlockSelectedLegendarySign
-	goto_if_eq VAR_RESULT, 6, Common_EventScript_LegendaryNeedsDevon
-	goto_if_eq VAR_RESULT, 5, Common_EventScript_LegendaryDefeatedAtShrine
+	goto_if_eq VAR_RESULT, 5, Common_EventScript_LegendaryRestingAtShrine
 	goto_if_eq VAR_RESULT, 0, NewMauville_Inside_EventScript_ZapdosDormant
 	goto_if_eq VAR_RESULT, 1, NewMauville_Inside_EventScript_ZapdosNeedsPartner
 	goto_if_eq VAR_RESULT, 4, NewMauville_Inside_EventScript_ZapdosCleanup
@@ -388,13 +391,13 @@ NewMauville_Inside_EventScript_Zapdos::
 	delay 40
 	waitmoncry
 	setvar VAR_0x8004, EC_SIGN_ZAPDOS_ID
-	msgbox gText_LegendaryOneShotWarning, MSGBOX_DEFAULT
 	special CreateSelectedLegendarySignEncounter
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+	special FinishLegendaryLandmarkEncounter
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_LegendaryDefeated
+	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_LegendaryResting
 	goto NewMauville_Inside_EventScript_ZapdosCaught
 	end
 
@@ -404,7 +407,8 @@ NewMauville_Inside_EventScript_ZapdosDormant::
 	end
 
 NewMauville_Inside_EventScript_ZapdosNeedsPartner::
-	msgbox NewMauville_Inside_Text_ZapdosNeedsPartner, MSGBOX_DEFAULT
+	special ResearchSelectedLegendarySign
+	msgbox gStringVar4, MSGBOX_DEFAULT
 	release
 	end
 
@@ -422,10 +426,8 @@ NewMauville_Inside_Text_ZapdosDormant:
 	.string "has not yet reached this place.$"
 
 NewMauville_Inside_Text_ZapdosNeedsPartner:
-	.string "The SIGN sketches MANECTRIC.\p"
-	.string "Bring that POKéMON's family to the\n"
-	.string "dream researcher at DEVON CORP. 2F\l"
-	.string "in RUSTBORO to translate this Sign.$"
+	.string "This Sign follows HOENN's story.\n"
+	.string "Return as your journey continues.$"
 
 NewMauville_Inside_Text_ZapdosAwakens:
 	.string "The CHAMPION'S SIGN erupts with light!\n"

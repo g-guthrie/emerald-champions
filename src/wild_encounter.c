@@ -213,9 +213,12 @@ void BufferCurrentMapRouteSignSpecies(void)
         dest = AppendRouteSignMethod(dest, sText_RouteSignGoodRod, entries, count, &hasMethod);
         count = CollectRouteSignSpecies(entries, info, 5, 5);
         dest = AppendRouteSignMethod(dest, sText_RouteSignSuperRod, entries, count, &hasMethod);
-        info = GetRouteSignInfo(headerId, WILD_AREA_HIDDEN);
-        count = CollectRouteSignSpecies(entries, info, 0, NUM_HIDDEN_MONS_ENCOUNTER_SLOTS);
-        dest = AppendRouteSignMethod(dest, sText_RouteSignHidden, entries, count, &hasMethod);
+        if (DEXNAV_ENABLED)
+        {
+            info = GetRouteSignInfo(headerId, WILD_AREA_HIDDEN);
+            count = CollectRouteSignSpecies(entries, info, 0, NUM_HIDDEN_MONS_ENCOUNTER_SLOTS);
+            dest = AppendRouteSignMethod(dest, sText_RouteSignHidden, entries, count, &hasMethod);
+        }
     }
 
     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE119)
@@ -694,8 +697,7 @@ void CreateWildMon(enum Species species, u8 level)
     GiveMonInitialMoveset(&gParties[B_TRAINER_OPPONENT_A][0]);
     if (!InBattlePike()
      && CurrentBattlePyramidLocation() == PYRAMID_LOCATION_NONE
-     && (IsEmeraldChampionsOrdinaryWildSpecies(species)
-      || IsLegendarySignConditionalWildSpecies(species)))
+     && IsEmeraldChampionsOrdinaryWildSpecies(species))
         ApplyEmeraldChampionsRandomWildSet(&gParties[B_TRAINER_OPPONENT_A][0]);
 }
 
@@ -709,17 +711,6 @@ bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, enum WildPok
 {
     u8 wildMonIndex = 0;
     u8 level;
-    enum Species species;
-
-    // An awakened Sign augments the native table until that single specimen
-    // is caught or lost. A successful roll bypasses lead filters so the
-    // quest result cannot be silently discarded.
-    if (TryGetLegendarySignWildOverride(area, &species, &level))
-    {
-        CreateWildMon(species, level);
-        return TRUE;
-    }
-
     switch (area)
     {
     case WILD_AREA_LAND:
@@ -892,19 +883,6 @@ bool8 StandardWildEncounter(u16 curMetatileBehavior, u16 prevMetatileBehavior)
     headerId = GetCurrentMapWildMonHeaderId();
     if (headerId == HEADER_NONE)
     {
-        // Quiet rooms can host a researched Sign without an ordinary roster.
-        // The shared override checks this map, research, and caught/lost state.
-        enum Species species;
-        u8 level;
-
-        if (MetatileBehavior_IsLandWildEncounter(curMetatileBehavior)
-         && TryGetLegendarySignWildOverride(WILD_AREA_LAND, &species, &level))
-        {
-            CreateWildMon(species, level);
-            BattleSetup_StartWildBattle();
-            return TRUE;
-        }
-
         if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_WILD_MONS)
         {
             headerId = GetBattlePikeWildMonHeaderId();
@@ -1133,8 +1111,8 @@ static bool8 SweetScentWildEncounterInner(void)
 
             if (DoMassOutbreakEncounterTest() == TRUE)
                 SetUpMassOutbreakEncounter(0);
-            else
-                TryGenerateWildMon(gWildMonHeaders[headerId].encounterTypes[timeOfDay].landMonsInfo, WILD_AREA_LAND, 0);
+            else if (TryGenerateWildMon(gWildMonHeaders[headerId].encounterTypes[timeOfDay].landMonsInfo, WILD_AREA_LAND, 0) != TRUE)
+                return FALSE;
 
             BattleSetup_StartWildBattle();
             return TRUE;
@@ -1154,7 +1132,8 @@ static bool8 SweetScentWildEncounterInner(void)
                 return TRUE;
             }
 
-            TryGenerateWildMon(gWildMonHeaders[headerId].encounterTypes[timeOfDay].waterMonsInfo, WILD_AREA_WATER, 0);
+            if (TryGenerateWildMon(gWildMonHeaders[headerId].encounterTypes[timeOfDay].waterMonsInfo, WILD_AREA_WATER, 0) != TRUE)
+                return FALSE;
             BattleSetup_StartWildBattle();
             return TRUE;
         }

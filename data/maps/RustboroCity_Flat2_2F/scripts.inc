@@ -73,9 +73,10 @@ RustboroCity_Flat2_2F_Text_MyDadsAceAtDevon:
 	.string "like me knows how to use.$"
 
 RustboroCity_Flat2_2F_Text_PokemonHoldFloatStone:
-	.string "A METAL COAT lets some POKéMON evolve\n"
-	.string "when traded. DEVON refines them.$"
-
+	.string "DEVON refines METAL COATS.\p"
+	.string "Use one from the BAG to evolve\n"
+	.string "ONIX or SCYTHER. No trade with\l"
+	.string "another player is required.$"
 RustboroCity_Flat2_2F_Text_PutOnWeight:
 	.string "For some reason, I've put on a lot of\n"
 	.string "weight recently…$"

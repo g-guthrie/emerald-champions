@@ -427,7 +427,7 @@ MauvilleCity_GameCorner_EventScript_ConfirmPokemonPrize::
 	checkcoins VAR_TEMP_2
 	goto_if_lt VAR_TEMP_2, VAR_0x8006, MauvilleCity_GameCorner_EventScript_NotEnoughCoinsForPokemon
 	special GiveEmeraldChampionsGameCornerPokemon
-	goto_if_eq VAR_RESULT, EC_GAME_CORNER_PRIZE_NEEDS_RESEARCH, MauvilleCity_GameCorner_EventScript_NeedsResearch
+	goto_if_eq VAR_RESULT, EC_GAME_CORNER_PRIZE_ALREADY_CAUGHT, MauvilleCity_GameCorner_EventScript_AlreadyCaughtLegendary
 	goto_if_eq VAR_RESULT, MON_CANT_GIVE, MauvilleCity_GameCorner_EventScript_NoRoomForPokemon
 	goto_if_eq VAR_RESULT, EC_GAME_CORNER_PRIZE_SET_FAILED, MauvilleCity_GameCorner_EventScript_PokemonPrizeSetFailed
 	removecoins VAR_0x8006
@@ -880,13 +880,11 @@ MauvilleCity_GameCorner_Text_CantPlayWithNoCoinCase:
 	.string "You can't play if you don't have\n"
 	.string "a COIN CASE.$"
 
-MauvilleCity_GameCorner_EventScript_NeedsResearch::
-	msgbox MauvilleCity_GameCorner_Text_NeedsResearch, MSGBOX_DEFAULT
+MauvilleCity_GameCorner_EventScript_AlreadyCaughtLegendary::
+	msgbox MauvilleCity_GameCorner_Text_AlreadyCaughtLegendary, MSGBOX_DEFAULT
 	goto MauvilleCity_GameCorner_EventScript_ChoosePokemonPrizeMessage
 
-MauvilleCity_GameCorner_Text_NeedsResearch:
-	.string "DEVON must translate this Pokémon's\n"
-	.string "Legendary Sign before we can release it.\p"
-	.string "Visit the dream researcher on DEVON\n"
-	.string "CORP.'s second floor in RUSTBORO.\p"
+MauvilleCity_GameCorner_Text_AlreadyCaughtLegendary:
+	.string "You have already befriended this\n"
+	.string "legendary Pokémon.\p"
 	.string "Your Coins have not been spent.$"

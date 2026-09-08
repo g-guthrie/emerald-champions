@@ -88,7 +88,7 @@ for m in maps:
 trade = (ROOT/"src/data/trade.h").read_text()
 for sp in re.findall(r"\.species = (SPECIES_[A-Z0-9_]+)", trade): note(sp, 40, "in-game trade")
 signs = (ROOT/"src/data/pokemon/legendary_signs.h").read_text()
-for m in re.finditer(r"(?:VISIBLE_SIGN|WILD_SIGN|OTHER_SIGN)\(LEGENDARY_SIGN_\w+,\s*(\w+),(.*)\)", signs):
+for m in re.finditer(r"(?:VISIBLE_SIGN|LANDMARK_SIGN|OTHER_SIGN)\(LEGENDARY_SIGN_\w+,\s*(\w+),(.*)\)", signs):
     sp = "SPECIES_" + m.group(1); flags = re.findall(r"FLAG_\w+", m.group(2))
     note(sp, BADGE_CAP.get(flags[-1], 55) if flags else 55, "Legendary Sign")
 gc = (ROOT/"data/maps/MauvilleCity_GameCorner/scripts.inc").read_text()

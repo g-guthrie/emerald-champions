@@ -995,7 +995,8 @@ bool32 IsAITest(void);
 
 #undef PARAMETRIZE // Override test/test.h's implementation.
 
-#define PARAMETRIZE if (gBattleTestRunnerState->parametersCount++ == i)
+// Use the runner's state, not the test function's shadowable local name `i`.
+#define PARAMETRIZE if (gBattleTestRunnerState->parametersCount++ == gBattleTestRunnerState->runParameter)
 
 /* Randomly */
 

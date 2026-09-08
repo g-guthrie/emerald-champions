@@ -18,6 +18,7 @@ ShoalCave_LowTideEntranceRoom_EventScript_SetLowTide::
 ShoalCave_LowTideEntranceRoom_EventScript_ShellBellExpert::
 	lock
 	faceplayer
+	msgbox ShoalCave_Text_RegionalEvolutions, MSGBOX_DEFAULT
 	dotimebasedevents
 	call_if_set FLAG_SYS_SHOAL_ITEM, ShoalCave_LowTideEntranceRoom_EventScript_ResetShoalItems
 	checkitem ITEM_LINKING_CORD
@@ -95,3 +96,12 @@ ShoalCave_LowTideEntranceRoom_EventScript_ResetShoalItems::
 	clearflag FLAG_RECEIVED_SHOAL_SHELL_4
 	clearflag FLAG_SYS_SHOAL_ITEM
 	return
+
+ShoalCave_Text_RegionalEvolutions:
+	.string "Level DEWOTT anywhere in SHOAL CAVE at\n"
+	.string "Lv. 36 or higher for Hisuian SAMUROTT.\p"
+	.string "Level BERGMITE in the low-tide ice room\n"
+	.string "at Lv. 37 or higher for Hisuian AVALUGG.\p"
+	.string "Elsewhere they take their usual forms.\n"
+	.string "Galarian MR. MIME also lives in that\l"
+	.string "ice room. It becomes MR. RIME at Lv. 42.$"

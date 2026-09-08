@@ -32,21 +32,14 @@ MON_RE = re.compile(
     r"nature=(NATURE_[A-Z0-9_]+) \| stat_points=([0-9/]+) \| moves=([A-Z0-9_,]+)$"
 )
 
-# "Assumptions" is the AI_FLAG_ASSUMPTIONS composite (Assume Stab, Assume
-# Status Moves, Weigh Ability Prediction).  "Prediction" is Predict Switch,
-# Predict Incoming Mon and Predict Move.  "Smart Trainer" already carries full
-# omniscience plus Smart Switching, Smart Mon Choices and PP-stall prevention.
-AI_PROFILES = {
-    "sharp": [
-        "Basic Trainer", "Assumptions", "Hp Aware", "Try To 2HKO", "Smart Switching",
-        "Smart Mon Choices", "Prediction", "Pp Stall Prevention", "Powerful Status",
-        "Know Opponent Party",
-    ],
-    "master": [
-        "Smart Trainer", "Prediction", "Assumptions", "Powerful Status", "Hp Aware",
-        "Try To 2HKO", "Know Opponent Party",
-    ],
-}
+# Class names remain compatibility aliases. Every campaign trainer uses the
+# same expert information and decision capabilities; levels/rosters set difficulty.
+EXPERT_AI_PROFILE = [
+    "Basic Trainer", "Omniscient", "Smart Switching", "Smart Mon Choices",
+    "Prediction", "Pp Stall Prevention", "Hp Aware", "Try To 2HKO",
+    "Powerful Status", "Know Opponent Party",
+]
+AI_PROFILES = {"sharp": EXPERT_AI_PROFILE, "master": EXPERT_AI_PROFILE}
 SUICIDE_MOVES = {
     "MOVE_EXPLOSION", "MOVE_SELF_DESTRUCT", "MOVE_MISTY_EXPLOSION", "MOVE_FINAL_GAMBIT",
     "MOVE_MEMENTO", "MOVE_HEALING_WISH", "MOVE_LUNAR_DANCE",
@@ -196,23 +189,29 @@ def implement(through_encounter: int, master: Path, party: Path) -> tuple[str, i
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--through-encounter", type=int, required=True)
+    parser.add_argument("--through-encounter", type=int, help="optional authoring prefix; defaults to every current encounter")
     parser.add_argument("--verify-only", action="store_true")
     parser.add_argument("--master", type=Path, default=MASTER)
     parser.add_argument("--output", type=Path, default=None,
                         help="write the materialized party here instead of src/data/trainers.party")
     args = parser.parse_args()
-    if not 1 <= args.through_encounter <= 513:
-        raise SystemExit("--through-encounter must be in 1..513")
-    output, applied, missing = implement(args.through_encounter, args.master, TRAINERS_PARTY)
+    through = args.through_encounter
+    if through is None:
+        designs = read_designs(args.master)
+        if not designs:
+            raise SystemExit("master has no trainer designs")
+        through = max(design.encounter for design in designs.values())
+    if through < 1:
+        raise SystemExit("--through-encounter must be positive")
+    output, applied, missing = implement(through, args.master, TRAINERS_PARTY)
+    if missing:
+        raise SystemExit("master trainers missing from output: " + ", ".join(missing))
     if args.verify_only:
         if output != TRAINERS_PARTY.read_text():
             raise SystemExit("trainer source differs from the requested master prefix")
     else:
         (args.output or TRAINERS_PARTY).write_text(output)
-    print(f"implemented_trainer_branches={applied} through_encounter={args.through_encounter}")
-    if missing:
-        print("planned_restore_trainers_missing_from_current_source=" + ",".join(missing))
+    print(f"implemented_trainer_branches={applied} through_encounter={through}")
     if args.verify_only:
         print("trainer_master_prefix_verification=PASS")
 

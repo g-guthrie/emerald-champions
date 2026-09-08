@@ -13,8 +13,6 @@ ASSUMPTIONS
     ASSUME(GetMoveEffect(MOVE_SILK_TRAP) == EFFECT_PROTECT);
 }
 
-TO_DO_BATTLE_TEST("TODO: Write Unseen Fist (Ability) test titles")
-
 SINGLE_BATTLE_TEST("Unseen Fist ignores Protect when user has Protective Pads, but not with Punching Glove", s16 damage)
 {
     enum Item item;

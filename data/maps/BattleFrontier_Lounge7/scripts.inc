@@ -5,12 +5,9 @@ BattleFrontier_Lounge7_MapScripts::
 BattleFrontier_Lounge7_EventScript_LeftMoveTutor::
 	lock
 	faceplayer
-	setvar VAR_TEMP_C, SCROLL_MULTI_BF_MOVE_TUTOR_1
-	goto_if_set FLAG_MET_FRONTIER_BEAUTY_MOVE_TUTOR, BattleFrontier_Lounge7_EventScript_AlreadyMetLeftTutor
-	msgbox BattleFrontier_Lounge7_Text_LeftTutorIntro, MSGBOX_DEFAULT
-	setflag FLAG_MET_FRONTIER_BEAUTY_MOVE_TUTOR
-	goto BattleFrontier_Lounge7_EventScript_ChooseLeftTutorMove
-	end
+	msgbox BattleFrontier_Lounge7_Text_LeftTutorFree, MSGBOX_DEFAULT
+	closemessage
+	goto Common_EventScript_EmeraldChampionsMoveTutor
 
 BattleFrontier_Lounge7_EventScript_AlreadyMetLeftTutor::
 	msgbox BattleFrontier_Lounge7_Text_LeftTutorWelcomeBack, MSGBOX_DEFAULT
@@ -127,12 +124,9 @@ BattleFrontier_Lounge7_EventScript_SwordsDance::
 BattleFrontier_Lounge7_EventScript_RightMoveTutor::
 	lock
 	faceplayer
-	setvar VAR_TEMP_C, SCROLL_MULTI_BF_MOVE_TUTOR_2
-	goto_if_set FLAG_MET_FRONTIER_SWIMMER_MOVE_TUTOR, BattleFrontier_Lounge7_EventScript_AlreadyMetRightTutor
-	msgbox BattleFrontier_Lounge7_Text_RightTutorIntro, MSGBOX_DEFAULT
-	setflag FLAG_MET_FRONTIER_SWIMMER_MOVE_TUTOR
-	goto BattleFrontier_Lounge7_EventScript_ChooseRightTutorMove
-	end
+	msgbox BattleFrontier_Lounge7_Text_RightTutorFree, MSGBOX_DEFAULT
+	closemessage
+	goto Common_EventScript_EmeraldChampionsMoveTutor
 
 BattleFrontier_Lounge7_EventScript_AlreadyMetRightTutor::
 	msgbox BattleFrontier_Lounge7_Text_RightTutorWelcomeBack, MSGBOX_DEFAULT
@@ -491,3 +485,15 @@ BattleFrontier_Lounge7_Text_FirePunchDesc::
 	.string "A fiery punch\n"
 	.string "that may burn\n"
 	.string "the foe.$"
+
+BattleFrontier_Lounge7_Text_LeftTutorFree::
+	.string "Buhahaha! I still know a thing or\n"
+	.string "two about beautiful moves.\p"
+	.string "The lessons are free now. Let us\n"
+	.string "prepare your team.$"
+
+BattleFrontier_Lounge7_Text_RightTutorFree::
+	.string "Ihihihi! Experience makes every\n"
+	.string "move worth another look.\p"
+	.string "The lessons are free now. Let us\n"
+	.string "prepare your team.$"

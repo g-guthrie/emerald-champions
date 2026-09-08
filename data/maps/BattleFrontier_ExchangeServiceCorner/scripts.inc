@@ -255,10 +255,9 @@ BattleFrontier_ExchangeServiceCorner_EventScript_BeastBall::
 BattleFrontier_ExchangeServiceCorner_EventScript_EvolutionClerk::
 	lock
 	faceplayer
-	setvar VAR_TEMP_2, EXCHANGE_CORNER_EVOLUTION_CLERK
-	call BattleFrontier_ExchangeServiceCorner_EventScript_ClerkWelcome
-	goto BattleFrontier_ExchangeServiceCorner_EventScript_ChooseEvolutionItem
-	end
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_ItemsWillGetMonTougher, MSGBOX_DEFAULT
+	closemessage
+	goto Common_EventScript_EmeraldChampionsBattleVendor
 
 BattleFrontier_ExchangeServiceCorner_EventScript_ChooseEvolutionItem::
 	setvar VAR_0x8004, SCROLL_MULTI_BF_EXCHANGE_CORNER_EVOLUTION_VENDOR
@@ -397,11 +396,11 @@ BattleFrontier_ExchangeServiceCorner_Text_GetYouAnythingYouWant:
 	.string "through anything to get it, honey!$"
 
 BattleFrontier_ExchangeServiceCorner_Text_ItemsWillGetMonTougher:
-	.string "The items here aren't ordinary held\n"
-	.string "battle gear.\p"
-	.string "They're rare supplies and evolution\n"
-	.string "tools worth saving Battle Points for!$"
-
+	.string "I save Battle Points for supplies\n"
+	.string "and decorations.\p"
+	.string "Ordinary evolution items are free\n"
+	.string "from CENTER vendors once you have\l"
+	.string "the MEGA RING.$"
 BattleFrontier_ExchangeServiceCorner_Text_GoGetYourOwnDoll:
 	.string "Hah?\n"
 	.string "What are you gawking at?\p"

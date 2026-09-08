@@ -18,4 +18,13 @@ void ChampionsCircuitHandleBattleResult(void);
 void ChampionsCircuitTryGiveReward(void);
 void ChampionsCircuitEnd(void);
 
+bool32 CreateChampionsExhibitionParty(u8 level);
+bool32 IsChampionsTentBattle(void);
+void ChampionsTentCanEnter(void);
+void ChampionsTentBegin(void);
+void ChampionsTentGenerateOpponent(void);
+void ChampionsTentHandleBattleResult(void);
+void ChampionsTentEnd(void);
+void ChampionsCircuitBufferRecord(void);
+
 #endif // GUARD_CHAMPIONS_CIRCUIT_H

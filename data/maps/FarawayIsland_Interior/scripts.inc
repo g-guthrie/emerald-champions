@@ -129,11 +129,11 @@ FarawayIsland_Interior_EventScript_Mew::
 	waitmoncry
 	setvar VAR_0x8004, SPECIES_MEW
 	setvar VAR_0x8005, 0
-	msgbox gText_LegendaryOneShotWarning, MSGBOX_DEFAULT
 	special CreateEmeraldChampionsStaticLegendaryEncounter
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+	special FinishLegendaryLandmarkEncounter
 	specialvar VAR_RESULT, GetBattleOutcome
 	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, FarawayIsland_Interior_EventScript_MewCaught
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, FarawayIsland_Interior_EventScript_MewDefeated
@@ -149,7 +149,7 @@ FarawayIsland_Interior_EventScript_MewCaught::
 	end
 
 FarawayIsland_Interior_EventScript_MewDefeated::
-	goto Common_EventScript_LegendaryDefeated
+	goto Common_EventScript_LegendaryResting
 	end
 
 FarawayIsland_Interior_EventScript_PlayerOrMewRan::

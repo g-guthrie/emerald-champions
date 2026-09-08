@@ -90,6 +90,7 @@ TrainerHill_Entrance_EventScript_PlayerExitChallenge::
 	applymovement LOCALID_PLAYER, TrainerHill_Entrance_Movement_PushPlayerBackFromCounter
 	waitmovement 0
 	setvar VAR_TRAINER_HILL_IS_ACTIVE, 0
+	trainerhill_resumetimer
 	special HealPlayerParty
 	callnative UpdateFollowingPokemon
 	releaseall
@@ -107,6 +108,8 @@ TrainerHill_Entrance_EventScript_Nurse::
 TrainerHill_Entrance_EventScript_Attendant::
 	lock
 	faceplayer
+	special TrainerHillHasPendingPrize
+	goto_if_eq VAR_RESULT, TRUE, TrainerHill_Entrance_EventScript_AttendantPendingPrize
 	trainerhill_inchallenge
 	goto_if_eq VAR_RESULT, FALSE, TrainerHill_Entrance_EventScript_ThanksForPlaying
 	msgbox TrainerHill_Entrance_Text_HopeYouGiveItYourBest, MSGBOX_DEFAULT
@@ -122,6 +125,8 @@ TrainerHill_Entrance_EventScript_EntryTrigger::
 	lockall
 	applymovement LOCALID_PLAYER, TrainerHill_Entrance_Movement_PlayerFaceAttendant
 	goto_if_unset FLAG_SYS_GAME_CLEAR, TrainerHill_Entrance_EventScript_Closed
+	special TrainerHillHasPendingPrize
+	goto_if_eq VAR_RESULT, TRUE, TrainerHill_Entrance_EventScript_EntryPendingPrize
 	msgbox TrainerHill_Entrance_Text_WelcomeToTrainerHill, MSGBOX_DEFAULT
 	trainerhill_getsaved
 	call_if_eq VAR_RESULT, FALSE, TrainerHill_Entrance_EventScript_SaveGame
@@ -434,3 +439,31 @@ TrainerHill_Entrance_Text_DoYouKnowWhenTheyOpen:
 TrainerHill_Elevator_Text_ReturnToReception:
 	.string "Would you like to return to\n"
 	.string "the reception counter?$"
+
+TrainerHill_Entrance_EventScript_AttendantPendingPrize::
+	call TrainerHill_Entrance_EventScript_ClaimPendingPrize
+	goto TrainerHill_Entrance_EventScript_AttendantEnd
+
+TrainerHill_Entrance_EventScript_EntryPendingPrize::
+	call TrainerHill_Entrance_EventScript_ClaimPendingPrize
+	goto TrainerHill_Entrance_EventScript_CancelEntry
+
+TrainerHill_Entrance_EventScript_ClaimPendingPrize::
+	trainerhill_giveprize
+	switch VAR_RESULT
+	case 0, TrainerHill_Entrance_EventScript_ReceivedPendingPrize
+	case 1, TrainerHill_Entrance_EventScript_PendingPrizeFull
+	return
+
+TrainerHill_Entrance_EventScript_ReceivedPendingPrize::
+	msgbox TrainerHill_Roof_Text_HaveTheMostMarvelousGift, MSGBOX_DEFAULT
+	playfanfare MUS_LEVEL_UP
+	message gText_ObtainedTheItem
+	waitfanfare
+	waitmessage
+	waitbuttonpress
+	return
+
+TrainerHill_Entrance_EventScript_PendingPrizeFull::
+	msgbox TrainerHill_Roof_Text_FullUpBeBackLaterForThis, MSGBOX_DEFAULT
+	return

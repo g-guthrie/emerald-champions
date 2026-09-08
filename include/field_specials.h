@@ -43,16 +43,6 @@ void CutMoveOpenDottedHoleDoor(void);
 void IsEmeraldChampionsGameCornerPokemonClaimed(void);
 void GiveEmeraldChampionsGameCornerPokemon(void);
 void GiveEmeraldChampionsPreparedPokemon(void);
-enum EmeraldChampionsStatBreakpoint
-{
-    EC_STAT_BREAKPOINT_FOUND,
-    EC_STAT_BREAKPOINT_STAT_MAXED,
-    EC_STAT_BREAKPOINT_NO_POINTS,
-    EC_STAT_BREAKPOINT_NO_CHANGE,
-};
-
-struct Pokemon;
-enum EmeraldChampionsStatBreakpoint GetEmeraldChampionsStatPointBreakpoint(struct Pokemon *mon, u32 displayStat, u32 *delta, u32 *value);
 void BufferSelectedMonEmeraldChampionsStatPointSummary(void);
 void BufferSelectedMonEmeraldChampionsStatPointDetail(void);
 void AdjustSelectedMonEmeraldChampionsStatPoints(void);
@@ -64,5 +54,17 @@ bool32 IsScrollableMultichoiceHeadlessActive(u16 menu);
 u8 GiveEmeraldChampionsGameCornerPokemonForTesting(enum Species species, u16 flag);
 u8 GiveEmeraldChampionsPreparedPokemonForTesting(enum Species species, u8 level);
 #endif
+
+void GiveEmeraldChampionsStarterMegaStoneAtIndex(void);
+
+void BufferEmeraldChampionsFormGift(void);
+void BuildEmeraldChampionsResearchPartnerChoices(void);
+void GiveEmeraldChampionsFormGift(void);
+void BuildEmeraldChampionsFormChoices(void);
+void PrepareEmeraldChampionsFormSelection(void);
+void BufferEmeraldChampionsFormPreview(void);
+void ApplyEmeraldChampionsFormSelection(void);
+void BufferEmeraldChampionsBondingPreview(void);
+void ApplyEmeraldChampionsBonding(void);
 
 #endif // GUARD_FIELD_SPECIALS_H

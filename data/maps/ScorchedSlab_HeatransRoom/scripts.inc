@@ -39,13 +39,13 @@ ScorchedSlab_HeatransRoom_EventScript_Heatran::
 	waitmoncry
 	setvar VAR_0x8004, SPECIES_HEATRAN
 	setvar VAR_0x8005, 2
-	msgbox gText_LegendaryOneShotWarning, MSGBOX_DEFAULT
 	special CreateEmeraldChampionsStaticLegendaryEncounter
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+	special FinishLegendaryLandmarkEncounter
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_LegendaryDefeated
+	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_LegendaryResting
 	goto ScorchedSlab_HeatransRoom_EventScript_HeatranCaught
 	end
 

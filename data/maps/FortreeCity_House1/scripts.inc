@@ -77,3 +77,20 @@ FortreeCity_House1_Text_TradingMemoriesWithOthers:
 FortreeCity_House1_Text_Zigzagoon:
 	.string "ZIGZAGOON: Gumomoh?$"
 
+
+FortreeCity_House1_EventScript_MegaGift_MILOTICITE::
+	goto_if_set FLAG_EC_MEGA_GIFT_MILOTICITE, FortreeCity_House1_EventScript_ExpertF
+	lock
+	faceplayer
+	msgbox FortreeCity_House1_EventScript_MegaGift_MILOTICITE_Text, MSGBOX_DEFAULT
+	giveitem ITEM_MILOTICITE
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_EC_MEGA_GIFT_MILOTICITE
+	release
+	goto FortreeCity_House1_EventScript_ExpertF
+
+FortreeCity_House1_EventScript_MegaGift_MILOTICITE_Text:
+	.string "People admire a Milotic, but few\n"
+	.string "remember the patient work of raising it.\p"
+	.string "Take this stone if you find one.\n"
+	.string "Beauty deserves a little adventure.$"

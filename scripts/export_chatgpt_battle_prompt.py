@@ -56,11 +56,11 @@ def megas() -> list[str]:
 def legendary_table() -> list[str]:
     text = (ROOT / "src/data/pokemon/legendary_signs.h").read_text()
     rows = []
-    for macro, args in re.findall(r"(WILD_SIGN|OTHER_SIGN|VISIBLE_SIGN|ORDINARY_WILD_SIGN)\(([^)]*)\)", text):
+    for macro, args in re.findall(r"^(LANDMARK_SIGN|OTHER_SIGN|VISIBLE_SIGN|ORDINARY_WILD_SIGN)\(([^)]*)\)", text, re.M):
         parts = [p.strip() for p in args.split(",")]
         mon = parts[1]
-        if macro == "WILD_SIGN":
-            rows.append(f"{mon}: conditional wild in {parts[2]} after badge {parts[5]} (needs {parts[7]} in party)")
+        if macro == "LANDMARK_SIGN":
+            rows.append(f"{mon}: interact with the Sign in {parts[2]} after badge {parts[3]} (discovery connection: {parts[5]}; no Devon requirement)")
         elif macro == "VISIBLE_SIGN":
             rows.append(f"{mon}: visible static encounter in {parts[2]} after badge {parts[3]}")
         elif macro == "ORDINARY_WILD_SIGN":

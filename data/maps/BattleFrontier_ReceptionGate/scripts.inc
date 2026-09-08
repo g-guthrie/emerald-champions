@@ -204,10 +204,7 @@ BattleFrontier_ReceptionGate_EventScript_ExitFacilityGuide::
 	end
 
 BattleFrontier_ReceptionGate_EventScript_RulesGuide::
-	lock
-	faceplayer
-	msgbox BattleFrontier_ReceptionGate_Text_YourGuideToRules, MSGBOX_DEFAULT
-	goto BattleFrontier_ReceptionGate_EventScript_ChooseRuleToLearnAbout
+	msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRules, MSGBOX_NPC
 	end
 
 BattleFrontier_ReceptionGate_EventScript_ChooseRuleToLearnAbout::
@@ -255,10 +252,7 @@ BattleFrontier_ReceptionGate_EventScript_ExitRulesGuide::
 	end
 
 BattleFrontier_ReceptionGate_EventScript_FrontierPassGuide::
-	lock
-	faceplayer
-	msgbox BattleFrontier_ReceptionGate_Text_YourGuideToFrontierPass, MSGBOX_DEFAULT
-	goto BattleFrontier_ReceptionGate_EventScript_ChooseFrontierPassInfoToLearnAbout
+	msgbox BattleFrontier_ReceptionGate_Text_CurrentFrontierPass, MSGBOX_NPC
 	end
 
 BattleFrontier_ReceptionGate_EventScript_ChooseFrontierPassInfoToLearnAbout::
@@ -329,18 +323,15 @@ BattleFrontier_ReceptionGate_Text_OhMrScottGoodDay:
 	.string "Good day to you, sir!$"
 
 BattleFrontier_ReceptionGate_Text_ScottGreatToSeeYouHere:
-	.string "SCOTT: It's great to see you here,\n"
-	.string "it really is!\p"
-	.string "Start with the CHAMPIONS CIRCUIT at\n"
-	.string "the far desk inside the BATTLE TOWER.\p"
-	.string "It assembles a new full-team Double\n"
-	.string "Battle every round. The other facilities\l"
-	.string "preserve HOENN's classic challenges.$"
-	.string "Naturally, I hope you'll also experience\n"
-	.string "the pure essence of battling.\p"
-	.string "I also have my quarters here, so feel\n"
-	.string "free to visit if you have time.$"
-
+	.string "SCOTT: It's great to see you here!\p"
+	.string "Every desk enters the CHAMPIONS\n"
+	.string "CIRCUIT. Six partners, coordinated\l"
+	.string "opponents, and no easy matches.\p"
+	.string "The buildings preserve the\n"
+	.string "Frontier's history. The Tower\l"
+	.string "holds our central arena.\p"
+	.string "Visit my house when you have time.\n"
+	.string "I'd like to hear about your teams.$"
 BattleFrontier_ReceptionGate_Text_YourGuideToFacilities:
 	.string "I'm your guide to the various facilities\n"
 	.string "here in the BATTLE FRONTIER.$"
@@ -349,67 +340,60 @@ BattleFrontier_ReceptionGate_Text_LearnAboutWhich2:
 	.string "Which would you like to learn about?$"
 
 BattleFrontier_ReceptionGate_Text_BattleTowerInfo:
-	.string "It is the gigantic tower considered\n"
-	.string "to be the BATTLE FRONTIER's symbol.\p"
-	.string "There are four kinds of BATTLE ROOMS\n"
-	.string "in the tower for SINGLE, DOUBLE, MULTI,\l"
-	.string "and LINK MULTI BATTLES.\p"
-	.string "The far desk hosts the\n"
-	.string "CHAMPIONS CIRCUIT, the FRONTIER's\l"
-	.string "premier full-team test.$"
-
+	.string "The BATTLE TOWER is the great\n"
+	.string "tower.\p"
+	.string "Its reception desk enters the\n"
+	.string "CHAMPIONS CIRCUIT at the central\l"
+	.string "Tower arena. All matches are\l"
+	.string "doubles.$"
 BattleFrontier_ReceptionGate_Text_BattleDomeInfo:
-	.string "The BATTLE DOME is the large building\n"
-	.string "shaped like a huge egg.\p"
-	.string "Events named Battle Tourneys are held\n"
-	.string "in this facility.\p"
-	.string "The Battle Tourneys are offered in\n"
-	.string "two courses--for SINGLE and DOUBLE\l"
-	.string "BATTLES.$"
-
+	.string "The BATTLE DOME is the oval\n"
+	.string "building.\p"
+	.string "Its reception desk enters the\n"
+	.string "CHAMPIONS CIRCUIT at the central\l"
+	.string "Tower arena. All matches are\l"
+	.string "doubles.$"
 BattleFrontier_ReceptionGate_Text_BattlePalaceInfo:
-	.string "The BATTLE PALACE is the red building\n"
-	.string "on the right of the BATTLE FRONTIER.\p"
-	.string "There are two kinds of BATTLE HALLS\n"
-	.string "for SINGLE and DOUBLE BATTLES.$"
-
+	.string "The BATTLE PALACE is the red\n"
+	.string "building to the east.\p"
+	.string "Its reception desk enters the\n"
+	.string "CHAMPIONS CIRCUIT at the central\l"
+	.string "Tower arena. All matches are\l"
+	.string "doubles.$"
 BattleFrontier_ReceptionGate_Text_BattleArenaInfo:
-	.string "The BATTLE ARENA is the dojo-like\n"
-	.string "building at the center-right of\l"
-	.string "the BATTLE FRONTIER.\p"
-	.string "An event called the Set KO Tourney\n"
-	.string "takes place at the BATTLE ARENA.$"
-
+	.string "The BATTLE ARENA is the central\n"
+	.string "dojo.\p"
+	.string "Its reception desk enters the\n"
+	.string "CHAMPIONS CIRCUIT at the central\l"
+	.string "Tower arena. All matches are\l"
+	.string "doubles.$"
 BattleFrontier_ReceptionGate_Text_BattleFactoryInfo:
-	.string "The BATTLE FACTORY is the large\n"
-	.string "building that is the closest to us.\p"
-	.string "An event called the Battle Swap\n"
-	.string "is conducted there.\p"
-	.string "The Battle Swap event is offered in\n"
-	.string "two courses for SINGLE and DOUBLE\l"
-	.string "BATTLES.$"
-
+	.string "The BATTLE FACTORY is the building\n"
+	.string "nearest this gate.\p"
+	.string "Its reception desk enters the\n"
+	.string "CHAMPIONS CIRCUIT at the central\l"
+	.string "Tower arena. All matches are\l"
+	.string "doubles.$"
 BattleFrontier_ReceptionGate_Text_BattlePikeInfo:
-	.string "The BATTLE PIKE is the building shaped\n"
-	.string "like a POKéMON at the center-left of\l"
-	.string "the BATTLE FRONTIER.\p"
-	.string "An event called the Battle Choice\n"
-	.string "is conducted there.$"
-
+	.string "The BATTLE PIKE is the\n"
+	.string "SEVIPER-shaped building.\p"
+	.string "Its reception desk enters the\n"
+	.string "CHAMPIONS CIRCUIT at the central\l"
+	.string "Tower arena. All matches are\l"
+	.string "doubles.$"
 BattleFrontier_ReceptionGate_Text_BattlePyramidInfo:
 	.string "The BATTLE PYRAMID is the enormous\n"
 	.string "pyramid.\p"
-	.string "An event called the Battle Quest\n"
-	.string "is conducted there.$"
-
+	.string "Its reception desk enters the\n"
+	.string "CHAMPIONS CIRCUIT at the central\l"
+	.string "Tower arena. All matches are\l"
+	.string "doubles.$"
 BattleFrontier_ReceptionGate_Text_RankingHallInfo:
-	.string "The RANKING HALL is located near\n"
-	.string "the BATTLE TOWER.\p"
-	.string "There, you may see the most fantastic\n"
-	.string "records left by the TRAINERS that\l"
-	.string "took on the many challenges of\l"
-	.string "the BATTLE FRONTIER.$"
-
+	.string "The RANKING HALL is near the\n"
+	.string "BATTLE TOWER.\p"
+	.string "Its current displays show your\n"
+	.string "CHAMPIONS CIRCUIT run, best\l"
+	.string "recorded run, and total wins.$"
 BattleFrontier_ReceptionGate_Text_ExchangeCornerInfo:
 	.string "The EXCHANGE SERVICE CORNER is near\n"
 	.string "the BATTLE TOWER.\p"
@@ -503,3 +487,10 @@ BattleFrontier_ReceptionGate_Text_BattlePointsInfo:
 	.string "You may trade in your Battle Points\n"
 	.string "for prizes at the EXCHANGE SERVICE\l"
 	.string "CORNER.$"
+
+BattleFrontier_ReceptionGate_Text_CurrentFrontierPass:
+	.string "Your FRONTIER PASS keeps your\n"
+	.string "TRAINER CARD, BATTLE POINTS, and\l"
+	.string "historical SYMBOL records.\p"
+	.string "The record boards show your\n"
+	.string "current CHAMPIONS CIRCUIT results.$"

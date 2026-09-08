@@ -541,7 +541,9 @@ static void PrepareHeadlessWildBattle(bool32 isDouble)
         CreateHealthyHeadlessMon(&gParties[B_TRAINER_OPPONENT_A][1], SPECIES_PIKACHU, 5, OTID_STRUCT_RANDOM_NO_SHINY);
 
     ClearBag();
-    AddBagItem(ITEM_QUICK_BALL, 10);
+    // Move details share the Ball shortcut, so this fixture needs an empty Bag.
+    if (gEcHeadlessFixtureActiveScenario != EC_HEADLESS_SCENARIO_MOVE_DETAILS)
+        AddBagItem(ITEM_QUICK_BALL, 10);
     gLastThrownBall = ITEM_QUICK_BALL;
     gBallToDisplay = ITEM_QUICK_BALL;
     gSaveBlock2Ptr->optionsButtonMode = OPTIONS_BUTTON_MODE_NORMAL;

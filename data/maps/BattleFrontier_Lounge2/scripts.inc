@@ -22,23 +22,7 @@ BattleFrontier_Lounge2_EventScript_AlreadyMetManiac::
 	end
 
 BattleFrontier_Lounge2_EventScript_GiveAdvice::
-	call_if_eq VAR_FRONTIER_MANIAC_FACILITY, FRONTIER_MANIAC_TOWER_SINGLES, BattleFrontier_Lounge2_EventScript_BufferSingle
-	call_if_eq VAR_FRONTIER_MANIAC_FACILITY, FRONTIER_MANIAC_TOWER_DOUBLES, BattleFrontier_Lounge2_EventScript_BufferDouble
-	call_if_eq VAR_FRONTIER_MANIAC_FACILITY, FRONTIER_MANIAC_TOWER_MULTIS, BattleFrontier_Lounge2_EventScript_BufferMulti
-	call_if_eq VAR_FRONTIER_MANIAC_FACILITY, FRONTIER_MANIAC_TOWER_LINK, BattleFrontier_Lounge2_EventScript_BufferMultiLink
-	call_if_eq VAR_FRONTIER_MANIAC_FACILITY, FRONTIER_MANIAC_DOME, BattleFrontier_Lounge2_EventScript_BufferBattleDome
-	call_if_eq VAR_FRONTIER_MANIAC_FACILITY, FRONTIER_MANIAC_FACTORY, BattleFrontier_Lounge2_EventScript_BufferBattleFactory
-	call_if_eq VAR_FRONTIER_MANIAC_FACILITY, FRONTIER_MANIAC_PALACE, BattleFrontier_Lounge2_EventScript_BufferBattlePalace
-	call_if_eq VAR_FRONTIER_MANIAC_FACILITY, FRONTIER_MANIAC_ARENA, BattleFrontier_Lounge2_EventScript_BufferBattleArena
-	call_if_eq VAR_FRONTIER_MANIAC_FACILITY, FRONTIER_MANIAC_PIKE, BattleFrontier_Lounge2_EventScript_BufferBattlePike
-	call_if_eq VAR_FRONTIER_MANIAC_FACILITY, FRONTIER_MANIAC_PYRAMID, BattleFrontier_Lounge2_EventScript_BufferBattlePyramid
-@ <= FRONTIER_MANIAC_TOWER_LINK is any Battle Tower mode
-	call_if_le VAR_FRONTIER_MANIAC_FACILITY, FRONTIER_MANIAC_TOWER_LINK, BattleFrontier_Lounge2_EventScript_BattleTowerNews
-@ >= FRONTIER_MANIAC_DOME is any facility other than Battle Tower
-	call_if_ge VAR_FRONTIER_MANIAC_FACILITY, FRONTIER_MANIAC_DOME, BattleFrontier_Lounge2_EventScript_FacilityNews
-	special ShowFrontierManiacMessage
-	waitmessage
-	waitbuttonpress
+	msgbox BattleFrontier_Lounge2_Text_CurrentCircuitNews, MSGBOX_DEFAULT
 	release
 	end
 
@@ -367,3 +351,9 @@ BattleFrontier_Lounge2_Text_ThisPlaceIsScaringMe::
 	.string "…What is this place?\n"
 	.string "It's scaring me…$"
 
+BattleFrontier_Lounge2_Text_CurrentCircuitNews::
+	.string "Here's the latest: every desk\n"
+	.string "enters the CHAMPIONS CIRCUIT!\p"
+	.string "Different buildings, one central\n"
+	.string "arena, and plenty of different\l"
+	.string "teams to argue about.$"

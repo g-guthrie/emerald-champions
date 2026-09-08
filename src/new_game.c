@@ -231,8 +231,6 @@ void NewGameInitData(void)
     ResetTrainerTowerResults();
     ResetContestLinkResults();
     SetCurrentDifficultyLevel(DIFFICULTY_HARD);
-    VarSet(VAR_EMERALD_CHAMPIONS_SAVE_VERSION, EMERALD_CHAMPIONS_SAVE_VERSION_CURRENT);
-    FlagSet(FLAG_EC_BESPOKE_TRAINER_FLAGS_MIGRATED);
     ResetItemFlags();
     ResetDexNav();
     ClearFollowerNPCData();

@@ -93,3 +93,20 @@ Route104_PrettyPetalFlowerShop_EventScript_AlreadyReceivedBerry::
 	msgbox Route104_PrettyPetalFlowerShop_Text_MachineMixesBerries, MSGBOX_DEFAULT
 	release
 	end
+
+Route104_PrettyPetalFlowerShop_EventScript_MegaGift_VENUSAURITE::
+	goto_if_set FLAG_EC_MEGA_GIFT_VENUSAURITE, Route104_PrettyPetalFlowerShop_EventScript_RandomBerryGirl
+	lock
+	faceplayer
+	msgbox Route104_PrettyPetalFlowerShop_EventScript_MegaGift_VENUSAURITE_Text, MSGBOX_DEFAULT
+	giveitem ITEM_VENUSAURITE
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_EC_MEGA_GIFT_VENUSAURITE
+	release
+	goto Route104_PrettyPetalFlowerShop_EventScript_RandomBerryGirl
+
+Route104_PrettyPetalFlowerShop_EventScript_MegaGift_VENUSAURITE_Text:
+	.string "I found this while tending flowers.\n"
+	.string "It seems to answer a Venusaur.\p"
+	.string "Keep gathering berries as you travel.\n"
+	.string "The Berry Master trades stones, too.$"

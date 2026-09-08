@@ -60,9 +60,9 @@ SURF_TIER_LEVEL = 55
 # species.h and silently dropped if this build lacks them.
 REGIONS = {
     "west": {
-        "surf": ["WINGULL", "TENTACOOL", "SHELLOS", "WAILMER", "STARYU", "KRABBY", "CORSOLA", "MANTYKE",
+        "surf": ["WINGULL", "TENTACOOL", "SHELLOS", "WAILMER", "STARYU", "KRABBY", "CORSOLA", "MANTINE",
                  "CLAMPERL", "FINNEON", "FRILLISH", "ARROKUDA", "BINACLE", "WISHIWASHI", "PYUKUMUKU"],
-        "surf_rare": ["WIGLETT", "MANTYKE", "CORSOLA"],
+        "surf_rare": ["WIGLETT", "MANTINE", "CORSOLA"],
         "fish": ["MAGIKARP", "REMORAID", "HORSEA", "WISHIWASHI", "CLAUNCHER", "SKRELP", "CARVANHA",
                  "LUVDISC", "BRUXISH", "KRABBY", "SHELLDER", "STARYU", "QWILFISH", "CLAMPERL"],
         "fish_rare": ["WIGLETT", "FEEBAS", "DHELMISE", "MAREANIE"],
@@ -76,7 +76,7 @@ REGIONS = {
         "fish_rare": ["DRATINI", "FEEBAS", "DHELMISE"],
     },
     "east": {
-        "surf": ["WAILMER", "WINGULL", "TENTACOOL", "MANTYKE", "CARVANHA", "SPHEAL", "CRAMORANT",
+        "surf": ["WAILMER", "WINGULL", "TENTACOOL", "MANTINE", "CARVANHA", "SPHEAL", "CRAMORANT",
                  "FRILLISH", "ALOMOMOLA", "MAREANIE", "PYUKUMUKU", "WISHIWASHI", "CLAMPERL", "SEEL", "STARYU",
                  "FINNEON", "FINIZEN"],
         "surf_rare": ["LAPRAS", "TAUROS_PALDEA_AQUA", "FINIZEN", "ALOMOMOLA"],
@@ -85,12 +85,12 @@ REGIONS = {
         "fish_rare": ["RELICANTH", "LAPRAS", "DHELMISE", "FEEBAS"],
     },
     "deep": {
-        "surf": ["WAILMER", "TENTACOOL", "WINGULL", "MANTYKE", "FRILLISH", "CARVANHA", "MAGIKARP",
+        "surf": ["WAILMER", "TENTACOOL", "WINGULL", "MANTINE", "FRILLISH", "CARVANHA", "MAGIKARP",
                  "WISHIWASHI", "ALOMOMOLA", "CRAMORANT", "SPHEAL", "PYUKUMUKU", "SEEL", "CLAMPERL", "FINIZEN", "FINNEON"],
-        "surf_rare": ["DONDOZO", "LAPRAS", "FINIZEN", "GYARADOS"],
+        "surf_rare": ["LAPRAS", "FINIZEN", "GYARADOS"],
         "fish": ["CHINCHOU", "QWILFISH", "REMORAID", "HORSEA", "RELICANTH", "SKRELP", "CLAUNCHER",
                  "SHELLDER", "ARROKUDA", "BRUXISH", "CLAMPERL", "LUVDISC", "MAGIKARP", "KRABBY", "QWILFISH_HISUI"],
-        "fish_rare": ["TATSUGIRI", "DONDOZO", "BASCULEGION", "LAPRAS", "RELICANTH"],
+        "fish_rare": ["BASCULEGION", "LAPRAS", "RELICANTH"],
     },
     "ice": {
         "surf": ["SPHEAL", "SEEL", "CLAMPERL", "TENTACOOL", "WAILMER", "FRILLISH", "SHELLDER", "CETODDLE", "BERGMITE", "SNOM"],
@@ -138,9 +138,9 @@ EXTRA_CAPS = {
 LAND_PLACEMENTS = {
     "LECHONK": "MAP_ROUTE102", "NYMBLE": "MAP_ROUTE102", "PIDOVE": "MAP_ROUTE104", "YUNGOOS": "MAP_ROUTE104",
     "PIKIPEK": "MAP_ROUTE104", "PATRAT": "MAP_ROUTE103", "TAROUNTULA": "MAP_PETALBURG_WOODS",
-    "SEWADDLE": "MAP_PETALBURG_WOODS", "BLIPBUG": "MAP_PETALBURG_WOODS", "SKWOVET": "MAP_ROUTE116",
+    "SEWADDLE": "MAP_PETALBURG_WOODS", "BLIPBUG": "MAP_PETALBURG_WOODS", "SKWOVET": "MAP_ROUTE115",
     "PURRLOIN": "MAP_ROUTE116", "THROH": "MAP_ROUTE116", "SNUBBULL": "MAP_ROUTE115", "SAWK": "MAP_ROUTE115",
-    "CLEFFA": "MAP_ROUTE115", "MINCCINO": "MAP_ROUTE117", "GLAMEOW": "MAP_ROUTE117", "FOMANTIS": "MAP_ROUTE117",
+    "CLEFFA": "MAP_ROUTE115", "MINCCINO": "MAP_ROUTE117", "GLAMEOW": "MAP_ROUTE117", "FOMANTIS": "MAP_ROUTE115",
     "PETILIL": "MAP_ROUTE117", "IGGLYBUFF": "MAP_ROUTE117", "STUNKY": "MAP_ROUTE110", "SHROODLE": "MAP_ROUTE110",
     "VAROOM": "MAP_ROUTE110", "SPOINK": "MAP_ROUTE113", "MASCHIFF": "MAP_ROUTE111", "RELLOR": "MAP_ROUTE111",
     "BRAMBLIN": "MAP_ROUTE111", "SKIDDO": "MAP_ROUTE114", "KLAWF": "MAP_ROUTE112", "TOEDSCOOL": "MAP_ROUTE119",
@@ -157,10 +157,21 @@ LAND_PLACEMENTS = {
 # campaign promise (no wild starters, reachable Unown for Hoopa, fossils only
 # through revival). Missing-line placement must never evict them.
 PINNED_REPLACEMENTS = {
+    ("MAP_ROUTE116", "land_mons", 7): "SPECIES_MUNCHLAX",
+    ("MAP_ROUTE116", "land_mons", 1): "SPECIES_MIME_JR",
+    ("MAP_ROUTE102", "land_mons", 7): "SPECIES_HAPPINY",
+    ("MAP_ROUTE117", "land_mons", 5): "SPECIES_MEOWTH",
+    ("MAP_ROUTE115", "land_mons", 4): "SPECIES_SKWOVET",
+    ("MAP_RUSTURF_TUNNEL", "land_mons", 10): "SPECIES_CHINGLING",
+    ("MAP_DEWFORD_MANOR_1F", "land_mons", 7): "SPECIES_MIME_JR",
+    ("MAP_MT_PYRE_EXTERIOR", "land_mons", 10): "SPECIES_DUSKULL",
+    ("MAP_ROUTE104", "land_mons", 2): "SPECIES_MIENFOO",
+    ("MAP_PETALBURG_WOODS", "land_mons", 3): "SPECIES_CATERPIE",
+    ("MAP_PETALBURG_WOODS", "land_mons", 10): "SPECIES_FERROSEED",
     ("MAP_ROUTE101", "land_mons", 4): "SPECIES_PIDGEY",
     ("MAP_ROUTE103", "land_mons", 4): "SPECIES_GROWLITHE",
     ("MAP_ROUTE117", "land_mons", 6): "SPECIES_EXEGGCUTE",
-    ("MAP_ROUTE117", "land_mons", 7): "SPECIES_PONYTA",
+    ("MAP_ROUTE117", "land_mons", 7): "SPECIES_DITTO",
     ("MAP_FIERY_PATH", "land_mons", 7): "SPECIES_HOUNDOUR",
     ("MAP_SANDSTREWN_RUINS", "land_mons", 8): "SPECIES_UNOWN",
     ("MAP_MIRAGE_TOWER_1F", "land_mons", 3): "SPECIES_GOLETT",
@@ -282,6 +293,18 @@ def build_fishing(region: dict, offset: int, cap: int, evolutions, available, ro
             else:
                 promoted = promote(name, level, evolutions, available).replace("SPECIES_", "")
             mons.append({"min_level": max(2, level - 5), "max_level": level, "species": f"SPECIES_{promoted}"})
+    overrides = (row or {}).get("fishing_species_overrides", {})
+    indices = set()
+    for key, species in overrides.items():
+        if not isinstance(key, str) or not re.fullmatch(r"[0-9]+", key):
+            raise ValueError(f"Invalid fishing slot: {key!r}")
+        index = int(key)
+        if not 0 <= index < 10 or index in indices:
+            raise ValueError(f"Invalid or duplicate fishing slot: {key!r}")
+        if not isinstance(species, str) or f"SPECIES_{species}" not in available or species in {"NONE", "EGG"}:
+            raise ValueError(f"Unavailable fishing species: {species!r}")
+        indices.add(index)
+        mons[index]["species"] = f"SPECIES_{species}"
     return {"encounter_rate": 30, "mons": mons}
 
 
@@ -469,7 +492,7 @@ THEMED_FILLERS = {
 }
 DEDUPE_FILLERS = ["WOOBAT", "GLIGAR", "SABLEYE", "MAWILE", "ARON", "CARBINK", "DODUO", "GIRAFARIG", "WOBBUFFET",
                   "PINSIR", "HERACROSS", "RHYHORN", "PHANPY", "NATU", "SWABLU", "NUZLEAF", "KECLEON", "TROPIUS",
-                  "SKARMORY", "NUMEL", "SPINDA", "ABSOL", "CHINGLING", "BRONZOR", "LARVITAR", "SNEASEL", "MEDITITE"]
+                  "SKARMORY", "NUMEL", "SPINDA", "ABSOL", "CHIMECHO", "BRONZOR", "LARVITAR", "SNEASEL", "MEDITITE"]
 
 
 def dedupe_land(encounters: list[dict], available) -> list[str]:

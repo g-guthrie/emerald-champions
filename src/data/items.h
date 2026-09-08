@@ -5783,7 +5783,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 0,
         .holdEffect = HOLD_EFFECT_MEGA_STONE,
         .description = COMPOUND_STRING(
-            "This stone enables\n"
+            "Enables ordinary\n"
             "Slowbro to Mega\n"
             "Evolve in battle."),
         .pocket = POCKET_ITEMS,
@@ -6791,7 +6791,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 0,
         .holdEffect = HOLD_EFFECT_MEGA_STONE,
         .description = COMPOUND_STRING(
-            "This stone enables\n"
+            "Enables ordinary\n"
             "Greninja to Mega\n"
             "Evolve in battle."),
         .pocket = POCKET_ITEMS,
@@ -6827,7 +6827,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 0,
         .holdEffect = HOLD_EFFECT_MEGA_STONE,
         .description = COMPOUND_STRING(
-            "This stone enables\n"
+            "Enables Eternal\n"
             "Floette to Mega\n"
             "Evolve in battle."),
         .pocket = POCKET_ITEMS,
@@ -6917,7 +6917,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 0,
         .holdEffect = HOLD_EFFECT_MEGA_STONE,
         .description = COMPOUND_STRING(
-            "This stone enables\n"
+            "Enables Complete\n"
             "Zygarde to Mega\n"
             "Evolve in battle."),
         .pocket = POCKET_ITEMS,
@@ -7025,9 +7025,9 @@ const struct ItemInfo gItemsInfo[] =
         .price = 0,
         .holdEffect = HOLD_EFFECT_MEGA_STONE,
         .description = COMPOUND_STRING(
-            "This stone enables\n"
-            "Raichu to Mega\n"
-            "Evolve in battle."),
+            "Enables Kantonian\n"
+            "Raichu to become\n"
+            "Mega Raichu X."),
         .pocket = POCKET_ITEMS,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
@@ -7043,9 +7043,9 @@ const struct ItemInfo gItemsInfo[] =
         .price = 0,
         .holdEffect = HOLD_EFFECT_MEGA_STONE,
         .description = COMPOUND_STRING(
-            "This stone enables\n"
-            "Raichu to Mega\n"
-            "Evolve in battle."),
+            "Enables Kantonian\n"
+            "Raichu to become\n"
+            "Mega Raichu Y."),
         .pocket = POCKET_ITEMS,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
@@ -11338,9 +11338,9 @@ const struct ItemInfo gItemsInfo[] =
         .holdEffect = HOLD_EFFECT_RESTORE_PCT_HP,
         .holdEffectParam = 25,
         .description = COMPOUND_STRING(
-            "A held item that\n"
-            "restores a little\n"
-            "HP in battle."),
+            "Heals 1/4 HP at half\n"
+            "HP or less (rounded\n"
+            "up)."),
     #else
         .holdEffect = HOLD_EFFECT_RESTORE_HP,
         .holdEffectParam = 30,
@@ -15120,9 +15120,9 @@ const struct ItemInfo gItemsInfo[] =
         .name = ITEM_NAME("Leader's Crest"),
         .price = 3000,
         .description = COMPOUND_STRING(
-            "A shard of a blade.\n"
-            "Bisharp that head\n"
-            "a group hold it."),
+            "Bisharp evolves on\n"
+            "leveling up while\n"
+            "holding this."),
         .pocket = POCKET_ITEMS,
         .sortType = ITEM_TYPE_EVOLUTION_ITEM,
         .type = ITEM_USE_BAG_MENU,

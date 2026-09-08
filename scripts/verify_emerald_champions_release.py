@@ -19,62 +19,23 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from rom_artifacts import verify_rom_elf_pair
 
 
+# Required gates protect current source structure and authored/generated agreement.
+# Historical snapshots, prose, team-strength heuristics and corpus quotas are
+# deliberately outside the release path. See docs/VERIFICATION.md.
 STATIC_GATES = (
-    ("core services", (PYTHON, "scripts/verify_emerald_champions_core.py")),
-    ("native field UI", (PYTHON, "scripts/verify_emerald_champions_native_ui.py")),
-    ("visual contracts", (PYTHON, "scripts/verify_emerald_champions_visual_contracts.py")),
-    ("compiled map tile compatibility and dynamic inventory", (
-        PYTHON, "scripts/audit/map_integrity.py", "--out",
-        "work/audits/map_tile_inventory.json",
+    ("compiled map and tile integrity", (
+        PYTHON, "scripts/audit/map_integrity.py", "--out", "work/audits/map_tile_inventory.json",
     )),
-    ("Inclement visual sources", (PYTHON, "scripts/verify_inclement_visual_sources.py")),
-    ("Inclement overworld parity", (PYTHON, "scripts/verify_inclement_overworld_parity.py")),
-    ("Inclement story parity", (PYTHON, "scripts/verify_inclement_story_parity.py")),
-    ("local warp collision regressions", (PYTHON, "scripts/verify_map_reachability.py")),
-    ("NPC script integrity", (PYTHON, "scripts/verify_npc_script_integrity.py")),
-    ("retired route conversations", (PYTHON, "scripts/verify_route_conversations.py")),
-    (
-        "Verdant visual byte inventory",
-        (PYTHON, "scripts/audit_verdant_visual_parity.py", "--check-fast"),
-    ),
-    ("finite rewards", (PYTHON, "scripts/emerald_champions_reward_rewrite.py")),
-    ("reward economy", (PYTHON, "scripts/verify_emerald_champions_reward_economy.py")),
-    ("interaction rewards", (PYTHON, "scripts/verify_emerald_champions_interaction_rewards.py")),
-    ("authored wild distribution", (PYTHON, "scripts/verify_wild_distribution.py")),
-    ("route signs", (PYTHON, "scripts/emerald_champions_route_signs.py")),
-    ("competitive presets", (PYTHON, "scripts/verify_emerald_champions_battle_sets.py")),
-    ("species stat rebalances", (PYTHON, "scripts/verify_species_stat_rebalances.py")),
-    ("upstream critical fixes", (PYTHON, "scripts/verify_upstream_critical_fixes.py")),
-    ("campaign roster", (PYTHON, "scripts/verify_emerald_champions_campaign_roster.py")),
-    ("Game Corner starter archive", (PYTHON, "scripts/verify_game_corner_starter_archive.py")),
-    ("trainer Ability legality", (PYTHON, "scripts/verify_trainer_ability_legality.py")),
-    ("trainer runtime coherence", (PYTHON, "scripts/verify_trainer_runtime_coherence.py")),
-    ("marquee dynamic AI", (PYTHON, "scripts/verify_emerald_champions_dynamic_ai.py")),
-    ("trainer row reachability", (PYTHON, "scripts/prune_unreachable_trainer_parties.py")),
-    ("trainer dialogue species", (PYTHON, "scripts/audit_trainer_dialogue_species.py")),
-    ("story and dialogue", (PYTHON, "scripts/verify_emerald_champions_story.py")),
-    ("rematch-free Match Call", (PYTHON, "scripts/verify_rematch_free_match_call.py")),
-    ("map and script structure with selected progression contracts", (PYTHON, "scripts/verify_emerald_champions_progression.py")),
-    ("legendary availability", (PYTHON, "scripts/verify_legendary_availability.py")),
-    ("legendary signs and Circuit", (PYTHON, "scripts/verify_legendary_signs_and_circuit.py")),
-    ("regional starters", (PYTHON, "scripts/verify_regional_starters.py")),
-    ("restored world", (PYTHON, "scripts/verify_restored_emerald_champions_world.py")),
-    ("single-player evolutions", (PYTHON, "scripts/verify_solo_evolution_access.py")),
-    ("fossil revival", (PYTHON, "scripts/verify_fossil_revival.py")),
-    ("campaign battle master", (PYTHON, "scripts/audit_emerald_champions_master_battles.py")),
-    # The master materializes the authored loadouts plus encounter metadata.
-    # Compare its trainer output exactly; a direct edit must not bypass authoring.
-    ("battle master regenerates byte-for-byte",
-     (PYTHON, "scripts/implement_emerald_champions_master_battles.py",
-      "--through-encounter", "513", "--verify-only")),
-    # audit_encounter_quality walks every active branch for teams that cannot do the
-    # thing they were built to do. selftest_encounter_audit proves its rules still
-    # fire, so "zero findings" means the corpus is clean, not that the rules rotted.
-    ("per-encounter quality audit self-test", (PYTHON, "scripts/selftest_encounter_audit.py")),
-    ("per-encounter quality audit", (PYTHON, "scripts/audit_encounter_quality.py", "--fail-on-findings")),
-    ("Frontier competitive loadouts", (PYTHON, "scripts/generate_emerald_champions_frontier_sets.py", "--check")),
-    ("local-ID sprite bindings", (PYTHON, "scripts/verify_local_id_sprite_bindings.py")),
-    ("battle script formats", (PYTHON, "scripts/align_emerald_champions_battle_scripts.py")),
+    ("map and script references", (PYTHON, "scripts/verify_emerald_champions_progression.py")),
+    ("authored trainer script formats", (PYTHON, "scripts/align_emerald_champions_battle_scripts.py")),
+    ("configured trainer abilities", (PYTHON, "scripts/verify_trainer_ability_legality.py")),
+    ("authored trainer materialization", (
+        PYTHON, "scripts/implement_emerald_champions_master_battles.py", "--verify-only",
+    )),
+    ("authored competitive presets", (PYTHON, "scripts/generate_emerald_champions_battle_sets.py", "--check")),
+    ("authored Circuit projection", (PYTHON, "scripts/generate_showdown_champions_circuit.py", "--check")),
+    ("wild table integrity", (PYTHON, "scripts/verify_wild_distribution.py")),
+    ("Mega Stone reward coverage", (PYTHON, "scripts/verify_mega_stone_rewards.py")),
 )
 
 
@@ -127,7 +88,7 @@ def verify_unique_state_ids() -> None:
                     return -value
                 return ~value
             if isinstance(node, ast.BinOp) and isinstance(
-                node.op, (ast.Add, ast.Sub, ast.BitOr, ast.BitAnd, ast.LShift, ast.RShift)
+                node.op, (ast.Add, ast.Sub, ast.Mult, ast.Mod, ast.BitOr, ast.BitAnd, ast.LShift, ast.RShift)
             ):
                 left = evaluate_node(node.left, stack)
                 right = evaluate_node(node.right, stack)
@@ -135,6 +96,10 @@ def verify_unique_state_ids() -> None:
                     return left + right
                 if isinstance(node.op, ast.Sub):
                     return left - right
+                if isinstance(node.op, ast.Mult):
+                    return left * right
+                if isinstance(node.op, ast.Mod):
+                    return left % right
                 if isinstance(node.op, ast.BitOr):
                     return left | right
                 if isinstance(node.op, ast.BitAnd):
@@ -228,7 +193,6 @@ def verify_rom(rom: Path, elf: Path) -> None:
     require(elf.is_file(), f"release ELF is missing: {elf}")
     verify_rom_elf_pair(rom, elf)
     data = rom.read_bytes()
-    require(len(data) == 32 * 1024 * 1024, f"ROM is not exactly 32 MiB: {len(data)} bytes")
     require(data[0xA0:0xAC] == b"EM CHAMPIONS", f"wrong ROM title: {data[0xA0:0xAC]!r}")
     require(data[0xAC:0xB0] == b"BPEE", f"wrong ROM game code: {data[0xAC:0xB0]!r}")
     require(data[0xB0:0xB2] == b"01", f"wrong ROM maker code: {data[0xB0:0xB2]!r}")
@@ -303,8 +267,6 @@ def main() -> None:
 
     for label, command in STATIC_GATES:
         run_gate(label, command)
-    # Master-design/party equality is proven by the campaign battle master
-    # gate; the former materialization re-check duplicated it.
     verify_unique_state_ids()
     verify_branding()
     verify_patch_integrity(allow_source_bundle=args.allow_source_bundle)

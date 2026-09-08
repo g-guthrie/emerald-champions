@@ -1,5 +1,4 @@
 FallarborTown_BattleTentLobby_MapScripts::
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, FallarborTown_BattleTentLobby_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, FallarborTown_BattleTentLobby_OnWarp
 	.byte 0
 
@@ -103,10 +102,10 @@ FallarborTown_BattleTentLobby_EventScript_ResumeChallenge::
 FallarborTown_BattleTentLobby_EventScript_Attendant::
 	lock
 	faceplayer
-	fallarbortent_getprize
-	goto_if_ne VAR_RESULT, ITEM_NONE, FallarborTown_BattleTentLobby_EventScript_PrizeWaiting
-	special SavePlayerParty
-	msgbox FallarborTown_BattleTentLobby_Text_WelcomeToBattleTent, MSGBOX_DEFAULT
+	setvar VAR_0x8004, 2
+	msgbox FallarborTown_BattleTentLobby_Text_ExhibitionWelcome, MSGBOX_DEFAULT
+	goto ChampionsTent_EventScript_Attendant
+
 FallarborTown_BattleTentLobby_EventScript_AskEnterChallenge::
 	message FallarborTown_BattleTentLobby_Text_TakeChallenge
 	waitmessage
@@ -251,9 +250,7 @@ FallarborTown_BattleTentLobby_EventScript_ScottAlreadySpokenTo::
 	end
 
 FallarborTown_BattleTentLobby_EventScript_RulesBoard::
-	lockall
-	msgbox BattleFrontier_BattleArenaLobby_Text_RulesAreListed, MSGBOX_DEFAULT
-	goto FallarborTown_BattleTentLobby_EventScript_ReadRulesBoard
+	msgbox FallarborTown_BattleTentLobby_Text_ExhibitionRules, MSGBOX_SIGN
 	end
 
 FallarborTown_BattleTentLobby_EventScript_ReadRulesBoard::
@@ -307,14 +304,10 @@ FallarborTown_BattleTentLobby_Text_MakeThinkImJustKid:
 	.string "the title!$"
 
 FallarborTown_BattleTentLobby_Text_FallarborTentMyFavorite:
-	.string "You know how BATTLE TENTS offer\n"
-	.string "different events in different towns?\p"
-	.string "My favorite is definitely the BATTLE\n"
-	.string "TENT in FALLARBOR TOWN.\p"
-	.string "I think it's fantastic how TRAINERS\n"
-	.string "try to win with all their faith in\l"
-	.string "their POKéMON.$"
-
+	.string "The tents share the same serious\n"
+	.string "doubles competition.\p"
+	.string "FALLARBOR is my favorite place to\n"
+	.string "visit between exhibitions.$"
 FallarborTown_BattleTentLobby_Text_CameToCampOut:
 	.string "I heard something about some tent,\n"
 	.string "so I came to camp out.\p"
@@ -343,3 +336,24 @@ FallarborTown_BattleTentLobby_Text_ScottMakeChallenge:
 	.string "time with the likes of me, why not\l"
 	.string "make a challenge?$"
 
+FallarborTown_BattleTentLobby_Text_ExhibitionWelcome::
+	.string "Our challengers bring ideas from\n"
+	.string "the mountains and far beyond.\p"
+	.string "This is a six-Pokémon doubles\n"
+	.string "exhibition. You command every move\l"
+	.string "and switch.\p"
+	.string "Your team uses the current cap.\n"
+	.string "Difficulty sets opponent levels.\l"
+	.string "Enter with six healthy partners?$"
+
+FallarborTown_BattleTentLobby_Text_ExhibitionRules::
+	.string "LOCAL DOUBLES EXHIBITIONS\p"
+	.string "Bring six healthy Pokémon, with no\n"
+	.string "Eggs. Prepare freely before\l"
+	.string "entering.\p"
+	.string "Three victories earn one local\n"
+	.string "prize. Your party is restored\l"
+	.string "after each exhibition.\p"
+	.string "These results are separate from\n"
+	.string "the CHAMPIONS CIRCUIT. You return\l"
+	.string "to this lobby afterward.$"

@@ -294,20 +294,26 @@ MauvilleCity_Gym_Text_KirkDefeat:
 	.string "You shut down my amplifier!$"
 
 MauvilleCity_Gym_Text_KirkPostBattle:
-	.string "Sound pressure is still special damage.\n"
-	.string "SNARL and LIGHT SCREEN can quiet it.$"
+	.string "ELECTRIC TERRAIN protects grounded\n"
+	.string "Pokémon from sleep.\p"
+	.string "A Flying Pokémon or an AIR BALLOON\n"
+	.string "changes which benefits apply.$"
 
 MauvilleCity_Gym_Text_ShawnIntro:
-	.string "You saved your EARTHQUAKE for me.\n"
-	.string "Nothing here stands on the ground.\p"
-	.string "Try again, from the air!$"
+	.string "Some of my Pokémon float above\n"
+	.string "Ground attacks. Others use the\n"
+	.string "terrain beneath them.\p"
+	.string "Can you tell which answer fits\n"
+	.string "each pair?$"
 
 MauvilleCity_Gym_Text_ShawnDefeat:
 	.string "You broke our live connection…$"
 
 MauvilleCity_Gym_Text_ShawnPostBattle:
-	.string "Stop one lead before HELPING HAND and\n"
-	.string "ELECTROWEB turn every attack dangerous.$"
+	.string "BELLIBOLT can set ELECTRIC TERRAIN\n"
+	.string "for RAICHU's SURGE SURFER.\p"
+	.string "MEGA AMPHAROS brings a different\n"
+	.string "pace and a Dragon typing.$"
 
 MauvilleCity_Gym_Text_BenIntro:
 	.string "Send current -- LANTURN drinks it.\n"
@@ -318,8 +324,11 @@ MauvilleCity_Gym_Text_BenDefeat:
 	.string "You reversed my reverse current!$"
 
 MauvilleCity_Gym_Text_BenPostBattle:
-	.string "Taunt ORANGURU or wait out TRICK ROOM.\n"
-	.string "Never race a slow battery on its clock.$"
+	.string "CHARJABUG powers special attacks\n"
+	.string "with BATTERY. DISCHARGE can even\n"
+	.string "heal LANTURN.\p"
+	.string "That same move is not safe beside\n"
+	.string "every partner.$"
 
 MauvilleCity_Gym_Text_VivianIntro:
 	.string "PLUSLE and MINUN amplify each other\n"
@@ -334,27 +343,32 @@ MauvilleCity_Gym_Text_VivianPostBattle:
 	.string "Ability that wants to absorb them.$"
 
 MauvilleCity_Gym_Text_AngeloIntro:
-	.string "JOLTIK's THUNDER does not miss, and\n"
-	.string "TOXTRICITY only gets louder.\p"
-	.string "Accuracy is a luxury. I have it!$"
+	.string "JOLTIK makes THUNDER more\n"
+	.string "reliable, and TOXTRICITY turns\n"
+	.string "sound into power.\p"
+	.string "We are ready to take our chances!$"
 
 MauvilleCity_Gym_Text_AngeloDefeat:
 	.string "Our relay lost its charge…$"
 
 MauvilleCity_Gym_Text_AngeloPostBattle:
-	.string "Clear the STICKY WEB before my\n"
-	.string "VIKAVOLT outspeeds your whole team.$"
+	.string "WATTREL can set TAILWIND, and\n"
+	.string "JOLTIK can slow opponents with\n"
+	.string "ELECTROWEB.\p"
+	.string "Those moves change speed in\n"
+	.string "different ways.$"
 
 MauvilleCity_Gym_Text_WattsonIntro:
-	.string "Wahahahah! I'm WATTSON!\p"
-	.string "Electric teams can race forward or close\n"
-	.string "the circuit and reverse move order.\p"
-	.string "My opening is fixed. My reserves are not.\n"
-	.string "Read the board each time it changes!$"
+	.string "Wahahahah! I am WATTSON!\p"
+	.string "ELECTRODE sends the current.\n"
+	.string "ELECTIVIRE turns it into speed.\p"
+	.string "I know how my partners work\n"
+	.string "together. Show me what yours can\n"
+	.string "do!$"
 
 MauvilleCity_Gym_Text_WattsonDefeat:
-	.string "Wahahah! You solved the circuit instead\n"
-	.string "of memorizing it! Take the DYNAMO BADGE!$"
+	.string "Wahahah! What a battle!\p"
+	.string "You have earned the DYNAMO BADGE!$"
 
 MauvilleCity_Gym_Text_ReceivedDynamoBadge:
 	.string "{PLAYER} received the DYNAMO BADGE\n"

@@ -1317,22 +1317,15 @@ PetalburgCity_Gym_Text_DadNoAmountOfTrainingIsEnough:
 	.string "training would ever be enough.$"
 
 PetalburgCity_Gym_Text_GymGuideAdvice:
-	.string "Hey, how's it going, CHAMPION-\n"
-	.string "bound {PLAYER}?\p"
-	.string "The doors in this GYM open when you\n"
-	.string "beat the awaiting TRAINERS.\p"
-	.string "Whoops! The doors in this room are\n"
-	.string "already open, so don't attack me!\p"
-	.string "The TRAINERS of PETALBURG GYM\n"
-	.string "use all kinds of items.\p"
-	.string "The door at the left leads to\n"
-	.string "the SPEED ROOM.\p"
-	.string "The door at the right leads to\n"
-	.string "the ACCURACY ROOM.\p"
-	.string "The room's name will be on\n"
-	.string "the door, so choose carefully.\p"
-	.string "Once you've chosen the door…\n"
-	.string "Well, hey, go for it!$"
+	.string "Welcome, CHAMPION-bound {PLAYER}!\p"
+	.string "Defeat the Trainers in a room to\n"
+	.string "open its onward doors.\p"
+	.string "The left door leads to the\n"
+	.string "MULTIHIT ROOM. The right leads to\l"
+	.string "the RETALIATION ROOM.\p"
+	.string "Each room's sign names its plan.\n"
+	.string "Choose your route and prepare your\l"
+	.string "partners together.$"
 
 PetalburgCity_Gym_Text_GymGuidePostVictory:
 	.string "{PLAYER}! Whoa! You've overcome even\n"
@@ -1341,21 +1334,19 @@ PetalburgCity_Gym_Text_GymGuidePostVictory:
 	.string "What a stunning turn of events!$"
 
 PetalburgCity_Gym_Text_RandallIntro:
-	.string "The ability to attack before the\n"
-	.string "opponent…\p"
-	.string "Just that alone puts me at a great\n"
-	.string "advantage, don't you agree?\p"
-	.string "Five hits a turn. No SASH lives!$"
+	.string "This is the MULTIHIT ROOM.\p"
+	.string "One attack can strike again and\n"
+	.string "again. A FOCUS SASH may not be\n"
+	.string "enough!$"
 
 PetalburgCity_Gym_Text_RandallDefeat:
 	.string "That was a magnificent battle!$"
 
 PetalburgCity_Gym_Text_RandallPostBattle:
-	.string "Go on to the next room where a new\n"
-	.string "challenge awaits you.\p"
-	.string "At the left is the CONFUSION ROOM.\p"
-	.string "The right door leads to the DEFENSE\n"
-	.string "ROOM.$"
+	.string "Another challenge waits ahead.\p"
+	.string "The left door leads to the TRICK\n"
+	.string "ROOM; the right leads to the\l"
+	.string "STATUS ROOM.$"
 
 PetalburgCity_Gym_Text_RandallPostBadge:
 	.string "Whomever you beat, and whomever you\n"
@@ -1365,60 +1356,63 @@ PetalburgCity_Gym_Text_RandallPostBadge:
 	.string "GYM LEADER is all about.$"
 
 PetalburgCity_Gym_Text_ParkerIntro:
-	.string "This is the CONFUSION ROOM.\p"
-	.string "Let me see how well bonded you are\n"
-	.string "with your POKéMON!\p"
-	.string "TRICK ROOM. My slowest strike first!$"
+	.string "Welcome to the TRICK ROOM.\p"
+	.string "The slower Pokémon can move first\n"
+	.string "here. ORANGURU can also make its\n"
+	.string "partner repeat an attack.\p"
+	.string "Let us see how you position your\n"
+	.string "team.$"
 
 PetalburgCity_Gym_Text_ParkerDefeat:
-	.string "I couldn't confuse your team enough…\n"
-	.string "You share a strong bond together.$"
+	.string "Our timing was not enough. Good\n"
+	.string "battle!$"
 
 PetalburgCity_Gym_Text_ParkerPostBattle:
-	.string "The next room is the STRENGTH ROOM.\n"
-	.string "Can you withstand brute force?$"
+	.string "The next door leads to the POWER\n"
+	.string "ROOM.\p"
+	.string "Keep your team ready for it!$"
 
 PetalburgCity_Gym_Text_ParkerPostBadge:
 	.string "After you beat our LEADER, the\n"
 	.string "training has become a lot tougher.$"
 
 PetalburgCity_Gym_Text_GeorgeIntro:
-	.string "Just when you think you're going to\n"
-	.string "win, your opponent restores HP…\p"
-	.string "Can you just imagine how awful that\n"
-	.string "must feel?\p"
-	.string "I'll show you exactly how awful it\n"
-	.string "feels!$"
+	.string "This is the ENDURANCE ROOM.\p"
+	.string "Healing buys time. DUBWOOL can\n"
+	.string "turn that time into BODY PRESS\n"
+	.string "power.\p"
+	.string "Can your team finish the job?$"
 
 PetalburgCity_Gym_Text_GeorgeDefeat:
-	.string "I couldn't restore HP enough…\n"
-	.string "What ATTACK power…$"
+	.string "We could not outlast your team!$"
 
 PetalburgCity_Gym_Text_GeorgePostBattle:
-	.string "I should have expected no less from\n"
-	.string "our LEADER's kid.\p"
-	.string "No, wait! A TRAINER's abilities are\n"
-	.string "earned only through effort.\p"
-	.string "I lost because my own efforts\n"
-	.string "weren't enough.\p"
-	.string "Go on! The ONE-HIT KO ROOM is next.$"
+	.string "That was well played.\p"
+	.string "The next door leads to the BURST\n"
+	.string "ROOM. Be ready for its\l"
+	.string "concentrated pressure.$"
 
 PetalburgCity_Gym_Text_GeorgePostBadge:
 	.string "I'm going to keep training at GYMS.\n"
 	.string "One day, I'll become a LEADER.$"
 
 PetalburgCity_Gym_Text_BerkeIntro:
-	.string "This is the BURST ROOM. SCRAPPY sound\n"
-	.string "crosses Ghosts. One visible EXPLOSION\l"
-	.string "can erase a careless board. Position!$"
+	.string "This is the BURST ROOM.\p"
+	.string "EXPLOUD's voice can hit Ghosts.\n"
+	.string "MEGA GLALIE turns Normal attacks\n"
+	.string "into Ice.\p"
+	.string "Prepare for both sides of the\n"
+	.string "board!$"
 
 PetalburgCity_Gym_Text_BerkeDefeat:
-	.string "You made every burst hit the wrong turn!$"
+	.string "Your team took the battle!$"
 
 PetalburgCity_Gym_Text_BerkePostBattle:
-	.string "Track TRICK ROOM, guard the telegraphed\n"
-	.string "EXPLOSION, and keep an answer for the\l"
-	.string "refrigerated final impact.$"
+	.string "A strong pair can attack through\n"
+	.string "different defenses.\p"
+	.string "The last reserves still matter:\n"
+	.string "STOUTLAND and KANGASKHAN keep the\n"
+	.string "pressure on.$"
 
 PetalburgCity_Gym_Text_BerkePostBadge:
 	.string "Since your dad became the LEADER,\n"
@@ -1426,22 +1420,20 @@ PetalburgCity_Gym_Text_BerkePostBadge:
 	.string "become a lot tougher.$"
 
 PetalburgCity_Gym_Text_MaryIntro:
-	.string "Giggle…\n"
-	.string "This is the ACCURACY ROOM.\p"
-	.string "It's pretty nasty when every attack\n"
-	.string "lands without fail.\p"
-	.string "Hurt me halfway, and BERSERK answers!$"
+	.string "This is the RETALIATION ROOM.\p"
+	.string "DRAMPA can gain power after a hard\n"
+	.string "hit. RUFFLET's HUSTLE trades\n"
+	.string "accuracy for strength.\p"
+	.string "Every risk needs a purpose!$"
 
 PetalburgCity_Gym_Text_MaryDefeat:
 	.string "You were a cut above me…$"
 
 PetalburgCity_Gym_Text_MaryPostBattle:
-	.string "There are some even stronger\n"
-	.string "TRAINERS waiting for you.\p"
-	.string "The left is the DEFENSE ROOM, and\n"
-	.string "the right is the RECOVERY ROOM.\p"
-	.string "Your POKéMON's ATTACK power will be\n"
-	.string "on trial either way.$"
+	.string "More formidable teams await.\p"
+	.string "The left door leads to the STATUS\n"
+	.string "ROOM; the right leads to the\l"
+	.string "ENDURANCE ROOM.$"
 
 PetalburgCity_Gym_Text_MaryPostBadge:
 	.string "Do you know what we're trying to\n"
@@ -1450,32 +1442,30 @@ PetalburgCity_Gym_Text_MaryPostBadge:
 	.string "with our POKéMON.$"
 
 PetalburgCity_Gym_Text_AlexiaIntro:
-	.string "The higher the DEFENSE, the more\n"
-	.string "reckless I can be in attack.\p"
-	.string "My own poison is the whole point!$"
+	.string "This is the STATUS ROOM.\p"
+	.string "ZANGOOSE and URSARING make their\n"
+	.string "own status a weapon.\p"
+	.string "Bring a plan for the whole team!$"
 
 PetalburgCity_Gym_Text_AlexiaDefeat:
 	.string "Our defenses weren't enough…$"
 
 PetalburgCity_Gym_Text_AlexiaPostBattle:
-	.string "I think you've taught me a valuable\n"
-	.string "lesson here.\p"
-	.string "Now, go on! The left door goes to\n"
-	.string "the STRENGTH ROOM.\p"
-	.string "The right door opens to\n"
-	.string "the ONE-HIT KO ROOM.\p"
-	.string "Both of them have TRAINERS who are\n"
-	.string "skilled at offense.$"
+	.string "You've given me something to think\n"
+	.string "about.\p"
+	.string "The left door leads to the POWER\n"
+	.string "ROOM; the right leads to the BURST\l"
+	.string "ROOM.$"
 
 PetalburgCity_Gym_Text_AlexiaPostBadge:
 	.string "Hi! Have you tried using SURF?$"
 
 PetalburgCity_Gym_Text_JodyIntro:
-	.string "Our GYM LEADER told us to go all out\n"
-	.string "and beat you.\p"
-	.string "Even if you happen to be the\n"
-	.string "LEADER's kid!\p"
-	.string "No tricks in here. Only power!$"
+	.string "This is the POWER ROOM.\p"
+	.string "Our LEADER told us to give you\n"
+	.string "everything we have, even if you\n"
+	.string "are his kid.\p"
+	.string "That is exactly what we will do!$"
 
 PetalburgCity_Gym_Text_JodyDefeat:
 	.string "But… I went all out!$"
@@ -1498,36 +1488,35 @@ PetalburgCity_Gym_Text_DoorAppearsLocked:
 	.string "right now…$"
 
 PetalburgCity_Gym_Text_EnterSpeedRoom:
-	.string "“SPEED ROOM,” the sign says.\p"
+	.string "“MULTIHIT ROOM”, the sign says.\p"
 	.string "Do you want to go through?$"
 
-@ Unused
 PetalburgCity_Gym_Text_DoorAppearsLocked2:
 	.string "This door appears to be locked\n"
 	.string "right now…$"
 
 PetalburgCity_Gym_Text_EnterAccuracyRoom:
-	.string "“ACCURACY ROOM,” the sign says.\p"
+	.string "“RETALIATION ROOM”, the sign says.\p"
 	.string "Do you want to go through?$"
 
 PetalburgCity_Gym_Text_EnterConfusionRoom:
-	.string "“CONFUSION ROOM,” the sign says.\p"
+	.string "“TRICK ROOM”, the sign says.\p"
 	.string "Do you want to go through?$"
 
 PetalburgCity_Gym_Text_EnterDefenseRoom:
-	.string "“DEFENSE ROOM,” the sign says.\p"
+	.string "“STATUS ROOM”, the sign says.\p"
 	.string "Do you want to go through?$"
 
 PetalburgCity_Gym_Text_EnterRecoveryRoom:
-	.string "“RECOVERY ROOM,” the sign says.\p"
+	.string "“ENDURANCE ROOM”, the sign says.\p"
 	.string "Do you want to go through?$"
 
 PetalburgCity_Gym_Text_EnterStrengthRoom:
-	.string "“STRENGTH ROOM,” the sign says.\p"
+	.string "“POWER ROOM”, the sign says.\p"
 	.string "Do you want to go through?$"
 
 PetalburgCity_Gym_Text_EnterOHKORoom:
-	.string "“BURST ROOM,” the sign says.\p"
+	.string "“BURST ROOM”, the sign says.\p"
 	.string "Do you want to go through?$"
 
 PetalburgCity_Gym_Text_EnterGymLeadersRoom:

@@ -153,12 +153,7 @@ Route110_TrickHouseEnd_EventScript_CompletedPuzzle8::
 	waitmovement 0
 	delay 30
 	msgbox Route110_TrickHouseEnd_Text_DefeatedMePreferWhichTent, MSGBOX_DEFAULT
-	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
-	call Route110_TrickHouseEnd_EventScript_ChooseTent
-	call_if_eq VAR_RESULT, FALSE, Route110_TrickHouseEnd_EventScript_NoRoomForTent
-	msgbox Route110_TrickHouseEnd_Text_FinalPrizeMegaStone, MSGBOX_DEFAULT
-	giveitem ITEM_ALAKAZITE
-	call_if_eq VAR_RESULT, FALSE, Route110_TrickHouseEnd_EventScript_BagFull
+	call Route110_TrickHouseEnd_EventScript_ClaimFinalRewards
 	msgbox Route110_TrickHouseEnd_Text_LeavingOnJourney, MSGBOX_DEFAULT
 	call Route110_TrickHouseEnd_EventScript_TrickMasterExit
 	special ResetTrickHouseNuggetFlag
@@ -361,3 +356,27 @@ Route110_TrickHouseEnd_Text_YoureIgnoringMe:
 Route110_TrickHouseEnd_Text_FinalPrizeMegaStone:
 	.string "And one more thing! A true master of\n"
 	.string "tricks deserves a master of the mind.$"
+
+@ Both final prizes are independent entitlements, including later courier claims.
+Route110_TrickHouseEnd_EventScript_ClaimFinalRewards::
+	call_if_unset FLAG_EC_TRICK_FINAL_TENT_RECEIVED, Route110_TrickHouseEnd_EventScript_ClaimFinalTent
+	call_if_unset FLAG_EC_TRICK_FINAL_ALAKAZITE_RECEIVED, Route110_TrickHouseEnd_EventScript_ClaimFinalStone
+	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 1
+	goto_if_unset FLAG_EC_TRICK_FINAL_TENT_RECEIVED, Route110_TrickHouseEnd_EventScript_FinalRewardsPending
+	goto_if_unset FLAG_EC_TRICK_FINAL_ALAKAZITE_RECEIVED, Route110_TrickHouseEnd_EventScript_FinalRewardsPending
+	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
+Route110_TrickHouseEnd_EventScript_FinalRewardsPending::
+	return
+
+Route110_TrickHouseEnd_EventScript_ClaimFinalTent::
+	call Route110_TrickHouseEnd_EventScript_ChooseTent
+	goto_if_eq VAR_RESULT, FALSE, Route110_TrickHouseEnd_EventScript_NoRoomForTent
+	setflag FLAG_EC_TRICK_FINAL_TENT_RECEIVED
+	return
+
+Route110_TrickHouseEnd_EventScript_ClaimFinalStone::
+	msgbox Route110_TrickHouseEnd_Text_FinalPrizeMegaStone, MSGBOX_DEFAULT
+	giveitem ITEM_ALAKAZITE
+	goto_if_eq VAR_RESULT, FALSE, Route110_TrickHouseEnd_EventScript_BagFull
+	setflag FLAG_EC_TRICK_FINAL_ALAKAZITE_RECEIVED
+	return

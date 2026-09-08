@@ -1,5 +1,5 @@
 #include "global.h"
-#include "legendary_signs.h"
+#include "emerald_champions_opening.h"
 #include "battle.h"
 #include "battle_anim.h"
 #include "battle_anim_scripts.h"
@@ -5534,7 +5534,11 @@ bool32 HasEnoughHpToEatBerry(enum BattlerId battler, enum Ability ability, u32 h
         return FALSE;
     if (gBattleScripting.overrideBerryRequirements)
         return TRUE;
-    if (gBattleMons[battler].hp <= gBattleMons[battler].maxHP / hpFraction)
+    // Sitrus works after Belly Drum at either HP parity, without changing stats.
+    u32 threshold = gBattleMons[battler].maxHP / hpFraction;
+    if (itemId == ITEM_SITRUS_BERRY && hpFraction == 2)
+        threshold = (gBattleMons[battler].maxHP + 1) / 2;
+    if (gBattleMons[battler].hp <= threshold)
         return TRUE;
 
     if (hpFraction <= 4 && GetItemPocket(itemId) == POCKET_BERRIES
@@ -7650,7 +7654,7 @@ static inline uq4_12_t GetDefenderItemsModifier(struct DamageContext *ctx)
         {
             if (ctx->updateFlags)
                 gSpecialStatuses[ctx->battlerDef].berryReduced = TRUE;
-            if (ctx->aiCalc && AI_DAMAGES_THROUGH_BERRIES)
+            if (ctx->aiCalc)
                 ctx->aiCheckBerryModifier = TRUE;
             return (ctx->abilities[ctx->battlerDef] == ABILITY_RIPEN) ? UQ_4_12(0.25) : UQ_4_12(0.5);
         }
@@ -8058,7 +8062,8 @@ static bool32 IsCriticalHit(struct DamageContext *ctx)
 {
 
     if ((gBattleTypeFlags & (BATTLE_TYPE_CATCH_TUTORIAL | BATTLE_TYPE_POKEDUDE))
-    || ((gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE) && (!IS_FRLG || !BtlCtrl_OakOldMan_TestState2Flag(1))))
+    || ((gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE) && !IsEmeraldChampionsBirchRescueBattle()
+        && (!IS_FRLG || !BtlCtrl_OakOldMan_TestState2Flag(1))))
         return FALSE;
     if (ctx->isSelfInflicted)
         return FALSE;
@@ -10900,6 +10905,8 @@ bool32 IsDoubleSpreadMove(void)
 
 bool32 IsAllowedToUseBag(void)
 {
+    if (IsEmeraldChampionsBirchRescueBattle())
+        return FALSE;
     // Emerald Champions is a competitive puzzle campaign.  Ordinary Trainer
     // battles never permit Bag actions; Battle Pyramid keeps its facility Bag.
     if (GEN_LATEST == GEN_CHAMPIONS
@@ -11226,34 +11233,12 @@ struct PartyState *GetBattlerPartyState(enum BattlerId battler)
     return &gBattleStruct->partyState[GetBattlerTrainer(battler)][gBattlerPartyIndexes[battler]];
 }
 
-static bool32 IsPersistentWildEncounter(void)
-{
-    if (gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_LINK
-         | BATTLE_TYPE_RECORDED_LINK | BATTLE_TYPE_FRONTIER
-         | BATTLE_TYPE_CATCH_TUTORIAL | BATTLE_TYPE_POKEDUDE))
-        return FALSE;
-#if TESTING
-    // Native battle tests use the recorded-action controller.
-    if (gTestRunnerEnabled)
-        return TRUE;
-#endif
-    return !(gBattleTypeFlags & BATTLE_TYPE_RECORDED);
-}
 
-void RecordFailedLegendaryEncounters(void)
-{
-    if (!IsPersistentWildEncounter() || gBattleOutcome == B_OUTCOME_CAUGHT)
-        return;
-    for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
-        if (GetBattlerSide(battler) == B_SIDE_OPPONENT)
-            MarkLegendaryEncounterLost(GetMonData(GetBattlerMon(battler), MON_DATA_SPECIES));
-}
+
+
 
 void SetValuesOnFaint(enum BattlerId battler)
 {
-    if (GetBattlerSide(battler) == B_SIDE_OPPONENT && IsPersistentWildEncounter())
-        MarkLegendaryEncounterLost(GetMonData(GetBattlerMon(battler), MON_DATA_SPECIES));
-
     gHitMarker |= HITMARKER_FAINTED(battler);
     gBattleStruct->eventState.faintedAction = 0;
     gBattlerFainted = battler;

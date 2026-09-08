@@ -1,4 +1,6 @@
 #include "global.h"
+#include "battle.h"
+#include "caps.h"
 #include "data.h"
 #include "event_data.h"
 #include "pokemon.h"
@@ -51,9 +53,13 @@ u8 GetTrainerLevelReduction(void)
 void ApplyTrainerLevelDifficulty(struct Pokemon *party)
 {
     u8 reduction = GetTrainerLevelReduction();
+    u8 floor = 1;
 
-    if (reduction == 0)
-        return;
+    // All campaign trainers keep pace with the live cap, including gyms
+    // and return visits. Their authored higher levels still take precedence.
+    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
+     && !(gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED | BATTLE_TYPE_TRAINER_HILL)))
+        floor = min(MAX_LEVEL, GetCurrentLevelCap());
 
     for (u32 i = 0; i < PARTY_SIZE; i++)
     {
@@ -66,6 +72,7 @@ void ApplyTrainerLevelDifficulty(struct Pokemon *party)
             continue;
 
         level = GetMonData(&party[i], MON_DATA_LEVEL);
+        level = max(level, floor);
         level = level > reduction ? level - reduction : 1;
         experience = gExperienceTables[gSpeciesInfo[species].growthRate][level];
         SetMonData(&party[i], MON_DATA_EXP, &experience);

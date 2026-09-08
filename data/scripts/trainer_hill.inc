@@ -66,3 +66,16 @@ TrainerHill_EventScript_TrainerBattle::
 	waitbuttonpress
 	closemessage
 	end
+
+TrainerHill_EventScript_GenerationFailed::
+	lockall
+	msgbox TrainerHill_Text_TeamNotReady, MSGBOX_DEFAULT
+	closemessage
+	warp MAP_TRAINER_HILL_ENTRANCE, 9, 6
+	waitstate
+	releaseall
+	end
+
+TrainerHill_Text_TeamNotReady:
+	.string "The next team isn't ready.\n"
+	.string "Please begin again at reception.$"

@@ -110,8 +110,7 @@ AlteringCave_B1F_EventScript_Mewtwo::
 	faceplayer
 	setvar VAR_0x8004, EC_SIGN_MEWTWO_ID
 	special TryUnlockSelectedLegendarySign
-	goto_if_eq VAR_RESULT, 6, Common_EventScript_LegendaryNeedsDevon
-	goto_if_eq VAR_RESULT, 5, Common_EventScript_LegendaryDefeatedAtShrine
+	goto_if_eq VAR_RESULT, 5, Common_EventScript_LegendaryRestingAtShrine
 	goto_if_eq VAR_RESULT, 0, AlteringCave_B1F_EventScript_MewtwoDormant
 	goto_if_eq VAR_RESULT, 1, AlteringCave_B1F_EventScript_MewtwoNeedsPartner
 	goto_if_eq VAR_RESULT, 4, AlteringCave_B1F_EventScript_MewtwoCleanup
@@ -121,13 +120,13 @@ AlteringCave_B1F_EventScript_Mewtwo::
 	delay 40
 	waitmoncry
 	setvar VAR_0x8004, EC_SIGN_MEWTWO_ID
-	msgbox gText_LegendaryOneShotWarning, MSGBOX_DEFAULT
 	special CreateSelectedLegendarySignEncounter
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+	special FinishLegendaryLandmarkEncounter
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_LegendaryDefeated
+	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_LegendaryResting
 	goto AlteringCave_B1F_EventScript_MewtwoCaught
 	end
 
@@ -137,7 +136,8 @@ AlteringCave_B1F_EventScript_MewtwoDormant::
 	end
 
 AlteringCave_B1F_EventScript_MewtwoNeedsPartner::
-	msgbox AlteringCave_B1F_Text_MewtwoNeedsPartner, MSGBOX_DEFAULT
+	special ResearchSelectedLegendarySign
+	msgbox gStringVar4, MSGBOX_DEFAULT
 	release
 	end
 
@@ -155,10 +155,8 @@ AlteringCave_B1F_Text_MewtwoDormant:
 	.string "has not yet reached this place.$"
 
 AlteringCave_B1F_Text_MewtwoNeedsPartner:
-	.string "The SIGN sketches DITTO.\p"
-	.string "Bring that Pokémon's family to the\n"
-	.string "dream researcher at DEVON CORP. 2F\l"
-	.string "in RUSTBORO to translate this Sign.$"
+	.string "This Sign follows HOENN's story.\n"
+	.string "Return as your journey continues.$"
 
 AlteringCave_B1F_Text_MewtwoAwakens:
 	.string "The CHAMPION'S SIGN erupts with light!\n"

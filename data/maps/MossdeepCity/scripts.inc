@@ -362,13 +362,13 @@ MossdeepCity_Text_NiceIfWorldCoveredByFlowers:
 	.string "plants and flowers like this island?$"
 
 MossdeepCity_Text_LifeNeedsSeaToLive:
-	.string "All life needs the sea to live, even\n"
-	.string "though it makes its home on the land.\p"
-	.string "Old divers tell of a RELICANTH circling\n"
+	.string "All life needs the sea, even when\n"
+	.string "it makes its home on the land.\p"
+	.string "Divers found a princely SIGN near\n"
 	.string "the SEAFLOOR CAVERN approach.\p"
-	.string "When it does, a princely light stirs\n"
-	.string "beneath the trench.$"
-
+	.string "Inspect that underwater landmark\n"
+	.string "with the MIND BADGE. The stolen\l"
+	.string "submarine points the way.$"
 MossdeepCity_Text_SurfExhilarating:
 	.string "A voyage on a ship is fine.\p"
 	.string "But crossing the sea with POKéMON\n"

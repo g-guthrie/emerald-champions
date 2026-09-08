@@ -16,17 +16,17 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 12,
       "y": 8,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
-      "movement_range_x": 1,
-      "movement_range_y": 1,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 5,
+      "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_ABOMASITE",
+      "trainer_sight_or_berry_tree_id": "ITEM_RAZZ_BERRY",
       "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ITEM_SHOAL_CAVE_ICE_ROOM_ABOMASITE"
+      "flag": "FLAG_EC_GARDEN_BUNDLE_SHOALCAVE_LOWTIDEICEROOM_RAZZ_BERRY"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -42,17 +42,17 @@
       "flag": "FLAG_ITEM_SHOAL_CAVE_ICE_ROOM_ICE_STONE"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 2,
       "y": 26,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
-      "movement_range_x": 1,
-      "movement_range_y": 1,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 5,
+      "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_FROSLASSITE",
+      "trainer_sight_or_berry_tree_id": "ITEM_POMEG_BERRY",
       "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_EC_ITEM_SHOAL_CAVE_ICE_ROOM_FROSLASSITE"
+      "flag": "FLAG_EC_GARDEN_BUNDLE_SHOALCAVE_LOWTIDEICEROOM_POMEG_BERRY"
     },
     {
       "local_id": "LOCALID_EC_ARTICUNO",
@@ -67,6 +67,20 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "ShoalCave_LowTideIceRoom_EventScript_Articuno",
       "flag": "FLAG_EC_CAUGHT_ARTICUNO"
+    },
+    {
+      "local_id": "LOCALID_SHOAL_CAVE_LOW_TIDE_ICE_ROOM_LEGENDARY_SIGN",
+      "graphics_id": "OBJ_EVENT_GFX_DEOXYS_TRIANGLE",
+      "x": 12,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Common_EventScript_LegendaryLandmark",
+      "flag": "0"
     }
   ],
   "warp_events": [

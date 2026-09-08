@@ -221,6 +221,7 @@ Route120_EventScript_StevenBattleKecleon::
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	dowildbattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+	special FinishLegendaryLandmarkEncounter
 	specialvar VAR_RESULT, GetBattleOutcome
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Route120_EventScript_RemoveBridgeKecleonPostBattle
 	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, Route120_EventScript_RemoveBridgeKecleonPostBattle
@@ -466,11 +467,11 @@ Kecleon_Text_UseDevonScopeMonAttacked:
 	.string "The startled POKéMON attacked!$"
 
 Route120_Text_RouteSignFortree:
-	.string "ROUTE 120\n"
-	.string "{LEFT_ARROW} FORTREE CITY\p"
-	.string "Two weathered marks show GARDEVOIR\n"
-	.string "beside water and XATU beside grass.$"
-
+	.string "ROUTE 120 {LEFT_ARROW} FORTREE\n"
+	.string "CITY\p"
+	.string "A lakeside SIGN answers the\n"
+	.string "BALANCE BADGE. Other marks await a\l"
+	.string "Champion who returns here.$"
 Route120_Text_RouteSign121:
 	.string "{RIGHT_ARROW} ROUTE 121\n"
 	.string "{LEFT_ARROW} ROUTE 120$"

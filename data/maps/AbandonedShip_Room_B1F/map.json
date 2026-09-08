@@ -16,17 +16,17 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 4,
       "y": 4,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
-      "movement_range_x": 1,
-      "movement_range_y": 1,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 5,
+      "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_GLALITITE",
+      "trainer_sight_or_berry_tree_id": "ITEM_KELPSY_BERRY",
       "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_GLALITITE"
+      "flag": "FLAG_EC_GARDEN_BUNDLE_ABANDONEDSHIP_ROOM_B1F_KELPSY_BERRY"
     }
   ],
   "warp_events": [

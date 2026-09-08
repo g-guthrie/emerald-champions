@@ -13,11 +13,6 @@ BattleFrontier_BattleArenaLobby_EventScript_TurnPlayerNorth::
 	end
 
 BattleFrontier_BattleArenaLobby_OnFrame:
-	map_script_2 VAR_TEMP_CHALLENGE_STATUS, 0, BattleFrontier_BattleArenaLobby_EventScript_GetChallengeStatus
-	map_script_2 VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_SAVING, BattleFrontier_BattleArenaLobby_EventScript_QuitWithoutSaving
-	map_script_2 VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_PAUSED, BattleFrontier_BattleArenaLobby_EventScript_ResumeChallenge
-	map_script_2 VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_WON, BattleFrontier_BattleArenaLobby_EventScript_WonChallenge
-	map_script_2 VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST, BattleFrontier_BattleArenaLobby_EventScript_LostChallenge
 	.2byte 0
 
 BattleFrontier_BattleArenaLobby_EventScript_GetChallengeStatus::
@@ -290,11 +285,8 @@ BattleFrontier_BattleArenaLobby_Movement_PlayerWalkToRightDoor:
 	step_end
 
 BattleFrontier_BattleArenaLobby_EventScript_ShowResults::
-	lockall
-	frontier_results FRONTIER_FACILITY_ARENA
-	waitbuttonpress
-	special RemoveRecordsWindow
-	releaseall
+	special ChampionsCircuitBufferRecord
+	msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN
 	end
 
 BattleFrontier_BattleArenaLobby_EventScript_Youngster::
@@ -314,9 +306,7 @@ BattleFrontier_BattleArenaLobby_EventScript_Woman::
 	end
 
 BattleFrontier_BattleArenaLobby_EventScript_RulesBoard::
-	lockall
-	msgbox BattleFrontier_BattleArenaLobby_Text_RulesAreListed, MSGBOX_DEFAULT
-	goto BattleFrontier_BattleArenaLobby_EventScript_ReadRulesBoard
+	msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRules, MSGBOX_SIGN
 	end
 
 BattleFrontier_BattleArenaLobby_EventScript_ReadRulesBoard::
@@ -489,32 +479,26 @@ BattleFrontier_BattleArenaLobby_Text_RecordLastMatch:
 	.string "match on your FRONTIER PASS?$"
 
 BattleFrontier_BattleArenaLobby_Text_BadIdeaToNotAttack:
-	.string "I lost on the REFEREE's decision…\p"
-	.string "I don't think it was a good idea to only\n"
-	.string "use defensive moves and not attack…$"
-
+	.string "I protected every turn and never\n"
+	.string "built a winning position.\p"
+	.string "Next time, my defensive choices\n"
+	.string "need to create an opportunity.$"
 BattleFrontier_BattleArenaLobby_Text_LandingHitsWorked:
-	.string "I won in judging!\p"
-	.string "Landing hits consistently on\n"
-	.string "the opponent's POKéMON worked!$"
-
+	.string "I kept finding safe chances to\n"
+	.string "land my attacks.\p"
+	.string "That won my last Circuit match!$"
 BattleFrontier_BattleArenaLobby_Text_MatchWasDeclaredDraw:
-	.string "Our match was declared a draw.\p"
-	.string "When we ran out of time, both my\n"
-	.string "POKéMON and the opponent's had about\l"
-	.string "the same amount of HP left.$"
-
+	.string "The old ARENA judged a match after\n"
+	.string "three turns.\p"
+	.string "The CIRCUIT lets a longer plan\n"
+	.string "play out. You still have to\l"
+	.string "survive those first turns.$"
 BattleFrontier_BattleArenaLobby_Text_OrderOfMonsImportant:
-	.string "In the BATTLE ARENA, the order of\n"
-	.string "POKéMON is totally important.\p"
-	.string "For example, if your first POKéMON\n"
-	.string "has certain type disadvantages,\l"
-	.string "try making your second POKéMON one\l"
-	.string "with moves that are super effective\l"
-	.string "against the first one.\p"
-	.string "I think that will be a good way of\n"
-	.string "making an effective team.$"
-
+	.string "Your first two Pokémon begin the\n"
+	.string "Circuit battle together.\p"
+	.string "Make the opening pair support one\n"
+	.string "another, and keep useful answers\l"
+	.string "in reserve.$"
 BattleFrontier_BattleArenaLobby_Text_RulesAreListed:
 	.string "The Set KO Tourney's rules are listed.$"
 

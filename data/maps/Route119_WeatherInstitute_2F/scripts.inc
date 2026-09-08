@@ -308,10 +308,11 @@ Route119_WeatherInstitute_2F_Text_PlayerReceivedCastform:
 
 Route119_WeatherInstitute_2F_Text_PokemonChangesWithWeather:
 	.string "CASTFORM changes with the weather.\n"
-	.string "Let it show you what a storm can do.\p"
-	.string "Before each SIGN's challenge, visit\n"
-	.string "DEVON's researchers in RUSTBORO.$"
-
+	.string "Let it show you what a storm can\l"
+	.string "do.\p"
+	.string "Investigate SIGNS as you explore.\n"
+	.string "DEVON's researcher offers clues\l"
+	.string "whenever you want some guidance.$"
 Route119_WeatherInstitute_2F_Text_RevealGlassPurpose:
 	.string "This REVEAL GLASS changes the forms of\n"
 	.string "TORNADUS, THUNDURUS, and LANDORUS.\p"
@@ -324,13 +325,12 @@ Route119_WeatherInstitute_2F_Text_RevealGlassBagFull:
 	.string "Make room, then speak with me again.$"
 
 Route119_WeatherInstitute_2F_Text_ChangingWeatherRidiculous:
-	.string "Our instruments still trace that old\n"
-	.string "network beneath HOENN.\p"
-	.string "Report to DEVON's lab in RUSTBORO\n"
-	.string "before each SIGN you want to challenge.\p"
+	.string "Our instruments still trace that\n"
+	.string "old network beneath HOENN.\p"
+	.string "DEVON's lab has optional leads for\n"
+	.string "the SIGNS you want to investigate.\p"
 	.string "The road north leads to FORTREE.\n"
-	.string "You're welcome to rest here on the way.$"
-
+	.string "You're welcome to rest here.$"
 Route119_WeatherInstitute_2F_Text_GroudonWeather:
 	.string "I track weather patterns over\n"
 	.string "the HOENN region.\p"

@@ -39,7 +39,13 @@ MtPyre_1F_Text_ExplainCleanseTag:
 MtPyre_1F_Text_ComeToPayRespects:
 	.string "Did you come to pay your respect\n"
 	.string "to the spirits of departed POKéMON?\p"
-	.string "You must care for your POKéMON a lot.$"
+	.string "You must care for your POKéMON a lot.\p"
+	.string "This mountain changes some evolutions.\n"
+	.string "Level QUILAVA here at Lv. 36 or higher\l"
+	.string "for Hisuian TYPHLOSION.\p"
+	.string "Level RUFFLET here at Lv. 54 or higher\n"
+	.string "for Hisuian BRAVIARY. Elsewhere, both\l"
+	.string "grow into their usual forms.$"
 
 MtPyre_1F_Text_RestingPlaceOfZigzagoon:
 	.string "This is the final resting place of my\n"

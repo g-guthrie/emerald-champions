@@ -277,36 +277,27 @@ RustboroCity_Gym_Movement_GuideReturn4:
 	step_end
 
 RustboroCity_Gym_Text_GuideIntroduction:
-	.string "Yo! Welcome to your first GYM exam.\p"
-	.string "ROXANNE battles with a full doubles team.\n"
-	.string "Her students teach the pieces: field\l"
-	.string "control, redirection, and reverse speed.\p"
-	.string "Read each pair before attacking, and\n"
-	.string "bring answers instead of one favorite.\p"
-	.string "Take these FRESH WATERS for the road.\n"
-	.string "Come see me after you earn the BADGE!$"
+	.string "Yo! Welcome to RUSTBORO GYM.\p"
+	.string "Every trainer here brings a\n"
+	.string "complete doubles plan. ROXANNE\n"
+	.string "brings the full force of her Rock\n"
+	.string "team.\p"
+	.string "Prepare your partners, study the\n"
+	.string "board, and make your own opening.\p"
+	.string "Take these FRESH WATERS. Come see\n"
+	.string "me after you earn the BADGE!$"
 
 RustboroCity_Gym_Text_GymGuideAdvice:
-	.string "Yo, how's it going?\p"
-	.string "Listen, my friend!\n"
-	.string "Would you like to become the CHAMPION?\p"
-	.string "I'm no TRAINER, not me, but I can\n"
-	.string "sure give you winning advice.\p"
-	.string "That's settled, then! We'll aim for the\n"
-	.string "POKéMON CHAMPIONSHIP together!\p"
-	.string "It's your job as a TRAINER to collect\n"
-	.string "GYM BADGES, am I right?\p"
-	.string "But GYM LEADERS aren't pushovers!\p"
-	.string "And that's where I come in!\n"
-	.string "I'm here to provide expert advice!\p"
-	.string "ROXANNE, the GYM LEADER, is a user\n"
-	.string "of ROCK-type POKéMON.\p"
-	.string "The ROCK type is very durable, but\n"
-	.string "it can't stand WATER-type and\l"
-	.string "GRASS-type moves.\p"
-	.string "Come see me afterwards, if you beat\n"
-	.string "the GYM LEADER.\p"
-	.string "Well, go for it!$"
+	.string "ROXANNE uses Rock Pokémon with\n"
+	.string "different jobs.\p"
+	.string "CARBINK can reverse move order\n"
+	.string "with TRICK ROOM. NOSEPASS can\n"
+	.string "guard its partner from spread\n"
+	.string "attacks.\p"
+	.string "Water and Grass are useful, but\n"
+	.string "target choice and timing still\n"
+	.string "matter. Build the answer that\n"
+	.string "suits your team!$"
 
 RustboroCity_Gym_Text_GymGuidePostVictory:
 	.string "Whoa! What a breathtaking victory!\n"
@@ -321,16 +312,18 @@ RustboroCity_Gym_Text_GymGuidePostVictory:
 	.string "That's got to feel awesome!$"
 
 RustboroCity_Gym_Text_JoshIntro:
-	.string "STURDY means BONSLY and SHIELDON\n"
-	.string "always live to swing back.\p"
-	.string "Chip them first, or don't swing!$"
+	.string "BONSLY and SHIELDON can survive a\n"
+	.string "knockout blow at full health.\p"
+	.string "We make that extra action count!$"
 
 RustboroCity_Gym_Text_JoshDefeat:
 	.string "You broke the wall and the chip!$"
 
 RustboroCity_Gym_Text_JoshPostBattle:
-	.string "STURDY guarantees NOSEPASS one more\n"
-	.string "turn. Plan for the turn after it.$"
+	.string "STURDY can preserve NOSEPASS at\n"
+	.string "full health. Chip damage or an\n"
+	.string "Ability that bypasses it changes\n"
+	.string "the plan.$"
 
 RustboroCity_Gym_Text_TommyIntro:
 	.string "LILEEP drinks the water you aim at\n"
@@ -345,9 +338,10 @@ RustboroCity_Gym_Text_TommyPostBattle:
 	.string "underestimate a first-badge team.$"
 
 RustboroCity_Gym_Text_MarcIntro:
-	.string "AMAURA calls the snow, and the veil\n"
-	.string "it raises blunts everything.\p"
-	.string "Break the snow, or break through!$"
+	.string "AMAURA calls snow and raises\n"
+	.string "AURORA VEIL.\p"
+	.string "Stop the screen or find a way\n"
+	.string "through!$"
 
 RustboroCity_Gym_Text_MarcDefeat:
 	.string "You kept control of your choices!$"
@@ -357,13 +351,15 @@ RustboroCity_Gym_Text_MarcPostBattle:
 	.string "control, reverse speed, and endurance.$"
 
 RustboroCity_Gym_Text_RoxanneIntro:
-	.string "I am ROXANNE, RUSTBORO's GYM LEADER.\p"
-	.string "I teach here, but each challenger gives\n"
-	.string "me something new to study.\p"
-	.string "Rock can endure, redirect an attack, or\n"
-	.string "reverse the order of a battle. My\l"
-	.string "students have shown you the pieces.\p"
-	.string "Now, let us put them together.$"
+	.string "I am ROXANNE, RUSTBORO's GYM\n"
+	.string "LEADER.\p"
+	.string "Each challenger gives me something\n"
+	.string "new to study.\p"
+	.string "My Pokémon can endure a blow,\n"
+	.string "guard a partner, or reverse the\n"
+	.string "order of battle.\p"
+	.string "Show me how your team answers\n"
+	.string "mine.$"
 
 RustboroCity_Gym_Text_RoxanneDefeat:
 	.string "There is always more to learn. Even a\n"

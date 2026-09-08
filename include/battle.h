@@ -218,12 +218,17 @@ struct AiPartyData // Opposing battlers - party mons.
     u8 count[MAX_BATTLE_TRAINERS];
 };
 
+#define AI_ITEM_CONSUMED_MINIMUM (1u << 0)
+#define AI_ITEM_CONSUMED_MEDIAN  (1u << 1)
+#define AI_ITEM_CONSUMED_MAXIMUM (1u << 2)
+
 struct SimulatedDamage
 {
     u16 minimum;
     u16 median;
     u16 maximum;
     u16 random;
+    u8 consumedItem; // AI_ITEM_CONSUMED_* bits for the corresponding damage roll.
 };
 
 // Ai Data used when deciding which move to use, computed only once before each turn's start.

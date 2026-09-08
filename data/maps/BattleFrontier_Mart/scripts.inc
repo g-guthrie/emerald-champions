@@ -32,21 +32,6 @@ BattleFrontier_Mart_EventScript_OldMan::
 	msgbox BattleFrontier_Mart_Text_ChaperonGrandson, MSGBOX_NPC
 	end
 
-BattleFrontier_Mart_EventScript_MegaArchive::
-	lock
-	faceplayer
-	message BattleFrontier_Mart_Text_MegaArchive
-	waitmessage
-	special OpenEmeraldChampionsMegaStoneArchive
-	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
-	release
-	end
-
-BattleFrontier_Mart_Text_MegaArchive:
-	.string "Every CENTER VENDOR shares one Mega\n"
-	.string "archive with any RING holder.\p"
-	.string "Take any stones your teams need.$"
-
 BattleFrontier_Mart_EventScript_OldWoman::
 	lock
 	applymovement LOCALID_FRONTIER_MART_OLD_WOMAN, Common_Movement_FaceDown
@@ -72,8 +57,7 @@ BattleFrontier_Mart_Text_CaptureBallsMakeNiceGift:
 	.string "one more teammate.$"
 
 BattleFrontier_Mart_Text_FacilitiesDontAllowItems:
-	.string "A lot of the BATTLE FRONTIER's\n"
-	.string "facilities don't allow the use of items\l"
-	.string "during battles.\p"
-	.string "That rule makes things tougher than\n"
-	.string "they already are!$"
+	.string "Trainer battles here don't allow\n"
+	.string "items from the BAG.\p"
+	.string "Prepare held items before entering\n"
+	.string "the CHAMPIONS CIRCUIT.$"

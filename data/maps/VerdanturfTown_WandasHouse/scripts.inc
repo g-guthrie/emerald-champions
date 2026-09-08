@@ -64,23 +64,19 @@ VerdanturfTown_WandasHouse_EventScript_WallysAunt::
 	goto_if_set FLAG_DEFEATED_LAVARIDGE_GYM, VerdanturfTown_WandasHouse_EventScript_WallysAuntAnythingHappened
 	goto_if_set FLAG_RUSTURF_TUNNEL_OPENED, VerdanturfTown_WandasHouse_EventScript_WallysAuntTunnelOpen
 	msgbox VerdanturfTown_WandasHouse_Text_DaughtersBoyfriendDriven, MSGBOX_DEFAULT
-	release
-	end
+	goto VerdanturfTown_WandasHouse_EventScript_IndeedeeOffer
 
 VerdanturfTown_WandasHouse_EventScript_WallysAuntTunnelOpen::
 	msgbox VerdanturfTown_WandasHouse_Text_DaughtersBoyfriendWasDigging, MSGBOX_DEFAULT
-	release
-	end
+	goto VerdanturfTown_WandasHouse_EventScript_IndeedeeOffer
 
 VerdanturfTown_WandasHouse_EventScript_WallysAuntAnythingHappened::
 	msgbox VerdanturfTown_WandasHouse_Text_IfAnythingHappenedToWally, MSGBOX_DEFAULT
-	release
-	end
+	goto VerdanturfTown_WandasHouse_EventScript_IndeedeeOffer
 
 VerdanturfTown_WandasHouse_EventScript_WallysAuntEverGrande::
 	msgbox VerdanturfTown_WandasHouse_Text_WallyWasInEverGrande, MSGBOX_DEFAULT
-	release
-	end
+	goto VerdanturfTown_WandasHouse_EventScript_IndeedeeOffer
 
 VerdanturfTown_WandasHouse_Text_StrongerSpeech:
 	.string "WALLY: I lost to you, {PLAYER}, but I'm\n"
@@ -166,3 +162,26 @@ VerdanturfTown_WandasHouse_Text_WallyWasInEverGrande:
 	.string "His parents in PETALBURG would be\n"
 	.string "astonished to hear that!$"
 
+
+VerdanturfTown_WandasHouse_EventScript_MegaGift_GARDEVOIRITE::
+	goto_if_set FLAG_EC_MEGA_GIFT_GARDEVOIRITE, VerdanturfTown_WandasHouse_EventScript_WallysAunt
+	lock
+	faceplayer
+	msgbox VerdanturfTown_WandasHouse_EventScript_MegaGift_GARDEVOIRITE_Text, MSGBOX_DEFAULT
+	giveitem ITEM_GARDEVOIRITE
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_EC_MEGA_GIFT_GARDEVOIRITE
+	release
+	goto VerdanturfTown_WandasHouse_EventScript_WallysAunt
+
+VerdanturfTown_WandasHouse_EventScript_MegaGift_GARDEVOIRITE_Text:
+	.string "Wally and his Ralts have given\n"
+	.string "each other the courage to grow.\p"
+	.string "If you raise a Gardevoir, this\n"
+	.string "stone can deepen that partnership.$"
+
+VerdanturfTown_WandasHouse_EventScript_IndeedeeOffer::
+	setvar VAR_0x8004, 0
+	call Common_EventScript_EmeraldChampionsFormGift
+	release
+	end

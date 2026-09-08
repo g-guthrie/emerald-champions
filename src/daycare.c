@@ -2,7 +2,6 @@
 #include "pokemon.h"
 #include "battle.h"
 #include "daycare.h"
-#include "legendary_signs.h"
 #include "string_util.h"
 #include "caps.h"
 #include "mail.h"
@@ -30,6 +29,8 @@
 #include "constants/moves.h"
 #include "constants/party_menu.h"
 #include "constants/region_map_sections.h"
+
+STATIC_ASSERT(MAPSEC_COUNT <= METLOC_DAYCARE_EGG, DaycareEggOriginDoesNotOverlapMapSections);
 
 #define IS_DITTO(species) (gSpeciesInfo[species].eggGroups[0] == EGG_GROUP_DITTO || gSpeciesInfo[species].eggGroups[1] == EGG_GROUP_DITTO)
 
@@ -1013,6 +1014,12 @@ static void _GiveEggFromDaycare(struct DayCare *daycare)
     RemoveEggFromDayCare(daycare);
 }
 
+static void SetEggHatchCycles(struct Pokemon *mon, enum Species species)
+{
+    u8 cycles = min(gSpeciesInfo[species].eggCycles, 5);
+    SetMonData(mon, MON_DATA_FRIENDSHIP, &cycles);
+}
+
 void CreateEgg(struct Pokemon *mon, enum Species species, bool8 setHotSpringsLocation)
 {
     u8 metLevel;
@@ -1027,7 +1034,7 @@ void CreateEgg(struct Pokemon *mon, enum Species species, bool8 setHotSpringsLoc
     language = LANGUAGE_JAPANESE;
     SetMonData(mon, MON_DATA_POKEBALL, &ball);
     SetMonData(mon, MON_DATA_NICKNAME, sJapaneseEggNickname);
-    SetMonData(mon, MON_DATA_FRIENDSHIP, &gSpeciesInfo[species].eggCycles);
+    SetEggHatchCycles(mon, species);
     SetMonData(mon, MON_DATA_MET_LEVEL, &metLevel);
     SetMonData(mon, MON_DATA_LANGUAGE, &language);
     if (setHotSpringsLocation)
@@ -1051,9 +1058,11 @@ static void SetInitialEggData(struct Pokemon *mon, enum Species species, struct 
     metLevel = 0;
     language = LANGUAGE_JAPANESE;
     SetMonData(mon, MON_DATA_NICKNAME, sJapaneseEggNickname);
-    SetMonData(mon, MON_DATA_FRIENDSHIP, &gSpeciesInfo[species].eggCycles);
+    SetEggHatchCycles(mon, species);
     SetMonData(mon, MON_DATA_MET_LEVEL, &metLevel);
     SetMonData(mon, MON_DATA_LANGUAGE, &language);
+    metloc_u8_t origin = METLOC_DAYCARE_EGG;
+    SetMonData(mon, MON_DATA_MET_LOCATION, &origin);
 }
 
 void GiveEggFromDaycare(void)
@@ -1076,7 +1085,7 @@ static void _IncrementDaycareSteps(struct DayCare *daycare)
     if (daycareParentCount != DAYCARE_MON_COUNT || IsEggPending(daycare))
         return;
 
-    if ((daycare->mons[1].steps & 0xFF) == 0xFF)
+    if ((daycare->mons[1].steps & 0x3F) == 0x3F)
     {
         u8 compatibility = ModifyBreedingScoreForOvalCharm(GetDaycareCompatibilityScore(daycare));
         if (RandomPercentage(RNG_DAYCARE_MAKE_EGG, compatibility))
@@ -1139,7 +1148,8 @@ static bool32 TryToHatchEgg(struct DayCare *daycare)
         if (GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SANITY_IS_BAD_EGG))
             continue;
 
-        eggCycles = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_FRIENDSHIP);
+        // Apply the shorter wait to eggs already present in existing saves too.
+        eggCycles = min(GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_FRIENDSHIP), 5);
         if (eggCycles != 0)
         {
             if (eggCycles >= toSub)
@@ -1254,11 +1264,6 @@ u8 GetDaycareCompatibilityScore(struct DayCare *daycare)
         eggGroups[i][1] = gSpeciesInfo[species[i]].eggGroups[1];
     }
 
-    if (!IsLegendarySignUnlocked(LEGENDARY_SIGN_PHIONE)
-     && (species[0] == SPECIES_MANAPHY || species[1] == SPECIES_MANAPHY
-      || species[0] == SPECIES_PHIONE || species[1] == SPECIES_PHIONE))
-        return PARENTS_INCOMPATIBLE;
-
     // Manaphy is the one Mythical that breeds a distinct species with Ditto.
     // The species calculation already yields Phione; allow that native pair
     // through the otherwise-correct Undiscovered egg-group gate.
@@ -1325,18 +1330,6 @@ void SetDaycareCompatibilityString(void)
     u8 relationshipScore;
 
     relationshipScore = GetDaycareCompatibilityScoreFromSave();
-    if (!IsLegendarySignUnlocked(LEGENDARY_SIGN_PHIONE))
-    {
-        for (u32 i = 0; i < DAYCARE_MON_COUNT; i++)
-        {
-            enum Species species = GetBoxMonData(&gSaveBlock1Ptr->daycare.mons[i].mon, MON_DATA_SPECIES);
-            if (species == SPECIES_MANAPHY || species == SPECIES_PHIONE)
-            {
-                StringCopy(gStringVar4, COMPOUND_STRING("These Pokémon may hold PHIONE's secret.\pFirst, ask the dream researcher on\nDEVON CORP.'s second floor in RUSTBORO\lto translate PHIONE's Legendary Sign."));
-                return;
-            }
-        }
-    }
     whichString = 0;
     if (relationshipScore == PARENTS_INCOMPATIBLE)
         whichString = 3;

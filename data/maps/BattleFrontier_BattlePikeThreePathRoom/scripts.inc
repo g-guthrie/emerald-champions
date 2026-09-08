@@ -1,7 +1,4 @@
 BattleFrontier_BattlePikeThreePathRoom_MapScripts::
-	map_script MAP_SCRIPT_ON_RESUME, BattleFrontier_BattlePikeRoom_OnResume
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattlePikeThreePathRoom_OnFrame
-	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattlePikeThreePathRoom_OnWarp
 	.byte 0
 
 BattleFrontier_BattlePikeThreePathRoom_OnFrame:

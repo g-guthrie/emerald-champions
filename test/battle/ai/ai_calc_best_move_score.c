@@ -18,7 +18,9 @@ AI_SINGLE_BATTLE_TEST("AI will not further increase Attack / Sp. Atk stat if it 
         OPPONENT(SPECIES_KANGASKHAN) { Speed(20); Moves(MOVE_CHIP_AWAY, MOVE_SWIFT, move); }
     } WHEN {
         TURN { MOVE(player, MOVE_SKY_UPPERCUT); EXPECT_MOVE(opponent, move); }
-        TURN { EXPECT_MOVE(opponent, MOVE_CHIP_AWAY); MOVE(player, MOVE_SKY_UPPERCUT); }
+        // Either attack satisfies this contract; Calm Mind can make Swift
+        // preferable. What must never win here is another setup turn.
+        TURN { EXPECT_MOVES(opponent, MOVE_CHIP_AWAY, MOVE_SWIFT); MOVE(player, MOVE_SKY_UPPERCUT); }
     }
 }
 
@@ -38,7 +40,7 @@ AI_SINGLE_BATTLE_TEST("AI will not further increase Attack / Sp. Atk stat if it 
         OPPONENT(SPECIES_KANGASKHAN) { Speed(15); Moves(MOVE_CHIP_AWAY, MOVE_SWIFT, move); }
     } WHEN {
         TURN { MOVE(player, MOVE_DOUBLE_KICK); EXPECT_MOVE(opponent, move); }
-        TURN { EXPECT_MOVE(opponent, MOVE_CHIP_AWAY); MOVE(player, MOVE_DOUBLE_KICK); }
+        TURN { EXPECT_MOVES(opponent, MOVE_CHIP_AWAY, MOVE_SWIFT); MOVE(player, MOVE_DOUBLE_KICK); }
     }
 }
 
@@ -70,7 +72,7 @@ AI_SINGLE_BATTLE_TEST("AI will not waste a turn setting up if it knows target ca
         OPPONENT(SPECIES_KANGASKHAN) { Speed(20); Moves(MOVE_CHIP_AWAY, MOVE_SWIFT, move); }
     } WHEN {
         TURN { MOVE(player, MOVE_DOUBLE_KICK); EXPECT_MOVE(opponent, move); }
-        TURN { EXPECT_MOVE(opponent, MOVE_CHIP_AWAY); MOVE(player, MOVE_SKY_UPPERCUT); }
+        TURN { EXPECT_MOVES(opponent, MOVE_CHIP_AWAY, MOVE_SWIFT); MOVE(player, MOVE_SKY_UPPERCUT); }
     }
 }
 

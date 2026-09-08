@@ -32,7 +32,7 @@ VerdanturfTown_FriendshipRatersHouse_Text_TradeHappiny:
 
 VerdanturfTown_FriendshipRatersHouse_Text_TradeComplete:
 	.string "Thank you. Friendship is the best\n"
-	.string "training HAPPINY can receive.$"
+	.string "training CHANSEY can receive.$"
 
 VerdanturfTown_FriendshipRatersHouse_Text_TradeDeclined:
 	.string "That's all right. A trade should never\n"
@@ -43,8 +43,8 @@ VerdanturfTown_FriendshipRatersHouse_Text_NeedRequestedMon:
 	.string "the partner we discussed.$"
 
 VerdanturfTown_FriendshipRatersHouse_Text_HappinyDoingWell:
-	.string "Your friendship tells me HAPPINY found\n"
-	.string "the right TRAINER.$"
+	.string "CHANSEY and DITTO at the DAY CARE\n"
+	.string "can have a HAPPINY EGG.$"
 
 VerdanturfTown_FriendshipRatersHouse_EventScript_FriendshipRater::
 	lock
@@ -59,43 +59,35 @@ VerdanturfTown_FriendshipRatersHouse_EventScript_FriendshipRater::
 	case FRIENDSHIP_150_TO_199, VerdanturfTown_FriendshipRatersHouse_EventScript_LikesYouQuiteALot
 	case FRIENDSHIP_200_TO_254, VerdanturfTown_FriendshipRatersHouse_EventScript_VeryHappy
 	case FRIENDSHIP_MAX, VerdanturfTown_FriendshipRatersHouse_EventScript_AdoresYou
-	release
-	end
+	goto VerdanturfTown_FriendshipRatersHouse_EventScript_Bonding
 
 VerdanturfTown_FriendshipRatersHouse_EventScript_DetestsYou::
 	msgbox VerdanturfTown_FriendshipRatersHouse_Text_DetestsYou, MSGBOX_DEFAULT
-	release
-	end
+	goto VerdanturfTown_FriendshipRatersHouse_EventScript_Bonding
 
 VerdanturfTown_FriendshipRatersHouse_EventScript_VeryWary::
 	msgbox VerdanturfTown_FriendshipRatersHouse_Text_VeryWary, MSGBOX_DEFAULT
-	release
-	end
+	goto VerdanturfTown_FriendshipRatersHouse_EventScript_Bonding
 
 VerdanturfTown_FriendshipRatersHouse_EventScript_NotUsedToYou::
 	msgbox VerdanturfTown_FriendshipRatersHouse_Text_NotUsedToYou, MSGBOX_DEFAULT
-	release
-	end
+	goto VerdanturfTown_FriendshipRatersHouse_EventScript_Bonding
 
 VerdanturfTown_FriendshipRatersHouse_EventScript_GettingUsedToYou::
 	msgbox VerdanturfTown_FriendshipRatersHouse_Text_GettingUsedToYou, MSGBOX_DEFAULT
-	release
-	end
+	goto VerdanturfTown_FriendshipRatersHouse_EventScript_Bonding
 
 VerdanturfTown_FriendshipRatersHouse_EventScript_LikesYouQuiteALot::
 	msgbox VerdanturfTown_FriendshipRatersHouse_Text_LikesYouQuiteALot, MSGBOX_DEFAULT
-	release
-	end
+	goto VerdanturfTown_FriendshipRatersHouse_EventScript_Bonding
 
 VerdanturfTown_FriendshipRatersHouse_EventScript_VeryHappy::
 	msgbox VerdanturfTown_FriendshipRatersHouse_Text_VeryHappy, MSGBOX_DEFAULT
-	release
-	end
+	goto VerdanturfTown_FriendshipRatersHouse_EventScript_Bonding
 
 VerdanturfTown_FriendshipRatersHouse_EventScript_AdoresYou::
 	msgbox VerdanturfTown_FriendshipRatersHouse_Text_AdoresYou, MSGBOX_DEFAULT
-	release
-	end
+	goto VerdanturfTown_FriendshipRatersHouse_EventScript_Bonding
 
 VerdanturfTown_FriendshipRatersHouse_EventScript_Pikachu::
 	lock
@@ -146,3 +138,25 @@ VerdanturfTown_FriendshipRatersHouse_Text_DetestsYou:
 
 VerdanturfTown_FriendshipRatersHouse_Text_Pikachu:
 	.string "PIKACHU: Pika pika!$"
+
+VerdanturfTown_FriendshipRatersHouse_EventScript_MegaGift_RAICHUNITE_X::
+	goto_if_set FLAG_EC_MEGA_GIFT_RAICHUNITE_X, VerdanturfTown_FriendshipRatersHouse_EventScript_FriendshipRater
+	lock
+	faceplayer
+	msgbox VerdanturfTown_FriendshipRatersHouse_EventScript_MegaGift_RAICHUNITE_X_Text, MSGBOX_DEFAULT
+	giveitem ITEM_RAICHUNITE_X
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_EC_MEGA_GIFT_RAICHUNITE_X
+	release
+	goto VerdanturfTown_FriendshipRatersHouse_EventScript_FriendshipRater
+
+VerdanturfTown_FriendshipRatersHouse_EventScript_MegaGift_RAICHUNITE_X_Text:
+	.string "A little Pichu can grow into\n"
+	.string "a wonderful traveling companion.\p"
+	.string "This stone is for a Raichu.\n"
+	.string "Friendship is where it all begins.$"
+
+VerdanturfTown_FriendshipRatersHouse_EventScript_Bonding::
+	call Common_EventScript_EmeraldChampionsBonding
+	release
+	end

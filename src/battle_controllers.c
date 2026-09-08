@@ -1,4 +1,5 @@
 #include "global.h"
+#include "emerald_champions_opening.h"
 #include "battle.h"
 #include "battle_ai_main.h"
 #include "battle_ai_util.h"
@@ -151,7 +152,9 @@ void SetUpBattleVarsAndBirchZigzagoon(void)
     BattleAI_SetupItems();
     BattleAI_SetupFlags();
 
-    if (!IS_FRLG && gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
+    if (IsEmeraldChampionsBirchRescueBattle())
+        CreateEmeraldChampionsBirchRescueParty();
+    else if (!IS_FRLG && gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
         CreateWildMon(SPECIES_ZIGZAGOON, 2);
 }
 

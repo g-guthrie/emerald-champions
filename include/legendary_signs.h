@@ -90,12 +90,15 @@ enum LegendarySignId
     LEGENDARY_SIGN_VOLCANION,
     LEGENDARY_SIGN_KELDEO,
     LEGENDARY_SIGN_OGERPON,
+    LEGENDARY_SIGN_ARTICUNO_GALAR,
+    LEGENDARY_SIGN_ZAPDOS_GALAR,
+    LEGENDARY_SIGN_MOLTRES_GALAR,
     LEGENDARY_SIGN_COUNT,
 };
 
 enum LegendarySignSource
 {
-    LEGENDARY_SOURCE_CONDITIONAL_WILD,
+    LEGENDARY_SOURCE_LANDMARK,
     LEGENDARY_SOURCE_VISIBLE,
     LEGENDARY_SOURCE_BREEDING,
     LEGENDARY_SOURCE_GAME_CORNER,
@@ -111,8 +114,6 @@ struct LegendarySignDefinition
     enum Species requiredSpecies;
     u16 requiredFlag;
     enum LegendarySignSource source;
-    enum WildPokemonArea area;
-    u8 chance;
     u8 minimumBadges;
     s8 levelOffset;
 };
@@ -121,19 +122,13 @@ extern const struct LegendarySignDefinition gLegendarySignDefinitions[LEGENDARY_
 
 bool32 IsLegendarySignUnlocked(enum LegendarySignId signId);
 bool32 IsLegendarySignCaught(enum LegendarySignId signId);
-bool32 IsLegendaryEncounterLost(enum Species species);
-bool32 IsOneShotLegendarySpecies(enum Species species);
 bool32 CanAcquireLegendarySignSpecies(enum Species species);
-void MarkLegendaryEncounterLost(enum Species species);
 void UnlockLegendarySign(enum LegendarySignId signId);
-void InitializeLegendaryRelicDeliveryState(void);
 void RetryPendingLegendaryRelics(void);
 void MarkLegendarySignCaughtBySpecies(enum Species species);
 enum LegendarySignId GetLegendarySignIdBySpecies(enum Species species);
-bool32 TryGetLegendarySignWildOverride(enum WildPokemonArea area, enum Species *species, u8 *level);
 bool32 PlayerPartyHasSpeciesFamily(enum Species species);
 bool32 IsLegendarySignOrdinaryWildSpecies(enum Species species);
-bool32 IsLegendarySignConditionalWildSpecies(enum Species species);
 void DoesPlayerPartyHaveSelectedSpeciesFamily(void);
 void TryUnlockSelectedLegendarySign(void);
 u16 GetSelectedLegendarySignState(void);
@@ -144,6 +139,10 @@ void TryGiveSelectedLegendarySignReward(void);
 void CreateEmeraldChampionsStaticLegendaryEncounter(void);
 void TryUnlockDarkraiLegendarySign(void);
 void BuildLegendarySignResearchMenu(void);
+void BuildLocalLegendarySignMenu(void);
+void ResetLegendaryEncounterVisits(void);
+void FinishLegendaryLandmarkEncounter(void);
+void HideRestingLegendaryObject(void);
 void ResearchSelectedLegendarySign(void);
 void TryGiveArceusLegendarySignMasteryReward(void);
 u8 GiveLegendarySignReward(enum Species species, u8 level);

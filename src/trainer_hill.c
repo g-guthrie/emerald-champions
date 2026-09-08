@@ -1,4 +1,7 @@
 #include "global.h"
+#include "caps.h"
+#include "champions_circuit.h"
+#include "difficulty.h"
 #include "malloc.h"
 #include "battle.h"
 #include "battle_tower.h"
@@ -76,7 +79,6 @@ static void TrainerHillDummy(void);
 static void SetTimerValue(u32 *dst, u32 val);
 static u32 GetTimerValue(u32 *src);
 #endif //FREE_TRAINER_HILL
-static void SetTrainerHillMonLevel(struct Pokemon *mon, u8 level);
 #if FREE_TRAINER_HILL == FALSE
 static enum Item GetPrizeItemId(void);
 #endif //FREE_TRAINER_HILL
@@ -277,11 +279,7 @@ static const u32 sNextFloorMapNum[NUM_TRAINER_HILL_FLOORS] =
     [TRAINER_HILL_3F - 1] = MAP_NUM(MAP_TRAINER_HILL_4F),
     [TRAINER_HILL_4F - 1] = MAP_NUM(MAP_TRAINER_HILL_ROOF)
 };
-static const u8 sTrainerPartySlots[HILL_TRAINERS_PER_FLOOR][PARTY_SIZE / 2] =
-{
-    {0, 1, 2},
-    {3, 4, 5}
-};
+
 
 void CallTrainerHillFunction(void)
 {
@@ -423,6 +421,7 @@ static void TrainerHillStartChallenge(void)
     gSaveBlock1Ptr->trainerHill.spokeToOwner = 0;
     gSaveBlock1Ptr->trainerHill.checkedFinalTime = 0;
     gSaveBlock1Ptr->trainerHill.maybeECardScanDuringChallenge = 0;
+    gSaveBlock1Ptr->trainerHill.hasLost = FALSE;
     gSaveBlock2Ptr->frontier.trainerFlags = 0;
     gBattleOutcome = 0;
     gSaveBlock1Ptr->trainerHill.receivedPrize = 0;
@@ -432,6 +431,15 @@ static void TrainerHillStartChallenge(void)
 static void GetOwnerState(void)
 {
 #if FREE_TRAINER_HILL == FALSE
+    u32 completedFloors = (1u << (sHillData->challenge.numFloors * HILL_TRAINERS_PER_FLOOR)) - 1;
+
+    if (!gSaveBlock1Ptr->trainerHill.spokeToOwner
+     && (VarGet(VAR_TRAINER_HILL_IS_ACTIVE) == 0 || gSaveBlock1Ptr->trainerHill.hasLost
+         || (gSaveBlock2Ptr->frontier.trainerFlags & completedFloors) != completedFloors))
+    {
+        gSpecialVar_Result = 3;
+        return;
+    }
     ClearTrainerHillVBlankCounter();
     gSpecialVar_Result = 0;
     if (gSaveBlock1Ptr->trainerHill.spokeToOwner)
@@ -493,7 +501,10 @@ static void CheckFinalTime(void)
 static void TrainerHillResumeTimer(void)
 {
 #if FREE_TRAINER_HILL == FALSE
-    if (!gSaveBlock1Ptr->trainerHill.spokeToOwner)
+    if (VarGet(VAR_TRAINER_HILL_IS_ACTIVE) == 0 || gSaveBlock1Ptr->trainerHill.hasLost
+     || gSaveBlock1Ptr->trainerHill.spokeToOwner)
+        ClearTrainerHillVBlankCounter();
+    else
     {
         if (gSaveBlock1Ptr->trainerHill.timer >= HILL_MAX_TIME)
             gSaveBlock1Ptr->trainerHill.timer = HILL_MAX_TIME;
@@ -506,6 +517,7 @@ static void TrainerHillResumeTimer(void)
 static void TrainerHillSetPlayerLost(void)
 {
 #if FREE_TRAINER_HILL == FALSE
+    ClearTrainerHillVBlankCounter();
     gSaveBlock1Ptr->trainerHill.hasLost = TRUE;
 #endif //FREE_TRAINER_HILL
 }
@@ -879,41 +891,26 @@ static void ShowTrainerHillPostBattleText(void)
     ShowFieldMessageFromBuffer();
 }
 
-static void CreateNPCTrainerHillParty(u16 trainerId, enum BattleTrainer trainer)
+bool32 FillHillTrainersParties(void)
 {
-    u8 trId, level;
-    s32 i, floorId, partySlot;
+    u8 level = max(1, min(MAX_LEVEL, GetCurrentLevelCap()) - GetTrainerLevelReduction());
 
-    if (trainerId == 0 || trainerId > HILL_TRAINERS_PER_FLOOR)
-        return;
-
-    trId = trainerId - 1;
-    SetUpDataStruct();
-    level = GetHighestLevelInPlayerParty();
-    floorId = GetFloorId();
-    for (i = 0, partySlot = 0; i < MULTI_PARTY_SIZE; i++, partySlot++)
+    if (!CreateChampionsExhibitionParty(level))
+        return FALSE;
+    // The generator supplies one coordinated team. Preserve both chosen leads
+    // while splitting the four reserves between the two native owners.
+    gParties[B_TRAINER_OPPONENT_B][0] = gParties[B_TRAINER_OPPONENT_A][1];
+    gParties[B_TRAINER_OPPONENT_B][1] = gParties[B_TRAINER_OPPONENT_A][4];
+    gParties[B_TRAINER_OPPONENT_B][2] = gParties[B_TRAINER_OPPONENT_A][5];
+    gParties[B_TRAINER_OPPONENT_A][1] = gParties[B_TRAINER_OPPONENT_A][2];
+    gParties[B_TRAINER_OPPONENT_A][2] = gParties[B_TRAINER_OPPONENT_A][3];
+    for (u32 slot = MULTI_PARTY_SIZE; slot < PARTY_SIZE; slot++)
     {
-        u8 id = sTrainerPartySlots[trId][partySlot];
-        struct Pokemon *mon = &gParties[trainer][i];
-
-        CreateBattleTowerMon(mon, &sHillData->floors[floorId].trainers[trId].mons[id]);
-        SetTrainerHillMonLevel(mon, level);
+        ZeroMonData(&gParties[B_TRAINER_OPPONENT_A][slot]);
+        ZeroMonData(&gParties[B_TRAINER_OPPONENT_B][slot]);
     }
-
-    FreeDataStruct();
-}
-
-void FillHillTrainerParty(void)
-{
-    ZeroEnemyPartyMons();
-    CreateNPCTrainerHillParty(TRAINER_BATTLE_PARAM.opponentA, B_TRAINER_OPPONENT_A);
-}
-
-void FillHillTrainersParties(void)
-{
-    ZeroEnemyPartyMons();
-    CreateNPCTrainerHillParty(TRAINER_BATTLE_PARAM.opponentA, B_TRAINER_OPPONENT_A);
-    CreateNPCTrainerHillParty(TRAINER_BATTLE_PARAM.opponentB, B_TRAINER_OPPONENT_B);
+    CalculateEnemyPartyCount();
+    return TRUE;
 }
 
 u8 GetTrainerEncounterMusicIdInTrainerHill(u16 trainerId)
@@ -935,15 +932,7 @@ u8 GetTrainerEncounterMusicIdInTrainerHill(u16 trainerId)
     return 0;
 }
 
-static void SetTrainerHillMonLevel(struct Pokemon *mon, u8 level)
-{
-    enum Species species = GetMonData(mon, MON_DATA_SPECIES);
-    u32 exp = gExperienceTables[gSpeciesInfo[species].growthRate][level];
 
-    SetMonData(mon, MON_DATA_EXP, &exp);
-    SetMonData(mon, MON_DATA_LEVEL, &level);
-    CalculateMonStats(mon);
-}
 
 u8 GetNumFloorsInTrainerHillChallenge(void)
 {
@@ -1107,3 +1096,17 @@ static enum Item GetPrizeItemId(void)
     return prizeList[id];
 }
 #endif //FREE_TRAINER_HILL
+
+void TrainerHillHasPendingPrize(void)
+{
+    gSpecialVar_Result = gSaveBlock1Ptr->trainerHill.spokeToOwner
+        && !gSaveBlock1Ptr->trainerHill.receivedPrize;
+}
+
+void AbortTrainerHillChallenge(void)
+{
+    ClearTrainerHillVBlankCounter();
+    TrainerHillSetPlayerLost();
+    SetAllTrainerFlags();
+    gBattleOutcome = 0;
+}

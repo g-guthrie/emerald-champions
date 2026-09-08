@@ -273,11 +273,7 @@ SINGLE_BATTLE_TEST("Focus Punch failing occurs before flinching (Gen 5+)")
     }
 }
 
-TO_DO_BATTLE_TEST("Focus Punch activates when the user is hit by a status move");
-TO_DO_BATTLE_TEST("Focus Punch losing focus is considered as the last move used (Gen 3-4)"); //Eg. Encore
-TO_DO_BATTLE_TEST("Focus Punch losing focus is not considered as the last move used (Gen 5+)"); //Eg. Encore
-TO_DO_BATTLE_TEST("Focus Punch's initial message is not considered as using the move for Zoom Lens");
-TO_DO_BATTLE_TEST("Focus Punch will use the selected move's priority when being Encored into Focus Punch");
+
 
 SINGLE_BATTLE_TEST("Focus Punch's initial message is not shown if the user selected a different move and was Encored into using Focus Punch (Gen9-)")
 {

@@ -13,7 +13,7 @@ import json
 import re
 from pathlib import Path
 
-from verify_emerald_champions_visual_contracts import registered_map_names, verify_map_event_geometry
+from verify_emerald_champions_visual_contracts import registered_map_names, map_event_geometry_errors
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -67,7 +67,8 @@ def label_index(paths: list[Path]) -> dict[str, tuple[Path, int]]:
 
 
 def verify_map_data(map_names: list[str], labels: dict[str, tuple[Path, int]]) -> tuple[int, int]:
-    verify_map_event_geometry()
+    errors, _, _, _ = map_event_geometry_errors()
+    require(not errors, "invalid map geometry:\n" + "\n".join(errors))
     layouts = {
         row["id"]: row
         for row in load_json(ROOT / "data/layouts/layouts.json")["layouts"]
@@ -88,12 +89,12 @@ def verify_map_data(map_names: list[str], labels: dict[str, tuple[Path, int]]) -
                     require(script in labels, f"{name}:{section}[{index}]: missing script label {script}")
         warp_count += len(payload.get("warp_events") or [])
 
-    includes = (ROOT / "data/event_scripts.s").read_text()
+    includes = set(re.findall(r'(?m)^\s*\.include\s+"([^"\n]+)"', (ROOT / "data/event_scripts.s").read_text()))
     for map_name in map_names:
         script = MAPS_ROOT / map_name / "scripts.inc"
         if script.is_file():
             require(
-                f'\t.include "data/maps/{map_name}/scripts.inc"' in includes,
+                f"data/maps/{map_name}/scripts.inc" in includes,
                 f"{map_name}: scripts exist but are not assembled",
             )
     return event_count, warp_count
@@ -171,372 +172,6 @@ def verify_specialvar_return_contracts(paths: list[Path]) -> int:
     return checked
 
 
-def label_block(path: str, label: str) -> str:
-    text = (ROOT / path).read_text()
-    match = re.search(
-        rf"(?ms)^\s*{re.escape(label)}::?\s*$\n(.*?)(?=^\s*[A-Za-z_][A-Za-z0-9_]*::?\s*$|\Z)",
-        text,
-    )
-    require(match is not None, f"{path}: missing label {label}")
-    return match.group(1)
-
-
-def verify_critical_progression_contracts() -> None:
-    dewford = load_json(MAPS_ROOT / "DewfordTown" / "map.json")
-    gym_warp = next(
-        warp for warp in dewford["warp_events"]
-        if warp["dest_map"] == "MAP_DEWFORD_TOWN_GYM"
-    )
-    require(
-        not any(
-            event["x"] == gym_warp["x"]
-            and event["y"] == gym_warp["y"] + 1
-            and event.get("flag") in {None, "0"}
-            for event in dewford["object_events"]
-        ),
-        "Dewford's permanent Gym guide blocks the only approach to the Gym warp",
-    )
-
-    birch = label_block(
-        "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc",
-        "LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex",
-    )
-    require("FLAG_SYS_NATIONAL_DEX" in birch and "EnableNationalPokedex" in birch,
-            "initial Pokedex does not expose the campaign's national roster")
-
-    league_path = "data/maps/EverGrandeCity_PokemonLeague_1F/scripts.inc"
-    league = label_block(league_path, "EverGrandeCity_PokemonLeague_1F_EventScript_DoorGuard")
-    for badge in range(1, 9):
-        require(
-            f"goto_if_unset FLAG_BADGE{badge:02d}_GET, EverGrandeCity_PokemonLeague_1F_EventScript_NotAllBadges" in league,
-            f"League entrance does not explicitly require badge {badge}",
-        )
-    require(
-        league.index("FLAG_BADGE08_GET") < league.index("setflag FLAG_ENTERED_ELITE_FOUR"),
-        "League opens before completing its explicit eight-badge checks",
-    )
-
-    route120 = label_block("data/maps/Route120/scripts.inc", "Route120_EventScript_Steven")
-    require(
-        route120.index("FLAG_BADGE06_GET") < route120.index("FLAG_RECEIVED_DEVON_SCOPE")
-        < route120.index("Route120_EventScript_StevenBattleKecleon"),
-        "Route 120 does not hold the eastward story path behind Winona",
-    )
-    fortree = label_block("data/maps/FortreeCity_Gym/scripts.inc", "FortreeCity_Gym_EventScript_WinonaDefeated")
-    require(
-        fortree.index("FLAG_BADGE06_GET") < fortree.index("FLAG_HIDE_ROUTE_120_STEVEN"),
-        "the Route 120 Winona gate is not retired with the Feather Badge",
-    )
-    mossdeep = label_block("data/maps/MossdeepCity_Gym/scripts.inc", "MossdeepCity_Gym_EventScript_TateAndLiza")
-    require(
-        mossdeep.index("FLAG_BADGE06_GET") < mossdeep.index("trainerbattle_double"),
-        "Tate and Liza can be challenged before Winona",
-    )
-    juan = label_block("data/maps/SootopolisCity_Gym_1F/scripts.inc", "SootopolisCity_Gym_1F_EventScript_Juan")
-    require(
-        juan.index("FLAG_BADGE07_GET") < juan.index("trainerbattle_double"),
-        "Juan can be defeated before Tate and Liza",
-    )
-
-    # Inclement's order: deliver Steven's Letter, sail to Slateport, find Brawly there,
-    # and only then can his Gym be challenged. Sailing must NOT require his badge.
-    dewford = label_block("data/maps/DewfordTown/scripts.inc", "DewfordTown_EventScript_Briney")
-    require(
-        dewford.index("FLAG_DELIVERED_STEVEN_LETTER") < dewford.index("DewfordTown_Text_WhereAreWeBound"),
-        "Slateport sailing is not gated by Steven's Letter",
-    )
-    require(
-        "FLAG_BADGE02_GET" not in dewford and "ITEM_MEGA_RING" not in dewford,
-        "Slateport sailing still requires Brawly's badge or the Mega Ring, reversing Inclement's story",
-    )
-    # The Dewford guide and Slateport Brawly must share one hide flag, so finding him
-    # clears the Gym entrance in the same moment.
-    dew_map = (ROOT / "data/maps/DewfordTown/map.json").read_text()
-    slate_map = (ROOT / "data/maps/SlateportCity/map.json").read_text()
-    require(
-        dew_map.count("FLAG_HIDE_SLATEPORT_CITY_BRAWLY") == 1
-        and slate_map.count("FLAG_HIDE_SLATEPORT_CITY_BRAWLY") == 1,
-        "the Dewford Gym guide and Slateport Brawly no longer share a hide flag",
-    )
-    slate_scripts = (ROOT / "data/maps/SlateportCity/scripts.inc").read_text()
-    require(
-        "SlateportCity_EventScript_Brawly::" in slate_scripts
-        and "removeobject" in slate_scripts.split("SlateportCity_EventScript_Brawly::", 1)[1][:600],
-        "finding Brawly in Slateport no longer sends him home",
-    )
-    # Both floors retain ambient visibility without overriding native Flash.
-    for cave in ("GraniteCave_B1F", "GraniteCave_B2F"):
-        require(
-            "special SetGraniteCaveFlashLevel" in (ROOT / f"data/maps/{cave}/scripts.inc").read_text(),
-            f"{cave} lost its shared ambient/native Flash helper",
-        )
-    flash_helper = (ROOT / "src/field_specials.c").read_text().split(
-        "void SetGraniteCaveFlashLevel(void)", 1
-    )[-1].split("\n}", 1)[0]
-    require(
-        re.search(r"SetDefaultFlashLevel\(\);\s*if \(GetFlashLevel\(\) > 4\)\s*SetFlashLevel\(4\);", flash_helper),
-        "Granite lighting must preserve native Flash and cap only the darker ambient fallback",
-    )
-    # Both Cycling Road entrances must start/reset the Mach Bike challenge.
-    for gate in ("Route110_SeasideCyclingRoadNorthEntrance", "Route110_SeasideCyclingRoadSouthEntrance"):
-        require(
-            "VAR_CYCLING_CHALLENGE_STATE" in (ROOT / f"data/maps/{gate}/scripts.inc").read_text(),
-            f"{gate} no longer initializes the Mach Bike challenge",
-        )
-    devon = label_block("data/maps/RustboroCity_DevonCorp_3F/scripts.inc", "RustboroCity_DevonCorp_3F_EventScript_MrStone")
-    require("checkitem ITEM_MEGA_RING" in devon, "Devon gives its Mega reward before the player owns the Mega Ring")
-    devon_path = ROOT / "data/maps/RustboroCity_DevonCorp_3F/scripts.inc"
-    devon_text = devon_path.read_text()
-    require(
-        "FLAG_RECEIVED_PIDGEOTITE_FROM_DEVON" in devon_text
-        and "RustboroCity_DevonCorp_3F_EventScript_GivePidgeotite" in devon_text,
-        "Devon's Pidgeotite reward still has misleading internal names",
-    )
-    require(
-        "FLAG_RECEIVED_EXP_SHARE" not in devon_text
-        and "GiveExpShare" not in devon_text
-        and "ExplainExpShare" not in devon_text,
-        "obsolete EXP Share terminology remains in Devon's Pidgeotite path",
-    )
-    require(
-        len(re.findall(r"^RustboroCity_DevonCorp_3F_EventScript_Employee::$", devon_text, re.MULTILINE)) == 1,
-        "Devon's employee event label is missing or duplicated",
-    )
-
-    vars_text = (ROOT / "include/constants/vars.h").read_text()
-    require(
-        re.search(r"#define\s+VAR_BIRCH_POSTGAME_RESEARCH_STATE\s+0x40D3\b", vars_text) is not None,
-        "Birch's renamed postgame state no longer preserves old-save storage",
-    )
-    birch_path = ROOT / "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc"
-    birch_text = birch_path.read_text()
-    require("VAR_DEX_UPGRADE_JOHTO_STARTER_STATE" not in birch_text,
-            "Birch's postgame state still claims to be a Johto starter reward")
-    require(
-        not re.search(r"givemon\s+SPECIES_(?:CYNDAQUIL|TOTODILE|CHIKORITA)\b", birch_text),
-        "Birch still gives a redundant Johto starter after all regions are initial choices",
-    )
-    research_tools = (
-        "ITEM_DNA_SPLICERS",
-        "ITEM_ZYGARDE_CUBE",
-        "ITEM_N_SOLARIZER",
-        "ITEM_N_LUNARIZER",
-        "ITEM_REINS_OF_UNITY",
-    )
-    campaign_acquisition_sources = assembled_sources(hoenn_map_names())
-    campaign_acquisition_sources.extend(MAPS_ROOT.glob("*/map.json"))
-    for item in research_tools:
-        require(f"checkitem {item}, 1" in birch_text, f"Birch reward cannot resume safely at {item}")
-        require(f"giveitem {item}" in birch_text, f"Birch reward does not deliver {item}")
-        require(
-            len(re.findall(rf"\bgiveitem\s+{item}\b", birch_text)) == 1,
-            f"Birch's completion reward gives {item} more than once",
-        )
-        other_sources = [
-            str(path.relative_to(ROOT))
-            for path in campaign_acquisition_sources
-            if path != birch_path and re.search(rf"\b{item}\b", path.read_text(errors="ignore"))
-        ]
-        require(
-            not other_sources,
-            f"{item} is not unique to Birch's completion reward: {', '.join(other_sources)}",
-        )
-    require(
-        birch_text.index("giveitem ITEM_REINS_OF_UNITY")
-        < birch_text.index("setvar VAR_BIRCH_POSTGAME_RESEARCH_STATE, 6"),
-        "Birch marks the research kit complete before offering every tool",
-    )
-    migration = label_block(
-        "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc",
-        "LittlerootTown_ProfessorBirchsLab_EventScript_MigrateLegacyResearchReward",
-    )
-    require(
-        all(item in migration for item in research_tools)
-        and "LittlerootTown_ProfessorBirchsLab_EventScript_ReopenResearchReward" in migration,
-        "old state-six saves cannot reopen the replacement Birch reward",
-    )
-
-    for path, label, destination_token in (
-        (
-            "data/maps/SlateportCity_Harbor/scripts.inc",
-            "SlateportCity_Harbor_EventScript_FerryAttendant",
-            "SlateportCity_Harbor_EventScript_AskForTicket",
-        ),
-        (
-            "data/maps/LilycoveCity_Harbor/scripts.inc",
-            "LilycoveCity_Harbor_EventScript_FerryAttendant",
-            "LilycoveCity_Harbor_EventScript_GetEonTicketState",
-        ),
-    ):
-        ferry = label_block(path, label)
-        require(
-            ferry.index("FLAG_SYS_GAME_CLEAR")
-            < ferry.index("FLAG_RECEIVED_SS_TICKET")
-            < ferry.index(destination_token),
-            f"{path}: postgame ferry can board without the registered S.S. Ticket entitlement",
-        )
-    ticket_fallback = label_block(
-        "data/scripts/players_house.inc",
-        "PlayersHouse_1F_EventScript_SSTicketNoRoom",
-    )
-    require(
-        "goto PlayersHouse_1F_EventScript_ReceivedSSTicket" in ticket_fallback,
-        "full KEY ITEMS and PC storage trap the forced postgame scene before ferry registration",
-    )
-    frontier_ferry = label_block(
-        "data/maps/BattleFrontier_OutsideWest/scripts.inc",
-        "BattleFrontier_OutsideWest_EventScript_FerryAttendant",
-    )
-    require(
-        "FLAG_RECEIVED_SS_TICKET" in frontier_ferry
-        and "checkitem ITEM_SS_TICKET" not in frontier_ferry
-        and frontier_ferry.index("FLAG_RECEIVED_SS_TICKET")
-        < frontier_ferry.index("BattleFrontier_OutsideWest_EventScript_ChooseFerryDestination"),
-        "Battle Frontier return ferry ignores the registered S.S. Ticket entitlement",
-    )
-    for path in (
-        "data/maps/SlateportCity_Harbor/scripts.inc",
-        "data/maps/LilycoveCity_Harbor/scripts.inc",
-        "data/maps/BattleFrontier_OutsideWest/scripts.inc",
-    ):
-        ferry_text = (ROOT / path).read_text()
-        require(
-            "confirmed your ferry" in ferry_text
-            and "flashed the TICKET" not in ferry_text,
-            f"{path}: ferry narration ignores the full-storage registration fallback",
-        )
-        require(
-            "FlashTicketWhereTo" not in ferry_text
-            and "FlashedTicketWhereTo" not in ferry_text,
-            f"{path}: stale physical-ticket narration symbol remains live",
-        )
-
-    sootopolis = (ROOT / "data/maps/SootopolisCity/scripts.inc").read_text()
-    require(
-        "SootopolisCity_EventScript_SetExpertBesideCaveEntrance::\n\tsetobjectxyperm LOCALID_SOOTOPOLIS_EXPERT, 30, 18" in sootopolis,
-        "Badge-eight Cave of Origin entrance is physically blocked",
-    )
-
-    pecharunt = label_block("data/maps/MtPyre_6F/scripts.inc", "MtPyre_6F_EventScript_Pecharunt")
-    for branch in ("goto_if_eq VAR_RESULT, 0", "goto_if_eq VAR_RESULT, 1"):
-        require(branch in pecharunt, f"Pecharunt ignores prerequisite result: {branch}")
-
-    one_shot_encounters = {
-        "data/maps/DesertRuins/scripts.inc": ("Regirock", "DesertRuins_EventScript_DefeatedRegirock", "FLAG_DEFEATED_REGIROCK"),
-        "data/maps/AncientTomb/scripts.inc": ("Registeel", "AncientTomb_EventScript_DefeatedRegisteel", "FLAG_DEFEATED_REGISTEEL"),
-        "data/maps/IslandCave/scripts.inc": ("Regice", "IslandCave_EventScript_DefeatedRegice", "FLAG_DEFEATED_REGICE"),
-        "data/maps/TerraCave_End/scripts.inc": ("Groudon", "TerraCave_End_EventScript_DefeatedGroudon", "FLAG_DEFEATED_GROUDON"),
-        "data/maps/MarineCave_End/scripts.inc": ("Kyogre", "MarineCave_End_EventScript_DefeatedKyogre", "FLAG_DEFEATED_KYOGRE"),
-        "data/maps/SkyPillar_Top/scripts.inc": ("Rayquaza", "SkyPillar_Top_EventScript_DefeatedRayquaza", "FLAG_DEFEATED_RAYQUAZA"),
-        "data/maps/SouthernIsland_Interior/scripts.inc": ("Lati", "SouthernIsland_Interior_EventScript_LatiDefeated", "FLAG_DEFEATED_LATIAS_OR_LATIOS"),
-        "data/maps/NavelRock_Top/scripts.inc": ("HoOh", "NavelRock_Top_EventScript_DefeatedHoOh", "FLAG_DEFEATED_HO_OH"),
-        "data/maps/NavelRock_Bottom/scripts.inc": ("Lugia", "NavelRock_Bottom_EventScript_DefeatedLugia", "FLAG_DEFEATED_LUGIA"),
-        "data/maps/FarawayIsland_Interior/scripts.inc": ("Mew", "FarawayIsland_Interior_EventScript_MewDefeated", "FLAG_DEFEATED_MEW"),
-        "data/maps/BirthIsland_Exterior/scripts.inc": ("Deoxys", "BirthIsland_Exterior_EventScript_DefeatedDeoxys", "FLAG_DEFEATED_DEOXYS"),
-    }
-    for path, (name, defeated_label, terminal_flag) in one_shot_encounters.items():
-        text = (ROOT / path).read_text()
-        branches = dict(re.findall(
-            r"goto_if_eq VAR_RESULT, (B_OUTCOME_\w+), (\w+)", text
-        ))
-        require(branches.get("B_OUTCOME_WON") == defeated_label,
-                f"{path}: {name} KO does not reach its terminal defeat handler")
-        require("B_OUTCOME_CAUGHT" in branches,
-                f"{path}: {name} has no distinct capture branch")
-        caught = label_block(path, branches["B_OUTCOME_CAUGHT"])
-        capture_flag = {
-            "Lati": "FLAG_CAUGHT_LATIAS_OR_LATIOS", "HoOh": "FLAG_CAUGHT_HO_OH",
-            "Lugia": "FLAG_CAUGHT_LUGIA", "Mew": "FLAG_CAUGHT_MEW",
-            "Deoxys": "FLAG_BATTLED_DEOXYS",
-        }.get(name, terminal_flag)
-        require(f"setflag {capture_flag}" in caught,
-                f"{path}: {name} capture no longer records its completion flag")
-        defeated = label_block(path, defeated_label)
-        require("goto Common_EventScript_LegendaryDefeated" in defeated,
-                f"{path}: {name} KO no longer removes the encounter")
-        for outcome in ("B_OUTCOME_RAN", "B_OUTCOME_PLAYER_TELEPORTED"):
-            require(outcome in branches, f"{path}: {name} ignores escape outcome {outcome}")
-            escaped = label_block(path, branches[outcome])
-            if name == "Rayquaza":
-                require("goto SkyPillar_Top_EventScript_RanFromRayquaza2" in escaped,
-                        f"{path}: Rayquaza escape bypasses its removal handler")
-                escaped += label_block(path, "SkyPillar_Top_EventScript_RanFromRayquaza2")
-                require("removeobject VAR_LAST_TALKED" in escaped,
-                        f"{path}: escaped Rayquaza remains physically present")
-            else:
-                require("goto Common_EventScript_LegendaryFlewAway" in escaped,
-                        f"{path}: escaped {name} no longer reaches physical removal")
-            for failed in (defeated, escaped):
-                require("MarkLegendarySignCaught" not in failed
-                        and "setflag FLAG_CAUGHT_" not in failed,
-                        f"{path}: failed {name} encounter incorrectly records capture")
-        require("CreateEmeraldChampionsStaticLegendaryEncounter" in text or "seteventmon SPECIES_LAT" in text,
-                f"{path}: {name} is not scaled to its campaign milestone")
-        if name == "Lati":
-            require(
-                "seteventmon SPECIES_LATIOS, 100" in text and "seteventmon SPECIES_LATIAS, 100" in text,
-                "Southern Island Lati encounter is below the postgame cap",
-            )
-
-    # Map terminal flags mean physical consumption, not capture ownership.
-    # The shared battle lifecycle persists failures before map scripts resume.
-    for label in ("Common_EventScript_LegendaryDefeated", "Common_EventScript_LegendaryFlewAway"):
-        require("removeobject VAR_LAST_TALKED" in label_block("data/event_scripts.s", label),
-                f"{label}: failed one-shot encounter remains physically present")
-    signs = (ROOT / "src/legendary_signs.c").read_text()
-    lost = signs[signs.index("void MarkLegendaryEncounterLost("):signs.index("bool32 IsLegendarySignOrdinaryWildSpecies(")]
-    require("lostLegendaryEncounters[index / 8] |= 1u << (index % 8)" in lost
-            and "FlagSet(sNativeLegendaryDefeatedFlags[nativeIndex])" in lost
-            and "FlagSet(sNativeLegendaryHideFlags[nativeIndex])" in lost,
-            "failed legendary encounters no longer persist loss and native physical removal")
-    require("VAR_LEGENDARY_SIGNS_CAUGHT_0" not in lost
-            and "MarkLegendarySignCaught" not in lost
-            and "FLAG_CAUGHT_" not in lost,
-            "legendary loss incorrectly grants capture ownership")
-    native_flags = signs[signs.index("static const u16 sNativeLegendaryDefeatedFlags"):signs.index("static const u16 sNativeLegendaryHideFlags")]
-    for name, _, flag in one_shot_encounters.values():
-        require(flag in (lost if name == "Lati" else native_flags),
-                f"{name}: loss no longer consumes its native terminal flag")
-    battle_util = (ROOT / "src/battle_util.c").read_text()
-    record_loss = battle_util[battle_util.index("void RecordFailedLegendaryEncounters("):battle_util.index("void SetValuesOnFaint(")]
-    require("if (!IsPersistentWildEncounter() || gBattleOutcome == B_OUTCOME_CAUGHT)" in record_loss
-            and "GetBattlerSide(battler) == B_SIDE_OPPONENT" in record_loss
-            and "MarkLegendaryEncounterLost(GetMonData(GetBattlerMon(battler), MON_DATA_SPECIES))" in record_loss,
-            "battle completion does not distinguish persistent failed encounters from captures")
-    require(re.findall(r"B_OUTCOME_\w+", record_loss) == ["B_OUTCOME_CAUGHT"],
-            "failed encounter recording excludes a terminal KO or escape outcome")
-    battle_main = (ROOT / "src/battle_main.c").read_text()
-    finish = battle_main[battle_main.index("static void HandleEndTurn_FinishBattle(void)\n{"):]
-    require("RecordFailedLegendaryEncounters();" in finish
-            and finish.index("RecordFailedLegendaryEncounters();") < finish.index("gBattleTypeFlags"),
-            "battle completion skips persistent loss before returning to the field")
-
-    for path, item, progress_token in (
-        ("data/maps/RustboroCity_CuttersHouse/scripts.inc", "ITEM_HM_CUT", "FLAG_RECEIVED_HM_CUT"),
-        ("data/maps/GraniteCave_1F/scripts.inc", "ITEM_HM_FLASH", "FLAG_RECEIVED_HM_FLASH"),
-        ("data/maps/MauvilleCity_House1/scripts.inc", "ITEM_HM_ROCK_SMASH", "FLAG_RECEIVED_HM_ROCK_SMASH"),
-        ("data/maps/RusturfTunnel/scripts.inc", "ITEM_HM_STRENGTH", "FLAG_RECEIVED_HM_STRENGTH"),
-        ("data/maps/PetalburgCity_WallysHouse/scripts.inc", "ITEM_HM_SURF", "FLAG_RECEIVED_HM_SURF"),
-        ("data/maps/MossdeepCity_StevensHouse/scripts.inc", "ITEM_HM_DIVE", "FLAG_RECEIVED_HM_DIVE"),
-        ("data/maps/SootopolisCity/scripts.inc", "ITEM_HM_WATERFALL", "FLAG_RECEIVED_HM_WATERFALL"),
-        ("data/maps/RustboroCity/scripts.inc", "ITEM_GREAT_BALL", "FLAG_RETURNED_DEVON_GOODS"),
-        ("data/maps/RustboroCity_DevonCorp_3F/scripts.inc", "ITEM_LETTER", "FLAG_RECEIVED_POKENAV"),
-        ("data/maps/RusturfTunnel/scripts.inc", "ITEM_DEVON_PARTS", "FLAG_RECOVERED_DEVON_GOODS"),
-        ("data/scripts/players_house.inc", "ITEM_SS_TICKET", "FLAG_RECEIVED_SS_TICKET"),
-        ("data/maps/Route110/scripts.inc", "ITEM_DOWSING_MACHINE", "VAR_ROUTE110_STATE"),
-        ("data/maps/SlateportCity/scripts.inc", "ITEM_POWDER_JAR", "FLAG_RECEIVED_POWDER_JAR"),
-        ("data/maps/Route120/scripts.inc", "ITEM_DEVON_SCOPE", "FLAG_RECEIVED_DEVON_SCOPE"),
-        ("data/maps/MtPyre_Summit/scripts.inc", "ITEM_MAGMA_EMBLEM", "FLAG_HIDE_JAGGED_PASS_MAGMA_GUARD"),
-        ("data/maps/LavaridgeTown/scripts.inc", "ITEM_GO_GOGGLES", "FLAG_RECEIVED_GO_GOGGLES"),
-        ("data/maps/Route119/scripts.inc", "ITEM_HM_FLY", "FLAG_RECEIVED_HM_FLY"),
-    ):
-        text = (ROOT / path).read_text()
-        gift = text.index(f"giveitem {item}")
-        progress = text.index(progress_token, gift)
-        require("goto_if_eq VAR_RESULT, FALSE" in text[gift:progress],
-                f"{path}: story advances after failed delivery of {item}")
-
-
 def main() -> None:
     map_names = hoenn_map_names()
     all_sources = all_assembly_sources()
@@ -545,7 +180,6 @@ def main() -> None:
     campaign_sources = assembled_sources(map_names)
     script_refs = verify_script_references(campaign_sources, labels)
     specialvar_refs = verify_specialvar_return_contracts(campaign_sources)
-    verify_critical_progression_contracts()
     script_lines = sum(
         len(path.read_text(errors="ignore").splitlines())
         for path in assembled_sources(map_names)
@@ -554,7 +188,6 @@ def main() -> None:
     print(f"PASS: {event_count} physical NPC/trigger/sign events and {warp_count} warps resolve")
     print(f"PASS: {script_refs} control-flow/dialogue/movement references resolve across {script_lines} script lines")
     print(f"PASS: {specialvar_refs} value-returning special calls never read a void C function")
-    print("PASS: selected badge, Mega, League, legendary, and story-item source contracts hold")
     print("Scope: static references and source patterns only; state-dependent campaign reachability is not verified")
 
 

@@ -35,7 +35,6 @@ TerraCave_End_EventScript_Groudon::
 	setvar VAR_LAST_TALKED, LOCALID_TERRA_CAVE_GROUDON
 	setvar VAR_0x8004, SPECIES_GROUDON
 	setvar VAR_0x8005, 0
-	msgbox gText_LegendaryOneShotWarning, MSGBOX_DEFAULT
 	special CreateEmeraldChampionsStaticLegendaryEncounter
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
@@ -56,8 +55,7 @@ TerraCave_End_EventScript_CaughtGroudon::
 	end
 
 TerraCave_End_EventScript_DefeatedGroudon::
-	setvar VAR_SHOULD_END_ABNORMAL_WEATHER, 1
-	goto Common_EventScript_LegendaryDefeated
+	goto Common_EventScript_LegendaryResting
 	end
 
 TerraCave_End_EventScript_RanFromGroudon::

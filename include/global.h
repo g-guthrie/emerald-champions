@@ -302,7 +302,7 @@ struct Pokedex
     /*0x04*/ u32 unownPersonality; // set when you first see Unown
     /*0x08*/ u32 spindaPersonality; // set when you first see Spinda
     /*0x0C*/ u32 unknown3;
-    /*0x10*/ u8 lostLegendaryEncounters[16];
+    /*0x10*/ u8 lostLegendaryEncounters[16]; // Legacy loss bits, cleared on migration; preserve the save layout.
 #if FREE_EXTRA_SEEN_FLAGS_SAVEBLOCK2 == FALSE
     /*0x20*/ u8 filler[0x58]; // Previously Dex Flags, feel free to remove.
 #endif //FREE_EXTRA_SEEN_FLAGS_SAVEBLOCK2

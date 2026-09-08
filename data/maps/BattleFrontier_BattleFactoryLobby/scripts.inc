@@ -13,11 +13,6 @@ BattleFrontier_BattleFactoryLobby_EventScript_TurnPlayerNorth::
 	end
 
 BattleFrontier_BattleFactoryLobby_OnFrame:
-	map_script_2 VAR_TEMP_CHALLENGE_STATUS, 0, BattleFrontier_BattleFactoryLobby_EventScript_GetChallengeStatus
-	map_script_2 VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_SAVING, BattleFrontier_BattleFactoryLobby_EventScript_QuitWithoutSaving
-	map_script_2 VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_PAUSED, BattleFrontier_BattleFactoryLobby_EventScript_ResumeChallenge
-	map_script_2 VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_WON, BattleFrontier_BattleFactoryLobby_EventScript_WonChallenge
-	map_script_2 VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST, BattleFrontier_BattleFactoryLobby_EventScript_LostChallenge
 	.2byte 0
 
 BattleFrontier_BattleFactoryLobby_EventScript_GetChallengeStatus::
@@ -240,19 +235,13 @@ BattleFrontier_BattleFactoryLobby_EventScript_ExplainDoublesChallenge::
 	return
 
 BattleFrontier_BattleFactoryLobby_EventScript_ShowSinglesResults::
-	lockall
-	frontier_results FRONTIER_FACILITY_FACTORY, FRONTIER_MODE_SINGLES
-	waitbuttonpress
-	special RemoveRecordsWindow
-	releaseall
+	special ChampionsCircuitBufferRecord
+	msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN
 	end
 
 BattleFrontier_BattleFactoryLobby_EventScript_ShowDoublesResults::
-	lockall
-	frontier_results FRONTIER_FACILITY_FACTORY, FRONTIER_MODE_DOUBLES
-	waitbuttonpress
-	special RemoveRecordsWindow
-	releaseall
+	special ChampionsCircuitBufferRecord
+	msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN
 	end
 
 BattleFrontier_BattleFactoryLobby_EventScript_Woman::
@@ -274,9 +263,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_FatMan::
 	end
 
 BattleFrontier_BattleFactoryLobby_EventScript_RulesBoard::
-	lockall
-	msgbox BattleFrontier_BattleFactoryLobby_Text_RulesAreListed, MSGBOX_DEFAULT
-	goto BattleFrontier_BattleFactoryLobby_EventScript_ReadRulesBoard
+	msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRules, MSGBOX_SIGN
 	end
 
 BattleFrontier_BattleFactoryLobby_EventScript_ReadRulesBoard::
@@ -469,22 +456,17 @@ BattleFrontier_BattleFactoryLobby_Text_RecordLastMatch:
 	.string "FRONTIER PASS?$"
 
 BattleFrontier_BattleFactoryLobby_Text_NeedKnowledgeOfMonsMoves:
-	.string "Hi!\n"
-	.string "You, there!\p"
-	.string "Are you thinking that the events here\n"
-	.string "are easy since you don't need to have\l"
-	.string "a raised team of POKéMON?\p"
-	.string "I wouldn't be too sure about winning\n"
-	.string "that easily.\p"
-	.string "If you don't have thorough knowledge\n"
-	.string "about POKéMON and their moves,\l"
-	.string "it will be tough to keep winning.$"
-
+	.string "Don't judge an opposing Pokémon by\n"
+	.string "its reputation alone.\p"
+	.string "Look at the board and what its\n"
+	.string "partner makes possible. That's how\l"
+	.string "the CIRCUIT keeps surprising me.$"
 BattleFrontier_BattleFactoryLobby_Text_SwappedForWeakMon:
-	.string "I swapped for a weak POKéMON…\n"
-	.string "I thought it was a good kind to have…\p"
-	.string "They wiped the floor with us…$"
-
+	.string "I changed one member of my team\n"
+	.string "and lost the support another\l"
+	.string "partner depended on.\p"
+	.string "The new Pokémon wasn't weak. My\n"
+	.string "combination was incomplete.$"
 BattleFrontier_BattleFactoryLobby_Text_NeedToCheckOpponentsMons:
 	.string "Things haven't been going my way\n"
 	.string "at all.\p"
@@ -493,11 +475,11 @@ BattleFrontier_BattleFactoryLobby_Text_NeedToCheckOpponentsMons:
 	.string "they're any good.$"
 
 BattleFrontier_BattleFactoryLobby_Text_CantFigureOutStaffHints:
-	.string "You know how the staff here give you\n"
-	.string "a few hints about your next opponent?\p"
-	.string "Well, I'm a full-grown man, but I have\n"
-	.string "trouble figuring out their hints.$"
-
+	.string "A name tells you which Pokémon\n"
+	.string "you're facing. It doesn't tell you\l"
+	.string "every choice it can make.\p"
+	.string "I keep that in mind when the\n"
+	.string "CIRCUIT introduces an opponent.$"
 @ Unused
 BattleFrontier_BattleFactoryLobby_Text_RentalMonsAreVaried:
 	.string "Like, I'm really tough, but I get bored\n"

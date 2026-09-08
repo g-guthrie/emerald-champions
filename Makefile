@@ -321,7 +321,7 @@ C_SRCS := $(foreach src,$(C_SRCS_IN),$(if $(findstring .inc.c,$(src)),,$(src)))
 C_OBJS := $(patsubst $(C_SUBDIR)/%.c,$(C_BUILDDIR)/%.o,$(C_SRCS))
 
 # A release/PR job may provide a curated source allowlist.  The normal default
-# remains the complete upstream test corpus for manual and scheduled builds.
+# selects the retained focused test corpus for manual builds.
 TEST_SOURCE_ALLOWLIST ?=
 TEST_SUPPORT_SRCS := $(TEST_SUBDIR)/test_runner.c $(TEST_SUBDIR)/test_runner_args.c $(TEST_SUBDIR)/test_runner_battle.c
 ifeq (,$(strip $(TEST_SOURCE_ALLOWLIST)))

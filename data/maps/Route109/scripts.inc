@@ -582,11 +582,12 @@ Route109_Text_SeashoreHouseSign:
 
 Route109_Text_TrainerTipsSign:
 	.string "TRAINER TIPS\p"
-	.string "POKéMON at the same level may not\n"
-	.string "always have identical stats.\p"
-	.string "POKéMON raised by TRAINERS are said\n"
-	.string "to grow stronger than wild POKéMON.$"
-
+	.string "Every partner has competitive\n"
+	.string "potential. Battles do not award\l"
+	.string "EVs to grind.\p"
+	.string "Use a CENTER specialist to set\n"
+	.string "Nature and STAT POINTS. Compare\l"
+	.string "the resulting stats before battle.$"
 Route109_Text_HUEY_LocalConversation:
 	.string "My sea legs are excellent.\n"
 	.string "My land legs filed a complaint.$"

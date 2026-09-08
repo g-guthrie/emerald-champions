@@ -36,13 +36,13 @@ BattleFrontier_Lounge6_Text_WouldYouLikeToTrade:
 	.string "for my {STR_VAR_2}?$"
 
 BattleFrontier_Lounge6_Text_PromiseIllBeGoodToIt:
-	.string "Oh, it's adorable!\n"
-	.string "Thank you!\l"
-	.string "I promise I'll be good to it!\p"
-	.string "{STR_VAR_2} comes with a complete\n"
-	.string "battle set. Give it a memory disc\l"
-	.string "and it will become SILVALLY.$"
-
+	.string "Oh, it's adorable! Thank you! I\n"
+	.string "promise I'll be good to it.\p"
+	.string "TYPE: NULL already has a battle\n"
+	.string "set. Raise its friendship, then\l"
+	.string "level it up to get SILVALLY.\p"
+	.string "A memory held by SILVALLY changes\n"
+	.string "its type.$"
 BattleFrontier_Lounge6_Text_DontTradeForAnythingButMon:
 	.string "Oh, I'm sorry!\n"
 	.string "I don't intend to trade for anything\l"

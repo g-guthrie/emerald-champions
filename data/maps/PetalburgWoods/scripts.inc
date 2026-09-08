@@ -436,10 +436,15 @@ PetalburgWoods_Text_StayOutOfTallGrass:
 	.string "of tall grass.$"
 
 PetalburgWoods_Text_HiddenItemsExplanation:
-	.string "Sometimes, there are things on the\n"
-	.string "ground even if you can't see them.\p"
-	.string "That's why I always check where I'm\n"
-	.string "walking.$"
+	.string "BURMY hide among these leaves. Females\n"
+	.string "become WORMADAM at Lv. 20; males\l"
+	.string "become MOTHIM at the same level.\p"
+	.string "After a battle, BURMY makes a cloak\n"
+	.string "from its surroundings: leaves in grass,\l"
+	.string "sand in caves, or trash in buildings.\p"
+	.string "Raise DARTRIX to Lv. 34 or higher here\n"
+	.string "to get Hisuian DECIDUEYE. Elsewhere,\l"
+	.string "it grows into the usual form.$"
 
 PetalburgWoods_Text_TryUsingThisItem:
 	.string "Oh, neat!\n"
@@ -461,8 +466,10 @@ PetalburgWoods_Text_TrainerTipsExperience:
 	.string "and held item before the next battle.$"
 
 PetalburgWoods_Text_TrainerTipsPP:
-	.string "TRAINER TIPS\p"
-	.string "CUT reveals the eastern paths into the\n"
+	.string "FOREST FIELD NOTES\p"
+	.string "CUT reveals paths into the\n"
 	.string "old-growth forest.\p"
-	.string "Rangers report two CHAMPION'S SIGNS:\n"
-	.string "one seeks BRELOOM, one seeks BLISSEY.$"
+	.string "One SIGN answers the KNUCKLE\n"
+	.string "BADGE. Deeper marks answer the\l"
+	.string "HEAT BADGE. Inspect them yourself;\l"
+	.string "DEVON offers clues if you want.$"

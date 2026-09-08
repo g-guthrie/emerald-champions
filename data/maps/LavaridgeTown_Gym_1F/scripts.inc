@@ -182,16 +182,14 @@ LavaridgeTown_Gym_1F_EventScript_GymStatue::
 	end
 
 LavaridgeTown_Gym_1F_Text_GymGuideAdvice:
-	.string "Hey, how's it going, CHAMPION-\n"
-	.string "bound {PLAYER}?\p"
-	.string "LAVARIDGE's GYM LEADER FLANNERY\n"
-	.string "uses FIRE-type POKéMON.\p"
-	.string "Her passion for POKéMON burns stronger\n"
-	.string "and hotter than a volcano.\p"
-	.string "Her sun weakens WATER and speeds SOLAR\n"
-	.string "BEAM, while TRICK ROOM reverses tempo.\p"
-	.string "Protect your WATER answer and disrupt\n"
-	.string "the field before attacking.$"
+	.string "FLANNERY's sun strengthens Fire\n"
+	.string "attacks and weakens Water attacks.\p"
+	.string "LILLIGANT can use AFTER YOU to let\n"
+	.string "slow TORKOAL attack sooner.\p"
+	.string "Weather control, disruption and\n"
+	.string "careful damage all offer different\n"
+	.string "ways to challenge that\n"
+	.string "partnership.$"
 
 LavaridgeTown_Gym_1F_Text_GymGuidePostVictory:
 	.string "Yow! That was a scorching-hot battle!$"
@@ -309,17 +307,18 @@ LavaridgeTown_Gym_B1F_Text_EliPostBattle:
 	.string "Hehehehe.$"
 
 LavaridgeTown_Gym_1F_Text_FlanneryIntro:
-	.string "I'm FLANNERY, LAVARIDGE's GYM LEADER!\p"
-	.string "I used to think Fire meant attacking\n"
-	.string "harder. MT. CHIMNEY taught me timing.\p"
-	.string "My slowest POKéMON can move first in two\n"
-	.string "different ways. Cool the engine early!$"
+	.string "I am FLANNERY, LAVARIDGE's GYM\n"
+	.string "LEADER!\p"
+	.string "MT. CHIMNEY taught me that power\n"
+	.string "needs timing.\p"
+	.string "LILLIGANT and TORKOAL are ready to\n"
+	.string "turn up the heat. Show us your\n"
+	.string "best!$"
 
 LavaridgeTown_Gym_1F_Text_FlanneryDefeat:
-	.string "You weakened the eruptions, broke the\n"
-	.string "Balloon, and changed pace with my heat.\p"
-	.string "No type-chart shortcut. Take the\n"
-	.string "HEAT BADGE!$"
+	.string "That was a blazing battle!\p"
+	.string "You beat the team I put my heart\n"
+	.string "into. Take the HEAT BADGE!$"
 
 LavaridgeTown_Gym_1F_Text_ReceivedHeatBadge:
 	.string "{PLAYER} received the HEAT BADGE\n"

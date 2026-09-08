@@ -34,3 +34,20 @@ DewfordTown_House1_Text_LifeGoesSlowlyOnIsland:
 DewfordTown_House1_Text_Zigzagoon:
 	.string "ZIGZAGOON: Guguuh!$"
 
+
+DewfordTown_House1_EventScript_MegaGift_BARBARACITE::
+	goto_if_set FLAG_EC_MEGA_GIFT_BARBARACITE, DewfordTown_House1_EventScript_Man
+	lock
+	faceplayer
+	msgbox DewfordTown_House1_EventScript_MegaGift_BARBARACITE_Text, MSGBOX_DEFAULT
+	giveitem ITEM_BARBARACITE
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_EC_MEGA_GIFT_BARBARACITE
+	release
+	goto DewfordTown_House1_EventScript_Man
+
+DewfordTown_House1_EventScript_MegaGift_BARBARACITE_Text:
+	.string "I found this in a tide pool, held\n"
+	.string "tight between two little claws.\p"
+	.string "A Binacle has a stubborn grip.\n"
+	.string "Its grown form can use this stone.$"

@@ -16,19 +16,38 @@ GraniteCave_StevensRoom_EventScript_Steven::
 
 GraniteCave_StevensRoom_EventScript_CheckKnuckleBadge::
 	goto_if_unset FLAG_BADGE02_GET, GraniteCave_StevensRoom_EventScript_WaitForKnuckleBadge
-	checkitem ITEM_MEGA_RING, 1
+	setvar VAR_0x8004, ITEM_MEGA_RING
+	special CheckEmeraldChampionsHandoffItem
 	goto_if_eq VAR_RESULT, TRUE, GraniteCave_StevensRoom_EventScript_StarterGifts
 	msgbox GraniteCave_StevensRoom_Text_ThankYouTakeThis, MSGBOX_DEFAULT
 	giveitem ITEM_MEGA_RING
 	goto_if_eq VAR_RESULT, FALSE, GraniteCave_StevensRoom_EventScript_BagFull
 GraniteCave_StevensRoom_EventScript_StarterGifts::
-	special GetEmeraldChampionsStarterMegaStone
-	goto_if_eq VAR_RESULT, FALSE, GraniteCave_StevensRoom_EventScript_NoStarterStone
-	special GiveEmeraldChampionsStarterMegaStones
-	copyvar VAR_0x8008, VAR_RESULT
-	call_if_ne VAR_0x8009, 0, GraniteCave_StevensRoom_EventScript_FirstStoneReceipt
-	call_if_ne VAR_0x800A, 0, GraniteCave_StevensRoom_EventScript_SecondStoneReceipt
-	goto_if_eq VAR_0x8008, FALSE, GraniteCave_StevensRoom_EventScript_StoneStorageFull
+	setvar VAR_0x8008, 0
+	setvar VAR_0x8007, TRUE
+	setvar VAR_0x8006, FALSE
+
+GraniteCave_StevensRoom_EventScript_StarterStoneLoop::
+	special GiveEmeraldChampionsStarterMegaStoneAtIndex
+	goto_if_eq VAR_RESULT, FALSE, GraniteCave_StevensRoom_EventScript_StarterStonePending
+	goto GraniteCave_StevensRoom_EventScript_StarterStoneReceipt
+
+GraniteCave_StevensRoom_EventScript_StarterStonePending::
+	setvar VAR_0x8007, FALSE
+
+GraniteCave_StevensRoom_EventScript_StarterStoneReceipt::
+	goto_if_eq VAR_0x8004, ITEM_NONE, GraniteCave_StevensRoom_EventScript_NextStarterStone
+	setvar VAR_0x8006, TRUE
+	goto_if_eq VAR_0x8005, 0, GraniteCave_StevensRoom_EventScript_NextStarterStone
+	copyvar VAR_0x8000, VAR_0x8004
+	copyvar VAR_0x800B, VAR_0x8005
+	call GraniteCave_StevensRoom_EventScript_StoneReceipt
+
+GraniteCave_StevensRoom_EventScript_NextStarterStone::
+	addvar VAR_0x8008, 1
+	goto_if_lt VAR_0x8008, 4, GraniteCave_StevensRoom_EventScript_StarterStoneLoop
+	goto_if_eq VAR_0x8007, FALSE, GraniteCave_StevensRoom_EventScript_StoneStorageFull
+	goto_if_eq VAR_0x8006, FALSE, GraniteCave_StevensRoom_EventScript_NoStarterStone
 	goto GraniteCave_StevensRoom_EventScript_ArchiveOpen
 
 GraniteCave_StevensRoom_EventScript_NoStarterStone::
@@ -104,15 +123,6 @@ GraniteCave_StevensRoom_EventScript_StoneStorageFull::
 	release
 	end
 
-GraniteCave_StevensRoom_EventScript_FirstStoneReceipt::
-	copyvar VAR_0x8000, VAR_0x8004
-	copyvar VAR_0x800B, VAR_0x8009
-	goto GraniteCave_StevensRoom_EventScript_StoneReceipt
-
-GraniteCave_StevensRoom_EventScript_SecondStoneReceipt::
-	copyvar VAR_0x8000, VAR_0x8005
-	copyvar VAR_0x800B, VAR_0x800A
-
 GraniteCave_StevensRoom_EventScript_StoneReceipt::
 	bufferitemnameplural STR_VAR_2, VAR_0x8000, 1
 	playfanfare MUS_OBTAIN_ITEM
@@ -133,8 +143,8 @@ GraniteCave_StevensRoom_Text_StoneInPC:
 GraniteCave_StevensRoom_Text_StoneStorageFull:
 	.string "Your BAG and PC have no room for the\n"
 	.string "remaining stone. I'll keep it here.\p"
-	.string "Your MEGA RING still opens the archive\n"
-	.string "at every POKéMON CENTER VENDOR.$"
+	.string "Make some room, then speak to me\n"
+	.string "again. Your gift will still be here.$"
 
 GraniteCave_StevensRoom_Movement_StevenExit:
 	walk_up
@@ -184,14 +194,17 @@ GraniteCave_StevensRoom_Text_ThankYouTakeThis:
 	.string "respond to that same bond.$"
 
 GraniteCave_StevensRoom_Text_NoStarterStone:
-	.string "Your starter's line has no Mega Stone,\n"
-	.string "so let your other partners carry one.$"
+	.string "Your original partners have no\n"
+	.string "applicable Mega Stone here.\p"
+	.string "Your other teammates can carry one!$"
 
 GraniteCave_StevensRoom_Text_ArchiveOpen:
-	.string "With that RING, each POKéMON CENTER\n"
-	.string "VENDOR opens the Mega Stone archive.\p"
-	.string "Every stone is available free of charge.\n"
-	.string "Find the ones that suit your partners.$"
+	.string "The RING lets your partners use the\n"
+	.string "Mega Stones you find across HOENN.\p"
+	.string "Look for their glimmer off the path.\n"
+	.string "People may have stones to share, too.\p"
+	.string "POKéMON CENTER VENDORS still offer\n"
+	.string "evolution items free of charge.$"
 
 GraniteCave_StevensRoom_Text_ReturnWithKnuckleBadge:
 	.string "The LETTER confirms what I feared:\n"
@@ -227,13 +240,15 @@ GraniteCave_StevensRoom_Text_SternHandoff:
 	.string "tell you where to find the captain.$"
 
 GraniteCave_StevensRoom_Text_IveGotToHurryAlong:
-	.string "I'm heading east. MAGMA and AQUA are\n"
-	.string "disturbing more than land and sea.\p"
-	.string "A mark in the lower cave resembles\n"
-	.string "LUCARIO. Take a member of that family\l"
-	.string "to DEVON's researcher on the 2nd floor.\p"
-	.string "Each SIGN needs its own translation\n"
-	.string "before you return to seek its Pokémon.$"
+	.string "I'm heading east. MAGMA and AQUA\n"
+	.string "are disturbing more than land and\l"
+	.string "sea.\p"
+	.string "Inspect the marked stone in the\n"
+	.string "lower cave. COBALION may answer\l"
+	.string "once you hold the STONE BADGE.\p"
+	.string "DEVON's researcher keeps optional\n"
+	.string "clues. You can explore without\l"
+	.string "him.$"
 
 GraniteCave_StevensRoom_Text_OhBagIsFull:
 	.string "Your BAG is full. Make room and return;\n"

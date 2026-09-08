@@ -49,6 +49,7 @@ CableClub_EventScript_MysteryGiftThankYou2::
 	end
 
 CableClub_OnWarp:
+	map_script_2 VAR_CABLE_CLUB_STATE, USING_REJECTED_BATTLE, CableClub_EventScript_CheckTurnAttendant
 	map_script_2 VAR_CABLE_CLUB_STATE, USING_SINGLE_BATTLE, CableClub_EventScript_CheckTurnAttendant
 	map_script_2 VAR_CABLE_CLUB_STATE, USING_DOUBLE_BATTLE, CableClub_EventScript_CheckTurnAttendant
 	map_script_2 VAR_CABLE_CLUB_STATE, USING_MULTI_BATTLE, CableClub_EventScript_CheckTurnAttendant
@@ -66,6 +67,7 @@ CableClub_EventScript_DontTurnAttendant::
 	end
 
 CableClub_OnLoad:
+	goto_if_eq VAR_CABLE_CLUB_STATE, USING_REJECTED_BATTLE, CableClub_EventScript_OnLoadFromColosseum
 	goto_if_eq VAR_CABLE_CLUB_STATE, USING_SINGLE_BATTLE, CableClub_EventScript_OnLoadFromColosseum
 	goto_if_eq VAR_CABLE_CLUB_STATE, USING_DOUBLE_BATTLE, CableClub_EventScript_OnLoadFromColosseum
 	goto_if_eq VAR_CABLE_CLUB_STATE, USING_MULTI_BATTLE, CableClub_EventScript_OnLoadFromColosseum
@@ -101,6 +103,7 @@ CableClub_EventScript_OnLoadFromGameCorner::
 	end
 
 CableClub_OnFrame:
+	map_script_2 VAR_CABLE_CLUB_STATE, USING_REJECTED_BATTLE, CableClub_EventScript_ExitRejectedBattle
 	map_script_2 VAR_CABLE_CLUB_TUTORIAL_STATE, 1, CableClub_EventScript_Tutorial
 	map_script_2 VAR_CABLE_CLUB_STATE, USING_SINGLE_BATTLE, CableClub_EventScript_ExitLinkRoom
 	map_script_2 VAR_CABLE_CLUB_STATE, USING_DOUBLE_BATTLE, CableClub_EventScript_ExitLinkRoom
@@ -286,11 +289,10 @@ CableClub_EventScript_SelectBattleMode::
 	waitmessage
 	multichoice 0, 0, MULTI_BATTLE_MODE, FALSE
 	switch VAR_RESULT
-	case 0, CableClub_EventScript_SingleBattleMode
-	case 1, CableClub_EventScript_DoubleBattleMode
-	case 2, CableClub_EventScript_MultiBattleMode
-	case 3, CableClub_EventScript_BattleModeInfo
-	case 4, CableClub_EventScript_AbortLink
+	case 0, CableClub_EventScript_DoubleBattleMode
+	case 1, CableClub_EventScript_MultiBattleMode
+	case 2, CableClub_EventScript_BattleModeInfo
+	case 3, CableClub_EventScript_AbortLink
 	case MULTI_B_PRESSED, CableClub_EventScript_AbortLink
 	end
 
@@ -300,13 +302,14 @@ CableClub_EventScript_BattleModeInfo::
 	end
 
 CableClub_EventScript_SingleBattleMode::
-	setvar VAR_0x8004, USING_SINGLE_BATTLE
-	goto CableClub_EventScript_TryEnterColosseum
+	msgbox CableClub_Text_RetiredSingleBattle, MSGBOX_DEFAULT
+	goto CableClub_EventScript_SelectBattleMode
 	end
 
 CableClub_EventScript_DoubleBattleMode::
-	special HasEnoughMonsForDoubleBattle
-	goto_if_ne VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS, CableClub_EventScript_NeedTwoMonsForDoubleBattle
+	setvar VAR_0x8004, USING_DOUBLE_BATTLE
+	special CheckChampionsLinkBattleParty
+	goto_if_eq VAR_RESULT, FALSE, CableClub_EventScript_LinkPartyNeeded
 	setvar VAR_0x8004, USING_DOUBLE_BATTLE
 	goto CableClub_EventScript_TryEnterColosseum
 	end
@@ -318,6 +321,9 @@ CableClub_EventScript_NeedTwoMonsForDoubleBattle::
 
 CableClub_EventScript_MultiBattleMode::
 	setvar VAR_0x8004, USING_MULTI_BATTLE
+	special CheckChampionsLinkBattleParty
+	goto_if_eq VAR_RESULT, FALSE, CableClub_EventScript_LinkPartyNeeded
+	setvar VAR_0x8004, USING_MULTI_BATTLE
 	goto CableClub_EventScript_TryEnterColosseum
 	end
 
@@ -327,6 +333,7 @@ CableClub_EventScript_TryEnterColosseum::
 	message gText_PleaseWaitForLink
 	waitmessage
 	special TryBattleLinkup
+	goto_if_eq VAR_RESULT, LINKUP_INCOMPATIBLE_BATTLE, CableClub_EventScript_UnsupportedLinkBattle
 	goto_if_eq VAR_RESULT, LINKUP_SUCCESS, CableClub_EventScript_EnterColosseum
 	goto_if_eq VAR_RESULT, LINKUP_SOMEONE_NOT_READY, CableClub_EventScript_AbortLinkSomeoneNotReady
 	goto_if_eq VAR_RESULT, LINKUP_DIFF_SELECTIONS, CableClub_EventScript_AbortLinkDifferentSelections
@@ -994,22 +1001,22 @@ CableClub_EventScript_WirelessBattleSelect::
 	waitmessage
 	multichoice 0, 0, MULTI_BATTLE_MODE, FALSE
 	switch VAR_RESULT
-	case 0, CableClub_EventScript_WirelessSingleBattle
-	case 1, CableClub_EventScript_WirelessDoubleBattle
-	case 2, CableClub_EventScript_WirelessMultiBattle
-	case 3, CableClub_EventScript_WirelessBattleInfo
-	case 4, CableClub_EventScript_AbortLink
+	case 0, CableClub_EventScript_WirelessDoubleBattle
+	case 1, CableClub_EventScript_WirelessMultiBattle
+	case 2, CableClub_EventScript_WirelessBattleInfo
+	case 3, CableClub_EventScript_AbortLink
 	case MULTI_B_PRESSED, CableClub_EventScript_AbortLink
 	end
 
 CableClub_EventScript_WirelessSingleBattle::
-	setvar VAR_0x8004, LINK_GROUP_SINGLE_BATTLE
-	goto CableClub_EventScript_SaveAndChooseLinkLeader
+	msgbox CableClub_Text_RetiredSingleBattle, MSGBOX_DEFAULT
+	goto CableClub_EventScript_WirelessBattleSelect
 	end
 
 CableClub_EventScript_WirelessDoubleBattle::
-	special HasEnoughMonsForDoubleBattle
-	goto_if_ne VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS, CableClub_EventScript_TwoMonsNeededForWirelessDoubleBattle
+	setvar VAR_0x8004, USING_DOUBLE_BATTLE
+	special CheckChampionsLinkBattleParty
+	goto_if_eq VAR_RESULT, FALSE, CableClub_EventScript_LinkPartyNeededWireless
 	setvar VAR_0x8004, LINK_GROUP_DOUBLE_BATTLE
 	goto CableClub_EventScript_SaveAndChooseLinkLeader
 	end
@@ -1020,6 +1027,9 @@ CableClub_EventScript_TwoMonsNeededForWirelessDoubleBattle::
 	end
 
 CableClub_EventScript_WirelessMultiBattle::
+	setvar VAR_0x8004, USING_MULTI_BATTLE
+	special CheckChampionsLinkBattleParty
+	goto_if_eq VAR_RESULT, FALSE, CableClub_EventScript_LinkPartyNeededWireless
 	setvar VAR_0x8004, LINK_GROUP_MULTI_BATTLE
 	goto CableClub_EventScript_SaveAndChooseLinkLeader
 	end
@@ -1051,11 +1061,11 @@ CableClub_EventScript_NeedBerryForBerryCrush::
 	end
 
 CableClub_EventScript_SaveAndChooseLinkLeader::
+	goto_if_eq VAR_0x8004, LINK_GROUP_SINGLE_BATTLE, CableClub_EventScript_WirelessSingleBattle
 	call Common_EventScript_SaveGame
 	goto_if_eq VAR_RESULT, 0, CableClub_EventScript_AbortLink
 	switch VAR_0x8004
 	case LINK_GROUP_TRADE, CableClub_EventScript_ChooseLinkLeaderFrom2
-	case LINK_GROUP_SINGLE_BATTLE, CableClub_EventScript_ChooseLinkLeaderFrom2
 	case LINK_GROUP_DOUBLE_BATTLE, CableClub_EventScript_ChooseLinkLeaderFrom2
 	case LINK_GROUP_MULTI_BATTLE, CableClub_EventScript_ChooseLinkLeaderFrom4
 	case LINK_GROUP_BERRY_CRUSH, CableClub_EventScript_ChooseLinkLeader
@@ -1075,6 +1085,7 @@ CableClub_EventScript_ChooseLinkLeaderFrom2::
 
 CableClub_EventScript_TryLeadGroup2Players::
 	call CableClub_EventScript_TryBecomeLinkLeader
+	goto_if_eq VAR_RESULT, LINKUP_INCOMPATIBLE_BATTLE, CableClub_EventScript_UnsupportedLinkBattle
 	goto_if_eq VAR_RESULT, LINKUP_SUCCESS, CableClub_EventScript_EnterWirelessLinkRoom
 	goto_if_eq VAR_RESULT, LINKUP_FAILED, CableClub_EventScript_ChooseLinkLeaderFrom2
 	goto_if_eq VAR_RESULT, LINKUP_RETRY_ROLE_ASSIGN, CableClub_EventScript_TryLeadGroup2Players
@@ -1083,6 +1094,7 @@ CableClub_EventScript_TryLeadGroup2Players::
 
 CableClub_EventScript_TryJoinGroup2Players::
 	call CableClub_EventScript_TryJoinLinkGroup
+	goto_if_eq VAR_RESULT, LINKUP_INCOMPATIBLE_BATTLE, CableClub_EventScript_UnsupportedLinkBattle
 	goto_if_eq VAR_RESULT, LINKUP_SUCCESS, CableClub_EventScript_EnterWirelessLinkRoom
 	goto_if_eq VAR_RESULT, LINKUP_FAILED, CableClub_EventScript_ChooseLinkLeaderFrom2
 	goto_if_eq VAR_RESULT, LINKUP_RETRY_ROLE_ASSIGN, CableClub_EventScript_TryJoinGroup2Players
@@ -1102,6 +1114,7 @@ CableClub_EventScript_ChooseLinkLeaderFrom4::
 
 CableClub_EventScript_TryLeadGroup4Players::
 	call CableClub_EventScript_TryBecomeLinkLeader
+	goto_if_eq VAR_RESULT, LINKUP_INCOMPATIBLE_BATTLE, CableClub_EventScript_UnsupportedLinkBattle
 	goto_if_eq VAR_RESULT, LINKUP_SUCCESS, CableClub_EventScript_EnterWirelessLinkRoom
 	goto_if_eq VAR_RESULT, LINKUP_FAILED, CableClub_EventScript_ChooseLinkLeaderFrom4
 	goto_if_eq VAR_RESULT, LINKUP_RETRY_ROLE_ASSIGN, CableClub_EventScript_TryLeadGroup4Players
@@ -1110,6 +1123,7 @@ CableClub_EventScript_TryLeadGroup4Players::
 
 CableClub_EventScript_TryJoinGroup4Players::
 	call CableClub_EventScript_TryJoinLinkGroup
+	goto_if_eq VAR_RESULT, LINKUP_INCOMPATIBLE_BATTLE, CableClub_EventScript_UnsupportedLinkBattle
 	goto_if_eq VAR_RESULT, LINKUP_SUCCESS, CableClub_EventScript_EnterWirelessLinkRoom
 	goto_if_eq VAR_RESULT, LINKUP_FAILED, CableClub_EventScript_ChooseLinkLeaderFrom4
 	goto_if_eq VAR_RESULT, LINKUP_RETRY_ROLE_ASSIGN, CableClub_EventScript_TryJoinGroup4Players
@@ -1387,3 +1401,22 @@ MossdeepCity_GameCorner_1F_EventScript_DodrioBerryPickingRecords::
 	special ShowDodrioBerryPickingRecords
 	releaseall
 	end
+
+CableClub_EventScript_LinkPartyNeeded::
+	msgbox CableClub_Text_LinkPartyRequirements, MSGBOX_DEFAULT
+	goto CableClub_EventScript_SelectBattleMode
+
+CableClub_EventScript_LinkPartyNeededWireless::
+	msgbox CableClub_Text_LinkPartyRequirements, MSGBOX_DEFAULT
+	goto CableClub_EventScript_WirelessBattleSelect
+
+CableClub_EventScript_UnsupportedLinkBattle::
+	special CloseLink
+	msgbox CableClub_Text_IncompatibleLinkBattle, MSGBOX_DEFAULT
+	release
+	end
+
+CableClub_EventScript_ExitRejectedBattle::
+	lockall
+	msgbox CableClub_Text_IncompatibleLinkBattle, MSGBOX_DEFAULT
+	goto CableClub_EventScript_ExitLinkRoom

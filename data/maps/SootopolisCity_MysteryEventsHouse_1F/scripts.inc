@@ -1,12 +1,10 @@
 SootopolisCity_MysteryEventsHouse_1F_MapScripts::
-	map_script MAP_SCRIPT_ON_TRANSITION, SootopolisCity_MysteryEventsHouse_1F_OnTransition
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, SootopolisCity_MysteryEventsHouse_1F_OnFrame
 	.byte 0
 
 SootopolisCity_MysteryEventsHouse_1F_OnTransition:
-	frontier_checkvisittrainer
-	call_if_eq VAR_RESULT, 0, SootopolisCity_MysteryEventsHouse_1F_EventScript_SetTrainerVisitingLayout
-	call_if_ne VAR_SOOTOPOLIS_MYSTERY_EVENTS_STATE, 0, SootopolisCity_MysteryEventsHouse_1F_EventScript_MoveOldManToDoor
+	setmaplayoutindex LAYOUT_SOOTOPOLIS_CITY_MYSTERY_EVENTS_HOUSE_1F
+	setobjectxyperm LOCALID_MYSTERY_EVENTS_OLD_MAN, 6, 4
+	setobjectmovementtype LOCALID_MYSTERY_EVENTS_OLD_MAN, MOVEMENT_TYPE_FACE_RIGHT
 	end
 
 SootopolisCity_MysteryEventsHouse_1F_EventScript_SetTrainerVisitingLayout::
@@ -29,17 +27,9 @@ SootopolisCity_MysteryEventsHouse_1F_OnFrame:
 
 SootopolisCity_MysteryEventsHouse_1F_EventScript_OldManCommentOnBattle::
 	lockall
-	applymovement LOCALID_PLAYER, SootopolisCity_MysteryEventsHouse_1F_Movement_PlayerExitStairs
-	waitmovement 0
-	applymovement LOCALID_MYSTERY_EVENTS_OLD_MAN, SootopolisCity_MysteryEventsHouse_1F_Movement_OldManWalkBehindPlayer
-	waitmovement 0
-	copyobjectxytoperm LOCALID_MYSTERY_EVENTS_OLD_MAN
-	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
-	waitmovement 0
 	call_if_eq VAR_SOOTOPOLIS_MYSTERY_EVENTS_STATE, 1, SootopolisCity_MysteryEventsHouse_1F_EventScript_BattleWonComment
 	call_if_eq VAR_SOOTOPOLIS_MYSTERY_EVENTS_STATE, 2, SootopolisCity_MysteryEventsHouse_1F_EventScript_BattleLostComment
 	call_if_eq VAR_SOOTOPOLIS_MYSTERY_EVENTS_STATE, 3, SootopolisCity_MysteryEventsHouse_1F_EventScript_BattleTiedComment
-	special LoadPlayerParty
 	setvar VAR_SOOTOPOLIS_MYSTERY_EVENTS_STATE, 0
 	releaseall
 	end
@@ -66,13 +56,7 @@ SootopolisCity_MysteryEventsHouse_1F_Movement_OldManWalkBehindPlayer:
 	step_end
 
 SootopolisCity_MysteryEventsHouse_1F_EventScript_OldMan::
-	lock
-	faceplayer
-	frontier_checkvisittrainer
-	goto_if_eq VAR_RESULT, 1, SootopolisCity_MysteryEventsHouse_1F_EventScript_InvalidVisitingTrainer
-	goto_if_eq VAR_TEMP_1, 1, SootopolisCity_MysteryEventsHouse_1F_EventScript_TrainerVisiting
-	msgbox SootopolisCity_MysteryEventsHouse_1F_Text_OnlyAmusementWatchingBattles, MSGBOX_DEFAULT
-	release
+	msgbox SootopolisCity_MysteryEventsHouse_1F_Text_CurrentBattles, MSGBOX_NPC
 	end
 
 SootopolisCity_MysteryEventsHouse_1F_EventScript_InvalidVisitingTrainer::
@@ -225,3 +209,10 @@ SootopolisCity_MysteryEventsHouse_1F_Text_TooBadForYou:
 	.string "But it was a good match.\n"
 	.string "I hope you can win next time.$"
 
+SootopolisCity_MysteryEventsHouse_1F_Text_CurrentBattles::
+	.string "I still enjoy a fine Pokémon\n"
+	.string "battle. These old visitor records\l"
+	.string "bring back good memories.\p"
+	.string "For a new challenge, seek the\n"
+	.string "League or the Frontier's CHAMPIONS\l"
+	.string "CIRCUIT.$"

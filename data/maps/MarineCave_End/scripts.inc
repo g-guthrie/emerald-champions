@@ -35,7 +35,6 @@ MarineCave_End_EventScript_Kyogre::
 	setvar VAR_LAST_TALKED, LOCALID_MARINE_CAVE_KYOGRE
 	setvar VAR_0x8004, SPECIES_KYOGRE
 	setvar VAR_0x8005, 0
-	msgbox gText_LegendaryOneShotWarning, MSGBOX_DEFAULT
 	special CreateEmeraldChampionsStaticLegendaryEncounter
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
@@ -56,8 +55,7 @@ MarineCave_End_EventScript_CaughtKyogre::
 	end
 
 MarineCave_End_EventScript_DefeatedKyogre::
-	setvar VAR_SHOULD_END_ABNORMAL_WEATHER, 1
-	goto Common_EventScript_LegendaryDefeated
+	goto Common_EventScript_LegendaryResting
 	end
 
 MarineCave_End_EventScript_RanFromKyogre::

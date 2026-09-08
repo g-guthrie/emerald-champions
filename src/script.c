@@ -1,4 +1,5 @@
 #include "global.h"
+#include "legendary_signs.h"
 #include "script.h"
 #include "event_data.h"
 #include "field_screen_effect.h"
@@ -434,6 +435,7 @@ void RunOnLoadMapScript(void)
 
 void RunOnTransitionMapScript(void)
 {
+    ResetLegendaryEncounterVisits();
     MapHeaderRunScriptType(MAP_SCRIPT_ON_TRANSITION);
 }
 

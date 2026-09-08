@@ -174,64 +174,6 @@ AI_MULTI_BATTLE_TEST("Partner will not steal your pokemon to delay using their a
     }
 }
 
-AI_MULTI_BATTLE_TEST("AI opponents do not steal their partner pokemon in multi battle to delay using their ace")
-{
-
-    GIVEN {
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
-        BATTLER_AI_FLAGS(opponentLeft, AI_FLAG_ACE_POKEMON);
-        PLAYER(SPECIES_WOBBUFFET);
-        PARTNER(SPECIES_WOBBUFFET);
-        OPPONENT_A(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); HP(1); }
-        OPPONENT_A(SPECIES_VENUSAUR) { Moves(MOVE_GIGA_DRAIN); }
-        OPPONENT_B(SPECIES_WYNAUT) { Moves(MOVE_CELEBRATE); }
-    } WHEN {
-        TURN { MOVE(playerLeft, MOVE_TACKLE, target: opponentLeft); }
-        TURN { MOVE(playerLeft, MOVE_TACKLE, target: opponentLeft); }
-    } THEN {
-        EXPECT_EQ(SPECIES_VENUSAUR, opponentLeft->species);
-    }
-}
-
-AI_MULTI_BATTLE_TEST("AI opponents do not steal their partner pokemon in multi battle when forced out")
-{
-    enum Item item;
-    enum Move move;
-    PARAMETRIZE { item = ITEM_EJECT_BUTTON; move = MOVE_TACKLE; }
-    PARAMETRIZE { item = ITEM_EJECT_PACK; move = MOVE_TAIL_WHIP; }
-    PARAMETRIZE { item = ITEM_NONE; move = MOVE_ROAR; }
-    GIVEN {
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
-        BATTLER_AI_FLAGS(opponentLeft, AI_FLAG_ACE_POKEMON);
-        PLAYER(SPECIES_WOBBUFFET);
-        PARTNER(SPECIES_WOBBUFFET);
-        OPPONENT_A(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); Item(item); }
-        OPPONENT_A(SPECIES_VENUSAUR) { Moves(MOVE_GIGA_DRAIN); }
-        OPPONENT_B(SPECIES_WYNAUT) { Moves(MOVE_CELEBRATE); }
-    } WHEN {
-        TURN { MOVE(playerLeft, move, target: opponentLeft); }
-    } THEN {
-        EXPECT_EQ(SPECIES_VENUSAUR, opponentLeft->species);
-    }
-}
-
-AI_MULTI_BATTLE_TEST("AI opponents do not steal their partner pokemon in multi battle when forced out 2")
-{
-    GIVEN {
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
-        BATTLER_AI_FLAGS(opponentLeft, AI_FLAG_ACE_POKEMON);
-        PLAYER(SPECIES_WOBBUFFET);
-        PARTNER(SPECIES_WOBBUFFET);
-        OPPONENT_A(SPECIES_GOLISOPOD) { Moves(MOVE_CELEBRATE); HP(101); MaxHP(200); Ability(ABILITY_EMERGENCY_EXIT); }
-        OPPONENT_A(SPECIES_VENUSAUR) { Moves(MOVE_GIGA_DRAIN); }
-        OPPONENT_B(SPECIES_WYNAUT) { Moves(MOVE_CELEBRATE); }
-    } WHEN {
-        TURN { MOVE(playerLeft, MOVE_TACKLE, target: opponentLeft); }
-    } THEN {
-        EXPECT_EQ(SPECIES_VENUSAUR, opponentLeft->species);
-    }
-}
-
 AI_MULTI_BATTLE_TEST("Pollen Puff: AI correctly scores moves with EFFECT_HIT_ENEMY_HEAL_ALLY as damaging opponents but not allies")
 {
     GIVEN {

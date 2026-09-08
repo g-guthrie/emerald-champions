@@ -13,11 +13,6 @@ BattleFrontier_BattlePalaceLobby_EventScript_TurnPlayerNorth::
 	end
 
 BattleFrontier_BattlePalaceLobby_OnFrame:
-	map_script_2 VAR_TEMP_CHALLENGE_STATUS, 0, BattleFrontier_BattlePalaceLobby_EventScript_GetChallengeStatus
-	map_script_2 VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_SAVING, BattleFrontier_BattlePalaceLobby_EventScript_QuitWithoutSaving
-	map_script_2 VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_PAUSED, BattleFrontier_BattlePalaceLobby_EventScript_ResumeChallenge
-	map_script_2 VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_WON, BattleFrontier_BattlePalaceLobby_EventScript_WonChallenge
-	map_script_2 VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST, BattleFrontier_BattlePalaceLobby_EventScript_LostChallenge
 	.2byte 0
 
 BattleFrontier_BattlePalaceLobby_EventScript_GetChallengeStatus::
@@ -297,19 +292,13 @@ BattleFrontier_BattlePalaceLobby_Movement_PlayerEnterDoor:
 	step_end
 
 BattleFrontier_BattlePalaceLobby_EventScript_ShowSinglesResults::
-	lockall
-	frontier_results FRONTIER_FACILITY_PALACE, FRONTIER_MODE_SINGLES
-	waitbuttonpress
-	special RemoveRecordsWindow
-	releaseall
+	special ChampionsCircuitBufferRecord
+	msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN
 	end
 
 BattleFrontier_BattlePalaceLobby_EventScript_ShowDoublesResults::
-	lockall
-	frontier_results FRONTIER_FACILITY_PALACE, FRONTIER_MODE_DOUBLES
-	waitbuttonpress
-	special RemoveRecordsWindow
-	releaseall
+	special ChampionsCircuitBufferRecord
+	msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN
 	end
 
 BattleFrontier_BattlePalaceLobby_EventScript_BlackBelt::
@@ -329,9 +318,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_Maniac::
 	end
 
 BattleFrontier_BattlePalaceLobby_EventScript_RulesBoard::
-	lockall
-	msgbox BattleFrontier_BattlePalaceLobby_Text_RulesAreListed, MSGBOX_DEFAULT
-	goto BattleFrontier_BattlePalaceLobby_EventScript_ReadRulesBoard
+	msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRules, MSGBOX_SIGN
 	end
 
 BattleFrontier_BattlePalaceLobby_EventScript_ReadRulesBoard::
@@ -520,18 +507,11 @@ BattleFrontier_BattlePalaceLobby_Text_LadyCanTellWhatMonsThink:
 	.string "Why are you looking at me like that?$"
 
 BattleFrontier_BattlePalaceLobby_Text_NatureAndMovesKeyHere:
-	.string "Hmm…\p"
-	.string "It appears that the nature of POKéMON\n"
-	.string "and the moves that they have been\l"
-	.string "taught are the keys to battle here.\p"
-	.string "To be more precise, it's how well\n"
-	.string "the moves match the nature of\l"
-	.string "the POKéMON.\p"
-	.string "If your POKéMON is in trouble and\n"
-	.string "unable to live up to its potential,\l"
-	.string "you may need to examine how well\l"
-	.string "its moves match its nature.$"
-
+	.string "The old Palace tested how Pokémon\n"
+	.string "acted on their own.\p"
+	.string "In the CIRCUIT, you command every\n"
+	.string "move. Natures change stats, not\l"
+	.string "obedience.$"
 BattleFrontier_BattlePalaceLobby_Text_MonDocileButTransforms:
 	.string "My POKéMON is usually very docile.\p"
 	.string "But when it's in a BATTLE HALL,\n"
@@ -541,12 +521,11 @@ BattleFrontier_BattlePalaceLobby_Text_MonDocileButTransforms:
 	.string "It's shocking, even.$"
 
 BattleFrontier_BattlePalaceLobby_Text_WhatNatureFavorsChippingAway:
-	.string "I wonder what sort of nature a POKéMON\n"
-	.string "would have if it favored enfeebling its\l"
-	.string "opponents and chipping away slowly.\p"
-	.string "I'd be surprised if it was a LAX nature.\p"
-	.string "But, nah, that can't be right.$"
-
+	.string "A careful Nature and Stat Point\n"
+	.string "spread can help a partner survive\l"
+	.string "the turn that matters.\p"
+	.string "Then I choose what it does with\n"
+	.string "that extra turn!$"
 BattleFrontier_BattlePalaceLobby_Text_WelcomeForDoubleBattle:
 	.string "Where the hearts of TRAINERS\n"
 	.string "are put to the test.\p"

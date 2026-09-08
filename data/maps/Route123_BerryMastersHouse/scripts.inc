@@ -9,6 +9,113 @@ Route123_BerryMastersHouse_OnTransition:
 Route123_BerryMastersHouse_EventScript_BerryMaster::
 	lock
 	faceplayer
+	message Route123_BerryMastersHouse_Text_GardenWelcome
+	waitmessage
+	dynmultipush Route123_BerryMastersHouse_Text_BerryGifts, 0
+	dynmultipush Route123_BerryMastersHouse_Text_StoneTrades, 1
+	dynmultipush Route123_BerryMastersHouse_Text_Leave, 2
+	dynmultistack 8, 1, FALSE, 3, 0, 0, DYN_MULTICHOICE_CB_NONE
+	closemessage
+	goto_if_eq VAR_RESULT, 0, Route123_BerryMastersHouse_EventScript_DailyBerries
+	goto_if_eq VAR_RESULT, 1, Route123_BerryMastersHouse_EventScript_StoneTrades
+	release
+	end
+
+Route123_BerryMastersHouse_EventScript_StoneTrades:
+	special CountEmeraldChampionsGardenBerries
+	buffernumberstring STR_VAR_1, VAR_RESULT
+	buffernumberstring STR_VAR_2, VAR_0x8005
+	message Route123_BerryMastersHouse_Text_StonePrices
+	waitmessage
+	dynmultipush Route123_BerryMastersHouse_Text_Baxcalibrite, 0
+	dynmultipush Route123_BerryMastersHouse_Text_Dragoninite, 1
+	dynmultipush Route123_BerryMastersHouse_Text_Tyranitarite, 2
+	dynmultipush Route123_BerryMastersHouse_Text_WhichBerries, 3
+	dynmultipush Route123_BerryMastersHouse_Text_Leave, 4
+	dynmultistack 8, 1, FALSE, 4, 0, 0, DYN_MULTICHOICE_CB_NONE
+	closemessage
+	goto_if_eq VAR_RESULT, 0, Route123_BerryMastersHouse_EventScript_Baxcalibrite
+	goto_if_eq VAR_RESULT, 1, Route123_BerryMastersHouse_EventScript_Dragoninite
+	goto_if_eq VAR_RESULT, 2, Route123_BerryMastersHouse_EventScript_Tyranitarite
+	goto_if_eq VAR_RESULT, 3, Route123_BerryMastersHouse_EventScript_WhichBerries
+	release
+	end
+
+Route123_BerryMastersHouse_EventScript_Baxcalibrite:
+	setvar VAR_0x8004, ITEM_BAXCALIBRITE
+	goto Route123_BerryMastersHouse_EventScript_ConfirmStone
+Route123_BerryMastersHouse_EventScript_Dragoninite:
+	setvar VAR_0x8004, ITEM_DRAGONINITE
+	goto Route123_BerryMastersHouse_EventScript_ConfirmStone
+Route123_BerryMastersHouse_EventScript_Tyranitarite:
+	setvar VAR_0x8004, ITEM_TYRANITARITE
+Route123_BerryMastersHouse_EventScript_ConfirmStone:
+	bufferitemname STR_VAR_1, VAR_0x8004
+	msgbox Route123_BerryMastersHouse_Text_ConfirmStone, MSGBOX_YESNO
+	goto_if_ne VAR_RESULT, YES, Route123_BerryMastersHouse_EventScript_StoneTrades
+	special TradeEmeraldChampionsGardenBerries
+	goto_if_eq VAR_RESULT, EC_MEGA_BERRY_TRADE_ALREADY_DONE, Route123_BerryMastersHouse_EventScript_StoneAlreadyGiven
+	goto_if_eq VAR_RESULT, EC_MEGA_BERRY_TRADE_NOT_ENOUGH, Route123_BerryMastersHouse_EventScript_MoreBerries
+	goto_if_eq VAR_RESULT, EC_MEGA_BERRY_TRADE_BAG_FULL, Common_EventScript_ShowBagIsFull
+	goto_if_ne VAR_RESULT, EC_MEGA_BERRY_TRADE_SUCCESS, Route123_BerryMastersHouse_EventScript_StoneTrades
+	playfanfare MUS_OBTAIN_ITEM
+	msgbox Route123_BerryMastersHouse_Text_StoneReceived, MSGBOX_DEFAULT
+	waitfanfare
+	goto Route123_BerryMastersHouse_EventScript_StoneTrades
+
+Route123_BerryMastersHouse_EventScript_WhichBerries:
+	msgbox Route123_BerryMastersHouse_Text_GardenBerries, MSGBOX_DEFAULT
+	goto Route123_BerryMastersHouse_EventScript_StoneTrades
+Route123_BerryMastersHouse_EventScript_MoreBerries:
+	msgbox Route123_BerryMastersHouse_Text_MoreBerries, MSGBOX_DEFAULT
+	goto Route123_BerryMastersHouse_EventScript_StoneTrades
+Route123_BerryMastersHouse_EventScript_StoneAlreadyGiven:
+	msgbox Route123_BerryMastersHouse_Text_StoneAlreadyGiven, MSGBOX_DEFAULT
+	goto Route123_BerryMastersHouse_EventScript_StoneTrades
+
+Route123_BerryMastersHouse_Text_GardenWelcome:
+	.string "A good garden always has something\n"
+	.string "to share. What brings you here?$"
+Route123_BerryMastersHouse_Text_BerryGifts:
+	.string "Berry gifts$"
+Route123_BerryMastersHouse_Text_StoneTrades:
+	.string "Mega Stone trades$"
+Route123_BerryMastersHouse_Text_Leave:
+	.string "See you later$"
+Route123_BerryMastersHouse_Text_Baxcalibrite:
+	.string "Baxcalibrite$"
+Route123_BerryMastersHouse_Text_Dragoninite:
+	.string "Dragoninite$"
+Route123_BerryMastersHouse_Text_Tyranitarite:
+	.string "Tyranitarite$"
+Route123_BerryMastersHouse_Text_WhichBerries:
+	.string "Which berries?$"
+Route123_BerryMastersHouse_Text_StonePrices:
+	.string "Each stone costs {STR_VAR_2} garden berries.\n"
+	.string "You have {STR_VAR_1}. One of each stone!$"
+Route123_BerryMastersHouse_Text_ConfirmStone:
+	.string "Trade {STR_VAR_2} garden berries for\n"
+	.string "a {STR_VAR_1}?$"
+Route123_BerryMastersHouse_Text_StoneReceived:
+	.string "You traded the berries and received\n"
+	.string "a {STR_VAR_1}!$"
+Route123_BerryMastersHouse_Text_StoneAlreadyGiven:
+	.string "That one's already yours! I only\n"
+	.string "found one of each in these fields.$"
+Route123_BerryMastersHouse_Text_MoreBerries:
+	.string "Keep gathering as you travel. Plant\n"
+	.string "a few, and your harvest will grow!$"
+Route123_BerryMastersHouse_Text_GardenBerries:
+	.string "Razz, Bluk, Nanab, Wepear and Pinap\n"
+	.string "are perfect for my garden.\p"
+	.string "Pomeg, Kelpsy, Qualot, Hondew, Grepa\n"
+	.string "and Tamato count, too. Any mixture!\p"
+	.string "I found these stones while digging.\n"
+	.string "Let's put them to better use.$"
+
+Route123_BerryMastersHouse_EventScript_DailyBerries::
+	lock
+	faceplayer
 	dotimebasedevents
 	goto_if_set FLAG_DAILY_BERRY_MASTER_RECEIVED_BERRY, Route123_BerryMastersHouse_EventScript_ReceivedBerryToday
 	msgbox Route123_BerryMastersHouse_Text_YoureDeservingOfBerry, MSGBOX_DEFAULT

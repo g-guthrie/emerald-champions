@@ -9,8 +9,7 @@ FallarborTown_CozmosHouse_EventScript_ProfCozmo::
 	special CheckEmeraldChampionsHandoffItem
 	goto_if_eq VAR_RESULT, TRUE, FallarborTown_CozmosHouse_EventScript_PlayerHasMeteorite
 	msgbox FallarborTown_CozmosHouse_Text_MeteoriteWillNeverBeMineNow, MSGBOX_DEFAULT
-	release
-	end
+	goto FallarborTown_CozmosHouse_EventScript_DeoxysResearch
 
 FallarborTown_CozmosHouse_EventScript_PlayerHasMeteorite::
 	call_if_unset FLAG_TEMP_2, FallarborTown_CozmosHouse_EventScript_NoticeMeteorite
@@ -24,8 +23,7 @@ FallarborTown_CozmosHouse_EventScript_PlayerHasMeteorite::
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_MissingHandoffItem
 	setflag FLAG_RECEIVED_COZMO_DAWN_STONE
 	msgbox FallarborTown_CozmosHouse_Text_ReallyGoingToHelpMyResearch, MSGBOX_DEFAULT
-	release
-	end
+	goto FallarborTown_CozmosHouse_EventScript_DeoxysResearch
 
 FallarborTown_CozmosHouse_EventScript_NoticeMeteorite::
 	msgbox FallarborTown_CozmosHouse_Text_MeteoriteWillNeverBeMineNow, MSGBOX_DEFAULT
@@ -39,13 +37,11 @@ FallarborTown_CozmosHouse_EventScript_AskForMeteorite::
 FallarborTown_CozmosHouse_EventScript_DeclineGiveMeteorite::
 	setflag FLAG_TEMP_2
 	msgbox FallarborTown_CozmosHouse_Text_CrushedWithDisappointment, MSGBOX_DEFAULT
-	release
-	end
+	goto FallarborTown_CozmosHouse_EventScript_DeoxysResearch
 
 FallarborTown_CozmosHouse_EventScript_GaveMeteorite::
 	msgbox FallarborTown_CozmosHouse_Text_ReallyGoingToHelpMyResearch, MSGBOX_DEFAULT
-	release
-	end
+	goto FallarborTown_CozmosHouse_EventScript_DeoxysResearch
 
 FallarborTown_CozmosHouse_EventScript_CozmosWife::
 	lock
@@ -108,3 +104,34 @@ FallarborTown_CozmosHouse_Text_FeelSorryForCozmo:
 FallarborTown_CozmosHouse_Text_CozmoIsSoHappy:
 	.string "Look at PROF. COZMO…\n"
 	.string "He's so happy! I think it's cute.$"
+
+FallarborTown_CozmosHouse_EventScript_MegaGift_CLEFABLITE::
+	msgbox FallarborTown_CozmosHouse_Text_HisuianGoomy, MSGBOX_NPC
+	goto_if_set FLAG_EC_MEGA_GIFT_CLEFABLITE, FallarborTown_CozmosHouse_EventScript_CozmosWife
+	lock
+	faceplayer
+	msgbox FallarborTown_CozmosHouse_EventScript_MegaGift_CLEFABLITE_Text, MSGBOX_DEFAULT
+	giveitem ITEM_CLEFABLITE
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_EC_MEGA_GIFT_CLEFABLITE
+	release
+	goto FallarborTown_CozmosHouse_EventScript_CozmosWife
+
+FallarborTown_CozmosHouse_EventScript_MegaGift_CLEFABLITE_Text:
+	.string "Cozmo studies what falls from space.\n"
+	.string "I notice who comes looking for it.\p"
+	.string "Clefairy gather around these stones.\n"
+	.string "Take this one for its evolved form.$"
+
+FallarborTown_CozmosHouse_Text_HisuianGoomy:
+	.string "METEOR FALLS has iron-rich stone. Level\n"
+	.string "GOOMY to Lv. 40 or higher in its main\l"
+	.string "entrance chamber for Hisuian SLIGGOO.\p"
+	.string "Elsewhere, GOOMY keeps its usual form.\n"
+	.string "Either SLIGGOO evolves at Lv. 50 or\l"
+	.string "higher when leveled in rain or fog.$"
+
+FallarborTown_CozmosHouse_EventScript_DeoxysResearch::
+	call Common_EventScript_EmeraldChampionsDeoxysResearch
+	release
+	end

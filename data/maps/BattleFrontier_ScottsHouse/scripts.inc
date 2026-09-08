@@ -264,15 +264,11 @@ BattleFrontier_ScottsHouse_Text_WhyIGoSeekingTrainers:
 	.string "battling, and invite them here.$"
 
 BattleFrontier_ScottsHouse_Text_HaveYouMetFrontierBrain:
-	.string "SCOTT: Have you met any of\n"
-	.string "the FRONTIER BRAINS?\p"
-	.string "Better yet, have you obtained any\n"
-	.string "symbols from them?\p"
-	.string "I handpicked the FRONTIER BRAINS\n"
-	.string "as the toughest TRAINERS anywhere.\p"
-	.string "But I'm sure that seeing how tough\n"
-	.string "you are will startle even them!$"
-
+	.string "SCOTT: The FRONTIER BRAINS gave\n"
+	.string "these buildings their character.\p"
+	.string "Today every desk enters the\n"
+	.string "CHAMPIONS CIRCUIT. I want to see\l"
+	.string "what your team can do there!$"
 BattleFrontier_ScottsHouse_Text_MayFindWildMonsInFrontier:
 	.string "SCOTT: You don't just train for battle,\n"
 	.string "right?\p"

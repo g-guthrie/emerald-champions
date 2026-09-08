@@ -213,7 +213,7 @@ SINGLE_BATTLE_TEST("Rage Fist base power is not lost if user switches out (Gen9)
 
 SINGLE_BATTLE_TEST("Rage Fist base power is lost if user switches out (Champions)")
 {
-    s16 timesGotHit[2];
+    s16 damage[3];
 
     GIVEN {
         WITH_CONFIG(B_RAGE_FIST, GEN_CHAMPIONS);
@@ -222,19 +222,25 @@ SINGLE_BATTLE_TEST("Rage Fist base power is lost if user switches out (Champions
         OPPONENT(SPECIES_REGIROCK);
     } WHEN {
         TURN { MOVE(player, MOVE_RAGE_FIST); MOVE(opponent, MOVE_SCRATCH); }
+        TURN { MOVE(player, MOVE_RAGE_FIST); }
         TURN { SWITCH(player, 1); MOVE(opponent, MOVE_SCRATCH); }
         TURN { SWITCH(player, 0); }
         TURN { MOVE(player, MOVE_RAGE_FIST); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_RAGE_FIST, player);
-        HP_BAR(opponent, captureDamage: &timesGotHit[0]);
+        HP_BAR(opponent, captureDamage: &damage[0]);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
+        HP_BAR(player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_RAGE_FIST, player);
+        HP_BAR(opponent, captureDamage: &damage[1]);
         SWITCH_OUT_MESSAGE("Wobbuffet");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
         SWITCH_OUT_MESSAGE("Wynaut");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_RAGE_FIST, player);
-        HP_BAR(opponent, captureDamage: &timesGotHit[1]);
+        HP_BAR(opponent, captureDamage: &damage[2]);
     } THEN {
-        EXPECT_MUL_EQ(timesGotHit[0], Q_4_12(1.0), timesGotHit[0]);
+        EXPECT_MUL_EQ(damage[0], Q_4_12(2.0), damage[1]);
+        EXPECT_EQ(damage[0], damage[2]);
     }
 }
 

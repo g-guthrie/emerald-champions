@@ -281,7 +281,8 @@ LilycoveCity_EventScript_May::
 	call_if_unset FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE, LilycoveCity_EventScript_MayAskToBattle
 	goto_if_eq VAR_RESULT, NO, LilycoveCity_EventScript_DeclineMayBattle
 	msgbox LilycoveCity_Text_MayWontBeBeaten, MSGBOX_DEFAULT
-	switch VAR_STARTER_MON
+	special BufferEmeraldChampionsRivalBranch
+	switch VAR_RESULT
 	case 0, LilycoveCity_EventScript_BattleMayTreecko
 	case 1, LilycoveCity_EventScript_BattleMayTorchic
 	case 2, LilycoveCity_EventScript_BattleMayMudkip
@@ -309,7 +310,8 @@ LilycoveCity_EventScript_Brendan::
 	call_if_unset FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE, LilycoveCity_EventScript_BrendanAskToBattle
 	goto_if_eq VAR_RESULT, NO, LilycoveCity_EventScript_DeclineBrendanBattle
 	msgbox LilycoveCity_Text_BrendanWontBeBeaten, MSGBOX_DEFAULT
-	switch VAR_STARTER_MON
+	special BufferEmeraldChampionsRivalBranch
+	switch VAR_RESULT
 	case 0, LilycoveCity_EventScript_BattleBrendanTreecko
 	case 1, LilycoveCity_EventScript_BattleBrendanTorchic
 	case 2, LilycoveCity_EventScript_BattleBrendanMudkip
@@ -470,11 +472,10 @@ LilycoveCity_Text_MayWontBeBeaten:
 	.string "everything. Let's see yours answer them!$"
 
 LilycoveCity_Text_MayDefeat:
-	.string "… … … … … … … …\p"
-	.string "I remember ROUTE 103. You didn't win\n"
-	.string "on power then either. You read faster.\p"
-	.string "You're still reading faster.$"
-
+	.string "MAY: I remember our first battle\n"
+	.string "on ROUTE 103.\p"
+	.string "You keep finding ways through my\n"
+	.string "teams. I'll have to try again!$"
 LilycoveCity_Text_MayGoingBackToLittleroot:
 	.string "MAY: I'm heading back to LITTLEROOT.\p"
 	.string "Dad's SIGN records need a second pair of\n"
@@ -521,10 +522,11 @@ LilycoveCity_Text_BrendanWontBeBeaten:
 	.string "here. I'm not losing to {PLAYER}.$"
 
 LilycoveCity_Text_BrendanDefeat:
-	.string "Humph… You read my lead in one turn.\p"
-	.string "That stings. I had a head start on you\n"
-	.string "as a TRAINER…$"
-
+	.string "BRENDAN: You found a way through\n"
+	.string "my team. That stings.\p"
+	.string "I had a head start as a TRAINER...\n"
+	.string "I'll have to make the next one\l"
+	.string "count.$"
 LilycoveCity_Text_BrendanGoingBackToLittleroot:
 	.string "BRENDAN: I'm going home to LITTLEROOT.\p"
 	.string "Dad's SIGN records are a mess. Someone\n"

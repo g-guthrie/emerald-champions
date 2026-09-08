@@ -35,6 +35,8 @@ Route101_EventScript_StartBirchRescue::
 	applymovement LOCALID_ROUTE101_ZIGZAGOON, Route101_Movement_ZigzagoonFaceBirch
 	applymovement LOCALID_ROUTE101_BIRCH, Route101_Movement_BirchFaceZigzagoon
 	waitmovement 0
+	applymovement LOCALID_ROUTE101_POOCHYENA, Route101_Movement_PoochyenaJoinChase
+	waitmovement 0
 	msgbox Route101_Text_PleaseHelp, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_ROUTE101_STATE, 2
@@ -216,21 +218,71 @@ Route101_EventScript_RouteSign::
 	goto Common_EventScript_ShowRouteSpecies
 
 Route101_EventScript_BirchsBag::
-	lock
+	lockall
 	faceplayer
-	setflag FLAG_SYS_POKEMON_GET
-	setflag FLAG_RESCUED_BIRCH
+	goto_if_eq VAR_EC_OPENING_STATE, EC_OPENING_RESCUE_WON, Route101_EventScript_FinishRescue
+	goto_if_eq VAR_EC_OPENING_STATE, EC_OPENING_PAIR_GRANTED, Route101_EventScript_RescueMenu
 	fadescreen FADE_TO_BLACK
 	removeobject LOCALID_ROUTE101_ZIGZAGOON
+	removeobject LOCALID_ROUTE101_POOCHYENA
 	setobjectxy LOCALID_PLAYER, 6, 13
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	special ChooseStarter
+	goto_if_eq VAR_RESULT, FALSE, Route101_EventScript_PairUnavailable
+	goto Route101_EventScript_RescueMenu
+
+Route101_EventScript_RescueMenu::
+	message Route101_Text_PrepareRescue
+	waitmessage
+	dynmultipush Route101_Text_Battle, 0
+	dynmultipush Route101_Text_PreparePair, 1
+	dynmultipush Route101_Text_BackToBag, 2
+	dynmultistack 30, 1, FALSE, 3, 0, 0, DYN_MULTICHOICE_CB_NONE
+	closemessage
+	switch VAR_RESULT
+	case 0, Route101_EventScript_BattleRescue
+	case 1, Route101_EventScript_PreparePair
+	goto Route101_EventScript_ReturnToBag
+
+Route101_EventScript_PreparePair::
+	message Route101_Text_PairPreparation
+	waitmessage
+	dynmultipush Route101_Text_MovesAndStats, 0
+	dynmultipush Route101_Text_HeldItems, 1
+	dynmultipush Route101_Text_BackToBag, 2
+	dynmultistack 30, 1, FALSE, 3, 0, 0, DYN_MULTICHOICE_CB_NONE
+	closemessage
+	switch VAR_RESULT
+	case 0, Route101_EventScript_OpeningPrep
+	case 1, Route101_EventScript_OpeningItems
+	goto Route101_EventScript_RescueMenu
+
+Route101_EventScript_OpeningPrep::
+	call Common_EventScript_EmeraldChampionsOpeningPrep
+	goto Route101_EventScript_PreparePair
+
+Route101_EventScript_OpeningItems::
+	call Common_EventScript_EmeraldChampionsOpeningItems
+	goto Route101_EventScript_PreparePair
+
+Route101_EventScript_BattleRescue::
+	fadescreen FADE_TO_BLACK
+	removeobject LOCALID_ROUTE101_ZIGZAGOON
+	removeobject LOCALID_ROUTE101_POOCHYENA
+	setobjectxy LOCALID_PLAYER, 6, 13
+	special StartEmeraldChampionsBirchRescue
+	goto_if_ne VAR_RESULT, B_OUTCOME_WON, Route101_EventScript_RescueLost
+	setvar VAR_EC_OPENING_STATE, EC_OPENING_RESCUE_WON
+	setflag FLAG_RESCUED_BIRCH
+
+Route101_EventScript_FinishRescue::
 	applymovement LOCALID_ROUTE101_BIRCH, Route101_Movement_BirchApproachPlayer
 	waitmovement 0
 	msgbox Route101_Text_YouSavedMe, MSGBOX_DEFAULT
 	special HealPlayerParty
 	setflag FLAG_HIDE_ROUTE_101_BIRCH_ZIGZAGOON_BATTLE
+	setflag FLAG_HIDE_ROUTE_101_ZIGZAGOON
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_BIRCH
 	setflag FLAG_HIDE_ROUTE_101_BIRCH_STARTERS_BAG
 	setvar VAR_BIRCH_LAB_STATE, 2
@@ -243,6 +295,68 @@ Route101_EventScript_BirchsBag::
 	waitstate
 	release
 	end
+
+Route101_EventScript_RescueLost::
+	msgbox Route101_Text_RescueTryAgain, MSGBOX_DEFAULT
+	goto Route101_EventScript_RescueMenu
+
+Route101_EventScript_PairUnavailable::
+	msgbox Route101_Text_PairUnavailable, MSGBOX_DEFAULT
+
+Route101_EventScript_ReturnToBag::
+	fadescreen FADE_TO_BLACK
+	setobjectxy LOCALID_PLAYER, 7, 15
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
+	waitmovement 0
+	clearflag FLAG_HIDE_ROUTE_101_ZIGZAGOON
+	clearflag FLAG_HIDE_ROUTE_101_BIRCH_ZIGZAGOON_BATTLE
+	addobject LOCALID_ROUTE101_BIRCH
+	addobject LOCALID_ROUTE101_ZIGZAGOON
+	addobject LOCALID_ROUTE101_POOCHYENA
+	setobjectxy LOCALID_ROUTE101_BIRCH, 4, 13
+	setobjectxy LOCALID_ROUTE101_ZIGZAGOON, 5, 13
+	setobjectxy LOCALID_ROUTE101_POOCHYENA, 6, 13
+	applymovement LOCALID_ROUTE101_BIRCH, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_ROUTE101_ZIGZAGOON, Common_Movement_WalkInPlaceFasterLeft
+	applymovement LOCALID_ROUTE101_POOCHYENA, Common_Movement_WalkInPlaceFasterLeft
+	waitmovement 0
+	setvar VAR_ROUTE101_STATE, 2
+	fadescreen FADE_FROM_BLACK
+	releaseall
+	end
+
+Route101_Movement_PoochyenaJoinChase:
+	walk_up
+	face_left
+	step_end
+
+Route101_Text_PrepareRescue:
+	.string "Your two partners are ready.\n"
+	.string "Battle now, or prepare the pair?$"
+
+Route101_Text_PairPreparation:
+	.string "Set up the moves, stats and held\n"
+	.string "items your partners will use.$"
+
+Route101_Text_Battle:
+	.string "Battle$"
+Route101_Text_PreparePair:
+	.string "Prepare pair$"
+Route101_Text_BackToBag:
+	.string "Back$"
+Route101_Text_MovesAndStats:
+	.string "Moves and stats$"
+Route101_Text_HeldItems:
+	.string "Held items$"
+
+Route101_Text_RescueTryAgain:
+	.string "Your partners are safe.\p"
+	.string "Prepare your next attempt,\n"
+	.string "and help BIRCH!$"
+
+Route101_Text_PairUnavailable:
+	.string "There is no room for both partners.\n"
+	.string "No new pair was given.$"
 
 Route101_EventScript_HideMayInBedroom::
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
@@ -260,10 +374,9 @@ Route101_Text_HelpMe:
 	.string "H-help me!$"
 
 Route101_Text_PleaseHelp:
-	.string "Hello! You over there!\n"
-	.string "Please! Help!\p"
-	.string "In my BAG!\n"
-	.string "There's a POKé BALL!$"
+	.string "You there! Please help!\p"
+	.string "Two wild POKéMON are after me!\n"
+	.string "Choose two POKéMON from my BAG!$"
 
 Route101_Text_DontLeaveMe:
 	.string "Wh-Where are you going?!\n"
@@ -295,4 +408,3 @@ Route101_Text_WildPokemonInTallGrass:
 Route101_Text_RouteSign:
 	.string "ROUTE 101\n"
 	.string "{UP_ARROW} OLDALE TOWN$"
-

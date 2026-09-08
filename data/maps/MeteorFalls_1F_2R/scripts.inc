@@ -81,11 +81,12 @@ MeteorFalls_1F_2R_Text_NicolasDefeat:
 	.string "I didn't expect you to be so strong!$"
 
 MeteorFalls_1F_2R_Text_NicolasPostBattle:
-	.string "The rear wall rings near REGIROCK.\n"
-	.string "A deeper mark resembles ALAKAZAM.\p"
-	.string "Bring those families through the Falls;\n"
-	.string "the cave may answer without DEVON.$"
-
+	.string "A mark here answers REGIROCK once\n"
+	.string "you hold the FEATHER BADGE.\p"
+	.string "Other SIGNS lie deeper in the\n"
+	.string "Falls. Inspect them as you\l"
+	.string "explore; DEVON keeps their\l"
+	.string "conditions on file.$"
 MeteorFalls_1F_2R_Text_NicolasRegister:
 	.string "I want to know more about your power.\n"
 	.string "Let me register you in my POKéNAV.$"

@@ -46,3 +46,37 @@ DewfordTown_House2_Text_BrawlySoCool:
 	.string "heard about BRAWLY?\p"
 	.string "He's so cool…\n"
 	.string "Everyone idolizes him.$"
+
+DewfordTown_House2_EventScript_MegaGift_KINGLERITE::
+	goto_if_set FLAG_EC_MEGA_GIFT_KINGLERITE, DewfordTown_House2_EventScript_Boy
+	lock
+	faceplayer
+	msgbox DewfordTown_House2_EventScript_MegaGift_KINGLERITE_Text, MSGBOX_DEFAULT
+	giveitem ITEM_KINGLERITE
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_EC_MEGA_GIFT_KINGLERITE
+	release
+	goto DewfordTown_House2_EventScript_Boy
+
+DewfordTown_House2_EventScript_MegaGift_KINGLERITE_Text:
+	.string "I followed a Krabby along the shore\n"
+	.string "and found this where it was digging.\p"
+	.string "When its claw is big and strong,\n"
+	.string "this stone could make it stronger!$"
+
+DewfordTown_House2_EventScript_MegaGift_GYARADOSITE::
+	goto_if_set FLAG_EC_MEGA_GIFT_GYARADOSITE, DewfordTown_House2_EventScript_Man
+	lock
+	faceplayer
+	msgbox DewfordTown_House2_EventScript_MegaGift_GYARADOSITE_Text, MSGBOX_DEFAULT
+	giveitem ITEM_GYARADOSITE
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_EC_MEGA_GIFT_GYARADOSITE
+	release
+	goto DewfordTown_House2_EventScript_Man
+
+DewfordTown_House2_EventScript_MegaGift_GYARADOSITE_Text:
+	.string "The fish you overlook today might\n"
+	.string "carry you through a storm tomorrow.\p"
+	.string "Raise a Magikarp with care.\n"
+	.string "This stone is for its grown form.$"

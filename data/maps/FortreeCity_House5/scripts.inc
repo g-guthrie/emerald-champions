@@ -33,3 +33,20 @@ FortreeCity_House5_Text_AdaptedToNature:
 FortreeCity_House5_Text_Zigzagoon:
 	.string "ZIGZAGOON: Bufuu!$"
 
+
+FortreeCity_House5_EventScript_MegaGift_CHIMECHITE::
+	goto_if_set FLAG_EC_MEGA_GIFT_CHIMECHITE, FortreeCity_House5_EventScript_PokefanF
+	lock
+	faceplayer
+	msgbox FortreeCity_House5_EventScript_MegaGift_CHIMECHITE_Text, MSGBOX_DEFAULT
+	giveitem ITEM_CHIMECHITE
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_EC_MEGA_GIFT_CHIMECHITE
+	release
+	goto FortreeCity_House5_EventScript_PokefanF
+
+FortreeCity_House5_EventScript_MegaGift_CHIMECHITE_Text:
+	.string "Listen to the chimes in the trees.\n"
+	.string "No two breezes sound quite alike.\p"
+	.string "I kept this for a Chimecho.\n"
+	.string "Perhaps yours will give it a voice.$"

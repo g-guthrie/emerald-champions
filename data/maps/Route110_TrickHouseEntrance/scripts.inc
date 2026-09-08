@@ -360,7 +360,7 @@ Route110_TrickHouseEntrance_EventScript_GivePuzzle3Reward::
 	end
 
 Route110_TrickHouseEntrance_EventScript_GivePuzzle4Reward::
-	giveitem ITEM_SMOKE_BALL
+	giveitem ITEM_KINGS_ROCK
 	goto_if_eq VAR_RESULT, TRUE, Route110_TrickHouseEntrance_EventScript_GotReward
 	call_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 	msgbox Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward, MSGBOX_DEFAULT
@@ -402,27 +402,11 @@ Route110_TrickHouseEntrance_EventScript_GotReward::
 Route110_TrickHouseEntrance_EventScript_MechadollReward::
 	applymovement LOCALID_TRICK_MASTER, Common_Movement_FacePlayer
 	waitmovement 0
-	msgbox Route110_TrickHouseEntrance_Text_MechadollWhichTent, MSGBOX_DEFAULT
-	call Route110_TrickHouseEntrance_EventScript_ChooseTent
-	goto_if_eq VAR_RESULT, TRUE, Route110_TrickHouseEntrance_EventScript_ReceivedTent
-	call_if_eq VAR_RESULT, FALSE, Common_EventScript_NoRoomForDecor
-	msgbox Route110_TrickHouseEntrance_Text_PCFullAgain, MSGBOX_DEFAULT
+	msgbox Route110_TrickHouseEntrance_Text_FinalRewardsPending, MSGBOX_DEFAULT
+	call Route110_TrickHouseEnd_EventScript_ClaimFinalRewards
+	goto_if_eq VAR_TRICK_HOUSE_PRIZE_PICKUP, 0, Route110_TrickHouseEntrance_EventScript_ReceivedTent
 	releaseall
 	end
-
-Route110_TrickHouseEntrance_EventScript_ChooseTent::
-	multichoice 0, 0, MULTI_TENT, TRUE
-	switch VAR_RESULT
-	case 0, Route110_TrickHouseEntrance_EventScript_GiveRedTent
-	goto Route110_TrickHouseEntrance_EventScript_GiveBlueTent
-
-Route110_TrickHouseEntrance_EventScript_GiveRedTent::
-	givedecoration DECOR_RED_TENT
-	return
-
-Route110_TrickHouseEntrance_EventScript_GiveBlueTent::
-	givedecoration DECOR_BLUE_TENT
-	return
 
 Route110_TrickHouseEntrance_EventScript_ReceivedTent::
 	msgbox Route110_TrickHouseEntrance_Text_ThenFarewell, MSGBOX_DEFAULT
@@ -822,3 +806,9 @@ Route110_TrickHouseEntrance_Text_DoorLockedWriteSecretCodeHere:
 	.string "The door is locked.\p"
 	.string "…On closer inspection, this is written\n"
 	.string "on it: “Write the secret code here.”$"
+
+Route110_TrickHouseEntrance_Text_FinalRewardsPending::
+	.string "YOUR FINAL REWARDS ARE RECORDED.\p"
+	.string "THE TENT AND ALAKAZITE ARE\n"
+	.string "SEPARATE GIFTS. MAKE ROOM FOR ANY\l"
+	.string "PART STILL WAITING HERE.$"

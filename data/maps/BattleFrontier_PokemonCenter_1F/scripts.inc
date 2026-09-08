@@ -51,9 +51,10 @@ BattleFrontier_PokemonCenter_1F_Text_NextStopBattleArena:
 	.string "the PC Storage System.$"
 
 BattleFrontier_PokemonCenter_1F_Text_GoingThroughEveryChallenge:
-	.string "Giggle… I'm going to go through every\n"
-	.string "challenge with just this baby!$"
-
+	.string "I'm bringing SKITTY on my next\n"
+	.string "Circuit team!\p"
+	.string "Five partners will help this\n"
+	.string "little one find its chance.$"
 BattleFrontier_PokemonCenter_1F_Text_Skitty:
 	.string "SKITTY: Mya myaaah!$"
 

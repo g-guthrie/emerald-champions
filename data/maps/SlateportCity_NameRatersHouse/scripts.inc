@@ -109,3 +109,20 @@ SlateportCity_NameRatersHouse_Text_ThatIsMerelyAnEgg:
 	.string "Now, now.\n"
 	.string "That is merely an EGG!$"
 
+
+SlateportCity_NameRatersHouse_EventScript_MegaGift_MALAMARITE::
+	goto_if_set FLAG_EC_MEGA_GIFT_MALAMARITE, SlateportCity_NameRatersHouse_EventScript_NameRater
+	lock
+	faceplayer
+	msgbox SlateportCity_NameRatersHouse_EventScript_MegaGift_MALAMARITE_Text, MSGBOX_DEFAULT
+	giveitem ITEM_MALAMARITE
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_EC_MEGA_GIFT_MALAMARITE
+	release
+	goto SlateportCity_NameRatersHouse_EventScript_NameRater
+
+SlateportCity_NameRatersHouse_EventScript_MegaGift_MALAMARITE_Text:
+	.string "An Inkay once watched me write\n"
+	.string "its name while hanging upside down.\p"
+	.string "It left this curious stone behind.\n"
+	.string "A Malamar should know what to do.$"

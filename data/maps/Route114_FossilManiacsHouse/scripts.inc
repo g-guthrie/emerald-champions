@@ -35,7 +35,13 @@ Route114_FossilManiacsHouse_Text_HaveThisToDigLikeMyBrother:
 
 Route114_FossilManiacsHouse_Text_DigReturnsYouToEntrance:
 	.string "If you make a POKéMON DIG inside a\n"
-	.string "cave, you're returned to the entrance…$"
+	.string "cave, you're returned to the entrance…\p"
+	.string "Old peat has another use: use a PEAT\n"
+	.string "BLOCK on URSARING at night to evolve\l"
+	.string "it into URSALUNA, anywhere in HOENN.\p"
+	.string "The free Evolution Items archive\n"
+	.string "supplies PEAT BLOCKS once you have\l"
+	.string "the MEGA RING.$"
 
 Route114_FossilManiacsHouse_Text_RocksFillDisplayCase:
 	.string "Rocks in peculiar shapes fill\n"

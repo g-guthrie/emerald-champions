@@ -449,7 +449,8 @@ Route110_EventScript_PlayBrendanMusic::
 
 Route110_EventScript_MayBattle::
 	msgbox Route110_Text_MayLetsBattle, MSGBOX_DEFAULT
-	switch VAR_STARTER_MON
+	special BufferEmeraldChampionsRivalBranch
+	switch VAR_RESULT
 	case 0, Route110_EventScript_MayBattleTreecko
 	case 1, Route110_EventScript_MayBattleTorchic
 	case 2, Route110_EventScript_MayBattleMudkip
@@ -479,7 +480,8 @@ Route110_EventScript_MayDefeated::
 
 Route110_EventScript_BrendanBattle::
 	msgbox Route110_Text_BrendanLetsBattle, MSGBOX_DEFAULT
-	switch VAR_STARTER_MON
+	special BufferEmeraldChampionsRivalBranch
+	switch VAR_RESULT
 	case 0, Route110_EventScript_BrendanBattleTreecko
 	case 1, Route110_EventScript_BrendanBattleTorchic
 	case 2, Route110_EventScript_BrendanBattleMudkip
@@ -847,18 +849,18 @@ Route110_Text_MayDefeated:
 	.string "You broke my pair before it clicked!$"
 
 Route110_Text_MayTakeThis:
-	.string "MAY: You didn't outlevel me. Nobody can,\n"
-	.string "here. You built the better answer.\p"
-	.string "Take this. It finds what routes hide.$"
-
+	.string "MAY: Your partners found an answer\n"
+	.string "to mine. That was a good battle!\p"
+	.string "Take this. It finds what routes\n"
+	.string "hide.$"
 Route110_Text_MayExplainItemfinder:
-	.string "MAY: That's a DOWSING MACHINE. Hidden\n"
-	.string "items make it sing.\p"
-	.string "Have DEVON's researcher translate\n"
-	.string "each SIGN before seeking its partner.\p"
+	.string "MAY: That's a DOWSING MACHINE. It\n"
+	.string "reacts to hidden items.\p"
+	.string "DEVON's researcher has useful\n"
+	.string "leads if you want help finding a\l"
+	.string "SIGN.\p"
 	.string "I'm heading north to MAUVILLE!\n"
-	.string "WATTSON's GYM is there. See you ahead!$"
-
+	.string "WATTSON's GYM is there. See you!$"
 Route110_Text_RivalBeforeBattle:
 	.string "Hey, {PLAYER}! Meet me just down\n"
 	.string "the path. I want to see your team!$"
@@ -885,15 +887,14 @@ Route110_Text_BrendanDefeated:
 	.string "Hmm… You read the pair fast.$"
 
 Route110_Text_BrendanTakeThis:
-	.string "BRENDAN: Levels don't decide anything in\n"
-	.string "HOENN. Plans do. Yours was better.\p"
+	.string "BRENDAN: A strong team, well\n"
+	.string "played. You earned that win.\p"
 	.string "Here. Take this.$"
-
 Route110_Text_BrendanExplainItemfinder:
 	.string "BRENDAN: DOWSING MACHINE. It hums near\n"
 	.string "items you can't see.\p"
-	.string "Get each SIGN translated by\n"
-	.string "DEVON's researcher first.\p"
+	.string "DEVON's researcher has useful leads\n"
+	.string "if you want help finding a SIGN.\p"
 	.string "Keep north to MAUVILLE CITY.\n"
 	.string "WATTSON's GYM will test your team.$"
 
@@ -1021,18 +1022,18 @@ Route110_Text_SeasideParkingSign:
 	.string "SEASIDE PARKING$"
 
 Route110_Text_MauvilleCitySign:
-	.string "ROUTE 110\n"
-	.string "{UP_ARROW} MAUVILLE CITY\p"
-	.string "A scorched note says MANECTRIC may\n"
-	.string "call a storm Champion after MAUVILLE.$"
-
+	.string "ROUTE 110 {UP_ARROW} MAUVILLE CITY\p"
+	.string "A storm is carved into the stone.\n"
+	.string "Return with the DYNAMO BADGE and\l"
+	.string "inspect the nearby landmark.$"
 Route110_Text_TrainerTipsPrlzSleep:
 	.string "TRAINER TIPS\p"
-	.string "The foe can be made helpless by\n"
-	.string "paralyzing it or causing it to sleep.\p"
-	.string "It is an important technique for\n"
-	.string "POKéMON battles.$"
-
+	.string "Paralysis usually lowers Speed and\n"
+	.string "can interrupt a move.\p"
+	.string "Sleep stops most moves until the\n"
+	.string "Pokémon wakes. Abilities and\l"
+	.string "terrain can change which plans\l"
+	.string "work.$"
 Route110_Text_TrainerTipsRegisterItems:
 	.string "TRAINER TIPS\p"
 	.string "The items in the BAG can be reorganized\n"

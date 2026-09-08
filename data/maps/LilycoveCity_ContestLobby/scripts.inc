@@ -456,7 +456,11 @@ LilycoveCity_ContestLobby_EventScript_BlackBelt::
 	end
 
 LilycoveCity_ContestLobby_EventScript_Girl::
-	msgbox LilycoveCity_ContestLobby_Text_WholeVarietyOfPokemonHere, MSGBOX_NPC
+	lock
+	faceplayer
+	msgbox LilycoveCity_ContestLobby_Text_WholeVarietyOfPokemonHere, MSGBOX_DEFAULT
+	call Common_EventScript_EmeraldChampionsContestServices
+	release
 	end
 
 LilycoveCity_ContestLobby_EventScript_Artist::

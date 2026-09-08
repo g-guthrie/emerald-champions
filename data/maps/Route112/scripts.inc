@@ -174,15 +174,20 @@ Route112_Text_MtChimneyCableCarSign:
 
 Route112_Text_MtChimneySign:
 	.string "MT. CHIMNEY\p"
-	.string "“For LAVARIDGE TOWN or the summit,\n"
-	.string "please take the CABLE CAR.”\p"
-	.string "A newer carving points into FIERY PATH:\n"
-	.string "a flame, a mane, and TORKOAL's shell.$"
-
+	.string "For LAVARIDGE TOWN or the summit,\n"
+	.string "please take the CABLE CAR.\p"
+	.string "A newer carving points to FIERY\n"
+	.string "PATH. A fiery guardian may answer\l"
+	.string "a holder of the DYNAMO BADGE.$"
 Route112_Text_RouteSignLavaridge:
 	.string "ROUTE 112\n"
 	.string "{LEFT_ARROW} LAVARIDGE TOWN$"
 
 Route112_Text_CAROL_LocalConversation:
 	.string "The mountain is lovely today.\n"
-	.string "My sandwich is now toast.$"
+	.string "My sandwich is now toast.\p"
+	.string "KOFFING takes to FIERY PATH better.\n"
+	.string "Level it up there at Lv. 35 or higher\l"
+	.string "for Galarian WEEZING.\p"
+	.string "Outside that cave, it evolves into\n"
+	.string "the usual WEEZING.$"

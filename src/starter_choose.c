@@ -14,6 +14,7 @@
 #include "sound.h"
 #include "sprite.h"
 #include "starter_choose.h"
+#include "string_util.h"
 #include "strings.h"
 #include "task.h"
 #include "text.h"
@@ -448,6 +449,22 @@ static void VblankCB_StarterChoose(void)
 #define tStarterSelection   data[0]
 #define tPkmnSpriteId       data[1]
 #define tCircleSpriteId     data[2]
+#define tFirstChoice        data[3]
+
+static const u8 sText_ChooseFirstPartner[] = _("Choose your first partner.");
+static const u8 sText_ChooseSecondPartner[] = _("First: {STR_VAR_1}\nChoose your second partner.");
+static const u8 sText_ConfirmStarterPair[] = _("Take {STR_VAR_1} and {STR_VAR_2}\nas your partners?");
+
+static void CloseStarterPortrait(u8 taskId)
+{
+    u8 spriteId = gTasks[taskId].tPkmnSpriteId;
+
+    FreeOamMatrix(gSprites[spriteId].oam.matrixNum);
+    FreeAndDestroyMonPicSprite(spriteId);
+    spriteId = gTasks[taskId].tCircleSpriteId;
+    FreeOamMatrix(gSprites[spriteId].oam.matrixNum);
+    DestroySprite(&gSprites[spriteId]);
+}
 
 // Data for sSpriteTemplate_Pokeball
 #define sTaskId data[0]
@@ -523,6 +540,7 @@ void CB2_ChooseStarter(void)
 
     taskId = CreateTask(Task_StarterChoose, 0);
     gTasks[taskId].tStarterSelection = 1;
+    gTasks[taskId].tFirstChoice = -1;
 
     // Create hand sprite
     spriteId = CreateSprite(&sSpriteTemplate_Hand, 120, 56, 2);
@@ -557,7 +575,15 @@ static void Task_StarterChoose(u8 taskId)
 {
     CreateStarterPokemonLabel(gTasks[taskId].tStarterSelection);
     DrawStdFrameWithCustomTileAndPalette(0, FALSE, 0x2A8, 0xD);
-    AddTextPrinterParameterized(0, FONT_NORMAL, gText_BirchInTrouble, 0, 1, 0, NULL);
+    FillWindowPixelBuffer(0, PIXEL_FILL(1));
+    if (gTasks[taskId].tFirstChoice < 0)
+        AddTextPrinterParameterized(0, FONT_NORMAL, sText_ChooseFirstPartner, 0, 1, 0, NULL);
+    else
+    {
+        StringCopy(gStringVar1, GetSpeciesName(GetStarterPokemon(gTasks[taskId].tFirstChoice)));
+        StringExpandPlaceholders(gStringVar4, sText_ChooseSecondPartner);
+        AddTextPrinterParameterized(0, FONT_NORMAL, gStringVar4, 0, 1, 0, NULL);
+    }
     PutWindowTilemap(0);
     ScheduleBgCopyTilemapToVram(0);
     gTasks[taskId].func = Task_HandleStarterChooseInput;
@@ -587,13 +613,30 @@ static void Task_HandleStarterChooseInput(u8 taskId)
     }
     else if (JOY_NEW(DPAD_LEFT) && selection > 0)
     {
-        gTasks[taskId].tStarterSelection--;
+        s16 next = selection - 1;
+        if (next == gTasks[taskId].tFirstChoice)
+            next--;
+        if (next < 0)
+            return;
+        gTasks[taskId].tStarterSelection = next;
         gTasks[taskId].func = Task_MoveStarterChooseCursor;
     }
     else if (JOY_NEW(DPAD_RIGHT) && selection < STARTER_MON_COUNT - 1)
     {
-        gTasks[taskId].tStarterSelection++;
+        s16 next = selection + 1;
+        if (next == gTasks[taskId].tFirstChoice)
+            next++;
+        if (next >= STARTER_MON_COUNT)
+            return;
+        gTasks[taskId].tStarterSelection = next;
         gTasks[taskId].func = Task_MoveStarterChooseCursor;
+    }
+    else if (JOY_NEW(B_BUTTON) && gTasks[taskId].tFirstChoice >= 0)
+    {
+        ClearStarterLabel();
+        gTasks[taskId].tStarterSelection = gTasks[taskId].tFirstChoice;
+        gTasks[taskId].tFirstChoice = -1;
+        gTasks[taskId].func = Task_StarterChoose;
     }
 }
 
@@ -611,7 +654,15 @@ static void Task_AskConfirmStarter(u8 taskId)
 {
     PlayCry_Normal(GetStarterPokemon(gTasks[taskId].tStarterSelection), 0);
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
-    AddTextPrinterParameterized(0, FONT_NORMAL, gText_ConfirmStarterChoice, 0, 1, 0, NULL);
+    if (gTasks[taskId].tFirstChoice < 0)
+        AddTextPrinterParameterized(0, FONT_NORMAL, gText_ConfirmStarterChoice, 0, 1, 0, NULL);
+    else
+    {
+        StringCopy(gStringVar1, GetSpeciesName(GetStarterPokemon(gTasks[taskId].tFirstChoice)));
+        StringCopy(gStringVar2, GetSpeciesName(GetStarterPokemon(gTasks[taskId].tStarterSelection)));
+        StringExpandPlaceholders(gStringVar4, sText_ConfirmStarterPair);
+        AddTextPrinterParameterized(0, FONT_NORMAL, gStringVar4, 0, 1, 0, NULL);
+    }
     ScheduleBgCopyTilemapToVram(0);
     CreateYesNoMenu(&sWindowTemplate_ConfirmStarter, 0x2A8, 0xD, 0);
     gTasks[taskId].func = Task_HandleConfirmStarterInput;
@@ -619,26 +670,28 @@ static void Task_AskConfirmStarter(u8 taskId)
 
 static void Task_HandleConfirmStarterInput(u8 taskId)
 {
-    u8 spriteId;
-
     switch (Menu_ProcessInputNoWrapClearOnChoose())
     {
     case 0:  // YES
-        // Return the starter choice and exit.
-        gSpecialVar_Result = gTasks[taskId].tStarterSelection;
-        ResetAllPicSprites();
-        SetMainCallback2(gMain.savedCallback);
+        if (gTasks[taskId].tFirstChoice < 0)
+        {
+            gTasks[taskId].tFirstChoice = gTasks[taskId].tStarterSelection;
+            gTasks[taskId].tStarterSelection = (gTasks[taskId].tFirstChoice + 1) % STARTER_MON_COUNT;
+            CloseStarterPortrait(taskId);
+            gTasks[taskId].func = Task_StarterChoose;
+        }
+        else
+        {
+            gSpecialVar_Result = gTasks[taskId].tFirstChoice;
+            gSpecialVar_0x8004 = gTasks[taskId].tStarterSelection;
+            ResetAllPicSprites();
+            SetMainCallback2(gMain.savedCallback);
+        }
         break;
     case 1:  // NO
     case MENU_B_PRESSED:
         PlaySE(SE_SELECT);
-        spriteId = gTasks[taskId].tPkmnSpriteId;
-        FreeOamMatrix(gSprites[spriteId].oam.matrixNum);
-        FreeAndDestroyMonPicSprite(spriteId);
-
-        spriteId = gTasks[taskId].tCircleSpriteId;
-        FreeOamMatrix(gSprites[spriteId].oam.matrixNum);
-        DestroySprite(&gSprites[spriteId]);
+        CloseStarterPortrait(taskId);
         gTasks[taskId].func = Task_DeclineStarter;
         break;
     }
@@ -728,6 +781,7 @@ static void SpriteCB_SelectionHand(struct Sprite *sprite)
 
 static void SpriteCB_Pokeball(struct Sprite *sprite)
 {
+    sprite->invisible = gTasks[sprite->sTaskId].tFirstChoice == sprite->sBallId;
     // Animate Poké Ball if currently selected
     if (gTasks[sprite->sTaskId].tStarterSelection == sprite->sBallId)
         StartSpriteAnimIfDifferent(sprite, 1);

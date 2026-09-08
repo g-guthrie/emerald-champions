@@ -111,107 +111,107 @@ static const struct MenuAction MultichoiceList_LevelMode[] =
 
 static const struct MenuAction MultichoiceList_Mechadoll1_Q1[] =
 {
-    {COMPOUND_STRING("ODDISH")},
-    {COMPOUND_STRING("POOCHYENA")},
-    {COMPOUND_STRING("TAILLOW")},
+    {COMPOUND_STRING("PROTECT")},
+    {COMPOUND_STRING("WIDE GUARD")},
+    {COMPOUND_STRING("QUICK GUARD")},
 };
 
 static const struct MenuAction MultichoiceList_Mechadoll1_Q2[] =
 {
-    {COMPOUND_STRING("AZURILL")},
-    {COMPOUND_STRING("LOTAD")},
-    {COMPOUND_STRING("WINGULL")},
+    {COMPOUND_STRING("GRASS")},
+    {COMPOUND_STRING("NORMAL")},
+    {COMPOUND_STRING("ROCK")},
 };
 
 static const struct MenuAction MultichoiceList_Mechadoll1_Q3[] =
 {
-    {COMPOUND_STRING("DUSTOX")},
-    {COMPOUND_STRING("ZUBAT")},
-    {COMPOUND_STRING("NINCADA")},
+    {COMPOUND_STRING("ROCK SLIDE")},
+    {COMPOUND_STRING("THUNDERBOLT")},
+    {COMPOUND_STRING("CLOSE COMBAT")},
 };
 
 static const struct MenuAction MultichoiceList_Mechadoll2_Q1[] =
 {
-    {COMPOUND_STRING("RALTS")},
-    {COMPOUND_STRING("ZIGZAGOON")},
-    {COMPOUND_STRING("SLAKOTH")},
+    {COMPOUND_STRING("The whole turn")},
+    {COMPOUND_STRING("Each priority bracket")},
+    {COMPOUND_STRING("Only one side")},
 };
 
 static const struct MenuAction MultichoiceList_Mechadoll2_Q2[] =
 {
-    {COMPOUND_STRING("POOCHYENA")},
-    {COMPOUND_STRING("SHROOMISH")},
-    {COMPOUND_STRING("ZIGZAGOON")},
+    {COMPOUND_STRING("Only at full HP")},
+    {COMPOUND_STRING("After every Protect")},
+    {COMPOUND_STRING("First turn after entry")},
 };
 
 static const struct MenuAction MultichoiceList_Mechadoll2_Q3[] =
 {
-    {COMPOUND_STRING("POOCHYENA")},
-    {COMPOUND_STRING("ZUBAT")},
-    {COMPOUND_STRING("CARVANHA")},
+    {COMPOUND_STRING("Non-damaging moves")},
+    {COMPOUND_STRING("All special attacks")},
+    {COMPOUND_STRING("All priority moves")},
 };
 
 static const struct MenuAction MultichoiceList_Mechadoll3_Q1[] =
 {
-    {COMPOUND_STRING("BURN HEAL")},
-    {COMPOUND_STRING("HARBOR MAIL")},
-    {COMPOUND_STRING("Same price")},
+    {COMPOUND_STRING("BURN")},
+    {COMPOUND_STRING("POISON")},
+    {COMPOUND_STRING("SLEEP")},
 };
 
 static const struct MenuAction MultichoiceList_Mechadoll3_Q2[] =
 {
-    {COMPOUND_STRING("¥60")},
-    {COMPOUND_STRING("¥55")},
-    {COMPOUND_STRING("Nothing")},
+    {COMPOUND_STRING("REFLECT")},
+    {COMPOUND_STRING("SAFEGUARD")},
+    {COMPOUND_STRING("HELPING HAND")},
 };
 
 static const struct MenuAction MultichoiceList_Mechadoll3_Q3[] =
 {
-    {COMPOUND_STRING("They will cost more.")},
-    {COMPOUND_STRING("They will cost less.")},
-    {COMPOUND_STRING("Same price")},
+    {COMPOUND_STRING("One with no evolution")},
+    {COMPOUND_STRING("One that can still evolve")},
+    {COMPOUND_STRING("Any below level 50")},
 };
 
 static const struct MenuAction MultichoiceList_Mechadoll4_Q1[] =
 {
-    {COMPOUND_STRING("Male")},
-    {COMPOUND_STRING("Female")},
-    {COMPOUND_STRING("Neither")},
+    {COMPOUND_STRING("MENTAL HERB")},
+    {COMPOUND_STRING("POWER HERB")},
+    {COMPOUND_STRING("WHITE HERB")},
 };
 
 static const struct MenuAction MultichoiceList_Mechadoll4_Q2[] =
 {
-    {COMPOUND_STRING("Elderly men")},
-    {COMPOUND_STRING("Elderly ladies")},
-    {COMPOUND_STRING("Same number")},
+    {COMPOUND_STRING("STORM DRAIN")},
+    {COMPOUND_STRING("WATER ABSORB")},
+    {COMPOUND_STRING("RAIN DISH")},
 };
 
 static const struct MenuAction MultichoiceList_Mechadoll4_Q3[] =
 {
-    {COMPOUND_STRING("None")},
-    {COMPOUND_STRING("1")},
-    {COMPOUND_STRING("2")},
+    {COMPOUND_STRING("An airborne target")},
+    {COMPOUND_STRING("A grounded target")},
+    {COMPOUND_STRING("Every target")},
 };
 
 static const struct MenuAction MultichoiceList_Mechadoll5_Q1[] =
 {
-    {COMPOUND_STRING("2")},
-    {COMPOUND_STRING("3")},
-    {COMPOUND_STRING("4")},
+    {COMPOUND_STRING("It ends immediately")},
+    {COMPOUND_STRING("It keeps running")},
+    {COMPOUND_STRING("It starts over")},
 };
 
 static const struct MenuAction MultichoiceList_Mechadoll5_Q2[] =
 {
-    {COMPOUND_STRING("6")},
-    {COMPOUND_STRING("7")},
-    {COMPOUND_STRING("8")},
+    {COMPOUND_STRING("SAFEGUARD")},
+    {COMPOUND_STRING("QUICK GUARD")},
+    {COMPOUND_STRING("WIDE GUARD")},
 };
 
 static const struct MenuAction MultichoiceList_Mechadoll5_Q3[] =
 {
-    {COMPOUND_STRING("6")},
-    {COMPOUND_STRING("7")},
-    {COMPOUND_STRING("8")},
+    {COMPOUND_STRING("DARK")},
+    {COMPOUND_STRING("DRAGON")},
+    {COMPOUND_STRING("PSYCHIC")},
 };
 
 static const struct MenuAction MultichoiceList_VendingMachine[] =
@@ -567,7 +567,6 @@ static const struct MenuAction MultichoiceList_YesNoInfo[] =
 
 static const struct MenuAction MultichoiceList_BattleMode[] =
 {
-    {COMPOUND_STRING("SINGLE BATTLE")},
     {COMPOUND_STRING("DOUBLE BATTLE")},
     {COMPOUND_STRING("MULTI BATTLE")},
     {gText_Info2},

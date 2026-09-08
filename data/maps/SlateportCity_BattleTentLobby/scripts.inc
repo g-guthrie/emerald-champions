@@ -1,5 +1,4 @@
 SlateportCity_BattleTentLobby_MapScripts::
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, SlateportCity_BattleTentLobby_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, SlateportCity_BattleTentLobby_OnWarp
 	.byte 0
 
@@ -90,10 +89,10 @@ SlateportCity_BattleTentLobby_EventScript_ResumeChallenge::
 SlateportCity_BattleTentLobby_EventScript_Attendant::
 	lock
 	faceplayer
-	slateporttent_getprize
-	goto_if_ne VAR_RESULT, ITEM_NONE, SlateportCity_BattleTentLobby_EventScript_GivePrize
-	special SavePlayerParty
-	msgbox SlateportCity_BattleTentLobby_Text_WelcomeToBattleTent, MSGBOX_DEFAULT
+	setvar VAR_0x8004, 0
+	msgbox SlateportCity_BattleTentLobby_Text_ExhibitionWelcome, MSGBOX_DEFAULT
+	goto ChampionsTent_EventScript_Attendant
+
 SlateportCity_BattleTentLobby_EventScript_AskEnterChallenge::
 	message SlateportCity_BattleTentLobby_Text_TakeChallenge
 	waitmessage
@@ -224,9 +223,7 @@ SlateportCity_BattleTentLobby_EventScript_Woman::
 	end
 
 SlateportCity_BattleTentLobby_EventScript_RulesBoard::
-	lockall
-	msgbox BattleFrontier_BattleFactoryLobby_Text_RulesAreListed, MSGBOX_DEFAULT
-	goto SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard
+	msgbox SlateportCity_BattleTentLobby_Text_ExhibitionRules, MSGBOX_SIGN
 	end
 
 SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard::
@@ -273,14 +270,10 @@ SlateportCity_BattleTentLobby_EventScript_ExitRules::
 	end
 
 SlateportCity_BattleTentLobby_Text_CouldntFindMonForMe:
-	.string "So, like, I couldn't find myself any\n"
-	.string "POKéMON that were, like, for me.\p"
-	.string "So, I figured, like, hey, I should file\n"
-	.string "a complaint to the guy there?\p"
-	.string "And he wouldn't hear me out, like, hey!\n"
-	.string "So, like, total bummer, man!\p"
-	.string "Hey, like, you! Zip it, you know?\n"
-	.string "Just, you know, take this!$"
+	.string "I couldn't settle on a team. Too\n"
+	.string "many interesting choices!\p"
+	.string "Then I found this PRISM SCALE.\n"
+	.string "Maybe you can put it to use.$"
 SlateportCity_BattleTentLobby_Text_ExplainPrismScale:
 	.string "A Prism Scale evolves Feebas.\n"
 	.string "Use it from the Bag when ready.$"
@@ -293,9 +286,32 @@ SlateportCity_BattleTentLobby_Text_IllTryUsingBugMons:
 	.string "them!$"
 
 SlateportCity_BattleTentLobby_Text_BattleEvenWithoutToughMons:
-	.string "You can battle all you want here even\n"
-	.string "if you don't have any tough POKéMON.$"
-
+	.string "The CENTER can prepare any legal\n"
+	.string "set for free. Bring your own six\l"
+	.string "and test them here.$"
 SlateportCity_BattleTentLobby_Text_NiceIfMoreSelection:
-	.string "Wouldn't it be nice if they had more of\n"
-	.string "a selection?$"
+	.string "A new opponent every match! I keep\n"
+	.string "leaving with another idea for my\l"
+	.string "team.$"
+
+SlateportCity_BattleTentLobby_Text_ExhibitionWelcome::
+	.string "The port brings together teams\n"
+	.string "from every shore.\p"
+	.string "This is a six-Pokémon doubles\n"
+	.string "exhibition. You command every move\l"
+	.string "and switch.\p"
+	.string "Your team uses the current cap.\n"
+	.string "Difficulty sets opponent levels.\l"
+	.string "Enter with six healthy partners?$"
+
+SlateportCity_BattleTentLobby_Text_ExhibitionRules::
+	.string "LOCAL DOUBLES EXHIBITIONS\p"
+	.string "Bring six healthy Pokémon, with no\n"
+	.string "Eggs. Prepare freely before\l"
+	.string "entering.\p"
+	.string "Three victories earn one local\n"
+	.string "prize. Your party is restored\l"
+	.string "after each exhibition.\p"
+	.string "These results are separate from\n"
+	.string "the CHAMPIONS CIRCUIT. You return\l"
+	.string "to this lobby afterward.$"

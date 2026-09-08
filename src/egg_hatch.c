@@ -3,6 +3,7 @@
 #include "egg_hatch.h"
 #include "pokedex.h"
 #include "constants/items.h"
+#include "constants/region_map_sections.h"
 #include "script.h"
 #include "decompress.h"
 #include "task.h"
@@ -323,6 +324,8 @@ static void AddHatchedMonToParty(u8 id)
     SetMonData(mon, MON_DATA_NICKNAME, name);
 
     MarkLegendarySignCaughtBySpecies(species);
+    if (GetMonData(mon, MON_DATA_MET_LOCATION) == METLOC_DAYCARE_EGG)
+        FlagSet(FLAG_EC_HATCHED_DAYCARE_EGG);
 
     nationalDexNum = SpeciesToNationalPokedexNum(species);
     GetSetPokedexFlag(nationalDexNum, FLAG_SET_SEEN);

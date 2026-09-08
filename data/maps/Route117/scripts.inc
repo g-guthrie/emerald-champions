@@ -50,8 +50,26 @@ Route117_EventScript_StopMoveDayCareMan::
 	return
 
 Route117_EventScript_Woman::
-	msgbox Route117_Text_ArentTheseFlowersPretty, MSGBOX_NPC
+	lock
+	faceplayer
+	goto_if_set FLAG_ITEM_ROUTE_115_AUDINITE, Route117_EventScript_AudiniteAfter
+	msgbox Route117_Text_AudiniteGift, MSGBOX_DEFAULT
+	giveitem ITEM_AUDINITE
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_ITEM_ROUTE_115_AUDINITE
+	release
 	end
+
+Route117_EventScript_AudiniteAfter::
+	msgbox Route117_Text_ArentTheseFlowersPretty, MSGBOX_DEFAULT
+	release
+	end
+
+Route117_Text_AudiniteGift:
+	.string "AUDINO often wander through these\n"
+	.string "flowers. They're wonderful partners.\p"
+	.string "Take this AUDINITE. With a MEGA RING,\n"
+	.string "it helps an AUDINO Mega Evolve.$"
 
 Route117_EventScript_LittleBoy::
 	msgbox Route117_Text_AirIsTastyHere, MSGBOX_NPC

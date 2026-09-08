@@ -233,7 +233,7 @@ static enum Species ResolveBattleSetSpecies(enum Species species, u8 format)
     return species;
 }
 
-static u8 GetRawBattleSetCountForFormat(enum Species species, u8 format)
+u8 GetEmeraldChampionsRawBattleSetCountForFormat(enum Species species, u8 format)
 {
     const struct EmeraldChampionsBattleSet *defaults;
     const struct EmeraldChampionsBattleSetRange *ranges;
@@ -250,7 +250,7 @@ static u8 GetRawBattleSetCountForFormat(enum Species species, u8 format)
     return ranges[species].count + 1;
 }
 
-static const struct EmeraldChampionsBattleSet *GetRawBattleSetForFormat(
+const struct EmeraldChampionsBattleSet *GetEmeraldChampionsRawBattleSetForFormat(
     enum Species species,
     u8 rawChoice,
     u8 format)
@@ -259,7 +259,7 @@ static const struct EmeraldChampionsBattleSet *GetRawBattleSetForFormat(
     const struct EmeraldChampionsBattleSet *defaults;
     const struct EmeraldChampionsBattleSetChoice *alternatives;
 
-    if (GetRawBattleSetCountForFormat(species, format) == 0)
+    if (GetEmeraldChampionsRawBattleSetCountForFormat(species, format) == 0)
         return NULL;
     species = ResolveBattleSetSpecies(species, format);
     defaults = GetDefaultSetTable(format);
@@ -274,12 +274,12 @@ static const struct EmeraldChampionsBattleSet *GetRawBattleSetForFormat(
 
 u8 GetEmeraldChampionsRawBattleSetCount(enum Species species)
 {
-    return GetRawBattleSetCountForFormat(species, EC_BATTLE_FORMAT_DOUBLES);
+    return GetEmeraldChampionsRawBattleSetCountForFormat(species, EC_BATTLE_FORMAT_DOUBLES);
 }
 
 const struct EmeraldChampionsBattleSet *GetEmeraldChampionsRawBattleSet(enum Species species, u8 rawChoice)
 {
-    return GetRawBattleSetForFormat(species, rawChoice, EC_BATTLE_FORMAT_DOUBLES);
+    return GetEmeraldChampionsRawBattleSetForFormat(species, rawChoice, EC_BATTLE_FORMAT_DOUBLES);
 }
 
 // With no outputs, count every visible set; otherwise stop at the requested choice.
@@ -298,7 +298,7 @@ static u8 ScanVisibleBattleSets(
     const struct EmeraldChampionsBattleSetChoice *alternatives;
     u8 visibleChoice = 0;
 
-    if (GetRawBattleSetCountForFormat(species, format) == 0)
+    if (GetEmeraldChampionsRawBattleSetCountForFormat(species, format) == 0)
         return 0;
 
     setSpecies = ResolveBattleSetSpecies(species, format);
@@ -439,17 +439,15 @@ static bool32 DoesMonMatchPresetAbility(struct Pokemon *mon, const struct Emeral
         && actualAbility == GetAbilityBySpecies(species, slot);
 }
 
-// A set built around Belly Drum and a half-HP berry only works when max HP is
-// even: Belly Drum leaves ceil(maxHP / 2) and the berry fires at
-// floor(maxHP / 2), so an odd total misses by exactly one point. Level moves
-// the parity, so the authored spread is re-landed wherever the level or the
-// spread changes (preset application, the Leveler) instead of being hand-tuned
-// for one cap.
-static bool32 IsHalfHpBerry(enum Item item, enum Ability ability)
+// Other half-HP items still need even HP after Belly Drum. Sitrus rounds
+// its activation threshold up and never needs Stat Point adjustments.
+static bool32 DoesItemNeedEvenHp(enum Item item, enum Ability ability)
 {
     enum HoldEffect holdEffect = GetItemHoldEffect(item);
 
-    if (holdEffect == HOLD_EFFECT_RESTORE_HP || holdEffect == HOLD_EFFECT_RESTORE_PCT_HP)
+    if (item == ITEM_SITRUS_BERRY)
+        return FALSE;
+    if (holdEffect == HOLD_EFFECT_RESTORE_HP)
         return TRUE;
     // The confusion-flavor berries fire at a quarter of max HP, which Belly
     // Drum never reaches on its own. Gluttony moves that trigger to half,
@@ -459,7 +457,7 @@ static bool32 IsHalfHpBerry(enum Item item, enum Ability ability)
 
 static bool32 DoesPresetWantEvenHp(const struct EmeraldChampionsBattleSet *preset)
 {
-    if (!IsHalfHpBerry(preset->item, preset->ability))
+    if (!DoesItemNeedEvenHp(preset->item, preset->ability))
         return FALSE;
     for (u32 i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -471,7 +469,7 @@ static bool32 DoesPresetWantEvenHp(const struct EmeraldChampionsBattleSet *prese
 
 static bool32 DoesMonWantEvenHp(struct Pokemon *mon)
 {
-    if (!IsHalfHpBerry(GetMonData(mon, MON_DATA_HELD_ITEM), GetMonAbility(mon)))
+    if (!DoesItemNeedEvenHp(GetMonData(mon, MON_DATA_HELD_ITEM), GetMonAbility(mon)))
         return FALSE;
     for (u32 i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -760,6 +758,11 @@ u8 ApplyEmeraldChampionsRandomNonMegaSet(struct Pokemon *mon)
     if (selected == NULL)
         return EC_BATTLE_SET_FAILED;
     return ApplyPreset(mon, selected, FALSE, FALSE, FALSE, FALSE);
+}
+
+u8 ApplyEmeraldChampionsScriptedSet(struct Pokemon *mon, const struct EmeraldChampionsBattleSet *preset)
+{
+    return ApplyPreset(mon, preset, FALSE, TRUE, FALSE, FALSE);
 }
 
 u8 ApplyEmeraldChampionsOpponentSet(struct Pokemon *mon, u8 rawChoice)

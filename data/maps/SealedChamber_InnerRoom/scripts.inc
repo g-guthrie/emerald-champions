@@ -90,20 +90,19 @@ SealedChamber_InnerRoom_EventScript_RegigigasEC::
 	waitmoncry
 	setvar VAR_0x8004, EC_SIGN_REGIGIGAS_ID
 	special TryUnlockSelectedLegendarySign
-	goto_if_eq VAR_RESULT, 6, Common_EventScript_LegendaryNeedsDevon
-	goto_if_eq VAR_RESULT, 5, Common_EventScript_LegendaryDefeatedAtShrine
+	goto_if_eq VAR_RESULT, 5, Common_EventScript_LegendaryRestingAtShrine
 	goto_if_eq VAR_RESULT, 0, SealedChamber_InnerRoom_EventScript_RegigigasStatue
 	goto_if_eq VAR_RESULT, 1, SealedChamber_InnerRoom_EventScript_RegigigasStatue
 	goto_if_eq VAR_RESULT, 4, SealedChamber_InnerRoom_EventScript_RegigigasECCaught
 	msgbox SealedChamber_InnerRoom_Text_RegigigasECAwakens, MSGBOX_DEFAULT
 	setvar VAR_0x8004, EC_SIGN_REGIGIGAS_ID
-	msgbox gText_LegendaryOneShotWarning, MSGBOX_DEFAULT
 	special CreateSelectedLegendarySignEncounter
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+	special FinishLegendaryLandmarkEncounter
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_LegendaryDefeated
+	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_LegendaryResting
 	goto SealedChamber_InnerRoom_EventScript_RegigigasECCaught
 	end
 

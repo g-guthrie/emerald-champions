@@ -74,7 +74,7 @@ MtPyre_6F_EventScript_Pecharunt::
 	lock
 	setvar VAR_0x8004, EC_SIGN_PECHARUNT_ID
 	special GetSelectedLegendarySignState
-	goto_if_eq VAR_RESULT, 3, Common_EventScript_LegendaryDefeatedAtShrine
+	goto_if_eq VAR_RESULT, 3, Common_EventScript_LegendaryRestingAtShrine
 	goto_if_eq VAR_RESULT, 2, MtPyre_6F_EventScript_PecharuntQuiet
 	setvar VAR_0x8004, 64
 	special GetSelectedLegendarySignState
@@ -87,8 +87,7 @@ MtPyre_6F_EventScript_Pecharunt::
 	goto_if_ne VAR_RESULT, 2, MtPyre_6F_EventScript_PecharuntDormant
 	setvar VAR_0x8004, EC_SIGN_PECHARUNT_ID
 	special TryUnlockSelectedLegendarySign
-	goto_if_eq VAR_RESULT, 6, Common_EventScript_LegendaryNeedsDevon
-	goto_if_eq VAR_RESULT, 5, Common_EventScript_LegendaryDefeatedAtShrine
+	goto_if_eq VAR_RESULT, 5, Common_EventScript_LegendaryRestingAtShrine
 	goto_if_eq VAR_RESULT, 0, MtPyre_6F_EventScript_PecharuntDormant
 	goto_if_eq VAR_RESULT, 1, MtPyre_6F_EventScript_PecharuntNeedsPartner
 	msgbox MtPyre_6F_Text_PecharuntAwakens, MSGBOX_DEFAULT
@@ -97,13 +96,13 @@ MtPyre_6F_EventScript_Pecharunt::
 	delay 40
 	waitmoncry
 	setvar VAR_0x8004, EC_SIGN_PECHARUNT_ID
-	msgbox gText_LegendaryOneShotWarning, MSGBOX_DEFAULT
 	special CreateSelectedLegendarySignEncounter
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+	special FinishLegendaryLandmarkEncounter
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_LegendaryDefeatedAtShrine
+	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_LegendaryRestingAtShrine
 	goto MtPyre_6F_EventScript_PecharuntCaught
 	end
 
@@ -134,12 +133,10 @@ MtPyre_6F_Text_PecharuntDormant:
 	.string "returning to this poisoned shrine.$"
 
 MtPyre_6F_Text_PecharuntNeedsPartner:
-	.string "All three masks are lit, but the dog\n"
-	.string "mark still reaches toward OKIDOGI.\p"
-	.string "Bring its family to the dream\n"
-	.string "researcher at DEVON CORP. 2F.\p"
-	.string "Translate PECHARUNT's Sign in RUSTBORO,\n"
-	.string "then return to this shrine.$"
+	.string "The three masks belong to OKIDOGI,\n"
+	.string "MUNKIDORI and FEZANDIPITI.\p"
+	.string "Catch all three, then return here.\n"
+	.string "They do not need to travel with you.$"
 
 MtPyre_6F_Text_PecharuntAwakens:
 	.string "The three masks flare! A poisoned mist\n"

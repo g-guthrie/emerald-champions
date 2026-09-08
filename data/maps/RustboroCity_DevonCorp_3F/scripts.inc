@@ -259,8 +259,8 @@ RustboroCity_DevonCorp_3F_Text_MrStoneExplainPokenavRestUp:
 	.string "keeps you in touch with key Trainers.\p"
 	.string "Our researcher on the second floor is\n"
 	.string "cataloging the CHAMPION'S SIGNS.\p"
-	.string "Have him translate each SIGN before\n"
-	.string "you seek the Pokémon connected to it.\p"
+	.string "He can help you follow their clues\n"
+	.string "whenever you want a lead to explore.\p"
 	.string "Please rest here before you leave.\n"
 	.string "DEWFORD is your next stop.\p"
 	.string "I hope STEVEN can make sense of this\n"
@@ -275,8 +275,8 @@ RustboroCity_DevonCorp_3F_Text_CountingOnYou:
 	.string "near DEWFORD. He often loses track\l"
 	.string "of time when he's studying rocks.\p"
 	.string "Our researcher on the second floor\n"
-	.string "must translate each CHAMPION'S SIGN\l"
-	.string "before its Pokémon will answer.$"
+	.string "keeps a guide to the LEGENDARY SIGNS.\l"
+	.string "Ask him whenever you want a lead.$"
 
 RustboroCity_DevonCorp_3F_Text_StevenAwaitsKnuckleBadge:
 	.string "STEVEN received my LETTER. Good.\p"
@@ -290,18 +290,23 @@ RustboroCity_DevonCorp_3F_Text_ThankYouForDeliveringLetter:
 	.string "Let PIDGEOT show you what it can become.$"
 
 RustboroCity_DevonCorp_3F_Text_ExplainPidgeotite:
-	.string "Shops never sell MEGA STONES. Once you\n"
-	.string "hold a RING, every POKéMON CENTER\l"
-	.string "VENDOR lends the whole archive free.\p"
-	.string "The ones in HOENN's gyms, ruins and\n"
-	.string "caves are the originals. Find them.$"
-
+	.string "PIDGEOTITE lets a PIDGEOT Mega\n"
+	.string "Evolve when it holds the stone and\l"
+	.string "you possess a MEGA RING.\p"
+	.string "Find Mega Stones in HOENN's caves,\n"
+	.string "gyms and side paths, or through\l"
+	.string "the people you meet.\p"
+	.string "CENTER vendors supply held items\n"
+	.string "and ordinary evolution items free\l"
+	.string "of charge.$"
 RustboroCity_DevonCorp_3F_Text_NotFamiliarWithTrends:
 	.string "The old records call these marks a\n"
 	.string "network of CHAMPION'S SIGNS.\p"
-	.string "They do not reward strength alone. Each\n"
-	.string "one asks for the right partner or deed.$"
-
+	.string "Each has its own conditions. Some\n"
+	.string "answer a BADGE or a deed; a few\l"
+	.string "recognize another POKéMON.\p"
+	.string "Our researcher can explain them.\n"
+	.string "His guidance is entirely optional.$"
 RustboroCity_DevonCorp_3F_Text_ThisIs3rdFloorWaitHere:
 	.string "This is the DEVON CORPORATION's\n"
 	.string "third floor.\p"

@@ -1,6 +1,5 @@
 #include "global.h"
 #include "event_data.h"
-#include "legendary_signs.h"
 #include "ow_abilities.h"
 #include "pokemon.h"
 #include "random.h"
@@ -142,7 +141,7 @@ bool8 TryAddRoamer(enum Species species, u8 level)
 {
     u8 index = GetFirstInactiveRoamerIndex();
 
-    if (index < ROAMER_COUNT && !IsLegendaryEncounterLost(species))
+    if (index < ROAMER_COUNT)
     {
         // Create the roamer and stop searching
         CreateInitialRoamerMon(index, species, level);
@@ -252,7 +251,8 @@ void CreateRoamerMonInstance(u32 roamerIndex)
     ZeroEnemyPartyMons();
     CreateMonWithIVsPersonality(mon, ROAMER(roamerIndex)->species, ROAMER(roamerIndex)->level, ROAMER(roamerIndex)->ivs, ROAMER(roamerIndex)->personality);
     SetMonData(mon, MON_DATA_STATUS, &status);
-    SetMonData(mon, MON_DATA_HP, &ROAMER(roamerIndex)->hp);
+    if (ROAMER(roamerIndex)->hp != 0)
+        SetMonData(mon, MON_DATA_HP, &ROAMER(roamerIndex)->hp);
     SetMonData(mon, MON_DATA_COOL, &ROAMER(roamerIndex)->cool);
     SetMonData(mon, MON_DATA_BEAUTY, &ROAMER(roamerIndex)->beauty);
     SetMonData(mon, MON_DATA_CUTE, &ROAMER(roamerIndex)->cute);
@@ -267,8 +267,7 @@ bool8 TryStartRoamerEncounter(void)
 
     for (i = 0; i < ROAMER_COUNT; i++)
     {
-        if (!IsLegendaryEncounterLost(ROAMER(i)->species)
-         && IsRoamerAt(i, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum) == TRUE && (Random() % 4) == 0)
+        if (IsRoamerAt(i, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum) == TRUE && (Random() % 4) == 0)
         {
             CreateRoamerMonInstance(i);
             gEncounteredRoamerIndex = i;
@@ -285,6 +284,11 @@ void UpdateRoamerHPStatus(struct Pokemon *mon)
     ROAMER(gEncounteredRoamerIndex)->hp = GetMonData(mon, MON_DATA_HP);
     ROAMER(gEncounteredRoamerIndex)->statusA = status;
     ROAMER(gEncounteredRoamerIndex)->statusB = status >> 8;
+    if (ROAMER(gEncounteredRoamerIndex)->hp == 0)
+    {
+        ROAMER(gEncounteredRoamerIndex)->statusA = 0;
+        ROAMER(gEncounteredRoamerIndex)->statusB = 0;
+    }
 
     RoamerMoveToOtherLocationSet(gEncounteredRoamerIndex);
 }

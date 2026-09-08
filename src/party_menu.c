@@ -526,7 +526,7 @@ static u8 IndividualToCombinedPartyId(u8 index, enum BattlerId battler);
 static const u8 sText_askText[] = _("Would you like to change {STR_VAR_1}'s\nability to {STR_VAR_2}?");
 static const u8 sText_doneText[] = _("{STR_VAR_1}'s Ability became\n{STR_VAR_2}!{PAUSE_UNTIL_PRESS}");
 static const u8 sText_CancelTitleCase[] = _("Cancel");
-static const u8 sText_LevelerComplete[] = _("Your party reached the current\nlevel cap: Lv. {STR_VAR_1}!{PAUSE_UNTIL_PRESS}");
+static const u8 sText_LevelerComplete[] = _("Party preparation is complete.\nCurrent cap: Lv. {STR_VAR_1}.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_BasePointsResetToZero[] = _("{STR_VAR_1}'s base points\nwere all reset to zero!{PAUSE_UNTIL_PRESS}");
 static const u8 sText_CannotSendMonToBoxHM[] = _("Cannot send that mon to the box,\nbecause it knows a HM move.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_CannotSendMonToBoxPartner[] = _("Cannot send a mon that doesn't\nbelong to you to the box.{PAUSE_UNTIL_PRESS}");
@@ -5986,13 +5986,9 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
 
 static u8 FindNextLevelerSlot(void)
 {
-    u32 levelCap = min(GetCurrentLevelCap(), MAX_LEVEL);
-
     for (u32 slot = sLevelerNextSlot; slot < gPartiesCount[B_TRAINER_PLAYER]; slot++)
     {
-        if (GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_SPECIES) != SPECIES_NONE
-         && !GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_IS_EGG)
-         && GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_LEVEL) < levelCap)
+        if (IsMonEligibleForLeveler(&gParties[B_TRAINER_PLAYER][slot]))
             return slot;
     }
 
@@ -6090,6 +6086,7 @@ static void CB2_ContinueLevelerEvolution(void)
 
     if (currentSpecies != sLevelerEvolutionSpecies)
     {
+        sLevelerRaisedParty = TRUE;
         bool32 canStopEvo = TRUE;
         enum Species targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_NORMAL, ITEM_NONE, NULL, &canStopEvo, CHECK_EVO);
 
@@ -6620,48 +6617,6 @@ static void RestoreFusionMon(struct Pokemon *mon)
     }
 }
 
-static void DeleteInvalidFusionMoves(struct Pokemon *mon, enum Species species)
-{
-    for (u32 i = 0; i < MAX_MON_MOVES; i++)
-    {
-        enum Move move = GetMonData(mon, MON_DATA_MOVE1 + i);
-        bool32 toDelete = TRUE;
-        const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species);
-        for (u32 j = 0; learnset[j].move != LEVEL_UP_MOVE_END;j++)
-        {
-            if (learnset[j].move == move)
-            {
-                toDelete = FALSE;
-                break;
-            }
-        }
-        if (!toDelete)
-            continue;
-        const u16 *learnset2 = GetSpeciesTeachableLearnset(species);
-        for (u32 j = 0; learnset2[j] != MOVE_UNAVAILABLE;j++)
-        {
-            if (learnset2[j] == move)
-            {
-                toDelete = FALSE;
-                break;
-            }
-        }
-        if (!toDelete)
-            continue;
-        const u16 *learnset3 = GetSpeciesEggMoves(species);
-        for (u32 j = 0; learnset3[j] != MOVE_UNAVAILABLE;j++)
-        {
-            if (learnset3[j] == move)
-            {
-                toDelete = FALSE;
-                break;
-            }
-        }
-        if (toDelete)
-            DeleteMove(mon, move);
-    }
-}
-
 #if P_FUSION_FORMS
 static void SwapFusionMonMoves(struct Pokemon *mon, const u16 moveTable[][2], u32 mode)
 {
@@ -6694,6 +6649,168 @@ static void SwapFusionMonMoves(struct Pokemon *mon, const u16 moveTable[][2], u3
 }
 #endif //P_FUSION_FORMS
 
+struct EmeraldChampionsUnfusionMoves
+{
+    enum Move moves[MAX_MON_MOVES];
+    u8 pp[MAX_MON_MOVES];
+    u8 bonuses;
+};
+static EWRAM_DATA struct EmeraldChampionsUnfusionMoves sEmeraldChampionsUnfusionMoves = {0};
+
+static bool32 CanSpeciesKeepUnfusionMove(enum Species species, enum Move move)
+{
+    if (CanSpeciesUseEmeraldChampionsPreparationMove(species, move))
+        return TRUE;
+    const struct LevelUpMove *levelMoves = GetSpeciesLevelUpLearnset(species);
+    for (u32 i = 0; levelMoves[i].move != LEVEL_UP_MOVE_END; i++)
+        if (levelMoves[i].move == move)
+            return TRUE;
+    const u16 *moves = GetSpeciesTeachableLearnset(species);
+    for (u32 i = 0; moves[i] != MOVE_UNAVAILABLE; i++)
+        if (moves[i] == move)
+            return TRUE;
+    moves = GetSpeciesEggMoves(species);
+    for (u32 i = 0; moves[i] != MOVE_UNAVAILABLE; i++)
+        if (moves[i] == move)
+            return TRUE;
+    return FALSE;
+}
+
+static void ApplyEmeraldChampionsUnfusionMoves(struct Pokemon *mon)
+{
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+    {
+        SetMonData(mon, MON_DATA_MOVE1 + i, &sEmeraldChampionsUnfusionMoves.moves[i]);
+        SetMonData(mon, MON_DATA_PP1 + i, &sEmeraldChampionsUnfusionMoves.pp[i]);
+    }
+    SetMonData(mon, MON_DATA_PP_BONUSES, &sEmeraldChampionsUnfusionMoves.bonuses);
+}
+
+// Construct one proposal from immutable slots. Native signature swaps retain
+// their PP behavior; every unchanged move keeps its own PP and PP Ups.
+static bool32 PrepareEmeraldChampionsUnfusionMoves(u8 taskId)
+{
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gTasks[taskId].firstFusionSlot];
+    struct Pokemon proposal = *mon;
+    u32 count = 0;
+    bool32 changed = FALSE;
+    memset(&sEmeraldChampionsUnfusionMoves, 0, sizeof(sEmeraldChampionsUnfusionMoves));
+    StringCopy(gStringVar4, COMPOUND_STRING("Unfusing changes these moves:\p"));
+#if P_FUSION_FORMS && P_FAMILY_KYUREM
+#if P_FAMILY_RESHIRAM
+    if (gTasks[taskId].tExtraMoveHandling == SWAP_EXTRA_MOVES_KYUREM_WHITE)
+        SwapFusionMonMoves(&proposal, gKyuremWhiteSwapMoveTable, UNFUSE_MON);
+#endif
+#if P_FAMILY_ZEKROM
+    if (gTasks[taskId].tExtraMoveHandling == SWAP_EXTRA_MOVES_KYUREM_BLACK)
+        SwapFusionMonMoves(&proposal, gKyuremBlackSwapMoveTable, UNFUSE_MON);
+#endif
+#endif
+    u8 bonuses = GetMonData(&proposal, MON_DATA_PP_BONUSES);
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+    {
+        enum Move move = GetMonData(&proposal, MON_DATA_MOVE1 + i);
+        enum Move original = GetMonData(mon, MON_DATA_MOVE1 + i);
+        if (move == MOVE_NONE)
+            continue;
+        bool32 keep = gTasks[taskId].tExtraMoveHandling != FORGET_EXTRA_MOVES
+            || CanSpeciesKeepUnfusionMove(gTasks[taskId].fusionResult, move);
+        if (!keep || move != original)
+        {
+            u8 text[120];
+            changed = TRUE;
+            StringCopy(gStringVar1, GetMoveName(original));
+            if (keep)
+            {
+                StringCopy(gStringVar2, GetMoveName(move));
+                StringExpandPlaceholders(text, COMPOUND_STRING("{STR_VAR_1} becomes\n{STR_VAR_2}.\p"));
+            }
+            else
+                StringExpandPlaceholders(text, COMPOUND_STRING("Remove {STR_VAR_1}.\p"));
+            StringAppend(gStringVar4, text);
+        }
+        if (keep)
+        {
+            sEmeraldChampionsUnfusionMoves.moves[count] = move;
+            sEmeraldChampionsUnfusionMoves.pp[count] = GetMonData(&proposal, MON_DATA_PP1 + i);
+            sEmeraldChampionsUnfusionMoves.bonuses |= ((bonuses >> (i * 2)) & 3) << (count * 2);
+            count++;
+        }
+    }
+    if (count == 0)
+    {
+        sEmeraldChampionsUnfusionMoves.moves[0] = MOVE_CONFUSION;
+        sEmeraldChampionsUnfusionMoves.pp[0] = CalculatePPWithBonus(MOVE_CONFUSION, 0, 0);
+        StringAppend(gStringVar4, COMPOUND_STRING("Learn Confusion.\p"));
+        changed = TRUE;
+    }
+    StringAppend(gStringVar4, COMPOUND_STRING("Unfuse these Pokémon?"));
+    return changed;
+}
+
+static bool32 WouldUnfusionLoseSurf(u8 taskId)
+{
+    if (FieldMove_GetUserSlot(FIELD_MOVE_SURF, TRUE) >= PARTY_SIZE)
+        return FALSE;
+    u32 slot = gTasks[taskId].firstFusionSlot;
+    u32 freeSlot = gPartiesCount[B_TRAINER_PLAYER];
+    struct Pokemon saved = gParties[B_TRAINER_PLAYER][slot];
+    struct Pokemon empty = gParties[B_TRAINER_PLAYER][freeSlot];
+    enum Species species = gTasks[taskId].fusionResult;
+    SetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_SPECIES, &species);
+    ApplyEmeraldChampionsUnfusionMoves(&gParties[B_TRAINER_PLAYER][slot]);
+    gParties[B_TRAINER_PLAYER][freeSlot] = gPokemonStoragePtr->fusions[gTasks[taskId].storageIndex];
+    bool32 losesSurf = FieldMove_GetUserSlot(FIELD_MOVE_SURF, TRUE) >= PARTY_SIZE;
+    gParties[B_TRAINER_PLAYER][slot] = saved;
+    gParties[B_TRAINER_PLAYER][freeSlot] = empty;
+    return losesSurf;
+}
+
+static void Task_HandleEmeraldChampionsUnfusionConfirmation(u8 taskId)
+{
+    s32 choice = Menu_ProcessInputNoWrapClearOnChoose();
+    if (choice == 0)
+        TryItemUseFusionChange(taskId, (TaskFunc)GetWordTaskArg(taskId, tNextFunc));
+    else if (choice == 1 || choice == MENU_B_PRESSED)
+    {
+        gTasks[taskId].fusionType = 0;
+        gPartyMenuUseExitCallback = FALSE;
+        DisplayPartyMenuMessage(COMPOUND_STRING("The Pokémon stayed fused."), TRUE);
+        ScheduleBgCopyTilemapToVram(2);
+        gTasks[taskId].func = (TaskFunc)GetWordTaskArg(taskId, tNextFunc);
+    }
+}
+
+static void Task_ShowEmeraldChampionsUnfusionConfirmation(u8 taskId)
+{
+    if (!IsPartyMenuTextPrinterActive())
+    {
+        PartyMenuDisplayYesNoMenu();
+        gTasks[taskId].func = Task_HandleEmeraldChampionsUnfusionConfirmation;
+    }
+}
+
+static void TryConfirmEmeraldChampionsUnfusion(u8 taskId, TaskFunc callback)
+{
+    bool32 changed = PrepareEmeraldChampionsUnfusionMoves(taskId);
+    if (WouldUnfusionLoseSurf(taskId))
+    {
+        gPartyMenuUseExitCallback = FALSE;
+        DisplayPartyMenuMessage(COMPOUND_STRING("Your party needs its Surf capability."), TRUE);
+        ScheduleBgCopyTilemapToVram(2);
+        gTasks[taskId].func = callback;
+    }
+    else if (changed)
+    {
+        SetWordTaskArg(taskId, tNextFunc, (u32)callback);
+        DisplayPartyMenuMessage(gStringVar4, FALSE);
+        ScheduleBgCopyTilemapToVram(2);
+        gTasks[taskId].func = Task_ShowEmeraldChampionsUnfusionConfirmation;
+    }
+    else
+        TryItemUseFusionChange(taskId, callback);
+}
+
 static void Task_TryItemUseFusionChange(u8 taskId)
 {
     struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gTasks[taskId].firstFusionSlot];
@@ -6719,6 +6836,8 @@ static void Task_TryItemUseFusionChange(u8 taskId)
         }
         targetSpecies = gTasks[taskId].tTargetSpecies;
         SetMonData(mon, MON_DATA_SPECIES, &targetSpecies);
+        if (gTasks[taskId].fusionType == UNFUSE_MON)
+            ApplyEmeraldChampionsUnfusionMoves(mon);
         CalculateMonStats(mon);
         CompactPartySlots();
         CalculatePlayerPartyCount();
@@ -6802,27 +6921,6 @@ static void Task_TryItemUseFusionChange(u8 taskId)
                 if (gTasks[taskId].moveToLearn != 0)
                     FormChangeTeachMove(taskId, gTasks[taskId].moveToLearn, gTasks[taskId].firstFusionSlot);
             }
-            else //(gTasks[taskId].fusionType == UNFUSE_MON)
-            {
-#if P_FUSION_FORMS
-#if P_FAMILY_KYUREM
-#if P_FAMILY_RESHIRAM
-                if (gTasks[taskId].tExtraMoveHandling == SWAP_EXTRA_MOVES_KYUREM_WHITE)
-                    SwapFusionMonMoves(mon, gKyuremWhiteSwapMoveTable, UNFUSE_MON);
-#endif //P_FAMILY_RESHIRAM
-#if P_FAMILY_ZEKROM
-                if (gTasks[taskId].tExtraMoveHandling == SWAP_EXTRA_MOVES_KYUREM_BLACK)
-                    SwapFusionMonMoves(mon, gKyuremBlackSwapMoveTable, UNFUSE_MON);
-#endif //P_FAMILY_ZEKROM
-#endif //P_FAMILY_KYUREM
-#endif //P_FUSION_FORMS
-                if ( gTasks[taskId].tExtraMoveHandling == FORGET_EXTRA_MOVES)
-                {
-                    DeleteInvalidFusionMoves(mon, gTasks[taskId].fusionResult);
-                    if (!DoesMonHaveAnyMoves(mon))
-                        FormChangeTeachMove(taskId, MOVE_CONFUSION, gTasks[taskId].firstFusionSlot);
-                }
-            }
             gTasks[taskId].tState++;
         }
         break;
@@ -6869,7 +6967,7 @@ void ItemUseCB_Fusion(u8 taskId, TaskFunc taskFunc)
                 task->unfuseSecondMon = itemFusion[i].targetSpecies2;
                 task->tExtraMoveHandling = itemFusion[i].extraMoveHandling;
                 task->forgetMove = itemFusion[i].fusionMove;
-                TryItemUseFusionChange(taskId, taskFunc);
+                TryConfirmEmeraldChampionsUnfusion(taskId, taskFunc);
                 return;
             }
         }
@@ -8601,32 +8699,23 @@ void IsSelectedMonEgg(void)
         gSpecialVar_Result = FALSE;
 }
 
+bool32 WouldPartyLoseSurfByReplacingMove(u32 partySlot, u32 moveSlot, enum Move newMove)
+{
+    if (partySlot >= PARTY_SIZE || moveSlot >= MAX_MON_MOVES
+        || FieldMove_GetUserSlot(FIELD_MOVE_SURF, TRUE) >= PARTY_SIZE)
+        return FALSE;
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][partySlot];
+    enum Move oldMove = GetMonData(mon, MON_DATA_MOVE1 + moveSlot);
+    SetMonData(mon, MON_DATA_MOVE1 + moveSlot, &newMove);
+    bool32 losesSurf = FieldMove_GetUserSlot(FIELD_MOVE_SURF, TRUE) >= PARTY_SIZE;
+    SetMonData(mon, MON_DATA_MOVE1 + moveSlot, &oldMove);
+    return losesSurf;
+}
+
 void IsLastMonThatKnowsSurf(void)
 {
-    enum Move move;
-    u32 i, j;
-
-    gSpecialVar_Result = FALSE;
-    if (gSpecialVar_0x8004 == PC_MON_CHOSEN)
-        return;
-
-    move = GetMonData(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004], MON_DATA_MOVE1 + gSpecialVar_0x8005);
-    if (move == MOVE_SURF)
-    {
-        for (i = 0; i < CalculatePlayerPartyCount(); i++)
-        {
-            if (i != gSpecialVar_0x8004)
-            {
-                for (j = 0; j < MAX_MON_MOVES; j++)
-                {
-                    if (GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_MOVE1 + j) == MOVE_SURF)
-                        return;
-                }
-            }
-        }
-        if (AnyStorageMonWithMove(move) != TRUE)
-            gSpecialVar_Result = !P_CAN_FORGET_HIDDEN_MOVE;
-    }
+    gSpecialVar_Result = WouldPartyLoseSurfByReplacingMove(gSpecialVar_0x8004,
+        gSpecialVar_0x8005, MOVE_NONE);
 }
 
 void CursorCb_MoveItemCallback(u8 taskId)

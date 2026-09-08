@@ -4,10 +4,6 @@ BattleFrontier_BattlePikeLobby_MapScripts::
 	.byte 0
 
 BattleFrontier_BattlePikeLobby_OnFrame:
-	map_script_2 VAR_TEMP_CHALLENGE_STATUS, 0, BattleFrontier_BattlePikeLobby_EventScript_GetChallengeStatus
-	map_script_2 VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_SAVING, BattleFrontier_BattlePikeLobby_EventScript_QuitWithoutSaving
-	map_script_2 VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_WON, BattleFrontier_BattlePikeLobby_EventScript_WonChallenge
-	map_script_2 VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST, BattleFrontier_BattlePikeLobby_EventScript_LostChallenge
 	.2byte 0
 
 BattleFrontier_BattlePikeLobby_OnWarp:
@@ -195,11 +191,8 @@ BattleFrontier_BattlePikeLobby_EventScript_EndCancelChallenge::
 	end
 
 BattleFrontier_BattlePikeLobby_EventScript_ShowResults::
-	lockall
-	frontier_results FRONTIER_FACILITY_PIKE
-	waitbuttonpress
-	special RemoveRecordsWindow
-	releaseall
+	special ChampionsCircuitBufferRecord
+	msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN
 	end
 
 BattleFrontier_BattlePikeLobby_EventScript_WalkToCorridor::
@@ -229,9 +222,7 @@ BattleFrontier_BattlePikeLobby_EventScript_Beauty::
 	end
 
 BattleFrontier_BattlePikeLobby_EventScript_RulesBoard::
-	lockall
-	msgbox BattleFrontier_BattlePikeLobby_Text_RulesAreListed, MSGBOX_DEFAULT
-	goto BattleFrontier_BattlePikeLobby_EventScript_ReadRulesBoard
+	msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRules, MSGBOX_SIGN
 	end
 
 BattleFrontier_BattlePikeLobby_EventScript_ReadRulesBoard::
@@ -389,16 +380,15 @@ BattleFrontier_BattlePikeLobby_Text_AwardYouTheseBattlePoints:
 	.string "we award you these Battle Point(s)…$"
 
 BattleFrontier_BattlePikeLobby_Text_OneRoomAwayFromGoal:
-	.string "Arrgh! I blew my chance!\n"
-	.string "I was one room away from the goal!\p"
-	.string "In this place, you'd better watch out\n"
-	.string "for poison, freezing, and so on.$"
-
+	.string "One more victory would have beaten\n"
+	.string "my Circuit record.\p"
+	.string "A status move stopped me. I left\n"
+	.string "that answer out of my team.$"
 BattleFrontier_BattlePikeLobby_Text_NeverHadToBattleTrainer:
-	.string "I've completed the challenge 10 times\n"
-	.string "now, but I've never had to battle\l"
-	.string "a TRAINER once.$"
-
+	.string "I used to get lucky in the PIKE.\p"
+	.string "The CIRCUIT makes you face a\n"
+	.string "complete opposing team every\l"
+	.string "match. I like that.$"
 BattleFrontier_BattlePikeLobby_Text_ThinkAbilitiesUsefulHere:
 	.string "Listen! Listen!\p"
 	.string "Don't you think that the special\n"

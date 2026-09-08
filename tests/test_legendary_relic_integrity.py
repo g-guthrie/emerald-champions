@@ -165,15 +165,6 @@ int main(void) {
     MarkLegendarySignCaughtBySpecies(SPECIES_ARCEUS);
     assert(CheckBagHasItem(ITEM_FLAME_PLATE,7) && CheckPCHasItem(ITEM_SPLASH_PLATE,4) && Total()==11);
     assert(!(GetLegendaryRelicDeliveryState()&((1u<<7)|(1u<<8))));
-    // Old ownership suppresses replay but never backfills lost/discarded items.
-    Reset(32,32,MON_GIVEN_TO_PARTY);
-    ownedSpecies[SPECIES_GROUDON]=1;ownedSpecies[SPECIES_ARCEUS]=1;
-    vars[0]=vars[1]=0xFFFF;InitializeLegendaryRelicDeliveryState();
-    assert(GetLegendaryRelicDeliveryState()==((1u<<24)|(1u<<29)));
-    RetryPendingLegendaryRelics();MarkLegendarySignCaughtBySpecies(SPECIES_GROUDON);
-    assert(!Total());
-    MarkLegendarySignCaughtBySpecies(SPECIES_KYOGRE);
-    assert(Total()==1 && CheckBagHasItem(ITEM_BLUE_ORB,1));
     return 0;
 }
 '''

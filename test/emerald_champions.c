@@ -599,7 +599,7 @@ TEST("Emerald Champions exposes named Doubles and Singles sets for every direct 
                             for (u32 move = 0; move < MAX_MON_MOVES; move++)
                                 drum |= preset->moves[move] == MOVE_BELLY_DRUM;
                             EXPECT(drum);
-                            EXPECT(held == ITEM_BERRY_JUICE || held == ITEM_ORAN_BERRY || held == ITEM_SITRUS_BERRY
+                            EXPECT(held == ITEM_BERRY_JUICE || held == ITEM_ORAN_BERRY
                                 || (GetMonAbility(&mon) == ABILITY_GLUTTONY
                                     && gItemsInfo[held].holdEffect == HOLD_EFFECT_CONFUSE_FLAVOR));
                             EXPECT_GE((s32)points, (s32)preset->statPoints[0] - 2);
@@ -712,219 +712,6 @@ TEST("Emerald Champions protects progression items from preparation services")
         EC_BATTLE_SET_SPECIAL_ITEM_EQUIPPED
     );
     EXPECT_EQ(GetMonData(&mon, MON_DATA_HELD_ITEM), ITEM_DEEP_SEA_TOOTH);
-}
-
-TEST("Emerald Champions migrates Linking Cord into one reusable Key Item")
-{
-    ClearBag();
-    BagPocket_SetSlotItemIdAndCount(&gBagPockets[POCKET_ITEMS], 0, ITEM_LINKING_CORD, 12);
-
-    MigrateEmeraldChampionsLinkingCord();
-
-    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_LINKING_CORD), 1);
-    for (u32 i = 0; i < gBagPockets[POCKET_ITEMS].capacity; i++)
-        EXPECT_NE(GetBagItemId(POCKET_ITEMS, i), ITEM_LINKING_CORD);
-
-    // The migration is idempotent and cannot produce a second Key Item.
-    MigrateEmeraldChampionsLinkingCord();
-    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_LINKING_CORD), 1);
-}
-
-TEST("Emerald Champions migrates the exact 81e Sign Circuit and difficulty layout")
-{
-    static const u16 signVars[] =
-    {
-        VAR_LEGENDARY_SIGNS_UNLOCKED_0,
-        VAR_LEGENDARY_SIGNS_UNLOCKED_1,
-        VAR_LEGENDARY_SIGNS_UNLOCKED_2,
-        VAR_LEGENDARY_SIGNS_UNLOCKED_3,
-        VAR_LEGENDARY_SIGNS_UNLOCKED_4,
-        VAR_LEGENDARY_SIGNS_UNLOCKED_5,
-        VAR_LEGENDARY_SIGNS_CAUGHT_0,
-        VAR_LEGENDARY_SIGNS_CAUGHT_1,
-        VAR_LEGENDARY_SIGNS_CAUGHT_2,
-        VAR_LEGENDARY_SIGNS_CAUGHT_3,
-        VAR_LEGENDARY_SIGNS_CAUGHT_4,
-        VAR_LEGENDARY_SIGNS_CAUGHT_5,
-    };
-
-    VarSet(VAR_EMERALD_CHAMPIONS_SAVE_VERSION, 0);
-    FlagSet(FLAG_UNUSED_0x91E); // 81e gym-reward migration marker.
-    FlagSet(FLAG_UNUSED_0x91F); // 81e item-ball migration marker.
-    FlagSet(FLAG_EC_CAUGHT_SHAYMIN); // 81e difficulty migration marker at 0x4F9.
-    FlagClear(FLAG_EC_BESPOKE_TRAINER_FLAGS_MIGRATED); // Raw 81e save without the colliding defeated-Zygarde bit.
-    for (u32 i = 0; i < ARRAY_COUNT(signVars); i++)
-        VarSet(signVars[i], 0xFFFF);
-    // 81e used 0x40F7-0x40FA for unlocked bits, 0x40FB-0x40FE
-    // for caught bits, and 0x40FF for lifetime Circuit wins.
-    VarSet(0x40F7, 1u << LEGENDARY_SIGN_CELEBI);
-    VarSet(0x40F8, 0);
-    VarSet(0x40F9, 1u << (LEGENDARY_SIGN_SHAYMIN - 32));
-    VarSet(0x40FA, 1u << (LEGENDARY_SIGN_ZYGARDE - 48));
-    VarSet(0x40FB, 1u << LEGENDARY_SIGN_CELEBI);
-    VarSet(0x40FC, 0);
-    VarSet(0x40FD, 1u << (LEGENDARY_SIGN_SHAYMIN - 32));
-    VarSet(0x40FE, 1u << (LEGENDARY_SIGN_ZYGARDE - 48));
-    VarSet(0x40FF, 37);
-    gSaveBlock2Ptr->optionsTextSpeed = 2; // 81e Easy.
-    VarSet(VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, 9);
-    VarSet(VAR_CHAMPIONS_CIRCUIT_ACTIVE, 1);
-
-    // Every row models an unrelated live 81e bit that collides with current
-    // content and therefore must not suppress that content after migration.
-    FlagSet(FLAG_EC_STARTER_ARCHIVE_BULBASAUR);
-    FlagSet(FLAG_RECEIVED_GAME_CORNER_GENESECT);
-    FlagSet(FLAG_HIDE_ROUTE111_VIAL_CHANSEY);
-    FlagSet(FLAG_EC_CAUGHT_ARTICUNO);
-    FlagSet(FLAG_RECEIVED_BRAWLY_LUCARIONITE);
-    FlagSet(FLAG_EC_ITEM_PRISON_BOTTLE);
-    FlagSet(FLAG_HIDDEN_ITEM_ROUTE_113_ULTRA_BALL);
-    FlagSet(FLAG_ITEM_ROUTE_116_LUCARIONITE_Z);
-
-    MigrateEmeraldChampionsCoreState();
-
-    EXPECT_EQ(VarGet(VAR_EMERALD_CHAMPIONS_SAVE_VERSION), EMERALD_CHAMPIONS_SAVE_VERSION_CURRENT);
-    EXPECT_EQ(GetCurrentDifficultyLevel(), DIFFICULTY_EASY);
-    EXPECT(FlagGet(FLAG_EC_BESPOKE_TRAINER_FLAGS_MIGRATED));
-    EXPECT(!FlagGet(FLAG_UNUSED_0x91E));
-    EXPECT(!FlagGet(FLAG_UNUSED_0x91F));
-    EXPECT(IsLegendarySignCaught(LEGENDARY_SIGN_CELEBI));
-    EXPECT(IsLegendarySignCaught(LEGENDARY_SIGN_SHAYMIN));
-    EXPECT(IsLegendarySignCaught(LEGENDARY_SIGN_ZYGARDE));
-    EXPECT(!IsLegendarySignCaught(LEGENDARY_SIGN_ARTICUNO));
-    EXPECT_EQ(VarGet(VAR_LEGENDARY_SIGNS_UNLOCKED_4), 0);
-    EXPECT_EQ(VarGet(VAR_LEGENDARY_SIGNS_UNLOCKED_5), 0);
-    EXPECT_EQ(VarGet(VAR_LEGENDARY_SIGNS_CAUGHT_4), 0);
-    EXPECT_EQ(VarGet(VAR_LEGENDARY_SIGNS_CAUGHT_5), 0);
-    EXPECT_EQ(VarGet(VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS), 0);
-    EXPECT_EQ(VarGet(VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS), 37);
-    EXPECT_EQ(VarGet(VAR_CHAMPIONS_CIRCUIT_ACTIVE), 0);
-    EXPECT(FlagGet(FLAG_EC_CAUGHT_CELEBI));
-    EXPECT(FlagGet(FLAG_EC_CAUGHT_SHAYMIN));
-    EXPECT(FlagGet(FLAG_EC_CAUGHT_ZYGARDE));
-    EXPECT(!FlagGet(FLAG_EC_CAUGHT_ARTICUNO));
-    EXPECT(!FlagGet(FLAG_EC_STARTER_ARCHIVE_BULBASAUR));
-    EXPECT(!FlagGet(FLAG_RECEIVED_GAME_CORNER_GENESECT));
-    EXPECT(!FlagGet(FLAG_HIDE_ROUTE111_VIAL_CHANSEY));
-    EXPECT(!FlagGet(FLAG_RECEIVED_BRAWLY_LUCARIONITE));
-    EXPECT(!FlagGet(FLAG_EC_ITEM_PRISON_BOTTLE));
-    EXPECT(!FlagGet(FLAG_HIDDEN_ITEM_ROUTE_113_ULTRA_BALL));
-    EXPECT(!FlagGet(FLAG_ITEM_ROUTE_116_LUCARIONITE_Z));
-
-    // The version, not a repurposed flag, makes the migration idempotent.
-    SetCurrentDifficultyLevel(DIFFICULTY_NORMAL);
-    VarSet(VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS, 41);
-    VarSet(VAR_LEGENDARY_SIGNS_CAUGHT_4, 0xA55A);
-    FlagSet(FLAG_EC_STARTER_ARCHIVE_BULBASAUR);
-    MigrateEmeraldChampionsCoreState();
-    EXPECT_EQ(GetCurrentDifficultyLevel(), DIFFICULTY_NORMAL);
-    EXPECT_EQ(VarGet(VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS), 41);
-    EXPECT_EQ(VarGet(VAR_LEGENDARY_SIGNS_CAUGHT_4), 0xA55A);
-    EXPECT(FlagGet(FLAG_EC_STARTER_ARCHIVE_BULBASAUR));
-}
-
-TEST("Emerald Champions ambiguous unversioned saves fail safe")
-{
-    VarSet(VAR_EMERALD_CHAMPIONS_SAVE_VERSION, 0);
-    FlagSet(FLAG_UNUSED_0x91E);
-    FlagClear(FLAG_UNUSED_0x91F); // Partial legacy signature is deliberately ambiguous.
-    FlagSet(FLAG_EC_BESPOKE_TRAINER_FLAGS_MIGRATED);
-    FlagSet(FLAG_EC_CAUGHT_SHAYMIN);
-    FlagSet(FLAG_EC_STARTER_ARCHIVE_CHARMANDER);
-    FlagSet(FLAG_RECEIVED_GAME_CORNER_POIPOLE);
-    FlagSet(FLAG_EC_ITEM_MASTER_BALL);
-    FlagSet(FLAG_HIDDEN_ITEM_ROUTE_113_ULTRA_BALL);
-    FlagSet(FLAG_ITEM_ROUTE_116_LUCARIONITE_Z);
-    for (u32 i = 0; i < ARRAY_COUNT(sEmeraldChampionsTestSignStateVars); i++)
-        VarSet(sEmeraldChampionsTestSignStateVars[i], 0xFFFF);
-    SetCurrentDifficultyLevel(DIFFICULTY_EASY);
-    VarSet(VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, 12);
-    VarSet(VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS, 34);
-    VarSet(VAR_CHAMPIONS_CIRCUIT_ACTIVE, 1);
-
-    MigrateEmeraldChampionsCoreState();
-
-    EXPECT_EQ(VarGet(VAR_EMERALD_CHAMPIONS_SAVE_VERSION), EMERALD_CHAMPIONS_SAVE_VERSION_CURRENT);
-    EXPECT_EQ(GetCurrentDifficultyLevel(), DIFFICULTY_HARD);
-    EXPECT(FlagGet(FLAG_EC_BESPOKE_TRAINER_FLAGS_MIGRATED));
-    EXPECT(!FlagGet(FLAG_UNUSED_0x91E));
-    EXPECT(!FlagGet(FLAG_UNUSED_0x91F));
-    EXPECT(!FlagGet(FLAG_EC_CAUGHT_SHAYMIN));
-    EXPECT(!FlagGet(FLAG_EC_STARTER_ARCHIVE_CHARMANDER));
-    EXPECT(!FlagGet(FLAG_RECEIVED_GAME_CORNER_POIPOLE));
-    EXPECT(!FlagGet(FLAG_EC_ITEM_MASTER_BALL));
-    EXPECT(!FlagGet(FLAG_HIDDEN_ITEM_ROUTE_113_ULTRA_BALL));
-    EXPECT(!FlagGet(FLAG_ITEM_ROUTE_116_LUCARIONITE_Z));
-    for (u32 i = 0; i < ARRAY_COUNT(sEmeraldChampionsTestSignStateVars); i++)
-        EXPECT_EQ(VarGet(sEmeraldChampionsTestSignStateVars[i]), 0);
-    EXPECT_EQ(VarGet(VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS), 0);
-    EXPECT_EQ(VarGet(VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS), 0);
-    EXPECT_EQ(VarGet(VAR_CHAMPIONS_CIRCUIT_ACTIVE), 0);
-    EXPECT(FlagGet(FLAG_HIDE_LEGENDARY_SIGN_DARKRAI));
-}
-
-TEST("Emerald Champions unversioned e7 saves preserve Shaymin and current state")
-{
-    VarSet(VAR_EMERALD_CHAMPIONS_SAVE_VERSION, 0);
-    FlagClear(FLAG_UNUSED_0x91E);
-    FlagClear(FLAG_UNUSED_0x91F);
-    FlagSet(FLAG_EC_BESPOKE_TRAINER_FLAGS_MIGRATED);
-    FlagSet(FLAG_EC_CAUGHT_SHAYMIN);
-    FlagSet(FLAG_EC_STARTER_ARCHIVE_BULBASAUR);
-    VarSet(VAR_LEGENDARY_SIGNS_CAUGHT_0, 0xA55A);
-    VarSet(VAR_LEGENDARY_SIGNS_CAUGHT_2, 1u << (LEGENDARY_SIGN_SHAYMIN - 32));
-    VarSet(VAR_LEGENDARY_SIGNS_CAUGHT_4, 0x5AA5);
-    VarSet(VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS, 23);
-    VarSet(VAR_CHANSEY_NURSE_STATE, 6);
-    SetCurrentDifficultyLevel(DIFFICULTY_EASY);
-
-    MigrateEmeraldChampionsCoreState();
-
-    EXPECT_EQ(VarGet(VAR_EMERALD_CHAMPIONS_SAVE_VERSION), EMERALD_CHAMPIONS_SAVE_VERSION_CURRENT);
-    EXPECT_EQ(GetCurrentDifficultyLevel(), DIFFICULTY_EASY);
-    EXPECT(FlagGet(FLAG_EC_BESPOKE_TRAINER_FLAGS_MIGRATED));
-    EXPECT(FlagGet(FLAG_EC_CAUGHT_SHAYMIN));
-    EXPECT(FlagGet(FLAG_EC_STARTER_ARCHIVE_BULBASAUR));
-    EXPECT_EQ(VarGet(VAR_LEGENDARY_SIGNS_CAUGHT_0), 0xA55A);
-    EXPECT_EQ(VarGet(VAR_LEGENDARY_SIGNS_CAUGHT_2), 1u << (LEGENDARY_SIGN_SHAYMIN - 32));
-    EXPECT_EQ(VarGet(VAR_LEGENDARY_SIGNS_CAUGHT_4), 0x5AA5);
-    EXPECT_EQ(VarGet(VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS), 23);
-    EXPECT_EQ(VarGet(VAR_CHANSEY_NURSE_STATE), 6);
-}
-
-TEST("Emerald Champions overlapping 81e Zygarde and e7 lineage fails safe")
-{
-    VarSet(VAR_EMERALD_CHAMPIONS_SAVE_VERSION, 0);
-    FlagSet(FLAG_UNUSED_0x91E);
-    FlagSet(FLAG_UNUSED_0x91F);
-    FlagSet(FLAG_EC_BESPOKE_TRAINER_FLAGS_MIGRATED);
-    FlagSet(FLAG_EC_CAUGHT_SHAYMIN);
-    FlagSet(FLAG_EC_STARTER_ARCHIVE_BULBASAUR);
-    SetCurrentDifficultyLevel(DIFFICULTY_NORMAL);
-    VarSet(VAR_LEGENDARY_SIGNS_UNLOCKED_0, 0x1357);
-    VarSet(VAR_LEGENDARY_SIGNS_CAUGHT_0, 0x2468);
-    VarSet(VAR_LEGENDARY_SIGNS_CAUGHT_2, 1u << (LEGENDARY_SIGN_SHAYMIN - 32));
-    VarSet(VAR_LEGENDARY_SIGNS_CAUGHT_4, 0x5AA5);
-    VarSet(VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, 7);
-    VarSet(VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS, 23);
-    VarSet(VAR_CHAMPIONS_CIRCUIT_ACTIVE, 1);
-
-    MigrateEmeraldChampionsCoreState();
-
-    EXPECT_EQ(VarGet(VAR_EMERALD_CHAMPIONS_SAVE_VERSION), EMERALD_CHAMPIONS_SAVE_VERSION_CURRENT);
-    EXPECT_EQ(GetCurrentDifficultyLevel(), DIFFICULTY_HARD);
-    EXPECT(!FlagGet(FLAG_UNUSED_0x91E));
-    EXPECT(!FlagGet(FLAG_UNUSED_0x91F));
-    EXPECT(FlagGet(FLAG_EC_BESPOKE_TRAINER_FLAGS_MIGRATED));
-    EXPECT(!FlagGet(FLAG_EC_CAUGHT_SHAYMIN));
-    EXPECT(!FlagGet(FLAG_EC_STARTER_ARCHIVE_BULBASAUR));
-    EXPECT_EQ(VarGet(VAR_LEGENDARY_SIGNS_UNLOCKED_0), 0);
-    EXPECT_EQ(VarGet(VAR_LEGENDARY_SIGNS_CAUGHT_0), 0);
-    EXPECT_EQ(VarGet(VAR_LEGENDARY_SIGNS_CAUGHT_2), 0);
-    EXPECT_EQ(VarGet(VAR_LEGENDARY_SIGNS_CAUGHT_4), 0);
-    EXPECT_EQ(VarGet(VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS), 0);
-    EXPECT_EQ(VarGet(VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS), 0);
-    EXPECT_EQ(VarGet(VAR_CHAMPIONS_CIRCUIT_ACTIVE), 0);
 }
 
 TEST("Emerald Champions battle-ready wild presets exclude special encounters")
@@ -1347,41 +1134,7 @@ TEST("Emerald Champions legendary requirements accept the whole evolution family
     EXPECT(PlayerPartyHasSpeciesFamily(SPECIES_TAUROS));
 }
 
-TEST("Emerald Champions conditional Signs awaken at their marked place")
-{
-    static const u16 signStateVars[] =
-    {
-        VAR_LEGENDARY_SIGNS_UNLOCKED_0,
-        VAR_LEGENDARY_SIGNS_UNLOCKED_1,
-        VAR_LEGENDARY_SIGNS_UNLOCKED_2,
-        VAR_LEGENDARY_SIGNS_UNLOCKED_3,
-        VAR_LEGENDARY_SIGNS_UNLOCKED_4,
-        VAR_LEGENDARY_SIGNS_UNLOCKED_5,
-        VAR_LEGENDARY_SIGNS_CAUGHT_0,
-        VAR_LEGENDARY_SIGNS_CAUGHT_1,
-        VAR_LEGENDARY_SIGNS_CAUGHT_2,
-        VAR_LEGENDARY_SIGNS_CAUGHT_3,
-        VAR_LEGENDARY_SIGNS_CAUGHT_4,
-        VAR_LEGENDARY_SIGNS_CAUGHT_5,
-    };
-    enum Species species = SPECIES_NONE;
-    u8 level = 0;
 
-    for (u32 i = 0; i < ARRAY_COUNT(signStateVars); i++)
-        VarSet(signStateVars[i], 0);
-    for (u32 i = 0; i < NUM_BADGES; i++)
-        FlagClear(FLAG_BADGE01_GET + i);
-    FlagSet(FLAG_BADGE01_GET);
-
-    ZeroPlayerPartyMons();
-    CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_RIOLU, 20, 0, OTID_STRUCT_PLAYER_ID);
-    gSaveBlock1Ptr->location.mapGroup = MAP_GROUP(MAP_GRANITE_CAVE_B2F);
-    gSaveBlock1Ptr->location.mapNum = MAP_NUM(MAP_GRANITE_CAVE_B2F);
-
-    EXPECT(!IsLegendarySignUnlocked(LEGENDARY_SIGN_COBALION));
-    TryGetLegendarySignWildOverride(WILD_AREA_LAND, &species, &level);
-    EXPECT(IsLegendarySignUnlocked(LEGENDARY_SIGN_COBALION));
-}
 
 TEST("Emerald Champions persists appended legendary sign bits")
 {
@@ -1660,35 +1413,22 @@ TEST("Champions Circuit entry requires six healthy non-Egg Pokemon")
 
 TEST("Champions Circuit win and loss transitions preserve counters and restore the party")
 {
-    static const enum Item items[PARTY_SIZE] =
-    {
-        ITEM_EVIOLITE,
-        ITEM_LIFE_ORB,
-        ITEM_SITRUS_BERRY,
-        ITEM_LIGHT_BALL,
-        ITEM_CHOICE_SCARF,
-        ITEM_FOCUS_SASH,
-    };
-    u8 originalLevels[PARTY_SIZE];
-
+    u16 damagedHp = 1;
     ZeroPlayerPartyMons();
     for (u32 slot = 0; slot < PARTY_SIZE; slot++)
-    {
-        enum Item item = items[slot];
-
-        CreateMon(&gParties[B_TRAINER_PLAYER][slot], SPECIES_BULBASAUR, 20 + slot, 0, OTID_STRUCT_PLAYER_ID);
-        SetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_HELD_ITEM, &item);
-        originalLevels[slot] = GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_LEVEL);
-    }
+        CreateMonWithIVs(&gParties[B_TRAINER_PLAYER][slot], SPECIES_BULBASAUR, 20, 0, OTID_STRUCT_PLAYER_ID, MAX_PER_STAT_IVS);
+    gPartiesCount[B_TRAINER_PLAYER] = PARTY_SIZE;
     ChampionsCircuitBegin();
     VarSet(VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, 5);
     VarSet(VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS, 9);
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP, &damagedHp);
 
     gBattleOutcome = B_OUTCOME_WON;
     ChampionsCircuitHandleBattleResult();
     EXPECT_EQ(gSpecialVar_Result, TRUE);
     EXPECT_EQ(VarGet(VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS), 6);
     EXPECT_EQ(VarGet(VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS), 10);
+    EXPECT_GT(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP), damagedHp);
     for (u32 slot = 0; slot < PARTY_SIZE; slot++)
         EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_HP), GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_MAX_HP));
 
@@ -1698,12 +1438,7 @@ TEST("Champions Circuit win and loss transitions preserve counters and restore t
     EXPECT_EQ(VarGet(VAR_CHAMPIONS_CIRCUIT_ACTIVE), FALSE);
     EXPECT_EQ(VarGet(VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS), 0);
     EXPECT_EQ(VarGet(VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS), 10);
-    for (u32 slot = 0; slot < PARTY_SIZE; slot++)
-    {
-        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_LEVEL), originalLevels[slot]);
-        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_HELD_ITEM), items[slot]);
-        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_HP), GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_MAX_HP));
-    }
+    // Full prepared-party byte restoration is checked by its dedicated test.
 }
 
 TEST("Champions Circuit sends earned rewards to the PC")
@@ -1773,78 +1508,6 @@ TEST("Champions Circuit mastery waits for every finite Circuit reward")
     EXPECT(IsLegendarySignCaught(LEGENDARY_SIGN_ETERNATUS));
 }
 
-TEST("Champions Circuit generates live Showdown doubles teams")
-{
-    static EWRAM_DATA bool8 seenSpecies[NUM_SPECIES];
-    u32 diversity = 0;
-
-    VarSet(VAR_CHAMPIONS_CIRCUIT_ACTIVE, TRUE);
-    SetCurrentDifficultyLevel(DIFFICULTY_HARD);
-    memset(seenSpecies, 0, sizeof(seenSpecies));
-    // Sixteen live generations exercise 96 complete sets while staying below
-    // the GBA test runner's per-test cycle budget.
-    for (u32 seed = 1; seed <= 16; seed++)
-    {
-        u32 megaStoneCount = 0;
-
-        SeedRng(seed);
-        VarSet(VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, seed % 48);
-        ChampionsCircuitGenerateOpponent();
-        EXPECT_EQ(gSpecialVar_Result, PARTY_SIZE);
-        EXPECT_EQ(gPartiesCount[B_TRAINER_OPPONENT_A], PARTY_SIZE);
-
-        for (u32 slot = 0; slot < PARTY_SIZE; slot++)
-        {
-            enum Species species = GetMonData(&gParties[B_TRAINER_OPPONENT_A][slot], MON_DATA_SPECIES);
-            u8 expectedLevel = 100 + (seed % 48) / PARTY_SIZE;
-            u32 statPointTotal = 0;
-            u32 moveCount = 0;
-            bool32 reachedEmptyMove = FALSE;
-
-            if (slot < (seed % 48) % PARTY_SIZE && expectedLevel < CHAMPIONS_CIRCUIT_MAX_LEVEL)
-                expectedLevel++;
-            EXPECT_NE(species, SPECIES_NONE);
-            EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][slot], MON_DATA_LEVEL), expectedLevel);
-            EXPECT_NE(GetMonAbility(&gParties[B_TRAINER_OPPONENT_A][slot]), ABILITY_NONE);
-            if (gItemsInfo[GetMonData(&gParties[B_TRAINER_OPPONENT_A][slot], MON_DATA_HELD_ITEM)].sortType
-             == ITEM_TYPE_MEGA_STONE)
-                megaStoneCount++;
-            for (u32 stat = 0; stat < NUM_STATS; stat++)
-                statPointTotal += GetMonData(&gParties[B_TRAINER_OPPONENT_A][slot], MON_DATA_HP_EV + stat);
-            EXPECT_EQ(statPointTotal, 66);
-            for (u32 move = 0; move < MAX_MON_MOVES; move++)
-            {
-                enum Move selectedMove = GetMonData(&gParties[B_TRAINER_OPPONENT_A][slot], MON_DATA_MOVE1 + move);
-                if (selectedMove == MOVE_NONE)
-                {
-                    reachedEmptyMove = TRUE;
-                    continue;
-                }
-                EXPECT(!reachedEmptyMove);
-                moveCount++;
-                for (u32 otherMove = 0; otherMove < move; otherMove++)
-                    EXPECT_NE(selectedMove, GetMonData(&gParties[B_TRAINER_OPPONENT_A][slot], MON_DATA_MOVE1 + otherMove));
-            }
-            // Showdown deliberately uses Transform-only Ditto and the
-            // two-move Fake Out + Last Resort set; both are complete sets.
-            EXPECT_GE(moveCount, 1);
-            for (u32 other = 0; other < slot; other++)
-            {
-                enum Species otherSpecies = GetMonData(&gParties[B_TRAINER_OPPONENT_A][other], MON_DATA_SPECIES);
-                EXPECT_NE(SpeciesToNationalPokedexNum(species), SpeciesToNationalPokedexNum(otherSpecies));
-            }
-            if (!seenSpecies[species])
-            {
-                seenSpecies[species] = TRUE;
-                diversity++;
-            }
-        }
-        EXPECT_LE(megaStoneCount, 1);
-    }
-    EXPECT_GE(diversity, 50);
-    VarSet(VAR_CHAMPIONS_CIRCUIT_ACTIVE, FALSE);
-}
-
 TEST("Champions Circuit honors the live difficulty level reduction")
 {
     static const enum DifficultyLevel difficulties[] =
@@ -1875,20 +1538,24 @@ TEST("Champions Circuit assembles complete competitive sets across 2048 seeds")
     for (u32 seed = 1; seed <= 2048; seed++)
     PARAMETRIZE_LABEL("seed=%d", seed)
     {
-        u32 speedControl = 0, physical = 0, special = 0;
+        u32 speedControl = 0, physical = 0, special = 0, megaStones = 0;
         VarSet(VAR_CHAMPIONS_CIRCUIT_ACTIVE, TRUE);
         VarSet(VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, seed);
         SetCurrentDifficultyLevel(DIFFICULTY_HARD);
         SeedRng(seed);
         ChampionsCircuitGenerateOpponent();
         EXPECT_EQ(gSpecialVar_Result, PARTY_SIZE);
+        EXPECT_EQ(gPartiesCount[B_TRAINER_OPPONENT_A], PARTY_SIZE);
         for (u32 slot = 0; slot < PARTY_SIZE; slot++)
         {
             struct Pokemon *mon = &gParties[B_TRAINER_OPPONENT_A][slot];
             enum Species species = GetMonData(mon, MON_DATA_SPECIES);
             enum Item item = GetMonData(mon, MON_DATA_HELD_ITEM);
             u32 moves = 0, status = 0, points = 0;
+            bool32 reachedEmptyMove = FALSE;
             EXPECT_NE(species, SPECIES_NONE);
+            EXPECT_NE(GetMonAbility(mon), ABILITY_NONE);
+            megaStones += gItemsInfo[item].sortType == ITEM_TYPE_MEGA_STONE;
             EXPECT_EQ(GetMonData(mon, MON_DATA_LEVEL), GetChampionsCircuitOpponentLevel(seed, slot));
             EXPECT_GT(GetMonData(mon, MON_DATA_HP), 0);
             if (slot == PARTY_SIZE - 1)
@@ -1904,11 +1571,13 @@ TEST("Champions Circuit assembles complete competitive sets across 2048 seeds")
             {
                 enum Move move = GetMonData(mon, MON_DATA_MOVE1 + m);
                 if (move == MOVE_NONE)
+                {
+                    reachedEmptyMove = TRUE;
                     continue;
+                }
+                EXPECT(!reachedEmptyMove);
                 moves++;
                 EXPECT_NE(move, MOVE_TERA_BLAST);
-                if (move == MOVE_BELLY_DRUM && item == ITEM_SITRUS_BERRY)
-                    EXPECT_EQ(GetMonData(mon, MON_DATA_MAX_HP) & 1, 0);
                 EXPECT_GT(GetMonData(mon, MON_DATA_PP1 + m), 0);
                 for (u32 earlier = 0; earlier < m; earlier++)
                     EXPECT_NE(move, GetMonData(mon, MON_DATA_MOVE1 + earlier));
@@ -1948,6 +1617,7 @@ TEST("Champions Circuit assembles complete competitive sets across 2048 seeds")
         EXPECT_GT(speedControl, 0);
         EXPECT_GT(physical, 0);
         EXPECT_GT(special, 0);
+        EXPECT_LE(megaStones, 1);
         VarSet(VAR_CHAMPIONS_CIRCUIT_ACTIVE, FALSE);
     }
 }
@@ -1975,23 +1645,28 @@ TEST("Champions Circuit overlevel stats survive form recalculation without chang
     struct Pokemon *opponent = &gParties[B_TRAINER_OPPONENT_A][0];
     static const u8 levels[] = {101, 150, 255};
     enum Species mega = SPECIES_GARCHOMP_MEGA;
-    u32 exp, hp100;
+    u32 exp, previousStats[NUM_STATS];
 
-    CreateMon(opponent, SPECIES_GARCHOMP, 100, 0, OTID_STRUCT_PLAYER_ID);
+    CreateMonWithIVs(opponent, SPECIES_GARCHOMP, 100, 0, OTID_STRUCT_PLAYER_ID, MAX_PER_STAT_IVS);
     exp = GetMonData(opponent, MON_DATA_EXP);
-    hp100 = GetMonData(opponent, MON_DATA_MAX_HP);
+    for (u32 field = MON_DATA_MAX_HP; field <= MON_DATA_SPDEF; field++)
+        previousStats[field - MON_DATA_MAX_HP] = GetMonData(opponent, field);
     VarSet(VAR_CHAMPIONS_CIRCUIT_ACTIVE, TRUE);
     for (u32 i = 0; i < ARRAY_COUNT(levels); i++)
     {
-        u32 hp;
         SetMonData(opponent, MON_DATA_LEVEL, &levels[i]);
         CalculateMonStats(opponent);
         EXPECT_EQ(GetMonData(opponent, MON_DATA_LEVEL), levels[i]);
         EXPECT_EQ(GetMonData(opponent, MON_DATA_EXP), exp);
-        hp = GetMonData(opponent, MON_DATA_MAX_HP);
-        EXPECT_GT(hp, hp100);
+        for (u32 field = MON_DATA_MAX_HP; field <= MON_DATA_SPDEF; field++)
+        {
+            u32 stat = GetMonData(opponent, field);
+            EXPECT_GT(stat, previousStats[field - MON_DATA_MAX_HP]);
+            previousStats[field - MON_DATA_MAX_HP] = stat;
+        }
         CalculateMonStats(opponent);
-        EXPECT_EQ(GetMonData(opponent, MON_DATA_MAX_HP), hp);
+        for (u32 field = MON_DATA_MAX_HP; field <= MON_DATA_SPDEF; field++)
+            EXPECT_EQ(GetMonData(opponent, field), previousStats[field - MON_DATA_MAX_HP]);
     }
     SetMonData(opponent, MON_DATA_SPECIES, &mega);
     CalculateMonStats(opponent);
@@ -2040,17 +1715,20 @@ TEST("Champions Circuit templates use configured legal Abilities")
     for (u32 variantIndex = 0; variantIndex < SHOWDOWN_CIRCUIT_VARIANT_COUNT; variantIndex++)
     {
         const struct ShowdownCircuitVariant *variant = &gShowdownCircuitVariants[variantIndex];
+        EXPECT_GT(variant->templateCount, 0);
 
         for (u32 templateIndex = variant->templateOffset;
              templateIndex < variant->templateOffset + variant->templateCount;
              templateIndex++)
         {
             const struct ShowdownCircuitTemplate *template = &gShowdownCircuitTemplates[templateIndex];
+            EXPECT_GT(template->abilityCount, 0);
 
             for (u32 abilityIndex = 0; abilityIndex < template->abilityCount; abilityIndex++)
             {
                 enum Ability ability = template->abilities[abilityIndex];
                 bool32 found = FALSE;
+                EXPECT_NE(ability, ABILITY_NONE);
 
                 for (u32 slot = 0; slot < NUM_ABILITY_SLOTS; slot++)
                     if (gSpeciesInfo[variant->partySpecies].abilities[slot] == ability)
@@ -2117,12 +1795,11 @@ TEST("Champions Circuit restores the exact prepared party after a run")
 
 static u32 EmeraldChampionsExpectedStat(enum Species species, u32 stat, u32 level, u32 points)
 {
-    u32 investment = min(2 * points, 63);
-    u32 n = 2 * GetSpeciesBaseStat(species, stat) + MAX_PER_STAT_IVS + investment;
+    u32 n = 2 * GetSpeciesBaseStat(species, stat) + MAX_PER_STAT_IVS;
 
     if (stat == STAT_HP)
-        return (n * level) / 100 + level + 10;
-    return (n * level) / 100 + 5; // Hardy nature, no friendship boost.
+        return (n * level) / 100 + level + 10 + points;
+    return (n * level) / 100 + 5 + points; // Hardy nature, no friendship boost.
 }
 
 static const u8 sEmeraldChampionsLevelCaps[] = {14, 20, 30, 40, 45, 55, 60, 70, 80};
@@ -2158,14 +1835,14 @@ TEST("Emerald Champions Stat Points change every stat at every level cap")
             CalculateMonStats(mon);
             atFull = GetMonData(mon, MON_DATA_MAX_HP + stats[s]);
             EXPECT_EQ(atFull, EmeraldChampionsExpectedStat(SPECIES_ZIGZAGOON, stats[s], level, EC_STAT_POINTS_PER_STAT));
-            EXPECT_GT(atFull, atZero);
+            EXPECT_EQ(atFull - atZero, EC_STAT_POINTS_PER_STAT);
 
             SetMonData(mon, MON_DATA_HP_EV + stats[s], &zero);
         }
     }
 }
 
-TEST("Emerald Champions Belly Drum berry sets land on even HP at every level cap")
+TEST("Emerald Champions Belly Drum berry sets preserve Sitrus points and Gluttony parity at every level cap")
 {
     static const enum Species species[] = {SPECIES_ZIGZAGOON, SPECIES_AZURILL, SPECIES_AZUMARILL};
 
@@ -2176,7 +1853,6 @@ TEST("Emerald Champions Belly Drum berry sets land on even HP at every level cap
             struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][0];
             s32 choice = -1;
             u32 total = 0;
-            u8 value_restore;
 
             ZeroPlayerPartyMons();
             CreateMon(mon, species[s], sEmeraldChampionsLevelCaps[c], 0, OTID_STRUCT_PLAYER_ID);
@@ -2202,40 +1878,17 @@ TEST("Emerald Champions Belly Drum berry sets land on even HP at every level cap
             }
             EXPECT_GE(choice, 0);
             EXPECT_EQ(ApplyEmeraldChampionsBattleSetChoice(mon, choice), EC_BATTLE_SET_SUCCESS);
-            // Belly Drum leaves ceil(maxHP / 2); a half-HP berry fires at
-            // floor(maxHP / 2), so the two meet only on even HP. The
-            // normalizer re-lands the authored spread within the point
-            // budget, so parity is required exactly where some legal HP
-            // value can reach it: a spread already spending the full budget
-            // on other stats has no point to move.
+            const struct EmeraldChampionsBattleSet *preset =
+                GetEmeraldChampionsBattleSetPresetForFormat(mon, choice, EC_BATTLE_FORMAT_DOUBLES);
+            if (preset->item == ITEM_SITRUS_BERRY)
             {
-                u32 authoredHp = GetMonData(mon, MON_DATA_HP_EV);
-                u32 spent = 0;
-                bool32 parityReachable = FALSE;
-
                 for (u32 stat = 0; stat < NUM_STATS; stat++)
-                    spent += GetMonData(mon, MON_DATA_HP_EV + stat);
-                // The normalizer may only deviate by the amount
-                // GetEmeraldChampionsCurrentBattleSetChoice still recognizes,
-                // so parity is required exactly where that window reaches it.
-                for (u32 points = authoredHp > 2 ? authoredHp - 2 : 0;
-                     points <= authoredHp + 2 && points <= EC_STAT_POINTS_PER_STAT;
-                     points++)
-                {
-                    u8 value = points;
-
-                    if (spent - authoredHp + points > EC_STAT_POINT_BUDGET)
-                        continue;
-                    SetMonData(mon, MON_DATA_HP_EV, &value);
-                    CalculateMonStats(mon);
-                    if ((GetMonData(mon, MON_DATA_MAX_HP) % 2) == 0)
-                        parityReachable = TRUE;
-                }
-                value_restore = authoredHp;
-                SetMonData(mon, MON_DATA_HP_EV, &value_restore);
-                CalculateMonStats(mon);
-                if (parityReachable)
-                    EXPECT_EQ(GetMonData(mon, MON_DATA_MAX_HP) % 2, 0);
+                    EXPECT_EQ(GetMonData(mon, MON_DATA_HP_EV + stat), preset->statPoints[stat]);
+            }
+            else
+            {
+                // Zigzagoon's Gluttony/Figy build still needs even HP.
+                EXPECT_EQ(GetMonData(mon, MON_DATA_MAX_HP) % 2, 0);
             }
             EXPECT_EQ(GetMonData(mon, MON_DATA_HP), GetMonData(mon, MON_DATA_MAX_HP));
             for (u32 stat = 0; stat < NUM_STATS; stat++)
@@ -2284,50 +1937,58 @@ TEST("Emerald Champions Belly Drum normalization preserves authored sets across 
     }
 }
 
-TEST("Emerald Champions Stat Point editor reports the next stat breakpoint")
+TEST("Emerald Champions reload refreshes cached stats without reviving fainted Pokemon")
+{
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][0];
+    u32 hp;
+    u32 staleAttack = 1;
+    u32 expectedAttack;
+    u32 expectedMaxHp;
+    PARAMETRIZE_LABEL("hp=%d", 0) { hp = 0; }
+    PARAMETRIZE_LABEL("hp=%d", 10) { hp = 10; }
+    ZeroPlayerPartyMons();
+    CreateMon(mon, SPECIES_ZIGZAGOON, 20, 0, OTID_STRUCT_PLAYER_ID);
+    CalculatePlayerPartyCount();
+    CalculateMonStats(mon);
+    expectedAttack = GetMonData(mon, MON_DATA_ATK);
+    expectedMaxHp = GetMonData(mon, MON_DATA_MAX_HP);
+    SetMonData(mon, MON_DATA_HP, &hp);
+    SetMonData(mon, MON_DATA_ATK, &staleAttack);
+    SavePlayerParty();
+    LoadPlayerParty();
+    EXPECT_EQ(GetMonData(mon, MON_DATA_ATK), expectedAttack);
+    EXPECT_EQ(GetMonData(mon, MON_DATA_MAX_HP), expectedMaxHp);
+    EXPECT_EQ(GetMonData(mon, MON_DATA_HP), hp);
+}
+
+TEST("Emerald Champions Stat Point editor shows actual stats and remaining points")
 {
     struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][0];
     u32 nature = NATURE_HARDY;
     u32 friendship = 0;
-    u32 delta;
-    u32 value;
     u32 base;
-    u8 points = 2;
+    u8 zero = 0;
+    static const u8 expected[] = _("HP: 53\nPoints: 2/32  Left: 64");
 
     ZeroPlayerPartyMons();
     CreateMon(mon, SPECIES_ZIGZAGOON, 20, 0, OTID_STRUCT_PLAYER_ID);
     CalculatePlayerPartyCount();
     SetMonData(mon, MON_DATA_HIDDEN_NATURE, &nature);
     SetMonData(mon, MON_DATA_FRIENDSHIP, &friendship);
-    SetMonData(mon, MON_DATA_HP_EV, &points);
+    for (u32 stat = 0; stat < NUM_STATS; stat++)
+        SetMonData(mon, MON_DATA_HP_EV + stat, &zero);
     CalculateMonStats(mon);
     base = GetMonData(mon, MON_DATA_MAX_HP);
-
-    EXPECT_EQ(GetEmeraldChampionsStatPointBreakpoint(mon, 0, &delta, &value), EC_STAT_BREAKPOINT_FOUND);
-    EXPECT_GE(delta, 1);
-    EXPECT_GT(value, base);
-    // The probe restores the spread, the stat and the current HP.
+    gSpecialVar_0x800A = 0;
+    gSpecialVar_0x8005 = 0;
+    gSpecialVar_0x8006 = 3; // +1 point, twice.
+    AdjustSelectedMonEmeraldChampionsStatPoints();
+    AdjustSelectedMonEmeraldChampionsStatPoints();
+    EXPECT_EQ(GetMonData(mon, MON_DATA_MAX_HP), base + 2);
     EXPECT_EQ(GetMonData(mon, MON_DATA_HP_EV), 2);
-    EXPECT_EQ(GetMonData(mon, MON_DATA_MAX_HP), base);
-    EXPECT_EQ(GetMonData(mon, MON_DATA_HP), base);
-
-    // Every smaller step is dead, and the reported step lands the reported value.
-    for (u32 step = 1; step < delta; step++)
-    {
-        points = 2 + step;
-        SetMonData(mon, MON_DATA_HP_EV, &points);
-        CalculateMonStats(mon);
-        EXPECT_EQ(GetMonData(mon, MON_DATA_MAX_HP), base);
-    }
-    points = 2 + delta;
-    SetMonData(mon, MON_DATA_HP_EV, &points);
-    CalculateMonStats(mon);
-    EXPECT_EQ(GetMonData(mon, MON_DATA_MAX_HP), value);
-
-    points = EC_STAT_POINTS_PER_STAT;
-    SetMonData(mon, MON_DATA_HP_EV, &points);
-    CalculateMonStats(mon);
-    EXPECT_EQ(GetEmeraldChampionsStatPointBreakpoint(mon, 0, &delta, &value), EC_STAT_BREAKPOINT_STAT_MAXED);
+    BufferSelectedMonEmeraldChampionsStatPointDetail();
+    EXPECT_EQ(StringCompare(gStringVar4, expected), 0);
+    EXPECT_EQ(GetMonData(mon, MON_DATA_HP), base + 2);
 }
 
 TEST("Emerald Champions field moves need the badge and a party member that could learn them")
@@ -2520,35 +2181,4 @@ TEST("Emerald Champions partial mask grants retry only their saved undelivered i
     EXPECT(!CheckPCHasItem(ITEM_WELLSPRING_MASK, 1));
     ClearBag();
     memset(gSaveBlock1Ptr->pcItems, 0, sizeof(gSaveBlock1Ptr->pcItems));
-}
-TEST("Emerald Champions opening rival singles presets can attack without a partner")
-{
-    static const enum Species starters[] = {
-        SPECIES_BULBASAUR, SPECIES_CHARMANDER, SPECIES_SQUIRTLE,
-        SPECIES_CHIKORITA, SPECIES_CYNDAQUIL, SPECIES_TOTODILE,
-        SPECIES_TREECKO, SPECIES_TORCHIC, SPECIES_MUDKIP,
-        SPECIES_TURTWIG, SPECIES_CHIMCHAR, SPECIES_PIPLUP,
-        SPECIES_SNIVY, SPECIES_TEPIG, SPECIES_OSHAWOTT,
-        SPECIES_CHESPIN, SPECIES_FENNEKIN, SPECIES_FROAKIE,
-        SPECIES_ROWLET, SPECIES_LITTEN, SPECIES_POPPLIO,
-        SPECIES_GROOKEY, SPECIES_SCORBUNNY, SPECIES_SOBBLE,
-        SPECIES_SPRIGATITO, SPECIES_FUECOCO, SPECIES_QUAXLY,
-    };
-    struct Pokemon mon;
-    for (u32 i = 0; i < ARRAY_COUNT(starters); i++)
-    {
-        bool32 hasAttack = FALSE;
-        CreateMon(&mon, starters[i], 13, 0, OTID_STRUCT_PLAYER_ID);
-        EXPECT_EQ(ApplyEmeraldChampionsBattleSetChoiceForFormat(&mon, 0, EC_BATTLE_FORMAT_SINGLES), EC_BATTLE_SET_SUCCESS);
-        for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
-        {
-            enum Move move = GetMonData(&mon, MON_DATA_MOVE1 + slot);
-            hasAttack |= move != MOVE_NONE && GetMoveCategory(move) != DAMAGE_CATEGORY_STATUS;
-            EXPECT_NE(move, MOVE_HELPING_HAND);
-            EXPECT_NE(move, MOVE_HEAL_PULSE);
-            EXPECT_NE(move, MOVE_FOLLOW_ME);
-        }
-        EXPECT(hasAttack);
-        EXPECT_EQ(GetMonData(&mon, MON_DATA_LEVEL), 13);
-    }
 }

@@ -28,6 +28,7 @@ u32 GetBattlerTurnOrderNum(enum BattlerId battler);
 u32 GetBattlerRawSpeedOrder(enum BattlerId battler);
 bool32 NoAliveMonsForBattlerSide(enum BattlerId battler);
 bool32 NoAliveMonsForPlayer(void);
+bool32 WillPlayerWhiteOutIfPartnerWinsAlone(void);
 bool32 NoAliveMonsForEitherParty(void);
 bool32 TrySetReflect(enum BattlerId battler);
 bool32 TrySetLightScreen(enum BattlerId battler);

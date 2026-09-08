@@ -39,6 +39,7 @@ Route111_EventScript_ShowTemporaryMirageTower::
 
 Route111_OnTransition:
 	setvar VAR_TRAINER_HILL_IS_ACTIVE, 0
+	trainerhill_resumetimer
 	special SetMirageTowerVisibility
 	call_if_unset FLAG_MIRAGE_TOWER_VISIBLE, Route111_EventScript_SetLayoutNoMirageTower
 	call_if_eq VAR_MIRAGE_TOWER_STATE, 1, Route111_EventScript_SetFallingPlayerGfx
@@ -412,6 +413,7 @@ Route111_EventScript_Man2::
 Route111_EventScript_Hiker::
 	lock
 	faceplayer
+	msgbox Route111_Text_CursedStoneClue, MSGBOX_DEFAULT
 	goto_if_eq VAR_MIRAGE_TOWER_STATE, 3, Route111_EventScript_HikerMirageTowerGone
 	goto_if_eq VAR_MIRAGE_TOWER_STATE, 2, Route111_EventScript_HikerMirageTowerDisintegrated
 	goto_if_set FLAG_MIRAGE_TOWER_VISIBLE, Route111_EventScript_HikerMirageTowerVisible
@@ -869,3 +871,36 @@ Route111_Text_IRENE_LocalConversation:
 Route111_Text_BECKY_LocalConversation:
 	.string "I came to admire the desert.\n"
 	.string "The desert came into my shoes.$"
+
+Route111_EventScript_CursedStone::
+	lockall
+	msgbox Route111_Text_CursedStone, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, Route111_EventScript_CursedStoneEnd
+	closemessage
+	tryspecialevo EVO_TRIGGER_TABLET_CURSE, TRUE, TRUE
+	goto_if_ne VAR_RESULT, 0, Route111_EventScript_CursedStoneEnd
+	msgbox Route111_Text_CursedStoneUnchanged, MSGBOX_DEFAULT
+Route111_EventScript_CursedStoneEnd:
+	releaseall
+	end
+
+Route111_Text_CursedStoneClue:
+	.string "That carved stone just east of me\n"
+	.string "matches a Galarian YAMASK's slab.\p"
+	.string "Read it with a conscious Galarian\n"
+	.string "YAMASK missing at least 49 HP from\l"
+	.string "its maximum. It becomes RUNERIGUS.\p"
+	.string "You can return to the stone even after\n"
+	.string "MIRAGE TOWER disappears.$"
+
+Route111_Text_CursedStone:
+	.string "A curse is carved into this stone.\p"
+	.string "Each conscious Galarian YAMASK in your\n"
+	.string "party that is missing at least 49 HP\l"
+	.string "can become RUNERIGUS here.\p"
+	.string "Let the stone call to your party?$"
+
+Route111_Text_CursedStoneUnchanged:
+	.string "The stone falls silent. Bring a\n"
+	.string "conscious Galarian YAMASK missing\l"
+	.string "at least 49 HP, without an EVERSTONE.$"

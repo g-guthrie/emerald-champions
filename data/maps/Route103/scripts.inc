@@ -19,6 +19,13 @@ Route103_EventScript_OpenAlteringCave::
 
 Route103_EventScript_Rival::
 	lockall
+	goto_if_eq VAR_EC_OPENING_STATE, EC_OPENING_PRE_RIVAL_READY, Route103_EventScript_RivalReady
+	goto_if_eq VAR_EC_OPENING_STATE, EC_OPENING_COMPLETE, Route103_EventScript_RivalReady
+	msgbox Route103_Text_FinishPreparation, MSGBOX_DEFAULT
+	releaseall
+	end
+
+Route103_EventScript_RivalReady::
 	checkplayergender
 	goto_if_eq VAR_RESULT, MALE, Route103_EventScript_RivalMay
 	goto_if_eq VAR_RESULT, FEMALE, Route103_EventScript_RivalBrendan
@@ -34,8 +41,10 @@ Route103_EventScript_RivalMay::
 	waitmovement 0
 	applymovement LOCALID_ROUTE103_RIVAL, Common_Movement_Delay48
 	waitmovement 0
-	msgbox Route103_Text_MayLetsBattle, MSGBOX_DEFAULT
-	switch VAR_STARTER_MON
+	msgbox Route103_Text_MayLetsBattle, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, Route103_EventScript_KeepPreparing
+	special BufferEmeraldChampionsRivalBranch
+	switch VAR_RESULT
 	case 0, Route103_EventScript_StartMayBattleTreecko
 	case 1, Route103_EventScript_StartMayBattleTorchic
 	case 2, Route103_EventScript_StartMayBattleMudkip
@@ -51,46 +60,55 @@ Route103_EventScript_RivalBrendan::
 	waitmovement 0
 	applymovement LOCALID_ROUTE103_RIVAL, Common_Movement_Delay48
 	waitmovement 0
-	msgbox Route103_Text_BrendanLetsBattle, MSGBOX_DEFAULT
-	switch VAR_STARTER_MON
+	msgbox Route103_Text_BrendanLetsBattle, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, Route103_EventScript_KeepPreparing
+	special BufferEmeraldChampionsRivalBranch
+	switch VAR_RESULT
 	case 0, Route103_EventScript_StartBrendanBattleTreecko
 	case 1, Route103_EventScript_StartBrendanBattleTorchic
 	case 2, Route103_EventScript_StartBrendanBattleMudkip
 	end
 
 Route103_EventScript_StartMayBattleTreecko::
-	trainerbattle_no_intro TRAINER_MAY_ROUTE_103_TREECKO, Route103_Text_MayDefeated
+	trainerbattle_no_intro_double TRAINER_MAY_ROUTE_103_TREECKO, Route103_Text_MayDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	goto Route103_EventScript_AfterMayBattle
 	end
 
 Route103_EventScript_StartMayBattleTorchic::
-	trainerbattle_no_intro TRAINER_MAY_ROUTE_103_TORCHIC, Route103_Text_MayDefeated
+	trainerbattle_no_intro_double TRAINER_MAY_ROUTE_103_TORCHIC, Route103_Text_MayDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	goto Route103_EventScript_AfterMayBattle
 	end
 
 Route103_EventScript_StartMayBattleMudkip::
-	trainerbattle_no_intro TRAINER_MAY_ROUTE_103_MUDKIP, Route103_Text_MayDefeated
+	trainerbattle_no_intro_double TRAINER_MAY_ROUTE_103_MUDKIP, Route103_Text_MayDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	goto Route103_EventScript_AfterMayBattle
 	end
 
 Route103_EventScript_StartBrendanBattleTreecko::
-	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_103_TREECKO, Route103_Text_BrendanDefeated
+	trainerbattle_no_intro_double TRAINER_BRENDAN_ROUTE_103_TREECKO, Route103_Text_BrendanDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	goto Route103_EventScript_AfterBrendanBattle
 	end
 
 Route103_EventScript_StartBrendanBattleTorchic::
-	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_103_TORCHIC, Route103_Text_BrendanDefeated
+	trainerbattle_no_intro_double TRAINER_BRENDAN_ROUTE_103_TORCHIC, Route103_Text_BrendanDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	goto Route103_EventScript_AfterBrendanBattle
 	end
 
 Route103_EventScript_StartBrendanBattleMudkip::
-	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_103_MUDKIP, Route103_Text_BrendanDefeated
+	trainerbattle_no_intro_double TRAINER_BRENDAN_ROUTE_103_MUDKIP, Route103_Text_BrendanDefeated, EmeraldChampions_Text_NeedTwoPokemon
 	goto Route103_EventScript_AfterBrendanBattle
 	end
 
 Route103_EventScript_AfterMayBattle::
 	msgbox Route103_Text_MayTimeToHeadBack, MSGBOX_DEFAULT
 	goto Route103_EventScript_RivalExit
+	end
+
+Route103_EventScript_KeepPreparing::
+	msgbox Route103_Text_KeepPreparing, MSGBOX_DEFAULT
+	savebgm MUS_DUMMY
+	fadedefaultbgm
+	releaseall
 	end
 
 Route103_EventScript_AfterBrendanBattle::
@@ -287,42 +305,44 @@ Route103_Text_MayRoute103Pokemon:
 	.string "on ROUTE 103 include…$"
 
 Route103_Text_MayLetsBattle:
-	.string "MAY: There you are, {PLAYER}{KUN}!\p"
-	.string "Dad said you helped him out. I wanted to\n"
-	.string "meet the POKéMON that was with you!\p"
-	.string "Mine has the type advantage, though.\n"
-	.string "Did you use OLDALE's LEVELER?\p"
-	.string "Let's see how we do together!$"
+	.string "MAY: I took the partner you left\n"
+	.string "with Dad. PIKACHU and the rest\l"
+	.string "of my team are ready too!\p"
+	.string "Bring the team you want.\n"
+	.string "Ready for our DOUBLE BATTLE?$"
 
 Route103_Text_MayDefeated:
-	.string "We lost! You two make a good team!$"
+	.string "Your team earned that win!$"
 
 Route103_Text_MayTimeToHeadBack:
-	.string "MAY: I thought I had the advantage!\n"
-	.string "I guess there's more to learn.\p"
-	.string "Come on, let's head back to the LAB.\n"
-	.string "Dad will want to hear about this!$"
+	.string "MAY: That was a serious battle!\p"
+	.string "Let's tell Dad how our teams did.$"
 
 Route103_Text_BrendanRoute103Pokemon:
 	.string "BRENDAN: Okay, so it's this one and\n"
 	.string "that one that live on ROUTE 103…$"
 
 Route103_Text_BrendanLetsBattle:
-	.string "BRENDAN: Hey, {PLAYER}. Dad told me\n"
-	.string "you got him out of trouble.\p"
-	.string "Let's see your POKéMON in a battle.\n"
-	.string "Mine has the type advantage!\p"
-	.string "You tried the LEVELER in OLDALE, right?\n"
-	.string "Then let's get started.$"
+	.string "BRENDAN: I took the partner you\n"
+	.string "left with Dad. PIKACHU and the\l"
+	.string "rest of my team are ready too!\p"
+	.string "Bring the team you want.\n"
+	.string "Ready for our DOUBLE BATTLE?$"
 
 Route103_Text_BrendanDefeated:
 	.string "Huh. We still have work to do.$"
 
 Route103_Text_BrendanTimeToHeadBack:
-	.string "BRENDAN: All right, you earned that win.\n"
-	.string "Type advantage isn't enough, is it?\p"
-	.string "Let's head back to the LAB. Dad wanted\n"
-	.string "to see you when we were done.$"
+	.string "BRENDAN: You earned that win!\p"
+	.string "Let's tell Dad how our teams did.$"
+
+Route103_Text_FinishPreparation:
+	.string "Speak to Dad or his lab aide first.\n"
+	.string "Your partners and field supplies\l"
+	.string "are waiting for you there.$"
+
+Route103_Text_KeepPreparing:
+	.string "I'll be here when your team is ready.$"
 
 Route103_Text_ShouldHaveBroughtPotion:
 	.string "My POKéMON is staggeringly tired…\n"

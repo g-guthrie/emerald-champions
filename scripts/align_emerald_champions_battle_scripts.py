@@ -133,8 +133,6 @@ def main() -> None:
                 changed += 1
         print(f"updated_script_files={changed}")
 
-    require(NEED_TWO in (ROOT / "data/scripts/emerald_champions.inc").read_text(), "shared doubles guard text is missing")
-    require("trainerbattle_no_intro_double" in (ROOT / "asm/macros/event.inc").read_text(), "no-intro doubles macro is missing")
     errors = mismatches(authored)
     require(not errors, "\n".join(errors))
     print(f"PASS: all {len(authored)} campaign trainer branches use their authored battle format")

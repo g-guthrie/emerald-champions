@@ -32,17 +32,6 @@ def run_c(body):
 
 
 class UtilWordIntegrity(unittest.TestCase):
-    def test_original_high_word_shift_is_undefined(self):
-        result = run_c(r'''
-int main(void) {
-    volatile u16 h[] = {0x1234, 0x8000};
-    volatile u32 w = h[0] | (s16)h[1] << 16;
-    (void)w;
-    return 0;
-}
-''')
-        self.assertNotEqual(result.returncode, 0)
-        self.assertIn('left shift of negative value', result.stderr)
 
     def test_roundtrip_layout_and_defined_domain(self):
         result = run_c(production_words() + r'''

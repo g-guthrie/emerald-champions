@@ -80,9 +80,10 @@ Bounded retries must fail cleanly rather than hang or start an incomplete battle
 The expanded port includes Showdown's bidirectional status/Choice-utility
 incompatibility and redundant-attack rules. A culled move cannot be reinserted
 to fill a short set. Required-item arrays (such as Arceus plates) are resolved,
-not just singular item fields. Belly Drum/Sitrus HP is optimized for the actual
-arena level by redistributing the same 66 Stat Points; this matters at level
-100 because this engine's fixed-IV investment formula differs from mainline EVs.
+not just singular item fields. Sitrus activates at half HP rounded up, so Belly
+Drum works at any arena level without redistributing Stat Points. Each point
+adds one HP after level scaling; other stats receive the same fixed bonus before
+Nature.
 
 All live Frontier challenge desks already route to this Circuit. Existing
 competitive doubles AI is reused; no new fixed boss teams are needed. Generator

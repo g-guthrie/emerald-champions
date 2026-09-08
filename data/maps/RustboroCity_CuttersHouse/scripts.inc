@@ -37,10 +37,11 @@ RustboroCity_CuttersHouse_Text_YouCanPutThisHMToGoodUse:
 RustboroCity_CuttersHouse_Text_ExplainCut:
 	.string "That HM registers CUT as a field\n"
 	.string "technique for your team.\p"
-	.string "Once you earn the STONE BADGE, any\n"
-	.string "POKéMON that knows CUT can chop thin\l"
-	.string "trees outside battle.$"
-
+	.string "With the STONE BADGE, a party\n"
+	.string "member able to learn CUT can chop\l"
+	.string "thin trees.\p"
+	.string "It needn't keep CUT among its four\n"
+	.string "battle moves.$"
 RustboroCity_CuttersHouse_Text_DadHelpedClearLandOfTrees:
 	.string "When they were expanding the city of\n"
 	.string "RUSTBORO, my dad helped out.\p"

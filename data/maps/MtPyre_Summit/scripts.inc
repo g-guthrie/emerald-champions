@@ -174,72 +174,22 @@ MtPyre_Summit_EventScript_OldManNewTale::
 	return
 
 MtPyre_Summit_EventScript_LegendarySign::
-	goto_if_unset FLAG_RECEIVED_RED_OR_BLUE_ORB, MtPyre_Summit_EventScript_LegendarySignReturn
-	special TryUnlockDarkraiLegendarySign
-	goto_if_eq VAR_RESULT, 6, Common_EventScript_LegendaryNeedsDevon
-	goto_if_eq VAR_RESULT, 5, Common_EventScript_LegendaryDefeatedAtShrine
-	goto_if_eq VAR_RESULT, 0, MtPyre_Summit_EventScript_DarkraiNeedsTrainers
-	goto_if_eq VAR_RESULT, 1, MtPyre_Summit_EventScript_DarkraiNeedsMusharna
-	goto_if_eq VAR_RESULT, 2, MtPyre_Summit_EventScript_DarkraiAwakened
-	goto_if_eq VAR_RESULT, 3, MtPyre_Summit_EventScript_DarkraiAwaits
+	setvar VAR_0x8004, LEGENDARY_SIGN_DARKRAI_ID
+	special GetSelectedLegendarySignState
+	goto_if_ne VAR_RESULT, 2, MtPyre_Summit_EventScript_ReviewSign
 	setvar VAR_0x8004, LEGENDARY_SIGN_CRESSELIA_ID
-	special TryUnlockSelectedLegendarySign
-	goto_if_eq VAR_RESULT, 6, Common_EventScript_LegendaryNeedsDevon
-	goto_if_eq VAR_RESULT, 5, Common_EventScript_LegendaryDefeatedAtShrine
-	goto_if_eq VAR_RESULT, 2, MtPyre_Summit_EventScript_CresseliaAwakened
-	goto_if_eq VAR_RESULT, 4, MtPyre_Summit_EventScript_TryDialgaSign
-	msgbox MtPyre_Summit_Text_CresseliaAwaits, MSGBOX_DEFAULT
-	return
-
-MtPyre_Summit_EventScript_TryDialgaSign::
-	goto_if_unset FLAG_SYS_GAME_CLEAR, MtPyre_Summit_EventScript_TimeSignDormant
+	special GetSelectedLegendarySignState
+	goto_if_ne VAR_RESULT, 2, MtPyre_Summit_EventScript_ReviewSign
 	setvar VAR_0x8004, LEGENDARY_SIGN_DIALGA_ID
-	special TryUnlockSelectedLegendarySign
-	goto_if_eq VAR_RESULT, 6, Common_EventScript_LegendaryNeedsDevon
-	goto_if_eq VAR_RESULT, 5, Common_EventScript_LegendaryDefeatedAtShrine
-	goto_if_eq VAR_RESULT, 2, MtPyre_Summit_EventScript_DialgaAwakened
-	goto_if_eq VAR_RESULT, 4, MtPyre_Summit_EventScript_DreamChainComplete
-	msgbox MtPyre_Summit_Text_DialgaAwaits, MSGBOX_DEFAULT
-	return
-
-MtPyre_Summit_EventScript_DarkraiNeedsTrainers::
-	msgbox MtPyre_Summit_Text_DarkraiNeedsTrainers, MSGBOX_DEFAULT
-	return
-
-MtPyre_Summit_EventScript_DarkraiNeedsMusharna::
-	msgbox MtPyre_Summit_Text_DarkraiNeedsMusharna, MSGBOX_DEFAULT
-	return
-
-MtPyre_Summit_EventScript_DarkraiAwakened::
-	msgbox MtPyre_Summit_Text_DarkraiAwakened, MSGBOX_DEFAULT
-	return
-
-MtPyre_Summit_EventScript_DarkraiAwaits::
-	msgbox MtPyre_Summit_Text_DarkraiAwaits, MSGBOX_DEFAULT
-	return
-
-MtPyre_Summit_EventScript_CresseliaAwakened::
-	msgbox MtPyre_Summit_Text_CresseliaAwakened, MSGBOX_DEFAULT
-	return
-
-MtPyre_Summit_EventScript_TimeSignDormant::
-	msgbox MtPyre_Summit_Text_TimeSignDormant, MSGBOX_DEFAULT
-	return
-
-MtPyre_Summit_EventScript_DialgaAwakened::
-	msgbox MtPyre_Summit_Text_DialgaAwakened, MSGBOX_DEFAULT
-	return
-
-MtPyre_Summit_EventScript_DreamChainComplete::
-	msgbox MtPyre_Summit_Text_DreamChainComplete, MSGBOX_DEFAULT
-MtPyre_Summit_EventScript_LegendarySignReturn::
+MtPyre_Summit_EventScript_ReviewSign::
+	special ResearchSelectedLegendarySign
+	msgbox gStringVar4, MSGBOX_DEFAULT
 	return
 
 MtPyre_Summit_EventScript_Darkrai::
 	lock
 	special TryUnlockDarkraiLegendarySign
-	goto_if_eq VAR_RESULT, 6, Common_EventScript_LegendaryNeedsDevon
-	goto_if_eq VAR_RESULT, 5, Common_EventScript_LegendaryDefeatedAtShrine
+	goto_if_eq VAR_RESULT, 5, Common_EventScript_LegendaryRestingAtShrine
 	goto_if_eq VAR_RESULT, 0, MtPyre_Summit_EventScript_DarkraiDormant
 	goto_if_eq VAR_RESULT, 1, MtPyre_Summit_EventScript_DarkraiDormant
 	goto_if_eq VAR_RESULT, 4, MtPyre_Summit_EventScript_DarkraiQuiet
@@ -248,13 +198,13 @@ MtPyre_Summit_EventScript_Darkrai::
 	delay 40
 	waitmoncry
 	setvar VAR_0x8004, LEGENDARY_SIGN_DARKRAI_ID
-	msgbox gText_LegendaryOneShotWarning, MSGBOX_DEFAULT
 	special CreateSelectedLegendarySignEncounter
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+	special FinishLegendaryLandmarkEncounter
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_LegendaryDefeatedAtShrine
+	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_LegendaryRestingAtShrine
 	goto MtPyre_Summit_EventScript_DarkraiCaught
 	end
 
@@ -263,7 +213,8 @@ MtPyre_Summit_EventScript_DarkraiCaught::
 	end
 
 MtPyre_Summit_EventScript_DarkraiDormant::
-	msgbox MtPyre_Summit_Text_DarkraiDormant, MSGBOX_DEFAULT
+	special ResearchSelectedLegendarySign
+	msgbox gStringVar4, MSGBOX_DEFAULT
 	release
 	end
 
@@ -273,27 +224,29 @@ MtPyre_Summit_EventScript_DarkraiQuiet::
 	end
 
 MtPyre_Summit_Text_DarkraiDormant:
-	.string "The black SIGN is still. Complete all\n"
-	.string "Trainer battles within MT. PYRE.\p"
-	.string "Return with MUSHARNA's family after\n"
-	.string "DEVON translates DARKRAI's Sign.$"
+	.string "A dream can calm this nightmare.\p"
+	.string "After helping the elders, befriend\n"
+	.string "MUNNA or MUSHARNA and return here.\p"
+	.string "Your Pokédex records the connection.\n"
+	.string "Your partner may stay in the PC.$"
 
 MtPyre_Summit_Text_DarkraiQuiet:
 	.string "The nightmare has lifted. The black\n"
 	.string "SIGN records the trial you completed.$"
 
 MtPyre_Summit_Text_DarkraiNeedsTrainers:
-	.string "A Legendary Sign stains this peak.\p"
-	.string "Face every Trainer within Mt. Pyre,\n"
-	.string "then take MUSHARNA to DEVON CORP. 2F.\p"
-	.string "Have the dream researcher in RUSTBORO\n"
-	.string "translate DARKRAI's Sign, then return.$"
+	.string "A dream can calm this nightmare.\p"
+	.string "After helping the elders, befriend\n"
+	.string "MUNNA or MUSHARNA and return here.\p"
+	.string "Your Pokédex records the connection.\n"
+	.string "Your partner may stay in the PC.$"
 
 MtPyre_Summit_Text_DarkraiNeedsMusharna:
-	.string "Every spirit here acknowledges you.\p"
-	.string "But the Sign answers only a dream.\n"
-	.string "Bring MUSHARNA's family to DEVON's\n"
-	.string "dream researcher, then return here.$"
+	.string "A dream can calm this nightmare.\p"
+	.string "After helping the elders, befriend\n"
+	.string "MUNNA or MUSHARNA and return here.\p"
+	.string "Your Pokédex records the connection.\n"
+	.string "Your partner may stay in the PC.$"
 
 MtPyre_Summit_Text_DarkraiAwakened:
 	.string "The Legendary Sign has awakened!\p"
@@ -769,18 +722,17 @@ MtPyre_Summit_Text_WillYouHearOutMyTale:
 	.string "told in the HOENN region?$"
 
 MtPyre_Summit_Text_GroudonKyogreTale:
-	.string "Long ago, GROUDON raised the land and\n"
-	.string "KYOGRE carved the sea. Their clash grew\l"
-	.string "until neither could stop itself.\p"
-	.string "Ancient Trainers formed a network of\n"
-	.string "SIGNS with trusted POKéMON as its keys.\p"
-	.string "The RED and BLUE ORBS joined that net,\n"
+	.string "Long ago, GROUDON raised the land\n"
+	.string "and KYOGRE carved the sea. Their\l"
+	.string "clash grew until neither could\l"
+	.string "stop.\p"
+	.string "Ancient Trainers formed a network\n"
+	.string "of SIGNS with trusted POKéMON.\p"
+	.string "The RED and BLUE ORBS joined it,\n"
 	.string "but RAYQUAZA supplied its balance.\p"
-	.string "The ORBS calmed the rivals, the SIGNS\n"
-	.string "fell dark, and the sky guardian departed.\p"
-	.string "The exterior still bears lesser marks:\n"
-	.string "one sketches GARDEVOIR, one ABSOL.$"
-
+	.string "The mountain still bears other\n"
+	.string "SIGNS. Inspect them yourself;\l"
+	.string "their conditions differ.$"
 MtPyre_Summit_Text_WellThatTooIsFine:
 	.string "I see…\n"
 	.string "Well, that, too, is fine…$"
@@ -797,17 +749,15 @@ MtPyre_Summit_Text_HearTheNewLegendOfHoenn:
 	.string "Will you hear HOENN's new legend?$"
 
 MtPyre_Summit_Text_HoennTrioTale:
-	.string "Land and sea became absolute, and HOENN\n"
-	.string "began to break between them.\p"
-	.string "A green POKéMON descended from the sky,\n"
-	.string "but it answered a mortal Trainer's call.\p"
-	.string "RAYQUAZA restored the board. The Trainer\n"
-	.string "restored the reason to keep playing.\p"
-	.string "Each awakened SIGN waits to see what\n"
-	.string "kind of Champion that Trainer becomes.\p"
-	.string "On the sixth floor, a broken-world mark\n"
-	.string "now sketches DUSKNOIR.$"
-
+	.string "Land and sea became absolute, and\n"
+	.string "HOENN began to break.\p"
+	.string "A green POKéMON descended from the\n"
+	.string "sky and answered your call.\p"
+	.string "RAYQUAZA restored the balance. You\n"
+	.string "gave it a reason to answer.\p"
+	.string "The sixth floor holds another\n"
+	.string "SIGN. Return there after earning\l"
+	.string "the title of Champion.$"
 MtPyre_Summit_EventScript_OldLadyAfterMagma::
 	msgbox MtPyre_Summit_Text_OrbsApart, MSGBOX_DEFAULT
 	release

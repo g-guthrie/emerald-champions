@@ -3,12 +3,10 @@ AbandonedShip_Room_B1F_MapScripts::
 
 AbandonedShip_Room_B1F_EventScript_Spiritomb::
 	lock
-	checkspecies SPECIES_LICKITUNG
-	goto_if_eq VAR_RESULT, TRUE, AbandonedShip_Room_B1F_EventScript_CheckOddKeystone
-	checkspecies SPECIES_SLUGMA
-	goto_if_eq VAR_RESULT, TRUE, AbandonedShip_Room_B1F_EventScript_CheckOddKeystone
+	goto AbandonedShip_Room_B1F_EventScript_CheckOddKeystone
+
 AbandonedShip_Room_B1F_EventScript_Empty::
-	msgbox Text_EmptyTrashCan, MSGBOX_DEFAULT
+	msgbox AbandonedShip_Room_B1F_Text_KeystoneMissing, MSGBOX_DEFAULT
 	release
 	end
 
@@ -38,6 +36,12 @@ AbandonedShip_Room_B1F_EventScript_End::
 	end
 
 AbandonedShip_Room_B1F_Text_PutKeystoneInTrash:
-	.string "Something compels you to place the\n"
-	.string "ODD KEYSTONE in this trash can.\p"
-	.string "Place the ODD KEYSTONE?$"
+	.string "The ODD KEYSTONE fits the cracked\n"
+	.string "socket in this old bin.\p"
+	.string "A whisper rises from the hull. Set\n"
+	.string "the stone in place?$"
+
+AbandonedShip_Room_B1F_Text_KeystoneMissing::
+	.string "Cold air seeps from the old bin.\p"
+	.string "A cracked socket in its base looks\n"
+	.string "made for an ODD KEYSTONE.$"

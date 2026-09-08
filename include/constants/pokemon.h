@@ -342,6 +342,7 @@ enum EvolutionMode {
     EVO_MODE_OVERWORLD_SPECIAL,
     EVO_MODE_SCRIPT_TRIGGER,
     EVO_MODE_BATTLE_ONLY,        // This mode is only used in battles to support Tandemaus' unique requirement
+    EVO_MODE_BATTLE_READY,       // Battle-only methods after a battle without a level gain.
 };
 
 enum EvoTriggerVersion {

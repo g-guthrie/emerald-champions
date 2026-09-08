@@ -441,3 +441,56 @@ static void GenerateOpponentMons(void)
         i++;
     }
 }
+
+// Local exhibitions retain the three original pending-prize fields.
+static u16 *GetChampionsTentPrizeField(u8 tent)
+{
+    if (tent == 0)
+        return &gSaveBlock2Ptr->frontier.slateportTentPrize;
+    if (tent == 1)
+        return &gSaveBlock2Ptr->frontier.verdanturfTentPrize;
+    return &gSaveBlock2Ptr->frontier.fallarborTentPrize;
+}
+
+void SetChampionsTentPrize(u8 tent)
+{
+    const u16 *rewards;
+    u32 count;
+
+    if (*GetChampionsTentPrizeField(tent) != ITEM_NONE)
+        return;
+    if (tent == 0)
+    {
+        rewards = sSlateportTentRewards;
+        count = ARRAY_COUNT(sSlateportTentRewards);
+    }
+    else if (tent == 1)
+    {
+        rewards = sVerdanturfTentRewards;
+        count = ARRAY_COUNT(sVerdanturfTentRewards);
+    }
+    else
+    {
+        rewards = sFallarborTentRewards;
+        count = ARRAY_COUNT(sFallarborTentRewards);
+    }
+    *GetChampionsTentPrizeField(tent) = rewards[RandomUniform(RNG_NONE, 0, count - 1)];
+}
+
+void ChampionsTentTryGivePrize(void)
+{
+    u16 *prize = GetChampionsTentPrizeField(gSpecialVar_0x8004);
+    gSpecialVar_Result = 0;
+    if (*prize == ITEM_NONE)
+        return;
+    CopyItemName(*prize, gStringVar1);
+    if (AddBagItem(*prize, 1))
+    {
+        *prize = ITEM_NONE;
+        gSpecialVar_Result = 1;
+    }
+    else
+    {
+        gSpecialVar_Result = 2;
+    }
+}

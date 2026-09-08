@@ -77,25 +77,23 @@ AI_SINGLE_BATTLE_TEST("AI sees increased base power of Wake Up Slap")
 
 AI_SINGLE_BATTLE_TEST("AI sees increased base power of Grav Apple")
 {
-    enum Move movePlayer;
-    u16 expectedMove;
-
-    PARAMETRIZE { movePlayer = MOVE_CELEBRATE; expectedMove = MOVE_DRUM_BEATING; }
-    PARAMETRIZE { movePlayer = MOVE_GRAVITY; expectedMove = MOVE_GRAV_APPLE; }
-
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_GRAV_APPLE) == EFFECT_GRAV_APPLE);
-        ASSUME(GetMovePower(MOVE_GRAV_APPLE) == GetMovePower(MOVE_DRUM_BEATING));
-        ASSUME_MOVE_EFFECT_STAT_CHANGE(MOVE_DRUM_BEATING, self: FALSE, speed: -1);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
-        PLAYER(SPECIES_WOBBUFFET) { HP(81); Speed(20); }
-        OPPONENT(SPECIES_WOBBUFFET) { Speed(10); Moves(MOVE_DRUM_BEATING, MOVE_GRAV_APPLE); }
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_GRAV_APPLE); }
     } WHEN {
-        TURN { MOVE(player, movePlayer); EXPECT_MOVE(opponent, MOVE_DRUM_BEATING); }
-        TURN { MOVE(player, MOVE_CELEBRATE); EXPECT_MOVE(opponent, expectedMove); }
-    } SCENE {
-        if (expectedMove == MOVE_GRAV_APPLE)
-            MESSAGE("Wobbuffet fainted!");
+        TURN { EXPECT_MOVE(opponent, MOVE_GRAV_APPLE); }
+    } THEN {
+        // Champions increased Grav Apple's base power to 90, so comparing
+        // equal-power Grav Apple and Drum Beating no longer tests this rule.
+        struct AiCalcValues calc = { .move = MOVE_GRAV_APPLE, .weather = AI_GetWeather(), .terrain = gFieldTimers.terrain };
+        enum BattlerId attacker = opponent - gBattleMons;
+        enum BattlerId target = player - gBattleMons;
+        gFieldStatuses &= ~STATUS_FIELD_GRAVITY;
+        u32 normalDamage = AI_CalcDamage(&calc, attacker, target).median;
+        gFieldStatuses |= STATUS_FIELD_GRAVITY;
+        EXPECT_GT(AI_CalcDamage(&calc, attacker, target).median, normalDamage);
     }
 }
 

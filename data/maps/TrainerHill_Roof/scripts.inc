@@ -4,7 +4,6 @@ TrainerHill_Roof_MapScripts::
 	.byte 0
 
 TrainerHill_Roof_EventScript_Owner::
-	trainerhill_settrainerflags
 	lock
 	faceplayer
 	trainerhill_getownerstate
@@ -12,6 +11,7 @@ TrainerHill_Roof_EventScript_Owner::
 	case 0, TrainerHill_Roof_EventScript_Arrived
 	case 1, TrainerHill_Roof_EventScript_GivePrize
 	case 2, TrainerHill_Roof_EventScript_AlreadyReceivedPrize
+	case 3, TrainerHill_Roof_EventScript_NotCompleted
 TrainerHill_Roof_EventScript_Arrived::
 	msgbox TrainerHill_Roof_Text_YouFinallyCameBravo, MSGBOX_DEFAULT
 TrainerHill_Roof_EventScript_GivePrize::
@@ -60,3 +60,12 @@ TrainerHill_Roof_EventScript_AlreadyReceivedPrize::
 	release
 	end
 
+
+TrainerHill_Roof_EventScript_NotCompleted::
+	msgbox TrainerHill_Roof_Text_NotCompleted, MSGBOX_DEFAULT
+	release
+	end
+
+TrainerHill_Roof_Text_NotCompleted:
+	.string "Finish every floor's DOUBLE BATTLE\n"
+	.string "in a current challenge first.$"

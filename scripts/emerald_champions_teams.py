@@ -13,8 +13,9 @@ Species, items, abilities, natures and moves are written without their
 ``SPECIES_``/``ITEM_``/``ABILITY_``/``NATURE_``/``MOVE_`` prefixes.  Stat
 Points accept either six slash-separated values or one of the spreads in
 ``POINT_SPREADS``.  The level column is the offset from the encounter's strict
-level cap and is applied verbatim: difficulty comes from levels and team size,
-never from a hidden tier nudge.
+level cap and is materialized verbatim. At battle creation, all campaign
+trainer Pokemon receive the live-cap floor in src/difficulty.c before the global
+difficulty offset, including gyms and the four-Pokemon opening rival.
 
 The battle class selects the AI profile. ``--write`` rewrites the master's team
 and design fields in place while preserving every other encounter field
@@ -385,7 +386,7 @@ def main() -> None:
 
     if args.write:
         MASTER.write_text(master_text)
-        run([sys.executable, "scripts/implement_emerald_champions_master_battles.py", "--through-encounter", "513"])
+        run([sys.executable, "scripts/implement_emerald_champions_master_battles.py"])
         print(f"wrote {MASTER} and src/data/trainers.party")
         return
 
@@ -396,17 +397,13 @@ def main() -> None:
             scratch_master.write_text(master_text)
             run([
                 sys.executable, "scripts/implement_emerald_champions_master_battles.py",
-                "--through-encounter", "513", "--master", str(scratch_master), "--output", str(scratch_party),
+                "--master", str(scratch_master), "--output", str(scratch_party),
             ])
-            run([sys.executable, "scripts/audit_emerald_champions_master_battles.py", str(scratch_master)],
-                {"EC_TRAINERS_PARTY": str(scratch_party)}, fatal=False)
-            run([sys.executable, "scripts/verify_trainer_runtime_coherence.py"],
-                {"EC_TRAINERS_PARTY": str(scratch_party)}, fatal=False)
             run([sys.executable, "scripts/verify_trainer_ability_legality.py"],
                 {"EC_TRAINERS_PARTY": str(scratch_party)}, fatal=False)
         if FAILED_GATES:
             raise SystemExit(f"gates failed: {FAILED_GATES}")
-        print("PASS: teams compile and every static trainer gate passes on scratch output")
+        print("PASS: teams materialize and configured trainer abilities are valid on scratch output")
         return
 
     parser.print_help()

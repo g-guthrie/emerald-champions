@@ -258,7 +258,10 @@ SafariZone_RestHouse_Text_PsychicM:
 	.string "If you use {POKEBLOCK}S, wild POKéMON won't\n"
 	.string "be so quick to run away.\p"
 	.string "It's not much use to give {POKEBLOCK}S to\n"
-	.string "POKéMON that don't flee easily.$"
+	.string "POKéMON that don't flee easily.\p"
+	.string "Looking for Alolan forms? RAICHU lives\n"
+	.string "in the south. EXEGGUTOR lives in the\l"
+	.string "north and northwest; MAROWAK, north.$"
 
 SafariZone_RestHouse_Text_FatMan:
 	.string "If you put a {POKEBLOCK} on the FEEDER,\n"

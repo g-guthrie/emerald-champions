@@ -14,11 +14,6 @@ BattleFrontier_BattlePyramidLobby_EventScript_TurnPlayerNorth:
 	end
 
 BattleFrontier_BattlePyramidLobby_OnFrame:
-	map_script_2 VAR_TEMP_CHALLENGE_STATUS, 0, BattleFrontier_BattlePyramidLobby_EventScript_GetChallengeStatus
-	map_script_2 VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_SAVING, BattleFrontier_BattlePyramidLobby_EventScript_QuitWithoutSaving
-	map_script_2 VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_PAUSED, BattleFrontier_BattlePyramidLobby_EventScript_ResumeChallenge
-	map_script_2 VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_WON, BattleFrontier_BattlePyramidLobby_EventScript_WonChallenge
-	map_script_2 VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST, BattleFrontier_BattlePyramidLobby_EventScript_LostChallenge
 	.2byte 0
 
 BattleFrontier_BattlePyramidLobby_EventScript_GetChallengeStatus::
@@ -210,9 +205,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_HintGiver::
 	lockall
 	applymovement LOCALID_PYRAMID_LOBBY_HINT_GIVER, Common_Movement_FacePlayer
 	waitmovement 0
-	msgbox BattleFrontier_BattlePyramidLobby_Text_TellYouWhatMisfortunesAwait, MSGBOX_DEFAULT
-	call BattleFrontier_BattlePyramidLobby_EventScript_GiveHint
-	msgbox BattleFrontier_BattlePyramidLobby_Text_BelieveMyFortunesOrNot, MSGBOX_DEFAULT
+	msgbox BattleFrontier_BattlePyramidLobby_Text_CircuitObserver, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -362,11 +355,8 @@ BattleFrontier_BattlePyramidLobby_EventScript_HintNormal::
 	return
 
 BattleFrontier_BattlePyramidLobby_EventScript_ShowResults::
-	lockall
-	frontier_results FRONTIER_FACILITY_PYRAMID
-	waitbuttonpress
-	special RemoveRecordsWindow
-	releaseall
+	special ChampionsCircuitBufferRecord
+	msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN
 	end
 
 BattleFrontier_BattlePyramidLobby_EventScript_WalkToPanelAndReceiveBag::
@@ -484,9 +474,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_FatMan::
 	end
 
 BattleFrontier_BattlePyramidLobby_EventScript_RulesBoard::
-	lockall
-	msgbox BattleFrontier_BattlePyramidLobby_Text_RulesAreListed, MSGBOX_DEFAULT
-	goto BattleFrontier_BattlePyramidLobby_EventScript_ReadRulesBoard
+	msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRules, MSGBOX_SIGN
 	end
 
 BattleFrontier_BattlePyramidLobby_EventScript_ReadRulesBoard::
@@ -839,19 +827,17 @@ BattleFrontier_BattlePyramidLobby_Text_BelieveMyFortunesOrNot:
 	.string "I wish you safe passage…$"
 
 BattleFrontier_BattlePyramidLobby_Text_TrainersNoticeRunning:
-	.string "Did you know?\p"
-	.string "If you run fast, TRAINERS may notice\n"
-	.string "and come after you for a battle.\p"
-	.string "So, if you want to avoid TRAINERS,\n"
-	.string "don't catch their eyes, but sneak\l"
-	.string "cautiously and quietly past them.$"
-
+	.string "The old PYRAMID was a maze. Now I\n"
+	.string "study the CIRCUIT here.\p"
+	.string "Its opponents can punish a\n"
+	.string "careless switch just as quickly as\l"
+	.string "a careless attack.$"
 BattleFrontier_BattlePyramidLobby_Text_LostLotOfItems:
-	.string "Awaaaaaaarrrrgh!\p"
-	.string "I had a whole lot of items, but I lost\n"
-	.string "them all when I lost!\p"
-	.string "Awaaaaaaarrrrgh!$"
-
+	.string "I used to worry about losing items\n"
+	.string "in the old PYRAMID.\p"
+	.string "The CIRCUIT restores my team and\n"
+	.string "held items after each match. I can\l"
+	.string "focus on the battle.$"
 BattleFrontier_BattlePyramidLobby_Text_YouveDefeatedPyramidKing:
 	.string "Welcome back!\n"
 	.string "You've done the unthinkable!\p"
@@ -903,3 +889,10 @@ BattleFrontier_BattlePyramidLobby_Text_ExplainBagRules:
 	.string "The contents of the BATTLE BAG are\n"
 	.string "lost if you fail in your quest.$"
 
+BattleFrontier_BattlePyramidLobby_Text_CircuitObserver::
+	.string "I once read the PYRAMID's omens.\p"
+	.string "The CIRCUIT asks a different\n"
+	.string "question: how will your team\l"
+	.string "answer the board before it?\p"
+	.string "A prediction helps. A sound\n"
+	.string "fallback helps even more.$"
