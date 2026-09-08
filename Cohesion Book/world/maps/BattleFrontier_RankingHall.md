@@ -1,0 +1,41 @@
+# BattleFrontier_RankingHall
+
+**REVISE.** Map-specific script/dialogue digest and physical event records were reviewed against the region contract. Preserve the described map and its existing state handoffs, subject to the explicitly linked proposals and central battle/acquisition rules.
+
+[Regional experience](../08-frontier.md) · [Map source](../../baseline/source/data/maps/BattleFrontier_RankingHall/map.json) · [Scripts](../../baseline/source/data/maps/BattleFrontier_RankingHall/scripts.inc)
+
+## Current map contract
+
+`MAP_BATTLE_FRONTIER_RANKING_HALL` · `LAYOUT_BATTLE_FRONTIER_RANKING_HALL` · `WEATHER_NONE` · `MUS_LILYCOVE_MUSEUM`
+
+Map-specific script/dialogue digest and physical event records were reviewed against the region contract. Preserve the described map and its existing state handoffs, subject to the explicitly linked proposals and central battle/acquisition rules.
+
+## Complete event ledger
+
+Every row is a distinct snapshot event. A KEEP applies the examined common contract and this map’s context; it is not a claim that this scene has been traversed in an emulator.
+
+| Event | Position / selector | Current behavior | Disposition / final dependency |
+|---|---|---|---|
+| `BattleFrontier_RankingHall:object_events:001` | 24,13 | [BattleFrontier_RankingHall_EventScript_Attendant](../../baseline/source/data/maps/BattleFrontier_RankingHall/scripts.inc#L73) — BattleFrontier_RankingHall_EventScript_Attendant at (24,13); This is the RANKING HALL. //  This is where we recognize the immortal /  TRAINERS who left great records in /  BATTLE FRONTIER events. | **REPAIR** · [W-C-FLAVOR](../common-contracts.md#w-c-flavor) · W-CIRCUIT-RECORDS |
+| `BattleFrontier_RankingHall:object_events:002` | 4,10 | [BattleFrontier_RankingHall_EventScript_NinjaBoy](../../baseline/source/data/maps/BattleFrontier_RankingHall/scripts.inc#L85) — BattleFrontier_RankingHall_EventScript_NinjaBoy at (4,10); Hi, is your name on this list? / Wow, that's super! /  I'll have to try harder, too! | **KEEP** · [W-C-STORY](../common-contracts.md#w-c-story) |
+| `BattleFrontier_RankingHall:object_events:003` | 44,11 | [BattleFrontier_RankingHall_EventScript_Boy](../../baseline/source/data/maps/BattleFrontier_RankingHall/scripts.inc#L99) — BattleFrontier_RankingHall_EventScript_Boy at (44,11); Hmm… /  My name's not up there… //  Well, it's only natural since I haven't /  taken any challenges yet. | **KEEP** · [W-C-FLAVOR](../common-contracts.md#w-c-flavor) |
+| `BattleFrontier_RankingHall:bg_events:001` | 26,9 | [BattleFrontier_RankingHall_EventScript_TowerSinglesRecords](../../baseline/source/data/maps/BattleFrontier_RankingHall/scripts.inc#L4) — BattleFrontier_RankingHall_EventScript_TowerSinglesRecords at (26,9); shared behavior BACKGROUND | **REPAIR** · [W-C-BACKGROUND](../common-contracts.md#w-c-background) · W-CIRCUIT-RECORDS |
+| `BattleFrontier_RankingHall:bg_events:002` | 23,8 | [BattleFrontier_RankingHall_EventScript_TowerDoublesRecords](../../baseline/source/data/maps/BattleFrontier_RankingHall/scripts.inc#L10) — BattleFrontier_RankingHall_EventScript_TowerDoublesRecords at (23,8); shared behavior BACKGROUND | **REPAIR** · [W-C-BACKGROUND](../common-contracts.md#w-c-background) · W-CIRCUIT-RECORDS |
+| `BattleFrontier_RankingHall:bg_events:003` | 26,5 | [BattleFrontier_RankingHall_EventScript_TowerMultisRecords](../../baseline/source/data/maps/BattleFrontier_RankingHall/scripts.inc#L16) — BattleFrontier_RankingHall_EventScript_TowerMultisRecords at (26,5); shared behavior BACKGROUND | **REPAIR** · [W-C-BACKGROUND](../common-contracts.md#w-c-background) · W-CIRCUIT-RECORDS |
+| `BattleFrontier_RankingHall:bg_events:004` | 29,8 | [BattleFrontier_RankingHall_EventScript_TowerLinkRecords](../../baseline/source/data/maps/BattleFrontier_RankingHall/scripts.inc#L22) — BattleFrontier_RankingHall_EventScript_TowerLinkRecords at (29,8); shared behavior BACKGROUND | **REPAIR** · [W-C-BACKGROUND](../common-contracts.md#w-c-background) · W-CIRCUIT-RECORDS |
+| `BattleFrontier_RankingHall:bg_events:005` | 42,9 | [BattleFrontier_RankingHall_EventScript_ArenaRecords](../../baseline/source/data/maps/BattleFrontier_RankingHall/scripts.inc#L28) — BattleFrontier_RankingHall_EventScript_ArenaRecords at (42,9); shared behavior BACKGROUND | **REPAIR** · [W-C-BACKGROUND](../common-contracts.md#w-c-background) · W-CIRCUIT-RECORDS |
+| `BattleFrontier_RankingHall:bg_events:006` | 46,9 | [BattleFrontier_RankingHall_EventScript_PalaceRecords](../../baseline/source/data/maps/BattleFrontier_RankingHall/scripts.inc#L34) — BattleFrontier_RankingHall_EventScript_PalaceRecords at (46,9); shared behavior BACKGROUND | **REPAIR** · [W-C-BACKGROUND](../common-contracts.md#w-c-background) · W-CIRCUIT-RECORDS |
+| `BattleFrontier_RankingHall:bg_events:007` | 10,9 | [BattleFrontier_RankingHall_EventScript_FactoryRecords](../../baseline/source/data/maps/BattleFrontier_RankingHall/scripts.inc#L40) — BattleFrontier_RankingHall_EventScript_FactoryRecords at (10,9); shared behavior BACKGROUND | **REPAIR** · [W-C-BACKGROUND](../common-contracts.md#w-c-background) · W-CIRCUIT-RECORDS |
+| `BattleFrontier_RankingHall:bg_events:008` | 8,7 | [BattleFrontier_RankingHall_EventScript_DomeRecords](../../baseline/source/data/maps/BattleFrontier_RankingHall/scripts.inc#L46) — BattleFrontier_RankingHall_EventScript_DomeRecords at (8,7); shared behavior BACKGROUND | **REPAIR** · [W-C-BACKGROUND](../common-contracts.md#w-c-background) · W-CIRCUIT-RECORDS |
+| `BattleFrontier_RankingHall:bg_events:009` | 6,9 | [BattleFrontier_RankingHall_EventScript_PikeRecords](../../baseline/source/data/maps/BattleFrontier_RankingHall/scripts.inc#L52) — BattleFrontier_RankingHall_EventScript_PikeRecords at (6,9); shared behavior BACKGROUND | **REPAIR** · [W-C-BACKGROUND](../common-contracts.md#w-c-background) · W-CIRCUIT-RECORDS |
+| `BattleFrontier_RankingHall:bg_events:010` | 44,7 | [BattleFrontier_RankingHall_EventScript_PyramidRecords](../../baseline/source/data/maps/BattleFrontier_RankingHall/scripts.inc#L58) — BattleFrontier_RankingHall_EventScript_PyramidRecords at (44,7); shared behavior BACKGROUND | **REPAIR** · [W-C-BACKGROUND](../common-contracts.md#w-c-background) · W-CIRCUIT-RECORDS |
+| `BattleFrontier_RankingHall:bg_events:011` | 16,8 | [BattleFrontier_RankingHall_EventScript_DomePikeFactoryRecordsSign](../../baseline/source/data/maps/BattleFrontier_RankingHall/scripts.inc#L77) — BattleFrontier_RankingHall_EventScript_DomePikeFactoryRecordsSign at (16,8); BATTLE DOME, BATTLE PIKE, /  and BATTLE FACTORY Records | **REPAIR** · [W-C-BACKGROUND](../common-contracts.md#w-c-background) · W-CIRCUIT-RECORDS |
+| `BattleFrontier_RankingHall:bg_events:012` | 36,8 | [BattleFrontier_RankingHall_EventScript_PalaceArenaPyramidRecordsSIgn](../../baseline/source/data/maps/BattleFrontier_RankingHall/scripts.inc#L81) — BattleFrontier_RankingHall_EventScript_PalaceArenaPyramidRecordsSIgn at (36,8); BATTLE PALACE, BATTLE ARENA, /  and BATTLE PYRAMID Records | **REPAIR** · [W-C-BACKGROUND](../common-contracts.md#w-c-background) · W-CIRCUIT-RECORDS |
+| `BattleFrontier_RankingHall:warp_events:001` | 26,14 | Warp from (26,14, elevation 3) to MAP_BATTLE_FRONTIER_OUTSIDE_EAST warp 4. | **KEEP** · [W-C-WARP](../common-contracts.md#w-c-warp) |
+| `BattleFrontier_RankingHall:warp_events:002` | 27,14 | Warp from (27,14, elevation 3) to MAP_BATTLE_FRONTIER_OUTSIDE_EAST warp 4. | **KEEP** · [W-C-WARP](../common-contracts.md#w-c-warp) |
+
+## Final specification and acceptance
+
+Retain the complete baseline map record except the exact entries in [proposed edits](../changes.md) and its owning battle/acquisition chapters. Preserve numeric IDs and unrelated flags.
+Required implementation evidence: enter from each actual neighbor; exercise locked/unlocked and before/after story states that change this map; verify objects, collision/elevation, trigger direction, destination and return route. For generic repetitions, execute the shared behavior once per meaningful engine case and inspect each instance’s specific placement. A source reference check does not replace this traversal.
+The [machine ledger](../event-ledger.json) records complete event dictionaries, local/shared label sets, every referenced dialogue label, proposal IDs, and explicit evidence boundaries.

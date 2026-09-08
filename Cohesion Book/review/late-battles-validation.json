@@ -1,0 +1,10 @@
+{
+  "branch_headers": 250,
+  "unique_assessments": 250,
+  "unique_ai_reviews": 250,
+  "local_links_checked": 1125,
+  "missing_links": [],
+  "full_final_teams": 250,
+  "source_preservation": "Only book/battles/late and book/review/late-battles.* outputs were written by this reviewer. No game/native tests executed.",
+  "passed": true
+}

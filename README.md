@@ -1,3 +1,5 @@
+> **Current development handoff:** [Continue here](docs/CONTINUE_HERE.md) · [Complete Cohesion Book](Cohesion%20Book/README.md)
+
 # Emerald Champions
 
 A doubles-focused Emerald adventure built on pokeemerald-expansion, with free team-preparation services, adjustable trainer levels, and separate battle Retry and save Reload actions.

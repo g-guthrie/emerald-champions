@@ -1,0 +1,1145 @@
+[
+  {
+    "id": "W-PETALBURG-ROOMS",
+    "title": "Make Norman’s room names describe the inspected teams",
+    "assessment": "The preserved teams no longer match the old Accuracy/Confusion/Defense names. Berke already has a Burst door but neighbors still direct players to One-hit KO. Names are coordinated with the early battle reviewer; maps, routes, identifiers, unlocking rules and geometry stay intact.",
+    "disposition": "REVISE",
+    "targets": [
+      {
+        "source": "data/maps/PetalburgCity_Gym/scripts.inc",
+        "label": "PetalburgCity_Gym_Text_EnterSpeedRoom",
+        "line": 1500,
+        "current": "“SPEED ROOM,” the sign says. //  Do you want to go through?",
+        "replacement_text": "\"MULTIHIT ROOM\", the sign says.\\pDo you want to go through?"
+      },
+      {
+        "source": "data/maps/PetalburgCity_Gym/scripts.inc",
+        "label": "PetalburgCity_Gym_Text_EnterAccuracyRoom",
+        "line": 1509,
+        "current": "“ACCURACY ROOM,” the sign says. //  Do you want to go through?",
+        "replacement_text": "\"RETALIATION ROOM\", the sign says.\\pDo you want to go through?"
+      },
+      {
+        "source": "data/maps/PetalburgCity_Gym/scripts.inc",
+        "label": "PetalburgCity_Gym_Text_EnterConfusionRoom",
+        "line": 1513,
+        "current": "“CONFUSION ROOM,” the sign says. //  Do you want to go through?",
+        "replacement_text": "\"TRICK ROOM\", the sign says.\\pDo you want to go through?"
+      },
+      {
+        "source": "data/maps/PetalburgCity_Gym/scripts.inc",
+        "label": "PetalburgCity_Gym_Text_EnterDefenseRoom",
+        "line": 1517,
+        "current": "“DEFENSE ROOM,” the sign says. //  Do you want to go through?",
+        "replacement_text": "\"STATUS ROOM\", the sign says.\\pDo you want to go through?"
+      },
+      {
+        "source": "data/maps/PetalburgCity_Gym/scripts.inc",
+        "label": "PetalburgCity_Gym_Text_EnterRecoveryRoom",
+        "line": 1521,
+        "current": "“RECOVERY ROOM,” the sign says. //  Do you want to go through?",
+        "replacement_text": "\"ENDURANCE ROOM\", the sign says.\\pDo you want to go through?"
+      },
+      {
+        "source": "data/maps/PetalburgCity_Gym/scripts.inc",
+        "label": "PetalburgCity_Gym_Text_EnterStrengthRoom",
+        "line": 1525,
+        "current": "“STRENGTH ROOM,” the sign says. //  Do you want to go through?",
+        "replacement_text": "\"POWER ROOM\", the sign says.\\pDo you want to go through?"
+      },
+      {
+        "source": "data/maps/PetalburgCity_Gym/scripts.inc",
+        "label": "PetalburgCity_Gym_Text_EnterOHKORoom",
+        "line": 1529,
+        "current": "“BURST ROOM,” the sign says. //  Do you want to go through?",
+        "replacement_text": "\"BURST ROOM\", the sign says.\\pDo you want to go through?"
+      },
+      {
+        "source": "data/maps/PetalburgCity_Gym/scripts.inc",
+        "label": "PetalburgCity_Gym_Text_GymGuideAdvice",
+        "line": 1319,
+        "current": "Hey, how's it going, CHAMPION- /  bound {PLAYER}? //  The doors in this GYM open when you /  beat the awaiting TRAINERS. //  Whoops! The doors in this room are /  already open, so don't attack me! //  The TRAINERS of PETALBURG GYM /  use all kinds of items. //  The door at the left leads to /  the SPEED ROOM. //  The door at the right leads to /  the ACCURACY ROOM. //  The room's name will be on /  the door, so choose carefully. //  Once you've chosen the door… /  Well, hey, go for it!",
+        "replacement_text": "Welcome, CHAMPION-bound {PLAYER}!\\pDefeat the Trainers in a room\nto open its onward doors.\\pThe left door leads to the\nMULTIHIT ROOM. The right leads\nto the RETALIATION ROOM.\\pEach room's sign names its plan.\nChoose your route and prepare\nyour partners together."
+      },
+      {
+        "source": "data/maps/PetalburgCity_Gym/scripts.inc",
+        "label": "PetalburgCity_Gym_Text_MaryPostBattle",
+        "line": 1438,
+        "current": "There are some even stronger /  TRAINERS waiting for you. //  The left is the DEFENSE ROOM, and /  the right is the RECOVERY ROOM. //  Your POKéMON's ATTACK power will be /  on trial either way.",
+        "replacement_text": "More formidable teams await.\\pThe left door leads to the\nSTATUS ROOM; the right leads\nto the ENDURANCE ROOM."
+      },
+      {
+        "source": "data/maps/PetalburgCity_Gym/scripts.inc",
+        "label": "PetalburgCity_Gym_Text_RandallPostBattle",
+        "line": 1353,
+        "current": "Go on to the next room where a new /  challenge awaits you. //  At the left is the CONFUSION ROOM. //  The right door leads to the DEFENSE /  ROOM.",
+        "replacement_text": "Another challenge waits ahead.\\pThe left door leads to the\nTRICK ROOM; the right leads\nto the STATUS ROOM."
+      },
+      {
+        "source": "data/maps/PetalburgCity_Gym/scripts.inc",
+        "label": "PetalburgCity_Gym_Text_ParkerPostBattle",
+        "line": 1377,
+        "current": "The next room is the STRENGTH ROOM. /  Can you withstand brute force?",
+        "replacement_text": "The next door leads to the\nPOWER ROOM.\\pKeep your team ready for it!"
+      },
+      {
+        "source": "data/maps/PetalburgCity_Gym/scripts.inc",
+        "label": "PetalburgCity_Gym_Text_AlexiaPostBattle",
+        "line": 1460,
+        "current": "I think you've taught me a valuable /  lesson here. //  Now, go on! The left door goes to /  the STRENGTH ROOM. //  The right door opens to /  the ONE-HIT KO ROOM. //  Both of them have TRAINERS who are /  skilled at offense.",
+        "replacement_text": "You've given me something\nto think about.\\pThe left door leads to the\nPOWER ROOM; the right leads\nto the BURST ROOM."
+      },
+      {
+        "source": "data/maps/PetalburgCity_Gym/scripts.inc",
+        "label": "PetalburgCity_Gym_Text_GeorgePostBattle",
+        "line": 1397,
+        "current": "I should have expected no less from /  our LEADER's kid. //  No, wait! A TRAINER's abilities are /  earned only through effort. //  I lost because my own efforts /  weren't enough. //  Go on! The ONE-HIT KO ROOM is next.",
+        "replacement_text": "That was well played.\\pThe next door leads to the\nBURST ROOM. Be ready for\nits concentrated pressure."
+      }
+    ],
+    "dependencies": [
+      "Early battle volume: Randall MULTIHIT, Mary RETALIATION, Parker TRICK, Alexia STATUS, George ENDURANCE, Jody POWER, Berke BURST; intro paragraphs owned there"
+    ],
+    "acceptance": [
+      "Walk both branching routes and compare each door name to its destination and neighbor directions. Defeating a room still opens exactly its existing onward doors. No encounter is added or removed."
+    ]
+  },
+  {
+    "id": "W-WALLACE-ROOT",
+    "title": "Restore the authored Wallace exhibition as an optional chamber encounter",
+    "assessment": "The complete E0510 team/script remains authored but has no object/coordinate/background entry. Restore this one named authored exhibition deliberately; do not revive every retired script.",
+    "disposition": "REPAIR",
+    "targets": [
+      {
+        "source": "data/maps/CaveOfOrigin_DianciesRoom/map.json",
+        "label": "new LOCALID_EC_WALLACE_EXHIBITION",
+        "new_event": true,
+        "current": "Only Diancie at (9,9) and Diancite at (7,9) are present.",
+        "final_object": {
+          "local_id": "LOCALID_EC_WALLACE_EXHIBITION",
+          "graphics_id": "OBJ_EVENT_GFX_WALLACE",
+          "x": 11,
+          "y": 10,
+          "elevation": 3,
+          "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+          "movement_range_x": 0,
+          "movement_range_y": 0,
+          "trainer_type": "TRAINER_TYPE_NONE",
+          "trainer_sight_or_berry_tree_id": "0",
+          "script": "CaveOfOrigin_DianciesRoom_EventScript_WallaceExhibition",
+          "flag": "0"
+        },
+        "final_behavior": "Wallace is visible whenever this chamber is reachable. Before game clear he declines. After game clear, interaction offers the existing one-time exhibition. He never auto-approaches or blocks Diancie, its stone, or the north exit. Preserve current map-local IDs and append the new ID."
+      },
+      {
+        "source": "data/maps/CaveOfOrigin_DianciesRoom/scripts.inc",
+        "label": "CaveOfOrigin_DianciesRoom_EventScript_WallaceExhibition",
+        "line": 4,
+        "current": "lock\nfaceplayer\ngoto_if_unset FLAG_SYS_GAME_CLEAR, CaveOfOrigin_DianciesRoom_EventScript_WallaceNotReady\ngoto_if_defeated TRAINER_WALLACE_DOUBLES_LEGENDS, CaveOfOrigin_DianciesRoom_EventScript_WallaceReward\ntrainerbattle_double TRAINER_WALLACE_DOUBLES_LEGENDS, CaveOfOrigin_DianciesRoom_Text_WallaceIntro, CaveOfOrigin_DianciesRoom_Text_WallaceDefeat, EmeraldChampions_Text_NeedTwoPokemon",
+        "final_behavior": "lock\nfaceplayer\ngoto_if_unset FLAG_SYS_GAME_CLEAR, CaveOfOrigin_DianciesRoom_EventScript_WallaceNotReady\ngoto_if_defeated TRAINER_WALLACE_DOUBLES_LEGENDS, CaveOfOrigin_DianciesRoom_EventScript_WallaceAfter\nmsgbox CaveOfOrigin_DianciesRoom_Text_WallaceOffer, MSGBOX_YESNO\ngoto_if_eq VAR_RESULT, NO, CaveOfOrigin_DianciesRoom_EventScript_WallaceDecline\ncall EventScript_CheckStoryDoubleBattleParty\ntrainerbattle_double TRAINER_WALLACE_DOUBLES_LEGENDS, CaveOfOrigin_DianciesRoom_Text_WallaceIntro, CaveOfOrigin_DianciesRoom_Text_WallaceDefeat, EmeraldChampions_Text_NeedTwoPokemon\ngoto CaveOfOrigin_DianciesRoom_EventScript_WallaceAfter"
+      },
+      {
+        "source": "data/maps/CaveOfOrigin_DianciesRoom/scripts.inc",
+        "label": "CaveOfOrigin_DianciesRoom_EventScript_WallaceReward",
+        "line": 11,
+        "current": "checkitem ITEM_DIANCITE, 1\ngoto_if_eq VAR_RESULT, TRUE, CaveOfOrigin_DianciesRoom_EventScript_WallaceAfter\ngiveitem ITEM_DIANCITE\ngoto_if_eq VAR_RESULT, FALSE, CaveOfOrigin_DianciesRoom_EventScript_WallaceBagFull",
+        "final_behavior": "Retire the duplicate Diancite handoff path. After a legitimate win, go directly to WallaceAfter; retain the trainer defeated flag. The chamber pickup remains the Diancite acquisition owner."
+      },
+      {
+        "source": "data/maps/CaveOfOrigin_DianciesRoom/scripts.inc",
+        "label": "CaveOfOrigin_DianciesRoom_Text_WallaceAfter",
+        "line": 41,
+        "current": "Take this DIANCITE. Let the jewel of /  this cave shine as brightly as you.",
+        "replacement_text": "The chamber has heard two\nChampions answer one another.\\pThe DIANCITE beside its guardian\nbelongs to your exploration.\nOur battle was its own reward."
+      },
+      {
+        "source": "data/maps/CaveOfOrigin_DianciesRoom/scripts.inc",
+        "label": "CaveOfOrigin_DianciesRoom_Text_WallaceOffer",
+        "new_label": true,
+        "replacement_text": "Would you face my unrestricted\nrain exhibition here?\\pThe chamber's guardian and its\nstone will wait while we battle."
+      },
+      {
+        "source": "data/maps/CaveOfOrigin_DianciesRoom/scripts.inc",
+        "label": "CaveOfOrigin_DianciesRoom_EventScript_WallaceDecline",
+        "new_label": true,
+        "final_behavior": "msgbox CaveOfOrigin_DianciesRoom_Text_WallaceDecline, MSGBOX_DEFAULT; release; end"
+      },
+      {
+        "source": "data/maps/CaveOfOrigin_DianciesRoom/scripts.inc",
+        "label": "CaveOfOrigin_DianciesRoom_Text_WallaceDecline",
+        "new_label": true,
+        "replacement_text": "Whenever your team is ready.\nI will be here."
+      }
+    ],
+    "dependencies": [
+      "E0510 final team and defeat prose owned by late battle volume; Diancite world pickup; no native trainer singles"
+    ],
+    "acceptance": [
+      "Map.bin tile (11,10) is passable elevation3 in snapshot; render and walk around Wallace from each reachable side. Test pre-clear, decline, insufficient usable party, loss/Retry, first win, and revisit. Diancie remains independently interactable and Diancite is not reissued by battle."
+    ]
+  },
+  {
+    "id": "W-TRICK-REWARDS",
+    "title": "Make all Trick House reward retries preserve their earned contents",
+    "assessment": "Puzzle4 changes its prize on the full-Bag route. Final puzzle8 collapses tent and Alakazite failures into one flag, while the entrance retries only the tent. Preserve both authored final rewards and support each independently.",
+    "disposition": "REPAIR",
+    "targets": [
+      {
+        "source": "data/maps/Route110_TrickHouseEntrance/scripts.inc",
+        "label": "Route110_TrickHouseEntrance_EventScript_GivePuzzle4Reward",
+        "line": 362,
+        "current": "giveitem ITEM_SMOKE_BALL\ngoto_if_eq VAR_RESULT, TRUE, Route110_TrickHouseEntrance_EventScript_GotReward\ncall_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull\nmsgbox Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward, MSGBOX_DEFAULT\nreleaseall\nend",
+        "final_behavior": "Change only giveitem ITEM_SMOKE_BALL to giveitem ITEM_KINGS_ROCK. Preserve result branches and the remaining stage rewards."
+      },
+      {
+        "source": "data/maps/Route110_TrickHouseEnd/scripts.inc",
+        "label": "Route110_TrickHouseEnd_EventScript_CompletedPuzzle8",
+        "line": 142,
+        "current": "msgbox Route110_TrickHouseEnd_Text_AllNightPolishingFloors, MSGBOX_DEFAULT\nclosemessage\ncall_if_eq VAR_FACING, DIR_SOUTH, Route110_TrickHouseEnd_EventScript_TrickMasterFaceAwaySouth\ncall_if_eq VAR_FACING, DIR_NORTH, Route110_TrickHouseEnd_EventScript_TrickMasterFaceAwayNorth\ncall_if_eq VAR_FACING, DIR_WEST, Route110_TrickHouseEnd_EventScript_TrickMasterFaceAwayWest\ncall_if_eq VAR_FACING, DIR_EAST, Route110_TrickHouseEnd_EventScript_TrickMasterFaceAwayEast\ndelay 30\nmsgbox Route110_TrickHouseEnd_Text_FountainOfIdeasRunDry, MSGBOX_DEFAULT\nclosemessage\napplymovement LOCALID_TRICK_MASTER_END, Common_Movement_FacePlayer\nwaitmovement 0\ndelay 30\nmsgbox Route110_TrickHouseEnd_Text_DefeatedMePreferWhichTent, MSGBOX_DEFAULT\nsetvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0\ncall Route110_TrickHouseEnd_EventScript_ChooseTent\ncall_if_eq VAR_RESULT, FALSE, Route110_TrickHouseEnd_EventScript_NoRoomForTent\nmsgbox Route110_TrickHouseEnd_Text_FinalPrizeMegaStone, MSGBOX_DEFAULT\ngiveitem ITEM_ALAKAZITE\ncall_if_eq VAR_RESULT, FALSE, Route110_TrickHouseEnd_EventScript_BagFull\nmsgbox Route110_TrickHouseEnd_Text_LeavingOnJourney, MSGBOX_DEFAULT\ncall Route110_TrickHouseEnd_EventScript_TrickMasterExit\nspecial ResetTrickHouseNuggetFlag\nrelease\nend",
+        "final_behavior": "Keep final story, chosen RED/BLUE TENT, Alakazite, departure and level advancement. Add separate receipt flags FLAG_EC_TRICK_FINAL_TENT_RECEIVED and FLAG_EC_TRICK_FINAL_ALAKAZITE_RECEIVED. A successful givedecoration sets only tent receipt; a successful giveitem sets only Alakazite receipt. Failure of either leaves that receipt false. At level8 both are owed until individually received; VAR_TRICK_HOUSE_PRIZE_PICKUP becomes1 whenever either receipt is false,0 only when both true. Completing one must not clear the other. Share this claim operation with the entrance courier; do not replay puzzle8 to claim a pending part."
+      },
+      {
+        "source": "data/maps/Route110_TrickHouseEntrance/scripts.inc",
+        "label": "Route110_TrickHouseEntrance_EventScript_MechadollReward",
+        "line": 402,
+        "current": "applymovement LOCALID_TRICK_MASTER, Common_Movement_FacePlayer\nwaitmovement 0\nmsgbox Route110_TrickHouseEntrance_Text_MechadollWhichTent, MSGBOX_DEFAULT\ncall Route110_TrickHouseEntrance_EventScript_ChooseTent\ngoto_if_eq VAR_RESULT, TRUE, Route110_TrickHouseEntrance_EventScript_ReceivedTent\ncall_if_eq VAR_RESULT, FALSE, Common_EventScript_NoRoomForDecor\nmsgbox Route110_TrickHouseEntrance_Text_PCFullAgain, MSGBOX_DEFAULT\nreleaseall\nend",
+        "final_behavior": "Offer the tent choice only if its receipt is false, and Alakazite only if its receipt is false. After each insertion, mark only the successful part received. Keep the mechadoll visible whenever anything remains pending. When both receipts are true, clear PRIZE_PICKUP, retain LEVEL=8, and use the existing departure effect exactly once. Do not issue another tent just because Alakazite failed."
+      },
+      {
+        "source": "data/maps/Route110_TrickHouseEntrance/scripts.inc",
+        "label": "Route110_TrickHouseEntrance_OnTransition",
+        "line": 16,
+        "current": "setflag FLAG_LANDMARK_TRICK_HOUSE\ngoto_if_eq VAR_TRICK_HOUSE_ENTER_FROM_CORRIDOR, 1, Route110_TrickHouseEntrance_EventScript_EnterFromCorridor\ngoto_if_eq VAR_TRICK_HOUSE_PRIZE_PICKUP, 1, Route110_TrickHouseEntrance_EventScript_SetReadyToGiveReward\ngoto_if_eq VAR_TRICK_HOUSE_FOUND_TRICK_MASTER, 1, Route110_TrickHouseEntrance_EventScript_MoveTrickMasterToDoor\ncall_if_eq VAR_TRICK_HOUSE_ENTRANCE_STATE, 5, Route110_TrickHouseEntrance_EventScript_CheckReadyForNextPuzzle\ncall_if_eq VAR_TRICK_HOUSE_ENTRANCE_STATE, 3, Route110_TrickHouseEntrance_EventScript_CheckReadyForNextPuzzle\ncall_if_eq VAR_TRICK_HOUSE_ENTRANCE_STATE, 0, Route110_TrickHouseEntrance_EventScript_CheckReadyForNextPuzzle\nswitch VAR_TRICK_HOUSE_ENTRANCE_STATE\ncase 0, Route110_TrickHouseEntrance_EventScript_ReadyBeingWatchedTrigger\ncase 1, Route110_TrickHouseEntrance_EventScript_SetNotBeingWatched1\ncase 3, Route110_TrickHouseEntrance_EventScript_SetNotBeingWatched2\ncase 4, Route110_TrickHouseEntrance_EventScript_SetNotBeingWatched3\nend",
+        "final_behavior": "Before existing final-prize visibility selection, run one-time receipt initialization guarded by new FLAG_EC_TRICK_FINAL_STATE_INITIALIZED. If LEVEL<8, initialize marker only. For an old completed LEVEL>=8 and PRIZE_PICKUP=0, mark both receipts received. For old LEVEL>=8 and PRIZE_PICKUP=1, mark a tent received only if RED/BLUE TENT ownership is recorded (including placed decorations); mark Alakazite received if already in Bag, item PC or on any party/PC Pokémon. Otherwise preserve that part as a one-time claim. Then set the initialization marker and derive final PRIZE_PICKUP from the two receipts. Never reset puzzle progress, catches, other Mega flags or owned decorations. The old one-bit state cannot prove which reward was lost after disposal; record that migration limitation openly."
+      },
+      {
+        "source": "include/constants/flags.h",
+        "label": "new symbolic Trick House receipt flags",
+        "new_label": true,
+        "final_behavior": "Use the central reservations in appendices/state-allocation.md and review/state-allocations.json: FLAG_EC_TRICK_FINAL_TENT_RECEIVED=0x2B2, FLAG_EC_TRICK_FINAL_ALAKAZITE_RECEIVED=0x2B3, FLAG_EC_TRICK_FINAL_STATE_INITIALIZED=0x2B4. They replace declaration-only unused flags. The single version4 migration initializes them once, then reconstructs legacy final-prize state; later loads never clear the initializer or receipts. Recheck live-source collisions before applying these reserved addresses."
+      },
+      {
+        "source": "data/maps/Route110_TrickHouseEntrance/scripts.inc",
+        "label": "Route110_TrickHouseEntrance_Text_FinalRewardsPending",
+        "new_label": true,
+        "replacement_text": "YOUR FINAL REWARDS ARE RECORDED.\\pTHE TENT AND ALAKAZITE ARE\nSEPARATE GIFTS. MAKE ROOM FOR\nANY PART STILL WAITING HERE."
+      }
+    ],
+    "dependencies": [
+      "Mega reward catalogue; persistent flag allocation; existing Alakazite Granite Cave alternate preserved",
+      "Central state allocation: appendices/state-allocation.md"
+    ],
+    "acceptance": [
+      "For stages1–7 compare immediate and pending item IDs; puzzle4 always King’s Rock. For stage8 exercise all four tent/stone insertion success combinations, reload/revisit, claim one part at a time, and verify no duplication. Test old completed saves with no pending state, tent-only ownership, stone-only ownership, both, neither; preserve unrelated inventory and puzzle flags."
+    ]
+  },
+  {
+    "id": "W-TRICK-QUIZ",
+    "title": "Reauthor all fifteen quiz questions against actual battle rules",
+    "assessment": "The current random quiz bank asks obsolete wild-table, prior-team, price and NPC-count questions. Retain five dolls, three randomly chosen questions per doll, movement/incorrect-answer reset and reward topology, with a complete stable doubles question bank. This optional puzzle is not a campaign training curriculum.",
+    "disposition": "REPAIR",
+    "targets": [
+      {
+        "source": "data/maps/Route110_TrickHousePuzzle5/scripts.inc",
+        "label": "Route110_TrickHousePuzzle5_Text_Mechadoll1Quiz1",
+        "line": 912,
+        "current": "MECHADOLL 1 QUIZ. //  One of these POKéMON is not found /  on ROUTE 110. Which one is it?",
+        "replacement_text": "MECHADOLL 1 QUIZ.\\pWhich move guards your side against opposing priority moves?",
+        "choices": [
+          "PROTECT",
+          "WIDE GUARD",
+          "QUICK GUARD"
+        ],
+        "correct_index": 2,
+        "menu_array": "MultichoiceList_Mechadoll1_Q1",
+        "menu_source": "src/data/script_menu.h",
+        "script_label": "Route110_TrickHousePuzzle5_EventScript_Mechadoll1Quiz1",
+        "evidence": "src/battle_util.c:5915"
+      },
+      {
+        "source": "data/maps/Route110_TrickHousePuzzle5/scripts.inc",
+        "label": "Route110_TrickHousePuzzle5_Text_Mechadoll1Quiz2",
+        "line": 917,
+        "current": "MECHADOLL 1 QUIZ. //  One of these POKéMON is not of the /  WATER type. Which one is it?",
+        "replacement_text": "MECHADOLL 1 QUIZ.\\pWhich type normally ignores RAGE POWDER when choosing a target?",
+        "choices": [
+          "GRASS",
+          "NORMAL",
+          "ROCK"
+        ],
+        "correct_index": 0,
+        "menu_array": "MultichoiceList_Mechadoll1_Q2",
+        "menu_source": "src/data/script_menu.h",
+        "script_label": "Route110_TrickHousePuzzle5_EventScript_Mechadoll1Quiz2",
+        "evidence": "src/battle_util.c; powder/redirection target checks"
+      },
+      {
+        "source": "data/maps/Route110_TrickHousePuzzle5/scripts.inc",
+        "label": "Route110_TrickHousePuzzle5_Text_Mechadoll1Quiz3",
+        "line": 922,
+        "current": "MECHADOLL 1 QUIZ. //  One of these POKéMON does not use /  LEECH LIFE. Which one is it?",
+        "replacement_text": "MECHADOLL 1 QUIZ.\\pWhich move normally hits both opponents instead of being redirected by FOLLOW ME?",
+        "choices": [
+          "ROCK SLIDE",
+          "THUNDERBOLT",
+          "CLOSE COMBAT"
+        ],
+        "correct_index": 0,
+        "menu_array": "MultichoiceList_Mechadoll1_Q3",
+        "menu_source": "src/data/script_menu.h",
+        "script_label": "Route110_TrickHousePuzzle5_EventScript_Mechadoll1Quiz3",
+        "evidence": "src/data/moves_info.h; MOVE_ROCK_SLIDE target flags; redirection in src/battle_util.c"
+      },
+      {
+        "source": "data/maps/Route110_TrickHousePuzzle5/scripts.inc",
+        "label": "Route110_TrickHousePuzzle5_Text_Mechadoll2Quiz1",
+        "line": 948,
+        "current": "MECHADOLL 2 QUIZ. //  Which of these POKéMON did WALLY /  borrow from your father?",
+        "replacement_text": "MECHADOLL 2 QUIZ.\\pTRICK ROOM reverses Speed order within which boundary?",
+        "choices": [
+          "The whole turn",
+          "Each priority bracket",
+          "Only one side"
+        ],
+        "correct_index": 1,
+        "menu_array": "MultichoiceList_Mechadoll2_Q1",
+        "menu_source": "src/data/script_menu.h",
+        "script_label": "Route110_TrickHousePuzzle5_EventScript_Mechadoll2Quiz1",
+        "evidence": "src/battle_main.c:GetWhoStrikesFirst / Trick Room comparisons"
+      },
+      {
+        "source": "data/maps/Route110_TrickHousePuzzle5/scripts.inc",
+        "label": "Route110_TrickHousePuzzle5_Text_Mechadoll2Quiz2",
+        "line": 953,
+        "current": "MECHADOLL 2 QUIZ. //  Which of these POKéMON was chasing /  PROF. BIRCH?",
+        "replacement_text": "MECHADOLL 2 QUIZ.\\pWhen can a Pokémon normally use FAKE OUT successfully?",
+        "choices": [
+          "Only at full HP",
+          "After every Protect",
+          "First turn after entry"
+        ],
+        "correct_index": 2,
+        "menu_array": "MultichoiceList_Mechadoll2_Q2",
+        "menu_source": "src/data/script_menu.h",
+        "script_label": "Route110_TrickHousePuzzle5_EventScript_Mechadoll2Quiz2",
+        "evidence": "data/battle_scripts_1.s:BattleScript_EffectFirstTurnOnly; first-turn counter"
+      },
+      {
+        "source": "data/maps/Route110_TrickHousePuzzle5/scripts.inc",
+        "label": "Route110_TrickHousePuzzle5_Text_Mechadoll2Quiz3",
+        "line": 958,
+        "current": "MECHADOLL 2 QUIZ. //  Which of these POKéMON did TEAM AQUA /  use in PETALBURG FOREST?",
+        "replacement_text": "MECHADOLL 2 QUIZ.\\pTAUNT prevents the target from choosing which moves?",
+        "choices": [
+          "Non-damaging moves",
+          "All special attacks",
+          "All priority moves"
+        ],
+        "correct_index": 0,
+        "menu_array": "MultichoiceList_Mechadoll2_Q3",
+        "menu_source": "src/data/script_menu.h",
+        "script_label": "Route110_TrickHousePuzzle5_EventScript_Mechadoll2Quiz3",
+        "evidence": "src/battle_util.c:CheckMoveLimitations; tauntTimer"
+      },
+      {
+        "source": "data/maps/Route110_TrickHousePuzzle5/scripts.inc",
+        "label": "Route110_TrickHousePuzzle5_Text_Mechadoll3Quiz1",
+        "line": 968,
+        "current": "MECHADOLL 3 QUIZ. //  Which costs more? /  Three HARBOR MAILS or one BURN HEAL?",
+        "replacement_text": "MECHADOLL 3 QUIZ.\\pWhich status reduces physical damage for most attackers?",
+        "choices": [
+          "BURN",
+          "POISON",
+          "SLEEP"
+        ],
+        "correct_index": 0,
+        "menu_array": "MultichoiceList_Mechadoll3_Q1",
+        "menu_source": "src/data/script_menu.h",
+        "script_label": "Route110_TrickHousePuzzle5_EventScript_Mechadoll3Quiz1",
+        "evidence": "src/battle_util.c physical damage modifier and Guts exception"
+      },
+      {
+        "source": "data/maps/Route110_TrickHousePuzzle5/scripts.inc",
+        "label": "Route110_TrickHousePuzzle5_Text_Mechadoll3Quiz2",
+        "line": 973,
+        "current": "MECHADOLL 3 QUIZ. //  Sell one GREAT BALL and buy /  one POTION. How much money remains?",
+        "replacement_text": "MECHADOLL 3 QUIZ.\\pWhich move boosts an ally’s attack damage for the current turn?",
+        "choices": [
+          "REFLECT",
+          "SAFEGUARD",
+          "HELPING HAND"
+        ],
+        "correct_index": 2,
+        "menu_array": "MultichoiceList_Mechadoll3_Q2",
+        "menu_source": "src/data/script_menu.h",
+        "script_label": "Route110_TrickHousePuzzle5_EventScript_Mechadoll3Quiz2",
+        "evidence": "src/data/moves_info.h:MOVE_HELPING_HAND; damage modifier"
+      },
+      {
+        "source": "data/maps/Route110_TrickHousePuzzle5/scripts.inc",
+        "label": "Route110_TrickHousePuzzle5_Text_Mechadoll3Quiz3",
+        "line": 978,
+        "current": "MECHADOLL 3 QUIZ. //  Do one REPEL and SODA POP cost /  more than one SUPER POTION?",
+        "replacement_text": "MECHADOLL 3 QUIZ.\\pWhich Pokémon can receive EVIOLITE’s defensive benefit?",
+        "choices": [
+          "One with no evolution",
+          "One that can still evolve",
+          "Any below level 50"
+        ],
+        "correct_index": 1,
+        "menu_array": "MultichoiceList_Mechadoll3_Q3",
+        "menu_source": "src/data/script_menu.h",
+        "script_label": "Route110_TrickHousePuzzle5_EventScript_Mechadoll3Quiz3",
+        "evidence": "src/battle_util.c:7291; CanSpeciesEvolve"
+      },
+      {
+        "source": "data/maps/Route110_TrickHousePuzzle5/scripts.inc",
+        "label": "Route110_TrickHousePuzzle5_Text_Mechadoll4Quiz1",
+        "line": 988,
+        "current": "MECHADOLL 4 QUIZ. //  In SEASHORE HOUSE, were there more men /  or women?",
+        "replacement_text": "MECHADOLL 4 QUIZ.\\pWhich held item can remove TAUNT from its holder?",
+        "choices": [
+          "MENTAL HERB",
+          "POWER HERB",
+          "WHITE HERB"
+        ],
+        "correct_index": 0,
+        "menu_array": "MultichoiceList_Mechadoll4_Q1",
+        "menu_source": "src/data/script_menu.h",
+        "script_label": "Route110_TrickHousePuzzle5_EventScript_Mechadoll4Quiz1",
+        "evidence": "src/battle_script_commands.c:902; mental-herb status handling"
+      },
+      {
+        "source": "data/maps/Route110_TrickHousePuzzle5/scripts.inc",
+        "label": "Route110_TrickHousePuzzle5_Text_Mechadoll4Quiz2",
+        "line": 993,
+        "current": "MECHADOLL 4 QUIZ. //  In LAVARIDGE TOWN, were there more /  elderly men or elderly women?",
+        "replacement_text": "MECHADOLL 4 QUIZ.\\pWhich Ability redirects single-target WATER moves?",
+        "choices": [
+          "STORM DRAIN",
+          "WATER ABSORB",
+          "RAIN DISH"
+        ],
+        "correct_index": 0,
+        "menu_array": "MultichoiceList_Mechadoll4_Q2",
+        "menu_source": "src/data/script_menu.h",
+        "script_label": "Route110_TrickHousePuzzle5_EventScript_Mechadoll4Quiz2",
+        "evidence": "src/battle_util.c:2358 and redirection handling"
+      },
+      {
+        "source": "data/maps/Route110_TrickHousePuzzle5/scripts.inc",
+        "label": "Route110_TrickHousePuzzle5_Text_Mechadoll4Quiz3",
+        "line": 998,
+        "current": "MECHADOLL 4 QUIZ. //  In the TRAINER'S SCHOOL, how many /  girl students were there?",
+        "replacement_text": "MECHADOLL 4 QUIZ.\\pWhich opposing target does PSYCHIC TERRAIN protect from FAKE OUT?",
+        "choices": [
+          "An airborne target",
+          "A grounded target",
+          "Every target"
+        ],
+        "correct_index": 1,
+        "menu_array": "MultichoiceList_Mechadoll4_Q3",
+        "menu_source": "src/data/script_menu.h",
+        "script_label": "Route110_TrickHousePuzzle5_EventScript_Mechadoll4Quiz3",
+        "evidence": "src/battle_util.c:IsBattlerGrounded; Psychic Terrain priority protection"
+      },
+      {
+        "source": "data/maps/Route110_TrickHousePuzzle5/scripts.inc",
+        "label": "Route110_TrickHousePuzzle5_Text_Mechadoll5Quiz1",
+        "line": 1009,
+        "current": "MECHADOLL 5 QUIZ. //  In SLATEPORT's POKéMON FAN CLUB, /  how many POKéMON were there?",
+        "replacement_text": "MECHADOLL 5 QUIZ.\\pYou switch out while TRICK ROOM is active. What happens to the room’s timer?",
+        "choices": [
+          "It ends immediately",
+          "It keeps running",
+          "It starts over"
+        ],
+        "correct_index": 1,
+        "menu_array": "MultichoiceList_Mechadoll5_Q1",
+        "menu_source": "src/data/script_menu.h",
+        "script_label": "Route110_TrickHousePuzzle5_EventScript_Mechadoll5Quiz1",
+        "evidence": "src/battle_main.c and field timer update; no switch reset"
+      },
+      {
+        "source": "data/maps/Route110_TrickHousePuzzle5/scripts.inc",
+        "label": "Route110_TrickHousePuzzle5_Text_Mechadoll5Quiz2",
+        "line": 1014,
+        "current": "MECHADOLL 5 QUIZ. //  In FORTREE CITY, how many /  tree houses were there?",
+        "replacement_text": "MECHADOLL 5 QUIZ.\\pWhich move guards your side against most damaging moves that hit multiple targets?",
+        "choices": [
+          "SAFEGUARD",
+          "QUICK GUARD",
+          "WIDE GUARD"
+        ],
+        "correct_index": 2,
+        "menu_array": "MultichoiceList_Mechadoll5_Q2",
+        "menu_source": "src/data/script_menu.h",
+        "script_label": "Route110_TrickHousePuzzle5_EventScript_Mechadoll5Quiz2",
+        "evidence": "src/battle_util.c:5896"
+      },
+      {
+        "source": "data/maps/Route110_TrickHousePuzzle5/scripts.inc",
+        "label": "Route110_TrickHousePuzzle5_Text_Mechadoll5Quiz3",
+        "line": 1019,
+        "current": "MECHADOLL 5 QUIZ. //  On the CYCLING ROAD, how many /  TRIATHLETES were there?",
+        "replacement_text": "MECHADOLL 5 QUIZ.\\pPRANKSTER-boosted TAUNT normally fails against an opposing Pokémon of which type?",
+        "choices": [
+          "DARK",
+          "DRAGON",
+          "PSYCHIC"
+        ],
+        "correct_index": 0,
+        "menu_array": "MultichoiceList_Mechadoll5_Q3",
+        "menu_source": "src/data/script_menu.h",
+        "script_label": "Route110_TrickHousePuzzle5_EventScript_Mechadoll5Quiz3",
+        "evidence": "src/battle_util.c:9458; B_PRANKSTER_DARK_TYPES"
+      }
+    ],
+    "dependencies": [
+      "Configured battle mechanics; current move/ability/item behavior; W-TRICK-REWARDS"
+    ],
+    "acceptance": [
+      "Update all15 menu arrays and matching correct-answer cases together. Exercise one correct and each incorrect choice per question through the script path, with mechanical claims checked against production behavior. Keep any future mechanic change tied to its affected question instead of a historical prose lock."
+    ]
+  },
+  {
+    "id": "W-TENT-SLATEPORTCITY",
+    "title": "Present Slateport as a local doubles exhibition",
+    "assessment": "FAC-01 supersedes native legacy Factory/Palace/Arena battle rules. Preserve the location, local residents and unrelated gift, and make the actual competition format explicit.",
+    "disposition": "REVISE",
+    "targets": [
+      {
+        "source": "data/maps/SlateportCity_BattleTentLobby/scripts.inc",
+        "label": "SlateportCity_BattleTentLobby_EventScript_Attendant",
+        "line": 90,
+        "current": "lock\nfaceplayer\nslateporttent_getprize\ngoto_if_ne VAR_RESULT, ITEM_NONE, SlateportCity_BattleTentLobby_EventScript_GivePrize\nspecial SavePlayerParty\nmsgbox SlateportCity_BattleTentLobby_Text_WelcomeToBattleTent, MSGBOX_DEFAULT",
+        "final_behavior": "Replace the legacy challenge entry with FAC-01 local exhibition entry. First settle any existing pending slateportTentPrize using its existing commit-on-success contract. Offer rules and participation; call the shared local exhibition API only after eligibility and affirmative choice. It performs battle in this lobby and returns here. Three exhibition victories earn exactly one prize from the existing local pool; no Circuit counters, legendary entitlements or legacy rental/Palace/Arena mode advances."
+      },
+      {
+        "source": "data/maps/SlateportCity_BattleTentLobby/scripts.inc",
+        "label": "SlateportCity_BattleTentLobby_EventScript_RulesBoard",
+        "line": 226,
+        "current": "lockall\nmsgbox BattleFrontier_BattleFactoryLobby_Text_RulesAreListed, MSGBOX_DEFAULT\ngoto SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard\nend",
+        "final_behavior": "Display the new ExhibitionRules text below as a sign and end. Remove the old scrolling headings for rentals, swaps, autonomous Nature choice, Arena judging, level30 and three-Pokémon teams."
+      },
+      {
+        "source": "data/maps/SlateportCity_BattleTentLobby/scripts.inc",
+        "label": "SlateportCity_BattleTentLobby_Text_ExhibitionWelcome",
+        "new_label": true,
+        "replacement_text": "The port brings together teams\nfrom every shore.\\pThis is a six-Pokémon doubles\nexhibition. You command every\nmove and switch.\\pYour team uses the current cap.\nDifficulty sets opponent levels.\nEnter with six healthy partners?"
+      },
+      {
+        "source": "data/maps/SlateportCity_BattleTentLobby/scripts.inc",
+        "label": "SlateportCity_BattleTentLobby_Text_ExhibitionRules",
+        "new_label": true,
+        "replacement_text": "LOCAL DOUBLES EXHIBITIONS\\pBring six healthy Pokémon,\nwith no Eggs. Prepare freely\nbefore entering.\\pThree victories earn one local\nprize. Your party is restored\nafter each exhibition.\\pThese results are separate from\nthe CHAMPIONS CIRCUIT. You\nreturn to this lobby afterward."
+      }
+    ],
+    "dependencies": [
+      "FAC-01; DIFF-01; existing src/battle_tent.c local prize pool"
+    ],
+    "acceptance": [
+      "Enter with5/6 and withEgg/faintedmember; decline cleanly; win three times, lose, withdraw, reload and fillBagbeforeprize. Preserve held items/moves/levels/HP and pendingprize transaction; never warp to Frontier. Confirm no change to Circuit lifetime/best/rewardstate."
+    ]
+  },
+  {
+    "id": "W-TENT-VERDANTURFTOWN",
+    "title": "Present Verdanturf as a local doubles exhibition",
+    "assessment": "FAC-01 supersedes native legacy Factory/Palace/Arena battle rules. Preserve the location, local residents and unrelated gift, and make the actual competition format explicit.",
+    "disposition": "REVISE",
+    "targets": [
+      {
+        "source": "data/maps/VerdanturfTown_BattleTentLobby/scripts.inc",
+        "label": "VerdanturfTown_BattleTentLobby_EventScript_Attendant",
+        "line": 104,
+        "current": "lock\nfaceplayer\nverdanturftent_getprize\ngoto_if_ne VAR_RESULT, ITEM_NONE, VerdanturfTown_BattleTentLobby_EventScript_PrizeWaiting\nspecial SavePlayerParty\nmsgbox VerdanturfTown_BattleTentLobby_Text_WelcomeToBattleTent, MSGBOX_DEFAULT",
+        "final_behavior": "Replace the legacy challenge entry with FAC-01 local exhibition entry. First settle any existing pending verdanturfTentPrize using its existing commit-on-success contract. Offer rules and participation; call the shared local exhibition API only after eligibility and affirmative choice. It performs battle in this lobby and returns here. Three exhibition victories earn exactly one prize from the existing local pool; no Circuit counters, legendary entitlements or legacy rental/Palace/Arena mode advances."
+      },
+      {
+        "source": "data/maps/VerdanturfTown_BattleTentLobby/scripts.inc",
+        "label": "VerdanturfTown_BattleTentLobby_EventScript_RulesBoard",
+        "line": 270,
+        "current": "lockall\nmsgbox VerdanturfTown_BattleTentLobby_Text_RulesAreListed, MSGBOX_DEFAULT\ngoto VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard\nend",
+        "final_behavior": "Display the new ExhibitionRules text below as a sign and end. Remove the old scrolling headings for rentals, swaps, autonomous Nature choice, Arena judging, level30 and three-Pokémon teams."
+      },
+      {
+        "source": "data/maps/VerdanturfTown_BattleTentLobby/scripts.inc",
+        "label": "VerdanturfTown_BattleTentLobby_Text_ExhibitionWelcome",
+        "new_label": true,
+        "replacement_text": "Bring a team that supports each\npartner through a hard match.\\pThis is a six-Pokémon doubles\nexhibition. You command every\nmove and switch.\\pYour team uses the current cap.\nDifficulty sets opponent levels.\nEnter with six healthy partners?"
+      },
+      {
+        "source": "data/maps/VerdanturfTown_BattleTentLobby/scripts.inc",
+        "label": "VerdanturfTown_BattleTentLobby_Text_ExhibitionRules",
+        "new_label": true,
+        "replacement_text": "LOCAL DOUBLES EXHIBITIONS\\pBring six healthy Pokémon,\nwith no Eggs. Prepare freely\nbefore entering.\\pThree victories earn one local\nprize. Your party is restored\nafter each exhibition.\\pThese results are separate from\nthe CHAMPIONS CIRCUIT. You\nreturn to this lobby afterward."
+      }
+    ],
+    "dependencies": [
+      "FAC-01; DIFF-01; existing src/battle_tent.c local prize pool"
+    ],
+    "acceptance": [
+      "Enter with5/6 and withEgg/faintedmember; decline cleanly; win three times, lose, withdraw, reload and fillBagbeforeprize. Preserve held items/moves/levels/HP and pendingprize transaction; never warp to Frontier. Confirm no change to Circuit lifetime/best/rewardstate."
+    ]
+  },
+  {
+    "id": "W-TENT-FALLARBORTOWN",
+    "title": "Present Fallarbor as a local doubles exhibition",
+    "assessment": "FAC-01 supersedes native legacy Factory/Palace/Arena battle rules. Preserve the location, local residents and unrelated gift, and make the actual competition format explicit.",
+    "disposition": "REVISE",
+    "targets": [
+      {
+        "source": "data/maps/FallarborTown_BattleTentLobby/scripts.inc",
+        "label": "FallarborTown_BattleTentLobby_EventScript_Attendant",
+        "line": 103,
+        "current": "lock\nfaceplayer\nfallarbortent_getprize\ngoto_if_ne VAR_RESULT, ITEM_NONE, FallarborTown_BattleTentLobby_EventScript_PrizeWaiting\nspecial SavePlayerParty\nmsgbox FallarborTown_BattleTentLobby_Text_WelcomeToBattleTent, MSGBOX_DEFAULT",
+        "final_behavior": "Replace the legacy challenge entry with FAC-01 local exhibition entry. First settle any existing pending fallarborTentPrize using its existing commit-on-success contract. Offer rules and participation; call the shared local exhibition API only after eligibility and affirmative choice. It performs battle in this lobby and returns here. Three exhibition victories earn exactly one prize from the existing local pool; no Circuit counters, legendary entitlements or legacy rental/Palace/Arena mode advances."
+      },
+      {
+        "source": "data/maps/FallarborTown_BattleTentLobby/scripts.inc",
+        "label": "FallarborTown_BattleTentLobby_EventScript_RulesBoard",
+        "line": 253,
+        "current": "lockall\nmsgbox BattleFrontier_BattleArenaLobby_Text_RulesAreListed, MSGBOX_DEFAULT\ngoto FallarborTown_BattleTentLobby_EventScript_ReadRulesBoard\nend",
+        "final_behavior": "Display the new ExhibitionRules text below as a sign and end. Remove the old scrolling headings for rentals, swaps, autonomous Nature choice, Arena judging, level30 and three-Pokémon teams."
+      },
+      {
+        "source": "data/maps/FallarborTown_BattleTentLobby/scripts.inc",
+        "label": "FallarborTown_BattleTentLobby_Text_ExhibitionWelcome",
+        "new_label": true,
+        "replacement_text": "Our challengers bring ideas from\nthe mountains and far beyond.\\pThis is a six-Pokémon doubles\nexhibition. You command every\nmove and switch.\\pYour team uses the current cap.\nDifficulty sets opponent levels.\nEnter with six healthy partners?"
+      },
+      {
+        "source": "data/maps/FallarborTown_BattleTentLobby/scripts.inc",
+        "label": "FallarborTown_BattleTentLobby_Text_ExhibitionRules",
+        "new_label": true,
+        "replacement_text": "LOCAL DOUBLES EXHIBITIONS\\pBring six healthy Pokémon,\nwith no Eggs. Prepare freely\nbefore entering.\\pThree victories earn one local\nprize. Your party is restored\nafter each exhibition.\\pThese results are separate from\nthe CHAMPIONS CIRCUIT. You\nreturn to this lobby afterward."
+      }
+    ],
+    "dependencies": [
+      "FAC-01; DIFF-01; existing src/battle_tent.c local prize pool"
+    ],
+    "acceptance": [
+      "Enter with5/6 and withEgg/faintedmember; decline cleanly; win three times, lose, withdraw, reload and fillBagbeforeprize. Preserve held items/moves/levels/HP and pendingprize transaction; never warp to Frontier. Confirm no change to Circuit lifetime/best/rewardstate."
+    ]
+  },
+  {
+    "id": "W-TENT-FLAVOR",
+    "title": "Remove obsolete rental and autonomous-move claims from live tent residents",
+    "assessment": "Native tent mechanics change under FAC-01. Their NPCs need to talk about the actual exhibitions rather than an unoffered ruleset.",
+    "disposition": "REVISE",
+    "targets": [
+      {
+        "source": "data/maps/SlateportCity_BattleTentLobby/scripts.inc",
+        "label": "SlateportCity_BattleTentLobby_Text_CouldntFindMonForMe",
+        "line": 275,
+        "current": "So, like, I couldn't find myself any /  POKéMON that were, like, for me. //  So, I figured, like, hey, I should file /  a complaint to the guy there? //  And he wouldn't hear me out, like, hey! /  So, like, total bummer, man! //  Hey, like, you! Zip it, you know? /  Just, you know, take this!",
+        "replacement_text": "I couldn't settle on a team.\nToo many interesting choices!\\pThen I found this PRISM SCALE.\nMaybe you can put it to use."
+      },
+      {
+        "source": "data/maps/SlateportCity_BattleTentLobby/scripts.inc",
+        "label": "SlateportCity_BattleTentLobby_Text_BattleEvenWithoutToughMons",
+        "line": 295,
+        "current": "You can battle all you want here even /  if you don't have any tough POKéMON.",
+        "replacement_text": "The CENTER can prepare any legal\nset for free. Bring your own six\nand test them here."
+      },
+      {
+        "source": "data/maps/SlateportCity_BattleTentLobby/scripts.inc",
+        "label": "SlateportCity_BattleTentLobby_Text_NiceIfMoreSelection",
+        "line": 299,
+        "current": "Wouldn't it be nice if they had more of /  a selection?",
+        "replacement_text": "A new opponent every match!\nI keep leaving with another\nidea for my team."
+      },
+      {
+        "source": "data/maps/VerdanturfTown_BattleTentLobby/scripts.inc",
+        "label": "VerdanturfTown_BattleTentLobby_Text_MonsReluctantToUseDislikedMoves",
+        "line": 326,
+        "current": "If it doesn't like a certain move, /  a POKéMON will be reluctant to use it. //  It doesn't matter how strong it is, /  either. //  For example, a POKéMON with a GENTLE /  nature probably won't enjoy hurting /  its opponents. //  If it can't seem to live up to its /  potential, it's probably failing at /  using a disliked move against its will.",
+        "replacement_text": "Natures change stats, not which\nmoves your Pokémon will obey.\\pYou command both partners here.\nA quiet Pokémon can have a\nvery aggressive battle set."
+      },
+      {
+        "source": "data/maps/FallarborTown_BattleTentLobby/scripts.inc",
+        "label": "FallarborTown_BattleTentLobby_Text_FallarborTentMyFavorite",
+        "line": 309,
+        "current": "You know how BATTLE TENTS offer /  different events in different towns? //  My favorite is definitely the BATTLE /  TENT in FALLARBOR TOWN. //  I think it's fantastic how TRAINERS /  try to win with all their faith in /  their POKéMON.",
+        "replacement_text": "The tents share the same serious\ndoubles competition.\\pFALLARBOR is my favorite place\nto visit between exhibitions."
+      }
+    ],
+    "dependencies": [
+      "FAC-01"
+    ],
+    "acceptance": [
+      "Talk to all three lobbies’ residents after entering an exhibition; no resident promises rental selection, autonomous commands, three-turn judging or a different native format."
+    ]
+  },
+  {
+    "id": "W-CIRCUIT-RULES",
+    "title": "Give every active Frontier rules board one truthful contract",
+    "assessment": "All current desks enter Circuit, but all seven legacy rule boards remain live and advertise incompatible old formats. Replace those interaction roots; keep their historical underlying labels inert for archival source compatibility.",
+    "disposition": "REPAIR",
+    "targets": [
+      {
+        "source": "data/maps/BattleFrontier_BattleTowerLobby/scripts.inc",
+        "label": "BattleFrontier_BattleTowerLobby_EventScript_RulesBoard",
+        "line": 1017,
+        "current": "lockall\nmsgbox BattleFrontier_BattleTowerLobby_Text_RulesAreListed, MSGBOX_DEFAULT\ngoto BattleFrontier_BattleTowerLobby_EventScript_ReadRulesBoard\nend",
+        "final_behavior": "Replace the old mode-selection help with: msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRules, MSGBOX_SIGN; end. This is information only and never starts a battle."
+      },
+      {
+        "source": "data/maps/BattleFrontier_BattleDomeLobby/scripts.inc",
+        "label": "BattleFrontier_BattleDomeLobby_EventScript_RulesBoard",
+        "line": 402,
+        "current": "lockall\nmsgbox BattleFrontier_BattleDomeLobby_Text_RulesAreListed, MSGBOX_DEFAULT\ngoto BattleFrontier_BattleDomeLobby_EventScript_ReadRulesBoard\nend",
+        "final_behavior": "Replace the old mode-selection help with: msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRules, MSGBOX_SIGN; end. This is information only and never starts a battle."
+      },
+      {
+        "source": "data/maps/BattleFrontier_BattlePalaceLobby/scripts.inc",
+        "label": "BattleFrontier_BattlePalaceLobby_EventScript_RulesBoard",
+        "line": 331,
+        "current": "lockall\nmsgbox BattleFrontier_BattlePalaceLobby_Text_RulesAreListed, MSGBOX_DEFAULT\ngoto BattleFrontier_BattlePalaceLobby_EventScript_ReadRulesBoard\nend",
+        "final_behavior": "Replace the old mode-selection help with: msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRules, MSGBOX_SIGN; end. This is information only and never starts a battle."
+      },
+      {
+        "source": "data/maps/BattleFrontier_BattlePyramidLobby/scripts.inc",
+        "label": "BattleFrontier_BattlePyramidLobby_EventScript_RulesBoard",
+        "line": 486,
+        "current": "lockall\nmsgbox BattleFrontier_BattlePyramidLobby_Text_RulesAreListed, MSGBOX_DEFAULT\ngoto BattleFrontier_BattlePyramidLobby_EventScript_ReadRulesBoard\nend",
+        "final_behavior": "Replace the old mode-selection help with: msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRules, MSGBOX_SIGN; end. This is information only and never starts a battle."
+      },
+      {
+        "source": "data/maps/BattleFrontier_BattleArenaLobby/scripts.inc",
+        "label": "BattleFrontier_BattleArenaLobby_EventScript_RulesBoard",
+        "line": 316,
+        "current": "lockall\nmsgbox BattleFrontier_BattleArenaLobby_Text_RulesAreListed, MSGBOX_DEFAULT\ngoto BattleFrontier_BattleArenaLobby_EventScript_ReadRulesBoard\nend",
+        "final_behavior": "Replace the old mode-selection help with: msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRules, MSGBOX_SIGN; end. This is information only and never starts a battle."
+      },
+      {
+        "source": "data/maps/BattleFrontier_BattleFactoryLobby/scripts.inc",
+        "label": "BattleFrontier_BattleFactoryLobby_EventScript_RulesBoard",
+        "line": 276,
+        "current": "lockall\nmsgbox BattleFrontier_BattleFactoryLobby_Text_RulesAreListed, MSGBOX_DEFAULT\ngoto BattleFrontier_BattleFactoryLobby_EventScript_ReadRulesBoard\nend",
+        "final_behavior": "Replace the old mode-selection help with: msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRules, MSGBOX_SIGN; end. This is information only and never starts a battle."
+      },
+      {
+        "source": "data/maps/BattleFrontier_BattlePikeLobby/scripts.inc",
+        "label": "BattleFrontier_BattlePikeLobby_EventScript_RulesBoard",
+        "line": 231,
+        "current": "lockall\nmsgbox BattleFrontier_BattlePikeLobby_Text_RulesAreListed, MSGBOX_DEFAULT\ngoto BattleFrontier_BattlePikeLobby_EventScript_ReadRulesBoard\nend",
+        "final_behavior": "Replace the old mode-selection help with: msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRules, MSGBOX_SIGN; end. This is information only and never starts a battle."
+      },
+      {
+        "source": "data/maps/BattleFrontier_BattleTowerLobby/scripts.inc",
+        "label": "BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRules",
+        "new_label": true,
+        "replacement_text": "CHAMPIONS CIRCUIT\\pBring six healthy Pokémon and\nno Eggs. Every match is doubles;\nyou control your own team.\\pYour team battles at Lv. 100.\nOpponent levels begin from your\ndifficulty and rise with wins.\\pAfter each battle, your party\nand held items are restored.\nYou can leave between matches.\\pEvery Frontier desk registers\nyou for the central Tower arena.\nMilestone rewards remain recorded."
+      },
+      {
+        "source": "data/maps/BattleFrontier_BattleTowerLobby/scripts.inc",
+        "label": "BattleFrontier_BattleTowerLobby_Text_CanLeaveUntilLossOrSevenWins",
+        "line": 1163,
+        "current": "Once you've entered the BATTLE TOWER, /  you can't leave until you either lose /  or you beat seven TRAINERS in a row. //  You'd best be certain that you're up /  to the challenge.",
+        "replacement_text": "The CIRCUIT restores your team\nafter each match.\\pYou may continue or leave then.\nA strong run deserves another\nwell-prepared decision."
+      },
+      {
+        "source": "data/maps/BattleFrontier_BattleTowerLobby/scripts.inc",
+        "label": "BattleFrontier_BattleTowerLobby_Text_CircuitWelcome",
+        "line": 506,
+        "current": "This is the FRONTIER's premier challenge: /  the CHAMPIONS CIRCUIT. //  Every match is a full-team Double Battle /  assembled from competitive roles. //  Your team becomes Lv. 100. Opponents /  gain one total level after each win. //  They can climb as high as Lv. 255. /  Every desk enters this Circuit.",
+        "replacement_text": "Welcome to the CHAMPIONS CIRCUIT!\\pEvery match is a full-team Double\nBattle with a competitive opponent.\\pYour team battles at Lv. 100.\nOpponents grow stronger as your\nrun continues, up to Lv. 255.\\pEvery Frontier desk registers you\nfor the central Tower arena."
+      }
+    ],
+    "dependencies": [
+      "Shared Circuit API; DIFF-01; all native trainer battles doubles"
+    ],
+    "acceptance": [
+      "Read every active lobby rules board and every desk. None offers singles, three-Pokémon teams, rentals, autonomous player move choice, Arena judging or seven-win forced lock-in. Confirm actual central-room route and between-match withdrawal."
+    ]
+  },
+  {
+    "id": "W-FRONTIER-GUIDES",
+    "title": "Reconcile the reception tour and Scott with the current competition",
+    "assessment": "Reception still claims the other buildings preserve classic challenges, while their actual desks were replaced. Keep architecture and character history; describe current services exactly.",
+    "disposition": "REPAIR",
+    "targets": [
+      {
+        "source": "data/maps/BattleFrontier_ReceptionGate/scripts.inc",
+        "label": "BattleFrontier_ReceptionGate_Text_BattleTowerInfo",
+        "line": 351,
+        "current": "It is the gigantic tower considered /  to be the BATTLE FRONTIER's symbol. //  There are four kinds of BATTLE ROOMS /  in the tower for SINGLE, DOUBLE, MULTI, /  and LINK MULTI BATTLES. //  The far desk hosts the /  CHAMPIONS CIRCUIT, the FRONTIER's /  premier full-team test.",
+        "replacement_text": "The BATTLE TOWER is the great tower.\\pIts reception desk enters the\nCHAMPIONS CIRCUIT at the central\nTower arena. All matches are doubles."
+      },
+      {
+        "source": "data/maps/BattleFrontier_ReceptionGate/scripts.inc",
+        "label": "BattleFrontier_ReceptionGate_Text_BattleDomeInfo",
+        "line": 361,
+        "current": "The BATTLE DOME is the large building /  shaped like a huge egg. //  Events named Battle Tourneys are held /  in this facility. //  The Battle Tourneys are offered in /  two courses--for SINGLE and DOUBLE /  BATTLES.",
+        "replacement_text": "The BATTLE DOME is the oval building.\\pIts reception desk enters the\nCHAMPIONS CIRCUIT at the central\nTower arena. All matches are doubles."
+      },
+      {
+        "source": "data/maps/BattleFrontier_ReceptionGate/scripts.inc",
+        "label": "BattleFrontier_ReceptionGate_Text_BattlePalaceInfo",
+        "line": 370,
+        "current": "The BATTLE PALACE is the red building /  on the right of the BATTLE FRONTIER. //  There are two kinds of BATTLE HALLS /  for SINGLE and DOUBLE BATTLES.",
+        "replacement_text": "The BATTLE PALACE is the red building to the east.\\pIts reception desk enters the\nCHAMPIONS CIRCUIT at the central\nTower arena. All matches are doubles."
+      },
+      {
+        "source": "data/maps/BattleFrontier_ReceptionGate/scripts.inc",
+        "label": "BattleFrontier_ReceptionGate_Text_BattleArenaInfo",
+        "line": 376,
+        "current": "The BATTLE ARENA is the dojo-like /  building at the center-right of /  the BATTLE FRONTIER. //  An event called the Set KO Tourney /  takes place at the BATTLE ARENA.",
+        "replacement_text": "The BATTLE ARENA is the central dojo.\\pIts reception desk enters the\nCHAMPIONS CIRCUIT at the central\nTower arena. All matches are doubles."
+      },
+      {
+        "source": "data/maps/BattleFrontier_ReceptionGate/scripts.inc",
+        "label": "BattleFrontier_ReceptionGate_Text_BattleFactoryInfo",
+        "line": 383,
+        "current": "The BATTLE FACTORY is the large /  building that is the closest to us. //  An event called the Battle Swap /  is conducted there. //  The Battle Swap event is offered in /  two courses for SINGLE and DOUBLE /  BATTLES.",
+        "replacement_text": "The BATTLE FACTORY is the building nearest this gate.\\pIts reception desk enters the\nCHAMPIONS CIRCUIT at the central\nTower arena. All matches are doubles."
+      },
+      {
+        "source": "data/maps/BattleFrontier_ReceptionGate/scripts.inc",
+        "label": "BattleFrontier_ReceptionGate_Text_BattlePikeInfo",
+        "line": 392,
+        "current": "The BATTLE PIKE is the building shaped /  like a POKéMON at the center-left of /  the BATTLE FRONTIER. //  An event called the Battle Choice /  is conducted there.",
+        "replacement_text": "The BATTLE PIKE is the SEVIPER-shaped building.\\pIts reception desk enters the\nCHAMPIONS CIRCUIT at the central\nTower arena. All matches are doubles."
+      },
+      {
+        "source": "data/maps/BattleFrontier_ReceptionGate/scripts.inc",
+        "label": "BattleFrontier_ReceptionGate_Text_BattlePyramidInfo",
+        "line": 399,
+        "current": "The BATTLE PYRAMID is the enormous /  pyramid. //  An event called the Battle Quest /  is conducted there.",
+        "replacement_text": "The BATTLE PYRAMID is the enormous pyramid.\\pIts reception desk enters the\nCHAMPIONS CIRCUIT at the central\nTower arena. All matches are doubles."
+      },
+      {
+        "source": "data/maps/BattleFrontier_ReceptionGate/scripts.inc",
+        "label": "BattleFrontier_ReceptionGate_EventScript_RulesGuide",
+        "line": 206,
+        "current": "lock\nfaceplayer\nmsgbox BattleFrontier_ReceptionGate_Text_YourGuideToRules, MSGBOX_DEFAULT\ngoto BattleFrontier_ReceptionGate_EventScript_ChooseRuleToLearnAbout\nend",
+        "final_behavior": "Show BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRules with MSGBOX_NPC and end; retire old Level50/Open/duplicate-item/rental-entry menu from native interaction."
+      },
+      {
+        "source": "data/maps/BattleFrontier_ReceptionGate/scripts.inc",
+        "label": "BattleFrontier_ReceptionGate_Text_ScottGreatToSeeYouHere",
+        "line": 331,
+        "current": "SCOTT: It's great to see you here, /  it really is! //  Start with the CHAMPIONS CIRCUIT at /  the far desk inside the BATTLE TOWER. //  It assembles a new full-team Double /  Battle every round. The other facilities /  preserve HOENN's classic challenges. Naturally, I hope you'll also experience /  the pure essence of battling. //  I also have my quarters here, so feel /  free to visit if you have time.",
+        "replacement_text": "SCOTT: It's great to see you here!\\pEvery desk enters the CHAMPIONS\nCIRCUIT. Six partners, coordinated\nopponents, and no easy matches.\\pThe buildings preserve the\nFrontier's history. The Tower\nholds our central arena.\\pVisit my house when you have time.\nI'd like to hear about your teams."
+      },
+      {
+        "source": "data/maps/BattleFrontier_ReceptionGate/scripts.inc",
+        "label": "BattleFrontier_ReceptionGate_Text_RankingHallInfo",
+        "line": 405,
+        "current": "The RANKING HALL is located near /  the BATTLE TOWER. //  There, you may see the most fantastic /  records left by the TRAINERS that /  took on the many challenges of /  the BATTLE FRONTIER.",
+        "replacement_text": "The RANKING HALL is near\nthe BATTLE TOWER.\\pIts current displays show your\nCHAMPIONS CIRCUIT run, best\nrecorded run, and total wins."
+      },
+      {
+        "source": "data/maps/BattleFrontier_ReceptionGate/scripts.inc",
+        "label": "BattleFrontier_ReceptionGate_EventScript_FrontierPassGuide",
+        "line": 257,
+        "current": "lock\nfaceplayer\nmsgbox BattleFrontier_ReceptionGate_Text_YourGuideToFrontierPass, MSGBOX_DEFAULT\ngoto BattleFrontier_ReceptionGate_EventScript_ChooseFrontierPassInfoToLearnAbout\nend",
+        "final_behavior": "Keep Pass acquisition/ownership. Replace the old symbol/recording submenu with an accurate current Pass explanation: it retains the Trainer Card, Battle Points and historical symbol records. Current Circuit records are displayed at current record boards; do not claim old symbols are earned from Circuit unless another explicit chapter authorizes it."
+      },
+      {
+        "source": "data/maps/BattleFrontier_ScottsHouse/scripts.inc",
+        "label": "BattleFrontier_ScottsHouse_Text_HaveYouMetFrontierBrain",
+        "line": 266,
+        "current": "SCOTT: Have you met any of /  the FRONTIER BRAINS? //  Better yet, have you obtained any /  symbols from them? //  I handpicked the FRONTIER BRAINS /  as the toughest TRAINERS anywhere. //  But I'm sure that seeing how tough /  you are will startle even them!",
+        "replacement_text": "SCOTT: The FRONTIER BRAINS gave\nthese buildings their character.\\pToday every desk enters the\nCHAMPIONS CIRCUIT. I want to see\nwhat your team can do there!"
+      }
+    ],
+    "dependencies": [
+      "W-CIRCUIT-RULES; Circuit record display; historic earned-symbol rewards remain stored"
+    ],
+    "acceptance": [
+      "Read each reception menu choice, initial Scott scene and later Scott random comments. They all describe the same active Circuit. Historical symbol flags and already earned Scott gifts remain retrievable without creating new claims."
+    ]
+  },
+  {
+    "id": "W-FRONTIER-RESIDENTS",
+    "title": "Keep local personality while removing unavailable-service promises",
+    "assessment": "The outdoor residents and active lobby NPCs still describe rentals, maze goals, autonomous move choice and classic-symbol ambitions that the live Circuit does not supply. These complete replacements preserve individual attitudes and the buildings’ history.",
+    "disposition": "REPAIR",
+    "targets": [
+      {
+        "source": "data/maps/BattleFrontier_OutsideWest/scripts.inc",
+        "label": "BattleFrontier_OutsideWest_Text_SureWeCanChallengeWithNoMons",
+        "line": 374,
+        "current": "Hey, bro… //  Are you sure we can make challenges /  even if we don't have any POKéMON?",
+        "replacement_text": "Hey, bro... We need six Pokémon\nfor the CIRCUIT.\\pLet's visit the CENTER and\nfinish our team first."
+      },
+      {
+        "source": "data/maps/BattleFrontier_OutsideWest/scripts.inc",
+        "label": "BattleFrontier_OutsideWest_Text_BigGuySaidIllLendYouMons",
+        "line": 379,
+        "current": "Uh… /  I'm sure it'll be okay. //  I think… //  But remember that big scary guy? /  He said, “I'll lend you POKéMON!”",
+        "replacement_text": "That big fellow showed me how\nto prepare a set at the CENTER.\\pHe said the team still needs\nto be ours. Fair enough!"
+      },
+      {
+        "source": "data/maps/BattleFrontier_OutsideWest/scripts.inc",
+        "label": "BattleFrontier_OutsideWest_Text_WhosRaisingThoseRentalMons",
+        "line": 386,
+        "current": "That's the BATTLE FACTORY. /  You can rent strong POKéMON there. //  But it makes me wonder. /  Who's raising those rental POKéMON?",
+        "replacement_text": "That's the BATTLE FACTORY. Its\ndesk also enters the CIRCUIT.\\pWho prepares all those opposing\nteams? I'd like to compare notes!"
+      },
+      {
+        "source": "data/maps/BattleFrontier_OutsideWest/scripts.inc",
+        "label": "BattleFrontier_OutsideWest_Text_KeepBattlingUntilIGetSymbol",
+        "line": 422,
+        "current": "Today, I'm going to keep battling, no /  matter what, until I get a Symbol.",
+        "replacement_text": "I'm going to keep battling until\nI beat my best Circuit streak!"
+      },
+      {
+        "source": "data/maps/BattleFrontier_OutsideWest/scripts.inc",
+        "label": "BattleFrontier_OutsideWest_Text_WonIllTakePikeChallenge",
+        "line": 404,
+        "current": "Yay! I won! /  I will take the BATTLE PIKE challenge!",
+        "replacement_text": "I won! I'll register at the PIKE\nand start another Circuit run!"
+      },
+      {
+        "source": "data/maps/BattleFrontier_OutsideWest/scripts.inc",
+        "label": "BattleFrontier_OutsideWest_Text_LostIllPutOffPikeChallenge",
+        "line": 408,
+        "current": "Oh, no… /  I lost. //  I guess I'm not very lucky today. /  I'll put off my BATTLE PIKE challenge /  until tomorrow.",
+        "replacement_text": "I lost. Maybe that's my cue to\nreview my team before the CIRCUIT."
+      },
+      {
+        "source": "data/maps/BattleFrontier_OutsideWest/scripts.inc",
+        "label": "BattleFrontier_OutsideWest_Text_BattlePikeSign",
+        "line": 308,
+        "current": "This is the BATTLE PIKE! /  Choose one of three paths!",
+        "replacement_text": "BATTLE PIKE\\pCHAMPIONS CIRCUIT RECEPTION\nCentral arena: BATTLE TOWER"
+      },
+      {
+        "source": "data/maps/BattleFrontier_OutsideEast/scripts.inc",
+        "label": "BattleFrontier_OutsideEast_Text_PyramidTooHarsh",
+        "line": 273,
+        "current": "The BATTLE PYRAMID's too harsh! /  I just can't make it to the top! //  Since I'm out of options, maybe I can /  climb the outside…",
+        "replacement_text": "The CIRCUIT is too harsh!\nI keep losing at the same point.\\pMaybe I should change my plan\ninstead of climbing this pyramid."
+      },
+      {
+        "source": "data/maps/BattleFrontier_OutsideEast/scripts.inc",
+        "label": "BattleFrontier_OutsideEast_Text_ThriveInDarkness",
+        "line": 279,
+        "current": "I thrive in darkness… /  Yes… What is worthy of me? /  None other than the BATTLE PYRAMID… //  What say you to wandering in darkness /  and in utter and total desperation?",
+        "replacement_text": "I thrive in darkness...\\pA quiet pyramid, a difficult\nteam to build, and nobody\ninterrupting my thoughts..."
+      },
+      {
+        "source": "data/maps/BattleFrontier_OutsideEast/scripts.inc",
+        "label": "BattleFrontier_OutsideEast_Text_PeopleCallMeBusybody",
+        "line": 309,
+        "current": "People call me a busybody, /  but I can't help it. //  Your hat's on crooked! /  Oh, no, trash on the ground! /  Oops, it's almost dinnertime! //  I don't know if I can stand to just /  watch at the BATTLE PALACE…",
+        "replacement_text": "People call me a busybody.\nI keep spotting something to fix!\\pThat habit helps in doubles.\nThere are two sides of the\nboard to watch at once."
+      },
+      {
+        "source": "data/maps/BattleFrontier_OutsideEast/scripts.inc",
+        "label": "BattleFrontier_OutsideEast_Text_PowerOfOurLoveWillOvercome",
+        "line": 399,
+        "current": "Ooh, darling, you are so wonderful! //  Ooh, I just can't wait anymore! //  Let's go to a MULTI BATTLE ROOM /  right this instant! //  If we get together in the BATTLE SALON, /  the power of our love will overcome /  everyone we meet. //  Why, before us, darling, everything /  will topple like dominoes!",
+        "replacement_text": "Let's sit down and build a team\ntogether, darling!\\pSix partners that support one\nanother. Then we can each see\nhow far our plan goes!"
+      },
+      {
+        "source": "data/maps/BattleFrontier_OutsideEast/scripts.inc",
+        "label": "BattleFrontier_OutsideEast_Text_BattlePyramidSign",
+        "line": 247,
+        "current": "This is the BATTLE PYRAMID! /  Advance through the Battle Quest!",
+        "replacement_text": "BATTLE PYRAMID\\pCHAMPIONS CIRCUIT RECEPTION\nCentral arena: BATTLE TOWER"
+      },
+      {
+        "source": "data/maps/BattleFrontier_BattleDomeLobby/scripts.inc",
+        "label": "BattleFrontier_BattleDomeLobby_Text_NeedToCheckOpponentCarefully",
+        "line": 635,
+        "current": "I would've won if I'd kept this POKéMON /  held in reserve. //  You need to check your opponent's /  POKéMON carefully before choosing /  your battling POKéMON.",
+        "replacement_text": "I committed my best answer too\nearly and lost it.\\pA reserve is valuable only if\nyou preserve the chance to use it."
+      },
+      {
+        "source": "data/maps/BattleFrontier_BattleDomeLobby/scripts.inc",
+        "label": "BattleFrontier_BattleDomeLobby_Text_WinnersGainReputation",
+        "line": 621,
+        "current": "When a TRAINER chains tournament /  wins at the BATTLE DOME, he or she /  gains a reputation as a star. //  Tough TRAINERS are drawn by that /  reputation to the BATTLE DOME. //  A true superstar is a TRAINER who /  can keep winning tournaments.",
+        "replacement_text": "The DOME built its reputation\non great tournament battles.\\pNow its desk enters the CIRCUIT.\nKeep winning, and people\nremember your team!"
+      },
+      {
+        "source": "data/maps/BattleFrontier_BattleDomeLobby/scripts.inc",
+        "label": "BattleFrontier_BattleDomeLobby_Text_TrashedInFirstRound",
+        "line": 630,
+        "current": "I ran into one of the tournament /  favorites in the very first round. //  Of course I got trashed…",
+        "replacement_text": "My very first Circuit opponent\nbroke through my opening.\\pI need a stronger answer\nfrom the first turn."
+      },
+      {
+        "source": "data/maps/BattleFrontier_BattleDomeLobby/scripts.inc",
+        "label": "BattleFrontier_BattleDomeLobby_Text_LastWinnerWasTough",
+        "line": 599,
+        "current": "Did you see it? /  The last Battle Tournament? //  The winner, {STR_VAR_1}, was seriously /  tough. //  You should check out the results /  on the monitor beside the PC.",
+        "replacement_text": "These monitors preserve the\nDOME's old tournaments.\\pToday's Circuit records are\nmarked separately. A different\nchallenge, the same ambition!"
+      },
+      {
+        "source": "data/maps/BattleFrontier_BattlePalaceLobby/scripts.inc",
+        "label": "BattleFrontier_BattlePalaceLobby_Text_WhatNatureFavorsChippingAway",
+        "line": 543,
+        "current": "I wonder what sort of nature a POKéMON /  would have if it favored enfeebling its /  opponents and chipping away slowly. //  I'd be surprised if it was a LAX nature. //  But, nah, that can't be right.",
+        "replacement_text": "A careful Nature and Stat Point\nspread can help a partner\nsurvive the turn that matters.\\pThen I choose what it does\nwith that extra turn!"
+      },
+      {
+        "source": "data/maps/BattleFrontier_BattlePalaceLobby/scripts.inc",
+        "label": "BattleFrontier_BattlePalaceLobby_Text_NatureAndMovesKeyHere",
+        "line": 522,
+        "current": "Hmm… //  It appears that the nature of POKéMON /  and the moves that they have been /  taught are the keys to battle here. //  To be more precise, it's how well /  the moves match the nature of /  the POKéMON. //  If your POKéMON is in trouble and /  unable to live up to its potential, /  you may need to examine how well /  its moves match its nature.",
+        "replacement_text": "The old Palace tested how\nPokémon acted on their own.\\pIn the CIRCUIT, you command\nevery move. Natures change\nstats, not obedience."
+      },
+      {
+        "source": "data/maps/BattleFrontier_BattleFactoryLobby/scripts.inc",
+        "label": "BattleFrontier_BattleFactoryLobby_Text_NeedKnowledgeOfMonsMoves",
+        "line": 471,
+        "current": "Hi! /  You, there! //  Are you thinking that the events here /  are easy since you don't need to have /  a raised team of POKéMON? //  I wouldn't be too sure about winning /  that easily. //  If you don't have thorough knowledge /  about POKéMON and their moves, /  it will be tough to keep winning.",
+        "replacement_text": "Don't judge an opposing Pokémon\nby its reputation alone.\\pLook at the board and what its\npartner makes possible. That's\nhow the CIRCUIT keeps surprising me."
+      },
+      {
+        "source": "data/maps/BattleFrontier_BattleFactoryLobby/scripts.inc",
+        "label": "BattleFrontier_BattleFactoryLobby_Text_SwappedForWeakMon",
+        "line": 483,
+        "current": "I swapped for a weak POKéMON… /  I thought it was a good kind to have… //  They wiped the floor with us…",
+        "replacement_text": "I changed one member of my team\nand lost the support another\npartner depended on.\\pThe new Pokémon wasn't weak.\nMy combination was incomplete."
+      },
+      {
+        "source": "data/maps/BattleFrontier_BattleFactoryLobby/scripts.inc",
+        "label": "BattleFrontier_BattleFactoryLobby_Text_CantFigureOutStaffHints",
+        "line": 495,
+        "current": "You know how the staff here give you /  a few hints about your next opponent? //  Well, I'm a full-grown man, but I have /  trouble figuring out their hints.",
+        "replacement_text": "A name tells you which Pokémon\nyou're facing. It doesn't tell\nyou every choice it can make.\\pI keep that in mind when the\nCIRCUIT introduces an opponent."
+      },
+      {
+        "source": "data/maps/BattleFrontier_BattlePikeLobby/scripts.inc",
+        "label": "BattleFrontier_BattlePikeLobby_Text_OneRoomAwayFromGoal",
+        "line": 391,
+        "current": "Arrgh! I blew my chance! /  I was one room away from the goal! //  In this place, you'd better watch out /  for poison, freezing, and so on.",
+        "replacement_text": "One more victory would have\nbeaten my Circuit record.\\pA status move stopped me.\nI left that answer out of my team."
+      },
+      {
+        "source": "data/maps/BattleFrontier_BattlePikeLobby/scripts.inc",
+        "label": "BattleFrontier_BattlePikeLobby_Text_NeverHadToBattleTrainer",
+        "line": 397,
+        "current": "I've completed the challenge 10 times /  now, but I've never had to battle /  a TRAINER once.",
+        "replacement_text": "I used to get lucky in the PIKE.\\pThe CIRCUIT makes you face\na complete opposing team\nevery match. I like that."
+      },
+      {
+        "source": "data/maps/BattleFrontier_BattlePyramidLobby/scripts.inc",
+        "label": "BattleFrontier_BattlePyramidLobby_Text_TrainersNoticeRunning",
+        "line": 841,
+        "current": "Did you know? //  If you run fast, TRAINERS may notice /  and come after you for a battle. //  So, if you want to avoid TRAINERS, /  don't catch their eyes, but sneak /  cautiously and quietly past them.",
+        "replacement_text": "The old PYRAMID was a maze.\nNow I study the CIRCUIT here.\\pIts opponents can punish a\ncareless switch just as quickly\nas a careless attack."
+      },
+      {
+        "source": "data/maps/BattleFrontier_BattlePyramidLobby/scripts.inc",
+        "label": "BattleFrontier_BattlePyramidLobby_Text_LostLotOfItems",
+        "line": 849,
+        "current": "Awaaaaaaarrrrgh! //  I had a whole lot of items, but I lost /  them all when I lost! //  Awaaaaaaarrrrgh!",
+        "replacement_text": "I used to worry about losing\nitems in the old PYRAMID.\\pThe CIRCUIT restores my team\nand held items after each match.\nI can focus on the battle."
+      },
+      {
+        "source": "data/maps/BattleFrontier_PokemonCenter_1F/scripts.inc",
+        "label": "BattleFrontier_PokemonCenter_1F_Text_GoingThroughEveryChallenge",
+        "line": 53,
+        "current": "Giggle… I'm going to go through every /  challenge with just this baby!",
+        "replacement_text": "I'm bringing SKITTY on my\nnext Circuit team!\\pFive partners will help this\nlittle one find its chance."
+      },
+      {
+        "source": "data/maps/BattleFrontier_Mart/scripts.inc",
+        "label": "BattleFrontier_Mart_Text_FacilitiesDontAllowItems",
+        "line": 59,
+        "current": "A lot of the BATTLE FRONTIER's /  facilities don't allow the use of items /  during battles. //  That rule makes things tougher than /  they already are!",
+        "replacement_text": "Trainer battles here don't allow\nitems from the BAG.\\pPrepare held items before entering\nthe CHAMPIONS CIRCUIT."
+      }
+    ],
+    "dependencies": [
+      "W-CIRCUIT-RULES; preserved legacy maps/records"
+    ],
+    "acceptance": [
+      "Read each changed NPC/sign from its real map position. All current-service claims match the Circuit entry, restoration and withdrawal behavior. No new battle or reward is introduced."
+    ]
+  },
+  {
+    "id": "W-FREE-SERVICE-COHESION",
+    "title": "Consolidate paid duplicate preparation into the existing free services",
+    "assessment": "The native Frontier tutors still debit BP for moves available free elsewhere, and an evolution counter sells the free Ring archive. Keep the NPCs and their personality, with one owner for legal preparation.",
+    "disposition": "REPAIR",
+    "targets": [
+      {
+        "source": "data/maps/BattleFrontier_Lounge7/scripts.inc",
+        "label": "BattleFrontier_Lounge7_EventScript_LeftMoveTutor",
+        "line": 5,
+        "current": "lock\nfaceplayer\nsetvar VAR_TEMP_C, SCROLL_MULTI_BF_MOVE_TUTOR_1\ngoto_if_set FLAG_MET_FRONTIER_BEAUTY_MOVE_TUTOR, BattleFrontier_Lounge7_EventScript_AlreadyMetLeftTutor\nmsgbox BattleFrontier_Lounge7_Text_LeftTutorIntro, MSGBOX_DEFAULT\nsetflag FLAG_MET_FRONTIER_BEAUTY_MOVE_TUTOR\ngoto BattleFrontier_Lounge7_EventScript_ChooseLeftTutorMove\nend",
+        "final_behavior": "Keep a brief left veteran greeting (new text below), close it, then goto Common_EventScript_EmeraldChampionsMoveTutor. Remove this live path to paid BP tutor selection and debit. Existing free legality/selection/cancel behavior is the owner; no second learnset table."
+      },
+      {
+        "source": "data/maps/BattleFrontier_Lounge7/scripts.inc",
+        "label": "BattleFrontier_Lounge7_Text_LeftTutorFree",
+        "new_label": true,
+        "replacement_text": "Buhahaha! I still know a thing\nor two about beautiful moves.\\pThe lessons are free now.\nLet us prepare your team."
+      },
+      {
+        "source": "data/maps/BattleFrontier_Lounge7/scripts.inc",
+        "label": "BattleFrontier_Lounge7_EventScript_RightMoveTutor",
+        "line": 127,
+        "current": "lock\nfaceplayer\nsetvar VAR_TEMP_C, SCROLL_MULTI_BF_MOVE_TUTOR_2\ngoto_if_set FLAG_MET_FRONTIER_SWIMMER_MOVE_TUTOR, BattleFrontier_Lounge7_EventScript_AlreadyMetRightTutor\nmsgbox BattleFrontier_Lounge7_Text_RightTutorIntro, MSGBOX_DEFAULT\nsetflag FLAG_MET_FRONTIER_SWIMMER_MOVE_TUTOR\ngoto BattleFrontier_Lounge7_EventScript_ChooseRightTutorMove\nend",
+        "final_behavior": "Keep a brief right veteran greeting (new text below), close it, then goto Common_EventScript_EmeraldChampionsMoveTutor. Remove this live path to paid BP tutor selection and debit. Existing free legality/selection/cancel behavior is the owner; no second learnset table."
+      },
+      {
+        "source": "data/maps/BattleFrontier_Lounge7/scripts.inc",
+        "label": "BattleFrontier_Lounge7_Text_RightTutorFree",
+        "new_label": true,
+        "replacement_text": "Ihihihi! Experience makes every\nmove worth another look.\\pThe lessons are free now.\nLet us prepare your team."
+      },
+      {
+        "source": "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
+        "label": "BattleFrontier_ExchangeServiceCorner_EventScript_EvolutionClerk",
+        "line": 255,
+        "current": "lock\nfaceplayer\nsetvar VAR_TEMP_2, EXCHANGE_CORNER_EVOLUTION_CLERK\ncall BattleFrontier_ExchangeServiceCorner_EventScript_ClerkWelcome\ngoto BattleFrontier_ExchangeServiceCorner_EventScript_ChooseEvolutionItem\nend",
+        "final_behavior": "Explain that the evolution archive is free with the Mega Ring, then goto Common_EventScript_EmeraldChampionsBattleVendor. Do not take Battle Points for ordinary evolution items. Keep decoration and field-supply BP counters unchanged."
+      },
+      {
+        "source": "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
+        "label": "BattleFrontier_ExchangeServiceCorner_Text_ItemsWillGetMonTougher",
+        "line": 399,
+        "current": "The items here aren't ordinary held /  battle gear. //  They're rare supplies and evolution /  tools worth saving Battle Points for!",
+        "replacement_text": "I save Battle Points for supplies\nand decorations.\\pOrdinary evolution items are free\nfrom CENTER vendors once you\nhave the MEGA RING."
+      }
+    ],
+    "dependencies": [
+      "Shared Center specialist/vendor; unchanged decoration and field-supply economics"
+    ],
+    "acceptance": [
+      "Talk to both veteran tutors and the evolution clerk. Perform a legal edit, cancel a selection, and request an unavailable move; Battle Points never change. Ordinary item/decor purchases retain their current debit-on-success checks."
+    ]
+  },
+  {
+    "id": "W-GAMBLER-RETIRE",
+    "title": "Retire bets on unavailable formats without losing recorded stakes",
+    "assessment": "The gambler’s challenge selection and settlement are indexed to classic facility modes; Circuit does not complete those records. Retire new stakes and settle any existing obligation before ordinary flavor.",
+    "disposition": "REPAIR",
+    "targets": [
+      {
+        "source": "data/maps/BattleFrontier_Lounge3/scripts.inc",
+        "label": "BattleFrontier_Lounge3_EventScript_Gambler",
+        "line": 8,
+        "current": "lock\nfaceplayer\ngoto_if_set FLAG_MET_BATTLE_FRONTIER_GAMBLER, BattleFrontier_Lounge3_EventScript_AlreadyMetGambler\ncall BattleFrontier_Lounge3_EventScript_CountSilverSymbols\ngoto_if_le VAR_0x8004, 2, BattleFrontier_Lounge3_EventScript_NotEnoughSilverSymbols\nsetflag FLAG_MET_BATTLE_FRONTIER_GAMBLER\nmsgbox BattleFrontier_Lounge3_Text_YouLookToughExplainGambling, MSGBOX_DEFAULT\ngoto BattleFrontier_Lounge3_EventScript_AskToEnterChallenge\nend",
+        "final_behavior": "Before all old introduction/gate branches, inspect VAR_FRONTIER_GAMBLER_STATE and AMOUNT_BET. WAITING/no placed wager: show new observer text and end, never debit BP. PLACED_BET: refund5/10/15 according to the existing validated amount enum. WON: pay the recorded10/20/30 owed by the old win. LOST: preserve the recorded result, clear only this resolved wager state, and show outcome text. For a refund/payment that would exceed MAX_BATTLE_FRONTIER_POINTS, leave the complete obligation pending and ask player to make room by spending BP; never clamp away the balance. Once the full exact amount is credited, set state WAITING and clear the obsolete selected wager; repeated interaction cannot pay again. Invalid historical amount/state is not authority to invent funds; show neutral unavailable-record text and preserve data for repair review."
+      },
+      {
+        "source": "data/maps/BattleFrontier_Lounge3/scripts.inc",
+        "label": "BattleFrontier_Lounge3_Text_CurrentObserver",
+        "new_label": true,
+        "replacement_text": "I used to wager on the old\nFrontier events.\\pNow I watch the CIRCUIT and argue\nabout teams. It's cheaper...\nusually."
+      },
+      {
+        "source": "data/maps/BattleFrontier_Lounge3/scripts.inc",
+        "label": "BattleFrontier_Lounge3_Text_SettlementPending",
+        "new_label": true,
+        "replacement_text": "Your old wager is still recorded.\\pSpend a few Battle Points, then\nreturn. I will settle the full\namount without losing any of it."
+      }
+    ],
+    "dependencies": [
+      "Existing VAR_FRONTIER_GAMBLER_STATE/AMOUNT_BET; MAX_BATTLE_FRONTIER_POINTS=9999"
+    ],
+    "acceptance": [
+      "Test no wager, each placed stake, each recorded win, a recorded loss, cap-insufficient credit space and repeated visit/reload. Credits match the original obligation exactly; no new bets or Circuit milestones created."
+    ]
+  }
+]

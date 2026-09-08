@@ -1,0 +1,38 @@
+# BattleFrontier_BattlePikeThreePathRoom
+
+**INERT/EXCLUDED.** Legacy facility staging/template map retained for identity and historical data support. Current native desks use central Circuit; no new native challenge may enter this old mode. Geometry and controller records are inventoried, not certified as a live attraction.
+
+[Regional experience](../08-frontier.md) · [Map source](../../baseline/source/data/maps/BattleFrontier_BattlePikeThreePathRoom/map.json) · [Scripts](../../baseline/source/data/maps/BattleFrontier_BattlePikeThreePathRoom/scripts.inc)
+
+## Current map contract
+
+`MAP_BATTLE_FRONTIER_BATTLE_PIKE_THREE_PATH_ROOM` · `LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_THREE_PATH_ROOM` · `WEATHER_NONE` · `MUS_B_PIKE`
+
+Legacy facility staging/template map retained for identity and historical data support. Current native desks use central Circuit; no new native challenge may enter this old mode. Geometry and controller records are inventoried, not certified as a live attraction.
+
+## Complete event ledger
+
+Every row is a distinct snapshot event. A KEEP applies the examined common contract and this map’s context; it is not a claim that this scene has been traversed in an emulator.
+
+| Event | Position / selector | Current behavior | Disposition / final dependency |
+|---|---|---|---|
+| `BattleFrontier_BattlePikeThreePathRoom:object_events:001` | 4,10 | [BattleFrontier_BattlePikeThreePathRoom_EventScript_Attendant](../../baseline/source/data/maps/BattleFrontier_BattlePikeThreePathRoom/scripts.inc#L51) — BattleFrontier_BattlePikeThreePathRoom_EventScript_Attendant at (4,10); You are currently in /  the 1st room… / You are currently in /  the 3rd room… | **INERT/EXCLUDED** · [W-C-FLAVOR](../common-contracts.md#w-c-flavor) |
+| `BattleFrontier_BattlePikeThreePathRoom:object_events:002` | 8,5 | [BattleFrontier_BattlePikeThreePathRoom_EventScript_HintGiver](../../baseline/source/data/maps/BattleFrontier_BattlePikeThreePathRoom/scripts.inc#L171) — BattleFrontier_BattlePikeThreePathRoom_EventScript_HintGiver at (8,5); I beg your pardon, but… //  Are you perhaps finding it difficult /  to choose your path? / I see… /  I apologize for my impertinence… | **INERT/EXCLUDED** · [W-C-STORY](../common-contracts.md#w-c-story) |
+| `BattleFrontier_BattlePikeThreePathRoom:coord_events:001` | 2,3 | [BattleFrontier_BattlePikeThreePathRoom_EventScript_LeftRoomWarp](../../baseline/source/data/scripts/battle_pike.inc#L72) — Coordinate trigger at (2,3); VAR_TEMP_1 == 0 invokes BattleFrontier_BattlePikeThreePathRoom_EventScript_LeftRoomWarp. | **INERT/EXCLUDED** · [W-C-COORD](../common-contracts.md#w-c-coord) |
+| `BattleFrontier_BattlePikeThreePathRoom:coord_events:002` | 6,3 | [BattleFrontier_BattlePikeThreePathRoom_EventScript_CenterRoomWarp](../../baseline/source/data/scripts/battle_pike.inc#L77) — Coordinate trigger at (6,3); VAR_TEMP_1 == 0 invokes BattleFrontier_BattlePikeThreePathRoom_EventScript_CenterRoomWarp. | **INERT/EXCLUDED** · [W-C-COORD](../common-contracts.md#w-c-coord) |
+| `BattleFrontier_BattlePikeThreePathRoom:coord_events:003` | 10,3 | [BattleFrontier_BattlePikeThreePathRoom_EventScript_RightRoomWarp](../../baseline/source/data/scripts/battle_pike.inc#L82) — Coordinate trigger at (10,3); VAR_TEMP_1 == 0 invokes BattleFrontier_BattlePikeThreePathRoom_EventScript_RightRoomWarp. | **INERT/EXCLUDED** · [W-C-COORD](../common-contracts.md#w-c-coord) |
+| `BattleFrontier_BattlePikeThreePathRoom:coord_events:004` | 5,10 | [BattleFrontier_BattlePikeThreePathRoom_EventScript_NoTurningBack](../../baseline/source/data/scripts/battle_pike.inc#L130) — Coordinate trigger at (5,10); VAR_TEMP_3 == 1 invokes BattleFrontier_BattlePikeThreePathRoom_EventScript_NoTurningBack. | **INERT/EXCLUDED** · [W-C-COORD](../common-contracts.md#w-c-coord) |
+| `BattleFrontier_BattlePikeThreePathRoom:coord_events:005` | 6,10 | [BattleFrontier_BattlePikeThreePathRoom_EventScript_NoTurningBack](../../baseline/source/data/scripts/battle_pike.inc#L130) — Coordinate trigger at (6,10); VAR_TEMP_3 == 1 invokes BattleFrontier_BattlePikeThreePathRoom_EventScript_NoTurningBack. | **INERT/EXCLUDED** · [W-C-COORD](../common-contracts.md#w-c-coord) |
+| `BattleFrontier_BattlePikeThreePathRoom:coord_events:006` | 6,9 | [BattleFrontier_BattlePikeThreePathRoom_EventScript_SetEnteredRoom](../../baseline/source/data/scripts/battle_pike.inc#L125) — Coordinate trigger at (6,9); VAR_TEMP_2 == 0 invokes BattleFrontier_BattlePikeThreePathRoom_EventScript_SetEnteredRoom. | **INERT/EXCLUDED** · [W-C-COORD](../common-contracts.md#w-c-coord) |
+| `BattleFrontier_BattlePikeThreePathRoom:coord_events:007` | 5,9 | [BattleFrontier_BattlePikeThreePathRoom_EventScript_SetEnteredRoom](../../baseline/source/data/scripts/battle_pike.inc#L125) — Coordinate trigger at (5,9); VAR_TEMP_2 == 0 invokes BattleFrontier_BattlePikeThreePathRoom_EventScript_SetEnteredRoom. | **INERT/EXCLUDED** · [W-C-COORD](../common-contracts.md#w-c-coord) |
+| `BattleFrontier_BattlePikeThreePathRoom:coord_events:008` | 7,9 | [BattleFrontier_BattlePikeThreePathRoom_EventScript_SetEnteredRoom](../../baseline/source/data/scripts/battle_pike.inc#L125) — Coordinate trigger at (7,9); VAR_TEMP_2 == 0 invokes BattleFrontier_BattlePikeThreePathRoom_EventScript_SetEnteredRoom. | **INERT/EXCLUDED** · [W-C-COORD](../common-contracts.md#w-c-coord) |
+| `BattleFrontier_BattlePikeThreePathRoom:coord_events:009` | 7,10 | [BattleFrontier_BattlePikeThreePathRoom_EventScript_NoTurningBack](../../baseline/source/data/scripts/battle_pike.inc#L130) — Coordinate trigger at (7,10); VAR_TEMP_3 == 1 invokes BattleFrontier_BattlePikeThreePathRoom_EventScript_NoTurningBack. | **INERT/EXCLUDED** · [W-C-COORD](../common-contracts.md#w-c-coord) |
+| `BattleFrontier_BattlePikeThreePathRoom:map_scripts:001` | MAP_SCRIPT_ON_RESUME | [BattleFrontier_BattlePikeRoom_OnResume](../../baseline/source/data/scripts/battle_pike.inc#L228) — MAP_SCRIPT_ON_RESUME calls BattleFrontier_BattlePikeRoom_OnResume. | **INERT/EXCLUDED** · [W-C-MAP_CALLBACK](../common-contracts.md#w-c-map_callback) |
+| `BattleFrontier_BattlePikeThreePathRoom:map_scripts:002` | MAP_SCRIPT_ON_FRAME_TABLE | [BattleFrontier_BattlePikeThreePathRoom_OnFrame](../../baseline/source/data/maps/BattleFrontier_BattlePikeThreePathRoom/scripts.inc#L7) — MAP_SCRIPT_ON_FRAME_TABLE calls BattleFrontier_BattlePikeThreePathRoom_OnFrame. | **INERT/EXCLUDED** · [W-C-MAP_CALLBACK](../common-contracts.md#w-c-map_callback) |
+| `BattleFrontier_BattlePikeThreePathRoom:map_scripts:003` | MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE | [BattleFrontier_BattlePikeThreePathRoom_OnWarp](../../baseline/source/data/maps/BattleFrontier_BattlePikeThreePathRoom/scripts.inc#L15) — MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE calls BattleFrontier_BattlePikeThreePathRoom_OnWarp. | **INERT/EXCLUDED** · [W-C-MAP_CALLBACK](../common-contracts.md#w-c-map_callback) |
+
+## Final specification and acceptance
+
+Retain the complete baseline map record except the exact entries in [proposed edits](../changes.md) and its owning battle/acquisition chapters. Preserve numeric IDs and unrelated flags.
+Required implementation evidence: enter from each actual neighbor; exercise locked/unlocked and before/after story states that change this map; verify objects, collision/elevation, trigger direction, destination and return route. For generic repetitions, execute the shared behavior once per meaningful engine case and inspect each instance’s specific placement. A source reference check does not replace this traversal.
+The [machine ledger](../event-ledger.json) records complete event dictionaries, local/shared label sets, every referenced dialogue label, proposal IDs, and explicit evidence boundaries.

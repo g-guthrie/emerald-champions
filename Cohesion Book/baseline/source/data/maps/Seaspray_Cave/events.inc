@@ -1,0 +1,27 @@
+@
+@ DO NOT MODIFY THIS FILE! It is auto-generated from data/maps/Seaspray_Cave/map.json
+@
+
+	.align 2
+
+Seaspray_Cave_ObjectEvents:
+	object_event 1, OBJ_EVENT_GFX_BREAKABLE_ROCK, 5, 30, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, EventScript_RockSmash, FLAG_TEMP_13
+	object_event 2, OBJ_EVENT_GFX_BREAKABLE_ROCK, 25, 31, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, EventScript_RockSmash, FLAG_TEMP_11
+	object_event 3, OBJ_EVENT_GFX_BREAKABLE_ROCK, 7, 27, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, EventScript_RockSmash, FLAG_TEMP_12
+	object_event 4, OBJ_EVENT_GFX_GOLD_ITEM_BALL, 5, 5, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, TRAINER_TYPE_NONE, ITEM_DAWN_STONE, Common_EventScript_FindItem, FLAG_EC_ITEM_SEASPRAY_DAWN_STONE
+	object_event 5, OBJ_EVENT_GFX_ITEM_BALL, 10, 24, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, TRAINER_TYPE_NONE, ITEM_LURE_BALL, Common_EventScript_FindItem, FLAG_EC_ITEM_SEASPRAY_LURE_BALL
+	object_event 6, OBJ_EVENT_GFX_MEGA_STONE, 6, 25, 3, MOVEMENT_TYPE_WALK_IN_PLACE_DOWN, 0, 0, TRAINER_TYPE_NONE, ITEM_BLASTOISINITE, Common_EventScript_FindItem, FLAG_EC_ITEM_SEASPRAY_BLASTOISINITE
+	object_event 7, OBJ_EVENT_GFX_GOLD_ITEM_BALL, 25, 34, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, TRAINER_TYPE_NONE, ITEM_DUSK_BALL, Seaspray_Cave_EventScript_DuskBallPack, FLAG_EC_ITEM_SEASPRAY_CAVE_DUSK_BALL
+	object_event 8, OBJ_EVENT_GFX_GOLD_ITEM_BALL, 46, 18, 3, MOVEMENT_TYPE_NONE, 0, 0, TRAINER_TYPE_NONE, ITEM_TIMER_BALL, Seaspray_Cave_EventScript_TimerBallPack, FLAG_EC_ITEM_SEASPRAY_TIMER_BALL
+
+Seaspray_Cave_MapWarps:
+	warp_def 9, 34, 3, 3, MAP_ROUTE115
+	warp_def 10, 10, 3, 0, MAP_SEASPRAY_CAVE_B1F
+	warp_def 31, 29, 0, 1, MAP_SEASPRAY_CAVE_B1F
+
+Seaspray_Cave_MapBGEvents:
+	bg_hidden_item_event 36, 22, 4, ITEM_DAWN_STONE, FLAG_EC_HIDDEN_ITEM_SEASPRAY_DAWN_STONE, 1, FALSE
+
+Seaspray_Cave_MapEvents::
+	map_events Seaspray_Cave_ObjectEvents, Seaspray_Cave_MapWarps, NULL, Seaspray_Cave_MapBGEvents
+

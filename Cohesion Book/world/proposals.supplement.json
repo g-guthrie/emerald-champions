@@ -1,0 +1,403 @@
+[
+  {
+    "id": "W-INTRO-GEOMETRY",
+    "title": "Show both rescue opponents without breaking the opening choreography",
+    "disposition": "REVISE",
+    "assessment": "INTRO-01 introduces a scripted two-starter rescue against Poochyena and Zigzagoon. The new field actor must match that battle while preserving the existing approach tracks and access to Birch’s bag.",
+    "targets": [
+      {
+        "source": "data/maps/Route101/map.json",
+        "label": "new LOCALID_ROUTE101_POOCHYENA",
+        "new_event": true,
+        "current": "The snapshot rescue has Birch(9,13 template), Zigzagoon(10,13 template), bag(7,14), two player triggers(10/11,19); the scene repositions its moving actors before the chase.",
+        "final_object": {
+          "local_id": "LOCALID_ROUTE101_POOCHYENA",
+          "graphics_id": "OBJ_EVENT_GFX_POOCHYENA",
+          "x": 6,
+          "y": 14,
+          "elevation": 3,
+          "movement_type": "MOVEMENT_TYPE_FACE_UP",
+          "movement_range_x": 0,
+          "movement_range_y": 0,
+          "trainer_type": "TRAINER_TYPE_NONE",
+          "trainer_sight_or_berry_tree_id": "0",
+          "script": "0",
+          "flag": "FLAG_HIDE_ROUTE_101_BIRCH_ZIGZAGOON_BATTLE"
+        },
+        "final_behavior": "Append the local object ID; reuse Birch’s rescue visibility lifecycle and do not add a second permanent hide flag."
+      },
+      {
+        "source": "data/maps/Route101/scripts.inc",
+        "label": "Route101_EventScript_StartBirchRescue",
+        "line": 19,
+        "current": "lockall\nplaybgm MUS_HELP, TRUE\nmsgbox Route101_Text_HelpMe, MSGBOX_DEFAULT\nclosemessage\nsetobjectxy LOCALID_ROUTE101_BIRCH, 0, 15\nsetobjectxy LOCALID_ROUTE101_ZIGZAGOON, 0, 16\napplymovement LOCALID_PLAYER, Route101_Movement_EnterScene\napplymovement LOCALID_ROUTE101_BIRCH, Route101_Movement_BirchRunAway1\napplymovement LOCALID_ROUTE101_ZIGZAGOON, Route101_Movement_ZigzagoonChase1\nwaitmovement 0\napplymovement LOCALID_ROUTE101_ZIGZAGOON, Route101_Movement_ZigzagoonChaseInCircles\napplymovement LOCALID_ROUTE101_BIRCH, Route101_Movement_BirchRunInCircles\nwaitmovement 0\napplymovement LOCALID_ROUTE101_BIRCH, Common_Movement_WalkInPlaceFasterRight\nwaitmovement 0\napplymovement LOCALID_ROUTE101_ZIGZAGOON, Route101_Movement_ZigzagoonFaceBirch\napplymovement LOCALID_ROUTE101_BIRCH, Route101_Movement_BirchFaceZigzagoon\nwaitmovement 0\nmsgbox Route101_Text_PleaseHelp, MSGBOX_DEFAULT\nclosemessage\nsetvar VAR_ROUTE101_STATE, 2\nreleaseall\nend",
+        "final_behavior": "Keep existing player/Birch/Zigzagoon movement and synchronization. After their circle chase and final facing movements have completed, move LOCALID_ROUTE101_POOCHYENA one ordinary step up from(6,14) to(6,13), then face left; wait for its movement. At rest Birch is(4,13), Zigzagoon(5,13), Poochyena(6,13). The bag remains(7,14). INTRO-01 supplies the two-ball help line and battle selection."
+      },
+      {
+        "source": "data/maps/Route101/scripts.inc",
+        "label": "Route101_Movement_PoochyenaCloseIn",
+        "new_label": true,
+        "final_behavior": "walk_up\nface_left\nstep_end"
+      },
+      {
+        "source": "data/maps/Route101/scripts.inc",
+        "label": "Route101_EventScript_BirchsBag",
+        "line": 218,
+        "current": "lock\nfaceplayer\nsetflag FLAG_SYS_POKEMON_GET\nsetflag FLAG_RESCUED_BIRCH\nfadescreen FADE_TO_BLACK\nremoveobject LOCALID_ROUTE101_ZIGZAGOON\nsetobjectxy LOCALID_PLAYER, 6, 13\napplymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft\nwaitmovement 0\nspecial ChooseStarter\napplymovement LOCALID_ROUTE101_BIRCH, Route101_Movement_BirchApproachPlayer\nwaitmovement 0\nmsgbox Route101_Text_YouSavedMe, MSGBOX_DEFAULT\nspecial HealPlayerParty\nsetflag FLAG_HIDE_ROUTE_101_BIRCH_ZIGZAGOON_BATTLE\nclearflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_BIRCH\nsetflag FLAG_HIDE_ROUTE_101_BIRCH_STARTERS_BAG\nsetvar VAR_BIRCH_LAB_STATE, 2\nsetvar VAR_ROUTE101_STATE, 3\nclearflag FLAG_HIDE_MAP_NAME_POPUP\ncheckplayergender\ncall_if_eq VAR_RESULT, MALE, Route101_EventScript_HideMayInBedroom\ncall_if_eq VAR_RESULT, FEMALE, Route101_EventScript_HideBrendanInBedroom\nwarp MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB, 6, 5\nwaitstate\nrelease\nend",
+        "final_behavior": "Apply INTRO-01 selection/battle state. Remove both LOCALID_ROUTE101_ZIGZAGOON and LOCALID_ROUTE101_POOCHYENA during the post-win fade before moving the player to(6,13). Hide the rescue actor group only after the agreed legitimate rescue success. Cancellation and loss retain both field foes and a reachable bag. On a loss returning to the field, relocate the player while faded/locked to(7,15), face up, before restoring foes at(5,13)/(6,13) and Birch at(4,13); retain VAR_ROUTE101_STATE=2. Only then fade in and release. The standby tile is passable elevation3, directly south of the bag and contains no trigger or other object."
+      }
+    ],
+    "dependencies": [
+      "INTRO-01 authored by early battle volume; ordinary wild/static captures remain singles"
+    ],
+    "acceptance": [
+      "Source geometry: both newactor cells are passable collision0/elevation3; the initial cell is off the chase track; the final cell is used only after the chase completes; bag is adjacent. Runtime: enter from each trigger(10,19)/(11,19); observe whole chase, approach bag from south/east, cancel starterchoice, lose/retry, win, and revisit. Confirm no actor overlap, blocked bag, duplicated Pokémon, or premature flags."
+    ]
+  },
+  {
+    "id": "W-FRONTIER-ANCILLARY",
+    "title": "Align remaining active NPC services with Circuit",
+    "disposition": "REPAIR",
+    "assessment": "Some retained lobby NPCs and record surfaces still offer rules or forecasts for unavailable facility modes. Keep their historical context while removing actionable misinformation.",
+    "targets": [
+      {
+        "source": "data/maps/BattleFrontier_BattlePyramidLobby/scripts.inc",
+        "label": "BattleFrontier_BattlePyramidLobby_EventScript_HintGiver",
+        "line": 209,
+        "current": "lockall\napplymovement LOCALID_PYRAMID_LOBBY_HINT_GIVER, Common_Movement_FacePlayer\nwaitmovement 0\nmsgbox BattleFrontier_BattlePyramidLobby_Text_TellYouWhatMisfortunesAwait, MSGBOX_DEFAULT\ncall BattleFrontier_BattlePyramidLobby_EventScript_GiveHint\nmsgbox BattleFrontier_BattlePyramidLobby_Text_BelieveMyFortunesOrNot, MSGBOX_DEFAULT\nreleaseall\nend",
+        "final_behavior": "Replace dynamic GetBattlePyramidHint forecast with a single current observer message below. Do not pretend the retired random-maze floor forecast describes the next Circuit opponent."
+      },
+      {
+        "source": "data/maps/BattleFrontier_BattlePyramidLobby/scripts.inc",
+        "label": "BattleFrontier_BattlePyramidLobby_Text_CircuitObserver",
+        "new_label": true,
+        "replacement_text": "I once read the PYRAMID's omens.\\pThe CIRCUIT asks a different\nquestion: how will your team\nanswer the board before it?\\pA prediction helps. A sound\nfallback helps even more."
+      },
+      {
+        "source": "data/maps/BattleFrontier_BattleArenaLobby/scripts.inc",
+        "label": "BattleFrontier_BattleArenaLobby_Text_OrderOfMonsImportant",
+        "line": 507,
+        "current": "In the BATTLE ARENA, the order of /  POKéMON is totally important. //  For example, if your first POKéMON /  has certain type disadvantages, /  try making your second POKéMON one /  with moves that are super effective /  against the first one. //  I think that will be a good way of /  making an effective team.",
+        "replacement_text": "Your first two Pokémon begin\nthe Circuit battle together.\\pMake the opening pair support\none another, and keep useful\nanswers in reserve."
+      },
+      {
+        "source": "data/maps/BattleFrontier_BattleArenaLobby/scripts.inc",
+        "label": "BattleFrontier_BattleArenaLobby_Text_LandingHitsWorked",
+        "line": 496,
+        "current": "I won in judging! //  Landing hits consistently on /  the opponent's POKéMON worked!",
+        "replacement_text": "I kept finding safe chances\nto land my attacks.\\pThat won my last Circuit match!"
+      },
+      {
+        "source": "data/maps/BattleFrontier_BattleArenaLobby/scripts.inc",
+        "label": "BattleFrontier_BattleArenaLobby_Text_MatchWasDeclaredDraw",
+        "line": 501,
+        "current": "Our match was declared a draw. //  When we ran out of time, both my /  POKéMON and the opponent's had about /  the same amount of HP left.",
+        "replacement_text": "The old ARENA judged a match\nafter three turns.\\pThe CIRCUIT lets a longer plan\nplay out. You still have to\nsurvive those first turns."
+      },
+      {
+        "source": "data/maps/BattleFrontier_BattleArenaLobby/scripts.inc",
+        "label": "BattleFrontier_BattleArenaLobby_Text_BadIdeaToNotAttack",
+        "line": 491,
+        "current": "I lost on the REFEREE's decision… //  I don't think it was a good idea to only /  use defensive moves and not attack…",
+        "replacement_text": "I protected every turn and\nnever built a winning position.\\pNext time, my defensive choices\nneed to create an opportunity."
+      },
+      {
+        "source": "data/maps/BattleFrontier_OutsideWest/scripts.inc",
+        "label": "BattleFrontier_OutsideWest_Text_ChooseFishingOverBattling",
+        "line": 415,
+        "current": "I believe I'm the only person here who, /  for some unknown reason, would choose /  fishing over battling. //  Huh? You can't catch anything here? /  That's disappointing…",
+        "replacement_text": "I came to fish instead of battle.\\pI'll try the water and see\nwhat bites. A good partner\ncan be its own reward."
+      },
+      {
+        "source": "data/maps/BattleFrontier_Lounge2/scripts.inc",
+        "label": "BattleFrontier_Lounge2_EventScript_FrontierManiac",
+        "line": 10,
+        "current": "lock\nfaceplayer\ngoto_if_set FLAG_MET_BATTLE_FRONTIER_MANIAC, BattleFrontier_Lounge2_EventScript_AlreadyMetManiac\nsetflag FLAG_MET_BATTLE_FRONTIER_MANIAC\nmsgbox BattleFrontier_Lounge2_Text_FrontierManiacIntro, MSGBOX_DEFAULT\ngoto BattleFrontier_Lounge2_EventScript_GiveAdvice\nend",
+        "final_behavior": "Keep greeting and personality, replace old ShowFrontierManiacMessage selection with current Circuit observer text below. Do not recommend an unoffered singles/rental/Palace mode."
+      },
+      {
+        "source": "data/maps/BattleFrontier_Lounge2/scripts.inc",
+        "label": "BattleFrontier_Lounge2_Text_CurrentCircuitNews",
+        "new_label": true,
+        "replacement_text": "Here's the latest: every desk\nenters the CHAMPIONS CIRCUIT!\\pDifferent buildings, one central\narena, and plenty of different\nteams to argue about."
+      }
+    ],
+    "dependencies": [
+      "W-CIRCUIT-RULES; preserved architecture and archived records"
+    ],
+    "acceptance": [
+      "Talk to every listed resident and invoke HintGiver repeatedly; no retired-mode forecast or challenge is advertised. Fishing statement remains neutral regardless of exact acquisition-table placement."
+    ]
+  },
+  {
+    "id": "W-EREADER-NATIVE-RETIRE",
+    "title": "Keep legacy houses while retiring unsupported native trainer battles",
+    "disposition": "REPAIR",
+    "assessment": "The live Sootopolis visitor path chooses three Pokémon and starts SPECIAL_BATTLE_EREADER. The Mossdeep RS Mystery Event door exposes a similar legacy route. No native trainer singles is the explicit final rule.",
+    "targets": [
+      {
+        "source": "data/maps/SootopolisCity_MysteryEventsHouse_1F/scripts.inc",
+        "label": "SootopolisCity_MysteryEventsHouse_1F_EventScript_OldMan",
+        "line": 68,
+        "current": "lock\nfaceplayer\nfrontier_checkvisittrainer\ngoto_if_eq VAR_RESULT, 1, SootopolisCity_MysteryEventsHouse_1F_EventScript_InvalidVisitingTrainer\ngoto_if_eq VAR_TEMP_1, 1, SootopolisCity_MysteryEventsHouse_1F_EventScript_TrainerVisiting\nmsgbox SootopolisCity_MysteryEventsHouse_1F_Text_OnlyAmusementWatchingBattles, MSGBOX_DEFAULT\nrelease\nend",
+        "final_behavior": "Replace active visitor challenge dispatch with a harmless conversation pointing to the League/Frontier. Do not call SavePlayerParty, ChooseHalfPartyForBattle, ReducePlayerPartyToSelectedMons or warp to the battle basement. Preserve stored e-Reader team data."
+      },
+      {
+        "source": "data/maps/SootopolisCity_MysteryEventsHouse_1F/scripts.inc",
+        "label": "SootopolisCity_MysteryEventsHouse_1F_OnTransition",
+        "line": 6,
+        "current": "frontier_checkvisittrainer\ncall_if_eq VAR_RESULT, 0, SootopolisCity_MysteryEventsHouse_1F_EventScript_SetTrainerVisitingLayout\ncall_if_ne VAR_SOOTOPOLIS_MYSTERY_EVENTS_STATE, 0, SootopolisCity_MysteryEventsHouse_1F_EventScript_MoveOldManToDoor\nend",
+        "final_behavior": "Keep the normal house layout and ordinary old-man placement. Do not open the basement based on imported visitor validity. Preserve IDs and data. An already saved legacy in-progress basement session must restore its saved player party and return safely to the 1F entrance without starting another battle; do not alter its recorded historical result."
+      },
+      {
+        "source": "data/maps/SootopolisCity_MysteryEventsHouse_B1F/scripts.inc",
+        "label": "SootopolisCity_MysteryEventsHouse_B1F_OnFrame",
+        "line": 10,
+        "current": "map_script_2 VAR_TEMP_1, 0, SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleVisitingTrainer\n.2byte 0",
+        "final_behavior": "Replace native battle-start entry with recovery-only handling when reached from a pre-revision in-progress save: restore original saved party if its backup is valid, reset only the retired session state, and return to1F(3,1). Never construct an e-Reader opponent or fabricate a battle outcome."
+      },
+      {
+        "source": "data/maps/SootopolisCity_MysteryEventsHouse_1F/scripts.inc",
+        "label": "SootopolisCity_MysteryEventsHouse_1F_Text_CurrentBattles",
+        "new_label": true,
+        "replacement_text": "I still enjoy a fine Pokémon\nbattle. These old visitor records\nbring back good memories.\\pFor a new challenge, seek the\nLeague or the Frontier's\nCHAMPIONS CIRCUIT."
+      },
+      {
+        "source": "data/maps/MossdeepCity_GameCorner_1F/scripts.inc",
+        "label": "RS_MysteryEventsHouse_EventScript_Door",
+        "line": 37,
+        "current": "msgbox RS_MysteryEventsHouse_Text_DoorIsLocked, MSGBOX_SIGN\nend",
+        "final_behavior": "Retain the locked-door flavor; do not expose an imported trainer challenge through this native home. Preserve externally stored data and the harmless minigame record displays in Mossdeep."
+      }
+    ],
+    "dependencies": [
+      "No native trainer singles; shared save/party-restoration integrity; external link-format decisions owned centrally"
+    ],
+    "acceptance": [
+      "New game and imported-record save: neither house starts a trainer battle. A valid existing legacy in-progress save restores the original party and exits; invalid backup is surfaced as an integrity failure, never overwritten. Records/minigame viewing and harmless residents remain usable."
+    ]
+  },
+  {
+    "id": "W-CIRCUIT-RECORDS",
+    "title": "Show actual Circuit progress on current record boards",
+    "disposition": "REPAIR",
+    "assessment": "Existing monitors read retired mode counters. A current standard competition needs records tied to the same state that governs its results and entitlements, without a second scoreboard state.",
+    "targets": [
+      {
+        "source": "data/maps/BattleFrontier_BattleTowerLobby/scripts.inc",
+        "label": "BattleFrontier_BattleTowerLobby_EventScript_ShowSinglesResults",
+        "line": 631,
+        "current": "lockall\nfrontier_results FRONTIER_FACILITY_TOWER, FRONTIER_MODE_SINGLES\nwaitbuttonpress\nspecial RemoveRecordsWindow\nreleaseall\nend",
+        "final_behavior": "Replace body with: special ChampionsCircuitBufferRecord; msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN; end. FAC-03 binds STR_VAR_1 to current VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, STR_VAR_2 to Best recorded VAR_EC_CIRCUIT_BEST_WINS (display -- when no observed record), STR_VAR_3 to lifetime VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS. Five decimal digits must fit. Viewing never mutates state; retained old facility record data does not become a live challenge."
+      },
+      {
+        "source": "data/maps/BattleFrontier_BattleTowerLobby/scripts.inc",
+        "label": "BattleFrontier_BattleTowerLobby_EventScript_ShowDoublesResults",
+        "line": 639,
+        "current": "lockall\nfrontier_results FRONTIER_FACILITY_TOWER, FRONTIER_MODE_DOUBLES\nwaitbuttonpress\nspecial RemoveRecordsWindow\nreleaseall\nend",
+        "final_behavior": "Replace body with: special ChampionsCircuitBufferRecord; msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN; end. FAC-03 binds STR_VAR_1 to current VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, STR_VAR_2 to Best recorded VAR_EC_CIRCUIT_BEST_WINS (display -- when no observed record), STR_VAR_3 to lifetime VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS. Five decimal digits must fit. Viewing never mutates state; retained old facility record data does not become a live challenge."
+      },
+      {
+        "source": "data/maps/BattleFrontier_BattleTowerLobby/scripts.inc",
+        "label": "BattleFrontier_BattleTowerLobby_EventScript_ShowMultisResults",
+        "line": 647,
+        "current": "lockall\nfrontier_results FRONTIER_FACILITY_TOWER, FRONTIER_MODE_MULTIS\nwaitbuttonpress\nspecial RemoveRecordsWindow\nreleaseall\nend",
+        "final_behavior": "Replace body with: special ChampionsCircuitBufferRecord; msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN; end. FAC-03 binds STR_VAR_1 to current VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, STR_VAR_2 to Best recorded VAR_EC_CIRCUIT_BEST_WINS (display -- when no observed record), STR_VAR_3 to lifetime VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS. Five decimal digits must fit. Viewing never mutates state; retained old facility record data does not become a live challenge."
+      },
+      {
+        "source": "data/maps/BattleFrontier_BattleTowerLobby/scripts.inc",
+        "label": "BattleFrontier_BattleTowerLobby_EventScript_ShowLinkMultisResults",
+        "line": 655,
+        "current": "lockall\nfrontier_results FRONTIER_FACILITY_TOWER, FRONTIER_MODE_LINK_MULTIS\nwaitbuttonpress\nspecial RemoveRecordsWindow\nreleaseall\nend",
+        "final_behavior": "Replace body with: special ChampionsCircuitBufferRecord; msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN; end. FAC-03 binds STR_VAR_1 to current VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, STR_VAR_2 to Best recorded VAR_EC_CIRCUIT_BEST_WINS (display -- when no observed record), STR_VAR_3 to lifetime VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS. Five decimal digits must fit. Viewing never mutates state; retained old facility record data does not become a live challenge."
+      },
+      {
+        "source": "data/maps/BattleFrontier_BattleDomeLobby/scripts.inc",
+        "label": "BattleFrontier_BattleDomeLobby_EventScript_ShowSinglesResults",
+        "line": 327,
+        "current": "lockall\nfrontier_results FRONTIER_FACILITY_DOME, FRONTIER_MODE_SINGLES\nwaitbuttonpress\nspecial RemoveRecordsWindow\nreleaseall\nend",
+        "final_behavior": "Replace body with: special ChampionsCircuitBufferRecord; msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN; end. FAC-03 binds STR_VAR_1 to current VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, STR_VAR_2 to Best recorded VAR_EC_CIRCUIT_BEST_WINS (display -- when no observed record), STR_VAR_3 to lifetime VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS. Five decimal digits must fit. Viewing never mutates state; retained old facility record data does not become a live challenge."
+      },
+      {
+        "source": "data/maps/BattleFrontier_BattleDomeLobby/scripts.inc",
+        "label": "BattleFrontier_BattleDomeLobby_EventScript_ShowPrevTourneyTree",
+        "line": 343,
+        "current": "dome_get DOME_DATA_PREV_TOURNEY_TYPE\ncall_if_eq VAR_RESULT, 0, BattleFrontier_BattleDomeLobby_EventScript_PrevTourneyResultsSinglesLv50\ncall_if_eq VAR_RESULT, 1, BattleFrontier_BattleDomeLobby_EventScript_PrevTourneyResultsDoublesLv50\ncall_if_eq VAR_RESULT, 2, BattleFrontier_BattleDomeLobby_EventScript_PrevTourneyResultsSinglesLvOpen\ncall_if_eq VAR_RESULT, 3, BattleFrontier_BattleDomeLobby_EventScript_PrevTourneyResultsDoublesLvOpen\nfadescreen FADE_TO_BLACK\ndome_showprevtourneytree\nwaitstate\nend",
+        "final_behavior": "Replace body with: special ChampionsCircuitBufferRecord; msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN; end. FAC-03 binds STR_VAR_1 to current VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, STR_VAR_2 to Best recorded VAR_EC_CIRCUIT_BEST_WINS (display -- when no observed record), STR_VAR_3 to lifetime VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS. Five decimal digits must fit. Viewing never mutates state; retained old facility record data does not become a live challenge."
+      },
+      {
+        "source": "data/maps/BattleFrontier_BattleDomeLobby/scripts.inc",
+        "label": "BattleFrontier_BattleDomeLobby_EventScript_ShowDoublesResults",
+        "line": 335,
+        "current": "lockall\nfrontier_results FRONTIER_FACILITY_DOME, FRONTIER_MODE_DOUBLES\nwaitbuttonpress\nspecial RemoveRecordsWindow\nreleaseall\nend",
+        "final_behavior": "Replace body with: special ChampionsCircuitBufferRecord; msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN; end. FAC-03 binds STR_VAR_1 to current VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, STR_VAR_2 to Best recorded VAR_EC_CIRCUIT_BEST_WINS (display -- when no observed record), STR_VAR_3 to lifetime VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS. Five decimal digits must fit. Viewing never mutates state; retained old facility record data does not become a live challenge."
+      },
+      {
+        "source": "data/maps/BattleFrontier_BattlePalaceLobby/scripts.inc",
+        "label": "BattleFrontier_BattlePalaceLobby_EventScript_ShowSinglesResults",
+        "line": 299,
+        "current": "lockall\nfrontier_results FRONTIER_FACILITY_PALACE, FRONTIER_MODE_SINGLES\nwaitbuttonpress\nspecial RemoveRecordsWindow\nreleaseall\nend",
+        "final_behavior": "Replace body with: special ChampionsCircuitBufferRecord; msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN; end. FAC-03 binds STR_VAR_1 to current VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, STR_VAR_2 to Best recorded VAR_EC_CIRCUIT_BEST_WINS (display -- when no observed record), STR_VAR_3 to lifetime VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS. Five decimal digits must fit. Viewing never mutates state; retained old facility record data does not become a live challenge."
+      },
+      {
+        "source": "data/maps/BattleFrontier_BattlePalaceLobby/scripts.inc",
+        "label": "BattleFrontier_BattlePalaceLobby_EventScript_ShowDoublesResults",
+        "line": 307,
+        "current": "lockall\nfrontier_results FRONTIER_FACILITY_PALACE, FRONTIER_MODE_DOUBLES\nwaitbuttonpress\nspecial RemoveRecordsWindow\nreleaseall\nend",
+        "final_behavior": "Replace body with: special ChampionsCircuitBufferRecord; msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN; end. FAC-03 binds STR_VAR_1 to current VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, STR_VAR_2 to Best recorded VAR_EC_CIRCUIT_BEST_WINS (display -- when no observed record), STR_VAR_3 to lifetime VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS. Five decimal digits must fit. Viewing never mutates state; retained old facility record data does not become a live challenge."
+      },
+      {
+        "source": "data/maps/BattleFrontier_BattlePyramidLobby/scripts.inc",
+        "label": "BattleFrontier_BattlePyramidLobby_EventScript_ShowResults",
+        "line": 364,
+        "current": "lockall\nfrontier_results FRONTIER_FACILITY_PYRAMID\nwaitbuttonpress\nspecial RemoveRecordsWindow\nreleaseall\nend",
+        "final_behavior": "Replace body with: special ChampionsCircuitBufferRecord; msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN; end. FAC-03 binds STR_VAR_1 to current VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, STR_VAR_2 to Best recorded VAR_EC_CIRCUIT_BEST_WINS (display -- when no observed record), STR_VAR_3 to lifetime VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS. Five decimal digits must fit. Viewing never mutates state; retained old facility record data does not become a live challenge."
+      },
+      {
+        "source": "data/maps/BattleFrontier_BattleArenaLobby/scripts.inc",
+        "label": "BattleFrontier_BattleArenaLobby_EventScript_ShowResults",
+        "line": 292,
+        "current": "lockall\nfrontier_results FRONTIER_FACILITY_ARENA\nwaitbuttonpress\nspecial RemoveRecordsWindow\nreleaseall\nend",
+        "final_behavior": "Replace body with: special ChampionsCircuitBufferRecord; msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN; end. FAC-03 binds STR_VAR_1 to current VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, STR_VAR_2 to Best recorded VAR_EC_CIRCUIT_BEST_WINS (display -- when no observed record), STR_VAR_3 to lifetime VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS. Five decimal digits must fit. Viewing never mutates state; retained old facility record data does not become a live challenge."
+      },
+      {
+        "source": "data/maps/BattleFrontier_BattleFactoryLobby/scripts.inc",
+        "label": "BattleFrontier_BattleFactoryLobby_EventScript_ShowSinglesResults",
+        "line": 242,
+        "current": "lockall\nfrontier_results FRONTIER_FACILITY_FACTORY, FRONTIER_MODE_SINGLES\nwaitbuttonpress\nspecial RemoveRecordsWindow\nreleaseall\nend",
+        "final_behavior": "Replace body with: special ChampionsCircuitBufferRecord; msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN; end. FAC-03 binds STR_VAR_1 to current VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, STR_VAR_2 to Best recorded VAR_EC_CIRCUIT_BEST_WINS (display -- when no observed record), STR_VAR_3 to lifetime VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS. Five decimal digits must fit. Viewing never mutates state; retained old facility record data does not become a live challenge."
+      },
+      {
+        "source": "data/maps/BattleFrontier_BattleFactoryLobby/scripts.inc",
+        "label": "BattleFrontier_BattleFactoryLobby_EventScript_ShowDoublesResults",
+        "line": 250,
+        "current": "lockall\nfrontier_results FRONTIER_FACILITY_FACTORY, FRONTIER_MODE_DOUBLES\nwaitbuttonpress\nspecial RemoveRecordsWindow\nreleaseall\nend",
+        "final_behavior": "Replace body with: special ChampionsCircuitBufferRecord; msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN; end. FAC-03 binds STR_VAR_1 to current VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, STR_VAR_2 to Best recorded VAR_EC_CIRCUIT_BEST_WINS (display -- when no observed record), STR_VAR_3 to lifetime VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS. Five decimal digits must fit. Viewing never mutates state; retained old facility record data does not become a live challenge."
+      },
+      {
+        "source": "data/maps/BattleFrontier_BattlePikeLobby/scripts.inc",
+        "label": "BattleFrontier_BattlePikeLobby_EventScript_ShowResults",
+        "line": 197,
+        "current": "lockall\nfrontier_results FRONTIER_FACILITY_PIKE\nwaitbuttonpress\nspecial RemoveRecordsWindow\nreleaseall\nend",
+        "final_behavior": "Replace body with: special ChampionsCircuitBufferRecord; msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN; end. FAC-03 binds STR_VAR_1 to current VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, STR_VAR_2 to Best recorded VAR_EC_CIRCUIT_BEST_WINS (display -- when no observed record), STR_VAR_3 to lifetime VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS. Five decimal digits must fit. Viewing never mutates state; retained old facility record data does not become a live challenge."
+      },
+      {
+        "source": "data/maps/BattleFrontier_RankingHall/scripts.inc",
+        "label": "BattleFrontier_RankingHall_EventScript_TowerSinglesRecords",
+        "line": 4,
+        "current": "lockall\nsetvar VAR_0x8005, RANKING_HALL_TOWER_SINGLES\ngoto BattleFrontier_RankingHall_EventScript_ShowRecords\nend",
+        "final_behavior": "Replace body with: special ChampionsCircuitBufferRecord; msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN; end. FAC-03 binds STR_VAR_1 to current VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, STR_VAR_2 to Best recorded VAR_EC_CIRCUIT_BEST_WINS (display -- when no observed record), STR_VAR_3 to lifetime VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS. Five decimal digits must fit. Viewing never mutates state; retained old facility record data does not become a live challenge."
+      },
+      {
+        "source": "data/maps/BattleFrontier_RankingHall/scripts.inc",
+        "label": "BattleFrontier_RankingHall_EventScript_TowerDoublesRecords",
+        "line": 10,
+        "current": "lockall\nsetvar VAR_0x8005, RANKING_HALL_TOWER_DOUBLES\ngoto BattleFrontier_RankingHall_EventScript_ShowRecords\nend",
+        "final_behavior": "Replace body with: special ChampionsCircuitBufferRecord; msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN; end. FAC-03 binds STR_VAR_1 to current VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, STR_VAR_2 to Best recorded VAR_EC_CIRCUIT_BEST_WINS (display -- when no observed record), STR_VAR_3 to lifetime VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS. Five decimal digits must fit. Viewing never mutates state; retained old facility record data does not become a live challenge."
+      },
+      {
+        "source": "data/maps/BattleFrontier_RankingHall/scripts.inc",
+        "label": "BattleFrontier_RankingHall_EventScript_TowerMultisRecords",
+        "line": 16,
+        "current": "lockall\nsetvar VAR_0x8005, RANKING_HALL_TOWER_MULTIS\ngoto BattleFrontier_RankingHall_EventScript_ShowRecords\nend",
+        "final_behavior": "Replace body with: special ChampionsCircuitBufferRecord; msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN; end. FAC-03 binds STR_VAR_1 to current VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, STR_VAR_2 to Best recorded VAR_EC_CIRCUIT_BEST_WINS (display -- when no observed record), STR_VAR_3 to lifetime VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS. Five decimal digits must fit. Viewing never mutates state; retained old facility record data does not become a live challenge."
+      },
+      {
+        "source": "data/maps/BattleFrontier_RankingHall/scripts.inc",
+        "label": "BattleFrontier_RankingHall_EventScript_TowerLinkRecords",
+        "line": 22,
+        "current": "lockall\nsetvar VAR_0x8005, RANKING_HALL_TOWER_LINK\ngoto BattleFrontier_RankingHall_EventScript_ShowRecords\nend",
+        "final_behavior": "Replace body with: special ChampionsCircuitBufferRecord; msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN; end. FAC-03 binds STR_VAR_1 to current VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, STR_VAR_2 to Best recorded VAR_EC_CIRCUIT_BEST_WINS (display -- when no observed record), STR_VAR_3 to lifetime VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS. Five decimal digits must fit. Viewing never mutates state; retained old facility record data does not become a live challenge."
+      },
+      {
+        "source": "data/maps/BattleFrontier_RankingHall/scripts.inc",
+        "label": "BattleFrontier_RankingHall_EventScript_ArenaRecords",
+        "line": 28,
+        "current": "lockall\nsetvar VAR_0x8005, RANKING_HALL_ARENA\ngoto BattleFrontier_RankingHall_EventScript_ShowRecords\nend",
+        "final_behavior": "Replace body with: special ChampionsCircuitBufferRecord; msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN; end. FAC-03 binds STR_VAR_1 to current VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, STR_VAR_2 to Best recorded VAR_EC_CIRCUIT_BEST_WINS (display -- when no observed record), STR_VAR_3 to lifetime VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS. Five decimal digits must fit. Viewing never mutates state; retained old facility record data does not become a live challenge."
+      },
+      {
+        "source": "data/maps/BattleFrontier_RankingHall/scripts.inc",
+        "label": "BattleFrontier_RankingHall_EventScript_PalaceRecords",
+        "line": 34,
+        "current": "lockall\nsetvar VAR_0x8005, RANKING_HALL_PALACE\ngoto BattleFrontier_RankingHall_EventScript_ShowRecords\nend",
+        "final_behavior": "Replace body with: special ChampionsCircuitBufferRecord; msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN; end. FAC-03 binds STR_VAR_1 to current VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, STR_VAR_2 to Best recorded VAR_EC_CIRCUIT_BEST_WINS (display -- when no observed record), STR_VAR_3 to lifetime VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS. Five decimal digits must fit. Viewing never mutates state; retained old facility record data does not become a live challenge."
+      },
+      {
+        "source": "data/maps/BattleFrontier_RankingHall/scripts.inc",
+        "label": "BattleFrontier_RankingHall_EventScript_FactoryRecords",
+        "line": 40,
+        "current": "lockall\nsetvar VAR_0x8005, RANKING_HALL_FACTORY\ngoto BattleFrontier_RankingHall_EventScript_ShowRecords\nend",
+        "final_behavior": "Replace body with: special ChampionsCircuitBufferRecord; msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN; end. FAC-03 binds STR_VAR_1 to current VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, STR_VAR_2 to Best recorded VAR_EC_CIRCUIT_BEST_WINS (display -- when no observed record), STR_VAR_3 to lifetime VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS. Five decimal digits must fit. Viewing never mutates state; retained old facility record data does not become a live challenge."
+      },
+      {
+        "source": "data/maps/BattleFrontier_RankingHall/scripts.inc",
+        "label": "BattleFrontier_RankingHall_EventScript_DomeRecords",
+        "line": 46,
+        "current": "lockall\nsetvar VAR_0x8005, RANKING_HALL_DOME\ngoto BattleFrontier_RankingHall_EventScript_ShowRecords\nend",
+        "final_behavior": "Replace body with: special ChampionsCircuitBufferRecord; msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN; end. FAC-03 binds STR_VAR_1 to current VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, STR_VAR_2 to Best recorded VAR_EC_CIRCUIT_BEST_WINS (display -- when no observed record), STR_VAR_3 to lifetime VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS. Five decimal digits must fit. Viewing never mutates state; retained old facility record data does not become a live challenge."
+      },
+      {
+        "source": "data/maps/BattleFrontier_RankingHall/scripts.inc",
+        "label": "BattleFrontier_RankingHall_EventScript_PikeRecords",
+        "line": 52,
+        "current": "lockall\nsetvar VAR_0x8005, RANKING_HALL_PIKE\ngoto BattleFrontier_RankingHall_EventScript_ShowRecords\nend",
+        "final_behavior": "Replace body with: special ChampionsCircuitBufferRecord; msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN; end. FAC-03 binds STR_VAR_1 to current VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, STR_VAR_2 to Best recorded VAR_EC_CIRCUIT_BEST_WINS (display -- when no observed record), STR_VAR_3 to lifetime VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS. Five decimal digits must fit. Viewing never mutates state; retained old facility record data does not become a live challenge."
+      },
+      {
+        "source": "data/maps/BattleFrontier_RankingHall/scripts.inc",
+        "label": "BattleFrontier_RankingHall_EventScript_PyramidRecords",
+        "line": 58,
+        "current": "lockall\nsetvar VAR_0x8005, RANKING_HALL_PYRAMID\ngoto BattleFrontier_RankingHall_EventScript_ShowRecords\nend",
+        "final_behavior": "Replace body with: special ChampionsCircuitBufferRecord; msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN; end. FAC-03 binds STR_VAR_1 to current VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, STR_VAR_2 to Best recorded VAR_EC_CIRCUIT_BEST_WINS (display -- when no observed record), STR_VAR_3 to lifetime VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS. Five decimal digits must fit. Viewing never mutates state; retained old facility record data does not become a live challenge."
+      },
+      {
+        "source": "data/maps/BattleFrontier_RankingHall/scripts.inc",
+        "label": "BattleFrontier_RankingHall_EventScript_DomePikeFactoryRecordsSign",
+        "line": 77,
+        "current": "msgbox BattleFrontier_RankingHall_Text_DomePikeFactoryRecords, MSGBOX_SIGN\nend",
+        "final_behavior": "Replace body with: special ChampionsCircuitBufferRecord; msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN; end. FAC-03 binds STR_VAR_1 to current VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, STR_VAR_2 to Best recorded VAR_EC_CIRCUIT_BEST_WINS (display -- when no observed record), STR_VAR_3 to lifetime VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS. Five decimal digits must fit. Viewing never mutates state; retained old facility record data does not become a live challenge."
+      },
+      {
+        "source": "data/maps/BattleFrontier_RankingHall/scripts.inc",
+        "label": "BattleFrontier_RankingHall_EventScript_PalaceArenaPyramidRecordsSIgn",
+        "line": 81,
+        "current": "msgbox BattleFrontier_RankingHall_Text_PalaceArenaPyramidRecords, MSGBOX_SIGN\nend",
+        "final_behavior": "Replace body with: special ChampionsCircuitBufferRecord; msgbox BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord, MSGBOX_SIGN; end. FAC-03 binds STR_VAR_1 to current VAR_CHAMPIONS_CIRCUIT_CURRENT_WINS, STR_VAR_2 to Best recorded VAR_EC_CIRCUIT_BEST_WINS (display -- when no observed record), STR_VAR_3 to lifetime VAR_CHAMPIONS_CIRCUIT_TOTAL_WINS. Five decimal digits must fit. Viewing never mutates state; retained old facility record data does not become a live challenge."
+      },
+      {
+        "source": "data/maps/BattleFrontier_BattleTowerLobby/scripts.inc",
+        "label": "BattleFrontier_BattleTowerLobby_Text_CurrentCircuitRecord",
+        "new_label": true,
+        "replacement_text": "CHAMPIONS CIRCUIT\\pCurrent run: {STR_VAR_1}\\pBest recorded: {STR_VAR_2}\\pTotal wins: {STR_VAR_3}"
+      },
+      {
+        "source": "data/maps/BattleFrontier_RankingHall/scripts.inc",
+        "label": "BattleFrontier_RankingHall_Text_ExplainRankingHall",
+        "line": 103,
+        "current": "This is the RANKING HALL. //  This is where we recognize the immortal /  TRAINERS who left great records in /  BATTLE FRONTIER events.",
+        "replacement_text": "This hall celebrates the\nFrontier's competitive history.\\pToday's boards show CHAMPIONS\nCIRCUIT results: the current run,\nbest recorded run, and total wins."
+      },
+      {
+        "source": "data/maps/BattleFrontier_RankingHall/scripts.inc",
+        "label": "BattleFrontier_RankingHall_Text_DomePikeFactoryRecords",
+        "line": 109,
+        "current": "BATTLE DOME, BATTLE PIKE, /  and BATTLE FACTORY Records",
+        "replacement_text": "CHAMPIONS CIRCUIT RECORDS\nCurrent run, best recorded, total wins"
+      },
+      {
+        "source": "data/maps/BattleFrontier_RankingHall/scripts.inc",
+        "label": "BattleFrontier_RankingHall_Text_PalaceArenaPyramidRecords",
+        "line": 113,
+        "current": "BATTLE PALACE, BATTLE ARENA, /  and BATTLE PYRAMID Records",
+        "replacement_text": "CHAMPIONS CIRCUIT RECORDS\nCurrent run, best recorded, total wins"
+      }
+    ],
+    "dependencies": [
+      "FAC-03: CURRENT_WINS0x40DB, TOTAL_WINS0x40DC, proposed BEST_WINS0x40E3; initialize best only from observed currentrun, never infer historical best from lifetime. Legacy record data preserved"
+    ],
+    "acceptance": [
+      "After Circuit wins, withdrawal, loss and reload, each current board matches the same authoritative counters. Tent/Hill wins do not change these values. Viewing any record cannot claim rewards, alter streaks or start a battle."
+    ]
+  }
+]

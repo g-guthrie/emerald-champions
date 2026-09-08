@@ -1,0 +1,12 @@
+{
+  "changed_team_move_legality_issues": [],
+  "authored_branches": 266,
+  "encounters": 224,
+  "pokemon_slots": 1146,
+  "all_individually_reviewed": true,
+  "master_compile_identical": true,
+  "native_early_rewrite_identical": true,
+  "native_examined": 266,
+  "native_problems": [],
+  "runtime_tested": false
+}

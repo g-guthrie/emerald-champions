@@ -1,0 +1,2144 @@
+[
+  {
+    "frame": 1200,
+    "duration": 1,
+    "key": "START",
+    "action_index": 1
+  },
+  {
+    "frame": 1740,
+    "duration": 1,
+    "key": "START",
+    "action_index": 19
+  },
+  {
+    "frame": 1920,
+    "duration": 1,
+    "key": "A",
+    "action_index": 25
+  },
+  {
+    "frame": 2520,
+    "duration": 1,
+    "key": "A",
+    "action_index": 45
+  },
+  {
+    "frame": 2640,
+    "duration": 1,
+    "key": "A",
+    "action_index": 49
+  },
+  {
+    "frame": 2760,
+    "duration": 1,
+    "key": "A",
+    "action_index": 53
+  },
+  {
+    "frame": 3000,
+    "duration": 1,
+    "key": "A",
+    "action_index": 61
+  },
+  {
+    "frame": 3120,
+    "duration": 1,
+    "key": "A",
+    "action_index": 65
+  },
+  {
+    "frame": 3240,
+    "duration": 1,
+    "key": "A",
+    "action_index": 69
+  },
+  {
+    "frame": 3360,
+    "duration": 1,
+    "key": "A",
+    "action_index": 73
+  },
+  {
+    "frame": 3480,
+    "duration": 1,
+    "key": "A",
+    "action_index": 77
+  },
+  {
+    "frame": 3600,
+    "duration": 1,
+    "key": "A",
+    "action_index": 81
+  },
+  {
+    "frame": 3720,
+    "duration": 1,
+    "key": "A",
+    "action_index": 85
+  },
+  {
+    "frame": 3840,
+    "duration": 1,
+    "key": "A",
+    "action_index": 89
+  },
+  {
+    "frame": 3960,
+    "duration": 1,
+    "key": "A",
+    "action_index": 93
+  },
+  {
+    "frame": 4080,
+    "duration": 1,
+    "key": "A",
+    "action_index": 97
+  },
+  {
+    "frame": 4200,
+    "duration": 1,
+    "key": "A",
+    "action_index": 101
+  },
+  {
+    "frame": 4320,
+    "duration": 1,
+    "key": "A",
+    "action_index": 105
+  },
+  {
+    "frame": 4440,
+    "duration": 1,
+    "key": "A",
+    "action_index": 109
+  },
+  {
+    "frame": 4560,
+    "duration": 1,
+    "key": "A",
+    "action_index": 113
+  },
+  {
+    "frame": 4680,
+    "duration": 1,
+    "key": "A",
+    "action_index": 117
+  },
+  {
+    "frame": 4800,
+    "duration": 1,
+    "key": "A",
+    "action_index": 121
+  },
+  {
+    "frame": 4920,
+    "duration": 1,
+    "key": "A",
+    "action_index": 125
+  },
+  {
+    "frame": 5040,
+    "duration": 1,
+    "key": "A",
+    "action_index": 129
+  },
+  {
+    "frame": 5160,
+    "duration": 1,
+    "key": "A",
+    "action_index": 133
+  },
+  {
+    "frame": 5280,
+    "duration": 1,
+    "key": "A",
+    "action_index": 137
+  },
+  {
+    "frame": 5400,
+    "duration": 1,
+    "key": "A",
+    "action_index": 141
+  },
+  {
+    "frame": 5520,
+    "duration": 1,
+    "key": "A",
+    "action_index": 145
+  },
+  {
+    "frame": 5640,
+    "duration": 1,
+    "key": "A",
+    "action_index": 149
+  },
+  {
+    "frame": 5760,
+    "duration": 1,
+    "key": "A",
+    "action_index": 153
+  },
+  {
+    "frame": 5880,
+    "duration": 1,
+    "key": "A",
+    "action_index": 157
+  },
+  {
+    "frame": 6000,
+    "duration": 1,
+    "key": "A",
+    "action_index": 161
+  },
+  {
+    "frame": 6120,
+    "duration": 1,
+    "key": "A",
+    "action_index": 165
+  },
+  {
+    "frame": 6240,
+    "duration": 1,
+    "key": "A",
+    "action_index": 169
+  },
+  {
+    "frame": 6360,
+    "duration": 1,
+    "key": "A",
+    "action_index": 173
+  },
+  {
+    "frame": 6480,
+    "duration": 1,
+    "key": "A",
+    "action_index": 177
+  },
+  {
+    "frame": 6600,
+    "duration": 1,
+    "key": "A",
+    "action_index": 181
+  },
+  {
+    "frame": 6720,
+    "duration": 1,
+    "key": "A",
+    "action_index": 185
+  },
+  {
+    "frame": 6840,
+    "duration": 1,
+    "key": "A",
+    "action_index": 189
+  },
+  {
+    "frame": 6960,
+    "duration": 1,
+    "key": "A",
+    "action_index": 193
+  },
+  {
+    "frame": 7080,
+    "duration": 1,
+    "key": "A",
+    "action_index": 197
+  },
+  {
+    "frame": 7200,
+    "duration": 1,
+    "key": "A",
+    "action_index": 201
+  },
+  {
+    "frame": 7320,
+    "duration": 1,
+    "key": "A",
+    "action_index": 205
+  },
+  {
+    "frame": 7440,
+    "duration": 1,
+    "key": "A",
+    "action_index": 209
+  },
+  {
+    "frame": 7470,
+    "duration": 1,
+    "key": "START",
+    "action_index": 210
+  },
+  {
+    "frame": 7500,
+    "duration": 1,
+    "key": "A",
+    "action_index": 211
+  },
+  {
+    "frame": 7770,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 220
+  },
+  {
+    "frame": 7800,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 221
+  },
+  {
+    "frame": 7830,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 222
+  },
+  {
+    "frame": 7860,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 223
+  },
+  {
+    "frame": 7890,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 224
+  },
+  {
+    "frame": 7920,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 225
+  },
+  {
+    "frame": 7950,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 226
+  },
+  {
+    "frame": 7980,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 227
+  },
+  {
+    "frame": 8010,
+    "duration": 1,
+    "key": "DOWN",
+    "action_index": 228
+  },
+  {
+    "frame": 8040,
+    "duration": 1,
+    "key": "DOWN",
+    "action_index": 229
+  },
+  {
+    "frame": 8070,
+    "duration": 1,
+    "key": "START",
+    "action_index": 230
+  },
+  {
+    "frame": 8160,
+    "duration": 1,
+    "key": "A",
+    "action_index": 233
+  },
+  {
+    "frame": 8400,
+    "duration": 1,
+    "key": "A",
+    "action_index": 241
+  },
+  {
+    "frame": 8520,
+    "duration": 1,
+    "key": "A",
+    "action_index": 245
+  },
+  {
+    "frame": 8640,
+    "duration": 1,
+    "key": "A",
+    "action_index": 249
+  },
+  {
+    "frame": 8760,
+    "duration": 1,
+    "key": "A",
+    "action_index": 253
+  },
+  {
+    "frame": 9120,
+    "duration": 1,
+    "key": "A",
+    "action_index": 265
+  },
+  {
+    "frame": 9240,
+    "duration": 1,
+    "key": "A",
+    "action_index": 269
+  },
+  {
+    "frame": 9360,
+    "duration": 1,
+    "key": "A",
+    "action_index": 273
+  },
+  {
+    "frame": 9480,
+    "duration": 1,
+    "key": "A",
+    "action_index": 277
+  },
+  {
+    "frame": 9600,
+    "duration": 1,
+    "key": "A",
+    "action_index": 281
+  },
+  {
+    "frame": 10770,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 320
+  },
+  {
+    "frame": 10800,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 321
+  },
+  {
+    "frame": 10830,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 322
+  },
+  {
+    "frame": 11100,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 331
+  },
+  {
+    "frame": 11130,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 332
+  },
+  {
+    "frame": 11160,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 333
+  },
+  {
+    "frame": 11370,
+    "duration": 1,
+    "key": "A",
+    "action_index": 340
+  },
+  {
+    "frame": 11490,
+    "duration": 1,
+    "key": "A",
+    "action_index": 344
+  },
+  {
+    "frame": 11610,
+    "duration": 1,
+    "key": "A",
+    "action_index": 348
+  },
+  {
+    "frame": 11730,
+    "duration": 1,
+    "key": "A",
+    "action_index": 352
+  },
+  {
+    "frame": 11850,
+    "duration": 1,
+    "key": "A",
+    "action_index": 356
+  },
+  {
+    "frame": 11970,
+    "duration": 1,
+    "key": "A",
+    "action_index": 360
+  },
+  {
+    "frame": 12090,
+    "duration": 1,
+    "key": "A",
+    "action_index": 364
+  },
+  {
+    "frame": 12420,
+    "duration": 1,
+    "key": "A",
+    "action_index": 375
+  },
+  {
+    "frame": 12540,
+    "duration": 1,
+    "key": "A",
+    "action_index": 379
+  },
+  {
+    "frame": 12660,
+    "duration": 1,
+    "key": "A",
+    "action_index": 383
+  },
+  {
+    "frame": 12780,
+    "duration": 1,
+    "key": "A",
+    "action_index": 387
+  },
+  {
+    "frame": 12900,
+    "duration": 1,
+    "key": "A",
+    "action_index": 391
+  },
+  {
+    "frame": 13020,
+    "duration": 1,
+    "key": "A",
+    "action_index": 395
+  },
+  {
+    "frame": 13140,
+    "duration": 1,
+    "key": "A",
+    "action_index": 399
+  },
+  {
+    "frame": 13260,
+    "duration": 1,
+    "key": "A",
+    "action_index": 403
+  },
+  {
+    "frame": 13380,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 407
+  },
+  {
+    "frame": 13410,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 408
+  },
+  {
+    "frame": 13440,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 409
+  },
+  {
+    "frame": 13470,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 410
+  },
+  {
+    "frame": 13500,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 411
+  },
+  {
+    "frame": 13530,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 412
+  },
+  {
+    "frame": 13830,
+    "duration": 1,
+    "key": "LEFT",
+    "action_index": 422
+  },
+  {
+    "frame": 13860,
+    "duration": 1,
+    "key": "LEFT",
+    "action_index": 423
+  },
+  {
+    "frame": 13890,
+    "duration": 1,
+    "key": "LEFT",
+    "action_index": 424
+  },
+  {
+    "frame": 13920,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 425
+  },
+  {
+    "frame": 13950,
+    "duration": 1,
+    "key": "A",
+    "action_index": 426
+  },
+  {
+    "frame": 14070,
+    "duration": 1,
+    "key": "A",
+    "action_index": 430
+  },
+  {
+    "frame": 14280,
+    "duration": 1,
+    "key": "A",
+    "action_index": 437
+  },
+  {
+    "frame": 14550,
+    "duration": 1,
+    "key": "A",
+    "action_index": 446
+  },
+  {
+    "frame": 14670,
+    "duration": 1,
+    "key": "A",
+    "action_index": 450
+  },
+  {
+    "frame": 15060,
+    "duration": 1,
+    "key": "A",
+    "action_index": 463
+  },
+  {
+    "frame": 15150,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 466
+  },
+  {
+    "frame": 15180,
+    "duration": 1,
+    "key": "A",
+    "action_index": 467
+  },
+  {
+    "frame": 15570,
+    "duration": 1,
+    "key": "A",
+    "action_index": 480
+  },
+  {
+    "frame": 15690,
+    "duration": 1,
+    "key": "A",
+    "action_index": 484
+  },
+  {
+    "frame": 15810,
+    "duration": 1,
+    "key": "A",
+    "action_index": 488
+  },
+  {
+    "frame": 15930,
+    "duration": 1,
+    "key": "A",
+    "action_index": 492
+  },
+  {
+    "frame": 16050,
+    "duration": 1,
+    "key": "A",
+    "action_index": 496
+  },
+  {
+    "frame": 16170,
+    "duration": 1,
+    "key": "A",
+    "action_index": 500
+  },
+  {
+    "frame": 16440,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 509
+  },
+  {
+    "frame": 16470,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 510
+  },
+  {
+    "frame": 16500,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 511
+  },
+  {
+    "frame": 16530,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 512
+  },
+  {
+    "frame": 16560,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 513
+  },
+  {
+    "frame": 16950,
+    "duration": 1,
+    "key": "LEFT",
+    "action_index": 526
+  },
+  {
+    "frame": 16980,
+    "duration": 1,
+    "key": "LEFT",
+    "action_index": 527
+  },
+  {
+    "frame": 17010,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 528
+  },
+  {
+    "frame": 17040,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 529
+  },
+  {
+    "frame": 17430,
+    "duration": 1,
+    "key": "A",
+    "action_index": 542
+  },
+  {
+    "frame": 17550,
+    "duration": 1,
+    "key": "A",
+    "action_index": 546
+  },
+  {
+    "frame": 17670,
+    "duration": 1,
+    "key": "A",
+    "action_index": 550
+  },
+  {
+    "frame": 17790,
+    "duration": 1,
+    "key": "A",
+    "action_index": 554
+  },
+  {
+    "frame": 17910,
+    "duration": 1,
+    "key": "A",
+    "action_index": 558
+  },
+  {
+    "frame": 18030,
+    "duration": 1,
+    "key": "A",
+    "action_index": 562
+  },
+  {
+    "frame": 18150,
+    "duration": 1,
+    "key": "A",
+    "action_index": 566
+  },
+  {
+    "frame": 18270,
+    "duration": 1,
+    "key": "A",
+    "action_index": 570
+  },
+  {
+    "frame": 18390,
+    "duration": 1,
+    "key": "A",
+    "action_index": 574
+  },
+  {
+    "frame": 18510,
+    "duration": 1,
+    "key": "A",
+    "action_index": 578
+  },
+  {
+    "frame": 18780,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 587
+  },
+  {
+    "frame": 18810,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 588
+  },
+  {
+    "frame": 18840,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 589
+  },
+  {
+    "frame": 18870,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 590
+  },
+  {
+    "frame": 18900,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 591
+  },
+  {
+    "frame": 18930,
+    "duration": 1,
+    "key": "DOWN",
+    "action_index": 592
+  },
+  {
+    "frame": 18960,
+    "duration": 1,
+    "key": "DOWN",
+    "action_index": 593
+  },
+  {
+    "frame": 18990,
+    "duration": 1,
+    "key": "DOWN",
+    "action_index": 594
+  },
+  {
+    "frame": 19020,
+    "duration": 1,
+    "key": "DOWN",
+    "action_index": 595
+  },
+  {
+    "frame": 19350,
+    "duration": 1,
+    "key": "DOWN",
+    "action_index": 606
+  },
+  {
+    "frame": 19380,
+    "duration": 1,
+    "key": "DOWN",
+    "action_index": 607
+  },
+  {
+    "frame": 19680,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 617
+  },
+  {
+    "frame": 19710,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 618
+  },
+  {
+    "frame": 19740,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 619
+  },
+  {
+    "frame": 19770,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 620
+  },
+  {
+    "frame": 19800,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 621
+  },
+  {
+    "frame": 19830,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 622
+  },
+  {
+    "frame": 19860,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 623
+  },
+  {
+    "frame": 19890,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 624
+  },
+  {
+    "frame": 19920,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 625
+  },
+  {
+    "frame": 19950,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 626
+  },
+  {
+    "frame": 19980,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 627
+  },
+  {
+    "frame": 20010,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 628
+  },
+  {
+    "frame": 20400,
+    "duration": 1,
+    "key": "A",
+    "action_index": 641
+  },
+  {
+    "frame": 20520,
+    "duration": 1,
+    "key": "A",
+    "action_index": 645
+  },
+  {
+    "frame": 20640,
+    "duration": 1,
+    "key": "A",
+    "action_index": 649
+  },
+  {
+    "frame": 20760,
+    "duration": 1,
+    "key": "A",
+    "action_index": 653
+  },
+  {
+    "frame": 20880,
+    "duration": 1,
+    "key": "A",
+    "action_index": 657
+  },
+  {
+    "frame": 21000,
+    "duration": 1,
+    "key": "A",
+    "action_index": 661
+  },
+  {
+    "frame": 21120,
+    "duration": 1,
+    "key": "A",
+    "action_index": 665
+  },
+  {
+    "frame": 21420,
+    "duration": 1,
+    "key": "A",
+    "action_index": 675
+  },
+  {
+    "frame": 21540,
+    "duration": 1,
+    "key": "A",
+    "action_index": 679
+  },
+  {
+    "frame": 21660,
+    "duration": 1,
+    "key": "A",
+    "action_index": 683
+  },
+  {
+    "frame": 21780,
+    "duration": 1,
+    "key": "A",
+    "action_index": 687
+  },
+  {
+    "frame": 22050,
+    "duration": 1,
+    "key": "B",
+    "action_index": 696
+  },
+  {
+    "frame": 22080,
+    "duration": 1,
+    "key": "B",
+    "action_index": 697
+  },
+  {
+    "frame": 22110,
+    "duration": 1,
+    "key": "B",
+    "action_index": 698
+  },
+  {
+    "frame": 22140,
+    "duration": 1,
+    "key": "B",
+    "action_index": 699
+  },
+  {
+    "frame": 22170,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 700
+  },
+  {
+    "frame": 22200,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 701
+  },
+  {
+    "frame": 22230,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 702
+  },
+  {
+    "frame": 22260,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 703
+  },
+  {
+    "frame": 22290,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 704
+  },
+  {
+    "frame": 22320,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 705
+  },
+  {
+    "frame": 22710,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 718
+  },
+  {
+    "frame": 22740,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 719
+  },
+  {
+    "frame": 23130,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 732
+  },
+  {
+    "frame": 23160,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 733
+  },
+  {
+    "frame": 23190,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 734
+  },
+  {
+    "frame": 23220,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 735
+  },
+  {
+    "frame": 23250,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 736
+  },
+  {
+    "frame": 23280,
+    "duration": 1,
+    "key": "DOWN",
+    "action_index": 737
+  },
+  {
+    "frame": 23310,
+    "duration": 1,
+    "key": "DOWN",
+    "action_index": 738
+  },
+  {
+    "frame": 23340,
+    "duration": 1,
+    "key": "A",
+    "action_index": 739
+  },
+  {
+    "frame": 23670,
+    "duration": 1,
+    "key": "A",
+    "action_index": 750
+  },
+  {
+    "frame": 23790,
+    "duration": 1,
+    "key": "A",
+    "action_index": 754
+  },
+  {
+    "frame": 23910,
+    "duration": 1,
+    "key": "A",
+    "action_index": 758
+  },
+  {
+    "frame": 24030,
+    "duration": 1,
+    "key": "A",
+    "action_index": 762
+  },
+  {
+    "frame": 24150,
+    "duration": 1,
+    "key": "A",
+    "action_index": 766
+  },
+  {
+    "frame": 24270,
+    "duration": 1,
+    "key": "A",
+    "action_index": 770
+  },
+  {
+    "frame": 24390,
+    "duration": 1,
+    "key": "A",
+    "action_index": 774
+  },
+  {
+    "frame": 24540,
+    "duration": 1,
+    "key": "DOWN",
+    "action_index": 779
+  },
+  {
+    "frame": 24570,
+    "duration": 1,
+    "key": "DOWN",
+    "action_index": 780
+  },
+  {
+    "frame": 24600,
+    "duration": 1,
+    "key": "A",
+    "action_index": 781
+  },
+  {
+    "frame": 24810,
+    "duration": 1,
+    "key": "A",
+    "action_index": 788
+  },
+  {
+    "frame": 24930,
+    "duration": 1,
+    "key": "A",
+    "action_index": 792
+  },
+  {
+    "frame": 25050,
+    "duration": 1,
+    "key": "A",
+    "action_index": 796
+  },
+  {
+    "frame": 25170,
+    "duration": 1,
+    "key": "A",
+    "action_index": 800
+  },
+  {
+    "frame": 25290,
+    "duration": 1,
+    "key": "A",
+    "action_index": 804
+  },
+  {
+    "frame": 25650,
+    "duration": 1,
+    "key": "LEFT",
+    "action_index": 816
+  },
+  {
+    "frame": 25680,
+    "duration": 1,
+    "key": "LEFT",
+    "action_index": 817
+  },
+  {
+    "frame": 25710,
+    "duration": 1,
+    "key": "LEFT",
+    "action_index": 818
+  },
+  {
+    "frame": 25740,
+    "duration": 1,
+    "key": "LEFT",
+    "action_index": 819
+  },
+  {
+    "frame": 25770,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 820
+  },
+  {
+    "frame": 25800,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 821
+  },
+  {
+    "frame": 25830,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 822
+  },
+  {
+    "frame": 26220,
+    "duration": 1,
+    "key": "LEFT",
+    "action_index": 835
+  },
+  {
+    "frame": 26250,
+    "duration": 1,
+    "key": "LEFT",
+    "action_index": 836
+  },
+  {
+    "frame": 26280,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 837
+  },
+  {
+    "frame": 26310,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 838
+  },
+  {
+    "frame": 26640,
+    "duration": 1,
+    "key": "DOWN",
+    "action_index": 849
+  },
+  {
+    "frame": 26670,
+    "duration": 1,
+    "key": "DOWN",
+    "action_index": 850
+  },
+  {
+    "frame": 26700,
+    "duration": 1,
+    "key": "DOWN",
+    "action_index": 851
+  },
+  {
+    "frame": 26730,
+    "duration": 1,
+    "key": "DOWN",
+    "action_index": 852
+  },
+  {
+    "frame": 26760,
+    "duration": 1,
+    "key": "DOWN",
+    "action_index": 853
+  },
+  {
+    "frame": 26790,
+    "duration": 1,
+    "key": "DOWN",
+    "action_index": 854
+  },
+  {
+    "frame": 27120,
+    "duration": 1,
+    "key": "LEFT",
+    "action_index": 865
+  },
+  {
+    "frame": 27150,
+    "duration": 1,
+    "key": "LEFT",
+    "action_index": 866
+  },
+  {
+    "frame": 27180,
+    "duration": 1,
+    "key": "LEFT",
+    "action_index": 867
+  },
+  {
+    "frame": 27210,
+    "duration": 1,
+    "key": "LEFT",
+    "action_index": 868
+  },
+  {
+    "frame": 27240,
+    "duration": 1,
+    "key": "LEFT",
+    "action_index": 869
+  },
+  {
+    "frame": 27270,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 870
+  },
+  {
+    "frame": 27300,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 871
+  },
+  {
+    "frame": 27330,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 872
+  },
+  {
+    "frame": 27360,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 873
+  },
+  {
+    "frame": 27390,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 874
+  },
+  {
+    "frame": 27420,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 875
+  },
+  {
+    "frame": 27450,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 876
+  },
+  {
+    "frame": 27480,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 877
+  },
+  {
+    "frame": 27510,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 878
+  },
+  {
+    "frame": 27540,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 879
+  },
+  {
+    "frame": 27870,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 890
+  },
+  {
+    "frame": 27900,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 891
+  },
+  {
+    "frame": 27930,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 892
+  },
+  {
+    "frame": 27960,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 893
+  },
+  {
+    "frame": 28290,
+    "duration": 1,
+    "key": "A",
+    "action_index": 904
+  },
+  {
+    "frame": 28410,
+    "duration": 1,
+    "key": "A",
+    "action_index": 908
+  },
+  {
+    "frame": 28530,
+    "duration": 1,
+    "key": "A",
+    "action_index": 912
+  },
+  {
+    "frame": 28650,
+    "duration": 1,
+    "key": "A",
+    "action_index": 916
+  },
+  {
+    "frame": 28770,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 920
+  },
+  {
+    "frame": 28800,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 921
+  },
+  {
+    "frame": 28830,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 922
+  },
+  {
+    "frame": 28860,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 923
+  },
+  {
+    "frame": 29190,
+    "duration": 1,
+    "key": "A",
+    "action_index": 934
+  },
+  {
+    "frame": 29310,
+    "duration": 1,
+    "key": "A",
+    "action_index": 938
+  },
+  {
+    "frame": 29430,
+    "duration": 1,
+    "key": "A",
+    "action_index": 942
+  },
+  {
+    "frame": 29550,
+    "duration": 1,
+    "key": "A",
+    "action_index": 946
+  },
+  {
+    "frame": 29670,
+    "duration": 1,
+    "key": "A",
+    "action_index": 950
+  },
+  {
+    "frame": 29850,
+    "duration": 1,
+    "key": "LEFT",
+    "action_index": 956
+  },
+  {
+    "frame": 29880,
+    "duration": 1,
+    "key": "LEFT",
+    "action_index": 957
+  },
+  {
+    "frame": 29910,
+    "duration": 1,
+    "key": "LEFT",
+    "action_index": 958
+  },
+  {
+    "frame": 29940,
+    "duration": 1,
+    "key": "LEFT",
+    "action_index": 959
+  },
+  {
+    "frame": 29970,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 960
+  },
+  {
+    "frame": 30000,
+    "duration": 1,
+    "key": "A",
+    "action_index": 961
+  },
+  {
+    "frame": 30330,
+    "duration": 1,
+    "key": "A",
+    "action_index": 972
+  },
+  {
+    "frame": 30540,
+    "duration": 1,
+    "key": "A",
+    "action_index": 979
+  },
+  {
+    "frame": 30810,
+    "duration": 1,
+    "key": "B",
+    "action_index": 988
+  },
+  {
+    "frame": 30990,
+    "duration": 1,
+    "key": "A",
+    "action_index": 994
+  },
+  {
+    "frame": 31200,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1001
+  },
+  {
+    "frame": 31470,
+    "duration": 1,
+    "key": "LEFT",
+    "action_index": 1010
+  },
+  {
+    "frame": 31650,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1016
+  },
+  {
+    "frame": 31860,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1023
+  },
+  {
+    "frame": 32250,
+    "duration": 1,
+    "key": "DOWN",
+    "action_index": 1036
+  },
+  {
+    "frame": 32280,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1037
+  },
+  {
+    "frame": 32610,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1048
+  },
+  {
+    "frame": 32940,
+    "duration": 1,
+    "key": "DOWN",
+    "action_index": 1059
+  },
+  {
+    "frame": 32970,
+    "duration": 1,
+    "key": "DOWN",
+    "action_index": 1060
+  },
+  {
+    "frame": 33000,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1061
+  },
+  {
+    "frame": 33330,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1072
+  },
+  {
+    "frame": 33660,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1083
+  },
+  {
+    "frame": 33990,
+    "duration": 1,
+    "key": "B",
+    "action_index": 1094
+  },
+  {
+    "frame": 34110,
+    "duration": 1,
+    "key": "B",
+    "action_index": 1098
+  },
+  {
+    "frame": 34230,
+    "duration": 1,
+    "key": "B",
+    "action_index": 1102
+  },
+  {
+    "frame": 34350,
+    "duration": 1,
+    "key": "B",
+    "action_index": 1106
+  },
+  {
+    "frame": 34470,
+    "duration": 1,
+    "key": "B",
+    "action_index": 1110
+  },
+  {
+    "frame": 34590,
+    "duration": 1,
+    "key": "B",
+    "action_index": 1114
+  },
+  {
+    "frame": 34710,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1118
+  },
+  {
+    "frame": 35700,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1151
+  },
+  {
+    "frame": 36480,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1177
+  },
+  {
+    "frame": 36630,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1182
+  },
+  {
+    "frame": 36750,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1186
+  },
+  {
+    "frame": 36900,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1191
+  },
+  {
+    "frame": 37020,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 1195
+  },
+  {
+    "frame": 37050,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1196
+  },
+  {
+    "frame": 37200,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1201
+  },
+  {
+    "frame": 38370,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1240
+  },
+  {
+    "frame": 39360,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1273
+  },
+  {
+    "frame": 39840,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1289
+  },
+  {
+    "frame": 40320,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1305
+  },
+  {
+    "frame": 40440,
+    "duration": 1,
+    "key": "DOWN",
+    "action_index": 1309
+  },
+  {
+    "frame": 40470,
+    "duration": 1,
+    "key": "LEFT",
+    "action_index": 1310
+  },
+  {
+    "frame": 40500,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1311
+  },
+  {
+    "frame": 40620,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1315
+  },
+  {
+    "frame": 41400,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1341
+  },
+  {
+    "frame": 41970,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1360
+  },
+  {
+    "frame": 42600,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1381
+  },
+  {
+    "frame": 42990,
+    "duration": 1,
+    "key": "DOWN",
+    "action_index": 1394
+  },
+  {
+    "frame": 43020,
+    "duration": 1,
+    "key": "DOWN",
+    "action_index": 1395
+  },
+  {
+    "frame": 43050,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1396
+  },
+  {
+    "frame": 43440,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 1409
+  },
+  {
+    "frame": 43470,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1410
+  },
+  {
+    "frame": 43740,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1419
+  },
+  {
+    "frame": 44610,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1448
+  },
+  {
+    "frame": 45360,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1473
+  },
+  {
+    "frame": 45480,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 1477
+  },
+  {
+    "frame": 45510,
+    "duration": 1,
+    "key": "DOWN",
+    "action_index": 1478
+  },
+  {
+    "frame": 45540,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1479
+  },
+  {
+    "frame": 45720,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1485
+  },
+  {
+    "frame": 45840,
+    "duration": 1,
+    "key": "DOWN",
+    "action_index": 1489
+  },
+  {
+    "frame": 45870,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1490
+  },
+  {
+    "frame": 45990,
+    "duration": 1,
+    "key": "LEFT",
+    "action_index": 1494
+  },
+  {
+    "frame": 46080,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1497
+  },
+  {
+    "frame": 46890,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1524
+  },
+  {
+    "frame": 47460,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1543
+  },
+  {
+    "frame": 47940,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1559
+  },
+  {
+    "frame": 48060,
+    "duration": 1,
+    "key": "UP",
+    "action_index": 1563
+  },
+  {
+    "frame": 48090,
+    "duration": 1,
+    "key": "LEFT",
+    "action_index": 1564
+  },
+  {
+    "frame": 48120,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1565
+  },
+  {
+    "frame": 48240,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1569
+  },
+  {
+    "frame": 48390,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1574
+  },
+  {
+    "frame": 48510,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1578
+  },
+  {
+    "frame": 48630,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1582
+  },
+  {
+    "frame": 49560,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1613
+  },
+  {
+    "frame": 50010,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1628
+  },
+  {
+    "frame": 50460,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1643
+  },
+  {
+    "frame": 50910,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1658
+  },
+  {
+    "frame": 51390,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1674
+  },
+  {
+    "frame": 51510,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1678
+  },
+  {
+    "frame": 51630,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1682
+  },
+  {
+    "frame": 51750,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1686
+  },
+  {
+    "frame": 51870,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1690
+  },
+  {
+    "frame": 51990,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1694
+  },
+  {
+    "frame": 52350,
+    "duration": 1,
+    "key": "DOWN",
+    "action_index": 1706
+  },
+  {
+    "frame": 52380,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1707
+  },
+  {
+    "frame": 52590,
+    "duration": 1,
+    "key": "DOWN",
+    "action_index": 1714
+  },
+  {
+    "frame": 52620,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1715
+  },
+  {
+    "frame": 52830,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1722
+  },
+  {
+    "frame": 52950,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1726
+  },
+  {
+    "frame": 53070,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1730
+  },
+  {
+    "frame": 53190,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1734
+  },
+  {
+    "frame": 53310,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1738
+  },
+  {
+    "frame": 53430,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1742
+  },
+  {
+    "frame": 53550,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1746
+  },
+  {
+    "frame": 53670,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1750
+  },
+  {
+    "frame": 53790,
+    "duration": 1,
+    "key": "B",
+    "action_index": 1754
+  },
+  {
+    "frame": 53910,
+    "duration": 1,
+    "key": "B",
+    "action_index": 1758
+  },
+  {
+    "frame": 54030,
+    "duration": 1,
+    "key": "B",
+    "action_index": 1762
+  },
+  {
+    "frame": 54150,
+    "duration": 1,
+    "key": "START",
+    "action_index": 1766
+  },
+  {
+    "frame": 54330,
+    "duration": 1,
+    "key": "DOWN",
+    "action_index": 1772
+  },
+  {
+    "frame": 54360,
+    "duration": 1,
+    "key": "DOWN",
+    "action_index": 1773
+  },
+  {
+    "frame": 54390,
+    "duration": 1,
+    "key": "A",
+    "action_index": 1774
+  },
+  {
+    "frame": 54660,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 1783
+  },
+  {
+    "frame": 54750,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 1786
+  },
+  {
+    "frame": 54840,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 1789
+  },
+  {
+    "frame": 54930,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 1792
+  },
+  {
+    "frame": 55020,
+    "duration": 1,
+    "key": "RIGHT",
+    "action_index": 1795
+  }
+]

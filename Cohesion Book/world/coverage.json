@@ -1,0 +1,44 @@
+{
+  "registered_maps_expected": 540,
+  "registered_maps_actual": 540,
+  "event_counts_expected": {
+    "object_events": 3052,
+    "coord_events": 421,
+    "bg_events": 723,
+    "warp_events": 1402,
+    "connections": 152,
+    "map_scripts": 572
+  },
+  "event_counts_actual": {
+    "object_events": 3052,
+    "coord_events": 421,
+    "bg_events": 723,
+    "warp_events": 1402,
+    "connections": 152,
+    "map_scripts": 572
+  },
+  "event_dispositions": {
+    "KEEP": 4432,
+    "REVISE": 1381,
+    "REPAIR": 190,
+    "INERT/EXCLUDED": 319
+  },
+  "events_with_disposition": 6322,
+  "unrooted_entrypoint_candidates": 132,
+  "shared_event_roots": 135,
+  "proposals": 27,
+  "proposal_targets": 213,
+  "dialogue_labels_from_event_closures": 3726,
+  "runtime_executed": false,
+  "source_gate": {
+    "maps": 540,
+    "physical_npc_trigger_sign_events": 4196,
+    "warps": 1402,
+    "script_refs": 18350,
+    "script_lines": 106569,
+    "specialvar_return_contracts": 368,
+    "result": "PASS",
+    "scope": "Static structure only"
+  },
+  "review_method": "All registered maps and event records enumerated; per-map source dialogue/state digests inspected; common engine contracts inspected once and referenced by each instance; focused source traces for each proposed repair; no blanket claim of manual instruction-by-instruction execution or full live traversal."
+}

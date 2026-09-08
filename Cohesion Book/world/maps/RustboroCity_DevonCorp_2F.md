@@ -1,0 +1,34 @@
+# RustboroCity_DevonCorp_2F
+
+**KEEP.** Map-specific script/dialogue digest and physical event records were reviewed against the region contract. Preserve the described map and its existing state handoffs, subject to the explicitly linked proposals and central battle/acquisition rules.
+
+[Regional experience](../01-opening.md) · [Map source](../../baseline/source/data/maps/RustboroCity_DevonCorp_2F/map.json) · [Scripts](../../baseline/source/data/maps/RustboroCity_DevonCorp_2F/scripts.inc)
+
+## Current map contract
+
+`MAP_RUSTBORO_CITY_DEVON_CORP_2F` · `LAYOUT_RUSTBORO_CITY_DEVON_CORP_2F` · `WEATHER_NONE` · `MUS_RUSTBORO`
+
+Map-specific script/dialogue digest and physical event records were reviewed against the region contract. Preserve the described map and its existing state handoffs, subject to the explicitly linked proposals and central battle/acquisition rules.
+
+## Complete event ledger
+
+Every row is a distinct snapshot event. A KEEP applies the examined common contract and this map’s context; it is not a claim that this scene has been traversed in an emulator.
+
+| Event | Position / selector | Current behavior | Disposition / final dependency |
+|---|---|---|---|
+| `RustboroCity_DevonCorp_2F:object_events:001` | 6,5 | [RustboroCity_DevonCorp_2F_EventScript_TalkToPokemonScientist](../../baseline/source/data/maps/RustboroCity_DevonCorp_2F/scripts.inc#L72) — RustboroCity_DevonCorp_2F_EventScript_TalkToPokemonScientist at (6,5); We're developing a device for talking /  with POKéMON. //  But we haven't had much success… | **KEEP** · [W-C-FLAVOR](../common-contracts.md#w-c-flavor) |
+| `RustboroCity_DevonCorp_2F:object_events:002` | 1,5 | [RustboroCity_DevonCorp_2F_EventScript_MegaGift_MAGEARNITE](../../baseline/source/data/maps/RustboroCity_DevonCorp_2F/scripts.inc#L686) — RustboroCity_DevonCorp_2F_EventScript_MegaGift_MAGEARNITE at (1,5); I'm developing new kinds of /  POKé BALLS… //  But I haven't made much headway… / We finally made new kinds of /  POKé BALLS! //  The REPEAT BALL makes it easier to /  catch POKéMON you've caught before. //  The TIMER BALL gets better at catching /  POKéMON the longer a battle runs. //  Both are proudly developed by /  the DEVON CORPORATION. //  Please give them a try! | **KEEP** · [W-C-STORY](../common-contracts.md#w-c-story) |
+| `RustboroCity_DevonCorp_2F:object_events:003` | 2,6 | [RustboroCity_DevonCorp_2F_EventScript_PokenavScientist](../../baseline/source/data/maps/RustboroCity_DevonCorp_2F/scripts.inc#L94) — RustboroCity_DevonCorp_2F_EventScript_PokenavScientist at (2,6); I made the POKéNAV! //  As an engineer, I feel blessed to have /  made something so great! / Oh, wow! /  That's a POKéNAV! //  It came about as a result of our /  PRESIDENT's desire to learn about /  the feelings of POKéMON. //  Would you like me to describe its /  features in detail? //  No, no. I think you'll find out just by /  trying the POKéNAV out. | **KEEP** · [W-C-STORY](../common-contracts.md#w-c-story) |
+| `RustboroCity_DevonCorp_2F:object_events:004` | 10,5 | [RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist](../../baseline/source/data/maps/RustboroCity_DevonCorp_2F/scripts.inc#L108) — RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist at (10,5); HOENN is full of LEGENDARY SIGNS. /  You can follow them at your own pace. //  Inspect marked stones and strange /  shrines as you explore. They can /  answer without a visit to DEVON. //  If a legendary escapes or faints, /  leave its area and return to try again. //  I keep leads for every discovery, /  including ones you have completed. / Your discovery completes DEVON's /  sealed mechanical prototype! //  MAGEARNA awakens and joins your party. | **KEEP** · [W-C-STORY](../common-contracts.md#w-c-story) |
+| `RustboroCity_DevonCorp_2F:object_events:005` | 14,8 | [RustboroCity_DevonCorp_2F_EventScript_FossilScientist](../../baseline/source/data/maps/RustboroCity_DevonCorp_2F/scripts.inc#L222) — RustboroCity_DevonCorp_2F_EventScript_FossilScientist at (14,8); My FOSSIL REGENERATOR can restore /  ancient POKéMON from every era. //  Bring me any complete fossil you find. / Wait! You have a POKéMON fossil! //  Shall I restore its ancient POKéMON /  with the FOSSIL REGENERATOR? | **KEEP** · [W-C-STORY](../common-contracts.md#w-c-story) |
+| `RustboroCity_DevonCorp_2F:object_events:006` | 14,5 | [RustboroCity_DevonCorp_2F_EventScript_MatchCallScientist](../../baseline/source/data/maps/RustboroCity_DevonCorp_2F/scripts.inc#L556) — RustboroCity_DevonCorp_2F_EventScript_MatchCallScientist at (14,5); I'm trying to develop a new feature /  for the POKéNAV… //  But it's not going well. / Well, now what shall I work on /  developing next? //  Our company allows us to make our /  inspirations into reality. //  One couldn't ask for a better /  environment as an engineer. | **KEEP** · [W-C-STORY](../common-contracts.md#w-c-story) |
+| `RustboroCity_DevonCorp_2F:object_events:007` | 6,8 | [RustboroCity_DevonCorp_2F_EventScript_EeveeResearcher](../../baseline/source/data/maps/RustboroCity_DevonCorp_2F/scripts.inc#L5) — RustboroCity_DevonCorp_2F_EventScript_EeveeResearcher at (6,8); DEVON can safely return an evolved /  EEVEE to its original form. Try it? / Choose the EEVEE evolution to return /  to EEVEE. | **KEEP** · [W-C-STORY](../common-contracts.md#w-c-story) |
+| `RustboroCity_DevonCorp_2F:warp_events:001` | 14,1 | Warp from (14,1, elevation 0) to MAP_RUSTBORO_CITY_DEVON_CORP_1F warp 2. | **KEEP** · [W-C-WARP](../common-contracts.md#w-c-warp) |
+| `RustboroCity_DevonCorp_2F:warp_events:002` | 2,1 | Warp from (2,1, elevation 0) to MAP_RUSTBORO_CITY_DEVON_CORP_3F warp 0. | **KEEP** · [W-C-WARP](../common-contracts.md#w-c-warp) |
+| `RustboroCity_DevonCorp_2F:map_scripts:001` | MAP_SCRIPT_ON_TRANSITION | [RustboroCity_DevonCorp_2F_OnTransition](../../baseline/source/data/maps/RustboroCity_DevonCorp_2F/scripts.inc#L64) — MAP_SCRIPT_ON_TRANSITION calls RustboroCity_DevonCorp_2F_OnTransition. | **KEEP** · [W-C-MAP_CALLBACK](../common-contracts.md#w-c-map_callback) |
+
+## Final specification and acceptance
+
+Retain the complete baseline map record except the exact entries in [proposed edits](../changes.md) and its owning battle/acquisition chapters. Preserve numeric IDs and unrelated flags.
+Required implementation evidence: enter from each actual neighbor; exercise locked/unlocked and before/after story states that change this map; verify objects, collision/elevation, trigger direction, destination and return route. For generic repetitions, execute the shared behavior once per meaningful engine case and inspect each instance’s specific placement. A source reference check does not replace this traversal.
+The [machine ledger](../event-ledger.json) records complete event dictionaries, local/shared label sets, every referenced dialogue label, proposal IDs, and explicit evidence boundaries.

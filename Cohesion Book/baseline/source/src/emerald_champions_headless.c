@@ -1,0 +1,2207 @@
+#include "global.h"
+
+#if EC_HEADLESS_FIXTURES
+
+#include "battle.h"
+#include "battle_anim.h"
+#include "battle_dome.h"
+#include "battle_gimmick.h"
+#include "battle_interface.h"
+#include "battle_main.h"
+#include "battle_setup.h"
+#include "caps.h"
+#include "champions_circuit.h"
+#include "emerald_champions_headless.h"
+#include "emerald_champions_battle_sets.h"
+#include "emerald_champions_agent_prep.h"
+#include "coins.h"
+#include "contest.h"
+#include "contest_util.h"
+#include "event_data.h"
+#include "item_use.h"
+#include "load_save.h"
+#include "event_object_movement.h"
+#include "field_effect.h"
+#include "field_player_avatar.h"
+#include "field_specials.h"
+#include "field_door.h"
+#include "field_screen_effect.h"
+#include "fieldmap.h"
+#include "frontier_pass.h"
+#include "heal_location.h"
+#include "item.h"
+#include "item_menu.h"
+#include "legendary_signs.h"
+#include "load_save.h"
+#include "main_menu.h"
+#include "move_relearner.h"
+#include "naming_screen.h"
+#include "new_game.h"
+#include "option_menu.h"
+#include "overworld.h"
+#include "party_menu.h"
+#include "play_time.h"
+#include "pokeblock.h"
+#include "pokedex.h"
+#include "save.h"
+#include "pokedex_common.h"
+#include "pokemon.h"
+#include "pokemon_summary_screen.h"
+#include "pokemon_storage_system.h"
+#include "random.h"
+#include "safari_zone.h"
+#include "script.h"
+#include "script_pokemon_util.h"
+#include "slot_machine.h"
+#include "string_util.h"
+#include "wild_encounter.h"
+#include "title_screen.h"
+#include "trainer_card.h"
+#include "constants/battle.h"
+#include "constants/battle_frontier.h"
+#include "constants/contest.h"
+#include "constants/game_stat.h"
+#include "constants/items.h"
+#include "constants/moves.h"
+#include "constants/pokemon.h"
+#include "constants/flags.h"
+#include "constants/event_objects.h"
+#include "constants/field_effects.h"
+#include "constants/field_specials.h"
+#include "constants/script_menu.h"
+#include "constants/heal_locations.h"
+#include "constants/maps.h"
+#include "constants/opponents.h"
+#include "constants/decorations.h"
+#include "constants/metatile_labels.h"
+#include "constants/secret_bases.h"
+#include "constants/pokedex.h"
+#include "constants/region_map_sections.h"
+#include "constants/species.h"
+
+EWRAM_DATA volatile u32 gEcHeadlessFixtureScenario = EC_HEADLESS_SCENARIO_NONE;
+EWRAM_DATA volatile u32 gEcHeadlessFixtureActiveScenario = EC_HEADLESS_SCENARIO_NONE;
+EWRAM_DATA volatile u32 gEcHeadlessFixtureSetupResult = FALSE;
+EWRAM_DATA volatile u32 gEcHeadlessFixtureObservedResult = FALSE;
+EWRAM_DATA volatile u32 gEcHeadlessFixtureParam = MOVE_NONE;
+EWRAM_DATA volatile u32 gEcHeadlessFixtureTrigger = FALSE;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignBattleSerial = 0;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignLastBattleType = 0;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignLastOpponentA = TRAINER_NONE;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignLastOpponentB = TRAINER_NONE;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignMapId = 0;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignMapGroup = 0;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignMapNum = 0;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignPlayerX = 0;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignPlayerY = 0;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignPlayerFacing = DIR_NONE;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignControlsLocked = 0;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignScriptEnabled = 0;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignInBattle = FALSE;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignQueryKind = EC_HEADLESS_CAMPAIGN_QUERY_NONE;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignQueryId = 0;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignQueryValue = 0;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignQueryObjectActive = FALSE;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignQueryObjectX = 0;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignQueryObjectY = 0;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignCaptureSerial = 0;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignLastCapturedSpecies = SPECIES_NONE;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignLastCaptureResult = 0;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignCaptureBookkeepingValid = FALSE;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignLastResolution = EC_HEADLESS_BATTLE_NATIVE;
+EWRAM_DATA volatile u32 gEcHeadlessLeafRewardOwned = FALSE;
+EWRAM_DATA volatile u32 gEcHeadlessLeafCompleted = FALSE;
+EWRAM_DATA volatile u32 gEcHeadlessLeafTrainerDefeated = FALSE;
+EWRAM_DATA volatile u32 gEcHeadlessFixtureFlashLevel = 0;
+static EWRAM_DATA u8 sEcHeadlessName[POKEMON_NAME_LENGTH + 1] = {0};
+static EWRAM_DATA u16 sEcHeadlessObservedDelay = 0;
+static EWRAM_DATA bool8 sEcHeadlessFurfrouMenuOpened = FALSE;
+static EWRAM_DATA bool8 sEcHeadlessAutoCaptureInProgress = FALSE;
+static const u8 sEcHeadlessPlayerName[] = _("BRENDAN");
+extern void gInitialMainCB2(void);
+extern const u8 Common_EventScript_ChooseStarterRegion[];
+extern void CallBattleDomeFunction(void);
+
+bool32 EmeraldChampionsHeadlessBattleAutomationActive(void)
+{
+    return gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CAMPAIGN_AUTOWIN
+        || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CAPTURE_TO_PARTY
+        || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CAPTURE_TO_PC
+        || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CAPTURE_QUEST_DIANCIE
+        || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CAPTURE_QUEST_REGISTEEL
+        || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CAPTURE_QUEST_LATIOS
+        || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CAPTURE_ORDINARY_FIRST
+        || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_ROXANNE_VICTORY
+        || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_FIRST_CENTER_ACQUISITION
+        || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_LEAF_SCENE
+        || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_SECRET_BASE_ESTABLISHED
+        || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_NEW_MAUVILLE_BUTTONS
+        || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_RUSTBORO_GUIDE_RETRY
+        || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_STORY_HANDOFF
+        || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_RYDEL_RETRY
+        || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_ROUTE110_RETRY;
+}
+
+bool32 EmeraldChampionsHeadlessAutoCaptureActive(void)
+{
+    return EmeraldChampionsHeadlessBattleAutomationActive()
+        && sEcHeadlessAutoCaptureInProgress;
+}
+
+enum EmeraldChampionsHeadlessBattleResolution EmeraldChampionsHeadlessGetBattleResolution(void)
+{
+    if (gBattleTypeFlags & (BATTLE_TYPE_LINK
+                          | BATTLE_TYPE_RECORDED
+                          | BATTLE_TYPE_RECORDED_LINK
+                          | BATTLE_TYPE_CATCH_TUTORIAL
+                          | BATTLE_TYPE_POKEDUDE))
+        return EC_HEADLESS_BATTLE_NATIVE;
+    if (gBattleTypeFlags & (BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_ROAMER))
+        return EC_HEADLESS_BATTLE_CAPTURE;
+    if ((gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CAMPAIGN_AUTOWIN
+      || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CAPTURE_ORDINARY_FIRST)
+     && !(gBattleTypeFlags & (BATTLE_TYPE_TRAINER
+                           | BATTLE_TYPE_SAFARI
+                           | BATTLE_TYPE_GHOST
+                           | BATTLE_TYPE_FIRST_BATTLE))
+     && !(gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER))
+     && CalculatePlayerPartyCount() < 2)
+        return EC_HEADLESS_BATTLE_CAPTURE;
+    return EC_HEADLESS_BATTLE_WIN;
+}
+
+void EmeraldChampionsHeadlessBeginAutoCapture(void)
+{
+    sEcHeadlessAutoCaptureInProgress = TRUE;
+}
+
+void EmeraldChampionsHeadlessRecordCapture(enum Species species, u32 result)
+{
+    bool32 delivered = FALSE;
+
+    if (result == MON_GIVEN_TO_PARTY)
+    {
+        for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+        {
+            if (GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_SPECIES) == species)
+                delivered = TRUE;
+        }
+    }
+    else if (result == MON_GIVEN_TO_PC)
+    {
+        for (u32 box = 0; box < TOTAL_BOXES_COUNT && !delivered; box++)
+        {
+            for (u32 slot = 0; slot < IN_BOX_COUNT; slot++)
+            {
+                if (GetBoxMonData(&gPokemonStoragePtr->boxes[box][slot], MON_DATA_SPECIES) == species)
+                {
+                    delivered = TRUE;
+                    break;
+                }
+            }
+        }
+    }
+    gEcHeadlessCampaignLastCapturedSpecies = species;
+    gEcHeadlessCampaignLastCaptureResult = result;
+    gEcHeadlessCampaignCaptureBookkeepingValid = delivered
+        && GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT);
+    gEcHeadlessCampaignCaptureSerial++;
+    sEcHeadlessAutoCaptureInProgress = FALSE;
+}
+
+struct EcHeadlessOverworldFixture
+{
+    u16 map;
+    u16 species;
+    s16 playerX;
+    s16 playerY;
+};
+
+#define EC_HEADLESS_OVERWORLD_FIXTURE(index, map, species, playerX, playerY) \
+    [index - 1] = {map, species, playerX, playerY},
+static const struct EcHeadlessOverworldFixture sEcHeadlessOverworldFixtures[] =
+{
+#include "emerald_champions_headless_overworld_fixtures.h"
+};
+#undef EC_HEADLESS_OVERWORLD_FIXTURE
+
+static const struct { u16 map; s16 x; s16 y; } sEcHeadlessMapSweep[] =
+{
+#define EC_HEADLESS_MAP_SWEEP(map, x, y) {map, x, y},
+#include "emerald_champions_headless_map_sweep.h"
+#undef EC_HEADLESS_MAP_SWEEP
+};
+
+STATIC_ASSERT(ARRAY_COUNT(sEcHeadlessOverworldFixtures) == 8, HeadlessOverworldFixtureCount);
+
+static u16 GetHeadlessOverworldFixtureGraphicsId(enum Species species)
+{
+    switch (species)
+    {
+    case SPECIES_ARTICUNO: return OBJ_EVENT_GFX_INCLEMENT_ARTICUNO;
+    case SPECIES_ZAPDOS: return OBJ_EVENT_GFX_INCLEMENT_ZAPDOS;
+    case SPECIES_MOLTRES: return OBJ_EVENT_GFX_INCLEMENT_MOLTRES;
+    case SPECIES_MEWTWO: return OBJ_EVENT_GFX_INCLEMENT_MEWTWO;
+    case SPECIES_JIRACHI: return OBJ_EVENT_GFX_INCLEMENT_JIRACHI;
+    case SPECIES_HEATRAN: return OBJ_EVENT_GFX_INCLEMENT_HEATRAN;
+    case SPECIES_REGIGIGAS: return OBJ_EVENT_GFX_REGIGIGAS_STATUE;
+    case SPECIES_DIANCIE: return OBJ_EVENT_GFX_INCLEMENT_DIANCIE;
+    default: return OBJ_EVENT_MON + species;
+    }
+}
+
+static void PrepareHeadlessOverworldFixtureState(enum Species species)
+{
+    FlagClear(FLAG_EC_CAUGHT_ARTICUNO);
+    FlagClear(FLAG_EC_CAUGHT_DIANCIE);
+    FlagClear(FLAG_EC_CAUGHT_HEATRAN);
+    FlagClear(FLAG_EC_CAUGHT_JIRACHI);
+    FlagClear(FLAG_EC_CAUGHT_MOLTRES);
+    FlagClear(FLAG_EC_CAUGHT_MEWTWO);
+    FlagClear(FLAG_EC_CAUGHT_REGIGIGAS);
+    FlagClear(FLAG_EC_CAUGHT_ZAPDOS);
+    UnlockLegendarySign(GetLegendarySignIdBySpecies(species));
+}
+
+static EWRAM_DATA enum Species sEcHeadlessFlightRider = SPECIES_NONE;
+
+static void PrepareHeadlessFieldMoveParty(u16 badgeFlag, u16 hmFlag)
+{
+    ZeroPlayerPartyMons();
+    CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_ZIGZAGOON, 14, 0, OTID_STRUCT_PLAYER_ID);
+    CalculatePlayerPartyCount();
+    FlagSet(badgeFlag);
+    FlagSet(hmFlag);
+}
+
+static void Task_HeadlessOpenFlightBeaconMap(u8 taskId)
+{
+    CleanupOverworldWindowsAndTilemaps();
+    OpenFlyMapForFlightBeacon(CB2_ReturnToField);
+    sEcHeadlessFlightRider = gFieldMoveShowMonSpeciesOverride;
+    gEcHeadlessFixtureSetupResult = TRUE;
+    DestroyTask(taskId);
+}
+
+static void PrepareHeadlessNewGame(void)
+{
+    SetSaveBlocksPointers(0);
+    NewGameInitData();
+    StringCopy(gSaveBlock2Ptr->playerName, sEcHeadlessPlayerName);
+    gSaveBlock2Ptr->playerGender = MALE;
+    gSaveBlock2Ptr->playerTrainerId[0] = 0x34;
+    gSaveBlock2Ptr->playerTrainerId[1] = 0x12;
+    gSaveBlock2Ptr->playerTrainerId[2] = 0x78;
+    gSaveBlock2Ptr->playerTrainerId[3] = 0x56;
+    ResetInitialPlayerAvatarState();
+    PlayTimeCounter_Start();
+    ScriptContext_Init();
+    UnlockPlayerFieldControls();
+}
+
+// Synthetic capacity boundary only: unique valid keys, with owed gifts absent.
+static void FillHeadlessKeyPocket(void)
+{
+    struct BagPocket *pocket = &gBagPockets[GetItemPocket(ITEM_DOWSING_MACHINE)];
+    u32 slot = 0;
+
+    for (u32 item = 1; item < ITEMS_COUNT && slot < pocket->capacity; item++)
+    {
+        if (GetItemPocket(item) == GetItemPocket(ITEM_DOWSING_MACHINE)
+         && item != ITEM_DOWSING_MACHINE && item != ITEM_MACH_BIKE && item != ITEM_ACRO_BIKE)
+            BagPocket_SetSlotItemIdAndCount(pocket, slot++, item, 1);
+    }
+    fatal_assertf(slot == pocket->capacity, "Headless key pocket could not be filled");
+}
+
+static void LoadHeadlessMap(u16 map, s16 x, s16 y)
+{
+    SetWarpDestination(MAP_GROUP(map), MAP_NUM(map), WARP_ID_NONE, x, y);
+    WarpIntoMap();
+    gFieldCallback = FieldCB_WarpExitFadeFromBlack;
+    gFieldCallback2 = NULL;
+    SetMainCallback2(CB2_LoadMap);
+}
+
+static void FieldCB_HeadlessSuppressOnFrame(void)
+{
+    VarSet(VAR_TEMP_1, 1);
+    FieldCB_WarpExitFadeFromBlack();
+}
+
+static void CreateHealthyHeadlessMon(
+    struct Pokemon *mon,
+    enum Species species,
+    u8 level,
+    struct OriginalTrainerId trainerId)
+{
+    CreateMon(mon, species, level, 0, trainerId);
+    CalculateMonStats(mon);
+}
+
+static void PrepareHeadlessHallParty(u32 count)
+{
+    static const enum Species species[PARTY_SIZE] =
+    {
+        SPECIES_PIKACHU, SPECIES_CHARIZARD, SPECIES_BLASTOISE,
+        SPECIES_VENUSAUR, SPECIES_GENGAR, SPECIES_DRAGONITE,
+    };
+
+    for (u32 i = 0; i < min(count, PARTY_SIZE); i++)
+        CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][i], species[i], 80, OTID_STRUCT_PLAYER_ID);
+    CalculatePlayerPartyCount();
+}
+
+static void PrepareAbilityMenu(void)
+{
+    CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_GEODUDE, 30, OTID_STRUCT_PLAYER_ID);
+    CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][1], SPECIES_GARDEVOIR, 30, OTID_STRUCT_PLAYER_ID);
+    CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][2], SPECIES_PIKACHU, 30, OTID_STRUCT_PLAYER_ID);
+    CalculatePlayerPartyCount();
+    SetMainCallback2(CB2_PartyMenuFromStartMenu);
+}
+
+static void GiveHeadlessGeodude(u8 level)
+{
+    CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_GEODUDE, level, OTID_STRUCT_PLAYER_ID);
+    ApplyEmeraldChampionsBattleSetChoice(&gParties[B_TRAINER_PLAYER][0], 0);
+    CalculatePlayerPartyCount();
+}
+
+static void PrepareCircuitParty(void)
+{
+    static const enum Species species[PARTY_SIZE] =
+    {
+        SPECIES_PIKACHU,
+        SPECIES_CHARIZARD,
+        SPECIES_BLASTOISE,
+        SPECIES_VENUSAUR,
+        SPECIES_GENGAR,
+        SPECIES_DRAGONITE,
+    };
+
+    for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+        CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][slot], species[slot], 80, OTID_STRUCT_PLAYER_ID);
+    CalculatePlayerPartyCount();
+}
+
+static void PrepareAllLegalMoves(enum Species species)
+{
+    CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][0], species, 30, OTID_STRUCT_PLAYER_ID);
+    CalculatePlayerPartyCount();
+    gSpecialVar_0x8004 = 0;
+    gMoveRelearnerState = MOVE_RELEARNER_ALL_MOVES;
+    gRelearnMode = RELEARN_MODE_SCRIPT;
+    SetMainCallback2(CB2_InitLearnMove);
+}
+
+static void PrepareHmReplacement(void)
+{
+    CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_MEW, 30, OTID_STRUCT_PLAYER_ID);
+    SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][0], MOVE_SURF, 0);
+    SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][0], MOVE_PSYCHIC, 1);
+    SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][0], MOVE_ICE_BEAM, 2);
+    SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][0], MOVE_PROTECT, 3);
+    CalculatePlayerPartyCount();
+    gMoveRelearnerState = MOVE_RELEARNER_ALL_MOVES;
+    gRelearnMode = RELEARN_MODE_SCRIPT;
+    ShowSelectMovePokemonSummaryScreen(
+        gParties[B_TRAINER_PLAYER],
+        0,
+        gInitialMainCB2,
+        MOVE_THUNDERBOLT
+    );
+    gEcHeadlessFixtureSetupResult = TRUE;
+}
+
+// Params 20-22 seed a single species that lives only in one restored Inclement area, so
+// the Area page proves the region-map marker/glow for the expansion map group.
+#define EC_HEADLESS_POKEDEX_AREA_ASHEN_WOODS       20
+#define EC_HEADLESS_POKEDEX_AREA_DEWFORD_MEADOW    21
+#define EC_HEADLESS_POKEDEX_AREA_VERDANTURF_MEADOW 22
+
+static void PrepareHeadlessPokedex(void)
+{
+    static const enum Species species[] =
+    {
+        SPECIES_BULBASAUR,
+        SPECIES_IVYSAUR,
+        SPECIES_VENUSAUR,
+        SPECIES_CHARMANDER,
+        SPECIES_CHARMELEON,
+        SPECIES_CHARIZARD,
+    };
+    static const enum Species areaSpecies[] =
+    {
+        [EC_HEADLESS_POKEDEX_AREA_ASHEN_WOODS - 20] = SPECIES_BUZZWOLE,
+        [EC_HEADLESS_POKEDEX_AREA_DEWFORD_MEADOW - 20] = SPECIES_PHEROMOSA,
+        [EC_HEADLESS_POKEDEX_AREA_VERDANTURF_MEADOW - 20] = SPECIES_ALCREMIE,
+    };
+    const enum Species *list = species;
+    u32 count = ARRAY_COUNT(species);
+
+    if (gEcHeadlessFixtureParam >= 20 && gEcHeadlessFixtureParam < 20 + ARRAY_COUNT(areaSpecies))
+    {
+        list = &areaSpecies[gEcHeadlessFixtureParam - 20];
+        count = 1;
+    }
+
+    FlagSet(FLAG_SYS_POKEDEX_GET);
+    EnableNationalPokedex();
+    for (u32 i = 0; i < count; i++)
+    {
+        enum NationalDexOrder dex = SpeciesToNationalPokedexNum(list[i]);
+
+        GetSetPokedexFlag(dex, FLAG_SET_SEEN);
+        if (i != 2)
+            GetSetPokedexFlag(dex, FLAG_SET_CAUGHT);
+    }
+    gSaveBlock2Ptr->pokedex.mode = DEX_MODE_NATIONAL;
+    SetMainCallback2(CB2_OpenPokedex);
+}
+
+static void PrepareHeadlessSummary(void)
+{
+    metloc_u8_t metLocation = MAPSEC_ROUTE_101;
+    u16 item = ITEM_LEFTOVERS;
+    enum Species species = (gEcHeadlessFixtureParam >> 16) != 0
+        ? SanitizeSpeciesId(gEcHeadlessFixtureParam >> 16) : SPECIES_GARCHOMP;
+    if (gSpeciesInfo[species].isMegaEvolution && gSpeciesInfo[species].formChangeTable != NULL)
+    {
+        const struct FormChange *form = gSpeciesInfo[species].formChangeTable;
+        for (; form->method != FORM_CHANGE_TERMINATOR; form++)
+            if (form->method == FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM && form->targetSpecies == species)
+                item = form->param1;
+    }
+
+    CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][0], species, 67, OTID_STRUCT_PLAYER_ID);
+    SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][0], MOVE_EARTHQUAKE, 0);
+    SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][0], MOVE_DRAGON_CLAW, 1);
+    SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][0], MOVE_ROCK_SLIDE, 2);
+    SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][0], MOVE_PROTECT, 3);
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MET_LOCATION, &metLocation);
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM, &item);
+    CalculatePlayerPartyCount();
+    ShowPokemonSummaryScreen(
+        SUMMARY_MODE_NORMAL,
+        gParties[B_TRAINER_PLAYER],
+        0,
+        0,
+        CB2_PartyMenuFromStartMenu);
+}
+
+static void PrepareHeadlessBag(void)
+{
+    ClearBag();
+    AddBagItem(ITEM_LEFTOVERS, 6);
+    AddBagItem(ITEM_ROCKY_HELMET, 4);
+    GoToBagMenu(ITEMMENULOCATION_FIELD, POCKET_BATTLE, gInitialMainCB2);
+}
+
+static void PrepareHeadlessFrontierPass(void)
+{
+    SetWarpDestination(
+        MAP_GROUP(MAP_BATTLE_FRONTIER_BATTLE_TOWER_LOBBY),
+        MAP_NUM(MAP_BATTLE_FRONTIER_BATTLE_TOWER_LOBBY),
+        WARP_ID_NONE,
+        23,
+        6);
+    WarpIntoMap();
+    InitMap();
+    FlagSet(FLAG_SYS_FRONTIER_PASS);
+    gSaveBlock2Ptr->frontier.battlePoints = 987;
+    ShowFrontierPass(gInitialMainCB2);
+}
+
+static void PrepareHeadlessWildBattle(bool32 isDouble)
+{
+    SetWarpDestination(MAP_GROUP(MAP_ROUTE101), MAP_NUM(MAP_ROUTE101), WARP_ID_NONE, 8, 12);
+    WarpIntoMap();
+    InitMap();
+    SeedRng(0x1234);
+    ZeroPlayerPartyMons();
+    ZeroEnemyPartyMons();
+
+    CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_GEODUDE, 14, OTID_STRUCT_PLAYER_ID);
+    SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][0], MOVE_EARTHQUAKE, 0);
+    SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][0], MOVE_ROCK_SLIDE, 1);
+    SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][0], MOVE_PROTECT, 2);
+    SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][0], MOVE_WIDE_GUARD, 3);
+    if (isDouble)
+    {
+        CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][1], SPECIES_GARDEVOIR, 14, OTID_STRUCT_PLAYER_ID);
+        SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][1], MOVE_DAZZLING_GLEAM, 0);
+        SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][1], MOVE_PSYCHIC, 1);
+        SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][1], MOVE_HELPING_HAND, 2);
+        SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][1], MOVE_PROTECT, 3);
+    }
+    CalculatePlayerPartyCount();
+    CreateWildMon(SPECIES_POOCHYENA, 5);
+    if (isDouble)
+        CreateHealthyHeadlessMon(&gParties[B_TRAINER_OPPONENT_A][1], SPECIES_PIKACHU, 5, OTID_STRUCT_RANDOM_NO_SHINY);
+
+    ClearBag();
+    // Move details share the Ball shortcut, so this fixture needs an empty Bag.
+    if (gEcHeadlessFixtureActiveScenario != EC_HEADLESS_SCENARIO_MOVE_DETAILS)
+        AddBagItem(ITEM_QUICK_BALL, 10);
+    gLastThrownBall = ITEM_QUICK_BALL;
+    gBallToDisplay = ITEM_QUICK_BALL;
+    gSaveBlock2Ptr->optionsButtonMode = OPTIONS_BUTTON_MODE_NORMAL;
+    gActionSelectionCursor[0] = 0;
+    gMoveSelectionCursor[0] = 0;
+    gBattleTypeFlags = isDouble ? BATTLE_TYPE_DOUBLE : 0;
+    gMain.savedCallback = gInitialMainCB2;
+    gEcHeadlessFixtureSetupResult = TRUE;
+    SetMainCallback2(CB2_InitBattle);
+}
+
+static enum Species GetHeadlessCaptureSpecies(void)
+{
+    enum Species species = gEcHeadlessFixtureParam >> 16;
+    return species > SPECIES_NONE && species < NUM_SPECIES ? species : SPECIES_DIANCIE;
+}
+
+static bool32 HeadlessCapturedSignIsComplete(void)
+{
+    enum LegendarySignId signId = GetLegendarySignIdBySpecies(GetHeadlessCaptureSpecies());
+    return signId == LEGENDARY_SIGN_COUNT
+        || (IsLegendarySignUnlocked(signId) && IsLegendarySignCaught(signId));
+}
+
+static void PrepareHeadlessCaptureBattle(bool32 fullParty)
+{
+    SetWarpDestination(MAP_GROUP(MAP_ROUTE101), MAP_NUM(MAP_ROUTE101), WARP_ID_NONE, 8, 12);
+    WarpIntoMap();
+    InitMap();
+    ZeroPlayerPartyMons();
+    ZeroEnemyPartyMons();
+    for (u32 i = 0; i < (fullParty ? PARTY_SIZE : 1); i++)
+    {
+        CreateHealthyHeadlessMon(
+            &gParties[B_TRAINER_PLAYER][i], SPECIES_GEODUDE, 30,
+            OTID_STRUCT_PLAYER_ID
+        );
+    }
+    CalculatePlayerPartyCount();
+    CreateWildMon(GetHeadlessCaptureSpecies(), 50);
+    gBattleTypeFlags = BATTLE_TYPE_LEGENDARY;
+    gMain.savedCallback = gInitialMainCB2;
+    SetMainCallback2(CB2_InitBattle);
+}
+
+static void SetHeadlessStatus(struct Pokemon *mon, u32 status)
+{
+    SetMonData(mon, MON_DATA_STATUS, &status);
+}
+
+static void PrepareHeadlessDoubleStatusAbilityBattle(void)
+{
+    u32 abilitySlot = 0;
+
+    SetWarpDestination(MAP_GROUP(MAP_ROUTE101), MAP_NUM(MAP_ROUTE101), WARP_ID_NONE, 8, 12);
+    WarpIntoMap();
+    InitMap();
+    ZeroPlayerPartyMons();
+    ZeroEnemyPartyMons();
+    CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_ARCANINE, 50, OTID_STRUCT_PLAYER_ID);
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_ABILITY_NUM, &abilitySlot);
+    CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][1], SPECIES_GARDEVOIR, 50, OTID_STRUCT_PLAYER_ID);
+    CreateHealthyHeadlessMon(&gParties[B_TRAINER_OPPONENT_A][0], SPECIES_VENUSAUR, 50, OTID_STRUCT_RANDOM_NO_SHINY);
+    CreateHealthyHeadlessMon(&gParties[B_TRAINER_OPPONENT_A][1], SPECIES_PIKACHU, 50, OTID_STRUCT_RANDOM_NO_SHINY);
+    SetHeadlessStatus(&gParties[B_TRAINER_PLAYER][0], STATUS1_BURN);
+    SetHeadlessStatus(&gParties[B_TRAINER_PLAYER][1], STATUS1_PARALYSIS);
+    SetHeadlessStatus(&gParties[B_TRAINER_OPPONENT_A][0], STATUS1_POISON);
+    SetHeadlessStatus(&gParties[B_TRAINER_OPPONENT_A][1], STATUS1_SLEEP_TURN(2));
+    CalculatePlayerPartyCount();
+    gBattleTypeFlags = BATTLE_TYPE_DOUBLE;
+    gMain.savedCallback = gInitialMainCB2;
+    SetMainCallback2(CB2_InitBattle);
+}
+
+// Low bits preserve the original ready/active scenarios; high bits select a form.
+static enum Species GetHeadlessMegaTarget(void)
+{
+    return (gEcHeadlessFixtureParam >> 16) != 0
+        ? gEcHeadlessFixtureParam >> 16 : SPECIES_CHARIZARD_MEGA_X;
+}
+
+static void PrepareHeadlessMegaBattle(void)
+{
+    u16 stone = ITEM_CHARIZARDITE_X;
+    enum Species base = SPECIES_CHARIZARD;
+    enum Move requiredMove = MOVE_AIR_SLASH;
+    bool32 found = FALSE;
+
+    for (enum Species species = SPECIES_BULBASAUR; species < NUM_SPECIES && !found; species++)
+    {
+        const struct FormChange *form = gSpeciesInfo[species].formChangeTable;
+        if (form == NULL || gSpeciesInfo[species].isMegaEvolution)
+            continue;
+        for (; form->method != FORM_CHANGE_TERMINATOR; form++)
+        {
+            if (form->targetSpecies != GetHeadlessMegaTarget()
+             || (form->method != FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM
+              && form->method != FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE))
+                continue;
+            base = species;
+            stone = form->method == FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM ? form->param1 : ITEM_NONE;
+            if (form->method == FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE)
+                requiredMove = form->param1;
+            found = TRUE;
+            break;
+        }
+    }
+    if (!found)
+    {
+        SetMainCallback2(gInitialMainCB2);
+        return;
+    }
+
+    SetWarpDestination(MAP_GROUP(MAP_ROUTE101), MAP_NUM(MAP_ROUTE101), WARP_ID_NONE, 8, 12);
+    WarpIntoMap();
+    InitMap();
+    ZeroPlayerPartyMons();
+    ZeroEnemyPartyMons();
+    CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][0], base, 50, OTID_STRUCT_PLAYER_ID);
+    SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][0], MOVE_PROTECT, 0);
+    SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][0], MOVE_DRAGON_CLAW, 1);
+    SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][0], MOVE_FLAMETHROWER, 2);
+    SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][0], requiredMove, 3);
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM, &stone);
+    CreateHealthyHeadlessMon(&gParties[B_TRAINER_OPPONENT_A][0], SPECIES_VENUSAUR, 50, OTID_STRUCT_RANDOM_NO_SHINY);
+    if (gEcHeadlessFixtureParam >> 16)
+    {
+        SetMonMoveSlot(&gParties[B_TRAINER_OPPONENT_A][0], MOVE_SPLASH, 0);
+        for (u32 slot = 1; slot < MAX_MON_MOVES; slot++)
+            SetMonMoveSlot(&gParties[B_TRAINER_OPPONENT_A][0], MOVE_NONE, slot);
+    }
+    CalculatePlayerPartyCount();
+    ClearBag();
+    // Level-50 UI subjects need earned obedience, including the no-Ring case.
+    for (u32 badge = 0; badge < NUM_BADGES; badge++)
+        FlagSet(FLAG_BADGE01_GET + badge);
+    if (!(gEcHeadlessFixtureParam & 2))
+        AddBagItem(ITEM_MEGA_RING, 1);
+    gBattleTypeFlags = 0;
+    gMain.savedCallback = gInitialMainCB2;
+    SetMainCallback2(CB2_InitBattle);
+}
+
+static void PrepareHeadlessPrimalBattle(void)
+{
+    u16 blueOrb = ITEM_BLUE_ORB;
+    u16 redOrb = ITEM_RED_ORB;
+
+    SetWarpDestination(MAP_GROUP(MAP_ROUTE101), MAP_NUM(MAP_ROUTE101), WARP_ID_NONE, 8, 12);
+    WarpIntoMap();
+    InitMap();
+    ZeroPlayerPartyMons();
+    ZeroEnemyPartyMons();
+    CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_KYOGRE_PRIMAL, 70, OTID_STRUCT_PLAYER_ID);
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM, &blueOrb);
+    CreateHealthyHeadlessMon(&gParties[B_TRAINER_OPPONENT_A][0], SPECIES_GROUDON_PRIMAL, 70, OTID_STRUCT_RANDOM_NO_SHINY);
+    SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_HELD_ITEM, &redOrb);
+    CalculatePlayerPartyCount();
+    gBattleTypeFlags = 0;
+    gMain.savedCallback = gInitialMainCB2;
+    SetMainCallback2(CB2_InitBattle);
+}
+
+static void PrepareHeadlessSafariBattle(void)
+{
+    SetWarpDestination(MAP_GROUP(MAP_SAFARI_ZONE_NORTH), MAP_NUM(MAP_SAFARI_ZONE_NORTH), WARP_ID_NONE, 8, 8);
+    WarpIntoMap();
+    InitMap();
+    ZeroPlayerPartyMons();
+    ZeroEnemyPartyMons();
+    CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_PIKACHU, 30, OTID_STRUCT_PLAYER_ID);
+    CalculatePlayerPartyCount();
+    CreateWildMon(SPECIES_CHANSEY, 30);
+    gNumSafariBalls = 30;
+    gBattleTypeFlags = BATTLE_TYPE_SAFARI;
+    gMain.savedCallback = gInitialMainCB2;
+    SetMainCallback2(CB2_InitBattle);
+}
+
+static void PrepareHeadlessPokeblock(void)
+{
+    struct Pokeblock *pokeblock = &gSaveBlock1Ptr->pokeblocks[0];
+
+    CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_MILOTIC, 40, OTID_STRUCT_PLAYER_ID);
+    CalculatePlayerPartyCount();
+    *pokeblock = (struct Pokeblock){PBLOCK_CLR_GOLD, 40, 35, 30, 25, 20, 10};
+    ChooseMonToGivePokeblock(pokeblock, gInitialMainCB2);
+}
+
+static void PrepareHeadlessGoldTrainerCard(void)
+{
+    SetGameStat(GAME_STAT_ENTERED_HOF, 1);
+    EnableNationalPokedex();
+    for (enum NationalDexOrder dex = 1; dex < NATIONAL_DEX_COUNT; dex++)
+        GetSetPokedexFlag(dex, FLAG_SET_CAUGHT);
+    for (u32 i = 0; i < CONTEST_CATEGORIES_COUNT; i++)
+        gSaveBlock1Ptr->contestWinners[MUSEUM_CONTEST_WINNERS_START + i].species = SPECIES_MILOTIC;
+    for (u32 i = 0; i < NUM_FRONTIER_FACILITIES; i++)
+    {
+        FlagSet(FLAG_SYS_TOWER_SILVER + 2 * i);
+        FlagSet(FLAG_SYS_TOWER_GOLD + 2 * i);
+    }
+    ShowPlayerTrainerCard(gInitialMainCB2);
+}
+
+static void PrepareHeadlessDomeInfo(void)
+{
+    VarSet(VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES);
+    gSaveBlock2Ptr->frontier.lvlMode = FRONTIER_LVL_50;
+    gSpecialVar_0x8004 = BATTLE_DOME_FUNC_INIT;
+    CallBattleDomeFunction();
+    gSpecialVar_0x8004 = BATTLE_DOME_FUNC_INIT_TRAINERS;
+    CallBattleDomeFunction();
+    gSpecialVar_0x8004 = BATTLE_DOME_FUNC_SHOW_OPPONENT_INFO;
+    CallBattleDomeFunction();
+}
+
+static void PrepareHeadlessContestResults(void)
+{
+    static const enum Species species[CONTESTANT_COUNT] =
+    {
+        SPECIES_MILOTIC,
+        SPECIES_PIKACHU,
+        SPECIES_ALTARIA,
+        SPECIES_ROSERADE,
+    };
+    static const u8 *const names[CONTESTANT_COUNT] =
+    {
+        COMPOUND_STRING("AQUA"),
+        COMPOUND_STRING("SPARK"),
+        COMPOUND_STRING("ARIA"),
+        COMPOUND_STRING("ROSE"),
+    };
+
+    gContestPlayerMonIndex = 0;
+    gSpecialVar_ContestCategory = CONTEST_CATEGORY_BEAUTY;
+    gSpecialVar_ContestRank = CONTEST_RANK_MASTER;
+    for (u32 i = 0; i < CONTESTANT_COUNT; i++)
+    {
+        memset(&gContestMons[i], 0, sizeof(gContestMons[i]));
+        gContestMons[i].species = species[i];
+        StringCopy(gContestMons[i].nickname, names[i]);
+        StringCopy(gContestMons[i].trainerName, i == 0 ? sEcHeadlessPlayerName : names[i]);
+        gContestMons[i].personality = 0x12340000 + i;
+        gContestMons[i].trainerGfxId = OBJ_EVENT_GFX_BRENDAN_NORMAL;
+        gContestFinalStandings[i] = i;
+        gContestMonRound1Points[i] = 400 - i * 50;
+        gContestMonRound2Points[i] = 400 - i * 40;
+        gContestMonTotalPoints[i] = gContestMonRound1Points[i] + gContestMonRound2Points[i];
+    }
+}
+
+static void PrepareHeadlessFairySummary(void)
+{
+    metloc_u8_t metLocation = MAPSEC_ROUTE_101;
+
+    CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_SYLVEON, 50, OTID_STRUCT_PLAYER_ID);
+    SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][0], MOVE_MOONBLAST, 0);
+    SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][0], MOVE_HYPER_VOICE, 1);
+    SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][0], MOVE_PROTECT, 2);
+    SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][0], MOVE_HELPING_HAND, 3);
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MET_LOCATION, &metLocation);
+    CalculatePlayerPartyCount();
+    ShowPokemonSummaryScreen(
+        SUMMARY_MODE_NORMAL,
+        gParties[B_TRAINER_PLAYER],
+        0,
+        0,
+        CB2_PartyMenuFromStartMenu);
+}
+
+static bool32 IsHeadlessPokedexStateObserved(void)
+{
+    switch (gEcHeadlessFixtureParam)
+    {
+    case EC_HEADLESS_POKEDEX_LIST:
+        return IsPokedexHeadlessOnScreen(PAGE_MAIN, AREA_SCREEN, FALSE);
+    case EC_HEADLESS_POKEDEX_INFO:
+        return IsPokedexHeadlessOnScreen(PAGE_INFO, AREA_SCREEN, FALSE);
+    case EC_HEADLESS_POKEDEX_AREA:
+        return IsPokedexHeadlessOnScreen(PAGE_AREA, AREA_SCREEN, FALSE);
+    case EC_HEADLESS_POKEDEX_STATS:
+        return IsPokedexHeadlessOnScreen(STATS_SCREEN, AREA_SCREEN, FALSE);
+    case EC_HEADLESS_POKEDEX_EVOLUTIONS:
+        return IsPokedexHeadlessOnScreen(EVO_SCREEN, EVO_SCREEN, FALSE);
+    case EC_HEADLESS_POKEDEX_FORMS:
+        return IsPokedexHeadlessOnScreen(FORMS_SCREEN, FORMS_SCREEN, FALSE);
+    case EC_HEADLESS_POKEDEX_CRY:
+        return IsPokedexHeadlessOnScreen(PAGE_CRY, CRY_SCREEN, FALSE);
+    case EC_HEADLESS_POKEDEX_SIZE:
+        return IsPokedexHeadlessOnScreen(PAGE_SIZE, SIZE_SCREEN, FALSE);
+    case EC_HEADLESS_POKEDEX_SEARCH:
+        return IsPokedexHeadlessOnScreen(PAGE_SEARCH, AREA_SCREEN, FALSE);
+    case EC_HEADLESS_POKEDEX_SEARCH_RESULTS:
+        return IsPokedexHeadlessOnScreen(PAGE_SEARCH_RESULTS, AREA_SCREEN, TRUE);
+    }
+    return FALSE;
+}
+
+static bool32 IsHeadlessSummaryStateObserved(void)
+{
+    switch (gEcHeadlessFixtureParam & 0xFFFF)
+    {
+    case EC_HEADLESS_SUMMARY_INFO:
+        return IsPokemonSummaryHeadlessOnPage(PSS_PAGE_INFO, FALSE);
+    case EC_HEADLESS_SUMMARY_SKILLS:
+        return IsPokemonSummaryHeadlessOnPage(PSS_PAGE_SKILLS, FALSE);
+    case EC_HEADLESS_SUMMARY_BATTLE_MOVES:
+        return IsPokemonSummaryHeadlessOnPage(PSS_PAGE_BATTLE_MOVES, FALSE);
+    case EC_HEADLESS_SUMMARY_CONTEST_MOVES:
+        return IsPokemonSummaryHeadlessOnPage(PSS_PAGE_CONTEST_MOVES, FALSE);
+    case EC_HEADLESS_SUMMARY_MOVE_DETAILS:
+        return IsPokemonSummaryHeadlessOnPage(PSS_PAGE_BATTLE_MOVES, TRUE);
+    case EC_HEADLESS_SUMMARY_PARTY_ROUNDTRIP:
+        return IsPartyMenuHeadlessAwaitingSelection();
+    }
+    return FALSE;
+}
+
+void EmeraldChampionsHeadlessObserve(void)
+{
+    EmeraldChampionsAgentPrepPoll();
+    if ((gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_RYDEL_RETRY
+      || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_ROUTE110_RETRY)
+     && gEcHeadlessFixtureTrigger && gMain.callback2 == CB2_Overworld
+     && !ArePlayerFieldControlsLocked() && !ScriptContext_IsEnabled())
+    {
+        // Diagnostic-only recovery actions; never used by the earned campaign.
+        if (gEcHeadlessFixtureTrigger == 2)
+        {
+            struct BagPocket *pocket = &gBagPockets[GetItemPocket(ITEM_DOWSING_MACHINE)];
+            BagPocket_SetSlotItemIdAndCount(pocket, 0, ITEM_NONE, 0);
+        }
+        else if (gEcHeadlessFixtureTrigger == 3)
+            HealPlayerParty();
+        gEcHeadlessFixtureTrigger = 0;
+    }
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_STORY_HANDOFF
+        && gEcHeadlessFixtureTrigger && gMain.callback2 == CB2_Overworld
+        && !ArePlayerFieldControlsLocked() && !ScriptContext_IsEnabled())
+    {
+        // Fixture storage edits only; reload exercises native persistent state.
+        if (gEcHeadlessFixtureTrigger == 2 || gEcHeadlessFixtureTrigger == 3)
+        {
+            u32 slot = gEcHeadlessFixtureTrigger - 2;
+            gSaveBlock1Ptr->pcItems[slot] = (struct ItemSlot){ITEM_NONE, 0};
+        }
+        gEcHeadlessFixtureTrigger = 0;
+        LoadHeadlessMap(MAP_GRANITE_CAVE_STEVENS_ROOM, 7, 9);
+    }
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_RUSTBORO_GUIDE_RETRY
+        && gEcHeadlessFixtureTrigger == 2 && gMain.callback2 == CB2_Overworld
+        && !ArePlayerFieldControlsLocked() && !ScriptContext_IsEnabled())
+    {
+        // Fixture-only room-making; the guide state and position stay untouched.
+        ClearBag();
+        gEcHeadlessFixtureTrigger = 0;
+    }
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_LEAF_SCENE)
+    {
+        gEcHeadlessFixtureFlashLevel = GetFlashLevel();
+        gEcHeadlessLeafRewardOwned = CheckBagHasItem(ITEM_MEWTWONITE_X, 1);
+        gEcHeadlessLeafCompleted = FlagGet(FLAG_EC_DEFEATED_LEAF_ALTERING_CAVE);
+        gEcHeadlessLeafTrainerDefeated = HasTrainerBeenFought(TRAINER_LEAF_ALTERING_CAVE);
+        // Host setup requests only: reload preserves persistent encounter state.
+        if (gEcHeadlessFixtureTrigger && gMain.callback2 == CB2_Overworld
+            && !ArePlayerFieldControlsLocked() && !ScriptContext_IsEnabled())
+        {
+            if (gEcHeadlessFixtureTrigger == 2)
+                ClearBag();
+            gEcHeadlessFixtureTrigger = 0;
+            LoadHeadlessMap(MAP_ALTERING_CAVE_B1F, 21, 20);
+        }
+    }
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_SECRET_BASE_ESTABLISHED)
+    {
+        gEcHeadlessFixtureObservedResult = gMain.callback2 == CB2_Overworld
+            && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_SECRET_BASE_RED_CAVE1)
+            && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_SECRET_BASE_RED_CAVE1)
+            && gSaveBlock1Ptr->pos.x == 6 && gSaveBlock1Ptr->pos.y == 5
+            && VarGet(VAR_CURRENT_SECRET_BASE) == 0
+            && VarGet(VAR_INIT_SECRET_BASE) == 1
+            && VarGet(VAR_SECRET_BASE_INITIALIZED) == 1
+            && FlagGet(FLAG_HIDE_SECRET_BASE_TRAINER)
+            && MapGridGetMetatileIdAt(5 + MAP_OFFSET, 5 + MAP_OFFSET) == METATILE_SecretBase_SmallChair
+            && !ArePlayerFieldControlsLocked() && !ScriptContext_IsEnabled();
+    }
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_NEW_MAUVILLE_BUTTONS)
+    {
+        bool32 blue = VarGet(VAR_TEMP_1) == 1 && VarGet(VAR_TEMP_2) == 0;
+        bool32 green = VarGet(VAR_TEMP_1) == 0 && VarGet(VAR_TEMP_2) == 1;
+        gEcHeadlessFixtureObservedResult = 0;
+        if (gMain.callback2 == CB2_Overworld
+            && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_NEW_MAUVILLE_INSIDE)
+            && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_NEW_MAUVILLE_INSIDE)
+            && !ArePlayerFieldControlsLocked() && !ScriptContext_IsEnabled())
+        {
+            // Sample a passage tile from each color, including collision.
+            if (blue
+                && MapGridGetMetatileIdAt(10 + MAP_OFFSET, 18 + MAP_OFFSET) == METATILE_BikeShop_Floor_Shadow_Top
+                && MapGridGetCollisionAt(10 + MAP_OFFSET, 18 + MAP_OFFSET) == 0
+                && MapGridGetMetatileIdAt(21 + MAP_OFFSET, 4 + MAP_OFFSET) == METATILE_BikeShop_Barrier_Green_BottomMid
+                && MapGridGetCollisionAt(21 + MAP_OFFSET, 4 + MAP_OFFSET) != 0)
+                gEcHeadlessFixtureObservedResult = 1;
+            if (green
+                && MapGridGetMetatileIdAt(10 + MAP_OFFSET, 18 + MAP_OFFSET) == METATILE_BikeShop_Barrier_Blue_BottomMid
+                && MapGridGetCollisionAt(10 + MAP_OFFSET, 18 + MAP_OFFSET) != 0
+                && MapGridGetMetatileIdAt(21 + MAP_OFFSET, 4 + MAP_OFFSET) == METATILE_BikeShop_Floor_Shadow_Top
+                && MapGridGetCollisionAt(21 + MAP_OFFSET, 4 + MAP_OFFSET) == 0)
+                gEcHeadlessFixtureObservedResult = 2;
+        }
+    }
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_MAP_SWEEP)
+    {
+        u32 index = gEcHeadlessFixtureParam;
+        gEcHeadlessFixtureObservedResult = index < ARRAY_COUNT(sEcHeadlessMapSweep)
+            && gEcHeadlessFixtureSetupResult
+            && gMain.callback2 == CB2_Overworld
+            && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(sEcHeadlessMapSweep[index].map)
+            && gSaveBlock1Ptr->location.mapNum == MAP_NUM(sEcHeadlessMapSweep[index].map)
+            && gSaveBlock1Ptr->pos.x == sEcHeadlessMapSweep[index].x
+            && gSaveBlock1Ptr->pos.y == sEcHeadlessMapSweep[index].y;
+        return;
+    }
+    if (EmeraldChampionsHeadlessBattleAutomationActive())
+    {
+        if (!gMain.inBattle)
+            sEcHeadlessAutoCaptureInProgress = FALSE;
+        gEcHeadlessFixtureSetupResult = TRUE;
+        gEcHeadlessCampaignInBattle = gMain.inBattle;
+        if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_FLAG)
+            gEcHeadlessCampaignQueryValue = FlagGet(gEcHeadlessCampaignQueryId);
+        else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_VAR)
+            gEcHeadlessCampaignQueryValue = VarGet(gEcHeadlessCampaignQueryId);
+        else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_ITEM)
+            gEcHeadlessCampaignQueryValue = CountTotalItemQuantityInBag(gEcHeadlessCampaignQueryId);
+        else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_PC_ITEM)
+        {
+            gEcHeadlessCampaignQueryValue = 0;
+            for (u32 slot = 0; slot < PC_ITEMS_COUNT; slot++)
+                if (gSaveBlock1Ptr->pcItems[slot].itemId == gEcHeadlessCampaignQueryId)
+                    gEcHeadlessCampaignQueryValue += gSaveBlock1Ptr->pcItems[slot].quantity;
+        }
+        else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_OBJECT
+              && gMain.callback2 == CB2_Overworld)
+        {
+            u8 objectEventId = GetObjectEventIdByLocalIdAndMap(
+                gEcHeadlessCampaignQueryId,
+                gSaveBlock1Ptr->location.mapNum,
+                gSaveBlock1Ptr->location.mapGroup
+            );
+
+            gEcHeadlessCampaignQueryObjectActive = objectEventId < OBJECT_EVENTS_COUNT
+                && gObjectEvents[objectEventId].active;
+            if (gEcHeadlessCampaignQueryObjectActive)
+            {
+                gEcHeadlessCampaignQueryObjectX =
+                    gObjectEvents[objectEventId].currentCoords.x - MAP_OFFSET;
+                gEcHeadlessCampaignQueryObjectY =
+                    gObjectEvents[objectEventId].currentCoords.y - MAP_OFFSET;
+            }
+            else
+            {
+                gEcHeadlessCampaignQueryObjectX = 0;
+                gEcHeadlessCampaignQueryObjectY = 0;
+            }
+            gEcHeadlessCampaignQueryValue = gEcHeadlessCampaignQueryObjectActive;
+        }
+        else
+        {
+            gEcHeadlessCampaignQueryValue = 0;
+            gEcHeadlessCampaignQueryObjectActive = FALSE;
+            gEcHeadlessCampaignQueryObjectX = 0;
+            gEcHeadlessCampaignQueryObjectY = 0;
+        }
+
+        if (gMain.callback2 == CB2_Overworld)
+        {
+            gEcHeadlessCampaignMapId = (gSaveBlock1Ptr->location.mapGroup << 8)
+                | gSaveBlock1Ptr->location.mapNum;
+            gEcHeadlessCampaignMapGroup = gSaveBlock1Ptr->location.mapGroup;
+            gEcHeadlessCampaignMapNum = gSaveBlock1Ptr->location.mapNum;
+            gEcHeadlessCampaignPlayerX = gSaveBlock1Ptr->pos.x;
+            gEcHeadlessCampaignPlayerY = gSaveBlock1Ptr->pos.y;
+            gEcHeadlessCampaignPlayerFacing = GetPlayerFacingDirection();
+            gEcHeadlessCampaignControlsLocked = ArePlayerFieldControlsLocked();
+            gEcHeadlessCampaignScriptEnabled = ScriptContext_IsEnabled();
+        }
+        else
+        {
+            gEcHeadlessCampaignControlsLocked = TRUE;
+            gEcHeadlessCampaignScriptEnabled = TRUE;
+        }
+        if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CAPTURE_TO_PARTY)
+        {
+            gEcHeadlessFixtureObservedResult =
+                gEcHeadlessCampaignBattleSerial == 1
+                && gEcHeadlessCampaignCaptureSerial == 1
+                && gEcHeadlessCampaignLastCapturedSpecies == GetHeadlessCaptureSpecies()
+                && gEcHeadlessCampaignLastCaptureResult == MON_GIVEN_TO_PARTY
+                && gEcHeadlessCampaignCaptureBookkeepingValid
+                && HeadlessCapturedSignIsComplete();
+        }
+        else if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CAPTURE_TO_PC)
+        {
+            gEcHeadlessFixtureObservedResult =
+                gEcHeadlessCampaignBattleSerial == 1
+                && gEcHeadlessCampaignCaptureSerial == 1
+                && gEcHeadlessCampaignLastCapturedSpecies == GetHeadlessCaptureSpecies()
+                && gEcHeadlessCampaignLastCaptureResult == MON_GIVEN_TO_PC
+                && gEcHeadlessCampaignCaptureBookkeepingValid
+                && HeadlessCapturedSignIsComplete();
+        }
+        else if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CAPTURE_QUEST_DIANCIE)
+        {
+            gEcHeadlessFixtureObservedResult =
+                gEcHeadlessCampaignBattleSerial == 1
+                && gEcHeadlessCampaignCaptureSerial == 1
+                && gEcHeadlessCampaignLastCapturedSpecies == SPECIES_DIANCIE
+                && gEcHeadlessCampaignLastCaptureResult == MON_GIVEN_TO_PARTY
+                && gEcHeadlessCampaignCaptureBookkeepingValid
+                && FlagGet(FLAG_EC_CAUGHT_DIANCIE);
+        }
+        else if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CAPTURE_QUEST_REGISTEEL)
+        {
+            gEcHeadlessFixtureObservedResult =
+                gEcHeadlessCampaignBattleSerial == 1
+                && gEcHeadlessCampaignCaptureSerial == 1
+                && gEcHeadlessCampaignLastCapturedSpecies == SPECIES_REGISTEEL
+                && gEcHeadlessCampaignCaptureBookkeepingValid
+                && FlagGet(FLAG_DEFEATED_REGISTEEL);
+        }
+        else if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CAPTURE_QUEST_LATIOS)
+        {
+            gEcHeadlessFixtureObservedResult =
+                gEcHeadlessCampaignBattleSerial == 1
+                && gEcHeadlessCampaignCaptureSerial == 1
+                && gEcHeadlessCampaignLastCapturedSpecies == SPECIES_LATIOS
+                && gEcHeadlessCampaignCaptureBookkeepingValid
+                && FlagGet(FLAG_CAUGHT_LATIAS_OR_LATIOS);
+        }
+        else if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CAPTURE_ORDINARY_FIRST)
+        {
+            gEcHeadlessFixtureObservedResult =
+                gEcHeadlessCampaignBattleSerial == 1
+                && gEcHeadlessCampaignCaptureSerial == 1
+                && !(gEcHeadlessCampaignLastBattleType
+                    & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_CATCH_TUTORIAL))
+                && gEcHeadlessCampaignLastCapturedSpecies == SPECIES_POOCHYENA
+                && gEcHeadlessCampaignLastCaptureResult == MON_GIVEN_TO_PARTY
+                && gEcHeadlessCampaignCaptureBookkeepingValid;
+        }
+        else if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_ROXANNE_VICTORY)
+        {
+            gEcHeadlessFixtureObservedResult =
+                gEcHeadlessCampaignBattleSerial == 1
+                && gEcHeadlessCampaignLastResolution == EC_HEADLESS_BATTLE_WIN
+                && FlagGet(FLAG_BADGE01_GET)
+                && FlagGet(FLAG_DEFEATED_RUSTBORO_GYM)
+                && FlagGet(FLAG_EC_RECEIVED_ROXANNE_AERODACTYLITE)
+                && FlagGet(FLAG_RECEIVED_ROXANNE_OLD_AMBER)
+                && HasTrainerBeenFought(TRAINER_ROXANNE_1)
+                && GetCurrentLevelCap() == 20
+                && CheckBagHasItem(ITEM_AERODACTYLITE, 1)
+                && CheckBagHasItem(ITEM_OLD_AMBER, 1)
+                && VarGet(VAR_RUSTBORO_CITY_STATE) == 1
+                && !gMain.inBattle
+                && gMain.callback2 == CB2_Overworld
+                && !ArePlayerFieldControlsLocked()
+                && !ScriptContext_IsEnabled();
+        }
+        else if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_FIRST_CENTER_ACQUISITION)
+        {
+            u32 checks = 0;
+
+#define EC_CENTER_CHECK(bit, condition) if (condition) checks |= 1u << (bit)
+            EC_CENTER_CHECK(0, gEcHeadlessCampaignBattleSerial == 0);
+            EC_CENTER_CHECK(1, gEcHeadlessCampaignCaptureSerial == 0);
+            EC_CENTER_CHECK(2, FlagGet(FLAG_SYS_POKEDEX_GET));
+            EC_CENTER_CHECK(3, FlagGet(FLAG_SYS_POKEMON_GET));
+            EC_CENTER_CHECK(4, !FlagGet(FLAG_BADGE01_GET));
+            EC_CENTER_CHECK(5, CheckBagHasItem(ITEM_POKE_VIAL, 1));
+            EC_CENTER_CHECK(6, CheckBagHasItem(ITEM_LEVELER, 1));
+            EC_CENTER_CHECK(7, CheckBagHasItem(ITEM_REPEL_SPRAY, 1));
+            EC_CENTER_CHECK(8, CheckBagHasItem(ITEM_FLIGHT_BEACON, 1));
+            EC_CENTER_CHECK(9, VarGet(VAR_POKE_VIAL_MAX_CHARGES) == 1);
+            EC_CENTER_CHECK(10, VarGet(VAR_POKE_VIAL_CHARGES) == 1);
+            EC_CENTER_CHECK(11, VarGet(VAR_RUSTBORO_CITY_STATE) == 0);
+            EC_CENTER_CHECK(12, VarGet(VAR_PETALBURG_GYM_STATE) == 0);
+            EC_CENTER_CHECK(13, GetGameStat(GAME_STAT_USED_POKECENTER) == 1);
+            EC_CENTER_CHECK(14, GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP)
+                == GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MAX_HP));
+            EC_CENTER_CHECK(15, GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_STATUS) == 0);
+            EC_CENTER_CHECK(16, !gMain.inBattle && gMain.callback2 == CB2_Overworld);
+            EC_CENTER_CHECK(17, !ArePlayerFieldControlsLocked() && !ScriptContext_IsEnabled());
+#undef EC_CENTER_CHECK
+            gEcHeadlessCampaignQueryValue = checks;
+            gEcHeadlessFixtureObservedResult = checks == (1u << 18) - 1;
+        }
+        return;
+    }
+
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_DEWFORD_GYM_ENTRY)
+    {
+        gEcHeadlessFixtureSetupResult = TRUE;
+        if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_DEWFORD_TOWN_GYM)
+         && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_DEWFORD_TOWN_GYM))
+            gEcHeadlessFixtureObservedResult = TRUE;
+        return;
+    }
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_HM_REPLACEMENT)
+    {
+        if (gSpecialVar_Result == TRUE && gSpecialVar_0x8005 == 0)
+            gEcHeadlessFixtureObservedResult = TRUE;
+        return;
+    }
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_HEAL_LOCATION_WHITEOUT)
+    {
+        bool32 stateMatches = IsWhiteoutRespawnHeadlessState(gEcHeadlessFixtureParam);
+
+        if (IsLastHealLocationPlayerHouse())
+            gEcHeadlessFixtureObservedResult = stateMatches && ArePlayerFieldControlsLocked();
+        else
+            gEcHeadlessFixtureObservedResult = stateMatches
+                && FieldEffectActiveListContains(FLDEFF_POKECENTER_HEAL);
+        return;
+    }
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_FIELD_MOVE_CUT
+     || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_FIELD_MOVE_ROCK_SMASH
+     || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_FIELD_MOVE_STRENGTH)
+    {
+        gEcHeadlessFixtureSetupResult = TRUE;
+        if (FieldEffectActiveListContains(FLDEFF_FIELD_MOVE_SHOW_MON))
+            gEcHeadlessFixtureObservedResult = TRUE;
+        return;
+    }
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_FLIGHT_BEACON)
+    {
+        if (gEcHeadlessFixtureTrigger)
+        {
+            gEcHeadlessFixtureTrigger = FALSE;
+            CreateTask(Task_HeadlessOpenFlightBeaconMap, 0);
+        }
+        if (sEcHeadlessFlightRider == SPECIES_WINGULL
+         && gFieldMoveShowMonSpeciesOverride == SPECIES_NONE
+         && FieldEffectActiveListContains(FLDEFF_USE_FLY)
+         && FieldEffectActiveListContains(FLDEFF_FIELD_MOVE_SHOW_MON))
+            gEcHeadlessFixtureObservedResult = TRUE;
+        return;
+    }
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_HALL_OF_FAME_RECORD)
+    {
+        if (gEcHeadlessFixtureTrigger && !gEcHeadlessFixtureSetupResult
+         && gMain.callback2 == CB2_Overworld)
+        {
+            FieldEffectStart(FLDEFF_HALL_OF_FAME_RECORD);
+            gEcHeadlessFixtureSetupResult = TRUE;
+        }
+        gEcHeadlessFixtureObservedResult = gEcHeadlessFixtureSetupResult
+            && IsHallOfFameRecordHeadlessVisible(gEcHeadlessFixtureParam);
+        return;
+    }
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_MULTI_CORRIDOR_DOOR)
+    {
+        if (gEcHeadlessFixtureTrigger && !gEcHeadlessFixtureSetupResult
+         && gMain.callback2 == CB2_Overworld)
+        {
+            u32 x = ((gEcHeadlessFixtureParam & 1) ? 8 : 7) + MAP_OFFSET;
+            u32 y = 1 + MAP_OFFSET;
+
+            if (gEcHeadlessFixtureParam >= 2)
+            {
+                FieldSetDoorOpened(x, y);
+                gEcHeadlessFixtureSetupResult = FieldAnimateDoorClose(x, y) >= 0;
+            }
+            else
+            {
+                gEcHeadlessFixtureSetupResult = FieldAnimateDoorOpen(x, y) >= 0;
+            }
+        }
+        gEcHeadlessFixtureObservedResult = gEcHeadlessFixtureSetupResult
+            && FieldIsDoorAnimationRunning();
+        return;
+    }
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_FURFROU_TRIMS)
+    {
+        bool32 menuActive;
+
+        if (!gEcHeadlessFixtureSetupResult && gMain.callback2 == CB2_Overworld)
+        {
+            gSpecialVar_0x8004 = SCROLL_MULTI_FURFROU_TRIMS;
+            gSpecialVar_0x8005 = 0;
+            ShowScrollableMultichoice();
+            gEcHeadlessFixtureSetupResult = TRUE;
+        }
+        menuActive = IsScrollableMultichoiceHeadlessActive(SCROLL_MULTI_FURFROU_TRIMS);
+        if (menuActive)
+            sEcHeadlessFurfrouMenuOpened = TRUE;
+        switch (gEcHeadlessFixtureParam)
+        {
+        case EC_HEADLESS_FURFROU_TRIMS_OPEN:
+            gEcHeadlessFixtureObservedResult = menuActive
+                && gScrollableMultichoice_ScrollOffset == 0;
+            break;
+        case EC_HEADLESS_FURFROU_TRIMS_SCROLLED:
+            gEcHeadlessFixtureObservedResult = menuActive
+                && gScrollableMultichoice_ScrollOffset == 6;
+            break;
+        case EC_HEADLESS_FURFROU_TRIMS_B_CANCELLED:
+            gEcHeadlessFixtureObservedResult = sEcHeadlessFurfrouMenuOpened
+                && !menuActive
+                && gSpecialVar_Result == MULTI_B_PRESSED;
+            break;
+        case EC_HEADLESS_FURFROU_TRIMS_BACK_SELECTED:
+            gEcHeadlessFixtureObservedResult = sEcHeadlessFurfrouMenuOpened
+                && !menuActive
+                && gSpecialVar_Result == 10;
+            break;
+        }
+        return;
+    }
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_BATTLE_SET_LONG_LIST)
+    {
+        bool32 menuActive;
+        u16 expectedOffset;
+
+        if (gEcHeadlessFixtureTrigger
+         && !gEcHeadlessFixtureSetupResult
+         && gMain.callback2 == CB2_Overworld)
+        {
+            gEcHeadlessFixtureTrigger = FALSE;
+            gSpecialVar_0x800A = 0;
+            gSpecialVar_0x8007 = EC_BATTLE_FORMAT_DOUBLES;
+            gSpecialVar_0x8004 = SCROLL_MULTI_EMERALD_CHAMPIONS_BATTLE_SET;
+            gSpecialVar_0x8005 = 0;
+            ScriptContext_Stop();
+            ShowScrollableMultichoice();
+            gEcHeadlessFixtureSetupResult = TRUE;
+        }
+        menuActive = IsScrollableMultichoiceHeadlessActive(
+            SCROLL_MULTI_EMERALD_CHAMPIONS_BATTLE_SET
+        );
+        expectedOffset = gEcHeadlessFixtureParam == EC_HEADLESS_BATTLE_SET_LIST_BOTTOM
+            ? 3
+            : gEcHeadlessFixtureParam == EC_HEADLESS_BATTLE_SET_LIST_MIDDLE ? 2 : 0;
+        gEcHeadlessFixtureObservedResult = menuActive
+            && GetEmeraldChampionsBattleSetCountForFormat(
+                &gParties[B_TRAINER_PLAYER][0], EC_BATTLE_FORMAT_DOUBLES
+            ) == 6
+            && gScrollableMultichoice_ScrollOffset == expectedOffset;
+        return;
+    }
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_POKEDEX)
+    {
+        gEcHeadlessFixtureObservedResult = IsHeadlessPokedexStateObserved();
+        return;
+    }
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_SUMMARY
+     || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_FAIRY_SUMMARY)
+    {
+        gEcHeadlessFixtureObservedResult = IsHeadlessSummaryStateObserved();
+        return;
+    }
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_BAG)
+    {
+        gEcHeadlessFixtureObservedResult = gEcHeadlessFixtureParam < POCKETS_COUNT
+            && IsBagHeadlessOnPocket(gEcHeadlessFixtureParam);
+        return;
+    }
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_MAGMA_SPARKLE
+     && gMain.callback2 == CB2_Overworld)
+    {
+        gEcHeadlessFixtureSetupResult = TRUE;
+        if (gEcHeadlessFixtureTrigger && !gEcHeadlessFixtureObservedResult)
+        {
+            gFieldEffectArguments[0] = 16;
+            gFieldEffectArguments[1] = 21;
+            gFieldEffectArguments[2] = 0;
+            FieldEffectStart(FLDEFF_SPARKLE);
+            gEcHeadlessFixtureObservedResult = TRUE;
+        }
+        return;
+    }
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CENTER_OLDALE
+     && gEcHeadlessFixtureParam != 0
+     && gMain.callback2 == CB2_Overworld)
+    {
+        gEcHeadlessFixtureSetupResult = TRUE;
+        if (FieldEffectActiveListContains(FLDEFF_POKECENTER_HEAL))
+            gEcHeadlessFixtureObservedResult = TRUE;
+        return;
+    }
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CONTEST_RESULTS
+     && !gEcHeadlessFixtureSetupResult
+     && gMain.callback2 == CB2_Overworld)
+    {
+        ShowContestResults();
+        gEcHeadlessFixtureSetupResult = TRUE;
+        return;
+    }
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_SLOT_MACHINE
+     && !gEcHeadlessFixtureSetupResult
+     && gMain.callback2 == CB2_Overworld)
+    {
+        PlaySlotMachine(0, gInitialMainCB2);
+        gEcHeadlessFixtureSetupResult = TRUE;
+        return;
+    }
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_SPECIES_OVERWORLD
+     && !gEcHeadlessFixtureSetupResult
+     && gMain.callback2 == CB2_Overworld)
+    {
+        const struct EcHeadlessOverworldFixture *fixture;
+
+        if (gEcHeadlessFixtureParam >= ARRAY_COUNT(sEcHeadlessOverworldFixtures))
+            return;
+        fixture = &sEcHeadlessOverworldFixtures[gEcHeadlessFixtureParam];
+        for (u32 objectEventId = 0; objectEventId < OBJECT_EVENTS_COUNT; objectEventId++)
+        {
+            struct ObjectEvent *objectEvent = &gObjectEvents[objectEventId];
+            struct Sprite *sprite;
+
+            if (!objectEvent->active
+             || objectEvent->mapGroup != MAP_GROUP(fixture->map)
+             || objectEvent->mapNum != MAP_NUM(fixture->map)
+             || objectEvent->graphicsId != GetHeadlessOverworldFixtureGraphicsId(fixture->species))
+                continue;
+
+            gEcHeadlessFixtureSetupResult = TRUE;
+            if (objectEvent->invisible
+             || objectEvent->offScreen
+             || objectEvent->spriteId >= MAX_SPRITES)
+                return;
+            sprite = &gSprites[objectEvent->spriteId];
+            if (sprite->inUse
+             && sprite->x + sprite->x2 >= -64
+             && sprite->x + sprite->x2 < DISPLAY_WIDTH + 64
+             && sprite->y + sprite->y2 >= -64
+             && sprite->y + sprite->y2 < DISPLAY_HEIGHT + 64)
+                gEcHeadlessFixtureObservedResult = TRUE;
+            return;
+        }
+        return;
+    }
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_SPECIES_OVERWORLD_BACKGROUND
+     && gMain.callback2 == CB2_Overworld)
+    {
+        const struct EcHeadlessOverworldFixture *fixture;
+
+        if (gEcHeadlessFixtureParam >= ARRAY_COUNT(sEcHeadlessOverworldFixtures))
+            return;
+        fixture = &sEcHeadlessOverworldFixtures[gEcHeadlessFixtureParam];
+        for (u32 objectEventId = 0; objectEventId < OBJECT_EVENTS_COUNT; objectEventId++)
+        {
+            struct ObjectEvent *objectEvent = &gObjectEvents[objectEventId];
+
+            if (!objectEvent->active
+             || objectEvent->mapGroup != MAP_GROUP(fixture->map)
+             || objectEvent->mapNum != MAP_NUM(fixture->map)
+             || objectEvent->graphicsId != GetHeadlessOverworldFixtureGraphicsId(fixture->species))
+                continue;
+
+            RemoveObjectEvent(objectEvent);
+            gEcHeadlessFixtureSetupResult = TRUE;
+            return;
+        }
+        if (gEcHeadlessFixtureSetupResult)
+            gEcHeadlessFixtureObservedResult = TRUE;
+        return;
+    }
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_STORAGE
+     && !gEcHeadlessFixtureSetupResult
+     && gMain.callback2 == CB2_Overworld)
+    {
+        ShowPokemonStorageSystemPC();
+        gEcHeadlessFixtureSetupResult = TRUE;
+        return;
+    }
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_STARTER_REGIONS
+     && !gEcHeadlessFixtureSetupResult
+     && gMain.callback2 == CB2_Overworld)
+    {
+        ScriptContext_SetupScript(Common_EventScript_ChooseStarterRegion);
+        gEcHeadlessFixtureSetupResult = TRUE;
+        return;
+    }
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_MOVE_ANIMATION
+     && gMain.inBattle
+     && gBattleStruct != NULL)
+    {
+        if (gEcHeadlessFixtureTrigger)
+        {
+            gEcHeadlessFixtureTrigger = FALSE;
+            gBattlerAttacker = B_BATTLER_0;
+            gBattlerTarget = B_BATTLER_1;
+            gCurrentMove = gEcHeadlessFixtureParam;
+            DoMoveAnim(gCurrentMove);
+            gEcHeadlessFixtureSetupResult = TRUE;
+        }
+        if (gEcHeadlessFixtureSetupResult && gAnimScriptActive)
+        {
+            gAnimScriptCallback();
+            gEcHeadlessFixtureObservedResult = TRUE;
+        }
+        return;
+    }
+
+    if (gEcHeadlessFixtureObservedResult || !gMain.inBattle || gBattleStruct == NULL)
+        return;
+
+    switch (gEcHeadlessFixtureActiveScenario)
+    {
+    case EC_HEADLESS_SCENARIO_DOUBLE_STATUS_ABILITY:
+        if (gHealthboxSpriteIds[B_BATTLER_0] != MAX_SPRITES
+         && gHealthboxSpriteIds[B_BATTLER_1] != MAX_SPRITES
+         && gHealthboxSpriteIds[B_BATTLER_2] != MAX_SPRITES
+         && gHealthboxSpriteIds[B_BATTLER_3] != MAX_SPRITES)
+        {
+            gEcHeadlessFixtureSetupResult = TRUE;
+            if (gEcHeadlessFixtureTrigger)
+            {
+                gEcHeadlessFixtureTrigger = FALSE;
+                CreateAbilityPopUp(B_BATTLER_0, ABILITY_INTIMIDATE, TRUE);
+            }
+        }
+        if (gEcHeadlessFixtureSetupResult && IsAnyAbilityPopUpActive())
+        {
+            u8 left = gBattleStruct->abilityPopUpSpriteIds[B_BATTLER_0][0];
+            u8 right = gBattleStruct->abilityPopUpSpriteIds[B_BATTLER_0][1];
+
+            if (left < MAX_SPRITES && right < MAX_SPRITES
+             && gSprites[left].inUse && gSprites[right].inUse
+             && gSprites[left].x + gSprites[left].x2 == 24)
+                gEcHeadlessFixtureObservedResult = TRUE;
+        }
+        break;
+    case EC_HEADLESS_SCENARIO_MEGA:
+        if (!(gEcHeadlessFixtureParam & 1))
+        {
+            if (gBattleStruct->gimmick.triggerSpriteId != MAX_SPRITES)
+            {
+                gEcHeadlessFixtureSetupResult = TRUE;
+                if (gSprites[gBattleStruct->gimmick.triggerSpriteId].inUse)
+                    gEcHeadlessFixtureObservedResult = TRUE;
+            }
+        }
+        else if (gBattleMons[B_BATTLER_0].species == GetHeadlessMegaTarget())
+        {
+            u8 indicator = gBattleStruct->gimmick.indicatorSpriteId[B_BATTLER_0];
+
+            if (gBattleSpritesDataPtr->healthBoxesData[B_BATTLER_0].animFromTableActive)
+                gEcHeadlessFixtureSetupResult = TRUE;
+            if (gEcHeadlessFixtureSetupResult
+             && indicator < MAX_SPRITES && gSprites[indicator].inUse
+             && !gBattleSpritesDataPtr->healthBoxesData[B_BATTLER_0].animFromTableActive
+             && ++sEcHeadlessObservedDelay >= 120)
+                gEcHeadlessFixtureObservedResult = TRUE;
+        }
+        break;
+    case EC_HEADLESS_SCENARIO_PRIMALS:
+        if (gBattleMons[B_BATTLER_0].species == SPECIES_KYOGRE_PRIMAL
+         && gBattleMons[B_BATTLER_1].species == SPECIES_GROUDON_PRIMAL)
+        {
+            u8 alpha = gBattleStruct->gimmick.indicatorSpriteId[B_BATTLER_0];
+            u8 omega = gBattleStruct->gimmick.indicatorSpriteId[B_BATTLER_1];
+
+            gEcHeadlessFixtureSetupResult = TRUE;
+            if (alpha < MAX_SPRITES && omega < MAX_SPRITES
+             && gSprites[alpha].inUse && gSprites[omega].inUse
+             && ++sEcHeadlessObservedDelay >= 60)
+                gEcHeadlessFixtureObservedResult = TRUE;
+        }
+        break;
+    case EC_HEADLESS_SCENARIO_SAFARI:
+        if ((gBattleTypeFlags & BATTLE_TYPE_SAFARI)
+         && gHealthboxSpriteIds[B_BATTLER_0] < MAX_SPRITES
+         && gSprites[gHealthboxSpriteIds[B_BATTLER_0]].inUse)
+        {
+            gEcHeadlessFixtureSetupResult = TRUE;
+            gEcHeadlessFixtureObservedResult = TRUE;
+        }
+        break;
+    case EC_HEADLESS_SCENARIO_WILD_ACTION_MENU:
+        if (gLastUsedBallMenuPresent
+         && gBallToDisplay == ITEM_QUICK_BALL
+         && gBattleStruct->ballSpriteIds[0] != MAX_SPRITES
+         && gBattleStruct->ballSpriteIds[1] != MAX_SPRITES)
+            gEcHeadlessFixtureObservedResult = TRUE;
+        break;
+    case EC_HEADLESS_SCENARIO_MOVE_DETAILS:
+        if (gBattle_BG0_Y == DISPLAY_HEIGHT * 2
+         && gBattleStruct->descriptionSubmenu
+         && gCategoryIconSpriteId != 0xFF
+         && gMoveSelectionCursor[0] == 0)
+            gEcHeadlessFixtureObservedResult = TRUE;
+        break;
+    case EC_HEADLESS_SCENARIO_WILD_FOE_TYPES:
+        if (gBattle_BG0_Y == DISPLAY_HEIGHT
+         && GetWindowAttribute(B_WIN_MOVE_DESCRIPTION, WINDOW_TILEMAP_TOP) == 27
+         && gBattleStruct->descriptionSubmenu
+         && gBattleStruct->foeTypesSubmenu)
+            gEcHeadlessFixtureObservedResult = TRUE;
+        break;
+    case EC_HEADLESS_SCENARIO_MOVE_FOE_TYPES:
+        if (gBattle_BG0_Y == DISPLAY_HEIGHT * 2
+         && GetWindowAttribute(B_WIN_MOVE_DESCRIPTION, WINDOW_TILEMAP_TOP) == 47
+         && gBattleStruct->descriptionSubmenu
+         && gBattleStruct->foeTypesSubmenu)
+            gEcHeadlessFixtureObservedResult = TRUE;
+        break;
+    }
+}
+
+void CB2_EmeraldChampionsHeadlessFixture(void)
+{
+    u32 scenario = gEcHeadlessFixtureScenario;
+
+    // The host writes the selected scenario only after CRT startup has cleared
+    // EWRAM. Until then the fixture deliberately renders a blank boot frame.
+    if (scenario == EC_HEADLESS_SCENARIO_NONE)
+        return;
+
+    gEcHeadlessFixtureScenario = EC_HEADLESS_SCENARIO_NONE;
+    gEcHeadlessFixtureActiveScenario = scenario;
+    gEcHeadlessFixtureSetupResult = FALSE;
+    gEcHeadlessFixtureObservedResult = FALSE;
+    gEcHeadlessFixtureTrigger = FALSE;
+    sEcHeadlessObservedDelay = 0;
+    sEcHeadlessFurfrouMenuOpened = FALSE;
+
+    if (scenario == EC_HEADLESS_SCENARIO_CAMPAIGN_AUTOWIN)
+    {
+        gEcHeadlessCampaignBattleSerial = 0;
+        gEcHeadlessCampaignLastBattleType = 0;
+        gEcHeadlessCampaignLastOpponentA = TRAINER_NONE;
+        gEcHeadlessCampaignLastOpponentB = TRAINER_NONE;
+        gEcHeadlessCampaignMapId = 0;
+        gEcHeadlessCampaignMapGroup = 0;
+        gEcHeadlessCampaignMapNum = 0;
+        gEcHeadlessCampaignPlayerX = 0;
+        gEcHeadlessCampaignPlayerY = 0;
+        gEcHeadlessCampaignPlayerFacing = DIR_NONE;
+        gEcHeadlessCampaignControlsLocked = TRUE;
+        gEcHeadlessCampaignScriptEnabled = TRUE;
+        gEcHeadlessCampaignInBattle = FALSE;
+        gEcHeadlessCampaignQueryKind = EC_HEADLESS_CAMPAIGN_QUERY_NONE;
+        gEcHeadlessCampaignQueryId = 0;
+        gEcHeadlessCampaignQueryValue = 0;
+        gEcHeadlessCampaignQueryObjectActive = FALSE;
+        gEcHeadlessCampaignQueryObjectX = 0;
+        gEcHeadlessCampaignQueryObjectY = 0;
+        gEcHeadlessCampaignCaptureSerial = 0;
+        gEcHeadlessCampaignLastCapturedSpecies = SPECIES_NONE;
+        gEcHeadlessCampaignLastCaptureResult = MON_CANT_GIVE;
+        gEcHeadlessCampaignCaptureBookkeepingValid = FALSE;
+        gEcHeadlessCampaignLastResolution = EC_HEADLESS_BATTLE_NATIVE;
+        sEcHeadlessAutoCaptureInProgress = FALSE;
+        gEcHeadlessFixtureSetupResult = TRUE;
+        SetMainCallback2(gInitialMainCB2);
+        return;
+    }
+
+    PrepareHeadlessNewGame();
+
+    if (scenario == EC_HEADLESS_SCENARIO_CAPTURE_TO_PARTY
+     || scenario == EC_HEADLESS_SCENARIO_CAPTURE_TO_PC)
+    {
+        gEcHeadlessCampaignBattleSerial = 0;
+        gEcHeadlessCampaignCaptureSerial = 0;
+        gEcHeadlessCampaignLastCapturedSpecies = SPECIES_NONE;
+        gEcHeadlessCampaignLastCaptureResult = MON_CANT_GIVE;
+        gEcHeadlessCampaignCaptureBookkeepingValid = FALSE;
+        sEcHeadlessAutoCaptureInProgress = FALSE;
+        PrepareHeadlessCaptureBattle(scenario == EC_HEADLESS_SCENARIO_CAPTURE_TO_PC);
+        return;
+    }
+    if (scenario == EC_HEADLESS_SCENARIO_CAPTURE_QUEST_DIANCIE)
+    {
+        gEcHeadlessCampaignBattleSerial = 0;
+        gEcHeadlessCampaignCaptureSerial = 0;
+        gEcHeadlessCampaignLastCapturedSpecies = SPECIES_NONE;
+        gEcHeadlessCampaignLastCaptureResult = MON_CANT_GIVE;
+        gEcHeadlessCampaignCaptureBookkeepingValid = FALSE;
+        sEcHeadlessAutoCaptureInProgress = FALSE;
+        PrepareHeadlessOverworldFixtureState(SPECIES_DIANCIE);
+        CreateHealthyHeadlessMon(
+            &gParties[B_TRAINER_PLAYER][0], SPECIES_GEODUDE, 70,
+            OTID_STRUCT_PLAYER_ID
+        );
+        CalculatePlayerPartyCount();
+        LoadHeadlessMap(MAP_CAVE_OF_ORIGIN_DIANCIES_ROOM, 9, 11);
+        return;
+    }
+    if (scenario == EC_HEADLESS_SCENARIO_CAPTURE_QUEST_REGISTEEL
+     || scenario == EC_HEADLESS_SCENARIO_CAPTURE_QUEST_LATIOS)
+    {
+        gEcHeadlessCampaignBattleSerial = 0;
+        gEcHeadlessCampaignCaptureSerial = 0;
+        gEcHeadlessCampaignLastCapturedSpecies = SPECIES_NONE;
+        gEcHeadlessCampaignLastCaptureResult = MON_CANT_GIVE;
+        gEcHeadlessCampaignCaptureBookkeepingValid = FALSE;
+        sEcHeadlessAutoCaptureInProgress = FALSE;
+        CreateHealthyHeadlessMon(
+            &gParties[B_TRAINER_PLAYER][0], SPECIES_GEODUDE, 70,
+            OTID_STRUCT_PLAYER_ID
+        );
+        CalculatePlayerPartyCount();
+        if (scenario == EC_HEADLESS_SCENARIO_CAPTURE_QUEST_REGISTEEL)
+            LoadHeadlessMap(MAP_ANCIENT_TOMB, 8, 8);
+        else
+        {
+            FlagSet(FLAG_ENABLE_SHIP_SOUTHERN_ISLAND);
+            LoadHeadlessMap(MAP_SOUTHERN_ISLAND_INTERIOR, 13, 12);
+        }
+        return;
+    }
+    if (scenario == EC_HEADLESS_SCENARIO_CAPTURE_ORDINARY_FIRST)
+    {
+        gEcHeadlessCampaignBattleSerial = 0;
+        gEcHeadlessCampaignCaptureSerial = 0;
+        gEcHeadlessCampaignLastCapturedSpecies = SPECIES_NONE;
+        gEcHeadlessCampaignLastCaptureResult = MON_CANT_GIVE;
+        gEcHeadlessCampaignCaptureBookkeepingValid = FALSE;
+        PrepareHeadlessWildBattle(FALSE);
+        gBattleTypeFlags = 0;
+        return;
+    }
+    if (scenario == EC_HEADLESS_SCENARIO_ROXANNE_VICTORY)
+    {
+        gEcHeadlessCampaignBattleSerial = 0;
+        gEcHeadlessCampaignLastResolution = EC_HEADLESS_BATTLE_NATIVE;
+        CreateHealthyHeadlessMon(
+            &gParties[B_TRAINER_PLAYER][0], SPECIES_GEODUDE, 14,
+            OTID_STRUCT_PLAYER_ID
+        );
+        CreateHealthyHeadlessMon(
+            &gParties[B_TRAINER_PLAYER][1], SPECIES_TREECKO, 14,
+            OTID_STRUCT_PLAYER_ID
+        );
+        CalculatePlayerPartyCount();
+        LoadHeadlessMap(MAP_RUSTBORO_CITY_GYM, 5, 3);
+        return;
+    }
+    if (scenario == EC_HEADLESS_SCENARIO_FIRST_CENTER_ACQUISITION)
+    {
+        u32 hp = 1;
+        u32 status = STATUS1_POISON;
+
+        gEcHeadlessCampaignBattleSerial = 0;
+        gEcHeadlessCampaignCaptureSerial = 0;
+        FlagSet(FLAG_SYS_POKEDEX_GET);
+        FlagSet(FLAG_SYS_POKEMON_GET);
+        CreateHealthyHeadlessMon(
+            &gParties[B_TRAINER_PLAYER][0], SPECIES_TREECKO, 10,
+            OTID_STRUCT_PLAYER_ID
+        );
+        CreateHealthyHeadlessMon(
+            &gParties[B_TRAINER_PLAYER][1], SPECIES_POOCHYENA, 8,
+            OTID_STRUCT_PLAYER_ID
+        );
+        SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP, &hp);
+        SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_STATUS, &status);
+        CalculatePlayerPartyCount();
+        LoadHeadlessMap(MAP_OLDALE_TOWN_POKEMON_CENTER_1F, 8, 3);
+        return;
+    }
+
+    switch (scenario)
+    {
+    case EC_HEADLESS_SCENARIO_CENTER_OLDALE:
+        if (gEcHeadlessFixtureParam != 0)
+        {
+            // An established save holds every Center tool; without the spray
+            // the nurse's back-fill dialog would shift the scenario timeline.
+            AddBagItem(ITEM_POKE_VIAL, 1);
+            AddBagItem(ITEM_LEVELER, 1);
+            AddBagItem(ITEM_REPEL_SPRAY, 1);
+            AddBagItem(ITEM_FLIGHT_BEACON, 1);
+            VarSet(VAR_POKE_VIAL_MAX_CHARGES, 1);
+            VarSet(VAR_POKE_VIAL_CHARGES, 1);
+            PrepareCircuitParty();
+        }
+        if (gEcHeadlessFixtureParam == 2
+         || gEcHeadlessFixtureParam == 4
+         || gEcHeadlessFixtureParam == 6)
+        {
+            SetLastHealLocationWarp(
+                gEcHeadlessFixtureParam == 4
+                    ? HEAL_LOCATION_EVER_GRANDE_CITY_POKEMON_LEAGUE
+                    : gEcHeadlessFixtureParam == 6
+                        ? HEAL_LOCATION_LAVARIDGE_TOWN
+                        : HEAL_LOCATION_OLDALE_TOWN
+            );
+            DoWhiteOut();
+            gFieldCallback = FieldCB_RushInjuredPokemonToCenter;
+            gFieldCallback2 = NULL;
+            SetMainCallback2(CB2_LoadMap);
+        }
+        else if (gEcHeadlessFixtureParam == 5)
+        {
+            LoadHeadlessMap(MAP_TRAINER_HILL_ENTRANCE, 4, 10);
+        }
+        else
+        {
+            LoadHeadlessMap(MAP_OLDALE_TOWN_POKEMON_CENTER_1F, 8, 7);
+        }
+        break;
+    case EC_HEADLESS_SCENARIO_CENTER_LAVARIDGE:
+        LoadHeadlessMap(MAP_LAVARIDGE_TOWN_POKEMON_CENTER_1F, 8, 7);
+        break;
+    case EC_HEADLESS_SCENARIO_ABILITY_MENU:
+        PrepareAbilityMenu();
+        break;
+    case EC_HEADLESS_SCENARIO_OPTIONS:
+        SetMainCallback2(CB2_InitOptionMenu);
+        break;
+    case EC_HEADLESS_SCENARIO_BATTLE_VENDOR:
+        if (gEcHeadlessFixtureParam != 0)
+            FlagSet(FLAG_BADGE08_GET);
+        LoadHeadlessMap(MAP_OLDALE_TOWN_POKEMON_CENTER_1F, 2, 3);
+        break;
+    case EC_HEADLESS_SCENARIO_MOVE_SPECIALIST:
+        GiveHeadlessGeodude(30);
+        if (gEcHeadlessFixtureParam != 0)
+        {
+            bool8 isEgg = TRUE;
+
+            CreateHealthyHeadlessMon(
+                &gParties[B_TRAINER_PLAYER][1],
+                SPECIES_TOGEPI,
+                1,
+                OTID_STRUCT_PLAYER_ID
+            );
+            SetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_IS_EGG, &isEgg);
+            CalculatePlayerPartyCount();
+        }
+        if (gEcHeadlessFixtureParam == 2)
+            LoadHeadlessMap(MAP_FALLARBOR_TOWN_MOVE_RELEARNERS_HOUSE, 7, 5);
+        else
+            LoadHeadlessMap(MAP_OLDALE_TOWN_POKEMON_CENTER_1F, 13, 3);
+        break;
+    case EC_HEADLESS_SCENARIO_MOVE_SPECIALIST_CURRENT_SET:
+        GiveHeadlessGeodude(30);
+        ApplyEmeraldChampionsBattleSetChoice(&gParties[B_TRAINER_PLAYER][0], 1);
+        LoadHeadlessMap(MAP_OLDALE_TOWN_POKEMON_CENTER_1F, 13, 3);
+        break;
+    case EC_HEADLESS_SCENARIO_THUNDURUS:
+        LoadHeadlessMap(MAP_ROUTE110, 6, 16);
+        break;
+    case EC_HEADLESS_SCENARIO_TORNADUS:
+        LoadHeadlessMap(MAP_ROUTE119, 29, 11);
+        break;
+    case EC_HEADLESS_SCENARIO_LANDORUS:
+        LoadHeadlessMap(MAP_ROUTE111_RUINS_EXTERIOR, 9, 13);
+        break;
+    case EC_HEADLESS_SCENARIO_GAME_CORNER:
+        AddBagItem(ITEM_COIN_CASE, 1);
+        SetCoins(9999);
+        LoadHeadlessMap(MAP_MAUVILLE_CITY_GAME_CORNER, 13, 3);
+        break;
+    case EC_HEADLESS_SCENARIO_CIRCUIT_LOBBY:
+        FlagSet(FLAG_SYS_GAME_CLEAR);
+        PrepareCircuitParty();
+        LoadHeadlessMap(MAP_BATTLE_FRONTIER_BATTLE_TOWER_LOBBY, 23, 6);
+        break;
+    case EC_HEADLESS_SCENARIO_LEVELER:
+        GiveHeadlessGeodude(1);
+        gSpecialVar_ItemId = ITEM_LEVELER;
+        StartLevelerPartySequence(CB2_PartyMenuFromStartMenu);
+        break;
+    case EC_HEADLESS_SCENARIO_ALL_LEGAL_MOVES:
+        PrepareAllLegalMoves(SPECIES_GEODUDE);
+        break;
+    case EC_HEADLESS_SCENARIO_ALL_LEGAL_MOVES_MEW:
+        PrepareAllLegalMoves(SPECIES_MEW);
+        break;
+    case EC_HEADLESS_SCENARIO_HM_REPLACEMENT:
+        PrepareHmReplacement();
+        break;
+    case EC_HEADLESS_SCENARIO_DEWFORD_GYM_ENTRY:
+        LoadHeadlessMap(MAP_DEWFORD_TOWN, 8, 18);
+        break;
+    case EC_HEADLESS_SCENARIO_MAP_SWEEP:
+        {
+            u32 index = gEcHeadlessFixtureParam;
+            if (index >= ARRAY_COUNT(sEcHeadlessMapSweep))
+                break;
+            // Established-save state so story objects are in their normal positions.
+            FlagSet(FLAG_SYS_POKEDEX_GET);
+            FlagSet(FLAG_SYS_POKEMON_GET);
+            FlagSet(FLAG_SYS_POKENAV_GET);
+            LoadHeadlessMap(sEcHeadlessMapSweep[index].map, sEcHeadlessMapSweep[index].x, sEcHeadlessMapSweep[index].y);
+            gEcHeadlessFixtureSetupResult = TRUE;
+        }
+        break;
+    case EC_HEADLESS_SCENARIO_LEAF_SCENE:
+        {
+            u32 slot;
+            // Established Flash unlock uses normal cave-entry illumination.
+            FlagSet(FLAG_BADGE02_GET);
+            FlagSet(FLAG_RECEIVED_HM_FLASH);
+            ZeroPlayerPartyMons();
+            CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_ZIGZAGOON, 80, OTID_STRUCT_PLAYER_ID);
+            if (gEcHeadlessFixtureParam == EC_HEADLESS_LEAF_FIRST_BATTLE)
+                CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][1], SPECIES_GEODUDE, 80, OTID_STRUCT_PLAYER_ID);
+            CalculatePlayerPartyCount();
+            FlagSet(FLAG_SYS_POKEMON_GET);
+            FlagClear(FLAG_EC_DEFEATED_LEAF_ALTERING_CAVE);
+            ClearTrainerFlag(TRAINER_LEAF_ALTERING_CAVE);
+            ClearBag();
+            if (gEcHeadlessFixtureParam == EC_HEADLESS_LEAF_COMPLETED)
+                FlagSet(FLAG_EC_DEFEATED_LEAF_ALTERING_CAVE);
+            else if (gEcHeadlessFixtureParam == EC_HEADLESS_LEAF_PENDING_FULL_BAG)
+            {
+                struct BagPocket *pocket = &gBagPockets[GetItemPocket(ITEM_MEWTWONITE_X)];
+                SetTrainerFlag(TRAINER_LEAF_ALTERING_CAVE);
+                for (slot = 0; slot < pocket->capacity; slot++)
+                    BagPocket_SetSlotItemIdAndCount(pocket, slot, ITEM_LEFTOVERS, 1);
+            }
+            LoadHeadlessMap(MAP_ALTERING_CAVE_B1F, 21, 20);
+        }
+        break;
+    case EC_HEADLESS_SCENARIO_SECRET_BASE_ESTABLISHED:
+        {
+            struct SecretBase *base = &gSaveBlock1Ptr->secretBases[0];
+            base->secretBaseId = SECRET_BASE_RED_CAVE1_1;
+            StringCopyN(base->trainerName, gSaveBlock2Ptr->playerName, PLAYER_NAME_LENGTH);
+            memcpy(base->trainerId, gSaveBlock2Ptr->playerTrainerId, TRAINER_ID_LENGTH);
+            base->gender = gSaveBlock2Ptr->playerGender;
+            base->language = GAME_LANGUAGE;
+            base->numTimesEntered = 1;
+            base->decorations[0] = DECOR_SMALL_CHAIR;
+            base->decorationPositions[0] = (5 << 4) | 5;
+            VarSet(VAR_CURRENT_SECRET_BASE, 0);
+            VarSet(VAR_SECRET_BASE_MAP, MAPSEC_ROUTE_118);
+            VarSet(VAR_INIT_SECRET_BASE, 1);
+            VarSet(VAR_SECRET_BASE_INITIALIZED, 0);
+            FlagSet(FLAG_HIDE_SECRET_BASE_TRAINER);
+            LoadHeadlessMap(MAP_SECRET_BASE_RED_CAVE1, 6, 5);
+        }
+        break;
+    case EC_HEADLESS_SCENARIO_RYDEL_RETRY:
+        ClearBag();
+        memset(gSaveBlock1Ptr->pcItems, 0, sizeof(gSaveBlock1Ptr->pcItems));
+        FlagClear(FLAG_RECEIVED_BIKE);
+        FlagClear(FLAG_DECLINED_BIKE);
+        FillHeadlessKeyPocket();
+        LoadHeadlessMap(MAP_MAUVILLE_CITY_BIKE_SHOP, 1, 5);
+        break;
+    case EC_HEADLESS_SCENARIO_ROUTE110_RETRY:
+        {
+            u32 lane = gEcHeadlessFixtureParam % 3;
+            bool32 oneUsable = gEcHeadlessFixtureParam >= 3 && gEcHeadlessFixtureParam < 6;
+            CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_ZIGZAGOON, 30, OTID_STRUCT_PLAYER_ID);
+            CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][1], SPECIES_GEODUDE, 30, OTID_STRUCT_PLAYER_ID);
+            CalculatePlayerPartyCount();
+            FlagSet(FLAG_SYS_POKEMON_GET);
+            ClearBag();
+            memset(gSaveBlock1Ptr->pcItems, 0, sizeof(gSaveBlock1Ptr->pcItems));
+            VarSet(VAR_STARTER_MON, 1);
+            VarSet(VAR_ROUTE110_STATE, 0);
+            VarSet(VAR_REPEL_STEP_COUNT, 250);
+            FlagClear(FLAG_HIDE_ROUTE_110_RIVAL);
+            FlagSet(FLAG_HIDE_ROUTE_110_RIVAL_ON_BIKE);
+            if (oneUsable)
+            {
+                u16 hp = 0;
+                SetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_HP, &hp);
+            }
+            else if (gEcHeadlessFixtureParam < 3)
+            {
+                FillHeadlessKeyPocket();
+                for (u32 slot = 0; slot < PC_ITEMS_COUNT; slot++)
+                    gSaveBlock1Ptr->pcItems[slot] = (struct ItemSlot){ITEM_POTION, 1};
+            }
+            LoadHeadlessMap(MAP_ROUTE110, 33 + lane, 57);
+        }
+        break;
+    case EC_HEADLESS_SCENARIO_STORY_HANDOFF:
+        {
+            u32 slot;
+            CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_ZIGZAGOON, 20, OTID_STRUCT_PLAYER_ID);
+            CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][1], SPECIES_GEODUDE, 20, OTID_STRUCT_PLAYER_ID);
+            CalculatePlayerPartyCount();
+            FlagSet(FLAG_SYS_POKEMON_GET);
+            ClearBag();
+            memset(gSaveBlock1Ptr->pcItems, 0, sizeof(gSaveBlock1Ptr->pcItems));
+            FlagClear(FLAG_HIDE_GRANITE_CAVE_STEVEN);
+            FlagClear(FLAG_DELIVERED_STEVEN_LETTER);
+            FlagClear(FLAG_BADGE02_GET);
+            if (gEcHeadlessFixtureParam == 1)
+                AddPCItem(ITEM_LETTER, 1);
+            else if (gEcHeadlessFixtureParam == 2)
+            {
+                struct BagPocket *pocket = &gBagPockets[GetItemPocket(ITEM_CHARIZARDITE_X)];
+                FlagSet(FLAG_DELIVERED_STEVEN_LETTER);
+                FlagSet(FLAG_BADGE02_GET);
+                VarSet(VAR_STARTER_GEN, 1);
+                VarSet(VAR_STARTER_MON, 1);
+                AddBagItem(ITEM_MEGA_RING, 1);
+                for (slot = 0; slot < pocket->capacity; slot++)
+                    BagPocket_SetSlotItemIdAndCount(pocket, slot, ITEM_VENUSAURITE, 1);
+                for (slot = 0; slot < PC_ITEMS_COUNT; slot++)
+                    gSaveBlock1Ptr->pcItems[slot] = (struct ItemSlot){ITEM_POTION, 1};
+            }
+            if (gEcHeadlessFixtureParam == 3)
+            {
+                FlagClear(FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_2F_CAPTAIN_STERN);
+                FlagSet(FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_2F_AQUA_GRUNT_1);
+                FlagSet(FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_2F_AQUA_GRUNT_2);
+                FlagSet(FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_2F_ARCHIE);
+                LoadHeadlessMap(MAP_SLATEPORT_CITY_OCEANIC_MUSEUM_2F, 13, 7);
+            }
+            else
+                LoadHeadlessMap(MAP_GRANITE_CAVE_STEVENS_ROOM, 7, 9);
+        }
+        break;
+    case EC_HEADLESS_SCENARIO_RUSTBORO_GUIDE_RETRY:
+        {
+            static const s16 starts[][2] = {{5, 19}, {5, 19}, {6, 19}, {6, 19}};
+            struct BagPocket *pocket = &gBagPockets[GetItemPocket(ITEM_FRESH_WATER)];
+            u32 slot;
+            if (gEcHeadlessFixtureParam >= ARRAY_COUNT(starts))
+                break;
+            CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_ZIGZAGOON, 5, OTID_STRUCT_PLAYER_ID);
+            CalculatePlayerPartyCount();
+            FlagSet(FLAG_SYS_POKEMON_GET);
+            ClearBag();
+            for (slot = 0; slot < pocket->capacity; slot++)
+                BagPocket_SetSlotItemIdAndCount(pocket, slot, ITEM_POTION, 1);
+            VarSet(VAR_RUSTBORO_GYM_GUIDE_STATE, 0);
+            LoadHeadlessMap(MAP_RUSTBORO_CITY_GYM, starts[gEcHeadlessFixtureParam][0], starts[gEcHeadlessFixtureParam][1]);
+        }
+        break;
+    case EC_HEADLESS_SCENARIO_NEW_MAUVILLE_BUTTONS:
+        // Established visit: the Voltorb and item covering these two switches
+        // have been cleared. Keep a real party and native Repel protection.
+        CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_ZIGZAGOON, 100, OTID_STRUCT_PLAYER_ID);
+        CalculatePlayerPartyCount();
+        FlagSet(FLAG_SYS_POKEMON_GET);
+        FlagSet(FLAG_DEFEATED_VOLTORB_2_NEW_MAUVILLE);
+        FlagSet(FLAG_HIDE_NEW_MAUVILLE_VOLTORB_2);
+        FlagSet(FLAG_ITEM_NEW_MAUVILLE_UPGRADE);
+        VarSet(VAR_REPEL_STEP_COUNT, 250);
+        LoadHeadlessMap(MAP_NEW_MAUVILLE_INSIDE, 6, 12);
+        break;
+    case EC_HEADLESS_SCENARIO_BATTLE_SET_LONG_LIST:
+        AddBagItem(ITEM_MEGA_RING, 1);
+        CreateHealthyHeadlessMon(
+            &gParties[B_TRAINER_PLAYER][0],
+            SPECIES_CHARIZARD,
+            50,
+            OTID_STRUCT_PLAYER_ID
+        );
+        CalculatePlayerPartyCount();
+        LoadHeadlessMap(MAP_OLDALE_TOWN_POKEMON_CENTER_1F, 8, 7);
+        break;
+    case EC_HEADLESS_SCENARIO_START_MENU_FULL:
+        // Every Start menu row an established save can show: Pokedex, Pokemon, Bag,
+        // PokeNav, Player, Save, Reload, Option, Exit (nine rows, one more than fits).
+        FlagSet(FLAG_SYS_POKEDEX_GET);
+        FlagSet(FLAG_SYS_POKEMON_GET);
+        FlagSet(FLAG_SYS_POKENAV_GET);
+        gSaveFileStatus = SAVE_STATUS_OK; // makes the Reload row appear, as on a real save
+        LoadHeadlessMap(MAP_OLDALE_TOWN_POKEMON_CENTER_1F, 7, 6);
+        break;
+    case EC_HEADLESS_SCENARIO_WILD_ACTION_MENU:
+    case EC_HEADLESS_SCENARIO_MOVE_DETAILS:
+    case EC_HEADLESS_SCENARIO_WILD_FOE_TYPES:
+    case EC_HEADLESS_SCENARIO_MOVE_FOE_TYPES:
+        PrepareHeadlessWildBattle(FALSE);
+        break;
+    case EC_HEADLESS_SCENARIO_MOVE_ANIMATION:
+        PrepareHeadlessWildBattle(TRUE);
+        // This scenario uses setupResult to prove the requested animation was
+        // launched, rather than merely proving that the battle was created.
+        gEcHeadlessFixtureSetupResult = FALSE;
+        break;
+    case EC_HEADLESS_SCENARIO_NAMING:
+        DoNamingScreen(
+            NAMING_SCREEN_NICKNAME,
+            sEcHeadlessName,
+            SPECIES_GEODUDE,
+            MON_MALE,
+            0,
+            gInitialMainCB2);
+        break;
+    case EC_HEADLESS_SCENARIO_STORAGE:
+    {
+        u16 item = ITEM_LEFTOVERS;
+
+        CreateBoxMon(
+            &gPokemonStoragePtr->boxes[0][0],
+            SPECIES_GEODUDE,
+            30,
+            0,
+            OTID_STRUCT_PLAYER_ID);
+        SetBoxMonData(&gPokemonStoragePtr->boxes[0][0], MON_DATA_HELD_ITEM, &item);
+        LoadHeadlessMap(MAP_OLDALE_TOWN_POKEMON_CENTER_1F, 8, 7);
+        break;
+    }
+    case EC_HEADLESS_SCENARIO_STARTER_REGIONS:
+        LoadHeadlessMap(MAP_OLDALE_TOWN_POKEMON_CENTER_1F, 8, 7);
+        break;
+    case EC_HEADLESS_SCENARIO_CIRCUIT_ROOM:
+        PrepareCircuitParty();
+        ChampionsCircuitBegin();
+        LoadHeadlessMap(MAP_BATTLE_FRONTIER_BATTLE_TOWER_BATTLE_ROOM, 5, 8);
+        break;
+    case EC_HEADLESS_SCENARIO_POKEDEX:
+        PrepareHeadlessPokedex();
+        gEcHeadlessFixtureSetupResult = TRUE;
+        break;
+    case EC_HEADLESS_SCENARIO_SUMMARY:
+        PrepareHeadlessSummary();
+        gEcHeadlessFixtureSetupResult = TRUE;
+        break;
+    case EC_HEADLESS_SCENARIO_BAG:
+        PrepareHeadlessBag();
+        gEcHeadlessFixtureSetupResult = TRUE;
+        break;
+    case EC_HEADLESS_SCENARIO_FRONTIER_PASS:
+        PrepareHeadlessFrontierPass();
+        break;
+    case EC_HEADLESS_SCENARIO_EMBER_PATH_WARDEN:
+        LoadHeadlessMap(MAP_EMBER_PATH, 8, 39);
+        break;
+    case EC_HEADLESS_SCENARIO_SPECIES_OVERWORLD:
+        if (gEcHeadlessFixtureParam < ARRAY_COUNT(sEcHeadlessOverworldFixtures))
+        {
+            const struct EcHeadlessOverworldFixture *fixture =
+                &sEcHeadlessOverworldFixtures[gEcHeadlessFixtureParam];
+
+            PrepareHeadlessOverworldFixtureState(fixture->species);
+            FlagSet(FLAG_SYS_USE_FLASH);
+            LoadHeadlessMap(fixture->map, fixture->playerX, fixture->playerY);
+        }
+        else
+        {
+            SetMainCallback2(gInitialMainCB2);
+        }
+        break;
+    case EC_HEADLESS_SCENARIO_SPECIES_OVERWORLD_BACKGROUND:
+        if (gEcHeadlessFixtureParam < ARRAY_COUNT(sEcHeadlessOverworldFixtures))
+        {
+            const struct EcHeadlessOverworldFixture *fixture =
+                &sEcHeadlessOverworldFixtures[gEcHeadlessFixtureParam];
+
+            PrepareHeadlessOverworldFixtureState(fixture->species);
+            FlagSet(FLAG_SYS_USE_FLASH);
+            LoadHeadlessMap(fixture->map, fixture->playerX, fixture->playerY);
+        }
+        else
+        {
+            SetMainCallback2(gInitialMainCB2);
+        }
+        break;
+    case EC_HEADLESS_SCENARIO_DOUBLE_STATUS_ABILITY:
+        PrepareHeadlessDoubleStatusAbilityBattle();
+        break;
+    case EC_HEADLESS_SCENARIO_MEGA:
+        PrepareHeadlessMegaBattle();
+        break;
+    case EC_HEADLESS_SCENARIO_PRIMALS:
+        PrepareHeadlessPrimalBattle();
+        break;
+    case EC_HEADLESS_SCENARIO_SAFARI:
+        PrepareHeadlessSafariBattle();
+        break;
+    case EC_HEADLESS_SCENARIO_TITLE:
+        SetMainCallback2(CB2_InitTitleScreen);
+        break;
+    case EC_HEADLESS_SCENARIO_BIRCH:
+        SetMainCallback2(CB2_InitMainMenu);
+        break;
+    case EC_HEADLESS_SCENARIO_POKEBLOCK:
+        PrepareHeadlessPokeblock();
+        break;
+    case EC_HEADLESS_SCENARIO_TRAINER_CARD:
+        PrepareHeadlessGoldTrainerCard();
+        break;
+    case EC_HEADLESS_SCENARIO_DOME_INFO:
+        PrepareHeadlessDomeInfo();
+        break;
+    case EC_HEADLESS_SCENARIO_CONTEST_RESULTS:
+        PrepareHeadlessContestResults();
+        LoadHeadlessMap(MAP_CONTEST_HALL, 7, 10);
+        break;
+    case EC_HEADLESS_SCENARIO_SLOT_MACHINE:
+        SetCoins(5000);
+        LoadHeadlessMap(MAP_MAUVILLE_CITY_GAME_CORNER, 8, 8);
+        break;
+    case EC_HEADLESS_SCENARIO_FAIRY_SUMMARY:
+        PrepareHeadlessFairySummary();
+        gEcHeadlessFixtureSetupResult = TRUE;
+        break;
+    case EC_HEADLESS_SCENARIO_MAGMA_SPARKLE:
+        LoadHeadlessMap(MAP_MAGMA_HIDEOUT_4F, 16, 22);
+        break;
+    case EC_HEADLESS_SCENARIO_FURFROU_TRIMS:
+        LoadHeadlessMap(MAP_SLATEPORT_CITY_POKEMON_FAN_CLUB, 12, 11);
+        break;
+    case EC_HEADLESS_SCENARIO_HEAL_LOCATION_WHITEOUT:
+        PrepareCircuitParty();
+        SetLastHealLocationWarp(gEcHeadlessFixtureParam);
+        DoWhiteOut();
+        gFieldCallback = FieldCB_RushInjuredPokemonToCenter;
+        gFieldCallback2 = NULL;
+        SetMainCallback2(CB2_LoadMap);
+        gEcHeadlessFixtureSetupResult = TRUE;
+        break;
+    // Field moves without HM carriers: the party is one Zigzagoon that could
+    // learn the move but does not know it, the badge and HM flags are set, and
+    // the player stands facing the obstacle. The scenario taps UP, A, then A on
+    // the Yes/No, and the observer latches the "used <move>!" showcase.
+    case EC_HEADLESS_SCENARIO_FIELD_MOVE_CUT:
+        PrepareHeadlessFieldMoveParty(FLAG_BADGE01_GET, FLAG_RECEIVED_HM_CUT);
+        LoadHeadlessMap(MAP_ROUTE104, 35, 23);
+        break;
+    case EC_HEADLESS_SCENARIO_FIELD_MOVE_ROCK_SMASH:
+        PrepareHeadlessFieldMoveParty(FLAG_BADGE03_GET, FLAG_RECEIVED_HM_ROCK_SMASH);
+        LoadHeadlessMap(MAP_ROUTE111, 18, 102);
+        break;
+    case EC_HEADLESS_SCENARIO_FIELD_MOVE_STRENGTH:
+        PrepareHeadlessFieldMoveParty(FLAG_BADGE04_GET, FLAG_RECEIVED_HM_STRENGTH);
+        LoadHeadlessMap(MAP_FIERY_PATH, 10, 16);
+        break;
+    // The Flight Beacon: nobody in the party can fly, but a boxed Wingull knows
+    // Fly. The trigger opens the fly map the way the item does, A picks the
+    // current town, and the observer latches the Fly showcase carrying the
+    // boxed rider with the override consumed.
+    case EC_HEADLESS_SCENARIO_FLIGHT_BEACON:
+    {
+        struct Pokemon rider;
+
+        PrepareHeadlessFieldMoveParty(FLAG_BADGE06_GET, FLAG_RECEIVED_HM_FLY);
+        AddBagItem(ITEM_FLIGHT_BEACON, 1);
+        FlagSet(FLAG_VISITED_LITTLEROOT_TOWN);
+        CreateMon(&rider, SPECIES_WINGULL, 20, 0, OTID_STRUCT_PLAYER_ID);
+        SetMonMoveSlot(&rider, MOVE_FLY, 0);
+        gPokemonStoragePtr->boxes[0][0] = rider.box;
+        sEcHeadlessFlightRider = SPECIES_NONE;
+        LoadHeadlessMap(MAP_LITTLEROOT_TOWN, 8, 10);
+        break;
+    }
+    case EC_HEADLESS_SCENARIO_HALL_OF_FAME_RECORD:
+        PrepareHeadlessHallParty(gEcHeadlessFixtureParam);
+        LoadHeadlessMap(MAP_EVER_GRANDE_CITY_HALL_OF_FAME, 7, 11);
+        gFieldCallback = FieldCB_HeadlessSuppressOnFrame;
+        break;
+    case EC_HEADLESS_SCENARIO_MULTI_CORRIDOR_DOOR:
+        LoadHeadlessMap(MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_CORRIDOR, 8, 3);
+        gFieldCallback = FieldCB_HeadlessSuppressOnFrame;
+        break;
+    default:
+        SetMainCallback2(gInitialMainCB2);
+        break;
+    }
+}
+
+#endif // EC_HEADLESS_FIXTURES

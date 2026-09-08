@@ -1,0 +1,317 @@
+{
+  "ITEM_MEWTWONITE_Y": [
+    "AlteringCave_B1F: sparkle at (35, 21)"
+  ],
+  "ITEM_PINSIRITE": [
+    "AshenWoods: sparkle at (6, 40)"
+  ],
+  "ITEM_DIANCITE": [
+    "CaveOfOrigin_DianciesRoom: sparkle at (7, 9)"
+  ],
+  "ITEM_SABLENITE": [
+    "DewfordManor_1F: sparkle at (1, 11)"
+  ],
+  "ITEM_BANETTITE": [
+    "DewfordManor_1F: sparkle at (3, 7)"
+  ],
+  "ITEM_CHANDELURITE": [
+    "DewfordManor_1F: sparkle at (3, 9)"
+  ],
+  "ITEM_HAWLUCHANITE": [
+    "DewfordMeadow: sparkle at (4, 13)"
+  ],
+  "ITEM_MAWILITE": [
+    "DewfordMeadow: sparkle at (21, 14)"
+  ],
+  "ITEM_HOUNDOOMINITE": [
+    "FieryPath: sparkle at (8, 3)"
+  ],
+  "ITEM_CAMERUPTITE": [
+    "FieryPath: sparkle at (7, 32)",
+    "LavaridgeTown_Gym_1F: NPC/event gift (LavaridgeTown_Gym_1F_EventScript_GiveCameruptite2)",
+    "LavaridgeTown_Gym_1F: NPC/event gift (LavaridgeTown_Gym_1F_EventScript_GiveCameruptite)"
+  ],
+  "ITEM_ALAKAZITE": [
+    "GraniteCave_B1F: sparkle at (15, 21)",
+    "Route110_TrickHouseEnd: NPC/event gift (Route110_TrickHouseEnd_EventScript_CompletedPuzzle8)"
+  ],
+  "ITEM_GLIMMORANITE": [
+    "GraniteCave_B2F: sparkle at (29, 4)"
+  ],
+  "ITEM_ABSOLITE": [
+    "JaggedPass: sparkle at (23, 24)",
+    "LavaridgeTown_PokemonCenter_1F: NPC/event gift (LavaridgeTown_PokemonCenter_1F_EventScript_LucyReward)"
+  ],
+  "ITEM_SCRAFTINITE": [
+    "JaggedPass: sparkle at (8, 10)"
+  ],
+  "ITEM_SCOVILLAINITE": [
+    "JaggedPass: sparkle at (7, 29)"
+  ],
+  "ITEM_AGGRONITE": [
+    "MeteorFalls_1F_1R: sparkle at (2, 4)"
+  ],
+  "ITEM_METAGROSSITE": [
+    "MeteorFalls_1F_1R: sparkle at (27, 5)",
+    "MossdeepCity_Gym: NPC/event gift (MossdeepCity_Gym_EventScript_GiveMetagrossite2)",
+    "MossdeepCity_Gym: NPC/event gift (MossdeepCity_Gym_EventScript_GiveMetagrossite)"
+  ],
+  "ITEM_SALAMENCITE": [
+    "MeteorFalls_1F_1R: sparkle at (26, 32)"
+  ],
+  "ITEM_SCOLIPITE": [
+    "PetalburgWoods: sparkle at (45, 15)"
+  ],
+  "ITEM_HERACRONITE": [
+    "PetalburgWoods: sparkle at (35, 20)"
+  ],
+  "ITEM_BUTTERFRENITE": [
+    "PetalburgWoods: sparkle at (4, 8)"
+  ],
+  "ITEM_LOPUNNITE": [
+    "PetalburgWoods: sparkle at (4, 26)",
+    "PetalburgCity_Gym: NPC/event gift (PetalburgCity_Gym_EventScript_GiveLopunnite)"
+  ],
+  "ITEM_BEEDRILLITE": [
+    "PetalburgWoods_3: sparkle at (38, 9)"
+  ],
+  "ITEM_SWAMPERTITE": [
+    "Route104: sparkle at (39, 15)"
+  ],
+  "ITEM_SCEPTILITE": [
+    "Route104: sparkle at (5, 8)"
+  ],
+  "ITEM_GOLISOPITE": [
+    "Route109: sparkle at (27, 46)"
+  ],
+  "ITEM_SHARPEDONITE": [
+    "Route109: sparkle at (25, 6)"
+  ],
+  "ITEM_MEGANIUMITE": [
+    "Route110: sparkle at (26, 47)"
+  ],
+  "ITEM_FERALIGITE": [
+    "Route110: sparkle at (6, 38)"
+  ],
+  "ITEM_EMBOARITE": [
+    "Route110: sparkle at (35, 39)"
+  ],
+  "ITEM_CHARIZARDITE_X": [
+    "Route110: sparkle at (33, 45)"
+  ],
+  "ITEM_EELEKTROSSITE": [
+    "Route110: sparkle at (4, 35)"
+  ],
+  "ITEM_DELPHOXITE": [
+    "Route110: sparkle at (37, 67)"
+  ],
+  "ITEM_DRAMPANITE": [
+    "Route111: sparkle at (33, 104)"
+  ],
+  "ITEM_ALTARIANITE": [
+    "Route111: sparkle at (3, 113)",
+    "LilycoveCity: NPC/event gift (LilycoveCity_EventScript_AltarianiteKeeper)",
+    "FortreeCity_Gym: NPC/event gift (FortreeCity_Gym_EventScript_GiveAltarianite2)",
+    "FortreeCity_Gym: NPC/event gift (FortreeCity_Gym_EventScript_GiveAltarianite)"
+  ],
+  "ITEM_STEELIXITE": [
+    "Route111_RuinsExterior: sparkle at (10, 22)"
+  ],
+  "ITEM_SKARMORITE": [
+    "Route112: sparkle at (14, 43)"
+  ],
+  "ITEM_FALINKSITE": [
+    "Route113: sparkle at (53, 7)"
+  ],
+  "ITEM_EXCADRITE": [
+    "Route113: sparkle at (79, 5)"
+  ],
+  "ITEM_ABSOLITE_Z": [
+    "Route114: sparkle at (31, 19)"
+  ],
+  "ITEM_MEDICHAMITE": [
+    "Route115: sparkle at (18, 7)"
+  ],
+  "ITEM_PYROARITE": [
+    "Route115: sparkle at (31, 56)"
+  ],
+  "ITEM_RAICHUNITE_Y": [
+    "Route115: sparkle at (26, 67)"
+  ],
+  "ITEM_VICTREEBELITE": [
+    "Route115: sparkle at (23, 29)"
+  ],
+  "ITEM_LUCARIONITE": [
+    "Route116: sparkle at (19, 6)",
+    "DewfordTown_Gym: NPC/event gift (DewfordTown_Gym_EventScript_GiveLucarionite2)",
+    "DewfordTown_Gym: NPC/event gift (DewfordTown_Gym_EventScript_GiveLucarionite)"
+  ],
+  "ITEM_STARAPTITE": [
+    "Route116: sparkle at (10, 17)",
+    "Route110_TrickHouseEntrance: NPC/event gift (Route110_TrickHouseEntrance_EventScript_GivePuzzle1Reward)",
+    "Route110_TrickHouseEnd: NPC/event gift (Route110_TrickHouseEnd_EventScript_CompletedPuzzle1)"
+  ],
+  "ITEM_GARCHOMPITE_Z": [
+    "Route116: sparkle at (80, 8)"
+  ],
+  "ITEM_LUCARIONITE_Z": [
+    "Route116: sparkle at (55, 12)"
+  ],
+  "ITEM_MEOWSTICITE": [
+    "Route116: sparkle at (34, 7)"
+  ],
+  "ITEM_CHESNAUGHTITE": [
+    "Route117: sparkle at (16, 18)"
+  ],
+  "ITEM_GRENINJITE": [
+    "Route117: sparkle at (9, 1)"
+  ],
+  "ITEM_CHARIZARDITE_Y": [
+    "Route117: sparkle at (3, 18)"
+  ],
+  "ITEM_SCIZORITE": [
+    "Route118: sparkle at (69, 7)"
+  ],
+  "ITEM_DRAGALGITE": [
+    "Route119: sparkle at (29, 53)"
+  ],
+  "ITEM_KINGDRANITE": [
+    "Route119: sparkle at (33, 117)"
+  ],
+  "ITEM_GENGARITE": [
+    "Route120: sparkle at (20, 55)",
+    "SlateportCity: NPC/event gift (SlateportCity_EventScript_GretaReward)"
+  ],
+  "ITEM_ZERAORITE": [
+    "Route120: sparkle at (22, 13)"
+  ],
+  "ITEM_GARCHOMPITE": [
+    "SandstrewnRuins: sparkle at (5, 56)"
+  ],
+  "ITEM_GOLURKITE": [
+    "SandstrewnRuins: sparkle at (12, 113)"
+  ],
+  "ITEM_FLYGONITE": [
+    "SandstrewnRuins: sparkle at (2, 29)"
+  ],
+  "ITEM_HEATRANITE": [
+    "ScorchedSlab_HeatransRoom: sparkle at (8, 16)"
+  ],
+  "ITEM_BLASTOISINITE": [
+    "Seaspray_Cave: sparkle at (6, 25)"
+  ],
+  "ITEM_SLOWBRONITE": [
+    "Seaspray_Cave_B1F: sparkle at (11, 12)"
+  ],
+  "ITEM_CRABOMINITE": [
+    "Seaspray_Cave_B1F: sparkle at (20, 24)"
+  ],
+  "ITEM_ABOMASITE": [
+    "Seaspray_Cave_B1F: sparkle at (25, 21)"
+  ],
+  "ITEM_FROSLASSITE": [
+    "Seaspray_Cave_B1F: sparkle at (15, 5)"
+  ],
+  "ITEM_GLALITITE": [
+    "Seaspray_Cave_B1F: sparkle at (32, 27)"
+  ],
+  "ITEM_LATIASITE": [
+    "SouthernIsland_Interior: sparkle at (8, 8)"
+  ],
+  "ITEM_LATIOSITE": [
+    "SouthernIsland_Interior: sparkle at (10, 6)"
+  ],
+  "ITEM_TATSUGIRINITE": [
+    "Underwater_SeafloorCavern: sparkle at (9, 5)"
+  ],
+  "ITEM_FLOETTITE": [
+    "VerdanturfMeadow: sparkle at (7, 10)"
+  ],
+  "ITEM_ZYGARDITE": [
+    "VictoryRoad_1F: sparkle at (40, 26)"
+  ],
+  "ITEM_DARKRANITE": [
+    "VictoryRoad_1F: sparkle at (37, 39)"
+  ],
+  "ITEM_MALAMARITE": [
+    "SlateportCity_NameRatersHouse: NPC/event gift (SlateportCity_NameRatersHouse_EventScript_MegaGift_MALAMARITE)"
+  ],
+  "ITEM_LAPRASITE": [
+    "LilycoveCity_House4: NPC/event gift (LilycoveCity_House4_EventScript_MegaGift_LAPRASITE)"
+  ],
+  "ITEM_KINGLERITE": [
+    "DewfordTown_House2: NPC/event gift (DewfordTown_House2_EventScript_MegaGift_KINGLERITE)"
+  ],
+  "ITEM_BARBARACITE": [
+    "DewfordTown_House1: NPC/event gift (DewfordTown_House1_EventScript_MegaGift_BARBARACITE)"
+  ],
+  "ITEM_MILOTICITE": [
+    "FortreeCity_House1: NPC/event gift (FortreeCity_House1_EventScript_MegaGift_MILOTICITE)"
+  ],
+  "ITEM_MACHAMPITE": [
+    "LavaridgeTown_House: NPC/event gift (LavaridgeTown_House_EventScript_MegaGift_MACHAMPITE)"
+  ],
+  "ITEM_MANECTITE": [
+    "MauvilleCity_Gym: NPC/event gift (MauvilleCity_Gym_EventScript_GiveManectite2)",
+    "MauvilleCity_Gym: NPC/event gift (MauvilleCity_Gym_EventScript_GiveManectite)"
+  ],
+  "ITEM_GYARADOSITE": [
+    "SootopolisCity_Gym_1F: NPC/event gift (SootopolisCity_Gym_1F_EventScript_GiveGyaradosite2)",
+    "SootopolisCity_Gym_1F: NPC/event gift (SootopolisCity_Gym_1F_EventScript_GiveGyaradosite)",
+    "DewfordTown_House2: NPC/event gift (DewfordTown_House2_EventScript_MegaGift_GYARADOSITE)"
+  ],
+  "ITEM_CHIMECHITE": [
+    "FortreeCity_House5: NPC/event gift (FortreeCity_House5_EventScript_MegaGift_CHIMECHITE)"
+  ],
+  "ITEM_KANGASKHANITE": [
+    "Route117_PokemonDayCare: NPC/event gift (Route117_PokemonDayCare_EventScript_HatchReward)"
+  ],
+  "ITEM_GARDEVOIRITE": [
+    "VerdanturfTown_WandasHouse: NPC/event gift (VerdanturfTown_WandasHouse_EventScript_MegaGift_GARDEVOIRITE)"
+  ],
+  "ITEM_MAGEARNITE": [
+    "RustboroCity_DevonCorp_2F: NPC/event gift (RustboroCity_DevonCorp_2F_EventScript_MegaGift_MAGEARNITE)"
+  ],
+  "ITEM_AMPHAROSITE": [
+    "MauvilleCity_House2: NPC/event gift (MauvilleCity_House2_EventScript_MegaGift_AMPHAROSITE)"
+  ],
+  "ITEM_BLAZIKENITE": [
+    "LavaridgeTown_House: NPC/event gift (LavaridgeTown_House_EventScript_MegaGift_BLAZIKENITE)"
+  ],
+  "ITEM_PIDGEOTITE": [
+    "RustboroCity_DevonCorp_3F: NPC/event gift (RustboroCity_DevonCorp_3F_EventScript_GivePidgeotite)"
+  ],
+  "ITEM_CLEFABLITE": [
+    "FallarborTown_CozmosHouse: NPC/event gift (FallarborTown_CozmosHouse_EventScript_MegaGift_CLEFABLITE)"
+  ],
+  "ITEM_MEWTWONITE_X": [
+    "AlteringCave_B1F: NPC/event gift (AlteringCave_B1F_EventScript_LeafReward)"
+  ],
+  "ITEM_GALLADITE": [
+    "VerdanturfTown_House: NPC/event gift (VerdanturfTown_House_EventScript_MegaGift_GALLADITE)"
+  ],
+  "ITEM_RAICHUNITE_X": [
+    "VerdanturfTown_FriendshipRatersHouse: NPC/event gift (VerdanturfTown_FriendshipRatersHouse_EventScript_MegaGift_RAICHUNITE_X)"
+  ],
+  "ITEM_STARMINITE": [
+    "LilycoveCity_House4: NPC/event gift (LilycoveCity_House4_EventScript_MegaGift_STARMINITE)"
+  ],
+  "ITEM_AUDINITE": [
+    "Route117: NPC/event gift (Route117_EventScript_Woman)"
+  ],
+  "ITEM_AERODACTYLITE": [
+    "RustboroCity_Gym: NPC/event gift (RustboroCity_Gym_EventScript_GiveRoxanneRewards)"
+  ],
+  "ITEM_VENUSAURITE": [
+    "Route104_PrettyPetalFlowerShop: NPC/event gift (Route104_PrettyPetalFlowerShop_EventScript_MegaGift_VENUSAURITE)"
+  ],
+  "ITEM_BAXCALIBRITE": [
+    "Route123_BerryMastersHouse: one-time garden berry trade"
+  ],
+  "ITEM_DRAGONINITE": [
+    "Route123_BerryMastersHouse: one-time garden berry trade"
+  ],
+  "ITEM_TYRANITARITE": [
+    "Route123_BerryMastersHouse: one-time garden berry trade"
+  ]
+}

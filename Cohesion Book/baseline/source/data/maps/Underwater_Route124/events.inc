@@ -1,0 +1,18 @@
+@
+@ DO NOT MODIFY THIS FILE! It is auto-generated from data/maps/Underwater_Route124/map.json
+@
+
+	.align 2
+
+Underwater_Route124_MapBGEvents:
+	bg_hidden_item_event 42, 51, 0, ITEM_PEARL_STRING, FLAG_HIDDEN_ITEM_UNDERWATER_124_PEARL_STRING, 1, FALSE
+	bg_hidden_item_event 14, 40, 0, ITEM_GREEN_SHARD, FLAG_HIDDEN_ITEM_UNDERWATER_124_GREEN_SHARD, 1, FALSE
+	bg_hidden_item_event 66, 34, 3, ITEM_PEARL, FLAG_HIDDEN_ITEM_UNDERWATER_124_PEARL, 1, FALSE
+	bg_hidden_item_event 64, 54, 3, ITEM_BIG_PEARL, FLAG_HIDDEN_ITEM_UNDERWATER_124_BIG_PEARL, 1, FALSE
+	bg_hidden_item_event 70, 64, 3, ITEM_HEART_SCALE, FLAG_HIDDEN_ITEM_UNDERWATER_124_HEART_SCALE_1, 1, FALSE
+	bg_hidden_item_event 42, 5, 3, ITEM_BIG_PEARL, FLAG_HIDDEN_ITEM_UNDERWATER_124_BIG_PEARL_2, 1, FALSE
+	bg_hidden_item_event 45, 36, 3, ITEM_HEART_SCALE, FLAG_HIDDEN_ITEM_UNDERWATER_124_HEART_SCALE_2, 1, FALSE
+
+Underwater_Route124_MapEvents::
+	map_events NULL, NULL, NULL, Underwater_Route124_MapBGEvents
+

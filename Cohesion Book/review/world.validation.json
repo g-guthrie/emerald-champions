@@ -1,0 +1,22 @@
+{
+  "result": "PASS",
+  "checks": {
+    "assertions": 45247,
+    "quiz_questions": 15
+  },
+  "maps": 540,
+  "event_ids": 6322,
+  "event_counts": {
+    "object_events": 3052,
+    "coord_events": 421,
+    "bg_events": 723,
+    "warp_events": 1402,
+    "connections": 152,
+    "map_scripts": 572
+  },
+  "proposals": 27,
+  "targets": 213,
+  "overlapping_world_targets": 0,
+  "errors": [],
+  "scope": "Book coverage, snapshot bindings, exact targets, links, quiz mappings and proposed actor tile geometry only. No ROM build, gameplay or battle execution."
+}

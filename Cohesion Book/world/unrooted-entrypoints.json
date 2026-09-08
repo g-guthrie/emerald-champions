@@ -1,0 +1,1322 @@
+[
+  {
+    "map": "RustboroCity",
+    "label": "RustboroCity_EventScript_DevonCorpBranchOfficeSign",
+    "source": "data/maps/RustboroCity/scripts.inc",
+    "line": 224,
+    "body": "\tmsgbox RustboroCity_Text_DevonCorpBranchOfficeSign, MSGBOX_SIGN\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "RustboroCity",
+    "label": "RustboroCity_EventScript_ShadyCharacterTookOff",
+    "source": "data/maps/RustboroCity/scripts.inc",
+    "line": 337,
+    "body": "\tmsgbox RustboroCity_Text_ShadyCharacterTookOffTowardsTunnel, MSGBOX_DEFAULT\n\treturn\n\n@ Unused",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "RustboroCity",
+    "label": "RustboroCity_EventScript_YouGotItThankYou",
+    "source": "data/maps/RustboroCity/scripts.inc",
+    "line": 342,
+    "body": "\tmsgbox RustboroCity_Text_YouGotItThankYou, MSGBOX_DEFAULT\n\treturn\n\n@ Unknown, unused employee movements. Based on the differences in movement theyre for approaching an object (probably the player) in different positions",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "RustboroCity",
+    "label": "RustboroCity_EventScript_EmployeeApproachUp",
+    "source": "data/maps/RustboroCity/scripts.inc",
+    "line": 347,
+    "body": "\tapplymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, RustboroCity_Movement_EmployeeApproachUp\n\twaitmovement 0\n\treturn\n\n@ Unused, see above",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "RustboroCity",
+    "label": "RustboroCity_EventScript_EmployeeApproachLeft",
+    "source": "data/maps/RustboroCity/scripts.inc",
+    "line": 353,
+    "body": "\tapplymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, RustboroCity_Movement_EmployeeApproachLeft\n\twaitmovement 0\n\treturn\n\n@ Unused, see above",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "RustboroCity",
+    "label": "RustboroCity_EventScript_EmployeeApproachRight",
+    "source": "data/maps/RustboroCity/scripts.inc",
+    "line": 359,
+    "body": "\tapplymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, RustboroCity_Movement_EmployeeApproachRight\n\twaitmovement 0\n\treturn\n\n@ Unused, see above",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "RustboroCity",
+    "label": "RustboroCity_EventScript_EmployeeApproachDown",
+    "source": "data/maps/RustboroCity/scripts.inc",
+    "line": 365,
+    "body": "\tapplymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, RustboroCity_Movement_EmployeeApproachDown\n\twaitmovement 0\n\treturn\n\n@ Unused, similar movement to the above scripts",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "RustboroCity",
+    "label": "RustboroCity_EventScript_EmployeeApproachPlayerFar",
+    "source": "data/maps/RustboroCity/scripts.inc",
+    "line": 371,
+    "body": "\tapplymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, RustboroCity_Movement_EmployeeApproachPlayerFar\n\twaitmovement 0\n\tapplymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp\n\twaitmovement 0\n\treturn\n\n@ Unused",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "Route104",
+    "label": "Route104_EventScript_PlayRivalMusic",
+    "source": "data/maps/Route104/scripts.inc",
+    "line": 73,
+    "body": "\tcheckplayergender\n\tgoto_if_eq VAR_RESULT, MALE, Route104_EventScript_PlayMayMusic\n\tgoto_if_eq VAR_RESULT, FEMALE, Route104_EventScript_PlayBrendanMusic\n\treturn\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "Route110",
+    "label": "Route110_EventScript_Unused",
+    "source": "data/maps/Route110/scripts.inc",
+    "line": 281,
+    "body": "\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "Route111",
+    "label": "Route111_EventScript_ViciousSandstormTriggerUp",
+    "source": "data/maps/Route111/scripts.inc",
+    "line": 185,
+    "body": "\tlockall\n\tsetvar VAR_0x8004, 0\n\tgoto Route111_EventScript_ViciousSandstormTrigger\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "Route111",
+    "label": "Route111_EventScript_ViciousSandstormTriggerRight",
+    "source": "data/maps/Route111/scripts.inc",
+    "line": 204,
+    "body": "\tlockall\n\tsetvar VAR_0x8004, 3\n\tgoto Route111_EventScript_ViciousSandstormTrigger\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "Route115",
+    "label": "Route115_EventScript_RegisterNob",
+    "source": "data/maps/Route115/scripts.inc",
+    "line": 64,
+    "body": "\tspecial PlayerFaceTrainerAfterBattle\n\twaitmovement 0\n\tmsgbox Route115_Text_NobRegister, MSGBOX_DEFAULT\n\tregister_matchcall TRAINER_NOB_1\n\trelease\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "Route115",
+    "label": "Route115_EventScript_RematchNob",
+    "source": "data/maps/Route115/scripts.inc",
+    "line": 72,
+    "body": "\tmsgbox Route115_Text_NOB_1_LocalConversation, MSGBOX_NPC\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "Route116",
+    "label": "Route116_EventScript_TryRegisterKarenAfterBattle",
+    "source": "data/maps/Route116/scripts.inc",
+    "line": 295,
+    "body": "\tgoto_if_set FLAG_HAS_MATCH_CALL, Route116_EventScript_RegisterKarenAfterBattle\n\trelease\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "Route116",
+    "label": "Route116_EventScript_TryRegisterKaren",
+    "source": "data/maps/Route116/scripts.inc",
+    "line": 308,
+    "body": "\tgoto_if_set FLAG_HAS_MATCH_CALL, Route116_EventScript_RegisterKaren\n\tmsgbox Route116_Text_KarenPostBattle, MSGBOX_DEFAULT\n\trelease\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "Route116",
+    "label": "Route116_EventScript_RematchKaren",
+    "source": "data/maps/Route116/scripts.inc",
+    "line": 320,
+    "body": "\tmsgbox Route116_Text_KAREN_1_LocalConversation, MSGBOX_NPC\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "Route117",
+    "label": "Route117_EventScript_RegisterDylan",
+    "source": "data/maps/Route117/scripts.inc",
+    "line": 140,
+    "body": "\tspecial PlayerFaceTrainerAfterBattle\n\twaitmovement 0\n\tmsgbox Route117_Text_DylanRegister, MSGBOX_DEFAULT\n\tregister_matchcall TRAINER_DYLAN_1\n\trelease\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "Route117",
+    "label": "Route117_EventScript_RematchDylan",
+    "source": "data/maps/Route117/scripts.inc",
+    "line": 148,
+    "body": "\tmsgbox Route117_Text_DYLAN_1_LocalConversation, MSGBOX_NPC\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "Route120",
+    "label": "Route120_EventScript_RegisterRobert",
+    "source": "data/maps/Route120/scripts.inc",
+    "line": 309,
+    "body": "\tspecial PlayerFaceTrainerAfterBattle\n\twaitmovement 0\n\tmsgbox Route120_Text_RobertRegister, MSGBOX_DEFAULT\n\tregister_matchcall TRAINER_ROBERT_1\n\trelease\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "Route120",
+    "label": "Route120_EventScript_RematchRobert",
+    "source": "data/maps/Route120/scripts.inc",
+    "line": 317,
+    "body": "\tmsgbox Route120_Text_ROBERT_1_LocalConversation, MSGBOX_NPC\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "OldaleTown_PokemonCenter_2F",
+    "label": "OldaleTown_PokemonCenter_2F_EventScript_Colosseum",
+    "source": "data/maps/OldaleTown_PokemonCenter_2F/scripts.inc",
+    "line": 9,
+    "body": "\tcall CableClub_EventScript_Colosseum\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "OldaleTown_PokemonCenter_2F",
+    "label": "OldaleTown_PokemonCenter_2F_EventScript_TradeCenter",
+    "source": "data/maps/OldaleTown_PokemonCenter_2F/scripts.inc",
+    "line": 13,
+    "body": "\tcall CableClub_EventScript_TradeCenter\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "OldaleTown_PokemonCenter_2F",
+    "label": "OldaleTown_PokemonCenter_2F_EventScript_RecordCorner",
+    "source": "data/maps/OldaleTown_PokemonCenter_2F/scripts.inc",
+    "line": 17,
+    "body": "\tcall CableClub_EventScript_RecordCorner\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "DewfordTown_PokemonCenter_2F",
+    "label": "DewfordTown_PokemonCenter_2F_EventScript_Colosseum",
+    "source": "data/maps/DewfordTown_PokemonCenter_2F/scripts.inc",
+    "line": 9,
+    "body": "\tcall CableClub_EventScript_Colosseum\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "DewfordTown_PokemonCenter_2F",
+    "label": "DewfordTown_PokemonCenter_2F_EventScript_TradeCenter",
+    "source": "data/maps/DewfordTown_PokemonCenter_2F/scripts.inc",
+    "line": 13,
+    "body": "\tcall CableClub_EventScript_TradeCenter\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "DewfordTown_PokemonCenter_2F",
+    "label": "DewfordTown_PokemonCenter_2F_EventScript_RecordCorner",
+    "source": "data/maps/DewfordTown_PokemonCenter_2F/scripts.inc",
+    "line": 17,
+    "body": "\tcall CableClub_EventScript_RecordCorner\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "LavaridgeTown_PokemonCenter_2F",
+    "label": "LavaridgeTown_PokemonCenter_2F_EventScript_Colosseum",
+    "source": "data/maps/LavaridgeTown_PokemonCenter_2F/scripts.inc",
+    "line": 9,
+    "body": "\tcall CableClub_EventScript_Colosseum\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "LavaridgeTown_PokemonCenter_2F",
+    "label": "LavaridgeTown_PokemonCenter_2F_EventScript_TradeCenter",
+    "source": "data/maps/LavaridgeTown_PokemonCenter_2F/scripts.inc",
+    "line": 13,
+    "body": "\tcall CableClub_EventScript_TradeCenter\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "LavaridgeTown_PokemonCenter_2F",
+    "label": "LavaridgeTown_PokemonCenter_2F_EventScript_RecordCorner",
+    "source": "data/maps/LavaridgeTown_PokemonCenter_2F/scripts.inc",
+    "line": 17,
+    "body": "\tcall CableClub_EventScript_RecordCorner\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "FallarborTown_PokemonCenter_2F",
+    "label": "FallarborTown_PokemonCenter_2F_EventScript_Colosseum",
+    "source": "data/maps/FallarborTown_PokemonCenter_2F/scripts.inc",
+    "line": 9,
+    "body": "\tcall CableClub_EventScript_Colosseum\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "FallarborTown_PokemonCenter_2F",
+    "label": "FallarborTown_PokemonCenter_2F_EventScript_TradeCenter",
+    "source": "data/maps/FallarborTown_PokemonCenter_2F/scripts.inc",
+    "line": 13,
+    "body": "\tcall CableClub_EventScript_TradeCenter\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "FallarborTown_PokemonCenter_2F",
+    "label": "FallarborTown_PokemonCenter_2F_EventScript_RecordCorner",
+    "source": "data/maps/FallarborTown_PokemonCenter_2F/scripts.inc",
+    "line": 17,
+    "body": "\tcall CableClub_EventScript_RecordCorner\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "VerdanturfTown_PokemonCenter_2F",
+    "label": "VerdanturfTown_PokemonCenter_2F_EventScript_Colosseum",
+    "source": "data/maps/VerdanturfTown_PokemonCenter_2F/scripts.inc",
+    "line": 9,
+    "body": "\tcall CableClub_EventScript_Colosseum\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "VerdanturfTown_PokemonCenter_2F",
+    "label": "VerdanturfTown_PokemonCenter_2F_EventScript_TradeCenter",
+    "source": "data/maps/VerdanturfTown_PokemonCenter_2F/scripts.inc",
+    "line": 13,
+    "body": "\tcall CableClub_EventScript_TradeCenter\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "VerdanturfTown_PokemonCenter_2F",
+    "label": "VerdanturfTown_PokemonCenter_2F_EventScript_RecordCorner",
+    "source": "data/maps/VerdanturfTown_PokemonCenter_2F/scripts.inc",
+    "line": 17,
+    "body": "\tcall CableClub_EventScript_RecordCorner\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "PacifidlogTown_PokemonCenter_2F",
+    "label": "PacifidlogTown_PokemonCenter_2F_EventScript_Colosseum",
+    "source": "data/maps/PacifidlogTown_PokemonCenter_2F/scripts.inc",
+    "line": 9,
+    "body": "\tcall CableClub_EventScript_Colosseum\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "PacifidlogTown_PokemonCenter_2F",
+    "label": "PacifidlogTown_PokemonCenter_2F_EventScript_TradeCenter",
+    "source": "data/maps/PacifidlogTown_PokemonCenter_2F/scripts.inc",
+    "line": 13,
+    "body": "\tcall CableClub_EventScript_TradeCenter\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "PacifidlogTown_PokemonCenter_2F",
+    "label": "PacifidlogTown_PokemonCenter_2F_EventScript_RecordCorner",
+    "source": "data/maps/PacifidlogTown_PokemonCenter_2F/scripts.inc",
+    "line": 17,
+    "body": "\tcall CableClub_EventScript_RecordCorner\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "PetalburgCity_PokemonCenter_2F",
+    "label": "PetalburgCity_PokemonCenter_2F_EventScript_Colosseum",
+    "source": "data/maps/PetalburgCity_PokemonCenter_2F/scripts.inc",
+    "line": 9,
+    "body": "\tcall CableClub_EventScript_Colosseum\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "PetalburgCity_PokemonCenter_2F",
+    "label": "PetalburgCity_PokemonCenter_2F_EventScript_TradeCenter",
+    "source": "data/maps/PetalburgCity_PokemonCenter_2F/scripts.inc",
+    "line": 13,
+    "body": "\tcall CableClub_EventScript_TradeCenter\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "PetalburgCity_PokemonCenter_2F",
+    "label": "PetalburgCity_PokemonCenter_2F_EventScript_RecordCorner",
+    "source": "data/maps/PetalburgCity_PokemonCenter_2F/scripts.inc",
+    "line": 17,
+    "body": "\tcall CableClub_EventScript_RecordCorner\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "SlateportCity_PokemonCenter_2F",
+    "label": "SlateportCity_PokemonCenter_2F_EventScript_Colosseum",
+    "source": "data/maps/SlateportCity_PokemonCenter_2F/scripts.inc",
+    "line": 9,
+    "body": "\tcall CableClub_EventScript_Colosseum\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "SlateportCity_PokemonCenter_2F",
+    "label": "SlateportCity_PokemonCenter_2F_EventScript_TradeCenter",
+    "source": "data/maps/SlateportCity_PokemonCenter_2F/scripts.inc",
+    "line": 13,
+    "body": "\tcall CableClub_EventScript_TradeCenter\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "SlateportCity_PokemonCenter_2F",
+    "label": "SlateportCity_PokemonCenter_2F_EventScript_RecordCorner",
+    "source": "data/maps/SlateportCity_PokemonCenter_2F/scripts.inc",
+    "line": 17,
+    "body": "\tcall CableClub_EventScript_RecordCorner\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "MauvilleCity_GameCorner",
+    "label": "MauvilleCity_GameCorner_EventScript_ChooseCoinsDefault500",
+    "source": "data/maps/MauvilleCity_GameCorner/scripts.inc",
+    "line": 31,
+    "body": "\tmultichoicedefault 15, 0, MULTI_GAME_CORNER_COINS, 1, FALSE\n\tswitch VAR_RESULT\n\tcase 0, MauvilleCity_GameCorner_EventScript_Buy50Coins\n\tcase 1, MauvilleCity_GameCorner_EventScript_Buy500Coins\n\tgoto MauvilleCity_GameCorner_EventScript_CancelBuyCoins\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "MauvilleCity_PokemonCenter_2F",
+    "label": "MauvilleCity_PokemonCenter_2F_EventScript_Colosseum",
+    "source": "data/maps/MauvilleCity_PokemonCenter_2F/scripts.inc",
+    "line": 9,
+    "body": "\tcall CableClub_EventScript_Colosseum\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "MauvilleCity_PokemonCenter_2F",
+    "label": "MauvilleCity_PokemonCenter_2F_EventScript_TradeCenter",
+    "source": "data/maps/MauvilleCity_PokemonCenter_2F/scripts.inc",
+    "line": 13,
+    "body": "\tcall CableClub_EventScript_TradeCenter\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "MauvilleCity_PokemonCenter_2F",
+    "label": "MauvilleCity_PokemonCenter_2F_EventScript_RecordCorner",
+    "source": "data/maps/MauvilleCity_PokemonCenter_2F/scripts.inc",
+    "line": 17,
+    "body": "\tcall CableClub_EventScript_RecordCorner\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "RustboroCity_PokemonCenter_2F",
+    "label": "RustboroCity_PokemonCenter_2F_EventScript_Colosseum",
+    "source": "data/maps/RustboroCity_PokemonCenter_2F/scripts.inc",
+    "line": 9,
+    "body": "\tcall CableClub_EventScript_Colosseum\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "RustboroCity_PokemonCenter_2F",
+    "label": "RustboroCity_PokemonCenter_2F_EventScript_TradeCenter",
+    "source": "data/maps/RustboroCity_PokemonCenter_2F/scripts.inc",
+    "line": 13,
+    "body": "\tcall CableClub_EventScript_TradeCenter\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "RustboroCity_PokemonCenter_2F",
+    "label": "RustboroCity_PokemonCenter_2F_EventScript_RecordCorner",
+    "source": "data/maps/RustboroCity_PokemonCenter_2F/scripts.inc",
+    "line": 17,
+    "body": "\tcall CableClub_EventScript_RecordCorner\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "FortreeCity_PokemonCenter_2F",
+    "label": "FortreeCity_PokemonCenter_2F_EventScript_Colosseum",
+    "source": "data/maps/FortreeCity_PokemonCenter_2F/scripts.inc",
+    "line": 9,
+    "body": "\tcall CableClub_EventScript_Colosseum\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "FortreeCity_PokemonCenter_2F",
+    "label": "FortreeCity_PokemonCenter_2F_EventScript_TradeCenter",
+    "source": "data/maps/FortreeCity_PokemonCenter_2F/scripts.inc",
+    "line": 13,
+    "body": "\tcall CableClub_EventScript_TradeCenter\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "FortreeCity_PokemonCenter_2F",
+    "label": "FortreeCity_PokemonCenter_2F_EventScript_RecordCorner",
+    "source": "data/maps/FortreeCity_PokemonCenter_2F/scripts.inc",
+    "line": 17,
+    "body": "\tcall CableClub_EventScript_RecordCorner\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "LilycoveCity_PokemonCenter_2F",
+    "label": "LilycoveCity_PokemonCenter_2F_EventScript_Colosseum",
+    "source": "data/maps/LilycoveCity_PokemonCenter_2F/scripts.inc",
+    "line": 9,
+    "body": "\tcall CableClub_EventScript_Colosseum\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "LilycoveCity_PokemonCenter_2F",
+    "label": "LilycoveCity_PokemonCenter_2F_EventScript_TradeCenter",
+    "source": "data/maps/LilycoveCity_PokemonCenter_2F/scripts.inc",
+    "line": 13,
+    "body": "\tcall CableClub_EventScript_TradeCenter\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "LilycoveCity_PokemonCenter_2F",
+    "label": "LilycoveCity_PokemonCenter_2F_EventScript_RecordCorner",
+    "source": "data/maps/LilycoveCity_PokemonCenter_2F/scripts.inc",
+    "line": 17,
+    "body": "\tcall CableClub_EventScript_RecordCorner\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "LilycoveCity_Harbor",
+    "label": "LilycoveCity_Harbor_EventScript_GoToSlateportUnused",
+    "source": "data/maps/LilycoveCity_Harbor/scripts.inc",
+    "line": 358,
+    "body": "\tmsgbox LilycoveCity_Harbor_Text_SlateportItIs, MSGBOX_YESNO\n\tgoto_if_eq VAR_RESULT, NO, LilycoveCity_Harbor_EventScript_FerryDestinationChangeMind\n\tsetvar VAR_SS_TIDAL_STATE, SS_TIDAL_BOARD_LILYCOVE\n\tcall LilycoveCity_Harbor_EventScript_BoardFerry\n\twarp MAP_SS_TIDAL_CORRIDOR, 1, 10\n\twaitstate\n\trelease\n\tend\n\n@ Unused",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "LilycoveCity_Harbor",
+    "label": "LilycoveCity_Harbor_EventScript_GoToBattleFrontierUnused",
+    "source": "data/maps/LilycoveCity_Harbor/scripts.inc",
+    "line": 369,
+    "body": "\tmsgbox LilycoveCity_Harbor_Text_BattleFrontierItIs, MSGBOX_YESNO\n\tgoto_if_eq VAR_RESULT, NO, LilycoveCity_Harbor_EventScript_FerryDestinationChangeMind\n\tcall LilycoveCity_Harbor_EventScript_BoardFerry\n\twarp MAP_BATTLE_FRONTIER_OUTSIDE_WEST, 19, 67\n\twaitstate\n\trelease\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "MossdeepCity_Gym",
+    "label": "MossdeepCity_Gym_EventScript_Switch1",
+    "source": "data/maps/MossdeepCity_Gym/scripts.inc",
+    "line": 127,
+    "body": "\tlockall\n\tgoto_if_set FLAG_MOSSDEEP_GYM_SWITCH_1, MossdeepCity_Gym_EventScript_ClearSwitch1\n\tsetflag FLAG_MOSSDEEP_GYM_SWITCH_1\n\tapplymovement LOCALID_PLAYER, MossdeepCity_Gym_Movement_WaitAfterSwitchUse\n\twaitmovement 0\n\tsetmetatile 5, 5, METATILE_RSMossdeepGym_RedArrow_Right, FALSE\n\tsetmetatile 2, 7, METATILE_RSMossdeepGym_Switch_Down, TRUE\n\tgoto MossdeepCity_Gym_EventScript_DrawMapAfterSwitchUsed\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "MossdeepCity_Gym",
+    "label": "MossdeepCity_Gym_EventScript_Switch2",
+    "source": "data/maps/MossdeepCity_Gym/scripts.inc",
+    "line": 153,
+    "body": "\tlockall\n\tgoto_if_set FLAG_MOSSDEEP_GYM_SWITCH_2, MossdeepCity_Gym_EventScript_ClearSwitch2\n\tsetflag FLAG_MOSSDEEP_GYM_SWITCH_2\n\tapplymovement LOCALID_PLAYER, MossdeepCity_Gym_Movement_WaitAfterSwitchUse\n\twaitmovement 0\n\tsetmetatile 8, 14, METATILE_RSMossdeepGym_RedArrow_Right, FALSE\n\tsetmetatile 8, 10, METATILE_RSMossdeepGym_Switch_Down, TRUE\n\tgoto MossdeepCity_Gym_EventScript_DrawMapAfterSwitchUsed\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "MossdeepCity_Gym",
+    "label": "MossdeepCity_Gym_EventScript_Switch3",
+    "source": "data/maps/MossdeepCity_Gym/scripts.inc",
+    "line": 173,
+    "body": "\tlockall\n\tgoto_if_set FLAG_MOSSDEEP_GYM_SWITCH_3, MossdeepCity_Gym_EventScript_ClearSwitch3\n\tsetflag FLAG_MOSSDEEP_GYM_SWITCH_3\n\tapplymovement LOCALID_PLAYER, MossdeepCity_Gym_Movement_WaitAfterSwitchUse\n\twaitmovement 0\n\tsetmetatile 15, 17, METATILE_RSMossdeepGym_RedArrow_Left, FALSE\n\tsetmetatile 17, 15, METATILE_RSMossdeepGym_Switch_Down, TRUE\n\tgoto MossdeepCity_Gym_EventScript_DrawMapAfterSwitchUsed\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "MossdeepCity_Gym",
+    "label": "MossdeepCity_Gym_EventScript_Switch4",
+    "source": "data/maps/MossdeepCity_Gym/scripts.inc",
+    "line": 193,
+    "body": "\tlockall\n\tgoto_if_set FLAG_MOSSDEEP_GYM_SWITCH_4, MossdeepCity_Gym_EventScript_ClearSwitch4\n\tsetflag FLAG_MOSSDEEP_GYM_SWITCH_4\n\tapplymovement LOCALID_PLAYER, MossdeepCity_Gym_Movement_WaitAfterSwitchUse\n\twaitmovement 0\n\tsetmetatile 1, 23, METATILE_RSMossdeepGym_RedArrow_Up, FALSE\n\tsetmetatile 5, 24, METATILE_RSMossdeepGym_Switch_Down, TRUE\n\tgoto MossdeepCity_Gym_EventScript_DrawMapAfterSwitchUsed\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "MossdeepCity_House1",
+    "label": "MossdeepCity_House1_EventScript_BlackBelt",
+    "source": "data/maps/MossdeepCity_House1/scripts.inc",
+    "line": 4,
+    "body": "\tlock\n\tfaceplayer\n\tbufferleadmonspeciesname STR_VAR_1\n\tmsgbox MossdeepCity_House1_Text_HmmYourPokemon, MSGBOX_DEFAULT\n\tspecialvar VAR_RESULT, GetPokeblockNameByMonNature\n\tgoto_if_eq VAR_RESULT, 0, MossdeepCity_House1_EventScript_NeutralNature\n\tmsgbox MossdeepCity_House1_Text_ItLikesXPokeblocks, MSGBOX_DEFAULT\n\trelease\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "MossdeepCity_House1",
+    "label": "MossdeepCity_House1_EventScript_Woman",
+    "source": "data/maps/MossdeepCity_House1/scripts.inc",
+    "line": 20,
+    "body": "\tmsgbox MossdeepCity_House1_Text_HusbandCanTellPokeblockMonLikes, MSGBOX_NPC\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "MossdeepCity_PokemonCenter_2F",
+    "label": "MossdeepCity_PokemonCenter_2F_EventScript_Colosseum",
+    "source": "data/maps/MossdeepCity_PokemonCenter_2F/scripts.inc",
+    "line": 9,
+    "body": "\tcall CableClub_EventScript_Colosseum\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "MossdeepCity_PokemonCenter_2F",
+    "label": "MossdeepCity_PokemonCenter_2F_EventScript_TradeCenter",
+    "source": "data/maps/MossdeepCity_PokemonCenter_2F/scripts.inc",
+    "line": 13,
+    "body": "\tcall CableClub_EventScript_TradeCenter\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "MossdeepCity_PokemonCenter_2F",
+    "label": "MossdeepCity_PokemonCenter_2F_EventScript_RecordCorner",
+    "source": "data/maps/MossdeepCity_PokemonCenter_2F/scripts.inc",
+    "line": 17,
+    "body": "\tcall CableClub_EventScript_RecordCorner\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "MossdeepCity_StevensHouse",
+    "label": "MossdeepCity_StevensHouse_EventScript_DiveItemBall",
+    "source": "data/maps/MossdeepCity_StevensHouse/scripts.inc",
+    "line": 148,
+    "body": "\tfinditem ITEM_HM_DIVE\n\tsetflag FLAG_RECEIVED_HM_DIVE\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "SootopolisCity_PokemonCenter_2F",
+    "label": "SootopolisCity_PokemonCenter_2F_EventScript_Colosseum",
+    "source": "data/maps/SootopolisCity_PokemonCenter_2F/scripts.inc",
+    "line": 9,
+    "body": "\tcall CableClub_EventScript_Colosseum\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "SootopolisCity_PokemonCenter_2F",
+    "label": "SootopolisCity_PokemonCenter_2F_EventScript_TradeCenter",
+    "source": "data/maps/SootopolisCity_PokemonCenter_2F/scripts.inc",
+    "line": 13,
+    "body": "\tcall CableClub_EventScript_TradeCenter\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "SootopolisCity_PokemonCenter_2F",
+    "label": "SootopolisCity_PokemonCenter_2F_EventScript_RecordCorner",
+    "source": "data/maps/SootopolisCity_PokemonCenter_2F/scripts.inc",
+    "line": 17,
+    "body": "\tcall CableClub_EventScript_RecordCorner\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "EverGrandeCity_PokemonLeague_1F",
+    "label": "EverGrandeCity_PokemonLeague_1F_EventScript_Clerk",
+    "source": "data/maps/EverGrandeCity_PokemonLeague_1F/scripts.inc",
+    "line": 25,
+    "body": "\tlock\n\tfaceplayer\n\tmessage gText_HowMayIServeYou\n\twaitmessage\n\tpokemart EverGrandeCity_PokemonLeague_1F_Pokemart\n\tmsgbox gText_PleaseComeAgain, MSGBOX_DEFAULT\n\trelease\n\tend\n\n\t.align 2",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "EverGrandeCity_PokemonCenter_2F",
+    "label": "EverGrandeCity_PokemonCenter_2F_EventScript_Colosseum",
+    "source": "data/maps/EverGrandeCity_PokemonCenter_2F/scripts.inc",
+    "line": 9,
+    "body": "\tcall CableClub_EventScript_Colosseum\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "EverGrandeCity_PokemonCenter_2F",
+    "label": "EverGrandeCity_PokemonCenter_2F_EventScript_TradeCenter",
+    "source": "data/maps/EverGrandeCity_PokemonCenter_2F/scripts.inc",
+    "line": 13,
+    "body": "\tcall CableClub_EventScript_TradeCenter\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "EverGrandeCity_PokemonCenter_2F",
+    "label": "EverGrandeCity_PokemonCenter_2F_EventScript_RecordCorner",
+    "source": "data/maps/EverGrandeCity_PokemonCenter_2F/scripts.inc",
+    "line": 17,
+    "body": "\tcall CableClub_EventScript_RecordCorner\n\tend\n\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "EverGrandeCity_PokemonLeague_2F",
+    "label": "EverGrandeCity_PokemonLeague_2F_EventScript_Colosseum",
+    "source": "data/maps/EverGrandeCity_PokemonLeague_2F/scripts.inc",
+    "line": 9,
+    "body": "\tcall CableClub_EventScript_Colosseum\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "EverGrandeCity_PokemonLeague_2F",
+    "label": "EverGrandeCity_PokemonLeague_2F_EventScript_TradeCenter",
+    "source": "data/maps/EverGrandeCity_PokemonLeague_2F/scripts.inc",
+    "line": 13,
+    "body": "\tcall CableClub_EventScript_TradeCenter\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "EverGrandeCity_PokemonLeague_2F",
+    "label": "EverGrandeCity_PokemonLeague_2F_EventScript_RecordCorner",
+    "source": "data/maps/EverGrandeCity_PokemonLeague_2F/scripts.inc",
+    "line": 17,
+    "body": "\tcall CableClub_EventScript_RecordCorner\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "ShoalCave_LowTideEntranceRoom",
+    "label": "ShoalCave_LowTideEntranceRoom_EventScript_CheckSpaceWillBeFreed",
+    "source": "data/maps/ShoalCave_LowTideEntranceRoom/scripts.inc",
+    "line": 50,
+    "body": "\tcheckitem ITEM_SHOAL_SALT, 5\n\tgoto_if_eq VAR_RESULT, TRUE, ShoalCave_LowTideEntranceRoom_EventScript_CheckSpaceWillBeFreedShells\n\treturn\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "UnionRoom",
+    "label": "UnionRoom_EventScript_Unused",
+    "source": "data/maps/UnionRoom/scripts.inc",
+    "line": 102,
+    "body": "\tlockall\n\tsetvar VAR_RESULT, UR_INTERACT_UNUSED\n\twaitstate\n\treleaseall\n\tend",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "SafariZone_South",
+    "label": "SafariZone_South_EventScript_ConstructionWorker1",
+    "source": "data/maps/SafariZone_South/scripts.inc",
+    "line": 116,
+    "body": "\tmsgbox SafariZone_South_Text_AreaOffLimits1, MSGBOX_NPC\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "SafariZone_South",
+    "label": "SafariZone_South_EventScript_ConstructionWorker2",
+    "source": "data/maps/SafariZone_South/scripts.inc",
+    "line": 124,
+    "body": "\tmsgbox SafariZone_South_Text_AreaOffLimits2, MSGBOX_NPC\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "BattleFrontier_OutsideWest",
+    "label": "BattleFrontier_OutsideWest_EventScript_UnusedNPC1",
+    "source": "data/maps/BattleFrontier_OutsideWest/scripts.inc",
+    "line": 88,
+    "body": "\tmsgbox BattleFrontier_OutsideWest_Text_ThisIsBattleTower, MSGBOX_NPC\n\tend\n\n@ Unused",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "BattleFrontier_OutsideWest",
+    "label": "BattleFrontier_OutsideWest_EventScript_UnusedNPC2",
+    "source": "data/maps/BattleFrontier_OutsideWest/scripts.inc",
+    "line": 93,
+    "body": "\tmsgbox BattleFrontier_OutsideWest_Text_CantFindBattleTower, MSGBOX_NPC\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "BattleFrontier_OutsideWest",
+    "label": "BattleFrontier_OutsideWest_EventScript_UnusedNPC3",
+    "source": "data/maps/BattleFrontier_OutsideWest/scripts.inc",
+    "line": 238,
+    "body": "\tmsgbox BattleFrontier_OutsideWest_Text_DomeIsHereGrandpa, MSGBOX_NPC\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "BattleFrontier_BattleTowerLobby",
+    "label": "BattleFrontier_BattleTowerLobby_EventScript_SinglesAttendant",
+    "source": "data/maps/BattleFrontier_BattleTowerLobby/scripts.inc",
+    "line": 169,
+    "body": "\tlock\n\tfaceplayer\n\tsetvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_TOWER\n\tspecial SavePlayerParty\n\tmsgbox BattleFrontier_BattleTowerLobby_Text_WelcomSingleBattle, MSGBOX_DEFAULT",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "BattleFrontier_BattleTowerLobby",
+    "label": "BattleFrontier_BattleTowerLobby_EventScript_DoublesAttendant",
+    "source": "data/maps/BattleFrontier_BattleTowerLobby/scripts.inc",
+    "line": 232,
+    "body": "\tlock\n\tfaceplayer\n\tsetvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_TOWER\n\tspecial SavePlayerParty\n\tmsgbox BattleFrontier_BattleTowerLobby_Text_WelcomeDoubleBattle, MSGBOX_DEFAULT",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "BattleFrontier_BattleTowerLobby",
+    "label": "BattleFrontier_BattleTowerLobby_EventScript_MultisAttendant",
+    "source": "data/maps/BattleFrontier_BattleTowerLobby/scripts.inc",
+    "line": 295,
+    "body": "\tlock\n\tfaceplayer\n\tsetvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_TOWER\n\tclearflag FLAG_CHOSEN_MULTI_BATTLE_NPC_PARTNER\n\tspecial SavePlayerParty\n\tmsgbox BattleFrontier_BattleTowerLobby_Text_WelcomeMultiBattle, MSGBOX_DEFAULT",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "BattleFrontier_BattleTowerLobby",
+    "label": "BattleFrontier_BattleTowerLobby_EventScript_LinkMultisAttendant",
+    "source": "data/maps/BattleFrontier_BattleTowerLobby/scripts.inc",
+    "line": 359,
+    "body": "\tlock\n\tfaceplayer\n\tsetvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_TOWER\n\tspecial SavePlayerParty\n\tmsgbox BattleFrontier_BattleTowerLobby_Text_WelcomeLinkMultiBattle, MSGBOX_DEFAULT",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "BattleFrontier_BattleTowerLobby",
+    "label": "BattleFrontier_BattleTowerLobby_EventScript_FeelingsMan",
+    "source": "data/maps/BattleFrontier_BattleTowerLobby/scripts.inc",
+    "line": 430,
+    "body": "\tlock\n\tfaceplayer\n\tmessage BattleFrontier_BattleTowerLobby_Text_DescribeFeelingsAboutBattleTower\n\twaitmessage\n\tmultichoice 16, 4, MULTI_BATTLE_TOWER_FEELINGS, FALSE\n\tswitch VAR_RESULT\n\tcase 0, BattleFrontier_BattleTowerLobby_EventScript_FeelingsBattleNow\n\tcase 1, BattleFrontier_BattleTowerLobby_EventScript_FeelingsIWon\n\tcase 2, BattleFrontier_BattleTowerLobby_EventScript_FeelingsILost\n\tcase 3, BattleFrontier_BattleTowerLobby_EventScript_FeelingsWontTell\n\tcase MULTI_B_PRESSED, BattleFrontier_BattleTowerLobby_EventScript_FeelingsWontTell\n\trelease\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "BattleFrontier_BattleTowerMultiPartnerRoom",
+    "label": "BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_MoveToElevatorEast",
+    "source": "data/maps/BattleFrontier_BattleTowerMultiPartnerRoom/scripts.inc",
+    "line": 120,
+    "body": "\tapplymovement LOCALID_TOWER_PARTNER_ROOM_ATTENDANT, BattleFrontier_BattleTowerMultiPartnerRoom_Movement_AttendantEnterElevator\n\tapplymovement LOCALID_PLAYER, BattleFrontier_BattleTowerMultiPartnerRoom_Movement_PlayerEnterElevatorEast\n\twaitmovement 0\n\treturn\n\n@ Unused",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "BattleFrontier_BattleTowerMultiPartnerRoom",
+    "label": "BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_MoveToElevatorWest",
+    "source": "data/maps/BattleFrontier_BattleTowerMultiPartnerRoom/scripts.inc",
+    "line": 127,
+    "body": "\tapplymovement LOCALID_TOWER_PARTNER_ROOM_ATTENDANT, BattleFrontier_BattleTowerMultiPartnerRoom_Movement_AttendantEnterElevator\n\tapplymovement LOCALID_PLAYER, BattleFrontier_BattleTowerMultiPartnerRoom_Movement_PlayerEnterElevatorWest\n\twaitmovement 0\n\treturn\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "BattleFrontier_BattleDomeLobby",
+    "label": "BattleFrontier_BattleDomeLobby_EventScript_SinglesAttendant",
+    "source": "data/maps/BattleFrontier_BattleDomeLobby/scripts.inc",
+    "line": 119,
+    "body": "\tlock\n\tfaceplayer\n\tsetvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_DOME\n\tsetvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES\n\tgoto BattleFrontier_BattleDomeLobby_EventScript_AttendantWelcome\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "BattleFrontier_BattleDomeLobby",
+    "label": "BattleFrontier_BattleDomeLobby_EventScript_DoublesAttendant",
+    "source": "data/maps/BattleFrontier_BattleDomeLobby/scripts.inc",
+    "line": 127,
+    "body": "\tlock\n\tfaceplayer\n\tsetvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_DOME\n\tsetvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES\n\tgoto BattleFrontier_BattleDomeLobby_EventScript_AttendantWelcome\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "BattleFrontier_BattleDomeLobby",
+    "label": "BattleFrontier_OutsideWest_EventScript_BattleDomeSign2",
+    "source": "data/maps/BattleFrontier_BattleDomeLobby/scripts.inc",
+    "line": 393,
+    "body": "\tmsgbox BattleFrontier_OutsideWest_Text_BattleDomeSign2, MSGBOX_NPC\n\tend\n\n@ Unused",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "BattleFrontier_BattleDomeLobby",
+    "label": "BattleFrontier_OutsideWest_EventScript_UnderConstructionSign",
+    "source": "data/maps/BattleFrontier_BattleDomeLobby/scripts.inc",
+    "line": 398,
+    "body": "\tmsgbox BattleFrontier_OutsideWest_Text_QuestionMarkUnderConstruction, MSGBOX_NPC\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "BattleFrontier_BattlePalaceLobby",
+    "label": "BattleFrontier_BattlePalaceLobby_EventScript_SinglesAttendant",
+    "source": "data/maps/BattleFrontier_BattlePalaceLobby/scripts.inc",
+    "line": 107,
+    "body": "\tlock\n\tfaceplayer\n\tsetvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_PALACE\n\tsetvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES\n\tgoto BattleFrontier_BattlePalaceLobby_EventScript_Attendant\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "BattleFrontier_BattlePalaceLobby",
+    "label": "BattleFrontier_BattlePalaceLobby_EventScript_DoublesAttendant",
+    "source": "data/maps/BattleFrontier_BattlePalaceLobby/scripts.inc",
+    "line": 115,
+    "body": "\tlock\n\tfaceplayer\n\tsetvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_PALACE\n\tsetvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES\n\tgoto BattleFrontier_BattlePalaceLobby_EventScript_Attendant\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "BattleFrontier_BattlePyramidLobby",
+    "label": "BattleFrontier_BattlePyramidLobby_EventScript_Attendant",
+    "source": "data/maps/BattleFrontier_BattlePyramidLobby/scripts.inc",
+    "line": 105,
+    "body": "\tlock\n\tfaceplayer\n\tsetvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_PYRAMID\n\tsetvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES\n\tspecial SavePlayerParty\n\tmsgbox BattleFrontier_BattlePyramidLobby_Text_WelcomeToBattlePyramid, MSGBOX_DEFAULT",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "BattleFrontier_BattleArenaLobby",
+    "label": "BattleFrontier_BattleArenaLobby_EventScript_Attendant",
+    "source": "data/maps/BattleFrontier_BattleArenaLobby/scripts.inc",
+    "line": 106,
+    "body": "\tlock\n\tfaceplayer\n\tsetvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_ARENA\n\tsetvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES\n\tspecial SavePlayerParty\n\tmsgbox BattleFrontier_BattleArenaLobby_Text_WelcomeToBattleArena, MSGBOX_DEFAULT",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "BattleFrontier_BattleFactoryLobby",
+    "label": "BattleFrontier_BattleFactoryLobby_EventScript_SinglesAttendant",
+    "source": "data/maps/BattleFrontier_BattleFactoryLobby/scripts.inc",
+    "line": 110,
+    "body": "\tlock\n\tfaceplayer\n\tsetvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_FACTORY\n\tsetvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES\n\tgoto BattleFrontier_BattleFactoryLobby_EventScript_Attendant\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "BattleFrontier_BattleFactoryLobby",
+    "label": "BattleFrontier_BattleFactoryLobby_EventScript_DoublesAttendant",
+    "source": "data/maps/BattleFrontier_BattleFactoryLobby/scripts.inc",
+    "line": 118,
+    "body": "\tsetvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_FACTORY\n\tsetvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES\n\tgoto BattleFrontier_BattleFactoryLobby_EventScript_Attendant\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "BattleFrontier_BattlePikeLobby",
+    "label": "BattleFrontier_BattlePikeLobby_EventScript_Attendant",
+    "source": "data/maps/BattleFrontier_BattlePikeLobby/scripts.inc",
+    "line": 93,
+    "body": "\tlock\n\tfaceplayer\n\tsetvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_PIKE\n\tsetvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES\n\tspecial SavePlayerParty\n\tmsgbox BattleFrontier_BattlePikeLobby_Text_WelcomeToBattlePike, MSGBOX_DEFAULT",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "BattleFrontier_PokemonCenter_2F",
+    "label": "BattleFrontier_PokemonCenter_2F_EventScript_Colosseum",
+    "source": "data/maps/BattleFrontier_PokemonCenter_2F/scripts.inc",
+    "line": 9,
+    "body": "\tcall CableClub_EventScript_Colosseum\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "BattleFrontier_PokemonCenter_2F",
+    "label": "BattleFrontier_PokemonCenter_2F_EventScript_TradeCenter",
+    "source": "data/maps/BattleFrontier_PokemonCenter_2F/scripts.inc",
+    "line": 13,
+    "body": "\tcall CableClub_EventScript_TradeCenter\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "BattleFrontier_PokemonCenter_2F",
+    "label": "BattleFrontier_PokemonCenter_2F_EventScript_RecordCorner",
+    "source": "data/maps/BattleFrontier_PokemonCenter_2F/scripts.inc",
+    "line": 17,
+    "body": "\tcall CableClub_EventScript_RecordCorner\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "BattleFrontier_Mart",
+    "label": "BattleFrontier_Mart_EventScript_OldMan",
+    "source": "data/maps/BattleFrontier_Mart/scripts.inc",
+    "line": 31,
+    "body": "\tmsgbox BattleFrontier_Mart_Text_ChaperonGrandson, MSGBOX_NPC\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "TrainerHill_Elevator",
+    "label": "TrainerHill_Elevator_EventScript_ExitFloorSelect",
+    "source": "data/maps/TrainerHill_Elevator/scripts.inc",
+    "line": 42,
+    "body": "\tgoto TrainerHill_Elevator_EventScript_CloseFloorSelect\n\tend\n\n@ Functionally unused",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "Route110_TrickHouseEntrance",
+    "label": "Route110_TrickHouseEntrance_EventScript_UnusedRelease",
+    "source": "data/maps/Route110_TrickHouseEntrance/scripts.inc",
+    "line": 217,
+    "body": "\treleaseall\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "Route110_TrickHousePuzzle5",
+    "label": "Route110_TrickHousePuzzle5_EventScript_Mechadoll4Trigger5",
+    "source": "data/maps/Route110_TrickHousePuzzle5/scripts.inc",
+    "line": 197,
+    "body": "\tlockall\n\tsetvar VAR_TEMP_9, 5\n\tgoto Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "Route110_TrickHousePuzzle5",
+    "label": "Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft5",
+    "source": "data/maps/Route110_TrickHousePuzzle5/scripts.inc",
+    "line": 492,
+    "body": "\tcall_if_eq VAR_TEMP_8, LOCALID_MECHADOLL_1, Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkLeft5\n\tcall_if_eq VAR_TEMP_8, LOCALID_MECHADOLL_2, Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkLeft5\n\tcall_if_eq VAR_TEMP_8, LOCALID_MECHADOLL_3, Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkLeft5\n\tcall_if_eq VAR_TEMP_8, LOCALID_MECHADOLL_4, Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkLeft5\n\tcall_if_eq VAR_TEMP_8, LOCALID_MECHADOLL_5, Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkLeft5\n\treturn\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "Route110_TrickHousePuzzle7",
+    "label": "Route110_TrickHousePuzzle7_EventScript_TeleportPad",
+    "source": "data/maps/Route110_TrickHousePuzzle7/scripts.inc",
+    "line": 110,
+    "body": "\tlockall\n\tsetvar VAR_TRICK_HOUSE_PUZZLE_7_STATE_2, 1\n\twarpteleport MAP_ROUTE110_TRICK_HOUSE_PUZZLE7, 3, 19\n\twaitstate\n\treleaseall\n\tend\n\n@ All the below switch scripts are unused leftover from R/S",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "Route110_TrickHousePuzzle7",
+    "label": "Route110_TrickHousePuzzle7_EventScript_Switch1",
+    "source": "data/maps/Route110_TrickHousePuzzle7/scripts.inc",
+    "line": 119,
+    "body": "\tlockall\n\tdelay 32\n\tcall_if_unset FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1, Route110_TrickHousePuzzle7_EventScript_SetSwitch1MetatilesOn\n\tcall_if_set FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1, Route110_TrickHousePuzzle7_EventScript_SetSwitch1MetatilesOff\n\tspecial DrawWholeMapView\n\tplayse SE_CLICK\n\tgoto_if_unset FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1, Route110_TrickHousePuzzle7_EventScript_SetSwitch1On\n\tgoto_if_set FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1, Route110_TrickHousePuzzle7_EventScript_SetSwitch1Off\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "Route110_TrickHousePuzzle7",
+    "label": "Route110_TrickHousePuzzle7_EventScript_Switch2",
+    "source": "data/maps/Route110_TrickHousePuzzle7/scripts.inc",
+    "line": 130,
+    "body": "\tlockall\n\tdelay 32\n\tcall_if_unset FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_2, Route110_TrickHousePuzzle7_EventScript_SetSwitch2MetatilesOn\n\tcall_if_set FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_2, Route110_TrickHousePuzzle7_EventScript_SetSwitch2MetatilesOff\n\tspecial DrawWholeMapView\n\tplayse SE_CLICK\n\tgoto_if_unset FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_2, Route110_TrickHousePuzzle7_EventScript_SetSwitch2On\n\tgoto_if_set FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_2, Route110_TrickHousePuzzle7_EventScript_SetSwitch2Off\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "Route110_TrickHousePuzzle7",
+    "label": "Route110_TrickHousePuzzle7_EventScript_Switch3",
+    "source": "data/maps/Route110_TrickHousePuzzle7/scripts.inc",
+    "line": 141,
+    "body": "\tlockall\n\tdelay 32\n\tcall_if_unset FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_3, Route110_TrickHousePuzzle7_EventScript_SetSwitch3MetatilesOn\n\tcall_if_set FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_3, Route110_TrickHousePuzzle7_EventScript_SetSwitch3MetatilesOff\n\tspecial DrawWholeMapView\n\tplayse SE_CLICK\n\tgoto_if_unset FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_3, Route110_TrickHousePuzzle7_EventScript_SetSwitch3On\n\tgoto_if_set FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_3, Route110_TrickHousePuzzle7_EventScript_SetSwitch3Off\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "Route110_TrickHousePuzzle7",
+    "label": "Route110_TrickHousePuzzle7_EventScript_Switch4",
+    "source": "data/maps/Route110_TrickHousePuzzle7/scripts.inc",
+    "line": 152,
+    "body": "\tlockall\n\tdelay 32\n\tcall_if_unset FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_4, Route110_TrickHousePuzzle7_EventScript_SetSwitch4MetatilesOn\n\tcall_if_set FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_4, Route110_TrickHousePuzzle7_EventScript_SetSwitch4MetatilesOff\n\tspecial DrawWholeMapView\n\tplayse SE_CLICK\n\tgoto_if_unset FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_4, Route110_TrickHousePuzzle7_EventScript_SetSwitch4On\n\tgoto_if_set FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_4, Route110_TrickHousePuzzle7_EventScript_SetSwitch4Off\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "Route110_TrickHousePuzzle7",
+    "label": "Route110_TrickHousePuzzle7_EventScript_Switch5",
+    "source": "data/maps/Route110_TrickHousePuzzle7/scripts.inc",
+    "line": 163,
+    "body": "\tlockall\n\tdelay 32\n\tcall_if_unset FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_5, Route110_TrickHousePuzzle7_EventScript_SetSwitch5MetatilesOn\n\tcall_if_set FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_5, Route110_TrickHousePuzzle7_EventScript_SetSwitch5MetatilesOff\n\tspecial DrawWholeMapView\n\tplayse SE_CLICK\n\tgoto_if_unset FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_5, Route110_TrickHousePuzzle7_EventScript_SetSwitch5On\n\tgoto_if_set FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_5, Route110_TrickHousePuzzle7_EventScript_SetSwitch5Off\n\tend\n\n@ All the below switch scripts are unused leftover from R/S",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "Route110_TrickHousePuzzle7",
+    "label": "Route110_TrickHousePuzzle7_EventScript_RedButton",
+    "source": "data/maps/Route110_TrickHousePuzzle7/scripts.inc",
+    "line": 275,
+    "body": "\tplayse SE_SWITCH\n\twaitse\n\tplayse SE_REPEL\n\tinitrotatingtilepuzzle TRUE\n\tmoverotatingtileobjects 4\n\twaitmovement 0\n\tturnrotatingtileobjects\n\twaitmovement 0\n\tfreerotatingtilepuzzle\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "AlteringCave_1F",
+    "label": "AlteringCave_1F_EventScript_Researcher",
+    "source": "data/maps/AlteringCave_1F/scripts.inc",
+    "line": 4,
+    "body": "\tmsgbox AlteringCave_1F_Text_Researcher, MSGBOX_NPC\n\tend\n",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "CaveOfOrigin_DianciesRoom",
+    "label": "CaveOfOrigin_DianciesRoom_EventScript_WallaceExhibition",
+    "source": "data/maps/CaveOfOrigin_DianciesRoom/scripts.inc",
+    "line": 4,
+    "body": "\tlock\n\tfaceplayer\n\tgoto_if_unset FLAG_SYS_GAME_CLEAR, CaveOfOrigin_DianciesRoom_EventScript_WallaceNotReady\n\tgoto_if_defeated TRAINER_WALLACE_DOUBLES_LEGENDS, CaveOfOrigin_DianciesRoom_EventScript_WallaceReward\n\ttrainerbattle_double TRAINER_WALLACE_DOUBLES_LEGENDS, CaveOfOrigin_DianciesRoom_Text_WallaceIntro, CaveOfOrigin_DianciesRoom_Text_WallaceDefeat, EmeraldChampions_Text_NeedTwoPokemon\n",
+    "disposition": "REPAIR",
+    "final_specification": "Restore deliberately under W-WALLACE-ROOT.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "DewfordManor_1F",
+    "label": "DewfordManor_1F_EventScript_Historian",
+    "source": "data/maps/DewfordManor_1F/scripts.inc",
+    "line": 10,
+    "body": "\tmsgbox DewfordManor_1F_Text_Historian, MSGBOX_NPC\n\tend",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "DewfordMeadow",
+    "label": "DewfordMeadow_EventScript_Warden",
+    "source": "data/maps/DewfordMeadow/scripts.inc",
+    "line": 10,
+    "body": "\tmsgbox DewfordMeadow_Text_Warden, MSGBOX_NPC\n\tend",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "EmberPath",
+    "label": "EmberPath_EventScript_Warden",
+    "source": "data/maps/EmberPath/scripts.inc",
+    "line": 10,
+    "body": "\tmsgbox EmberPath_Text_Warden, MSGBOX_NPC\n\tend",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "MirageTower_B1F",
+    "label": "MirageTower_B1F_EventScript_Inscription",
+    "source": "data/maps/MirageTower_B1F/scripts.inc",
+    "line": 4,
+    "body": "\tmsgbox MirageTower_B1F_Text_Inscription, MSGBOX_NPC\n\tend",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "PetalburgWoods_2",
+    "label": "PetalburgWoods_2_EventScript_Ranger",
+    "source": "data/maps/PetalburgWoods_2/scripts.inc",
+    "line": 4,
+    "body": "\tmsgbox PetalburgWoods_2_Text_Ranger, MSGBOX_NPC\n\tend",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "PetalburgWoods_3",
+    "label": "PetalburgWoods_3_EventScript_Ranger",
+    "source": "data/maps/PetalburgWoods_3/scripts.inc",
+    "line": 4,
+    "body": "\tmsgbox PetalburgWoods_3_Text_Ranger, MSGBOX_NPC\n\tend",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "Route111_RuinsExterior",
+    "label": "Route111_RuinsExterior_EventScript_Archaeologist",
+    "source": "data/maps/Route111_RuinsExterior/scripts.inc",
+    "line": 4,
+    "body": "\tmsgbox Route111_RuinsExterior_Text_Archaeologist, MSGBOX_NPC\n\tend",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "SandstrewnRuins",
+    "label": "SandstrewnRuins_EventScript_Archaeologist",
+    "source": "data/maps/SandstrewnRuins/scripts.inc",
+    "line": 10,
+    "body": "\tmsgbox SandstrewnRuins_Text_Archaeologist, MSGBOX_NPC\n\tend",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "ScorchedSlab_B2F",
+    "label": "ScorchedSlab_B2F_EventScript_Warden",
+    "source": "data/maps/ScorchedSlab_B2F/scripts.inc",
+    "line": 4,
+    "body": "\tmsgbox ScorchedSlab_B2F_Text_Warden, MSGBOX_NPC\n\tend",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  },
+  {
+    "map": "Seaspray_Cave",
+    "label": "Seaspray_Cave_EventScript_Explorer",
+    "source": "data/maps/Seaspray_Cave/scripts.inc",
+    "line": 10,
+    "body": "\tmsgbox Seaspray_Cave_Text_Explorer, MSGBOX_NPC\n\tend",
+    "disposition": "INERT/EXCLUDED",
+    "final_specification": "No independent native interaction root found by the structural reference review. Preserve inert unless the owning explicit chapter retires the code; do not silently reattach old trainers, guides or facilities.",
+    "evidence_boundary": "Reference closure candidate classification cross-checked by root context; external/dynamic calls may be separately documented. Not a proof that arbitrary debug/script injection cannot reach it."
+  }
+]

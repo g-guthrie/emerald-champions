@@ -1,0 +1,186 @@
+{
+  "scope": "Bounded source/book reconciliation of charter01/02, early/late battle volumes, world changes/15quiz bank/event ledger. Activewild/forms/Mega chapters not wholesale re-audited; specific starter-stone integration coordinated with owner.",
+  "findings": [
+    {
+      "id": "QA-01",
+      "priority": "P1",
+      "title": "Stale format charter and six-only multi assumption",
+      "book_file": "chapters/00-design-charter.md",
+      "approximate_line": 16,
+      "source_evidence": [
+        "baseline/source/include/config/battle.h:403",
+        "baseline/source/src/battle_setup.c:2301",
+        "baseline/source/data/maps/MeteorFalls_1F_1R/scripts.inc:56"
+      ],
+      "resolution": "Charter and TEAM01 now preserve wild/legendary singles, Birch doubles, Half3+3 and Full6+6.",
+      "status": "resolved_in_book",
+      "runtime_verified": false
+    },
+    {
+      "id": "QA-02",
+      "priority": "P1",
+      "title": "Full early-supplies storage could retrigger old lab OnFrame",
+      "book_file": "chapters/01-opening-and-starters.md",
+      "approximate_line": 110,
+      "source_evidence": [
+        "baseline/source/data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:121"
+      ],
+      "resolution": "Oldlab3 is committed before release; newopening2 keeps supplies owed and interactable Birch/aide resumes them.",
+      "status": "resolved_in_book",
+      "runtime_verified": false
+    },
+    {
+      "id": "QA-03",
+      "priority": "P2",
+      "title": "Eviolite quiz had two truthful choices",
+      "book_file": "world/changes.md",
+      "approximate_line": 1495,
+      "source_evidence": [
+        "baseline/source/src/battle_util.c:7291"
+      ],
+      "resolution": "Decoy0 is now One with no evolution; correctindex1 remains One that can still evolve.",
+      "status": "resolved_in_book",
+      "runtime_verified": false
+    },
+    {
+      "id": "QA-04",
+      "priority": "P1",
+      "title": "Native link and imported Secret Base singles lacked exact final entry rules",
+      "book_file": "chapters/02-competition-rules.md",
+      "approximate_line": 132,
+      "source_evidence": [
+        "baseline/source/data/scripts/cable_club.inc:284",
+        "baseline/source/data/scripts/cable_club.inc:992",
+        "baseline/source/src/data/script_menu.h:568",
+        "baseline/source/data/scripts/secret_base.inc:284",
+        "baseline/source/data/scripts/secret_base.inc:638",
+        "baseline/source/src/secret_base.c:1162"
+      ],
+      "resolution": "LINK01 now specifies menu/protocol remapping, guarded legacy cleanup, and SecretBase challenge retirement before mutation.",
+      "status": "resolved_in_book",
+      "runtime_verified": false
+    },
+    {
+      "id": "QA-05",
+      "priority": "P1",
+      "title": "Legacy second starter falsely jumped to ready before Dex/Balls",
+      "book_file": "chapters/01-opening-and-starters.md",
+      "approximate_line": 75,
+      "source_evidence": [
+        "baseline/source/data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc:393"
+      ],
+      "resolution": "Oldlab2/3/4 now route supplement->newopening2+oldlab3->supplies->ready or debrief; only completeoldlab5+Dex skips directly4.",
+      "status": "resolved_in_book",
+      "runtime_verified": false
+    },
+    {
+      "id": "QA-06",
+      "priority": "P1",
+      "title": "Previously hidden Steven could not deliver newly earned second-family stones",
+      "book_file": "chapters/01-opening-and-starters.md",
+      "approximate_line": 163,
+      "source_evidence": [
+        "baseline/source/data/maps/GraniteCave_StevensRoom/scripts.inc:24",
+        "baseline/source/src/field_specials.c:633"
+      ],
+      "resolution": "After actual secondgift delivery, real newpending slots wake only Steven visibility after oldstory prerequisites; no repeated oldgifts.",
+      "status": "resolved_in_book",
+      "runtime_verified": false
+    },
+    {
+      "id": "QA-07",
+      "priority": "P2",
+      "title": "Birch fieldwork could delay legacy supplement",
+      "book_file": "chapters/01-opening-and-starters.md",
+      "approximate_line": 79,
+      "source_evidence": [
+        "baseline/source/data/scripts/prof_birch.inc:1",
+        "baseline/source/src/time_events.c:116",
+        "baseline/source/data/maps/LittlerootTown_ProfessorBirchsLab/map.json"
+      ],
+      "resolution": "Always-present aide shares state5/state2/research-menu priority and receipts without relocating Birch.",
+      "status": "resolved_in_book",
+      "runtime_verified": false
+    }
+  ],
+  "checks": {
+    "trainer_ids_expected": 516,
+    "trainer_ids_reviewed": 516,
+    "missing_trainer_ids": [],
+    "extra_trainer_ids": [],
+    "overlapping_volume_ids": [],
+    "final_pokemon_slots": 2339,
+    "final_point_budget_issues": [],
+    "final_duplicate_move_issues": [],
+    "final_duplicate_opponent_item_issues": [],
+    "under_four_parties_are_explicit_half_components": true,
+    "full_E0127_opponents": 12,
+    "late_stat_rows_recomputed": 9,
+    "late_stat_math_issues": [],
+    "quiz_questions_semantically_read": 15,
+    "world_registered_maps": 540,
+    "world_baseline_events": 6322,
+    "expanded_native_move_policy_preserved": true
+  },
+  "gate_dispositions": [
+    {
+      "check": "Authored/master/native equality",
+      "disposition": "KEEP",
+      "scope": "Fresh exact input binding; preserves user authoring."
+    },
+    {
+      "check": "IDs/references/warps/return contracts",
+      "disposition": "KEEP",
+      "scope": "Structural integrity; distinguish accessible and inactive roots."
+    },
+    {
+      "check": "Opening exception and gym floor fixtures",
+      "disposition": "UPDATE",
+      "scope": "Two chosen starters, double rescue, four-mon rival, Mediumlivecapminus2, Half versus Full."
+    },
+    {
+      "check": "Stat preparation fixtures",
+      "disposition": "UPDATE",
+      "scope": "66/32flatpoints, display mapping, IV31forced, integernature."
+    },
+    {
+      "check": "Pinned-only move legality",
+      "disposition": "UPDATE",
+      "scope": "Advisory reference comparison under explicit expanded-native policy."
+    },
+    {
+      "check": "Unique whole-team fingerprints",
+      "disposition": "RETIRE_AS_BLOCKER",
+      "source": "scripts/audit_emerald_champions_master_battles.py:968"
+    },
+    {
+      "check": "Every Mega/legendary opposing showcase",
+      "disposition": "RETIRE_AS_BLOCKER",
+      "source": "scripts/audit_emerald_champions_master_battles.py:972"
+    },
+    {
+      "check": "Five primary labels/35 local species repeats",
+      "disposition": "RETIRE_AS_BLOCKER",
+      "source": "scripts/audit_emerald_champions_master_battles.py:1029"
+    },
+    {
+      "check": "Prose keyword locks",
+      "disposition": "RETIRE_AS_MECHANICS_PROOF",
+      "scope": "Verify actual behavior; no solution prescription."
+    },
+    {
+      "check": "Snapshot book counts",
+      "disposition": "KEEP_BOOK_ONLY",
+      "scope": "Never convert516/54/270/540/6322 into future gameplay floors."
+    },
+    {
+      "check": "Focused production/battle tests",
+      "disposition": "KEEP_OR_UPDATE",
+      "scope": "Audit fixtures and freshness; assert observable defect prevention, not one scripted player solution."
+    }
+  ],
+  "game_changes": false,
+  "baseline_changes": false,
+  "new_runtime_battles": 0,
+  "completion_boundary": "Findings resolved in documentation, not executed game behavior. This bounded pass does not claim global runtime readiness."
+}

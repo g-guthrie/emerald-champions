@@ -1,0 +1,35 @@
+# RecordCorner
+
+**REVISE.** Shared player-owned or external-link support. Preserve geography, trades, records and decoration data. Native trainer challenge entry is governed by the all-doubles external-entry contract, never silently accepted as a singles exception.
+
+[Regional experience](../10-support.md) · [Map source](../../baseline/source/data/maps/RecordCorner/map.json) · [Scripts](../../baseline/source/data/maps/RecordCorner/scripts.inc)
+
+## Current map contract
+
+`MAP_RECORD_CORNER` · `LAYOUT_RECORD_CORNER` · `WEATHER_NONE` · `MUS_EVER_GRANDE`
+
+Shared player-owned or external-link support. Preserve geography, trades, records and decoration data. Native trainer challenge entry is governed by the all-doubles external-entry contract, never silently accepted as a singles exception.
+
+## Complete event ledger
+
+Every row is a distinct snapshot event. A KEEP applies the examined common contract and this map’s context; it is not a claim that this scene has been traversed in an emulator.
+
+| Event | Position / selector | Current behavior | Disposition / final dependency |
+|---|---|---|---|
+| `RecordCorner:object_events:001` | 10,5 | [RecordCorner_EventScript_Attendant](../../baseline/source/data/scripts/cable_club.inc#L786) — RecordCorner_EventScript_Attendant at (10,5); shared behavior LINK | **REVISE** · [W-C-LINK](../common-contracts.md#w-c-link)  · LINK-01 |
+| `RecordCorner:coord_events:001` | 6,4 | [EventScript_RecordCenter_Spot0](../../baseline/source/data/scripts/cable_club.inc#L723) — Coordinate trigger at (6,4); VAR_TEMP_0 == 0 invokes EventScript_RecordCenter_Spot0. | **REVISE** · [W-C-COORD](../common-contracts.md#w-c-coord)  · LINK-01 |
+| `RecordCorner:coord_events:002` | 6,6 | [EventScript_RecordCenter_Spot2](../../baseline/source/data/scripts/cable_club.inc#L735) — Coordinate trigger at (6,6); VAR_TEMP_0 == 0 invokes EventScript_RecordCenter_Spot2. | **REVISE** · [W-C-COORD](../common-contracts.md#w-c-coord)  · LINK-01 |
+| `RecordCorner:coord_events:003` | 13,4 | [EventScript_RecordCenter_Spot1](../../baseline/source/data/scripts/cable_club.inc#L729) — Coordinate trigger at (13,4); VAR_TEMP_0 == 0 invokes EventScript_RecordCenter_Spot1. | **REVISE** · [W-C-COORD](../common-contracts.md#w-c-coord)  · LINK-01 |
+| `RecordCorner:coord_events:004` | 13,6 | [EventScript_RecordCenter_Spot3](../../baseline/source/data/scripts/cable_club.inc#L741) — Coordinate trigger at (13,6); VAR_TEMP_0 == 0 invokes EventScript_RecordCenter_Spot3. | **REVISE** · [W-C-COORD](../common-contracts.md#w-c-coord)  · LINK-01 |
+| `RecordCorner:warp_events:001` | 8,9 | Warp from (8,9, elevation 3) to MAP_DYNAMIC warp WARP_ID_DYNAMIC. | **REVISE** · [W-C-WARP](../common-contracts.md#w-c-warp)  · LINK-01 |
+| `RecordCorner:warp_events:002` | 9,9 | Warp from (9,9, elevation 3) to MAP_DYNAMIC warp WARP_ID_DYNAMIC. | **REVISE** · [W-C-WARP](../common-contracts.md#w-c-warp)  · LINK-01 |
+| `RecordCorner:warp_events:003` | 11,9 | Warp from (11,9, elevation 3) to MAP_DYNAMIC warp WARP_ID_DYNAMIC. | **REVISE** · [W-C-WARP](../common-contracts.md#w-c-warp)  · LINK-01 |
+| `RecordCorner:warp_events:004` | 10,9 | Warp from (10,9, elevation 3) to MAP_DYNAMIC warp WARP_ID_DYNAMIC. | **REVISE** · [W-C-WARP](../common-contracts.md#w-c-warp)  · LINK-01 |
+
+## Final specification and acceptance
+
+Retain the complete baseline map record except the exact entries in [proposed edits](../changes.md) and its owning battle/acquisition chapters. Preserve numeric IDs and unrelated flags.
+Required implementation evidence: enter from each actual neighbor; exercise locked/unlocked and before/after story states that change this map; verify objects, collision/elevation, trigger direction, destination and return route. For generic repetitions, execute the shared behavior once per meaningful engine case and inspect each instance’s specific placement. A source reference check does not replace this traversal.
+The [machine ledger](../event-ledger.json) records complete event dictionaries, local/shared label sets, every referenced dialogue label, proposal IDs, and explicit evidence boundaries.
+
+Shared entry/format reconciliation: **LINK-01**. Preserve imported teams, trading and records; use its exact doubles-only native entry and recovery rules.

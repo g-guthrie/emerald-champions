@@ -1,0 +1,62 @@
+# Route109
+
+**REVISE.** Map-specific script/dialogue digest and physical event records were reviewed against the region contract. Preserve the described map and its existing state handoffs, subject to the explicitly linked proposals and central battle/acquisition rules.
+
+[Regional experience](../02-dewford-and-slateport.md) · [Map source](../../baseline/source/data/maps/Route109/map.json) · [Scripts](../../baseline/source/data/maps/Route109/scripts.inc)
+
+## Current map contract
+
+`MAP_ROUTE109` · `LAYOUT_ROUTE109` · `WEATHER_SUNNY` · `MUS_ROUTE104`
+
+Map-specific script/dialogue digest and physical event records were reviewed against the region contract. Preserve the described map and its existing state handoffs, subject to the explicitly linked proposals and central battle/acquisition rules.
+
+## Complete event ledger
+
+Every row is a distinct snapshot event. A KEEP applies the examined common contract and this map’s context; it is not a claim that this scene has been traversed in an emulator.
+
+| Event | Position / selector | Current behavior | Disposition / final dependency |
+|---|---|---|---|
+| `Route109:object_events:001` | 21,26 | Passive/staged OBJ_EVENT_GFX_MR_BRINEYS_BOAT at (21,26); visibility flag FLAG_HIDE_ROUTE_109_MR_BRINEY_BOAT; no direct interaction script. | **KEEP** · [W-C-PASSIVE](../common-contracts.md#w-c-passive) |
+| `Route109:object_events:002` | 21,24 | [Route109_EventScript_MrBriney](../../baseline/source/data/maps/Route109/scripts.inc#L302) — Route109_EventScript_MrBriney at (21,24); MR. BRINEY: I thought you're supposed /  to deliver the DEVON GOODS. //  Would you like to sail back to /  DEWFORD, then? / MR. BRINEY: DEWFORD it is, then! //  Anchors aweigh! /  PEEKO, we're setting sail, my darling! | **KEEP** · [W-C-TRAVEL](../common-contracts.md#w-c-travel) |
+| `Route109:object_events:003` | 12,36 | [Route109_EventScript_David](../../baseline/source/data/maps/Route109/scripts.inc#L404) — Route109_EventScript_David at (12,36); shared behavior TRAINER | **REVISE** · [W-C-TRAINER](../common-contracts.md#w-c-trainer) · DIFF-01 |
+| `Route109:object_events:004` | 25,39 | [Route109_EventScript_Alice](../../baseline/source/data/maps/Route109/scripts.inc#L409) — Route109_EventScript_Alice at (25,39); shared behavior TRAINER | **REVISE** · [W-C-TRAINER](../common-contracts.md#w-c-trainer) · DIFF-01 |
+| `Route109:object_events:005` | 15,17 | [Route109_EventScript_Huey](../../baseline/source/data/maps/Route109/scripts.inc#L414) — Route109_EventScript_Huey at (15,17); My sea legs are excellent. /  My land legs filed a complaint. | **KEEP** · [W-C-FLAVOR](../common-contracts.md#w-c-flavor) |
+| `Route109:object_events:006` | 24,13 | [Route109_EventScript_Edmond](../../baseline/source/data/maps/Route109/scripts.inc#L418) — Route109_EventScript_Edmond at (24,13); shared behavior TRAINER | **REVISE** · [W-C-TRAINER](../common-contracts.md#w-c-trainer) · DIFF-01 |
+| `Route109:object_events:007` | 19,10 | [Route109_EventScript_Ricky](../../baseline/source/data/maps/Route109/scripts.inc#L423) — Route109_EventScript_Ricky at (19,10); shared behavior TRAINER | **REVISE** · [W-C-TRAINER](../common-contracts.md#w-c-trainer) · DIFF-01 |
+| `Route109:object_events:008` | 22,7 | [Route109_EventScript_Lola](../../baseline/source/data/maps/Route109/scripts.inc#L444) — Route109_EventScript_Lola at (22,7); shared behavior TRAINER | **REVISE** · [W-C-TRAINER](../common-contracts.md#w-c-trainer) · DIFF-01 |
+| `Route109:object_events:009` | 11,6 | [Route109_EventScript_SeashoreHouseGirl](../../baseline/source/data/maps/Route109/scripts.inc#L342) — Route109_EventScript_SeashoreHouseGirl at (11,6); Yo, TRAINERS! /  Whether you're hot to trot, /  or cool cat not, /  chill at my papa's spot! | **KEEP** · [W-C-FLAVOR](../common-contracts.md#w-c-flavor) |
+| `Route109:object_events:010` | 27,46 | [Common_EventScript_FindItem](../../baseline/source/data/scripts/item_ball_scripts.inc#L1) — Pickup ITEM_GOLISOPITE; root Common_EventScript_FindItem; flag FLAG_EC_MEGA_REWARD_GOLISOPITE. | **KEEP** · [W-C-PICKUP](../common-contracts.md#w-c-pickup) |
+| `Route109:object_events:011` | 29,32 | [Route109_EventScript_Gwen](../../baseline/source/data/maps/Route109/scripts.inc#L470) — Route109_EventScript_Gwen at (29,32); My float has never lost a race. /  It has never entered one either. | **KEEP** · [W-C-FLAVOR](../common-contracts.md#w-c-flavor) |
+| `Route109:object_events:012` | 28,31 | [Route109_EventScript_Austina](../../baseline/source/data/maps/Route109/scripts.inc#L465) — Route109_EventScript_Austina at (28,31); shared behavior TRAINER | **REVISE** · [W-C-TRAINER](../common-contracts.md#w-c-trainer) · DIFF-01 |
+| `Route109:object_events:013` | 21,56 | [Route109_EventScript_Carter](../../baseline/source/data/maps/Route109/scripts.inc#L474) — Route109_EventScript_Carter at (21,56); shared behavior TRAINER | **REVISE** · [W-C-TRAINER](../common-contracts.md#w-c-trainer) · DIFF-01 |
+| `Route109:object_events:014` | 24,18 | [Route109_EventScript_SandCastleBoy](../../baseline/source/data/maps/Route109/scripts.inc#L346) — Route109_EventScript_SandCastleBoy at (24,18); Our sand castle's taking a long time /  to make. | **KEEP** · [W-C-STORY](../common-contracts.md#w-c-story) |
+| `Route109:object_events:015` | 25,18 | [Route109_EventScript_WaterStoneGirl](../../baseline/source/data/maps/Route109/scripts.inc#L356) — Route109_EventScript_WaterStoneGirl at (25,18); You can have this! / We're going to get all the sand from /  the beach and make a big castle! //  And then we're going to be a king and /  queen. //  We'll let you be a servant. | **KEEP** · [W-C-STORY](../common-contracts.md#w-c-story) |
+| `Route109:object_events:016` | 30,32 | [Route109_EventScript_Woman](../../baseline/source/data/maps/Route109/scripts.inc#L378) — Route109_EventScript_Woman at (30,32); Little kids can dart around so quickly… //  You don't dare take your eyes off them /  for an instant. It's very taxing. //  Mine are with my POKéMON, so they /  should be okay, but… | **KEEP** · [W-C-FLAVOR](../common-contracts.md#w-c-flavor) |
+| `Route109:object_events:017` | 8,41 | [Route109_EventScript_Mel](../../baseline/source/data/maps/Route109/scripts.inc#L484) — Route109_EventScript_Mel at (8,41); shared behavior TRAINER | **REVISE** · [W-C-TRAINER](../common-contracts.md#w-c-trainer) · DIFF-01 |
+| `Route109:object_events:018` | 9,41 | [Route109_EventScript_Paul](../../baseline/source/data/maps/Route109/scripts.inc#L479) — Route109_EventScript_Paul at (9,41); shared behavior TRAINER | **REVISE** · [W-C-TRAINER](../common-contracts.md#w-c-trainer) · DIFF-01 |
+| `Route109:object_events:019` | 33,6 | [Route109_EventScript_OldMan](../../baseline/source/data/maps/Route109/scripts.inc#L382) — Route109_EventScript_OldMan at (33,6); The water around these parts is clean. //  But, I get my ZIGZAGOON to pick up /  litter from the shoreline at times. //  Dirty water becomes rain and joins our /  rivers, which we drink from… //  If we pollute the sea, it all comes /  back to haunt us eventually. | **KEEP** · [W-C-FLAVOR](../common-contracts.md#w-c-flavor) |
+| `Route109:object_events:020` | 32,6 | [Route109_EventScript_Zigzagoon](../../baseline/source/data/maps/Route109/scripts.inc#L386) — Route109_EventScript_Zigzagoon at (32,6); ZIGZAGOON: Guguu? | **KEEP** · [W-C-FLAVOR](../common-contracts.md#w-c-flavor) |
+| `Route109:object_events:021` | 17,13 | [Route109_EventScript_Hailey](../../baseline/source/data/maps/Route109/scripts.inc#L494) — Route109_EventScript_Hailey at (17,13); shared behavior TRAINER | **REVISE** · [W-C-TRAINER](../common-contracts.md#w-c-trainer) · DIFF-01 |
+| `Route109:object_events:022` | 27,7 | [Route109_EventScript_Chandler](../../baseline/source/data/maps/Route109/scripts.inc#L489) — Route109_EventScript_Chandler at (27,7); shared behavior TRAINER | **REVISE** · [W-C-TRAINER](../common-contracts.md#w-c-trainer) · DIFF-01 |
+| `Route109:object_events:023` | 25,6 | [Common_EventScript_FindItem](../../baseline/source/data/scripts/item_ball_scripts.inc#L1) — Pickup ITEM_SHARPEDONITE; root Common_EventScript_FindItem; flag FLAG_EC_MEGA_REWARD_SHARPEDONITE. | **KEEP** · [W-C-PICKUP](../common-contracts.md#w-c-pickup) |
+| `Route109:object_events:024` | 17,56 | [Route109_EventScript_Elijah](../../baseline/source/data/maps/Route109/scripts.inc#L499) — Route109_EventScript_Elijah at (17,56); A bird overhead means good luck. /  Usually. Keep your hat on. | **KEEP** · [W-C-FLAVOR](../common-contracts.md#w-c-flavor) |
+| `Route109:object_events:025` | 13,19 | [Route109_EventScript_SandMound1](../../baseline/source/data/maps/Route109/scripts.inc#L7) — Route109_EventScript_SandMound1 at (13,19); shared behavior STORY | **KEEP** · [W-C-STORY](../common-contracts.md#w-c-story) |
+| `Route109:object_events:026` | 24,22 | [Route109_EventScript_SandMound2](../../baseline/source/data/maps/Route109/scripts.inc#L16) — Route109_EventScript_SandMound2 at (24,22); shared behavior STORY | **KEEP** · [W-C-STORY](../common-contracts.md#w-c-story) |
+| `Route109:object_events:027` | 31,14 | [Route109_EventScript_SandMound3](../../baseline/source/data/maps/Route109/scripts.inc#L25) — Route109_EventScript_SandMound3 at (31,14); shared behavior STORY | **KEEP** · [W-C-STORY](../common-contracts.md#w-c-story) |
+| `Route109:bg_events:001` | 15,5 | [Route109_EventScript_SeashoreHouseSign](../../baseline/source/data/maps/Route109/scripts.inc#L396) — Route109_EventScript_SeashoreHouseSign at (15,5); SEASHORE HOUSE //  “May hot battles rage on hot sands! /  The place for hot TRAINERS!” | **REVISE** · [W-C-BACKGROUND](../common-contracts.md#w-c-background) · GUIDE-01 |
+| `Route109:bg_events:002` | 29,10 | [Route109_EventScript_TrainerTipsSign](../../baseline/source/data/maps/Route109/scripts.inc#L400) — Route109_EventScript_TrainerTipsSign at (29,10); TRAINER TIPS //  POKéMON at the same level may not /  always have identical stats. //  POKéMON raised by TRAINERS are said /  to grow stronger than wild POKéMON. | **REPAIR** · [W-C-BACKGROUND](../common-contracts.md#w-c-background) · GUIDE-01, W-OPENING-TIPS |
+| `Route109:bg_events:003` | 16,23 | Hidden ITEM_REVIVE at (16,23); persistent flag FLAG_HIDDEN_ITEM_ROUTE_109_REVIVE. | **KEEP** · [W-C-HIDDEN](../common-contracts.md#w-c-hidden) |
+| `Route109:bg_events:004` | 33,5 | Hidden ITEM_HEART_SCALE at (33,5); persistent flag FLAG_HIDDEN_ITEM_ROUTE_109_HEART_SCALE_1. | **KEEP** · [W-C-HIDDEN](../common-contracts.md#w-c-hidden) |
+| `Route109:bg_events:005` | 9,10 | Hidden ITEM_GREAT_BALL at (9,10); persistent flag FLAG_HIDDEN_ITEM_ROUTE_109_GREAT_BALL. | **KEEP** · [W-C-HIDDEN](../common-contracts.md#w-c-hidden) |
+| `Route109:bg_events:006` | 28,20 | Hidden ITEM_ETHER at (28,20); persistent flag FLAG_HIDDEN_ITEM_ROUTE_109_ETHER. | **KEEP** · [W-C-HIDDEN](../common-contracts.md#w-c-hidden) |
+| `Route109:bg_events:007` | 13,16 | Hidden ITEM_HEART_SCALE at (13,16); persistent flag FLAG_HIDDEN_ITEM_ROUTE_109_HEART_SCALE_2. | **KEEP** · [W-C-HIDDEN](../common-contracts.md#w-c-hidden) |
+| `Route109:bg_events:008` | 8,42 | Hidden ITEM_HEART_SCALE at (8,42); persistent flag FLAG_HIDDEN_ITEM_ROUTE_109_HEART_SCALE_3. | **KEEP** · [W-C-HIDDEN](../common-contracts.md#w-c-hidden) |
+| `Route109:warp_events:001` | 12,5 | Warp from (12,5, elevation 0) to MAP_ROUTE109_SEASHORE_HOUSE warp 0. | **KEEP** · [W-C-WARP](../common-contracts.md#w-c-warp) |
+| `Route109:connections:001` | up | up connection to MAP_SLATEPORT_CITY, offset 0. | **KEEP** · [W-C-WARP](../common-contracts.md#w-c-warp) |
+| `Route109:connections:002` | left | left connection to MAP_ROUTE108, offset 40. | **KEEP** · [W-C-WARP](../common-contracts.md#w-c-warp) |
+
+## Final specification and acceptance
+
+Retain the complete baseline map record except the exact entries in [proposed edits](../changes.md) and its owning battle/acquisition chapters. Preserve numeric IDs and unrelated flags.
+Required implementation evidence: enter from each actual neighbor; exercise locked/unlocked and before/after story states that change this map; verify objects, collision/elevation, trigger direction, destination and return route. For generic repetitions, execute the shared behavior once per meaningful engine case and inspect each instance’s specific placement. A source reference check does not replace this traversal.
+The [machine ledger](../event-ledger.json) records complete event dictionaries, local/shared label sets, every referenced dialogue label, proposal IDs, and explicit evidence boundaries.

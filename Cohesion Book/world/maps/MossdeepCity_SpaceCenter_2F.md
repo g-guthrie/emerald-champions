@@ -1,0 +1,37 @@
+# MossdeepCity_SpaceCenter_2F
+
+**REVISE.** Map-specific script/dialogue digest and physical event records were reviewed against the region contract. Preserve the described map and its existing state handoffs, subject to the explicitly linked proposals and central battle/acquisition rules.
+
+[Regional experience](../06-sea-and-crisis.md) · [Map source](../../baseline/source/data/maps/MossdeepCity_SpaceCenter_2F/map.json) · [Scripts](../../baseline/source/data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc)
+
+## Current map contract
+
+`MAP_MOSSDEEP_CITY_SPACE_CENTER_2F` · `LAYOUT_MOSSDEEP_CITY_SPACE_CENTER_2F` · `WEATHER_NONE` · `MUS_RUSTBORO`
+
+Map-specific script/dialogue digest and physical event records were reviewed against the region contract. Preserve the described map and its existing state handoffs, subject to the explicitly linked proposals and central battle/acquisition rules.
+
+## Complete event ledger
+
+Every row is a distinct snapshot event. A KEEP applies the examined common contract and this map’s context; it is not a claim that this scene has been traversed in an emulator.
+
+| Event | Position / selector | Current behavior | Disposition / final dependency |
+|---|---|---|---|
+| `MossdeepCity_SpaceCenter_2F:object_events:001` | 6,2 | [MossdeepCity_SpaceCenter_2F_EventScript_RichBoy](../../baseline/source/data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc#L132) — MossdeepCity_SpaceCenter_2F_EventScript_RichBoy at (6,2); I wish ordinary people could go into /  space one day… / TEAM MAGMA… /  Do they want to go to space, too? | **KEEP** · [W-C-STORY](../common-contracts.md#w-c-story) |
+| `MossdeepCity_SpaceCenter_2F:object_events:002` | 11,8 | [MossdeepCity_SpaceCenter_2F_EventScript_Gentleman](../../baseline/source/data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc#L113) — MossdeepCity_SpaceCenter_2F_EventScript_Gentleman at (11,8); If only I was a little younger, I would /  have liked being an astronaut… //  No… It's not too late! /  I can and will try! / If TEAM MAGMA takes the rocket fuel, /  I won't be able to go to space! //  They can't be allowed to get away /  with such an outrage! | **KEEP** · [W-C-STORY](../common-contracts.md#w-c-story) |
+| `MossdeepCity_SpaceCenter_2F:object_events:003` | 5,6 | [MossdeepCity_SpaceCenter_2F_EventScript_Scientist](../../baseline/source/data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc#L94) — MossdeepCity_SpaceCenter_2F_EventScript_Scientist at (5,6); MOSSDEEP has mainly sunny weather, /  and its winds are stable. //  It's an ideal location for launching /  rockets. / Why would TEAM MAGMA want to steal /  our rocket fuel in the first place? | **KEEP** · [W-C-STORY](../common-contracts.md#w-c-story) |
+| `MossdeepCity_SpaceCenter_2F:object_events:004` | 1,8 | [MossdeepCity_SpaceCenter_2F_EventScript_Steven](../../baseline/source/data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc#L184) — MossdeepCity_SpaceCenter_2F_EventScript_Steven at (1,8); STEVEN: Rocket fuel cannot control /  GROUDON. What are you truly targeting? / MAXIE: The rocket can strike MT. CHIMNEY /  with a measured charge from above. //  If GROUDON will not obey, I will sever /  the fault network before AQUA uses it. //  The calculation is brutal, not savage. | **KEEP** · [W-C-STORY](../common-contracts.md#w-c-story) |
+| `MossdeepCity_SpaceCenter_2F:object_events:005` | 12,2 | [MossdeepCity_SpaceCenter_2F_EventScript_Grunt6](../../baseline/source/data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc#L152) — MossdeepCity_SpaceCenter_2F_EventScript_Grunt6 at (12,2); Three battles should expose every /  answer. You kept finding new ones. | **KEEP** · [W-C-FLAVOR](../common-contracts.md#w-c-flavor) |
+| `MossdeepCity_SpaceCenter_2F:object_events:006` | 13,3 | [MossdeepCity_SpaceCenter_2F_EventScript_Grunt5](../../baseline/source/data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc#L160) — MossdeepCity_SpaceCenter_2F_EventScript_Grunt5 at (13,3); MAXIE's model did not account for a team /  that improves while being worn down. | **KEEP** · [W-C-FLAVOR](../common-contracts.md#w-c-flavor) |
+| `MossdeepCity_SpaceCenter_2F:object_events:007` | 14,2 | [MossdeepCity_SpaceCenter_2F_EventScript_Grunt7](../../baseline/source/data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc#L156) — MossdeepCity_SpaceCenter_2F_EventScript_Grunt7 at (14,2); Attrition favored us. Adaptation favored /  you. | **KEEP** · [W-C-FLAVOR](../common-contracts.md#w-c-flavor) |
+| `MossdeepCity_SpaceCenter_2F:object_events:008` | 0,8 | [MossdeepCity_SpaceCenter_2F_EventScript_Courtney](../../baseline/source/data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc#L169) — MossdeepCity_SpaceCenter_2F_EventScript_Courtney at (0,8); COURTNEY: MAXIE supplies force. I supply /  the alternate clock. STEVEN is accounted /  for. You remain the unstable variable. | **KEEP** · [W-C-STORY](../common-contracts.md#w-c-story) |
+| `MossdeepCity_SpaceCenter_2F:object_events:009` | 1,9 | [MossdeepCity_SpaceCenter_2F_EventScript_Maxie](../../baseline/source/data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc#L178) — MossdeepCity_SpaceCenter_2F_EventScript_Maxie at (1,9); MAXIE: The calculation has reached its /  final input. Do not interfere. | **KEEP** · [W-C-FLAVOR](../common-contracts.md#w-c-flavor) |
+| `MossdeepCity_SpaceCenter_2F:object_events:010` | 12,5 | [MossdeepCity_SpaceCenter_2F_EventScript_Tabitha](../../baseline/source/data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc#L164) — MossdeepCity_SpaceCenter_2F_EventScript_Tabitha at (12,5); The launch angle collapsed… / TABITHA: The rocket needs a stable base. //  My sand formation will pin both of your /  POKéMON before you reach MAXIE. | **REVISE** · [W-C-TRAINER](../common-contracts.md#w-c-trainer) · DIFF-01 |
+| `MossdeepCity_SpaceCenter_2F:warp_events:001` | 13,1 | Warp from (13,1, elevation 0) to MAP_MOSSDEEP_CITY_SPACE_CENTER_1F warp 2. | **KEEP** · [W-C-WARP](../common-contracts.md#w-c-warp) |
+| `MossdeepCity_SpaceCenter_2F:map_scripts:001` | MAP_SCRIPT_ON_TRANSITION | [MossdeepCity_SpaceCenter_2F_OnTransition](../../baseline/source/data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc#L6) — MAP_SCRIPT_ON_TRANSITION calls MossdeepCity_SpaceCenter_2F_OnTransition. | **KEEP** · [W-C-MAP_CALLBACK](../common-contracts.md#w-c-map_callback) |
+| `MossdeepCity_SpaceCenter_2F:map_scripts:002` | MAP_SCRIPT_ON_FRAME_TABLE | [MossdeepCity_SpaceCenter_2F_OnFrame](../../baseline/source/data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc#L27) — MAP_SCRIPT_ON_FRAME_TABLE calls MossdeepCity_SpaceCenter_2F_OnFrame. | **KEEP** · [W-C-MAP_CALLBACK](../common-contracts.md#w-c-map_callback) |
+
+## Final specification and acceptance
+
+Retain the complete baseline map record except the exact entries in [proposed edits](../changes.md) and its owning battle/acquisition chapters. Preserve numeric IDs and unrelated flags.
+Required implementation evidence: enter from each actual neighbor; exercise locked/unlocked and before/after story states that change this map; verify objects, collision/elevation, trigger direction, destination and return route. For generic repetitions, execute the shared behavior once per meaningful engine case and inspect each instance’s specific placement. A source reference check does not replace this traversal.
+The [machine ledger](../event-ledger.json) records complete event dictionaries, local/shared label sets, every referenced dialogue label, proposal IDs, and explicit evidence boundaries.
