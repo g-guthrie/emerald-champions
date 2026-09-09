@@ -1,9 +1,9 @@
 {
   "schema_version": 2,
-  "inputs_sha256": "95088d8906baca8fcd2feb8fb82c4a47ec35c11c165b5b98c48fb93586ce3f17",
+  "inputs_sha256": "8d2dc559434676720378ca7055e03210ce7968c7d75535a3d8a982dcd3200a5d",
   "input_count": 28978,
   "artifacts": {
-    "pokeemerald-release.gba": "5202d59396e4ae4feaecebf2dd16ef7ad558d1f8f13f3e5021d044b97c6f0e82",
-    "pokeemerald-release.elf": "99ca68d34ec449b30a4414b9cfdffb36e524283c07fe94a459b04cf7322c1a3e"
+    "pokeemerald-release.gba": "35e420fac7663c1e77a6357afa4d120bd1803321af271ccca3a5621edac62947",
+    "pokeemerald-release.elf": "e16188b9f2c029a0b344a7c843702f999124ebcaa23478384982e2177e8e990f"
   }
 }

@@ -1,5 +1,11 @@
 # Working on Emerald Champions
 
+## September 9 Birch rescue correction
+
+The user now requests both Birch rescue opponents at level 2, superseding
+the earlier level-3 instruction. Poochyena must follow one step behind
+Zigzagoon through the opening chase, rather than joining after it ends.
+
 ## Executable-AI restart — latest user instruction
 
 The user explicitly said to start over and fix the AI for each battle as it is

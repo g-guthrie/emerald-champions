@@ -120,7 +120,7 @@ void CreateEmeraldChampionsBirchRescueParty(void)
     ZeroEnemyPartyMons();
     for (u32 i = 0; i < ARRAY_COUNT(sSpecies); i++)
     {
-        CreateRandomMonWithIVs(&gParties[B_TRAINER_OPPONENT_A][i], sSpecies[i], 3, MAX_PER_STAT_IVS);
+        CreateRandomMonWithIVs(&gParties[B_TRAINER_OPPONENT_A][i], sSpecies[i], 2, MAX_PER_STAT_IVS);
         ApplyEmeraldChampionsScriptedSet(&gParties[B_TRAINER_OPPONENT_A][i], &sRescueSets[i]);
     }
     gPartiesCount[B_TRAINER_OPPONENT_A] = ARRAY_COUNT(sSpecies);
