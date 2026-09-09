@@ -6008,13 +6008,19 @@ s32 Factorial(s32 n)
 
 bool32 CanPlayerForfeitNormalTrainerBattle(void)
 {
+    u32 excludedBattleTypes = BATTLE_TYPE_RECORDED_INVALID;
+
     if (!B_RUN_TRAINER_BATTLE)
         return FALSE;
 
     if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
         return FALSE;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_RECORDED_INVALID)
+    // The scripted doubles rescue supports Retry despite being FIRST_BATTLE.
+    // Keep link, tutorial and other special-format exclusions intact.
+    if (IsEmeraldChampionsBirchRescueBattle())
+        excludedBattleTypes &= ~BATTLE_TYPE_FIRST_BATTLE;
+    if (gBattleTypeFlags & excludedBattleTypes)
         return FALSE;
 
     return (gBattleTypeFlags & BATTLE_TYPE_TRAINER) || IsEmeraldChampionsBirchRescueBattle();

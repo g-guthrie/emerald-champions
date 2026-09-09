@@ -4608,7 +4608,7 @@ static void CreateInGameTradePokemonInternal(u8 whichPlayerMon, u8 whichInGameTr
         }
     }
     // Apply this last so legacy trade fields cannot overwrite the finished
-    // competitive build's moves, nature, Ability, Stat Points, or held item.
+    // competitive build's moves, nature, Ability, EVs, or held item.
     ApplyEmeraldChampionsBattleSetChoice(pokemon, 0);
     CalculateMonStats(&gParties[B_TRAINER_OPPONENT_A][0]);
 }

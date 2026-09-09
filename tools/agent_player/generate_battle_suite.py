@@ -23,7 +23,7 @@ BRANCH_RE = re.compile(r"(?m)^--- BRANCH ([A-Z0-9_]+) ---$")
 MON_RE = re.compile(
     r"(?m)^  (\d+)\. (SPECIES_[A-Z0-9_]+) @ (ITEM_[A-Z0-9_]+) \| "
     r"level_offset=(-?\d+) \| ability=(ABILITY_[A-Z0-9_]+) \| "
-    r"nature=(NATURE_[A-Z0-9_]+) \| stat_points=([0-9/]+) \| "
+    r"nature=(NATURE_[A-Z0-9_]+) \| evs=([0-9/]+) \| "
     r"moves=(MOVE_[A-Z0-9_]+(?:,MOVE_[A-Z0-9_]+){0,3})$"
 )
 INPUTS = (
@@ -110,7 +110,7 @@ def generate(arsenal_index: Path) -> dict[str, Any]:
                     "slot": int(row.group(1)), "species": row.group(2), "item": row.group(3),
                     "level": int(field(encounter, "strict_cap")) + int(row.group(4)),
                     "ability": row.group(5), "nature": row.group(6),
-                    "stat_points": [int(value) for value in row.group(7).split("/")],
+                    "evs": [int(value) for value in row.group(7).split("/")],
                     "moves": row.group(8).split(","),
                 })
             dossier = {

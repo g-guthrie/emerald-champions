@@ -229,6 +229,17 @@ struct SimulatedDamage
     u16 maximum;
     u16 random;
     u8 consumedItem; // AI_ITEM_CONSUMED_* bits for the corresponding damage roll.
+    bool8 affectsTarget; // Conditional on hitting; includes Substitute/Disguise and zero-HP-loss hits.
+};
+
+#define AI_POPULATION_BOMB_STRIKES 10
+struct AiPopulationBombDamage
+{
+    u16 strike[3][AI_POPULATION_BOMB_STRIKES]; // Existing native low/median/high calculations.
+    u8 count[3];
+    u8 minimumStrikes;
+    bool8 repeatedAccuracy;
+    bool8 valid;
 };
 
 // Ai Data used when deciding which move to use, computed only once before each turn's start.
@@ -242,6 +253,7 @@ struct AiLogicData
     enum Move partnerMove;
     u16 speedStats[MAX_BATTLERS_COUNT]; // Speed stats for all battles, calculated only once, same way as damages
     struct SimulatedDamage simulatedDmg[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT][MAX_MON_MOVES]; // attacker, target, moveIndex
+    struct AiPopulationBombDamage populationBomb[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT];
     uq4_12_t effectiveness[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT][MAX_MON_MOVES]; // attacker, target, moveIndex
     u8 moveAccuracy[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT][MAX_MON_MOVES]; // attacker, target, moveIndex
     u8 moveLimitations[MAX_BATTLERS_COUNT];

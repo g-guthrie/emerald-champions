@@ -86,6 +86,13 @@ work/visual-audit/rendered/grave-site-probe/
 # Disposable Docker builder object trees and ELF/GBA copies
 work/docker-output/
 
+# Local repair toolchain, native emulator builds and scratch play sessions.
+work/toolchain/
+work/mgba-build/
+work/mgba-native/
+work/repair-baseline/
+work/repair-runtime/
+
 # Library build receipts and their atomic temporary files are cache state.
 /libagbsyscall/.assembly-config.json*
 /libagbsyscall/.archive-config.json*

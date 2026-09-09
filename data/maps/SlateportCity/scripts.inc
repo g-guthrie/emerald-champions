@@ -185,9 +185,9 @@ SlateportCity_Pokemart_CatchingGuru:
 	.2byte ITEM_REPEAT_BALL
 	pokemartlistend
 
-SlateportCity_EventScript_StatPointGuide::
+SlateportCity_EventScript_EvGuide::
 	bufferleadmonspeciesname STR_VAR_1
-	msgbox SlateportCity_Text_StatPointsAlreadyReady, MSGBOX_NPC
+	msgbox SlateportCity_Text_EvsAlreadyReady, MSGBOX_NPC
 	end
 
 SlateportCity_EventScript_Cook::
@@ -971,9 +971,9 @@ SlateportCity_Text_CatchingGuruSellWhatYouNeed:
 	.string "The right BALL can turn a rare sighting\n"
 	.string "into your next teammate!$"
 
-SlateportCity_Text_StatPointsAlreadyReady:
-	.string "Your {STR_VAR_1} already has its full\n"
-	.string "competitive STAT POINT budget.\p"
+SlateportCity_Text_EvsAlreadyReady:
+	.string "A CENTER tutor can prepare\n"
+	.string "your {STR_VAR_1}'s EV spread.\p"
 	.string "There is no EV training here; only\n"
 	.string "team building and battle practice!$"
 

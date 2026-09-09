@@ -521,7 +521,7 @@ BattleFrontier_BattlePalaceLobby_Text_MonDocileButTransforms:
 	.string "It's shocking, even.$"
 
 BattleFrontier_BattlePalaceLobby_Text_WhatNatureFavorsChippingAway:
-	.string "A careful Nature and Stat Point\n"
+	.string "A careful Nature and EV\n"
 	.string "spread can help a partner survive\l"
 	.string "the turn that matters.\p"
 	.string "Then I choose what it does with\n"
@@ -629,4 +629,3 @@ BattleFrontier_BattlePalaceLobby_Text_ExplainRulesWhenInDanger:
 	.string "nature when it is in trouble.\p"
 	.string "If a POKéMON begins behaving oddly\n"
 	.string "in a pinch, watch it carefully.$"
-

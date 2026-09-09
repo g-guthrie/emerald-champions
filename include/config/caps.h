@@ -25,9 +25,9 @@
 #define EV_CAP_NO_GAIN                  3 // No EVs can be gained
 
 // EV Cap Configs
-#define B_EV_CAP_TYPE                   EV_CAP_NO_GAIN // Competitive Stat Points are applied by wild and tutor presets, never through grinding.
+#define B_EV_CAP_TYPE                   EV_CAP_NO_GAIN // Editable EVs are applied by wild and tutor presets, never through grinding.
 #define B_EV_CAP_VARIABLE               0 // unused when B_EV_CAP_TYPE is EV_CAP_NO_GAIN
 
-#define B_EV_ITEMS_CAP                  TRUE  // Stat Points come from authored presets; vitamins cannot bypass the no-grind contract.
+#define B_EV_ITEMS_CAP                  TRUE  // EVs come from presets or the tutor; vitamins cannot bypass the no-grind contract.
 
 #endif /* GUARD_CONFIG_CAPS_H */

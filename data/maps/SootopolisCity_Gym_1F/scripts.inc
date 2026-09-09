@@ -201,23 +201,22 @@ SootopolisCity_Gym_1F_Text_GymGuidePostVictory:
 	.string "set for the POKéMON LEAGUE challenge!$"
 
 SootopolisCity_Gym_1F_Text_JuanIntro:
-	.string "I am JUAN, WALLACE's mentor, keeper of\n"
-	.string "SOOTOPOLIS's final examination.\p"
-	.string "You calmed one impossible rain. Now solve\n"
-	.string "rain used deliberately: speed, trapping,\l"
-	.string "reversed order, and protected Water.\p"
-	.string "This is artistry only if every choice has\n"
-	.string "purpose. Show me yours.$"
+	.string "I am JUAN, WALLACE's mentor, keeper\n"
+	.string "of SOOTOPOLIS's final examination.\p"
+	.string "You calmed one impossible rain.\n"
+	.string "Now face rain used deliberately:\l"
+	.string "speed, endurance and growing power.\p"
+	.string "Artistry gives each choice purpose.\n"
+	.string "Show me yours.$"
 
 @ NOTE: This defeat text actually causes a buffer overflow. It's about 50 bytes too long for
 @ the gDisplayedStringBattle buffer that it's put into, and it stomps all over the gBattleTextBuffs
 @ after, as well as the otherwise unused array after that. One wonders if that's the reason for
 @ the existence of that unused array of ints.
 SootopolisCity_Gym_1F_Text_JuanDefeat:
-	.string "Excellent! You found space inside every\n"
-	.string "current and denied my final rain turn.\p"
-	.string "Take the RAIN BADGE. WALLACE will demand\n"
-	.string "everything this Gym only introduced.$"
+	.string "Excellent! A victory to be proud of.\p"
+	.string "Take the RAIN BADGE. WALLACE will\n"
+	.string "ask even more of your team.$"
 
 SootopolisCity_Gym_1F_Text_ReceivedRainBadge:
 	.string "{PLAYER} received the RAIN BADGE\n"

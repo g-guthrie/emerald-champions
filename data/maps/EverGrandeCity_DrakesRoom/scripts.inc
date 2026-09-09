@@ -71,14 +71,14 @@ EverGrandeCity_DrakesRoom_Text_IntroSpeech:
 	.string "DRAKE. Last of the four, and the one\n"
 	.string "who's sailed the longest.\p"
 	.string "Dragons remember every age of battle.\n"
-	.string "DIALGA runs the clock backwards,\l"
-	.string "RESHIRAM runs it forward, and two of\l"
-	.string "mine set up while you decide which.\p"
-	.string "Kill the first clock. Then meet\n"
-	.string "SALAMENCE with something left. Come on!$"
+	.string "SALAMENCE can bring a TAILWIND.\p"
+	.string "KORAIDON brings sunlight for\n"
+	.string "RESHIRAM's flames.\p"
+	.string "Keep something for MEGA GARCHOMP.\n"
+	.string "Come on!$"
 
 EverGrandeCity_DrakesRoom_Text_Defeat:
-	.string "Hah! Both clocks, and you still stood.\n"
+	.string "Hah! My Dragons gave you everything.\n"
 	.string "Superb, Trainer. Superb.$"
 
 EverGrandeCity_DrakesRoom_Text_PostBattleSpeech:

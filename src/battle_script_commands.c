@@ -5826,44 +5826,9 @@ static void Cmd_transformdataexecution(void)
     }
     else
     {
-        s32 i;
-        u8 *battleMonAttacker, *battleMonTarget;
-        u8 timesGotHit;
-
         gChosenMove = MOVE_UNAVAILABLE;
-        gBattleMons[gBattlerAttacker].volatiles.transformed = TRUE;
-        gBattleMons[gBattlerAttacker].volatiles.disabledMove = MOVE_NONE;
-        gBattleMons[gBattlerAttacker].volatiles.disableTimer = 0;
-        gBattleMons[gBattlerAttacker].volatiles.transformedMonSpecies = gBattleMons[gBattlerAttacker].species;
-        gBattleMons[gBattlerAttacker].volatiles.transformedMonPID = gBattleMons[gBattlerTarget].personality;
-
-        if (B_TRANSFORM_SHINY >= GEN_4)
-            gBattleMons[gBattlerAttacker].volatiles.isTransformedMonShiny = gBattleMons[gBattlerTarget].isShiny;
-        else
-            gBattleMons[gBattlerAttacker].volatiles.isTransformedMonShiny = gBattleMons[gBattlerAttacker].isShiny;
-        gBattleMons[gBattlerAttacker].volatiles.mimickedMoves = 0;
-        gBattleMons[gBattlerAttacker].volatiles.usedMoves = 0;
-
-        timesGotHit = GetBattlerPartyState(gBattlerTarget)->timesGotHit;
-        GetBattlerPartyState(gBattlerAttacker)->timesGotHit = timesGotHit;
-
         PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gBattlerTarget].species)
-
-        battleMonAttacker = (u8 *)(&gBattleMons[gBattlerAttacker]);
-        battleMonTarget = (u8 *)(&gBattleMons[gBattlerTarget]);
-
-        for (i = 0; i < offsetof(struct BattlePokemon, pp); i++)
-            battleMonAttacker[i] = battleMonTarget[i];
-
-        gBattleMons[gBattlerAttacker].volatiles.overwrittenAbility = GetBattlerAbility(gBattlerTarget);
-        for (i = 0; i < MAX_MON_MOVES; i++)
-        {
-            u32 pp = GetMovePP(gBattleMons[gBattlerAttacker].moves[i]);
-            if (pp < 5)
-                gBattleMons[gBattlerAttacker].pp[i] = pp;
-            else
-                gBattleMons[gBattlerAttacker].pp[i] = 5;
-        }
+        TransformBattlerData(gBattlerAttacker, gBattlerTarget);
 
         // update AI knowledge
         RecordAllMoves(gBattlerAttacker);

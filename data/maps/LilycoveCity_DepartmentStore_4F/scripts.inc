@@ -48,6 +48,6 @@ LilycoveCity_DepartmentStore_4F_Text_ClerkMoves:
 LilycoveCity_DepartmentStore_4F_Text_ClerkSets:
 	.string "The CENTER tutor also applies complete\n"
 	.string "competitive sets: moves, Nature,\l"
-	.string "Ability, Stat Points, and held item.\p"
+	.string "Ability, EVs, and held item.\p"
 	.string "Mega sets still require the matching\n"
 	.string "stone from your adventure.$"

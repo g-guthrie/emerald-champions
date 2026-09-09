@@ -50,12 +50,13 @@ static inline bool32 RngSeedNotDefault(const rng_value_t *seed)
 #undef Q_4_12
 #define Q_4_12(n) (s32)((n) * 4096)
 
-#define TRAINER_RED_TEST    1
-#define TRAINER_LEAF_TEST   2
 #define PARTNER_STEVEN_TEST 1
 
+// Synthetic IDs occupy spare slots after campaign records. Never override a
+// real trainer: actual-party fixtures must read the production catalog intact.
 const struct Trainer gTrainers[DIFFICULTY_COUNT][TRAINERS_COUNT] =
 {
+    #include "../src/data/trainers.h"
     #include "battle/trainer_control.h"
 };
 
@@ -1369,6 +1370,10 @@ void TestRunner_Battle_CheckChosenMove(enum BattlerId battlerId, enum Move moveI
     u32 id = DATA.trial.aiActionsPlayed[battlerId];
     struct ExpectedAIAction *expectedAction = &DATA.expectedAiActions[battlerId][id];
 
+    // Temporary decision trace for the current native encounter investigation.
+    if (strncmp(gTestRunnerState.test->name, "EC live review", 14) == 0)
+        Test_MgbaPrintf("AI decision turn=%d actor=%d move=%S target=%d", gBattleResults.battleTurnCounter + 1, battlerId, GetMoveName(moveId), target);
+
     if (!expectedAction->actionSet)
         return;
 
@@ -1442,6 +1447,9 @@ void TestRunner_Battle_CheckChosenMove(enum BattlerId battlerId, enum Move moveI
 
 void TestRunner_Battle_CheckSwitch(enum BattlerId battlerId, u32 partyIndex)
 {
+    // Temporary encounter-review trace, paired with the chosen-move trace.
+    if (strncmp(gTestRunnerState.test->name, "EC live review", 14) == 0)
+        Test_MgbaPrintf("AI switch turn=%d actor=%d party=%d", gBattleResults.battleTurnCounter + 1, battlerId, partyIndex);
     const char *filename = gTestRunnerState.test->filename;
     u32 id = DATA.trial.aiActionsPlayed[battlerId];
     struct ExpectedAIAction *expectedAction = &DATA.expectedAiActions[battlerId][id];

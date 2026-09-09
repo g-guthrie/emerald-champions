@@ -838,6 +838,9 @@ int main(int argc, char *argv[])
     if (results == 0)
     {
         fprintf(stdout, "\nNo tests found.\n");
+        // An empty selection is not evidence that the requested checks passed.
+        if (exit_code == 0)
+            exit_code = 1;
     }
     else
     {

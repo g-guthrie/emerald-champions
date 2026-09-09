@@ -22,8 +22,8 @@ gText_EmeraldChampionsExplainTools::
 	.string "to the current level cap.\p"
 	.string "It never runs out. Use it whenever\n"
 	.string "you want to prepare a new team.\p"
-	.string "The Repel Spray switches wild\n"
-	.string "encounters off until you use it again.\p"
+	.string "The Repel Spray keeps wild Pokémon\n"
+	.string "away for 500 steps per use.\p"
 	.string "Fishing, Rock Smash and Sweet Scent\n"
 	.string "still work.\p"
 	.string "And meet my neighbors! The Tutor by\n"
@@ -33,11 +33,15 @@ gText_EmeraldChampionsExplainTools::
 	.string "item, free. Every Center has us both.\p"
 	.string "The Flight Beacon calls a flier to\n"
 	.string "carry you, once you have the badge\l"
-	.string "for Fly. Travel in peace!$"
+	.string "for Fly.$"
 
 gText_EmeraldChampionsGiveMissingFlightBeacon::
 	.string "One more tool for you:\n"
 	.string "the Flight Beacon!$"
+
+gText_EmeraldChampionsHealAfterTools::
+	.string "Well, now that you're here, would\n"
+	.string "you also like to heal your Pokémon?$"
 
 gText_EmeraldChampionsExplainFlightBeacon::
 	.string "Use it to call a flier, once you\n"

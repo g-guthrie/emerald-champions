@@ -60,10 +60,8 @@ struct CircuitGeneratedSet
     enum Move moves[MAX_MON_MOVES];
     enum Ability ability;
     enum Item item;
-    u8 statPoints[NUM_STATS];
+    u8 evs[NUM_STATS];
     u8 nature;
-    bool8 zeroAttackIv;
-    bool8 zeroSpeedIv;
     enum CircuitDependency dependency;
 };
 
@@ -906,7 +904,7 @@ static enum Item ChooseShowdownItem(
     return ITEM_SITRUS_BERRY;
 }
 
-static void SetShowdownStatPoints(
+static void SetShowdownEvs(
     struct CircuitGeneratedSet *set,
     const struct ShowdownCircuitTemplate *template)
 {
@@ -919,7 +917,7 @@ static void SetShowdownStatPoints(
                 || template->role == SHOWDOWN_ROLE_BULKY_ATTACKER;
 
     for (u32 i = 0; i < NUM_STATS; i++)
-        set->statPoints[i] = 0;
+        set->evs[i] = 0;
     for (u32 i = 0; i < MAX_MON_MOVES; i++)
     {
         enum Move move = set->moves[i];
@@ -934,17 +932,17 @@ static void SetShowdownStatPoints(
 
     if (!physicalDamage && !specialDamage)
     {
-        set->statPoints[STAT_HP] = 32;
+        set->evs[STAT_HP] = 252;
         if (template->role == SHOWDOWN_ROLE_SUPPORT && !slow)
         {
-            set->statPoints[STAT_DEF] = 2;
-            set->statPoints[STAT_SPEED] = 32;
+            set->evs[STAT_DEF] = 4;
+            set->evs[STAT_SPEED] = 252;
             set->nature = NATURE_TIMID;
         }
         else
         {
-            set->statPoints[STAT_DEF] = 17;
-            set->statPoints[STAT_SPDEF] = 17;
+            set->evs[STAT_DEF] = 124;
+            set->evs[STAT_SPDEF] = 132;
             set->nature = slow ? NATURE_SASSY : NATURE_CALM;
         }
     }
@@ -952,59 +950,53 @@ static void SetShowdownStatPoints(
     {
         if (slow || bulky)
         {
-            set->statPoints[STAT_HP] = 32;
-            set->statPoints[STAT_ATK] = 16;
-            set->statPoints[STAT_SPATK] = 16;
-            set->statPoints[STAT_DEF] = 2;
+            set->evs[STAT_HP] = 252;
+            set->evs[STAT_ATK] = 124;
+            set->evs[STAT_SPATK] = 124;
+            set->evs[STAT_DEF] = 8;
             set->nature = slow ? NATURE_QUIET : NATURE_RASH;
         }
         else
         {
-            set->statPoints[STAT_ATK] = 22;
-            set->statPoints[STAT_SPATK] = 22;
-            set->statPoints[STAT_SPEED] = 22;
+            set->evs[STAT_ATK] = 164;
+            set->evs[STAT_SPATK] = 172;
+            set->evs[STAT_SPEED] = 172;
             set->nature = NATURE_NAIVE;
         }
     }
     else if (physicalDamage)
     {
-        set->statPoints[STAT_ATK] = 32;
+        set->evs[STAT_ATK] = 252;
         if (slow || bulky)
         {
-            set->statPoints[STAT_HP] = 32;
-            set->statPoints[STAT_DEF] = 2;
+            set->evs[STAT_HP] = 252;
+            set->evs[STAT_DEF] = 4;
             set->nature = slow ? NATURE_BRAVE : NATURE_ADAMANT;
         }
         else
         {
-            set->statPoints[STAT_HP] = 2;
-            set->statPoints[STAT_SPEED] = 32;
+            set->evs[STAT_HP] = 4;
+            set->evs[STAT_SPEED] = 252;
             set->nature = NATURE_JOLLY;
         }
     }
     else
     {
-        set->statPoints[STAT_SPATK] = 32;
+        set->evs[STAT_SPATK] = 252;
         if (slow || bulky)
         {
-            set->statPoints[STAT_HP] = 32;
-            set->statPoints[STAT_SPDEF] = 2;
+            set->evs[STAT_HP] = 252;
+            set->evs[STAT_SPDEF] = 4;
             set->nature = slow ? NATURE_QUIET : NATURE_MODEST;
         }
         else
         {
-            set->statPoints[STAT_HP] = 2;
-            set->statPoints[STAT_SPEED] = 32;
+            set->evs[STAT_HP] = 4;
+            set->evs[STAT_SPEED] = 252;
             set->nature = NATURE_TIMID;
         }
     }
 
-    if (!physicalDamage && !SetHasMove(set, MOVE_TRANSFORM))
-        set->zeroAttackIv = TRUE;
-    if (slow)
-    {
-        set->zeroSpeedIv = TRUE;
-    }
 }
 
 static bool32 IsBaseDexExhausted(enum NationalDexOrder dex)
@@ -1406,7 +1398,7 @@ static bool32 GenerateShowdownTeam(struct CircuitTeamState *team)
             set.ability = template->abilities[0];
             set.item = template->item;
             set.nature = template->nature;
-            memcpy(set.statPoints, template->statPoints, sizeof(set.statPoints));
+            memcpy(set.evs, template->evs, sizeof(set.evs));
         }
         else
         {
@@ -1415,7 +1407,7 @@ static bool32 GenerateShowdownTeam(struct CircuitTeamState *team)
                 continue;
             set.ability = ChooseShowdownAbility(&set, template, variant, &team->details);
             set.item = ChooseShowdownItem(&set, template, variant);
-            SetShowdownStatPoints(&set, template);
+            SetShowdownEvs(&set, template);
         }
         AddSetToTeamState(team, &set);
     }
@@ -1451,17 +1443,6 @@ static void CreateCircuitMon(struct Pokemon *mon, const struct CircuitGeneratedS
     SetMonData(mon, MON_DATA_LEVEL, &level);
     for (u32 stat = 0; stat < NUM_STATS; stat++)
         SetMonData(mon, MON_DATA_HP_IV + stat, &iv);
-    if (set->zeroAttackIv)
-    {
-        iv = 0;
-        SetMonData(mon, MON_DATA_ATK_IV, &iv);
-        iv = MAX_PER_STAT_IVS;
-    }
-    if (set->zeroSpeedIv)
-    {
-        iv = 0;
-        SetMonData(mon, MON_DATA_SPEED_IV, &iv);
-    }
     SetMonData(mon, MON_DATA_PP_BONUSES, &ppBonuses);
     for (u32 i = 0; i < MAX_MON_MOVES; i++)
         SetMonMoveSlot(mon, set->moves[i], i);
@@ -1472,12 +1453,12 @@ static void CreateCircuitMon(struct Pokemon *mon, const struct CircuitGeneratedS
         abilitySlot = 0;
     }
     SetMonData(mon, MON_DATA_ABILITY_NUM, &abilitySlot);
-    SetMonData(mon, MON_DATA_HP_EV, &set->statPoints[STAT_HP]);
-    SetMonData(mon, MON_DATA_ATK_EV, &set->statPoints[STAT_ATK]);
-    SetMonData(mon, MON_DATA_DEF_EV, &set->statPoints[STAT_DEF]);
-    SetMonData(mon, MON_DATA_SPEED_EV, &set->statPoints[STAT_SPEED]);
-    SetMonData(mon, MON_DATA_SPATK_EV, &set->statPoints[STAT_SPATK]);
-    SetMonData(mon, MON_DATA_SPDEF_EV, &set->statPoints[STAT_SPDEF]);
+    SetMonData(mon, MON_DATA_HP_EV, &set->evs[STAT_HP]);
+    SetMonData(mon, MON_DATA_ATK_EV, &set->evs[STAT_ATK]);
+    SetMonData(mon, MON_DATA_DEF_EV, &set->evs[STAT_DEF]);
+    SetMonData(mon, MON_DATA_SPEED_EV, &set->evs[STAT_SPEED]);
+    SetMonData(mon, MON_DATA_SPATK_EV, &set->evs[STAT_SPATK]);
+    SetMonData(mon, MON_DATA_SPDEF_EV, &set->evs[STAT_SPDEF]);
     SetMonData(mon, MON_DATA_HELD_ITEM, &set->item);
     CalculateMonStats(mon);
 }

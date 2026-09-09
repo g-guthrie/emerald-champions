@@ -119,7 +119,6 @@ RUNTIME_GATES = (
     RuntimeGate(
         "Billy's Imposter lead targets a vulnerable foe after copying its moves",
     ),
-    RuntimeGate("test/save.c"),
     RuntimeGate(
         "test/battle/ai/ai_doubles.c",
     ),

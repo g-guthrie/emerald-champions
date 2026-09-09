@@ -586,7 +586,7 @@ Route109_Text_TrainerTipsSign:
 	.string "potential. Battles do not award\l"
 	.string "EVs to grind.\p"
 	.string "Use a CENTER specialist to set\n"
-	.string "Nature and STAT POINTS. Compare\l"
+	.string "Nature and EVs. Compare\l"
 	.string "the resulting stats before battle.$"
 Route109_Text_HUEY_LocalConversation:
 	.string "My sea legs are excellent.\n"

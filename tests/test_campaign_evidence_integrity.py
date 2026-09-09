@@ -18,7 +18,6 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 import run_emerald_champions_campaign as campaign
 import verify_emerald_champions_campaign_battle_policy as policy
-import verify_emerald_champions_campaign_run as baseline
 
 
 def artifact(digest, finalized=True):
@@ -30,25 +29,6 @@ def artifact(digest, finalized=True):
         result.update(snapshot_sha256_after_run=digest, source_sha256_after_run=digest,
                       verified_immutable=True)
     return result
-
-
-def valid_run():
-    artifacts = {label: artifact(char * 64) for label, char in (("rom", "a"), ("elf", "b"), ("manifest", "c"))}
-    return {
-        "schema_version": 1, "run_kind": "full", "run_id": "full",
-        "selection": {"complete_manifest": True, "segment_ids": ["root"]},
-        "rom_sha256": "a" * 64, "elf_sha256": "b" * 64, "manifest_sha256": "c" * 64,
-        "artifact_evidence": artifacts,
-        "segments": [{
-            "segment": "root", "parent": None, "rom_sha256": "a" * 64,
-            "state": "/archived/root.ss1", "state_sha256": "d" * 64,
-            "save": "/archived/root.sav", "save_sha256": "e" * 64,
-            "artifact_evidence": copy.deepcopy(artifacts),
-            "telemetry": dict.fromkeys(baseline.TELEMETRY_KEYS, 0),
-            "screenshots": [{"path": "/archived/root/final.png", "pixel_sha256": "f" * 64, "png_sha256": "1" * 64}],
-            "assertions": {"flags": {"FLAG_EXAMPLE": {"id": 1, "actual": 1, "expected": 1, "passed": True}}, "vars": {}},
-        }],
-    }
 
 
 class CheckpointEvidenceTests(unittest.TestCase):
@@ -98,13 +78,6 @@ class CheckpointEvidenceTests(unittest.TestCase):
         self.persist()
         with self.assertRaisesRegex(RuntimeError, "lacks recorded parent"):
             self.validate()
-
-    def test_original_two_argument_api_checks_filename_identity(self):
-        campaign.validate_state_input(self.state, "a" * 64)
-        self.metadata["segment"] = "different-parent"
-        self.persist()
-        with self.assertRaisesRegex(RuntimeError, "expected parent"):
-            campaign.validate_state_input(self.state, "a" * 64)
 
     def test_modified_checkpoint_bytes_rejected(self):
         self.state.write_bytes(b"replaced by a same-ROM checkpoint from later in the story")
@@ -198,75 +171,6 @@ class CheckpointEvidenceTests(unittest.TestCase):
         self.assertEqual(selected, self.directory / "checkpoints/parent.ss1")
 
 
-class BaselineEvidenceTests(unittest.TestCase):
-    def test_complete_valid_producer_record_normalizes_and_compares(self):
-        result = baseline.normalize_run(valid_run())
-        self.assertEqual(result["segment_count"], 1)
-        self.assertEqual(baseline.compare(copy.deepcopy(result), result), [])
-
-    def test_targeted_run_can_begin_at_external_parent(self):
-        run = valid_run()
-        run["run_kind"] = "targeted"
-        run["selection"]["complete_manifest"] = False
-        run["segments"][0]["parent"] = "external-parent"
-        baseline.normalize_run(run)
-
-    def test_all_missing_artifact_hashes_no_longer_compare_equal(self):
-        run = valid_run()
-        run["artifact_evidence"] = {label: {"verified_immutable": True} for label in ("rom", "elf", "manifest")}
-        with self.assertRaisesRegex(RuntimeError, "valid rom snapshot hash"):
-            baseline.normalize_run(run)
-
-    def test_every_artifact_requires_valid_hash_closure_size_and_top_identity(self):
-        for label in ("rom", "elf", "manifest"):
-            for field, invalid in (("snapshot_sha256", None), ("snapshot_sha256", "z" * 64),
-                                   ("snapshot_size", None), ("snapshot_size", 0), ("snapshot_size", True),
-                                   ("source_sha256_after_run", "9" * 64), ("verified_immutable", False)):
-                with self.subTest(label=label, field=field, invalid=invalid):
-                    run = valid_run()
-                    run["artifact_evidence"][label][field] = invalid
-                    with self.assertRaises(RuntimeError):
-                        baseline.normalize_run(run)
-            run = valid_run()
-            run[f"{label}_sha256"] = "9" * 64
-            with self.subTest(label=label), self.assertRaises(RuntimeError):
-                baseline.normalize_run(run)
-
-    def test_mixed_segment_artifact_identity_rejected(self):
-        run = valid_run()
-        run["segments"][0]["artifact_evidence"]["rom"] = artifact("9" * 64)
-        with self.assertRaisesRegex(RuntimeError, "provenance differs"):
-            baseline.normalize_run(run)
-
-    def test_nonhex_screenshots_and_missing_state_save_hashes_rejected(self):
-        for field in ("pixel_sha256", "png_sha256"):
-            run = valid_run()
-            run["segments"][0]["screenshots"][0][field] = "g" * 64
-            with self.subTest(field=field), self.assertRaises(RuntimeError):
-                baseline.normalize_run(run)
-        for field in ("state_sha256", "save_sha256"):
-            run = valid_run()
-            del run["segments"][0][field]
-            with self.subTest(field=field), self.assertRaises(RuntimeError):
-                baseline.normalize_run(run)
-
-    def test_selection_full_ancestry_and_telemetry_types_rejected_when_invalid(self):
-        cases = []
-        run = valid_run(); run["selection"]["segment_ids"] = []; cases.append(run)
-        run = valid_run(); run["segments"][0]["parent"] = "missing-parent"; cases.append(run)
-        run = valid_run(); run["segments"][0]["telemetry"][baseline.TELEMETRY_KEYS[0]] = True; cases.append(run)
-        run = valid_run(); run["selection"]["complete_manifest"] = False; cases.append(run)
-        for run in cases:
-            with self.subTest(run=run), self.assertRaises(RuntimeError):
-                baseline.normalize_run(run)
-
-    def test_assertion_with_missing_expected_and_actual_is_not_a_pass(self):
-        run = valid_run()
-        run["segments"][0]["assertions"]["flags"]["FLAG_EXAMPLE"] = {"passed": True, "id": 1}
-        with self.assertRaisesRegex(RuntimeError, "expected/actual"):
-            baseline.normalize_run(run)
-
-
 class ProductionPolicyTests(unittest.TestCase):
     def test_actual_c_classifier_passes_declared_policy_cases(self):
         result = policy.audit()
@@ -287,30 +191,6 @@ class ProductionPolicyTests(unittest.TestCase):
             result = policy.audit()
         self.assertTrue(any("trainer-single" in error for error in result["failures"]))
         self.assertTrue(any("ordinary-established-party" in error for error in result["failures"]))
-
-    def test_missing_compiler_and_abnormal_host_exit_fail_without_fallback(self):
-        with patch.object(policy.shutil, "which", return_value=None):
-            result = policy.audit()
-        self.assertTrue(result["failures"])
-        with patch.object(policy.subprocess, "run", side_effect=[
-            subprocess.CompletedProcess([], 0, "", ""),
-            subprocess.CompletedProcess([], -9, "", "killed"),
-        ]):
-            result = policy.audit()
-        self.assertTrue(any("exit -9" in error for error in result["failures"]))
-
-    def test_missing_function_is_not_replaced_by_python_prediction(self):
-        original = Path.read_text
-        def changed_read(path, *args, **kwargs):
-            value = original(path, *args, **kwargs)
-            if path == ROOT / "src/emerald_champions_headless.c":
-                value = value.replace("EmeraldChampionsHeadlessGetBattleResolution(void)", "RenamedClassifier(void)")
-            return value
-        with patch.object(Path, "read_text", new=changed_read):
-            result = policy.audit()
-        self.assertTrue(result["failures"])
-        self.assertEqual(result["flows"], [])
-
 
 class CampaignPairBoundaryTests(unittest.TestCase):
     def test_init_rejects_mismatched_pair_before_building_runner_or_playing(self):

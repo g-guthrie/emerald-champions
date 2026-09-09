@@ -20,14 +20,14 @@ static const struct EmeraldChampionsBattleSet sRescueSets[] =
         .item = ITEM_FOCUS_SASH,
         .nature = NATURE_JOLLY,
         .ability = ABILITY_RATTLED,
-        .statPoints = {2, 32, 0, 0, 0, 32},
+        .evs = {4, 252, 0, 0, 0, 252},
     },
     {
         .moves = {MOVE_BELLY_DRUM, MOVE_EXTREME_SPEED, MOVE_SEED_BOMB, MOVE_PROTECT},
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_ADAMANT,
         .ability = ABILITY_GLUTTONY,
-        .statPoints = {2, 32, 0, 0, 0, 32},
+        .evs = {4, 252, 0, 0, 0, 252},
     },
 };
 
@@ -44,7 +44,7 @@ static void GetOpeningStarterSet(enum Species species, struct EmeraldChampionsBa
             .item = ITEM_EVIOLITE,
             .nature = NATURE_TIMID,
             .ability = ABILITY_SPEED_BOOST,
-            .statPoints = {2, 0, 0, 32, 0, 32},
+            .evs = {4, 0, 0, 252, 0, 252},
         };
         *preset = sTorchic;
     }
@@ -120,7 +120,7 @@ void CreateEmeraldChampionsBirchRescueParty(void)
     ZeroEnemyPartyMons();
     for (u32 i = 0; i < ARRAY_COUNT(sSpecies); i++)
     {
-        CreateRandomMonWithIVs(&gParties[B_TRAINER_OPPONENT_A][i], sSpecies[i], 5, MAX_PER_STAT_IVS);
+        CreateRandomMonWithIVs(&gParties[B_TRAINER_OPPONENT_A][i], sSpecies[i], 2, MAX_PER_STAT_IVS);
         ApplyEmeraldChampionsScriptedSet(&gParties[B_TRAINER_OPPONENT_A][i], &sRescueSets[i]);
     }
     gPartiesCount[B_TRAINER_OPPONENT_A] = ARRAY_COUNT(sSpecies);
@@ -143,6 +143,29 @@ void ApplyEmeraldChampionsRegionalRivalSet(struct Pokemon *party, u32 slot, bool
     if (opening)
     {
         GetOpeningStarterSet(species, &preset);
+        // These are the rival's generated alternatives, not changes to the
+        // player's starter presets. The party has no automatic sun setter.
+        switch (species)
+        {
+        case SPECIES_BULBASAUR:
+            preset.ability = ABILITY_OVERGROW;
+            preset.moves[0] = MOVE_PROTECT;
+            break;
+        case SPECIES_CHARMANDER:
+            preset.ability = ABILITY_BLAZE;
+            preset.moves[1] = MOVE_FLAMETHROWER;
+            break;
+        case SPECIES_ROWLET:
+            preset.moves[3] = MOVE_PROTECT;
+            break;
+        case SPECIES_SOBBLE:
+            // Native preparation does not grant Sobble Ice Beam. Mud Shot
+            // replaces redundant Water Pulse with legal coverage and control.
+            preset.moves[2] = MOVE_MUD_SHOT;
+            break;
+        default:
+            break;
+        }
         if (preset.item == ITEM_EVIOLITE)
             preset.item = ITEM_SITRUS_BERRY;
     }
@@ -176,7 +199,7 @@ void ApplyEmeraldChampionsRegionalRivalSet(struct Pokemon *party, u32 slot, bool
                 ITEM_COVERT_CLOAK, ITEM_MENTAL_HERB, ITEM_LEFTOVERS,
                 ITEM_LUM_BERRY, ITEM_SITRUS_BERRY,
             };
-            bool32 support = max(preset.statPoints[1], preset.statPoints[3]) < 16;
+            bool32 support = max(preset.evs[1], preset.evs[3]) < 124;
             const enum Item *items = support ? sSupportItems : sOffenseItems;
             u32 count = support ? ARRAY_COUNT(sSupportItems) : ARRAY_COUNT(sOffenseItems);
 

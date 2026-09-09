@@ -10,7 +10,8 @@ import re
 from collections import defaultdict
 from pathlib import Path
 
-
+from emerald_champions_evs import validate_evs
+from generate_emerald_champions_battle_sets import HAND_AUDITED_SOURCE, load_hand_audited_catalog
 from showdown_import import ABILITY_OVERRIDES, PINNED_COMMIT, SOURCE_HASHES, constants, mega_suffix, read_pinned_source, to_id, verify_checkout
 from verify_trainer_ability_legality import configured_species_abilities, resolve_species, species_aliases
 
@@ -20,6 +21,59 @@ C_OUTPUT = ROOT / "src" / "data" / "pokemon" / "showdown_champions_circuit.h"
 COUNTS_OUTPUT = ROOT / "include/showdown_champions_circuit.h"
 SOURCE_FILE = "data/random-battles/champions/doubles-sets.json"
 GEN9_SOURCE_FILE = "data/random-battles/gen9/doubles-sets.json"
+
+
+def authored_entries() -> list[dict]:
+    """The Circuit references the live Doubles owner, never a generated copy."""
+    catalog = load_hand_audited_catalog()
+    choices = [catalog["species"][species]["doubles"]
+               for species in catalog["species_order"]]
+    # Preserve the old projection's ordering even when native aliases merge.
+    return [rows[0] for rows in choices] + [entry for rows in choices for entry in rows[1:]]
+
+
+def authored_reference(entry: dict) -> dict:
+    return {"authored_ref": {"species": entry["species"], "name": entry["name"]}}
+
+
+def resolve_authored_templates(manifest: dict) -> dict:
+    """Project named references; copied loadouts cannot override their owner."""
+    if manifest.get("schema_version") != 3:
+        raise ValueError("Circuit manifest requires canonical-reference schema 3")
+    if manifest.get("supplement_source") != str(HAND_AUDITED_SOURCE.relative_to(ROOT)):
+        raise ValueError("Circuit authored supplement must name the canonical catalog")
+    catalog = {}
+    for entry in authored_entries():
+        key = (entry["species"], entry["name"])
+        if key in catalog:
+            raise ValueError(f"Ambiguous canonical Doubles preset: {key}")
+        catalog[key] = entry
+    templates = []
+    for template in manifest["templates"]:
+        if "authored_ref" not in template:
+            if template.get("authored"):
+                raise ValueError("Circuit authored loadouts must be canonical references")
+            templates.append(template)
+            continue
+        ref = template["authored_ref"]
+        if set(template) != {"authored_ref"} or set(ref) != {"species", "name"}:
+            raise ValueError("Circuit authored reference cannot contain local overrides")
+        key = (ref["species"], ref["name"])
+        if key not in catalog:
+            raise ValueError(f"Missing canonical Doubles preset: {key}")
+        entry = catalog[key]
+        if entry["required_item"] != "ITEM_NONE" or entry.get("required_move", "MOVE_NONE") != "MOVE_NONE":
+            raise ValueError(f"Circuit ordinary supplement references a transformation preset: {key}")
+        templates.append({
+            "role": "SHOWDOWN_ROLE_SUPPORT", "moves": entry["moves"],
+            "abilities": [entry["ability"]], "preferred_type": "TYPE_NONE",
+            "authored": True, "item": entry["item"], "nature": entry["nature"],
+            # Canonical display order -> native internal stat order, not units.
+            "evs": [entry["evs"][i] for i in (0, 1, 2, 5, 3, 4)],
+            "dependency": "CIRCUIT_DEPENDENCY_" + (entry.get("field_dependency") or "none").upper().replace("-", "_"),
+            "name": entry["name"], "authored_ref": ref,
+        })
+    return {**manifest, "templates": templates}
 
 ROLES = {
     "Bulky Protect": "SHOWDOWN_ROLE_BULKY_ATTACKER",
@@ -89,10 +143,8 @@ def build(showdown_root: Path) -> tuple[dict, str]:
     form_text = (ROOT / "src/data/pokemon/form_change_tables.h").read_text()
     mega_items = dict(re.findall(
         r"FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM,\s*(SPECIES_[A-Z0-9_]+),\s*(ITEM_[A-Z0-9_]+)", form_text))
-    authored_path = ROOT / "data/emerald_champions/emerald_champions_battle_sets.json"
-    authored = json.loads(authored_path.read_text())
     authored_by_species = defaultdict(list)
-    for entry in authored["defaults"] + authored["alternatives"]:
+    for entry in authored_entries():
         authored_by_species[resolve_species(entry["species"], aliases)].append(entry)
 
     variants, templates, omitted = [], [], []
@@ -168,12 +220,7 @@ def build(showdown_root: Path) -> tuple[dict, str]:
         for entry in entries:
             if entry["required_item"] != "ITEM_NONE" or entry["ability"] not in info["abilities"]:
                 continue
-            rows.append({"role": "SHOWDOWN_ROLE_SUPPORT", "moves": entry["moves"],
-                         "abilities": [entry["ability"]], "preferred_type": "TYPE_NONE",
-                         "authored": True, "item": entry["item"], "nature": entry["nature"],
-                         "stat_points": [entry["stat_points"][i] for i in (0, 1, 2, 5, 3, 4)],
-                         "dependency": "CIRCUIT_DEPENDENCY_" + (entry.get("field_dependency") or "none").upper().replace("-", "_"),
-                         "name": entry["name"]})
+            rows.append(authored_reference(entry))
         add_variant(species_id, species, species, "ITEM_NONE", rows, "authored doubles supplement")
 
     def dex_number(variant):
@@ -187,12 +234,12 @@ def build(showdown_root: Path) -> tuple[dict, str]:
     # contiguous National Dex groups after merging sources.
     variants.sort(key=lambda v: (dex_number(v), v["showdown_id"]))
     manifest = {
-        "schema_version": 2,
+        "schema_version": 3,
         "source": "Pokemon Showdown Champions and Gen 9 random doubles with legacy doubles supplements",
         "source_commit": PINNED_COMMIT, "source_file": SOURCE_FILE,
         "source_sha256": hashlib.sha256(sources[SOURCE_FILE]).hexdigest(),
         "source_files": {name: hashlib.sha256(data).hexdigest() for name, data in sources.items()},
-        "supplement_source_sha256": hashlib.sha256(authored_path.read_bytes()).hexdigest(),
+        "supplement_source": str(HAND_AUDITED_SOURCE.relative_to(ROOT)),
         "license": "MIT; copyright 2011-2026 Guangcong Luo and other contributors",
         "policy": {
             "runtime": "teams and moves are selected on demand in the GBA ROM",
@@ -248,7 +295,7 @@ def render_c(manifest: dict) -> str:
             *( ["        .authored = TRUE,", f"        .item = {entry['item']},",
                  f"        .nature = {entry['nature']},",
                  f"        .dependency = {entry['dependency']},",
-                 "        .statPoints = {" + ", ".join(map(str, entry["stat_points"])) + "},"]
+                 "        .evs = {" + ", ".join(map(str, entry["evs"])) + "},"]
                if entry.get("authored") else [] ),
             "    },",
         ])
@@ -261,7 +308,7 @@ def validate_manifest(manifest: dict) -> None:
         or manifest["source_file"] != SOURCE_FILE
         or manifest["source_sha256"] != SOURCE_HASHES[SOURCE_FILE]):
         raise ValueError("Circuit manifest provenance does not match the pinned source")
-    if manifest.get("schema_version") == 2:
+    if manifest.get("schema_version") == 3:
         for name in (SOURCE_FILE, GEN9_SOURCE_FILE, "data/pokedex.ts",
                             "data/random-battles/champions/teams.ts", "data/random-battles/gen9/teams.ts"):
             if manifest.get("source_files", {}).get(name) != SOURCE_HASHES[name]:
@@ -275,8 +322,8 @@ def validate_manifest(manifest: dict) -> None:
         if len(set(template["moves"])) != len(template["moves"]) or "MOVE_NONE" in template["moves"]:
             raise ValueError("Circuit template contains duplicate or empty moves")
         if template.get("authored"):
-            points = template.get("stat_points", [])
-            if len(template["moves"]) > 4 or len(points) != 6 or sum(points) > 66 or any(type(p) is not int or p < 0 or p > 32 for p in points):
+            validate_evs(template.get("evs", []))
+            if len(template["moves"]) > 4:
                 raise ValueError("Circuit authored supplement violates the competitive set budget")
             if template.get("dependency") not in {
                 "CIRCUIT_DEPENDENCY_" + name for name in
@@ -293,6 +340,8 @@ def validate_manifest(manifest: dict) -> None:
         start = variant["template_offset"]
         stop = start + variant["template_count"]
         for index, template in enumerate(manifest["templates"][start:stop], start):
+            if template.get("authored") and resolve_species(template["authored_ref"]["species"], aliases) != resolve_species(variant["party_species"], aliases):
+                raise ValueError(f"Circuit {variant['party_species']} template {index} references another species")
             illegal = set(template["abilities"]) - legal
             if illegal:
                 raise ValueError(
@@ -315,6 +364,7 @@ def render_counts(manifest: dict, header: str) -> str:
 
 
 def project(manifest: dict, *, check: bool, c_output: Path = C_OUTPUT, counts_output: Path = COUNTS_OUTPUT) -> None:
+    manifest = resolve_authored_templates(manifest)
     validate_manifest(manifest)
     outputs = {c_output: render_c(manifest), counts_output: render_counts(manifest, counts_output.read_text())}
     if check:

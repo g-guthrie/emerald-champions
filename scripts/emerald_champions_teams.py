@@ -5,23 +5,30 @@
 truth for every campaign trainer team.  Each block is one trainer branch:
 
     ## E0002 TRAINER_CALVIN_1 class=regular
+    strategy: SETUP
     plan: what the team is trying to do
     crack: how the player is meant to beat it
     ZORUA @EXPERT_BELT ILLUSION TIMID SS -1 | DARK_PULSE, EXTRASENSORY, SUCKER_PUNCH, PROTECT
 
 Species, items, abilities, natures and moves are written without their
-``SPECIES_``/``ITEM_``/``ABILITY_``/``NATURE_``/``MOVE_`` prefixes.  Stat
-Points accept either six slash-separated values or one of the spreads in
-``POINT_SPREADS``.  The level column is the offset from the encounter's strict
+``SPECIES_``/``ITEM_``/``ABILITY_``/``NATURE_``/``MOVE_`` prefixes. EVs accept
+six slash-separated values in HP/Atk/Def/SpA/SpD/Spe order or a spread in
+``EV_SPREADS``. The level column is the offset from the encounter's strict
 level cap and is materialized verbatim. At battle creation, all campaign
 trainer Pokemon receive the live-cap floor in src/difficulty.c before the global
 difficulty offset, including gyms and the four-Pokemon opening rival.
 
-The battle class selects the AI profile. ``--write`` rewrites the master's team
-and design fields in place while preserving every other encounter field
-(ids, chronology, location, caps, dialogue status).  ``--check`` compiles to a
-scratch master and runs the static audit, the trainer implementation and the
-runtime-coherence and Ability-legality gates against scratch output.
+``strategy:`` supplies explicit contextual instructions to the bounded doubles
+planner (comma-separated names, or NONE). ``plan:`` and ``crack:`` explain the
+team but are never executable instructions. ``tactic: KIND ACTOR MOVE RECIPIENT``
+names a concrete partnership to consider when selecting reserves; it never
+overrides move legality, survival or the evaluated payoff. Classes retain their profile names
+as aliases of the common expert profile. ``--write`` rewrites the master's team
+and design fields and the trainer-indexed plan table while preserving every other encounter field
+(ids, chronology, location, caps, dialogue status). ``--check`` compares the
+generated master, strategy table and trainer party with their canonical inputs,
+and validates configured trainer Abilities. It does not establish move legality
+or strategic quality.
 """
 
 from __future__ import annotations
@@ -36,10 +43,14 @@ from collections import Counter
 from dataclasses import dataclass, field
 from pathlib import Path
 
+from emerald_champions_evs import validate_evs
 
 ROOT = Path(__file__).resolve().parents[1]
 TEAMS = ROOT / "data/emerald_champions/emerald_champions_battle_teams.txt"
 MASTER = ROOT / "data/emerald_champions/emerald_champions_master_battle_design.txt"
+PLANS = ROOT / "src/data/emerald_champions_battle_plans.h"
+STRATEGIES = {"TRICK_ROOM", "RAIN", "SUN", "SAND", "SNOW", "REDIRECTION", "SETUP", "TAILWIND", "ALLY_COMBO", "PERISH_TRAP", "PRESSURE"}
+TACTICS = {"ACTIVATE", "AFTER_YOU", "INSTRUCT", "COMMANDER", "SUPPRESS"}
 ENCOUNTER_RE = re.compile(r"(?m)^=== ENCOUNTER (\d{4}) ===$")
 BRANCH_RE = re.compile(r"(?m)^--- BRANCH ([A-Z0-9_]+) ---$")
 HEADER_RE = re.compile(r"^## E(\d{4}) (TRAINER_[A-Z0-9_]+)(?:\s+class=([a-z_]+))?\s*$")
@@ -47,22 +58,22 @@ MON_RE = re.compile(
     r"^([A-Z0-9_]+)\s+@([A-Z0-9_]+)\s+([A-Z0-9_]+)\s+([A-Z]+)\s+([A-Z0-9/]+)\s+([+-]?\d+)\s*\|\s*(.+)$"
 )
 
-POINT_SPREADS = {
+EV_SPREADS = {
     # fast physical / fast special sweepers
-    "PS": "2/32/0/0/0/32",
-    "SS": "2/0/0/32/0/32",
+    "PS": "4/252/0/0/0/252",
+    "SS": "4/0/0/252/0/252",
     # bulky attackers
-    "PB": "32/32/2/0/0/0",
-    "SB": "32/0/2/32/0/0",
+    "PB": "252/252/4/0/0/0",
+    "SB": "252/0/4/252/0/0",
     # walls: physical, special, mixed
-    "WD": "32/0/32/0/2/0",
-    "WS": "32/0/2/0/32/0",
-    "WM": "32/0/16/0/18/0",
+    "WD": "252/0/252/0/4/0",
+    "WS": "252/0/4/0/252/0",
+    "WM": "252/0/116/0/140/0",
     # bulky speed control / support that still needs to move
-    "FS": "32/0/2/0/0/32",
+    "FS": "252/0/4/0/0/252",
     # mixed attackers
-    "MX": "2/32/0/32/0/0",
-    "MB": "32/16/0/16/0/2",
+    "MX": "4/252/0/252/0/0",
+    "MB": "252/124/0/124/0/8",
 }
 
 # Per-trainer AI traits.  These append to the class AI profile so a single
@@ -97,7 +108,7 @@ class Mon:
     item: str
     ability: str
     nature: str
-    points: str
+    evs: str
     offset: int
     moves: list[str]
 
@@ -105,7 +116,7 @@ class Mon:
         return (
             f"  {index}. SPECIES_{self.species} @ ITEM_{self.item} | level_offset={self.offset} | "
             f"ability=ABILITY_{self.ability} | nature=NATURE_{self.nature} | "
-            f"stat_points={self.points} | moves=" + ",".join(f"MOVE_{move}" for move in self.moves)
+            f"evs={self.evs} | moves=" + ",".join(f"MOVE_{move}" for move in self.moves)
         )
 
 
@@ -119,17 +130,19 @@ class Branch:
     ai: list[str] = field(default_factory=list)
     mons: list[Mon] = field(default_factory=list)
     line: int = 0
+    strategy: list[str] = field(default_factory=list)
+    tactics: list[tuple[str, str, str, str]] = field(default_factory=list)
 
 
-def parse_points(text: str, where: str) -> str:
-    if text in POINT_SPREADS:
-        return POINT_SPREADS[text]
+def parse_evs(text: str, where: str) -> str:
+    text = EV_SPREADS.get(text, text)
     values = text.split("/")
     if len(values) != 6 or not all(value.isdigit() for value in values):
-        raise SystemExit(f"{where}: bad stat points {text!r}")
-    ints = [int(value) for value in values]
-    if any(value > 32 for value in ints) or sum(ints) > 66:
-        raise SystemExit(f"{where}: illegal stat points {text!r}")
+        raise SystemExit(f"{where}: bad EVs {text!r}")
+    try:
+        validate_evs([int(value) for value in values])
+    except ValueError as error:
+        raise SystemExit(f"{where}: {error}") from error
     return text
 
 
@@ -168,6 +181,18 @@ def read_teams(path: Path = TEAMS) -> list[Branch]:
                 raise SystemExit(f"{where}: unknown AI trait(s) {unknown}; known: {sorted(AI_TRAITS)}")
             current.ai = wanted
             continue
+        if line.startswith("strategy:"):
+            current.strategy = [value.strip() for value in line[9:].split(",") if value.strip() != "NONE"]
+            unknown = set(current.strategy) - STRATEGIES
+            if unknown:
+                raise SystemExit(f"{where}: unknown battle strategies {sorted(unknown)}")
+            continue
+        if line.startswith("tactic:"):
+            fields = line[7:].split()
+            if len(fields) != 4 or fields[0] not in TACTICS:
+                raise SystemExit(f"{where}: expected tactic: KIND ACTOR MOVE RECIPIENT")
+            current.tactics.append(tuple(fields))
+            continue
         mon = MON_RE.match(line)
         if not mon:
             raise SystemExit(f"{where}: cannot parse team line {line!r}")
@@ -179,7 +204,7 @@ def read_teams(path: Path = TEAMS) -> list[Branch]:
             item=mon.group(2),
             ability=mon.group(3),
             nature=mon.group(4),
-            points=parse_points(mon.group(5), where),
+            evs=parse_evs(mon.group(5), where),
             offset=int(mon.group(6)),
             moves=moves,
         ))
@@ -192,6 +217,19 @@ def read_teams(path: Path = TEAMS) -> list[Branch]:
             raise SystemExit(f"{path.name}:{branch.line}: {branch.trainer} has no Pokemon")
         if len(branch.mons) > 6:
             raise SystemExit(f"{path.name}:{branch.line}: {branch.trainer} has more than six Pokemon")
+        for kind, actor, move, recipient in branch.tactics:
+            actors = [mon for mon in branch.mons if mon.species == actor]
+            if not actors or not any(mon.species == recipient for mon in branch.mons):
+                raise SystemExit(f"{branch.trainer}: tactic references an absent actor or recipient")
+            if kind in {"COMMANDER", "SUPPRESS"}:
+                ability = "COMMANDER" if kind == "COMMANDER" else "NEUTRALIZING_GAS"
+                valid = move == "NONE" and any(mon.ability == ability for mon in actors)
+            else:
+                valid = any(move in mon.moves for mon in actors)
+                if kind in {"AFTER_YOU", "INSTRUCT"}:
+                    valid = valid and move == kind
+            if not valid:
+                raise SystemExit(f"{branch.trainer}: tactic actor cannot execute {kind} {move}")
         if branch.plan and branch.crack:
             plans.setdefault(branch.encounter, (branch.plan, branch.crack))
     for branch in branches:
@@ -232,12 +270,31 @@ def split_encounters(text: str) -> tuple[str, list[tuple[int, str]]]:
 def render_branch(block_branch: str, branch: Branch) -> str:
     head, _sep, _tail = block_branch.partition("team:\n")
     head = re.sub(r"(?m)^ai_extra:.*\n", "", head)
+    head = re.sub(r"(?m)^strategy:.*\n", "", head)
+    head = re.sub(r"(?m)^tactic:.*\n", "", head)
+    head = set_field(head, "strategy", ", ".join(branch.strategy) or "NONE", after="format")
+    if branch.tactics:
+        head = head.rstrip() + "\n" + "\n".join("tactic: " + " ".join(tactic) for tactic in branch.tactics) + "\n"
     if branch.ai:
         head = set_field(head, "ai_extra", ", ".join(branch.ai), after="format")
     lines = [head + "team:"]
     lines.extend(mon.master_line(index) for index, mon in enumerate(branch.mons, 1))
     lines.append("source_note: Hand-authored Emerald Champions team; implementation must match exactly.")
     return "\n".join(lines) + "\n"
+
+
+def render_plans(branches: list[Branch]) -> str:
+    """Compile explicit authoring, never infer a strategy from moves at runtime."""
+    lines = ["// Generated by scripts/emerald_champions_teams.py --write; edit the teams source.",
+             "static const u16 sEmeraldChampionsBattlePlans[TRAINERS_COUNT] =", "{"]
+    for branch in branches:
+        flags = " | ".join("EC_BATTLE_PLAN_" + value for value in branch.strategy) or "0"
+        lines.append(f"    [{branch.trainer}] = {flags},")
+    lines += ["};", "", "static const struct EmeraldChampionsBattleTactic sEmeraldChampionsBattleTactics[] =", "{"]
+    for branch in branches:
+        for kind, actor, move, recipient in branch.tactics:
+            lines.append(f"    {{{branch.trainer}, SPECIES_{actor}, SPECIES_{recipient}, MOVE_{move}, EC_BATTLE_TACTIC_{kind}}},")
+    return "\n".join(lines + ["};", ""])
 
 
 def compile_master(branches: list[Branch], master_text: str) -> str:
@@ -291,47 +348,6 @@ def display(species: str) -> str:
     return species.replace("_", " ").title()
 
 
-def seed_from_master(master_text: str) -> str:
-    """Emit a teams file that reproduces the current master (bootstrap only)."""
-    mon_re = re.compile(
-        r"(?m)^  \d+\. SPECIES_([A-Z0-9_]+) @ ITEM_([A-Z0-9_]+) \| level_offset=(-?\d+) \| "
-        r"ability=ABILITY_([A-Z0-9_]+) \| nature=NATURE_([A-Z0-9_]+) \| stat_points=([0-9/]+) \| moves=([A-Z0-9_,]+)$"
-    )
-    reverse_points = {value: key for key, value in POINT_SPREADS.items()}
-    lines = ["#! Emerald Champions hand-authored campaign teams (see scripts/emerald_champions_teams.py)"]
-    _prefix, blocks = split_encounters(master_text)
-    for number, block in blocks:
-        cap = int(line_value(block, "strict_cap"))
-        location = line_value(block, "location")
-        cls = line_value(block, "battle_class")
-        if cls not in CLASSES:
-            raise ValueError(f"encounter {number}: missing or invalid battle_class {cls!r}")
-        if CLASSES[cls] != line_value(block, "ai_profile"):
-            raise ValueError(f"encounter {number}: battle_class does not preserve its ai_profile")
-        marks = list(BRANCH_RE.finditer(block))
-        chapter = line_value(block, "chapter")
-        lines.append("")
-        lines.append(f"# ---- E{number:04d} {location} cap={cap} {chapter}")
-        for index, mark in enumerate(marks):
-            end = marks[index + 1].start() if index + 1 < len(marks) else len(block)
-            segment = block[mark.start():end]
-            trainer = mark.group(1)
-            fmt = line_value(segment, "format")
-            mons = mon_re.findall(segment)
-            lines.append(f"## E{number:04d} {trainer} class={cls}")
-            lines.append(f"# {fmt}")
-            if line_value(segment, "ai_extra"):
-                lines.append("ai: " + line_value(segment, "ai_extra"))
-            if index == 0:
-                lines.append("plan: " + line_value(block, "theme_and_tempo"))
-                lines.append("crack: " + line_value(block, "intentional_weakness"))
-            for species, item, offset, ability, nature, points, moves in mons:
-                points = reverse_points.get(points, points)
-                moves = ", ".join(move[5:] for move in moves.split(","))
-                lines.append(f"{species} @{item} {ability} {nature} {points} {int(offset):+d} | {moves}")
-    return "\n".join(lines) + "\n"
-
-
 FAILED_GATES: list[str] = []
 
 
@@ -347,18 +363,10 @@ def run(command: list[str], env: dict[str, str] | None = None, fatal: bool = Tru
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--seed", action="store_true", help="bootstrap the teams file from the current master")
     parser.add_argument("--write", action="store_true", help="rewrite the master and trainers.party")
-    parser.add_argument("--check", action="store_true", help="compile to scratch and run every static gate")
+    parser.add_argument("--check", action="store_true", help="compare generated master/plans/party and validate configured Abilities")
     parser.add_argument("--summary", action="store_true", help="print class, legendary and Mega coverage")
     args = parser.parse_args()
-
-    if args.seed:
-        if TEAMS.exists():
-            raise SystemExit(f"{TEAMS} already exists; refusing to overwrite")
-        TEAMS.write_text(seed_from_master(MASTER.read_text()))
-        print(f"seeded {TEAMS}")
-        return
 
     branches = read_teams()
     master_text = compile_master(branches, MASTER.read_text())
@@ -386,11 +394,16 @@ def main() -> None:
 
     if args.write:
         MASTER.write_text(master_text)
+        PLANS.write_text(render_plans(branches))
         run([sys.executable, "scripts/implement_emerald_champions_master_battles.py"])
         print(f"wrote {MASTER} and src/data/trainers.party")
         return
 
     if args.check:
+        if MASTER.read_text() != master_text:
+            raise SystemExit("generated master differs from authored teams; run --write")
+        if not PLANS.exists() or PLANS.read_text() != render_plans(branches):
+            raise SystemExit("compiled battle plans differ from authored strategies; run --write")
         with tempfile.TemporaryDirectory() as scratch:
             scratch_master = Path(scratch) / "master.txt"
             scratch_party = Path(scratch) / "trainers.party"
@@ -399,11 +412,13 @@ def main() -> None:
                 sys.executable, "scripts/implement_emerald_champions_master_battles.py",
                 "--master", str(scratch_master), "--output", str(scratch_party),
             ])
+            if scratch_party.read_text() != (ROOT / "src/data/trainers.party").read_text():
+                raise SystemExit("generated trainer party differs from authored teams; run --write")
             run([sys.executable, "scripts/verify_trainer_ability_legality.py"],
                 {"EC_TRAINERS_PARTY": str(scratch_party)}, fatal=False)
         if FAILED_GATES:
             raise SystemExit(f"gates failed: {FAILED_GATES}")
-        print("PASS: teams materialize and configured trainer abilities are valid on scratch output")
+        print("PASS: generated master/plans/party match authored teams; configured trainer abilities are valid")
         return
 
     parser.print_help()

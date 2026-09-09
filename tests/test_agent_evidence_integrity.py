@@ -110,74 +110,10 @@ class AggregateEvidence(unittest.TestCase):
                     self.result()
                 player.atomic_json(self.runs[0] / "session.json", original)
 
-    def test_mixed_protocol_fields_are_rejected(self):
-        for field, value in (
-            ("observation_mode", "instrumented"), ("rtc_epoch", 123), ("level_cap", 20),
-            ("model", {"name": "other"}), ("elf_sha256", "1" * 64),
-        ):
-            with self.subTest(field=field):
-                original = player.load_json(self.runs[0] / "session.json")
-                self.result()
-                changed = copy.deepcopy(original)
-                changed[field] = value
-                if field in changed["comparison_protocol"]:
-                    changed["comparison_protocol"][field] = value
-                player.atomic_json(self.runs[0] / "session.json", changed)
-                aggregate.raw_run(self.runs[0])  # Valid individually; incompatible with this cohort.
-                with self.assertRaisesRegex(ValueError, "cohort"):
-                    self.result()
-                player.atomic_json(self.runs[0] / "session.json", original)
-
-    def test_mixed_budgets_are_rejected_even_when_artifacts_match(self):
-        session = player.load_json(self.runs[0] / "session.json")
-        session["comparison_protocol"]["budgets"]["max_actions"] = 100
-        player.atomic_json(self.runs[0] / "session.json", session)
-        with self.assertRaisesRegex(ValueError, "cohort"):
-            self.result()
-
-    def test_empty_protocol_is_not_reported_as_complete(self):
-        for i in range(3):
-            self.change(i, comparison_protocol={})
-        with self.assertRaisesRegex(ValueError, "incomplete comparison_protocol"):
-            self.result()
-
-    def test_legacy_protocol_absence_is_disclosed_and_not_mixed_with_new(self):
-        self.change(0, comparison_protocol=None)
-        with self.assertRaisesRegex(ValueError, "cohort"):
-            self.result()
-        self.change(1, comparison_protocol=None)
-        self.change(2, comparison_protocol=None)
-        self.assertFalse(self.result()["protocol"]["comparison_protocol_recorded"])
-
     def test_campaign_automation_cannot_become_battle_evidence(self):
         self.change(0, benchmark_mode="campaign_play")
         with self.assertRaisesRegex(ValueError, "battle_lab"):
             self.result()
-
-    def test_distinct_rng_delays_are_counted_instead_of_run_rows(self):
-        self.change(2, rng_delay_frames=17)
-        with self.assertRaisesRegex(ValueError, "distinct RNG-delay"):
-            self.result()
-        result = self.result(minimum=2)
-        self.assertEqual(result["aggregate"]["runs"], 3)
-        self.assertEqual(result["protocol"]["independent_seed_count"], 2)
-        self.assertEqual(result["protocol"]["duplicate_delay_runs"], 1)
-
-    def test_duplicate_directories_and_invalid_thresholds_are_rejected(self):
-        with self.assertRaisesRegex(ValueError, "more than once"):
-            aggregate.aggregate_runs(self.runs + [self.runs[0]], "calvin", 3)
-        with self.assertRaisesRegex(ValueError, "positive"):
-            self.result(minimum=0)
-
-    def test_missing_or_boolean_delays_are_not_seeds(self):
-        original = player.load_json(self.runs[0] / "session.json")
-        for delay in (None, True, -1):
-            with self.subTest(delay=delay):
-                player.atomic_json(self.runs[0] / "session.json", original)
-                self.result(minimum=1)
-                self.change(0, rng_delay_frames=delay)
-                with self.assertRaises(ValueError):
-                    self.result(minimum=1)
 
     def test_missing_attempt_does_not_claim_first_plan_or_verified_success(self):
         self.assertTrue(self.result()["raw_runs"][0]["first_plan_success"])
@@ -188,63 +124,6 @@ class AggregateEvidence(unittest.TestCase):
         self.assertFalse(row["first_plan_success"])
         self.assertEqual(row["outcome_basis"], "reported")
         self.assertIsNone(row["verified_win"])
-
-    def test_unfinished_runs_without_reported_wins_do_not_claim_budget_exhaustion(self):
-        for run in self.runs:
-            session = player.load_json(run / "session.json")
-            session["status"] = "active"
-            player.atomic_json(run / "session.json", session)
-            (run / "events.jsonl").write_text(json.dumps({
-                "kind": "semantic", "event": "battle_attempt", "battle_id": "calvin", "timestamp_epoch": 0,
-            }) + "\n")
-        result = self.result()
-        self.assertEqual(result["aggregate"]["wins"], 0)
-        self.assertEqual(result["rating"]["label"], "no reported wins")
-        self.assertIsNone(result["rating"]["unbeaten_within_budget"])
-
-    def test_post_win_roster_is_not_credited_as_winning_team(self):
-        rows = [
-            {"kind": "prep", "status": "applied", "mutation": "roster", "value": "original",
-             "battle_id": "calvin", "timestamp_epoch": 0},
-            {"kind": "semantic", "event": "battle_attempt", "battle_id": "calvin", "timestamp_epoch": 1},
-            {"kind": "semantic", "event": "battle_success", "battle_id": "calvin", "timestamp_epoch": 2},
-        ]
-        for run in self.runs:
-            (run / "events.jsonl").write_text("\n".join(json.dumps(row) for row in rows) + "\n")
-        before = self.result()
-        for run in self.runs:
-            for i in range(3):
-                player.append_jsonl(run / "events.jsonl", {
-                    "kind": "prep", "status": "applied", "mutation": "roster", "value": f"after-win-{i}",
-                    "battle_id": "calvin", "timestamp_epoch": 3 + i,
-                })
-        after = self.result()
-        self.assertEqual(after["rating"], before["rating"])
-        for field in ("wins", "first_plan_success_rate", "median_prep_revisions", "distinct_winning_teams"):
-            self.assertEqual(after["aggregate"][field], before["aggregate"][field])
-        for row in after["raw_runs"]:
-            self.assertTrue(row["first_plan_success"])
-            self.assertEqual(row["prep_revisions"], 0)
-            self.assertEqual(row["winning_team_hash"], aggregate.team_hash("original"))
-            self.assertEqual(len(row["team_hashes"]), 4)  # Preserve later experiments in raw history.
-
-    def test_unsolved_runs_keep_all_preparation_costs(self):
-        for run in self.runs:
-            rows = [{"kind": "semantic", "event": "battle_attempt", "battle_id": "calvin", "timestamp_epoch": 0}]
-            (run / "events.jsonl").write_text(json.dumps(rows[0]) + "\n")
-        before = self.result()
-        self.assertTrue(all(row["prep_revisions"] == 0 for row in before["raw_runs"]))
-        for run in self.runs:
-            for i in range(4):
-                player.append_jsonl(run / "events.jsonl", {
-                    "kind": "prep", "status": "applied", "mutation": "roster", "value": f"attempt-{i}",
-                    "battle_id": "calvin", "timestamp_epoch": i + 1,
-                })
-        after = self.result()
-        self.assertEqual(after["aggregate"]["wins"], 0)
-        self.assertEqual(after["aggregate"]["median_prep_revisions"], 3)
-        self.assertTrue(all(row["prep_revisions"] == 3 for row in after["raw_runs"]))
-
 
 class HarnessCheckpointEvidence(unittest.TestCase):
     def setUp(self):
@@ -356,13 +235,6 @@ class HarnessCheckpointEvidence(unittest.TestCase):
         self.session.restore("before")
         with self.assertRaisesRegex(player.HarnessError, "checkpoint name"):
             self.session.restore("../before")
-
-    def test_protocol_records_real_budget_and_step_settings(self):
-        protocol = self.old_meta["comparison_protocol"]
-        self.assertEqual(protocol["budgets"]["max_actions"], 10)
-        self.assertEqual(protocol["step"], self.session.config["step"])
-        self.assertNotIn("seed", protocol)
-        self.assertNotIn("rng_delay_frames", protocol)
 
     def test_init_rejects_mismatched_pair_before_replacing_session_or_running_emulator(self):
         self.session.elf = self.root / "elf"

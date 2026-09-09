@@ -440,7 +440,7 @@ static bool32 DoesMonMatchPresetAbility(struct Pokemon *mon, const struct Emeral
 }
 
 // Other half-HP items still need even HP after Belly Drum. Sitrus rounds
-// its activation threshold up and never needs Stat Point adjustments.
+// its activation threshold up and never needs EV adjustments.
 static bool32 DoesItemNeedEvenHp(enum Item item, enum Ability ability)
 {
     enum HoldEffect holdEffect = GetItemHoldEffect(item);
@@ -479,9 +479,12 @@ static bool32 DoesMonWantEvenHp(struct Pokemon *mon)
     return FALSE;
 }
 
+// At the opening cap, up to 24 EVs may be needed to change HP by one.
+// Keep this bound stable across levels to prevent preset recognition drift.
+#define BELLY_DRUM_HP_EV_TOLERANCE 24
+
 bool32 TryNormalizeEmeraldChampionsBellyDrumHpParity(struct Pokemon *mon)
 {
-    static const s8 nudges[] = {0, 1, -1, 2, -2};
     u32 hpPoints;
     u32 anchorHpPoints;
     s32 choice;
@@ -503,13 +506,13 @@ bool32 TryNormalizeEmeraldChampionsBellyDrumHpParity(struct Pokemon *mon)
     choice = GetEmeraldChampionsCurrentBattleSetChoice(mon);
     if (choice >= 0)
         anchorHpPoints = GetEmeraldChampionsBattleSetPresetForFormat(
-            mon, choice, EC_BATTLE_FORMAT_DOUBLES)->statPoints[STAT_HP];
+            mon, choice, EC_BATTLE_FORMAT_DOUBLES)->evs[STAT_HP];
     else
     {
         choice = GetEmeraldChampionsCurrentBattleSetChoiceForFormat(mon, EC_BATTLE_FORMAT_SINGLES);
         if (choice >= 0)
             anchorHpPoints = GetEmeraldChampionsBattleSetPresetForFormat(
-                mon, choice, EC_BATTLE_FORMAT_SINGLES)->statPoints[STAT_HP];
+                mon, choice, EC_BATTLE_FORMAT_SINGLES)->evs[STAT_HP];
     }
     for (u32 stat = 0; stat < NUM_STATS; stat++)
         total += GetMonData(mon, MON_DATA_HP_EV + stat);
@@ -518,12 +521,13 @@ bool32 TryNormalizeEmeraldChampionsBellyDrumHpParity(struct Pokemon *mon)
     // Anchor recognized sets to their authored investment. Using the current
     // investment lets successive Leveler visits accumulate deviations beyond
     // the recognition tolerance. Custom spreads retain their current anchor.
-    for (u32 i = 0; i < ARRAY_COUNT(nudges); i++)
+    for (u32 i = 0; i <= 2 * BELLY_DRUM_HP_EV_TOLERANCE / 4; i++)
     {
-        s32 target = (s32)anchorHpPoints + nudges[i];
+        s32 offset = 4 * ((i + 1) / 2);
+        s32 target = (s32)anchorHpPoints + (i & 1 ? offset : -offset);
         s32 nudge = target - (s32)hpPoints;
 
-        if (target < 0 || target > EC_STAT_POINTS_PER_STAT || (s32)total + nudge > EC_STAT_POINT_BUDGET)
+        if (target < 0 || target > MAX_PER_STAT_EVS || (s32)total + nudge > MAX_TOTAL_EVS)
             continue;
         value = target;
         SetMonData(mon, MON_DATA_HP_EV, &value);
@@ -545,7 +549,7 @@ bool32 TryNormalizeEmeraldChampionsBellyDrumHpParity(struct Pokemon *mon)
     return FALSE;
 }
 
-const u8 gEmeraldChampionsStatPointOrder[NUM_STATS] =
+const u8 gEmeraldChampionsEvOrder[NUM_STATS] =
 {
     STAT_HP,
     STAT_ATK,
@@ -576,11 +580,12 @@ static bool32 DoesMonMatchPreset(struct Pokemon *mon, const struct EmeraldChampi
 
     for (u32 stat = 0; stat < NUM_STATS; stat++)
     {
-        s32 diff = (s32)GetMonData(mon, EC_STAT_POINT_DATA(stat)) - preset->statPoints[stat];
+        s32 diff = (s32)GetMonData(mon, EC_EV_DATA(stat)) - preset->evs[stat];
 
-        // The parity re-landing may move HP by up to two points; the set is
-        // still the authored set.
-        if (stat == 0 && diff >= -2 && diff <= 2 && DoesPresetWantEvenHp(preset))
+        // Use the same bounded adjustment as parity normalization, so repeated
+        // Leveler visits remain anchored to the authored spread.
+        if (stat == 0 && diff >= -BELLY_DRUM_HP_EV_TOLERANCE
+         && diff <= BELLY_DRUM_HP_EV_TOLERANCE && DoesPresetWantEvenHp(preset))
             continue;
         if (diff != 0)
             return FALSE;
@@ -675,7 +680,7 @@ static u8 ApplyPreset(
     SetMonData(mon, MON_DATA_HIDDEN_NATURE, &preset->nature);
     SetMonData(mon, MON_DATA_ABILITY_NUM, &abilitySlot);
     for (u32 stat = 0; stat < NUM_STATS; stat++)
-        SetMonData(mon, EC_STAT_POINT_DATA(stat), &preset->statPoints[stat]);
+        SetMonData(mon, EC_EV_DATA(stat), &preset->evs[stat]);
     for (u32 stat = 0; stat < NUM_STATS; stat++)
         SetMonData(mon, MON_DATA_HP_IV + stat, &perfectIv);
     if (!(preserveProtectedItemInPlace && protectedItemHeld))

@@ -2,6 +2,7 @@
 """Overlay hand-authored team blocks onto data/emerald_champions/emerald_champions_battle_teams.txt by trainer id."""
 import re, sys
 from pathlib import Path
+from emerald_champions_teams import MON_RE, parse_evs
 ROOT = Path(__file__).resolve().parents[1]
 TEAMS = ROOT / "data/emerald_champions/emerald_champions_battle_teams.txt"
 HEAD = re.compile(r"^## E(\d{4}) (TRAINER_[A-Z0-9_]+)")
@@ -21,6 +22,11 @@ src = TEAMS.read_text()
 new_blocks = {}
 for path in sys.argv[1:]:
     b, _ = blocks(Path(path).read_text())
+    for trainer, block in b.items():
+        for line in block:
+            mon = MON_RE.match(line)
+            if mon:
+                parse_evs(mon.group(5), f"{path}: {trainer}")
     new_blocks.update(b)
 lines = src.splitlines(); out = []; i = 0; replaced = 0
 while i < len(lines):

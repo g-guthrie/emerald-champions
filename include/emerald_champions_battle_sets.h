@@ -14,7 +14,7 @@ struct EmeraldChampionsBattleSet
     enum Move requiredMove;
     u8 nature;
     enum Ability ability;
-    u8 statPoints[NUM_STATS];
+    u8 evs[NUM_STATS];
 };
 
 struct EmeraldChampionsBattleSetRange
@@ -29,13 +29,13 @@ struct EmeraldChampionsBattleSetChoice
     struct EmeraldChampionsBattleSet preset;
 };
 
-// Stat Points are shown and authored in display order (HP, Atk, Def, Sp. Atk,
+// EVs are shown and authored in display order (HP, Atk, Def, Sp. Atk,
 // Sp. Def, Speed), which is not STAT_* order. This is the one table that maps
 // display index -> STAT_* id; every editor, matcher and preset uses it so the
 // six stats can never be paired differently in two places.
-extern const u8 gEmeraldChampionsStatPointOrder[NUM_STATS];
-#define EC_STAT_POINT_DATA(displayIndex) (MON_DATA_HP_EV + gEmeraldChampionsStatPointOrder[displayIndex])
-#define EC_STAT_VALUE_DATA(displayIndex) (MON_DATA_MAX_HP + gEmeraldChampionsStatPointOrder[displayIndex])
+extern const u8 gEmeraldChampionsEvOrder[NUM_STATS];
+#define EC_EV_DATA(displayIndex) (MON_DATA_HP_EV + gEmeraldChampionsEvOrder[displayIndex])
+#define EC_STAT_VALUE_DATA(displayIndex) (MON_DATA_MAX_HP + gEmeraldChampionsEvOrder[displayIndex])
 
 extern const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SPECIES];
 extern const u8 *const gEmeraldChampionsDefaultBattleSetNames[NUM_SPECIES];

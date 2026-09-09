@@ -228,28 +228,25 @@ EverGrandeCity_ChampionsRoom_Movement_BirchArrives:
 
 EverGrandeCity_ChampionsRoom_Text_IntroSpeech:
 	.string "WALLACE: Welcome, {PLAYER}.\p"
-	.string "You crossed HOENN with every tool made\n"
-	.string "available: moves, items, rare partners,\l"
-	.string "and the power of Mega Evolution.\p"
-	.string "Nothing was hidden behind grinding. Every\n"
-	.string "loss asked you to build a better answer.\p"
-	.string "You restored SOOTOPOLIS's balance and\n"
-	.string "beat the ELITE FOUR without healing\l"
-	.string "inside a single battle.\p"
-	.string "Now face the region's complete exam. My\n"
-	.string "team shifts rhythm until yours breaks.\p"
+	.string "Across HOENN, moves, items and rare\n"
+	.string "partners offered new possibilities.\l"
+	.string "Mega Evolution opened even more.\p"
+	.string "You restored SOOTOPOLIS's balance\n"
+	.string "and beat the ELITE FOUR under the\l"
+	.string "LEAGUE's battle rules.\p"
+	.string "Now face the region's complete exam.\n"
+	.string "My team is ready. Is yours?\p"
 	.string "Show me the Champion you became!$"
 
 EverGrandeCity_ChampionsRoom_Text_Defeat:
-	.string "Every time I changed the question, you\n"
-	.string "found another answer. Magnificent.$"
+	.string "You have beaten my finest team.\n"
+	.string "Magnificent!$"
 
 EverGrandeCity_ChampionsRoom_Text_PostBattleSpeech:
-	.string "WALLACE: Your final team was not the only\n"
-	.string "team that brought you here.\p"
-	.string "Every partner you caught, every puzzle\n"
-	.string "you lost, and every rebuilt plan became\l"
-	.string "part of this victory.\p"
+	.string "WALLACE: This victory belongs to you\n"
+	.string "and the partners who brought you here.\p"
+	.string "Every choice along the way helped\n"
+	.string "shape the TRAINER before me.\p"
 	.string "You stand at HOENN's peak, but the\n"
 	.string "FRONTIER waits beyond the summit.\p"
 	.string "I proclaim you the new HOENN CHAMPION!$"
@@ -257,9 +254,8 @@ EverGrandeCity_ChampionsRoom_Text_PostBattleSpeech:
 EverGrandeCity_ChampionsRoom_Text_MayAdvice:
 	.string "MAY: {PLAYER}{KUN}! One thing before\n"
 	.string "WALLACE.\p"
-	.string "He changes rhythm the moment you settle.\n"
-	.string "The turn you just won says nothing\l"
-	.string "about the next one.$"
+	.string "Watch his remaining partners.\n"
+	.string "A strong opening isn't the whole battle.$"
 
 EverGrandeCity_ChampionsRoom_Text_MayItsAlreadyOver:
 	.string "MAY: Huh? Wait. Your face…\p"
@@ -269,8 +265,8 @@ EverGrandeCity_ChampionsRoom_Text_MayItsAlreadyOver:
 EverGrandeCity_ChampionsRoom_Text_BrendanAdvice:
 	.string "BRENDAN: {PLAYER}! Advice before\n"
 	.string "WALLACE, if you want it.\p"
-	.string "He resets the pace every time you find\n"
-	.string "it. Don't trust a winning turn.$"
+	.string "Watch his remaining partners.\n"
+	.string "Don't let a winning turn distract you.$"
 
 EverGrandeCity_ChampionsRoom_Text_BrendanYouveWon:
 	.string "BRENDAN: {PLAYER}…\p"

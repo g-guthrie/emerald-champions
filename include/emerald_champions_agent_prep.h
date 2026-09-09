@@ -24,7 +24,7 @@ enum EmeraldChampionsAgentPrepResult
     EC_AGENT_PREP_BAD_NATURE,
     EC_AGENT_PREP_BAD_ABILITY,
     EC_AGENT_PREP_BAD_ITEM,
-    EC_AGENT_PREP_BAD_STAT_POINTS,
+    EC_AGENT_PREP_BAD_EVS,
 };
 
 extern volatile u32 gEcAgentPrepCommand;
@@ -39,7 +39,7 @@ extern volatile u32 gEcAgentPrepMoves[EC_AGENT_PREP_PARTY_SIZE][EC_AGENT_PREP_MO
 extern volatile u32 gEcAgentPrepNature[EC_AGENT_PREP_PARTY_SIZE];
 extern volatile u32 gEcAgentPrepAbility[EC_AGENT_PREP_PARTY_SIZE];
 extern volatile u32 gEcAgentPrepItem[EC_AGENT_PREP_PARTY_SIZE];
-extern volatile u32 gEcAgentPrepStatPoints[EC_AGENT_PREP_PARTY_SIZE][EC_AGENT_PREP_STAT_COUNT];
+extern volatile u32 gEcAgentPrepEvs[EC_AGENT_PREP_PARTY_SIZE][EC_AGENT_PREP_STAT_COUNT];
 
 void EmeraldChampionsAgentPrepPoll(void);
 

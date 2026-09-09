@@ -3,13 +3,15 @@
 
 Every campaign branch in ``data/emerald_champions/emerald_champions_master_battle_design.txt``
 is materialized exactly: species, held item, level (strict cap plus the
-authored offset), Ability, nature, Stat Points and moves.  Nothing here nudges
-levels or trims Stat Points; the authored numbers are the design.
+authored offset), Ability, nature, EVs and moves. Nothing here nudges
+levels or trims EVs. Team/design fields are generated from battle_teams.txt;
+edit that canonical source, not the materialized master.
 
-AI comes from the encounter's ``ai_profile`` line.  Every campaign trainer is
-sharp: full move evaluation, switching, and prediction.  Bosses add
-omniscience.  Difficulty is expressed through levels, team size and team
-composition, never by making an opponent play badly.
+AI comes from the encounter's ``ai_profile`` line and the compiled per-trainer
+battle plan. Every campaign trainer uses the same expert information. The
+bounded doubles evaluator owns response forecasting; the old generic
+Prediction flag redundantly searches predicted switches during initialization.
+Difficulty is expressed through levels, team size and team composition.
 """
 
 from __future__ import annotations
@@ -19,6 +21,7 @@ import re
 from dataclasses import dataclass
 from pathlib import Path
 
+from emerald_champions_evs import validate_evs
 
 ROOT = Path(__file__).resolve().parents[1]
 MASTER = ROOT / "data/emerald_champions/emerald_champions_master_battle_design.txt"
@@ -29,14 +32,14 @@ BRANCH_RE = re.compile(r"(?m)^--- BRANCH ([A-Z0-9_]+) ---$")
 MON_RE = re.compile(
     r"(?m)^  \d+\. (SPECIES_[A-Z0-9_]+) @ (ITEM_[A-Z0-9_]+) \| "
     r"level_offset=(-?\d+) \| ability=(ABILITY_[A-Z0-9_]+) \| "
-    r"nature=(NATURE_[A-Z0-9_]+) \| stat_points=([0-9/]+) \| moves=([A-Z0-9_,]+)$"
+    r"nature=(NATURE_[A-Z0-9_]+) \| evs=([0-9/]+) \| moves=([A-Z0-9_,]+)$"
 )
 
 # Class names remain compatibility aliases. Every campaign trainer uses the
 # same expert information and decision capabilities; levels/rosters set difficulty.
 EXPERT_AI_PROFILE = [
     "Basic Trainer", "Omniscient", "Smart Switching", "Smart Mon Choices",
-    "Prediction", "Pp Stall Prevention", "Hp Aware", "Try To 2HKO",
+    "Pp Stall Prevention", "Hp Aware", "Try To 2HKO",
     "Powerful Status", "Know Opponent Party",
 ]
 AI_PROFILES = {"sharp": EXPERT_AI_PROFILE, "master": EXPERT_AI_PROFILE}
@@ -53,7 +56,7 @@ class Mon:
     level: int
     ability: str
     nature: str
-    points: list[int]
+    evs: list[int]
     moves: list[str]
 
 
@@ -106,9 +109,11 @@ def read_designs(master: Path = MASTER) -> dict[str, Design]:
                     level=level,
                     ability=match.group(4),
                     nature=match.group(5),
-                    points=[int(value) for value in match.group(6).split("/")],
+                    evs=validate_evs([int(value) for value in match.group(6).split("/")]),
                     moves=match.group(7).split(","),
                 ))
+            if not mons:
+                raise ValueError(f"{trainer}: no EV-encoded Pokemon records")
             if trainer in designs:
                 raise ValueError(f"duplicate trainer design {trainer}")
             extra = line_value(branch, "ai_extra")
@@ -145,7 +150,7 @@ def render_party(design: Design) -> str:
             f"Level: {mon.level}",
             f"Ability: {mon.ability}",
             "IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe",
-            "EVs: " + " / ".join(f"{value} {name}" for value, name in zip(mon.points, stat_names)),
+            "EVs: " + " / ".join(f"{value} {name}" for value, name in zip(mon.evs, stat_names)),
             f"Nature: {mon.nature}",
         ])
         rows.extend(f"- {move}" for move in mon.moves if move != "MOVE_NONE")

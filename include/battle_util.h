@@ -204,6 +204,8 @@ bool32 CanTargetBattler(enum BattlerId battlerAtk, enum BattlerId battlerDef, en
 u32 GetNextTarget(u32 moveTarget, bool32 excludeCurrent);
 void CopyMonLevelAndBaseStatsToBattleMon(enum BattlerId battler, struct Pokemon *mon, bool32 updateSpeedStat);
 void CopyMonAbilityAndTypesToBattleMon(enum BattlerId battler, struct Pokemon *mon);
+enum BattlerId GetImposterTransformTarget(enum BattlerId battler);
+void TransformBattlerData(enum BattlerId battler, enum BattlerId target);
 void RecalcBattlerStats(enum BattlerId battler, struct Pokemon *mon, bool32 isDynamaxing);
 bool32 IsGen6ExpShareEnabled(void);
 bool32 MoveHasAdditionalEffect(enum Move move, enum MoveEffect moveEffect);
@@ -302,6 +304,7 @@ void SetWrapTurns(enum BattlerId battler, enum HoldEffect holdEffect);
 bool32 ChangeOrderTargetAfterAttacker(enum BattlerId battlerDef);
 void TryUpdateEvolutionTracker(enum EvolutionConditions evolutionCondition, u32 upAmount, enum Move usedMove);
 bool32 CanUseMoveConsecutively(enum BattlerId battler);
+u32 GetConsecutiveMoveSuccessDenominator(u32 moveUses);
 void TryResetConsecutiveUseCounter(enum BattlerId battler);
 void SetOrClearRageVolatile(void);
 enum BattlerId GetTargetBySlot(enum BattlerId battlerAtk, enum BattlerId battlerDef);

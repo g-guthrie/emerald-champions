@@ -1,5 +1,11 @@
 # Small common expert AI validation set
 
+Historical validation plan. The September 8 repair subsequently changed the
+implementation, expanded the focused cases, and executed them in native mGBA.
+Current commands, results and limitations are in
+[the September 8 repair record](ai-repair-2026-09-08.md). The counts and
+not-yet-run statements below describe the earlier plan, not the current result.
+
 Prepared at the implementation owner's request. This is a scoped native behavior check, not a new release gate or whole-battle certificate.
 
 ## Exact source and filter selection

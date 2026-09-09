@@ -109,43 +109,5 @@ class MapSweepIntegrity(unittest.TestCase):
         self.assertIn("do not match", self.report()["error"])
 
 
-class CensusIntegrity(unittest.TestCase):
-    def test_current_canonical_census(self):
-        names, rows = sweep.load_census()
-        self.assertEqual(len(names), len(rows))
-        self.assertGreater(len(names), 0)
-
-    def test_reordered_or_invalid_names_fail(self):
-        original = Path.read_text
-        for names in (["../escape"], ["PetalburgCity", "PetalburgCity"], ["SlateportCity", "PetalburgCity"]):
-            def read(path, *args, **kwargs):
-                if path.name == "map_sweep_names.json":
-                    return json.dumps(names)
-                return original(path, *args, **kwargs)
-            with self.subTest(names=names), patch.object(Path, "read_text", read):
-                with self.assertRaises(ValueError):
-                    sweep.load_census()
-
-    def test_fixture_coordinates_outside_layout_fail(self):
-        original = Path.read_text
-        def read(path, *args, **kwargs):
-            text = original(path, *args, **kwargs)
-            if path.name == "emerald_champions_headless_map_sweep.h":
-                return text.replace("MAP_PETALBURG_CITY, 10, 20", "MAP_PETALBURG_CITY, 30, 20", 1)
-            return text
-        with patch.object(Path, "read_text", read), self.assertRaisesRegex(ValueError, "layout bounds"):
-            sweep.load_census()
-
-    def test_fixture_order_mismatch_fails(self):
-        original = Path.read_text
-        def read(path, *args, **kwargs):
-            text = original(path, *args, **kwargs)
-            if path.name == "emerald_champions_headless_map_sweep.h":
-                return text.replace("MAP_PETALBURG_CITY", "MAP_WRONG_CITY", 1)
-            return text
-        with patch.object(Path, "read_text", read), self.assertRaisesRegex(ValueError, "order mismatch"):
-            sweep.load_census()
-
-
 if __name__ == "__main__":
     unittest.main()

@@ -43,10 +43,10 @@ void CutMoveOpenDottedHoleDoor(void);
 void IsEmeraldChampionsGameCornerPokemonClaimed(void);
 void GiveEmeraldChampionsGameCornerPokemon(void);
 void GiveEmeraldChampionsPreparedPokemon(void);
-void BufferSelectedMonEmeraldChampionsStatPointSummary(void);
-void BufferSelectedMonEmeraldChampionsStatPointDetail(void);
-void AdjustSelectedMonEmeraldChampionsStatPoints(void);
-void ResetSelectedMonEmeraldChampionsStatPoints(void);
+void BufferSelectedMonEmeraldChampionsEvSummary(void);
+void BufferSelectedMonEmeraldChampionsEvDetail(void);
+void AdjustSelectedMonEmeraldChampionsEvs(void);
+void ResetSelectedMonEmeraldChampionsEvs(void);
 #if EC_HEADLESS_FIXTURES
 bool32 IsScrollableMultichoiceHeadlessActive(u16 menu);
 #endif

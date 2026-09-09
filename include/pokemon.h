@@ -791,6 +791,7 @@ enum TrainerPicID GetUnionRoomTrainerPic(void);
 enum TrainerClassID GetUnionRoomTrainerClass(void);
 void CreateEnemyEventMon(void);
 void CalculateMonStats(struct Pokemon *mon);
+u32 CalculateSpeciesStat(enum Species species, u32 nature, enum Stat stat, u32 level, u32 evs);
 void CalculateMonStatsCont(struct Pokemon *mon, bool32 updateSpeedStat);
 void BoxMonToMon(const struct BoxPokemon *src, struct Pokemon *dest);
 u8 GetLevelFromMonExp(struct Pokemon *mon);
