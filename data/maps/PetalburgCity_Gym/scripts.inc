@@ -1269,9 +1269,10 @@ PetalburgCity_Gym_Text_NormanIntro:
 	.string "battle as GYM LEADER, not as your father.$"
 
 PetalburgCity_Gym_Text_NormanDefeat:
-	.string "You read every rule I placed in front of\n"
-	.string "you, and forced me to read yours.\p"
-	.string "I'm proud of you. Take the BALANCE BADGE.$"
+	.string "You beat the team I've raised\n"
+	.string "with so much care.\p"
+	.string "I'm proud of you.\n"
+	.string "Take the BALANCE BADGE.$"
 
 PetalburgCity_Gym_Text_ReceivedBalanceBadge:
 	.string "{PLAYER} received the BALANCE BADGE\n"
@@ -1357,20 +1358,19 @@ PetalburgCity_Gym_Text_RandallPostBadge:
 
 PetalburgCity_Gym_Text_ParkerIntro:
 	.string "Welcome to the TRICK ROOM.\p"
-	.string "The slower Pokémon can move first\n"
-	.string "here. ORANGURU can also make its\n"
-	.string "partner repeat an attack.\p"
-	.string "Let us see how you position your\n"
-	.string "team.$"
+	.string "LICKILICKY shakes the ground.\n"
+	.string "ORANGURU tells it to do it again.\p"
+	.string "TELEPATHY keeps my partner safe.\n"
+	.string "What will keep yours safe?$"
 
 PetalburgCity_Gym_Text_ParkerDefeat:
 	.string "Our timing was not enough. Good\n"
 	.string "battle!$"
 
 PetalburgCity_Gym_Text_ParkerPostBattle:
-	.string "The next door leads to the POWER\n"
-	.string "ROOM.\p"
-	.string "Keep your team ready for it!$"
+	.string "WIDE GUARD can stop both EARTHQUAKES.\n"
+	.string "But we have single-target moves, too.\p"
+	.string "The POWER ROOM is next. Be ready!$"
 
 PetalburgCity_Gym_Text_ParkerPostBadge:
 	.string "After you beat our LEADER, the\n"

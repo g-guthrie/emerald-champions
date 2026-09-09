@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """Validate active encounter tables without freezing habitat, species or slot weights."""
 from pathlib import Path
+import copy
 import json
+from verify_trainer_ability_legality import configured_species_abilities, species_aliases, resolve_species
 
 ROOT = Path(__file__).resolve().parents[1]
 # Current no-grind policy. This is deliberately explicit and revisable.
@@ -18,6 +20,8 @@ def main():
         if row.get('region', 'REGION_HOENN') == 'REGION_HOENN':
             active.add(row['id'])
     fields = {f['type']: f for f in group['fields']}
+    configured = configured_species_abilities()
+    aliases = species_aliases()
     errors, checked = [], 0
     for entry in group['encounters']:
         if entry['map'] not in active:
@@ -29,6 +33,9 @@ def main():
             rates = field['encounter_rates']
             mons = table['mons']
             tag = f"{entry['map']}/{name}"
+            encounter_rate = table.get('encounter_rate')
+            if type(encounter_rate) is not int or not 0 <= encounter_rate <= 255:
+                errors.append(f'{tag}: encounter rate must fit the native unsigned byte')
             if len(mons) != len(rates) or not mons:
                 errors.append(f'{tag}: slots do not match encounter weights')
                 continue
@@ -36,7 +43,12 @@ def main():
                 errors.append(f'{tag}: invalid probability weights')
                 continue
             for mon in mons:
-                if not 1 <= mon['min_level'] <= mon['max_level'] <= 100:
+                species = mon.get('species')
+                if (not isinstance(species, str) or species in {'SPECIES_NONE', 'SPECIES_EGG'}
+                        or not configured.get(resolve_species(species, aliases))):
+                    errors.append(f'{tag}: invalid configured encounter species {species}')
+                if (type(mon.get('min_level')) is not int or type(mon.get('max_level')) is not int
+                        or not 1 <= mon['min_level'] <= mon['max_level'] <= 100):
                     errors.append(f'{tag}: invalid level range for {mon["species"]}')
             methods = field.get('groups', {name: list(range(len(mons)))})
             for method, indices in methods.items():
@@ -45,7 +57,7 @@ def main():
                     continue
                 if sum(rates[i] for i in indices) != 100:
                     errors.append(f'{tag}/{method}: weights must total100')
-                if table.get('encounter_rate', 0) <= 0:
+                if encounter_rate == 0:
                     continue
                 for reverse in (False, True):
                     totals = {}
@@ -59,32 +71,20 @@ def main():
     # Compare materialized water tables to today's authored route sheet. This
     # protects edits to authoring inputs without freezing the old encounters.
     import emerald_champions_rebuild_wild_water as rebuild
-    sheet, caps = rebuild.load_route_sheet(), rebuild.caps_by_map()
-    species, evolutions, _ = rebuild.load_species_data()
-    seen = set()
-    for entry in group['encounters']:
-        map_id = entry['map']
-        if rebuild.KANTO.search(map_id) or map_id in seen or not (entry.get('water_mons') or entry.get('fishing_mons')):
-            continue
-        seen.add(map_id)
-        if map_id not in active:
-            continue
-        if map_id not in sheet:
-            errors.append(f'{map_id}: missing authored water row')
-            continue
-        row = sheet[map_id]
-        region = rebuild.REGIONS[row.get('region') or rebuild.REGION_OF.get(map_id, 'inland')]
-        offset = sum(map(ord, map_id)) % 7 + len(seen)
-        for field, builder in [('water_mons', rebuild.build_water), ('fishing_mons', rebuild.build_fishing)]:
-            if entry.get(field) and entry[field] != builder(region, offset, caps.get(map_id, 55), evolutions, species, row):
-                errors.append(f'{map_id}/{field}: generated table differs from authored row')
-    if set(sheet) != seen:
-        errors.append('authored water rows differ from generator input maps')
+    water_maps = {e['map'] for e in group['encounters']
+                  if e['map'] in active and (e.get('water_mons') or e.get('fishing_mons'))}
+    if set(rebuild.load_route_sheet()) != water_maps:
+        errors.append('authored water rows differ from active Hoenn water maps')
+    try:
+        for method in rebuild.materialize_water(copy.deepcopy(payload)):
+            errors.append(f'{method}: generated species differ from authored row')
+    except (KeyError, ValueError) as error:
+        errors.append(f'invalid water authoring: {error}')
     if not checked:
         errors.append('no active encounter tables checked')
     if errors:
         raise SystemExit('\n'.join(errors))
-    print(f'PASS: {checked} active encounter tables have valid slots, levels and species probabilities')
+    print(f'PASS: {checked} active encounter tables have configured species, valid numeric fields and slot probabilities')
 
 
 if __name__ == '__main__':

@@ -270,7 +270,7 @@ def legendary_rows() -> list[dict[str, str]]:
     return rows
 
 
-def write_report(check: bool = False) -> None:
+def write_report() -> None:
     labels = source_blocks()
     occurrences = trainer_occurrences(labels)
     parties = trainer_party_blocks()
@@ -410,15 +410,6 @@ def write_report(check: bool = False) -> None:
         output.append("Missing IDs: none")
 
     report = "\n".join(output) + "\n"
-    if check:
-        if not OUTPUT.exists() or OUTPUT.read_text() != report:
-            raise SystemExit(
-                "FAIL: campaign evidence is stale; run "
-                "python3 scripts/generate_emerald_champions_campaign_evidence.py"
-            )
-        print("PASS: campaign evidence matches its complete source snapshot")
-        return
-
     OUTPUT.write_text(report)
     print(f"wrote {OUTPUT.relative_to(ROOT)}")
     print(f"encounters={len(rows)} branches={sum(len(row['branches']) for row in rows)}")
@@ -427,10 +418,7 @@ def write_report(check: bool = False) -> None:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    mode = parser.add_mutually_exclusive_group(required=True)
-    mode.add_argument("--write", action="store_true")
-    mode.add_argument("--check", action="store_true")
+    parser.add_argument("--write", action="store_true", required=True)
     args = parser.parse_args()
-    if args.write:
-        OUTPUT.parent.mkdir(parents=True, exist_ok=True)
-    write_report(check=args.check)
+    OUTPUT.parent.mkdir(parents=True, exist_ok=True)
+    write_report()

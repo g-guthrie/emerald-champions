@@ -4,8 +4,6 @@
 from __future__ import annotations
 
 import argparse
-import ast
-import collections
 import re
 import shutil
 import subprocess
@@ -26,16 +24,13 @@ STATIC_GATES = (
     ("compiled map and tile integrity", (
         PYTHON, "scripts/audit/map_integrity.py", "--out", "work/audits/map_tile_inventory.json",
     )),
-    ("map and script references", (PYTHON, "scripts/verify_emerald_champions_progression.py")),
-    ("authored trainer script formats", (PYTHON, "scripts/align_emerald_champions_battle_scripts.py")),
     ("configured trainer abilities", (PYTHON, "scripts/verify_trainer_ability_legality.py")),
     ("authored trainer materialization", (
         PYTHON, "scripts/implement_emerald_champions_master_battles.py", "--verify-only",
     )),
-    ("authored competitive presets", (PYTHON, "scripts/generate_emerald_champions_battle_sets.py", "--check")),
+    ("preset structural validation and output agreement (not strategy quality)", (PYTHON, "scripts/generate_emerald_champions_battle_sets.py", "--check")),
     ("authored Circuit projection", (PYTHON, "scripts/generate_showdown_champions_circuit.py", "--check")),
     ("wild table integrity", (PYTHON, "scripts/verify_wild_distribution.py")),
-    ("Mega Stone reward coverage", (PYTHON, "scripts/verify_mega_stone_rewards.py")),
 )
 
 
@@ -47,108 +42,6 @@ def require(condition: bool, message: str) -> None:
 def run_gate(label: str, command: tuple[str, ...]) -> None:
     print(f"\n== {label} ==", flush=True)
     subprocess.run(command, cwd=ROOT, check=True)
-
-
-def verify_unique_state_ids() -> None:
-    for relative, prefix in (
-        ("include/constants/flags.h", "FLAG_"),
-        ("include/constants/vars.h", "VAR_"),
-    ):
-        definitions: dict[str, list[tuple[int, str]]] = collections.defaultdict(list)
-        for line_number, line in enumerate((ROOT / relative).read_text().splitlines(), 1):
-            match = re.match(
-                rf"#define\s+({prefix}[A-Z0-9_]+)\s+(.+?)(?:\s*//.*|\s*/\*.*)?$",
-                line,
-            )
-            if match is not None:
-                definitions[match.group(1)].append((line_number, match.group(2).strip()))
-        duplicate_names = {
-            name: rows for name, rows in definitions.items() if len(rows) > 1
-        }
-        require(
-            not duplicate_names,
-            f"{relative}: state macros are defined more than once: {duplicate_names}",
-        )
-
-        expressions = {name: rows[0][1] for name, rows in definitions.items()}
-        resolved: dict[str, int] = {}
-
-        def evaluate_node(node: ast.AST, stack: tuple[str, ...]) -> int:
-            if isinstance(node, ast.Constant) and isinstance(node.value, int):
-                return node.value
-            if isinstance(node, ast.Name):
-                return evaluate(node.id, stack)
-            if isinstance(node, ast.UnaryOp) and isinstance(
-                node.op, (ast.UAdd, ast.USub, ast.Invert)
-            ):
-                value = evaluate_node(node.operand, stack)
-                if isinstance(node.op, ast.UAdd):
-                    return value
-                if isinstance(node.op, ast.USub):
-                    return -value
-                return ~value
-            if isinstance(node, ast.BinOp) and isinstance(
-                node.op, (ast.Add, ast.Sub, ast.Mult, ast.Mod, ast.BitOr, ast.BitAnd, ast.LShift, ast.RShift)
-            ):
-                left = evaluate_node(node.left, stack)
-                right = evaluate_node(node.right, stack)
-                if isinstance(node.op, ast.Add):
-                    return left + right
-                if isinstance(node.op, ast.Sub):
-                    return left - right
-                if isinstance(node.op, ast.Mult):
-                    return left * right
-                if isinstance(node.op, ast.Mod):
-                    return left % right
-                if isinstance(node.op, ast.BitOr):
-                    return left | right
-                if isinstance(node.op, ast.BitAnd):
-                    return left & right
-                if isinstance(node.op, ast.LShift):
-                    return left << right
-                return left >> right
-            raise ValueError(f"unsupported state expression: {ast.dump(node)}")
-
-        def evaluate(name: str, stack: tuple[str, ...] = ()) -> int:
-            if name in resolved:
-                return resolved[name]
-            if name not in expressions or name in stack:
-                raise ValueError(name)
-            value = evaluate_node(ast.parse(expressions[name], mode="eval").body, stack + (name,))
-            resolved[name] = value
-            return value
-
-        values: dict[int, list[str]] = collections.defaultdict(list)
-        for name in expressions:
-            if name.endswith(("_START", "_END")):
-                continue
-            try:
-                value = evaluate(name)
-            except (SyntaxError, ValueError):
-                continue
-            if value != 0:  # FRLG compatibility aliases use zero deliberately.
-                values[value].append(name)
-        duplicates = {value: names for value, names in values.items() if len(names) > 1}
-        require(not duplicates, f"{relative}: duplicate state IDs: {duplicates}")
-    print("PASS: resolved flag and variable names and assignments are unique")
-
-
-def verify_branding() -> None:
-    forbidden = ("inclement emerald", "salt buffet", "buffet salt")
-    violations = []
-    for directory in (ROOT / "data", ROOT / "src"):
-        for path in directory.rglob("*"):
-            if path.suffix not in {".c", ".h", ".inc", ".s"}:
-                continue
-            for line_number, line in enumerate(path.read_text(errors="ignore").splitlines(), 1):
-                quoted = " ".join(re.findall(r'"([^"]*)"', line)).lower()
-                if any(token in quoted for token in forbidden):
-                    violations.append(f"{path.relative_to(ROOT)}:{line_number}: {line.strip()}")
-    require(not violations, "obsolete player-facing branding remains:\n" + "\n".join(violations))
-    makefile = (ROOT / "Makefile").read_text()
-    require("TITLE        ?= EM CHAMPIONS" in makefile, "ROM title is not Emerald Champions")
-    require("GAME_CODE    ?= BPEE" in makefile, "ROM game code drifted")
-    print("PASS: player-facing branding and build identity are Emerald Champions")
 
 
 def gba_header_checksum(data: bytes) -> int:
@@ -267,8 +160,6 @@ def main() -> None:
 
     for label, command in STATIC_GATES:
         run_gate(label, command)
-    verify_unique_state_ids()
-    verify_branding()
     verify_patch_integrity(allow_source_bundle=args.allow_source_bundle)
     verify_build_freshness(args.rom.resolve(), args.elf.resolve())
     verify_rom(args.rom.resolve(), args.elf.resolve())

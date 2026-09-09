@@ -120,7 +120,7 @@ void CreateEmeraldChampionsBirchRescueParty(void)
     ZeroEnemyPartyMons();
     for (u32 i = 0; i < ARRAY_COUNT(sSpecies); i++)
     {
-        CreateRandomMonWithIVs(&gParties[B_TRAINER_OPPONENT_A][i], sSpecies[i], 5, MAX_PER_STAT_IVS);
+        CreateRandomMonWithIVs(&gParties[B_TRAINER_OPPONENT_A][i], sSpecies[i], 3, MAX_PER_STAT_IVS);
         ApplyEmeraldChampionsScriptedSet(&gParties[B_TRAINER_OPPONENT_A][i], &sRescueSets[i]);
     }
     gPartiesCount[B_TRAINER_OPPONENT_A] = ARRAY_COUNT(sSpecies);
@@ -143,6 +143,29 @@ void ApplyEmeraldChampionsRegionalRivalSet(struct Pokemon *party, u32 slot, bool
     if (opening)
     {
         GetOpeningStarterSet(species, &preset);
+        // These are the rival's generated alternatives, not changes to the
+        // player's starter presets. The party has no automatic sun setter.
+        switch (species)
+        {
+        case SPECIES_BULBASAUR:
+            preset.ability = ABILITY_OVERGROW;
+            preset.moves[0] = MOVE_PROTECT;
+            break;
+        case SPECIES_CHARMANDER:
+            preset.ability = ABILITY_BLAZE;
+            preset.moves[1] = MOVE_FLAMETHROWER;
+            break;
+        case SPECIES_ROWLET:
+            preset.moves[3] = MOVE_PROTECT;
+            break;
+        case SPECIES_SOBBLE:
+            // Native preparation does not grant Sobble Ice Beam. Mud Shot
+            // replaces redundant Water Pulse with legal coverage and control.
+            preset.moves[2] = MOVE_MUD_SHOT;
+            break;
+        default:
+            break;
+        }
         if (preset.item == ITEM_EVIOLITE)
             preset.item = ITEM_SITRUS_BERRY;
     }

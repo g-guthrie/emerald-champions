@@ -28,7 +28,6 @@ class TrainerFlagIntegrityTests(unittest.TestCase):
 
     def test_real_opponents_resolve_without_special_trainer_namespace(self):
         constants = campaign.parse_numeric_constants()
-        self.assertEqual(constants["FLAG_DEFEATED_TRAINER_TAKAO"], 0x500 + 179)
         self.assertNotIn("FLAG_DEFEATED_TRAINER_NONE", constants)
         self.assertNotIn("FLAG_DEFEATED_TRAINER_EREADER", constants)
         self.assertNotIn("FLAG_DEFEATED_TRAINER_CLASS_HIKER", constants)

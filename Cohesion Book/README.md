@@ -1,5 +1,10 @@
 # Emerald Champions — Cohesion and Rearchitecture Book
 
+> Historical specification. The user's September 8 repair audit supersedes this
+> book wherever it conflicts with current instructions. Its source inventories
+> can aid investigation; its prescriptions and acceptance prose do not establish
+> correct gameplay. See the repository `AGENTS.md` and current audit reports.
+
 **Complete specification, ready for review. September 8, 2026.** This book proposes the next revision; it has not been implemented or playtested.
 
 This book examines the existing authored game and specifies a cohesive revision while preserving successful work. The live game, ROM and save are outside the writing scope. The source snapshot under `baseline/source/` includes uncommitted authoring captured on September 8, 2026; `baseline/manifest.json` identifies every copied input.

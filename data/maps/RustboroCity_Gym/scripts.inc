@@ -317,10 +317,10 @@ RustboroCity_Gym_Text_JoshIntro:
 	.string "We make that extra action count!$"
 
 RustboroCity_Gym_Text_JoshDefeat:
-	.string "You broke the wall and the chip!$"
+	.string "Our wall came down!$"
 
 RustboroCity_Gym_Text_JoshPostBattle:
-	.string "STURDY can preserve NOSEPASS at\n"
+	.string "STURDY can preserve BONSLY at\n"
 	.string "full health. Chip damage or an\n"
 	.string "Ability that bypasses it changes\n"
 	.string "the plan.$"

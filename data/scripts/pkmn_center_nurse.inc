@@ -20,7 +20,7 @@ Common_EventScript_PkmnCenterNurse::
 	message gText_EmeraldChampionsExplainTools
 	waitmessage
 	waitbuttonpress
-	goto EventScript_PkmnCenterNurse_Main
+	goto EventScript_PkmnCenterNurse_OfferHealAfterTools
 
 EventScript_PkmnCenterNurse_HasVial::
 	checkitem ITEM_LEVELER, 1
@@ -30,7 +30,7 @@ EventScript_PkmnCenterNurse_HasVial::
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	msgbox gText_EmeraldChampionsExplainLeveler, MSGBOX_DEFAULT
 
-@ Existing saves predate the Repel Spray, so every Center hands it out once.
+@ Resume tool delivery if the Bag filled during an earlier visit.
 EventScript_PkmnCenterNurse_CheckRepelSpray::
 	checkitem ITEM_REPEL_SPRAY, 1
 	goto_if_eq VAR_RESULT, TRUE, EventScript_PkmnCenterNurse_CheckFlightBeacon
@@ -39,7 +39,6 @@ EventScript_PkmnCenterNurse_CheckRepelSpray::
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	msgbox gText_EmeraldChampionsExplainRepelSpray, MSGBOX_DEFAULT
 
-@ Existing saves predate the Flight Beacon too.
 EventScript_PkmnCenterNurse_CheckFlightBeacon::
 	checkitem ITEM_FLIGHT_BEACON, 1
 	goto_if_eq VAR_RESULT, TRUE, EventScript_PkmnCenterNurse_Main
@@ -47,6 +46,12 @@ EventScript_PkmnCenterNurse_CheckFlightBeacon::
 	giveitem ITEM_FLIGHT_BEACON, 1
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	msgbox gText_EmeraldChampionsExplainFlightBeacon, MSGBOX_DEFAULT
+	goto EventScript_PkmnCenterNurse_OfferHealAfterTools
+
+EventScript_PkmnCenterNurse_OfferHealAfterTools::
+	setvar VAR_0x8004, 0
+	msgbox gText_EmeraldChampionsHealAfterTools, MSGBOX_YESNO
+	goto EventScript_PkmnCenterNurse_AnswerHeal
 
 EventScript_PkmnCenterNurse_Main::
 	setvar VAR_0x8004, 0
@@ -55,6 +60,7 @@ EventScript_PkmnCenterNurse_Main::
 	goto_if_eq VAR_RESULT, 4, EventScript_PkmnCenterNurse_GoldCard
 .endif
 	msgbox gText_WouldYouLikeToRestYourPkmn, MSGBOX_YESNO
+EventScript_PkmnCenterNurse_AnswerHeal::
 	goto_if_eq VAR_RESULT, YES, EventScript_PkmnCenterNurse_HealPkmn
 	goto_if_eq VAR_RESULT, NO, EventScript_PkmnCenterNurse_Goodbye
 	end

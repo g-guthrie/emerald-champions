@@ -2,6 +2,25 @@
 
 Run commands from the repository root. The canonical toolchain/package setup is in [.github/workflows/build.yml](https://github.com/g-guthrie/emerald-champions/blob/main/.github/workflows/build.yml); [Makefile](https://github.com/g-guthrie/emerald-champions/blob/main/Makefile) defines the actual build. A compatible ARM GCC/binutils/newlib toolchain and native build tools are required. A usable emulator alone is not a complete ROM build environment.
 
+## September 8 repair environment
+
+The repair was built on Apple Silicon with Arm GNU Toolchain 15.3.Rel1
+(GCC 15.3.1 and newlib), Apple make 3.81, libpng 1.6.58 and pkgconf 3.0.7.
+The local extracted toolchain is `work/toolchain/arm-expanded/Payload`.
+That cache is not tracked. Put its `bin` directory on the shell's PATH before
+invoking make: setting only `DEVKITARM` did not reach a recursive generated-data
+command under this make version.
+
+```sh
+export PATH="$PWD/work/toolchain/arm-expanded/Payload/bin:$PATH"
+make -j4 release BUILD_NAME=emerald-repair-20260908
+```
+
+The named build preserves the tracked 5.1 `pokeemerald-release.gba`.
+The local native runner uses the vendored mGBA 0.10.5 source, built under
+`work/mgba-native`; set `MGBA_PREFIX="$PWD/work/mgba-native"` for its Python
+drivers. This is a reproducibility note, not a completed-release claim.
+
 ## Release artifacts
 
 ```sh
@@ -49,7 +68,7 @@ The campaign runner currently selects `CAMPAIGN_AUTOWIN` for traversal. Per-segm
 
 Trainer defeat assertions can use test-only aliases such as `FLAG_DEFEATED_TRAINER_TAKAO` in `expected.flags`. The runner derives these from authored `constants/opponents.h` IDs and the reserved trainer flag range; these aliases are not declarations added to the game.
 
-Campaign checkpoints bind state bytes, parent identity, and artifact provenance. Explicit parent-run selection is honored; unrelated future manifest additions can remain compatible when the checkpoint's ancestry is unchanged. [verify_emerald_champions_campaign_run.py](https://github.com/g-guthrie/emerald-champions/blob/main/scripts/verify_emerald_champions_campaign_run.py) compares completed evidence against an explicitly written baseline. Do not update a baseline simply to erase a failure.
+Campaign checkpoints bind state bytes, parent identity, and artifact provenance. Explicit parent-run selection is honored; unrelated future manifest additions can remain compatible when the checkpoint's ancestry is unchanged. The historical full-run baseline comparator was removed in the static-check audit: it could discard incorrect flag/variable expectations while reporting agreement. Use the actual producer's state observations and checkpoint provenance, not an old normalized snapshot, as evidence.
 
 [aggregate_results.py](https://github.com/g-guthrie/emerald-champions/blob/main/tools/agent_player/aggregate_results.py) rejects incompatible run identities and labels reported outcomes. Unknown Hard-mode or budget-exhaustion claims remain unknown. Harness checkpoint restore retains cumulative budgets. It is separate from the game's Retry and Reload controls.
 
@@ -58,6 +77,20 @@ Visual fixture comparison uses [verify_emerald_champions_visual_runtime.py](http
 Record failures and incomplete coverage alongside successes. A release-readiness claim needs a fresh build, relevant runtime tests, native UI/failure-path checks, and an actual fresh-save campaign run; balancing and Nuzlocke difficulty additionally need appropriate play evidence.
 
 ## Keeping the suite small
+
+The September 8 static-check audit and subsequent user instruction removed
+drifting host fixtures, old-save layout locks, strategy heuristics, imported
+policy locks and source-text checks without essential regression value. The
+audit and exact disposition are recorded in `docs/static_check_audit/`. Deleted
+checks are not passing checks, and removing a test does not fix the gameplay
+that it purported to verify.
+
+The release command no longer runs the weak script-format/reward-graph gates
+or the branding and partial state-ID scanners. Compiled geometry, configured
+abilities, materialized-output agreement and artifact checks remain. Standalone
+world/coverage reports are not release-readiness evidence. Known remaining
+checker/generator limitations are explicit in the audit; do not treat a green
+projection check as competitive quality or complete native legality.
 
 A retained test needs a concrete current failure it can detect, an assertion that observes that failure, and a reason existing checks do not already cover it. Prefer an executed production-function regression over another source-token scanner. Empty TODOs belong in issue notes. Benchmarks, historical imports and speculative strategy judgments do not belong in required game gates.
 

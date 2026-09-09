@@ -197,7 +197,7 @@ LavaridgeTown_Gym_1F_Text_GymGuidePostVictory:
 LavaridgeTown_Gym_1F_Text_ColeIntro:
 	.string "Owowowowow!\n"
 	.string "Yikes, it's hot!\p"
-	.string "Touch us, and you will feel it!$"
+	.string "Contact can burn more than pride!$"
 
 LavaridgeTown_Gym_1F_Text_ColeDefeat:
 	.string "I'm blinded by sweat in my eyes…$"
@@ -211,7 +211,8 @@ LavaridgeTown_Gym_1F_Text_ColePostBattle:
 LavaridgeTown_Gym_1F_Text_AxleIntro:
 	.string "I'm trying to relieve my stress.\n"
 	.string "Don't come along and stress me out!\p"
-	.string "Hit me hard. I only grow!$"
+	.string "ARMAROUGE's WEAKNESS POLICY can\n"
+	.string "turn a weakness into power!$"
 
 LavaridgeTown_Gym_1F_Text_AxleDefeat:
 	.string "I hope FLANNERY flames you good!$"
@@ -240,18 +241,18 @@ LavaridgeTown_Gym_B1F_Text_KeeganPostBattle:
 	.string "burned seriously.$"
 
 LavaridgeTown_Gym_1F_Text_GeraldIntro:
-	.string "Can your POKéMON withstand\n"
-	.string "392-degree heat?\p"
+	.string "Can your POKéMON handle\n"
+	.string "the heat of this team?\p"
 	.string "SUNNY DAY first. Then we run!$"
 
 LavaridgeTown_Gym_1F_Text_GeraldDefeat:
 	.string "It didn't burn hotly enough…$"
 
 LavaridgeTown_Gym_1F_Text_GeraldPostBattle:
-	.string "The temperature of magma is\n"
-	.string "392 degrees.\p"
-	.string "Your POKéMON beat me, so they should\n"
-	.string "easily survive in magma.$"
+	.string "Sun helps my Grass Pokémon move\n"
+	.string "faster.\p"
+	.string "Even here, a Fire team needs\n"
+	.string "its partners!$"
 
 LavaridgeTown_Gym_1F_Text_DanielleIntro:
 	.string "Um…\n"
@@ -268,7 +269,7 @@ LavaridgeTown_Gym_1F_Text_DaniellePostBattle:
 LavaridgeTown_Gym_B1F_Text_JaceIntro:
 	.string "Come on, get with it!\n"
 	.string "Let's go before my feelings cool!\p"
-	.string "My poison reaches even STEEL!$"
+	.string "SALAZZLE's TOXIC can poison STEEL!$"
 
 LavaridgeTown_Gym_B1F_Text_JaceDefeat:
 	.string "It's so hot, and yet my heart is\n"
@@ -282,7 +283,8 @@ LavaridgeTown_Gym_B1F_Text_JacePostBattle:
 LavaridgeTown_Gym_B1F_Text_JeffIntro:
 	.string "See how the flames blaze wildly?\n"
 	.string "They flare in anticipation of my win!\p"
-	.string "I move first. Always!$"
+	.string "At full health, TALONFLAME's\n"
+	.string "Flying moves gain priority!$"
 
 LavaridgeTown_Gym_B1F_Text_JeffDefeat:
 	.string "Something didn't go right.$"
@@ -295,11 +297,12 @@ LavaridgeTown_Gym_B1F_Text_JeffPostBattle:
 LavaridgeTown_Gym_B1F_Text_EliIntro:
 	.string "As much as I love mountains,\n"
 	.string "I especially love volcanoes.\p"
-	.string "Nothing here stands where you aim!$"
+	.string "CLAYDOL avoids Ground attacks.\n"
+	.string "BRONZONG can take the heat!$"
 
 LavaridgeTown_Gym_B1F_Text_EliDefeat:
-	.string "Well, it seems to me I lost without\n"
-	.string "ever being in control.$"
+	.string "Well, it seems my team has\n"
+	.string "met its match!$"
 
 LavaridgeTown_Gym_B1F_Text_EliPostBattle:
 	.string "I stay here because I became a fan\n"

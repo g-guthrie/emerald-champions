@@ -73,13 +73,13 @@ EverGrandeCity_SidneysRoom_EventScript_Defeated::
 EverGrandeCity_SidneysRoom_Text_IntroSpeech:
 	.string "Heh. SIDNEY. First door, best door.\p"
 	.string "My crew fights dirty. Fake Out, sleep,\n"
-	.string "a fast board that goes slow when you\l"
-	.string "blink. You'll think you've read it.\p"
+	.string "TAILWIND to keep you chasing.\l"
+	.string "You'll think you've read it.\p"
 	.string "Then ABSOL shows up and the reading\n"
 	.string "was wrong. Let's go, kid!$"
 
 EverGrandeCity_SidneysRoom_Text_Defeat:
-	.string "Ha! You saw every trick coming. Fine.\n"
+	.string "Ha! You got the better of my crew.\n"
 	.string "That was a good time.$"
 
 EverGrandeCity_SidneysRoom_Text_PostBattleSpeech:

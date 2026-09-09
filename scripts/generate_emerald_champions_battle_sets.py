@@ -7,7 +7,9 @@ import copy
 import argparse
 import json
 import re
+import shutil
 import subprocess
+import tempfile
 from collections import defaultdict
 from pathlib import Path
 
@@ -954,9 +956,41 @@ def constants(path: Path, prefix: str) -> set[str]:
     return set(re.findall(rf"\b{prefix}[A-Z0-9_]+\b", path.read_text()))
 
 
+def configured_integer_values(expressions: list[str]) -> dict[str, int]:
+    """Let C evaluate table constants, including signed values and Gen ternaries."""
+    expressions = list(dict.fromkeys(expressions))
+    compiler = shutil.which("cc") or shutil.which("clang") or shutil.which("gcc")
+    if compiler is None:
+        raise RuntimeError("a host C compiler is required for configured table values")
+    source = (
+        '#include <stdio.h>\n'
+        '#include "config/general.h"\n'
+        '#include "constants/global.h"\n'
+        'int main(void) {\n'
+        '    const int values[] = {\n'
+        + ",\n".join(f"        ({expression})" for expression in expressions)
+        + '\n    };\n'
+        '    for (unsigned i = 0; i < sizeof(values) / sizeof(values[0]); i++)\n'
+        '        printf("%d\\n", values[i]);\n'
+        '    return 0;\n}\n'
+    )
+    with tempfile.TemporaryDirectory() as directory:
+        executable = Path(directory) / "table_values"
+        subprocess.run(
+            [compiler, "-std=c11", "-x", "c", "-DTRUE=1", "-DFALSE=0",
+             "-I", str(ROOT / "include"), "-", "-o", str(executable)],
+            input=source, text=True, check=True,
+        )
+        values = subprocess.check_output([str(executable)], text=True).splitlines()
+    return dict(zip(expressions, map(int, values), strict=True))
+
+
 def move_metadata() -> dict[str, dict]:
     """Read the configured move table closely enough to rank legal options."""
     text = (ROOT / "src/data/moves_info.h").read_text()
+    numeric_values = configured_integer_values(re.findall(
+        r"\.(?:power|accuracy|priority)\s*=\s*([^,]+)", text
+    ))
     markers = list(re.finditer(r"(?m)^\s*\[(MOVE_[A-Z0-9_]+)\]\s*=\s*\{", text))
     result: dict[str, dict] = {}
     for index, marker in enumerate(markers):
@@ -972,8 +1006,7 @@ def move_metadata() -> dict[str, dict]:
         def numeric(match: re.Match[str] | None, fallback: int) -> int:
             if match is None:
                 return fallback
-            values = [int(value) for value in re.findall(r"\b\d+\b", match.group(1))]
-            return max(values) if values else fallback
+            return numeric_values[match.group(1)]
 
         result[marker.group(1)] = {
             "category": category.group(1) if category else "DAMAGE_CATEGORY_STATUS",
@@ -998,6 +1031,9 @@ def species_build_metadata() -> dict[str, dict]:
     table_start = text.find("const struct SpeciesInfo gSpeciesInfo[]")
     assert table_start >= 0
     text = text[table_start:]
+    stat_values = configured_integer_values(re.findall(
+        r"\.base(?:HP|Attack|Defense|SpAttack|SpDefense|Speed)\s*=\s*([^,]+)", text
+    ))
     markers = list(SPECIES_MARKER.finditer(text))
     result: dict[str, dict] = {}
     for index, marker in enumerate(markers):
@@ -1005,8 +1041,8 @@ def species_build_metadata() -> dict[str, dict]:
         block = text[marker.start():end]
 
         def stat(field: str) -> int:
-            match = re.search(rf"\.{field}\s*=\s*(\d+)", block)
-            return int(match.group(1)) if match else 0
+            match = re.search(rf"\.{field}\s*=\s*([^,]+)", block)
+            return stat_values[match.group(1)] if match else 0
 
         type_match = re.search(r"\.types\s*=\s*\{([^}]+)\}", block)
         learnset_match = re.search(

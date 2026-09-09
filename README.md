@@ -1,3 +1,5 @@
+> **Current ROM: Emerald Champions 6.0.** [Release notes](docs/RELEASE_6.0.md) · [Download ROM](Emerald%20Champions%206.0.gba)
+
 > **Current development handoff:** [Continue here](docs/CONTINUE_HERE.md) · [Complete Cohesion Book](Cohesion%20Book/README.md)
 
 # Emerald Champions

@@ -17,6 +17,7 @@
 #include "constants/battle_string_ids.h"
 #include "constants/items.h"
 #include "constants/moves.h"
+#include "constants/opponents.h"
 #include "../src/data/map_group_count.h"
 #include "test/overworld_script.h"
 
@@ -654,8 +655,8 @@ TEST("Battle strings fit on the battle message window")
         sBattlerAbilities[j] = longAbilityID;
 
     // Set Trainers
-    TRAINER_BATTLE_PARAM.opponentA = 1;
-    TRAINER_BATTLE_PARAM.opponentB = 1;
+    TRAINER_BATTLE_PARAM.opponentA = TRAINER_RED_TEST;
+    TRAINER_BATTLE_PARAM.opponentB = TRAINER_RED_TEST;
 
     // Set battler to 1, so "The opposing " is prefixed when refering to battlers.
     gBattleTypeFlags |= BATTLE_TYPE_TRAINER;

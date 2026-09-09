@@ -1,12 +1,6 @@
-Common_EventScript_EmeraldChampionsOpeningPrep::
-	setvar VAR_UNUSED_0x8014, 1
-	goto EmeraldChampions_EventScript_InitializePrep
-
 Common_EventScript_EmeraldChampionsMoveTutor::
-	setvar VAR_UNUSED_0x8014, 0
 	lockall
 	faceplayer
-EmeraldChampions_EventScript_InitializePrep:
 	setvar VAR_0x8007, EC_BATTLE_FORMAT_DOUBLES
 	setvar VAR_0x8009, 0
 	setvar VAR_0x800B, 0
@@ -386,19 +380,12 @@ EmeraldChampions_EventScript_BattleSetSpecialItem:
 
 EmeraldChampions_EventScript_MoveTutorExit:
 	msgbox EmeraldChampions_Text_MoveTutorGoodbye, MSGBOX_DEFAULT
-	goto_if_eq VAR_UNUSED_0x8014, 1, EmeraldChampions_EventScript_ReturnService
 	releaseall
 	end
 
-Common_EventScript_EmeraldChampionsOpeningItems::
-	setvar VAR_UNUSED_0x8014, 1
-	goto EmeraldChampions_EventScript_InitializeItems
-
 Common_EventScript_EmeraldChampionsBattleVendor::
-	setvar VAR_UNUSED_0x8014, 0
 	lock
 	faceplayer
-EmeraldChampions_EventScript_InitializeItems:
 	setvar VAR_0x8008, 0
 	setvar VAR_0x8009, 0
 
@@ -462,7 +449,6 @@ EmeraldChampions_EventScript_OpenEvolutionArchive:
 
 EmeraldChampions_EventScript_BattleVendorExit:
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
-	goto_if_eq VAR_UNUSED_0x8014, 1, EmeraldChampions_EventScript_ReturnService
 	release
 	end
 

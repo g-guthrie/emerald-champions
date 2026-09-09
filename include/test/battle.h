@@ -559,7 +559,9 @@
 
 // NOTE: If the stack is too small the test runner will probably crash
 // or loop.
-#define BATTLE_TEST_STACK_SIZE 1024
+// Direct AI evaluations in THEN need the same headroom as a native battle
+// callback; 1 KiB overflows into the runner's trial/probability bookkeeping.
+#define BATTLE_TEST_STACK_SIZE 4096
 #define MAX_TURNS 16
 #define MAX_QUEUED_EVENTS 30
 #define MAX_EXPECTED_ACTIONS 10

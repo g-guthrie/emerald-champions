@@ -2,6 +2,7 @@
 #include "battle.h"
 #include "constants/battle_ai.h"
 #include "battle_ai_main.h"
+#include "battle_ai_record.h"
 #include "battle_ai_switch.h"
 #include "battle_ai_util.h"
 #include "battle_util.h"
@@ -101,6 +102,8 @@ struct SwitchCandidateSnapshot
     enum Item lastUsedItem;
     enum Ability lastUsedAbility;
     enum BattlerId attacker, target, effectBattler, abilityBattler;
+    enum BattlerId potentialItemBattler;
+    u16 movePower;
     u8 chosenActions[MAX_BATTLERS_COUNT];
     u16 chosenMoves[MAX_BATTLERS_COUNT];
     u8 absent;
@@ -143,6 +146,8 @@ void AI_CaptureCandidateState(struct SwitchCandidateSnapshot *state)
     state->target = gBattlerTarget;
     state->effectBattler = gEffectBattler;
     state->abilityBattler = gBattlerAbility;
+    state->potentialItemBattler = gPotentialItemEffectBattler;
+    state->movePower = gBattleMovePower;
     memcpy(state->chosenActions, gChosenActionByBattler, sizeof(state->chosenActions));
     memcpy(state->chosenMoves, gChosenMoveByBattler, sizeof(state->chosenMoves));
     state->absent = gAbsentBattlerFlags;
@@ -192,6 +197,8 @@ void AI_RestoreCandidateState(const struct SwitchCandidateSnapshot *state)
     gBattlerTarget = state->target;
     gEffectBattler = state->effectBattler;
     gBattlerAbility = state->abilityBattler;
+    gPotentialItemEffectBattler = state->potentialItemBattler;
+    gBattleMovePower = state->movePower;
     memcpy(gChosenActionByBattler, state->chosenActions, sizeof(state->chosenActions));
     memcpy(gChosenMoveByBattler, state->chosenMoves, sizeof(state->chosenMoves));
     gAbsentBattlerFlags = state->absent;
@@ -213,6 +220,9 @@ static void RefreshSwitchCandidateData(void)
 
 static void ApplySwitchinForm(enum BattlerId battler, enum FormChanges method)
 {
+    // The native form wrapper rejects transformed battlers in modern rules.
+    if (gBattleMons[battler].volatiles.transformed && GetConfig(B_TRANSFORM_FORM_CHANGES) >= GEN_5)
+        return;
     if (method == FORM_CHANGE_BATTLE_WEATHER)
     {
         u32 weather = AI_GetWeather();
@@ -316,6 +326,45 @@ static void PrepareSwitchCandidateMon(enum BattlerId battler, u32 monIndex, stru
     }
 }
 
+static void ApplySwitchCandidateTrace(enum BattlerId battler)
+{
+    if (GetBattlerAbility(battler) != ABILITY_TRACE || gBattleMons[battler].volatiles.traceActivated)
+        return;
+
+    enum Ability copied = ABILITY_NONE;
+    bool32 found = FALSE;
+    for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
+    {
+        if (IsBattlerAlly(battler, foe) || gBattleMons[foe].hp == 0)
+            continue;
+        // Trace copies the native raw ability, including one currently
+        // suppressed. Do not reveal an unknown ability to a non-omniscient AI.
+        if (!IsAiBattlerAware(foe) && !IsAiFlagPresent(AI_FLAG_ABILITY_OMNISCIENCE)
+         && !gBattleMons[foe].volatiles.overwrittenAbility && GetRecordedAbility(foe) == ABILITY_NONE)
+            return;
+        enum Ability ability = gBattleMons[foe].ability;
+        if (gAbilitiesInfo[ability].cantBeTraced)
+            continue;
+        // Native Trace randomly chooses between two legal opponents. Resolve
+        // only a sole outcome; retaining Trace for mixed outcomes is an
+        // approximation, not a favorable roll or a worst-case evaluation.
+        if (found && copied != ability)
+            return;
+        copied = ability;
+        found = TRUE;
+    }
+    if (!found)
+        return;
+
+    gBattleMons[battler].volatiles.traceActivated = TRUE;
+    if (GetBattlerHoldEffectIgnoreAbility(battler) == HOLD_EFFECT_ABILITY_SHIELD)
+        return;
+    gBattleStruct->tracedAbility[battler] = copied;
+    gBattleMons[battler].ability = copied;
+    gBattleMons[battler].volatiles.overwrittenAbility = copied;
+    RefreshSwitchCandidateData();
+}
+
 static void ApplySwitchCandidateEntry(enum BattlerId battler)
 {
     struct IncomingHealInfo healing;
@@ -354,6 +403,9 @@ static void ApplySwitchCandidateEntry(enum BattlerId battler)
 
     ApplySwitchinForm(battler, FORM_CHANGE_BATTLE_PRIMAL_REVERSION);
     RefreshSwitchCandidateData();
+    // Native Trace re-enters switch-in abilities after copying. Resolve it
+    // before the existing field/stat/foe hooks so those effects occur once.
+    ApplySwitchCandidateTrace(battler);
     SetSwitchinField(battler);
     RefreshSwitchCandidateData();
     SetBattlerStatStagesForSwitchin(battler);
@@ -362,6 +414,15 @@ static void ApplySwitchCandidateEntry(enum BattlerId battler)
             ApplySwitchinAbilityToFoe(battler, foe);
     if (gAiLogicData->abilities[battler] == ABILITY_SUPERSWEET_SYRUP)
         GetBattlerPartyState(battler)->supersweetSyrup = TRUE;
+    if (GetBattlerAbility(battler) == ABILITY_IMPOSTER)
+    {
+        enum BattlerId target = GetImposterTransformTarget(battler);
+        if (target < MAX_BATTLERS_COUNT)
+        {
+            TransformBattlerData(battler, target);
+            RefreshSwitchCandidateData();
+        }
+    }
 }
 
 void AI_RefreshCandidateFieldEffects(void)
@@ -395,6 +456,8 @@ static void FinishSwitchCandidateEntries(u32 enteredMask, bool32 afterSwitch, bo
     for (enum BattlerId actor = 0; actor < gBattlersCount; actor++)
         if (IsBattlerAlive(actor))
         {
+            // Native Imposter has passed the general entry block, but the
+            // later ally phase still sees its copied ability and entry flag.
             ApplySwitchinAllyAbility(actor, enteredMask);
             ApplySwitchinWhiteHerb(actor);
         }
@@ -2887,6 +2950,17 @@ static u32 GetBestMonDoubles(enum BattlerId battler, enum SwitchType switchType)
                 AI_LoadSwitchCandidatePair(battler, slot, partner, other, FALSE);
             else
                 AI_LoadSwitchCandidate(battler, slot, FALSE);
+            if (switchType == SWITCH_AFTER_KO && gCurrentTurnActionNumber == gBattlersCount
+             && gBattleStruct->eventState.beforeFirstTurn == 0)
+            {
+                // Ordinary KO replacements precede EndTurnEvents' timer tick.
+                // Forecast the upcoming action turn: 2 becomes the boosted 1,
+                // while an existing 1 expires. Initial-entry hazard KOs do not
+                // pass that tick. Each candidate/final restore restores timers.
+                for (u32 side = 0; side < NUM_BATTLE_SIDES; side++)
+                    if (gSideTimers[side].retaliateTimer)
+                        gSideTimers[side].retaliateTimer--;
+            }
             s32 score = AI_EvaluateDoublesPosition(battler, noActionMask);
             if (score > bestScore || (score == bestScore && best != PARTY_SIZE && aceCost < bestAceCost))
             {
@@ -3247,7 +3321,7 @@ static void ApplySwitchinAllyAbility(enum BattlerId battler, u32 enteredMask)
         if (!HasPartnerTrainer(battler)
             && gBattleStruct->battlerState[ally].commanderSpecies == SPECIES_NONE
             && gBattleMons[ally].species == SPECIES_DONDOZO
-            && GET_BASE_SPECIES_ID(gBattleMons[battler].species) == SPECIES_TATSUGIRI)
+            && GET_BASE_SPECIES_ID(GetMonData(GetBattlerMon(battler), MON_DATA_SPECIES)) == SPECIES_TATSUGIRI)
         {
             gBattleStruct->battlerState[battler].commandingDondozo = TRUE;
             gBattleStruct->battlerState[ally].commanderSpecies = gBattleMons[battler].species;

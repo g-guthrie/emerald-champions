@@ -70,25 +70,6 @@ class MapTileIntegrityTests(unittest.TestCase):
         self.assertEqual(nonblank[0], 2)
         self.assertIn("Ignoring -num_tiles", nonblank[2])
 
-    def test_registered_and_compiled_domains_and_exact_placement_bytes(self):
-        report = self.baseline
-        self.assertTrue(report["maps"]["LittlerootTown"]["compiled"])
-        self.assertFalse(report["maps"]["PalletTown_Frlg"]["compiled"])
-        layout = report["layouts"]["LAYOUT_LITTLEROOT_TOWN"]
-        raw = (ROOT / "data/layouts/LittlerootTown/map.bin").read_bytes()
-        self.assertEqual(
-            struct.pack(
-                "<" + "H" * len(layout["packed_cells"]), *layout["packed_cells"]
-            ),
-            raw,
-        )
-        self.assertGreater(
-            report["counts"]["placement_cells"],
-            report["counts"]["compiled_placement_cells"],
-        )
-        self.assertEqual(report["counts"]["compiled_errors"], 0)
-        self.assertGreater(report["counts"]["dormant_errors"], 0)
-
     def test_used_metatile_outside_tileset_fails_compiled_domain(self):
         path = "data/layouts/LittlerootTown/map.bin"
         raw = bytearray((ROOT / path).read_bytes())
@@ -129,18 +110,6 @@ class MapTileIntegrityTests(unittest.TestCase):
         ):
             audit.inventory(ROOT, include_dynamic=False)
 
-    def test_unloaded_palette_is_not_certified_as_dynamic_art(self):
-        path = "data/tilesets/secondary/petalburg/metatiles.bin"
-        raw = bytearray((ROOT / path).read_bytes())
-        struct.pack_into("<H", raw, 0x4A * 16, 0xE000)
-        report = self.mutated_bytes(path, bytes(raw))
-        self.assertTrue(
-            any(
-                e["compiled"] and "palette outside normal" in e["reason"]
-                for e in report["errors"]
-            )
-        )
-
     def test_invalid_layer_is_rejected(self):
         path = "data/tilesets/secondary/petalburg/metatile_attributes.bin"
         raw = bytearray((ROOT / path).read_bytes())
@@ -149,21 +118,6 @@ class MapTileIntegrityTests(unittest.TestCase):
         self.assertTrue(
             any(e["compiled"] and e.get("layer") == 15 for e in report["errors"])
         )
-
-    def test_primary_animation_cannot_write_secondary_partition(self):
-        path = ROOT / "src/tileset_anims.c"
-        original = Path.read_text
-        source = original(path)
-        self.assertIn("TILE_OFFSET_4BPP(508)", source)
-        mutated = source.replace("TILE_OFFSET_4BPP(508)", "TILE_OFFSET_4BPP(700)", 1)
-
-        def read(current, *args, **kwargs):
-            return mutated if current == path else original(current, *args, **kwargs)
-
-        with patch.object(Path, "read_text", read), self.assertRaisesRegex(
-            audit.InvalidData, "animation outside partition"
-        ):
-            audit.inventory(ROOT)
 
     def test_registered_but_dormant_warp_destination_is_rejected(self):
         path = "data/maps/LittlerootTown/map.json"

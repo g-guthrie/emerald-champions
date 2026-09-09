@@ -6,10 +6,11 @@ is materialized exactly: species, held item, level (strict cap plus the
 authored offset), Ability, nature, Stat Points and moves.  Nothing here nudges
 levels or trims Stat Points; the authored numbers are the design.
 
-AI comes from the encounter's ``ai_profile`` line.  Every campaign trainer is
-sharp: full move evaluation, switching, and prediction.  Bosses add
-omniscience.  Difficulty is expressed through levels, team size and team
-composition, never by making an opponent play badly.
+AI comes from the encounter's ``ai_profile`` line and the compiled per-trainer
+battle plan. Every campaign trainer uses the same expert information. The
+bounded doubles evaluator owns response forecasting; the old generic
+Prediction flag redundantly searches predicted switches during initialization.
+Difficulty is expressed through levels, team size and team composition.
 """
 
 from __future__ import annotations
@@ -36,7 +37,7 @@ MON_RE = re.compile(
 # same expert information and decision capabilities; levels/rosters set difficulty.
 EXPERT_AI_PROFILE = [
     "Basic Trainer", "Omniscient", "Smart Switching", "Smart Mon Choices",
-    "Prediction", "Pp Stall Prevention", "Hp Aware", "Try To 2HKO",
+    "Pp Stall Prevention", "Hp Aware", "Try To 2HKO",
     "Powerful Status", "Know Opponent Party",
 ]
 AI_PROFILES = {"sharp": EXPERT_AI_PROFILE, "master": EXPERT_AI_PROFILE}

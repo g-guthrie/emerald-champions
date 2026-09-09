@@ -4,14 +4,31 @@ These exercise actual status transitions and corrupt-sector decoding, not GBA
 flash timing, power loss, or emulator reload callbacks.
 """
 from pathlib import Path
+import re
 import shutil
 import subprocess
 import tempfile
 import unittest
 
-from test_restart_integrity import declaration
-
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def declaration(source, signature):
+    """Extract a complete, brace-balanced declaration/function from game code."""
+    pattern = r"\s+".join(re.escape(part) for part in signature.split()) + r"\s*\{"
+    match = re.search(pattern, source)
+    if match is None:
+        raise AssertionError(f"cannot locate declaration: {signature}")
+    start = match.start()
+    opening = match.end() - 1
+    depth = 1
+    cursor = opening + 1
+    while depth:
+        depth += (source[cursor] == "{") - (source[cursor] == "}")
+        cursor += 1
+    if source[cursor:cursor + 1] == ";":
+        cursor += 1
+    return source[start:cursor] + "\n"
 
 
 def fixture_source():
@@ -180,6 +197,32 @@ static int Corruption(void)
             s->id = badIds[bad];
             CHECK(TryLoadSaveSlot(FULL_SAVE_SLOT, locations) == SAVE_STATUS_CORRUPT);
             CHECK(extraCopies == 0);
+            ValidSlot(1 - slot);
+            CHECK(TryLoadSaveSlot(FULL_SAVE_SLOT, locations) == SAVE_STATUS_ERROR);
+            CHECK(gSaveCounter == 1 - slot && extraCopies == NUM_SECTORS_PER_SLOT);
+            for (unsigned i = 0; i < NUM_SECTORS_PER_SLOT; i++) CHECK(destinations[i] == 100 + i);
+        }
+    // A valid sector ID/signature does not make a corrupt payload trustworthy.
+    // Mutate after computing the original checksum, never using the production
+    // checksum helper to manufacture the corrupted sector's expected result.
+    for (unsigned slot = 0; slot < NUM_SAVE_SLOTS; slot++)
+        for (unsigned corruptPayload = 0; corruptPayload < 2; corruptPayload++)
+        {
+            SeedFlash();
+            ValidSlot(slot);
+            struct SaveSector *s = &flash[slot * NUM_SECTORS_PER_SLOT];
+            if (corruptPayload)
+                s->data[0] ^= 1;
+            else
+                s->checksum ^= 1;
+            CHECK(TryLoadSaveSlot(FULL_SAVE_SLOT, locations) == SAVE_STATUS_CORRUPT);
+            CHECK(destinations[0] == 0xdeadbeef);
+            // The loader may copy individually valid sectors even when the
+            // complete save is rejected. Only the damaged sector must not copy.
+            extraCopies = 0;
+            for (unsigned i = 0; i < NUM_SECTORS_PER_SLOT; i++) destinations[i] = 0xdeadbeef;
+            // Recover only the intact alternate slot, not any of the invalid
+            // slot's otherwise well-formed sectors or its damaged payload.
             ValidSlot(1 - slot);
             CHECK(TryLoadSaveSlot(FULL_SAVE_SLOT, locations) == SAVE_STATUS_ERROR);
             CHECK(gSaveCounter == 1 - slot && extraCopies == NUM_SECTORS_PER_SLOT);

@@ -352,7 +352,7 @@ DewfordTown_Gym_Text_LauraPostBattle:
 DewfordTown_Gym_Text_LilithIntro:
 	.string "INTIMIDATE softens you, then SCRAGGY\n"
 	.string "dances into the space it made.\p"
-	.string "Weaken me and I only grow!$"
+	.string "We build on every opening!$"
 
 DewfordTown_Gym_Text_LilithDefeat:
 	.string "You brought a winning team!$"
@@ -362,8 +362,8 @@ DewfordTown_Gym_Text_LilithPostBattle:
 	.string "not one trick repeated twice.$"
 
 DewfordTown_Gym_Text_BrendenIntro:
-	.string "SAWK breaks through what should stop\n"
-	.string "it. MACHOP simply never misses.\p"
+	.string "MACHOP's NO GUARD beats accuracy\n"
+	.string "tricks. SAWK has MOLD BREAKER.\p"
 	.string "There is no safe angle here!$"
 
 DewfordTown_Gym_Text_BrendenDefeat:

@@ -3049,6 +3049,46 @@ static bool32 TryDancer(void)
     return FALSE;
 }
 
+enum BattlerId GetImposterTransformTarget(enum BattlerId battler)
+{
+    enum BattlerId target = GetOppositeBattler(battler);
+    if (IsDoubleBattle())
+        target = GetPartnerBattler(target);
+    if (!gBattleMons[battler].volatiles.overwrittenAbility
+     && IsBattlerAlive(target)
+     && !gBattleMons[target].volatiles.substitute
+     && !gBattleMons[target].volatiles.transformed
+     && !gBattleMons[battler].volatiles.transformed
+     && gBattleStruct->illusion[target].state != ILLUSION_ON
+     && !IsSemiInvulnerable(target, EXCLUDE_COMMANDER))
+        return target;
+    return MAX_BATTLERS_COUNT;
+}
+
+// Deterministic Transform data only. The native command owns eligibility,
+// scripts, controller output, knowledge recording and turn-order globals.
+void TransformBattlerData(enum BattlerId battler, enum BattlerId target)
+{
+    gBattleMons[battler].volatiles.transformed = TRUE;
+    gBattleMons[battler].volatiles.disabledMove = MOVE_NONE;
+    gBattleMons[battler].volatiles.disableTimer = 0;
+    gBattleMons[battler].volatiles.transformedMonSpecies = gBattleMons[battler].species;
+    gBattleMons[battler].volatiles.transformedMonPID = gBattleMons[target].personality;
+    if (B_TRANSFORM_SHINY >= GEN_4)
+        gBattleMons[battler].volatiles.isTransformedMonShiny = gBattleMons[target].isShiny;
+    else
+        gBattleMons[battler].volatiles.isTransformedMonShiny = gBattleMons[battler].isShiny;
+    gBattleMons[battler].volatiles.mimickedMoves = 0;
+    gBattleMons[battler].volatiles.usedMoves = 0;
+    GetBattlerPartyState(battler)->timesGotHit = GetBattlerPartyState(target)->timesGotHit;
+
+    // This native prefix deliberately excludes HP, level, item and status.
+    memcpy(&gBattleMons[battler], &gBattleMons[target], offsetof(struct BattlePokemon, pp));
+    gBattleMons[battler].volatiles.overwrittenAbility = GetBattlerAbility(target);
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+        gBattleMons[battler].pp[i] = min(5, GetMovePP(gBattleMons[battler].moves[i]));
+}
+
 u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum Ability ability, enum Move move, bool32 shouldAbilityTrigger)
 {
     u32 effect = 0;
@@ -3144,18 +3184,9 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
         case ABILITY_IMPOSTER:
             if (gBattleStruct->battlerState[battler].switchIn)
             {
-                enum BattlerId diagonalBattler = GetOppositeBattler(battler);
-                if (IsDoubleBattle())
-                    diagonalBattler = GetPartnerBattler(diagonalBattler);
-
+                enum BattlerId diagonalBattler = GetImposterTransformTarget(battler);
                 // Imposter only activates when the battler first switches in
-                if (!gBattleMons[battler].volatiles.overwrittenAbility
-                    && IsBattlerAlive(diagonalBattler)
-                    && !gBattleMons[diagonalBattler].volatiles.substitute
-                    && !gBattleMons[diagonalBattler].volatiles.transformed
-                    && !gBattleMons[battler].volatiles.transformed
-                    && gBattleStruct->illusion[diagonalBattler].state != ILLUSION_ON
-                    && !IsSemiInvulnerable(diagonalBattler, EXCLUDE_COMMANDER))
+                if (diagonalBattler < MAX_BATTLERS_COUNT)
                 {
                     SaveBattlerAttacker(gBattlerAttacker);
                     SaveBattlerTarget(gBattlerTarget);
@@ -11097,18 +11128,19 @@ static const u16 sGen5ProtectFailChances[] =
     27
 };
 
-bool32 CanUseMoveConsecutively(enum BattlerId battler)
+u32 GetConsecutiveMoveSuccessDenominator(u32 moveUses)
 {
-    u32 moveUses = gBattleMons[battler].volatiles.consecutiveMoveUses;
     if (moveUses >= ARRAY_COUNT(sProtectFailChances))
         moveUses = ARRAY_COUNT(sProtectFailChances) - 1;
 
-    u32 failChances;
-
     if (B_PROTECT_FAILURE_RATE < GEN_5)
-        failChances = sProtectFailChances[moveUses];
-    else
-        failChances = sGen5ProtectFailChances[moveUses];
+        return sProtectFailChances[moveUses];
+    return sGen5ProtectFailChances[moveUses];
+}
+
+bool32 CanUseMoveConsecutively(enum BattlerId battler)
+{
+    u32 failChances = GetConsecutiveMoveSuccessDenominator(gBattleMons[battler].volatiles.consecutiveMoveUses);
 
     if (failChances == 1)
         return TRUE;

@@ -98,7 +98,7 @@ LilycoveCity_CoveLilyMotel_2F_Text_BuffelChallenge:
 	.string "Want to test one of my favorite teams?$"
 
 LilycoveCity_CoveLilyMotel_2F_Text_BuffelDefeat:
-	.string "You broke the redirect before the setup.$"
+	.string "You've given me something to think on!$"
 
 LilycoveCity_CoveLilyMotel_2F_Text_BuffelAfter:
 	.string "The best battle is difficult, readable,\n"

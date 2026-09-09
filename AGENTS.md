@@ -1,5 +1,107 @@
 # Working on Emerald Champions
 
+## Executable-AI restart — latest user instruction
+
+The user explicitly said to start over and fix the AI for each battle as it is
+handled. Restart at E0001; pause later trainer-authoring batches and preserve
+their existing edits. Previous design/source reviews do not count as encounter
+AI completion. Run relevant native decision scenarios using actual compiled
+trainer parties and native stat generation, diagnose/fix executable failures,
+rerun the scenarios, and report each completed battle separately in the main
+chat with team changes, AI changes, observed decisions, rating and remaining
+limits before advancing. Human-readable plan/crack prose is not executable AI.
+Do not force a move just to match a hoped-for script or read the human's pending
+commands. Keep the AI bounded and measure latency as shared logic changes.
+Temporary diagnostic scenarios are not a new permanent per-battle test suite;
+retain only distinct necessary regressions under the user's test-minimization
+policy. A diagnostic PASS means execution, not tactical correctness.
+
+## Static-check audit prerequisite — latest user instruction
+
+The user explicitly requests deleting tests unless they are absolutely necessary.
+Remove stale design locks, brittle source-text checks, duplicated scaffolding and
+checks without distinct observable value. Preserve only a small, justified set
+for current save/artifact integrity and demonstrated serious regressions; do not
+rebuild a large suite or change gameplay to make old expectations pass.
+
+Pause further trainer authoring until all current static checks have been audited
+against their actual consumers for stale inputs, wrong contracts, weak assertions,
+false passes and false rejections. Audit findings are not authorization to change
+gameplay to satisfy a checker. Track the reviewed check inventory and distinguish
+source review, negative probes and executed tests. Every subsequently completed
+battle must receive its own confirmation and intention rating in the main chat;
+subagent messages and review documents do not substitute for that confirmation.
+
+## Complete trainer authoring pass — latest user instruction
+
+The user explicitly requested subagents to hand-author and optimize every current
+campaign trainer battle, authorizing changes to team composition, moves, items,
+abilities and Stat Points where they improve the encounter. Account for the
+campaign-wide distribution of trainer species and strategies, not just isolated
+team strength. This supersedes the earlier five-encounter scope and any blanket
+loadout/stat preservation rule. Preserve progression, live caps/difficulty
+offsets, gym identities, current party sizes, the repaired level-3 rescue, wild
+habitat work and unrelated changes unless a concrete conflict requires discussion.
+
+Maintain individual branch coverage and report each completed battle in chat
+with an honest intention-based 1–10 rating; below 10, explain how it could be
+better. Ratings are design judgments, not measured win rates. Do not label an
+inventory, unchanged prose, or generic AI test as individual battle completion.
+Track intended lead, partner payoff, reserve transitions, counterplay, investment
+and speed logic, native mechanic constraints, and species/strategy repetition.
+Existing good choices may be retained with explicit reasons; no change quota.
+One owner runs canonical materialization; parallel authors may edit only their
+assigned encounter blocks and individual review records. Preserve concurrent
+edits. Record native testing separately from static/design completion.
+
+## September 8 repair audit — current instruction
+
+The user rejected the 5.1 redesign as reliable authority and requested a game-wide
+audit and fixes, with proactive subagents. Current explicit changes: the Birch
+rescue opponents are level 3; choosing two starters leads straight into the rescue
+without pre-fight team editing; the second wild overworld actor animates; the
+first Center tool handout transitions naturally into an optional healing offer.
+Repair synchronous battle stalls and faulty strategy with fast, coordinated,
+per-battle instructions, including weather, redirection and Trick Room. Audit
+actual wild distribution and trainer quality. The Cohesion Book is historical
+design input, not an immutable specification or proof of correct gameplay.
+These instructions supersede conflicting book implementation requirements below.
+
+The user subsequently approved a habitat/discovery revision and explicitly
+requested stronger early choices, especially Fighting options such as Timburr.
+Early rosters may change to provide useful competitive tools. Preserve early
+powerful discoveries (including Pheromosa and Kartana), babies, and demanding
+trainer/gym difficulty; do not weaken their stats or move them later to create
+discovery pacing. The implemented opening adds Mienfoo on Route101, Timburr and
+Pachirisu on Route102, with existing free preparation. Land duplicate slots now
+deliberately emphasize habitat residents; do not refill them with generic
+species. Exact Surf/rod species live in `wild_route_sheet.json`; the generator
+copies them without changing land, levels, or encounter rates. See
+`docs/WILD_HABITAT_REVISION_2026_09_08.md` for the current changes and evidence.
+
+The user subsequently approved every redistribution recommendation in
+`docs/WILD_AREA_RATINGS_2026_09_08.md`. Preserve its 30 keep decisions and the
+stronger early choices while applying the 108 area revisions. Their latest
+correction requires Pineco, Heracross and Ferroseed in accessible grass during
+the first Petalburg Woods visit: Rock Smash is not available then and must not
+gate those early choices. Rock Smash may offer supplemental catches. This
+correction supersedes any conflicting placement in the approved report.
+The completed 108-area implementation and production evidence are in
+`docs/WILD_AREA_REVISION_2026_09_08.md`; the numerical ratings remain a
+pre-change snapshot, not claims of fully playtested campaign balance.
+The user then authorized further discretionary wild-distribution refinements.
+The follow-up promotes Route123's orchard to mature residents (including
+Hydrapple and Arboliva) and adds Crustle at 25% to the main Woods Rock Smash
+table. Preserve the first-visit grass Heracross/Pineco/Ferroseed access.
+See `docs/WILD_AREA_POLISH_2026_09_08.md` for exact changes and evidence.
+
+The user subsequently approved raising trainer-strategy quality with targeted
+improvements, after discussing Perish Trap, Storm Drain, Steam Engine and creative
+ability partnerships. That authorizes a focused pass on existing encounters'
+teams and executable tactics. Preserve gym identities, current party sizes and
+level/cap settings; verify the intended combo and useful counterplay. The earlier
+instruction to preserve every loadout is not a veto on these approved upgrades.
+
 Preserve the current game design. Fix demonstrated bugs and refactor without changing behavior. Discuss changes to progression, availability, economy, difficulty tuning, or player options before implementing them. Retry restarts the current battle; Reload restores the last saved game. Both are intentional and must remain separate.
 
 The user-approved campaign direction (September 5, 2026) intentionally demands competitive knowledge from the opening. Easy/Normal/Hard are global opponent-level calibration offsets, not different teams or AI. Prefer coordinated, demanding battles over filler. The route-conversation reduction and gym coordination changes are deliberate; old encounter totals, percentage quotas, and historical prose must not restore retired fights or override the current authoring. This campaign revision does not require compatibility with pre-tuning save files. New design changes can be discussed and revised rather than treating old documents as immutable requirements.

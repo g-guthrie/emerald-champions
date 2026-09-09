@@ -898,4 +898,12 @@
 #endif
 #define TRAINER_PARTNER(partner)           (MAX_TRAINERS_COUNT + partner)
 
+#if TESTING
+// Append two synthetic records after campaign IDs without changing
+// MAX_TRAINERS_COUNT: that constant also fixes the campaign flag layout.
+#include "test/trainer_ids.h"
+#undef TRAINERS_COUNT
+#define TRAINERS_COUNT TEST_TRAINERS_COUNT
+#endif
+
 #endif  // GUARD_CONSTANTS_OPPONENTS_H

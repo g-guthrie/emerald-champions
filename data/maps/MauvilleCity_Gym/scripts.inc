@@ -321,7 +321,7 @@ MauvilleCity_Gym_Text_BenIntro:
 	.string "What is left in your bag?$"
 
 MauvilleCity_Gym_Text_BenDefeat:
-	.string "You reversed my reverse current!$"
+	.string "Our circuit couldn't hold!$"
 
 MauvilleCity_Gym_Text_BenPostBattle:
 	.string "CHARJABUG powers special attacks\n"
@@ -336,7 +336,7 @@ MauvilleCity_Gym_Text_VivianIntro:
 	.string "Split us, or lose to both!$"
 
 MauvilleCity_Gym_Text_VivianDefeat:
-	.string "You found a path around every immunity!$"
+	.string "Our partnership wasn't enough!$"
 
 MauvilleCity_Gym_Text_VivianPostBattle:
 	.string "Do not press ELECTRIC attacks into the\n"

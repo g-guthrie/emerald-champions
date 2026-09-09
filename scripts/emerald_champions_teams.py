@@ -5,6 +5,7 @@
 truth for every campaign trainer team.  Each block is one trainer branch:
 
     ## E0002 TRAINER_CALVIN_1 class=regular
+    strategy: SETUP
     plan: what the team is trying to do
     crack: how the player is meant to beat it
     ZORUA @EXPERT_BELT ILLUSION TIMID SS -1 | DARK_PULSE, EXTRASENSORY, SUCKER_PUNCH, PROTECT
@@ -17,11 +18,17 @@ level cap and is materialized verbatim. At battle creation, all campaign
 trainer Pokemon receive the live-cap floor in src/difficulty.c before the global
 difficulty offset, including gyms and the four-Pokemon opening rival.
 
-The battle class selects the AI profile. ``--write`` rewrites the master's team
-and design fields in place while preserving every other encounter field
-(ids, chronology, location, caps, dialogue status).  ``--check`` compiles to a
-scratch master and runs the static audit, the trainer implementation and the
-runtime-coherence and Ability-legality gates against scratch output.
+``strategy:`` supplies explicit contextual instructions to the bounded doubles
+planner (comma-separated names, or NONE). ``plan:`` and ``crack:`` explain the
+team but are never executable instructions. ``tactic: KIND ACTOR MOVE RECIPIENT``
+names a concrete partnership to consider when selecting reserves; it never
+overrides move legality, survival or the evaluated payoff. Classes retain their profile names
+as aliases of the common expert profile. ``--write`` rewrites the master's team
+and design fields and the trainer-indexed plan table while preserving every other encounter field
+(ids, chronology, location, caps, dialogue status). ``--check`` compares the
+compiled strategy table, materializes a scratch trainer party and validates
+that scratch party's configured Abilities. It does not compare the actual
+master/party outputs or establish move legality or strategic quality.
 """
 
 from __future__ import annotations
@@ -40,6 +47,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 TEAMS = ROOT / "data/emerald_champions/emerald_champions_battle_teams.txt"
 MASTER = ROOT / "data/emerald_champions/emerald_champions_master_battle_design.txt"
+PLANS = ROOT / "src/data/emerald_champions_battle_plans.h"
+STRATEGIES = {"TRICK_ROOM", "RAIN", "SUN", "SAND", "SNOW", "REDIRECTION", "SETUP", "TAILWIND", "ALLY_COMBO", "PERISH_TRAP", "PRESSURE"}
+TACTICS = {"ACTIVATE", "AFTER_YOU", "INSTRUCT", "COMMANDER", "SUPPRESS"}
 ENCOUNTER_RE = re.compile(r"(?m)^=== ENCOUNTER (\d{4}) ===$")
 BRANCH_RE = re.compile(r"(?m)^--- BRANCH ([A-Z0-9_]+) ---$")
 HEADER_RE = re.compile(r"^## E(\d{4}) (TRAINER_[A-Z0-9_]+)(?:\s+class=([a-z_]+))?\s*$")
@@ -119,6 +129,8 @@ class Branch:
     ai: list[str] = field(default_factory=list)
     mons: list[Mon] = field(default_factory=list)
     line: int = 0
+    strategy: list[str] = field(default_factory=list)
+    tactics: list[tuple[str, str, str, str]] = field(default_factory=list)
 
 
 def parse_points(text: str, where: str) -> str:
@@ -168,6 +180,18 @@ def read_teams(path: Path = TEAMS) -> list[Branch]:
                 raise SystemExit(f"{where}: unknown AI trait(s) {unknown}; known: {sorted(AI_TRAITS)}")
             current.ai = wanted
             continue
+        if line.startswith("strategy:"):
+            current.strategy = [value.strip() for value in line[9:].split(",") if value.strip() != "NONE"]
+            unknown = set(current.strategy) - STRATEGIES
+            if unknown:
+                raise SystemExit(f"{where}: unknown battle strategies {sorted(unknown)}")
+            continue
+        if line.startswith("tactic:"):
+            fields = line[7:].split()
+            if len(fields) != 4 or fields[0] not in TACTICS:
+                raise SystemExit(f"{where}: expected tactic: KIND ACTOR MOVE RECIPIENT")
+            current.tactics.append(tuple(fields))
+            continue
         mon = MON_RE.match(line)
         if not mon:
             raise SystemExit(f"{where}: cannot parse team line {line!r}")
@@ -192,6 +216,19 @@ def read_teams(path: Path = TEAMS) -> list[Branch]:
             raise SystemExit(f"{path.name}:{branch.line}: {branch.trainer} has no Pokemon")
         if len(branch.mons) > 6:
             raise SystemExit(f"{path.name}:{branch.line}: {branch.trainer} has more than six Pokemon")
+        for kind, actor, move, recipient in branch.tactics:
+            actors = [mon for mon in branch.mons if mon.species == actor]
+            if not actors or not any(mon.species == recipient for mon in branch.mons):
+                raise SystemExit(f"{branch.trainer}: tactic references an absent actor or recipient")
+            if kind in {"COMMANDER", "SUPPRESS"}:
+                ability = "COMMANDER" if kind == "COMMANDER" else "NEUTRALIZING_GAS"
+                valid = move == "NONE" and any(mon.ability == ability for mon in actors)
+            else:
+                valid = any(move in mon.moves for mon in actors)
+                if kind in {"AFTER_YOU", "INSTRUCT"}:
+                    valid = valid and move == kind
+            if not valid:
+                raise SystemExit(f"{branch.trainer}: tactic actor cannot execute {kind} {move}")
         if branch.plan and branch.crack:
             plans.setdefault(branch.encounter, (branch.plan, branch.crack))
     for branch in branches:
@@ -232,12 +269,31 @@ def split_encounters(text: str) -> tuple[str, list[tuple[int, str]]]:
 def render_branch(block_branch: str, branch: Branch) -> str:
     head, _sep, _tail = block_branch.partition("team:\n")
     head = re.sub(r"(?m)^ai_extra:.*\n", "", head)
+    head = re.sub(r"(?m)^strategy:.*\n", "", head)
+    head = re.sub(r"(?m)^tactic:.*\n", "", head)
+    head = set_field(head, "strategy", ", ".join(branch.strategy) or "NONE", after="format")
+    if branch.tactics:
+        head = head.rstrip() + "\n" + "\n".join("tactic: " + " ".join(tactic) for tactic in branch.tactics) + "\n"
     if branch.ai:
         head = set_field(head, "ai_extra", ", ".join(branch.ai), after="format")
     lines = [head + "team:"]
     lines.extend(mon.master_line(index) for index, mon in enumerate(branch.mons, 1))
     lines.append("source_note: Hand-authored Emerald Champions team; implementation must match exactly.")
     return "\n".join(lines) + "\n"
+
+
+def render_plans(branches: list[Branch]) -> str:
+    """Compile explicit authoring, never infer a strategy from moves at runtime."""
+    lines = ["// Generated by scripts/emerald_champions_teams.py --write; edit the teams source.",
+             "static const u16 sEmeraldChampionsBattlePlans[TRAINERS_COUNT] =", "{"]
+    for branch in branches:
+        flags = " | ".join("EC_BATTLE_PLAN_" + value for value in branch.strategy) or "0"
+        lines.append(f"    [{branch.trainer}] = {flags},")
+    lines += ["};", "", "static const struct EmeraldChampionsBattleTactic sEmeraldChampionsBattleTactics[] =", "{"]
+    for branch in branches:
+        for kind, actor, move, recipient in branch.tactics:
+            lines.append(f"    {{{branch.trainer}, SPECIES_{actor}, SPECIES_{recipient}, MOVE_{move}, EC_BATTLE_TACTIC_{kind}}},")
+    return "\n".join(lines + ["};", ""])
 
 
 def compile_master(branches: list[Branch], master_text: str) -> str:
@@ -322,6 +378,8 @@ def seed_from_master(master_text: str) -> str:
             lines.append(f"# {fmt}")
             if line_value(segment, "ai_extra"):
                 lines.append("ai: " + line_value(segment, "ai_extra"))
+            lines.append("strategy: " + (line_value(segment, "strategy") or "NONE"))
+            lines.extend(re.findall(r"(?m)^tactic: .*$", segment))
             if index == 0:
                 lines.append("plan: " + line_value(block, "theme_and_tempo"))
                 lines.append("crack: " + line_value(block, "intentional_weakness"))
@@ -349,7 +407,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--seed", action="store_true", help="bootstrap the teams file from the current master")
     parser.add_argument("--write", action="store_true", help="rewrite the master and trainers.party")
-    parser.add_argument("--check", action="store_true", help="compile to scratch and run every static gate")
+    parser.add_argument("--check", action="store_true", help="compare strategy table and validate scratch trainer materialization/Abilities")
     parser.add_argument("--summary", action="store_true", help="print class, legendary and Mega coverage")
     args = parser.parse_args()
 
@@ -386,11 +444,14 @@ def main() -> None:
 
     if args.write:
         MASTER.write_text(master_text)
+        PLANS.write_text(render_plans(branches))
         run([sys.executable, "scripts/implement_emerald_champions_master_battles.py"])
         print(f"wrote {MASTER} and src/data/trainers.party")
         return
 
     if args.check:
+        if not PLANS.exists() or PLANS.read_text() != render_plans(branches):
+            raise SystemExit("compiled battle plans differ from authored strategies; run --write")
         with tempfile.TemporaryDirectory() as scratch:
             scratch_master = Path(scratch) / "master.txt"
             scratch_party = Path(scratch) / "trainers.party"
