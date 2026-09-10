@@ -460,6 +460,7 @@ PlayersHouse_1F_EventScript_ReceivedSSTicket::
 	delay 20
 	msgbox PlayersHouse_1F_Text_DadShouldStayLonger, MSGBOX_DEFAULT
 	closemessage
+	goto_if_set FLAG_LATIOS_OR_LATIAS_ROAMING, PlayersHouse_1F_EventScript_LatiReportFinished
 	setflag FLAG_SYS_TV_LATIAS_LATIOS
 	special TurnOnTVScreen
 	delay 60
@@ -483,6 +484,7 @@ PlayersHouse_1F_EventScript_ReceivedSSTicket::
 	copyvar VAR_ROAMER_POKEMON, VAR_RESULT
 	msgbox PlayersHouse_1F_Text_StillUnknownPokemon, MSGBOX_DEFAULT
 	closemessage
+PlayersHouse_1F_EventScript_LatiReportFinished::
 	setvar VAR_LITTLEROOT_HOUSES_STATE_MAY, 4
 	setvar VAR_LITTLEROOT_HOUSES_STATE_BRENDAN, 4
 	releaseall
@@ -494,6 +496,7 @@ PlayersHouse_1F_EventScript_SSTicketNoRoom::
 
 @ Never called.
 PlayersHouse_1F_EventScript_AirLatiBroadcast::
+	goto_if_set FLAG_LATIOS_OR_LATIAS_ROAMING, PlayersHouse_1F_EventScript_LatiReportFinished
 	setflag FLAG_SYS_TV_LATIAS_LATIOS
 	return
 

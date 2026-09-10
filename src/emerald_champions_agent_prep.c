@@ -27,7 +27,7 @@ EWRAM_DATA volatile u32 gEcAgentPrepMoves[EC_AGENT_PREP_PARTY_SIZE][EC_AGENT_PRE
 EWRAM_DATA volatile u32 gEcAgentPrepNature[EC_AGENT_PREP_PARTY_SIZE] = {0};
 EWRAM_DATA volatile u32 gEcAgentPrepAbility[EC_AGENT_PREP_PARTY_SIZE] = {0};
 EWRAM_DATA volatile u32 gEcAgentPrepItem[EC_AGENT_PREP_PARTY_SIZE] = {0};
-EWRAM_DATA volatile u32 gEcAgentPrepStatPoints[EC_AGENT_PREP_PARTY_SIZE][EC_AGENT_PREP_STAT_COUNT] = {{0}};
+EWRAM_DATA volatile u32 gEcAgentPrepEvs[EC_AGENT_PREP_PARTY_SIZE][EC_AGENT_PREP_STAT_COUNT] = {{0}};
 
 static EWRAM_DATA struct Pokemon sEcAgentPreparedParty[PARTY_SIZE] = {0};
 
@@ -89,21 +89,28 @@ static bool32 ApplyOverrides(struct Pokemon *mon, u32 slot)
     }
     for (u32 stat = 0; stat < NUM_STATS; stat++)
     {
-        u32 points = gEcAgentPrepStatPoints[slot][stat];
+        u32 points = gEcAgentPrepEvs[slot][stat];
         if (points == EC_AGENT_PREP_KEEP)
+        {
+            // An override is one complete spread or six KEEP sentinels.
+            if (gEcAgentPrepEvs[slot][0] != EC_AGENT_PREP_KEEP)
+                return FALSE;
             continue;
-        if (points > EC_STAT_POINTS_PER_STAT)
+        }
+        if (gEcAgentPrepEvs[slot][0] == EC_AGENT_PREP_KEEP)
+            return FALSE;
+        if (points > MAX_PER_STAT_EVS)
             return FALSE;
         total += points;
     }
-    if (gEcAgentPrepStatPoints[slot][0] != EC_AGENT_PREP_KEEP)
+    if (gEcAgentPrepEvs[slot][0] != EC_AGENT_PREP_KEEP)
     {
-        if (total != EC_STAT_POINT_BUDGET)
+        if (total > MAX_TOTAL_EVS)
             return FALSE;
         for (u32 stat = 0; stat < NUM_STATS; stat++)
         {
-            u8 points = gEcAgentPrepStatPoints[slot][stat];
-            SetMonData(mon, EC_STAT_POINT_DATA(stat), &points);
+            u8 points = gEcAgentPrepEvs[slot][stat];
+            SetMonData(mon, EC_EV_DATA(stat), &points);
         }
     }
     SetMonData(mon, MON_DATA_PP_BONUSES, &ppBonuses);
@@ -160,7 +167,7 @@ void EmeraldChampionsAgentPrepPoll(void)
         }
         if (!ApplyOverrides(&sEcAgentPreparedParty[slot], slot))
         {
-            Fail(EC_AGENT_PREP_BAD_STAT_POINTS, slot);
+            Fail(EC_AGENT_PREP_BAD_EVS, slot);
             return;
         }
     }

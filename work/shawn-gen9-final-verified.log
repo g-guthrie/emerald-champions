@@ -1,0 +1,856 @@
+tools/scaninc/scaninc -M build/emerald-test/test/battle/ai/emerald_champions_plans.d -g build/assets -I include -I tools/agbcc/include test/battle/ai/emerald_champions_plans.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/battle/ai/emerald_champions_plans.o test/battle/ai/emerald_champions_plans.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 4
+[1] EC live review Shawn: terrain against a faster incoming foe: [32mPASS[0m
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Electric Terrain target=1
+AI decision turn=1 actor=2 move=Ice Punch target=3
+AI decision turn=1 actor=3 move=Psychic target=2
+AI decision turn=2 actor=1 move=Thunderbolt target=2
+AI decision turn=2 actor=3 move=Thunderbolt target=2
+REVIEW_AFTER board=10 turns=1 reserves=0 species=1327/958 HP=95/77 foes=88/88 faints=0/1 initialFrames=39
+REVIEW_STATE actor=1 move=Electric Terrain PP=15/10/9/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=280 item=472
+REVIEW_STATE actor=3 move=Psychic PP=15/9/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=207 item=479
+SHAWN_SPEED terrain=3 raichu=204 xatu=105
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Electric Terrain target=1
+AI decision turn=1 actor=2 move=Ice Punch target=3
+AI decision turn=1 actor=3 move=Psychic target=2
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Thunderbolt target=2
+AI decision turn=2 actor=2 move=Psychic target=3
+AI decision turn=2 actor=3 move=Thunderbolt target=2
+AI decision turn=3 actor=1 move=Thunderbolt target=0
+AI decision turn=3 actor=3 move=Thunderbolt target=0
+REVIEW_AFTER board=10 turns=2 reserves=0 species=1327/958 HP=61/69 foes=8/0 faints=0/2 initialFrames=39
+REVIEW_STATE actor=1 move=Thunderbolt PP=14/10/9/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=280 item=472
+REVIEW_STATE actor=3 move=Thunderbolt PP=14/9/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=207 item=479
+SHAWN_SPEED terrain=3 raichu=204 xatu=105
+[0] EC live review Shawn timing: six-player bench with Mega reserve: [32mPASS[0m
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Thunderbolt target=2
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Psychic target=0
+AI decision turn=2 actor=1 move=Thunderbolt target=2
+AI decision turn=2 actor=3 move=Psychic target=0
+REVIEW_AFTER board=99 turns=1 reserves=0 species=1327/958 HP=129/85 foes=76/88 faints=0/0 initialFrames=50
+REVIEW_STATE actor=1 move=Thunderbolt PP=14/10/10/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=280 item=472
+REVIEW_STATE actor=3 move=Psychic PP=15/9/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=207 item=479
+REVIEW_TIMING setup=6 bothActors=47 complete=53
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Thunderbolt target=2
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Mach Punch target=0
+AI decision turn=2 actor=1 move=Thunderbolt target=2
+AI decision turn=2 actor=3 move=Mach Punch target=0
+REVIEW_AFTER board=99 turns=1 reserves=1 species=1065/1307 HP=77/91 foes=76/88 faints=0/0 initialFrames=22
+REVIEW_STATE actor=1 move=Thunderbolt PP=14/5/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=523
+REVIEW_STATE actor=3 move=Mach Punch PP=15/19/5/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=89 item=442
+REVIEW_TIMING setup=5 bothActors=10 complete=15
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Thunderbolt target=2
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Thunderbolt target=2
+AI decision turn=2 actor=3 move=Thunderbolt target=0
+REVIEW_AFTER board=99 turns=1 reserves=2 species=604/181 HP=119/118 foes=76/88 faints=0/0 initialFrames=48
+REVIEW_STATE actor=1 move=Thunderbolt PP=14/15/10/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=503
+REVIEW_STATE actor=3 move=Protect PP=15/10/5/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=9 item=307
+REVIEW_TIMING setup=7 bothActors=47 complete=54
+[2] EC live review Shawn: terrain offense and Mega reserves: [32mPASS[0m
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Electric Terrain target=1
+AI decision turn=1 actor=2 move=Ice Punch target=3
+AI decision turn=1 actor=3 move=Psychic target=2
+AI decision turn=2 actor=1 move=Thunderbolt target=0
+AI decision turn=2 actor=3 move=Thunderbolt target=0
+REVIEW_AFTER board=0 turns=1 reserves=0 species=1327/958 HP=95/77 foes=88/0 faints=0/1 initialFrames=39
+REVIEW_STATE actor=1 move=Electric Terrain PP=15/10/9/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=280 item=472
+REVIEW_STATE actor=3 move=Psychic PP=15/9/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=207 item=479
+SHAWN_FIELD terrain=3 timer=4 charge=0/0 speed=40/204 nativeSpeed=40/102
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Electric Terrain target=1
+AI decision turn=1 actor=2 move=Ice Punch target=3
+AI decision turn=1 actor=3 move=Psychic target=2
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Thunderbolt target=0
+AI decision turn=2 actor=3 move=Thunderbolt target=0
+AI decision turn=3 actor=1 move=Thunderbolt target=0
+AI decision turn=3 actor=3 move=Thunderbolt target=0
+REVIEW_AFTER board=0 turns=2 reserves=0 species=1327/958 HP=103/69 foes=7/0 faints=0/1 initialFrames=39
+REVIEW_STATE actor=1 move=Thunderbolt PP=14/10/9/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=280 item=472
+REVIEW_STATE actor=3 move=Thunderbolt PP=14/9/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=207 item=479
+SHAWN_FIELD terrain=3 timer=3 charge=0/0 speed=40/204 nativeSpeed=40/102
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Electric Terrain target=1
+AI decision turn=1 actor=2 move=Ice Punch target=3
+AI decision turn=1 actor=3 move=Psychic target=2
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Thunderbolt target=0
+AI decision turn=2 actor=3 move=Thunderbolt target=0
+AI decision turn=3 actor=0 move=Double-Edge target=1
+AI decision turn=3 actor=1 move=Thunderbolt target=0
+AI decision turn=3 actor=3 move=Thunderbolt target=0
+REVIEW_AFTER board=0 turns=3 reserves=0 species=1327/958 HP=103/61 foes=0/0 faints=0/2 initialFrames=39
+REVIEW_STATE actor=1 move=Thunderbolt PP=14/10/9/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=280 item=472
+REVIEW_STATE actor=3 move=Thunderbolt PP=13/9/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=207 item=479
+SHAWN_FIELD terrain=3 timer=3 charge=0/0 speed=40/204 nativeSpeed=40/102
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Thunderbolt target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Nasty Plot target=3
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Psychic target=2
+REVIEW_AFTER board=1 turns=1 reserves=0 species=1327/958 HP=83/75 foes=0/104 faints=0/1 initialFrames=34
+REVIEW_STATE actor=1 move=Thunderbolt PP=14/10/10/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=280 item=472
+REVIEW_STATE actor=3 move=Nasty Plot PP=15/10/19/5 Atk=6 Def=6 SpA=8 SpD=6 Spe=6 status=0 ability=207 item=479
+SHAWN_FIELD terrain=0 timer=0 charge=0/0 speed=40/102 nativeSpeed=40/102
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Thunderbolt target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Nasty Plot target=3
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Psychic target=2
+REVIEW_AFTER board=1 turns=2 reserves=0 species=1327/958 HP=83/67 foes=0/0 faints=0/2 initialFrames=34
+REVIEW_STATE actor=1 move=Protect PP=14/10/10/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=280 item=472
+REVIEW_STATE actor=3 move=Psychic PP=15/9/19/5 Atk=6 Def=6 SpA=8 SpD=6 Spe=6 status=0 ability=207 item=479
+SHAWN_FIELD terrain=0 timer=0 charge=0/0 speed=40/102 nativeSpeed=40/102
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Thunderbolt target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Thunderbolt target=0
+AI decision turn=2 actor=3 move=Thunderbolt target=0
+REVIEW_AFTER board=2 turns=1 reserves=0 species=1327/958 HP=124/85 foes=76/104 faints=0/0 initialFrames=48
+REVIEW_STATE actor=1 move=- PP=15/10/10/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=280 item=472
+REVIEW_STATE actor=3 move=Protect PP=15/10/20/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=207 item=479
+SHAWN_FIELD terrain=0 timer=0 charge=0/0 speed=40/102 nativeSpeed=40/102
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Thunderbolt target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Thunderbolt target=0
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=Thunderbolt target=0
+AI decision turn=3 actor=1 move=Electric Terrain target=1
+AI decision turn=3 actor=3 move=Thunderbolt target=2
+REVIEW_AFTER board=2 turns=2 reserves=0 species=1327/958 HP=129/44 foes=0/104 faints=0/1 initialFrames=48
+REVIEW_STATE actor=1 move=Thunderbolt PP=14/10/10/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=280 item=472
+REVIEW_STATE actor=3 move=Thunderbolt PP=14/10/20/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=207 item=479
+SHAWN_FIELD terrain=0 timer=0 charge=0/0 speed=40/102 nativeSpeed=40/102
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Thunderbolt target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Thunderbolt target=0
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=Thunderbolt target=0
+AI decision turn=3 actor=2 move=Scald target=3
+AI decision turn=3 actor=1 move=Electric Terrain target=1
+AI decision turn=3 actor=3 move=Thunderbolt target=2
+AI decision turn=4 actor=1 move=Thunderbolt target=2
+AI decision turn=4 actor=3 move=Thunderbolt target=2
+REVIEW_AFTER board=2 turns=3 reserves=0 species=1327/958 HP=129/36 foes=0/53 faints=0/1 initialFrames=48
+REVIEW_STATE actor=1 move=Electric Terrain PP=14/10/9/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=280 item=472
+REVIEW_STATE actor=3 move=Thunderbolt PP=13/10/20/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=207 item=479
+SHAWN_FIELD terrain=3 timer=4 charge=0/0 speed=40/204 nativeSpeed=40/102
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Thunderbolt target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Thunderbolt target=0
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=Thunderbolt target=0
+AI decision turn=3 actor=2 move=Scald target=3
+AI decision turn=3 actor=1 move=Electric Terrain target=1
+AI decision turn=3 actor=3 move=Thunderbolt target=2
+AI decision turn=4 actor=2 move=Scald target=3
+AI decision turn=4 actor=1 move=Thunderbolt target=2
+AI decision turn=4 actor=3 move=Thunderbolt target=2
+REVIEW_AFTER board=2 turns=4 reserves=0 species=1327/958 HP=129/28 foes=0/0 faints=0/2 initialFrames=48
+REVIEW_STATE actor=1 move=Electric Terrain PP=14/10/9/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=280 item=472
+REVIEW_STATE actor=3 move=Thunderbolt PP=12/10/20/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=207 item=479
+SHAWN_FIELD terrain=3 timer=4 charge=0/0 speed=40/204 nativeSpeed=40/102
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Air Slash target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=2
+AI switch turn=1 actor=3 party=5
+AI decision turn=2 actor=1 move=Thunderbolt target=2
+AI decision turn=2 actor=3 move=Protect target=3
+REVIEW_AFTER board=3 turns=1 reserves=0 species=1327/181 HP=129/118 foes=70/88 faints=1/0 initialFrames=12
+REVIEW_STATE actor=1 move=Protect PP=15/10/10/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=280 item=472
+REVIEW_STATE actor=3 move=- PP=15/10/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=9 item=307
+SHAWN_FIELD terrain=0 timer=0 charge=0/0 speed=40/45 nativeSpeed=40/45
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Air Slash target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=2
+AI switch turn=1 actor=3 party=5
+AI decision turn=2 actor=0 move=Earthquake target=1
+AI decision turn=2 actor=1 move=Thunderbolt target=2
+AI decision turn=2 actor=2 move=Air Slash target=3
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=1 move=Protect target=1
+AI decision turn=3 actor=3 move=Dragon Pulse target=0
+REVIEW_AFTER board=3 turns=2 reserves=0 species=1327/181 HP=63/118 foes=70/0 faints=1/1 initialFrames=12
+REVIEW_STATE actor=1 move=Thunderbolt PP=14/10/10/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=280 item=472
+REVIEW_STATE actor=3 move=Protect PP=15/10/5/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=9 item=307
+SHAWN_FIELD terrain=0 timer=0 charge=0/0 speed=40/45 nativeSpeed=40/45
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Air Slash target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=2
+AI switch turn=1 actor=3 party=5
+AI decision turn=2 actor=0 move=Earthquake target=1
+AI decision turn=2 actor=1 move=Thunderbolt target=2
+AI decision turn=2 actor=2 move=Air Slash target=3
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=0 move=Earthquake target=1
+AI decision turn=3 actor=1 move=Protect target=1
+AI decision turn=3 actor=3 move=Dragon Pulse target=0
+AI decision turn=4 actor=1 move=Muddy Water target=0
+AI decision turn=4 actor=3 move=Protect target=3
+REVIEW_AFTER board=3 turns=3 reserves=0 species=1327/921 HP=71/52 foes=1/0 faints=1/1 initialFrames=12
+REVIEW_STATE actor=1 move=Protect PP=14/10/10/3 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=280 item=472
+REVIEW_STATE actor=3 move=Dragon Pulse PP=15/9/5/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=104 item=307
+SHAWN_FIELD terrain=0 timer=0 charge=0/0 speed=40/40 nativeSpeed=40/40
+SHAWN_MEGA HP=118 Atk=62 Def=75 SpA=139 SpD=77 Speed=40 ability=104
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Air Slash target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=2
+AI switch turn=1 actor=3 party=5
+AI decision turn=2 actor=0 move=Earthquake target=1
+AI decision turn=2 actor=1 move=Thunderbolt target=2
+AI decision turn=2 actor=2 move=Air Slash target=3
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=0 move=Earthquake target=1
+AI decision turn=3 actor=1 move=Protect target=1
+AI decision turn=3 actor=3 move=Dragon Pulse target=0
+AI decision turn=4 actor=0 move=Earthquake target=1
+AI decision turn=4 actor=1 move=Muddy Water target=0
+AI decision turn=4 actor=3 move=Protect target=3
+AI switch turn=4 actor=1 party=3
+AI decision turn=5 actor=1 move=Mach Punch target=0
+AI decision turn=5 actor=3 move=Dragon Pulse target=0
+REVIEW_AFTER board=3 turns=4 reserves=0 species=1307/921 HP=91/52 foes=1/0 faints=2/1 initialFrames=12
+REVIEW_STATE actor=1 move=- PP=15/20/5/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=89 item=442
+REVIEW_STATE actor=3 move=Protect PP=15/9/5/3 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=104 item=307
+SHAWN_FIELD terrain=0 timer=0 charge=0/0 speed=105/40 nativeSpeed=105/40
+SHAWN_MEGA HP=118 Atk=62 Def=75 SpA=139 SpD=77 Speed=40 ability=104
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Air Slash target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=2
+AI switch turn=1 actor=3 party=5
+AI decision turn=2 actor=0 move=Earthquake target=1
+AI decision turn=2 actor=1 move=Thunderbolt target=2
+AI decision turn=2 actor=2 move=Air Slash target=3
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=0 move=Earthquake target=1
+AI decision turn=3 actor=1 move=Protect target=1
+AI decision turn=3 actor=3 move=Dragon Pulse target=0
+AI decision turn=4 actor=0 move=Earthquake target=1
+AI decision turn=4 actor=1 move=Muddy Water target=0
+AI decision turn=4 actor=3 move=Protect target=3
+AI switch turn=4 actor=1 party=3
+AI decision turn=5 actor=0 move=Earthquake target=1
+AI decision turn=5 actor=1 move=Mach Punch target=0
+AI decision turn=5 actor=3 move=Dragon Pulse target=0
+REVIEW_AFTER board=3 turns=5 reserves=0 species=1307/921 HP=91/52 foes=0/0 faints=2/2 initialFrames=12
+REVIEW_STATE actor=1 move=Mach Punch PP=15/19/5/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=89 item=442
+REVIEW_STATE actor=3 move=Protect PP=15/9/5/3 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=104 item=307
+SHAWN_FIELD terrain=0 timer=0 charge=0/0 speed=105/40 nativeSpeed=105/40
+SHAWN_MEGA HP=118 Atk=62 Def=75 SpA=139 SpD=77 Speed=40 ability=104
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Thunderbolt target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Thunderbolt target=0
+AI decision turn=2 actor=3 move=Nasty Plot target=3
+REVIEW_AFTER board=4 turns=1 reserves=0 species=1327/958 HP=129/85 foes=7/104 faints=0/0 initialFrames=48
+REVIEW_STATE actor=1 move=Thunderbolt PP=14/10/10/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=280 item=472
+REVIEW_STATE actor=3 move=Protect PP=15/10/20/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=207 item=479
+SHAWN_FIELD terrain=0 timer=0 charge=0/0 speed=40/102 nativeSpeed=40/102
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Thunderbolt target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Thunderbolt target=0
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=3 move=Nasty Plot target=3
+AI decision turn=3 actor=1 move=Thunderbolt target=2
+AI decision turn=3 actor=3 move=Thunderbolt target=2
+REVIEW_AFTER board=4 turns=2 reserves=0 species=1327/958 HP=129/52 foes=0/104 faints=0/1 initialFrames=48
+REVIEW_STATE actor=1 move=Thunderbolt PP=13/10/10/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=280 item=472
+REVIEW_STATE actor=3 move=Nasty Plot PP=15/10/19/4 Atk=6 Def=6 SpA=8 SpD=6 Spe=6 status=0 ability=207 item=479
+SHAWN_FIELD terrain=0 timer=0 charge=0/0 speed=40/102 nativeSpeed=40/102
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Thunderbolt target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Thunderbolt target=0
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=3 move=Nasty Plot target=3
+AI decision turn=3 actor=2 move=Giga Drain target=3
+AI decision turn=3 actor=1 move=Thunderbolt target=2
+AI decision turn=3 actor=3 move=Thunderbolt target=2
+REVIEW_AFTER board=4 turns=3 reserves=0 species=1327/958 HP=129/44 foes=0/0 faints=0/2 initialFrames=48
+REVIEW_STATE actor=1 move=Thunderbolt PP=12/10/10/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=280 item=472
+REVIEW_STATE actor=3 move=Thunderbolt PP=14/10/19/4 Atk=6 Def=6 SpA=8 SpD=6 Spe=6 status=0 ability=207 item=479
+SHAWN_FIELD terrain=0 timer=0 charge=0/0 speed=40/102 nativeSpeed=40/102
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Hydro Pump target=2
+AI decision turn=1 actor=2 move=Ice Punch target=3
+AI decision turn=1 actor=3 move=Close Combat target=0
+AI decision turn=2 actor=1 move=Hydro Pump target=2
+AI decision turn=2 actor=3 move=Close Combat target=2
+REVIEW_AFTER board=0 turns=1 reserves=1 species=1065/1307 HP=77/40 foes=0/61 faints=0/1 initialFrames=23
+REVIEW_STATE actor=1 move=Hydro Pump PP=15/4/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=523
+REVIEW_STATE actor=3 move=Close Combat PP=15/20/4/15 Atk=6 Def=5 SpA=6 SpD=5 Spe=6 status=0 ability=89 item=442
+SHAWN_FIELD terrain=0 timer=0 charge=0/0 speed=82/105 nativeSpeed=82/105
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Hydro Pump target=2
+AI decision turn=1 actor=2 move=Ice Punch target=3
+AI decision turn=1 actor=3 move=Close Combat target=0
+AI decision turn=2 actor=2 move=Ice Punch target=3
+AI decision turn=2 actor=1 move=Hydro Pump target=2
+AI decision turn=2 actor=3 move=Close Combat target=2
+REVIEW_AFTER board=0 turns=2 reserves=1 species=1065/1307 HP=77/40 foes=0/0 faints=0/2 initialFrames=23
+REVIEW_STATE actor=1 move=Hydro Pump PP=15/4/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=523
+REVIEW_STATE actor=3 move=Close Combat PP=15/20/3/15 Atk=6 Def=4 SpA=6 SpD=4 Spe=6 status=0 ability=89 item=442
+SHAWN_FIELD terrain=0 timer=0 charge=0/0 speed=82/105 nativeSpeed=82/105
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Thunderbolt target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Mach Punch target=2
+AI decision turn=2 actor=1 move=Hydro Pump target=2
+AI decision turn=2 actor=3 move=Mach Punch target=2
+REVIEW_AFTER board=1 turns=1 reserves=1 species=1065/1307 HP=53/78 foes=0/71 faints=0/1 initialFrames=20
+REVIEW_STATE actor=1 move=Thunderbolt PP=14/5/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=0
+REVIEW_STATE actor=3 move=Mach Punch PP=15/19/5/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=89 item=442
+SHAWN_FIELD terrain=0 timer=0 charge=0/0 speed=82/105 nativeSpeed=82/105
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Thunderbolt target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Mach Punch target=2
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=1 move=Hydro Pump target=2
+AI decision turn=2 actor=3 move=Mach Punch target=2
+AI decision turn=3 actor=1 move=Hydro Pump target=2
+AI decision turn=3 actor=3 move=Mach Punch target=2
+REVIEW_AFTER board=1 turns=2 reserves=1 species=1065/1307 HP=53/65 foes=0/9 faints=0/1 initialFrames=20
+REVIEW_STATE actor=1 move=Hydro Pump PP=14/4/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=0
+REVIEW_STATE actor=3 move=Mach Punch PP=15/18/5/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=89 item=442
+SHAWN_FIELD terrain=0 timer=0 charge=0/0 speed=82/105 nativeSpeed=82/105
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Thunderbolt target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Mach Punch target=2
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=1 move=Hydro Pump target=2
+AI decision turn=2 actor=3 move=Mach Punch target=2
+AI decision turn=3 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=1 move=Hydro Pump target=2
+AI decision turn=3 actor=3 move=Mach Punch target=2
+REVIEW_AFTER board=1 turns=3 reserves=1 species=1065/1307 HP=53/65 foes=0/0 faints=0/2 initialFrames=20
+REVIEW_STATE actor=1 move=Hydro Pump PP=14/4/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=0
+REVIEW_STATE actor=3 move=Mach Punch PP=15/17/5/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=89 item=442
+SHAWN_FIELD terrain=0 timer=0 charge=0/0 speed=82/105 nativeSpeed=82/105
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Thunderbolt target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Close Combat target=2
+AI decision turn=2 actor=1 move=Thunderbolt target=2
+AI decision turn=2 actor=3 move=Close Combat target=0
+REVIEW_AFTER board=2 turns=1 reserves=1 species=1065/1307 HP=66/25 foes=76/4 faints=0/0 initialFrames=24
+REVIEW_STATE actor=1 move=- PP=15/5/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=523
+REVIEW_STATE actor=3 move=Close Combat PP=15/20/4/15 Atk=6 Def=5 SpA=6 SpD=5 Spe=6 status=0 ability=89 item=442
+SHAWN_FIELD terrain=0 timer=0 charge=0/0 speed=82/105 nativeSpeed=82/105
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Thunderbolt target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Close Combat target=2
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Thunderbolt target=2
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=Close Combat target=0
+AI decision turn=3 actor=1 move=Thunderbolt target=0
+AI decision turn=3 actor=3 move=Close Combat target=0
+REVIEW_AFTER board=2 turns=2 reserves=1 species=1065/1307 HP=54/25 foes=16/0 faints=0/1 initialFrames=24
+REVIEW_STATE actor=1 move=Thunderbolt PP=14/5/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=0
+REVIEW_STATE actor=3 move=Close Combat PP=15/20/3/15 Atk=6 Def=4 SpA=6 SpD=4 Spe=6 status=0 ability=89 item=442
+SHAWN_FIELD terrain=0 timer=0 charge=0/0 speed=82/105 nativeSpeed=82/105
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Thunderbolt target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Close Combat target=2
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Thunderbolt target=2
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=Close Combat target=0
+AI decision turn=3 actor=0 move=Drain Punch target=1
+AI decision turn=3 actor=1 move=Thunderbolt target=0
+AI decision turn=3 actor=3 move=Close Combat target=0
+REVIEW_AFTER board=2 turns=3 reserves=1 species=1065/1307 HP=54/25 foes=0/0 faints=0/2 initialFrames=24
+REVIEW_STATE actor=1 move=Thunderbolt PP=14/5/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=0
+REVIEW_STATE actor=3 move=Close Combat PP=15/20/2/15 Atk=6 Def=3 SpA=6 SpD=3 Spe=6 status=0 ability=89 item=442
+SHAWN_FIELD terrain=0 timer=0 charge=0/0 speed=82/105 nativeSpeed=82/105
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=Thunderbolt target=2
+AI decision turn=1 actor=2 move=Air Slash target=3
+AI decision turn=1 actor=3 move=Mach Punch target=0
+AI decision turn=2 actor=1 move=Hydro Pump target=0
+REVIEW_AFTER board=3 turns=1 reserves=1 species=1065/1307 HP=77/0 foes=10/0 faints=1/1 initialFrames=18
+REVIEW_STATE actor=1 move=Thunderbolt PP=14/5/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=523
+REVIEW_STATE actor=3 move=- PP=15/19/5/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=0 item=442
+SHAWN_FIELD terrain=0 timer=0 charge=0/0 speed=82/105 nativeSpeed=82/105
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=Thunderbolt target=2
+AI decision turn=1 actor=2 move=Air Slash target=3
+AI decision turn=1 actor=3 move=Mach Punch target=0
+AI decision turn=2 actor=0 move=Earthquake target=1
+AI decision turn=2 actor=1 move=Hydro Pump target=0
+REVIEW_AFTER board=3 turns=2 reserves=1 species=1065/1307 HP=77/0 foes=0/0 faints=1/2 initialFrames=18
+REVIEW_STATE actor=1 move=Hydro Pump PP=14/4/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=523
+REVIEW_STATE actor=3 move=- PP=15/19/5/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=0 item=442
+SHAWN_FIELD terrain=0 timer=0 charge=0/0 speed=82/105 nativeSpeed=82/105
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Thunderbolt target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Close Combat target=2
+AI decision turn=2 actor=1 move=Thunderbolt target=2
+AI decision turn=2 actor=3 move=Close Combat target=0
+REVIEW_AFTER board=4 turns=1 reserves=1 species=1065/1307 HP=77/30 foes=6/34 faints=0/0 initialFrames=24
+REVIEW_STATE actor=1 move=Thunderbolt PP=14/5/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=523
+REVIEW_STATE actor=3 move=Close Combat PP=15/20/4/15 Atk=6 Def=5 SpA=6 SpD=5 Spe=6 status=0 ability=89 item=442
+SHAWN_FIELD terrain=0 timer=0 charge=0/0 speed=82/105 nativeSpeed=82/105
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Thunderbolt target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Close Combat target=2
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Thunderbolt target=2
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=3 move=Close Combat target=0
+REVIEW_AFTER board=4 turns=2 reserves=1 species=1065/1307 HP=77/30 foes=0/0 faints=0/2 initialFrames=24
+REVIEW_STATE actor=1 move=Thunderbolt PP=13/5/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=523
+REVIEW_STATE actor=3 move=Close Combat PP=15/20/3/15 Atk=6 Def=4 SpA=6 SpD=4 Spe=6 status=0 ability=89 item=442
+SHAWN_FIELD terrain=0 timer=0 charge=0/0 speed=82/105 nativeSpeed=82/105
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Acid Spray target=2
+AI decision turn=1 actor=2 move=Ice Punch target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=2
+AI decision turn=2 actor=1 move=Acid Spray target=0
+AI decision turn=2 actor=3 move=Thunderbolt target=0
+REVIEW_AFTER board=0 turns=1 reserves=2 species=604/921 HP=75/118 foes=87/0 faints=0/1 initialFrames=47
+REVIEW_STATE actor=1 move=Acid Spray PP=15/15/10/19 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=503
+REVIEW_STATE actor=3 move=Thunderbolt PP=14/10/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=104 item=307
+SHAWN_FIELD terrain=0 timer=0 charge=0/0 speed=44/40 nativeSpeed=44/40
+SHAWN_MEGA HP=118 Atk=62 Def=75 SpA=139 SpD=77 Speed=40 ability=104
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Acid Spray target=2
+AI decision turn=1 actor=2 move=Ice Punch target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=2
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Acid Spray target=0
+AI decision turn=2 actor=3 move=Thunderbolt target=0
+REVIEW_AFTER board=0 turns=2 reserves=2 species=604/921 HP=31/118 foes=0/0 faints=0/2 initialFrames=47
+REVIEW_STATE actor=1 move=Acid Spray PP=15/15/10/18 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=503
+REVIEW_STATE actor=3 move=Thunderbolt PP=13/10/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=104 item=307
+SHAWN_FIELD terrain=0 timer=0 charge=0/0 speed=44/40 nativeSpeed=44/40
+SHAWN_MEGA HP=118 Atk=62 Def=75 SpA=139 SpD=77 Speed=40 ability=104
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Thunderbolt target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Focus Blast target=2
+AI decision turn=2 actor=1 move=Giga Drain target=2
+AI decision turn=2 actor=3 move=Dragon Pulse target=2
+REVIEW_AFTER board=1 turns=1 reserves=2 species=604/921 HP=83/114 foes=0/75 faints=0/1 initialFrames=44
+REVIEW_STATE actor=1 move=Thunderbolt PP=14/15/10/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=503
+REVIEW_STATE actor=3 move=Focus Blast PP=15/10/4/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=104 item=307
+SHAWN_FIELD terrain=0 timer=0 charge=0/0 speed=44/40 nativeSpeed=44/40
+SHAWN_MEGA HP=118 Atk=62 Def=75 SpA=139 SpD=77 Speed=40 ability=104
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Thunderbolt target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Focus Blast target=2
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=1 move=Giga Drain target=2
+AI decision turn=2 actor=3 move=Dragon Pulse target=2
+REVIEW_AFTER board=1 turns=2 reserves=2 species=604/921 HP=104/110 foes=0/0 faints=0/2 initialFrames=44
+REVIEW_STATE actor=1 move=Giga Drain PP=14/15/9/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=503
+REVIEW_STATE actor=3 move=Dragon Pulse PP=15/9/4/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=104 item=307
+SHAWN_FIELD terrain=0 timer=0 charge=0/0 speed=44/40 nativeSpeed=44/40
+SHAWN_MEGA HP=118 Atk=62 Def=75 SpA=139 SpD=77 Speed=40 ability=104
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Thunderbolt target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI decision turn=2 actor=1 move=Giga Drain target=0
+AI decision turn=2 actor=3 move=Thunderbolt target=2
+REVIEW_AFTER board=2 turns=1 reserves=2 species=604/181 HP=105/85 foes=3/104 faints=0/0 initialFrames=47
+REVIEW_STATE actor=1 move=- PP=15/15/10/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=503
+REVIEW_STATE actor=3 move=Thunderbolt PP=14/10/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=9 item=307
+SHAWN_FIELD terrain=0 timer=0 charge=0/0 speed=44/45 nativeSpeed=44/45
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Thunderbolt target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Giga Drain target=0
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=Thunderbolt target=2
+AI decision turn=3 actor=1 move=Acid Spray target=2
+AI decision turn=3 actor=3 move=Thunderbolt target=2
+REVIEW_AFTER board=2 turns=2 reserves=2 species=604/921 HP=106/71 foes=0/53 faints=0/1 initialFrames=47
+REVIEW_STATE actor=1 move=Giga Drain PP=15/15/9/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=503
+REVIEW_STATE actor=3 move=Thunderbolt PP=13/10/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=104 item=307
+SHAWN_FIELD terrain=0 timer=0 charge=0/0 speed=44/40 nativeSpeed=44/40
+SHAWN_MEGA HP=118 Atk=62 Def=75 SpA=139 SpD=77 Speed=40 ability=104
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Thunderbolt target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Giga Drain target=0
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=Thunderbolt target=2
+AI decision turn=3 actor=2 move=Scald target=3
+AI decision turn=3 actor=1 move=Acid Spray target=2
+AI decision turn=3 actor=3 move=Thunderbolt target=2
+REVIEW_AFTER board=2 turns=3 reserves=2 species=604/921 HP=106/71 foes=0/0 faints=0/2 initialFrames=47
+REVIEW_STATE actor=1 move=Acid Spray PP=15/15/9/19 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=503
+REVIEW_STATE actor=3 move=Thunderbolt PP=12/10/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=104 item=307
+SHAWN_FIELD terrain=0 timer=0 charge=0/0 speed=44/40 nativeSpeed=44/40
+SHAWN_MEGA HP=118 Atk=62 Def=75 SpA=139 SpD=77 Speed=40 ability=104
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=Thunderbolt target=2
+AI decision turn=1 actor=2 move=Air Slash target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Flamethrower target=0
+AI decision turn=2 actor=3 move=Dragon Pulse target=0
+REVIEW_AFTER board=3 turns=1 reserves=2 species=604/181 HP=119/118 foes=70/0 faints=0/1 initialFrames=40
+REVIEW_STATE actor=1 move=Thunderbolt PP=14/15/10/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=503
+REVIEW_STATE actor=3 move=Protect PP=15/10/5/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=9 item=307
+SHAWN_FIELD terrain=0 timer=0 charge=0/0 speed=44/45 nativeSpeed=44/45
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=Thunderbolt target=2
+AI decision turn=1 actor=2 move=Air Slash target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Earthquake target=1
+AI decision turn=2 actor=1 move=Flamethrower target=0
+AI decision turn=2 actor=3 move=Dragon Pulse target=0
+REVIEW_AFTER board=3 turns=2 reserves=2 species=604/921 HP=119/52 foes=0/0 faints=0/2 initialFrames=40
+REVIEW_STATE actor=1 move=Flamethrower PP=14/14/10/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=503
+REVIEW_STATE actor=3 move=Dragon Pulse PP=15/9/5/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=104 item=307
+SHAWN_FIELD terrain=0 timer=0 charge=0/0 speed=44/40 nativeSpeed=44/40
+SHAWN_MEGA HP=118 Atk=62 Def=75 SpA=139 SpD=77 Speed=40 ability=104
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Thunderbolt target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI decision turn=2 actor=1 move=Acid Spray target=2
+AI decision turn=2 actor=3 move=Thunderbolt target=2
+REVIEW_AFTER board=4 turns=1 reserves=2 species=604/181 HP=119/87 foes=0/104 faints=0/1 initialFrames=47
+REVIEW_STATE actor=1 move=Thunderbolt PP=14/15/10/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=503
+REVIEW_STATE actor=3 move=Thunderbolt PP=14/10/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=9 item=307
+SHAWN_FIELD terrain=0 timer=0 charge=0/0 speed=44/45 nativeSpeed=44/45
+REVIEW_INPUT trainer=194 slot=0 species=1327 lv=29 HP=129 Atk=45 Def=67 SpA=101 SpD=62 Spe=40 item=472 ability=280
+REVIEW_INPUT trainer=194 slot=1 species=958 lv=30 HP=85 Atk=58 Def=44 SpA=99 SpD=65 Spe=102 item=479 ability=207
+REVIEW_INPUT trainer=194 slot=2 species=1065 lv=29 HP=77 Atk=45 Def=76 SpA=102 SpD=76 Spe=82 item=523 ability=26
+REVIEW_INPUT trainer=194 slot=3 species=1307 lv=30 HP=91 Atk=102 Def=56 SpA=50 SpD=50 Spe=105 item=442 ability=89
+REVIEW_INPUT trainer=194 slot=4 species=604 lv=30 HP=119 Atk=74 Def=62 SpA=105 SpD=62 Spe=44 item=503 ability=26
+REVIEW_INPUT trainer=194 slot=5 species=181 lv=29 HP=118 Atk=51 Def=63 SpA=107 SpD=66 Spe=45 item=307 ability=9
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Thunderbolt target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=1 move=Acid Spray target=2
+AI decision turn=2 actor=3 move=Thunderbolt target=2
+REVIEW_AFTER board=4 turns=2 reserves=2 species=604/921 HP=119/74 foes=0/0 faints=0/2 initialFrames=47
+REVIEW_STATE actor=1 move=Acid Spray PP=14/15/10/19 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=503
+REVIEW_STATE actor=3 move=Thunderbolt PP=13/10/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=104 item=307
+SHAWN_FIELD terrain=0 timer=0 charge=0/0 speed=44/40 nativeSpeed=44/40
+SHAWN_MEGA HP=118 Atk=62 Def=75 SpA=139 SpD=77 Speed=40 ability=104
+
+- Tests [32mPASSED[0m:          3
+- Tests [34mTOTAL[0m:           3
+

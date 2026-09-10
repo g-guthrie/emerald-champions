@@ -1,0 +1,2405 @@
+[
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_WeCantTalkAboutAquaActivities",
+    "line": 826,
+    "text": "TEAM AQUA's activities…\\nWe can't talk about them yet.$",
+    "lines": [
+      {
+        "text": "TEAM AQUA's activities…",
+        "width": 126,
+        "unresolved": []
+      },
+      {
+        "text": "We can't talk about them yet.",
+        "width": 154,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_KickUpARuckus",
+    "line": 830,
+    "text": "I want to get going to SLATEPORT and\\nkick up a ruckus!$",
+    "lines": [
+      {
+        "text": "I want to get going to SLATEPORT and",
+        "width": 193,
+        "unresolved": []
+      },
+      {
+        "text": "kick up a ruckus!",
+        "width": 88,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_MyFirstJobInAqua",
+    "line": 834,
+    "text": "This is my first job after joining\\nTEAM AQUA. It's a little scary.$",
+    "lines": [
+      {
+        "text": "This is my first job after joining",
+        "width": 172,
+        "unresolved": []
+      },
+      {
+        "text": "TEAM AQUA. It's a little scary.",
+        "width": 158,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_AquaActionsBringSmiles",
+    "line": 838,
+    "text": "TEAM AQUA's actions should bring\\nsmiles to people's faces!$",
+    "lines": [
+      {
+        "text": "TEAM AQUA's actions should bring",
+        "width": 173,
+        "unresolved": []
+      },
+      {
+        "text": "smiles to people's faces!",
+        "width": 133,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_MayLetsBattle",
+    "line": 842,
+    "text": "MAY: {PLAYER}{KUN}! I've been\\nfinding new POKéMON all the way\\lfrom OLDALE.\\pYou must have met some, too!\\nLet's have a battle and introduce\\lthem!$",
+    "lines": [
+      {
+        "text": "MAY: {PLAYER}{KUN}! I've been",
+        "width": 124,
+        "unresolved": []
+      },
+      {
+        "text": "finding new POKéMON all the way",
+        "width": 163,
+        "unresolved": []
+      },
+      {
+        "text": "from OLDALE.",
+        "width": 65,
+        "unresolved": []
+      },
+      {
+        "text": "You must have met some, too!",
+        "width": 148,
+        "unresolved": []
+      },
+      {
+        "text": "Let's have a battle and introduce",
+        "width": 178,
+        "unresolved": []
+      },
+      {
+        "text": "them!",
+        "width": 28,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_MayDefeated",
+    "line": 850,
+    "text": "Wow! You've gotten stronger!$",
+    "lines": [
+      {
+        "text": "Wow! You've gotten stronger!",
+        "width": 153,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_MayTakeThis",
+    "line": 853,
+    "text": "MAY: Your partners found an answer\\nto mine. That was a good battle!\\pTake this. It finds what routes\\nhide.$",
+    "lines": [
+      {
+        "text": "MAY: Your partners found an answer",
+        "width": 182,
+        "unresolved": []
+      },
+      {
+        "text": "to mine. That was a good battle!",
+        "width": 165,
+        "unresolved": []
+      },
+      {
+        "text": "Take this. It finds what routes",
+        "width": 163,
+        "unresolved": []
+      },
+      {
+        "text": "hide.",
+        "width": 25,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_MayExplainItemfinder",
+    "line": 858,
+    "text": "MAY: That's a DOWSING MACHINE. It\\nreacts to hidden items.\\pFor legendary POKéMON, ask the\\nguide near a POKéMON CENTER's PC.\\lThey know the local leads.\\pI'm heading north to MAUVILLE.\\nWATTSON's GYM is there. See you!$",
+    "lines": [
+      {
+        "text": "MAY: That's a DOWSING MACHINE. It",
+        "width": 177,
+        "unresolved": []
+      },
+      {
+        "text": "reacts to hidden items.",
+        "width": 121,
+        "unresolved": []
+      },
+      {
+        "text": "For legendary POKéMON, ask the",
+        "width": 161,
+        "unresolved": []
+      },
+      {
+        "text": "guide near a POKéMON CENTER's PC.",
+        "width": 177,
+        "unresolved": []
+      },
+      {
+        "text": "They know the local leads.",
+        "width": 135,
+        "unresolved": []
+      },
+      {
+        "text": "I'm heading north to MAUVILLE.",
+        "width": 162,
+        "unresolved": []
+      },
+      {
+        "text": "WATTSON's GYM is there. See you!",
+        "width": 169,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_RivalBeforeBattle",
+    "line": 866,
+    "text": "Hey, {PLAYER}! Meet me just down\\nthe path. I want to see your team!$",
+    "lines": [
+      {
+        "text": "Hey, {PLAYER}! Meet me just down",
+        "width": 165,
+        "unresolved": []
+      },
+      {
+        "text": "the path. I want to see your team!",
+        "width": 177,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_RivalRewardRetry",
+    "line": 870,
+    "text": "I still have that DOWSING MACHINE\\nfor you. Here you go!$",
+    "lines": [
+      {
+        "text": "I still have that DOWSING MACHINE",
+        "width": 177,
+        "unresolved": []
+      },
+      {
+        "text": "for you. Here you go!",
+        "width": 107,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_DowsingMachineSentToPC",
+    "line": 874,
+    "text": "Your KEY ITEMS pocket is full, so the\\nDOWSING MACHINE was sent to your PC.$",
+    "lines": [
+      {
+        "text": "Your KEY ITEMS pocket is full, so the",
+        "width": 191,
+        "unresolved": []
+      },
+      {
+        "text": "DOWSING MACHINE was sent to your PC.",
+        "width": 194,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_DowsingMachineNoRoom",
+    "line": 878,
+    "text": "Your KEY ITEMS pocket and PC are full.\\nMake room, then speak to me again.$",
+    "lines": [
+      {
+        "text": "Your KEY ITEMS pocket and PC are full.",
+        "width": 198,
+        "unresolved": []
+      },
+      {
+        "text": "Make room, then speak to me again.",
+        "width": 177,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_BrendanLetsBattle",
+    "line": 882,
+    "text": "BRENDAN: Hey, {PLAYER}! Figured\\nyou'd come this way.\\pI've been looking forward to\\nanother battle. Let's see how far\\lwe've come!$",
+    "lines": [
+      {
+        "text": "BRENDAN: Hey, {PLAYER}! Figured",
+        "width": 160,
+        "unresolved": []
+      },
+      {
+        "text": "you'd come this way.",
+        "width": 106,
+        "unresolved": []
+      },
+      {
+        "text": "I've been looking forward to",
+        "width": 150,
+        "unresolved": []
+      },
+      {
+        "text": "another battle. Let's see how far",
+        "width": 176,
+        "unresolved": []
+      },
+      {
+        "text": "we've come!",
+        "width": 61,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_BrendanDefeated",
+    "line": 889,
+    "text": "Hah… You've been busy, too!$",
+    "lines": [
+      {
+        "text": "Hah… You've been busy, too!",
+        "width": 145,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_BrendanTakeThis",
+    "line": 892,
+    "text": "BRENDAN: A strong team, well\\nplayed. You earned that win.\\pHere. Take this.$",
+    "lines": [
+      {
+        "text": "BRENDAN: A strong team, well",
+        "width": 145,
+        "unresolved": []
+      },
+      {
+        "text": "played. You earned that win.",
+        "width": 145,
+        "unresolved": []
+      },
+      {
+        "text": "Here. Take this.",
+        "width": 81,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_BrendanExplainItemfinder",
+    "line": 896,
+    "text": "BRENDAN: A DOWSING MACHINE! It\\nhums near items you can't see.\\pThe guide near each POKéMON\\nCENTER's PC knows local legendary\\lPOKéMON and where to find them.\\pKeep north to MAUVILLE CITY.\\nWATTSON's GYM will test your\\lteam.$",
+    "lines": [
+      {
+        "text": "BRENDAN: A DOWSING MACHINE! It",
+        "width": 163,
+        "unresolved": []
+      },
+      {
+        "text": "hums near items you can't see.",
+        "width": 159,
+        "unresolved": []
+      },
+      {
+        "text": "The guide near each POKéMON",
+        "width": 147,
+        "unresolved": []
+      },
+      {
+        "text": "CENTER's PC knows local legendary",
+        "width": 179,
+        "unresolved": []
+      },
+      {
+        "text": "POKéMON and where to find them.",
+        "width": 165,
+        "unresolved": []
+      },
+      {
+        "text": "Keep north to MAUVILLE CITY.",
+        "width": 152,
+        "unresolved": []
+      },
+      {
+        "text": "WATTSON's GYM will test your",
+        "width": 149,
+        "unresolved": []
+      },
+      {
+        "text": "team.",
+        "width": 27,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_RideBikeAtFullSpeed",
+    "line": 906,
+    "text": "Wouldn't it be great to ride a BIKE\\nat full speed on CYCLING ROAD?$",
+    "lines": [
+      {
+        "text": "Wouldn't it be great to ride a BIKE",
+        "width": 181,
+        "unresolved": []
+      },
+      {
+        "text": "at full speed on CYCLING ROAD?",
+        "width": 161,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_HairStreamsBehindMe",
+    "line": 910,
+    "text": "How do you like the way my raven-\\ncolored hair streams behind me?\\pI grew my hair out just for that.$",
+    "lines": [
+      {
+        "text": "How do you like the way my raven-",
+        "width": 172,
+        "unresolved": []
+      },
+      {
+        "text": "colored hair streams behind me?",
+        "width": 165,
+        "unresolved": []
+      },
+      {
+        "text": "I grew my hair out just for that.",
+        "width": 168,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_YouGotBikeFromRydel",
+    "line": 915,
+    "text": "Oh, hey, you got that BIKE from RYDEL!\\pOh, it's glaringly obvious.\\nIt says right on your bike…\\pRYDEL, RYDEL, RYDEL, RYDEL, RYDEL,\\nRYDEL, RYDEL, RYDEL, RYDEL, RYDEL,\\pRYDEL, RYDEL, RYDEL, RYDEL, RYDEL,\\nRYDEL, RYDEL, RYDEL, RYDEL, RYDEL,\\pRYDEL, RYDEL, RYDEL, RYDEL, RYDEL,\\nRYDEL, RYDEL, RYDEL, RYDEL, RYDEL,\\pRYDEL, RYDEL, RYDEL, RYDEL, RYDEL,\\nRYDEL, RYDEL, RYDEL, RYDEL, RYDEL,\\pRYDEL, RYDEL, RYDEL, RYDEL, RYDEL…\\nThat name's everywhere.\\pYou should ride it around all over\\nthe place--it's good advertising!$",
+    "lines": [
+      {
+        "text": "Oh, hey, you got that BIKE from RYDEL!",
+        "width": 198,
+        "unresolved": []
+      },
+      {
+        "text": "Oh, it's glaringly obvious.",
+        "width": 136,
+        "unresolved": []
+      },
+      {
+        "text": "It says right on your bike…",
+        "width": 141,
+        "unresolved": []
+      },
+      {
+        "text": "RYDEL, RYDEL, RYDEL, RYDEL, RYDEL,",
+        "width": 177,
+        "unresolved": []
+      },
+      {
+        "text": "RYDEL, RYDEL, RYDEL, RYDEL, RYDEL,",
+        "width": 177,
+        "unresolved": []
+      },
+      {
+        "text": "RYDEL, RYDEL, RYDEL, RYDEL, RYDEL,",
+        "width": 177,
+        "unresolved": []
+      },
+      {
+        "text": "RYDEL, RYDEL, RYDEL, RYDEL, RYDEL,",
+        "width": 177,
+        "unresolved": []
+      },
+      {
+        "text": "RYDEL, RYDEL, RYDEL, RYDEL, RYDEL,",
+        "width": 177,
+        "unresolved": []
+      },
+      {
+        "text": "RYDEL, RYDEL, RYDEL, RYDEL, RYDEL,",
+        "width": 177,
+        "unresolved": []
+      },
+      {
+        "text": "RYDEL, RYDEL, RYDEL, RYDEL, RYDEL,",
+        "width": 177,
+        "unresolved": []
+      },
+      {
+        "text": "RYDEL, RYDEL, RYDEL, RYDEL, RYDEL,",
+        "width": 177,
+        "unresolved": []
+      },
+      {
+        "text": "RYDEL, RYDEL, RYDEL, RYDEL, RYDEL…",
+        "width": 180,
+        "unresolved": []
+      },
+      {
+        "text": "That name's everywhere.",
+        "width": 127,
+        "unresolved": []
+      },
+      {
+        "text": "You should ride it around all over",
+        "width": 173,
+        "unresolved": []
+      },
+      {
+        "text": "the place--it's good advertising!",
+        "width": 178,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_TwoRoads",
+    "line": 932,
+    "text": "The two roads, one above, one below…\\pA road each for people and POKéMON.\\nPerhaps that is right and fair.$",
+    "lines": [
+      {
+        "text": "The two roads, one above, one below…",
+        "width": 189,
+        "unresolved": []
+      },
+      {
+        "text": "A road each for people and POKéMON.",
+        "width": 185,
+        "unresolved": []
+      },
+      {
+        "text": "Perhaps that is right and fair.",
+        "width": 159,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_WalkOnTheLowRoad",
+    "line": 937,
+    "text": "I don't have a BIKE, so I'll take\\na leisurely walk on the low road.$",
+    "lines": [
+      {
+        "text": "I don't have a BIKE, so I'll take",
+        "width": 170,
+        "unresolved": []
+      },
+      {
+        "text": "a leisurely walk on the low road.",
+        "width": 165,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_BikeTechniques",
+    "line": 941,
+    "text": "Learning techniques will make BIKE\\nriding even more fun.\\pThere are some places that you can\\nreach only by using a BIKE technique.$",
+    "lines": [
+      {
+        "text": "Learning techniques will make BIKE",
+        "width": 181,
+        "unresolved": []
+      },
+      {
+        "text": "riding even more fun.",
+        "width": 108,
+        "unresolved": []
+      },
+      {
+        "text": "There are some places that you can",
+        "width": 182,
+        "unresolved": []
+      },
+      {
+        "text": "reach only by using a BIKE technique.",
+        "width": 194,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_WhichShouldIChoose",
+    "line": 947,
+    "text": "Which should I choose?\\pMake a beeline for MAUVILLE on\\nCYCLING ROAD, or take the low road\\land look for POKéMON?$",
+    "lines": [
+      {
+        "text": "Which should I choose?",
+        "width": 119,
+        "unresolved": []
+      },
+      {
+        "text": "Make a beeline for MAUVILLE on",
+        "width": 160,
+        "unresolved": []
+      },
+      {
+        "text": "CYCLING ROAD, or take the low road",
+        "width": 179,
+        "unresolved": []
+      },
+      {
+        "text": "and look for POKéMON?",
+        "width": 114,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_CyclingChallengeResultSummary",
+    "line": 953,
+    "text": "Number of collisions:\\n… … {STR_VAR_1}!\\pTotal time:\\n… … {STR_VAR_2}!$",
+    "lines": [
+      {
+        "text": "Number of collisions:",
+        "width": 108,
+        "unresolved": []
+      },
+      {
+        "text": "… … {STR_VAR_1}!",
+        "width": 94,
+        "unresolved": []
+      },
+      {
+        "text": "Total time:",
+        "width": 56,
+        "unresolved": []
+      },
+      {
+        "text": "… … {STR_VAR_2}!",
+        "width": 94,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_ChallengeReactionBest",
+    "line": 959,
+    "text": "Bravo! Splendid showing!\\pYour love of cycling comes from deep\\nwithin your heart.\\lYou've shaken me to my very soul!$",
+    "lines": [
+      {
+        "text": "Bravo! Splendid showing!",
+        "width": 127,
+        "unresolved": []
+      },
+      {
+        "text": "Your love of cycling comes from deep",
+        "width": 190,
+        "unresolved": []
+      },
+      {
+        "text": "within your heart.",
+        "width": 93,
+        "unresolved": []
+      },
+      {
+        "text": "You've shaken me to my very soul!",
+        "width": 175,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_ChallengeReactionGood",
+    "line": 965,
+    "text": "Your technique is remarkable.\\pI suggest you speed up a bit while\\nstill avoiding collisions.$",
+    "lines": [
+      {
+        "text": "Your technique is remarkable.",
+        "width": 153,
+        "unresolved": []
+      },
+      {
+        "text": "I suggest you speed up a bit while",
+        "width": 177,
+        "unresolved": []
+      },
+      {
+        "text": "still avoiding collisions.",
+        "width": 129,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_ChallengeReactionOk",
+    "line": 970,
+    "text": "I would consider you a work in\\nprogress.\\pStill, I hope you don't forget the\\nsheer pleasure of cycling.$",
+    "lines": [
+      {
+        "text": "I would consider you a work in",
+        "width": 154,
+        "unresolved": []
+      },
+      {
+        "text": "progress.",
+        "width": 49,
+        "unresolved": []
+      },
+      {
+        "text": "Still, I hope you don't forget the",
+        "width": 176,
+        "unresolved": []
+      },
+      {
+        "text": "sheer pleasure of cycling.",
+        "width": 136,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_ChallengeReactionBad",
+    "line": 976,
+    "text": "My word… Your cycling skills border\\non terrifying.\\pMost certainly, you need much more\\npractice riding.$",
+    "lines": [
+      {
+        "text": "My word… Your cycling skills border",
+        "width": 181,
+        "unresolved": []
+      },
+      {
+        "text": "on terrifying.",
+        "width": 72,
+        "unresolved": []
+      },
+      {
+        "text": "Most certainly, you need much more",
+        "width": 180,
+        "unresolved": []
+      },
+      {
+        "text": "practice riding.",
+        "width": 82,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_ChallengeReactionWorst",
+    "line": 982,
+    "text": "…I am aghast…\\pYou're perhaps not cut out for this\\nunfortunate cycling business.\\pYou ought to give serious thought to\\nreturning that BIKE to RYDEL.$",
+    "lines": [
+      {
+        "text": "…I am aghast…",
+        "width": 72,
+        "unresolved": []
+      },
+      {
+        "text": "You're perhaps not cut out for this",
+        "width": 187,
+        "unresolved": []
+      },
+      {
+        "text": "unfortunate cycling business.",
+        "width": 158,
+        "unresolved": []
+      },
+      {
+        "text": "You ought to give serious thought to",
+        "width": 193,
+        "unresolved": []
+      },
+      {
+        "text": "returning that BIKE to RYDEL.",
+        "width": 155,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_RatedForNumberOfCollisions",
+    "line": 989,
+    "text": "This is CYCLING ROAD.\\pIf you were to ride from MAUVILLE to\\nSLATEPORT on a MACH BIKE, you would\\lbe rated for the number of collisions\\land your total time.$",
+    "lines": [
+      {
+        "text": "This is CYCLING ROAD.",
+        "width": 110,
+        "unresolved": []
+      },
+      {
+        "text": "If you were to ride from MAUVILLE to",
+        "width": 190,
+        "unresolved": []
+      },
+      {
+        "text": "SLATEPORT on a MACH BIKE, you would",
+        "width": 187,
+        "unresolved": []
+      },
+      {
+        "text": "be rated for the number of collisions",
+        "width": 193,
+        "unresolved": []
+      },
+      {
+        "text": "and your total time.",
+        "width": 103,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_AlwaysAimHigher",
+    "line": 996,
+    "text": "Regardless of the results, I count on\\nseeing more challenges from you.\\lAlways aim higher!$",
+    "lines": [
+      {
+        "text": "Regardless of the results, I count on",
+        "width": 195,
+        "unresolved": []
+      },
+      {
+        "text": "seeing more challenges from you.",
+        "width": 169,
+        "unresolved": []
+      },
+      {
+        "text": "Always aim higher!",
+        "width": 93,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_AcroBikesDoNotQualify",
+    "line": 1001,
+    "text": "On this CYCLING ROAD, those riding\\nMACH BIKES are rated for their number\\lof collisions and their total times.\\pACRO BIKES do not qualify for rating.\\nThey are easy to turn, so it's not fair.$",
+    "lines": [
+      {
+        "text": "On this CYCLING ROAD, those riding",
+        "width": 179,
+        "unresolved": []
+      },
+      {
+        "text": "MACH BIKES are rated for their number",
+        "width": 197,
+        "unresolved": []
+      },
+      {
+        "text": "of collisions and their total times.",
+        "width": 183,
+        "unresolved": []
+      },
+      {
+        "text": "ACRO BIKES do not qualify for rating.",
+        "width": 193,
+        "unresolved": []
+      },
+      {
+        "text": "They are easy to turn, so it's not fair.",
+        "width": 203,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_SlateportCitySign",
+    "line": 1008,
+    "text": "ROUTE 110\\n{DOWN_ARROW} SLATEPORT CITY$",
+    "lines": [
+      {
+        "text": "ROUTE 110",
+        "width": 51,
+        "unresolved": []
+      },
+      {
+        "text": "{DOWN_ARROW} SLATEPORT CITY",
+        "width": 90,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_CyclingRoadSign",
+    "line": 1012,
+    "text": "SEASIDE CYCLING ROAD$",
+    "lines": [
+      {
+        "text": "SEASIDE CYCLING ROAD",
+        "width": 114,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_AquaWasHere",
+    "line": 1015,
+    "text": "“TEAM AQUA was here!”\\pSomeone painted that onto this sign,\\nbut then someone else painted over it.\\p“TEAM MAGMA rules!” is what it\\nsays now.$",
+    "lines": [
+      {
+        "text": "“TEAM AQUA was here!”",
+        "width": 114,
+        "unresolved": []
+      },
+      {
+        "text": "Someone painted that onto this sign,",
+        "width": 192,
+        "unresolved": []
+      },
+      {
+        "text": "but then someone else painted over it.",
+        "width": 200,
+        "unresolved": []
+      },
+      {
+        "text": "“TEAM MAGMA rules!” is what it",
+        "width": 156,
+        "unresolved": []
+      },
+      {
+        "text": "says now.",
+        "width": 48,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_Route103Sign",
+    "line": 1022,
+    "text": "ROUTE 110\\n{LEFT_ARROW} ROUTE 103$",
+    "lines": [
+      {
+        "text": "ROUTE 110",
+        "width": 51,
+        "unresolved": []
+      },
+      {
+        "text": "{LEFT_ARROW} ROUTE 103",
+        "width": 60,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_SeasideParkingSign",
+    "line": 1026,
+    "text": "SEASIDE PARKING$",
+    "lines": [
+      {
+        "text": "SEASIDE PARKING",
+        "width": 87,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_MauvilleCitySign",
+    "line": 1029,
+    "text": "ROUTE 110\\n{UP_ARROW} MAUVILLE CITY$",
+    "lines": [
+      {
+        "text": "ROUTE 110",
+        "width": 51,
+        "unresolved": []
+      },
+      {
+        "text": "{UP_ARROW} MAUVILLE CITY",
+        "width": 84,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_TrainerTipsPrlzSleep",
+    "line": 1032,
+    "text": "TRAINER TIPS\\pParalysis usually lowers Speed and\\ncan interrupt a move.\\pSleep stops most moves until the\\nPokémon wakes. Abilities and\\lterrain can change which plans\\lwork.$",
+    "lines": [
+      {
+        "text": "TRAINER TIPS",
+        "width": 69,
+        "unresolved": []
+      },
+      {
+        "text": "Paralysis usually lowers Speed and",
+        "width": 180,
+        "unresolved": []
+      },
+      {
+        "text": "can interrupt a move.",
+        "width": 110,
+        "unresolved": []
+      },
+      {
+        "text": "Sleep stops most moves until the",
+        "width": 171,
+        "unresolved": []
+      },
+      {
+        "text": "Pokémon wakes. Abilities and",
+        "width": 148,
+        "unresolved": []
+      },
+      {
+        "text": "terrain can change which plans",
+        "width": 160,
+        "unresolved": []
+      },
+      {
+        "text": "work.",
+        "width": 26,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_TrainerTipsRegisterItems",
+    "line": 1040,
+    "text": "TRAINER TIPS\\pThe items in the BAG can be reorganized\\nby pressing SELECT.$",
+    "lines": [
+      {
+        "text": "TRAINER TIPS",
+        "width": 69,
+        "unresolved": []
+      },
+      {
+        "text": "The items in the BAG can be reorganized",
+        "width": 205,
+        "unresolved": []
+      },
+      {
+        "text": "by pressing SELECT.",
+        "width": 102,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_TrickHouseSign",
+    "line": 1045,
+    "text": "“Three steps {RIGHT_ARROW} and two steps {UP_ARROW}\\nto reach the wondrous TRICK HOUSE.”$",
+    "lines": [
+      {
+        "text": "“Three steps {RIGHT_ARROW} and two steps {UP_ARROW}",
+        "width": 161,
+        "unresolved": []
+      },
+      {
+        "text": "to reach the wondrous TRICK HOUSE.”",
+        "width": 190,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_BestRecord",
+    "line": 1049,
+    "text": "THE BEST RECORD TO DATE…\\pNo. of collisions: {STR_VAR_1}\\pElapsed time: {STR_VAR_2}$",
+    "lines": [
+      {
+        "text": "THE BEST RECORD TO DATE…",
+        "width": 132,
+        "unresolved": []
+      },
+      {
+        "text": "No. of collisions: {STR_VAR_1}",
+        "width": 163,
+        "unresolved": []
+      },
+      {
+        "text": "Elapsed time: {STR_VAR_2}",
+        "width": 143,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_ThereIsNoRecord",
+    "line": 1054,
+    "text": "THE BEST RECORD TO DATE…\\pNo one seems to have taken the\\nchallenge. There is no record…$",
+    "lines": [
+      {
+        "text": "THE BEST RECORD TO DATE…",
+        "width": 132,
+        "unresolved": []
+      },
+      {
+        "text": "No one seems to have taken the",
+        "width": 162,
+        "unresolved": []
+      },
+      {
+        "text": "challenge. There is no record…",
+        "width": 156,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_ImagineSeeingYouHere",
+    "line": 1059,
+    "text": "PROF. BIRCH: Oh, {PLAYER}{KUN}!\\nImagine seeing you here!\\pAnd where might my {RIVAL} be?$",
+    "lines": [
+      {
+        "text": "PROF. BIRCH: Oh, {PLAYER}{KUN}!",
+        "width": 130,
+        "unresolved": []
+      },
+      {
+        "text": "Imagine seeing you here!",
+        "width": 128,
+        "unresolved": []
+      },
+      {
+        "text": "And where might my {RIVAL} be?",
+        "width": 162,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_HeardYouInstallMatchCall",
+    "line": 1064,
+    "text": "Oh, I see!\\nYou two are running separately.\\lWell, that's fine.\\pOh, yes, I heard that your POKéNAV\\nhad the MATCH CALL system installed.\\pWell, then, I should register you in\\nmy POKéNAV as well.\\pThat way, even when we're apart,\\nI can rate your POKéDEX anytime.\\p… … … … … …$",
+    "lines": [
+      {
+        "text": "Oh, I see!",
+        "width": 49,
+        "unresolved": []
+      },
+      {
+        "text": "You two are running separately.",
+        "width": 164,
+        "unresolved": []
+      },
+      {
+        "text": "Well, that's fine.",
+        "width": 90,
+        "unresolved": []
+      },
+      {
+        "text": "Oh, yes, I heard that your POKéNAV",
+        "width": 178,
+        "unresolved": []
+      },
+      {
+        "text": "had the MATCH CALL system installed.",
+        "width": 192,
+        "unresolved": []
+      },
+      {
+        "text": "Well, then, I should register you in",
+        "width": 180,
+        "unresolved": []
+      },
+      {
+        "text": "my POKéNAV as well.",
+        "width": 98,
+        "unresolved": []
+      },
+      {
+        "text": "That way, even when we're apart,",
+        "width": 169,
+        "unresolved": []
+      },
+      {
+        "text": "I can rate your POKéDEX anytime.",
+        "width": 170,
+        "unresolved": []
+      },
+      {
+        "text": "… … … … … …",
+        "width": 51,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_RegisteredBirchInPokenav",
+    "line": 1076,
+    "text": "Registered PROF. BIRCH\\nin the POKéNAV.$",
+    "lines": [
+      {
+        "text": "Registered PROF. BIRCH",
+        "width": 120,
+        "unresolved": []
+      },
+      {
+        "text": "in the POKéNAV.",
+        "width": 79,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_KeepAnEyeOutForRival",
+    "line": 1080,
+    "text": "PROF. BIRCH: {PLAYER}{KUN}…\\pPlease keep an eye out for my {RIVAL}.\\n… … … … … …\\pWell, I had better get going.\\nSee you again, {PLAYER}{KUN}!$",
+    "lines": [
+      {
+        "text": "PROF. BIRCH: {PLAYER}{KUN}…",
+        "width": 114,
+        "unresolved": []
+      },
+      {
+        "text": "Please keep an eye out for my {RIVAL}.",
+        "width": 201,
+        "unresolved": []
+      },
+      {
+        "text": "… … … … … …",
+        "width": 51,
+        "unresolved": []
+      },
+      {
+        "text": "Well, I had better get going.",
+        "width": 146,
+        "unresolved": []
+      },
+      {
+        "text": "See you again, {PLAYER}{KUN}!",
+        "width": 122,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_DALE_LocalConversation",
+    "line": 1087,
+    "text": "OCTILLERY has eight arms.\\nStill only holds one fishing rod.$",
+    "lines": [
+      {
+        "text": "OCTILLERY has eight arms.",
+        "width": 135,
+        "unresolved": []
+      },
+      {
+        "text": "Still only holds one fishing rod.",
+        "width": 165,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_JacobIntro",
+    "line": 1007,
+    "text": "Whoa! Watch it!\\nI guess you're not used to BIKE racing.$",
+    "lines": [
+      {
+        "text": "Whoa! Watch it!",
+        "width": 78,
+        "unresolved": []
+      },
+      {
+        "text": "I guess you're not used to BIKE racing.",
+        "width": 206,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_JacobDefeated",
+    "line": 1011,
+    "text": "Whoa!\\nMy brakes failed!$",
+    "lines": [
+      {
+        "text": "Whoa!",
+        "width": 28,
+        "unresolved": []
+      },
+      {
+        "text": "My brakes failed!",
+        "width": 89,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_JacobPostBattle",
+    "line": 1015,
+    "text": "Flat tires and brake problems can\\ncause serious injury!\\lInspect your BIKE for problems!$",
+    "lines": [
+      {
+        "text": "Flat tires and brake problems can",
+        "width": 174,
+        "unresolved": []
+      },
+      {
+        "text": "cause serious injury!",
+        "width": 111,
+        "unresolved": []
+      },
+      {
+        "text": "Inspect your BIKE for problems!",
+        "width": 167,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_AnthonyIntro",
+    "line": 1020,
+    "text": "Yo, you!\\nCan you keep up with my speed?$",
+    "lines": [
+      {
+        "text": "Yo, you!",
+        "width": 40,
+        "unresolved": []
+      },
+      {
+        "text": "Can you keep up with my speed?",
+        "width": 160,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_AnthonyDefeated",
+    "line": 1024,
+    "text": "Crash and burn!$",
+    "lines": [
+      {
+        "text": "Crash and burn!",
+        "width": 80,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_AnthonyPostBattle",
+    "line": 1027,
+    "text": "Speed alone won't let me win at POKéMON.\\nI need to reconsider this…$",
+    "lines": [
+      {
+        "text": "Speed alone won't let me win at POKéMON.",
+        "width": 210,
+        "unresolved": []
+      },
+      {
+        "text": "I need to reconsider this…",
+        "width": 138,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_BenjaminIntro",
+    "line": 1031,
+    "text": "Don't panic if your BIKE's going fast!$",
+    "lines": [
+      {
+        "text": "Don't panic if your BIKE's going fast!",
+        "width": 201,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_BenjaminDefeated",
+    "line": 1034,
+    "text": "I shouldn't panic during POKéMON\\nbattles…$",
+    "lines": [
+      {
+        "text": "I shouldn't panic during POKéMON",
+        "width": 173,
+        "unresolved": []
+      },
+      {
+        "text": "battles…",
+        "width": 46,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_BenjaminPostBattle",
+    "line": 1038,
+    "text": "There's no need to panic or stress.\\nTake it easy. There's plenty of time.$",
+    "lines": [
+      {
+        "text": "There's no need to panic or stress.",
+        "width": 184,
+        "unresolved": []
+      },
+      {
+        "text": "Take it easy. There's plenty of time.",
+        "width": 191,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_BenjaminRegister",
+    "line": 1042,
+    "text": "I'll keep chugging on without stressing.\\nGive me a shout if you're up to it.$",
+    "lines": [
+      {
+        "text": "I'll keep chugging on without stressing.",
+        "width": 211,
+        "unresolved": []
+      },
+      {
+        "text": "Give me a shout if you're up to it.",
+        "width": 176,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_BenjaminRematchIntro",
+    "line": 1046,
+    "text": "Aren't you going a little too fast?\\nTake it easy and let's battle.$",
+    "lines": [
+      {
+        "text": "Aren't you going a little too fast?",
+        "width": 183,
+        "unresolved": []
+      },
+      {
+        "text": "Take it easy and let's battle.",
+        "width": 156,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_BenjaminRematchDefeated",
+    "line": 1050,
+    "text": "I didn't panic, but I still lost…$",
+    "lines": [
+      {
+        "text": "I didn't panic, but I still lost…",
+        "width": 165,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_BenjaminRematchPostBattle",
+    "line": 1053,
+    "text": "There's no need to panic or stress.\\nTake it easy. There's plenty of time.$",
+    "lines": [
+      {
+        "text": "There's no need to panic or stress.",
+        "width": 184,
+        "unresolved": []
+      },
+      {
+        "text": "Take it easy. There's plenty of time.",
+        "width": 191,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_AbigailIntro",
+    "line": 1057,
+    "text": "The triathlon is hard in the extreme.\\pYou have to complete the three events\\nof swimming, cycling, and running.$",
+    "lines": [
+      {
+        "text": "The triathlon is hard in the extreme.",
+        "width": 190,
+        "unresolved": []
+      },
+      {
+        "text": "You have to complete the three events",
+        "width": 201,
+        "unresolved": []
+      },
+      {
+        "text": "of swimming, cycling, and running.",
+        "width": 172,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_AbigailDefeated",
+    "line": 1062,
+    "text": "POKéMON battles are hard, too!$",
+    "lines": [
+      {
+        "text": "POKéMON battles are hard, too!",
+        "width": 159,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_AbigailPostBattle",
+    "line": 1065,
+    "text": "I'm exhausted, so I need a break.\\nIt's important to get proper rest.$",
+    "lines": [
+      {
+        "text": "I'm exhausted, so I need a break.",
+        "width": 173,
+        "unresolved": []
+      },
+      {
+        "text": "It's important to get proper rest.",
+        "width": 180,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_AbigailRegister",
+    "line": 1069,
+    "text": "You know, I like you!\\nLet's swap tips about CYCLING ROAD.$",
+    "lines": [
+      {
+        "text": "You know, I like you!",
+        "width": 105,
+        "unresolved": []
+      },
+      {
+        "text": "Let's swap tips about CYCLING ROAD.",
+        "width": 190,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_AbigailRematchIntro",
+    "line": 1073,
+    "text": "Isn't it neat to hold a battle while\\ncycling?$",
+    "lines": [
+      {
+        "text": "Isn't it neat to hold a battle while",
+        "width": 185,
+        "unresolved": []
+      },
+      {
+        "text": "cycling?",
+        "width": 44,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_AbigailRematchDefeated",
+    "line": 1077,
+    "text": "Wow…\\nHow could you be so strong?$",
+    "lines": [
+      {
+        "text": "Wow…",
+        "width": 24,
+        "unresolved": []
+      },
+      {
+        "text": "How could you be so strong?",
+        "width": 144,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_AbigailRematchPostBattle",
+    "line": 1081,
+    "text": "Were you going after a record?\\pI'm sorry if I held you up!$",
+    "lines": [
+      {
+        "text": "Were you going after a record?",
+        "width": 159,
+        "unresolved": []
+      },
+      {
+        "text": "I'm sorry if I held you up!",
+        "width": 136,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_JasmineIntro",
+    "line": 1085,
+    "text": "I've been riding without stopping.\\nMy thighs are like rocks!$",
+    "lines": [
+      {
+        "text": "I've been riding without stopping.",
+        "width": 180,
+        "unresolved": []
+      },
+      {
+        "text": "My thighs are like rocks!",
+        "width": 128,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_JasmineDefeated",
+    "line": 1089,
+    "text": "I'm worried about muscle cramps…$",
+    "lines": [
+      {
+        "text": "I'm worried about muscle cramps…",
+        "width": 173,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_JasminePostBattle",
+    "line": 1092,
+    "text": "Oh, you have some GYM BADGES?\\nNo wonder you're so strong!$",
+    "lines": [
+      {
+        "text": "Oh, you have some GYM BADGES?",
+        "width": 156,
+        "unresolved": []
+      },
+      {
+        "text": "No wonder you're so strong!",
+        "width": 145,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_EdwardIntro",
+    "line": 1096,
+    "text": "I have foreseen your intentions!\\nI cannot possibly lose!$",
+    "lines": [
+      {
+        "text": "I have foreseen your intentions!",
+        "width": 172,
+        "unresolved": []
+      },
+      {
+        "text": "I cannot possibly lose!",
+        "width": 121,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_EdwardDefeated",
+    "line": 1100,
+    "text": "I failed to prophesize my own demise!$",
+    "lines": [
+      {
+        "text": "I failed to prophesize my own demise!",
+        "width": 193,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_EdwardPostBattle",
+    "line": 1103,
+    "text": "I see your future…\\pHmm…\\nI see a shining light…$",
+    "lines": [
+      {
+        "text": "I see your future…",
+        "width": 97,
+        "unresolved": []
+      },
+      {
+        "text": "Hmm…",
+        "width": 24,
+        "unresolved": []
+      },
+      {
+        "text": "I see a shining light…",
+        "width": 112,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_JaclynIntro",
+    "line": 1108,
+    "text": "Ahahahaha!\\nI'll dazzle you with my wonders!$",
+    "lines": [
+      {
+        "text": "Ahahahaha!",
+        "width": 58,
+        "unresolved": []
+      },
+      {
+        "text": "I'll dazzle you with my wonders!",
+        "width": 166,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_JaclynDefeated",
+    "line": 1112,
+    "text": "I wondrously lost!$",
+    "lines": [
+      {
+        "text": "I wondrously lost!",
+        "width": 95,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_JaclynPostBattle",
+    "line": 1115,
+    "text": "You managed to win only because it was\\na wonder! Yes, a wonder!\\lDon't think you can win all the time!$",
+    "lines": [
+      {
+        "text": "You managed to win only because it was",
+        "width": 201,
+        "unresolved": []
+      },
+      {
+        "text": "a wonder! Yes, a wonder!",
+        "width": 123,
+        "unresolved": []
+      },
+      {
+        "text": "Don't think you can win all the time!",
+        "width": 189,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_EdwinIntro",
+    "line": 1120,
+    "text": "Could I see your POKéMON?\\nJust one look, please?$",
+    "lines": [
+      {
+        "text": "Could I see your POKéMON?",
+        "width": 135,
+        "unresolved": []
+      },
+      {
+        "text": "Just one look, please?",
+        "width": 116,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_EdwinDefeated",
+    "line": 1124,
+    "text": "I wanted to complete\\nmy collection…$",
+    "lines": [
+      {
+        "text": "I wanted to complete",
+        "width": 109,
+        "unresolved": []
+      },
+      {
+        "text": "my collection…",
+        "width": 75,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_EdwinPostBattle",
+    "line": 1128,
+    "text": "When I see a POKéMON that I don't know,\\nmy passion as a collector is ignited!$",
+    "lines": [
+      {
+        "text": "When I see a POKéMON that I don't know,",
+        "width": 207,
+        "unresolved": []
+      },
+      {
+        "text": "my passion as a collector is ignited!",
+        "width": 189,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_EdwinRegister",
+    "line": 1132,
+    "text": "I like collecting MATCH CALL\\nregistrations, too…$",
+    "lines": [
+      {
+        "text": "I like collecting MATCH CALL",
+        "width": 146,
+        "unresolved": []
+      },
+      {
+        "text": "registrations, too…",
+        "width": 102,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_EdwinRematchIntro",
+    "line": 1136,
+    "text": "Hi, have you caught any new POKéMON?\\pCould I see your POKéMON?\\nJust one look, please?$",
+    "lines": [
+      {
+        "text": "Hi, have you caught any new POKéMON?",
+        "width": 193,
+        "unresolved": []
+      },
+      {
+        "text": "Could I see your POKéMON?",
+        "width": 135,
+        "unresolved": []
+      },
+      {
+        "text": "Just one look, please?",
+        "width": 116,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_EdwinRematchDefeated",
+    "line": 1141,
+    "text": "Your POKéMON…\\nI envy you.$",
+    "lines": [
+      {
+        "text": "Your POKéMON…",
+        "width": 74,
+        "unresolved": []
+      },
+      {
+        "text": "I envy you.",
+        "width": 57,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_EdwinRematchPostBattle",
+    "line": 1145,
+    "text": "Oh, I long to make all rare POKéMON\\nmine!$",
+    "lines": [
+      {
+        "text": "Oh, I long to make all rare POKéMON",
+        "width": 178,
+        "unresolved": []
+      },
+      {
+        "text": "mine!",
+        "width": 26,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_DaleIntro",
+    "line": 1149,
+    "text": "Hey!\\nDon't sneak up behind me like that!$",
+    "lines": [
+      {
+        "text": "Hey!",
+        "width": 22,
+        "unresolved": []
+      },
+      {
+        "text": "Don't sneak up behind me like that!",
+        "width": 184,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_DaleDefeated",
+    "line": 1153,
+    "text": "I lost!\\nDrat!$",
+    "lines": [
+      {
+        "text": "I lost!",
+        "width": 35,
+        "unresolved": []
+      },
+      {
+        "text": "Drat!",
+        "width": 27,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_DalePostBattle",
+    "line": 1157,
+    "text": "Fishing is all about concentration.\\nYou have to focus on the floater.$",
+    "lines": [
+      {
+        "text": "Fishing is all about concentration.",
+        "width": 182,
+        "unresolved": []
+      },
+      {
+        "text": "You have to focus on the floater.",
+        "width": 174,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_IsabelIntro",
+    "line": 1161,
+    "text": "Ahahaha! I would go anywhere to show\\noff my delightful POKéMON.$",
+    "lines": [
+      {
+        "text": "Ahahaha! I would go anywhere to show",
+        "width": 193,
+        "unresolved": []
+      },
+      {
+        "text": "off my delightful POKéMON.",
+        "width": 138,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_IsabelDefeated",
+    "line": 1165,
+    "text": "Oh, dear, this won't do.$",
+    "lines": [
+      {
+        "text": "Oh, dear, this won't do.",
+        "width": 120,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_IsabelPostBattle",
+    "line": 1168,
+    "text": "Rather than battling, perhaps I should\\nshow off my POKéMON at the FAN CLUB.$",
+    "lines": [
+      {
+        "text": "Rather than battling, perhaps I should",
+        "width": 202,
+        "unresolved": []
+      },
+      {
+        "text": "show off my POKéMON at the FAN CLUB.",
+        "width": 192,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_IsabelRegister",
+    "line": 1172,
+    "text": "That wasn't close to what I could\\ndo to show off my POKéMON.\\pI'll have you as my captive audience\\nas often as possible!$",
+    "lines": [
+      {
+        "text": "That wasn't close to what I could",
+        "width": 176,
+        "unresolved": []
+      },
+      {
+        "text": "do to show off my POKéMON.",
+        "width": 138,
+        "unresolved": []
+      },
+      {
+        "text": "I'll have you as my captive audience",
+        "width": 190,
+        "unresolved": []
+      },
+      {
+        "text": "as often as possible!",
+        "width": 111,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_IsabelRematchIntro",
+    "line": 1178,
+    "text": "Ahahahaha! I would be happy to show\\noff my POKéMON as often as you like!$",
+    "lines": [
+      {
+        "text": "Ahahahaha! I would be happy to show",
+        "width": 188,
+        "unresolved": []
+      },
+      {
+        "text": "off my POKéMON as often as you like!",
+        "width": 189,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_IsabelRematchDefeated",
+    "line": 1182,
+    "text": "Oh, dear, this won't do.$",
+    "lines": [
+      {
+        "text": "Oh, dear, this won't do.",
+        "width": 120,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_IsabelRematchPostBattle",
+    "line": 1185,
+    "text": "I don't think that I could ever stop\\nfrom showing off my POKéMON.\\pBut I like to battle, too!$",
+    "lines": [
+      {
+        "text": "I don't think that I could ever stop",
+        "width": 190,
+        "unresolved": []
+      },
+      {
+        "text": "from showing off my POKéMON.",
+        "width": 150,
+        "unresolved": []
+      },
+      {
+        "text": "But I like to battle, too!",
+        "width": 130,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_TimmyIntro",
+    "line": 1190,
+    "text": "I found some cool POKéMON in the grass\\naround here!$",
+    "lines": [
+      {
+        "text": "I found some cool POKéMON in the grass",
+        "width": 202,
+        "unresolved": []
+      },
+      {
+        "text": "around here!",
+        "width": 65,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_TimmyDefeated",
+    "line": 1194,
+    "text": "Being cool isn't enough to win…$",
+    "lines": [
+      {
+        "text": "Being cool isn't enough to win…",
+        "width": 163,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_TimmyPostBattle",
+    "line": 1197,
+    "text": "It's hard to battle with POKéMON you\\njust caught.$",
+    "lines": [
+      {
+        "text": "It's hard to battle with POKéMON you",
+        "width": 193,
+        "unresolved": []
+      },
+      {
+        "text": "just caught.",
+        "width": 65,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_AlyssaIntro",
+    "line": 1201,
+    "text": "I fell off CYCLING ROAD…\\pI'll get over my embarrassment by\\nbattling with you!$",
+    "lines": [
+      {
+        "text": "I fell off CYCLING ROAD…",
+        "width": 128,
+        "unresolved": []
+      },
+      {
+        "text": "I'll get over my embarrassment by",
+        "width": 176,
+        "unresolved": []
+      },
+      {
+        "text": "battling with you!",
+        "width": 94,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_AlyssaDefeated",
+    "line": 1206,
+    "text": "Oops!\\nI ended up losing!$",
+    "lines": [
+      {
+        "text": "Oops!",
+        "width": 28,
+        "unresolved": []
+      },
+      {
+        "text": "I ended up losing!",
+        "width": 93,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_AlyssaPostBattle",
+    "line": 1210,
+    "text": "Falling… Losing…\\nThis is so humiliating for me!$",
+    "lines": [
+      {
+        "text": "Falling… Losing…",
+        "width": 85,
+        "unresolved": []
+      },
+      {
+        "text": "This is so humiliating for me!",
+        "width": 150,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_JosephIntro",
+    "line": 1214,
+    "text": "Okay! Full-throttle time! If you can't\\ngroove, you get left behind!$",
+    "lines": [
+      {
+        "text": "Okay! Full-throttle time! If you can't",
+        "width": 200,
+        "unresolved": []
+      },
+      {
+        "text": "groove, you get left behind!",
+        "width": 146,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_JosephDefeated",
+    "line": 1218,
+    "text": "You got into the groove all right…$",
+    "lines": [
+      {
+        "text": "You got into the groove all right…",
+        "width": 176,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_JosephPostBattle",
+    "line": 1221,
+    "text": "This isn't going to bring me down!\\nLosing has made me a better man!$",
+    "lines": [
+      {
+        "text": "This isn't going to bring me down!",
+        "width": 175,
+        "unresolved": []
+      },
+      {
+        "text": "Losing has made me a better man!",
+        "width": 169,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_KalebIntro",
+    "line": 1225,
+    "text": "When cute POKéMON help each other…\\nYou won't see a more adorable sight!$",
+    "lines": [
+      {
+        "text": "When cute POKéMON help each other…",
+        "width": 186,
+        "unresolved": []
+      },
+      {
+        "text": "You won't see a more adorable sight!",
+        "width": 190,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_KalebDefeated",
+    "line": 1229,
+    "text": "Have you no compassion or pity?$",
+    "lines": [
+      {
+        "text": "Have you no compassion or pity?",
+        "width": 166,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route110_Text_KalebPostBattle",
+    "line": 1232,
+    "text": "Okay, okay, you've done the best you\\ncould, my pretties.$",
+    "lines": [
+      {
+        "text": "Okay, okay, you've done the best you",
+        "width": 192,
+        "unresolved": []
+      },
+      {
+        "text": "could, my pretties.",
+        "width": 97,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/move_tutors.inc",
+    "label": "MoveTutor_Text_ThisMoveCanOnlyBeLearnedOnce",
+    "line": 1,
+    "text": "I can give this lesson only once.\\nShall we begin?$",
+    "lines": [
+      {
+        "text": "I can give this lesson only once.",
+        "width": 169,
+        "unresolved": []
+      },
+      {
+        "text": "Shall we begin?",
+        "width": 78,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/move_tutors.inc",
+    "label": "MoveTutor_Text_SwaggerTeach",
+    "line": 5,
+    "text": "Heh! My POKéMON totally rules!\\nIt's cooler than any POKéMON!\\pI was lipping off with a swagger in\\nmy step like that when the CHAIRMAN\\lchewed me out.\\pThat took the swagger out of my step.\\pIf you'd like, I'll teach the move\\nSWAGGER to a POKéMON of yours.$",
+    "lines": [
+      {
+        "text": "Heh! My POKéMON totally rules!",
+        "width": 157,
+        "unresolved": []
+      },
+      {
+        "text": "It's cooler than any POKéMON!",
+        "width": 157,
+        "unresolved": []
+      },
+      {
+        "text": "I was lipping off with a swagger in",
+        "width": 178,
+        "unresolved": []
+      },
+      {
+        "text": "my step like that when the CHAIRMAN",
+        "width": 188,
+        "unresolved": []
+      },
+      {
+        "text": "chewed me out.",
+        "width": 75,
+        "unresolved": []
+      },
+      {
+        "text": "That took the swagger out of my step.",
+        "width": 197,
+        "unresolved": []
+      },
+      {
+        "text": "If you'd like, I'll teach the move",
+        "width": 175,
+        "unresolved": []
+      },
+      {
+        "text": "SWAGGER to a POKéMON of yours.",
+        "width": 161,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/move_tutors.inc",
+    "label": "MoveTutor_Text_SwaggerDeclined",
+    "line": 15,
+    "text": "What, no? Can't you get into\\nthe spirit of things?$",
+    "lines": [
+      {
+        "text": "What, no? Can't you get into",
+        "width": 148,
+        "unresolved": []
+      },
+      {
+        "text": "the spirit of things?",
+        "width": 110,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/move_tutors.inc",
+    "label": "MoveTutor_Text_SwaggerWhichMon",
+    "line": 19,
+    "text": "All right, which POKéMON wants to\\nlearn how to SWAGGER?$",
+    "lines": [
+      {
+        "text": "All right, which POKéMON wants to",
+        "width": 171,
+        "unresolved": []
+      },
+      {
+        "text": "learn how to SWAGGER?",
+        "width": 114,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/move_tutors.inc",
+    "label": "MoveTutor_Text_SwaggerTaught",
+    "line": 23,
+    "text": "I'll just praise my POKéMON from now\\non without the swagger.$",
+    "lines": [
+      {
+        "text": "I'll just praise my POKéMON from now",
+        "width": 189,
+        "unresolved": []
+      },
+      {
+        "text": "on without the swagger.",
+        "width": 123,
+        "unresolved": []
+      }
+    ]
+  }
+]

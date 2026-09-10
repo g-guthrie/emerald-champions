@@ -23,19 +23,21 @@ Route101_EventScript_StartBirchRescue::
 	closemessage
 	setobjectxy LOCALID_ROUTE101_BIRCH, 0, 15
 	setobjectxy LOCALID_ROUTE101_ZIGZAGOON, 0, 16
+	setobjectxy LOCALID_ROUTE101_POOCHYENA, 0, 17
 	applymovement LOCALID_PLAYER, Route101_Movement_EnterScene
 	applymovement LOCALID_ROUTE101_BIRCH, Route101_Movement_BirchRunAway1
 	applymovement LOCALID_ROUTE101_ZIGZAGOON, Route101_Movement_ZigzagoonChase1
+	applymovement LOCALID_ROUTE101_POOCHYENA, Route101_Movement_PoochyenaChase1
 	waitmovement 0
 	applymovement LOCALID_ROUTE101_ZIGZAGOON, Route101_Movement_ZigzagoonChaseInCircles
+	applymovement LOCALID_ROUTE101_POOCHYENA, Route101_Movement_PoochyenaChaseInCircles
 	applymovement LOCALID_ROUTE101_BIRCH, Route101_Movement_BirchRunInCircles
 	waitmovement 0
 	applymovement LOCALID_ROUTE101_BIRCH, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	applymovement LOCALID_ROUTE101_ZIGZAGOON, Route101_Movement_ZigzagoonFaceBirch
+	applymovement LOCALID_ROUTE101_POOCHYENA, Route101_Movement_ZigzagoonFaceBirch
 	applymovement LOCALID_ROUTE101_BIRCH, Route101_Movement_BirchFaceZigzagoon
-	waitmovement 0
-	applymovement LOCALID_ROUTE101_POOCHYENA, Route101_Movement_PoochyenaJoinChase
 	waitmovement 0
 	msgbox Route101_Text_PleaseHelp, MSGBOX_DEFAULT
 	closemessage
@@ -221,7 +223,7 @@ Route101_EventScript_BirchsBag::
 	lockall
 	faceplayer
 	goto_if_eq VAR_EC_OPENING_STATE, EC_OPENING_RESCUE_WON, Route101_EventScript_FinishRescue
-	goto_if_eq VAR_EC_OPENING_STATE, EC_OPENING_PAIR_GRANTED, Route101_EventScript_RescueMenu
+	goto_if_eq VAR_EC_OPENING_STATE, EC_OPENING_PAIR_GRANTED, Route101_EventScript_BattleRescue
 	fadescreen FADE_TO_BLACK
 	removeobject LOCALID_ROUTE101_ZIGZAGOON
 	removeobject LOCALID_ROUTE101_POOCHYENA
@@ -230,41 +232,7 @@ Route101_EventScript_BirchsBag::
 	waitmovement 0
 	special ChooseStarter
 	goto_if_eq VAR_RESULT, FALSE, Route101_EventScript_PairUnavailable
-	goto Route101_EventScript_RescueMenu
-
-Route101_EventScript_RescueMenu::
-	message Route101_Text_PrepareRescue
-	waitmessage
-	dynmultipush Route101_Text_Battle, 0
-	dynmultipush Route101_Text_PreparePair, 1
-	dynmultipush Route101_Text_BackToBag, 2
-	dynmultistack 30, 1, FALSE, 3, 0, 0, DYN_MULTICHOICE_CB_NONE
-	closemessage
-	switch VAR_RESULT
-	case 0, Route101_EventScript_BattleRescue
-	case 1, Route101_EventScript_PreparePair
-	goto Route101_EventScript_ReturnToBag
-
-Route101_EventScript_PreparePair::
-	message Route101_Text_PairPreparation
-	waitmessage
-	dynmultipush Route101_Text_MovesAndStats, 0
-	dynmultipush Route101_Text_HeldItems, 1
-	dynmultipush Route101_Text_BackToBag, 2
-	dynmultistack 30, 1, FALSE, 3, 0, 0, DYN_MULTICHOICE_CB_NONE
-	closemessage
-	switch VAR_RESULT
-	case 0, Route101_EventScript_OpeningPrep
-	case 1, Route101_EventScript_OpeningItems
-	goto Route101_EventScript_RescueMenu
-
-Route101_EventScript_OpeningPrep::
-	call Common_EventScript_EmeraldChampionsOpeningPrep
-	goto Route101_EventScript_PreparePair
-
-Route101_EventScript_OpeningItems::
-	call Common_EventScript_EmeraldChampionsOpeningItems
-	goto Route101_EventScript_PreparePair
+	goto Route101_EventScript_BattleRescue
 
 Route101_EventScript_BattleRescue::
 	fadescreen FADE_TO_BLACK
@@ -297,8 +265,9 @@ Route101_EventScript_FinishRescue::
 	end
 
 Route101_EventScript_RescueLost::
-	msgbox Route101_Text_RescueTryAgain, MSGBOX_DEFAULT
-	goto Route101_EventScript_RescueMenu
+	msgbox Route101_Text_RescueTryAgain, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, Route101_EventScript_BattleRescue
+	goto Route101_EventScript_ReturnToBag
 
 Route101_EventScript_PairUnavailable::
 	msgbox Route101_Text_PairUnavailable, MSGBOX_DEFAULT
@@ -325,34 +294,52 @@ Route101_EventScript_ReturnToBag::
 	releaseall
 	end
 
-Route101_Movement_PoochyenaJoinChase:
-	walk_up
-	face_left
+Route101_Movement_PoochyenaChase1:
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
 	step_end
 
-Route101_Text_PrepareRescue:
-	.string "Your two partners are ready.\n"
-	.string "Battle now, or prepare the pair?$"
-
-Route101_Text_PairPreparation:
-	.string "Set up the moves, stats and held\n"
-	.string "items your partners will use.$"
-
-Route101_Text_Battle:
-	.string "Battle$"
-Route101_Text_PreparePair:
-	.string "Prepare pair$"
-Route101_Text_BackToBag:
-	.string "Back$"
-Route101_Text_MovesAndStats:
-	.string "Moves and stats$"
-Route101_Text_HeldItems:
-	.string "Held items$"
+@ Follow Zigzagoon one step behind through the same turns.
+Route101_Movement_PoochyenaChaseInCircles:
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_down
+	walk_fast_down
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_down
+	walk_fast_down
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_down
+	walk_fast_down
+	walk_fast_left
+	step_end
 
 Route101_Text_RescueTryAgain:
 	.string "Your partners are safe.\p"
-	.string "Prepare your next attempt,\n"
-	.string "and help BIRCH!$"
+	.string "Try again and help BIRCH?$"
 
 Route101_Text_PairUnavailable:
 	.string "There is no room for both partners.\n"
@@ -383,15 +370,13 @@ Route101_Text_DontLeaveMe:
 	.string "Don't leave me like this!$"
 
 Route101_Text_YouSavedMe:
-	.string "PROF. BIRCH: Whew…\p"
-	.string "I was in the tall grass studying wild\n"
-	.string "POKéMON when I was jumped.\p"
-	.string "You saved me.\n"
-	.string "Thanks a lot!\p"
-	.string "Oh?\p"
-	.string "Hi, you're {PLAYER}{KUN}!\p"
-	.string "This is not the place to chat, so come\n"
-	.string "by my POKéMON LAB later, okay?$"
+	.string "PROF. BIRCH: Whew! Thank you!\p"
+	.string "I was studying those wild POKéMON\n"
+	.string "when they suddenly chased me.\p"
+	.string "You're {PLAYER}{KUN}, our new neighbor!\n"
+	.string "What a way to meet!\p"
+	.string "Let's get back to my LAB. I want\n"
+	.string "to thank you and your partners.$"
 
 Route101_Text_TakeTiredPokemonToPokeCenter:
 	.string "If POKéMON get tired, take them to\n"
@@ -400,10 +385,9 @@ Route101_Text_TakeTiredPokemonToPokeCenter:
 	.string "TOWN right close by.$"
 
 Route101_Text_WildPokemonInTallGrass:
-	.string "Wild POKéMON will jump out at you in\n"
-	.string "tall grass.\p"
-	.string "If you want to catch POKéMON, you have\n"
-	.string "to go into the tall grass and search.$"
+	.string "Wild POKéMON live in tall grass.\p"
+	.string "Walk through it to find a partner,\n"
+	.string "then use a POKé BALL to catch it.$"
 
 Route101_Text_RouteSign:
 	.string "ROUTE 101\n"

@@ -29,21 +29,32 @@ RustboroCity_PokemonCenter_1F_EventScript_Girl::
 	end
 
 RustboroCity_PokemonCenter_1F_Text_PokemonHavePersonalities:
-	.string "My POKéMON has a NAIVE nature, and my\n"
-	.string "friend's has a JOLLY nature.\p"
-	.string "It's fascinating how POKéMON have\n"
-	.string "personalities!$"
+	.string "My partner's JOLLY Nature raises\n"
+	.string "Speed but lowers Sp. Atk. That\l"
+	.string "suits its physical moves!\p"
+	.string "The TUTOR can change the Nature\n"
+	.string "that affects your stats for free.\l"
+	.string "Each choice shows its tradeoff.\p"
+	.string "IVs are fixed at the best value,\n"
+	.string "31, for everyone. You don't need\l"
+	.string "to breed for better stats.\p"
+	.string "To change an available Ability,\n"
+	.string "select your POKéMON in the party\l"
+	.string "menu and choose Change Ability.$"
 
 RustboroCity_PokemonCenter_1F_Text_MaleAndFemalePokemon:
-	.string "Just like people, there are male and\n"
-	.string "female POKéMON.\p"
-	.string "But no one seems to have any idea how\n"
-	.string "they're different.$"
+	.string "Some POKéMON are male or female.\n"
+	.string "Others have no gender.\p"
+	.string "Sometimes it even changes how\n"
+	.string "they evolve! Female BURMY become\l"
+	.string "WORMADAM; males become MOTHIM.$"
 
 RustboroCity_PokemonCenter_1F_Text_HMCutNextDoor:
-	.string "The man next door gave me an HM!\p"
-	.string "I used it to teach my POKéMON how to\n"
-	.string "CUT down skinny trees.$"
+	.string "The man next door gave me CUT!\p"
+	.string "With the STONE BADGE and a\n"
+	.string "compatible partner, I can clear\l"
+	.string "skinny trees. It doesn't take up\l"
+	.string "a battle move slot.$"
 
 RustboroCity_PokemonCenter_1F_EventScript_Clerk2::
 	lock

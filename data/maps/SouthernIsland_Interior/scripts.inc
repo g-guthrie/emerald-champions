@@ -106,11 +106,15 @@ SouthernIsland_Interior_EventScript_Sign::
 	end
 
 SouthernIsland_Interior_EventScript_SetLatiosBattleVars::
-	seteventmon SPECIES_LATIOS, 100, ITEM_SOUL_DEW
+	setvar VAR_0x8004, SPECIES_LATIOS
+	setvar VAR_0x8005, 0
+	special CreateEmeraldChampionsStaticLegendaryEncounter
 	return
 
 SouthernIsland_Interior_EventScript_SetLatiasBattleVars::
-	seteventmon SPECIES_LATIAS, 100, ITEM_SOUL_DEW
+	setvar VAR_0x8004, SPECIES_LATIAS
+	setvar VAR_0x8005, 0
+	special CreateEmeraldChampionsStaticLegendaryEncounter
 	return
 
 SouthernIsland_Interior_Movement_CameraPanUp:

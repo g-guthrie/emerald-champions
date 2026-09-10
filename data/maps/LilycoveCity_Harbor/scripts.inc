@@ -9,7 +9,7 @@ LilycoveCity_Harbor_OnTransition:
 LilycoveCity_Harbor_EventScript_FerryAttendant::
 	lock
 	faceplayer
-	goto_if_unset FLAG_SYS_GAME_CLEAR, LilycoveCity_Harbor_EventScript_FerryUnavailable
+	goto_if_unset FLAG_BADGE06_GET, LilycoveCity_Harbor_EventScript_FerryUnavailable
 	goto_if_unset FLAG_RECEIVED_SS_TICKET, LilycoveCity_Harbor_EventScript_NoTicket
 	call LilycoveCity_Harbor_EventScript_GetEonTicketState
 	call LilycoveCity_Harbor_EventScript_GetAuroraTicketState
@@ -427,13 +427,15 @@ LilycoveCity_Harbor_Movement_UnusedBoardFerry:
 LilycoveCity_Harbor_EventScript_Sailor::
 	lock
 	faceplayer
-	goto_if_set FLAG_SYS_GAME_CLEAR, LilycoveCity_Harbor_EventScript_SailorFerryAvailable
+	goto_if_set FLAG_BADGE06_GET, LilycoveCity_Harbor_EventScript_SailorFerryAvailable
 	msgbox LilycoveCity_Harbor_Text_SailorFerryUnavailable, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_Harbor_EventScript_SailorFerryAvailable::
 	msgbox LilycoveCity_Harbor_Text_SailorFerryAvailable, MSGBOX_DEFAULT
+	call_if_unset FLAG_RECEIVED_SS_TICKET, LilycoveCity_Harbor_EventScript_GiveSSTicket
+	call_if_unset FLAG_LATIOS_OR_LATIAS_ROAMING, LilycoveCity_Harbor_EventScript_LatiReport
 	checkitem ITEM_EON_TICKET, 1
 	call_if_eq VAR_RESULT, FALSE, LilycoveCity_Harbor_EventScript_GiveEonTicket
 	setflag FLAG_ENABLE_SHIP_SOUTHERN_ISLAND
@@ -576,20 +578,19 @@ LilycoveCity_Harbor_Movement_SailorBoardWithBrineyEast:
 	step_end
 
 LilycoveCity_Harbor_Text_FerryUnavailable:
-	.string "I beg your pardon?\n"
-	.string "You're looking for a ship?\p"
-	.string "I'm sorry, the ferry service isn't\n"
-	.string "available at present…$"
+	.string "The ferry opens to TRAINERS with\n"
+	.string "six BADGES. Come back with the\l"
+	.string "FEATHER BADGE!$"
 
 LilycoveCity_Harbor_Text_MayISeeYourTicket:
 	.string "Hello, are you here for the ferry?\n"
 	.string "May I confirm your ferry pass?$"
 
 LilycoveCity_Harbor_Text_NoTicket:
-	.string "Your ferry pass is not registered.\p"
-	.string "I'm terribly sorry.\p"
-	.string "You need a registered pass to board\n"
-	.string "the ferry.$"
+	.string "You'll need a ferry pass. With\n"
+	.string "six BADGES, speak to the sailor\l"
+	.string "here in LILYCOVE HARBOR. He can\l"
+	.string "register yours.$"
 
 LilycoveCity_Harbor_Text_ConfirmedPassWhereTo:
 	.string "The attendant confirmed your ferry\n"
@@ -614,23 +615,61 @@ LilycoveCity_Harbor_Text_WhereWouldYouLikeToGo:
 	.string "Then, where would you like to go?$"
 
 LilycoveCity_Harbor_Text_SailorFerryUnavailable:
-	.string "Until they finish making the ferry,\n"
-	.string "we sailors have nothing to do…\p"
-	.string "I wish they'd get a move on, the folks\n"
-	.string "at the SHIPYARD in SLATEPORT.$"
+	.string "STERN is preparing exploration\n"
+	.string "trips. Come back with the FEATHER\l"
+	.string "BADGE and I'll have your passes\l"
+	.string "ready.$"
 
 LilycoveCity_Harbor_Text_SailorFerryAvailable:
-	.string "CHAMPION! STERN and DEVON approved\n"
-	.string "four old exploration passes for you.\p"
-	.string "They chart SOUTHERN ISLAND, NAVEL ROCK,\n"
-	.string "BIRTH ISLAND, and FARAWAY ISLAND.$"
+	.string "Six badges! STERN and DEVON have\n"
+	.string "approved your exploration trips.\p"
+	.string "Here are passes for the ferry,\n"
+	.string "SOUTHERN ISLAND, NAVEL ROCK,\l"
+	.string "BIRTH ISLAND and FARAWAY ISLAND.\p"
+	.string "The BATTLE FRONTIER is open too.\n"
+	.string "Its CIRCUIT awards legendary\l"
+	.string "POKéMON as your total wins grow.$"
 
 LilycoveCity_Harbor_Text_ChampionPassesReady:
-	.string "All four routes are active. Show the\n"
-	.string "attendant a pass to choose its island.\p"
-	.string "Each destination preserves a unique\n"
-	.string "legendary encounter. Explore them all.$"
+	.string "Your island routes are active.\n"
+	.string "Show the attendant a pass to\l"
+	.string "choose a destination.\p"
+	.string "Explore for LATIAS or LATIOS,\n"
+	.string "LUGIA, HO-OH, DEOXYS and MEW. You\l"
+	.string "can meet them during your GYM\l"
+	.string "journey.$"
 
 LilycoveCity_Harbor_Text_ChampionPassesBagFull:
-	.string "Your BAG cannot hold the next pass. Make\n"
-	.string "room and speak to me again.$"
+	.string "Your BAG cannot hold the next\n"
+	.string "pass. Make room and speak to me\l"
+	.string "again.$"
+
+LilycoveCity_Harbor_EventScript_GiveSSTicket::
+	giveitem ITEM_SS_TICKET
+	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_Harbor_EventScript_PassesBagFull
+	setflag FLAG_RECEIVED_SS_TICKET
+	return
+
+LilycoveCity_Harbor_EventScript_LatiReport::
+	msgbox LilycoveCity_Harbor_Text_LatiReport, MSGBOX_DEFAULT
+	multichoice 22, 8, MULTI_TV_LATI, TRUE
+	copyvar VAR_ROAMER_POKEMON, VAR_RESULT
+	copyvar VAR_0x8004, VAR_RESULT
+	special InitRoamer
+	setflag FLAG_LATIOS_OR_LATIAS_ROAMING
+	msgbox LilycoveCity_Harbor_Text_LatiReportReady, MSGBOX_DEFAULT
+	return
+
+LilycoveCity_Harbor_Text_LatiReport:
+	.string "I've received two sightings: red\n"
+	.string "LATIAS and blue LATIOS!\p"
+	.string "One will travel HOENN's routes.\n"
+	.string "The other waits on SOUTHERN\l"
+	.string "ISLAND.\p"
+	.string "Which mainland lead shall we\n"
+	.string "follow: red or blue?$"
+
+LilycoveCity_Harbor_Text_LatiReportReady:
+	.string "Red is LATIAS; blue is LATIOS.\p"
+	.string "Watch the routes for your choice,\n"
+	.string "and sail to meet the other!$"

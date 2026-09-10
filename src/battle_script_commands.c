@@ -906,7 +906,7 @@ static const struct PickupItem sPickupTable[] =
     { ITEM_MAX_REVIVE,      {   _,   _,   _,   4,   4,   4,   4,   7,   9,   9, } },
     { ITEM_ELIXIR,          {   _,   _,   _,   _,   1,   1,   4,   5,   4,   5, } },
     { ITEM_MAX_ELIXIR,      {   _,   _,   _,   _,   _,   _,   1,   1,   4,   5, } },
-    { ITEM_BOTTLE_CAP,      {   _,   _,   _,   _,   _,   _,   _,   1,   1,   1, } },
+    { ITEM_PEARL_STRING,    {   _,   _,   _,   _,   _,   _,   _,   1,   1,   1, } },
 };
 
 #undef _
@@ -5826,44 +5826,9 @@ static void Cmd_transformdataexecution(void)
     }
     else
     {
-        s32 i;
-        u8 *battleMonAttacker, *battleMonTarget;
-        u8 timesGotHit;
-
         gChosenMove = MOVE_UNAVAILABLE;
-        gBattleMons[gBattlerAttacker].volatiles.transformed = TRUE;
-        gBattleMons[gBattlerAttacker].volatiles.disabledMove = MOVE_NONE;
-        gBattleMons[gBattlerAttacker].volatiles.disableTimer = 0;
-        gBattleMons[gBattlerAttacker].volatiles.transformedMonSpecies = gBattleMons[gBattlerAttacker].species;
-        gBattleMons[gBattlerAttacker].volatiles.transformedMonPID = gBattleMons[gBattlerTarget].personality;
-
-        if (B_TRANSFORM_SHINY >= GEN_4)
-            gBattleMons[gBattlerAttacker].volatiles.isTransformedMonShiny = gBattleMons[gBattlerTarget].isShiny;
-        else
-            gBattleMons[gBattlerAttacker].volatiles.isTransformedMonShiny = gBattleMons[gBattlerAttacker].isShiny;
-        gBattleMons[gBattlerAttacker].volatiles.mimickedMoves = 0;
-        gBattleMons[gBattlerAttacker].volatiles.usedMoves = 0;
-
-        timesGotHit = GetBattlerPartyState(gBattlerTarget)->timesGotHit;
-        GetBattlerPartyState(gBattlerAttacker)->timesGotHit = timesGotHit;
-
         PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gBattlerTarget].species)
-
-        battleMonAttacker = (u8 *)(&gBattleMons[gBattlerAttacker]);
-        battleMonTarget = (u8 *)(&gBattleMons[gBattlerTarget]);
-
-        for (i = 0; i < offsetof(struct BattlePokemon, pp); i++)
-            battleMonAttacker[i] = battleMonTarget[i];
-
-        gBattleMons[gBattlerAttacker].volatiles.overwrittenAbility = GetBattlerAbility(gBattlerTarget);
-        for (i = 0; i < MAX_MON_MOVES; i++)
-        {
-            u32 pp = GetMovePP(gBattleMons[gBattlerAttacker].moves[i]);
-            if (pp < 5)
-                gBattleMons[gBattlerAttacker].pp[i] = pp;
-            else
-                gBattleMons[gBattlerAttacker].pp[i] = 5;
-        }
+        TransformBattlerData(gBattlerAttacker, gBattlerTarget);
 
         // update AI knowledge
         RecordAllMoves(gBattlerAttacker);
@@ -9576,7 +9541,9 @@ void BS_TryHealPulse(void)
         s32 healAmount = 0;
         if (GetBattlerAbility(gBattlerAttacker) == ABILITY_MEGA_LAUNCHER && IsPulseMove(gCurrentMove))
             healAmount = GetNonDynamaxMaxHP(gBattlerTarget) * 75 / 100;
-        else if (gFieldTimers.terrain == B_TERRAIN_GRASSY && GetMoveEffectArg_MoveProperty(gCurrentMove) == MOVE_EFFECT_FLORAL_HEALING)
+        else if (gFieldTimers.terrain == B_TERRAIN_GRASSY
+              && GetMoveEffect(gCurrentMove) == EFFECT_HEAL_PULSE
+              && GetMoveEffectArg_MoveProperty(gCurrentMove) == MOVE_EFFECT_FLORAL_HEALING)
             healAmount = GetNonDynamaxMaxHP(gBattlerTarget) * 2 / 3;
         else
             healAmount = GetNonDynamaxMaxHP(gBattlerTarget) / 2;

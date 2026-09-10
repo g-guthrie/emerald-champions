@@ -28,12 +28,13 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "scripts"))
 from rom_artifacts import verify_rom_elf_pair
+from emerald_champions_evs import validate_evs
 import native_tools
 
 RUNNER_SOURCE = ROOT / "tests/headless/emerald_champions_mgba_runner.c"
 DEFAULT_RUNNER = ROOT / "build/headless/emerald_champions_mgba_runner"
 BUTTONS = {"A", "B", "START", "SELECT", "UP", "DOWN", "LEFT", "RIGHT", "L", "R", "WAIT"}
-PREP_MUTATIONS = {"roster", "catch", "level", "moves", "preset", "nature", "ability", "item", "stat_points"}
+PREP_MUTATIONS = {"roster", "catch", "level", "moves", "preset", "nature", "ability", "item", "evs"}
 SEMANTIC_EVENTS = {
     "battle_attempt": "battle_attempts",
     "battle_turn": "battle_turns",
@@ -45,7 +46,7 @@ SEMANTIC_EVENTS = {
     "preset_change": "preset_uses",
     "vendor_use": "vendor_uses",
     "ability_change": "ability_changes",
-    "stat_points_change": "stat_point_changes",
+    "evs_change": "stat_point_changes",
     "item_change": "item_changes",
     "level_to_cap": "leveler_uses",
     "center_visit": "center_visits",
@@ -666,16 +667,21 @@ class Session:
             nature = raw.get("nature")
             if nature is not None and not re.fullmatch(r"NATURE_[A-Z0-9_]+", str(nature)):
                 raise HarnessError(f"slot {slot}: invalid nature")
-            points = raw.get("stat_points")
-            if points is not None and (not isinstance(points, list) or len(points) != 6 or any(not isinstance(value, int) or not 0 <= value <= 32 for value in points) or sum(points) != 66):
-                raise HarnessError(f"slot {slot}: Stat Points must total 66 with 0-32 per stat")
+            points = raw.get("evs")
+            if points is not None:
+                if not isinstance(points, list):
+                    raise HarnessError(f"slot {slot}: EVs must be a six-value list")
+                try:
+                    validate_evs(points)
+                except ValueError as error:
+                    raise HarnessError(f"slot {slot}: {error}") from error
             constants_needed += [species]
             constants_needed += moves or []
             constants_needed += [value for value in (ability, item, nature) if value is not None]
-            normalized.append({"species": species, "level": level, "preset": preset, "moves": moves, "ability": ability, "item": item, "nature": nature, "stat_points": points})
+            normalized.append({"species": species, "level": level, "preset": preset, "moves": moves, "ability": ability, "item": item, "nature": nature, "evs": points})
         ids = resolve_game_constants(constants_needed)
         symbol_table = symbols(self.elf)
-        names = ["gEcAgentPrepCommand", "gEcAgentPrepResult", "gEcAgentPrepErrorSlot", "gEcAgentPrepPartyCount", "gEcAgentPrepSpecies", "gEcAgentPrepPreset", "gEcAgentPrepFormat", "gEcAgentPrepLevel", "gEcAgentPrepMoves", "gEcAgentPrepNature", "gEcAgentPrepAbility", "gEcAgentPrepItem", "gEcAgentPrepStatPoints", "gEcHeadlessFixtureActiveScenario"]
+        names = ["gEcAgentPrepCommand", "gEcAgentPrepResult", "gEcAgentPrepErrorSlot", "gEcAgentPrepPartyCount", "gEcAgentPrepSpecies", "gEcAgentPrepPreset", "gEcAgentPrepFormat", "gEcAgentPrepLevel", "gEcAgentPrepMoves", "gEcAgentPrepNature", "gEcAgentPrepAbility", "gEcAgentPrepItem", "gEcAgentPrepEvs", "gEcHeadlessFixtureActiveScenario"]
         missing = [name for name in names if name not in symbol_table]
         if missing:
             raise HarnessError(f"agent-preparation fixture symbols missing from ELF: {missing}")
@@ -700,8 +706,8 @@ class Session:
                 value = mon[key] if mon else None
                 write(name, slot * 4, ids[value] if value else keep)
             for stat in range(6):
-                value = mon["stat_points"][stat] if mon and mon["stat_points"] else keep
-                write("gEcAgentPrepStatPoints", (slot * 6 + stat) * 4, value)
+                value = mon["evs"][stat] if mon and mon["evs"] else keep
+                write("gEcAgentPrepEvs", (slot * 6 + stat) * 4, value)
         write("gEcAgentPrepCommand", 0, 1, False)
         result_reads = [
             {"name": "prep_result", "address": symbol_table["gEcAgentPrepResult"], "width": 4},

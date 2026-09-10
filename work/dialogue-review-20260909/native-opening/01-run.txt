@@ -1,0 +1,1 @@
+RESULT frames=1400 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=4a03d3c706988ff6 nonzero_pixels=37426 save_bytes=0

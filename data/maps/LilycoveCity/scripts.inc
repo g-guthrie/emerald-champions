@@ -98,7 +98,7 @@ LilycoveCity_EventScript_Man3::
 LilycoveCity_EventScript_Girl::
 	lock
 	faceplayer
-	goto_if_set FLAG_BADGE07_GET, LilycoveCity_EventScript_GirlAquaGone
+	goto_if_set FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE, LilycoveCity_EventScript_GirlAquaGone
 	msgbox LilycoveCity_Text_StrangeCaveInCove, MSGBOX_DEFAULT
 	release
 	end
@@ -153,7 +153,7 @@ LilycoveCity_EventScript_ExpertF::
 LilycoveCity_EventScript_ExpertM2::
 	lock
 	faceplayer
-	goto_if_set FLAG_BADGE07_GET, LilycoveCity_EventScript_ExpertM2AquaGone
+	goto_if_set FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE, LilycoveCity_EventScript_ExpertM2AquaGone
 	msgbox LilycoveCity_Text_TeamAquaRenovatedCavern, MSGBOX_DEFAULT
 	release
 	end
@@ -211,7 +211,7 @@ LilycoveCity_EventScript_MuseumSignNoPaintings::
 
 LilycoveCity_EventScript_HarborSign::
 	lockall
-	goto_if_set FLAG_SYS_GAME_CLEAR, LilycoveCity_EventScript_HarborSignFerryReady
+	goto_if_set FLAG_BADGE06_GET, LilycoveCity_EventScript_HarborSignFerryReady
 	msgbox LilycoveCity_Text_HarborSignUnderConstruction, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -453,23 +453,26 @@ LilycoveCity_EventScript_DontKnowAboutBerryBlender::
 	return
 
 LilycoveCity_Text_MayShoppingLetsBattle:
-	.string "MAY: {PLAYER}{KUN}! Shopping? I'm picking\n"
-	.string "held items. The CENTER gives them free,\l"
-	.string "but choosing is the fun part.\p"
-	.string "I rebuilt my six around every SIGN I\n"
-	.string "woke. Battle me and show me yours!$"
+	.string "MAY: {PLAYER}{KUN}! Are you\n"
+	.string "shopping, too?\p"
+	.string "I was looking for a gift for Dad,\n"
+	.string "but I keep finding things I want!\p"
+	.string "It's been ages since our last\n"
+	.string "battle. Want to show me your\l"
+	.string "team?$"
 
 LilycoveCity_Text_MayNotRaisingPokemon:
-	.string "MAY: Not now? Come on. Nobody needs to\n"
-	.string "grind here. Bring the plan you have.$"
+	.string "MAY: Another time, then! I'll be\n"
+	.string "here trying to choose a present.$"
 
 LilycoveCity_Text_MayBattleMe:
-	.string "MAY: Come on, battle me so I can see\n"
-	.string "how you build now!$"
+	.string "MAY: Ready for a battle? I've met\n"
+	.string "some wonderful POKéMON since\l"
+	.string "ROUTE 119!$"
 
 LilycoveCity_Text_MayWontBeBeaten:
-	.string "MAY: My six have an answer for\n"
-	.string "everything. Let's see yours answer them!$"
+	.string "MAY: All right! Everyone, let's\n"
+	.string "give it our best!$"
 
 LilycoveCity_Text_MayDefeat:
 	.string "MAY: I remember our first battle\n"
@@ -477,15 +480,17 @@ LilycoveCity_Text_MayDefeat:
 	.string "You keep finding ways through my\n"
 	.string "teams. I'll have to try again!$"
 LilycoveCity_Text_MayGoingBackToLittleroot:
-	.string "MAY: I'm heading back to LITTLEROOT.\p"
-	.string "Dad's SIGN records need a second pair of\n"
-	.string "hands, and mine are free now.$"
+	.string "MAY: I'm heading back to\n"
+	.string "LITTLEROOT. Dad could use help\l"
+	.string "sorting all our POKéMON\l"
+	.string "sightings.$"
 
 LilycoveCity_Text_MayYouGoingToCollectBadges:
-	.string "{PLAYER}{KUN}, keep going. Earn the\n"
-	.string "BADGES, wake the SIGNS, take the LEAGUE.\p"
-	.string "I'll still finish the POKéDEX before\n"
-	.string "you do. See you!$"
+	.string "Keep going, {PLAYER}{KUN}. Earn\n"
+	.string "the BADGES, explore HOENN and\l"
+	.string "take on the LEAGUE!\p"
+	.string "I'll still finish the POKéDEX\n"
+	.string "before you do. See you!$"
 
 LilycoveCity_Text_MayYouGoingToPokemonLeague:
 	.string "{PLAYER}{KUN}, is it the LEAGUE next?\n"
@@ -504,22 +509,25 @@ LilycoveCity_Text_MayYouGoingToBattleFrontier:
 	.string "See you!$"
 
 LilycoveCity_Text_BrendanShoppingLetsBattle:
-	.string "BRENDAN: {PLAYER}. Running an errand for\n"
-	.string "Dad. No, not DOLLS.\p"
-	.string "It's been a while. Let's see whose six\n"
-	.string "got smarter since ROUTE 119.$"
+	.string "BRENDAN: {PLAYER}! Running an\n"
+	.string "errand for Dad. No, I'm not\l"
+	.string "buying DOLLS!\p"
+	.string "It's been a while since ROUTE\n"
+	.string "119. Got time for a battle?$"
 
 LilycoveCity_Text_BrendanNoConfidence:
-	.string "BRENDAN: What, no plan ready?\n"
-	.string "That's new for you.$"
+	.string "BRENDAN: Got other plans? Fair\n"
+	.string "enough. Come find me when you're\l"
+	.string "ready!$"
 
 LilycoveCity_Text_BrendanBattleMe:
-	.string "BRENDAN: Battle me. I want to see how\n"
-	.string "you build now.$"
+	.string "BRENDAN: How about that battle?\n"
+	.string "I've been looking forward to it!$"
 
 LilycoveCity_Text_BrendanWontBeBeaten:
-	.string "BRENDAN: I read every SIGN on the way\n"
-	.string "here. I'm not losing to {PLAYER}.$"
+	.string "BRENDAN: I've caught and trained\n"
+	.string "POKéMON all the way here. I'm\l"
+	.string "ready for you, {PLAYER}!$"
 
 LilycoveCity_Text_BrendanDefeat:
 	.string "BRENDAN: You found a way through\n"
@@ -528,15 +536,19 @@ LilycoveCity_Text_BrendanDefeat:
 	.string "I'll have to make the next one\l"
 	.string "count.$"
 LilycoveCity_Text_BrendanGoingBackToLittleroot:
-	.string "BRENDAN: I'm going home to LITTLEROOT.\p"
-	.string "Dad's SIGN records are a mess. Someone\n"
-	.string "who's actually seen them should help.$"
+	.string "BRENDAN: I'm heading home. Dad\n"
+	.string "needs someone to sort our POKéMON\l"
+	.string "sightings, and I know where I\l"
+	.string "found mine.$"
 
 LilycoveCity_Text_BrendanYouGoingToCollectBadges:
-	.string "{PLAYER}, what's next? The rest of the\n"
-	.string "BADGES and the LEAGUE?\p"
-	.string "Maybe I'll do that too…\p"
-	.string "Anyway. Keep reading them faster.$"
+	.string "BRENDAN: What's next, {PLAYER}?\n"
+	.string "The rest of the BADGES, then the\l"
+	.string "LEAGUE?\p"
+	.string "Maybe I'll try that, too. But\n"
+	.string "first, Dad's waiting for these\l"
+	.string "supplies.\p"
+	.string "Don't get too far ahead of me!$"
 
 LilycoveCity_Text_BrendanYouGoingToPokemonLeague:
 	.string "{PLAYER}, going for the LEAGUE?\p"
@@ -598,10 +610,12 @@ LilycoveCity_Text_StrangeCaveInCove:
 	.string "the cove at the edge of town?$"
 
 LilycoveCity_Text_GoingToMoveDeleterForHMs:
-	.string "I'm going to teach my POKéMON some new\n"
-	.string "moves for entering a CONTEST.\p"
-	.string "So, I'm going to see the MOVE DELETER\n"
-	.string "and make it forget HM moves.$"
+	.string "I'm choosing moves for a CONTEST.\p"
+	.string "The move tutor beside the CENTER's\n"
+	.string "PC helps me rearrange my team's moves.\p"
+	.string "Field skills don't need a move slot\n"
+	.string "once licensed, so I have room to try\l"
+	.string "something new!$"
 
 LilycoveCity_Text_ImFromKanto:
 	.string "I came from KANTO.\p"

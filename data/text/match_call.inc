@@ -147,18 +147,17 @@ MatchCall_NegativeBattleText2::
 	.string "losing. Oh, well!$"
 
 MatchCall_NegativeBattleText3::
-	.string "Hey there, {PLAYER}!\n"
-	.string "It's me, {STR_VAR_1}.\p"
-	.string "I just got cleaned in a battle.\p"
-	.string "I guess I need to raise my team\n"
-	.string "some more!$"
+	.string "Hey there, {PLAYER}! It's me,\n"
+	.string "{STR_VAR_1}!\p"
+	.string "I just got cleaned in a battle. I\n"
+	.string "need to rethink how my partners\l"
+	.string "work together!$"
 
 MatchCall_NegativeBattleText4::
-	.string "Hey, {PLAYER}.\n"
-	.string "{STR_VAR_1} here.\p"
+	.string "Hey, {PLAYER}. {STR_VAR_1} here.\p"
 	.string "I tried another battle yesterday,\n"
 	.string "but I couldn't pull out the win.\p"
-	.string "My team needs more raising.\n"
+	.string "I'm trying a different lead pair.\n"
 	.string "Okay, catch you later.$"
 
 MatchCall_NegativeBattleText5::
@@ -205,11 +204,10 @@ MatchCall_NegativeBattleText9::
 	.string "Oh, it burns me up!$"
 
 MatchCall_NegativeBattleText10::
-	.string "Oh, {PLAYER}{KUN}, hello…\n"
-	.string "This is {STR_VAR_1}.\p"
-	.string "A little earlier, I was in a battle.\n"
-	.string "I lost, though.\p"
-	.string "I need to raise my POKéMON more.\n"
+	.string "Oh, {PLAYER}{KUN}, hello… This is\n"
+	.string "{STR_VAR_1}.\p"
+	.string "I lost a battle earlier. I'm going\n"
+	.string "to review our moves with a TUTOR.\p"
 	.string "See you around.$"
 
 MatchCall_NegativeBattleText11::
@@ -2279,16 +2277,15 @@ MatchCall_Text_Glacia::
 	.string "to the POKéMON LEAGUE…$"
 
 MatchCall_Text_Drake::
-	.string "DRAKE: That voice… {PLAYER}, is it?\n"
-	.string "You sound well…\p"
-	.string "I understand that there is now\n"
-	.string "a facility called the BATTLE\l"
-	.string "FRONTIER that tests the skills of\l"
-	.string "TRAINERS.\p"
-	.string "However, if you wish to have real\n"
-	.string "battles, there is no substitute for\l"
-	.string "the POKéMON LEAGUE!\p"
-	.string "Don't you agree, {PLAYER}?$"
+	.string "DRAKE: That voice… {PLAYER}, is\n"
+	.string "it? You sound well…\p"
+	.string "The CHAMPIONS CIRCUIT tests how\n"
+	.string "long a crew can keep winning.\p"
+	.string "Here at the LEAGUE, you face us in\n"
+	.string "succession. Two worthy challenges\l"
+	.string "for a seasoned TRAINER.\p"
+	.string "When the sea brings you back,\n"
+	.string "we'll be ready.$"
 
 MatchCall_Text_Wallace::
 	.string "WALLACE: Hello, {PLAYER}{KUN}.\n"
@@ -2394,8 +2391,9 @@ MatchCall_Text_May8::
 	.string "MAY: {PLAYER}{KUN}, hi.\p"
 	.string "MT. PYRE is a memorial to POKéMON\n"
 	.string "whose lives have ended.\p"
-	.string "Maybe as a result, it's infested\n"
-	.string "with many GHOST-type POKéMON!$"
+	.string "GHOST POKéMON gather there. I\n"
+	.string "wonder if they feel at home among\l"
+	.string "the memories.$"
 
 MatchCall_Text_May9::
 	.string "MAY: Hi, {PLAYER}{KUN}!\p"
@@ -2521,8 +2519,9 @@ MatchCall_Text_Brendan8::
 	.string "BRENDAN: {PLAYER}!\p"
 	.string "MT. PYRE is a memorial to POKéMON\n"
 	.string "whose lives have ended.\p"
-	.string "That's probably why it's infested\n"
-	.string "with many GHOST-type POKéMON!$"
+	.string "There are GHOST POKéMON\n"
+	.string "everywhere. I'm keeping my voice\l"
+	.string "down while I explore.$"
 
 MatchCall_Text_Brendan9::
 	.string "BRENDAN: Hey there, {PLAYER}.\p"
@@ -2685,21 +2684,16 @@ MatchCall_Text_Scott5::
 	.string "And I don't raise POKéMON…$"
 
 MatchCall_Text_Scott6::
-	.string "SCOTT: Hi, hi, {PLAYER}{KUN}!\p"
-	.string "You know that you can challenge\n"
-	.string "the POKéMON LEAGUE when you've\l"
-	.string "collected all the GYM BADGES?\p"
-	.string "With your talent, becoming the\n"
-	.string "CHAMPION isn't a pipe dream.\p"
-	.string "But did you know?\n"
-	.string "There's somewhere even better.\p"
-	.string "But, that's all I'm willing to say\n"
-	.string "for the time being.\p"
-	.string "It's something you can look\n"
-	.string "forward to.\p"
-	.string "When you've won your way through\n"
-	.string "the POKéMON LEAGUE into the HALL\l"
-	.string "OF FAME!$"
+	.string "SCOTT: Hi, hi, {PLAYER}{KUN}! All\n"
+	.string "eight BADGES! The LEAGUE is\l"
+	.string "waiting for you.\p"
+	.string "If you want another challenge,\n"
+	.string "visit the CHAMPIONS CIRCUIT at the\l"
+	.string "BATTLE FRONTIER.\p"
+	.string "The LILYCOVE ferry opens that\n"
+	.string "route with six BADGES. You've\l"
+	.string "already earned your passage!\p"
+	.string "I hope to see you over there!$"
 
 MatchCall_Text_Scott7::
 	.string "… … … … … …\n"

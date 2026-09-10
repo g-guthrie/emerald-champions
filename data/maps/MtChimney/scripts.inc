@@ -543,54 +543,59 @@ MtChimney_EventScript_SawyerRematch::
 	end
 
 MtChimney_Text_MeteoriteWillActivateVolcano:
-	.string "The METEORITE will force MT. CHIMNEY's\n"
-	.string "energy into a stable, permanent field.\p"
-	.string "Every cavern on the fault line will\n"
-	.string "open, and every ancient SIGN will wake.$"
+	.string "The METEORITE will drive this\n"
+	.string "volcano's energy into the fault\l"
+	.string "line.\p"
+	.string "Caverns will open beneath HOENN,\n"
+	.string "and the land will rise!$"
 
 MtChimney_Text_MaxieIntro:
-	.string "MAXIE: So you are ARCHIE's unexpected\n"
-	.string "variable. I prefer solvable systems.\p"
-	.string "The sea changes without permission.\n"
-	.string "Land lets people build, plan, and grow.\p"
-	.string "This machine will stabilize the fault\n"
-	.string "network and expand that certainty.\p"
-	.string "The marks you call CHAMPION'S SIGNS are\n"
-	.string "nodes of the same ancient system.\p"
-	.string "You may test my model. You will not stop\n"
-	.string "it.$"
+	.string "MAXIE: ARCHIE's unexpected ally.\n"
+	.string "I prefer problems with clear\l"
+	.string "solutions.\p"
+	.string "The sea changes without\n"
+	.string "permission. Land gives people\l"
+	.string "room to build and grow.\p"
+	.string "This machine will awaken the\n"
+	.string "power beneath MT. CHIMNEY. HOENN\l"
+	.string "will have all the land it needs.\p"
+	.string "You may test my team. You will\n"
+	.string "not stop my work.$"
 
 MtChimney_Text_MaxieDefeat:
-	.string "You found the flaw before I could\n"
-	.string "stabilize the field...$"
+	.string "You stopped my team… How?!$"
 
 MtChimney_Text_MaxieYouHaventSeenLastOfMagma:
-	.string "MAXIE: The METEORITE was one input, not\n"
-	.string "the plan itself. The BLUE ORB remains.\p"
-	.string "You stopped this eruption, but the fault\n"
-	.string "line is already moving beneath HOENN.$"
+	.string "MAXIE: You've stopped this\n"
+	.string "machine. But MAGMA's work will\l"
+	.string "continue.\p"
+	.string "There is a greater power beneath\n"
+	.string "HOENN. We will find a way to\l"
+	.string "awaken it.$"
 
 MtChimney_Text_TabithaIntro:
-	.string "TABITHA: You followed the METEORITE.\n"
-	.string "Good. You understand the real objective.\p"
-	.string "MAXIE already has it. My formation only\n"
-	.string "needs to keep you from his machine.$"
+	.string "TABITHA: So you followed us from\n"
+	.string "METEOR FALLS!\p"
+	.string "MAXIE is working with the\n"
+	.string "METEORITE. I'm not letting you\l"
+	.string "near his machine!$"
 
 MtChimney_Text_TabithaDefeat:
-	.string "You broke the guard line too quickly…$"
+	.string "I couldn't hold you off!$"
 
 MtChimney_Text_TabithaPostBattle:
-	.string "MAXIE, begin the fault-line sequence!\n"
-	.string "The delay model has failed.$"
+	.string "TABITHA: MAXIE! The intruder is\n"
+	.string "coming!$"
 
 MtChimney_Text_Grunt2Intro:
-	.string "Stable land means homes, roads, and room\n"
-	.string "for people to build a future.\p"
+	.string "Stable land means homes, roads,\n"
+	.string "and room for people to build a\l"
+	.string "future.\p"
 	.string "That is why I chose TEAM MAGMA.\n"
 	.string "You will not interrupt the work.$"
 
 MtChimney_Text_Grunt2Defeat:
-	.string "My certainty cracked first…$"
+	.string "I couldn't protect the machine…$"
 
 MtChimney_Text_Grunt2PostBattle:
 	.string "MAXIE promised a safer world.\p"
@@ -598,49 +603,56 @@ MtChimney_Text_Grunt2PostBattle:
 	.string "meant to help, what did we misjudge?$"
 
 MtChimney_Text_Grunt1Intro:
-	.string "This ridge could become solid ground,\n"
-	.string "not a threat hanging over LAVARIDGE.\p"
-	.string "I believe in that future enough to\n"
-	.string "defend it.$"
+	.string "LAVARIDGE sits beside a volcano.\n"
+	.string "Imagine if we could make all that\l"
+	.string "land safe!\p"
+	.string "That's what MAXIE promised us.\n"
+	.string "I'm not letting you stop him!$"
 
 MtChimney_Text_Grunt1Defeat:
-	.string "Belief was not enough to hold the line…$"
+	.string "Even with all our training…$"
 
 MtChimney_Text_Grunt1PostBattle:
-	.string "You came through fire to challenge us.\n"
-	.string "Maybe certainty is not the same as truth.$"
+	.string "I thought this would make people\n"
+	.string "feel safer. Why are they all so\l"
+	.string "frightened?$"
 
 MtChimney_Text_TeamAquaAlwaysMessingWithPlans:
-	.string "AQUA keeps changing the field before our\n"
-	.string "formation can stabilize it.$"
+	.string "Those AQUA grunts keep trying to\n"
+	.string "reach our machine!$"
 
 MtChimney_Text_MeteoritesPackAmazingPower:
-	.string "The METEORITE resonates with the fault!$"
+	.string "The METEORITE resonates with the\n"
+	.string "fault!$"
 
 MtChimney_Text_YouBetterNotMessWithUs:
-	.string "Stand back! We are forcing the mountain\n"
-	.string "into a stable state for everyone.$"
+	.string "Stand back! MAXIE is working at\n"
+	.string "the crater!$"
 
 MtChimney_Text_AquasNameSimilar:
-	.string "MAGMA builds fixed ground. AQUA trusts\n"
-	.string "change without limits.\p"
-	.string "Do not confuse opposite answers.$"
+	.string "MAGMA wants more land. AQUA wants\n"
+	.string "more sea.\p"
+	.string "And neither side is giving way\n"
+	.string "today!$"
 
 MtChimney_Text_DouseThemInFire:
 	.string "Hold the high ground!\n"
 	.string "Do not let AQUA reach the machine!$"
 
 MtChimney_Text_KeepMakingMoreLand:
-	.string "We will make the fault line hold!$"
+	.string "More land means more places to\n"
+	.string "live! That's why we're here!$"
 
 MtChimney_Text_Bufoh:
 	.string "The line is holding!$"
 
 MtChimney_Text_ArchieGoStopTeamMagma:
-	.string "ARCHIE: {PLAYER}! MAXIE is forcing the\n"
-	.string "METEORITE into the volcano's fault line.\p"
-	.string "If it breaks, fire will tear through the\n"
-	.string "mountain and every connected cavern.$"
+	.string "ARCHIE: {PLAYER}! MAXIE is\n"
+	.string "forcing the METEORITE into the\l"
+	.string "volcano's fault line.\p"
+	.string "If it breaks, fire will tear\n"
+	.string "through the mountain and every\l"
+	.string "connected cavern.$"
 
 MtChimney_Text_ArchieIHaveMyHandsFull:
 	.string "ARCHIE: Grrr…\p"
@@ -650,27 +662,30 @@ MtChimney_Text_ArchieIHaveMyHandsFull:
 	.string "three opponents at once!$"
 
 MtChimney_Text_ArchieThankYou:
-	.string "ARCHIE: You stopped him. I owe you that.\p"
-	.string "But do not confuse AQUA with MAGMA. We\n"
-	.string "would free the old current, not cage it.\p"
-	.string "Take JAGGED PASS down to LAVARIDGE.\n"
-	.string "Your next GYM is there.\p"
-	.string "That METEORITE is still in the machine.\n"
-	.string "COZMO in FALLARBOR may want it back.\p"
-	.string "If you stand in our way again, I will\n"
-	.string "expect an even better battle.$"
+	.string "ARCHIE: You stopped him. I owe\n"
+	.string "you that.\p"
+	.string "The sea POKéMON along this coast\n"
+	.string "can breathe easy. But AQUA's work\l"
+	.string "isn't finished.\p"
+	.string "JAGGED PASS leads down to\n"
+	.string "LAVARIDGE. You've earned a rest.\p"
+	.string "And that METEORITE is still in\n"
+	.string "the machine. COZMO in FALLARBOR\l"
+	.string "will want it back.$"
 
 MtChimney_Text_MagmaOutnumbersUs:
-	.string "MAGMA fixed every approach at once.\n"
-	.string "We cannot break their formation!$"
+	.string "MAGMA outnumbers us! We can't get\n"
+	.string "through to the machine!$"
 
 MtChimney_Text_LessHabitatForWaterPokemon:
-	.string "If they seal the currents, every WATER\n"
-	.string "POKéMON below loses its habitat!$"
+	.string "If lava pours into the sea, what\n"
+	.string "happens to the POKéMON living\l"
+	.string "there?$"
 
 MtChimney_Text_MagmasNameSimilar:
-	.string "AQUA keeps life moving. MAGMA would\n"
-	.string "freeze the world into one answer.$"
+	.string "We joined AQUA to protect the\n"
+	.string "sea. We can't let MAGMA destroy\l"
+	.string "it!$"
 
 MtChimney_Text_Bushaa:
 	.string "Break their line!$"
@@ -691,10 +706,9 @@ MtChimney_Text_OhFineThen:
 	.string "Oh, fine then.$"
 
 MtChimney_Text_MeteoriteFittedOnMachine:
-	.string "A METEORITE is fitted on a mysterious\n"
-	.string "machine…\p"
-	.string "The machine seems to be storing\n"
-	.string "energy in the METEORITE.$"
+	.string "A METEORITE is fitted into the\n"
+	.string "machine. Cables run from it\l"
+	.string "toward the crater.$"
 
 MtChimney_Text_RemoveTheMeteorite:
 	.string "A METEORITE is fitted on a mysterious\n"
@@ -714,7 +728,7 @@ MtChimney_Text_MachineMakesNoResponse:
 	.string "It makes no response whatsoever.$"
 
 MtChimney_Text_RouteSign:
-	.string "{DOWN_ARROW} JAGGED PATH\n"
+	.string "{DOWN_ARROW} JAGGED PASS\n"
 	.string "LAVARIDGE TOWN AHEAD$"
 
 MtChimney_Text_ShelbyIntro:

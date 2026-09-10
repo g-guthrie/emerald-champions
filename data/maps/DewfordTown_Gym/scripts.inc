@@ -286,18 +286,18 @@ DewfordTown_Gym_EventScript_GymStatue::
 
 DewfordTown_Gym_Text_GymGuideAdvice:
 	.string "BRAWLY brings a powerful Fighting\n"
-	.string "team, but his partners do more\n"
+	.string "team, but his partners do more\l"
 	.string "than attack.\p"
 	.string "PACHIRISU draws single-target\n"
-	.string "moves aside. His fighters use\n"
-	.string "speed, priority and support to\n"
+	.string "moves aside. His fighters use\l"
+	.string "speed, priority and support to\l"
 	.string "create openings.\p"
 	.string "Normal Pokémon risk Fighting\n"
-	.string "damage, but a useful support role\n"
-	.string "can still earn a place on your\n"
+	.string "damage, but a useful support role\l"
+	.string "can still earn a place on your\l"
 	.string "team.\p"
 	.string "The GYM grows brighter as you\n"
-	.string "defeat its trainers. Make every\n"
+	.string "defeat its trainers. Make every\l"
 	.string "action count!$"
 
 DewfordTown_Gym_Text_GymGuidePostVictory:
@@ -306,7 +306,7 @@ DewfordTown_Gym_Text_GymGuidePostVictory:
 
 DewfordTown_Gym_Text_TakaoIntro:
 	.string "GRAPPLOCT can hold a target in\n"
-	.string "place. WOBBUFFET makes switching\n"
+	.string "place. WOBBUFFET makes switching\l"
 	.string "difficult too.\p"
 	.string "Let us see how you handle the\n"
 	.string "pressure!$"
@@ -316,7 +316,7 @@ DewfordTown_Gym_Text_TakaoDefeat:
 
 DewfordTown_Gym_Text_TakaoPostBattle:
 	.string "HITMONLEE's WHITE HERB can clear\n"
-	.string "its stat drops and activate\n"
+	.string "its stat drops and activate\l"
 	.string "UNBURDEN.\p"
 	.string "Speed can change in the middle of\n"
 	.string "a turn. Watch the whole board.$"
@@ -332,7 +332,7 @@ DewfordTown_Gym_Text_JocelynDefeat:
 
 DewfordTown_Gym_Text_JocelynPostBattle:
 	.string "TAILWIND lasts four turns.\n"
-	.string "BRELOOM's POISON HEAL can keep it\n"
+	.string "BRELOOM's POISON HEAL can keep it\l"
 	.string "going while the field changes.\p"
 	.string "Plan for the partners still in\n"
 	.string "reserve.$"
@@ -352,7 +352,7 @@ DewfordTown_Gym_Text_LauraPostBattle:
 DewfordTown_Gym_Text_LilithIntro:
 	.string "INTIMIDATE softens you, then SCRAGGY\n"
 	.string "dances into the space it made.\p"
-	.string "Weaken me and I only grow!$"
+	.string "We build on every opening!$"
 
 DewfordTown_Gym_Text_LilithDefeat:
 	.string "You brought a winning team!$"
@@ -362,8 +362,8 @@ DewfordTown_Gym_Text_LilithPostBattle:
 	.string "not one trick repeated twice.$"
 
 DewfordTown_Gym_Text_BrendenIntro:
-	.string "SAWK breaks through what should stop\n"
-	.string "it. MACHOP simply never misses.\p"
+	.string "MACHOP's NO GUARD beats accuracy\n"
+	.string "tricks. SAWK has MOLD BREAKER.\p"
 	.string "There is no safe angle here!$"
 
 DewfordTown_Gym_Text_BrendenDefeat:
@@ -385,7 +385,7 @@ DewfordTown_Gym_Text_CristianPostBattle:
 	.string "FALINKS can power up JUSTIFIED\n"
 	.string "before its partner attacks.\p"
 	.string "GALLADE and LUCARIO can both use\n"
-	.string "that opening. Always check who is\n"
+	.string "that opening. Always check who is\l"
 	.string "active.$"
 
 DewfordTown_Gym_Text_BrawlyIntro:

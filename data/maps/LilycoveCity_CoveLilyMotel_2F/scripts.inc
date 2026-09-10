@@ -93,12 +93,14 @@ LilycoveCity_CoveLilyMotel_2F_Text_ShowMeCompletedDex:
 	.string "show me.$"
 
 LilycoveCity_CoveLilyMotel_2F_Text_BuffelChallenge:
-	.string "I helped design battles where every role\n"
-	.string "hands momentum to the next.\p"
-	.string "Want to test one of my favorite teams?$"
+	.string "I helped design battles where\n"
+	.string "every role hands momentum to the\l"
+	.string "next.\p"
+	.string "Want to test one of my favorite\n"
+	.string "teams?$"
 
 LilycoveCity_CoveLilyMotel_2F_Text_BuffelDefeat:
-	.string "You broke the redirect before the setup.$"
+	.string "You've given me something to think on!$"
 
 LilycoveCity_CoveLilyMotel_2F_Text_BuffelAfter:
 	.string "The best battle is difficult, readable,\n"
@@ -127,12 +129,13 @@ LilycoveCity_CoveLilyMotel_2F_Text_ImTheGraphicArtist:
 	.string "POKéMON of HOENN interesting?$"
 
 LilycoveCity_CoveLilyMotel_2F_Text_GirlsAreCute:
-	.string "The girl TUBERS, they're cute, hey?\n"
-	.string "To battle against a cute TUBER…\p"
-	.string "Whoop, it's so awesome!\p"
-	.string "And the TWINS! Aren't they cute?\n"
-	.string "A 2-on-2 battle with TWINS…\p"
-	.string "Whoop, it's unbearably fun!$"
+	.string "I love watching young TRAINERS\n"
+	.string "discover what their POKéMON can\l"
+	.string "do.\p"
+	.string "A pair of TWINS surprised me with\n"
+	.string "their teamwork. They'd practiced\l"
+	.string "together for ages!\p"
+	.string "Whoop! That's the joy of battling!$"
 
 LilycoveCity_CoveLilyMotel_2F_Text_SeaBreezeTicklesHeart:
 	.string "The sea breeze tickles my heart.\n"

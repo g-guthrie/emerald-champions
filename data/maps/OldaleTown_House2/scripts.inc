@@ -10,12 +10,23 @@ OldaleTown_House2_EventScript_Man::
 	end
 
 OldaleTown_House2_Text_PokemonLevelUp:
-	.string "POKéMON grow from battles, but you\n"
-	.string "never need to grind.\p"
-	.string "A POKéMON CENTER LEVELER trains your\n"
-	.string "whole party to the current limit.$"
+	.string "Battles test your team here.\n"
+	.string "They don't give experience.\p"
+	.string "Use the free LEVELER from the\n"
+	.string "CENTER to raise your whole party\l"
+	.string "to the current level cap.\p"
+	.string "BADGES raise that cap. Use it\n"
+	.string "again when a new partner joins!\p"
+	.string "It also checks for evolutions.\n"
+	.string "If you meet a new requirement,\l"
+	.string "try it again, even at the cap.$"
 
 OldaleTown_House2_Text_YoullGoFurtherWithStrongPokemon:
-	.string "Raw levels alone won't take you far.\p"
-	.string "Build different partners for different\n"
-	.string "battles, then change plans when needed.$"
+	.string "A new move can make an old\n"
+	.string "partner feel completely different!\p"
+	.string "The TUTOR by the CENTER PC can\n"
+	.string "teach your partner its available\l"
+	.string "moves for free.\p"
+	.string "You don't need to wait for\n"
+	.string "level-up moves. Visit again\l"
+	.string "after your partner evolves!$"

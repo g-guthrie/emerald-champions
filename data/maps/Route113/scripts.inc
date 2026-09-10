@@ -145,9 +145,8 @@ Route113_Text_FunWalkingThroughAsh:
 	.string "Let BISHARP hold a LEADER'S CREST,\n"
 	.string "then level it up for KINGAMBIT.\l"
 	.string "The crest is used up when it evolves.\p"
-	.string "The free Evolution Items archive has\n"
-	.string "crests. Show a battle supplier your\l"
-	.string "MEGA RING to open the archive.$"
+	.string "LILYCOVE's evolution department\n"
+	.string "sells LEADER'S CRESTS.$"
 
 Route113_Text_RouteSign111:
 	.string "ROUTE 113\n"

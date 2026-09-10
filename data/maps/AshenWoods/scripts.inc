@@ -25,18 +25,17 @@ AshenWoods_EventScript_SetWeatherAsh::
 
 AshenWoods_EventScript_ShowVialChansey::
 	clearflag FLAG_HIDE_ASHEN_WOODS_VIAL_CHANSEY
+	setobjectxyperm LOCALID_ASHEN_WOODS_VIAL_CHANSEY, 14, 29
 	end
 
 AshenWoods_EventScript_ShowVialChanseyPos1::
 	clearflag FLAG_HIDE_ASHEN_WOODS_VIAL_CHANSEY
-	setobjectxy LOCALID_ASHEN_WOODS_VIAL_CHANSEY, 6, 40
-	copyobjectxytoperm LOCALID_ASHEN_WOODS_VIAL_CHANSEY
+	setobjectxyperm LOCALID_ASHEN_WOODS_VIAL_CHANSEY, 6, 39
 	end
 
 AshenWoods_EventScript_ShowVialChanseyPos2::
 	clearflag FLAG_HIDE_ASHEN_WOODS_VIAL_CHANSEY
-	setobjectxy LOCALID_ASHEN_WOODS_VIAL_CHANSEY, 27, 43
-	copyobjectxytoperm LOCALID_ASHEN_WOODS_VIAL_CHANSEY
+	setobjectxyperm LOCALID_ASHEN_WOODS_VIAL_CHANSEY, 27, 43
 	end
 
 AshenWoods_EventScript_VialChanseyEscape1::
@@ -51,8 +50,8 @@ AshenWoods_EventScript_VialChanseyEscape1::
 	waitmoncry
 	applymovement LOCALID_ASHEN_WOODS_VIAL_CHANSEY, AshenWoods_Movement_VialChanseyEscape1
 	waitmovement 0
-	setobjectxy LOCALID_ASHEN_WOODS_VIAL_CHANSEY, 6, 40
-	copyobjectxytoperm LOCALID_ASHEN_WOODS_VIAL_CHANSEY
+	setobjectxy LOCALID_ASHEN_WOODS_VIAL_CHANSEY, 6, 39
+	setobjectxyperm LOCALID_ASHEN_WOODS_VIAL_CHANSEY, 6, 39
 	setvar VAR_CHANSEY_NURSE_STATE, 4
 	msgbox AshenWoods_Text_VialBlobKeepsRunning, MSGBOX_DEFAULT
 	releaseall
@@ -71,7 +70,7 @@ AshenWoods_EventScript_VialChanseyEscape2::
 	applymovement LOCALID_ASHEN_WOODS_VIAL_CHANSEY, AshenWoods_Movement_VialChanseyEscape2
 	waitmovement 0
 	setobjectxy LOCALID_ASHEN_WOODS_VIAL_CHANSEY, 27, 43
-	copyobjectxytoperm LOCALID_ASHEN_WOODS_VIAL_CHANSEY
+	setobjectxyperm LOCALID_ASHEN_WOODS_VIAL_CHANSEY, 27, 43
 	setvar VAR_CHANSEY_NURSE_STATE, 5
 	msgbox AshenWoods_Text_VialBlobCornered, MSGBOX_DEFAULT
 	releaseall
@@ -80,6 +79,9 @@ AshenWoods_EventScript_VialChanseyEscape2::
 AshenWoods_EventScript_VialChansey::
 	lockall
 	faceplayer
+	goto_if_eq VAR_CHANSEY_NURSE_STATE, 3, AshenWoods_EventScript_VialApproachFromEast
+	goto_if_eq VAR_CHANSEY_NURSE_STATE, 4, AshenWoods_EventScript_VialApproachFromNorth
+	goto_if_ne VAR_CHANSEY_NURSE_STATE, 5, AshenWoods_EventScript_VialEndInteraction
 	applymovement LOCALID_ASHEN_WOODS_VIAL_CHANSEY, AshenWoods_Movement_VialChanseyJumpRight
 	waitmovement 0
 	playmoncry SPECIES_CHANSEY, CRY_MODE_NORMAL
@@ -106,8 +108,17 @@ AshenWoods_EventScript_VialChansey::
 	setflag FLAG_HIDE_ASHEN_WOODS_VIAL_BALL
 	removeobject LOCALID_ASHEN_WOODS_VIAL_BALL
 	setvar VAR_CHANSEY_NURSE_STATE, 6
+AshenWoods_EventScript_VialEndInteraction::
 	releaseall
 	end
+
+AshenWoods_EventScript_VialApproachFromEast::
+	msgbox AshenWoods_Text_VialApproachFromEast, MSGBOX_DEFAULT
+	goto AshenWoods_EventScript_VialEndInteraction
+
+AshenWoods_EventScript_VialApproachFromNorth::
+	msgbox AshenWoods_Text_VialApproachFromNorth, MSGBOX_DEFAULT
+	goto AshenWoods_EventScript_VialEndInteraction
 
 AshenWoods_EventScript_VialNoHealBall::
 	msgbox AshenWoods_Text_VialNoHealBall, MSGBOX_DEFAULT
@@ -168,6 +179,14 @@ AshenWoods_Text_VialBlobNowhereToRun:
 	.string "Blob watches the HEAL BALL.\n"
 	.string "This is your chance to bring it home.$"
 
+AshenWoods_Text_VialApproachFromEast:
+	.string "Blob keeps looking for an escape.\n"
+	.string "Try approaching from the east.$"
+
+AshenWoods_Text_VialApproachFromNorth:
+	.string "Blob is still too restless to catch.\n"
+	.string "Try the narrow trail to the north.$"
+
 AshenWoods_Text_VialNoHealBall:
 	.string "You need one of the nurse's HEAL BALLS.\n"
 	.string "Return to her on ROUTE 111 for another.$"
@@ -186,6 +205,7 @@ AshenWoods_EventScript_Alannah::
 	end
 AshenWoods_EventScript_Martin::
 	trainerbattle_double TRAINER_MARTIN, AshenWoods_Text_MartinIntro, AshenWoods_Text_MartinDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	goto_if_set FLAG_EC_CAUGHT_MOLTRES, AshenWoods_EventScript_MoltresCaught
 	msgbox AshenWoods_Text_MartinAfter, MSGBOX_AUTOCLOSE
 	end
 AshenWoods_EventScript_Roman::
@@ -201,8 +221,9 @@ AshenWoods_EventScript_Caretaker::
 	end
 
 AshenWoods_Text_AlannahIntro:
-	.string "The ash feeds roots tougher than stone.\n"
-	.string "Can your team outlast mine?$"
+	.string "The ash feeds roots tougher than\n"
+	.string "stone. Can your team outlast\l"
+	.string "mine?$"
 AshenWoods_Text_AlannahDefeat:
 	.string "Your answer grew through the ash.$"
 AshenWoods_Text_AlannahAfter:
@@ -214,26 +235,44 @@ AshenWoods_Text_MartinIntro:
 AshenWoods_Text_MartinDefeat:
 	.string "You extinguished the wildfire cleanly.$"
 AshenWoods_Text_MartinAfter:
-	.string "MOLTRES waits beyond EMBER PATH.\n"
-	.string "Strength alone will not reach it.$"
+	.string "MOLTRES roosts in EMBER PATH.\n"
+	.string "Follow the trail and keep your eyes\l"
+	.string "up. Those feathers catch the light!$"
 AshenWoods_Text_RomanIntro:
-	.string "One drop of water can wake a mountain.\n"
-	.string "Interrupt the engine if you can!$"
+	.string "The rocks hiss when rain hits them.\n"
+	.string "A little water, all that heat...\l"
+	.string "Now watch what my POKéMON can do!$"
 AshenWoods_Text_RomanDefeat:
-	.string "You stopped the engine before it ran.$"
+	.string "Whew! You've left us steaming!$"
 AshenWoods_Text_RomanAfter:
-	.string "The best doubles plans are visible.\n"
-	.string "The hard part is answering in time.$"
+	.string "I could listen to the forest hiss\n"
+	.string "after rain all day. Even the mountain\l"
+	.string "needs to cool off sometimes.$"
 AshenWoods_Text_ElmerIntro:
-	.string "Every insect here wins differently.\n"
-	.string "Show me four different answers!$"
+	.string "Look closely at the ash. Tiny tracks\n"
+	.string "everywhere! My bugs are tougher\l"
+	.string "than they look. Care to see?$"
 AshenWoods_Text_ElmerDefeat:
 	.string "You changed pace with every swarm.$"
 AshenWoods_Text_ElmerAfter:
-	.string "A Champion needs a toolbox, not a\n"
-	.string "single unbeatable hammer.$"
+	.string "Some insects burrow when the ash\n"
+	.string "falls. Others just shake it off.\l"
+	.string "I always find something new here.$"
 AshenWoods_Text_Caretaker:
-	.string "GROUDON's heat burned this place.\n"
-	.string "Rain returned it to life.\p"
-	.string "The old wardens say RAYQUAZA is not\n"
-	.string "a conqueror, but Hoenn's balance.$"
+	.string "Heat scorched these woods, but the\n"
+	.string "roots survived. See the new leaves?\p"
+	.string "With the weather changing so much,\n"
+	.string "POKéMON we seldom saw are appearing\l"
+	.string "among the ash.\p"
+	.string "The old wardens say RAYQUAZA keeps\n"
+	.string "land and sea in balance. I hope\l"
+	.string "they are right.$"
+
+AshenWoods_EventScript_MoltresCaught::
+	msgbox AshenWoods_Text_MoltresCaught, MSGBOX_AUTOCLOSE
+	end
+
+AshenWoods_Text_MoltresCaught:
+	.string "MOLTRES found a partner in you!\p"
+	.string "EMBER PATH still glows at sunset.\n"
+	.string "I always look up, out of habit.$"

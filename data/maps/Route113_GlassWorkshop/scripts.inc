@@ -42,7 +42,21 @@ Route113_GlassWorkshop_EventScript_ExplainSootSack::
 Route113_GlassWorkshop_EventScript_CheckCollectedAsh::
 	checkitem ITEM_SOOT_SACK
 	goto_if_eq VAR_RESULT, FALSE, Route113_GlassWorkshop_EventScript_SootSackNotInBag
+Route113_GlassWorkshop_EventScript_ClaimMilestones:
+	special ClaimEmeraldChampionsSootMilestone
+	goto_if_eq VAR_RESULT, 1, Route113_GlassWorkshop_EventScript_MilestoneBag
+	goto_if_eq VAR_RESULT, 2, Route113_GlassWorkshop_EventScript_MilestonePC
+	goto_if_eq VAR_RESULT, 3, Route113_GlassWorkshop_EventScript_Marshadow
+	goto_if_eq VAR_RESULT, 4, Route113_GlassWorkshop_EventScript_MilestoneNoRoom
+	goto_if_eq VAR_RESULT, 5, Route113_GlassWorkshop_EventScript_MilestoneOwned
+	special BufferEmeraldChampionsSootProgress
 	msgbox Route113_GlassWorkshop_Text_LetsSeeCollectedAshes, MSGBOX_DEFAULT
+	switch VAR_RESULT
+	case 0, Route113_GlassWorkshop_EventScript_NextCord
+	case 1, Route113_GlassWorkshop_EventScript_NextMarshadow
+	case 2, Route113_GlassWorkshop_EventScript_NextMega
+	msgbox Route113_GlassWorkshop_Text_AllMilestones, MSGBOX_DEFAULT
+Route113_GlassWorkshop_EventScript_BrowseGlass:
 	goto_if_lt VAR_ASH_GATHER_COUNT, LOWEST_ASH_PRICE, Route113_GlassWorkshop_EventScript_NotEnoughAsh
 	message Route113_GlassWorkshop_Text_WhichGlassItemWoudYouLike
 	waitmessage
@@ -75,6 +89,7 @@ Route113_GlassWorkshop_EventScript_BlueFlute::
 	bufferitemname STR_VAR_1, VAR_0x8008
 	setvar VAR_0x800A, BLUE_FLUTE_PRICE
 	goto_if_lt VAR_ASH_GATHER_COUNT, BLUE_FLUTE_PRICE, Route113_GlassWorkshop_EventScript_NotEnoughAshForItem
+	buffernumberstring STR_VAR_2, VAR_0x800A
 	msgbox Route113_GlassWorkshop_Text_IsThatTheItemForYou, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, Route113_GlassWorkshop_EventScript_ChooseDifferentItem
 	setvar VAR_GLASS_WORKSHOP_STATE, 10
@@ -87,6 +102,7 @@ Route113_GlassWorkshop_EventScript_YellowFlute::
 	bufferitemname STR_VAR_1, VAR_0x8008
 	setvar VAR_0x800A, YELLOW_FLUTE_PRICE
 	goto_if_lt VAR_ASH_GATHER_COUNT, YELLOW_FLUTE_PRICE, Route113_GlassWorkshop_EventScript_NotEnoughAshForItem
+	buffernumberstring STR_VAR_2, VAR_0x800A
 	msgbox Route113_GlassWorkshop_Text_IsThatTheItemForYou, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, Route113_GlassWorkshop_EventScript_ChooseDifferentItem
 	setvar VAR_GLASS_WORKSHOP_STATE, 11
@@ -99,6 +115,7 @@ Route113_GlassWorkshop_EventScript_RedFlute::
 	bufferitemname STR_VAR_1, VAR_0x8008
 	setvar VAR_0x800A, RED_FLUTE_PRICE
 	goto_if_lt VAR_ASH_GATHER_COUNT, RED_FLUTE_PRICE, Route113_GlassWorkshop_EventScript_NotEnoughAshForItem
+	buffernumberstring STR_VAR_2, VAR_0x800A
 	msgbox Route113_GlassWorkshop_Text_IsThatTheItemForYou, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, Route113_GlassWorkshop_EventScript_ChooseDifferentItem
 	setvar VAR_GLASS_WORKSHOP_STATE, 12
@@ -111,6 +128,7 @@ Route113_GlassWorkshop_EventScript_WhiteFlute::
 	bufferitemname STR_VAR_1, VAR_0x8008
 	setvar VAR_0x800A, WHITE_FLUTE_PRICE
 	goto_if_lt VAR_ASH_GATHER_COUNT, WHITE_FLUTE_PRICE, Route113_GlassWorkshop_EventScript_NotEnoughAshForItem
+	buffernumberstring STR_VAR_2, VAR_0x800A
 	msgbox Route113_GlassWorkshop_Text_IsThatTheItemForYou, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, Route113_GlassWorkshop_EventScript_ChooseDifferentItem
 	setvar VAR_GLASS_WORKSHOP_STATE, 13
@@ -123,6 +141,7 @@ Route113_GlassWorkshop_EventScript_BlackFlute::
 	bufferitemname STR_VAR_1, VAR_0x8008
 	setvar VAR_0x800A, BLACK_FLUTE_PRICE
 	goto_if_lt VAR_ASH_GATHER_COUNT, BLACK_FLUTE_PRICE, Route113_GlassWorkshop_EventScript_NotEnoughAshForItem
+	buffernumberstring STR_VAR_2, VAR_0x800A
 	msgbox Route113_GlassWorkshop_Text_IsThatTheItemForYou, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, Route113_GlassWorkshop_EventScript_ChooseDifferentItem
 	setvar VAR_GLASS_WORKSHOP_STATE, 14
@@ -136,6 +155,7 @@ Route113_GlassWorkshop_EventScript_PrettyChair::
 	bufferdecorationname STR_VAR_1, VAR_0x8008
 	setvar VAR_0x800A, PRETTY_CHAIR_PRICE
 	goto_if_lt VAR_ASH_GATHER_COUNT, PRETTY_CHAIR_PRICE, Route113_GlassWorkshop_EventScript_NotEnoughAshForItem
+	buffernumberstring STR_VAR_2, VAR_0x800A
 	msgbox Route113_GlassWorkshop_Text_IsThatTheItemForYou, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, Route113_GlassWorkshop_EventScript_ChooseDifferentItem
 	setvar VAR_GLASS_WORKSHOP_STATE, 15
@@ -149,6 +169,7 @@ Route113_GlassWorkshop_EventScript_PrettyDesk::
 	bufferdecorationname STR_VAR_1, VAR_0x8008
 	setvar VAR_0x800A, PRETTY_DESK_PRICE
 	goto_if_lt VAR_ASH_GATHER_COUNT, PRETTY_DESK_PRICE, Route113_GlassWorkshop_EventScript_NotEnoughAshForItem
+	buffernumberstring STR_VAR_2, VAR_0x800A
 	msgbox Route113_GlassWorkshop_Text_IsThatTheItemForYou, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, Route113_GlassWorkshop_EventScript_ChooseDifferentItem
 	setvar VAR_GLASS_WORKSHOP_STATE, 16
@@ -308,8 +329,10 @@ Route113_GlassWorkshop_Text_ExplainSootSack:
 	.string "amount, come see me, huff-puff.$"
 
 Route113_GlassWorkshop_Text_LetsSeeCollectedAshes:
-	.string "Have you collected ashes, huff-puff?\n"
-	.string "Let me see, huff-puff.$"
+	.string "Soot to spend: {STR_VAR_1}.\n"
+	.string "Lifetime soot collected: {STR_VAR_2}.\p"
+	.string "Glass purchases never lower your\n"
+	.string "lifetime total, huff-puff!$"
 
 Route113_GlassWorkshop_Text_NotEnoughAshNeedX:
 	.string "Hmmm…\n"
@@ -326,8 +349,8 @@ Route113_GlassWorkshop_Text_WhichGlassItemWoudYouLike:
 	.string "Which one would you like, huff-puff?$"
 
 Route113_GlassWorkshop_Text_IsThatTheItemForYou:
-	.string "A {STR_VAR_1}, huff-puff?\n"
-	.string "Is that the one for you, huff-puff?$"
+	.string "A {STR_VAR_1} costs {STR_VAR_2} soot.\n"
+	.string "Shall I make it, huff-puff?$"
 
 Route113_GlassWorkshop_Text_WhichWouldYouLike:
 	.string "Which one would you like, huff-puff?$"
@@ -378,3 +401,63 @@ Route113_GlassWorkshop_Text_FunToBlowGlassFlute:
 	.string "my boss is talking.\p"
 	.string "Huff-huff! Puff-puff!$"
 
+
+Route113_GlassWorkshop_EventScript_MilestoneBag:
+	playfanfare MUS_OBTAIN_ITEM
+	msgbox Route113_GlassWorkshop_Text_MilestoneBag, MSGBOX_DEFAULT
+	waitfanfare
+	goto Route113_GlassWorkshop_EventScript_ClaimMilestones
+Route113_GlassWorkshop_EventScript_MilestonePC:
+	msgbox Route113_GlassWorkshop_Text_MilestonePC, MSGBOX_DEFAULT
+	goto Route113_GlassWorkshop_EventScript_ClaimMilestones
+Route113_GlassWorkshop_EventScript_MilestoneOwned:
+	msgbox Route113_GlassWorkshop_Text_MilestoneOwned, MSGBOX_DEFAULT
+	goto Route113_GlassWorkshop_EventScript_ClaimMilestones
+Route113_GlassWorkshop_EventScript_MilestoneNoRoom:
+	msgbox Route113_GlassWorkshop_Text_MilestoneNoRoom, MSGBOX_DEFAULT
+	release
+	end
+Route113_GlassWorkshop_EventScript_Marshadow:
+	msgbox Route113_GlassWorkshop_Text_Marshadow, MSGBOX_DEFAULT
+	goto Route113_GlassWorkshop_EventScript_ClaimMilestones
+Route113_GlassWorkshop_EventScript_NextCord:
+	msgbox Route113_GlassWorkshop_Text_NextCord, MSGBOX_DEFAULT
+	goto Route113_GlassWorkshop_EventScript_BrowseGlass
+Route113_GlassWorkshop_EventScript_NextMarshadow:
+	msgbox Route113_GlassWorkshop_Text_NextMarshadow, MSGBOX_DEFAULT
+	goto Route113_GlassWorkshop_EventScript_BrowseGlass
+Route113_GlassWorkshop_EventScript_NextMega:
+	msgbox Route113_GlassWorkshop_Text_NextMega, MSGBOX_DEFAULT
+	goto Route113_GlassWorkshop_EventScript_BrowseGlass
+Route113_GlassWorkshop_Text_NextCord:
+	.string "At 100 lifetime soot, I'll give you\n"
+	.string "a reusable LINKING CORD!$"
+Route113_GlassWorkshop_Text_NextMarshadow:
+	.string "At 250 lifetime soot, I can show you\n"
+	.string "a secret in the ash grass!$"
+Route113_GlassWorkshop_Text_NextMega:
+	.string "At 500 lifetime soot, a HOUNDOOMINITE\n"
+	.string "is yours. Keep exploring, huff-puff!$"
+Route113_GlassWorkshop_Text_AllMilestones:
+	.string "You've earned every collection gift!\n"
+	.string "I can still make glass for your soot.$"
+Route113_GlassWorkshop_Text_MilestoneBag:
+	.string "You've earned a {STR_VAR_1}!\n"
+	.string "It's in your BAG, huff-puff.$"
+Route113_GlassWorkshop_Text_MilestonePC:
+	.string "You've earned a {STR_VAR_1}!\n"
+	.string "Your BAG is full, so it's in your PC.$"
+Route113_GlassWorkshop_Text_MilestoneOwned:
+	.string "You already own a {STR_VAR_1}.\n"
+	.string "That milestone is complete, huff-puff!$"
+Route113_GlassWorkshop_Text_MilestoneNoRoom:
+	.string "Your collection gift is safe with me.\n"
+	.string "Make room in your BAG or item PC,\l"
+	.string "then come back, huff-puff!$"
+Route113_GlassWorkshop_Text_Marshadow:
+	.string "250 soot! You've stirred up a shadow\n"
+	.string "that follows the drifting ash.\p"
+	.string "That's MARSHADOW! It can now appear\n"
+	.string "in ROUTE 113's wild grass.\p"
+	.string "The route sign records this discovery.\n"
+	.string "Once caught, it stops appearing here.$"

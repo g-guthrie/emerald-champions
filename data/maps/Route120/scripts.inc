@@ -170,6 +170,7 @@ Route120_EventScript_Steven::
 	faceplayer
 	goto_if_set FLAG_BADGE06_GET, Route120_EventScript_ClearStevenFeatherGateAndRelease
 	goto_if_set FLAG_RECEIVED_DEVON_SCOPE, Route120_EventScript_StevenFeatherGate
+	goto_if_set FLAG_HIDE_ROUTE_120_KECLEON_BRIDGE, Route120_EventScript_TryGiveDevonScope
 	goto_if_set FLAG_NOT_READY_FOR_BATTLE_ROUTE_120, Route120_EventScript_StevenAskReadyForBattle
 	msgbox Route120_Text_StevenGreeting, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, Route120_EventScript_StevenNotReady
@@ -241,6 +242,7 @@ Route120_EventScript_StevenGiveDeconScope::
 	applymovement LOCALID_ROUTE120_STEVEN, Common_Movement_WalkInPlaceFasterDown
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
+Route120_EventScript_TryGiveDevonScope::
 	msgbox Route120_Text_StevenGiveDevonScope, MSGBOX_DEFAULT
 	giveitem ITEM_DEVON_SCOPE
 	goto_if_eq VAR_RESULT, FALSE, Route120_EventScript_ArchiveDevonScope
@@ -379,8 +381,20 @@ Route120_EventScript_Riley::
 
 Route120_EventScript_Leonel::
 	trainerbattle_double TRAINER_LEONEL, Route120_Text_LeonelIntro, Route120_Text_LeonelDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	setvar VAR_0x8004, LEGENDARY_SIGN_OGERPON
+	specialvar VAR_RESULT, GetSelectedLegendarySignState
+	goto_if_eq VAR_RESULT, 2, Route120_EventScript_LeonelOgerponCaught
 	msgbox Route120_Text_LeonelPostBattle, MSGBOX_AUTOCLOSE
 	end
+
+Route120_EventScript_LeonelOgerponCaught::
+	msgbox Route120_Text_LeonelOgerponCaught, MSGBOX_AUTOCLOSE
+	end
+
+Route120_Text_LeonelOgerponCaught:
+	.string "So OGERPON is traveling with you!\p"
+	.string "The old stories have a new\n"
+	.string "chapter. Take care of each other.$"
 
 Route120_EventScript_Callie::
 	msgbox Route120_Text_CALLIE_LocalConversation, MSGBOX_NPC
@@ -467,11 +481,8 @@ Kecleon_Text_UseDevonScopeMonAttacked:
 	.string "The startled POKéMON attacked!$"
 
 Route120_Text_RouteSignFortree:
-	.string "ROUTE 120 {LEFT_ARROW} FORTREE\n"
-	.string "CITY\p"
-	.string "A lakeside SIGN answers the\n"
-	.string "BALANCE BADGE. Other marks await a\l"
-	.string "Champion who returns here.$"
+	.string "ROUTE 120\n"
+	.string "{LEFT_ARROW} FORTREE CITY$"
 Route120_Text_RouteSign121:
 	.string "{RIGHT_ARROW} ROUTE 121\n"
 	.string "{LEFT_ARROW} ROUTE 120$"

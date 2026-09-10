@@ -1,0 +1,602 @@
+[
+  {
+    "file": "data/maps/AlteringCave_1F/scripts.inc",
+    "label": "AlteringCave_1F_Text_Researcher",
+    "text": "This cavern feels like a doorway.\\nThe deeper I go, the stranger it\\lbecomes.\\pHOOPA lives among the wild\\nPOK\u00e9MON here. Each encounter\\lhas a 3% chance of being HOOPA.\\pMEWTWO waits on B1F. It accepts\\nchallengers with the MIND BADGE.$"
+  },
+  {
+    "file": "data/maps/AlteringCave_B1F/scripts.inc",
+    "label": "AlteringCave_B1F_Text_LeafAfter",
+    "text": "LEAF: Take this MEWTWONITE X. It\\ncan help MEWTWO Mega Evolve.\\pIf you meet it here, I hope the\\ntwo of you can learn to trust each\\lother.$"
+  },
+  {
+    "file": "data/maps/AlteringCave_B1F/scripts.inc",
+    "label": "AlteringCave_B1F_Text_MewtwoDormant",
+    "text": "MEWTWO is watching you. Return\\nwith the MIND BADGE to challenge\\lit.$"
+  },
+  {
+    "file": "data/maps/AlteringCave_B1F/scripts.inc",
+    "label": "AlteringCave_B1F_Text_MewtwoNeedsPartner",
+    "text": "MEWTWO accepts challengers with\\nthe MIND BADGE. No partner\\lspecies is required.$"
+  },
+  {
+    "file": "data/maps/AlteringCave_B1F/scripts.inc",
+    "label": "AlteringCave_B1F_Text_MewtwoAwakens",
+    "text": "MEWTWO steps forward to challenge\\nyou!$"
+  },
+  {
+    "file": "data/maps/AshenWoods/scripts.inc",
+    "label": "AshenWoods_Text_MartinAfter",
+    "text": "MOLTRES roosts in EMBER PATH.\\nFollow the trail and keep your eyes\\lup. Those feathers catch the light!$"
+  },
+  {
+    "file": "data/maps/AshenWoods/scripts.inc",
+    "label": "AshenWoods_Text_Caretaker",
+    "text": "Heat scorched these woods, but the\\nroots survived. See the new leaves?\\pWith the weather changing so much,\\nPOK\u00e9MON we seldom saw are appearing\\lamong the ash.\\pThe old wardens say RAYQUAZA keeps\\nland and sea in balance. I hope\\lthey are right.$"
+  },
+  {
+    "file": "data/maps/BattleFrontier_BattleTowerLobby/scripts.inc",
+    "label": "BattleFrontier_BattleTowerLobby_Text_CircuitRewardPending",
+    "text": "Your reward remains recorded.\\pReview this Pok\u00e9mon's legendary lead\\nfor any remaining conditions.\\pYour wins will not be lost.$"
+  },
+  {
+    "file": "data/maps/BattleFrontier_Lounge2/scripts.inc",
+    "label": "BattleFrontier_Lounge2_Text_PalaceMavenGoldMons",
+    "text": "Have you battled the PALACE MAVEN\\nwhen he's serious?\\pWhen he throws his entire might into\\nbattle, he's said to use these POK\u00e9MON:\\pA FIRE-type LEGENDARY POK\u00e9MON,\\na NORMAL-type LAZY POK\u00e9MON,\\land a WATER-type AURORA POK\u00e9MON.$"
+  },
+  {
+    "file": "data/maps/BattleFrontier_Lounge6/scripts.inc",
+    "label": "BattleFrontier_Lounge6_Text_PromiseIllBeGoodToIt",
+    "text": "Oh, it's adorable! Thank you! I\\npromise I'll be good to it.\\pTYPE: NULL already has a battle\\nset. Raise its friendship, then\\llevel it up to get SILVALLY.\\pA memory held by SILVALLY changes\\nits type.$"
+  },
+  {
+    "file": "data/maps/BattleFrontier_OutsideWest/scripts.inc",
+    "label": "BattleFrontier_OutsideWest_Text_DomeAceLookedBecauseOfMyCheering",
+    "text": "Whaaaaaat?! Pfft!\\pThe DOME ACE only looked our way\\nbecause my cheering was so loud!\\lThat old tournament was legendary!$"
+  },
+  {
+    "file": "data/maps/CaveOfOrigin_B1F/scripts.inc",
+    "label": "CaveOfOrigin_B1F_Text_WallaceStory",
+    "text": "Ah, {PLAYER}{KUN}. STEVEN told me\\nhow far you have traveled.\\pI am WALLACE. I once led the\\nSOOTOPOLIS GYM; JUAN leads it\\lnow.\\pGROUDON and KYOGRE's powers are\\noverwhelming HOENN. Their\\lstruggle will consume land and\\lsea alike.\\pThe oldest tale tells of a third\\npower that stopped their clash:\\lRAYQUAZA.\\pWe need its help again. But I do\\nnot know where it sleeps...$"
+  },
+  {
+    "file": "data/maps/CaveOfOrigin_B1F/scripts.inc",
+    "label": "CaveOfOrigin_B1F_Text_OldLadyDidntMentionThat",
+    "text": "WALLACE: The elders at MT. PYRE\\ntold me RAYQUAZA's story, but it\\ldoesn't rest there.\\pPerhaps another place high above\\nthe sea?$"
+  },
+  {
+    "file": "data/maps/CaveOfOrigin_DianciesRoom/scripts.inc",
+    "label": "CaveOfOrigin_DianciesRoom_Text_WallaceAfter",
+    "text": "WALLACE: What a pleasure to battle\\nyou here! The crystals seemed to\\lcatch every flash of light.\\pYou needn't win an exhibition to\\nmeet DIANCIE or find the DIANCITE\\lhere. Take your time exploring!$"
+  },
+  {
+    "file": "data/maps/CeruleanCave_B1F_Frlg/scripts.inc",
+    "label": "CeruleanCave_B1F_Text_Mew",
+    "text": "Mew!$"
+  },
+  {
+    "file": "data/maps/CinnabarIsland_PokemonLab_ResearchRoom_Frlg/scripts.inc",
+    "label": "CinnabarIsland_PokemonLab_ResearchRoom_Text_LegendaryBirdEmail",
+    "text": "There's an e-mail message.\\p\u2026 \u2026 \u2026\\pThere are three legendary bird\\nPOK\u00e9MON.\\pThey are ARTICUNO, ZAPDOS, and\\nMOLTRES.\\pTheir whereabouts are unknown.\\pWe plan to explore the cavern\\nclose to CERULEAN.\\pFrom: POK\u00e9MON RESEARCH TEAM\u2026$"
+  },
+  {
+    "file": "data/maps/DewfordMeadow/scripts.inc",
+    "label": "DewfordMeadow_Text_Warden",
+    "text": "COSMOG and MUNKIDORI live in\\nthis meadow. Each has a 3%\\lchance of appearing in the grass.\\pMELOETTA answers songs. With the\\nKNUCKLE BADGE, bring a partner\\lwith SING and we will perform\\ltogether.\\pOnce it answers, you can search\\nfor it here. We only need to\\lsing together once.\\pSWEET SCENT helps find MELOETTA\\nafter our song. All available\\llocal legendaries share its\\l25% chance.$"
+  },
+  {
+    "file": "data/maps/EverGrandeCity_PhoebesRoom/scripts.inc",
+    "label": "EverGrandeCity_PhoebesRoom_Text_IntroSpeech",
+    "text": "Welcome. I am PHOEBE.\\pI trained on MT. PYRE, where the ones\\nwho are gone still take part.\\pMy friends can steal your boosts\\nand wear down your strength with burns.\\pKeep something for SPECTRIER.\\nEach knockout can make it stronger.$"
+  },
+  {
+    "file": "data/maps/FortreeCity_Gym/scripts.inc",
+    "label": "FortreeCity_Gym_Text_DariusIntro",
+    "text": "TORNADUS gives TAILWIND priority.\\nBRAVIARY rides the gust behind it.\\pFour turns. Outlast them!$"
+  },
+  {
+    "file": "data/maps/LilycoveCity_Harbor/scripts.inc",
+    "label": "LilycoveCity_Harbor_Text_SailorFerryAvailable",
+    "text": "Six badges! STERN and DEVON have\\napproved your exploration trips.\\pHere are passes for the ferry,\\nSOUTHERN ISLAND, NAVEL ROCK,\\lBIRTH ISLAND and FARAWAY ISLAND.\\pThe BATTLE FRONTIER is open too.\\nIts CIRCUIT awards legendary\\lPOK\u00e9MON as your total wins grow.$"
+  },
+  {
+    "file": "data/maps/LilycoveCity_Harbor/scripts.inc",
+    "label": "LilycoveCity_Harbor_Text_ChampionPassesReady",
+    "text": "Your island routes are active.\\nShow the attendant a pass to\\lchoose a destination.\\pExplore for LATIAS or LATIOS,\\nLUGIA, HO-OH, DEOXYS and MEW. You\\lcan meet them during your GYM\\ljourney.$"
+  },
+  {
+    "file": "data/maps/LilycoveCity_Harbor/scripts.inc",
+    "label": "LilycoveCity_Harbor_Text_LatiReport",
+    "text": "I've received two sightings: red\\nLATIAS and blue LATIOS!\\pOne will travel HOENN's routes.\\nThe other waits on SOUTHERN\\lISLAND.\\pWhich mainland lead shall we\\nfollow: red or blue?$"
+  },
+  {
+    "file": "data/maps/LilycoveCity_Harbor/scripts.inc",
+    "label": "LilycoveCity_Harbor_Text_LatiReportReady",
+    "text": "Red is LATIAS; blue is LATIOS.\\pWatch the routes for your choice,\\nand sail to meet the other!$"
+  },
+  {
+    "file": "data/maps/LilycoveCity_LilycoveMuseum_1F/scripts.inc",
+    "label": "LilycoveCity_LilycoveMuseum_1F_Text_PaintingOfLegendaryPokemon",
+    "text": "It's a painting of a legendary POK\u00e9MON\\nfrom long ago.\\pThe artist painted this from\\nimagination.$"
+  },
+  {
+    "file": "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc",
+    "label": "LittlerootTown_ProfessorBirchsLab_Text_ResearchRewardWaiting",
+    "text": "PROF. BIRCH: Your LEGENDARY FORM tools\\nare still here. Let's finish the set.$"
+  },
+  {
+    "file": "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc",
+    "label": "LittlerootTown_ProfessorBirchsLab_Text_ResearchRewardComplete",
+    "text": "The tools let KYUREM, ZYGARDE,\\nNECROZMA, and CALYREX change\\lforms or combine with certain\\lpartners.\\pThere's always something new to\\nlearn about POK\u00e9MON!$"
+  },
+  {
+    "file": "data/maps/MagmaHideout_4F/scripts.inc",
+    "label": "MagmaHideout_4F_Text_Grunt11PostBattle",
+    "text": "None of us have seen GROUDON.\\nMAXIE keeps the last chamber\\lclosed.\\pThe mountain's shaking. I hope he\\nknows what he's doing.$"
+  },
+  {
+    "file": "data/maps/MagmaHideout_4F/scripts.inc",
+    "label": "MagmaHideout_4F_Text_Grunt12Intro",
+    "text": "Can you feel the mountain\\nshaking? That's GROUDON's power!\\pMAXIE's waited years for this. I\\nwon't let you spoil it!$"
+  },
+  {
+    "file": "data/maps/MagmaHideout_4F/scripts.inc",
+    "label": "MagmaHideout_4F_Text_Grunt13Intro",
+    "text": "This is the last chamber. GROUDON\\nis just beyond us.\\pYou want to stop MAXIE? You'll\\nhave to get past me!$"
+  },
+  {
+    "file": "data/maps/MagmaHideout_4F/scripts.inc",
+    "label": "MagmaHideout_4F_Text_TabithaIntro",
+    "text": "TABITHA: You've made it through\\nthe entire hideout. I should have\\lexpected it.\\pMAXIE is with GROUDON. This is\\nthe moment we've worked for.\\pI'm not letting you take it from\\nus!$"
+  },
+  {
+    "file": "data/maps/MagmaHideout_4F/scripts.inc",
+    "label": "MagmaHideout_4F_Text_MaxieAwakenGroudon",
+    "text": "MAXIE: GROUDON, ancient architect\\nof continents... accept the BLUE\\lORB.\\pThe mountain shakes with your\\npower. Rise, and give HOENN land\\lthat will never yield!$"
+  },
+  {
+    "file": "data/maps/MagmaHideout_4F/scripts.inc",
+    "label": "MagmaHideout_4F_Text_MaxieGroudonWhatsWrong",
+    "text": "MAXIE: GROUDON! What's wrong? The\\nBLUE ORB was supposed to awaken\\lyou!\\pWait! Where are you going?$"
+  },
+  {
+    "file": "data/maps/MagmaHideout_4F/scripts.inc",
+    "label": "MagmaHideout_4F_Text_MaxieImGoingAfterGroudon",
+    "text": "MAXIE: GROUDON is loose. I have\\nto find out why the ORB failed to\\lcontrol it.\\pARCHIE still has the RED ORB.\\nHe'll need STERN's submarine to\\lreach KYOGRE on the seafloor.\\pGo warn CAPT. STERN at the harbor\\nin northeast SLATEPORT.\\pI'm going after GROUDON.$"
+  },
+  {
+    "file": "data/maps/MauvilleCity/scripts.inc",
+    "label": "MauvilleCity_Text_WattsonWontBeChallenge",
+    "text": "WATTSON: Don't you worry about it.\\nIt won't be a challenge to you.\\pThe entrance to NEW MAUVILLE is just\\na short SURF away from ROUTE 110.\\pThat's it, then, you have my trust!\\nWahahahaha!\\pWATTSON: If you find MELTAN, level it\\nup in NEW MAUVILLE to get MELMETAL.\\lThe generator can be on or off!$"
+  },
+  {
+    "file": "data/maps/MauvilleCity/scripts.inc",
+    "label": "MauvilleCity_Text_WattsonYoungTakeCharge",
+    "text": "WATTSON: Wahahahaha!\\pIt pleases me to no end to see\\nthe young step up and take charge!\\pWATTSON: If you find MELTAN, level it\\nup in NEW MAUVILLE to get MELMETAL.\\lThe generator can be on or off!$"
+  },
+  {
+    "file": "data/maps/MeteorFalls_1F_2R/scripts.inc",
+    "label": "MeteorFalls_1F_2R_Text_NicolasPostBattle",
+    "text": "With the FEATHER BADGE and\\nREGIROCK recorded as caught,\\lREGIDRAGO can appear on this\\lfloor.\\pIt has a 1% wild encounter\\nchance. SWEET SCENT raises that\\lto 25%.\\pFALLARBOR's CENTER guide knows\\nthe discoveries in the other\\lMETEOR FALLS rooms.$"
+  },
+  {
+    "file": "data/maps/MossdeepCity/scripts.inc",
+    "label": "MossdeepCity_Text_LifeNeedsSeaToLive",
+    "text": "MANAPHY and PALKIA live on the\\nSEAFLOOR CAVERN seabed.\\pDIVE at ROUTE 128 and search near\\nthe submarine. Each has a 3%\\lwild encounter chance.$"
+  },
+  {
+    "file": "data/maps/MossdeepCity_Gym/scripts.inc",
+    "label": "MossdeepCity_Gym_Text_SamanthaIntro",
+    "text": "GOTHITELLE closes the exit. AZELF\\nplots, and then ends the board.\\pYou cannot run from this one!$"
+  },
+  {
+    "file": "data/maps/MossdeepCity_Gym/scripts.inc",
+    "label": "MossdeepCity_Gym_Text_KathleenPostBattle",
+    "text": "LATIAS can recover and use CALM MIND.\\nDon't let a long battle favor it.$"
+  },
+  {
+    "file": "data/maps/MossdeepCity_Gym/scripts.inc",
+    "label": "MossdeepCity_Gym_Text_NicholasIntro",
+    "text": "LATIOS is quick, and AEGISLASH\\ncan make a careless attack\\lcostly.\\pChoose your moment!$"
+  },
+  {
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_2F_Text_MaxieWeWillGiveUp",
+    "text": "MAXIE: Keep the fuel. We're\\nleaving.\\pI must find GROUDON, and stop\\nARCHIE before he awakens KYOGRE.$"
+  },
+  {
+    "file": "data/maps/MtPyre_6F/scripts.inc",
+    "label": "MtPyre_6F_Text_PecharuntDormant",
+    "text": "PECHARUNT waits here. Earn the\\nMIND BADGE and catch OKIDOGI,\\lMUNKIDORI and FEZANDIPITI to\\lchallenge it.$"
+  },
+  {
+    "file": "data/maps/MtPyre_6F/scripts.inc",
+    "label": "MtPyre_6F_Text_PecharuntNeedsPartner",
+    "text": "The three masks belong to OKIDOGI,\\nMUNKIDORI and FEZANDIPITI.\\pCatch all three, then return here.\\nThey do not need to travel with you.$"
+  },
+  {
+    "file": "data/maps/MtPyre_6F/scripts.inc",
+    "label": "MtPyre_6F_Text_PecharuntAwakens",
+    "text": "The three masks flare! A poisoned mist\\nspills from the tombstone--PECHARUNT!$"
+  },
+  {
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_DarkraiQuiet",
+    "text": "The nightmare has lifted. Your\\nencounter with DARKRAI is\\lrecorded.$"
+  },
+  {
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_DarkraiAwakened",
+    "text": "DARKRAI emerges from the\\nnightmare mist. Approach it at\\lthe summit.$"
+  },
+  {
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_DarkraiAwaits",
+    "text": "DARKRAI is still waiting in the\\nnightmare mist at the summit.$"
+  },
+  {
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_CresseliaAwakened",
+    "text": "DARKRAI's capture has revealed a\\nnew lead: CRESSELIA shelters in\\lthe rear B1F room of METEOR\\lFALLS.\\pWith six badges and our ORB, it\\ncan appear among wild POK\u00e9MON\\lthere.$"
+  },
+  {
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_CresseliaAwaits",
+    "text": "CRESSELIA can appear among wild\\nPOK\u00e9MON in METEOR FALLS' rear B1F\\lroom, after six badges and our\\lORB.$"
+  },
+  {
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_TimeSignDormant",
+    "text": "DIALGA lives in the main B1F\\nchamber of METEOR FALLS. It has\\la 3% wild encounter chance.$"
+  },
+  {
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_DialgaAwakened",
+    "text": "DIALGA can appear among wild\\nPOK\u00e9MON in the main B1F chamber\\lof METEOR FALLS. Its chance is 3%.$"
+  },
+  {
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_DialgaAwaits",
+    "text": "Search the main B1F chamber of\\nMETEOR FALLS for DIALGA. Each\\lwild encounter has a 3% chance.$"
+  },
+  {
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_BothOrbsTakenMagmaLeftThis",
+    "text": "Both ORBS are gone. They were\\nentrusted to us to keep GROUDON\\land KYOGRE's powers in balance.\\pMAGMA dropped this EMBLEM. Take\\nit to their hideout in JAGGED\\lPASS.\\pRide ROUTE 112's cable car to MT.\\nCHIMNEY, then descend the pass.\\pCarry the EMBLEM near the odd\\nboulder on the east side. It may\\lopen the way.\\pStop MAGMA before they awaken\\nsomething they cannot control.$"
+  },
+  {
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_OrbsHaveBeenTaken",
+    "text": "The stolen ORBS can awaken\\nGROUDON and KYOGRE. Their powers\\lmust never clash again.\\pTake the MAGMA EMBLEM to JAGGED\\nPASS. Use ROUTE 112's cable car\\lto MT. CHIMNEY, then descend the\\lpass.\\pApproach the strange boulder on\\nthe east side. Find MAGMA before\\lthey awaken GROUDON.$"
+  },
+  {
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_GroudonKyogreAwakened",
+    "text": "Both GROUDON and KYOGRE are\\nawake? Then we are all in danger.\\pThe ORBS are part of their\\nancient bond. They are no\\lguarantee of obedience.\\pOnly RAYQUAZA stopped their last\\nclash. You must find someone who\\lknows where it rests.$"
+  },
+  {
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_GroudonKyogreTale",
+    "text": "GROUDON raised the land and\\nKYOGRE carved the sea. Their\\lclash grew until neither could\\lstop.\\pRAYQUAZA descended and calmed\\nthem. The RED and BLUE ORBS were\\lleft in our care.\\pTAPU LELE and Galarian MOLTRES\\nlive in the outside grass.\\lGIRATINA lives on the sixth floor.\\lEach has a 3% encounter chance.\\pReceiving our ORB and earning\\nsix badges lets you find YVELTAL\\loutside, too. SWEET SCENT helps\\lwith that discovery.$"
+  },
+  {
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_HearTheNewLegendOfHoenn",
+    "text": "Our old tale tells how RAYQUAZA\\nstopped a terrible clash. Now we\\lhave seen it happen again.\\pWill you hear what people are\\nsaying about SOOTOPOLIS?$"
+  },
+  {
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_HoennTrioTale",
+    "text": "RAYQUAZA restored the balance.\\nYou helped HOENN find a way\\lthrough.\\pSearch the sixth floor for\\nGIRATINA. It has a 3% wild\\lencounter chance.$"
+  },
+  {
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_OrbsApart",
+    "text": "The ORBS were entrusted to us to\\nkeep GROUDON and KYOGRE's powers\\lin balance.\\pOnly RAYQUAZA could calm their\\nlast clash. I fear we will need\\lits help again.$"
+  },
+  {
+    "file": "data/maps/NewMauville_Inside/scripts.inc",
+    "label": "NewMauville_Inside_Text_RotomCaught",
+    "text": "The ROTOM CATALOG changes ROTOM\\ninto its five appliances.\\pMELTAN lives among this plant's\\nwild POK\u00e9MON, at 3%.\\pWith five badges, finish\\nWATTSON's generator job and\\lreport back to add ZERAORA.\\lCatch REGISTEEL for REGIELEKI.\\pThe FEATHER BADGE then adds\\nZEKROM. These three have 1%\\lchances; SWEET SCENT gives 25%,\\lshared with all local legendaries.$"
+  },
+  {
+    "file": "data/maps/NewMauville_Inside/scripts.inc",
+    "label": "NewMauville_Inside_Text_ZapdosDormant",
+    "text": "ZAPDOS watches over the\\ngenerator. Return with the\\lBALANCE BADGE to challenge it.$"
+  },
+  {
+    "file": "data/maps/NewMauville_Inside/scripts.inc",
+    "label": "NewMauville_Inside_Text_ZapdosNeedsPartner",
+    "text": "ZAPDOS accepts challengers with\\nthe BALANCE BADGE. No partner\\lspecies is required.$"
+  },
+  {
+    "file": "data/maps/NewMauville_Inside/scripts.inc",
+    "label": "NewMauville_Inside_Text_ZapdosAwakens",
+    "text": "ZAPDOS crackles with electricity!\\nIt accepts your challenge!$"
+  },
+  {
+    "file": "data/maps/PetalburgWoods/scripts.inc",
+    "label": "PetalburgWoods_Text_TrainerTipsPP",
+    "text": "FOREST FIELD NOTES\\pCUT opens paths into the deeper\\nforest. CELEBI lives in the\\lthird area.\\pVIRIZION and WO-CHIEN live in\\nthe second area. Each of these\\llegendaries has a 3% wild\\lencounter chance in its habitat.$"
+  },
+  {
+    "file": "data/maps/PetalburgWoods_3/scripts.inc",
+    "label": "PetalburgWoods_3_Text_Ranger",
+    "text": "CELEBI has been slipping between\\nthe trees. You can find it in\\lthis grove's grass, with a 3%\\lencounter chance.$"
+  },
+  {
+    "file": "data/maps/PokemonMansion_2F_Frlg/scripts.inc",
+    "label": "PokemonMansion_1F_Text_ChristenedDiscoveredMonMew",
+    "text": "Diary: July 10\\nWe christened the newly discovered\\lPOK\u00e9MON, MEW.$"
+  },
+  {
+    "file": "data/maps/PokemonMansion_3F_Frlg/scripts.inc",
+    "label": "PokemonMansion_1F_Text_MewGaveBirthToMewtwo",
+    "text": "Diary: Feb. 6\\nMEW gave birth.\\pWe named the newborn MEWTWO.$"
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_MayExplainItemfinder",
+    "text": "MAY: That's a DOWSING MACHINE. It\\nreacts to hidden items.\\pFor legendary POK\u00e9MON, ask the\\nguide near a POK\u00e9MON CENTER's PC.\\lThey know the local leads.\\pI'm heading north to MAUVILLE.\\nWATTSON's GYM is there. See you!$"
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_BrendanExplainItemfinder",
+    "text": "BRENDAN: A DOWSING MACHINE! It\\nhums near items you can't see.\\pThe guide near each POK\u00e9MON\\nCENTER's PC knows local legendary\\lPOK\u00e9MON and where to find them.\\pKeep north to MAUVILLE CITY.\\nWATTSON's GYM will test your\\lteam.$"
+  },
+  {
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_MauvilleCitySign",
+    "text": "ROUTE 110: MAUVILLE CITY to the\\nnorth.\\pRAIKOU and TAPU KOKO live in\\nthis grass, at 3% each.\\pWith five badges, rescuing the\\nWEATHER INSTITUTE adds THUNDURUS.\\lIt has a 1% chance. SWEET SCENT\\lgives a shared 25% chance among\\lall available local legendaries.$"
+  },
+  {
+    "file": "data/maps/Route111_RuinsExterior/scripts.inc",
+    "label": "Route111_RuinsExterior_Text_Archaeologist",
+    "text": "The storms leave strange patterns\\nacross these ruins. LANDORUS may\\lbe sheltering here.\\pWith the BALANCE BADGE, bring\\nCASTFORM and help me survey the\\lweather.\\pThen LANDORUS can appear among\\nthe wild POK\u00e9MON here. Our work\\lonly needs doing once.$"
+  },
+  {
+    "file": "data/maps/Route112/scripts.inc",
+    "label": "Route112_Text_MtChimneySign",
+    "text": "MT. CHIMNEY\\pFor LAVARIDGE TOWN or the summit,\\nplease take the CABLE CAR.\\pFIELD NOTE: ENTEI lives in\\nFIERY PATH. Each wild encounter\\lthere has a 3% chance.$"
+  },
+  {
+    "file": "data/maps/Route114_FossilManiacsTunnel/scripts.inc",
+    "label": "Route114_FossilManiacsTunnel_Text_NotSafeThatWay",
+    "text": "Oh... Be careful! I was digging\\nwhen the wall fell into an\\lenormous cavern.\\pTING-LU lives in the DESERT\\nUNDERPASS. It also connects to\\lSANDSTREWN RUINS, where ZYGARDE\\llives on B1F.\\pEach has a 3% wild encounter\\nchance in its habitat.$"
+  },
+  {
+    "file": "data/maps/Route117/scripts.inc",
+    "label": "Route117_Text_ArentTheseFlowersPretty",
+    "text": "Aren't these flowers pretty? I\\nlove watching the POK\u00e9MON wander\\lthrough them.\\pLately, an odd one with a metal\\nmask has been hiding in the grass.\\lDEVON calls it TYPE: NULL.\\pWith the KNUCKLE BADGE, you can\\nsearch for it here. It's very\\lrare, but SWEET SCENT helps draw\\lit out.$"
+  },
+  {
+    "file": "data/maps/Route119_WeatherInstitute_2F/scripts.inc",
+    "label": "Route119_WeatherInstitute_2F_Text_PokemonChangesWithWeather",
+    "text": "CASTFORM changes with the\\nweather. Let it show you what a\\lstorm can do.\\pNow that our work can continue,\\nfive badges let you find TORNADUS\\lon ROUTE 119 and THUNDURUS on\\lROUTE 110.\\pSearch their grass. Each has a 1%\\nchance; SWEET SCENT gives 25%,\\lshared with other local legends.\\pA researcher at ROUTE 111's\\nelevated ruins also needs\\lCASTFORM for a weather survey.$"
+  },
+  {
+    "file": "data/maps/Route119_WeatherInstitute_2F/scripts.inc",
+    "label": "Route119_WeatherInstitute_2F_Text_RevealGlassPurpose",
+    "text": "This REVEAL GLASS changes the forms of\\nTORNADUS, THUNDURUS, and LANDORUS.\\pThe northern bridge is clear now.\\nFollow ROUTE 119 to FORTREE's GYM.$"
+  },
+  {
+    "file": "data/maps/Route120/scripts.inc",
+    "label": "Route120_Text_RouteSignFortree",
+    "text": "ROUTE 120: FORTREE CITY to the\\nwest.\\pMESPRIT, OGERPON, XERNEAS and\\nGalarian ARTICUNO live in this\\lgrass, at 3% each.$"
+  },
+  {
+    "file": "data/maps/Route14_Frlg/scripts.inc",
+    "label": "Route14_Text_DonaldPostBattle",
+    "text": "Well, the winged mirages are the\\nlegendary bird POK\u00e9MON.\\pThere are three of them: ARTICUNO,\\nZAPDOS, and MOLTRES.$"
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_2F_Text_MagearnaNoRoom",
+    "text": "The sealed prototype answers DIANCIE,\\nbut your party and PC have no room.$"
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_2F_Text_ArceusRewardNoRoom",
+    "text": "ARCEUS has answered your journey,\\nbut needs room. Please make space\\lin your PC.$"
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_2F_Text_ArceusRewardComplete",
+    "text": "Even ARCEUS has joined your\\njourney. Take your discoveries to\\lthe LEAGUE!$"
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_2F_EventScript_MegaGift_MAGEARNITE_Text",
+    "text": "Eight badges! You have seen things\\nour laboratory can only dream of.\\pThis stone responds to Magearna.\\nPerhaps you can learn why.$"
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_3F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_3F_Text_MrStoneExplainPokenavRestUp",
+    "text": "The POK\u00e9NAV maps HOENN and keeps\\nyou in touch with key Trainers.\\pFor legendary leads, visit the\\nguide near the POK\u00e9MON CENTER PC.\\pEach town's guide knows nearby\\nPok\u00e9mon and their requirements.\\pPlease rest before you leave.\\nDEWFORD is your next stop.$"
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_3F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_3F_Text_CountingOnYou",
+    "text": "You'll find STEVEN in GRANITE\\nCAVE near DEWFORD. He loses track\\lof time studying rocks!\\pFor local legendary leads, ask\\nthe guide near the PC in any\\lPOK\u00e9MON CENTER.$"
+  },
+  {
+    "file": "data/maps/SandstrewnRuins/scripts.inc",
+    "label": "SandstrewnRuins_Text_Archaeologist",
+    "text": "Every fossil here tells us how a\\nPOK\u00e9MON lived. Imagine this place\\lbefore the desert!\\pThose green lights below us may\\nbe ZYGARDE. Search B1F. It has\\la 3% wild encounter chance.$"
+  },
+  {
+    "file": "data/maps/ScorchedSlab_B2F/scripts.inc",
+    "label": "ScorchedSlab_B2F_Text_Warden",
+    "text": "A white dragon has been glimpsed\\namong these hot stones. RESHIRAM!\\pIt lives here, with a 3% wild\\nencounter chance. HEATRAN dwells\\lfarther below.$"
+  },
+  {
+    "file": "data/maps/SeafloorCavern_Room9/scripts.inc",
+    "label": "SeafloorCavern_Room9_Text_ArchieWhereDidKyogreGo",
+    "text": "ARCHIE: What?!\\pI didn't do anything.\\nWhy did the RED ORB\u2026\\pWhere did KYOGRE go?$"
+  },
+  {
+    "file": "data/maps/SeafloorCavern_Room9/scripts.inc",
+    "label": "SeafloorCavern_Room9_Text_ArchieWhatRainingTooHard",
+    "text": "ARCHIE: Heavy rain? Good! KYOGRE\\nis expanding the sea!\\pWhat? The routes are flooding?\\nOur own crews are trapped?\\pTell them to get to high ground!\\nHow can the rain still be getting\\lworse?$"
+  },
+  {
+    "file": "data/maps/SeafloorCavern_Room9/scripts.inc",
+    "label": "SeafloorCavern_Room9_Text_ArchieWhyDidKyogreDisappear",
+    "text": "ARCHIE: The RED ORB woke KYOGRE.\\nWhy won't it answer me now?\\pI never wanted people to get\\nhurt\u2026$"
+  },
+  {
+    "file": "data/maps/SeafloorCavern_Room9/scripts.inc",
+    "label": "SeafloorCavern_Room9_Text_MaxieWhatHaveYouWrought",
+    "text": "MAXIE: ARCHIE! KYOGRE's rain is\\nspreading, and GROUDON's heat is\\lgetting worse.\\pIf they meet, the people and\\nPOK\u00e9MON of HOENN will be caught\\lbetween them!$"
+  },
+  {
+    "file": "data/maps/SeafloorCavern_Room9/scripts.inc",
+    "label": "SeafloorCavern_Room9_Text_ArchieDontGetAllHighAndMighty",
+    "text": "ARCHIE: You're the one who woke\\nGROUDON!\\pI thought the ORB would let me\\ncontrol KYOGRE. But it's not\\llistening. Neither of them is!$"
+  },
+  {
+    "file": "data/maps/ShoalCave_LowTideIceRoom/scripts.inc",
+    "label": "ShoalCave_LowTideIceRoom_Text_ArticunoDormant",
+    "text": "ARTICUNO rests in the frozen\\nchamber. Return with the FEATHER\\lBADGE to challenge it.$"
+  },
+  {
+    "file": "data/maps/ShoalCave_LowTideIceRoom/scripts.inc",
+    "label": "ShoalCave_LowTideIceRoom_Text_ArticunoNeedsPartner",
+    "text": "ARTICUNO accepts challengers with\\nthe FEATHER BADGE. No partner\\lspecies is required.$"
+  },
+  {
+    "file": "data/maps/ShoalCave_LowTideIceRoom/scripts.inc",
+    "label": "ShoalCave_LowTideIceRoom_Text_ArticunoAwakens",
+    "text": "ARTICUNO spreads its icy wings!\\nIt accepts your challenge!$"
+  },
+  {
+    "file": "data/maps/SkyPillar_Top/scripts.inc",
+    "label": "SkyPillar_Top_Text_RayquazaFlewOff",
+    "text": "RAYQUAZA flew toward SOOTOPOLIS!$"
+  },
+  {
+    "file": "data/maps/SootopolisCity/scripts.inc",
+    "label": "SootopolisCity_Text_WhereDidLegendariesGo",
+    "text": "GROUDON and KYOGRE\u2026\\nWhere did they go?\\pWill they cause droughts or downpours\\nsomewhere else?$"
+  },
+  {
+    "file": "data/maps/SootopolisCity/scripts.inc",
+    "label": "SootopolisCity_Text_GroudonPleaseStop",
+    "text": "MAXIE: GROUDON, stop!\\pI wanted more land for people and\\nPOK\u00e9MON to live on. You're\\lburning the homes they already\\lhave!$"
+  },
+  {
+    "file": "data/maps/SootopolisCity/scripts.inc",
+    "label": "SootopolisCity_Text_KyogreCalmDown",
+    "text": "ARCHIE: KYOGRE! I called this freedom,\\nbut even the sea needs a shore.\\pThe RED ORB cannot make you hear me.$"
+  },
+  {
+    "file": "data/maps/SootopolisCity/scripts.inc",
+    "label": "SootopolisCity_Text_InvolvedWithCrisisComeWithMe",
+    "text": "STEVEN: GROUDON and KYOGRE's\\nclash is tearing through this\\lcrater.\\pTheir weather reaches across\\nHOENN. We must restore the\\lbalance before anyone else is\\lhurt.\\pWALLACE knows the old legends.\\nCome with me.$"
+  },
+  {
+    "file": "data/maps/SootopolisCity/scripts.inc",
+    "label": "SootopolisCity_Text_SoThatsRayquaza",
+    "text": "STEVEN: So that's RAYQUAZA\u2026\\pJust as the old tale said, it\\nstopped their clash. You reached\\lit in time, {PLAYER}.$"
+  },
+  {
+    "file": "data/maps/SootopolisCity/scripts.inc",
+    "label": "SootopolisCity_Text_MaxieArchieLeft",
+    "text": "STEVEN: MAXIE and ARCHIE have\\ngone to MT. PYRE to return the\\lORBS.\\pThe weather is settling. There is\\nstill so much of HOENN to\\lexplore, and so many POK\u00e9MON to\\lmeet.\\pThe guide near the POK\u00e9MON\\nCENTER's PC can tell you about\\llocal legendary discoveries.$"
+  },
+  {
+    "file": "data/scripts/emerald_champions.inc",
+    "label": "EmeraldChampions_Text_KubfuInfo",
+    "text": "A Dark Scroll and a Water Scroll\\nlead KUBFU to different styles.\\pThis second partner lets you explore\\nboth paths with your original KUBFU.$"
+  },
+  {
+    "file": "data/scripts/emerald_champions.inc",
+    "label": "EmeraldChampions_Text_CosmogInfo",
+    "text": "COSMOEM evolves into SOLGALEO by\\nday or LUNALA at night.\\pThis second COSMOG lets you\\nexplore both paths. Use your\\lLeveler when ready.$"
+  },
+  {
+    "file": "data/scripts/emerald_champions.inc",
+    "label": "EmeraldChampions_Text_DeoxysResearch",
+    "text": "Would you like to study your DEOXYS\\nwith our form-changing equipment?$"
+  },
+  {
+    "file": "data/scripts/mauville_man.inc",
+    "label": "MauvilleCity_PokemonCenter_1F_Text_WillYouHearMyTale",
+    "text": "I'm the STORYTELLER.\\nI'll tell you tales of legendary\\lTRAINERS.\\pWill you hear my tale?$"
+  },
+  {
+    "file": "data/scripts/mauville_man.inc",
+    "label": "MauvilleCity_PokemonCenter_1F_Text_IKnowNoTales",
+    "text": "But, I know of no legendary TRAINERS.\\nHence, I know no tales.\\pWhere does one find a TRAINER worthy\\nof a legendary tale?$"
+  },
+  {
+    "file": "data/scripts/mauville_man.inc",
+    "label": "MauvilleCity_PokemonCenter_1F_Text_HaveYouAnyLegendaryTales",
+    "text": "Are you a TRAINER?\\pThen tell me, have you any tales that\\nare even remotely legendary?$"
+  },
+  {
+    "file": "data/scripts/mauville_man.inc",
+    "label": "MauvilleCity_PokemonCenter_1F_Text_HearAnotherLegendaryTale",
+    "text": "Incidentally\u2026 Would you care to hear\\nanother legendary tale?$"
+  },
+  {
+    "file": "data/scripts/mauville_man.inc",
+    "label": "MauvilleCity_PokemonCenter_1F_Text_IWishMorePeopleWereInterested",
+    "text": "I wish more people would be interested\\nin hearing my epic tales of legendary\\lTRAINERS.$"
+  },
+  {
+    "file": "data/scripts/mauville_man.inc",
+    "label": "MauvilleCity_PokemonCenter_1F_Text_BerriesPlantedStory",
+    "text": "This is a tale of a TRAINER\\nnamed {STR_VAR_3}.\\pThis TRAINER planted BERRIES\\n{STR_VAR_1} times!\\p{STR_VAR_3} is a legendary lover of\\nBERRIES!$"
+  },
+  {
+    "file": "data/scripts/mauville_man.inc",
+    "label": "MauvilleCity_PokemonCenter_1F_Text_PokemonCaughtStory",
+    "text": "This is a tale of a TRAINER\\nnamed {STR_VAR_3}.\\pThis TRAINER caught\\n{STR_VAR_1} POK\u00e9MON!\\p{STR_VAR_3} is a legendary catcher of\\nwild POK\u00e9MON!$"
+  },
+  {
+    "file": "data/scripts/mauville_man.inc",
+    "label": "MauvilleCity_PokemonCenter_1F_Text_FishingPokemonCaughtStory",
+    "text": "This is a tale of a TRAINER\\nnamed {STR_VAR_3}.\\pThis TRAINER caught\\n{STR_VAR_1} POK\u00e9MON while fishing!\\p{STR_VAR_3} is a legendary fishing\\nexpert!$"
+  },
+  {
+    "file": "data/scripts/mauville_man.inc",
+    "label": "MauvilleCity_PokemonCenter_1F_Text_EggsHatchedStory",
+    "text": "This is a tale of a TRAINER\\nnamed {STR_VAR_3}.\\pThis TRAINER hatched {STR_VAR_1} POK\u00e9MON\\nfrom EGGS!\\p{STR_VAR_3} is a legendary warmer\\nof EGGS!$"
+  },
+  {
+    "file": "data/scripts/mauville_man.inc",
+    "label": "MauvilleCity_PokemonCenter_1F_Text_TVWatchedTitle",
+    "text": "The Legendary TV Viewer$"
+  },
+  {
+    "file": "data/text/pkmn_center_nurse.inc",
+    "label": "gText_EmeraldChampionsExplainRepelSpray",
+    "text": "Use it and wild Pok\u00e9mon leave you\\nalone for 500 steps. When it wears\\loff, you can mist the air again.\\pFishing, Rock Smash and Sweet Scent\\nare never blocked.\\pSWEET SCENT gives a 25% chance of\\nan available local legendary.\\pSeveral legends in one area share\\nthat chance. Their requirements apply.$"
+  },
+  {
+    "file": "data/text/pokemon_news.inc",
+    "label": "gPokeNewsTextBlendMaster_Upcoming",
+    "text": "Greetings!\\nIt's time for POK\u00e9MON NEWS.\\pWe have big news for everyone\\ninvolved in the making of {POKEBLOCK}S.\\pThe legendary BLEND MASTER will be\\nappearing in LILYCOVE CITY with just\\la mere {STR_VAR_1}-day wait to go!\\pThe BLEND MASTER is said to be\\nthe best in all HOENN when it comes to\\lspinning a BERRY BLENDER.\\pThose people who want to make great\\n{POKEBLOCK}S or see the MASTER in action\\lare urged to save their BERRIES.\\pThat's the news on POK\u00e9MON NEWS.$"
+  },
+  {
+    "file": "data/text/pokemon_news.inc",
+    "label": "gPokeNewsTextBlendMaster_Ongoing",
+    "text": "Greetings!\\nIt's time for POK\u00e9MON NEWS.\\pWe have big news for everyone\\ninvolved in the making of {POKEBLOCK}S.\\pThe legendary BLEND MASTER has\\nfinally appeared!\\pThe BLEND MASTER is spinning\\nthe BERRY BLENDER at the LILYCOVE\\lCONTEST HALL.\\pThose people who want to make great\\n{POKEBLOCK}S or see the MASTER in action\\lshould hurry to LILYCOVE.\\pThat's the news on POK\u00e9MON NEWS.$"
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route120_Text_LorenzoIntro",
+    "text": "Fitness check! OGERPON sets the pace,\\nSTARMIE keeps it. Can you keep up?$"
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route120_Text_LeonelPostBattle",
+    "text": "Travelers with five BADGES have\\nspotted OGERPON in this route's\\lgrass.\\pIt's a rare sight. SWEET SCENT can\\nhelp draw out the local\\ldiscoveries.$"
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route127_Text_AthenaIntro",
+    "text": "Slow and methodical. Then PHEROMOSA\\nmakes it fast. Shall we?$"
+  }
+]

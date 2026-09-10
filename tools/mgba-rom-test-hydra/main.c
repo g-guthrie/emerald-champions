@@ -563,8 +563,25 @@ int main(int argc, char *argv[])
         }
         regfree(&preg);
     }
+    // Explicit runtime budget takes precedence over inherited build flags.
+    // Direct Python invocations do not inherit the child's make -j setting.
+    const char *worker_budget = getenv("HYDRA_JOBS");
+    if (worker_budget)
+    {
+        char *end;
+        long requested = strtol(worker_budget, &end, 10);
+        if (end == worker_budget || *end != '\0' || requested < 1 || requested > MAX_PROCESSES)
+        {
+            fprintf(stderr, "HYDRA_JOBS must be an integer between 1 and %d\n", MAX_PROCESSES);
+            exit(2);
+        }
+        nrunners = requested;
+    }
     if (nrunners > MAX_PROCESSES)
         nrunners = MAX_PROCESSES;
+    if (nrunners < 1)
+        nrunners = 1;
+    fprintf(stdout, "Hydra workers: %d\n", nrunners);
     runners_digits = ceil(log10(nrunners));
     runners = calloc(nrunners, sizeof(*runners));
     if (!runners)
@@ -838,6 +855,9 @@ int main(int argc, char *argv[])
     if (results == 0)
     {
         fprintf(stdout, "\nNo tests found.\n");
+        // An empty selection is not evidence that the requested checks passed.
+        if (exit_code == 0)
+            exit_code = 1;
     }
     else
     {

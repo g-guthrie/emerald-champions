@@ -1,0 +1,55 @@
+stamped 28980 build inputs: 56f92364934d (binds pokeemerald-dewford-audit-20260910-release.gba, pokeemerald-dewford-audit-20260910-release.elf)
+
+== compiled map and tile integrity ==
+{
+  "status": "compiled_structure_passed_with_unresolved_states",
+  "counts": {
+    "registered_maps": 957,
+    "compiled_hoenn_maps": 540,
+    "dormant_maps": 417,
+    "registered_layouts": 807,
+    "compiled_layouts": 463,
+    "tilesets": 139,
+    "placement_cells": 585957,
+    "compiled_placement_cells": 346343,
+    "used_metatiles_per_layout": 45734,
+    "script_writes": 0,
+    "script_write_commands": {},
+    "script_map_state_changes": 0,
+    "unresolved_script_writes": 0,
+    "unresolved_script_writes_possible_hoenn": 0,
+    "script_writes_without_map_context": 0,
+    "errors": 47,
+    "compiled_errors": 0,
+    "dormant_errors": 47,
+    "unresolved_static_ownership": 1
+  }
+}
+
+== canonical trainer output agreement and configured abilities ==
+implemented_trainer_branches=516 through_encounter=513
+PASS: 2339 authored trainer Abilities are legal for the configured species/form tables
+PASS: generated master/plans/party match authored teams; configured trainer abilities are valid
+
+== preset structural validation and output agreement (not strategy quality) ==
+PASS: generated battle-set outputs match current canonical inputs byte-for-byte
+defaults=1309
+alternatives=2890
+singles_defaults=1309
+singles_alternatives=1415
+sets=6923
+
+== authored Circuit projection ==
+checked 756 variants and 1322 templates
+
+== wild table integrity ==
+PASS: 265 active encounter tables have configured species, valid numeric fields and slot probabilities
+
+== whitespace and patch integrity ==
+
+== release input content stamp ==
+PASS: pokeemerald-dewford-audit-20260910-release.inputs.json matches 28980 build inputs and artifact bytes: pokeemerald-dewford-audit-20260910-release.gba, pokeemerald-dewford-audit-20260910-release.elf
+PASS: ROM header, checksum, and GBA memory regions are valid
+memory: ROM 27,915,456/33,554,432 (83.19%), EWRAM 232,282/262,144 (88.61%), IWRAM 28,316/32,768 (86.41%)
+
+EMERALD CHAMPIONS RELEASE GATES: PASS

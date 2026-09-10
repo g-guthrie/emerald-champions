@@ -1,0 +1,6 @@
+save2 0x20151ec old local offset 0 RESULT frames=7000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=3e05b66ace588817 nonzero_pixels=18894 save_bytes=0
+READ width=4 address=020022c4 value=00000002
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=2 address=03006b64 value=00000008
+ 

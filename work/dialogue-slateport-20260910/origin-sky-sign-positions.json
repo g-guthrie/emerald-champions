@@ -1,0 +1,42 @@
+{
+  "SootopolisCity": [
+    44,
+    32
+  ],
+  "CaveOfOrigin_Entrance": [
+    8,
+    19
+  ],
+  "CaveOfOrigin_1F": [
+    10,
+    16
+  ],
+  "CaveOfOrigin_B1F": [
+    8,
+    3
+  ],
+  "CaveOfOrigin_UnusedRubySapphireMap1": [
+    12,
+    5
+  ],
+  "CaveOfOrigin_UnusedRubySapphireMap2": [
+    6,
+    9
+  ],
+  "CaveOfOrigin_UnusedRubySapphireMap3": [
+    6,
+    14
+  ],
+  "SkyPillar_1F": [
+    5,
+    12
+  ],
+  "SkyPillar_3F": [
+    2,
+    2
+  ],
+  "SkyPillar_5F": [
+    4,
+    2
+  ]
+}

@@ -1,0 +1,214 @@
+tools/scaninc/scaninc -M build/emerald-test/test/battle/ai/emerald_champions_plans.d -g build/assets -I include -I tools/agbcc/include test/battle/ai/emerald_champions_plans.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/battle/ai/emerald_champions_plans.o test/battle/ai/emerald_champions_plans.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 4
+[0] EC live review James timing: complete cold decision with six-player party: [32mPASS[0m
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Struggle Bug target=0
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Liquidation target=2
+AI decision turn=2 actor=1 move=Struggle Bug target=0
+AI decision turn=2 actor=3 move=Liquidation target=2
+E11_COMPLETE_TIMING trainer=621 setupFrames=7 decisionFrames=42 completeFrames=49 warmFrames=41 first=3 moves=Struggle Bug/Liquidation
+[1] EC live review James reserves: native physical special and Speed Boost continuation: [32mPASS[0m
+JAMES_RESERVE_INPUT special=0 turns=1 owner=0 slot=0 species=133 level=14 HP=52/52 Atk=36 Def=23 SpA=18 SpD=27 Speed=24 ability=91 item=494
+JAMES_RESERVE_INPUT special=0 turns=1 owner=0 slot=1 species=532 level=14 HP=58/58 Atk=31 Def=36 SpA=14 SpD=19 Speed=19 ability=89 item=494
+JAMES_RESERVE_INPUT special=0 turns=1 owner=1 slot=0 species=543 level=12 HP=37/37 Atk=24 Def=22 SpA=13 SpD=19 Speed=28 ability=3 item=494
+JAMES_RESERVE_INPUT special=0 turns=1 owner=1 slot=1 species=402 level=12 HP=44/44 Atk=36 Def=20 SpA=18 SpD=20 Speed=34 ability=101 item=479
+JAMES_RESERVE_INPUT special=0 turns=1 owner=1 slot=2 species=283 level=12 HP=0/35 Atk=13 Def=16 SpA=28 SpD=21 Speed=34 ability=33 item=481
+JAMES_RESERVE_INPUT special=0 turns=1 owner=1 slot=3 species=751 level=12 HP=0/42 Atk=27 Def=21 SpA=16 SpD=26 Speed=15 ability=199 item=494
+AI decision turn=1 actor=0 move=Double-Edge target=3
+AI decision turn=1 actor=1 move=Poison Jab target=0
+AI decision turn=1 actor=2 move=Ice Punch target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Struggle Bug target=0
+AI decision turn=2 actor=3 move=Bug Bite target=0
+JAMES_RESERVE_AFTER special=0 turns=1 nativeTurns=1 species=543/402 HP=26/44 foes=37/58 LAST=Poison Jab/Protect foeLAST=Double-Edge/Ice Punch speedStages=7/6 foeSpeedStages=6/6 ownFaints=0 foeFaints=0 status=0/0 foeStatus=8/0 weather=0
+JAMES_RESERVE_HAZARDS special=0 turns=1 sideFlags=0/0 spikes=0/0 toxicSpikes=0/0
+JAMES_RESERVE_DROPS special=0 turns=1 foeSpA=6/6
+JAMES_RESERVE_HAZARDS_RECHECK special=0 turns=1 sideFlags=0/0 spikes=0/0 toxicSpikes=0/0
+JAMES_RESERVE_PARTY special=0 turns=1 slot=0 species=543 HP=26 status=0
+JAMES_RESERVE_PARTY special=0 turns=1 slot=1 species=402 HP=44 status=0
+JAMES_RESERVE_PARTY special=0 turns=1 slot=2 species=283 HP=0 status=0
+JAMES_RESERVE_PARTY special=0 turns=1 slot=3 species=751 HP=0 status=0
+JAMES_RESERVE_INPUT special=0 turns=2 owner=0 slot=0 species=133 level=14 HP=52/52 Atk=36 Def=23 SpA=18 SpD=27 Speed=24 ability=91 item=494
+JAMES_RESERVE_INPUT special=0 turns=2 owner=0 slot=1 species=532 level=14 HP=58/58 Atk=31 Def=36 SpA=14 SpD=19 Speed=19 ability=89 item=494
+JAMES_RESERVE_INPUT special=0 turns=2 owner=1 slot=0 species=543 level=12 HP=37/37 Atk=24 Def=22 SpA=13 SpD=19 Speed=28 ability=3 item=494
+JAMES_RESERVE_INPUT special=0 turns=2 owner=1 slot=1 species=402 level=12 HP=44/44 Atk=36 Def=20 SpA=18 SpD=20 Speed=34 ability=101 item=479
+JAMES_RESERVE_INPUT special=0 turns=2 owner=1 slot=2 species=283 level=12 HP=0/35 Atk=13 Def=16 SpA=28 SpD=21 Speed=34 ability=33 item=481
+JAMES_RESERVE_INPUT special=0 turns=2 owner=1 slot=3 species=751 level=12 HP=0/42 Atk=27 Def=21 SpA=16 SpD=26 Speed=15 ability=199 item=494
+AI decision turn=1 actor=0 move=Double-Edge target=3
+AI decision turn=1 actor=1 move=Poison Jab target=0
+AI decision turn=1 actor=2 move=Ice Punch target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Double-Edge target=3
+AI decision turn=2 actor=1 move=Struggle Bug target=0
+AI decision turn=2 actor=2 move=Ice Punch target=1
+AI decision turn=2 actor=3 move=Bug Bite target=0
+AI decision turn=3 actor=1 move=Protect target=1
+JAMES_RESERVE_AFTER special=0 turns=2 nativeTurns=2 species=543/402 HP=15/0 foes=0/57 LAST=Struggle Bug/- foeLAST=-/Ice Punch speedStages=8/6 foeSpeedStages=6/6 ownFaints=1 foeFaints=1 status=0/0 foeStatus=0/0 weather=0
+JAMES_RESERVE_HAZARDS special=0 turns=2 sideFlags=0/0 spikes=0/0 toxicSpikes=0/0
+JAMES_RESERVE_DROPS special=0 turns=2 foeSpA=6/5
+JAMES_RESERVE_HAZARDS_RECHECK special=0 turns=2 sideFlags=0/0 spikes=0/0 toxicSpikes=0/0
+JAMES_RESERVE_PARTY special=0 turns=2 slot=0 species=543 HP=15 status=0
+JAMES_RESERVE_PARTY special=0 turns=2 slot=1 species=402 HP=0 status=0
+JAMES_RESERVE_PARTY special=0 turns=2 slot=2 species=283 HP=0 status=0
+JAMES_RESERVE_PARTY special=0 turns=2 slot=3 species=751 HP=0 status=0
+JAMES_RESERVE_INPUT special=1 turns=1 owner=0 slot=0 species=177 level=14 HP=48/48 Atk=20 Def=21 SpA=40 SpD=22 Speed=28 ability=28 item=494
+JAMES_RESERVE_INPUT special=1 turns=1 owner=0 slot=1 species=4 level=14 HP=48/48 Atk=20 Def=21 SpA=37 SpD=23 Speed=27 ability=66 item=494
+JAMES_RESERVE_INPUT special=1 turns=1 owner=1 slot=0 species=543 level=12 HP=37/37 Atk=24 Def=22 SpA=13 SpD=19 Speed=28 ability=3 item=494
+JAMES_RESERVE_INPUT special=1 turns=1 owner=1 slot=1 species=402 level=12 HP=44/44 Atk=36 Def=20 SpA=18 SpD=20 Speed=34 ability=101 item=479
+JAMES_RESERVE_INPUT special=1 turns=1 owner=1 slot=2 species=283 level=12 HP=0/35 Atk=13 Def=16 SpA=28 SpD=21 Speed=34 ability=33 item=481
+JAMES_RESERVE_INPUT special=1 turns=1 owner=1 slot=3 species=751 level=12 HP=0/42 Atk=27 Def=21 SpA=16 SpD=26 Speed=15 ability=199 item=494
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Flamethrower target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Struggle Bug target=0
+AI decision turn=2 actor=3 move=Taunt target=0
+JAMES_RESERVE_AFTER special=1 turns=1 nativeTurns=1 species=543/402 HP=37/44 foes=48/48 LAST=Protect/Protect foeLAST=Psychic/Flamethrower speedStages=7/6 foeSpeedStages=6/6 ownFaints=0 foeFaints=0 status=0/0 foeStatus=0/0 weather=0
+JAMES_RESERVE_HAZARDS special=1 turns=1 sideFlags=0/0 spikes=0/0 toxicSpikes=0/0
+JAMES_RESERVE_DROPS special=1 turns=1 foeSpA=6/6
+JAMES_RESERVE_HAZARDS_RECHECK special=1 turns=1 sideFlags=0/0 spikes=0/0 toxicSpikes=0/0
+JAMES_RESERVE_PARTY special=1 turns=1 slot=0 species=543 HP=37 status=0
+JAMES_RESERVE_PARTY special=1 turns=1 slot=1 species=402 HP=44 status=0
+JAMES_RESERVE_PARTY special=1 turns=1 slot=2 species=283 HP=0 status=0
+JAMES_RESERVE_PARTY special=1 turns=1 slot=3 species=751 HP=0 status=0
+JAMES_RESERVE_INPUT special=1 turns=2 owner=0 slot=0 species=177 level=14 HP=48/48 Atk=20 Def=21 SpA=40 SpD=22 Speed=28 ability=28 item=494
+JAMES_RESERVE_INPUT special=1 turns=2 owner=0 slot=1 species=4 level=14 HP=48/48 Atk=20 Def=21 SpA=37 SpD=23 Speed=27 ability=66 item=494
+JAMES_RESERVE_INPUT special=1 turns=2 owner=1 slot=0 species=543 level=12 HP=37/37 Atk=24 Def=22 SpA=13 SpD=19 Speed=28 ability=3 item=494
+JAMES_RESERVE_INPUT special=1 turns=2 owner=1 slot=1 species=402 level=12 HP=44/44 Atk=36 Def=20 SpA=18 SpD=20 Speed=34 ability=101 item=479
+JAMES_RESERVE_INPUT special=1 turns=2 owner=1 slot=2 species=283 level=12 HP=0/35 Atk=13 Def=16 SpA=28 SpD=21 Speed=34 ability=33 item=481
+JAMES_RESERVE_INPUT special=1 turns=2 owner=1 slot=3 species=751 level=12 HP=0/42 Atk=27 Def=21 SpA=16 SpD=26 Speed=15 ability=199 item=494
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Flamethrower target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Psychic target=1
+AI decision turn=2 actor=1 move=Struggle Bug target=0
+AI decision turn=2 actor=2 move=Flamethrower target=3
+AI decision turn=2 actor=3 move=Taunt target=0
+AI decision turn=3 actor=1 move=Protect target=1
+AI decision turn=3 actor=3 move=Protect target=3
+JAMES_RESERVE_AFTER special=1 turns=2 nativeTurns=2 species=543/402 HP=5/2 foes=45/47 LAST=Struggle Bug/Taunt foeLAST=Psychic/Flamethrower speedStages=8/6 foeSpeedStages=6/6 ownFaints=0 foeFaints=0 status=0/0 foeStatus=0/0 weather=0
+JAMES_RESERVE_HAZARDS special=1 turns=2 sideFlags=0/0 spikes=0/0 toxicSpikes=0/0
+JAMES_RESERVE_DROPS special=1 turns=2 foeSpA=5/5
+JAMES_RESERVE_HAZARDS_RECHECK special=1 turns=2 sideFlags=0/0 spikes=0/0 toxicSpikes=0/0
+JAMES_RESERVE_PARTY special=1 turns=2 slot=0 species=543 HP=5 status=0
+JAMES_RESERVE_PARTY special=1 turns=2 slot=1 species=402 HP=2 status=0
+JAMES_RESERVE_PARTY special=1 turns=2 slot=2 species=283 HP=0 status=0
+JAMES_RESERVE_PARTY special=1 turns=2 slot=3 species=751 HP=0 status=0
+[2] EC live review James leads: rain physical special and Fake Out pressure: [32mPASS[0m
+JAMES_LEAD_INPUT board=0 slot=0 species=283 level=12 HP=35 Atk=13 Def=16 SpA=28 SpD=21 Speed=34 item=481 ability=33
+JAMES_LEAD_INPUT board=0 slot=1 species=751 level=12 HP=42 Atk=27 Def=21 SpA=16 SpD=26 Speed=15 item=494 ability=199
+JAMES_LEAD_INPUT board=0 slot=2 species=543 level=12 HP=37 Atk=24 Def=22 SpA=13 SpD=19 Speed=28 item=494 ability=3
+JAMES_LEAD_INPUT board=0 slot=3 species=402 level=12 HP=44 Atk=36 Def=20 SpA=18 SpD=20 Speed=34 item=479 ability=101
+AI decision turn=1 actor=0 move=Double-Edge target=3
+AI decision turn=1 actor=1 move=Rain Dance target=1
+AI decision turn=1 actor=2 move=Ice Punch target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Icy Wind target=0
+AI decision turn=2 actor=3 move=Liquidation target=0
+JAMES_LEAD_AFTER board=0 turns=1 weather=2 rainTimer=4 active=283/751 HP=24/42 foes=52/58 LAST=Rain Dance/Protect foeSpA=6/6 foeAtk=6/6 foeSpeed=6/6 ownFaints=0 foeFaints=0
+JAMES_LEAD_INPUT board=0 slot=0 species=283 level=12 HP=35 Atk=13 Def=16 SpA=28 SpD=21 Speed=34 item=481 ability=33
+JAMES_LEAD_INPUT board=0 slot=1 species=751 level=12 HP=42 Atk=27 Def=21 SpA=16 SpD=26 Speed=15 item=494 ability=199
+JAMES_LEAD_INPUT board=0 slot=2 species=543 level=12 HP=37 Atk=24 Def=22 SpA=13 SpD=19 Speed=28 item=494 ability=3
+JAMES_LEAD_INPUT board=0 slot=3 species=402 level=12 HP=44 Atk=36 Def=20 SpA=18 SpD=20 Speed=34 item=479 ability=101
+AI decision turn=1 actor=0 move=Double-Edge target=3
+AI decision turn=1 actor=1 move=Rain Dance target=1
+AI decision turn=1 actor=2 move=Ice Punch target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Double-Edge target=3
+AI decision turn=2 actor=1 move=Icy Wind target=0
+AI decision turn=2 actor=2 move=Ice Punch target=1
+AI decision turn=2 actor=3 move=Liquidation target=0
+AI decision turn=3 actor=1 move=Hydro Pump target=0
+AI decision turn=3 actor=3 move=Lunge target=2
+JAMES_LEAD_AFTER board=0 turns=2 weather=2 rainTimer=3 active=283/751 HP=13/8 foes=5/53 LAST=Icy Wind/Liquidation foeSpA=6/6 foeAtk=6/6 foeSpeed=5/5 ownFaints=0 foeFaints=0
+JAMES_LEAD_INPUT board=1 slot=0 species=283 level=12 HP=35 Atk=13 Def=16 SpA=28 SpD=21 Speed=34 item=481 ability=33
+JAMES_LEAD_INPUT board=1 slot=1 species=751 level=12 HP=42 Atk=27 Def=21 SpA=16 SpD=26 Speed=15 item=494 ability=199
+JAMES_LEAD_INPUT board=1 slot=2 species=543 level=12 HP=37 Atk=24 Def=22 SpA=13 SpD=19 Speed=28 item=494 ability=3
+JAMES_LEAD_INPUT board=1 slot=3 species=402 level=12 HP=44 Atk=36 Def=20 SpA=18 SpD=20 Speed=34 item=479 ability=101
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Rain Dance target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Liquidation target=0
+AI decision turn=2 actor=1 move=Hydro Pump target=0
+AI decision turn=2 actor=3 move=Leech Life target=0
+JAMES_LEAD_AFTER board=1 turns=1 weather=2 rainTimer=4 active=283/751 HP=3/26 foes=14/53 LAST=Rain Dance/Liquidation foeSpA=6/6 foeAtk=6/6 foeSpeed=6/6 ownFaints=0 foeFaints=0
+JAMES_LEAD_INPUT board=1 slot=0 species=283 level=12 HP=35 Atk=13 Def=16 SpA=28 SpD=21 Speed=34 item=481 ability=33
+JAMES_LEAD_INPUT board=1 slot=1 species=751 level=12 HP=42 Atk=27 Def=21 SpA=16 SpD=26 Speed=15 item=494 ability=199
+JAMES_LEAD_INPUT board=1 slot=2 species=543 level=12 HP=37 Atk=24 Def=22 SpA=13 SpD=19 Speed=28 item=494 ability=3
+JAMES_LEAD_INPUT board=1 slot=3 species=402 level=12 HP=44 Atk=36 Def=20 SpA=18 SpD=20 Speed=34 item=479 ability=101
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Rain Dance target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Liquidation target=0
+AI decision turn=2 actor=0 move=Psychic target=3
+AI decision turn=2 actor=1 move=Hydro Pump target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=3 move=Leech Life target=0
+AI switch turn=2 actor=1 party=3
+AI decision turn=3 actor=1 move=Bug Bite target=2
+AI decision turn=3 actor=3 move=Liquidation target=2
+JAMES_LEAD_AFTER board=1 turns=2 weather=2 rainTimer=3 active=402/751 HP=44/30 foes=0/44 LAST=-/Leech Life foeSpA=6/6 foeAtk=6/6 foeSpeed=6/6 ownFaints=1 foeFaints=1
+JAMES_LEAD_INPUT board=2 slot=0 species=283 level=12 HP=35 Atk=13 Def=16 SpA=28 SpD=21 Speed=34 item=481 ability=33
+JAMES_LEAD_INPUT board=2 slot=1 species=751 level=12 HP=42 Atk=27 Def=21 SpA=16 SpD=26 Speed=15 item=494 ability=199
+JAMES_LEAD_INPUT board=2 slot=2 species=543 level=12 HP=37 Atk=24 Def=22 SpA=13 SpD=19 Speed=28 item=494 ability=3
+JAMES_LEAD_INPUT board=2 slot=3 species=402 level=12 HP=44 Atk=36 Def=20 SpA=18 SpD=20 Speed=34 item=479 ability=101
+AI switch turn=1 actor=1 party=2
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Liquidation target=0
+AI decision turn=2 actor=1 move=Poison Jab target=0
+AI decision turn=2 actor=3 move=Protect target=3
+JAMES_LEAD_AFTER board=2 turns=1 weather=0 rainTimer=0 active=543/751 HP=31/24 foes=23/53 LAST=-/Liquidation foeSpA=6/6 foeAtk=6/6 foeSpeed=6/6 ownFaints=0 foeFaints=0
+JAMES_LEAD_INPUT board=2 slot=0 species=283 level=12 HP=35 Atk=13 Def=16 SpA=28 SpD=21 Speed=34 item=481 ability=33
+JAMES_LEAD_INPUT board=2 slot=1 species=751 level=12 HP=42 Atk=27 Def=21 SpA=16 SpD=26 Speed=15 item=494 ability=199
+JAMES_LEAD_INPUT board=2 slot=2 species=543 level=12 HP=37 Atk=24 Def=22 SpA=13 SpD=19 Speed=28 item=494 ability=3
+JAMES_LEAD_INPUT board=2 slot=3 species=402 level=12 HP=44 Atk=36 Def=20 SpA=18 SpD=20 Speed=34 item=479 ability=101
+AI switch turn=1 actor=1 party=2
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Liquidation target=0
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Poison Jab target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=1 move=Poison Jab target=0
+AI decision turn=3 actor=3 move=Leech Life target=0
+JAMES_LEAD_AFTER board=2 turns=2 weather=0 rainTimer=0 active=543/751 HP=27/24 foes=5/53 LAST=Poison Jab/Protect foeSpA=6/6 foeAtk=6/6 foeSpeed=6/6 ownFaints=0 foeFaints=0
+JAMES_LEAD_INPUT board=3 slot=0 species=283 level=12 HP=35 Atk=13 Def=16 SpA=28 SpD=21 Speed=34 item=481 ability=33
+JAMES_LEAD_INPUT board=3 slot=1 species=751 level=12 HP=42 Atk=27 Def=21 SpA=16 SpD=26 Speed=15 item=494 ability=199
+JAMES_LEAD_INPUT board=3 slot=2 species=543 level=12 HP=37 Atk=24 Def=22 SpA=13 SpD=19 Speed=28 item=494 ability=3
+JAMES_LEAD_INPUT board=3 slot=3 species=402 level=12 HP=44 Atk=36 Def=20 SpA=18 SpD=20 Speed=34 item=479 ability=101
+AI switch turn=1 actor=1 party=2
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Liquidation target=0
+AI decision turn=2 actor=1 move=Poison Jab target=0
+AI decision turn=2 actor=3 move=Protect target=3
+JAMES_LEAD_AFTER board=3 turns=1 weather=0 rainTimer=0 active=543/751 HP=37/24 foes=23/53 LAST=-/Liquidation foeSpA=6/6 foeAtk=6/6 foeSpeed=6/6 ownFaints=0 foeFaints=0
+JAMES_LEAD_INPUT board=3 slot=0 species=283 level=12 HP=35 Atk=13 Def=16 SpA=28 SpD=21 Speed=34 item=481 ability=33
+JAMES_LEAD_INPUT board=3 slot=1 species=751 level=12 HP=42 Atk=27 Def=21 SpA=16 SpD=26 Speed=15 item=494 ability=199
+JAMES_LEAD_INPUT board=3 slot=2 species=543 level=12 HP=37 Atk=24 Def=22 SpA=13 SpD=19 Speed=28 item=494 ability=3
+JAMES_LEAD_INPUT board=3 slot=3 species=402 level=12 HP=44 Atk=36 Def=20 SpA=18 SpD=20 Speed=34 item=479 ability=101
+AI switch turn=1 actor=1 party=2
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Liquidation target=0
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Poison Jab target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=1 move=Poison Jab target=0
+AI decision turn=3 actor=3 move=Leech Life target=0
+JAMES_LEAD_AFTER board=3 turns=2 weather=0 rainTimer=0 active=543/751 HP=33/24 foes=5/53 LAST=Poison Jab/Protect foeSpA=6/6 foeAtk=6/6 foeSpeed=6/6 ownFaints=0 foeFaints=0
+
+- Tests [32mPASSED[0m:          3
+- Tests [34mTOTAL[0m:           3
+

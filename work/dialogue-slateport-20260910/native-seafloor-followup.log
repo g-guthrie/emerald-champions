@@ -1,0 +1,56 @@
+194-sub 0 WATCH frame=62 address=020022f0 value=00000001 screenshot=work/dialogue-slateport-20260910/seafloor-194-sub-script-000062-00000001.png
+WATCH frame=72 address=020022f0 value=00000000 screenshot=work/dialogue-slateport-20260910/seafloor-194-sub-script-000072-00000000.png
+RESULT frames=15000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=5a4b78db5f49fc67 nonzero_pixels=38219 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=02002290 value=00000000
+READ width=4 address=020022d4 value=0000181a
+READ width=4 address=020022e0 value=00000006
+READ width=4 address=020022e4 value=00000005
+ 
+193-sub 0 WATCH frame=62 address=020022f0 value=00000001 screenshot=work/dialogue-slateport-20260910/seafloor-193-sub-script-000062-00000001.png
+WATCH frame=72 address=020022f0 value=00000000 screenshot=work/dialogue-slateport-20260910/seafloor-193-sub-script-000072-00000000.png
+RESULT frames=15000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=5be81c285e27faf4 nonzero_pixels=38219 save_bytes=0
+READ width=4 address=020022c4 value=00000001
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=02002290 value=00000000
+READ width=4 address=020022d4 value=0000181a
+READ width=4 address=020022e0 value=00000006
+READ width=4 address=020022e4 value=00000005
+ 
+195-full 0 WATCH frame=62 address=020022f0 value=00000001 screenshot=work/dialogue-slateport-20260910/seafloor-195-full-script-000062-00000001.png
+WATCH frame=72 address=020022f0 value=00000000 screenshot=work/dialogue-slateport-20260910/seafloor-195-full-script-000072-00000000.png
+WATCH frame=400 address=020022f0 value=00000001 screenshot=work/dialogue-slateport-20260910/seafloor-195-full-script-000400-00000001.png
+WATCH frame=407 address=020022f0 value=00000000 screenshot=work/dialogue-slateport-20260910/seafloor-195-full-script-000407-00000000.png
+WATCH frame=850 address=020022f0 value=00000001 screenshot=work/dialogue-slateport-20260910/seafloor-195-full-script-000850-00000001.png
+WATCH frame=1203 address=020022f0 value=00000000 screenshot=work/dialogue-slateport-20260910/seafloor-195-full-script-001203-00000000.png
+WATCH frame=1351 address=020022f0 value=00000001 screenshot=work/dialogue-slateport-20260910/seafloor-195-full-script-001351-00000001.png
+WATCH frame=1361 address=020022f0 value=00000000 screenshot=work/dialogue-slateport-20260910/seafloor-195-full-script-001361-00000000.png
+WATCH frame=2046 address=020022f0 value=00000001 screenshot=work/dialogue-slateport-20260910/seafloor-195-full-script-002046-00000001.png
+WATCH frame=2057 address=020022f0 value=00000000 screenshot=work/dialogue-slateport-20260910/seafloor-195-full-script-002057-00000000.png
+WATCH frame=3000 address=020022f0 value=00000001 screenshot=work/dialogue-slateport-20260910/seafloor-195-full-script-003000-00000001.png
+WATCH frame=3007 address=020022f0 value=00000000 screenshot=work/dialogue-slateport-20260910/seafloor-195-full-script-003007-00000000.png
+WATCH frame=3400 address=020022f0 value=00000001 screenshot=work/dialogue-slateport-20260910/seafloor-195-full-script-003400-00000001.png
+WATCH frame=3803 address=020022f0 value=00000000 screenshot=work/dialogue-slateport-20260910/seafloor-195-full-script-003803-00000000.png
+WATCH frame=3951 address=020022f0 value=00000001 screenshot=work/dialogue-slateport-20260910/seafloor-195-full-script-003951-00000001.png
+WATCH frame=3989 address=020022f0 value=00000000 screenshot=work/dialogue-slateport-20260910/seafloor-195-full-script-003989-00000000.png
+RESULT frames=15000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=6100d40b82e1dac2 nonzero_pixels=38228 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=02002290 value=00000000
+READ width=4 address=020022d4 value=0000181b
+READ width=4 address=020022e0 value=0000000a
+READ width=4 address=020022e4 value=00000011
+ 
+210-after 0 RESULT frames=15000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=3c05f7476c2748b2 nonzero_pixels=38315 save_bytes=0
+READ width=4 address=020022c4 value=00000001
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=02002290 value=00000001
+READ width=4 address=020022d4 value=0000002a
+READ width=4 address=020022e0 value=0000000d
+READ width=4 address=020022e4 value=00000017
+ 

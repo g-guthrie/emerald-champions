@@ -1,0 +1,6083 @@
+{
+  "scope": "All encoded text literals physically defined in the five assigned C files, including unused, empty and control-only fallback strings; excludes included headers, resource paths and comments. All 1226 string-bearing source lines were read before filtering. Counts are C text literals, not assembly dialogue blocks.",
+  "review_type": "Complete source-string reading with targeted consumer/config inspection; no runtime or rendered UI review.",
+  "reviewed_encoded_literal_count": 1189,
+  "edited_literal_count": 13,
+  "files": [
+    {
+      "file": "src/strings.c",
+      "reviewed_encoded_literal_count": 1069,
+      "edited_literal_count": 11,
+      "reviewed_literals": [
+        {
+          "line": 7,
+          "identifier": "gText_ExpandedPlaceholder_Empty",
+          "literal": "\"\""
+        },
+        {
+          "line": 8,
+          "identifier": "gText_ExpandedPlaceholder_Kun",
+          "literal": "\"\""
+        },
+        {
+          "line": 9,
+          "identifier": "gText_ExpandedPlaceholder_Chan",
+          "literal": "\"\""
+        },
+        {
+          "line": 10,
+          "identifier": "gText_ExpandedPlaceholder_Sapphire",
+          "literal": "\"SAPPHIRE\""
+        },
+        {
+          "line": 11,
+          "identifier": "gText_ExpandedPlaceholder_Ruby",
+          "literal": "\"RUBY\""
+        },
+        {
+          "line": 12,
+          "identifier": "gText_ExpandedPlaceholder_Emerald",
+          "literal": "\"EMERALD\""
+        },
+        {
+          "line": 13,
+          "identifier": "gText_ExpandedPlaceholder_Aqua",
+          "literal": "\"AQUA\""
+        },
+        {
+          "line": 14,
+          "identifier": "gText_ExpandedPlaceholder_Magma",
+          "literal": "\"MAGMA\""
+        },
+        {
+          "line": 15,
+          "identifier": "gText_ExpandedPlaceholder_Archie",
+          "literal": "\"ARCHIE\""
+        },
+        {
+          "line": 16,
+          "identifier": "gText_ExpandedPlaceholder_Maxie",
+          "literal": "\"MAXIE\""
+        },
+        {
+          "line": 17,
+          "identifier": "gText_ExpandedPlaceholder_Kyogre",
+          "literal": "\"KYOGRE\""
+        },
+        {
+          "line": 18,
+          "identifier": "gText_ExpandedPlaceholder_Groudon",
+          "literal": "\"GROUDON\""
+        },
+        {
+          "line": 19,
+          "identifier": "gText_ExpandedPlaceholder_Brendan",
+          "literal": "\"BRENDAN\""
+        },
+        {
+          "line": 20,
+          "identifier": "gText_ExpandedPlaceholder_May",
+          "literal": "\"MAY\""
+        },
+        {
+          "line": 21,
+          "identifier": "gText_ExpandedPlaceholder_Red",
+          "literal": "\"RED\""
+        },
+        {
+          "line": 22,
+          "identifier": "gText_ExpandedPlaceholder_Green",
+          "literal": "\"GREEN\""
+        },
+        {
+          "line": 23,
+          "identifier": null,
+          "literal": "\"EGG\""
+        },
+        {
+          "line": 24,
+          "identifier": null,
+          "literal": "\"POKéMON\""
+        },
+        {
+          "line": 25,
+          "identifier": "gText_Player",
+          "literal": "\"PLAYER\""
+        },
+        {
+          "line": 26,
+          "identifier": "gText_Pokedex",
+          "literal": "\"POKéDEX\""
+        },
+        {
+          "line": 27,
+          "identifier": "gText_Time",
+          "literal": "\"TIME\""
+        },
+        {
+          "line": 28,
+          "identifier": "gText_Badges",
+          "literal": "\"BADGES\""
+        },
+        {
+          "line": 29,
+          "identifier": "gText_AButton",
+          "literal": "\"A Button\""
+        },
+        {
+          "line": 30,
+          "identifier": "gText_BButton",
+          "literal": "\"B Button\""
+        },
+        {
+          "line": 31,
+          "identifier": "gText_RButton",
+          "literal": "\"R Button\""
+        },
+        {
+          "line": 32,
+          "identifier": "gText_LButton",
+          "literal": "\"L Button\""
+        },
+        {
+          "line": 33,
+          "identifier": "gText_Start",
+          "literal": "\"START\""
+        },
+        {
+          "line": 34,
+          "identifier": "gText_Select",
+          "literal": "\"SELECT\""
+        },
+        {
+          "line": 35,
+          "identifier": "gText_ControlPad",
+          "literal": "\"+ Control Pad\""
+        },
+        {
+          "line": 36,
+          "identifier": "gText_LButtonRButton",
+          "literal": "\"L Button  R Button\""
+        },
+        {
+          "line": 37,
+          "identifier": "gText_Controls",
+          "literal": "\"CONTROLS\""
+        },
+        {
+          "line": 38,
+          "identifier": "gText_PickOk",
+          "literal": "\"{DPAD_UPDOWN}PICK {A_BUTTON}OK\""
+        },
+        {
+          "line": 39,
+          "identifier": "gText_Next",
+          "literal": "\"{A_BUTTON}NEXT\""
+        },
+        {
+          "line": 40,
+          "identifier": "gText_NextBack",
+          "literal": "\"{A_BUTTON}NEXT {B_BUTTON}BACK\""
+        },
+        {
+          "line": 41,
+          "identifier": "gText_PickNextCancel",
+          "literal": "\"{DPAD_UPDOWN}PICK {A_BUTTON}NEXT {B_BUTTON}CANCEL\""
+        },
+        {
+          "line": 42,
+          "identifier": "gText_PickCancel",
+          "literal": "\"{DPAD_UPDOWN}PICK {A_BUTTON}{B_BUTTON}CANCEL\""
+        },
+        {
+          "line": 43,
+          "identifier": "gText_AButtonExit",
+          "literal": "\"{A_BUTTON}EXIT\""
+        },
+        {
+          "line": 44,
+          "identifier": "gText_Boy",
+          "literal": "\"BOY\""
+        },
+        {
+          "line": 45,
+          "identifier": "gText_Girl",
+          "literal": "\"GIRL\""
+        },
+        {
+          "line": 46,
+          "identifier": "gText_ThisIsAPokemon",
+          "literal": "\"This is what we call a “POKéMON.”{PAUSE 96}\\p\""
+        },
+        {
+          "line": 47,
+          "identifier": "gText_5MarksPokemon",
+          "literal": "\"????? POKéMON\""
+        },
+        {
+          "line": 48,
+          "identifier": "gText_CryOf",
+          "literal": "\"CRY OF\""
+        },
+        {
+          "line": 49,
+          "identifier": "gText_SizeComparedTo",
+          "literal": "\"SIZE COMPARED TO \""
+        },
+        {
+          "line": 50,
+          "identifier": "gText_SelectorArrow",
+          "literal": "\"▶\""
+        },
+        {
+          "line": 51,
+          "identifier": "gText_EmptySpace",
+          "literal": "\" \""
+        },
+        {
+          "line": 52,
+          "identifier": "gText_WelcomeToHOF",
+          "literal": "\"Welcome to the HALL OF FAME!\""
+        },
+        {
+          "line": 53,
+          "identifier": "gText_HOFDexRating",
+          "literal": "\"Spotted POKéMON: {STR_VAR_1}!\\nOwned POKéMON: {STR_VAR_2}!\\pPROF. BIRCH's POKéDEX rating!\\pPROF. BIRCH: Let's see…\\p\""
+        },
+        {
+          "line": 54,
+          "identifier": "gText_HOFDexSaving",
+          "literal": "\"SAVING…\\nDON'T TURN OFF THE POWER.\""
+        },
+        {
+          "line": 55,
+          "identifier": "gText_HOFCorrupted",
+          "literal": "\"The HALL OF FAME data is corrupted.\""
+        },
+        {
+          "line": 56,
+          "identifier": "gText_HOFNumber",
+          "literal": "\"HALL OF FAME No. {STR_VAR_1}\""
+        },
+        {
+          "line": 57,
+          "identifier": "gText_LeagueChamp",
+          "literal": "\"LEAGUE CHAMPION!\\nCONGRATULATIONS!\""
+        },
+        {
+          "line": 58,
+          "identifier": "gText_Number",
+          "literal": "\"No. \""
+        },
+        {
+          "line": 59,
+          "identifier": "gText_Level",
+          "literal": "\"Lv. \""
+        },
+        {
+          "line": 60,
+          "identifier": "gText_IdNumberSlash",
+          "literal": "\"IDNo. /\""
+        },
+        {
+          "line": 61,
+          "identifier": "gText_Name",
+          "literal": "\"NAME\""
+        },
+        {
+          "line": 62,
+          "identifier": "gText_IDNumber",
+          "literal": "\"IDNo.\""
+        },
+        {
+          "line": 63,
+          "identifier": "gText_BirchInTrouble",
+          "literal": "\"PROF. BIRCH is in trouble!\\nRelease a POKéMON and rescue him!\""
+        },
+        {
+          "line": 64,
+          "identifier": "gText_ConfirmStarterChoice",
+          "literal": "\"Do you choose this POKéMON?\""
+        },
+        {
+          "line": 65,
+          "identifier": "gText_Pokemon4",
+          "literal": "\"POKéMON\""
+        },
+        {
+          "line": 66,
+          "identifier": "gText_FlyToWhere",
+          "literal": "\"FLY to where?\""
+        },
+        {
+          "line": 67,
+          "identifier": "gMenuText_Use",
+          "literal": "\"Use\""
+        },
+        {
+          "line": 68,
+          "identifier": "gMenuText_Toss",
+          "literal": "\"Toss\""
+        },
+        {
+          "line": 69,
+          "identifier": "gMenuText_Register",
+          "literal": "\"Register\""
+        },
+        {
+          "line": 70,
+          "identifier": "gMenuText_Give",
+          "literal": "\"Give\""
+        },
+        {
+          "line": 71,
+          "identifier": "gMenuText_Confirm",
+          "literal": "\"Confirm\""
+        },
+        {
+          "line": 72,
+          "identifier": "gText_Cancel",
+          "literal": "\"Cancel\""
+        },
+        {
+          "line": 73,
+          "identifier": "gText_Cancel2",
+          "literal": "\"Cancel\""
+        },
+        {
+          "line": 74,
+          "identifier": "gText_EmptyString2",
+          "literal": "\"\""
+        },
+        {
+          "line": 75,
+          "identifier": "gText_None",
+          "literal": "\"None\""
+        },
+        {
+          "line": 76,
+          "identifier": "gText_FiveMarks",
+          "literal": "\"?????\""
+        },
+        {
+          "line": 77,
+          "identifier": "gText_Slash",
+          "literal": "\"/\""
+        },
+        {
+          "line": 78,
+          "identifier": "gText_OneDash",
+          "literal": "\"-\""
+        },
+        {
+          "line": 79,
+          "identifier": "gText_TwoDashes",
+          "literal": "\"--\""
+        },
+        {
+          "line": 80,
+          "identifier": "gText_ThreeDashes",
+          "literal": "\"---\""
+        },
+        {
+          "line": 81,
+          "identifier": "gText_MaleSymbol",
+          "literal": "\"♂\""
+        },
+        {
+          "line": 82,
+          "identifier": "gText_FemaleSymbol",
+          "literal": "\"♀\""
+        },
+        {
+          "line": 83,
+          "identifier": "gText_LevelSymbol",
+          "literal": "\"{LV}\""
+        },
+        {
+          "line": 84,
+          "identifier": "gText_NumberClear01",
+          "literal": "\"{NO}{CLEAR 1}\""
+        },
+        {
+          "line": 85,
+          "identifier": "gText_RightArrow",
+          "literal": "\"{RIGHT_ARROW}\""
+        },
+        {
+          "line": 86,
+          "identifier": "gText_IDNumber2",
+          "literal": "\"{ID}{NO}\""
+        },
+        {
+          "line": 87,
+          "identifier": "gText_Space",
+          "literal": "\" \""
+        },
+        {
+          "line": 88,
+          "identifier": "gText_SelectorArrow2",
+          "literal": "\"▶\""
+        },
+        {
+          "line": 89,
+          "identifier": "gText_GoBackPrevMenu",
+          "literal": "\"Go back to the\\nprevious menu.\""
+        },
+        {
+          "line": 90,
+          "identifier": "gText_WhatWouldYouLike",
+          "literal": "\"What would you like to do?\""
+        },
+        {
+          "line": 91,
+          "identifier": "gMenuText_Give2",
+          "literal": "\"Give\""
+        },
+        {
+          "line": 92,
+          "identifier": "gText_xVar1",
+          "literal": "\"×{STR_VAR_1}\""
+        },
+        {
+          "line": 93,
+          "identifier": "gText_Berry2",
+          "literal": "\" BERRY\""
+        },
+        {
+          "line": 94,
+          "identifier": "gText_Coins",
+          "literal": "\"{STR_VAR_1} COINS\""
+        },
+        {
+          "line": 95,
+          "identifier": "gText_CloseBag",
+          "literal": "\"Close Bag\""
+        },
+        {
+          "line": 96,
+          "identifier": "gText_Var1IsSelected",
+          "literal": "\"{STR_VAR_1}\\nis selected.\""
+        },
+        {
+          "line": 97,
+          "identifier": "gText_CantWriteMail",
+          "literal": "\"You can't write\\nMAIL here.\""
+        },
+        {
+          "line": 98,
+          "identifier": "gText_NoPokemon",
+          "literal": "\"There is no\\nPOKéMON.\""
+        },
+        {
+          "line": 99,
+          "identifier": "gText_MoveVar1Where",
+          "literal": "\"Move the\\n{STR_VAR_1}\\nwhere?\""
+        },
+        {
+          "line": 100,
+          "identifier": "gText_Var1CantBeHeld",
+          "literal": "\"The {STR_VAR_1} can't be held.\""
+        },
+        {
+          "line": 101,
+          "identifier": "gText_TossHowManyVar1s",
+          "literal": "\"Toss out how many\\n{STR_VAR_1}?\""
+        },
+        {
+          "line": 102,
+          "identifier": "gText_ThrewAwayVar2Var1s",
+          "literal": "\"Threw away {STR_VAR_2}\\n{STR_VAR_1}.\""
+        },
+        {
+          "line": 103,
+          "identifier": "gText_ConfirmTossItems",
+          "literal": "\"Is it okay to\\nthrow away {STR_VAR_2}\\n{STR_VAR_1}?\""
+        },
+        {
+          "line": 104,
+          "identifier": "gText_DadsAdvice",
+          "literal": "\"DAD's advice…\\n{PLAYER}, there's a time and place for\\leverything!{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 105,
+          "identifier": "gText_PlayerUsedVar2",
+          "literal": "\"{PLAYER} used the\\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 106,
+          "identifier": "gText_RepelEffectsLingered",
+          "literal": "\"But the effects of a REPEL\\nlingered from earlier.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 107,
+          "identifier": "gText_LureEffectsLingered",
+          "literal": "\"But the effects of a Lure\\nlingered from earlier.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 108,
+          "identifier": "gText_BoxFull",
+          "literal": "\"The BOX is full.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 109,
+          "identifier": "gText_TheField",
+          "literal": "\"the field\""
+        },
+        {
+          "line": 110,
+          "identifier": "gText_TheBattle",
+          "literal": "\"the battle\""
+        },
+        {
+          "line": 111,
+          "identifier": "gText_ThePokemonList",
+          "literal": "\"the POKéMON LIST\""
+        },
+        {
+          "line": 112,
+          "identifier": "gText_TheShop",
+          "literal": "\"the shop\""
+        },
+        {
+          "line": 113,
+          "identifier": "gText_ThePC",
+          "literal": "\"the PC\""
+        },
+        {
+          "line": 140,
+          "identifier": "gText_ReturnToVar1",
+          "literal": "\"Return to\\n{STR_VAR_1}.\""
+        },
+        {
+          "line": 144,
+          "identifier": null,
+          "literal": "\"Items\""
+        },
+        {
+          "line": 145,
+          "identifier": null,
+          "literal": "\"Medicine\""
+        },
+        {
+          "line": 146,
+          "identifier": null,
+          "literal": "\"Battle Items\""
+        },
+        {
+          "line": 147,
+          "identifier": null,
+          "literal": "\"TMs & HMs\""
+        },
+        {
+          "line": 148,
+          "identifier": null,
+          "literal": "\"Berries\""
+        },
+        {
+          "line": 149,
+          "identifier": null,
+          "literal": "\"Poké Balls\""
+        },
+        {
+          "line": 150,
+          "identifier": null,
+          "literal": "\"Key Items\""
+        },
+        {
+          "line": 151,
+          "identifier": null,
+          "literal": "\"Mega Stones\""
+        },
+        {
+          "line": 154,
+          "identifier": "gText_NumberItem_TMBerry",
+          "literal": "\"{NO}{STR_VAR_1}{CLEAR 3}{STR_VAR_2}\""
+        },
+        {
+          "line": 155,
+          "identifier": "gText_NumberItem_HM",
+          "literal": "\"{CLEAR_TO 17}{STR_VAR_1}{CLEAR 5}{STR_VAR_2}\""
+        },
+        {
+          "line": 157,
+          "identifier": "gText_ShopBuy",
+          "literal": "\"BUY\""
+        },
+        {
+          "line": 158,
+          "identifier": "gText_ShopSell",
+          "literal": "\"SELL\""
+        },
+        {
+          "line": 159,
+          "identifier": "gText_ShopQuit",
+          "literal": "\"QUIT\""
+        },
+        {
+          "line": 160,
+          "identifier": "gText_ThatItemIsSoldOut",
+          "literal": "\"I'm sorry, but that item is sold out.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 161,
+          "identifier": "gText_SoldOut",
+          "literal": "\"SOLD OUT\""
+        },
+        {
+          "line": 162,
+          "identifier": "gText_InBagVar1",
+          "literal": "\"IN BAG: {STR_VAR_1}\""
+        },
+        {
+          "line": 163,
+          "identifier": "gText_QuitShopping",
+          "literal": "\"Quit shopping.\""
+        },
+        {
+          "line": 164,
+          "identifier": "gText_Var1CertainlyHowMany",
+          "literal": "\"{STR_VAR_1}? Certainly.\\nHow many would you like?\""
+        },
+        {
+          "line": 165,
+          "identifier": "gText_Var1CertainlyHowMany2",
+          "literal": "\"{STR_VAR_1}? Certainly.\\nHow many would you like?\""
+        },
+        {
+          "line": 166,
+          "identifier": "gText_Var1AndYouWantedVar2",
+          "literal": "\"{STR_VAR_1}? And you wanted {STR_VAR_2}?\\nThat will be ¥{STR_VAR_3}.\""
+        },
+        {
+          "line": 167,
+          "identifier": "gText_Var1IsItThatllBeVar2",
+          "literal": "\"{STR_VAR_1}, is it?\\nThat'll be ¥{STR_VAR_2}. Do you want it?\""
+        },
+        {
+          "line": 168,
+          "identifier": "gText_YouWantedVar1ThatllBeVar2",
+          "literal": "\"You wanted {STR_VAR_1}?\\nThat'll be ¥{STR_VAR_2}. Will that be okay?\""
+        },
+        {
+          "line": 169,
+          "identifier": "gText_HereYouGoThankYou",
+          "literal": "\"Here you go!\\nThank you very much.\""
+        },
+        {
+          "line": 170,
+          "identifier": "gText_ThankYouIllSendItHome",
+          "literal": "\"Thank you!\\nI'll send it to your home PC.\""
+        },
+        {
+          "line": 171,
+          "identifier": "gText_ThanksIllSendItHome",
+          "literal": "\"Thanks!\\nI'll send it to your PC at home.\""
+        },
+        {
+          "line": 172,
+          "identifier": "gText_YouDontHaveMoney",
+          "literal": "\"You don't have enough money.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 173,
+          "identifier": "gText_NoMoreRoomForThis",
+          "literal": "\"You have no more room for this\\nitem.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 174,
+          "identifier": "gText_SpaceForVar1Full",
+          "literal": "\"The space for {STR_VAR_1} is full.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 175,
+          "identifier": "gText_AnythingElseICanHelp",
+          "literal": "\"Is there anything else I can help\\nyou with?\""
+        },
+        {
+          "line": 176,
+          "identifier": "gText_CanIHelpWithAnythingElse",
+          "literal": "\"Can I help you with anything else?\""
+        },
+        {
+          "line": 177,
+          "identifier": "gText_ThrowInPremierBall",
+          "literal": "\"I'll throw in a PREMIER BALL, too.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 178,
+          "identifier": "gText_ThrowInPremierBalls",
+          "literal": "\"I'll throw in {STR_VAR_1} PREMIER BALLS, too.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 179,
+          "identifier": "gText_CantBuyKeyItem",
+          "literal": "\"{STR_VAR_2}? Oh, no.\\nI can't buy that.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 180,
+          "identifier": "gText_HowManyToSell",
+          "literal": "\"{STR_VAR_2}?\\nHow many would you like to sell?\""
+        },
+        {
+          "line": 181,
+          "identifier": "gText_ICanPayVar1",
+          "literal": "\"I can pay ¥{STR_VAR_1}.\\nWould that be okay?\""
+        },
+        {
+          "line": 182,
+          "identifier": "gText_TurnedOverVar1ForVar2",
+          "literal": "\"Turned over the {STR_VAR_2}\\nand received ¥{STR_VAR_1}.\""
+        },
+        {
+          "line": 183,
+          "identifier": "gText_PokedollarVar1",
+          "literal": "\"¥{STR_VAR_1}\""
+        },
+        {
+          "line": 184,
+          "identifier": "gText_HP3",
+          "literal": "\"HP\""
+        },
+        {
+          "line": 185,
+          "identifier": "gText_SpAtk3",
+          "literal": "\"SP. ATK\""
+        },
+        {
+          "line": 186,
+          "identifier": "gText_SpDef3",
+          "literal": "\"SP. DEF\""
+        },
+        {
+          "line": 187,
+          "identifier": "gText_WontHaveEffect",
+          "literal": "\"It won't have any effect.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 188,
+          "identifier": "gText_NextFusionMon",
+          "literal": "\"Choose {PKMN} to fuse with.\""
+        },
+        {
+          "line": 189,
+          "identifier": "gText_CantBeUsedOnPkmn",
+          "literal": "\"This can't be used on\\nthat POKéMON.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 190,
+          "identifier": "gText_PkmnCantSwitchOut",
+          "literal": "\"{STR_VAR_1} can't be switched\\nout!{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 191,
+          "identifier": "gText_PkmnAlreadyInBattle",
+          "literal": "\"{STR_VAR_1} is already\\nin battle!{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 192,
+          "identifier": "gText_PkmnAlreadySelected",
+          "literal": "\"{STR_VAR_1} has already been\\nselected.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 193,
+          "identifier": "gText_PkmnHasNoEnergy",
+          "literal": "\"{STR_VAR_1} has no energy\\nleft to battle!{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 194,
+          "identifier": "gText_CantSwitchWithAlly",
+          "literal": "\"You can't switch {STR_VAR_1}'s\\nPOKéMON with one of yours!{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 195,
+          "identifier": "gText_EggCantBattle",
+          "literal": "\"An EGG can't battle!{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 196,
+          "identifier": "gText_CantUseUntilNewBadge",
+          "literal": "\"This field move needs its HM\\nand the matching BADGE.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 197,
+          "identifier": "gText_NoMoreThanVar1Pkmn",
+          "literal": "\"No more than {STR_VAR_1} POKéMON\\nmay enter.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 198,
+          "identifier": "gText_SendMailToPC",
+          "literal": "\"Send the removed MAIL to\\nyour PC?\""
+        },
+        {
+          "line": 199,
+          "identifier": "gText_MailSentToPC",
+          "literal": "\"The MAIL was sent to your PC.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 200,
+          "identifier": "gText_PCMailboxFull",
+          "literal": "\"Your PC's MAILBOX is full.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 201,
+          "identifier": "gText_MailMessageWillBeLost",
+          "literal": "\"If the MAIL is removed, the\\nmessage will be lost. Okay?\""
+        },
+        {
+          "line": 202,
+          "identifier": "gText_RemoveMailBeforeItem",
+          "literal": "\"MAIL must be removed before\\nholding an item.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 203,
+          "identifier": "gText_PkmnWasGivenItem",
+          "literal": "\"{STR_VAR_1} was given the\\n{STR_VAR_2} to hold.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 204,
+          "identifier": "gText_PkmnAlreadyHoldingItemSwitch",
+          "literal": "\"{STR_VAR_1} is already holding\\none {STR_VAR_2}.\\pWould you like to switch the\\ntwo items?\""
+        },
+        {
+          "line": 205,
+          "identifier": "gText_PkmnNotHolding",
+          "literal": "\"{STR_VAR_1} isn't holding\\nanything.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 206,
+          "identifier": "gText_ReceivedItemFromPkmn",
+          "literal": "\"Received the {STR_VAR_2}\\nfrom {STR_VAR_1}.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 207,
+          "identifier": "gText_MailTakenFromPkmn",
+          "literal": "\"MAIL was taken from the\\nPOKéMON.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 208,
+          "identifier": "gText_SwitchedPkmnItem",
+          "literal": "\"The {STR_VAR_2} was taken and\\nreplaced with the {STR_VAR_1}.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 209,
+          "identifier": "gText_PkmnHoldingItemCantHoldMail",
+          "literal": "\"This POKéMON is holding an\\nitem. It cannot hold MAIL.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 210,
+          "identifier": "gText_MailTransferredFromMailbox",
+          "literal": "\"MAIL was transferred from\\nthe MAILBOX.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 211,
+          "identifier": "gText_BagFullCouldNotRemoveItem",
+          "literal": "\"The BAG is full. The POKéMON's\\nitem could not be removed.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 212,
+          "identifier": "gText_PkmnLearnedMove3",
+          "literal": "\"{STR_VAR_1} learned\\n{STR_VAR_2}!\""
+        },
+        {
+          "line": 213,
+          "identifier": "gText_PkmnLearnedMove4",
+          "literal": "\"{STR_VAR_1} learned\\n{STR_VAR_2}!{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 214,
+          "identifier": "gText_PkmnCantLearnMove",
+          "literal": "\"{STR_VAR_1} and {STR_VAR_2}\\nare not compatible.\\p{STR_VAR_2} can't be\\nlearned.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 215,
+          "identifier": "gText_PkmnNeedsToReplaceMove",
+          "literal": "\"{STR_VAR_1} wants to learn the\\nmove {STR_VAR_2}.\\pHowever, {STR_VAR_1} already\\nknows four moves.\\pShould a move be deleted and\\nreplaced with {STR_VAR_2}?\""
+        },
+        {
+          "line": 216,
+          "identifier": "gText_StopLearningMove2",
+          "literal": "\"Stop trying to teach\\n{STR_VAR_2}?\""
+        },
+        {
+          "line": 217,
+          "identifier": "gText_MoveNotLearned",
+          "literal": "\"{STR_VAR_1} did not learn the\\nmove {STR_VAR_2}.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 218,
+          "identifier": "gText_WhichMoveToForget",
+          "literal": "\"Which move should be forgotten?{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 219,
+          "identifier": "gText_12PoofForgotMove",
+          "literal": "\"1, {PAUSE 15}2, and{PAUSE 15}… {PAUSE 15}… {PAUSE 15}… {PAUSE 15}{PLAY_SE SE_BALL_BOUNCE_1}Poof!\\p{STR_VAR_1} forgot how to\\nuse {STR_VAR_2}.\\pAnd…{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 220,
+          "identifier": "gText_PkmnAlreadyKnows",
+          "literal": "\"{STR_VAR_1} already knows\\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 221,
+          "identifier": "gText_PkmnHPRestoredByVar2",
+          "literal": "\"{STR_VAR_1}'s HP was restored\\nby {STR_VAR_2} point(s).{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 222,
+          "identifier": "gText_PkmnCuredOfPoison",
+          "literal": "\"{STR_VAR_1} was cured of its\\npoisoning.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 223,
+          "identifier": "gText_PkmnCuredOfParalysis",
+          "literal": "\"{STR_VAR_1} was cured of\\nparalysis.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 224,
+          "identifier": "gText_PkmnWokeUp2",
+          "literal": "\"{STR_VAR_1} woke up.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 225,
+          "identifier": "gText_PkmnBurnHealed",
+          "literal": "\"{STR_VAR_1}'s burn was healed.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 226,
+          "identifier": "gText_PkmnFrostbiteHealed",
+          "literal": "\"{STR_VAR_1}'s frostbite was healed.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 227,
+          "identifier": "gText_PkmnThawedOut",
+          "literal": "\"{STR_VAR_1} was thawed out.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 228,
+          "identifier": "gText_PPWasRestored",
+          "literal": "\"PP was restored.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 229,
+          "identifier": "gText_PkmnRegainhedHealth",
+          "literal": "\"{STR_VAR_1} regained health.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 230,
+          "identifier": "gText_PkmnBecameHealthy",
+          "literal": "\"{STR_VAR_1} became healthy.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 231,
+          "identifier": "gText_MovesPPIncreased",
+          "literal": "\"{STR_VAR_1}'s PP increased.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 232,
+          "identifier": "gText_PkmnElevatedToLvVar2",
+          "literal": "\"{STR_VAR_1} was elevated to\\nLv. {STR_VAR_2}.\""
+        },
+        {
+          "line": 233,
+          "identifier": "gText_PkmnGainedExp",
+          "literal": "\"{STR_VAR_1} gained {STR_VAR_2} Exp. Points!{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 234,
+          "identifier": "gText_PkmnGainedExpAndElevatedToLvVar3",
+          "literal": "\"{STR_VAR_1} gained {STR_VAR_2} Exp. Points\\nand was elevated to Lv. {STR_VAR_3}!\""
+        },
+        {
+          "line": 235,
+          "identifier": "gText_PkmnBaseVar2StatIncreased",
+          "literal": "\"{STR_VAR_1}'s {STR_VAR_2}\\nEVs increased.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 236,
+          "identifier": "gText_PkmnFriendlyBaseVar2Fell",
+          "literal": "\"{STR_VAR_1} turned friendly.\\nIts {STR_VAR_2} EVs fell!{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 237,
+          "identifier": "gText_PkmnAdoresBaseVar2Fell",
+          "literal": "\"{STR_VAR_1} adores you!\\nIts {STR_VAR_2} EVs fell!{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 238,
+          "identifier": "gText_PkmnFriendlyBaseVar2CantFall",
+          "literal": "\"{STR_VAR_1} turned friendly.\\nIts {STR_VAR_2} EVs can't fall!{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 239,
+          "identifier": "gText_PkmnSnappedOutOfConfusion",
+          "literal": "\"{STR_VAR_1} snapped out of its\\nconfusion.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 240,
+          "identifier": "gText_PkmnGotOverInfatuation",
+          "literal": "\"{STR_VAR_1} got over its\\ninfatuation.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 241,
+          "identifier": "gText_PkmnTransformed",
+          "literal": "\"{STR_VAR_1} transformed!{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 242,
+          "identifier": "gText_ThrowAwayItem",
+          "literal": "\"Throw away this\\n{STR_VAR_1}?\""
+        },
+        {
+          "line": 243,
+          "identifier": "gText_ItemThrownAway",
+          "literal": "\"The {STR_VAR_1}\\nwas thrown away.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 244,
+          "identifier": "gText_TeachWhichPokemon2",
+          "literal": "\"Teach which POKéMON?\""
+        },
+        {
+          "line": 245,
+          "identifier": "gText_ChoosePokemon",
+          "literal": "\"Choose a Pokémon.\""
+        },
+        {
+          "line": 246,
+          "identifier": "gText_MoveToWhere",
+          "literal": "\"Move to where?\""
+        },
+        {
+          "line": 247,
+          "identifier": "gText_TeachWhichPokemon",
+          "literal": "\"Teach which POKéMON?\""
+        },
+        {
+          "line": 248,
+          "identifier": "gText_UseOnWhichPokemon",
+          "literal": "\"Use on which POKéMON?\""
+        },
+        {
+          "line": 249,
+          "identifier": "gText_GiveToWhichPokemon",
+          "literal": "\"Give to which POKéMON?\""
+        },
+        {
+          "line": 250,
+          "identifier": "gText_DoWhatWithPokemon",
+          "literal": "\"Do what with this {PKMN}?\""
+        },
+        {
+          "line": 251,
+          "identifier": "gText_NothingToCut",
+          "literal": "\"There's nothing to CUT.\""
+        },
+        {
+          "line": 252,
+          "identifier": "gText_CantSurfHere",
+          "literal": "\"You can't SURF here.\""
+        },
+        {
+          "line": 253,
+          "identifier": "gText_AlreadySurfing",
+          "literal": "\"You're already SURFING.\""
+        },
+        {
+          "line": 254,
+          "identifier": "gText_CantUseHere",
+          "literal": "\"Can't use that here.\""
+        },
+        {
+          "line": 255,
+          "identifier": "gText_RestoreWhichMove",
+          "literal": "\"Restore which move?\""
+        },
+        {
+          "line": 256,
+          "identifier": "gText_BoostPP",
+          "literal": "\"Boost PP of which move?\""
+        },
+        {
+          "line": 257,
+          "identifier": "gText_DoWhatWithItem",
+          "literal": "\"Do what with an item?\""
+        },
+        {
+          "line": 258,
+          "identifier": "gText_NoPokemonForBattle",
+          "literal": "\"No POKéMON for battle!\""
+        },
+        {
+          "line": 259,
+          "identifier": "gText_ChoosePokemon2",
+          "literal": "\"Choose a Pokémon.\""
+        },
+        {
+          "line": 260,
+          "identifier": "gText_NotEnoughHp",
+          "literal": "\"Not enough HP…\""
+        },
+        {
+          "line": 261,
+          "identifier": "gText_PokemonAreNeeded",
+          "literal": "\"{STR_VAR_1} POKéMON are needed.\""
+        },
+        {
+          "line": 262,
+          "identifier": "gText_PokemonCantBeSame",
+          "literal": "\"POKéMON can't be the same.\""
+        },
+        {
+          "line": 263,
+          "identifier": "gText_NoIdenticalHoldItems",
+          "literal": "\"No identical hold items.\""
+        },
+        {
+          "line": 264,
+          "identifier": "gText_CurrentIsTooFast",
+          "literal": "\"The current is much too fast!\""
+        },
+        {
+          "line": 265,
+          "identifier": "gText_DoWhatWithMail",
+          "literal": "\"Do what with the MAIL?\""
+        },
+        {
+          "line": 266,
+          "identifier": "gText_ChoosePokemonCancel",
+          "literal": "\"Choose Pokémon or Cancel.\""
+        },
+        {
+          "line": 267,
+          "identifier": "gText_ChoosePokemonConfirm",
+          "literal": "\"Choose Pokémon and confirm.\""
+        },
+        {
+          "line": 268,
+          "identifier": "gText_SendWhichMonToPC",
+          "literal": "\"Send which POKéMON to the PC?\""
+        },
+        {
+          "line": 269,
+          "identifier": "gText_MoveItemWhere",
+          "literal": "\"Move item to where?\""
+        },
+        {
+          "line": 270,
+          "identifier": "gText_XsYAnd",
+          "literal": "\"{STR_VAR_1}'s {STR_VAR_2} and\\n\""
+        },
+        {
+          "line": 271,
+          "identifier": "gText_XsYWereSwapped",
+          "literal": "\"{STR_VAR_1}'s {STR_VAR_2} were swapped!{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 272,
+          "identifier": "gText_EnjoyCycling",
+          "literal": "\"Let's enjoy cycling!\""
+        },
+        {
+          "line": 273,
+          "identifier": "gText_InUseAlready_PM",
+          "literal": "\"This is in use already.\""
+        },
+        {
+          "line": 274,
+          "identifier": "gText_AlreadyHoldingOne",
+          "literal": "\"{STR_VAR_1} is already holding\\none {STR_VAR_2}.\""
+        },
+        {
+          "line": 275,
+          "identifier": "gText_WhichAppliance",
+          "literal": "\"Order which\\nappliance?\""
+        },
+        {
+          "line": 276,
+          "identifier": "gText_NoUse",
+          "literal": "\"No use.\""
+        },
+        {
+          "line": 277,
+          "identifier": "gText_Able",
+          "literal": "\"ABLE\""
+        },
+        {
+          "line": 278,
+          "identifier": "gText_First_PM",
+          "literal": "\"FIRST\""
+        },
+        {
+          "line": 279,
+          "identifier": "gText_Second_PM",
+          "literal": "\"SECOND\""
+        },
+        {
+          "line": 280,
+          "identifier": "gText_Third_PM",
+          "literal": "\"THIRD\""
+        },
+        {
+          "line": 281,
+          "identifier": "gText_Able2",
+          "literal": "\"ABLE\""
+        },
+        {
+          "line": 282,
+          "identifier": "gText_NotAble",
+          "literal": "\"NOT ABLE\""
+        },
+        {
+          "line": 283,
+          "identifier": "gText_Able3",
+          "literal": "\"ABLE!\""
+        },
+        {
+          "line": 284,
+          "identifier": "gText_NotAble2",
+          "literal": "\"NOT ABLE!\""
+        },
+        {
+          "line": 285,
+          "identifier": "gText_Learned",
+          "literal": "\"LEARNED\""
+        },
+        {
+          "line": 286,
+          "identifier": "gText_Have",
+          "literal": "\"HAVE\""
+        },
+        {
+          "line": 287,
+          "identifier": "gText_DontHave",
+          "literal": "\"DON'T HAVE\""
+        },
+        {
+          "line": 288,
+          "identifier": "gText_Fourth",
+          "literal": "\"FOURTH\""
+        },
+        {
+          "line": 289,
+          "identifier": "gText_PkmnCantParticipate",
+          "literal": "\"That POKéMON can't participate.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 290,
+          "identifier": "gText_CancelParticipation",
+          "literal": "\"Cancel participation?\""
+        },
+        {
+          "line": 291,
+          "identifier": "gText_CancelBattle",
+          "literal": "\"Cancel the battle?\""
+        },
+        {
+          "line": 292,
+          "identifier": "gText_ReturnToWaitingRoom",
+          "literal": "\"Return to the WAITING ROOM?\""
+        },
+        {
+          "line": 293,
+          "identifier": "gText_CancelChallenge",
+          "literal": "\"Cancel the challenge?\""
+        },
+        {
+          "line": 294,
+          "identifier": "gText_EscapeFromHere",
+          "literal": "\"Want to escape from here and return\\nto {STR_VAR_1}?\""
+        },
+        {
+          "line": 295,
+          "identifier": "gText_ReturnToHealingSpot",
+          "literal": "\"Want to return to the healing spot\\nused last in {STR_VAR_1}?\""
+        },
+        {
+          "line": 296,
+          "identifier": "gText_PauseUntilPress",
+          "literal": "\"{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 297,
+          "identifier": "gJPText_AreYouSureYouWantToSpinTradeMon",
+          "literal": "\"{STR_VAR_1}を ぐるぐるこうかんに\\nだして よろしいですか？\""
+        },
+        {
+          "line": 298,
+          "identifier": "gText_OnlyPkmnForBattle",
+          "literal": "\"That's your only\\nPOKéMON for battle.\""
+        },
+        {
+          "line": 299,
+          "identifier": "gText_PkmnCantBeTradedNow",
+          "literal": "\"That POKéMON can't be traded\\nnow.\""
+        },
+        {
+          "line": 300,
+          "identifier": "gText_PkmnCantBeTraded",
+          "literal": "\"That POKéMON can't be traded.\""
+        },
+        {
+          "line": 301,
+          "identifier": "gText_EggCantBeTradedNow",
+          "literal": "\"An EGG can't be traded now.\""
+        },
+        {
+          "line": 302,
+          "identifier": "gText_OtherTrainersPkmnCantBeTraded",
+          "literal": "\"The other TRAINER's POKéMON\\ncan't be traded now.\""
+        },
+        {
+          "line": 303,
+          "identifier": "gText_OtherTrainerCantAcceptPkmn",
+          "literal": "\"The other TRAINER can't accept\\nthat POKéMON now.\""
+        },
+        {
+          "line": 304,
+          "identifier": "gText_CantTradeWithTrainer",
+          "literal": "\"You can't trade with that\\nTRAINER now.\""
+        },
+        {
+          "line": 305,
+          "identifier": "gText_NotPkmnOtherTrainerWants",
+          "literal": "\"That isn't the type of POKéMON\\nthat the other TRAINER wants.\""
+        },
+        {
+          "line": 306,
+          "identifier": "gText_ThatIsntAnEgg",
+          "literal": "\"That isn't an EGG.\""
+        },
+        {
+          "line": 307,
+          "identifier": "gText_Register",
+          "literal": "\"Register\""
+        },
+        {
+          "line": 308,
+          "identifier": "gText_Attack3",
+          "literal": "\"Attack\""
+        },
+        {
+          "line": 309,
+          "identifier": "gText_Defense3",
+          "literal": "\"Defense\""
+        },
+        {
+          "line": 310,
+          "identifier": "gText_SpAtk4",
+          "literal": "\"Sp. Atk\""
+        },
+        {
+          "line": 311,
+          "identifier": "gText_SpDef4",
+          "literal": "\"Sp. Def\""
+        },
+        {
+          "line": 312,
+          "identifier": "gText_Speed2",
+          "literal": "\"Speed\""
+        },
+        {
+          "line": 313,
+          "identifier": "gText_HP4",
+          "literal": "\"HP\""
+        },
+        {
+          "line": 314,
+          "identifier": "gText_EmptyString8",
+          "literal": "\"\""
+        },
+        {
+          "line": 315,
+          "identifier": "gText_OTSlash",
+          "literal": "\"OT/\""
+        },
+        {
+          "line": 316,
+          "identifier": "gText_RentalPkmn",
+          "literal": "\"RENTAL POKéMON\""
+        },
+        {
+          "line": 317,
+          "identifier": "gText_TypeSlash",
+          "literal": "\"Type/\""
+        },
+        {
+          "line": 318,
+          "identifier": "gText_Power",
+          "literal": "\"POWER\""
+        },
+        {
+          "line": 319,
+          "identifier": "gText_Accuracy2",
+          "literal": "\"ACCURACY\""
+        },
+        {
+          "line": 320,
+          "identifier": "gText_Appeal",
+          "literal": "\"APPEAL\""
+        },
+        {
+          "line": 321,
+          "identifier": "gText_Jam",
+          "literal": "\"JAM\""
+        },
+        {
+          "line": 322,
+          "identifier": "gText_Status",
+          "literal": "\"STATUS\""
+        },
+        {
+          "line": 323,
+          "identifier": "gText_ExpPoints",
+          "literal": "\"Exp. Points\""
+        },
+        {
+          "line": 324,
+          "identifier": "gText_NextLv",
+          "literal": "\"Next Lv.\""
+        },
+        {
+          "line": 325,
+          "identifier": "gText_RibbonsVar1",
+          "literal": "\"{STR_VAR_1}\""
+        },
+        {
+          "line": 326,
+          "identifier": "gText_EmptyString5",
+          "literal": "\"\""
+        },
+        {
+          "line": 327,
+          "identifier": "gText_Events",
+          "literal": "\"EVENTS\""
+        },
+        {
+          "line": 328,
+          "identifier": "gText_Switch",
+          "literal": "\"SWITCH\""
+        },
+        {
+          "line": 329,
+          "identifier": "gText_PkmnInfo",
+          "literal": "\"Pokémon Info\""
+        },
+        {
+          "line": 330,
+          "identifier": "gText_PkmnSkills",
+          "literal": "\"Pokémon Skills\""
+        },
+        {
+          "line": 331,
+          "identifier": "gText_BattleMoves",
+          "literal": "\"Battle Moves\""
+        },
+        {
+          "line": 332,
+          "identifier": "gText_ContestMoves",
+          "literal": "\"CONTEST MOVES\""
+        },
+        {
+          "line": 333,
+          "identifier": "gText_Info",
+          "literal": "\"Info\""
+        },
+        {
+          "line": 334,
+          "identifier": "gText_EggWillTakeALongTime",
+          "literal": "\"It looks like this EGG will\\ntake a long time to hatch.\""
+        },
+        {
+          "line": 335,
+          "identifier": "gText_EggWillTakeSomeTime",
+          "literal": "\"What will hatch from this?\\nIt will take some time.\""
+        },
+        {
+          "line": 336,
+          "identifier": "gText_EggWillHatchSoon",
+          "literal": "\"It moves occasionally.\\nIt should hatch soon.\""
+        },
+        {
+          "line": 337,
+          "identifier": "gText_EggAboutToHatch",
+          "literal": "\"It's making sounds.\\nIt's about to hatch!\""
+        },
+        {
+          "line": 338,
+          "identifier": "gText_HMMovesCantBeForgotten2",
+          "literal": "\"HM moves can't be\\nforgotten now.\""
+        },
+        {
+          "line": 339,
+          "identifier": "gText_XNatureMetAtYZ",
+          "literal": "\"{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\\nmet at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1},\\n{DYNAMIC 0}{DYNAMIC 4}{DYNAMIC 1}.\""
+        },
+        {
+          "line": 340,
+          "identifier": "gText_XNatureHatchedAtYZ",
+          "literal": "\"{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\\nhatched at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1},\\n{DYNAMIC 0}{DYNAMIC 4}{DYNAMIC 1}.\""
+        },
+        {
+          "line": 341,
+          "identifier": "gText_XNatureObtainedInTrade",
+          "literal": "\"{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\\nobtained in a trade.\""
+        },
+        {
+          "line": 342,
+          "identifier": "gText_XNatureFatefulEncounter",
+          "literal": "\"{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\\nobtained in a fateful\\nencounter at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1}.\""
+        },
+        {
+          "line": 343,
+          "identifier": "gText_XNatureProbablyMetAt",
+          "literal": "\"{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\\nprobably met at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1},\\n{DYNAMIC 0}{DYNAMIC 4}{DYNAMIC 1}.\""
+        },
+        {
+          "line": 344,
+          "identifier": "gText_XNature",
+          "literal": "\"{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature\""
+        },
+        {
+          "line": 345,
+          "identifier": "gText_XNatureMetSomewhereAt",
+          "literal": "\"{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\\nmet somewhere at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1}.\""
+        },
+        {
+          "line": 346,
+          "identifier": "gText_XNatureHatchedSomewhereAt",
+          "literal": "\"{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\\nhatched somewhere at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1}.\""
+        },
+        {
+          "line": 347,
+          "identifier": "gText_OddEggFoundByCouple",
+          "literal": "\"An odd POKéMON EGG found\\nby the DAY CARE couple.\""
+        },
+        {
+          "line": 348,
+          "identifier": "gText_PeculiarEggNicePlace",
+          "literal": "\"A peculiar POKéMON EGG\\nobtained at the nice place.\""
+        },
+        {
+          "line": 349,
+          "identifier": "gText_PeculiarEggTrade",
+          "literal": "\"A peculiar POKéMON EGG\\nobtained in a trade.\""
+        },
+        {
+          "line": 350,
+          "identifier": "gText_EggFromHotSprings",
+          "literal": "\"A POKéMON EGG obtained\\nat the hot springs.\""
+        },
+        {
+          "line": 351,
+          "identifier": "gText_EggFromTraveler",
+          "literal": "\"An odd POKéMON EGG\\nobtained from a traveler.\""
+        },
+        {
+          "line": 352,
+          "identifier": "gText_ApostropheSBase",
+          "literal": "\"'s BASE\""
+        },
+        {
+          "line": 353,
+          "identifier": "gText_OkayToDeleteFromRegistry",
+          "literal": "\"Is it okay to delete {STR_VAR_1}\\nfrom the REGISTRY?\""
+        },
+        {
+          "line": 354,
+          "identifier": "gText_RegisteredDataDeleted",
+          "literal": "\"The registered data was deleted.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 355,
+          "identifier": "gText_NoRegistry",
+          "literal": "\"There is no REGISTRY.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 356,
+          "identifier": "gText_DelRegist",
+          "literal": "\"DEL REGIST.\""
+        },
+        {
+          "line": 357,
+          "identifier": "gText_Var3Var1SlashVar2",
+          "literal": "\"{STR_VAR_3}{STR_VAR_1}/{STR_VAR_2}\""
+        },
+        {
+          "line": 358,
+          "identifier": "gText_Decorate",
+          "literal": "\"DECORATE\""
+        },
+        {
+          "line": 359,
+          "identifier": "gText_PutAway",
+          "literal": "\"PUT AWAY\""
+        },
+        {
+          "line": 360,
+          "identifier": "gText_Toss2",
+          "literal": "\"TOSS\""
+        },
+        {
+          "line": 361,
+          "identifier": "gText_Color161Shadow161",
+          "literal": "\"{COLOR 161}{SHADOW 161}\""
+        },
+        {
+          "line": 362,
+          "identifier": "gText_PutOutSelectedDecorItem",
+          "literal": "\"Put out the selected decoration item.\""
+        },
+        {
+          "line": 363,
+          "identifier": "gText_StoreChosenDecorInPC",
+          "literal": "\"Store the chosen decoration in the PC.\""
+        },
+        {
+          "line": 364,
+          "identifier": "gText_ThrowAwayUnwantedDecors",
+          "literal": "\"Throw away unwanted decorations.\""
+        },
+        {
+          "line": 365,
+          "identifier": "gText_NoDecorations",
+          "literal": "\"There are no decorations.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 366,
+          "identifier": "gText_Desk",
+          "literal": "\"DESK\""
+        },
+        {
+          "line": 367,
+          "identifier": "gText_Chair",
+          "literal": "\"CHAIR\""
+        },
+        {
+          "line": 368,
+          "identifier": "gText_Plant",
+          "literal": "\"PLANT\""
+        },
+        {
+          "line": 369,
+          "identifier": "gText_Ornament",
+          "literal": "\"ORNAMENT\""
+        },
+        {
+          "line": 370,
+          "identifier": "gText_Mat",
+          "literal": "\"MAT\""
+        },
+        {
+          "line": 371,
+          "identifier": "gText_Poster",
+          "literal": "\"POSTER\""
+        },
+        {
+          "line": 372,
+          "identifier": "gText_Doll",
+          "literal": "\"DOLL\""
+        },
+        {
+          "line": 373,
+          "identifier": "gText_Cushion",
+          "literal": "\"CUSHION\""
+        },
+        {
+          "line": 374,
+          "identifier": "gText_Gold",
+          "literal": "\"GOLD\""
+        },
+        {
+          "line": 375,
+          "identifier": "gText_Silver",
+          "literal": "\"SILVER\""
+        },
+        {
+          "line": 376,
+          "identifier": "gText_PlaceItHere",
+          "literal": "\"Place it here?\""
+        },
+        {
+          "line": 377,
+          "identifier": "gText_CantBePlacedHere",
+          "literal": "\"It can't be placed here.\""
+        },
+        {
+          "line": 378,
+          "identifier": "gText_CancelDecorating",
+          "literal": "\"Cancel decorating?\""
+        },
+        {
+          "line": 379,
+          "identifier": "gText_InUseAlready",
+          "literal": "\"This is in use already.\""
+        },
+        {
+          "line": 380,
+          "identifier": "gText_NoMoreDecorations",
+          "literal": "\"No more decorations can be placed.\\nThe most that can be placed are {STR_VAR_1}.\""
+        },
+        {
+          "line": 381,
+          "identifier": "gText_NoMoreDecorations2",
+          "literal": "\"No more decorations can be placed.\\nThe most that can be placed are {STR_VAR_1}.\""
+        },
+        {
+          "line": 382,
+          "identifier": "gText_MustBePlacedOnDesk",
+          "literal": "\"This can't be placed here.\\nIt must be on a DESK, etc.\""
+        },
+        {
+          "line": 383,
+          "identifier": "gText_CantPlaceInRoom",
+          "literal": "\"This decoration can't be placed in\\nyour own room.\""
+        },
+        {
+          "line": 384,
+          "identifier": "gText_CantThrowAwayInUse",
+          "literal": "\"This decoration is in use.\\nIt can't be thrown away.\""
+        },
+        {
+          "line": 385,
+          "identifier": "gText_DecorationWillBeDiscarded",
+          "literal": "\"This {STR_VAR_1} will be discarded.\\nIs that okay?\""
+        },
+        {
+          "line": 386,
+          "identifier": "gText_DecorationThrownAway",
+          "literal": "\"The decoration item was thrown away.\""
+        },
+        {
+          "line": 387,
+          "identifier": "gText_StopPuttingAwayDecorations",
+          "literal": "\"Stop putting away decorations?\""
+        },
+        {
+          "line": 388,
+          "identifier": "gText_NoDecorationHere",
+          "literal": "\"There is no decoration item here.\""
+        },
+        {
+          "line": 389,
+          "identifier": "gText_ReturnDecorationToPC",
+          "literal": "\"Return this decoration to the PC?\""
+        },
+        {
+          "line": 390,
+          "identifier": "gText_DecorationReturnedToPC",
+          "literal": "\"The decoration was returned to the PC.\""
+        },
+        {
+          "line": 391,
+          "identifier": "gText_NoDecorationsInUse",
+          "literal": "\"There are no decorations in use.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 392,
+          "identifier": "gText_NoItems",
+          "literal": "\"There are no items.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 393,
+          "identifier": "gText_NoMailHere",
+          "literal": "\"There's no MAIL here.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 394,
+          "identifier": "gText_WhatToDoWithVar1sMail",
+          "literal": "\"What would you like to do with\\n{STR_VAR_1}'s MAIL?\""
+        },
+        {
+          "line": 395,
+          "identifier": "gText_MessageWillBeLost",
+          "literal": "\"The message will be lost.\\nIs that okay?\""
+        },
+        {
+          "line": 396,
+          "identifier": "gText_BagIsFull",
+          "literal": "\"The BAG is full.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 397,
+          "identifier": "gText_MailToBagMessageErased",
+          "literal": "\"The MAIL was returned to the BAG\\nwith its message erased.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 398,
+          "identifier": "gText_Dad",
+          "literal": "\"DAD\""
+        },
+        {
+          "line": 399,
+          "identifier": "gText_Mom",
+          "literal": "\"MOM\""
+        },
+        {
+          "line": 400,
+          "identifier": "gText_CoolnessContest",
+          "literal": "\"COOLNESS CONTEST\""
+        },
+        {
+          "line": 401,
+          "identifier": "gText_BeautyContest",
+          "literal": "\"BEAUTY CONTEST\""
+        },
+        {
+          "line": 402,
+          "identifier": "gText_CutenessContest",
+          "literal": "\"CUTENESS CONTEST\""
+        },
+        {
+          "line": 403,
+          "identifier": "gText_SmartnessContest",
+          "literal": "\"SMARTNESS CONTEST\""
+        },
+        {
+          "line": 404,
+          "identifier": "gText_ToughnessContest",
+          "literal": "\"TOUGHNESS CONTEST\""
+        },
+        {
+          "line": 405,
+          "identifier": "gText_Information",
+          "literal": "\"INFORMATION\""
+        },
+        {
+          "line": 406,
+          "identifier": "gText_Yes",
+          "literal": "\"YES\""
+        },
+        {
+          "line": 407,
+          "identifier": "gText_No",
+          "literal": "\"NO\""
+        },
+        {
+          "line": 408,
+          "identifier": "gText_Lv50",
+          "literal": "\"LV. 50\""
+        },
+        {
+          "line": 409,
+          "identifier": "gText_OpenLevel",
+          "literal": "\"OPEN LEVEL\""
+        },
+        {
+          "line": 410,
+          "identifier": "gText_BattleFrontier",
+          "literal": "\"BATTLE FRONTIER\""
+        },
+        {
+          "line": 411,
+          "identifier": "gText_Cool",
+          "literal": "\"COOL\""
+        },
+        {
+          "line": 412,
+          "identifier": "gText_Beauty",
+          "literal": "\"BEAUTY\""
+        },
+        {
+          "line": 413,
+          "identifier": "gText_Cute",
+          "literal": "\"CUTE\""
+        },
+        {
+          "line": 414,
+          "identifier": "gText_Smart",
+          "literal": "\"SMART\""
+        },
+        {
+          "line": 415,
+          "identifier": "gText_Tough",
+          "literal": "\"TOUGH\""
+        },
+        {
+          "line": 416,
+          "identifier": "gText_Normal",
+          "literal": "\"NORMAL\""
+        },
+        {
+          "line": 417,
+          "identifier": "gText_Super",
+          "literal": "\"SUPER\""
+        },
+        {
+          "line": 418,
+          "identifier": "gText_Hyper",
+          "literal": "\"HYPER\""
+        },
+        {
+          "line": 419,
+          "identifier": "gText_Master",
+          "literal": "\"MASTER\""
+        },
+        {
+          "line": 420,
+          "identifier": "gText_SomeonesPC",
+          "literal": "\"SOMEONE'S PC\""
+        },
+        {
+          "line": 421,
+          "identifier": "gText_LanettesPC",
+          "literal": "\"LANETTE'S PC\""
+        },
+        {
+          "line": 422,
+          "identifier": "gText_BillsPc",
+          "literal": "\"BILL'S PC\""
+        },
+        {
+          "line": 423,
+          "identifier": "gText_PlayersPC",
+          "literal": "\"{PLAYER}'s PC\""
+        },
+        {
+          "line": 424,
+          "identifier": "gText_HallOfFame",
+          "literal": "\"HALL OF FAME\""
+        },
+        {
+          "line": 425,
+          "identifier": "gText_LogOff",
+          "literal": "\"LOG OFF\""
+        },
+        {
+          "line": 426,
+          "identifier": "gText_Single2",
+          "literal": "\"SINGLE\""
+        },
+        {
+          "line": 427,
+          "identifier": "gText_Double2",
+          "literal": "\"DOUBLE\""
+        },
+        {
+          "line": 428,
+          "identifier": "gText_Multi",
+          "literal": "\"MULTI\""
+        },
+        {
+          "line": 429,
+          "identifier": "gText_MultiLink",
+          "literal": "\"MULTI-LINK\""
+        },
+        {
+          "line": 430,
+          "identifier": "gText_MenuOptionPokedex",
+          "literal": "\"POKéDEX\""
+        },
+        {
+          "line": 431,
+          "identifier": "gText_MenuOptionPokemon",
+          "literal": "\"POKéMON\""
+        },
+        {
+          "line": 432,
+          "identifier": "gText_MenuOptionBag",
+          "literal": "\"BAG\""
+        },
+        {
+          "line": 433,
+          "identifier": "gText_MenuOptionPokenav",
+          "literal": "\"POKéNAV\""
+        },
+        {
+          "line": 434,
+          "identifier": "gText_MenuOptionSave",
+          "literal": "\"SAVE\""
+        },
+        {
+          "line": 435,
+          "identifier": "gText_MenuOptionOption",
+          "literal": "\"OPTION\""
+        },
+        {
+          "line": 436,
+          "identifier": "gText_MenuOptionExit",
+          "literal": "\"EXIT\""
+        },
+        {
+          "line": 437,
+          "identifier": "gText_SouthernIsland",
+          "literal": "\"SOUTHERN ISLAND\""
+        },
+        {
+          "line": 438,
+          "identifier": "gText_BirthIsland",
+          "literal": "\"BIRTH ISLAND\""
+        },
+        {
+          "line": 439,
+          "identifier": "gText_FarawayIsland",
+          "literal": "\"FARAWAY ISLAND\""
+        },
+        {
+          "line": 440,
+          "identifier": "gText_NavelRock",
+          "literal": "\"NAVEL ROCK\""
+        },
+        {
+          "line": 441,
+          "identifier": "gText_NormalTagMatch",
+          "literal": "\"NORMAL TAG MATCH\""
+        },
+        {
+          "line": 442,
+          "identifier": "gText_VarietyTagMatch",
+          "literal": "\"VARIETY TAG MATCH\""
+        },
+        {
+          "line": 443,
+          "identifier": "gText_UniqueTagMatch",
+          "literal": "\"UNIQUE TAG MATCH\""
+        },
+        {
+          "line": 444,
+          "identifier": "gText_ExpertTagMatch",
+          "literal": "\"EXPERT TAG MATCH\""
+        },
+        {
+          "line": 445,
+          "identifier": "gText_BattleBasics",
+          "literal": "\"BATTLE BASICS\""
+        },
+        {
+          "line": 446,
+          "identifier": "gText_PokemonNature",
+          "literal": "\"POKéMON NATURE\""
+        },
+        {
+          "line": 447,
+          "identifier": "gText_PokemonMoves",
+          "literal": "\"POKéMON MOVES\""
+        },
+        {
+          "line": 448,
+          "identifier": "gText_Underpowered",
+          "literal": "\"UNDERPOWERED\""
+        },
+        {
+          "line": 449,
+          "identifier": "gText_WhenInDanger",
+          "literal": "\"WHEN IN DANGER\""
+        },
+        {
+          "line": 450,
+          "identifier": "gText_BattlePokemon",
+          "literal": "\"BATTLE POKéMON\""
+        },
+        {
+          "line": 451,
+          "identifier": "gText_BattleTrainers",
+          "literal": "\"BATTLE TRAINERS\""
+        },
+        {
+          "line": 452,
+          "identifier": "gText_1F",
+          "literal": "\"1F\""
+        },
+        {
+          "line": 453,
+          "identifier": "gText_2F",
+          "literal": "\"2F\""
+        },
+        {
+          "line": 454,
+          "identifier": "gText_3F",
+          "literal": "\"3F\""
+        },
+        {
+          "line": 455,
+          "identifier": "gText_4F",
+          "literal": "\"4F\""
+        },
+        {
+          "line": 456,
+          "identifier": "gText_5F",
+          "literal": "\"5F\""
+        },
+        {
+          "line": 457,
+          "identifier": "gText_6F",
+          "literal": "\"6F\""
+        },
+        {
+          "line": 458,
+          "identifier": "gText_7F",
+          "literal": "\"7F\""
+        },
+        {
+          "line": 459,
+          "identifier": "gText_8F",
+          "literal": "\"8F\""
+        },
+        {
+          "line": 460,
+          "identifier": "gText_9F",
+          "literal": "\"9F\""
+        },
+        {
+          "line": 461,
+          "identifier": "gText_10F",
+          "literal": "\"10F\""
+        },
+        {
+          "line": 462,
+          "identifier": "gText_11F",
+          "literal": "\"11F\""
+        },
+        {
+          "line": 463,
+          "identifier": "gText_B1F",
+          "literal": "\"B1F\""
+        },
+        {
+          "line": 464,
+          "identifier": "gText_B2F",
+          "literal": "\"B2F\""
+        },
+        {
+          "line": 465,
+          "identifier": "gText_B3F",
+          "literal": "\"B3F\""
+        },
+        {
+          "line": 466,
+          "identifier": "gText_B4F",
+          "literal": "\"B4F\""
+        },
+        {
+          "line": 467,
+          "identifier": "gText_Rooftop",
+          "literal": "\"ROOFTOP\""
+        },
+        {
+          "line": 468,
+          "identifier": "gText_ElevatorNowOn",
+          "literal": "\"Now on:\""
+        },
+        {
+          "line": 469,
+          "identifier": "gText_BP",
+          "literal": "\"BP\""
+        },
+        {
+          "line": 470,
+          "identifier": "gText_RankingHall",
+          "literal": "\"RANKING HALL\""
+        },
+        {
+          "line": 471,
+          "identifier": "gText_ExchangeService",
+          "literal": "\"EXCHANGE SERVICE\""
+        },
+        {
+          "line": 472,
+          "identifier": "gText_SlateportCity",
+          "literal": "\"SLATEPORT CITY\""
+        },
+        {
+          "line": 473,
+          "identifier": "gText_Exit",
+          "literal": "\"EXIT\""
+        },
+        {
+          "line": 474,
+          "identifier": "gText_YourPartysFull",
+          "literal": "\"Your party's full!{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 475,
+          "identifier": "gText_InParty",
+          "literal": "\"IN PARTY\""
+        },
+        {
+          "line": 476,
+          "identifier": "gText_PokemonMaleLv",
+          "literal": "\"{DYNAMIC 0}{BACKGROUND WHITE}{TEXT_COLORS LIGHT_RED GREEN WHITE}♂{BACKGROUND WHITE}{TEXT_COLORS DARK_GRAY LIGHT_GRAY WHITE}/{LV}{DYNAMIC 1}\""
+        },
+        {
+          "line": 477,
+          "identifier": "gText_PokemonFemaleLv",
+          "literal": "\"{DYNAMIC 0}{BACKGROUND WHITE}{TEXT_COLORS LIGHT_GREEN BLUE WHITE}♀{BACKGROUND WHITE}{TEXT_COLORS DARK_GRAY LIGHT_GRAY WHITE}/{LV}{DYNAMIC 1}\""
+        },
+        {
+          "line": 478,
+          "identifier": "gText_PokemonNoGenderLv",
+          "literal": "\"{DYNAMIC 0}/{LV}{DYNAMIC 1}\""
+        },
+        {
+          "line": 479,
+          "identifier": "gText_PokemonMaleLv2",
+          "literal": "\"{DYNAMIC 0}{BACKGROUND WHITE}{TEXT_COLORS LIGHT_RED GREEN WHITE}♂{BACKGROUND WHITE}{TEXT_COLORS DARK_GRAY LIGHT_GRAY WHITE}/{LV}{DYNAMIC 1}{DYNAMIC 2}\""
+        },
+        {
+          "line": 480,
+          "identifier": "gText_PokemonFemaleLv2",
+          "literal": "\"{DYNAMIC 0}{BACKGROUND WHITE}{TEXT_COLORS LIGHT_GREEN BLUE WHITE}♀{BACKGROUND WHITE}{TEXT_COLORS DARK_GRAY LIGHT_GRAY WHITE}/{LV}{DYNAMIC 1}{DYNAMIC 2}\""
+        },
+        {
+          "line": 481,
+          "identifier": "gText_PokemonNoGenderLv2",
+          "literal": "\"{DYNAMIC 0}/{LV}{DYNAMIC 1}{DYNAMIC 2}\""
+        },
+        {
+          "line": 482,
+          "identifier": "gText_CombineFourWordsOrPhrases",
+          "literal": "\"Combine four words or phrases\""
+        },
+        {
+          "line": 483,
+          "identifier": "gText_AndMakeYourProfile",
+          "literal": "\"and make your profile.\""
+        },
+        {
+          "line": 484,
+          "identifier": "gText_CombineSixWordsOrPhrases",
+          "literal": "\"Combine six words or phrases\""
+        },
+        {
+          "line": 485,
+          "identifier": "gText_AndMakeAMessage",
+          "literal": "\"and make a message.\""
+        },
+        {
+          "line": 486,
+          "identifier": "gText_FindWordsThatDescribeYour",
+          "literal": "\"Find words that describe your\""
+        },
+        {
+          "line": 487,
+          "identifier": "gText_FeelingsRightNow",
+          "literal": "\"feelings right now.\""
+        },
+        {
+          "line": 488,
+          "identifier": "gText_WithFourPhrases",
+          "literal": "\"With four phrases,\""
+        },
+        {
+          "line": 489,
+          "identifier": "gText_CombineNineWordsOrPhrases",
+          "literal": "\"Combine nine words or phrases\""
+        },
+        {
+          "line": 490,
+          "identifier": "gText_AndMakeAMessage2",
+          "literal": "\"and make a message.\""
+        },
+        {
+          "line": 491,
+          "identifier": "gText_ChangeJustOneWordOrPhrase",
+          "literal": "\"Change just one word or phrase\""
+        },
+        {
+          "line": 492,
+          "identifier": "gText_AndImproveTheBardsSong",
+          "literal": "\"and improve the BARD's song.\""
+        },
+        {
+          "line": 493,
+          "identifier": "gText_YourProfile",
+          "literal": "\"Your profile\""
+        },
+        {
+          "line": 494,
+          "identifier": "gText_YourFeelingAtTheBattlesStart",
+          "literal": "\"Your feeling at the battle's start\""
+        },
+        {
+          "line": 495,
+          "identifier": "gText_WhatYouSayIfYouWin",
+          "literal": "\"What you say if you win a battle\""
+        },
+        {
+          "line": 496,
+          "identifier": "gText_WhatYouSayIfYouLose",
+          "literal": "\"What you say if you lose a battle\""
+        },
+        {
+          "line": 497,
+          "identifier": "gText_TheAnswer",
+          "literal": "\"The answer\""
+        },
+        {
+          "line": 498,
+          "identifier": "gText_TheMailMessage",
+          "literal": "\"The MAIL message\""
+        },
+        {
+          "line": 499,
+          "identifier": "gText_TheMailSalutation",
+          "literal": "\"The MAIL salutation\""
+        },
+        {
+          "line": 500,
+          "identifier": "gText_TheBardsSong2",
+          "literal": "\"The new song\""
+        },
+        {
+          "line": 501,
+          "identifier": "gText_CombineTwoWordsOrPhrases",
+          "literal": "\"Combine two words or phrases\""
+        },
+        {
+          "line": 502,
+          "identifier": "gText_AndMakeATrendySaying",
+          "literal": "\"and make a trendy saying.\""
+        },
+        {
+          "line": 503,
+          "identifier": "gText_TheTrendySaying",
+          "literal": "\"The trendy saying\""
+        },
+        {
+          "line": 504,
+          "identifier": "gText_IsAsShownOkay",
+          "literal": "\"is as shown. Okay?\""
+        },
+        {
+          "line": 505,
+          "identifier": "gText_CombineTwoWordsOrPhrases2",
+          "literal": "\"Combine two words or phrases\""
+        },
+        {
+          "line": 506,
+          "identifier": "gText_ToTeachHerAGoodSaying",
+          "literal": "\"to teach her a good saying.\""
+        },
+        {
+          "line": 507,
+          "identifier": "gText_FindWordsWhichFit",
+          "literal": "\"Find words which fit\""
+        },
+        {
+          "line": 508,
+          "identifier": "gText_TheTrainersImage",
+          "literal": "\"the TRAINER's image.\""
+        },
+        {
+          "line": 509,
+          "identifier": "gText_TheImage",
+          "literal": "\"The image:\""
+        },
+        {
+          "line": 510,
+          "identifier": "gText_OutOfTheListedChoices",
+          "literal": "\"Out of the listed choices,\""
+        },
+        {
+          "line": 511,
+          "identifier": "gText_SelectTheAnswerToTheQuiz",
+          "literal": "\"select the answer to the quiz!\""
+        },
+        {
+          "line": 512,
+          "identifier": "gText_AndCreateAQuiz",
+          "literal": "\"and create a quiz!\""
+        },
+        {
+          "line": 513,
+          "identifier": "gText_PickAWordOrPhraseAnd",
+          "literal": "\"Pick a word or phrase and\""
+        },
+        {
+          "line": 514,
+          "identifier": "gText_SetTheQuizAnswer",
+          "literal": "\"set the quiz answer.\""
+        },
+        {
+          "line": 515,
+          "identifier": "gText_TheAnswerColon",
+          "literal": "\"The answer:\""
+        },
+        {
+          "line": 516,
+          "identifier": "gText_TheQuizColon",
+          "literal": "\"The quiz:\""
+        },
+        {
+          "line": 517,
+          "identifier": "gText_ApprenticePhrase",
+          "literal": "\"Apprentice's phrase:\""
+        },
+        {
+          "line": 518,
+          "identifier": "gText_QuitEditing",
+          "literal": "\"Quit editing?\""
+        },
+        {
+          "line": 519,
+          "identifier": "gText_StopGivingPkmnMail",
+          "literal": "\"Stop giving the POKéMON MAIL?\""
+        },
+        {
+          "line": 520,
+          "identifier": "gText_AndFillOutTheQuestionnaire",
+          "literal": "\"and fill out the questionnaire.\""
+        },
+        {
+          "line": 521,
+          "identifier": "gText_LetsReplyToTheInterview",
+          "literal": "\"Let's reply to the interview!\""
+        },
+        {
+          "line": 522,
+          "identifier": "gText_AllTextBeingEditedWill",
+          "literal": "\"All the text being edited will\""
+        },
+        {
+          "line": 523,
+          "identifier": "gText_BeDeletedThatOkay",
+          "literal": "\"be deleted. Is that okay?\""
+        },
+        {
+          "line": 524,
+          "identifier": "gText_QuitEditing2",
+          "literal": "\"Quit editing?\""
+        },
+        {
+          "line": 525,
+          "identifier": "gText_EditedTextWillNotBeSaved",
+          "literal": "\"The edited text will not be saved.\""
+        },
+        {
+          "line": 526,
+          "identifier": "gText_IsThatOkay",
+          "literal": "\"Is that okay?\""
+        },
+        {
+          "line": 527,
+          "identifier": "gText_PleaseEnterPhraseOrWord",
+          "literal": "\"Please enter a phrase or word.\""
+        },
+        {
+          "line": 528,
+          "identifier": "gText_EntireTextCantBeDeleted",
+          "literal": "\"The entire text can't be deleted.\""
+        },
+        {
+          "line": 529,
+          "identifier": "gText_OnlyOnePhrase",
+          "literal": "\"Only one phrase may be changed.\""
+        },
+        {
+          "line": 530,
+          "identifier": "gText_OriginalSongWillBeUsed",
+          "literal": "\"The original song will be used.\""
+        },
+        {
+          "line": 531,
+          "identifier": "gText_ThatsTrendyAlready",
+          "literal": "\"That's trendy already!\""
+        },
+        {
+          "line": 532,
+          "identifier": "gText_CombineTwoWordsOrPhrases3",
+          "literal": "\"Combine two words or phrases.\""
+        },
+        {
+          "line": 533,
+          "identifier": "gText_QuitGivingInfo",
+          "literal": "\"Quit giving information?\""
+        },
+        {
+          "line": 534,
+          "identifier": "gText_StopGivingPkmnMail2",
+          "literal": "\"Stop giving the POKéMON MAIL?\""
+        },
+        {
+          "line": 535,
+          "identifier": "gText_CreateAQuiz2",
+          "literal": "\"Create a quiz!\""
+        },
+        {
+          "line": 536,
+          "identifier": "gText_SetTheAnswer",
+          "literal": "\"Set the answer!\""
+        },
+        {
+          "line": 537,
+          "identifier": "gText_CancelSelection",
+          "literal": "\"Cancel the selection?\""
+        },
+        {
+          "line": 538,
+          "identifier": "gText_Profile",
+          "literal": "\"PROFILE\""
+        },
+        {
+          "line": 539,
+          "identifier": "gText_AtTheBattlesStart",
+          "literal": "\"At the battle's start:\""
+        },
+        {
+          "line": 540,
+          "identifier": "gText_UponWinningABattle",
+          "literal": "\"Upon winning a battle:\""
+        },
+        {
+          "line": 541,
+          "identifier": "gText_UponLosingABattle",
+          "literal": "\"Upon losing a battle:\""
+        },
+        {
+          "line": 542,
+          "identifier": "gText_TheBardsSong",
+          "literal": "\"The BARD's Song\""
+        },
+        {
+          "line": 543,
+          "identifier": "gText_WhatsHipAndHappening",
+          "literal": "\"What's hip and happening?\""
+        },
+        {
+          "line": 544,
+          "identifier": "gText_Interview",
+          "literal": "\"Interview\""
+        },
+        {
+          "line": 545,
+          "identifier": "gText_GoodSaying",
+          "literal": "\"Good saying\""
+        },
+        {
+          "line": 546,
+          "identifier": "gText_FansQuestion",
+          "literal": "\"Fan's question\""
+        },
+        {
+          "line": 547,
+          "identifier": "gJPText_WhatIsTheQuizAnswer",
+          "literal": "\"クイズの こたえは？\""
+        },
+        {
+          "line": 548,
+          "identifier": "gText_ApprenticesPhrase",
+          "literal": "\"Apprentice's phrase\""
+        },
+        {
+          "line": 549,
+          "identifier": "gText_Questionnaire",
+          "literal": "\"QUESTIONNAIRE\""
+        },
+        {
+          "line": 550,
+          "identifier": "gText_YouCannotQuitHere",
+          "literal": "\"You cannot quit here.\""
+        },
+        {
+          "line": 551,
+          "identifier": "gText_SectionMustBeCompleted",
+          "literal": "\"This section must be completed.\""
+        },
+        {
+          "line": 552,
+          "identifier": "gText_F700sQuiz",
+          "literal": "\"{DYNAMIC 0}'s quiz\""
+        },
+        {
+          "line": 553,
+          "identifier": "gText_Lady",
+          "literal": "\"Lady\""
+        },
+        {
+          "line": 554,
+          "identifier": "gText_AfterYouHaveReadTheQuiz",
+          "literal": "\"After you have read the quiz\""
+        },
+        {
+          "line": 555,
+          "identifier": "gText_QuestionPressTheAButton",
+          "literal": "\"question, press the A Button.\""
+        },
+        {
+          "line": 556,
+          "identifier": "gText_TheQuizAnswerIs",
+          "literal": "\"The quiz answer is?\""
+        },
+        {
+          "line": 557,
+          "identifier": "gText_LikeToQuitQuiz",
+          "literal": "\"Would you like to quit this quiz\""
+        },
+        {
+          "line": 558,
+          "identifier": "gText_ChallengeQuestionMark",
+          "literal": "\"challenge?\""
+        },
+        {
+          "line": 559,
+          "identifier": "gText_IsThisQuizOK",
+          "literal": "\"Is this quiz OK?\""
+        },
+        {
+          "line": 560,
+          "identifier": "gText_CreateAQuiz",
+          "literal": "\"Create a quiz!\""
+        },
+        {
+          "line": 561,
+          "identifier": "gText_SelectTheAnswer",
+          "literal": "\"Select the answer!\""
+        },
+        {
+          "line": 562,
+          "identifier": "gText_LyricsCantBeDeleted",
+          "literal": "\"The lyrics can't be deleted.\""
+        },
+        {
+          "line": 563,
+          "identifier": "gText_PokemonLeague",
+          "literal": "\"POKéMON LEAGUE\""
+        },
+        {
+          "line": 564,
+          "identifier": "gText_PokemonCenter",
+          "literal": "\"POKéMON CENTER\""
+        },
+        {
+          "line": 565,
+          "identifier": "gText_Coolness",
+          "literal": "\"Coolness \""
+        },
+        {
+          "line": 566,
+          "identifier": "gText_Beauty3",
+          "literal": "\"Beauty \""
+        },
+        {
+          "line": 567,
+          "identifier": "gText_Cuteness",
+          "literal": "\"Cuteness \""
+        },
+        {
+          "line": 568,
+          "identifier": "gText_Smartness",
+          "literal": "\"Smartness \""
+        },
+        {
+          "line": 569,
+          "identifier": "gText_Toughness",
+          "literal": "\"Toughness \""
+        },
+        {
+          "line": 570,
+          "identifier": "gText_SaveFailedCheckingBackup",
+          "literal": "\"Save failed. Checking the backup\\nmemory… Please wait.\\n{COLOR RED}“Time required: about 1 minute”\""
+        },
+        {
+          "line": 571,
+          "identifier": "gText_BackupMemoryDamaged",
+          "literal": "\"The backup memory is damaged, or\\nthe internal battery has run dry.\\nYou can still play, but not save.\""
+        },
+        {
+          "line": 572,
+          "identifier": "gText_GamePlayCannotBeContinued",
+          "literal": "\"{COLOR RED}“Game play cannot be continued.\\nReturning to the title screen…”\""
+        },
+        {
+          "line": 573,
+          "identifier": "gText_CheckCompleted",
+          "literal": "\"Check completed.\\nAttempting to save again.\\nPlease wait.\""
+        },
+        {
+          "line": 574,
+          "identifier": "gText_SaveCompleteGameCannotContinue",
+          "literal": "\"Save completed.\\n{COLOR RED}“Game play cannot be continued.\\nReturning to the title screen.”\""
+        },
+        {
+          "line": 575,
+          "identifier": "gText_SaveCompletePressA",
+          "literal": "\"Save completed.\\n{COLOR RED}“Please press the A Button.”\""
+        },
+        {
+          "line": 576,
+          "identifier": "gText_Ferry",
+          "literal": "\"FERRY\""
+        },
+        {
+          "line": 577,
+          "identifier": "gText_SecretBase",
+          "literal": "\"SECRET BASE\""
+        },
+        {
+          "line": 578,
+          "identifier": "gText_Hideout",
+          "literal": "\"HIDEOUT\""
+        },
+        {
+          "line": 579,
+          "identifier": "gText_ResetRTCConfirmCancel",
+          "literal": "\"Reset RTC?\\nA: Confirm, B: Cancel\""
+        },
+        {
+          "line": 580,
+          "identifier": "gText_PresentTime",
+          "literal": "\"Present time in game\""
+        },
+        {
+          "line": 581,
+          "identifier": "gText_PreviousTime",
+          "literal": "\"Previous time in game\""
+        },
+        {
+          "line": 582,
+          "identifier": "gText_PleaseResetTime",
+          "literal": "\"Please reset the time.\""
+        },
+        {
+          "line": 583,
+          "identifier": "gText_ClockHasBeenReset",
+          "literal": "\"The clock has been reset.\\nData will be saved. Please wait.\""
+        },
+        {
+          "line": 584,
+          "identifier": "gText_SaveCompleted",
+          "literal": "\"Save completed.\""
+        },
+        {
+          "line": 585,
+          "identifier": "gText_SaveFailed",
+          "literal": "\"Save failed…\""
+        },
+        {
+          "line": 586,
+          "identifier": "gText_NoSaveFileCantSetTime",
+          "literal": "\"There is no save file, so the time\\ncan't be set.\""
+        },
+        {
+          "line": 587,
+          "identifier": "gText_InGameClockUsable",
+          "literal": "\"The in-game clock adjustment system\\nis now useable.\""
+        },
+        {
+          "line": 588,
+          "identifier": "gText_Spicy2",
+          "literal": "\"spicy\""
+        },
+        {
+          "line": 589,
+          "identifier": "gText_Dry2",
+          "literal": "\"dry\""
+        },
+        {
+          "line": 590,
+          "identifier": "gText_Sweet2",
+          "literal": "\"sweet\""
+        },
+        {
+          "line": 591,
+          "identifier": "gText_Bitter2",
+          "literal": "\"bitter\""
+        },
+        {
+          "line": 592,
+          "identifier": "gText_Sour2",
+          "literal": "\"sour\""
+        },
+        {
+          "line": 593,
+          "identifier": "gText_Single",
+          "literal": "\"SINGLE\""
+        },
+        {
+          "line": 594,
+          "identifier": "gText_Double",
+          "literal": "\"DOUBLE\""
+        },
+        {
+          "line": 595,
+          "identifier": "gText_Knockout",
+          "literal": "\"KNOCKOUT\""
+        },
+        {
+          "line": 596,
+          "identifier": "gText_Mixed",
+          "literal": "\"MIXED\""
+        },
+        {
+          "line": 597,
+          "identifier": "gText_First",
+          "literal": "\"first\""
+        },
+        {
+          "line": 598,
+          "identifier": "gText_Second",
+          "literal": "\"second\""
+        },
+        {
+          "line": 599,
+          "identifier": "gText_Third",
+          "literal": "\"third\""
+        },
+        {
+          "line": 601,
+          "identifier": "gText_PkmnFainted_FldPsn",
+          "literal": "\"{STR_VAR_1} fainted…\\p\\n\""
+        },
+        {
+          "line": 603,
+          "identifier": "gText_PkmnFainted_FldPsn",
+          "literal": "\"{STR_VAR_1} survived the poisoning.\\nThe poison faded away!\\p\""
+        },
+        {
+          "line": 605,
+          "identifier": "gText_Marco",
+          "literal": "\"MARCO\""
+        },
+        {
+          "line": 606,
+          "identifier": "gText_TrainerCardName",
+          "literal": "\"NAME: \""
+        },
+        {
+          "line": 607,
+          "identifier": "gText_TrainerCardIDNo",
+          "literal": "\"IDNo.\""
+        },
+        {
+          "line": 608,
+          "identifier": "gText_TrainerCardMoney",
+          "literal": "\"MONEY\""
+        },
+        {
+          "line": 609,
+          "identifier": "gText_PokeDollar",
+          "literal": "\"¥\""
+        },
+        {
+          "line": 610,
+          "identifier": "gText_TrainerCardPokedex",
+          "literal": "\"POKéDEX\""
+        },
+        {
+          "line": 611,
+          "identifier": "gText_EmptyString6",
+          "literal": "\"\""
+        },
+        {
+          "line": 612,
+          "identifier": "gText_Colon2",
+          "literal": "\":\""
+        },
+        {
+          "line": 613,
+          "identifier": "gText_Points",
+          "literal": "\" points\""
+        },
+        {
+          "line": 614,
+          "identifier": "gText_TrainerCardTime",
+          "literal": "\"TIME\""
+        },
+        {
+          "line": 615,
+          "identifier": "gJPText_BattlePoints",
+          "literal": "\"ゲ-ムポイント\""
+        },
+        {
+          "line": 616,
+          "identifier": "gText_Var1sTrainerCard",
+          "literal": "\"{STR_VAR_1}'s TRAINER CARD\""
+        },
+        {
+          "line": 617,
+          "identifier": "gText_HallOfFameDebut",
+          "literal": "\"HALL OF FAME DEBUT  \""
+        },
+        {
+          "line": 618,
+          "identifier": "gText_LinkBattles",
+          "literal": "\"LINK BATTLES\""
+        },
+        {
+          "line": 619,
+          "identifier": "gText_LinkCableBattles",
+          "literal": "\"LINK CABLE BATTLES\""
+        },
+        {
+          "line": 620,
+          "identifier": "gText_WinsLosses",
+          "literal": "\"W:{COLOR RED}{SHADOW LIGHT_RED}{STR_VAR_1}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}  L:{COLOR RED}{SHADOW LIGHT_RED}{STR_VAR_2}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}\""
+        },
+        {
+          "line": 621,
+          "identifier": "gText_PokemonTrades",
+          "literal": "\"POKéMON TRADES\""
+        },
+        {
+          "line": 622,
+          "identifier": "gText_UnionTradesAndBattles",
+          "literal": "\"UNION TRADES & BATTLES\""
+        },
+        {
+          "line": 623,
+          "identifier": "gText_BerryCrush",
+          "literal": "\"BERRY CRUSH\""
+        },
+        {
+          "line": 624,
+          "identifier": "gText_WaitingTrainerFinishReading",
+          "literal": "\"Waiting for the other TRAINER to\\nfinish reading your TRAINER CARD.\""
+        },
+        {
+          "line": 625,
+          "identifier": "gText_PokeblocksWithFriends",
+          "literal": "\"{POKEBLOCK}S W/FRIENDS\""
+        },
+        {
+          "line": 626,
+          "identifier": "gText_NumPokeblocks",
+          "literal": "\"{STR_VAR_1}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}\""
+        },
+        {
+          "line": 627,
+          "identifier": "gText_WonContestsWFriends",
+          "literal": "\"WON CONTESTS W/FRIENDS\""
+        },
+        {
+          "line": 628,
+          "identifier": "gText_BattlePtsWon",
+          "literal": "\"BATTLE POINTS WON\""
+        },
+        {
+          "line": 629,
+          "identifier": "gText_NumBP",
+          "literal": "\"{STR_VAR_1}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}BP\""
+        },
+        {
+          "line": 630,
+          "identifier": "gText_BattleTower",
+          "literal": "\"BATTLE TOWER\""
+        },
+        {
+          "line": 631,
+          "identifier": "gText_WinsStraight",
+          "literal": "\"W/{COLOR RED}{SHADOW LIGHT_RED}{STR_VAR_1}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}  STRAIGHT/{COLOR RED}{SHADOW LIGHT_RED}{STR_VAR_2}\""
+        },
+        {
+          "line": 632,
+          "identifier": "gText_BattleTower2",
+          "literal": "\"BATTLE TOWER\""
+        },
+        {
+          "line": 633,
+          "identifier": "gText_BattleDome",
+          "literal": "\"BATTLE DOME\""
+        },
+        {
+          "line": 634,
+          "identifier": "gText_BattlePalace",
+          "literal": "\"BATTLE PALACE\""
+        },
+        {
+          "line": 635,
+          "identifier": "gText_BattleFactory",
+          "literal": "\"BATTLE FACTORY\""
+        },
+        {
+          "line": 636,
+          "identifier": "gText_BattleArena",
+          "literal": "\"BATTLE ARENA\""
+        },
+        {
+          "line": 637,
+          "identifier": "gText_BattlePike",
+          "literal": "\"BATTLE PIKE\""
+        },
+        {
+          "line": 638,
+          "identifier": "gText_BattlePyramid",
+          "literal": "\"BATTLE PYRAMID\""
+        },
+        {
+          "line": 640,
+          "identifier": "gText_FacilitySingle",
+          "literal": "\"{STR_VAR_1} SINGLE\""
+        },
+        {
+          "line": 641,
+          "identifier": "gText_FacilityDouble",
+          "literal": "\"{STR_VAR_1} DOUBLE\""
+        },
+        {
+          "line": 642,
+          "identifier": "gText_FacilityMulti",
+          "literal": "\"{STR_VAR_1} MULTI\""
+        },
+        {
+          "line": 643,
+          "identifier": "gText_FacilityLink",
+          "literal": "\"{STR_VAR_1} LINK\""
+        },
+        {
+          "line": 644,
+          "identifier": "gText_Facility",
+          "literal": "\"{STR_VAR_1}\""
+        },
+        {
+          "line": 646,
+          "identifier": "gText_Give",
+          "literal": "\"Give\""
+        },
+        {
+          "line": 647,
+          "identifier": "gText_NoNeed",
+          "literal": "\"No need\""
+        },
+        {
+          "line": 648,
+          "identifier": "gText_AnnouncingResults",
+          "literal": "\"Announcing the results!\""
+        },
+        {
+          "line": 649,
+          "identifier": "gText_PreliminaryResults",
+          "literal": "\"The preliminary results!\""
+        },
+        {
+          "line": 650,
+          "identifier": "gText_Round2Results",
+          "literal": "\"Round 2 results!\""
+        },
+        {
+          "line": 651,
+          "identifier": "gText_ContestantsMonWon",
+          "literal": "\"{STR_VAR_1}'s {STR_VAR_2} won!\""
+        },
+        {
+          "line": 652,
+          "identifier": "gText_CommunicationStandby",
+          "literal": "\"Communication standby…\""
+        },
+        {
+          "line": 653,
+          "identifier": "gText_ColorDarkGray",
+          "literal": "\"{COLOR DARK_GRAY}\""
+        },
+        {
+          "line": 654,
+          "identifier": "gText_ColorDynamic6WhiteDynamic5",
+          "literal": "\"{BACKGROUND WHITE}{TEXT_COLORS DYNAMIC_COLOR6 DYNAMIC_COLOR5 WHITE}\""
+        },
+        {
+          "line": 655,
+          "identifier": "gText_HealthboxNickname",
+          "literal": "\"{BACKGROUND DARK_GRAY}{ACCENT DARK_GRAY}\""
+        },
+        {
+          "line": 656,
+          "identifier": "gText_EmptySpace2",
+          "literal": "\" \""
+        },
+        {
+          "line": 657,
+          "identifier": "gText_HealthboxGender_Male",
+          "literal": "\"{COLOR DYNAMIC_COLOR2}♂\""
+        },
+        {
+          "line": 658,
+          "identifier": "gText_HealthboxGender_Female",
+          "literal": "\"{COLOR DYNAMIC_COLOR1}♀\""
+        },
+        {
+          "line": 659,
+          "identifier": "gText_HealthboxGender_None",
+          "literal": "\"{COLOR DYNAMIC_COLOR2}\""
+        },
+        {
+          "line": 660,
+          "identifier": "gText_Upper",
+          "literal": "\"UPPER\""
+        },
+        {
+          "line": 661,
+          "identifier": "gText_Lower",
+          "literal": "\"lower\""
+        },
+        {
+          "line": 662,
+          "identifier": "gText_Others",
+          "literal": "\"OTHERS\""
+        },
+        {
+          "line": 663,
+          "identifier": "gText_Symbols",
+          "literal": "\"SYMBOLS\""
+        },
+        {
+          "line": 664,
+          "identifier": "gText_Register2",
+          "literal": "\"REGISTER\""
+        },
+        {
+          "line": 665,
+          "identifier": "gText_Exit2",
+          "literal": "\"EXIT\""
+        },
+        {
+          "line": 666,
+          "identifier": "gText_QuitChatting",
+          "literal": "\"Quit chatting?\""
+        },
+        {
+          "line": 667,
+          "identifier": "gText_RegisterTextWhere",
+          "literal": "\"Register text where?\""
+        },
+        {
+          "line": 668,
+          "identifier": "gText_RegisterTextHere",
+          "literal": "\"Register text here?\""
+        },
+        {
+          "line": 669,
+          "identifier": "gText_InputText",
+          "literal": "\"Input text.\""
+        },
+        {
+          "line": 670,
+          "identifier": "gText_F700JoinedChat",
+          "literal": "\"{DYNAMIC 0} joined the chat!\""
+        },
+        {
+          "line": 671,
+          "identifier": "gText_F700LeftChat",
+          "literal": "\"{DYNAMIC 0} left the chat.\""
+        },
+        {
+          "line": 672,
+          "identifier": "gJPText_PlayersXPokemon",
+          "literal": "\"{DYNAMIC 0}の{DYNAMIC 1}ひきめ:\""
+        },
+        {
+          "line": 673,
+          "identifier": "gJPText_PlayersXPokmonDoesNotExist",
+          "literal": "\"{DYNAMIC 0}の{DYNAMIC 1}ひきめは いません\""
+        },
+        {
+          "line": 674,
+          "identifier": "gText_ExitingChat",
+          "literal": "\"Exiting the chat…\""
+        },
+        {
+          "line": 675,
+          "identifier": "gText_LeaderLeftEndingChat",
+          "literal": "\"The LEADER, {DYNAMIC 0}, has\\nleft, ending the chat.\""
+        },
+        {
+          "line": 676,
+          "identifier": "gText_RegisteredTextChangedOKToSave",
+          "literal": "\"The registered text has been changed.\\nIs it okay to save the game?\""
+        },
+        {
+          "line": 677,
+          "identifier": "gText_AlreadySavedFile_Chat",
+          "literal": "\"There is already a saved file.\\nIs it okay to overwrite it?\""
+        },
+        {
+          "line": 678,
+          "identifier": "gText_SavingDontTurnOff_Chat",
+          "literal": "\"SAVING…\\nDON'T TURN OFF THE POWER.\""
+        },
+        {
+          "line": 679,
+          "identifier": "gText_PlayerSavedGame_Chat",
+          "literal": "\"{DYNAMIC 0} saved the game.\""
+        },
+        {
+          "line": 680,
+          "identifier": "gText_IfLeaderLeavesChatEnds",
+          "literal": "\"If the LEADER leaves, the chat\\nwill end. Is that okay?\""
+        },
+        {
+          "line": 681,
+          "identifier": "gText_Hello",
+          "literal": "\"HELLO\""
+        },
+        {
+          "line": 682,
+          "identifier": "gText_Pokemon2",
+          "literal": "\"POKéMON\""
+        },
+        {
+          "line": 683,
+          "identifier": "gText_Trade",
+          "literal": "\"TRADE\""
+        },
+        {
+          "line": 684,
+          "identifier": "gText_Battle",
+          "literal": "\"BATTLE\""
+        },
+        {
+          "line": 685,
+          "identifier": "gText_Lets",
+          "literal": "\"LET'S\""
+        },
+        {
+          "line": 686,
+          "identifier": "gText_Ok",
+          "literal": "\"OK!\""
+        },
+        {
+          "line": 687,
+          "identifier": "gText_Sorry",
+          "literal": "\"SORRY\""
+        },
+        {
+          "line": 688,
+          "identifier": "gText_YaySmileEmoji",
+          "literal": "\"YAY{EMOJI_BIGSMILE}\""
+        },
+        {
+          "line": 689,
+          "identifier": "gText_ThankYou",
+          "literal": "\"THANK YOU\""
+        },
+        {
+          "line": 690,
+          "identifier": "gText_ByeBye",
+          "literal": "\"BYE-BYE!\""
+        },
+        {
+          "line": 691,
+          "identifier": "gText_HatchedFromEgg",
+          "literal": "\"{STR_VAR_1} hatched from the EGG!\""
+        },
+        {
+          "line": 692,
+          "identifier": "gText_NicknameHatchPrompt",
+          "literal": "\"Would you like to nickname the newly\\nhatched {STR_VAR_1}?\""
+        },
+        {
+          "line": 693,
+          "identifier": "gText_ReadyPickBerry",
+          "literal": "\"Are you ready to BERRY-CRUSH?\\nPlease pick a BERRY for use.\\p\""
+        },
+        {
+          "line": 694,
+          "identifier": "gText_WaitForAllChooseBerry",
+          "literal": "\"Please wait while each member\\nchooses a BERRY.\""
+        },
+        {
+          "line": 695,
+          "identifier": "gText_EndedWithXUnitsPowder",
+          "literal": "\"{PAUSE_MUSIC}{PLAY_BGM MUS_LEVEL_UP}You ended up with {STR_VAR_1} units of\\nsilky-smooth BERRY POWDER.{RESUME_MUSIC}\\pYour total amount of BERRY POWDER\\nis {STR_VAR_2}.\\p\""
+        },
+        {
+          "line": 696,
+          "identifier": "gText_RecordingGameResults",
+          "literal": "\"Recording your game results in the\\nsave file.\\lPlease wait.\""
+        },
+        {
+          "line": 697,
+          "identifier": "gText_PlayBerryCrushAgain",
+          "literal": "\"Want to play BERRY CRUSH again?\""
+        },
+        {
+          "line": 698,
+          "identifier": "gText_YouHaveNoBerries",
+          "literal": "\"You have no BERRIES.\\nThe game will be canceled.\""
+        },
+        {
+          "line": 699,
+          "identifier": "gText_MemberDroppedOut",
+          "literal": "\"A member dropped out.\\nThe game will be canceled.\""
+        },
+        {
+          "line": 700,
+          "identifier": "gText_TimesUpNoGoodPowder",
+          "literal": "\"Time's up.\\pGood BERRY POWDER could not be\\nmade…\\p\""
+        },
+        {
+          "line": 701,
+          "identifier": "gText_CommunicationStandby2",
+          "literal": "\"Communication standby…\""
+        },
+        {
+          "line": 702,
+          "identifier": "gText_1DotBlueF700",
+          "literal": "\"1. {COLOR BLUE}{SHADOW LIGHT_BLUE}{DYNAMIC 0}\""
+        },
+        {
+          "line": 703,
+          "identifier": "gText_1DotF700",
+          "literal": "\"1. {DYNAMIC 0}\""
+        },
+        {
+          "line": 704,
+          "identifier": "gText_SpaceTimes2",
+          "literal": "\" time(s)\""
+        },
+        {
+          "line": 705,
+          "identifier": "gText_XDotY",
+          "literal": "\"{STR_VAR_1}.{STR_VAR_2}\""
+        },
+        {
+          "line": 706,
+          "identifier": "gText_Var1Berry",
+          "literal": "\"{STR_VAR_1} BERRY\""
+        },
+        {
+          "line": 707,
+          "identifier": "gText_TimeColon",
+          "literal": "\"Time:\""
+        },
+        {
+          "line": 708,
+          "identifier": "gText_PressingSpeed",
+          "literal": "\"Pressing Speed:\""
+        },
+        {
+          "line": 709,
+          "identifier": "gText_Silkiness",
+          "literal": "\"Silkiness:\""
+        },
+        {
+          "line": 710,
+          "identifier": "gText_StrVar1",
+          "literal": "\"{STR_VAR_1}\""
+        },
+        {
+          "line": 711,
+          "identifier": "gText_SpaceMin",
+          "literal": "\" min. \""
+        },
+        {
+          "line": 712,
+          "identifier": "gText_XDotY2",
+          "literal": "\"{STR_VAR_1}.{STR_VAR_2}\""
+        },
+        {
+          "line": 713,
+          "identifier": "gText_SpaceSec",
+          "literal": "\" sec.\""
+        },
+        {
+          "line": 714,
+          "identifier": "gText_XDotY3",
+          "literal": "\"{STR_VAR_1}.{STR_VAR_2}\""
+        },
+        {
+          "line": 715,
+          "identifier": "gText_TimesPerSec",
+          "literal": "\" Times/sec.\""
+        },
+        {
+          "line": 716,
+          "identifier": "gText_Var1Percent",
+          "literal": "\"{STR_VAR_1}%\""
+        },
+        {
+          "line": 717,
+          "identifier": "gText_PressesRankings",
+          "literal": "\"No. of Presses Rankings\""
+        },
+        {
+          "line": 718,
+          "identifier": "gText_CrushingResults",
+          "literal": "\"Crushing Results\""
+        },
+        {
+          "line": 719,
+          "identifier": "gText_NeatnessRankings",
+          "literal": "\"Neatness Rankings\""
+        },
+        {
+          "line": 720,
+          "identifier": "gText_CoopRankings",
+          "literal": "\"Cooperative Rankings\""
+        },
+        {
+          "line": 721,
+          "identifier": "gText_PressingPowerRankings",
+          "literal": "\"Pressing-Power Rankings\""
+        },
+        {
+          "line": 722,
+          "identifier": "gText_BerryCrush2",
+          "literal": "\"BERRY CRUSH\""
+        },
+        {
+          "line": 723,
+          "identifier": "gText_PressingSpeedRankings",
+          "literal": "\"Pressing-Speed Rankings\""
+        },
+        {
+          "line": 724,
+          "identifier": "gText_Var1Players",
+          "literal": "\"{STR_VAR_1} PLAYERS\""
+        },
+        {
+          "line": 725,
+          "identifier": "gText_SymbolsEarned",
+          "literal": "\"Symbols Earned\""
+        },
+        {
+          "line": 726,
+          "identifier": "gText_BattleRecord",
+          "literal": "\"Battle Record\""
+        },
+        {
+          "line": 727,
+          "identifier": "gText_BattlePoints",
+          "literal": "\"Battle Points\""
+        },
+        {
+          "line": 728,
+          "identifier": "gText_UnusedCancel",
+          "literal": "\"CANCEL\""
+        },
+        {
+          "line": 729,
+          "identifier": "gText_EmptyString7",
+          "literal": "\"\""
+        },
+        {
+          "line": 730,
+          "identifier": "gText_CheckFrontierMap",
+          "literal": "\"Check BATTLE FRONTIER MAP.\""
+        },
+        {
+          "line": 731,
+          "identifier": "gText_CheckTrainerCard",
+          "literal": "\"Check TRAINER CARD.\""
+        },
+        {
+          "line": 732,
+          "identifier": "gText_ViewRecordedBattle",
+          "literal": "\"View recorded battle.\""
+        },
+        {
+          "line": 733,
+          "identifier": "gText_PutAwayFrontierPass",
+          "literal": "\"Put away the FRONTIER PASS.\""
+        },
+        {
+          "line": 734,
+          "identifier": "gText_CurrentBattlePoints",
+          "literal": "\"Your current Battle Points.\""
+        },
+        {
+          "line": 735,
+          "identifier": "gText_CollectedSymbols",
+          "literal": "\"Your collected Symbols.\""
+        },
+        {
+          "line": 736,
+          "identifier": "gText_BattleTowerAbilitySymbol",
+          "literal": "\"Battle Tower - Ability Symbol\""
+        },
+        {
+          "line": 737,
+          "identifier": "gText_BattleDomeTacticsSymbol",
+          "literal": "\"Battle Dome - Tactics Symbol\""
+        },
+        {
+          "line": 738,
+          "identifier": "gText_BattlePalaceSpiritsSymbol",
+          "literal": "\"Battle Palace - Spirits Symbol\""
+        },
+        {
+          "line": 739,
+          "identifier": "gText_BattleArenaGutsSymbol",
+          "literal": "\"Battle Arena - Guts Symbol\""
+        },
+        {
+          "line": 740,
+          "identifier": "gText_BattleFactoryKnowledgeSymbol",
+          "literal": "\"Battle Factory - Knowledge Symbol\""
+        },
+        {
+          "line": 741,
+          "identifier": "gText_BattlePikeLuckSymbol",
+          "literal": "\"Battle Pike - Luck Symbol\""
+        },
+        {
+          "line": 742,
+          "identifier": "gText_BattlePyramidBraveSymbol",
+          "literal": "\"Battle Pyramid - Brave Symbol\""
+        },
+        {
+          "line": 743,
+          "identifier": "gText_ThereIsNoBattleRecord",
+          "literal": "\"There is no Battle Record.\""
+        },
+        {
+          "line": 744,
+          "identifier": "gText_BattleTower3",
+          "literal": "\"BATTLE TOWER\""
+        },
+        {
+          "line": 745,
+          "identifier": "gText_BattleDome2",
+          "literal": "\"BATTLE DOME\""
+        },
+        {
+          "line": 746,
+          "identifier": "gText_BattlePalace2",
+          "literal": "\"BATTLE PALACE\""
+        },
+        {
+          "line": 747,
+          "identifier": "gText_BattleArena2",
+          "literal": "\"BATTLE ARENA\""
+        },
+        {
+          "line": 748,
+          "identifier": "gText_BattleFactory2",
+          "literal": "\"BATTLE FACTORY\""
+        },
+        {
+          "line": 749,
+          "identifier": "gText_BattlePike2",
+          "literal": "\"BATTLE PIKE\""
+        },
+        {
+          "line": 750,
+          "identifier": "gText_BattlePyramid2",
+          "literal": "\"BATTLE PYRAMID\""
+        },
+        {
+          "line": 751,
+          "identifier": "gText_BattleTowerDesc",
+          "literal": "\"Central arena of the CIRCUIT.\\nBring six for Double Battles!\""
+        },
+        {
+          "line": 752,
+          "identifier": "gText_BattleDomeDesc",
+          "literal": "\"Once home to grand tournaments.\\nNow a CIRCUIT registration desk.\""
+        },
+        {
+          "line": 753,
+          "identifier": "gText_BattlePalaceDesc",
+          "literal": "\"A quiet palace by the water.\\nRegister here for the CIRCUIT.\""
+        },
+        {
+          "line": 754,
+          "identifier": "gText_BattleArenaDesc",
+          "literal": "\"A gathering place for challengers.\\nRegister here for the CIRCUIT.\""
+        },
+        {
+          "line": 755,
+          "identifier": "gText_BattleFactoryDesc",
+          "literal": "\"The old rental-battle facility.\\nBring your own six to the CIRCUIT.\""
+        },
+        {
+          "line": 756,
+          "identifier": "gText_BattlePikeDesc",
+          "literal": "\"A familiar serpent-shaped hall.\\nRegister here for the CIRCUIT.\""
+        },
+        {
+          "line": 757,
+          "identifier": "gText_BattlePyramidDesc",
+          "literal": "\"A landmark built for adventure.\\nRegister here for the CIRCUIT.\""
+        },
+        {
+          "line": 758,
+          "identifier": "gText_Powder",
+          "literal": "\"POWDER\""
+        },
+        {
+          "line": 759,
+          "identifier": "gText_BerryPickingRecords",
+          "literal": "\"DODRIO BERRY-PICKING RECORDS\""
+        },
+        {
+          "line": 760,
+          "identifier": "gText_BerriesPicked",
+          "literal": "\"BERRIES picked:\""
+        },
+        {
+          "line": 761,
+          "identifier": "gText_BestScore",
+          "literal": "\"Best score:\""
+        },
+        {
+          "line": 762,
+          "identifier": "gText_BerriesInRowFivePlayers",
+          "literal": "\"BERRIES picked in a row with\\nfive players:\""
+        },
+        {
+          "line": 763,
+          "identifier": "gText_BerryPickingResults",
+          "literal": "\"Announcing BERRY-PICKING results!\""
+        },
+        {
+          "line": 764,
+          "identifier": "gText_10P30P50P50P",
+          "literal": "\"{CLEAR_TO 3}10P{CLEAR_TO 43}30P{CLEAR_TO 83}50P{CLEAR_TO 119}{EMOJI_MINUS}50P\""
+        },
+        {
+          "line": 765,
+          "identifier": "gText_AnnouncingRankings",
+          "literal": "\"Announcing rankings!\""
+        },
+        {
+          "line": 766,
+          "identifier": "gText_AnnouncingPrizes",
+          "literal": "\"Announcing prizes!\""
+        },
+        {
+          "line": 767,
+          "identifier": "gText_1Colon",
+          "literal": "\"1:\""
+        },
+        {
+          "line": 768,
+          "identifier": "gText_2Colon",
+          "literal": "\"2:\""
+        },
+        {
+          "line": 769,
+          "identifier": "gText_3Colon",
+          "literal": "\"3:\""
+        },
+        {
+          "line": 770,
+          "identifier": "gText_4Colon",
+          "literal": "\"4:\""
+        },
+        {
+          "line": 771,
+          "identifier": "gText_5Colon",
+          "literal": "\"5:\""
+        },
+        {
+          "line": 772,
+          "identifier": "gText_FirstPlacePrize",
+          "literal": "\"The first-place winner gets\\nthis {DYNAMIC 0}!\""
+        },
+        {
+          "line": 773,
+          "identifier": "gText_CantHoldAnyMore",
+          "literal": "\"You can't hold any more!\""
+        },
+        {
+          "line": 774,
+          "identifier": "gText_FilledStorageSpace",
+          "literal": "\"It filled its storage space.\""
+        },
+        {
+          "line": 775,
+          "identifier": "gText_WantToPlayAgain",
+          "literal": "\"Want to play again?\""
+        },
+        {
+          "line": 776,
+          "identifier": "gText_SomeoneDroppedOut",
+          "literal": "\"Somebody dropped out.\\nThe link will be canceled.\""
+        },
+        {
+          "line": 777,
+          "identifier": "gText_SpacePoints",
+          "literal": "\" points\""
+        },
+        {
+          "line": 778,
+          "identifier": "gText_CommunicationStandby3",
+          "literal": "\"Communication standby…\""
+        },
+        {
+          "line": 779,
+          "identifier": "gText_SpacePoints2",
+          "literal": "\" points\""
+        },
+        {
+          "line": 780,
+          "identifier": "gText_SpaceTimes3",
+          "literal": "\" time(s)\""
+        },
+        {
+          "line": 781,
+          "identifier": "gText_PkmnJumpRecords",
+          "literal": "\"POKéMON JUMP RECORDS\""
+        },
+        {
+          "line": 782,
+          "identifier": "gText_JumpsInARow",
+          "literal": "\"Jumps in a row:\""
+        },
+        {
+          "line": 783,
+          "identifier": "gText_BestScore2",
+          "literal": "\"Best score:\""
+        },
+        {
+          "line": 784,
+          "identifier": "gText_ExcellentsInARow",
+          "literal": "\"EXCELLENTS in a row:\""
+        },
+        {
+          "line": 785,
+          "identifier": "gText_AwesomeWonF701F700",
+          "literal": "\"Awesome score! You've\\nwon {DYNAMIC 1} {DYNAMIC 0}!\""
+        },
+        {
+          "line": 786,
+          "identifier": "gText_FilledStorageSpace2",
+          "literal": "\"It filled its storage space.\""
+        },
+        {
+          "line": 787,
+          "identifier": "gText_CantHoldMore",
+          "literal": "\"You can't hold any more!\""
+        },
+        {
+          "line": 788,
+          "identifier": "gText_WantToPlayAgain2",
+          "literal": "\"Want to play again?\""
+        },
+        {
+          "line": 789,
+          "identifier": "gText_SomeoneDroppedOut2",
+          "literal": "\"Somebody dropped out.\\nThe link will be canceled.\""
+        },
+        {
+          "line": 790,
+          "identifier": "gText_CommunicationStandby4",
+          "literal": "\"Communication standby…\""
+        },
+        {
+          "line": 791,
+          "identifier": "gText_LinkContestResults",
+          "literal": "\"{PLAYER}'s Link Contest Results\""
+        },
+        {
+          "line": 792,
+          "identifier": "gText_1st",
+          "literal": "\"1st\""
+        },
+        {
+          "line": 793,
+          "identifier": "gText_2nd",
+          "literal": "\"2nd\""
+        },
+        {
+          "line": 794,
+          "identifier": "gText_3rd",
+          "literal": "\"3rd\""
+        },
+        {
+          "line": 795,
+          "identifier": "gText_4th",
+          "literal": "\"4th\""
+        },
+        {
+          "line": 796,
+          "identifier": "gText_Friend",
+          "literal": "\"Friend\""
+        },
+        {
+          "line": 797,
+          "identifier": "gText_Pokemon3",
+          "literal": "\"POKeMON\""
+        },
+        {
+          "line": 798,
+          "identifier": "gJPText_MysteryGift",
+          "literal": "\"ふしぎなもらいもの\""
+        },
+        {
+          "line": 799,
+          "identifier": "gJPText_DecideStop",
+          "literal": "\"{A_BUTTON}けってい {B_BUTTON}やめる\""
+        },
+        {
+          "line": 800,
+          "identifier": "gJPText_ReceiveMysteryGiftWithEReader",
+          "literal": "\"カードeリーダー{PLUS}　で\\nふしぎなもらいものを　よみこみます\""
+        },
+        {
+          "line": 801,
+          "identifier": "gJPText_SelectConnectFromEReaderMenu",
+          "literal": "\"カードeリーダー{PLUS}の　メニューから\\n‘つうしん'を　えらび\""
+        },
+        {
+          "line": 802,
+          "identifier": "gJPText_SelectConnectWithGBA",
+          "literal": "\"‘ゲームボーイアドバンスとつうしん'\\nを　せんたく　してください\""
+        },
+        {
+          "line": 803,
+          "identifier": "gJPText_SelectConnectAndPressA",
+          "literal": "\"カードeリーダー{PLUS}の　‘つうしん'を\\nえらんで　Aボタンを　おしてください\""
+        },
+        {
+          "line": 804,
+          "identifier": "gJPText_LinkIsIncorrect",
+          "literal": "\"せつぞくが　まちがっています\""
+        },
+        {
+          "line": 805,
+          "identifier": "gJPText_CardReadingHasBeenHalted",
+          "literal": "\"カードの　よみこみを\\nちゅうし　しました\""
+        },
+        {
+          "line": 806,
+          "identifier": "gJPText_UnableConnectWithEReader",
+          "literal": "\"カードeリーダー{PLUS}と\\nつうしん　できません\""
+        },
+        {
+          "line": 807,
+          "identifier": "gJPText_Connecting",
+          "literal": "\"つうしん　ちゅう　です\""
+        },
+        {
+          "line": 808,
+          "identifier": "gJPText_ConnectionErrorCheckLink",
+          "literal": "\"つうしん　エラーです\\nせつぞくを　たしかめて　ください\""
+        },
+        {
+          "line": 809,
+          "identifier": "gJPText_ConnectionErrorTryAgain",
+          "literal": "\"つうしん　エラーです\\nはじめから　やりなおして　ください\""
+        },
+        {
+          "line": 810,
+          "identifier": "gJPText_AllowEReaderToLoadCard",
+          "literal": "\"カードeリーダー{PLUS}　に\\nカードを　よみこませて　ください\""
+        },
+        {
+          "line": 811,
+          "identifier": "gJPText_ConnectionComplete",
+          "literal": "\"つうしん　しゅうりょう！\""
+        },
+        {
+          "line": 812,
+          "identifier": "gJPText_NewTrainerHasComeToHoenn",
+          "literal": "\"あらたな　トレーナーが\\nホウエンに　やってきた！\""
+        },
+        {
+          "line": 813,
+          "identifier": "gJPText_PleaseWaitAMoment",
+          "literal": "\"しばらく　おまちください\""
+        },
+        {
+          "line": 814,
+          "identifier": "gJPText_WriteErrorUnableToSaveData",
+          "literal": "\"かきこみ　エラー　です\\nデータが　ほぞん　できませんでした\""
+        },
+        {
+          "line": 815,
+          "identifier": "gText_SingleBattleRoomResults",
+          "literal": "\"{PLAYER}'s Single Battle Room Results\""
+        },
+        {
+          "line": 816,
+          "identifier": "gText_DoubleBattleRoomResults",
+          "literal": "\"{PLAYER}'s Double Battle Room Results\""
+        },
+        {
+          "line": 817,
+          "identifier": "gText_MultiBattleRoomResults",
+          "literal": "\"{PLAYER}'s Multi Battle Room Results\""
+        },
+        {
+          "line": 818,
+          "identifier": "gText_LinkMultiBattleRoomResults",
+          "literal": "\"{PLAYER}'s Link Multi Battle Room Results\""
+        },
+        {
+          "line": 819,
+          "identifier": "gText_SingleBattleTourneyResults",
+          "literal": "\"{PLAYER}'s Single Battle Tourney Results\""
+        },
+        {
+          "line": 820,
+          "identifier": "gText_DoubleBattleTourneyResults",
+          "literal": "\"{PLAYER}'s Double Battle Tourney Results\""
+        },
+        {
+          "line": 821,
+          "identifier": "gText_SingleBattleHallResults",
+          "literal": "\"{PLAYER}'s Single Battle Hall Results\""
+        },
+        {
+          "line": 822,
+          "identifier": "gText_DoubleBattleHallResults",
+          "literal": "\"{PLAYER}'s Double Battle Hall Results\""
+        },
+        {
+          "line": 823,
+          "identifier": "gText_BattleChoiceResults",
+          "literal": "\"{PLAYER}'s Battle Choice Results\""
+        },
+        {
+          "line": 824,
+          "identifier": "gText_SetKOTourneyResults",
+          "literal": "\"{PLAYER}'s Set KO Tourney Results\""
+        },
+        {
+          "line": 825,
+          "identifier": "gText_BattleSwapSingleResults",
+          "literal": "\"{PLAYER}'s Battle Swap Single Results\""
+        },
+        {
+          "line": 826,
+          "identifier": "gText_BattleSwapDoubleResults",
+          "literal": "\"{PLAYER}'s Battle Swap Double Results\""
+        },
+        {
+          "line": 827,
+          "identifier": "gText_BattleQuestResults",
+          "literal": "\"{PLAYER}'s Battle Quest Results\""
+        },
+        {
+          "line": 828,
+          "identifier": "gText_Lv502",
+          "literal": "\"LV. 50\""
+        },
+        {
+          "line": 829,
+          "identifier": "gText_OpenLv",
+          "literal": "\"OPEN LV.\""
+        },
+        {
+          "line": 830,
+          "identifier": "gText_WinStreak",
+          "literal": "\"Win streak: {STR_VAR_1}\""
+        },
+        {
+          "line": 831,
+          "identifier": "gText_Current",
+          "literal": "\"CURRENT\""
+        },
+        {
+          "line": 832,
+          "identifier": "gText_Record",
+          "literal": "\"RECORD\""
+        },
+        {
+          "line": 833,
+          "identifier": "gText_Prev",
+          "literal": "\"PREV.\""
+        },
+        {
+          "line": 834,
+          "identifier": "gText_RentalSwap",
+          "literal": "\"Rental/Swap\""
+        },
+        {
+          "line": 835,
+          "identifier": "gText_Total",
+          "literal": "\"Total\""
+        },
+        {
+          "line": 836,
+          "identifier": "gText_ClearStreak",
+          "literal": "\"Clear streak: {STR_VAR_1}\""
+        },
+        {
+          "line": 837,
+          "identifier": "gText_Championships",
+          "literal": "\"Championships: {STR_VAR_1}\""
+        },
+        {
+          "line": 838,
+          "identifier": "gText_RoomsCleared",
+          "literal": "\"Rooms cleared: {STR_VAR_1}\""
+        },
+        {
+          "line": 839,
+          "identifier": "gText_TimesCleared",
+          "literal": "\"Times cleared:{CLEAR 5}{STR_VAR_1}\""
+        },
+        {
+          "line": 840,
+          "identifier": "gText_KOsInARow",
+          "literal": "\"KOs in a row: {STR_VAR_1}\""
+        },
+        {
+          "line": 841,
+          "identifier": "gText_TimesVar1",
+          "literal": "\"Times: {STR_VAR_1}\""
+        },
+        {
+          "line": 842,
+          "identifier": "gText_FloorsCleared",
+          "literal": "\"Floors cleared: {STR_VAR_1}\""
+        },
+        {
+          "line": 844,
+          "identifier": "gText_RecordsLv50",
+          "literal": "\"LV. 50\""
+        },
+        {
+          "line": 845,
+          "identifier": "gText_RecordsOpenLevel",
+          "literal": "\"OPEN LEVEL\""
+        },
+        {
+          "line": 846,
+          "identifier": "gText_FrontierFacilityWinStreak",
+          "literal": "\"Win streak: {STR_VAR_2}\""
+        },
+        {
+          "line": 847,
+          "identifier": "gText_FrontierFacilityClearStreak",
+          "literal": "\"Clear streak: {STR_VAR_2}\""
+        },
+        {
+          "line": 848,
+          "identifier": "gText_FrontierFacilityRoomsCleared",
+          "literal": "\"Rooms cleared: {STR_VAR_2}\""
+        },
+        {
+          "line": 849,
+          "identifier": "gText_FrontierFacilityKOsStreak",
+          "literal": "\"KOs in a row: {STR_VAR_2}\""
+        },
+        {
+          "line": 850,
+          "identifier": "gText_FrontierFacilityFloorsCleared",
+          "literal": "\"Floors cleared: {STR_VAR_2}\""
+        },
+        {
+          "line": 851,
+          "identifier": "gText_123Dot",
+          "literal": "\"1.\""
+        },
+        {
+          "line": 851,
+          "identifier": "gText_123Dot",
+          "literal": "\"2.\""
+        },
+        {
+          "line": 851,
+          "identifier": "gText_123Dot",
+          "literal": "\"3.\""
+        },
+        {
+          "line": 852,
+          "identifier": "gText_FrontierFacilityTotalCaughtSpeciesBanned",
+          "literal": "\" and {STR_VAR_2} of the POKéMON species\\nyou caught are inelegible\""
+        },
+        {
+          "line": 853,
+          "identifier": "gText_FrontierFacilityIncluding",
+          "literal": "\".\\pThese include \""
+        },
+        {
+          "line": 854,
+          "identifier": "gText_FrontierFacilityAreInelegible",
+          "literal": "\" are inelegible\""
+        },
+        {
+          "line": 856,
+          "identifier": "gText_YesNo",
+          "literal": "\"YES\\nNO\""
+        },
+        {
+          "line": 857,
+          "identifier": "gText_SelectorArrow3",
+          "literal": "\"▶\""
+        },
+        {
+          "line": 858,
+          "identifier": "gText_Peekaboo",
+          "literal": "\"PEEKABOO!\""
+        },
+        {
+          "line": 859,
+          "identifier": "gText_CommErrorCheckConnections",
+          "literal": "\"Communication error…\\nPlease check all connections,\\nthen turn the power OFF and ON.\""
+        },
+        {
+          "line": 860,
+          "identifier": "gText_CommErrorEllipsis",
+          "literal": "\"Communication error…\""
+        },
+        {
+          "line": 861,
+          "identifier": "gText_MoveCloserToLinkPartner",
+          "literal": "\"Move closer to your link partner(s).\\nAvoid obstacles between partners.\""
+        },
+        {
+          "line": 862,
+          "identifier": "gText_ABtnRegistrationCounter",
+          "literal": "\"A Button: Registration Counter\""
+        },
+        {
+          "line": 863,
+          "identifier": "gText_ABtnTitleScreen",
+          "literal": "\"A Button: Title Screen\""
+        },
+        {
+          "line": 864,
+          "identifier": "gText_NumPlayerLink",
+          "literal": "\"{STR_VAR_1}P LINK\""
+        },
+        {
+          "line": 865,
+          "identifier": "gText_BronzeCard",
+          "literal": "\"BRONZE\""
+        },
+        {
+          "line": 866,
+          "identifier": "gText_CopperCard",
+          "literal": "\"COPPER\""
+        },
+        {
+          "line": 867,
+          "identifier": "gText_SilverCard",
+          "literal": "\"SILVER\""
+        },
+        {
+          "line": 868,
+          "identifier": "gText_GoldCard",
+          "literal": "\"GOLD\""
+        },
+        {
+          "line": 869,
+          "identifier": "gText_Day",
+          "literal": "\"DAY\""
+        },
+        {
+          "line": 870,
+          "identifier": "gText_Colon3",
+          "literal": "\":\""
+        },
+        {
+          "line": 871,
+          "identifier": "gText_Confirm2",
+          "literal": "\"CONFIRM\""
+        },
+        {
+          "line": 872,
+          "identifier": "gText_Days",
+          "literal": "\"Days\""
+        },
+        {
+          "line": 873,
+          "identifier": "gText_TimeColon2",
+          "literal": "\"Time:\""
+        },
+        {
+          "line": 874,
+          "identifier": "gText_GameTime",
+          "literal": "\"Game time\""
+        },
+        {
+          "line": 875,
+          "identifier": "gText_RTCTime",
+          "literal": "\"RTC time\""
+        },
+        {
+          "line": 876,
+          "identifier": "gText_UpdatedTime",
+          "literal": "\"Updated time\""
+        },
+        {
+          "line": 877,
+          "identifier": "gText_MenuPokedex",
+          "literal": "\"Pokédex\""
+        },
+        {
+          "line": 878,
+          "identifier": "gText_MenuPokemon",
+          "literal": "\"Pokémon\""
+        },
+        {
+          "line": 879,
+          "identifier": "gText_MenuBag",
+          "literal": "\"Bag\""
+        },
+        {
+          "line": 880,
+          "identifier": "gText_MenuPokenav",
+          "literal": "\"PokéNav\""
+        },
+        {
+          "line": 881,
+          "identifier": "gText_MenuPlayer",
+          "literal": "\"{PLAYER}\""
+        },
+        {
+          "line": 882,
+          "identifier": "gText_MenuSave",
+          "literal": "\"Save\""
+        },
+        {
+          "line": 883,
+          "identifier": "gText_MenuOption",
+          "literal": "\"Option\""
+        },
+        {
+          "line": 884,
+          "identifier": "gText_MenuExit",
+          "literal": "\"Exit\""
+        },
+        {
+          "line": 885,
+          "identifier": "gText_MenuRetire",
+          "literal": "\"Retire\""
+        },
+        {
+          "line": 886,
+          "identifier": "gText_MenuRest",
+          "literal": "\"Rest\""
+        },
+        {
+          "line": 887,
+          "identifier": "gText_MenuDexNav",
+          "literal": "\"DexNav\""
+        },
+        {
+          "line": 888,
+          "identifier": "gText_SafariBallStock",
+          "literal": "\"SAFARI BALLS\\nStock: {STR_VAR_1}\""
+        },
+        {
+          "line": 889,
+          "identifier": "gText_MenuSafariStats",
+          "literal": "\"{STR_VAR_1}/{STR_VAR_2}\\nBALLS  {STR_VAR_3}\""
+        },
+        {
+          "line": 890,
+          "identifier": "gText_BattlePyramidFloor",
+          "literal": "\"Battle Pyramid\\n{STR_VAR_1}\""
+        },
+        {
+          "line": 891,
+          "identifier": "gText_Floor1",
+          "literal": "\"Floor 1\""
+        },
+        {
+          "line": 892,
+          "identifier": "gText_Floor2",
+          "literal": "\"Floor 2\""
+        },
+        {
+          "line": 893,
+          "identifier": "gText_Floor3",
+          "literal": "\"Floor 3\""
+        },
+        {
+          "line": 894,
+          "identifier": "gText_Floor4",
+          "literal": "\"Floor 4\""
+        },
+        {
+          "line": 895,
+          "identifier": "gText_Floor5",
+          "literal": "\"Floor 5\""
+        },
+        {
+          "line": 896,
+          "identifier": "gText_Floor6",
+          "literal": "\"Floor 6\""
+        },
+        {
+          "line": 897,
+          "identifier": "gText_Floor7",
+          "literal": "\"Floor 7\""
+        },
+        {
+          "line": 898,
+          "identifier": "gText_Peak",
+          "literal": "\"Peak\""
+        },
+        {
+          "line": 899,
+          "identifier": "gText_LinkStandby2",
+          "literal": "\"Link standby…\\n… … B Button: Cancel\""
+        },
+        {
+          "line": 900,
+          "identifier": "gText_PressAToLoadEvent",
+          "literal": "\"Press the A Button to load event.\\n… … B Button: Cancel\""
+        },
+        {
+          "line": 901,
+          "identifier": "gText_LoadingEvent",
+          "literal": "\"Loading event…\""
+        },
+        {
+          "line": 902,
+          "identifier": "gText_DontRemoveCableTurnOff",
+          "literal": "\"Don't remove the Game Link cable.\\nDon't turn off the power.\""
+        },
+        {
+          "line": 903,
+          "identifier": "gText_EventSafelyLoaded",
+          "literal": "\"The event was safely loaded.\""
+        },
+        {
+          "line": 904,
+          "identifier": "gText_LoadErrorEndingSession",
+          "literal": "\"Loading error.\\nEnding session.\""
+        },
+        {
+          "line": 905,
+          "identifier": "gJPText_Player",
+          "literal": "\"プレイヤー\""
+        },
+        {
+          "line": 906,
+          "identifier": "gJPText_Sama",
+          "literal": "\"さま\""
+        },
+        {
+          "line": 907,
+          "identifier": "gText_DexHoenn",
+          "literal": "\"HOENN\""
+        },
+        {
+          "line": 908,
+          "identifier": "gText_DexNational",
+          "literal": "\"NATIONAL\""
+        },
+        {
+          "line": 909,
+          "identifier": "gText_PokedexDiploma",
+          "literal": "\"PLAYER: {CLEAR 16}{COLOR RED}{SHADOW LIGHT_RED}{PLAYER}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}\\n\\nThis document certifies\\nthat you have successfully\\ncompleted your\\n{STR_VAR_1} POKéDEX.\\n\\n{CLEAR_TO 66}{COLOR RED}{SHADOW LIGHT_RED}GAME FREAK\""
+        },
+        {
+          "line": 910,
+          "identifier": "gJPText_GameFreak",
+          "literal": "\"{COLOR RED}{SHADOW LIGHT_RED}ゲ-ムフリ-ク\""
+        },
+        {
+          "line": 911,
+          "identifier": "gText_DiplomaEmpty",
+          "literal": "\"{COLOR RED}{SHADOW LIGHT_RED}\""
+        },
+        {
+          "line": 912,
+          "identifier": "gText_Hoenn",
+          "literal": "\"HOENN\""
+        },
+        {
+          "line": 913,
+          "identifier": "gText_Kanto",
+          "literal": "\"KANTO\""
+        },
+        {
+          "line": 914,
+          "identifier": "gText_XWillBeSentToY",
+          "literal": "\"{STR_VAR_2} will be\\nsent to {STR_VAR_1}.\""
+        },
+        {
+          "line": 915,
+          "identifier": "gText_ByeByeVar1",
+          "literal": "\"Bye-bye, {STR_VAR_2}!\""
+        },
+        {
+          "line": 916,
+          "identifier": "gText_XSentOverY",
+          "literal": "\"{STR_VAR_1} sent over {STR_VAR_3}.\""
+        },
+        {
+          "line": 917,
+          "identifier": "gText_TakeGoodCareOfX",
+          "literal": "\"Take good care of {STR_VAR_3}!\""
+        },
+        {
+          "line": 919,
+          "identifier": "gText_ThreeQuestionMarks",
+          "literal": "\"???\""
+        },
+        {
+          "line": 920,
+          "identifier": "gText_MaxHP",
+          "literal": "\"MAX. HP\""
+        },
+        {
+          "line": 921,
+          "identifier": "gText_Attack",
+          "literal": "\"ATTACK\""
+        },
+        {
+          "line": 922,
+          "identifier": "gText_Defense",
+          "literal": "\"DEFENSE\""
+        },
+        {
+          "line": 923,
+          "identifier": "gText_Speed",
+          "literal": "\"SPEED\""
+        },
+        {
+          "line": 924,
+          "identifier": "gText_SpAtk",
+          "literal": "\"SP. ATK\""
+        },
+        {
+          "line": 925,
+          "identifier": "gText_SpDef",
+          "literal": "\"SP. DEF\""
+        },
+        {
+          "line": 926,
+          "identifier": "gText_Plus",
+          "literal": "\"{PLUS}\""
+        },
+        {
+          "line": 927,
+          "identifier": "gText_Dash",
+          "literal": "\"-\""
+        },
+        {
+          "line": 928,
+          "identifier": "gText_MixingRecords",
+          "literal": "\"Mixing records…\""
+        },
+        {
+          "line": 929,
+          "identifier": "gText_RecordMixingComplete",
+          "literal": "\"Record mixing completed.\\nThank you for waiting.\""
+        },
+        {
+          "line": 930,
+          "identifier": "gText_RentalPkmn2",
+          "literal": "\"RENTAL POKéMON\""
+        },
+        {
+          "line": 931,
+          "identifier": "gText_SelectFirstPkmn",
+          "literal": "\"Select the first POKéMON.\""
+        },
+        {
+          "line": 932,
+          "identifier": "gText_SelectSecondPkmn",
+          "literal": "\"Select the second POKéMON.\""
+        },
+        {
+          "line": 933,
+          "identifier": "gText_SelectThirdPkmn",
+          "literal": "\"Select the third POKéMON.\""
+        },
+        {
+          "line": 934,
+          "identifier": "gText_Rent",
+          "literal": "\"RENT\""
+        },
+        {
+          "line": 935,
+          "identifier": "gText_Summary",
+          "literal": "\"SUMMARY\""
+        },
+        {
+          "line": 936,
+          "identifier": "gText_Others2",
+          "literal": "\"OTHERS\""
+        },
+        {
+          "line": 937,
+          "identifier": "gText_Deselect",
+          "literal": "\"DESELECT\""
+        },
+        {
+          "line": 938,
+          "identifier": "gText_TheseThreePkmnOkay",
+          "literal": "\"Are these three POKéMON OK?\""
+        },
+        {
+          "line": 939,
+          "identifier": "gText_Yes2",
+          "literal": "\"YES\""
+        },
+        {
+          "line": 940,
+          "identifier": "gText_No2",
+          "literal": "\"NO\""
+        },
+        {
+          "line": 941,
+          "identifier": "gText_CantSelectSamePkmn",
+          "literal": "\"Can't select same {PKMN}.\""
+        },
+        {
+          "line": 942,
+          "identifier": "gText_PkmnSwap",
+          "literal": "\"POKéMON SWAP\""
+        },
+        {
+          "line": 943,
+          "identifier": "gText_SelectPkmnToSwap",
+          "literal": "\"Select POKéMON to swap.\""
+        },
+        {
+          "line": 944,
+          "identifier": "gText_SelectPkmnToAccept",
+          "literal": "\"Select POKéMON to accept.\""
+        },
+        {
+          "line": 945,
+          "identifier": "gText_Swap",
+          "literal": "\"SWAP\""
+        },
+        {
+          "line": 946,
+          "identifier": "gText_Summary2",
+          "literal": "\"SUMMARY\""
+        },
+        {
+          "line": 947,
+          "identifier": "gText_Rechoose",
+          "literal": "\"RECHOOSE\""
+        },
+        {
+          "line": 948,
+          "identifier": "gText_QuitSwapping",
+          "literal": "\"Quit swapping?\""
+        },
+        {
+          "line": 949,
+          "identifier": "gText_Yes3",
+          "literal": "\"YES\""
+        },
+        {
+          "line": 950,
+          "identifier": "gText_No3",
+          "literal": "\"NO\""
+        },
+        {
+          "line": 951,
+          "identifier": "gText_PkmnForSwap",
+          "literal": "\"{PKMN} FOR SWAP\""
+        },
+        {
+          "line": 952,
+          "identifier": "gText_Cancel3",
+          "literal": "\"CANCEL\""
+        },
+        {
+          "line": 953,
+          "identifier": "gText_Swap2",
+          "literal": "\"SWAP\""
+        },
+        {
+          "line": 954,
+          "identifier": "gText_Accept",
+          "literal": "\"ACCEPT\""
+        },
+        {
+          "line": 955,
+          "identifier": "gText_AcceptThisPkmn",
+          "literal": "\"Accept this POKéMON?\""
+        },
+        {
+          "line": 956,
+          "identifier": "gText_4Spaces",
+          "literal": "\"    \""
+        },
+        {
+          "line": 957,
+          "identifier": "gText_SamePkmnInPartyAlready",
+          "literal": "\"Same {PKMN} in party already.\""
+        },
+        {
+          "line": 958,
+          "identifier": "gText_DecimalPoint",
+          "literal": "\".\""
+        },
+        {
+          "line": 959,
+          "identifier": "gText_SavingPlayer",
+          "literal": "\"PLAYER\""
+        },
+        {
+          "line": 960,
+          "identifier": "gText_SavingBadges",
+          "literal": "\"BADGES\""
+        },
+        {
+          "line": 961,
+          "identifier": "gText_SavingPokedex",
+          "literal": "\"POKéDEX\""
+        },
+        {
+          "line": 962,
+          "identifier": "gText_SavingTime",
+          "literal": "\"TIME\""
+        },
+        {
+          "line": 963,
+          "identifier": "gText_WirelessCommStatus",
+          "literal": "\"Wireless Communication Status\""
+        },
+        {
+          "line": 964,
+          "identifier": "gText_PeopleTrading",
+          "literal": "\"People trading:\""
+        },
+        {
+          "line": 965,
+          "identifier": "gText_PeopleBattling",
+          "literal": "\"People battling:\""
+        },
+        {
+          "line": 966,
+          "identifier": "gText_PeopleInUnionRoom",
+          "literal": "\"People in the UNION ROOM:\""
+        },
+        {
+          "line": 967,
+          "identifier": "gText_PeopleCommunicating",
+          "literal": "\"People communicating:\""
+        },
+        {
+          "line": 968,
+          "identifier": "gText_F700Players",
+          "literal": "\"{DYNAMIC 0} players\""
+        },
+        {
+          "line": 969,
+          "identifier": "gText_F701Players",
+          "literal": "\"{DYNAMIC 1} players\""
+        },
+        {
+          "line": 970,
+          "identifier": "gText_F702Players",
+          "literal": "\"{DYNAMIC 2} players\""
+        },
+        {
+          "line": 971,
+          "identifier": "gText_F703Players",
+          "literal": "\"{DYNAMIC 3} players\""
+        },
+        {
+          "line": 980,
+          "identifier": "gText_WonderCards",
+          "literal": "\"WONDER CARDS\""
+        },
+        {
+          "line": 981,
+          "identifier": "gText_WonderNews",
+          "literal": "\"WONDER NEWS\""
+        },
+        {
+          "line": 982,
+          "identifier": "gText_WirelessCommunication",
+          "literal": "\"WIRELESS COMMUNICATION\""
+        },
+        {
+          "line": 983,
+          "identifier": "gText_Friend2",
+          "literal": "\"FRIEND\""
+        },
+        {
+          "line": 984,
+          "identifier": "gText_Exit3",
+          "literal": "\"EXIT\""
+        },
+        {
+          "line": 985,
+          "identifier": "gText_Receive",
+          "literal": "\"RECEIVE\""
+        },
+        {
+          "line": 986,
+          "identifier": "gText_Send",
+          "literal": "\"SEND\""
+        },
+        {
+          "line": 987,
+          "identifier": "gText_Toss",
+          "literal": "\"TOSS\""
+        },
+        {
+          "line": 988,
+          "identifier": "gText_VarietyOfEventsImportedWireless",
+          "literal": "\"A variety of events will be imported\\nover Wireless Communication.\""
+        },
+        {
+          "line": 989,
+          "identifier": "gText_WonderCardsInPossession",
+          "literal": "\"Read the WONDER CARDS in your\\npossession.\""
+        },
+        {
+          "line": 990,
+          "identifier": "gText_ReadNewsThatArrived",
+          "literal": "\"Read the NEWS that arrived.\""
+        },
+        {
+          "line": 991,
+          "identifier": "gText_ReturnToTitle",
+          "literal": "\"Return to the title screen.\""
+        },
+        {
+          "line": 992,
+          "identifier": "gText_DontHaveCardNewOneInput",
+          "literal": "\"You don't have a WONDER CARD,\\nso a new CARD will be input.\""
+        },
+        {
+          "line": 993,
+          "identifier": "gText_DontHaveNewsNewOneInput",
+          "literal": "\"You don't have any WONDER NEWS,\\nso new NEWS will be input.\""
+        },
+        {
+          "line": 994,
+          "identifier": "gText_WhereShouldCardBeAccessed",
+          "literal": "\"Where should the WONDER CARD\\nbe accessed?\""
+        },
+        {
+          "line": 995,
+          "identifier": "gText_WhereShouldNewsBeAccessed",
+          "literal": "\"Where should the WONDER NEWS\\nbe accessed?\""
+        },
+        {
+          "line": 996,
+          "identifier": "gText_CommunicationStandbyBButtonCancel",
+          "literal": "\"Communication standby…\\nB Button: Cancel\""
+        },
+        {
+          "line": 997,
+          "identifier": "gText_Communicating",
+          "literal": "\"Communicating…\""
+        },
+        {
+          "line": 998,
+          "identifier": "gText_CommunicationCompleted",
+          "literal": "\"Communication completed.\""
+        },
+        {
+          "line": 999,
+          "identifier": "gText_CommunicationError",
+          "literal": "\"Communication error.\""
+        },
+        {
+          "line": 1000,
+          "identifier": "gText_CommunicationCanceled",
+          "literal": "\"Communication has been canceled.\""
+        },
+        {
+          "line": 1001,
+          "identifier": "gText_ThrowAwayWonderCard",
+          "literal": "\"Throw away the WONDER CARD\\nand input a new CARD?\""
+        },
+        {
+          "line": 1002,
+          "identifier": "gText_HaventReceivedCardsGift",
+          "literal": "\"You haven't received the CARD's gift\\nyet. Input a new CARD anyway?\""
+        },
+        {
+          "line": 1003,
+          "identifier": "gText_WonderCardReceivedFrom",
+          "literal": "\"A WONDER CARD has been received\\nfrom {STR_VAR_1}.\""
+        },
+        {
+          "line": 1004,
+          "identifier": "gText_WonderNewsReceivedFrom",
+          "literal": "\"A WONDER NEWS item has been\\nreceived from {STR_VAR_1}.\""
+        },
+        {
+          "line": 1005,
+          "identifier": "gText_WonderCardReceived",
+          "literal": "\"A new WONDER CARD has been\\nreceived.\""
+        },
+        {
+          "line": 1006,
+          "identifier": "gText_WonderNewsReceived",
+          "literal": "\"A new WONDER NEWS item has been\\nreceived.\""
+        },
+        {
+          "line": 1007,
+          "identifier": "gText_NewStampReceived",
+          "literal": "\"A new STAMP has been received.\""
+        },
+        {
+          "line": 1008,
+          "identifier": "gText_NewTrainerReceived",
+          "literal": "\"A new TRAINER has arrived.\""
+        },
+        {
+          "line": 1009,
+          "identifier": "gText_AlreadyHadCard",
+          "literal": "\"You already had that\\nWONDER CARD.\""
+        },
+        {
+          "line": 1010,
+          "identifier": "gText_AlreadyHadNews",
+          "literal": "\"You already had that\\nWONDER NEWS item.\""
+        },
+        {
+          "line": 1011,
+          "identifier": "gText_AlreadyHadStamp",
+          "literal": "\"You already had that\\nSTAMP.\""
+        },
+        {
+          "line": 1012,
+          "identifier": "gText_NoMoreRoomForStamps",
+          "literal": "\"There's no more room for adding\\nSTAMPS.\""
+        },
+        {
+          "line": 1013,
+          "identifier": "gText_RecordUploadedViaWireless",
+          "literal": "\"Your record has been uploaded via\\nWIRELESS COMMUNICATION.\""
+        },
+        {
+          "line": 1014,
+          "identifier": "gText_CantAcceptCardFromTrainer",
+          "literal": "\"You can't accept a WONDER CARD\\nfrom this TRAINER.\""
+        },
+        {
+          "line": 1015,
+          "identifier": "gText_CantAcceptNewsFromTrainer",
+          "literal": "\"You can't accept WONDER NEWS\\nfrom this TRAINER.\""
+        },
+        {
+          "line": 1016,
+          "identifier": "gText_NothingSentOver",
+          "literal": "\"Nothing was sent over…\""
+        },
+        {
+          "line": 1017,
+          "identifier": "gText_WhatToDoWithCards",
+          "literal": "\"What would you like to do\\nwith the WONDER CARDS?\""
+        },
+        {
+          "line": 1018,
+          "identifier": "gText_WhatToDoWithNews",
+          "literal": "\"What would you like to do\\nwith the WONDER NEWS?\""
+        },
+        {
+          "line": 1019,
+          "identifier": "gText_SendingWonderCard",
+          "literal": "\"Sending your WONDER CARD…\""
+        },
+        {
+          "line": 1020,
+          "identifier": "gText_SendingWonderNews",
+          "literal": "\"Sending your WONDER NEWS item…\""
+        },
+        {
+          "line": 1021,
+          "identifier": "gText_WonderCardSentTo",
+          "literal": "\"Your WONDER CARD has been sent\\nto {STR_VAR_1}.\""
+        },
+        {
+          "line": 1022,
+          "identifier": "gText_WonderNewsSentTo",
+          "literal": "\"Your WONDER NEWS item has been\\nsent to {STR_VAR_1}.\""
+        },
+        {
+          "line": 1023,
+          "identifier": "gText_StampSentTo",
+          "literal": "\"A STAMP has been sent to {STR_VAR_1}.\""
+        },
+        {
+          "line": 1024,
+          "identifier": "gText_GiftSentTo",
+          "literal": "\"A GIFT has been sent to {STR_VAR_1}.\""
+        },
+        {
+          "line": 1025,
+          "identifier": "gText_OtherTrainerHasCard",
+          "literal": "\"The other TRAINER has the same\\nWONDER CARD already.\""
+        },
+        {
+          "line": 1026,
+          "identifier": "gText_OtherTrainerHasNews",
+          "literal": "\"The other TRAINER has the same\\nWONDER NEWS already.\""
+        },
+        {
+          "line": 1027,
+          "identifier": "gText_OtherTrainerHasStamp",
+          "literal": "\"The other TRAINER has the same\\nSTAMP already.\""
+        },
+        {
+          "line": 1028,
+          "identifier": "gText_OtherTrainerCanceled",
+          "literal": "\"The other TRAINER canceled\\ncommunication.\""
+        },
+        {
+          "line": 1029,
+          "identifier": "gText_CantSendGiftToTrainer",
+          "literal": "\"You can't send a MYSTERY GIFT to\\nthis TRAINER.\""
+        },
+        {
+          "line": 1030,
+          "identifier": "gText_IfThrowAwayCardEventWontHappen",
+          "literal": "\"If you throw away the CARD,\\nits event won't happen. Okay?\""
+        },
+        {
+          "line": 1031,
+          "identifier": "gText_OkayToDiscardNews",
+          "literal": "\"Is it okay to discard this\\nNEWS item?\""
+        },
+        {
+          "line": 1032,
+          "identifier": "gText_HaventReceivedGiftOkayToDiscard",
+          "literal": "\"You haven't received the\\nGIFT. Is it okay to discard?\""
+        },
+        {
+          "line": 1033,
+          "identifier": "gText_DataWillBeSaved",
+          "literal": "\"Data will be saved.\\nPlease wait.\""
+        },
+        {
+          "line": 1034,
+          "identifier": "gText_SaveCompletedPressA",
+          "literal": "\"Save completed.\\nPlease press the A Button.\""
+        },
+        {
+          "line": 1035,
+          "identifier": "gText_WonderCardThrownAway",
+          "literal": "\"The WONDER CARD was thrown away.\""
+        },
+        {
+          "line": 1036,
+          "identifier": "gText_WonderNewsThrownAway",
+          "literal": "\"The WONDER NEWS was thrown away.\""
+        },
+        {
+          "line": 1037,
+          "identifier": "gText_MysteryGift",
+          "literal": "\"MYSTERY GIFT\""
+        },
+        {
+          "line": 1038,
+          "identifier": "gText_PickOKExit",
+          "literal": "\"{DPAD_UPDOWN}PICK {A_BUTTON}OK {B_BUTTON}EXIT\""
+        },
+        {
+          "line": 1039,
+          "identifier": "gText_PickOKCancel",
+          "literal": "\"{DPAD_UPDOWN}PICK {A_BUTTON}OK {B_BUTTON}CANCEL\""
+        },
+        {
+          "line": 1040,
+          "identifier": "gText_PlayersBattleResults",
+          "literal": "\"{PLAYER}'s BATTLE RESULTS\""
+        },
+        {
+          "line": 1041,
+          "identifier": "gText_TotalRecordWLD",
+          "literal": "\"TOTAL RECORD W:{STR_VAR_1} L:{STR_VAR_2} D:{STR_VAR_3}\""
+        },
+        {
+          "line": 1042,
+          "identifier": "gText_WinLoseDraw",
+          "literal": "\"{CLEAR_TO 83}WIN{CLEAR_TO 128}LOSE{CLEAR_TO 176}DRAW\""
+        },
+        {
+          "line": 1043,
+          "identifier": "gText_CommunicationStandby5",
+          "literal": "\"Communication standby…\""
+        },
+        {
+          "line": 1044,
+          "identifier": "gDaycareText_GetAlongVeryWell",
+          "literal": "\"The two seem to get along\\nvery well.\""
+        },
+        {
+          "line": 1045,
+          "identifier": "gDaycareText_GetAlong",
+          "literal": "\"The two seem to get along.\""
+        },
+        {
+          "line": 1046,
+          "identifier": "gDaycareText_DontLikeOther",
+          "literal": "\"The two don't seem to like\\neach other much.\""
+        },
+        {
+          "line": 1047,
+          "identifier": "gDaycareText_PlayOther",
+          "literal": "\"The two prefer to play with other\\nPOKéMON than each other.\""
+        },
+        {
+          "line": 1048,
+          "identifier": "gText_NewLine2",
+          "literal": "\"\\n\""
+        },
+        {
+          "line": 1049,
+          "identifier": "gText_Exit4",
+          "literal": "\"EXIT\""
+        },
+        {
+          "line": 1050,
+          "identifier": "gText_Lv",
+          "literal": "\"{LV}\""
+        },
+        {
+          "line": 1051,
+          "identifier": "gText_TimeBoard",
+          "literal": "\"TIME BOARD\""
+        },
+        {
+          "line": 1052,
+          "identifier": "gText_TimeCleared",
+          "literal": "\"TIME CLEARED \""
+        },
+        {
+          "line": 1053,
+          "identifier": "gText_XMinYDotZSec",
+          "literal": "\"{STR_VAR_1} min. {STR_VAR_2}.{STR_VAR_3} sec.\""
+        },
+        {
+          "line": 1054,
+          "identifier": "gText_TrainerHill1F",
+          "literal": "\"1F\""
+        },
+        {
+          "line": 1055,
+          "identifier": "gText_TrainerHill2F",
+          "literal": "\"2F\""
+        },
+        {
+          "line": 1056,
+          "identifier": "gText_TrainerHill3F",
+          "literal": "\"3F\""
+        },
+        {
+          "line": 1057,
+          "identifier": "gText_TrainerHill4F",
+          "literal": "\"4F\""
+        },
+        {
+          "line": 1058,
+          "identifier": "gText_TeachWhichMoveToPkmn",
+          "literal": "\"Teach which {STR_VAR_3} to\\n{STR_VAR_1}?\""
+        },
+        {
+          "line": 1059,
+          "identifier": "gText_MoveRelearnerTeachMoveConfirm",
+          "literal": "\"Teach {STR_VAR_2}?\""
+        },
+        {
+          "line": 1060,
+          "identifier": "gText_MoveRelearnerTeachMoveConfirmUseTm",
+          "literal": "\"Teach {STR_VAR_2}?\\nThis will consume one {STR_VAR_3}.\""
+        },
+        {
+          "line": 1061,
+          "identifier": "gText_MoveRelearnerPkmnLearnedMove",
+          "literal": "\"{STR_VAR_1} learned\\n{STR_VAR_2}!\""
+        },
+        {
+          "line": 1062,
+          "identifier": "gText_MoveRelearnerPkmnTryingToLearnMove",
+          "literal": "\"{STR_VAR_1} is trying to learn\\n{STR_VAR_2}.\\pBut {STR_VAR_1} can't learn more\\nthan four moves.\\pDelete an older move to make\\nroom for {STR_VAR_2}?\""
+        },
+        {
+          "line": 1063,
+          "identifier": "gText_MoveRelearnerStopTryingToTeachMove",
+          "literal": "\"Stop trying to teach\\n{STR_VAR_2}?\""
+        },
+        {
+          "line": 1064,
+          "identifier": "gText_MoveRelearnerAndPoof",
+          "literal": "\"{PAUSE 32}1, {PAUSE 15}2, and {PAUSE 15}… {PAUSE 15}… {PAUSE 15}… {PAUSE 15}{PLAY_SE SE_BALL_BOUNCE_1}Poof!\\p\""
+        },
+        {
+          "line": 1065,
+          "identifier": "gText_MoveRelearnerPkmnForgotMoveAndLearnedNew",
+          "literal": "\"{STR_VAR_1} forgot {STR_VAR_3}.\\pAnd…\\p{STR_VAR_1} learned {STR_VAR_2}.\""
+        },
+        {
+          "line": 1066,
+          "identifier": "gText_MoveRelearnedPkmnDidNotLearnMove",
+          "literal": "\"{STR_VAR_1} did not learn the\\nmove {STR_VAR_2}.\""
+        },
+        {
+          "line": 1067,
+          "identifier": "gText_MoveRelearnerGiveUp",
+          "literal": "\"Give up trying to teach a new\\nmove to {STR_VAR_1}?\""
+        },
+        {
+          "line": 1068,
+          "identifier": "gText_MoveRelearnerStop",
+          "literal": "\"Stop trying to learn new\\nmoves for {STR_VAR_1}?\""
+        },
+        {
+          "line": 1069,
+          "identifier": "gText_MoveRelearnerWhichMoveToForget",
+          "literal": "\"Which move should be\\nforgotten?\\p\""
+        },
+        {
+          "line": 1070,
+          "identifier": "gText_MoveRelearnerBattleMoves",
+          "literal": "\"BATTLE MOVES\""
+        },
+        {
+          "line": 1071,
+          "identifier": "gText_MoveRelearnerContestMovesTitle",
+          "literal": "\"CONTEST MOVES\""
+        },
+        {
+          "line": 1072,
+          "identifier": "gText_MoveRelearnerType",
+          "literal": "\"TYPE/\""
+        },
+        {
+          "line": 1073,
+          "identifier": "gText_MoveRelearnerPP",
+          "literal": "\"PP/\""
+        },
+        {
+          "line": 1074,
+          "identifier": "gText_MoveRelearnerPower",
+          "literal": "\"POWER/\""
+        },
+        {
+          "line": 1075,
+          "identifier": "gText_MoveRelearnerAccuracy",
+          "literal": "\"ACCURACY/\""
+        },
+        {
+          "line": 1076,
+          "identifier": "gText_MoveRelearnerAppeal",
+          "literal": "\"APPEAL\""
+        },
+        {
+          "line": 1077,
+          "identifier": "gText_MoveRelearnerJam",
+          "literal": "\"JAM\""
+        },
+        {
+          "line": 1078,
+          "identifier": "gText_ClearAllSaveData",
+          "literal": "\"Clear all save data areas?\""
+        },
+        {
+          "line": 1079,
+          "identifier": "gText_ClearingData",
+          "literal": "\"Clearing data…\\nPlease wait.\""
+        },
+        {
+          "line": 1080,
+          "identifier": "gText_IsThisTheCorrectTime",
+          "literal": "\"Is this the correct time?\""
+        },
+        {
+          "line": 1081,
+          "identifier": "gText_Confirm3",
+          "literal": "\"CONFIRM\""
+        },
+        {
+          "line": 1082,
+          "identifier": "gText_Cancel4",
+          "literal": "\"CANCEL\""
+        },
+        {
+          "line": 1083,
+          "identifier": "gText_CommStandbyAwaitingOtherPlayer",
+          "literal": "\"Communication standby…\\nAwaiting another player to choose.\""
+        },
+        {
+          "line": 1084,
+          "identifier": "gText_BattleWasRefused",
+          "literal": "\"The battle was refused.{PAUSE 60}\""
+        },
+        {
+          "line": 1085,
+          "identifier": "gText_RefusedBattle",
+          "literal": "\"Refused the battle.{PAUSE 60}\""
+        },
+        {
+          "line": 1086,
+          "identifier": "gText_NoWeather",
+          "literal": "\"NO WEATHER\""
+        },
+        {
+          "line": 1087,
+          "identifier": "gText_Sunny",
+          "literal": "\"SUNNY\""
+        },
+        {
+          "line": 1088,
+          "identifier": "gText_Sunny2",
+          "literal": "\"SUNNY2\""
+        },
+        {
+          "line": 1089,
+          "identifier": "gText_Rain",
+          "literal": "\"RAIN\""
+        },
+        {
+          "line": 1090,
+          "identifier": "gText_Snow",
+          "literal": "\"SNOW\""
+        },
+        {
+          "line": 1091,
+          "identifier": "gText_Lightning",
+          "literal": "\"LIGHTNING\""
+        },
+        {
+          "line": 1092,
+          "identifier": "gText_Fog",
+          "literal": "\"FOG\""
+        },
+        {
+          "line": 1093,
+          "identifier": "gText_VolcanoAsh",
+          "literal": "\"VOLCANO ASH\""
+        },
+        {
+          "line": 1094,
+          "identifier": "gText_Sandstorm",
+          "literal": "\"SANDSTORM\""
+        },
+        {
+          "line": 1095,
+          "identifier": "gText_Fog2",
+          "literal": "\"FOG2\""
+        },
+        {
+          "line": 1096,
+          "identifier": "gText_Seafloor",
+          "literal": "\"SEAFLOOR\""
+        },
+        {
+          "line": 1097,
+          "identifier": "gText_Cloudy",
+          "literal": "\"CLOUDY\""
+        },
+        {
+          "line": 1098,
+          "identifier": "gText_Sunny3",
+          "literal": "\"SUNNY3\""
+        },
+        {
+          "line": 1099,
+          "identifier": "gText_HeavyRain",
+          "literal": "\"HEAVY RAIN\""
+        },
+        {
+          "line": 1100,
+          "identifier": "gText_Seafloor2",
+          "literal": "\"SEAFLOOR2\""
+        },
+        {
+          "line": 1101,
+          "identifier": "gText_DelAll",
+          "literal": "\"DEL. ALL\""
+        },
+        {
+          "line": 1102,
+          "identifier": "gText_Cancel5",
+          "literal": "\"CANCEL\""
+        },
+        {
+          "line": 1103,
+          "identifier": "gText_Ok2",
+          "literal": "\"OK\""
+        },
+        {
+          "line": 1104,
+          "identifier": "gText_Quiz",
+          "literal": "\"QUIZ\""
+        },
+        {
+          "line": 1105,
+          "identifier": "gText_Answer",
+          "literal": "\"ANSWER\""
+        },
+        {
+          "line": 1106,
+          "identifier": "gText_PokeBalls",
+          "literal": "\"POKé BALLS\""
+        },
+        {
+          "line": 1107,
+          "identifier": "gText_Berry",
+          "literal": "\"BERRY\""
+        },
+        {
+          "line": 1108,
+          "identifier": "gText_Berries",
+          "literal": "\"BERRIES\""
+        },
+        {
+          "line": 1109,
+          "identifier": "gText_ExpShareOn",
+          "literal": "\"The Exp. Share has been turned on.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 1110,
+          "identifier": "gText_ExpShareOff",
+          "literal": "\"The Exp. Share has been turned off.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 1111,
+          "identifier": "gText_Ghost",
+          "literal": "\"GHOST\""
+        },
+        {
+          "line": 1112,
+          "identifier": "gText_Boulderbadge",
+          "literal": "\"BOULDERBADGE\""
+        },
+        {
+          "line": 1113,
+          "identifier": "gText_Cascadebadge",
+          "literal": "\"CASCADEBADGE\""
+        },
+        {
+          "line": 1114,
+          "identifier": "gText_Thunderbadge",
+          "literal": "\"THUNDERBADGE\""
+        },
+        {
+          "line": 1115,
+          "identifier": "gText_Rainbowbadge",
+          "literal": "\"RAINBOWBADGE\""
+        },
+        {
+          "line": 1116,
+          "identifier": "gText_Soulbadge",
+          "literal": "\"SOULBADGE\""
+        },
+        {
+          "line": 1117,
+          "identifier": "gText_Marshbadge",
+          "literal": "\"MARSHBADGE\""
+        },
+        {
+          "line": 1118,
+          "identifier": "gText_Volcanobadge",
+          "literal": "\"VOLCANOBADGE\""
+        },
+        {
+          "line": 1119,
+          "identifier": "gText_Earthbadge",
+          "literal": "\"EARTHBADGE\""
+        },
+        {
+          "line": 1120,
+          "identifier": "gText_OakImportantToGetToKnowPokemonThroughly",
+          "literal": "\"OAK: It's important to get to know\\nyour POKéMON thoroughly.\\p\""
+        },
+        {
+          "line": 1121,
+          "identifier": "gText_OakThisIsListOfPokemon",
+          "literal": "\"This is a list of your POKéMON,\\n{PLAYER}.\\pOpen this to check the skills\\nand moves of your POKéMON.\\pYou also choose POKéMON here if\\nyou want to use an item on one.{PAUSE_UNTIL_PRESS}\""
+        }
+      ],
+      "text_changes": [
+        {
+          "identifier": "gText_PkmnBaseVar2StatIncreased",
+          "line": 235,
+          "before": "\"{STR_VAR_1}'s base {STR_VAR_2}\\nstat was raised.{PAUSE_UNTIL_PRESS}\"",
+          "after": "\"{STR_VAR_1}'s {STR_VAR_2}\\nEVs increased.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "identifier": "gText_PkmnFriendlyBaseVar2Fell",
+          "line": 236,
+          "before": "\"{STR_VAR_1} turned friendly.\\nThe base {STR_VAR_2} fell!{PAUSE_UNTIL_PRESS}\"",
+          "after": "\"{STR_VAR_1} turned friendly.\\nIts {STR_VAR_2} EVs fell!{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "identifier": "gText_PkmnAdoresBaseVar2Fell",
+          "line": 237,
+          "before": "\"{STR_VAR_1} adores you!\\nThe base {STR_VAR_2} fell!{PAUSE_UNTIL_PRESS}\"",
+          "after": "\"{STR_VAR_1} adores you!\\nIts {STR_VAR_2} EVs fell!{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "identifier": "gText_PkmnFriendlyBaseVar2CantFall",
+          "line": 238,
+          "before": "\"{STR_VAR_1} turned friendly.\\nThe base {STR_VAR_2} can't fall!{PAUSE_UNTIL_PRESS}\"",
+          "after": "\"{STR_VAR_1} turned friendly.\\nIts {STR_VAR_2} EVs can't fall!{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "identifier": "gText_BattleTowerDesc",
+          "line": 751,
+          "before": "\"KO opponents and aim for the top!\\nYour ability will be tested.\"",
+          "after": "\"Central arena of the CIRCUIT.\\nBring six for Double Battles!\""
+        },
+        {
+          "identifier": "gText_BattleDomeDesc",
+          "line": 752,
+          "before": "\"Keep winning at the tournament!\\nYour tactics will be tested.\"",
+          "after": "\"Once home to grand tournaments.\\nNow a CIRCUIT registration desk.\""
+        },
+        {
+          "identifier": "gText_BattlePalaceDesc",
+          "line": 753,
+          "before": "\"Watch your POKéMON battle!\\nYour spirit will be tested.\"",
+          "after": "\"A quiet palace by the water.\\nRegister here for the CIRCUIT.\""
+        },
+        {
+          "identifier": "gText_BattleArenaDesc",
+          "line": 754,
+          "before": "\"Win battles with teamed-up POKéMON!\\nYour guts will be tested.\"",
+          "after": "\"A gathering place for challengers.\\nRegister here for the CIRCUIT.\""
+        },
+        {
+          "identifier": "gText_BattleFactoryDesc",
+          "line": 755,
+          "before": "\"Aim for victory using rental POKéMON!\\nYour knowledge will be tested.\"",
+          "after": "\"The old rental-battle facility.\\nBring your own six to the CIRCUIT.\""
+        },
+        {
+          "identifier": "gText_BattlePikeDesc",
+          "line": 756,
+          "before": "\"Select one of three paths to battle!\\nYour luck will be tested.\"",
+          "after": "\"A familiar serpent-shaped hall.\\nRegister here for the CIRCUIT.\""
+        },
+        {
+          "identifier": "gText_BattlePyramidDesc",
+          "line": 757,
+          "before": "\"Aim for the top with exploration!\\nYour bravery will be tested.\"",
+          "after": "\"A landmark built for adventure.\\nRegister here for the CIRCUIT.\""
+        }
+      ],
+      "whole_file_snapshot_diff_is_text_only": true,
+      "concurrent_nontext_edits_preserved": false
+    },
+    {
+      "file": "src/party_menu.c",
+      "reviewed_encoded_literal_count": 17,
+      "edited_literal_count": 2,
+      "reviewed_literals": [
+        {
+          "line": 526,
+          "identifier": "sText_askText",
+          "literal": "\"Would you like to change {STR_VAR_1}'s\\nability to {STR_VAR_2}?\""
+        },
+        {
+          "line": 527,
+          "identifier": "sText_doneText",
+          "literal": "\"{STR_VAR_1}'s Ability became\\n{STR_VAR_2}!{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 528,
+          "identifier": "sText_CancelTitleCase",
+          "literal": "\"Cancel\""
+        },
+        {
+          "line": 529,
+          "identifier": "sText_LevelerComplete",
+          "literal": "\"Party preparation is complete.\\nCurrent cap: Lv. {STR_VAR_1}.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 530,
+          "identifier": "sText_BasePointsResetToZero",
+          "literal": "\"{STR_VAR_1}'s EVs\\nwere all reset to zero!{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 531,
+          "identifier": "sText_CannotSendMonToBoxHM",
+          "literal": "\"Cannot send that mon to the box,\\nbecause it knows an HM move.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 532,
+          "identifier": "sText_CannotSendMonToBoxPartner",
+          "literal": "\"Cannot send a mon that doesn't\\nbelong to you to the box.{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 5186,
+          "identifier": "sText_askText",
+          "literal": "\"It might affect {STR_VAR_1}'s stats.\\nAre you sure you want to use it?\""
+        },
+        {
+          "line": 5187,
+          "identifier": "sText_doneText",
+          "literal": "\"{STR_VAR_1}'s stats may have changed due\\nto the effects of the {STR_VAR_2}!{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 6301,
+          "identifier": "sText_doneText",
+          "literal": "\"{STR_VAR_1}'s Dynamax Level\\nincreased by 1!{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "line": 6693,
+          "identifier": null,
+          "literal": "\"Unfusing changes these moves:\\p\""
+        },
+        {
+          "line": 6721,
+          "identifier": null,
+          "literal": "\"{STR_VAR_1} becomes\\n{STR_VAR_2}.\\p\""
+        },
+        {
+          "line": 6724,
+          "identifier": null,
+          "literal": "\"Remove {STR_VAR_1}.\\p\""
+        },
+        {
+          "line": 6739,
+          "identifier": null,
+          "literal": "\"Learn Confusion.\\p\""
+        },
+        {
+          "line": 6742,
+          "identifier": null,
+          "literal": "\"Unfuse these Pokémon?\""
+        },
+        {
+          "line": 6773,
+          "identifier": null,
+          "literal": "\"The Pokémon stayed fused.\""
+        },
+        {
+          "line": 6794,
+          "identifier": null,
+          "literal": "\"Your party needs its Surf capability.\""
+        }
+      ],
+      "text_changes": [
+        {
+          "identifier": "sText_BasePointsResetToZero",
+          "line": 530,
+          "before": "\"{STR_VAR_1}'s base points\\nwere all reset to zero!{PAUSE_UNTIL_PRESS}\"",
+          "after": "\"{STR_VAR_1}'s EVs\\nwere all reset to zero!{PAUSE_UNTIL_PRESS}\""
+        },
+        {
+          "identifier": "sText_CannotSendMonToBoxHM",
+          "line": 531,
+          "before": "\"Cannot send that mon to the box,\\nbecause it knows a HM move.{PAUSE_UNTIL_PRESS}\"",
+          "after": "\"Cannot send that mon to the box,\\nbecause it knows an HM move.{PAUSE_UNTIL_PRESS}\""
+        }
+      ],
+      "whole_file_snapshot_diff_is_text_only": false,
+      "concurrent_nontext_edits_preserved": true
+    },
+    {
+      "file": "src/pokemon_summary_screen.c",
+      "reviewed_encoded_literal_count": 20,
+      "edited_literal_count": 0,
+      "reviewed_literals": [
+        {
+          "line": 770,
+          "identifier": "sText_Relearn",
+          "literal": "\"{START_BUTTON} RELEARN\""
+        },
+        {
+          "line": 772,
+          "identifier": "sMemoNatureTextColor",
+          "literal": "\"{COLOR LIGHT_RED}{SHADOW GREEN}\""
+        },
+        {
+          "line": 773,
+          "identifier": "sMemoMiscTextColor",
+          "literal": "\"{COLOR WHITE}{SHADOW DARK_GRAY}\""
+        },
+        {
+          "line": 774,
+          "identifier": "sStatsLeftColumnLayout",
+          "literal": "\"{DYNAMIC 0}/{DYNAMIC 1}\\n{DYNAMIC 2}\\n{DYNAMIC 3}\""
+        },
+        {
+          "line": 775,
+          "identifier": "sStatsLeftIVEVColumnLayout",
+          "literal": "\"{DYNAMIC 0}\\n{DYNAMIC 1}\\n{DYNAMIC 2}\""
+        },
+        {
+          "line": 776,
+          "identifier": "sStatsRightColumnLayout",
+          "literal": "\"{DYNAMIC 0}\\n{DYNAMIC 1}\\n{DYNAMIC 2}\""
+        },
+        {
+          "line": 777,
+          "identifier": "sMovesPPLayout",
+          "literal": "\"{PP}{DYNAMIC 0}/{DYNAMIC 1}\""
+        },
+        {
+          "line": 3832,
+          "identifier": "sTextNatureDown",
+          "literal": "\"{COLOR}{08}\""
+        },
+        {
+          "line": 3833,
+          "identifier": "sTextNatureUp",
+          "literal": "\"{COLOR}{05}\""
+        },
+        {
+          "line": 3834,
+          "identifier": "sTextNatureNeutral",
+          "literal": "\"{COLOR}{01}\""
+        },
+        {
+          "line": 3857,
+          "identifier": "gText_GradeF",
+          "literal": "\"F\""
+        },
+        {
+          "line": 3858,
+          "identifier": "gText_GradeD",
+          "literal": "\"D\""
+        },
+        {
+          "line": 3859,
+          "identifier": "gText_GradeC",
+          "literal": "\"C\""
+        },
+        {
+          "line": 3860,
+          "identifier": "gText_GradeB",
+          "literal": "\"B\""
+        },
+        {
+          "line": 3861,
+          "identifier": "gText_GradeA",
+          "literal": "\"A\""
+        },
+        {
+          "line": 3862,
+          "identifier": "gText_GradeS",
+          "literal": "\"S\""
+        },
+        {
+          "line": 4771,
+          "identifier": null,
+          "literal": "\"IVs\""
+        },
+        {
+          "line": 4772,
+          "identifier": null,
+          "literal": "\"EVs\""
+        },
+        {
+          "line": 4773,
+          "identifier": null,
+          "literal": "\"STATS\""
+        },
+        {
+          "line": 4774,
+          "identifier": null,
+          "literal": "\"RENAME\""
+        }
+      ],
+      "text_changes": [],
+      "whole_file_snapshot_diff_is_text_only": true,
+      "concurrent_nontext_edits_preserved": false
+    },
+    {
+      "file": "src/pokemon_storage_system.c",
+      "reviewed_encoded_literal_count": 82,
+      "edited_literal_count": 0,
+      "reviewed_literals": [
+        {
+          "line": 862,
+          "identifier": "gText_JustOnePkmn",
+          "literal": "\"There is just one POKéMON with you.\""
+        },
+        {
+          "line": 863,
+          "identifier": "gText_PartyFull",
+          "literal": "\"Your party is full!\""
+        },
+        {
+          "line": 864,
+          "identifier": "gText_Box",
+          "literal": "\"BOX\""
+        },
+        {
+          "line": 871,
+          "identifier": null,
+          "literal": "\"Withdraw Pokémon\""
+        },
+        {
+          "line": 871,
+          "identifier": null,
+          "literal": "\"Move Pokémon stored in Boxes to\\nyour party.\""
+        },
+        {
+          "line": 872,
+          "identifier": null,
+          "literal": "\"Deposit Pokémon\""
+        },
+        {
+          "line": 872,
+          "identifier": null,
+          "literal": "\"Store Pokémon in your party in Boxes.\""
+        },
+        {
+          "line": 873,
+          "identifier": null,
+          "literal": "\"Move Pokémon\""
+        },
+        {
+          "line": 873,
+          "identifier": null,
+          "literal": "\"Organize the Pokémon in Boxes and\\nin your party.\""
+        },
+        {
+          "line": 874,
+          "identifier": null,
+          "literal": "\"Move Items\""
+        },
+        {
+          "line": 874,
+          "identifier": null,
+          "literal": "\"Move items held by any Pokémon\\nin a Box or your party.\""
+        },
+        {
+          "line": 875,
+          "identifier": null,
+          "literal": "\"See Ya!\""
+        },
+        {
+          "line": 875,
+          "identifier": null,
+          "literal": "\"Return to the previous menu.\""
+        },
+        {
+          "line": 934,
+          "identifier": "sText_OutOf30",
+          "literal": "\"/30\""
+        },
+        {
+          "line": 1048,
+          "identifier": "gText_PkmnIsSelected",
+          "literal": "\"{DYNAMIC 0} is selected.\""
+        },
+        {
+          "line": 1052,
+          "identifier": null,
+          "literal": "\"Exit from the BOX?\""
+        },
+        {
+          "line": 1053,
+          "identifier": null,
+          "literal": "\"What do you want to do?\""
+        },
+        {
+          "line": 1054,
+          "identifier": null,
+          "literal": "\"Please pick a theme.\""
+        },
+        {
+          "line": 1055,
+          "identifier": null,
+          "literal": "\"Pick the wallpaper.\""
+        },
+        {
+          "line": 1057,
+          "identifier": null,
+          "literal": "\"Jump to which BOX?\""
+        },
+        {
+          "line": 1058,
+          "identifier": null,
+          "literal": "\"Deposit in which BOX?\""
+        },
+        {
+          "line": 1059,
+          "identifier": null,
+          "literal": "\"{DYNAMIC 0} was deposited.\""
+        },
+        {
+          "line": 1060,
+          "identifier": null,
+          "literal": "\"The BOX is full.\""
+        },
+        {
+          "line": 1061,
+          "identifier": null,
+          "literal": "\"Release this POKéMON?\""
+        },
+        {
+          "line": 1062,
+          "identifier": null,
+          "literal": "\"{DYNAMIC 0} was released.\""
+        },
+        {
+          "line": 1063,
+          "identifier": null,
+          "literal": "\"Bye-bye, {DYNAMIC 0}!\""
+        },
+        {
+          "line": 1064,
+          "identifier": null,
+          "literal": "\"Mark your POKéMON.\""
+        },
+        {
+          "line": 1065,
+          "identifier": null,
+          "literal": "\"That's your last POKéMON!\""
+        },
+        {
+          "line": 1067,
+          "identifier": null,
+          "literal": "\"You're holding a POKéMON!\""
+        },
+        {
+          "line": 1068,
+          "identifier": null,
+          "literal": "\"Which one will you take?\""
+        },
+        {
+          "line": 1069,
+          "identifier": null,
+          "literal": "\"You can't release an EGG.\""
+        },
+        {
+          "line": 1070,
+          "identifier": null,
+          "literal": "\"Continue BOX operations?\""
+        },
+        {
+          "line": 1071,
+          "identifier": null,
+          "literal": "\"{DYNAMIC 0} came back!\""
+        },
+        {
+          "line": 1072,
+          "identifier": null,
+          "literal": "\"Was it worried about you?\""
+        },
+        {
+          "line": 1073,
+          "identifier": null,
+          "literal": "\"… … … … !\""
+        },
+        {
+          "line": 1074,
+          "identifier": null,
+          "literal": "\"Please remove the MAIL.\""
+        },
+        {
+          "line": 1076,
+          "identifier": null,
+          "literal": "\"GIVE to a POKéMON?\""
+        },
+        {
+          "line": 1077,
+          "identifier": null,
+          "literal": "\"Placed item in the BAG.\""
+        },
+        {
+          "line": 1078,
+          "identifier": null,
+          "literal": "\"The BAG is full.\""
+        },
+        {
+          "line": 1079,
+          "identifier": null,
+          "literal": "\"Put this item in the BAG?\""
+        },
+        {
+          "line": 1080,
+          "identifier": null,
+          "literal": "\"{DYNAMIC 0} is now held.\""
+        },
+        {
+          "line": 1081,
+          "identifier": null,
+          "literal": "\"Changed to {DYNAMIC 0}.\""
+        },
+        {
+          "line": 1082,
+          "identifier": null,
+          "literal": "\"MAIL can't be stored!\""
+        },
+        {
+          "line": 7978,
+          "identifier": "gPCText_Give",
+          "literal": "\"GIVE\""
+        },
+        {
+          "line": 7982,
+          "identifier": null,
+          "literal": "\"CANCEL\""
+        },
+        {
+          "line": 7983,
+          "identifier": null,
+          "literal": "\"STORE\""
+        },
+        {
+          "line": 7984,
+          "identifier": null,
+          "literal": "\"WITHDRAW\""
+        },
+        {
+          "line": 7985,
+          "identifier": null,
+          "literal": "\"MOVE\""
+        },
+        {
+          "line": 7986,
+          "identifier": null,
+          "literal": "\"SHIFT\""
+        },
+        {
+          "line": 7987,
+          "identifier": null,
+          "literal": "\"PLACE\""
+        },
+        {
+          "line": 7988,
+          "identifier": null,
+          "literal": "\"SUMMARY\""
+        },
+        {
+          "line": 7989,
+          "identifier": null,
+          "literal": "\"RELEASE\""
+        },
+        {
+          "line": 7990,
+          "identifier": null,
+          "literal": "\"MARK\""
+        },
+        {
+          "line": 7991,
+          "identifier": null,
+          "literal": "\"JUMP\""
+        },
+        {
+          "line": 7992,
+          "identifier": null,
+          "literal": "\"WALLPAPER\""
+        },
+        {
+          "line": 7993,
+          "identifier": null,
+          "literal": "\"NAME\""
+        },
+        {
+          "line": 7994,
+          "identifier": null,
+          "literal": "\"TAKE\""
+        },
+        {
+          "line": 7997,
+          "identifier": null,
+          "literal": "\"SWITCH\""
+        },
+        {
+          "line": 7998,
+          "identifier": null,
+          "literal": "\"BAG\""
+        },
+        {
+          "line": 7999,
+          "identifier": null,
+          "literal": "\"INFO\""
+        },
+        {
+          "line": 8000,
+          "identifier": null,
+          "literal": "\"SCENERY 1\""
+        },
+        {
+          "line": 8001,
+          "identifier": null,
+          "literal": "\"SCENERY 2\""
+        },
+        {
+          "line": 8002,
+          "identifier": null,
+          "literal": "\"SCENERY 3\""
+        },
+        {
+          "line": 8003,
+          "identifier": null,
+          "literal": "\"ETCETERA\""
+        },
+        {
+          "line": 8004,
+          "identifier": null,
+          "literal": "\"FRIENDS\""
+        },
+        {
+          "line": 8005,
+          "identifier": null,
+          "literal": "\"FOREST\""
+        },
+        {
+          "line": 8006,
+          "identifier": null,
+          "literal": "\"CITY\""
+        },
+        {
+          "line": 8007,
+          "identifier": null,
+          "literal": "\"DESERT\""
+        },
+        {
+          "line": 8008,
+          "identifier": null,
+          "literal": "\"SAVANNA\""
+        },
+        {
+          "line": 8009,
+          "identifier": null,
+          "literal": "\"CRAG\""
+        },
+        {
+          "line": 8010,
+          "identifier": null,
+          "literal": "\"VOLCANO\""
+        },
+        {
+          "line": 8011,
+          "identifier": null,
+          "literal": "\"SNOW\""
+        },
+        {
+          "line": 8012,
+          "identifier": null,
+          "literal": "\"CAVE\""
+        },
+        {
+          "line": 8013,
+          "identifier": null,
+          "literal": "\"BEACH\""
+        },
+        {
+          "line": 8014,
+          "identifier": null,
+          "literal": "\"SEAFLOOR\""
+        },
+        {
+          "line": 8015,
+          "identifier": null,
+          "literal": "\"RIVER\""
+        },
+        {
+          "line": 8016,
+          "identifier": null,
+          "literal": "\"SKY\""
+        },
+        {
+          "line": 8017,
+          "identifier": null,
+          "literal": "\"POLKA-DOT\""
+        },
+        {
+          "line": 8018,
+          "identifier": null,
+          "literal": "\"POKéCENTER\""
+        },
+        {
+          "line": 8019,
+          "identifier": null,
+          "literal": "\"MACHINE\""
+        },
+        {
+          "line": 8020,
+          "identifier": null,
+          "literal": "\"SIMPLE\""
+        },
+        {
+          "line": 8021,
+          "identifier": null,
+          "literal": "\"SELECT\""
+        }
+      ],
+      "text_changes": [],
+      "whole_file_snapshot_diff_is_text_only": true,
+      "concurrent_nontext_edits_preserved": false
+    },
+    {
+      "file": "src/emerald_champions_battle_sets.c",
+      "reviewed_encoded_literal_count": 1,
+      "edited_literal_count": 0,
+      "reviewed_literals": [
+        {
+          "line": 14,
+          "identifier": "sRecommendedSetName",
+          "literal": "\"Recommended\""
+        }
+      ],
+      "text_changes": [],
+      "whole_file_snapshot_diff_is_text_only": false,
+      "concurrent_nontext_edits_preserved": true
+    }
+  ]
+}

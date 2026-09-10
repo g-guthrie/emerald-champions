@@ -1,0 +1,56 @@
+Route134_MapScripts::
+	map_script MAP_SCRIPT_ON_RESUME, Route134_OnResume
+	.byte 0
+
+Route134_OnResume:
+	setdivewarp MAP_UNDERWATER_ROUTE134, 8, 6
+	end
+
+Route134_EventScript_Jack::
+	trainerbattle_double TRAINER_JACK, Route134_Text_JackIntro, Route134_Text_JackDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	msgbox Route134_Text_JackPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+Route134_EventScript_Laurel::
+	trainerbattle_double TRAINER_LAUREL, Route134_Text_LaurelIntro, Route134_Text_LaurelDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	msgbox Route134_Text_LaurelPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+Route134_EventScript_Alex::
+	trainerbattle_double TRAINER_ALEX, Route134_Text_AlexIntro, Route134_Text_AlexDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	msgbox Route134_Text_AlexPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+Route134_EventScript_Aaron::
+	trainerbattle_double TRAINER_AARON, Route134_Text_AaronIntro, Route134_Text_AaronDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	msgbox Route134_Text_AaronPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+Route134_EventScript_Hitoshi::
+	msgbox Route134_Text_HITOSHI_LocalConversation, MSGBOX_NPC
+	end
+
+Route134_EventScript_Hudson::
+	trainerbattle_double TRAINER_HUDSON, Route134_Text_HudsonIntro, Route134_Text_HudsonDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	msgbox Route134_Text_HudsonPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+Route134_EventScript_Reyna::
+	trainerbattle_double TRAINER_REYNA, Route134_Text_ReynaIntro, Route134_Text_ReynaDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	msgbox Route134_Text_ReynaPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+Route134_EventScript_Marley::
+	trainerbattle_double TRAINER_MARLEY, Route134_Text_MarleyIntro, Route134_Text_MarleyDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	msgbox Route134_Text_MarleyPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+Route134_EventScript_Kelvin::
+	trainerbattle_double TRAINER_KELVIN, Route134_Text_KelvinIntro, Route134_Text_KelvinDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	msgbox Route134_Text_KelvinPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+
+Route134_Text_HITOSHI_LocalConversation:
+	.string "Even MACHAMP takes a rest day.\n"
+	.string "It rests four arms. I rest two.$"

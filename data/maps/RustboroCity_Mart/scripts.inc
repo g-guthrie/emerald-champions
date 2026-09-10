@@ -2,13 +2,29 @@ RustboroCity_Mart_MapScripts::
 	.byte 0
 
 RustboroCity_Mart_EventScript_MoveSpecialist::
-	msgbox RustboroCity_Mart_Text_MoveSpecialist, MSGBOX_NPC
+	lock
+	faceplayer
+	msgbox RustboroCity_Mart_Text_MoveSpecialist, MSGBOX_DEFAULT
+	pokemart RustboroCity_Mart_EvolutionStock
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
 	end
 
 RustboroCity_Mart_Text_MoveSpecialist:
-	.string "FALSE SWIPE used to be my special TM.\p"
-	.string "The POKéMON CENTER specialist now\n"
-	.string "teaches it whenever it is legal.$"
+	.string "I sell evolution stones for ¥3000 each.\n"
+	.string "Try one on your POKéMON to check!\p"
+	.string "SLATEPORT carries more varieties.\n"
+	.string "LILYCOVE stocks the complete range.$"
+
+	.align 2
+RustboroCity_Mart_EvolutionStock:
+	.2byte ITEM_FIRE_STONE
+	.2byte ITEM_WATER_STONE
+	.2byte ITEM_THUNDER_STONE
+	.2byte ITEM_LEAF_STONE
+	.2byte ITEM_MOON_STONE
+	.2byte ITEM_SUN_STONE
+	pokemartlistend
 
 RustboroCity_Mart_EventScript_Clerk::
 	lock

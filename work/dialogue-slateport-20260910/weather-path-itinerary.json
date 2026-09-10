@@ -1,0 +1,203 @@
+[
+  {
+    "from": [
+      5,
+      11
+    ],
+    "to": [
+      10,
+      7
+    ],
+    "keys": [
+      "UP",
+      "UP",
+      "UP",
+      "UP",
+      "RIGHT",
+      "RIGHT",
+      "RIGHT",
+      "RIGHT",
+      "RIGHT"
+    ]
+  },
+  {
+    "from": [
+      10,
+      7
+    ],
+    "to": [
+      14,
+      3
+    ],
+    "keys": [
+      "RIGHT",
+      "RIGHT",
+      "RIGHT",
+      "UP",
+      "UP",
+      "UP",
+      "RIGHT",
+      "UP"
+    ]
+  },
+  {
+    "from": [
+      14,
+      3
+    ],
+    "to": [
+      17,
+      1
+    ],
+    "keys": [
+      "UP",
+      "RIGHT",
+      "RIGHT",
+      "RIGHT",
+      "UP"
+    ]
+  },
+  {
+    "from": [
+      17,
+      2
+    ],
+    "to": [
+      19,
+      5
+    ],
+    "keys": [
+      "RIGHT",
+      "RIGHT",
+      "DOWN",
+      "DOWN",
+      "DOWN"
+    ]
+  },
+  {
+    "from": [
+      19,
+      5
+    ],
+    "to": [
+      15,
+      5
+    ],
+    "keys": [
+      "LEFT",
+      "LEFT",
+      "LEFT",
+      "LEFT"
+    ]
+  },
+  {
+    "from": [
+      15,
+      5
+    ],
+    "to": [
+      10,
+      7
+    ],
+    "keys": [
+      "RIGHT",
+      "DOWN",
+      "DOWN",
+      "LEFT",
+      "DOWN",
+      "DOWN",
+      "DOWN",
+      "LEFT",
+      "LEFT",
+      "LEFT",
+      "UP",
+      "UP",
+      "UP",
+      "LEFT",
+      "LEFT"
+    ]
+  },
+  {
+    "from": [
+      10,
+      7
+    ],
+    "to": [
+      5,
+      6
+    ],
+    "keys": [
+      "UP",
+      "LEFT",
+      "LEFT",
+      "LEFT",
+      "LEFT",
+      "LEFT"
+    ]
+  },
+  {
+    "from": [
+      5,
+      6
+    ],
+    "to": [
+      17,
+      1
+    ],
+    "keys": [
+      "RIGHT",
+      "RIGHT",
+      "RIGHT",
+      "RIGHT",
+      "RIGHT",
+      "RIGHT",
+      "RIGHT",
+      "RIGHT",
+      "RIGHT",
+      "RIGHT",
+      "UP",
+      "UP",
+      "UP",
+      "UP",
+      "RIGHT",
+      "RIGHT",
+      "UP"
+    ]
+  },
+  {
+    "from": [
+      17,
+      2
+    ],
+    "to": [
+      9,
+      12
+    ],
+    "keys": [
+      "LEFT",
+      "LEFT",
+      "LEFT",
+      "LEFT",
+      "LEFT",
+      "DOWN",
+      "LEFT",
+      "LEFT",
+      "LEFT",
+      "LEFT",
+      "DOWN",
+      "DOWN",
+      "DOWN",
+      "LEFT",
+      "LEFT",
+      "DOWN",
+      "DOWN",
+      "DOWN",
+      "DOWN",
+      "RIGHT",
+      "RIGHT",
+      "RIGHT",
+      "DOWN",
+      "DOWN"
+    ]
+  }
+]

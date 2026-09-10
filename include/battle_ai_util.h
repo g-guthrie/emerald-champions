@@ -89,7 +89,11 @@ struct AiCalcValues
     enum Gimmick gimmickDef:8;
     u8 skipStrikes; // Caller already resolved these strikes into a damage-blocking state.
     u8 strikeLimit; // Zero: all remaining strikes; one: evaluate only the next strike.
+    struct AiPopulationBombDamage *populationBomb; // Optional primary-cache output, never an implicit global write.
 };
+
+u32 AI_GetContactDamage(enum BattlerId actor, enum BattlerId target, enum Move move,
+    enum Ability ability, enum HoldEffect held, enum HoldEffect targetHeld, enum Ability targetAbility);
 
 // A rational hit-and-KO chance. exact is false for unresolved multihit or
 // variable-power distributions; callers must not treat those as certainty.
@@ -205,7 +209,21 @@ struct SimulatedDamage AI_CalcDamageSaveBattlers(enum Move move, enum BattlerId 
 bool32 IsAdditionalEffectBlocked(enum BattlerId battlerAtk, enum Ability abilityAtk, enum BattlerId battlerDef, enum Ability abilityDef, enum Move move);
 bool32 AI_ApplyMegaForm(enum BattlerId battler);
 struct SimulatedDamage AI_CalcDamage(struct AiCalcValues *aiCalc, enum BattlerId battlerAtk, enum BattlerId battlerDef);
+// Raw native single-hit HP-power anchors, with resist Berries but without
+// guaranteed-survival clipping. Unsupported moves/gimmicks/HP return zero;
+// pending Mega forms must be materialized before requesting an anchor.
+struct SimulatedDamage AI_CalcHpPowerDamage(struct AiCalcValues *aiCalc, enum BattlerId battlerAtk, enum BattlerId battlerDef, u32 hp);
+// Raw single-hit anchors for a caller-validated special Plus/Minus move.
+// Disabling the partner's cached ability does not remove its field occupant.
+struct SimulatedDamage AI_CalcPartnerBoostDamage(struct AiCalcValues *aiCalc, enum BattlerId battlerAtk, enum BattlerId battlerDef, bool32 partnerPresent);
+// Raw single-hit anchors for a caller-validated offensive item/move pairing.
+// Item absence is temporary; native damage, item caches and RNG are restored.
+struct SimulatedDamage AI_CalcItemBoostDamage(struct AiCalcValues *aiCalc, enum BattlerId battlerAtk, enum BattlerId battlerDef, bool32 itemPresent);
+// Native raw single-hit Defeatist anchors; temporarily override only HP.
+struct SimulatedDamage AI_CalcDefeatistDamage(struct AiCalcValues *aiCalc, enum BattlerId battlerAtk, enum BattlerId battlerDef, bool32 healthy);
 bool32 AI_MoveAlwaysCrits(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move);
+bool32 AI_CanScreenReduceDamage(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move);
+bool32 AI_MoveBreaksScreensBeforeDamage(enum Move move);
 u32 AI_GetBeatUpHitCount(enum BattlerId battlerAtk);
 struct AiKOChance AI_CalcKOChance(struct AiCalcValues *aiCalc, enum BattlerId battlerAtk, enum BattlerId battlerDef, u32 hp);
 struct SimulatedDamage AI_CalcDamageAfterBerry(struct AiCalcValues *aiCalc, enum BattlerId battlerAtk, enum BattlerId battlerDef);
@@ -244,6 +262,7 @@ bool32 IsAromaVeilProtectedEffect(enum BattleMoveEffects moveEffect);
 bool32 IsNonVolatileStatusMove(enum Move move);
 bool32 IsMoveRedirectionPrevented(enum BattlerId battlerAtk, enum Move move, enum Ability atkAbility);
 bool32 IsHazardMove(enum Move move);
+bool32 AI_IsHazardAtCapacity(enum BattleSide side, enum Move move);
 bool32 IsTwoTurnNotSemiInvulnerableMove(enum BattlerId battlerAtk, enum Move move);
 bool32 IsBattlerDamagedByStatus(enum BattlerId battler);
 s32 ProtectChecks(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move, enum Move predictedMove);
@@ -254,7 +273,6 @@ bool32 ShouldSetTerrain(enum BattlerId battler, enum BattleTerrain terrain);
 bool32 ShouldClearTerrain(enum BattlerId battler, enum BattleTerrain terrain);
 bool32 ShouldSetFieldStatus(enum BattlerId battler, u32 fieldStatus);
 bool32 ShouldClearFieldStatus(enum BattlerId battler, u32 fieldStatus);
-bool32 CanRefreshTrickRoom(enum BattlerId battler);
 bool32 HasSleepMoveWithLowAccuracy(enum BattlerId battlerAtk, enum BattlerId battlerDef);
 bool32 HasHealingEffect(enum BattlerId battler);
 bool32 IsTrappingMove(enum Move move);

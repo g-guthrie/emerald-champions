@@ -1,0 +1,796 @@
+tools/scaninc/scaninc -M build/emerald-test/test/battle/ai/ai_doubles.d -g build/assets -I include -I tools/agbcc/include test/battle/ai/ai_doubles.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/battle/ai/ai_doubles.o test/battle/ai/ai_doubles.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 4
+[1] EC expert pair: Glare enables a partner KO but not through a paralysis cure: [32mPASS[0m
+[2] EC expert pair: Feint opens partner damage through Protect but not immunity: [32mPASS[0m
+[0] EC expert pair: secondary paralysis earns probabilistic partner order with a Cloak control: [32mPASS[0m
+[3] EC expert pair: Knock Off timing removes only the later offensive item boost: [32mPASS[0m
+[1] EC expert pair: preserve the Plus Minus partner before taking a boosted knockout: [32mPASS[0m
+[2] EC expert pair: timely primary Charm protects its user: [32mPASS[0m
+[1] EC expert pair: non-Flying priority Roost recovers under continued pressure: [32mPASS[0m
+[3] EC expert pair: reciprocal Helping Hand secures its concrete partner's spread KOs: [32mPASS[0m
+[0] EC expert pair: Nuzzle speed control distinguishes primary and secondary immunity: [32mPASS[0m
+[3] EC expert pair: Motor Drive activation earns its same-turn speed crossing: [32mPASS[0m
+[1] EC expert pair: Trick Room never cancels itself and is reset after expiry: [32mPASS[0m
+[2] EC expert pair: candidate evaluation restores board caches field and RNG: [32mPASS[0m
+[3] EC expert pair: Coaching values the partner attack and physical survival: [32mPASS[0m
+[1] EC expert pair: Klutz transfers Flame Orb to a vulnerable physical attacker: [32mPASS[0m
+[0] EC expert pair: reciprocal Justified activation preserves the recipient's attack: [32mPASS[0m
+[3] EC expert pair: Follow Me protects the Trick Room setter: [32mPASS[0m
+[1] EC expert pair: Helping Hand requires a damaging partner action: [32mPASS[0m
+[2] EC expert pair: Acid Spray enables only a later unblocked special attack: [32mPASS[0m
+[0] EC expert pair: partner healing preserves the slower winning attack: [32mPASS[0m
+[3] EC expert pair: timing probe with full parties and legal Mega reserves: [32mPASS[0m
+full-party paired decision selected=1 frames=30
+[2] EC expert pair: Perish countdown survives and simultaneous deadlines choose distinct escapes: [32mPASS[0m
+[1] EC expert pair: beneficial weather is established once: [32mPASS[0m
+[0] EC expert pair: damage-based recoil distinguishes unsafe and surviving attacks: [32mPASS[0m
+[3] EC expert pair: candidate Trace copies deterministic abilities and restores state: [32mPASS[0m
+[1] EC expert pair: Cotton Guard earns only timely physical mitigation: [32mPASS[0m
+[3] EC expert pair: Quiver Dance mitigates only later special attacks: [32mPASS[0m
+[2] EC expert pair: Wish survives modest pressure and pays at the next end turn: [32mPASS[0m
+[1] EC expert pair: HP-powered damage follows public faster chip: [32mPASS[0m
+[3] EC expert pair: prevent a priority hit from activating Defeatist before attack: [32mPASS[0m
+[0] EC expert pair: offensive drops protect a slower partner only when timely and unblocked: [32mPASS[0m
+[1] EC expert pair: Sleep Powder denial respects native accuracy Grass and Goggles: [32mPASS[0m
+[3] EC expert pair: Stamina changes the followup after partner chip: [32mPASS[0m
+[2] EC expert pair: Life Orb costs a hit and stolen Sitrus heals before recoil: [32mPASS[0m
+[1] EC expert pair: Rock Tomb earns a partner crossing unless Cloak blocks it: [32mPASS[0m
+[1] EC Perish policy: fresh trapped targets, escape timing and immunity guards: [32mPASS[0m
+[2] EC expert pair: Iron Defense mitigates only later physical attacks: [32mPASS[0m
+[0] EC expert pair: two passive guards need progress but retain useful waits and legal fallback: [32mPASS[0m
+[1] EC authored strategy: Parker preserves a nonimmune reserve beside Earthquake: [32mPASS[0m
+[1] EC authored strategy: Parker repeats Earthquake safely through Telepathy: [32mPASS[0m
+[3] EC authored strategy: Maura escapes her countdown while retaining the trap: [32mPASS[0m
+[2] EC expert pair: personality flags preserve an accurate guaranteed KO: [32mPASS[0m
+[3] EC authored strategy: Flannery advances Eruption before opposing Rock Slide: [32mPASS[0m
+[2] EC authored strategy: Connie's mutual Surf activates Storm Drain: [32mPASS[0m
+[3] EC live review Protect audit dead end: lone injured rival Mudkip without a guard payoff: [32mPASS[0m
+AI decision turn=1 actor=0 move=Thunderbolt target=1
+AI decision turn=1 actor=1 move=Liquidation target=0
+GUARD_DEAD_END HP=0 foe=30 last=- counter=0 turns=0
+[3] EC live review Protect reset: failed attempt resets odds but remains the last move: [32mPASS[0m
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Celebrate target=1
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Celebrate target=1
+AI decision turn=2 actor=0 move=Protect target=0
+AI decision turn=2 actor=1 move=Celebrate target=1
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Celebrate target=1
+AI decision turn=2 actor=0 move=Protect target=0
+AI decision turn=2 actor=1 move=Celebrate target=1
+AI decision turn=3 actor=0 move=Protect target=0
+AI decision turn=3 actor=1 move=Celebrate target=1
+[1] EC authored strategy: Tabitha activation requires survival and a useful boost: [32mPASS[0m
+[1] EC live review Devan timing: complete cold decision with six-player party: [32mPASS[0m
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=High Horsepower target=0
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Helping Hand target=3
+AI decision turn=2 actor=3 move=Rock Slide target=0
+E24_DEVAN_COMPLETE_TIMING trainer=753 setupFrames=7 decisionFrames=41 completeFrames=48 warmFrames=42 first=3 moves=Helping Hand/Rock Slide
+[2] EC live review Protect audit rescue: native rescue factory and fresh starter stats: [32mPASS[0m
+AI decision turn=1 actor=0 move=Liquidation target=1
+AI decision turn=1 actor=1 move=Crunch target=2
+AI decision turn=1 actor=2 move=Flamethrower target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Helping Hand target=3
+AI decision turn=2 actor=3 move=Extreme Speed target=2
+GUARD_RESCUE pair=0 turns=1 native=1 levels=5/5/2/2 HP=1/14 foes=24/18 last=Crunch/Protect counter=0/1
+AI decision turn=1 actor=0 move=Liquidation target=1
+AI decision turn=1 actor=1 move=Crunch target=2
+AI decision turn=1 actor=2 move=Flamethrower target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Liquidation target=1
+AI decision turn=2 actor=1 move=Helping Hand target=3
+AI decision turn=2 actor=2 move=Flamethrower target=3
+AI decision turn=2 actor=3 move=Extreme Speed target=2
+GUARD_RESCUE pair=0 turns=2 native=1 levels=5/5/2/2 HP=0/0 foes=24/11 last=-/- counter=0/0
+AI decision turn=1 actor=0 move=Bullet Seed target=1
+AI decision turn=1 actor=1 move=Crunch target=0
+AI decision turn=1 actor=2 move=Flamethrower target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=3 move=Extreme Speed target=0
+GUARD_RESCUE pair=1 turns=1 native=1 levels=5/5/2/2 HP=0/14 foes=23/21 last=-/Protect counter=0/1
+AI decision turn=1 actor=0 move=Bullet Seed target=1
+AI decision turn=1 actor=1 move=Crunch target=0
+AI decision turn=1 actor=2 move=Flamethrower target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=3 move=Extreme Speed target=0
+AI decision turn=2 actor=0 move=Bullet Seed target=1
+AI decision turn=2 actor=2 move=Flamethrower target=3
+GUARD_RESCUE pair=1 turns=2 native=1 levels=5/5/2/2 HP=0/0 foes=19/21 last=-/- counter=0/0
+AI decision turn=1 actor=0 move=Bullet Seed target=1
+AI decision turn=1 actor=1 move=Crunch target=0
+AI decision turn=1 actor=2 move=Liquidation target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=3 move=Extreme Speed target=0
+GUARD_RESCUE pair=2 turns=1 native=1 levels=5/5/2/2 HP=0/14 foes=23/24 last=-/Protect counter=0/1
+AI decision turn=1 actor=0 move=Bullet Seed target=1
+AI decision turn=1 actor=1 move=Crunch target=0
+AI decision turn=1 actor=2 move=Liquidation target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=3 move=Extreme Speed target=0
+AI decision turn=2 actor=0 move=Bullet Seed target=1
+AI decision turn=2 actor=2 move=Liquidation target=3
+GUARD_RESCUE pair=2 turns=2 native=1 levels=5/5/2/2 HP=0/0 foes=19/24 last=-/- counter=0/0
+[2] EC live review E0001: actual reserves respect Grass and Magic Bounce: [32mPASS[0m
+AI decision turn=1 actor=0 move=Bullet Seed target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Psychic target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Giga Drain target=2
+AI decision turn=2 actor=3 move=Quick Attack target=2
+E1 reserves indices=2/3 executed=Protect/Protect HP=47/35 TaillowStatus=128
+[2] EC live review E0001: actual Hoenn rival opening decisions: [32mPASS[0m
+AI decision turn=1 actor=0 move=Liquidation target=1
+AI decision turn=1 actor=1 move=Seed Bomb target=0
+AI decision turn=1 actor=2 move=Flamethrower target=1
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI switch turn=1 actor=1 party=3
+AI decision turn=2 actor=1 move=Quick Attack target=2
+AI decision turn=2 actor=3 move=Thunderbolt target=2
+E1 trainer=520 disruption=0 completedTurns=1 left=Taillow lastExecuted=- hp=35/35 right=Pikachu lastExecuted=Thunderbolt hp=34/34 playerHP=0/51 versus 41/41 levels=14/14/12/12
+AI decision turn=1 actor=0 move=Bullet Seed target=1
+AI decision turn=1 actor=1 move=Liquidation target=2
+AI decision turn=1 actor=2 move=Flamethrower target=1
+AI decision turn=1 actor=3 move=Fake Out target=0
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Thunderbolt target=2
+E1 trainer=526 disruption=0 completedTurns=1 left=Mudkip lastExecuted=Liquidation hp=17/37 right=Pikachu lastExecuted=Fake Out hp=34/34 playerHP=39/48 versus 20/41 levels=14/14/12/12
+AI decision turn=1 actor=0 move=Bullet Seed target=1
+AI decision turn=1 actor=1 move=Flamethrower target=0
+AI decision turn=1 actor=2 move=Liquidation target=1
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Thunderbolt target=2
+E1 trainer=523 disruption=0 completedTurns=1 left=Torchic lastExecuted=Flamethrower hp=33/36 right=Pikachu lastExecuted=Fake Out hp=34/34 playerHP=0/48 versus 46/51 levels=14/14/12/12
+AI decision turn=1 actor=0 move=Liquidation target=1
+AI decision turn=1 actor=1 move=Seed Bomb target=0
+AI decision turn=1 actor=2 move=Will-O-Wisp target=1
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI decision turn=2 actor=1 move=Seed Bomb target=2
+AI decision turn=2 actor=3 move=Thunderbolt target=2
+E1 trainer=529 disruption=1 completedTurns=1 left=Treecko lastExecuted=Seed Bomb hp=33/35 right=Pikachu lastExecuted=Thunderbolt hp=34/34 playerHP=0/51 versus 41/41 levels=14/14/12/12
+AI decision turn=1 actor=0 move=Bullet Seed target=1
+AI decision turn=1 actor=1 move=Liquidation target=2
+AI decision turn=1 actor=2 move=Will-O-Wisp target=1
+AI decision turn=1 actor=3 move=Fake Out target=0
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Thunderbolt target=2
+E1 trainer=535 disruption=1 completedTurns=1 left=Mudkip lastExecuted=Liquidation hp=32/37 right=Pikachu lastExecuted=Fake Out hp=34/34 playerHP=39/48 versus 20/41 levels=14/14/12/12
+AI decision turn=1 actor=0 move=Bullet Seed target=1
+AI decision turn=1 actor=1 move=Flamethrower target=0
+AI decision turn=1 actor=2 move=Wide Guard target=2
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Thunderbolt target=2
+E1 trainer=532 disruption=1 completedTurns=1 left=Torchic lastExecuted=Flamethrower hp=33/36 right=Pikachu lastExecuted=Fake Out hp=34/34 playerHP=0/48 versus 46/51 levels=14/14/12/12
+[1] EC live review Devan weather: rain replacement and setup denial: [32mPASS[0m
+DEVAN_INPUT reserves=0 slot=0 lv=12 HP=49 Atk=26 Def=38 SpA=15 SpD=18 Speed=16 item=494 ability=45
+DEVAN_INPUT reserves=0 slot=1 lv=12 HP=40 Atk=39 Def=18 SpA=13 SpD=19 Speed=32 item=479 ability=146
+DEVAN_INPUT reserves=0 slot=2 lv=12 HP=45 Atk=36 Def=32 SpA=16 SpD=18 Speed=15 item=494 ability=5
+DEVAN_INPUT reserves=0 slot=3 lv=12 HP=37 Atk=33 Def=17 SpA=15 SpD=17 Speed=34 item=494 ability=153
+AI decision turn=1 actor=0 move=Fake Out target=3
+AI decision turn=1 actor=1 move=High Horsepower target=0
+AI decision turn=1 actor=2 move=Rain Dance target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=High Horsepower target=0
+AI decision turn=2 actor=3 move=Drill Run target=0
+DEVAN_AFTER board=10 turns=1 reserves=0 native=1 species=449/529 HP=49/40 foes=37/48 moves=High Horsepower/Protect weather=2 duration=4 speeds=16/32 foeSpeeds=39/34 AtkStages=6/6 foeStatus=0/0 faints=0/0
+DEVAN_INPUT reserves=0 slot=0 lv=12 HP=49 Atk=26 Def=38 SpA=15 SpD=18 Speed=16 item=494 ability=45
+DEVAN_INPUT reserves=0 slot=1 lv=12 HP=40 Atk=39 Def=18 SpA=13 SpD=19 Speed=32 item=479 ability=146
+DEVAN_INPUT reserves=0 slot=2 lv=12 HP=45 Atk=36 Def=32 SpA=16 SpD=18 Speed=15 item=494 ability=5
+DEVAN_INPUT reserves=0 slot=3 lv=12 HP=37 Atk=33 Def=17 SpA=15 SpD=17 Speed=34 item=494 ability=153
+AI decision turn=1 actor=0 move=Fake Out target=3
+AI decision turn=1 actor=1 move=High Horsepower target=0
+AI decision turn=1 actor=2 move=Rain Dance target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Taunt target=1
+AI decision turn=2 actor=1 move=High Horsepower target=0
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=3 move=Drill Run target=0
+AI switch turn=2 actor=3 party=2
+AI decision turn=3 actor=1 move=High Horsepower target=0
+AI decision turn=3 actor=3 move=Protect target=3
+DEVAN_AFTER board=10 turns=2 reserves=0 native=2 species=449/304 HP=49/45 foes=4/48 moves=High Horsepower/- weather=2 duration=3 speeds=16/15 foeSpeeds=39/34 AtkStages=6/6 foeStatus=0/0 faints=1/0
+DEVAN_INPUT reserves=0 slot=0 lv=12 HP=49 Atk=26 Def=38 SpA=15 SpD=18 Speed=16 item=494 ability=45
+DEVAN_INPUT reserves=0 slot=1 lv=12 HP=40 Atk=39 Def=18 SpA=13 SpD=19 Speed=32 item=479 ability=146
+DEVAN_INPUT reserves=0 slot=2 lv=12 HP=45 Atk=36 Def=32 SpA=16 SpD=18 Speed=15 item=494 ability=5
+DEVAN_INPUT reserves=0 slot=3 lv=12 HP=37 Atk=33 Def=17 SpA=15 SpD=17 Speed=34 item=494 ability=153
+AI decision turn=1 actor=0 move=Fake Out target=3
+AI decision turn=1 actor=1 move=High Horsepower target=0
+AI decision turn=1 actor=2 move=Rain Dance target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Taunt target=1
+AI decision turn=2 actor=1 move=High Horsepower target=0
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=3 move=Drill Run target=0
+AI switch turn=2 actor=3 party=2
+AI decision turn=3 actor=0 move=Taunt target=1
+AI decision turn=3 actor=1 move=High Horsepower target=0
+AI decision turn=3 actor=2 move=Giga Drain target=3
+AI decision turn=3 actor=3 move=Protect target=3
+AI decision turn=4 actor=1 move=High Horsepower target=2
+AI decision turn=4 actor=3 move=Rock Slide target=2
+DEVAN_AFTER board=10 turns=3 reserves=0 native=3 species=449/304 HP=49/45 foes=0/48 moves=High Horsepower/Protect weather=2 duration=2 speeds=16/15 foeSpeeds=0/34 AtkStages=6/6 foeStatus=0/0 faints=1/1
+DEVAN_INPUT reserves=0 slot=0 lv=12 HP=49 Atk=26 Def=38 SpA=15 SpD=18 Speed=16 item=494 ability=45
+DEVAN_INPUT reserves=0 slot=1 lv=12 HP=40 Atk=39 Def=18 SpA=13 SpD=19 Speed=32 item=479 ability=146
+DEVAN_INPUT reserves=0 slot=2 lv=12 HP=45 Atk=36 Def=32 SpA=16 SpD=18 Speed=15 item=494 ability=5
+DEVAN_INPUT reserves=0 slot=3 lv=12 HP=37 Atk=33 Def=17 SpA=15 SpD=17 Speed=34 item=494 ability=153
+AI decision turn=1 actor=0 move=Fake Out target=3
+AI decision turn=1 actor=1 move=High Horsepower target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Helping Hand target=3
+AI decision turn=2 actor=3 move=X-Scissor target=2
+DEVAN_AFTER board=11 turns=1 reserves=0 native=1 species=449/529 HP=49/40 foes=34/45 moves=High Horsepower/Protect weather=64 duration=4 speeds=16/64 foeSpeeds=39/17 AtkStages=6/6 foeStatus=0/0 faints=0/0
+DEVAN_INPUT reserves=0 slot=0 lv=12 HP=49 Atk=26 Def=38 SpA=15 SpD=18 Speed=16 item=494 ability=45
+DEVAN_INPUT reserves=0 slot=1 lv=12 HP=40 Atk=39 Def=18 SpA=13 SpD=19 Speed=32 item=479 ability=146
+DEVAN_INPUT reserves=0 slot=2 lv=12 HP=45 Atk=36 Def=32 SpA=16 SpD=18 Speed=15 item=494 ability=5
+DEVAN_INPUT reserves=0 slot=3 lv=12 HP=37 Atk=33 Def=17 SpA=15 SpD=17 Speed=34 item=494 ability=153
+AI decision turn=1 actor=0 move=Fake Out target=3
+AI decision turn=1 actor=1 move=High Horsepower target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Taunt target=1
+AI decision turn=2 actor=1 move=Helping Hand target=3
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=3 move=X-Scissor target=2
+AI decision turn=3 actor=1 move=High Horsepower target=0
+AI decision turn=3 actor=3 move=Drill Run target=0
+DEVAN_AFTER board=11 turns=2 reserves=0 native=2 species=449/529 HP=49/36 foes=31/0 moves=Helping Hand/X-Scissor weather=64 duration=3 speeds=16/64 foeSpeeds=39/0 AtkStages=6/6 foeStatus=0/0 faints=0/1
+DEVAN_INPUT reserves=0 slot=0 lv=12 HP=49 Atk=26 Def=38 SpA=15 SpD=18 Speed=16 item=494 ability=45
+DEVAN_INPUT reserves=0 slot=1 lv=12 HP=40 Atk=39 Def=18 SpA=13 SpD=19 Speed=32 item=479 ability=146
+DEVAN_INPUT reserves=0 slot=2 lv=12 HP=45 Atk=36 Def=32 SpA=16 SpD=18 Speed=15 item=494 ability=5
+DEVAN_INPUT reserves=0 slot=3 lv=12 HP=37 Atk=33 Def=17 SpA=15 SpD=17 Speed=34 item=494 ability=153
+AI decision turn=1 actor=0 move=Fake Out target=3
+AI decision turn=1 actor=1 move=High Horsepower target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Taunt target=1
+AI decision turn=2 actor=1 move=Helping Hand target=3
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=3 move=X-Scissor target=2
+AI decision turn=3 actor=0 move=Taunt target=1
+AI decision turn=3 actor=1 move=High Horsepower target=0
+AI decision turn=3 actor=3 move=Drill Run target=0
+DEVAN_AFTER board=11 turns=3 reserves=0 native=2 species=449/529 HP=49/32 foes=0/0 moves=High Horsepower/Drill Run weather=64 duration=3 speeds=16/64 foeSpeeds=39/0 AtkStages=6/6 foeStatus=0/0 faints=0/2
+[1] EC live review E0001: native counterfactual sash pressure lines: [32mPASS[0m
+AI decision turn=1 actor=0 move=Drain Punch target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+E1 counterfactual web=0 TreeckoPartyHP=35 PikaPartyHP=3 foesHP=7/41 foeSpeedStages=6/6 leftSpecies=Treecko
+AI decision turn=1 actor=0 move=Drain Punch target=1
+AI decision turn=1 actor=1 move=Seed Bomb target=0
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Electroweb target=0
+E1 counterfactual web=1 TreeckoPartyHP=10 PikaPartyHP=3 foesHP=25/40 foeSpeedStages=5/5 leftSpecies=Treecko
+[0] EC live review Protect audit opening: actual first trainers sustained pressure: [32mPASS[0m
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Swords Dance target=1
+AI decision turn=1 actor=2 move=Double-Edge target=3
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Drain Punch target=2
+AI decision turn=2 actor=2 move=Wish target=2
+AI decision turn=2 actor=3 move=Thunderbolt target=2
+AI decision turn=3 actor=1 move=Drain Punch target=2
+AI decision turn=3 actor=3 move=Electroweb target=0
+GUARD_AUDIT trainer=520 turns=2 HP=18/34 foes=53/6 last=Drain Punch/Thunderbolt streaks=0/0 resulting=Drain Punch/Thunderbolt
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Swords Dance target=1
+AI decision turn=1 actor=2 move=Double-Edge target=3
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Drain Punch target=2
+AI decision turn=2 actor=2 move=Wish target=2
+AI decision turn=2 actor=3 move=Thunderbolt target=2
+AI decision turn=3 actor=0 move=Super Fang target=1
+AI decision turn=3 actor=1 move=Drain Punch target=2
+AI decision turn=3 actor=2 move=Double-Edge target=3
+AI decision turn=3 actor=3 move=Electroweb target=0
+AI decision turn=4 actor=0 move=Super Fang target=1
+AI decision turn=4 actor=1 move=Drain Punch target=0
+AI decision turn=4 actor=3 move=Helping Hand target=1
+AI decision turn=5 actor=1 move=Seed Bomb target=0
+AI decision turn=5 actor=3 move=Helping Hand target=1
+GUARD_AUDIT trainer=520 turns=4 HP=10/34 foes=38/0 last=Drain Punch/Helping Hand streaks=0/0 resulting=Drain Punch/Helping Hand
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Superpower target=2
+AI decision turn=1 actor=2 move=Double-Edge target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=2
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Liquidation target=2
+AI decision turn=2 actor=2 move=Wish target=2
+AI decision turn=2 actor=3 move=Thunderbolt target=2
+AI decision turn=3 actor=1 move=Liquidation target=0
+AI decision turn=3 actor=3 move=Helping Hand target=1
+GUARD_AUDIT trainer=526 turns=2 HP=5/34 foes=36/0 last=Liquidation/Thunderbolt streaks=0/0 resulting=Liquidation/Thunderbolt
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Superpower target=2
+AI decision turn=1 actor=2 move=Double-Edge target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=2
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Liquidation target=2
+AI decision turn=2 actor=2 move=Wish target=2
+AI decision turn=2 actor=3 move=Thunderbolt target=2
+AI decision turn=3 actor=0 move=Super Fang target=1
+AI decision turn=3 actor=1 move=Liquidation target=0
+AI decision turn=3 actor=3 move=Helping Hand target=1
+GUARD_AUDIT trainer=526 turns=3 HP=0/34 foes=0/0 last=-/Helping Hand streaks=0/0 resulting=-/Helping Hand
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Heat Wave target=0
+AI decision turn=1 actor=2 move=Double-Edge target=3
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Protect target=1
+AI switch turn=2 actor=3 party=2
+AI decision turn=2 actor=2 move=Wish target=2
+AI decision turn=3 actor=1 move=Heat Wave target=0
+AI decision turn=3 actor=3 move=Leech Seed target=0
+GUARD_AUDIT trainer=523 turns=2 HP=15/47 foes=31/32 last=Protect/- streaks=1/0 resulting=Protect/-
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Heat Wave target=0
+AI decision turn=1 actor=2 move=Double-Edge target=3
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Protect target=1
+AI switch turn=2 actor=3 party=2
+AI decision turn=2 actor=2 move=Wish target=2
+AI decision turn=3 actor=0 move=Super Fang target=1
+AI decision turn=3 actor=1 move=Heat Wave target=0
+AI decision turn=3 actor=2 move=Double-Edge target=3
+AI decision turn=3 actor=3 move=Leech Seed target=0
+AI decision turn=4 actor=0 move=Super Fang target=1
+AI decision turn=4 actor=1 move=Flamethrower target=0
+AI decision turn=4 actor=2 move=Wish target=2
+AI decision turn=4 actor=3 move=Leech Seed target=2
+AI decision turn=5 actor=1 move=Heat Wave target=2
+AI decision turn=5 actor=3 move=Giga Drain target=2
+GUARD_AUDIT trainer=523 turns=4 HP=3/47 foes=0/35 last=Flamethrower/Leech Seed streaks=1/0 resulting=Flamethrower/Leech Seed
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Crunch target=2
+AI decision turn=1 actor=2 move=Double-Edge target=3
+AI decision turn=1 actor=3 move=Extreme Speed target=2
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Helping Hand target=3
+AI decision turn=2 actor=2 move=Wish target=2
+AI decision turn=2 actor=3 move=Extreme Speed target=2
+AI decision turn=3 actor=1 move=Helping Hand target=3
+AI decision turn=3 actor=3 move=Extreme Speed target=0
+GUARD_AUDIT trainer=318 turns=2 HP=9/12 foes=53/0 last=Helping Hand/Extreme Speed streaks=0/0 resulting=Helping Hand/Extreme Speed
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Crunch target=2
+AI decision turn=1 actor=2 move=Double-Edge target=3
+AI decision turn=1 actor=3 move=Extreme Speed target=2
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Helping Hand target=3
+AI decision turn=2 actor=2 move=Wish target=2
+AI decision turn=2 actor=3 move=Extreme Speed target=2
+AI decision turn=3 actor=0 move=Super Fang target=1
+AI decision turn=3 actor=1 move=Helping Hand target=3
+AI decision turn=3 actor=3 move=Extreme Speed target=0
+AI decision turn=4 actor=0 move=Super Fang target=1
+AI decision turn=4 actor=1 move=Taunt target=0
+AI decision turn=4 actor=3 move=Extreme Speed target=0
+AI decision turn=5 actor=1 move=Crunch target=0
+AI decision turn=5 actor=3 move=Protect target=3
+GUARD_AUDIT trainer=318 turns=4 HP=3/12 foes=31/0 last=Taunt/Extreme Speed streaks=0/0 resulting=Taunt/Extreme Speed
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Knock Off target=2
+AI decision turn=1 actor=2 move=Double-Edge target=3
+AI decision turn=1 actor=3 move=Rock Slide target=0
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Knock Off target=2
+AI decision turn=2 actor=2 move=Wish target=2
+AI decision turn=2 actor=3 move=X-Scissor target=2
+AI decision turn=3 actor=1 move=Knock Off target=2
+AI decision turn=3 actor=3 move=Rock Slide target=0
+GUARD_AUDIT trainer=615 turns=2 HP=11/39 foes=46/6 last=Knock Off/X-Scissor streaks=0/0 resulting=Knock Off/X-Scissor
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Knock Off target=2
+AI decision turn=1 actor=2 move=Double-Edge target=3
+AI decision turn=1 actor=3 move=Rock Slide target=0
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Knock Off target=2
+AI decision turn=2 actor=2 move=Wish target=2
+AI decision turn=2 actor=3 move=X-Scissor target=2
+AI decision turn=3 actor=0 move=Super Fang target=1
+AI decision turn=3 actor=1 move=Knock Off target=2
+AI decision turn=3 actor=2 move=Double-Edge target=3
+AI decision turn=3 actor=3 move=Rock Slide target=0
+AI decision turn=4 actor=0 move=Super Fang target=1
+AI decision turn=4 actor=1 move=Knock Off target=0
+AI decision turn=4 actor=3 move=Knock Off target=0
+AI decision turn=5 actor=1 move=Knock Off target=0
+AI decision turn=5 actor=3 move=X-Scissor target=0
+GUARD_AUDIT trainer=615 turns=4 HP=3/39 foes=24/0 last=Knock Off/Knock Off streaks=0/0 resulting=Knock Off/Knock Off
+[1] EC live review E0001: actual Treecko pair against faster Inner Focus pressure: [32mPASS[0m
+AI decision turn=1 actor=0 move=Drain Punch target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=2
+AI decision turn=2 actor=1 move=Seed Bomb target=0
+AI decision turn=2 actor=3 move=Thunderbolt target=2
+E1 pressure sash=0 executed=Protect/Thunderbolt opponentHP=35/34 playerHP=41/17 playerSpeeds=39/39 opponentSpeeds=36/40
+AI decision turn=1 actor=0 move=Drain Punch target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=2
+AI decision turn=2 actor=1 move=Seed Bomb target=2
+AI decision turn=2 actor=3 move=Electroweb target=0
+E1 pressure sash=1 executed=Protect/Thunderbolt opponentHP=35/34 playerHP=41/7 playerSpeeds=39/39 opponentSpeeds=36/40
+[0] EC live review E0001: pressure follow-through after opening guards: [32mPASS[0m
+AI decision turn=1 actor=0 move=Drain Punch target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=2
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Seed Bomb target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Thunderbolt target=2
+AI decision turn=3 actor=1 move=Seed Bomb target=0
+AI decision turn=3 actor=3 move=Electroweb target=0
+E1 pressure follow-through sash=0 turns=2 lastExecuted=Seed Bomb/Thunderbolt partyHP=10/34 foesHP=25/0 guardCounters=1/0
+AI decision turn=1 actor=0 move=Drain Punch target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=2
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Seed Bomb target=2
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Electroweb target=0
+AI decision turn=3 actor=1 move=Seed Bomb target=0
+AI decision turn=3 actor=3 move=Thunderbolt target=0
+E1 pressure follow-through sash=1 turns=2 lastExecuted=Seed Bomb/Electroweb partyHP=10/34 foesHP=25/0 guardCounters=1/0
+[2] EC live review Allen Guard AI: two native Heat Wave attackers: [32mPASS[0m
+AI decision turn=1 actor=0 move=Heat Wave target=1
+AI decision turn=1 actor=1 move=Volt Tackle target=0
+AI switch turn=1 actor=3 party=2
+AI decision turn=1 actor=2 move=Heat Wave target=1
+AI decision turn=2 actor=1 move=Volt Tackle target=2
+AI decision turn=2 actor=3 move=Body Slam target=2
+Allen Guard AI wacan=0 turns=1 completed=1 LAST=Volt Tackle/- activeParty=0/2 species=25/287 HP=6/32 foeHP=0/48 foeLAST=-/Heat Wave guardUses=0/0
+AI decision turn=1 actor=0 move=Heat Wave target=1
+AI decision turn=1 actor=1 move=Volt Tackle target=0
+AI switch turn=1 actor=3 party=2
+AI decision turn=1 actor=2 move=Heat Wave target=1
+AI decision turn=2 actor=2 move=Heat Wave target=1
+AI decision turn=2 actor=1 move=Volt Tackle target=2
+AI decision turn=2 actor=3 move=Body Slam target=2
+Allen Guard AI wacan=0 turns=2 completed=1 LAST=-/- activeParty=0/2 species=25/287 HP=0/32 foeHP=0/0 foeLAST=-/- guardUses=0/0
+AI decision turn=1 actor=0 move=Heat Wave target=1
+AI decision turn=1 actor=1 move=Fake Out target=2
+AI decision turn=1 actor=2 move=Heat Wave target=1
+AI decision turn=1 actor=3 move=Leech Life target=0
+AI switch turn=1 actor=3 party=3
+AI decision turn=2 actor=1 move=Volt Tackle target=2
+AI decision turn=2 actor=3 move=Rock Slide target=0
+Allen Guard AI wacan=1 turns=1 completed=1 LAST=Fake Out/- activeParty=0/3 species=25/659 HP=21/34 foeHP=48/40 foeLAST=Heat Wave/- guardUses=0/0
+AI decision turn=1 actor=0 move=Heat Wave target=1
+AI decision turn=1 actor=1 move=Fake Out target=2
+AI decision turn=1 actor=2 move=Heat Wave target=1
+AI decision turn=1 actor=3 move=Leech Life target=0
+AI switch turn=1 actor=3 party=3
+AI decision turn=2 actor=0 move=Heat Wave target=1
+AI decision turn=2 actor=1 move=Volt Tackle target=2
+AI decision turn=2 actor=2 move=Heat Wave target=1
+AI decision turn=2 actor=3 move=Rock Slide target=0
+AI decision turn=3 actor=1 move=Volt Tackle target=0
+AI decision turn=3 actor=3 move=Frustration target=0
+Allen Guard AI wacan=1 turns=2 completed=2 LAST=Volt Tackle/Rock Slide activeParty=0/3 species=25/659 HP=11/34 foeHP=28/0 foeLAST=Heat Wave/- guardUses=0/0
+[0] EC live review E0001: actual setup and immunity support window: [32mPASS[0m
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Swords Dance target=1
+AI decision turn=1 actor=2 move=Yawn target=1
+AI decision turn=1 actor=3 move=Fake Out target=0
+AI decision turn=2 actor=1 move=Drain Punch target=2
+AI decision turn=2 actor=3 move=Thunderbolt target=2
+E1 setup turns=1 executed=Swords Dance/Fake Out TreeckoAttackStage=8 playerHP=48/52 opponentHP=35/34
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Swords Dance target=1
+AI decision turn=1 actor=2 move=Yawn target=1
+AI decision turn=1 actor=3 move=Fake Out target=0
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Drain Punch target=2
+AI decision turn=2 actor=2 move=Wish target=2
+AI decision turn=2 actor=3 move=Thunderbolt target=2
+AI decision turn=3 actor=1 move=Seed Bomb target=0
+AI decision turn=3 actor=3 move=Thunderbolt target=2
+E1 setup turns=2 executed=Drain Punch/Thunderbolt TreeckoAttackStage=8 playerHP=48/14 opponentHP=26/34
+[0] EC battle plans: compiled directives follow trainer ownership and exclude other battle namespaces: [32mPASS[0m
+[0] EC expert pair: two eligible partners commit only one Mega for their owner: [32mPASS[0m
+[1] EC live review Allen: actual opening sleep immunity and Fake Out controls: [32mPASS[0m
+ALLEN_INPUT scenario=0 owner=0 slot=0 species=417 level=14 HP=53 Atk=18 Def=40 SpA=21 SpD=34 Speed=35 item=523 ability=10
+ALLEN_INPUT scenario=0 owner=0 slot=1 species=133 level=14 HP=52 Atk=36 Def=23 SpA=18 SpD=27 Speed=24 item=494 ability=91
+ALLEN_INPUT scenario=0 owner=1 slot=0 species=25 level=12 HP=34 Atk=29 Def=18 SpA=18 SpD=20 Speed=40 item=392 ability=31
+ALLEN_INPUT scenario=0 owner=1 slot=1 species=46 level=12 HP=41 Atk=36 Def=22 SpA=17 SpD=21 Speed=14 item=494 ability=87
+ALLEN_INPUT scenario=0 owner=1 slot=2 species=287 level=12 HP=47 Atk=33 Def=23 SpA=15 SpD=17 Speed=15 item=442 ability=54
+ALLEN_INPUT scenario=0 owner=1 slot=3 species=659 level=12 HP=34 Atk=26 Def=17 SpA=14 SpD=17 Speed=29 item=523 ability=37
+AI decision turn=1 actor=0 move=Thunderbolt target=3
+AI decision turn=1 actor=1 move=Fake Out target=2
+AI decision turn=1 actor=2 move=Double-Edge target=3
+AI decision turn=1 actor=3 move=Leech Life target=2
+AI decision turn=2 actor=1 move=Volt Tackle target=2
+AI decision turn=2 actor=3 move=Protect target=3
+ALLEN_AFTER scenario=0 LAST=Fake Out/Leech Life liveSpecies=25/46 HP=34/41 playerHP=53/29 sleep=0/0 SpeedStage=6/6 Reflect=0 turns=1
+ALLEN_INPUT scenario=1 owner=0 slot=0 species=270 level=14 HP=48 Atk=15 Def=28 SpA=20 SpD=23 Speed=17 item=494 ability=44
+ALLEN_INPUT scenario=1 owner=0 slot=1 species=619 level=14 HP=49 Atk=45 Def=23 SpA=21 SpD=23 Speed=27 item=504 ability=144
+ALLEN_INPUT scenario=1 owner=1 slot=0 species=25 level=12 HP=34 Atk=29 Def=18 SpA=18 SpD=20 Speed=40 item=392 ability=31
+ALLEN_INPUT scenario=1 owner=1 slot=1 species=46 level=12 HP=41 Atk=36 Def=22 SpA=17 SpD=21 Speed=14 item=494 ability=87
+ALLEN_INPUT scenario=1 owner=1 slot=2 species=287 level=12 HP=47 Atk=33 Def=23 SpA=15 SpD=17 Speed=15 item=442 ability=54
+ALLEN_INPUT scenario=1 owner=1 slot=3 species=659 level=12 HP=34 Atk=26 Def=17 SpA=14 SpD=17 Speed=29 item=523 ability=37
+AI decision turn=1 actor=0 move=Giga Drain target=3
+AI decision turn=1 actor=1 move=Volt Tackle target=2
+AI decision turn=1 actor=2 move=Drain Punch target=1
+AI decision turn=1 actor=3 move=Leech Life target=0
+AI decision turn=2 actor=1 move=Volt Tackle target=0
+AI decision turn=2 actor=3 move=Leech Life target=2
+ALLEN_AFTER scenario=1 LAST=Volt Tackle/Leech Life liveSpecies=25/46 HP=19/41 playerHP=24/1 sleep=0/0 SpeedStage=6/6 Reflect=0 turns=1
+ALLEN_INPUT scenario=2 owner=0 slot=0 species=619 level=14 HP=41 Atk=41 Def=23 SpA=21 SpD=23 Speed=39 item=444 ability=144
+ALLEN_INPUT scenario=2 owner=0 slot=1 species=133 level=14 HP=52 Atk=36 Def=23 SpA=18 SpD=27 Speed=24 item=494 ability=91
+ALLEN_INPUT scenario=2 owner=1 slot=0 species=25 level=12 HP=34 Atk=29 Def=18 SpA=18 SpD=20 Speed=40 item=392 ability=31
+ALLEN_INPUT scenario=2 owner=1 slot=1 species=46 level=12 HP=41 Atk=36 Def=22 SpA=17 SpD=21 Speed=14 item=494 ability=87
+ALLEN_INPUT scenario=2 owner=1 slot=2 species=287 level=12 HP=47 Atk=33 Def=23 SpA=15 SpD=17 Speed=15 item=442 ability=54
+ALLEN_INPUT scenario=2 owner=1 slot=3 species=659 level=12 HP=34 Atk=26 Def=17 SpA=14 SpD=17 Speed=29 item=523 ability=37
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Volt Tackle target=0
+AI decision turn=1 actor=2 move=Double-Edge target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Volt Tackle target=0
+AI decision turn=2 actor=3 move=Leech Life target=2
+ALLEN_AFTER scenario=2 LAST=-/Protect liveSpecies=25/46 HP=23/41 playerHP=41/52 sleep=0/0 SpeedStage=6/6 Reflect=0 turns=1
+ALLEN_INPUT scenario=3 owner=0 slot=0 species=532 level=14 HP=58 Atk=44 Def=24 SpA=16 SpD=19 Speed=17 item=494 ability=89
+ALLEN_INPUT scenario=3 owner=0 slot=1 species=532 level=14 HP=58 Atk=44 Def=24 SpA=16 SpD=19 Speed=17 item=494 ability=89
+ALLEN_INPUT scenario=3 owner=1 slot=0 species=25 level=12 HP=34 Atk=29 Def=18 SpA=18 SpD=20 Speed=40 item=392 ability=31
+ALLEN_INPUT scenario=3 owner=1 slot=1 species=46 level=12 HP=41 Atk=36 Def=22 SpA=17 SpD=21 Speed=14 item=494 ability=87
+ALLEN_INPUT scenario=3 owner=1 slot=2 species=287 level=12 HP=47 Atk=33 Def=23 SpA=15 SpD=17 Speed=15 item=442 ability=54
+ALLEN_INPUT scenario=3 owner=1 slot=3 species=659 level=12 HP=34 Atk=26 Def=17 SpA=14 SpD=17 Speed=29 item=523 ability=37
+AI decision turn=1 actor=0 move=Ice Punch target=3
+AI decision turn=1 actor=1 move=Fake Out target=2
+AI decision turn=1 actor=2 move=Ice Punch target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Electroweb target=0
+AI decision turn=2 actor=3 move=Spore target=2
+ALLEN_AFTER scenario=3 LAST=Fake Out/Protect liveSpecies=25/46 HP=34/41 playerHP=58/51 sleep=0/0 SpeedStage=6/6 Reflect=0 turns=1
+ALLEN_INPUT scenario=4 owner=0 slot=0 species=417 level=14 HP=53 Atk=18 Def=40 SpA=21 SpD=34 Speed=35 item=523 ability=10
+ALLEN_INPUT scenario=4 owner=0 slot=1 species=177 level=14 HP=48 Atk=20 Def=33 SpA=29 SpD=21 Speed=28 item=494 ability=156
+ALLEN_INPUT scenario=4 owner=1 slot=0 species=25 level=12 HP=34 Atk=29 Def=18 SpA=18 SpD=20 Speed=40 item=392 ability=31
+ALLEN_INPUT scenario=4 owner=1 slot=1 species=46 level=12 HP=41 Atk=36 Def=22 SpA=17 SpD=21 Speed=14 item=494 ability=87
+ALLEN_INPUT scenario=4 owner=1 slot=2 species=287 level=12 HP=47 Atk=33 Def=23 SpA=15 SpD=17 Speed=15 item=442 ability=54
+ALLEN_INPUT scenario=4 owner=1 slot=3 species=659 level=12 HP=34 Atk=26 Def=17 SpA=14 SpD=17 Speed=29 item=523 ability=37
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Volt Tackle target=2
+AI decision turn=1 actor=2 move=Heat Wave target=1
+AI decision turn=1 actor=3 move=Leech Life target=0
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Leech Life target=0
+ALLEN_AFTER scenario=4 LAST=Volt Tackle/Leech Life liveSpecies=25/46 HP=10/41 playerHP=41/0 sleep=0/0 SpeedStage=6/6 Reflect=0 turns=1
+[3] EC live review Devan core: physical special leads and reserves: [32mPASS[0m
+DEVAN_INPUT reserves=0 slot=0 lv=12 HP=49 Atk=26 Def=38 SpA=15 SpD=18 Speed=16 item=494 ability=45
+DEVAN_INPUT reserves=0 slot=1 lv=12 HP=40 Atk=39 Def=18 SpA=13 SpD=19 Speed=32 item=479 ability=146
+DEVAN_INPUT reserves=0 slot=2 lv=12 HP=45 Atk=36 Def=32 SpA=16 SpD=18 Speed=15 item=494 ability=5
+DEVAN_INPUT reserves=0 slot=3 lv=12 HP=37 Atk=33 Def=17 SpA=15 SpD=17 Speed=34 item=494 ability=153
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=High Horsepower target=0
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Helping Hand target=3
+AI decision turn=2 actor=3 move=Drill Run target=0
+DEVAN_AFTER board=0 turns=1 reserves=0 native=1 species=449/529 HP=35/40 foes=33/55 moves=High Horsepower/Protect weather=64 duration=4 speeds=16/64 foeSpeeds=24/19 AtkStages=6/6 foeStatus=0/0 faints=0/0
+DEVAN_INPUT reserves=0 slot=0 lv=12 HP=49 Atk=26 Def=38 SpA=15 SpD=18 Speed=16 item=494 ability=45
+DEVAN_INPUT reserves=0 slot=1 lv=12 HP=40 Atk=39 Def=18 SpA=13 SpD=19 Speed=32 item=479 ability=146
+DEVAN_INPUT reserves=0 slot=2 lv=12 HP=45 Atk=36 Def=32 SpA=16 SpD=18 Speed=15 item=494 ability=5
+DEVAN_INPUT reserves=0 slot=3 lv=12 HP=37 Atk=33 Def=17 SpA=15 SpD=17 Speed=34 item=494 ability=153
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=High Horsepower target=0
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Helping Hand target=3
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Drill Run target=0
+AI decision turn=3 actor=1 move=Slack Off target=1
+AI decision turn=3 actor=3 move=Protect target=3
+DEVAN_AFTER board=0 turns=2 reserves=0 native=2 species=449/529 HP=21/8 foes=0/55 moves=Helping Hand/Drill Run weather=64 duration=3 speeds=16/64 foeSpeeds=0/19 AtkStages=6/6 foeStatus=0/0 faints=0/1
+DEVAN_INPUT reserves=0 slot=0 lv=12 HP=49 Atk=26 Def=38 SpA=15 SpD=18 Speed=16 item=494 ability=45
+DEVAN_INPUT reserves=0 slot=1 lv=12 HP=40 Atk=39 Def=18 SpA=13 SpD=19 Speed=32 item=479 ability=146
+DEVAN_INPUT reserves=0 slot=2 lv=12 HP=45 Atk=36 Def=32 SpA=16 SpD=18 Speed=15 item=494 ability=5
+DEVAN_INPUT reserves=0 slot=3 lv=12 HP=37 Atk=33 Def=17 SpA=15 SpD=17 Speed=34 item=494 ability=153
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=High Horsepower target=0
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Helping Hand target=3
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Drill Run target=0
+AI decision turn=3 actor=2 move=Drain Punch target=3
+AI decision turn=3 actor=1 move=Slack Off target=1
+AI decision turn=3 actor=3 move=Protect target=3
+AI decision turn=4 actor=1 move=High Horsepower target=2
+AI decision turn=4 actor=3 move=Drill Run target=2
+DEVAN_AFTER board=0 turns=3 reserves=0 native=3 species=449/529 HP=45/8 foes=0/52 moves=Slack Off/Protect weather=64 duration=2 speeds=16/64 foeSpeeds=0/19 AtkStages=6/6 foeStatus=0/0 faints=0/1
+DEVAN_INPUT reserves=0 slot=0 lv=12 HP=49 Atk=26 Def=38 SpA=15 SpD=18 Speed=16 item=494 ability=45
+DEVAN_INPUT reserves=0 slot=1 lv=12 HP=40 Atk=39 Def=18 SpA=13 SpD=19 Speed=32 item=479 ability=146
+DEVAN_INPUT reserves=0 slot=2 lv=12 HP=45 Atk=36 Def=32 SpA=16 SpD=18 Speed=15 item=494 ability=5
+DEVAN_INPUT reserves=0 slot=3 lv=12 HP=37 Atk=33 Def=17 SpA=15 SpD=17 Speed=34 item=494 ability=153
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=High Horsepower target=0
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Helping Hand target=3
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Drill Run target=0
+AI decision turn=3 actor=2 move=Drain Punch target=3
+AI decision turn=3 actor=1 move=Slack Off target=1
+AI decision turn=3 actor=3 move=Protect target=3
+AI decision turn=4 actor=2 move=Drain Punch target=3
+AI decision turn=4 actor=1 move=High Horsepower target=2
+AI decision turn=4 actor=3 move=Drill Run target=2
+AI switch turn=4 actor=3 party=2
+AI decision turn=5 actor=1 move=High Horsepower target=2
+AI decision turn=5 actor=3 move=Protect target=3
+DEVAN_AFTER board=0 turns=4 reserves=0 native=4 species=449/304 HP=45/45 foes=0/20 moves=High Horsepower/- weather=64 duration=1 speeds=16/15 foeSpeeds=0/19 AtkStages=6/6 foeStatus=0/0 faints=1/1
+DEVAN_INPUT reserves=0 slot=0 lv=12 HP=49 Atk=26 Def=38 SpA=15 SpD=18 Speed=16 item=494 ability=45
+DEVAN_INPUT reserves=0 slot=1 lv=12 HP=40 Atk=39 Def=18 SpA=13 SpD=19 Speed=32 item=479 ability=146
+DEVAN_INPUT reserves=0 slot=2 lv=12 HP=45 Atk=36 Def=32 SpA=16 SpD=18 Speed=15 item=494 ability=5
+DEVAN_INPUT reserves=0 slot=3 lv=12 HP=37 Atk=33 Def=17 SpA=15 SpD=17 Speed=34 item=494 ability=153
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Helping Hand target=3
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=X-Scissor target=2
+AI decision turn=2 actor=1 move=Helping Hand target=3
+AI decision turn=2 actor=3 move=Drill Run target=0
+DEVAN_AFTER board=1 turns=1 reserves=0 native=1 species=449/529 HP=25/36 foes=50/0 moves=Helping Hand/X-Scissor weather=64 duration=4 speeds=16/64 foeSpeeds=35/0 AtkStages=6/6 foeStatus=0/0 faints=0/1
+DEVAN_INPUT reserves=0 slot=0 lv=12 HP=49 Atk=26 Def=38 SpA=15 SpD=18 Speed=16 item=494 ability=45
+DEVAN_INPUT reserves=0 slot=1 lv=12 HP=40 Atk=39 Def=18 SpA=13 SpD=19 Speed=32 item=479 ability=146
+DEVAN_INPUT reserves=0 slot=2 lv=12 HP=45 Atk=36 Def=32 SpA=16 SpD=18 Speed=15 item=494 ability=5
+DEVAN_INPUT reserves=0 slot=3 lv=12 HP=37 Atk=33 Def=17 SpA=15 SpD=17 Speed=34 item=494 ability=153
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Helping Hand target=3
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=X-Scissor target=2
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Helping Hand target=3
+AI decision turn=2 actor=3 move=Drill Run target=0
+AI decision turn=3 actor=1 move=High Horsepower target=0
+AI decision turn=3 actor=3 move=Drill Run target=0
+DEVAN_AFTER board=1 turns=2 reserves=0 native=2 species=449/529 HP=13/32 foes=11/0 moves=Helping Hand/Drill Run weather=64 duration=3 speeds=16/64 foeSpeeds=35/0 AtkStages=6/6 foeStatus=0/0 faints=0/1
+DEVAN_INPUT reserves=0 slot=0 lv=12 HP=49 Atk=26 Def=38 SpA=15 SpD=18 Speed=16 item=494 ability=45
+DEVAN_INPUT reserves=0 slot=1 lv=12 HP=40 Atk=39 Def=18 SpA=13 SpD=19 Speed=32 item=479 ability=146
+DEVAN_INPUT reserves=0 slot=2 lv=12 HP=45 Atk=36 Def=32 SpA=16 SpD=18 Speed=15 item=494 ability=5
+DEVAN_INPUT reserves=0 slot=3 lv=12 HP=37 Atk=33 Def=17 SpA=15 SpD=17 Speed=34 item=494 ability=153
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Helping Hand target=3
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=X-Scissor target=2
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Helping Hand target=3
+AI decision turn=2 actor=3 move=Drill Run target=0
+AI decision turn=3 actor=0 move=Super Fang target=1
+AI decision turn=3 actor=1 move=High Horsepower target=0
+AI decision turn=3 actor=3 move=Drill Run target=0
+DEVAN_AFTER board=1 turns=3 reserves=0 native=2 species=449/529 HP=13/28 foes=0/0 moves=Helping Hand/Drill Run weather=64 duration=3 speeds=16/64 foeSpeeds=35/0 AtkStages=6/6 foeStatus=0/0 faints=0/2
+DEVAN_INPUT reserves=1 slot=0 lv=12 HP=49 Atk=26 Def=38 SpA=15 SpD=18 Speed=16 item=494 ability=45
+DEVAN_INPUT reserves=1 slot=1 lv=12 HP=40 Atk=39 Def=18 SpA=13 SpD=19 Speed=32 item=479 ability=146
+DEVAN_INPUT reserves=1 slot=2 lv=12 HP=45 Atk=36 Def=32 SpA=16 SpD=18 Speed=15 item=494 ability=5
+DEVAN_INPUT reserves=1 slot=3 lv=12 HP=37 Atk=33 Def=17 SpA=15 SpD=17 Speed=34 item=494 ability=153
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Body Press target=0
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Crunch target=0
+DEVAN_AFTER board=0 turns=1 reserves=1 native=1 species=304/551 HP=41/37 foes=33/58 moves=Body Press/Protect weather=0 duration=0 speeds=15/34 foeSpeeds=24/19 AtkStages=6/6 foeStatus=0/0 faints=0/0
+DEVAN_INPUT reserves=1 slot=0 lv=12 HP=49 Atk=26 Def=38 SpA=15 SpD=18 Speed=16 item=494 ability=45
+DEVAN_INPUT reserves=1 slot=1 lv=12 HP=40 Atk=39 Def=18 SpA=13 SpD=19 Speed=32 item=479 ability=146
+DEVAN_INPUT reserves=1 slot=2 lv=12 HP=45 Atk=36 Def=32 SpA=16 SpD=18 Speed=15 item=494 ability=5
+DEVAN_INPUT reserves=1 slot=3 lv=12 HP=37 Atk=33 Def=17 SpA=15 SpD=17 Speed=34 item=494 ability=153
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Body Press target=0
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Crunch target=0
+AI decision turn=3 actor=1 move=Iron Head target=0
+DEVAN_AFTER board=0 turns=2 reserves=1 native=2 species=304/551 HP=41/0 foes=20/58 moves=Protect/- weather=0 duration=0 speeds=15/0 foeSpeeds=24/19 AtkStages=6/6 foeStatus=0/0 faints=1/0
+DEVAN_INPUT reserves=1 slot=0 lv=12 HP=49 Atk=26 Def=38 SpA=15 SpD=18 Speed=16 item=494 ability=45
+DEVAN_INPUT reserves=1 slot=1 lv=12 HP=40 Atk=39 Def=18 SpA=13 SpD=19 Speed=32 item=479 ability=146
+DEVAN_INPUT reserves=1 slot=2 lv=12 HP=45 Atk=36 Def=32 SpA=16 SpD=18 Speed=15 item=494 ability=5
+DEVAN_INPUT reserves=1 slot=3 lv=12 HP=37 Atk=33 Def=17 SpA=15 SpD=17 Speed=34 item=494 ability=153
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Body Press target=0
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Crunch target=0
+AI decision turn=3 actor=0 move=Double-Edge target=1
+AI decision turn=3 actor=1 move=Iron Head target=0
+AI decision turn=3 actor=2 move=Drain Punch target=3
+DEVAN_AFTER board=0 turns=3 reserves=1 native=2 species=304/551 HP=0/0 foes=19/58 moves=-/- weather=0 duration=0 speeds=15/0 foeSpeeds=24/19 AtkStages=6/6 foeStatus=0/0 faints=2/0
+DEVAN_INPUT reserves=1 slot=0 lv=12 HP=49 Atk=26 Def=38 SpA=15 SpD=18 Speed=16 item=494 ability=45
+DEVAN_INPUT reserves=1 slot=1 lv=12 HP=40 Atk=39 Def=18 SpA=13 SpD=19 Speed=32 item=479 ability=146
+DEVAN_INPUT reserves=1 slot=2 lv=12 HP=45 Atk=36 Def=32 SpA=16 SpD=18 Speed=15 item=494 ability=5
+DEVAN_INPUT reserves=1 slot=3 lv=12 HP=37 Atk=33 Def=17 SpA=15 SpD=17 Speed=34 item=494 ability=153
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Rock Slide target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Rock Slide target=0
+AI decision turn=2 actor=3 move=Crunch target=2
+DEVAN_AFTER board=1 turns=1 reserves=1 native=1 species=304/551 HP=23/37 foes=46/36 moves=Rock Slide/Protect weather=0 duration=0 speeds=15/34 foeSpeeds=35/17 AtkStages=6/6 foeStatus=0/0 faints=0/0
+DEVAN_INPUT reserves=1 slot=0 lv=12 HP=49 Atk=26 Def=38 SpA=15 SpD=18 Speed=16 item=494 ability=45
+DEVAN_INPUT reserves=1 slot=1 lv=12 HP=40 Atk=39 Def=18 SpA=13 SpD=19 Speed=32 item=479 ability=146
+DEVAN_INPUT reserves=1 slot=2 lv=12 HP=45 Atk=36 Def=32 SpA=16 SpD=18 Speed=15 item=494 ability=5
+DEVAN_INPUT reserves=1 slot=3 lv=12 HP=37 Atk=33 Def=17 SpA=15 SpD=17 Speed=34 item=494 ability=153
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Rock Slide target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Rock Slide target=0
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=3 move=Crunch target=2
+AI decision turn=3 actor=1 move=Protect target=1
+AI decision turn=3 actor=3 move=Crunch target=2
+DEVAN_AFTER board=1 turns=2 reserves=1 native=2 species=304/551 HP=12/5 foes=39/17 moves=Rock Slide/Crunch weather=0 duration=0 speeds=15/34 foeSpeeds=35/17 AtkStages=6/6 foeStatus=0/0 faints=0/0
+DEVAN_INPUT reserves=1 slot=0 lv=12 HP=49 Atk=26 Def=38 SpA=15 SpD=18 Speed=16 item=494 ability=45
+DEVAN_INPUT reserves=1 slot=1 lv=12 HP=40 Atk=39 Def=18 SpA=13 SpD=19 Speed=32 item=479 ability=146
+DEVAN_INPUT reserves=1 slot=2 lv=12 HP=45 Atk=36 Def=32 SpA=16 SpD=18 Speed=15 item=494 ability=5
+DEVAN_INPUT reserves=1 slot=3 lv=12 HP=37 Atk=33 Def=17 SpA=15 SpD=17 Speed=34 item=494 ability=153
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Rock Slide target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Rock Slide target=0
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=3 move=Crunch target=2
+AI decision turn=3 actor=0 move=Super Fang target=1
+AI decision turn=3 actor=1 move=Protect target=1
+AI decision turn=3 actor=2 move=Giga Drain target=3
+AI decision turn=3 actor=3 move=Crunch target=2
+AI decision turn=4 actor=1 move=Iron Head target=0
+AI decision turn=4 actor=3 move=Stomping Tantrum target=0
+DEVAN_AFTER board=1 turns=3 reserves=1 native=3 species=304/551 HP=12/5 foes=39/0 moves=Protect/Crunch weather=0 duration=0 speeds=15/34 foeSpeeds=35/0 AtkStages=6/7 foeStatus=0/0 faints=0/1
+DEVAN_INPUT reserves=1 slot=0 lv=12 HP=49 Atk=26 Def=38 SpA=15 SpD=18 Speed=16 item=494 ability=45
+DEVAN_INPUT reserves=1 slot=1 lv=12 HP=40 Atk=39 Def=18 SpA=13 SpD=19 Speed=32 item=479 ability=146
+DEVAN_INPUT reserves=1 slot=2 lv=12 HP=45 Atk=36 Def=32 SpA=16 SpD=18 Speed=15 item=494 ability=5
+DEVAN_INPUT reserves=1 slot=3 lv=12 HP=37 Atk=33 Def=17 SpA=15 SpD=17 Speed=34 item=494 ability=153
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Rock Slide target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Rock Slide target=0
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=3 move=Crunch target=2
+AI decision turn=3 actor=0 move=Super Fang target=1
+AI decision turn=3 actor=1 move=Protect target=1
+AI decision turn=3 actor=2 move=Giga Drain target=3
+AI decision turn=3 actor=3 move=Crunch target=2
+AI decision turn=4 actor=0 move=Super Fang target=1
+AI decision turn=4 actor=1 move=Iron Head target=0
+AI decision turn=4 actor=3 move=Stomping Tantrum target=0
+AI decision turn=5 actor=1 move=Protect target=1
+AI decision turn=5 actor=3 move=Stomping Tantrum target=0
+DEVAN_AFTER board=1 turns=4 reserves=1 native=4 species=304/551 HP=6/5 foes=14/0 moves=Iron Head/Stomping Tantrum weather=0 duration=0 speeds=15/34 foeSpeeds=35/0 AtkStages=6/7 foeStatus=0/0 faints=0/1
+
+- Tests [32mPASSED[0m:          61
+- Tests [34mTOTAL[0m:           61
+

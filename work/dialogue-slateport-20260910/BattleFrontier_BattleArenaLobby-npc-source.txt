@@ -1,0 +1,44 @@
+BattleFrontier_BattleArenaLobby_EventScript_Youngster::
+	msgbox BattleFrontier_BattleArenaLobby_Text_BadIdeaToNotAttack, MSGBOX_NPC
+	end
+
+
+BattleFrontier_BattleArenaLobby_EventScript_Man::
+	msgbox BattleFrontier_BattleArenaLobby_Text_LandingHitsWorked, MSGBOX_NPC
+	end
+
+
+BattleFrontier_BattleArenaLobby_EventScript_Camper::
+	msgbox BattleFrontier_BattleArenaLobby_Text_MatchWasDeclaredDraw, MSGBOX_NPC
+	end
+
+
+BattleFrontier_BattleArenaLobby_EventScript_Woman::
+	msgbox BattleFrontier_BattleArenaLobby_Text_OrderOfMonsImportant, MSGBOX_NPC
+	end
+
+
+BattleFrontier_BattleArenaLobby_Text_BadIdeaToNotAttack:
+	.string "I protected every turn and never\n"
+	.string "built a winning position.\p"
+	.string "Next time, my defensive choices\n"
+	.string "need to create an opportunity.$"
+
+BattleFrontier_BattleArenaLobby_Text_LandingHitsWorked:
+	.string "I kept finding safe chances to\n"
+	.string "land my attacks.\p"
+	.string "That won my last Circuit match!$"
+
+BattleFrontier_BattleArenaLobby_Text_MatchWasDeclaredDraw:
+	.string "The old ARENA judged a match after\n"
+	.string "three turns.\p"
+	.string "The CIRCUIT lets a longer plan\n"
+	.string "play out. You still have to\l"
+	.string "survive those first turns.$"
+
+BattleFrontier_BattleArenaLobby_Text_OrderOfMonsImportant:
+	.string "Your first two Pokémon begin the\n"
+	.string "Circuit battle together.\p"
+	.string "Make the opening pair support one\n"
+	.string "another, and keep useful answers\l"
+	.string "in reserve.$"

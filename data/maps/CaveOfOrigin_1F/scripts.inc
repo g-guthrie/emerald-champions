@@ -16,6 +16,8 @@ CaveOfOrigin_1F_EventScript_Carbink::
 	end
 
 CaveOfOrigin_1F_Text_CarbinkStuck:
-	.string "This CARBINK is guarding an old ladder.\p"
-	.string "Its crystals echo with the energy of\n"
-	.string "eight BADGES. Come back when they shine.$"
+	.string "This CARBINK is guarding an old\n"
+	.string "ladder.\p"
+	.string "Its crystals echo with the energy\n"
+	.string "of eight BADGES. Come back when\l"
+	.string "they shine.$"

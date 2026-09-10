@@ -1,0 +1,154 @@
+{
+  "elf": "/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/pokeemerald-legendary-audit-headless.elf",
+  "param_symbol": "0x0200220c",
+  "rendered": [
+    {
+      "fixture_map": "MAP_ALTERING_CAVE_B1F",
+      "fixture_species": "SPECIES_MEWTWO",
+      "frames": 650,
+      "keys": [],
+      "name": "encounter-01-mewtwo",
+      "param": 0,
+      "pixel_sha256": "114c5c160eeafabf8a8532cd8f7b140bdf1aecb90519b381f6102d40c03e0e56",
+      "player": [
+        7,
+        15
+      ],
+      "png_sha256": "ad3261299d5591795daf59b36b449f837fb242f2dc757a0f828e1605aab01333",
+      "scenario_id": 28,
+      "screenshot": "work/legendary-pipeline-audit/overworld/encounter-01-mewtwo.png",
+      "verified_runtime_state": true,
+      "video_hash": "07a6ca3fb9ab1722"
+    },
+    {
+      "fixture_map": "MAP_CAVE_OF_ORIGIN_DIANCIES_ROOM",
+      "fixture_species": "SPECIES_DIANCIE",
+      "frames": 650,
+      "keys": [],
+      "name": "encounter-02-diancie",
+      "param": 1,
+      "pixel_sha256": "2a42c2dcbcb47fccde29fe9159e71635d52feb7702563154562006207a0a3ab0",
+      "player": [
+        9,
+        11
+      ],
+      "png_sha256": "0a4fb178f265f569c1f63b7ff8e6807aa2eb1ee471347cc16f28eb053aa30b21",
+      "scenario_id": 28,
+      "screenshot": "work/legendary-pipeline-audit/overworld/encounter-02-diancie.png",
+      "verified_runtime_state": true,
+      "video_hash": "1df5a852ad5769ea"
+    },
+    {
+      "fixture_map": "MAP_EMBER_PATH",
+      "fixture_species": "SPECIES_MOLTRES",
+      "frames": 650,
+      "keys": [],
+      "name": "encounter-03-moltres",
+      "param": 2,
+      "pixel_sha256": "a49835bb799858b1a4c1e04acc40de196cfdcbbc51c524182f2ffe63e4615228",
+      "player": [
+        21,
+        17
+      ],
+      "png_sha256": "e8ff2758a53258b0440be48b8a0864d0251887ab989940482a54e7516f226c9b",
+      "scenario_id": 28,
+      "screenshot": "work/legendary-pipeline-audit/overworld/encounter-03-moltres.png",
+      "verified_runtime_state": true,
+      "video_hash": "3e7a1f0b1bb9e8df"
+    },
+    {
+      "fixture_map": "MAP_METEOR_FALLS_JIRACHIS_ROOM",
+      "fixture_species": "SPECIES_JIRACHI",
+      "frames": 650,
+      "keys": [],
+      "name": "encounter-04-jirachi",
+      "param": 3,
+      "pixel_sha256": "ba242b9e5b8a0336b0b7edce66ce822b718d828be41207b0e2292967c3a91bf1",
+      "player": [
+        7,
+        9
+      ],
+      "png_sha256": "f5098ff46c4a1017361fabcdc57375f0c1487837efbcbf5aac326bc5d6f45b0b",
+      "scenario_id": 28,
+      "screenshot": "work/legendary-pipeline-audit/overworld/encounter-04-jirachi.png",
+      "verified_runtime_state": true,
+      "video_hash": "ff47cf15ff45d7a6"
+    },
+    {
+      "fixture_map": "MAP_NEW_MAUVILLE_INSIDE",
+      "fixture_species": "SPECIES_ZAPDOS",
+      "frames": 650,
+      "keys": [],
+      "name": "encounter-05-zapdos",
+      "param": 4,
+      "pixel_sha256": "e775cf18750f1c7c7aca823b856606ff5be893605e1c9de007501544de9f4cc8",
+      "player": [
+        33,
+        18
+      ],
+      "png_sha256": "95438d3a25504e017f8a66fdd92acfec1379f790bdcf92cd07a2717d2560882f",
+      "scenario_id": 28,
+      "screenshot": "work/legendary-pipeline-audit/overworld/encounter-05-zapdos.png",
+      "verified_runtime_state": true,
+      "video_hash": "6241c29e3231ab6c"
+    },
+    {
+      "fixture_map": "MAP_SCORCHED_SLAB_HEATRANS_ROOM",
+      "fixture_species": "SPECIES_HEATRAN",
+      "frames": 650,
+      "keys": [],
+      "name": "encounter-06-heatran",
+      "param": 5,
+      "pixel_sha256": "83a68895622dc5b66a649873a0deb40fe2fc44c31d99566ed1152709a8d808c2",
+      "player": [
+        10,
+        15
+      ],
+      "png_sha256": "b0ff02d6dd7a4567e02fbe37d68e0fee2ce2c9bb35eff0ec33aaee22b2cf12b9",
+      "scenario_id": 28,
+      "screenshot": "work/legendary-pipeline-audit/overworld/encounter-06-heatran.png",
+      "verified_runtime_state": true,
+      "video_hash": "4990bd2746f9c789"
+    },
+    {
+      "fixture_map": "MAP_SEALED_CHAMBER_INNER_ROOM",
+      "fixture_species": "SPECIES_REGIGIGAS",
+      "frames": 650,
+      "keys": [],
+      "name": "encounter-07-regigigas",
+      "param": 6,
+      "pixel_sha256": "67b23471954f9aba93bb6200e0524120201ba4468ee9a2d2e1979a0e8ad6c030",
+      "player": [
+        10,
+        16
+      ],
+      "png_sha256": "826e639f9bf23d8fd7db5dee7d7d87b320d58aa8a1eb16b62acd32f9913effe8",
+      "scenario_id": 28,
+      "screenshot": "work/legendary-pipeline-audit/overworld/encounter-07-regigigas.png",
+      "verified_runtime_state": true,
+      "video_hash": "9ef4cfc0a0b9e951"
+    },
+    {
+      "fixture_map": "MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM",
+      "fixture_species": "SPECIES_ARTICUNO",
+      "frames": 650,
+      "keys": [],
+      "name": "encounter-08-articuno",
+      "param": 7,
+      "pixel_sha256": "ab92a25dec31ecf8f8b2a7d04ba742e4420e9a51ec2bda6e0c747e272dafb289",
+      "player": [
+        8,
+        11
+      ],
+      "png_sha256": "cadb06b48badc248fdbd8214803c2950fe6681393a2fd0cebbab9b4eaac1210a",
+      "scenario_id": 28,
+      "screenshot": "work/legendary-pipeline-audit/overworld/encounter-08-articuno.png",
+      "verified_runtime_state": true,
+      "video_hash": "8d4313dffd6661d8"
+    }
+  ],
+  "rom": "/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/pokeemerald-legendary-audit-headless.gba",
+  "rom_sha256": "997949b6acd0ae792b61796b0ec86e255c5bcfad4c827dec90cb1993591e8348",
+  "scenario_symbol": "0x0200228c",
+  "schema_version": 1
+}

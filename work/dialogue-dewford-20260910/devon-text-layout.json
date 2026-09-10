@@ -1,0 +1,1868 @@
+[
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_1F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_1F_Text_WelcomeToDevonCorp",
+    "line": 81,
+    "text": "Hello and welcome to the DEVON\\nCORPORATION.\\pWe're proud producers of items and\\nmedicine that enhance your life.$",
+    "lines": [
+      {
+        "text": "Hello and welcome to the DEVON",
+        "width": 159,
+        "unresolved": []
+      },
+      {
+        "text": "CORPORATION.",
+        "width": 69,
+        "unresolved": []
+      },
+      {
+        "text": "We're proud producers of items and",
+        "width": 183,
+        "unresolved": []
+      },
+      {
+        "text": "medicine that enhance your life.",
+        "width": 168,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_1F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_1F_Text_StaffGotRobbed",
+    "line": 87,
+    "text": "One of our researchers was robbed\\nof an important parcel. I hope\\lhe's all right.$",
+    "lines": [
+      {
+        "text": "One of our researchers was robbed",
+        "width": 178,
+        "unresolved": []
+      },
+      {
+        "text": "of an important parcel. I hope",
+        "width": 156,
+        "unresolved": []
+      },
+      {
+        "text": "he's all right.",
+        "width": 74,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_1F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_1F_Text_ThoseShoesAreOurProduct",
+    "line": 92,
+    "text": "Hey, those RUNNING SHOES!\\nThey're one of our products!\\pIt makes me happy when I see someone\\nusing something we made.$",
+    "lines": [
+      {
+        "text": "Hey, those RUNNING SHOES!",
+        "width": 136,
+        "unresolved": []
+      },
+      {
+        "text": "They're one of our products!",
+        "width": 151,
+        "unresolved": []
+      },
+      {
+        "text": "It makes me happy when I see someone",
+        "width": 195,
+        "unresolved": []
+      },
+      {
+        "text": "using something we made.",
+        "width": 128,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_1F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_1F_Text_RobberWasntVeryBright",
+    "line": 98,
+    "text": "That parcel holds instruments for\\nCAPT. STERN's research.\\pWho would go to so much trouble\\nto steal them? They must know\\lwhat the captain is studying.$",
+    "lines": [
+      {
+        "text": "That parcel holds instruments for",
+        "width": 177,
+        "unresolved": []
+      },
+      {
+        "text": "CAPT. STERN's research.",
+        "width": 124,
+        "unresolved": []
+      },
+      {
+        "text": "Who would go to so much trouble",
+        "width": 163,
+        "unresolved": []
+      },
+      {
+        "text": "to steal them? They must know",
+        "width": 157,
+        "unresolved": []
+      },
+      {
+        "text": "what the captain is studying.",
+        "width": 153,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_1F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_1F_Text_SoundsLikeStolenGoodsRecovered",
+    "line": 105,
+    "text": "It sounds like they've recovered\\nthe ripped-off DEVON GOODS.$",
+    "lines": [
+      {
+        "text": "It sounds like they've recovered",
+        "width": 174,
+        "unresolved": []
+      },
+      {
+        "text": "the ripped-off DEVON GOODS.",
+        "width": 147,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_1F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_1F_Text_OnlyAuthorizedPeopleEnter",
+    "line": 109,
+    "text": "I'm sorry, only authorized people\\nare allowed to enter here.$",
+    "lines": [
+      {
+        "text": "I'm sorry, only authorized people",
+        "width": 174,
+        "unresolved": []
+      },
+      {
+        "text": "are allowed to enter here.",
+        "width": 134,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_1F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_1F_Text_HowCouldWeGetRobbed",
+    "line": 113,
+    "text": "After that robbery, we're being\\nmuch more careful with our\\lresearch deliveries.$",
+    "lines": [
+      {
+        "text": "After that robbery, we're being",
+        "width": 165,
+        "unresolved": []
+      },
+      {
+        "text": "much more careful with our",
+        "width": 137,
+        "unresolved": []
+      },
+      {
+        "text": "research deliveries.",
+        "width": 105,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_1F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_1F_Text_YoureAlwaysWelcomeHere",
+    "line": 118,
+    "text": "Hi, there!\\nYou're always welcome here!$",
+    "lines": [
+      {
+        "text": "Hi, there!",
+        "width": 49,
+        "unresolved": []
+      },
+      {
+        "text": "You're always welcome here!",
+        "width": 145,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_1F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_1F_Text_RocksMetalDisplay",
+    "line": 122,
+    "text": "Samples of rocks and metal are\\ndisplayed in the glass case.\\pThere's a panel with some writing\\non it…\\p“DEVON CORPORATION got its start as\\na producer of stones from quarries.\\p“The company also produced iron from\\nfilings in the sand.\\p“From that humble start as a producer\\nof raw materials, DEVON developed.\\p“DEVON is now a manufacturer of a wide\\nrange of industrial products.”$",
+    "lines": [
+      {
+        "text": "Samples of rocks and metal are",
+        "width": 159,
+        "unresolved": []
+      },
+      {
+        "text": "displayed in the glass case.",
+        "width": 145,
+        "unresolved": []
+      },
+      {
+        "text": "There's a panel with some writing",
+        "width": 173,
+        "unresolved": []
+      },
+      {
+        "text": "on it…",
+        "width": 31,
+        "unresolved": []
+      },
+      {
+        "text": "“DEVON CORPORATION got its start as",
+        "width": 192,
+        "unresolved": []
+      },
+      {
+        "text": "a producer of stones from quarries.",
+        "width": 185,
+        "unresolved": []
+      },
+      {
+        "text": "“The company also produced iron from",
+        "width": 194,
+        "unresolved": []
+      },
+      {
+        "text": "filings in the sand.",
+        "width": 100,
+        "unresolved": []
+      },
+      {
+        "text": "“From that humble start as a producer",
+        "width": 198,
+        "unresolved": []
+      },
+      {
+        "text": "of raw materials, DEVON developed.",
+        "width": 178,
+        "unresolved": []
+      },
+      {
+        "text": "“DEVON is now a manufacturer of a wide",
+        "width": 201,
+        "unresolved": []
+      },
+      {
+        "text": "range of industrial products.”",
+        "width": 159,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_1F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_1F_Text_ProductDisplay",
+    "line": 136,
+    "text": "Prototypes and test products fill\\nthe glass display case.\\pThere's a panel with a description…\\p“In addition to industrial products,\\nDEVON now markets sundries and\\lpharmaceuticals for better lifestyles.\\p“Recently, DEVON has begun marketing\\ntools for POKéMON TRAINERS, including\\lPOKé BALLS and POKéNAV systems.”$",
+    "lines": [
+      {
+        "text": "Prototypes and test products fill",
+        "width": 178,
+        "unresolved": []
+      },
+      {
+        "text": "the glass display case.",
+        "width": 120,
+        "unresolved": []
+      },
+      {
+        "text": "There's a panel with a description…",
+        "width": 185,
+        "unresolved": []
+      },
+      {
+        "text": "“In addition to industrial products,",
+        "width": 189,
+        "unresolved": []
+      },
+      {
+        "text": "DEVON now markets sundries and",
+        "width": 164,
+        "unresolved": []
+      },
+      {
+        "text": "pharmaceuticals for better lifestyles.",
+        "width": 203,
+        "unresolved": []
+      },
+      {
+        "text": "“Recently, DEVON has begun marketing",
+        "width": 196,
+        "unresolved": []
+      },
+      {
+        "text": "tools for POKéMON TRAINERS, including",
+        "width": 198,
+        "unresolved": []
+      },
+      {
+        "text": "POKé BALLS and POKéNAV systems.”",
+        "width": 177,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_2F_Text_EeveeResearcherOffer",
+    "line": 38,
+    "text": "DEVON can safely return an evolved\\nEEVEE to its original form. Try it?$",
+    "lines": [
+      {
+        "text": "DEVON can safely return an evolved",
+        "width": 183,
+        "unresolved": []
+      },
+      {
+        "text": "EEVEE to its original form. Try it?",
+        "width": 176,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_2F_Text_EeveeResearcherChoose",
+    "line": 42,
+    "text": "Choose the EEVEE evolution to return\\nto EEVEE.$",
+    "lines": [
+      {
+        "text": "Choose the EEVEE evolution to return",
+        "width": 195,
+        "unresolved": []
+      },
+      {
+        "text": "to EEVEE.",
+        "width": 48,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_2F_Text_EeveeResearcherConfirm",
+    "line": 46,
+    "text": "Return {STR_VAR_1} to EEVEE? Its\\ncurrent moves will be preserved.$",
+    "lines": [
+      {
+        "text": "Return {STR_VAR_1} to EEVEE? Its",
+        "width": 185,
+        "unresolved": []
+      },
+      {
+        "text": "current moves will be preserved.",
+        "width": 167,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_2F_Text_EeveeResearcherComplete",
+    "line": 50,
+    "text": "The genetic pattern stabilized.\\n{STR_VAR_1} is EEVEE again.$",
+    "lines": [
+      {
+        "text": "The genetic pattern stabilized.",
+        "width": 165,
+        "unresolved": []
+      },
+      {
+        "text": "{STR_VAR_1} is EEVEE again.",
+        "width": 152,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_2F_Text_EeveeResearcherInvalid",
+    "line": 54,
+    "text": "That POKéMON is not an evolved member\\nof EEVEE's family.$",
+    "lines": [
+      {
+        "text": "That POKéMON is not an evolved member",
+        "width": 199,
+        "unresolved": []
+      },
+      {
+        "text": "of EEVEE's family.",
+        "width": 95,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_2F_Text_EeveeResearcherExit",
+    "line": 58,
+    "text": "The machine will be ready whenever\\nyou need it.$",
+    "lines": [
+      {
+        "text": "The machine will be ready whenever",
+        "width": 179,
+        "unresolved": []
+      },
+      {
+        "text": "you need it.",
+        "width": 61,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_2F_Text_LegendarySignResearcherIntro",
+    "line": 182,
+    "text": "HOENN is full of rare discoveries.\\nYou can find them at your own pace.\\pMany legendaries are wild residents\\nwith a 3% encounter chance each.\\lRoute signs list them and mark\\leach one you catch.\\pSWEET SCENT helps find them.\\pOther wild discoveries need local\\nhelp, story progress or partners.\\lThose have 1% chances normally.\\lSWEET SCENT gives a shared 25%\\lchance among eligible, uncaught\\llocal legends.\\pRead the area signs for the exact\\nrequirements. Failed encounters\\lremain available until caught.\\pOthers await you at special places\\nor come from rewards. Talk to the\\lpeople you meet on your travels.$",
+    "lines": [
+      {
+        "text": "HOENN is full of rare discoveries.",
+        "width": 173,
+        "unresolved": []
+      },
+      {
+        "text": "You can find them at your own pace.",
+        "width": 183,
+        "unresolved": []
+      },
+      {
+        "text": "Many legendaries are wild residents",
+        "width": 185,
+        "unresolved": []
+      },
+      {
+        "text": "with a 3% encounter chance each.",
+        "width": 171,
+        "unresolved": []
+      },
+      {
+        "text": "Route signs list them and mark",
+        "width": 158,
+        "unresolved": []
+      },
+      {
+        "text": "each one you catch.",
+        "width": 102,
+        "unresolved": []
+      },
+      {
+        "text": "SWEET SCENT helps find them.",
+        "width": 149,
+        "unresolved": []
+      },
+      {
+        "text": "Other wild discoveries need local",
+        "width": 172,
+        "unresolved": []
+      },
+      {
+        "text": "help, story progress or partners.",
+        "width": 172,
+        "unresolved": []
+      },
+      {
+        "text": "Those have 1% chances normally.",
+        "width": 166,
+        "unresolved": []
+      },
+      {
+        "text": "SWEET SCENT gives a shared 25%",
+        "width": 162,
+        "unresolved": []
+      },
+      {
+        "text": "chance among eligible, uncaught",
+        "width": 166,
+        "unresolved": []
+      },
+      {
+        "text": "local legends.",
+        "width": 72,
+        "unresolved": []
+      },
+      {
+        "text": "Read the area signs for the exact",
+        "width": 176,
+        "unresolved": []
+      },
+      {
+        "text": "requirements. Failed encounters",
+        "width": 168,
+        "unresolved": []
+      },
+      {
+        "text": "remain available until caught.",
+        "width": 155,
+        "unresolved": []
+      },
+      {
+        "text": "Others await you at special places",
+        "width": 180,
+        "unresolved": []
+      },
+      {
+        "text": "or come from rewards. Talk to the",
+        "width": 171,
+        "unresolved": []
+      },
+      {
+        "text": "people you meet on your travels.",
+        "width": 168,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_2F_Text_MagearnaParty",
+    "line": 203,
+    "text": "Your discovery completes DEVON's\\nsealed mechanical prototype!\\pMAGEARNA awakens and joins your party.$",
+    "lines": [
+      {
+        "text": "Your discovery completes DEVON's",
+        "width": 177,
+        "unresolved": []
+      },
+      {
+        "text": "sealed mechanical prototype!",
+        "width": 153,
+        "unresolved": []
+      },
+      {
+        "text": "MAGEARNA awakens and joins your party.",
+        "width": 205,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_2F_Text_MagearnaPC",
+    "line": 208,
+    "text": "Your discovery completes DEVON's\\nsealed mechanical prototype!\\pMAGEARNA awakens and is sent to\\nyour PC.$",
+    "lines": [
+      {
+        "text": "Your discovery completes DEVON's",
+        "width": 177,
+        "unresolved": []
+      },
+      {
+        "text": "sealed mechanical prototype!",
+        "width": 153,
+        "unresolved": []
+      },
+      {
+        "text": "MAGEARNA awakens and is sent to",
+        "width": 169,
+        "unresolved": []
+      },
+      {
+        "text": "your PC.",
+        "width": 41,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_2F_Text_MagearnaNoRoom",
+    "line": 214,
+    "text": "The sealed prototype answers DIANCIE,\\nbut your party and PC have no room.$",
+    "lines": [
+      {
+        "text": "The sealed prototype answers DIANCIE,",
+        "width": 203,
+        "unresolved": []
+      },
+      {
+        "text": "but your party and PC have no room.",
+        "width": 183,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_2F_Text_ArceusRewardParty",
+    "line": 218,
+    "text": "You restored HOENN's weather and\\nearned all eight badges.\\lSomething extraordinary has\\lanswered!\\pARCEUS appears before you and\\njoins your party.$",
+    "lines": [
+      {
+        "text": "You restored HOENN's weather and",
+        "width": 177,
+        "unresolved": []
+      },
+      {
+        "text": "earned all eight badges.",
+        "width": 125,
+        "unresolved": []
+      },
+      {
+        "text": "Something extraordinary has",
+        "width": 149,
+        "unresolved": []
+      },
+      {
+        "text": "answered!",
+        "width": 51,
+        "unresolved": []
+      },
+      {
+        "text": "ARCEUS appears before you and",
+        "width": 160,
+        "unresolved": []
+      },
+      {
+        "text": "joins your party.",
+        "width": 88,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_2F_Text_ArceusRewardPC",
+    "line": 226,
+    "text": "You restored HOENN's weather and\\nearned all eight badges.\\lSomething extraordinary has\\lanswered!\\pARCEUS appears before you and is\\nsent to your PC.$",
+    "lines": [
+      {
+        "text": "You restored HOENN's weather and",
+        "width": 177,
+        "unresolved": []
+      },
+      {
+        "text": "earned all eight badges.",
+        "width": 125,
+        "unresolved": []
+      },
+      {
+        "text": "Something extraordinary has",
+        "width": 149,
+        "unresolved": []
+      },
+      {
+        "text": "answered!",
+        "width": 51,
+        "unresolved": []
+      },
+      {
+        "text": "ARCEUS appears before you and is",
+        "width": 173,
+        "unresolved": []
+      },
+      {
+        "text": "sent to your PC.",
+        "width": 83,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_2F_Text_ArceusRewardNoRoom",
+    "line": 234,
+    "text": "ARCEUS has answered your journey,\\nbut needs room. Please make space\\lin your PC.$",
+    "lines": [
+      {
+        "text": "ARCEUS has answered your journey,",
+        "width": 179,
+        "unresolved": []
+      },
+      {
+        "text": "but needs room. Please make space",
+        "width": 177,
+        "unresolved": []
+      },
+      {
+        "text": "in your PC.",
+        "width": 54,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_2F_Text_ArceusRewardComplete",
+    "line": 239,
+    "text": "Even ARCEUS has joined your\\njourney. Take your discoveries to\\lthe LEAGUE!$",
+    "lines": [
+      {
+        "text": "Even ARCEUS has joined your",
+        "width": 146,
+        "unresolved": []
+      },
+      {
+        "text": "journey. Take your discoveries to",
+        "width": 175,
+        "unresolved": []
+      },
+      {
+        "text": "the LEAGUE!",
+        "width": 61,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_2F_Text_DeviceForTalkingToPokemon",
+    "line": 592,
+    "text": "We're developing a device for talking\\nwith POKéMON.\\pBut we haven't had much success…$",
+    "lines": [
+      {
+        "text": "We're developing a device for talking",
+        "width": 195,
+        "unresolved": []
+      },
+      {
+        "text": "with POKéMON.",
+        "width": 70,
+        "unresolved": []
+      },
+      {
+        "text": "But we haven't had much success…",
+        "width": 177,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_2F_Text_DevelopingNewBalls",
+    "line": 597,
+    "text": "I'm developing new kinds of\\nPOKé BALLS…\\pBut I haven't made much headway…$",
+    "lines": [
+      {
+        "text": "I'm developing new kinds of",
+        "width": 144,
+        "unresolved": []
+      },
+      {
+        "text": "POKé BALLS…",
+        "width": 63,
+        "unresolved": []
+      },
+      {
+        "text": "But I haven't made much headway…",
+        "width": 177,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_2F_Text_WeFinallyMadeNewBalls",
+    "line": 602,
+    "text": "We finally made new kinds of\\nPOKé BALLS!\\pThe REPEAT BALL makes it easier to\\ncatch POKéMON you've caught before.\\pThe TIMER BALL gets better at catching\\nPOKéMON the longer a battle runs.\\pBoth are proudly developed by\\nthe DEVON CORPORATION.\\pPlease give them a try!$",
+    "lines": [
+      {
+        "text": "We finally made new kinds of",
+        "width": 145,
+        "unresolved": []
+      },
+      {
+        "text": "POKé BALLS!",
+        "width": 61,
+        "unresolved": []
+      },
+      {
+        "text": "The REPEAT BALL makes it easier to",
+        "width": 181,
+        "unresolved": []
+      },
+      {
+        "text": "catch POKéMON you've caught before.",
+        "width": 194,
+        "unresolved": []
+      },
+      {
+        "text": "The TIMER BALL gets better at catching",
+        "width": 207,
+        "unresolved": []
+      },
+      {
+        "text": "POKéMON the longer a battle runs.",
+        "width": 174,
+        "unresolved": []
+      },
+      {
+        "text": "Both are proudly developed by",
+        "width": 156,
+        "unresolved": []
+      },
+      {
+        "text": "the DEVON CORPORATION.",
+        "width": 123,
+        "unresolved": []
+      },
+      {
+        "text": "Please give them a try!",
+        "width": 119,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_2F_Text_IMadePokenav",
+    "line": 613,
+    "text": "I made the POKéNAV!\\pAs an engineer, I feel blessed to have\\nmade something so great!$",
+    "lines": [
+      {
+        "text": "I made the POKéNAV!",
+        "width": 103,
+        "unresolved": []
+      },
+      {
+        "text": "As an engineer, I feel blessed to have",
+        "width": 197,
+        "unresolved": []
+      },
+      {
+        "text": "made something so great!",
+        "width": 130,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_2F_Text_WowThatsAPokenav",
+    "line": 618,
+    "text": "Oh, wow!\\nThat's a POKéNAV!\\pIt came about as a result of our\\nPRESIDENT's desire to learn about\\lthe feelings of POKéMON.\\pWould you like me to describe its\\nfeatures in detail?\\pNo, no. I think you'll find out just by\\ntrying the POKéNAV out.$",
+    "lines": [
+      {
+        "text": "Oh, wow!",
+        "width": 40,
+        "unresolved": []
+      },
+      {
+        "text": "That's a POKéNAV!",
+        "width": 94,
+        "unresolved": []
+      },
+      {
+        "text": "It came about as a result of our",
+        "width": 167,
+        "unresolved": []
+      },
+      {
+        "text": "PRESIDENT's desire to learn about",
+        "width": 180,
+        "unresolved": []
+      },
+      {
+        "text": "the feelings of POKéMON.",
+        "width": 128,
+        "unresolved": []
+      },
+      {
+        "text": "Would you like me to describe its",
+        "width": 169,
+        "unresolved": []
+      },
+      {
+        "text": "features in detail?",
+        "width": 101,
+        "unresolved": []
+      },
+      {
+        "text": "No, no. I think you'll find out just by",
+        "width": 195,
+        "unresolved": []
+      },
+      {
+        "text": "trying the POKéNAV out.",
+        "width": 123,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_2F_Text_DeviceToVisualizePokemonDreams",
+    "line": 629,
+    "text": "I'm trying to develop a device that\\nvisually reproduces the dreams of\\lPOKéMON…\\pBut it's not going well.$",
+    "lines": [
+      {
+        "text": "I'm trying to develop a device that",
+        "width": 185,
+        "unresolved": []
+      },
+      {
+        "text": "visually reproduces the dreams of",
+        "width": 177,
+        "unresolved": []
+      },
+      {
+        "text": "POKéMON…",
+        "width": 48,
+        "unresolved": []
+      },
+      {
+        "text": "But it's not going well.",
+        "width": 121,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_2F_Text_DevelopDeviceToResurrectFossils",
+    "line": 635,
+    "text": "My FOSSIL REGENERATOR can restore\\nancient POKéMON from every era.\\pBring me any complete fossil you find.$",
+    "lines": [
+      {
+        "text": "My FOSSIL REGENERATOR can restore",
+        "width": 184,
+        "unresolved": []
+      },
+      {
+        "text": "ancient POKéMON from every era.",
+        "width": 166,
+        "unresolved": []
+      },
+      {
+        "text": "Bring me any complete fossil you find.",
+        "width": 196,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_2F_Text_WantToBringFossilBackToLife",
+    "line": 640,
+    "text": "Wait! You have a POKéMON fossil!\\pShall I restore its ancient POKéMON\\nwith the FOSSIL REGENERATOR?$",
+    "lines": [
+      {
+        "text": "Wait! You have a POKéMON fossil!",
+        "width": 167,
+        "unresolved": []
+      },
+      {
+        "text": "Shall I restore its ancient POKéMON",
+        "width": 185,
+        "unresolved": []
+      },
+      {
+        "text": "with the FOSSIL REGENERATOR?",
+        "width": 157,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_2F_Text_OhIsThatSo",
+    "line": 645,
+    "text": "Oh, is that so?\\pDEVON's technological expertise\\nis outstanding, I tell you.$",
+    "lines": [
+      {
+        "text": "Oh, is that so?",
+        "width": 76,
+        "unresolved": []
+      },
+      {
+        "text": "DEVON's technological expertise",
+        "width": 171,
+        "unresolved": []
+      },
+      {
+        "text": "is outstanding, I tell you.",
+        "width": 136,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_2F_Text_ChooseFossil",
+    "line": 650,
+    "text": "The machine restores one fossil at\\na time. Which one shall I revive?$",
+    "lines": [
+      {
+        "text": "The machine restores one fossil at",
+        "width": 181,
+        "unresolved": []
+      },
+      {
+        "text": "a time. Which one shall I revive?",
+        "width": 166,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_2F_Text_HandedFossilToResearcher",
+    "line": 654,
+    "text": "Excellent!\\nLet's do this right away.\\p{PLAYER} handed the {STR_VAR_1} to\\nthe DEVON RESEARCHER.$",
+    "lines": [
+      {
+        "text": "Excellent!",
+        "width": 54,
+        "unresolved": []
+      },
+      {
+        "text": "Let's do this right away.",
+        "width": 130,
+        "unresolved": []
+      },
+      {
+        "text": "{PLAYER} handed the {STR_VAR_1} to",
+        "width": 198,
+        "unresolved": []
+      },
+      {
+        "text": "the DEVON RESEARCHER.",
+        "width": 117,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_2F_Text_FossilNoLongerAvailable",
+    "line": 660,
+    "text": "Oh! That fossil is no longer in your\\nBag. Bring it back and we'll try again.$",
+    "lines": [
+      {
+        "text": "Oh! That fossil is no longer in your",
+        "width": 181,
+        "unresolved": []
+      },
+      {
+        "text": "Bag. Bring it back and we'll try again.",
+        "width": 195,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_2F_Text_FossilDataLost",
+    "line": 664,
+    "text": "The regenerator's record is unreadable.\\nI've reset it so we can try again.$",
+    "lines": [
+      {
+        "text": "The regenerator's record is unreadable.",
+        "width": 209,
+        "unresolved": []
+      },
+      {
+        "text": "I've reset it so we can try again.",
+        "width": 174,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_2F_Text_FossilRegeneratorTakesTime",
+    "line": 668,
+    "text": "The regenerator is working.\\nIt only needs a short while!\\pTalk to one of my colleagues,\\nor step outside this floor,\\lthen come back for your POKéMON.$",
+    "lines": [
+      {
+        "text": "The regenerator is working.",
+        "width": 142,
+        "unresolved": []
+      },
+      {
+        "text": "It only needs a short while!",
+        "width": 144,
+        "unresolved": []
+      },
+      {
+        "text": "Talk to one of my colleagues,",
+        "width": 150,
+        "unresolved": []
+      },
+      {
+        "text": "or step outside this floor,",
+        "width": 139,
+        "unresolved": []
+      },
+      {
+        "text": "then come back for your POKéMON.",
+        "width": 172,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_2F_Text_FossilizedMonBroughtBackToLife",
+    "line": 675,
+    "text": "Thanks for waiting!\\pYour fossilized POKéMON has been\\nbrought back to life!\\pIt was {STR_VAR_2}!\\nAn ancient POKéMON!$",
+    "lines": [
+      {
+        "text": "Thanks for waiting!",
+        "width": 101,
+        "unresolved": []
+      },
+      {
+        "text": "Your fossilized POKéMON has been",
+        "width": 173,
+        "unresolved": []
+      },
+      {
+        "text": "brought back to life!",
+        "width": 110,
+        "unresolved": []
+      },
+      {
+        "text": "It was {STR_VAR_2}!",
+        "width": 118,
+        "unresolved": []
+      },
+      {
+        "text": "An ancient POKéMON!",
+        "width": 104,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_2F_Text_ReceivedMonFromResearcher",
+    "line": 682,
+    "text": "{PLAYER} received {STR_VAR_2} from\\nthe DEVON RESEARCHER.$",
+    "lines": [
+      {
+        "text": "{PLAYER} received {STR_VAR_2} from",
+        "width": 197,
+        "unresolved": []
+      },
+      {
+        "text": "the DEVON RESEARCHER.",
+        "width": 117,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_2F_Text_TooManyPokemon",
+    "line": 687,
+    "text": "Uh-oh, you've got too many POKéMON.\\nYou have no room for this one.$",
+    "lines": [
+      {
+        "text": "Uh-oh, you've got too many POKéMON.",
+        "width": 189,
+        "unresolved": []
+      },
+      {
+        "text": "You have no room for this one.",
+        "width": 155,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_2F_Text_DevelopNewPokenavFeature",
+    "line": 691,
+    "text": "I'm trying to develop a new feature\\nfor the POKéNAV…\\pBut it's not going well.$",
+    "lines": [
+      {
+        "text": "I'm trying to develop a new feature",
+        "width": 186,
+        "unresolved": []
+      },
+      {
+        "text": "for the POKéNAV…",
+        "width": 89,
+        "unresolved": []
+      },
+      {
+        "text": "But it's not going well.",
+        "width": 121,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_2F_Text_WhatToWorkOnNext",
+    "line": 696,
+    "text": "Well, now what shall I work on\\ndeveloping next?\\pOur company allows us to make our\\ninspirations into reality.\\pOne couldn't ask for a better\\nenvironment as an engineer.$",
+    "lines": [
+      {
+        "text": "Well, now what shall I work on",
+        "width": 150,
+        "unresolved": []
+      },
+      {
+        "text": "developing next?",
+        "width": 89,
+        "unresolved": []
+      },
+      {
+        "text": "Our company allows us to make our",
+        "width": 174,
+        "unresolved": []
+      },
+      {
+        "text": "inspirations into reality.",
+        "width": 133,
+        "unresolved": []
+      },
+      {
+        "text": "One couldn't ask for a better",
+        "width": 155,
+        "unresolved": []
+      },
+      {
+        "text": "environment as an engineer.",
+        "width": 144,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_2F_EventScript_MegaGift_MAGEARNITE_Text",
+    "line": 719,
+    "text": "Eight badges! You have seen things\\nour laboratory can only dream of.\\pThis stone responds to Magearna.\\nPerhaps you can learn why.$",
+    "lines": [
+      {
+        "text": "Eight badges! You have seen things",
+        "width": 183,
+        "unresolved": []
+      },
+      {
+        "text": "our laboratory can only dream of.",
+        "width": 172,
+        "unresolved": []
+      },
+      {
+        "text": "This stone responds to Magearna.",
+        "width": 173,
+        "unresolved": []
+      },
+      {
+        "text": "Perhaps you can learn why.",
+        "width": 137,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_3F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_3F_Text_MrStoneIHaveFavor",
+    "line": 227,
+    "text": "I'm MR. STONE, president of\\nDEVON. You recovered our GOODS\\land protected my staff. Thank\\lyou!\\pReports of rare POKéMON are\\narriving from caves and forests\\lacross HOENN.\\pMAGMA and AQUA are searching\\nthose same places. I fear the\\lthefts are connected.\\pMy son STEVEN is in GRANITE CAVE\\nnear DEWFORD. Please take this\\lLETTER to him.\\pThen deliver the GOODS to CAPT.\\nSTERN in SLATEPORT. He's counting\\lon us.$",
+    "lines": [
+      {
+        "text": "I'm MR. STONE, president of",
+        "width": 141,
+        "unresolved": []
+      },
+      {
+        "text": "DEVON. You recovered our GOODS",
+        "width": 162,
+        "unresolved": []
+      },
+      {
+        "text": "and protected my staff. Thank",
+        "width": 158,
+        "unresolved": []
+      },
+      {
+        "text": "you!",
+        "width": 22,
+        "unresolved": []
+      },
+      {
+        "text": "Reports of rare POKéMON are",
+        "width": 146,
+        "unresolved": []
+      },
+      {
+        "text": "arriving from caves and forests",
+        "width": 166,
+        "unresolved": []
+      },
+      {
+        "text": "across HOENN.",
+        "width": 71,
+        "unresolved": []
+      },
+      {
+        "text": "MAGMA and AQUA are searching",
+        "width": 152,
+        "unresolved": []
+      },
+      {
+        "text": "those same places. I fear the",
+        "width": 153,
+        "unresolved": []
+      },
+      {
+        "text": "thefts are connected.",
+        "width": 116,
+        "unresolved": []
+      },
+      {
+        "text": "My son STEVEN is in GRANITE CAVE",
+        "width": 170,
+        "unresolved": []
+      },
+      {
+        "text": "near DEWFORD. Please take this",
+        "width": 160,
+        "unresolved": []
+      },
+      {
+        "text": "LETTER to him.",
+        "width": 73,
+        "unresolved": []
+      },
+      {
+        "text": "Then deliver the GOODS to CAPT.",
+        "width": 163,
+        "unresolved": []
+      },
+      {
+        "text": "STERN in SLATEPORT. He's counting",
+        "width": 179,
+        "unresolved": []
+      },
+      {
+        "text": "on us.",
+        "width": 30,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_3F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_3F_Text_LetterSentToPC",
+    "line": 245,
+    "text": "Your KEY ITEMS pocket is full, so the\\nLETTER was sent to your PC.$",
+    "lines": [
+      {
+        "text": "Your KEY ITEMS pocket is full, so the",
+        "width": 191,
+        "unresolved": []
+      },
+      {
+        "text": "LETTER was sent to your PC.",
+        "width": 143,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_3F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_3F_Text_LetterNoRoom",
+    "line": 249,
+    "text": "Your KEY ITEMS pocket and PC are full.\\nMake room, then return to my desk.$",
+    "lines": [
+      {
+        "text": "Your KEY ITEMS pocket and PC are full.",
+        "width": 198,
+        "unresolved": []
+      },
+      {
+        "text": "Make room, then return to my desk.",
+        "width": 177,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_3F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_3F_Text_MrStoneWantYouToHaveThis",
+    "line": 253,
+    "text": "Please take this POKéNAV. You'll need\\na good map for the journey ahead.$",
+    "lines": [
+      {
+        "text": "Please take this POKéNAV. You'll need",
+        "width": 196,
+        "unresolved": []
+      },
+      {
+        "text": "a good map for the journey ahead.",
+        "width": 174,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_3F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_3F_Text_ReceivedPokenav",
+    "line": 257,
+    "text": "{PLAYER} received a POKéNAV.$",
+    "lines": [
+      {
+        "text": "{PLAYER} received a POKéNAV.",
+        "width": 147,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_3F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_3F_Text_MrStoneExplainPokenavRestUp",
+    "line": 260,
+    "text": "The POKéNAV maps HOENN and keeps\\nyou in touch with key Trainers.\\pFor legendary leads, visit the\\nguide near the POKéMON CENTER PC.\\pEach town's guide knows nearby\\nPokémon and their requirements.\\pPlease rest before you leave.\\nDEWFORD is your next stop.$",
+    "lines": [
+      {
+        "text": "The POKéNAV maps HOENN and keeps",
+        "width": 177,
+        "unresolved": []
+      },
+      {
+        "text": "you in touch with key Trainers.",
+        "width": 160,
+        "unresolved": []
+      },
+      {
+        "text": "For legendary leads, visit the",
+        "width": 155,
+        "unresolved": []
+      },
+      {
+        "text": "guide near the POKéMON CENTER PC.",
+        "width": 177,
+        "unresolved": []
+      },
+      {
+        "text": "Each town's guide knows nearby",
+        "width": 165,
+        "unresolved": []
+      },
+      {
+        "text": "Pokémon and their requirements.",
+        "width": 167,
+        "unresolved": []
+      },
+      {
+        "text": "Please rest before you leave.",
+        "width": 153,
+        "unresolved": []
+      },
+      {
+        "text": "DEWFORD is your next stop.",
+        "width": 138,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_3F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_3F_Text_MrStoneGoWithCautionAndCare",
+    "line": 270,
+    "text": "Go carefully, {PLAYER}. You've already\\ndone more for us than I could ask.$",
+    "lines": [
+      {
+        "text": "Go carefully, {PLAYER}. You've already",
+        "width": 196,
+        "unresolved": []
+      },
+      {
+        "text": "done more for us than I could ask.",
+        "width": 176,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_3F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_3F_Text_CountingOnYou",
+    "line": 274,
+    "text": "You'll find STEVEN in GRANITE\\nCAVE near DEWFORD. He loses track\\lof time studying rocks!\\pFor local legendary leads, ask\\nthe guide near the PC in any\\lPOKéMON CENTER.$",
+    "lines": [
+      {
+        "text": "You'll find STEVEN in GRANITE",
+        "width": 154,
+        "unresolved": []
+      },
+      {
+        "text": "CAVE near DEWFORD. He loses track",
+        "width": 176,
+        "unresolved": []
+      },
+      {
+        "text": "of time studying rocks!",
+        "width": 122,
+        "unresolved": []
+      },
+      {
+        "text": "For local legendary leads, ask",
+        "width": 155,
+        "unresolved": []
+      },
+      {
+        "text": "the guide near the PC in any",
+        "width": 145,
+        "unresolved": []
+      },
+      {
+        "text": "POKéMON CENTER.",
+        "width": 84,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_3F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_3F_Text_StevenAwaitsKnuckleBadge",
+    "line": 282,
+    "text": "STEVEN received my LETTER. Good.\\pHe will entrust the MEGA RING\\nonly after you earn DEWFORD's\\lKNUCKLE BADGE.$",
+    "lines": [
+      {
+        "text": "STEVEN received my LETTER. Good.",
+        "width": 171,
+        "unresolved": []
+      },
+      {
+        "text": "He will entrust the MEGA RING",
+        "width": 152,
+        "unresolved": []
+      },
+      {
+        "text": "only after you earn DEWFORD's",
+        "width": 158,
+        "unresolved": []
+      },
+      {
+        "text": "KNUCKLE BADGE.",
+        "width": 78,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_3F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_3F_Text_ThankYouForDeliveringLetter",
+    "line": 288,
+    "text": "You reached STEVEN and earned the\\nright to use MEGA EVOLUTION.\\lExcellent.\\pThis stone was found above\\nRUSTBORO. Let PIDGEOT show you\\lwhat it can become.$",
+    "lines": [
+      {
+        "text": "You reached STEVEN and earned the",
+        "width": 181,
+        "unresolved": []
+      },
+      {
+        "text": "right to use MEGA EVOLUTION.",
+        "width": 150,
+        "unresolved": []
+      },
+      {
+        "text": "Excellent.",
+        "width": 53,
+        "unresolved": []
+      },
+      {
+        "text": "This stone was found above",
+        "width": 142,
+        "unresolved": []
+      },
+      {
+        "text": "RUSTBORO. Let PIDGEOT show you",
+        "width": 165,
+        "unresolved": []
+      },
+      {
+        "text": "what it can become.",
+        "width": 100,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_3F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_3F_Text_ExplainPidgeotite",
+    "line": 296,
+    "text": "PIDGEOTITE lets a PIDGEOT Mega\\nEvolve when it holds the stone and\\lyou possess a MEGA RING.\\pFind Mega Stones in HOENN's caves,\\ngyms and side paths, or through\\lthe people you meet.\\pCENTER vendors supply held items\\nand ordinary evolution items free\\lof charge.$",
+    "lines": [
+      {
+        "text": "PIDGEOTITE lets a PIDGEOT Mega",
+        "width": 166,
+        "unresolved": []
+      },
+      {
+        "text": "Evolve when it holds the stone and",
+        "width": 180,
+        "unresolved": []
+      },
+      {
+        "text": "you possess a MEGA RING.",
+        "width": 129,
+        "unresolved": []
+      },
+      {
+        "text": "Find Mega Stones in HOENN's caves,",
+        "width": 182,
+        "unresolved": []
+      },
+      {
+        "text": "gyms and side paths, or through",
+        "width": 164,
+        "unresolved": []
+      },
+      {
+        "text": "the people you meet.",
+        "width": 106,
+        "unresolved": []
+      },
+      {
+        "text": "CENTER vendors supply held items",
+        "width": 173,
+        "unresolved": []
+      },
+      {
+        "text": "and ordinary evolution items free",
+        "width": 175,
+        "unresolved": []
+      },
+      {
+        "text": "of charge.",
+        "width": 53,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_3F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_3F_Text_NotFamiliarWithTrends",
+    "line": 306,
+    "text": "Some rare POKéMON become\\navailable as you earn BADGES or\\lhelp HOENN.\\pA few also require you to have\\ncaught another POKéMON. Our guide\\ltells you exactly which one.\\pYou can explore and catch them\\nwithout visiting our researcher.$",
+    "lines": [
+      {
+        "text": "Some rare POKéMON become",
+        "width": 133,
+        "unresolved": []
+      },
+      {
+        "text": "available as you earn BADGES or",
+        "width": 163,
+        "unresolved": []
+      },
+      {
+        "text": "help HOENN.",
+        "width": 58,
+        "unresolved": []
+      },
+      {
+        "text": "A few also require you to have",
+        "width": 156,
+        "unresolved": []
+      },
+      {
+        "text": "caught another POKéMON. Our guide",
+        "width": 179,
+        "unresolved": []
+      },
+      {
+        "text": "tells you exactly which one.",
+        "width": 145,
+        "unresolved": []
+      },
+      {
+        "text": "You can explore and catch them",
+        "width": 162,
+        "unresolved": []
+      },
+      {
+        "text": "without visiting our researcher.",
+        "width": 168,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_3F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_3F_Text_ThisIs3rdFloorWaitHere",
+    "line": 315,
+    "text": "This is the DEVON CORPORATION's\\nthird floor.\\pOur PRESIDENT's OFFICE is on\\nthis floor.\\pAnyway, I can't tell you how much I'm\\ngrateful for what you've done.\\pUm… By the way, that parcel\\nyou got back for us…\\pCould I get you to deliver that to\\nthe SHIPYARD in SLATEPORT?\\pIt would be awful if those robbers\\ntried to take it again.\\pUh… Hehehe, so, uh, could I count\\non you to do that for me?\\pOh, that's right.\\nCould you wait here a second?$",
+    "lines": [
+      {
+        "text": "This is the DEVON CORPORATION's",
+        "width": 170,
+        "unresolved": []
+      },
+      {
+        "text": "third floor.",
+        "width": 60,
+        "unresolved": []
+      },
+      {
+        "text": "Our PRESIDENT's OFFICE is on",
+        "width": 153,
+        "unresolved": []
+      },
+      {
+        "text": "this floor.",
+        "width": 55,
+        "unresolved": []
+      },
+      {
+        "text": "Anyway, I can't tell you how much I'm",
+        "width": 194,
+        "unresolved": []
+      },
+      {
+        "text": "grateful for what you've done.",
+        "width": 161,
+        "unresolved": []
+      },
+      {
+        "text": "Um… By the way, that parcel",
+        "width": 141,
+        "unresolved": []
+      },
+      {
+        "text": "you got back for us…",
+        "width": 107,
+        "unresolved": []
+      },
+      {
+        "text": "Could I get you to deliver that to",
+        "width": 176,
+        "unresolved": []
+      },
+      {
+        "text": "the SHIPYARD in SLATEPORT?",
+        "width": 145,
+        "unresolved": []
+      },
+      {
+        "text": "It would be awful if those robbers",
+        "width": 178,
+        "unresolved": []
+      },
+      {
+        "text": "tried to take it again.",
+        "width": 116,
+        "unresolved": []
+      },
+      {
+        "text": "Uh… Hehehe, so, uh, could I count",
+        "width": 169,
+        "unresolved": []
+      },
+      {
+        "text": "on you to do that for me?",
+        "width": 131,
+        "unresolved": []
+      },
+      {
+        "text": "Oh, that's right.",
+        "width": 87,
+        "unresolved": []
+      },
+      {
+        "text": "Could you wait here a second?",
+        "width": 154,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_3F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_3F_Text_WordWithPresidentComeWithMe",
+    "line": 333,
+    "text": "Our PRESIDENT would like to have\\na word with you.\\pPlease come with me.$",
+    "lines": [
+      {
+        "text": "Our PRESIDENT would like to have",
+        "width": 170,
+        "unresolved": []
+      },
+      {
+        "text": "a word with you.",
+        "width": 81,
+        "unresolved": []
+      },
+      {
+        "text": "Please come with me.",
+        "width": 104,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_3F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_3F_Text_PleaseGoAhead",
+    "line": 338,
+    "text": "Please, go ahead.$",
+    "lines": [
+      {
+        "text": "Please, go ahead.",
+        "width": 88,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_3F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_3F_Text_VisitCaptSternShipyard",
+    "line": 341,
+    "text": "If you visit the SHIPYARD in SLATEPORT,\\nyou should go see CAPT. STERN.$",
+    "lines": [
+      {
+        "text": "If you visit the SHIPYARD in SLATEPORT,",
+        "width": 207,
+        "unresolved": []
+      },
+      {
+        "text": "you should go see CAPT. STERN.",
+        "width": 157,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_3F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_3F_Text_RepeatAndTimerHugelyPopular",
+    "line": 345,
+    "text": "DEVON's new products, the REPEAT BALL\\nand TIMER BALL, have become hugely\\lpopular among TRAINERS.$",
+    "lines": [
+      {
+        "text": "DEVON's new products, the REPEAT BALL",
+        "width": 203,
+        "unresolved": []
+      },
+      {
+        "text": "and TIMER BALL, have become hugely",
+        "width": 184,
+        "unresolved": []
+      },
+      {
+        "text": "popular among TRAINERS.",
+        "width": 126,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/RustboroCity_DevonCorp_3F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_3F_Text_RareRocksDisplay",
+    "line": 350,
+    "text": "It's a collection of rare rocks and\\nstones assembled by the PRESIDENT.$",
+    "lines": [
+      {
+        "text": "It's a collection of rare rocks and",
+        "width": 183,
+        "unresolved": []
+      },
+      {
+        "text": "stones assembled by the PRESIDENT.",
+        "width": 187,
+        "unresolved": []
+      }
+    ]
+  }
+]

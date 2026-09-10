@@ -5,7 +5,7 @@ Route119_WeatherInstitute_2F_MapScripts::
 Route119_WeatherInstitute_2F_OnTransition:
 	call_if_eq VAR_WEATHER_INSTITUTE_STATE, 0, Route119_WeatherInstitute_2F_EventScript_SetScientistPosAquaHere
 	call_if_eq VAR_WEATHER_INSTITUTE_STATE, 1, Route119_WeatherInstitute_2F_EventScript_SetScientistPosAquaGone
-	call_if_set FLAG_SYS_GAME_CLEAR, Route119_WeatherInstitute_2F_EventScript_SetScientistPosGameClear
+	call_if_set FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, Route119_WeatherInstitute_2F_EventScript_SetScientistPosGameClear
 	end
 
 Route119_WeatherInstitute_2F_EventScript_SetScientistPosAquaHere::
@@ -143,7 +143,7 @@ Route119_WeatherInstitute_2F_EventScript_RevealGlassBagFull::
 	end
 
 Route119_WeatherInstitute_2F_EventScript_ScientistMentionWeather::
-	goto_if_set FLAG_SYS_GAME_CLEAR, Route119_WeatherInstitute_2F_EventScript_TryStartAbnormalWeather
+	goto_if_set FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, Route119_WeatherInstitute_2F_EventScript_TryStartAbnormalWeather
 	msgbox Route119_WeatherInstitute_2F_Text_ChangingWeatherRidiculous, MSGBOX_DEFAULT
 	release
 	end
@@ -153,6 +153,7 @@ Route119_WeatherInstitute_2F_EventScript_TryStartAbnormalWeather::
 	call_if_set FLAG_DEFEATED_KYOGRE, Route119_WeatherInstitute_2F_EventScript_LegendaryDefeated
 	call_if_set FLAG_DEFEATED_GROUDON, Route119_WeatherInstitute_2F_EventScript_LegendaryDefeated
 	goto_if_eq VAR_0x8004, 2, Route119_WeatherInstitute_2F_EventScript_NoAbnormalWeather  @ Both defeated
+	call_if_eq VAR_ABNORMAL_WEATHER_LOCATION, ABNORMAL_WEATHER_NONE, Route119_WeatherInstitute_2F_EventScript_CreateAbnormalWeather
 	call_if_unset FLAG_TEMP_2, Route119_WeatherInstitute_2F_EventScript_CreateAbnormalWeather
 	specialvar VAR_RESULT, GetAbnormalWeatherMapNameAndType
 	goto_if_eq VAR_RESULT, 1, Route119_WeatherInstitute_2F_EventScript_KyogreWeather
@@ -231,55 +232,66 @@ Route119_WeatherInstitute_2F_EventScript_GiveRevealGlass::
 	end
 
 Route119_WeatherInstitute_2F_Text_Grunt2Intro:
-	.string "CASTFORM reads a battlefield before the\n"
-	.string "first drop falls. AQUA needs that gift.\p"
-	.string "You will not reach the research wing.$"
+	.string "The researchers say CASTFORM\n"
+	.string "changes with the weather. ARCHIE\l"
+	.string "wants to know why!\p"
+	.string "You can't go into the research\n"
+	.string "wing!$"
 
 Route119_WeatherInstitute_2F_Text_Grunt2Defeat:
-	.string "You changed the forecast around me…$"
+	.string "I couldn't stop you…$"
 
 Route119_WeatherInstitute_2F_Text_Grunt2PostBattle:
-	.string "CASTFORM does not command the weather.\n"
-	.string "It survives by changing with it.$"
+	.string "CASTFORM does not command the\n"
+	.string "weather. It survives by changing\l"
+	.string "with it.$"
 
 Route119_WeatherInstitute_2F_Text_Grunt3Intro:
-	.string "Rare data, rare POKéMON, hidden currents.\n"
-	.string "AQUA follows what the world conceals.$"
+	.string "Weather records, rare POKéMON…\n"
+	.string "This place has everything ARCHIE\l"
+	.string "asked for!\p"
+	.string "You're not taking it away from\n"
+	.string "us!$"
 
 Route119_WeatherInstitute_2F_Text_Grunt3Defeat:
-	.string "You exposed every hidden line…$"
+	.string "But I was guarding the records…$"
 
 Route119_WeatherInstitute_2F_Text_Grunt3PostBattle:
-	.string "ARCHIE wants a world no border can hold.\n"
-	.string "You keep asking what that freedom costs.$"
+	.string "We've watched strange storms\n"
+	.string "gather out at sea. ARCHIE says\l"
+	.string "these records will tell us what\l"
+	.string "they mean.$"
 
 Route119_WeatherInstitute_2F_Text_Grunt5Intro:
-	.string "You came for the weather POKéMON, too?\p"
-	.string "Then you know a changing form can answer\n"
-	.string "more fields than a rigid one. Show me.$"
+	.string "What are you after? The records?\n"
+	.string "The weather POKéMON?\p"
+	.string "Whatever it is, TEAM AQUA got\n"
+	.string "here first!$"
 
 Route119_WeatherInstitute_2F_Text_Grunt5Defeat:
-	.string "Your answer changed one turn sooner…$"
+	.string "I couldn't hold my post…$"
 
 Route119_WeatherInstitute_2F_Text_Grunt5PostBattle:
-	.string "CASTFORM was never the whole objective.\n"
-	.string "The records point from storms to SIGNS,\l"
-	.string "and from here to MT. PYRE.$"
+	.string "The storm records led us to old\n"
+	.string "stories about MT. PYRE. ARCHIE\l"
+	.string "thinks its ORBS are the key.$"
 
 Route119_WeatherInstitute_2F_Text_ShellyIntro:
-	.string "SHELLY: We came for weather records,\n"
-	.string "but they chart the SIGNS as well.\p"
-	.string "AQUA wins by changing the board before\n"
-	.string "the opponent knows what it became.\p"
-	.string "Let's see how quickly you read a storm.$"
+	.string "SHELLY: We came for weather\n"
+	.string "records. They show something\l"
+	.string "powerful stirring in the ocean.\p"
+	.string "You should have stayed out of\n"
+	.string "this, {PLAYER}. I'm not letting\l"
+	.string "you interfere with ARCHIE's work!$"
 
 Route119_WeatherInstitute_2F_Text_ShellyDefeat:
-	.string "You found the calm inside my storm…$"
+	.string "You've beaten us here, too…$"
 
 Route119_WeatherInstitute_2F_Text_ShellyPostBattle:
-	.string "You adapted inside the storm. No wonder\n"
-	.string "ARCHIE remembers you.\p"
-	.string "The records point to MT. PYRE. We move.$"
+	.string "SHELLY: You're as persistent as\n"
+	.string "ARCHIE said.\p"
+	.string "We have what we need. These\n"
+	.string "records point to MT. PYRE.$"
 
 Route119_WeatherInstitute_2F_Text_TeamMagmaJustPassedBy:
 	.string "TEAM MAGMA just passed below us. They\n"
@@ -287,16 +299,19 @@ Route119_WeatherInstitute_2F_Text_TeamMagmaJustPassedBy:
 	.string "They are headed for MT. PYRE!$"
 
 Route119_WeatherInstitute_2F_Text_WeHaveToHurryToMtPyre:
-	.string "What?! MAGMA already moved toward the\n"
+	.string "What?! MAGMA is heading for the\n"
 	.string "BLUE ORB?\p"
-	.string "The records confirm MT. PYRE is the next\n"
-	.string "node. AQUA, change course now!$"
+	.string "SHELLY: Then we can't waste\n"
+	.string "another moment here. AQUA! To MT.\l"
+	.string "PYRE!$"
 
 Route119_WeatherInstitute_2F_Text_ThanksPleaseTakePokemon:
-	.string "You saved our staff and our data. Take\n"
-	.string "this CASTFORM as a research partner.\p"
-	.string "It reads weather directly, and old desert\n"
-	.string "records say the land itself knows it.$"
+	.string "You saved us, and our research.\n"
+	.string "Thank you!\p"
+	.string "This CASTFORM has helped us study\n"
+	.string "the weather. I think it would\l"
+	.string "enjoy traveling with you. Please\l"
+	.string "take it!$"
 
 @ Unused
 Route119_WeatherInstitute_2F_Text_NoRoomForPokemon:
@@ -307,12 +322,18 @@ Route119_WeatherInstitute_2F_Text_PlayerReceivedCastform:
 	.string "{PLAYER} received CASTFORM!$"
 
 Route119_WeatherInstitute_2F_Text_PokemonChangesWithWeather:
-	.string "CASTFORM changes with the weather.\n"
-	.string "Let it show you what a storm can\l"
-	.string "do.\p"
-	.string "Investigate SIGNS as you explore.\n"
-	.string "DEVON's researcher offers clues\l"
-	.string "whenever you want some guidance.$"
+	.string "CASTFORM changes with the\n"
+	.string "weather. Let it show you what a\l"
+	.string "storm can do.\p"
+	.string "Our records link TORNADUS to\n"
+	.string "ROUTE 119 and THUNDURUS to\l"
+	.string "ROUTE 110.\p"
+	.string "The route signs list their\n"
+	.string "requirements and mark any\l"
+	.string "partners you've already caught.\p"
+	.string "A researcher at ROUTE 111's\n"
+	.string "elevated ruins also needs\l"
+	.string "CASTFORM for a weather survey.$"
 Route119_WeatherInstitute_2F_Text_RevealGlassPurpose:
 	.string "This REVEAL GLASS changes the forms of\n"
 	.string "TORNADUS, THUNDURUS, and LANDORUS.\p"
@@ -325,10 +346,11 @@ Route119_WeatherInstitute_2F_Text_RevealGlassBagFull:
 	.string "Make room, then speak with me again.$"
 
 Route119_WeatherInstitute_2F_Text_ChangingWeatherRidiculous:
-	.string "Our instruments still trace that\n"
-	.string "old network beneath HOENN.\p"
-	.string "DEVON's lab has optional leads for\n"
-	.string "the SIGNS you want to investigate.\p"
+	.string "Our instruments track unusual\n"
+	.string "weather across HOENN.\p"
+	.string "POKéMON CENTER guides track local\n"
+	.string "legendary leads. Look near the PC\l"
+	.string "to hear where to search.\p"
 	.string "The road north leads to FORTREE.\n"
 	.string "You're welcome to rest here.$"
 Route119_WeatherInstitute_2F_Text_GroudonWeather:

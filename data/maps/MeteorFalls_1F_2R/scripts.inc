@@ -15,7 +15,15 @@ MeteorFalls_1F_2R_EventScript_Nicolas::
 	trainerbattle_double TRAINER_NICOLAS_1, MeteorFalls_1F_2R_Text_NicolasIntro, MeteorFalls_1F_2R_Text_NicolasDefeat, EmeraldChampions_Text_NeedTwoPokemon, MeteorFalls_1F_2R_EventScript_RegisterNicolas
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, MeteorFalls_1F_2R_EventScript_RematchNicolas
+	setvar VAR_0x8004, LEGENDARY_SIGN_REGIDRAGO
+	special GetSelectedLegendarySignState
+	goto_if_eq VAR_RESULT, 2, MeteorFalls_1F_2R_EventScript_NicolasRegidragoCaught
 	msgbox MeteorFalls_1F_2R_Text_NicolasPostBattle, MSGBOX_DEFAULT
+	release
+	end
+
+MeteorFalls_1F_2R_EventScript_NicolasRegidragoCaught::
+	msgbox MeteorFalls_1F_2R_Text_NicolasRegidragoCaught, MSGBOX_DEFAULT
 	release
 	end
 
@@ -81,12 +89,21 @@ MeteorFalls_1F_2R_Text_NicolasDefeat:
 	.string "I didn't expect you to be so strong!$"
 
 MeteorFalls_1F_2R_Text_NicolasPostBattle:
-	.string "A mark here answers REGIROCK once\n"
-	.string "you hold the FEATHER BADGE.\p"
-	.string "Other SIGNS lie deeper in the\n"
-	.string "Falls. Inspect them as you\l"
-	.string "explore; DEVON keeps their\l"
-	.string "conditions on file.$"
+	.string "With the FEATHER BADGE and\n"
+	.string "REGIROCK recorded as caught,\l"
+	.string "REGIDRAGO can appear on this\l"
+	.string "floor.\p"
+	.string "It has a 1% wild encounter\n"
+	.string "chance. SWEET SCENT raises that\l"
+	.string "to 25%.\p"
+	.string "FALLARBOR's CENTER guide knows\n"
+	.string "the discoveries in the other\l"
+	.string "METEOR FALLS rooms.$"
+MeteorFalls_1F_2R_Text_NicolasRegidragoCaught:
+	.string "You've caught REGIDRAGO!\n"
+	.string "What a partner to train beside.\p"
+	.string "FALLARBOR's CENTER guide knows\n"
+	.string "the legends in the other rooms.$"
 MeteorFalls_1F_2R_Text_NicolasRegister:
 	.string "I want to know more about your power.\n"
 	.string "Let me register you in my POKéNAV.$"

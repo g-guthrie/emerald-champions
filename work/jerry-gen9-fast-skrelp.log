@@ -1,0 +1,364 @@
+arm-none-eabi-cpp -iquote include -Wno-trigraphs -DMODERN=1 -DTESTING=0 -DEMERALD -std=gnu17 -DEC_HEADLESS_FIXTURES=0 -traditional-cpp - < src/data/trainers.party | tools/trainerproc/trainerproc -o src/data/trainers.h -i src/data/trainers.party -
+tools/scaninc/scaninc -M build/emerald-test/test/battle/ai/emerald_champions_plans.d -g build/assets -I include -I tools/agbcc/include test/battle/ai/emerald_champions_plans.c
+tools/scaninc/scaninc -M build/emerald-test/test/test_runner_battle.d -g build/assets -I include -I tools/agbcc/include test/test_runner_battle.c
+tools/scaninc/scaninc -M build/emerald-test/src/emerald_champions_battle_plan.d -g build/assets -I include -I tools/agbcc/include src/emerald_champions_battle_plan.c
+tools/scaninc/scaninc -M build/emerald-test/src/data.d -g build/assets -I include -I tools/agbcc/include src/data.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/data.o src/data.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/emerald_champions_battle_plan.o src/emerald_champions_battle_plan.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/test_runner_battle.o test/test_runner_battle.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/battle/ai/emerald_champions_plans.o test/battle/ai/emerald_champions_plans.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 4
+[0] EC live review Jerry timing: complete cold decision with six-player party: [32mPASS[0m
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Volt Switch target=2
+AI switch turn=1 actor=3 party=2
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=2 actor=1 move=Volt Switch target=2
+AI decision turn=2 actor=3 move=Scald target=0
+E26_JERRY_1_COMPLETE_TIMING trainer=273 setupFrames=7 decisionFrames=47 completeFrames=54 warmFrames=46 first=3 moves=Thunderbolt/Scald
+[3] EC live review Jerry ground: Balloon and Sturdy under spread pressure: [32mPASS[0m
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Volt Switch target=0
+AI decision turn=1 actor=2 move=Earthquake target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI switch turn=2 actor=1 party=2
+AI decision turn=2 actor=3 move=Iron Head target=0
+JERRY_GROUND turns=1 species=81/1354 HP=1/44 item=494/497 foes=39/51 faints=0/0
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Volt Switch target=0
+AI decision turn=1 actor=2 move=Earthquake target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI switch turn=2 actor=1 party=2
+AI decision turn=2 actor=0 move=Psychic target=3
+AI decision turn=2 actor=2 move=Earthquake target=1
+AI decision turn=2 actor=3 move=Iron Head target=0
+AI switch turn=2 actor=1 party=0
+AI switch turn=2 actor=3 party=3
+AI decision turn=3 actor=1 move=Volt Switch target=0
+AI decision turn=3 actor=3 move=Protect target=3
+JERRY_GROUND turns=2 species=81/88 HP=1/52 item=494/487 foes=39/51 faints=2/0
+[1] EC live review Jerry disruption: Ghost phazing and noncontact Fire: [32mPASS[0m
+JERRY_1_INPUT reserves=0 slot=0 lv=12 HP=31 Atk=15 Def=25 SpA=42 SpD=21 Speed=27 item=494 ability=5
+JERRY_1_INPUT reserves=0 slot=1 lv=12 HP=44 Atk=36 Def=23 SpA=13 SpD=19 Speed=20 item=497 ability=142
+JERRY_1_INPUT reserves=0 slot=2 lv=12 HP=37 Atk=20 Def=23 SpA=30 SpD=23 Speed=25 item=443 ability=91
+JERRY_1_INPUT reserves=0 slot=3 lv=12 HP=52 Atk=38 Def=20 SpA=16 SpD=20 Speed=14 item=487 ability=143
+AI switch turn=1 actor=1 party=3
+AI decision turn=1 actor=0 move=Fake Out target=3
+AI decision turn=1 actor=2 move=Dragon Tail target=1
+AI decision turn=1 actor=3 move=Gunk Shot target=0
+AI decision turn=2 actor=1 move=Sludge Bomb target=0
+AI decision turn=2 actor=3 move=Gunk Shot target=0
+JERRY_1_TEMPO board=10 turns=1 reserves=0 tailwind=0 rawSpeeds=25/20 ownHP=37/40 friendship=0/0
+JERRY_1_AFTER board=10 turns=1 reserves=0 native=1 species=690/1354 HP=37/40 foes=49/45 moves=-/- weather=0 duration=0 speeds=25/20 foeSpeeds=39/32 AtkStages=6/6 foeStatus=0/0 faints=0/0
+JERRY_1_CONTROL board=0 turns=1 tailwind=0 Taunt=0/0 items=443/0 statuses=0/0
+JERRY_1_INPUT reserves=0 slot=0 lv=12 HP=31 Atk=15 Def=25 SpA=42 SpD=21 Speed=27 item=494 ability=5
+JERRY_1_INPUT reserves=0 slot=1 lv=12 HP=44 Atk=36 Def=23 SpA=13 SpD=19 Speed=20 item=497 ability=142
+JERRY_1_INPUT reserves=0 slot=2 lv=12 HP=37 Atk=20 Def=23 SpA=30 SpD=23 Speed=25 item=443 ability=91
+JERRY_1_INPUT reserves=0 slot=3 lv=12 HP=52 Atk=38 Def=20 SpA=16 SpD=20 Speed=14 item=487 ability=143
+AI switch turn=1 actor=1 party=3
+AI decision turn=1 actor=0 move=Fake Out target=3
+AI decision turn=1 actor=2 move=Dragon Tail target=1
+AI decision turn=1 actor=3 move=Gunk Shot target=0
+AI decision turn=2 actor=0 move=Taunt target=3
+AI decision turn=2 actor=1 move=Sludge Bomb target=0
+AI decision turn=2 actor=2 move=Bite target=1
+AI decision turn=2 actor=3 move=Gunk Shot target=0
+AI decision turn=3 actor=1 move=Sludge Bomb target=2
+AI decision turn=3 actor=3 move=Iron Head target=2
+JERRY_1_TEMPO board=10 turns=2 reserves=0 tailwind=0 rawSpeeds=25/20 ownHP=28/40 friendship=0/0
+JERRY_1_AFTER board=10 turns=2 reserves=0 native=2 species=690/1354 HP=28/40 foes=0/45 moves=Sludge Bomb/Gunk Shot weather=0 duration=0 speeds=25/20 foeSpeeds=0/32 AtkStages=6/6 foeStatus=0/0 faints=0/1
+JERRY_1_CONTROL board=0 turns=2 tailwind=0 Taunt=0/2 items=443/0 statuses=0/0
+JERRY_1_INPUT reserves=0 slot=0 lv=12 HP=31 Atk=15 Def=25 SpA=42 SpD=21 Speed=27 item=494 ability=5
+JERRY_1_INPUT reserves=0 slot=1 lv=12 HP=44 Atk=36 Def=23 SpA=13 SpD=19 Speed=20 item=497 ability=142
+JERRY_1_INPUT reserves=0 slot=2 lv=12 HP=37 Atk=20 Def=23 SpA=30 SpD=23 Speed=25 item=443 ability=91
+JERRY_1_INPUT reserves=0 slot=3 lv=12 HP=52 Atk=38 Def=20 SpA=16 SpD=20 Speed=14 item=487 ability=143
+AI switch turn=1 actor=1 party=3
+AI decision turn=1 actor=0 move=Fake Out target=3
+AI decision turn=1 actor=2 move=Dragon Tail target=1
+AI decision turn=1 actor=3 move=Gunk Shot target=0
+AI decision turn=2 actor=0 move=Taunt target=3
+AI decision turn=2 actor=1 move=Sludge Bomb target=0
+AI decision turn=2 actor=2 move=Bite target=1
+AI decision turn=2 actor=3 move=Gunk Shot target=0
+AI decision turn=3 actor=2 move=Bite target=1
+AI decision turn=3 actor=1 move=Sludge Bomb target=2
+AI decision turn=3 actor=3 move=Iron Head target=2
+AI decision turn=4 actor=1 move=Sludge Bomb target=2
+AI decision turn=4 actor=3 move=Iron Head target=2
+JERRY_1_TEMPO board=10 turns=3 reserves=0 tailwind=0 rawSpeeds=25/20 ownHP=19/40 friendship=0/0
+JERRY_1_AFTER board=10 turns=3 reserves=0 native=3 species=690/1354 HP=19/40 foes=0/11 moves=Sludge Bomb/Iron Head weather=0 duration=0 speeds=25/20 foeSpeeds=0/32 AtkStages=6/6 foeStatus=0/8 faints=0/1
+JERRY_1_CONTROL board=0 turns=3 tailwind=0 Taunt=0/1 items=443/0 statuses=0/0
+JERRY_1_INPUT reserves=0 slot=0 lv=12 HP=31 Atk=15 Def=25 SpA=42 SpD=21 Speed=27 item=494 ability=5
+JERRY_1_INPUT reserves=0 slot=1 lv=12 HP=44 Atk=36 Def=23 SpA=13 SpD=19 Speed=20 item=497 ability=142
+JERRY_1_INPUT reserves=0 slot=2 lv=12 HP=37 Atk=20 Def=23 SpA=30 SpD=23 Speed=25 item=443 ability=91
+JERRY_1_INPUT reserves=0 slot=3 lv=12 HP=52 Atk=38 Def=20 SpA=16 SpD=20 Speed=14 item=487 ability=143
+AI decision turn=1 actor=0 move=Flamethrower target=1
+AI decision turn=1 actor=1 move=Flash Cannon target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Flash Cannon target=0
+AI decision turn=2 actor=3 move=Gunk Shot target=2
+JERRY_1_TEMPO board=11 turns=1 reserves=0 tailwind=0 rawSpeeds=27/20 ownHP=7/44 friendship=0/0
+JERRY_1_AFTER board=11 turns=1 reserves=0 native=1 species=81/1354 HP=7/44 foes=39/48 moves=Flash Cannon/Protect weather=0 duration=0 speeds=27/20 foeSpeeds=27/17 AtkStages=6/6 foeStatus=0/0 faints=0/0
+JERRY_1_CONTROL board=1 turns=1 tailwind=0 Taunt=0/0 items=494/497 statuses=0/0
+JERRY_1_INPUT reserves=0 slot=0 lv=12 HP=31 Atk=15 Def=25 SpA=42 SpD=21 Speed=27 item=494 ability=5
+JERRY_1_INPUT reserves=0 slot=1 lv=12 HP=44 Atk=36 Def=23 SpA=13 SpD=19 Speed=20 item=497 ability=142
+JERRY_1_INPUT reserves=0 slot=2 lv=12 HP=37 Atk=20 Def=23 SpA=30 SpD=23 Speed=25 item=443 ability=91
+JERRY_1_INPUT reserves=0 slot=3 lv=12 HP=52 Atk=38 Def=20 SpA=16 SpD=20 Speed=14 item=487 ability=143
+AI decision turn=1 actor=0 move=Flamethrower target=1
+AI decision turn=1 actor=1 move=Flash Cannon target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Flamethrower target=1
+AI decision turn=2 actor=1 move=Flash Cannon target=0
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=3 move=Gunk Shot target=2
+AI switch turn=2 actor=1 party=3
+AI decision turn=3 actor=1 move=Poison Jab target=0
+AI decision turn=3 actor=3 move=Protect target=3
+JERRY_1_TEMPO board=11 turns=2 reserves=0 tailwind=0 rawSpeeds=14/20 ownHP=52/44 friendship=0/0
+JERRY_1_AFTER board=11 turns=2 reserves=0 native=2 species=88/1354 HP=52/44 foes=25/0 moves=-/Gunk Shot weather=0 duration=0 speeds=14/20 foeSpeeds=27/0 AtkStages=6/6 foeStatus=0/0 faints=1/1
+JERRY_1_CONTROL board=1 turns=2 tailwind=0 Taunt=0/0 items=487/497 statuses=0/0
+JERRY_1_INPUT reserves=0 slot=0 lv=12 HP=31 Atk=15 Def=25 SpA=42 SpD=21 Speed=27 item=494 ability=5
+JERRY_1_INPUT reserves=0 slot=1 lv=12 HP=44 Atk=36 Def=23 SpA=13 SpD=19 Speed=20 item=497 ability=142
+JERRY_1_INPUT reserves=0 slot=2 lv=12 HP=37 Atk=20 Def=23 SpA=30 SpD=23 Speed=25 item=443 ability=91
+JERRY_1_INPUT reserves=0 slot=3 lv=12 HP=52 Atk=38 Def=20 SpA=16 SpD=20 Speed=14 item=487 ability=143
+AI decision turn=1 actor=0 move=Flamethrower target=1
+AI decision turn=1 actor=1 move=Flash Cannon target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Flamethrower target=1
+AI decision turn=2 actor=1 move=Flash Cannon target=0
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=3 move=Gunk Shot target=2
+AI switch turn=2 actor=1 party=3
+AI decision turn=3 actor=0 move=Flamethrower target=1
+AI decision turn=3 actor=1 move=Poison Jab target=0
+AI decision turn=3 actor=3 move=Protect target=3
+AI decision turn=4 actor=1 move=Shadow Sneak target=0
+AI decision turn=4 actor=3 move=Iron Head target=0
+JERRY_1_TEMPO board=11 turns=3 reserves=0 tailwind=0 rawSpeeds=14/20 ownHP=36/44 friendship=0/0
+JERRY_1_AFTER board=11 turns=3 reserves=0 native=3 species=88/1354 HP=36/44 foes=6/0 moves=Poison Jab/Protect weather=0 duration=0 speeds=14/20 foeSpeeds=27/0 AtkStages=6/6 foeStatus=8/0 faints=1/1
+JERRY_1_CONTROL board=1 turns=3 tailwind=0 Taunt=0/0 items=487/497 statuses=0/0
+JERRY_1_INPUT reserves=1 slot=0 lv=12 HP=31 Atk=15 Def=25 SpA=42 SpD=21 Speed=27 item=494 ability=5
+JERRY_1_INPUT reserves=1 slot=1 lv=12 HP=44 Atk=36 Def=23 SpA=13 SpD=19 Speed=20 item=497 ability=142
+JERRY_1_INPUT reserves=1 slot=2 lv=12 HP=37 Atk=20 Def=23 SpA=30 SpD=23 Speed=25 item=443 ability=91
+JERRY_1_INPUT reserves=1 slot=3 lv=12 HP=52 Atk=38 Def=20 SpA=16 SpD=20 Speed=14 item=487 ability=143
+AI decision turn=1 actor=0 move=Flamethrower target=1
+AI decision turn=1 actor=1 move=Scald target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Poison Jab target=2
+AI decision turn=2 actor=1 move=Scald target=0
+AI decision turn=2 actor=3 move=Shadow Sneak target=2
+JERRY_1_TEMPO board=12 turns=1 reserves=1 tailwind=0 rawSpeeds=25/14 ownHP=29/46 friendship=0/0
+JERRY_1_AFTER board=12 turns=1 reserves=1 native=1 species=690/88 HP=29/46 foes=19/4 moves=Scald/Poison Jab weather=0 duration=0 speeds=25/14 foeSpeeds=27/17 AtkStages=6/6 foeStatus=16/8 faints=0/0
+JERRY_1_CONTROL board=2 turns=1 tailwind=0 Taunt=0/0 items=443/487 statuses=0/0
+JERRY_1_INPUT reserves=1 slot=0 lv=12 HP=31 Atk=15 Def=25 SpA=42 SpD=21 Speed=27 item=494 ability=5
+JERRY_1_INPUT reserves=1 slot=1 lv=12 HP=44 Atk=36 Def=23 SpA=13 SpD=19 Speed=20 item=497 ability=142
+JERRY_1_INPUT reserves=1 slot=2 lv=12 HP=37 Atk=20 Def=23 SpA=30 SpD=23 Speed=25 item=443 ability=91
+JERRY_1_INPUT reserves=1 slot=3 lv=12 HP=52 Atk=38 Def=20 SpA=16 SpD=20 Speed=14 item=487 ability=143
+AI decision turn=1 actor=0 move=Flamethrower target=1
+AI decision turn=1 actor=1 move=Scald target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Poison Jab target=2
+AI decision turn=2 actor=0 move=Flamethrower target=1
+AI decision turn=2 actor=1 move=Scald target=0
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=3 move=Shadow Sneak target=2
+JERRY_1_TEMPO board=12 turns=2 reserves=1 tailwind=0 rawSpeeds=25/14 ownHP=21/46 friendship=0/0
+JERRY_1_AFTER board=12 turns=2 reserves=1 native=1 species=690/88 HP=21/46 foes=0/0 moves=Scald/Shadow Sneak weather=0 duration=0 speeds=25/14 foeSpeeds=27/17 AtkStages=6/6 foeStatus=0/0 faints=0/2
+JERRY_1_CONTROL board=2 turns=2 tailwind=0 Taunt=0/0 items=443/487 statuses=0/0
+[2] EC live review Jerry core: physical special leads and reserves: [32mPASS[0m
+JERRY_1_INPUT reserves=0 slot=0 lv=12 HP=31 Atk=15 Def=25 SpA=42 SpD=21 Speed=27 item=494 ability=5
+JERRY_1_INPUT reserves=0 slot=1 lv=12 HP=44 Atk=36 Def=23 SpA=13 SpD=19 Speed=20 item=497 ability=142
+JERRY_1_INPUT reserves=0 slot=2 lv=12 HP=37 Atk=20 Def=23 SpA=30 SpD=23 Speed=25 item=443 ability=91
+JERRY_1_INPUT reserves=0 slot=3 lv=12 HP=52 Atk=38 Def=20 SpA=16 SpD=20 Speed=14 item=487 ability=143
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Thunder Wave target=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Gunk Shot target=0
+AI decision turn=2 actor=1 move=Thunderbolt target=0
+AI decision turn=2 actor=3 move=Iron Head target=0
+JERRY_1_TEMPO board=0 turns=1 reserves=0 tailwind=0 rawSpeeds=27/20 ownHP=21/44 friendship=0/0
+JERRY_1_AFTER board=0 turns=1 reserves=0 native=1 species=81/1354 HP=21/44 foes=22/58 moves=Thunder Wave/Gunk Shot weather=0 duration=0 speeds=27/20 foeSpeeds=24/9 AtkStages=6/6 foeStatus=8/64 faints=0/0
+JERRY_1_INPUT reserves=0 slot=0 lv=12 HP=31 Atk=15 Def=25 SpA=42 SpD=21 Speed=27 item=494 ability=5
+JERRY_1_INPUT reserves=0 slot=1 lv=12 HP=44 Atk=36 Def=23 SpA=13 SpD=19 Speed=20 item=497 ability=142
+JERRY_1_INPUT reserves=0 slot=2 lv=12 HP=37 Atk=20 Def=23 SpA=30 SpD=23 Speed=25 item=443 ability=91
+JERRY_1_INPUT reserves=0 slot=3 lv=12 HP=52 Atk=38 Def=20 SpA=16 SpD=20 Speed=14 item=487 ability=143
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Thunder Wave target=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Gunk Shot target=0
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Thunderbolt target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Iron Head target=0
+AI switch turn=3 actor=1 party=2
+AI decision turn=3 actor=3 move=Protect target=3
+JERRY_1_TEMPO board=0 turns=2 reserves=0 tailwind=0 rawSpeeds=27/20 ownHP=11/44 friendship=0/0
+JERRY_1_AFTER board=0 turns=2 reserves=0 native=2 species=81/1354 HP=11/44 foes=0/58 moves=Thunderbolt/Iron Head weather=0 duration=0 speeds=27/20 foeSpeeds=0/9 AtkStages=6/6 foeStatus=0/64 faints=0/1
+JERRY_1_INPUT reserves=0 slot=0 lv=12 HP=31 Atk=15 Def=25 SpA=42 SpD=21 Speed=27 item=494 ability=5
+JERRY_1_INPUT reserves=0 slot=1 lv=12 HP=44 Atk=36 Def=23 SpA=13 SpD=19 Speed=20 item=497 ability=142
+JERRY_1_INPUT reserves=0 slot=2 lv=12 HP=37 Atk=20 Def=23 SpA=30 SpD=23 Speed=25 item=443 ability=91
+JERRY_1_INPUT reserves=0 slot=3 lv=12 HP=52 Atk=38 Def=20 SpA=16 SpD=20 Speed=14 item=487 ability=143
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Thunder Wave target=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Gunk Shot target=0
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Thunderbolt target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Iron Head target=0
+AI switch turn=3 actor=1 party=2
+AI decision turn=3 actor=2 move=Drain Punch target=3
+AI decision turn=3 actor=3 move=Protect target=3
+AI decision turn=4 actor=1 move=Sludge Bomb target=2
+AI decision turn=4 actor=3 move=Gunk Shot target=2
+JERRY_1_TEMPO board=0 turns=3 reserves=0 tailwind=0 rawSpeeds=25/20 ownHP=37/44 friendship=0/0
+JERRY_1_AFTER board=0 turns=3 reserves=0 native=3 species=690/1354 HP=37/44 foes=0/58 moves=-/Protect weather=0 duration=0 speeds=25/20 foeSpeeds=0/9 AtkStages=6/6 foeStatus=0/64 faints=0/1
+JERRY_1_INPUT reserves=0 slot=0 lv=12 HP=31 Atk=15 Def=25 SpA=42 SpD=21 Speed=27 item=494 ability=5
+JERRY_1_INPUT reserves=0 slot=1 lv=12 HP=44 Atk=36 Def=23 SpA=13 SpD=19 Speed=20 item=497 ability=142
+JERRY_1_INPUT reserves=0 slot=2 lv=12 HP=37 Atk=20 Def=23 SpA=30 SpD=23 Speed=25 item=443 ability=91
+JERRY_1_INPUT reserves=0 slot=3 lv=12 HP=52 Atk=38 Def=20 SpA=16 SpD=20 Speed=14 item=487 ability=143
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Thunder Wave target=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Gunk Shot target=0
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Thunderbolt target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Iron Head target=0
+AI switch turn=3 actor=1 party=2
+AI decision turn=3 actor=2 move=Drain Punch target=3
+AI decision turn=3 actor=3 move=Protect target=3
+AI decision turn=4 actor=2 move=Drain Punch target=3
+AI decision turn=4 actor=1 move=Sludge Bomb target=2
+AI decision turn=4 actor=3 move=Gunk Shot target=2
+AI decision turn=5 actor=1 move=Sludge Bomb target=2
+AI decision turn=5 actor=3 move=Gunk Shot target=2
+JERRY_1_TEMPO board=0 turns=4 reserves=0 tailwind=0 rawSpeeds=25/20 ownHP=37/44 friendship=0/0
+JERRY_1_AFTER board=0 turns=4 reserves=0 native=4 species=690/1354 HP=37/44 foes=0/17 moves=Sludge Bomb/Gunk Shot weather=0 duration=0 speeds=25/20 foeSpeeds=0/9 AtkStages=6/6 foeStatus=0/64 faints=0/1
+JERRY_1_INPUT reserves=0 slot=0 lv=12 HP=31 Atk=15 Def=25 SpA=42 SpD=21 Speed=27 item=494 ability=5
+JERRY_1_INPUT reserves=0 slot=1 lv=12 HP=44 Atk=36 Def=23 SpA=13 SpD=19 Speed=20 item=497 ability=142
+JERRY_1_INPUT reserves=0 slot=2 lv=12 HP=37 Atk=20 Def=23 SpA=30 SpD=23 Speed=25 item=443 ability=91
+JERRY_1_INPUT reserves=0 slot=3 lv=12 HP=52 Atk=38 Def=20 SpA=16 SpD=20 Speed=14 item=487 ability=143
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Flash Cannon target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Gunk Shot target=2
+AI decision turn=2 actor=1 move=Flash Cannon target=0
+AI decision turn=2 actor=3 move=Protect target=3
+JERRY_1_TEMPO board=1 turns=1 reserves=0 tailwind=0 rawSpeeds=27/20 ownHP=16/44 friendship=0/0
+JERRY_1_AFTER board=1 turns=1 reserves=0 native=1 species=81/1354 HP=16/44 foes=45/0 moves=Flash Cannon/Gunk Shot weather=0 duration=0 speeds=27/20 foeSpeeds=35/0 AtkStages=6/6 foeStatus=0/0 faints=0/1
+JERRY_1_INPUT reserves=0 slot=0 lv=12 HP=31 Atk=15 Def=25 SpA=42 SpD=21 Speed=27 item=494 ability=5
+JERRY_1_INPUT reserves=0 slot=1 lv=12 HP=44 Atk=36 Def=23 SpA=13 SpD=19 Speed=20 item=497 ability=142
+JERRY_1_INPUT reserves=0 slot=2 lv=12 HP=37 Atk=20 Def=23 SpA=30 SpD=23 Speed=25 item=443 ability=91
+JERRY_1_INPUT reserves=0 slot=3 lv=12 HP=52 Atk=38 Def=20 SpA=16 SpD=20 Speed=14 item=487 ability=143
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Flash Cannon target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Gunk Shot target=2
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Flash Cannon target=0
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=1 move=Flash Cannon target=0
+AI decision turn=3 actor=3 move=Gunk Shot target=0
+JERRY_1_TEMPO board=1 turns=2 reserves=0 tailwind=0 rawSpeeds=27/20 ownHP=8/44 friendship=0/0
+JERRY_1_AFTER board=1 turns=2 reserves=0 native=2 species=81/1354 HP=8/44 foes=33/0 moves=Flash Cannon/Protect weather=0 duration=0 speeds=27/20 foeSpeeds=35/0 AtkStages=6/6 foeStatus=0/0 faints=0/1
+JERRY_1_INPUT reserves=0 slot=0 lv=12 HP=31 Atk=15 Def=25 SpA=42 SpD=21 Speed=27 item=494 ability=5
+JERRY_1_INPUT reserves=0 slot=1 lv=12 HP=44 Atk=36 Def=23 SpA=13 SpD=19 Speed=20 item=497 ability=142
+JERRY_1_INPUT reserves=0 slot=2 lv=12 HP=37 Atk=20 Def=23 SpA=30 SpD=23 Speed=25 item=443 ability=91
+JERRY_1_INPUT reserves=0 slot=3 lv=12 HP=52 Atk=38 Def=20 SpA=16 SpD=20 Speed=14 item=487 ability=143
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Flash Cannon target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Gunk Shot target=2
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Flash Cannon target=0
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=0 move=Super Fang target=1
+AI decision turn=3 actor=1 move=Flash Cannon target=0
+AI decision turn=3 actor=3 move=Gunk Shot target=0
+AI switch turn=4 actor=1 party=3
+AI decision turn=4 actor=3 move=Gunk Shot target=0
+JERRY_1_TEMPO board=1 turns=3 reserves=0 tailwind=0 rawSpeeds=27/20 ownHP=4/44 friendship=0/0
+JERRY_1_AFTER board=1 turns=3 reserves=0 native=3 species=81/1354 HP=4/44 foes=9/0 moves=Flash Cannon/Gunk Shot weather=0 duration=0 speeds=27/20 foeSpeeds=35/0 AtkStages=6/6 foeStatus=8/0 faints=0/1
+JERRY_1_INPUT reserves=1 slot=0 lv=12 HP=31 Atk=15 Def=25 SpA=42 SpD=21 Speed=27 item=494 ability=5
+JERRY_1_INPUT reserves=1 slot=1 lv=12 HP=44 Atk=36 Def=23 SpA=13 SpD=19 Speed=20 item=497 ability=142
+JERRY_1_INPUT reserves=1 slot=2 lv=12 HP=37 Atk=20 Def=23 SpA=30 SpD=23 Speed=25 item=443 ability=91
+JERRY_1_INPUT reserves=1 slot=3 lv=12 HP=52 Atk=38 Def=20 SpA=16 SpD=20 Speed=14 item=487 ability=143
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Sludge Bomb target=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Shadow Sneak target=2
+AI decision turn=2 actor=1 move=Sludge Bomb target=2
+AI decision turn=2 actor=3 move=Shadow Sneak target=2
+JERRY_1_TEMPO board=0 turns=1 reserves=1 tailwind=0 rawSpeeds=25/14 ownHP=5/43 friendship=0/0
+JERRY_1_AFTER board=0 turns=1 reserves=1 native=1 species=690/88 HP=5/43 foes=42/30 moves=Sludge Bomb/Shadow Sneak weather=0 duration=0 speeds=25/14 foeSpeeds=24/19 AtkStages=6/6 foeStatus=0/8 faints=0/0
+JERRY_1_INPUT reserves=1 slot=0 lv=12 HP=31 Atk=15 Def=25 SpA=42 SpD=21 Speed=27 item=494 ability=5
+JERRY_1_INPUT reserves=1 slot=1 lv=12 HP=44 Atk=36 Def=23 SpA=13 SpD=19 Speed=20 item=497 ability=142
+JERRY_1_INPUT reserves=1 slot=2 lv=12 HP=37 Atk=20 Def=23 SpA=30 SpD=23 Speed=25 item=443 ability=91
+JERRY_1_INPUT reserves=1 slot=3 lv=12 HP=52 Atk=38 Def=20 SpA=16 SpD=20 Speed=14 item=487 ability=143
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Sludge Bomb target=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Shadow Sneak target=2
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Sludge Bomb target=2
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Shadow Sneak target=2
+AI decision turn=3 actor=3 move=Shadow Sneak target=2
+JERRY_1_TEMPO board=0 turns=2 reserves=1 tailwind=0 rawSpeeds=25/14 ownHP=0/34 friendship=0/0
+JERRY_1_AFTER board=0 turns=2 reserves=1 native=2 species=690/88 HP=0/34 foes=41/2 moves=-/Shadow Sneak weather=0 duration=0 speeds=0/14 foeSpeeds=24/19 AtkStages=6/6 foeStatus=0/8 faints=1/0
+JERRY_1_INPUT reserves=1 slot=0 lv=12 HP=31 Atk=15 Def=25 SpA=42 SpD=21 Speed=27 item=494 ability=5
+JERRY_1_INPUT reserves=1 slot=1 lv=12 HP=44 Atk=36 Def=23 SpA=13 SpD=19 Speed=20 item=497 ability=142
+JERRY_1_INPUT reserves=1 slot=2 lv=12 HP=37 Atk=20 Def=23 SpA=30 SpD=23 Speed=25 item=443 ability=91
+JERRY_1_INPUT reserves=1 slot=3 lv=12 HP=52 Atk=38 Def=20 SpA=16 SpD=20 Speed=14 item=487 ability=143
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Sludge Bomb target=2
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Poison Jab target=2
+AI decision turn=2 actor=1 move=Sludge Bomb target=0
+AI decision turn=2 actor=3 move=Knock Off target=0
+JERRY_1_TEMPO board=1 turns=1 reserves=1 tailwind=0 rawSpeeds=25/14 ownHP=19/46 friendship=0/0
+JERRY_1_AFTER board=1 turns=1 reserves=1 native=1 species=690/88 HP=19/46 foes=53/0 moves=Sludge Bomb/Poison Jab weather=0 duration=0 speeds=25/14 foeSpeeds=35/0 AtkStages=6/6 foeStatus=0/0 faints=0/1
+JERRY_1_INPUT reserves=1 slot=0 lv=12 HP=31 Atk=15 Def=25 SpA=42 SpD=21 Speed=27 item=494 ability=5
+JERRY_1_INPUT reserves=1 slot=1 lv=12 HP=44 Atk=36 Def=23 SpA=13 SpD=19 Speed=20 item=497 ability=142
+JERRY_1_INPUT reserves=1 slot=2 lv=12 HP=37 Atk=20 Def=23 SpA=30 SpD=23 Speed=25 item=443 ability=91
+JERRY_1_INPUT reserves=1 slot=3 lv=12 HP=52 Atk=38 Def=20 SpA=16 SpD=20 Speed=14 item=487 ability=143
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Sludge Bomb target=2
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Poison Jab target=2
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Sludge Bomb target=0
+AI decision turn=2 actor=3 move=Knock Off target=0
+AI decision turn=3 actor=1 move=Sludge Bomb target=0
+AI decision turn=3 actor=3 move=Poison Jab target=0
+JERRY_1_TEMPO board=1 turns=2 reserves=1 tailwind=0 rawSpeeds=25/14 ownHP=10/49 friendship=0/0
+JERRY_1_AFTER board=1 turns=2 reserves=1 native=2 species=690/88 HP=10/49 foes=27/0 moves=Sludge Bomb/Knock Off weather=0 duration=0 speeds=25/14 foeSpeeds=35/0 AtkStages=6/6 foeStatus=8/0 faints=0/1
+JERRY_1_INPUT reserves=1 slot=0 lv=12 HP=31 Atk=15 Def=25 SpA=42 SpD=21 Speed=27 item=494 ability=5
+JERRY_1_INPUT reserves=1 slot=1 lv=12 HP=44 Atk=36 Def=23 SpA=13 SpD=19 Speed=20 item=497 ability=142
+JERRY_1_INPUT reserves=1 slot=2 lv=12 HP=37 Atk=20 Def=23 SpA=30 SpD=23 Speed=25 item=443 ability=91
+JERRY_1_INPUT reserves=1 slot=3 lv=12 HP=52 Atk=38 Def=20 SpA=16 SpD=20 Speed=14 item=487 ability=143
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Sludge Bomb target=2
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Poison Jab target=2
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Sludge Bomb target=0
+AI decision turn=2 actor=3 move=Knock Off target=0
+AI decision turn=3 actor=0 move=Super Fang target=1
+AI decision turn=3 actor=1 move=Sludge Bomb target=0
+AI decision turn=3 actor=3 move=Poison Jab target=0
+JERRY_1_TEMPO board=1 turns=3 reserves=1 tailwind=0 rawSpeeds=25/14 ownHP=5/49 friendship=0/0
+JERRY_1_AFTER board=1 turns=3 reserves=1 native=2 species=690/88 HP=5/49 foes=0/0 moves=Sludge Bomb/Poison Jab weather=0 duration=0 speeds=25/14 foeSpeeds=35/0 AtkStages=6/6 foeStatus=0/0 faints=0/2
+
+- Tests [32mPASSED[0m:          4
+- Tests [34mTOTAL[0m:           4
+

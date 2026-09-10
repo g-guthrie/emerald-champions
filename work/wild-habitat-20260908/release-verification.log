@@ -1,0 +1,74 @@
+
+== compiled map and tile integrity ==
+{
+  "status": "compiled_structure_passed_with_unresolved_states",
+  "counts": {
+    "registered_maps": 957,
+    "compiled_hoenn_maps": 540,
+    "dormant_maps": 417,
+    "registered_layouts": 807,
+    "compiled_layouts": 463,
+    "tilesets": 139,
+    "placement_cells": 585957,
+    "compiled_placement_cells": 346343,
+    "used_metatiles_per_layout": 45949,
+    "script_writes": 1416,
+    "script_write_commands": {
+      "setmetatile": 1416
+    },
+    "script_map_state_changes": 269,
+    "unresolved_script_writes": 519,
+    "unresolved_script_writes_possible_hoenn": 166,
+    "script_writes_without_map_context": 74,
+    "errors": 47,
+    "compiled_errors": 0,
+    "dormant_errors": 47,
+    "unresolved_static_ownership": 1
+  }
+}
+
+== map and script references ==
+PASS: 540 Hoenn maps have valid layouts, events, warps, and assembled scripts
+PASS: 4195 physical NPC/trigger/sign events and 1402 warps resolve
+PASS: 18359 control-flow/dialogue/movement references resolve across 106878 script lines
+PASS: 368 value-returning special calls never read a void C function
+Scope: static references and source patterns only; state-dependent campaign reachability is not verified
+
+== authored trainer script formats ==
+PASS: all 516 campaign trainer branches use their authored battle format
+
+== configured trainer abilities ==
+PASS: 2339 authored trainer Abilities are legal for the configured species/form tables
+
+== authored trainer materialization ==
+implemented_trainer_branches=516 through_encounter=513
+trainer_master_prefix_verification=PASS
+
+== authored competitive presets ==
+PASS: generated battle-set outputs match current canonical inputs byte-for-byte
+defaults=1309
+alternatives=2890
+singles_defaults=1309
+singles_alternatives=1415
+sets=6923
+
+== authored Circuit projection ==
+checked 756 variants and 1322 templates
+
+== wild table integrity ==
+PASS: 264 active encounter tables have valid slots, levels and species probabilities
+
+== Mega Stone reward coverage ==
+PASS: all 99 Mega Stones have world rewards; three are exclusive berry trades
+PASS: no free Mega archive or preset berry-currency bypass; evolution archive preserved
+PASS: resolved flag and variable names and assignments are unique
+PASS: player-facing branding and build identity are Emerald Champions
+
+== whitespace and patch integrity ==
+
+== release input content stamp ==
+PASS: pokeemerald-habitats-20260908-release.inputs.json matches 28977 build inputs and artifact bytes: pokeemerald-habitats-20260908-release.gba, pokeemerald-habitats-20260908-release.elf
+PASS: ROM header, checksum, and GBA memory regions are valid
+memory: ROM 27,866,736/33,554,432 (83.05%), EWRAM 232,286/262,144 (88.61%), IWRAM 28,324/32,768 (86.44%)
+
+EMERALD CHAMPIONS RELEASE GATES: PASS

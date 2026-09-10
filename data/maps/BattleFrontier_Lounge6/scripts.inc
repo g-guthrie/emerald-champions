@@ -28,11 +28,10 @@ BattleFrontier_Lounge6_EventScript_TradeCompleted::
 
 BattleFrontier_Lounge6_Text_WouldYouLikeToTrade:
 	.string "My POKéMON is a {STR_VAR_2}.\n"
-	.string "Do you know it?\l"
 	.string "It was built to become anything.\p"
-	.string "It deserves a Champion's team, and\n"
-	.string "I could trade it with pride.\p"
-	.string "Would you like to trade me a {STR_VAR_1}\n"
+	.string "I think it needs a TRAINER who will\n"
+	.string "help it discover what it wants to be.\p"
+	.string "Would you trade me a {STR_VAR_1}\n"
 	.string "for my {STR_VAR_2}?$"
 
 BattleFrontier_Lounge6_Text_PromiseIllBeGoodToIt:

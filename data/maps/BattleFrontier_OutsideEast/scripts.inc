@@ -375,10 +375,9 @@ BattleFrontier_OutsideEast_Text_ToughTrainerInBattleTower:
 	.string "decide to go to the BATTLE TOWER.$"
 
 BattleFrontier_OutsideEast_Text_EnoughBattlePointsForDoll:
-	.string "Yes!\n"
-	.string "I've finally got enough Battle Points!\p"
-	.string "I guess I'll trade for another giant\n"
-	.string "plush DOLL!$"
+	.string "Yes! Enough Battle Points at last!\n"
+	.string "I'm getting a giant plush DOLL.\l"
+	.string "It has a place waiting on my bed.$"
 
 BattleFrontier_OutsideEast_Text_LikeToHaveNameRecordedHere:
 	.string "Oh, yeah, okay!\n"

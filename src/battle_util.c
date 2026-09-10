@@ -3049,6 +3049,46 @@ static bool32 TryDancer(void)
     return FALSE;
 }
 
+enum BattlerId GetImposterTransformTarget(enum BattlerId battler)
+{
+    enum BattlerId target = GetOppositeBattler(battler);
+    if (IsDoubleBattle())
+        target = GetPartnerBattler(target);
+    if (!gBattleMons[battler].volatiles.overwrittenAbility
+     && IsBattlerAlive(target)
+     && !gBattleMons[target].volatiles.substitute
+     && !gBattleMons[target].volatiles.transformed
+     && !gBattleMons[battler].volatiles.transformed
+     && gBattleStruct->illusion[target].state != ILLUSION_ON
+     && !IsSemiInvulnerable(target, EXCLUDE_COMMANDER))
+        return target;
+    return MAX_BATTLERS_COUNT;
+}
+
+// Deterministic Transform data only. The native command owns eligibility,
+// scripts, controller output, knowledge recording and turn-order globals.
+void TransformBattlerData(enum BattlerId battler, enum BattlerId target)
+{
+    gBattleMons[battler].volatiles.transformed = TRUE;
+    gBattleMons[battler].volatiles.disabledMove = MOVE_NONE;
+    gBattleMons[battler].volatiles.disableTimer = 0;
+    gBattleMons[battler].volatiles.transformedMonSpecies = gBattleMons[battler].species;
+    gBattleMons[battler].volatiles.transformedMonPID = gBattleMons[target].personality;
+    if (B_TRANSFORM_SHINY >= GEN_4)
+        gBattleMons[battler].volatiles.isTransformedMonShiny = gBattleMons[target].isShiny;
+    else
+        gBattleMons[battler].volatiles.isTransformedMonShiny = gBattleMons[battler].isShiny;
+    gBattleMons[battler].volatiles.mimickedMoves = 0;
+    gBattleMons[battler].volatiles.usedMoves = 0;
+    GetBattlerPartyState(battler)->timesGotHit = GetBattlerPartyState(target)->timesGotHit;
+
+    // This native prefix deliberately excludes HP, level, item and status.
+    memcpy(&gBattleMons[battler], &gBattleMons[target], offsetof(struct BattlePokemon, pp));
+    gBattleMons[battler].volatiles.overwrittenAbility = GetBattlerAbility(target);
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+        gBattleMons[battler].pp[i] = min(5, GetMovePP(gBattleMons[battler].moves[i]));
+}
+
 u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum Ability ability, enum Move move, bool32 shouldAbilityTrigger)
 {
     u32 effect = 0;
@@ -3144,18 +3184,9 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
         case ABILITY_IMPOSTER:
             if (gBattleStruct->battlerState[battler].switchIn)
             {
-                enum BattlerId diagonalBattler = GetOppositeBattler(battler);
-                if (IsDoubleBattle())
-                    diagonalBattler = GetPartnerBattler(diagonalBattler);
-
+                enum BattlerId diagonalBattler = GetImposterTransformTarget(battler);
                 // Imposter only activates when the battler first switches in
-                if (!gBattleMons[battler].volatiles.overwrittenAbility
-                    && IsBattlerAlive(diagonalBattler)
-                    && !gBattleMons[diagonalBattler].volatiles.substitute
-                    && !gBattleMons[diagonalBattler].volatiles.transformed
-                    && !gBattleMons[battler].volatiles.transformed
-                    && gBattleStruct->illusion[diagonalBattler].state != ILLUSION_ON
-                    && !IsSemiInvulnerable(diagonalBattler, EXCLUDE_COMMANDER))
+                if (diagonalBattler < MAX_BATTLERS_COUNT)
                 {
                     SaveBattlerAttacker(gBattlerAttacker);
                     SaveBattlerTarget(gBattlerTarget);
@@ -5527,23 +5558,30 @@ bool32 CanBeConfused(enum BattlerId battlerAtk, enum BattlerId effectBattler)
     return TRUE;
 }
 
-// second argument is 1/X of current hp compared to max hp
+// One owner for natural HP-triggered consumption, including Berry Juice.
+// Grant one HP above the ordinary cutoff, but never consume at full HP.
+u32 GetBerryActivationThreshold(u32 maxHp, u32 hpFraction, enum Ability ability, enum Item itemId)
+{
+    if (maxHp <= 1)
+        return 0;
+    if (ability == ABILITY_GLUTTONY && hpFraction <= 4 && GetItemPocket(itemId) == POCKET_BERRIES)
+        hpFraction = min(hpFraction, 2);
+    return min(maxHp - 1, maxHp / hpFraction + 1);
+}
+
 bool32 HasEnoughHpToEatBerry(enum BattlerId battler, enum Ability ability, u32 hpFraction, enum Item itemId)
 {
     if (!IsBattlerAlive(battler))
         return FALSE;
     if (gBattleScripting.overrideBerryRequirements)
         return TRUE;
-    // Sitrus works after Belly Drum at either HP parity, without changing stats.
-    u32 threshold = gBattleMons[battler].maxHP / hpFraction;
-    if (itemId == ITEM_SITRUS_BERRY && hpFraction == 2)
-        threshold = (gBattleMons[battler].maxHP + 1) / 2;
-    if (gBattleMons[battler].hp <= threshold)
+    u32 maxHp = gBattleMons[battler].maxHP;
+    if (gBattleMons[battler].hp <= GetBerryActivationThreshold(maxHp, hpFraction, ABILITY_NONE, itemId))
         return TRUE;
 
-    if (hpFraction <= 4 && GetItemPocket(itemId) == POCKET_BERRIES
-         && gBattleMons[battler].hp <= gBattleMons[battler].maxHP / 2
-         && IsAbilityAndRecord(battler, GetBattlerAbility(battler), ABILITY_GLUTTONY))
+    // Record Gluttony only when its enlarged threshold is actually needed.
+    if (gBattleMons[battler].hp <= GetBerryActivationThreshold(maxHp, hpFraction, ability, itemId)
+         && IsAbilityAndRecord(battler, ability, ABILITY_GLUTTONY))
         return TRUE;
 
     return FALSE;
@@ -11097,18 +11135,19 @@ static const u16 sGen5ProtectFailChances[] =
     27
 };
 
-bool32 CanUseMoveConsecutively(enum BattlerId battler)
+u32 GetConsecutiveMoveSuccessDenominator(u32 moveUses)
 {
-    u32 moveUses = gBattleMons[battler].volatiles.consecutiveMoveUses;
     if (moveUses >= ARRAY_COUNT(sProtectFailChances))
         moveUses = ARRAY_COUNT(sProtectFailChances) - 1;
 
-    u32 failChances;
-
     if (B_PROTECT_FAILURE_RATE < GEN_5)
-        failChances = sProtectFailChances[moveUses];
-    else
-        failChances = sGen5ProtectFailChances[moveUses];
+        return sProtectFailChances[moveUses];
+    return sGen5ProtectFailChances[moveUses];
+}
+
+bool32 CanUseMoveConsecutively(enum BattlerId battler)
+{
+    u32 failChances = GetConsecutiveMoveSuccessDenominator(gBattleMons[battler].volatiles.consecutiveMoveUses);
 
     if (failChances == 1)
         return TRUE;

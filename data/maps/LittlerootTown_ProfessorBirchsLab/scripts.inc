@@ -17,7 +17,8 @@ LittlerootTown_ProfessorBirchsLab_MapScripts::
 	@ 2: Chose starter
 	@ 3: Received starter in lab
 	@ 4: Defeated rival on Route 103
-	@ 5: Received pokedex
+	@ 5: Completed the post-rival send-off
+	@ 6: Post-rival Great Balls waiting for storage space
 
 LittlerootTown_ProfessorBirchsLab_OnTransition:
 	call Common_EventScript_SetupRivalGfxId
@@ -135,6 +136,11 @@ LittlerootTown_ProfessorBirchsLab_EventScript_OpeningReady::
 	releaseall
 	end
 
+LittlerootTown_ProfessorBirchsLab_EventScript_OpeningReminder::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_OpeningReady, MSGBOX_DEFAULT
+	releaseall
+	end
+
 LittlerootTown_ProfessorBirchsLab_EventScript_OpeningSuppliesFull::
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_OpeningSuppliesFull, MSGBOX_DEFAULT
 	releaseall
@@ -199,8 +205,11 @@ LittlerootTown_ProfessorBirchsLab_EventScript_UpgradeToNationalDex::
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCH
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_RIVAL
 	setvar VAR_BIRCH_POSTGAME_RESEARCH_STATE, 2
+	clearflag FLAG_SCOTT_CALL_BATTLE_FRONTIER
+	goto_if_set FLAG_MET_SCOTT_ON_SS_TIDAL, LittlerootTown_ProfessorBirchsLab_EventScript_ResearchSyncFinished
 	setvar VAR_SCOTT_BF_CALL_STEP_COUNTER, 0
 	setflag FLAG_SCOTT_CALL_BATTLE_FRONTIER
+LittlerootTown_ProfessorBirchsLab_EventScript_ResearchSyncFinished::
 	releaseall
 	end
 
@@ -268,6 +277,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_Aide::
 	lock
 	faceplayer
 	goto_if_eq VAR_EC_OPENING_STATE, EC_OPENING_RESCUE_WON, LittlerootTown_ProfessorBirchsLab_EventScript_OpeningSupplies
+	goto_if_eq VAR_BIRCH_LAB_STATE, 3, LittlerootTown_ProfessorBirchsLab_EventScript_OpeningReminder
 	call Common_EventScript_EmeraldChampionsResearchPartners
 	goto_if_ge VAR_BIRCH_LAB_STATE, 3, LittlerootTown_ProfessorBirchsLab_EventScript_AideReceivedStarter
 	goto_if_set FLAG_BIRCH_AIDE_MET, LittlerootTown_ProfessorBirchsLab_EventScript_AideAlreadyMet
@@ -336,7 +346,10 @@ LittlerootTown_ProfessorBirchsLab_EventScript_ResearchRewardBagFull::
 LittlerootTown_ProfessorBirchsLab_EventScript_Birch::
 	lock
 	faceplayer
+	goto_if_eq VAR_BIRCH_LAB_STATE, 4, LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex
+	goto_if_eq VAR_BIRCH_LAB_STATE, 6, LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex
 	goto_if_eq VAR_EC_OPENING_STATE, EC_OPENING_RESCUE_WON, LittlerootTown_ProfessorBirchsLab_EventScript_OpeningSupplies
+	goto_if_eq VAR_BIRCH_LAB_STATE, 3, LittlerootTown_ProfessorBirchsLab_EventScript_OpeningReminder
 	call Common_EventScript_EmeraldChampionsResearchPartners
 	goto_if_eq VAR_BIRCH_POSTGAME_RESEARCH_STATE, 5, LittlerootTown_ProfessorBirchsLab_EventScript_ResearchRewardWaiting
 	goto_if_eq VAR_BIRCH_POSTGAME_RESEARCH_STATE, 2, LittlerootTown_ProfessorBirchsLab_EventScript_GrassyPatchWaiting
@@ -375,12 +388,27 @@ EventScript_RegisterProfBirch::
 
 LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex::
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_OpeningDebrief, MSGBOX_DEFAULT
+	giveitem ITEM_GREAT_BALL, 10
+	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_OpeningSendoff
+	addpcitem ITEM_GREAT_BALL, 10
+	goto_if_eq VAR_RESULT, FALSE, LittlerootTown_ProfessorBirchsLab_EventScript_DebriefBagFull
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_GreatBallsInPC, MSGBOX_DEFAULT
+
+LittlerootTown_ProfessorBirchsLab_EventScript_OpeningSendoff::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_OpeningSendoff, MSGBOX_DEFAULT
 	setvar VAR_BIRCH_LAB_STATE, 5
 	setvar VAR_EC_OPENING_STATE, EC_OPENING_COMPLETE
 	setflag FLAG_ADVENTURE_STARTED
 	setvar VAR_OLDALE_TOWN_STATE, 1
 	setvar VAR_LITTLEROOT_RIVAL_STATE, 4
 	setvar VAR_LITTLEROOT_TOWN_STATE, 3
+	releaseall
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_DebriefBagFull::
+	@ Do not retrigger the automatic walk while the player makes room.
+	setvar VAR_BIRCH_LAB_STATE, 6
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_GreatBallsWaiting, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -504,23 +532,16 @@ LittlerootTown_ProfessorBirchsLab_EventScript_ScottAboardSSTidalCall::
 	end
 
 LittlerootTown_ProfessorBirchsLab_Text_BirchAwayOnFieldwork:
-	.string "Hunh? PROF. BIRCH?\p"
-	.string "The PROF's away on fieldwork.\n"
-	.string "Ergo, he isn't here.\p"
-	.string "Oh, let me explain what fieldwork is.\p"
-	.string "It is to study things in the natural\n"
-	.string "environment, like fields and mountains,\l"
-	.string "instead of a laboratory.\p"
-	.string "The PROF isn't one for doing desk work.\n"
-	.string "He's the type of person who would\l"
-	.string "rather go outside and experience\l"
-	.string "things than read about them here.$"
+	.string "Looking for PROF. BIRCH?\p"
+	.string "He's on ROUTE 101, north of town,\n"
+	.string "studying POKéMON in the wild.\p"
+	.string "He calls it fieldwork. I call it\n"
+	.string "a good excuse to leave the desk!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_BirchIsntOneForDeskWork:
-	.string "The PROF isn't one for doing desk work.\n"
-	.string "He's the type of person who would\l"
-	.string "rather go outside and experience\l"
-	.string "things than read about them here.$"
+	.string "The PROF. prefers fieldwork to\n"
+	.string "paperwork. Try ROUTE 101, just\l"
+	.string "north of town.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_BirchEnjoysRivalsHelpToo:
 	.string "PROF. BIRCH is studying the habitats\n"
@@ -542,13 +563,15 @@ LittlerootTown_ProfessorBirchsLab_Text_WhyNotGiveNicknameToMon:
 	.string "give a nickname to that {STR_VAR_1}?$"
 
 LittlerootTown_ProfessorBirchsLab_Text_MightBeGoodIdeaToGoSeeRival:
-	.string "{RIVAL} is out studying on ROUTE 103.\n"
-	.string "You should go introduce your partner!\p"
-	.string "{RIVAL}'s POKéMON has the type edge.\n"
-	.string "Visit OLDALE's POKéMON CENTER first.\p"
-	.string "The LEVELER trains your POKéMON to the\n"
-	.string "current level limit, free of charge.\p"
-	.string "Would you like to go find {RIVAL}?$"
+	.string "{RIVAL} is studying POKéMON on\n"
+	.string "ROUTE 103. Why not introduce your\l"
+	.string "new partners?\p"
+	.string "OLDALE's CENTER can help you\n"
+	.string "prepare. Its free LEVELER brings\l"
+	.string "your POKéMON up to the current\l"
+	.string "training limit.\p"
+	.string "Would you like to go find\n"
+	.string "{RIVAL}?$"
 
 LittlerootTown_ProfessorBirchsLab_Text_GetRivalToTeachYou:
 	.string "Good! You can learn a lot from a battle,\n"
@@ -588,10 +611,11 @@ LittlerootTown_ProfessorBirchsLab_Text_ExplainPokedex:
 	.string "and preparation. Look after each other!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_CountlessPokemonAwait:
-	.string "Rare POKéMON live throughout HOENN.\n"
-	.string "I wonder which ones you'll meet first?\p"
-	.string "Explore! And remember, the Trainers you\n"
-	.string "meet are learning alongside you.$"
+	.string "Take ROUTE 102 west from OLDALE\n"
+	.string "to PETALBURG CITY. Your dad will\l"
+	.string "be happy to see you at his GYM.\p"
+	.string "Bring back a few discoveries\n"
+	.string "of your own, too!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_MayGotPokedexTooTakeThese:
 	.string "MAY: Oh, wow, {PLAYER}{KUN}!\n"
@@ -646,14 +670,14 @@ LittlerootTown_ProfessorBirchsLab_Text_BookTooHardToRead:
 	.string "It's a book that's too hard to read.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_OtherRegionsUpgradeToNational:
-	.string "PROF. BIRCH: Now…\p"
-	.string "{PLAYER}{KUN} and {RIVAL}, I've had the two\n"
-	.string "of you help me study POKéMON.\p"
-	.string "Your POKéDEX recorded every region from\n"
-	.string "the day your journey began.\p"
-	.string "Now I can synchronize our final field\n"
-	.string "notes and mark FRONTIER research.\p"
-	.string "Here, let me see your POKéDEX units.$"
+	.string "PROF. BIRCH: {PLAYER}{KUN},\n"
+	.string "{RIVAL}, you've both brought back\l"
+	.string "so many field notes!\p"
+	.string "Your POKéDEX units could record\n"
+	.string "every region from the start.\l"
+	.string "Let's add our latest observations\l"
+	.string "to both.\p"
+	.string "May I see them for a moment?$"
 
 LittlerootTown_ProfessorBirchsLab_Text_MayUpgradeSoCool:
 	.string "MAY: Eheheh!\p"
@@ -698,30 +722,33 @@ LittlerootTown_ProfessorBirchsLab_Text_BrendanTakeBreakFromFieldwork:
 	.string "for a while.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_CompletedDexResearchReward:
-	.string "PROF. BIRCH: Oh, {PLAYER}{KUN}!\n"
-	.string "Let's have a look at your POKéDEX.\p"
-	.string "… … … … … …\n"
-	.string "… … … … … …\p"
-	.string "Every known HOENN species. Wonderful!\n"
-	.string "You proved how each habitat connects.\p"
-	.string "DEVON helped me restore five tools\n"
-	.string "from our LEGENDARY FORM research.\p"
-	.string "They let certain rare POKéMON change\n"
-	.string "or combine outside battle. Take them!$"
+	.string "PROF. BIRCH: Every known HOENN\n"
+	.string "species! What a remarkable record\l"
+	.string "of your journey.\p"
+	.string "I've kept a spare set of our\n"
+	.string "legendary form tools here. Take\l"
+	.string "any you're missing!\p"
+	.string "They're also in the CENTER\n"
+	.string "vendors' Form Tools archive.\l"
+	.string "Your MEGA RING gives you access\l"
+	.string "there.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_ResearchRewardWaiting:
 	.string "PROF. BIRCH: Your LEGENDARY FORM tools\n"
 	.string "are still here. Let's finish the set.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_ResearchRewardComplete:
-	.string "Those tools affect KYUREM, ZYGARDE,\n"
-	.string "NECROZMA, and CALYREX.\p"
-	.string "The POKéMON must still choose you. The\n"
-	.string "tools only reveal forms they can take.$"
+	.string "The tools let KYUREM, ZYGARDE,\n"
+	.string "NECROZMA, and CALYREX change\l"
+	.string "forms or combine with certain\l"
+	.string "partners.\p"
+	.string "There's always something new to\n"
+	.string "learn about POKéMON!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_ResearchRewardBagFull:
-	.string "Your KEY ITEMS pocket is full. Make room\n"
-	.string "and return; every remaining tool is safe.$"
+	.string "Your KEY ITEMS pocket is full.\n"
+	.string "Make room and return; every\l"
+	.string "remaining tool is safe.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_MayWhatNextImStayingHere:
 	.string "MAY: {PLAYER}{KUN}, after this…\n"
@@ -765,17 +792,29 @@ LittlerootTown_ProfessorBirchsLab_Text_ScottAboardSSTidalCall:
 	.string "… … … … … Click!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_YourTwoPartners:
-	.string "You and both POKéMON saved me.\p"
-	.string "I would like {STR_VAR_1} and\n"
-	.string "{STR_VAR_2} to stay with you.$"
+	.string "PROF. BIRCH: You and both of these\n"
+	.string "POKéMON were brave out there.\p"
+	.string "I'd like {STR_VAR_1} and\n"
+	.string "{STR_VAR_2} to stay with you.\p"
+	.string "I think you're going to make\n"
+	.string "a wonderful team!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_NameOpeningPartner:
 	.string "Would you like to nickname\n"
 	.string "{STR_VAR_1}?$"
 
 LittlerootTown_ProfessorBirchsLab_Text_OpeningDex:
-	.string "Take this POKéDEX. There are many\n"
-	.string "more partners waiting out there!$"
+	.string "Take this POKéDEX, too. It records\n"
+	.string "the POKéMON you see and catch.\p"
+	.string "HOENN's weather has been strange.\n"
+	.string "POKéMON are appearing in places\l"
+	.string "we've never seen them before.\p"
+	.string "Even LEGENDARY POKéMON, once known\n"
+	.string "only through stories, are being\l"
+	.string "sighted along our routes!\p"
+	.string "Are they following the weather,\n"
+	.string "or is something drawing them here?\l"
+	.string "Your discoveries could help us learn.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_OpeningBalls:
 	.string "You received 20 POKé BALLS!$"
@@ -785,10 +824,19 @@ LittlerootTown_ProfessorBirchsLab_Text_OpeningBallsInPC:
 	.string "to the item PC.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_OpeningReady:
-	.string "Oldale's Center can prepare any\n"
-	.string "team you want, all for free.\p"
-	.string "Catch more partners, try your ideas,\n"
-	.string "then meet {RIVAL} on ROUTE 103.$"
+	.string "{RIVAL} is studying POKéMON on\n"
+	.string "ROUTE 103, north of OLDALE TOWN.\p"
+	.string "Stop at OLDALE's POKéMON CENTER.\n"
+	.string "Collect your free tools and ask\l"
+	.string "the TUTOR about Battle Sets.\p"
+	.string "They prepare moves and stats.\n"
+	.string "Use the LEVELER to raise your\l"
+	.string "party; battles give no experience.\p"
+	.string "Catch a few more partners, then\n"
+	.string "try a battle with {RIVAL}!\p"
+	.string "If you need another try, choose\n"
+	.string "RUN in a TRAINER battle. You can\l"
+	.string "restart that battle for free.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_OpeningSuppliesFull:
 	.string "Your field supplies are waiting.\p"
@@ -796,7 +844,41 @@ LittlerootTown_ProfessorBirchsLab_Text_OpeningSuppliesFull:
 	.string "then speak to me or the aide.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_OpeningDebrief:
-	.string "Welcome back! I am glad you both\n"
-	.string "gave that battle everything.\p"
-	.string "Keep finding partners and making\n"
-	.string "the team your own!$"
+	.string "PROF. BIRCH: Welcome back, {PLAYER}!\n"
+	.string "You beat {RIVAL}? Well done!\p"
+	.string "First you helped me out of a\n"
+	.string "scrape, and now your first win\l"
+	.string "against another TRAINER!\p"
+	.string "There's nothing like getting out\n"
+	.string "in the field with your partners.\l"
+	.string "Even I learn something every day!\p"
+	.string "Here, take these 10 GREAT BALLS.\n"
+	.string "They catch POKéMON more easily\l"
+	.string "than ordinary POKé BALLS.$"
+
+LittlerootTown_ProfessorBirchsLab_Text_OpeningSendoff:
+	.string "Head west from OLDALE along\n"
+	.string "ROUTE 102 to PETALBURG CITY.\p"
+	.string "Your dad runs the GYM there.\n"
+	.string "Go show him your team!\p"
+	.string "Read the route signs as you go.\n"
+	.string "They list local POKéMON by grass,\l"
+	.string "water, and fishing method.\p"
+	.string "Keep reading past the fishing\n"
+	.string "lists for local LEGENDARIES. Many\l"
+	.string "can be found in the wild!\p"
+	.string "For more leads, ask the local\n"
+	.string "guide near the PC in each\l"
+	.string "POKéMON CENTER.\p"
+	.string "He can tell you which LEGENDARIES\n"
+	.string "are nearby and who to talk to\l"
+	.string "about them. Enjoy the journey!$"
+
+LittlerootTown_ProfessorBirchsLab_Text_GreatBallsInPC:
+	.string "Your 10 GREAT BALLS were sent\n"
+	.string "to the item PC.$"
+
+LittlerootTown_ProfessorBirchsLab_Text_GreatBallsWaiting:
+	.string "Your Bag and item PC are full.\p"
+	.string "Make room and come see me.\n"
+	.string "I'll keep your GREAT BALLS here!$"

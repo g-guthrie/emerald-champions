@@ -1,0 +1,174 @@
+tools/scaninc/scaninc -M build/emerald-test/test/battle/ai/emerald_champions_plans.d -g build/assets -I include -I tools/agbcc/include test/battle/ai/emerald_champions_plans.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/battle/ai/emerald_champions_plans.o test/battle/ai/emerald_champions_plans.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 4
+[0] EC live review Brandi disruption: Taunt slower enemies and Dark reserves: [32mPASS[0m
+REVIEW_INPUT trainer=756 slot=0 species=436 lv=28 HP=96 Atk=27 Def=86 SpA=27 SpD=62 Spe=23 item=494 ability=26
+REVIEW_INPUT trainer=756 slot=1 species=281 lv=28 HP=85 Atk=33 Def=33 SpA=73 SpD=44 Spe=36 item=494 ability=36
+REVIEW_INPUT trainer=756 slot=2 species=518 lv=28 HP=129 Atk=44 Def=61 SpA=100 SpD=66 Spe=26 item=472 ability=28
+REVIEW_INPUT trainer=756 slot=3 species=202 lv=28 HP=170 Atk=28 Def=46 SpA=32 SpD=69 Spe=32 item=523 ability=23
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Trick Room target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Dazzling Gleam target=0
+AI decision turn=2 actor=1 move=Gyro Ball target=0
+AI decision turn=2 actor=3 move=Protect target=3
+REVIEW_AFTER board=10 turns=1 reserves=0 species=436/281 HP=96/85 foes=10/82 faints=0/0 initialFrames=35
+REVIEW_STATE actor=1 move=- PP=5/20/5/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=494
+REVIEW_STATE actor=3 move=Dazzling Gleam PP=10/9/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=10 item=494
+BRANDI_DISRUPT timer=0 taunt=2 playerSpeed=79/71
+REVIEW_INPUT trainer=756 slot=0 species=436 lv=28 HP=96 Atk=27 Def=86 SpA=27 SpD=62 Spe=23 item=494 ability=26
+REVIEW_INPUT trainer=756 slot=1 species=281 lv=28 HP=85 Atk=33 Def=33 SpA=73 SpD=44 Spe=36 item=494 ability=36
+REVIEW_INPUT trainer=756 slot=2 species=518 lv=28 HP=129 Atk=44 Def=61 SpA=100 SpD=66 Spe=26 item=472 ability=28
+REVIEW_INPUT trainer=756 slot=3 species=202 lv=28 HP=170 Atk=28 Def=46 SpA=32 SpD=69 Spe=32 item=523 ability=23
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Trick Room target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Dazzling Gleam target=0
+AI decision turn=2 actor=0 move=Taunt target=1
+AI decision turn=2 actor=1 move=Gyro Ball target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=1 move=Gyro Ball target=2
+AI decision turn=3 actor=3 move=Calm Mind target=3
+REVIEW_AFTER board=10 turns=2 reserves=0 species=436/281 HP=96/85 foes=0/82 faints=0/1 initialFrames=35
+REVIEW_STATE actor=1 move=Gyro Ball PP=4/20/5/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=494
+REVIEW_STATE actor=3 move=Protect PP=10/9/20/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=10 item=494
+BRANDI_DISRUPT timer=0 taunt=1 playerSpeed=79/71
+REVIEW_INPUT trainer=756 slot=0 species=436 lv=28 HP=96 Atk=27 Def=86 SpA=27 SpD=62 Spe=23 item=494 ability=26
+REVIEW_INPUT trainer=756 slot=1 species=281 lv=28 HP=85 Atk=33 Def=33 SpA=73 SpD=44 Spe=36 item=494 ability=36
+REVIEW_INPUT trainer=756 slot=2 species=518 lv=28 HP=129 Atk=44 Def=61 SpA=100 SpD=66 Spe=26 item=472 ability=28
+REVIEW_INPUT trainer=756 slot=3 species=202 lv=28 HP=170 Atk=28 Def=46 SpA=32 SpD=69 Spe=32 item=523 ability=23
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Trick Room target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Dazzling Gleam target=0
+AI decision turn=2 actor=0 move=Taunt target=1
+AI decision turn=2 actor=1 move=Gyro Ball target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=1 move=Gyro Ball target=2
+AI decision turn=3 actor=3 move=Calm Mind target=3
+AI decision turn=4 actor=1 move=Trick Room target=1
+AI decision turn=4 actor=3 move=Calm Mind target=3
+REVIEW_AFTER board=10 turns=3 reserves=0 species=436/281 HP=96/85 foes=0/78 faints=0/1 initialFrames=35
+REVIEW_STATE actor=1 move=Gyro Ball PP=3/20/5/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=494
+REVIEW_STATE actor=3 move=Calm Mind PP=10/9/19/4 Atk=6 Def=6 SpA=7 SpD=7 Spe=6 status=0 ability=10 item=494
+BRANDI_DISRUPT timer=0 taunt=0 playerSpeed=79/71
+REVIEW_INPUT trainer=756 slot=0 species=436 lv=28 HP=96 Atk=27 Def=86 SpA=27 SpD=62 Spe=23 item=494 ability=26
+REVIEW_INPUT trainer=756 slot=1 species=281 lv=28 HP=85 Atk=33 Def=33 SpA=73 SpD=44 Spe=36 item=494 ability=36
+REVIEW_INPUT trainer=756 slot=2 species=518 lv=28 HP=129 Atk=44 Def=61 SpA=100 SpD=66 Spe=26 item=472 ability=28
+REVIEW_INPUT trainer=756 slot=3 species=202 lv=28 HP=170 Atk=28 Def=46 SpA=32 SpD=69 Spe=32 item=523 ability=23
+AI decision turn=1 actor=0 move=Body Slam target=1
+AI decision turn=1 actor=1 move=Reflect target=1
+AI decision turn=1 actor=2 move=Knock Off target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Gyro Ball target=0
+AI decision turn=2 actor=3 move=Calm Mind target=3
+REVIEW_AFTER board=11 turns=1 reserves=0 species=436/281 HP=89/85 foes=149/94 faints=0/0 initialFrames=29
+REVIEW_STATE actor=1 move=Reflect PP=5/20/5/19 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=494
+REVIEW_STATE actor=3 move=Protect PP=10/10/20/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=160 item=494
+BRANDI_DISRUPT timer=0 taunt=0 playerSpeed=15/18
+REVIEW_INPUT trainer=756 slot=0 species=436 lv=28 HP=96 Atk=27 Def=86 SpA=27 SpD=62 Spe=23 item=494 ability=26
+REVIEW_INPUT trainer=756 slot=1 species=281 lv=28 HP=85 Atk=33 Def=33 SpA=73 SpD=44 Spe=36 item=494 ability=36
+REVIEW_INPUT trainer=756 slot=2 species=518 lv=28 HP=129 Atk=44 Def=61 SpA=100 SpD=66 Spe=26 item=472 ability=28
+REVIEW_INPUT trainer=756 slot=3 species=202 lv=28 HP=170 Atk=28 Def=46 SpA=32 SpD=69 Spe=32 item=523 ability=23
+AI decision turn=1 actor=0 move=Body Slam target=1
+AI decision turn=1 actor=1 move=Reflect target=1
+AI decision turn=1 actor=2 move=Knock Off target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Body Slam target=1
+AI decision turn=2 actor=1 move=Gyro Ball target=0
+AI decision turn=2 actor=2 move=Knock Off target=3
+AI decision turn=2 actor=3 move=Calm Mind target=3
+AI decision turn=3 actor=1 move=Gyro Ball target=0
+AI decision turn=3 actor=3 move=Protect target=3
+REVIEW_AFTER board=11 turns=2 reserves=0 species=436/281 HP=82/70 foes=143/83 faints=0/0 initialFrames=29
+REVIEW_STATE actor=1 move=Gyro Ball PP=4/20/5/19 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=494
+REVIEW_STATE actor=3 move=Calm Mind PP=10/10/19/4 Atk=6 Def=6 SpA=7 SpD=7 Spe=6 status=0 ability=160 item=0
+BRANDI_DISRUPT timer=0 taunt=0 playerSpeed=15/18
+REVIEW_INPUT trainer=756 slot=0 species=436 lv=28 HP=96 Atk=27 Def=86 SpA=27 SpD=62 Spe=23 item=494 ability=26
+REVIEW_INPUT trainer=756 slot=1 species=281 lv=28 HP=85 Atk=33 Def=33 SpA=73 SpD=44 Spe=36 item=494 ability=36
+REVIEW_INPUT trainer=756 slot=2 species=518 lv=28 HP=129 Atk=44 Def=61 SpA=100 SpD=66 Spe=26 item=472 ability=28
+REVIEW_INPUT trainer=756 slot=3 species=202 lv=28 HP=170 Atk=28 Def=46 SpA=32 SpD=69 Spe=32 item=523 ability=23
+AI decision turn=1 actor=0 move=Body Slam target=1
+AI decision turn=1 actor=1 move=Reflect target=1
+AI decision turn=1 actor=2 move=Knock Off target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Body Slam target=1
+AI decision turn=2 actor=1 move=Gyro Ball target=0
+AI decision turn=2 actor=2 move=Knock Off target=3
+AI decision turn=2 actor=3 move=Calm Mind target=3
+AI decision turn=3 actor=0 move=Body Slam target=1
+AI decision turn=3 actor=1 move=Gyro Ball target=0
+AI decision turn=3 actor=2 move=Knock Off target=3
+AI decision turn=3 actor=3 move=Protect target=3
+AI decision turn=4 actor=1 move=Gyro Ball target=0
+AI switch turn=4 actor=3 party=2
+REVIEW_AFTER board=11 turns=3 reserves=0 species=436/281 HP=75/70 foes=137/83 faints=0/0 initialFrames=29
+REVIEW_STATE actor=1 move=Gyro Ball PP=3/20/5/19 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=494
+REVIEW_STATE actor=3 move=Protect PP=10/10/19/3 Atk=6 Def=6 SpA=7 SpD=7 Spe=6 status=0 ability=160 item=0
+BRANDI_DISRUPT timer=0 taunt=0 playerSpeed=15/18
+REVIEW_INPUT trainer=756 slot=0 species=436 lv=28 HP=96 Atk=27 Def=86 SpA=27 SpD=62 Spe=23 item=494 ability=26
+REVIEW_INPUT trainer=756 slot=1 species=281 lv=28 HP=85 Atk=33 Def=33 SpA=73 SpD=44 Spe=36 item=494 ability=36
+REVIEW_INPUT trainer=756 slot=2 species=518 lv=28 HP=129 Atk=44 Def=61 SpA=100 SpD=66 Spe=26 item=472 ability=28
+REVIEW_INPUT trainer=756 slot=3 species=202 lv=28 HP=170 Atk=28 Def=46 SpA=32 SpD=69 Spe=32 item=523 ability=23
+AI decision turn=1 actor=0 move=Foul Play target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Foul Play target=3
+AI decision turn=1 actor=3 move=Destiny Bond target=3
+AI decision turn=2 actor=1 move=Calm Mind target=1
+AI decision turn=2 actor=3 move=Counter target=2
+REVIEW_AFTER board=12 turns=1 reserves=1 species=518/202 HP=129/126 foes=110/104 faints=0/0 initialFrames=14
+REVIEW_STATE actor=1 move=Protect PP=20/10/10/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=28 item=472
+REVIEW_STATE actor=3 move=Destiny Bond PP=20/20/5/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=23 item=523
+BRANDI_DISRUPT timer=0 taunt=0 playerSpeed=44/68
+REVIEW_INPUT trainer=756 slot=0 species=436 lv=28 HP=96 Atk=27 Def=86 SpA=27 SpD=62 Spe=23 item=494 ability=26
+REVIEW_INPUT trainer=756 slot=1 species=281 lv=28 HP=85 Atk=33 Def=33 SpA=73 SpD=44 Spe=36 item=494 ability=36
+REVIEW_INPUT trainer=756 slot=2 species=518 lv=28 HP=129 Atk=44 Def=61 SpA=100 SpD=66 Spe=26 item=472 ability=28
+REVIEW_INPUT trainer=756 slot=3 species=202 lv=28 HP=170 Atk=28 Def=46 SpA=32 SpD=69 Spe=32 item=523 ability=23
+AI decision turn=1 actor=0 move=Foul Play target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Foul Play target=3
+AI decision turn=1 actor=3 move=Destiny Bond target=3
+AI decision turn=2 actor=0 move=Foul Play target=1
+AI decision turn=2 actor=1 move=Calm Mind target=1
+AI decision turn=2 actor=2 move=Foul Play target=3
+AI decision turn=2 actor=3 move=Counter target=2
+AI decision turn=3 actor=1 move=Protect target=1
+AI decision turn=3 actor=3 move=Counter target=2
+REVIEW_AFTER board=12 turns=2 reserves=1 species=518/202 HP=87/124 foes=110/16 faints=0/0 initialFrames=14
+REVIEW_STATE actor=1 move=Calm Mind PP=19/10/10/4 Atk=6 Def=6 SpA=7 SpD=7 Spe=6 status=0 ability=28 item=472
+REVIEW_STATE actor=3 move=Counter PP=19/20/5/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=23 item=0
+BRANDI_DISRUPT timer=0 taunt=0 playerSpeed=44/68
+REVIEW_INPUT trainer=756 slot=0 species=436 lv=28 HP=96 Atk=27 Def=86 SpA=27 SpD=62 Spe=23 item=494 ability=26
+REVIEW_INPUT trainer=756 slot=1 species=281 lv=28 HP=85 Atk=33 Def=33 SpA=73 SpD=44 Spe=36 item=494 ability=36
+REVIEW_INPUT trainer=756 slot=2 species=518 lv=28 HP=129 Atk=44 Def=61 SpA=100 SpD=66 Spe=26 item=472 ability=28
+REVIEW_INPUT trainer=756 slot=3 species=202 lv=28 HP=170 Atk=28 Def=46 SpA=32 SpD=69 Spe=32 item=523 ability=23
+AI decision turn=1 actor=0 move=Foul Play target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Foul Play target=3
+AI decision turn=1 actor=3 move=Destiny Bond target=3
+AI decision turn=2 actor=0 move=Foul Play target=1
+AI decision turn=2 actor=1 move=Calm Mind target=1
+AI decision turn=2 actor=2 move=Foul Play target=3
+AI decision turn=2 actor=3 move=Counter target=2
+AI decision turn=3 actor=0 move=Foul Play target=1
+AI decision turn=3 actor=1 move=Protect target=1
+AI decision turn=3 actor=2 move=Foul Play target=3
+AI decision turn=3 actor=3 move=Counter target=2
+AI decision turn=4 actor=1 move=Yawn target=0
+AI decision turn=4 actor=3 move=Encore target=0
+REVIEW_AFTER board=12 turns=3 reserves=1 species=518/202 HP=95/80 foes=110/0 faints=0/1 initialFrames=14
+REVIEW_STATE actor=1 move=Protect PP=19/10/10/3 Atk=6 Def=6 SpA=7 SpD=7 Spe=6 status=0 ability=28 item=472
+REVIEW_STATE actor=3 move=Counter PP=18/20/5/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=23 item=0
+BRANDI_DISRUPT timer=0 taunt=0 playerSpeed=44/68
+
+- Tests [32mPASSED[0m:          1
+- Tests [34mTOTAL[0m:           1
+

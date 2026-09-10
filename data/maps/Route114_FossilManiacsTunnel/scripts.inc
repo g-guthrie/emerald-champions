@@ -4,7 +4,7 @@ Route114_FossilManiacsTunnel_MapScripts::
 	.byte 0
 
 Route114_FossilManiacsTunnel_OnTransition:
-	call_if_set FLAG_SYS_GAME_CLEAR, Route114_FossilManiacsTunnel_EventScript_MoveFossilManiac
+	call_if_set FLAG_BADGE04_GET, Route114_FossilManiacsTunnel_EventScript_MoveFossilManiac
 	end
 
 Route114_FossilManiacsTunnel_EventScript_MoveFossilManiac::
@@ -13,7 +13,7 @@ Route114_FossilManiacsTunnel_EventScript_MoveFossilManiac::
 	return
 
 Route114_FossilManiacsTunnel_OnLoad:
-	goto_if_set FLAG_SYS_GAME_CLEAR, Route114_FossilManiacsTunnel_EventScript_EndLoad
+	goto_if_set FLAG_BADGE04_GET, Route114_FossilManiacsTunnel_EventScript_EndLoad
 	goto_if_ge VAR_MIRAGE_TOWER_STATE, 2, Route114_FossilManiacsTunnel_EventScript_EndLoad
 	call Route114_FossilManiacsTunnel_EventScript_CloseDesertUnderpass
 Route114_FossilManiacsTunnel_EventScript_EndLoad:
@@ -99,9 +99,13 @@ Route114_FossilManiacsTunnel_Text_FossilsAreWonderful:
 	.string "DEVON can revive any others you find.$"
 
 Route114_FossilManiacsTunnel_Text_NotSafeThatWay:
-	.string "Oh... It's not safe that way...\p"
-	.string "I was digging when the wall fell\n"
-	.string "into an enormous cavern!\p"
-	.string "It connects to SANDSTREWN RUINS.\n"
-	.string "Look for ancient fossils and a\l"
-	.string "marked stone beneath the desert.$"
+	.string "Oh... Be careful! I was digging\n"
+	.string "when the wall fell into an\l"
+	.string "enormous cavern.\p"
+	.string "TING-LU lives in the DESERT\n"
+	.string "UNDERPASS. It also connects to\l"
+	.string "SANDSTREWN RUINS, where ZYGARDE\l"
+	.string "lives on B1F.\p"
+	.string "Until caught, each has a 3%\n"
+	.string "wild encounter chance in its\l"
+	.string "habitat.$"

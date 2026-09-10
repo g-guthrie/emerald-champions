@@ -1,0 +1,20 @@
+purchase-stone-money expected 47000 0 RESULT frames=8000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=b8e3749120115bd2 nonzero_pixels=30608 save_bytes=0
+READ width=4 address=020022c0 value=0000b798
+READ width=4 address=020022e8 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000 
+shoal-full expected 4 0 RESULT frames=8000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=413ef0fadb53f8eb nonzero_pixels=38355 save_bytes=0
+READ width=4 address=020022c0 value=00000004
+READ width=4 address=020022e8 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000 
+purchase-stone-item expected 1 0 RESULT frames=8000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=b8e3749120115bd2 nonzero_pixels=30608 save_bytes=0
+READ width=4 address=020022c0 value=00000001
+READ width=4 address=020022e8 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000 
+purchase-tool-money expected 45000 0 RESULT frames=8000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=200e9c327888def8 nonzero_pixels=30620 save_bytes=0
+READ width=4 address=020022c0 value=0000c350
+READ width=4 address=020022e8 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000 

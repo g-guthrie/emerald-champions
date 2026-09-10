@@ -1,0 +1,9 @@
+{
+  "schema_version": 2,
+  "inputs_sha256": "d08175914b468a5f90f1cd7c95e8a97828c6a9bf01a353e023d13387e6f9d8bd",
+  "input_count": 28979,
+  "artifacts": {
+    "pokeemerald-champions-protect-20260909-1848-release.gba": "098d3a3fe471ae5c917d6350798d797bfa24a7c27e4e66d2db63ab4088d1c94c",
+    "pokeemerald-champions-protect-20260909-1848-release.elf": "0772bd112421433318a01c44a0d536132eb9287d826c6852fe6d9530385df483"
+  }
+}

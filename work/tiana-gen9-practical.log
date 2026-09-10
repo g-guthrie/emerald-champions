@@ -1,0 +1,227 @@
+tools/scaninc/scaninc -M build/emerald-test/test/battle/ai/emerald_champions_plans.d -g build/assets -I include -I tools/agbcc/include test/battle/ai/emerald_champions_plans.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/battle/ai/emerald_champions_plans.o test/battle/ai/emerald_champions_plans.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 4
+[2] EC live review Tiana Gleam: actual AI versus two Inner Focus attackers: [32mPASS[0m
+TIANA_GLEAM_INPUT slot=0 playerHP=41 Atk=41 Def=23 SpD=23 Speed=39 enemySpecies=300 HP=45 SpA=15 Speed=30
+TIANA_GLEAM_INPUT slot=1 playerHP=41 Atk=41 Def=23 SpD=23 Speed=39 enemySpecies=684 HP=40 SpA=33 Speed=28
+AI decision turn=1 actor=0 move=Drain Punch target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Dazzling Gleam target=0
+AI decision turn=2 actor=1 move=Helping Hand target=3
+AI decision turn=2 actor=3 move=Dazzling Gleam target=0
+TIANA_GLEAM_AI LAST=Protect/Dazzling Gleam species=300/684 HP=45/28 item=523 playerHP=23/23 unburden=0
+[0] EC live review Tiana timing: complete cold decision with six-player party: [32mPASS[0m
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Dazzling Gleam target=0
+AI decision turn=2 actor=1 move=Helping Hand target=3
+AI decision turn=2 actor=3 move=Dazzling Gleam target=0
+E5_COMPLETE_TIMING trainer=603 setupFrames=6 decisionFrames=44 completeFrames=50 warmFrames=43 first=3 moves=Helping Hand/Dazzling Gleam
+[1] EC live review Tiana Gleam: native Helping Hand spread versus single target: [32mPASS[0m
+TIANA_GLEAM_INPUT slot=0 playerHP=41 Atk=41 Def=23 SpD=23 Speed=39 enemySpecies=300 HP=45 SpA=15 Speed=30
+TIANA_GLEAM_INPUT slot=1 playerHP=41 Atk=41 Def=23 SpD=23 Speed=39 enemySpecies=684 HP=40 SpA=33 Speed=28
+AI decision turn=1 actor=0 move=Drain Punch target=1
+AI decision turn=1 actor=1 move=Helping Hand target=3
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Draining Kiss target=2
+TIANA_GLEAM_FIXED spread=0 LAST=Helping Hand/Draining Kiss HP=1/40 playerHP=41/17 item=523 unburden=0
+TIANA_GLEAM_INPUT slot=0 playerHP=41 Atk=41 Def=23 SpD=23 Speed=39 enemySpecies=300 HP=45 SpA=15 Speed=30
+TIANA_GLEAM_INPUT slot=1 playerHP=41 Atk=41 Def=23 SpD=23 Speed=39 enemySpecies=684 HP=40 SpA=33 Speed=28
+AI decision turn=1 actor=0 move=Drain Punch target=1
+AI decision turn=1 actor=1 move=Helping Hand target=3
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Dazzling Gleam target=0
+TIANA_GLEAM_FIXED spread=1 LAST=Helping Hand/Dazzling Gleam HP=1/28 playerHP=15/15 item=523 unburden=0
+[3] EC live review Tiana drain AI: actual injured attacker continuation: [32mPASS[0m
+AI decision turn=1 actor=0 move=Ice Punch target=3
+AI decision turn=1 actor=1 move=Fake Out target=0
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Draining Kiss target=0
+AI decision turn=2 actor=1 move=Helping Hand target=3
+AI decision turn=2 actor=3 move=Dazzling Gleam target=0
+TIANA_DRAIN_AI turns=1 LAST=Fake Out/Draining Kiss party=0/1 HP=45/40 originalSwirlixHP=40 foeHP=34/53 sleep=0/0 item=0 unburden=1
+AI decision turn=1 actor=0 move=Ice Punch target=3
+AI decision turn=1 actor=1 move=Fake Out target=0
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Draining Kiss target=0
+AI decision turn=2 actor=0 move=Ice Punch target=3
+AI decision turn=2 actor=1 move=Helping Hand target=3
+AI decision turn=2 actor=2 move=Protect target=2
+AI decision turn=2 actor=3 move=Dazzling Gleam target=0
+AI decision turn=3 actor=1 move=Protect target=1
+AI decision turn=3 actor=3 move=Draining Kiss target=0
+TIANA_DRAIN_AI turns=2 LAST=Helping Hand/Dazzling Gleam party=0/1 HP=45/19 originalSwirlixHP=19 foeHP=2/40 sleep=0/0 item=0 unburden=1
+[2] EC live review Tiana: actual lead support and natural berry continuation: [32mPASS[0m
+TIANA_INPUT berry=0 turns=1 owner=0 slot=0 species=417 level=14 HP=53 Atk=18 Def=40 SpA=21 SpD=34 Speed=35 item=523 ability=10
+TIANA_INPUT berry=0 turns=1 owner=0 slot=1 species=133 level=14 HP=52 Atk=36 Def=23 SpA=18 SpD=27 Speed=24 item=494 ability=91
+TIANA_INPUT berry=0 turns=1 owner=1 slot=0 species=300 level=12 HP=45 Atk=19 Def=19 SpA=15 SpD=17 Speed=30 item=481 ability=147
+TIANA_INPUT berry=0 turns=1 owner=1 slot=1 species=684 level=12 HP=40 Atk=18 Def=24 SpA=33 SpD=22 Speed=28 item=523 ability=84
+TIANA_INPUT berry=0 turns=1 owner=1 slot=2 species=133 level=12 HP=46 Atk=31 Def=20 SpA=17 SpD=24 Speed=21 item=494 ability=91
+TIANA_INPUT berry=0 turns=1 owner=1 slot=3 species=427 level=12 HP=39 Atk=32 Def=19 SpA=17 SpD=22 Speed=39 item=445 ability=103
+AI decision turn=1 actor=0 move=Round target=3
+AI decision turn=1 actor=1 move=Fake Out target=0
+AI decision turn=1 actor=2 move=Double-Edge target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Sing target=2
+AI decision turn=2 actor=3 move=Dazzling Gleam target=0
+TIANA_AFTER berry=0 requestedTurns=1 nativeTurns=1 LAST=Fake Out/Protect party=0/1 species=300/684 HP=45/40 item=481/523 unburden=0/0 playerHP=49/52 playerSleep=0/0
+TIANA_PARTY berry=0 turns=1 slot=0 species=300 HP=45/45 item=481 status=0
+TIANA_PARTY berry=0 turns=1 slot=1 species=684 HP=40/40 item=523 status=0
+TIANA_PARTY berry=0 turns=1 slot=2 species=133 HP=46/46 item=494 status=0
+TIANA_PARTY berry=0 turns=1 slot=3 species=427 HP=39/39 item=445 status=0
+TIANA_INPUT berry=0 turns=2 owner=0 slot=0 species=417 level=14 HP=53 Atk=18 Def=40 SpA=21 SpD=34 Speed=35 item=523 ability=10
+TIANA_INPUT berry=0 turns=2 owner=0 slot=1 species=133 level=14 HP=52 Atk=36 Def=23 SpA=18 SpD=27 Speed=24 item=494 ability=91
+TIANA_INPUT berry=0 turns=2 owner=1 slot=0 species=300 level=12 HP=45 Atk=19 Def=19 SpA=15 SpD=17 Speed=30 item=481 ability=147
+TIANA_INPUT berry=0 turns=2 owner=1 slot=1 species=684 level=12 HP=40 Atk=18 Def=24 SpA=33 SpD=22 Speed=28 item=523 ability=84
+TIANA_INPUT berry=0 turns=2 owner=1 slot=2 species=133 level=12 HP=46 Atk=31 Def=20 SpA=17 SpD=24 Speed=21 item=494 ability=91
+TIANA_INPUT berry=0 turns=2 owner=1 slot=3 species=427 level=12 HP=39 Atk=32 Def=19 SpA=17 SpD=22 Speed=39 item=445 ability=103
+AI decision turn=1 actor=0 move=Round target=3
+AI decision turn=1 actor=1 move=Fake Out target=0
+AI decision turn=1 actor=2 move=Double-Edge target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Round target=3
+AI decision turn=2 actor=1 move=Sing target=2
+AI decision turn=2 actor=2 move=Double-Edge target=3
+AI decision turn=2 actor=3 move=Dazzling Gleam target=0
+AI decision turn=3 actor=1 move=Protect target=1
+AI decision turn=3 actor=3 move=Dazzling Gleam target=0
+TIANA_AFTER berry=0 requestedTurns=2 nativeTurns=2 LAST=Sing/Dazzling Gleam party=0/1 species=300/684 HP=45/32 item=481/523 unburden=0/0 playerHP=40/45 playerSleep=0/2
+TIANA_PARTY berry=0 turns=2 slot=0 species=300 HP=45/45 item=481 status=0
+TIANA_PARTY berry=0 turns=2 slot=1 species=684 HP=32/40 item=523 status=0
+TIANA_PARTY berry=0 turns=2 slot=2 species=133 HP=46/46 item=494 status=0
+TIANA_PARTY berry=0 turns=2 slot=3 species=427 HP=39/39 item=445 status=0
+TIANA_INPUT berry=1 turns=1 owner=0 slot=0 species=619 level=14 HP=45 Atk=37 Def=23 SpA=21 SpD=23 Speed=39 item=494 ability=39
+TIANA_INPUT berry=1 turns=1 owner=0 slot=1 species=177 level=14 HP=48 Atk=20 Def=22 SpA=30 SpD=21 Speed=37 item=494 ability=156
+TIANA_INPUT berry=1 turns=1 owner=1 slot=0 species=300 level=12 HP=45 Atk=19 Def=19 SpA=15 SpD=17 Speed=30 item=481 ability=147
+TIANA_INPUT berry=1 turns=1 owner=1 slot=1 species=684 level=12 HP=40 Atk=18 Def=24 SpA=33 SpD=22 Speed=28 item=523 ability=84
+TIANA_INPUT berry=1 turns=1 owner=1 slot=2 species=133 level=12 HP=46 Atk=31 Def=20 SpA=17 SpD=24 Speed=21 item=494 ability=91
+TIANA_INPUT berry=1 turns=1 owner=1 slot=3 species=427 level=12 HP=39 Atk=32 Def=19 SpA=17 SpD=22 Speed=39 item=445 ability=103
+AI decision turn=1 actor=0 move=Strength target=3
+AI decision turn=1 actor=1 move=Fake Out target=2
+AI decision turn=1 actor=2 move=Psychic target=1
+AI decision turn=1 actor=3 move=Dazzling Gleam target=0
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Protect target=3
+TIANA_AFTER berry=1 requestedTurns=1 nativeTurns=1 LAST=Fake Out/Dazzling Gleam party=0/1 species=300/684 HP=45/24 item=481/523 unburden=0/0 playerHP=27/34 playerSleep=0/0
+TIANA_PARTY berry=1 turns=1 slot=0 species=300 HP=45/45 item=481 status=0
+TIANA_PARTY berry=1 turns=1 slot=1 species=684 HP=24/40 item=523 status=0
+TIANA_PARTY berry=1 turns=1 slot=2 species=133 HP=46/46 item=494 status=0
+TIANA_PARTY berry=1 turns=1 slot=3 species=427 HP=39/39 item=445 status=0
+TIANA_INPUT berry=1 turns=2 owner=0 slot=0 species=619 level=14 HP=45 Atk=37 Def=23 SpA=21 SpD=23 Speed=39 item=494 ability=39
+TIANA_INPUT berry=1 turns=2 owner=0 slot=1 species=177 level=14 HP=48 Atk=20 Def=22 SpA=30 SpD=21 Speed=37 item=494 ability=156
+TIANA_INPUT berry=1 turns=2 owner=1 slot=0 species=300 level=12 HP=45 Atk=19 Def=19 SpA=15 SpD=17 Speed=30 item=481 ability=147
+TIANA_INPUT berry=1 turns=2 owner=1 slot=1 species=684 level=12 HP=40 Atk=18 Def=24 SpA=33 SpD=22 Speed=28 item=523 ability=84
+TIANA_INPUT berry=1 turns=2 owner=1 slot=2 species=133 level=12 HP=46 Atk=31 Def=20 SpA=17 SpD=24 Speed=21 item=494 ability=91
+TIANA_INPUT berry=1 turns=2 owner=1 slot=3 species=427 level=12 HP=39 Atk=32 Def=19 SpA=17 SpD=22 Speed=39 item=445 ability=103
+AI decision turn=1 actor=0 move=Strength target=3
+AI decision turn=1 actor=1 move=Fake Out target=2
+AI decision turn=1 actor=2 move=Psychic target=1
+AI decision turn=1 actor=3 move=Dazzling Gleam target=0
+AI decision turn=2 actor=0 move=Strength target=3
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=2 move=Psychic target=1
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=1 move=Sing target=0
+AI switch turn=3 actor=3 party=2
+TIANA_AFTER berry=1 requestedTurns=2 nativeTurns=2 LAST=Protect/Protect party=0/1 species=300/684 HP=45/24 item=481/523 unburden=0/0 playerHP=27/34 playerSleep=0/0
+TIANA_PARTY berry=1 turns=2 slot=0 species=300 HP=45/45 item=481 status=0
+TIANA_PARTY berry=1 turns=2 slot=1 species=684 HP=24/40 item=523 status=0
+TIANA_PARTY berry=1 turns=2 slot=2 species=133 HP=46/46 item=494 status=0
+TIANA_PARTY berry=1 turns=2 slot=3 species=427 HP=39/39 item=445 status=0
+[0] EC live review Tiana reserves: physical burn pressure and recipient counterplay: [32mPASS[0m
+TIANA_RESERVE_INPUT c=0 owner=0 slot=0 species=532 level=14 hp=58 atk=38 def=29 spa=14 spd=19 speed=19 item=494 ability=89 status=0
+TIANA_RESERVE_INPUT c=0 owner=0 slot=1 species=417 level=14 hp=53 atk=18 def=40 spa=21 spd=34 speed=35 item=523 ability=10 status=0
+TIANA_RESERVE_INPUT c=0 owner=1 slot=0 species=133 level=12 hp=46 atk=31 def=20 spa=17 spd=24 speed=21 item=494 ability=91 status=0
+TIANA_RESERVE_INPUT c=0 owner=1 slot=1 species=427 level=12 hp=39 atk=32 def=19 spa=17 spd=22 speed=39 item=445 ability=103 status=0
+TIANA_RESERVE_INPUT c=0 owner=1 slot=2 species=300 level=12 hp=0 atk=19 def=19 spa=15 spd=17 speed=30 item=481 ability=147 status=0
+TIANA_RESERVE_INPUT c=0 owner=1 slot=3 species=684 level=12 hp=0 atk=18 def=24 spa=33 spd=22 speed=28 item=523 ability=84 status=0
+AI decision turn=1 actor=0 move=Ice Punch target=1
+AI decision turn=1 actor=1 move=Double-Edge target=2
+AI decision turn=1 actor=2 move=Super Fang target=3
+AI decision turn=1 actor=3 move=Fake Out target=0
+AI decision turn=2 actor=0 move=Ice Punch target=1
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=2 move=Super Fang target=3
+AI decision turn=2 actor=3 move=Drain Punch target=0
+AI decision turn=3 actor=1 move=Double-Edge target=0
+AI decision turn=3 actor=3 move=Encore target=2
+TIANA_RESERVE_AFTER c=0 LAST=Protect/Drain Punch foeLAST=Ice Punch/Super Fang hp=39/12 foeHP=46/31 items=494/445 foeItems=494/523 statuses=0/0 foeStatuses=0/0
+TIANA_RESERVE_INPUT c=1 owner=0 slot=0 species=532 level=14 hp=58 atk=38 def=29 spa=14 spd=19 speed=19 item=494 ability=62 status=0
+TIANA_RESERVE_INPUT c=1 owner=0 slot=1 species=417 level=14 hp=53 atk=18 def=40 spa=21 spd=34 speed=35 item=523 ability=10 status=0
+TIANA_RESERVE_INPUT c=1 owner=1 slot=0 species=133 level=12 hp=46 atk=31 def=20 spa=17 spd=24 speed=21 item=494 ability=91 status=0
+TIANA_RESERVE_INPUT c=1 owner=1 slot=1 species=427 level=12 hp=39 atk=32 def=19 spa=17 spd=22 speed=39 item=445 ability=103 status=0
+TIANA_RESERVE_INPUT c=1 owner=1 slot=2 species=300 level=12 hp=0 atk=19 def=19 spa=15 spd=17 speed=30 item=481 ability=147 status=0
+TIANA_RESERVE_INPUT c=1 owner=1 slot=3 species=684 level=12 hp=0 atk=18 def=24 spa=33 spd=22 speed=28 item=523 ability=84 status=0
+AI decision turn=1 actor=0 move=Ice Punch target=1
+AI decision turn=1 actor=1 move=Double-Edge target=2
+AI decision turn=1 actor=2 move=Super Fang target=3
+AI decision turn=1 actor=3 move=Fake Out target=0
+AI decision turn=2 actor=0 move=Ice Punch target=1
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=2 move=Super Fang target=3
+AI decision turn=2 actor=3 move=Encore target=2
+AI decision turn=3 actor=1 move=Double-Edge target=2
+AI decision turn=3 actor=3 move=Drain Punch target=2
+TIANA_RESERVE_AFTER c=1 LAST=Protect/Encore foeLAST=Ice Punch/Super Fang hp=39/10 foeHP=52/31 items=494/445 foeItems=494/523 statuses=0/0 foeStatuses=0/0
+TIANA_RESERVE_INPUT c=2 owner=0 slot=0 species=255 level=14 hp=49 atk=33 def=25 spa=25 spd=23 speed=21 item=494 ability=66 status=0
+TIANA_RESERVE_INPUT c=2 owner=0 slot=1 species=417 level=14 hp=53 atk=18 def=40 spa=21 spd=34 speed=35 item=523 ability=10 status=0
+TIANA_RESERVE_INPUT c=2 owner=1 slot=0 species=133 level=12 hp=46 atk=31 def=20 spa=17 spd=24 speed=21 item=494 ability=91 status=0
+TIANA_RESERVE_INPUT c=2 owner=1 slot=1 species=427 level=12 hp=39 atk=32 def=19 spa=17 spd=22 speed=39 item=445 ability=103 status=0
+TIANA_RESERVE_INPUT c=2 owner=1 slot=2 species=300 level=12 hp=0 atk=19 def=19 spa=15 spd=17 speed=30 item=481 ability=147 status=0
+TIANA_RESERVE_INPUT c=2 owner=1 slot=3 species=684 level=12 hp=0 atk=18 def=24 spa=33 spd=22 speed=28 item=523 ability=84 status=0
+AI decision turn=1 actor=0 move=Body Slam target=1
+AI decision turn=1 actor=1 move=Double-Edge target=0
+AI decision turn=1 actor=2 move=Super Fang target=3
+AI decision turn=1 actor=3 move=Fake Out target=0
+AI decision turn=2 actor=0 move=Body Slam target=1
+AI decision turn=2 actor=1 move=Quick Attack target=0
+AI decision turn=2 actor=2 move=Super Fang target=3
+AI decision turn=2 actor=3 move=Drain Punch target=0
+AI decision turn=3 actor=1 move=Quick Attack target=0
+AI decision turn=3 actor=3 move=Drain Punch target=0
+TIANA_RESERVE_AFTER c=2 LAST=Quick Attack/Drain Punch foeLAST=Body Slam/Super Fang hp=27/12 foeHP=3/53 items=494/445 foeItems=494/523 statuses=0/0 foeStatuses=0/0
+TIANA_RESERVE_INPUT c=3 owner=0 slot=0 species=532 level=14 hp=58 atk=38 def=29 spa=14 spd=19 speed=19 item=494 ability=89 status=8
+TIANA_RESERVE_INPUT c=3 owner=0 slot=1 species=417 level=14 hp=53 atk=18 def=40 spa=21 spd=34 speed=35 item=523 ability=10 status=0
+TIANA_RESERVE_INPUT c=3 owner=1 slot=0 species=133 level=12 hp=46 atk=31 def=20 spa=17 spd=24 speed=21 item=494 ability=91 status=0
+TIANA_RESERVE_INPUT c=3 owner=1 slot=1 species=427 level=12 hp=39 atk=32 def=19 spa=17 spd=22 speed=39 item=445 ability=103 status=0
+TIANA_RESERVE_INPUT c=3 owner=1 slot=2 species=300 level=12 hp=0 atk=19 def=19 spa=15 spd=17 speed=30 item=481 ability=147 status=0
+TIANA_RESERVE_INPUT c=3 owner=1 slot=3 species=684 level=12 hp=0 atk=18 def=24 spa=33 spd=22 speed=28 item=523 ability=84 status=0
+AI decision turn=1 actor=0 move=Ice Punch target=1
+AI decision turn=1 actor=1 move=Double-Edge target=2
+AI decision turn=1 actor=2 move=Super Fang target=3
+AI decision turn=1 actor=3 move=Fake Out target=0
+AI decision turn=2 actor=0 move=Ice Punch target=1
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=2 move=Super Fang target=3
+AI decision turn=2 actor=3 move=Drain Punch target=0
+AI decision turn=3 actor=1 move=Double-Edge target=0
+AI decision turn=3 actor=3 move=Encore target=2
+TIANA_RESERVE_AFTER c=3 LAST=Protect/Drain Punch foeLAST=Ice Punch/Super Fang hp=39/12 foeHP=32/31 items=494/445 foeItems=494/523 statuses=0/0 foeStatuses=8/0
+TIANA_RESERVE_INPUT c=4 owner=0 slot=0 species=532 level=14 hp=58 atk=38 def=29 spa=14 spd=19 speed=19 item=494 ability=89 status=0
+TIANA_RESERVE_INPUT c=4 owner=0 slot=1 species=417 level=14 hp=53 atk=18 def=40 spa=21 spd=34 speed=35 item=523 ability=10 status=0
+TIANA_RESERVE_INPUT c=4 owner=1 slot=0 species=133 level=12 hp=46 atk=31 def=20 spa=17 spd=24 speed=21 item=494 ability=91 status=0
+TIANA_RESERVE_INPUT c=4 owner=1 slot=1 species=427 level=12 hp=39 atk=32 def=19 spa=17 spd=22 speed=39 item=445 ability=103 status=0
+TIANA_RESERVE_INPUT c=4 owner=1 slot=2 species=300 level=12 hp=0 atk=19 def=19 spa=15 spd=17 speed=30 item=481 ability=147 status=0
+TIANA_RESERVE_INPUT c=4 owner=1 slot=3 species=684 level=12 hp=0 atk=18 def=24 spa=33 spd=22 speed=28 item=523 ability=84 status=0
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Double-Edge target=2
+AI decision turn=1 actor=2 move=Super Fang target=3
+AI decision turn=1 actor=3 move=Fake Out target=0
+AI decision turn=2 actor=0 move=Ice Punch target=1
+AI decision turn=2 actor=1 move=Double-Edge target=0
+AI decision turn=2 actor=2 move=Super Fang target=3
+AI decision turn=2 actor=3 move=Encore target=0
+AI decision turn=3 actor=1 move=Double-Edge target=2
+AI decision turn=3 actor=3 move=Encore target=2
+TIANA_RESERVE_AFTER c=4 LAST=Double-Edge/Encore foeLAST=Protect/Super Fang hp=33/10 foeHP=38/31 items=494/445 foeItems=494/523 statuses=0/0 foeStatuses=0/0
+
+- Tests [32mPASSED[0m:          6
+- Tests [34mTOTAL[0m:           6
+

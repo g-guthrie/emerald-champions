@@ -155,15 +155,15 @@ FortreeCity_Gym_Text_GymGuidePostVictory:
 
 FortreeCity_Gym_Text_JaredIntro:
 	.string "SWOOBAT's SIMPLE doubles every CALM\n"
-	.string "MIND. NOCTOWL puts you to sleep first.\p"
-	.string "Wake up before STORED POWER lands!$"
+	.string "MIND. NOCTOWL keeps the pressure on.\p"
+	.string "Which one will you stop first?$"
 
 FortreeCity_Gym_Text_JaredDefeat:
-	.string "You broke the boost before it grew!$"
+	.string "We couldn't hold the sky…$"
 
 FortreeCity_Gym_Text_JaredPostBattle:
-	.string "TAUNT or a fast hit stops SIMPLE setup.\n"
-	.string "Never give a SIMPLE user a free turn.$"
+	.string "TAUNT can stop CALM MIND. But don't\n"
+	.string "forget the attacker beside SWOOBAT.$"
 
 FortreeCity_Gym_Text_EdwardoIntro:
 	.string "JUMPLUFF puts you to sleep, and\n"
@@ -171,7 +171,7 @@ FortreeCity_Gym_Text_EdwardoIntro:
 	.string "Give it nothing to feed on!$"
 
 FortreeCity_Gym_Text_EdwardoDefeat:
-	.string "You outlasted my wind…$"
+	.string "We lost our lift…$"
 
 FortreeCity_Gym_Text_EdwardoPostBattle:
 	.string "TAILWIND lasts four turns. Stall the\n"
@@ -179,7 +179,7 @@ FortreeCity_Gym_Text_EdwardoPostBattle:
 
 FortreeCity_Gym_Text_FlintIntro:
 	.string "MULTISCALE DRAGONITE, SPEED BOOST\n"
-	.string "YANMEGA, and a TAILWIND behind them.\p"
+	.string "YANMEGA, and dragons in reserve.\p"
 	.string "WINONA needn't see you if I win here!$"
 
 FortreeCity_Gym_Text_FlintDefeat:
@@ -190,16 +190,17 @@ FortreeCity_Gym_Text_FlintPostBattle:
 	.string "priority. EXTREME SPEED is coming.$"
 
 FortreeCity_Gym_Text_AshleyIntro:
-	.string "PIDGEOT's HURRICANE never misses under\n"
-	.string "NO GUARD. SWANNA brings the rain.\p"
+	.string "PIDGEOT's HURRICANE never misses\n"
+	.string "under NO GUARD. PELIPPER brings\l"
+	.string "the rain.\p"
 	.string "Position, then power!$"
 
 FortreeCity_Gym_Text_AshleyDefeat:
-	.string "You changed the weather on me!$"
+	.string "Even our sky wasn't enough!$"
 
 FortreeCity_Gym_Text_AshleyPostBattle:
-	.string "Your own weather move overwrites mine.\n"
-	.string "The sky belongs to whoever set it last.$"
+	.string "Changing the rain slows MANTINE.\n"
+	.string "But NO GUARD works in any weather.$"
 
 FortreeCity_Gym_Text_HumbertoIntro:
 	.string "GLISCOR heals through its own poison,\n"
@@ -207,35 +208,38 @@ FortreeCity_Gym_Text_HumbertoIntro:
 	.string "Lower our stats. I dare you!$"
 
 FortreeCity_Gym_Text_HumbertoDefeat:
-	.string "You hit MINIOR before the shell came off!$"
+	.string "Even steel wings can buckle…$"
 
 FortreeCity_Gym_Text_HumbertoPostBattle:
-	.string "SHELL SMASH needs one free turn.\n"
-	.string "FAKE OUT or a spread attack denies it.$"
+	.string "Special attacks test our defenses.\n"
+	.string "ICE is especially hard on GLISCOR.$"
 
 FortreeCity_Gym_Text_DariusIntro:
-	.string "TORNADUS raises the TAILWIND before\n"
-	.string "you have taken a single turn.\p"
+	.string "TORNADUS gives TAILWIND priority.\n"
+	.string "BRAVIARY rides the gust behind it.\p"
 	.string "Four turns. Outlast them!$"
 
 FortreeCity_Gym_Text_DariusDefeat:
-	.string "You aimed at the rod itself!$"
+	.string "Our wind has run its course.$"
 
 FortreeCity_Gym_Text_DariusPostBattle:
-	.string "Remove the redirect first. The birds\n"
-	.string "behind it are only fast, not sturdy.$"
+	.string "A rival TAILWIND can contest mine.\n"
+	.string "TRICK ROOM can turn speed against us.$"
 
 FortreeCity_Gym_Text_WinonaIntro:
-	.string "I am WINONA, FORTREE's GYM LEADER.\p"
-	.string "The sky controls position: wind decides\n"
-	.string "speed, wings evade Ground, snow hides\l"
-	.string "the final horizon.\p"
-	.string "Preserve the answer you will need after\n"
-	.string "the weather changes.$"
+	.string "I am WINONA, FORTREE's GYM\n"
+	.string "LEADER.\p"
+	.string "My POKéMON and I have flown\n"
+	.string "through clear skies and sudden\l"
+	.string "storms. We know how quickly the\l"
+	.string "wind can turn.\p"
+	.string "Show me how your team meets a\n"
+	.string "changing sky!$"
 
 FortreeCity_Gym_Text_WinonaDefeat:
-	.string "You denied the wind without losing sight\n"
-	.string "of the snow. Accept the FEATHER BADGE.$"
+	.string "You've carried your team through\n"
+	.string "our strongest winds. The FEATHER\l"
+	.string "BADGE is yours.$"
 
 FortreeCity_Gym_Text_ReceivedFeatherBadge:
 	.string "{PLAYER} received the FEATHER BADGE\n"
@@ -255,22 +259,25 @@ FortreeCity_Gym_Text_ExplainAltarianite:
 
 FortreeCity_Gym_Text_PyreHandoff:
 	.string "AQUA has been seen near MT. PYRE.\n"
-	.string "Follow ROUTES 120 and 121 east, then\l"
-	.string "SURF south on ROUTE 122 to find it.\p"
-	.string "Discover what they are disturbing there.\n"
-	.string "The skies over HOENN are unsettled.$"
+	.string "Follow ROUTES 120 and 121 east,\l"
+	.string "then SURF south on ROUTE 122 to\l"
+	.string "find it.\p"
+	.string "Discover what they are disturbing\n"
+	.string "there. The skies over HOENN are\l"
+	.string "unsettled.$"
 
 FortreeCity_Gym_Text_RegisteredWinona:
 	.string "Registered GYM LEADER WINONA\n"
 	.string "in the POKéNAV.$"
 
 FortreeCity_Gym_Text_WinonaPostBattle:
-	.string "A flying team is not one species label.\n"
-	.string "It is freedom of position. Remember that.\p"
-	.string "To follow AQUA to MT. PYRE, head east\n"
-	.string "through ROUTES 120 and 121, then SURF\l"
-	.string "south on ROUTE 122.\p"
-	.string "Find what drew them to that quiet place.$"
+	.string "WINONA: A strong wind can carry\n"
+	.string "you far, but you must choose\l"
+	.string "where to go.\p"
+	.string "To follow AQUA to MT. PYRE, head\n"
+	.string "east through ROUTES 120 and 121,\l"
+	.string "then SURF south on ROUTE 122.\p"
+	.string "I hope the people there are safe.$"
 
 FortreeCity_Gym_Text_GymStatue:
 	.string "FORTREE CITY POKéMON GYM$"
@@ -320,8 +327,11 @@ FortreeCity_Gym_EventScript_WinonaAfterPyre::
 	end
 
 FortreeCity_Gym_Text_WinonaAfterPyre:
-	.string "A flying team is not one species label.\n"
-	.string "It is freedom of position. Remember that.$"
+	.string "WINONA: A strong wind can carry\n"
+	.string "you far, but you must choose\l"
+	.string "where to go.\p"
+	.string "May your journey bring you clear\n"
+	.string "skies.$"
 
 FortreeCity_Gym_EventScript_PyreHandoff::
 	msgbox FortreeCity_Gym_Text_PyreHandoff, MSGBOX_DEFAULT

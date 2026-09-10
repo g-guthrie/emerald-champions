@@ -12,31 +12,37 @@ SeafloorCavern_Room3_EventScript_Grunt5::
 	end
 
 SeafloorCavern_Room3_Text_ShellyIntro:
-	.string "SHELLY: You reached the seafloor without\n"
-	.string "our submarine. I expected no less.\p"
-	.string "At the INSTITUTE you read the weather.\n"
-	.string "Here the cavern itself changes the field.\p"
-	.string "Read the current before it closes.$"
+	.string "SHELLY: You reached the seafloor\n"
+	.string "without a submarine… Impressive.\p"
+	.string "First the WEATHER INSTITUTE, now\n"
+	.string "here. You really intend to stop\l"
+	.string "ARCHIE.\p"
+	.string "Then you'll have to get past me\n"
+	.string "again!$"
 
 SeafloorCavern_Room3_Text_ShellyDefeat:
-	.string "You mapped the current while inside it…$"
+	.string "You've grown stronger since we\n"
+	.string "met…$"
 
 SeafloorCavern_Room3_Text_ShellyPostBattle:
-	.string "You would have been formidable in AQUA.\p"
-	.string "But you keep choosing balance over our\n"
-	.string "freedom. ARCHIE waits beyond this room.$"
+	.string "SHELLY: We wanted more room for\n"
+	.string "sea POKéMON to live. That's why I\l"
+	.string "joined AQUA.\p"
+	.string "ARCHIE is beyond this room. I hope\n"
+	.string "he still remembers why we came.$"
 
 SeafloorCavern_Room3_Text_Grunt5Intro:
-	.string "AQUA needs POKéMON to reach a current\n"
-	.string "human tools cannot follow.\p"
-	.string "Your team carried you just as far.\n"
-	.string "Only one formation advances.$"
+	.string "Our submarine brought us this far.\n"
+	.string "Your POKéMON brought you.\p"
+	.string "They're tough, I'll give you that.\n"
+	.string "But I'm not letting you through!$"
 
 SeafloorCavern_Room3_Text_Grunt5Defeat:
-	.string "Your formation held deeper…$"
+	.string "You really did come prepared…$"
 
 SeafloorCavern_Room3_Text_Grunt5PostBattle:
-	.string "We followed ARCHIE because his dream\n"
-	.string "made motion sound like freedom.\p"
-	.string "You came this deep to ask whether a\n"
-	.string "world without limits can survive.$"
+	.string "I joined AQUA because I love the\n"
+	.string "sea.\p"
+	.string "I thought I'd feel at home down\n"
+	.string "here. Now I just want to see the\l"
+	.string "sky again.$"

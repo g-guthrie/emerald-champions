@@ -360,8 +360,8 @@ static void InitGiddyTaleList(void)
             // Pick a random word id, then advance through the word
             // groups until the group where that id landed.
             s16 randWord = Random() % totalWords;
-            for (var = 0; i < ARRAY_COUNT(wordGroupsAndCount); var++)
-                if ((randWord -= wordGroupsAndCount[var][1]) <= 0)
+            for (var = 0; var < ARRAY_COUNT(wordGroupsAndCount); var++)
+                if ((randWord -= wordGroupsAndCount[var][1]) < 0)
                     break;
             if (var == ARRAY_COUNT(wordGroupsAndCount))
                 var = 0;
@@ -1246,6 +1246,8 @@ static bool8 StorytellerInitializeRandomStat(void)
     u8 storyIds[sNumStories];
     s32 i, j;
 
+    for (i = 0; i < sNumStories; i++)
+        storyIds[i] = i;
     Shuffle(storyIds, sNumStories, sizeof(storyIds[0]));
     for (i = 0; i < sNumStories; i++)
     {

@@ -1,0 +1,613 @@
+[
+  {
+    "label": "EmeraldChampions_Text_KubfuInfo",
+    "file": "data/scripts/emerald_champions.inc",
+    "live": true,
+    "chain": [
+      "LittlerootTown_ProfessorBirchsLab_EventScript_Aide",
+      "Common_EventScript_EmeraldChampionsResearchPartners",
+      "Common_EventScript_EmeraldChampionsFormGift",
+      "EmeraldChampions_EventScript_KubfuInfo",
+      "EmeraldChampions_Text_KubfuInfo"
+    ],
+    "root_events": [
+      "LittlerootTown_ProfessorBirchsLab:object_events[0]"
+    ],
+    "text": "A Dark Scroll and a Water Scroll\\nlead KUBFU to different styles.\\pThis second partner lets you explore\\nboth paths with your original KUBFU.$"
+  },
+  {
+    "label": "EmeraldChampions_Text_CosmogInfo",
+    "file": "data/scripts/emerald_champions.inc",
+    "live": true,
+    "chain": [
+      "LittlerootTown_ProfessorBirchsLab_EventScript_Aide",
+      "Common_EventScript_EmeraldChampionsResearchPartners",
+      "Common_EventScript_EmeraldChampionsFormGift",
+      "EmeraldChampions_EventScript_CosmogInfo",
+      "EmeraldChampions_Text_CosmogInfo"
+    ],
+    "root_events": [
+      "LittlerootTown_ProfessorBirchsLab:object_events[0]"
+    ],
+    "text": "COSMOEM evolves into SOLGALEO by\\n day or LUNALA at night.\\p This second COSMOG lets you\\n explore both paths. Use your\\l Leveler when ready.$"
+  },
+  {
+    "label": "gText_EmeraldChampionsExplainRepelSpray",
+    "file": "data/text/pkmn_center_nurse.inc",
+    "live": true,
+    "chain": [
+      "OldaleTown_PokemonCenter_1F_EventScript_Nurse",
+      "Common_EventScript_PkmnCenterNurse",
+      "EventScript_PkmnCenterNurse_HasVial",
+      "EventScript_PkmnCenterNurse_CheckRepelSpray",
+      "gText_EmeraldChampionsExplainRepelSpray"
+    ],
+    "root_events": [
+      "OldaleTown_PokemonCenter_1F:object_events[0]"
+    ],
+    "text": "Use it and wild Pok\u00e9mon leave you\\n alone for 500 steps. When it wears\\l off, you can mist the air again.\\p Fishing, Rock Smash and Sweet Scent\\n are never blocked.\\p SWEET SCENT gives a 25% chance of\\n an available local legendary.\\p Several legends in one area share\\n that chance. Their requirements apply.$"
+  },
+  {
+    "label": "Route119_Text_JacksonIntro",
+    "file": "data/text/trainers.inc",
+    "live": true,
+    "chain": [
+      "Route119_EventScript_Jackson",
+      "Route119_Text_JacksonIntro"
+    ],
+    "root_events": [
+      "Route119:object_events[6]"
+    ],
+    "text": "A RANGER reads the ground. Here the\\n ground is TAPU KOKO's own terrain.$"
+  },
+  {
+    "label": "Route120_Text_LorenzoIntro",
+    "file": "data/text/trainers.inc",
+    "live": true,
+    "chain": [
+      "Route120_EventScript_Lorenzo",
+      "Route120_Text_LorenzoIntro"
+    ],
+    "root_events": [
+      "Route120:object_events[12]"
+    ],
+    "text": "Fitness check! OGERPON sets the pace,\\n STARMIE keeps it. Can you keep up?$"
+  },
+  {
+    "label": "Route120_Text_LeonelPostBattle",
+    "file": "data/text/trainers.inc",
+    "live": true,
+    "chain": [
+      "Route120_EventScript_Leonel",
+      "Route120_Text_LeonelPostBattle"
+    ],
+    "root_events": [
+      "Route120:object_events[42]"
+    ],
+    "text": "Travelers with five BADGES have\\n spotted OGERPON in this route's\\l grass.\\p It's a rare sight. SWEET SCENT can\\n help draw out the local\\l discoveries.$"
+  },
+  {
+    "label": "Route121_Text_MarcelIntro",
+    "file": "data/text/trainers.inc",
+    "live": true,
+    "chain": [
+      "Route121_EventScript_Marcel",
+      "Route121_Text_MarcelIntro"
+    ],
+    "root_events": [
+      "Route121:object_events[25]"
+    ],
+    "text": "My gang has never tasted defeat.\\n ZERAORA, show them why!$"
+  },
+  {
+    "label": "FortreeCity_Gym_Text_DariusIntro",
+    "file": "data/maps/FortreeCity_Gym/scripts.inc",
+    "live": true,
+    "chain": [
+      "FortreeCity_Gym_EventScript_Darius",
+      "FortreeCity_Gym_Text_DariusIntro"
+    ],
+    "root_events": [
+      "FortreeCity_Gym:object_events[7]"
+    ],
+    "text": "TORNADUS gives TAILWIND priority.\\n BRAVIARY rides the gust behind it.\\p Four turns. Outlast them!$"
+  },
+  {
+    "label": "MossdeepCity_Text_LifeNeedsSeaToLive",
+    "file": "data/maps/MossdeepCity/scripts.inc",
+    "live": true,
+    "chain": [
+      "MossdeepCity_EventScript_ExpertM",
+      "MossdeepCity_Text_LifeNeedsSeaToLive"
+    ],
+    "root_events": [
+      "MossdeepCity:object_events[1]"
+    ],
+    "text": "With the MIND BADGE, MANAPHY and\\n PALKIA can appear among wild\\l POK\u00e9MON on the SEAFLOOR CAVERN\\l seabed.\\p DIVE at ROUTE 128 and search near\\n the submarine.\\p Each has a 1% chance. SWEET SCENT\\n gives a 25% chance of an\\l available legendary, shared\\l between them.$"
+  },
+  {
+    "label": "Route102_Text_CatchWholeBunchOfPokemon",
+    "file": "data/maps/Route102/scripts.inc",
+    "live": true,
+    "chain": [
+      "Route102_EventScript_Boy",
+      "Route102_Text_CatchWholeBunchOfPokemon"
+    ],
+    "root_events": [
+      "Route102:object_events[4]"
+    ],
+    "text": "I thought I saw a flower move...\\n Then a little green POK\u00e9MON ran\\l through the grass!\\p SHAYMIN! Right here, so close to home!\\n You could meet it on your first trip.\\p It has a 1% encounter chance.\\n SWEET SCENT raises that to 25%.$"
+  },
+  {
+    "label": "Route111_RuinsExterior_Text_Archaeologist",
+    "file": "data/maps/Route111_RuinsExterior/scripts.inc",
+    "live": true,
+    "chain": [
+      "Route111_RuinsExterior_EventScript_Archaeologist",
+      "Route111_RuinsExterior_Text_Archaeologist"
+    ],
+    "root_events": [
+      "Route111_RuinsExterior:object_events[1]"
+    ],
+    "text": "The storms leave strange patterns\\n across these ruins. LANDORUS may\\l be sheltering here.\\p With the BALANCE BADGE, bring\\n CASTFORM and help me survey the\\l weather.\\p Then LANDORUS can appear among\\n the wild POK\u00e9MON here. Our work\\l only needs doing once.$"
+  },
+  {
+    "label": "SootopolisCity_Text_CaveOfOriginSleepsToo",
+    "file": "data/maps/SootopolisCity/scripts.inc",
+    "live": true,
+    "chain": [
+      "SootopolisCity_EventScript_CaveOfOriginExpert",
+      "SootopolisCity_EventScript_ExpertPostLegendaries",
+      "SootopolisCity_Text_CaveOfOriginSleepsToo"
+    ],
+    "root_events": [
+      "SootopolisCity:object_events[0]"
+    ],
+    "text": "The crisis has passed. You may\\n explore the CAVE OF ORIGIN again.\\p TERAPAGOS lives on B1F, the floor\\n where you met WALLACE. Let me\\l check its discovery record.$"
+  },
+  {
+    "label": "DewfordMeadow_Text_Warden",
+    "file": "data/maps/DewfordMeadow/scripts.inc",
+    "live": true,
+    "chain": [
+      "DewfordMeadow_EventScript_Warden",
+      "DewfordMeadow_Text_Warden"
+    ],
+    "root_events": [
+      "DewfordMeadow:object_events[3]"
+    ],
+    "text": "A little COSMOG drifted into our\\n meadow. Keep an eye on the grass,\\l even on your first visit!\\p MELOETTA answers songs. With the\\n KNUCKLE BADGE, bring a partner\\l with SING and we'll perform\\l together.\\p Once it answers, you can keep\\n looking for it here. We only need\\l to sing together once.\\p With the HEAT BADGE, you may also\\n spot MUNKIDORI. SWEET SCENT helps\\l draw out these rare visitors.$"
+  },
+  {
+    "label": "ScorchedSlab_B2F_Text_Warden",
+    "file": "data/maps/ScorchedSlab_B2F/scripts.inc",
+    "live": true,
+    "chain": [
+      "ScorchedSlab_B2F_EventScript_Warden",
+      "ScorchedSlab_B2F_Text_Warden"
+    ],
+    "root_events": [
+      "ScorchedSlab_B2F:object_events[7]"
+    ],
+    "text": "A white dragon has been glimpsed\\n among these hot stones. RESHIRAM!\\p With the FEATHER BADGE, you can\\n search for it here. HEATRAN dwells\\l farther below.$"
+  },
+  {
+    "label": "MtPyre_Summit_Text_CresseliaAwakened",
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "live": false,
+    "chain": null,
+    "root_events": [],
+    "text": "DARKRAI's capture has revealed a\\n new lead: CRESSELIA shelters in\\l the rear B1F room of METEOR\\l FALLS.\\p With six badges and our ORB, it\\n can appear among wild POK\u00e9MON\\l there.$"
+  },
+  {
+    "label": "MtPyre_Summit_Text_CresseliaAwaits",
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "live": false,
+    "chain": null,
+    "root_events": [],
+    "text": "CRESSELIA can appear among wild\\n POK\u00e9MON in METEOR FALLS' rear B1F\\l room, after six badges and our\\l ORB.$"
+  },
+  {
+    "label": "MtPyre_Summit_Text_TimeSignDormant",
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "live": false,
+    "chain": null,
+    "root_events": [],
+    "text": "DIALGA can appear in METEOR\\n FALLS' main B1F chamber with the\\l MIND BADGE. It needs no dream\\l POK\u00e9MON.$"
+  },
+  {
+    "label": "MtPyre_Summit_Text_DialgaAwakened",
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "live": false,
+    "chain": null,
+    "root_events": [],
+    "text": "With the MIND BADGE, DIALGA can\\n appear among wild POK\u00e9MON in the\\l main B1F chamber of METEOR FALLS.$"
+  },
+  {
+    "label": "MtPyre_Summit_Text_DialgaAwaits",
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "live": false,
+    "chain": null,
+    "root_events": [],
+    "text": "Search the main B1F chamber of\\n METEOR FALLS for DIALGA. SWEET\\l SCENT helps draw out local\\l legends.$"
+  },
+  {
+    "label": "MtPyre_Summit_Text_GroudonKyogreTale",
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "live": true,
+    "chain": [
+      "MtPyre_Summit_EventScript_OldMan",
+      "MtPyre_Summit_EventScript_OldManTale",
+      "MtPyre_Summit_Text_GroudonKyogreTale"
+    ],
+    "root_events": [
+      "MtPyre_Summit:object_events[0]"
+    ],
+    "text": "GROUDON raised the land and\\n KYOGRE carved the sea. Their\\l clash grew until neither could\\l stop.\\p RAYQUAZA descended and calmed\\n them. The RED and BLUE ORBS were\\l left in our care.\\p With the FEATHER BADGE, TAPU LELE\\n and Galarian MOLTRES can appear\\l in the outside grass. Receiving\\l our ORB adds YVELTAL.\\p With the MIND BADGE, GIRATINA can\\n appear on the sixth floor.\\p Each is a 1% wild encounter.\\n SWEET SCENT gives 25%, shared\\l among the available legends in\\l that area.$"
+  },
+  {
+    "label": "MtPyre_Summit_Text_HoennTrioTale",
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "live": true,
+    "chain": [
+      "MtPyre_Summit_EventScript_OldMan",
+      "MtPyre_Summit_EventScript_OldManAfterRayquaza",
+      "MtPyre_Summit_EventScript_OldManNewTale",
+      "MtPyre_Summit_Text_HoennTrioTale"
+    ],
+    "root_events": [
+      "MtPyre_Summit:object_events[0]"
+    ],
+    "text": "RAYQUAZA restored the balance.\\n You helped HOENN find a way\\l through.\\p With the MIND BADGE, search the\\n sixth floor for GIRATINA. It has\\l a 1% wild encounter chance.\\p SWEET SCENT raises its chance to\\n 25%.$"
+  },
+  {
+    "label": "AlteringCave_1F_Text_Researcher",
+    "file": "data/maps/AlteringCave_1F/scripts.inc",
+    "live": true,
+    "chain": [
+      "AlteringCave_1F_EventScript_Researcher",
+      "AlteringCave_1F_Text_Researcher"
+    ],
+    "root_events": [
+      "AlteringCave_1F:object_events[13]"
+    ],
+    "text": "This cavern feels like a doorway.\\n The deeper I go, the stranger it\\l becomes.\\p With the BALANCE BADGE, you may\\n find HOOPA among the wild POK\u00e9MON\\l here. It's rare; SWEET SCENT\\l helps.\\p MEWTWO waits on B1F. It accepts\\n challengers with the MIND BADGE.$"
+  },
+  {
+    "label": "Route119_Text_WeatherInstitute",
+    "file": "data/maps/Route119/scripts.inc",
+    "live": true,
+    "chain": [
+      "Route119_EventScript_WeatherInstituteSign",
+      "Route119_Text_WeatherInstitute"
+    ],
+    "root_events": [
+      "Route119:bg_events[0]"
+    ],
+    "text": "WEATHER INSTITUTE\\p After rescuing the researchers,\\n the BALANCE BADGE lets you find\\l TORNADUS in ROUTE 119's tall\\l grass.\\p It has a 1% encounter chance.\\n SWEET SCENT raises that to 25%.$"
+  },
+  {
+    "label": "Route110_Text_MauvilleCitySign",
+    "file": "data/maps/Route110/scripts.inc",
+    "live": true,
+    "chain": [
+      "Route110_EventScript_MauvilleCitySign",
+      "Route110_Text_MauvilleCitySign"
+    ],
+    "root_events": [
+      "Route110:bg_events[5]"
+    ],
+    "text": "ROUTE 110: MAUVILLE CITY to the\\n north.\\p RAIKOU can appear in the grass\\n with the KNUCKLE BADGE. The\\l BALANCE BADGE adds TAPU KOKO.\\p With five badges, rescuing the\\n WEATHER INSTITUTE adds THUNDURUS.\\p Each is a 1% encounter. SWEET\\n SCENT gives a 25% chance of an\\l available legendary, shared\\l evenly.$"
+  },
+  {
+    "label": "Route117_Text_ArentTheseFlowersPretty",
+    "file": "data/maps/Route117/scripts.inc",
+    "live": true,
+    "chain": [
+      "Route117_EventScript_Woman",
+      "Route117_EventScript_AudiniteAfter",
+      "Route117_Text_ArentTheseFlowersPretty"
+    ],
+    "root_events": [
+      "Route117:object_events[0]"
+    ],
+    "text": "Aren't these flowers pretty? I\\n love watching the POK\u00e9MON wander\\l through them.\\p Lately, an odd one with a metal\\n mask has been hiding in the grass.\\l DEVON calls it TYPE: NULL.\\p With the KNUCKLE BADGE, you can\\n search for it here. It's very\\l rare, but SWEET SCENT helps draw\\l it out.$"
+  },
+  {
+    "label": "Route120_Text_RouteSignFortree",
+    "file": "data/maps/Route120/scripts.inc",
+    "live": true,
+    "chain": [
+      "Route120_EventScript_RouteSignFortree",
+      "Route120_Text_RouteSignFortree"
+    ],
+    "root_events": [
+      "Route120:bg_events[0]"
+    ],
+    "text": "ROUTE 120: FORTREE CITY to the\\n west.\\p With the BALANCE BADGE, MESPRIT\\n and OGERPON can appear in this\\l route's grass.\\p The FEATHER BADGE adds XERNEAS\\n and Galarian ARTICUNO.\\p Each is a 1% encounter. SWEET\\n SCENT gives a 25% chance of an\\l available legendary, shared\\l evenly.$"
+  },
+  {
+    "label": "NewMauville_Inside_Text_RotomCaught",
+    "file": "data/maps/NewMauville_Inside/scripts.inc",
+    "live": true,
+    "chain": [
+      "NewMauville_Inside_EventScript_RotomEncounter",
+      "NewMauville_Inside_EventScript_RotomCaught",
+      "NewMauville_Inside_Text_RotomCaught"
+    ],
+    "root_events": [
+      "NewMauville_Inside:coord_events[19]"
+    ],
+    "text": "The ROTOM CATALOG changes ROTOM\\n into its five appliances.\\p With the BALANCE BADGE, MELTAN\\n can appear among this plant's\\l wild POK\u00e9MON.\\p Finish WATTSON's generator job\\n and report back to add ZERAORA.\\l Catch REGISTEEL to add REGIELEKI\\l too.\\p The FEATHER BADGE then adds\\n ZEKROM. Each is a 1% encounter;\\l SWEET SCENT gives 25%, shared\\l among those available.$"
+  },
+  {
+    "label": "MossdeepCity_Gym_Text_SamanthaIntro",
+    "file": "data/maps/MossdeepCity_Gym/scripts.inc",
+    "live": true,
+    "chain": [
+      "MossdeepCity_Gym_EventScript_Samantha",
+      "MossdeepCity_Gym_Text_SamanthaIntro"
+    ],
+    "root_events": [
+      "MossdeepCity_Gym:object_events[4]"
+    ],
+    "text": "GOTHITELLE closes the exit. AZELF\\n plots, and then ends the board.\\p You cannot run from this one!$"
+  },
+  {
+    "label": "PetalburgWoods_Text_TrainerTipsPP",
+    "file": "data/maps/PetalburgWoods/scripts.inc",
+    "live": true,
+    "chain": [
+      "PetalburgWoods_EventScript_Sign2",
+      "PetalburgWoods_Text_TrainerTipsPP"
+    ],
+    "root_events": [
+      "PetalburgWoods:bg_events[5]"
+    ],
+    "text": "FOREST FIELD NOTES\\p CUT opens paths into the deeper\\n forest. With the STONE BADGE,\\l CELEBI can appear in the third\\l area.\\p The KNUCKLE BADGE adds VIRIZION\\n in the second area. The HEAT\\l BADGE adds WO-CHIEN there.\\p Each is a 1% wild encounter.\\n SWEET SCENT gives a 25% chance of\\l an available local legendary.$"
+  },
+  {
+    "label": "GraniteCave_StevensRoom_Text_IveGotToHurryAlong",
+    "file": "data/maps/GraniteCave_StevensRoom/scripts.inc",
+    "live": true,
+    "chain": [
+      "GraniteCave_StevensRoom_EventScript_Steven",
+      "GraniteCave_StevensRoom_EventScript_CheckKnuckleBadge",
+      "GraniteCave_StevensRoom_EventScript_StarterGifts",
+      "GraniteCave_StevensRoom_EventScript_StarterStoneLoop",
+      "GraniteCave_StevensRoom_EventScript_StarterStoneReceipt",
+      "GraniteCave_StevensRoom_EventScript_NextStarterStone",
+      "GraniteCave_StevensRoom_EventScript_ArchiveOpen",
+      "GraniteCave_StevensRoom_EventScript_RegisterSteven",
+      "GraniteCave_StevensRoom_EventScript_Finish",
+      "GraniteCave_StevensRoom_Text_IveGotToHurryAlong"
+    ],
+    "root_events": [
+      "GraniteCave_StevensRoom:object_events[0]"
+    ],
+    "text": "I'm heading east. MAGMA and AQUA\\n are disturbing more than land and\\l sea.\\p With the STONE BADGE, COBALION\\n can appear among wild POK\u00e9MON on\\l GRANITE CAVE B2F.\\p It has a 1% chance. SWEET SCENT\\n increases that to 25%.\\p DEVON's researcher lists the\\n other legendary locations and\\l requirements.$"
+  },
+  {
+    "label": "LittlerootTown_ProfessorBirchsLab_Text_ResearchRewardComplete",
+    "file": "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc",
+    "live": true,
+    "chain": [
+      "LittlerootTown_ProfessorBirchsLab_EventScript_Birch",
+      "LittlerootTown_ProfessorBirchsLab_EventScript_ResearchRewardWaiting",
+      "LittlerootTown_ProfessorBirchsLab_EventScript_TryGiveResearchReward",
+      "LittlerootTown_ProfessorBirchsLab_EventScript_TryGiveZygardeCube",
+      "LittlerootTown_ProfessorBirchsLab_EventScript_TryGiveNSolarizer",
+      "LittlerootTown_ProfessorBirchsLab_EventScript_TryGiveNLunarizer",
+      "LittlerootTown_ProfessorBirchsLab_EventScript_TryGiveReinsOfUnity",
+      "LittlerootTown_ProfessorBirchsLab_EventScript_ResearchRewardComplete",
+      "LittlerootTown_ProfessorBirchsLab_Text_ResearchRewardComplete"
+    ],
+    "root_events": [
+      "LittlerootTown_ProfessorBirchsLab:object_events[1]"
+    ],
+    "text": "The tools let KYUREM, ZYGARDE,\\n NECROZMA, and CALYREX change\\l forms or combine with certain\\l partners.\\p There's always something new to\\n learn about POK\u00e9MON!$"
+  },
+  {
+    "label": "Route119_WeatherInstitute_2F_Text_PokemonChangesWithWeather",
+    "file": "data/maps/Route119_WeatherInstitute_2F/scripts.inc",
+    "live": true,
+    "chain": [
+      "Route119_WeatherInstitute_2F_EventScript_WeatherScientist",
+      "Route119_WeatherInstitute_2F_EventScript_ReceiveCastform",
+      "Route119_WeatherInstitute_2F_EventScript_ReceiveCastformParty",
+      "Route119_WeatherInstitute_2F_EventScript_ExplainCastform",
+      "Route119_WeatherInstitute_2F_Text_PokemonChangesWithWeather"
+    ],
+    "root_events": [
+      "Route119_WeatherInstitute_2F:object_events[4]"
+    ],
+    "text": "CASTFORM changes with the\\n weather. Let it show you what a\\l storm can do.\\p Now that our work can continue,\\n five badges let you find TORNADUS\\l on ROUTE 119 and THUNDURUS on\\l ROUTE 110.\\p Search their grass. Each has a 1%\\n chance; SWEET SCENT gives 25%,\\l shared with other local legends.\\p A researcher at ROUTE 111's\\n elevated ruins also needs\\l CASTFORM for a weather survey.$"
+  },
+  {
+    "label": "Route119_WeatherInstitute_2F_Text_RevealGlassPurpose",
+    "file": "data/maps/Route119_WeatherInstitute_2F/scripts.inc",
+    "live": true,
+    "chain": [
+      "Route119_WeatherInstitute_2F_EventScript_WeatherScientist",
+      "Route119_WeatherInstitute_2F_EventScript_GiveRevealGlass",
+      "Route119_WeatherInstitute_2F_Text_RevealGlassPurpose"
+    ],
+    "root_events": [
+      "Route119_WeatherInstitute_2F:object_events[4]"
+    ],
+    "text": "This REVEAL GLASS changes the forms of\\n TORNADUS, THUNDURUS, and LANDORUS.\\p The northern bridge is clear now.\\n Follow ROUTE 119 to FORTREE's GYM.$"
+  },
+  {
+    "label": "MtPyre_6F_Text_PecharuntDormant",
+    "file": "data/maps/MtPyre_6F/scripts.inc",
+    "live": true,
+    "chain": [
+      "MtPyre_6F_EventScript_Pecharunt",
+      "MtPyre_6F_EventScript_PecharuntDormant",
+      "MtPyre_6F_Text_PecharuntDormant"
+    ],
+    "root_events": [
+      "MtPyre_6F:bg_events[0]"
+    ],
+    "text": "PECHARUNT waits here. Earn the\\n MIND BADGE and catch OKIDOGI,\\l MUNKIDORI and FEZANDIPITI to\\l challenge it.$"
+  },
+  {
+    "label": "MtPyre_6F_Text_PecharuntNeedsPartner",
+    "file": "data/maps/MtPyre_6F/scripts.inc",
+    "live": true,
+    "chain": [
+      "MtPyre_6F_EventScript_Pecharunt",
+      "MtPyre_6F_EventScript_PecharuntNeedsPartner",
+      "MtPyre_6F_Text_PecharuntNeedsPartner"
+    ],
+    "root_events": [
+      "MtPyre_6F:bg_events[0]"
+    ],
+    "text": "The three masks belong to OKIDOGI,\\n MUNKIDORI and FEZANDIPITI.\\p Catch all three, then return here.\\n They do not need to travel with you.$"
+  },
+  {
+    "label": "EverGrandeCity_DrakesRoom_Text_IntroSpeech",
+    "file": "data/maps/EverGrandeCity_DrakesRoom/scripts.inc",
+    "live": true,
+    "chain": [
+      "EverGrandeCity_DrakesRoom_EventScript_Drake",
+      "EverGrandeCity_DrakesRoom_Text_IntroSpeech"
+    ],
+    "root_events": [
+      "EverGrandeCity_DrakesRoom:object_events[0]"
+    ],
+    "text": "DRAKE. Last of the four, and the one\\n who's sailed the longest.\\p Dragons remember every age of battle.\\n SALAMENCE can bring a TAILWIND.\\p KORAIDON brings sunlight for\\n RESHIRAM's flames.\\p Keep something for MEGA GARCHOMP.\\n Come on!$"
+  },
+  {
+    "label": "PetalburgWoods_3_Text_Ranger",
+    "file": "data/maps/PetalburgWoods_3/scripts.inc",
+    "live": true,
+    "chain": [
+      "PetalburgWoods_3_EventScript_Ranger",
+      "PetalburgWoods_3_Text_Ranger"
+    ],
+    "root_events": [
+      "PetalburgWoods_3:object_events[7]"
+    ],
+    "text": "CELEBI has been slipping between\\n the trees. With the STONE BADGE,\\l you can find it in this grove's\\l grass.\\p It has a 1% encounter chance.\\n SWEET SCENT raises it to 25%.$"
+  },
+  {
+    "label": "SandstrewnRuins_Text_Archaeologist",
+    "file": "data/maps/SandstrewnRuins/scripts.inc",
+    "live": true,
+    "chain": [
+      "SandstrewnRuins_EventScript_Archaeologist",
+      "SandstrewnRuins_Text_Archaeologist"
+    ],
+    "root_events": [
+      "SandstrewnRuins:object_events[21]"
+    ],
+    "text": "Every fossil here tells us how a\\n POK\u00e9MON lived. Imagine this place\\l before the desert!\\p Those green lights below us may be\\n ZYGARDE. Search B1F after earning\\l the BALANCE BADGE.$"
+  },
+  {
+    "label": "Route114_FossilManiacsTunnel_Text_NotSafeThatWay",
+    "file": "data/maps/Route114_FossilManiacsTunnel/scripts.inc",
+    "live": true,
+    "chain": [
+      "Route114_FossilManiacsTunnel_EventScript_ManiacMentionCaveIn",
+      "Route114_FossilManiacsTunnel_Text_NotSafeThatWay"
+    ],
+    "root_events": [
+      "Route114_FossilManiacsTunnel:coord_events[0]",
+      "Route114_FossilManiacsTunnel:coord_events[1]"
+    ],
+    "text": "Oh... Be careful! I was digging\\n when the wall fell into an\\l enormous cavern.\\p With the HEAT BADGE, TING-LU can\\n appear in the DESERT UNDERPASS.\\p It also connects to SANDSTREWN\\n RUINS. With the BALANCE BADGE,\\l ZYGARDE can appear on the ruins'\\l B1F.\\p Each is a 1% wild encounter in\\n its habitat. SWEET SCENT raises\\l that chance to 25%.$"
+  },
+  {
+    "label": "Route112_Text_MtChimneySign",
+    "file": "data/maps/Route112/scripts.inc",
+    "live": true,
+    "chain": [
+      "Route112_EventScript_MtChimneySign",
+      "Route112_Text_MtChimneySign"
+    ],
+    "root_events": [
+      "Route112:bg_events[0]"
+    ],
+    "text": "MT. CHIMNEY\\p For LAVARIDGE TOWN or the summit,\\n please take the CABLE CAR.\\p FIELD NOTE: ENTEI has been sighted\\n in FIERY PATH. Search after earning\\l the DYNAMO BADGE.$"
+  },
+  {
+    "label": "Route123_Text_RouteSignMtPyre",
+    "file": "data/maps/Route123/scripts.inc",
+    "live": true,
+    "chain": [
+      "Route123_EventScript_RouteSignMtPyre",
+      "Route123_Text_RouteSignMtPyre"
+    ],
+    "root_events": [
+      "Route123:bg_events[0]"
+    ],
+    "text": "{UP_ARROW} MT. PYRE\\p Travelers report TAPU BULU in the\\n grass on ROUTE 123. Search with\\l the FEATHER BADGE.\\p It is a rare wild discovery. SWEET\\n SCENT may help you find it.$"
+  },
+  {
+    "label": "VictoryRoad_1F_Text_EdgarPostBattle",
+    "file": "data/maps/VictoryRoad_1F/scripts.inc",
+    "live": true,
+    "chain": [
+      "VictoryRoad_1F_EventScript_Edgar",
+      "VictoryRoad_1F_Text_EdgarPostBattle"
+    ],
+    "root_events": [
+      "VictoryRoad_1F:object_events[0]"
+    ],
+    "text": "You've made it this far. Keep\\n going and become the CHAMPION!\\p They say VICTINI appears on this\\n floor to TRAINERS with all eight\\l BADGES. A rare bit of luck on a\\l hard road!\\p Try SWEET SCENT if you're looking\\n for it.$"
+  },
+  {
+    "label": "MeteorFalls_1F_2R_Text_NicolasPostBattle",
+    "file": "data/maps/MeteorFalls_1F_2R/scripts.inc",
+    "live": true,
+    "chain": [
+      "MeteorFalls_1F_2R_EventScript_Nicolas",
+      "MeteorFalls_1F_2R_Text_NicolasPostBattle"
+    ],
+    "root_events": [
+      "MeteorFalls_1F_2R:object_events[0]"
+    ],
+    "text": "With the FEATHER BADGE and\\n REGIROCK recorded as caught,\\l REGIDRAGO can appear on this\\l floor.\\p It has a 1% wild encounter\\n chance. SWEET SCENT raises that\\l to 25%.\\p DEVON's guide lists the\\n discoveries in the other METEOR\\l FALLS rooms.$"
+  },
+  {
+    "label": "MauvilleCity_Text_WattsonWontBeChallenge",
+    "file": "data/maps/MauvilleCity/scripts.inc",
+    "live": true,
+    "chain": [
+      "MauvilleCity_EventScript_Wattson",
+      "MauvilleCity_Text_WattsonWontBeChallenge"
+    ],
+    "root_events": [
+      "MauvilleCity:object_events[7]"
+    ],
+    "text": "WATTSON: Don't you worry about it.\\n It won't be a challenge to you.\\p The entrance to NEW MAUVILLE is just\\n a short SURF away from ROUTE 110.\\p That's it, then, you have my trust!\\n Wahahahaha!\\p WATTSON: If you find MELTAN, level it\\n up in NEW MAUVILLE to get MELMETAL.\\l The generator can be on or off!$"
+  },
+  {
+    "label": "MauvilleCity_Text_WattsonYoungTakeCharge",
+    "file": "data/maps/MauvilleCity/scripts.inc",
+    "live": true,
+    "chain": [
+      "MauvilleCity_EventScript_Wattson",
+      "MauvilleCity_EventScript_CompletedNewMauville",
+      "MauvilleCity_Text_WattsonYoungTakeCharge"
+    ],
+    "root_events": [
+      "MauvilleCity:object_events[7]"
+    ],
+    "text": "WATTSON: Wahahahaha!\\p It pleases me to no end to see\\n the young step up and take charge!\\p WATTSON: If you find MELTAN, level it\\n up in NEW MAUVILLE to get MELMETAL.\\l The generator can be on or off!$"
+  },
+  {
+    "label": "RustboroCity_DevonCorp_2F_Text_LegendarySignResearcherIntro",
+    "file": "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
+    "live": true,
+    "chain": [
+      "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist",
+      "RustboroCity_DevonCorp_2F_Text_LegendarySignResearcherIntro"
+    ],
+    "root_events": [
+      "RustboroCity_DevonCorp_2F:object_events[3]"
+    ],
+    "text": "HOENN is full of rare discoveries.\\n You can find them at your own pace.\\p Some legendaries have a 1% chance\\n to appear among wild POK\u00e9MON.\\p SWEET SCENT gives a 25% chance of\\n an available local legendary.\\p If several are available there,\\n they share that chance evenly.\\p Check each entry for its BADGE,\\n story and partner requirements.\\p If one escapes or faints, keep\\n looking. It can appear again.\\p Others await you at special places\\n or come from rewards.\\p I keep leads for every discovery,\\n including ones you have completed.$"
+  }
+]

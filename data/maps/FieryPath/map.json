@@ -16,19 +16,6 @@
   "connections": null,
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
-      "x": 8,
-      "y": 3,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
-      "movement_range_x": 1,
-      "movement_range_y": 1,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "ITEM_HOUNDOOMINITE",
-      "script": "Common_EventScript_FindItem",
-      "flag": "FLAG_ITEM_FIERY_PATH_HOUNDOOMINITE"
-    },
-    {
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 10,
       "y": 15,
@@ -118,20 +105,6 @@
       "trainer_sight_or_berry_tree_id": "ITEM_CAMERUPTITE",
       "script": "Common_EventScript_FindItem",
       "flag": "FLAG_ITEM_FIERY_PATH_CAMERUPTITE"
-    },
-    {
-      "local_id": "LOCALID_FIERY_PATH_LEGENDARY_SIGN",
-      "graphics_id": "OBJ_EVENT_GFX_DEOXYS_TRIANGLE",
-      "x": 25,
-      "y": 32,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_NONE",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Common_EventScript_LegendaryLandmark",
-      "flag": "0"
     }
   ],
   "warp_events": [

@@ -16,6 +16,7 @@ Route119_EventScript_TryRemoveKecleon::
 Route119_OnTransition:
 	call Common_EventScript_SetupRivalGfxId
 	call Common_EventScript_SetupRivalOnBikeGfxId
+	call_if_eq VAR_ROUTE119_STATE, 2, Route119_EventScript_ShowWaitingRival
 	call_if_eq VAR_WEATHER_INSTITUTE_STATE, 1, Route119_EventScript_MoveInstituteWorkersDownstairs
 	special SetRoute119Weather
 	end
@@ -146,8 +147,40 @@ Route119_EventScript_ReceivedFlyHM::
 
 Route119_EventScript_FlyHMNoRoom::
 	msgbox Route119_Text_FlyHMNoRoom, MSGBOX_DEFAULT
-	releaseall
+	return
+
+Route119_EventScript_ShowWaitingRival::
+	setobjectxyperm LOCALID_ROUTE119_RIVAL, 25, 32
+	setobjectmovementtype LOCALID_ROUTE119_RIVAL, MOVEMENT_TYPE_FACE_UP
+	clearflag FLAG_HIDE_ROUTE_119_RIVAL
+	addobject LOCALID_ROUTE119_RIVAL
+	return
+
+Route119_EventScript_RetryFlyGift::
+	lock
+	faceplayer
+	call Route119_EventScript_GiveFlyHM
+	goto_if_unset FLAG_RECEIVED_HM_FLY, Route119_EventScript_RetryFlyRelease
+	checkplayergender
+	call_if_eq VAR_RESULT, MALE, Route119_EventScript_ExplainFlyMay
+	call_if_eq VAR_RESULT, FEMALE, Route119_EventScript_ExplainFlyBrendan
+	closemessage
+	fadescreen FADE_TO_BLACK
+	removeobject LOCALID_ROUTE119_RIVAL
+	setflag FLAG_HIDE_ROUTE_119_RIVAL
+	setvar VAR_ROUTE119_STATE, 1
+	fadescreen FADE_FROM_BLACK
+Route119_EventScript_RetryFlyRelease::
+	release
 	end
+
+Route119_EventScript_ExplainFlyMay::
+	msgbox Route119_Text_MayExplainFly, MSGBOX_DEFAULT
+	return
+
+Route119_EventScript_ExplainFlyBrendan::
+	msgbox Route119_Text_BrendanExplainFly, MSGBOX_DEFAULT
+	return
 
 Route119_EventScript_RivalExitScottArrive::
 	closemessage
@@ -160,6 +193,9 @@ Route119_EventScript_RivalExitScottArrive::
 	call_if_eq VAR_TEMP_1, 2, Route119_EventScript_RivalExit2
 	removeobject LOCALID_ROUTE119_RIVAL_ON_BIKE
 	setvar VAR_ROUTE119_STATE, 1
+	goto_if_set FLAG_RECEIVED_HM_FLY, Route119_EventScript_ScottArrive
+	setvar VAR_ROUTE119_STATE, 2
+Route119_EventScript_ScottArrive::
 	savebgm MUS_DUMMY
 	fadedefaultbgm
 	delay 60
@@ -174,6 +210,7 @@ Route119_EventScript_RivalExitScottArrive::
 	call_if_eq VAR_TEMP_1, 1, Route119_EventScript_ScottExit1
 	call_if_eq VAR_TEMP_1, 2, Route119_EventScript_ScottExit2
 	removeobject LOCALID_ROUTE119_SCOTT
+	call_if_eq VAR_ROUTE119_STATE, 2, Route119_EventScript_ShowWaitingRival
 	releaseall
 	end
 
@@ -332,7 +369,7 @@ Route119_EventScript_RouteSignFortree::
 
 Route119_EventScript_WeatherInstituteSign::
 	msgbox Route119_Text_WeatherInstitute, MSGBOX_SIGN
-	end
+	goto Common_EventScript_ShowRouteSpecies
 
 Route119_EventScript_Brent::
 	trainerbattle_double TRAINER_BRENT, Route119_Text_BrentIntro, Route119_Text_BrentDefeat, EmeraldChampions_Text_NeedTwoPokemon
@@ -491,27 +528,30 @@ Route119_EventScript_ScottWonAtFortreeGymCall::
 	end
 
 Route119_Text_MayIntro:
-	.string "MAY: {PLAYER}{KUN}! The storms up here\n"
-	.string "rewrote my whole team.\p"
-	.string "I want to know if you still adapt faster\n"
-	.string "than I do. Ready? Go!$"
+	.string "MAY: {PLAYER}{KUN}! There you\n"
+	.string "are!\p"
+	.string "I keep stopping to take notes,\n"
+	.string "and then the rain washes them\l"
+	.string "away!\p"
+	.string "A battle will cheer us up. Ready?$"
 
 Route119_Text_MayDefeat:
-	.string "You changed plans mid-storm!$"
+	.string "Whew! That was worth getting\n"
+	.string "soaked for!$"
 
 Route119_Text_MayPresentForYou:
 	.string "MAY: Your partners came through\n"
 	.string "that battle together.\p"
 	.string "Here. I have a present for you.$"
 Route119_Text_MayExplainFly:
-	.string "MAY: Your FLIGHT BEACON turns on once\n"
-	.string "you hold the FEATHER BADGE.\p"
-	.string "WINONA awards it at FORTREE GYM.\n"
-	.string "Just follow this road north!\p"
-	.string "Use it from the BAG. Any town you've\n"
-	.string "seen, instantly.\p"
-	.string "Go home sometime. Mom asks about you.\p"
-	.string "Maybe we'll meet at the LEAGUE!$"
+	.string "MAY: Your FLIGHT BEACON works\n"
+	.string "once you earn the FEATHER BADGE\l"
+	.string "from WINONA in FORTREE.\p"
+	.string "Follow this road north! Then use\n"
+	.string "the beacon from your BAG to fly\l"
+	.string "to towns you've visited.\p"
+	.string "Stop by home sometime. Your mom\n"
+	.string "would love to see you!$"
 
 Route119_Text_FlyHMSentToPC:
 	.string "Your TM pocket is full, so FLY was sent\n"
@@ -522,28 +562,27 @@ Route119_Text_FlyHMNoRoom:
 	.string "Make room, then speak to me again.$"
 
 Route119_Text_BrendanIntro:
-	.string "BRENDAN: {PLAYER}! The rain up here\n"
-	.string "made me rebuild everything.\p"
-	.string "Let's see whose rebuild is better.\n"
-	.string "It's a battle, so battle!$"
+	.string "BRENDAN: {PLAYER}! I wondered\n"
+	.string "when you'd catch up.\p"
+	.string "A little rain hasn't stopped us\n"
+	.string "practicing. Come on, let's\l"
+	.string "battle!$"
 
 Route119_Text_BrendanDefeat:
 	.string "Hmm… You adapted quicker than me.$"
 
 Route119_Text_BrendanIllGiveYouThis:
-	.string "BRENDAN: You could build a team for any\n"
-	.string "route in HOENN now.\p"
-	.string "Here. Try this out.$"
+	.string "BRENDAN: I knew you'd give us a\n"
+	.string "good battle. Here, take this!$"
 
 Route119_Text_BrendanExplainFly:
-	.string "BRENDAN: Your FLIGHT BEACON turns on\n"
-	.string "once you hold the FEATHER BADGE.\p"
-	.string "WINONA has it at FORTREE GYM.\n"
-	.string "Follow the road north and earn it!\p"
-	.string "Use it from the BAG. Any town you've\n"
-	.string "seen, instantly.\p"
-	.string "I'm off. The SIGNS won't catalog\n"
-	.string "themselves.$"
+	.string "BRENDAN: Your FLIGHT BEACON works\n"
+	.string "once you earn the FEATHER BADGE\l"
+	.string "from WINONA at FORTREE GYM.\p"
+	.string "Use it from the BAG to visit a\n"
+	.string "town you've already reached.\p"
+	.string "I'm off to see what POKéMON live\n"
+	.string "beyond FORTREE!$"
 
 Route119_Text_ScottWayToGoBeSeeingYou:
 	.string "SCOTT: Hahahah!\n"
@@ -586,13 +625,12 @@ Route119_Text_DontGoNearWeatherInstitute:
 	.string "WEATHER INSTITUTE.$"
 
 Route119_Text_ThoughtFlyByCatchingBirdMons:
-	.string "I thought you FLY by catching a whole\n"
-	.string "flock of BIRD POKéMON, and then\l"
-	.string "hanging on to them somehow.\p"
-	.string "But it turns out there's an HM move\n"
-	.string "called FLY!\p"
-	.string "I wish I'd known about that a long\n"
-	.string "time ago…$"
+	.string "I thought you could fly by holding\n"
+	.string "on to a whole flock of birds!\p"
+	.string "Turns out a FLIGHT BEACON is much\n"
+	.string "simpler. Earn WINONA's badge, then\l"
+	.string "use it to visit familiar towns.\p"
+	.string "The birds seem relieved.$"
 
 Route119_Text_TallGrassSnaresBikeTires:
 	.string "Tch…\n"
@@ -611,9 +649,9 @@ Route119_Text_RouteSignFortree:
 
 Route119_Text_WeatherInstitute:
 	.string "WEATHER INSTITUTE\p"
-	.string "FIELD NOTE: Inspect this route's\n"
-	.string "marked stone with the BALANCE\l"
-	.string "BADGE. A storm may answer.$"
+	.string "Researching HOENN's changing\n"
+	.string "weather and the POKéMON drawn\l"
+	.string "to it.$"
 Route119_Text_TrainerTipsDecoration:
 	.string "TRAINER TIPS\p"
 	.string "Up to sixteen decorations and\n"

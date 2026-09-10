@@ -11,18 +11,9 @@ BattleFrontier_BattleTowerLobby_OnResume:
 
 BattleFrontier_BattleTowerLobby_OnTransition:
 	call BattleFrontier_BattleTowerLobby_EventScript_ShowOrHideReporter
-	apprentice_shouldcheckgone
-	goto_if_eq VAR_0x8004, FALSE, BattleFrontier_BattleTowerLobby_EventScript_ShowApprentice  @ VAR_0x8004 always TRUE here
-	goto_if_set FLAG_DAILY_APPRENTICE_LEAVES, BattleFrontier_BattleTowerLobby_EventScript_HideApprentice
-BattleFrontier_BattleTowerLobby_EventScript_ShowApprentice::
 	clearflag FLAG_HIDE_APPRENTICE
 	apprentice_setgfx
-BattleFrontier_BattleTowerLobby_EventScript_EndShowOrHideApprentice::
 	end
-
-BattleFrontier_BattleTowerLobby_EventScript_HideApprentice::
-	setflag FLAG_HIDE_APPRENTICE
-	goto BattleFrontier_BattleTowerLobby_EventScript_EndShowOrHideApprentice
 
 BattleFrontier_BattleTowerLobby_OnWarp:
 	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattleTowerLobby_EventScript_PlayerFaceNorth
@@ -440,7 +431,7 @@ BattleFrontier_BattleTowerLobby_EventScript_FeelingsMan::
 BattleFrontier_BattleTowerLobby_EventScript_ChampionsCircuit::
 	lock
 	faceplayer
-	goto_if_unset FLAG_SYS_GAME_CLEAR, BattleFrontier_BattleTowerLobby_EventScript_CircuitLocked
+	goto_if_unset FLAG_BADGE06_GET, BattleFrontier_BattleTowerLobby_EventScript_CircuitLocked
 	special ChampionsCircuitTryGiveReward
 	call_if_eq VAR_RESULT, 4, BattleFrontier_BattleTowerLobby_EventScript_CircuitRewardPending
 	call_if_eq VAR_RESULT, 1, BattleFrontier_BattleTowerLobby_EventScript_CircuitRewardParty
@@ -537,14 +528,16 @@ BattleFrontier_BattleTowerLobby_Text_CircuitRewardPC:
 	.string "{STR_VAR_1} was sent to the PC.$"
 
 BattleFrontier_BattleTowerLobby_Text_CircuitRewardNoRoom:
-	.string "A Circuit reward is waiting, but both\n"
-	.string "your party and PC are full.\p"
-	.string "Make room, then speak to this desk again.$"
+	.string "A Circuit reward is waiting, but\n"
+	.string "both your party and PC are full.\p"
+	.string "Make room, then speak to this\n"
+	.string "desk again.$"
 
 BattleFrontier_BattleTowerLobby_Text_CircuitLocked:
-	.string "This desk hosts a challenge beyond\n"
-	.string "the Pokémon League.\p"
-	.string "Return after becoming Champion.$"
+	.string "The CHAMPIONS CIRCUIT welcomes\n"
+	.string "challengers with the FEATHER\l"
+	.string "BADGE.\p"
+	.string "Return when you've earned it!$"
 
 BattleFrontier_BattleTowerLobby_Text_CircuitNeedsParty:
 	.string "The Circuit requires six healthy\n"

@@ -3,10 +3,15 @@ AlteringCave_1F_MapScripts::
 
 AlteringCave_1F_EventScript_Researcher::
 	msgbox AlteringCave_1F_Text_Researcher, MSGBOX_NPC
+	releaseall
 	end
 
 AlteringCave_1F_Text_Researcher:
-	.string "DEVON called this cave an error in\n"
-	.string "nature. I think it is a doorway.\p"
-	.string "The same CHAMPION'S SIGN appears in\n"
-	.string "every shape this cavern assumes.$"
+	.string "This cavern feels like a doorway.\n"
+	.string "The deeper I go, the stranger it\l"
+	.string "becomes.\p"
+	.string "HOOPA lives among the wild\n"
+	.string "POKéMON here. Each encounter\l"
+	.string "has a 3% chance of being HOOPA.\p"
+	.string "MEWTWO waits on B1F. It accepts\n"
+	.string "challengers with the MIND BADGE.$"

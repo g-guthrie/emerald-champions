@@ -32,14 +32,13 @@ MauvilleCity_House1_Text_ImRockSmashDudeTakeThis:
 	.string "Here, take this HIDDEN MACHINE!$"
 
 MauvilleCity_House1_Text_ExplainRockSmash:
-	.string "That HM registers ROCK SMASH as a\n"
-	.string "field technique for your team.\p"
-	.string "If you come across large boulders\n"
-	.string "that block your path…\p"
-	.string "Well, use that HM move and smash\n"
-	.string "them right out of your way!\p"
-	.string "Yes, sir! Smash rocks aside, I say!\n"
-	.string "Woohoo!$"
+	.string "That HM registers ROCK SMASH for\n"
+	.string "your team!\p"
+	.string "With the DYNAMO BADGE and a\n"
+	.string "compatible partner, you can smash\l"
+	.string "cracked rocks in your path.\p"
+	.string "No need to use a battle move slot.\n"
+	.string "Smash rocks aside, I say! Woohoo!$"
 
 MauvilleCity_House1_Text_MonCanFlyOutOfSmashedRock:
 	.string "Oh, yes, if you smash a rock, a POKéMON\n"

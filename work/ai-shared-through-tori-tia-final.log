@@ -1,0 +1,82 @@
+arm-none-eabi-cpp -iquote include -Wno-trigraphs -DMODERN=1 -DTESTING=0 -DEMERALD -std=gnu17 -DEC_HEADLESS_FIXTURES=0 -traditional-cpp - < src/data/trainers.party | tools/trainerproc/trainerproc -o src/data/trainers.h -i src/data/trainers.party -
+tools/scaninc/scaninc -M build/emerald-test/data/event_scripts.d -g build/assets -I include -I "" data/event_scripts.s
+tools/scaninc/scaninc -M build/emerald-test/test/battle/ai/emerald_champions_plans.d -g build/assets -I include -I tools/agbcc/include test/battle/ai/emerald_champions_plans.c
+tools/scaninc/scaninc -M build/emerald-test/test/test_runner_battle.d -g build/assets -I include -I tools/agbcc/include test/test_runner_battle.c
+tools/scaninc/scaninc -M build/emerald-test/src/emerald_champions_battle_plan.d -g build/assets -I include -I tools/agbcc/include src/emerald_champions_battle_plan.c
+tools/scaninc/scaninc -M build/emerald-test/src/data.d -g build/assets -I include -I tools/agbcc/include src/data.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/data.o src/data.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/emerald_champions_battle_plan.o src/emerald_champions_battle_plan.c
+tools/preproc/preproc -s data/event_scripts.s charmap.txt | arm-none-eabi-cpp -iquote include -Wno-trigraphs -DMODERN=1 -DTESTING=1 -DEMERALD -std=gnu17 -DEC_HEADLESS_FIXTURES=0 -I include - | tools/preproc/preproc -ie data/event_scripts.s charmap.txt | arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -o build/emerald-test/data/event_scripts.o
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/test_runner_battle.o test/test_runner_battle.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/battle/ai/emerald_champions_plans.o test/battle/ai/emerald_champions_plans.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 4
+[1] EC expert pair: Glare enables a partner KO but not through a paralysis cure: [32mPASS[0m
+[2] EC expert pair: Feint opens partner damage through Protect but not immunity: [32mPASS[0m
+[0] EC expert pair: secondary paralysis earns probabilistic partner order with a Cloak control: [32mPASS[0m
+[3] EC expert pair: Knock Off timing removes only the later offensive item boost: [32mPASS[0m
+[1] EC expert pair: preserve the Plus Minus partner before taking a boosted knockout: [32mPASS[0m
+[2] EC expert pair: timely primary Charm protects its user: [32mPASS[0m
+[1] EC expert pair: non-Flying priority Roost recovers under continued pressure: [32mPASS[0m
+[3] EC expert pair: reciprocal Helping Hand secures its concrete partner's spread KOs: [32mPASS[0m
+[0] EC expert pair: Nuzzle speed control distinguishes primary and secondary immunity: [32mPASS[0m
+[3] EC expert pair: Motor Drive activation earns its same-turn speed crossing: [32mPASS[0m
+[1] EC expert pair: Trick Room never cancels itself and is reset after expiry: [32mPASS[0m
+[2] EC expert pair: candidate evaluation restores board caches field and RNG: [32mPASS[0m
+[3] EC expert pair: Coaching values the partner attack and physical survival: [32mPASS[0m
+[1] EC expert pair: Klutz transfers Flame Orb to a vulnerable physical attacker: [32mPASS[0m
+[3] EC expert pair: Follow Me protects the Trick Room setter: [32mPASS[0m
+[0] EC expert pair: reciprocal Justified activation preserves the recipient's attack: [32mPASS[0m
+[2] EC expert pair: Acid Spray enables only a later unblocked special attack: [32mPASS[0m
+[1] EC expert pair: Helping Hand requires a damaging partner action: [32mPASS[0m
+[3] EC expert pair: damage-based recoil distinguishes unsafe and surviving attacks: [32mPASS[0m
+[0] EC expert pair: partner healing preserves the slower winning attack: [32mPASS[0m
+[2] EC expert pair: Perish countdown survives and simultaneous deadlines choose distinct escapes: [32mPASS[0m
+[1] EC expert pair: beneficial weather is established once: [32mPASS[0m
+[0] EC expert pair: candidate Trace copies deterministic abilities and restores state: [32mPASS[0m
+[1] EC expert pair: Cotton Guard earns only timely physical mitigation: [32mPASS[0m
+[2] EC expert pair: Wish survives modest pressure and pays at the next end turn: [32mPASS[0m
+[0] EC expert pair: Quiver Dance mitigates only later special attacks: [32mPASS[0m
+[1] EC expert pair: HP-powered damage follows public faster chip: [32mPASS[0m
+[3] EC expert pair: offensive drops protect a slower partner only when timely and unblocked: [32mPASS[0m
+[3] EC expert pair: Stamina changes the followup after partner chip: [32mPASS[0m
+[0] EC expert pair: prevent a priority hit from activating Defeatist before attack: [32mPASS[0m
+[1] EC expert pair: Sleep Powder denial respects native accuracy Grass and Goggles: [32mPASS[0m
+[2] EC expert pair: Life Orb costs a hit and stolen Sitrus heals before recoil: [32mPASS[0m
+[0] EC expert pair: team shields cannot bypass empty double-guard rejection: [32mPASS[0m
+[1] EC expert pair: Rock Tomb earns a partner crossing unless Cloak blocks it: [32mPASS[0m
+[2] EC expert pair: Iron Defense mitigates only later physical attacks: [32mPASS[0m
+[0] EC hazard targeting: Magic Bounce discourages hazards on either foe flank: [32mPASS[0m
+[3] EC hazard targeting: partners do not duplicate a full hazard: [32mPASS[0m
+[3] EC Perish policy: fresh trapped targets, escape timing and immunity guards: [32mPASS[0m
+[0] EC hazard targeting: damaging hazard moves remain attacks at capacity: [32mPASS[0m
+[2] EC expert pair: two passive guards need progress but retain useful waits and legal fallback: [32mPASS[0m
+[0] EC Octolock: an affected target is rejected without rejecting a fresh target: [32mPASS[0m
+[3] EC status legality: preserve damaging moves and legal forced fallback: [32mPASS[0m
+[3] EC authored strategy: Parker preserves a nonimmune reserve beside Earthquake: [32mPASS[0m
+[0] EC revealed redirection: do not repeatedly feed Volt Absorb: [32mPASS[0m
+[2] EC expert pair: personality flags preserve an accurate guaranteed KO: [32mPASS[0m
+[3] EC authored strategy: Flannery advances Eruption before opposing Rock Slide: [32mPASS[0m
+[0] EC status legality: a spent burn is not a substitute for an action: [32mPASS[0m
+[3] EC Leech Seed: do not repeat into a seeded Follow Me recipient: [32mPASS[0m
+[3] EC battle plans: compiled directives follow trainer ownership and exclude other battle namespaces: [32mPASS[0m
+[0] EC doubles budget: initial Mega and full benches stay below 1.2 seconds: [32mPASS[0m
+MEGA_BUDGET_INITIAL_FRAMES=60
+[1] EC hazard targeting: correct opposing side, valid layers, no saturated repeat: [32mPASS[0m
+[0] EC authored strategy: Parker repeats Earthquake safely through Telepathy: [32mPASS[0m
+[2] EC authored strategy: Maura escapes her countdown while retaining the trap: [32mPASS[0m
+[1] EC authored strategy: Connie's mutual Surf activates Storm Drain: [32mPASS[0m
+[2] EC Calm Mind: fast Simple setup accounts for immediate special defense: [32mPASS[0m
+[1] EC Tailwind: faster recoil attackers do not use empty speed setup: [32mPASS[0m
+[0] EC authored strategy: Tabitha activation requires survival and a useful boost: [32mPASS[0m
+[1] EC Tailwind: charge and speed rewards exclude immune or fainted foes: [32mPASS[0m
+[1] EC expert pair: two eligible partners commit only one Mega for their owner: [32mPASS[0m
+[2] EC pivot cleanup: exhausted bench does not skip the next target: [32mPASS[0m
+
+- Tests [32mPASSED[0m:          60
+- Tests [34mTOTAL[0m:           60
+

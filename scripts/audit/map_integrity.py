@@ -737,7 +737,10 @@ def main(argv=None):
     )
     args = parser.parse_args(argv)
     try:
-        report = inventory(args.root)
+        # The release check protects compiled references and binary geometry.
+        # Speculative source-derived animation/scene inventories are not proof
+        # that dynamic writes execute at the inferred addresses.
+        report = inventory(args.root, include_dynamic=False)
     except (OSError, ValueError, KeyError, TypeError) as error:
         report = {"status": "failed", "error": f"{type(error).__name__}: {error}"}
     else:

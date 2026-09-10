@@ -1,0 +1,372 @@
+tools/scaninc/scaninc -M build/emerald-test/test/battle/ai/emerald_champions_plans.d -g build/assets -I include -I tools/agbcc/include test/battle/ai/emerald_champions_plans.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/battle/ai/emerald_champions_plans.o test/battle/ai/emerald_champions_plans.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 4
+[0] EC live review Simon timing: complete cold decision with six-player party: [32mPASS[0m
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Heavy Slam target=2
+AI decision turn=2 actor=1 move=Hydro Pump target=0
+AI decision turn=2 actor=3 move=Heavy Slam target=2
+E49_SIMON_COMPLETE_TIMING trainer=65 setupFrames=6 decisionFrames=41 completeFrames=47 warmFrames=40 first=3 moves=Hydro Pump/Heavy Slam
+[2] EC live review Simon disruption: Fake Out and Taunt into lead or reserves: [32mPASS[0m
+SIMON_INPUT reserves=0 slot=0 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=481 ability=172
+SIMON_INPUT reserves=0 slot=1 lv=18 HP=61 Atk=62 Def=35 SpA=23 SpD=30 Speed=35 item=494 ability=192
+SIMON_INPUT reserves=0 slot=2 lv=18 HP=59 Atk=20 Def=45 SpA=33 SpD=37 Speed=15 item=494 ability=27
+SIMON_INPUT reserves=0 slot=3 lv=18 HP=71 Atk=21 Def=24 SpA=46 SpD=30 Speed=34 item=503 ability=11
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=High Horsepower target=0
+AI switch turn=2 actor=1 party=2
+AI decision turn=2 actor=3 move=High Horsepower target=0
+SIMON_AFTER board=10 turns=1 pair=0 species=394/749 HP=56/61 foes=35/72 moves=Protect/High Horsepower speed=39/35 foeSpeed=53/49 SpA=6/6 Def=6/6 foeAtk=6/6 foeStatus=0/0 firstPP=5/9 faints=0/0
+SIMON_INPUT reserves=0 slot=0 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=481 ability=172
+SIMON_INPUT reserves=0 slot=1 lv=18 HP=61 Atk=62 Def=35 SpA=23 SpD=30 Speed=35 item=494 ability=192
+SIMON_INPUT reserves=0 slot=2 lv=18 HP=59 Atk=20 Def=45 SpA=33 SpD=37 Speed=15 item=494 ability=27
+SIMON_INPUT reserves=0 slot=3 lv=18 HP=71 Atk=21 Def=24 SpA=46 SpD=30 Speed=34 item=503 ability=11
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=High Horsepower target=0
+AI switch turn=2 actor=1 party=2
+AI decision turn=2 actor=0 move=Taunt target=1
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=High Horsepower target=0
+AI decision turn=3 actor=1 move=Dazzling Gleam target=0
+AI decision turn=3 actor=3 move=High Horsepower target=2
+SIMON_AFTER board=10 turns=2 pair=0 species=755/749 HP=59/61 foes=4/72 moves=-/High Horsepower speed=15/35 foeSpeed=53/49 SpA=6/6 Def=6/6 foeAtk=6/6 foeStatus=0/0 firstPP=15/8 faints=0/0
+SIMON_INPUT reserves=0 slot=0 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=481 ability=172
+SIMON_INPUT reserves=0 slot=1 lv=18 HP=61 Atk=62 Def=35 SpA=23 SpD=30 Speed=35 item=494 ability=192
+SIMON_INPUT reserves=0 slot=2 lv=18 HP=59 Atk=20 Def=45 SpA=33 SpD=37 Speed=15 item=494 ability=27
+SIMON_INPUT reserves=0 slot=3 lv=18 HP=71 Atk=21 Def=24 SpA=46 SpD=30 Speed=34 item=503 ability=11
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=High Horsepower target=0
+AI switch turn=2 actor=1 party=2
+AI decision turn=2 actor=0 move=Taunt target=1
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=High Horsepower target=0
+AI decision turn=3 actor=0 move=Taunt target=1
+AI decision turn=3 actor=1 move=Dazzling Gleam target=0
+AI decision turn=3 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=3 move=High Horsepower target=2
+AI decision turn=4 actor=1 move=Dazzling Gleam target=2
+AI decision turn=4 actor=3 move=High Horsepower target=2
+SIMON_AFTER board=10 turns=3 pair=0 species=755/749 HP=59/61 foes=0/30 moves=Dazzling Gleam/High Horsepower speed=15/35 foeSpeed=0/49 SpA=6/6 Def=6/6 foeAtk=6/6 foeStatus=0/0 firstPP=15/7 faints=0/1
+SIMON_INPUT reserves=1 slot=0 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=481 ability=172
+SIMON_INPUT reserves=1 slot=1 lv=18 HP=61 Atk=62 Def=35 SpA=23 SpD=30 Speed=35 item=494 ability=192
+SIMON_INPUT reserves=1 slot=2 lv=18 HP=59 Atk=20 Def=45 SpA=33 SpD=37 Speed=15 item=494 ability=27
+SIMON_INPUT reserves=1 slot=3 lv=18 HP=71 Atk=21 Def=24 SpA=46 SpD=30 Speed=34 item=503 ability=11
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Dazzling Gleam target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Muddy Water target=0
+AI decision turn=2 actor=1 move=Dazzling Gleam target=0
+AI decision turn=2 actor=3 move=Thunderbolt target=0
+SIMON_AFTER board=10 turns=1 pair=1 species=755/170 HP=54/55 foes=50/56 moves=-/Muddy Water speed=15/34 foeSpeed=53/49 SpA=6/6 Def=6/6 foeAtk=6/6 foeStatus=0/0 firstPP=15/9 faints=0/0
+SIMON_INPUT reserves=1 slot=0 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=481 ability=172
+SIMON_INPUT reserves=1 slot=1 lv=18 HP=61 Atk=62 Def=35 SpA=23 SpD=30 Speed=35 item=494 ability=192
+SIMON_INPUT reserves=1 slot=2 lv=18 HP=59 Atk=20 Def=45 SpA=33 SpD=37 Speed=15 item=494 ability=27
+SIMON_INPUT reserves=1 slot=3 lv=18 HP=71 Atk=21 Def=24 SpA=46 SpD=30 Speed=34 item=503 ability=11
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Dazzling Gleam target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Muddy Water target=0
+AI decision turn=2 actor=0 move=Taunt target=1
+AI decision turn=2 actor=1 move=Dazzling Gleam target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Thunderbolt target=0
+AI decision turn=3 actor=1 move=Dazzling Gleam target=0
+AI decision turn=3 actor=3 move=Thunderbolt target=0
+SIMON_AFTER board=10 turns=2 pair=1 species=755/170 HP=54/39 foes=8/46 moves=Dazzling Gleam/Thunderbolt speed=15/34 foeSpeed=26/49 SpA=6/6 Def=6/6 foeAtk=6/6 foeStatus=64/0 firstPP=15/9 faints=0/0
+SIMON_INPUT reserves=1 slot=0 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=481 ability=172
+SIMON_INPUT reserves=1 slot=1 lv=18 HP=61 Atk=62 Def=35 SpA=23 SpD=30 Speed=35 item=494 ability=192
+SIMON_INPUT reserves=1 slot=2 lv=18 HP=59 Atk=20 Def=45 SpA=33 SpD=37 Speed=15 item=494 ability=27
+SIMON_INPUT reserves=1 slot=3 lv=18 HP=71 Atk=21 Def=24 SpA=46 SpD=30 Speed=34 item=503 ability=11
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Dazzling Gleam target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Muddy Water target=0
+AI decision turn=2 actor=0 move=Taunt target=1
+AI decision turn=2 actor=1 move=Dazzling Gleam target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Thunderbolt target=0
+AI decision turn=3 actor=0 move=Taunt target=1
+AI decision turn=3 actor=1 move=Dazzling Gleam target=0
+AI decision turn=3 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=3 move=Thunderbolt target=0
+AI decision turn=4 actor=1 move=Dazzling Gleam target=2
+AI decision turn=4 actor=3 move=Muddy Water target=2
+SIMON_AFTER board=10 turns=3 pair=1 species=755/170 HP=54/23 foes=0/49 moves=Dazzling Gleam/Thunderbolt speed=15/34 foeSpeed=0/49 SpA=6/6 Def=6/6 foeAtk=6/6 foeStatus=0/0 firstPP=15/9 faints=0/1
+[1] EC live review Simon motifs: Stamina hits and opposing Icy Wind: [32mPASS[0m
+SIMON_INPUT reserves=0 slot=0 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=481 ability=172
+SIMON_INPUT reserves=0 slot=1 lv=18 HP=61 Atk=62 Def=35 SpA=23 SpD=30 Speed=35 item=494 ability=192
+SIMON_INPUT reserves=0 slot=2 lv=18 HP=59 Atk=20 Def=45 SpA=33 SpD=37 Speed=15 item=494 ability=27
+SIMON_INPUT reserves=0 slot=3 lv=18 HP=71 Atk=21 Def=24 SpA=46 SpD=30 Speed=34 item=503 ability=11
+AI decision turn=1 actor=0 move=Double-Edge target=3
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=High Horsepower target=0
+AI decision turn=2 actor=1 move=Hydro Pump target=0
+AI decision turn=2 actor=3 move=High Horsepower target=0
+SIMON_AFTER board=20 turns=1 pair=0 species=394/749 HP=56/20 foes=30/78 moves=Protect/High Horsepower speed=39/35 foeSpeed=33/25 SpA=6/6 Def=6/8 foeAtk=6/6 foeStatus=0/0 firstPP=5/9 faints=0/0
+SIMON_INPUT reserves=0 slot=0 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=481 ability=172
+SIMON_INPUT reserves=0 slot=1 lv=18 HP=61 Atk=62 Def=35 SpA=23 SpD=30 Speed=35 item=494 ability=192
+SIMON_INPUT reserves=0 slot=2 lv=18 HP=59 Atk=20 Def=45 SpA=33 SpD=37 Speed=15 item=494 ability=27
+SIMON_INPUT reserves=0 slot=3 lv=18 HP=71 Atk=21 Def=24 SpA=46 SpD=30 Speed=34 item=503 ability=11
+AI decision turn=1 actor=0 move=Double-Edge target=3
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=High Horsepower target=0
+AI decision turn=2 actor=0 move=Double-Edge target=3
+AI decision turn=2 actor=1 move=Hydro Pump target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=High Horsepower target=0
+AI decision turn=3 actor=1 move=Hydro Pump target=2
+AI decision turn=3 actor=3 move=High Horsepower target=2
+SIMON_AFTER board=20 turns=2 pair=0 species=394/749 HP=56/10 foes=0/78 moves=Hydro Pump/High Horsepower speed=39/35 foeSpeed=0/25 SpA=6/6 Def=6/9 foeAtk=6/6 foeStatus=0/0 firstPP=4/8 faints=0/1
+SIMON_INPUT reserves=0 slot=0 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=481 ability=172
+SIMON_INPUT reserves=0 slot=1 lv=18 HP=61 Atk=62 Def=35 SpA=23 SpD=30 Speed=35 item=494 ability=192
+SIMON_INPUT reserves=0 slot=2 lv=18 HP=59 Atk=20 Def=45 SpA=33 SpD=37 Speed=15 item=494 ability=27
+SIMON_INPUT reserves=0 slot=3 lv=18 HP=71 Atk=21 Def=24 SpA=46 SpD=30 Speed=34 item=503 ability=11
+AI decision turn=1 actor=0 move=Double-Edge target=3
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=High Horsepower target=0
+AI decision turn=2 actor=0 move=Double-Edge target=3
+AI decision turn=2 actor=1 move=Hydro Pump target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=High Horsepower target=0
+AI decision turn=3 actor=2 move=Drain Punch target=3
+AI decision turn=3 actor=1 move=Hydro Pump target=2
+AI decision turn=3 actor=3 move=High Horsepower target=2
+AI decision turn=4 actor=1 move=Hydro Pump target=2
+AI decision turn=4 actor=3 move=High Horsepower target=2
+SIMON_AFTER board=20 turns=3 pair=0 species=394/749 HP=56/3 foes=0/28 moves=Hydro Pump/High Horsepower speed=39/35 foeSpeed=0/25 SpA=6/6 Def=6/10 foeAtk=6/6 foeStatus=0/0 firstPP=3/7 faints=0/1
+SIMON_INPUT reserves=0 slot=0 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=481 ability=172
+SIMON_INPUT reserves=0 slot=1 lv=18 HP=61 Atk=62 Def=35 SpA=23 SpD=30 Speed=35 item=494 ability=192
+SIMON_INPUT reserves=0 slot=2 lv=18 HP=59 Atk=20 Def=45 SpA=33 SpD=37 Speed=15 item=494 ability=27
+SIMON_INPUT reserves=0 slot=3 lv=18 HP=71 Atk=21 Def=24 SpA=46 SpD=30 Speed=34 item=503 ability=11
+AI decision turn=1 actor=0 move=Icy Wind target=1
+AI decision turn=1 actor=1 move=Hydro Pump target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=High Horsepower target=2
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Rock Slide target=0
+SIMON_AFTER board=21 turns=1 pair=0 species=394/749 HP=52/49 foes=64/0 moves=Hydro Pump/High Horsepower speed=26/23 foeSpeed=23/0 SpA=8/6 Def=6/7 foeAtk=6/6 foeStatus=0/0 firstPP=4/9 faints=0/1
+SIMON_INPUT reserves=0 slot=0 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=481 ability=172
+SIMON_INPUT reserves=0 slot=1 lv=18 HP=61 Atk=62 Def=35 SpA=23 SpD=30 Speed=35 item=494 ability=192
+SIMON_INPUT reserves=0 slot=2 lv=18 HP=59 Atk=20 Def=45 SpA=33 SpD=37 Speed=15 item=494 ability=27
+SIMON_INPUT reserves=0 slot=3 lv=18 HP=71 Atk=21 Def=24 SpA=46 SpD=30 Speed=34 item=503 ability=11
+AI decision turn=1 actor=0 move=Icy Wind target=1
+AI decision turn=1 actor=1 move=Hydro Pump target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=High Horsepower target=2
+AI decision turn=2 actor=0 move=Giga Drain target=1
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Rock Slide target=0
+AI decision turn=3 actor=1 move=Icy Wind target=0
+AI decision turn=3 actor=3 move=High Horsepower target=0
+SIMON_AFTER board=21 turns=2 pair=0 species=394/749 HP=52/49 foes=42/0 moves=Protect/Rock Slide speed=26/23 foeSpeed=23/0 SpA=8/6 Def=6/7 foeAtk=6/6 foeStatus=0/0 firstPP=4/9 faints=0/1
+SIMON_INPUT reserves=0 slot=0 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=481 ability=172
+SIMON_INPUT reserves=0 slot=1 lv=18 HP=61 Atk=62 Def=35 SpA=23 SpD=30 Speed=35 item=494 ability=192
+SIMON_INPUT reserves=0 slot=2 lv=18 HP=59 Atk=20 Def=45 SpA=33 SpD=37 Speed=15 item=494 ability=27
+SIMON_INPUT reserves=0 slot=3 lv=18 HP=71 Atk=21 Def=24 SpA=46 SpD=30 Speed=34 item=503 ability=11
+AI decision turn=1 actor=0 move=Icy Wind target=1
+AI decision turn=1 actor=1 move=Hydro Pump target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=High Horsepower target=2
+AI decision turn=2 actor=0 move=Giga Drain target=1
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Rock Slide target=0
+AI decision turn=3 actor=0 move=Giga Drain target=1
+AI decision turn=3 actor=1 move=Icy Wind target=0
+AI decision turn=3 actor=3 move=High Horsepower target=0
+AI decision turn=4 actor=1 move=Ice Beam target=0
+AI decision turn=4 actor=3 move=Rock Slide target=0
+SIMON_AFTER board=21 turns=3 pair=0 species=394/749 HP=10/49 foes=24/0 moves=Icy Wind/High Horsepower speed=26/23 foeSpeed=15/0 SpA=8/6 Def=6/7 foeAtk=6/6 foeStatus=0/0 firstPP=4/8 faints=0/1
+[3] EC live review Simon core: physical special leads and reserves: [32mPASS[0m
+SIMON_INPUT reserves=0 slot=0 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=481 ability=172
+SIMON_INPUT reserves=0 slot=1 lv=18 HP=61 Atk=62 Def=35 SpA=23 SpD=30 Speed=35 item=494 ability=192
+SIMON_INPUT reserves=0 slot=2 lv=18 HP=59 Atk=20 Def=45 SpA=33 SpD=37 Speed=15 item=494 ability=27
+SIMON_INPUT reserves=0 slot=3 lv=18 HP=71 Atk=21 Def=24 SpA=46 SpD=30 Speed=34 item=503 ability=11
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=High Horsepower target=0
+AI decision turn=2 actor=1 move=Hydro Pump target=0
+AI decision turn=2 actor=3 move=Heavy Slam target=0
+SIMON_AFTER board=0 turns=1 pair=0 species=394/749 HP=56/42 foes=39/78 moves=Protect/High Horsepower speed=39/35 foeSpeed=33/25 SpA=6/6 Def=6/7 foeAtk=6/6 foeStatus=0/0 firstPP=5/9 faints=0/0
+SIMON_INPUT reserves=0 slot=0 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=481 ability=172
+SIMON_INPUT reserves=0 slot=1 lv=18 HP=61 Atk=62 Def=35 SpA=23 SpD=30 Speed=35 item=494 ability=192
+SIMON_INPUT reserves=0 slot=2 lv=18 HP=59 Atk=20 Def=45 SpA=33 SpD=37 Speed=15 item=494 ability=27
+SIMON_INPUT reserves=0 slot=3 lv=18 HP=71 Atk=21 Def=24 SpA=46 SpD=30 Speed=34 item=503 ability=11
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=High Horsepower target=0
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Hydro Pump target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Heavy Slam target=0
+AI decision turn=3 actor=1 move=Hydro Pump target=2
+AI decision turn=3 actor=3 move=High Horsepower target=2
+SIMON_AFTER board=0 turns=2 pair=0 species=394/749 HP=56/29 foes=0/78 moves=Hydro Pump/Heavy Slam speed=39/35 foeSpeed=0/25 SpA=6/6 Def=6/8 foeAtk=6/6 foeStatus=0/0 firstPP=4/9 faints=0/1
+SIMON_INPUT reserves=0 slot=0 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=481 ability=172
+SIMON_INPUT reserves=0 slot=1 lv=18 HP=61 Atk=62 Def=35 SpA=23 SpD=30 Speed=35 item=494 ability=192
+SIMON_INPUT reserves=0 slot=2 lv=18 HP=59 Atk=20 Def=45 SpA=33 SpD=37 Speed=15 item=494 ability=27
+SIMON_INPUT reserves=0 slot=3 lv=18 HP=71 Atk=21 Def=24 SpA=46 SpD=30 Speed=34 item=503 ability=11
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=High Horsepower target=0
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Hydro Pump target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Heavy Slam target=0
+AI decision turn=3 actor=2 move=Drain Punch target=3
+AI decision turn=3 actor=1 move=Hydro Pump target=2
+AI decision turn=3 actor=3 move=High Horsepower target=2
+AI decision turn=4 actor=1 move=Hydro Pump target=2
+AI decision turn=4 actor=3 move=High Horsepower target=2
+SIMON_AFTER board=0 turns=3 pair=0 species=394/749 HP=56/19 foes=0/30 moves=Hydro Pump/High Horsepower speed=39/35 foeSpeed=0/25 SpA=6/6 Def=6/9 foeAtk=6/6 foeStatus=0/0 firstPP=3/8 faints=0/1
+SIMON_INPUT reserves=0 slot=0 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=481 ability=172
+SIMON_INPUT reserves=0 slot=1 lv=18 HP=61 Atk=62 Def=35 SpA=23 SpD=30 Speed=35 item=494 ability=192
+SIMON_INPUT reserves=0 slot=2 lv=18 HP=59 Atk=20 Def=45 SpA=33 SpD=37 Speed=15 item=494 ability=27
+SIMON_INPUT reserves=0 slot=3 lv=18 HP=71 Atk=21 Def=24 SpA=46 SpD=30 Speed=34 item=503 ability=11
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Heavy Slam target=0
+AI switch turn=2 actor=1 party=3
+AI decision turn=2 actor=3 move=Heavy Slam target=0
+SIMON_AFTER board=1 turns=1 pair=0 species=394/749 HP=56/34 foes=24/72 moves=Protect/Heavy Slam speed=39/35 foeSpeed=56/49 SpA=6/6 Def=6/7 foeAtk=6/6 foeStatus=0/0 firstPP=5/10 faints=0/0
+SIMON_INPUT reserves=0 slot=0 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=481 ability=172
+SIMON_INPUT reserves=0 slot=1 lv=18 HP=61 Atk=62 Def=35 SpA=23 SpD=30 Speed=35 item=494 ability=192
+SIMON_INPUT reserves=0 slot=2 lv=18 HP=59 Atk=20 Def=45 SpA=33 SpD=37 Speed=15 item=494 ability=27
+SIMON_INPUT reserves=0 slot=3 lv=18 HP=71 Atk=21 Def=24 SpA=46 SpD=30 Speed=34 item=503 ability=11
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Heavy Slam target=0
+AI switch turn=2 actor=1 party=3
+AI decision turn=2 actor=0 move=Psychic target=3
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=3 move=Heavy Slam target=0
+AI decision turn=3 actor=1 move=Muddy Water target=2
+AI decision turn=3 actor=3 move=High Horsepower target=2
+SIMON_AFTER board=1 turns=2 pair=0 species=170/749 HP=55/7 foes=0/72 moves=-/Heavy Slam speed=34/35 foeSpeed=0/49 SpA=6/6 Def=6/8 foeAtk=6/6 foeStatus=0/0 firstPP=10/10 faints=0/1
+SIMON_INPUT reserves=0 slot=0 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=481 ability=172
+SIMON_INPUT reserves=0 slot=1 lv=18 HP=61 Atk=62 Def=35 SpA=23 SpD=30 Speed=35 item=494 ability=192
+SIMON_INPUT reserves=0 slot=2 lv=18 HP=59 Atk=20 Def=45 SpA=33 SpD=37 Speed=15 item=494 ability=27
+SIMON_INPUT reserves=0 slot=3 lv=18 HP=71 Atk=21 Def=24 SpA=46 SpD=30 Speed=34 item=503 ability=11
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Heavy Slam target=0
+AI switch turn=2 actor=1 party=3
+AI decision turn=2 actor=0 move=Psychic target=3
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=3 move=Heavy Slam target=0
+AI decision turn=3 actor=2 move=Thunderbolt target=1
+AI decision turn=3 actor=1 move=Muddy Water target=2
+AI decision turn=3 actor=3 move=High Horsepower target=2
+AI decision turn=4 actor=1 move=Muddy Water target=2
+AI decision turn=4 actor=3 move=High Horsepower target=2
+SIMON_AFTER board=1 turns=3 pair=0 species=170/749 HP=39/7 foes=0/19 moves=Muddy Water/High Horsepower speed=34/35 foeSpeed=0/49 SpA=6/6 Def=6/8 foeAtk=6/6 foeStatus=0/0 firstPP=9/9 faints=0/1
+SIMON_INPUT reserves=1 slot=0 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=481 ability=172
+SIMON_INPUT reserves=1 slot=1 lv=18 HP=61 Atk=62 Def=35 SpA=23 SpD=30 Speed=35 item=494 ability=192
+SIMON_INPUT reserves=1 slot=2 lv=18 HP=59 Atk=20 Def=45 SpA=33 SpD=37 Speed=15 item=494 ability=27
+SIMON_INPUT reserves=1 slot=3 lv=18 HP=71 Atk=21 Def=24 SpA=46 SpD=30 Speed=34 item=503 ability=11
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Dazzling Gleam target=0
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Muddy Water target=0
+AI decision turn=2 actor=1 move=Dazzling Gleam target=0
+AI decision turn=2 actor=3 move=Muddy Water target=0
+SIMON_AFTER board=0 turns=1 pair=1 species=755/170 HP=37/29 foes=47/64 moves=Dazzling Gleam/Muddy Water speed=15/34 foeSpeed=33/25 SpA=6/6 Def=6/6 foeAtk=6/6 foeStatus=0/0 firstPP=15/9 faints=0/0
+SIMON_INPUT reserves=1 slot=0 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=481 ability=172
+SIMON_INPUT reserves=1 slot=1 lv=18 HP=61 Atk=62 Def=35 SpA=23 SpD=30 Speed=35 item=494 ability=192
+SIMON_INPUT reserves=1 slot=2 lv=18 HP=59 Atk=20 Def=45 SpA=33 SpD=37 Speed=15 item=494 ability=27
+SIMON_INPUT reserves=1 slot=3 lv=18 HP=71 Atk=21 Def=24 SpA=46 SpD=30 Speed=34 item=503 ability=11
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Dazzling Gleam target=0
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Muddy Water target=0
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Dazzling Gleam target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Muddy Water target=0
+AI decision turn=3 actor=1 move=Spore target=0
+SIMON_AFTER board=0 turns=2 pair=1 species=755/170 HP=15/0 foes=24/52 moves=Dazzling Gleam/- speed=15/0 foeSpeed=33/25 SpA=6/6 Def=6/6 foeAtk=6/6 foeStatus=0/0 firstPP=15/8 faints=1/0
+SIMON_INPUT reserves=1 slot=0 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=481 ability=172
+SIMON_INPUT reserves=1 slot=1 lv=18 HP=61 Atk=62 Def=35 SpA=23 SpD=30 Speed=35 item=494 ability=192
+SIMON_INPUT reserves=1 slot=2 lv=18 HP=59 Atk=20 Def=45 SpA=33 SpD=37 Speed=15 item=494 ability=27
+SIMON_INPUT reserves=1 slot=3 lv=18 HP=71 Atk=21 Def=24 SpA=46 SpD=30 Speed=34 item=503 ability=11
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Dazzling Gleam target=0
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Muddy Water target=0
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Dazzling Gleam target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Muddy Water target=0
+AI decision turn=3 actor=0 move=Double-Edge target=1
+AI decision turn=3 actor=1 move=Spore target=0
+AI decision turn=3 actor=2 move=Drain Punch target=3
+SIMON_AFTER board=0 turns=3 pair=1 species=755/170 HP=0/0 foes=20/52 moves=-/- speed=15/0 foeSpeed=33/25 SpA=6/6 Def=6/6 foeAtk=6/6 foeStatus=0/0 firstPP=15/8 faints=2/0
+SIMON_INPUT reserves=1 slot=0 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=481 ability=172
+SIMON_INPUT reserves=1 slot=1 lv=18 HP=61 Atk=62 Def=35 SpA=23 SpD=30 Speed=35 item=494 ability=192
+SIMON_INPUT reserves=1 slot=2 lv=18 HP=59 Atk=20 Def=45 SpA=33 SpD=37 Speed=15 item=494 ability=27
+SIMON_INPUT reserves=1 slot=3 lv=18 HP=71 Atk=21 Def=24 SpA=46 SpD=30 Speed=34 item=503 ability=11
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI decision turn=2 actor=1 move=Dazzling Gleam target=0
+AI decision turn=2 actor=3 move=Thunderbolt target=0
+SIMON_AFTER board=1 turns=1 pair=1 species=755/170 HP=59/44 foes=4/72 moves=Protect/Thunderbolt speed=15/34 foeSpeed=28/49 SpA=6/6 Def=6/6 foeAtk=6/6 foeStatus=64/0 firstPP=15/10 faints=0/0
+SIMON_INPUT reserves=1 slot=0 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=481 ability=172
+SIMON_INPUT reserves=1 slot=1 lv=18 HP=61 Atk=62 Def=35 SpA=23 SpD=30 Speed=35 item=494 ability=192
+SIMON_INPUT reserves=1 slot=2 lv=18 HP=59 Atk=20 Def=45 SpA=33 SpD=37 Speed=15 item=494 ability=27
+SIMON_INPUT reserves=1 slot=3 lv=18 HP=71 Atk=21 Def=24 SpA=46 SpD=30 Speed=34 item=503 ability=11
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI decision turn=2 actor=0 move=Psychic target=3
+AI decision turn=2 actor=1 move=Dazzling Gleam target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=3 move=Thunderbolt target=0
+AI decision turn=3 actor=1 move=Spore target=2
+AI decision turn=3 actor=3 move=Muddy Water target=2
+SIMON_AFTER board=1 turns=2 pair=1 species=755/170 HP=53/44 foes=0/57 moves=Dazzling Gleam/Thunderbolt speed=15/34 foeSpeed=0/49 SpA=6/6 Def=6/6 foeAtk=6/6 foeStatus=0/0 firstPP=15/10 faints=0/1
+SIMON_INPUT reserves=1 slot=0 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=481 ability=172
+SIMON_INPUT reserves=1 slot=1 lv=18 HP=61 Atk=62 Def=35 SpA=23 SpD=30 Speed=35 item=494 ability=192
+SIMON_INPUT reserves=1 slot=2 lv=18 HP=59 Atk=20 Def=45 SpA=33 SpD=37 Speed=15 item=494 ability=27
+SIMON_INPUT reserves=1 slot=3 lv=18 HP=71 Atk=21 Def=24 SpA=46 SpD=30 Speed=34 item=503 ability=11
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI decision turn=2 actor=0 move=Psychic target=3
+AI decision turn=2 actor=1 move=Dazzling Gleam target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=3 move=Thunderbolt target=0
+AI decision turn=3 actor=2 move=Thunderbolt target=1
+AI decision turn=3 actor=1 move=Spore target=2
+AI decision turn=3 actor=3 move=Muddy Water target=2
+AI decision turn=4 actor=1 move=Dazzling Gleam target=2
+AI decision turn=4 actor=3 move=Muddy Water target=2
+SIMON_AFTER board=1 turns=3 pair=1 species=755/170 HP=47/44 foes=0/54 moves=Spore/Muddy Water speed=15/34 foeSpeed=0/49 SpA=6/6 Def=6/6 foeAtk=6/6 foeStatus=0/3 firstPP=14/9 faints=0/1
+
+- Tests [32mPASSED[0m:          4
+- Tests [34mTOTAL[0m:           4
+

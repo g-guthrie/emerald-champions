@@ -83,15 +83,15 @@ SlateportCity_PokemonFanClub_EventScript_FurfrouExit::
 	end
 
 SlateportCity_PokemonFanClub_Text_FurfrouOffer:
-	.string "I style every FURFROU trim used by\n"
-	.string "competitive TRAINERS. Want a new cut?$"
+	.string "A fine FURFROU deserves a fine\n"
+	.string "trim! Would yours like a new cut?$"
 
 SlateportCity_PokemonFanClub_Text_FurfrouChoose:
 	.string "Choose the FURFROU you want styled.$"
 
 SlateportCity_PokemonFanClub_Text_FurfrouComplete:
-	.string "All done! {STR_VAR_1} has a clean\n"
-	.string "new competitive look.$"
+	.string "All done! {STR_VAR_1} has a lovely\n"
+	.string "new look.$"
 
 SlateportCity_PokemonFanClub_Text_FurfrouInvalid:
 	.string "I can only style FURFROU, including\n"
@@ -448,11 +448,10 @@ SlateportCity_PokemonFanClub_Text_ExplainYellowScarf:
 	.string "toughness so much more!$"
 
 SlateportCity_PokemonFanClub_Text_NothingElseToGiveYou:
-	.string "I'm sorry, but I've nothing else to\n"
-	.string "give you! None at all!\p"
-	.string "After all, you're blessed with the gift\n"
-	.string "of raising POKéMON without resorting\l"
-	.string "to any items!$"
+	.string "You've earned every scarf I have!\p"
+	.string "Do keep visiting with your\n"
+	.string "POKéMON. Seeing them flourish is a\l"
+	.string "joy!$"
 
 SlateportCity_PokemonFanClub_Text_ShowMePokemonThatLoveYou:
 	.string "I love seeing POKéMON that love\n"

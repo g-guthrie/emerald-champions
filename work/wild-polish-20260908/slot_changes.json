@@ -1,0 +1,79 @@
+[
+  {
+    "map": "MAP_ROUTE123",
+    "method": "land_mons",
+    "slot": 0,
+    "before": "SPECIES_APPLIN",
+    "after": "SPECIES_HYDRAPPLE"
+  },
+  {
+    "map": "MAP_ROUTE123",
+    "method": "land_mons",
+    "slot": 1,
+    "before": "SPECIES_SMOLIV",
+    "after": "SPECIES_ARBOLIVA"
+  },
+  {
+    "map": "MAP_ROUTE123",
+    "method": "land_mons",
+    "slot": 3,
+    "before": "SPECIES_KRICKETOT",
+    "after": "SPECIES_ORANGURU"
+  },
+  {
+    "map": "MAP_ROUTE123",
+    "method": "land_mons",
+    "slot": 4,
+    "before": "SPECIES_KARRABLAST",
+    "after": "SPECIES_ESCAVALIER"
+  },
+  {
+    "map": "MAP_ROUTE123",
+    "method": "land_mons",
+    "slot": 5,
+    "before": "SPECIES_SHELMET",
+    "after": "SPECIES_ACCELGOR"
+  },
+  {
+    "map": "MAP_ROUTE123",
+    "method": "land_mons",
+    "slot": 6,
+    "before": "SPECIES_ORANGURU",
+    "after": "SPECIES_FLAMIGO"
+  },
+  {
+    "map": "MAP_ROUTE123",
+    "method": "land_mons",
+    "slot": 7,
+    "before": "SPECIES_FLAMIGO",
+    "after": "SPECIES_BELLOSSOM"
+  },
+  {
+    "map": "MAP_ROUTE123",
+    "method": "land_mons",
+    "slot": 8,
+    "before": "SPECIES_ODDISH",
+    "after": "SPECIES_GREEDENT"
+  },
+  {
+    "map": "MAP_ROUTE123",
+    "method": "land_mons",
+    "slot": 9,
+    "before": "SPECIES_TAROUNTULA",
+    "after": "SPECIES_KRICKETUNE"
+  },
+  {
+    "map": "MAP_ROUTE123",
+    "method": "land_mons",
+    "slot": 10,
+    "before": "SPECIES_SKWOVET",
+    "after": "SPECIES_SPIDOPS"
+  },
+  {
+    "map": "MAP_PETALBURG_WOODS",
+    "method": "rock_smash_mons",
+    "slot": 1,
+    "before": "SPECIES_DWEBBLE",
+    "after": "SPECIES_CRUSTLE"
+  }
+]

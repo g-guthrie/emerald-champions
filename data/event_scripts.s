@@ -41,6 +41,7 @@
 #include "constants/items.h"
 #include "constants/heal_locations.h"
 #include "constants/layouts.h"
+#include "constants/legendary_signs.h"
 #include "constants/lilycove_lady.h"
 #include "constants/map_scripts.h"
 #include "constants/emerald_champions.h"
@@ -1180,8 +1181,19 @@ Common_EventScript_ShowPokemonCenterSign::
 	end
 
 Common_EventScript_ShowRouteSpecies::
+	lockall
 	special BufferCurrentMapRouteSignSpecies
-	msgbox gStringVar4, MSGBOX_SIGN
+	msgbox gStringVar4, MSGBOX_DEFAULT
+	setvar VAR_0x8004, 0
+
+Common_EventScript_ShowRouteRequirements::
+	special BufferNextLocalLegendaryRequirement
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_RouteSpeciesEnd
+	msgbox gStringVar4, MSGBOX_DEFAULT
+	goto Common_EventScript_ShowRouteRequirements
+
+Common_EventScript_RouteSpeciesEnd::
+	releaseall
 	end
 
 Common_ShowEasyChatScreen::
@@ -1554,62 +1566,6 @@ Common_EventScript_LegendaryRestingAtShrine::
 gText_LegendaryFlewAway::
 	.string "The {STR_VAR_1} has retreated.\n"
 	.string "Leave this area and return to try again.$"
-
-Common_EventScript_LegendaryGuide::
-	special BuildLegendarySignResearchMenu
-	msgbox gText_LegendaryGuideChoose, MSGBOX_DEFAULT
-	dynmultistack 0, 1, FALSE, 6, TRUE, 0, DYN_MULTICHOICE_CB_NONE
-	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, Common_EventScript_LegendaryGuideExit
-	copyvar VAR_0x8004, VAR_RESULT
-	special ResearchSelectedLegendarySign
-	msgbox gStringVar4, MSGBOX_DEFAULT
-	goto Common_EventScript_LegendaryGuide
-
-Common_EventScript_LegendaryGuideExit::
-	releaseall
-	end
-
-gText_LegendaryGuideChoose::
-	.string "Choose a legendary lead to review.\n"
-	.string "Future and caught leads stay listed.$"
-
-Common_EventScript_LegendaryLandmark::
-	lockall
-	msgbox gText_LegendaryLandmark, MSGBOX_DEFAULT
-Common_EventScript_LegendaryLandmarkMenu::
-	special BuildLocalLegendarySignMenu
-	dynmultistack 0, 1, FALSE, 5, TRUE, 0, DYN_MULTICHOICE_CB_NONE
-	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, Common_EventScript_LegendaryGuideExit
-	goto_if_eq VAR_RESULT, 65534, Common_EventScript_LegendaryGuide
-	copyvar VAR_0x8004, VAR_RESULT
-	special ResearchSelectedLegendarySign
-	copyvar VAR_0x8008, VAR_RESULT
-	msgbox gStringVar4, MSGBOX_DEFAULT
-	goto_if_ne VAR_0x8008, 2, Common_EventScript_LegendaryLandmarkMenu
-	msgbox gText_LegendaryLandmarkCall, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, Common_EventScript_LegendaryLandmarkMenu
-	special CreateSelectedLegendarySignEncounter
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_LegendaryLandmarkMenu
-	special BattleSetup_StartLegendaryBattle
-	special FinishLegendaryLandmarkEncounter
-	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_LegendaryRestingAtShrine
-	msgbox gText_LegendaryLandmarkCaught, MSGBOX_DEFAULT
-	releaseall
-	end
-
-gText_LegendaryLandmark::
-	.string "Faint markings shimmer on this stone.\n"
-	.string "Which Sign will you follow?$"
-
-gText_LegendaryLandmarkCall::
-	.string "Call to this Pokémon?\p"
-	.string "If it escapes or faints, you can\n"
-	.string "leave the area and try again.$"
-
-gText_LegendaryLandmarkCaught::
-	.string "The markings settle into a soft glow.\n"
-	.string "Your discovery has been recorded.$"
 
 gText_WantWhichFloor::
 	.string "Which floor do you want?$"

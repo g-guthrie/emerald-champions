@@ -94,7 +94,7 @@ MossdeepCity_SpaceCenter_2F_Movement_Grunt7Defeated:
 MossdeepCity_SpaceCenter_2F_EventScript_Scientist::
 	lock
 	faceplayer
-	goto_if_set FLAG_SYS_GAME_CLEAR, MossdeepCity_SpaceCenter_2F_EventScript_ScientistNormal
+	goto_if_ge VAR_MOSSDEEP_CITY_STATE, 3, MossdeepCity_SpaceCenter_2F_EventScript_ScientistNormal
 	goto_if_eq VAR_MOSSDEEP_CITY_STATE, 2, MossdeepCity_SpaceCenter_2F_EventScript_ScientistMagma
 	goto_if_lt VAR_MOSSDEEP_CITY_STATE, 2, MossdeepCity_SpaceCenter_2F_EventScript_ScientistNormal
 	goto MossdeepCity_SpaceCenter_2F_EventScript_ScientistMagma
@@ -113,7 +113,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_ScientistMagma::
 MossdeepCity_SpaceCenter_2F_EventScript_Gentleman::
 	lock
 	faceplayer
-	goto_if_set FLAG_SYS_GAME_CLEAR, MossdeepCity_SpaceCenter_2F_EventScript_GentlemanNormal
+	goto_if_ge VAR_MOSSDEEP_CITY_STATE, 3, MossdeepCity_SpaceCenter_2F_EventScript_GentlemanNormal
 	goto_if_eq VAR_MOSSDEEP_CITY_STATE, 2, MossdeepCity_SpaceCenter_2F_EventScript_GentlemanMagma
 	goto_if_lt VAR_MOSSDEEP_CITY_STATE, 2, MossdeepCity_SpaceCenter_2F_EventScript_GentlemanNormal
 	goto MossdeepCity_SpaceCenter_2F_EventScript_GentlemanMagma
@@ -132,7 +132,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_GentlemanMagma::
 MossdeepCity_SpaceCenter_2F_EventScript_RichBoy::
 	lock
 	faceplayer
-	goto_if_set FLAG_SYS_GAME_CLEAR, MossdeepCity_SpaceCenter_2F_EventScript_RichBoyNormal
+	goto_if_ge VAR_MOSSDEEP_CITY_STATE, 3, MossdeepCity_SpaceCenter_2F_EventScript_RichBoyNormal
 	goto_if_eq VAR_MOSSDEEP_CITY_STATE, 2, MossdeepCity_SpaceCenter_2F_EventScript_RichBoyMagma
 	goto_if_lt VAR_MOSSDEEP_CITY_STATE, 2, MossdeepCity_SpaceCenter_2F_EventScript_RichBoyNormal
 	goto MossdeepCity_SpaceCenter_2F_EventScript_RichBoyMagma
@@ -376,71 +376,77 @@ MossdeepCity_SpaceCenter_2F_Text_DoesMagmaWantToGoToSpace:
 	.string "Do they want to go to space, too?$"
 
 MossdeepCity_SpaceCenter_2F_Text_YoureOutnumberedTakeUsOn:
-	.string "Three consecutive formations guard this\n"
-	.string "corridor. You still choose to advance?$"
+	.string "You'll have to battle all three\n"
+	.string "of us, one after another!\p"
+	.string "Still want to come through?$"
 
 MossdeepCity_SpaceCenter_2F_Text_GoodAnswer:
-	.string "A sound decision. Recover your team\n"
-	.string "before challenging the full sequence.$"
+	.string "That's right. Go downstairs while\n"
+	.string "you can!$"
 
 MossdeepCity_SpaceCenter_2F_Text_Grunt5Intro:
-	.string "First formation: establish pressure\n"
-	.string "before you can read the sequence.$"
+	.string "I'm first! You're not getting\n"
+	.string "past this corridor!$"
 
 MossdeepCity_SpaceCenter_2F_Text_Grunt5Defeat:
-	.string "First line broken. The sequence holds.$"
+	.string "What?! It's your turn. Stop that\n"
+	.string "kid!$"
 
 MossdeepCity_SpaceCenter_2F_Text_Grunt6Intro:
-	.string "Second formation: punish the answer you\n"
-	.string "revealed in the first.$"
+	.string "You beat one of us. Let's see you\n"
+	.string "beat two!$"
 
 MossdeepCity_SpaceCenter_2F_Text_Grunt6Defeat:
-	.string "You changed plans between battles…$"
+	.string "Oh, no… It's all up to you now!$"
 
 MossdeepCity_SpaceCenter_2F_Text_Grunt7Intro:
-	.string "Final formation: exploit the damage the\n"
-	.string "first two left behind. No reset.$"
+	.string "I'm the last one! MAXIE's\n"
+	.string "counting on me!$"
 
 MossdeepCity_SpaceCenter_2F_Text_Grunt7Defeat:
-	.string "Your team endured the whole sequence…$"
+	.string "All three of us… defeated!$"
 
 MossdeepCity_SpaceCenter_2F_Text_Grunt6PostBattle:
-	.string "Three battles should expose every\n"
-	.string "answer. You kept finding new ones.$"
+	.string "Three of us guarding one\n"
+	.string "corridor. I thought this would be\l"
+	.string "an easy job.$"
 
 MossdeepCity_SpaceCenter_2F_Text_Grunt7PostBattle:
-	.string "Attrition favored us. Adaptation favored\n"
-	.string "you.$"
+	.string "I can't believe you beat us all.\n"
+	.string "What do I tell MAXIE?$"
 
 MossdeepCity_SpaceCenter_2F_Text_Grunt5PostBattle:
-	.string "MAXIE's model did not account for a team\n"
-	.string "that improves while being worn down.$"
+	.string "We were supposed to keep everyone\n"
+	.string "downstairs until MAXIE had the\l"
+	.string "fuel.$"
 
 MossdeepCity_SpaceCenter_2F_Text_WellTakeCareOfYou:
-	.string "You broke the corridor and reached the\n"
-	.string "launch floor. That ends here.\p"
-	.string "Our final formation protects MAXIE and\n"
-	.string "the fuel at the same time.$"
+	.string "The others couldn't stop you?\n"
+	.string "Then we will!\p"
+	.string "MAXIE isn't leaving without that\n"
+	.string "fuel.$"
 
 MossdeepCity_SpaceCenter_2F_Text_MaxieDontInterfere:
-	.string "MAXIE: The calculation has reached its\n"
-	.string "final input. Do not interfere.$"
+	.string "MAXIE: You again? STEVEN is\n"
+	.string "already wasting my time. Stand\l"
+	.string "aside!$"
 
 MossdeepCity_SpaceCenter_2F_Text_StevenWhyStealRocketFuel:
 	.string "STEVEN: Rocket fuel cannot control\n"
 	.string "GROUDON. What are you truly targeting?$"
 
 MossdeepCity_SpaceCenter_2F_Text_MaxieUseFuelToEruptVolcano:
-	.string "MAXIE: The rocket can strike MT. CHIMNEY\n"
-	.string "with a measured charge from above.\p"
-	.string "If GROUDON will not obey, I will sever\n"
-	.string "the fault network before AQUA uses it.\p"
-	.string "The calculation is brutal, not savage.$"
+	.string "MAXIE: The rocket fuel will blast\n"
+	.string "open MT. CHIMNEY. New land will\l"
+	.string "rise across HOENN.\p"
+	.string "GROUDON would not obey. I will\n"
+	.string "finish what it began myself.$"
 
 MossdeepCity_SpaceCenter_2F_Text_StevenAreYouReadyToBattle:
-	.string "STEVEN: {PLAYER}! We fight together.\n"
-	.string "Their formation is built for two targets.\p"
-	.string "Are you ready to break it as partners?$"
+	.string "STEVEN: {PLAYER}! Help me stop\n"
+	.string "them.\p"
+	.string "Are you ready to battle alongside\n"
+	.string "me?$"
 
 MossdeepCity_SpaceCenter_2F_Text_StevenHurryGetReadyQuickly:
 	.string "STEVEN: Then, hurry!\n"
@@ -451,45 +457,52 @@ MossdeepCity_SpaceCenter_2F_Text_JustWantToExpandLand:
 	.string "I just want to expand the land mass…$"
 
 MossdeepCity_SpaceCenter_Text_TabithaDefeat:
-	.string "The launch angle collapsed…$"
+	.string "I couldn't keep you away…$"
 
 MossdeepCity_SpaceCenter_2F_Text_TabithaIntro:
-	.string "TABITHA: The rocket needs a stable base.\p"
-	.string "My sand formation will pin both of your\n"
-	.string "POKéMON before you reach MAXIE.$"
+	.string "TABITHA: MAXIE needs that rocket\n"
+	.string "fuel. My orders are to keep\l"
+	.string "everyone else away!$"
 
 MossdeepCity_SpaceCenter_2F_Text_TabithaAfter:
-	.string "You broke the foundation, but the real\n"
-	.string "launch sequence is still ahead.$"
+	.string "TABITHA: You beat me, but MAXIE\n"
+	.string "won't leave empty-handed. STEVEN\l"
+	.string "is still trying to stop him.$"
 
 MossdeepCity_SpaceCenter_2F_Text_TabithaNotEnoughMons:
 	.string "A formation requires two usable\n"
 	.string "POKéMON. Return when both can battle.$"
 
 MossdeepCity_SpaceCenter_Text_CourtneyDefeat:
-	.string "Joint model... broken by partnership.$"
+	.string "COURTNEY: Defeated… Both of us.$"
 
 MossdeepCity_SpaceCenter_2F_Text_CourtneyFormation:
-	.string "COURTNEY: MAXIE supplies force. I supply\n"
-	.string "the alternate clock. STEVEN is accounted\l"
-	.string "for. You remain the unstable variable.$"
+	.string "COURTNEY: STEVEN… and you.\p"
+	.string "MAXIE, I'll cover you. We still\n"
+	.string "need that fuel.$"
 
 MossdeepCity_SpaceCenter_2F_Text_MaxieWeFailedIsAquaAlsoMisguided:
-	.string "MAXIE: Again, your partnership adapted\n"
-	.string "while my certainty narrowed.\p"
-	.string "We failed to control GROUDON, and now we\n"
-	.string "would destroy what refused control.\p"
-	.string "If MAGMA's premise is wrong, then AQUA's\n"
-	.string "opposite certainty must be wrong as well.$"
+	.string "MAXIE: We couldn't control\n"
+	.string "GROUDON. So I came here to take\l"
+	.string "fuel and force an eruption\l"
+	.string "anyway.\p"
+	.string "I nearly destroyed the very land\n"
+	.string "I claimed to protect.\p"
+	.string "If I was this wrong… ARCHIE may\n"
+	.string "be making the same mistake at\l"
+	.string "sea.$"
 
 MossdeepCity_SpaceCenter_2F_Text_MaxieWeWillGiveUp:
-	.string "MAXIE: Keep the fuel. I must find GROUDON\n"
-	.string "before ARCHIE repeats the same mistake.$"
+	.string "MAXIE: Keep the fuel. We're\n"
+	.string "leaving.\p"
+	.string "I must find GROUDON, and stop\n"
+	.string "ARCHIE before he awakens KYOGRE.$"
 
 MossdeepCity_SpaceCenter_2F_Text_StevenThankYouComeSeeMeAtHome:
-	.string "STEVEN: That was true doubles play: each\n"
-	.string "of us made the other's options better.\p"
+	.string "STEVEN: Thank you, {PLAYER}.\n"
+	.string "Together, we kept the staff and\l"
+	.string "their research safe.\p"
 	.string "Come to my home west of the GYM.\n"
-	.string "I have the HM DIVE for you.\p"
-	.string "We can use it to follow AQUA's\n"
+	.string "I have DIVE for you.\p"
+	.string "You'll need it to follow AQUA's\n"
 	.string "stolen submarine.$"

@@ -140,7 +140,8 @@ void GetPokeblockFeederInFront(void)
 
     for (i = 0; i < NUM_POKEBLOCK_FEEDERS; i++)
     {
-        if (gSaveBlock1Ptr->location.mapNum == sPokeblockFeeders[i].mapNum
+        if (sPokeblockFeeders[i].stepCounter != 0
+         && gSaveBlock1Ptr->location.mapNum == sPokeblockFeeders[i].mapNum
          && sPokeblockFeeders[i].x == x
          && sPokeblockFeeders[i].y == y)
         {
@@ -162,16 +163,17 @@ void GetPokeblockFeederWithinRange(void)
 
     for (i = 0; i < NUM_POKEBLOCK_FEEDERS; i++)
     {
-        if (gSaveBlock1Ptr->location.mapNum == sPokeblockFeeders[i].mapNum)
+        if (sPokeblockFeeders[i].stepCounter != 0
+         && gSaveBlock1Ptr->location.mapNum == sPokeblockFeeders[i].mapNum)
         {
-            // Get absolute value of x and y distance from Pokeblock feeder on current map.
-            x -= sPokeblockFeeders[i].x;
-            y -= sPokeblockFeeders[i].y;
-            if (x < 0)
-                x *= -1;
-            if (y < 0)
-                y *= -1;
-            if ((x + y) <= 5)
+            // Each feeder is measured from the original player position.
+            s16 dx = x - sPokeblockFeeders[i].x;
+            s16 dy = y - sPokeblockFeeders[i].y;
+            if (dx < 0)
+                dx *= -1;
+            if (dy < 0)
+                dy *= -1;
+            if ((dx + dy) <= 5)
             {
                 gSpecialVar_Result = i;
                 return;

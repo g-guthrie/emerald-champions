@@ -265,8 +265,9 @@ JaggedPass_Text_DianaPostBattle:
 	.string "bicycles up this horribly bumpy pass.$"
 
 JaggedPass_Text_DianaRegister:
-	.string "Will you ever be back in this area?\n"
-	.string "If you return, share what you've learned.$"
+	.string "Will you ever be back in this\n"
+	.string "area? If you return, share what\l"
+	.string "you've learned.$"
 
 JaggedPass_Text_DianaRematchIntro:
 	.string "Picnics are fun wherever you go.\n"

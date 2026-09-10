@@ -903,66 +903,10 @@ bool32 ComputePlayerShinyOdds(u32 personality, u32 value)
 
 void SetBoxMonIVs(struct BoxPokemon *mon, u8 fixedIV)
 {
-    u32 i, value;
-
-    if (fixedIV < USE_RANDOM_IVS)
-    {
-        for (i = 0; i < NUM_STATS; i++)
-            SetBoxMonData(mon, MON_DATA_HP_IV + i, &fixedIV);
-        return;
-    }
-
-    u32 iv;
-    u32 ivRandom = Random32();
-    enum Species species = GetBoxMonData(mon, MON_DATA_SPECIES);
-    value = (u16)ivRandom;
-
-    iv = value & MAX_IV_MASK;
-    SetBoxMonData(mon, MON_DATA_HP_IV, &iv);
-    iv = (value & (MAX_IV_MASK << 5)) >> 5;
-    SetBoxMonData(mon, MON_DATA_ATK_IV, &iv);
-    iv = (value & (MAX_IV_MASK << 10)) >> 10;
-    SetBoxMonData(mon, MON_DATA_DEF_IV, &iv);
-
-    value = (u16)(ivRandom >> 16);
-
-    iv = value & MAX_IV_MASK;
-    SetBoxMonData(mon, MON_DATA_SPEED_IV, &iv);
-    iv = (value & (MAX_IV_MASK << 5)) >> 5;
-    SetBoxMonData(mon, MON_DATA_SPATK_IV, &iv);
-    iv = (value & (MAX_IV_MASK << 10)) >> 10;
-    SetBoxMonData(mon, MON_DATA_SPDEF_IV, &iv);
-
-    SetBoxMonPerfectIVs(mon, gSpeciesInfo[species].perfectIVCount);
-}
-
-void SetBoxMonPerfectIVs(struct BoxPokemon *mon, u32 numPerfect)
-{
-    if (!numPerfect)
-        return;
-
-    u32 i, iv = MAX_PER_STAT_IVS;
-    if (numPerfect >= NUM_STATS)
-    {
-        for (i = 0; i < NUM_STATS; i++)
-            SetBoxMonData(mon, MON_DATA_HP_IV + i, &iv);
-        return;
-    }
-
-    enum Stat availableIVs[NUM_STATS];
-    enum Stat selectedIvs[NUM_STATS];
-    // Initialize a list of IV indices.
-    for (i = 0; i < NUM_STATS; i++)
-        availableIVs[i] = i;
-
-    // Select the IVs that will be perfected.
-    for (i = 0; i < numPerfect; i++)
-    {
-        u8 index = Random() % (NUM_STATS - i);
-        selectedIvs[i] = availableIVs[index];
-        RemoveIVIndexFromList(availableIVs, index);
-        SetBoxMonData(mon, MON_DATA_HP_IV + selectedIvs[i], &iv);
-    }
+    // The retained constructor API accepts legacy IV requests, but every
+    // Pokemon has perfect IVs. Do not roll or graduate individual values.
+    const u32 ivs = 0x3FFFFFFF;
+    SetBoxMonData(mon, MON_DATA_IVS, &ivs);
 }
 
 void CreateBoxMon(struct BoxPokemon *boxMon, enum Species species, u8 level, u32 personality, struct OriginalTrainerId trainerId)
@@ -1018,6 +962,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, enum Species species, u8 level, u32
     //using gen 3-4 ability formula, it was changed in later gens
     if (GetSpeciesAbility(species, 1))
         SetBoxMonData(boxMon, MON_DATA_ABILITY_NUM, &value);
+    SetBoxMonIVs(boxMon, MAX_PER_STAT_IVS);
 }
 
 static bool32 IsValidGender(u32 gender)
@@ -1371,6 +1316,20 @@ static u16 CalculateBoxMonChecksumReencrypt(struct BoxPokemon *boxMon)
     return checksum;
 }
 
+// Single owner of the game's Gen 9 stat formula, including fixed IVs and
+// Shedinja. Party recalculation and facility previews use this same function.
+u32 CalculateSpeciesStat(enum Species species, u32 nature, enum Stat stat, u32 level, u32 evs)
+{
+    u32 value;
+
+    if (stat == STAT_HP && HasShedinjaHPHandling(species))
+        return 1;
+    value = ((2 * GetSpeciesBaseStat(species, stat) + MAX_PER_STAT_IVS + evs / 4) * level) / 100;
+    if (stat == STAT_HP)
+        return value + level + 10;
+    return ModifyStatByNature(nature, value + 5, stat);
+}
+
 void CalculateMonStats(struct Pokemon *mon)
 {
     CalculateMonStatsCont(mon, TRUE);
@@ -1396,12 +1355,10 @@ void CalculateMonStatsCont(struct Pokemon *mon, bool32 updateSpeedStat)
     SetMonData(mon, MON_DATA_LEVEL, &level);
 
     bool32 hyperTrained[NUM_STATS]; //In a battle test, hyper training flag indicates a fixed stat
-    s32 iv[NUM_STATS];
     s32 ev[NUM_STATS];
     for (u32 i = 0; i < NUM_STATS; i++)
     {
         hyperTrained[i] = GetMonData(mon, MON_DATA_HYPER_TRAINED_HP + i);
-        iv[i] = GetMonData(mon, MON_DATA_HP_IV + i);
         ev[i] = GetMonData(mon, MON_DATA_HP_EV + i);
 
         if (hyperTrained[i])
@@ -1410,27 +1367,12 @@ void CalculateMonStatsCont(struct Pokemon *mon, bool32 updateSpeedStat)
             if (gMain.inBattle)
                 continue;
         #endif
-            iv[i] = MAX_PER_STAT_IVS;
         }
 
         if (i == STAT_HP)
             continue;
 
-        u8 baseStat = GetSpeciesBaseStat(species, i);
-        s32 n;
-
-        if (P_STAT_CALCULATION >= GEN_CHAMPIONS)
-        {
-            // Stat Points are a fixed bonus at every level, before Nature.
-            iv[i] = MAX_PER_STAT_IVS;
-            n = ((2 * baseStat + iv[i]) * level) / 100 + 5 + ev[i];
-        }
-        else
-        {
-            n = ((2 * baseStat + iv[i] + ev[i] / 4) * level) / 100 + 5;
-        }
-
-        n = ModifyStatByNature(nature, n, i);
+        s32 n = CalculateSpeciesStat(species, nature, i, level, ev[i]);
         if (B_FRIENDSHIP_BOOST == TRUE)
             n = n + ((n * 10 * friendship) / (MAX_FRIENDSHIP * 100));
         SetMonData(mon, MON_DATA_MAX_HP + i, &n);
@@ -1441,22 +1383,7 @@ void CalculateMonStatsCont(struct Pokemon *mon, bool32 updateSpeedStat)
         return;
 #endif
 
-    if (HasShedinjaHPHandling(species))
-    {
-        newMaxHP = 1;
-    }
-    else
-    {
-        if (P_STAT_CALCULATION >= GEN_CHAMPIONS)
-        {
-            iv[STAT_HP] = MAX_PER_STAT_IVS;
-            newMaxHP = ((2 * GetSpeciesBaseHP(species) + iv[STAT_HP]) * level) / 100 + level + 10 + ev[STAT_HP];
-        }
-        else
-        {
-            newMaxHP = ((2 * GetSpeciesBaseHP(species) + iv[STAT_HP] + ev[STAT_HP] / 4) * level) / 100 + level + 10;
-        }
-    }
+    newMaxHP = CalculateSpeciesStat(species, nature, STAT_HP, level, ev[STAT_HP]);
 
     gBattleScripting.levelUpHP = newMaxHP - oldMaxHP;
     if (gBattleScripting.levelUpHP == 0)
@@ -2589,6 +2516,15 @@ void SetMonData(struct Pokemon *mon, s32 field, const void *dataArg)
 void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
 {
     const u8 *data = dataArg;
+    // IVs are universal, including gifts, eggs, imported teams and packed writes.
+    // Keeping the stored value perfect also makes non-stat IV consumers agree.
+    const u32 perfectIvs = 0x3FFFFFFF;
+    const u8 perfectIv = MAX_PER_STAT_IVS;
+
+    if (field >= MON_DATA_HP_IV && field <= MON_DATA_SPDEF_IV)
+        data = &perfectIv;
+    else if (field == MON_DATA_IVS)
+        data = (const u8 *)&perfectIvs;
 
     if (field > MON_DATA_ENCRYPT_SEPARATOR)
     {
@@ -6209,27 +6145,6 @@ u16 MonTryLearningNewMoveEvolution(struct Pokemon *mon, bool8 firstMove)
     return 0;
 }
 
-// Removes the selected index from the given IV list and shifts the remaining
-// elements to the left.
-void RemoveIVIndexFromList(u8 *ivs, u8 selectedIv)
-{
-    s32 i, j;
-    u8 temp[NUM_STATS];
-
-    ivs[selectedIv] = 0xFF;
-    for (i = 0; i < NUM_STATS; i++)
-    {
-        temp[i] = ivs[i];
-    }
-
-    j = 0;
-    for (i = 0; i < NUM_STATS; i++)
-    {
-        if (temp[i] != 0xFF)
-            ivs[j++] = temp[i];
-    }
-}
-
 void TrySpecialOverworldEvo(void)
 {
     u8 i;
@@ -6777,48 +6692,6 @@ static enum PokeBall ResolveBall(u32 ballTemplate)
     return BALL_STRANGE;
 }
 
-static void ResolveIVs(enum Species species, const u16 *ivsTemplate, u8 *ivs)
-{
-    u32 i;
-    u32 nonFixedIvCount = 0;
-    enum Stat availableIVs[NUM_STATS];
-    enum Stat selectedIvs[NUM_STATS];
-    for (i = 0; i < NUM_STATS; i++)
-    {
-        if (ivsTemplate[i] < USE_RANDOM_IVS)
-        {
-            ivs[i] = ivsTemplate[i];
-        }
-        else if (ivsTemplate[i] == USE_RANDOM_IVS)
-        {
-            availableIVs[nonFixedIvCount] = i;
-            ivs[i] = Random() % (MAX_PER_STAT_IVS + 1);
-            nonFixedIvCount++;
-        }
-        else
-        {
-            errorf("invalid iv value of %d above maximum of %d", ivs[i], MAX_PER_STAT_IVS);
-            ivs[i] = MAX_PER_STAT_IVS;
-        }
-    }
-
-    // Perfect IV calculation
-    if (gSpeciesInfo[species].perfectIVCount != 0)
-    {
-        // Select the IVs that will be perfected.
-        for (i = 0; i < nonFixedIvCount && i < gSpeciesInfo[species].perfectIVCount; i++)
-        {
-            u8 index = Random() % (nonFixedIvCount - i);
-            selectedIvs[i] = availableIVs[index];
-            RemoveIVIndexFromList(availableIVs, index);
-        }
-        for (i = 0; i < nonFixedIvCount && i < gSpeciesInfo[species].perfectIVCount; i++)
-        {
-            ivs[selectedIvs[i]] = MAX_PER_STAT_IVS;
-        }
-    }
-}
-
 void ResolveEVs(const u16 *evsTemplate, u8 *evs, bool32 ignoreTotalEvCheck)
 {
     u32 evTotal = 0;
@@ -6973,13 +6846,10 @@ void CreateMonFromTemplate(struct Pokemon *mon, const struct PokemonTemplate *mo
         SetMonData(mon, MON_DATA_ABILITY_NUM, &abilityNum);
     }
 
-    u8 ivs[NUM_STATS];
     u8 evs[NUM_STATS];
-    ResolveIVs(species, monTemplate->ivs, ivs);
     ResolveEVs(monTemplate->evs, evs, monTemplate->ignoreTotalEvCheck);
     for (u32 i = 0; i < NUM_STATS; i++)
     {
-        SetMonData(mon, MON_DATA_HP_IV + i, &ivs[i]);
         SetMonData(mon, MON_DATA_HP_EV + i, &evs[i]);
     }
 

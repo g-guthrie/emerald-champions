@@ -122,7 +122,8 @@ RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery::
 	goto_if_eq VAR_RESULT, 2, RustboroCity_DevonCorp_2F_EventScript_ArceusRewardPC
 	goto_if_eq VAR_RESULT, 3, RustboroCity_DevonCorp_2F_EventScript_ArceusRewardNoRoom
 	goto_if_eq VAR_RESULT, 4, RustboroCity_DevonCorp_2F_EventScript_ArceusRewardComplete
-	goto Common_EventScript_LegendaryGuide
+	releaseall
+	end
 
 RustboroCity_DevonCorp_2F_EventScript_TryMagearnaPrototype::
 	setvar VAR_0x8004, EC_SIGN_MAGEARNA_ID
@@ -170,22 +171,34 @@ RustboroCity_DevonCorp_2F_EventScript_ArceusRewardPC::
 
 RustboroCity_DevonCorp_2F_EventScript_ArceusRewardNoRoom::
 	msgbox RustboroCity_DevonCorp_2F_Text_ArceusRewardNoRoom, MSGBOX_DEFAULT
-	goto Common_EventScript_LegendaryGuide
+	releaseall
+	end
 
 RustboroCity_DevonCorp_2F_EventScript_ArceusRewardComplete::
 	msgbox RustboroCity_DevonCorp_2F_Text_ArceusRewardComplete, MSGBOX_DEFAULT
-	goto Common_EventScript_LegendaryGuide
+	releaseall
+	end
 
 RustboroCity_DevonCorp_2F_Text_LegendarySignResearcherIntro:
-	.string "HOENN is full of LEGENDARY SIGNS.\n"
-	.string "You can follow them at your own pace.\p"
-	.string "Inspect marked stones and strange\n"
-	.string "shrines as you explore. They can\l"
-	.string "answer without a visit to DEVON.\p"
-	.string "If a legendary escapes or faints,\n"
-	.string "leave its area and return to try again.\p"
-	.string "I keep leads for every discovery,\n"
-	.string "including ones you have completed.$"
+	.string "HOENN is full of rare discoveries.\n"
+	.string "You can find them at your own pace.\p"
+	.string "Many legendaries are wild residents\n"
+	.string "with a 3% encounter chance each.\l"
+	.string "Route signs list them and mark\l"
+	.string "each one you catch.\p"
+	.string "SWEET SCENT helps find them.\p"
+	.string "Other wild discoveries need local\n"
+	.string "help, story progress or partners.\l"
+	.string "Those have 1% chances normally.\l"
+	.string "SWEET SCENT gives a shared 25%\l"
+	.string "chance among eligible, uncaught\l"
+	.string "local legends.\p"
+	.string "Read the area signs for the exact\n"
+	.string "requirements. Failed encounters\l"
+	.string "remain available until caught.\p"
+	.string "Others await you at special places\n"
+	.string "or come from rewards. Talk to the\l"
+	.string "people you meet on your travels.$"
 
 RustboroCity_DevonCorp_2F_Text_MagearnaParty:
 	.string "Your discovery completes DEVON's\n"
@@ -195,29 +208,38 @@ RustboroCity_DevonCorp_2F_Text_MagearnaParty:
 RustboroCity_DevonCorp_2F_Text_MagearnaPC:
 	.string "Your discovery completes DEVON's\n"
 	.string "sealed mechanical prototype!\p"
-	.string "MAGEARNA awakens and is sent to your PC.$"
+	.string "MAGEARNA awakens and is sent to\n"
+	.string "your PC.$"
 
 RustboroCity_DevonCorp_2F_Text_MagearnaNoRoom:
 	.string "The sealed prototype answers DIANCIE,\n"
 	.string "but your party and PC have no room.$"
 
 RustboroCity_DevonCorp_2F_Text_ArceusRewardParty:
-	.string "Every Legendary Sign is complete!\p"
-	.string "Their light calls ARCEUS, who has\n"
-	.string "joined your party.$"
+	.string "You restored HOENN's weather and\n"
+	.string "earned all eight badges.\l"
+	.string "Something extraordinary has\l"
+	.string "answered!\p"
+	.string "ARCEUS appears before you and\n"
+	.string "joins your party.$"
 
 RustboroCity_DevonCorp_2F_Text_ArceusRewardPC:
-	.string "Every Legendary Sign is complete!\p"
-	.string "Their light calls ARCEUS, who was\n"
+	.string "You restored HOENN's weather and\n"
+	.string "earned all eight badges.\l"
+	.string "Something extraordinary has\l"
+	.string "answered!\p"
+	.string "ARCEUS appears before you and is\n"
 	.string "sent to your PC.$"
 
 RustboroCity_DevonCorp_2F_Text_ArceusRewardNoRoom:
-	.string "Every Sign is complete, but ARCEUS\n"
-	.string "has nowhere to go. Make PC space.$"
+	.string "ARCEUS has answered your journey,\n"
+	.string "but needs room. Please make space\l"
+	.string "in your PC.$"
 
 RustboroCity_DevonCorp_2F_Text_ArceusRewardComplete:
-	.string "You completed every Legendary Sign.\n"
-	.string "Even ARCEUS answered your call.$"
+	.string "Even ARCEUS has joined your\n"
+	.string "journey. Take your discoveries to\l"
+	.string "the LEAGUE!$"
 
 RustboroCity_DevonCorp_2F_EventScript_FossilScientist::
 	lock
@@ -644,12 +666,11 @@ RustboroCity_DevonCorp_2F_Text_FossilDataLost:
 	.string "I've reset it so we can try again.$"
 
 RustboroCity_DevonCorp_2F_Text_FossilRegeneratorTakesTime:
-	.string "The FOSSIL REGENERATOR, which I made,\n"
-	.string "is incredible.\p"
-	.string "But it has one drawback--it takes\n"
-	.string "a long time to work.\p"
-	.string "So, uh… How about you go for a stroll\n"
-	.string "and look around for a while?$"
+	.string "The regenerator is working.\n"
+	.string "It only needs a short while!\p"
+	.string "Talk to one of my colleagues,\n"
+	.string "or step outside this floor,\l"
+	.string "then come back for your POKéMON.$"
 
 RustboroCity_DevonCorp_2F_Text_FossilizedMonBroughtBackToLife:
 	.string "Thanks for waiting!\p"

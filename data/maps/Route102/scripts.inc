@@ -14,7 +14,9 @@ Route102_EventScript_RouteSignPetalburg::
 	goto Common_EventScript_ShowRouteSpecies
 
 Route102_EventScript_Boy::
+	goto_if_set FLAG_EC_CAUGHT_SHAYMIN, Route102_EventScript_ShayminCaught
 	msgbox Route102_Text_CatchWholeBunchOfPokemon, MSGBOX_NPC
+	releaseall
 	end
 
 Route102_EventScript_Calvin::
@@ -74,11 +76,12 @@ Route102_EventScript_Allen::
 	end
 
 Route102_Text_WatchMeCatchPokemon:
-	.string "WALLY: {PLAYER}… POKéMON hide in tall\n"
-	.string "grass like this, don't they?\p"
-	.string "I've never thrown a POKé BALL. Watch me\n"
-	.string "and tell me if I do it right.\p"
-	.string "…Whoa!$"
+	.string "WALLY: {PLAYER}... POKéMON live in\n"
+	.string "tall grass like this, don't they?\p"
+	.string "I've never thrown a POKé BALL.\n"
+	.string "Will you watch and tell me if\l"
+	.string "I do it right?\p"
+	.string "...Whoa!$"
 
 Route102_Text_WallyIDidIt:
 	.string "WALLY: I did it… It chose to stay.\n"
@@ -96,8 +99,12 @@ Route102_Text_ImNotVeryTall:
 	.string "Fwatchoo!$"
 
 Route102_Text_CatchWholeBunchOfPokemon:
-	.string "I'm going to catch a whole bunch of\n"
-	.string "POKéMON!$"
+	.string "I thought I saw a flower move...\n"
+	.string "Then a little green POKéMON ran\l"
+	.string "through the grass!\p"
+	.string "SHAYMIN! Right here, so close\n"
+	.string "to home! It has a 3% chance of\l"
+	.string "appearing in the grass.$"
 
 Route102_Text_RouteSignOldale:
 	.string "ROUTE 102\n"
@@ -106,3 +113,12 @@ Route102_Text_RouteSignOldale:
 Route102_Text_RouteSignPetalburg:
 	.string "ROUTE 102\n"
 	.string "{LEFT_ARROW} PETALBURG CITY$"
+
+Route102_EventScript_ShayminCaught::
+	msgbox Route102_Text_ShayminCaught, MSGBOX_NPC
+	end
+
+Route102_Text_ShayminCaught:
+	.string "You caught SHAYMIN! I knew that\n"
+	.string "moving flower was a POKéMON.\p"
+	.string "Look after our little neighbor!$"

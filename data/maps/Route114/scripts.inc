@@ -24,12 +24,13 @@ Route114_EventScript_GoodRodDeclined::
 	end
 
 Route114_Text_GoodRodOffer:
-	.string "These pools hide stronger partners than\n"
-	.string "an OLD ROD can reach. Take my GOOD ROD?$"
+	.string "Different fish gather in these pools\n"
+	.string "at different depths. Want my GOOD ROD?$"
 
 Route114_Text_GoodRodAdvice:
-	.string "A GOOD ROD opens another layer of each\n"
-	.string "route's encounter pool. Try every shore.$"
+	.string "Try your GOOD ROD along every shore.\n"
+	.string "You may find POKéMON your OLD ROD\l"
+	.string "never brought to the surface.$"
 
 Route114_Text_GoodRodDeclined:
 	.string "Come back if you decide to explore\n"

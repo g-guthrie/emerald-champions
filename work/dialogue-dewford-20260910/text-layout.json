@@ -1,0 +1,37 @@
+[
+  {
+    "file": "data/text/pkmn_center_nurse.inc",
+    "label": "gText_EmeraldChampionsExplainFlightBeacon",
+    "max_width": 169,
+    "pages": 3,
+    "lines": 8
+  },
+  {
+    "file": "data/maps/DewfordTown_PokemonCenter_1F/scripts.inc",
+    "label": "DewfordTown_PokemonCenter_1F_Text_FaintedMonCanUseHM",
+    "max_width": 174,
+    "pages": 2,
+    "lines": 7
+  },
+  {
+    "file": "data/maps/DewfordMeadow/scripts.inc",
+    "label": "DewfordMeadow_Text_Warden",
+    "max_width": 174,
+    "pages": 4,
+    "lines": 13
+  },
+  {
+    "file": "data/maps/DewfordMeadow/scripts.inc",
+    "label": "DewfordMeadow_Text_MeloettaCaught",
+    "max_width": 178,
+    "pages": 2,
+    "lines": 5
+  },
+  {
+    "file": "data/maps/DewfordTown_Hall/scripts.inc",
+    "label": "DewfordTown_Hall_Text_ScaleAndTrend",
+    "max_width": 193,
+    "pages": 2,
+    "lines": 6
+  }
+]

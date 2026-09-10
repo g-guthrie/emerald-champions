@@ -201,23 +201,19 @@ SootopolisCity_Gym_1F_Text_GymGuidePostVictory:
 	.string "set for the POKéMON LEAGUE challenge!$"
 
 SootopolisCity_Gym_1F_Text_JuanIntro:
-	.string "I am JUAN, WALLACE's mentor, keeper of\n"
-	.string "SOOTOPOLIS's final examination.\p"
-	.string "You calmed one impossible rain. Now solve\n"
-	.string "rain used deliberately: speed, trapping,\l"
-	.string "reversed order, and protected Water.\p"
-	.string "This is artistry only if every choice has\n"
-	.string "purpose. Show me yours.$"
+	.string "I am JUAN, WALLACE's mentor and\n"
+	.string "SOOTOPOLIS's GYM LEADER.\p"
+	.string "You have done our city a great\n"
+	.string "service. Now let us meet as\l"
+	.string "TRAINERS.\p"
+	.string "My partners thrive in rain. Each\n"
+	.string "brings a different strength to\l"
+	.string "our performance. Shall we begin?$"
 
-@ NOTE: This defeat text actually causes a buffer overflow. It's about 50 bytes too long for
-@ the gDisplayedStringBattle buffer that it's put into, and it stomps all over the gBattleTextBuffs
-@ after, as well as the otherwise unused array after that. One wonders if that's the reason for
-@ the existence of that unused array of ints.
 SootopolisCity_Gym_1F_Text_JuanDefeat:
-	.string "Excellent! You found space inside every\n"
-	.string "current and denied my final rain turn.\p"
-	.string "Take the RAIN BADGE. WALLACE will demand\n"
-	.string "everything this Gym only introduced.$"
+	.string "Excellent! A victory to be proud of.\p"
+	.string "Take the RAIN BADGE. WALLACE will\n"
+	.string "ask even more of your team.$"
 
 SootopolisCity_Gym_1F_Text_ReceivedRainBadge:
 	.string "{PLAYER} received the RAIN BADGE\n"
@@ -234,22 +230,27 @@ SootopolisCity_Gym_1F_Text_ExplainRainBadgeTakeThis:
 	.string "And, so that you never forget the\n"
 	.string "battle we shared, take this…$"
 SootopolisCity_Gym_1F_Text_ExplainGyaradosite:
-	.string "Gyaradosite lets Gyarados Mega Evolve.\n"
-	.string "Let it hold the stone in battle.\p"
-	.string "SURF east from ROUTE 128 to EVER GRANDE.\n"
-	.string "Use WATERFALL at the city's entrance.$"
+	.string "Gyaradosite lets Gyarados Mega\n"
+	.string "Evolve. Let it hold the stone in\l"
+	.string "battle.\p"
+	.string "SURF east from ROUTE 128 to EVER\n"
+	.string "GRANDE. Use WATERFALL at the\l"
+	.string "city's entrance.$"
 
 SootopolisCity_Gym_1F_Text_RegisteredJuan:
 	.string "Registered GYM LEADER JUAN\n"
 	.string "in the POKéNAV.$"
 
 SootopolisCity_Gym_1F_Text_JuanPostBattle:
-	.string "Eight BADGES open EVER GRANDE. Its\n"
-	.string "challenge is five master teams in a row.\p"
-	.string "SURF east from ROUTE 128 to EVER GRANDE.\n"
-	.string "Use WATERFALL at the city's entrance.\p"
-	.string "You may heal with your BAG between rooms,\n"
-	.string "but never use items inside their battles.$"
+	.string "Eight BADGES open EVER GRANDE.\n"
+	.string "Its challenge is five master\l"
+	.string "teams in a row.\p"
+	.string "SURF east from ROUTE 128 to EVER\n"
+	.string "GRANDE. Use WATERFALL at the\l"
+	.string "city's entrance.\p"
+	.string "You may heal with your BAG\n"
+	.string "between rooms, but never use\l"
+	.string "items inside their battles.$"
 
 SootopolisCity_Gym_1F_Text_NeedMindBadge:
 	.string "There remains but one BADGE to\n"

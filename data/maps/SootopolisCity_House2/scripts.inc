@@ -29,15 +29,18 @@ SootopolisCity_House2_EventScript_DontKnowAboutOrbs::
 	return
 
 SootopolisCity_House2_Text_DidYouKnowAboutMtPyreOrbs:
-	.string "MT. PYRE…\p"
-	.string "At its peak are two orbs placed side\n"
-	.string "by side. Did you know?$"
+	.string "MT. PYRE… I once visited its\n"
+	.string "summit and saw the two ORBS in\l"
+	.string "the elders' care.\p"
+	.string "Have you heard their story?$"
 
 SootopolisCity_House2_Text_YesTwoOrbsSideBySide:
-	.string "Yes, two orbs side by side…\p"
-	.string "The sight of them together…\n"
-	.string "It is somehow soothing…$"
+	.string "The elders said those ORBS were\n"
+	.string "passed down for generations.\p"
+	.string "I still remember how carefully\n"
+	.string "they watched over them.$"
 
 SootopolisCity_House2_Text_OughtToVisitAndSee:
-	.string "Is that so?\n"
-	.string "Perhaps you ought to visit and see…$"
+	.string "The elders at MT. PYRE can tell\n"
+	.string "you. They've kept HOENN's old\l"
+	.string "stories alive for so long.$"

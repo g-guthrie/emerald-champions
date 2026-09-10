@@ -1,4 +1,5 @@
 #include "global.h"
+#include "field_specials.h"
 #include "item.h"
 #include "berry.h"
 #include "pokeball.h"
@@ -1128,7 +1129,10 @@ u32 GetItemStatus1Mask(enum Item itemId)
 
 u32 GetItemSellPrice(enum Item itemId)
 {
-    return GetItemPrice(itemId) / ITEM_SELL_FACTOR;
+    if (IsEmeraldChampionsFreeCatalogueItem(itemId))
+        return 0;
+    u32 evolutionPrice = GetEmeraldChampionsEvolutionPrice(itemId);
+    return (evolutionPrice ? evolutionPrice : GetItemPrice(itemId)) / ITEM_SELL_FACTOR;
 }
 
 bool32 IsHoldEffectChoice(enum HoldEffect holdEffect)

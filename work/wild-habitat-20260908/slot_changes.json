@@ -1,0 +1,849 @@
+[
+  {
+    "map": "MAP_ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS",
+    "method": "water_mons",
+    "slot": 2,
+    "before": "SPECIES_PELIPPER",
+    "after": "SPECIES_JELLICENT"
+  },
+  {
+    "map": "MAP_ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS",
+    "method": "fishing_mons",
+    "slot": 5,
+    "before": "SPECIES_BARRASKEWDA",
+    "after": "SPECIES_DHELMISE"
+  },
+  {
+    "map": "MAP_ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS",
+    "method": "fishing_mons",
+    "slot": 6,
+    "before": "SPECIES_WAILORD",
+    "after": "SPECIES_DRAGALGE"
+  },
+  {
+    "map": "MAP_ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS",
+    "method": "fishing_mons",
+    "slot": 9,
+    "before": "SPECIES_DHELMISE",
+    "after": "SPECIES_JELLICENT"
+  },
+  {
+    "map": "MAP_ABANDONED_SHIP_ROOMS_B1F",
+    "method": "water_mons",
+    "slot": 2,
+    "before": "SPECIES_WALREIN",
+    "after": "SPECIES_GOLISOPOD"
+  },
+  {
+    "map": "MAP_ABANDONED_SHIP_ROOMS_B1F",
+    "method": "water_mons",
+    "slot": 3,
+    "before": "SPECIES_CRAMORANT",
+    "after": "SPECIES_QWILFISH"
+  },
+  {
+    "map": "MAP_ABANDONED_SHIP_ROOMS_B1F",
+    "method": "fishing_mons",
+    "slot": 5,
+    "before": "SPECIES_SEADRA",
+    "after": "SPECIES_CLAWITZER"
+  },
+  {
+    "map": "MAP_ABANDONED_SHIP_ROOMS_B1F",
+    "method": "fishing_mons",
+    "slot": 8,
+    "before": "SPECIES_LUVDISC",
+    "after": "SPECIES_BARBARACLE"
+  },
+  {
+    "map": "MAP_ARTISAN_CAVE_1F",
+    "method": "land_mons",
+    "slot": 1,
+    "before": "SPECIES_WOOBAT",
+    "after": "SPECIES_SMEARGLE"
+  },
+  {
+    "map": "MAP_ARTISAN_CAVE_1F",
+    "method": "land_mons",
+    "slot": 2,
+    "before": "SPECIES_GLIGAR",
+    "after": "SPECIES_SMEARGLE"
+  },
+  {
+    "map": "MAP_ARTISAN_CAVE_1F",
+    "method": "land_mons",
+    "slot": 3,
+    "before": "SPECIES_SABLEYE",
+    "after": "SPECIES_SMEARGLE"
+  },
+  {
+    "map": "MAP_ARTISAN_CAVE_1F",
+    "method": "land_mons",
+    "slot": 4,
+    "before": "SPECIES_MAWILE",
+    "after": "SPECIES_SMEARGLE"
+  },
+  {
+    "map": "MAP_ARTISAN_CAVE_1F",
+    "method": "land_mons",
+    "slot": 5,
+    "before": "SPECIES_ARON",
+    "after": "SPECIES_WOOBAT"
+  },
+  {
+    "map": "MAP_ARTISAN_CAVE_1F",
+    "method": "land_mons",
+    "slot": 6,
+    "before": "SPECIES_CARBINK",
+    "after": "SPECIES_GLIGAR"
+  },
+  {
+    "map": "MAP_ARTISAN_CAVE_1F",
+    "method": "land_mons",
+    "slot": 7,
+    "before": "SPECIES_DODUO",
+    "after": "SPECIES_SABLEYE"
+  },
+  {
+    "map": "MAP_ARTISAN_CAVE_1F",
+    "method": "land_mons",
+    "slot": 8,
+    "before": "SPECIES_GIRAFARIG",
+    "after": "SPECIES_MAWILE"
+  },
+  {
+    "map": "MAP_ARTISAN_CAVE_1F",
+    "method": "land_mons",
+    "slot": 9,
+    "before": "SPECIES_WOBBUFFET",
+    "after": "SPECIES_ARON"
+  },
+  {
+    "map": "MAP_ARTISAN_CAVE_1F",
+    "method": "land_mons",
+    "slot": 10,
+    "before": "SPECIES_PINSIR",
+    "after": "SPECIES_CARBINK"
+  },
+  {
+    "map": "MAP_ARTISAN_CAVE_1F",
+    "method": "land_mons",
+    "slot": 11,
+    "before": "SPECIES_HERACROSS",
+    "after": "SPECIES_WOBBUFFET"
+  },
+  {
+    "map": "MAP_ARTISAN_CAVE_B1F",
+    "method": "land_mons",
+    "slot": 1,
+    "before": "SPECIES_WOOBAT",
+    "after": "SPECIES_SMEARGLE"
+  },
+  {
+    "map": "MAP_ARTISAN_CAVE_B1F",
+    "method": "land_mons",
+    "slot": 2,
+    "before": "SPECIES_GLIGAR",
+    "after": "SPECIES_SMEARGLE"
+  },
+  {
+    "map": "MAP_ARTISAN_CAVE_B1F",
+    "method": "land_mons",
+    "slot": 5,
+    "before": "SPECIES_ARON",
+    "after": "SPECIES_CARBINK"
+  },
+  {
+    "map": "MAP_ARTISAN_CAVE_B1F",
+    "method": "land_mons",
+    "slot": 6,
+    "before": "SPECIES_CARBINK",
+    "after": "SPECIES_WOBBUFFET"
+  },
+  {
+    "map": "MAP_ARTISAN_CAVE_B1F",
+    "method": "land_mons",
+    "slot": 7,
+    "before": "SPECIES_DODUO",
+    "after": "SPECIES_SMEARGLE"
+  },
+  {
+    "map": "MAP_ARTISAN_CAVE_B1F",
+    "method": "land_mons",
+    "slot": 8,
+    "before": "SPECIES_GIRAFARIG",
+    "after": "SPECIES_SMEARGLE"
+  },
+  {
+    "map": "MAP_ARTISAN_CAVE_B1F",
+    "method": "land_mons",
+    "slot": 9,
+    "before": "SPECIES_WOBBUFFET",
+    "after": "SPECIES_SMEARGLE"
+  },
+  {
+    "map": "MAP_ARTISAN_CAVE_B1F",
+    "method": "land_mons",
+    "slot": 10,
+    "before": "SPECIES_PINSIR",
+    "after": "SPECIES_SABLEYE"
+  },
+  {
+    "map": "MAP_ARTISAN_CAVE_B1F",
+    "method": "land_mons",
+    "slot": 11,
+    "before": "SPECIES_HERACROSS",
+    "after": "SPECIES_MAWILE"
+  },
+  {
+    "map": "MAP_CAVE_OF_ORIGIN_DIANCIES_ROOM",
+    "method": "land_mons",
+    "slot": 1,
+    "before": "SPECIES_WOOBAT",
+    "after": "SPECIES_CARBINK"
+  },
+  {
+    "map": "MAP_CAVE_OF_ORIGIN_DIANCIES_ROOM",
+    "method": "land_mons",
+    "slot": 2,
+    "before": "SPECIES_GLIGAR",
+    "after": "SPECIES_CARBINK"
+  },
+  {
+    "map": "MAP_CAVE_OF_ORIGIN_DIANCIES_ROOM",
+    "method": "land_mons",
+    "slot": 5,
+    "before": "SPECIES_ARON",
+    "after": "SPECIES_CARBINK"
+  },
+  {
+    "map": "MAP_CAVE_OF_ORIGIN_DIANCIES_ROOM",
+    "method": "land_mons",
+    "slot": 6,
+    "before": "SPECIES_DODUO",
+    "after": "SPECIES_GLIMMORA"
+  },
+  {
+    "map": "MAP_CAVE_OF_ORIGIN_DIANCIES_ROOM",
+    "method": "land_mons",
+    "slot": 7,
+    "before": "SPECIES_GIRAFARIG",
+    "after": "SPECIES_CARBINK"
+  },
+  {
+    "map": "MAP_CAVE_OF_ORIGIN_DIANCIES_ROOM",
+    "method": "land_mons",
+    "slot": 8,
+    "before": "SPECIES_WOBBUFFET",
+    "after": "SPECIES_CARBINK"
+  },
+  {
+    "map": "MAP_CAVE_OF_ORIGIN_DIANCIES_ROOM",
+    "method": "land_mons",
+    "slot": 9,
+    "before": "SPECIES_PINSIR",
+    "after": "SPECIES_SABLEYE"
+  },
+  {
+    "map": "MAP_CAVE_OF_ORIGIN_DIANCIES_ROOM",
+    "method": "land_mons",
+    "slot": 10,
+    "before": "SPECIES_HERACROSS",
+    "after": "SPECIES_MAWILE"
+  },
+  {
+    "map": "MAP_CAVE_OF_ORIGIN_DIANCIES_ROOM",
+    "method": "land_mons",
+    "slot": 11,
+    "before": "SPECIES_RHYHORN",
+    "after": "SPECIES_GLIMMORA"
+  },
+  {
+    "map": "MAP_DEWFORD_TOWN",
+    "method": "fishing_mons",
+    "slot": 9,
+    "before": "SPECIES_DHELMISE",
+    "after": "SPECIES_MANTINE"
+  },
+  {
+    "map": "MAP_METEOR_FALLS_B1F_1R",
+    "method": "water_mons",
+    "slot": 2,
+    "before": "SPECIES_SHELLOS",
+    "after": "SPECIES_DRAGONAIR"
+  },
+  {
+    "map": "MAP_METEOR_FALLS_B1F_1R",
+    "method": "water_mons",
+    "slot": 4,
+    "before": "SPECIES_CHEWTLE",
+    "after": "SPECIES_KINGDRA"
+  },
+  {
+    "map": "MAP_METEOR_FALLS_B1F_1R",
+    "method": "fishing_mons",
+    "slot": 9,
+    "before": "SPECIES_DHELMISE",
+    "after": "SPECIES_KINGDRA"
+  },
+  {
+    "map": "MAP_MIRAGE_TOWER_4F",
+    "method": "land_mons",
+    "slot": 10,
+    "before": "SPECIES_ORTHWORM",
+    "after": "SPECIES_COFAGRIGUS"
+  },
+  {
+    "map": "MAP_MIRAGE_TOWER_4F",
+    "method": "land_mons",
+    "slot": 11,
+    "before": "SPECIES_TINKATINK",
+    "after": "SPECIES_BRONZONG"
+  },
+  {
+    "map": "MAP_MOSSDEEP_CITY",
+    "method": "fishing_mons",
+    "slot": 9,
+    "before": "SPECIES_DHELMISE",
+    "after": "SPECIES_STARMIE"
+  },
+  {
+    "map": "MAP_MT_PYRE_1F",
+    "method": "land_mons",
+    "slot": 3,
+    "before": "SPECIES_ZUBAT",
+    "after": "SPECIES_DUSKULL"
+  },
+  {
+    "map": "MAP_MT_PYRE_1F",
+    "method": "land_mons",
+    "slot": 7,
+    "before": "SPECIES_MURKROW",
+    "after": "SPECIES_SHUPPET"
+  },
+  {
+    "map": "MAP_MT_PYRE_3F",
+    "method": "land_mons",
+    "slot": 5,
+    "before": "SPECIES_MURKROW",
+    "after": "SPECIES_LITWICK"
+  },
+  {
+    "map": "MAP_MT_PYRE_3F",
+    "method": "land_mons",
+    "slot": 8,
+    "before": "SPECIES_GREAVARD",
+    "after": "SPECIES_LAMPENT"
+  },
+  {
+    "map": "MAP_MT_PYRE_4F",
+    "method": "land_mons",
+    "slot": 5,
+    "before": "SPECIES_NOIBAT",
+    "after": "SPECIES_DUSCLOPS"
+  },
+  {
+    "map": "MAP_MT_PYRE_4F",
+    "method": "land_mons",
+    "slot": 7,
+    "before": "SPECIES_MURKROW",
+    "after": "SPECIES_BANETTE"
+  },
+  {
+    "map": "MAP_MT_PYRE_6F",
+    "method": "land_mons",
+    "slot": 3,
+    "before": "SPECIES_MIMIKYU",
+    "after": "SPECIES_SINISTCHA"
+  },
+  {
+    "map": "MAP_MT_PYRE_6F",
+    "method": "land_mons",
+    "slot": 4,
+    "before": "SPECIES_HAUNTER",
+    "after": "SPECIES_DUSKNOIR"
+  },
+  {
+    "map": "MAP_MT_PYRE_6F",
+    "method": "land_mons",
+    "slot": 5,
+    "before": "SPECIES_NOIBAT",
+    "after": "SPECIES_CHANDELURE"
+  },
+  {
+    "map": "MAP_MT_PYRE_6F",
+    "method": "land_mons",
+    "slot": 6,
+    "before": "SPECIES_GREAVARD",
+    "after": "SPECIES_HOUNDSTONE"
+  },
+  {
+    "map": "MAP_PETALBURG_CITY",
+    "method": "fishing_mons",
+    "slot": 1,
+    "before": "SPECIES_MAGIKARP",
+    "after": "SPECIES_MARILL"
+  },
+  {
+    "map": "MAP_PETALBURG_WOODS",
+    "method": "land_mons",
+    "slot": 2,
+    "before": "SPECIES_WURMPLE",
+    "after": "SPECIES_KRICKETOT"
+  },
+  {
+    "map": "MAP_ROUTE101",
+    "method": "land_mons",
+    "slot": 4,
+    "before": "SPECIES_PIDGEY",
+    "after": "SPECIES_MIENFOO"
+  },
+  {
+    "map": "MAP_ROUTE102",
+    "method": "land_mons",
+    "slot": 2,
+    "before": "SPECIES_BIDOOF",
+    "after": "SPECIES_TIMBURR"
+  },
+  {
+    "map": "MAP_ROUTE102",
+    "method": "land_mons",
+    "slot": 6,
+    "before": "SPECIES_KRICKETOT",
+    "after": "SPECIES_PACHIRISU"
+  },
+  {
+    "map": "MAP_ROUTE103",
+    "method": "land_mons",
+    "slot": 0,
+    "before": "SPECIES_PATRAT",
+    "after": "SPECIES_BIDOOF"
+  },
+  {
+    "map": "MAP_ROUTE104",
+    "method": "land_mons",
+    "slot": 2,
+    "before": "SPECIES_MIENFOO",
+    "after": "SPECIES_PIDGEY"
+  },
+  {
+    "map": "MAP_ROUTE107",
+    "method": "fishing_mons",
+    "slot": 9,
+    "before": "SPECIES_DHELMISE",
+    "after": "SPECIES_BARRASKEWDA"
+  },
+  {
+    "map": "MAP_ROUTE111",
+    "method": "fishing_mons",
+    "slot": 9,
+    "before": "SPECIES_DHELMISE",
+    "after": "SPECIES_WHISCASH"
+  },
+  {
+    "map": "MAP_ROUTE120",
+    "method": "fishing_mons",
+    "slot": 9,
+    "before": "SPECIES_DHELMISE",
+    "after": "SPECIES_LUDICOLO"
+  },
+  {
+    "map": "MAP_ROUTE121",
+    "method": "fishing_mons",
+    "slot": 9,
+    "before": "SPECIES_DHELMISE",
+    "after": "SPECIES_JELLICENT"
+  },
+  {
+    "map": "MAP_ROUTE123",
+    "method": "land_mons",
+    "slot": 6,
+    "before": "SPECIES_TROPIUS",
+    "after": "SPECIES_PATRAT"
+  },
+  {
+    "map": "MAP_ROUTE125",
+    "method": "water_mons",
+    "slot": 3,
+    "before": "SPECIES_TENTACRUEL",
+    "after": "SPECIES_WALREIN"
+  },
+  {
+    "map": "MAP_ROUTE127",
+    "method": "water_mons",
+    "slot": 2,
+    "before": "SPECIES_WALREIN",
+    "after": "SPECIES_TOXAPEX"
+  },
+  {
+    "map": "MAP_ROUTE127",
+    "method": "water_mons",
+    "slot": 3,
+    "before": "SPECIES_CRAMORANT",
+    "after": "SPECIES_BRUXISH"
+  },
+  {
+    "map": "MAP_ROUTE129",
+    "method": "water_mons",
+    "slot": 2,
+    "before": "SPECIES_PYUKUMUKU",
+    "after": "SPECIES_WAILORD"
+  },
+  {
+    "map": "MAP_ROUTE129",
+    "method": "water_mons",
+    "slot": 3,
+    "before": "SPECIES_DEWGONG",
+    "after": "SPECIES_MANTINE"
+  },
+  {
+    "map": "MAP_ROUTE130",
+    "method": "land_mons",
+    "slot": 1,
+    "before": "SPECIES_WOOBAT",
+    "after": "SPECIES_WYNAUT"
+  },
+  {
+    "map": "MAP_ROUTE130",
+    "method": "land_mons",
+    "slot": 2,
+    "before": "SPECIES_GLIGAR",
+    "after": "SPECIES_WYNAUT"
+  },
+  {
+    "map": "MAP_ROUTE130",
+    "method": "land_mons",
+    "slot": 3,
+    "before": "SPECIES_SABLEYE",
+    "after": "SPECIES_WOBBUFFET"
+  },
+  {
+    "map": "MAP_ROUTE130",
+    "method": "land_mons",
+    "slot": 4,
+    "before": "SPECIES_MAWILE",
+    "after": "SPECIES_GIRAFARIG"
+  },
+  {
+    "map": "MAP_ROUTE130",
+    "method": "land_mons",
+    "slot": 5,
+    "before": "SPECIES_ARON",
+    "after": "SPECIES_DODUO"
+  },
+  {
+    "map": "MAP_ROUTE130",
+    "method": "land_mons",
+    "slot": 6,
+    "before": "SPECIES_CARBINK",
+    "after": "SPECIES_NATU"
+  },
+  {
+    "map": "MAP_ROUTE130",
+    "method": "land_mons",
+    "slot": 7,
+    "before": "SPECIES_DODUO",
+    "after": "SPECIES_WYNAUT"
+  },
+  {
+    "map": "MAP_ROUTE130",
+    "method": "land_mons",
+    "slot": 8,
+    "before": "SPECIES_GIRAFARIG",
+    "after": "SPECIES_XATU"
+  },
+  {
+    "map": "MAP_ROUTE130",
+    "method": "land_mons",
+    "slot": 9,
+    "before": "SPECIES_WOBBUFFET",
+    "after": "SPECIES_TROPIUS"
+  },
+  {
+    "map": "MAP_ROUTE130",
+    "method": "land_mons",
+    "slot": 10,
+    "before": "SPECIES_PINSIR",
+    "after": "SPECIES_WOBBUFFET"
+  },
+  {
+    "map": "MAP_ROUTE130",
+    "method": "land_mons",
+    "slot": 11,
+    "before": "SPECIES_HERACROSS",
+    "after": "SPECIES_KECLEON"
+  },
+  {
+    "map": "MAP_ROUTE130",
+    "method": "water_mons",
+    "slot": 2,
+    "before": "SPECIES_PYUKUMUKU",
+    "after": "SPECIES_JELLICENT"
+  },
+  {
+    "map": "MAP_ROUTE130",
+    "method": "water_mons",
+    "slot": 3,
+    "before": "SPECIES_DEWGONG",
+    "after": "SPECIES_ALOMOMOLA"
+  },
+  {
+    "map": "MAP_ROUTE131",
+    "method": "water_mons",
+    "slot": 2,
+    "before": "SPECIES_FINIZEN",
+    "after": "SPECIES_RELICANTH"
+  },
+  {
+    "map": "MAP_ROUTE132",
+    "method": "water_mons",
+    "slot": 2,
+    "before": "SPECIES_LUMINEON",
+    "after": "SPECIES_BARRASKEWDA"
+  },
+  {
+    "map": "MAP_ROUTE133",
+    "method": "water_mons",
+    "slot": 2,
+    "before": "SPECIES_TENTACRUEL",
+    "after": "SPECIES_DRAGALGE"
+  },
+  {
+    "map": "MAP_ROUTE134",
+    "method": "water_mons",
+    "slot": 2,
+    "before": "SPECIES_FINIZEN",
+    "after": "SPECIES_HUNTAIL"
+  },
+  {
+    "map": "MAP_ROUTE134",
+    "method": "water_mons",
+    "slot": 3,
+    "before": "SPECIES_LUMINEON",
+    "after": "SPECIES_GOREBYSS"
+  },
+  {
+    "map": "MAP_SAFARI_ZONE_SOUTHEAST",
+    "method": "fishing_mons",
+    "slot": 9,
+    "before": "SPECIES_DHELMISE",
+    "after": "SPECIES_AZUMARILL"
+  },
+  {
+    "map": "MAP_SANDSTREWN_RUINS",
+    "method": "fishing_mons",
+    "slot": 9,
+    "before": "SPECIES_DHELMISE",
+    "after": "SPECIES_RELICANTH"
+  },
+  {
+    "map": "MAP_SANDSTREWN_RUINS_B1F",
+    "method": "land_mons",
+    "slot": 7,
+    "before": "SPECIES_GABITE",
+    "after": "SPECIES_GOLURK"
+  },
+  {
+    "map": "MAP_SANDSTREWN_RUINS_B1F",
+    "method": "land_mons",
+    "slot": 11,
+    "before": "SPECIES_SPIRITOMB",
+    "after": "SPECIES_COFAGRIGUS"
+  },
+  {
+    "map": "MAP_SEAFLOOR_CAVERN_ROOM1",
+    "method": "land_mons",
+    "slot": 2,
+    "before": "SPECIES_WOOBAT",
+    "after": "SPECIES_DRAGALGE"
+  },
+  {
+    "map": "MAP_SEAFLOOR_CAVERN_ROOM1",
+    "method": "land_mons",
+    "slot": 4,
+    "before": "SPECIES_DHELMISE",
+    "after": "SPECIES_DRAGALGE"
+  },
+  {
+    "map": "MAP_SEAFLOOR_CAVERN_ROOM1",
+    "method": "land_mons",
+    "slot": 8,
+    "before": "SPECIES_CROBAT",
+    "after": "SPECIES_GOLISOPOD"
+  },
+  {
+    "map": "MAP_SEAFLOOR_CAVERN_ROOM2",
+    "method": "land_mons",
+    "slot": 5,
+    "before": "SPECIES_DHELMISE",
+    "after": "SPECIES_SHARPEDO"
+  },
+  {
+    "map": "MAP_SEAFLOOR_CAVERN_ROOM3",
+    "method": "land_mons",
+    "slot": 4,
+    "before": "SPECIES_MALAMAR",
+    "after": "SPECIES_DHELMISE"
+  },
+  {
+    "map": "MAP_SEAFLOOR_CAVERN_ROOM3",
+    "method": "land_mons",
+    "slot": 8,
+    "before": "SPECIES_CROBAT",
+    "after": "SPECIES_DHELMISE"
+  },
+  {
+    "map": "MAP_SEAFLOOR_CAVERN_ROOM3",
+    "method": "land_mons",
+    "slot": 9,
+    "before": "SPECIES_BARBARACLE",
+    "after": "SPECIES_SABLEYE"
+  },
+  {
+    "map": "MAP_SEAFLOOR_CAVERN_ROOM3",
+    "method": "land_mons",
+    "slot": 10,
+    "before": "SPECIES_KINGDRA",
+    "after": "SPECIES_CLAYDOL"
+  },
+  {
+    "map": "MAP_SEAFLOOR_CAVERN_ROOM3",
+    "method": "land_mons",
+    "slot": 11,
+    "before": "SPECIES_BASCULEGION",
+    "after": "SPECIES_BRONZONG"
+  },
+  {
+    "map": "MAP_SEAFLOOR_CAVERN_ROOM4",
+    "method": "land_mons",
+    "slot": 7,
+    "before": "SPECIES_DHELMISE",
+    "after": "SPECIES_MALAMAR"
+  },
+  {
+    "map": "MAP_SEAFLOOR_CAVERN_ROOM5",
+    "method": "land_mons",
+    "slot": 2,
+    "before": "SPECIES_TYNAMO",
+    "after": "SPECIES_KINGDRA"
+  },
+  {
+    "map": "MAP_SEAFLOOR_CAVERN_ROOM5",
+    "method": "land_mons",
+    "slot": 3,
+    "before": "SPECIES_DHELMISE",
+    "after": "SPECIES_KINGDRA"
+  },
+  {
+    "map": "MAP_SEAFLOOR_CAVERN_ROOM5",
+    "method": "land_mons",
+    "slot": 4,
+    "before": "SPECIES_MALAMAR",
+    "after": "SPECIES_GOLISOPOD"
+  },
+  {
+    "map": "MAP_SEAFLOOR_CAVERN_ROOM5",
+    "method": "land_mons",
+    "slot": 6,
+    "before": "SPECIES_CLAWITZER",
+    "after": "SPECIES_DRAGALGE"
+  },
+  {
+    "map": "MAP_SEAFLOOR_CAVERN_ROOM6",
+    "method": "land_mons",
+    "slot": 3,
+    "before": "SPECIES_DHELMISE",
+    "after": "SPECIES_BARBARACLE"
+  },
+  {
+    "map": "MAP_SEAFLOOR_CAVERN_ROOM6",
+    "method": "water_mons",
+    "slot": 2,
+    "before": "SPECIES_CRAMORANT",
+    "after": "SPECIES_JELLICENT"
+  },
+  {
+    "map": "MAP_SEAFLOOR_CAVERN_ROOM6",
+    "method": "water_mons",
+    "slot": 3,
+    "before": "SPECIES_WALREIN",
+    "after": "SPECIES_GOLISOPOD"
+  },
+  {
+    "map": "MAP_SEAFLOOR_CAVERN_ROOM7",
+    "method": "land_mons",
+    "slot": 4,
+    "before": "SPECIES_DHELMISE",
+    "after": "SPECIES_TOXAPEX"
+  },
+  {
+    "map": "MAP_SEAFLOOR_CAVERN_ROOM7",
+    "method": "water_mons",
+    "slot": 2,
+    "before": "SPECIES_PYUKUMUKU",
+    "after": "SPECIES_HUNTAIL"
+  },
+  {
+    "map": "MAP_SEAFLOOR_CAVERN_ROOM7",
+    "method": "water_mons",
+    "slot": 3,
+    "before": "SPECIES_DEWGONG",
+    "after": "SPECIES_GOREBYSS"
+  },
+  {
+    "map": "MAP_SEAFLOOR_CAVERN_ROOM8",
+    "method": "land_mons",
+    "slot": 2,
+    "before": "SPECIES_DEWPIDER",
+    "after": "SPECIES_DRAGALGE"
+  },
+  {
+    "map": "MAP_SEAFLOOR_CAVERN_ROOM8",
+    "method": "land_mons",
+    "slot": 3,
+    "before": "SPECIES_DHELMISE",
+    "after": "SPECIES_KINGDRA"
+  },
+  {
+    "map": "MAP_SEAFLOOR_CAVERN_ROOM8",
+    "method": "land_mons",
+    "slot": 5,
+    "before": "SPECIES_MALAMAR",
+    "after": "SPECIES_GOLISOPOD"
+  },
+  {
+    "map": "MAP_SEAFLOOR_CAVERN_ROOM8",
+    "method": "land_mons",
+    "slot": 7,
+    "before": "SPECIES_TOXAPEX",
+    "after": "SPECIES_CLAWITZER"
+  },
+  {
+    "map": "MAP_SEAFLOOR_CAVERN_ROOM8",
+    "method": "land_mons",
+    "slot": 9,
+    "before": "SPECIES_BARRASKEWDA",
+    "after": "SPECIES_CROBAT"
+  },
+  {
+    "map": "MAP_VICTORY_ROAD_B2F",
+    "method": "fishing_mons",
+    "slot": 6,
+    "before": "SPECIES_OCTILLERY",
+    "after": "SPECIES_CRAWDAUNT"
+  },
+  {
+    "map": "MAP_VICTORY_ROAD_B2F",
+    "method": "fishing_mons",
+    "slot": 8,
+    "before": "SPECIES_LOMBRE",
+    "after": "SPECIES_BASCULIN"
+  },
+  {
+    "map": "MAP_VICTORY_ROAD_B2F",
+    "method": "fishing_mons",
+    "slot": 9,
+    "before": "SPECIES_DRATINI",
+    "after": "SPECIES_DRAGONAIR"
+  }
+]

@@ -1,0 +1,9 @@
+{
+  "schema_version": 2,
+  "inputs_sha256": "a084b85ed19c3773c173e05e51f0a25cce2e0bff08b98153c36dbb158537d625",
+  "input_count": 28980,
+  "artifacts": {
+    "pokeemerald-legendary-once-20260910-release.gba": "3285030833eca5897e5e9766556e1414d7970a20ba8c0002f682f64e378aef9e",
+    "pokeemerald-legendary-once-20260910-release.elf": "fe255a5178a7afb436bf3b4e8f052c7ac632f3413ced1f5e6268640bd0cc9224"
+  }
+}

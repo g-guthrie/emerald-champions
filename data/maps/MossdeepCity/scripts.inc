@@ -362,13 +362,11 @@ MossdeepCity_Text_NiceIfWorldCoveredByFlowers:
 	.string "plants and flowers like this island?$"
 
 MossdeepCity_Text_LifeNeedsSeaToLive:
-	.string "All life needs the sea, even when\n"
-	.string "it makes its home on the land.\p"
-	.string "Divers found a princely SIGN near\n"
-	.string "the SEAFLOOR CAVERN approach.\p"
-	.string "Inspect that underwater landmark\n"
-	.string "with the MIND BADGE. The stolen\l"
-	.string "submarine points the way.$"
+	.string "MANAPHY and PALKIA live on the\n"
+	.string "SEAFLOOR CAVERN seabed.\p"
+	.string "DIVE at ROUTE 128 and search near\n"
+	.string "the submarine. Each has a 3%\l"
+	.string "wild encounter chance.$"
 MossdeepCity_Text_SurfExhilarating:
 	.string "A voyage on a ship is fine.\p"
 	.string "But crossing the sea with POKéMON\n"
@@ -403,17 +401,12 @@ MossdeepCity_Text_SpaceCenterSign:
 	.string "“The closest place to space.”$"
 
 MossdeepCity_Text_ScottSomethingWrongWithTown:
-	.string "SCOTT: {PLAYER}{KUN}, feeling good?\n"
-	.string "I'm doing great!\p"
-	.string "I'd heard MOSSDEEP's GYM LEADER is\n"
-	.string "pretty strong, so I decided to come\l"
-	.string "take a look-see for myself.\p"
-	.string "But there's something wrong about\n"
-	.string "this town.\p"
-	.string "People are going on about a warning\n"
-	.string "letter and the SPACE CENTER…\p"
-	.string "I don't think it concerns me in any\n"
-	.string "way, though.$"
+	.string "SCOTT: {PLAYER}{KUN}! I came to\n"
+	.string "watch the GYM, but everyone's\l"
+	.string "worried about a threat to the\l"
+	.string "SPACE CENTER.\p"
+	.string "STEVEN is looking into it. I hope\n"
+	.string "those researchers are safe.$"
 
 MossdeepCity_Text_SootopolisNewGymLeader:
 	.string "Ahh… It feels great letting the waves\n"

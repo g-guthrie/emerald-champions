@@ -1,0 +1,1962 @@
+[
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_WantToTradeDecor",
+    "line": "Hi, I'm the TRADER.",
+    "width": 97
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_WantToTradeDecor",
+    "line": "Want to trade decorations with me?",
+    "width": 183
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_TraderFeelingTheBlues",
+    "line": "Oh\u2026",
+    "width": 18
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_TraderFeelingTheBlues",
+    "line": "You've left me feeling the blues\u2026",
+    "width": 175
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_WeveAlreadyTraded",
+    "line": "But we've traded decorations already,",
+    "width": 200
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_WeveAlreadyTraded",
+    "line": "you and I.",
+    "width": 51
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_PickADecorItem",
+    "line": "If you see any decorative item that",
+    "width": 187
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_PickADecorItem",
+    "line": "you want of mine, speak up.",
+    "width": 139
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_YouDontWantAnything",
+    "line": "You don't want anything?",
+    "width": 133
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_YouDontWantAnything",
+    "line": "I feel unwanted\u2026",
+    "width": 88
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_OnceBelongedToPlayerDoYouWantIt",
+    "line": "That decorative item once belonged",
+    "width": 185
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_OnceBelongedToPlayerDoYouWantIt",
+    "line": "to {STR_VAR_1}.",
+    "width": 60
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_OnceBelongedToPlayerDoYouWantIt",
+    "line": "Do you want it?",
+    "width": 79
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_YouDontHaveAnyDecor",
+    "line": "Uh\u2026 Wait a second. You don't have a",
+    "width": 184
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_YouDontHaveAnyDecor",
+    "line": "single piece of decoration!",
+    "width": 142
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_PickTheDecorToTrade",
+    "line": "Okay, pick the decoration that you'll",
+    "width": 195
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_PickTheDecorToTrade",
+    "line": "trade to me.",
+    "width": 62
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_YouDontWantToTrade",
+    "line": "You won't trade with me?",
+    "width": 129
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_YouDontWantToTrade",
+    "line": "I feel unwanted\u2026",
+    "width": 88
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_YouveNoRoomForThis",
+    "line": "You've got all the {STR_VAR_2}S that can",
+    "width": 194
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_YouveNoRoomForThis",
+    "line": "be stored. You've no room for this.",
+    "width": 181
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_SoWellTradeTheseDecor",
+    "line": "Okay, so we'll trade my {STR_VAR_3}",
+    "width": 208
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_SoWellTradeTheseDecor",
+    "line": "for your {STR_VAR_2}?",
+    "width": 139
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_ThatDecorIsInUse",
+    "line": "That piece of decoration is in use.",
+    "width": 180
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_ThatDecorIsInUse",
+    "line": "You can't trade it.",
+    "width": 99
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_SendDecorToYourPC",
+    "line": "Then we'll trade!",
+    "width": 89
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_SendDecorToYourPC",
+    "line": "I'll send my decoration to your PC.",
+    "width": 181
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_CantTradeThatOne",
+    "line": "Oops! Sorry! That's a really rare",
+    "width": 170
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_CantTradeThatOne",
+    "line": "piece of decoration.",
+    "width": 106
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_CantTradeThatOne",
+    "line": "I can't trade that one away!",
+    "width": 150
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_CantTradeThatOne",
+    "line": "Can I interest you in something else?",
+    "width": 195
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_WillYouHearMyTale",
+    "line": "I'm the STORYTELLER.",
+    "width": 111
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_WillYouHearMyTale",
+    "line": "I'll tell you tales of legendary",
+    "width": 164
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_WillYouHearMyTale",
+    "line": "TRAINERS.",
+    "width": 51
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_WillYouHearMyTale",
+    "line": "Will you hear my tale?",
+    "width": 111
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_StorytellerFeelingTheBlues",
+    "line": "Oh\u2026",
+    "width": 18
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_StorytellerFeelingTheBlues",
+    "line": "You've left me feeling the blues\u2026",
+    "width": 175
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_WhichTaleToTell",
+    "line": "I know of these legends.",
+    "width": 127
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_WhichTaleToTell",
+    "line": "Which tale will you have me tell?",
+    "width": 166
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_IKnowNoTales",
+    "line": "But, I know of no legendary TRAINERS.",
+    "width": 195
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_IKnowNoTales",
+    "line": "Hence, I know no tales.",
+    "width": 118
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_IKnowNoTales",
+    "line": "Where does one find a TRAINER worthy",
+    "width": 194
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_IKnowNoTales",
+    "line": "of a legendary tale?",
+    "width": 106
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_YouDidStatXTimes",
+    "line": "What's that?!",
+    "width": 73
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_YouDidStatXTimes",
+    "line": "You\u2026 You\u2026",
+    "width": 51
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_YouDidStatXTimes",
+    "line": "{STR_VAR_2}",
+    "width": 176
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_YouDidStatXTimes",
+    "line": "{STR_VAR_1} time(s)?!",
+    "width": 97
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_YouDidStatXTimes",
+    "line": "That is indeed magnificent!",
+    "width": 143
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_YouDidStatXTimes",
+    "line": "It's the birth of a new legend!",
+    "width": 161
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_CouldThereBeOtherLegends",
+    "line": "It gets me thinking, could there be",
+    "width": 182
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_CouldThereBeOtherLegends",
+    "line": "other TRAINERS with more impressive",
+    "width": 189
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_CouldThereBeOtherLegends",
+    "line": "legends awaiting discovery?",
+    "width": 147
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_HaveYouAnyLegendaryTales",
+    "line": "Are you a TRAINER?",
+    "width": 98
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_HaveYouAnyLegendaryTales",
+    "line": "Then tell me, have you any tales that",
+    "width": 192
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_HaveYouAnyLegendaryTales",
+    "line": "are even remotely legendary?",
+    "width": 152
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_HearAnotherLegendaryTale",
+    "line": "Incidentally\u2026 Would you care to hear",
+    "width": 191
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_HearAnotherLegendaryTale",
+    "line": "another legendary tale?",
+    "width": 126
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_NotWorthyOfLegend",
+    "line": "Hmm\u2026",
+    "width": 24
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_NotWorthyOfLegend",
+    "line": "I'm not satisfied\u2026",
+    "width": 98
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_NotWorthyOfLegend",
+    "line": "I wish you would bring me news worthy",
+    "width": 193
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_NotWorthyOfLegend",
+    "line": "of being called a legend.",
+    "width": 127
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_IWishMorePeopleWereInterested",
+    "line": "I wish more people would be interested",
+    "width": 200
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_IWishMorePeopleWereInterested",
+    "line": "in hearing my epic tales of legendary",
+    "width": 192
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_IWishMorePeopleWereInterested",
+    "line": "TRAINERS.",
+    "width": 51
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_SavedGameTitle",
+    "line": "The Save-Happy TRAINER",
+    "width": 126
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_SavedGameAction",
+    "line": "Saved the game",
+    "width": 78
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_SavedGameStory",
+    "line": "This is a tale of a TRAINER",
+    "width": 138
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_SavedGameStory",
+    "line": "named {STR_VAR_3}.",
+    "width": 78
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_SavedGameStory",
+    "line": "This TRAINER saved the game",
+    "width": 148
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_SavedGameStory",
+    "line": "{STR_VAR_1} times!",
+    "width": 83
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_SavedGameStory",
+    "line": "A more cautious TRAINER than",
+    "width": 153
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_SavedGameStory",
+    "line": "{STR_VAR_3} one will never find!",
+    "width": 145
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_TrendsStartedTitle",
+    "line": "The Trendsetter TRAINER",
+    "width": 130
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_TrendsStartedAction",
+    "line": "Started trends",
+    "width": 79
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_TrendsStartedStory",
+    "line": "This is a tale of a TRAINER",
+    "width": 138
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_TrendsStartedStory",
+    "line": "named {STR_VAR_3}.",
+    "width": 78
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_TrendsStartedStory",
+    "line": "This TRAINER started new trends",
+    "width": 170
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_TrendsStartedStory",
+    "line": "{STR_VAR_1} times!",
+    "width": 83
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_TrendsStartedStory",
+    "line": "{STR_VAR_3} is setting trends for all",
+    "width": 173
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_TrendsStartedStory",
+    "line": "the HOENN region!",
+    "width": 91
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_BerriesPlantedTitle",
+    "line": "The BERRY-Planting TRAINER",
+    "width": 146
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_BerriesPlantedAction",
+    "line": "Planted BERRIES",
+    "width": 85
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_BerriesPlantedStory",
+    "line": "This is a tale of a TRAINER",
+    "width": 138
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_BerriesPlantedStory",
+    "line": "named {STR_VAR_3}.",
+    "width": 78
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_BerriesPlantedStory",
+    "line": "This TRAINER planted BERRIES",
+    "width": 155
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_BerriesPlantedStory",
+    "line": "{STR_VAR_1} times!",
+    "width": 83
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_BerriesPlantedStory",
+    "line": "{STR_VAR_3} is a legendary lover of",
+    "width": 163
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_BerriesPlantedStory",
+    "line": "BERRIES!",
+    "width": 46
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_BikeTradesTitle",
+    "line": "The BIKE-Loving TRAINER",
+    "width": 130
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_BikeTradesAction",
+    "line": "Traded BIKES",
+    "width": 68
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_BikeTradesStory",
+    "line": "This is a tale of a TRAINER",
+    "width": 138
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_BikeTradesStory",
+    "line": "named {STR_VAR_3}.",
+    "width": 78
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_BikeTradesStory",
+    "line": "This TRAINER swapped BIKES",
+    "width": 145
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_BikeTradesStory",
+    "line": "{STR_VAR_1} times!",
+    "width": 83
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_BikeTradesStory",
+    "line": "{STR_VAR_3} must love BIKES deeply",
+    "width": 164
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_BikeTradesStory",
+    "line": "and passionately!",
+    "width": 93
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_InterviewsTitle",
+    "line": "The Interviewed TRAINER",
+    "width": 129
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_InterviewsAction",
+    "line": "Got interviewed",
+    "width": 82
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_InterviewsStory",
+    "line": "This is a tale of a TRAINER",
+    "width": 138
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_InterviewsStory",
+    "line": "named {STR_VAR_3}.",
+    "width": 78
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_InterviewsStory",
+    "line": "This TRAINER got interviewed",
+    "width": 152
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_InterviewsStory",
+    "line": "{STR_VAR_1} times!",
+    "width": 83
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_InterviewsStory",
+    "line": "{STR_VAR_3} must be a TRAINER who's",
+    "width": 171
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_InterviewsStory",
+    "line": "attracting much attention!",
+    "width": 143
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_TrainerBattlesTitle",
+    "line": "The Battle-Happy TRAINER",
+    "width": 136
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_TrainerBattlesAction",
+    "line": "Battled",
+    "width": 40
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_TrainerBattlesStory",
+    "line": "This is a tale of a TRAINER",
+    "width": 138
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_TrainerBattlesStory",
+    "line": "named {STR_VAR_3}.",
+    "width": 78
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_TrainerBattlesStory",
+    "line": "This TRAINER battled {STR_VAR_1} times!",
+    "width": 196
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_TrainerBattlesStory",
+    "line": "{STR_VAR_3} must be a TRAINER who can",
+    "width": 180
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_TrainerBattlesStory",
+    "line": "never refuse a chance to battle!",
+    "width": 171
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_PokemonCaughtTitle",
+    "line": "The POK\u00e9MON-Catching TRAINER",
+    "width": 160
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_PokemonCaughtAction",
+    "line": "Caught POK\u00e9MON",
+    "width": 81
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_PokemonCaughtStory",
+    "line": "This is a tale of a TRAINER",
+    "width": 138
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_PokemonCaughtStory",
+    "line": "named {STR_VAR_3}.",
+    "width": 78
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_PokemonCaughtStory",
+    "line": "This TRAINER caught",
+    "width": 106
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_PokemonCaughtStory",
+    "line": "{STR_VAR_1} POK\u00e9MON!",
+    "width": 97
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_PokemonCaughtStory",
+    "line": "{STR_VAR_3} is a legendary catcher of",
+    "width": 177
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_PokemonCaughtStory",
+    "line": "wild POK\u00e9MON!",
+    "width": 69
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_FishingPokemonCaughtTitle",
+    "line": "The Fishing TRAINER",
+    "width": 104
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_FishingPokemonCaughtAction",
+    "line": "Caught POK\u00e9MON with a ROD",
+    "width": 136
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_FishingPokemonCaughtStory",
+    "line": "This is a tale of a TRAINER",
+    "width": 138
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_FishingPokemonCaughtStory",
+    "line": "named {STR_VAR_3}.",
+    "width": 78
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_FishingPokemonCaughtStory",
+    "line": "This TRAINER caught",
+    "width": 106
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_FishingPokemonCaughtStory",
+    "line": "{STR_VAR_1} POK\u00e9MON while fishing!",
+    "width": 167
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_FishingPokemonCaughtStory",
+    "line": "{STR_VAR_3} is a legendary fishing",
+    "width": 159
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_FishingPokemonCaughtStory",
+    "line": "expert!",
+    "width": 39
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_EggsHatchedTitle",
+    "line": "The EGG-Warming TRAINER",
+    "width": 129
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_EggsHatchedAction",
+    "line": "Hatched EGGS",
+    "width": 69
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_EggsHatchedStory",
+    "line": "This is a tale of a TRAINER",
+    "width": 138
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_EggsHatchedStory",
+    "line": "named {STR_VAR_3}.",
+    "width": 78
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_EggsHatchedStory",
+    "line": "This TRAINER hatched {STR_VAR_1} POK\u00e9MON",
+    "width": 208
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_EggsHatchedStory",
+    "line": "from EGGS!",
+    "width": 54
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_EggsHatchedStory",
+    "line": "{STR_VAR_3} is a legendary warmer",
+    "width": 155
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_EggsHatchedStory",
+    "line": "of EGGS!",
+    "width": 43
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_PokemonEvolvedTitle",
+    "line": "The Evolver TRAINER",
+    "width": 105
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_PokemonEvolvedAction",
+    "line": "Evolved POK\u00e9MON",
+    "width": 85
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_PokemonEvolvedStory",
+    "line": "This is a tale of a TRAINER",
+    "width": 138
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_PokemonEvolvedStory",
+    "line": "named {STR_VAR_3}.",
+    "width": 78
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_PokemonEvolvedStory",
+    "line": "This TRAINER made {STR_VAR_1} POK\u00e9MON",
+    "width": 190
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_PokemonEvolvedStory",
+    "line": "evolve!",
+    "width": 38
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_PokemonEvolvedStory",
+    "line": "{STR_VAR_3} is the ultimate evolver",
+    "width": 165
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_PokemonEvolvedStory",
+    "line": "of POK\u00e9MON!",
+    "width": 61
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedPokemonCenterTitle",
+    "line": "The POK\u00e9MON CENTER-Loving TRAINER",
+    "width": 187
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedPokemonCenterAction",
+    "line": "Used POK\u00e9MON CENTERS",
+    "width": 114
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedPokemonCenterStory",
+    "line": "This is a tale of a TRAINER",
+    "width": 138
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedPokemonCenterStory",
+    "line": "named {STR_VAR_3}.",
+    "width": 78
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedPokemonCenterStory",
+    "line": "This TRAINER healed POK\u00e9MON",
+    "width": 149
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedPokemonCenterStory",
+    "line": "{STR_VAR_1} times at POK\u00e9MON CENTERS!",
+    "width": 188
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedPokemonCenterStory",
+    "line": "There could be no greater lover of",
+    "width": 178
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedPokemonCenterStory",
+    "line": "POK\u00e9MON CENTERS than {STR_VAR_3}!",
+    "width": 163
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_RestedAtHomeTitle",
+    "line": "The Homebody TRAINER",
+    "width": 114
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_RestedAtHomeAction",
+    "line": "Rested POK\u00e9MON at home",
+    "width": 123
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_RestedAtHomeStory",
+    "line": "This is a tale of a TRAINER",
+    "width": 138
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_RestedAtHomeStory",
+    "line": "named {STR_VAR_3}.",
+    "width": 78
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_RestedAtHomeStory",
+    "line": "This TRAINER healed POK\u00e9MON",
+    "width": 149
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_RestedAtHomeStory",
+    "line": "{STR_VAR_1} times at home!",
+    "width": 125
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_RestedAtHomeStory",
+    "line": "There could be no more of a homebody",
+    "width": 191
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_RestedAtHomeStory",
+    "line": "than {STR_VAR_3}!",
+    "width": 73
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_SafariGamesTitle",
+    "line": "The SAFARI-Loving TRAINER",
+    "width": 142
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_SafariGamesAction",
+    "line": "Entered the SAFARI ZONE",
+    "width": 128
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_SafariGamesStory",
+    "line": "This is a tale of a TRAINER",
+    "width": 138
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_SafariGamesStory",
+    "line": "named {STR_VAR_3}.",
+    "width": 78
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_SafariGamesStory",
+    "line": "This TRAINER went into the SAFARI ZONE",
+    "width": 206
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_SafariGamesStory",
+    "line": "{STR_VAR_1} times!",
+    "width": 83
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_SafariGamesStory",
+    "line": "{STR_VAR_3} is a TRAINER whose wild side",
+    "width": 190
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_SafariGamesStory",
+    "line": "must come out in the SAFARI ZONE!",
+    "width": 176
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedCutTitle",
+    "line": "The CUT-Frenzy TRAINER",
+    "width": 125
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedCutAction",
+    "line": "Used CUT",
+    "width": 45
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedCutStory",
+    "line": "This is a tale of a TRAINER",
+    "width": 138
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedCutStory",
+    "line": "named {STR_VAR_3}.",
+    "width": 78
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedCutStory",
+    "line": "This TRAINER used CUT",
+    "width": 115
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedCutStory",
+    "line": "{STR_VAR_1} times!",
+    "width": 83
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedCutStory",
+    "line": "{STR_VAR_3} is a TRAINER who just must",
+    "width": 183
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedCutStory",
+    "line": "love to CUT!",
+    "width": 62
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedRockSmashTitle",
+    "line": "The ROCK-SMASHING TRAINER",
+    "width": 144
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedRockSmashAction",
+    "line": "Smashed rocks",
+    "width": 74
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedRockSmashStory",
+    "line": "This is a tale of a TRAINER",
+    "width": 138
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedRockSmashStory",
+    "line": "named {STR_VAR_3}.",
+    "width": 78
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedRockSmashStory",
+    "line": "This TRAINER used ROCK SMASH",
+    "width": 154
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedRockSmashStory",
+    "line": "{STR_VAR_1} times!",
+    "width": 83
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedRockSmashStory",
+    "line": "{STR_VAR_3} must be a TRAINER who",
+    "width": 159
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedRockSmashStory",
+    "line": "can't leave a stone unsmashed!",
+    "width": 164
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_MovedBasesTitle",
+    "line": "The Move-Loving TRAINER",
+    "width": 130
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_MovedBasesAction",
+    "line": "Moved the SECRET BASE",
+    "width": 117
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_MovedBasesStory",
+    "line": "This is a tale of a TRAINER",
+    "width": 138
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_MovedBasesStory",
+    "line": "named {STR_VAR_3}.",
+    "width": 78
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_MovedBasesStory",
+    "line": "This TRAINER moved the SECRET BASE",
+    "width": 187
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_MovedBasesStory",
+    "line": "{STR_VAR_1} times!",
+    "width": 83
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_MovedBasesStory",
+    "line": "{STR_VAR_3} is a TRAINER who loves",
+    "width": 161
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_MovedBasesStory",
+    "line": "to move houses often!",
+    "width": 115
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedSplashTitle",
+    "line": "The SPLASH-Happy TRAINER",
+    "width": 138
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedSplashAction",
+    "line": "Used SPLASH",
+    "width": 63
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedSplashStory",
+    "line": "This is a tale of a TRAINER",
+    "width": 138
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedSplashStory",
+    "line": "named {STR_VAR_3}.",
+    "width": 78
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedSplashStory",
+    "line": "This TRAINER used SPLASH",
+    "width": 133
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedSplashStory",
+    "line": "{STR_VAR_1} times!",
+    "width": 83
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedSplashStory",
+    "line": "{STR_VAR_3} is a TRAINER who must love",
+    "width": 182
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedSplashStory",
+    "line": "SPLASHING around!",
+    "width": 96
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedStruggleTitle",
+    "line": "The Tenacious TRAINER",
+    "width": 118
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedStruggleAction",
+    "line": "Resorted to using STRUGGLE",
+    "width": 144
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedStruggleStory",
+    "line": "This is a tale of a TRAINER",
+    "width": 138
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedStruggleStory",
+    "line": "named {STR_VAR_3}.",
+    "width": 78
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedStruggleStory",
+    "line": "This TRAINER had to rely on STRUGGLE",
+    "width": 193
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedStruggleStory",
+    "line": "{STR_VAR_1} times!",
+    "width": 83
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedStruggleStory",
+    "line": "{STR_VAR_3} is a tenacious TRAINER",
+    "width": 164
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedStruggleStory",
+    "line": "who never gives in to adversity!",
+    "width": 167
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_SlotJackpotsTitle",
+    "line": "The SLOT Champ",
+    "width": 78
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_SlotJackpotsAction",
+    "line": "Won the jackpot on the SLOTS",
+    "width": 152
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_SlotJackpotsStory",
+    "line": "This is a tale of a TRAINER",
+    "width": 138
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_SlotJackpotsStory",
+    "line": "named {STR_VAR_3}.",
+    "width": 78
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_SlotJackpotsStory",
+    "line": "This TRAINER won the jackpot on",
+    "width": 168
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_SlotJackpotsStory",
+    "line": "the SLOTS {STR_VAR_1} times.",
+    "width": 136
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_SlotJackpotsStory",
+    "line": "{STR_VAR_3} is a TRAINER who was lucky",
+    "width": 182
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_SlotJackpotsStory",
+    "line": "on the SLOTS!",
+    "width": 70
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_RouletteWinsTitle",
+    "line": "The ROULETTE Champ",
+    "width": 102
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_RouletteWinsAction",
+    "line": "Had consecutive ROULETTE wins of",
+    "width": 176
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_RouletteWinsStory",
+    "line": "This is a tale of a TRAINER",
+    "width": 138
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_RouletteWinsStory",
+    "line": "named {STR_VAR_3}.",
+    "width": 78
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_RouletteWinsStory",
+    "line": "This TRAINER won in ROULETTE",
+    "width": 152
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_RouletteWinsStory",
+    "line": "{STR_VAR_1} times in a row.",
+    "width": 124
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_RouletteWinsStory",
+    "line": "{STR_VAR_3} was lucky when the ball",
+    "width": 165
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_RouletteWinsStory",
+    "line": "bounced in ROULETTE!",
+    "width": 110
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_BattleTowerChallengesTitle",
+    "line": "The BATTLE TOWER Challenger",
+    "width": 148
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_BattleTowerChallengesAction",
+    "line": "Took the BATTLE TOWER challenge",
+    "width": 170
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_BattleTowerChallengesStory",
+    "line": "This is a tale of a TRAINER",
+    "width": 138
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_BattleTowerChallengesStory",
+    "line": "named {STR_VAR_3}.",
+    "width": 78
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_BattleTowerChallengesStory",
+    "line": "This TRAINER took the BATTLE TOWER",
+    "width": 187
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_BattleTowerChallengesStory",
+    "line": "challenge {STR_VAR_1} times!",
+    "width": 136
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_BattleTowerChallengesStory",
+    "line": "{STR_VAR_3} is a TRAINER who aspires",
+    "width": 172
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_BattleTowerChallengesStory",
+    "line": "for excellence in the BATTLE TOWER!",
+    "width": 186
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_MadePokeblocksTitle",
+    "line": "The Blend-Loving TRAINER",
+    "width": 134
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_MadePokeblocksAction",
+    "line": "Made {POKEBLOCK}S",
+    "width": 63
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_MadePokeblocksStory",
+    "line": "This is a tale of a TRAINER",
+    "width": 138
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_MadePokeblocksStory",
+    "line": "named {STR_VAR_3}.",
+    "width": 78
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_MadePokeblocksStory",
+    "line": "This TRAINER made {POKEBLOCK}S",
+    "width": 133
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_MadePokeblocksStory",
+    "line": "{STR_VAR_1} times!",
+    "width": 83
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_MadePokeblocksStory",
+    "line": "There is none better at using a BERRY",
+    "width": 195
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_MadePokeblocksStory",
+    "line": "BLENDER than {STR_VAR_3}!",
+    "width": 118
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_EnteredContestsTitle",
+    "line": "The CONTEST-Loving TRAINER",
+    "width": 148
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_EnteredContestsAction",
+    "line": "Entered CONTESTS",
+    "width": 92
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_EnteredContestsStory",
+    "line": "This is a tale of a TRAINER",
+    "width": 138
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_EnteredContestsStory",
+    "line": "named {STR_VAR_3}.",
+    "width": 78
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_EnteredContestsStory",
+    "line": "This TRAINER entered CONTESTS",
+    "width": 162
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_EnteredContestsStory",
+    "line": "{STR_VAR_1} times!",
+    "width": 83
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_EnteredContestsStory",
+    "line": "{STR_VAR_3} must love showing off",
+    "width": 158
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_EnteredContestsStory",
+    "line": "POK\u00e9MON to others!",
+    "width": 99
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_WonContestsTitle",
+    "line": "The CONTEST Master",
+    "width": 101
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_WonContestsAction",
+    "line": "Won CONTESTS",
+    "width": 69
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_WonContestsStory",
+    "line": "This is a tale of a TRAINER",
+    "width": 138
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_WonContestsStory",
+    "line": "named {STR_VAR_3}.",
+    "width": 78
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_WonContestsStory",
+    "line": "This TRAINER won CONTESTS",
+    "width": 139
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_WonContestsStory",
+    "line": "{STR_VAR_1} times!",
+    "width": 83
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_WonContestsStory",
+    "line": "{STR_VAR_3} must be an incredible",
+    "width": 155
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_WonContestsStory",
+    "line": "CONTEST master!",
+    "width": 84
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_TimesShoppedTitle",
+    "line": "The Happy Shopper",
+    "width": 95
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_TimesShoppedAction",
+    "line": "Shopped",
+    "width": 42
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_TimesShoppedStory",
+    "line": "This is a tale of a TRAINER",
+    "width": 138
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_TimesShoppedStory",
+    "line": "named {STR_VAR_3}.",
+    "width": 78
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_TimesShoppedStory",
+    "line": "This TRAINER bought items in shops",
+    "width": 183
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_TimesShoppedStory",
+    "line": "{STR_VAR_1} times!",
+    "width": 83
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_TimesShoppedStory",
+    "line": "{STR_VAR_3} must be one of those",
+    "width": 153
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_TimesShoppedStory",
+    "line": "people who are born to shop.",
+    "width": 146
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedItemFinderTitle",
+    "line": "The Item-Finding TRAINER",
+    "width": 134
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedItemFinderAction",
+    "line": "Used an ITEMFINDER",
+    "width": 102
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedItemFinderStory",
+    "line": "This is a tale of a TRAINER",
+    "width": 138
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedItemFinderStory",
+    "line": "named {STR_VAR_3}.",
+    "width": 78
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedItemFinderStory",
+    "line": "This TRAINER used an ITEMFINDER",
+    "width": 172
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedItemFinderStory",
+    "line": "{STR_VAR_1} times!",
+    "width": 83
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedItemFinderStory",
+    "line": "{STR_VAR_3} must enjoy scouring the",
+    "width": 170
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedItemFinderStory",
+    "line": "ground for hidden items!",
+    "width": 127
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_TimesRainedTitle",
+    "line": "The Rain-Soaked TRAINER",
+    "width": 130
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_TimesRainedAction",
+    "line": "Got rained on",
+    "width": 69
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_TimesRainedStory",
+    "line": "This is a tale of a TRAINER",
+    "width": 138
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_TimesRainedStory",
+    "line": "named {STR_VAR_3}.",
+    "width": 78
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_TimesRainedStory",
+    "line": "This TRAINER got soaked by rain",
+    "width": 166
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_TimesRainedStory",
+    "line": "{STR_VAR_1} times!",
+    "width": 83
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_TimesRainedStory",
+    "line": "{STR_VAR_3}'s charisma must even",
+    "width": 156
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_TimesRainedStory",
+    "line": "attract rain!",
+    "width": 69
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_CheckedPokedexTitle",
+    "line": "The Avid POK\u00e9DEX Reader",
+    "width": 126
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_CheckedPokedexAction",
+    "line": "Checked a POK\u00e9DEX",
+    "width": 96
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_CheckedPokedexStory",
+    "line": "This is a tale of a TRAINER",
+    "width": 138
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_CheckedPokedexStory",
+    "line": "named {STR_VAR_3}.",
+    "width": 78
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_CheckedPokedexStory",
+    "line": "This TRAINER checked a POK\u00e9DEX",
+    "width": 166
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_CheckedPokedexStory",
+    "line": "{STR_VAR_1} times!",
+    "width": 83
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_CheckedPokedexStory",
+    "line": "{STR_VAR_3} must love inspecting",
+    "width": 153
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_CheckedPokedexStory",
+    "line": "POK\u00e9MON in a POK\u00e9DEX!",
+    "width": 113
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_ReceivedRibbonsTitle",
+    "line": "The RIBBON Collector",
+    "width": 109
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_ReceivedRibbonsAction",
+    "line": "Received RIBBONS",
+    "width": 91
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_ReceivedRibbonsStory",
+    "line": "This is a tale of a TRAINER",
+    "width": 138
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_ReceivedRibbonsStory",
+    "line": "named {STR_VAR_3}.",
+    "width": 78
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_ReceivedRibbonsStory",
+    "line": "This TRAINER received RIBBONS",
+    "width": 160
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_ReceivedRibbonsStory",
+    "line": "{STR_VAR_1} times!",
+    "width": 83
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_ReceivedRibbonsStory",
+    "line": "{STR_VAR_3} must be a TRAINER who",
+    "width": 159
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_ReceivedRibbonsStory",
+    "line": "loves to collect RIBBONS!",
+    "width": 133
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_LedgesJumpedTitle",
+    "line": "The Ledge-Jumping TRAINER",
+    "width": 142
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_LedgesJumpedAction",
+    "line": "Jumped down ledges",
+    "width": 100
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_LedgesJumpedStory",
+    "line": "This is a tale of a TRAINER",
+    "width": 138
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_LedgesJumpedStory",
+    "line": "named {STR_VAR_3}.",
+    "width": 78
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_LedgesJumpedStory",
+    "line": "This TRAINER jumped down ledges",
+    "width": 169
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_LedgesJumpedStory",
+    "line": "{STR_VAR_1} times!",
+    "width": 83
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_LedgesJumpedStory",
+    "line": "If there's a ledge to be jumped,",
+    "width": 167
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_LedgesJumpedStory",
+    "line": "{STR_VAR_3} can't ignore it!",
+    "width": 128
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_TVWatchedTitle",
+    "line": "The Legendary TV Viewer",
+    "width": 125
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_TVWatchedAction",
+    "line": "Watched TV",
+    "width": 57
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_TVWatchedStory",
+    "line": "This is a tale of a TRAINER",
+    "width": 138
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_TVWatchedStory",
+    "line": "named {STR_VAR_3}.",
+    "width": 78
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_TVWatchedStory",
+    "line": "This TRAINER watched TV",
+    "width": 127
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_TVWatchedStory",
+    "line": "{STR_VAR_1} times!",
+    "width": 83
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_TVWatchedStory",
+    "line": "{STR_VAR_3} must love watching TV!",
+    "width": 162
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_CheckedClockTitle",
+    "line": "The Time-Conscious TRAINER",
+    "width": 146
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_CheckedClockAction",
+    "line": "Checked the time",
+    "width": 88
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_CheckedClockStory",
+    "line": "This is a tale of a TRAINER",
+    "width": 138
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_CheckedClockStory",
+    "line": "named {STR_VAR_3}.",
+    "width": 78
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_CheckedClockStory",
+    "line": "This TRAINER checked the time",
+    "width": 158
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_CheckedClockStory",
+    "line": "{STR_VAR_1} times!",
+    "width": 83
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_CheckedClockStory",
+    "line": "{STR_VAR_3} must be a punctual TRAINER",
+    "width": 187
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_CheckedClockStory",
+    "line": "who's conscious of the time.",
+    "width": 149
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_WonLotteryTitle",
+    "line": "The POK\u00e9MON LOTTERY Wizard",
+    "width": 144
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_WonLotteryAction",
+    "line": "Won POK\u00e9MON LOTTERIES",
+    "width": 120
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_WonLotteryStory",
+    "line": "This is a tale of a TRAINER",
+    "width": 138
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_WonLotteryStory",
+    "line": "named {STR_VAR_3}.",
+    "width": 78
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_WonLotteryStory",
+    "line": "This TRAINER won POK\u00e9MON LOTTERIES",
+    "width": 190
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_WonLotteryStory",
+    "line": "{STR_VAR_1} times!",
+    "width": 83
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_WonLotteryStory",
+    "line": "{STR_VAR_3} must have many friends",
+    "width": 165
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_WonLotteryStory",
+    "line": "to trade POK\u00e9MON with!",
+    "width": 118
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedDaycareTitle",
+    "line": "The DAY CARE-Using Trainer",
+    "width": 141
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedDaycareAction",
+    "line": "Left POK\u00e9MON at the DAY CARE",
+    "width": 153
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedDaycareStory",
+    "line": "This is a tale of a TRAINER",
+    "width": 138
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedDaycareStory",
+    "line": "named {STR_VAR_3}.",
+    "width": 78
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedDaycareStory",
+    "line": "This TRAINER left POK\u00e9MON with the",
+    "width": 183
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedDaycareStory",
+    "line": "DAY CARE {STR_VAR_1} times!",
+    "width": 131
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedDaycareStory",
+    "line": "{STR_VAR_3} must be a real go-getter",
+    "width": 173
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_UsedDaycareStory",
+    "line": "who raises POK\u00e9MON aggressively!",
+    "width": 173
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_RodeCableCarTitle",
+    "line": "The CABLE CAR-Loving TRAINER",
+    "width": 157
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_RodeCableCarAction",
+    "line": "Rode the CABLE CAR",
+    "width": 99
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_RodeCableCarStory",
+    "line": "This is a tale of a TRAINER",
+    "width": 138
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_RodeCableCarStory",
+    "line": "named {STR_VAR_3}.",
+    "width": 78
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_RodeCableCarStory",
+    "line": "This TRAINER rode the CABLE CAR",
+    "width": 168
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_RodeCableCarStory",
+    "line": "{STR_VAR_1} times!",
+    "width": 83
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_RodeCableCarStory",
+    "line": "{STR_VAR_3} must be a busy TRAINER",
+    "width": 165
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_RodeCableCarStory",
+    "line": "who's up and down all the time!",
+    "width": 160
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_HotSpringsTitle",
+    "line": "The Hot Spring-Loving TRAINER",
+    "width": 160
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_HotSpringsAction",
+    "line": "Bathed in hot springs",
+    "width": 112
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_HotSpringsStory",
+    "line": "This is a tale of a TRAINER",
+    "width": 138
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_HotSpringsStory",
+    "line": "named {STR_VAR_3}.",
+    "width": 78
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_HotSpringsStory",
+    "line": "This TRAINER bathed in hot springs",
+    "width": 182
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_HotSpringsStory",
+    "line": "{STR_VAR_1} times!",
+    "width": 83
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_HotSpringsStory",
+    "line": "{STR_VAR_3} must be a TRAINER with",
+    "width": 163
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_HotSpringsStory",
+    "line": "baby-smooth skin!",
+    "width": 95
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_HearMyStory",
+    "line": "I'm GIDDY!",
+    "width": 55
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_HearMyStory",
+    "line": "I have a scintillating story for you!",
+    "width": 190
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_HearMyStory",
+    "line": "Would you like to hear my story?",
+    "width": 166
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_GiddyFeelingTheBlues",
+    "line": "Oh\u2026",
+    "width": 18
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_GiddyFeelingTheBlues",
+    "line": "You've left me feeling the blues\u2026",
+    "width": 175
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_AlsoIWasThinking",
+    "line": "Also, I was thinking\u2026",
+    "width": 108
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_WeShouldChatAgain",
+    "line": "That's about it, I think\u2026",
+    "width": 131
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_WeShouldChatAgain",
+    "line": "We should chat again!",
+    "width": 111
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_WeShouldChatAgain",
+    "line": "Bye-bye!",
+    "width": 46
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_WouldYouLikeToHearMySong",
+    "line": "Hi, I'm the BARD.",
+    "width": 85
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_WouldYouLikeToHearMySong",
+    "line": "Would you like to hear my song?",
+    "width": 161
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_BardFeelingTheBlues1",
+    "line": "Oh\u2026",
+    "width": 18
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_BardFeelingTheBlues1",
+    "line": "You've left me feeling the blues\u2026",
+    "width": 175
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_WishICouldPlaySongForOthers",
+    "line": "Oh, what a moving song\u2026",
+    "width": 121
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_WishICouldPlaySongForOthers",
+    "line": "I wish I could play it for others\u2026",
+    "width": 173
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_WouldYouLikeToWriteSomeLyrics",
+    "line": "So?",
+    "width": 18
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_WouldYouLikeToWriteSomeLyrics",
+    "line": "How do you like my song?",
+    "width": 125
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_WouldYouLikeToWriteSomeLyrics",
+    "line": "But I'm none too happy about",
+    "width": 153
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_WouldYouLikeToWriteSomeLyrics",
+    "line": "the lyrics.",
+    "width": 55
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_WouldYouLikeToWriteSomeLyrics",
+    "line": "How would you like to write some",
+    "width": 165
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_WouldYouLikeToWriteSomeLyrics",
+    "line": "new lyrics for me?",
+    "width": 93
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_BardFeelingTheBlues2",
+    "line": "Oh\u2026",
+    "width": 18
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_BardFeelingTheBlues2",
+    "line": "You've left me feeling the blues\u2026",
+    "width": 175
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_LetMeSingItForYou",
+    "line": "Thank you kindly!",
+    "width": 90
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_LetMeSingItForYou",
+    "line": "Let me sing it for you.",
+    "width": 115
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_ThatHowYouWantedSongToGo",
+    "line": "Was that how you wanted your song",
+    "width": 179
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_ThatHowYouWantedSongToGo",
+    "line": "to go?",
+    "width": 33
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_IllSingThisSongForAWhile",
+    "line": "Okay! That's it, then.",
+    "width": 113
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_IllSingThisSongForAWhile",
+    "line": "I'll sing this song for a while.",
+    "width": 158
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_TeachWhatsHipAndHappening",
+    "line": "Hey, yo! They call me the HIPSTER.",
+    "width": 174
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_TeachWhatsHipAndHappening",
+    "line": "I'll teach you what's hip and happening.",
+    "width": 211
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_IAlreadyTaughtYou",
+    "line": "But, hey, I taught you what's hip and",
+    "width": 193
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_IAlreadyTaughtYou",
+    "line": "happening already.",
+    "width": 97
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_IAlreadyTaughtYou",
+    "line": "I'd like to spread the good word to",
+    "width": 183
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_IAlreadyTaughtYou",
+    "line": "other folks.",
+    "width": 63
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_IveGotNothingNewToTeach",
+    "line": "But, hey, you already know a lot about",
+    "width": 196
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_IveGotNothingNewToTeach",
+    "line": "what's hip and happening.",
+    "width": 134
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_IveGotNothingNewToTeach",
+    "line": "I've got nothing new to teach you!",
+    "width": 182
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_HaveYouHeardOfWord",
+    "line": "Hey, have you heard about",
+    "width": 134
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_HaveYouHeardOfWord",
+    "line": "\u201c{STR_VAR_1}\u201d?",
+    "width": 99
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_HaveYouHeardOfWord",
+    "line": "What's it mean? Well\u2026",
+    "width": 111
+  },
+  {
+    "label": "MauvilleCity_PokemonCenter_1F_Text_HaveYouHeardOfWord",
+    "line": "Ask your daddy or mommy, okay?",
+    "width": 160
+  }
+]

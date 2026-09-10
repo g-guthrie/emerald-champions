@@ -36,9 +36,10 @@ MauvilleCity_Mart_EventScript_Man::
 	end
 
 MauvilleCity_Mart_Text_ItemsToTemporarilyElevateStats:
-	.string "Trainer battles do not allow BAG items.\n"
-	.string "This shop stocks specialized POKé BALLS\l"
-	.string "instead, so you can build more teams.$"
+	.string "Trainer battles do not allow BAG\n"
+	.string "items. This shop stocks\l"
+	.string "specialized POKé BALLS instead,\l"
+	.string "so you can build more teams.$"
 
 MauvilleCity_Mart_Text_DecisionsDetermineBattle:
 	.string "Choose a move, switch a partner, or\n"

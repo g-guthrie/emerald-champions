@@ -630,7 +630,7 @@ enum MoveTarget
     TARGET_USER_OR_ALLY, // Acupressure
     TARGET_FOES_AND_ALLY,
     TARGET_FIELD, // Moves that target the field, e.g. Rain Dance
-    TARGET_OPPONENTS_FIELD, // Targets all other battlers and self, e.g. Teatime
+    TARGET_OPPONENTS_FIELD, // Targets the opposing side, e.g. Stealth Rock
     TARGET_ALL_BATTLERS,
 };
 

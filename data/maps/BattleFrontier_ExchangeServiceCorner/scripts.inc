@@ -255,9 +255,9 @@ BattleFrontier_ExchangeServiceCorner_EventScript_BeastBall::
 BattleFrontier_ExchangeServiceCorner_EventScript_EvolutionClerk::
 	lock
 	faceplayer
-	msgbox BattleFrontier_ExchangeServiceCorner_Text_ItemsWillGetMonTougher, MSGBOX_DEFAULT
-	closemessage
-	goto Common_EventScript_EmeraldChampionsBattleVendor
+	setvar VAR_TEMP_2, EXCHANGE_CORNER_EVOLUTION_CLERK
+	call BattleFrontier_ExchangeServiceCorner_EventScript_ClerkWelcome
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_ChooseEvolutionItem
 
 BattleFrontier_ExchangeServiceCorner_EventScript_ChooseEvolutionItem::
 	setvar VAR_0x8004, SCROLL_MULTI_BF_EXCHANGE_CORNER_EVOLUTION_VENDOR
@@ -286,6 +286,10 @@ BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseEvolutionItem::
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_LinkingCord::
+	checkitem ITEM_LINKING_CORD
+	goto_if_eq VAR_RESULT, TRUE, BattleFrontier_ExchangeServiceCorner_EventScript_AlreadyOwnCord
+	checkpcitem ITEM_LINKING_CORD
+	goto_if_eq VAR_RESULT, TRUE, BattleFrontier_ExchangeServiceCorner_EventScript_AlreadyOwnCord
 	setitemandprice ITEM_LINKING_CORD, 8
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseEvolutionItem
 
@@ -398,9 +402,9 @@ BattleFrontier_ExchangeServiceCorner_Text_GetYouAnythingYouWant:
 BattleFrontier_ExchangeServiceCorner_Text_ItemsWillGetMonTougher:
 	.string "I save Battle Points for supplies\n"
 	.string "and decorations.\p"
-	.string "Ordinary evolution items are free\n"
-	.string "from CENTER vendors once you have\l"
-	.string "the MEGA RING.$"
+	.string "Evolution tools cost cash at specialist\n"
+	.string "shops, or Battle Points here.$"
+
 BattleFrontier_ExchangeServiceCorner_Text_GoGetYourOwnDoll:
 	.string "Hah?\n"
 	.string "What are you gawking at?\p"
@@ -410,10 +414,10 @@ BattleFrontier_ExchangeServiceCorner_Text_GoGetYourOwnDoll:
 	.string "Isn't that right, SMOOCHUM?$"
 
 BattleFrontier_ExchangeServiceCorner_Text_MoreBattlePointsForRecord:
-	.string "Did you know?\p"
-	.string "If you stretch your record at any of\n"
-	.string "the BATTLE facilities, they start\l"
-	.string "giving you more and more Battle Points.$"
+	.string "Every CIRCUIT victory earns Battle\n"
+	.string "Points. Longer streaks earn more.\p"
+	.string "I keep promising myself I'll save\n"
+	.string "them. Then I see another plush DOLL!$"
 
 BattleFrontier_ExchangeServiceCorner_Text_KissPosterDesc::
 	.string "A large poster with a SMOOCHUM print.$"
@@ -471,7 +475,7 @@ BattleFrontier_ExchangeServiceCorner_Text_SacredAshDesc::
 	.string "Revives every fainted party member.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_DreamBallDesc::
-	.string "A rare BALL for dreamlike POKéMON.$"
+	.string "A BALL that excels on sleeping POKéMON.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_BeastBallDesc::
 	.string "A rare BALL made for ULTRA BEASTS.$"
@@ -503,3 +507,10 @@ BattleFrontier_ExchangeServiceCorner_Text_TartAppleDesc::
 
 BattleFrontier_ExchangeServiceCorner_Text_PrismScaleDesc::
 	.string "A shining scale that evolves FEEBAS.$"
+
+BattleFrontier_ExchangeServiceCorner_EventScript_AlreadyOwnCord:
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_AlreadyOwnCord, MSGBOX_DEFAULT
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_ChooseEvolutionItem
+BattleFrontier_ExchangeServiceCorner_Text_AlreadyOwnCord:
+	.string "You already own a LINKING CORD.\n"
+	.string "It's reusable, so save your points!$"

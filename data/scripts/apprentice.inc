@@ -1,11 +1,16 @@
 BattleFrontier_BattleTowerLobby_EventScript_Apprentice::
-	lock
-	faceplayer
-	apprentice_gavelvlmode
-	goto_if_eq VAR_RESULT, FALSE, Apprentice_EventScript_FirstMeeting
-	apprentice_shouldcheckgone
-	goto_if_eq VAR_0x8004, FALSE, Apprentice_EventScript_AskQuestion  @ VAR_0x8004 always TRUE here
-	goto_if_set FLAG_DAILY_APPRENTICE_LEAVES, Apprentice_EventScript_Gone
+	msgbox Apprentice_Text_PreparingForCircuit, MSGBOX_NPC
+	end
+
+Apprentice_Text_PreparingForCircuit:
+	.string "I'm putting together my first\n"
+	.string "six-POKéMON CIRCUIT team!\p"
+	.string "I picked my two opening partners.\n"
+	.string "Now I'm looking for teammates who\l"
+	.string "can help when they need to switch.\p"
+	.string "Six strong POKéMON are a start.\n"
+	.string "I want mine to work together!$"
+
 Apprentice_EventScript_AskQuestion:
 	apprentice_getquestion
 	goto_if_eq VAR_RESULT, APPRENTICE_QUESTION_WHICH_MON, Apprentice_EventScript_UseWhichMon

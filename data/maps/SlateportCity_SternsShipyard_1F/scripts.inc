@@ -3,8 +3,8 @@ SlateportCity_SternsShipyard_1F_MapScripts::
 
 SlateportCity_SternsShipyard_1F_EventScript_Dock::
 	lockall
-	goto_if_set FLAG_SYS_GAME_CLEAR, SlateportCity_SternsShipyard_1F_EventScript_FerryReady
 	goto_if_set FLAG_BADGE07_GET, SlateportCity_SternsShipyard_1F_EventScript_BrineyJoined
+	goto_if_set FLAG_BADGE06_GET, SlateportCity_SternsShipyard_1F_EventScript_FerryReady
 	goto_if_set FLAG_DELIVERED_DEVON_GOODS, SlateportCity_SternsShipyard_1F_EventScript_NeedVeteran
 	goto_if_set FLAG_DOCK_REJECTED_DEVON_GOODS, SlateportCity_SternsShipyard_1F_EventScript_GoFindStern
 	msgbox SlateportCity_SternsShipyard_1F_Text_CantMakeHeadsOrTails, MSGBOX_DEFAULT
@@ -90,10 +90,10 @@ SlateportCity_SternsShipyard_1F_Text_CouldUseAdviceFromVeteran:
 	.string "who knows the seas…$"
 
 SlateportCity_SternsShipyard_1F_Text_BrineyJoinedUs:
-	.string "DOCK: Hi! MR. BRINEY's joined us to\n"
-	.string "lend us his help.\p"
-	.string "Thanks to the veteran sailor, the\n"
-	.string "ferry is steadily coming together.$"
+	.string "DOCK: MR. BRINEY's joined us!\p"
+	.string "The ferry is sailing, but there's\n"
+	.string "always work to do. His experience\l"
+	.string "at sea is a great help.$"
 
 SlateportCity_SternsShipyard_1F_Text_FerryIsReady:
 	.string "DOCK: The ferry is finally ready!\p"
@@ -107,17 +107,12 @@ SlateportCity_SternsShipyard_1F_Text_FerryIsReady:
 SlateportCity_SternsShipyard_1F_Text_DecidedToHelpDock:
 	.string "MR. BRINEY: Ah, {PLAYER}{KUN}!\n"
 	.string "It's been too long!\p"
-	.string "Aye, since I met you, this old sea dog's\n"
-	.string "been feeling frisky!\p"
-	.string "So I've decided to help DOCK make\n"
-	.string "a ferry.\p"
-	.string "Aye, after all, a ferry would be able\n"
-	.string "to carry a lot of people.\p"
-	.string "But, you know, that DOCK is really\n"
-	.string "something special.\p"
-	.string "With his knack for technology and\n"
-	.string "my experience, I'm sure that we can\l"
-	.string "build one great ship, aye!$"
+	.string "I've joined DOCK here at the\n"
+	.string "shipyard. That lad's S.S. TIDAL\l"
+	.string "is a fine vessel!\p"
+	.string "He knows the engineering, and I\n"
+	.string "know the sea. Together, we'll\l"
+	.string "keep her sailing for years!$"
 
 SlateportCity_SternsShipyard_1F_Text_SeaIsLikeLivingThing:
 	.string "The seasons, the weather, where\n"

@@ -68,17 +68,17 @@ EverGrandeCity_PhoebesRoom_Text_IntroSpeech:
 	.string "Welcome. I am PHOEBE.\p"
 	.string "I trained on MT. PYRE, where the ones\n"
 	.string "who are gone still take part.\p"
-	.string "My friends borrow your boosts, shelter\n"
-	.string "from your spread attacks, and one empty\l"
-	.string "shell will swallow your best move.\p"
-	.string "Keep something for the rider in the\n"
-	.string "shadow. It is always closer than it looks.$"
+	.string "My friends can steal your boosts\n"
+	.string "and wear down your strength with burns.\p"
+	.string "Keep something for SPECTRIER.\n"
+	.string "Each knockout can make it stronger.$"
 
 EverGrandeCity_PhoebesRoom_Text_Defeat:
-	.string "You honored what you could not touch.\n"
-	.string "My grandmother would like you.$"
+	.string "What a wonderful team! My\n"
+	.string "grandmother would love to meet\l"
+	.string "your POKéMON.$"
 
 EverGrandeCity_PhoebesRoom_Text_PostBattleSpeech:
 	.string "Rest a moment if you need to.\p"
-	.string "GLACIA covers the whole field before\n"
-	.string "she strikes. Do not fight in her snow.$"
+	.string "GLACIA can shelter her team with\n"
+	.string "AURORA VEIL. Prepare for her snow.$"

@@ -472,7 +472,19 @@ Route111_EventScript_VialUpgradeNurse::
 	giveitem ITEM_HEAL_BALL
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 Route111_EventScript_VialNurseReminder::
+	goto_if_eq VAR_CHANSEY_NURSE_STATE, 2, Route111_EventScript_VialNurseJaggedPass
+	goto_if_ge VAR_CHANSEY_NURSE_STATE, 3, Route111_EventScript_VialNurseAshenWoods
 	msgbox Route111_Text_VialBringBlobBack, MSGBOX_DEFAULT
+	release
+	end
+
+Route111_EventScript_VialNurseJaggedPass::
+	msgbox Route111_Text_VialNurseJaggedPass, MSGBOX_DEFAULT
+	release
+	end
+
+Route111_EventScript_VialNurseAshenWoods::
+	msgbox Route111_Text_VialNurseAshenWoods, MSGBOX_DEFAULT
 	release
 	end
 
@@ -534,8 +546,16 @@ Route111_Text_VialReplacementBall:
 	.string "Blob will recognize it.$"
 
 Route111_Text_VialBringBlobBack:
-	.string "Blob ran north along ROUTE 111.\n"
+	.string "Follow ROUTE 111 north to ROUTE 112.\n"
 	.string "Please bring my CHANSEY home!$"
+
+Route111_Text_VialNurseJaggedPass:
+	.string "Blob climbed toward JAGGED PASS.\n"
+	.string "Try the slope below MT. CHIMNEY.$"
+
+Route111_Text_VialNurseAshenWoods:
+	.string "Take EMBER PATH off JAGGED PASS.\n"
+	.string "Blob ran into ASHEN WOODS beyond.$"
 
 Route111_Text_VialThanks:
 	.string "You caught Blob! Thank you!\p"
@@ -773,11 +793,11 @@ Route111_Text_OldLadysRestStopSign:
 
 Route111_Text_TrainerTipsSpAtkSpDef:
 	.string "TRAINER TIPS\p"
-	.string "One of the indicators of a POKéMON's\n"
-	.string "powerfulness is SP. ATK. It stands for\l"
-	.string "“SPECIAL ATTACK.”\p"
-	.string "Likewise, SP. DEF stands for “SPECIAL\n"
-	.string "DEFENSE.”$"
+	.string "SP. ATK means SPECIAL ATTACK. It\n"
+	.string "determines the power of special\l"
+	.string "moves.\p"
+	.string "SP. DEF means SPECIAL DEFENSE. It\n"
+	.string "helps a POKéMON withstand them.$"
 
 Route111_Text_ShouldBeMirageTowerAroundHere:
 	.string "There should be a tower made of sand\n"
@@ -787,20 +807,25 @@ Route111_Text_ShouldBeMirageTowerAroundHere:
 	.string "That's why I call it the MIRAGE TOWER.$"
 
 Route111_Text_MirageTowerClearlyVisible:
-	.string "The MIRAGE TOWER is visible! Beneath its\n"
-	.string "first floor lies an older stairway.\p"
-	.string "Archaeologists say it reaches a fossil\n"
-	.string "archive called SANDSTREWN RUINS.$"
+	.string "The MIRAGE TOWER is visible!\n"
+	.string "Beneath its first floor lies an\l"
+	.string "older stairway.\p"
+	.string "Archaeologists say it reaches a\n"
+	.string "fossil archive called SANDSTREWN\l"
+	.string "RUINS.$"
 
 Route111_Text_ThatWasShockingSandRainedDown:
-	.string "The tower collapsed, but its basement\n"
-	.string "passage may still meet DESERT UNDERPASS.\p"
-	.string "That route leads into SANDSTREWN RUINS.$"
+	.string "The tower collapsed, but its\n"
+	.string "basement passage may still meet\l"
+	.string "DESERT UNDERPASS.\p"
+	.string "That route leads into SANDSTREWN\n"
+	.string "RUINS.$"
 
 Route111_Text_MirageTowerHasntBeenSeenSince:
-	.string "MIRAGE TOWER is gone, but the ruins below\n"
-	.string "remain. FOSSIL MANIAC's tunnel on\l"
-	.string "ROUTE 114 now reaches DESERT UNDERPASS.$"
+	.string "MIRAGE TOWER is gone, but the\n"
+	.string "ruins below remain. FOSSIL\l"
+	.string "MANIAC's tunnel on ROUTE 114 now\l"
+	.string "reaches DESERT UNDERPASS.$"
 
 Route111_Text_ClawFossilDisappeared:
 	.string "The CLAW FOSSIL disappeared into\n"
@@ -860,9 +885,11 @@ Route111_Text_DynamoGuardClosed:
 	.string "DYNAMO BADGE, you're cleared to pass.$"
 
 Route111_Text_DynamoGuardTrigger:
-	.string "Hey! Not past the rope. The trail\n"
-	.string "north is closed until WATTSON's crew\l"
-	.string "finishes the power lines.$"
+	.string "Hey! Not past the rope. Storm\n"
+	.string "damage has made the northern trail\l"
+	.string "unsafe.\p"
+	.string "You'll need WATTSON's DYNAMO BADGE\n"
+	.string "before I can let you through.$"
 
 Route111_Text_IRENE_LocalConversation:
 	.string "A picnic needs three things:\n"

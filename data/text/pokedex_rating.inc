@@ -4,8 +4,8 @@ gBirchDexRatingText_AreYouCurious::
 	.string "POKéDEX is coming along?$"
 
 gBirchDexRatingText_Cancel::
-	.string "Hm? Oh, you haven't caught enough\n"
-	.string "POKéMON to make it worthwhile.$"
+	.string "Another time, then! I always enjoy\n"
+	.string "hearing about your discoveries.$"
 
 gBirchDexRatingText_SoYouveSeenAndCaught::
 	.string "Hmhm…\p"
@@ -57,17 +57,18 @@ gBirchDexRatingText_LessThan100::
 	.string "can only be caught there.$"
 
 gBirchDexRatingText_LessThan110::
-	.string "You've finally reached\n"
-	.string "the 100-kind mark.\p"
-	.string "This is an impressive POKéDEX!$"
+	.string "Your field notes are really taking\n"
+	.string "shape. This is an impressive\l"
+	.string "POKéDEX!$"
 
 gBirchDexRatingText_LessThan120::
 	.string "There might be POKéMON that can be\n"
 	.string "found using ROCK SMASH.$"
 
 gBirchDexRatingText_LessThan130::
-	.string "You should get some more POKéMON\n"
-	.string "by trading with others.$"
+	.string "Try returning to familiar places\n"
+	.string "with a new ROD or a field skill.\l"
+	.string "You may meet different POKéMON!$"
 
 gBirchDexRatingText_LessThan140::
 	.string "I've heard of POKéMON that evolve\n"
@@ -105,8 +106,8 @@ gBirchDexRatingText_LessThan200::
 	.string "I can feel it in my bones!$"
 
 gBirchDexRatingText_DexCompleted::
-	.string "Congratulations!\n"
-	.string "Your POKéDEX is complete!$"
+	.string "Congratulations! Your HOENN\n"
+	.string "POKéDEX is complete!$"
 
 gBirchDexRatingText_OnANationwideBasis::
 	.string "Hmhm…\n"

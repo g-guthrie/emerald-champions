@@ -1396,6 +1396,10 @@ static const struct SpriteFrameImage sPicTable_ApricornTree[] = {
     overworld_frame(gObjectEventPic_ApricornTree, 2, 2, 0),
 };
 
+static const struct SpriteFrameImage sPicTable_Sign[] = {
+    overworld_frame(gObjectEventPic_Sign, 2, 2, 0),
+};
+
 #if IS_FRLG
 
 static const struct SpriteFrameImage sPicTable_RedNormal[] = {
@@ -2010,9 +2014,6 @@ static const struct SpriteFrameImage sPicTable_GymSign[] = {
     overworld_frame(gObjectEventPic_GymSign, 2, 4, 0),
 };
 
-static const struct SpriteFrameImage sPicTable_Sign[] = {
-    overworld_frame(gObjectEventPic_Sign, 2, 2, 0),
-};
 
 static const struct SpriteFrameImage sPicTable_WoodenSign[] = {
     overworld_frame(gObjectEventPic_WoodenSign, 2, 2, 0),

@@ -1,0 +1,252 @@
+{
+  "main": {
+    "files": 121,
+    "extracted_blocks": 1755,
+    "unique_labeled_blocks": 1755,
+    "raw_string_lines": 6589,
+    "uncovered_raw_string_lines": 0,
+    "inactive_frlg_lines_excluded": 0,
+    "uncovered": [],
+    "excluded": []
+  },
+  "npcs_a": {
+    "files": 117,
+    "extracted_blocks": 1382,
+    "unique_labeled_blocks": 1382,
+    "raw_string_lines": 4897,
+    "uncovered_raw_string_lines": 0,
+    "inactive_frlg_lines_excluded": 0,
+    "uncovered": [],
+    "excluded": []
+  },
+  "npcs_b": {
+    "files": 107,
+    "extracted_blocks": 1589,
+    "unique_labeled_blocks": 1589,
+    "raw_string_lines": 4931,
+    "uncovered_raw_string_lines": 0,
+    "inactive_frlg_lines_excluded": 0,
+    "uncovered": [],
+    "excluded": []
+  },
+  "shared": {
+    "files": 68,
+    "extracted_blocks": 3468,
+    "unique_labeled_blocks": 3473,
+    "raw_string_lines": 12831,
+    "uncovered_raw_string_lines": 24,
+    "inactive_frlg_lines_excluded": 2,
+    "uncovered": [
+      {
+        "file": "data/text/pc_transfer.inc",
+        "line": 12,
+        "label": "gText_PkmnTransferredLanettesPC",
+        "text": ".string \"LANETTE'S PC.\\p\"",
+        "inactive_frlg": false,
+        "covered_by_extraction": false
+      },
+      {
+        "file": "data/text/pc_transfer.inc",
+        "line": 14,
+        "label": "gText_PkmnTransferredLanettesPC",
+        "text": ".string \"It was placed in \\n\"",
+        "inactive_frlg": false,
+        "covered_by_extraction": false
+      },
+      {
+        "file": "data/text/pc_transfer.inc",
+        "line": 15,
+        "label": "gText_PkmnTransferredLanettesPC",
+        "text": ".string \"BOX \u201c{STR_VAR_1}.\u201d$\"",
+        "inactive_frlg": false,
+        "covered_by_extraction": false
+      },
+      {
+        "file": "data/text/pc_transfer.inc",
+        "line": 28,
+        "label": "gText_PkmnTransferredLanettesPCBoxFull",
+        "text": ".string \"LANETTE'S PC was full.\\p\"",
+        "inactive_frlg": false,
+        "covered_by_extraction": false
+      },
+      {
+        "file": "data/text/pc_transfer.inc",
+        "line": 30,
+        "label": "gText_PkmnTransferredLanettesPCBoxFull",
+        "text": ".string \"{STR_VAR_2} was transferred to\\n\"",
+        "inactive_frlg": false,
+        "covered_by_extraction": false
+      },
+      {
+        "file": "data/text/pc_transfer.inc",
+        "line": 31,
+        "label": "gText_PkmnTransferredLanettesPCBoxFull",
+        "text": ".string \"BOX \u201c{STR_VAR_1}.\u201d$\"",
+        "inactive_frlg": false,
+        "covered_by_extraction": false
+      },
+      {
+        "file": "data/scripts/berry_tree.inc",
+        "line": 270,
+        "label": "BerryTree_Text_BerryGrowthStage1",
+        "text": ".string \"This is where you planted the\\n{STR_VAR_1}!$\"",
+        "inactive_frlg": false,
+        "covered_by_extraction": false
+      },
+      {
+        "file": "data/scripts/berry_tree.inc",
+        "line": 272,
+        "label": "BerryTree_Text_BerryGrowthStage1",
+        "text": ".string \"One {STR_VAR_1} was planted here.$\"",
+        "inactive_frlg": false,
+        "covered_by_extraction": false
+      },
+      {
+        "file": "data/scripts/berry_tree.inc",
+        "line": 277,
+        "label": "BerryTree_Text_BerryGrowthStage2",
+        "text": ".string \"The {STR_VAR_1} is sprouting!$\"",
+        "inactive_frlg": false,
+        "covered_by_extraction": false
+      },
+      {
+        "file": "data/scripts/berry_tree.inc",
+        "line": 279,
+        "label": "BerryTree_Text_BerryGrowthStage2",
+        "text": ".string \"{STR_VAR_1} has sprouted.$\"",
+        "inactive_frlg": false,
+        "covered_by_extraction": false
+      },
+      {
+        "file": "data/scripts/berry_tree.inc",
+        "line": 284,
+        "label": "BerryTree_Text_BerryGrowthStage3",
+        "text": ".string \"The {STR_VAR_1}'s seedling is growing well!$\"",
+        "inactive_frlg": false,
+        "covered_by_extraction": false
+      },
+      {
+        "file": "data/scripts/berry_tree.inc",
+        "line": 286,
+        "label": "BerryTree_Text_BerryGrowthStage3",
+        "text": ".string \"This {STR_VAR_1} plant is growing taller.$\"",
+        "inactive_frlg": false,
+        "covered_by_extraction": false
+      },
+      {
+        "file": "data/scripts/berry_tree.inc",
+        "line": 297,
+        "label": "BerryTree_Text_BerryGrowthStage4",
+        "text": ".string \"The {STR_VAR_1} tree is in bloom!$\"",
+        "inactive_frlg": false,
+        "covered_by_extraction": false
+      },
+      {
+        "file": "data/scripts/berry_tree.inc",
+        "line": 299,
+        "label": "BerryTree_Text_BerryGrowthStage4",
+        "text": ".string \"These {STR_VAR_1} flowers are blooming\\n\"",
+        "inactive_frlg": false,
+        "covered_by_extraction": false
+      },
+      {
+        "file": "data/scripts/berry_tree.inc",
+        "line": 300,
+        "label": "BerryTree_Text_BerryGrowthStage4",
+        "text": ".string \"{STR_VAR_2}.$\"",
+        "inactive_frlg": false,
+        "covered_by_extraction": false
+      },
+      {
+        "file": "data/scripts/debug.inc",
+        "line": 762,
+        "label": "Debug_EventScript_FontTest_Text_9",
+        "text": ".string \"{FONT_SMALL_NARROWER}\"                 @ Edit this to test your font",
+        "inactive_frlg": false,
+        "covered_by_extraction": false
+      },
+      {
+        "file": "data/scripts/debug.inc",
+        "line": 763,
+        "label": "Debug_EventScript_FontTest_Text_9",
+        "text": ".string \"42 \u00d7 138 = 5796.\\n\"",
+        "inactive_frlg": false,
+        "covered_by_extraction": false
+      },
+      {
+        "file": "data/scripts/debug.inc",
+        "line": 764,
+        "label": "Debug_EventScript_FontTest_Text_9",
+        "text": ".string \"Mr Jock, TV quiz PhD: bags 20% fewer\\l\"",
+        "inactive_frlg": false,
+        "covered_by_extraction": false
+      },
+      {
+        "file": "data/scripts/debug.inc",
+        "line": 765,
+        "label": "Debug_EventScript_FontTest_Text_9",
+        "text": ".string \"lynx at a caf\u00e9; voil\u00e0, they're \u201cworth\u201d\\l\"",
+        "inactive_frlg": false,
+        "covered_by_extraction": false
+      },
+      {
+        "file": "data/scripts/debug.inc",
+        "line": 766,
+        "label": "Debug_EventScript_FontTest_Text_9",
+        "text": ".string \"\u26421/\u26401 = \u00a51. That's 10 + 9 - 8 = 11\\l\"",
+        "inactive_frlg": false,
+        "covered_by_extraction": false
+      },
+      {
+        "file": "data/scripts/debug.inc",
+        "line": 767,
+        "label": "Debug_EventScript_FontTest_Text_9",
+        "text": ".string \"Nintendo GBA can connect to a Nintendo\\l\"",
+        "inactive_frlg": false,
+        "covered_by_extraction": false
+      },
+      {
+        "file": "data/scripts/debug.inc",
+        "line": 768,
+        "label": "Debug_EventScript_FontTest_Text_9",
+        "text": ".string \"GameCube console! He claimed-though I don't\\l\"",
+        "inactive_frlg": false,
+        "covered_by_extraction": false
+      },
+      {
+        "file": "data/scripts/debug.inc",
+        "line": 769,
+        "label": "Debug_EventScript_FontTest_Text_9",
+        "text": ".string \"believe him-to have done so in an eyes-shut\\l\"",
+        "inactive_frlg": false,
+        "covered_by_extraction": false
+      },
+      {
+        "file": "data/scripts/debug.inc",
+        "line": 770,
+        "label": "Debug_EventScript_FontTest_Text_9",
+        "text": ".string \"state\u2026?$\"",
+        "inactive_frlg": false,
+        "covered_by_extraction": false
+      }
+    ],
+    "excluded": [
+      {
+        "file": "data/text/pc_transfer.inc",
+        "line": 10,
+        "label": "gText_PkmnTransferredLanettesPC",
+        "text": ".string \"BILL'S PC.\\p\"",
+        "inactive_frlg": true,
+        "covered_by_extraction": false
+      },
+      {
+        "file": "data/text/pc_transfer.inc",
+        "line": 26,
+        "label": "gText_PkmnTransferredLanettesPCBoxFull",
+        "text": ".string \"BILL'S PC was full.\\p\"",
+        "inactive_frlg": true,
+        "covered_by_extraction": false
+      }
+    ]
+  }
+}

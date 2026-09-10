@@ -1,0 +1,203 @@
+213 0 RESULT frames=24000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=e7fbc5e5cd139496 nonzero_pixels=38400 save_bytes=0
+READ width=4 address=020022c4 value=00000002
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=02002290 value=00000000
+READ width=4 address=020022d4 value=00000007
+READ width=4 address=020022e0 value=0000001d
+READ width=4 address=020022e4 value=00000035
+READ width=2 address=0200233e value=00000000
+READ width=2 address=0200233c value=00000000
+ 
+214 0 RESULT frames=24000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=1ec33df5cf92cb94 nonzero_pixels=38400 save_bytes=0
+READ width=4 address=020022c4 value=00000002
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=02002290 value=00000000
+READ width=4 address=020022d4 value=00000007
+READ width=4 address=020022e0 value=0000002b
+READ width=4 address=020022e4 value=00000020
+READ width=2 address=0200233e value=00000000
+READ width=2 address=0200233c value=00000000
+ 
+215 0 RESULT frames=24000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=c99c09e11bb1ca4b nonzero_pixels=38343 save_bytes=0
+READ width=4 address=020022c4 value=00000001
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=02002290 value=00000000
+READ width=4 address=020022d4 value=00001825
+READ width=4 address=020022e0 value=00000009
+READ width=4 address=020022e4 value=00000014
+READ width=2 address=0200233e value=00000000
+READ width=2 address=0200233c value=00000000
+ 
+216 0 RESULT frames=24000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=c99c09e11bb1ca4b nonzero_pixels=38343 save_bytes=0
+READ width=4 address=020022c4 value=00000001
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=02002290 value=00000000
+READ width=4 address=020022d4 value=00001825
+READ width=4 address=020022e0 value=00000009
+READ width=4 address=020022e4 value=00000014
+READ width=2 address=0200233e value=00000000
+READ width=2 address=0200233c value=00000000
+ 
+217 0 RESULT frames=24000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=735a83cbd9726a1a nonzero_pixels=38343 save_bytes=0
+READ width=4 address=020022c4 value=00000003
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=02002290 value=00000000
+READ width=4 address=020022d4 value=0000182a
+READ width=4 address=020022e0 value=00000009
+READ width=4 address=020022e4 value=0000000e
+READ width=2 address=0200233e value=00000000
+READ width=2 address=0200233c value=00000000
+ 
+218 0 RESULT frames=24000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=cc66662af3c3cd34 nonzero_pixels=38400 save_bytes=0
+READ width=4 address=020022c4 value=00000004
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=02002290 value=00000000
+READ width=4 address=020022d4 value=0000184e
+READ width=4 address=020022e0 value=0000000e
+READ width=4 address=020022e4 value=00000007
+READ width=2 address=0200233e value=00000000
+READ width=2 address=0200233c value=00000000
+ 
+219 0 RESULT frames=24000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=04d643cf17822ee8 nonzero_pixels=38343 save_bytes=0
+READ width=4 address=020022c4 value=00000005
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=02002290 value=00000000
+READ width=4 address=020022d4 value=00001855
+READ width=4 address=020022e0 value=0000000e
+READ width=4 address=020022e4 value=00000009
+READ width=2 address=0200233e value=00000000
+READ width=2 address=0200233c value=00000000
+ 
+220 0 RESULT frames=24000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=3ef977e0515984ee nonzero_pixels=38228 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=02002290 value=00000000
+READ width=4 address=020022d4 value=00000007
+READ width=4 address=020022e0 value=0000001d
+READ width=4 address=020022e4 value=00000035
+READ width=2 address=0200233e value=00000000
+READ width=2 address=0200233c value=00000000
+ 
+221 0 RESULT frames=24000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=d7109d524ff363ee nonzero_pixels=38334 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=02002290 value=00000000
+READ width=4 address=020022d4 value=00000007
+READ width=4 address=020022e0 value=0000002b
+READ width=4 address=020022e4 value=00000020
+READ width=2 address=0200233e value=00000000
+READ width=2 address=0200233c value=00000000
+ 
+222 0 RESULT frames=24000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=93298e1142ee2ac4 nonzero_pixels=38301 save_bytes=0
+READ width=4 address=020022c4 value=00000001
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=02002290 value=00000000
+READ width=4 address=020022d4 value=00000007
+READ width=4 address=020022e0 value=0000001f
+READ width=4 address=020022e4 value=00000022
+READ width=2 address=0200233e value=00000000
+READ width=2 address=0200233c value=00000000
+ 
+223 0 RESULT frames=24000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=48e3a2e5ae8518f8 nonzero_pixels=38293 save_bytes=0
+READ width=4 address=020022c4 value=00000001
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=02002290 value=00000000
+READ width=4 address=020022d4 value=00000007
+READ width=4 address=020022e0 value=0000001f
+READ width=4 address=020022e4 value=00000022
+READ width=2 address=0200233e value=00000000
+READ width=2 address=0200233c value=00000000
+ 
+224 0 RESULT frames=24000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=ec3db3629cdd8032 nonzero_pixels=32556 save_bytes=0
+READ width=4 address=020022c4 value=00000001
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=02002290 value=00000001
+READ width=4 address=020022d4 value=00000f00
+READ width=4 address=020022e0 value=00000008
+READ width=4 address=020022e4 value=00000003
+READ width=2 address=0200233e value=00000008
+READ width=2 address=0200233c value=00000000
+ 
+225 0 RESULT frames=15000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=846cda11c77402f9 nonzero_pixels=13220 save_bytes=0
+READ width=4 address=020022c4 value=00008000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=02002290 value=00000000
+READ width=4 address=020022d4 value=00000f0c
+READ width=4 address=020022e0 value=00000005
+READ width=4 address=020022e4 value=00000005
+READ width=2 address=0200233e value=00000000
+READ width=2 address=0200233c value=00000111
+ 
+226 0 RESULT frames=15000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=846cda11c77402f9 nonzero_pixels=13220 save_bytes=0
+READ width=4 address=020022c4 value=00008000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=02002290 value=00000000
+READ width=4 address=020022d4 value=00000f0c
+READ width=4 address=020022e0 value=00000005
+READ width=4 address=020022e4 value=00000005
+READ width=2 address=0200233e value=00000000
+READ width=2 address=0200233c value=00000111
+ 
+227 0 RESULT frames=15000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=ab66140357918b0b nonzero_pixels=13224 save_bytes=0
+READ width=4 address=020022c4 value=00008000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=02002290 value=00000000
+READ width=4 address=020022d4 value=00000f0c
+READ width=4 address=020022e0 value=00000002
+READ width=4 address=020022e4 value=00000005
+READ width=2 address=0200233e value=00000000
+READ width=2 address=0200233c value=0000010e
+ 
+228 0 RESULT frames=15000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=ab66140357918b0b nonzero_pixels=13224 save_bytes=0
+READ width=4 address=020022c4 value=00008000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=02002290 value=00000000
+READ width=4 address=020022d4 value=00000f0c
+READ width=4 address=020022e0 value=00000002
+READ width=4 address=020022e4 value=00000005
+READ width=2 address=0200233e value=00000000
+READ width=2 address=0200233c value=0000010e
+ 
+Traceback (most recent call last):
+  File "/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/dialogue-slateport-20260910/probe_sootopolis.py", line 33, in <module>
+    with concurrent.futures.ThreadPoolExecutor(max_workers=2) as ex:list(ex.map(probe,sys.argv[1:] or range(213,231)))
+                                                                    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/concurrent/futures/_base.py", line 639, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/concurrent/futures/_base.py", line 311, in _result_or_cancel
+    return fut.result(timeout)
+           ~~~~~~~~~~^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/concurrent/futures/_base.py", line 443, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/concurrent/futures/_base.py", line 395, in __get_result
+    raise self._exception
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/concurrent/futures/thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/concurrent/futures/thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/dialogue-slateport-20260910/probe_sootopolis.py", line 15, in probe
+    if p>=229:kind,q=1,flag('FLAG_DAILY_SOOTOPOLIS_RECEIVED_BERRY')
+                       ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/dialogue-slateport-20260910/probe_sootopolis.py", line 6, in flag
+    def flag(n):return eval(re.search(r'#define '+n+r'\s+([^\n/]+)',flags)[1].strip(),{'SYSTEM_FLAGS':0x860,'__builtins__':{}})
+                       ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 1, in <module>
+NameError: name 'DAILY_FLAGS_START' is not defined

@@ -675,6 +675,9 @@ SootopolisCity_EventScript_ExpertLeadToCave::
 
 SootopolisCity_EventScript_ExpertPostLegendaries::
 	msgbox SootopolisCity_Text_CaveOfOriginSleepsToo, MSGBOX_DEFAULT
+	setvar VAR_0x8004, LEGENDARY_SIGN_TERAPAGOS
+	special ResearchSelectedLegendarySign
+	msgbox gStringVar4, MSGBOX_DEFAULT
 	release
 	end
 
@@ -708,28 +711,42 @@ SootopolisCity_EventScript_KiriGiveBerry::
 	special GetPlayerBigGuyGirlString
 	goto_if_set FLAG_DAILY_SOOTOPOLIS_RECEIVED_BERRY, SootopolisCity_EventScript_KiriReceivedBerry
 	msgbox SootopolisCity_Text_NameIsKiriHaveOneOfThese, MSGBOX_DEFAULT
-	giverandomberry BERRY_ID_POMEG, BERRY_ID_NOMEL
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_DAILY_SOOTOPOLIS_RECEIVED_BERRY
-	msgbox SootopolisCity_Text_GiveYouThisBerryToo, MSGBOX_DEFAULT
+	callnative Script_GiveRandomBerry
+	.byte BERRY_ID_POMEG
+	.byte BERRY_ID_NOMEL
+	copyvar VAR_0x8008, VAR_RESULT
 	random 2
-	goto_if_eq VAR_RESULT, 0, SootopolisCity_EventScript_GiveFigyBerry
-	goto_if_eq VAR_RESULT, 1, SootopolisCity_EventScript_GiveIapapaBerry
-	end
-
-SootopolisCity_EventScript_GiveFigyBerry::
-	giveitem ITEM_FIGY_BERRY
+	setvar VAR_0x8009, ITEM_FIGY_BERRY
+	call_if_eq VAR_RESULT, 1, SootopolisCity_EventScript_KiriChooseIapapa
+	additem VAR_0x8008, 1
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	additem VAR_0x8009, 1
+	goto_if_eq VAR_RESULT, FALSE, SootopolisCity_EventScript_KiriNoRoomForPair
+	setflag FLAG_DAILY_SOOTOPOLIS_RECEIVED_BERRY
+	copyvar VAR_0x8000, VAR_0x8008
+	call SootopolisCity_EventScript_KiriShowDeliveredBerry
+	msgbox SootopolisCity_Text_GiveYouThisBerryToo, MSGBOX_DEFAULT
+	copyvar VAR_0x8000, VAR_0x8009
+	call SootopolisCity_EventScript_KiriShowDeliveredBerry
 	msgbox SootopolisCity_Text_WhatKindOfWishInYourName, MSGBOX_DEFAULT
 	release
 	end
 
-SootopolisCity_EventScript_GiveIapapaBerry::
-	giveitem ITEM_IAPAPA_BERRY
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	msgbox SootopolisCity_Text_WhatKindOfWishInYourName, MSGBOX_DEFAULT
-	release
-	end
+SootopolisCity_EventScript_KiriChooseIapapa::
+	setvar VAR_0x8009, ITEM_IAPAPA_BERRY
+	return
+
+SootopolisCity_EventScript_KiriNoRoomForPair::
+	removeitem VAR_0x8008, 1
+	goto Common_EventScript_ShowBagIsFull
+
+@ Both berries are already delivered; show the normal receipt without adding again.
+SootopolisCity_EventScript_KiriShowDeliveredBerry::
+	copyvar VAR_0x8006, VAR_0x8000
+	setvar VAR_0x8001, 1
+	setvar VAR_0x8007, TRUE
+	call EventScript_ObtainItemMessage
+	return
 
 SootopolisCity_EventScript_KiriReceivedBerry::
 	msgbox SootopolisCity_Text_LikeSeasonBornIn, MSGBOX_YESNO
@@ -1524,9 +1541,11 @@ SootopolisCity_Text_AwakenedPokemonClash:
 	.string "of a third POKéMON…$"
 
 SootopolisCity_Text_CaveOfOriginSleepsToo:
-	.string "This is the CAVE OF ORIGIN…\p"
-	.string "The crisis has passed, but new signs\n"
-	.string "stir within. You may enter.$"
+	.string "The crisis has passed. You may\n"
+	.string "explore the CAVE OF ORIGIN again.\p"
+	.string "TERAPAGOS lives on B1F, the floor\n"
+	.string "where you met WALLACE. Let me\l"
+	.string "check its discovery record.$"
 
 SootopolisCity_Text_SootopolisSkyBeautiful:
 	.string "SOOTOPOLIS sprang up as a town in\n"
@@ -1571,15 +1590,20 @@ SootopolisCity_Text_YouBroughtFlyingMon:
 	.string "Well, aren't you amazing!$"
 
 SootopolisCity_Text_GroudonPleaseStop:
-	.string "MAXIE: GROUDON, stop! I wanted land that\n"
-	.string "could sustain a future, not consume it.\p"
-	.string "My certainty left no room for yours.$"
+	.string "MAXIE: GROUDON, stop!\p"
+	.string "I wanted more land for people and\n"
+	.string "POKéMON to live on. You're\l"
+	.string "burning the homes they already\l"
+	.string "have!$"
 
 SootopolisCity_Text_AfterAllOurScheming:
-	.string "MAXIE: RAYQUAZA did not overpower both\n"
-	.string "rivals. It restored their relationship.\p"
-	.string "All our models optimized one side of a\n"
-	.string "system that could only live in balance.$"
+	.string "MAXIE: The heat is fading…\n"
+	.string "RAYQUAZA stopped them.\p"
+	.string "I was so certain more land would\n"
+	.string "help HOENN. I wouldn't listen to\l"
+	.string "anyone who questioned me.\p"
+	.string "Look what that certainty nearly\n"
+	.string "cost us.$"
 
 SootopolisCity_Text_KyogreCalmDown:
 	.string "ARCHIE: KYOGRE! I called this freedom,\n"
@@ -1587,48 +1611,68 @@ SootopolisCity_Text_KyogreCalmDown:
 	.string "The RED ORB cannot make you hear me.$"
 
 SootopolisCity_Text_TryingMeaninglessToPokemon:
-	.string "ARCHIE: Land, sea, and sky returned to\n"
-	.string "motion without belonging to any of us.\p"
-	.string "AQUA tried to free the world by choosing\n"
-	.string "its answer for it. That was control too.$"
+	.string "ARCHIE: The rain's stopped.\n"
+	.string "People can come out again.\p"
+	.string "I said I was protecting sea\n"
+	.string "POKéMON. I nearly washed away\l"
+	.string "every home along this coast.\p"
+	.string "We have to return the ORBS,\n"
+	.string "MAXIE.$"
 
 SootopolisCity_Text_InvolvedWithCrisisComeWithMe:
-	.string "STEVEN: GROUDON and KYOGRE are pulling\n"
-	.string "every awakened SIGN toward this crater.\p"
-	.string "No team can defeat this weather. The\n"
-	.string "balance itself must be restored.\p"
-	.string "You have solved that kind of problem all\n"
-	.string "across HOENN. Come meet WALLACE.$"
+	.string "STEVEN: GROUDON and KYOGRE's\n"
+	.string "clash is tearing through this\l"
+	.string "crater.\p"
+	.string "Their weather reaches across\n"
+	.string "HOENN. We must restore the\l"
+	.string "balance before anyone else is\l"
+	.string "hurt.\p"
+	.string "WALLACE knows the old legends.\n"
+	.string "Come with me.$"
 
 SootopolisCity_Text_DoesThisMakeYourFearPokemon:
-	.string "STEVEN: Power without relationship looks\n"
-	.string "terrifying. You already know the answer:\l"
-	.string "a partner is not a tool to command.$"
+	.string "STEVEN: I understand why people\n"
+	.string "are frightened. Neither leader\l"
+	.string "could control the POKéMON they\l"
+	.string "awakened.\p"
+	.string "But POKéMON have helped us\n"
+	.string "through this, too. We must find a\l"
+	.string "way to stop the fighting.$"
 
 SootopolisCity_Text_HereWereAreHelpWallace:
-	.string "WALLACE knows HOENN's oldest balance\n"
-	.string "ritual. Share what the SIGNS taught you.$"
+	.string "WALLACE knows the story of the\n"
+	.string "last time these two clashed. Tell\l"
+	.string "him what you have seen.$"
 
 SootopolisCity_Text_KnowWhatsNeededToHelpHim:
 	.string "STEVEN: I think you have what's\n"
 	.string "needed to help him…$"
 
 SootopolisCity_Text_NeverBeenToSkyPillar:
-	.string "STEVEN: SKY PILLAR is on the north side\n"
-	.string "of ROUTE 131, east of PACIFIDLOG.\p"
-	.string "The oldest SIGN in HOENN should be there,\n"
-	.string "and no one has read it in centuries.$"
+	.string "STEVEN: SKY PILLAR stands on the\n"
+	.string "north side of ROUTE 131, east of\l"
+	.string "PACIFIDLOG.\p"
+	.string "RAYQUAZA is said to rest at its\n"
+	.string "summit. Find it and bring it\l"
+	.string "here!$"
 
 SootopolisCity_Text_SoThatsRayquaza:
-	.string "STEVEN: RAYQUAZA did not make them flee.\n"
-	.string "It reminded land and sea of the whole.$"
+	.string "STEVEN: So that's RAYQUAZA…\p"
+	.string "Just as the old tale said, it\n"
+	.string "stopped their clash. You reached\l"
+	.string "it in time, {PLAYER}.$"
 
 SootopolisCity_Text_MaxieArchieLeft:
-	.string "STEVEN: MAXIE and ARCHIE have gone to\n"
-	.string "MT. PYRE to return the ORBS.\p"
-	.string "The network is quiet again. Every SIGN\n"
-	.string "it woke is still out there, waiting for\l"
-	.string "the partner it asked for.$"
+	.string "STEVEN: MAXIE and ARCHIE have\n"
+	.string "gone to MT. PYRE to return the\l"
+	.string "ORBS.\p"
+	.string "The weather is settling. There is\n"
+	.string "still so much of HOENN to\l"
+	.string "explore, and so many POKéMON to\l"
+	.string "meet.\p"
+	.string "The guide near the POKéMON\n"
+	.string "CENTER's PC can tell you about\l"
+	.string "local legendary discoveries.$"
 
 SootopolisCity_Text_HaventYouScaledSkyPillar:
 	.string "WALLACE: Oh?\n"
@@ -1639,17 +1683,21 @@ SootopolisCity_Text_HaventYouScaledSkyPillar:
 	.string "the top of the SKY PILLAR…$"
 
 SootopolisCity_Text_AquaMagmaDidntMeanHarm:
-	.string "WALLACE: MAXIE and ARCHIE caused this,\n"
-	.string "but both finally understand the cost.\p"
-	.string "Hear them. Accountability matters more\n"
-	.string "when the motive once sounded noble.$"
+	.string "WALLACE: MAXIE and ARCHIE are\n"
+	.string "still here. They owe you an\l"
+	.string "explanation.\p"
+	.string "Returning the ORBS will be a\n"
+	.string "start. There is much more for\l"
+	.string "them to put right.$"
 
 SootopolisCity_Text_ThankYouForHelpAcceptThis:
-	.string "WALLACE: You did not win by possessing\n"
-	.string "the strongest POKéMON in the crater.\p"
-	.string "You found the one relationship that made\n"
-	.string "every other action possible.\p"
-	.string "HOENN is safe. Please accept this.$"
+	.string "WALLACE: You crossed HOENN to\n"
+	.string "stop this disaster, then climbed\l"
+	.string "SKY PILLAR when we needed you\l"
+	.string "most.\p"
+	.string "Thank you, {PLAYER}{KUN}.\n"
+	.string "SOOTOPOLIS is safe again. Please\l"
+	.string "accept this.$"
 
 SootopolisCity_Text_ExplainWaterfallGoToGym:
 	.string "That HIDDEN MACHINE contains\n"
@@ -1665,5 +1713,9 @@ SootopolisCity_Text_ExplainWaterfallGoToGym:
 	.string "that door.$"
 
 SootopolisCity_Text_DazzledByMentor:
-	.string "WALLACE: JUAN's Gym is the final test\n"
-	.string "before the LEAGUE. Expect no mercy.$"
+	.string "WALLACE: JUAN, my mentor, leads\n"
+	.string "this city's GYM. His BADGE is the\l"
+	.string "last you need for the LEAGUE.\p"
+	.string "You've helped our city through so\n"
+	.string "much. I look forward to seeing\l"
+	.string "how far your journey takes you.$"

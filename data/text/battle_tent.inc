@@ -111,9 +111,11 @@ FallarborTown_BattleTentLobby_Text_LookingForwardToArrival:
 	.string "I must save the game. Please wait.$"
 
 VerdanturfTown_BattleTentLobby_Text_WelcomeToBattleTent:
-	.string "Welcome to the VERDANTURF BATTLE TENT!\p"
-	.string "Here, four POKéMON battle in pairs, and\n"
-	.string "their TRAINER only watches.$"
+	.string "Welcome to the VERDANTURF BATTLE\n"
+	.string "TENT!\p"
+	.string "Here, four POKéMON battle in\n"
+	.string "pairs, and their TRAINER only\l"
+	.string "watches.$"
 
 VerdanturfTown_BattleTentLobby_Text_TakeChallenge:
 	.string "Do you wish to take the VERDANTURF\n"

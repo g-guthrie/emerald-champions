@@ -305,11 +305,11 @@ Route103_Text_MayRoute103Pokemon:
 	.string "on ROUTE 103 include…$"
 
 Route103_Text_MayLetsBattle:
-	.string "MAY: I took the partner you left\n"
-	.string "with Dad. PIKACHU and the rest\l"
-	.string "of my team are ready too!\p"
-	.string "Bring the team you want.\n"
-	.string "Ready for our DOUBLE BATTLE?$"
+	.string "MAY: The partner you left with\n"
+	.string "Dad has joined my team!\p"
+	.string "I've been so excited to introduce\n"
+	.string "everyone. Ready for our DOUBLE\l"
+	.string "BATTLE?$"
 
 Route103_Text_MayDefeated:
 	.string "Your team earned that win!$"
@@ -324,10 +324,10 @@ Route103_Text_BrendanRoute103Pokemon:
 
 Route103_Text_BrendanLetsBattle:
 	.string "BRENDAN: I took the partner you\n"
-	.string "left with Dad. PIKACHU and the\l"
-	.string "rest of my team are ready too!\p"
-	.string "Bring the team you want.\n"
-	.string "Ready for our DOUBLE BATTLE?$"
+	.string "left with Dad. We're getting\l"
+	.string "along great!\p"
+	.string "Let's see how your team and mine\n"
+	.string "measure up. DOUBLE BATTLE. Ready?$"
 
 Route103_Text_BrendanDefeated:
 	.string "Huh. We still have work to do.$"

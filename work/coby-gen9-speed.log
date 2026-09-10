@@ -1,0 +1,639 @@
+arm-none-eabi-cpp -iquote include -Wno-trigraphs -DMODERN=1 -DTESTING=0 -DEMERALD -std=gnu17 -DEC_HEADLESS_FIXTURES=0 -traditional-cpp - < src/data/trainers.party | tools/trainerproc/trainerproc -o src/data/trainers.h -i src/data/trainers.party -
+tools/scaninc/scaninc -M build/emerald-test/test/battle/ai/emerald_champions_plans.d -g build/assets -I include -I tools/agbcc/include test/battle/ai/emerald_champions_plans.c
+tools/scaninc/scaninc -M build/emerald-test/test/test_runner_battle.d -g build/assets -I include -I tools/agbcc/include test/test_runner_battle.c
+tools/scaninc/scaninc -M build/emerald-test/src/emerald_champions_battle_plan.d -g build/assets -I include -I tools/agbcc/include src/emerald_champions_battle_plan.c
+tools/scaninc/scaninc -M build/emerald-test/src/data.d -g build/assets -I include -I tools/agbcc/include src/data.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/data.o src/data.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/emerald_champions_battle_plan.o src/emerald_champions_battle_plan.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/test_runner_battle.o test/test_runner_battle.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/battle/ai/emerald_champions_plans.o test/battle/ai/emerald_champions_plans.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 4
+[0] EC live review Coby timing: six-player bench: [32mPASS[0m
+REVIEW_INPUT trainer=709 slot=0 species=822 lv=38 HP=135 Atk=67 Def=89 SpA=44 SpD=58 Spe=76 item=494 ability=145
+REVIEW_INPUT trainer=709 slot=1 species=733 lv=38 HP=120 Atk=144 Def=73 SpA=65 SpD=73 Spe=86 item=523 ability=92
+REVIEW_INPUT trainer=709 slot=2 species=430 lv=38 HP=136 Atk=135 Def=56 SpA=86 SpD=56 Spe=103 item=471 ability=105
+REVIEW_INPUT trainer=709 slot=3 species=1329 lv=38 HP=113 Atk=62 Def=62 SpA=120 SpD=62 Spe=148 item=428 ability=172
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Tailwind target=1
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Beak Blast target=0
+AI decision turn=2 actor=1 move=Brave Bird target=0
+AI decision turn=2 actor=3 move=Rock Blast target=2
+REVIEW_AFTER board=99 turns=1 reserves=0 species=822/733 HP=135/120 foes=98/114 faints=0/0 initialFrames=60
+REVIEW_STATE actor=1 move=Tailwind PP=15/20/14/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=145 item=494
+REVIEW_STATE actor=3 move=Beak Blast PP=4/20/10/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=92 item=523
+REVIEW_TIMING setup=11 bothActors=49 complete=60
+REVIEW_INPUT trainer=709 slot=0 species=822 lv=38 HP=135 Atk=67 Def=89 SpA=44 SpD=58 Spe=76 item=494 ability=145
+REVIEW_INPUT trainer=709 slot=1 species=733 lv=38 HP=120 Atk=144 Def=73 SpA=65 SpD=73 Spe=86 item=523 ability=92
+REVIEW_INPUT trainer=709 slot=2 species=430 lv=38 HP=136 Atk=135 Def=56 SpA=86 SpD=56 Spe=103 item=471 ability=105
+REVIEW_INPUT trainer=709 slot=3 species=1329 lv=38 HP=113 Atk=62 Def=62 SpA=120 SpD=62 Spe=148 item=428 ability=172
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Sucker Punch target=2
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI decision turn=2 actor=1 move=Sucker Punch target=2
+AI decision turn=2 actor=3 move=Hurricane target=0
+REVIEW_AFTER board=99 turns=1 reserves=1 species=430/1329 HP=136/113 foes=98/114 faints=0/0 initialFrames=19
+REVIEW_STATE actor=1 move=Sucker Punch PP=15/4/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=105 item=471
+REVIEW_STATE actor=3 move=Thunderbolt PP=14/10/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=172 item=428
+REVIEW_TIMING setup=6 bothActors=15 complete=21
+[1] EC live review Coby: Competitive and critical reserve pressure: [32mPASS[0m
+REVIEW_INPUT trainer=709 slot=0 species=822 lv=38 HP=135 Atk=67 Def=89 SpA=44 SpD=58 Spe=76 item=494 ability=145
+REVIEW_INPUT trainer=709 slot=1 species=733 lv=38 HP=120 Atk=144 Def=73 SpA=65 SpD=73 Spe=86 item=523 ability=92
+REVIEW_INPUT trainer=709 slot=2 species=430 lv=38 HP=136 Atk=135 Def=56 SpA=86 SpD=56 Spe=103 item=471 ability=105
+REVIEW_INPUT trainer=709 slot=3 species=1329 lv=38 HP=113 Atk=62 Def=62 SpA=120 SpD=62 Spe=148 item=428 ability=172
+AI decision turn=1 actor=0 move=Snarl target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI decision turn=2 actor=1 move=Night Slash target=2
+AI decision turn=2 actor=3 move=Protect target=3
+REVIEW_AFTER board=80 turns=1 reserves=1 species=430/1329 HP=136/77 foes=137/135 faints=0/0 initialFrames=17
+REVIEW_STATE actor=1 move=Protect PP=15/5/20/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=105 item=471
+REVIEW_STATE actor=3 move=Thunderbolt PP=14/10/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=172 item=428
+COBY_FOES PP=15/15/20/5 SpA=6/6
+COBY_PLAYER_MOVE - / Thunderbolt
+REVIEW_INPUT trainer=709 slot=0 species=822 lv=38 HP=135 Atk=67 Def=89 SpA=44 SpD=58 Spe=76 item=494 ability=145
+REVIEW_INPUT trainer=709 slot=1 species=733 lv=38 HP=120 Atk=144 Def=73 SpA=65 SpD=73 Spe=86 item=523 ability=92
+REVIEW_INPUT trainer=709 slot=2 species=430 lv=38 HP=136 Atk=135 Def=56 SpA=86 SpD=56 Spe=103 item=471 ability=105
+REVIEW_INPUT trainer=709 slot=3 species=1329 lv=38 HP=113 Atk=62 Def=62 SpA=120 SpD=62 Spe=148 item=428 ability=172
+AI decision turn=1 actor=0 move=Snarl target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI decision turn=2 actor=0 move=Snarl target=1
+AI decision turn=2 actor=1 move=Night Slash target=2
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=1 move=Brave Bird target=0
+AI decision turn=3 actor=3 move=Thunderbolt target=0
+REVIEW_AFTER board=80 turns=2 reserves=1 species=430/1329 HP=136/77 foes=147/75 faints=0/0 initialFrames=17
+REVIEW_STATE actor=1 move=Night Slash PP=15/5/19/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=105 item=471
+REVIEW_STATE actor=3 move=Protect PP=14/10/15/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=172 item=428
+COBY_FOES PP=15/15/20/5 SpA=6/6
+COBY_PLAYER_MOVE - / Thunderbolt
+REVIEW_INPUT trainer=709 slot=0 species=822 lv=38 HP=135 Atk=67 Def=89 SpA=44 SpD=58 Spe=76 item=494 ability=145
+REVIEW_INPUT trainer=709 slot=1 species=733 lv=38 HP=120 Atk=144 Def=73 SpA=65 SpD=73 Spe=86 item=523 ability=92
+REVIEW_INPUT trainer=709 slot=2 species=430 lv=38 HP=136 Atk=135 Def=56 SpA=86 SpD=56 Spe=103 item=471 ability=105
+REVIEW_INPUT trainer=709 slot=3 species=1329 lv=38 HP=113 Atk=62 Def=62 SpA=120 SpD=62 Spe=148 item=428 ability=172
+AI decision turn=1 actor=0 move=Snarl target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI decision turn=2 actor=0 move=Snarl target=1
+AI decision turn=2 actor=1 move=Night Slash target=2
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=0 move=Snarl target=1
+AI decision turn=3 actor=1 move=Brave Bird target=0
+AI decision turn=3 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=3 move=Thunderbolt target=0
+AI decision turn=4 actor=1 move=Brave Bird target=0
+AI decision turn=4 actor=3 move=Thunderbolt target=0
+REVIEW_AFTER board=80 turns=3 reserves=1 species=430/1329 HP=114/41 foes=54/75 faints=0/0 initialFrames=17
+REVIEW_STATE actor=1 move=Brave Bird PP=14/5/19/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=105 item=471
+REVIEW_STATE actor=3 move=Thunderbolt PP=13/10/15/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=172 item=428
+COBY_FOES PP=15/15/20/5 SpA=6/6
+COBY_PLAYER_MOVE - / Thunderbolt
+REVIEW_INPUT trainer=709 slot=0 species=822 lv=38 HP=135 Atk=67 Def=89 SpA=44 SpD=58 Spe=76 item=494 ability=145
+REVIEW_INPUT trainer=709 slot=1 species=733 lv=38 HP=120 Atk=144 Def=73 SpA=65 SpD=73 Spe=86 item=523 ability=92
+REVIEW_INPUT trainer=709 slot=2 species=430 lv=38 HP=136 Atk=135 Def=56 SpA=86 SpD=56 Spe=103 item=471 ability=105
+REVIEW_INPUT trainer=709 slot=3 species=1329 lv=38 HP=113 Atk=62 Def=62 SpA=120 SpD=62 Spe=148 item=428 ability=172
+AI decision turn=1 actor=0 move=Snarl target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI decision turn=2 actor=0 move=Snarl target=1
+AI decision turn=2 actor=1 move=Night Slash target=2
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=0 move=Snarl target=1
+AI decision turn=3 actor=1 move=Brave Bird target=0
+AI decision turn=3 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=3 move=Thunderbolt target=0
+AI decision turn=4 actor=0 move=Snarl target=1
+AI decision turn=4 actor=1 move=Brave Bird target=0
+AI decision turn=4 actor=2 move=Thunderbolt target=3
+AI decision turn=4 actor=3 move=Thunderbolt target=0
+AI decision turn=5 actor=1 move=Night Slash target=2
+AI decision turn=5 actor=3 move=Hurricane target=2
+REVIEW_AFTER board=80 turns=4 reserves=1 species=430/1329 HP=109/5 foes=0/75 faints=0/1 initialFrames=17
+REVIEW_STATE actor=1 move=Brave Bird PP=13/5/19/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=105 item=471
+REVIEW_STATE actor=3 move=Thunderbolt PP=12/10/15/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=172 item=428
+COBY_FOES PP=15/15/20/5 SpA=6/6
+COBY_PLAYER_MOVE - / Thunderbolt
+REVIEW_INPUT trainer=709 slot=0 species=822 lv=38 HP=135 Atk=67 Def=89 SpA=44 SpD=58 Spe=76 item=494 ability=145
+REVIEW_INPUT trainer=709 slot=1 species=733 lv=38 HP=120 Atk=144 Def=73 SpA=65 SpD=73 Spe=86 item=523 ability=92
+REVIEW_INPUT trainer=709 slot=2 species=430 lv=38 HP=136 Atk=135 Def=56 SpA=86 SpD=56 Spe=103 item=471 ability=105
+REVIEW_INPUT trainer=709 slot=3 species=1329 lv=38 HP=113 Atk=62 Def=62 SpA=120 SpD=62 Spe=148 item=428 ability=172
+AI decision turn=1 actor=0 move=Night Shade target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI decision turn=2 actor=1 move=Night Slash target=0
+AI decision turn=2 actor=3 move=Thunderbolt target=0
+REVIEW_AFTER board=81 turns=1 reserves=1 species=430/1329 HP=136/77 foes=86/135 faints=0/0 initialFrames=17
+REVIEW_STATE actor=1 move=Protect PP=15/5/20/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=105 item=471
+REVIEW_STATE actor=3 move=Thunderbolt PP=13/10/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=172 item=428
+COBY_FOES PP=15/15/20/5 SpA=6/6
+COBY_PLAYER_MOVE - / Thunderbolt
+REVIEW_INPUT trainer=709 slot=0 species=822 lv=38 HP=135 Atk=67 Def=89 SpA=44 SpD=58 Spe=76 item=494 ability=145
+REVIEW_INPUT trainer=709 slot=1 species=733 lv=38 HP=120 Atk=144 Def=73 SpA=65 SpD=73 Spe=86 item=523 ability=92
+REVIEW_INPUT trainer=709 slot=2 species=430 lv=38 HP=136 Atk=135 Def=56 SpA=86 SpD=56 Spe=103 item=471 ability=105
+REVIEW_INPUT trainer=709 slot=3 species=1329 lv=38 HP=113 Atk=62 Def=62 SpA=120 SpD=62 Spe=148 item=428 ability=172
+AI decision turn=1 actor=0 move=Night Shade target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI decision turn=2 actor=0 move=Night Shade target=1
+AI decision turn=2 actor=1 move=Night Slash target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Thunderbolt target=0
+AI decision turn=3 actor=1 move=Night Slash target=2
+AI decision turn=3 actor=3 move=Protect target=3
+REVIEW_AFTER board=81 turns=2 reserves=1 species=430/1329 HP=136/41 foes=0/135 faints=0/1 initialFrames=17
+REVIEW_STATE actor=1 move=Night Slash PP=15/5/18/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=105 item=471
+REVIEW_STATE actor=3 move=Thunderbolt PP=11/10/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=172 item=428
+COBY_FOES PP=15/15/20/5 SpA=6/6
+COBY_PLAYER_MOVE - / Thunderbolt
+REVIEW_INPUT trainer=709 slot=0 species=822 lv=38 HP=135 Atk=67 Def=89 SpA=44 SpD=58 Spe=76 item=494 ability=145
+REVIEW_INPUT trainer=709 slot=1 species=733 lv=38 HP=120 Atk=144 Def=73 SpA=65 SpD=73 Spe=86 item=523 ability=92
+REVIEW_INPUT trainer=709 slot=2 species=430 lv=38 HP=136 Atk=135 Def=56 SpA=86 SpD=56 Spe=103 item=471 ability=105
+REVIEW_INPUT trainer=709 slot=3 species=1329 lv=38 HP=113 Atk=62 Def=62 SpA=120 SpD=62 Spe=148 item=428 ability=172
+AI decision turn=1 actor=0 move=Night Shade target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI decision turn=2 actor=0 move=Night Shade target=1
+AI decision turn=2 actor=1 move=Night Slash target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Thunderbolt target=0
+AI decision turn=3 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=1 move=Night Slash target=2
+AI decision turn=3 actor=3 move=Protect target=3
+AI decision turn=4 actor=1 move=Night Slash target=2
+AI decision turn=4 actor=3 move=Hurricane target=2
+REVIEW_AFTER board=81 turns=3 reserves=1 species=430/1329 HP=136/41 foes=0/75 faints=0/1 initialFrames=17
+REVIEW_STATE actor=1 move=Night Slash PP=15/5/17/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=105 item=471
+REVIEW_STATE actor=3 move=Protect PP=11/10/15/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=172 item=428
+COBY_FOES PP=15/15/20/5 SpA=6/6
+COBY_PLAYER_MOVE - / Thunderbolt
+REVIEW_INPUT trainer=709 slot=0 species=822 lv=38 HP=135 Atk=67 Def=89 SpA=44 SpD=58 Spe=76 item=494 ability=145
+REVIEW_INPUT trainer=709 slot=1 species=733 lv=38 HP=120 Atk=144 Def=73 SpA=65 SpD=73 Spe=86 item=523 ability=92
+REVIEW_INPUT trainer=709 slot=2 species=430 lv=38 HP=136 Atk=135 Def=56 SpA=86 SpD=56 Spe=103 item=471 ability=105
+REVIEW_INPUT trainer=709 slot=3 species=1329 lv=38 HP=113 Atk=62 Def=62 SpA=120 SpD=62 Spe=148 item=428 ability=172
+AI decision turn=1 actor=0 move=Night Shade target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI decision turn=2 actor=0 move=Night Shade target=1
+AI decision turn=2 actor=1 move=Night Slash target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Thunderbolt target=0
+AI decision turn=3 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=1 move=Night Slash target=2
+AI decision turn=3 actor=3 move=Protect target=3
+AI decision turn=4 actor=2 move=Thunderbolt target=3
+AI decision turn=4 actor=1 move=Night Slash target=2
+AI decision turn=4 actor=3 move=Hurricane target=2
+AI decision turn=5 actor=1 move=Brave Bird target=2
+AI decision turn=5 actor=3 move=Hurricane target=2
+REVIEW_AFTER board=81 turns=4 reserves=1 species=430/1329 HP=136/41 foes=0/7 faints=0/1 initialFrames=17
+REVIEW_STATE actor=1 move=Night Slash PP=15/5/16/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=105 item=471
+REVIEW_STATE actor=3 move=Hurricane PP=11/9/15/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=172 item=428
+COBY_FOES PP=15/15/20/5 SpA=6/6
+COBY_PLAYER_MOVE - / Thunderbolt
+[2] EC live review Coby: pressure and reserves: [32mPASS[0m
+REVIEW_INPUT trainer=709 slot=0 species=822 lv=38 HP=135 Atk=67 Def=89 SpA=44 SpD=58 Spe=76 item=494 ability=145
+REVIEW_INPUT trainer=709 slot=1 species=733 lv=38 HP=120 Atk=144 Def=73 SpA=65 SpD=73 Spe=86 item=523 ability=92
+REVIEW_INPUT trainer=709 slot=2 species=430 lv=38 HP=136 Atk=135 Def=56 SpA=86 SpD=56 Spe=103 item=471 ability=105
+REVIEW_INPUT trainer=709 slot=3 species=1329 lv=38 HP=113 Atk=62 Def=62 SpA=120 SpD=62 Spe=148 item=428 ability=172
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Brave Bird target=0
+AI decision turn=1 actor=2 move=Ice Punch target=3
+AI decision turn=1 actor=3 move=Beak Blast target=0
+AI decision turn=2 actor=1 move=Brave Bird target=2
+AI decision turn=2 actor=3 move=Bullet Seed target=2
+REVIEW_AFTER board=0 turns=1 reserves=0 species=822/733 HP=88/60 foes=0/146 faints=0/1 initialFrames=51
+REVIEW_STATE actor=1 move=Brave Bird PP=14/20/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=145 item=494
+REVIEW_STATE actor=3 move=Beak Blast PP=4/20/10/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=92 item=0
+COBY_SPEED left=76 right=86 tailwind=0
+REVIEW_INPUT trainer=709 slot=0 species=822 lv=38 HP=135 Atk=67 Def=89 SpA=44 SpD=58 Spe=76 item=494 ability=145
+REVIEW_INPUT trainer=709 slot=1 species=733 lv=38 HP=120 Atk=144 Def=73 SpA=65 SpD=73 Spe=86 item=523 ability=92
+REVIEW_INPUT trainer=709 slot=2 species=430 lv=38 HP=136 Atk=135 Def=56 SpA=86 SpD=56 Spe=103 item=471 ability=105
+REVIEW_INPUT trainer=709 slot=3 species=1329 lv=38 HP=113 Atk=62 Def=62 SpA=120 SpD=62 Spe=148 item=428 ability=172
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Brave Bird target=0
+AI decision turn=1 actor=2 move=Ice Punch target=3
+AI decision turn=1 actor=3 move=Beak Blast target=0
+AI decision turn=2 actor=2 move=Ice Punch target=3
+AI decision turn=2 actor=1 move=Brave Bird target=2
+AI decision turn=2 actor=3 move=Bullet Seed target=2
+AI switch turn=2 actor=3 party=3
+AI decision turn=3 actor=1 move=Brave Bird target=2
+AI decision turn=3 actor=3 move=Thunderbolt target=2
+REVIEW_AFTER board=0 turns=2 reserves=0 species=822/1329 HP=70/113 foes=0/36 faints=1/1 initialFrames=51
+REVIEW_STATE actor=1 move=Brave Bird PP=13/20/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=145 item=494
+REVIEW_STATE actor=3 move=- PP=15/10/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=172 item=428
+COBY_SPEED left=76 right=148 tailwind=0
+REVIEW_INPUT trainer=709 slot=0 species=822 lv=38 HP=135 Atk=67 Def=89 SpA=44 SpD=58 Spe=76 item=494 ability=145
+REVIEW_INPUT trainer=709 slot=1 species=733 lv=38 HP=120 Atk=144 Def=73 SpA=65 SpD=73 Spe=86 item=523 ability=92
+REVIEW_INPUT trainer=709 slot=2 species=430 lv=38 HP=136 Atk=135 Def=56 SpA=86 SpD=56 Spe=103 item=471 ability=105
+REVIEW_INPUT trainer=709 slot=3 species=1329 lv=38 HP=113 Atk=62 Def=62 SpA=120 SpD=62 Spe=148 item=428 ability=172
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Brave Bird target=0
+AI decision turn=1 actor=2 move=Ice Punch target=3
+AI decision turn=1 actor=3 move=Beak Blast target=0
+AI decision turn=2 actor=2 move=Ice Punch target=3
+AI decision turn=2 actor=1 move=Brave Bird target=2
+AI decision turn=2 actor=3 move=Bullet Seed target=2
+AI switch turn=2 actor=3 party=3
+AI decision turn=3 actor=2 move=Ice Punch target=3
+AI decision turn=3 actor=1 move=Brave Bird target=2
+AI decision turn=3 actor=3 move=Thunderbolt target=2
+REVIEW_AFTER board=0 turns=3 reserves=0 species=822/1329 HP=70/113 foes=0/0 faints=1/2 initialFrames=51
+REVIEW_STATE actor=1 move=Brave Bird PP=13/20/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=145 item=494
+REVIEW_STATE actor=3 move=Thunderbolt PP=14/10/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=172 item=428
+COBY_SPEED left=76 right=148 tailwind=0
+REVIEW_INPUT trainer=709 slot=0 species=822 lv=38 HP=135 Atk=67 Def=89 SpA=44 SpD=58 Spe=76 item=494 ability=145
+REVIEW_INPUT trainer=709 slot=1 species=733 lv=38 HP=120 Atk=144 Def=73 SpA=65 SpD=73 Spe=86 item=523 ability=92
+REVIEW_INPUT trainer=709 slot=2 species=430 lv=38 HP=136 Atk=135 Def=56 SpA=86 SpD=56 Spe=103 item=471 ability=105
+REVIEW_INPUT trainer=709 slot=3 species=1329 lv=38 HP=113 Atk=62 Def=62 SpA=120 SpD=62 Spe=148 item=428 ability=172
+AI decision turn=1 actor=0 move=Air Slash target=1
+AI decision turn=1 actor=1 move=Tailwind target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Rock Blast target=0
+AI decision turn=2 actor=1 move=Taunt target=2
+AI decision turn=2 actor=3 move=Bullet Seed target=2
+REVIEW_AFTER board=1 turns=1 reserves=0 species=822/733 HP=81/88 foes=0/135 faints=0/1 initialFrames=49
+REVIEW_STATE actor=1 move=Tailwind PP=15/20/14/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=145 item=494
+REVIEW_STATE actor=3 move=Rock Blast PP=5/20/9/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=92 item=0
+COBY_SPEED left=152 right=172 tailwind=3
+REVIEW_INPUT trainer=709 slot=0 species=822 lv=38 HP=135 Atk=67 Def=89 SpA=44 SpD=58 Spe=76 item=494 ability=145
+REVIEW_INPUT trainer=709 slot=1 species=733 lv=38 HP=120 Atk=144 Def=73 SpA=65 SpD=73 Spe=86 item=523 ability=92
+REVIEW_INPUT trainer=709 slot=2 species=430 lv=38 HP=136 Atk=135 Def=56 SpA=86 SpD=56 Spe=103 item=471 ability=105
+REVIEW_INPUT trainer=709 slot=3 species=1329 lv=38 HP=113 Atk=62 Def=62 SpA=120 SpD=62 Spe=148 item=428 ability=172
+AI decision turn=1 actor=0 move=Air Slash target=1
+AI decision turn=1 actor=1 move=Tailwind target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Rock Blast target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=1 move=Taunt target=2
+AI decision turn=2 actor=3 move=Bullet Seed target=2
+AI decision turn=3 actor=1 move=Brave Bird target=2
+AI decision turn=3 actor=3 move=Knock Off target=2
+REVIEW_AFTER board=1 turns=2 reserves=0 species=822/733 HP=81/26 foes=0/80 faints=0/1 initialFrames=49
+REVIEW_STATE actor=1 move=Taunt PP=15/19/14/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=145 item=494
+REVIEW_STATE actor=3 move=Bullet Seed PP=5/19/9/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=92 item=0
+COBY_SPEED left=152 right=172 tailwind=2
+REVIEW_INPUT trainer=709 slot=0 species=822 lv=38 HP=135 Atk=67 Def=89 SpA=44 SpD=58 Spe=76 item=494 ability=145
+REVIEW_INPUT trainer=709 slot=1 species=733 lv=38 HP=120 Atk=144 Def=73 SpA=65 SpD=73 Spe=86 item=523 ability=92
+REVIEW_INPUT trainer=709 slot=2 species=430 lv=38 HP=136 Atk=135 Def=56 SpA=86 SpD=56 Spe=103 item=471 ability=105
+REVIEW_INPUT trainer=709 slot=3 species=1329 lv=38 HP=113 Atk=62 Def=62 SpA=120 SpD=62 Spe=148 item=428 ability=172
+AI decision turn=1 actor=0 move=Air Slash target=1
+AI decision turn=1 actor=1 move=Tailwind target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Rock Blast target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=1 move=Taunt target=2
+AI decision turn=2 actor=3 move=Bullet Seed target=2
+AI decision turn=3 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=1 move=Brave Bird target=2
+AI decision turn=3 actor=3 move=Knock Off target=2
+AI switch turn=3 actor=3 party=2
+AI decision turn=4 actor=1 move=Brave Bird target=2
+AI decision turn=4 actor=3 move=Night Slash target=2
+REVIEW_AFTER board=1 turns=3 reserves=0 species=822/430 HP=76/136 foes=0/25 faints=1/1 initialFrames=49
+REVIEW_STATE actor=1 move=Brave Bird PP=14/19/14/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=145 item=494
+REVIEW_STATE actor=3 move=- PP=15/5/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=105 item=471
+COBY_SPEED left=152 right=206 tailwind=1
+REVIEW_INPUT trainer=709 slot=0 species=822 lv=38 HP=135 Atk=67 Def=89 SpA=44 SpD=58 Spe=76 item=494 ability=145
+REVIEW_INPUT trainer=709 slot=1 species=733 lv=38 HP=120 Atk=144 Def=73 SpA=65 SpD=73 Spe=86 item=523 ability=92
+REVIEW_INPUT trainer=709 slot=2 species=430 lv=38 HP=136 Atk=135 Def=56 SpA=86 SpD=56 Spe=103 item=471 ability=105
+REVIEW_INPUT trainer=709 slot=3 species=1329 lv=38 HP=113 Atk=62 Def=62 SpA=120 SpD=62 Spe=148 item=428 ability=172
+AI decision turn=1 actor=0 move=Air Slash target=1
+AI decision turn=1 actor=1 move=Tailwind target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Rock Blast target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=1 move=Taunt target=2
+AI decision turn=2 actor=3 move=Bullet Seed target=2
+AI decision turn=3 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=1 move=Brave Bird target=2
+AI decision turn=3 actor=3 move=Knock Off target=2
+AI switch turn=3 actor=3 party=2
+AI decision turn=4 actor=2 move=Thunderbolt target=3
+AI decision turn=4 actor=1 move=Brave Bird target=2
+AI decision turn=4 actor=3 move=Night Slash target=2
+REVIEW_AFTER board=1 turns=4 reserves=0 species=822/430 HP=76/136 foes=0/0 faints=1/2 initialFrames=49
+REVIEW_STATE actor=1 move=Brave Bird PP=14/19/14/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=145 item=494
+REVIEW_STATE actor=3 move=Night Slash PP=15/5/19/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=105 item=471
+COBY_SPEED left=152 right=206 tailwind=1
+REVIEW_INPUT trainer=709 slot=0 species=822 lv=38 HP=135 Atk=67 Def=89 SpA=44 SpD=58 Spe=76 item=494 ability=145
+REVIEW_INPUT trainer=709 slot=1 species=733 lv=38 HP=120 Atk=144 Def=73 SpA=65 SpD=73 Spe=86 item=523 ability=92
+REVIEW_INPUT trainer=709 slot=2 species=430 lv=38 HP=136 Atk=135 Def=56 SpA=86 SpD=56 Spe=103 item=471 ability=105
+REVIEW_INPUT trainer=709 slot=3 species=1329 lv=38 HP=113 Atk=62 Def=62 SpA=120 SpD=62 Spe=148 item=428 ability=172
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Brave Bird target=2
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Bullet Seed target=2
+AI decision turn=2 actor=1 move=Brave Bird target=2
+AI decision turn=2 actor=3 move=Bullet Seed target=0
+REVIEW_AFTER board=2 turns=1 reserves=0 species=822/733 HP=124/69 foes=98/70 faints=0/0 initialFrames=54
+REVIEW_STATE actor=1 move=- PP=15/20/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=145 item=494
+REVIEW_STATE actor=3 move=Bullet Seed PP=5/19/10/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=92 item=523
+COBY_SPEED left=76 right=86 tailwind=0
+REVIEW_INPUT trainer=709 slot=0 species=822 lv=38 HP=135 Atk=67 Def=89 SpA=44 SpD=58 Spe=76 item=494 ability=145
+REVIEW_INPUT trainer=709 slot=1 species=733 lv=38 HP=120 Atk=144 Def=73 SpA=65 SpD=73 Spe=86 item=523 ability=92
+REVIEW_INPUT trainer=709 slot=2 species=430 lv=38 HP=136 Atk=135 Def=56 SpA=86 SpD=56 Spe=103 item=471 ability=105
+REVIEW_INPUT trainer=709 slot=3 species=1329 lv=38 HP=113 Atk=62 Def=62 SpA=120 SpD=62 Spe=148 item=428 ability=172
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Brave Bird target=2
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Bullet Seed target=2
+AI decision turn=2 actor=0 move=Knock Off target=1
+AI decision turn=2 actor=1 move=Brave Bird target=2
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=Bullet Seed target=0
+AI decision turn=3 actor=1 move=Tailwind target=1
+AI decision turn=3 actor=3 move=Knock Off target=0
+REVIEW_AFTER board=2 turns=2 reserves=0 species=822/733 HP=76/69 foes=3/0 faints=0/1 initialFrames=54
+REVIEW_STATE actor=1 move=Brave Bird PP=14/20/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=145 item=0
+REVIEW_STATE actor=3 move=Bullet Seed PP=5/18/10/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=92 item=523
+COBY_SPEED left=76 right=86 tailwind=0
+REVIEW_INPUT trainer=709 slot=0 species=822 lv=38 HP=135 Atk=67 Def=89 SpA=44 SpD=58 Spe=76 item=494 ability=145
+REVIEW_INPUT trainer=709 slot=1 species=733 lv=38 HP=120 Atk=144 Def=73 SpA=65 SpD=73 Spe=86 item=523 ability=92
+REVIEW_INPUT trainer=709 slot=2 species=430 lv=38 HP=136 Atk=135 Def=56 SpA=86 SpD=56 Spe=103 item=471 ability=105
+REVIEW_INPUT trainer=709 slot=3 species=1329 lv=38 HP=113 Atk=62 Def=62 SpA=120 SpD=62 Spe=148 item=428 ability=172
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Brave Bird target=2
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Bullet Seed target=2
+AI decision turn=2 actor=0 move=Knock Off target=1
+AI decision turn=2 actor=1 move=Brave Bird target=2
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=Bullet Seed target=0
+AI decision turn=3 actor=0 move=Knock Off target=1
+AI decision turn=3 actor=1 move=Tailwind target=1
+AI decision turn=3 actor=3 move=Knock Off target=0
+REVIEW_AFTER board=2 turns=3 reserves=0 species=822/733 HP=51/69 foes=0/0 faints=0/2 initialFrames=54
+REVIEW_STATE actor=1 move=Brave Bird PP=14/20/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=145 item=0
+REVIEW_STATE actor=3 move=Knock Off PP=5/18/10/19 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=92 item=523
+COBY_SPEED left=76 right=86 tailwind=0
+REVIEW_INPUT trainer=709 slot=0 species=822 lv=38 HP=135 Atk=67 Def=89 SpA=44 SpD=58 Spe=76 item=494 ability=145
+REVIEW_INPUT trainer=709 slot=1 species=733 lv=38 HP=120 Atk=144 Def=73 SpA=65 SpD=73 Spe=86 item=523 ability=92
+REVIEW_INPUT trainer=709 slot=2 species=430 lv=38 HP=136 Atk=135 Def=56 SpA=86 SpD=56 Spe=103 item=471 ability=105
+REVIEW_INPUT trainer=709 slot=3 species=1329 lv=38 HP=113 Atk=62 Def=62 SpA=120 SpD=62 Spe=148 item=428 ability=172
+AI decision turn=1 actor=0 move=Rock Slide target=1
+AI decision turn=1 actor=1 move=Tailwind target=1
+AI decision turn=1 actor=2 move=Air Slash target=1
+AI decision turn=1 actor=3 move=Beak Blast target=0
+AI decision turn=2 actor=1 move=Brave Bird target=0
+AI decision turn=2 actor=3 move=Rock Blast target=2
+REVIEW_AFTER board=3 turns=1 reserves=0 species=822/733 HP=49/62 foes=1/114 faints=0/0 initialFrames=48
+REVIEW_STATE actor=1 move=Tailwind PP=15/20/14/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=145 item=494
+REVIEW_STATE actor=3 move=Beak Blast PP=4/20/10/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=92 item=523
+COBY_SPEED left=152 right=172 tailwind=3
+REVIEW_INPUT trainer=709 slot=0 species=822 lv=38 HP=135 Atk=67 Def=89 SpA=44 SpD=58 Spe=76 item=494 ability=145
+REVIEW_INPUT trainer=709 slot=1 species=733 lv=38 HP=120 Atk=144 Def=73 SpA=65 SpD=73 Spe=86 item=523 ability=92
+REVIEW_INPUT trainer=709 slot=2 species=430 lv=38 HP=136 Atk=135 Def=56 SpA=86 SpD=56 Spe=103 item=471 ability=105
+REVIEW_INPUT trainer=709 slot=3 species=1329 lv=38 HP=113 Atk=62 Def=62 SpA=120 SpD=62 Spe=148 item=428 ability=172
+AI decision turn=1 actor=0 move=Rock Slide target=1
+AI decision turn=1 actor=1 move=Tailwind target=1
+AI decision turn=1 actor=2 move=Air Slash target=1
+AI decision turn=1 actor=3 move=Beak Blast target=0
+AI decision turn=2 actor=0 move=Rock Slide target=1
+AI decision turn=2 actor=1 move=Brave Bird target=0
+AI decision turn=2 actor=2 move=Air Slash target=1
+AI decision turn=2 actor=3 move=Rock Blast target=2
+REVIEW_AFTER board=3 turns=2 reserves=0 species=822/733 HP=48/62 foes=0/0 faints=0/2 initialFrames=48
+REVIEW_STATE actor=1 move=Brave Bird PP=14/20/14/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=145 item=494
+REVIEW_STATE actor=3 move=Rock Blast PP=4/20/9/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=92 item=523
+COBY_SPEED left=152 right=172 tailwind=3
+REVIEW_INPUT trainer=709 slot=0 species=822 lv=38 HP=135 Atk=67 Def=89 SpA=44 SpD=58 Spe=76 item=494 ability=145
+REVIEW_INPUT trainer=709 slot=1 species=733 lv=38 HP=120 Atk=144 Def=73 SpA=65 SpD=73 Spe=86 item=523 ability=92
+REVIEW_INPUT trainer=709 slot=2 species=430 lv=38 HP=136 Atk=135 Def=56 SpA=86 SpD=56 Spe=103 item=471 ability=105
+REVIEW_INPUT trainer=709 slot=3 species=1329 lv=38 HP=113 Atk=62 Def=62 SpA=120 SpD=62 Spe=148 item=428 ability=172
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Brave Bird target=2
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Bullet Seed target=2
+AI decision turn=2 actor=1 move=Brave Bird target=0
+AI decision turn=2 actor=3 move=Bullet Seed target=0
+REVIEW_AFTER board=4 turns=1 reserves=0 species=822/733 HP=112/120 foes=98/0 faints=0/1 initialFrames=54
+REVIEW_STATE actor=1 move=Brave Bird PP=14/20/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=145 item=494
+REVIEW_STATE actor=3 move=Bullet Seed PP=5/19/10/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=92 item=523
+COBY_SPEED left=76 right=86 tailwind=0
+REVIEW_INPUT trainer=709 slot=0 species=822 lv=38 HP=135 Atk=67 Def=89 SpA=44 SpD=58 Spe=76 item=494 ability=145
+REVIEW_INPUT trainer=709 slot=1 species=733 lv=38 HP=120 Atk=144 Def=73 SpA=65 SpD=73 Spe=86 item=523 ability=92
+REVIEW_INPUT trainer=709 slot=2 species=430 lv=38 HP=136 Atk=135 Def=56 SpA=86 SpD=56 Spe=103 item=471 ability=105
+REVIEW_INPUT trainer=709 slot=3 species=1329 lv=38 HP=113 Atk=62 Def=62 SpA=120 SpD=62 Spe=148 item=428 ability=172
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Brave Bird target=2
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Bullet Seed target=2
+AI decision turn=2 actor=0 move=Knock Off target=1
+AI decision turn=2 actor=1 move=Brave Bird target=0
+AI decision turn=2 actor=3 move=Bullet Seed target=0
+REVIEW_AFTER board=4 turns=2 reserves=0 species=822/733 HP=86/120 foes=0/0 faints=0/2 initialFrames=54
+REVIEW_STATE actor=1 move=Brave Bird PP=13/20/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=145 item=0
+REVIEW_STATE actor=3 move=Bullet Seed PP=5/18/10/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=92 item=523
+COBY_SPEED left=76 right=86 tailwind=0
+REVIEW_INPUT trainer=709 slot=0 species=822 lv=38 HP=135 Atk=67 Def=89 SpA=44 SpD=58 Spe=76 item=494 ability=145
+REVIEW_INPUT trainer=709 slot=1 species=733 lv=38 HP=120 Atk=144 Def=73 SpA=65 SpD=73 Spe=86 item=523 ability=92
+REVIEW_INPUT trainer=709 slot=2 species=430 lv=38 HP=136 Atk=135 Def=56 SpA=86 SpD=56 Spe=103 item=471 ability=105
+REVIEW_INPUT trainer=709 slot=3 species=1329 lv=38 HP=113 Atk=62 Def=62 SpA=120 SpD=62 Spe=148 item=428 ability=172
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Brave Bird target=2
+AI decision turn=1 actor=2 move=Ice Punch target=3
+AI decision turn=1 actor=3 move=Hurricane target=2
+AI decision turn=2 actor=1 move=Night Slash target=0
+AI decision turn=2 actor=3 move=Thunderbolt target=0
+REVIEW_AFTER board=0 turns=1 reserves=1 species=430/1329 HP=48/113 foes=104/0 faints=0/1 initialFrames=19
+REVIEW_STATE actor=1 move=Brave Bird PP=14/5/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=105 item=471
+REVIEW_STATE actor=3 move=Hurricane PP=15/9/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=172 item=428
+COBY_SPEED left=103 right=148 tailwind=0
+REVIEW_INPUT trainer=709 slot=0 species=822 lv=38 HP=135 Atk=67 Def=89 SpA=44 SpD=58 Spe=76 item=494 ability=145
+REVIEW_INPUT trainer=709 slot=1 species=733 lv=38 HP=120 Atk=144 Def=73 SpA=65 SpD=73 Spe=86 item=523 ability=92
+REVIEW_INPUT trainer=709 slot=2 species=430 lv=38 HP=136 Atk=135 Def=56 SpA=86 SpD=56 Spe=103 item=471 ability=105
+REVIEW_INPUT trainer=709 slot=3 species=1329 lv=38 HP=113 Atk=62 Def=62 SpA=120 SpD=62 Spe=148 item=428 ability=172
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Brave Bird target=2
+AI decision turn=1 actor=2 move=Ice Punch target=3
+AI decision turn=1 actor=3 move=Hurricane target=2
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Night Slash target=0
+AI decision turn=2 actor=3 move=Thunderbolt target=0
+REVIEW_AFTER board=0 turns=2 reserves=1 species=430/1329 HP=48/113 foes=0/0 faints=0/2 initialFrames=19
+REVIEW_STATE actor=1 move=Night Slash PP=14/5/19/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=105 item=471
+REVIEW_STATE actor=3 move=Thunderbolt PP=14/9/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=172 item=428
+COBY_SPEED left=103 right=148 tailwind=0
+REVIEW_INPUT trainer=709 slot=0 species=822 lv=38 HP=135 Atk=67 Def=89 SpA=44 SpD=58 Spe=76 item=494 ability=145
+REVIEW_INPUT trainer=709 slot=1 species=733 lv=38 HP=120 Atk=144 Def=73 SpA=65 SpD=73 Spe=86 item=523 ability=92
+REVIEW_INPUT trainer=709 slot=2 species=430 lv=38 HP=136 Atk=135 Def=56 SpA=86 SpD=56 Spe=103 item=471 ability=105
+REVIEW_INPUT trainer=709 slot=3 species=1329 lv=38 HP=113 Atk=62 Def=62 SpA=120 SpD=62 Spe=148 item=428 ability=172
+AI decision turn=1 actor=0 move=Air Slash target=1
+AI decision turn=1 actor=1 move=Night Slash target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Tailwind target=3
+AI decision turn=2 actor=1 move=Night Slash target=2
+AI decision turn=2 actor=3 move=Protect target=3
+REVIEW_AFTER board=1 turns=1 reserves=1 species=430/1329 HP=136/77 foes=0/135 faints=0/1 initialFrames=17
+REVIEW_STATE actor=1 move=Night Slash PP=15/5/19/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=105 item=471
+REVIEW_STATE actor=3 move=Tailwind PP=15/10/14/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=172 item=428
+COBY_SPEED left=206 right=296 tailwind=3
+REVIEW_INPUT trainer=709 slot=0 species=822 lv=38 HP=135 Atk=67 Def=89 SpA=44 SpD=58 Spe=76 item=494 ability=145
+REVIEW_INPUT trainer=709 slot=1 species=733 lv=38 HP=120 Atk=144 Def=73 SpA=65 SpD=73 Spe=86 item=523 ability=92
+REVIEW_INPUT trainer=709 slot=2 species=430 lv=38 HP=136 Atk=135 Def=56 SpA=86 SpD=56 Spe=103 item=471 ability=105
+REVIEW_INPUT trainer=709 slot=3 species=1329 lv=38 HP=113 Atk=62 Def=62 SpA=120 SpD=62 Spe=148 item=428 ability=172
+AI decision turn=1 actor=0 move=Air Slash target=1
+AI decision turn=1 actor=1 move=Night Slash target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Tailwind target=3
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=1 move=Night Slash target=2
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=1 move=Night Slash target=2
+AI decision turn=3 actor=3 move=Hurricane target=2
+REVIEW_AFTER board=1 turns=2 reserves=1 species=430/1329 HP=136/77 foes=0/75 faints=0/1 initialFrames=17
+REVIEW_STATE actor=1 move=Night Slash PP=15/5/18/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=105 item=471
+REVIEW_STATE actor=3 move=Protect PP=15/10/14/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=172 item=428
+COBY_SPEED left=206 right=296 tailwind=2
+REVIEW_INPUT trainer=709 slot=0 species=822 lv=38 HP=135 Atk=67 Def=89 SpA=44 SpD=58 Spe=76 item=494 ability=145
+REVIEW_INPUT trainer=709 slot=1 species=733 lv=38 HP=120 Atk=144 Def=73 SpA=65 SpD=73 Spe=86 item=523 ability=92
+REVIEW_INPUT trainer=709 slot=2 species=430 lv=38 HP=136 Atk=135 Def=56 SpA=86 SpD=56 Spe=103 item=471 ability=105
+REVIEW_INPUT trainer=709 slot=3 species=1329 lv=38 HP=113 Atk=62 Def=62 SpA=120 SpD=62 Spe=148 item=428 ability=172
+AI decision turn=1 actor=0 move=Air Slash target=1
+AI decision turn=1 actor=1 move=Night Slash target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Tailwind target=3
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=1 move=Night Slash target=2
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=1 move=Night Slash target=2
+AI decision turn=3 actor=3 move=Hurricane target=2
+AI decision turn=4 actor=1 move=Brave Bird target=2
+AI decision turn=4 actor=3 move=Hurricane target=2
+REVIEW_AFTER board=1 turns=3 reserves=1 species=430/1329 HP=136/77 foes=0/7 faints=0/1 initialFrames=17
+REVIEW_STATE actor=1 move=Night Slash PP=15/5/17/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=105 item=471
+REVIEW_STATE actor=3 move=Hurricane PP=15/9/14/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=172 item=428
+COBY_SPEED left=206 right=296 tailwind=1
+REVIEW_INPUT trainer=709 slot=0 species=822 lv=38 HP=135 Atk=67 Def=89 SpA=44 SpD=58 Spe=76 item=494 ability=145
+REVIEW_INPUT trainer=709 slot=1 species=733 lv=38 HP=120 Atk=144 Def=73 SpA=65 SpD=73 Spe=86 item=523 ability=92
+REVIEW_INPUT trainer=709 slot=2 species=430 lv=38 HP=136 Atk=135 Def=56 SpA=86 SpD=56 Spe=103 item=471 ability=105
+REVIEW_INPUT trainer=709 slot=3 species=1329 lv=38 HP=113 Atk=62 Def=62 SpA=120 SpD=62 Spe=148 item=428 ability=172
+AI decision turn=1 actor=0 move=Air Slash target=1
+AI decision turn=1 actor=1 move=Night Slash target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Tailwind target=3
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=1 move=Night Slash target=2
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=1 move=Night Slash target=2
+AI decision turn=3 actor=3 move=Hurricane target=2
+AI decision turn=4 actor=2 move=Thunderbolt target=3
+AI decision turn=4 actor=1 move=Brave Bird target=2
+AI decision turn=4 actor=3 move=Hurricane target=2
+REVIEW_AFTER board=1 turns=4 reserves=1 species=430/1329 HP=136/77 foes=0/0 faints=0/2 initialFrames=17
+REVIEW_STATE actor=1 move=Night Slash PP=15/5/17/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=105 item=471
+REVIEW_STATE actor=3 move=Hurricane PP=15/8/14/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=172 item=428
+COBY_SPEED left=206 right=296 tailwind=1
+REVIEW_INPUT trainer=709 slot=0 species=822 lv=38 HP=135 Atk=67 Def=89 SpA=44 SpD=58 Spe=76 item=494 ability=145
+REVIEW_INPUT trainer=709 slot=1 species=733 lv=38 HP=120 Atk=144 Def=73 SpA=65 SpD=73 Spe=86 item=523 ability=92
+REVIEW_INPUT trainer=709 slot=2 species=430 lv=38 HP=136 Atk=135 Def=56 SpA=86 SpD=56 Spe=103 item=471 ability=105
+REVIEW_INPUT trainer=709 slot=3 species=1329 lv=38 HP=113 Atk=62 Def=62 SpA=120 SpD=62 Spe=148 item=428 ability=172
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Brave Bird target=2
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI decision turn=2 actor=1 move=Brave Bird target=2
+AI decision turn=2 actor=3 move=Thunderbolt target=0
+REVIEW_AFTER board=2 turns=1 reserves=1 species=430/1329 HP=111/55 foes=1/135 faints=0/0 initialFrames=18
+REVIEW_STATE actor=1 move=- PP=15/5/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=105 item=471
+REVIEW_STATE actor=3 move=Thunderbolt PP=14/10/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=172 item=428
+COBY_SPEED left=103 right=148 tailwind=0
+REVIEW_INPUT trainer=709 slot=0 species=822 lv=38 HP=135 Atk=67 Def=89 SpA=44 SpD=58 Spe=76 item=494 ability=145
+REVIEW_INPUT trainer=709 slot=1 species=733 lv=38 HP=120 Atk=144 Def=73 SpA=65 SpD=73 Spe=86 item=523 ability=92
+REVIEW_INPUT trainer=709 slot=2 species=430 lv=38 HP=136 Atk=135 Def=56 SpA=86 SpD=56 Spe=103 item=471 ability=105
+REVIEW_INPUT trainer=709 slot=3 species=1329 lv=38 HP=113 Atk=62 Def=62 SpA=120 SpD=62 Spe=148 item=428 ability=172
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Brave Bird target=2
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI decision turn=2 actor=0 move=Knock Off target=1
+AI decision turn=2 actor=1 move=Brave Bird target=2
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=Thunderbolt target=0
+REVIEW_AFTER board=2 turns=2 reserves=1 species=430/1329 HP=67/55 foes=0/0 faints=0/2 initialFrames=18
+REVIEW_STATE actor=1 move=Brave Bird PP=14/5/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=105 item=471
+REVIEW_STATE actor=3 move=Thunderbolt PP=13/10/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=172 item=428
+COBY_SPEED left=103 right=148 tailwind=0
+REVIEW_INPUT trainer=709 slot=0 species=822 lv=38 HP=135 Atk=67 Def=89 SpA=44 SpD=58 Spe=76 item=494 ability=145
+REVIEW_INPUT trainer=709 slot=1 species=733 lv=38 HP=120 Atk=144 Def=73 SpA=65 SpD=73 Spe=86 item=523 ability=92
+REVIEW_INPUT trainer=709 slot=2 species=430 lv=38 HP=136 Atk=135 Def=56 SpA=86 SpD=56 Spe=103 item=471 ability=105
+REVIEW_INPUT trainer=709 slot=3 species=1329 lv=38 HP=113 Atk=62 Def=62 SpA=120 SpD=62 Spe=148 item=428 ability=172
+AI decision turn=1 actor=0 move=Rock Slide target=1
+AI decision turn=1 actor=1 move=Night Slash target=2
+AI decision turn=1 actor=2 move=Air Slash target=1
+AI decision turn=1 actor=3 move=Tailwind target=3
+AI decision turn=2 actor=1 move=Night Slash target=0
+AI decision turn=2 actor=3 move=Hurricane target=0
+REVIEW_AFTER board=3 turns=1 reserves=1 species=430/1329 HP=60/45 foes=90/0 faints=0/1 initialFrames=16
+REVIEW_STATE actor=1 move=Night Slash PP=15/5/19/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=105 item=471
+REVIEW_STATE actor=3 move=Tailwind PP=15/10/14/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=172 item=428
+COBY_SPEED left=206 right=296 tailwind=3
+REVIEW_INPUT trainer=709 slot=0 species=822 lv=38 HP=135 Atk=67 Def=89 SpA=44 SpD=58 Spe=76 item=494 ability=145
+REVIEW_INPUT trainer=709 slot=1 species=733 lv=38 HP=120 Atk=144 Def=73 SpA=65 SpD=73 Spe=86 item=523 ability=92
+REVIEW_INPUT trainer=709 slot=2 species=430 lv=38 HP=136 Atk=135 Def=56 SpA=86 SpD=56 Spe=103 item=471 ability=105
+REVIEW_INPUT trainer=709 slot=3 species=1329 lv=38 HP=113 Atk=62 Def=62 SpA=120 SpD=62 Spe=148 item=428 ability=172
+AI decision turn=1 actor=0 move=Rock Slide target=1
+AI decision turn=1 actor=1 move=Night Slash target=2
+AI decision turn=1 actor=2 move=Air Slash target=1
+AI decision turn=1 actor=3 move=Tailwind target=3
+AI decision turn=2 actor=0 move=Rock Slide target=1
+AI decision turn=2 actor=1 move=Night Slash target=0
+AI decision turn=2 actor=3 move=Hurricane target=0
+REVIEW_AFTER board=3 turns=2 reserves=1 species=430/1329 HP=60/45 foes=0/0 faints=0/2 initialFrames=16
+REVIEW_STATE actor=1 move=Night Slash PP=15/5/18/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=105 item=471
+REVIEW_STATE actor=3 move=Hurricane PP=15/9/14/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=172 item=428
+COBY_SPEED left=206 right=296 tailwind=3
+REVIEW_INPUT trainer=709 slot=0 species=822 lv=38 HP=135 Atk=67 Def=89 SpA=44 SpD=58 Spe=76 item=494 ability=145
+REVIEW_INPUT trainer=709 slot=1 species=733 lv=38 HP=120 Atk=144 Def=73 SpA=65 SpD=73 Spe=86 item=523 ability=92
+REVIEW_INPUT trainer=709 slot=2 species=430 lv=38 HP=136 Atk=135 Def=56 SpA=86 SpD=56 Spe=103 item=471 ability=105
+REVIEW_INPUT trainer=709 slot=3 species=1329 lv=38 HP=113 Atk=62 Def=62 SpA=120 SpD=62 Spe=148 item=428 ability=172
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Brave Bird target=2
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI decision turn=2 actor=1 move=Brave Bird target=0
+AI decision turn=2 actor=3 move=Thunderbolt target=0
+REVIEW_AFTER board=4 turns=1 reserves=1 species=430/1329 HP=92/113 foes=1/0 faints=0/1 initialFrames=18
+REVIEW_STATE actor=1 move=Brave Bird PP=14/5/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=105 item=471
+REVIEW_STATE actor=3 move=Thunderbolt PP=14/10/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=172 item=428
+COBY_SPEED left=103 right=148 tailwind=0
+REVIEW_INPUT trainer=709 slot=0 species=822 lv=38 HP=135 Atk=67 Def=89 SpA=44 SpD=58 Spe=76 item=494 ability=145
+REVIEW_INPUT trainer=709 slot=1 species=733 lv=38 HP=120 Atk=144 Def=73 SpA=65 SpD=73 Spe=86 item=523 ability=92
+REVIEW_INPUT trainer=709 slot=2 species=430 lv=38 HP=136 Atk=135 Def=56 SpA=86 SpD=56 Spe=103 item=471 ability=105
+REVIEW_INPUT trainer=709 slot=3 species=1329 lv=38 HP=113 Atk=62 Def=62 SpA=120 SpD=62 Spe=148 item=428 ability=172
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Brave Bird target=2
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI decision turn=2 actor=0 move=Knock Off target=1
+AI decision turn=2 actor=1 move=Brave Bird target=0
+AI decision turn=2 actor=3 move=Thunderbolt target=0
+REVIEW_AFTER board=4 turns=2 reserves=1 species=430/1329 HP=92/113 foes=0/0 faints=0/2 initialFrames=18
+REVIEW_STATE actor=1 move=Brave Bird PP=14/5/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=105 item=471
+REVIEW_STATE actor=3 move=Thunderbolt PP=13/10/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=172 item=428
+COBY_SPEED left=103 right=148 tailwind=0
+
+- Tests [32mPASSED[0m:          3
+- Tests [34mTOTAL[0m:           3
+

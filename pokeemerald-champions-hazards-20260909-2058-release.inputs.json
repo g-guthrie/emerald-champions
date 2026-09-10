@@ -1,0 +1,9 @@
+{
+  "schema_version": 2,
+  "inputs_sha256": "c9c8865aeb402681c7cde65ffdf83180a4f760cef6d189e33c70c8ee970a0a63",
+  "input_count": 28979,
+  "artifacts": {
+    "pokeemerald-champions-hazards-20260909-2058-release.gba": "0ade80ebe0ec0e671de4d83f5eb71a4ec9778f03a76b2f15bbc678c1e4131d33",
+    "pokeemerald-champions-hazards-20260909-2058-release.elf": "4a46cd7e4c65b3fb910506a8cecd334e40e1a2dacc3b0547f98eadc48253dd94"
+  }
+}

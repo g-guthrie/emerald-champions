@@ -1,0 +1,40 @@
+tools/scaninc/scaninc -M build/emerald-test/src/battle_ai_pair.d -g build/assets -I include -I tools/agbcc/include src/battle_ai_pair.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/battle_ai_pair.o src/battle_ai_pair.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+[4] EC expert pair: Helping Hand requires a damaging partner action: [32mPASS[0m
+[6] EC expert pair: Follow Me protects the Trick Room setter: [32mPASS[0m
+[0] EC expert pair: candidate evaluation restores board caches field and RNG: [32mPASS[0m
+[7] EC expert pair: partner healing preserves the slower winning attack: [32mPASS[0m
+[6] EC Perish policy: fresh trapped targets, escape timing and immunity guards: [32mPASS[0m
+[7] EC authored strategy: Maura escapes her countdown while retaining the trap 1/2: [31mFAIL[0m
+test/battle/ai/emerald_champions_plans.c:266: Unmatched EXPECT_MOVE Perish Song, got Fake Out
+[1] EC expert pair: reciprocal Helping Hand secures its concrete partner's spread KOs: [32mPASS[0m
+[2] EC expert pair: Trick Room never cancels itself and is reset after expiry: [32mPASS[0m
+[5] EC expert pair: beneficial weather is established once: [32mPASS[0m
+[0] EC expert pair: Perish countdown survives and simultaneous deadlines choose distinct escapes: [32mPASS[0m
+[1] EC authored strategy: Parker repeats Earthquake safely through Telepathy: [32mPASS[0m
+[5] EC authored strategy: Flannery advances Eruption before opposing Rock Slide: [32mPASS[0m
+[4] EC expert pair: personality flags preserve an accurate guaranteed KO: [32mPASS[0m
+[2] EC expert pair: timing probe with full parties and legal Mega reserves: [32mPASS[0m
+full-party paired decision selected=1 frames=18
+[0] EC authored strategy: Parker preserves a nonimmune reserve beside Earthquake: [32mPASS[0m
+[0] EC battle plans: compiled directives follow trainer ownership and exclude other battle namespaces: [32mPASS[0m
+[1] EC expert pair: two eligible partners commit only one Mega for their owner: [32mPASS[0m
+[3] EC expert pair: reciprocal Justified activation preserves the recipient's attack: [32mPASS[0m
+[6] EC authored strategy: Tabitha activation requires survival and a useful boost 3/3: [31mFAIL[0m
+test/battle/ai/emerald_champions_plans.c:144: Unmatched NOT_EXPECT_MOVE Surf
+[2] EC authored strategy: Connie's mutual Surf activates Storm Drain: [32mPASS[0m
+
+  [31mFAILED[0m tests:
+  - [31mtest/battle/ai/emerald_champions_plans.c:256[0m: EC authored strategy: Maura escapes her countdown while retaining the trap 1/2: 266: Unmatched EXPECT_MOVE Perish Song, got Fake Out
+  - [31mtest/battle/ai/emerald_champions_plans.c:122[0m: EC authored strategy: Tabitha activation requires survival and a useful boost 3/3: 144: Unmatched NOT_EXPECT_MOVE Surf
+
+- Tests [31mFAILED[0m:          2    Add TESTS='X' to run tests with the defined prefix.
+- Tests [32mPASSED[0m:          18
+- Tests [34mTOTAL[0m:           20
+
+make: *** [check] Error 1

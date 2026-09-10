@@ -2584,7 +2584,11 @@ static bool32 ShouldSkipBattlerForDamage(enum BattlerId battlerAtk, enum Battler
 
 static enum CancelerResult CancelerPreAttackMoveEffect(struct BattleCalcValues *cv)
 {
-    if (IsBattleMoveStatus(cv->move))
+    // Pollen Puff remains a damaging move against foes, but its allied target
+    // must go straight to the healing script without a preceding damage hit.
+    if (IsBattleMoveStatus(cv->move)
+     || (GetMoveEffect(cv->move) == EFFECT_HIT_ENEMY_HEAL_ALLY
+         && IsBattlerAlly(cv->battlerAtk, cv->battlerDef)))
     {
         gBattleStruct->eventState.atkCanceler = CANCELER_END;
         return CANCELER_RESULT_END;
@@ -4725,6 +4729,9 @@ static enum MoveEndResult MoveEndHitEscape(struct BattleCalcValues *cv)
          && !gBattleStruct->unableToUseMove
          && IsAnyTargetTurnDamaged(cv->battlerAtk, INCLUDING_SUBSTITUTES)
          && IsBattlerAlive(cv->battlerAtk)
+         // A blocked switch script ends early, bypassing move cleanup. Do
+         // not queue a replacement when the user's bench is exhausted.
+         && CanBattlerSwitch(cv->battlerAtk)
          && !NoAliveMonsForBattlerSide(cv->battlerDef))
         {
             result = MOVEEND_RESULT_RUN_SCRIPT;
@@ -4733,7 +4740,7 @@ static enum MoveEndResult MoveEndHitEscape(struct BattleCalcValues *cv)
         }
         break;
     case EFFECT_PARTING_SHOT:
-        if (CanPartingShotTrigger(cv->battlerAtk))
+        if (CanBattlerSwitch(cv->battlerAtk) && CanPartingShotTrigger(cv->battlerAtk))
         {
             for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
                 gBattleMons[battler].volatiles.tryEjectPack = FALSE;

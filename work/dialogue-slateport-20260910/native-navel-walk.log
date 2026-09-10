@@ -1,0 +1,285 @@
+navel-harbor-start 0 RESULT frames=1700 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=cff468ebb7504db2 nonzero_pixels=32601 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00001a43
+READ width=4 address=020022e0 value=00000008
+READ width=4 address=020022e4 value=00000004
+READ width=4 address=02002290 value=00000000
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+READ width=4 address=0200229c value=00000000
+ 
+WALK NavelRock_Harbor (8, 4) to (8, 2) steps 2
+navel-approach-0 0 RESULT frames=1596 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=7fb8c9bf97175691 nonzero_pixels=38396 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00001a42
+READ width=4 address=020022e0 value=0000000a
+READ width=4 address=020022e4 value=00000012
+READ width=4 address=02002290 value=00000000
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+READ width=4 address=0200229c value=00000000
+ 
+WALK NavelRock_Exterior (10, 18) to (10, 10) steps 8
+navel-approach-1 0 RESULT frames=1884 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=99ddaaea71c4147d nonzero_pixels=38343 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00001a44
+READ width=4 address=020022e0 value=0000000a
+READ width=4 address=020022e4 value=0000001a
+READ width=4 address=02002290 value=00000000
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+READ width=4 address=0200229c value=00000000
+ 
+WALK NavelRock_Entrance (10, 26) to (10, 5) steps 21
+navel-approach-2 0 RESULT frames=2508 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=9773b48ed2058776 nonzero_pixels=38343 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00001a45
+READ width=4 address=020022e0 value=00000004
+READ width=4 address=020022e4 value=00000003
+READ width=4 address=02002290 value=00000000
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+READ width=4 address=0200229c value=00000000
+ 
+WALK NavelRock_B1F (4, 3) to (18, 9) steps 20
+navel-approach-3 0 RESULT frames=2460 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=c58962927a139b33 nonzero_pixels=38351 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00001a46
+READ width=4 address=020022e0 value=0000000b
+READ width=4 address=020022e4 value=0000004f
+READ width=4 address=02002290 value=00000000
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+READ width=4 address=0200229c value=00000000
+ 
+WALK NavelRock_Fork (11, 79) to (4, 6) steps 84
+navel-up-0 0 RESULT frames=5532 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=b039ad652364a585 nonzero_pixels=38327 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00001a47
+READ width=4 address=020022e0 value=00000005
+READ width=4 address=020022e4 value=00000005
+READ width=4 address=02002290 value=00000000
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+READ width=4 address=0200229c value=00000000
+ 
+WALK NavelRock_Up1 (5, 5) to (3, 3) steps 4
+navel-up-1 0 RESULT frames=1692 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=6e2111df174e57d0 nonzero_pixels=38327 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00001a48
+READ width=4 address=020022e0 value=00000003
+READ width=4 address=020022e4 value=00000003
+READ width=4 address=02002290 value=00000000
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+READ width=4 address=0200229c value=00000000
+ 
+WALK NavelRock_Up2 (3, 3) to (5, 5) steps 4
+navel-up-2 0 RESULT frames=1692 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=84ad755db4970bcc nonzero_pixels=38327 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00001a49
+READ width=4 address=020022e0 value=00000005
+READ width=4 address=020022e4 value=00000005
+READ width=4 address=02002290 value=00000000
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+READ width=4 address=0200229c value=00000000
+ 
+WALK NavelRock_Up3 (5, 5) to (3, 3) steps 4
+navel-up-3 0 RESULT frames=1692 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=6e2111df174e57d0 nonzero_pixels=38327 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00001a4a
+READ width=4 address=020022e0 value=00000003
+READ width=4 address=020022e4 value=00000003
+READ width=4 address=02002290 value=00000000
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+READ width=4 address=0200229c value=00000000
+ 
+WALK NavelRock_Up4 (3, 3) to (5, 5) steps 4
+navel-up-4 0 RESULT frames=1692 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=fdaaabbf80d35b35 nonzero_pixels=38327 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00001a4b
+READ width=4 address=020022e0 value=0000000d
+READ width=4 address=020022e4 value=00000014
+READ width=4 address=02002290 value=00000000
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+READ width=4 address=0200229c value=00000000
+ 
+WALK NavelRock_Fork (11, 79) to (22, 6) steps 84
+navel-down-0 0 RESULT frames=5532 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=7b0569b1cc641fed nonzero_pixels=38290 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00001a4c
+READ width=4 address=020022e0 value=00000003
+READ width=4 address=020022e4 value=00000003
+READ width=4 address=02002290 value=00000000
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+READ width=4 address=0200229c value=00000000
+ 
+WALK NavelRock_Down01 (3, 3) to (5, 5) steps 4
+navel-down-1 0 RESULT frames=1692 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=d798d3cc19a3a136 nonzero_pixels=38283 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00001a4d
+READ width=4 address=020022e0 value=00000005
+READ width=4 address=020022e4 value=00000005
+READ width=4 address=02002290 value=00000000
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+READ width=4 address=0200229c value=00000000
+ 
+WALK NavelRock_Down02 (5, 5) to (3, 3) steps 4
+navel-down-2 0 RESULT frames=1692 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=4c1bdfe04df16282 nonzero_pixels=38290 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00001a4e
+READ width=4 address=020022e0 value=00000003
+READ width=4 address=020022e4 value=00000003
+READ width=4 address=02002290 value=00000000
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+READ width=4 address=0200229c value=00000000
+ 
+WALK NavelRock_Down03 (3, 3) to (5, 5) steps 4
+navel-down-3 0 RESULT frames=1692 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=d798d3cc19a3a136 nonzero_pixels=38283 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00001a4f
+READ width=4 address=020022e0 value=00000005
+READ width=4 address=020022e4 value=00000005
+READ width=4 address=02002290 value=00000000
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+READ width=4 address=0200229c value=00000000
+ 
+WALK NavelRock_Down04 (5, 5) to (3, 3) steps 4
+navel-down-4 0 RESULT frames=1692 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=4c1bdfe04df16282 nonzero_pixels=38290 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00001a50
+READ width=4 address=020022e0 value=00000003
+READ width=4 address=020022e4 value=00000003
+READ width=4 address=02002290 value=00000000
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+READ width=4 address=0200229c value=00000000
+ 
+WALK NavelRock_Down05 (3, 3) to (5, 5) steps 4
+navel-down-5 0 RESULT frames=1692 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=d798d3cc19a3a136 nonzero_pixels=38283 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00001a51
+READ width=4 address=020022e0 value=00000005
+READ width=4 address=020022e4 value=00000005
+READ width=4 address=02002290 value=00000000
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+READ width=4 address=0200229c value=00000000
+ 
+WALK NavelRock_Down06 (5, 5) to (3, 3) steps 4
+navel-down-6 0 RESULT frames=1692 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=4c1bdfe04df16282 nonzero_pixels=38290 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00001a52
+READ width=4 address=020022e0 value=00000003
+READ width=4 address=020022e4 value=00000003
+READ width=4 address=02002290 value=00000000
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+READ width=4 address=0200229c value=00000000
+ 
+WALK NavelRock_Down07 (3, 3) to (5, 5) steps 4
+navel-down-7 0 RESULT frames=1692 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=d798d3cc19a3a136 nonzero_pixels=38283 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00001a53
+READ width=4 address=020022e0 value=00000005
+READ width=4 address=020022e4 value=00000005
+READ width=4 address=02002290 value=00000000
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+READ width=4 address=0200229c value=00000000
+ 
+WALK NavelRock_Down08 (5, 5) to (3, 3) steps 4
+navel-down-8 0 RESULT frames=1692 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=4c1bdfe04df16282 nonzero_pixels=38290 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00001a54
+READ width=4 address=020022e0 value=00000003
+READ width=4 address=020022e4 value=00000003
+READ width=4 address=02002290 value=00000000
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+READ width=4 address=0200229c value=00000000
+ 
+WALK NavelRock_Down09 (3, 3) to (5, 5) steps 4
+navel-down-9 0 RESULT frames=1692 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=d798d3cc19a3a136 nonzero_pixels=38283 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00001a55
+READ width=4 address=020022e0 value=00000005
+READ width=4 address=020022e4 value=00000005
+READ width=4 address=02002290 value=00000000
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+READ width=4 address=0200229c value=00000000
+ 
+WALK NavelRock_Down10 (5, 5) to (3, 3) steps 4
+navel-down-10 0 RESULT frames=1692 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=4c1bdfe04df16282 nonzero_pixels=38290 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00001a56
+READ width=4 address=020022e0 value=00000003
+READ width=4 address=020022e4 value=00000003
+READ width=4 address=02002290 value=00000000
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+READ width=4 address=0200229c value=00000000
+ 
+WALK NavelRock_Down11 (3, 3) to (5, 5) steps 4
+navel-down-11 0 RESULT frames=1692 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=d1060e3bb8c0d4d1 nonzero_pixels=38351 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00001a57
+READ width=4 address=020022e0 value=0000000e
+READ width=4 address=020022e4 value=00000013
+READ width=4 address=02002290 value=00000000
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+READ width=4 address=0200229c value=00000000
+ 

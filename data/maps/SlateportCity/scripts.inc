@@ -17,9 +17,12 @@ SlateportCity_EventScript_IncenseScholar::
 	end
 
 SlateportCity_Text_IncenseScholar:
-	.string "Incense still matters for breeding,\n"
-	.string "but not as a scarce battle tool.\p"
-	.string "Check CENTER vendors and local shops.$"
+	.string "You don't need Incense to get\n"
+	.string "baby POKéMON from compatible\l"
+	.string "parents.\p"
+	.string "Some Incenses have effects in\n"
+	.string "battle, though. The CENTER\l"
+	.string "vendors can help you find them.$"
 
 @ Inclement: Brawly is waiting in the Slateport crowd. Finding him sends him home,
 @ and removeobject sets FLAG_HIDE_SLATEPORT_CITY_BRAWLY, which is shared with the
@@ -185,9 +188,9 @@ SlateportCity_Pokemart_CatchingGuru:
 	.2byte ITEM_REPEAT_BALL
 	pokemartlistend
 
-SlateportCity_EventScript_StatPointGuide::
+SlateportCity_EventScript_EvGuide::
 	bufferleadmonspeciesname STR_VAR_1
-	msgbox SlateportCity_Text_StatPointsAlreadyReady, MSGBOX_NPC
+	msgbox SlateportCity_Text_EvsAlreadyReady, MSGBOX_NPC
 	end
 
 SlateportCity_EventScript_Cook::
@@ -289,7 +292,7 @@ SlateportCity_EventScript_BattleTentSign::
 
 SlateportCity_EventScript_SternsShipyardSign::
 	lockall
-	goto_if_set FLAG_SYS_GAME_CLEAR, SlateportCity_EventScript_SternsShipyardFerryComplete
+	goto_if_set FLAG_BADGE06_GET, SlateportCity_EventScript_SternsShipyardFerryComplete
 	goto_if_set FLAG_BADGE07_GET, SlateportCity_EventScript_SternsShipyardNearsCompletion
 	msgbox SlateportCity_Text_SternsShipyardWantedSign, MSGBOX_DEFAULT
 	releaseall
@@ -323,7 +326,7 @@ SlateportCity_EventScript_MarketSign::
 
 SlateportCity_EventScript_HarborSign::
 	lockall
-	goto_if_set FLAG_SYS_GAME_CLEAR, SlateportCity_EventScript_HarborSignFerryComplete
+	goto_if_set FLAG_BADGE06_GET, SlateportCity_EventScript_HarborSignFerryComplete
 	msgbox SlateportCity_Text_HarborFerryUnderConstruction, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -736,178 +739,27 @@ SlateportCity_EventScript_Man3::
 	msgbox SlateportCity_Text_WonderIfLighthouseStartlesPokemon, MSGBOX_NPC
 	end
 
-SlateportCity_EventScript_BerryPowderClerk::
+SlateportCity_EventScript_HerbalSupplyClerk::
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_POWDER_JAR, SlateportCity_EventScript_ReceivedPowderJar
-	msgbox SlateportCity_Text_ExplainBerries, MSGBOX_DEFAULT
-	giveitem ITEM_POWDER_JAR
-	goto_if_eq VAR_RESULT, FALSE, SlateportCity_EventScript_ArchivePowderJar
-	goto SlateportCity_EventScript_ReceivedPowderJarNow
-	end
-
-SlateportCity_EventScript_ArchivePowderJar::
-	addpcitem ITEM_POWDER_JAR
-	goto_if_eq VAR_RESULT, FALSE, SlateportCity_EventScript_PowderJarNoRoom
-	msgbox SlateportCity_Text_PowderJarSentToPC, MSGBOX_DEFAULT
-
-SlateportCity_EventScript_ReceivedPowderJarNow::
-	setflag FLAG_RECEIVED_POWDER_JAR
-	msgbox SlateportCity_Text_ExplainBerryPowder, MSGBOX_DEFAULT
+	msgbox SlateportCity_Text_HerbalSupplies, MSGBOX_DEFAULT
+	pokemart SlateportCity_HerbalSupplyStock
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
-SlateportCity_EventScript_PowderJarNoRoom::
-	msgbox SlateportCity_Text_PowderJarNoRoom, MSGBOX_DEFAULT
-	release
-	end
-
-SlateportCity_EventScript_ReceivedPowderJar::
-	setvar VAR_0x8004, 1
-	specialvar VAR_RESULT, HasEnoughBerryPowder
-	goto_if_eq VAR_RESULT, FALSE, SlateportCity_EventScript_ExplainBerryPowder
-	msgbox SlateportCity_Text_BroughtMeSomeBerryPowder, MSGBOX_DEFAULT
-	special DisplayBerryPowderVendorMenu
-	goto SlateportCity_EventScript_ChooseBerryPowderItem
-	end
-
-SlateportCity_EventScript_ExplainBerryPowder::
-	msgbox SlateportCity_Text_ExplainBerryPowder, MSGBOX_DEFAULT
-	release
-	end
-
-SlateportCity_EventScript_ChooseBerryPowderItem::
-	message SlateportCity_Text_ExchangeWhatWithIt
-	waitmessage
-	setvar VAR_0x8004, SCROLL_MULTI_BERRY_POWDER_VENDOR
-	special ShowScrollableMultichoice
-	switch VAR_RESULT
-	case 0, SlateportCity_EventScript_EnergyPowder
-	case 1, SlateportCity_EventScript_EnergyRoot
-	case 2, SlateportCity_EventScript_HealPowder
-	case 3, SlateportCity_EventScript_RevivalHerb
-	case 4, SlateportCity_EventScript_Ether
-	case 5, SlateportCity_EventScript_MaxEther
-	case 6, SlateportCity_EventScript_Elixir
-	case 7, SlateportCity_EventScript_MaxElixir
-	case 8, SlateportCity_EventScript_PPUp
-	case 9, SlateportCity_EventScript_PPMax
-	case 10, SlateportCity_EventScript_SacredAsh
-	case 11, SlateportCity_EventScript_CancelPowderItemSelect
-	case MULTI_B_PRESSED, SlateportCity_EventScript_CancelPowderItemSelect
-	end
-
-SlateportCity_EventScript_EnergyPowder::
-	bufferitemname STR_VAR_1, ITEM_ENERGY_POWDER
-	setvar VAR_0x8008, ITEM_ENERGY_POWDER
-	setvar VAR_0x8009, 50
-	goto SlateportCity_EventScript_TryBuyBerryPowderItem
-	end
-
-SlateportCity_EventScript_EnergyRoot::
-	bufferitemname STR_VAR_1, ITEM_ENERGY_ROOT
-	setvar VAR_0x8008, ITEM_ENERGY_ROOT
-	setvar VAR_0x8009, 80
-	goto SlateportCity_EventScript_TryBuyBerryPowderItem
-	end
-
-SlateportCity_EventScript_HealPowder::
-	bufferitemname STR_VAR_1, ITEM_HEAL_POWDER
-	setvar VAR_0x8008, ITEM_HEAL_POWDER
-	setvar VAR_0x8009, 50
-	goto SlateportCity_EventScript_TryBuyBerryPowderItem
-	end
-
-SlateportCity_EventScript_RevivalHerb::
-	bufferitemname STR_VAR_1, ITEM_REVIVAL_HERB
-	setvar VAR_0x8008, ITEM_REVIVAL_HERB
-	setvar VAR_0x8009, 300
-	goto SlateportCity_EventScript_TryBuyBerryPowderItem
-	end
-
-SlateportCity_EventScript_Ether::
-	bufferitemname STR_VAR_1, ITEM_ETHER
-	setvar VAR_0x8008, ITEM_ETHER
-	setvar VAR_0x8009, 500
-	goto SlateportCity_EventScript_TryBuyBerryPowderItem
-	end
-
-SlateportCity_EventScript_MaxEther::
-	bufferitemname STR_VAR_1, ITEM_MAX_ETHER
-	setvar VAR_0x8008, ITEM_MAX_ETHER
-	setvar VAR_0x8009, 1000
-	goto SlateportCity_EventScript_TryBuyBerryPowderItem
-	end
-
-SlateportCity_EventScript_Elixir::
-	bufferitemname STR_VAR_1, ITEM_ELIXIR
-	setvar VAR_0x8008, ITEM_ELIXIR
-	setvar VAR_0x8009, 1500
-	goto SlateportCity_EventScript_TryBuyBerryPowderItem
-	end
-
-SlateportCity_EventScript_MaxElixir::
-	bufferitemname STR_VAR_1, ITEM_MAX_ELIXIR
-	setvar VAR_0x8008, ITEM_MAX_ELIXIR
-	setvar VAR_0x8009, 3000
-	goto SlateportCity_EventScript_TryBuyBerryPowderItem
-	end
-
-SlateportCity_EventScript_PPUp::
-	bufferitemname STR_VAR_1, ITEM_PP_UP
-	setvar VAR_0x8008, ITEM_PP_UP
-	setvar VAR_0x8009, 3000
-	goto SlateportCity_EventScript_TryBuyBerryPowderItem
-	end
-
-SlateportCity_EventScript_PPMax::
-	bufferitemname STR_VAR_1, ITEM_PP_MAX
-	setvar VAR_0x8008, ITEM_PP_MAX
-	setvar VAR_0x8009, 9000
-	goto SlateportCity_EventScript_TryBuyBerryPowderItem
-	end
-
-SlateportCity_EventScript_SacredAsh::
-	bufferitemname STR_VAR_1, ITEM_SACRED_ASH
-	setvar VAR_0x8008, ITEM_SACRED_ASH
-	setvar VAR_0x8009, 12000
-	goto SlateportCity_EventScript_TryBuyBerryPowderItem
-	end
-
-SlateportCity_EventScript_CancelPowderItemSelect::
-	msgbox SlateportCity_Text_ComeBackToTradeBerryPowder, MSGBOX_DEFAULT
-	special RemoveBerryPowderVendorMenu
-	release
-	end
-
-SlateportCity_EventScript_TryBuyBerryPowderItem::
-	msgbox SlateportCity_Text_ExchangeBerryPowderForItem, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, SlateportCity_EventScript_ChooseBerryPowderItem
-	copyvar VAR_0x8004, VAR_0x8009
-	specialvar VAR_RESULT, HasEnoughBerryPowder
-	goto_if_eq VAR_RESULT, FALSE, SlateportCity_EventScript_NotEnoughBerryPowder
-	giveitem VAR_0x8008
-	goto_if_eq VAR_RESULT, FALSE, SlateportCity_EventScript_NoRoomForBerryPowderItem
-	copyvar VAR_0x8004, VAR_0x8009
-	special TakeBerryPowder
-	special PrintPlayerBerryPowderAmount
-	msgbox SlateportCity_Text_FineBerryPowderTradeSomethingElse, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, SlateportCity_EventScript_ChooseBerryPowderItem
-	msgbox SlateportCity_Text_WhenYouGetMoreBringItToMe, MSGBOX_DEFAULT
-	special RemoveBerryPowderVendorMenu
-	release
-	end
-
-SlateportCity_EventScript_NoRoomForBerryPowderItem::
-	msgbox gText_TheBagIsFull, MSGBOX_DEFAULT
-	special RemoveBerryPowderVendorMenu
-	release
-	end
-
-SlateportCity_EventScript_NotEnoughBerryPowder::
-	msgbox SlateportCity_Text_DontHaveEnoughBerryPowder, MSGBOX_DEFAULT
-	goto SlateportCity_EventScript_ChooseBerryPowderItem
-	end
+	.align 2
+SlateportCity_HerbalSupplyStock:
+	.2byte ITEM_ENERGY_POWDER
+	.2byte ITEM_ENERGY_ROOT
+	.2byte ITEM_HEAL_POWDER
+	.2byte ITEM_REVIVAL_HERB
+	.2byte ITEM_ETHER
+	.2byte ITEM_MAX_ETHER
+	.2byte ITEM_ELIXIR
+	.2byte ITEM_PP_UP
+	.2byte ITEM_PP_MAX
+	pokemartlistend
 
 SlateportCity_EventScript_ScottBattleTentScene::
 	lockall
@@ -959,10 +811,8 @@ SlateportCity_Movement_ScottExitAfterBattleTent:
 	walk_right
 	step_end
 
-SlateportCity_EventScript_BerryCrushRankingsSign::
-	lockall
-	special ShowBerryCrushRankings
-	releaseall
+SlateportCity_EventScript_MarketDirectory::
+	msgbox SlateportCity_Text_MarketDirectory, MSGBOX_SIGN
 	end
 
 SlateportCity_Text_CatchingGuruSellWhatYouNeed:
@@ -971,9 +821,9 @@ SlateportCity_Text_CatchingGuruSellWhatYouNeed:
 	.string "The right BALL can turn a rare sighting\n"
 	.string "into your next teammate!$"
 
-SlateportCity_Text_StatPointsAlreadyReady:
-	.string "Your {STR_VAR_1} already has its full\n"
-	.string "competitive STAT POINT budget.\p"
+SlateportCity_Text_EvsAlreadyReady:
+	.string "A CENTER tutor can prepare\n"
+	.string "your {STR_VAR_1}'s EV spread.\p"
 	.string "There is no EV training here; only\n"
 	.string "team building and battle practice!$"
 
@@ -1281,103 +1131,47 @@ SlateportCity_Text_NameRatersHouseSign:
 	.string "NAME RATER'S HOUSE\n"
 	.string "“POKéMON nicknames rated.”$"
 
-SlateportCity_Text_ExplainBerries:
-	.string "If a wild POKéMON gets hurt, it heals\n"
-	.string "itself by chewing on BERRIES.\p"
-	.string "Did you know that?\p"
-	.string "Somebody saw that and got the idea\n"
-	.string "of making medicine from BERRIES.\p"
-	.string "Did you know that?\p"
-	.string "To turn BERRIES into medicine,\n"
-	.string "they must be crushed into powder.\p"
-	.string "Did you know that?\p"
-	.string "You seem to have an interest\n"
-	.string "in BERRIES!\p"
-	.string "I've got something good for someone\n"
-	.string "like you.$"
+SlateportCity_Text_HerbalSupplies:
+	.string "Fresh herbs and expedition supplies!\n"
+	.string "Cash purchases, ready for the road.\p"
+	.string "PP UPS and PP MAX raise a move's PP.\n"
+	.string "When you change a battle set, those\l"
+	.string "upgrades stay with its move slots.$"
 
-SlateportCity_Text_PowderJarSentToPC:
-	.string "Your KEY ITEMS pocket is full, so the\n"
-	.string "POWDER JAR was sent to your PC.$"
-
-SlateportCity_Text_PowderJarNoRoom:
-	.string "Your KEY ITEMS pocket and PC are full.\n"
-	.string "Make room, then return for the jar.$"
-
-SlateportCity_Text_ExplainBerryPowder:
-	.string "I recently had machines installed at\n"
-	.string "POKéMON CENTERS for crushing BERRIES.\p"
-	.string "The BERRY CRUSH machines are at\n"
-	.string "the DIRECT CORNER upstairs.\p"
-	.string "Did you know?\p"
-	.string "Could you make BERRY POWDER for\n"
-	.string "me using those machines?\p"
-	.string "I can make you all sorts of medicine\n"
-	.string "if you bring me lots of BERRY POWDER.$"
-
-SlateportCity_Text_BroughtMeSomeBerryPowder:
-	.string "Have you brought me some\n"
-	.string "BERRY POWDER?$"
-
-SlateportCity_Text_ExchangeWhatWithIt:
-	.string "What would you like to exchange\n"
-	.string "it with?$"
-
-SlateportCity_Text_ExchangeBerryPowderForItem:
-	.string "Okay, you want to exchange your\n"
-	.string "BERRY POWDER for one {STR_VAR_1}?$"
-
-SlateportCity_Text_DontHaveEnoughBerryPowder:
-	.string "Oh, dear. You don't have enough\n"
-	.string "BERRY POWDER.$"
-
-SlateportCity_Text_FineBerryPowderTradeSomethingElse:
-	.string "This is fine BERRY POWDER.\n"
-	.string "It will make excellent medicine.\p"
-	.string "Would you like to trade more of your\n"
-	.string "BERRY POWDER for something else?$"
-
-SlateportCity_Text_WhenYouGetMoreBringItToMe:
-	.string "Okay! When you get some more\n"
-	.string "BERRY POWDER, bring it to me, please!$"
-
-SlateportCity_Text_ComeBackToTradeBerryPowder:
-	.string "Come back if you'd like to trade your\n"
-	.string "BERRY POWDER for some medicine.\p"
-	.string "I'm always running a bazaar here.\p"
-	.string "Did you know?$"
+SlateportCity_Text_MarketDirectory:
+	.string "SLATEPORT MARKET\p"
+	.string "Capture supplies, herbal medicine,\n"
+	.string "and decorations for your SECRET BASE.\p"
+	.string "Visit the MART for evolution stones\n"
+	.string "and special evolution tools.$"
 
 SlateportCity_Text_YouDroveTeamAquaAway:
-	.string "SCOTT: Huh?\n"
-	.string "I'm sure I met you somewhere before.\p"
-	.string "Have I introduced myself to you?\n"
-	.string "If not, my name's SCOTT.\p"
-	.string "I just saw TEAM AQUA run away from\n"
-	.string "here like they were stung.\p"
-	.string "Let me guess--you drove them away?$"
+	.string "SCOTT: Good to see you again!\n"
+	.string "We met in PETALBURG.\p"
+	.string "I just saw TEAM AQUA rush out.\n"
+	.string "Was that your team's doing?$"
 
 SlateportCity_Text_MaybeThisTrainer:
-	.string "SCOTT: Hmm…\n"
-	.string "Maybe, just maybe, this TRAINER…$"
+	.string "SCOTT: Handling a surprise like\n"
+	.string "that takes more than strong moves.\l"
+	.string "You kept your team together.$"
 
 SlateportCity_Text_LetsRegisterEachOther:
-	.string "SCOTT: All right! I think you're going\n"
-	.string "to become a good friend.\p"
-	.string "So, let's register each other in our\n"
-	.string "POKéNAVS.\p"
-	.string "… … … … … …$"
+	.string "SCOTT: I'd like to hear how your\n"
+	.string "journey goes. Let's register\l"
+	.string "each other in our POKéNAVS.$"
 
 SlateportCity_Text_RegisteredScott:
-	.string "Registered this SCOTT person\n"
+	.string "Registered SCOTT\n"
 	.string "in the POKéNAV.$"
 
 SlateportCity_Text_KeepEyeOnTrainersBeSeeingYou:
-	.string "SCOTT: What I'd like to do is tag along\n"
-	.string "with you, but I do want to keep an eye\l"
-	.string "on the talents of other people, too.\p"
-	.string "So, I'll be off to roam other towns\n"
-	.string "a bit more.\p"
-	.string "Be seeing you, {PLAYER}{KUN}!$"
+	.string "SCOTT: There are promising\n"
+	.string "TRAINERS all over HOENN. I have\l"
+	.string "a few more stops to make.\p"
+	.string "Keep trying new plans,\n"
+	.string "{PLAYER}{KUN}. I'll be watching\l"
+	.string "for your next BADGE!$"
 
 SlateportCity_Text_TakingBattleTentChallenge:
 	.string "SCOTT: Oh, hey!\n"

@@ -254,17 +254,20 @@ Route118_EventScript_Deandre::
 	end
 
 Route118_Text_StevenQuestions:
-	.string "STEVEN: {PLAYER}{KUN}! Good to see you.\p"
-	.string "Have you found new partners, or stayed\n"
-	.string "with your favorites?\p"
-	.string "Either way, think about how they help\n"
-	.string "one another. That's a team's strength.\p"
-	.string "Head north on ROUTE 119.\n"
-	.string "Visit the WEATHER INSTITUTE on the way.\p"
-	.string "Ask its researchers about the weather.\n"
-	.string "Then challenge WINONA in FORTREE.\p"
-	.string "I'll keep exploring.\n"
-	.string "Let's compare discoveries next time.$"
+	.string "STEVEN: {PLAYER}{KUN}! Good to\n"
+	.string "see you.\p"
+	.string "Have you found new partners, or\n"
+	.string "stayed with your favorites?\p"
+	.string "Either way, think about how they\n"
+	.string "help one another. That's a team's\l"
+	.string "strength.\p"
+	.string "Head north on ROUTE 119. Visit\n"
+	.string "the WEATHER INSTITUTE on the way.\p"
+	.string "Ask its researchers about the\n"
+	.string "weather. Then challenge WINONA in\l"
+	.string "FORTREE.\p"
+	.string "I'll keep exploring. Let's\n"
+	.string "compare discoveries next time.$"
 
 Route118_Text_YouAgreeGoodRodIsGood:
 	.string "Hmm!\n"
@@ -289,18 +292,21 @@ Route118_Text_TryCatchingMonWithGoodRod:
 	.string "with your GOOD ROD.$"
 
 Route118_Text_MagikarpGuyChallenge:
-	.string "A rod catches fish. A Trainer finds the\n"
-	.string "battle hidden inside them.\p"
-	.string "Want to face my complete fishing team?$"
+	.string "People see my MAGIKARP and smile.\n"
+	.string "I don't mind. I smiled when I\l"
+	.string "caught it!\p"
+	.string "Care to battle my fishing team?$"
 
 Route118_Text_MagikarpGuyDefeat:
-	.string "You never mistook the little fish for\n"
-	.string "the whole current.$"
+	.string "Well caught! That was a good\n"
+	.string "battle.$"
 
 Route118_Text_MagikarpGuyAfter:
-	.string "MAGIKARP was the invitation.\n"
-	.string "It was never the joke.\p"
-	.string "Every weak-looking lead can hide a plan.$"
+	.string "Every partner has a story. Mine\n"
+	.string "usually starts with a fishing rod\l"
+	.string "and a very long wait.\p"
+	.string "Even that little MAGIKARP made me\n"
+	.string "work for it!$"
 
 Route118_Text_MagikarpGuyDecline:
 	.string "No hurry. The river and my team will wait.$"

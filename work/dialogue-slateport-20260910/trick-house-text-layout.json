@@ -1,0 +1,3206 @@
+[
+  {
+    "file": "data/maps/Route110_TrickHouseEnd/scripts.inc",
+    "label": "Route110_TrickHouseEnd_Text_YouveMadeItToMe",
+    "line": 248,
+    "text": "Aak!\\nYou've made it to me?\\lHmmm… You're sharp!$",
+    "lines": [
+      {
+        "text": "Aak!",
+        "width": 22,
+        "unresolved": []
+      },
+      {
+        "text": "You've made it to me?",
+        "width": 112,
+        "unresolved": []
+      },
+      {
+        "text": "Hmmm… You're sharp!",
+        "width": 104,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHouseEnd/scripts.inc",
+    "label": "Route110_TrickHouseEnd_Text_AllNightToPlantTrees",
+    "line": 253,
+    "text": "It took me all night to plant all those\\ntrees…\\pYou're almost my equal in greatness by\\none, two, three, four, five, six places!$",
+    "lines": [
+      {
+        "text": "It took me all night to plant all those",
+        "width": 198,
+        "unresolved": []
+      },
+      {
+        "text": "trees…",
+        "width": 35,
+        "unresolved": []
+      },
+      {
+        "text": "You're almost my equal in greatness by",
+        "width": 202,
+        "unresolved": []
+      },
+      {
+        "text": "one, two, three, four, five, six places!",
+        "width": 197,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHouseEnd/scripts.inc",
+    "label": "Route110_TrickHouseEnd_Text_AllNightToMakeMaze",
+    "line": 259,
+    "text": "It took me all night to make the maze…\\pYou're almost my equal in greatness by\\none, two, three, four, five places!$",
+    "lines": [
+      {
+        "text": "It took me all night to make the maze…",
+        "width": 198,
+        "unresolved": []
+      },
+      {
+        "text": "You're almost my equal in greatness by",
+        "width": 202,
+        "unresolved": []
+      },
+      {
+        "text": "one, two, three, four, five places!",
+        "width": 175,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHouseEnd/scripts.inc",
+    "label": "Route110_TrickHouseEnd_Text_AllNightToPreparePanels",
+    "line": 264,
+    "text": "It took me all night to prepare\\nthe wall panels…\\pYou're almost my equal in greatness by\\none, two, three, four places!$",
+    "lines": [
+      {
+        "text": "It took me all night to prepare",
+        "width": 160,
+        "unresolved": []
+      },
+      {
+        "text": "the wall panels…",
+        "width": 84,
+        "unresolved": []
+      },
+      {
+        "text": "You're almost my equal in greatness by",
+        "width": 202,
+        "unresolved": []
+      },
+      {
+        "text": "one, two, three, four places!",
+        "width": 147,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHouseEnd/scripts.inc",
+    "label": "Route110_TrickHouseEnd_Text_AllNightToShoveBoulders",
+    "line": 270,
+    "text": "It took me all night to shove in those\\nboulders…\\pYou're almost my equal in greatness by\\none, two, three places!$",
+    "lines": [
+      {
+        "text": "It took me all night to shove in those",
+        "width": 196,
+        "unresolved": []
+      },
+      {
+        "text": "boulders…",
+        "width": 51,
+        "unresolved": []
+      },
+      {
+        "text": "You're almost my equal in greatness by",
+        "width": 202,
+        "unresolved": []
+      },
+      {
+        "text": "one, two, three places!",
+        "width": 118,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHouseEnd/scripts.inc",
+    "label": "Route110_TrickHouseEnd_Text_AllNightToMakeMechadolls",
+    "line": 276,
+    "text": "It took me all night to make MECHADOLLS\\nand another to think up the quiz…\\pYou're almost my equal in greatness by\\none, two places!$",
+    "lines": [
+      {
+        "text": "It took me all night to make MECHADOLLS",
+        "width": 207,
+        "unresolved": []
+      },
+      {
+        "text": "and another to think up the quiz…",
+        "width": 175,
+        "unresolved": []
+      },
+      {
+        "text": "You're almost my equal in greatness by",
+        "width": 202,
+        "unresolved": []
+      },
+      {
+        "text": "one, two places!",
+        "width": 83,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHouseEnd/scripts.inc",
+    "label": "Route110_TrickHouseEnd_Text_AllNightToInstallDoors",
+    "line": 282,
+    "text": "It took me all night to install\\nthe doors…\\pYou're almost my equal in greatness!$",
+    "lines": [
+      {
+        "text": "It took me all night to install",
+        "width": 156,
+        "unresolved": []
+      },
+      {
+        "text": "the doors…",
+        "width": 56,
+        "unresolved": []
+      },
+      {
+        "text": "You're almost my equal in greatness!",
+        "width": 191,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHouseEnd/scripts.inc",
+    "label": "Route110_TrickHouseEnd_Text_AllNightSettingUpArrows",
+    "line": 287,
+    "text": "It took me all night setting up arrows…\\pYou're my equal in greatness!$",
+    "lines": [
+      {
+        "text": "It took me all night setting up arrows…",
+        "width": 203,
+        "unresolved": []
+      },
+      {
+        "text": "You're my equal in greatness!",
+        "width": 154,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHouseEnd/scripts.inc",
+    "label": "Route110_TrickHouseEnd_Text_AllNightPolishingFloors",
+    "line": 291,
+    "text": "It took me all night polishing floors…\\pYou're above me in greatness!\\nPossibly…$",
+    "lines": [
+      {
+        "text": "It took me all night polishing floors…",
+        "width": 195,
+        "unresolved": []
+      },
+      {
+        "text": "You're above me in greatness!",
+        "width": 156,
+        "unresolved": []
+      },
+      {
+        "text": "Possibly…",
+        "width": 50,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHouseEnd/scripts.inc",
+    "label": "Route110_TrickHouseEnd_Text_FountainOfIdeasRunDry",
+    "line": 296,
+    "text": "Wh-what should I do?\\nMy fountain of ideas for tricks has\\lrun dry…\\pPerhaps it is time I toured the country\\non a quest to devise new tricks…$",
+    "lines": [
+      {
+        "text": "Wh-what should I do?",
+        "width": 109,
+        "unresolved": []
+      },
+      {
+        "text": "My fountain of ideas for tricks has",
+        "width": 184,
+        "unresolved": []
+      },
+      {
+        "text": "run dry…",
+        "width": 43,
+        "unresolved": []
+      },
+      {
+        "text": "Perhaps it is time I toured the country",
+        "width": 204,
+        "unresolved": []
+      },
+      {
+        "text": "on a quest to devise new tricks…",
+        "width": 169,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHouseEnd/scripts.inc",
+    "label": "Route110_TrickHouseEnd_Text_DefeatedMePreferWhichTent",
+    "line": 303,
+    "text": "I hate to admit defeat, but you have\\nbested me!\\pStill, you must have been reeled in by\\nmy charisma for you to visit me again\\land again. Yes, you must have!\\pBut that has nothing to do with my\\nlosing!\\pIn recognition of the friendship\\nbetween you, the driven, and the genius\\lthat is myself, I demand that you take\\lthis keepsake!\\pActually there are two--\\na RED TENT and a BLUE TENT.\\lWhich do you prefer?$",
+    "lines": [
+      {
+        "text": "I hate to admit defeat, but you have",
+        "width": 190,
+        "unresolved": []
+      },
+      {
+        "text": "bested me!",
+        "width": 55,
+        "unresolved": []
+      },
+      {
+        "text": "Still, you must have been reeled in by",
+        "width": 193,
+        "unresolved": []
+      },
+      {
+        "text": "my charisma for you to visit me again",
+        "width": 191,
+        "unresolved": []
+      },
+      {
+        "text": "and again. Yes, you must have!",
+        "width": 155,
+        "unresolved": []
+      },
+      {
+        "text": "But that has nothing to do with my",
+        "width": 179,
+        "unresolved": []
+      },
+      {
+        "text": "losing!",
+        "width": 36,
+        "unresolved": []
+      },
+      {
+        "text": "In recognition of the friendship",
+        "width": 170,
+        "unresolved": []
+      },
+      {
+        "text": "between you, the driven, and the genius",
+        "width": 205,
+        "unresolved": []
+      },
+      {
+        "text": "that is myself, I demand that you take",
+        "width": 200,
+        "unresolved": []
+      },
+      {
+        "text": "this keepsake!",
+        "width": 77,
+        "unresolved": []
+      },
+      {
+        "text": "Actually there are two--",
+        "width": 129,
+        "unresolved": []
+      },
+      {
+        "text": "a RED TENT and a BLUE TENT.",
+        "width": 141,
+        "unresolved": []
+      },
+      {
+        "text": "Which do you prefer?",
+        "width": 107,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHouseEnd/scripts.inc",
+    "label": "Route110_TrickHouseEnd_Text_NoRoomInPC",
+    "line": 319,
+    "text": "What? No room in your PC?\\nWhat am I to make of that?\\pI wish I could say that, but I am much\\ntoo kind and caring, so come back later!$",
+    "lines": [
+      {
+        "text": "What? No room in your PC?",
+        "width": 131,
+        "unresolved": []
+      },
+      {
+        "text": "What am I to make of that?",
+        "width": 138,
+        "unresolved": []
+      },
+      {
+        "text": "I wish I could say that, but I am much",
+        "width": 194,
+        "unresolved": []
+      },
+      {
+        "text": "too kind and caring, so come back later!",
+        "width": 206,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHouseEnd/scripts.inc",
+    "label": "Route110_TrickHouseEnd_Text_LeavingOnJourney",
+    "line": 325,
+    "text": "… … … … … …\\pI am leaving on a journey of discovery.\\nA quest in search of new tricks.\\pI wish that you will one day visit and\\nentertain me again.\\pAnd now, farewell!$",
+    "lines": [
+      {
+        "text": "… … … … … …",
+        "width": 51,
+        "unresolved": []
+      },
+      {
+        "text": "I am leaving on a journey of discovery.",
+        "width": 201,
+        "unresolved": []
+      },
+      {
+        "text": "A quest in search of new tricks.",
+        "width": 165,
+        "unresolved": []
+      },
+      {
+        "text": "I wish that you will one day visit and",
+        "width": 192,
+        "unresolved": []
+      },
+      {
+        "text": "entertain me again.",
+        "width": 100,
+        "unresolved": []
+      },
+      {
+        "text": "And now, farewell!",
+        "width": 92,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHouseEnd/scripts.inc",
+    "label": "Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward",
+    "line": 333,
+    "text": "Fine!\\nYou have earned this reward!$",
+    "lines": [
+      {
+        "text": "Fine!",
+        "width": 26,
+        "unresolved": []
+      },
+      {
+        "text": "You have earned this reward!",
+        "width": 149,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHouseEnd/scripts.inc",
+    "label": "Route110_TrickHouseEnd_Text_NoRoomForThis",
+    "line": 337,
+    "text": "What? Have you no room for this?\\nWhat manner of items do you carry?\\pBut fine, since you've reached me,\\nyour reward will be with me till later.$",
+    "lines": [
+      {
+        "text": "What? Have you no room for this?",
+        "width": 170,
+        "unresolved": []
+      },
+      {
+        "text": "What manner of items do you carry?",
+        "width": 181,
+        "unresolved": []
+      },
+      {
+        "text": "But fine, since you've reached me,",
+        "width": 178,
+        "unresolved": []
+      },
+      {
+        "text": "your reward will be with me till later.",
+        "width": 190,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHouseEnd/scripts.inc",
+    "label": "Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou",
+    "line": 343,
+    "text": "Scrub that smug smirk from your face!\\nIt's much too early to think you've won!\\pI'll make new tricks to stump you, I will.\\nYou may mock me only when you're done.\\pCome back for the next exciting\\ninstallment!$",
+    "lines": [
+      {
+        "text": "Scrub that smug smirk from your face!",
+        "width": 196,
+        "unresolved": []
+      },
+      {
+        "text": "It's much too early to think you've won!",
+        "width": 212,
+        "unresolved": []
+      },
+      {
+        "text": "I'll make new tricks to stump you, I will.",
+        "width": 209,
+        "unresolved": []
+      },
+      {
+        "text": "You may mock me only when you're done.",
+        "width": 201,
+        "unresolved": []
+      },
+      {
+        "text": "Come back for the next exciting",
+        "width": 166,
+        "unresolved": []
+      },
+      {
+        "text": "installment!",
+        "width": 64,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHouseEnd/scripts.inc",
+    "label": "Route110_TrickHouseEnd_Text_YoureIgnoringMe",
+    "line": 351,
+    "text": "Now, now! You're ignoring me now?\\nNow that, I consider heartbreaking!$",
+    "lines": [
+      {
+        "text": "Now, now! You're ignoring me now?",
+        "width": 172,
+        "unresolved": []
+      },
+      {
+        "text": "Now that, I consider heartbreaking!",
+        "width": 186,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHouseEnd/scripts.inc",
+    "label": "Route110_TrickHouseEnd_Text_FinalPrizeMegaStone",
+    "line": 356,
+    "text": "And one more thing! A true master of\\ntricks deserves a master of the mind.$",
+    "lines": [
+      {
+        "text": "And one more thing! A true master of",
+        "width": 188,
+        "unresolved": []
+      },
+      {
+        "text": "tricks deserves a master of the mind.",
+        "width": 194,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHouseEntrance/scripts.inc",
+    "label": "Route110_TrickHouseEntrance_Text_YoureBeingWatched",
+    "line": 681,
+    "text": "You're being watched…$",
+    "lines": [
+      {
+        "text": "You're being watched…",
+        "width": 117,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHouseEntrance/scripts.inc",
+    "label": "Route110_TrickHouseEntrance_Text_ConcealedBeneathDesk",
+    "line": 684,
+    "text": "Hah? Grrr…\\pHow did you know I concealed myself\\nbeneath this desk? You're sharp!$",
+    "lines": [
+      {
+        "text": "Hah? Grrr…",
+        "width": 54,
+        "unresolved": []
+      },
+      {
+        "text": "How did you know I concealed myself",
+        "width": 186,
+        "unresolved": []
+      },
+      {
+        "text": "beneath this desk? You're sharp!",
+        "width": 174,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHouseEntrance/scripts.inc",
+    "label": "Route110_TrickHouseEntrance_Text_ConcealedBehindTree",
+    "line": 689,
+    "text": "Hah? Grrr…\\pHow did you know I concealed myself\\nbehind this tree? You're sharp!$",
+    "lines": [
+      {
+        "text": "Hah? Grrr…",
+        "width": 54,
+        "unresolved": []
+      },
+      {
+        "text": "How did you know I concealed myself",
+        "width": 186,
+        "unresolved": []
+      },
+      {
+        "text": "behind this tree? You're sharp!",
+        "width": 165,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHouseEntrance/scripts.inc",
+    "label": "Route110_TrickHouseEntrance_Text_ConcealedInDresser",
+    "line": 694,
+    "text": "Hah? Grrr…\\pHow did you know I concealed myself\\nin this dresser? You're sharp!$",
+    "lines": [
+      {
+        "text": "Hah? Grrr…",
+        "width": 54,
+        "unresolved": []
+      },
+      {
+        "text": "How did you know I concealed myself",
+        "width": 186,
+        "unresolved": []
+      },
+      {
+        "text": "in this dresser? You're sharp!",
+        "width": 158,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHouseEntrance/scripts.inc",
+    "label": "Route110_TrickHouseEntrance_Text_ConealedBeyondWindow",
+    "line": 699,
+    "text": "Hah? Grrr…\\pHow did you know I concealed myself\\nbeyond this window? You're sharp!$",
+    "lines": [
+      {
+        "text": "Hah? Grrr…",
+        "width": 54,
+        "unresolved": []
+      },
+      {
+        "text": "How did you know I concealed myself",
+        "width": 186,
+        "unresolved": []
+      },
+      {
+        "text": "beyond this window? You're sharp!",
+        "width": 178,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHouseEntrance/scripts.inc",
+    "label": "Route110_TrickHouseEntrance_Text_ConcealedInPlanter",
+    "line": 704,
+    "text": "Hah? Grrr…\\pHow did you know I concealed myself\\nin this planter? You're sharp!$",
+    "lines": [
+      {
+        "text": "Hah? Grrr…",
+        "width": 54,
+        "unresolved": []
+      },
+      {
+        "text": "How did you know I concealed myself",
+        "width": 186,
+        "unresolved": []
+      },
+      {
+        "text": "in this planter? You're sharp!",
+        "width": 157,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHouseEntrance/scripts.inc",
+    "label": "Route110_TrickHouseEntrance_Text_ConcealedInCupboard",
+    "line": 709,
+    "text": "Hah? Grrr…\\pHow did you know I concealed myself\\nin this cupboard? You're sharp!$",
+    "lines": [
+      {
+        "text": "Hah? Grrr…",
+        "width": 54,
+        "unresolved": []
+      },
+      {
+        "text": "How did you know I concealed myself",
+        "width": 186,
+        "unresolved": []
+      },
+      {
+        "text": "in this cupboard? You're sharp!",
+        "width": 165,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHouseEntrance/scripts.inc",
+    "label": "Route110_TrickHouseEntrance_Text_ConcealedBehindWindow",
+    "line": 714,
+    "text": "Hah? Grrr…\\pHow did you know I concealed myself\\nbehind this window? You're sharp!$",
+    "lines": [
+      {
+        "text": "Hah? Grrr…",
+        "width": 54,
+        "unresolved": []
+      },
+      {
+        "text": "How did you know I concealed myself",
+        "width": 186,
+        "unresolved": []
+      },
+      {
+        "text": "behind this window? You're sharp!",
+        "width": 176,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHouseEntrance/scripts.inc",
+    "label": "Route110_TrickHouseEntrance_Text_ConcealedBeneathCushion",
+    "line": 719,
+    "text": "Hah? Grrr…\\pHow did you know I concealed myself\\nbeneath this cushion? You're sharp!$",
+    "lines": [
+      {
+        "text": "Hah? Grrr…",
+        "width": 54,
+        "unresolved": []
+      },
+      {
+        "text": "How did you know I concealed myself",
+        "width": 186,
+        "unresolved": []
+      },
+      {
+        "text": "beneath this cushion? You're sharp!",
+        "width": 190,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHouseEntrance/scripts.inc",
+    "label": "Route110_TrickHouseEntrance_Text_TheyCallMeTrickMaster",
+    "line": 724,
+    "text": "Behold!\\pFor I am the greatest living mystery\\nof a man in all of HOENN!\\lThey call me…\\pThe TRICK MASTER!\\nWahahaha! Glad to meet you!$",
+    "lines": [
+      {
+        "text": "Behold!",
+        "width": 38,
+        "unresolved": []
+      },
+      {
+        "text": "For I am the greatest living mystery",
+        "width": 189,
+        "unresolved": []
+      },
+      {
+        "text": "of a man in all of HOENN!",
+        "width": 124,
+        "unresolved": []
+      },
+      {
+        "text": "They call me…",
+        "width": 68,
+        "unresolved": []
+      },
+      {
+        "text": "The TRICK MASTER!",
+        "width": 94,
+        "unresolved": []
+      },
+      {
+        "text": "Wahahaha! Glad to meet you!",
+        "width": 144,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHouseEntrance/scripts.inc",
+    "label": "Route110_TrickHouseEntrance_Text_ComeToChallengeTrickHouse",
+    "line": 732,
+    "text": "You, you've come to challenge\\nmy TRICK HOUSE, haven't you?\\pThat's why you're here, isn't it?\\nYes, it is!\\pConsider your challenge accepted!\\pEnter through the scroll there,\\nand let your challenge commence!\\pI shall be waiting in the back!$",
+    "lines": [
+      {
+        "text": "You, you've come to challenge",
+        "width": 155,
+        "unresolved": []
+      },
+      {
+        "text": "my TRICK HOUSE, haven't you?",
+        "width": 153,
+        "unresolved": []
+      },
+      {
+        "text": "That's why you're here, isn't it?",
+        "width": 174,
+        "unresolved": []
+      },
+      {
+        "text": "Yes, it is!",
+        "width": 51,
+        "unresolved": []
+      },
+      {
+        "text": "Consider your challenge accepted!",
+        "width": 179,
+        "unresolved": []
+      },
+      {
+        "text": "Enter through the scroll there,",
+        "width": 163,
+        "unresolved": []
+      },
+      {
+        "text": "and let your challenge commence!",
+        "width": 171,
+        "unresolved": []
+      },
+      {
+        "text": "I shall be waiting in the back!",
+        "width": 156,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHouseEntrance/scripts.inc",
+    "label": "Route110_TrickHouseEntrance_Text_ItsAScroll",
+    "line": 742,
+    "text": "It's a scroll.$",
+    "lines": [
+      {
+        "text": "It's a scroll.",
+        "width": 70,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHouseEntrance/scripts.inc",
+    "label": "Route110_TrickHouseEntrance_Text_GoInHoleBehindScroll",
+    "line": 745,
+    "text": "There is a big hole behind the scroll!\\pWant to go in?$",
+    "lines": [
+      {
+        "text": "There is a big hole behind the scroll!",
+        "width": 191,
+        "unresolved": []
+      },
+      {
+        "text": "Want to go in?",
+        "width": 73,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHouseEntrance/scripts.inc",
+    "label": "Route110_TrickHouseEntrance_Text_LeavingOnJourneyNote",
+    "line": 749,
+    "text": "There is a note affixed to the scroll…\\p“I am leaving on a journey.\\nDon't look for me. TRICK MASTER”$",
+    "lines": [
+      {
+        "text": "There is a note affixed to the scroll…",
+        "width": 197,
+        "unresolved": []
+      },
+      {
+        "text": "“I am leaving on a journey.",
+        "width": 138,
+        "unresolved": []
+      },
+      {
+        "text": "Don't look for me. TRICK MASTER”",
+        "width": 171,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHouseEntrance/scripts.inc",
+    "label": "Route110_TrickHouseEntrance_Text_NextTimeUseThisTrick",
+    "line": 754,
+    "text": "For the next time, I'll use this trick,\\nand that scheme, and those ruses…\\pMufufufu… If I may say so, it's\\nbrilliantly difficult, even for me!$",
+    "lines": [
+      {
+        "text": "For the next time, I'll use this trick,",
+        "width": 195,
+        "unresolved": []
+      },
+      {
+        "text": "and that scheme, and those ruses…",
+        "width": 179,
+        "unresolved": []
+      },
+      {
+        "text": "Mufufufu… If I may say so, it's",
+        "width": 163,
+        "unresolved": []
+      },
+      {
+        "text": "brilliantly difficult, even for me!",
+        "width": 175,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHouseEntrance/scripts.inc",
+    "label": "Route110_TrickHouseEntrance_Text_InMidstOfDevisingNewChallenges",
+    "line": 760,
+    "text": "Hah? What?!\\nOh, it's you!\\pI'm in the midst of devising new tricky\\nchallenges!\\pIt's not too much to ask for a bit more\\ntime for me to think, is it now?\\lYou wouldn't begrudge me that?\\lCome back in a little while!$",
+    "lines": [
+      {
+        "text": "Hah? What?!",
+        "width": 61,
+        "unresolved": []
+      },
+      {
+        "text": "Oh, it's you!",
+        "width": 65,
+        "unresolved": []
+      },
+      {
+        "text": "I'm in the midst of devising new tricky",
+        "width": 202,
+        "unresolved": []
+      },
+      {
+        "text": "challenges!",
+        "width": 60,
+        "unresolved": []
+      },
+      {
+        "text": "It's not too much to ask for a bit more",
+        "width": 203,
+        "unresolved": []
+      },
+      {
+        "text": "time for me to think, is it now?",
+        "width": 159,
+        "unresolved": []
+      },
+      {
+        "text": "You wouldn't begrudge me that?",
+        "width": 165,
+        "unresolved": []
+      },
+      {
+        "text": "Come back in a little while!",
+        "width": 139,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHouseEntrance/scripts.inc",
+    "label": "Route110_TrickHouseEntrance_Text_YoureHereToAcceptReward",
+    "line": 770,
+    "text": "Ah, it's you! You're here to accept the\\nreward from before, isn't that right?\\lYes, right I am!\\pHere!\\nI'll give it to you now!$",
+    "lines": [
+      {
+        "text": "Ah, it's you! You're here to accept the",
+        "width": 204,
+        "unresolved": []
+      },
+      {
+        "text": "reward from before, isn't that right?",
+        "width": 195,
+        "unresolved": []
+      },
+      {
+        "text": "Yes, right I am!",
+        "width": 79,
+        "unresolved": []
+      },
+      {
+        "text": "Here!",
+        "width": 27,
+        "unresolved": []
+      },
+      {
+        "text": "I'll give it to you now!",
+        "width": 119,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHouseEntrance/scripts.inc",
+    "label": "Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward",
+    "line": 777,
+    "text": "Hah?\\nDid you not come to claim your reward?$",
+    "lines": [
+      {
+        "text": "Hah?",
+        "width": 24,
+        "unresolved": []
+      },
+      {
+        "text": "Did you not come to claim your reward?",
+        "width": 198,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHouseEntrance/scripts.inc",
+    "label": "Route110_TrickHouseEntrance_Text_MechadollWhichTent",
+    "line": 781,
+    "text": "MECHADOLL 5 I AM!\\nIF REWARD IS NOT TAKEN BY YOU,\\lTHEN TRICK MASTER YOU CANNOT FOLLOW.\\pRED TENT OR BLUE TENT,\\nWHICH DO YOU PREFER?$",
+    "lines": [
+      {
+        "text": "MECHADOLL 5 I AM!",
+        "width": 91,
+        "unresolved": []
+      },
+      {
+        "text": "IF REWARD IS NOT TAKEN BY YOU,",
+        "width": 159,
+        "unresolved": []
+      },
+      {
+        "text": "THEN TRICK MASTER YOU CANNOT FOLLOW.",
+        "width": 198,
+        "unresolved": []
+      },
+      {
+        "text": "RED TENT OR BLUE TENT,",
+        "width": 117,
+        "unresolved": []
+      },
+      {
+        "text": "WHICH DO YOU PREFER?",
+        "width": 111,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHouseEntrance/scripts.inc",
+    "label": "Route110_TrickHouseEntrance_Text_ThenFarewell",
+    "line": 788,
+    "text": "THEN FAREWELL.$",
+    "lines": [
+      {
+        "text": "THEN FAREWELL.",
+        "width": 78,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHouseEntrance/scripts.inc",
+    "label": "Route110_TrickHouseEntrance_Text_PCFullAgain",
+    "line": 791,
+    "text": "YOUR PC STATUS: FULL AGAIN.\\nMEAN, YOU ARE.$",
+    "lines": [
+      {
+        "text": "YOUR PC STATUS: FULL AGAIN.",
+        "width": 144,
+        "unresolved": []
+      },
+      {
+        "text": "MEAN, YOU ARE.",
+        "width": 72,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHouseEntrance/scripts.inc",
+    "label": "Route110_TrickHousePuzzle_Text_FoundAScroll",
+    "line": 795,
+    "text": "{PLAYER} found a scroll.$",
+    "lines": [
+      {
+        "text": "{PLAYER} found a scroll.",
+        "width": 121,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHouseEntrance/scripts.inc",
+    "label": "Route110_TrickHousePuzzle_Text_MemorizedSecretCode",
+    "line": 798,
+    "text": "{PLAYER} memorized the secret code\\nwritten on the scroll.$",
+    "lines": [
+      {
+        "text": "{PLAYER} memorized the secret code",
+        "width": 182,
+        "unresolved": []
+      },
+      {
+        "text": "written on the scroll.",
+        "width": 112,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHouseEntrance/scripts.inc",
+    "label": "Route110_TrickHousePuzzle_Text_SecretCodeWrittenOnIt",
+    "line": 802,
+    "text": "A secret code is written on it.$",
+    "lines": [
+      {
+        "text": "A secret code is written on it.",
+        "width": 157,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHouseEntrance/scripts.inc",
+    "label": "Route110_TrickHouseEntrance_Text_DoorLockedWriteSecretCodeHere",
+    "line": 805,
+    "text": "The door is locked.\\p…On closer inspection, this is written\\non it: “Write the secret code here.”$",
+    "lines": [
+      {
+        "text": "The door is locked.",
+        "width": 97,
+        "unresolved": []
+      },
+      {
+        "text": "…On closer inspection, this is written",
+        "width": 196,
+        "unresolved": []
+      },
+      {
+        "text": "on it: “Write the secret code here.”",
+        "width": 185,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHouseEntrance/scripts.inc",
+    "label": "Route110_TrickHouseEntrance_Text_FinalRewardsPending",
+    "line": 810,
+    "text": "YOUR FINAL REWARDS ARE RECORDED.\\pTHE TENT AND ALAKAZITE ARE\\nSEPARATE GIFTS. MAKE ROOM FOR ANY\\lPART STILL WAITING HERE.$",
+    "lines": [
+      {
+        "text": "YOUR FINAL REWARDS ARE RECORDED.",
+        "width": 177,
+        "unresolved": []
+      },
+      {
+        "text": "THE TENT AND ALAKAZITE ARE",
+        "width": 144,
+        "unresolved": []
+      },
+      {
+        "text": "SEPARATE GIFTS. MAKE ROOM FOR ANY",
+        "width": 180,
+        "unresolved": []
+      },
+      {
+        "text": "PART STILL WAITING HERE.",
+        "width": 132,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle1/scripts.inc",
+    "label": "Route110_TrickHousePuzzle1_Text_WroteSecretCodeLockOpened",
+    "line": 39,
+    "text": "{PLAYER} wrote down the secret code\\non the door.\\p“TRICK MASTER is fabulous.”\\n… … … … … … … …\\pThe lock clicked open!$",
+    "lines": [
+      {
+        "text": "{PLAYER} wrote down the secret code",
+        "width": 187,
+        "unresolved": []
+      },
+      {
+        "text": "on the door.",
+        "width": 62,
+        "unresolved": []
+      },
+      {
+        "text": "“TRICK MASTER is fabulous.”",
+        "width": 146,
+        "unresolved": []
+      },
+      {
+        "text": "… … … … … … … …",
+        "width": 69,
+        "unresolved": []
+      },
+      {
+        "text": "The lock clicked open!",
+        "width": 115,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle1/scripts.inc",
+    "label": "Route110_TrickHousePuzzle1_Text_SallyIntro",
+    "line": 46,
+    "text": "I've cut a path through every shrub!\\nNow let's see if I can cut through\\lyour defenses!$",
+    "lines": [
+      {
+        "text": "I've cut a path through every shrub!",
+        "width": 193,
+        "unresolved": []
+      },
+      {
+        "text": "Now let's see if I can cut through",
+        "width": 178,
+        "unresolved": []
+      },
+      {
+        "text": "your defenses!",
+        "width": 78,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle1/scripts.inc",
+    "label": "Route110_TrickHousePuzzle1_Text_SallyDefeat",
+    "line": 51,
+    "text": "Why are you so serious?$",
+    "lines": [
+      {
+        "text": "Why are you so serious?",
+        "width": 122,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle1/scripts.inc",
+    "label": "Route110_TrickHousePuzzle1_Text_SallyPostBattle",
+    "line": 54,
+    "text": "I never get tired of hacking\\nand slashing!$",
+    "lines": [
+      {
+        "text": "I never get tired of hacking",
+        "width": 147,
+        "unresolved": []
+      },
+      {
+        "text": "and slashing!",
+        "width": 69,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle1/scripts.inc",
+    "label": "Route110_TrickHousePuzzle1_Text_EddieIntro",
+    "line": 58,
+    "text": "I wandered into this weird house\\nby accident…$",
+    "lines": [
+      {
+        "text": "I wandered into this weird house",
+        "width": 169,
+        "unresolved": []
+      },
+      {
+        "text": "by accident…",
+        "width": 67,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle1/scripts.inc",
+    "label": "Route110_TrickHousePuzzle1_Text_EddieDefeat",
+    "line": 62,
+    "text": "And now I've lost…$",
+    "lines": [
+      {
+        "text": "And now I've lost…",
+        "width": 97,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle1/scripts.inc",
+    "label": "Route110_TrickHousePuzzle1_Text_EddiePostBattle",
+    "line": 65,
+    "text": "I lost my way, I lost a battle, and I'm\\nnow even more lost… I can't get out…$",
+    "lines": [
+      {
+        "text": "I lost my way, I lost a battle, and I'm",
+        "width": 195,
+        "unresolved": []
+      },
+      {
+        "text": "now even more lost… I can't get out…",
+        "width": 192,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle1/scripts.inc",
+    "label": "Route110_TrickHousePuzzle1_Text_RobinIntro",
+    "line": 69,
+    "text": "Just who is the TRICK MASTER?$",
+    "lines": [
+      {
+        "text": "Just who is the TRICK MASTER?",
+        "width": 157,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle1/scripts.inc",
+    "label": "Route110_TrickHousePuzzle1_Text_RobinDefeat",
+    "line": 72,
+    "text": "I lost while I was lost in thought!$",
+    "lines": [
+      {
+        "text": "I lost while I was lost in thought!",
+        "width": 177,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle1/scripts.inc",
+    "label": "Route110_TrickHousePuzzle1_Text_RobinPostBattle",
+    "line": 75,
+    "text": "You're strong!\\nJust who are you?$",
+    "lines": [
+      {
+        "text": "You're strong!",
+        "width": 77,
+        "unresolved": []
+      },
+      {
+        "text": "Just who are you?",
+        "width": 92,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle2/scripts.inc",
+    "label": "Route110_TrickHousePuzzle2_Text_WroteSecretCodeLockOpened",
+    "line": 102,
+    "text": "{PLAYER} wrote down the secret code\\non the door.\\p“TRICK MASTER is smart.”\\n… … … … … … … …\\pThe lock clicked open!$",
+    "lines": [
+      {
+        "text": "{PLAYER} wrote down the secret code",
+        "width": 187,
+        "unresolved": []
+      },
+      {
+        "text": "on the door.",
+        "width": 62,
+        "unresolved": []
+      },
+      {
+        "text": "“TRICK MASTER is smart.”",
+        "width": 129,
+        "unresolved": []
+      },
+      {
+        "text": "… … … … … … … …",
+        "width": 69,
+        "unresolved": []
+      },
+      {
+        "text": "The lock clicked open!",
+        "width": 115,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle2/scripts.inc",
+    "label": "Route110_TrickHousePuzzle2_Text_TedIntro",
+    "line": 109,
+    "text": "Which switch closes which hole?$",
+    "lines": [
+      {
+        "text": "Which switch closes which hole?",
+        "width": 164,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle2/scripts.inc",
+    "label": "Route110_TrickHousePuzzle2_Text_TedDefeat",
+    "line": 112,
+    "text": "After that battle, I'm even more\\nconfused!$",
+    "lines": [
+      {
+        "text": "After that battle, I'm even more",
+        "width": 170,
+        "unresolved": []
+      },
+      {
+        "text": "confused!",
+        "width": 52,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle2/scripts.inc",
+    "label": "Route110_TrickHousePuzzle2_Text_TedPostBattle",
+    "line": 116,
+    "text": "Can I get you to push all the buttons\\nfor me?$",
+    "lines": [
+      {
+        "text": "Can I get you to push all the buttons",
+        "width": 194,
+        "unresolved": []
+      },
+      {
+        "text": "for me?",
+        "width": 38,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle2/scripts.inc",
+    "label": "Route110_TrickHousePuzzle2_Text_PaulIntro",
+    "line": 120,
+    "text": "Oh! You're on your second TRICK HOUSE\\nchallenge!$",
+    "lines": [
+      {
+        "text": "Oh! You're on your second TRICK HOUSE",
+        "width": 200,
+        "unresolved": []
+      },
+      {
+        "text": "challenge!",
+        "width": 54,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle2/scripts.inc",
+    "label": "Route110_TrickHousePuzzle2_Text_PaulDefeat",
+    "line": 124,
+    "text": "You're good at battling too?$",
+    "lines": [
+      {
+        "text": "You're good at battling too?",
+        "width": 151,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle2/scripts.inc",
+    "label": "Route110_TrickHousePuzzle2_Text_PaulPostBattle",
+    "line": 127,
+    "text": "The TRICK MASTER rigged all the tricks\\nin this house all by himself.$",
+    "lines": [
+      {
+        "text": "The TRICK MASTER rigged all the tricks",
+        "width": 200,
+        "unresolved": []
+      },
+      {
+        "text": "in this house all by himself.",
+        "width": 144,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle2/scripts.inc",
+    "label": "Route110_TrickHousePuzzle2_Text_GeorgiaIntro",
+    "line": 131,
+    "text": "I want to make my own GYM one day.\\nSo, I'm studying how to set traps.$",
+    "lines": [
+      {
+        "text": "I want to make my own GYM one day.",
+        "width": 177,
+        "unresolved": []
+      },
+      {
+        "text": "So, I'm studying how to set traps.",
+        "width": 177,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle2/scripts.inc",
+    "label": "Route110_TrickHousePuzzle2_Text_GeorgiaDefeat",
+    "line": 135,
+    "text": "I didn't study battling enough!$",
+    "lines": [
+      {
+        "text": "I didn't study battling enough!",
+        "width": 166,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle2/scripts.inc",
+    "label": "Route110_TrickHousePuzzle2_Text_GeorgiaPostBattle",
+    "line": 138,
+    "text": "You're strong, aren't you?\\nMaybe even enough to be a GYM LEADER!$",
+    "lines": [
+      {
+        "text": "You're strong, aren't you?",
+        "width": 141,
+        "unresolved": []
+      },
+      {
+        "text": "Maybe even enough to be a GYM LEADER!",
+        "width": 199,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle3/scripts.inc",
+    "label": "Route110_TrickHousePuzzle3_Text_WroteSecretCodeLockOpened",
+    "line": 304,
+    "text": "{PLAYER} wrote down the secret code\\non the door.\\p“TRICK MASTER is coveted.”\\n… … … … … … … …\\pThe lock clicked open!$",
+    "lines": [
+      {
+        "text": "{PLAYER} wrote down the secret code",
+        "width": 187,
+        "unresolved": []
+      },
+      {
+        "text": "on the door.",
+        "width": 62,
+        "unresolved": []
+      },
+      {
+        "text": "“TRICK MASTER is coveted.”",
+        "width": 142,
+        "unresolved": []
+      },
+      {
+        "text": "… … … … … … … …",
+        "width": 69,
+        "unresolved": []
+      },
+      {
+        "text": "The lock clicked open!",
+        "width": 115,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle3/scripts.inc",
+    "label": "Route110_TrickHousePuzzle3_Text_JustinIntro",
+    "line": 311,
+    "text": "I keep coming back to this same place!$",
+    "lines": [
+      {
+        "text": "I keep coming back to this same place!",
+        "width": 199,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle3/scripts.inc",
+    "label": "Route110_TrickHousePuzzle3_Text_JustinDefeat",
+    "line": 314,
+    "text": "I'm already having trouble, and then\\nyou have to beat me? It's not fair!$",
+    "lines": [
+      {
+        "text": "I'm already having trouble, and then",
+        "width": 190,
+        "unresolved": []
+      },
+      {
+        "text": "you have to beat me? It's not fair!",
+        "width": 184,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle3/scripts.inc",
+    "label": "Route110_TrickHousePuzzle3_Text_JustinPostBattle",
+    "line": 318,
+    "text": "It's full of doors here!\\nIt's too small and dark in here! Help!$",
+    "lines": [
+      {
+        "text": "It's full of doors here!",
+        "width": 124,
+        "unresolved": []
+      },
+      {
+        "text": "It's too small and dark in here! Help!",
+        "width": 193,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle3/scripts.inc",
+    "label": "Route110_TrickHousePuzzle3_Text_MarthaIntro",
+    "line": 322,
+    "text": "I don't know what's going on here.\\nI'm starting to feel sad…$",
+    "lines": [
+      {
+        "text": "I don't know what's going on here.",
+        "width": 180,
+        "unresolved": []
+      },
+      {
+        "text": "I'm starting to feel sad…",
+        "width": 133,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle3/scripts.inc",
+    "label": "Route110_TrickHousePuzzle3_Text_MarthaDefeat",
+    "line": 326,
+    "text": "You… You're awful!$",
+    "lines": [
+      {
+        "text": "You… You're awful!",
+        "width": 97,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle3/scripts.inc",
+    "label": "Route110_TrickHousePuzzle3_Text_MarthaPostBattle",
+    "line": 329,
+    "text": "I know I'm weak!\\nAnd, I have no sense of direction!$",
+    "lines": [
+      {
+        "text": "I know I'm weak!",
+        "width": 85,
+        "unresolved": []
+      },
+      {
+        "text": "And, I have no sense of direction!",
+        "width": 176,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle3/scripts.inc",
+    "label": "Route110_TrickHousePuzzle3_Text_AlanIntro",
+    "line": 333,
+    "text": "I don't get it. What would anyone want\\nwith a house this bizarre?$",
+    "lines": [
+      {
+        "text": "I don't get it. What would anyone want",
+        "width": 200,
+        "unresolved": []
+      },
+      {
+        "text": "with a house this bizarre?",
+        "width": 136,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle3/scripts.inc",
+    "label": "Route110_TrickHousePuzzle3_Text_AlanDefeat",
+    "line": 337,
+    "text": "I don't get it.\\nHow did I lose?$",
+    "lines": [
+      {
+        "text": "I don't get it.",
+        "width": 76,
+        "unresolved": []
+      },
+      {
+        "text": "How did I lose?",
+        "width": 77,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle3/scripts.inc",
+    "label": "Route110_TrickHousePuzzle3_Text_AlanPostBattle",
+    "line": 341,
+    "text": "I don't get it.\\nHow many traps are in this house?\\pYou may be the one to solve that.$",
+    "lines": [
+      {
+        "text": "I don't get it.",
+        "width": 76,
+        "unresolved": []
+      },
+      {
+        "text": "How many traps are in this house?",
+        "width": 174,
+        "unresolved": []
+      },
+      {
+        "text": "You may be the one to solve that.",
+        "width": 172,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle4/scripts.inc",
+    "label": "Route110_TrickHousePuzzle4_Text_WroteSecretCodeLockOpened",
+    "line": 30,
+    "text": "{PLAYER} wrote down the secret code\\non the door.\\p“TRICK MASTER is cool.”\\n… … … … … … … …\\pThe lock clicked open!$",
+    "lines": [
+      {
+        "text": "{PLAYER} wrote down the secret code",
+        "width": 187,
+        "unresolved": []
+      },
+      {
+        "text": "on the door.",
+        "width": 62,
+        "unresolved": []
+      },
+      {
+        "text": "“TRICK MASTER is cool.”",
+        "width": 122,
+        "unresolved": []
+      },
+      {
+        "text": "… … … … … … … …",
+        "width": 69,
+        "unresolved": []
+      },
+      {
+        "text": "The lock clicked open!",
+        "width": 115,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle4/scripts.inc",
+    "label": "Route110_TrickHousePuzzle4_Text_CoraIntro",
+    "line": 37,
+    "text": "It's too much bother to think this out.\\nI only wanted to battle!$",
+    "lines": [
+      {
+        "text": "It's too much bother to think this out.",
+        "width": 205,
+        "unresolved": []
+      },
+      {
+        "text": "I only wanted to battle!",
+        "width": 126,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle4/scripts.inc",
+    "label": "Route110_TrickHousePuzzle4_Text_CoraDefeat",
+    "line": 41,
+    "text": "Even though I lost, I still like battling\\nthe best!$",
+    "lines": [
+      {
+        "text": "Even though I lost, I still like battling",
+        "width": 206,
+        "unresolved": []
+      },
+      {
+        "text": "the best!",
+        "width": 49,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle4/scripts.inc",
+    "label": "Route110_TrickHousePuzzle4_Text_CoraPostBattle",
+    "line": 45,
+    "text": "Wouldn't you agree? You would go\\nanywhere if TRAINERS were there.$",
+    "lines": [
+      {
+        "text": "Wouldn't you agree? You would go",
+        "width": 172,
+        "unresolved": []
+      },
+      {
+        "text": "anywhere if TRAINERS were there.",
+        "width": 172,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle4/scripts.inc",
+    "label": "Route110_TrickHousePuzzle4_Text_YujiIntro",
+    "line": 49,
+    "text": "Heh! Boulders like this, I can brush\\naside with one finger!$",
+    "lines": [
+      {
+        "text": "Heh! Boulders like this, I can brush",
+        "width": 183,
+        "unresolved": []
+      },
+      {
+        "text": "aside with one finger!",
+        "width": 114,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle4/scripts.inc",
+    "label": "Route110_TrickHousePuzzle4_Text_YujiDefeat",
+    "line": 53,
+    "text": "I can push boulders, but I can't solve\\nthe puzzle…$",
+    "lines": [
+      {
+        "text": "I can push boulders, but I can't solve",
+        "width": 199,
+        "unresolved": []
+      },
+      {
+        "text": "the puzzle…",
+        "width": 61,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle4/scripts.inc",
+    "label": "Route110_TrickHousePuzzle4_Text_YujiPostBattle",
+    "line": 57,
+    "text": "It's not good enough to be brawny…\\nYou have to use your head. Be brainy!$",
+    "lines": [
+      {
+        "text": "It's not good enough to be brawny…",
+        "width": 185,
+        "unresolved": []
+      },
+      {
+        "text": "You have to use your head. Be brainy!",
+        "width": 192,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle4/scripts.inc",
+    "label": "Route110_TrickHousePuzzle4_Text_PaulaIntro",
+    "line": 61,
+    "text": "The TRICK HOUSE is getting trickier,\\nisn't it?$",
+    "lines": [
+      {
+        "text": "The TRICK HOUSE is getting trickier,",
+        "width": 188,
+        "unresolved": []
+      },
+      {
+        "text": "isn't it?",
+        "width": 47,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle4/scripts.inc",
+    "label": "Route110_TrickHousePuzzle4_Text_PaulaDefeat",
+    "line": 65,
+    "text": "Aaak!$",
+    "lines": [
+      {
+        "text": "Aaak!",
+        "width": 28,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle4/scripts.inc",
+    "label": "Route110_TrickHousePuzzle4_Text_PaulaPostBattle",
+    "line": 68,
+    "text": "Has anyone made it to the end?$",
+    "lines": [
+      {
+        "text": "Has anyone made it to the end?",
+        "width": 160,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle5/scripts.inc",
+    "label": "Route110_TrickHousePuzzle5_Text_WroteSecretCodeLockOpened",
+    "line": 898,
+    "text": "{PLAYER} wrote down the secret code\\non the door.\\p“TRICK MASTER is a genius.”\\n… … … … … … … …\\pThe lock clicked open!$",
+    "lines": [
+      {
+        "text": "{PLAYER} wrote down the secret code",
+        "width": 187,
+        "unresolved": []
+      },
+      {
+        "text": "on the door.",
+        "width": 62,
+        "unresolved": []
+      },
+      {
+        "text": "“TRICK MASTER is a genius.”",
+        "width": 143,
+        "unresolved": []
+      },
+      {
+        "text": "… … … … … … … …",
+        "width": 69,
+        "unresolved": []
+      },
+      {
+        "text": "The lock clicked open!",
+        "width": 115,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle5/scripts.inc",
+    "label": "Route110_TrickHousePuzzle5_Text_Mechadoll1Intro",
+    "line": 905,
+    "text": "CLICKETY-CLACK…\\nMECHADOLL 1 AM I!\\pIF YOU ANSWER QUIZZES CORRECTLY,\\nTHEN YOU WILL GO TO MECHADOLL 5.\\lTHEN YOU CAN OBTAIN THE SECRET CODE.$",
+    "lines": [
+      {
+        "text": "CLICKETY-CLACK…",
+        "width": 90,
+        "unresolved": []
+      },
+      {
+        "text": "MECHADOLL 1 AM I!",
+        "width": 91,
+        "unresolved": []
+      },
+      {
+        "text": "IF YOU ANSWER QUIZZES CORRECTLY,",
+        "width": 177,
+        "unresolved": []
+      },
+      {
+        "text": "THEN YOU WILL GO TO MECHADOLL 5.",
+        "width": 171,
+        "unresolved": []
+      },
+      {
+        "text": "THEN YOU CAN OBTAIN THE SECRET CODE.",
+        "width": 195,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle5/scripts.inc",
+    "label": "Route110_TrickHousePuzzle5_Text_Mechadoll1Quiz1",
+    "line": 912,
+    "text": "MECHADOLL 1 QUIZ.\\pWhich move guards your side\\nagainst opposing priority moves?$",
+    "lines": [
+      {
+        "text": "MECHADOLL 1 QUIZ.",
+        "width": 93,
+        "unresolved": []
+      },
+      {
+        "text": "Which move guards your side",
+        "width": 144,
+        "unresolved": []
+      },
+      {
+        "text": "against opposing priority moves?",
+        "width": 173,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle5/scripts.inc",
+    "label": "Route110_TrickHousePuzzle5_Text_Mechadoll1Quiz2",
+    "line": 916,
+    "text": "MECHADOLL 1 QUIZ.\\pWhich type normally ignores RAGE\\nPOWDER when choosing a target?$",
+    "lines": [
+      {
+        "text": "MECHADOLL 1 QUIZ.",
+        "width": 93,
+        "unresolved": []
+      },
+      {
+        "text": "Which type normally ignores RAGE",
+        "width": 170,
+        "unresolved": []
+      },
+      {
+        "text": "POWDER when choosing a target?",
+        "width": 165,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle5/scripts.inc",
+    "label": "Route110_TrickHousePuzzle5_Text_Mechadoll1Quiz3",
+    "line": 920,
+    "text": "MECHADOLL 1 QUIZ.\\pWhich move normally hits both\\nopponents instead of being\\lredirected by FOLLOW ME?$",
+    "lines": [
+      {
+        "text": "MECHADOLL 1 QUIZ.",
+        "width": 93,
+        "unresolved": []
+      },
+      {
+        "text": "Which move normally hits both",
+        "width": 153,
+        "unresolved": []
+      },
+      {
+        "text": "opponents instead of being",
+        "width": 143,
+        "unresolved": []
+      },
+      {
+        "text": "redirected by FOLLOW ME?",
+        "width": 131,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle5/scripts.inc",
+    "label": "Route110_TrickHousePuzzle5_Text_CorrectGoThrough",
+    "line": 925,
+    "text": "CONGRATULATIONS. CORRECT YOU ARE.\\nGO THROUGH. PLEASE.$",
+    "lines": [
+      {
+        "text": "CONGRATULATIONS. CORRECT YOU ARE.",
+        "width": 183,
+        "unresolved": []
+      },
+      {
+        "text": "GO THROUGH. PLEASE.",
+        "width": 102,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle5/scripts.inc",
+    "label": "Route110_TrickHousePuzzle5_Text_DisappointmentError",
+    "line": 929,
+    "text": "BZZZT. DISAPPOINTMENT.\\nERROR.$",
+    "lines": [
+      {
+        "text": "BZZZT. DISAPPOINTMENT.",
+        "width": 123,
+        "unresolved": []
+      },
+      {
+        "text": "ERROR.",
+        "width": 33,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle5/scripts.inc",
+    "label": "Route110_TrickHousePuzzle5_Text_Wahahahaha",
+    "line": 933,
+    "text": "WAHAHAHAHA! WAHAHAHAHA!\\nCLICKETY-CLACK!$",
+    "lines": [
+      {
+        "text": "WAHAHAHAHA! WAHAHAHAHA!",
+        "width": 131,
+        "unresolved": []
+      },
+      {
+        "text": "CLICKETY-CLACK!",
+        "width": 88,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle5/scripts.inc",
+    "label": "Route110_TrickHousePuzzle5_Text_WaitForNextChallenge",
+    "line": 937,
+    "text": "YOUR NEXT CHALLENGE WE WAIT FOR.$",
+    "lines": [
+      {
+        "text": "YOUR NEXT CHALLENGE WE WAIT FOR.",
+        "width": 174,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle5/scripts.inc",
+    "label": "Route110_TrickHousePuzzle5_Text_Mechadoll2Intro",
+    "line": 940,
+    "text": "CLICKETY-CLACK…\\nMECHADOLL 2 AM I!\\pMECHADOLL 1'S QUIZ DIFFICULTY LEVEL\\nIS SET TOO LOW.$",
+    "lines": [
+      {
+        "text": "CLICKETY-CLACK…",
+        "width": 90,
+        "unresolved": []
+      },
+      {
+        "text": "MECHADOLL 2 AM I!",
+        "width": 91,
+        "unresolved": []
+      },
+      {
+        "text": "MECHADOLL 1'S QUIZ DIFFICULTY LEVEL",
+        "width": 198,
+        "unresolved": []
+      },
+      {
+        "text": "IS SET TOO LOW.",
+        "width": 78,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle5/scripts.inc",
+    "label": "Route110_TrickHousePuzzle5_Text_Mechadoll2Quiz1",
+    "line": 946,
+    "text": "MECHADOLL 2 QUIZ.\\pTRICK ROOM reverses Speed order\\nwithin which boundary?$",
+    "lines": [
+      {
+        "text": "MECHADOLL 2 QUIZ.",
+        "width": 93,
+        "unresolved": []
+      },
+      {
+        "text": "TRICK ROOM reverses Speed order",
+        "width": 170,
+        "unresolved": []
+      },
+      {
+        "text": "within which boundary?",
+        "width": 119,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle5/scripts.inc",
+    "label": "Route110_TrickHousePuzzle5_Text_Mechadoll2Quiz2",
+    "line": 950,
+    "text": "MECHADOLL 2 QUIZ.\\pWhen can a Pokémon normally use\\nFAKE OUT successfully?$",
+    "lines": [
+      {
+        "text": "MECHADOLL 2 QUIZ.",
+        "width": 93,
+        "unresolved": []
+      },
+      {
+        "text": "When can a Pokémon normally use",
+        "width": 166,
+        "unresolved": []
+      },
+      {
+        "text": "FAKE OUT successfully?",
+        "width": 122,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle5/scripts.inc",
+    "label": "Route110_TrickHousePuzzle5_Text_Mechadoll2Quiz3",
+    "line": 954,
+    "text": "MECHADOLL 2 QUIZ.\\pTAUNT prevents the target from\\nchoosing which moves?$",
+    "lines": [
+      {
+        "text": "MECHADOLL 2 QUIZ.",
+        "width": 93,
+        "unresolved": []
+      },
+      {
+        "text": "TAUNT prevents the target from",
+        "width": 165,
+        "unresolved": []
+      },
+      {
+        "text": "choosing which moves?",
+        "width": 116,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle5/scripts.inc",
+    "label": "Route110_TrickHousePuzzle5_Text_Mechadoll3Intro",
+    "line": 958,
+    "text": "CLICKETY-CLACK... MECHADOLL 3 AM I!\\pSUPPORT, STATUS, AND HELD ITEMS!\\nSMALL DETAILS, LARGE CONSEQUENCES!$",
+    "lines": [
+      {
+        "text": "CLICKETY-CLACK... MECHADOLL 3 AM I!",
+        "width": 187,
+        "unresolved": []
+      },
+      {
+        "text": "SUPPORT, STATUS, AND HELD ITEMS!",
+        "width": 172,
+        "unresolved": []
+      },
+      {
+        "text": "SMALL DETAILS, LARGE CONSEQUENCES!",
+        "width": 190,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle5/scripts.inc",
+    "label": "Route110_TrickHousePuzzle5_Text_Mechadoll3Quiz1",
+    "line": 963,
+    "text": "MECHADOLL 3 QUIZ.\\pWhich status reduces physical\\ndamage for most attackers?$",
+    "lines": [
+      {
+        "text": "MECHADOLL 3 QUIZ.",
+        "width": 93,
+        "unresolved": []
+      },
+      {
+        "text": "Which status reduces physical",
+        "width": 158,
+        "unresolved": []
+      },
+      {
+        "text": "damage for most attackers?",
+        "width": 145,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle5/scripts.inc",
+    "label": "Route110_TrickHousePuzzle5_Text_Mechadoll3Quiz2",
+    "line": 967,
+    "text": "MECHADOLL 3 QUIZ.\\pWhich move boosts an ally's attack\\ndamage for the current turn?$",
+    "lines": [
+      {
+        "text": "MECHADOLL 3 QUIZ.",
+        "width": 93,
+        "unresolved": []
+      },
+      {
+        "text": "Which move boosts an ally's attack",
+        "width": 183,
+        "unresolved": []
+      },
+      {
+        "text": "damage for the current turn?",
+        "width": 152,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle5/scripts.inc",
+    "label": "Route110_TrickHousePuzzle5_Text_Mechadoll3Quiz3",
+    "line": 971,
+    "text": "MECHADOLL 3 QUIZ.\\pWhich Pokémon can receive\\nEVIOLITE's defensive benefit?$",
+    "lines": [
+      {
+        "text": "MECHADOLL 3 QUIZ.",
+        "width": 93,
+        "unresolved": []
+      },
+      {
+        "text": "Which Pokémon can receive",
+        "width": 136,
+        "unresolved": []
+      },
+      {
+        "text": "EVIOLITE's defensive benefit?",
+        "width": 164,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle5/scripts.inc",
+    "label": "Route110_TrickHousePuzzle5_Text_Mechadoll4Intro",
+    "line": 975,
+    "text": "CLICKETY-CLACK…\\nMECHADOLL 4 THAT IS ME!\\pMY QUIZ IS AN OBJECT OF BEAUTY.$",
+    "lines": [
+      {
+        "text": "CLICKETY-CLACK…",
+        "width": 90,
+        "unresolved": []
+      },
+      {
+        "text": "MECHADOLL 4 THAT IS ME!",
+        "width": 124,
+        "unresolved": []
+      },
+      {
+        "text": "MY QUIZ IS AN OBJECT OF BEAUTY.",
+        "width": 165,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle5/scripts.inc",
+    "label": "Route110_TrickHousePuzzle5_Text_Mechadoll4Quiz1",
+    "line": 980,
+    "text": "MECHADOLL 4 QUIZ.\\pWhich held item can remove TAUNT\\nfrom its holder?$",
+    "lines": [
+      {
+        "text": "MECHADOLL 4 QUIZ.",
+        "width": 93,
+        "unresolved": []
+      },
+      {
+        "text": "Which held item can remove TAUNT",
+        "width": 170,
+        "unresolved": []
+      },
+      {
+        "text": "from its holder?",
+        "width": 84,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle5/scripts.inc",
+    "label": "Route110_TrickHousePuzzle5_Text_Mechadoll4Quiz2",
+    "line": 984,
+    "text": "MECHADOLL 4 QUIZ.\\pWhich Ability redirects\\nsingle-target WATER moves?$",
+    "lines": [
+      {
+        "text": "MECHADOLL 4 QUIZ.",
+        "width": 93,
+        "unresolved": []
+      },
+      {
+        "text": "Which Ability redirects",
+        "width": 120,
+        "unresolved": []
+      },
+      {
+        "text": "single-target WATER moves?",
+        "width": 145,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle5/scripts.inc",
+    "label": "Route110_TrickHousePuzzle5_Text_Mechadoll4Quiz3",
+    "line": 988,
+    "text": "MECHADOLL 4 QUIZ.\\pWhich opposing target does PSYCHIC\\nTERRAIN protect from FAKE OUT?$",
+    "lines": [
+      {
+        "text": "MECHADOLL 4 QUIZ.",
+        "width": 93,
+        "unresolved": []
+      },
+      {
+        "text": "Which opposing target does PSYCHIC",
+        "width": 187,
+        "unresolved": []
+      },
+      {
+        "text": "TERRAIN protect from FAKE OUT?",
+        "width": 166,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle5/scripts.inc",
+    "label": "Route110_TrickHousePuzzle5_Text_Mechadoll5Intro",
+    "line": 992,
+    "text": "CLICKETY-CLACK…\\nMECHADOLL 5 AM I!\\pTHE MASTER'S BEST AND PROUDEST\\nACHIEVEMENT AM I.$",
+    "lines": [
+      {
+        "text": "CLICKETY-CLACK…",
+        "width": 90,
+        "unresolved": []
+      },
+      {
+        "text": "MECHADOLL 5 AM I!",
+        "width": 91,
+        "unresolved": []
+      },
+      {
+        "text": "THE MASTER'S BEST AND PROUDEST",
+        "width": 168,
+        "unresolved": []
+      },
+      {
+        "text": "ACHIEVEMENT AM I.",
+        "width": 93,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle5/scripts.inc",
+    "label": "Route110_TrickHousePuzzle5_Text_Mechadoll5Quiz1",
+    "line": 998,
+    "text": "MECHADOLL 5 QUIZ.\\pYou switch out while TRICK ROOM is\\nactive. What happens to the room's\\ltimer?$",
+    "lines": [
+      {
+        "text": "MECHADOLL 5 QUIZ.",
+        "width": 93,
+        "unresolved": []
+      },
+      {
+        "text": "You switch out while TRICK ROOM is",
+        "width": 178,
+        "unresolved": []
+      },
+      {
+        "text": "active. What happens to the room's",
+        "width": 183,
+        "unresolved": []
+      },
+      {
+        "text": "timer?",
+        "width": 33,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle5/scripts.inc",
+    "label": "Route110_TrickHousePuzzle5_Text_Mechadoll5Quiz2",
+    "line": 1003,
+    "text": "MECHADOLL 5 QUIZ.\\pWhich move guards your side\\nagainst most damaging moves that\\lhit multiple targets?$",
+    "lines": [
+      {
+        "text": "MECHADOLL 5 QUIZ.",
+        "width": 93,
+        "unresolved": []
+      },
+      {
+        "text": "Which move guards your side",
+        "width": 144,
+        "unresolved": []
+      },
+      {
+        "text": "against most damaging moves that",
+        "width": 176,
+        "unresolved": []
+      },
+      {
+        "text": "hit multiple targets?",
+        "width": 111,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle5/scripts.inc",
+    "label": "Route110_TrickHousePuzzle5_Text_Mechadoll5Quiz3",
+    "line": 1008,
+    "text": "MECHADOLL 5 QUIZ.\\pPRANKSTER-boosted TAUNT normally\\nfails against an opposing Pokémon\\lof which type?$",
+    "lines": [
+      {
+        "text": "MECHADOLL 5 QUIZ.",
+        "width": 93,
+        "unresolved": []
+      },
+      {
+        "text": "PRANKSTER-boosted TAUNT normally",
+        "width": 181,
+        "unresolved": []
+      },
+      {
+        "text": "fails against an opposing Pokémon",
+        "width": 178,
+        "unresolved": []
+      },
+      {
+        "text": "of which type?",
+        "width": 76,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle6/scripts.inc",
+    "label": "Route110_TrickHousePuzzle6_Text_WroteSecretCodeLockOpened",
+    "line": 45,
+    "text": "{PLAYER} wrote down the secret code\\non the door.\\p“TRICK MASTER is my life.”\\n… … … … … … … …\\pThe lock clicked open!$",
+    "lines": [
+      {
+        "text": "{PLAYER} wrote down the secret code",
+        "width": 187,
+        "unresolved": []
+      },
+      {
+        "text": "on the door.",
+        "width": 62,
+        "unresolved": []
+      },
+      {
+        "text": "“TRICK MASTER is my life.”",
+        "width": 135,
+        "unresolved": []
+      },
+      {
+        "text": "… … … … … … … …",
+        "width": 69,
+        "unresolved": []
+      },
+      {
+        "text": "The lock clicked open!",
+        "width": 115,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle6/scripts.inc",
+    "label": "Route110_TrickHousePuzzle6_Text_SophiaIntro",
+    "line": 52,
+    "text": "When I heard there was a strange\\nhouse, I had to check it out.$",
+    "lines": [
+      {
+        "text": "When I heard there was a strange",
+        "width": 171,
+        "unresolved": []
+      },
+      {
+        "text": "house, I had to check it out.",
+        "width": 148,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle6/scripts.inc",
+    "label": "Route110_TrickHousePuzzle6_Text_SophiaDefeat",
+    "line": 56,
+    "text": "I've discovered a tough TRAINER!$",
+    "lines": [
+      {
+        "text": "I've discovered a tough TRAINER!",
+        "width": 175,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle6/scripts.inc",
+    "label": "Route110_TrickHousePuzzle6_Text_SophiaPostBattle",
+    "line": 59,
+    "text": "I'm sure having a good time checking\\nthis place out.\\pIt's a challenge I've found worth\\nrepeating!$",
+    "lines": [
+      {
+        "text": "I'm sure having a good time checking",
+        "width": 191,
+        "unresolved": []
+      },
+      {
+        "text": "this place out.",
+        "width": 77,
+        "unresolved": []
+      },
+      {
+        "text": "It's a challenge I've found worth",
+        "width": 178,
+        "unresolved": []
+      },
+      {
+        "text": "repeating!",
+        "width": 55,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle6/scripts.inc",
+    "label": "Route110_TrickHousePuzzle6_Text_BennyIntro",
+    "line": 65,
+    "text": "Maybe I could get my BIRD POKéMON\\nto fly over the wall…$",
+    "lines": [
+      {
+        "text": "Maybe I could get my BIRD POKéMON",
+        "width": 178,
+        "unresolved": []
+      },
+      {
+        "text": "to fly over the wall…",
+        "width": 107,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle6/scripts.inc",
+    "label": "Route110_TrickHousePuzzle6_Text_BennyDefeat",
+    "line": 69,
+    "text": "Gwaaah! I blew it!$",
+    "lines": [
+      {
+        "text": "Gwaaah! I blew it!",
+        "width": 91,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle6/scripts.inc",
+    "label": "Route110_TrickHousePuzzle6_Text_BennyPostBattle",
+    "line": 72,
+    "text": "Ehehehe… I guess I lost because\\nI was trying to cheat.$",
+    "lines": [
+      {
+        "text": "Ehehehe… I guess I lost because",
+        "width": 169,
+        "unresolved": []
+      },
+      {
+        "text": "I was trying to cheat.",
+        "width": 114,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle6/scripts.inc",
+    "label": "Route110_TrickHousePuzzle6_Text_SebastianIntro",
+    "line": 76,
+    "text": "I'm getting dizzy from these rotating\\ndoors…$",
+    "lines": [
+      {
+        "text": "I'm getting dizzy from these rotating",
+        "width": 199,
+        "unresolved": []
+      },
+      {
+        "text": "doors…",
+        "width": 35,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle6/scripts.inc",
+    "label": "Route110_TrickHousePuzzle6_Text_SebastianDefeat",
+    "line": 80,
+    "text": "Everything's spinning around and\\naround. I can't take this anymore…$",
+    "lines": [
+      {
+        "text": "Everything's spinning around and",
+        "width": 175,
+        "unresolved": []
+      },
+      {
+        "text": "around. I can't take this anymore…",
+        "width": 182,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle6/scripts.inc",
+    "label": "Route110_TrickHousePuzzle6_Text_SebastianPostBattle",
+    "line": 84,
+    "text": "You don't seem to be affected at all.\\nOr do you have your poker face on?$",
+    "lines": [
+      {
+        "text": "You don't seem to be affected at all.",
+        "width": 194,
+        "unresolved": []
+      },
+      {
+        "text": "Or do you have your poker face on?",
+        "width": 180,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle7/scripts.inc",
+    "label": "Route110_TrickHousePuzzle7_Text_WroteSecretCodeLockOpened",
+    "line": 317,
+    "text": "{PLAYER} wrote down the secret code\\non the door.\\p“TRICK MASTER is huggable.”\\n… … … … … … … …\\pThe lock clicked open!$",
+    "lines": [
+      {
+        "text": "{PLAYER} wrote down the secret code",
+        "width": 187,
+        "unresolved": []
+      },
+      {
+        "text": "on the door.",
+        "width": 62,
+        "unresolved": []
+      },
+      {
+        "text": "“TRICK MASTER is huggable.”",
+        "width": 146,
+        "unresolved": []
+      },
+      {
+        "text": "… … … … … … … …",
+        "width": 69,
+        "unresolved": []
+      },
+      {
+        "text": "The lock clicked open!",
+        "width": 115,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle7/scripts.inc",
+    "label": "Route110_TrickHousePuzzle7_Text_JoshuaIntro",
+    "line": 324,
+    "text": "The TRICK MASTER always vanishes\\nlike smoke. How does he do it?$",
+    "lines": [
+      {
+        "text": "The TRICK MASTER always vanishes",
+        "width": 176,
+        "unresolved": []
+      },
+      {
+        "text": "like smoke. How does he do it?",
+        "width": 153,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle7/scripts.inc",
+    "label": "Route110_TrickHousePuzzle7_Text_JoshuaDefeat",
+    "line": 328,
+    "text": "Aiyeeeh! You're much too strong!\\nHow do you do it?$",
+    "lines": [
+      {
+        "text": "Aiyeeeh! You're much too strong!",
+        "width": 172,
+        "unresolved": []
+      },
+      {
+        "text": "How do you do it?",
+        "width": 88,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle7/scripts.inc",
+    "label": "Route110_TrickHousePuzzle7_Text_JoshuaPostBattle",
+    "line": 332,
+    "text": "I wish I could appear and disappear as\\nif I were smoke, too.$",
+    "lines": [
+      {
+        "text": "I wish I could appear and disappear as",
+        "width": 199,
+        "unresolved": []
+      },
+      {
+        "text": "if I were smoke, too.",
+        "width": 105,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle7/scripts.inc",
+    "label": "Route110_TrickHousePuzzle7_Text_PatriciaIntro",
+    "line": 336,
+    "text": "Going around the same spot…\\nIt begets ill fortune…$",
+    "lines": [
+      {
+        "text": "Going around the same spot…",
+        "width": 147,
+        "unresolved": []
+      },
+      {
+        "text": "It begets ill fortune…",
+        "width": 116,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle7/scripts.inc",
+    "label": "Route110_TrickHousePuzzle7_Text_PatriciaDefeat",
+    "line": 340,
+    "text": "Defeated!\\nIt's a bad sign…$",
+    "lines": [
+      {
+        "text": "Defeated!",
+        "width": 52,
+        "unresolved": []
+      },
+      {
+        "text": "It's a bad sign…",
+        "width": 85,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle7/scripts.inc",
+    "label": "Route110_TrickHousePuzzle7_Text_PatriciaPostBattle",
+    "line": 344,
+    "text": "I've circled the same spot over ten\\ntimes now… It's ill fortune…$",
+    "lines": [
+      {
+        "text": "I've circled the same spot over ten",
+        "width": 186,
+        "unresolved": []
+      },
+      {
+        "text": "times now… It's ill fortune…",
+        "width": 147,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle7/scripts.inc",
+    "label": "Route110_TrickHousePuzzle7_Text_AlexisIntro",
+    "line": 348,
+    "text": "Whoever wins will get through here\\nfirst. That's the feeling I get.$",
+    "lines": [
+      {
+        "text": "Whoever wins will get through here",
+        "width": 178,
+        "unresolved": []
+      },
+      {
+        "text": "first. That's the feeling I get.",
+        "width": 164,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle7/scripts.inc",
+    "label": "Route110_TrickHousePuzzle7_Text_AlexisDefeat",
+    "line": 352,
+    "text": "Oh!\\nWell, go ahead, then!$",
+    "lines": [
+      {
+        "text": "Oh!",
+        "width": 16,
+        "unresolved": []
+      },
+      {
+        "text": "Well, go ahead, then!",
+        "width": 105,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle7/scripts.inc",
+    "label": "Route110_TrickHousePuzzle7_Text_AlexisPostBattle",
+    "line": 356,
+    "text": "You're solving all the puzzles in the\\nTRICK HOUSE. That's the feeling I get.$",
+    "lines": [
+      {
+        "text": "You're solving all the puzzles in the",
+        "width": 191,
+        "unresolved": []
+      },
+      {
+        "text": "TRICK HOUSE. That's the feeling I get.",
+        "width": 200,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle7/scripts.inc",
+    "label": "Route110_TrickHousePuzzle7_Text_MarielaIntro",
+    "line": 360,
+    "text": "Nufufufu, here at last!\\nLet's get right with it!$",
+    "lines": [
+      {
+        "text": "Nufufufu, here at last!",
+        "width": 121,
+        "unresolved": []
+      },
+      {
+        "text": "Let's get right with it!",
+        "width": 123,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle7/scripts.inc",
+    "label": "Route110_TrickHousePuzzle7_Text_MarielaDefeat",
+    "line": 364,
+    "text": "You're so casual about winning!$",
+    "lines": [
+      {
+        "text": "You're so casual about winning!",
+        "width": 165,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle7/scripts.inc",
+    "label": "Route110_TrickHousePuzzle7_Text_MarielaPostBattle",
+    "line": 367,
+    "text": "Humph! I'm not upset!\\nNot me!$",
+    "lines": [
+      {
+        "text": "Humph! I'm not upset!",
+        "width": 113,
+        "unresolved": []
+      },
+      {
+        "text": "Not me!",
+        "width": 37,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle7/scripts.inc",
+    "label": "Route110_TrickHousePuzzle7_Text_AlvaroIntro",
+    "line": 371,
+    "text": "I ever so closely watched you coming!$",
+    "lines": [
+      {
+        "text": "I ever so closely watched you coming!",
+        "width": 195,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle7/scripts.inc",
+    "label": "Route110_TrickHousePuzzle7_Text_AlvaroDefeat",
+    "line": 374,
+    "text": "This outcome I didn't see coming…$",
+    "lines": [
+      {
+        "text": "This outcome I didn't see coming…",
+        "width": 177,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle7/scripts.inc",
+    "label": "Route110_TrickHousePuzzle7_Text_AlvaroPostBattle",
+    "line": 377,
+    "text": "Well, anyway, we both picked a weird\\nplace to get acquainted.\\pAs one weirdo to another,\\nlet's do our best!$",
+    "lines": [
+      {
+        "text": "Well, anyway, we both picked a weird",
+        "width": 183,
+        "unresolved": []
+      },
+      {
+        "text": "place to get acquainted.",
+        "width": 128,
+        "unresolved": []
+      },
+      {
+        "text": "As one weirdo to another,",
+        "width": 131,
+        "unresolved": []
+      },
+      {
+        "text": "let's do our best!",
+        "width": 94,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle7/scripts.inc",
+    "label": "Route110_TrickHousePuzzle7_Text_EverettIntro",
+    "line": 383,
+    "text": "It's awfully cramped in here…$",
+    "lines": [
+      {
+        "text": "It's awfully cramped in here…",
+        "width": 154,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle7/scripts.inc",
+    "label": "Route110_TrickHousePuzzle7_Text_EverettDefeat",
+    "line": 386,
+    "text": "Oh, yes, strong you are.$",
+    "lines": [
+      {
+        "text": "Oh, yes, strong you are.",
+        "width": 121,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle7/scripts.inc",
+    "label": "Route110_TrickHousePuzzle7_Text_EverettPostBattle",
+    "line": 389,
+    "text": "I was hoping to switch places with you\\nwhen I beat you, but…$",
+    "lines": [
+      {
+        "text": "I was hoping to switch places with you",
+        "width": 199,
+        "unresolved": []
+      },
+      {
+        "text": "when I beat you, but…",
+        "width": 111,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle8/scripts.inc",
+    "label": "Route110_TrickHousePuzzle8_Text_WroteSecretCodeLockOpened",
+    "line": 30,
+    "text": "{PLAYER} wrote down the secret code\\non the door.\\p“TRICK MASTER I love.”\\n… … … … … … … …\\pThe lock clicked open!$",
+    "lines": [
+      {
+        "text": "{PLAYER} wrote down the secret code",
+        "width": 187,
+        "unresolved": []
+      },
+      {
+        "text": "on the door.",
+        "width": 62,
+        "unresolved": []
+      },
+      {
+        "text": "“TRICK MASTER I love.”",
+        "width": 118,
+        "unresolved": []
+      },
+      {
+        "text": "… … … … … … … …",
+        "width": 69,
+        "unresolved": []
+      },
+      {
+        "text": "The lock clicked open!",
+        "width": 115,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle8/scripts.inc",
+    "label": "Route110_TrickHousePuzzle8_Text_VincentIntro",
+    "line": 37,
+    "text": "Not many TRAINERS have made it\\nthis far.$",
+    "lines": [
+      {
+        "text": "Not many TRAINERS have made it",
+        "width": 163,
+        "unresolved": []
+      },
+      {
+        "text": "this far.",
+        "width": 45,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle8/scripts.inc",
+    "label": "Route110_TrickHousePuzzle8_Text_VincentDefeat",
+    "line": 41,
+    "text": "That must mean you're tough, too…$",
+    "lines": [
+      {
+        "text": "That must mean you're tough, too…",
+        "width": 179,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle8/scripts.inc",
+    "label": "Route110_TrickHousePuzzle8_Text_VincentPostBattle",
+    "line": 44,
+    "text": "You've beaten the POKéMON LEAGUE\\nCHAMPION? That's too much!$",
+    "lines": [
+      {
+        "text": "You've beaten the POKéMON LEAGUE",
+        "width": 180,
+        "unresolved": []
+      },
+      {
+        "text": "CHAMPION? That's too much!",
+        "width": 145,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle8/scripts.inc",
+    "label": "Route110_TrickHousePuzzle8_Text_KeiraIntro",
+    "line": 48,
+    "text": "Consider yourself lucky to be\\nbattling me!$",
+    "lines": [
+      {
+        "text": "Consider yourself lucky to be",
+        "width": 154,
+        "unresolved": []
+      },
+      {
+        "text": "battling me!",
+        "width": 63,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle8/scripts.inc",
+    "label": "Route110_TrickHousePuzzle8_Text_KeiraDefeat",
+    "line": 52,
+    "text": "This isn't right!\\nI can't lose!$",
+    "lines": [
+      {
+        "text": "This isn't right!",
+        "width": 87,
+        "unresolved": []
+      },
+      {
+        "text": "I can't lose!",
+        "width": 68,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle8/scripts.inc",
+    "label": "Route110_TrickHousePuzzle8_Text_KeiraPostBattle",
+    "line": 56,
+    "text": "It's a miracle that you beat me.\\nYou can brag about it.$",
+    "lines": [
+      {
+        "text": "It's a miracle that you beat me.",
+        "width": 166,
+        "unresolved": []
+      },
+      {
+        "text": "You can brag about it.",
+        "width": 114,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle8/scripts.inc",
+    "label": "Route110_TrickHousePuzzle8_Text_LeroyIntro",
+    "line": 60,
+    "text": "You've been slugging through the TRICK\\nHOUSE challenge, too.$",
+    "lines": [
+      {
+        "text": "You've been slugging through the TRICK",
+        "width": 208,
+        "unresolved": []
+      },
+      {
+        "text": "HOUSE challenge, too.",
+        "width": 110,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle8/scripts.inc",
+    "label": "Route110_TrickHousePuzzle8_Text_LeroyDefeat",
+    "line": 64,
+    "text": "I see…\\nYou possess an extraordinary style.$",
+    "lines": [
+      {
+        "text": "I see…",
+        "width": 33,
+        "unresolved": []
+      },
+      {
+        "text": "You possess an extraordinary style.",
+        "width": 188,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route110_TrickHousePuzzle8/scripts.inc",
+    "label": "Route110_TrickHousePuzzle8_Text_LeroyPostBattle",
+    "line": 68,
+    "text": "Seeing someone like you should please\\nthe TRICK MASTER.$",
+    "lines": [
+      {
+        "text": "Seeing someone like you should please",
+        "width": 197,
+        "unresolved": []
+      },
+      {
+        "text": "the TRICK MASTER.",
+        "width": 93,
+        "unresolved": []
+      }
+    ]
+  }
+]

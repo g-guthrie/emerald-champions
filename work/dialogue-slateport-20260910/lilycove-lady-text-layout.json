@@ -1,0 +1,932 @@
+[
+  {
+    "label": "ImTheFavorLady",
+    "text": "I'm the FAVOR LADY…",
+    "expanded": "I'm the FAVOR LADY…",
+    "width": 105
+  },
+  {
+    "label": "ObsessedWithThing",
+    "text": "I've recently developed an obsession",
+    "expanded": "I've recently developed an obsession",
+    "width": 197
+  },
+  {
+    "label": "ObsessedWithThing",
+    "text": "for {STR_VAR_1} things…",
+    "expanded": "for wham-ish things…",
+    "width": 109
+  },
+  {
+    "label": "ThankYouForLastTime",
+    "text": "Oh…",
+    "expanded": "Oh…",
+    "width": 18
+  },
+  {
+    "label": "ThankYouForLastTime",
+    "text": "Thank you for last time…",
+    "expanded": "Thank you for last time…",
+    "width": 127
+  },
+  {
+    "label": "PlayerGaveMeBadThing",
+    "text": "Before, I think it was {STR_VAR_3}…",
+    "expanded": "Before, I think it was WWWWWWW…",
+    "width": 163
+  },
+  {
+    "label": "PlayerGaveMeBadThing",
+    "text": "{STR_VAR_3} gave me one",
+    "expanded": "WWWWWWW gave me one",
+    "width": 105
+  },
+  {
+    "label": "PlayerGaveMeBadThing",
+    "text": "{STR_VAR_2},",
+    "expanded": "Unremarkable Teacup,",
+    "width": 110
+  },
+  {
+    "label": "PlayerGaveMeBadThing",
+    "text": "saying it was {STR_VAR_1}.",
+    "expanded": "saying it was wham-ish.",
+    "width": 120
+  },
+  {
+    "label": "PlayerGaveMeBadThing",
+    "text": "But it wasn't {STR_VAR_1}.",
+    "expanded": "But it wasn't wham-ish.",
+    "width": 122
+  },
+  {
+    "label": "PlayerGaveMeBadThing",
+    "text": "Not in the least bit.",
+    "expanded": "Not in the least bit.",
+    "width": 105
+  },
+  {
+    "label": "PlayerGaveMeGreatThing",
+    "text": "Before, {STR_VAR_3} gave me a very",
+    "expanded": "Before, WWWWWWW gave me a very",
+    "width": 160
+  },
+  {
+    "label": "PlayerGaveMeGreatThing",
+    "text": "{STR_VAR_1} {STR_VAR_2}.",
+    "expanded": "wham-ish Energy Powder.",
+    "width": 125
+  },
+  {
+    "label": "PlayerGaveMeGreatThing",
+    "text": "I cherish it now.",
+    "expanded": "I cherish it now.",
+    "width": 85
+  },
+  {
+    "label": "WillYouShareThing",
+    "text": "Listen, if you have anything that",
+    "expanded": "Listen, if you have anything that",
+    "width": 174
+  },
+  {
+    "label": "WillYouShareThing",
+    "text": "is {STR_VAR_1}, will you share it",
+    "expanded": "is wham-ish, will you share it",
+    "width": 149
+  },
+  {
+    "label": "WillYouShareThing",
+    "text": "with me?",
+    "expanded": "with me?",
+    "width": 43
+  },
+  {
+    "label": "WhatWillYouGiveMe",
+    "text": "…Really?",
+    "expanded": "…Really?",
+    "width": 44
+  },
+  {
+    "label": "WhatWillYouGiveMe",
+    "text": "What will you give me?",
+    "expanded": "What will you give me?",
+    "width": 112
+  },
+  {
+    "label": "IsThatSoGoodbye",
+    "text": "Is that so?",
+    "expanded": "Is that so?",
+    "width": 60
+  },
+  {
+    "label": "IsThatSoGoodbye",
+    "text": "Then, it's good-bye…",
+    "expanded": "Then, it's good-bye…",
+    "width": 109
+  },
+  {
+    "label": "NotWillingToShare",
+    "text": "Oh…",
+    "expanded": "Oh…",
+    "width": 18
+  },
+  {
+    "label": "NotWillingToShare",
+    "text": "You're not willing to share?",
+    "expanded": "You're not willing to share?",
+    "width": 146
+  },
+  {
+    "label": "IllTryToCherishIt",
+    "text": "Oh?",
+    "expanded": "Oh?",
+    "width": 18
+  },
+  {
+    "label": "IllTryToCherishIt",
+    "text": "That {STR_VAR_2} is {STR_VAR_1}?",
+    "expanded": "That Unremarkable Teacup is wham-ish?",
+    "width": 202
+  },
+  {
+    "label": "IllTryToCherishIt",
+    "text": "…Oh, is that right?",
+    "expanded": "…Oh, is that right?",
+    "width": 97
+  },
+  {
+    "label": "IllTryToCherishIt",
+    "text": "Well, I owe you a thanks anyway.",
+    "expanded": "Well, I owe you a thanks anyway.",
+    "width": 164
+  },
+  {
+    "label": "IllTryToCherishIt",
+    "text": "I'll try to cherish it…",
+    "expanded": "I'll try to cherish it…",
+    "width": 116
+  },
+  {
+    "label": "IWillCherishThis",
+    "text": "Oh…",
+    "expanded": "Oh…",
+    "width": 18
+  },
+  {
+    "label": "IWillCherishThis",
+    "text": "That's a quite {STR_VAR_1}",
+    "expanded": "That's a quite wham-ish",
+    "width": 125
+  },
+  {
+    "label": "IWillCherishThis",
+    "text": "{STR_VAR_2}…",
+    "expanded": "Energy Powder…",
+    "width": 79
+  },
+  {
+    "label": "IWillCherishThis",
+    "text": "Isn't it nice?",
+    "expanded": "Isn't it nice?",
+    "width": 74
+  },
+  {
+    "label": "IWillCherishThis",
+    "text": "It's so dreamy…",
+    "expanded": "It's so dreamy…",
+    "width": 83
+  },
+  {
+    "label": "IWillCherishThis",
+    "text": "Thank you…",
+    "expanded": "Thank you…",
+    "width": 57
+  },
+  {
+    "label": "IWillCherishThis",
+    "text": "I will cherish this…",
+    "expanded": "I will cherish this…",
+    "width": 100
+  },
+  {
+    "label": "IWillTreasureThis",
+    "text": "…Oh, oh, oh…",
+    "expanded": "…Oh, oh, oh…",
+    "width": 60
+  },
+  {
+    "label": "IWillTreasureThis",
+    "text": "This is amazing!",
+    "expanded": "This is amazing!",
+    "width": 82
+  },
+  {
+    "label": "IWillTreasureThis",
+    "text": "This really is {STR_VAR_1}!",
+    "expanded": "This really is wham-ish!",
+    "width": 122
+  },
+  {
+    "label": "IWillTreasureThis",
+    "text": "I never knew that one {STR_VAR_2}",
+    "expanded": "I never knew that one Energy Powder",
+    "width": 189
+  },
+  {
+    "label": "IWillTreasureThis",
+    "text": "could be this {STR_VAR_1}!",
+    "expanded": "could be this wham-ish!",
+    "width": 121
+  },
+  {
+    "label": "IWillTreasureThis",
+    "text": "Thank you!",
+    "expanded": "Thank you!",
+    "width": 55
+  },
+  {
+    "label": "IWillTreasureThis",
+    "text": "I will treasure this for the rest",
+    "expanded": "I will treasure this for the rest",
+    "width": 168
+  },
+  {
+    "label": "IWillTreasureThis",
+    "text": "of my life!",
+    "expanded": "of my life!",
+    "width": 54
+  },
+  {
+    "label": "IllGiveYouThisInReturn",
+    "text": "I'll give you this wonderful item in",
+    "expanded": "I'll give you this wonderful item in",
+    "width": 183
+  },
+  {
+    "label": "IllGiveYouThisInReturn",
+    "text": "return for your fabulous gift.",
+    "expanded": "return for your fabulous gift.",
+    "width": 157
+  },
+  {
+    "label": "IllGiveYouThisInReturn",
+    "text": "I hope you will cherish it…",
+    "expanded": "I hope you will cherish it…",
+    "width": 136
+  },
+  {
+    "label": "YouDontHaveSpaceForIt",
+    "text": "Oh, you can't have it if you don't have",
+    "expanded": "Oh, you can't have it if you don't have",
+    "width": 203
+  },
+  {
+    "label": "YouDontHaveSpaceForIt",
+    "text": "the space for it.",
+    "expanded": "the space for it.",
+    "width": 87
+  },
+  {
+    "label": "YouDontHaveSpaceForIt",
+    "text": "Please come see me when you get",
+    "expanded": "Please come see me when you get",
+    "width": 166
+  },
+  {
+    "label": "YouDontHaveSpaceForIt",
+    "text": "your BAG organized…",
+    "expanded": "your BAG organized…",
+    "width": 104
+  },
+  {
+    "label": "ImTheQuizLady",
+    "text": "I'm the QUIZ LADY!",
+    "expanded": "I'm the QUIZ LADY!",
+    "width": 97
+  },
+  {
+    "label": "ImTheQuizLady",
+    "text": "I love quizzes!",
+    "expanded": "I love quizzes!",
+    "width": 78
+  },
+  {
+    "label": "WaitingToTakeYourQuiz",
+    "text": "Oh?",
+    "expanded": "Oh?",
+    "width": 18
+  },
+  {
+    "label": "WaitingToTakeYourQuiz",
+    "text": "I'm waiting for a challenger to answer",
+    "expanded": "I'm waiting for a challenger to answer",
+    "width": 199
+  },
+  {
+    "label": "WaitingToTakeYourQuiz",
+    "text": "the quiz you made.",
+    "expanded": "the quiz you made.",
+    "width": 94
+  },
+  {
+    "label": "WaitingToTakeYourQuiz",
+    "text": "We can chat another time, okay?",
+    "expanded": "We can chat another time, okay?",
+    "width": 165
+  },
+  {
+    "label": "WaitingForChallenger",
+    "text": "I'm waiting for someone to challenge",
+    "expanded": "I'm waiting for someone to challenge",
+    "width": 192
+  },
+  {
+    "label": "WaitingForChallenger",
+    "text": "a quiz this {STR_VAR_1} thought up!",
+    "expanded": "a quiz this WWWWWWW thought up!",
+    "width": 165
+  },
+  {
+    "label": "TakeQuizChallenge",
+    "text": "If you answer correctly, you can win",
+    "expanded": "If you answer correctly, you can win",
+    "width": 188
+  },
+  {
+    "label": "TakeQuizChallenge",
+    "text": "fabulous prizes!",
+    "expanded": "fabulous prizes!",
+    "width": 86
+  },
+  {
+    "label": "TakeQuizChallenge",
+    "text": "Would you like to take the quiz",
+    "expanded": "Would you like to take the quiz",
+    "width": 160
+  },
+  {
+    "label": "TakeQuizChallenge",
+    "text": "challenge?",
+    "expanded": "challenge?",
+    "width": 56
+  },
+  {
+    "label": "WaitForAnswer",
+    "text": "… … … … … …",
+    "expanded": "… … … … … …",
+    "width": 51
+  },
+  {
+    "label": "WaitForAnswer",
+    "text": "… … … … … …",
+    "expanded": "… … … … … …",
+    "width": 51
+  },
+  {
+    "label": "HowBoringBye",
+    "text": "Oh, how boring!",
+    "expanded": "Oh, how boring!",
+    "width": 76
+  },
+  {
+    "label": "HowBoringBye",
+    "text": "Bye-bye!",
+    "expanded": "Bye-bye!",
+    "width": 46
+  },
+  {
+    "label": "YoureGoingToQuit",
+    "text": "Awww!",
+    "expanded": "Awww!",
+    "width": 28
+  },
+  {
+    "label": "YoureGoingToQuit",
+    "text": "You're going to quit?",
+    "expanded": "You're going to quit?",
+    "width": 112
+  },
+  {
+    "label": "TakeTheQuizAnotherTime",
+    "text": "Please take the quiz challenge",
+    "expanded": "Please take the quiz challenge",
+    "width": 160
+  },
+  {
+    "label": "TakeTheQuizAnotherTime",
+    "text": "another time!",
+    "expanded": "another time!",
+    "width": 70
+  },
+  {
+    "label": "YouGotItRight",
+    "text": "You're amazing! You've got it right!",
+    "expanded": "You're amazing! You've got it right!",
+    "width": 189
+  },
+  {
+    "label": "YouGotItRight",
+    "text": "You're one sharp customer!",
+    "expanded": "You're one sharp customer!",
+    "width": 142
+  },
+  {
+    "label": "YouGotItRightYouveWonPersonsPrize",
+    "text": "Congratulations!",
+    "expanded": "Congratulations!",
+    "width": 89
+  },
+  {
+    "label": "YouGotItRightYouveWonPersonsPrize",
+    "text": "You've got the quiz right!",
+    "expanded": "You've got the quiz right!",
+    "width": 137
+  },
+  {
+    "label": "YouGotItRightYouveWonPersonsPrize",
+    "text": "You've won a prize provided by",
+    "expanded": "You've won a prize provided by",
+    "width": 159
+  },
+  {
+    "label": "YouGotItRightYouveWonPersonsPrize",
+    "text": "{STR_VAR_1}!",
+    "expanded": "WWWWWWW!",
+    "width": 46
+  },
+  {
+    "label": "XReceivedOneY",
+    "text": "{STR_VAR_1} received",
+    "expanded": "WWWWWWW received",
+    "width": 90
+  },
+  {
+    "label": "XReceivedOneY",
+    "text": "one {STR_VAR_2}!",
+    "expanded": "one Unremarkable Teacup!",
+    "width": 132
+  },
+  {
+    "label": "YourBagIsFilledUp",
+    "text": "Oh? Your BAG is filled up!",
+    "expanded": "Oh? Your BAG is filled up!",
+    "width": 130
+  },
+  {
+    "label": "YourBagIsFilledUp",
+    "text": "Come see me when you have room.",
+    "expanded": "Come see me when you have room.",
+    "width": 164
+  },
+  {
+    "label": "WrongTheCorrectAnswerIs",
+    "text": "Hmm… Wrong!",
+    "expanded": "Hmm… Wrong!",
+    "width": 60
+  },
+  {
+    "label": "WrongTheCorrectAnswerIs",
+    "text": "The correct answer is “{STR_VAR_3}”!",
+    "expanded": "The correct answer is “SMELLING SALTS”!",
+    "width": 212
+  },
+  {
+    "label": "IGetToKeepPrize",
+    "text": "Too bad!",
+    "expanded": "Too bad!",
+    "width": 43
+  },
+  {
+    "label": "IGetToKeepPrize",
+    "text": "I get to keep the quiz prize",
+    "expanded": "I get to keep the quiz prize",
+    "width": 145
+  },
+  {
+    "label": "IGetToKeepPrize",
+    "text": "{STR_VAR_1} now!",
+    "expanded": "Unremarkable Teacup now!",
+    "width": 132
+  },
+  {
+    "label": "MakeYourOwnQuiz",
+    "text": "Listen, listen!",
+    "expanded": "Listen, listen!",
+    "width": 76
+  },
+  {
+    "label": "MakeYourOwnQuiz",
+    "text": "Would you like to make your own quiz?",
+    "expanded": "Would you like to make your own quiz?",
+    "width": 192
+  },
+  {
+    "label": "MaybeNextTime",
+    "text": "Oh, I see…",
+    "expanded": "Oh, I see…",
+    "width": 51
+  },
+  {
+    "label": "MaybeNextTime",
+    "text": "Well, maybe next time!",
+    "expanded": "Well, maybe next time!",
+    "width": 112
+  },
+  {
+    "label": "PickYourPrize",
+    "text": "Okay, the first thing you have to do",
+    "expanded": "Okay, the first thing you have to do",
+    "width": 187
+  },
+  {
+    "label": "PickYourPrize",
+    "text": "is pick the prize for the person that",
+    "expanded": "is pick the prize for the person that",
+    "width": 192
+  },
+  {
+    "label": "PickYourPrize",
+    "text": "answers your quiz correctly.",
+    "expanded": "answers your quiz correctly.",
+    "width": 148
+  },
+  {
+    "label": "PickYourPrize",
+    "text": "But beware, if the person taking",
+    "expanded": "But beware, if the person taking",
+    "width": 168
+  },
+  {
+    "label": "PickYourPrize",
+    "text": "the quiz can't get it right, I get to",
+    "expanded": "the quiz can't get it right, I get to",
+    "width": 188
+  },
+  {
+    "label": "PickYourPrize",
+    "text": "keep the prize!",
+    "expanded": "keep the prize!",
+    "width": 79
+  },
+  {
+    "label": "QuitChoosingPrize",
+    "text": "If you don't choose a prize,",
+    "expanded": "If you don't choose a prize,",
+    "width": 147
+  },
+  {
+    "label": "QuitChoosingPrize",
+    "text": "your quiz can't be made.",
+    "expanded": "your quiz can't be made.",
+    "width": 126
+  },
+  {
+    "label": "QuitChoosingPrize",
+    "text": "Are you going to quit making",
+    "expanded": "Are you going to quit making",
+    "width": 146
+  },
+  {
+    "label": "QuitChoosingPrize",
+    "text": "your quiz?",
+    "expanded": "your quiz?",
+    "width": 54
+  },
+  {
+    "label": "WriteYourQuiz",
+    "text": "Oh, how nice!",
+    "expanded": "Oh, how nice!",
+    "width": 65
+  },
+  {
+    "label": "WriteYourQuiz",
+    "text": "That's a wonderful prize!",
+    "expanded": "That's a wonderful prize!",
+    "width": 133
+  },
+  {
+    "label": "WriteYourQuiz",
+    "text": "Next, you need to write your quiz",
+    "expanded": "Next, you need to write your quiz",
+    "width": 171
+  },
+  {
+    "label": "WriteYourQuiz",
+    "text": "question and its answer.",
+    "expanded": "question and its answer.",
+    "width": 127
+  },
+  {
+    "label": "QuitWritingQuizQuestion",
+    "text": "Are you going to quit writing",
+    "expanded": "Are you going to quit writing",
+    "width": 149
+  },
+  {
+    "label": "QuitWritingQuizQuestion",
+    "text": "your quiz question?",
+    "expanded": "your quiz question?",
+    "width": 103
+  },
+  {
+    "label": "QuitWritingQuizAnswer",
+    "text": "Are you going to quit choosing",
+    "expanded": "Are you going to quit choosing",
+    "width": 158
+  },
+  {
+    "label": "QuitWritingQuizAnswer",
+    "text": "your quiz answer?",
+    "expanded": "your quiz answer?",
+    "width": 92
+  },
+  {
+    "label": "IllLookForAChallenger",
+    "text": "Thank you!",
+    "expanded": "Thank you!",
+    "width": 55
+  },
+  {
+    "label": "IllLookForAChallenger",
+    "text": "You've put together a nice quiz.",
+    "expanded": "You've put together a nice quiz.",
+    "width": 169
+  },
+  {
+    "label": "IllLookForAChallenger",
+    "text": "I'll go look for someone who'll take",
+    "expanded": "I'll go look for someone who'll take",
+    "width": 187
+  },
+  {
+    "label": "IllLookForAChallenger",
+    "text": "your quiz challenge right away.",
+    "expanded": "your quiz challenge right away.",
+    "width": 161
+  },
+  {
+    "label": "ImTheContestLady",
+    "text": "I'm the CONTEST LADY!",
+    "expanded": "I'm the CONTEST LADY!",
+    "width": 115
+  },
+  {
+    "label": "ImTheContestLady",
+    "text": "I sure do love CONTESTS!",
+    "expanded": "I sure do love CONTESTS!",
+    "width": 127
+  },
+  {
+    "label": "ThankForPokeblock",
+    "text": "Thanks for your {POKEBLOCK} before!",
+    "expanded": "Thanks for your WWWWW before!",
+    "width": 157
+  },
+  {
+    "label": "MyFriendDisplaysQuality",
+    "text": "This is my friend {STR_VAR_1}!",
+    "expanded": "This is my friend HANDSOME!",
+    "width": 141
+  },
+  {
+    "label": "MyFriendDisplaysQuality",
+    "text": "It's the epitome of {STR_VAR_2}!",
+    "expanded": "It's the epitome of toughness!",
+    "width": 164
+  },
+  {
+    "label": "MyFriendDisplaysQuality",
+    "text": "But I think that it will display",
+    "expanded": "But I think that it will display",
+    "width": 160
+  },
+  {
+    "label": "MyFriendDisplaysQuality",
+    "text": "even more {STR_VAR_2}!",
+    "expanded": "even more toughness!",
+    "width": 111
+  },
+  {
+    "label": "DontHaveAPokeblockCase",
+    "text": "So, I need your help!",
+    "expanded": "So, I need your help!",
+    "width": 106
+  },
+  {
+    "label": "DontHaveAPokeblockCase",
+    "text": "Please, may I have one {POKEBLOCK}?",
+    "expanded": "Please, may I have one WWWWW?",
+    "width": 154
+  },
+  {
+    "label": "DontHaveAPokeblockCase",
+    "text": "All I'm asking for is one!",
+    "expanded": "All I'm asking for is one!",
+    "width": 130
+  },
+  {
+    "label": "DontHaveAPokeblockCase",
+    "text": "…Oh, but…",
+    "expanded": "…Oh, but…",
+    "width": 48
+  },
+  {
+    "label": "DontHaveAPokeblockCase",
+    "text": "Don't you have a {POKEBLOCK} CASE?",
+    "expanded": "Don't you have a WWWWW CASE?",
+    "width": 153
+  },
+  {
+    "label": "DontHaveAPokeblockCase",
+    "text": "That's no good. Next time, then!",
+    "expanded": "That's no good. Next time, then!",
+    "width": 167
+  },
+  {
+    "label": "AskingForOnePokeblock",
+    "text": "So, I need your help!",
+    "expanded": "So, I need your help!",
+    "width": 106
+  },
+  {
+    "label": "AskingForOnePokeblock",
+    "text": "Please, may I have one {POKEBLOCK}?",
+    "expanded": "Please, may I have one WWWWW?",
+    "width": 154
+  },
+  {
+    "label": "AskingForOnePokeblock",
+    "text": "All I'm asking for is one!",
+    "expanded": "All I'm asking for is one!",
+    "width": 130
+  },
+  {
+    "label": "ICantHaveOnePokeblock",
+    "text": "Awww!",
+    "expanded": "Awww!",
+    "width": 28
+  },
+  {
+    "label": "ICantHaveOnePokeblock",
+    "text": "I can't have one {POKEBLOCK}?!",
+    "expanded": "I can't have one WWWWW?!",
+    "width": 130
+  },
+  {
+    "label": "WhatACheapskate",
+    "text": "Sheesh!",
+    "expanded": "Sheesh!",
+    "width": 40
+  },
+  {
+    "label": "WhatACheapskate",
+    "text": "What a cheapskate!",
+    "expanded": "What a cheapskate!",
+    "width": 100
+  },
+  {
+    "label": "IllUseYourPokeblock",
+    "text": "Yay!",
+    "expanded": "Yay!",
+    "width": 22
+  },
+  {
+    "label": "IllUseYourPokeblock",
+    "text": "Thank you!",
+    "expanded": "Thank you!",
+    "width": 55
+  },
+  {
+    "label": "IllUseYourPokeblock",
+    "text": "I'll feed my POKéMON your {POKEBLOCK}",
+    "expanded": "I'll feed my POKéMON your WWWWW",
+    "width": 166
+  },
+  {
+    "label": "IllUseYourPokeblock",
+    "text": "right away.",
+    "expanded": "right away.",
+    "width": 57
+  },
+  {
+    "label": "NoChangeThanks",
+    "text": "…It doesn't seem to have changed",
+    "expanded": "…It doesn't seem to have changed",
+    "width": 177
+  },
+  {
+    "label": "NoChangeThanks",
+    "text": "in any way at all…",
+    "expanded": "in any way at all…",
+    "width": 90
+  },
+  {
+    "label": "NoChangeThanks",
+    "text": "Hmm…",
+    "expanded": "Hmm…",
+    "width": 24
+  },
+  {
+    "label": "NoChangeThanks",
+    "text": "Oh, well!",
+    "expanded": "Oh, well!",
+    "width": 42
+  },
+  {
+    "label": "NoChangeThanks",
+    "text": "Thank you very much!",
+    "expanded": "Thank you very much!",
+    "width": 108
+  },
+  {
+    "label": "ReallyImprovedThanks",
+    "text": "Oh, yay!",
+    "expanded": "Oh, yay!",
+    "width": 40
+  },
+  {
+    "label": "ReallyImprovedThanks",
+    "text": "It's really delighted!",
+    "expanded": "It's really delighted!",
+    "width": 115
+  },
+  {
+    "label": "ReallyImprovedThanks",
+    "text": "I think it really improved {STR_VAR_1}'s",
+    "expanded": "I think it really improved HANDSOME's",
+    "width": 195
+  },
+  {
+    "label": "ReallyImprovedThanks",
+    "text": "{STR_VAR_2} quality, too.",
+    "expanded": "toughness quality, too.",
+    "width": 122
+  },
+  {
+    "label": "ReallyImprovedThanks",
+    "text": "Thank you so much!",
+    "expanded": "Thank you so much!",
+    "width": 97
+  },
+  {
+    "label": "ReadyToEnterContests",
+    "text": "Hmm…",
+    "expanded": "Hmm…",
+    "width": 24
+  },
+  {
+    "label": "ReadyToEnterContests",
+    "text": "I think we may be ready to enter",
+    "expanded": "I think we may be ready to enter",
+    "width": 167
+  },
+  {
+    "label": "ReadyToEnterContests",
+    "text": "some CONTESTS.",
+    "expanded": "some CONTESTS.",
+    "width": 78
+  },
+  {
+    "label": "ReadyToEnterContests",
+    "text": "If you see us in one somewhere,",
+    "expanded": "If you see us in one somewhere,",
+    "width": 162
+  },
+  {
+    "label": "ReadyToEnterContests",
+    "text": "I hope you'll cheer for us.",
+    "expanded": "I hope you'll cheer for us.",
+    "width": 138
+  },
+  {
+    "label": "Zigzagoon",
+    "text": "{STR_VAR_1}: Guguuh!",
+    "expanded": "HANDSOME: Guguuh!",
+    "width": 94
+  },
+  {
+    "label": "Kecleon",
+    "text": "{STR_VAR_1}: Igigigiiih!",
+    "expanded": "HANDSOME: Igigigiiih!",
+    "width": 108
+  },
+  {
+    "label": "Poochyena",
+    "text": "{STR_VAR_1}: Baaarun…",
+    "expanded": "HANDSOME: Baaarun…",
+    "width": 101
+  },
+  {
+    "label": "Pikachu",
+    "text": "{STR_VAR_1}: Pikka!",
+    "expanded": "HANDSOME: Pikka!",
+    "width": 86
+  },
+  {
+    "label": "Skitty",
+    "text": "{STR_VAR_1}: Umyaaaan!",
+    "expanded": "HANDSOME: Umyaaaan!",
+    "width": 106
+  }
+]

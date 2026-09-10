@@ -99,7 +99,8 @@ DesertRuins_Braille_UseRockSmash:
 	brailleformat 1, 0, 27, 19, 4, 3
 	.braille "LEFT, LEFT,\n"
 	.braille "DOWN, DOWN.\n"
-	.braille "THEN, USE\n"
+	.braille "PRESS A\n"
+	.braille "TO USE\n"
 	.braille "ROCK SMASH.$"
 
 IslandCave_Braille_RunLapAroundWall:
@@ -114,17 +115,18 @@ AncientTomb_Braille_ShineInTheMiddle:
 	.braille "THOSE WHO\n"
 	.braille "INHERIT OUR\n"
 	.braille "WILL, SHINE\n"
-	.braille "IN THE MIDDLE.$"
+	.braille "IN THE MIDDLE.\n"
+	.braille "PRESS A\n"
+	.braille "FOR FLASH.$"
 
 SealedChamber_InnerRoom_Braille_Regigigas:
 	brailleformat 3, 0, 25, 19, 6, 3
-	.braille "A BODY OF ROCK.\n"
-	.braille "A BODY OF ICE.\n"
-	.braille "A BODY OF STEEL.\n"
-	.braille "WHEN GATHERS\n"
-	.braille "THE THREE, THE\n"
-	.braille "KING SHALL\n"
-	.braille "APPEAR.$"
+	.braille "BODIES OF\n"
+	.braille "ROCK, ICE,\n"
+	.braille "AND STEEL.\n"
+	.braille "BRING THREE.\n"
+	.braille "THE KING\n"
+	.braille "SHALL AWAKEN.$"
 
 @ FRLG
 Braille_Text_Up::

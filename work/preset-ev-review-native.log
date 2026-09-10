@@ -1,0 +1,22 @@
+tools/scaninc/scaninc -M build/emerald-test/test/battle/ai/emerald_champions_plans.d -g build/assets -I include -I tools/agbcc/include test/battle/ai/emerald_champions_plans.c
+tools/scaninc/scaninc -M build/emerald-test/test/emerald_champions.d -g build/assets -I include -I tools/agbcc/include test/emerald_champions.c
+tools/scaninc/scaninc -M build/emerald-test/src/emerald_champions_battle_sets.d -g build/assets -I include -I tools/agbcc/include src/emerald_champions_battle_sets.c
+tools/scaninc/scaninc -M build/emerald-test/src/champions_circuit.d -g build/assets -I include -I tools/agbcc/include src/champions_circuit.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/champions_circuit.o src/champions_circuit.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/emerald_champions_battle_sets.o src/emerald_champions_battle_sets.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/emerald_champions.o test/emerald_champions.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/battle/ai/emerald_champions_plans.o test/battle/ai/emerald_champions_plans.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 2
+[0] EC preset EV review: slow Perish and Sash offense follow native stats: [32mPASS[0m
+Preset EV review levels3-100 WigglytuffHPgainLevels=52 ApplinSpeedGainLevels=98; Applin deliberately trades SpDef
+[1] EC preset EV review: offense axes preserve intended stats: [32mPASS[0m
+Preset offense EV review levels2-100 gains BeedrillSpA=99 TangelaSpDef=52 HisuiAvaluggSpDef=52; HP Def Speed preserved
+
+- Tests [32mPASSED[0m:          2
+- Tests [34mTOTAL[0m:           2
+

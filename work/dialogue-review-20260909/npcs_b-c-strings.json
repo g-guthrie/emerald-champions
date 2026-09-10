@@ -1,0 +1,6132 @@
+[
+  {
+    "file": "src/strings.c",
+    "line": 7,
+    "source": "const u8 gText_ExpandedPlaceholder_Empty[] = _(\"\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 8,
+    "source": "const u8 gText_ExpandedPlaceholder_Kun[] = _(\"\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 9,
+    "source": "const u8 gText_ExpandedPlaceholder_Chan[] = _(\"\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 10,
+    "source": "const u8 gText_ExpandedPlaceholder_Sapphire[] = _(\"SAPPHIRE\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 11,
+    "source": "const u8 gText_ExpandedPlaceholder_Ruby[] = _(\"RUBY\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 12,
+    "source": "const u8 gText_ExpandedPlaceholder_Emerald[] = _(\"EMERALD\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 13,
+    "source": "const u8 gText_ExpandedPlaceholder_Aqua[] = _(\"AQUA\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 14,
+    "source": "const u8 gText_ExpandedPlaceholder_Magma[] = _(\"MAGMA\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 15,
+    "source": "const u8 gText_ExpandedPlaceholder_Archie[] = _(\"ARCHIE\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 16,
+    "source": "const u8 gText_ExpandedPlaceholder_Maxie[] = _(\"MAXIE\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 17,
+    "source": "const u8 gText_ExpandedPlaceholder_Kyogre[] = _(\"KYOGRE\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 18,
+    "source": "const u8 gText_ExpandedPlaceholder_Groudon[] = _(\"GROUDON\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 19,
+    "source": "const u8 gText_ExpandedPlaceholder_Brendan[] = _(\"BRENDAN\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 20,
+    "source": "const u8 gText_ExpandedPlaceholder_May[] = _(\"MAY\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 21,
+    "source": "const u8 gText_ExpandedPlaceholder_Red[] = _(\"RED\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 22,
+    "source": "const u8 gText_ExpandedPlaceholder_Green[] = _(\"GREEN\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 23,
+    "source": "const u8 gText_EggNickname[POKEMON_NAME_LENGTH + 1] = _(\"EGG\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 24,
+    "source": "const u8 gText_Pokemon[POKEMON_NAME_LENGTH + 1] = _(\"POK\u00e9MON\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 25,
+    "source": "const u8 gText_Player[] = _(\"PLAYER\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 26,
+    "source": "const u8 gText_Pokedex[] = _(\"POK\u00e9DEX\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 27,
+    "source": "const u8 gText_Time[] = _(\"TIME\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 28,
+    "source": "const u8 gText_Badges[] = _(\"BADGES\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 29,
+    "source": "const u8 gText_AButton[] = _(\"A Button\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 30,
+    "source": "const u8 gText_BButton[] = _(\"B Button\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 31,
+    "source": "const u8 gText_RButton[] = _(\"R Button\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 32,
+    "source": "const u8 gText_LButton[] = _(\"L Button\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 33,
+    "source": "const u8 gText_Start[] = _(\"START\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 34,
+    "source": "const u8 gText_Select[] = _(\"SELECT\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 35,
+    "source": "const u8 gText_ControlPad[] = _(\"+ Control Pad\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 36,
+    "source": "const u8 gText_LButtonRButton[] = _(\"L Button  R Button\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 37,
+    "source": "const u8 gText_Controls[] = _(\"CONTROLS\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 38,
+    "source": "ALIGNED(4) const u8 gText_PickOk[] = _(\"{DPAD_UPDOWN}PICK {A_BUTTON}OK\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 39,
+    "source": "ALIGNED(4) const u8 gText_Next[] = _(\"{A_BUTTON}NEXT\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 40,
+    "source": "ALIGNED(4) const u8 gText_NextBack[] = _(\"{A_BUTTON}NEXT {B_BUTTON}BACK\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 41,
+    "source": "ALIGNED(4) const u8 gText_PickNextCancel[] = _(\"{DPAD_UPDOWN}PICK {A_BUTTON}NEXT {B_BUTTON}CANCEL\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 42,
+    "source": "ALIGNED(4) const u8 gText_PickCancel[] = _(\"{DPAD_UPDOWN}PICK {A_BUTTON}{B_BUTTON}CANCEL\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 43,
+    "source": "ALIGNED(4) const u8 gText_AButtonExit[] = _(\"{A_BUTTON}EXIT\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 44,
+    "source": "const u8 gText_Boy[] = _(\"BOY\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 45,
+    "source": "const u8 gText_Girl[] = _(\"GIRL\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 46,
+    "source": "const u8 gText_ThisIsAPokemon[] = _(\"This is what we call a \u201cPOK\u00e9MON.\u201d{PAUSE 96}\\p\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 47,
+    "source": "const u8 gText_5MarksPokemon[] = _(\"????? POK\u00e9MON\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 48,
+    "source": "const u8 gText_CryOf[] = _(\"CRY OF\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 49,
+    "source": "const u8 gText_SizeComparedTo[] = _(\"SIZE COMPARED TO \");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 50,
+    "source": "const u8 gText_SelectorArrow[] = _(\"\u25b6\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 51,
+    "source": "const u8 gText_EmptySpace[] = _(\" \"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 52,
+    "source": "const u8 gText_WelcomeToHOF[] = _(\"Welcome to the HALL OF FAME!\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 53,
+    "source": "const u8 gText_HOFDexRating[] = _(\"Spotted POK\u00e9MON: {STR_VAR_1}!\\nOwned POK\u00e9MON: {STR_VAR_2}!\\pPROF. BIRCH's POK\u00e9DEX rating!\\pPROF. BIRCH: Let's see\u2026\\p\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 54,
+    "source": "const u8 gText_HOFDexSaving[] = _(\"SAVING\u2026\\nDON'T TURN OFF THE POWER.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 55,
+    "source": "const u8 gText_HOFCorrupted[] = _(\"The HALL OF FAME data is corrupted.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 56,
+    "source": "const u8 gText_HOFNumber[] = _(\"HALL OF FAME No. {STR_VAR_1}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 57,
+    "source": "const u8 gText_LeagueChamp[] = _(\"LEAGUE CHAMPION!\\nCONGRATULATIONS!\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 58,
+    "source": "const u8 gText_Number[] = _(\"No. \");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 59,
+    "source": "const u8 gText_Level[] = _(\"Lv. \");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 60,
+    "source": "const u8 gText_IdNumberSlash[] = _(\"IDNo. /\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 61,
+    "source": "const u8 gText_Name[] = _(\"NAME\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 62,
+    "source": "const u8 gText_IDNumber[] = _(\"IDNo.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 63,
+    "source": "const u8 gText_BirchInTrouble[] = _(\"PROF. BIRCH is in trouble!\\nRelease a POK\u00e9MON and rescue him!\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 64,
+    "source": "const u8 gText_ConfirmStarterChoice[] = _(\"Do you choose this POK\u00e9MON?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 65,
+    "source": "const u8 gText_Pokemon4[] = _(\"POK\u00e9MON\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 66,
+    "source": "const u8 gText_FlyToWhere[] = _(\"FLY to where?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 67,
+    "source": "const u8 gMenuText_Use[] = _(\"Use\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 68,
+    "source": "const u8 gMenuText_Toss[] = _(\"Toss\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 69,
+    "source": "const u8 gMenuText_Register[] = _(\"Register\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 70,
+    "source": "const u8 gMenuText_Give[] = _(\"Give\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 71,
+    "source": "const u8 gMenuText_Confirm[] = _(\"Confirm\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 72,
+    "source": "const u8 gText_Cancel[] = _(\"Cancel\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 73,
+    "source": "const u8 gText_Cancel2[] = _(\"Cancel\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 74,
+    "source": "const u8 gText_EmptyString2[] = _(\"\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 75,
+    "source": "const u8 gText_None[] = _(\"None\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 76,
+    "source": "const u8 gText_FiveMarks[] = _(\"?????\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 77,
+    "source": "const u8 gText_Slash[] = _(\"/\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 78,
+    "source": "const u8 gText_OneDash[] = _(\"-\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 79,
+    "source": "const u8 gText_TwoDashes[] = _(\"--\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 80,
+    "source": "const u8 gText_ThreeDashes[] = _(\"---\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 81,
+    "source": "const u8 gText_MaleSymbol[] = _(\"\u2642\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 82,
+    "source": "const u8 gText_FemaleSymbol[] = _(\"\u2640\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 83,
+    "source": "const u8 gText_LevelSymbol[] = _(\"{LV}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 84,
+    "source": "const u8 gText_NumberClear01[] = _(\"{NO}{CLEAR 1}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 85,
+    "source": "const u8 gText_RightArrow[] = _(\"{RIGHT_ARROW}\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 86,
+    "source": "const u8 gText_IDNumber2[] = _(\"{ID}{NO}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 87,
+    "source": "const u8 gText_Space[] = _(\" \");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 88,
+    "source": "const u8 gText_SelectorArrow2[] = _(\"\u25b6\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 89,
+    "source": "const u8 gText_GoBackPrevMenu[] = _(\"Go back to the\\nprevious menu.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 90,
+    "source": "const u8 gText_WhatWouldYouLike[] = _(\"What would you like to do?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 91,
+    "source": "const u8 gMenuText_Give2[] = _(\"Give\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 92,
+    "source": "const u8 gText_xVar1[] = _(\"\u00d7{STR_VAR_1}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 93,
+    "source": "const u8 gText_Berry2[] = _(\" BERRY\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 94,
+    "source": "const u8 gText_Coins[] = _(\"{STR_VAR_1} COINS\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 95,
+    "source": "const u8 gText_CloseBag[] = _(\"Close Bag\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 96,
+    "source": "const u8 gText_Var1IsSelected[] = _(\"{STR_VAR_1}\\nis selected.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 97,
+    "source": "const u8 gText_CantWriteMail[] = _(\"You can't write\\nMAIL here.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 98,
+    "source": "const u8 gText_NoPokemon[] = _(\"There is no\\nPOK\u00e9MON.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 99,
+    "source": "const u8 gText_MoveVar1Where[] = _(\"Move the\\n{STR_VAR_1}\\nwhere?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 100,
+    "source": "const u8 gText_Var1CantBeHeld[] = _(\"The {STR_VAR_1} can't be held.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 101,
+    "source": "const u8 gText_TossHowManyVar1s[] = _(\"Toss out how many\\n{STR_VAR_1}?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 102,
+    "source": "const u8 gText_ThrewAwayVar2Var1s[] = _(\"Threw away {STR_VAR_2}\\n{STR_VAR_1}.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 103,
+    "source": "const u8 gText_ConfirmTossItems[] = _(\"Is it okay to\\nthrow away {STR_VAR_2}\\n{STR_VAR_1}?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 104,
+    "source": "const u8 gText_DadsAdvice[] = _(\"DAD's advice\u2026\\n{PLAYER}, there's a time and place for\\leverything!{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 105,
+    "source": "const u8 gText_PlayerUsedVar2[] = _(\"{PLAYER} used the\\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 106,
+    "source": "const u8 gText_RepelEffectsLingered[] = _(\"But the effects of a REPEL\\nlingered from earlier.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 107,
+    "source": "const u8 gText_LureEffectsLingered[] = _(\"But the effects of a Lure\\nlingered from earlier.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 108,
+    "source": "const u8 gText_BoxFull[] = _(\"The BOX is full.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 109,
+    "source": "const u8 gText_TheField[] = _(\"the field\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 110,
+    "source": "const u8 gText_TheBattle[] = _(\"the battle\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 111,
+    "source": "const u8 gText_ThePokemonList[] = _(\"the POK\u00e9MON LIST\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 112,
+    "source": "const u8 gText_TheShop[] = _(\"the shop\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 113,
+    "source": "const u8 gText_ThePC[] = _(\"the PC\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 140,
+    "source": "const u8 gText_ReturnToVar1[] = _(\"Return to\\n{STR_VAR_1}.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 144,
+    "source": "[POCKET_ITEMS]       = COMPOUND_STRING(\"Items\"),"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 145,
+    "source": "[POCKET_MEDICINE]    = COMPOUND_STRING(\"Medicine\"),"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 146,
+    "source": "[POCKET_BATTLE]      = COMPOUND_STRING(\"Battle Items\"),"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 147,
+    "source": "[POCKET_TM_HM]       = COMPOUND_STRING(\"TMs & HMs\"),"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 148,
+    "source": "[POCKET_BERRIES]     = COMPOUND_STRING(\"Berries\"),"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 149,
+    "source": "[POCKET_POKE_BALLS]  = COMPOUND_STRING(\"Pok\u00e9 Balls\"),"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 150,
+    "source": "[POCKET_KEY_ITEMS]   = COMPOUND_STRING(\"Key Items\"),"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 151,
+    "source": "[POCKET_MEGA_STONES] = COMPOUND_STRING(\"Mega Stones\")"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 154,
+    "source": "const u8 gText_NumberItem_TMBerry[] = _(\"{NO}{STR_VAR_1}{CLEAR 3}{STR_VAR_2}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 155,
+    "source": "const u8 gText_NumberItem_HM[] = _(\"{CLEAR_TO 17}{STR_VAR_1}{CLEAR 5}{STR_VAR_2}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 157,
+    "source": "const u8 gText_ShopBuy[] = _(\"BUY\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 158,
+    "source": "const u8 gText_ShopSell[] = _(\"SELL\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 159,
+    "source": "const u8 gText_ShopQuit[] = _(\"QUIT\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 160,
+    "source": "const u8 gText_ThatItemIsSoldOut[] = _(\"I'm sorry, but that item is sold out.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 161,
+    "source": "const u8 gText_SoldOut[] = _(\"SOLD OUT\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 162,
+    "source": "const u8 gText_InBagVar1[] = _(\"IN BAG: {STR_VAR_1}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 163,
+    "source": "const u8 gText_QuitShopping[] = _(\"Quit shopping.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 164,
+    "source": "const u8 gText_Var1CertainlyHowMany[] = _(\"{STR_VAR_1}? Certainly.\\nHow many would you like?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 165,
+    "source": "const u8 gText_Var1CertainlyHowMany2[] = _(\"{STR_VAR_1}? Certainly.\\nHow many would you like?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 166,
+    "source": "const u8 gText_Var1AndYouWantedVar2[] = _(\"{STR_VAR_1}? And you wanted {STR_VAR_2}?\\nThat will be \u00a5{STR_VAR_3}.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 167,
+    "source": "const u8 gText_Var1IsItThatllBeVar2[] = _(\"{STR_VAR_1}, is it?\\nThat'll be \u00a5{STR_VAR_2}. Do you want it?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 168,
+    "source": "const u8 gText_YouWantedVar1ThatllBeVar2[] = _(\"You wanted {STR_VAR_1}?\\nThat'll be \u00a5{STR_VAR_2}. Will that be okay?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 169,
+    "source": "const u8 gText_HereYouGoThankYou[] = _(\"Here you go!\\nThank you very much.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 170,
+    "source": "const u8 gText_ThankYouIllSendItHome[] = _(\"Thank you!\\nI'll send it to your home PC.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 171,
+    "source": "const u8 gText_ThanksIllSendItHome[] = _(\"Thanks!\\nI'll send it to your PC at home.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 172,
+    "source": "const u8 gText_YouDontHaveMoney[] = _(\"You don't have enough money.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 173,
+    "source": "const u8 gText_NoMoreRoomForThis[] = _(\"You have no more room for this\\nitem.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 174,
+    "source": "const u8 gText_SpaceForVar1Full[] = _(\"The space for {STR_VAR_1} is full.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 175,
+    "source": "const u8 gText_AnythingElseICanHelp[] = _(\"Is there anything else I can help\\nyou with?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 176,
+    "source": "const u8 gText_CanIHelpWithAnythingElse[] = _(\"Can I help you with anything else?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 177,
+    "source": "const u8 gText_ThrowInPremierBall[] = _(\"I'll throw in a PREMIER BALL, too.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 178,
+    "source": "const u8 gText_ThrowInPremierBalls[] = _(\"I'll throw in {STR_VAR_1} PREMIER BALLS, too.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 179,
+    "source": "const u8 gText_CantBuyKeyItem[] = _(\"{STR_VAR_2}? Oh, no.\\nI can't buy that.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 180,
+    "source": "const u8 gText_HowManyToSell[] = _(\"{STR_VAR_2}?\\nHow many would you like to sell?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 181,
+    "source": "const u8 gText_ICanPayVar1[] = _(\"I can pay \u00a5{STR_VAR_1}.\\nWould that be okay?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 182,
+    "source": "const u8 gText_TurnedOverVar1ForVar2[] = _(\"Turned over the {STR_VAR_2}\\nand received \u00a5{STR_VAR_1}.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 183,
+    "source": "const u8 gText_PokedollarVar1[] = _(\"\u00a5{STR_VAR_1}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 184,
+    "source": "const u8 gText_HP3[] = _(\"HP\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 185,
+    "source": "const u8 gText_SpAtk3[] = _(\"SP. ATK\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 186,
+    "source": "const u8 gText_SpDef3[] = _(\"SP. DEF\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 187,
+    "source": "const u8 gText_WontHaveEffect[] = _(\"It won't have any effect.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 188,
+    "source": "const u8 gText_NextFusionMon[] = _(\"Choose {PKMN} to fuse with.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 189,
+    "source": "const u8 gText_CantBeUsedOnPkmn[] = _(\"This can't be used on\\nthat POK\u00e9MON.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 190,
+    "source": "const u8 gText_PkmnCantSwitchOut[] = _(\"{STR_VAR_1} can't be switched\\nout!{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 191,
+    "source": "const u8 gText_PkmnAlreadyInBattle[] = _(\"{STR_VAR_1} is already\\nin battle!{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 192,
+    "source": "const u8 gText_PkmnAlreadySelected[] = _(\"{STR_VAR_1} has already been\\nselected.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 193,
+    "source": "const u8 gText_PkmnHasNoEnergy[] = _(\"{STR_VAR_1} has no energy\\nleft to battle!{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 194,
+    "source": "const u8 gText_CantSwitchWithAlly[] = _(\"You can't switch {STR_VAR_1}'s\\nPOK\u00e9MON with one of yours!{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 195,
+    "source": "const u8 gText_EggCantBattle[] = _(\"An EGG can't battle!{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 196,
+    "source": "const u8 gText_CantUseUntilNewBadge[] = _(\"This field move needs its HM\\nand the matching BADGE.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 197,
+    "source": "const u8 gText_NoMoreThanVar1Pkmn[] = _(\"No more than {STR_VAR_1} POK\u00e9MON\\nmay enter.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 198,
+    "source": "const u8 gText_SendMailToPC[] = _(\"Send the removed MAIL to\\nyour PC?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 199,
+    "source": "const u8 gText_MailSentToPC[] = _(\"The MAIL was sent to your PC.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 200,
+    "source": "const u8 gText_PCMailboxFull[] = _(\"Your PC's MAILBOX is full.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 201,
+    "source": "const u8 gText_MailMessageWillBeLost[] = _(\"If the MAIL is removed, the\\nmessage will be lost. Okay?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 202,
+    "source": "const u8 gText_RemoveMailBeforeItem[] = _(\"MAIL must be removed before\\nholding an item.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 203,
+    "source": "const u8 gText_PkmnWasGivenItem[] = _(\"{STR_VAR_1} was given the\\n{STR_VAR_2} to hold.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 204,
+    "source": "const u8 gText_PkmnAlreadyHoldingItemSwitch[] = _(\"{STR_VAR_1} is already holding\\none {STR_VAR_2}.\\pWould you like to switch the\\ntwo items?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 205,
+    "source": "const u8 gText_PkmnNotHolding[] = _(\"{STR_VAR_1} isn't holding\\nanything.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 206,
+    "source": "const u8 gText_ReceivedItemFromPkmn[] = _(\"Received the {STR_VAR_2}\\nfrom {STR_VAR_1}.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 207,
+    "source": "const u8 gText_MailTakenFromPkmn[] = _(\"MAIL was taken from the\\nPOK\u00e9MON.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 208,
+    "source": "const u8 gText_SwitchedPkmnItem[] = _(\"The {STR_VAR_2} was taken and\\nreplaced with the {STR_VAR_1}.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 209,
+    "source": "const u8 gText_PkmnHoldingItemCantHoldMail[] = _(\"This POK\u00e9MON is holding an\\nitem. It cannot hold MAIL.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 210,
+    "source": "const u8 gText_MailTransferredFromMailbox[] = _(\"MAIL was transferred from\\nthe MAILBOX.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 211,
+    "source": "const u8 gText_BagFullCouldNotRemoveItem[] = _(\"The BAG is full. The POK\u00e9MON's\\nitem could not be removed.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 212,
+    "source": "const u8 gText_PkmnLearnedMove3[] = _(\"{STR_VAR_1} learned\\n{STR_VAR_2}!\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 213,
+    "source": "const u8 gText_PkmnLearnedMove4[] = _(\"{STR_VAR_1} learned\\n{STR_VAR_2}!{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 214,
+    "source": "const u8 gText_PkmnCantLearnMove[] = _(\"{STR_VAR_1} and {STR_VAR_2}\\nare not compatible.\\p{STR_VAR_2} can't be\\nlearned.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 215,
+    "source": "const u8 gText_PkmnNeedsToReplaceMove[] = _(\"{STR_VAR_1} wants to learn the\\nmove {STR_VAR_2}.\\pHowever, {STR_VAR_1} already\\nknows four moves.\\pShould a move be deleted and\\nreplaced with {STR_VAR_2}?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 216,
+    "source": "const u8 gText_StopLearningMove2[] = _(\"Stop trying to teach\\n{STR_VAR_2}?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 217,
+    "source": "const u8 gText_MoveNotLearned[] = _(\"{STR_VAR_1} did not learn the\\nmove {STR_VAR_2}.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 218,
+    "source": "const u8 gText_WhichMoveToForget[] = _(\"Which move should be forgotten?{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 219,
+    "source": "const u8 gText_12PoofForgotMove[] = _(\"1, {PAUSE 15}2, and{PAUSE 15}\u2026 {PAUSE 15}\u2026 {PAUSE 15}\u2026 {PAUSE 15}{PLAY_SE SE_BALL_BOUNCE_1}Poof!\\p{STR_VAR_1} forgot how to\\nuse {STR_VAR_2}.\\pAnd\u2026{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 220,
+    "source": "const u8 gText_PkmnAlreadyKnows[] = _(\"{STR_VAR_1} already knows\\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 221,
+    "source": "const u8 gText_PkmnHPRestoredByVar2[] = _(\"{STR_VAR_1}'s HP was restored\\nby {STR_VAR_2} point(s).{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 222,
+    "source": "const u8 gText_PkmnCuredOfPoison[] = _(\"{STR_VAR_1} was cured of its\\npoisoning.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 223,
+    "source": "const u8 gText_PkmnCuredOfParalysis[] = _(\"{STR_VAR_1} was cured of\\nparalysis.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 224,
+    "source": "const u8 gText_PkmnWokeUp2[] = _(\"{STR_VAR_1} woke up.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 225,
+    "source": "const u8 gText_PkmnBurnHealed[] = _(\"{STR_VAR_1}'s burn was healed.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 226,
+    "source": "const u8 gText_PkmnFrostbiteHealed[] = _(\"{STR_VAR_1}'s frostbite was healed.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 227,
+    "source": "const u8 gText_PkmnThawedOut[] = _(\"{STR_VAR_1} was thawed out.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 228,
+    "source": "const u8 gText_PPWasRestored[] = _(\"PP was restored.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 229,
+    "source": "const u8 gText_PkmnRegainhedHealth[] = _(\"{STR_VAR_1} regained health.{PAUSE_UNTIL_PRESS}\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 230,
+    "source": "const u8 gText_PkmnBecameHealthy[] = _(\"{STR_VAR_1} became healthy.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 231,
+    "source": "const u8 gText_MovesPPIncreased[] = _(\"{STR_VAR_1}'s PP increased.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 232,
+    "source": "const u8 gText_PkmnElevatedToLvVar2[] = _(\"{STR_VAR_1} was elevated to\\nLv. {STR_VAR_2}.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 233,
+    "source": "const u8 gText_PkmnGainedExp[] = _(\"{STR_VAR_1} gained {STR_VAR_2} Exp. Points!{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 234,
+    "source": "const u8 gText_PkmnGainedExpAndElevatedToLvVar3[] = _(\"{STR_VAR_1} gained {STR_VAR_2} Exp. Points\\nand was elevated to Lv. {STR_VAR_3}!\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 235,
+    "source": "const u8 gText_PkmnBaseVar2StatIncreased[] = _(\"{STR_VAR_1}'s base {STR_VAR_2}\\nstat was raised.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 236,
+    "source": "const u8 gText_PkmnFriendlyBaseVar2Fell[] = _(\"{STR_VAR_1} turned friendly.\\nThe base {STR_VAR_2} fell!{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 237,
+    "source": "const u8 gText_PkmnAdoresBaseVar2Fell[] = _(\"{STR_VAR_1} adores you!\\nThe base {STR_VAR_2} fell!{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 238,
+    "source": "const u8 gText_PkmnFriendlyBaseVar2CantFall[] = _(\"{STR_VAR_1} turned friendly.\\nThe base {STR_VAR_2} can't fall!{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 239,
+    "source": "const u8 gText_PkmnSnappedOutOfConfusion[] = _(\"{STR_VAR_1} snapped out of its\\nconfusion.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 240,
+    "source": "const u8 gText_PkmnGotOverInfatuation[] = _(\"{STR_VAR_1} got over its\\ninfatuation.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 241,
+    "source": "const u8 gText_PkmnTransformed[] = _(\"{STR_VAR_1} transformed!{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 242,
+    "source": "const u8 gText_ThrowAwayItem[] = _(\"Throw away this\\n{STR_VAR_1}?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 243,
+    "source": "const u8 gText_ItemThrownAway[] = _(\"The {STR_VAR_1}\\nwas thrown away.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 244,
+    "source": "const u8 gText_TeachWhichPokemon2[] = _(\"Teach which POK\u00e9MON?\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 245,
+    "source": "const u8 gText_ChoosePokemon[] = _(\"Choose a Pok\u00e9mon.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 246,
+    "source": "const u8 gText_MoveToWhere[] = _(\"Move to where?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 247,
+    "source": "const u8 gText_TeachWhichPokemon[] = _(\"Teach which POK\u00e9MON?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 248,
+    "source": "const u8 gText_UseOnWhichPokemon[] = _(\"Use on which POK\u00e9MON?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 249,
+    "source": "const u8 gText_GiveToWhichPokemon[] = _(\"Give to which POK\u00e9MON?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 250,
+    "source": "const u8 gText_DoWhatWithPokemon[] = _(\"Do what with this {PKMN}?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 251,
+    "source": "const u8 gText_NothingToCut[] = _(\"There's nothing to CUT.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 252,
+    "source": "const u8 gText_CantSurfHere[] = _(\"You can't SURF here.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 253,
+    "source": "const u8 gText_AlreadySurfing[] = _(\"You're already SURFING.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 254,
+    "source": "const u8 gText_CantUseHere[] = _(\"Can't use that here.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 255,
+    "source": "const u8 gText_RestoreWhichMove[] = _(\"Restore which move?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 256,
+    "source": "const u8 gText_BoostPP[] = _(\"Boost PP of which move?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 257,
+    "source": "const u8 gText_DoWhatWithItem[] = _(\"Do what with an item?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 258,
+    "source": "const u8 gText_NoPokemonForBattle[] = _(\"No POK\u00e9MON for battle!\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 259,
+    "source": "const u8 gText_ChoosePokemon2[] = _(\"Choose a Pok\u00e9mon.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 260,
+    "source": "const u8 gText_NotEnoughHp[] = _(\"Not enough HP\u2026\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 261,
+    "source": "const u8 gText_PokemonAreNeeded[] = _(\"{STR_VAR_1} POK\u00e9MON are needed.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 262,
+    "source": "const u8 gText_PokemonCantBeSame[] = _(\"POK\u00e9MON can't be the same.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 263,
+    "source": "const u8 gText_NoIdenticalHoldItems[] = _(\"No identical hold items.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 264,
+    "source": "const u8 gText_CurrentIsTooFast[] = _(\"The current is much too fast!\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 265,
+    "source": "const u8 gText_DoWhatWithMail[] = _(\"Do what with the MAIL?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 266,
+    "source": "const u8 gText_ChoosePokemonCancel[] = _(\"Choose Pok\u00e9mon or Cancel.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 267,
+    "source": "const u8 gText_ChoosePokemonConfirm[] = _(\"Choose Pok\u00e9mon and confirm.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 268,
+    "source": "const u8 gText_SendWhichMonToPC[] = _(\"Send which POK\u00e9MON to the PC?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 269,
+    "source": "const u8 gText_MoveItemWhere[] = _(\"Move item to where?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 270,
+    "source": "const u8 gText_XsYAnd[] = _(\"{STR_VAR_1}'s {STR_VAR_2} and\\n\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 271,
+    "source": "const u8 gText_XsYWereSwapped[] = _(\"{STR_VAR_1}'s {STR_VAR_2} were swapped!{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 272,
+    "source": "const u8 gText_EnjoyCycling[] = _(\"Let's enjoy cycling!\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 273,
+    "source": "const u8 gText_InUseAlready_PM[] = _(\"This is in use already.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 274,
+    "source": "const u8 gText_AlreadyHoldingOne[] = _(\"{STR_VAR_1} is already holding\\none {STR_VAR_2}.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 275,
+    "source": "const u8 gText_WhichAppliance[] = _(\"Order which\\nappliance?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 276,
+    "source": "const u8 gText_NoUse[] = _(\"No use.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 277,
+    "source": "const u8 gText_Able[] = _(\"ABLE\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 278,
+    "source": "const u8 gText_First_PM[] = _(\"FIRST\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 279,
+    "source": "const u8 gText_Second_PM[] = _(\"SECOND\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 280,
+    "source": "const u8 gText_Third_PM[] = _(\"THIRD\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 281,
+    "source": "const u8 gText_Able2[] = _(\"ABLE\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 282,
+    "source": "const u8 gText_NotAble[] = _(\"NOT ABLE\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 283,
+    "source": "const u8 gText_Able3[] = _(\"ABLE!\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 284,
+    "source": "const u8 gText_NotAble2[] = _(\"NOT ABLE!\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 285,
+    "source": "const u8 gText_Learned[] = _(\"LEARNED\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 286,
+    "source": "const u8 gText_Have[] = _(\"HAVE\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 287,
+    "source": "const u8 gText_DontHave[] = _(\"DON'T HAVE\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 288,
+    "source": "const u8 gText_Fourth[] = _(\"FOURTH\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 289,
+    "source": "const u8 gText_PkmnCantParticipate[] = _(\"That POK\u00e9MON can't participate.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 290,
+    "source": "const u8 gText_CancelParticipation[] = _(\"Cancel participation?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 291,
+    "source": "const u8 gText_CancelBattle[] = _(\"Cancel the battle?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 292,
+    "source": "const u8 gText_ReturnToWaitingRoom[] = _(\"Return to the WAITING ROOM?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 293,
+    "source": "const u8 gText_CancelChallenge[] = _(\"Cancel the challenge?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 294,
+    "source": "const u8 gText_EscapeFromHere[] = _(\"Want to escape from here and return\\nto {STR_VAR_1}?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 295,
+    "source": "const u8 gText_ReturnToHealingSpot[] = _(\"Want to return to the healing spot\\nused last in {STR_VAR_1}?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 296,
+    "source": "const u8 gText_PauseUntilPress[] = _(\"{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 297,
+    "source": "const u8 gJPText_AreYouSureYouWantToSpinTradeMon[] = _(\"{STR_VAR_1}\u3092 \u3050\u308b\u3050\u308b\u3053\u3046\u304b\u3093\u306b\\n\u3060\u3057\u3066 \u3088\u308d\u3057\u3044\u3067\u3059\u304b\uff1f\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 298,
+    "source": "ALIGNED(4) const u8 gText_OnlyPkmnForBattle[] = _(\"That's your only\\nPOK\u00e9MON for battle.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 299,
+    "source": "ALIGNED(4) const u8 gText_PkmnCantBeTradedNow[] = _(\"That POK\u00e9MON can't be traded\\nnow.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 300,
+    "source": "ALIGNED(4) const u8 gText_PkmnCantBeTraded[] = _(\"That POK\u00e9MON can't be traded.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 301,
+    "source": "ALIGNED(4) const u8 gText_EggCantBeTradedNow[] = _(\"An EGG can't be traded now.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 302,
+    "source": "ALIGNED(4) const u8 gText_OtherTrainersPkmnCantBeTraded[] = _(\"The other TRAINER's POK\u00e9MON\\ncan't be traded now.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 303,
+    "source": "ALIGNED(4) const u8 gText_OtherTrainerCantAcceptPkmn[] = _(\"The other TRAINER can't accept\\nthat POK\u00e9MON now.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 304,
+    "source": "ALIGNED(4) const u8 gText_CantTradeWithTrainer[] = _(\"You can't trade with that\\nTRAINER now.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 305,
+    "source": "ALIGNED(4) const u8 gText_NotPkmnOtherTrainerWants[] = _(\"That isn't the type of POK\u00e9MON\\nthat the other TRAINER wants.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 306,
+    "source": "ALIGNED(4) const u8 gText_ThatIsntAnEgg[] = _(\"That isn't an EGG.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 307,
+    "source": "const u8 gText_Register[] = _(\"Register\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 308,
+    "source": "const u8 gText_Attack3[] = _(\"Attack\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 309,
+    "source": "const u8 gText_Defense3[] = _(\"Defense\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 310,
+    "source": "const u8 gText_SpAtk4[] = _(\"Sp. Atk\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 311,
+    "source": "const u8 gText_SpDef4[] = _(\"Sp. Def\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 312,
+    "source": "const u8 gText_Speed2[] = _(\"Speed\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 313,
+    "source": "const u8 gText_HP4[] = _(\"HP\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 314,
+    "source": "const u8 gText_EmptyString8[] = _(\"\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 315,
+    "source": "const u8 gText_OTSlash[] = _(\"OT/\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 316,
+    "source": "const u8 gText_RentalPkmn[] = _(\"RENTAL POK\u00e9MON\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 317,
+    "source": "const u8 gText_TypeSlash[] = _(\"Type/\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 318,
+    "source": "const u8 gText_Power[] = _(\"POWER\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 319,
+    "source": "const u8 gText_Accuracy2[] = _(\"ACCURACY\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 320,
+    "source": "const u8 gText_Appeal[] = _(\"APPEAL\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 321,
+    "source": "const u8 gText_Jam[] = _(\"JAM\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 322,
+    "source": "const u8 gText_Status[] = _(\"STATUS\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 323,
+    "source": "const u8 gText_ExpPoints[] = _(\"Exp. Points\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 324,
+    "source": "const u8 gText_NextLv[] = _(\"Next Lv.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 325,
+    "source": "const u8 gText_RibbonsVar1[] = _(\"{STR_VAR_1}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 326,
+    "source": "const u8 gText_EmptyString5[] = _(\"\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 327,
+    "source": "const u8 gText_Events[] = _(\"EVENTS\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 328,
+    "source": "const u8 gText_Switch[] = _(\"SWITCH\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 329,
+    "source": "const u8 gText_PkmnInfo[] = _(\"Pok\u00e9mon Info\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 330,
+    "source": "const u8 gText_PkmnSkills[] = _(\"Pok\u00e9mon Skills\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 331,
+    "source": "const u8 gText_BattleMoves[] = _(\"Battle Moves\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 332,
+    "source": "const u8 gText_ContestMoves[] = _(\"CONTEST MOVES\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 333,
+    "source": "const u8 gText_Info[] = _(\"Info\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 334,
+    "source": "const u8 gText_EggWillTakeALongTime[] = _(\"It looks like this EGG will\\ntake a long time to hatch.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 335,
+    "source": "const u8 gText_EggWillTakeSomeTime[] = _(\"What will hatch from this?\\nIt will take some time.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 336,
+    "source": "const u8 gText_EggWillHatchSoon[] = _(\"It moves occasionally.\\nIt should hatch soon.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 337,
+    "source": "const u8 gText_EggAboutToHatch[] = _(\"It's making sounds.\\nIt's about to hatch!\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 338,
+    "source": "const u8 gText_HMMovesCantBeForgotten2[] = _(\"HM moves can't be\\nforgotten now.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 339,
+    "source": "const u8 gText_XNatureMetAtYZ[] = _(\"{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\\nmet at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1},\\n{DYNAMIC 0}{DYNAMIC 4}{DYNAMIC 1}.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 340,
+    "source": "const u8 gText_XNatureHatchedAtYZ[] = _(\"{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\\nhatched at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1},\\n{DYNAMIC 0}{DYNAMIC 4}{DYNAMIC 1}.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 341,
+    "source": "const u8 gText_XNatureObtainedInTrade[] = _(\"{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\\nobtained in a trade.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 342,
+    "source": "const u8 gText_XNatureFatefulEncounter[] = _(\"{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\\nobtained in a fateful\\nencounter at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1}.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 343,
+    "source": "const u8 gText_XNatureProbablyMetAt[] = _(\"{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\\nprobably met at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1},\\n{DYNAMIC 0}{DYNAMIC 4}{DYNAMIC 1}.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 344,
+    "source": "const u8 gText_XNature[] = _(\"{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 345,
+    "source": "const u8 gText_XNatureMetSomewhereAt[] = _(\"{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\\nmet somewhere at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1}.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 346,
+    "source": "const u8 gText_XNatureHatchedSomewhereAt[] = _(\"{DYNAMIC 0}{DYNAMIC 2}{DYNAMIC 1}{DYNAMIC 5} nature,\\nhatched somewhere at {LV_2}{DYNAMIC 0}{DYNAMIC 3}{DYNAMIC 1}.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 347,
+    "source": "const u8 gText_OddEggFoundByCouple[] = _(\"An odd POK\u00e9MON EGG found\\nby the DAY CARE couple.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 348,
+    "source": "const u8 gText_PeculiarEggNicePlace[] = _(\"A peculiar POK\u00e9MON EGG\\nobtained at the nice place.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 349,
+    "source": "const u8 gText_PeculiarEggTrade[] = _(\"A peculiar POK\u00e9MON EGG\\nobtained in a trade.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 350,
+    "source": "const u8 gText_EggFromHotSprings[] = _(\"A POK\u00e9MON EGG obtained\\nat the hot springs.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 351,
+    "source": "const u8 gText_EggFromTraveler[] = _(\"An odd POK\u00e9MON EGG\\nobtained from a traveler.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 352,
+    "source": "const u8 gText_ApostropheSBase[] = _(\"'s BASE\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 353,
+    "source": "const u8 gText_OkayToDeleteFromRegistry[] = _(\"Is it okay to delete {STR_VAR_1}\\nfrom the REGISTRY?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 354,
+    "source": "const u8 gText_RegisteredDataDeleted[] = _(\"The registered data was deleted.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 355,
+    "source": "const u8 gText_NoRegistry[] = _(\"There is no REGISTRY.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 356,
+    "source": "const u8 gText_DelRegist[] = _(\"DEL REGIST.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 357,
+    "source": "const u8 gText_Var3Var1SlashVar2[] = _(\"{STR_VAR_3}{STR_VAR_1}/{STR_VAR_2}\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 358,
+    "source": "const u8 gText_Decorate[] = _(\"DECORATE\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 359,
+    "source": "const u8 gText_PutAway[] = _(\"PUT AWAY\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 360,
+    "source": "const u8 gText_Toss2[] = _(\"TOSS\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 361,
+    "source": "const u8 gText_Color161Shadow161[] = _(\"{COLOR 161}{SHADOW 161}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 362,
+    "source": "const u8 gText_PutOutSelectedDecorItem[] = _(\"Put out the selected decoration item.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 363,
+    "source": "const u8 gText_StoreChosenDecorInPC[] = _(\"Store the chosen decoration in the PC.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 364,
+    "source": "const u8 gText_ThrowAwayUnwantedDecors[] = _(\"Throw away unwanted decorations.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 365,
+    "source": "const u8 gText_NoDecorations[] = _(\"There are no decorations.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 366,
+    "source": "const u8 gText_Desk[] = _(\"DESK\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 367,
+    "source": "const u8 gText_Chair[] = _(\"CHAIR\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 368,
+    "source": "const u8 gText_Plant[] = _(\"PLANT\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 369,
+    "source": "const u8 gText_Ornament[] = _(\"ORNAMENT\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 370,
+    "source": "const u8 gText_Mat[] = _(\"MAT\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 371,
+    "source": "const u8 gText_Poster[] = _(\"POSTER\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 372,
+    "source": "const u8 gText_Doll[] = _(\"DOLL\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 373,
+    "source": "const u8 gText_Cushion[] = _(\"CUSHION\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 374,
+    "source": "const u8 gText_Gold[] = _(\"GOLD\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 375,
+    "source": "const u8 gText_Silver[] = _(\"SILVER\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 376,
+    "source": "const u8 gText_PlaceItHere[] = _(\"Place it here?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 377,
+    "source": "const u8 gText_CantBePlacedHere[] = _(\"It can't be placed here.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 378,
+    "source": "const u8 gText_CancelDecorating[] = _(\"Cancel decorating?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 379,
+    "source": "const u8 gText_InUseAlready[] = _(\"This is in use already.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 380,
+    "source": "const u8 gText_NoMoreDecorations[] = _(\"No more decorations can be placed.\\nThe most that can be placed are {STR_VAR_1}.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 381,
+    "source": "const u8 gText_NoMoreDecorations2[] = _(\"No more decorations can be placed.\\nThe most that can be placed are {STR_VAR_1}.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 382,
+    "source": "const u8 gText_MustBePlacedOnDesk[] = _(\"This can't be placed here.\\nIt must be on a DESK, etc.\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 383,
+    "source": "const u8 gText_CantPlaceInRoom[] = _(\"This decoration can't be placed in\\nyour own room.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 384,
+    "source": "const u8 gText_CantThrowAwayInUse[] = _(\"This decoration is in use.\\nIt can't be thrown away.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 385,
+    "source": "const u8 gText_DecorationWillBeDiscarded[] = _(\"This {STR_VAR_1} will be discarded.\\nIs that okay?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 386,
+    "source": "const u8 gText_DecorationThrownAway[] = _(\"The decoration item was thrown away.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 387,
+    "source": "const u8 gText_StopPuttingAwayDecorations[] = _(\"Stop putting away decorations?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 388,
+    "source": "const u8 gText_NoDecorationHere[] = _(\"There is no decoration item here.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 389,
+    "source": "const u8 gText_ReturnDecorationToPC[] = _(\"Return this decoration to the PC?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 390,
+    "source": "const u8 gText_DecorationReturnedToPC[] = _(\"The decoration was returned to the PC.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 391,
+    "source": "const u8 gText_NoDecorationsInUse[] = _(\"There are no decorations in use.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 392,
+    "source": "const u8 gText_NoItems[] = _(\"There are no items.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 393,
+    "source": "const u8 gText_NoMailHere[] = _(\"There's no MAIL here.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 394,
+    "source": "const u8 gText_WhatToDoWithVar1sMail[] = _(\"What would you like to do with\\n{STR_VAR_1}'s MAIL?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 395,
+    "source": "const u8 gText_MessageWillBeLost[] = _(\"The message will be lost.\\nIs that okay?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 396,
+    "source": "const u8 gText_BagIsFull[] = _(\"The BAG is full.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 397,
+    "source": "const u8 gText_MailToBagMessageErased[] = _(\"The MAIL was returned to the BAG\\nwith its message erased.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 398,
+    "source": "const u8 gText_Dad[] = _(\"DAD\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 399,
+    "source": "const u8 gText_Mom[] = _(\"MOM\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 400,
+    "source": "const u8 gText_CoolnessContest[] = _(\"COOLNESS CONTEST\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 401,
+    "source": "const u8 gText_BeautyContest[] = _(\"BEAUTY CONTEST\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 402,
+    "source": "const u8 gText_CutenessContest[] = _(\"CUTENESS CONTEST\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 403,
+    "source": "const u8 gText_SmartnessContest[] = _(\"SMARTNESS CONTEST\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 404,
+    "source": "const u8 gText_ToughnessContest[] = _(\"TOUGHNESS CONTEST\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 405,
+    "source": "const u8 gText_Information[] = _(\"INFORMATION\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 406,
+    "source": "const u8 gText_Yes[] = _(\"YES\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 407,
+    "source": "const u8 gText_No[] = _(\"NO\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 408,
+    "source": "const u8 gText_Lv50[] = _(\"LV. 50\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 409,
+    "source": "const u8 gText_OpenLevel[] = _(\"OPEN LEVEL\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 410,
+    "source": "const u8 gText_BattleFrontier[] = _(\"BATTLE FRONTIER\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 411,
+    "source": "const u8 gText_Cool[] = _(\"COOL\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 412,
+    "source": "const u8 gText_Beauty[] = _(\"BEAUTY\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 413,
+    "source": "const u8 gText_Cute[] = _(\"CUTE\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 414,
+    "source": "const u8 gText_Smart[] = _(\"SMART\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 415,
+    "source": "const u8 gText_Tough[] = _(\"TOUGH\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 416,
+    "source": "const u8 gText_Normal[] = _(\"NORMAL\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 417,
+    "source": "const u8 gText_Super[] = _(\"SUPER\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 418,
+    "source": "const u8 gText_Hyper[] = _(\"HYPER\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 419,
+    "source": "const u8 gText_Master[] = _(\"MASTER\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 420,
+    "source": "const u8 gText_SomeonesPC[] = _(\"SOMEONE'S PC\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 421,
+    "source": "const u8 gText_LanettesPC[] = _(\"LANETTE'S PC\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 422,
+    "source": "const u8 gText_BillsPc[] = _(\"BILL'S PC\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 423,
+    "source": "const u8 gText_PlayersPC[] = _(\"{PLAYER}'s PC\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 424,
+    "source": "const u8 gText_HallOfFame[] = _(\"HALL OF FAME\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 425,
+    "source": "const u8 gText_LogOff[] = _(\"LOG OFF\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 426,
+    "source": "const u8 gText_Single2[] = _(\"SINGLE\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 427,
+    "source": "const u8 gText_Double2[] = _(\"DOUBLE\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 428,
+    "source": "const u8 gText_Multi[] = _(\"MULTI\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 429,
+    "source": "const u8 gText_MultiLink[] = _(\"MULTI-LINK\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 430,
+    "source": "const u8 gText_MenuOptionPokedex[] = _(\"POK\u00e9DEX\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 431,
+    "source": "const u8 gText_MenuOptionPokemon[] = _(\"POK\u00e9MON\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 432,
+    "source": "const u8 gText_MenuOptionBag[] = _(\"BAG\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 433,
+    "source": "const u8 gText_MenuOptionPokenav[] = _(\"POK\u00e9NAV\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 434,
+    "source": "const u8 gText_MenuOptionSave[] = _(\"SAVE\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 435,
+    "source": "const u8 gText_MenuOptionOption[] = _(\"OPTION\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 436,
+    "source": "const u8 gText_MenuOptionExit[] = _(\"EXIT\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 437,
+    "source": "const u8 gText_SouthernIsland[] = _(\"SOUTHERN ISLAND\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 438,
+    "source": "const u8 gText_BirthIsland[] = _(\"BIRTH ISLAND\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 439,
+    "source": "const u8 gText_FarawayIsland[] = _(\"FARAWAY ISLAND\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 440,
+    "source": "const u8 gText_NavelRock[] = _(\"NAVEL ROCK\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 441,
+    "source": "const u8 gText_NormalTagMatch[] = _(\"NORMAL TAG MATCH\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 442,
+    "source": "const u8 gText_VarietyTagMatch[] = _(\"VARIETY TAG MATCH\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 443,
+    "source": "const u8 gText_UniqueTagMatch[] = _(\"UNIQUE TAG MATCH\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 444,
+    "source": "const u8 gText_ExpertTagMatch[] = _(\"EXPERT TAG MATCH\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 445,
+    "source": "const u8 gText_BattleBasics[] = _(\"BATTLE BASICS\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 446,
+    "source": "const u8 gText_PokemonNature[] = _(\"POK\u00e9MON NATURE\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 447,
+    "source": "const u8 gText_PokemonMoves[] = _(\"POK\u00e9MON MOVES\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 448,
+    "source": "const u8 gText_Underpowered[] = _(\"UNDERPOWERED\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 449,
+    "source": "const u8 gText_WhenInDanger[] = _(\"WHEN IN DANGER\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 450,
+    "source": "const u8 gText_BattlePokemon[] = _(\"BATTLE POK\u00e9MON\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 451,
+    "source": "const u8 gText_BattleTrainers[] = _(\"BATTLE TRAINERS\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 452,
+    "source": "const u8 gText_1F[] = _(\"1F\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 453,
+    "source": "const u8 gText_2F[] = _(\"2F\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 454,
+    "source": "const u8 gText_3F[] = _(\"3F\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 455,
+    "source": "const u8 gText_4F[] = _(\"4F\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 456,
+    "source": "const u8 gText_5F[] = _(\"5F\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 457,
+    "source": "const u8 gText_6F[] = _(\"6F\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 458,
+    "source": "const u8 gText_7F[] = _(\"7F\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 459,
+    "source": "const u8 gText_8F[] = _(\"8F\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 460,
+    "source": "const u8 gText_9F[] = _(\"9F\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 461,
+    "source": "const u8 gText_10F[] = _(\"10F\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 462,
+    "source": "const u8 gText_11F[] = _(\"11F\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 463,
+    "source": "const u8 gText_B1F[] = _(\"B1F\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 464,
+    "source": "const u8 gText_B2F[] = _(\"B2F\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 465,
+    "source": "const u8 gText_B3F[] = _(\"B3F\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 466,
+    "source": "const u8 gText_B4F[] = _(\"B4F\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 467,
+    "source": "const u8 gText_Rooftop[] = _(\"ROOFTOP\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 468,
+    "source": "const u8 gText_ElevatorNowOn[] = _(\"Now on:\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 469,
+    "source": "const u8 gText_BP[] = _(\"BP\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 470,
+    "source": "const u8 gText_RankingHall[] = _(\"RANKING HALL\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 471,
+    "source": "const u8 gText_ExchangeService[] = _(\"EXCHANGE SERVICE\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 472,
+    "source": "const u8 gText_SlateportCity[] = _(\"SLATEPORT CITY\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 473,
+    "source": "const u8 gText_Exit[] = _(\"EXIT\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 474,
+    "source": "const u8 gText_YourPartysFull[] = _(\"Your party's full!{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 475,
+    "source": "const u8 gText_InParty[] = _(\"IN PARTY\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 476,
+    "source": "const u8 gText_PokemonMaleLv[] = _(\"{DYNAMIC 0}{BACKGROUND WHITE}{TEXT_COLORS LIGHT_RED GREEN WHITE}\u2642{BACKGROUND WHITE}{TEXT_COLORS DARK_GRAY LIGHT_GRAY WHITE}/{LV}{DYNAMIC 1}\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 477,
+    "source": "const u8 gText_PokemonFemaleLv[] = _(\"{DYNAMIC 0}{BACKGROUND WHITE}{TEXT_COLORS LIGHT_GREEN BLUE WHITE}\u2640{BACKGROUND WHITE}{TEXT_COLORS DARK_GRAY LIGHT_GRAY WHITE}/{LV}{DYNAMIC 1}\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 478,
+    "source": "const u8 gText_PokemonNoGenderLv[] = _(\"{DYNAMIC 0}/{LV}{DYNAMIC 1}\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 479,
+    "source": "const u8 gText_PokemonMaleLv2[] = _(\"{DYNAMIC 0}{BACKGROUND WHITE}{TEXT_COLORS LIGHT_RED GREEN WHITE}\u2642{BACKGROUND WHITE}{TEXT_COLORS DARK_GRAY LIGHT_GRAY WHITE}/{LV}{DYNAMIC 1}{DYNAMIC 2}\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 480,
+    "source": "const u8 gText_PokemonFemaleLv2[] = _(\"{DYNAMIC 0}{BACKGROUND WHITE}{TEXT_COLORS LIGHT_GREEN BLUE WHITE}\u2640{BACKGROUND WHITE}{TEXT_COLORS DARK_GRAY LIGHT_GRAY WHITE}/{LV}{DYNAMIC 1}{DYNAMIC 2}\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 481,
+    "source": "const u8 gText_PokemonNoGenderLv2[] = _(\"{DYNAMIC 0}/{LV}{DYNAMIC 1}{DYNAMIC 2}\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 482,
+    "source": "const u8 gText_CombineFourWordsOrPhrases[] = _(\"Combine four words or phrases\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 483,
+    "source": "const u8 gText_AndMakeYourProfile[] = _(\"and make your profile.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 484,
+    "source": "const u8 gText_CombineSixWordsOrPhrases[] = _(\"Combine six words or phrases\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 485,
+    "source": "const u8 gText_AndMakeAMessage[] = _(\"and make a message.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 486,
+    "source": "const u8 gText_FindWordsThatDescribeYour[] = _(\"Find words that describe your\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 487,
+    "source": "const u8 gText_FeelingsRightNow[] = _(\"feelings right now.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 488,
+    "source": "const u8 gText_WithFourPhrases[] = _(\"With four phrases,\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 489,
+    "source": "const u8 gText_CombineNineWordsOrPhrases[] = _(\"Combine nine words or phrases\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 490,
+    "source": "const u8 gText_AndMakeAMessage2[] = _(\"and make a message.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 491,
+    "source": "const u8 gText_ChangeJustOneWordOrPhrase[] = _(\"Change just one word or phrase\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 492,
+    "source": "const u8 gText_AndImproveTheBardsSong[] = _(\"and improve the BARD's song.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 493,
+    "source": "const u8 gText_YourProfile[] = _(\"Your profile\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 494,
+    "source": "const u8 gText_YourFeelingAtTheBattlesStart[] = _(\"Your feeling at the battle's start\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 495,
+    "source": "const u8 gText_WhatYouSayIfYouWin[] = _(\"What you say if you win a battle\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 496,
+    "source": "const u8 gText_WhatYouSayIfYouLose[] = _(\"What you say if you lose a battle\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 497,
+    "source": "const u8 gText_TheAnswer[] = _(\"The answer\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 498,
+    "source": "const u8 gText_TheMailMessage[] = _(\"The MAIL message\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 499,
+    "source": "const u8 gText_TheMailSalutation[] = _(\"The MAIL salutation\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 500,
+    "source": "const u8 gText_TheBardsSong2[] = _(\"The new song\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 501,
+    "source": "const u8 gText_CombineTwoWordsOrPhrases[] = _(\"Combine two words or phrases\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 502,
+    "source": "const u8 gText_AndMakeATrendySaying[] = _(\"and make a trendy saying.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 503,
+    "source": "const u8 gText_TheTrendySaying[] = _(\"The trendy saying\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 504,
+    "source": "const u8 gText_IsAsShownOkay[] = _(\"is as shown. Okay?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 505,
+    "source": "const u8 gText_CombineTwoWordsOrPhrases2[] = _(\"Combine two words or phrases\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 506,
+    "source": "const u8 gText_ToTeachHerAGoodSaying[] = _(\"to teach her a good saying.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 507,
+    "source": "const u8 gText_FindWordsWhichFit[] = _(\"Find words which fit\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 508,
+    "source": "const u8 gText_TheTrainersImage[] = _(\"the TRAINER's image.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 509,
+    "source": "const u8 gText_TheImage[] = _(\"The image:\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 510,
+    "source": "const u8 gText_OutOfTheListedChoices[] = _(\"Out of the listed choices,\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 511,
+    "source": "const u8 gText_SelectTheAnswerToTheQuiz[] = _(\"select the answer to the quiz!\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 512,
+    "source": "const u8 gText_AndCreateAQuiz[] = _(\"and create a quiz!\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 513,
+    "source": "const u8 gText_PickAWordOrPhraseAnd[] = _(\"Pick a word or phrase and\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 514,
+    "source": "const u8 gText_SetTheQuizAnswer[] = _(\"set the quiz answer.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 515,
+    "source": "const u8 gText_TheAnswerColon[] = _(\"The answer:\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 516,
+    "source": "const u8 gText_TheQuizColon[] = _(\"The quiz:\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 517,
+    "source": "const u8 gText_ApprenticePhrase[] = _(\"Apprentice's phrase:\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 518,
+    "source": "const u8 gText_QuitEditing[] = _(\"Quit editing?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 519,
+    "source": "const u8 gText_StopGivingPkmnMail[] = _(\"Stop giving the POK\u00e9MON MAIL?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 520,
+    "source": "const u8 gText_AndFillOutTheQuestionnaire[] = _(\"and fill out the questionnaire.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 521,
+    "source": "const u8 gText_LetsReplyToTheInterview[] = _(\"Let's reply to the interview!\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 522,
+    "source": "const u8 gText_AllTextBeingEditedWill[] = _(\"All the text being edited will\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 523,
+    "source": "const u8 gText_BeDeletedThatOkay[] = _(\"be deleted. Is that okay?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 524,
+    "source": "const u8 gText_QuitEditing2[] = _(\"Quit editing?\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 525,
+    "source": "const u8 gText_EditedTextWillNotBeSaved[] = _(\"The edited text will not be saved.\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 526,
+    "source": "const u8 gText_IsThatOkay[] = _(\"Is that okay?\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 527,
+    "source": "const u8 gText_PleaseEnterPhraseOrWord[] = _(\"Please enter a phrase or word.\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 528,
+    "source": "const u8 gText_EntireTextCantBeDeleted[] = _(\"The entire text can't be deleted.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 529,
+    "source": "const u8 gText_OnlyOnePhrase[] = _(\"Only one phrase may be changed.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 530,
+    "source": "const u8 gText_OriginalSongWillBeUsed[] = _(\"The original song will be used.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 531,
+    "source": "const u8 gText_ThatsTrendyAlready[] = _(\"That's trendy already!\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 532,
+    "source": "const u8 gText_CombineTwoWordsOrPhrases3[] = _(\"Combine two words or phrases.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 533,
+    "source": "const u8 gText_QuitGivingInfo[] = _(\"Quit giving information?\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 534,
+    "source": "const u8 gText_StopGivingPkmnMail2[] = _(\"Stop giving the POK\u00e9MON MAIL?\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 535,
+    "source": "const u8 gText_CreateAQuiz2[] = _(\"Create a quiz!\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 536,
+    "source": "const u8 gText_SetTheAnswer[] = _(\"Set the answer!\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 537,
+    "source": "const u8 gText_CancelSelection[] = _(\"Cancel the selection?\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 538,
+    "source": "const u8 gText_Profile[] = _(\"PROFILE\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 539,
+    "source": "const u8 gText_AtTheBattlesStart[] = _(\"At the battle's start:\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 540,
+    "source": "const u8 gText_UponWinningABattle[] = _(\"Upon winning a battle:\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 541,
+    "source": "const u8 gText_UponLosingABattle[] = _(\"Upon losing a battle:\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 542,
+    "source": "const u8 gText_TheBardsSong[] = _(\"The BARD's Song\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 543,
+    "source": "const u8 gText_WhatsHipAndHappening[] = _(\"What's hip and happening?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 544,
+    "source": "const u8 gText_Interview[] = _(\"Interview\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 545,
+    "source": "const u8 gText_GoodSaying[] = _(\"Good saying\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 546,
+    "source": "const u8 gText_FansQuestion[] = _(\"Fan's question\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 547,
+    "source": "const u8 gJPText_WhatIsTheQuizAnswer[] = _(\"\u30af\u30a4\u30ba\u306e \u3053\u305f\u3048\u306f\uff1f\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 548,
+    "source": "const u8 gText_ApprenticesPhrase[] = _(\"Apprentice's phrase\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 549,
+    "source": "const u8 gText_Questionnaire[] = _(\"QUESTIONNAIRE\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 550,
+    "source": "const u8 gText_YouCannotQuitHere[] = _(\"You cannot quit here.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 551,
+    "source": "const u8 gText_SectionMustBeCompleted[] = _(\"This section must be completed.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 552,
+    "source": "const u8 gText_F700sQuiz[] = _(\"{DYNAMIC 0}'s quiz\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 553,
+    "source": "const u8 gText_Lady[] = _(\"Lady\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 554,
+    "source": "const u8 gText_AfterYouHaveReadTheQuiz[] = _(\"After you have read the quiz\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 555,
+    "source": "const u8 gText_QuestionPressTheAButton[] = _(\"question, press the A Button.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 556,
+    "source": "const u8 gText_TheQuizAnswerIs[] = _(\"The quiz answer is?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 557,
+    "source": "const u8 gText_LikeToQuitQuiz[] = _(\"Would you like to quit this quiz\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 558,
+    "source": "const u8 gText_ChallengeQuestionMark[] = _(\"challenge?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 559,
+    "source": "const u8 gText_IsThisQuizOK[] = _(\"Is this quiz OK?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 560,
+    "source": "const u8 gText_CreateAQuiz[] = _(\"Create a quiz!\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 561,
+    "source": "const u8 gText_SelectTheAnswer[] = _(\"Select the answer!\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 562,
+    "source": "const u8 gText_LyricsCantBeDeleted[] = _(\"The lyrics can't be deleted.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 563,
+    "source": "const u8 gText_PokemonLeague[] = _(\"POK\u00e9MON LEAGUE\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 564,
+    "source": "const u8 gText_PokemonCenter[] = _(\"POK\u00e9MON CENTER\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 565,
+    "source": "const u8 gText_Coolness[] = _(\"Coolness \");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 566,
+    "source": "const u8 gText_Beauty3[] = _(\"Beauty \");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 567,
+    "source": "const u8 gText_Cuteness[] = _(\"Cuteness \");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 568,
+    "source": "const u8 gText_Smartness[] = _(\"Smartness \");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 569,
+    "source": "const u8 gText_Toughness[] = _(\"Toughness \");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 570,
+    "source": "const u8 gText_SaveFailedCheckingBackup[] = _(\"Save failed. Checking the backup\\nmemory\u2026 Please wait.\\n{COLOR RED}\u201cTime required: about 1 minute\u201d\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 571,
+    "source": "const u8 gText_BackupMemoryDamaged[] = _(\"The backup memory is damaged, or\\nthe internal battery has run dry.\\nYou can still play, but not save.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 572,
+    "source": "const u8 gText_GamePlayCannotBeContinued[] = _(\"{COLOR RED}\u201cGame play cannot be continued.\\nReturning to the title screen\u2026\u201d\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 573,
+    "source": "const u8 gText_CheckCompleted[] = _(\"Check completed.\\nAttempting to save again.\\nPlease wait.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 574,
+    "source": "const u8 gText_SaveCompleteGameCannotContinue[] = _(\"Save completed.\\n{COLOR RED}\u201cGame play cannot be continued.\\nReturning to the title screen.\u201d\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 575,
+    "source": "const u8 gText_SaveCompletePressA[] = _(\"Save completed.\\n{COLOR RED}\u201cPlease press the A Button.\u201d\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 576,
+    "source": "const u8 gText_Ferry[] = _(\"FERRY\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 577,
+    "source": "const u8 gText_SecretBase[] = _(\"SECRET BASE\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 578,
+    "source": "const u8 gText_Hideout[] = _(\"HIDEOUT\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 579,
+    "source": "const u8 gText_ResetRTCConfirmCancel[] = _(\"Reset RTC?\\nA: Confirm, B: Cancel\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 580,
+    "source": "const u8 gText_PresentTime[] = _(\"Present time in game\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 581,
+    "source": "const u8 gText_PreviousTime[] = _(\"Previous time in game\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 582,
+    "source": "const u8 gText_PleaseResetTime[] = _(\"Please reset the time.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 583,
+    "source": "const u8 gText_ClockHasBeenReset[] = _(\"The clock has been reset.\\nData will be saved. Please wait.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 584,
+    "source": "const u8 gText_SaveCompleted[] = _(\"Save completed.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 585,
+    "source": "const u8 gText_SaveFailed[] = _(\"Save failed\u2026\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 586,
+    "source": "const u8 gText_NoSaveFileCantSetTime[] = _(\"There is no save file, so the time\\ncan't be set.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 587,
+    "source": "const u8 gText_InGameClockUsable[] = _(\"The in-game clock adjustment system\\nis now useable.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 588,
+    "source": "const u8 gText_Spicy2[] = _(\"spicy\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 589,
+    "source": "const u8 gText_Dry2[] = _(\"dry\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 590,
+    "source": "const u8 gText_Sweet2[] = _(\"sweet\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 591,
+    "source": "const u8 gText_Bitter2[] = _(\"bitter\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 592,
+    "source": "const u8 gText_Sour2[] = _(\"sour\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 593,
+    "source": "const u8 gText_Single[] = _(\"SINGLE\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 594,
+    "source": "const u8 gText_Double[] = _(\"DOUBLE\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 595,
+    "source": "const u8 gText_Knockout[] = _(\"KNOCKOUT\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 596,
+    "source": "const u8 gText_Mixed[] = _(\"MIXED\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 597,
+    "source": "const u8 gText_First[] = _(\"first\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 598,
+    "source": "const u8 gText_Second[] = _(\"second\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 599,
+    "source": "const u8 gText_Third[] = _(\"third\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 601,
+    "source": "const u8 gText_PkmnFainted_FldPsn[] = _(\"{STR_VAR_1} fainted\u2026\\p\\n\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 603,
+    "source": "const u8 gText_PkmnFainted_FldPsn[] = _(\"{STR_VAR_1} survived the poisoning.\\nThe poison faded away!\\p\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 605,
+    "source": "const u8 gText_Marco[] = _(\"MARCO\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 606,
+    "source": "const u8 gText_TrainerCardName[] = _(\"NAME: \");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 607,
+    "source": "const u8 gText_TrainerCardIDNo[] = _(\"IDNo.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 608,
+    "source": "const u8 gText_TrainerCardMoney[] = _(\"MONEY\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 609,
+    "source": "const u8 gText_PokeDollar[] = _(\"\u00a5\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 610,
+    "source": "const u8 gText_TrainerCardPokedex[] = _(\"POK\u00e9DEX\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 611,
+    "source": "const u8 gText_EmptyString6[] = _(\"\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 612,
+    "source": "const u8 gText_Colon2[] = _(\":\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 613,
+    "source": "const u8 gText_Points[] = _(\" points\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 614,
+    "source": "const u8 gText_TrainerCardTime[] = _(\"TIME\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 615,
+    "source": "const u8 gJPText_BattlePoints[] = _(\"\u30b2-\u30e0\u30dd\u30a4\u30f3\u30c8\"); // Unused. Name presumed, translation is Game Points"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 616,
+    "source": "const u8 gText_Var1sTrainerCard[] = _(\"{STR_VAR_1}'s TRAINER CARD\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 617,
+    "source": "const u8 gText_HallOfFameDebut[] = _(\"HALL OF FAME DEBUT  \");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 618,
+    "source": "const u8 gText_LinkBattles[] = _(\"LINK BATTLES\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 619,
+    "source": "const u8 gText_LinkCableBattles[] = _(\"LINK CABLE BATTLES\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 620,
+    "source": "const u8 gText_WinsLosses[] = _(\"W:{COLOR RED}{SHADOW LIGHT_RED}{STR_VAR_1}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}  L:{COLOR RED}{SHADOW LIGHT_RED}{STR_VAR_2}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 621,
+    "source": "const u8 gText_PokemonTrades[] = _(\"POK\u00e9MON TRADES\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 622,
+    "source": "const u8 gText_UnionTradesAndBattles[] = _(\"UNION TRADES & BATTLES\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 623,
+    "source": "const u8 gText_BerryCrush[] = _(\"BERRY CRUSH\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 624,
+    "source": "const u8 gText_WaitingTrainerFinishReading[] = _(\"Waiting for the other TRAINER to\\nfinish reading your TRAINER CARD.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 625,
+    "source": "const u8 gText_PokeblocksWithFriends[] = _(\"{POKEBLOCK}S W/FRIENDS\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 626,
+    "source": "const u8 gText_NumPokeblocks[] = _(\"{STR_VAR_1}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 627,
+    "source": "const u8 gText_WonContestsWFriends[] = _(\"WON CONTESTS W/FRIENDS\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 628,
+    "source": "const u8 gText_BattlePtsWon[] = _(\"BATTLE POINTS WON\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 629,
+    "source": "const u8 gText_NumBP[] = _(\"{STR_VAR_1}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}BP\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 630,
+    "source": "const u8 gText_BattleTower[] = _(\"BATTLE TOWER\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 631,
+    "source": "const u8 gText_WinsStraight[] = _(\"W/{COLOR RED}{SHADOW LIGHT_RED}{STR_VAR_1}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}  STRAIGHT/{COLOR RED}{SHADOW LIGHT_RED}{STR_VAR_2}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 632,
+    "source": "const u8 gText_BattleTower2[] = _(\"BATTLE TOWER\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 633,
+    "source": "const u8 gText_BattleDome[] = _(\"BATTLE DOME\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 634,
+    "source": "const u8 gText_BattlePalace[] = _(\"BATTLE PALACE\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 635,
+    "source": "const u8 gText_BattleFactory[] = _(\"BATTLE FACTORY\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 636,
+    "source": "const u8 gText_BattleArena[] = _(\"BATTLE ARENA\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 637,
+    "source": "const u8 gText_BattlePike[] = _(\"BATTLE PIKE\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 638,
+    "source": "const u8 gText_BattlePyramid[] = _(\"BATTLE PYRAMID\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 640,
+    "source": "ALIGNED(4) const u8 gText_FacilitySingle[] = _(\"{STR_VAR_1} SINGLE\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 641,
+    "source": "ALIGNED(4) const u8 gText_FacilityDouble[] = _(\"{STR_VAR_1} DOUBLE\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 642,
+    "source": "ALIGNED(4) const u8 gText_FacilityMulti[] = _(\"{STR_VAR_1} MULTI\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 643,
+    "source": "ALIGNED(4) const u8 gText_FacilityLink[] = _(\"{STR_VAR_1} LINK\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 644,
+    "source": "ALIGNED(4) const u8 gText_Facility[] = _(\"{STR_VAR_1}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 646,
+    "source": "const u8 gText_Give[] = _(\"Give\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 647,
+    "source": "const u8 gText_NoNeed[] = _(\"No need\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 648,
+    "source": "const u8 gText_AnnouncingResults[] = _(\"Announcing the results!\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 649,
+    "source": "const u8 gText_PreliminaryResults[] = _(\"The preliminary results!\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 650,
+    "source": "const u8 gText_Round2Results[] = _(\"Round 2 results!\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 651,
+    "source": "const u8 gText_ContestantsMonWon[] = _(\"{STR_VAR_1}'s {STR_VAR_2} won!\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 652,
+    "source": "const u8 gText_CommunicationStandby[] = _(\"Communication standby\u2026\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 653,
+    "source": "const u8 gText_ColorDarkGray[] = _(\"{COLOR DARK_GRAY}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 654,
+    "source": "const u8 gText_ColorDynamic6WhiteDynamic5[] = _(\"{BACKGROUND WHITE}{TEXT_COLORS DYNAMIC_COLOR6 DYNAMIC_COLOR5 WHITE}\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 655,
+    "source": "const u8 gText_HealthboxNickname[] = _(\"{BACKGROUND DARK_GRAY}{ACCENT DARK_GRAY}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 656,
+    "source": "const u8 gText_EmptySpace2[] = _(\" \"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 657,
+    "source": "const u8 gText_HealthboxGender_Male[] = _(\"{COLOR DYNAMIC_COLOR2}\u2642\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 658,
+    "source": "const u8 gText_HealthboxGender_Female[] = _(\"{COLOR DYNAMIC_COLOR1}\u2640\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 659,
+    "source": "const u8 gText_HealthboxGender_None[] = _(\"{COLOR DYNAMIC_COLOR2}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 660,
+    "source": "const u8 gText_Upper[] = _(\"UPPER\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 661,
+    "source": "const u8 gText_Lower[] = _(\"lower\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 662,
+    "source": "const u8 gText_Others[] = _(\"OTHERS\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 663,
+    "source": "const u8 gText_Symbols[] = _(\"SYMBOLS\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 664,
+    "source": "const u8 gText_Register2[] = _(\"REGISTER\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 665,
+    "source": "const u8 gText_Exit2[] = _(\"EXIT\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 666,
+    "source": "const u8 gText_QuitChatting[] = _(\"Quit chatting?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 667,
+    "source": "const u8 gText_RegisterTextWhere[] = _(\"Register text where?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 668,
+    "source": "const u8 gText_RegisterTextHere[] = _(\"Register text here?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 669,
+    "source": "const u8 gText_InputText[] = _(\"Input text.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 670,
+    "source": "const u8 gText_F700JoinedChat[] = _(\"{DYNAMIC 0} joined the chat!\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 671,
+    "source": "const u8 gText_F700LeftChat[] = _(\"{DYNAMIC 0} left the chat.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 672,
+    "source": "const u8 gJPText_PlayersXPokemon[] = _(\"{DYNAMIC 0}\u306e{DYNAMIC 1}\u3072\u304d\u3081:\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 673,
+    "source": "const u8 gJPText_PlayersXPokmonDoesNotExist[] = _(\"{DYNAMIC 0}\u306e{DYNAMIC 1}\u3072\u304d\u3081\u306f \u3044\u307e\u305b\u3093\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 674,
+    "source": "const u8 gText_ExitingChat[] = _(\"Exiting the chat\u2026\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 675,
+    "source": "const u8 gText_LeaderLeftEndingChat[] = _(\"The LEADER, {DYNAMIC 0}, has\\nleft, ending the chat.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 676,
+    "source": "const u8 gText_RegisteredTextChangedOKToSave[] = _(\"The registered text has been changed.\\nIs it okay to save the game?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 677,
+    "source": "const u8 gText_AlreadySavedFile_Chat[] = _(\"There is already a saved file.\\nIs it okay to overwrite it?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 678,
+    "source": "const u8 gText_SavingDontTurnOff_Chat[] = _(\"SAVING\u2026\\nDON'T TURN OFF THE POWER.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 679,
+    "source": "const u8 gText_PlayerSavedGame_Chat[] = _(\"{DYNAMIC 0} saved the game.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 680,
+    "source": "const u8 gText_IfLeaderLeavesChatEnds[] = _(\"If the LEADER leaves, the chat\\nwill end. Is that okay?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 681,
+    "source": "const u8 gText_Hello[] = _(\"HELLO\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 682,
+    "source": "const u8 gText_Pokemon2[] = _(\"POK\u00e9MON\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 683,
+    "source": "const u8 gText_Trade[] = _(\"TRADE\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 684,
+    "source": "const u8 gText_Battle[] = _(\"BATTLE\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 685,
+    "source": "const u8 gText_Lets[] = _(\"LET'S\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 686,
+    "source": "const u8 gText_Ok[] = _(\"OK!\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 687,
+    "source": "const u8 gText_Sorry[] = _(\"SORRY\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 688,
+    "source": "const u8 gText_YaySmileEmoji[] = _(\"YAY{EMOJI_BIGSMILE}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 689,
+    "source": "const u8 gText_ThankYou[] = _(\"THANK YOU\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 690,
+    "source": "const u8 gText_ByeBye[] = _(\"BYE-BYE!\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 691,
+    "source": "const u8 gText_HatchedFromEgg[] = _(\"{STR_VAR_1} hatched from the EGG!\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 692,
+    "source": "const u8 gText_NicknameHatchPrompt[] = _(\"Would you like to nickname the newly\\nhatched {STR_VAR_1}?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 693,
+    "source": "ALIGNED(4) const u8 gText_ReadyPickBerry[] = _(\"Are you ready to BERRY-CRUSH?\\nPlease pick a BERRY for use.\\p\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 694,
+    "source": "ALIGNED(4) const u8 gText_WaitForAllChooseBerry[] = _(\"Please wait while each member\\nchooses a BERRY.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 695,
+    "source": "ALIGNED(4) const u8 gText_EndedWithXUnitsPowder[] = _(\"{PAUSE_MUSIC}{PLAY_BGM MUS_LEVEL_UP}You ended up with {STR_VAR_1} units of\\nsilky-smooth BERRY POWDER.{RESUME_MUSIC}\\pYour total amount of BERRY POWDER\\nis {STR_VAR_2}.\\p\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 696,
+    "source": "ALIGNED(4) const u8 gText_RecordingGameResults[] = _(\"Recording your game results in the\\nsave file.\\lPlease wait.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 697,
+    "source": "ALIGNED(4) const u8 gText_PlayBerryCrushAgain[] = _(\"Want to play BERRY CRUSH again?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 698,
+    "source": "ALIGNED(4) const u8 gText_YouHaveNoBerries[] = _(\"You have no BERRIES.\\nThe game will be canceled.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 699,
+    "source": "ALIGNED(4) const u8 gText_MemberDroppedOut[] = _(\"A member dropped out.\\nThe game will be canceled.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 700,
+    "source": "ALIGNED(4) const u8 gText_TimesUpNoGoodPowder[] = _(\"Time's up.\\pGood BERRY POWDER could not be\\nmade\u2026\\p\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 701,
+    "source": "ALIGNED(4) const u8 gText_CommunicationStandby2[] = _(\"Communication standby\u2026\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 702,
+    "source": "ALIGNED(4) const u8 gText_1DotBlueF700[] = _(\"1. {COLOR BLUE}{SHADOW LIGHT_BLUE}{DYNAMIC 0}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 703,
+    "source": "ALIGNED(4) const u8 gText_1DotF700[] = _(\"1. {DYNAMIC 0}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 704,
+    "source": "ALIGNED(4) const u8 gText_SpaceTimes2[] = _(\" time(s)\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 705,
+    "source": "ALIGNED(4) const u8 gText_XDotY[] = _(\"{STR_VAR_1}.{STR_VAR_2}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 706,
+    "source": "ALIGNED(4) const u8 gText_Var1Berry[] = _(\"{STR_VAR_1} BERRY\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 707,
+    "source": "ALIGNED(4) const u8 gText_TimeColon[] = _(\"Time:\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 708,
+    "source": "ALIGNED(4) const u8 gText_PressingSpeed[] = _(\"Pressing Speed:\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 709,
+    "source": "ALIGNED(4) const u8 gText_Silkiness[] = _(\"Silkiness:\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 710,
+    "source": "ALIGNED(4) const u8 gText_StrVar1[] = _(\"{STR_VAR_1}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 711,
+    "source": "ALIGNED(4) const u8 gText_SpaceMin[] = _(\" min. \");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 712,
+    "source": "ALIGNED(4) const u8 gText_XDotY2[] = _(\"{STR_VAR_1}.{STR_VAR_2}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 713,
+    "source": "ALIGNED(4) const u8 gText_SpaceSec[] = _(\" sec.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 714,
+    "source": "ALIGNED(4) const u8 gText_XDotY3[] = _(\"{STR_VAR_1}.{STR_VAR_2}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 715,
+    "source": "ALIGNED(4) const u8 gText_TimesPerSec[] = _(\" Times/sec.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 716,
+    "source": "ALIGNED(4) const u8 gText_Var1Percent[] = _(\"{STR_VAR_1}%\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 717,
+    "source": "ALIGNED(4) const u8 gText_PressesRankings[] = _(\"No. of Presses Rankings\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 718,
+    "source": "ALIGNED(4) const u8 gText_CrushingResults[] = _(\"Crushing Results\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 719,
+    "source": "ALIGNED(4) const u8 gText_NeatnessRankings[] = _(\"Neatness Rankings\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 720,
+    "source": "ALIGNED(4) const u8 gText_CoopRankings[] = _(\"Cooperative Rankings\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 721,
+    "source": "ALIGNED(4) const u8 gText_PressingPowerRankings[] = _(\"Pressing-Power Rankings\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 722,
+    "source": "const u8 gText_BerryCrush2[] = _(\"BERRY CRUSH\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 723,
+    "source": "const u8 gText_PressingSpeedRankings[] = _(\"Pressing-Speed Rankings\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 724,
+    "source": "const u8 gText_Var1Players[] = _(\"{STR_VAR_1} PLAYERS\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 725,
+    "source": "const u8 gText_SymbolsEarned[] = _(\"Symbols Earned\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 726,
+    "source": "const u8 gText_BattleRecord[] = _(\"Battle Record\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 727,
+    "source": "const u8 gText_BattlePoints[] = _(\"Battle Points\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 728,
+    "source": "const u8 gText_UnusedCancel[] = _(\"CANCEL\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 729,
+    "source": "const u8 gText_EmptyString7[] = _(\"\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 730,
+    "source": "const u8 gText_CheckFrontierMap[] = _(\"Check BATTLE FRONTIER MAP.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 731,
+    "source": "const u8 gText_CheckTrainerCard[] = _(\"Check TRAINER CARD.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 732,
+    "source": "const u8 gText_ViewRecordedBattle[] = _(\"View recorded battle.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 733,
+    "source": "const u8 gText_PutAwayFrontierPass[] = _(\"Put away the FRONTIER PASS.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 734,
+    "source": "const u8 gText_CurrentBattlePoints[] = _(\"Your current Battle Points.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 735,
+    "source": "const u8 gText_CollectedSymbols[] = _(\"Your collected Symbols.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 736,
+    "source": "const u8 gText_BattleTowerAbilitySymbol[] = _(\"Battle Tower - Ability Symbol\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 737,
+    "source": "const u8 gText_BattleDomeTacticsSymbol[] = _(\"Battle Dome - Tactics Symbol\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 738,
+    "source": "const u8 gText_BattlePalaceSpiritsSymbol[] = _(\"Battle Palace - Spirits Symbol\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 739,
+    "source": "const u8 gText_BattleArenaGutsSymbol[] = _(\"Battle Arena - Guts Symbol\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 740,
+    "source": "const u8 gText_BattleFactoryKnowledgeSymbol[] = _(\"Battle Factory - Knowledge Symbol\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 741,
+    "source": "const u8 gText_BattlePikeLuckSymbol[] = _(\"Battle Pike - Luck Symbol\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 742,
+    "source": "const u8 gText_BattlePyramidBraveSymbol[] = _(\"Battle Pyramid - Brave Symbol\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 743,
+    "source": "const u8 gText_ThereIsNoBattleRecord[] = _(\"There is no Battle Record.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 744,
+    "source": "const u8 gText_BattleTower3[] = _(\"BATTLE TOWER\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 745,
+    "source": "const u8 gText_BattleDome2[] = _(\"BATTLE DOME\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 746,
+    "source": "const u8 gText_BattlePalace2[] = _(\"BATTLE PALACE\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 747,
+    "source": "const u8 gText_BattleArena2[] = _(\"BATTLE ARENA\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 748,
+    "source": "const u8 gText_BattleFactory2[] = _(\"BATTLE FACTORY\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 749,
+    "source": "const u8 gText_BattlePike2[] = _(\"BATTLE PIKE\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 750,
+    "source": "const u8 gText_BattlePyramid2[] = _(\"BATTLE PYRAMID\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 751,
+    "source": "const u8 gText_BattleTowerDesc[] = _(\"KO opponents and aim for the top!\\nYour ability will be tested.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 752,
+    "source": "const u8 gText_BattleDomeDesc[] = _(\"Keep winning at the tournament!\\nYour tactics will be tested.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 753,
+    "source": "const u8 gText_BattlePalaceDesc[] = _(\"Watch your POK\u00e9MON battle!\\nYour spirit will be tested.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 754,
+    "source": "const u8 gText_BattleArenaDesc[] = _(\"Win battles with teamed-up POK\u00e9MON!\\nYour guts will be tested.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 755,
+    "source": "const u8 gText_BattleFactoryDesc[] = _(\"Aim for victory using rental POK\u00e9MON!\\nYour knowledge will be tested.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 756,
+    "source": "const u8 gText_BattlePikeDesc[] = _(\"Select one of three paths to battle!\\nYour luck will be tested.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 757,
+    "source": "const u8 gText_BattlePyramidDesc[] = _(\"Aim for the top with exploration!\\nYour bravery will be tested.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 758,
+    "source": "const u8 gText_Powder[] = _(\"POWDER\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 759,
+    "source": "const u8 gText_BerryPickingRecords[] = _(\"DODRIO BERRY-PICKING RECORDS\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 760,
+    "source": "const u8 gText_BerriesPicked[] = _(\"BERRIES picked:\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 761,
+    "source": "const u8 gText_BestScore[] = _(\"Best score:\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 762,
+    "source": "const u8 gText_BerriesInRowFivePlayers[] = _(\"BERRIES picked in a row with\\nfive players:\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 763,
+    "source": "const u8 gText_BerryPickingResults[] = _(\"Announcing BERRY-PICKING results!\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 764,
+    "source": "const u8 gText_10P30P50P50P[] = _(\"{CLEAR_TO 3}10P{CLEAR_TO 43}30P{CLEAR_TO 83}50P{CLEAR_TO 119}{EMOJI_MINUS}50P\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 765,
+    "source": "const u8 gText_AnnouncingRankings[] = _(\"Announcing rankings!\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 766,
+    "source": "const u8 gText_AnnouncingPrizes[] = _(\"Announcing prizes!\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 767,
+    "source": "const u8 gText_1Colon[] = _(\"1:\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 768,
+    "source": "const u8 gText_2Colon[] = _(\"2:\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 769,
+    "source": "const u8 gText_3Colon[] = _(\"3:\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 770,
+    "source": "const u8 gText_4Colon[] = _(\"4:\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 771,
+    "source": "const u8 gText_5Colon[] = _(\"5:\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 772,
+    "source": "const u8 gText_FirstPlacePrize[] = _(\"The first-place winner gets\\nthis {DYNAMIC 0}!\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 773,
+    "source": "const u8 gText_CantHoldAnyMore[] = _(\"You can't hold any more!\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 774,
+    "source": "const u8 gText_FilledStorageSpace[] = _(\"It filled its storage space.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 775,
+    "source": "const u8 gText_WantToPlayAgain[] = _(\"Want to play again?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 776,
+    "source": "const u8 gText_SomeoneDroppedOut[] = _(\"Somebody dropped out.\\nThe link will be canceled.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 777,
+    "source": "const u8 gText_SpacePoints[] = _(\" points\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 778,
+    "source": "const u8 gText_CommunicationStandby3[] = _(\"Communication standby\u2026\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 779,
+    "source": "const u8 gText_SpacePoints2[] = _(\" points\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 780,
+    "source": "const u8 gText_SpaceTimes3[] = _(\" time(s)\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 781,
+    "source": "const u8 gText_PkmnJumpRecords[] = _(\"POK\u00e9MON JUMP RECORDS\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 782,
+    "source": "const u8 gText_JumpsInARow[] = _(\"Jumps in a row:\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 783,
+    "source": "const u8 gText_BestScore2[] = _(\"Best score:\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 784,
+    "source": "const u8 gText_ExcellentsInARow[] = _(\"EXCELLENTS in a row:\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 785,
+    "source": "const u8 gText_AwesomeWonF701F700[] = _(\"Awesome score! You've\\nwon {DYNAMIC 1} {DYNAMIC 0}!\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 786,
+    "source": "const u8 gText_FilledStorageSpace2[] = _(\"It filled its storage space.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 787,
+    "source": "const u8 gText_CantHoldMore[] = _(\"You can't hold any more!\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 788,
+    "source": "const u8 gText_WantToPlayAgain2[] = _(\"Want to play again?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 789,
+    "source": "const u8 gText_SomeoneDroppedOut2[] = _(\"Somebody dropped out.\\nThe link will be canceled.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 790,
+    "source": "const u8 gText_CommunicationStandby4[] = _(\"Communication standby\u2026\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 791,
+    "source": "const u8 gText_LinkContestResults[] = _(\"{PLAYER}'s Link Contest Results\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 792,
+    "source": "const u8 gText_1st[] = _(\"1st\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 793,
+    "source": "const u8 gText_2nd[] = _(\"2nd\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 794,
+    "source": "const u8 gText_3rd[] = _(\"3rd\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 795,
+    "source": "const u8 gText_4th[] = _(\"4th\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 796,
+    "source": "const u8 gText_Friend[] = _(\"Friend\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 797,
+    "source": "const u8 gText_Pokemon3[] = _(\"POKeMON\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 798,
+    "source": "const u8 gJPText_MysteryGift[] = _(\"\u3075\u3057\u304e\u306a\u3082\u3089\u3044\u3082\u306e\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 799,
+    "source": "const u8 gJPText_DecideStop[] = _(\"{A_BUTTON}\u3051\u3063\u3066\u3044 {B_BUTTON}\u3084\u3081\u308b\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 800,
+    "source": "const u8 gJPText_ReceiveMysteryGiftWithEReader[] = _(\"\u30ab\u30fc\u30c9e\u30ea\u30fc\u30c0\u30fc{PLUS}\u3000\u3067\\n\u3075\u3057\u304e\u306a\u3082\u3089\u3044\u3082\u306e\u3092\u3000\u3088\u307f\u3053\u307f\u307e\u3059\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 801,
+    "source": "const u8 gJPText_SelectConnectFromEReaderMenu[] = _(\"\u30ab\u30fc\u30c9e\u30ea\u30fc\u30c0\u30fc{PLUS}\u306e\u3000\u30e1\u30cb\u30e5\u30fc\u304b\u3089\\n\u2018\u3064\u3046\u3057\u3093'\u3092\u3000\u3048\u3089\u3073\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 802,
+    "source": "const u8 gJPText_SelectConnectWithGBA[] = _(\"\u2018\u30b2\u30fc\u30e0\u30dc\u30fc\u30a4\u30a2\u30c9\u30d0\u30f3\u30b9\u3068\u3064\u3046\u3057\u3093'\\n\u3092\u3000\u305b\u3093\u305f\u304f\u3000\u3057\u3066\u304f\u3060\u3055\u3044\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 803,
+    "source": "const u8 gJPText_SelectConnectAndPressA[] = _(\"\u30ab\u30fc\u30c9e\u30ea\u30fc\u30c0\u30fc{PLUS}\u306e\u3000\u2018\u3064\u3046\u3057\u3093'\u3092\\n\u3048\u3089\u3093\u3067\u3000A\u30dc\u30bf\u30f3\u3092\u3000\u304a\u3057\u3066\u304f\u3060\u3055\u3044\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 804,
+    "source": "const u8 gJPText_LinkIsIncorrect[] = _(\"\u305b\u3064\u305e\u304f\u304c\u3000\u307e\u3061\u304c\u3063\u3066\u3044\u307e\u3059\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 805,
+    "source": "const u8 gJPText_CardReadingHasBeenHalted[] = _(\"\u30ab\u30fc\u30c9\u306e\u3000\u3088\u307f\u3053\u307f\u3092\\n\u3061\u3085\u3046\u3057\u3000\u3057\u307e\u3057\u305f\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 806,
+    "source": "const u8 gJPText_UnableConnectWithEReader[] = _(\"\u30ab\u30fc\u30c9e\u30ea\u30fc\u30c0\u30fc{PLUS}\u3068\\n\u3064\u3046\u3057\u3093\u3000\u3067\u304d\u307e\u305b\u3093\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 807,
+    "source": "const u8 gJPText_Connecting[] = _(\"\u3064\u3046\u3057\u3093\u3000\u3061\u3085\u3046\u3000\u3067\u3059\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 808,
+    "source": "const u8 gJPText_ConnectionErrorCheckLink[] = _(\"\u3064\u3046\u3057\u3093\u3000\u30a8\u30e9\u30fc\u3067\u3059\\n\u305b\u3064\u305e\u304f\u3092\u3000\u305f\u3057\u304b\u3081\u3066\u3000\u304f\u3060\u3055\u3044\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 809,
+    "source": "const u8 gJPText_ConnectionErrorTryAgain[] = _(\"\u3064\u3046\u3057\u3093\u3000\u30a8\u30e9\u30fc\u3067\u3059\\n\u306f\u3058\u3081\u304b\u3089\u3000\u3084\u308a\u306a\u304a\u3057\u3066\u3000\u304f\u3060\u3055\u3044\"); // Link error"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 810,
+    "source": "const u8 gJPText_AllowEReaderToLoadCard[] = _(\"\u30ab\u30fc\u30c9e\u30ea\u30fc\u30c0\u30fc{PLUS}\u3000\u306b\\n\u30ab\u30fc\u30c9\u3092\u3000\u3088\u307f\u3053\u307e\u305b\u3066\u3000\u304f\u3060\u3055\u3044\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 811,
+    "source": "const u8 gJPText_ConnectionComplete[] = _(\"\u3064\u3046\u3057\u3093\u3000\u3057\u3085\u3046\u308a\u3087\u3046\uff01\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 812,
+    "source": "const u8 gJPText_NewTrainerHasComeToHoenn[] = _(\"\u3042\u3089\u305f\u306a\u3000\u30c8\u30ec\u30fc\u30ca\u30fc\u304c\\n\u30db\u30a6\u30a8\u30f3\u306b\u3000\u3084\u3063\u3066\u304d\u305f\uff01\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 813,
+    "source": "const u8 gJPText_PleaseWaitAMoment[] = _(\"\u3057\u3070\u3089\u304f\u3000\u304a\u307e\u3061\u304f\u3060\u3055\u3044\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 814,
+    "source": "const u8 gJPText_WriteErrorUnableToSaveData[] = _(\"\u304b\u304d\u3053\u307f\u3000\u30a8\u30e9\u30fc\u3000\u3067\u3059\\n\u30c7\u30fc\u30bf\u304c\u3000\u307b\u305e\u3093\u3000\u3067\u304d\u307e\u305b\u3093\u3067\u3057\u305f\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 815,
+    "source": "const u8 gText_SingleBattleRoomResults[] = _(\"{PLAYER}'s Single Battle Room Results\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 816,
+    "source": "const u8 gText_DoubleBattleRoomResults[] = _(\"{PLAYER}'s Double Battle Room Results\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 817,
+    "source": "const u8 gText_MultiBattleRoomResults[] = _(\"{PLAYER}'s Multi Battle Room Results\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 818,
+    "source": "const u8 gText_LinkMultiBattleRoomResults[] = _(\"{PLAYER}'s Link Multi Battle Room Results\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 819,
+    "source": "const u8 gText_SingleBattleTourneyResults[] = _(\"{PLAYER}'s Single Battle Tourney Results\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 820,
+    "source": "const u8 gText_DoubleBattleTourneyResults[] = _(\"{PLAYER}'s Double Battle Tourney Results\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 821,
+    "source": "const u8 gText_SingleBattleHallResults[] = _(\"{PLAYER}'s Single Battle Hall Results\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 822,
+    "source": "const u8 gText_DoubleBattleHallResults[] = _(\"{PLAYER}'s Double Battle Hall Results\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 823,
+    "source": "const u8 gText_BattleChoiceResults[] = _(\"{PLAYER}'s Battle Choice Results\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 824,
+    "source": "const u8 gText_SetKOTourneyResults[] = _(\"{PLAYER}'s Set KO Tourney Results\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 825,
+    "source": "const u8 gText_BattleSwapSingleResults[] = _(\"{PLAYER}'s Battle Swap Single Results\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 826,
+    "source": "const u8 gText_BattleSwapDoubleResults[] = _(\"{PLAYER}'s Battle Swap Double Results\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 827,
+    "source": "const u8 gText_BattleQuestResults[] = _(\"{PLAYER}'s Battle Quest Results\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 828,
+    "source": "const u8 gText_Lv502[] = _(\"LV. 50\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 829,
+    "source": "const u8 gText_OpenLv[] = _(\"OPEN LV.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 830,
+    "source": "const u8 gText_WinStreak[] = _(\"Win streak: {STR_VAR_1}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 831,
+    "source": "const u8 gText_Current[] = _(\"CURRENT\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 832,
+    "source": "const u8 gText_Record[] = _(\"RECORD\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 833,
+    "source": "const u8 gText_Prev[] = _(\"PREV.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 834,
+    "source": "const u8 gText_RentalSwap[] = _(\"Rental/Swap\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 835,
+    "source": "const u8 gText_Total[] = _(\"Total\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 836,
+    "source": "const u8 gText_ClearStreak[] = _(\"Clear streak: {STR_VAR_1}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 837,
+    "source": "const u8 gText_Championships[] = _(\"Championships: {STR_VAR_1}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 838,
+    "source": "const u8 gText_RoomsCleared[] = _(\"Rooms cleared: {STR_VAR_1}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 839,
+    "source": "const u8 gText_TimesCleared[] = _(\"Times cleared:{CLEAR 5}{STR_VAR_1}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 840,
+    "source": "const u8 gText_KOsInARow[] = _(\"KOs in a row: {STR_VAR_1}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 841,
+    "source": "const u8 gText_TimesVar1[] = _(\"Times: {STR_VAR_1}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 842,
+    "source": "const u8 gText_FloorsCleared[] = _(\"Floors cleared: {STR_VAR_1}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 844,
+    "source": "ALIGNED(4) const u8 gText_RecordsLv50[] = _(\"LV. 50\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 845,
+    "source": "ALIGNED(4) const u8 gText_RecordsOpenLevel[] = _(\"OPEN LEVEL\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 846,
+    "source": "ALIGNED(4) const u8 gText_FrontierFacilityWinStreak[] = _(\"Win streak: {STR_VAR_2}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 847,
+    "source": "ALIGNED(4) const u8 gText_FrontierFacilityClearStreak[] = _(\"Clear streak: {STR_VAR_2}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 848,
+    "source": "ALIGNED(4) const u8 gText_FrontierFacilityRoomsCleared[] = _(\"Rooms cleared: {STR_VAR_2}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 849,
+    "source": "ALIGNED(4) const u8 gText_FrontierFacilityKOsStreak[] = _(\"KOs in a row: {STR_VAR_2}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 850,
+    "source": "ALIGNED(4) const u8 gText_FrontierFacilityFloorsCleared[] = _(\"Floors cleared: {STR_VAR_2}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 851,
+    "source": "ALIGNED(4) const u8 gText_123Dot[][3] = {_(\"1.\"), _(\"2.\"), _(\"3.\")};"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 852,
+    "source": "const u8 gText_FrontierFacilityTotalCaughtSpeciesBanned[] = _(\" and {STR_VAR_2} of the POK\u00e9MON species\\nyou caught are inelegible\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 853,
+    "source": "const u8 gText_FrontierFacilityIncluding[] = _(\".\\pThese include \");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 854,
+    "source": "const u8 gText_FrontierFacilityAreInelegible[] = _(\" are inelegible\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 856,
+    "source": "const u8 gText_YesNo[] = _(\"YES\\nNO\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 857,
+    "source": "const u8 gText_SelectorArrow3[] = _(\"\u25b6\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 858,
+    "source": "const u8 gText_Peekaboo[] = _(\"PEEKABOO!\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 859,
+    "source": "const u8 gText_CommErrorCheckConnections[] = _(\"Communication error\u2026\\nPlease check all connections,\\nthen turn the power OFF and ON.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 860,
+    "source": "const u8 gText_CommErrorEllipsis[] = _(\"Communication error\u2026\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 861,
+    "source": "const u8 gText_MoveCloserToLinkPartner[] = _(\"Move closer to your link partner(s).\\nAvoid obstacles between partners.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 862,
+    "source": "const u8 gText_ABtnRegistrationCounter[] = _(\"A Button: Registration Counter\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 863,
+    "source": "const u8 gText_ABtnTitleScreen[] = _(\"A Button: Title Screen\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 864,
+    "source": "const u8 gText_NumPlayerLink[] = _(\"{STR_VAR_1}P LINK\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 865,
+    "source": "const u8 gText_BronzeCard[] = _(\"BRONZE\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 866,
+    "source": "const u8 gText_CopperCard[] = _(\"COPPER\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 867,
+    "source": "const u8 gText_SilverCard[] = _(\"SILVER\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 868,
+    "source": "const u8 gText_GoldCard[] = _(\"GOLD\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 869,
+    "source": "const u8 gText_Day[] = _(\"DAY\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 870,
+    "source": "const u8 gText_Colon3[] = _(\":\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 871,
+    "source": "const u8 gText_Confirm2[] = _(\"CONFIRM\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 872,
+    "source": "const u8 gText_Days[] = _(\"Days\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 873,
+    "source": "const u8 gText_TimeColon2[] = _(\"Time:\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 874,
+    "source": "const u8 gText_GameTime[] = _(\"Game time\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 875,
+    "source": "const u8 gText_RTCTime[] = _(\"RTC time\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 876,
+    "source": "const u8 gText_UpdatedTime[] = _(\"Updated time\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 877,
+    "source": "const u8 gText_MenuPokedex[] = _(\"Pok\u00e9dex\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 878,
+    "source": "const u8 gText_MenuPokemon[] = _(\"Pok\u00e9mon\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 879,
+    "source": "const u8 gText_MenuBag[] = _(\"Bag\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 880,
+    "source": "const u8 gText_MenuPokenav[] = _(\"Pok\u00e9Nav\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 881,
+    "source": "const u8 gText_MenuPlayer[] = _(\"{PLAYER}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 882,
+    "source": "const u8 gText_MenuSave[] = _(\"Save\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 883,
+    "source": "const u8 gText_MenuOption[] = _(\"Option\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 884,
+    "source": "const u8 gText_MenuExit[] = _(\"Exit\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 885,
+    "source": "const u8 gText_MenuRetire[] = _(\"Retire\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 886,
+    "source": "const u8 gText_MenuRest[] = _(\"Rest\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 887,
+    "source": "const u8 gText_MenuDexNav[] = _(\"DexNav\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 888,
+    "source": "const u8 gText_SafariBallStock[] = _(\"SAFARI BALLS\\nStock: {STR_VAR_1}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 889,
+    "source": "const u8 gText_MenuSafariStats[] = _(\"{STR_VAR_1}/{STR_VAR_2}\\nBALLS  {STR_VAR_3}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 890,
+    "source": "const u8 gText_BattlePyramidFloor[] = _(\"Battle Pyramid\\n{STR_VAR_1}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 891,
+    "source": "const u8 gText_Floor1[] = _(\"Floor 1\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 892,
+    "source": "const u8 gText_Floor2[] = _(\"Floor 2\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 893,
+    "source": "const u8 gText_Floor3[] = _(\"Floor 3\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 894,
+    "source": "const u8 gText_Floor4[] = _(\"Floor 4\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 895,
+    "source": "const u8 gText_Floor5[] = _(\"Floor 5\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 896,
+    "source": "const u8 gText_Floor6[] = _(\"Floor 6\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 897,
+    "source": "const u8 gText_Floor7[] = _(\"Floor 7\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 898,
+    "source": "const u8 gText_Peak[] = _(\"Peak\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 899,
+    "source": "const u8 gText_LinkStandby2[] = _(\"Link standby\u2026\\n\u2026 \u2026 B Button: Cancel\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 900,
+    "source": "const u8 gText_PressAToLoadEvent[] = _(\"Press the A Button to load event.\\n\u2026 \u2026 B Button: Cancel\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 901,
+    "source": "const u8 gText_LoadingEvent[] = _(\"Loading event\u2026\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 902,
+    "source": "const u8 gText_DontRemoveCableTurnOff[] = _(\"Don't remove the Game Link cable.\\nDon't turn off the power.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 903,
+    "source": "const u8 gText_EventSafelyLoaded[] = _(\"The event was safely loaded.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 904,
+    "source": "const u8 gText_LoadErrorEndingSession[] = _(\"Loading error.\\nEnding session.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 905,
+    "source": "const u8 gJPText_Player[] = _(\"\u30d7\u30ec\u30a4\u30e4\u30fc\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 906,
+    "source": "const u8 gJPText_Sama[] = _(\"\u3055\u307e\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 907,
+    "source": "const u8 gText_DexHoenn[] = _(\"HOENN\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 908,
+    "source": "const u8 gText_DexNational[] = _(\"NATIONAL\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 909,
+    "source": "const u8 gText_PokedexDiploma[] = _(\"PLAYER: {CLEAR 16}{COLOR RED}{SHADOW LIGHT_RED}{PLAYER}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}\\n\\nThis document certifies\\nthat you have successfully\\ncompleted your\\n{STR_VAR_1} POK\u00e9DEX.\\n\\n{CLEAR_TO 66}{COLOR RED}{SHADOW LIGHT_RED}GAME FREAK\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 910,
+    "source": "const u8 gJPText_GameFreak[] = _(\"{COLOR RED}{SHADOW LIGHT_RED}\u30b2-\u30e0\u30d5\u30ea-\u30af\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 911,
+    "source": "const u8 gText_DiplomaEmpty[] = _(\"{COLOR RED}{SHADOW LIGHT_RED}\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 912,
+    "source": "const u8 gText_Hoenn[] = _(\"HOENN\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 913,
+    "source": "const u8 gText_Kanto[] = _(\"KANTO\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 914,
+    "source": "const u8 gText_XWillBeSentToY[] = _(\"{STR_VAR_2} will be\\nsent to {STR_VAR_1}.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 915,
+    "source": "const u8 gText_ByeByeVar1[] = _(\"Bye-bye, {STR_VAR_2}!\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 916,
+    "source": "const u8 gText_XSentOverY[] = _(\"{STR_VAR_1} sent over {STR_VAR_3}.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 917,
+    "source": "const u8 gText_TakeGoodCareOfX[] = _(\"Take good care of {STR_VAR_3}!\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 919,
+    "source": "const u8 gText_ThreeQuestionMarks[] = _(\"???\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 920,
+    "source": "const u8 gText_MaxHP[] = _(\"MAX. HP\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 921,
+    "source": "const u8 gText_Attack[] = _(\"ATTACK\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 922,
+    "source": "const u8 gText_Defense[] = _(\"DEFENSE\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 923,
+    "source": "const u8 gText_Speed[] = _(\"SPEED\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 924,
+    "source": "const u8 gText_SpAtk[] = _(\"SP. ATK\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 925,
+    "source": "const u8 gText_SpDef[] = _(\"SP. DEF\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 926,
+    "source": "const u8 gText_Plus[] = _(\"{PLUS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 927,
+    "source": "const u8 gText_Dash[] = _(\"-\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 928,
+    "source": "const u8 gText_MixingRecords[] = _(\"Mixing records\u2026\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 929,
+    "source": "const u8 gText_RecordMixingComplete[] = _(\"Record mixing completed.\\nThank you for waiting.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 930,
+    "source": "const u8 gText_RentalPkmn2[] = _(\"RENTAL POK\u00e9MON\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 931,
+    "source": "const u8 gText_SelectFirstPkmn[] = _(\"Select the first POK\u00e9MON.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 932,
+    "source": "const u8 gText_SelectSecondPkmn[] = _(\"Select the second POK\u00e9MON.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 933,
+    "source": "const u8 gText_SelectThirdPkmn[] = _(\"Select the third POK\u00e9MON.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 934,
+    "source": "const u8 gText_Rent[] = _(\"RENT\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 935,
+    "source": "const u8 gText_Summary[] = _(\"SUMMARY\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 936,
+    "source": "const u8 gText_Others2[] = _(\"OTHERS\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 937,
+    "source": "const u8 gText_Deselect[] = _(\"DESELECT\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 938,
+    "source": "const u8 gText_TheseThreePkmnOkay[] = _(\"Are these three POK\u00e9MON OK?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 939,
+    "source": "const u8 gText_Yes2[] = _(\"YES\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 940,
+    "source": "const u8 gText_No2[] = _(\"NO\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 941,
+    "source": "const u8 gText_CantSelectSamePkmn[] = _(\"Can't select same {PKMN}.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 942,
+    "source": "const u8 gText_PkmnSwap[] = _(\"POK\u00e9MON SWAP\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 943,
+    "source": "const u8 gText_SelectPkmnToSwap[] = _(\"Select POK\u00e9MON to swap.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 944,
+    "source": "const u8 gText_SelectPkmnToAccept[] = _(\"Select POK\u00e9MON to accept.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 945,
+    "source": "const u8 gText_Swap[] = _(\"SWAP\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 946,
+    "source": "const u8 gText_Summary2[] = _(\"SUMMARY\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 947,
+    "source": "const u8 gText_Rechoose[] = _(\"RECHOOSE\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 948,
+    "source": "const u8 gText_QuitSwapping[] = _(\"Quit swapping?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 949,
+    "source": "const u8 gText_Yes3[] = _(\"YES\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 950,
+    "source": "const u8 gText_No3[] = _(\"NO\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 951,
+    "source": "const u8 gText_PkmnForSwap[] = _(\"{PKMN} FOR SWAP\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 952,
+    "source": "const u8 gText_Cancel3[] = _(\"CANCEL\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 953,
+    "source": "const u8 gText_Swap2[] = _(\"SWAP\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 954,
+    "source": "const u8 gText_Accept[] = _(\"ACCEPT\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 955,
+    "source": "const u8 gText_AcceptThisPkmn[] = _(\"Accept this POK\u00e9MON?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 956,
+    "source": "const u8 gText_4Spaces[] = _(\"    \"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 957,
+    "source": "const u8 gText_SamePkmnInPartyAlready[] = _(\"Same {PKMN} in party already.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 958,
+    "source": "const u8 gText_DecimalPoint[] = _(\".\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 959,
+    "source": "const u8 gText_SavingPlayer[] = _(\"PLAYER\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 960,
+    "source": "const u8 gText_SavingBadges[] = _(\"BADGES\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 961,
+    "source": "const u8 gText_SavingPokedex[] = _(\"POK\u00e9DEX\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 962,
+    "source": "const u8 gText_SavingTime[] = _(\"TIME\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 963,
+    "source": "const u8 gText_WirelessCommStatus[] = _(\"Wireless Communication Status\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 964,
+    "source": "const u8 gText_PeopleTrading[] = _(\"People trading:\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 965,
+    "source": "const u8 gText_PeopleBattling[] = _(\"People battling:\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 966,
+    "source": "const u8 gText_PeopleInUnionRoom[] = _(\"People in the UNION ROOM:\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 967,
+    "source": "const u8 gText_PeopleCommunicating[] = _(\"People communicating:\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 968,
+    "source": "const u8 gText_F700Players[] = _(\"{DYNAMIC 0} players\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 969,
+    "source": "const u8 gText_F701Players[] = _(\"{DYNAMIC 1} players\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 970,
+    "source": "const u8 gText_F702Players[] = _(\"{DYNAMIC 2} players\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 971,
+    "source": "const u8 gText_F703Players[] = _(\"{DYNAMIC 3} players\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 980,
+    "source": "ALIGNED(4) const u8 gText_WonderCards[] = _(\"WONDER CARDS\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 981,
+    "source": "ALIGNED(4) const u8 gText_WonderNews[] = _(\"WONDER NEWS\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 982,
+    "source": "ALIGNED(4) const u8 gText_WirelessCommunication[] = _(\"WIRELESS COMMUNICATION\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 983,
+    "source": "ALIGNED(4) const u8 gText_Friend2[] = _(\"FRIEND\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 984,
+    "source": "ALIGNED(4) const u8 gText_Exit3[] = _(\"EXIT\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 985,
+    "source": "ALIGNED(4) const u8 gText_Receive[] = _(\"RECEIVE\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 986,
+    "source": "ALIGNED(4) const u8 gText_Send[] = _(\"SEND\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 987,
+    "source": "ALIGNED(4) const u8 gText_Toss[] = _(\"TOSS\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 988,
+    "source": "ALIGNED(4) const u8 gText_VarietyOfEventsImportedWireless[] = _(\"A variety of events will be imported\\nover Wireless Communication.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 989,
+    "source": "ALIGNED(4) const u8 gText_WonderCardsInPossession[] = _(\"Read the WONDER CARDS in your\\npossession.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 990,
+    "source": "ALIGNED(4) const u8 gText_ReadNewsThatArrived[] = _(\"Read the NEWS that arrived.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 991,
+    "source": "ALIGNED(4) const u8 gText_ReturnToTitle[] = _(\"Return to the title screen.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 992,
+    "source": "ALIGNED(4) const u8 gText_DontHaveCardNewOneInput[] = _(\"You don't have a WONDER CARD,\\nso a new CARD will be input.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 993,
+    "source": "ALIGNED(4) const u8 gText_DontHaveNewsNewOneInput[] = _(\"You don't have any WONDER NEWS,\\nso new NEWS will be input.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 994,
+    "source": "ALIGNED(4) const u8 gText_WhereShouldCardBeAccessed[] = _(\"Where should the WONDER CARD\\nbe accessed?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 995,
+    "source": "ALIGNED(4) const u8 gText_WhereShouldNewsBeAccessed[] = _(\"Where should the WONDER NEWS\\nbe accessed?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 996,
+    "source": "ALIGNED(4) const u8 gText_CommunicationStandbyBButtonCancel[] = _(\"Communication standby\u2026\\nB Button: Cancel\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 997,
+    "source": "ALIGNED(4) const u8 gText_Communicating[] = _(\"Communicating\u2026\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 998,
+    "source": "ALIGNED(4) const u8 gText_CommunicationCompleted[] = _(\"Communication completed.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 999,
+    "source": "ALIGNED(4) const u8 gText_CommunicationError[] = _(\"Communication error.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1000,
+    "source": "ALIGNED(4) const u8 gText_CommunicationCanceled[] = _(\"Communication has been canceled.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1001,
+    "source": "ALIGNED(4) const u8 gText_ThrowAwayWonderCard[] = _(\"Throw away the WONDER CARD\\nand input a new CARD?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1002,
+    "source": "ALIGNED(4) const u8 gText_HaventReceivedCardsGift[] = _(\"You haven't received the CARD's gift\\nyet. Input a new CARD anyway?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1003,
+    "source": "ALIGNED(4) const u8 gText_WonderCardReceivedFrom[] = _(\"A WONDER CARD has been received\\nfrom {STR_VAR_1}.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1004,
+    "source": "ALIGNED(4) const u8 gText_WonderNewsReceivedFrom[] = _(\"A WONDER NEWS item has been\\nreceived from {STR_VAR_1}.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1005,
+    "source": "ALIGNED(4) const u8 gText_WonderCardReceived[] = _(\"A new WONDER CARD has been\\nreceived.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1006,
+    "source": "ALIGNED(4) const u8 gText_WonderNewsReceived[] = _(\"A new WONDER NEWS item has been\\nreceived.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1007,
+    "source": "ALIGNED(4) const u8 gText_NewStampReceived[] = _(\"A new STAMP has been received.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1008,
+    "source": "ALIGNED(4) const u8 gText_NewTrainerReceived[] = _(\"A new TRAINER has arrived.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1009,
+    "source": "ALIGNED(4) const u8 gText_AlreadyHadCard[] = _(\"You already had that\\nWONDER CARD.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1010,
+    "source": "ALIGNED(4) const u8 gText_AlreadyHadNews[] = _(\"You already had that\\nWONDER NEWS item.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1011,
+    "source": "ALIGNED(4) const u8 gText_AlreadyHadStamp[] = _(\"You already had that\\nSTAMP.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1012,
+    "source": "ALIGNED(4) const u8 gText_NoMoreRoomForStamps[] = _(\"There's no more room for adding\\nSTAMPS.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1013,
+    "source": "ALIGNED(4) const u8 gText_RecordUploadedViaWireless[] = _(\"Your record has been uploaded via\\nWIRELESS COMMUNICATION.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1014,
+    "source": "ALIGNED(4) const u8 gText_CantAcceptCardFromTrainer[] = _(\"You can't accept a WONDER CARD\\nfrom this TRAINER.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1015,
+    "source": "ALIGNED(4) const u8 gText_CantAcceptNewsFromTrainer[] = _(\"You can't accept WONDER NEWS\\nfrom this TRAINER.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1016,
+    "source": "ALIGNED(4) const u8 gText_NothingSentOver[] = _(\"Nothing was sent over\u2026\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1017,
+    "source": "ALIGNED(4) const u8 gText_WhatToDoWithCards[] = _(\"What would you like to do\\nwith the WONDER CARDS?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1018,
+    "source": "ALIGNED(4) const u8 gText_WhatToDoWithNews[] = _(\"What would you like to do\\nwith the WONDER NEWS?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1019,
+    "source": "ALIGNED(4) const u8 gText_SendingWonderCard[] = _(\"Sending your WONDER CARD\u2026\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1020,
+    "source": "ALIGNED(4) const u8 gText_SendingWonderNews[] = _(\"Sending your WONDER NEWS item\u2026\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1021,
+    "source": "ALIGNED(4) const u8 gText_WonderCardSentTo[] = _(\"Your WONDER CARD has been sent\\nto {STR_VAR_1}.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1022,
+    "source": "ALIGNED(4) const u8 gText_WonderNewsSentTo[] = _(\"Your WONDER NEWS item has been\\nsent to {STR_VAR_1}.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1023,
+    "source": "ALIGNED(4) const u8 gText_StampSentTo[] = _(\"A STAMP has been sent to {STR_VAR_1}.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1024,
+    "source": "ALIGNED(4) const u8 gText_GiftSentTo[] = _(\"A GIFT has been sent to {STR_VAR_1}.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1025,
+    "source": "ALIGNED(4) const u8 gText_OtherTrainerHasCard[] = _(\"The other TRAINER has the same\\nWONDER CARD already.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1026,
+    "source": "ALIGNED(4) const u8 gText_OtherTrainerHasNews[] = _(\"The other TRAINER has the same\\nWONDER NEWS already.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1027,
+    "source": "ALIGNED(4) const u8 gText_OtherTrainerHasStamp[] = _(\"The other TRAINER has the same\\nSTAMP already.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1028,
+    "source": "ALIGNED(4) const u8 gText_OtherTrainerCanceled[] = _(\"The other TRAINER canceled\\ncommunication.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1029,
+    "source": "ALIGNED(4) const u8 gText_CantSendGiftToTrainer[] = _(\"You can't send a MYSTERY GIFT to\\nthis TRAINER.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1030,
+    "source": "ALIGNED(4) const u8 gText_IfThrowAwayCardEventWontHappen[] = _(\"If you throw away the CARD,\\nits event won't happen. Okay?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1031,
+    "source": "ALIGNED(4) const u8 gText_OkayToDiscardNews[] = _(\"Is it okay to discard this\\nNEWS item?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1032,
+    "source": "ALIGNED(4) const u8 gText_HaventReceivedGiftOkayToDiscard[] = _(\"You haven't received the\\nGIFT. Is it okay to discard?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1033,
+    "source": "ALIGNED(4) const u8 gText_DataWillBeSaved[] = _(\"Data will be saved.\\nPlease wait.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1034,
+    "source": "ALIGNED(4) const u8 gText_SaveCompletedPressA[] = _(\"Save completed.\\nPlease press the A Button.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1035,
+    "source": "ALIGNED(4) const u8 gText_WonderCardThrownAway[] = _(\"The WONDER CARD was thrown away.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1036,
+    "source": "ALIGNED(4) const u8 gText_WonderNewsThrownAway[] = _(\"The WONDER NEWS was thrown away.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1037,
+    "source": "ALIGNED(4) const u8 gText_MysteryGift[] = _(\"MYSTERY GIFT\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1038,
+    "source": "ALIGNED(4) const u8 gText_PickOKExit[] = _(\"{DPAD_UPDOWN}PICK {A_BUTTON}OK {B_BUTTON}EXIT\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1039,
+    "source": "ALIGNED(4) const u8 gText_PickOKCancel[] = _(\"{DPAD_UPDOWN}PICK {A_BUTTON}OK {B_BUTTON}CANCEL\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1040,
+    "source": "const u8 gText_PlayersBattleResults[] = _(\"{PLAYER}'s BATTLE RESULTS\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1041,
+    "source": "const u8 gText_TotalRecordWLD[] = _(\"TOTAL RECORD W:{STR_VAR_1} L:{STR_VAR_2} D:{STR_VAR_3}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1042,
+    "source": "const u8 gText_WinLoseDraw[] = _(\"{CLEAR_TO 83}WIN{CLEAR_TO 128}LOSE{CLEAR_TO 176}DRAW\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1043,
+    "source": "const u8 gText_CommunicationStandby5[] = _(\"Communication standby\u2026\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1044,
+    "source": "const u8 gDaycareText_GetAlongVeryWell[] = _(\"The two seem to get along\\nvery well.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1045,
+    "source": "const u8 gDaycareText_GetAlong[] = _(\"The two seem to get along.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1046,
+    "source": "const u8 gDaycareText_DontLikeOther[] = _(\"The two don't seem to like\\neach other much.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1047,
+    "source": "const u8 gDaycareText_PlayOther[] = _(\"The two prefer to play with other\\nPOK\u00e9MON than each other.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1048,
+    "source": "const u8 gText_NewLine2[] = _(\"\\n\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1049,
+    "source": "const u8 gText_Exit4[] = _(\"EXIT\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1050,
+    "source": "const u8 gText_Lv[] = _(\"{LV}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1051,
+    "source": "const u8 gText_TimeBoard[] = _(\"TIME BOARD\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1052,
+    "source": "const u8 gText_TimeCleared[] = _(\"TIME CLEARED \");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1053,
+    "source": "const u8 gText_XMinYDotZSec[] = _(\"{STR_VAR_1} min. {STR_VAR_2}.{STR_VAR_3} sec.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1054,
+    "source": "const u8 gText_TrainerHill1F[] = _(\"1F\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1055,
+    "source": "const u8 gText_TrainerHill2F[] = _(\"2F\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1056,
+    "source": "const u8 gText_TrainerHill3F[] = _(\"3F\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1057,
+    "source": "const u8 gText_TrainerHill4F[] = _(\"4F\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1058,
+    "source": "const u8 gText_TeachWhichMoveToPkmn[] = _(\"Teach which {STR_VAR_3} to\\n{STR_VAR_1}?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1059,
+    "source": "const u8 gText_MoveRelearnerTeachMoveConfirm[] = _(\"Teach {STR_VAR_2}?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1060,
+    "source": "const u8 gText_MoveRelearnerTeachMoveConfirmUseTm[] = _(\"Teach {STR_VAR_2}?\\nThis will consume one {STR_VAR_3}.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1061,
+    "source": "const u8 gText_MoveRelearnerPkmnLearnedMove[] = _(\"{STR_VAR_1} learned\\n{STR_VAR_2}!\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1062,
+    "source": "const u8 gText_MoveRelearnerPkmnTryingToLearnMove[] = _(\"{STR_VAR_1} is trying to learn\\n{STR_VAR_2}.\\pBut {STR_VAR_1} can't learn more\\nthan four moves.\\pDelete an older move to make\\nroom for {STR_VAR_2}?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1063,
+    "source": "const u8 gText_MoveRelearnerStopTryingToTeachMove[] = _(\"Stop trying to teach\\n{STR_VAR_2}?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1064,
+    "source": "const u8 gText_MoveRelearnerAndPoof[] = _(\"{PAUSE 32}1, {PAUSE 15}2, and {PAUSE 15}\u2026 {PAUSE 15}\u2026 {PAUSE 15}\u2026 {PAUSE 15}{PLAY_SE SE_BALL_BOUNCE_1}Poof!\\p\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1065,
+    "source": "const u8 gText_MoveRelearnerPkmnForgotMoveAndLearnedNew[] = _(\"{STR_VAR_1} forgot {STR_VAR_3}.\\pAnd\u2026\\p{STR_VAR_1} learned {STR_VAR_2}.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1066,
+    "source": "const u8 gText_MoveRelearnedPkmnDidNotLearnMove[] = _(\"{STR_VAR_1} did not learn the\\nmove {STR_VAR_2}.\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1067,
+    "source": "const u8 gText_MoveRelearnerGiveUp[] = _(\"Give up trying to teach a new\\nmove to {STR_VAR_1}?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1068,
+    "source": "const u8 gText_MoveRelearnerStop[] = _(\"Stop trying to learn new\\nmoves for {STR_VAR_1}?\");;"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1069,
+    "source": "const u8 gText_MoveRelearnerWhichMoveToForget[] = _(\"Which move should be\\nforgotten?\\p\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1070,
+    "source": "const u8 gText_MoveRelearnerBattleMoves[] = _(\"BATTLE MOVES\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1071,
+    "source": "const u8 gText_MoveRelearnerContestMovesTitle[] = _(\"CONTEST MOVES\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1072,
+    "source": "const u8 gText_MoveRelearnerType[] = _(\"TYPE/\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1073,
+    "source": "const u8 gText_MoveRelearnerPP[] = _(\"PP/\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1074,
+    "source": "const u8 gText_MoveRelearnerPower[] = _(\"POWER/\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1075,
+    "source": "const u8 gText_MoveRelearnerAccuracy[] = _(\"ACCURACY/\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1076,
+    "source": "const u8 gText_MoveRelearnerAppeal[] = _(\"APPEAL\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1077,
+    "source": "const u8 gText_MoveRelearnerJam[] = _(\"JAM\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1078,
+    "source": "const u8 gText_ClearAllSaveData[] = _(\"Clear all save data areas?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1079,
+    "source": "const u8 gText_ClearingData[] = _(\"Clearing data\u2026\\nPlease wait.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1080,
+    "source": "const u8 gText_IsThisTheCorrectTime[] = _(\"Is this the correct time?\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1081,
+    "source": "const u8 gText_Confirm3[] = _(\"CONFIRM\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1082,
+    "source": "const u8 gText_Cancel4[] = _(\"CANCEL\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1083,
+    "source": "const u8 gText_CommStandbyAwaitingOtherPlayer[] = _(\"Communication standby\u2026\\nAwaiting another player to choose.\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1084,
+    "source": "const u8 gText_BattleWasRefused[] = _(\"The battle was refused.{PAUSE 60}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1085,
+    "source": "const u8 gText_RefusedBattle[] = _(\"Refused the battle.{PAUSE 60}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1086,
+    "source": "const u8 gText_NoWeather[] = _(\"NO WEATHER\"); // Below are unused debug names for weather types"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1087,
+    "source": "const u8 gText_Sunny[] = _(\"SUNNY\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1088,
+    "source": "const u8 gText_Sunny2[] = _(\"SUNNY2\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1089,
+    "source": "const u8 gText_Rain[] = _(\"RAIN\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1090,
+    "source": "const u8 gText_Snow[] = _(\"SNOW\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1091,
+    "source": "const u8 gText_Lightning[] = _(\"LIGHTNING\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1092,
+    "source": "const u8 gText_Fog[] = _(\"FOG\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1093,
+    "source": "const u8 gText_VolcanoAsh[] = _(\"VOLCANO ASH\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1094,
+    "source": "const u8 gText_Sandstorm[] = _(\"SANDSTORM\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1095,
+    "source": "const u8 gText_Fog2[] = _(\"FOG2\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1096,
+    "source": "const u8 gText_Seafloor[] = _(\"SEAFLOOR\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1097,
+    "source": "const u8 gText_Cloudy[] = _(\"CLOUDY\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1098,
+    "source": "const u8 gText_Sunny3[] = _(\"SUNNY3\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1099,
+    "source": "const u8 gText_HeavyRain[] = _(\"HEAVY RAIN\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1100,
+    "source": "const u8 gText_Seafloor2[] = _(\"SEAFLOOR2\"); // Unused"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1101,
+    "source": "const u8 gText_DelAll[] = _(\"DEL. ALL\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1102,
+    "source": "const u8 gText_Cancel5[] = _(\"CANCEL\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1103,
+    "source": "const u8 gText_Ok2[] = _(\"OK\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1104,
+    "source": "const u8 gText_Quiz[] = _(\"QUIZ\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1105,
+    "source": "const u8 gText_Answer[] = _(\"ANSWER\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1106,
+    "source": "const u8 gText_PokeBalls[] = _(\"POK\u00e9 BALLS\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1107,
+    "source": "const u8 gText_Berry[] = _(\"BERRY\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1108,
+    "source": "const u8 gText_Berries[] = _(\"BERRIES\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1109,
+    "source": "const u8 gText_ExpShareOn[] = _(\"The Exp. Share has been turned on.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1110,
+    "source": "const u8 gText_ExpShareOff[] = _(\"The Exp. Share has been turned off.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1111,
+    "source": "ALIGNED(4) const u8 gText_Ghost[] = _(\"GHOST\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1112,
+    "source": "const u8 gText_Boulderbadge[] = _(\"BOULDERBADGE\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1113,
+    "source": "const u8 gText_Cascadebadge[] = _(\"CASCADEBADGE\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1114,
+    "source": "const u8 gText_Thunderbadge[] = _(\"THUNDERBADGE\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1115,
+    "source": "const u8 gText_Rainbowbadge[] = _(\"RAINBOWBADGE\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1116,
+    "source": "const u8 gText_Soulbadge[] = _(\"SOULBADGE\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1117,
+    "source": "const u8 gText_Marshbadge[] = _(\"MARSHBADGE\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1118,
+    "source": "const u8 gText_Volcanobadge[] = _(\"VOLCANOBADGE\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1119,
+    "source": "const u8 gText_Earthbadge[] = _(\"EARTHBADGE\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1120,
+    "source": "const u8 gText_OakImportantToGetToKnowPokemonThroughly[] = _(\"OAK: It's important to get to know\\nyour POK\u00e9MON thoroughly.\\p\");"
+  },
+  {
+    "file": "src/strings.c",
+    "line": 1121,
+    "source": "const u8 gText_OakThisIsListOfPokemon[] = _(\"This is a list of your POK\u00e9MON,\\n{PLAYER}.\\pOpen this to check the skills\\nand moves of your POK\u00e9MON.\\pYou also choose POK\u00e9MON here if\\nyou want to use an item on one.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/party_menu.c",
+    "line": 526,
+    "source": "static const u8 sText_askText[] = _(\"Would you like to change {STR_VAR_1}'s\\nability to {STR_VAR_2}?\");"
+  },
+  {
+    "file": "src/party_menu.c",
+    "line": 527,
+    "source": "static const u8 sText_doneText[] = _(\"{STR_VAR_1}'s Ability became\\n{STR_VAR_2}!{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/party_menu.c",
+    "line": 528,
+    "source": "static const u8 sText_CancelTitleCase[] = _(\"Cancel\");"
+  },
+  {
+    "file": "src/party_menu.c",
+    "line": 529,
+    "source": "static const u8 sText_LevelerComplete[] = _(\"Party preparation is complete.\\nCurrent cap: Lv. {STR_VAR_1}.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/party_menu.c",
+    "line": 530,
+    "source": "static const u8 sText_BasePointsResetToZero[] = _(\"{STR_VAR_1}'s base points\\nwere all reset to zero!{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/party_menu.c",
+    "line": 531,
+    "source": "static const u8 sText_CannotSendMonToBoxHM[] = _(\"Cannot send that mon to the box,\\nbecause it knows a HM move.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/party_menu.c",
+    "line": 532,
+    "source": "static const u8 sText_CannotSendMonToBoxPartner[] = _(\"Cannot send a mon that doesn't\\nbelong to you to the box.{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/party_menu.c",
+    "line": 1417,
+    "source": "// \"selected to switch\" palette the party menu uses everywhere else, so it"
+  },
+  {
+    "file": "src/party_menu.c",
+    "line": 5186,
+    "source": "static const u8 sText_askText[] = _(\"It might affect {STR_VAR_1}'s stats.\\nAre you sure you want to use it?\");"
+  },
+  {
+    "file": "src/party_menu.c",
+    "line": 5187,
+    "source": "static const u8 sText_doneText[] = _(\"{STR_VAR_1}'s stats may have changed due\\nto the effects of the {STR_VAR_2}!{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/party_menu.c",
+    "line": 6306,
+    "source": "static const u8 sText_doneText[] = _(\"{STR_VAR_1}'s Dynamax Level\\nincreased by 1!{PAUSE_UNTIL_PRESS}\");"
+  },
+  {
+    "file": "src/party_menu.c",
+    "line": 6698,
+    "source": "StringCopy(gStringVar4, COMPOUND_STRING(\"Unfusing changes these moves:\\p\"));"
+  },
+  {
+    "file": "src/party_menu.c",
+    "line": 6726,
+    "source": "StringExpandPlaceholders(text, COMPOUND_STRING(\"{STR_VAR_1} becomes\\n{STR_VAR_2}.\\p\"));"
+  },
+  {
+    "file": "src/party_menu.c",
+    "line": 6729,
+    "source": "StringExpandPlaceholders(text, COMPOUND_STRING(\"Remove {STR_VAR_1}.\\p\"));"
+  },
+  {
+    "file": "src/party_menu.c",
+    "line": 6744,
+    "source": "StringAppend(gStringVar4, COMPOUND_STRING(\"Learn Confusion.\\p\"));"
+  },
+  {
+    "file": "src/party_menu.c",
+    "line": 6747,
+    "source": "StringAppend(gStringVar4, COMPOUND_STRING(\"Unfuse these Pok\u00e9mon?\"));"
+  },
+  {
+    "file": "src/party_menu.c",
+    "line": 6778,
+    "source": "DisplayPartyMenuMessage(COMPOUND_STRING(\"The Pok\u00e9mon stayed fused.\"), TRUE);"
+  },
+  {
+    "file": "src/party_menu.c",
+    "line": 6799,
+    "source": "DisplayPartyMenuMessage(COMPOUND_STRING(\"Your party needs its Surf capability.\"), TRUE);"
+  },
+  {
+    "file": "src/party_menu.c",
+    "line": 8025,
+    "source": "// the second prompt's \"already chosen\" slot (prevSelectedPartySlot) was"
+  },
+  {
+    "file": "src/party_menu.c",
+    "line": 8808,
+    "source": "// show \"Move item to where\" in bottom left"
+  },
+  {
+    "file": "src/pokemon_summary_screen.c",
+    "line": 62,
+    "source": "#define PSS_LABEL_WINDOW_PROMPT_UTILITY 4 // Handles \"Switch\", \"Info\", and \"Cancel\" prompts. Also handles the \"Rename\" and \"IVs\"/\"EVs\"/\"STATS\" prompts if P_SUMMARY_SCREEN_RENAME and P_SUMMARY_SCREEN_IV_EV_INFO are true, respectively"
+  },
+  {
+    "file": "src/pokemon_summary_screen.c",
+    "line": 393,
+    "source": "static const u16 sStatusTilemap[] = INCBIN_U16(\"graphics/summary_screen/status_tilemap.bin\");"
+  },
+  {
+    "file": "src/pokemon_summary_screen.c",
+    "line": 750,
+    "source": "INCGFX_U8(\"graphics/summary_screen/a_button.png\", \".4bpp\"),"
+  },
+  {
+    "file": "src/pokemon_summary_screen.c",
+    "line": 751,
+    "source": "INCGFX_U8(\"graphics/summary_screen/b_button.png\", \".4bpp\"),"
+  },
+  {
+    "file": "src/pokemon_summary_screen.c",
+    "line": 770,
+    "source": "static const u8 sText_Relearn[] = _(\"{START_BUTTON} RELEARN\"); // future note: don't decap this, because it mimics the summary screen BG graphics which will not get decapped"
+  },
+  {
+    "file": "src/pokemon_summary_screen.c",
+    "line": 772,
+    "source": "static const u8 sMemoNatureTextColor[] = _(\"{COLOR LIGHT_RED}{SHADOW GREEN}\");"
+  },
+  {
+    "file": "src/pokemon_summary_screen.c",
+    "line": 773,
+    "source": "static const u8 sMemoMiscTextColor[] = _(\"{COLOR WHITE}{SHADOW DARK_GRAY}\"); // This is also affected by palettes, apparently"
+  },
+  {
+    "file": "src/pokemon_summary_screen.c",
+    "line": 774,
+    "source": "static const u8 sStatsLeftColumnLayout[] = _(\"{DYNAMIC 0}/{DYNAMIC 1}\\n{DYNAMIC 2}\\n{DYNAMIC 3}\");"
+  },
+  {
+    "file": "src/pokemon_summary_screen.c",
+    "line": 775,
+    "source": "static const u8 sStatsLeftIVEVColumnLayout[] = _(\"{DYNAMIC 0}\\n{DYNAMIC 1}\\n{DYNAMIC 2}\");"
+  },
+  {
+    "file": "src/pokemon_summary_screen.c",
+    "line": 776,
+    "source": "static const u8 sStatsRightColumnLayout[] = _(\"{DYNAMIC 0}\\n{DYNAMIC 1}\\n{DYNAMIC 2}\");"
+  },
+  {
+    "file": "src/pokemon_summary_screen.c",
+    "line": 777,
+    "source": "static const u8 sMovesPPLayout[] = _(\"{PP}{DYNAMIC 0}/{DYNAMIC 1}\");"
+  },
+  {
+    "file": "src/pokemon_summary_screen.c",
+    "line": 1165,
+    "source": "static const u16 sMarkings_Pal[] = INCGFX_U16(\"graphics/summary_screen/markings.pal\", \".gbapal\");"
+  },
+  {
+    "file": "src/pokemon_summary_screen.c",
+    "line": 2688,
+    "source": "// This redraws the power/accuracy window when the player scrolls out of the \"HM Moves can't be forgotten\" message"
+  },
+  {
+    "file": "src/pokemon_summary_screen.c",
+    "line": 3006,
+    "source": "// Toggles the \"Cancel\" window that appears when selecting a move"
+  },
+  {
+    "file": "src/pokemon_summary_screen.c",
+    "line": 3069,
+    "source": "// Calculate the number of 1-pixel \"ticks\" to illuminate in the experience progress bar."
+  },
+  {
+    "file": "src/pokemon_summary_screen.c",
+    "line": 3070,
+    "source": "// There are 8 tiles that make up the bar, and each tile has 8 \"ticks\". Hence, the numerator"
+  },
+  {
+    "file": "src/pokemon_summary_screen.c",
+    "line": 3832,
+    "source": "static const u8 sTextNatureDown[] = _(\"{COLOR}{08}\");"
+  },
+  {
+    "file": "src/pokemon_summary_screen.c",
+    "line": 3833,
+    "source": "static const u8 sTextNatureUp[] = _(\"{COLOR}{05}\");"
+  },
+  {
+    "file": "src/pokemon_summary_screen.c",
+    "line": 3834,
+    "source": "static const u8 sTextNatureNeutral[] = _(\"{COLOR}{01}\");"
+  },
+  {
+    "file": "src/pokemon_summary_screen.c",
+    "line": 3857,
+    "source": "static const u8 gText_GradeF[] = _(\"F\");"
+  },
+  {
+    "file": "src/pokemon_summary_screen.c",
+    "line": 3858,
+    "source": "static const u8 gText_GradeD[] = _(\"D\");"
+  },
+  {
+    "file": "src/pokemon_summary_screen.c",
+    "line": 3859,
+    "source": "static const u8 gText_GradeC[] = _(\"C\");"
+  },
+  {
+    "file": "src/pokemon_summary_screen.c",
+    "line": 3860,
+    "source": "static const u8 gText_GradeB[] = _(\"B\");"
+  },
+  {
+    "file": "src/pokemon_summary_screen.c",
+    "line": 3861,
+    "source": "static const u8 gText_GradeA[] = _(\"A\");"
+  },
+  {
+    "file": "src/pokemon_summary_screen.c",
+    "line": 3862,
+    "source": "static const u8 gText_GradeS[] = _(\"S\");"
+  },
+  {
+    "file": "src/pokemon_summary_screen.c",
+    "line": 4771,
+    "source": "const u8* gText_SkillPageIvs = COMPOUND_STRING(\"IVs\");"
+  },
+  {
+    "file": "src/pokemon_summary_screen.c",
+    "line": 4772,
+    "source": "const u8* gText_SkillPageEvs = COMPOUND_STRING(\"EVs\");"
+  },
+  {
+    "file": "src/pokemon_summary_screen.c",
+    "line": 4773,
+    "source": "const u8* gText_SkillPageStats = COMPOUND_STRING(\"STATS\");"
+  },
+  {
+    "file": "src/pokemon_summary_screen.c",
+    "line": 4774,
+    "source": "const u8* gText_Rename = COMPOUND_STRING(\"RENAME\");"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 53,
+    "source": "Search for \"SECTION:\" to locate them. These sections are not"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 322,
+    "source": "// \"MULTIPLE\" mode allows up to an entire box to be"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 348,
+    "source": "TILEMAPID_PKMN_DATA, // The \"Pkmn Data\" text at the top of the display"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 862,
+    "source": "static const u8 gText_JustOnePkmn[] = _(\"There is just one POK\u00e9MON with you.\");"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 863,
+    "source": "static const u8 gText_PartyFull[] = _(\"Your party is full!\");"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 864,
+    "source": "static const u8 gText_Box[] = _(\"BOX\");"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 871,
+    "source": "[OPTION_WITHDRAW]   = {COMPOUND_STRING(\"Withdraw Pok\u00e9mon\"), COMPOUND_STRING(\"Move Pok\u00e9mon stored in Boxes to\\nyour party.\")},"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 872,
+    "source": "[OPTION_DEPOSIT]    = {COMPOUND_STRING(\"Deposit Pok\u00e9mon\"),  COMPOUND_STRING(\"Store Pok\u00e9mon in your party in Boxes.\")},"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 873,
+    "source": "[OPTION_MOVE_MONS]  = {COMPOUND_STRING(\"Move Pok\u00e9mon\"),     COMPOUND_STRING(\"Organize the Pok\u00e9mon in Boxes and\\nin your party.\")},"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 874,
+    "source": "[OPTION_MOVE_ITEMS] = {COMPOUND_STRING(\"Move Items\"),       COMPOUND_STRING(\"Move items held by any Pok\u00e9mon\\nin a Box or your party.\")},"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 875,
+    "source": "[OPTION_EXIT]       = {COMPOUND_STRING(\"See Ya!\"),          COMPOUND_STRING(\"Return to the previous menu.\")}"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 934,
+    "source": "static const u8 sText_OutOf30[] = _(\"/30\");"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 936,
+    "source": "static const u16 sChooseBoxMenu_Pal[]        = INCGFX_U16(\"graphics/pokemon_storage/box_selection_popup.pal\", \".gbapal\");"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 937,
+    "source": "static const u8 sChooseBoxMenuCenter_Gfx[]   = INCGFX_U8(\"graphics/pokemon_storage/box_selection_popup_center.png\", \".4bpp\");"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 938,
+    "source": "static const u8 sChooseBoxMenuSides_Gfx[]    = INCGFX_U8(\"graphics/pokemon_storage/box_selection_popup_sides.png\", \".4bpp\");"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 939,
+    "source": "static const u32 sScrollingBg_Gfx[]          = INCGFX_U32(\"graphics/pokemon_storage/scrolling_bg.png\", \".4bpp.smol\");"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 940,
+    "source": "static const u32 sScrollingBg_Tilemap[]      = INCGFX_U32(\"graphics/pokemon_storage/scrolling_bg.bin\", \".smolTM\");"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 941,
+    "source": "static const u16 sDisplayMenu_Pal[]          = INCGFX_U16(\"graphics/pokemon_storage/display_menu.pal\", \".gbapal\"); // Unused"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 942,
+    "source": "static const u32 sDisplayMenu_Tilemap[]      = INCGFX_U32(\"graphics/pokemon_storage/display_menu.bin\", \".smolTM\");"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 943,
+    "source": "static const u16 sPkmnData_Tilemap[]         = INCBIN_U16(\"graphics/pokemon_storage/pkmn_data.bin\");"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 944,
+    "source": "// sInterface_Pal - parts of the display frame, \"PkmnData\"'s normal color, Close Box"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 945,
+    "source": "static const u16 sInterface_Pal[]            = INCGFX_U16(\"graphics/pokemon_storage/interface.pal\", \".gbapal\");"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 946,
+    "source": "static const u16 sPkmnDataGray_Pal[]         = INCGFX_U16(\"graphics/pokemon_storage/pkmn_data_gray.pal\", \".gbapal\");"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 947,
+    "source": "static const u16 sScrollingBg_Pal[]          = INCGFX_U16(\"graphics/pokemon_storage/scrolling_bg.pal\", \".gbapal\");"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 948,
+    "source": "static const u16 sScrollingBgMoveItems_Pal[] = INCGFX_U16(\"graphics/pokemon_storage/scrolling_bg_move_items.pal\", \".gbapal\");"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 949,
+    "source": "static const u16 sCloseBoxButton_Tilemap[]   = INCBIN_U16(\"graphics/pokemon_storage/close_box_button.bin\");"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 950,
+    "source": "static const u16 sPartySlotFilled_Tilemap[]  = INCBIN_U16(\"graphics/pokemon_storage/party_slot_filled.bin\");"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 951,
+    "source": "static const u16 sPartySlotEmpty_Tilemap[]   = INCBIN_U16(\"graphics/pokemon_storage/party_slot_empty.bin\");"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 952,
+    "source": "static const u16 sWaveform_Pal[]             = INCGFX_U16(\"graphics/pokemon_storage/waveform.png\", \".gbapal\");"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 953,
+    "source": "static const u32 sWaveform_Gfx[]             = INCGFX_U32(\"graphics/pokemon_storage/waveform.png\", \".4bpp\");"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 954,
+    "source": "static const u16 sUnused_Pal[]               = INCGFX_U16(\"graphics/pokemon_storage/unused.pal\", \".gbapal\");"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 955,
+    "source": "static const u16 sTextWindows_Pal[]          = INCGFX_U16(\"graphics/pokemon_storage/text_windows.pal\", \".gbapal\");"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 1048,
+    "source": "static const u8 gText_PkmnIsSelected[] = _(\"{DYNAMIC 0} is selected.\");"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 1052,
+    "source": "[MSG_EXIT_BOX]             = {COMPOUND_STRING(\"Exit from the BOX?\"),         MSG_VAR_NONE},"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 1053,
+    "source": "[MSG_WHAT_YOU_DO]          = {COMPOUND_STRING(\"What do you want to do?\"),    MSG_VAR_NONE},"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 1054,
+    "source": "[MSG_PICK_A_THEME]         = {COMPOUND_STRING(\"Please pick a theme.\"),       MSG_VAR_NONE},"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 1055,
+    "source": "[MSG_PICK_A_WALLPAPER]     = {COMPOUND_STRING(\"Pick the wallpaper.\"),        MSG_VAR_NONE},"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 1057,
+    "source": "[MSG_JUMP_TO_WHICH_BOX]    = {COMPOUND_STRING(\"Jump to which BOX?\"),         MSG_VAR_NONE},"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 1058,
+    "source": "[MSG_DEPOSIT_IN_WHICH_BOX] = {COMPOUND_STRING(\"Deposit in which BOX?\"),      MSG_VAR_NONE},"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 1059,
+    "source": "[MSG_WAS_DEPOSITED]        = {COMPOUND_STRING(\"{DYNAMIC 0} was deposited.\"), MSG_VAR_MON_NAME_1},"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 1060,
+    "source": "[MSG_BOX_IS_FULL]          = {COMPOUND_STRING(\"The BOX is full.\"),           MSG_VAR_NONE},"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 1061,
+    "source": "[MSG_RELEASE_POKE]         = {COMPOUND_STRING(\"Release this POK\u00e9MON?\"),      MSG_VAR_NONE},"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 1062,
+    "source": "[MSG_WAS_RELEASED]         = {COMPOUND_STRING(\"{DYNAMIC 0} was released.\"),  MSG_VAR_RELEASE_MON_1},"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 1063,
+    "source": "[MSG_BYE_BYE]              = {COMPOUND_STRING(\"Bye-bye, {DYNAMIC 0}!\"),      MSG_VAR_RELEASE_MON_3},"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 1064,
+    "source": "[MSG_MARK_POKE]            = {COMPOUND_STRING(\"Mark your POK\u00e9MON.\"),         MSG_VAR_NONE},"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 1065,
+    "source": "[MSG_LAST_POKE]            = {COMPOUND_STRING(\"That's your last POK\u00e9MON!\"),  MSG_VAR_NONE},"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 1067,
+    "source": "[MSG_HOLDING_POKE]         = {COMPOUND_STRING(\"You're holding a POK\u00e9MON!\"),  MSG_VAR_NONE},"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 1068,
+    "source": "[MSG_WHICH_ONE_WILL_TAKE]  = {COMPOUND_STRING(\"Which one will you take?\"),   MSG_VAR_NONE},"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 1069,
+    "source": "[MSG_CANT_RELEASE_EGG]     = {COMPOUND_STRING(\"You can't release an EGG.\"),  MSG_VAR_NONE},"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 1070,
+    "source": "[MSG_CONTINUE_BOX]         = {COMPOUND_STRING(\"Continue BOX operations?\"),   MSG_VAR_NONE},"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 1071,
+    "source": "[MSG_CAME_BACK]            = {COMPOUND_STRING(\"{DYNAMIC 0} came back!\"),     MSG_VAR_MON_NAME_1},"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 1072,
+    "source": "[MSG_WORRIED]              = {COMPOUND_STRING(\"Was it worried about you?\"),  MSG_VAR_NONE},"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 1073,
+    "source": "[MSG_SURPRISE]             = {COMPOUND_STRING(\"\u2026 \u2026 \u2026 \u2026 !\"),                  MSG_VAR_NONE},"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 1074,
+    "source": "[MSG_PLEASE_REMOVE_MAIL]   = {COMPOUND_STRING(\"Please remove the MAIL.\"),    MSG_VAR_NONE},"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 1076,
+    "source": "[MSG_GIVE_TO_MON]          = {COMPOUND_STRING(\"GIVE to a POK\u00e9MON?\"),         MSG_VAR_NONE},"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 1077,
+    "source": "[MSG_PLACED_IN_BAG]        = {COMPOUND_STRING(\"Placed item in the BAG.\"),    MSG_VAR_ITEM_NAME},"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 1078,
+    "source": "[MSG_BAG_FULL]             = {COMPOUND_STRING(\"The BAG is full.\"),           MSG_VAR_NONE},"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 1079,
+    "source": "[MSG_PUT_IN_BAG]           = {COMPOUND_STRING(\"Put this item in the BAG?\"),  MSG_VAR_NONE},"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 1080,
+    "source": "[MSG_ITEM_IS_HELD]         = {COMPOUND_STRING(\"{DYNAMIC 0} is now held.\"),   MSG_VAR_ITEM_NAME},"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 1081,
+    "source": "[MSG_CHANGED_TO_ITEM]      = {COMPOUND_STRING(\"Changed to {DYNAMIC 0}.\"),    MSG_VAR_ITEM_NAME},"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 1082,
+    "source": "[MSG_CANT_STORE_MAIL]      = {COMPOUND_STRING(\"MAIL can't be stored!\"),      MSG_VAR_NONE},"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 1291,
+    "source": "static const u16 sHandCursor_Pal[] = INCGFX_U16(\"graphics/pokemon_storage/hand_cursor.png\", \".gbapal\");"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 1292,
+    "source": "static const u8 sHandCursor_Gfx[] = INCGFX_U8(\"graphics/pokemon_storage/hand_cursor.png\", \".4bpp\");"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 1293,
+    "source": "static const u8 sHandCursorShadow_Gfx[] = INCGFX_U8(\"graphics/pokemon_storage/hand_cursor_shadow.png\", \".4bpp\");"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 1522,
+    "source": "// Printed \"can't do PC option message\""
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 2905,
+    "source": "// Start \"can't release\" sequence"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 3953,
+    "source": "// Turn the wave animation on the sides of \"Pkmn Data\" on/off"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 3960,
+    "source": "// Start waveform animation and color \"Pkmn Data\""
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 3967,
+    "source": "// Stop waveform animation and gray out \"Pkmn Data\""
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 7978,
+    "source": "static const u8 gPCText_Give[] = _(\"GIVE\");"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 7982,
+    "source": "[MENU_CANCEL]     = COMPOUND_STRING(\"CANCEL\"),"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 7983,
+    "source": "[MENU_STORE]      = COMPOUND_STRING(\"STORE\"),"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 7984,
+    "source": "[MENU_WITHDRAW]   = COMPOUND_STRING(\"WITHDRAW\"),"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 7985,
+    "source": "[MENU_MOVE]       = COMPOUND_STRING(\"MOVE\"),"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 7986,
+    "source": "[MENU_SHIFT]      = COMPOUND_STRING(\"SHIFT\"),"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 7987,
+    "source": "[MENU_PLACE]      = COMPOUND_STRING(\"PLACE\"),"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 7988,
+    "source": "[MENU_SUMMARY]    = COMPOUND_STRING(\"SUMMARY\"),"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 7989,
+    "source": "[MENU_RELEASE]    = COMPOUND_STRING(\"RELEASE\"),"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 7990,
+    "source": "[MENU_MARK]       = COMPOUND_STRING(\"MARK\"),"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 7991,
+    "source": "[MENU_JUMP]       = COMPOUND_STRING(\"JUMP\"),"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 7992,
+    "source": "[MENU_WALLPAPER]  = COMPOUND_STRING(\"WALLPAPER\"),"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 7993,
+    "source": "[MENU_NAME]       = COMPOUND_STRING(\"NAME\"),"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 7994,
+    "source": "[MENU_TAKE]       = COMPOUND_STRING(\"TAKE\"),"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 7997,
+    "source": "[MENU_SWITCH]     = COMPOUND_STRING(\"SWITCH\"),"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 7998,
+    "source": "[MENU_BAG]        = COMPOUND_STRING(\"BAG\"),"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 7999,
+    "source": "[MENU_INFO]       = COMPOUND_STRING(\"INFO\"),"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 8000,
+    "source": "[MENU_SCENERY_1]  = COMPOUND_STRING(\"SCENERY 1\"),"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 8001,
+    "source": "[MENU_SCENERY_2]  = COMPOUND_STRING(\"SCENERY 2\"),"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 8002,
+    "source": "[MENU_SCENERY_3]  = COMPOUND_STRING(\"SCENERY 3\"),"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 8003,
+    "source": "[MENU_ETCETERA]   = COMPOUND_STRING(\"ETCETERA\"),"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 8004,
+    "source": "[MENU_FRIENDS]    = COMPOUND_STRING(\"FRIENDS\"),"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 8005,
+    "source": "[MENU_FOREST]     = COMPOUND_STRING(\"FOREST\"),"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 8006,
+    "source": "[MENU_CITY]       = COMPOUND_STRING(\"CITY\"),"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 8007,
+    "source": "[MENU_DESERT]     = COMPOUND_STRING(\"DESERT\"),"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 8008,
+    "source": "[MENU_SAVANNA]    = COMPOUND_STRING(\"SAVANNA\"),"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 8009,
+    "source": "[MENU_CRAG]       = COMPOUND_STRING(\"CRAG\"),"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 8010,
+    "source": "[MENU_VOLCANO]    = COMPOUND_STRING(\"VOLCANO\"),"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 8011,
+    "source": "[MENU_SNOW]       = COMPOUND_STRING(\"SNOW\"),"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 8012,
+    "source": "[MENU_CAVE]       = COMPOUND_STRING(\"CAVE\"),"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 8013,
+    "source": "[MENU_BEACH]      = COMPOUND_STRING(\"BEACH\"),"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 8014,
+    "source": "[MENU_SEAFLOOR]   = COMPOUND_STRING(\"SEAFLOOR\"),"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 8015,
+    "source": "[MENU_RIVER]      = COMPOUND_STRING(\"RIVER\"),"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 8016,
+    "source": "[MENU_SKY]        = COMPOUND_STRING(\"SKY\"),"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 8017,
+    "source": "[MENU_POLKADOT]   = COMPOUND_STRING(\"POLKA-DOT\"),"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 8018,
+    "source": "[MENU_POKECENTER] = COMPOUND_STRING(\"POK\u00e9CENTER\"),"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 8019,
+    "source": "[MENU_MACHINE]    = COMPOUND_STRING(\"MACHINE\"),"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 8020,
+    "source": "[MENU_SIMPLE]     = COMPOUND_STRING(\"SIMPLE\"),"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 8021,
+    "source": "[MENU_SELECT]     = COMPOUND_STRING(\"SELECT\"),"
+  },
+  {
+    "file": "src/pokemon_storage_system.c",
+    "line": 8686,
+    "source": "static const u32 sItemInfoFrame_Gfx[] = INCGFX_U32(\"graphics/pokemon_storage/item_info_frame.png\", \".4bpp\");"
+  },
+  {
+    "file": "src/emerald_champions_battle_sets.c",
+    "line": 14,
+    "source": "static const u8 sRecommendedSetName[] = _(\"Recommended\");"
+  }
+]

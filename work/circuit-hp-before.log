@@ -1,0 +1,21 @@
+tools/scaninc/scaninc -M build/emerald-test/test/emerald_champions.d -g build/assets -I include -I tools/agbcc/include test/emerald_champions.c
+tools/scaninc/scaninc -M build/emerald-test/src/champions_circuit.d -g build/assets -I include -I tools/agbcc/include src/champions_circuit.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/champions_circuit.o src/champions_circuit.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/emerald_champions.o test/emerald_champions.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 4
+[0] EC Circuit HP review: authored Drum construction at actual competition levels: [31mFAIL[0m
+CIRCUIT_HP species=Linoone template=1021 level=14 item=Figy Berry rawHp=59 postHp=59 hpEV=252
+test/emerald_champions.c:24055: EXPECT_EQ(1, 0) failed
+
+  [31mFAILED[0m tests:
+  - [31mtest/emerald_champions.c:1802[0m: EC Circuit HP review: authored Drum construction at actual competition levels: 24055: EXPECT_EQ(1, 0) failed
+
+- Tests [31mFAILED[0m:          1    Add TESTS='X' to run tests with the defined prefix.
+- Tests [34mTOTAL[0m:           1
+
+make: *** [check] Error 1

@@ -1,0 +1,40 @@
+BattleFrontier_BattlePyramidLobby_EventScript_HintGiver::
+	lockall
+	applymovement LOCALID_PYRAMID_LOBBY_HINT_GIVER, Common_Movement_FacePlayer
+	waitmovement 0
+	msgbox BattleFrontier_BattlePyramidLobby_Text_CircuitObserver, MSGBOX_DEFAULT
+	releaseall
+	end
+
+
+BattleFrontier_BattlePyramidLobby_EventScript_Woman::
+	msgbox BattleFrontier_BattlePyramidLobby_Text_TrainersNoticeRunning, MSGBOX_NPC
+	end
+
+
+BattleFrontier_BattlePyramidLobby_EventScript_FatMan::
+	msgbox BattleFrontier_BattlePyramidLobby_Text_LostLotOfItems, MSGBOX_NPC
+	end
+
+
+BattleFrontier_BattlePyramidLobby_Text_TrainersNoticeRunning:
+	.string "The old PYRAMID was a maze. Now I\n"
+	.string "study the CIRCUIT here.\p"
+	.string "Its opponents can punish a\n"
+	.string "careless switch just as quickly as\l"
+	.string "a careless attack.$"
+
+BattleFrontier_BattlePyramidLobby_Text_LostLotOfItems:
+	.string "I used to worry about losing items\n"
+	.string "in the old PYRAMID.\p"
+	.string "The CIRCUIT restores my team and\n"
+	.string "held items after each match. I can\l"
+	.string "focus on the battle.$"
+
+BattleFrontier_BattlePyramidLobby_Text_CircuitObserver::
+	.string "I once read the PYRAMID's omens.\p"
+	.string "The CIRCUIT asks a different\n"
+	.string "question: how will your team\l"
+	.string "answer the board before it?\p"
+	.string "A prediction helps. A sound\n"
+	.string "fallback helps even more.$"

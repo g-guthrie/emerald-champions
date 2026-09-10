@@ -1,0 +1,118 @@
+blocks 1572 lines 4232 over200 117
+{"file": "data/maps/RustboroCity_DevonCorp_3F/scripts.inc", "label": "RustboroCity_DevonCorp_3F_Text_VisitCaptSternShipyard", "width": 207, "text": "If you visit the SHIPYARD in SLATEPORT,"}
+{"file": "data/maps/RustboroCity_DevonCorp_3F/scripts.inc", "label": "RustboroCity_DevonCorp_3F_Text_RepeatAndTimerHugelyPopular", "width": 203, "text": "DEVON's new products, the REPEAT BALL"}
+{"file": "data/maps/RustboroCity_Flat2_2F/scripts.inc", "label": "RustboroCity_Flat2_2F_Text_DevonWasTinyInOldDays", "width": 208, "text": "Way back in the old days, DEVON was just"}
+{"file": "data/maps/RustboroCity_Flat2_2F/scripts.inc", "label": "RustboroCity_Flat2_2F_Text_MyDaddyMadeThisYouCanHaveIt", "width": 207, "text": "My daddy's working at the CORPORATION."}
+{"file": "data/maps/RustboroCity_Flat2_2F/scripts.inc", "label": "RustboroCity_Flat2_2F_Text_GoingToWorkAtDevonToo", "width": 207, "text": "My daddy's working at the CORPORATION."}
+{"file": "data/maps/Route104/scripts.inc", "label": "Route104_Text_LikeFillingMouthWithSeedsTakeThis", "width": 202, "text": "when exposed to it. You should have it!"}
+{"file": "data/maps/Route104/scripts.inc", "label": "Route104_Text_BrendanHowsYourPokedex", "width": 203, "text": "BRENDAN: {PLAYER}, how's your POKéDEX?"}
+{"file": "data/maps/RustboroCity/scripts.inc", "label": "RustboroCity_Text_MayPassedBrineyWantToBattle", "width": 207, "text": "{PLAYER}{KUN}? Mine's looking pretty decent!"}
+{"file": "data/maps/RustboroCity/scripts.inc", "label": "RustboroCity_Text_BrendanNoConfidenceInPokemon", "width": 209, "text": "BRENDAN: What's the matter? Don't have"}
+{"file": "data/maps/RustboroCity/scripts.inc", "label": "RustboroCity_Text_DevelopedNewPokenavFeature", "width": 202, "text": "I've been developing an added feature"}
+{"file": "data/maps/RustboroCity/scripts.inc", "label": "RustboroCity_Text_YouCanHave2On2Battle", "width": 201, "text": "If you catch the eyes of two TRAINERS"}
+{"file": "data/maps/PetalburgCity_Gym/scripts.inc", "label": "PetalburgCity_Gym_Text_WallyIveNeverCaughtAPokemon", "width": 211, "text": "But I've never caught a POKéMON before."}
+{"file": "data/maps/PetalburgCity_Gym/scripts.inc", "label": "PetalburgCity_Gym_Text_NextGymLavaridge", "width": 208, "text": "Earn that fourth BADGE, then come home."}
+{"file": "data/maps/PetalburgCity_Gym/scripts.inc", "label": "PetalburgCity_Gym_Text_ParkerPostBattle", "width": 204, "text": "WIDE GUARD can stop both EARTHQUAKES."}
+{"file": "data/maps/PetalburgCity/scripts.inc", "label": "PetalburgCity_Text_WaterReflection", "width": 207, "text": "What do you see reflected in your face?"}
+{"file": "data/maps/PetalburgCity_WallysHouse/scripts.inc", "label": "PetalburgCity_WallysHouse_Text_ThanksForPlayingWithWally", "width": 210, "text": "We've sent him to stay with my relatives"}
+{"file": "data/maps/PetalburgWoods/scripts.inc", "label": "PetalburgWoods_Text_HaveYouSeenShroomish", "width": 211, "text": "I'm on my way back to DEVON in RUSTBORO."}
+{"file": "data/maps/PetalburgWoods/scripts.inc", "label": "PetalburgWoods_Text_ThatWasAwfullyClose", "width": 203, "text": "I must get these papers back to DEVON."}
+{"file": "data/maps/PetalburgWoods/scripts.inc", "label": "PetalburgWoods_Text_HiddenItemsExplanation", "width": 204, "text": "BURMY hide among these leaves. Females"}
+{"file": "data/maps/PetalburgWoods/scripts.inc", "label": "PetalburgWoods_Text_HiddenItemsExplanation", "width": 201, "text": "from its surroundings: leaves in grass,"}
+{"file": "data/maps/PetalburgWoods/scripts.inc", "label": "PetalburgWoods_Text_TrainerTipsExperience", "width": 202, "text": "Use the LEVELER to bring a new partner"}
+{"file": "data/maps/PetalburgWoods/scripts.inc", "label": "PetalburgWoods_Text_TrainerTipsExperience", "width": 205, "text": "Then prepare its moves, Ability, Nature,"}
+{"file": "data/maps/RustboroCity_PokemonSchool/scripts.inc", "label": "RustboroCity_PokemonSchool_Text_StudentTalentLevelUnknown", "width": 203, "text": "The talent levels of the students here"}
+{"file": "data/maps/RustboroCity_Flat1_2F/scripts.inc", "label": "RustboroCity_Flat1_2F_Text_OhYouDontKnowAny", "width": 206, "text": "Anyways, if you have a good suggestion,"}
+{"file": "data/maps/RustboroCity_Gym/scripts.inc", "label": "RustboroCity_Gym_Text_MarcPostBattle", "width": 201, "text": "control, reverse speed, and endurance."}
+{"file": "data/maps/RustboroCity_Gym/scripts.inc", "label": "RustboroCity_Gym_Text_RoxanneDefeat", "width": 203, "text": "carefully prepared team can be beaten."}
+{"file": "data/maps/RustboroCity_DevonCorp_1F/scripts.inc", "label": "RustboroCity_DevonCorp_1F_Text_RocksMetalDisplay", "width": 201, "text": "“DEVON is now a manufacturer of a wide"}
+{"file": "data/maps/RustboroCity_DevonCorp_1F/scripts.inc", "label": "RustboroCity_DevonCorp_1F_Text_ProductDisplay", "width": 203, "text": "pharmaceuticals for better lifestyles."}
+{"file": "data/maps/RustboroCity_DevonCorp_2F/scripts.inc", "label": "RustboroCity_DevonCorp_2F_Text_MagearnaParty", "width": 205, "text": "MAGEARNA awakens and joins your party."}
+{"file": "data/maps/RustboroCity_DevonCorp_2F/scripts.inc", "label": "RustboroCity_DevonCorp_2F_Text_MagearnaNoRoom", "width": 203, "text": "The sealed prototype answers DIANCIE,"}
+{"file": "data/maps/RustboroCity_DevonCorp_2F/scripts.inc", "label": "RustboroCity_DevonCorp_2F_Text_WeFinallyMadeNewBalls", "width": 207, "text": "The TIMER BALL gets better at catching"}
+{"file": "data/maps/RustboroCity_DevonCorp_2F/scripts.inc", "label": "RustboroCity_DevonCorp_2F_Text_FossilDataLost", "width": 209, "text": "The regenerator's record is unreadable."}
+{"file": "data/maps/Route102/scripts.inc", "label": "Route102_Text_WatchMeCatchPokemon", "width": 208, "text": "I've never thrown a POKé BALL. Watch me"}
+{"file": "data/text/berries.inc", "label": "Route104_Text_TrainersOftenMakeMonHoldBerries", "width": 205, "text": "It's up to you whether to grow BERRIES"}
+{"file": "data/text/berries.inc", "label": "Route104_PrettyPetalFlowerShop_Text_BerriesExplanation", "width": 201, "text": "Please help me, {PLAYER}{KUN}. Plant BERRIES"}
+{"file": "data/text/berries.inc", "label": "Route104_PrettyPetalFlowerShop_Text_YouCanHaveThis", "width": 205, "text": "The more attention you give to flowers,"}
+{"file": "data/text/berries.inc", "label": "Route104_PrettyPetalFlowerShop_Text_MachineMixesBerries", "width": 203, "text": "But now they have a machine that mixes"}
+{"file": "data/text/berries.inc", "label": "Route104_PrettyPetalFlowerShop_Text_MachineMixesBerries", "width": 208, "text": "up different BERRIES and makes candies"}
+{"file": "data/text/berries.inc", "label": "SootopolisCity_Text_LikeSeasonBornIn", "width": 209, "text": "If you're born in springtime, do you like"}
+{"file": "data/text/trainers.inc", "label": "Route102_Text_CalvinRematchIntro", "width": 202, "text": "Ever since I lost to you, I desperately"}
+{"file": "data/text/trainers.inc", "label": "Route103_Text_IsabellePostBattle", "width": 204, "text": "I'm a poor swimmer so I was practicing…"}
+{"file": "data/text/trainers.inc", "label": "Route104_Text_WinstonPostBattle", "width": 203, "text": "There are some things money can't buy."}
+{"file": "data/text/trainers.inc", "label": "Route104_Text_CindyPostBattle", "width": 206, "text": "“Hello” is the beginning of “good-bye.”"}
+{"file": "data/text/trainers.inc", "label": "Route104_Text_CindyPostRematch", "width": 206, "text": "“Hello” is the beginning of “good-bye.”"}
+{"file": "data/text/trainers.inc", "label": "Route109_Text_RickyRematchIntro", "width": 201, "text": "I'm hungry, but I've got enough pep in"}
+{"file": "data/text/trainers.inc", "label": "Route109_Text_PaulNotEnoughPokemon", "width": 201, "text": "That's why we make our POKéMON battle"}
+{"file": "data/text/trainers.inc", "label": "Route109_Text_MelIntro", "width": 201, "text": "Our romance is heating up all of HOENN!"}
+{"file": "data/text/trainers.inc", "label": "Route109_Text_MelNotEnoughPokemon", "width": 211, "text": "MEL: We're, like, deeply and truly in love."}
+{"file": "data/text/trainers.inc", "label": "Route110_Text_JacobIntro", "width": 206, "text": "I guess you're not used to BIKE racing."}
+{"file": "data/text/trainers.inc", "label": "Route110_Text_AnthonyPostBattle", "width": 210, "text": "Speed alone won't let me win at POKéMON."}
+{"file": "data/text/trainers.inc", "label": "Route110_Text_BenjaminIntro", "width": 201, "text": "Don't panic if your BIKE's going fast!"}
+{"file": "data/text/trainers.inc", "label": "Route110_Text_BenjaminRegister", "width": 211, "text": "I'll keep chugging on without stressing."}
+{"file": "data/text/trainers.inc", "label": "Route110_Text_AbigailIntro", "width": 201, "text": "You have to complete the three events"}
+{"file": "data/text/trainers.inc", "label": "Route110_Text_JaclynPostBattle", "width": 201, "text": "You managed to win only because it was"}
+{"file": "data/text/trainers.inc", "label": "Route110_Text_EdwinPostBattle", "width": 207, "text": "When I see a POKéMON that I don't know,"}
+{"file": "data/text/trainers.inc", "label": "Route110_Text_IsabelPostBattle", "width": 202, "text": "Rather than battling, perhaps I should"}
+{"file": "data/text/trainers.inc", "label": "Route110_Text_TimmyIntro", "width": 202, "text": "I found some cool POKéMON in the grass"}
+{"file": "data/text/trainers.inc", "label": "Route111_Text_BeckyPostBattle", "width": 201, "text": "If they can find fossils in the desert,"}
+{"file": "data/text/trainers.inc", "label": "Route111_Text_DustyDefeat", "width": 201, "text": "I've not searched for strong POKéMON."}
+{"file": "data/text/trainers.inc", "label": "Route111_Text_WiltonIntro", "width": 203, "text": "COFAGRIGUS gives your attacker MUMMY,"}
+{"file": "data/text/trainers.inc", "label": "Route111_Text_WiltonPostBattle", "width": 202, "text": "habit before a Ghost breaks your team."}
+{"file": "data/text/trainers.inc", "label": "Route112_Text_BricePostBattle", "width": 205, "text": "Hahahahaha! Something flew up my nose!"}
+{"file": "data/text/trainers.inc", "label": "Route112_Text_LarryPostBattle", "width": 206, "text": "I'm not crying because I miss my mommy!"}
+{"file": "data/text/trainers.inc", "label": "Route112_Text_CarolPostBattle", "width": 208, "text": "It doesn't matter if you're good or bad"}
+{"file": "data/text/trainers.inc", "label": "Route113_Text_JaylenPostBattle", "width": 213, "text": "That's good for me--I can't stand heat!"}
+{"file": "data/text/trainers.inc", "label": "Route113_Text_ToriDefeat", "width": 206, "text": "TORI: We lost… It's boring, so I'm going"}
+{"file": "data/text/trainers.inc", "label": "Route113_Text_WyattIntro", "width": 203, "text": "Even though I just caught my POKéMON?"}
+{"file": "data/text/trainers.inc", "label": "Route114_Text_LennyPostBattle", "width": 202, "text": "When I was a wee tyke, I believed there"}
+{"file": "data/text/trainers.inc", "label": "Route114_Text_TyraNotEnoughMons", "width": 202, "text": "If you want to battle with us, just one"}
+{"file": "data/text/trainers.inc", "label": "Route115_Text_TimothyPostBattle", "width": 203, "text": "Effort beats talent, but knowing which"}
+{"file": "data/text/trainers.inc", "label": "Route115_Text_TimothyPostRematch", "width": 203, "text": "I lost because I haven't put in enough"}
+{"file": "data/text/trainers.inc", "label": "Route115_Text_NobPostBattle", "width": 201, "text": "I've been teaching my POKéMON karate."}
+{"file": "data/text/trainers.inc", "label": "Route116_Text_ClarkIntro", "width": 204, "text": "If the tunnel doesn't go through, then"}
+{"file": "data/text/trainers.inc", "label": "Route116_Text_SarahIntro", "width": 203, "text": "Just so you know, I've never once been"}
+{"file": "data/text/trainers.inc", "label": "Route116_Text_DawsonIntro", "width": 204, "text": "When you lay your eyes on my POKéMON's"}
+{"file": "data/text/trainers.inc", "label": "Route117_Text_LydiaRegister", "width": 202, "text": "I'm glad I met a superb TRAINER in you."}
+{"file": "data/text/trainers.inc", "label": "Route117_Text_MariaIntro", "width": 207, "text": "I do my triathlon training with POKéMON,"}
+{"file": "data/text/trainers.inc", "label": "Route117_Text_MariaIntro", "width": 210, "text": "so I'm pretty confident about my speed."}
+{"file": "data/text/trainers.inc", "label": "Route117_Text_AnnaIntro", "width": 206, "text": "ANNA: I'm with my pretty junior student"}
+{"file": "data/text/trainers.inc", "label": "Route117_Text_AnnaDefeat", "width": 206, "text": "ANNA: I'm with my pretty junior student"}
+{"file": "data/text/trainers.inc", "label": "Route118_Text_WadePostBattle", "width": 201, "text": "Come to think of it, fishing is a battle"}
+{"file": "data/text/trainers.inc", "label": "Route119_Text_CatherineIntro", "width": 205, "text": "Traveling light? CASTFORM changes with"}
+{"file": "data/text/trainers.inc", "label": "Route119_Text_CatherineRegister", "width": 204, "text": "It's a must-have tool for any TRAINER."}
+{"file": "data/text/trainers.inc", "label": "Route119_Text_CatherinePostRematch", "width": 204, "text": "In the same way that you, as a TRAINER,"}
+{"file": "data/text/trainers.inc", "label": "Route119_Text_ChrisIntro", "width": 205, "text": "Sure! I'll try out the POKéMON I caught"}
+{"file": "data/text/trainers.inc", "label": "Route119_Text_ChrisPostBattle", "width": 208, "text": "It's an indescribably luxuriant moment!"}
+{"file": "data/text/trainers.inc", "label": "Route119_Text_FabianPostBattle", "width": 202, "text": "A doubles team is a band: each part can"}
+{"file": "data/text/trainers.inc", "label": "Route120_Text_RobertRegister", "width": 201, "text": "I'd like to register you in my POKéNAV!"}
+{"file": "data/text/trainers.inc", "label": "Route120_Text_CalliePostBattle", "width": 202, "text": "They're cute the way they are, though."}
+{"file": "data/text/trainers.inc", "label": "Route121_Text_JoyPostBattle", "width": 207, "text": "JOY: Ehehe, I'll have to train with KATE,"}
+{"file": "data/text/trainers.inc", "label": "Route121_Text_CristinIntro", "width": 205, "text": "Five TRAINERS a day, that's my routine."}
+{"file": "data/text/trainers.inc", "label": "Route121_Text_PatPostBattle", "width": 202, "text": "love and care--I don't pick favorites."}
+{"file": "data/text/trainers.inc", "label": "Route123_Text_JazmynIntro", "width": 204, "text": "ABSOL sees it coming, LUCARIO punishes"}
+{"file": "data/text/trainers.inc", "label": "Route124_Text_SpencerPostBattle", "width": 203, "text": "Many people lose their bearings at sea."}
+{"file": "data/text/trainers.inc", "label": "Route124_Text_LilaIntro", "width": 205, "text": "Here I am in the sea, but who's with me?"}
+{"file": "data/text/trainers.inc", "label": "Route124_Text_RoyIntro", "width": 201, "text": "ROY: My big sister is tough at POKéMON!"}
+{"file": "data/text/trainers.inc", "label": "Route124_Text_LilaRematchIntro", "width": 205, "text": "Here I am in the sea, but who's with me?"}
+{"file": "data/text/trainers.inc", "label": "Route125_Text_AuronPostBattle", "width": 201, "text": "Someone's been polluting these waves."}
+{"file": "data/text/trainers.inc", "label": "Route126_Text_BarryPostBattle", "width": 207, "text": "Look! Feast your eyes on this physique!"}
+{"file": "data/text/trainers.inc", "label": "Route126_Text_NikkiDefeat", "width": 206, "text": "My fantasy burst as if it were a bubble!"}
+{"file": "data/text/trainers.inc", "label": "Route127_Text_KojiRegister", "width": 205, "text": "This is what I do to people who beat me!"}
+{"file": "data/text/trainers.inc", "label": "Route127_Text_KojiRegister", "width": 207, "text": "I'll send you my barefoot training tips."}
+{"file": "data/text/trainers.inc", "label": "Route128_Text_IsaiahPostRematch", "width": 204, "text": "I'll eventually reach EVER GRANDE CITY"}
+{"file": "data/text/trainers.inc", "label": "Route128_Text_KatelynRegister", "width": 206, "text": "of this. Let's exchange training notes."}
+{"file": "data/text/trainers.inc", "label": "Route128_Text_AlexaIntro", "width": 210, "text": "We've trained for the LEAGUE for a year."}
+{"file": "data/text/trainers.inc", "label": "Route128_Text_AlexaIntro", "width": 206, "text": "FERALIGATR, SCIZOR… we can't lose now!"}
+{"file": "data/text/trainers.inc", "label": "Route129_Text_ChasePostBattle", "width": 204, "text": "If I'm all tensed up, I won't be able to"}
+{"file": "data/text/trainers.inc", "label": "Route129_Text_AllisonPostBattle", "width": 201, "text": "Do you know what's the greatest thing"}
+{"file": "data/text/trainers.inc", "label": "Route131_Text_SusiePostBattle", "width": 204, "text": "Did you see a guy over there who whines"}
+{"file": "data/text/trainers.inc", "label": "Route131_Text_KaraIntro", "width": 201, "text": "Why do men love bathing suits so much?"}
+{"file": "data/text/trainers.inc", "label": "Route131_Text_ReliPostBattle", "width": 206, "text": "together with the sea and POKéMON from"}
+{"file": "data/text/trainers.inc", "label": "Route132_Text_RonaldPostBattle", "width": 202, "text": "I like to battle at the razor's edge of"}
+{"file": "data/text/trainers.inc", "label": "Route132_Text_KiyoPostBattle", "width": 204, "text": "You must contemplate POKéMON 24 hours"}
+{"file": "data/text/trainers.inc", "label": "Route132_Text_JonathanIntro", "width": 209, "text": "Someone's been watching me. Was it you?"}
+{"file": "data/text/trainers.inc", "label": "Route132_Text_JonathanIntro", "width": 201, "text": "RAMPARDOS doesn't like being watched."}
+{"file": "data/text/trainers.inc", "label": "Route133_Text_FranklinPostBattle", "width": 204, "text": "It's just my luck that a tough TRAINER"}
+{"file": "data/text/trainers.inc", "label": "Route134_Text_JackPostBattle", "width": 207, "text": "I think POKéMON enjoy the fast-running"}

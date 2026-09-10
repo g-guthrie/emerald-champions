@@ -1,0 +1,392 @@
+arm-none-eabi-cpp -iquote include -Wno-trigraphs -DMODERN=1 -DTESTING=0 -DEMERALD -std=gnu17 -DEC_HEADLESS_FIXTURES=0 -traditional-cpp - < src/data/trainers.party | tools/trainerproc/trainerproc -o src/data/trainers.h -i src/data/trainers.party -
+tools/scaninc/scaninc -M build/emerald-test/test/battle/ai/emerald_champions_plans.d -g build/assets -I include -I tools/agbcc/include test/battle/ai/emerald_champions_plans.c
+tools/scaninc/scaninc -M build/emerald-test/test/test_runner_battle.d -g build/assets -I include -I tools/agbcc/include test/test_runner_battle.c
+tools/scaninc/scaninc -M build/emerald-test/src/emerald_champions_battle_plan.d -g build/assets -I include -I tools/agbcc/include src/emerald_champions_battle_plan.c
+tools/scaninc/scaninc -M build/emerald-test/src/data.d -g build/assets -I include -I tools/agbcc/include src/data.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/data.o src/data.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/emerald_champions_battle_plan.o src/emerald_champions_battle_plan.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/test_runner_battle.o test/test_runner_battle.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/battle/ai/emerald_champions_plans.o test/battle/ai/emerald_champions_plans.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 4
+[0] EC live review Ned timing: complete cold decision with six-player party: [32mPASS[0m
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Rain Dance target=1
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=U-turn target=2
+AI decision turn=2 actor=3 move=Flip Turn target=2
+E33_NED_COMPLETE_TIMING trainer=340 setupFrames=6 decisionFrames=43 completeFrames=49 warmFrames=43 first=3 moves=Scald/Liquidation
+[1] EC live review Ned weather denial: opposing Sunny Day removes rain: [32mPASS[0m
+NED_INPUT reserves=0 slot=0 lv=18 HP=51 Atk=25 Def=30 SpA=39 SpD=32 Speed=49 item=494 ability=33
+NED_INPUT reserves=0 slot=1 lv=18 HP=48 Atk=48 Def=24 SpA=21 SpD=21 Speed=45 item=427 ability=33
+NED_INPUT reserves=0 slot=2 lv=18 HP=61 Atk=15 Def=28 SpA=32 SpD=64 Speed=34 item=523 ability=11
+NED_INPUT reserves=0 slot=3 lv=18 HP=59 Atk=21 Def=25 SpA=28 SpD=57 Speed=35 item=494 ability=64
+AI decision turn=1 actor=0 move=Sunny Day target=1
+AI decision turn=1 actor=1 move=Rain Dance target=1
+AI decision turn=1 actor=2 move=Double-Edge target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Rain Dance target=1
+AI decision turn=2 actor=3 move=Liquidation target=2
+NED_SUPPORT board=20 turns=1 pair=0 tailwind=0 SpAStages=6/6 foeStatus=0/0
+NED_TEMPO board=20 turns=1 reserves=0 tailwind=0 rawSpeeds=49/45 ownHP=51/48 friendship=0/0
+NED_AFTER board=20 turns=1 reserves=0 native=1 species=456/846 HP=51/48 foes=66/70 moves=Rain Dance/Protect weather=16 duration=4 speeds=49/45 foeSpeeds=58/33 AtkStages=6/6 foeStatus=0/0 faints=0/0
+NED_INPUT reserves=0 slot=0 lv=18 HP=51 Atk=25 Def=30 SpA=39 SpD=32 Speed=49 item=494 ability=33
+NED_INPUT reserves=0 slot=1 lv=18 HP=48 Atk=48 Def=24 SpA=21 SpD=21 Speed=45 item=427 ability=33
+NED_INPUT reserves=0 slot=2 lv=18 HP=61 Atk=15 Def=28 SpA=32 SpD=64 Speed=34 item=523 ability=11
+NED_INPUT reserves=0 slot=3 lv=18 HP=59 Atk=21 Def=25 SpA=28 SpD=57 Speed=35 item=494 ability=64
+AI decision turn=1 actor=0 move=Sunny Day target=1
+AI decision turn=1 actor=1 move=Rain Dance target=1
+AI decision turn=1 actor=2 move=Double-Edge target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Giga Drain target=3
+AI decision turn=2 actor=1 move=Rain Dance target=1
+AI decision turn=2 actor=2 move=Double-Edge target=3
+AI decision turn=2 actor=3 move=Liquidation target=2
+AI switch turn=2 actor=3 party=2
+AI switch turn=3 actor=1 party=3
+AI decision turn=3 actor=3 move=Protect target=3
+NED_SUPPORT board=20 turns=2 pair=0 tailwind=0 SpAStages=6/6 foeStatus=0/0
+NED_TEMPO board=20 turns=2 reserves=0 tailwind=0 rawSpeeds=49/34 ownHP=19/61 friendship=0/0
+NED_AFTER board=20 turns=2 reserves=0 native=2 species=456/458 HP=19/61 foes=66/60 moves=Rain Dance/- weather=2 duration=4 speeds=98/34 foeSpeeds=29/33 AtkStages=6/6 foeStatus=0/0 faints=1/0
+NED_INPUT reserves=0 slot=0 lv=18 HP=51 Atk=25 Def=30 SpA=39 SpD=32 Speed=49 item=494 ability=33
+NED_INPUT reserves=0 slot=1 lv=18 HP=48 Atk=48 Def=24 SpA=21 SpD=21 Speed=45 item=427 ability=33
+NED_INPUT reserves=0 slot=2 lv=18 HP=61 Atk=15 Def=28 SpA=32 SpD=64 Speed=34 item=523 ability=11
+NED_INPUT reserves=0 slot=3 lv=18 HP=59 Atk=21 Def=25 SpA=28 SpD=57 Speed=35 item=494 ability=64
+AI decision turn=1 actor=0 move=Sunny Day target=1
+AI decision turn=1 actor=1 move=Rain Dance target=1
+AI decision turn=1 actor=2 move=Double-Edge target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Giga Drain target=3
+AI decision turn=2 actor=1 move=Rain Dance target=1
+AI decision turn=2 actor=2 move=Double-Edge target=3
+AI decision turn=2 actor=3 move=Liquidation target=2
+AI switch turn=2 actor=3 party=2
+AI switch turn=3 actor=1 party=3
+AI decision turn=3 actor=0 move=Giga Drain target=3
+AI decision turn=3 actor=2 move=Double-Edge target=3
+AI decision turn=3 actor=3 move=Protect target=3
+AI decision turn=4 actor=1 move=Acid Spray target=0
+AI decision turn=4 actor=3 move=Air Slash target=0
+NED_SUPPORT board=20 turns=3 pair=0 tailwind=0 SpAStages=6/6 foeStatus=0/0
+NED_TEMPO board=20 turns=3 reserves=0 tailwind=0 rawSpeeds=35/34 ownHP=59/61 friendship=0/0
+NED_AFTER board=20 turns=3 reserves=0 native=3 species=72/458 HP=59/61 foes=66/60 moves=-/Protect weather=2 duration=3 speeds=35/34 foeSpeeds=29/33 AtkStages=6/6 foeStatus=0/0 faints=1/0
+[2] EC live review Ned disruption: Fake Out Taunt and fast Electric pressure: [32mPASS[0m
+NED_INPUT reserves=0 slot=0 lv=18 HP=51 Atk=25 Def=30 SpA=39 SpD=32 Speed=49 item=494 ability=33
+NED_INPUT reserves=0 slot=1 lv=18 HP=48 Atk=48 Def=24 SpA=21 SpD=21 Speed=45 item=427 ability=33
+NED_INPUT reserves=0 slot=2 lv=18 HP=61 Atk=15 Def=28 SpA=32 SpD=64 Speed=34 item=523 ability=11
+NED_INPUT reserves=0 slot=3 lv=18 HP=59 Atk=21 Def=25 SpA=28 SpD=57 Speed=35 item=494 ability=64
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Rain Dance target=1
+AI decision turn=1 actor=2 move=Double-Edge target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Rain Dance target=1
+AI decision turn=2 actor=3 move=Liquidation target=0
+NED_SUPPORT board=10 turns=1 pair=0 tailwind=0 SpAStages=6/6 foeStatus=0/0
+NED_TEMPO board=10 turns=1 reserves=0 tailwind=0 rawSpeeds=49/45 ownHP=43/48 friendship=0/0
+NED_AFTER board=10 turns=1 reserves=0 native=1 species=456/846 HP=43/48 foes=66/70 moves=-/Protect weather=0 duration=0 speeds=49/45 foeSpeeds=53/33 AtkStages=6/6 foeStatus=0/0 faints=0/0
+NED_INPUT reserves=0 slot=0 lv=18 HP=51 Atk=25 Def=30 SpA=39 SpD=32 Speed=49 item=494 ability=33
+NED_INPUT reserves=0 slot=1 lv=18 HP=48 Atk=48 Def=24 SpA=21 SpD=21 Speed=45 item=427 ability=33
+NED_INPUT reserves=0 slot=2 lv=18 HP=61 Atk=15 Def=28 SpA=32 SpD=64 Speed=34 item=523 ability=11
+NED_INPUT reserves=0 slot=3 lv=18 HP=59 Atk=21 Def=25 SpA=28 SpD=57 Speed=35 item=494 ability=64
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Rain Dance target=1
+AI decision turn=1 actor=2 move=Double-Edge target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Taunt target=1
+AI decision turn=2 actor=1 move=Rain Dance target=1
+AI decision turn=2 actor=2 move=Double-Edge target=3
+AI decision turn=2 actor=3 move=Liquidation target=0
+AI switch turn=2 actor=3 party=2
+AI decision turn=3 actor=1 move=Scald target=0
+AI decision turn=3 actor=3 move=Air Slash target=0
+NED_SUPPORT board=10 turns=2 pair=0 tailwind=0 SpAStages=6/6 foeStatus=0/0
+NED_TEMPO board=10 turns=2 reserves=0 tailwind=0 rawSpeeds=49/34 ownHP=43/61 friendship=0/0
+NED_AFTER board=10 turns=2 reserves=0 native=2 species=456/458 HP=43/61 foes=41/55 moves=-/- weather=0 duration=0 speeds=49/34 foeSpeeds=53/33 AtkStages=6/6 foeStatus=0/0 faints=1/0
+NED_INPUT reserves=0 slot=0 lv=18 HP=51 Atk=25 Def=30 SpA=39 SpD=32 Speed=49 item=494 ability=33
+NED_INPUT reserves=0 slot=1 lv=18 HP=48 Atk=48 Def=24 SpA=21 SpD=21 Speed=45 item=427 ability=33
+NED_INPUT reserves=0 slot=2 lv=18 HP=61 Atk=15 Def=28 SpA=32 SpD=64 Speed=34 item=523 ability=11
+NED_INPUT reserves=0 slot=3 lv=18 HP=59 Atk=21 Def=25 SpA=28 SpD=57 Speed=35 item=494 ability=64
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Rain Dance target=1
+AI decision turn=1 actor=2 move=Double-Edge target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Taunt target=1
+AI decision turn=2 actor=1 move=Rain Dance target=1
+AI decision turn=2 actor=2 move=Double-Edge target=3
+AI decision turn=2 actor=3 move=Liquidation target=0
+AI switch turn=2 actor=3 party=2
+AI decision turn=3 actor=0 move=Taunt target=1
+AI decision turn=3 actor=1 move=Scald target=0
+AI decision turn=3 actor=2 move=Double-Edge target=3
+AI decision turn=3 actor=3 move=Air Slash target=0
+AI decision turn=4 actor=1 move=Scald target=2
+AI decision turn=4 actor=3 move=Protect target=3
+NED_SUPPORT board=10 turns=3 pair=0 tailwind=0 SpAStages=6/6 foeStatus=0/0
+NED_TEMPO board=10 turns=3 reserves=0 tailwind=0 rawSpeeds=49/34 ownHP=43/26 friendship=0/0
+NED_AFTER board=10 turns=3 reserves=0 native=3 species=456/458 HP=43/26 foes=0/39 moves=Scald/Air Slash weather=0 duration=0 speeds=49/34 foeSpeeds=0/33 AtkStages=6/6 foeStatus=0/0 faints=1/1
+NED_INPUT reserves=0 slot=0 lv=18 HP=51 Atk=25 Def=30 SpA=39 SpD=32 Speed=49 item=494 ability=33
+NED_INPUT reserves=0 slot=1 lv=18 HP=48 Atk=48 Def=24 SpA=21 SpD=21 Speed=45 item=427 ability=33
+NED_INPUT reserves=0 slot=2 lv=18 HP=61 Atk=15 Def=28 SpA=32 SpD=64 Speed=34 item=523 ability=11
+NED_INPUT reserves=0 slot=3 lv=18 HP=59 Atk=21 Def=25 SpA=28 SpD=57 Speed=35 item=494 ability=64
+AI decision turn=1 actor=0 move=Thunderbolt target=1
+AI decision turn=1 actor=1 move=Rain Dance target=1
+AI decision turn=1 actor=2 move=Double-Edge target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Scald target=0
+AI decision turn=2 actor=3 move=Liquidation target=0
+NED_SUPPORT board=11 turns=1 pair=0 tailwind=0 SpAStages=6/6 foeStatus=0/0
+NED_TEMPO board=11 turns=1 reserves=0 tailwind=0 rawSpeeds=49/45 ownHP=1/48 friendship=0/0
+NED_AFTER board=11 turns=1 reserves=0 native=1 species=456/846 HP=1/48 foes=52/70 moves=Rain Dance/Protect weather=2 duration=4 speeds=98/90 foeSpeeds=53/33 AtkStages=6/6 foeStatus=0/0 faints=0/0
+NED_INPUT reserves=0 slot=0 lv=18 HP=51 Atk=25 Def=30 SpA=39 SpD=32 Speed=49 item=494 ability=33
+NED_INPUT reserves=0 slot=1 lv=18 HP=48 Atk=48 Def=24 SpA=21 SpD=21 Speed=45 item=427 ability=33
+NED_INPUT reserves=0 slot=2 lv=18 HP=61 Atk=15 Def=28 SpA=32 SpD=64 Speed=34 item=523 ability=11
+NED_INPUT reserves=0 slot=3 lv=18 HP=59 Atk=21 Def=25 SpA=28 SpD=57 Speed=35 item=494 ability=64
+AI decision turn=1 actor=0 move=Thunderbolt target=1
+AI decision turn=1 actor=1 move=Rain Dance target=1
+AI decision turn=1 actor=2 move=Double-Edge target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Thunderbolt target=1
+AI decision turn=2 actor=1 move=Scald target=0
+AI decision turn=2 actor=2 move=Double-Edge target=3
+AI decision turn=2 actor=3 move=Liquidation target=0
+AI switch turn=2 actor=3 party=2
+AI decision turn=3 actor=1 move=Scald target=2
+AI decision turn=3 actor=3 move=Scald target=2
+NED_SUPPORT board=11 turns=2 pair=0 tailwind=0 SpAStages=6/6 foeStatus=0/0
+NED_TEMPO board=11 turns=2 reserves=0 tailwind=0 rawSpeeds=49/34 ownHP=1/61 friendship=0/0
+NED_AFTER board=11 turns=2 reserves=0 native=2 species=456/458 HP=1/61 foes=0/55 moves=Scald/- weather=2 duration=3 speeds=98/34 foeSpeeds=0/33 AtkStages=6/6 foeStatus=0/0 faints=1/1
+NED_INPUT reserves=0 slot=0 lv=18 HP=51 Atk=25 Def=30 SpA=39 SpD=32 Speed=49 item=494 ability=33
+NED_INPUT reserves=0 slot=1 lv=18 HP=48 Atk=48 Def=24 SpA=21 SpD=21 Speed=45 item=427 ability=33
+NED_INPUT reserves=0 slot=2 lv=18 HP=61 Atk=15 Def=28 SpA=32 SpD=64 Speed=34 item=523 ability=11
+NED_INPUT reserves=0 slot=3 lv=18 HP=59 Atk=21 Def=25 SpA=28 SpD=57 Speed=35 item=494 ability=64
+AI decision turn=1 actor=0 move=Thunderbolt target=1
+AI decision turn=1 actor=1 move=Rain Dance target=1
+AI decision turn=1 actor=2 move=Double-Edge target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Thunderbolt target=1
+AI decision turn=2 actor=1 move=Scald target=0
+AI decision turn=2 actor=2 move=Double-Edge target=3
+AI decision turn=2 actor=3 move=Liquidation target=0
+AI switch turn=2 actor=3 party=2
+AI decision turn=3 actor=2 move=Double-Edge target=3
+AI decision turn=3 actor=1 move=Scald target=2
+AI decision turn=3 actor=3 move=Scald target=2
+AI decision turn=4 actor=1 move=Scald target=2
+AI decision turn=4 actor=3 move=Scald target=2
+NED_SUPPORT board=11 turns=3 pair=0 tailwind=0 SpAStages=6/6 foeStatus=0/16
+NED_TEMPO board=11 turns=3 reserves=0 tailwind=0 rawSpeeds=49/34 ownHP=1/36 friendship=0/0
+NED_AFTER board=11 turns=3 reserves=0 native=3 species=456/458 HP=1/36 foes=0/15 moves=Scald/Scald weather=2 duration=2 speeds=98/34 foeSpeeds=0/33 AtkStages=6/6 foeStatus=0/16 faints=1/1
+[3] EC live review Ned core: physical special leads and reserves: [32mPASS[0m
+NED_INPUT reserves=0 slot=0 lv=18 HP=51 Atk=25 Def=30 SpA=39 SpD=32 Speed=49 item=494 ability=33
+NED_INPUT reserves=0 slot=1 lv=18 HP=48 Atk=48 Def=24 SpA=21 SpD=21 Speed=45 item=427 ability=33
+NED_INPUT reserves=0 slot=2 lv=18 HP=61 Atk=15 Def=28 SpA=32 SpD=64 Speed=34 item=523 ability=11
+NED_INPUT reserves=0 slot=3 lv=18 HP=59 Atk=21 Def=25 SpA=28 SpD=57 Speed=35 item=494 ability=64
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Rain Dance target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Scald target=0
+AI decision turn=2 actor=3 move=Liquidation target=0
+NED_SUPPORT board=0 turns=1 pair=0 tailwind=0 SpAStages=6/6 foeStatus=0/0
+NED_TEMPO board=0 turns=1 reserves=0 tailwind=0 rawSpeeds=49/45 ownHP=19/48 friendship=0/0
+NED_AFTER board=0 turns=1 reserves=0 native=1 species=456/846 HP=19/48 foes=60/78 moves=Rain Dance/Protect weather=2 duration=4 speeds=98/90 foeSpeeds=33/25 AtkStages=6/6 foeStatus=0/0 faints=0/0
+NED_INPUT reserves=0 slot=0 lv=18 HP=51 Atk=25 Def=30 SpA=39 SpD=32 Speed=49 item=494 ability=33
+NED_INPUT reserves=0 slot=1 lv=18 HP=48 Atk=48 Def=24 SpA=21 SpD=21 Speed=45 item=427 ability=33
+NED_INPUT reserves=0 slot=2 lv=18 HP=61 Atk=15 Def=28 SpA=32 SpD=64 Speed=34 item=523 ability=11
+NED_INPUT reserves=0 slot=3 lv=18 HP=59 Atk=21 Def=25 SpA=28 SpD=57 Speed=35 item=494 ability=64
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Rain Dance target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Scald target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Liquidation target=0
+AI decision turn=3 actor=1 move=Scald target=2
+AI decision turn=3 actor=3 move=Liquidation target=2
+NED_SUPPORT board=0 turns=2 pair=0 tailwind=0 SpAStages=6/6 foeStatus=0/0
+NED_TEMPO board=0 turns=2 reserves=0 tailwind=0 rawSpeeds=49/45 ownHP=3/6 friendship=0/0
+NED_AFTER board=0 turns=2 reserves=0 native=2 species=456/846 HP=3/6 foes=0/78 moves=Scald/Liquidation weather=2 duration=3 speeds=98/90 foeSpeeds=0/25 AtkStages=6/6 foeStatus=0/0 faints=0/1
+NED_INPUT reserves=0 slot=0 lv=18 HP=51 Atk=25 Def=30 SpA=39 SpD=32 Speed=49 item=494 ability=33
+NED_INPUT reserves=0 slot=1 lv=18 HP=48 Atk=48 Def=24 SpA=21 SpD=21 Speed=45 item=427 ability=33
+NED_INPUT reserves=0 slot=2 lv=18 HP=61 Atk=15 Def=28 SpA=32 SpD=64 Speed=34 item=523 ability=11
+NED_INPUT reserves=0 slot=3 lv=18 HP=59 Atk=21 Def=25 SpA=28 SpD=57 Speed=35 item=494 ability=64
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Rain Dance target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Scald target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Liquidation target=0
+AI decision turn=3 actor=2 move=Drain Punch target=3
+AI decision turn=3 actor=1 move=Scald target=2
+AI decision turn=3 actor=3 move=Liquidation target=2
+AI switch turn=3 actor=3 party=2
+AI decision turn=4 actor=1 move=Scald target=2
+AI decision turn=4 actor=3 move=Air Slash target=2
+NED_SUPPORT board=0 turns=3 pair=0 tailwind=0 SpAStages=6/6 foeStatus=0/16
+NED_TEMPO board=0 turns=3 reserves=0 tailwind=0 rawSpeeds=49/34 ownHP=3/61 friendship=0/0
+NED_AFTER board=0 turns=3 reserves=0 native=3 species=456/458 HP=3/61 foes=0/24 moves=Scald/- weather=2 duration=2 speeds=98/34 foeSpeeds=0/25 AtkStages=6/6 foeStatus=0/16 faints=1/1
+NED_INPUT reserves=0 slot=0 lv=18 HP=51 Atk=25 Def=30 SpA=39 SpD=32 Speed=49 item=494 ability=33
+NED_INPUT reserves=0 slot=1 lv=18 HP=48 Atk=48 Def=24 SpA=21 SpD=21 Speed=45 item=427 ability=33
+NED_INPUT reserves=0 slot=2 lv=18 HP=61 Atk=15 Def=28 SpA=32 SpD=64 Speed=34 item=523 ability=11
+NED_INPUT reserves=0 slot=3 lv=18 HP=59 Atk=21 Def=25 SpA=28 SpD=57 Speed=35 item=494 ability=64
+AI decision turn=1 actor=0 move=Thunderbolt target=1
+AI decision turn=1 actor=1 move=Rain Dance target=1
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Scald target=0
+AI switch turn=2 actor=3 party=3
+NED_SUPPORT board=1 turns=1 pair=0 tailwind=0 SpAStages=6/6 foeStatus=0/0
+NED_TEMPO board=1 turns=1 reserves=0 tailwind=0 rawSpeeds=49/45 ownHP=21/48 friendship=0/0
+NED_AFTER board=1 turns=1 reserves=0 native=1 species=456/846 HP=21/48 foes=72/64 moves=Rain Dance/Protect weather=2 duration=4 speeds=98/90 foeSpeeds=49/23 AtkStages=6/6 foeStatus=0/0 faints=0/0
+NED_INPUT reserves=0 slot=0 lv=18 HP=51 Atk=25 Def=30 SpA=39 SpD=32 Speed=49 item=494 ability=33
+NED_INPUT reserves=0 slot=1 lv=18 HP=48 Atk=48 Def=24 SpA=21 SpD=21 Speed=45 item=427 ability=33
+NED_INPUT reserves=0 slot=2 lv=18 HP=61 Atk=15 Def=28 SpA=32 SpD=64 Speed=34 item=523 ability=11
+NED_INPUT reserves=0 slot=3 lv=18 HP=59 Atk=21 Def=25 SpA=28 SpD=57 Speed=35 item=494 ability=64
+AI decision turn=1 actor=0 move=Thunderbolt target=1
+AI decision turn=1 actor=1 move=Rain Dance target=1
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Thunderbolt target=1
+AI decision turn=2 actor=1 move=Scald target=0
+AI switch turn=2 actor=3 party=3
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI switch turn=2 actor=1 party=2
+AI decision turn=3 actor=1 move=Protect target=1
+AI decision turn=3 actor=3 move=Sludge Bomb target=2
+NED_SUPPORT board=1 turns=2 pair=0 tailwind=0 SpAStages=6/6 foeStatus=16/0
+NED_TEMPO board=1 turns=2 reserves=0 tailwind=0 rawSpeeds=34/35 ownHP=61/50 friendship=0/0
+NED_AFTER board=1 turns=2 reserves=0 native=2 species=458/72 HP=61/50 foes=44/64 moves=-/- weather=2 duration=3 speeds=34/35 foeSpeeds=49/23 AtkStages=6/6 foeStatus=16/0 faints=1/0
+NED_INPUT reserves=0 slot=0 lv=18 HP=51 Atk=25 Def=30 SpA=39 SpD=32 Speed=49 item=494 ability=33
+NED_INPUT reserves=0 slot=1 lv=18 HP=48 Atk=48 Def=24 SpA=21 SpD=21 Speed=45 item=427 ability=33
+NED_INPUT reserves=0 slot=2 lv=18 HP=61 Atk=15 Def=28 SpA=32 SpD=64 Speed=34 item=523 ability=11
+NED_INPUT reserves=0 slot=3 lv=18 HP=59 Atk=21 Def=25 SpA=28 SpD=57 Speed=35 item=494 ability=64
+AI decision turn=1 actor=0 move=Thunderbolt target=1
+AI decision turn=1 actor=1 move=Rain Dance target=1
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Thunderbolt target=1
+AI decision turn=2 actor=1 move=Scald target=0
+AI switch turn=2 actor=3 party=3
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI switch turn=2 actor=1 party=2
+AI decision turn=3 actor=0 move=Thunderbolt target=1
+AI decision turn=3 actor=1 move=Protect target=1
+AI decision turn=3 actor=2 move=Giga Drain target=3
+AI decision turn=3 actor=3 move=Sludge Bomb target=2
+AI decision turn=4 actor=1 move=Air Slash target=2
+AI decision turn=4 actor=3 move=Sludge Bomb target=2
+NED_SUPPORT board=1 turns=3 pair=0 tailwind=0 SpAStages=6/6 foeStatus=16/8
+NED_TEMPO board=1 turns=3 reserves=0 tailwind=0 rawSpeeds=34/35 ownHP=61/41 friendship=0/0
+NED_AFTER board=1 turns=3 reserves=0 native=3 species=458/72 HP=61/41 foes=40/32 moves=Protect/Sludge Bomb weather=2 duration=2 speeds=34/35 foeSpeeds=49/23 AtkStages=6/6 foeStatus=16/8 faints=1/0
+NED_INPUT reserves=1 slot=0 lv=18 HP=51 Atk=25 Def=30 SpA=39 SpD=32 Speed=49 item=494 ability=33
+NED_INPUT reserves=1 slot=1 lv=18 HP=48 Atk=48 Def=24 SpA=21 SpD=21 Speed=45 item=427 ability=33
+NED_INPUT reserves=1 slot=2 lv=18 HP=61 Atk=15 Def=28 SpA=32 SpD=64 Speed=34 item=523 ability=11
+NED_INPUT reserves=1 slot=3 lv=18 HP=59 Atk=21 Def=25 SpA=28 SpD=57 Speed=35 item=494 ability=64
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Acid Spray target=2
+AI decision turn=2 actor=1 move=Air Slash target=2
+AI decision turn=2 actor=3 move=Acid Spray target=2
+NED_SUPPORT board=0 turns=1 pair=1 tailwind=0 SpAStages=6/6 foeStatus=0/0
+NED_TEMPO board=0 turns=1 reserves=1 tailwind=0 rawSpeeds=34/35 ownHP=61/46 friendship=0/0
+NED_AFTER board=0 turns=1 reserves=1 native=1 species=458/72 HP=61/46 foes=70/66 moves=Protect/Acid Spray weather=0 duration=0 speeds=34/35 foeSpeeds=33/25 AtkStages=6/6 foeStatus=0/0 faints=0/0
+NED_INPUT reserves=1 slot=0 lv=18 HP=51 Atk=25 Def=30 SpA=39 SpD=32 Speed=49 item=494 ability=33
+NED_INPUT reserves=1 slot=1 lv=18 HP=48 Atk=48 Def=24 SpA=21 SpD=21 Speed=45 item=427 ability=33
+NED_INPUT reserves=1 slot=2 lv=18 HP=61 Atk=15 Def=28 SpA=32 SpD=64 Speed=34 item=523 ability=11
+NED_INPUT reserves=1 slot=3 lv=18 HP=59 Atk=21 Def=25 SpA=28 SpD=57 Speed=35 item=494 ability=64
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Acid Spray target=2
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Air Slash target=2
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Acid Spray target=2
+AI decision turn=3 actor=1 move=Scald target=0
+AI decision turn=3 actor=3 move=Acid Spray target=0
+NED_SUPPORT board=0 turns=2 pair=1 tailwind=0 SpAStages=6/6 foeStatus=0/0
+NED_TEMPO board=0 turns=2 reserves=1 tailwind=0 rawSpeeds=34/35 ownHP=26/46 friendship=0/0
+NED_AFTER board=0 turns=2 reserves=1 native=2 species=458/72 HP=26/46 foes=54/0 moves=Air Slash/Acid Spray weather=0 duration=0 speeds=34/35 foeSpeeds=33/0 AtkStages=6/6 foeStatus=0/0 faints=0/1
+NED_INPUT reserves=1 slot=0 lv=18 HP=51 Atk=25 Def=30 SpA=39 SpD=32 Speed=49 item=494 ability=33
+NED_INPUT reserves=1 slot=1 lv=18 HP=48 Atk=48 Def=24 SpA=21 SpD=21 Speed=45 item=427 ability=33
+NED_INPUT reserves=1 slot=2 lv=18 HP=61 Atk=15 Def=28 SpA=32 SpD=64 Speed=34 item=523 ability=11
+NED_INPUT reserves=1 slot=3 lv=18 HP=59 Atk=21 Def=25 SpA=28 SpD=57 Speed=35 item=494 ability=64
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Acid Spray target=2
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Air Slash target=2
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Acid Spray target=2
+AI decision turn=3 actor=0 move=Double-Edge target=1
+AI decision turn=3 actor=1 move=Scald target=0
+AI decision turn=3 actor=3 move=Acid Spray target=0
+AI decision turn=4 actor=1 move=Scald target=0
+AI decision turn=4 actor=3 move=Acid Spray target=0
+NED_SUPPORT board=0 turns=3 pair=1 tailwind=0 SpAStages=6/6 foeStatus=16/0
+NED_TEMPO board=0 turns=3 reserves=1 tailwind=0 rawSpeeds=34/35 ownHP=1/46 friendship=0/0
+NED_AFTER board=0 turns=3 reserves=1 native=3 species=458/72 HP=1/46 foes=22/0 moves=Scald/Acid Spray weather=0 duration=0 speeds=34/35 foeSpeeds=33/0 AtkStages=6/6 foeStatus=16/0 faints=0/1
+NED_INPUT reserves=1 slot=0 lv=18 HP=51 Atk=25 Def=30 SpA=39 SpD=32 Speed=49 item=494 ability=33
+NED_INPUT reserves=1 slot=1 lv=18 HP=48 Atk=48 Def=24 SpA=21 SpD=21 Speed=45 item=427 ability=33
+NED_INPUT reserves=1 slot=2 lv=18 HP=61 Atk=15 Def=28 SpA=32 SpD=64 Speed=34 item=523 ability=11
+NED_INPUT reserves=1 slot=3 lv=18 HP=59 Atk=21 Def=25 SpA=28 SpD=57 Speed=35 item=494 ability=64
+AI decision turn=1 actor=0 move=Thunderbolt target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Sludge Bomb target=2
+AI decision turn=2 actor=1 move=Air Slash target=2
+AI decision turn=2 actor=3 move=Sludge Bomb target=2
+NED_SUPPORT board=1 turns=1 pair=1 tailwind=0 SpAStages=6/6 foeStatus=0/8
+NED_TEMPO board=1 turns=1 reserves=1 tailwind=0 rawSpeeds=34/35 ownHP=61/50 friendship=0/0
+NED_AFTER board=1 turns=1 reserves=1 native=1 species=458/72 HP=61/50 foes=72/28 moves=Protect/Sludge Bomb weather=0 duration=0 speeds=34/35 foeSpeeds=49/23 AtkStages=6/6 foeStatus=0/8 faints=0/0
+NED_INPUT reserves=1 slot=0 lv=18 HP=51 Atk=25 Def=30 SpA=39 SpD=32 Speed=49 item=494 ability=33
+NED_INPUT reserves=1 slot=1 lv=18 HP=48 Atk=48 Def=24 SpA=21 SpD=21 Speed=45 item=427 ability=33
+NED_INPUT reserves=1 slot=2 lv=18 HP=61 Atk=15 Def=28 SpA=32 SpD=64 Speed=34 item=523 ability=11
+NED_INPUT reserves=1 slot=3 lv=18 HP=59 Atk=21 Def=25 SpA=28 SpD=57 Speed=35 item=494 ability=64
+AI decision turn=1 actor=0 move=Thunderbolt target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Sludge Bomb target=2
+AI decision turn=2 actor=0 move=Thunderbolt target=1
+AI decision turn=2 actor=1 move=Air Slash target=2
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=3 move=Sludge Bomb target=2
+AI decision turn=3 actor=1 move=Protect target=1
+AI decision turn=3 actor=3 move=Sludge Bomb target=0
+NED_SUPPORT board=1 turns=2 pair=1 tailwind=0 SpAStages=6/6 foeStatus=0/0
+NED_TEMPO board=1 turns=2 reserves=1 tailwind=0 rawSpeeds=34/35 ownHP=28/50 friendship=0/0
+NED_AFTER board=1 turns=2 reserves=1 native=2 species=458/72 HP=28/50 foes=72/0 moves=Air Slash/Sludge Bomb weather=0 duration=0 speeds=34/35 foeSpeeds=49/0 AtkStages=6/6 foeStatus=0/0 faints=0/1
+NED_INPUT reserves=1 slot=0 lv=18 HP=51 Atk=25 Def=30 SpA=39 SpD=32 Speed=49 item=494 ability=33
+NED_INPUT reserves=1 slot=1 lv=18 HP=48 Atk=48 Def=24 SpA=21 SpD=21 Speed=45 item=427 ability=33
+NED_INPUT reserves=1 slot=2 lv=18 HP=61 Atk=15 Def=28 SpA=32 SpD=64 Speed=34 item=523 ability=11
+NED_INPUT reserves=1 slot=3 lv=18 HP=59 Atk=21 Def=25 SpA=28 SpD=57 Speed=35 item=494 ability=64
+AI decision turn=1 actor=0 move=Thunderbolt target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Sludge Bomb target=2
+AI decision turn=2 actor=0 move=Thunderbolt target=1
+AI decision turn=2 actor=1 move=Air Slash target=2
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=3 move=Sludge Bomb target=2
+AI decision turn=3 actor=0 move=Thunderbolt target=1
+AI decision turn=3 actor=1 move=Protect target=1
+AI decision turn=3 actor=3 move=Sludge Bomb target=0
+AI decision turn=4 actor=1 move=Helping Hand target=3
+AI decision turn=4 actor=3 move=Acid Spray target=0
+NED_SUPPORT board=1 turns=3 pair=1 tailwind=0 SpAStages=6/6 foeStatus=8/0
+NED_TEMPO board=1 turns=3 reserves=1 tailwind=0 rawSpeeds=34/35 ownHP=28/50 friendship=0/0
+NED_AFTER board=1 turns=3 reserves=1 native=3 species=458/72 HP=28/50 foes=50/0 moves=Protect/Sludge Bomb weather=0 duration=0 speeds=34/35 foeSpeeds=49/0 AtkStages=6/6 foeStatus=8/0 faints=0/1
+
+- Tests [32mPASSED[0m:          4
+- Tests [34mTOTAL[0m:           4
+

@@ -8,13 +8,15 @@ EmberPath_OnTransition:
 	end
 
 EmberPath_EventScript_Warden::
+	goto_if_set FLAG_EC_CAUGHT_MOLTRES, EmberPath_EventScript_WardenMoltresCaught
 	msgbox EmberPath_Text_Warden, MSGBOX_NPC
 	end
 EmberPath_Text_Warden:
-	.string "TEAM MAGMA's machine woke every fault\n"
-	.string "beneath this mountain.\p"
-	.string "MOLTRES came to test the heat. Farther\n"
-	.string "east, something heavier answered.$"
+	.string "The mountain has been restless.\n"
+	.string "TEAM MAGMA tampering with it\l"
+	.string "certainly did not help.\p"
+	.string "MOLTRES roosts along this path.\n"
+	.string "It seems quite at home with the heat.$"
 EmberPath_EventScript_Moltres::
 	lock
 	faceplayer
@@ -40,3 +42,13 @@ EmberPath_EventScript_MoltresCaught::
 	release
 	end
 
+
+EmberPath_EventScript_WardenMoltresCaught::
+	msgbox EmberPath_Text_WardenMoltresCaught, MSGBOX_NPC
+	end
+
+EmberPath_Text_WardenMoltresCaught:
+	.string "MOLTRES has left its roost here\n"
+	.string "to travel with you.\p"
+	.string "The mountain is still restless.\n"
+	.string "Take care along the hot slopes.$"

@@ -116,8 +116,9 @@ AquaHideout_B1F_Text_Grunt2Defeat:
 	.string "I can't win at all lately…$"
 
 AquaHideout_B1F_Text_Grunt2PostBattle:
-	.string "The secret? There's a submarine at the\n"
-	.string "far end. Or… there was. Kekeke.$"
+	.string "The secret? Our submarine dock is at\n"
+	.string "the far end. All these warp panels\l"
+	.string "should keep you guessing. Kekeke.$"
 
 AquaHideout_B1F_Text_Grunt3Intro:
 	.string "Fuel loaded A-OK! Snacks loaded A-OK!\p"
@@ -129,7 +130,8 @@ AquaHideout_B1F_Text_Grunt3Defeat:
 
 AquaHideout_B1F_Text_Grunt3PostBattle:
 	.string "Humph! My real job was to slow you\n"
-	.string "down, and I did. The sub's gone.$"
+	.string "down. Every minute you spend here\l"
+	.string "is another minute for the BOSS.$"
 
 AquaHideout_B1F_Text_Grunt5Intro:
 	.string "Yawn… Guard duty in a cave with no sea\n"

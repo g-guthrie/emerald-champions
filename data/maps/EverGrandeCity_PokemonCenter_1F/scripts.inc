@@ -87,13 +87,11 @@ EverGrandeCity_PokemonCenter_1F_Text_BelieveInYourPokemon:
 	.string "your very best!$"
 
 EverGrandeCity_PokemonCenter_1F_Text_ScottHappyForYou:
-	.string "SCOTT: {PLAYER}{KUN}, you've clawed your\n"
-	.string "way up to face the POKéMON LEAGUE!\p"
-	.string "I'm happy for you!\n"
-	.string "You made my cheering worthwhile!\p"
-	.string "{PLAYER}{KUN}, if you were to become\n"
-	.string "the POKéMON LEAGUE CHAMPION…\p"
-	.string "I'll get in touch with you then.\p"
-	.string "Okay, {PLAYER}{KUN}.\n"
-	.string "Go for greatness!$"
+	.string "SCOTT: {PLAYER}{KUN}! You've made\n"
+	.string "it to the POKéMON LEAGUE!\p"
+	.string "I knew you were one to watch. Now\n"
+	.string "you've got a shot at the\l"
+	.string "championship!\p"
+	.string "I'll be cheering for you. Give\n"
+	.string "them a battle they'll remember!$"
 

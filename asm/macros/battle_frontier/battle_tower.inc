@@ -98,6 +98,8 @@
 	.endm
 
 	.macro multi_do type:req
+	setvar VAR_0x8005, \type
+	callnative BattleSetup_SetMultiBattleFlags
 	callnative AreMultiPartiesFullTeams
 	goto_if_eq VAR_RESULT, TRUE, 1f
 	special ReducePlayerPartyToSelectedMons

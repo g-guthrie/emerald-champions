@@ -1,0 +1,10 @@
+tools/scaninc/scaninc -M build/emerald-test/test/battle/ai/emerald_champions_plans.d -g build/assets -I include -I tools/agbcc/include test/battle/ai/emerald_champions_plans.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/battle/ai/emerald_champions_plans.o test/battle/ai/emerald_champions_plans.c
+In file included from test/battle/ai/emerald_champions_plans.c:130:
+work/alyssa_gen9_probe.inc:66034:434: error: unsigned conversion from 'int' to 'short unsigned int' changes value from '66034' to '498' [-Werror=overflow]
+work/alyssa_gen9_probe.inc:66056:415: error: unsigned conversion from 'int' to 'short unsigned int' changes value from '66056' to '520' [-Werror=overflow]
+work/alyssa_gen9_probe.inc:66073:424: error: unsigned conversion from 'int' to 'short unsigned int' changes value from '66073' to '537' [-Werror=overflow]
+work/alyssa_gen9_probe.inc:66095:416: error: unsigned conversion from 'int' to 'short unsigned int' changes value from '66095' to '559' [-Werror=overflow]
+cc1: all warnings being treated as errors
+make: *** [build/emerald-test/test/battle/ai/emerald_champions_plans.o] Error 1
+make: *** Deleting file `build/emerald-test/test/battle/ai/emerald_champions_plans.o'

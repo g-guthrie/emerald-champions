@@ -1,0 +1,302 @@
+arm-none-eabi-cpp -iquote include -Wno-trigraphs -DMODERN=1 -DTESTING=0 -DEMERALD -std=gnu17 -DEC_HEADLESS_FIXTURES=0 -traditional-cpp - < src/data/trainers.party | tools/trainerproc/trainerproc -o src/data/trainers.h -i src/data/trainers.party -
+tools/scaninc/scaninc -M build/emerald-test/test/test_runner_battle.d -g build/assets -I include -I tools/agbcc/include test/test_runner_battle.c
+tools/scaninc/scaninc -M build/emerald-test/src/emerald_champions_battle_plan.d -g build/assets -I include -I tools/agbcc/include src/emerald_champions_battle_plan.c
+tools/scaninc/scaninc -M build/emerald-test/src/data.d -g build/assets -I include -I tools/agbcc/include src/data.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/data.o src/data.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/emerald_champions_battle_plan.o src/emerald_champions_battle_plan.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/test_runner_battle.o test/test_runner_battle.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 4
+[0] EC live review Cindy timing: complete cold decision with six-player party: [32mPASS[0m
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Dazzling Gleam target=0
+AI switch turn=2 actor=1 party=2
+AI decision turn=2 actor=3 move=Dazzling Gleam target=0
+E8_COMPLETE_TIMING trainer=114 setupFrames=7 decisionFrames=39 completeFrames=46 warmFrames=39 first=3 moves=Play Rough/Dazzling Gleam
+[1] EC live review Cindy recovery: actual injured Milcery decision before slower Body Slam: [32mPASS[0m
+CINDY_RECOVER_INPUT owner=0 slot=0 species=446 HP=74/74 Atk=45 Def=20 SpA=18 SpD=33 Speed=10 item=494 ability=47
+CINDY_RECOVER_INPUT owner=0 slot=1 species=417 HP=53/53 Atk=18 Def=40 SpA=21 SpD=34 Speed=35 item=523 ability=10
+CINDY_RECOVER_INPUT owner=1 slot=0 species=209 HP=47/47 Atk=38 Def=20 SpA=16 SpD=18 Speed=15 item=522 ability=22
+CINDY_RECOVER_INPUT owner=1 slot=1 species=868 HP=20/44 Atk=16 Def=19 SpA=24 SpD=27 Speed=16 item=494 ability=165
+AI decision turn=1 actor=0 move=Body Slam target=3
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Round target=3
+AI decision turn=1 actor=3 move=Draining Kiss target=2
+AI decision turn=2 actor=1 move=Play Rough target=2
+AI switch turn=2 actor=3 party=2
+CINDY_RECOVER_AI reservesAlive=1 LAST=Protect/Draining Kiss liveSpecies=209/868 HP=47/4 party=0/1 MilceryPartyHP=4 MunchAtkStage=5
+CINDY_RECOVER_INPUT owner=0 slot=0 species=446 HP=74/74 Atk=45 Def=20 SpA=18 SpD=33 Speed=10 item=494 ability=47
+CINDY_RECOVER_INPUT owner=0 slot=1 species=417 HP=53/53 Atk=18 Def=40 SpA=21 SpD=34 Speed=35 item=523 ability=10
+CINDY_RECOVER_INPUT owner=1 slot=0 species=209 HP=47/47 Atk=38 Def=20 SpA=16 SpD=18 Speed=15 item=522 ability=22
+CINDY_RECOVER_INPUT owner=1 slot=1 species=868 HP=20/44 Atk=16 Def=19 SpA=24 SpD=27 Speed=16 item=494 ability=165
+AI decision turn=1 actor=0 move=Body Slam target=3
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Round target=3
+AI decision turn=1 actor=3 move=Draining Kiss target=2
+AI decision turn=2 actor=1 move=Play Rough target=0
+AI decision turn=2 actor=3 move=Helping Hand target=1
+CINDY_RECOVER_AI reservesAlive=0 LAST=Protect/Draining Kiss liveSpecies=209/868 HP=47/4 party=0/1 MilceryPartyHP=4 MunchAtkStage=5
+[2] EC live review Cindy natural revenge: unrestricted two-turn response to focused Milcery pressure: [32mPASS[0m
+CINDY_REVENGE_AI_INPUT slot=0 species=209 HP=47 Atk=38 Def=20 SpA=16 SpD=18 Speed=15 moves=Play Rough/Fire Punch/Thunder Wave/Protect
+CINDY_REVENGE_AI_INPUT slot=1 species=868 HP=44 Atk=16 Def=19 SpA=24 SpD=27 Speed=16 moves=Draining Kiss/Dazzling Gleam/Helping Hand/Recover
+CINDY_REVENGE_AI_INPUT slot=2 species=676 HP=51 Atk=27 Def=23 SpA=21 SpD=40 Speed=33 moves=Double-Edge/U-turn/Sucker Punch/Snarl
+CINDY_REVENGE_AI_INPUT slot=3 species=287 HP=47 Atk=33 Def=23 SpA=15 SpD=17 Speed=15 moves=Body Slam/Hammer Arm/Retaliate/Rock Slide
+AI decision turn=1 actor=0 move=Super Fang target=3
+AI decision turn=1 actor=1 move=Protect target=1
+AI switch turn=1 actor=3 party=2
+AI decision turn=1 actor=2 move=Double-Edge target=3
+AI decision turn=2 actor=0 move=Super Fang target=3
+AI decision turn=2 actor=1 move=Play Rough target=0
+AI decision turn=2 actor=2 move=Double-Edge target=3
+AI decision turn=2 actor=3 move=Double-Edge target=2
+AI switch turn=2 actor=3 party=3
+AI decision turn=3 actor=1 move=Play Rough target=2
+AI decision turn=3 actor=3 move=Body Slam target=2
+CINDY_REVENGE_AI_AFTER focusRight=1 turns=2 species=209/287 HP=47/47 foeHP=38/30 LAST=Play Rough/- party=0/3 retaliateTimer=1 faintCount=1 choices=-/-
+CINDY_REVENGE_AI_PARTY SnubbullHP=47 MilceryHP=44 FurfrouHP=0 SlakothHP=47
+CINDY_REVENGE_AI_INPUT slot=0 species=209 HP=47 Atk=38 Def=20 SpA=16 SpD=18 Speed=15 moves=Play Rough/Fire Punch/Thunder Wave/Protect
+CINDY_REVENGE_AI_INPUT slot=1 species=868 HP=44 Atk=16 Def=19 SpA=24 SpD=27 Speed=16 moves=Draining Kiss/Dazzling Gleam/Helping Hand/Recover
+CINDY_REVENGE_AI_INPUT slot=2 species=676 HP=51 Atk=27 Def=23 SpA=21 SpD=40 Speed=33 moves=Double-Edge/U-turn/Sucker Punch/Snarl
+CINDY_REVENGE_AI_INPUT slot=3 species=287 HP=47 Atk=33 Def=23 SpA=15 SpD=17 Speed=15 moves=Body Slam/Hammer Arm/Retaliate/Rock Slide
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI switch turn=1 actor=3 party=2
+AI decision turn=1 actor=2 move=Double-Edge target=1
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=2 move=Double-Edge target=1
+AI decision turn=2 actor=3 move=Double-Edge target=2
+AI switch turn=2 actor=1 party=1
+AI decision turn=3 actor=1 move=Helping Hand target=3
+AI decision turn=3 actor=3 move=Double-Edge target=2
+CINDY_REVENGE_AI_AFTER focusRight=0 turns=2 species=868/676 HP=44/46 foeHP=53/29 LAST=-/Double-Edge party=1/2 retaliateTimer=1 faintCount=1 choices=-/-
+CINDY_REVENGE_AI_PARTY SnubbullHP=0 MilceryHP=44 FurfrouHP=46 SlakothHP=47
+[3] EC live review Cindy reserves: physical special and Protect into Truant continuation: [32mPASS[0m
+CINDY_RESERVE_INPUT board=0 turns=1 owner=0 slot=0 species=532 level=14 HP=58/58 Atk=31 Def=36 SpA=14 SpD=19 Speed=19 item=494 ability=89
+CINDY_RESERVE_INPUT board=0 turns=1 owner=0 slot=1 species=532 level=14 HP=58/58 Atk=31 Def=36 SpA=14 SpD=19 Speed=19 item=494 ability=89
+CINDY_RESERVE_INPUT board=0 turns=1 owner=1 slot=0 species=676 level=12 HP=51/51 Atk=27 Def=23 SpA=21 SpD=40 Speed=33 item=523 ability=169
+CINDY_RESERVE_INPUT board=0 turns=1 owner=1 slot=1 species=287 level=12 HP=47/47 Atk=33 Def=23 SpA=15 SpD=17 Speed=15 item=442 ability=54
+CINDY_RESERVE_INPUT board=0 turns=1 owner=1 slot=2 species=209 level=12 HP=0/47 Atk=38 Def=20 SpA=16 SpD=18 Speed=15 item=522 ability=22
+CINDY_RESERVE_INPUT board=0 turns=1 owner=1 slot=3 species=868 level=12 HP=0/44 Atk=16 Def=19 SpA=24 SpD=27 Speed=16 item=494 ability=165
+AI decision turn=1 actor=0 move=Ice Punch target=1
+AI decision turn=1 actor=1 move=Double-Edge target=2
+AI decision turn=1 actor=2 move=Ice Punch target=3
+AI decision turn=1 actor=3 move=Body Slam target=0
+AI decision turn=2 actor=1 move=Double-Edge target=0
+AI decision turn=2 actor=3 move=Body Slam target=0
+CINDY_RESERVE_AFTER board=0 turns=1 nativeTurns=1 species=676/287 HP=40/32 foeHP=45/48 LAST=Double-Edge/Body Slam foeLAST=Ice Punch/Ice Punch choice=Body Slam truant=1 foeSpA=6/6 ownStatus=0/0 foeStatus=64/0
+CINDY_SLAKOTH_PP board=0 turns=1 slot=0 move=Body Slam PP=14
+CINDY_SLAKOTH_PP board=0 turns=1 slot=1 move=Hammer Arm PP=10
+CINDY_SLAKOTH_PP board=0 turns=1 slot=2 move=Retaliate PP=5
+CINDY_SLAKOTH_PP board=0 turns=1 slot=3 move=Rock Slide PP=10
+CINDY_RESERVE_PARTY FurfrouHP=40 SlakothHP=32 activeParty=0/1
+CINDY_RESERVE_INPUT board=0 turns=2 owner=0 slot=0 species=532 level=14 HP=58/58 Atk=31 Def=36 SpA=14 SpD=19 Speed=19 item=494 ability=89
+CINDY_RESERVE_INPUT board=0 turns=2 owner=0 slot=1 species=532 level=14 HP=58/58 Atk=31 Def=36 SpA=14 SpD=19 Speed=19 item=494 ability=89
+CINDY_RESERVE_INPUT board=0 turns=2 owner=1 slot=0 species=676 level=12 HP=51/51 Atk=27 Def=23 SpA=21 SpD=40 Speed=33 item=523 ability=169
+CINDY_RESERVE_INPUT board=0 turns=2 owner=1 slot=1 species=287 level=12 HP=47/47 Atk=33 Def=23 SpA=15 SpD=17 Speed=15 item=442 ability=54
+CINDY_RESERVE_INPUT board=0 turns=2 owner=1 slot=2 species=209 level=12 HP=0/47 Atk=38 Def=20 SpA=16 SpD=18 Speed=15 item=522 ability=22
+CINDY_RESERVE_INPUT board=0 turns=2 owner=1 slot=3 species=868 level=12 HP=0/44 Atk=16 Def=19 SpA=24 SpD=27 Speed=16 item=494 ability=165
+AI decision turn=1 actor=0 move=Ice Punch target=1
+AI decision turn=1 actor=1 move=Double-Edge target=2
+AI decision turn=1 actor=2 move=Ice Punch target=3
+AI decision turn=1 actor=3 move=Body Slam target=0
+AI decision turn=2 actor=0 move=Ice Punch target=1
+AI decision turn=2 actor=1 move=Double-Edge target=0
+AI decision turn=2 actor=2 move=Ice Punch target=3
+AI decision turn=2 actor=3 move=Body Slam target=0
+AI decision turn=3 actor=1 move=Double-Edge target=0
+AI decision turn=3 actor=3 move=Body Slam target=2
+CINDY_RESERVE_AFTER board=0 turns=2 nativeTurns=2 species=676/287 HP=37/17 foeHP=35/48 LAST=Double-Edge/Body Slam foeLAST=Ice Punch/Ice Punch choice=Body Slam truant=0 foeSpA=6/6 ownStatus=0/0 foeStatus=64/0
+CINDY_SLAKOTH_PP board=0 turns=2 slot=0 move=Body Slam PP=14
+CINDY_SLAKOTH_PP board=0 turns=2 slot=1 move=Hammer Arm PP=10
+CINDY_SLAKOTH_PP board=0 turns=2 slot=2 move=Retaliate PP=5
+CINDY_SLAKOTH_PP board=0 turns=2 slot=3 move=Rock Slide PP=10
+CINDY_RESERVE_PARTY FurfrouHP=37 SlakothHP=17 activeParty=0/1
+CINDY_RESERVE_INPUT board=1 turns=1 owner=0 slot=0 species=270 level=14 HP=48/48 Atk=15 Def=22 SpA=26 SpD=23 Speed=17 item=494 ability=44
+CINDY_RESERVE_INPUT board=1 turns=1 owner=0 slot=1 species=270 level=14 HP=48/48 Atk=15 Def=22 SpA=26 SpD=23 Speed=17 item=494 ability=44
+CINDY_RESERVE_INPUT board=1 turns=1 owner=1 slot=0 species=676 level=12 HP=51/51 Atk=27 Def=23 SpA=21 SpD=40 Speed=33 item=523 ability=169
+CINDY_RESERVE_INPUT board=1 turns=1 owner=1 slot=1 species=287 level=12 HP=47/47 Atk=33 Def=23 SpA=15 SpD=17 Speed=15 item=442 ability=54
+CINDY_RESERVE_INPUT board=1 turns=1 owner=1 slot=2 species=209 level=12 HP=0/47 Atk=38 Def=20 SpA=16 SpD=18 Speed=15 item=522 ability=22
+CINDY_RESERVE_INPUT board=1 turns=1 owner=1 slot=3 species=868 level=12 HP=0/44 Atk=16 Def=19 SpA=24 SpD=27 Speed=16 item=494 ability=165
+AI decision turn=1 actor=0 move=Giga Drain target=1
+AI decision turn=1 actor=1 move=Snarl target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Retaliate target=0
+AI decision turn=2 actor=1 move=Snarl target=0
+AI decision turn=2 actor=3 move=Retaliate target=0
+CINDY_RESERVE_AFTER board=1 turns=1 nativeTurns=1 species=676/287 HP=44/32 foeHP=32/48 LAST=Snarl/Retaliate foeLAST=Giga Drain/Giga Drain choice=Retaliate truant=1 foeSpA=5/5 ownStatus=0/0 foeStatus=0/0
+CINDY_SLAKOTH_PP board=1 turns=1 slot=0 move=Body Slam PP=15
+CINDY_SLAKOTH_PP board=1 turns=1 slot=1 move=Hammer Arm PP=10
+CINDY_SLAKOTH_PP board=1 turns=1 slot=2 move=Retaliate PP=4
+CINDY_SLAKOTH_PP board=1 turns=1 slot=3 move=Rock Slide PP=10
+CINDY_RESERVE_PARTY FurfrouHP=44 SlakothHP=32 activeParty=0/1
+CINDY_RESERVE_INPUT board=1 turns=2 owner=0 slot=0 species=270 level=14 HP=48/48 Atk=15 Def=22 SpA=26 SpD=23 Speed=17 item=494 ability=44
+CINDY_RESERVE_INPUT board=1 turns=2 owner=0 slot=1 species=270 level=14 HP=48/48 Atk=15 Def=22 SpA=26 SpD=23 Speed=17 item=494 ability=44
+CINDY_RESERVE_INPUT board=1 turns=2 owner=1 slot=0 species=676 level=12 HP=51/51 Atk=27 Def=23 SpA=21 SpD=40 Speed=33 item=523 ability=169
+CINDY_RESERVE_INPUT board=1 turns=2 owner=1 slot=1 species=287 level=12 HP=47/47 Atk=33 Def=23 SpA=15 SpD=17 Speed=15 item=442 ability=54
+CINDY_RESERVE_INPUT board=1 turns=2 owner=1 slot=2 species=209 level=12 HP=0/47 Atk=38 Def=20 SpA=16 SpD=18 Speed=15 item=522 ability=22
+CINDY_RESERVE_INPUT board=1 turns=2 owner=1 slot=3 species=868 level=12 HP=0/44 Atk=16 Def=19 SpA=24 SpD=27 Speed=16 item=494 ability=165
+AI decision turn=1 actor=0 move=Giga Drain target=1
+AI decision turn=1 actor=1 move=Snarl target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Retaliate target=0
+AI decision turn=2 actor=0 move=Giga Drain target=1
+AI decision turn=2 actor=1 move=Snarl target=0
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=3 move=Retaliate target=0
+AI decision turn=3 actor=1 move=Snarl target=0
+AI decision turn=3 actor=3 move=Retaliate target=0
+CINDY_RESERVE_AFTER board=1 turns=2 nativeTurns=2 species=676/287 HP=38/20 foeHP=32/48 LAST=Snarl/Retaliate foeLAST=Giga Drain/Giga Drain choice=Retaliate truant=0 foeSpA=4/4 ownStatus=0/0 foeStatus=0/0
+CINDY_SLAKOTH_PP board=1 turns=2 slot=0 move=Body Slam PP=15
+CINDY_SLAKOTH_PP board=1 turns=2 slot=1 move=Hammer Arm PP=10
+CINDY_SLAKOTH_PP board=1 turns=2 slot=2 move=Retaliate PP=4
+CINDY_SLAKOTH_PP board=1 turns=2 slot=3 move=Rock Slide PP=10
+CINDY_RESERVE_PARTY FurfrouHP=38 SlakothHP=20 activeParty=0/1
+CINDY_RESERVE_INPUT board=2 turns=2 owner=0 slot=0 species=532 level=14 HP=58/58 Atk=31 Def=36 SpA=14 SpD=19 Speed=19 item=494 ability=89
+CINDY_RESERVE_INPUT board=2 turns=2 owner=0 slot=1 species=532 level=14 HP=58/58 Atk=31 Def=36 SpA=14 SpD=19 Speed=19 item=494 ability=89
+CINDY_RESERVE_INPUT board=2 turns=2 owner=1 slot=0 species=676 level=12 HP=51/51 Atk=27 Def=23 SpA=21 SpD=40 Speed=33 item=523 ability=169
+CINDY_RESERVE_INPUT board=2 turns=2 owner=1 slot=1 species=287 level=12 HP=47/47 Atk=33 Def=23 SpA=15 SpD=17 Speed=15 item=442 ability=54
+CINDY_RESERVE_INPUT board=2 turns=2 owner=1 slot=2 species=209 level=12 HP=0/47 Atk=38 Def=20 SpA=16 SpD=18 Speed=15 item=522 ability=22
+CINDY_RESERVE_INPUT board=2 turns=2 owner=1 slot=3 species=868 level=12 HP=0/44 Atk=16 Def=19 SpA=24 SpD=27 Speed=16 item=494 ability=165
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Double-Edge target=2
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Body Slam target=0
+AI decision turn=2 actor=0 move=Ice Punch target=1
+AI decision turn=2 actor=1 move=Double-Edge target=2
+AI decision turn=2 actor=2 move=Ice Punch target=3
+AI decision turn=2 actor=3 move=Body Slam target=0
+AI decision turn=3 actor=1 move=Double-Edge target=2
+AI decision turn=3 actor=3 move=Body Slam target=0
+CINDY_RESERVE_AFTER board=2 turns=2 nativeTurns=2 species=676/287 HP=40/32 foeHP=58/48 LAST=Double-Edge/Body Slam foeLAST=Ice Punch/Ice Punch choice=Body Slam truant=0 foeSpA=6/6 ownStatus=0/0 foeStatus=0/0
+CINDY_SLAKOTH_PP board=2 turns=2 slot=0 move=Body Slam PP=14
+CINDY_SLAKOTH_PP board=2 turns=2 slot=1 move=Hammer Arm PP=10
+CINDY_SLAKOTH_PP board=2 turns=2 slot=2 move=Retaliate PP=5
+CINDY_SLAKOTH_PP board=2 turns=2 slot=3 move=Rock Slide PP=10
+CINDY_RESERVE_PARTY FurfrouHP=40 SlakothHP=32 activeParty=0/1
+CINDY_RESERVE_INPUT board=2 turns=3 owner=0 slot=0 species=532 level=14 HP=58/58 Atk=31 Def=36 SpA=14 SpD=19 Speed=19 item=494 ability=89
+CINDY_RESERVE_INPUT board=2 turns=3 owner=0 slot=1 species=532 level=14 HP=58/58 Atk=31 Def=36 SpA=14 SpD=19 Speed=19 item=494 ability=89
+CINDY_RESERVE_INPUT board=2 turns=3 owner=1 slot=0 species=676 level=12 HP=51/51 Atk=27 Def=23 SpA=21 SpD=40 Speed=33 item=523 ability=169
+CINDY_RESERVE_INPUT board=2 turns=3 owner=1 slot=1 species=287 level=12 HP=47/47 Atk=33 Def=23 SpA=15 SpD=17 Speed=15 item=442 ability=54
+CINDY_RESERVE_INPUT board=2 turns=3 owner=1 slot=2 species=209 level=12 HP=0/47 Atk=38 Def=20 SpA=16 SpD=18 Speed=15 item=522 ability=22
+CINDY_RESERVE_INPUT board=2 turns=3 owner=1 slot=3 species=868 level=12 HP=0/44 Atk=16 Def=19 SpA=24 SpD=27 Speed=16 item=494 ability=165
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Double-Edge target=2
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Body Slam target=0
+AI decision turn=2 actor=0 move=Ice Punch target=1
+AI decision turn=2 actor=1 move=Double-Edge target=2
+AI decision turn=2 actor=2 move=Ice Punch target=3
+AI decision turn=2 actor=3 move=Body Slam target=0
+AI decision turn=3 actor=0 move=Ice Punch target=1
+AI decision turn=3 actor=1 move=Double-Edge target=2
+AI decision turn=3 actor=2 move=Ice Punch target=3
+AI decision turn=3 actor=3 move=Body Slam target=0
+AI decision turn=4 actor=1 move=Double-Edge target=0
+AI decision turn=4 actor=3 move=Body Slam target=0
+CINDY_RESERVE_AFTER board=2 turns=3 nativeTurns=3 species=676/287 HP=29/17 foeHP=45/38 LAST=Double-Edge/Body Slam foeLAST=Ice Punch/Ice Punch choice=Body Slam truant=1 foeSpA=6/6 ownStatus=0/0 foeStatus=64/0
+CINDY_SLAKOTH_PP board=2 turns=3 slot=0 move=Body Slam PP=13
+CINDY_SLAKOTH_PP board=2 turns=3 slot=1 move=Hammer Arm PP=10
+CINDY_SLAKOTH_PP board=2 turns=3 slot=2 move=Retaliate PP=5
+CINDY_SLAKOTH_PP board=2 turns=3 slot=3 move=Rock Slide PP=10
+CINDY_RESERVE_PARTY FurfrouHP=29 SlakothHP=17 activeParty=0/1
+[0] EC live review Cindy leads: physical special pressure and native Aroma Veil: [32mPASS[0m
+CINDY_INPUT c=0 owner=0 slot=0 species=532 lv=14 HP=58 Atk=31 Def=36 SpA=14 SpD=19 Speed=19
+CINDY_INPUT c=0 owner=0 slot=1 species=133 lv=14 HP=52 Atk=36 Def=23 SpA=18 SpD=27 Speed=24
+CINDY_INPUT c=0 owner=1 slot=0 species=209 lv=12 HP=47 Atk=38 Def=20 SpA=16 SpD=18 Speed=15
+CINDY_INPUT c=0 owner=1 slot=1 species=868 lv=12 HP=44 Atk=16 Def=19 SpA=24 SpD=27 Speed=16
+CINDY_INPUT c=0 owner=1 slot=2 species=676 lv=12 HP=51 Atk=27 Def=23 SpA=21 SpD=40 Speed=33
+CINDY_INPUT c=0 owner=1 slot=3 species=287 lv=12 HP=47 Atk=33 Def=23 SpA=15 SpD=17 Speed=15
+AI decision turn=1 actor=0 move=Drain Punch target=3
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Double-Edge target=1
+AI decision turn=1 actor=3 move=Dazzling Gleam target=0
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Dazzling Gleam target=0
+CINDY_AFTER c=0 turns=1 species=209/868 HP=47/38 foeHP=44/46 LAST=Protect/Dazzling Gleam taunt=0/0 foeAtk=5/5 party=0/1
+CINDY_INPUT c=0 owner=0 slot=0 species=532 lv=14 HP=58 Atk=31 Def=36 SpA=14 SpD=19 Speed=19
+CINDY_INPUT c=0 owner=0 slot=1 species=133 lv=14 HP=52 Atk=36 Def=23 SpA=18 SpD=27 Speed=24
+CINDY_INPUT c=0 owner=1 slot=0 species=209 lv=12 HP=47 Atk=38 Def=20 SpA=16 SpD=18 Speed=15
+CINDY_INPUT c=0 owner=1 slot=1 species=868 lv=12 HP=44 Atk=16 Def=19 SpA=24 SpD=27 Speed=16
+CINDY_INPUT c=0 owner=1 slot=2 species=676 lv=12 HP=51 Atk=27 Def=23 SpA=21 SpD=40 Speed=33
+CINDY_INPUT c=0 owner=1 slot=3 species=287 lv=12 HP=47 Atk=33 Def=23 SpA=15 SpD=17 Speed=15
+AI decision turn=1 actor=0 move=Drain Punch target=3
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Double-Edge target=1
+AI decision turn=1 actor=3 move=Dazzling Gleam target=0
+AI decision turn=2 actor=0 move=Drain Punch target=3
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=2 move=Double-Edge target=1
+AI decision turn=2 actor=3 move=Dazzling Gleam target=0
+AI decision turn=3 actor=1 move=Protect target=1
+AI switch turn=3 actor=3 party=2
+CINDY_AFTER c=0 turns=2 species=209/868 HP=11/32 foeHP=33/29 LAST=Protect/Dazzling Gleam taunt=0/0 foeAtk=5/5 party=0/1
+CINDY_INPUT c=1 owner=0 slot=0 species=4 lv=14 HP=48 Atk=20 Def=21 SpA=37 SpD=23 Speed=27
+CINDY_INPUT c=1 owner=0 slot=1 species=309 lv=14 HP=48 Atk=18 Def=20 SpA=39 SpD=20 Speed=27
+CINDY_INPUT c=1 owner=1 slot=0 species=209 lv=12 HP=47 Atk=38 Def=20 SpA=16 SpD=18 Speed=15
+CINDY_INPUT c=1 owner=1 slot=1 species=868 lv=12 HP=44 Atk=16 Def=19 SpA=24 SpD=27 Speed=16
+CINDY_INPUT c=1 owner=1 slot=2 species=676 lv=12 HP=51 Atk=27 Def=23 SpA=21 SpD=40 Speed=33
+CINDY_INPUT c=1 owner=1 slot=3 species=287 lv=12 HP=47 Atk=33 Def=23 SpA=15 SpD=17 Speed=15
+AI decision turn=1 actor=0 move=Flamethrower target=3
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Dazzling Gleam target=0
+AI decision turn=2 actor=1 move=Play Rough target=0
+AI decision turn=2 actor=3 move=Dazzling Gleam target=0
+CINDY_AFTER c=1 turns=1 species=209/868 HP=47/28 foeHP=45/41 LAST=Protect/Dazzling Gleam taunt=0/0 foeAtk=5/5 party=0/1
+CINDY_INPUT c=1 owner=0 slot=0 species=4 lv=14 HP=48 Atk=20 Def=21 SpA=37 SpD=23 Speed=27
+CINDY_INPUT c=1 owner=0 slot=1 species=309 lv=14 HP=48 Atk=18 Def=20 SpA=39 SpD=20 Speed=27
+CINDY_INPUT c=1 owner=1 slot=0 species=209 lv=12 HP=47 Atk=38 Def=20 SpA=16 SpD=18 Speed=15
+CINDY_INPUT c=1 owner=1 slot=1 species=868 lv=12 HP=44 Atk=16 Def=19 SpA=24 SpD=27 Speed=16
+CINDY_INPUT c=1 owner=1 slot=2 species=676 lv=12 HP=51 Atk=27 Def=23 SpA=21 SpD=40 Speed=33
+CINDY_INPUT c=1 owner=1 slot=3 species=287 lv=12 HP=47 Atk=33 Def=23 SpA=15 SpD=17 Speed=15
+AI decision turn=1 actor=0 move=Flamethrower target=3
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Dazzling Gleam target=0
+AI decision turn=2 actor=0 move=Flamethrower target=3
+AI decision turn=2 actor=1 move=Play Rough target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=3 move=Dazzling Gleam target=0
+AI decision turn=3 actor=1 move=Protect target=1
+AI switch turn=3 actor=3 party=2
+CINDY_AFTER c=1 turns=2 species=209/868 HP=11/12 foeHP=33/34 LAST=Play Rough/Dazzling Gleam taunt=0/0 foeAtk=4/5 party=0/1
+CINDY_INPUT c=2 owner=0 slot=0 species=619 lv=14 HP=45 Atk=37 Def=23 SpA=21 SpD=23 Speed=39
+CINDY_INPUT c=2 owner=0 slot=1 species=417 lv=14 HP=53 Atk=18 Def=40 SpA=21 SpD=34 Speed=35
+CINDY_INPUT c=2 owner=1 slot=0 species=209 lv=12 HP=47 Atk=38 Def=20 SpA=16 SpD=18 Speed=15
+CINDY_INPUT c=2 owner=1 slot=1 species=868 lv=12 HP=44 Atk=16 Def=19 SpA=24 SpD=27 Speed=16
+CINDY_INPUT c=2 owner=1 slot=2 species=676 lv=12 HP=51 Atk=27 Def=23 SpA=21 SpD=40 Speed=33
+CINDY_INPUT c=2 owner=1 slot=3 species=287 lv=12 HP=47 Atk=33 Def=23 SpA=15 SpD=17 Speed=15
+AI decision turn=1 actor=0 move=Taunt target=3
+AI decision turn=1 actor=1 move=Play Rough target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Dazzling Gleam target=0
+AI decision turn=2 actor=1 move=Fire Punch target=2
+AI decision turn=2 actor=3 move=Draining Kiss target=2
+CINDY_AFTER c=2 turns=1 species=209/868 HP=28/44 foeHP=0/46 LAST=Play Rough/Dazzling Gleam taunt=0/0 foeAtk=6/5 party=0/1
+CINDY_INPUT c=2 owner=0 slot=0 species=619 lv=14 HP=45 Atk=37 Def=23 SpA=21 SpD=23 Speed=39
+CINDY_INPUT c=2 owner=0 slot=1 species=417 lv=14 HP=53 Atk=18 Def=40 SpA=21 SpD=34 Speed=35
+CINDY_INPUT c=2 owner=1 slot=0 species=209 lv=12 HP=47 Atk=38 Def=20 SpA=16 SpD=18 Speed=15
+CINDY_INPUT c=2 owner=1 slot=1 species=868 lv=12 HP=44 Atk=16 Def=19 SpA=24 SpD=27 Speed=16
+CINDY_INPUT c=2 owner=1 slot=2 species=676 lv=12 HP=51 Atk=27 Def=23 SpA=21 SpD=40 Speed=33
+CINDY_INPUT c=2 owner=1 slot=3 species=287 lv=12 HP=47 Atk=33 Def=23 SpA=15 SpD=17 Speed=15
+AI decision turn=1 actor=0 move=Taunt target=3
+AI decision turn=1 actor=1 move=Play Rough target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Dazzling Gleam target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=1 move=Fire Punch target=2
+AI decision turn=2 actor=3 move=Draining Kiss target=2
+AI decision turn=3 actor=1 move=Protect target=1
+AI decision turn=3 actor=3 move=Dazzling Gleam target=2
+CINDY_AFTER c=2 turns=2 species=209/868 HP=9/44 foeHP=0/28 LAST=Fire Punch/Draining Kiss taunt=0/0 foeAtk=6/5 party=0/1
+
+- Tests [32mPASSED[0m:          5
+- Tests [34mTOTAL[0m:           5
+

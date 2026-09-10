@@ -1,6 +1,7 @@
 #include "global.h"
 #include "battle_setup.h"
 #include "bike.h"
+#include "braille_puzzles.h"
 #include "coord_event_weather.h"
 #include "daycare.h"
 #include "debug.h"
@@ -322,6 +323,13 @@ static const u8 *GetInteractionScript(struct MapPosition *position, u8 metatileB
     script = GetInteractedWaterScript(position, metatileBehavior, direction);
     if (script != NULL)
         return script;
+
+    // The tomb clues describe where to stand, so interact at the player's
+    // solution position without adding an object or requiring a party menu.
+    if (ShouldDoBrailleRegirockEffect())
+        return EventScript_BrailleRockSmash;
+    if (ShouldDoBrailleRegisteelEffect())
+        return EventScript_BrailleFlash;
 
     return NULL;
 }

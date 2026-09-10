@@ -21,67 +21,41 @@ ShoalCave_LowTideEntranceRoom_EventScript_ShellBellExpert::
 	msgbox ShoalCave_Text_RegionalEvolutions, MSGBOX_DEFAULT
 	dotimebasedevents
 	call_if_set FLAG_SYS_SHOAL_ITEM, ShoalCave_LowTideEntranceRoom_EventScript_ResetShoalItems
-	checkitem ITEM_LINKING_CORD
-	goto_if_eq VAR_RESULT, TRUE, ShoalCave_LowTideEntranceRoom_EventScript_AlreadyHasLinkingCord
 	checkitem ITEM_SHOAL_SALT, 4
-	goto_if_eq VAR_RESULT, FALSE, ShoalCave_LowTideEntranceRoom_EventScript_NotEnoughShoalSaltOrShells
+	goto_if_eq VAR_RESULT, FALSE, ShoalCave_EventScript_NeedMaterials
 	checkitem ITEM_SHOAL_SHELL, 4
-	goto_if_eq VAR_RESULT, FALSE, ShoalCave_LowTideEntranceRoom_EventScript_NotEnoughShoalSaltOrShells
-	msgbox ShoalCave_LowTideEntranceRoom_Text_WouldYouLikeShellBell, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, ShoalCave_LowTideEntranceRoom_EventScript_DeclineShellBell
-	checkitemspace ITEM_LINKING_CORD
-	goto_if_eq VAR_RESULT, FALSE, ShoalCave_LowTideEntranceRoom_EventScript_NoRoomForShellBell
-	msgbox ShoalCave_LowTideEntranceRoom_Text_MakeShellBellRightAway, MSGBOX_DEFAULT
-	removeitem ITEM_SHOAL_SALT, 4
-	removeitem ITEM_SHOAL_SHELL, 4
-	giveitem ITEM_LINKING_CORD
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull  @ Never FALSE, we already made sure there will be room in the bag.
-	msgbox ShoalCave_LowTideEntranceRoom_Text_ExplainShellBell, MSGBOX_DEFAULT
-	setflag FLAG_TEMP_2  @ Not read. Perhaps meant to stop him from re-explaining the Shell Bell if multiple are received in one sitting.
+	goto_if_eq VAR_RESULT, FALSE, ShoalCave_EventScript_NeedMaterials
+	setvar VAR_0x8008, ITEM_GLALITITE
+	call_if_set FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_GLALITITE, ShoalCave_EventScript_PearlReward
+	bufferitemname STR_VAR_1, VAR_0x8008
+	msgbox ShoalCave_Text_ConfirmExchange, MSGBOX_YESNO
+	goto_if_ne VAR_RESULT, YES, ShoalCave_EventScript_DeclineExchange
+	special TradeEmeraldChampionsShoalMaterials
+	goto_if_eq VAR_RESULT, 0, ShoalCave_EventScript_NeedMaterials
+	goto_if_eq VAR_RESULT, 3, ShoalCave_EventScript_NoRoom
+	goto_if_eq VAR_RESULT, 2, ShoalCave_EventScript_RewardPC
+	playfanfare MUS_OBTAIN_ITEM
+	msgbox ShoalCave_Text_RewardBag, MSGBOX_DEFAULT
+	waitfanfare
 	release
 	end
-
-ShoalCave_LowTideEntranceRoom_EventScript_AlreadyHasLinkingCord::
-	msgbox ShoalCave_LowTideEntranceRoom_Text_AlreadyHasLinkingCord, MSGBOX_DEFAULT
-	release
-	end
-
-@ If the bag is full, check if a slot will be freed when 4 Shoal Salt or Shells are given
-ShoalCave_LowTideEntranceRoom_EventScript_CheckSpaceWillBeFreed::
-	checkitem ITEM_SHOAL_SALT, 5
-	goto_if_eq VAR_RESULT, TRUE, ShoalCave_LowTideEntranceRoom_EventScript_CheckSpaceWillBeFreedShells
+ShoalCave_EventScript_PearlReward:
+	setvar VAR_0x8008, ITEM_BIG_PEARL
 	return
-
-ShoalCave_LowTideEntranceRoom_EventScript_CheckSpaceWillBeFreedShells::
-	checkitem ITEM_SHOAL_SHELL, 5
-	goto_if_eq VAR_RESULT, TRUE, ShoalCave_LowTideEntranceRoom_EventScript_NoSpaceWillBeFreed
-	return
-
-ShoalCave_LowTideEntranceRoom_EventScript_NoSpaceWillBeFreed::
-	setvar VAR_RESULT, 2
-	return
-
-ShoalCave_LowTideEntranceRoom_EventScript_NoRoomForShellBell::
-	msgbox ShoalCave_LowTideEntranceRoom_Text_NoSpaceInYourBag, MSGBOX_DEFAULT
+ShoalCave_EventScript_NeedMaterials:
+	msgbox ShoalCave_Text_Materials, MSGBOX_DEFAULT
 	release
 	end
-
-ShoalCave_LowTideEntranceRoom_EventScript_NotEnoughShoalSaltOrShells::
-	checkitem ITEM_SHOAL_SALT
-	goto_if_eq VAR_RESULT, TRUE, ShoalCave_LowTideEntranceRoom_EventScript_HasSomeShoalSaltOrShell
-	checkitem ITEM_SHOAL_SHELL
-	goto_if_eq VAR_RESULT, TRUE, ShoalCave_LowTideEntranceRoom_EventScript_HasSomeShoalSaltOrShell
-	msgbox ShoalCave_LowTideEntranceRoom_Text_AreYouPlanningOnGoingInThere, MSGBOX_DEFAULT
+ShoalCave_EventScript_DeclineExchange:
+	msgbox ShoalCave_Text_Declined, MSGBOX_DEFAULT
 	release
 	end
-
-ShoalCave_LowTideEntranceRoom_EventScript_HasSomeShoalSaltOrShell::
-	msgbox ShoalCave_LowTideEntranceRoom_Text_BringMe4ShoalSaltAndShells, MSGBOX_DEFAULT
+ShoalCave_EventScript_NoRoom:
+	msgbox ShoalCave_Text_NoRoom, MSGBOX_DEFAULT
 	release
 	end
-
-ShoalCave_LowTideEntranceRoom_EventScript_DeclineShellBell::
-	msgbox ShoalCave_LowTideEntranceRoom_Text_WantedToMakeShellBell, MSGBOX_DEFAULT
+ShoalCave_EventScript_RewardPC:
+	msgbox ShoalCave_Text_RewardPC, MSGBOX_DEFAULT
 	release
 	end
 

@@ -487,13 +487,17 @@ BattleFrontier_Lounge7_Text_FirePunchDesc::
 	.string "the foe.$"
 
 BattleFrontier_Lounge7_Text_LeftTutorFree::
-	.string "Buhahaha! I still know a thing or\n"
-	.string "two about beautiful moves.\p"
-	.string "The lessons are free now. Let us\n"
-	.string "prepare your team.$"
+	.string "Buhahaha! I was the toughest\n"
+	.string "BEAUTY around, and I still know a\l"
+	.string "beautiful move when I see one!\p"
+	.string "Don't mind her boasting over\n"
+	.string "there. My lessons are free. Let's\l"
+	.string "see your POKéMON!$"
 
 BattleFrontier_Lounge7_Text_RightTutorFree::
-	.string "Ihihihi! Experience makes every\n"
-	.string "move worth another look.\p"
-	.string "The lessons are free now. Let us\n"
-	.string "prepare your team.$"
+	.string "Ihihihi! I was winning battles\n"
+	.string "while swimming against the\l"
+	.string "current!\p"
+	.string "She'll tell you she was better.\n"
+	.string "Let her talk! My lessons are free.\l"
+	.string "Let's see your POKéMON!$"

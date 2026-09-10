@@ -2,19 +2,29 @@
 
 This is a bounded issue register, not a complete defect inventory. Entries distinguish demonstrated source defects from behavior questions and missing validation. Test totals and build claims belong with the exact artifacts that produced them, not in this rolling document.
 
-## Older saves cannot reconstruct lost relics
+## Fresh-save compatibility boundary
 
-New acquisitions now record failed relic delivery in [legendary_signs.c](https://github.com/g-guthrie/emerald-champions/blob/main/src/legendary_signs.c). Undelivered items survive saving and are retried after Pokémon Center healing; delivered items are not recreated after deliberate disposal.
-
-Older versions could lose accompanying relics when both the Bag and item PC were full. Those saves contain no record distinguishing a failed delivery from a deliberately discarded item. Migration therefore does not reconstruct old missing relics from caught flags or Pokédex ownership. It initializes the new delivery state without creating rewards.
+The current campaign targets fresh saves. The 5.1 implementation removed legacy
+save migration; older wording here about `MigrateEmeraldChampionsCoreState` and
+`ResetAmbiguousEmeraldChampionsState` described code that no longer exists.
+Current-run failed relic deliveries remain pending in `legendary_signs.c` and
+are retried after Pokémon Center healing. This does not reconstruct rewards
+lost in an older game revision.
 
 ## Behavior that needs a design decision before alteration
 
 Starting a new game initializes Hard even if Easy was selected in title-screen Options beforehand (`NewGameInitData`, [new_game.c](https://github.com/g-guthrie/emerald-champions/blob/main/src/new_game.c)). The existing behavior should be confirmed before changing how new-game preferences are carried forward.
 
-Save migration explicitly distinguishes supported legacy layouts. Other versions or ambiguous signatures currently enter `ResetAmbiguousEmeraldChampionsState` through `MigrateEmeraldChampionsCoreState` in [overworld.c](https://github.com/g-guthrie/emerald-champions/blob/main/src/overworld.c). That resets selected custom progression fields. Do not describe it as universally lossless compatibility or silently replace its policy during unrelated maintenance.
-
 ## Validation still required
+
+The September 8 repair replaces the exhaustive synchronous paired search and
+passes the focused native tactics/state suite. It is still a bounded forecast:
+same-turn manual terrain effects, delayed Wish, drain/recoil and complex
+secondary or multi-turn interactions are not fully replayed for every candidate.
+The 18-frame warm full-party probe is one position, not a universal latency
+ceiling. See [AI repair evidence](development/ai-repair-2026-09-08.md) and the
+[trainer audit](TRAINER_STRATEGY_AUDIT.md) before interpreting plan coverage as
+proof of optimal play.
 
 Static map and script checks do not prove state-dependent campaign reachability. Their scope is documented in [verify_emerald_champions_progression.py](https://github.com/g-guthrie/emerald-champions/blob/main/scripts/verify_emerald_champions_progression.py) and [verify_map_reachability.py](https://github.com/g-guthrie/emerald-champions/blob/main/scripts/verify_map_reachability.py). Fresh-save traversal, failure/recovery paths, and native UI interactions need runtime evidence.
 

@@ -99,5 +99,5 @@ PokemonLeague_EliteFour_Text_Stay:
 	.string "BAG and speak to me again.$"
 
 PokemonLeague_EliteFour_Text_Retired:
-	.string "Your LEAGUE run ends here. Rest, rebuild,\n"
-	.string "and challenge us again.$"
+	.string "Your LEAGUE run ends here. Rest,\n"
+	.string "rebuild, and challenge us again.$"

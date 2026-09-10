@@ -1,0 +1,369 @@
+arm-none-eabi-cpp -iquote include -Wno-trigraphs -DMODERN=1 -DTESTING=0 -DEMERALD -std=gnu17 -DEC_HEADLESS_FIXTURES=0 -traditional-cpp - < src/data/trainers.party | tools/trainerproc/trainerproc -o src/data/trainers.h -i src/data/trainers.party -
+tools/scaninc/scaninc -M build/emerald-test/test/battle/ai/emerald_champions_plans.d -g build/assets -I include -I tools/agbcc/include test/battle/ai/emerald_champions_plans.c
+tools/scaninc/scaninc -M build/emerald-test/test/test_runner_battle.d -g build/assets -I include -I tools/agbcc/include test/test_runner_battle.c
+tools/scaninc/scaninc -M build/emerald-test/src/emerald_champions_battle_plan.d -g build/assets -I include -I tools/agbcc/include src/emerald_champions_battle_plan.c
+tools/scaninc/scaninc -M build/emerald-test/src/data.d -g build/assets -I include -I tools/agbcc/include src/data.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/data.o src/data.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/emerald_champions_battle_plan.o src/emerald_champions_battle_plan.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/test_runner_battle.o test/test_runner_battle.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/battle/ai/emerald_champions_plans.o test/battle/ai/emerald_champions_plans.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 4
+[0] EC live review Clark timing: complete cold decision with six-player party: [32mPASS[0m
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Rock Slide target=0
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Rock Slide target=0
+AI decision turn=2 actor=3 move=Rock Tomb target=0
+E23_CLARK_COMPLETE_TIMING trainer=631 setupFrames=7 decisionFrames=40 completeFrames=47 warmFrames=39 first=3 moves=Rock Slide/Rock Tomb
+[2] EC live review Clark reserves: physical special and injured Defeatist observations: [32mPASS[0m
+CLARK_RESERVE_INPUT board=0 slot=0 species=749 level=12 HP=50 max=50 Atk=44 Def=25 SpA=17 SpD=21 Speed=19 item=523 ability=192
+CLARK_RESERVE_INPUT board=0 slot=1 species=566 level=12 HP=39 max=39 Atk=43 Def=19 SpA=23 SpD=19 Speed=36 item=0 ability=129
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Heavy Slam target=2
+AI decision turn=1 actor=2 move=Drain Punch target=1
+AI decision turn=1 actor=3 move=Acrobatics target=2
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Acrobatics target=2
+CLARK_RESERVE_AFTER board=0 turns=1 moves=Heavy Slam/Acrobatics HP=17/39 foes=43/7 Def=8/6 speeds=19/36 foeSpeStages=6/6 item=0/0 faints=0/0
+CLARK_RESERVE_INPUT board=0 slot=0 species=749 level=12 HP=50 max=50 Atk=44 Def=25 SpA=17 SpD=21 Speed=19 item=523 ability=192
+CLARK_RESERVE_INPUT board=0 slot=1 species=566 level=12 HP=39 max=39 Atk=43 Def=19 SpA=23 SpD=19 Speed=36 item=0 ability=129
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Heavy Slam target=2
+AI decision turn=1 actor=2 move=Drain Punch target=1
+AI decision turn=1 actor=3 move=Acrobatics target=2
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=2 move=Drain Punch target=1
+AI decision turn=2 actor=3 move=Acrobatics target=2
+AI decision turn=3 actor=1 move=Heavy Slam target=0
+AI decision turn=3 actor=3 move=Acrobatics target=0
+CLARK_RESERVE_AFTER board=0 turns=2 moves=Protect/Acrobatics HP=17/39 foes=43/0 Def=8/6 speeds=19/36 foeSpeStages=6/6 item=0/0 faints=0/1
+CLARK_RESERVE_INPUT board=1 slot=0 species=749 level=12 HP=50 max=50 Atk=44 Def=25 SpA=17 SpD=21 Speed=19 item=523 ability=192
+CLARK_RESERVE_INPUT board=1 slot=1 species=566 level=12 HP=39 max=39 Atk=43 Def=19 SpA=23 SpD=19 Speed=36 item=0 ability=129
+AI decision turn=1 actor=0 move=Thunderbolt target=3
+AI decision turn=1 actor=1 move=High Horsepower target=0
+AI decision turn=1 actor=2 move=Giga Drain target=1
+AI decision turn=1 actor=3 move=Acrobatics target=2
+AI decision turn=2 actor=1 move=High Horsepower target=0
+AI decision turn=2 actor=3 move=Protect target=3
+CLARK_RESERVE_AFTER board=1 turns=1 moves=High Horsepower/Acrobatics HP=50/3 foes=34/0 Def=6/6 speeds=19/36 foeSpeStages=6/6 item=523/0 faints=0/1
+CLARK_RESERVE_INPUT board=1 slot=0 species=749 level=12 HP=50 max=50 Atk=44 Def=25 SpA=17 SpD=21 Speed=19 item=523 ability=192
+CLARK_RESERVE_INPUT board=1 slot=1 species=566 level=12 HP=39 max=39 Atk=43 Def=19 SpA=23 SpD=19 Speed=36 item=0 ability=129
+AI decision turn=1 actor=0 move=Thunderbolt target=3
+AI decision turn=1 actor=1 move=High Horsepower target=0
+AI decision turn=1 actor=2 move=Giga Drain target=1
+AI decision turn=1 actor=3 move=Acrobatics target=2
+AI decision turn=2 actor=0 move=Thunderbolt target=3
+AI decision turn=2 actor=1 move=High Horsepower target=0
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=1 move=High Horsepower target=0
+AI decision turn=3 actor=3 move=Acrobatics target=0
+CLARK_RESERVE_AFTER board=1 turns=2 moves=High Horsepower/Protect HP=50/3 foes=2/0 Def=6/6 speeds=19/36 foeSpeStages=6/6 item=523/0 faints=0/1
+CLARK_RESERVE_INPUT board=2 slot=0 species=749 level=12 HP=50 max=50 Atk=44 Def=25 SpA=17 SpD=21 Speed=19 item=523 ability=192
+CLARK_RESERVE_INPUT board=2 slot=1 species=566 level=12 HP=19 max=39 Atk=43 Def=19 SpA=23 SpD=19 Speed=36 item=0 ability=129
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=High Horsepower target=0
+AI decision turn=1 actor=2 move=Drain Punch target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Acrobatics target=0
+CLARK_RESERVE_AFTER board=2 turns=1 moves=High Horsepower/Protect HP=17/19 foes=24/58 Def=8/6 speeds=19/36 foeSpeStages=6/6 item=0/0 faints=0/0
+CLARK_RESERVE_INPUT board=2 slot=0 species=749 level=12 HP=50 max=50 Atk=44 Def=25 SpA=17 SpD=21 Speed=19 item=523 ability=192
+CLARK_RESERVE_INPUT board=2 slot=1 species=566 level=12 HP=19 max=39 Atk=43 Def=19 SpA=23 SpD=19 Speed=36 item=0 ability=129
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=High Horsepower target=0
+AI decision turn=1 actor=2 move=Drain Punch target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=2 move=Drain Punch target=1
+AI decision turn=2 actor=3 move=Acrobatics target=0
+AI decision turn=3 actor=1 move=High Horsepower target=0
+AI decision turn=3 actor=3 move=Acrobatics target=0
+CLARK_RESERVE_AFTER board=2 turns=2 moves=Protect/Acrobatics HP=17/19 foes=12/58 Def=8/6 speeds=19/36 foeSpeStages=6/6 item=0/0 faints=0/0
+[1] EC live review Clark denial: single target disruption and Water spread pressure: [32mPASS[0m
+CLARK_DENIAL_INPUT b=0 owner=0 slot=0 species=619 lv=14 HP=49 stats=33/23/21/23/39 item=494 ability=39
+CLARK_DENIAL_MENU b=0 owner=0 slot=0 moves=252/269/409/282
+CLARK_DENIAL_INPUT b=0 owner=0 slot=1 species=270 lv=14 HP=48 stats=15/17/27/27/17 item=494 ability=44
+CLARK_DENIAL_MENU b=0 owner=0 slot=1 moves=202/58/240/182
+CLARK_DENIAL_INPUT b=0 owner=1 slot=0 species=524 lv=12 HP=46 stats=26/39/12/14/12 item=494 ability=5
+CLARK_DENIAL_MENU b=0 owner=1 slot=0 moves=469/157/334/704
+CLARK_DENIAL_INPUT b=0 owner=1 slot=1 species=74 lv=12 HP=35 stats=38/32/13/15/21 item=479 ability=69
+CLARK_DENIAL_MENU b=0 owner=1 slot=1 moves=317/38/661/182
+CLARK_DENIAL_INPUT b=0 owner=1 slot=2 species=749 lv=12 HP=50 stats=44/25/17/21/19 item=523 ability=192
+CLARK_DENIAL_MENU b=0 owner=1 slot=2 moves=630/317/484/182
+CLARK_DENIAL_INPUT b=0 owner=1 slot=3 species=566 lv=12 HP=39 stats=43/19/23/19/36 item=0 ability=129
+CLARK_DENIAL_MENU b=0 owner=1 slot=3 moves=157/512/182/282
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Iron Defense target=1
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Iron Defense target=1
+AI decision turn=2 actor=3 move=Double-Edge target=0
+CLARK_DENIAL_END b=0 t=1 native=1 active=524/74 slots=0/1 HP=44/35 foes=49/48 faints=0/0
+CLARK_DENIAL_MOVES b=0 t=1 own=-/Protect player=Fake Out/Giga Drain
+CLARK_DENIAL_STATE b=0 t=1 Def=6/6 Speed=6/6 taunt=0/0 foeStatus=0/0
+CLARK_DENIAL_PARTY b=0 t=1 slot=0 species=524 HP=44/46 item=494 status=0
+CLARK_DENIAL_PARTY b=0 t=1 slot=1 species=74 HP=35/35 item=479 status=0
+CLARK_DENIAL_PARTY b=0 t=1 slot=2 species=749 HP=50/50 item=523 status=0
+CLARK_DENIAL_PARTY b=0 t=1 slot=3 species=566 HP=39/39 item=0 status=0
+CLARK_DENIAL_INPUT b=0 owner=0 slot=0 species=619 lv=14 HP=49 stats=33/23/21/23/39 item=494 ability=39
+CLARK_DENIAL_MENU b=0 owner=0 slot=0 moves=252/269/409/282
+CLARK_DENIAL_INPUT b=0 owner=0 slot=1 species=270 lv=14 HP=48 stats=15/17/27/27/17 item=494 ability=44
+CLARK_DENIAL_MENU b=0 owner=0 slot=1 moves=202/58/240/182
+CLARK_DENIAL_INPUT b=0 owner=1 slot=0 species=524 lv=12 HP=46 stats=26/39/12/14/12 item=494 ability=5
+CLARK_DENIAL_MENU b=0 owner=1 slot=0 moves=469/157/334/704
+CLARK_DENIAL_INPUT b=0 owner=1 slot=1 species=74 lv=12 HP=35 stats=38/32/13/15/21 item=479 ability=69
+CLARK_DENIAL_MENU b=0 owner=1 slot=1 moves=317/38/661/182
+CLARK_DENIAL_INPUT b=0 owner=1 slot=2 species=749 lv=12 HP=50 stats=44/25/17/21/19 item=523 ability=192
+CLARK_DENIAL_MENU b=0 owner=1 slot=2 moves=630/317/484/182
+CLARK_DENIAL_INPUT b=0 owner=1 slot=3 species=566 lv=12 HP=39 stats=43/19/23/19/36 item=0 ability=129
+CLARK_DENIAL_MENU b=0 owner=1 slot=3 moves=157/512/182/282
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Iron Defense target=1
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Taunt target=1
+AI decision turn=2 actor=1 move=Iron Defense target=1
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=3 move=Double-Edge target=0
+AI switch turn=2 actor=3 party=3
+AI decision turn=3 actor=1 move=Body Press target=2
+AI decision turn=3 actor=3 move=Acrobatics target=2
+CLARK_DENIAL_END b=0 t=2 native=2 active=524/566 slots=0/3 HP=44/39 foes=30/48 faints=1/0
+CLARK_DENIAL_MOVES b=0 t=2 own=-/- player=Taunt/Giga Drain
+CLARK_DENIAL_STATE b=0 t=2 Def=6/6 Speed=6/6 taunt=2/0 foeStatus=0/0
+CLARK_DENIAL_PARTY b=0 t=2 slot=0 species=524 HP=44/46 item=494 status=0
+CLARK_DENIAL_PARTY b=0 t=2 slot=1 species=74 HP=0/35 item=479 status=0
+CLARK_DENIAL_PARTY b=0 t=2 slot=2 species=749 HP=50/50 item=523 status=0
+CLARK_DENIAL_PARTY b=0 t=2 slot=3 species=566 HP=39/39 item=0 status=0
+CLARK_DENIAL_INPUT b=1 owner=0 slot=0 species=619 lv=14 HP=49 stats=33/23/21/23/39 item=494 ability=39
+CLARK_DENIAL_MENU b=1 owner=0 slot=0 moves=252/269/409/282
+CLARK_DENIAL_INPUT b=1 owner=0 slot=1 species=270 lv=14 HP=48 stats=15/17/27/27/17 item=494 ability=44
+CLARK_DENIAL_MENU b=1 owner=0 slot=1 moves=330/202/58/182
+CLARK_DENIAL_INPUT b=1 owner=1 slot=0 species=524 lv=12 HP=46 stats=26/39/12/14/12 item=494 ability=5
+CLARK_DENIAL_MENU b=1 owner=1 slot=0 moves=469/157/334/704
+CLARK_DENIAL_INPUT b=1 owner=1 slot=1 species=74 lv=12 HP=35 stats=38/32/13/15/21 item=479 ability=69
+CLARK_DENIAL_MENU b=1 owner=1 slot=1 moves=317/38/661/182
+CLARK_DENIAL_INPUT b=1 owner=1 slot=2 species=749 lv=12 HP=50 stats=44/25/17/21/19 item=523 ability=192
+CLARK_DENIAL_MENU b=1 owner=1 slot=2 moves=630/317/484/182
+CLARK_DENIAL_INPUT b=1 owner=1 slot=3 species=566 lv=12 HP=39 stats=43/19/23/19/36 item=0 ability=129
+CLARK_DENIAL_MENU b=1 owner=1 slot=3 moves=157/512/182/282
+AI decision turn=1 actor=0 move=Drain Punch target=1
+AI decision turn=1 actor=1 move=Wide Guard target=1
+AI decision turn=1 actor=2 move=Muddy Water target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Wide Guard target=1
+AI decision turn=2 actor=3 move=Double-Edge target=2
+CLARK_DENIAL_END b=1 t=1 native=1 active=524/74 slots=0/1 HP=32/35 foes=49/48 faints=0/0
+CLARK_DENIAL_MOVES b=1 t=1 own=Wide Guard/Protect player=Drain Punch/Muddy Water
+CLARK_DENIAL_STATE b=1 t=1 Def=6/6 Speed=6/6 taunt=0/0 foeStatus=0/0
+CLARK_DENIAL_PARTY b=1 t=1 slot=0 species=524 HP=32/46 item=494 status=0
+CLARK_DENIAL_PARTY b=1 t=1 slot=1 species=74 HP=35/35 item=479 status=0
+CLARK_DENIAL_PARTY b=1 t=1 slot=2 species=749 HP=50/50 item=523 status=0
+CLARK_DENIAL_PARTY b=1 t=1 slot=3 species=566 HP=39/39 item=0 status=0
+CLARK_DENIAL_INPUT b=1 owner=0 slot=0 species=619 lv=14 HP=49 stats=33/23/21/23/39 item=494 ability=39
+CLARK_DENIAL_MENU b=1 owner=0 slot=0 moves=252/269/409/282
+CLARK_DENIAL_INPUT b=1 owner=0 slot=1 species=270 lv=14 HP=48 stats=15/17/27/27/17 item=494 ability=44
+CLARK_DENIAL_MENU b=1 owner=0 slot=1 moves=330/202/58/182
+CLARK_DENIAL_INPUT b=1 owner=1 slot=0 species=524 lv=12 HP=46 stats=26/39/12/14/12 item=494 ability=5
+CLARK_DENIAL_MENU b=1 owner=1 slot=0 moves=469/157/334/704
+CLARK_DENIAL_INPUT b=1 owner=1 slot=1 species=74 lv=12 HP=35 stats=38/32/13/15/21 item=479 ability=69
+CLARK_DENIAL_MENU b=1 owner=1 slot=1 moves=317/38/661/182
+CLARK_DENIAL_INPUT b=1 owner=1 slot=2 species=749 lv=12 HP=50 stats=44/25/17/21/19 item=523 ability=192
+CLARK_DENIAL_MENU b=1 owner=1 slot=2 moves=630/317/484/182
+CLARK_DENIAL_INPUT b=1 owner=1 slot=3 species=566 lv=12 HP=39 stats=43/19/23/19/36 item=0 ability=129
+CLARK_DENIAL_MENU b=1 owner=1 slot=3 moves=157/512/182/282
+AI decision turn=1 actor=0 move=Drain Punch target=1
+AI decision turn=1 actor=1 move=Wide Guard target=1
+AI decision turn=1 actor=2 move=Muddy Water target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Taunt target=1
+AI decision turn=2 actor=1 move=Wide Guard target=1
+AI decision turn=2 actor=2 move=Muddy Water target=1
+AI decision turn=2 actor=3 move=Double-Edge target=2
+AI switch turn=3 actor=1 party=3
+AI decision turn=3 actor=3 move=Double-Edge target=2
+CLARK_DENIAL_END b=1 t=2 native=2 active=524/74 slots=0/1 HP=32/32 foes=49/23 faints=0/0
+CLARK_DENIAL_MOVES b=1 t=2 own=Wide Guard/Double-Edge player=Taunt/Muddy Water
+CLARK_DENIAL_STATE b=1 t=2 Def=6/6 Speed=6/6 taunt=3/0 foeStatus=0/0
+CLARK_DENIAL_PARTY b=1 t=2 slot=0 species=524 HP=32/46 item=494 status=0
+CLARK_DENIAL_PARTY b=1 t=2 slot=1 species=74 HP=32/35 item=479 status=0
+CLARK_DENIAL_PARTY b=1 t=2 slot=2 species=749 HP=50/50 item=523 status=0
+CLARK_DENIAL_PARTY b=1 t=2 slot=3 species=566 HP=39/39 item=0 status=0
+CLARK_DENIAL_INPUT b=2 owner=0 slot=0 species=270 lv=14 HP=48 stats=15/17/27/27/17 item=494 ability=44
+CLARK_DENIAL_MENU b=2 owner=0 slot=0 moves=330/202/58/182
+CLARK_DENIAL_INPUT b=2 owner=0 slot=1 species=422 lv=14 HP=58 stats=19/22/37/26/18 item=494 ability=114
+CLARK_DENIAL_MENU b=2 owner=0 slot=1 moves=330/503/414/182
+CLARK_DENIAL_INPUT b=2 owner=1 slot=0 species=524 lv=12 HP=46 stats=26/39/12/14/12 item=494 ability=5
+CLARK_DENIAL_MENU b=2 owner=1 slot=0 moves=469/157/334/704
+CLARK_DENIAL_INPUT b=2 owner=1 slot=1 species=74 lv=12 HP=35 stats=38/32/13/15/21 item=479 ability=69
+CLARK_DENIAL_MENU b=2 owner=1 slot=1 moves=317/38/661/182
+CLARK_DENIAL_INPUT b=2 owner=1 slot=2 species=749 lv=12 HP=50 stats=44/25/17/21/19 item=523 ability=192
+CLARK_DENIAL_MENU b=2 owner=1 slot=2 moves=630/317/484/182
+CLARK_DENIAL_INPUT b=2 owner=1 slot=3 species=566 lv=12 HP=39 stats=43/19/23/19/36 item=0 ability=129
+CLARK_DENIAL_MENU b=2 owner=1 slot=3 moves=157/512/182/282
+AI decision turn=1 actor=0 move=Muddy Water target=1
+AI decision turn=1 actor=1 move=Wide Guard target=1
+AI decision turn=1 actor=2 move=Muddy Water target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Wide Guard target=1
+AI decision turn=2 actor=3 move=Double-Edge target=0
+CLARK_DENIAL_END b=2 t=1 native=1 active=524/74 slots=0/1 HP=46/35 foes=48/58 faints=0/0
+CLARK_DENIAL_MOVES b=2 t=1 own=Wide Guard/Protect player=Muddy Water/Muddy Water
+CLARK_DENIAL_STATE b=2 t=1 Def=6/6 Speed=6/6 taunt=0/0 foeStatus=0/0
+CLARK_DENIAL_PARTY b=2 t=1 slot=0 species=524 HP=46/46 item=494 status=0
+CLARK_DENIAL_PARTY b=2 t=1 slot=1 species=74 HP=35/35 item=479 status=0
+CLARK_DENIAL_PARTY b=2 t=1 slot=2 species=749 HP=50/50 item=523 status=0
+CLARK_DENIAL_PARTY b=2 t=1 slot=3 species=566 HP=39/39 item=0 status=0
+CLARK_DENIAL_INPUT b=2 owner=0 slot=0 species=270 lv=14 HP=48 stats=15/17/27/27/17 item=494 ability=44
+CLARK_DENIAL_MENU b=2 owner=0 slot=0 moves=330/202/58/182
+CLARK_DENIAL_INPUT b=2 owner=0 slot=1 species=422 lv=14 HP=58 stats=19/22/37/26/18 item=494 ability=114
+CLARK_DENIAL_MENU b=2 owner=0 slot=1 moves=330/503/414/182
+CLARK_DENIAL_INPUT b=2 owner=1 slot=0 species=524 lv=12 HP=46 stats=26/39/12/14/12 item=494 ability=5
+CLARK_DENIAL_MENU b=2 owner=1 slot=0 moves=469/157/334/704
+CLARK_DENIAL_INPUT b=2 owner=1 slot=1 species=74 lv=12 HP=35 stats=38/32/13/15/21 item=479 ability=69
+CLARK_DENIAL_MENU b=2 owner=1 slot=1 moves=317/38/661/182
+CLARK_DENIAL_INPUT b=2 owner=1 slot=2 species=749 lv=12 HP=50 stats=44/25/17/21/19 item=523 ability=192
+CLARK_DENIAL_MENU b=2 owner=1 slot=2 moves=630/317/484/182
+CLARK_DENIAL_INPUT b=2 owner=1 slot=3 species=566 lv=12 HP=39 stats=43/19/23/19/36 item=0 ability=129
+CLARK_DENIAL_MENU b=2 owner=1 slot=3 moves=157/512/182/282
+AI decision turn=1 actor=0 move=Muddy Water target=1
+AI decision turn=1 actor=1 move=Wide Guard target=1
+AI decision turn=1 actor=2 move=Muddy Water target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Muddy Water target=1
+AI decision turn=2 actor=1 move=Wide Guard target=1
+AI decision turn=2 actor=2 move=Muddy Water target=1
+AI decision turn=2 actor=3 move=Double-Edge target=0
+AI decision turn=3 actor=1 move=Wide Guard target=1
+AI decision turn=3 actor=3 move=Double-Edge target=0
+CLARK_DENIAL_END b=2 t=2 native=2 active=524/74 slots=0/1 HP=46/32 foes=23/58 faints=0/0
+CLARK_DENIAL_MOVES b=2 t=2 own=Wide Guard/Double-Edge player=Muddy Water/Muddy Water
+CLARK_DENIAL_STATE b=2 t=2 Def=6/6 Speed=6/6 taunt=0/0 foeStatus=0/0
+CLARK_DENIAL_PARTY b=2 t=2 slot=0 species=524 HP=46/46 item=494 status=0
+CLARK_DENIAL_PARTY b=2 t=2 slot=1 species=74 HP=32/35 item=479 status=0
+CLARK_DENIAL_PARTY b=2 t=2 slot=2 species=749 HP=50/50 item=523 status=0
+CLARK_DENIAL_PARTY b=2 t=2 slot=3 species=566 HP=39/39 item=0 status=0
+[3] EC live review Clark leads: native physical and special pressure: [32mPASS[0m
+CLARK_INPUT board=0 owner=0 slot=0 species=133 lv=14 HP=52 stats=24/23/18/39/24 item=494 ability=91
+CLARK_INPUT board=0 owner=0 slot=1 species=532 lv=14 HP=58 stats=31/24/14/29/19 item=494 ability=89
+CLARK_INPUT board=0 owner=1 slot=0 species=524 lv=12 HP=46 stats=26/39/12/14/12 item=494 ability=5
+CLARK_INPUT board=0 owner=1 slot=1 species=74 lv=12 HP=35 stats=38/32/13/15/21 item=479 ability=69
+CLARK_INPUT board=0 owner=1 slot=2 species=749 lv=12 HP=50 stats=44/25/17/21/19 item=523 ability=192
+CLARK_INPUT board=0 owner=1 slot=3 species=566 lv=12 HP=39 stats=43/19/23/19/36 item=0 ability=129
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Iron Defense target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Body Press target=0
+AI decision turn=2 actor=3 move=Rock Tomb target=0
+CLARK_AFTER board=0 t=1 native=1 active=524/74 HP=40/35 foes=51/58 moves=Iron Defense/Protect faints=0/0
+CLARK_STATE board=0 t=1 Def=8/6 foeSpe=6/6 items=494/479
+CLARK_INPUT board=0 owner=0 slot=0 species=133 lv=14 HP=52 stats=24/23/18/39/24 item=494 ability=91
+CLARK_INPUT board=0 owner=0 slot=1 species=532 lv=14 HP=58 stats=31/24/14/29/19 item=494 ability=89
+CLARK_INPUT board=0 owner=1 slot=0 species=524 lv=12 HP=46 stats=26/39/12/14/12 item=494 ability=5
+CLARK_INPUT board=0 owner=1 slot=1 species=74 lv=12 HP=35 stats=38/32/13/15/21 item=479 ability=69
+CLARK_INPUT board=0 owner=1 slot=2 species=749 lv=12 HP=50 stats=44/25/17/21/19 item=523 ability=192
+CLARK_INPUT board=0 owner=1 slot=3 species=566 lv=12 HP=39 stats=43/19/23/19/36 item=0 ability=129
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Iron Defense target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Body Press target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Rock Tomb target=0
+AI switch turn=2 actor=3 party=2
+AI decision turn=3 actor=1 move=Iron Defense target=1
+AI decision turn=3 actor=3 move=High Horsepower target=2
+CLARK_AFTER board=0 t=2 native=2 active=524/749 HP=36/50 foes=0/58 moves=Body Press/- faints=1/1
+CLARK_STATE board=0 t=2 Def=8/6 foeSpe=6/6 items=494/523
+CLARK_INPUT board=0 owner=0 slot=0 species=133 lv=14 HP=52 stats=24/23/18/39/24 item=494 ability=91
+CLARK_INPUT board=0 owner=0 slot=1 species=532 lv=14 HP=58 stats=31/24/14/29/19 item=494 ability=89
+CLARK_INPUT board=0 owner=1 slot=0 species=524 lv=12 HP=46 stats=26/39/12/14/12 item=494 ability=5
+CLARK_INPUT board=0 owner=1 slot=1 species=74 lv=12 HP=35 stats=38/32/13/15/21 item=479 ability=69
+CLARK_INPUT board=0 owner=1 slot=2 species=749 lv=12 HP=50 stats=44/25/17/21/19 item=523 ability=192
+CLARK_INPUT board=0 owner=1 slot=3 species=566 lv=12 HP=39 stats=43/19/23/19/36 item=0 ability=129
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Iron Defense target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Body Press target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Rock Tomb target=0
+AI switch turn=2 actor=3 party=2
+AI decision turn=3 actor=2 move=Drain Punch target=3
+AI decision turn=3 actor=1 move=Iron Defense target=1
+AI decision turn=3 actor=3 move=High Horsepower target=2
+AI decision turn=4 actor=1 move=Body Press target=2
+AI decision turn=4 actor=3 move=High Horsepower target=2
+CLARK_AFTER board=0 t=3 native=3 active=524/749 HP=36/29 foes=0/50 moves=Iron Defense/High Horsepower faints=1/1
+CLARK_STATE board=0 t=3 Def=10/7 foeSpe=6/6 items=494/523
+CLARK_INPUT board=1 owner=0 slot=0 species=417 lv=14 HP=53 stats=18/40/21/34/35 item=523 ability=10
+CLARK_INPUT board=1 owner=0 slot=1 species=270 lv=14 HP=48 stats=15/17/27/27/17 item=494 ability=44
+CLARK_INPUT board=1 owner=1 slot=0 species=524 lv=12 HP=46 stats=26/39/12/14/12 item=494 ability=5
+CLARK_INPUT board=1 owner=1 slot=1 species=74 lv=12 HP=35 stats=38/32/13/15/21 item=479 ability=69
+CLARK_INPUT board=1 owner=1 slot=2 species=749 lv=12 HP=50 stats=44/25/17/21/19 item=523 ability=192
+CLARK_INPUT board=1 owner=1 slot=3 species=566 lv=12 HP=39 stats=43/19/23/19/36 item=0 ability=129
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Iron Defense target=1
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Body Press target=2
+AI decision turn=2 actor=3 move=Rock Tomb target=2
+CLARK_AFTER board=1 t=1 native=1 active=524/74 HP=23/35 foes=53/48 moves=Iron Defense/Protect faints=0/0
+CLARK_STATE board=1 t=1 Def=8/6 foeSpe=6/6 items=494/479
+CLARK_INPUT board=1 owner=0 slot=0 species=417 lv=14 HP=53 stats=18/40/21/34/35 item=523 ability=10
+CLARK_INPUT board=1 owner=0 slot=1 species=270 lv=14 HP=48 stats=15/17/27/27/17 item=494 ability=44
+CLARK_INPUT board=1 owner=1 slot=0 species=524 lv=12 HP=46 stats=26/39/12/14/12 item=494 ability=5
+CLARK_INPUT board=1 owner=1 slot=1 species=74 lv=12 HP=35 stats=38/32/13/15/21 item=479 ability=69
+CLARK_INPUT board=1 owner=1 slot=2 species=749 lv=12 HP=50 stats=44/25/17/21/19 item=523 ability=192
+CLARK_INPUT board=1 owner=1 slot=3 species=566 lv=12 HP=39 stats=43/19/23/19/36 item=0 ability=129
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Iron Defense target=1
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Body Press target=2
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=3 move=Rock Tomb target=2
+AI switch turn=2 actor=3 party=3
+AI decision turn=3 actor=1 move=Body Press target=2
+AI decision turn=3 actor=3 move=Protect target=3
+CLARK_AFTER board=1 t=2 native=2 active=524/566 HP=12/39 foes=53/19 moves=Body Press/- faints=1/0
+CLARK_STATE board=1 t=2 Def=8/6 foeSpe=6/5 items=494/0
+CLARK_INPUT board=1 owner=0 slot=0 species=417 lv=14 HP=53 stats=18/40/21/34/35 item=523 ability=10
+CLARK_INPUT board=1 owner=0 slot=1 species=270 lv=14 HP=48 stats=15/17/27/27/17 item=494 ability=44
+CLARK_INPUT board=1 owner=1 slot=0 species=524 lv=12 HP=46 stats=26/39/12/14/12 item=494 ability=5
+CLARK_INPUT board=1 owner=1 slot=1 species=74 lv=12 HP=35 stats=38/32/13/15/21 item=479 ability=69
+CLARK_INPUT board=1 owner=1 slot=2 species=749 lv=12 HP=50 stats=44/25/17/21/19 item=523 ability=192
+CLARK_INPUT board=1 owner=1 slot=3 species=566 lv=12 HP=39 stats=43/19/23/19/36 item=0 ability=129
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Iron Defense target=1
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Body Press target=2
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=3 move=Rock Tomb target=2
+AI switch turn=2 actor=3 party=3
+AI decision turn=3 actor=0 move=Super Fang target=1
+AI decision turn=3 actor=1 move=Body Press target=2
+AI decision turn=3 actor=2 move=Giga Drain target=3
+AI decision turn=3 actor=3 move=Protect target=3
+AI decision turn=4 actor=1 move=Rock Slide target=0
+AI decision turn=4 actor=3 move=Knock Off target=0
+CLARK_AFTER board=1 t=3 native=3 active=524/566 HP=6/39 foes=53/0 moves=Body Press/Protect faints=1/1
+CLARK_STATE board=1 t=3 Def=8/6 foeSpe=6/6 items=494/0
+
+- Tests [32mPASSED[0m:          4
+- Tests [34mTOTAL[0m:           4
+

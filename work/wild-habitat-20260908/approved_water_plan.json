@@ -1,0 +1,534 @@
+{
+  "MAP_ABANDONED_SHIP_ROOMS_B1F": {
+    "methods": {
+      "water_mons": [
+        "MAREANIE",
+        "TENTACRUEL",
+        "GOLISOPOD",
+        "QWILFISH",
+        "BARBARACLE"
+      ]
+    },
+    "note": "Replace indoor Lapras with Barbaracle in the hull; the early-area owner receives Lapras in Route108 outside water. Preserve the rated10 flooded corridors."
+  },
+  "MAP_EVER_GRANDE_CITY": {
+    "methods": {
+      "super_rod": [
+        "KINGDRA",
+        "LAPRAS",
+        "GYARADOS",
+        "MANTINE",
+        "CLOYSTER"
+      ]
+    },
+    "note": "Finished Kingdra/Lapras/Gyarados lead the League approach fishing, followed by Mantine and Cloyster; all earlier methods remain unchanged."
+  },
+  "MAP_LILYCOVE_CITY": {
+    "methods": {
+      "super_rod": [
+        "MILOTIC",
+        "ALOMOMOLA",
+        "BRUXISH",
+        "BARRASKEWDA",
+        "RELICANTH"
+      ]
+    },
+    "note": "Milotic and Alomomola replace repeated Kingler/Shellder in advanced bay fishing; preserve Wailmer/Cramorant Surf and the full shore Rock Smash table."
+  },
+  "MAP_MOSSDEEP_CITY": {
+    "methods": {
+      "super_rod": [
+        "STARMIE",
+        "SHARPEDO",
+        "LANTURN",
+        "SEADRA",
+        "WAILORD"
+      ]
+    },
+    "note": "Swap Starmie and Wailord between30% and10% Super Rod slots; retain accessible25% Surf Staryu."
+  },
+  "MAP_PACIFIDLOG_TOWN": {
+    "methods": {
+      "super_rod": [
+        "RELICANTH",
+        "DRAGALGE",
+        "CLAWITZER",
+        "GOREBYSS",
+        "LAPRAS"
+      ]
+    },
+    "note": "Replace15% Super Rod Shellder with Gorebyss; preserve Alomomola, fishing birds, and all other methods."
+  },
+  "MAP_ROUTE124": {
+    "methods": {
+      "super_rod": [
+        "HUNTAIL",
+        "GOREBYSS",
+        "WAILORD",
+        "SHARPEDO",
+        "RELICANTH"
+      ]
+    },
+    "note": "Huntail and Gorebyss lead advanced shell-bed fishing; leave Mantine/Clamperl Surf and the separate rated10 Dive map intact."
+  },
+  "MAP_ROUTE125": {
+    "methods": {
+      "super_rod": [
+        "QWILFISH",
+        "WALREIN",
+        "DEWGONG",
+        "DRAGALGE",
+        "QWILFISH_HISUI"
+      ]
+    },
+    "note": "Walrein and Dewgong replace Luvdisc/Corsola on Super Rod; retain both Qwilfish forms, the kelp resident Dragalge and the full existing cold-water Surf roster."
+  },
+  "MAP_ROUTE126": {
+    "methods": {
+      "super_rod": [
+        "ALOMOMOLA",
+        "BRUXISH",
+        "TAUROS_PALDEA_AQUA",
+        "DRAGALGE",
+        "FEEBAS"
+      ]
+    },
+    "note": "Alomomola/Bruxish/Aqua Tauros lead the crater-ring Super Rod, with Dragalge and Feebas retained; Surf Aqua Tauros and all Dive placements remain unchanged."
+  },
+  "MAP_ROUTE127": {
+    "methods": {
+      "super_rod": [
+        "TOXAPEX",
+        "DRAGALGE",
+        "BARRASKEWDA",
+        "WAILORD",
+        "RELICANTH"
+      ]
+    },
+    "note": "Toxapex/Dragalge replace Super Rod Kingler/Shellder; preserve Mareanie/Pyukumuku/Bruxish Surf and Old Rod Bruxish."
+  },
+  "MAP_ROUTE128": {
+    "methods": {
+      "good_rod": [
+        "SHARPEDO",
+        "DRAGALGE",
+        "BARRASKEWDA"
+      ],
+      "super_rod": [
+        "BARRASKEWDA",
+        "JELLICENT",
+        "SHARPEDO",
+        "LANTURN",
+        "LAPRAS"
+      ]
+    },
+    "note": "Good Rod now centers Sharpedo/Dragalge/Barraskewda; Super Rod receives Jellicent in its repeated Wailord slot, developing predatory cavern-approach fishing."
+  },
+  "MAP_ROUTE129": {
+    "methods": {
+      "super_rod": [
+        "WAILORD",
+        "LAPRAS",
+        "MANTINE",
+        "RELICANTH",
+        "BASCULEGION"
+      ]
+    },
+    "note": "Wailord/Lapras/Mantine replace the generic leading Super Rod trio; preserve the existing Wailmer/Wailord pods on Surf."
+  },
+  "MAP_ROUTE130": {
+    "methods": {
+      "super_rod": [
+        "BRUXISH",
+        "STARMIE",
+        "QWILFISH_HISUI",
+        "RELICANTH",
+        "BASCULEGION"
+      ]
+    },
+    "note": "Preserve the complete Wynaut land colony. Bruxish/Starmie take the two leading Super Rod slots; one Hisuian Qwilfish slot remains20%, beside Relicanth and Basculegion."
+  },
+  "MAP_ROUTE131": {
+    "methods": {
+      "super_rod": [
+        "RELICANTH",
+        "OMASTAR",
+        "HUNTAIL",
+        "GOREBYSS",
+        "BASCULEGION"
+      ]
+    },
+    "note": "Archaeological fishing is led by Relicanth and Omastar with Huntail/Gorebyss and rare Basculegion. Omastar supplies a mature aquatic fossil and distinguishes this pool from Route134; Clamperl stays in Surf/Good Rod."
+  },
+  "MAP_ROUTE132": {
+    "methods": {
+      "water_mons": [
+        "CARVANHA",
+        "GYARADOS",
+        "BARRASKEWDA",
+        "WAILORD",
+        "FINIZEN"
+      ],
+      "super_rod": [
+        "BARRASKEWDA",
+        "SHARPEDO",
+        "FLOATZEL",
+        "CLAWITZER",
+        "LAPRAS"
+      ]
+    },
+    "note": "Gyarados replaces Surf Magikarp; Barraskewda/Sharpedo/Floatzel lead the stronger rod to match the fast currents. Old Rod Magikarp/Arrokuda stay."
+  },
+  "MAP_ROUTE133": {
+    "methods": {
+      "super_rod": [
+        "LANTURN",
+        "WALREIN",
+        "DRAGALGE",
+        "KINGLER",
+        "BASCULEGION"
+      ]
+    },
+    "note": "Lanturn leads return fishing; Walrein/Dragalge replace Clamperl/Luvdisc, connecting the existing cold-water and kelp Surf populations."
+  },
+  "MAP_ROUTE134": {
+    "methods": {
+      "super_rod": [
+        "HUNTAIL",
+        "GOREBYSS",
+        "RELICANTH",
+        "CLAWITZER",
+        "KINGDRA"
+      ]
+    },
+    "note": "Huntail/Gorebyss/Relicanth take75% of Super Rod; Clawitzer and Kingdra are useful deeper companions, distinct from Route131 aquatic fossils. Existing easier-method Clamperl stays."
+  },
+  "MAP_SAFARI_ZONE_NORTHEAST": {
+    "methods": {
+      "land_mons": [
+        "HOUNDOOM",
+        "MILTANK",
+        "TAUROS",
+        "GRANBULL",
+        "FORRETRESS",
+        "LEDIAN",
+        "NIDORINO",
+        "NIDORINA",
+        "STANTLER",
+        "PINECO",
+        "SKARMORY",
+        "HERACROSS"
+      ]
+    },
+    "note": "Upgrade Houndour to Houndoom and increase Miltank/Tauros/Granbull prominence through slot reordering. Keep Forretress and every other direct Safari resident, including Pineco at5%; Houndour retains earlier habitats."
+  },
+  "MAP_SAFARI_ZONE_NORTHWEST": {
+    "methods": {
+      "super_rod": [
+        "SEISMITOAD",
+        "DREDNAW",
+        "FLOATZEL",
+        "DRAGONAIR",
+        "DRATINI"
+      ]
+    },
+    "note": "Preserve every land resident. Floatzel/Dragonair replace Super Rod Golduck/Lombre; Dratini remains on Surf and Super Rod."
+  },
+  "MAP_SAFARI_ZONE_SOUTHEAST": {
+    "methods": {
+      "land_mons": [
+        "GLIGAR",
+        "AMPHAROS",
+        "URSARING",
+        "AMBIPOM",
+        "FLAAFFY",
+        "STANTLER",
+        "AMBIPOM",
+        "QUAGSIRE",
+        "HERACROSS",
+        "SKARMORY",
+        "ARIADOS",
+        "HOUNDOOM"
+      ]
+    },
+    "note": "Ampharos takes Flaaffy12%; preserve direct Flaaffy at10% in the repeated Granbull slot. Ambipom receives Aipom10% for18% total, while Ursaring/Ariados exchange11%/5% slots. Gligar and all other residents stay; Aipom retains earlier woods access, Granbull remains Northeast."
+  },
+  "MAP_SEAFLOOR_CAVERN_ENTRANCE": {
+    "methods": {
+      "water_mons": [
+        "CLAMPERL",
+        "TENTACRUEL",
+        "SHARPEDO",
+        "LANTURN",
+        "LAPRAS"
+      ]
+    },
+    "note": "Replace Surf Magikarp12% with Lanturn; preserve Old Rod Magikarp/Chinchou, Surf Sharpedo, and the existing evolved fish in rods."
+  },
+  "MAP_SEAFLOOR_CAVERN_ROOM1": {
+    "methods": {
+      "land_mons": [
+        "GOLISOPOD",
+        "GOLISOPOD",
+        "TOXAPEX",
+        "TOXAPEX",
+        "GOLISOPOD",
+        "MALAMAR",
+        "TOXAPEX",
+        "GRAPPLOCT",
+        "GOLISOPOD",
+        "BARBARACLE",
+        "GRAPPLOCT",
+        "TOXAPEX"
+      ]
+    },
+    "note": "Golisopod41% and Toxapex34% form a tidal armor colony, with Grapploct/Malamar/Barbaracle. Relocate all free-swimming floor fish into existing cavern pools/rods; Dragalge stays common on Room6 Surf and Super Rod, and Kingdra gains Room6 Super Rod55%."
+  },
+  "MAP_SEAFLOOR_CAVERN_ROOM2": {
+    "methods": {
+      "land_mons": [
+        "CROBAT",
+        "FLOATZEL",
+        "ZUBAT",
+        "BARBARACLE",
+        "MALAMAR",
+        "CROBAT",
+        "GRAPPLOCT",
+        "BARBARACLE",
+        "CROBAT",
+        "BARBARACLE",
+        "GRAPPLOCT",
+        "GRAPPLOCT"
+      ]
+    },
+    "note": "Crobat27%, Barbaracle22% and Grapploct18% distinguish the walking floor, retaining Floatzel/Zubat/Malamar. Sharpedo and Basculegion remain in actual cavern water methods; Kingdra relocates to Room6 Super Rod."
+  },
+  "MAP_SEAFLOOR_CAVERN_ROOM4": {
+    "methods": {
+      "land_mons": [
+        "MALAMAR",
+        "MALAMAR",
+        "CARBINK",
+        "GOLISOPOD",
+        "GRAPPLOCT",
+        "CARBINK",
+        "MALAMAR",
+        "MALAMAR",
+        "CROBAT",
+        "GRAPPLOCT",
+        "GRAPPLOCT",
+        "MALAMAR"
+      ]
+    },
+    "note": "A Malamar45%/Grapploct20% chamber with Carbink19%, Golisopod and Crobat replaces the swimming-fish floor slots. Fish remain represented in cavern pools and rods."
+  },
+  "MAP_SEAFLOOR_CAVERN_ROOM5": {
+    "methods": {
+      "land_mons": [
+        "GRAPPLOCT",
+        "GOLISOPOD",
+        "GRAPPLOCT",
+        "GRAPPLOCT",
+        "GOLISOPOD",
+        "GRAPPLOCT",
+        "GOLISOPOD",
+        "TOXAPEX",
+        "CROBAT",
+        "GOLISOPOD",
+        "BARBARACLE",
+        "GRAPPLOCT"
+      ]
+    },
+    "note": "The former land Kingdra concentration becomes a Grapploct47%/Golisopod35% shore colony, supported by Toxapex/Crobat/Barbaracle. Room6 Super Rod receives Kingdra55%; no Dive tables change."
+  },
+  "MAP_SEAFLOOR_CAVERN_ROOM6": {
+    "methods": {
+      "land_mons": [
+        "BARBARACLE",
+        "BARBARACLE",
+        "GLIGAR",
+        "BARBARACLE",
+        "MALAMAR",
+        "GOLISOPOD",
+        "GOLISOPOD",
+        "TOXAPEX",
+        "CROBAT",
+        "CLOBBOPUS",
+        "GRAPPLOCT",
+        "GLIGAR"
+      ],
+      "water_mons": [
+        "FRILLISH",
+        "DRAGALGE",
+        "JELLICENT",
+        "BARRASKEWDA",
+        "SHARPEDO"
+      ],
+      "super_rod": [
+        "KINGDRA",
+        "KINGDRA",
+        "DRAGALGE",
+        "BARRASKEWDA",
+        "BASCULEGION"
+      ]
+    },
+    "note": "Barbaracle35%, Gligar16% and Golisopod16% define the shore with other walkers. Keep Frillish/Jellicent and Dragalge in Surf; receive Barraskewda12% and Sharpedo10% there. Kingdra is55% of Super Rod, followed by Dragalge20%, Barraskewda15% and Basculegion10%; Clawitzer remains on Entrance Good Rod and neighboring sea rods."
+  },
+  "MAP_SEAFLOOR_CAVERN_ROOM7": {
+    "methods": {
+      "land_mons": [
+        "TOXAPEX",
+        "GOLISOPOD",
+        "TOXAPEX",
+        "MALAMAR",
+        "TOXAPEX",
+        "BARBARACLE",
+        "BARBARACLE",
+        "GRAPPLOCT",
+        "CROBAT",
+        "GOLISOPOD",
+        "BARBARACLE",
+        "TOXAPEX"
+      ],
+      "good_rod": [
+        "LANTURN",
+        "CLAMPERL",
+        "KINGLER"
+      ]
+    },
+    "note": "Toxapex39% and Barbaracle21% replace Mawile and swimming fish, supported by Golisopod/Malamar/Grapploct/Crobat. Preserve the entire Clamperl/Huntail/Gorebyss Surf pool and replace Good Rod Luvdisc with Clamperl."
+  },
+  "MAP_SEAFLOOR_CAVERN_ROOM8": {
+    "methods": {
+      "land_mons": [
+        "GRAPPLOCT",
+        "CLOBBOPUS",
+        "GRAPPLOCT",
+        "GOLISOPOD",
+        "GOLISOPOD",
+        "GOLISOPOD",
+        "BARBARACLE",
+        "GRAPPLOCT",
+        "CROBAT",
+        "CROBAT",
+        "CLOBBOPUS",
+        "CLOBBOPUS"
+      ]
+    },
+    "note": "Grapploct31%, Clobbopus22% and Golisopod28% form the deep-floor colony; Barbaracle/Crobat complete it. Remove swimming-fish floor slots while retaining their cavern pool/rod homes and all Dive placements."
+  },
+  "MAP_SHOAL_CAVE_LOW_TIDE_ENTRANCE_ROOM": {
+    "methods": {
+      "land_mons": [
+        "SPHEAL",
+        "ZUBAT",
+        "SEEL",
+        "SNOM",
+        "SNEASEL",
+        "SNORUNT",
+        "BERGMITE",
+        "SNOVER",
+        "CETODDLE",
+        "DELIBIRD",
+        "CRYOGONAL",
+        "EISCUE"
+      ],
+      "water_mons": [
+        "SPHEAL",
+        "DEWGONG",
+        "AVALUGG",
+        "SEALEO",
+        "LAPRAS"
+      ],
+      "super_rod": [
+        "WALREIN",
+        "DEWGONG",
+        "QWILFISH_HISUI",
+        "CLAMPERL",
+        "LAPRAS"
+      ]
+    },
+    "note": "Swap Spheal/Zubat to let Spheal lead. Relocate entrance Surf Snom/Cetoddle into duplicate Swinub/Cubchoo land slots, preserving arrival-area availability; those displaced juveniles remain in earlier Seaspray and deeper Shoal. Surf receives Sealeo/Lapras and Super Rod Cetoddle becomes Lapras. Rated10 Ice stays unchanged."
+  },
+  "MAP_SHOAL_CAVE_LOW_TIDE_INNER_ROOM": {
+    "methods": {
+      "water_mons": [
+        "WALREIN",
+        "CLAMPERL",
+        "DEWGONG",
+        "JELLICENT",
+        "LAPRAS"
+      ],
+      "super_rod": [
+        "LANTURN",
+        "RELICANTH",
+        "CLOYSTER",
+        "QWILFISH_HISUI",
+        "DEWGONG"
+      ]
+    },
+    "note": "Replace Surf Cetoddle with Walrein35% and indoor Wailord with Dewgong18%; Clamperl25%, Jellicent12% and Lapras10% remain. Cold cave Super Rod becomes Lanturn30%, Relicanth25%, Cloyster20%, Hisuian Qwilfish15% and Dewgong10%, removing Cetoddle and the generic Luvdisc/Shellder mix. Preserve Galarian Darumaka and every land resident; Snom/Cetoddle retain entrance land access and the untouched Ice roster. Wailord, Octillery, Luvdisc and Shellder remain available globally."
+  },
+  "MAP_SHOAL_CAVE_LOW_TIDE_LOWER_ROOM": {
+    "methods": {
+      "land_mons": [
+        "SANDSHREW_ALOLA",
+        "SANDSLASH_ALOLA",
+        "PILOSWINE",
+        "SNORUNT",
+        "SNEASEL",
+        "AVALUGG",
+        "SNOVER",
+        "CUBCHOO",
+        "VANILLITE",
+        "SNOM",
+        "CRYOGONAL",
+        "EISCUE"
+      ]
+    },
+    "note": "Keep Alolan Sandshrew13%; add Alolan Sandslash12%, Piloswine11% and Avalugg8% in repeated Spheal/Swinub/Bergmite slots. Their younger forms remain available earlier in Shoal; retain all remaining forms and residents."
+  },
+  "MAP_SHOAL_CAVE_LOW_TIDE_STAIRS_ROOM": {
+    "methods": {
+      "land_mons": [
+        "SNEASEL",
+        "WEAVILE",
+        "BERGMITE",
+        "AVALUGG",
+        "SNEASEL",
+        "BERGMITE",
+        "AVALUGG",
+        "CUBCHOO",
+        "VANILLITE",
+        "SNOM",
+        "CRYOGONAL",
+        "ARCTIBAX"
+      ]
+    },
+    "note": "Concentrate Sneasel23%/Weavile12% and Bergmite19%/Avalugg18%, replacing repeated Spheal/Seel/Swinub/Snorunt/Snover slots. Preserve Cubchoo/Vanillite/Snom/Cryogonal/Arctibax and their useful form diversity."
+  },
+  "MAP_SLATEPORT_CITY": {
+    "methods": {
+      "super_rod": [
+        "CLAWITZER",
+        "DRAGALGE",
+        "SEADRA",
+        "WISHIWASHI",
+        "DHELMISE"
+      ]
+    },
+    "note": "Clawitzer30%/Dragalge25% replace the generic Super Rod lead pair, developing Old Rod Clauncher and Good Rod Skrelp. Preserve Dhelmise10% offshore and all earlier methods."
+  },
+  "MAP_SOOTOPOLIS_CITY": {
+    "methods": {
+      "super_rod": [
+        "MILOTIC",
+        "GYARADOS",
+        "ALOMOMOLA",
+        "WISHIWASHI",
+        "FINIZEN"
+      ]
+    },
+    "note": "Milotic/Gyarados/Alomomola take the three main Super Rod positions, with Wishiwashi/Finizen forming the sheltered crater school. Leave every other method and the separate Dive habitat unchanged."
+  }
+}

@@ -1099,19 +1099,22 @@ RustboroCity_Text_CatchRarePokemonIfIGoToSchool:
 	.string "to catch rare POKéMON easily?$"
 
 RustboroCity_Text_PokemonCanChangeLookFromExp:
-	.string "If a POKéMON gains experience in\n"
-	.string "battles, it can sometimes change in\l"
-	.string "the way it looks.$"
+	.string "My POKéMON evolved when I used\n"
+	.string "the LEVELER!\p"
+	.string "Battles give no experience here.\n"
+	.string "The LEVELER raises your party\l"
+	.string "and checks for evolutions.$"
 
 RustboroCity_Text_PokemonChangeShape:
 	.string "A POKéMON changes shape?\n"
 	.string "If one did that, I would be shocked!$"
 
 RustboroCity_Text_TradePokemonGrowFast:
-	.string "A POKéMON you get in a trade from\n"
-	.string "someone grows fast.\p"
-	.string "But if you don't have certain GYM\n"
-	.string "BADGES, it may not obey you…$"
+	.string "A traded partner can use the\n"
+	.string "LEVELER just like one you caught.\p"
+	.string "No need to raise it through\n"
+	.string "battles. Take it to the CENTER\l"
+	.string "and try a Battle Set together!$"
 
 RustboroCity_Text_OutOfTheWay:
 	.string "Get out!\n"

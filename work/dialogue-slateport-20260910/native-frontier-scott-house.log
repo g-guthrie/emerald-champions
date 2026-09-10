@@ -1,0 +1,49 @@
+frontier-scott-house-enter-final 0 RESULT frames=1600 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=aecc67c75cf3a82d nonzero_pixels=7857 save_bytes=0
+READ width=4 address=020022c4 value=00000001
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00001a2e
+READ width=4 address=020022e0 value=00000002
+READ width=4 address=020022e4 value=00000007
+READ width=4 address=02002290 value=00000000
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+READ width=4 address=0200229c value=00000000
+ 
+WALK BattleFrontier_ScottsHouse (2, 7) to (2, 4) steps 3
+frontier-scott-ready 0 RESULT frames=1644 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=3932b949ff767d1c nonzero_pixels=11694 save_bytes=0
+READ width=4 address=020022c4 value=00000001
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00001a2e
+READ width=4 address=020022e0 value=00000002
+READ width=4 address=020022e4 value=00000004
+READ width=4 address=02002290 value=00000000
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+READ width=4 address=0200229c value=00000000
+ 
+frontier-scott-gift 0 RESULT frames=19000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=2653b2ac4d2301c8 nonzero_pixels=11706 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00001a2e
+READ width=4 address=020022e0 value=00000002
+READ width=4 address=020022e4 value=00000004
+READ width=4 address=02002290 value=00000000
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+READ width=4 address=0200229c value=00000000
+ 
+frontier-scott-repeat 0 RESULT frames=3500 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=46e2b06061d488eb nonzero_pixels=11703 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00001a2e
+READ width=4 address=020022e0 value=00000002
+READ width=4 address=020022e4 value=00000004
+READ width=4 address=02002290 value=00000000
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+READ width=4 address=0200229c value=00000000
+ 

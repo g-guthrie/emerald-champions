@@ -1,0 +1,9 @@
+{
+  "schema_version": 2,
+  "inputs_sha256": "b2f69a0a6e7ad2daa501f356ee8515d81168e5b5302eea9fa7d59228a171bf88",
+  "input_count": 28980,
+  "artifacts": {
+    "pokeemerald-badge1-dialogue-20260910-release.gba": "db22db808121589f9863c6103020bb5590b9699f91b7c0c2a1df3adbd3bdaaeb",
+    "pokeemerald-badge1-dialogue-20260910-release.elf": "835b08d46e41dc2f0abffb186009092592ca228db821a15032cea327aaa3de37"
+  }
+}

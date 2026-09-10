@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 #include <mgba/core/core.h>
 #include <mgba/core/config.h>
@@ -408,7 +409,9 @@ static bool ParseOptions(int argc, char **argv, struct Options *options)
         }
         else if (strcmp(argv[i], "--rtc") == 0 && i + 1 < argc)
         {
-            if (!ParseSigned64(argv[++i], &options->rtcEpoch))
+            if (!ParseSigned64(argv[++i], &options->rtcEpoch)
+             || options->rtcEpoch > INT64_MAX / 1000
+             || options->rtcEpoch < INT64_MIN / 1000)
                 return false;
         }
         else if (strcmp(argv[i], "--key") == 0 && i + 1 < argc)
@@ -586,8 +589,12 @@ int main(int argc, char **argv)
     mCoreConfigSetOverrideIntValue(&core->config, "threadedVideo", 0);
     mCoreConfigSetOverrideIntValue(&core->config, "hwaccelVideo", 0);
     mCoreLoadForeignConfig(core, &core->config);
+    // mGBA stores this value in milliseconds and converts cartridge dates
+    // through localtime. Keep the requested UNIX seconds independent of host TZ.
+    setenv("TZ", "UTC", 1);
+    tzset();
     core->rtc.override = RTC_FIXED;
-    core->rtc.value = options.rtcEpoch;
+    core->rtc.value = options.rtcEpoch * 1000LL;
 
     core->desiredVideoDimensions(core, &width, &height);
     pixels = calloc((size_t)width * height, sizeof(*pixels));

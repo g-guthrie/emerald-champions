@@ -9,8 +9,28 @@ LavaridgeTown_OnTransition:
 	call_if_set FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY, LavaridgeTown_EventScript_ShowMtChimneyTrainers
 	call Common_EventScript_SetupRivalGfxId
 	call Common_EventScript_SetupRivalOnBikeGfxId
+	call_if_eq VAR_LAVARIDGE_TOWN_STATE, 3, LavaridgeTown_EventScript_SetPendingRivalPos
 	call_if_eq VAR_LAVARIDGE_TOWN_STATE, 1, LavaridgeTown_EventScript_CheckSetRivalPos
 	call_if_eq VAR_LAVARIDGE_TOWN_STATE, 1, LavaridgeTown_EventScript_HideMapNamePopup
+	end
+
+@ Pending delivery is an optional conversation, never an on-frame loop.
+LavaridgeTown_EventScript_SetPendingRivalPos::
+	setobjectxyperm LOCALID_LAVARIDGE_RIVAL, 12, 16
+	setobjectmovementtype LOCALID_LAVARIDGE_RIVAL, MOVEMENT_TYPE_FACE_LEFT
+	clearflag FLAG_HIDE_LAVARIDGE_TOWN_RIVAL
+	return
+
+LavaridgeTown_EventScript_RetryGoGoggles::
+	lockall
+	faceplayer
+	goto_if_ne VAR_LAVARIDGE_TOWN_STATE, 3, LavaridgeTown_EventScript_EndPendingTalk
+	checkplayergender
+	goto_if_eq VAR_RESULT, MALE, LavaridgeTown_EventScript_MayGiveGoGoggles
+	goto LavaridgeTown_EventScript_BrendanGiveGoGoggles
+
+LavaridgeTown_EventScript_EndPendingTalk::
+	releaseall
 	end
 
 LavaridgeTown_EventScript_ClearLavaridgeWhiteOut::
@@ -94,11 +114,16 @@ LavaridgeTown_EventScript_BrendanReceivedGoGoggles::
 	end
 
 LavaridgeTown_EventScript_GoGogglesNoRoom::
+	setvar VAR_LAVARIDGE_TOWN_STATE, 3
+	clearflag FLAG_HIDE_MAP_NAME_POPUP
 	msgbox LavaridgeTown_Text_GoGogglesNoRoom, MSGBOX_DEFAULT
+	savebgm MUS_DUMMY
+	fadedefaultbgm
 	releaseall
 	end
 
 LavaridgeTown_EventScript_RivalExit::
+	goto_if_eq VAR_LAVARIDGE_TOWN_STATE, 3, LavaridgeTown_EventScript_EndPendingDelivery
 	closemessage
 	removeobject LOCALID_LAVARIDGE_RIVAL
 	addobject LOCALID_LAVARIDGE_RIVAL_ON_BIKE
@@ -110,6 +135,19 @@ LavaridgeTown_EventScript_RivalExit::
 	clearflag FLAG_HIDE_MAP_NAME_POPUP
 	savebgm MUS_DUMMY
 	fadedefaultbgm
+	releaseall
+	end
+
+LavaridgeTown_EventScript_EndPendingDelivery::
+	closemessage
+	fadescreen FADE_TO_BLACK
+	removeobject LOCALID_LAVARIDGE_RIVAL
+	removeobject LOCALID_LAVARIDGE_RIVAL_ON_BIKE
+	setvar VAR_LAVARIDGE_TOWN_STATE, 2
+	clearflag FLAG_HIDE_MAP_NAME_POPUP
+	savebgm MUS_DUMMY
+	fadedefaultbgm
+	fadescreen FADE_FROM_BLACK
 	releaseall
 	end
 
@@ -299,56 +337,50 @@ LavaridgeTown_EventScript_HerbShopSign::
 	end
 
 LavaridgeTown_Text_MayNiceBadgesTakeThis:
-	.string "MAY: {PLAYER}{KUN}! Long time no see!\p"
-	.string "Oh? While I visited the hot springs,\n"
-	.string "you got the LAVARIDGE GYM BADGE.\p"
-	.string "You must have collected\n"
-	.string "good POKéMON…\l"
-	.string "No, I believe you raised some.\p"
-	.string "I guess it would be okay for you to\n"
-	.string "have this.$"
+	.string "MAY: {PLAYER}{KUN}! You stopped MAGMA\n"
+	.string "and earned the HEAT BADGE!\p"
+	.string "The hot springs finally feel\n"
+	.string "peaceful again.\p"
+	.string "Here, these will help with the\n"
+	.string "sandstorm on ROUTE 111.$"
 
 LavaridgeTown_Text_GoGogglesSentToPC:
 	.string "Your KEY ITEMS pocket is full, so the\n"
 	.string "GO-GOGGLES were sent to your PC.$"
 
 LavaridgeTown_Text_GoGogglesNoRoom:
-	.string "Your KEY ITEMS pocket and PC are full.\n"
-	.string "Make room before taking the GO-GOGGLES.$"
+	.string "Your KEY ITEMS pocket and PC are\n"
+	.string "full. Make room, then talk to me.\p"
+	.string "If you leave town, I will wait\n"
+	.string "outside the HERB SHOP.$"
 
 LavaridgeTown_Text_MayExplainGoGogglesChallengeDad:
-	.string "MAY: With those GO-GOGGLES, you'll\n"
-	.string "have no trouble getting through the\l"
-	.string "desert near ROUTE 111.\p"
-	.string "But, wow, {PLAYER}{KUN}…\n"
-	.string "Challenging GYMS…\p"
-	.string "You're trying hard because you don't\n"
-	.string "want to lose to me, I bet!\p"
-	.string "{PLAYER}{KUN}, I think I should challenge\n"
-	.string "your dad in PETALBURG GYM.\p"
-	.string "See you again!$"
+	.string "MAY: Carry those GO-GOGGLES in\n"
+	.string "your BAG to explore the desert.\p"
+	.string "The route signs list its POKéMON.\n"
+	.string "Check them before heading in!\p"
+	.string "With four BADGES, you can\n"
+	.string "challenge your dad in PETALBURG.\p"
+	.string "I want to see how I do against\n"
+	.string "him, too. See you there!$"
 
 LavaridgeTown_Text_BrendanNiceBadgesTakeThis:
-	.string "BRENDAN: {PLAYER}, hey, it's been a while.\n"
-	.string "How's it going?\p"
-	.string "Hmm…\n"
-	.string "That's a decent collection of BADGES.\p"
-	.string "All right, then.\n"
-	.string "You may as well have this.$"
+	.string "BRENDAN: Hey, {PLAYER}!\n"
+	.string "You stopped MAXIE at the summit!\p"
+	.string "And now you have the HEAT BADGE.\n"
+	.string "You have been busy!\p"
+	.string "Take these for the sandstorm\n"
+	.string "on ROUTE 111.$"
 
 LavaridgeTown_Text_BrendanExplainGoGogglesChallengeDad:
-	.string "BRENDAN: Keep those with you if you're\n"
-	.string "planning on going into that desert near\l"
-	.string "ROUTE 111.\p"
-	.string "There should be some POKéMON that\n"
-	.string "are exclusively desert-dwellers.\l"
-	.string "You might look around for those.\p"
-	.string "As for me…\n"
-	.string "I'm considering challenging NORMAN,\l"
-	.string "the GYM LEADER of PETALBURG.\p"
-	.string "Unlike you, {PLAYER}, your dad looks like\n"
-	.string "he really is tough.\p"
-	.string "See you around!$"
+	.string "BRENDAN: Keep the GO-GOGGLES in\n"
+	.string "your BAG to explore the desert.\p"
+	.string "Check its route signs for POKéMON\n"
+	.string "you have not found elsewhere.\p"
+	.string "Four BADGES means NORMAN will\n"
+	.string "accept your challenge now.\p"
+	.string "I am heading to PETALBURG, too.\n"
+	.string "Your dad should be a tough match!$"
 
 LavaridgeTown_Text_HaveEggWillYouTakeIt:
 	.string "I have here an EGG.\p"

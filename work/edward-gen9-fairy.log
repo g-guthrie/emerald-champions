@@ -1,0 +1,473 @@
+arm-none-eabi-cpp -iquote include -Wno-trigraphs -DMODERN=1 -DTESTING=0 -DEMERALD -std=gnu17 -DEC_HEADLESS_FIXTURES=0 -traditional-cpp - < src/data/trainers.party | tools/trainerproc/trainerproc -o src/data/trainers.h -i src/data/trainers.party -
+tools/scaninc/scaninc -M build/emerald-test/test/test_runner_battle.d -g build/assets -I include -I tools/agbcc/include test/test_runner_battle.c
+tools/scaninc/scaninc -M build/emerald-test/src/emerald_champions_battle_plan.d -g build/assets -I include -I tools/agbcc/include src/emerald_champions_battle_plan.c
+tools/scaninc/scaninc -M build/emerald-test/src/data.d -g build/assets -I include -I tools/agbcc/include src/data.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/data.o src/data.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/emerald_champions_battle_plan.o src/emerald_champions_battle_plan.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/test_runner_battle.o test/test_runner_battle.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 4
+[0] EC live review Edward timing: complete six-player party: [32mPASS[0m
+EDWARD_INPUT slot=0 lv=28 HP=111 Atk=48 Def=58 SpA=54 SpD=95 Speed=51 item=464 ability=39
+EDWARD_INPUT slot=1 lv=28 HP=83 Atk=49 Def=52 SpA=95 SpD=52 Speed=99 item=523 ability=156
+EDWARD_INPUT slot=2 lv=28 HP=111 Atk=36 Def=64 SpA=66 SpD=95 Speed=50 item=472 ability=26
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Psychic target=0
+AI decision turn=2 actor=1 move=Psychic target=2
+AI decision turn=2 actor=3 move=Psychic target=0
+EDWARD_TIMING setup=7 bothActors=60 complete=67 warm=59
+[2] EC live review Edward disruption: Fake Out and Taunt: [32mPASS[0m
+EDWARD_INPUT slot=0 lv=28 HP=111 Atk=48 Def=58 SpA=54 SpD=95 Speed=51 item=464 ability=39
+EDWARD_INPUT slot=1 lv=28 HP=83 Atk=49 Def=52 SpA=95 SpD=52 Speed=99 item=523 ability=156
+EDWARD_INPUT slot=2 lv=28 HP=111 Atk=36 Def=64 SpA=66 SpD=95 Speed=50 item=472 ability=26
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Psychic target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Heat Wave target=0
+AI decision turn=2 actor=1 move=Psychic target=2
+AI decision turn=2 actor=3 move=Psychic target=2
+EDWARD_AFTER board=10 turns=1 pair=0 species=97/178 HP=85/83 foes=0/76 moves=Psychic/Heat Wave speed=51/99 foeSpeed=0/71 items=464/523 foeStatus=0/16 PP=20/10 secondPP=9/15 thirdPP=10/9 fourthPP=5/20 faints=0/1 partyHP=85/83/111 taunt=0/0
+EDWARD_INPUT slot=0 lv=28 HP=111 Atk=48 Def=58 SpA=54 SpD=95 Speed=51 item=464 ability=39
+EDWARD_INPUT slot=1 lv=28 HP=83 Atk=49 Def=52 SpA=95 SpD=52 Speed=99 item=523 ability=156
+EDWARD_INPUT slot=2 lv=28 HP=111 Atk=36 Def=64 SpA=66 SpD=95 Speed=50 item=472 ability=26
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Psychic target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Heat Wave target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=1 move=Psychic target=2
+AI decision turn=2 actor=3 move=Psychic target=2
+AI decision turn=3 actor=1 move=Psychic target=2
+AI decision turn=3 actor=3 move=Psychic target=2
+EDWARD_AFTER board=10 turns=2 pair=0 species=97/178 HP=70/83 foes=0/17 moves=Psychic/Psychic speed=51/99 foeSpeed=0/71 items=464/523 foeStatus=0/16 PP=20/9 secondPP=8/15 thirdPP=10/9 fourthPP=5/20 faints=0/1 partyHP=70/83/111 taunt=0/0
+EDWARD_INPUT slot=0 lv=28 HP=111 Atk=48 Def=58 SpA=54 SpD=95 Speed=51 item=464 ability=39
+EDWARD_INPUT slot=1 lv=28 HP=83 Atk=49 Def=52 SpA=95 SpD=52 Speed=99 item=523 ability=156
+EDWARD_INPUT slot=2 lv=28 HP=111 Atk=36 Def=64 SpA=66 SpD=95 Speed=50 item=472 ability=26
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Dazzling Gleam target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Psychic target=0
+AI decision turn=2 actor=1 move=Psychic target=2
+AI decision turn=2 actor=3 move=Protect target=3
+EDWARD_AFTER board=10 turns=1 pair=1 species=97/358 HP=85/111 foes=0/93 moves=Dazzling Gleam/Psychic speed=51/50 foeSpeed=0/71 items=464/472 foeStatus=0/0 PP=20/9 secondPP=10/10 thirdPP=9/20 fourthPP=5/5 faints=0/1 partyHP=85/111/0 taunt=0/0
+EDWARD_INPUT slot=0 lv=28 HP=111 Atk=48 Def=58 SpA=54 SpD=95 Speed=51 item=464 ability=39
+EDWARD_INPUT slot=1 lv=28 HP=83 Atk=49 Def=52 SpA=95 SpD=52 Speed=99 item=523 ability=156
+EDWARD_INPUT slot=2 lv=28 HP=111 Atk=36 Def=64 SpA=66 SpD=95 Speed=50 item=472 ability=26
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Dazzling Gleam target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Psychic target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=1 move=Psychic target=2
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=1 move=Psychic target=2
+AI decision turn=3 actor=3 move=Psychic target=2
+EDWARD_AFTER board=10 turns=2 pair=1 species=97/358 HP=70/111 foes=0/68 moves=Psychic/Protect speed=51/50 foeSpeed=0/71 items=464/472 foeStatus=0/0 PP=20/9 secondPP=9/10 thirdPP=9/20 fourthPP=5/4 faints=0/1 partyHP=70/111/0 taunt=0/0
+EDWARD_INPUT slot=0 lv=28 HP=111 Atk=48 Def=58 SpA=54 SpD=95 Speed=51 item=464 ability=39
+EDWARD_INPUT slot=1 lv=28 HP=83 Atk=49 Def=52 SpA=95 SpD=52 Speed=99 item=523 ability=156
+EDWARD_INPUT slot=2 lv=28 HP=111 Atk=36 Def=64 SpA=66 SpD=95 Speed=50 item=472 ability=26
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Psychic target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Heat Wave target=0
+AI decision turn=2 actor=1 move=Psychic target=0
+AI decision turn=2 actor=3 move=Psychic target=0
+EDWARD_AFTER board=10 turns=1 pair=2 species=358/178 HP=91/83 foes=56/76 moves=-/Heat Wave speed=50/99 foeSpeed=79/71 items=472/523 foeStatus=16/16 PP=10/10 secondPP=10/15 thirdPP=20/9 fourthPP=5/20 faints=0/0 partyHP=91/83/0 taunt=0/0
+EDWARD_INPUT slot=0 lv=28 HP=111 Atk=48 Def=58 SpA=54 SpD=95 Speed=51 item=464 ability=39
+EDWARD_INPUT slot=1 lv=28 HP=83 Atk=49 Def=52 SpA=95 SpD=52 Speed=99 item=523 ability=156
+EDWARD_INPUT slot=2 lv=28 HP=111 Atk=36 Def=64 SpA=66 SpD=95 Speed=50 item=472 ability=26
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Psychic target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Heat Wave target=0
+AI decision turn=2 actor=0 move=Taunt target=3
+AI decision turn=2 actor=1 move=Psychic target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=3 move=Psychic target=0
+AI decision turn=3 actor=1 move=Helping Hand target=3
+AI decision turn=3 actor=3 move=Psychic target=2
+EDWARD_AFTER board=10 turns=2 pair=2 species=358/178 HP=82/83 foes=0/66 moves=Psychic/Psychic speed=50/99 foeSpeed=0/71 items=472/523 foeStatus=0/16 PP=9/9 secondPP=10/15 thirdPP=20/9 fourthPP=5/20 faints=0/1 partyHP=82/83/0 taunt=0/0
+[1] EC live review Edward counterplay: Dark Ghost pressure: [32mPASS[0m
+EDWARD_INPUT slot=0 lv=28 HP=111 Atk=48 Def=58 SpA=54 SpD=95 Speed=51 item=464 ability=39
+EDWARD_INPUT slot=1 lv=28 HP=83 Atk=49 Def=52 SpA=95 SpD=52 Speed=99 item=523 ability=156
+EDWARD_INPUT slot=2 lv=28 HP=111 Atk=36 Def=64 SpA=66 SpD=95 Speed=50 item=472 ability=26
+AI decision turn=1 actor=0 move=Foul Play target=3
+AI decision turn=1 actor=1 move=Protect target=1
+AI switch turn=1 actor=3 party=2
+AI decision turn=1 actor=2 move=Shadow Ball target=1
+AI decision turn=2 actor=1 move=Dazzling Gleam target=0
+AI decision turn=2 actor=3 move=Protect target=3
+EDWARD_AFTER board=20 turns=1 pair=0 species=97/358 HP=111/79 foes=110/85 moves=Protect/- speed=51/50 foeSpeed=44/92 items=464/472 foeStatus=0/0 PP=20/10 secondPP=10/10 thirdPP=10/20 fourthPP=4/5 faints=0/0 partyHP=111/83/79 taunt=0/0
+EDWARD_INPUT slot=0 lv=28 HP=111 Atk=48 Def=58 SpA=54 SpD=95 Speed=51 item=464 ability=39
+EDWARD_INPUT slot=1 lv=28 HP=83 Atk=49 Def=52 SpA=95 SpD=52 Speed=99 item=523 ability=156
+EDWARD_INPUT slot=2 lv=28 HP=111 Atk=36 Def=64 SpA=66 SpD=95 Speed=50 item=472 ability=26
+AI decision turn=1 actor=0 move=Foul Play target=3
+AI decision turn=1 actor=1 move=Protect target=1
+AI switch turn=1 actor=3 party=2
+AI decision turn=1 actor=2 move=Shadow Ball target=1
+AI decision turn=2 actor=0 move=Foul Play target=3
+AI decision turn=2 actor=1 move=Dazzling Gleam target=0
+AI decision turn=2 actor=2 move=Shadow Ball target=1
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=1 move=Psychic target=2
+AI decision turn=3 actor=3 move=Psychic target=2
+EDWARD_AFTER board=20 turns=2 pair=0 species=97/358 HP=61/85 foes=84/77 moves=Dazzling Gleam/Protect speed=51/50 foeSpeed=44/92 items=464/472 foeStatus=0/0 PP=20/10 secondPP=10/10 thirdPP=9/20 fourthPP=4/4 faints=0/0 partyHP=61/83/85 taunt=0/0
+EDWARD_INPUT slot=0 lv=28 HP=111 Atk=48 Def=58 SpA=54 SpD=95 Speed=51 item=464 ability=39
+EDWARD_INPUT slot=1 lv=28 HP=83 Atk=49 Def=52 SpA=95 SpD=52 Speed=99 item=523 ability=156
+EDWARD_INPUT slot=2 lv=28 HP=111 Atk=36 Def=64 SpA=66 SpD=95 Speed=50 item=472 ability=26
+AI decision turn=1 actor=0 move=Foul Play target=3
+AI decision turn=1 actor=1 move=Protect target=1
+AI switch turn=1 actor=3 party=2
+AI decision turn=1 actor=2 move=Shadow Ball target=1
+AI decision turn=2 actor=0 move=Foul Play target=3
+AI decision turn=2 actor=1 move=Dazzling Gleam target=0
+AI decision turn=2 actor=2 move=Shadow Ball target=1
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=0 move=Foul Play target=3
+AI decision turn=3 actor=1 move=Psychic target=2
+AI decision turn=3 actor=2 move=Shadow Ball target=1
+AI decision turn=3 actor=3 move=Psychic target=2
+AI decision turn=4 actor=1 move=Psychic target=2
+AI decision turn=4 actor=3 move=Protect target=3
+EDWARD_AFTER board=20 turns=3 pair=0 species=97/358 HP=11/53 foes=84/26 moves=Psychic/Psychic speed=51/50 foeSpeed=44/92 items=464/472 foeStatus=0/0 PP=20/9 secondPP=9/10 thirdPP=9/20 fourthPP=4/4 faints=0/0 partyHP=11/83/53 taunt=0/0
+EDWARD_INPUT slot=0 lv=28 HP=111 Atk=48 Def=58 SpA=54 SpD=95 Speed=51 item=464 ability=39
+EDWARD_INPUT slot=1 lv=28 HP=83 Atk=49 Def=52 SpA=95 SpD=52 Speed=99 item=523 ability=156
+EDWARD_INPUT slot=2 lv=28 HP=111 Atk=36 Def=64 SpA=66 SpD=95 Speed=50 item=472 ability=26
+AI decision turn=1 actor=0 move=Foul Play target=3
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Shadow Ball target=1
+AI decision turn=1 actor=3 move=Psychic target=2
+AI decision turn=2 actor=1 move=Dazzling Gleam target=0
+AI decision turn=2 actor=3 move=Protect target=3
+EDWARD_AFTER board=20 turns=1 pair=1 species=97/358 HP=111/79 foes=110/64 moves=Protect/Psychic speed=51/50 foeSpeed=44/92 items=464/472 foeStatus=0/0 PP=20/9 secondPP=10/10 thirdPP=10/20 fourthPP=4/5 faints=0/0 partyHP=111/79/0 taunt=0/0
+EDWARD_INPUT slot=0 lv=28 HP=111 Atk=48 Def=58 SpA=54 SpD=95 Speed=51 item=464 ability=39
+EDWARD_INPUT slot=1 lv=28 HP=83 Atk=49 Def=52 SpA=95 SpD=52 Speed=99 item=523 ability=156
+EDWARD_INPUT slot=2 lv=28 HP=111 Atk=36 Def=64 SpA=66 SpD=95 Speed=50 item=472 ability=26
+AI decision turn=1 actor=0 move=Foul Play target=3
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Shadow Ball target=1
+AI decision turn=1 actor=3 move=Psychic target=2
+AI decision turn=2 actor=0 move=Foul Play target=3
+AI decision turn=2 actor=1 move=Dazzling Gleam target=0
+AI decision turn=2 actor=2 move=Shadow Ball target=1
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=1 move=Psychic target=2
+AI decision turn=3 actor=3 move=Psychic target=2
+EDWARD_AFTER board=20 turns=2 pair=1 species=97/358 HP=61/85 foes=84/53 moves=Dazzling Gleam/Protect speed=51/50 foeSpeed=44/92 items=464/472 foeStatus=0/0 PP=20/9 secondPP=10/10 thirdPP=9/20 fourthPP=4/4 faints=0/0 partyHP=61/85/0 taunt=0/0
+EDWARD_INPUT slot=0 lv=28 HP=111 Atk=48 Def=58 SpA=54 SpD=95 Speed=51 item=464 ability=39
+EDWARD_INPUT slot=1 lv=28 HP=83 Atk=49 Def=52 SpA=95 SpD=52 Speed=99 item=523 ability=156
+EDWARD_INPUT slot=2 lv=28 HP=111 Atk=36 Def=64 SpA=66 SpD=95 Speed=50 item=472 ability=26
+AI decision turn=1 actor=0 move=Foul Play target=3
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Shadow Ball target=1
+AI decision turn=1 actor=3 move=Psychic target=2
+AI decision turn=2 actor=0 move=Foul Play target=3
+AI decision turn=2 actor=1 move=Dazzling Gleam target=0
+AI decision turn=2 actor=2 move=Shadow Ball target=1
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=0 move=Foul Play target=3
+AI decision turn=3 actor=1 move=Psychic target=2
+AI decision turn=3 actor=2 move=Shadow Ball target=1
+AI decision turn=3 actor=3 move=Psychic target=2
+AI decision turn=4 actor=1 move=Thunder Wave target=0
+AI decision turn=4 actor=3 move=Heal Pulse target=1
+EDWARD_AFTER board=20 turns=3 pair=1 species=97/358 HP=11/53 foes=84/0 moves=Psychic/Psychic speed=51/50 foeSpeed=44/0 items=464/472 foeStatus=0/0 PP=20/8 secondPP=9/10 thirdPP=9/20 fourthPP=4/4 faints=0/1 partyHP=11/53/0 taunt=0/0
+EDWARD_INPUT slot=0 lv=28 HP=111 Atk=48 Def=58 SpA=54 SpD=95 Speed=51 item=464 ability=39
+EDWARD_INPUT slot=1 lv=28 HP=83 Atk=49 Def=52 SpA=95 SpD=52 Speed=99 item=523 ability=156
+EDWARD_INPUT slot=2 lv=28 HP=111 Atk=36 Def=64 SpA=66 SpD=95 Speed=50 item=472 ability=26
+AI decision turn=1 actor=0 move=Foul Play target=3
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Shadow Ball target=1
+AI decision turn=1 actor=3 move=Heat Wave target=0
+AI decision turn=2 actor=1 move=Psychic target=2
+AI decision turn=2 actor=3 move=Psychic target=2
+EDWARD_AFTER board=20 turns=1 pair=2 species=358/178 HP=111/50 foes=77/64 moves=Protect/Heat Wave speed=50/99 foeSpeed=44/92 items=472/523 foeStatus=16/16 PP=10/10 secondPP=10/15 thirdPP=20/9 fourthPP=4/20 faints=0/0 partyHP=111/50/0 taunt=0/0
+EDWARD_INPUT slot=0 lv=28 HP=111 Atk=48 Def=58 SpA=54 SpD=95 Speed=51 item=464 ability=39
+EDWARD_INPUT slot=1 lv=28 HP=83 Atk=49 Def=52 SpA=95 SpD=52 Speed=99 item=523 ability=156
+EDWARD_INPUT slot=2 lv=28 HP=111 Atk=36 Def=64 SpA=66 SpD=95 Speed=50 item=472 ability=26
+AI decision turn=1 actor=0 move=Foul Play target=3
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Shadow Ball target=1
+AI decision turn=1 actor=3 move=Heat Wave target=0
+AI decision turn=2 actor=0 move=Foul Play target=3
+AI decision turn=2 actor=1 move=Psychic target=2
+AI decision turn=2 actor=2 move=Shadow Ball target=1
+AI decision turn=2 actor=3 move=Psychic target=2
+AI decision turn=3 actor=1 move=Helping Hand target=3
+AI decision turn=3 actor=3 move=Air Slash target=0
+EDWARD_AFTER board=20 turns=2 pair=2 species=358/178 HP=67/37 foes=71/0 moves=Psychic/Psychic speed=50/99 foeSpeed=44/0 items=472/0 foeStatus=16/0 PP=9/9 secondPP=10/15 thirdPP=20/9 fourthPP=4/20 faints=0/1 partyHP=67/37/0 taunt=0/0
+EDWARD_INPUT slot=0 lv=28 HP=111 Atk=48 Def=58 SpA=54 SpD=95 Speed=51 item=464 ability=39
+EDWARD_INPUT slot=1 lv=28 HP=83 Atk=49 Def=52 SpA=95 SpD=52 Speed=99 item=523 ability=156
+EDWARD_INPUT slot=2 lv=28 HP=111 Atk=36 Def=64 SpA=66 SpD=95 Speed=50 item=472 ability=26
+AI decision turn=1 actor=0 move=Foul Play target=3
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Shadow Ball target=1
+AI decision turn=1 actor=3 move=Heat Wave target=0
+AI decision turn=2 actor=0 move=Foul Play target=3
+AI decision turn=2 actor=1 move=Psychic target=2
+AI decision turn=2 actor=2 move=Shadow Ball target=1
+AI decision turn=2 actor=3 move=Psychic target=2
+AI decision turn=3 actor=0 move=Foul Play target=3
+AI decision turn=3 actor=1 move=Helping Hand target=3
+AI decision turn=3 actor=3 move=Air Slash target=0
+AI decision turn=4 actor=1 move=Heal Pulse target=3
+AI decision turn=4 actor=3 move=Air Slash target=0
+EDWARD_AFTER board=20 turns=3 pair=2 species=358/178 HP=73/37 foes=28/0 moves=Helping Hand/Air Slash speed=50/99 foeSpeed=44/0 items=472/0 foeStatus=16/0 PP=9/9 secondPP=10/14 thirdPP=19/9 fourthPP=4/20 faints=0/1 partyHP=73/37/0 taunt=0/0
+[3] EC live review Edward core: pressure and surviving pairs: [32mPASS[0m
+EDWARD_INPUT slot=0 lv=28 HP=111 Atk=48 Def=58 SpA=54 SpD=95 Speed=51 item=464 ability=39
+EDWARD_INPUT slot=1 lv=28 HP=83 Atk=49 Def=52 SpA=95 SpD=52 Speed=99 item=523 ability=156
+EDWARD_INPUT slot=2 lv=28 HP=111 Atk=36 Def=64 SpA=66 SpD=95 Speed=50 item=472 ability=26
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI switch turn=1 actor=3 party=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=1 move=Psychic target=2
+AI decision turn=2 actor=3 move=Psychic target=2
+EDWARD_AFTER board=0 turns=1 pair=0 species=97/358 HP=111/97 foes=101/119 moves=Protect/- speed=51/50 foeSpeed=47/38 items=464/472 foeStatus=0/0 PP=20/10 secondPP=10/10 thirdPP=10/20 fourthPP=4/5 faints=0/0 partyHP=111/83/97 taunt=0/0
+EDWARD_INPUT slot=0 lv=28 HP=111 Atk=48 Def=58 SpA=54 SpD=95 Speed=51 item=464 ability=39
+EDWARD_INPUT slot=1 lv=28 HP=83 Atk=49 Def=52 SpA=95 SpD=52 Speed=99 item=523 ability=156
+EDWARD_INPUT slot=2 lv=28 HP=111 Atk=36 Def=64 SpA=66 SpD=95 Speed=50 item=472 ability=26
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI switch turn=1 actor=3 party=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Psychic target=2
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Psychic target=2
+AI decision turn=3 actor=1 move=Psychic target=2
+AI decision turn=3 actor=3 move=Psychic target=2
+EDWARD_AFTER board=0 turns=2 pair=0 species=97/358 HP=63/83 foes=86/37 moves=Psychic/Psychic speed=51/50 foeSpeed=47/38 items=464/472 foeStatus=0/0 PP=20/9 secondPP=9/10 thirdPP=10/20 fourthPP=4/5 faints=0/0 partyHP=63/83/83 taunt=0/0
+EDWARD_INPUT slot=0 lv=28 HP=111 Atk=48 Def=58 SpA=54 SpD=95 Speed=51 item=464 ability=39
+EDWARD_INPUT slot=1 lv=28 HP=83 Atk=49 Def=52 SpA=95 SpD=52 Speed=99 item=523 ability=156
+EDWARD_INPUT slot=2 lv=28 HP=111 Atk=36 Def=64 SpA=66 SpD=95 Speed=50 item=472 ability=26
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI switch turn=1 actor=3 party=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Psychic target=2
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Psychic target=2
+AI decision turn=3 actor=0 move=Double-Edge target=1
+AI decision turn=3 actor=1 move=Psychic target=2
+AI decision turn=3 actor=2 move=Drain Punch target=3
+AI decision turn=3 actor=3 move=Psychic target=2
+AI decision turn=4 actor=1 move=Psychic target=0
+AI decision turn=4 actor=3 move=Psychic target=0
+EDWARD_AFTER board=0 turns=3 pair=0 species=97/358 HP=15/89 foes=53/0 moves=Psychic/Psychic speed=51/50 foeSpeed=47/0 items=464/472 foeStatus=0/0 PP=20/8 secondPP=8/10 thirdPP=10/20 fourthPP=4/5 faints=0/1 partyHP=15/83/89 taunt=0/0
+EDWARD_INPUT slot=0 lv=28 HP=111 Atk=48 Def=58 SpA=54 SpD=95 Speed=51 item=464 ability=39
+EDWARD_INPUT slot=1 lv=28 HP=83 Atk=49 Def=52 SpA=95 SpD=52 Speed=99 item=523 ability=156
+EDWARD_INPUT slot=2 lv=28 HP=111 Atk=36 Def=64 SpA=66 SpD=95 Speed=50 item=472 ability=26
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Dazzling Gleam target=0
+AI switch turn=1 actor=3 party=2
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Protect target=3
+EDWARD_AFTER board=1 turns=1 pair=0 species=97/358 HP=96/99 foes=75/93 moves=Dazzling Gleam/- speed=51/50 foeSpeed=105/71 items=464/472 foeStatus=0/0 PP=20/10 secondPP=10/10 thirdPP=9/20 fourthPP=5/5 faints=0/0 partyHP=96/83/99 taunt=0/0
+EDWARD_INPUT slot=0 lv=28 HP=111 Atk=48 Def=58 SpA=54 SpD=95 Speed=51 item=464 ability=39
+EDWARD_INPUT slot=1 lv=28 HP=83 Atk=49 Def=52 SpA=95 SpD=52 Speed=99 item=523 ability=156
+EDWARD_INPUT slot=2 lv=28 HP=111 Atk=36 Def=64 SpA=66 SpD=95 Speed=50 item=472 ability=26
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Dazzling Gleam target=0
+AI switch turn=1 actor=3 party=2
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=0 move=Psychic target=3
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=1 move=Dazzling Gleam target=0
+AI decision turn=3 actor=3 move=Psychic target=0
+EDWARD_AFTER board=1 turns=2 pair=0 species=97/358 HP=96/105 foes=75/93 moves=Protect/Protect speed=51/50 foeSpeed=105/71 items=464/472 foeStatus=0/0 PP=20/10 secondPP=10/10 thirdPP=9/20 fourthPP=4/4 faints=0/0 partyHP=96/83/105 taunt=0/0
+EDWARD_INPUT slot=0 lv=28 HP=111 Atk=48 Def=58 SpA=54 SpD=95 Speed=51 item=464 ability=39
+EDWARD_INPUT slot=1 lv=28 HP=83 Atk=49 Def=52 SpA=95 SpD=52 Speed=99 item=523 ability=156
+EDWARD_INPUT slot=2 lv=28 HP=111 Atk=36 Def=64 SpA=66 SpD=95 Speed=50 item=472 ability=26
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Dazzling Gleam target=0
+AI switch turn=1 actor=3 party=2
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=0 move=Psychic target=3
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=0 move=Psychic target=3
+AI decision turn=3 actor=1 move=Dazzling Gleam target=0
+AI decision turn=3 actor=2 move=Thunderbolt target=1
+AI decision turn=3 actor=3 move=Psychic target=0
+AI decision turn=4 actor=1 move=Dazzling Gleam target=0
+AI decision turn=4 actor=3 move=Psychic target=0
+EDWARD_AFTER board=1 turns=3 pair=0 species=97/358 HP=81/93 foes=44/82 moves=Dazzling Gleam/Psychic speed=51/50 foeSpeed=105/71 items=464/472 foeStatus=0/0 PP=20/9 secondPP=10/10 thirdPP=8/20 fourthPP=4/4 faints=0/0 partyHP=81/83/93 taunt=0/0
+EDWARD_INPUT slot=0 lv=28 HP=111 Atk=48 Def=58 SpA=54 SpD=95 Speed=51 item=464 ability=39
+EDWARD_INPUT slot=1 lv=28 HP=83 Atk=49 Def=52 SpA=95 SpD=52 Speed=99 item=523 ability=156
+EDWARD_INPUT slot=2 lv=28 HP=111 Atk=36 Def=64 SpA=66 SpD=95 Speed=50 item=472 ability=26
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Psychic target=2
+AI decision turn=2 actor=1 move=Psychic target=2
+AI decision turn=2 actor=3 move=Psychic target=2
+EDWARD_AFTER board=0 turns=1 pair=1 species=97/358 HP=111/97 foes=101/91 moves=Protect/Psychic speed=51/50 foeSpeed=47/38 items=464/472 foeStatus=0/0 PP=20/9 secondPP=10/10 thirdPP=10/20 fourthPP=4/5 faints=0/0 partyHP=111/97/0 taunt=0/0
+EDWARD_INPUT slot=0 lv=28 HP=111 Atk=48 Def=58 SpA=54 SpD=95 Speed=51 item=464 ability=39
+EDWARD_INPUT slot=1 lv=28 HP=83 Atk=49 Def=52 SpA=95 SpD=52 Speed=99 item=523 ability=156
+EDWARD_INPUT slot=2 lv=28 HP=111 Atk=36 Def=64 SpA=66 SpD=95 Speed=50 item=472 ability=26
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Psychic target=2
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Psychic target=2
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Psychic target=2
+AI decision turn=3 actor=1 move=Psychic target=0
+AI decision turn=3 actor=3 move=Psychic target=0
+EDWARD_AFTER board=0 turns=2 pair=1 species=97/358 HP=63/103 foes=86/0 moves=Psychic/Psychic speed=51/50 foeSpeed=47/0 items=464/472 foeStatus=0/0 PP=20/8 secondPP=9/10 thirdPP=10/20 fourthPP=4/5 faints=0/1 partyHP=63/103/0 taunt=0/0
+EDWARD_INPUT slot=0 lv=28 HP=111 Atk=48 Def=58 SpA=54 SpD=95 Speed=51 item=464 ability=39
+EDWARD_INPUT slot=1 lv=28 HP=83 Atk=49 Def=52 SpA=95 SpD=52 Speed=99 item=523 ability=156
+EDWARD_INPUT slot=2 lv=28 HP=111 Atk=36 Def=64 SpA=66 SpD=95 Speed=50 item=472 ability=26
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Psychic target=2
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Psychic target=2
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Psychic target=2
+AI decision turn=3 actor=0 move=Double-Edge target=1
+AI decision turn=3 actor=1 move=Psychic target=0
+AI decision turn=3 actor=3 move=Psychic target=0
+AI decision turn=4 actor=1 move=Psychic target=0
+AI decision turn=4 actor=3 move=Psychic target=0
+EDWARD_AFTER board=0 turns=3 pair=1 species=97/358 HP=15/109 foes=31/0 moves=Psychic/Psychic speed=51/50 foeSpeed=47/0 items=464/472 foeStatus=0/0 PP=20/7 secondPP=8/10 thirdPP=10/20 fourthPP=4/5 faints=0/1 partyHP=15/109/0 taunt=0/0
+EDWARD_INPUT slot=0 lv=28 HP=111 Atk=48 Def=58 SpA=54 SpD=95 Speed=51 item=464 ability=39
+EDWARD_INPUT slot=1 lv=28 HP=83 Atk=49 Def=52 SpA=95 SpD=52 Speed=99 item=523 ability=156
+EDWARD_INPUT slot=2 lv=28 HP=111 Atk=36 Def=64 SpA=66 SpD=95 Speed=50 item=472 ability=26
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Dazzling Gleam target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Psychic target=2
+AI decision turn=2 actor=1 move=Psychic target=2
+AI decision turn=2 actor=3 move=Psychic target=2
+EDWARD_AFTER board=1 turns=1 pair=1 species=97/358 HP=96/99 foes=75/63 moves=Dazzling Gleam/Psychic speed=51/50 foeSpeed=105/71 items=464/472 foeStatus=0/0 PP=20/9 secondPP=10/10 thirdPP=9/20 fourthPP=5/5 faints=0/0 partyHP=96/99/0 taunt=0/0
+EDWARD_INPUT slot=0 lv=28 HP=111 Atk=48 Def=58 SpA=54 SpD=95 Speed=51 item=464 ability=39
+EDWARD_INPUT slot=1 lv=28 HP=83 Atk=49 Def=52 SpA=95 SpD=52 Speed=99 item=523 ability=156
+EDWARD_INPUT slot=2 lv=28 HP=111 Atk=36 Def=64 SpA=66 SpD=95 Speed=50 item=472 ability=26
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Dazzling Gleam target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Psychic target=2
+AI decision turn=2 actor=0 move=Psychic target=3
+AI decision turn=2 actor=1 move=Psychic target=2
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=3 move=Psychic target=2
+AI decision turn=3 actor=1 move=Dazzling Gleam target=0
+AI decision turn=3 actor=3 move=Psychic target=0
+EDWARD_AFTER board=1 turns=2 pair=1 species=97/358 HP=81/87 foes=75/0 moves=Psychic/Psychic speed=51/50 foeSpeed=105/0 items=464/472 foeStatus=0/0 PP=20/8 secondPP=9/10 thirdPP=9/20 fourthPP=5/5 faints=0/1 partyHP=81/87/0 taunt=0/0
+EDWARD_INPUT slot=0 lv=28 HP=111 Atk=48 Def=58 SpA=54 SpD=95 Speed=51 item=464 ability=39
+EDWARD_INPUT slot=1 lv=28 HP=83 Atk=49 Def=52 SpA=95 SpD=52 Speed=99 item=523 ability=156
+EDWARD_INPUT slot=2 lv=28 HP=111 Atk=36 Def=64 SpA=66 SpD=95 Speed=50 item=472 ability=26
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Dazzling Gleam target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Psychic target=2
+AI decision turn=2 actor=0 move=Psychic target=3
+AI decision turn=2 actor=1 move=Psychic target=2
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=3 move=Psychic target=2
+AI decision turn=3 actor=0 move=Psychic target=3
+AI decision turn=3 actor=1 move=Dazzling Gleam target=0
+AI decision turn=3 actor=3 move=Psychic target=0
+AI decision turn=4 actor=1 move=Psychic target=0
+AI decision turn=4 actor=3 move=Psychic target=0
+EDWARD_AFTER board=1 turns=3 pair=1 species=97/358 HP=81/75 foes=39/0 moves=Dazzling Gleam/Psychic speed=51/50 foeSpeed=105/0 items=464/472 foeStatus=0/0 PP=20/7 secondPP=9/10 thirdPP=8/20 fourthPP=5/5 faints=0/1 partyHP=81/75/0 taunt=0/0
+EDWARD_INPUT slot=0 lv=28 HP=111 Atk=48 Def=58 SpA=54 SpD=95 Speed=51 item=464 ability=39
+EDWARD_INPUT slot=1 lv=28 HP=83 Atk=49 Def=52 SpA=95 SpD=52 Speed=99 item=523 ability=156
+EDWARD_INPUT slot=2 lv=28 HP=111 Atk=36 Def=64 SpA=66 SpD=95 Speed=50 item=472 ability=26
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Psychic target=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Psychic target=2
+AI decision turn=2 actor=1 move=Psychic target=2
+AI decision turn=2 actor=3 move=Heat Wave target=0
+EDWARD_AFTER board=0 turns=1 pair=2 species=358/178 HP=73/71 foes=87/9 moves=Psychic/Psychic speed=50/99 foeSpeed=47/38 items=472/523 foeStatus=0/0 PP=9/9 secondPP=10/15 thirdPP=20/10 fourthPP=5/20 faints=0/0 partyHP=73/71/0 taunt=0/0
+EDWARD_INPUT slot=0 lv=28 HP=111 Atk=48 Def=58 SpA=54 SpD=95 Speed=51 item=464 ability=39
+EDWARD_INPUT slot=1 lv=28 HP=83 Atk=49 Def=52 SpA=95 SpD=52 Speed=99 item=523 ability=156
+EDWARD_INPUT slot=2 lv=28 HP=111 Atk=36 Def=64 SpA=66 SpD=95 Speed=50 item=472 ability=26
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Psychic target=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Psychic target=2
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Psychic target=2
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Heat Wave target=0
+AI decision turn=3 actor=1 move=Psychic target=0
+AI decision turn=3 actor=3 move=Psychic target=0
+EDWARD_AFTER board=0 turns=2 pair=2 species=358/178 HP=57/71 foes=43/0 moves=Psychic/Heat Wave speed=50/99 foeSpeed=47/0 items=472/523 foeStatus=16/0 PP=8/9 secondPP=10/15 thirdPP=20/9 fourthPP=5/20 faints=0/1 partyHP=57/71/0 taunt=0/0
+EDWARD_INPUT slot=0 lv=28 HP=111 Atk=48 Def=58 SpA=54 SpD=95 Speed=51 item=464 ability=39
+EDWARD_INPUT slot=1 lv=28 HP=83 Atk=49 Def=52 SpA=95 SpD=52 Speed=99 item=523 ability=156
+EDWARD_INPUT slot=2 lv=28 HP=111 Atk=36 Def=64 SpA=66 SpD=95 Speed=50 item=472 ability=26
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Psychic target=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Psychic target=2
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Psychic target=2
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Heat Wave target=0
+AI decision turn=3 actor=0 move=Double-Edge target=1
+AI decision turn=3 actor=1 move=Psychic target=0
+AI decision turn=3 actor=3 move=Psychic target=0
+EDWARD_AFTER board=0 turns=3 pair=2 species=358/178 HP=57/71 foes=0/0 moves=Psychic/Psychic speed=50/99 foeSpeed=47/0 items=472/523 foeStatus=0/0 PP=7/8 secondPP=10/15 thirdPP=20/9 fourthPP=5/20 faints=0/2 partyHP=57/71/0 taunt=0/0
+EDWARD_INPUT slot=0 lv=28 HP=111 Atk=48 Def=58 SpA=54 SpD=95 Speed=51 item=464 ability=39
+EDWARD_INPUT slot=1 lv=28 HP=83 Atk=49 Def=52 SpA=95 SpD=52 Speed=99 item=523 ability=156
+EDWARD_INPUT slot=2 lv=28 HP=111 Atk=36 Def=64 SpA=66 SpD=95 Speed=50 item=472 ability=26
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Psychic target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Air Slash target=0
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Air Slash target=0
+EDWARD_AFTER board=1 turns=1 pair=2 species=358/178 HP=102/51 foes=45/74 moves=Psychic/Air Slash speed=50/99 foeSpeed=105/71 items=472/523 foeStatus=0/0 PP=9/10 secondPP=10/14 thirdPP=20/10 fourthPP=5/20 faints=0/0 partyHP=102/51/0 taunt=0/0
+EDWARD_INPUT slot=0 lv=28 HP=111 Atk=48 Def=58 SpA=54 SpD=95 Speed=51 item=464 ability=39
+EDWARD_INPUT slot=1 lv=28 HP=83 Atk=49 Def=52 SpA=95 SpD=52 Speed=99 item=523 ability=156
+EDWARD_INPUT slot=2 lv=28 HP=111 Atk=36 Def=64 SpA=66 SpD=95 Speed=50 item=472 ability=26
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Psychic target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Air Slash target=0
+AI decision turn=2 actor=0 move=Psychic target=3
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=3 move=Air Slash target=0
+AI decision turn=3 actor=1 move=Psychic target=0
+AI decision turn=3 actor=3 move=Psychic target=0
+EDWARD_AFTER board=1 turns=2 pair=2 species=358/178 HP=108/39 foes=2/74 moves=Protect/Air Slash speed=50/99 foeSpeed=105/71 items=472/0 foeStatus=0/0 PP=9/10 secondPP=10/13 thirdPP=20/10 fourthPP=4/20 faints=0/0 partyHP=108/39/0 taunt=0/0
+EDWARD_INPUT slot=0 lv=28 HP=111 Atk=48 Def=58 SpA=54 SpD=95 Speed=51 item=464 ability=39
+EDWARD_INPUT slot=1 lv=28 HP=83 Atk=49 Def=52 SpA=95 SpD=52 Speed=99 item=523 ability=156
+EDWARD_INPUT slot=2 lv=28 HP=111 Atk=36 Def=64 SpA=66 SpD=95 Speed=50 item=472 ability=26
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Psychic target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Air Slash target=0
+AI decision turn=2 actor=0 move=Psychic target=3
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=3 move=Air Slash target=0
+AI decision turn=3 actor=0 move=Psychic target=3
+AI decision turn=3 actor=1 move=Psychic target=0
+AI decision turn=3 actor=2 move=Thunderbolt target=1
+AI decision turn=3 actor=3 move=Psychic target=0
+AI decision turn=4 actor=1 move=Psychic target=2
+AI decision turn=4 actor=3 move=Psychic target=2
+EDWARD_AFTER board=1 turns=3 pair=2 species=358/178 HP=99/7 foes=0/55 moves=Psychic/Psychic speed=50/99 foeSpeed=0/71 items=472/0 foeStatus=0/0 PP=8/9 secondPP=10/13 thirdPP=20/10 fourthPP=4/20 faints=0/1 partyHP=99/7/0 taunt=0/0
+
+- Tests [32mPASSED[0m:          4
+- Tests [34mTOTAL[0m:           4
+

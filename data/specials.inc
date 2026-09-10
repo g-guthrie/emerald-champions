@@ -529,10 +529,10 @@ gSpecials::
 	def_special BufferSelectedMonEmeraldChampionsBattleSetPreview
 	def_special BufferSelectedMonNature
 	def_special BufferSelectedMonCurrentEmeraldChampionsBattleSet
-	def_special BufferSelectedMonEmeraldChampionsStatPointSummary
-	def_special BufferSelectedMonEmeraldChampionsStatPointDetail
-	def_special AdjustSelectedMonEmeraldChampionsStatPoints
-	def_special ResetSelectedMonEmeraldChampionsStatPoints
+	def_special BufferSelectedMonEmeraldChampionsEvSummary
+	def_special BufferSelectedMonEmeraldChampionsEvDetail
+	def_special AdjustSelectedMonEmeraldChampionsEvs
+	def_special ResetSelectedMonEmeraldChampionsEvs
 	def_special TryUnlockSelectedLegendarySign
 	def_special GetSelectedLegendarySignState
 	def_special ShouldShowSelectedLegendarySignObject
@@ -543,8 +543,6 @@ gSpecials::
 	def_special DoesPlayerPartyHaveSelectedSpeciesFamily
 	def_special BufferCurrentMapRouteSignSpecies
 	def_special TryUnlockDarkraiLegendarySign
-	def_special BuildLegendarySignResearchMenu
-	def_special BuildLocalLegendarySignMenu
 	def_special TryGiveArceusLegendarySignMasteryReward
 	def_special ChampionsCircuitCanEnter
 	def_special ChampionsCircuitBegin
@@ -721,3 +719,17 @@ gSpecials::
 
 	def_special FinishLegendaryLandmarkEncounter
 	def_special HideRestingLegendaryObject
+
+	def_special BufferNextLocalLegendaryRequirement
+
+	def_special TryUnlockLocalLegendaryDiscovery
+	def_special BufferNextCenterLegendaryLead
+
+	def_special ClaimEmeraldChampionsSootMilestone
+	def_special BufferEmeraldChampionsSootProgress
+
+	def_special OpenEmeraldChampionsEvolutionSpecialist
+
+	def_special TradeEmeraldChampionsShoalMaterials
+
+	def_special GetHeatranDiscoveryState

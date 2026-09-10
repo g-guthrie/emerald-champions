@@ -21,9 +21,9 @@ EventTicket_Text_ShowEonTicket:
 	.string "All aboard!$"
 
 EventTicket_Text_SouthernIslandSailBack:
-	.string "Aye, mate, there's nothing here to\n"
-	.string "see or do on this forgettable island.\p"
-	.string "What say we sail back to LILYCOVE?$"
+	.string "Aye, mate, this island has a quiet\n"
+	.string "all its own.\p"
+	.string "Ready to sail back to LILYCOVE?$"
 
 EventTicket_Text_SailHome:
 	.string "Aye, right, then!\n"

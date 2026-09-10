@@ -906,28 +906,27 @@ LittlerootTown_EventScript_GiveRunningShoes::
 
 LittlerootTown_Text_OurNewHomeLetsGoInside:
 	.string "MOM: {PLAYER}, we're here, honey!\p"
-	.string "It must be tiring riding with our things\n"
+	.string "That must have been a tiring ride\n"
 	.string "in the moving truck.\p"
-	.string "Well, this is LITTLEROOT TOWN.\p"
-	.string "How do you like it?\n"
-	.string "This is our new home!\p"
-	.string "It has a quaint feel, but it seems to be\n"
-	.string "an easy place to live, don't you think?\p"
-	.string "And, you get your own room, {PLAYER}!\n"
-	.string "Let's go inside.$"
+	.string "Welcome to LITTLEROOT TOWN!\n"
+	.string "This is our new home.\p"
+	.string "It's quiet, but I think we'll\n"
+	.string "like it here. And you have\l"
+	.string "your very own room, {PLAYER}!\p"
+	.string "Come on, let's go inside.$"
 
 LittlerootTown_Text_WaitPlayer:
 	.string "MOM: Wait, {PLAYER}!$"
 
 LittlerootTown_Text_WearTheseRunningShoes:
-	.string "MOM: {PLAYER}! {PLAYER}! Did you\n"
-	.string "introduce yourself to PROF. BIRCH?\p"
-	.string "Oh! What an adorable POKéMON!\n"
-	.string "You got it from PROF. BIRCH. How nice!\p"
-	.string "You're your father's child, all right.\n"
-	.string "You look good together with POKéMON!\p"
-	.string "Here, honey! If you're going out on an\n"
-	.string "adventure, wear these RUNNING SHOES.\p"
+	.string "MOM: {PLAYER}! Did you meet PROF.\n"
+	.string "BIRCH?\p"
+	.string "Oh! Look at your new friends!\n"
+	.string "You're setting off together? How\l"
+	.string "lovely!\p"
+	.string "Your father will be so proud.\n"
+	.string "Here, honey, take these RUNNING\l"
+	.string "SHOES.\p"
 	.string "They'll put a zip in your step!$"
 
 LittlerootTown_Text_SwitchShoesWithRunningShoes:
@@ -935,12 +934,9 @@ LittlerootTown_Text_SwitchShoesWithRunningShoes:
 	.string "RUNNING SHOES.$"
 
 LittlerootTown_Text_ExplainRunningShoes:
-	.string "MOM: {PLAYER}, those shoes came with\n"
-	.string "instructions.\p"
-	.string "“Press the B Button while wearing these\n"
-	.string "RUNNING SHOES to run extra-fast!\p"
-	.string "“Slip on these RUNNING SHOES and race\n"
-	.string "in the great outdoors!”$"
+	.string "MOM: The shoes came with a note:\p"
+	.string "“Hold the B Button to run.\n"
+	.string "Now get out there and explore!”$"
 
 LittlerootTown_Text_ComeHomeIfAnythingHappens:
 	.string "… … … … … … … …\n"
@@ -951,7 +947,7 @@ LittlerootTown_Text_ComeHomeIfAnythingHappens:
 	.string "He's at the GYM in PETALBURG CITY.\n"
 	.string "Go west from OLDALE along ROUTE 102.\p"
 	.string "…But please be careful.\n"
-	.string "If anything happens, you can come home.\p"
+	.string "You can always come home to rest.\p"
 	.string "Go on, go get them, honey!$"
 
 LittlerootTown_Text_CanUsePCToStoreItems:
@@ -960,11 +956,10 @@ LittlerootTown_Text_CanUsePCToStoreItems:
 	.string "The power of science is staggering!$"
 
 LittlerootTown_Text_BirchSpendsDaysInLab:
-	.string "PROF. BIRCH spends days in his LAB\n"
-	.string "studying, then he'll suddenly go out in\l"
-	.string "the wild to do more research…\p"
-	.string "When does PROF. BIRCH spend time\n"
-	.string "at home?$"
+	.string "PROF. BIRCH spends days studying\n"
+	.string "in his LAB, then rushes outside\l"
+	.string "to do even more research.\p"
+	.string "When does he find time to go home?$"
 
 LittlerootTown_Text_IfYouGoInGrassPokemonWillJumpOut:
 	.string "Um, um, um!\p"

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "money.h"
 
 #if EC_HEADLESS_FIXTURES
 
@@ -34,6 +35,8 @@
 #include "legendary_signs.h"
 #include "load_save.h"
 #include "main_menu.h"
+#include "mauville_old_man.h"
+#include "daycare.h"
 #include "move_relearner.h"
 #include "naming_screen.h"
 #include "new_game.h"
@@ -49,6 +52,7 @@
 #include "pokemon_summary_screen.h"
 #include "pokemon_storage_system.h"
 #include "random.h"
+#include "rtc.h"
 #include "safari_zone.h"
 #include "script.h"
 #include "script_pokemon_util.h"
@@ -62,10 +66,12 @@
 #include "constants/contest.h"
 #include "constants/game_stat.h"
 #include "constants/items.h"
+#include "constants/lilycove_lady.h"
 #include "constants/moves.h"
 #include "constants/pokemon.h"
 #include "constants/flags.h"
 #include "constants/event_objects.h"
+#include "constants/emerald_champions.h"
 #include "constants/field_effects.h"
 #include "constants/field_specials.h"
 #include "constants/script_menu.h"
@@ -156,6 +162,11 @@ enum EmeraldChampionsHeadlessBattleResolution EmeraldChampionsHeadlessGetBattleR
                           | BATTLE_TYPE_CATCH_TUTORIAL
                           | BATTLE_TYPE_POKEDUDE))
         return EC_HEADLESS_BATTLE_NATIVE;
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_STORY_HANDOFF
+     && (gEcHeadlessFixtureParam == 116 || gEcHeadlessFixtureParam == 249 || gEcHeadlessFixtureParam == 250)
+     && gEcHeadlessCampaignCaptureSerial == 0
+     && gEcHeadlessCampaignBattleSerial == 0)
+        return EC_HEADLESS_BATTLE_WIN;
     if (gBattleTypeFlags & (BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_ROAMER))
         return EC_HEADLESS_BATTLE_CAPTURE;
     if ((gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CAMPAIGN_AUTOWIN
@@ -308,7 +319,9 @@ static void FillHeadlessKeyPocket(void)
     for (u32 item = 1; item < ITEMS_COUNT && slot < pocket->capacity; item++)
     {
         if (GetItemPocket(item) == GetItemPocket(ITEM_DOWSING_MACHINE)
-         && item != ITEM_DOWSING_MACHINE && item != ITEM_MACH_BIKE && item != ITEM_ACRO_BIKE)
+         && item != ITEM_DOWSING_MACHINE && item != ITEM_MACH_BIKE && item != ITEM_ACRO_BIKE
+         && item != ITEM_GO_GOGGLES && item != ITEM_DEVON_SCOPE && item != ITEM_LINKING_CORD
+         && item != ITEM_MAGMA_EMBLEM)
             BagPocket_SetSlotItemIdAndCount(pocket, slot++, item, 1);
     }
     fatal_assertf(slot == pocket->capacity, "Headless key pocket could not be filled");
@@ -892,7 +905,39 @@ void EmeraldChampionsHeadlessObserve(void)
             gSaveBlock1Ptr->pcItems[slot] = (struct ItemSlot){ITEM_NONE, 0};
         }
         gEcHeadlessFixtureTrigger = 0;
-        LoadHeadlessMap(MAP_GRANITE_CAVE_STEVENS_ROOM, 7, 9);
+        if (gEcHeadlessFixtureParam == 115 || gEcHeadlessFixtureParam == 116)
+            LoadHeadlessMap(MAP_SCORCHED_SLAB_HEATRANS_ROOM, 10, 15);
+        else if (gEcHeadlessFixtureParam == 151)
+            LoadHeadlessMap(MAP_MT_PYRE_SUMMIT, 23, 6);
+        else if (gEcHeadlessFixtureParam == 154)
+            LoadHeadlessMap(MAP_MT_PYRE_SUMMIT, 23, 11);
+        else if (gEcHeadlessFixtureParam == 245 || gEcHeadlessFixtureParam == 249)
+            LoadHeadlessMap(MAP_CAVE_OF_ORIGIN_DIANCIES_ROOM, 9, 10);
+        else if (gEcHeadlessFixtureParam == 246 || gEcHeadlessFixtureParam == 250)
+            LoadHeadlessMap(MAP_SKY_PILLAR_TOP, 14, 7);
+        else if (gEcHeadlessFixtureParam == 175)
+            LoadHeadlessMap(MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM, 8, 9);
+        else if (gEcHeadlessFixtureParam == 106)
+            LoadHeadlessMap(MAP_ROUTE113_GLASS_WORKSHOP, 2, 4);
+        else if (gEcHeadlessFixtureParam == 94 || gEcHeadlessFixtureParam == 95)
+            LoadHeadlessMap(MAP_ROUTE120, 14, 15);
+        else if (gEcHeadlessFixtureParam == 91)
+            VarSet(VAR_ABNORMAL_WEATHER_STEP_COUNTER, 999);
+        else if (gEcHeadlessFixtureParam == 43)
+            LoadHeadlessMap(MAP_MAUVILLE_CITY_GYM, gSaveBlock1Ptr->pos.x, gSaveBlock1Ptr->pos.y);
+        else if (gEcHeadlessFixtureParam == 68)
+            LoadHeadlessMap(MAP_LAVARIDGE_TOWN, 11, 16);
+        else if (gEcHeadlessFixtureParam == 89 || gEcHeadlessFixtureParam == 90)
+            LoadHeadlessMap(MAP_ROUTE119, 25, 33);
+        else if (gEcHeadlessFixtureParam == 77)
+        {
+            FlagClear(FLAG_HIDE_MAUVILLE_CITY_WATTSON);
+            LoadHeadlessMap(MAP_MAUVILLE_CITY, 29, 10);
+        }
+        else if (gEcHeadlessFixtureParam >= 4 && gEcHeadlessFixtureParam <= 9)
+            LoadHeadlessMap(MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB, 6, 5);
+        else
+            LoadHeadlessMap(MAP_GRANITE_CAVE_STEVENS_ROOM, 7, 9);
     }
     if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_RUSTBORO_GUIDE_RETRY
         && gEcHeadlessFixtureTrigger == 2 && gMain.callback2 == CB2_Overworld
@@ -978,6 +1023,21 @@ void EmeraldChampionsHeadlessObserve(void)
             gEcHeadlessCampaignQueryValue = FlagGet(gEcHeadlessCampaignQueryId);
         else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_VAR)
             gEcHeadlessCampaignQueryValue = VarGet(gEcHeadlessCampaignQueryId);
+        else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_SELL_PRICE)
+            gEcHeadlessCampaignQueryValue = GetItemSellPrice(gEcHeadlessCampaignQueryId);
+        else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_EVOLUTION_PRICE)
+            gEcHeadlessCampaignQueryValue = GetEmeraldChampionsEvolutionPrice(gEcHeadlessCampaignQueryId);
+        else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_MONEY)
+            gEcHeadlessCampaignQueryValue = GetMoney(&gSaveBlock1Ptr->money);
+        else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_BP)
+            gEcHeadlessCampaignQueryValue = gSaveBlock2Ptr->frontier.battlePoints;
+        else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_PARTY_SPECIES)
+            gEcHeadlessCampaignQueryValue = gEcHeadlessCampaignQueryId < PARTY_SIZE
+                ? GetMonData(&gParties[B_TRAINER_PLAYER][gEcHeadlessCampaignQueryId], MON_DATA_SPECIES) : SPECIES_NONE;
+        else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_PP_BONUSES)
+            gEcHeadlessCampaignQueryValue = GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP_BONUSES);
+        else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_LEGENDARY_ELIGIBLE)
+            gEcHeadlessCampaignQueryValue = CanAcquireLegendarySignSpecies(gEcHeadlessCampaignQueryId);
         else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_ITEM)
             gEcHeadlessCampaignQueryValue = CountTotalItemQuantityInBag(gEcHeadlessCampaignQueryId);
         else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_PC_ITEM)
@@ -1931,6 +1991,1402 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
             FlagSet(FLAG_SYS_POKEMON_GET);
             ClearBag();
             memset(gSaveBlock1Ptr->pcItems, 0, sizeof(gSaveBlock1Ptr->pcItems));
+            if (gEcHeadlessFixtureParam == 60 || gEcHeadlessFixtureParam == 61)
+            {
+                gSaveBlock2Ptr->playerGender = gEcHeadlessFixtureParam == 60 ? MALE : FEMALE;
+                VarSet(VAR_METEOR_FALLS_STATE, 0);
+                FlagClear(FLAG_HIDE_METEOR_FALLS_TEAM_MAGMA);
+                FlagClear(FLAG_HIDE_METEOR_FALLS_1F_1R_COZMO);
+                FlagSet(FLAG_HIDE_METEOR_FALLS_TEAM_AQUA);
+                FlagClear(FLAG_HIDE_ROUTE_112_TEAM_MAGMA);
+                ClearTrainerFlag(TRAINER_COURTNEY_METEOR_FALLS);
+                ClearTrainerFlag(TRAINER_GRUNT_METEOR_FALLS);
+                LoadHeadlessMap(MAP_METEOR_FALLS_1F_1R, 15, 18);
+                break;
+            }
+            if (gEcHeadlessFixtureParam >= 64 && gEcHeadlessFixtureParam <= 68)
+            {
+                gSaveBlock2Ptr->playerGender = (gEcHeadlessFixtureParam & 1) ? FEMALE : MALE;
+                FlagSet(FLAG_BADGE01_GET);
+                FlagSet(FLAG_BADGE02_GET);
+                FlagSet(FLAG_BADGE03_GET);
+                FlagSet(FLAG_BADGE04_GET);
+                FlagSet(FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY);
+                FlagClear(FLAG_RECEIVED_GO_GOGGLES);
+                FlagSet(FLAG_HIDE_LAVARIDGE_TOWN_RIVAL);
+                FlagSet(FLAG_HIDE_LAVARIDGE_TOWN_RIVAL_ON_BIKE);
+                VarSet(VAR_LAVARIDGE_TOWN_STATE, 1);
+                if (gEcHeadlessFixtureParam == 68)
+                {
+                    FillHeadlessKeyPocket();
+                    for (slot = 0; slot < PC_ITEMS_COUNT; slot++)
+                        gSaveBlock1Ptr->pcItems[slot] = (struct ItemSlot){ITEM_POTION, 1};
+                }
+                LoadHeadlessMap(MAP_LAVARIDGE_TOWN,
+                    gEcHeadlessFixtureParam == 66 || gEcHeadlessFixtureParam == 67 ? 9 : 5,
+                    gEcHeadlessFixtureParam == 66 || gEcHeadlessFixtureParam == 67 ? 7 : 16);
+                break;
+            }
+            if (gEcHeadlessFixtureParam == 69 || gEcHeadlessFixtureParam == 70)
+            {
+                FlagSet(FLAG_BADGE01_GET);
+                FlagSet(FLAG_BADGE02_GET);
+                FlagSet(FLAG_BADGE03_GET);
+                FlagClear(FLAG_BADGE04_GET);
+                FlagClear(FLAG_DEFEATED_LAVARIDGE_GYM);
+                FlagClear(FLAG_RECEIVED_FLANNERY_CAMERUPTITE);
+                ClearTrainerFlag(TRAINER_FLANNERY_1);
+                SetTrainerFlag(TRAINER_COLE);
+                SetTrainerFlag(TRAINER_GERALD);
+                VarSet(VAR_PETALBURG_GYM_STATE, 5);
+                VarSet(VAR_LAVARIDGE_TOWN_STATE, 0);
+                LoadHeadlessMap(MAP_LAVARIDGE_TOWN_GYM_1F,
+                    gEcHeadlessFixtureParam == 69 ? 13 : 3,
+                    gEcHeadlessFixtureParam == 69 ? 10 : 13);
+                break;
+            }
+            if (gEcHeadlessFixtureParam == 71 || gEcHeadlessFixtureParam == 72)
+            {
+                const u16 trainers[] = {TRAINER_COLE, TRAINER_GERALD, TRAINER_AXLE,
+                    TRAINER_DANIELLE, TRAINER_KEEGAN, TRAINER_JACE, TRAINER_JEFF, TRAINER_ELI};
+                FlagSet(FLAG_BADGE01_GET);
+                FlagSet(FLAG_BADGE02_GET);
+                FlagSet(FLAG_BADGE03_GET);
+                FlagClear(FLAG_BADGE04_GET);
+                FlagClear(FLAG_DEFEATED_LAVARIDGE_GYM);
+                ClearTrainerFlag(TRAINER_FLANNERY_1);
+                for (slot = 0; slot < ARRAY_COUNT(trainers); slot++)
+                    SetTrainerFlag(trainers[slot]);
+                if (gEcHeadlessFixtureParam == 72)
+                    ClearTrainerFlag(TRAINER_COLE);
+                LoadHeadlessMap(MAP_LAVARIDGE_TOWN_GYM_1F,
+                    gEcHeadlessFixtureParam == 71 ? 13 : 3,
+                    gEcHeadlessFixtureParam == 71 ? 17 : 13);
+                break;
+            }
+            if (gEcHeadlessFixtureParam >= 73 && gEcHeadlessFixtureParam <= 76)
+            {
+                FlagSet(FLAG_BADGE01_GET);
+                FlagSet(FLAG_BADGE02_GET);
+                FlagSet(FLAG_BADGE03_GET);
+                FlagSet(FLAG_BADGE04_GET);
+                FlagClear(FLAG_BADGE05_GET);
+                FlagClear(FLAG_DEFEATED_PETALBURG_GYM);
+                FlagClear(FLAG_RECEIVED_HM_SURF);
+                FlagClear(FLAG_RECEIVED_NORMAN_LOPUNNITE);
+                FlagSet(FLAG_HIDE_PETALBURG_GYM_WALLY);
+                FlagSet(FLAG_HIDE_PETALBURG_GYM_WALLYS_DAD);
+                ClearTrainerFlag(TRAINER_NORMAN_1);
+                VarSet(VAR_PETALBURG_GYM_STATE, 6);
+                VarSet(VAR_PETALBURG_CITY_STATE, 3);
+                if (gEcHeadlessFixtureParam == 76)
+                {
+                    const u16 trainers[] = {TRAINER_RANDALL, TRAINER_MARY, TRAINER_PARKER,
+                        TRAINER_ALEXIA, TRAINER_GEORGE, TRAINER_JODY, TRAINER_BERKE};
+                    for (slot = 0; slot < ARRAY_COUNT(trainers); slot++)
+                        ClearTrainerFlag(trainers[slot]);
+                    FlagClear(FLAG_HIDE_PETALBURG_GYM_GREETER);
+                    LoadHeadlessMap(MAP_PETALBURG_CITY_GYM, 4, 110);
+                    break;
+                }
+                LoadHeadlessMap(MAP_PETALBURG_CITY_GYM,
+                    gEcHeadlessFixtureParam == 73 ? 4 : gEcHeadlessFixtureParam == 74 ? 3 : 5,
+                    gEcHeadlessFixtureParam == 73 ? 3 : 2);
+                break;
+            }
+            if (gEcHeadlessFixtureParam >= 241 && gEcHeadlessFixtureParam <= 250)
+            {
+                u32 param = gEcHeadlessFixtureParam;
+                const u16 badges[] = {FLAG_BADGE01_GET, FLAG_BADGE02_GET, FLAG_BADGE03_GET,
+                    FLAG_BADGE04_GET, FLAG_BADGE05_GET, FLAG_BADGE06_GET, FLAG_BADGE07_GET};
+                for (slot = 0; slot < ARRAY_COUNT(badges); slot++)
+                    FlagSet(badges[slot]);
+                FlagClear(FLAG_BADGE08_GET);
+                FlagClear(FLAG_SYS_GAME_CLEAR);
+                FlagClear(FLAG_SYS_WEATHER_CTRL);
+                FlagSet(FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE);
+                FlagSet(FLAG_HIDE_SOOTOPOLIS_CITY_STEVEN);
+                FlagSet(FLAG_HIDE_SOOTOPOLIS_CITY_WALLACE);
+                FlagSet(FLAG_HIDE_SOOTOPOLIS_CITY_ARCHIE);
+                FlagSet(FLAG_HIDE_SOOTOPOLIS_CITY_MAXIE);
+                FlagSet(FLAG_HIDE_SOOTOPOLIS_CITY_RESIDENTS);
+                FlagSet(FLAG_HIDE_CAVE_OF_ORIGIN_B1F_WALLACE);
+                VarSet(VAR_SOOTOPOLIS_CITY_STATE, 6);
+                VarSet(VAR_SKY_PILLAR_STATE, 3);
+                VarSet(VAR_SKY_PILLAR_RAYQUAZA_CRY_DONE, 1);
+                if (param <= 242)
+                    LoadHeadlessMap(MAP_SOOTOPOLIS_CITY_GYM_1F, 8, 22);
+                else if (param <= 244)
+                {
+                    if (param == 244)
+                        FlagSet(FLAG_BADGE08_GET);
+                    LoadHeadlessMap(MAP_CAVE_OF_ORIGIN_1F, 5, 9);
+                }
+                else if (param == 245 || param == 249)
+                {
+                    FlagSet(FLAG_BADGE08_GET);
+                    FlagClear(FLAG_EC_CAUGHT_DIANCIE);
+                    LoadHeadlessMap(MAP_CAVE_OF_ORIGIN_DIANCIES_ROOM, 9, 10);
+                }
+                else if (param == 246 || param == 250)
+                {
+                    FlagClear(FLAG_DEFEATED_RAYQUAZA);
+                    FlagSet(FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA);
+                    FlagClear(FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA_STILL);
+                    LoadHeadlessMap(MAP_SKY_PILLAR_TOP, 14, 7);
+                }
+                else
+                {
+                    if (param == 247)
+                        FlagClear(FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE);
+                    LoadHeadlessMap(MAP_CAVE_OF_ORIGIN_B1F, 8, 4);
+                }
+                break;
+            }
+            if (gEcHeadlessFixtureParam >= 213 && gEcHeadlessFixtureParam <= 230)
+            {
+                u32 param = gEcHeadlessFixtureParam;
+                const u16 badges[] = {FLAG_BADGE01_GET, FLAG_BADGE02_GET, FLAG_BADGE03_GET,
+                    FLAG_BADGE04_GET, FLAG_BADGE05_GET, FLAG_BADGE06_GET, FLAG_BADGE07_GET};
+                for (slot = 0; slot < ARRAY_COUNT(badges); slot++)
+                    FlagSet(badges[slot]);
+                FlagClear(FLAG_BADGE08_GET);
+                FlagSet(FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN);
+                FlagSet(FLAG_SYS_WEATHER_CTRL);
+                FlagSet(FLAG_LEGENDARIES_IN_SOOTOPOLIS);
+                FlagClear(FLAG_HIDE_SOOTOPOLIS_CITY_STEVEN);
+                FlagClear(FLAG_HIDE_SOOTOPOLIS_CITY_ARCHIE);
+                FlagClear(FLAG_HIDE_SOOTOPOLIS_CITY_MAXIE);
+                FlagClear(FLAG_HIDE_SOOTOPOLIS_CITY_RESIDENTS);
+                FlagClear(FLAG_HIDE_SOOTOPOLIS_CITY_GROUDON);
+                FlagClear(FLAG_HIDE_SOOTOPOLIS_CITY_KYOGRE);
+                FlagSet(FLAG_HIDE_SOOTOPOLIS_CITY_RAYQUAZA);
+                FlagSet(FLAG_HIDE_SOOTOPOLIS_CITY_WALLACE);
+                FlagClear(FLAG_STEVEN_GUIDES_TO_CAVE_OF_ORIGIN);
+                FlagClear(FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE);
+                FlagClear(FLAG_MET_ARCHIE_SOOTOPOLIS);
+                FlagClear(FLAG_MET_MAXIE_SOOTOPOLIS);
+                FlagClear(FLAG_RECEIVED_HM_WATERFALL);
+                VarSet(VAR_SOOTOPOLIS_CITY_STATE, 1);
+                VarSet(VAR_SKY_PILLAR_STATE, 0);
+                VarSet(VAR_SOOTOPOLIS_WALLACE_STATE, 0);
+                if (param <= 214)
+                    LoadHeadlessMap(MAP_SOOTOPOLIS_CITY, param == 213 ? 29 : 43, param == 213 ? 53 : 32);
+                else if (param <= 216)
+                {
+                    VarSet(VAR_SOOTOPOLIS_CITY_STATE, 2);
+                    LoadHeadlessMap(MAP_SOOTOPOLIS_CITY, param == 215 ? 21 : 20, param == 215 ? 36 : 37);
+                }
+                else if (param == 217)
+                {
+                    VarSet(VAR_SOOTOPOLIS_CITY_STATE, 2);
+                    FlagClear(FLAG_HIDE_CAVE_OF_ORIGIN_B1F_WALLACE);
+                    LoadHeadlessMap(MAP_CAVE_OF_ORIGIN_B1F, 9, 14);
+                }
+                else if (param == 218)
+                {
+                    VarSet(VAR_SOOTOPOLIS_CITY_STATE, 3);
+                    FlagSet(FLAG_WALLACE_GOES_TO_SKY_PILLAR);
+                    FlagClear(FLAG_HIDE_SKY_PILLAR_WALLACE);
+                    LoadHeadlessMap(MAP_SKY_PILLAR_OUTSIDE, 17, 14);
+                }
+                else if (param == 219)
+                {
+                    VarSet(VAR_SOOTOPOLIS_CITY_STATE, 4);
+                    VarSet(VAR_SKY_PILLAR_RAYQUAZA_CRY_DONE, 0);
+                    FlagClear(FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA);
+                    FlagSet(FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA_STILL);
+                    LoadHeadlessMap(MAP_SKY_PILLAR_TOP, 14, 10);
+                }
+                else if (param <= 223)
+                {
+                    VarSet(VAR_SOOTOPOLIS_CITY_STATE, 5);
+                    VarSet(VAR_SKY_PILLAR_STATE, param <= 221 ? 1 : 3);
+                    FlagSet(FLAG_STEVEN_GUIDES_TO_CAVE_OF_ORIGIN);
+                    FlagClear(FLAG_HIDE_SOOTOPOLIS_CITY_WALLACE);
+                    if (param >= 222)
+                    {
+                        FlagClear(FLAG_SYS_WEATHER_CTRL);
+                        FlagClear(FLAG_LEGENDARIES_IN_SOOTOPOLIS);
+                        FlagSet(FLAG_HIDE_SOOTOPOLIS_CITY_GROUDON);
+                        FlagSet(FLAG_HIDE_SOOTOPOLIS_CITY_KYOGRE);
+                    }
+                    if (param == 223)
+                    {
+                        FlagSet(FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE);
+                        FlagSet(FLAG_HIDE_SOOTOPOLIS_CITY_ARCHIE);
+                        FlagSet(FLAG_HIDE_SOOTOPOLIS_CITY_MAXIE);
+                    }
+                    LoadHeadlessMap(MAP_SOOTOPOLIS_CITY,
+                        param == 220 ? 29 : param == 221 ? 43 : param == 222 ? 33 : 31,
+                        param == 220 ? 53 : param == 221 ? 32 : param == 222 ? 36 : 34);
+                }
+                else if (param == 224)
+                {
+                    FlagClear(FLAG_DEFEATED_SOOTOPOLIS_GYM);
+                    FlagClear(FLAG_RECEIVED_JUAN_GYARADOSITE);
+                    ClearTrainerFlag(TRAINER_JUAN_1);
+                    LoadHeadlessMap(MAP_SOOTOPOLIS_CITY_GYM_1F, 8, 3);
+                }
+                else if (param >= 229)
+                {
+                    FlagClear(FLAG_SYS_CLOCK_SET);
+                    FlagClear(FLAG_DAILY_SOOTOPOLIS_RECEIVED_BERRY);
+                    VarSet(VAR_SOOTOPOLIS_CITY_STATE, 6);
+                    if (param == 230)
+                    {
+                        struct BagPocket *pocket = &gBagPockets[GetItemPocket(ITEM_CHERI_BERRY)];
+                        for (slot = 0; slot < pocket->capacity; slot++)
+                            BagPocket_SetSlotItemIdAndCount(pocket, slot, ITEM_CHERI_BERRY, MAX_BAG_ITEM_CAPACITY);
+                        // Only the first berry can fit: the second must undo the first.
+                        BagPocket_SetSlotItemIdAndCount(pocket, 0, ITEM_NONE, 0);
+                    }
+                    LoadHeadlessMap(MAP_SOOTOPOLIS_CITY, 9, 44);
+                }
+                else
+                {
+                    CreateMon(&gParties[B_TRAINER_PLAYER][0], param <= 226 ? SPECIES_SEEDOT : SPECIES_LOTAD, 30, 0xFFFFFFFF, OTID_STRUCT_PLAYER_ID);
+                    CalculateMonStats(&gParties[B_TRAINER_PLAYER][0]);
+                    VarSet(VAR_SEEDOT_SIZE_RECORD, 0x8000);
+                    VarSet(VAR_LOTAD_SIZE_RECORD, 0x8000);
+                    RemoveBagItem(ITEM_ELIXIR, CountTotalItemQuantityInBag(ITEM_ELIXIR));
+                    if (param == 226 || param == 228)
+                    {
+                        struct BagPocket *pocket = &gBagPockets[GetItemPocket(ITEM_ELIXIR)];
+                        for (slot = 0; slot < pocket->capacity; slot++)
+                            BagPocket_SetSlotItemIdAndCount(pocket, slot, ITEM_POTION, MAX_BAG_ITEM_CAPACITY);
+                    }
+                    LoadHeadlessMap(MAP_SOOTOPOLIS_CITY_LOTAD_AND_SEEDOT_HOUSE, param <= 226 ? 5 : 2, 5);
+                }
+                break;
+            }
+            if (gEcHeadlessFixtureParam >= 190 && gEcHeadlessFixtureParam <= 212)
+            {
+                const struct { u16 map; s16 x, y; } signs[] = {
+                    {MAP_SEAFLOOR_CAVERN_ENTRANCE, 11, 4},
+                    {MAP_SEAFLOOR_CAVERN_ROOM1, 6, 18},
+                    {MAP_SEAFLOOR_CAVERN_ROOM2, 11, 6},
+                    {MAP_SEAFLOOR_CAVERN_ROOM3, 10, 12},
+                    {MAP_SEAFLOOR_CAVERN_ROOM4, 12, 3},
+                    {MAP_SEAFLOOR_CAVERN_ROOM5, 5, 3},
+                    {MAP_SEAFLOOR_CAVERN_ROOM6, 10, 21},
+                    {MAP_SEAFLOOR_CAVERN_ROOM7, 4, 23},
+                    {MAP_SEAFLOOR_CAVERN_ROOM8, 3, 12},
+                    {MAP_ROUTE126, 13, 1},
+                    {MAP_ROUTE127, 13, 23},
+                    {MAP_ROUTE128, 64, 30},
+                    {MAP_UNDERWATER_ROUTE126, 46, 67},
+                };
+                CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_WAILMER, 40, OTID_STRUCT_PLAYER_ID);
+                for (slot = 0; slot < MAX_MON_MOVES; slot++)
+                    SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][0], slot == 0 ? MOVE_WATER_GUN : MOVE_NONE, slot);
+                FlagSet(FLAG_BADGE01_GET);
+                FlagSet(FLAG_BADGE02_GET);
+                FlagSet(FLAG_BADGE03_GET);
+                FlagSet(FLAG_BADGE04_GET);
+                FlagSet(FLAG_BADGE05_GET);
+                FlagSet(FLAG_BADGE06_GET);
+                FlagSet(FLAG_BADGE07_GET);
+                FlagClear(FLAG_BADGE08_GET);
+                FlagSet(FLAG_RECEIVED_HM_DIVE);
+                FlagSet(FLAG_RECEIVED_HM_SURF);
+                FlagSet(FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE);
+                FlagClear(FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN);
+                FlagClear(FLAG_SYS_WEATHER_CTRL);
+                FlagClear(FLAG_LEGENDARIES_IN_SOOTOPOLIS);
+                FlagClear(FLAG_HIDE_UNDERWATER_SEA_FLOOR_CAVERN_STOLEN_SUBMARINE);
+                FlagClear(FLAG_HIDE_SEAFLOOR_CAVERN_ENTRANCE_AQUA_GRUNT);
+                FlagClear(FLAG_HIDE_SEAFLOOR_CAVERN_AQUA_GRUNTS);
+                FlagClear(FLAG_HIDE_SEAFLOOR_CAVERN_ROOM_9_KYOGRE_ASLEEP);
+                FlagSet(FLAG_HIDE_SEAFLOOR_CAVERN_ROOM_9_KYOGRE);
+                FlagSet(FLAG_HIDE_SEAFLOOR_CAVERN_ROOM_9_ARCHIE);
+                FlagSet(FLAG_HIDE_SEAFLOOR_CAVERN_ROOM_9_MAXIE);
+                FlagSet(FLAG_HIDE_SEAFLOOR_CAVERN_ROOM_9_MAGMA_GRUNTS);
+                FlagSet(FLAG_HIDE_ROUTE_128_STEVEN);
+                FlagSet(FLAG_HIDE_ROUTE_128_ARCHIE);
+                FlagSet(FLAG_HIDE_ROUTE_128_MAXIE);
+                VarSet(VAR_SEAFLOOR_CAVERN_STATE, 0);
+                VarSet(VAR_ROUTE128_STATE, 0);
+                VarSet(VAR_SOOTOPOLIS_CITY_STATE, 0);
+                VarSet(VAR_HAS_TALKED_TO_SEAFLOOR_CAVERN_ENTRANCE_GRUNT, 0);
+                ClearTrainerFlag(TRAINER_ARCHIE);
+                if (gEcHeadlessFixtureParam >= 200)
+                {
+                    slot = gEcHeadlessFixtureParam - 200;
+                    LoadHeadlessMap(signs[slot].map, signs[slot].x, signs[slot].y);
+                }
+                else if (gEcHeadlessFixtureParam <= 192)
+                {
+                    if (gEcHeadlessFixtureParam == 191)
+                    {
+                        u16 hp = 0;
+                        SetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_HP, &hp);
+                    }
+                    if (gEcHeadlessFixtureParam == 192)
+                    {
+                        FlagSet(FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN);
+                        FlagSet(FLAG_HIDE_SEAFLOOR_CAVERN_ROOM_9_KYOGRE_ASLEEP);
+                        FlagSet(FLAG_HIDE_SEAFLOOR_CAVERN_AQUA_GRUNTS);
+                        VarSet(VAR_SEAFLOOR_CAVERN_STATE, 1);
+                    }
+                    LoadHeadlessMap(MAP_SEAFLOOR_CAVERN_ROOM9, 17, 43);
+                }
+                else if (gEcHeadlessFixtureParam <= 194)
+                {
+                    if (gEcHeadlessFixtureParam == 194)
+                        FlagSet(FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN);
+                    LoadHeadlessMap(MAP_UNDERWATER_SEAFLOOR_CAVERN, 6, 5);
+                }
+                else if (gEcHeadlessFixtureParam == 195)
+                    LoadHeadlessMap(MAP_ROUTE128, 38, 27);
+                else if (gEcHeadlessFixtureParam == 196)
+                    LoadHeadlessMap(MAP_UNDERWATER_ROUTE126, 45, 66);
+                else
+                    LoadHeadlessMap(MAP_SEAFLOOR_CAVERN_ENTRANCE, 10, 3);
+                break;
+            }
+            if (gEcHeadlessFixtureParam >= 174 && gEcHeadlessFixtureParam <= 189)
+            {
+                const u16 collectionFlags[] = {
+                    FLAG_RECEIVED_SHOAL_SALT_1, FLAG_RECEIVED_SHOAL_SALT_2,
+                    FLAG_RECEIVED_SHOAL_SALT_3, FLAG_RECEIVED_SHOAL_SALT_4,
+                    FLAG_RECEIVED_SHOAL_SHELL_1, FLAG_RECEIVED_SHOAL_SHELL_2,
+                    FLAG_RECEIVED_SHOAL_SHELL_3, FLAG_RECEIVED_SHOAL_SHELL_4,
+                };
+                FlagSet(FLAG_BADGE01_GET);
+                FlagSet(FLAG_BADGE02_GET);
+                FlagSet(FLAG_BADGE03_GET);
+                FlagSet(FLAG_BADGE04_GET);
+                FlagSet(FLAG_BADGE05_GET);
+                FlagSet(FLAG_BADGE06_GET);
+                FlagSet(FLAG_BADGE07_GET);
+                FlagClear(FLAG_BADGE08_GET);
+                FlagClear(FLAG_SYS_CLOCK_SET); // Daily-reset cases seed its earned pending flag below.
+                FlagClear(FLAG_SYS_SHOAL_TIDE);
+                FlagClear(FLAG_SYS_SHOAL_ITEM);
+                FlagClear(FLAG_EC_CAUGHT_ARTICUNO);
+                FlagClear(FLAG_RECEIVED_SHOAL_DEEP_SEA_SCALE);
+                for (slot = 0; slot < ARRAY_COUNT(collectionFlags); slot++)
+                    FlagClear(collectionFlags[slot]);
+                if (gEcHeadlessFixtureParam == 174 || gEcHeadlessFixtureParam == 184)
+                {
+                    RtcInitLocalTimeOffset(gEcHeadlessFixtureParam == 174 ? 6 : 0, 0);
+                    LoadHeadlessMap(MAP_ROUTE125, 22, 20);
+                }
+                else if (gEcHeadlessFixtureParam >= 185)
+                {
+                    if (gEcHeadlessFixtureParam == 185)
+                        LoadHeadlessMap(MAP_SHOAL_CAVE_LOW_TIDE_ENTRANCE_ROOM, 20, 16);
+                    else if (gEcHeadlessFixtureParam <= 187)
+                    {
+                        if (gEcHeadlessFixtureParam == 187)
+                            FlagSet(FLAG_SYS_SHOAL_TIDE);
+                        LoadHeadlessMap(MAP_SHOAL_CAVE_LOW_TIDE_INNER_ROOM, 41, 23);
+                    }
+                    else if (gEcHeadlessFixtureParam == 188)
+                        LoadHeadlessMap(MAP_SHOAL_CAVE_LOW_TIDE_STAIRS_ROOM, 10, 13);
+                    else
+                        LoadHeadlessMap(MAP_SHOAL_CAVE_LOW_TIDE_LOWER_ROOM, 12, 6);
+                }
+                else if (gEcHeadlessFixtureParam <= 176)
+                {
+                    FlagClear(FLAG_BADGE07_GET);
+                    if (gEcHeadlessFixtureParam == 176)
+                        FlagClear(FLAG_BADGE06_GET);
+                    LoadHeadlessMap(MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM, 8, 9);
+                }
+                else if (gEcHeadlessFixtureParam <= 178)
+                {
+                    if (gEcHeadlessFixtureParam == 178)
+                        GetSetPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_ZEKROM), FLAG_SET_CAUGHT);
+                    LoadHeadlessMap(MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM, 12, 11);
+                }
+                else if (gEcHeadlessFixtureParam <= 180)
+                {
+                    for (slot = 0; slot < ARRAY_COUNT(collectionFlags); slot++)
+                        FlagSet(collectionFlags[slot]);
+                    if (gEcHeadlessFixtureParam == 180)
+                        FlagSet(FLAG_SYS_SHOAL_ITEM);
+                    LoadHeadlessMap(MAP_SHOAL_CAVE_LOW_TIDE_ENTRANCE_ROOM, 17, 15);
+                }
+                else if (gEcHeadlessFixtureParam == 181)
+                    LoadHeadlessMap(MAP_SHOAL_CAVE_LOW_TIDE_STAIRS_ROOM, 11, 12);
+                else if (gEcHeadlessFixtureParam == 182)
+                {
+                    FlagSet(FLAG_SYS_SHOAL_TIDE);
+                    LoadHeadlessMap(MAP_SHOAL_CAVE_LOW_TIDE_INNER_ROOM, 41, 21);
+                }
+                else
+                    LoadHeadlessMap(MAP_SHOAL_CAVE_LOW_TIDE_LOWER_ROOM, 11, 5);
+                break;
+            }
+            if (gEcHeadlessFixtureParam >= 164 && gEcHeadlessFixtureParam <= 173)
+            {
+                FlagSet(FLAG_BADGE01_GET);
+                FlagSet(FLAG_BADGE02_GET);
+                FlagSet(FLAG_BADGE03_GET);
+                FlagSet(FLAG_BADGE04_GET);
+                FlagSet(FLAG_BADGE05_GET);
+                FlagSet(FLAG_BADGE06_GET);
+                FlagClear(FLAG_BADGE08_GET);
+                FlagSet(FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE);
+                if (gEcHeadlessFixtureParam == 164 || gEcHeadlessFixtureParam == 172)
+                {
+                    FlagClear(FLAG_BADGE07_GET);
+                    FlagClear(FLAG_DEFEATED_MOSSDEEP_GYM);
+                    FlagClear(FLAG_RECEIVED_TATE_LIZA_METAGROSSITE);
+                    ClearTrainerFlag(TRAINER_TATE_AND_LIZA_1);
+                    LoadHeadlessMap(MAP_MOSSDEEP_CITY_GYM,
+                        gEcHeadlessFixtureParam == 164 ? 23 : 2,
+                        gEcHeadlessFixtureParam == 164 ? 8 : 22);
+                }
+                else
+                {
+                    FlagSet(FLAG_BADGE07_GET);
+                    VarSet(VAR_MOSSDEEP_CITY_STATE, 2);
+                    FlagClear(FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_1F_TEAM_MAGMA);
+                    FlagClear(FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_2F_TEAM_MAGMA);
+                    FlagClear(FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_2F_STEVEN);
+                    FlagSet(FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_1F_STEVEN);
+                    VarSet(VAR_MOSSDEEP_SPACE_CENTER_STATE, 2);
+                    if (gEcHeadlessFixtureParam == 165 || gEcHeadlessFixtureParam == 166)
+                    {
+                        VarSet(VAR_MOSSDEEP_SPACE_CENTER_STAIR_GUARD_STATE,
+                            gEcHeadlessFixtureParam == 165 ? 0 : 2);
+                        FlagClear(FLAG_DEFEATED_GRUNT_SPACE_CENTER_1F);
+                        ClearTrainerFlag(TRAINER_GRUNT_SPACE_CENTER_2);
+                        if (gEcHeadlessFixtureParam == 166)
+                        {
+                            FlagSet(FLAG_DEFEATED_GRUNT_SPACE_CENTER_1F);
+                            SetTrainerFlag(TRAINER_GRUNT_SPACE_CENTER_2);
+                        }
+                        LoadHeadlessMap(MAP_MOSSDEEP_CITY_SPACE_CENTER_1F, 13, 3);
+                    }
+                    else if (gEcHeadlessFixtureParam <= 168)
+                    {
+                        VarSet(VAR_MOSSDEEP_SPACE_CENTER_STATE, 1);
+                        ClearTrainerFlag(TRAINER_GRUNT_SPACE_CENTER_5);
+                        ClearTrainerFlag(TRAINER_GRUNT_SPACE_CENTER_6);
+                        ClearTrainerFlag(TRAINER_GRUNT_SPACE_CENTER_7);
+                        LoadHeadlessMap(MAP_MOSSDEEP_CITY_SPACE_CENTER_2F, 13, 2);
+                    }
+                    else if (gEcHeadlessFixtureParam <= 170)
+                    {
+                        FlagSet(FLAG_INTERACTED_WITH_STEVEN_SPACE_CENTER);
+                        VarSet(VAR_MOSSDEEP_CITY_STATE, 1); // Preserve the already-heard prompt on entry.
+                        LoadHeadlessMap(MAP_MOSSDEEP_CITY_SPACE_CENTER_2F, 2, 8);
+                    }
+                    else if (gEcHeadlessFixtureParam == 171)
+                    {
+                        FlagClear(FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_STEVEN);
+                        FlagClear(FLAG_RECEIVED_HM_DIVE);
+                        VarSet(VAR_STEVENS_HOUSE_STATE, 1);
+                        LoadHeadlessMap(MAP_MOSSDEEP_CITY_STEVENS_HOUSE, 3, 7);
+                    }
+                    else
+                    {
+                        VarSet(VAR_MOSSDEEP_CITY_STATE, 1);
+                        FlagClear(FLAG_HIDE_MOSSDEEP_CITY_TEAM_MAGMA);
+                        LoadHeadlessMap(MAP_MOSSDEEP_CITY, 40, 24);
+                    }
+                }
+                break;
+            }
+            if (gEcHeadlessFixtureParam >= 157 && gEcHeadlessFixtureParam <= 163)
+            {
+                FlagSet(FLAG_BADGE01_GET);
+                FlagSet(FLAG_BADGE02_GET);
+                FlagSet(FLAG_BADGE03_GET);
+                FlagSet(FLAG_BADGE04_GET);
+                FlagSet(FLAG_BADGE05_GET);
+                FlagSet(FLAG_BADGE06_GET);
+                FlagClear(FLAG_BADGE07_GET);
+                FlagClear(FLAG_BADGE08_GET);
+                FlagSet(FLAG_RECEIVED_SS_TICKET);
+                FlagSet(FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT);
+                FlagClear(FLAG_MET_TEAM_AQUA_HARBOR);
+                FlagClear(FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE);
+                FlagClear(FLAG_HIDE_SLATEPORT_CITY_HARBOR_CAPTAIN_STERN);
+                FlagClear(FLAG_HIDE_SLATEPORT_CITY_HARBOR_SUBMARINE_SHADOW);
+                FlagClear(FLAG_HIDE_SLATEPORT_CITY_HARBOR_AQUA_GRUNT);
+                FlagClear(FLAG_HIDE_SLATEPORT_CITY_HARBOR_ARCHIE);
+                VarSet(VAR_SLATEPORT_CITY_STATE, 1);
+                VarSet(VAR_SLATEPORT_HARBOR_STATE, 1);
+                if (gEcHeadlessFixtureParam == 157)
+                {
+                    FlagClear(FLAG_HIDE_SLATEPORT_CITY_CAPTAIN_STERN);
+                    FlagClear(FLAG_HIDE_SLATEPORT_CITY_GABBY_AND_TY);
+                    LoadHeadlessMap(MAP_SLATEPORT_CITY, 27, 13);
+                }
+                else if (gEcHeadlessFixtureParam <= 161)
+                    LoadHeadlessMap(MAP_SLATEPORT_CITY_HARBOR, 9, 11 + gEcHeadlessFixtureParam - 158);
+                else if (gEcHeadlessFixtureParam == 162)
+                {
+                    FlagClear(FLAG_HIDE_AQUA_HIDEOUT_GRUNTS);
+                    FlagClear(FLAG_HIDE_AQUA_HIDEOUT_B2F_SUBMARINE_SHADOW);
+                    ClearTrainerFlag(TRAINER_MATT);
+                    LoadHeadlessMap(MAP_AQUA_HIDEOUT_B2F, 24, 19);
+                }
+                else
+                {
+                    VarSet(VAR_SLATEPORT_HARBOR_STATE, 2);
+                    FlagSet(FLAG_MET_TEAM_AQUA_HARBOR);
+                    FlagSet(FLAG_HIDE_SLATEPORT_CITY_HARBOR_PATRONS);
+                    FlagSet(FLAG_HIDE_SLATEPORT_CITY_HARBOR_SUBMARINE_SHADOW);
+                    FlagSet(FLAG_HIDE_SLATEPORT_CITY_HARBOR_AQUA_GRUNT);
+                    FlagSet(FLAG_HIDE_SLATEPORT_CITY_HARBOR_ARCHIE);
+                    LoadHeadlessMap(MAP_SLATEPORT_CITY_HARBOR, 8, 11);
+                }
+                break;
+            }
+            if (gEcHeadlessFixtureParam >= 147 && gEcHeadlessFixtureParam <= 156)
+            {
+                FlagSet(FLAG_BADGE01_GET);
+                FlagSet(FLAG_BADGE02_GET);
+                FlagSet(FLAG_BADGE03_GET);
+                FlagSet(FLAG_BADGE04_GET);
+                FlagSet(FLAG_BADGE05_GET);
+                FlagSet(FLAG_BADGE06_GET);
+                FlagClear(FLAG_BADGE07_GET);
+                FlagClear(FLAG_BADGE08_GET);
+                FlagClear(FLAG_RECEIVED_RED_OR_BLUE_ORB);
+                if (gEcHeadlessFixtureParam <= 151)
+                {
+                    VarSet(VAR_MT_PYRE_STATE, 0);
+                    FlagClear(FLAG_HIDE_MT_PYRE_SUMMIT_ARCHIE);
+                    FlagClear(FLAG_HIDE_MT_PYRE_SUMMIT_TEAM_AQUA);
+                    FlagSet(FLAG_HIDE_MT_PYRE_SUMMIT_MAXIE);
+                    if (gEcHeadlessFixtureParam >= 150)
+                        FillHeadlessKeyPocket();
+                    if (gEcHeadlessFixtureParam == 151)
+                        for (slot = 0; slot < PC_ITEMS_COUNT; slot++)
+                            gSaveBlock1Ptr->pcItems[slot] = (struct ItemSlot){ITEM_POTION, 1};
+                    LoadHeadlessMap(MAP_MT_PYRE_SUMMIT,
+                        gEcHeadlessFixtureParam <= 149 ? 22 + gEcHeadlessFixtureParam - 147 : 23, 8);
+                }
+                else if (gEcHeadlessFixtureParam <= 153 || gEcHeadlessFixtureParam == 156)
+                {
+                    FlagClear(FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS);
+                    FlagClear(FLAG_HIDE_MAGMA_HIDEOUT_4F_GROUDON_ASLEEP);
+                    if (gEcHeadlessFixtureParam == 156)
+                        FlagSet(FLAG_HIDE_MAGMA_HIDEOUT_4F_GROUDON_ASLEEP);
+                    FlagSet(FLAG_HIDE_MAGMA_HIDEOUT_4F_GROUDON);
+                    FlagClear(FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT);
+                    SetTrainerFlag(TRAINER_TABITHA_MAGMA_HIDEOUT);
+                    if (gEcHeadlessFixtureParam != 153)
+                        SetTrainerFlag(TRAINER_COURTNEY_MAGMA_HIDEOUT);
+                    else
+                        ClearTrainerFlag(TRAINER_COURTNEY_MAGMA_HIDEOUT);
+                    ClearTrainerFlag(TRAINER_MAXIE_MAGMA_HIDEOUT);
+                    LoadHeadlessMap(MAP_MAGMA_HIDEOUT_4F, 15, 21);
+                }
+                else
+                {
+                    VarSet(VAR_MT_PYRE_STATE, 1);
+                    FlagSet(FLAG_RECEIVED_RED_OR_BLUE_ORB);
+                    FlagSet(FLAG_HIDE_MT_PYRE_SUMMIT_ARCHIE);
+                    FlagSet(FLAG_HIDE_MT_PYRE_SUMMIT_MAXIE);
+                    FlagSet(FLAG_HIDE_MT_PYRE_SUMMIT_TEAM_AQUA);
+                    if (gEcHeadlessFixtureParam == 154)
+                        GetSetPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_MUNNA), FLAG_SET_CAUGHT);
+                    LoadHeadlessMap(MAP_MT_PYRE_SUMMIT, 23, 11);
+                }
+                break;
+            }
+            if (gEcHeadlessFixtureParam >= 141 && gEcHeadlessFixtureParam <= 146)
+            {
+                if (gEcHeadlessFixtureParam == 141)
+                {
+                    struct LilycoveLadyFavor *favor = &gSaveBlock1Ptr->lilycoveLady.favor;
+                    memset(favor, 0, sizeof(*favor));
+                    favor->id = LILYCOVE_LADY_FAVOR;
+                    favor->itemId = ITEM_UNREMARKABLE_TEACUP;
+                    favor->language = gGameLanguage;
+                    StringCopy(favor->playerName, COMPOUND_STRING("WWWWWWW"));
+                    LoadHeadlessMap(MAP_LILYCOVE_CITY_POKEMON_CENTER_1F, 4, 5);
+                }
+                else if (gEcHeadlessFixtureParam == 142 || gEcHeadlessFixtureParam == 143)
+                {
+                    VarSet(VAR_LILYCOVE_MUSEUM_2F_STATE, gEcHeadlessFixtureParam == 143);
+                    if (gEcHeadlessFixtureParam == 143)
+                    {
+                        PrepareHeadlessContestResults();
+                        gSpecialVar_ContestCategory = CONTEST_CATEGORY_COOL;
+                        gContestMons[0].isShiny = TRUE;
+                        gLinkContestFlags = 0;
+                        SaveContestWinner(CONTEST_SAVE_FOR_MUSEUM);
+                        FlagSet(FLAG_COOL_PAINTING_MADE);
+                    }
+                    LoadHeadlessMap(MAP_LILYCOVE_CITY_LILYCOVE_MUSEUM_2F, 11,
+                        gEcHeadlessFixtureParam == 142 ? 8 : 7);
+                }
+                else if (gEcHeadlessFixtureParam == 146)
+                {
+                    struct LilycoveLadyQuiz *quiz = &gSaveBlock1Ptr->lilycoveLady.quiz;
+                    memset(quiz, 0, sizeof(*quiz));
+                    quiz->id = LILYCOVE_LADY_QUIZ;
+                    quiz->state = LILYCOVE_LADY_STATE_PRIZE;
+                    quiz->prize = ITEM_MAX_ETHER;
+                    StringCopy(quiz->playerName, COMPOUND_STRING(""));
+                    quiz->language = gGameLanguage;
+                    LoadHeadlessMap(MAP_LILYCOVE_CITY_POKEMON_CENTER_1F, 4, 5);
+                }
+                else
+                {
+                    FlagClear(FLAG_RECEIVED_POKEBLOCK_CASE);
+                    RemoveBagItem(ITEM_POKEBLOCK_CASE, 1);
+                    VarSet(VAR_CONTEST_PRIZE_PICKUP, gEcHeadlessFixtureParam == 145 ? 4 : 0);
+                    VarSet(VAR_LILYCOVE_CONTEST_LOBBY_STATE, 0);
+                    LoadHeadlessMap(MAP_LILYCOVE_CITY_CONTEST_LOBBY, 14, 4);
+                }
+                break;
+            }
+            if (gEcHeadlessFixtureParam >= 129 && gEcHeadlessFixtureParam <= 140)
+            {
+                FlagSet(FLAG_BADGE01_GET);
+                FlagSet(FLAG_BADGE02_GET);
+                FlagSet(FLAG_BADGE03_GET);
+                FlagSet(FLAG_BADGE04_GET);
+                FlagSet(FLAG_BADGE05_GET);
+                FlagSet(FLAG_BADGE06_GET);
+                FlagClear(FLAG_BADGE07_GET);
+                FlagClear(FLAG_BADGE08_GET);
+                FlagClear(FLAG_SYS_GAME_CLEAR);
+                if (gEcHeadlessFixtureParam <= 134)
+                {
+                    u32 first = (gEcHeadlessFixtureParam - 129) % 3;
+                    gSaveBlock2Ptr->playerGender = gEcHeadlessFixtureParam <= 131 ? MALE : FEMALE;
+                    VarSet(VAR_STARTER_MON, first);
+                    VarSet(VAR_EC_SECOND_STARTER, (first + 1) % 3 + 1);
+                    FlagClear(FLAG_HIDE_LILYCOVE_CITY_RIVAL);
+                    FlagClear(FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE);
+                    FlagClear(FLAG_MET_RIVAL_LILYCOVE);
+                    LoadHeadlessMap(MAP_LILYCOVE_CITY, 27, 8);
+                }
+                else if (gEcHeadlessFixtureParam <= 139)
+                {
+                    FlagClear(FLAG_HIDE_LILYCOVE_HARBOR_FERRY_ATTENDANT);
+                    FlagClear(FLAG_HIDE_LILYCOVE_HARBOR_SSTIDAL);
+                    FlagSet(FLAG_HIDE_LILYCOVE_HARBOR_FERRY_SAILOR);
+                    FlagSet(FLAG_HIDE_LILYCOVE_HARBOR_EVENT_TICKET_TAKER);
+                    FlagClear(FLAG_RECEIVED_SS_TICKET);
+                    FlagClear(FLAG_LATIOS_OR_LATIAS_ROAMING);
+                    if (gEcHeadlessFixtureParam == 136)
+                        FillHeadlessKeyPocket();
+                    if (gEcHeadlessFixtureParam == 137 || gEcHeadlessFixtureParam == 138)
+                    {
+                        FlagSet(FLAG_RECEIVED_SS_TICKET);
+                        AddBagItem(ITEM_OLD_SEA_MAP, 1);
+                        FlagSet(FLAG_ENABLE_SHIP_FARAWAY_ISLAND);
+                        FlagClear(FLAG_SHOWN_OLD_SEA_MAP);
+                        LoadHeadlessMap(MAP_LILYCOVE_CITY_HARBOR,
+                            gEcHeadlessFixtureParam == 137 ? 8 : 7,
+                            gEcHeadlessFixtureParam == 137 ? 11 : 10);
+                    }
+                    else
+                    {
+                        if (gEcHeadlessFixtureParam == 139)
+                            FlagClear(FLAG_BADGE06_GET);
+                        LoadHeadlessMap(MAP_LILYCOVE_CITY_HARBOR, 3, 14);
+                    }
+                }
+                else
+                {
+                    FlagSet(FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE);
+                    LoadHeadlessMap(MAP_LILYCOVE_CITY_COVE_LILY_MOTEL_1F, 9, 3);
+                }
+                break;
+            }
+            if (gEcHeadlessFixtureParam >= 125 && gEcHeadlessFixtureParam <= 128)
+            {
+                SetMoney(&gSaveBlock1Ptr->money, gEcHeadlessFixtureParam == 127 ? 499 : 3000);
+                if (gEcHeadlessFixtureParam != 126)
+                    AddBagItem(ITEM_POKEBLOCK_CASE, 1);
+                if (gEcHeadlessFixtureParam == 128)
+                {
+                    for (slot = 2; slot < PARTY_SIZE; slot++)
+                        CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][slot], SPECIES_ZIGZAGOON, 20, OTID_STRUCT_PLAYER_ID);
+                    CalculatePlayerPartyCount();
+                    CreateBoxMon(&gPokemonStoragePtr->boxes[0][0], SPECIES_ZIGZAGOON, 20, 0, OTID_STRUCT_PLAYER_ID);
+                    for (slot = 1; slot < TOTAL_BOXES_COUNT * IN_BOX_COUNT; slot++)
+                        gPokemonStoragePtr->boxes[slot / IN_BOX_COUNT][slot % IN_BOX_COUNT] = gPokemonStoragePtr->boxes[0][0];
+                }
+                ResetSafariZoneFlag();
+                VarSet(VAR_SAFARI_ZONE_STATE, 0);
+                LoadHeadlessMap(MAP_ROUTE121_SAFARI_ZONE_ENTRANCE, 9, 4);
+                break;
+            }
+            if (gEcHeadlessFixtureParam >= 115 && gEcHeadlessFixtureParam <= 124)
+            {
+                FlagSet(FLAG_BADGE01_GET);
+                FlagSet(FLAG_BADGE02_GET);
+                FlagSet(FLAG_BADGE03_GET);
+                FlagSet(FLAG_BADGE04_GET);
+                FlagSet(FLAG_BADGE05_GET);
+                FlagSet(FLAG_BADGE06_GET);
+                FlagSet(FLAG_RECEIVED_HM_FLASH);
+                FlagSet(FLAG_RECEIVED_HM_SURF);
+                FlagSet(FLAG_RECEIVED_HM_STRENGTH);
+                if (gEcHeadlessFixtureParam <= 116)
+                {
+                    FlagSet(FLAG_EC_CAUGHT_HEATRAN);
+                    AddBagItem(ITEM_MAGMA_STONE, 1);
+                    LoadHeadlessMap(MAP_SCORCHED_SLAB_HEATRANS_ROOM, 10, 15);
+                }
+                else if (gEcHeadlessFixtureParam <= 119)
+                {
+                    FlagSet(FLAG_EC_CAUGHT_HEATRAN);
+                    if (gEcHeadlessFixtureParam >= 118)
+                    {
+                        MarkLegendarySignCaughtBySpecies(SPECIES_RESHIRAM);
+                        FlagClear(FLAG_EC_CAUGHT_HEATRAN);
+                    }
+                    if (gEcHeadlessFixtureParam == 119)
+                    {
+                        GetSetPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_HEATRAN), FLAG_SET_CAUGHT);
+                        FlagSet(FLAG_EC_CAUGHT_HEATRAN);
+                    }
+                    LoadHeadlessMap(MAP_SCORCHED_SLAB_B2F, 19, 17);
+                }
+                else if (gEcHeadlessFixtureParam == 120)
+                {
+                    SetTrainerFlag(TRAINER_LEONEL);
+                    MarkLegendarySignCaughtBySpecies(SPECIES_OGERPON);
+                    LoadHeadlessMap(MAP_ROUTE120, 14, 35);
+                }
+                else if (gEcHeadlessFixtureParam <= 122)
+                {
+                    FlagSet(FLAG_WINGULL_SENT_ON_ERRAND);
+                    FlagSet(FLAG_WINGULL_DELIVERED_MAIL);
+                    FlagClear(FLAG_HIDE_FORTREE_CITY_HOUSE_4_WINGULL);
+                    FlagClear(FLAG_RECEIVED_FORTREE_SACHET);
+                    if (gEcHeadlessFixtureParam == 122)
+                        FlagSet(FLAG_RECEIVED_FORTREE_SACHET);
+                    LoadHeadlessMap(MAP_FORTREE_CITY_HOUSE4, 1, 4);
+                }
+                else
+                {
+                    VarSet(VAR_ROUTE121_STATE, 0);
+                    FlagClear(FLAG_HIDE_ROUTE_121_TEAM_AQUA_GRUNTS);
+                    LoadHeadlessMap(MAP_ROUTE121, 24, gEcHeadlessFixtureParam == 123 ? 5 : 8);
+                }
+                break;
+            }
+            if (gEcHeadlessFixtureParam >= 101 && gEcHeadlessFixtureParam <= 114)
+            {
+                if (gEcHeadlessFixtureParam <= 106)
+                {
+                    u16 total = gEcHeadlessFixtureParam == 101 ? 99 :
+                        (gEcHeadlessFixtureParam == 102 || gEcHeadlessFixtureParam == 105) ? 100 :
+                        gEcHeadlessFixtureParam == 103 ? 250 : 500;
+                    VarSet(VAR_EC_SOOT_PROGRESS, total);
+                    VarSet(VAR_ASH_GATHER_COUNT, 250);
+                    VarSet(VAR_GLASS_WORKSHOP_STATE, 2);
+                    FlagClear(FLAG_ITEM_FIERY_PATH_HOUNDOOMINITE);
+                    AddBagItem(ITEM_SOOT_SACK, 1);
+                    if (gEcHeadlessFixtureParam >= 105)
+                    {
+                        FillHeadlessKeyPocket();
+                        if (gEcHeadlessFixtureParam == 106)
+                        {
+                            struct BagPocket *pocket = &gBagPockets[GetItemPocket(ITEM_HOUNDOOMINITE)];
+                            for (slot = 0; slot < pocket->capacity; slot++)
+                                BagPocket_SetSlotItemIdAndCount(pocket, slot, ITEM_LEFTOVERS, 1);
+                            for (slot = 0; slot < PC_ITEMS_COUNT; slot++)
+                                gSaveBlock1Ptr->pcItems[slot] = (struct ItemSlot){ITEM_POTION, 1};
+                        }
+                    }
+                    if (!CheckBagHasItem(ITEM_SOOT_SACK, 1))
+                        BagPocket_SetSlotItemIdAndCount(&gBagPockets[GetItemPocket(ITEM_SOOT_SACK)], 0, ITEM_SOOT_SACK, 1);
+                    LoadHeadlessMap(MAP_ROUTE113_GLASS_WORKSHOP, 2, 4);
+                }
+                else if (gEcHeadlessFixtureParam <= 108)
+                {
+                    SetMoney(&gSaveBlock1Ptr->money, 50000);
+                    LoadHeadlessMap(MAP_LILYCOVE_CITY_DEPARTMENT_STORE_4F,
+                        gEcHeadlessFixtureParam == 107 ? 7 : 9, 4);
+                }
+                else if (gEcHeadlessFixtureParam <= 111)
+                {
+                    FlagClear(FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_GLALITITE);
+                    if (gEcHeadlessFixtureParam == 110)
+                        FlagSet(FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_GLALITITE);
+                    AddBagItem(ITEM_SHOAL_SALT, 4);
+                    AddBagItem(ITEM_SHOAL_SHELL, 4);
+                    if (gEcHeadlessFixtureParam == 111)
+                    {
+                        struct BagPocket *pocket = &gBagPockets[GetItemPocket(ITEM_GLALITITE)];
+                        // Mega Stones have their own pocket; salt/shells are
+                        // in Items and do not occupy its first two slots.
+                        for (slot = 0; slot < pocket->capacity; slot++)
+                            BagPocket_SetSlotItemIdAndCount(pocket, slot, ITEM_ABOMASITE, 1);
+                        for (slot = 0; slot < PC_ITEMS_COUNT; slot++)
+                            gSaveBlock1Ptr->pcItems[slot] = (struct ItemSlot){ITEM_POTION, 1};
+                    }
+                    LoadHeadlessMap(MAP_SHOAL_CAVE_LOW_TIDE_ENTRANCE_ROOM, 17, 15);
+                }
+                else if (gEcHeadlessFixtureParam == 112)
+                {
+                    u8 bonuses = 0xE4;
+                    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP_BONUSES, &bonuses);
+                    ApplyEmeraldChampionsBattleSetChoice(&gParties[B_TRAINER_PLAYER][0], 0);
+                    LoadHeadlessMap(MAP_ROUTE113_GLASS_WORKSHOP, 2, 4);
+                }
+                else
+                {
+                    gSaveBlock2Ptr->frontier.battlePoints = 100;
+                    if (gEcHeadlessFixtureParam == 114)
+                        AddPCItem(ITEM_LINKING_CORD, 1);
+                    LoadHeadlessMap(MAP_BATTLE_FRONTIER_EXCHANGE_SERVICE_CORNER, 12, 4);
+                }
+                break;
+            }
+            if (gEcHeadlessFixtureParam >= 92 && gEcHeadlessFixtureParam <= 100)
+            {
+                FlagSet(FLAG_BADGE01_GET);
+                FlagSet(FLAG_BADGE02_GET);
+                FlagSet(FLAG_BADGE03_GET);
+                FlagSet(FLAG_BADGE04_GET);
+                FlagSet(FLAG_BADGE05_GET);
+                FlagClear(FLAG_BADGE06_GET);
+                FlagSet(FLAG_RECEIVED_HM_SURF);
+                FlagSet(FLAG_RECEIVED_HM_FLY);
+                FlagClear(FLAG_RECEIVED_DEVON_SCOPE);
+                FlagClear(FLAG_HIDE_ROUTE_120_STEVEN);
+                FlagClear(FLAG_HIDE_ROUTE_120_KECLEON_BRIDGE);
+                FlagClear(FLAG_HIDE_ROUTE_120_KECLEON_BRIDGE_SHADOW);
+                FlagClear(FLAG_NOT_READY_FOR_BATTLE_ROUTE_120);
+                if (gEcHeadlessFixtureParam <= 95)
+                {
+                    if (gEcHeadlessFixtureParam >= 94)
+                    {
+                        FillHeadlessKeyPocket();
+                        for (slot = 0; slot < PC_ITEMS_COUNT; slot++)
+                            gSaveBlock1Ptr->pcItems[slot] = (struct ItemSlot){ITEM_POTION, 1};
+                    }
+                    LoadHeadlessMap(MAP_ROUTE120, (gEcHeadlessFixtureParam & 1) ? 14 : 13,
+                        (gEcHeadlessFixtureParam & 1) ? 15 : 16);
+                }
+                else if (gEcHeadlessFixtureParam <= 97)
+                {
+                    const u16 trainers[] = {TRAINER_JARED, TRAINER_EDWARDO, TRAINER_FLINT,
+                        TRAINER_ASHLEY, TRAINER_HUMBERTO, TRAINER_DARIUS};
+                    for (slot = 0; slot < ARRAY_COUNT(trainers); slot++)
+                        SetTrainerFlag(trainers[slot]);
+                    ClearTrainerFlag(TRAINER_WINONA_1);
+                    FlagClear(FLAG_DEFEATED_FORTREE_GYM);
+                    FlagClear(FLAG_RECEIVED_WINONA_ALTARIANITE);
+                    FlagClear(FLAG_RECEIVED_RED_OR_BLUE_ORB);
+                    LoadHeadlessMap(MAP_FORTREE_CITY_GYM, gEcHeadlessFixtureParam == 96 ? 15 : 16,
+                        gEcHeadlessFixtureParam == 96 ? 3 : 23);
+                }
+                else if (gEcHeadlessFixtureParam == 98)
+                {
+                    FlagSet(FLAG_RECEIVED_DEVON_SCOPE);
+                    FlagClear(FLAG_KECLEON_FLED_FORTREE);
+                    AddBagItem(ITEM_DEVON_SCOPE, 1);
+                    LoadHeadlessMap(MAP_FORTREE_CITY, 25, 9);
+                }
+                else if (gEcHeadlessFixtureParam == 99)
+                {
+                    FlagClear(FLAG_WINGULL_SENT_ON_ERRAND);
+                    FlagClear(FLAG_WINGULL_DELIVERED_MAIL);
+                    FlagClear(FLAG_RECEIVED_FORTREE_SACHET);
+                    FlagClear(FLAG_HIDE_FORTREE_CITY_HOUSE_4_WINGULL);
+                    LoadHeadlessMap(MAP_FORTREE_CITY_HOUSE4, 1, 4);
+                }
+                else
+                {
+                    FlagSet(FLAG_BADGE06_GET);
+                    FlagSet(FLAG_RECEIVED_DEVON_SCOPE);
+                    LoadHeadlessMap(MAP_ROUTE120, 14, 15);
+                }
+                break;
+            }
+            if (gEcHeadlessFixtureParam == 91)
+            {
+                VarSet(VAR_WEATHER_INSTITUTE_STATE, 2);
+                VarSet(VAR_ABNORMAL_WEATHER_LOCATION, 0);
+                FlagSet(FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE);
+                FlagSet(FLAG_RECEIVED_CASTFORM);
+                FlagSet(FLAG_HIDE_ROUTE_119_TEAM_AQUA);
+                FlagSet(FLAG_HIDE_WEATHER_INSTITUTE_2F_WORKERS);
+                FlagSet(FLAG_HIDE_WEATHER_INSTITUTE_2F_AQUA_GRUNT_M);
+                FlagClear(FLAG_DEFEATED_KYOGRE);
+                FlagClear(FLAG_DEFEATED_GROUDON);
+                AddBagItem(ITEM_REVEAL_GLASS, 1);
+                LoadHeadlessMap(MAP_ROUTE119_WEATHER_INSTITUTE_2F, 2, 3);
+                break;
+            }
+            if (gEcHeadlessFixtureParam >= 82 && gEcHeadlessFixtureParam <= 90)
+            {
+                FlagSet(FLAG_BADGE01_GET);
+                FlagSet(FLAG_BADGE02_GET);
+                FlagSet(FLAG_BADGE03_GET);
+                FlagSet(FLAG_BADGE04_GET);
+                FlagSet(FLAG_BADGE05_GET);
+                FlagSet(FLAG_RECEIVED_HM_SURF);
+                FlagClear(FLAG_RECEIVED_HM_FLY);
+                FlagSet(FLAG_EC_REPEL_SPRAY_ACTIVE);
+                VarSet(VAR_EC_REPEL_SPRAY_STEPS, 500);
+                if (gEcHeadlessFixtureParam <= 84)
+                {
+                    const u16 trainers[] = {TRAINER_GRUNT_WEATHER_INST_1, TRAINER_GRUNT_WEATHER_INST_2,
+                        TRAINER_GRUNT_WEATHER_INST_3, TRAINER_GRUNT_WEATHER_INST_4,
+                        TRAINER_GRUNT_WEATHER_INST_5, TRAINER_SHELLY_WEATHER_INSTITUTE};
+                    for (slot = 0; slot < ARRAY_COUNT(trainers); slot++)
+                        ClearTrainerFlag(trainers[slot]);
+                    VarSet(VAR_WEATHER_INSTITUTE_STATE, 0);
+                    FlagClear(FLAG_RECEIVED_CASTFORM);
+                    FlagClear(FLAG_HIDE_ROUTE_119_TEAM_AQUA);
+                    FlagClear(FLAG_HIDE_WEATHER_INSTITUTE_2F_WORKERS);
+                    FlagSet(FLAG_HIDE_WEATHER_INSTITUTE_1F_WORKERS);
+                    FlagSet(FLAG_HIDE_WEATHER_INSTITUTE_2F_AQUA_GRUNT_M);
+                    if (gEcHeadlessFixtureParam == 83)
+                    {
+                        for (slot = 2; slot < PARTY_SIZE; slot++)
+                            CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][slot], SPECIES_ZIGZAGOON, 20, OTID_STRUCT_PLAYER_ID);
+                        CalculatePlayerPartyCount();
+                    }
+                    if (gEcHeadlessFixtureParam == 84)
+                        LoadHeadlessMap(MAP_ROUTE119_WEATHER_INSTITUTE_1F, 5, 11);
+                    else
+                        LoadHeadlessMap(MAP_ROUTE119_WEATHER_INSTITUTE_2F, 5, 6);
+                }
+                else
+                {
+                    gSaveBlock2Ptr->playerGender = (gEcHeadlessFixtureParam & 1) ? MALE : FEMALE;
+                    VarSet(VAR_STARTER_GEN, 1);
+                    VarSet(VAR_STARTER_MON, 1);
+                    VarSet(VAR_WEATHER_INSTITUTE_STATE, 2);
+                    VarSet(VAR_ROUTE119_STATE, 0);
+                    FlagSet(FLAG_HIDE_ROUTE_119_TEAM_AQUA);
+                    FlagSet(FLAG_HIDE_ROUTE_119_RIVAL);
+                    FlagSet(FLAG_HIDE_ROUTE_119_RIVAL_ON_BIKE);
+                    FlagSet(FLAG_HIDE_ROUTE_119_SCOTT);
+                    if (gEcHeadlessFixtureParam >= 89)
+                    {
+                        // Synthetic full stores: test owed-HM recovery, not normal item availability.
+                        struct BagPocket *pocket = &gBagPockets[GetItemPocket(ITEM_HM_FLY)];
+                        for (slot = 0; slot < pocket->capacity; slot++)
+                            BagPocket_SetSlotItemIdAndCount(pocket, slot, ITEM_HM_SURF, 1);
+                        for (slot = 0; slot < PC_ITEMS_COUNT; slot++)
+                            gSaveBlock1Ptr->pcItems[slot] = (struct ItemSlot){ITEM_POTION, 1};
+                    }
+                    LoadHeadlessMap(MAP_ROUTE119,
+                        gEcHeadlessFixtureParam == 87 || gEcHeadlessFixtureParam == 88 || gEcHeadlessFixtureParam == 90 ? 26 : 25, 32);
+                }
+                break;
+            }
+            if (gEcHeadlessFixtureParam >= 77 && gEcHeadlessFixtureParam <= 81)
+            {
+                FlagSet(FLAG_BADGE01_GET);
+                FlagSet(FLAG_BADGE02_GET);
+                FlagSet(FLAG_BADGE03_GET);
+                FlagSet(FLAG_BADGE04_GET);
+                FlagSet(FLAG_BADGE05_GET);
+                FlagSet(FLAG_RECEIVED_HM_SURF);
+                FlagSet(FLAG_EC_REPEL_SPRAY_ACTIVE);
+                VarSet(VAR_EC_REPEL_SPRAY_STEPS, 500);
+                if (gEcHeadlessFixtureParam == 77)
+                {
+                    // Traversal assumes the removable objects have been cleared.
+                    FlagSet(FLAG_ITEM_NEW_MAUVILLE_ESCAPE_ROPE);
+                    FlagSet(FLAG_ITEM_NEW_MAUVILLE_ROTOM_CATALOG);
+                    FlagSet(FLAG_ITEM_NEW_MAUVILLE_UPGRADE);
+                    FlagSet(FLAG_DEFEATED_VOLTORB_1_NEW_MAUVILLE);
+                    FlagSet(FLAG_DEFEATED_VOLTORB_2_NEW_MAUVILLE);
+                    FlagSet(FLAG_DEFEATED_VOLTORB_3_NEW_MAUVILLE);
+                    FlagSet(FLAG_HIDE_NEW_MAUVILLE_VOLTORB_1);
+                    FlagSet(FLAG_HIDE_NEW_MAUVILLE_VOLTORB_2);
+                    FlagSet(FLAG_HIDE_NEW_MAUVILLE_VOLTORB_3);
+                    AddBagItem(ITEM_BASEMENT_KEY, 1);
+                    AddBagItem(ITEM_ROTOM_CATALOG, 1);
+                    VarSet(VAR_NEW_MAUVILLE_STATE, 0);
+                    LoadHeadlessMap(MAP_NEW_MAUVILLE_ENTRANCE, 4, 3);
+                }
+                else if (gEcHeadlessFixtureParam == 78)
+                {
+                    VarSet(VAR_NEW_MAUVILLE_STATE, 1);
+                    LoadHeadlessMap(MAP_NEW_MAUVILLE_INSIDE, 32, 6);
+                }
+                else
+                {
+                    VarSet(VAR_ROUTE118_STATE, 0);
+                    FlagClear(FLAG_HIDE_ROUTE_118_STEVEN);
+                    SetTrainerFlag(TRAINER_DALTON_1);
+                    LoadHeadlessMap(MAP_ROUTE118,
+                        gEcHeadlessFixtureParam == 79 ? 17 : gEcHeadlessFixtureParam == 80 ? 43 : 45,
+                        gEcHeadlessFixtureParam == 79 ? 9 : 12);
+                }
+                break;
+            }
+            if (gEcHeadlessFixtureParam == 62 || gEcHeadlessFixtureParam == 63)
+            {
+                FlagClear(FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY);
+                FlagClear(FLAG_HIDE_MT_CHIMNEY_TEAM_MAGMA);
+                FlagClear(FLAG_HIDE_MT_CHIMNEY_TEAM_AQUA);
+                FlagSet(FLAG_HIDE_MT_CHIMNEY_TRAINERS);
+                FlagSet(FLAG_HIDE_MT_CHIMNEY_LAVA_COOKIE_LADY);
+                ClearTrainerFlag(TRAINER_MAXIE_MT_CHIMNEY);
+                LoadHeadlessMap(MAP_MT_CHIMNEY, gEcHeadlessFixtureParam == 62 ? 12 : 13,
+                    gEcHeadlessFixtureParam == 62 ? 6 : 7);
+                break;
+            }
+            if (gEcHeadlessFixtureParam == 48)
+            {
+                ClearTrainerFlag(TRAINER_VICTOR);
+                ClearTrainerFlag(TRAINER_VICTORIA);
+                ClearTrainerFlag(TRAINER_VIVI);
+                ClearTrainerFlag(TRAINER_VICKY);
+                LoadHeadlessMap(MAP_ROUTE111, 13, 115);
+                break;
+            }
+            if (gEcHeadlessFixtureParam >= 49 && gEcHeadlessFixtureParam <= 59)
+            {
+                AddBagItem(ITEM_HEAL_BALL, 1);
+                switch (gEcHeadlessFixtureParam)
+                {
+                case 49:
+                    VarSet(VAR_CHANSEY_NURSE_STATE, 0);
+                    LoadHeadlessMap(MAP_ROUTE111, 19, 103);
+                    break;
+                case 50:
+                    VarSet(VAR_CHANSEY_NURSE_STATE, 1);
+                    LoadHeadlessMap(MAP_ROUTE112, 25, 32);
+                    break;
+                case 51:
+                case 54:
+                    VarSet(VAR_CHANSEY_NURSE_STATE, 2);
+                    LoadHeadlessMap(MAP_JAGGED_PASS, gEcHeadlessFixtureParam == 51 ? 11 : 12,
+                        gEcHeadlessFixtureParam == 51 ? 29 : 28);
+                    break;
+                case 52:
+                    VarSet(VAR_CHANSEY_NURSE_STATE, 3);
+                    LoadHeadlessMap(MAP_ASHEN_WOODS, 14, 30);
+                    break;
+                case 53:
+                    VarSet(VAR_CHANSEY_NURSE_STATE, 4);
+                    LoadHeadlessMap(MAP_ASHEN_WOODS, 7, 39);
+                    break;
+                case 55:
+                    VarSet(VAR_CHANSEY_NURSE_STATE, 3);
+                    LoadHeadlessMap(MAP_ASHEN_WOODS, 17, 29);
+                    break;
+                case 56:
+                    VarSet(VAR_CHANSEY_NURSE_STATE, 4);
+                    LoadHeadlessMap(MAP_ASHEN_WOODS, 6, 35);
+                    break;
+                case 57:
+                case 58:
+                    VarSet(VAR_CHANSEY_NURSE_STATE, 5);
+                    if (gEcHeadlessFixtureParam == 58)
+                        RemoveBagItem(ITEM_HEAL_BALL, 1);
+                    LoadHeadlessMap(MAP_ASHEN_WOODS, 27, 44);
+                    break;
+                case 59:
+                    VarSet(VAR_CHANSEY_NURSE_STATE, 6);
+                    VarSet(VAR_POKE_VIAL_MAX_CHARGES, 1);
+                    VarSet(VAR_POKE_VIAL_CHARGES, 0);
+                    LoadHeadlessMap(MAP_ROUTE111, 19, 102);
+                    break;
+                }
+                break;
+            }
+            if (gEcHeadlessFixtureParam == 46 || gEcHeadlessFixtureParam == 47)
+            {
+                FlagSet(FLAG_BADGE01_GET);
+                FlagSet(FLAG_RECEIVED_HM_CUT);
+                VarSet(VAR_TRICK_HOUSE_LEVEL, gEcHeadlessFixtureParam - 46);
+                VarSet(VAR_TRICK_HOUSE_PUZZLE_1_STATE, 0);
+                VarSet(VAR_TRICK_HOUSE_PUZZLE_2_STATE, 0);
+                SetTrainerFlag(TRAINER_SALLY);
+                SetTrainerFlag(TRAINER_EDDIE);
+                SetTrainerFlag(TRAINER_ROBIN);
+                SetTrainerFlag(TRAINER_TED);
+                SetTrainerFlag(TRAINER_PAUL);
+                SetTrainerFlag(TRAINER_GEORGIA);
+                LoadHeadlessMap(gEcHeadlessFixtureParam == 46
+                    ? MAP_ROUTE110_TRICK_HOUSE_PUZZLE1 : MAP_ROUTE110_TRICK_HOUSE_PUZZLE2, 0, 20);
+                break;
+            }
+            if (gEcHeadlessFixtureParam == 43)
+            {
+                FlagClear(FLAG_DEFEATED_MAUVILLE_GYM);
+                FlagClear(FLAG_BADGE03_GET);
+                FlagClear(FLAG_MAUVILLE_GYM_BARRIERS_STATE);
+                VarSet(VAR_MAUVILLE_GYM_STATE, 0);
+                SetTrainerFlag(TRAINER_KIRK);
+                SetTrainerFlag(TRAINER_SHAWN);
+                SetTrainerFlag(TRAINER_BEN);
+                SetTrainerFlag(TRAINER_VIVIAN);
+                SetTrainerFlag(TRAINER_ANGELO);
+                LoadHeadlessMap(MAP_MAUVILLE_CITY_GYM, 4, 19);
+                break;
+            }
+            if (gEcHeadlessFixtureParam == 44 || gEcHeadlessFixtureParam == 45)
+            {
+                FlagSet(FLAG_BADGE03_GET);
+                FlagSet(FLAG_RECEIVED_HM_ROCK_SMASH);
+                AddBagItem(ITEM_HM_ROCK_SMASH, 1);
+                FlagClear(FLAG_RUSTURF_TUNNEL_OPENED);
+                FlagClear(FLAG_RECEIVED_HM_STRENGTH);
+                FlagClear(FLAG_HIDE_RUSTURF_TUNNEL_ROCK_1);
+                FlagClear(FLAG_HIDE_RUSTURF_TUNNEL_ROCK_2);
+                FlagClear(FLAG_HIDE_RUSTURF_TUNNEL_WANDA);
+                FlagClear(FLAG_HIDE_RUSTURF_TUNNEL_WANDAS_BOYFRIEND);
+                VarSet(VAR_RUSTURF_TUNNEL_STATE, 3);
+                LoadHeadlessMap(MAP_RUSTURF_TUNNEL,
+                    gEcHeadlessFixtureParam == 44 ? 22 : 26,
+                    gEcHeadlessFixtureParam == 44 ? 4 : 5);
+                break;
+            }
+            if (gEcHeadlessFixtureParam >= 40 && gEcHeadlessFixtureParam <= 42)
+            {
+                FlagClear(FLAG_HIDE_FALLARBOR_POKEMON_CENTER_LANETTE);
+                FlagSet(FLAG_HIDE_LANETTES_HOUSE_LANETTE);
+                LoadHeadlessMap(MAP_FALLARBOR_TOWN_POKEMON_CENTER_1F,
+                    gEcHeadlessFixtureParam == 40 ? 11 : gEcHeadlessFixtureParam == 41 ? 12 : 10,
+                    gEcHeadlessFixtureParam == 40 ? 5 : 4);
+                break;
+            }
+            if (gEcHeadlessFixtureParam == 38 || gEcHeadlessFixtureParam == 39)
+            {
+                gSaveBlock2Ptr->playerGender = gEcHeadlessFixtureParam == 38 ? MALE : FEMALE;
+                VarSet(VAR_FALLARBOR_TOWN_STATE, 0);
+                VarSet(VAR_METEOR_FALLS_STATE, 0);
+                FlagClear(FLAG_HIDE_FALLARBOR_RIVAL);
+                LoadHeadlessMap(MAP_FALLARBOR_TOWN, 14, gEcHeadlessFixtureParam == 38 ? 10 : 8);
+                break;
+            }
+            if (gEcHeadlessFixtureParam == 37)
+            {
+                memset(&gSaveBlock1Ptr->daycare, 0, sizeof(gSaveBlock1Ptr->daycare));
+                CreateBoxMon(&gSaveBlock1Ptr->daycare.mons[0].mon, SPECIES_MANAPHY, 20, 0, OTID_STRUCT_PLAYER_ID);
+                CreateBoxMon(&gSaveBlock1Ptr->daycare.mons[1].mon, SPECIES_DITTO, 20, 0, OTID_STRUCT_PLAYER_ID);
+                LoadHeadlessMap(MAP_ROUTE117, 47, 6);
+                break;
+            }
+            if (gEcHeadlessFixtureParam == 35 || gEcHeadlessFixtureParam == 36)
+            {
+                memset(&gSaveBlock1Ptr->daycare, 0, sizeof(gSaveBlock1Ptr->daycare));
+                CreateBoxMon(&gSaveBlock1Ptr->daycare.mons[0].mon, SPECIES_DITTO,
+                    gEcHeadlessFixtureParam == 35 ? 10 : 20, 0, OTID_STRUCT_PLAYER_ID);
+                gSaveBlock1Ptr->daycare.mons[0].steps = 100000;
+                gSpecialVar_0x8004 = 0;
+                gSpecialVar_0x8006 = GetNumLevelsGainedFromDaycare();
+                GetDaycareCostAndPrepareString();
+                LoadHeadlessMap(MAP_ROUTE117_POKEMON_DAY_CARE, 2, 3);
+                break;
+            }
+            if (gEcHeadlessFixtureParam == 34)
+            {
+                memset(&gSaveBlock1Ptr->daycare, 0, sizeof(gSaveBlock1Ptr->daycare));
+                CreateBoxMon(&gPokemonStoragePtr->boxes[0][0], SPECIES_DITTO, 20, 0, OTID_STRUCT_PLAYER_ID);
+                LoadHeadlessMap(MAP_ROUTE117_POKEMON_DAY_CARE, 2, 3);
+                break;
+            }
+            if (gEcHeadlessFixtureParam == 32 || gEcHeadlessFixtureParam == 33)
+            {
+                memset(gSaveBlock2Ptr->playerTrainerId, 0, TRAINER_ID_LENGTH);
+                gSaveBlock2Ptr->playerTrainerId[0] = gEcHeadlessFixtureParam == 32 ? 6 : 8;
+                SetMauvilleOldMan();
+                SetGameStat(GAME_STAT_SAVED_GAME, 100);
+                LoadHeadlessMap(MAP_MAUVILLE_CITY_POKEMON_CENTER_1F, 4, 4);
+                break;
+            }
+            if (gEcHeadlessFixtureParam >= 29 && gEcHeadlessFixtureParam <= 31)
+            {
+                FlagSet(FLAG_BADGE01_GET);
+                FlagSet(FLAG_BADGE02_GET);
+                FlagSet(FLAG_ADVENTURE_STARTED);
+                FlagSet(FLAG_RECEIVED_POKENAV);
+                FlagSet(FLAG_SYS_POKENAV_GET);
+                FlagSet(FLAG_DELIVERED_DEVON_GOODS);
+                if (gEcHeadlessFixtureParam == 29)
+                {
+                    FlagClear(FLAG_HIDE_MAUVILLE_CITY_WALLY);
+                    FlagClear(FLAG_HIDE_MAUVILLE_CITY_WALLYS_UNCLE);
+                    LoadHeadlessMap(MAP_MAUVILLE_CITY, 8, 7);
+                }
+                else if (gEcHeadlessFixtureParam == 30)
+                {
+                    FlagClear(FLAG_HIDE_MAUVILLE_GYM_WATTSON);
+                    LoadHeadlessMap(MAP_MAUVILLE_CITY_GYM, 5, 3);
+                }
+                else
+                {
+                    VarSet(VAR_REGISTER_BIRCH_STATE, 1);
+                    LoadHeadlessMap(MAP_ROUTE110, 9, 86);
+                }
+                break;
+            }
+            if (gEcHeadlessFixtureParam == 28)
+            {
+                FlagSet(FLAG_BADGE01_GET);
+                FlagSet(FLAG_ADVENTURE_STARTED);
+                FlagSet(FLAG_RECEIVED_POKENAV);
+                FlagSet(FLAG_SYS_POKENAV_GET);
+                FlagSet(FLAG_DELIVERED_DEVON_GOODS);
+                FlagSet(FLAG_HIDE_SLATEPORT_CITY_TEAM_AQUA);
+                VarSet(VAR_SLATEPORT_OUTSIDE_MUSEUM_STATE, 1);
+                LoadHeadlessMap(MAP_SLATEPORT_CITY, 30, 27);
+                break;
+            }
+            if (gEcHeadlessFixtureParam == 27)
+            {
+                FlagSet(FLAG_BADGE01_GET);
+                FlagSet(FLAG_ADVENTURE_STARTED);
+                FlagSet(FLAG_DELIVERED_STEVEN_LETTER);
+                FlagSet(FLAG_RECEIVED_POKENAV);
+                FlagClear(FLAG_DELIVERED_DEVON_GOODS);
+                FlagClear(FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_2F_CAPTAIN_STERN);
+                FlagSet(FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_2F_AQUA_GRUNT_1);
+                FlagSet(FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_2F_AQUA_GRUNT_2);
+                FlagSet(FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_2F_ARCHIE);
+                AddBagItem(ITEM_DEVON_PARTS, 1);
+                LoadHeadlessMap(MAP_SLATEPORT_CITY_OCEANIC_MUSEUM_2F, 13, 7);
+                break;
+            }
+            if (gEcHeadlessFixtureParam == 25 || gEcHeadlessFixtureParam == 26)
+            {
+                FlagSet(FLAG_BADGE01_GET);
+                FlagSet(FLAG_ADVENTURE_STARTED);
+                FlagSet(FLAG_RETURNED_DEVON_GOODS);
+                if (gEcHeadlessFixtureParam == 25)
+                {
+                    VarSet(VAR_DEVON_CORP_3F_STATE, 0);
+                    FlagClear(FLAG_RECEIVED_POKENAV);
+                    AddBagItem(ITEM_DEVON_PARTS, 1);
+                    LoadHeadlessMap(MAP_RUSTBORO_CITY_DEVON_CORP_3F, 2, 2);
+                }
+                else
+                {
+                    VarSet(VAR_FOSSIL_RESURRECTION_STATE, 1);
+                    VarSet(VAR_WHICH_FOSSIL_REVIVED, 5); // Old Amber already handed in.
+                    LoadHeadlessMap(MAP_RUSTBORO_CITY_DEVON_CORP_2F, 14, 9);
+                }
+                break;
+            }
+            // Rescue/reward/sailing handoffs use native map scripts and movement.
+            if (gEcHeadlessFixtureParam >= 22 && gEcHeadlessFixtureParam <= 24)
+            {
+                FlagSet(FLAG_BADGE01_GET);
+                FlagSet(FLAG_ADVENTURE_STARTED);
+                FlagSet(FLAG_RECEIVED_POKENAV);
+                FlagSet(FLAG_SYS_POKENAV_GET);
+                if (gEcHeadlessFixtureParam == 22)
+                {
+                    FlagClear(FLAG_HIDE_RUSTURF_TUNNEL_AQUA_GRUNT);
+                    FlagClear(FLAG_HIDE_RUSTURF_TUNNEL_PEEKO);
+                    FlagSet(FLAG_HIDE_RUSTURF_TUNNEL_BRINEY);
+                    FlagSet(FLAG_DEVON_GOODS_STOLEN);
+                    VarSet(VAR_RUSTURF_TUNNEL_STATE, 3);
+                    LoadHeadlessMap(MAP_RUSTURF_TUNNEL, 13, 5);
+                }
+                else if (gEcHeadlessFixtureParam == 23)
+                {
+                    FlagClear(FLAG_BADGE02_GET);
+                    FlagClear(FLAG_HIDE_GRANITE_CAVE_STEVEN);
+                    FlagSet(FLAG_HIDE_SLATEPORT_CITY_BRAWLY);
+                    VarSet(VAR_PETALBURG_GYM_STATE, 3);
+                    LoadHeadlessMap(MAP_DEWFORD_TOWN_GYM, 4, 4);
+                }
+                else
+                {
+                    FlagClear(FLAG_HIDE_BRINEYS_HOUSE_MR_BRINEY);
+                    FlagClear(FLAG_HIDE_BRINEYS_HOUSE_PEEKO);
+                    FlagClear(FLAG_MR_BRINEY_SAILING_INTRO);
+                    FlagClear(FLAG_DELIVERED_STEVEN_LETTER);
+                    VarSet(VAR_BRINEY_HOUSE_STATE, 0);
+                    VarSet(VAR_BRINEY_LOCATION, 1);
+                    AddBagItem(ITEM_LETTER, 1);
+                    AddBagItem(ITEM_DEVON_PARTS, 1);
+                    LoadHeadlessMap(MAP_ROUTE104_MR_BRINEYS_HOUSE, 5, 4);
+                }
+                break;
+            }
+            // Scoped dialogue checks for completed/available local discoveries.
+            if (gEcHeadlessFixtureParam >= 17 && gEcHeadlessFixtureParam <= 21)
+            {
+                FlagSet(FLAG_BADGE01_GET);
+                FlagSet(FLAG_BADGE02_GET);
+                if (gEcHeadlessFixtureParam <= 18)
+                {
+                    FlagClear(FLAG_HIDE_GRANITE_CAVE_STEVEN);
+                    FlagSet(FLAG_DELIVERED_STEVEN_LETTER);
+                    FlagSet(FLAG_DELIVERED_DEVON_GOODS);
+                    FlagSet(FLAG_REGISTERED_STEVEN_POKENAV);
+                    AddBagItem(ITEM_MEGA_RING, 1);
+                    if (gEcHeadlessFixtureParam == 18)
+                        MarkLegendarySignCaughtBySpecies(SPECIES_COBALION);
+                    LoadHeadlessMap(MAP_GRANITE_CAVE_STEVENS_ROOM, 7, 9);
+                }
+                else
+                {
+                    if (gEcHeadlessFixtureParam == 20)
+                        MarkLegendarySignCaughtBySpecies(SPECIES_MELOETTA);
+                    else if (gEcHeadlessFixtureParam == 21)
+                        SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][0], MOVE_SING, 0);
+                    LoadHeadlessMap(MAP_DEWFORD_MEADOW, 27, 13);
+                }
+                break;
+            }
+            // Opening chapter dialogue: Scott's four approach rows, Wally's
+            // parents before/after his catch, and Norman's first meeting.
+            if (gEcHeadlessFixtureParam >= 10 && gEcHeadlessFixtureParam <= 16)
+            {
+                StringCopy(gSaveBlock2Ptr->playerName, COMPOUND_STRING("WWWWWWW"));
+                FlagSet(FLAG_ADVENTURE_STARTED);
+                FlagSet(FLAG_RESCUED_BIRCH);
+                FlagSet(FLAG_RECEIVED_POKEDEX_FROM_BIRCH);
+                VarSet(VAR_PETALBURG_CITY_STATE, 3);
+                VarSet(VAR_PETALBURG_GYM_STATE, 2);
+                if (gEcHeadlessFixtureParam <= 13)
+                {
+                    VarSet(VAR_SCOTT_PETALBURG_ENCOUNTER, 0);
+                    LoadHeadlessMap(MAP_PETALBURG_CITY, 5, gEcHeadlessFixtureParam);
+                }
+                else if (gEcHeadlessFixtureParam <= 15)
+                {
+                    VarSet(VAR_PETALBURG_GYM_STATE, gEcHeadlessFixtureParam == 14 ? 0 : 2);
+                    LoadHeadlessMap(MAP_PETALBURG_CITY_WALLYS_HOUSE, 4, 4);
+                }
+                else
+                {
+                    VarSet(VAR_PETALBURG_CITY_STATE, 1);
+                    VarSet(VAR_PETALBURG_GYM_STATE, 0);
+                    LoadHeadlessMap(MAP_PETALBURG_CITY_GYM, 4, 108);
+                }
+                break;
+            }
+            // 4-6: opening send-off, Bag / PC / both full; 7-9: female branch.
+            if (gEcHeadlessFixtureParam >= 4 && gEcHeadlessFixtureParam <= 9)
+            {
+                u32 storage = (gEcHeadlessFixtureParam - 4) % 3;
+                gSaveBlock2Ptr->playerGender = gEcHeadlessFixtureParam >= 7 ? FEMALE : MALE;
+                StringCopy(gSaveBlock2Ptr->playerName, COMPOUND_STRING("WWWWWWW"));
+                FlagSet(FLAG_RESCUED_BIRCH);
+                FlagSet(FLAG_DEFEATED_RIVAL_ROUTE103);
+                FlagSet(FLAG_RECEIVED_POKEDEX_FROM_BIRCH);
+                FlagSet(FLAG_SYS_POKEDEX_GET);
+                FlagClear(FLAG_ADVENTURE_STARTED);
+                FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_BIRCH);
+                FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_RIVAL);
+                VarSet(VAR_EC_OPENING_STATE, EC_OPENING_PRE_RIVAL_READY);
+                VarSet(VAR_BIRCH_LAB_STATE, 4);
+                if (storage != 0)
+                {
+                    struct BagPocket *pocket = &gBagPockets[GetItemPocket(ITEM_GREAT_BALL)];
+                    for (slot = 0; slot < pocket->capacity; slot++)
+                        BagPocket_SetSlotItemIdAndCount(pocket, slot, ITEM_POKE_BALL, 1);
+                }
+                if (storage == 2)
+                    for (slot = 0; slot < PC_ITEMS_COUNT; slot++)
+                        gSaveBlock1Ptr->pcItems[slot] = (struct ItemSlot){ITEM_POTION, 1};
+                LoadHeadlessMap(MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB, 6, 12);
+                break;
+            }
             FlagClear(FLAG_HIDE_GRANITE_CAVE_STEVEN);
             FlagClear(FLAG_DELIVERED_STEVEN_LETTER);
             FlagClear(FLAG_BADGE02_GET);

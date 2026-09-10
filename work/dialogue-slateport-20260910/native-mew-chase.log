@@ -1,0 +1,33 @@
+mew-chase-start 0 RESULT frames=2000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=a8a5586f9b5c1282 nonzero_pixels=38351 save_bytes=0
+READ width=4 address=020022c4 value=00000001
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00001a39
+READ width=4 address=020022e0 value=0000000d
+READ width=4 address=020022e4 value=00000012
+READ width=4 address=02002290 value=00000000
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+READ width=4 address=0200229c value=00000000
+ 
+step 0 player (13, 18) mew (13, 14) path ['UP', 'UP', 'UP']
+step 1 player (13, 17) mew (13, 14) path ['UP', 'UP']
+step 2 player (13, 16) mew (14, 14) path ['UP', 'UP']
+step 3 player (13, 15) mew (14, 13) path ['UP', 'RIGHT']
+step 4 player (13, 14) mew (15, 13) path ['RIGHT', 'UP']
+step 5 player (14, 14) mew (15, 12) path ['UP', 'UP']
+step 6 player (14, 13) mew (16, 12) path ['UP', 'RIGHT']
+step 7 player (14, 12) mew (16, 11) path ['UP', 'RIGHT']
+step 8 player (14, 11) mew (17, 11) path ['RIGHT', 'RIGHT']
+step 9 player (15, 11) mew (18, 11) path ['RIGHT', 'RIGHT']
+step 10 player (16, 11) mew (18, 11) path ['RIGHT']
+step 11 player (17, 11) mew (19, 11) path ['RIGHT']
+step 12 player (18, 11) mew (19, 10) path ['UP']
+step 13 player (18, 10) mew (19, 9) path ['RIGHT']
+step 14 player (19, 10) mew (19, 8) path ['UP']
+step 15 player (19, 9) mew (19, 7) path ['UP']
+step 16 player (19, 8) mew (18, 7) path ['UP']
+step 17 player (19, 7) mew (17, 7) path ['LEFT']
+step 18 player (18, 7) mew (16, 7) path ['LEFT']
+step 19 player (17, 7) mew (16, 7) path []
+Adjacent state mew-chase-18 face LEFT

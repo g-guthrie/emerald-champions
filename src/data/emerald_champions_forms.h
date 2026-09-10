@@ -179,63 +179,47 @@ static const struct EmeraldChampionsAppearance sEmeraldChampionsAppearances[] =
     {SPECIES_SQUAWKABILLY_WHITE, 16, COMPOUND_STRING("White")},
 };
 
-struct EmeraldChampionsFormGift { enum Species species; u16 flag; const u8 *name; struct EmeraldChampionsBattleSet preset; };
+struct EmeraldChampionsFormGift { enum Species species; u16 flag; const u8 *name; const struct EmeraldChampionsBattleSet *preset; };
 static const struct EmeraldChampionsFormGift sEmeraldChampionsFormGifts[] =
 {
     {
         .species = SPECIES_INDEEDEE_F, .flag = FLAG_EC_GIFT_INDEEDEE_F, .name = COMPOUND_STRING("Indeedee partner"),
-        .preset = {
-            .moves = {MOVE_FOLLOW_ME, MOVE_HELPING_HAND, MOVE_PSYCHIC, MOVE_PROTECT},
-            .item = ITEM_PSYCHIC_SEED, .ability = ABILITY_PSYCHIC_SURGE, .nature = NATURE_CALM,
-            .statPoints = {32, 0, 2, 0, 32, 0},
-        },
+        .preset = &gEmeraldChampionsDefaultBattleSets[SPECIES_INDEEDEE_F],
     },
     {
         .species = SPECIES_PIKACHU_COSPLAY, .flag = FLAG_EC_GIFT_COSPLAY_PIKACHU, .name = COMPOUND_STRING("Cosplay Pikachu"),
-        .preset = {
-            .moves = {MOVE_THUNDERBOLT, MOVE_GRASS_KNOT, MOVE_KNOCK_OFF, MOVE_PROTECT},
-            .item = ITEM_LIGHT_BALL, .ability = ABILITY_LIGHTNING_ROD, .nature = NATURE_TIMID,
-            .statPoints = {2, 0, 0, 32, 0, 32},
-        },
+        .preset = &gEmeraldChampionsDefaultBattleSets[SPECIES_PIKACHU_COSPLAY],
     },
     {
         .species = SPECIES_GRENINJA_BATTLE_BOND, .flag = FLAG_EC_GIFT_BATTLE_BOND_GRENINJA, .name = COMPOUND_STRING("Battle Bond Greninja"),
-        .preset = {
-            .moves = {MOVE_HYDRO_PUMP, MOVE_DARK_PULSE, MOVE_WATER_SHURIKEN, MOVE_PROTECT},
-            .item = ITEM_LIFE_ORB, .ability = ABILITY_BATTLE_BOND, .nature = NATURE_TIMID,
-            .statPoints = {2, 0, 0, 32, 0, 32},
-        },
+        .preset = &gEmeraldChampionsDefaultBattleSets[SPECIES_GRENINJA_BATTLE_BOND],
     },
     {
         .species = SPECIES_PIKACHU_STARTER, .flag = FLAG_EC_GIFT_PARTNER_PIKACHU, .name = COMPOUND_STRING("Partner Pikachu"),
-        .preset = {
+        .preset = &(const struct EmeraldChampionsBattleSet){
             .moves = {MOVE_FAKE_OUT, MOVE_THUNDERBOLT, MOVE_GRASS_KNOT, MOVE_PROTECT},
             .item = ITEM_LIGHT_BALL, .ability = ABILITY_LIGHTNING_ROD, .nature = NATURE_TIMID,
-            .statPoints = {2, 0, 0, 32, 0, 32},
+            .evs = {4, 0, 0, 252, 0, 252},
         },
     },
     {
         .species = SPECIES_EEVEE_STARTER, .flag = FLAG_EC_GIFT_PARTNER_EEVEE, .name = COMPOUND_STRING("Partner Eevee"),
-        .preset = {
+        .preset = &(const struct EmeraldChampionsBattleSet){
             .moves = {MOVE_DOUBLE_EDGE, MOVE_YAWN, MOVE_HELPING_HAND, MOVE_PROTECT},
             .item = ITEM_SITRUS_BERRY, .ability = ABILITY_ADAPTABILITY, .nature = NATURE_ADAMANT,
-            .statPoints = {32, 32, 2, 0, 0, 0},
+            .evs = {252, 252, 4, 0, 0, 0},
         },
     },
     {
         .species = SPECIES_KUBFU, .flag = FLAG_EC_GIFT_SECOND_KUBFU, .name = COMPOUND_STRING("Second Kubfu"),
-        .preset = {
-            .moves = {MOVE_CLOSE_COMBAT, MOVE_ICE_PUNCH, MOVE_U_TURN, MOVE_PROTECT},
-            .item = ITEM_EVIOLITE, .ability = ABILITY_INNER_FOCUS, .nature = NATURE_JOLLY,
-            .statPoints = {2, 32, 0, 0, 0, 32},
-        },
+        .preset = &gEmeraldChampionsDefaultBattleSets[SPECIES_KUBFU],
     },
     {
         .species = SPECIES_COSMOG, .flag = FLAG_EC_GIFT_SECOND_COSMOG, .name = COMPOUND_STRING("Second Cosmog"),
-        .preset = {
+        .preset = &(const struct EmeraldChampionsBattleSet){
             .moves = {MOVE_DOUBLE_EDGE, MOVE_TELEPORT, MOVE_MIMIC, MOVE_NONE},
             .item = ITEM_EVIOLITE, .ability = ABILITY_UNAWARE, .nature = NATURE_ADAMANT,
-            .statPoints = {32, 32, 2, 0, 0, 0},
+            .evs = {252, 252, 4, 0, 0, 0},
         },
     },
 };

@@ -1,0 +1,248 @@
+blocks 2534 lines 8244 over200 247
+{"file": "data/maps/Route111/scripts.inc", "label": "Route111_Text_VialBlobGetBackHere", "width": 203, "text": "Blob! Stop goofing around and get back"}
+{"file": "data/maps/Route111/scripts.inc", "label": "Route111_Text_ToughToKeepWinningUpTheRanks", "width": 201, "text": "more, it could be tough to keep winning"}
+{"file": "data/maps/Route111/scripts.inc", "label": "Route111_Text_CursedStoneClue", "width": 204, "text": "You can return to the stone even after"}
+{"file": "data/maps/Route111/scripts.inc", "label": "Route111_Text_CursedStone", "width": 203, "text": "Each conscious Galarian YAMASK in your"}
+{"file": "data/maps/Route111_WinstrateFamilysHouse/scripts.inc", "label": "Route111_WinstrateFamilysHouse_Text_MySonIsStrongerThanYou", "width": 206, "text": "You're the first TRAINER I've seen who"}
+{"file": "data/maps/Route111_WinstrateFamilysHouse/scripts.inc", "label": "Route111_WinstrateFamilysHouse_Text_GrandsonStrong", "width": 211, "text": "There's no question that you're strong."}
+{"file": "data/maps/AshenWoods/scripts.inc", "label": "AshenWoods_Text_VialBlobCornered", "width": 206, "text": "Blob reached the far edge of the woods."}
+{"file": "data/maps/AshenWoods/scripts.inc", "label": "AshenWoods_Text_VialNoHealBall", "width": 209, "text": "You need one of the nurse's HEAL BALLS."}
+{"file": "data/maps/AshenWoods/scripts.inc", "label": "AshenWoods_Text_VialNoHealBall", "width": 206, "text": "Return to her on ROUTE 111 for another."}
+{"file": "data/maps/AshenWoods/scripts.inc", "label": "AshenWoods_Text_AlannahAfter", "width": 205, "text": "The forest rewards adaptation, not one"}
+{"file": "data/maps/JaggedPass/scripts.inc", "label": "JaggedPass_Text_EthanRegister", "width": 205, "text": "When I get more used to this bumpiness,"}
+{"file": "data/maps/JaggedPass/scripts.inc", "label": "JaggedPass_Text_BoulderShakingInResponseToEmblem", "width": 202, "text": "Oh! This boulder is shaking in response"}
+{"file": "data/maps/Route113/scripts.inc", "label": "Route113_Text_FunWalkingThroughAsh", "width": 208, "text": "PAWNIARD leave little tracks in the ash."}
+{"file": "data/maps/Route113/scripts.inc", "label": "Route113_Text_GlassWorkshopSign", "width": 208, "text": "“Turning Volcanic Ash into Glass Items”"}
+{"file": "data/maps/Route113_GlassWorkshop/scripts.inc", "label": "Route113_GlassWorkshop_Text_ExplainSootSack", "width": 205, "text": "And it will fill up with the volcanic ash,"}
+{"file": "data/maps/Route113_GlassWorkshop/scripts.inc", "label": "Route113_GlassWorkshop_Text_ExplainSootSack", "width": 204, "text": "Once you think you've collected a good"}
+{"file": "data/maps/Route113_GlassWorkshop/scripts.inc", "label": "Route113_GlassWorkshop_Text_NotEnoughAshNeedX", "width": 211, "text": "There's not enough ash here, huff-puff."}
+{"file": "data/maps/Route113_GlassWorkshop/scripts.inc", "label": "Route113_GlassWorkshop_Text_NotEnoughAshNeedX", "width": 210, "text": "I can't make glass with this, huff-puff."}
+{"file": "data/maps/Route113_GlassWorkshop/scripts.inc", "label": "Route113_GlassWorkshop_Text_NotEnoughAshToMakeItem", "width": 204, "text": "Let's see… {STR_VAR_2} is the number of steps"}
+{"file": "data/maps/Route113_GlassWorkshop/scripts.inc", "label": "Route113_GlassWorkshop_Text_NotEnoughAshToMakeItem", "width": 211, "text": "you'll need to walk through volcanic ash"}
+{"file": "data/maps/Route113_GlassWorkshop/scripts.inc", "label": "Route113_GlassWorkshop_Text_HaventGotYourSootSack", "width": 202, "text": "You have to keep it with you to collect"}
+{"file": "data/maps/Route113_GlassWorkshop/scripts.inc", "label": "Route113_GlassWorkshop_Text_MilestoneOwned", "width": 203, "text": "That milestone is complete, huff-puff!"}
+{"file": "data/maps/FallarborTown/scripts.inc", "label": "FallarborTown_Text_HaveYouChallengedFlannery", "width": 210, "text": "It wouldn't surprise me to see FLANNERY"}
+{"file": "data/maps/FallarborTown_CozmosHouse/scripts.inc", "label": "FallarborTown_CozmosHouse_Text_ReallyGoingToHelpMyResearch", "width": 208, "text": "This is really going to help my research!"}
+{"file": "data/maps/FallarborTown_CozmosHouse/scripts.inc", "label": "FallarborTown_CozmosHouse_Text_FeelSorryForCozmo", "width": 208, "text": "He's so depressed… I feel sorry for him."}
+{"file": "data/maps/FallarborTown_CozmosHouse/scripts.inc", "label": "FallarborTown_CozmosHouse_Text_HisuianGoomy", "width": 208, "text": "METEOR FALLS has iron-rich stone. Level"}
+{"file": "data/maps/FallarborTown_Mart/scripts.inc", "label": "FallarborTown_Mart_Text_MoveSpecialist", "width": 201, "text": "I once handed out DRAIN PUNCH as a TM."}
+{"file": "data/maps/FallarborTown_PokemonCenter_1F/scripts.inc", "label": "FallarborTown_PokemonCenter_1F_Text_LanetteGreeting", "width": 205, "text": "great you're using the Storage System."}
+{"file": "data/maps/FallarborTown_MoveRelearnersHouse/scripts.inc", "label": "FallarborTown_MoveRelearnersHouse_Text_IvyEvieIntro1", "width": 208, "text": "If you want your POKéMON to be the very"}
+{"file": "data/maps/FallarborTown_MoveRelearnersHouse/scripts.inc", "label": "FallarborTown_MoveRelearnersHouse_Text_ImTheScaleCollector", "width": 202, "text": "PP upgrades stay with their move slots"}
+{"file": "data/maps/FallarborTown_BattleTentCorridor/scripts.inc", "label": "FallarborTown_ContestHall_Text_DoAllRightInPreliminary", "width": 204, "text": "We do all right in the preliminary round,"}
+{"file": "data/maps/FallarborTown_BattleTentCorridor/scripts.inc", "label": "FallarborTown_ContestHall_Text_MonAllTheseRibbons", "width": 205, "text": "Have your POKéMON earned any RIBBONS?"}
+{"file": "data/maps/Route114/scripts.inc", "label": "Route114_Text_GoodRodOffer", "width": 204, "text": "at different depths. Want my GOOD ROD?"}
+{"file": "data/maps/Route114_LanettesHouse/scripts.inc", "label": "Route114_LanettesHouse_Text_ResearchNotesPage3", "width": 201, "text": "In other words, when a BOX is examined,"}
+{"file": "data/maps/Route114_LanettesHouse/scripts.inc", "label": "Route114_LanettesHouse_Text_ResearchNotesPage3", "width": 204, "text": "it is automatically selected as the BOX"}
+{"file": "data/maps/Route114_LanettesHouse/scripts.inc", "label": "Route114_LanettesHouse_Text_EmailFromBill", "width": 207, "text": "“It has a lot of user-friendly features"}
+{"file": "data/maps/Route114_FossilManiacsHouse/scripts.inc", "label": "Route114_FossilManiacsHouse_Text_DigReturnsYouToEntrance", "width": 206, "text": "cave, you're returned to the entrance…"}
+{"file": "data/maps/Route114_FossilManiacsTunnel/scripts.inc", "label": "Route114_FossilManiacsTunnel_Text_LookInDesertForFossils", "width": 204, "text": "But the FOSSILS around these parts all"}
+{"file": "data/maps/Route114_FossilManiacsTunnel/scripts.inc", "label": "Route114_FossilManiacsTunnel_Text_DevonCorpRevivingFossils", "width": 208, "text": "DEVON's researcher can revive complete"}
+{"file": "data/maps/MeteorFalls_1F_2R/scripts.inc", "label": "MeteorFalls_1F_2R_Text_JohnRegister", "width": 205, "text": "notes on teamwork through MATCH CALL?"}
+{"file": "data/maps/MeteorFalls_1F_2R/scripts.inc", "label": "MeteorFalls_1F_2R_Text_JayNotEnoughMons", "width": 201, "text": "If you'd care to battle with us, you'll"}
+{"file": "data/maps/MeteorFalls_1F_2R/scripts.inc", "label": "MeteorFalls_1F_2R_Text_JayRematchNotEnoughMons", "width": 201, "text": "If you'd care to battle with us, you'll"}
+{"file": "data/maps/MtChimney/scripts.inc", "label": "MtChimney_Text_Grunt2PostBattle", "width": 202, "text": "If the method frightens everyone it is"}
+{"file": "data/maps/LavaridgeTown/scripts.inc", "label": "LavaridgeTown_Text_HaveEggWillYouTakeIt", "width": 201, "text": "I'd hoped to hatch it by covering it in"}
+{"file": "data/maps/LavaridgeTown/scripts.inc", "label": "LavaridgeTown_Text_BatheInHotSpringsEveryDay", "width": 208, "text": "I want to become a beautiful and strong"}
+{"file": "data/maps/LavaridgeTown/scripts.inc", "label": "LavaridgeTown_Text_HotSpringsClaims", "width": 209, "text": "They're claiming that these hot springs"}
+{"file": "data/maps/LavaridgeTown_HerbShop/scripts.inc", "label": "LavaridgeTown_HerbShop_Text_YouveComeToLookAtHerbalMedicine", "width": 201, "text": "You've come to look at herbal medicine"}
+{"file": "data/maps/LavaridgeTown_HerbShop/scripts.inc", "label": "LavaridgeTown_HerbShop_Text_HerbalMedicineWorksButMonWillDislike", "width": 206, "text": "Herbal medicine works impressively well."}
+{"file": "data/maps/LavaridgeTown_HerbShop/scripts.inc", "label": "LavaridgeTown_HerbShop_Text_HerbalMedicineWorksButMonWillDislike", "width": 206, "text": "But your POKéMON will dislike you for it."}
+{"file": "data/maps/LavaridgeTown_House/scripts.inc", "label": "LavaridgeTown_House_Text_WifeWarmingEggInHotSprings", "width": 206, "text": "She left two POKéMON with the DAY CARE."}
+{"file": "data/maps/LavaridgeTown_Mart/scripts.inc", "label": "LavaridgeTown_Mart_Text_LocalSpecialtyOnMtChimney", "width": 202, "text": "Give it to a POKéMON--it will be elated."}
+{"file": "data/maps/LavaridgeTown_PokemonCenter_1F/scripts.inc", "label": "LavaridgeTown_PokemonCenter_1F_Text_MoomooMilkWelcome", "width": 207, "text": "the hot spring. How many would you like?"}
+{"file": "data/maps/LavaridgeTown_Gym_1F/scripts.inc", "label": "LavaridgeTown_Gym_1F_Text_ExplainHeatBadgeTakeThis", "width": 204, "text": "The HEAT BADGE lets your LEVELER train"}
+{"file": "data/maps/LavaridgeTown_Gym_1F/scripts.inc", "label": "LavaridgeTown_Gym_1F_Text_ExplainCameruptite", "width": 205, "text": "Cameruptite lets Camerupt Mega Evolve."}
+{"file": "data/maps/LavaridgeTown_Gym_1F/scripts.inc", "label": "LavaridgeTown_Gym_1F_Text_FlanneryPostRematch", "width": 201, "text": "It's not often I get to enjoy a battle"}
+{"file": "data/maps/PetalburgCity_Gym/scripts.inc", "label": "PetalburgCity_Gym_Text_NextGymLavaridge", "width": 208, "text": "Earn that fourth BADGE, then come home."}
+{"file": "data/maps/PetalburgCity_Gym/scripts.inc", "label": "PetalburgCity_Gym_Text_ParkerPostBattle", "width": 204, "text": "WIDE GUARD can stop both EARTHQUAKES."}
+{"file": "data/maps/Route118/scripts.inc", "label": "Route118_Text_MagikarpGuyDecline", "width": 208, "text": "No hurry. The river and my team will wait."}
+{"file": "data/maps/Route119/scripts.inc", "label": "Route119_Text_ScottWayToGoBeSeeingYou", "width": 210, "text": "You just beat that TRAINER, didn't you?"}
+{"file": "data/maps/Route119/scripts.inc", "label": "Route119_Text_ScottWayToGoBeSeeingYou", "width": 205, "text": "I expect that you'll do well at the GYM."}
+{"file": "data/maps/Route119/scripts.inc", "label": "Route119_Text_CanYourMonMakeSecretBase", "width": 201, "text": "Can your POKéMON use its SECRET POWER"}
+{"file": "data/maps/Route119_WeatherInstitute_1F/scripts.inc", "label": "Route119_WeatherInstitute_1F_Text_EveryoneWentUpstairs", "width": 208, "text": "Those AQUA people took the researchers"}
+{"file": "data/maps/Route119_WeatherInstitute_1F/scripts.inc", "label": "Route119_WeatherInstitute_1F_Text_ProfStudyingRain", "width": 206, "text": "But if it keeps raining, people will be in"}
+{"file": "data/maps/Route119_WeatherInstitute_2F/scripts.inc", "label": "Route119_WeatherInstitute_2F_Text_TeamMagmaJustPassedBy", "width": 206, "text": "were searching for an ancient BLUE ORB."}
+{"file": "data/maps/Route119_WeatherInstitute_2F/scripts.inc", "label": "Route119_WeatherInstitute_2F_Text_RevealGlassPurpose", "width": 207, "text": "This REVEAL GLASS changes the forms of"}
+{"file": "data/maps/Route119_WeatherInstitute_2F/scripts.inc", "label": "Route119_WeatherInstitute_2F_Text_GroudonWeather", "width": 204, "text": "Presently, a drought has been recorded"}
+{"file": "data/maps/Route120/scripts.inc", "label": "Route120_Text_StevenGreeting", "width": 203, "text": "There's something here that you can't"}
+{"file": "data/maps/Route120/scripts.inc", "label": "Route120_Text_StevenUsedDevonScope", "width": 204, "text": "An invisible POKéMON became completely"}
+{"file": "data/maps/Route120/scripts.inc", "label": "Kecleon_Text_UseDevonScopeMonAttacked", "width": 204, "text": "An invisible POKéMON became completely"}
+{"file": "data/maps/FortreeCity/scripts.inc", "label": "FortreeCity_Text_UsedDevonScopePokemonFled", "width": 204, "text": "An invisible POKéMON became completely"}
+{"file": "data/maps/FortreeCity_Gym/scripts.inc", "label": "FortreeCity_Gym_Text_HumbertoIntro", "width": 208, "text": "and CORVIKNIGHT returns what you send."}
+{"file": "data/maps/FortreeCity_House1/scripts.inc", "label": "FortreeCity_House1_EventScript_MegaGift_MILOTICITE_Text", "width": 207, "text": "remember the patient work of raising it."}
+{"file": "data/maps/FortreeCity_Mart/scripts.inc", "label": "FortreeCity_Mart_Text_RareCandyMakesMonGrow", "width": 203, "text": "The LEVELER raises your whole party to"}
+{"file": "data/maps/FortreeCity_PokemonCenter_1F/scripts.inc", "label": "FortreeCity_PokemonCenter_1F_Text_RecordCornerIsNeat", "width": 204, "text": "It's pretty neat. It mixes and matches"}
+{"file": "data/maps/ScorchedSlab_B2F/scripts.inc", "label": "ScorchedSlab_B2F_Text_HeatranCaught", "width": 210, "text": "These caves have shared quite a secret!"}
+{"file": "data/maps/RustboroCity_Mart/scripts.inc", "label": "RustboroCity_Mart_Text_MoveSpecialist", "width": 204, "text": "I sell evolution stones for ¥3000 each."}
+{"file": "data/maps/LilycoveCity_DepartmentStore_4F/scripts.inc", "label": "LilycoveCity_DepartmentStore_4F_Text_Woman", "width": 207, "text": "I found an evolution item on my travels."}
+{"file": "data/maps/LilycoveCity_DepartmentStore_1F/scripts.inc", "label": "LilycoveCity_DepartmentStore_1F_Text_WelcomeToDeptStore", "width": 205, "text": "Welcome to LILYCOVE DEPARTMENT STORE."}
+{"file": "data/maps/LilycoveCity_DepartmentStore_1F/scripts.inc", "label": "LilycoveCity_DepartmentStore_1F_Text_IBuyAllSortsOfThings", "width": 201, "text": "STORE, I always end up buying all sorts"}
+{"file": "data/maps/LilycoveCity_DepartmentStore_1F/scripts.inc", "label": "LilycoveCity_DepartmentStore_1F_Text_BuyingSomethingForAzumarill", "width": 202, "text": "I'm buying something for my AZUMARILL"}
+{"file": "data/maps/SlateportCity/scripts.inc", "label": "SlateportCity_Text_CatchingGuruSellWhatYouNeed", "width": 203, "text": "The right BALL can turn a rare sighting"}
+{"file": "data/maps/SlateportCity/scripts.inc", "label": "SlateportCity_Text_WonderIfLighthouseStartlesPokemon", "width": 202, "text": "I wonder if it doesn't startle POKéMON"}
+{"file": "data/maps/SlateportCity/scripts.inc", "label": "SlateportCity_Text_VisitedMuseumOften", "width": 203, "text": "I used to dream about the mysteries of"}
+{"file": "data/maps/SlateportCity/scripts.inc", "label": "SlateportCity_Text_RemindsMeOfLongLineForGames", "width": 204, "text": "It reminds me of the times I lined up to"}
+{"file": "data/maps/SlateportCity/scripts.inc", "label": "SlateportCity_Text_ShouldveBroughtMyGameBoy", "width": 210, "text": "Advance so I wouldn't get bored in line…"}
+{"file": "data/maps/SlateportCity/scripts.inc", "label": "SlateportCity_Text_OhPlayerWeMadeDiscovery", "width": 201, "text": "We think it's the habitat of a POKéMON"}
+{"file": "data/maps/SlateportCity/scripts.inc", "label": "SlateportCity_Text_OhPlayerWeMadeDiscovery", "width": 201, "text": "that's said to have been long extinct."}
+{"file": "data/maps/ShoalCave_LowTideEntranceRoom/scripts.inc", "label": "ShoalCave_Text_RegionalEvolutions", "width": 205, "text": "Level DEWOTT anywhere in SHOAL CAVE at"}
+{"file": "data/maps/ShoalCave_LowTideEntranceRoom/scripts.inc", "label": "ShoalCave_Text_RegionalEvolutions", "width": 205, "text": "Level BERGMITE in the low-tide ice room"}
+{"file": "data/maps/ShoalCave_LowTideEntranceRoom/scripts.inc", "label": "ShoalCave_Text_RegionalEvolutions", "width": 204, "text": "at Lv. 37 or higher for Hisuian AVALUGG."}
+{"file": "data/maps/ShoalCave_LowTideEntranceRoom/scripts.inc", "label": "ShoalCave_Text_RegionalEvolutions", "width": 201, "text": "Elsewhere they take their usual forms."}
+{"file": "data/maps/ShoalCave_LowTideEntranceRoom/scripts.inc", "label": "ShoalCave_Text_RegionalEvolutions", "width": 201, "text": "ice room. It becomes MR. RIME at Lv. 42."}
+{"file": "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc", "label": "BattleFrontier_ExchangeServiceCorner_Text_ItemsWillGetMonTougher", "width": 207, "text": "Evolution tools cost cash at specialist"}
+{"file": "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc", "label": "BattleFrontier_ExchangeServiceCorner_Text_DreamBallDesc", "width": 207, "text": "A BALL that excels on sleeping POKéMON."}
+{"file": "data/scripts/safari_zone.inc", "label": "SafariZone_North_Text_Fisherman", "width": 201, "text": "I'm on a mission to find WATER POKéMON"}
+{"file": "data/scripts/safari_zone.inc", "label": "SafariZone_North_Text_Fisherman", "width": 203, "text": "Do you have any idea where the lake is?"}
+{"file": "data/scripts/safari_zone.inc", "label": "SafariZone_North_Text_Man", "width": 210, "text": "I'm going to catch a lot of rare POKéMON"}
+{"file": "data/scripts/safari_zone.inc", "label": "SafariZone_RestHouse_Text_Youngster", "width": 204, "text": "You can improve your chances of making"}
+{"file": "data/scripts/safari_zone.inc", "label": "SafariZone_RestHouse_Text_PsychicM", "width": 201, "text": "Looking for Alolan forms? RAICHU lives"}
+{"file": "data/scripts/safari_zone.inc", "label": "SafariZone_RestHouse_Text_FatMan", "width": 202, "text": "Try throwing the same flavor in battle."}
+{"file": "data/scripts/safari_zone.inc", "label": "SafariZone_RestHouse_Text_FatMan", "width": 207, "text": "change battle sets. The FEEDER's treat"}
+{"file": "data/scripts/safari_zone.inc", "label": "SafariZone_Northeast_Text_Boy", "width": 204, "text": "I only have a couple SAFARI BALLS left."}
+{"file": "data/text/shoal_cave.inc", "label": "ShoalCave_Text_Materials", "width": 202, "text": "Your first collection earns GLALITITE,"}
+{"file": "data/text/shoal_cave.inc", "label": "ShoalCave_Text_NoRoom", "width": 204, "text": "Keep your materials until there's room."}
+{"file": "data/text/trainers.inc", "label": "Route111_Text_BeckyPostBattle", "width": 201, "text": "If they can find fossils in the desert,"}
+{"file": "data/text/trainers.inc", "label": "Route111_Text_DustyDefeat", "width": 201, "text": "I've not searched for strong POKéMON."}
+{"file": "data/text/trainers.inc", "label": "Route111_Text_WiltonIntro", "width": 203, "text": "COFAGRIGUS gives your attacker MUMMY,"}
+{"file": "data/text/trainers.inc", "label": "Route111_Text_WiltonPostBattle", "width": 202, "text": "habit before a Ghost breaks your team."}
+{"file": "data/text/trainers.inc", "label": "Route112_Text_BricePostBattle", "width": 205, "text": "Hahahahaha! Something flew up my nose!"}
+{"file": "data/text/trainers.inc", "label": "Route112_Text_LarryPostBattle", "width": 206, "text": "I'm not crying because I miss my mommy!"}
+{"file": "data/text/trainers.inc", "label": "Route112_Text_CarolPostBattle", "width": 208, "text": "It doesn't matter if you're good or bad"}
+{"file": "data/text/trainers.inc", "label": "Route113_Text_JaylenPostBattle", "width": 213, "text": "That's good for me--I can't stand heat!"}
+{"file": "data/text/trainers.inc", "label": "Route113_Text_ToriDefeat", "width": 206, "text": "TORI: We lost… It's boring, so I'm going"}
+{"file": "data/text/trainers.inc", "label": "Route113_Text_WyattIntro", "width": 203, "text": "Even though I just caught my POKéMON?"}
+{"file": "data/text/trainers.inc", "label": "Route114_Text_LennyPostBattle", "width": 202, "text": "When I was a wee tyke, I believed there"}
+{"file": "data/text/trainers.inc", "label": "Route114_Text_TyraNotEnoughMons", "width": 202, "text": "If you want to battle with us, just one"}
+{"file": "data/text/trainers.inc", "label": "Route118_Text_WadePostBattle", "width": 201, "text": "Come to think of it, fishing is a battle"}
+{"file": "data/text/trainers.inc", "label": "Route119_Text_CatherineIntro", "width": 205, "text": "Traveling light? CASTFORM changes with"}
+{"file": "data/text/trainers.inc", "label": "Route119_Text_CatherineRegister", "width": 204, "text": "It's a must-have tool for any TRAINER."}
+{"file": "data/text/trainers.inc", "label": "Route119_Text_CatherinePostRematch", "width": 204, "text": "In the same way that you, as a TRAINER,"}
+{"file": "data/text/trainers.inc", "label": "Route119_Text_ChrisIntro", "width": 205, "text": "Sure! I'll try out the POKéMON I caught"}
+{"file": "data/text/trainers.inc", "label": "Route119_Text_ChrisPostBattle", "width": 208, "text": "It's an indescribably luxuriant moment!"}
+{"file": "data/text/trainers.inc", "label": "Route119_Text_FabianPostBattle", "width": 202, "text": "A doubles team is a band: each part can"}
+{"file": "data/text/trainers.inc", "label": "Route120_Text_RobertRegister", "width": 201, "text": "I'd like to register you in my POKéNAV!"}
+{"file": "data/text/trainers.inc", "label": "Route120_Text_CalliePostBattle", "width": 202, "text": "They're cute the way they are, though."}
+{"file": "data/text/trainers.inc", "label": "Route121_Text_JoyPostBattle", "width": 207, "text": "JOY: Ehehe, I'll have to train with KATE,"}
+{"file": "data/text/trainers.inc", "label": "Route121_Text_CristinIntro", "width": 205, "text": "Five TRAINERS a day, that's my routine."}
+{"file": "data/text/trainers.inc", "label": "Route121_Text_PatPostBattle", "width": 202, "text": "love and care--I don't pick favorites."}
+{"file": "data/text/trainers.inc", "label": "Route124_Text_SpencerPostBattle", "width": 203, "text": "Many people lose their bearings at sea."}
+{"file": "data/text/trainers.inc", "label": "Route124_Text_LilaIntro", "width": 205, "text": "Here I am in the sea, but who's with me?"}
+{"file": "data/text/trainers.inc", "label": "Route124_Text_RoyIntro", "width": 201, "text": "ROY: My big sister is tough at POKéMON!"}
+{"file": "data/text/trainers.inc", "label": "Route124_Text_LilaRematchIntro", "width": 205, "text": "Here I am in the sea, but who's with me?"}
+{"file": "data/text/trainers.inc", "label": "Route125_Text_AuronPostBattle", "width": 201, "text": "Someone's been polluting these waves."}
+{"file": "data/text/trainers.inc", "label": "Route126_Text_BarryPostBattle", "width": 207, "text": "Look! Feast your eyes on this physique!"}
+{"file": "data/text/trainers.inc", "label": "Route126_Text_NikkiDefeat", "width": 206, "text": "My fantasy burst as if it were a bubble!"}
+{"file": "data/text/trainers.inc", "label": "Route127_Text_KojiRegister", "width": 205, "text": "This is what I do to people who beat me!"}
+{"file": "data/text/trainers.inc", "label": "Route127_Text_KojiRegister", "width": 207, "text": "I'll send you my barefoot training tips."}
+{"file": "data/text/trainers.inc", "label": "Route128_Text_IsaiahPostRematch", "width": 204, "text": "I'll eventually reach EVER GRANDE CITY"}
+{"file": "data/text/trainers.inc", "label": "Route128_Text_KatelynRegister", "width": 206, "text": "of this. Let's exchange training notes."}
+{"file": "data/text/trainers.inc", "label": "Route128_Text_AlexaIntro", "width": 210, "text": "We've trained for the LEAGUE for a year."}
+{"file": "data/text/trainers.inc", "label": "Route128_Text_AlexaIntro", "width": 206, "text": "FERALIGATR, SCIZOR… we can't lose now!"}
+{"file": "data/text/berries.inc", "label": "SootopolisCity_Text_LikeSeasonBornIn", "width": 209, "text": "If you're born in springtime, do you like"}
+{"file": "data/text/event_ticket_1.inc", "label": "EventTicket_Text_ShowOldSeaMap", "width": 207, "text": "I know someone who will help you better."}
+{"file": "data/text/event_ticket_1.inc", "label": "EventTicket_Text_ShowEonTicket", "width": 202, "text": "tiny spit of an island far in the south."}
+{"file": "data/text/event_ticket_1.inc", "label": "EventTicket_Text_ShowEonTicket", "width": 207, "text": "There's no telling what we'll encounter"}
+{"file": "data/text/tv.inc", "label": "LilycoveCity_ContestLobby_Text_InterviewRequest", "width": 202, "text": "If I may, would you be willing to answer"}
+{"file": "data/maps/LilycoveCity/scripts.inc", "label": "LilycoveCity_Text_AltarianiteKeeperExplain", "width": 203, "text": "ALTARIANITE lets ALTARIA Mega Evolve."}
+{"file": "data/maps/LilycoveCity/scripts.inc", "label": "LilycoveCity_Text_BrendanYouGoingToBattleFrontier", "width": 202, "text": "One more rebuild and I'm stronger than"}
+{"file": "data/maps/LilycoveCity/scripts.inc", "label": "LilycoveCity_Text_ChanceToDoBigThings", "width": 201, "text": "But being on TEAM AQUA, I know I'll get"}
+{"file": "data/maps/LilycoveCity/scripts.inc", "label": "LilycoveCity_Text_GoingToMoveDeleterForHMs", "width": 202, "text": "PC helps me rearrange my team's moves."}
+{"file": "data/maps/LilycoveCity/scripts.inc", "label": "LilycoveCity_Text_SixtyYearsAgoHusbandProposed", "width": 204, "text": "It was sixty years ago that my husband"}
+{"file": "data/maps/LilycoveCity/scripts.inc", "label": "LilycoveCity_Text_FasterSpinBetterPokeblocks", "width": 201, "text": "People have to work together to get it"}
+{"file": "data/maps/LilycoveCity/scripts.inc", "label": "LilycoveCity_Text_FasterSpinBetterPokeblocks", "width": 202, "text": "better {POKEBLOCK}S you can get, I've heard."}
+{"file": "data/maps/LilycoveCity_ContestHall/scripts.inc", "label": "LilycoveCity_ContestHall_Text_DontAppreciateCuteLeechLife", "width": 208, "text": "But these mean people don't appreciate"}
+{"file": "data/maps/LilycoveCity_ContestHall/scripts.inc", "label": "LilycoveCity_ContestHall_Text_OverdidGrooming", "width": 205, "text": "My POKéMON's coat turned all scraggly…"}
+{"file": "data/maps/LilycoveCity_ContestLobby/scripts.inc", "label": "LilycoveCity_ContestLobby_Text_ShouldITakePaintingToMuseum", "width": 202, "text": "A work of this caliber, it wouldn't look"}
+{"file": "data/maps/LilycoveCity_CoveLilyMotel_1F/scripts.inc", "label": "LilycoveCity_CoveLilyMotel_1F_Text_MonFoundLostItem", "width": 204, "text": "That's something. If we had some smart"}
+{"file": "data/maps/LilycoveCity_CoveLilyMotel_2F/scripts.inc", "label": "LilycoveCity_CoveLilyMotel_2F_Text_BuffelDefeat", "width": 202, "text": "You've given me something to think on!"}
+{"file": "data/maps/LilycoveCity_CoveLilyMotel_2F/scripts.inc", "label": "LilycoveCity_CoveLilyMotel_2F_Text_BuffelDecline", "width": 209, "text": "Return when you want a designer's test."}
+{"file": "data/maps/LilycoveCity_CoveLilyMotel_2F/scripts.inc", "label": "LilycoveCity_CoveLilyMotel_2F_Text_SnoozingPreferBattles", "width": 208, "text": "{PLAYER}{KUN}, I hope you'll enjoy everything"}
+{"file": "data/maps/LilycoveCity_CoveLilyMotel_2F/scripts.inc", "label": "LilycoveCity_CoveLilyMotel_2F_Text_ContestsDoTakeStrategy", "width": 204, "text": "Devising CONTEST strategies is one way"}
+{"file": "data/maps/LilycoveCity_CoveLilyMotel_2F/scripts.inc", "label": "LilycoveCity_CoveLilyMotel_2F_Text_ContestsDoTakeStrategy", "width": 201, "text": "of becoming a better TRAINER, I'd say."}
+{"file": "data/maps/LilycoveCity_House3/scripts.inc", "label": "LilycoveCity_House3_Text_ExplainPokeblocks", "width": 203, "text": "Don't be stingy--the kinds of BERRIES"}
+{"file": "data/maps/LilycoveCity_House3/scripts.inc", "label": "LilycoveCity_House3_Text_HappyToHaveQuadruplets", "width": 205, "text": "When my wife gave birth to quadruplets,"}
+{"file": "data/maps/LilycoveCity_House3/scripts.inc", "label": "LilycoveCity_House3_Text_GoingToWinMultiBattles", "width": 204, "text": "We're having MULTI BATTLES, but I know"}
+{"file": "data/maps/LilycoveCity_LilycoveMuseum_1F/scripts.inc", "label": "LilycoveCity_LilycoveMuseum_1F_Text_PaintingOfLegendaryPokemon", "width": 203, "text": "It's a painting of a legendary POKéMON"}
+{"file": "data/maps/LilycoveCity_LilycoveMuseum_1F/scripts.inc", "label": "LilycoveCity_LilycoveMuseum_1F_Text_ThisMuseumIsInspiration", "width": 201, "text": "And the CURATOR is a wonderful person."}
+{"file": "data/maps/LilycoveCity_LilycoveMuseum_1F/scripts.inc", "label": "LilycoveCity_LilycoveMuseum_1F_Text_CuratorHasBeenCheerful", "width": 202, "text": "I bet something good happened for him."}
+{"file": "data/maps/LilycoveCity_LilycoveMuseum_1F/scripts.inc", "label": "LilycoveCity_LilycoveMuseum_1F_Text_MuseumTouristDestination", "width": 209, "text": "This is what I've heard--a lone TRAINER"}
+{"file": "data/maps/LilycoveCity_LilycoveMuseum_2F/scripts.inc", "label": "LilycoveCity_LilycoveMuseum_2F_Text_ExplainExhibitHall", "width": 202, "text": "Art, after all, is not restricted to old,"}
+{"file": "data/maps/LilycoveCity_LilycoveMuseum_2F/scripts.inc", "label": "LilycoveCity_LilycoveMuseum_2F_Text_ExplainExhibitHall", "width": 203, "text": "This exhibit hall, I wish to fill it with…"}
+{"file": "data/maps/LilycoveCity_LilycoveMuseum_2F/scripts.inc", "label": "LilycoveCity_LilycoveMuseum_2F_Text_ItsPinkPictureFrame", "width": 202, "text": "It's a picture frame with pink-colored"}
+{"file": "data/maps/LilycoveCity_MoveDeletersHouse/scripts.inc", "label": "LilycoveCity_MoveDeletersHouse_Text_ICanMakeMonForgetMove", "width": 203, "text": "I can make POKéMON forget their moves."}
+{"file": "data/maps/LilycoveCity_MoveDeletersHouse/scripts.inc", "label": "LilycoveCity_MoveDeletersHouse_Text_MonsMoveShouldBeForgotten", "width": 208, "text": "Hm! {STR_VAR_1}'s {STR_VAR_2}?"}
+{"file": "data/maps/LilycoveCity_MoveDeletersHouse/scripts.inc", "label": "LilycoveCity_MoveDeletersHouse_Text_CantForgetSurf", "width": 207, "text": "Your {STR_VAR_1} doesn't seem willing"}
+{"file": "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.inc", "label": "LilycoveCity_PokemonTrainerFanClub_Text_HearingAboutToughNewTrainer", "width": 203, "text": "This TRAINER's supposed to be beating"}
+{"file": "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.inc", "label": "LilycoveCity_PokemonTrainerFanClub_Text_YouveSurpassedYourFather", "width": 204, "text": "I'm telling you, so there's no question"}
+{"file": "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.inc", "label": "LilycoveCity_PokemonTrainerFanClub_Text_YoureAmazingAfterAll", "width": 206, "text": "It looks like my eyes didn't deceive me."}
+{"file": "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.inc", "label": "LilycoveCity_PokemonTrainerFanClub_Text_YouChangedMyMind", "width": 202, "text": "I'd like you to tell me how you managed"}
+{"file": "data/maps/LilycoveCity_PokemonTrainerFanClub/scripts.inc", "label": "LilycoveCity_PokemonTrainerFanClub_Text_TrainerIsStandout", "width": 204, "text": "That toughness, it's simply not normal."}
+{"file": "data/scripts/contest_hall.inc", "label": "LilycoveCity_ContestLobby_Text_ExplainContestRanks", "width": 201, "text": "CONTEST may move up to the SUPER Rank"}
+{"file": "data/scripts/contest_hall.inc", "label": "LilycoveCity_ContestLobby_Text_EnterWhichContest1", "width": 201, "text": "Which CONTEST would you like to enter?"}
+{"file": "data/scripts/contest_hall.inc", "label": "LilycoveCity_ContestLobby_Text_EnterWhichPokemon1", "width": 201, "text": "Which POKéMON would you like to enter?"}
+{"file": "data/scripts/contest_hall.inc", "label": "LilycoveCity_ContestLobby_Text_EggCannotTakePart", "width": 201, "text": "I'm sorry, but an EGG cannot take part"}
+{"file": "data/scripts/contest_hall.inc", "label": "LilycoveCity_ContestLobby_Text_EnterWhichContest2", "width": 201, "text": "Which CONTEST would you like to enter?"}
+{"file": "data/scripts/contest_hall.inc", "label": "LilycoveCity_ContestLobby_Text_EnterWhichPokemon2", "width": 201, "text": "Which POKéMON would you like to enter?"}
+{"file": "data/scripts/contest_hall.inc", "label": "LilycoveCity_ContestLobby_Text_EnterWhichContest3", "width": 201, "text": "Which CONTEST would you like to enter?"}
+{"file": "data/scripts/contest_hall.inc", "label": "LilycoveCity_ContestLobby_Text_EggCannotTakePart2", "width": 201, "text": "I'm sorry, but an EGG cannot take part"}
+{"file": "data/scripts/contest_hall.inc", "label": "LilycoveCity_ContestLobby_Text_EnterWhichPokemon3", "width": 201, "text": "Which POKéMON would you like to enter?"}
+{"file": "data/scripts/contest_hall.inc", "label": "LilycoveCity_ContestLobby_Text_ExplainLinkContest", "width": 204, "text": "Participants are first asked to choose"}
+{"file": "data/scripts/berry_blender.inc", "label": "BerryBlender_Text_SetNewBlenderRecord", "width": 203, "text": "Okay! Today's going to be the day that"}
+{"file": "data/scripts/berry_blender.inc", "label": "BerryBlender_Text_LookGoodAtBlendingJoinUs", "width": 201, "text": "You look as if you're good at blending."}
+{"file": "data/maps/MtPyre_1F/scripts.inc", "label": "MtPyre_1F_Text_ComeToPayRespects", "width": 205, "text": "This mountain changes some evolutions."}
+{"file": "data/maps/MtPyre_6F/scripts.inc", "label": "MtPyre_6F_Text_PecharuntAwakens", "width": 204, "text": "spills from the tombstone--PECHARUNT!"}
+{"file": "data/maps/MtPyre_Summit/scripts.inc", "label": "MtPyre_Summit_Text_MagmaEmblemNoRoom", "width": 203, "text": "full. Make room, then speak to me again."}
+{"file": "data/maps/MagmaHideout_2F_2R/scripts.inc", "label": "MagmaHideout_2F_2R_Text_Grunt15Intro", "width": 203, "text": "Nothing personal. I'm following orders,"}
+{"file": "data/maps/MagmaHideout_2F_2R/scripts.inc", "label": "MagmaHideout_2F_2R_Text_Grunt15PostBattle", "width": 207, "text": "We dug up something huge down here, and"}
+{"file": "data/maps/MagmaHideout_2F_2R/scripts.inc", "label": "MagmaHideout_2F_2R_Text_Grunt15PostBattle", "width": 210, "text": "I don't know what happens next. I don't"}
+{"file": "data/maps/MagmaHideout_2F_2R/scripts.inc", "label": "MagmaHideout_2F_2R_Text_Grunt7Intro", "width": 208, "text": "You feel those tremors? People say it's"}
+{"file": "data/maps/MagmaHideout_2F_2R/scripts.inc", "label": "MagmaHideout_2F_2R_Text_Grunt8PostBattle", "width": 203, "text": "Between you and me? I've got a feeling"}
+{"file": "data/maps/MagmaHideout_3F_1R/scripts.inc", "label": "MagmaHideout_3F_1R_Text_Grunt9Intro", "width": 203, "text": "Guard posting next to the lava. My left"}
+{"file": "data/maps/MagmaHideout_3F_1R/scripts.inc", "label": "MagmaHideout_3F_1R_Text_Grunt9Intro", "width": 204, "text": "At least fighting you means I can move."}
+{"file": "data/maps/MagmaHideout_3F_2R/scripts.inc", "label": "MagmaHideout_3F_2R_Text_Grunt10PostBattle", "width": 204, "text": "You know, losing to you cleared my mind."}
+{"file": "data/maps/AquaHideout_1F/scripts.inc", "label": "AquaHideout_1F_Text_BossIsOnRoute122", "width": 202, "text": "Our BOSS isn't here! He's on his way to"}
+{"file": "data/maps/AquaHideout_B1F/scripts.inc", "label": "AquaHideout_B1F_Text_Grunt2Intro", "width": 209, "text": "Want the HIDEOUT's secret? Then you go"}
+{"file": "data/maps/AquaHideout_B1F/scripts.inc", "label": "AquaHideout_B1F_Text_Grunt7Intro", "width": 201, "text": "Hey! Honest question. Whose uniform is"}
+{"file": "data/maps/AquaHideout_B2F/scripts.inc", "label": "AquaHideout_B2F_Text_Grunt8Intro", "width": 207, "text": "First thing they taught me here was how"}
+{"file": "data/maps/SlateportCity_Harbor/scripts.inc", "label": "SlateportCity_Harbor_Text_AbnormalWeather", "width": 204, "text": "Speaking of weather, I heard something"}
+{"file": "data/maps/SlateportCity_Harbor/scripts.inc", "label": "SlateportCity_Harbor_Text_AbnormalWeather", "width": 207, "text": "You should visit the WEATHER INSTITUTE"}
+{"file": "data/maps/SlateportCity_Harbor/scripts.inc", "label": "SlateportCity_Harbor_Text_CaptSternWhyStealMySubmarine", "width": 202, "text": "ARCHIE named LILYCOVE. Reach the city"}
+{"file": "data/maps/MossdeepCity/scripts.inc", "label": "MossdeepCity_Text_MossdeepTargetedByMagma", "width": 206, "text": "If you want to know what they're up to,"}
+{"file": "data/maps/MossdeepCity_Gym/scripts.inc", "label": "MossdeepCity_Gym_Text_GymGuideAdvice", "width": 201, "text": "If you want to win, you'll need to show"}
+{"file": "data/maps/MossdeepCity_Gym/scripts.inc", "label": "MossdeepCity_Gym_Text_SamanthaPostBattle", "width": 203, "text": "MAGIC BOUNCE returns your hazards and"}
+{"file": "data/maps/MossdeepCity_Gym/scripts.inc", "label": "MossdeepCity_Gym_Text_SylviaIntro", "width": 204, "text": "DONDOZO and TATSUGIRI wait in reserve."}
+{"file": "data/maps/MossdeepCity_Gym/scripts.inc", "label": "MossdeepCity_Gym_Text_SylviaPostBattle", "width": 209, "text": "Inside DONDOZO, TATSUGIRI can't be hit."}
+{"file": "data/maps/MossdeepCity_Gym/scripts.inc", "label": "MossdeepCity_Gym_Text_ExplainMindBadgeTakeThis", "width": 204, "text": "TATE: The MIND BADGE lets your LEVELER"}
+{"file": "data/maps/MossdeepCity_Gym/scripts.inc", "label": "MossdeepCity_Gym_Text_ExplainMetagrossite", "width": 207, "text": "Tate: Metagrossite lets Metagross Mega"}
+{"file": "data/maps/MossdeepCity_House1/scripts.inc", "label": "MossdeepCity_House1_Text_HusbandCanTellPokeblockMonLikes", "width": 201, "text": "CYNTHIA is our guest while she studies"}
+{"file": "data/maps/MossdeepCity_House1/scripts.inc", "label": "MossdeepCity_House1_Text_CynthiaChallenge", "width": 208, "text": "I'm CYNTHIA. I study myths, but battles"}
+{"file": "data/maps/MossdeepCity_House1/scripts.inc", "label": "MossdeepCity_House1_Text_CynthiaChallenge", "width": 207, "text": "reveal how a Trainer reasons under fire."}
+{"file": "data/maps/MossdeepCity_House1/scripts.inc", "label": "MossdeepCity_House1_Text_CynthiaChallenge", "width": 204, "text": "You are HOENN's Champion. Will you face"}
+{"file": "data/maps/MossdeepCity_House1/scripts.inc", "label": "MossdeepCity_House1_Text_CynthiaNotReady", "width": 201, "text": "These kind hosts gave me a quiet place"}
+{"file": "data/maps/MossdeepCity_Mart/scripts.inc", "label": "MossdeepCity_Mart_Text_ReviveIsFantastic", "width": 205, "text": "But be careful, REVIVE doesn't restore"}
+{"file": "data/maps/MossdeepCity_SpaceCenter_1F/scripts.inc", "label": "MossdeepCity_SpaceCenter_1F_Text_RocketLaunchDemandsPerfection", "width": 207, "text": "Not even a 1% margin of error is allowed."}
+{"file": "data/maps/MossdeepCity_SpaceCenter_1F/scripts.inc", "label": "MossdeepCity_SpaceCenter_1F_Text_RocketLaunchDemandsPerfection", "width": 201, "text": "is useless if 1% happens to be no good."}
+{"file": "data/maps/MossdeepCity_SpaceCenter_1F/scripts.inc", "label": "MossdeepCity_SpaceCenter_1F_Text_Grunt3Intro", "width": 205, "text": "We're here for the rocket fuel, exactly"}
+{"file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc", "label": "MossdeepCity_SpaceCenter_2F_Text_StevenWhyStealRocketFuel", "width": 203, "text": "GROUDON. What are you truly targeting?"}
+{"file": "data/maps/MossdeepCity_StevensHouse/scripts.inc", "label": "MossdeepCity_StevensHouse_Text_NoSpaceForAnotherMon", "width": 202, "text": "There is no space for another POKéMON."}
+{"file": "data/maps/Route124_DivingTreasureHuntersHouse/scripts.inc", "label": "Route124_DivingTreasureHuntersHouse_Text_ThatsAShardIllTradeYou", "width": 201, "text": "That's a SHARD! I'm looking for those!"}
+{"file": "data/maps/Route124_DivingTreasureHuntersHouse/scripts.inc", "label": "Route124_DivingTreasureHuntersHouse_Text_ComeBackIfYouChangeMind", "width": 207, "text": "Well, if you change your mind, come back."}
+{"file": "data/maps/Route128/scripts.inc", "label": "Route128_Text_StevenWholeWorldWillDrown", "width": 207, "text": "What in the world is taking place there?"}
+{"file": "data/maps/Route128/scripts.inc", "label": "Route128_Text_StevenImGoingToSootopolis", "width": 203, "text": "then west to ROUTE 126's white crater."}
+{"file": "data/maps/SootopolisCity/scripts.inc", "label": "SootopolisCity_Text_GiantPokemonSuddenlyAppeared", "width": 205, "text": "These giant POKéMON suddenly appeared"}
+{"file": "data/maps/SootopolisCity/scripts.inc", "label": "SootopolisCity_Text_GreenOneSettlesThings", "width": 207, "text": "it's the green one that settles things!"}
+{"file": "data/maps/SootopolisCity/scripts.inc", "label": "SootopolisCity_Text_NoOrdinaryTourist", "width": 206, "text": "You've come all the way to SOOTOPOLIS?"}
+{"file": "data/maps/SootopolisCity/scripts.inc", "label": "SootopolisCity_Text_ExplainWaterfallGoToGym", "width": 206, "text": "And where does one get the RAIN BADGE?"}
+{"file": "data/maps/SootopolisCity/scripts.inc", "label": "SootopolisCity_Text_ExplainWaterfallGoToGym", "width": 204, "text": "When you're all set to go, step through"}
+{"file": "data/maps/SootopolisCity_Gym_1F/scripts.inc", "label": "SootopolisCity_Gym_1F_Text_GymGuidePostVictory", "width": 208, "text": "If you've gotten all the BADGES, you're"}
+{"file": "data/maps/SootopolisCity_Gym_1F/scripts.inc", "label": "SootopolisCity_Gym_1F_Text_ExplainRainBadgeTakeThis", "width": 204, "text": "The RAIN BADGE lets your LEVELER train"}
+{"file": "data/maps/SootopolisCity_Gym_1F/scripts.inc", "label": "SootopolisCity_Gym_1F_Text_JuanRematchNeedTwoMons", "width": 203, "text": "I shall be delighted to dance with you…"}
+{"file": "data/maps/SootopolisCity_Gym_B1F/scripts.inc", "label": "SootopolisCity_Gym_B1F_Text_CrissyIntro", "width": 208, "text": "You came all the way here, but you won't"}
+{"file": "data/maps/SootopolisCity_Gym_B1F/scripts.inc", "label": "SootopolisCity_Gym_B1F_Text_TiffanyIntro", "width": 203, "text": "A TRAINER putting on that performance"}
+{"file": "data/maps/SootopolisCity_Gym_B1F/scripts.inc", "label": "SootopolisCity_Gym_B1F_Text_TiffanyPostBattle", "width": 201, "text": "you are as a TRAINER has nothing to do"}
+{"file": "data/maps/SootopolisCity_Gym_B1F/scripts.inc", "label": "SootopolisCity_Gym_B1F_Text_BethanyPostBattle", "width": 206, "text": "I wish I could forget about lost causes"}
+{"file": "data/maps/SootopolisCity_House3/scripts.inc", "label": "SootopolisCity_House3_Text_JuanHasManyFansDoYou", "width": 202, "text": "You're a POKéMON TRAINER, aren't you?"}
+{"file": "data/maps/SootopolisCity_LotadAndSeedotHouse/scripts.inc", "label": "SootopolisCity_LotadAndSeedotHouse_Text_PleaseShowMeBigLotad", "width": 203, "text": "But that's wrong! Everyone knows that"}
+{"file": "data/maps/SootopolisCity_PokemonCenter_1F/scripts.inc", "label": "SootopolisCity_PokemonCenter_1F_Text_WallaceToughestInHoenn", "width": 204, "text": "But the ELITE FOUR… They're said to be"}

@@ -1,0 +1,9 @@
+{
+  "schema_version": 2,
+  "inputs_sha256": "f19bf2534adc837dc1d635debfdbe828fdd85442c98a60dcb8b2705267405d32",
+  "input_count": 28982,
+  "artifacts": {
+    "pokeemerald-champions-7.0-release.gba": "33936c50124fca3e1150240bcb65ef540c559ebc3e1174887a23a94ffcc8dc58",
+    "pokeemerald-champions-7.0-release.elf": "c2683afbdda8bed5b2e2e87693141db7649fdd7fab7075695967fc4182efe06f"
+  }
+}

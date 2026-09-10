@@ -1,0 +1,449 @@
+arm-none-eabi-cpp -iquote include -Wno-trigraphs -DMODERN=1 -DTESTING=0 -DEMERALD -std=gnu17 -DEC_HEADLESS_FIXTURES=0 -traditional-cpp - < src/data/trainers.party | tools/trainerproc/trainerproc -o src/data/trainers.h -i src/data/trainers.party -
+tools/scaninc/scaninc -M build/emerald-test/test/test_runner_battle.d -g build/assets -I include -I tools/agbcc/include test/test_runner_battle.c
+tools/scaninc/scaninc -M build/emerald-test/src/emerald_champions_battle_plan.d -g build/assets -I include -I tools/agbcc/include src/emerald_champions_battle_plan.c
+tools/scaninc/scaninc -M build/emerald-test/src/data.d -g build/assets -I include -I tools/agbcc/include src/data.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/data.o src/data.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/emerald_champions_battle_plan.o src/emerald_champions_battle_plan.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/test_runner_battle.o test/test_runner_battle.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 4
+[0] EC live review Joey timing: complete cold decision with six-player party: [32mPASS[0m
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Fake Out target=0
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Headbutt target=2
+AI decision turn=2 actor=1 move=Nuzzle target=2
+AI decision turn=2 actor=3 move=Headbutt target=0
+E20_COMPLETE_TIMING trainer=322 setupFrames=6 decisionFrames=50 completeFrames=56 warmFrames=49 first=3 moves=Nuzzle/Headbutt
+[3] EC live review Joey Drum: actual full reserve menus under setup opportunity and pressure: [32mPASS[0m
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Super Fang target=2
+AI decision turn=1 actor=2 move=Bulk Up target=2
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Population Bomb target=2
+AI decision turn=2 actor=3 move=Extreme Speed target=0
+JOEY_DRUM_AI pressure=0 moves=Super Fang/Protect HP=19/42 foes=53/29 item=524 stage=6 faints=0/0
+AI decision turn=1 actor=0 move=Thunderbolt target=3
+AI decision turn=1 actor=1 move=Super Fang target=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Population Bomb target=2
+AI decision turn=2 actor=3 move=Extreme Speed target=0
+JOEY_DRUM_AI pressure=1 moves=Super Fang/Protect HP=37/42 foes=53/29 item=524 stage=6 faints=0/0
+[0] EC live review Joey Drum: native Figy restores HP after actual Gluttony setup: [32mPASS[0m
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Belly Drum target=3
+JOEY_DRUM_NATIVE berry=0 maxHP=42 cost=21 heal=0 HP=21 speed=23 ability=82
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Belly Drum target=3
+JOEY_DRUM_NATIVE berry=1 maxHP=42 cost=21 heal=-14 HP=35 speed=23 ability=82
+[2] EC live review Joey sleep window: actual reserve setup against sleeping or awake pressure: [32mPASS[0m
+AI decision turn=1 actor=0 move=Thunderbolt target=3
+AI decision turn=1 actor=1 move=Super Fang target=2
+AI decision turn=1 actor=2 move=Drain Punch target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=3 move=Extreme Speed target=0
+JOEY_SLEEP_WINDOW asleep=0 turns=1 moves=-/Protect ownHP=0/42 foes=53/47 stage=6 item=524 sleep=0/0 faints=1/0
+AI decision turn=1 actor=0 move=Thunderbolt target=3
+AI decision turn=1 actor=1 move=Super Fang target=2
+AI decision turn=1 actor=2 move=Drain Punch target=1
+AI decision turn=1 actor=3 move=Extreme Speed target=0
+AI decision turn=2 actor=1 move=Population Bomb target=2
+AI decision turn=2 actor=3 move=Extreme Speed target=0
+JOEY_SLEEP_WINDOW asleep=1 turns=1 moves=Super Fang/Extreme Speed ownHP=37/42 foes=44/29 stage=6 item=524 sleep=2/2 faints=0/0
+AI decision turn=1 actor=0 move=Thunderbolt target=3
+AI decision turn=1 actor=1 move=Super Fang target=2
+AI decision turn=1 actor=2 move=Drain Punch target=1
+AI decision turn=1 actor=3 move=Extreme Speed target=0
+AI decision turn=2 actor=0 move=Thunderbolt target=3
+AI decision turn=2 actor=1 move=Population Bomb target=2
+AI decision turn=2 actor=2 move=Drain Punch target=1
+AI decision turn=2 actor=3 move=Extreme Speed target=0
+AI decision turn=3 actor=1 move=Population Bomb target=0
+AI decision turn=3 actor=3 move=Extreme Speed target=0
+JOEY_SLEEP_WINDOW asleep=1 turns=2 moves=Population Bomb/Extreme Speed ownHP=37/42 foes=35/0 stage=6 item=524 sleep=1/0 faints=0/1
+[3] EC live review Joey reserves: physical pressure and Helmet contact counter: [32mPASS[0m
+JOEY_RESERVE_INPUT helmet=0 owner=0 slot=0 species=417 level=14 HP=53 Atk=18 Def=40 SpA=21 SpD=34 Speed=35 item=523 ability=10 moves=85/162/266/182
+JOEY_RESERVE_INPUT helmet=0 owner=0 slot=1 species=532 level=14 HP=58 Atk=31 Def=24 SpA=14 SpD=29 Speed=19 item=494 ability=89 moves=409/8/339/182
+JOEY_RESERVE_INPUT helmet=0 owner=1 slot=0 species=1308 level=12 HP=37 Atk=28 Def=19 SpA=16 SpD=19 Speed=37 item=474 ability=20 moves=788/162/227/182
+JOEY_RESERVE_INPUT helmet=0 owner=1 slot=1 species=263 level=12 HP=42 Atk=25 Def=18 SpA=13 SpD=18 Speed=23 item=524 ability=82 moves=187/245/402/182
+JOEY_RESERVE_INPUT helmet=0 owner=1 slot=2 species=1305 level=12 HP=0 Atk=28 Def=13 SpA=16 SpD=14 Speed=33 item=481 ability=89 moves=252/609/183/528
+JOEY_RESERVE_INPUT helmet=0 owner=1 slot=3 species=1298 level=12 HP=0 Atk=29 Def=18 SpA=15 SpD=19 Speed=21 item=494 ability=47 moves=29/583/281/182
+AI decision turn=1 actor=0 move=Super Fang target=3
+AI decision turn=1 actor=1 move=Super Fang target=2
+AI decision turn=1 actor=2 move=Drain Punch target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=3 move=Extreme Speed target=0
+JOEY_RESERVE_AFTER helmet=0 turns=1 nativeTurns=1 active=1308/263 HP=0/42 foes=53/47 LAST=-/Protect foeLAST=Super Fang/Drain Punch ownAtk=6/6 ownSpeed=37/23 ownStatus=0/0 confusion=0/0 items=474/524 foeItems=523/494 encore=0/0 faints=1/0
+JOEY_RESERVE_PARTY helmet=0 turns=1 slot=0 species=1308 HP=0/37 item=474 status=0
+JOEY_RESERVE_PARTY helmet=0 turns=1 slot=1 species=263 HP=42/42 item=524 status=0
+JOEY_RESERVE_PARTY helmet=0 turns=1 slot=2 species=1305 HP=0/36 item=481 status=0
+JOEY_RESERVE_PARTY helmet=0 turns=1 slot=3 species=1298 HP=0/41 item=494 status=0
+JOEY_RESERVE_INPUT helmet=0 owner=0 slot=0 species=417 level=14 HP=53 Atk=18 Def=40 SpA=21 SpD=34 Speed=35 item=523 ability=10 moves=85/162/266/182
+JOEY_RESERVE_INPUT helmet=0 owner=0 slot=1 species=532 level=14 HP=58 Atk=31 Def=24 SpA=14 SpD=29 Speed=19 item=494 ability=89 moves=409/8/339/182
+JOEY_RESERVE_INPUT helmet=0 owner=1 slot=0 species=1308 level=12 HP=37 Atk=28 Def=19 SpA=16 SpD=19 Speed=37 item=474 ability=20 moves=788/162/227/182
+JOEY_RESERVE_INPUT helmet=0 owner=1 slot=1 species=263 level=12 HP=42 Atk=25 Def=18 SpA=13 SpD=18 Speed=23 item=524 ability=82 moves=187/245/402/182
+JOEY_RESERVE_INPUT helmet=0 owner=1 slot=2 species=1305 level=12 HP=0 Atk=28 Def=13 SpA=16 SpD=14 Speed=33 item=481 ability=89 moves=252/609/183/528
+JOEY_RESERVE_INPUT helmet=0 owner=1 slot=3 species=1298 level=12 HP=0 Atk=29 Def=18 SpA=15 SpD=19 Speed=21 item=494 ability=47 moves=29/583/281/182
+AI decision turn=1 actor=0 move=Super Fang target=3
+AI decision turn=1 actor=1 move=Super Fang target=2
+AI decision turn=1 actor=2 move=Drain Punch target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=3 move=Extreme Speed target=0
+AI decision turn=2 actor=0 move=Super Fang target=3
+AI decision turn=2 actor=2 move=Drain Punch target=1
+JOEY_RESERVE_AFTER helmet=0 turns=2 nativeTurns=1 active=1308/263 HP=0/0 foes=44/58 LAST=-/- foeLAST=Super Fang/Drain Punch ownAtk=6/6 ownSpeed=37/23 ownStatus=0/0 confusion=0/0 items=474/0 foeItems=523/494 encore=0/0 faints=2/0
+JOEY_RESERVE_PARTY helmet=0 turns=2 slot=0 species=1308 HP=0/37 item=474 status=0
+JOEY_RESERVE_PARTY helmet=0 turns=2 slot=1 species=263 HP=0/42 item=0 status=0
+JOEY_RESERVE_PARTY helmet=0 turns=2 slot=2 species=1305 HP=0/36 item=481 status=0
+JOEY_RESERVE_PARTY helmet=0 turns=2 slot=3 species=1298 HP=0/41 item=494 status=0
+JOEY_RESERVE_INPUT helmet=1 owner=0 slot=0 species=417 level=14 HP=53 Atk=18 Def=40 SpA=21 SpD=34 Speed=35 item=496 ability=10 moves=85/162/266/182
+JOEY_RESERVE_INPUT helmet=1 owner=0 slot=1 species=532 level=14 HP=58 Atk=31 Def=24 SpA=14 SpD=29 Speed=19 item=494 ability=89 moves=409/8/339/182
+JOEY_RESERVE_INPUT helmet=1 owner=1 slot=0 species=1308 level=12 HP=37 Atk=28 Def=19 SpA=16 SpD=19 Speed=37 item=474 ability=20 moves=788/162/227/182
+JOEY_RESERVE_INPUT helmet=1 owner=1 slot=1 species=263 level=12 HP=42 Atk=25 Def=18 SpA=13 SpD=18 Speed=23 item=524 ability=82 moves=187/245/402/182
+JOEY_RESERVE_INPUT helmet=1 owner=1 slot=2 species=1305 level=12 HP=0 Atk=28 Def=13 SpA=16 SpD=14 Speed=33 item=481 ability=89 moves=252/609/183/528
+JOEY_RESERVE_INPUT helmet=1 owner=1 slot=3 species=1298 level=12 HP=0 Atk=29 Def=18 SpA=15 SpD=19 Speed=21 item=494 ability=47 moves=29/583/281/182
+AI decision turn=1 actor=0 move=Super Fang target=3
+AI decision turn=1 actor=1 move=Super Fang target=2
+AI decision turn=1 actor=2 move=Drain Punch target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=3 move=Extreme Speed target=0
+JOEY_RESERVE_AFTER helmet=1 turns=1 nativeTurns=1 active=1308/263 HP=0/42 foes=53/47 LAST=-/Protect foeLAST=Super Fang/Drain Punch ownAtk=6/6 ownSpeed=37/23 ownStatus=0/0 confusion=0/0 items=474/524 foeItems=496/494 encore=0/0 faints=1/0
+JOEY_RESERVE_PARTY helmet=1 turns=1 slot=0 species=1308 HP=0/37 item=474 status=0
+JOEY_RESERVE_PARTY helmet=1 turns=1 slot=1 species=263 HP=42/42 item=524 status=0
+JOEY_RESERVE_PARTY helmet=1 turns=1 slot=2 species=1305 HP=0/36 item=481 status=0
+JOEY_RESERVE_PARTY helmet=1 turns=1 slot=3 species=1298 HP=0/41 item=494 status=0
+JOEY_RESERVE_INPUT helmet=1 owner=0 slot=0 species=417 level=14 HP=53 Atk=18 Def=40 SpA=21 SpD=34 Speed=35 item=496 ability=10 moves=85/162/266/182
+JOEY_RESERVE_INPUT helmet=1 owner=0 slot=1 species=532 level=14 HP=58 Atk=31 Def=24 SpA=14 SpD=29 Speed=19 item=494 ability=89 moves=409/8/339/182
+JOEY_RESERVE_INPUT helmet=1 owner=1 slot=0 species=1308 level=12 HP=37 Atk=28 Def=19 SpA=16 SpD=19 Speed=37 item=474 ability=20 moves=788/162/227/182
+JOEY_RESERVE_INPUT helmet=1 owner=1 slot=1 species=263 level=12 HP=42 Atk=25 Def=18 SpA=13 SpD=18 Speed=23 item=524 ability=82 moves=187/245/402/182
+JOEY_RESERVE_INPUT helmet=1 owner=1 slot=2 species=1305 level=12 HP=0 Atk=28 Def=13 SpA=16 SpD=14 Speed=33 item=481 ability=89 moves=252/609/183/528
+JOEY_RESERVE_INPUT helmet=1 owner=1 slot=3 species=1298 level=12 HP=0 Atk=29 Def=18 SpA=15 SpD=19 Speed=21 item=494 ability=47 moves=29/583/281/182
+AI decision turn=1 actor=0 move=Super Fang target=3
+AI decision turn=1 actor=1 move=Super Fang target=2
+AI decision turn=1 actor=2 move=Drain Punch target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=3 move=Extreme Speed target=0
+AI decision turn=2 actor=0 move=Super Fang target=3
+AI decision turn=2 actor=2 move=Drain Punch target=1
+JOEY_RESERVE_AFTER helmet=1 turns=2 nativeTurns=1 active=1308/263 HP=0/0 foes=44/58 LAST=-/- foeLAST=Super Fang/Drain Punch ownAtk=6/6 ownSpeed=37/23 ownStatus=0/0 confusion=0/0 items=474/0 foeItems=496/494 encore=0/0 faints=2/0
+JOEY_RESERVE_PARTY helmet=1 turns=2 slot=0 species=1308 HP=0/37 item=474 status=0
+JOEY_RESERVE_PARTY helmet=1 turns=2 slot=1 species=263 HP=0/42 item=0 status=0
+JOEY_RESERVE_PARTY helmet=1 turns=2 slot=2 species=1305 HP=0/36 item=481 status=0
+JOEY_RESERVE_PARTY helmet=1 turns=2 slot=3 species=1298 HP=0/41 item=494 status=0
+[0] EC live review Joey leads: bulky pressure Electric Grass and denial: [32mPASS[0m
+JOEY_INPUT board=0 owner=0 slot=0 species=417 level=14 HP=53 Atk=18 Def=40 SpA=21 SpD=34 Speed=35 item=523 ability=10 moves=85/162/266/182
+JOEY_INPUT board=0 owner=0 slot=1 species=532 level=14 HP=58 Atk=31 Def=24 SpA=14 SpD=29 Speed=19 item=494 ability=89 moves=409/8/339/182
+JOEY_INPUT board=0 owner=1 slot=0 species=1305 level=12 HP=36 Atk=28 Def=13 SpA=16 SpD=14 Speed=33 item=481 ability=89 moves=252/609/183/528
+JOEY_INPUT board=0 owner=1 slot=1 species=1298 level=12 HP=41 Atk=29 Def=18 SpA=15 SpD=19 Speed=21 item=494 ability=47 moves=29/583/281/182
+JOEY_INPUT board=0 owner=1 slot=2 species=1308 level=12 HP=37 Atk=28 Def=19 SpA=16 SpD=19 Speed=37 item=474 ability=20 moves=788/162/227/182
+JOEY_INPUT board=0 owner=1 slot=3 species=263 level=12 HP=42 Atk=25 Def=18 SpA=13 SpD=18 Speed=23 item=524 ability=82 moves=187/245/402/182
+AI decision turn=1 actor=0 move=Super Fang target=3
+AI decision turn=1 actor=1 move=Fake Out target=2
+AI decision turn=1 actor=2 move=Drain Punch target=1
+AI decision turn=1 actor=3 move=Play Rough target=2
+AI decision turn=2 actor=1 move=Nuzzle target=2
+AI decision turn=2 actor=3 move=Play Rough target=2
+JOEY_AFTER board=0 turns=1 nativeTurns=1 active=1305/1298 slots=0/1 HP=36/21 foes=53/38 LAST=Fake Out/Play Rough foeLAST=Super Fang/- ownAtk=6/6 ownDef=6/6 ownSpA=6/6 ownSpD=6/6 ownSpeed=6/6 foeSpD=6/6 foeSpeed=6/6 taunt=0/0 faints=0/0
+JOEY_PARTY board=0 turns=1 slot=0 species=1305 HP=36/36 status=0 item=481
+JOEY_PARTY board=0 turns=1 slot=1 species=1298 HP=21/41 status=0 item=494
+JOEY_PARTY board=0 turns=1 slot=2 species=1308 HP=37/37 status=0 item=474
+JOEY_PARTY board=0 turns=1 slot=3 species=263 HP=42/42 status=0 item=524
+JOEY_INPUT board=0 owner=0 slot=0 species=417 level=14 HP=53 Atk=18 Def=40 SpA=21 SpD=34 Speed=35 item=523 ability=10 moves=85/162/266/182
+JOEY_INPUT board=0 owner=0 slot=1 species=532 level=14 HP=58 Atk=31 Def=24 SpA=14 SpD=29 Speed=19 item=494 ability=89 moves=409/8/339/182
+JOEY_INPUT board=0 owner=1 slot=0 species=1305 level=12 HP=36 Atk=28 Def=13 SpA=16 SpD=14 Speed=33 item=481 ability=89 moves=252/609/183/528
+JOEY_INPUT board=0 owner=1 slot=1 species=1298 level=12 HP=41 Atk=29 Def=18 SpA=15 SpD=19 Speed=21 item=494 ability=47 moves=29/583/281/182
+JOEY_INPUT board=0 owner=1 slot=2 species=1308 level=12 HP=37 Atk=28 Def=19 SpA=16 SpD=19 Speed=37 item=474 ability=20 moves=788/162/227/182
+JOEY_INPUT board=0 owner=1 slot=3 species=263 level=12 HP=42 Atk=25 Def=18 SpA=13 SpD=18 Speed=23 item=524 ability=82 moves=187/245/402/182
+AI decision turn=1 actor=0 move=Super Fang target=3
+AI decision turn=1 actor=1 move=Fake Out target=2
+AI decision turn=1 actor=2 move=Drain Punch target=1
+AI decision turn=1 actor=3 move=Play Rough target=2
+AI decision turn=2 actor=0 move=Super Fang target=3
+AI decision turn=2 actor=1 move=Nuzzle target=2
+AI decision turn=2 actor=2 move=Drain Punch target=1
+AI decision turn=2 actor=3 move=Play Rough target=2
+AI switch turn=3 actor=1 party=3
+AI decision turn=3 actor=3 move=Protect target=3
+JOEY_AFTER board=0 turns=2 nativeTurns=2 active=1305/1298 slots=0/1 HP=36/11 foes=53/19 LAST=Nuzzle/Play Rough foeLAST=Super Fang/- ownAtk=6/6 ownDef=6/6 ownSpA=6/6 ownSpD=6/6 ownSpeed=6/6 foeSpD=6/6 foeSpeed=6/6 taunt=0/0 faints=0/0
+JOEY_PARTY board=0 turns=2 slot=0 species=1305 HP=36/36 status=0 item=481
+JOEY_PARTY board=0 turns=2 slot=1 species=1298 HP=11/41 status=0 item=494
+JOEY_PARTY board=0 turns=2 slot=2 species=1308 HP=37/37 status=0 item=474
+JOEY_PARTY board=0 turns=2 slot=3 species=263 HP=42/42 status=0 item=524
+JOEY_INPUT board=1 owner=0 slot=0 species=417 level=14 HP=53 Atk=18 Def=40 SpA=21 SpD=34 Speed=35 item=523 ability=10 moves=85/162/266/182
+JOEY_INPUT board=1 owner=0 slot=1 species=270 level=14 HP=48 Atk=15 Def=17 SpA=27 SpD=27 Speed=17 item=494 ability=44 moves=202/58/240/182
+JOEY_INPUT board=1 owner=1 slot=0 species=1305 level=12 HP=36 Atk=28 Def=13 SpA=16 SpD=14 Speed=33 item=481 ability=89 moves=252/609/183/528
+JOEY_INPUT board=1 owner=1 slot=1 species=1298 level=12 HP=41 Atk=29 Def=18 SpA=15 SpD=19 Speed=21 item=494 ability=47 moves=29/583/281/182
+JOEY_INPUT board=1 owner=1 slot=2 species=1308 level=12 HP=37 Atk=28 Def=19 SpA=16 SpD=19 Speed=37 item=474 ability=20 moves=788/162/227/182
+JOEY_INPUT board=1 owner=1 slot=3 species=263 level=12 HP=42 Atk=25 Def=18 SpA=13 SpD=18 Speed=23 item=524 ability=82 moves=187/245/402/182
+AI decision turn=1 actor=0 move=Thunderbolt target=1
+AI decision turn=1 actor=1 move=Fake Out target=2
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Headbutt target=2
+AI decision turn=2 actor=1 move=Wild Charge target=2
+AI decision turn=2 actor=3 move=Headbutt target=2
+JOEY_AFTER board=1 turns=1 nativeTurns=1 active=1305/1298 slots=0/1 HP=24/41 foes=53/30 LAST=Fake Out/Headbutt foeLAST=Thunderbolt/- ownAtk=6/6 ownDef=6/6 ownSpA=6/6 ownSpD=6/6 ownSpeed=6/6 foeSpD=6/6 foeSpeed=6/6 taunt=0/0 faints=0/0
+JOEY_PARTY board=1 turns=1 slot=0 species=1305 HP=24/36 status=0 item=481
+JOEY_PARTY board=1 turns=1 slot=1 species=1298 HP=41/41 status=0 item=494
+JOEY_PARTY board=1 turns=1 slot=2 species=1308 HP=37/37 status=0 item=474
+JOEY_PARTY board=1 turns=1 slot=3 species=263 HP=42/42 status=0 item=524
+JOEY_INPUT board=1 owner=0 slot=0 species=417 level=14 HP=53 Atk=18 Def=40 SpA=21 SpD=34 Speed=35 item=523 ability=10 moves=85/162/266/182
+JOEY_INPUT board=1 owner=0 slot=1 species=270 level=14 HP=48 Atk=15 Def=17 SpA=27 SpD=27 Speed=17 item=494 ability=44 moves=202/58/240/182
+JOEY_INPUT board=1 owner=1 slot=0 species=1305 level=12 HP=36 Atk=28 Def=13 SpA=16 SpD=14 Speed=33 item=481 ability=89 moves=252/609/183/528
+JOEY_INPUT board=1 owner=1 slot=1 species=1298 level=12 HP=41 Atk=29 Def=18 SpA=15 SpD=19 Speed=21 item=494 ability=47 moves=29/583/281/182
+JOEY_INPUT board=1 owner=1 slot=2 species=1308 level=12 HP=37 Atk=28 Def=19 SpA=16 SpD=19 Speed=37 item=474 ability=20 moves=788/162/227/182
+JOEY_INPUT board=1 owner=1 slot=3 species=263 level=12 HP=42 Atk=25 Def=18 SpA=13 SpD=18 Speed=23 item=524 ability=82 moves=187/245/402/182
+AI decision turn=1 actor=0 move=Thunderbolt target=1
+AI decision turn=1 actor=1 move=Fake Out target=2
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Headbutt target=2
+AI decision turn=2 actor=0 move=Thunderbolt target=1
+AI decision turn=2 actor=1 move=Wild Charge target=2
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=3 move=Headbutt target=2
+AI switch turn=3 actor=1 party=3
+AI decision turn=3 actor=3 move=Headbutt target=2
+JOEY_AFTER board=1 turns=2 nativeTurns=2 active=1305/1298 slots=0/1 HP=8/41 foes=53/1 LAST=Wild Charge/Headbutt foeLAST=Thunderbolt/- ownAtk=6/6 ownDef=6/6 ownSpA=6/6 ownSpD=6/6 ownSpeed=6/6 foeSpD=6/6 foeSpeed=6/6 taunt=0/0 faints=0/0
+JOEY_PARTY board=1 turns=2 slot=0 species=1305 HP=8/36 status=0 item=481
+JOEY_PARTY board=1 turns=2 slot=1 species=1298 HP=41/41 status=0 item=494
+JOEY_PARTY board=1 turns=2 slot=2 species=1308 HP=37/37 status=0 item=474
+JOEY_PARTY board=1 turns=2 slot=3 species=263 HP=42/42 status=0 item=524
+JOEY_INPUT board=2 owner=0 slot=0 species=619 level=14 HP=49 Atk=33 Def=23 SpA=21 SpD=23 Speed=39 item=494 ability=39 moves=252/269/409/282
+JOEY_INPUT board=2 owner=0 slot=1 species=417 level=14 HP=53 Atk=18 Def=40 SpA=21 SpD=34 Speed=35 item=523 ability=10 moves=85/162/266/182
+JOEY_INPUT board=2 owner=1 slot=0 species=1305 level=12 HP=36 Atk=28 Def=13 SpA=16 SpD=14 Speed=33 item=481 ability=89 moves=252/609/183/528
+JOEY_INPUT board=2 owner=1 slot=1 species=1298 level=12 HP=41 Atk=29 Def=18 SpA=15 SpD=19 Speed=21 item=494 ability=47 moves=29/583/281/182
+JOEY_INPUT board=2 owner=1 slot=2 species=1308 level=12 HP=37 Atk=28 Def=19 SpA=16 SpD=19 Speed=37 item=474 ability=20 moves=788/162/227/182
+JOEY_INPUT board=2 owner=1 slot=3 species=263 level=12 HP=42 Atk=25 Def=18 SpA=13 SpD=18 Speed=23 item=524 ability=82 moves=187/245/402/182
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Fake Out target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Wild Charge target=0
+AI decision turn=2 actor=3 move=Play Rough target=0
+JOEY_AFTER board=2 turns=1 nativeTurns=1 active=1305/1298 slots=0/1 HP=23/41 foes=49/53 LAST=-/Protect foeLAST=Fake Out/Thunderbolt ownAtk=6/6 ownDef=6/6 ownSpA=6/6 ownSpD=6/6 ownSpeed=6/6 foeSpD=6/6 foeSpeed=6/6 taunt=0/0 faints=0/0
+JOEY_PARTY board=2 turns=1 slot=0 species=1305 HP=23/36 status=0 item=481
+JOEY_PARTY board=2 turns=1 slot=1 species=1298 HP=41/41 status=0 item=494
+JOEY_PARTY board=2 turns=1 slot=2 species=1308 HP=37/37 status=0 item=474
+JOEY_PARTY board=2 turns=1 slot=3 species=263 HP=42/42 status=0 item=524
+JOEY_INPUT board=2 owner=0 slot=0 species=619 level=14 HP=49 Atk=33 Def=23 SpA=21 SpD=23 Speed=39 item=494 ability=39 moves=252/269/409/282
+JOEY_INPUT board=2 owner=0 slot=1 species=417 level=14 HP=53 Atk=18 Def=40 SpA=21 SpD=34 Speed=35 item=523 ability=10 moves=85/162/266/182
+JOEY_INPUT board=2 owner=1 slot=0 species=1305 level=12 HP=36 Atk=28 Def=13 SpA=16 SpD=14 Speed=33 item=481 ability=89 moves=252/609/183/528
+JOEY_INPUT board=2 owner=1 slot=1 species=1298 level=12 HP=41 Atk=29 Def=18 SpA=15 SpD=19 Speed=21 item=494 ability=47 moves=29/583/281/182
+JOEY_INPUT board=2 owner=1 slot=2 species=1308 level=12 HP=37 Atk=28 Def=19 SpA=16 SpD=19 Speed=37 item=474 ability=20 moves=788/162/227/182
+JOEY_INPUT board=2 owner=1 slot=3 species=263 level=12 HP=42 Atk=25 Def=18 SpA=13 SpD=18 Speed=23 item=524 ability=82 moves=187/245/402/182
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Fake Out target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Taunt target=3
+AI decision turn=2 actor=1 move=Wild Charge target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Play Rough target=0
+AI decision turn=3 actor=1 move=Wild Charge target=0
+AI decision turn=3 actor=3 move=Headbutt target=0
+JOEY_AFTER board=2 turns=2 nativeTurns=2 active=1305/1298 slots=0/1 HP=20/28 foes=19/53 LAST=Wild Charge/Play Rough foeLAST=Taunt/Thunderbolt ownAtk=6/6 ownDef=6/6 ownSpA=6/6 ownSpD=6/6 ownSpeed=6/6 foeSpD=6/6 foeSpeed=6/6 taunt=0/2 faints=0/0
+JOEY_PARTY board=2 turns=2 slot=0 species=1305 HP=20/36 status=0 item=481
+JOEY_PARTY board=2 turns=2 slot=1 species=1298 HP=28/41 status=0 item=494
+JOEY_PARTY board=2 turns=2 slot=2 species=1308 HP=37/37 status=0 item=474
+JOEY_PARTY board=2 turns=2 slot=3 species=263 HP=42/42 status=0 item=524
+[1] EC live review Joey mixed: Pawmi supports healthy Zigzagoon: [32mPASS[0m
+JOEY_MIX_INPUT e=0 owner=0 slot=0 species=133 lv=14 HP=52 stats=24/23/18/39/24 item=494 ability=91
+JOEY_MIX_MENU e=0 owner=0 slot=0 moves=38/98/44/182
+JOEY_MIX_INPUT e=0 owner=0 slot=1 species=270 lv=14 HP=48 stats=15/17/27/27/17 item=494 ability=44
+JOEY_MIX_MENU e=0 owner=0 slot=1 moves=202/58/240/182
+JOEY_MIX_INPUT e=0 owner=1 slot=0 species=1305 lv=12 HP=36 stats=28/13/16/14/33 item=481 ability=89
+JOEY_MIX_MENU e=0 owner=1 slot=0 moves=252/609/183/528
+JOEY_MIX_INPUT e=0 owner=1 slot=1 species=263 lv=12 HP=42 stats=25/18/13/18/23 item=524 ability=82
+JOEY_MIX_MENU e=0 owner=1 slot=1 moves=187/245/402/182
+JOEY_MIX_INPUT e=0 owner=1 slot=2 species=1308 lv=12 HP=37 stats=28/19/16/19/37 item=474 ability=20
+JOEY_MIX_MENU e=0 owner=1 slot=2 moves=788/162/227/182
+JOEY_MIX_INPUT e=0 owner=1 slot=3 species=1298 lv=12 HP=41 stats=29/18/15/19/21 item=494 ability=47
+JOEY_MIX_MENU e=0 owner=1 slot=3 moves=29/583/281/182
+AI decision turn=1 actor=0 move=Double-Edge target=3
+AI decision turn=1 actor=1 move=Fake Out target=0
+AI decision turn=1 actor=2 move=Giga Drain target=1
+AI decision turn=1 actor=3 move=Extreme Speed target=0
+AI decision turn=2 actor=1 move=Wild Charge target=2
+AI decision turn=2 actor=3 move=Protect target=3
+JOEY_MIX_END e=0 t=1 native=1 plan=1088 active=1305/263 slots=0/1 HP=9/42 foes=38/48 faints=0/0
+JOEY_MIX_MOVES e=0 t=1 own=Fake Out/Extreme Speed player=-/Giga Drain
+JOEY_MIX_STATE e=0 t=1 Atk=6/6 foeSpeed=6/6 ownStatus=0/0 foeStatus=0/0 items=481/524
+JOEY_MIX_PARTY e=0 t=1 owner=0 slot=0 species=133 HP=38/52 item=494 status=0
+JOEY_MIX_PARTY e=0 t=1 owner=0 slot=1 species=270 HP=48/48 item=494 status=0
+JOEY_MIX_PARTY e=0 t=1 owner=1 slot=0 species=1305 HP=9/36 item=481 status=0
+JOEY_MIX_PARTY e=0 t=1 owner=1 slot=1 species=263 HP=42/42 item=524 status=0
+JOEY_MIX_PARTY e=0 t=1 owner=1 slot=2 species=1308 HP=37/37 item=474 status=0
+JOEY_MIX_PARTY e=0 t=1 owner=1 slot=3 species=1298 HP=41/41 item=494 status=0
+JOEY_MIX_INPUT e=0 owner=0 slot=0 species=133 lv=14 HP=52 stats=24/23/18/39/24 item=494 ability=91
+JOEY_MIX_MENU e=0 owner=0 slot=0 moves=38/98/44/182
+JOEY_MIX_INPUT e=0 owner=0 slot=1 species=270 lv=14 HP=48 stats=15/17/27/27/17 item=494 ability=44
+JOEY_MIX_MENU e=0 owner=0 slot=1 moves=202/58/240/182
+JOEY_MIX_INPUT e=0 owner=1 slot=0 species=1305 lv=12 HP=36 stats=28/13/16/14/33 item=481 ability=89
+JOEY_MIX_MENU e=0 owner=1 slot=0 moves=252/609/183/528
+JOEY_MIX_INPUT e=0 owner=1 slot=1 species=263 lv=12 HP=42 stats=25/18/13/18/23 item=524 ability=82
+JOEY_MIX_MENU e=0 owner=1 slot=1 moves=187/245/402/182
+JOEY_MIX_INPUT e=0 owner=1 slot=2 species=1308 lv=12 HP=37 stats=28/19/16/19/37 item=474 ability=20
+JOEY_MIX_MENU e=0 owner=1 slot=2 moves=788/162/227/182
+JOEY_MIX_INPUT e=0 owner=1 slot=3 species=1298 lv=12 HP=41 stats=29/18/15/19/21 item=494 ability=47
+JOEY_MIX_MENU e=0 owner=1 slot=3 moves=29/583/281/182
+AI decision turn=1 actor=0 move=Double-Edge target=3
+AI decision turn=1 actor=1 move=Fake Out target=0
+AI decision turn=1 actor=2 move=Giga Drain target=1
+AI decision turn=1 actor=3 move=Extreme Speed target=0
+AI decision turn=2 actor=0 move=Double-Edge target=3
+AI decision turn=2 actor=1 move=Wild Charge target=2
+AI decision turn=2 actor=2 move=Giga Drain target=1
+AI decision turn=2 actor=3 move=Protect target=3
+AI switch turn=2 actor=1 party=2
+AI decision turn=3 actor=1 move=Population Bomb target=0
+AI decision turn=3 actor=3 move=Extreme Speed target=0
+JOEY_MIX_END e=0 t=2 native=2 plan=1088 active=1308/263 slots=2/1 HP=37/42 foes=38/34 faints=1/0
+JOEY_MIX_MOVES e=0 t=2 own=-/Protect player=Double-Edge/Giga Drain
+JOEY_MIX_STATE e=0 t=2 Atk=6/6 foeSpeed=6/6 ownStatus=0/0 foeStatus=0/0 items=474/524
+JOEY_MIX_PARTY e=0 t=2 owner=0 slot=0 species=133 HP=38/52 item=494 status=0
+JOEY_MIX_PARTY e=0 t=2 owner=0 slot=1 species=270 HP=34/48 item=494 status=0
+JOEY_MIX_PARTY e=0 t=2 owner=1 slot=0 species=1305 HP=0/36 item=481 status=0
+JOEY_MIX_PARTY e=0 t=2 owner=1 slot=1 species=263 HP=42/42 item=524 status=0
+JOEY_MIX_PARTY e=0 t=2 owner=1 slot=2 species=1308 HP=37/37 item=474 status=0
+JOEY_MIX_PARTY e=0 t=2 owner=1 slot=3 species=1298 HP=41/41 item=494 status=0
+JOEY_MIX_INPUT e=0 owner=0 slot=0 species=133 lv=14 HP=52 stats=24/23/18/39/24 item=494 ability=91
+JOEY_MIX_MENU e=0 owner=0 slot=0 moves=38/98/44/182
+JOEY_MIX_INPUT e=0 owner=0 slot=1 species=270 lv=14 HP=48 stats=15/17/27/27/17 item=494 ability=44
+JOEY_MIX_MENU e=0 owner=0 slot=1 moves=202/58/240/182
+JOEY_MIX_INPUT e=0 owner=1 slot=0 species=1305 lv=12 HP=36 stats=28/13/16/14/33 item=481 ability=89
+JOEY_MIX_MENU e=0 owner=1 slot=0 moves=252/609/183/528
+JOEY_MIX_INPUT e=0 owner=1 slot=1 species=263 lv=12 HP=42 stats=25/18/13/18/23 item=524 ability=82
+JOEY_MIX_MENU e=0 owner=1 slot=1 moves=187/245/402/182
+JOEY_MIX_INPUT e=0 owner=1 slot=2 species=1308 lv=12 HP=37 stats=28/19/16/19/37 item=474 ability=20
+JOEY_MIX_MENU e=0 owner=1 slot=2 moves=788/162/227/182
+JOEY_MIX_INPUT e=0 owner=1 slot=3 species=1298 lv=12 HP=41 stats=29/18/15/19/21 item=494 ability=47
+JOEY_MIX_MENU e=0 owner=1 slot=3 moves=29/583/281/182
+AI decision turn=1 actor=0 move=Double-Edge target=3
+AI decision turn=1 actor=1 move=Fake Out target=0
+AI decision turn=1 actor=2 move=Giga Drain target=1
+AI decision turn=1 actor=3 move=Extreme Speed target=0
+AI decision turn=2 actor=0 move=Double-Edge target=3
+AI decision turn=2 actor=1 move=Wild Charge target=2
+AI decision turn=2 actor=2 move=Giga Drain target=1
+AI decision turn=2 actor=3 move=Protect target=3
+AI switch turn=2 actor=1 party=2
+AI decision turn=3 actor=0 move=Double-Edge target=3
+AI decision turn=3 actor=1 move=Population Bomb target=0
+AI decision turn=3 actor=2 move=Giga Drain target=1
+AI decision turn=3 actor=3 move=Extreme Speed target=0
+AI decision turn=4 actor=1 move=Population Bomb target=2
+AI decision turn=4 actor=3 move=Seed Bomb target=2
+JOEY_MIX_END e=0 t=3 native=3 plan=1088 active=1308/263 slots=2/1 HP=18/42 foes=0/43 faints=1/1
+JOEY_MIX_MOVES e=0 t=3 own=Population Bomb/Extreme Speed player=-/Giga Drain
+JOEY_MIX_STATE e=0 t=3 Atk=6/6 foeSpeed=6/6 ownStatus=0/0 foeStatus=0/0 items=474/524
+JOEY_MIX_PARTY e=0 t=3 owner=0 slot=0 species=133 HP=0/52 item=494 status=0
+JOEY_MIX_PARTY e=0 t=3 owner=0 slot=1 species=270 HP=43/48 item=494 status=0
+JOEY_MIX_PARTY e=0 t=3 owner=1 slot=0 species=1305 HP=0/36 item=481 status=0
+JOEY_MIX_PARTY e=0 t=3 owner=1 slot=1 species=263 HP=42/42 item=524 status=0
+JOEY_MIX_PARTY e=0 t=3 owner=1 slot=2 species=1308 HP=18/37 item=474 status=0
+JOEY_MIX_PARTY e=0 t=3 owner=1 slot=3 species=1298 HP=41/41 item=494 status=0
+JOEY_MIX_INPUT e=1 owner=0 slot=0 species=417 lv=14 HP=53 stats=18/40/21/34/35 item=523 ability=10
+JOEY_MIX_MENU e=1 owner=0 slot=0 moves=85/162/266/182
+JOEY_MIX_INPUT e=1 owner=0 slot=1 species=270 lv=14 HP=48 stats=15/17/27/27/17 item=494 ability=44
+JOEY_MIX_MENU e=1 owner=0 slot=1 moves=202/58/240/182
+JOEY_MIX_INPUT e=1 owner=1 slot=0 species=1305 lv=12 HP=36 stats=28/13/16/14/33 item=481 ability=89
+JOEY_MIX_MENU e=1 owner=1 slot=0 moves=252/609/183/528
+JOEY_MIX_INPUT e=1 owner=1 slot=1 species=263 lv=12 HP=42 stats=25/18/13/18/23 item=524 ability=82
+JOEY_MIX_MENU e=1 owner=1 slot=1 moves=187/245/402/182
+JOEY_MIX_INPUT e=1 owner=1 slot=2 species=1308 lv=12 HP=37 stats=28/19/16/19/37 item=474 ability=20
+JOEY_MIX_MENU e=1 owner=1 slot=2 moves=788/162/227/182
+JOEY_MIX_INPUT e=1 owner=1 slot=3 species=1298 lv=12 HP=41 stats=29/18/15/19/21 item=494 ability=47
+JOEY_MIX_MENU e=1 owner=1 slot=3 moves=29/583/281/182
+AI decision turn=1 actor=0 move=Thunderbolt target=3
+AI decision turn=1 actor=1 move=Fake Out target=2
+AI decision turn=1 actor=2 move=Giga Drain target=1
+AI decision turn=1 actor=3 move=Extreme Speed target=2
+AI decision turn=2 actor=1 move=Wild Charge target=2
+AI decision turn=2 actor=3 move=Extreme Speed target=2
+JOEY_MIX_END e=1 t=1 native=1 plan=1088 active=1305/263 slots=0/1 HP=36/23 foes=53/30 faints=0/0
+JOEY_MIX_MOVES e=1 t=1 own=Fake Out/Extreme Speed player=Thunderbolt/-
+JOEY_MIX_STATE e=1 t=1 Atk=6/6 foeSpeed=6/6 ownStatus=0/0 foeStatus=0/0 items=481/524
+JOEY_MIX_PARTY e=1 t=1 owner=0 slot=0 species=417 HP=53/53 item=523 status=0
+JOEY_MIX_PARTY e=1 t=1 owner=0 slot=1 species=270 HP=30/48 item=494 status=0
+JOEY_MIX_PARTY e=1 t=1 owner=1 slot=0 species=1305 HP=36/36 item=481 status=0
+JOEY_MIX_PARTY e=1 t=1 owner=1 slot=1 species=263 HP=23/42 item=524 status=0
+JOEY_MIX_PARTY e=1 t=1 owner=1 slot=2 species=1308 HP=37/37 item=474 status=0
+JOEY_MIX_PARTY e=1 t=1 owner=1 slot=3 species=1298 HP=41/41 item=494 status=0
+JOEY_MIX_INPUT e=1 owner=0 slot=0 species=417 lv=14 HP=53 stats=18/40/21/34/35 item=523 ability=10
+JOEY_MIX_MENU e=1 owner=0 slot=0 moves=85/162/266/182
+JOEY_MIX_INPUT e=1 owner=0 slot=1 species=270 lv=14 HP=48 stats=15/17/27/27/17 item=494 ability=44
+JOEY_MIX_MENU e=1 owner=0 slot=1 moves=202/58/240/182
+JOEY_MIX_INPUT e=1 owner=1 slot=0 species=1305 lv=12 HP=36 stats=28/13/16/14/33 item=481 ability=89
+JOEY_MIX_MENU e=1 owner=1 slot=0 moves=252/609/183/528
+JOEY_MIX_INPUT e=1 owner=1 slot=1 species=263 lv=12 HP=42 stats=25/18/13/18/23 item=524 ability=82
+JOEY_MIX_MENU e=1 owner=1 slot=1 moves=187/245/402/182
+JOEY_MIX_INPUT e=1 owner=1 slot=2 species=1308 lv=12 HP=37 stats=28/19/16/19/37 item=474 ability=20
+JOEY_MIX_MENU e=1 owner=1 slot=2 moves=788/162/227/182
+JOEY_MIX_INPUT e=1 owner=1 slot=3 species=1298 lv=12 HP=41 stats=29/18/15/19/21 item=494 ability=47
+JOEY_MIX_MENU e=1 owner=1 slot=3 moves=29/583/281/182
+AI decision turn=1 actor=0 move=Thunderbolt target=3
+AI decision turn=1 actor=1 move=Fake Out target=2
+AI decision turn=1 actor=2 move=Giga Drain target=1
+AI decision turn=1 actor=3 move=Extreme Speed target=2
+AI decision turn=2 actor=0 move=Thunderbolt target=3
+AI decision turn=2 actor=1 move=Wild Charge target=2
+AI decision turn=2 actor=2 move=Giga Drain target=1
+AI decision turn=2 actor=3 move=Extreme Speed target=2
+AI decision turn=3 actor=1 move=Wild Charge target=2
+AI decision turn=3 actor=3 move=Protect target=3
+JOEY_MIX_END e=1 t=2 native=2 plan=1088 active=1305/263 slots=0/1 HP=5/18 foes=53/14 faints=0/0
+JOEY_MIX_MOVES e=1 t=2 own=Wild Charge/Extreme Speed player=Thunderbolt/Giga Drain
+JOEY_MIX_STATE e=1 t=2 Atk=6/6 foeSpeed=6/6 ownStatus=0/0 foeStatus=0/0 items=481/0
+JOEY_MIX_PARTY e=1 t=2 owner=0 slot=0 species=417 HP=53/53 item=523 status=0
+JOEY_MIX_PARTY e=1 t=2 owner=0 slot=1 species=270 HP=14/48 item=494 status=0
+JOEY_MIX_PARTY e=1 t=2 owner=1 slot=0 species=1305 HP=5/36 item=481 status=0
+JOEY_MIX_PARTY e=1 t=2 owner=1 slot=1 species=263 HP=18/42 item=0 status=0
+JOEY_MIX_PARTY e=1 t=2 owner=1 slot=2 species=1308 HP=37/37 item=474 status=0
+JOEY_MIX_PARTY e=1 t=2 owner=1 slot=3 species=1298 HP=41/41 item=494 status=0
+JOEY_MIX_INPUT e=1 owner=0 slot=0 species=417 lv=14 HP=53 stats=18/40/21/34/35 item=523 ability=10
+JOEY_MIX_MENU e=1 owner=0 slot=0 moves=85/162/266/182
+JOEY_MIX_INPUT e=1 owner=0 slot=1 species=270 lv=14 HP=48 stats=15/17/27/27/17 item=494 ability=44
+JOEY_MIX_MENU e=1 owner=0 slot=1 moves=202/58/240/182
+JOEY_MIX_INPUT e=1 owner=1 slot=0 species=1305 lv=12 HP=36 stats=28/13/16/14/33 item=481 ability=89
+JOEY_MIX_MENU e=1 owner=1 slot=0 moves=252/609/183/528
+JOEY_MIX_INPUT e=1 owner=1 slot=1 species=263 lv=12 HP=42 stats=25/18/13/18/23 item=524 ability=82
+JOEY_MIX_MENU e=1 owner=1 slot=1 moves=187/245/402/182
+JOEY_MIX_INPUT e=1 owner=1 slot=2 species=1308 lv=12 HP=37 stats=28/19/16/19/37 item=474 ability=20
+JOEY_MIX_MENU e=1 owner=1 slot=2 moves=788/162/227/182
+JOEY_MIX_INPUT e=1 owner=1 slot=3 species=1298 lv=12 HP=41 stats=29/18/15/19/21 item=494 ability=47
+JOEY_MIX_MENU e=1 owner=1 slot=3 moves=29/583/281/182
+AI decision turn=1 actor=0 move=Thunderbolt target=3
+AI decision turn=1 actor=1 move=Fake Out target=2
+AI decision turn=1 actor=2 move=Giga Drain target=1
+AI decision turn=1 actor=3 move=Extreme Speed target=2
+AI decision turn=2 actor=0 move=Thunderbolt target=3
+AI decision turn=2 actor=1 move=Wild Charge target=2
+AI decision turn=2 actor=2 move=Giga Drain target=1
+AI decision turn=2 actor=3 move=Extreme Speed target=2
+AI decision turn=3 actor=0 move=Thunderbolt target=3
+AI decision turn=3 actor=1 move=Wild Charge target=2
+AI decision turn=3 actor=2 move=Giga Drain target=1
+AI decision turn=3 actor=3 move=Protect target=3
+AI decision turn=4 actor=1 move=Mach Punch target=0
+AI decision turn=4 actor=3 move=Extreme Speed target=0
+JOEY_MIX_END e=1 t=3 native=3 plan=1088 active=1305/263 slots=0/1 HP=2/18 foes=53/0 faints=0/1
+JOEY_MIX_MOVES e=1 t=3 own=Wild Charge/Protect player=Thunderbolt/-
+JOEY_MIX_STATE e=1 t=3 Atk=6/6 foeSpeed=6/6 ownStatus=0/0 foeStatus=0/0 items=481/0
+JOEY_MIX_PARTY e=1 t=3 owner=0 slot=0 species=417 HP=53/53 item=523 status=0
+JOEY_MIX_PARTY e=1 t=3 owner=0 slot=1 species=270 HP=0/48 item=494 status=0
+JOEY_MIX_PARTY e=1 t=3 owner=1 slot=0 species=1305 HP=2/36 item=481 status=0
+JOEY_MIX_PARTY e=1 t=3 owner=1 slot=1 species=263 HP=18/42 item=0 status=0
+JOEY_MIX_PARTY e=1 t=3 owner=1 slot=2 species=1308 HP=37/37 item=474 status=0
+JOEY_MIX_PARTY e=1 t=3 owner=1 slot=3 species=1298 HP=41/41 item=494 status=0
+
+- Tests [32mPASSED[0m:          7
+- Tests [34mTOTAL[0m:           7
+

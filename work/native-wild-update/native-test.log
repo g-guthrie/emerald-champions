@@ -1,0 +1,37 @@
+tools/scaninc/scaninc -M build/emerald-legendary-wild-test/data/mystery_gift.d -g build/assets -I include -I "" data/mystery_gift.s
+tools/scaninc/scaninc -M build/emerald-legendary-wild-test/data/event_scripts.d -g build/assets -I include -I "" data/event_scripts.s
+tools/scaninc/scaninc -M build/emerald-legendary-wild-test/test/legendary_sign_pipeline.d -g build/assets -I include -I tools/agbcc/include test/legendary_sign_pipeline.c
+tools/scaninc/scaninc -M build/emerald-legendary-wild-test/test/emerald_champions.d -g build/assets -I include -I tools/agbcc/include test/emerald_champions.c
+tools/scaninc/scaninc -M build/emerald-legendary-wild-test/src/wild_encounter.d -g build/assets -I include -I tools/agbcc/include src/wild_encounter.c
+tools/scaninc/scaninc -M build/emerald-legendary-wild-test/src/script_pokemon_util.d -g build/assets -I include -I tools/agbcc/include src/script_pokemon_util.c
+tools/scaninc/scaninc -M build/emerald-legendary-wild-test/src/script.d -g build/assets -I include -I tools/agbcc/include src/script.c
+tools/scaninc/scaninc -M build/emerald-legendary-wild-test/src/legendary_signs.d -g build/assets -I include -I tools/agbcc/include src/legendary_signs.c
+tools/scaninc/scaninc -M build/emerald-legendary-wild-test/src/field_specials.d -g build/assets -I include -I tools/agbcc/include src/field_specials.c
+tools/scaninc/scaninc -M build/emerald-legendary-wild-test/src/emerald_champions_headless.d -g build/assets -I include -I tools/agbcc/include src/emerald_champions_headless.c
+tools/scaninc/scaninc -M build/emerald-legendary-wild-test/src/egg_hatch.d -g build/assets -I include -I tools/agbcc/include src/egg_hatch.c
+tools/scaninc/scaninc -M build/emerald-legendary-wild-test/src/champions_circuit.d -g build/assets -I include -I tools/agbcc/include src/champions_circuit.c
+tools/scaninc/scaninc -M build/emerald-legendary-wild-test/src/battle_script_commands.d -g build/assets -I include -I tools/agbcc/include src/battle_script_commands.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-legendary-wild-test/src/battle_script_commands.o src/battle_script_commands.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-legendary-wild-test/src/champions_circuit.o src/champions_circuit.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-legendary-wild-test/src/egg_hatch.o src/egg_hatch.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-legendary-wild-test/src/emerald_champions_headless.o src/emerald_champions_headless.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-legendary-wild-test/src/field_specials.o src/field_specials.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-legendary-wild-test/src/legendary_signs.o src/legendary_signs.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-legendary-wild-test/src/script.o src/script.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-legendary-wild-test/src/script_pokemon_util.o src/script_pokemon_util.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-legendary-wild-test/src/wild_encounter.o src/wild_encounter.c
+tools/preproc/preproc -s data/event_scripts.s charmap.txt | arm-none-eabi-cpp -iquote include -Wno-trigraphs -DMODERN=1 -DTESTING=1 -DEMERALD -std=gnu17 -DEC_HEADLESS_FIXTURES=0 -I include - | tools/preproc/preproc -ie data/event_scripts.s charmap.txt | arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -o build/emerald-legendary-wild-test/data/event_scripts.o
+tools/preproc/preproc -s data/mystery_gift.s charmap.txt | arm-none-eabi-cpp -iquote include -Wno-trigraphs -DMODERN=1 -DTESTING=1 -DEMERALD -std=gnu17 -DEC_HEADLESS_FIXTURES=0 -I include - | tools/preproc/preproc -ie data/mystery_gift.s charmap.txt | arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -o build/emerald-legendary-wild-test/data/mystery_gift.o
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-legendary-wild-test/test/emerald_champions.o test/emerald_champions.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-legendary-wild-test/test/legendary_sign_pipeline.o test/legendary_sign_pipeline.c
+cd build/emerald-legendary-wild-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-legendary-wild-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-legendary-wild-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-legendary-wild-test/pokeemerald-legendary-wild-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-legendary-wild-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-legendary-wild-test-headless.elf
+Hydra workers: 8
+[0] Wild residents retain 3 percent slots and share Sweet Scent after capture: [32mPASS[0m
+
+- Tests [32mPASSED[0m:          1
+- Tests [34mTOTAL[0m:           1
+

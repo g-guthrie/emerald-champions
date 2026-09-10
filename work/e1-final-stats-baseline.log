@@ -1,0 +1,268 @@
+tools/scaninc/scaninc -M build/emerald-test/test/battle/ai/emerald_champions_plans.d -g build/assets -I include -I tools/agbcc/include test/battle/ai/emerald_champions_plans.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/battle/ai/emerald_champions_plans.o test/battle/ai/emerald_champions_plans.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 4
+[2] EC live review E0001: actual reserves respect Grass and Magic Bounce: [32mPASS[0m
+AI decision turn=1 actor=0 move=Bullet Seed target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Psychic target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Giga Drain target=2
+AI decision turn=2 actor=3 move=Quick Attack target=2
+E1 reserves indices=2/3 executed=Protect/Protect HP=47/35 TaillowStatus=128
+[0] EC live review E0001 Finish: actual Taillow takes the last available KO: [32mPASS[0m
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Giga Drain target=0
+AI decision turn=1 actor=3 move=Quick Attack target=0
+E1 Finish poisoned=0 executed=Quick Attack playerHP=0 TaillowHP=35 status=0 speeds=40/39
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Giga Drain target=0
+AI decision turn=1 actor=3 move=Quick Attack target=0
+E1 Finish poisoned=1 executed=Quick Attack playerHP=0 TaillowHP=35 status=128 speeds=40/39
+[2] EC live review E0001: native counterfactual sash pressure lines: [32mPASS[0m
+AI decision turn=1 actor=0 move=Drain Punch target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+E1 counterfactual web=0 TreeckoPartyHP=35 PikaPartyHP=3 foesHP=7/41 foeSpeedStages=6/6 leftSpecies=Treecko
+AI decision turn=1 actor=0 move=Drain Punch target=1
+AI decision turn=1 actor=1 move=Seed Bomb target=0
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Electroweb target=0
+E1 counterfactual web=1 TreeckoPartyHP=0 PikaPartyHP=3 foesHP=20/40 foeSpeedStages=5/5 leftSpecies=Taillow
+[0] EC live review E0001: actual Treecko pair against faster Inner Focus pressure: [32mPASS[0m
+AI decision turn=1 actor=0 move=Drain Punch target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Thunderbolt target=0
+E1 pressure sash=0 executed=Protect/Protect opponentHP=35/34 playerHP=41/41 playerSpeeds=39/39 opponentSpeeds=36/40
+AI decision turn=1 actor=0 move=Drain Punch target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Seed Bomb target=2
+AI decision turn=2 actor=3 move=Electroweb target=0
+E1 pressure sash=1 executed=Protect/Protect opponentHP=35/34 playerHP=41/41 playerSpeeds=39/39 opponentSpeeds=36/40
+[3] EC live review E0001: actual Hoenn rival opening decisions: [32mPASS[0m
+AI decision turn=1 actor=0 move=Liquidation target=1
+AI decision turn=1 actor=1 move=Seed Bomb target=0
+AI decision turn=1 actor=2 move=Flamethrower target=1
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI switch turn=1 actor=1 party=3
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Protect target=3
+E1 trainer=520 disruption=0 completedTurns=1 left=Taillow lastExecuted=- hp=35/35 right=Pikachu lastExecuted=Thunderbolt hp=34/34 playerHP=0/51 versus 41/41 levels=14/14/12/12
+AI decision turn=1 actor=0 move=Bullet Seed target=1
+AI decision turn=1 actor=1 move=Liquidation target=2
+AI decision turn=1 actor=2 move=Flamethrower target=1
+AI decision turn=1 actor=3 move=Fake Out target=0
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Protect target=3
+E1 trainer=526 disruption=0 completedTurns=1 left=Mudkip lastExecuted=Liquidation hp=17/37 right=Pikachu lastExecuted=Fake Out hp=34/34 playerHP=39/48 versus 20/41 levels=14/14/12/12
+AI decision turn=1 actor=0 move=Bullet Seed target=1
+AI decision turn=1 actor=1 move=Flamethrower target=0
+AI decision turn=1 actor=2 move=Liquidation target=1
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Protect target=3
+E1 trainer=523 disruption=0 completedTurns=1 left=Torchic lastExecuted=Flamethrower hp=33/36 right=Pikachu lastExecuted=Fake Out hp=34/34 playerHP=0/48 versus 46/51 levels=14/14/12/12
+AI decision turn=1 actor=0 move=Liquidation target=1
+AI decision turn=1 actor=1 move=Seed Bomb target=0
+AI decision turn=1 actor=2 move=Will-O-Wisp target=1
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Protect target=3
+E1 trainer=529 disruption=1 completedTurns=1 left=Treecko lastExecuted=Seed Bomb hp=30/35 right=Pikachu lastExecuted=Thunderbolt hp=34/34 playerHP=0/51 versus 41/41 levels=14/14/12/12
+AI decision turn=1 actor=0 move=Bullet Seed target=1
+AI decision turn=1 actor=1 move=Liquidation target=2
+AI decision turn=1 actor=2 move=Will-O-Wisp target=1
+AI decision turn=1 actor=3 move=Fake Out target=0
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Protect target=3
+E1 trainer=535 disruption=1 completedTurns=1 left=Mudkip lastExecuted=Liquidation hp=32/37 right=Pikachu lastExecuted=Fake Out hp=34/34 playerHP=39/48 versus 20/41 levels=14/14/12/12
+AI decision turn=1 actor=0 move=Bullet Seed target=1
+AI decision turn=1 actor=1 move=Flamethrower target=0
+AI decision turn=1 actor=2 move=Wide Guard target=2
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Protect target=3
+E1 trainer=532 disruption=1 completedTurns=1 left=Torchic lastExecuted=Flamethrower hp=33/36 right=Pikachu lastExecuted=Fake Out hp=34/34 playerHP=0/48 versus 46/51 levels=14/14/12/12
+[1] EC live review E0001: actual native regional opening replacements: [32mPASS[0m
+AI decision turn=1 actor=0 move=Knock Off target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Psychic target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Electroweb target=0
+E1 region=1 slot=0 species=Bulbasaur initialAbility=65 level=12 hp=36/36 lastExecuted=Protect PikachuHP=34 lastExecuted=Protect playerHP=41/39
+AI decision turn=1 actor=0 move=Knock Off target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Psychic target=1
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI decision turn=2 actor=1 move=Flamethrower target=2
+AI decision turn=2 actor=3 move=Protect target=3
+E1 region=1 slot=1 species=Charmander initialAbility=66 level=12 hp=35/35 lastExecuted=Protect PikachuHP=34 lastExecuted=Fake Out playerHP=41/31
+AI decision turn=1 actor=0 move=Knock Off target=1
+AI decision turn=1 actor=1 move=Follow Me target=1
+AI decision turn=1 actor=2 move=Psychic target=1
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI decision turn=2 actor=1 move=Follow Me target=1
+AI decision turn=2 actor=3 move=Electroweb target=0
+E1 region=1 slot=2 species=Squirtle initialAbility=67 level=12 hp=28/43 lastExecuted=Follow Me PikachuHP=34 lastExecuted=Fake Out playerHP=41/31
+AI decision turn=1 actor=0 move=Knock Off target=1
+AI decision turn=1 actor=1 move=Light Screen target=1
+AI decision turn=1 actor=2 move=Psychic target=1
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Electroweb target=0
+E1 region=2 slot=0 species=Chikorita initialAbility=65 level=12 hp=23/44 lastExecuted=Light Screen PikachuHP=34 lastExecuted=Fake Out playerHP=41/31
+AI decision turn=1 actor=0 move=Knock Off target=1
+AI decision turn=1 actor=1 move=Eruption target=0
+AI decision turn=1 actor=2 move=Psychic target=1
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI decision turn=2 actor=1 move=Extrasensory target=2
+AI decision turn=2 actor=3 move=Thunderbolt target=0
+E1 region=2 slot=1 species=Cyndaquil initialAbility=18 level=12 hp=9/35 lastExecuted=Eruption PikachuHP=34 lastExecuted=Fake Out playerHP=25/6
+AI decision turn=1 actor=0 move=Knock Off target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Psychic target=1
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI decision turn=2 actor=1 move=Liquidation target=2
+AI decision turn=2 actor=3 move=Protect target=3
+E1 region=2 slot=2 species=Totodile initialAbility=125 level=12 hp=37/37 lastExecuted=Protect PikachuHP=34 lastExecuted=Fake Out playerHP=41/31
+AI decision turn=1 actor=0 move=Knock Off target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Psychic target=1
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI switch turn=2 actor=1 party=3
+AI decision turn=2 actor=3 move=Electroweb target=0
+E1 region=4 slot=0 species=Turtwig initialAbility=75 level=12 hp=39/39 lastExecuted=Protect PikachuHP=34 lastExecuted=Fake Out playerHP=41/31
+AI decision turn=1 actor=0 move=Knock Off target=1
+AI decision turn=1 actor=1 move=Fake Out target=2
+AI decision turn=1 actor=2 move=Psychic target=1
+AI decision turn=1 actor=3 move=Fake Out target=0
+AI decision turn=2 actor=1 move=Fire Punch target=2
+AI decision turn=2 actor=3 move=Protect target=3
+E1 region=4 slot=1 species=Chimchar initialAbility=89 level=12 hp=43/43 lastExecuted=Fake Out PikachuHP=34 lastExecuted=Fake Out playerHP=36/32
+AI decision turn=1 actor=0 move=Knock Off target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Psychic target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Icy Wind target=0
+AI decision turn=2 actor=3 move=Electroweb target=0
+E1 region=4 slot=2 species=Piplup initialAbility=172 level=12 hp=46/46 lastExecuted=Protect PikachuHP=34 lastExecuted=Protect playerHP=41/39
+AI decision turn=1 actor=0 move=Knock Off target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Psychic target=1
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI decision turn=2 actor=1 move=Glare target=0
+AI decision turn=2 actor=3 move=Protect target=3
+E1 region=5 slot=0 species=Snivy initialAbility=126 level=12 hp=36/36 lastExecuted=Protect PikachuHP=34 lastExecuted=Fake Out playerHP=41/31
+AI decision turn=1 actor=0 move=Knock Off target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Psychic target=1
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI decision turn=2 actor=1 move=Head Smash target=2
+AI decision turn=2 actor=3 move=Protect target=3
+E1 region=5 slot=1 species=Tepig initialAbility=47 level=12 hp=41/41 lastExecuted=Protect PikachuHP=34 lastExecuted=Fake Out playerHP=41/31
+AI decision turn=1 actor=0 move=Knock Off target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Psychic target=1
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI decision turn=2 actor=1 move=Icy Wind target=0
+AI decision turn=2 actor=3 move=Protect target=3
+E1 region=5 slot=2 species=Oshawott initialAbility=75 level=12 hp=46/46 lastExecuted=Protect PikachuHP=34 lastExecuted=Fake Out playerHP=41/31
+AI decision turn=1 actor=0 move=Knock Off target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Psychic target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Super Fang target=0
+AI decision turn=2 actor=3 move=Electroweb target=0
+E1 region=6 slot=0 species=Chespin initialAbility=171 level=12 hp=46/46 lastExecuted=Protect PikachuHP=34 lastExecuted=Protect playerHP=41/39
+AI decision turn=1 actor=0 move=Knock Off target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Psychic target=1
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI switch turn=2 actor=1 party=3
+AI decision turn=2 actor=3 move=Electroweb target=0
+E1 region=6 slot=1 species=Fennekin initialAbility=66 level=12 hp=35/35 lastExecuted=Protect PikachuHP=34 lastExecuted=Fake Out playerHP=41/31
+AI decision turn=1 actor=0 move=Knock Off target=1
+AI decision turn=1 actor=1 move=Ice Beam target=2
+AI decision turn=1 actor=2 move=Psychic target=1
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Protect target=3
+E1 region=6 slot=2 species=Froakie initialAbility=168 level=12 hp=8/35 lastExecuted=Ice Beam PikachuHP=34 lastExecuted=Fake Out playerHP=41/0
+AI decision turn=1 actor=0 move=Knock Off target=1
+AI decision turn=1 actor=1 move=Brave Bird target=0
+AI decision turn=1 actor=2 move=Psychic target=1
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI decision turn=2 actor=1 move=Leaf Blade target=0
+AI decision turn=2 actor=3 move=Electroweb target=0
+E1 region=7 slot=0 species=Rowlet initialAbility=65 level=12 hp=9/42 lastExecuted=Brave Bird PikachuHP=34 lastExecuted=Fake Out playerHP=9/31
+AI decision turn=1 actor=0 move=Knock Off target=1
+AI decision turn=1 actor=1 move=Fake Out target=2
+AI decision turn=1 actor=2 move=Psychic target=1
+AI decision turn=1 actor=3 move=Fake Out target=0
+AI decision turn=2 actor=1 move=Flare Blitz target=0
+AI decision turn=2 actor=3 move=Electroweb target=0
+E1 region=7 slot=1 species=Litten initialAbility=22 level=12 hp=36/36 lastExecuted=Fake Out PikachuHP=34 lastExecuted=Fake Out playerHP=36/32
+AI decision turn=1 actor=0 move=Knock Off target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Psychic target=1
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI decision turn=2 actor=1 move=Moonblast target=0
+AI decision turn=2 actor=3 move=Protect target=3
+E1 region=7 slot=2 species=Popplio initialAbility=204 level=12 hp=37/37 lastExecuted=Protect PikachuHP=34 lastExecuted=Fake Out playerHP=41/31
+AI decision turn=1 actor=0 move=Knock Off target=1
+AI decision turn=1 actor=1 move=Fake Out target=2
+AI decision turn=1 actor=2 move=Psychic target=1
+AI decision turn=1 actor=3 move=Fake Out target=0
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Protect target=3
+E1 region=8 slot=0 species=Grookey initialAbility=229 level=12 hp=45/45 lastExecuted=Fake Out PikachuHP=34 lastExecuted=Fake Out playerHP=38/32
+AI decision turn=1 actor=0 move=Knock Off target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Psychic target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=U-turn target=2
+AI decision turn=2 actor=3 move=Electroweb target=0
+E1 region=8 slot=1 species=Scorbunny initialAbility=236 level=12 hp=37/37 lastExecuted=Protect PikachuHP=34 lastExecuted=Protect playerHP=41/39
+AI decision turn=1 actor=0 move=Knock Off target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Psychic target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Water Pledge target=2
+AI decision turn=2 actor=3 move=Electroweb target=0
+E1 region=8 slot=2 species=Sobble initialAbility=97 level=12 hp=37/37 lastExecuted=Protect PikachuHP=34 lastExecuted=Protect playerHP=41/39
+AI decision turn=1 actor=0 move=Knock Off target=1
+AI decision turn=1 actor=1 move=Play Rough target=0
+AI decision turn=1 actor=2 move=Psychic target=1
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI decision turn=2 actor=1 move=Play Rough target=0
+AI decision turn=2 actor=3 move=Thunderbolt target=0
+E1 region=9 slot=0 species=Sprigatito initialAbility=168 level=12 hp=12/35 lastExecuted=Play Rough PikachuHP=34 lastExecuted=Fake Out playerHP=15/31
+AI decision turn=1 actor=0 move=Knock Off target=1
+AI decision turn=1 actor=1 move=Fire Blast target=2
+AI decision turn=1 actor=2 move=Psychic target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Electroweb target=0
+E1 region=9 slot=1 species=Fuecoco initialAbility=109 level=12 hp=22/49 lastExecuted=Fire Blast PikachuHP=34 lastExecuted=Protect playerHP=41/18
+AI decision turn=1 actor=0 move=Knock Off target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Psychic target=1
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI decision turn=2 actor=1 move=Aqua Jet target=2
+AI decision turn=2 actor=3 move=Protect target=3
+E1 region=9 slot=2 species=Quaxly initialAbility=153 level=12 hp=39/39 lastExecuted=Protect PikachuHP=34 lastExecuted=Fake Out playerHP=41/31
+
+- Tests [32mPASSED[0m:          6
+- Tests [34mTOTAL[0m:           6
+

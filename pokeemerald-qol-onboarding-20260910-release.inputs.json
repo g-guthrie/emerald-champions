@@ -1,0 +1,9 @@
+{
+  "schema_version": 2,
+  "inputs_sha256": "1c4ba8fd8b97fe435ee65fe273ebcd38d82929d2e5c86fd40a534ee5dcc2bf2c",
+  "input_count": 28980,
+  "artifacts": {
+    "pokeemerald-qol-onboarding-20260910-release.gba": "13cc55522624506c06088b4b6415fbe4580c8720ba1fe931ac980782d8ae7718",
+    "pokeemerald-qol-onboarding-20260910-release.elf": "076e4c5d10a5bde32cb8d020faec8a9b1d64e6922c8a4e23dd625aac05f71ab5"
+  }
+}

@@ -1,0 +1,213 @@
+{
+  "centers": [
+    "BattleFrontier_PokemonCenter_1F",
+    "DewfordTown_PokemonCenter_1F",
+    "EverGrandeCity_PokemonCenter_1F",
+    "FallarborTown_PokemonCenter_1F",
+    "FortreeCity_PokemonCenter_1F",
+    "LavaridgeTown_PokemonCenter_1F",
+    "LilycoveCity_PokemonCenter_1F",
+    "MauvilleCity_PokemonCenter_1F",
+    "MossdeepCity_PokemonCenter_1F",
+    "OldaleTown_PokemonCenter_1F",
+    "PacifidlogTown_PokemonCenter_1F",
+    "PetalburgCity_PokemonCenter_1F",
+    "RustboroCity_PokemonCenter_1F",
+    "SlateportCity_PokemonCenter_1F",
+    "SootopolisCity_PokemonCenter_1F",
+    "VerdanturfTown_PokemonCenter_1F"
+  ],
+  "marts": [
+    "FallarborTown_Mart",
+    "FortreeCity_Mart",
+    "LavaridgeTown_Mart",
+    "MauvilleCity_Mart",
+    "PetalburgCity_Mart",
+    "SlateportCity_Mart",
+    "VerdanturfTown_Mart"
+  ],
+  "leads": [
+    [
+      "OLDALE_TOWN",
+      "SHAYMIN",
+      "SHAYMIN lives in the grass on|ROUTE 102, west of OLDALE.|You can look for it right away."
+    ],
+    [
+      "PETALBURG_CITY",
+      "CELEBI",
+      "Take CUT into PETALBURG WOODS.|CELEBI lives in the third area."
+    ],
+    [
+      "PETALBURG_CITY",
+      "VIRIZION",
+      "VIRIZION lives in the second|area of PETALBURG WOODS.|Check its sign for the full roster."
+    ],
+    [
+      "DEWFORD_TOWN",
+      "MELOETTA",
+      "MELOETTA answers songs in|DEWFORD MEADOW. Bring a partner|with SING to the warden there."
+    ],
+    [
+      "DEWFORD_TOWN",
+      "COSMOG",
+      "COSMOG drifts through the grass|in DEWFORD MEADOW. You can find|it on your first visit."
+    ],
+    [
+      "RUSTBORO_CITY",
+      "MAGEARNA",
+      "DEVON's dream researcher on 2F|has a MAGEARNA prototype.|Catch DIANCIE before visiting him."
+    ],
+    [
+      "RUSTBORO_CITY",
+      "ARCEUS",
+      "DEVON's dream researcher on 2F|also has an ARCEUS reward.|Resolve the weather crisis and|earn all eight badges to claim it."
+    ],
+    [
+      "SLATEPORT_CITY",
+      "THUNDURUS",
+      "THUNDURUS can appear in the|grass on ROUTE 110. First help|the WEATHER INSTITUTE researchers."
+    ],
+    [
+      "SLATEPORT_CITY",
+      "MEWTWO",
+      "MEWTWO waits on ALTERING CAVE B1F.|Reach the cave by SURFING|along ROUTE 103."
+    ],
+    [
+      "MAUVILLE_CITY",
+      "ZERAORA",
+      "For ZERAORA, finish WATTSON's|generator job and report back.|Then search NEW MAUVILLE inside."
+    ],
+    [
+      "MAUVILLE_CITY",
+      "REGIELEKI",
+      "REGIELEKI also lives inside|NEW MAUVILLE. Catch REGISTEEL|and finish WATTSON's generator job."
+    ],
+    [
+      "MAUVILLE_CITY",
+      "ZEKROM",
+      "ZEKROM can appear inside|NEW MAUVILLE after WATTSON's job.|Remember to report back to him."
+    ],
+    [
+      "MAUVILLE_CITY",
+      "ZAPDOS",
+      "The original ZAPDOS waits inside|NEW MAUVILLE. Approach it there|when you are ready."
+    ],
+    [
+      "MAUVILLE_CITY",
+      "GENESECT",
+      "GENESECT is a prize at the|MAUVILLE GAME CORNER.|Ask at the POK\u00e9MON prize counter."
+    ],
+    [
+      "MAUVILLE_CITY",
+      "POIPOLE",
+      "The GAME CORNER's POK\u00e9MON prize|counter also offers POIPOLE."
+    ],
+    [
+      "VERDANTURF_TOWN",
+      "PHIONE",
+      "For PHIONE, leave MANAPHY and|DITTO at ROUTE 117's DAY CARE.|Hatch the Egg they produce."
+    ],
+    [
+      "VERDANTURF_TOWN",
+      "ENAMORUS",
+      "ENAMORUS lives in VERDANTURF|MEADOW's grass. Check the area|sign for the other residents."
+    ],
+    [
+      "LAVARIDGE_TOWN",
+      "LANDORUS",
+      "Bring CASTFORM to the archaeologist|at ROUTE 111's elevated ruins.|Helping his weather survey lets|you find LANDORUS there."
+    ],
+    [
+      "LAVARIDGE_TOWN",
+      "VOLCANION",
+      "VOLCANION lives on MAGMA|HIDEOUT 4F. First confront MAXIE|deep inside the hideout."
+    ],
+    [
+      "FALLARBOR_TOWN",
+      "REGIDRAGO",
+      "REGIDRAGO lives in METEOR FALLS'|upper 1F room. Catch REGIROCK|before you go looking for it."
+    ],
+    [
+      "FALLARBOR_TOWN",
+      "CRESSELIA",
+      "For CRESSELIA, catch DARKRAI and|help the elders at MT. PYRE.|Then search METEOR FALLS'|second B1F room."
+    ],
+    [
+      "FORTREE_CITY",
+      "TORNADUS",
+      "TORNADUS can appear in ROUTE 119's|grass after you rescue the|WEATHER INSTITUTE researchers."
+    ],
+    [
+      "FORTREE_CITY",
+      "RESHIRAM",
+      "RESHIRAM lives on SCORCHED SLAB|B2F, off ROUTE 120. It is an|ordinary rare wild resident."
+    ],
+    [
+      "LILYCOVE_CITY",
+      "DARKRAI",
+      "For DARKRAI, befriend a member|of MUSHARNA's family and help|the elders at MT. PYRE.|Then visit the summit shrine."
+    ],
+    [
+      "LILYCOVE_CITY",
+      "YVELTAL",
+      "YVELTAL can appear in the outside|grass at MT. PYRE. First help|the elders and receive their ORB."
+    ],
+    [
+      "LILYCOVE_CITY",
+      "PECHARUNT",
+      "PECHARUNT waits on MT. PYRE's|sixth floor. Catch OKIDOGI,|MUNKIDORI and FEZANDIPITI,|then inspect the shrine."
+    ],
+    [
+      "MOSSDEEP_CITY",
+      "ARTICUNO",
+      "The original ARTICUNO waits in|SHOAL CAVE's low-tide ice room."
+    ],
+    [
+      "MOSSDEEP_CITY",
+      "KYUREM",
+      "KYUREM can appear in SHOAL CAVE's|low-tide ice room. Catch either|RESHIRAM or ZEKROM first."
+    ],
+    [
+      "SOOTOPOLIS_CITY",
+      "TERAPAGOS",
+      "TERAPAGOS lives on CAVE OF ORIGIN|B1F. Resolve the SOOTOPOLIS|weather crisis before searching."
+    ],
+    [
+      "SOOTOPOLIS_CITY",
+      "TAPU_FINI",
+      "After the weather crisis, search|while SURFING on ROUTE 126.|TAPU FINI can appear there."
+    ],
+    [
+      "SOOTOPOLIS_CITY",
+      "KELDEO",
+      "KELDEO can appear while SURFING|on ROUTE 127 once the weather|crisis is resolved."
+    ],
+    [
+      "PACIFIDLOG_TOWN",
+      "REGIGIGAS",
+      "Take REGIROCK, REGICE and|REGISTEEL together to the statue|inside the SEALED CHAMBER.|That is where REGIGIGAS waits."
+    ],
+    [
+      "EVER_GRANDE_CITY",
+      "VICTINI",
+      "VICTINI lives on VICTORY ROAD 1F.|Check the area signs as you climb|toward the POK\u00e9MON LEAGUE."
+    ],
+    [
+      "EVER_GRANDE_CITY",
+      "TERRAKION",
+      "TERRAKION lives on VICTORY ROAD|B1F. You can encounter it in|the cave like other wild POK\u00e9MON."
+    ],
+    [
+      "BATTLE_FRONTIER",
+      "CALYREX",
+      "The CHAMPIONS CIRCUIT at the|BATTLE TOWER awards CALYREX and|other legendaries at win milestones.|Ask its attendant about rewards."
+    ],
+    [
+      "BATTLE_FRONTIER",
+      "ETERNATUS",
+      "ETERNATUS is the CIRCUIT mastery|reward. Win 40 battles in total|and claim its other legendary|rewards, then see the attendant."
+    ]
+  ],
+  "lead_count": 47,
+  "classic_scene_species_count": 16
+}

@@ -18,7 +18,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_MoveObjectsForTeamMagma::
 	setobjectmovementtype LOCALID_SPACE_CENTER_1F_SCIENTIST_1, MOVEMENT_TYPE_FACE_RIGHT
 	setobjectmovementtype LOCALID_SPACE_CENTER_1F_SCIENTIST_2, MOVEMENT_TYPE_FACE_RIGHT
 	goto_if_eq VAR_MOSSDEEP_SPACE_CENTER_STAIR_GUARD_STATE, 1, MossdeepCity_SpaceCenter_1F_EventScript_MoveStairGuardLeft
-	goto_if_eq VAR_MOSSDEEP_SPACE_CENTER_STAIR_GUARD_STATE, 2, MossdeepCity_SpaceCenter_1F_EventScript_MoveStairGuardDown
+	goto_if_eq VAR_MOSSDEEP_SPACE_CENTER_STAIR_GUARD_STATE, 2, MossdeepCity_SpaceCenter_1F_EventScript_MoveStairGuardRight
 	goto_if_eq VAR_MOSSDEEP_SPACE_CENTER_STAIR_GUARD_STATE, 3, MossdeepCity_SpaceCenter_1F_EventScript_MoveStairGuardRight
 	end
 
@@ -26,11 +26,6 @@ MossdeepCity_SpaceCenter_1F_EventScript_MoveStairGuardLeft::
 	setobjectxyperm LOCALID_SPACE_CENTER_1F_STAIR_GRUNT, 12, 2
 	end
 
-MossdeepCity_SpaceCenter_1F_EventScript_MoveStairGuardDown::
-	setobjectxyperm LOCALID_SPACE_CENTER_1F_STAIR_GRUNT, 13, 3
-	end
-
-@ Functionally unused. See comment on MossdeepCity_SpaceCenter_1F_EventScript_MoveGruntFromStairsEast
 MossdeepCity_SpaceCenter_1F_EventScript_MoveStairGuardRight::
 	setobjectxyperm LOCALID_SPACE_CENTER_1F_STAIR_GRUNT, 14, 2
 	end
@@ -141,7 +136,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_GaveSunStoneMagma::
 MossdeepCity_SpaceCenter_1F_EventScript_Woman::
 	lock
 	faceplayer
-	goto_if_set FLAG_SYS_GAME_CLEAR, MossdeepCity_SpaceCenter_1F_EventScript_WomanNormal
+	goto_if_ge VAR_MOSSDEEP_CITY_STATE, 3, MossdeepCity_SpaceCenter_1F_EventScript_WomanNormal
 	goto_if_eq VAR_MOSSDEEP_CITY_STATE, 2, MossdeepCity_SpaceCenter_1F_EventScript_WomanMagma
 	goto_if_lt VAR_MOSSDEEP_CITY_STATE, 2, MossdeepCity_SpaceCenter_1F_EventScript_WomanNormal
 	goto MossdeepCity_SpaceCenter_1F_EventScript_WomanMagma
@@ -160,7 +155,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_WomanMagma::
 MossdeepCity_SpaceCenter_1F_EventScript_OldMan::
 	lock
 	faceplayer
-	goto_if_set FLAG_SYS_GAME_CLEAR, MossdeepCity_SpaceCenter_1F_EventScript_OldManNormal
+	goto_if_ge VAR_MOSSDEEP_CITY_STATE, 3, MossdeepCity_SpaceCenter_1F_EventScript_OldManNormal
 	goto_if_eq VAR_MOSSDEEP_CITY_STATE, 2, MossdeepCity_SpaceCenter_1F_EventScript_OldManMagma
 	goto_if_lt VAR_MOSSDEEP_CITY_STATE, 2, MossdeepCity_SpaceCenter_1F_EventScript_OldManNormal
 	goto MossdeepCity_SpaceCenter_1F_EventScript_OldManMagma
@@ -283,15 +278,17 @@ MossdeepCity_SpaceCenter_1F_Text_SuccessfulLaunchNumber:
 	.string "That's launch no. {STR_VAR_1}!$"
 
 MossdeepCity_SpaceCenter_1F_Text_HaywireButRocketLaunchImminent:
-	.string "I know that things are a little\n"
-	.string "haywire right now, but…\p"
-	.string "The rocket's launch is imminent!$"
+	.string "We were preparing for a launch\n"
+	.string "when MAGMA arrived.\p"
+	.string "The crew needs that fuel. We\n"
+	.string "can't let them take it!$"
 
 MossdeepCity_SpaceCenter_1F_Text_HaywireButSuccessfulLaunchNumber:
-	.string "I know that things are a little\n"
-	.string "haywire right now, but…\p"
-	.string "The rocket launched safely!\n"
-	.string "That's launch no. {STR_VAR_1}!$"
+	.string "We'd completed launch no.\n"
+	.string "{STR_VAR_1} safely. Then TEAM\l"
+	.string "MAGMA arrived.\p"
+	.string "I can't believe they're trying to\n"
+	.string "steal our fuel!$"
 
 MossdeepCity_SpaceCenter_1F_Text_RocketLaunchDemandsPerfection:
 	.string "A rocket launch demands perfection.\n"
@@ -302,10 +299,11 @@ MossdeepCity_SpaceCenter_1F_Text_RocketLaunchDemandsPerfection:
 	.string "Why? It's a dream that never ends.$"
 
 MossdeepCity_SpaceCenter_1F_Text_MagmaHaveSightsOnSpaceCenter:
-	.string "Those MAGMA thugs have their sights\n"
-	.string "set on our SPACE CENTER.\p"
-	.string "But we can't allow anything that minor\n"
-	.string "to interfere with our rocket launch!$"
+	.string "Those MAGMA thugs have threatened\n"
+	.string "the SPACE CENTER.\p"
+	.string "We're securing the rocket fuel.\n"
+	.string "If they take it, they could do\l"
+	.string "terrible damage.$"
 
 MossdeepCity_SpaceCenter_1F_Text_FoundThisYouCanHaveIt:
 	.string "I was taking a stroll down the beach\n"
@@ -318,10 +316,10 @@ MossdeepCity_SpaceCenter_1F_Text_HoennFamousForMeteorShowers:
 	.string "its meteor showers for a long time.$"
 
 MossdeepCity_SpaceCenter_1F_Text_MagmaCantStealFuelTakeThis:
-	.string "TEAM MAGMA can't be allowed to steal\n"
-	.string "the rocket fuel.\p"
-	.string "Oh, by the way, you can have this stone\n"
-	.string "I found on the beach.$"
+	.string "TEAM MAGMA mustn't get that fuel!\p"
+	.string "I found this SUN STONE on the\n"
+	.string "beach. If it can help one of your\l"
+	.string "POKéMON, please take it.$"
 
 MossdeepCity_SpaceCenter_1F_Text_CantStrollOnBeachWithMagma:
 	.string "With TEAM MAGMA around, I guess\n"

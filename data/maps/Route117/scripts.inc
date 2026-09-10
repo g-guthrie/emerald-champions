@@ -1,6 +1,3 @@
-.set LOCALID_DAYCARE_MON_0, 25
-.set LOCALID_DAYCARE_MON_1, 26
-
 Route117_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route117_OnTransition
 	.byte 0
@@ -57,12 +54,14 @@ Route117_EventScript_Woman::
 	giveitem ITEM_AUDINITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_ITEM_ROUTE_115_AUDINITE
-	release
-	end
+	goto Route117_EventScript_AudiniteAfter
 
 Route117_EventScript_AudiniteAfter::
+	setvar VAR_0x8004, LEGENDARY_SIGN_TYPE_NULL
+	special GetSelectedLegendarySignState
+	goto_if_eq VAR_RESULT, 2, Route117_EventScript_TypeNullCaught
 	msgbox Route117_Text_ArentTheseFlowersPretty, MSGBOX_DEFAULT
-	release
+	releaseall
 	end
 
 Route117_Text_AudiniteGift:
@@ -229,15 +228,23 @@ Route117_EventScript_Aisha::
 	end
 
 Route117_Text_DayCarePokemonHadNewMove:
-	.string "I left two compatible POKéMON at the\n"
-	.string "DAY CARE, and they produced an EGG!\p"
-	.string "Center tutors handle moves. The DAY CARE\n"
-	.string "is where new partners inherit traits.$"
+	.string "I left two compatible POKéMON at\n"
+	.string "the DAY CARE, and they produced an\l"
+	.string "EGG!\p"
+	.string "I wonder what the little one will\n"
+	.string "be like. Waiting to meet it is the\l"
+	.string "hardest part!$"
 
 Route117_Text_ArentTheseFlowersPretty:
-	.string "What do you think?\n"
-	.string "Aren't these flowers pretty?\p"
-	.string "I planted them all!$"
+	.string "Aren't these flowers pretty? I\n"
+	.string "love watching the POKéMON wander\l"
+	.string "through them.\p"
+	.string "Lately, an odd one with a metal\n"
+	.string "mask has been hiding in the grass.\l"
+	.string "DEVON calls it TYPE: NULL.\p"
+	.string "You can find it in this grass,\n"
+	.string "with a 3% encounter chance.\l"
+	.string "SWEET SCENT helps draw it out.$"
 
 Route117_Text_AirIsTastyHere:
 	.string "The air is tasty here!$"
@@ -257,3 +264,14 @@ Route117_Text_DayCareSign:
 Route117_Text_DYLAN_1_LocalConversation:
 	.string "Training tip: take a breath.\n"
 	.string "That is also my swimming plan.$"
+
+Route117_EventScript_TypeNullCaught::
+	msgbox Route117_Text_TypeNullCaught, MSGBOX_DEFAULT
+	releaseall
+	end
+
+Route117_Text_TypeNullCaught:
+	.string "The flowers seem peaceful now.\p"
+	.string "That TYPE: NULL found a partner\n"
+	.string "in you! I hope it enjoys traveling\l"
+	.string "as much as it enjoyed this meadow.$"

@@ -44,8 +44,9 @@ Route110_TrickHousePuzzle1_Text_WroteSecretCodeLockOpened::
 	.string "The lock clicked open!$"
 
 Route110_TrickHousePuzzle1_Text_SallyIntro:
-	.string "I'll hack and slash my way to victory\n"
-	.string "with the CUT we just learned!$"
+	.string "I've cut a path through every shrub!\n"
+	.string "Now let's see if I can cut through\l"
+	.string "your defenses!$"
 
 Route110_TrickHousePuzzle1_Text_SallyDefeat:
 	.string "Why are you so serious?$"

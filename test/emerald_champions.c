@@ -508,7 +508,7 @@ TEST("Emerald Champions leveling never interrupts a competitive moveset")
 TEST("Emerald Champions applies a complete authored battle set")
 {
     struct Pokemon mon;
-    u32 statPointTotal = 0;
+    u32 evTotal = 0;
 
     CreateMon(&mon, SPECIES_BULBASAUR, 14, 0, OTID_STRUCT_PLAYER_ID);
     EXPECT_GE(GetEmeraldChampionsBattleSetCount(&mon), 1);
@@ -522,8 +522,8 @@ TEST("Emerald Champions applies a complete authored battle set")
     EXPECT_EQ(GetMonData(&mon, MON_DATA_HELD_ITEM), ITEM_EVIOLITE);
 
     for (u32 i = 0; i < NUM_STATS; i++)
-        statPointTotal += GetMonData(&mon, MON_DATA_HP_EV + i);
-    EXPECT_EQ(statPointTotal, 66);
+        evTotal += GetMonData(&mon, MON_DATA_HP_EV + i);
+    EXPECT_LE(evTotal, MAX_TOTAL_EVS);
 }
 
 TEST("Emerald Champions exposes named Doubles and Singles sets for every direct species")
@@ -584,31 +584,13 @@ TEST("Emerald Champions exposes named Doubles and Singles sets for every direct 
                     EXPECT_NE(GetMonAbility(&mon), ABILITY_NONE);
                     if (preset->requiredItem == ITEM_NONE && preset->requiredMove == MOVE_NONE)
                         EXPECT_EQ(GetMonAbility(&mon), preset->ability);
-                    // Belly Drum's half-HP berry normalizer may lower HP by up
-                    // to two points; it does not redistribute those points.
-                    // Every other stat must still match the authored spread.
                     for (u32 stat = 0; stat < NUM_STATS; stat++)
                     {
-                        u32 points = GetMonData(&mon, EC_STAT_POINT_DATA(stat));
+                        u32 points = GetMonData(&mon, EC_EV_DATA(stat));
                         total += points;
-                        if (stat != 0 || points == preset->statPoints[0])
-                            EXPECT_EQ(points, preset->statPoints[stat]);
-                        else
-                        {
-                            bool32 drum = FALSE;
-                            for (u32 move = 0; move < MAX_MON_MOVES; move++)
-                                drum |= preset->moves[move] == MOVE_BELLY_DRUM;
-                            EXPECT(drum);
-                            EXPECT(held == ITEM_BERRY_JUICE || held == ITEM_ORAN_BERRY
-                                || (GetMonAbility(&mon) == ABILITY_GLUTTONY
-                                    && gItemsInfo[held].holdEffect == HOLD_EFFECT_CONFUSE_FLAVOR));
-                            EXPECT_GE((s32)points, (s32)preset->statPoints[0] - 2);
-                            EXPECT_LT(points, preset->statPoints[0]);
-                            EXPECT_EQ(GetMonData(&mon, MON_DATA_MAX_HP) & 1, 0);
-                        }
+                        EXPECT_EQ(points, preset->evs[stat]);
                     }
-                    EXPECT_GE(total, 64);
-                    EXPECT_LE(total, 66);
+                    EXPECT_LE(total, MAX_TOTAL_EVS);
                 }
             }
         }
@@ -644,42 +626,47 @@ TEST("Emerald Champions evolution applies the evolved Doubles recommendation")
     EXPECT_NE(GetMonData(&mon, MON_DATA_HELD_ITEM), ITEM_SCOVILLAINITE);
 }
 
-TEST("Emerald Champions Stat Point editor clamps every spread to 32 and 66")
+TEST("Emerald Champions EV editor clamps individual and total allocations")
 {
     u32 total = 0;
 
     ZeroPlayerPartyMons();
     CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_BULBASAUR, 14, 0, OTID_STRUCT_PLAYER_ID);
     CalculatePlayerPartyCount();
-    EXPECT_EQ(
-        ApplyEmeraldChampionsBattleSetChoice(&gParties[B_TRAINER_PLAYER][0], 0),
-        EC_BATTLE_SET_SUCCESS
-    );
     gSpecialVar_0x800A = 0;
+    ResetSelectedMonEmeraldChampionsEvs();
     gSpecialVar_0x8005 = STAT_HP;
-    gSpecialVar_0x8006 = 2; // -1
-    AdjustSelectedMonEmeraldChampionsStatPoints();
+    gSpecialVar_0x8006 = 7; // Set Maximum.
+    AdjustSelectedMonEmeraldChampionsEvs();
     EXPECT_EQ(gSpecialVar_Result, TRUE);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP_EV), 252);
 
     gSpecialVar_0x8005 = STAT_ATK;
-    gSpecialVar_0x8006 = 7; // Set Maximum, limited by the one free point.
-    AdjustSelectedMonEmeraldChampionsStatPoints();
+    AdjustSelectedMonEmeraldChampionsEvs();
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_ATK_EV), 252);
+    gSpecialVar_0x8005 = 5; // Display-order Speed; only six EVs remain.
+    AdjustSelectedMonEmeraldChampionsEvs();
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPEED_EV), 6);
     for (u32 stat = 0; stat < NUM_STATS; stat++)
     {
-        u32 value = GetMonData(&gParties[B_TRAINER_PLAYER][0], EC_STAT_POINT_DATA(stat));
-        EXPECT_LE(value, EC_STAT_POINTS_PER_STAT);
+        u32 value = GetMonData(&gParties[B_TRAINER_PLAYER][0], EC_EV_DATA(stat));
+        EXPECT_LE(value, MAX_PER_STAT_EVS);
         total += value;
     }
-    EXPECT_EQ(total, EC_STAT_POINT_BUDGET);
+    EXPECT_EQ(total, MAX_TOTAL_EVS);
 
     // A capped increase is rejected so the field script can play native
     // failure feedback instead of silently redrawing an unchanged value.
-    gSpecialVar_0x8005 = STAT_ATK;
-    gSpecialVar_0x8006 = 3; // +1 with no points remaining.
-    AdjustSelectedMonEmeraldChampionsStatPoints();
+    gSpecialVar_0x8006 = 3; // +4 with no EVs remaining.
+    AdjustSelectedMonEmeraldChampionsEvs();
     EXPECT_EQ(gSpecialVar_Result, FALSE);
 
-    ResetSelectedMonEmeraldChampionsStatPoints();
+    gSpecialVar_0x8006 = 2; // -4, then clamp the remaining two to zero.
+    AdjustSelectedMonEmeraldChampionsEvs();
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPEED_EV), 2);
+    AdjustSelectedMonEmeraldChampionsEvs();
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPEED_EV), 0);
+    ResetSelectedMonEmeraldChampionsEvs();
     total = 0;
     for (u32 stat = 0; stat < NUM_STATS; stat++)
         total += GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP_EV + stat);
@@ -1283,7 +1270,7 @@ TEST("Emerald Champions imported battle sets remain legal against current data")
         for (u8 choice = 0; choice < count; choice++)
         {
             const struct EmeraldChampionsBattleSet *preset = GetEmeraldChampionsRawBattleSet(species, choice);
-            u32 statPointTotal = 0;
+            u32 evTotal = 0;
             u8 result;
 
             CreateMon(&mon, species, 50, 0, OTID_STRUCT_PLAYER_ID);
@@ -1305,8 +1292,8 @@ TEST("Emerald Champions imported battle sets remain legal against current data")
             }
             EXPECT_EQ(GetMonData(&mon, MON_DATA_HIDDEN_NATURE), preset->nature);
             for (u32 stat = 0; stat < NUM_STATS; stat++)
-                statPointTotal += preset->statPoints[stat];
-            EXPECT_EQ(statPointTotal, 66);
+                evTotal += preset->evs[stat];
+            EXPECT_LE(evTotal, MAX_TOTAL_EVS);
             if (preset->requiredItem != ITEM_NONE)
                 EXPECT_EQ(GetMonData(&mon, MON_DATA_HELD_ITEM), preset->requiredItem);
         }
@@ -1563,10 +1550,10 @@ TEST("Champions Circuit assembles complete competitive sets across 2048 seeds")
             for (u32 stat = 0; stat < NUM_STATS; stat++)
             {
                 u32 investment = GetMonData(mon, MON_DATA_HP_EV + stat);
-                EXPECT_LE(investment, 32);
+                EXPECT_LE(investment, MAX_PER_STAT_EVS);
                 points += investment;
             }
-            EXPECT_EQ(points, 66);
+            EXPECT_LE(points, MAX_TOTAL_EVS);
             for (u32 m = 0; m < MAX_MON_MOVES; m++)
             {
                 enum Move move = GetMonData(mon, MON_DATA_MOVE1 + m);
@@ -1793,150 +1780,6 @@ TEST("Champions Circuit restores the exact prepared party after a run")
     }
 }
 
-static u32 EmeraldChampionsExpectedStat(enum Species species, u32 stat, u32 level, u32 points)
-{
-    u32 n = 2 * GetSpeciesBaseStat(species, stat) + MAX_PER_STAT_IVS;
-
-    if (stat == STAT_HP)
-        return (n * level) / 100 + level + 10 + points;
-    return (n * level) / 100 + 5 + points; // Hardy nature, no friendship boost.
-}
-
-static const u8 sEmeraldChampionsLevelCaps[] = {14, 20, 30, 40, 45, 55, 60, 70, 80};
-
-TEST("Emerald Champions Stat Points change every stat at every level cap")
-{
-    static const u8 stats[] = {STAT_HP, STAT_ATK, STAT_DEF, STAT_SPEED, STAT_SPATK, STAT_SPDEF};
-    u32 nature = NATURE_HARDY;
-    u32 friendship = 0;
-
-    for (u32 c = 0; c < ARRAY_COUNT(sEmeraldChampionsLevelCaps); c++)
-    {
-        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][0];
-        u32 level = sEmeraldChampionsLevelCaps[c];
-
-        ZeroPlayerPartyMons();
-        CreateMon(mon, SPECIES_ZIGZAGOON, level, 0, OTID_STRUCT_PLAYER_ID);
-        SetMonData(mon, MON_DATA_HIDDEN_NATURE, &nature);
-        SetMonData(mon, MON_DATA_FRIENDSHIP, &friendship);
-        for (u32 s = 0; s < ARRAY_COUNT(stats); s++)
-        {
-            u8 zero = 0;
-            u8 full = EC_STAT_POINTS_PER_STAT;
-            u32 atZero;
-            u32 atFull;
-
-            SetMonData(mon, MON_DATA_HP_EV + stats[s], &zero);
-            CalculateMonStats(mon);
-            atZero = GetMonData(mon, MON_DATA_MAX_HP + stats[s]);
-            EXPECT_EQ(atZero, EmeraldChampionsExpectedStat(SPECIES_ZIGZAGOON, stats[s], level, 0));
-
-            SetMonData(mon, MON_DATA_HP_EV + stats[s], &full);
-            CalculateMonStats(mon);
-            atFull = GetMonData(mon, MON_DATA_MAX_HP + stats[s]);
-            EXPECT_EQ(atFull, EmeraldChampionsExpectedStat(SPECIES_ZIGZAGOON, stats[s], level, EC_STAT_POINTS_PER_STAT));
-            EXPECT_EQ(atFull - atZero, EC_STAT_POINTS_PER_STAT);
-
-            SetMonData(mon, MON_DATA_HP_EV + stats[s], &zero);
-        }
-    }
-}
-
-TEST("Emerald Champions Belly Drum berry sets preserve Sitrus points and Gluttony parity at every level cap")
-{
-    static const enum Species species[] = {SPECIES_ZIGZAGOON, SPECIES_AZURILL, SPECIES_AZUMARILL};
-
-    for (u32 s = 0; s < ARRAY_COUNT(species); s++)
-    {
-        for (u32 c = 0; c < ARRAY_COUNT(sEmeraldChampionsLevelCaps); c++)
-        {
-            struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][0];
-            s32 choice = -1;
-            u32 total = 0;
-
-            ZeroPlayerPartyMons();
-            CreateMon(mon, species[s], sEmeraldChampionsLevelCaps[c], 0, OTID_STRUCT_PLAYER_ID);
-            CalculatePlayerPartyCount();
-            for (u32 i = 0; i < GetEmeraldChampionsBattleSetCount(mon); i++)
-            {
-                const struct EmeraldChampionsBattleSet *preset =
-                    GetEmeraldChampionsBattleSetPresetForFormat(mon, i, EC_BATTLE_FORMAT_DOUBLES);
-                bool32 drum = FALSE;
-
-                for (u32 m = 0; preset != NULL && m < MAX_MON_MOVES; m++)
-                    drum |= preset->moves[m] == MOVE_BELLY_DRUM;
-                bool32 halfHpBerry = preset != NULL
-                                  && (preset->item == ITEM_SITRUS_BERRY
-                                   || (preset->ability == ABILITY_GLUTTONY
-                                    && gItemsInfo[preset->item].holdEffect == HOLD_EFFECT_CONFUSE_FLAVOR));
-
-                if (drum && halfHpBerry)
-                {
-                    choice = i;
-                    break;
-                }
-            }
-            EXPECT_GE(choice, 0);
-            EXPECT_EQ(ApplyEmeraldChampionsBattleSetChoice(mon, choice), EC_BATTLE_SET_SUCCESS);
-            const struct EmeraldChampionsBattleSet *preset =
-                GetEmeraldChampionsBattleSetPresetForFormat(mon, choice, EC_BATTLE_FORMAT_DOUBLES);
-            if (preset->item == ITEM_SITRUS_BERRY)
-            {
-                for (u32 stat = 0; stat < NUM_STATS; stat++)
-                    EXPECT_EQ(GetMonData(mon, MON_DATA_HP_EV + stat), preset->statPoints[stat]);
-            }
-            else
-            {
-                // Zigzagoon's Gluttony/Figy build still needs even HP.
-                EXPECT_EQ(GetMonData(mon, MON_DATA_MAX_HP) % 2, 0);
-            }
-            EXPECT_EQ(GetMonData(mon, MON_DATA_HP), GetMonData(mon, MON_DATA_MAX_HP));
-            for (u32 stat = 0; stat < NUM_STATS; stat++)
-                total += GetMonData(mon, MON_DATA_HP_EV + stat);
-            EXPECT_LE(total, EC_STAT_POINT_BUDGET);
-            // The re-landed spread still reads as the authored set.
-            EXPECT_EQ(GetEmeraldChampionsCurrentBattleSetChoice(mon), choice);
-        }
-    }
-}
-
-TEST("Emerald Champions Belly Drum normalization preserves authored sets across successive level caps")
-{
-    static const enum Species species[] = {SPECIES_ZIGZAGOON, SPECIES_AZUMARILL};
-
-    ClearBag();
-    for (u32 s = 0; s < ARRAY_COUNT(species); s++)
-    {
-        struct Pokemon mon;
-        s32 choice = -1;
-
-        CreateMon(&mon, species[s], sEmeraldChampionsLevelCaps[0], 0, OTID_STRUCT_PLAYER_ID);
-        for (u32 i = 0; i < GetEmeraldChampionsBattleSetCount(&mon); i++)
-        {
-            const struct EmeraldChampionsBattleSet *preset =
-                GetEmeraldChampionsBattleSetPresetForFormat(&mon, i, EC_BATTLE_FORMAT_DOUBLES);
-            for (u32 m = 0; m < MAX_MON_MOVES; m++)
-                if (preset->moves[m] == MOVE_BELLY_DRUM)
-                    choice = i;
-        }
-        EXPECT_GE(choice, 0);
-        EXPECT_EQ(ApplyEmeraldChampionsBattleSetChoice(&mon, choice), EC_BATTLE_SET_SUCCESS);
-        for (u32 c = 0; c < ARRAY_COUNT(sEmeraldChampionsLevelCaps); c++)
-        {
-            u32 experience = gExperienceTables[gSpeciesInfo[species[s]].growthRate][sEmeraldChampionsLevelCaps[c]];
-            u32 hp;
-
-            SetMonData(&mon, MON_DATA_EXP, &experience);
-            CalculateMonStats(&mon);
-            hp = GetMonData(&mon, MON_DATA_MAX_HP);
-            SetMonData(&mon, MON_DATA_HP, &hp);
-            TryNormalizeEmeraldChampionsBellyDrumHpParity(&mon);
-            EXPECT_EQ(GetEmeraldChampionsCurrentBattleSetChoice(&mon), choice);
-            EXPECT_EQ(GetMonData(&mon, MON_DATA_HP), GetMonData(&mon, MON_DATA_MAX_HP));
-        }
-    }
-}
-
 TEST("Emerald Champions reload refreshes cached stats without reviving fainted Pokemon")
 {
     struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][0];
@@ -1961,14 +1804,15 @@ TEST("Emerald Champions reload refreshes cached stats without reviving fainted P
     EXPECT_EQ(GetMonData(mon, MON_DATA_HP), hp);
 }
 
-TEST("Emerald Champions Stat Point editor shows actual stats and remaining points")
+TEST("Emerald Champions EV editor shows native stats and three-digit allocations")
 {
     struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][0];
     u32 nature = NATURE_HARDY;
     u32 friendship = 0;
     u32 base;
     u8 zero = 0;
-    static const u8 expected[] = _("HP: 53\nPoints: 2/32  Left: 64");
+    static const u8 expected[] = _("HP: 53\nEVs: 32/252  Left: 478");
+    static const u8 maximum[] = _("HP: 64\nEVs: 252/252  Left: 258");
 
     ZeroPlayerPartyMons();
     CreateMon(mon, SPECIES_ZIGZAGOON, 20, 0, OTID_STRUCT_PLAYER_ID);
@@ -1981,14 +1825,18 @@ TEST("Emerald Champions Stat Point editor shows actual stats and remaining point
     base = GetMonData(mon, MON_DATA_MAX_HP);
     gSpecialVar_0x800A = 0;
     gSpecialVar_0x8005 = 0;
-    gSpecialVar_0x8006 = 3; // +1 point, twice.
-    AdjustSelectedMonEmeraldChampionsStatPoints();
-    AdjustSelectedMonEmeraldChampionsStatPoints();
+    gSpecialVar_0x8006 = 4; // +16 EVs, twice.
+    AdjustSelectedMonEmeraldChampionsEvs();
+    AdjustSelectedMonEmeraldChampionsEvs();
     EXPECT_EQ(GetMonData(mon, MON_DATA_MAX_HP), base + 2);
-    EXPECT_EQ(GetMonData(mon, MON_DATA_HP_EV), 2);
-    BufferSelectedMonEmeraldChampionsStatPointDetail();
+    EXPECT_EQ(GetMonData(mon, MON_DATA_HP_EV), 32);
+    BufferSelectedMonEmeraldChampionsEvDetail();
     EXPECT_EQ(StringCompare(gStringVar4, expected), 0);
     EXPECT_EQ(GetMonData(mon, MON_DATA_HP), base + 2);
+    gSpecialVar_0x8006 = 7;
+    AdjustSelectedMonEmeraldChampionsEvs();
+    BufferSelectedMonEmeraldChampionsEvDetail();
+    EXPECT_EQ(StringCompare(gStringVar4, maximum), 0);
 }
 
 TEST("Emerald Champions field moves need the badge and a party member that could learn them")

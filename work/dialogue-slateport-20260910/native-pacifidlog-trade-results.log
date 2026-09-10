@@ -1,0 +1,30 @@
+pacifidlog-trade-wrong 0 RESULT frames=15000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=f14785650cb0d638 nonzero_pixels=21633 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=2 address=02002346 value=00000000
+READ width=2 address=02002344 value=00000002
+ 
+pacifidlog-trade-cancel 0 RESULT frames=15000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=f14785650cb0d638 nonzero_pixels=21633 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=2 address=02002346 value=000000ff
+READ width=2 address=02002344 value=00000002
+ 
+slot4 wrong 0 RESULT frames=30 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=f14785650cb0d638 nonzero_pixels=21633 save_bytes=0
+READ width=4 address=020022c4 value=00000173
+
+slot4 cancel 0 RESULT frames=30 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=f14785650cb0d638 nonzero_pixels=21633 save_bytes=0
+READ width=4 address=020022c4 value=00000173
+
+pacifidlog-trade-accept 0 RESULT frames=15000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=f14785650cb0d638 nonzero_pixels=21633 save_bytes=0
+READ width=4 address=020022c4 value=00000001
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=2 address=02002346 value=00000004
+READ width=2 address=02002344 value=00000002
+ 
+slot4 accept 0 RESULT frames=30 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=f14785650cb0d638 nonzero_pixels=21633 save_bytes=0
+READ width=4 address=020022c4 value=0000054c
+

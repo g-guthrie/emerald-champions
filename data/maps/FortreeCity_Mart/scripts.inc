@@ -86,4 +86,5 @@ FortreeCity_Mart_Text_StockUpOnItems:
 FortreeCity_Mart_Text_RareCandyMakesMonGrow:
 	.string "The LEVELER raises your whole party to\n"
 	.string "the current level limit at once.\p"
-	.string "It makes training completely optional.$"
+	.string "Use it again after each GYM BADGE\n"
+	.string "raises that limit.$"

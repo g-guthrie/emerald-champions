@@ -1,0 +1,1432 @@
+tools/scaninc/scaninc -M build/emerald-test/test/battle/ai/emerald_champions_plans.d -g build/assets -I include -I tools/agbcc/include test/battle/ai/emerald_champions_plans.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/battle/ai/emerald_champions_plans.o test/battle/ai/emerald_champions_plans.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 4
+[1] EC live review Nolan timing: six-player bench: [32mPASS[0m
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Wave Crash target=0
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=2 actor=1 move=Wave Crash target=0
+REVIEW_AFTER board=99 turns=1 reserves=0 species=1366/1367 HP=197/111 foes=98/114 faints=0/0 initialFrames=11
+REVIEW_STATE actor=1 move=Wave Crash PP=10/9/10/15 Atk=8 Def=8 SpA=8 SpD=8 Spe=8 status=0 ability=109 item=472
+REVIEW_STATE actor=3 move=- PP=10/10/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=279 item=481
+REVIEW_PLAYER actor=0 species=619 move=Protect PP=10/10/20/4 status=0
+REVIEW_PLAYER actor=2 species=178 move=Protect PP=10/10/15/4 status=0
+REVIEW_TIMING setup=7 bothActors=6 complete=13
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Wave Crash target=2
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Psychic target=0
+AI decision turn=2 actor=1 move=Wave Crash target=2
+AI decision turn=2 actor=3 move=Psychic target=0
+REVIEW_AFTER board=99 turns=1 reserves=1 species=1352/80 HP=136/155 foes=98/114 faints=0/0 initialFrames=30
+REVIEW_STATE actor=1 move=Wave Crash PP=20/9/15/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=278 item=523
+REVIEW_STATE actor=3 move=Psychic PP=9/15/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=144 item=523
+REVIEW_PLAYER actor=0 species=619 move=Protect PP=10/10/20/4 status=0
+REVIEW_PLAYER actor=2 species=178 move=Protect PP=10/10/15/4 status=0
+REVIEW_TIMING setup=7 bothActors=26 complete=33
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Wave Crash target=0
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Muddy Water target=0
+AI decision turn=2 actor=1 move=Wave Crash target=0
+AI decision turn=2 actor=3 move=Muddy Water target=0
+REVIEW_AFTER board=99 turns=1 reserves=2 species=1352/1367 HP=136/111 foes=98/114 faints=0/0 initialFrames=50
+REVIEW_STATE actor=1 move=Wave Crash PP=20/9/15/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=278 item=523
+REVIEW_STATE actor=3 move=Muddy Water PP=10/9/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=279 item=481
+REVIEW_PLAYER actor=0 species=619 move=Protect PP=10/10/20/4 status=0
+REVIEW_PLAYER actor=2 species=178 move=Protect PP=10/10/15/4 status=0
+REVIEW_TIMING setup=7 bothActors=46 complete=53
+[0] EC live review Nolan: Haze counterplay: [32mPASS[0m
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Haze target=1
+AI decision turn=1 actor=1 move=Wave Crash target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=1 move=Wave Crash target=2
+REVIEW_AFTER board=80 turns=1 reserves=0 species=1366/1367 HP=150/111 foes=119/68 faints=0/0 initialFrames=9
+REVIEW_STATE actor=1 move=Wave Crash PP=10/9/10/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=109 item=472
+REVIEW_STATE actor=3 move=- PP=10/10/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=279 item=481
+REVIEW_PLAYER actor=0 species=356 move=Haze PP=19/15/20/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=Thunderbolt PP=14/10/20/5 status=0
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Haze target=1
+AI decision turn=1 actor=1 move=Wave Crash target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=0 move=Night Shade target=1
+AI decision turn=2 actor=1 move=Wave Crash target=2
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=3 actor=1 move=Order Up target=2
+REVIEW_AFTER board=80 turns=2 reserves=0 species=1366/1367 HP=56/111 foes=119/17 faints=0/0 initialFrames=9
+REVIEW_STATE actor=1 move=Wave Crash PP=10/8/10/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=109 item=472
+REVIEW_STATE actor=3 move=- PP=10/10/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=279 item=481
+REVIEW_PLAYER actor=0 species=356 move=Night Shade PP=19/14/20/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=Thunderbolt PP=13/10/20/5 status=0
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Haze target=1
+AI decision turn=1 actor=1 move=Wave Crash target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=0 move=Night Shade target=1
+AI decision turn=2 actor=1 move=Wave Crash target=2
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=3 actor=0 move=Night Shade target=1
+AI decision turn=3 actor=1 move=Order Up target=2
+AI decision turn=3 actor=2 move=Thunderbolt target=1
+AI switch turn=3 actor=1 party=2
+AI decision turn=4 actor=1 move=Flip Turn target=0
+AI decision turn=4 actor=3 move=Dragon Pulse target=0
+REVIEW_AFTER board=80 turns=3 reserves=0 species=1352/1367 HP=136/111 foes=119/0 faints=1/1 initialFrames=9
+REVIEW_STATE actor=1 move=- PP=20/10/15/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=278 item=523
+REVIEW_STATE actor=3 move=- PP=10/10/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=279 item=481
+REVIEW_PLAYER actor=0 species=356 move=Night Shade PP=19/13/20/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=- PP=12/10/20/5 status=0
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Haze target=1
+AI decision turn=1 actor=1 move=Wave Crash target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=0 move=Night Shade target=1
+AI decision turn=2 actor=1 move=Wave Crash target=2
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=3 actor=0 move=Night Shade target=1
+AI decision turn=3 actor=1 move=Order Up target=2
+AI decision turn=3 actor=2 move=Thunderbolt target=1
+AI switch turn=3 actor=1 party=2
+AI decision turn=4 actor=0 move=Night Shade target=1
+AI decision turn=4 actor=1 move=Flip Turn target=0
+AI decision turn=4 actor=3 move=Dragon Pulse target=0
+AI switch turn=4 actor=1 party=3
+AI decision turn=5 actor=1 move=Psychic target=0
+AI decision turn=5 actor=3 move=Dragon Pulse target=0
+REVIEW_AFTER board=80 turns=4 reserves=0 species=80/1367 HP=115/111 foes=82/0 faints=1/1 initialFrames=9
+REVIEW_STATE actor=1 move=- PP=10/15/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=144 item=523
+REVIEW_STATE actor=3 move=Dragon Pulse PP=8/10/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=279 item=481
+REVIEW_PLAYER actor=0 species=356 move=Night Shade PP=19/12/20/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=- PP=12/10/20/5 status=0
+REVIEW_TIMING setup=4 bothActors=6 complete=10
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Haze target=1
+AI decision turn=1 actor=1 move=Wave Crash target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=0 move=Night Shade target=1
+AI decision turn=2 actor=1 move=Wave Crash target=2
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=3 actor=0 move=Night Shade target=1
+AI decision turn=3 actor=1 move=Order Up target=2
+AI decision turn=3 actor=2 move=Thunderbolt target=1
+AI switch turn=3 actor=1 party=2
+AI decision turn=4 actor=0 move=Night Shade target=1
+AI decision turn=4 actor=1 move=Flip Turn target=0
+AI decision turn=4 actor=3 move=Dragon Pulse target=0
+AI switch turn=4 actor=1 party=3
+AI decision turn=5 actor=0 move=Night Shade target=1
+AI decision turn=5 actor=1 move=Psychic target=0
+AI decision turn=5 actor=3 move=Dragon Pulse target=0
+AI decision turn=6 actor=1 move=Psychic target=0
+AI decision turn=6 actor=3 move=Dragon Pulse target=0
+REVIEW_AFTER board=80 turns=5 reserves=0 species=80/1367 HP=113/111 foes=34/0 faints=1/1 initialFrames=9
+REVIEW_STATE actor=1 move=Psychic PP=8/15/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=144 item=0
+REVIEW_STATE actor=3 move=Dragon Pulse PP=6/10/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=279 item=481
+REVIEW_PLAYER actor=0 species=356 move=Night Shade PP=19/11/20/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=- PP=12/10/20/5 status=0
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Haze target=1
+AI decision turn=1 actor=1 move=Wave Crash target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=0 move=Night Shade target=1
+AI decision turn=2 actor=1 move=Wave Crash target=2
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=3 actor=0 move=Night Shade target=1
+AI decision turn=3 actor=1 move=Order Up target=2
+AI decision turn=3 actor=2 move=Thunderbolt target=1
+AI switch turn=3 actor=1 party=2
+AI decision turn=4 actor=0 move=Night Shade target=1
+AI decision turn=4 actor=1 move=Flip Turn target=0
+AI decision turn=4 actor=3 move=Dragon Pulse target=0
+AI switch turn=4 actor=1 party=3
+AI decision turn=5 actor=0 move=Night Shade target=1
+AI decision turn=5 actor=1 move=Psychic target=0
+AI decision turn=5 actor=3 move=Dragon Pulse target=0
+AI decision turn=6 actor=0 move=Night Shade target=1
+AI decision turn=6 actor=1 move=Psychic target=0
+AI decision turn=6 actor=3 move=Dragon Pulse target=0
+REVIEW_AFTER board=80 turns=6 reserves=0 species=80/1367 HP=113/111 foes=0/0 faints=1/2 initialFrames=9
+REVIEW_STATE actor=1 move=Psychic PP=8/15/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=144 item=0
+REVIEW_STATE actor=3 move=Dragon Pulse PP=4/10/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=279 item=481
+REVIEW_PLAYER actor=0 species=356 move=- PP=19/11/20/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=- PP=12/10/20/5 status=0
+[2] EC live review Nolan: Commander pressure and reserve transitions: [32mPASS[0m
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Wave Crash target=0
+AI decision turn=1 actor=2 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Wave Crash target=2
+REVIEW_AFTER board=0 turns=1 reserves=0 species=1366/1367 HP=123/111 foes=0/155 faints=0/1 initialFrames=11
+REVIEW_STATE actor=1 move=Wave Crash PP=10/9/10/15 Atk=8 Def=8 SpA=8 SpD=8 Spe=8 status=0 ability=109 item=472
+REVIEW_STATE actor=3 move=- PP=10/10/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=279 item=481
+REVIEW_PLAYER actor=0 species=133 move=- PP=14/20/20/5 status=0
+REVIEW_PLAYER actor=2 species=533 move=Drain Punch PP=9/15/20/5 status=0
+NOLAN_ENGINE commander=1367 hidden=7 speed=94/113
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Wave Crash target=0
+AI decision turn=1 actor=2 move=Drain Punch target=1
+AI decision turn=2 actor=2 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Wave Crash target=2
+AI decision turn=3 actor=1 move=Wave Crash target=2
+REVIEW_AFTER board=0 turns=2 reserves=0 species=1366/1367 HP=84/111 foes=0/83 faints=0/1 initialFrames=11
+REVIEW_STATE actor=1 move=Wave Crash PP=10/8/10/15 Atk=8 Def=8 SpA=8 SpD=8 Spe=8 status=0 ability=109 item=472
+REVIEW_STATE actor=3 move=- PP=10/10/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=279 item=481
+REVIEW_PLAYER actor=0 species=133 move=- PP=14/20/20/5 status=0
+REVIEW_PLAYER actor=2 species=533 move=Drain Punch PP=8/15/20/5 status=0
+NOLAN_ENGINE commander=1367 hidden=7 speed=94/113
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Wave Crash target=0
+AI decision turn=1 actor=2 move=Drain Punch target=1
+AI decision turn=2 actor=2 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Wave Crash target=2
+AI decision turn=3 actor=2 move=Drain Punch target=1
+AI decision turn=3 actor=1 move=Wave Crash target=2
+REVIEW_AFTER board=0 turns=3 reserves=0 species=1366/1367 HP=57/111 foes=0/0 faints=0/2 initialFrames=11
+REVIEW_STATE actor=1 move=Wave Crash PP=10/7/10/15 Atk=8 Def=8 SpA=8 SpD=8 Spe=8 status=0 ability=109 item=472
+REVIEW_STATE actor=3 move=- PP=10/10/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=279 item=481
+REVIEW_PLAYER actor=0 species=133 move=- PP=14/20/20/5 status=0
+REVIEW_PLAYER actor=2 species=533 move=- PP=8/15/20/5 status=0
+NOLAN_ENGINE commander=1367 hidden=7 speed=94/113
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Wave Crash target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=1 move=Wave Crash target=2
+REVIEW_AFTER board=1 turns=1 reserves=0 species=1366/1367 HP=113/111 foes=0/135 faints=0/1 initialFrames=10
+REVIEW_STATE actor=1 move=Wave Crash PP=10/9/10/15 Atk=8 Def=8 SpA=8 SpD=8 Spe=8 status=0 ability=109 item=472
+REVIEW_STATE actor=3 move=- PP=10/10/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=279 item=481
+REVIEW_PLAYER actor=0 species=178 move=- PP=9/15/15/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=Thunderbolt PP=14/10/20/5 status=0
+NOLAN_ENGINE commander=1367 hidden=7 speed=94/113
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Wave Crash target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=1 move=Wave Crash target=2
+AI decision turn=3 actor=1 move=Wave Crash target=2
+REVIEW_AFTER board=1 turns=2 reserves=0 species=1366/1367 HP=66/111 foes=0/68 faints=0/1 initialFrames=10
+REVIEW_STATE actor=1 move=Wave Crash PP=10/8/10/15 Atk=8 Def=8 SpA=8 SpD=8 Spe=8 status=0 ability=109 item=472
+REVIEW_STATE actor=3 move=- PP=10/10/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=279 item=481
+REVIEW_PLAYER actor=0 species=178 move=- PP=9/15/15/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=Thunderbolt PP=13/10/20/5 status=0
+NOLAN_ENGINE commander=1367 hidden=7 speed=94/113
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Wave Crash target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=1 move=Wave Crash target=2
+AI decision turn=3 actor=2 move=Thunderbolt target=1
+AI decision turn=3 actor=1 move=Wave Crash target=2
+REVIEW_AFTER board=1 turns=3 reserves=0 species=1366/1367 HP=44/111 foes=0/0 faints=0/2 initialFrames=10
+REVIEW_STATE actor=1 move=Wave Crash PP=10/7/10/15 Atk=8 Def=8 SpA=8 SpD=8 Spe=8 status=0 ability=109 item=472
+REVIEW_STATE actor=3 move=- PP=10/10/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=279 item=481
+REVIEW_PLAYER actor=0 species=178 move=- PP=9/15/15/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=- PP=13/10/20/5 status=0
+NOLAN_ENGINE commander=1367 hidden=7 speed=94/113
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Order Up target=0
+AI decision turn=1 actor=2 move=Giga Drain target=1
+AI decision turn=2 actor=1 move=Order Up target=0
+REVIEW_AFTER board=2 turns=1 reserves=0 species=1366/1367 HP=160/111 foes=98/135 faints=0/0 initialFrames=11
+REVIEW_STATE actor=1 move=- PP=10/10/10/15 Atk=8 Def=8 SpA=8 SpD=8 Spe=8 status=0 ability=109 item=472
+REVIEW_STATE actor=3 move=- PP=10/10/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=279 item=481
+REVIEW_PLAYER actor=0 species=619 move=Fake Out PP=9/10/20/20 status=0
+REVIEW_PLAYER actor=2 species=271 move=Giga Drain PP=9/15/10/5 status=0
+NOLAN_ENGINE commander=1367 hidden=7 speed=94/113
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Order Up target=0
+AI decision turn=1 actor=2 move=Giga Drain target=1
+AI decision turn=2 actor=0 move=Knock Off target=1
+AI decision turn=2 actor=1 move=Order Up target=0
+AI decision turn=2 actor=2 move=Giga Drain target=1
+AI decision turn=3 actor=1 move=Order Up target=0
+REVIEW_AFTER board=2 turns=2 reserves=0 species=1366/1367 HP=101/111 foes=15/135 faints=0/0 initialFrames=11
+REVIEW_STATE actor=1 move=Order Up PP=9/10/10/15 Atk=9 Def=8 SpA=8 SpD=8 Spe=8 status=0 ability=109 item=0
+REVIEW_STATE actor=3 move=- PP=10/10/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=279 item=481
+REVIEW_PLAYER actor=0 species=619 move=Knock Off PP=9/10/19/20 status=0
+REVIEW_PLAYER actor=2 species=271 move=Giga Drain PP=8/15/10/5 status=0
+NOLAN_ENGINE commander=1367 hidden=7 speed=94/113
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Order Up target=0
+AI decision turn=1 actor=2 move=Giga Drain target=1
+AI decision turn=2 actor=0 move=Knock Off target=1
+AI decision turn=2 actor=1 move=Order Up target=0
+AI decision turn=2 actor=2 move=Giga Drain target=1
+AI decision turn=3 actor=0 move=Knock Off target=1
+AI decision turn=3 actor=1 move=Order Up target=0
+AI decision turn=3 actor=2 move=Giga Drain target=1
+AI decision turn=4 actor=1 move=Order Up target=2
+REVIEW_AFTER board=2 turns=3 reserves=0 species=1366/1367 HP=48/111 foes=0/135 faints=0/1 initialFrames=11
+REVIEW_STATE actor=1 move=Order Up PP=8/10/10/15 Atk=10 Def=8 SpA=8 SpD=8 Spe=8 status=0 ability=109 item=0
+REVIEW_STATE actor=3 move=- PP=10/10/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=279 item=481
+REVIEW_PLAYER actor=0 species=619 move=- PP=9/10/18/20 status=0
+REVIEW_PLAYER actor=2 species=271 move=Giga Drain PP=7/15/10/5 status=0
+NOLAN_ENGINE commander=1367 hidden=7 speed=94/113
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Order Up target=0
+AI decision turn=1 actor=2 move=Giga Drain target=1
+AI decision turn=2 actor=0 move=Knock Off target=1
+AI decision turn=2 actor=1 move=Order Up target=0
+AI decision turn=2 actor=2 move=Giga Drain target=1
+AI decision turn=3 actor=0 move=Knock Off target=1
+AI decision turn=3 actor=1 move=Order Up target=0
+AI decision turn=3 actor=2 move=Giga Drain target=1
+AI decision turn=4 actor=2 move=Giga Drain target=1
+AI decision turn=4 actor=1 move=Order Up target=2
+AI decision turn=5 actor=1 move=Order Up target=2
+REVIEW_AFTER board=2 turns=4 reserves=0 species=1366/1367 HP=6/111 foes=0/73 faints=0/1 initialFrames=11
+REVIEW_STATE actor=1 move=Order Up PP=7/10/10/15 Atk=11 Def=8 SpA=8 SpD=8 Spe=8 status=0 ability=109 item=0
+REVIEW_STATE actor=3 move=- PP=10/10/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=279 item=481
+REVIEW_PLAYER actor=0 species=619 move=- PP=9/10/18/20 status=0
+REVIEW_PLAYER actor=2 species=271 move=Giga Drain PP=6/15/10/5 status=0
+NOLAN_ENGINE commander=1367 hidden=7 speed=94/113
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Order Up target=0
+AI decision turn=1 actor=2 move=Giga Drain target=1
+AI decision turn=2 actor=0 move=Knock Off target=1
+AI decision turn=2 actor=1 move=Order Up target=0
+AI decision turn=2 actor=2 move=Giga Drain target=1
+AI decision turn=3 actor=0 move=Knock Off target=1
+AI decision turn=3 actor=1 move=Order Up target=0
+AI decision turn=3 actor=2 move=Giga Drain target=1
+AI decision turn=4 actor=2 move=Giga Drain target=1
+AI decision turn=4 actor=1 move=Order Up target=2
+AI decision turn=5 actor=2 move=Giga Drain target=1
+AI decision turn=5 actor=1 move=Order Up target=2
+REVIEW_AFTER board=2 turns=5 reserves=0 species=1366/1367 HP=6/111 foes=0/0 faints=0/2 initialFrames=11
+REVIEW_STATE actor=1 move=Order Up PP=6/10/10/15 Atk=12 Def=8 SpA=8 SpD=8 Spe=8 status=0 ability=109 item=0
+REVIEW_STATE actor=3 move=- PP=10/10/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=279 item=481
+REVIEW_PLAYER actor=0 species=619 move=- PP=9/10/18/20 status=0
+REVIEW_PLAYER actor=2 species=271 move=- PP=6/15/10/5 status=0
+NOLAN_ENGINE commander=1367 hidden=7 speed=94/113
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Giga Drain target=1
+AI decision turn=1 actor=1 move=Wave Crash target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=1 move=Wave Crash target=2
+REVIEW_AFTER board=3 turns=1 reserves=0 species=1366/1367 HP=108/111 foes=135/68 faints=0/0 initialFrames=11
+REVIEW_STATE actor=1 move=Wave Crash PP=10/9/10/15 Atk=8 Def=8 SpA=8 SpD=8 Spe=8 status=0 ability=109 item=472
+REVIEW_STATE actor=3 move=- PP=10/10/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=279 item=481
+REVIEW_PLAYER actor=0 species=271 move=Giga Drain PP=9/15/10/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=Thunderbolt PP=14/10/20/5 status=0
+NOLAN_ENGINE commander=1367 hidden=7 speed=94/113
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Giga Drain target=1
+AI decision turn=1 actor=1 move=Wave Crash target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=0 move=Giga Drain target=1
+AI decision turn=2 actor=1 move=Wave Crash target=2
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=3 actor=1 move=Order Up target=0
+REVIEW_AFTER board=3 turns=2 reserves=0 species=1366/1367 HP=56/111 foes=135/0 faints=0/1 initialFrames=11
+REVIEW_STATE actor=1 move=Wave Crash PP=10/8/10/15 Atk=8 Def=8 SpA=8 SpD=8 Spe=8 status=0 ability=109 item=472
+REVIEW_STATE actor=3 move=- PP=10/10/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=279 item=481
+REVIEW_PLAYER actor=0 species=271 move=Giga Drain PP=8/15/10/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=- PP=14/10/20/5 status=0
+NOLAN_ENGINE commander=1367 hidden=7 speed=94/113
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Giga Drain target=1
+AI decision turn=1 actor=1 move=Wave Crash target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=0 move=Giga Drain target=1
+AI decision turn=2 actor=1 move=Wave Crash target=2
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=3 actor=0 move=Giga Drain target=1
+AI decision turn=3 actor=1 move=Order Up target=0
+AI decision turn=4 actor=1 move=Order Up target=0
+REVIEW_AFTER board=3 turns=3 reserves=0 species=1366/1367 HP=26/111 foes=100/0 faints=0/1 initialFrames=11
+REVIEW_STATE actor=1 move=Order Up PP=9/8/10/15 Atk=9 Def=8 SpA=8 SpD=8 Spe=8 status=0 ability=109 item=472
+REVIEW_STATE actor=3 move=- PP=10/10/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=279 item=481
+REVIEW_PLAYER actor=0 species=271 move=Giga Drain PP=7/15/10/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=- PP=14/10/20/5 status=0
+NOLAN_ENGINE commander=1367 hidden=7 speed=94/113
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Giga Drain target=1
+AI decision turn=1 actor=1 move=Wave Crash target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=0 move=Giga Drain target=1
+AI decision turn=2 actor=1 move=Wave Crash target=2
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=3 actor=0 move=Giga Drain target=1
+AI decision turn=3 actor=1 move=Order Up target=0
+AI decision turn=4 actor=0 move=Giga Drain target=1
+AI decision turn=4 actor=1 move=Order Up target=0
+AI switch turn=4 actor=1 party=2
+AI decision turn=5 actor=1 move=Flip Turn target=0
+AI decision turn=5 actor=3 move=Dragon Pulse target=0
+REVIEW_AFTER board=3 turns=4 reserves=0 species=1352/1367 HP=136/111 foes=44/0 faints=1/1 initialFrames=11
+REVIEW_STATE actor=1 move=- PP=20/10/15/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=278 item=523
+REVIEW_STATE actor=3 move=- PP=10/10/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=279 item=481
+REVIEW_PLAYER actor=0 species=271 move=Giga Drain PP=6/15/10/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=- PP=14/10/20/5 status=0
+NOLAN_ENGINE commander=0 hidden=0 speed=127/113
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Giga Drain target=1
+AI decision turn=1 actor=1 move=Wave Crash target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=0 move=Giga Drain target=1
+AI decision turn=2 actor=1 move=Wave Crash target=2
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=3 actor=0 move=Giga Drain target=1
+AI decision turn=3 actor=1 move=Order Up target=0
+AI decision turn=4 actor=0 move=Giga Drain target=1
+AI decision turn=4 actor=1 move=Order Up target=0
+AI switch turn=4 actor=1 party=2
+AI decision turn=5 actor=0 move=Giga Drain target=1
+AI decision turn=5 actor=1 move=Flip Turn target=0
+AI decision turn=5 actor=3 move=Dragon Pulse target=0
+AI switch turn=5 actor=1 party=3
+REVIEW_AFTER board=3 turns=5 reserves=0 species=80/1367 HP=155/111 foes=0/0 faints=1/2 initialFrames=11
+REVIEW_STATE actor=1 move=- PP=10/15/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=144 item=523
+REVIEW_STATE actor=3 move=Dragon Pulse PP=9/10/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=279 item=481
+REVIEW_PLAYER actor=0 species=271 move=- PP=6/15/10/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=- PP=14/10/20/5 status=0
+NOLAN_ENGINE commander=0 hidden=0 speed=39/113
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Order Up target=0
+AI decision turn=1 actor=2 move=Giga Drain target=1
+AI decision turn=2 actor=1 move=Order Up target=0
+REVIEW_AFTER board=4 turns=1 reserves=0 species=1366/1367 HP=167/111 foes=15/135 faints=0/0 initialFrames=11
+REVIEW_STATE actor=1 move=Order Up PP=9/10/10/15 Atk=9 Def=8 SpA=8 SpD=8 Spe=8 status=0 ability=109 item=472
+REVIEW_STATE actor=3 move=- PP=10/10/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=279 item=481
+REVIEW_PLAYER actor=0 species=619 move=Taunt PP=10/10/20/19 status=0
+REVIEW_PLAYER actor=2 species=271 move=Giga Drain PP=9/15/10/5 status=0
+NOLAN_ENGINE commander=1367 hidden=7 speed=94/113
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Order Up target=0
+AI decision turn=1 actor=2 move=Giga Drain target=1
+AI decision turn=2 actor=0 move=Knock Off target=1
+AI decision turn=2 actor=1 move=Order Up target=0
+AI decision turn=2 actor=2 move=Giga Drain target=1
+AI decision turn=3 actor=1 move=Order Up target=2
+REVIEW_AFTER board=4 turns=2 reserves=0 species=1366/1367 HP=108/111 foes=0/135 faints=0/1 initialFrames=11
+REVIEW_STATE actor=1 move=Order Up PP=8/10/10/15 Atk=10 Def=8 SpA=8 SpD=8 Spe=8 status=0 ability=109 item=0
+REVIEW_STATE actor=3 move=- PP=10/10/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=279 item=481
+REVIEW_PLAYER actor=0 species=619 move=- PP=10/10/19/19 status=0
+REVIEW_PLAYER actor=2 species=271 move=Giga Drain PP=8/15/10/5 status=0
+NOLAN_ENGINE commander=1367 hidden=7 speed=94/113
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Order Up target=0
+AI decision turn=1 actor=2 move=Giga Drain target=1
+AI decision turn=2 actor=0 move=Knock Off target=1
+AI decision turn=2 actor=1 move=Order Up target=0
+AI decision turn=2 actor=2 move=Giga Drain target=1
+AI decision turn=3 actor=2 move=Giga Drain target=1
+AI decision turn=3 actor=1 move=Order Up target=2
+AI decision turn=4 actor=1 move=Order Up target=2
+REVIEW_AFTER board=4 turns=3 reserves=0 species=1366/1367 HP=66/111 foes=0/73 faints=0/1 initialFrames=11
+REVIEW_STATE actor=1 move=Order Up PP=7/10/10/15 Atk=11 Def=8 SpA=8 SpD=8 Spe=8 status=0 ability=109 item=0
+REVIEW_STATE actor=3 move=- PP=10/10/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=279 item=481
+REVIEW_PLAYER actor=0 species=619 move=- PP=10/10/19/19 status=0
+REVIEW_PLAYER actor=2 species=271 move=Giga Drain PP=7/15/10/5 status=0
+NOLAN_ENGINE commander=1367 hidden=7 speed=94/113
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Order Up target=0
+AI decision turn=1 actor=2 move=Giga Drain target=1
+AI decision turn=2 actor=0 move=Knock Off target=1
+AI decision turn=2 actor=1 move=Order Up target=0
+AI decision turn=2 actor=2 move=Giga Drain target=1
+AI decision turn=3 actor=2 move=Giga Drain target=1
+AI decision turn=3 actor=1 move=Order Up target=2
+AI decision turn=4 actor=2 move=Giga Drain target=1
+AI decision turn=4 actor=1 move=Order Up target=2
+REVIEW_AFTER board=4 turns=4 reserves=0 species=1366/1367 HP=66/111 foes=0/0 faints=0/2 initialFrames=11
+REVIEW_STATE actor=1 move=Order Up PP=6/10/10/15 Atk=12 Def=8 SpA=8 SpD=8 Spe=8 status=0 ability=109 item=0
+REVIEW_STATE actor=3 move=- PP=10/10/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=279 item=481
+REVIEW_PLAYER actor=0 species=619 move=- PP=10/10/19/19 status=0
+REVIEW_PLAYER actor=2 species=271 move=- PP=7/15/10/5 status=0
+NOLAN_ENGINE commander=1367 hidden=7 speed=94/113
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Flip Turn target=0
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Psychic target=2
+AI decision turn=2 actor=1 move=Wave Crash target=0
+AI decision turn=2 actor=3 move=Psychic target=2
+REVIEW_AFTER board=0 turns=1 reserves=1 species=1352/80 HP=70/137 foes=80/69 faints=0/0 initialFrames=21
+REVIEW_STATE actor=1 move=Flip Turn PP=19/10/15/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=278 item=523
+REVIEW_STATE actor=3 move=Psychic PP=9/15/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=144 item=523
+REVIEW_PLAYER actor=0 species=133 move=Double-Edge PP=14/20/20/5 status=0
+REVIEW_PLAYER actor=2 species=533 move=Drain Punch PP=9/15/20/5 status=0
+NOLAN_ENGINE commander=0 hidden=0 speed=127/39
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Flip Turn target=0
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Psychic target=2
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Wave Crash target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Psychic target=2
+AI decision turn=3 actor=1 move=Flip Turn target=0
+AI decision turn=3 actor=3 move=Psychic target=0
+REVIEW_AFTER board=0 turns=2 reserves=1 species=1352/80 HP=19/119 foes=1/0 faints=0/1 initialFrames=21
+REVIEW_STATE actor=1 move=Wave Crash PP=19/9/15/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=278 item=0
+REVIEW_STATE actor=3 move=Psychic PP=8/15/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=144 item=523
+REVIEW_PLAYER actor=0 species=133 move=Double-Edge PP=13/20/20/5 status=0
+REVIEW_PLAYER actor=2 species=533 move=- PP=8/15/20/5 status=0
+NOLAN_ENGINE commander=0 hidden=0 speed=127/39
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Flip Turn target=0
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Psychic target=2
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Wave Crash target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Psychic target=2
+AI decision turn=3 actor=0 move=Double-Edge target=1
+AI decision turn=3 actor=1 move=Flip Turn target=0
+AI decision turn=3 actor=3 move=Psychic target=0
+REVIEW_AFTER board=0 turns=3 reserves=1 species=1352/80 HP=19/119 foes=0/0 faints=0/2 initialFrames=21
+REVIEW_STATE actor=1 move=Flip Turn PP=18/9/15/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=278 item=0
+REVIEW_STATE actor=3 move=Psychic PP=8/15/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=144 item=523
+REVIEW_PLAYER actor=0 species=133 move=- PP=13/20/20/5 status=0
+REVIEW_PLAYER actor=2 species=533 move=- PP=8/15/20/5 status=0
+NOLAN_ENGINE commander=0 hidden=0 speed=127/39
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Wave Crash target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Scald target=0
+AI decision turn=2 actor=1 move=Wave Crash target=2
+AI decision turn=2 actor=3 move=Slack Off target=3
+REVIEW_AFTER board=1 turns=1 reserves=1 species=1352/80 HP=60/95 foes=0/135 faints=0/1 initialFrames=20
+REVIEW_STATE actor=1 move=Wave Crash PP=20/9/15/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=278 item=0
+REVIEW_STATE actor=3 move=Scald PP=10/14/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=144 item=523
+REVIEW_PLAYER actor=0 species=178 move=- PP=9/15/15/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=Thunderbolt PP=14/10/20/5 status=0
+NOLAN_ENGINE commander=0 hidden=0 speed=127/39
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Wave Crash target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Scald target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=1 move=Wave Crash target=2
+AI decision turn=2 actor=3 move=Slack Off target=3
+AI decision turn=3 actor=1 move=Wave Crash target=2
+AI decision turn=3 actor=3 move=Psychic target=2
+REVIEW_AFTER board=1 turns=2 reserves=1 species=1352/80 HP=45/150 foes=0/89 faints=0/1 initialFrames=20
+REVIEW_STATE actor=1 move=Wave Crash PP=20/8/15/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=278 item=0
+REVIEW_STATE actor=3 move=Slack Off PP=10/14/4/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=144 item=0
+REVIEW_PLAYER actor=0 species=178 move=- PP=9/15/15/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=Thunderbolt PP=13/10/20/5 status=0
+NOLAN_ENGINE commander=0 hidden=0 speed=127/39
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Wave Crash target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Scald target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=1 move=Wave Crash target=2
+AI decision turn=2 actor=3 move=Slack Off target=3
+AI decision turn=3 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=1 move=Wave Crash target=2
+AI decision turn=3 actor=3 move=Psychic target=2
+AI decision turn=4 actor=1 move=Wave Crash target=2
+AI decision turn=4 actor=3 move=Slack Off target=3
+REVIEW_AFTER board=1 turns=3 reserves=1 species=1352/80 HP=30/90 foes=0/34 faints=0/1 initialFrames=20
+REVIEW_STATE actor=1 move=Wave Crash PP=20/7/15/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=278 item=0
+REVIEW_STATE actor=3 move=Psychic PP=9/14/4/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=144 item=0
+REVIEW_PLAYER actor=0 species=178 move=- PP=9/15/15/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=Thunderbolt PP=12/10/20/5 status=0
+NOLAN_ENGINE commander=0 hidden=0 speed=127/39
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Wave Crash target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Scald target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=1 move=Wave Crash target=2
+AI decision turn=2 actor=3 move=Slack Off target=3
+AI decision turn=3 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=1 move=Wave Crash target=2
+AI decision turn=3 actor=3 move=Psychic target=2
+AI decision turn=4 actor=2 move=Thunderbolt target=3
+AI decision turn=4 actor=1 move=Wave Crash target=2
+AI decision turn=4 actor=3 move=Slack Off target=3
+REVIEW_AFTER board=1 turns=4 reserves=1 species=1352/80 HP=19/90 foes=0/0 faints=0/2 initialFrames=20
+REVIEW_STATE actor=1 move=Wave Crash PP=20/6/15/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=278 item=0
+REVIEW_STATE actor=3 move=Psychic PP=9/14/4/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=144 item=0
+REVIEW_PLAYER actor=0 species=178 move=- PP=9/15/15/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=- PP=12/10/20/5 status=0
+NOLAN_ENGINE commander=0 hidden=0 speed=127/39
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Flip Turn target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Psychic target=0
+AI decision turn=2 actor=1 move=Flip Turn target=0
+AI decision turn=2 actor=3 move=Psychic target=0
+REVIEW_AFTER board=2 turns=1 reserves=1 species=1352/80 HP=116/103 foes=1/135 faints=0/0 initialFrames=21
+REVIEW_STATE actor=1 move=- PP=20/10/15/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=278 item=523
+REVIEW_STATE actor=3 move=Psychic PP=9/15/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=144 item=0
+REVIEW_PLAYER actor=0 species=619 move=Fake Out PP=9/10/20/20 status=0
+REVIEW_PLAYER actor=2 species=271 move=Giga Drain PP=9/15/10/5 status=0
+NOLAN_ENGINE commander=0 hidden=0 speed=127/39
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Flip Turn target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Psychic target=0
+AI decision turn=2 actor=0 move=Knock Off target=1
+AI decision turn=2 actor=1 move=Flip Turn target=0
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=3 move=Psychic target=0
+AI decision turn=3 actor=1 move=Flip Turn target=2
+AI decision turn=3 actor=3 move=Psychic target=2
+REVIEW_AFTER board=2 turns=2 reserves=1 species=1352/80 HP=116/13 foes=0/102 faints=0/1 initialFrames=21
+REVIEW_STATE actor=1 move=Flip Turn PP=19/10/15/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=278 item=523
+REVIEW_STATE actor=3 move=Psychic PP=8/15/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=144 item=0
+REVIEW_PLAYER actor=0 species=619 move=- PP=9/10/20/20 status=0
+REVIEW_PLAYER actor=2 species=271 move=Giga Drain PP=8/15/10/5 status=0
+NOLAN_ENGINE commander=0 hidden=0 speed=127/39
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Flip Turn target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Psychic target=0
+AI decision turn=2 actor=0 move=Knock Off target=1
+AI decision turn=2 actor=1 move=Flip Turn target=0
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=3 move=Psychic target=0
+AI decision turn=3 actor=2 move=Giga Drain target=3
+AI decision turn=3 actor=1 move=Flip Turn target=2
+AI decision turn=3 actor=3 move=Psychic target=2
+AI decision turn=4 actor=1 move=Ice Punch target=2
+REVIEW_AFTER board=2 turns=3 reserves=1 species=1352/80 HP=116/0 foes=0/101 faints=1/1 initialFrames=21
+REVIEW_STATE actor=1 move=Flip Turn PP=18/10/15/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=278 item=523
+REVIEW_STATE actor=3 move=- PP=8/15/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=0 item=0
+REVIEW_PLAYER actor=0 species=619 move=- PP=9/10/20/20 status=0
+REVIEW_PLAYER actor=2 species=271 move=Giga Drain PP=7/15/10/5 status=0
+NOLAN_ENGINE commander=0 hidden=0 speed=127/39
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Flip Turn target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Psychic target=0
+AI decision turn=2 actor=0 move=Knock Off target=1
+AI decision turn=2 actor=1 move=Flip Turn target=0
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=3 move=Psychic target=0
+AI decision turn=3 actor=2 move=Giga Drain target=3
+AI decision turn=3 actor=1 move=Flip Turn target=2
+AI decision turn=3 actor=3 move=Psychic target=2
+AI decision turn=4 actor=2 move=Giga Drain target=3
+AI decision turn=4 actor=1 move=Ice Punch target=2
+AI decision turn=5 actor=1 move=Ice Punch target=2
+REVIEW_AFTER board=2 turns=4 reserves=1 species=1352/80 HP=40/0 foes=0/132 faints=1/1 initialFrames=21
+REVIEW_STATE actor=1 move=Ice Punch PP=18/10/14/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=278 item=0
+REVIEW_STATE actor=3 move=- PP=8/15/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=0 item=0
+REVIEW_PLAYER actor=0 species=619 move=- PP=9/10/20/20 status=0
+REVIEW_PLAYER actor=2 species=271 move=Giga Drain PP=6/15/10/5 status=0
+NOLAN_ENGINE commander=0 hidden=0 speed=127/39
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Flip Turn target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Psychic target=0
+AI decision turn=2 actor=0 move=Knock Off target=1
+AI decision turn=2 actor=1 move=Flip Turn target=0
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=3 move=Psychic target=0
+AI decision turn=3 actor=2 move=Giga Drain target=3
+AI decision turn=3 actor=1 move=Flip Turn target=2
+AI decision turn=3 actor=3 move=Psychic target=2
+AI decision turn=4 actor=2 move=Giga Drain target=3
+AI decision turn=4 actor=1 move=Ice Punch target=2
+AI decision turn=5 actor=2 move=Giga Drain target=3
+AI decision turn=5 actor=1 move=Ice Punch target=2
+REVIEW_AFTER board=2 turns=5 reserves=1 species=1352/80 HP=0/0 foes=0/128 faints=2/1 initialFrames=21
+REVIEW_STATE actor=1 move=- PP=18/10/13/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=0 item=0
+REVIEW_STATE actor=3 move=- PP=8/15/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=0 item=0
+REVIEW_PLAYER actor=0 species=619 move=- PP=9/10/20/20 status=0
+REVIEW_PLAYER actor=2 species=271 move=Giga Drain PP=5/15/10/5 status=0
+NOLAN_ENGINE commander=0 hidden=0 speed=127/39
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Giga Drain target=1
+AI decision turn=1 actor=1 move=Wave Crash target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Wave Crash target=2
+AI decision turn=2 actor=3 move=Psychic target=0
+REVIEW_AFTER board=3 turns=1 reserves=1 species=1352/80 HP=45/155 foes=135/89 faints=0/0 initialFrames=23
+REVIEW_STATE actor=1 move=Wave Crash PP=20/9/15/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=278 item=0
+REVIEW_STATE actor=3 move=Protect PP=10/15/5/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=144 item=523
+REVIEW_PLAYER actor=0 species=271 move=Giga Drain PP=9/15/10/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=Thunderbolt PP=14/10/20/5 status=0
+NOLAN_ENGINE commander=0 hidden=0 speed=127/39
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Giga Drain target=1
+AI decision turn=1 actor=1 move=Wave Crash target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Giga Drain target=1
+AI decision turn=2 actor=1 move=Wave Crash target=2
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Psychic target=0
+AI decision turn=3 actor=3 move=Psychic target=0
+REVIEW_AFTER board=3 turns=2 reserves=1 species=1352/80 HP=0/95 foes=102/76 faints=1/0 initialFrames=23
+REVIEW_STATE actor=1 move=- PP=20/8/15/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=0 item=0
+REVIEW_STATE actor=3 move=Psychic PP=9/15/5/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=144 item=523
+REVIEW_PLAYER actor=0 species=271 move=Giga Drain PP=8/15/10/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=Thunderbolt PP=13/10/20/5 status=0
+NOLAN_ENGINE commander=0 hidden=0 speed=127/39
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Giga Drain target=1
+AI decision turn=1 actor=1 move=Wave Crash target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Giga Drain target=1
+AI decision turn=2 actor=1 move=Wave Crash target=2
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Psychic target=0
+AI decision turn=3 actor=3 move=Psychic target=0
+AI decision turn=3 actor=0 move=Giga Drain target=1
+AI decision turn=3 actor=2 move=Thunderbolt target=3
+REVIEW_AFTER board=3 turns=3 reserves=1 species=1352/80 HP=0/0 foes=135/76 faints=2/0 initialFrames=23
+REVIEW_STATE actor=1 move=- PP=20/8/15/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=0 item=0
+REVIEW_STATE actor=3 move=- PP=9/15/5/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=0 item=0
+REVIEW_PLAYER actor=0 species=271 move=Giga Drain PP=7/15/10/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=Thunderbolt PP=12/10/20/5 status=0
+NOLAN_ENGINE commander=0 hidden=0 speed=127/39
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Flip Turn target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Psychic target=0
+AI decision turn=2 actor=1 move=Flip Turn target=2
+AI decision turn=2 actor=3 move=Slack Off target=3
+REVIEW_AFTER board=4 turns=1 reserves=1 species=1352/80 HP=136/103 foes=0/135 faints=0/1 initialFrames=21
+REVIEW_STATE actor=1 move=Flip Turn PP=19/10/15/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=278 item=523
+REVIEW_STATE actor=3 move=Psychic PP=9/15/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=144 item=0
+REVIEW_PLAYER actor=0 species=619 move=- PP=10/10/20/19 status=0
+REVIEW_PLAYER actor=2 species=271 move=Giga Drain PP=9/15/10/5 status=0
+NOLAN_ENGINE commander=0 hidden=0 speed=127/39
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Flip Turn target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Psychic target=0
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=1 move=Flip Turn target=2
+AI decision turn=2 actor=3 move=Slack Off target=3
+AI decision turn=3 actor=1 move=Flip Turn target=2
+AI decision turn=3 actor=3 move=Protect target=3
+REVIEW_AFTER board=4 turns=2 reserves=1 species=1352/80 HP=136/90 foes=0/135 faints=0/1 initialFrames=21
+REVIEW_STATE actor=1 move=Flip Turn PP=18/10/15/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=278 item=523
+REVIEW_STATE actor=3 move=Slack Off PP=9/15/4/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=144 item=0
+REVIEW_PLAYER actor=0 species=619 move=- PP=10/10/20/19 status=0
+REVIEW_PLAYER actor=2 species=271 move=Giga Drain PP=8/15/10/5 status=0
+NOLAN_ENGINE commander=0 hidden=0 speed=127/39
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Flip Turn target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Psychic target=0
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=1 move=Flip Turn target=2
+AI decision turn=2 actor=3 move=Slack Off target=3
+AI decision turn=3 actor=2 move=Giga Drain target=3
+AI decision turn=3 actor=1 move=Flip Turn target=2
+AI decision turn=3 actor=3 move=Protect target=3
+AI decision turn=4 actor=1 move=Flip Turn target=2
+AI decision turn=4 actor=3 move=Psychic target=2
+REVIEW_AFTER board=4 turns=3 reserves=1 species=1352/80 HP=136/90 foes=0/128 faints=0/1 initialFrames=21
+REVIEW_STATE actor=1 move=Flip Turn PP=17/10/15/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=278 item=523
+REVIEW_STATE actor=3 move=Protect PP=9/15/4/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=144 item=0
+REVIEW_PLAYER actor=0 species=619 move=- PP=10/10/20/19 status=0
+REVIEW_PLAYER actor=2 species=271 move=Giga Drain PP=7/15/10/5 status=0
+NOLAN_ENGINE commander=0 hidden=0 speed=127/39
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Flip Turn target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Psychic target=0
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=1 move=Flip Turn target=2
+AI decision turn=2 actor=3 move=Slack Off target=3
+AI decision turn=3 actor=2 move=Giga Drain target=3
+AI decision turn=3 actor=1 move=Flip Turn target=2
+AI decision turn=3 actor=3 move=Protect target=3
+AI decision turn=4 actor=2 move=Giga Drain target=3
+AI decision turn=4 actor=1 move=Flip Turn target=2
+AI decision turn=4 actor=3 move=Psychic target=2
+AI decision turn=5 actor=1 move=Ice Punch target=2
+REVIEW_AFTER board=4 turns=4 reserves=1 species=1352/80 HP=136/0 foes=0/135 faints=1/1 initialFrames=21
+REVIEW_STATE actor=1 move=Flip Turn PP=16/10/15/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=278 item=523
+REVIEW_STATE actor=3 move=- PP=9/15/4/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=0 item=0
+REVIEW_PLAYER actor=0 species=619 move=- PP=10/10/20/19 status=0
+REVIEW_PLAYER actor=2 species=271 move=Giga Drain PP=6/15/10/5 status=0
+NOLAN_ENGINE commander=0 hidden=0 speed=127/39
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Flip Turn target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Psychic target=0
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=1 move=Flip Turn target=2
+AI decision turn=2 actor=3 move=Slack Off target=3
+AI decision turn=3 actor=2 move=Giga Drain target=3
+AI decision turn=3 actor=1 move=Flip Turn target=2
+AI decision turn=3 actor=3 move=Protect target=3
+AI decision turn=4 actor=2 move=Giga Drain target=3
+AI decision turn=4 actor=1 move=Flip Turn target=2
+AI decision turn=4 actor=3 move=Psychic target=2
+AI decision turn=5 actor=2 move=Giga Drain target=3
+AI decision turn=5 actor=1 move=Ice Punch target=2
+AI decision turn=6 actor=1 move=Ice Punch target=2
+REVIEW_AFTER board=4 turns=5 reserves=1 species=1352/80 HP=60/0 foes=0/135 faints=1/1 initialFrames=21
+REVIEW_STATE actor=1 move=Ice Punch PP=16/10/14/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=278 item=0
+REVIEW_STATE actor=3 move=- PP=9/15/4/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=0 item=0
+REVIEW_PLAYER actor=0 species=619 move=- PP=10/10/20/19 status=0
+REVIEW_PLAYER actor=2 species=271 move=Giga Drain PP=5/15/10/5 status=0
+NOLAN_ENGINE commander=0 hidden=0 speed=127/39
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Flip Turn target=0
+AI switch turn=1 actor=3 party=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI switch turn=1 actor=1 party=1
+AI decision turn=2 actor=1 move=Helping Hand target=3
+AI decision turn=2 actor=3 move=Psychic target=2
+REVIEW_AFTER board=0 turns=1 reserves=2 species=1367/80 HP=37/137 foes=77/155 faints=0/0 initialFrames=45
+REVIEW_STATE actor=1 move=- PP=10/10/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=279 item=481
+REVIEW_STATE actor=3 move=- PP=10/15/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=144 item=523
+REVIEW_PLAYER actor=0 species=133 move=Double-Edge PP=14/20/20/5 status=0
+REVIEW_PLAYER actor=2 species=533 move=Drain Punch PP=9/15/20/5 status=0
+NOLAN_ENGINE commander=0 hidden=0 speed=113/39
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Flip Turn target=0
+AI switch turn=1 actor=3 party=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI switch turn=1 actor=1 party=1
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Helping Hand target=3
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Psychic target=2
+AI switch turn=2 actor=1 party=0
+AI decision turn=3 actor=1 move=Wave Crash target=0
+AI decision turn=3 actor=3 move=Psychic target=2
+REVIEW_AFTER board=0 turns=2 reserves=2 species=1353/80 HP=136/119 foes=65/27 faints=1/0 initialFrames=45
+REVIEW_STATE actor=1 move=- PP=19/10/15/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=278 item=523
+REVIEW_STATE actor=3 move=Psychic PP=9/15/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=144 item=523
+REVIEW_PLAYER actor=0 species=133 move=Double-Edge PP=13/20/20/5 status=0
+REVIEW_PLAYER actor=2 species=533 move=Drain Punch PP=8/15/20/5 status=0
+NOLAN_ENGINE commander=0 hidden=0 speed=127/39
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Flip Turn target=0
+AI switch turn=1 actor=3 party=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI switch turn=1 actor=1 party=1
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Helping Hand target=3
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Psychic target=2
+AI switch turn=2 actor=1 party=0
+AI decision turn=3 actor=0 move=Double-Edge target=1
+AI decision turn=3 actor=1 move=Wave Crash target=0
+AI decision turn=3 actor=2 move=Drain Punch target=3
+AI decision turn=3 actor=3 move=Psychic target=2
+REVIEW_AFTER board=0 turns=3 reserves=2 species=1353/80 HP=115/101 foes=0/0 faints=1/2 initialFrames=45
+REVIEW_STATE actor=1 move=Wave Crash PP=19/9/15/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=278 item=523
+REVIEW_STATE actor=3 move=Psychic PP=8/15/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=144 item=523
+REVIEW_PLAYER actor=0 species=133 move=- PP=13/20/20/5 status=0
+REVIEW_PLAYER actor=2 species=533 move=- PP=7/15/20/5 status=0
+NOLAN_HERO hp=136 atk=162 def=90 spa=87 spd=82 speed=127
+NOLAN_ENGINE commander=0 hidden=0 speed=127/39
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Ice Punch target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Muddy Water target=0
+AI decision turn=2 actor=1 move=Flip Turn target=0
+AI decision turn=2 actor=3 move=Dragon Pulse target=0
+REVIEW_AFTER board=1 turns=1 reserves=2 species=1352/1367 HP=82/86 foes=6/92 faints=0/0 initialFrames=42
+REVIEW_STATE actor=1 move=Ice Punch PP=20/10/14/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=278 item=0
+REVIEW_STATE actor=3 move=Muddy Water PP=10/9/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=279 item=481
+REVIEW_PLAYER actor=0 species=178 move=Psychic PP=9/15/15/5 status=32
+REVIEW_PLAYER actor=2 species=417 move=Thunderbolt PP=14/10/20/5 status=0
+NOLAN_ENGINE commander=0 hidden=0 speed=127/113
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Ice Punch target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Muddy Water target=0
+AI decision turn=2 actor=0 move=Psychic target=1
+AI decision turn=2 actor=1 move=Flip Turn target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Dragon Pulse target=0
+AI switch turn=2 actor=1 party=2
+AI decision turn=3 actor=1 move=Psychic target=2
+AI decision turn=3 actor=3 move=Dragon Pulse target=2
+REVIEW_AFTER board=1 turns=2 reserves=2 species=80/1367 HP=155/61 foes=0/92 faints=1/1 initialFrames=42
+REVIEW_STATE actor=1 move=- PP=10/15/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=144 item=523
+REVIEW_STATE actor=3 move=Dragon Pulse PP=9/9/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=279 item=481
+REVIEW_PLAYER actor=0 species=178 move=- PP=8/15/15/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=Thunderbolt PP=13/10/20/5 status=0
+NOLAN_ENGINE commander=0 hidden=0 speed=39/113
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Ice Punch target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Muddy Water target=0
+AI decision turn=2 actor=0 move=Psychic target=1
+AI decision turn=2 actor=1 move=Flip Turn target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Dragon Pulse target=0
+AI switch turn=2 actor=1 party=2
+AI decision turn=3 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=1 move=Psychic target=2
+AI decision turn=3 actor=3 move=Dragon Pulse target=2
+AI decision turn=4 actor=1 move=Psychic target=2
+AI decision turn=4 actor=3 move=Dragon Pulse target=2
+REVIEW_AFTER board=1 turns=3 reserves=2 species=80/1367 HP=155/36 foes=0/28 faints=1/1 initialFrames=42
+REVIEW_STATE actor=1 move=Psychic PP=9/15/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=144 item=523
+REVIEW_STATE actor=3 move=Dragon Pulse PP=8/9/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=279 item=481
+REVIEW_PLAYER actor=0 species=178 move=- PP=8/15/15/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=Thunderbolt PP=12/10/20/5 status=0
+NOLAN_ENGINE commander=0 hidden=0 speed=39/113
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Ice Punch target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Muddy Water target=0
+AI decision turn=2 actor=0 move=Psychic target=1
+AI decision turn=2 actor=1 move=Flip Turn target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Dragon Pulse target=0
+AI switch turn=2 actor=1 party=2
+AI decision turn=3 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=1 move=Psychic target=2
+AI decision turn=3 actor=3 move=Dragon Pulse target=2
+AI decision turn=4 actor=2 move=Thunderbolt target=3
+AI decision turn=4 actor=1 move=Psychic target=2
+AI decision turn=4 actor=3 move=Dragon Pulse target=2
+REVIEW_AFTER board=1 turns=4 reserves=2 species=80/1367 HP=155/36 foes=0/0 faints=1/2 initialFrames=42
+REVIEW_STATE actor=1 move=Psychic PP=9/15/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=144 item=523
+REVIEW_STATE actor=3 move=Dragon Pulse PP=7/9/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=279 item=481
+REVIEW_PLAYER actor=0 species=178 move=- PP=8/15/15/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=- PP=12/10/20/5 status=0
+NOLAN_ENGINE commander=0 hidden=0 speed=39/113
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Flip Turn target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Dragon Pulse target=0
+AI switch turn=2 actor=1 party=2
+AI decision turn=2 actor=3 move=Dragon Pulse target=0
+REVIEW_AFTER board=2 turns=1 reserves=2 species=1352/1367 HP=116/71 foes=13/135 faints=0/0 initialFrames=46
+REVIEW_STATE actor=1 move=- PP=20/10/15/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=278 item=523
+REVIEW_STATE actor=3 move=Dragon Pulse PP=9/10/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=279 item=481
+REVIEW_PLAYER actor=0 species=619 move=Fake Out PP=9/10/20/20 status=0
+REVIEW_PLAYER actor=2 species=271 move=Giga Drain PP=9/15/10/5 status=0
+NOLAN_ENGINE commander=0 hidden=0 speed=127/113
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Flip Turn target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Dragon Pulse target=0
+AI switch turn=2 actor=1 party=2
+AI decision turn=2 actor=0 move=Knock Off target=1
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=3 move=Dragon Pulse target=0
+AI decision turn=3 actor=1 move=Psychic target=2
+AI decision turn=3 actor=3 move=Dragon Pulse target=2
+REVIEW_AFTER board=2 turns=2 reserves=2 species=80/1367 HP=155/31 foes=0/135 faints=0/1 initialFrames=46
+REVIEW_STATE actor=1 move=- PP=10/15/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=144 item=523
+REVIEW_STATE actor=3 move=Dragon Pulse PP=8/10/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=279 item=481
+REVIEW_PLAYER actor=0 species=619 move=- PP=9/10/20/20 status=0
+REVIEW_PLAYER actor=2 species=271 move=Giga Drain PP=8/15/10/5 status=0
+NOLAN_ENGINE commander=0 hidden=0 speed=39/113
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Flip Turn target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Dragon Pulse target=0
+AI switch turn=2 actor=1 party=2
+AI decision turn=2 actor=0 move=Knock Off target=1
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=3 move=Dragon Pulse target=0
+AI decision turn=3 actor=2 move=Giga Drain target=3
+AI decision turn=3 actor=1 move=Psychic target=2
+AI decision turn=3 actor=3 move=Dragon Pulse target=2
+AI switch turn=3 actor=3 party=0
+AI decision turn=4 actor=1 move=Psychic target=2
+AI decision turn=4 actor=3 move=Ice Punch target=2
+REVIEW_AFTER board=2 turns=3 reserves=2 species=80/1353 HP=155/116 foes=0/72 faints=1/1 initialFrames=46
+REVIEW_STATE actor=1 move=Psychic PP=9/15/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=144 item=523
+REVIEW_STATE actor=3 move=- PP=20/10/15/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=278 item=523
+REVIEW_PLAYER actor=0 species=619 move=- PP=9/10/20/20 status=0
+REVIEW_PLAYER actor=2 species=271 move=Giga Drain PP=7/15/10/5 status=0
+NOLAN_ENGINE commander=0 hidden=0 speed=39/127
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Flip Turn target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Dragon Pulse target=0
+AI switch turn=2 actor=1 party=2
+AI decision turn=2 actor=0 move=Knock Off target=1
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=3 move=Dragon Pulse target=0
+AI decision turn=3 actor=2 move=Giga Drain target=3
+AI decision turn=3 actor=1 move=Psychic target=2
+AI decision turn=3 actor=3 move=Dragon Pulse target=2
+AI switch turn=3 actor=3 party=0
+AI decision turn=4 actor=2 move=Giga Drain target=3
+AI decision turn=4 actor=1 move=Psychic target=2
+AI decision turn=4 actor=3 move=Ice Punch target=2
+AI decision turn=5 actor=1 move=Psychic target=2
+AI decision turn=5 actor=3 move=Ice Punch target=2
+REVIEW_AFTER board=2 turns=4 reserves=2 species=80/1353 HP=155/66 foes=0/21 faints=1/1 initialFrames=46
+REVIEW_STATE actor=1 move=Psychic PP=8/15/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=144 item=523
+REVIEW_STATE actor=3 move=Ice Punch PP=20/10/14/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=278 item=0
+REVIEW_PLAYER actor=0 species=619 move=- PP=9/10/20/20 status=0
+REVIEW_PLAYER actor=2 species=271 move=Giga Drain PP=6/15/10/5 status=0
+NOLAN_ENGINE commander=0 hidden=0 speed=39/127
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Flip Turn target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Dragon Pulse target=0
+AI switch turn=2 actor=1 party=2
+AI decision turn=2 actor=0 move=Knock Off target=1
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=3 move=Dragon Pulse target=0
+AI decision turn=3 actor=2 move=Giga Drain target=3
+AI decision turn=3 actor=1 move=Psychic target=2
+AI decision turn=3 actor=3 move=Dragon Pulse target=2
+AI switch turn=3 actor=3 party=0
+AI decision turn=4 actor=2 move=Giga Drain target=3
+AI decision turn=4 actor=1 move=Psychic target=2
+AI decision turn=4 actor=3 move=Ice Punch target=2
+AI decision turn=5 actor=2 move=Giga Drain target=3
+AI decision turn=5 actor=1 move=Psychic target=2
+AI decision turn=5 actor=3 move=Ice Punch target=2
+REVIEW_AFTER board=2 turns=5 reserves=2 species=80/1353 HP=155/66 foes=0/0 faints=1/2 initialFrames=46
+REVIEW_STATE actor=1 move=Psychic PP=8/15/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=144 item=523
+REVIEW_STATE actor=3 move=Ice Punch PP=20/10/13/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=278 item=0
+REVIEW_PLAYER actor=0 species=619 move=- PP=9/10/20/20 status=0
+REVIEW_PLAYER actor=2 species=271 move=- PP=6/15/10/5 status=0
+NOLAN_ENGINE commander=0 hidden=0 speed=39/127
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Giga Drain target=1
+AI decision turn=1 actor=1 move=Flip Turn target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Muddy Water target=0
+AI switch turn=1 actor=1 party=2
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Dragon Pulse target=2
+REVIEW_AFTER board=3 turns=1 reserves=2 species=80/1367 HP=103/86 foes=135/101 faints=0/0 initialFrames=44
+REVIEW_STATE actor=1 move=- PP=10/15/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=144 item=0
+REVIEW_STATE actor=3 move=Muddy Water PP=10/9/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=279 item=481
+REVIEW_PLAYER actor=0 species=271 move=Giga Drain PP=9/15/10/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=Thunderbolt PP=14/10/20/5 status=0
+NOLAN_ENGINE commander=0 hidden=0 speed=39/113
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Giga Drain target=1
+AI decision turn=1 actor=1 move=Flip Turn target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Muddy Water target=0
+AI switch turn=1 actor=1 party=2
+AI decision turn=2 actor=0 move=Giga Drain target=1
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Dragon Pulse target=2
+AI decision turn=3 actor=1 move=Slack Off target=1
+AI decision turn=3 actor=3 move=Dragon Pulse target=2
+REVIEW_AFTER board=3 turns=2 reserves=2 species=80/1367 HP=103/61 foes=135/46 faints=0/0 initialFrames=44
+REVIEW_STATE actor=1 move=Protect PP=10/15/5/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=144 item=0
+REVIEW_STATE actor=3 move=Dragon Pulse PP=9/9/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=279 item=481
+REVIEW_PLAYER actor=0 species=271 move=Giga Drain PP=8/15/10/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=Thunderbolt PP=13/10/20/5 status=0
+NOLAN_ENGINE commander=0 hidden=0 speed=39/113
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Giga Drain target=1
+AI decision turn=1 actor=1 move=Flip Turn target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Muddy Water target=0
+AI switch turn=1 actor=1 party=2
+AI decision turn=2 actor=0 move=Giga Drain target=1
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Dragon Pulse target=2
+AI decision turn=3 actor=0 move=Giga Drain target=1
+AI decision turn=3 actor=1 move=Slack Off target=1
+AI decision turn=3 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=3 move=Dragon Pulse target=2
+AI decision turn=4 actor=1 move=Slack Off target=1
+AI decision turn=4 actor=3 move=Icy Wind target=0
+REVIEW_AFTER board=3 turns=3 reserves=2 species=80/1367 HP=90/61 foes=135/0 faints=0/1 initialFrames=44
+REVIEW_STATE actor=1 move=Slack Off PP=10/15/4/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=144 item=0
+REVIEW_STATE actor=3 move=Dragon Pulse PP=8/9/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=279 item=481
+REVIEW_PLAYER actor=0 species=271 move=Giga Drain PP=7/15/10/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=- PP=13/10/20/5 status=0
+NOLAN_ENGINE commander=0 hidden=0 speed=39/113
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Giga Drain target=1
+AI decision turn=1 actor=1 move=Flip Turn target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Muddy Water target=0
+AI switch turn=1 actor=1 party=2
+AI decision turn=2 actor=0 move=Giga Drain target=1
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Dragon Pulse target=2
+AI decision turn=3 actor=0 move=Giga Drain target=1
+AI decision turn=3 actor=1 move=Slack Off target=1
+AI decision turn=3 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=3 move=Dragon Pulse target=2
+AI decision turn=4 actor=0 move=Giga Drain target=1
+AI decision turn=4 actor=1 move=Slack Off target=1
+AI decision turn=4 actor=3 move=Icy Wind target=0
+AI decision turn=5 actor=1 move=Slack Off target=1
+AI decision turn=5 actor=3 move=Dragon Pulse target=0
+REVIEW_AFTER board=3 turns=4 reserves=2 species=80/1367 HP=65/61 foes=135/0 faints=0/1 initialFrames=44
+REVIEW_STATE actor=1 move=Slack Off PP=10/15/3/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=144 item=0
+REVIEW_STATE actor=3 move=Icy Wind PP=8/9/14/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=279 item=481
+REVIEW_PLAYER actor=0 species=271 move=Giga Drain PP=6/15/10/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=- PP=13/10/20/5 status=0
+NOLAN_ENGINE commander=0 hidden=0 speed=39/113
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Giga Drain target=1
+AI decision turn=1 actor=1 move=Flip Turn target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Muddy Water target=0
+AI switch turn=1 actor=1 party=2
+AI decision turn=2 actor=0 move=Giga Drain target=1
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Dragon Pulse target=2
+AI decision turn=3 actor=0 move=Giga Drain target=1
+AI decision turn=3 actor=1 move=Slack Off target=1
+AI decision turn=3 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=3 move=Dragon Pulse target=2
+AI decision turn=4 actor=0 move=Giga Drain target=1
+AI decision turn=4 actor=1 move=Slack Off target=1
+AI decision turn=4 actor=3 move=Icy Wind target=0
+AI decision turn=5 actor=0 move=Giga Drain target=1
+AI decision turn=5 actor=1 move=Slack Off target=1
+AI decision turn=5 actor=3 move=Dragon Pulse target=0
+AI decision turn=6 actor=1 move=Slack Off target=1
+AI decision turn=6 actor=3 move=Dragon Pulse target=0
+REVIEW_AFTER board=3 turns=5 reserves=2 species=80/1367 HP=52/61 foes=135/0 faints=0/1 initialFrames=44
+REVIEW_STATE actor=1 move=Slack Off PP=10/15/2/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=144 item=0
+REVIEW_STATE actor=3 move=Dragon Pulse PP=7/9/14/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=279 item=481
+REVIEW_PLAYER actor=0 species=271 move=Giga Drain PP=5/15/10/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=- PP=13/10/20/5 status=0
+NOLAN_ENGINE commander=0 hidden=0 speed=39/113
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Flip Turn target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Dragon Pulse target=0
+AI switch turn=1 actor=1 party=2
+AI decision turn=2 actor=1 move=Psychic target=2
+AI decision turn=2 actor=3 move=Helping Hand target=1
+REVIEW_AFTER board=4 turns=1 reserves=2 species=80/1367 HP=155/71 foes=0/135 faints=0/1 initialFrames=46
+REVIEW_STATE actor=1 move=- PP=10/15/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=144 item=523
+REVIEW_STATE actor=3 move=Dragon Pulse PP=9/10/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=279 item=481
+REVIEW_PLAYER actor=0 species=619 move=- PP=10/10/20/20 status=0
+REVIEW_PLAYER actor=2 species=271 move=Giga Drain PP=9/15/10/5 status=0
+NOLAN_ENGINE commander=0 hidden=0 speed=39/113
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Flip Turn target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Dragon Pulse target=0
+AI switch turn=1 actor=1 party=2
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=1 move=Psychic target=2
+AI decision turn=2 actor=3 move=Helping Hand target=1
+AI decision turn=3 actor=1 move=Psychic target=2
+AI decision turn=3 actor=3 move=Icy Wind target=2
+REVIEW_AFTER board=4 turns=2 reserves=2 species=80/1367 HP=155/31 foes=0/84 faints=0/1 initialFrames=46
+REVIEW_STATE actor=1 move=Psychic PP=9/15/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=144 item=523
+REVIEW_STATE actor=3 move=Helping Hand PP=9/10/15/19 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=279 item=481
+REVIEW_PLAYER actor=0 species=619 move=- PP=10/10/20/20 status=0
+REVIEW_PLAYER actor=2 species=271 move=Giga Drain PP=8/15/10/5 status=0
+NOLAN_ENGINE commander=0 hidden=0 speed=39/113
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Flip Turn target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Dragon Pulse target=0
+AI switch turn=1 actor=1 party=2
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=1 move=Psychic target=2
+AI decision turn=2 actor=3 move=Helping Hand target=1
+AI decision turn=3 actor=2 move=Giga Drain target=3
+AI decision turn=3 actor=1 move=Psychic target=2
+AI decision turn=3 actor=3 move=Icy Wind target=2
+AI switch turn=3 actor=3 party=0
+AI decision turn=4 actor=1 move=Psychic target=2
+AI decision turn=4 actor=3 move=Ice Punch target=2
+REVIEW_AFTER board=4 turns=3 reserves=2 species=80/1353 HP=155/136 foes=0/18 faints=1/1 initialFrames=46
+REVIEW_STATE actor=1 move=Psychic PP=8/15/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=144 item=523
+REVIEW_STATE actor=3 move=- PP=19/10/15/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=278 item=523
+REVIEW_PLAYER actor=0 species=619 move=- PP=10/10/20/20 status=0
+REVIEW_PLAYER actor=2 species=271 move=Giga Drain PP=7/15/10/5 status=0
+NOLAN_ENGINE commander=0 hidden=0 speed=39/127
+REVIEW_INPUT trainer=342 slot=0 species=1366 lv=38 HP=197 Atk=101 Def=104 SpA=59 SpD=86 Spe=47 item=472 ability=109
+REVIEW_INPUT trainer=342 slot=1 species=1367 lv=38 HP=111 Atk=48 Def=62 SpA=131 SpD=88 Spe=113 item=481 ability=279
+REVIEW_INPUT trainer=342 slot=2 species=1352 lv=38 HP=136 Atk=93 Def=71 SpA=51 SpD=63 Spe=127 item=523 ability=278
+REVIEW_INPUT trainer=342 slot=3 species=80 lv=38 HP=155 Atk=65 Def=136 SpA=92 SpD=77 Spe=39 item=523 ability=144
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Flip Turn target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Dragon Pulse target=0
+AI switch turn=1 actor=1 party=2
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=1 move=Psychic target=2
+AI decision turn=2 actor=3 move=Helping Hand target=1
+AI decision turn=3 actor=2 move=Giga Drain target=3
+AI decision turn=3 actor=1 move=Psychic target=2
+AI decision turn=3 actor=3 move=Icy Wind target=2
+AI switch turn=3 actor=3 party=0
+AI decision turn=4 actor=2 move=Giga Drain target=3
+AI decision turn=4 actor=1 move=Psychic target=2
+AI decision turn=4 actor=3 move=Ice Punch target=2
+REVIEW_AFTER board=4 turns=4 reserves=2 species=80/1353 HP=155/136 foes=0/0 faints=1/2 initialFrames=46
+REVIEW_STATE actor=1 move=Psychic PP=8/15/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=144 item=523
+REVIEW_STATE actor=3 move=Ice Punch PP=19/10/14/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=278 item=523
+REVIEW_PLAYER actor=0 species=619 move=- PP=10/10/20/20 status=0
+REVIEW_PLAYER actor=2 species=271 move=- PP=7/15/10/5 status=0
+NOLAN_ENGINE commander=0 hidden=0 speed=39/127
+
+- Tests [32mPASSED[0m:          3
+- Tests [34mTOTAL[0m:           3
+

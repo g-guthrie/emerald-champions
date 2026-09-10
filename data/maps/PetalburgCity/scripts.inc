@@ -719,16 +719,16 @@ PetalburgCity_Text_ThisIsGymSign:
 
 PetalburgCity_Text_WaterReflection:
 	.string "My face is reflected in the water.\p"
-	.string "It's a shining grin full of hope…\p"
-	.string "Or it could be a look of somber silence\n"
-	.string "struggling with fear…\p"
-	.string "What do you see reflected in your face?$"
+	.string "A hopeful grin one day...\n"
+	.string "A worried frown the next.\p"
+	.string "What do you see in your reflection?$"
 
 PetalburgCity_Text_FullPartyExplanation:
-	.string "Let's say you have six POKéMON.\n"
-	.string "If you catch another one…\p"
-	.string "It is automatically sent to a STORAGE\n"
-	.string "BOX over a PC connection.$"
+	.string "Already traveling with six POKéMON?\n"
+	.string "You can still catch a new partner.\p"
+	.string "Choose whether to add it to your\n"
+	.string "party and send someone to a BOX,\l"
+	.string "or send the new catch to storage.$"
 
 PetalburgCity_Text_GymSign:
 	.string "PETALBURG CITY POKéMON GYM\n"
@@ -743,18 +743,20 @@ PetalburgCity_Text_WallyHouseSign:
 	.string "WALLY'S HOUSE$"
 
 PetalburgCity_Text_AreYouATrainer:
-	.string "Excuse me!\p"
-	.string "Let me guess, from the way you're\n"
-	.string "dressed, are you a POKéMON TRAINER?$"
+	.string "Excuse me! You travel with POKéMON,\n"
+	.string "don't you?\p"
+	.string "I'm SCOTT. I scout for TRAINERS\n"
+	.string "with a talent for battling.$"
 
 PetalburgCity_Text_WellMaybeNot:
-	.string "… … … … … …\p"
-	.string "Well, maybe not.\n"
-	.string "Your clothes aren't all that dirty.\p"
-	.string "You're either a rookie TRAINER,\n"
-	.string "or maybe you're just an ordinary kid.$"
+	.string "No BADGES yet? Then your journey\n"
+	.string "is just getting started.\p"
+	.string "A strong team takes more than\n"
+	.string "power. I watch how partners work\l"
+	.string "together when a battle gets tough.$"
 
 PetalburgCity_Text_ImLookingForTalentedTrainers:
-	.string "I'm roaming the land in search of\n"
-	.string "talented TRAINERS.\p"
-	.string "I'm sorry to have taken your time.$"
+	.string "Heading to RUSTBORO? ROXANNE\n"
+	.string "will give you plenty to think about.\p"
+	.string "I'll be visiting the TRAINER'S\n"
+	.string "SCHOOL there. Tell me how it goes!$"

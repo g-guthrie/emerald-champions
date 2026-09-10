@@ -1,0 +1,2425 @@
+[
+  {
+    "map": "InsideOfTruck",
+    "objects": [
+      {
+        "local_id": "LOCALID_TRUCK_BOX_TOP",
+        "graphics_id": "OBJ_EVENT_GFX_MOVING_BOX",
+        "x": 0,
+        "y": 0,
+        "elevation": 8,
+        "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "InsideOfTruck_EventScript_MovingBox",
+        "flag": "0"
+      },
+      {
+        "local_id": "LOCALID_TRUCK_BOX_BOTTOM_L",
+        "graphics_id": "OBJ_EVENT_GFX_MOVING_BOX",
+        "x": 0,
+        "y": 3,
+        "elevation": 8,
+        "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "InsideOfTruck_EventScript_MovingBox",
+        "flag": "0"
+      },
+      {
+        "local_id": "LOCALID_TRUCK_BOX_BOTTOM_R",
+        "graphics_id": "OBJ_EVENT_GFX_MOVING_BOX",
+        "x": 2,
+        "y": 3,
+        "elevation": 8,
+        "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "InsideOfTruck_EventScript_MovingBox",
+        "flag": "0"
+      }
+    ],
+    "warps": [
+      {
+        "x": 4,
+        "y": 1,
+        "elevation": 0,
+        "dest_map": "MAP_DYNAMIC",
+        "dest_warp_id": "WARP_ID_DYNAMIC"
+      },
+      {
+        "x": 4,
+        "y": 2,
+        "elevation": 0,
+        "dest_map": "MAP_DYNAMIC",
+        "dest_warp_id": "WARP_ID_DYNAMIC"
+      },
+      {
+        "x": 4,
+        "y": 3,
+        "elevation": 0,
+        "dest_map": "MAP_DYNAMIC",
+        "dest_warp_id": "WARP_ID_DYNAMIC"
+      }
+    ],
+    "coords": [
+      {
+        "type": "trigger",
+        "x": 3,
+        "y": 1,
+        "elevation": 3,
+        "var": "VAR_LITTLEROOT_INTRO_STATE",
+        "var_value": "0",
+        "script": "InsideOfTruck_EventScript_SetIntroFlags"
+      },
+      {
+        "type": "trigger",
+        "x": 3,
+        "y": 2,
+        "elevation": 3,
+        "var": "VAR_LITTLEROOT_INTRO_STATE",
+        "var_value": "0",
+        "script": "InsideOfTruck_EventScript_SetIntroFlags"
+      },
+      {
+        "type": "trigger",
+        "x": 3,
+        "y": 3,
+        "elevation": 3,
+        "var": "VAR_LITTLEROOT_INTRO_STATE",
+        "var_value": "0",
+        "script": "InsideOfTruck_EventScript_SetIntroFlags"
+      }
+    ],
+    "background": [
+      {
+        "type": "sign",
+        "x": 1,
+        "y": 0,
+        "elevation": 0,
+        "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+        "script": "InsideOfTruck_EventScript_MovingBox"
+      },
+      {
+        "type": "sign",
+        "x": 3,
+        "y": 4,
+        "elevation": 0,
+        "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+        "script": "InsideOfTruck_EventScript_MovingBox"
+      },
+      {
+        "type": "sign",
+        "x": 2,
+        "y": 3,
+        "elevation": 0,
+        "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+        "script": "InsideOfTruck_EventScript_MovingBox"
+      },
+      {
+        "type": "sign",
+        "x": 0,
+        "y": 1,
+        "elevation": 0,
+        "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+        "script": "InsideOfTruck_EventScript_MovingBox"
+      },
+      {
+        "type": "sign",
+        "x": 0,
+        "y": 2,
+        "elevation": 0,
+        "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+        "script": "InsideOfTruck_EventScript_MovingBox"
+      }
+    ]
+  },
+  {
+    "map": "LittlerootTown",
+    "objects": [
+      {
+        "local_id": "LOCALID_LITTLEROOT_TWIN",
+        "graphics_id": "OBJ_EVENT_GFX_TWIN",
+        "x": 16,
+        "y": 10,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+        "movement_range_x": 1,
+        "movement_range_y": 2,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "LittlerootTown_EventScript_Twin",
+        "flag": "0"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_FAT_MAN",
+        "x": 12,
+        "y": 13,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+        "movement_range_x": 2,
+        "movement_range_y": 1,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "LittlerootTown_EventScript_FatMan",
+        "flag": "FLAG_HIDE_LITTLEROOT_TOWN_FAT_MAN"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_BOY_2",
+        "x": 14,
+        "y": 17,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+        "movement_range_x": 2,
+        "movement_range_y": 1,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "LittlerootTown_EventScript_Boy",
+        "flag": "0"
+      },
+      {
+        "local_id": "LOCALID_LITTLEROOT_MOM",
+        "graphics_id": "OBJ_EVENT_GFX_MOM",
+        "x": 5,
+        "y": 8,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_UP",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "LittlerootTown_EventScript_Mom",
+        "flag": "FLAG_HIDE_LITTLEROOT_TOWN_MOM_OUTSIDE"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_TRUCK",
+        "x": 2,
+        "y": 10,
+        "elevation": 4,
+        "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_TRUCK"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_TRUCK",
+        "x": 11,
+        "y": 10,
+        "elevation": 4,
+        "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_TRUCK"
+      },
+      {
+        "local_id": "LOCALID_LITTLEROOT_RIVAL",
+        "graphics_id": "OBJ_EVENT_GFX_VAR_0",
+        "x": 13,
+        "y": 10,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_UP",
+        "movement_range_x": 1,
+        "movement_range_y": 1,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "FLAG_HIDE_LITTLEROOT_TOWN_RIVAL"
+      },
+      {
+        "local_id": "LOCALID_LITTLEROOT_BIRCH",
+        "graphics_id": "OBJ_EVENT_GFX_PROF_BIRCH",
+        "x": 14,
+        "y": 10,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_UP",
+        "movement_range_x": 1,
+        "movement_range_y": 1,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "FLAG_HIDE_LITTLEROOT_TOWN_BIRCH"
+      }
+    ],
+    "warps": [
+      {
+        "x": 14,
+        "y": 8,
+        "elevation": 0,
+        "dest_map": "MAP_LITTLEROOT_TOWN_MAYS_HOUSE_1F",
+        "dest_warp_id": "1"
+      },
+      {
+        "x": 5,
+        "y": 8,
+        "elevation": 0,
+        "dest_map": "MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F",
+        "dest_warp_id": "1"
+      },
+      {
+        "x": 7,
+        "y": 16,
+        "elevation": 0,
+        "dest_map": "MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB",
+        "dest_warp_id": "0"
+      }
+    ],
+    "coords": [
+      {
+        "type": "trigger",
+        "x": 10,
+        "y": 1,
+        "elevation": 3,
+        "var": "VAR_LITTLEROOT_TOWN_STATE",
+        "var_value": "0",
+        "script": "LittlerootTown_EventScript_NeedPokemonTriggerLeft"
+      },
+      {
+        "type": "trigger",
+        "x": 11,
+        "y": 1,
+        "elevation": 3,
+        "var": "VAR_LITTLEROOT_TOWN_STATE",
+        "var_value": "0",
+        "script": "LittlerootTown_EventScript_NeedPokemonTriggerRight"
+      },
+      {
+        "type": "trigger",
+        "x": 11,
+        "y": 1,
+        "elevation": 3,
+        "var": "VAR_LITTLEROOT_TOWN_STATE",
+        "var_value": "1",
+        "script": "LittlerootTown_EventScript_GoSaveBirchTrigger"
+      },
+      {
+        "type": "trigger",
+        "x": 8,
+        "y": 9,
+        "elevation": 3,
+        "var": "VAR_LITTLEROOT_TOWN_STATE",
+        "var_value": "3",
+        "script": "LittlerootTown_EventScript_GiveRunningShoesTrigger4"
+      },
+      {
+        "type": "trigger",
+        "x": 9,
+        "y": 9,
+        "elevation": 3,
+        "var": "VAR_LITTLEROOT_TOWN_STATE",
+        "var_value": "3",
+        "script": "LittlerootTown_EventScript_GiveRunningShoesTrigger5"
+      },
+      {
+        "type": "trigger",
+        "x": 10,
+        "y": 9,
+        "elevation": 3,
+        "var": "VAR_LITTLEROOT_TOWN_STATE",
+        "var_value": "3",
+        "script": "LittlerootTown_EventScript_GiveRunningShoesTrigger2"
+      },
+      {
+        "type": "trigger",
+        "x": 11,
+        "y": 9,
+        "elevation": 3,
+        "var": "VAR_LITTLEROOT_TOWN_STATE",
+        "var_value": "3",
+        "script": "LittlerootTown_EventScript_GiveRunningShoesTrigger3"
+      },
+      {
+        "type": "trigger",
+        "x": 10,
+        "y": 2,
+        "elevation": 3,
+        "var": "VAR_LITTLEROOT_TOWN_STATE",
+        "var_value": "3",
+        "script": "LittlerootTown_EventScript_GiveRunningShoesTrigger0"
+      },
+      {
+        "type": "trigger",
+        "x": 11,
+        "y": 2,
+        "elevation": 3,
+        "var": "VAR_LITTLEROOT_TOWN_STATE",
+        "var_value": "3",
+        "script": "LittlerootTown_EventScript_GiveRunningShoesTrigger1"
+      }
+    ],
+    "background": [
+      {
+        "type": "sign",
+        "x": 15,
+        "y": 13,
+        "elevation": 0,
+        "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+        "script": "LittlerootTown_EventScript_TownSign"
+      },
+      {
+        "type": "sign",
+        "x": 6,
+        "y": 17,
+        "elevation": 0,
+        "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+        "script": "LittlerootTown_EventScript_BirchsLabSign"
+      },
+      {
+        "type": "sign",
+        "x": 7,
+        "y": 8,
+        "elevation": 3,
+        "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+        "script": "LittlerootTown_EventScript_BrendansHouseSign"
+      },
+      {
+        "type": "sign",
+        "x": 12,
+        "y": 8,
+        "elevation": 3,
+        "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+        "script": "LittlerootTown_EventScript_MaysHouseSign"
+      }
+    ]
+  },
+  {
+    "map": "LittlerootTown_BrendansHouse_1F",
+    "objects": [
+      {
+        "local_id": "LOCALID_PLAYERS_HOUSE_1F_MOM",
+        "graphics_id": "OBJ_EVENT_GFX_MOM",
+        "x": 2,
+        "y": 6,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "PlayersHouse_1F_EventScript_Mom",
+        "flag": "FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_MOM"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_VIGOROTH_CARRYING_BOX",
+        "x": 1,
+        "y": 3,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_WALK_RIGHT_AND_LEFT",
+        "movement_range_x": 3,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "PlayersHouse_1F_EventScript_Vigoroth2",
+        "flag": "FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_HOUSE_VIGOROTH_2"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_VIGOROTH_FACING_AWAY",
+        "x": 4,
+        "y": 5,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_UP",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "PlayersHouse_1F_EventScript_Vigoroth1",
+        "flag": "FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_HOUSE_VIGOROTH_1"
+      },
+      {
+        "local_id": "LOCALID_RIVALS_HOUSE_1F_MOM",
+        "graphics_id": "OBJ_EVENT_GFX_WOMAN_4",
+        "x": 2,
+        "y": 7,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "RivalsHouse_1F_EventScript_RivalMom",
+        "flag": "FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_MOM"
+      },
+      {
+        "local_id": "LOCALID_PLAYERS_HOUSE_1F_DAD",
+        "graphics_id": "OBJ_EVENT_GFX_NORMAN",
+        "x": 5,
+        "y": 6,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+        "movement_range_x": 1,
+        "movement_range_y": 1,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "FLAG_HIDE_PLAYERS_HOUSE_DAD"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_NINJA_BOY",
+        "x": 1,
+        "y": 5,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT",
+        "movement_range_x": 1,
+        "movement_range_y": 1,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "RivalsHouse_1F_EventScript_RivalSibling",
+        "flag": "FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_SIBLING"
+      },
+      {
+        "local_id": "LOCALID_RIVALS_HOUSE_1F_RIVAL",
+        "graphics_id": "OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL",
+        "x": 8,
+        "y": 8,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_UP",
+        "movement_range_x": 1,
+        "movement_range_y": 1,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_BRENDAN"
+      }
+    ],
+    "warps": [
+      {
+        "x": 9,
+        "y": 8,
+        "elevation": 0,
+        "dest_map": "MAP_LITTLEROOT_TOWN",
+        "dest_warp_id": "1"
+      },
+      {
+        "x": 8,
+        "y": 8,
+        "elevation": 0,
+        "dest_map": "MAP_LITTLEROOT_TOWN",
+        "dest_warp_id": "1"
+      },
+      {
+        "x": 8,
+        "y": 2,
+        "elevation": 0,
+        "dest_map": "MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F",
+        "dest_warp_id": "0"
+      }
+    ],
+    "coords": [
+      {
+        "type": "trigger",
+        "x": 8,
+        "y": 8,
+        "elevation": 0,
+        "var": "VAR_LITTLEROOT_INTRO_STATE",
+        "var_value": "4",
+        "script": "LittlerootTown_BrendansHouse_1F_EventScript_GoSeeRoom"
+      },
+      {
+        "type": "trigger",
+        "x": 7,
+        "y": 3,
+        "elevation": 0,
+        "var": "VAR_LITTLEROOT_RIVAL_STATE",
+        "var_value": "2",
+        "script": "LittlerootTown_BrendansHouse_1F_EventScript_MeetRival0"
+      },
+      {
+        "type": "trigger",
+        "x": 8,
+        "y": 4,
+        "elevation": 0,
+        "var": "VAR_LITTLEROOT_RIVAL_STATE",
+        "var_value": "2",
+        "script": "LittlerootTown_BrendansHouse_1F_EventScript_MeetRival1"
+      },
+      {
+        "type": "trigger",
+        "x": 9,
+        "y": 3,
+        "elevation": 0,
+        "var": "VAR_LITTLEROOT_RIVAL_STATE",
+        "var_value": "2",
+        "script": "LittlerootTown_BrendansHouse_1F_EventScript_MeetRival2"
+      }
+    ],
+    "background": []
+  },
+  {
+    "map": "LittlerootTown_BrendansHouse_2F",
+    "objects": [
+      {
+        "local_id": "LOCALID_RIVALS_HOUSE_2F_RIVAL",
+        "graphics_id": "OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL",
+        "x": 7,
+        "y": 1,
+        "elevation": 0,
+        "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+        "movement_range_x": 1,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "RivalsHouse_2F_EventScript_Rival",
+        "flag": "FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_VAR_0",
+        "x": 0,
+        "y": 0,
+        "elevation": 0,
+        "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "FLAG_DECORATION_1"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_VAR_1",
+        "x": 0,
+        "y": 1,
+        "elevation": 0,
+        "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "FLAG_DECORATION_2"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_VAR_2",
+        "x": 0,
+        "y": 2,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "FLAG_DECORATION_3"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_VAR_3",
+        "x": 0,
+        "y": 3,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "FLAG_DECORATION_4"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_VAR_4",
+        "x": 0,
+        "y": 4,
+        "elevation": 0,
+        "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "FLAG_DECORATION_5"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_VAR_5",
+        "x": 0,
+        "y": 5,
+        "elevation": 4,
+        "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "FLAG_DECORATION_6"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_VAR_6",
+        "x": 1,
+        "y": 0,
+        "elevation": 0,
+        "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "FLAG_DECORATION_7"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_VAR_7",
+        "x": 1,
+        "y": 1,
+        "elevation": 0,
+        "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "FLAG_DECORATION_8"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_VAR_8",
+        "x": 1,
+        "y": 2,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "FLAG_DECORATION_9"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_VAR_9",
+        "x": 1,
+        "y": 3,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "FLAG_DECORATION_10"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_VAR_A",
+        "x": 1,
+        "y": 4,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "FLAG_DECORATION_11"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_VAR_B",
+        "x": 1,
+        "y": 5,
+        "elevation": 0,
+        "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "FLAG_DECORATION_12"
+      },
+      {
+        "local_id": "LOCALID_PLAYERS_HOUSE_2F_MOM",
+        "graphics_id": "OBJ_EVENT_GFX_MOM",
+        "x": 7,
+        "y": 1,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+        "movement_range_x": 1,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_BEDROOM_MOM"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+        "x": 3,
+        "y": 4,
+        "elevation": 0,
+        "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+        "movement_range_x": 1,
+        "movement_range_y": 1,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "LittlerootTown_BrendansHouse_2F_EventScript_RivalsPokeBall",
+        "flag": "FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_SWABLU_DOLL",
+        "x": 5,
+        "y": 5,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+        "movement_range_x": 1,
+        "movement_range_y": 1,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_SWABLU_DOLL"
+      }
+    ],
+    "warps": [
+      {
+        "x": 7,
+        "y": 1,
+        "elevation": 0,
+        "dest_map": "MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F",
+        "dest_warp_id": "2"
+      }
+    ],
+    "coords": [],
+    "background": [
+      {
+        "type": "sign",
+        "x": 0,
+        "y": 1,
+        "elevation": 0,
+        "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+        "script": "LittlerootTown_BrendansHouse_2F_EventScript_PC"
+      },
+      {
+        "type": "sign",
+        "x": 1,
+        "y": 1,
+        "elevation": 0,
+        "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+        "script": "PlayersHouse_2F_EventScript_Notebook"
+      },
+      {
+        "type": "sign",
+        "x": 5,
+        "y": 1,
+        "elevation": 0,
+        "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+        "script": "LittlerootTown_BrendansHouse_2F_EventScript_WallClock"
+      },
+      {
+        "type": "sign",
+        "x": 3,
+        "y": 1,
+        "elevation": 0,
+        "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+        "script": "PlayersHouse_2F_EventScript_GameCube"
+      }
+    ]
+  },
+  {
+    "map": "LittlerootTown_MaysHouse_1F",
+    "objects": [
+      {
+        "local_id": "LOCALID_PLAYERS_HOUSE_1F_MOM",
+        "graphics_id": "OBJ_EVENT_GFX_MOM",
+        "x": 8,
+        "y": 6,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "PlayersHouse_1F_EventScript_Mom",
+        "flag": "FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_MOM"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_VIGOROTH_FACING_AWAY",
+        "x": 6,
+        "y": 5,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_UP",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "PlayersHouse_1F_EventScript_Vigoroth1",
+        "flag": "FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_HOUSE_VIGOROTH_1"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_VIGOROTH_CARRYING_BOX",
+        "x": 9,
+        "y": 3,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_WALK_LEFT_AND_RIGHT",
+        "movement_range_x": 3,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "PlayersHouse_1F_EventScript_Vigoroth2",
+        "flag": "FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_HOUSE_VIGOROTH_2"
+      },
+      {
+        "local_id": "LOCALID_RIVALS_HOUSE_1F_MOM",
+        "graphics_id": "OBJ_EVENT_GFX_WOMAN_4",
+        "x": 8,
+        "y": 7,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "RivalsHouse_1F_EventScript_RivalMom",
+        "flag": "FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_MOM"
+      },
+      {
+        "local_id": "LOCALID_PLAYERS_HOUSE_1F_DAD",
+        "graphics_id": "OBJ_EVENT_GFX_NORMAN",
+        "x": 5,
+        "y": 6,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+        "movement_range_x": 1,
+        "movement_range_y": 1,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "FLAG_HIDE_PLAYERS_HOUSE_DAD"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_NINJA_BOY",
+        "x": 9,
+        "y": 5,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT",
+        "movement_range_x": 1,
+        "movement_range_y": 1,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "RivalsHouse_1F_EventScript_RivalSibling",
+        "flag": "FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_SIBLING"
+      },
+      {
+        "local_id": "LOCALID_RIVALS_HOUSE_1F_RIVAL",
+        "graphics_id": "OBJ_EVENT_GFX_RIVAL_MAY_NORMAL",
+        "x": 2,
+        "y": 8,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_UP",
+        "movement_range_x": 1,
+        "movement_range_y": 1,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_MAY"
+      }
+    ],
+    "warps": [
+      {
+        "x": 1,
+        "y": 8,
+        "elevation": 0,
+        "dest_map": "MAP_LITTLEROOT_TOWN",
+        "dest_warp_id": "0"
+      },
+      {
+        "x": 2,
+        "y": 8,
+        "elevation": 0,
+        "dest_map": "MAP_LITTLEROOT_TOWN",
+        "dest_warp_id": "0"
+      },
+      {
+        "x": 2,
+        "y": 2,
+        "elevation": 0,
+        "dest_map": "MAP_LITTLEROOT_TOWN_MAYS_HOUSE_2F",
+        "dest_warp_id": "0"
+      }
+    ],
+    "coords": [
+      {
+        "type": "trigger",
+        "x": 2,
+        "y": 8,
+        "elevation": 0,
+        "var": "VAR_LITTLEROOT_INTRO_STATE",
+        "var_value": "4",
+        "script": "LittlerootTown_MaysHouse_1F_EventScript_GoSeeRoom"
+      },
+      {
+        "type": "trigger",
+        "x": 1,
+        "y": 3,
+        "elevation": 0,
+        "var": "VAR_LITTLEROOT_RIVAL_STATE",
+        "var_value": "2",
+        "script": "LittlerootTown_MaysHouse_1F_EventScript_MeetRival0"
+      },
+      {
+        "type": "trigger",
+        "x": 2,
+        "y": 4,
+        "elevation": 0,
+        "var": "VAR_LITTLEROOT_RIVAL_STATE",
+        "var_value": "2",
+        "script": "LittlerootTown_MaysHouse_1F_EventScript_MeetRival1"
+      },
+      {
+        "type": "trigger",
+        "x": 3,
+        "y": 3,
+        "elevation": 0,
+        "var": "VAR_LITTLEROOT_RIVAL_STATE",
+        "var_value": "2",
+        "script": "LittlerootTown_MaysHouse_1F_EventScript_MeetRival2"
+      }
+    ],
+    "background": []
+  },
+  {
+    "map": "LittlerootTown_MaysHouse_2F",
+    "objects": [
+      {
+        "local_id": "LOCALID_RIVALS_HOUSE_2F_RIVAL",
+        "graphics_id": "OBJ_EVENT_GFX_RIVAL_MAY_NORMAL",
+        "x": 1,
+        "y": 1,
+        "elevation": 0,
+        "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+        "movement_range_x": 1,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "RivalsHouse_2F_EventScript_Rival",
+        "flag": "FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_VAR_0",
+        "x": 0,
+        "y": 6,
+        "elevation": 0,
+        "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "FLAG_DECORATION_1"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_VAR_1",
+        "x": 1,
+        "y": 6,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "FLAG_DECORATION_2"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_VAR_2",
+        "x": 2,
+        "y": 6,
+        "elevation": 0,
+        "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "FLAG_DECORATION_3"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_VAR_3",
+        "x": 3,
+        "y": 6,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "FLAG_DECORATION_4"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_VAR_4",
+        "x": 4,
+        "y": 6,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "FLAG_DECORATION_5"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_VAR_5",
+        "x": 5,
+        "y": 6,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "FLAG_DECORATION_6"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_VAR_6",
+        "x": 0,
+        "y": 7,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "FLAG_DECORATION_7"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_VAR_7",
+        "x": 1,
+        "y": 7,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "FLAG_DECORATION_8"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_VAR_8",
+        "x": 2,
+        "y": 7,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "FLAG_DECORATION_9"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_VAR_9",
+        "x": 3,
+        "y": 7,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "FLAG_DECORATION_10"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_VAR_A",
+        "x": 4,
+        "y": 7,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "FLAG_DECORATION_11"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_VAR_B",
+        "x": 5,
+        "y": 7,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "FLAG_DECORATION_12"
+      },
+      {
+        "local_id": "LOCALID_PLAYERS_HOUSE_2F_MOM",
+        "graphics_id": "OBJ_EVENT_GFX_MOM",
+        "x": 1,
+        "y": 1,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+        "movement_range_x": 1,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_BEDROOM_MOM"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_PICHU_DOLL",
+        "x": 3,
+        "y": 4,
+        "elevation": 4,
+        "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+        "movement_range_x": 1,
+        "movement_range_y": 1,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_PICHU_DOLL"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+        "x": 5,
+        "y": 4,
+        "elevation": 0,
+        "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+        "movement_range_x": 1,
+        "movement_range_y": 1,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "LittlerootTown_MaysHouse_2F_EventScript_RivalsPokeBall",
+        "flag": "FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL"
+      }
+    ],
+    "warps": [
+      {
+        "x": 1,
+        "y": 1,
+        "elevation": 0,
+        "dest_map": "MAP_LITTLEROOT_TOWN_MAYS_HOUSE_1F",
+        "dest_warp_id": "2"
+      }
+    ],
+    "coords": [],
+    "background": [
+      {
+        "type": "sign",
+        "x": 5,
+        "y": 1,
+        "elevation": 0,
+        "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+        "script": "PlayersHouse_2F_EventScript_GameCube"
+      },
+      {
+        "type": "sign",
+        "x": 7,
+        "y": 1,
+        "elevation": 0,
+        "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+        "script": "PlayersHouse_2F_EventScript_Notebook"
+      },
+      {
+        "type": "sign",
+        "x": 3,
+        "y": 1,
+        "elevation": 0,
+        "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+        "script": "LittlerootTown_MaysHouse_2F_EventScript_WallClock"
+      },
+      {
+        "type": "sign",
+        "x": 8,
+        "y": 1,
+        "elevation": 0,
+        "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+        "script": "LittlerootTown_MaysHouse_2F_EventScript_PC"
+      }
+    ]
+  },
+  {
+    "map": "LittlerootTown_ProfessorBirchsLab",
+    "objects": [
+      {
+        "local_id": "LOCALID_BIRCHS_LAB_AIDE",
+        "graphics_id": "OBJ_EVENT_GFX_SCIENTIST_1",
+        "x": 9,
+        "y": 8,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+        "movement_range_x": 1,
+        "movement_range_y": 1,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "LittlerootTown_ProfessorBirchsLab_EventScript_Aide",
+        "flag": "0"
+      },
+      {
+        "local_id": "LOCALID_BIRCHS_LAB_BIRCH",
+        "graphics_id": "OBJ_EVENT_GFX_PROF_BIRCH",
+        "x": 6,
+        "y": 4,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "LittlerootTown_ProfessorBirchsLab_EventScript_Birch",
+        "flag": "FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_BIRCH"
+      },
+      {
+        "local_id": "LOCALID_BIRCHS_LAB_RIVAL",
+        "graphics_id": "OBJ_EVENT_GFX_VAR_0",
+        "x": 7,
+        "y": 4,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+        "movement_range_x": 1,
+        "movement_range_y": 1,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "LittlerootTown_ProfessorBirchsLab_EventScript_Rival",
+        "flag": "FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_RIVAL"
+      }
+    ],
+    "warps": [
+      {
+        "x": 6,
+        "y": 12,
+        "elevation": 0,
+        "dest_map": "MAP_LITTLEROOT_TOWN",
+        "dest_warp_id": "2"
+      },
+      {
+        "x": 7,
+        "y": 12,
+        "elevation": 0,
+        "dest_map": "MAP_LITTLEROOT_TOWN",
+        "dest_warp_id": "2"
+      }
+    ],
+    "coords": [],
+    "background": [
+      {
+        "type": "sign",
+        "x": 10,
+        "y": 7,
+        "elevation": 0,
+        "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+        "script": "LittlerootTown_ProfessorBirchsLab_EventScript_Machine"
+      },
+      {
+        "type": "sign",
+        "x": 11,
+        "y": 7,
+        "elevation": 0,
+        "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+        "script": "LittlerootTown_ProfessorBirchsLab_EventScript_Machine"
+      },
+      {
+        "type": "sign",
+        "x": 7,
+        "y": 1,
+        "elevation": 0,
+        "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+        "script": "LittlerootTown_ProfessorBirchsLab_EventScript_Book"
+      },
+      {
+        "type": "sign",
+        "x": 8,
+        "y": 1,
+        "elevation": 0,
+        "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+        "script": "LittlerootTown_ProfessorBirchsLab_EventScript_Book"
+      },
+      {
+        "type": "sign",
+        "x": 1,
+        "y": 1,
+        "elevation": 0,
+        "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+        "script": "LittlerootTown_ProfessorBirchsLab_EventScript_Bookshelf"
+      },
+      {
+        "type": "sign",
+        "x": 0,
+        "y": 7,
+        "elevation": 0,
+        "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+        "script": "LittlerootTown_ProfessorBirchsLab_EventScript_Bookshelf"
+      },
+      {
+        "type": "sign",
+        "x": 1,
+        "y": 7,
+        "elevation": 0,
+        "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+        "script": "LittlerootTown_ProfessorBirchsLab_EventScript_Bookshelf"
+      },
+      {
+        "type": "sign",
+        "x": 2,
+        "y": 7,
+        "elevation": 0,
+        "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+        "script": "LittlerootTown_ProfessorBirchsLab_EventScript_Bookshelf"
+      },
+      {
+        "type": "sign",
+        "x": 3,
+        "y": 7,
+        "elevation": 0,
+        "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+        "script": "LittlerootTown_ProfessorBirchsLab_EventScript_Bookshelf"
+      },
+      {
+        "type": "sign",
+        "x": 4,
+        "y": 1,
+        "elevation": 0,
+        "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+        "script": "LittlerootTown_ProfessorBirchsLab_EventScript_PC"
+      },
+      {
+        "type": "sign",
+        "x": 3,
+        "y": 1,
+        "elevation": 0,
+        "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+        "script": "LittlerootTown_ProfessorBirchsLab_EventScript_PC"
+      },
+      {
+        "type": "sign",
+        "x": 1,
+        "y": 10,
+        "elevation": 0,
+        "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+        "script": "LittlerootTown_ProfessorBirchsLab_EventScript_PC"
+      },
+      {
+        "type": "sign",
+        "x": 1,
+        "y": 9,
+        "elevation": 0,
+        "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+        "script": "LittlerootTown_ProfessorBirchsLab_EventScript_PC"
+      },
+      {
+        "type": "sign",
+        "x": 11,
+        "y": 10,
+        "elevation": 0,
+        "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+        "script": "LittlerootTown_ProfessorBirchsLab_EventScript_PC"
+      },
+      {
+        "type": "sign",
+        "x": 11,
+        "y": 9,
+        "elevation": 0,
+        "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+        "script": "LittlerootTown_ProfessorBirchsLab_EventScript_PC"
+      }
+    ]
+  },
+  {
+    "map": "OldaleTown",
+    "objects": [
+      {
+        "graphics_id": "OBJ_EVENT_GFX_GIRL_3",
+        "x": 16,
+        "y": 11,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "OldaleTown_EventScript_Girl",
+        "flag": "0"
+      },
+      {
+        "local_id": "LOCALID_OLDALE_MART_EMPLOYEE",
+        "graphics_id": "OBJ_EVENT_GFX_MART_EMPLOYEE",
+        "x": 13,
+        "y": 7,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "OldaleTown_EventScript_MartEmployee",
+        "flag": "0"
+      },
+      {
+        "local_id": "LOCALID_FOOTPRINTS_MAN",
+        "graphics_id": "OBJ_EVENT_GFX_MANIAC",
+        "x": 8,
+        "y": 9,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "OldaleTown_EventScript_FootprintsMan",
+        "flag": "0"
+      },
+      {
+        "local_id": "LOCALID_OLDALE_RIVAL",
+        "graphics_id": "OBJ_EVENT_GFX_VAR_0",
+        "x": 11,
+        "y": 19,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_UP",
+        "movement_range_x": 1,
+        "movement_range_y": 1,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "OldaleTown_EventScript_Rival",
+        "flag": "FLAG_HIDE_OLDALE_TOWN_RIVAL"
+      }
+    ],
+    "warps": [
+      {
+        "x": 5,
+        "y": 7,
+        "elevation": 0,
+        "dest_map": "MAP_OLDALE_TOWN_HOUSE1",
+        "dest_warp_id": "0"
+      },
+      {
+        "x": 15,
+        "y": 16,
+        "elevation": 0,
+        "dest_map": "MAP_OLDALE_TOWN_HOUSE2",
+        "dest_warp_id": "0"
+      },
+      {
+        "x": 6,
+        "y": 16,
+        "elevation": 0,
+        "dest_map": "MAP_OLDALE_TOWN_POKEMON_CENTER_1F",
+        "dest_warp_id": "0"
+      },
+      {
+        "x": 14,
+        "y": 6,
+        "elevation": 0,
+        "dest_map": "MAP_OLDALE_TOWN_MART",
+        "dest_warp_id": "0"
+      }
+    ],
+    "coords": [
+      {
+        "type": "trigger",
+        "x": 0,
+        "y": 10,
+        "elevation": 3,
+        "var": "VAR_OLDALE_TOWN_STATE",
+        "var_value": "0",
+        "script": "OldaleTown_EventScript_BlockedPath"
+      },
+      {
+        "type": "trigger",
+        "x": 8,
+        "y": 19,
+        "elevation": 3,
+        "var": "VAR_OLDALE_RIVAL_STATE",
+        "var_value": "1",
+        "script": "OldaleTown_EventScript_RivalTrigger1"
+      },
+      {
+        "type": "trigger",
+        "x": 9,
+        "y": 19,
+        "elevation": 3,
+        "var": "VAR_OLDALE_RIVAL_STATE",
+        "var_value": "1",
+        "script": "OldaleTown_EventScript_RivalTrigger2"
+      },
+      {
+        "type": "trigger",
+        "x": 10,
+        "y": 19,
+        "elevation": 3,
+        "var": "VAR_OLDALE_RIVAL_STATE",
+        "var_value": "1",
+        "script": "OldaleTown_EventScript_RivalTrigger3"
+      }
+    ],
+    "background": [
+      {
+        "type": "sign",
+        "x": 11,
+        "y": 9,
+        "elevation": 0,
+        "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+        "script": "OldaleTown_EventScript_TownSign"
+      },
+      {
+        "type": "sign",
+        "x": 7,
+        "y": 16,
+        "elevation": 0,
+        "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+        "script": "Common_EventScript_ShowPokemonCenterSign"
+      },
+      {
+        "type": "sign",
+        "x": 15,
+        "y": 6,
+        "elevation": 0,
+        "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+        "script": "Common_EventScript_ShowPokemartSign"
+      },
+      {
+        "type": "sign",
+        "x": 8,
+        "y": 16,
+        "elevation": 0,
+        "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+        "script": "Common_EventScript_ShowPokemonCenterSign"
+      },
+      {
+        "type": "sign",
+        "x": 16,
+        "y": 6,
+        "elevation": 0,
+        "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+        "script": "Common_EventScript_ShowPokemartSign"
+      }
+    ]
+  },
+  {
+    "map": "OldaleTown_House1",
+    "objects": [
+      {
+        "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
+        "x": 6,
+        "y": 4,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+        "movement_range_x": 1,
+        "movement_range_y": 1,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "OldaleTown_House1_EventScript_Woman",
+        "flag": "0"
+      }
+    ],
+    "warps": [
+      {
+        "x": 3,
+        "y": 8,
+        "elevation": 0,
+        "dest_map": "MAP_OLDALE_TOWN",
+        "dest_warp_id": "0"
+      },
+      {
+        "x": 4,
+        "y": 8,
+        "elevation": 0,
+        "dest_map": "MAP_OLDALE_TOWN",
+        "dest_warp_id": "0"
+      }
+    ],
+    "coords": [],
+    "background": []
+  },
+  {
+    "map": "OldaleTown_House2",
+    "objects": [
+      {
+        "graphics_id": "OBJ_EVENT_GFX_POKEFAN_F",
+        "x": 4,
+        "y": 4,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "OldaleTown_House2_EventScript_Woman",
+        "flag": "0"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_SCHOOL_KID_M",
+        "x": 7,
+        "y": 4,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "OldaleTown_House2_EventScript_Man",
+        "flag": "0"
+      }
+    ],
+    "warps": [
+      {
+        "x": 3,
+        "y": 7,
+        "elevation": 0,
+        "dest_map": "MAP_OLDALE_TOWN",
+        "dest_warp_id": "1"
+      },
+      {
+        "x": 4,
+        "y": 7,
+        "elevation": 0,
+        "dest_map": "MAP_OLDALE_TOWN",
+        "dest_warp_id": "1"
+      }
+    ],
+    "coords": [],
+    "background": []
+  },
+  {
+    "map": "OldaleTown_Mart",
+    "objects": [
+      {
+        "local_id": "LOCALID_OLDALE_MART_CLERK",
+        "graphics_id": "OBJ_EVENT_GFX_MART_EMPLOYEE",
+        "x": 1,
+        "y": 3,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "OldaleTown_Mart_EventScript_Clerk",
+        "flag": "0"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_WOMAN_5",
+        "x": 5,
+        "y": 5,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "OldaleTown_Mart_EventScript_Woman",
+        "flag": "0"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_BOY_1",
+        "x": 9,
+        "y": 4,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_WANDER_UP_AND_DOWN",
+        "movement_range_x": 0,
+        "movement_range_y": 1,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "OldaleTown_Mart_EventScript_Boy",
+        "flag": "0"
+      }
+    ],
+    "warps": [
+      {
+        "x": 3,
+        "y": 7,
+        "elevation": 0,
+        "dest_map": "MAP_OLDALE_TOWN",
+        "dest_warp_id": "3"
+      },
+      {
+        "x": 4,
+        "y": 7,
+        "elevation": 0,
+        "dest_map": "MAP_OLDALE_TOWN",
+        "dest_warp_id": "3"
+      }
+    ],
+    "coords": [],
+    "background": []
+  },
+  {
+    "map": "OldaleTown_PokemonCenter_1F",
+    "objects": [
+      {
+        "local_id": "LOCALID_OLDALE_NURSE",
+        "graphics_id": "OBJ_EVENT_GFX_NURSE",
+        "x": 8,
+        "y": 2,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "OldaleTown_PokemonCenter_1F_EventScript_Nurse",
+        "flag": "0"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
+        "x": 4,
+        "y": 4,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "OldaleTown_PokemonCenter_1F_EventScript_Gentleman",
+        "flag": "0"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_BOY_1",
+        "x": 12,
+        "y": 6,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "OldaleTown_PokemonCenter_1F_EventScript_Boy",
+        "flag": "0"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_GIRL_3",
+        "x": 3,
+        "y": 8,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+        "movement_range_x": 1,
+        "movement_range_y": 1,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "OldaleTown_PokemonCenter_1F_EventScript_Girl",
+        "flag": "0"
+      },
+      {
+        "elevation": 3,
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "flag": "0",
+        "graphics_id": "OBJ_EVENT_GFX_MART_EMPLOYEE",
+        "x": 2,
+        "y": 2,
+        "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+        "script": "Common_EventScript_EmeraldChampionsBattleVendor"
+      },
+      {
+        "elevation": 3,
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "flag": "0",
+        "graphics_id": "OBJ_EVENT_GFX_OLD_MAN",
+        "x": 13,
+        "y": 2,
+        "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+        "script": "Common_EventScript_EmeraldChampionsMoveTutor"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_MAN_4",
+        "x": 14,
+        "y": 4,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "Common_EventScript_CenterLocalGuide",
+        "flag": "0"
+      }
+    ],
+    "warps": [
+      {
+        "x": 8,
+        "y": 8,
+        "elevation": 3,
+        "dest_map": "MAP_OLDALE_TOWN",
+        "dest_warp_id": "2"
+      },
+      {
+        "x": 7,
+        "y": 8,
+        "elevation": 3,
+        "dest_map": "MAP_OLDALE_TOWN",
+        "dest_warp_id": "2"
+      },
+      {
+        "x": 1,
+        "y": 6,
+        "elevation": 4,
+        "dest_map": "MAP_OLDALE_TOWN_POKEMON_CENTER_2F",
+        "dest_warp_id": "0"
+      }
+    ],
+    "coords": [],
+    "background": []
+  },
+  {
+    "map": "OldaleTown_PokemonCenter_2F",
+    "objects": [
+      {
+        "graphics_id": "OBJ_EVENT_GFX_TEALA",
+        "x": 6,
+        "y": 2,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+        "movement_range_x": 1,
+        "movement_range_y": 1,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "Common_EventScript_UnionRoomAttendant",
+        "flag": "0"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_TEALA",
+        "x": 2,
+        "y": 2,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+        "movement_range_x": 1,
+        "movement_range_y": 1,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "Common_EventScript_WirelessClubAttendant",
+        "flag": "0"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_TEALA",
+        "x": 10,
+        "y": 2,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+        "movement_range_x": 1,
+        "movement_range_y": 1,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "Common_EventScript_DirectCornerAttendant",
+        "flag": "0"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_MYSTERY_GIFT_MAN",
+        "x": 1,
+        "y": 2,
+        "elevation": 0,
+        "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+        "movement_range_x": 1,
+        "movement_range_y": 1,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "CableClub_EventScript_MysteryGiftMan",
+        "flag": "FLAG_HIDE_POKEMON_CENTER_2F_MYSTERY_GIFT_MAN"
+      }
+    ],
+    "warps": [
+      {
+        "x": 1,
+        "y": 6,
+        "elevation": 4,
+        "dest_map": "MAP_OLDALE_TOWN_POKEMON_CENTER_1F",
+        "dest_warp_id": "2"
+      },
+      {
+        "x": 5,
+        "y": 1,
+        "elevation": 3,
+        "dest_map": "MAP_UNION_ROOM",
+        "dest_warp_id": "0"
+      },
+      {
+        "x": 9,
+        "y": 1,
+        "elevation": 3,
+        "dest_map": "MAP_TRADE_CENTER",
+        "dest_warp_id": "0"
+      }
+    ],
+    "coords": [],
+    "background": []
+  },
+  {
+    "map": "Route101",
+    "objects": [
+      {
+        "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER",
+        "x": 16,
+        "y": 8,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "Route101_EventScript_Youngster",
+        "flag": "0"
+      },
+      {
+        "local_id": "LOCALID_ROUTE101_BIRCH",
+        "graphics_id": "OBJ_EVENT_GFX_PROF_BIRCH",
+        "x": 9,
+        "y": 13,
+        "elevation": 0,
+        "movement_type": "MOVEMENT_TYPE_JOG_IN_PLACE_RIGHT",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "FLAG_HIDE_ROUTE_101_BIRCH_ZIGZAGOON_BATTLE"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_BIRCHS_BAG",
+        "x": 7,
+        "y": 14,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "Route101_EventScript_BirchsBag",
+        "flag": "FLAG_HIDE_ROUTE_101_BIRCH_STARTERS_BAG"
+      },
+      {
+        "local_id": "LOCALID_ROUTE101_ZIGZAGOON",
+        "graphics_id": "OBJ_EVENT_GFX_ZIGZAGOON_1",
+        "x": 10,
+        "y": 13,
+        "elevation": 0,
+        "movement_type": "MOVEMENT_TYPE_JOG_IN_PLACE_LEFT",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "FLAG_HIDE_ROUTE_101_ZIGZAGOON"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_PROF_BIRCH",
+        "x": 5,
+        "y": 11,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "ProfBirch_EventScript_RatePokedexOrRegister",
+        "flag": "FLAG_HIDE_ROUTE_101_BIRCH"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_BOY_2",
+        "x": 2,
+        "y": 13,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT",
+        "movement_range_x": 1,
+        "movement_range_y": 1,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "Route101_EventScript_Boy",
+        "flag": "FLAG_HIDE_ROUTE_101_BOY"
+      },
+      {
+        "local_id": "LOCALID_ROUTE101_POOCHYENA",
+        "graphics_id": "OBJ_EVENT_GFX_POOCHYENA",
+        "x": 6,
+        "y": 14,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_JOG_IN_PLACE_LEFT",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "FLAG_HIDE_ROUTE_101_ZIGZAGOON"
+      }
+    ],
+    "warps": [],
+    "coords": [
+      {
+        "type": "trigger",
+        "x": 10,
+        "y": 19,
+        "elevation": 3,
+        "var": "VAR_ROUTE101_STATE",
+        "var_value": "1",
+        "script": "Route101_EventScript_StartBirchRescue"
+      },
+      {
+        "type": "trigger",
+        "x": 11,
+        "y": 19,
+        "elevation": 3,
+        "var": "VAR_ROUTE101_STATE",
+        "var_value": "1",
+        "script": "Route101_EventScript_StartBirchRescue"
+      },
+      {
+        "type": "trigger",
+        "x": 10,
+        "y": 18,
+        "elevation": 3,
+        "var": "VAR_ROUTE101_STATE",
+        "var_value": "2",
+        "script": "Route101_EventScript_PreventExitSouth"
+      },
+      {
+        "type": "trigger",
+        "x": 11,
+        "y": 18,
+        "elevation": 3,
+        "var": "VAR_ROUTE101_STATE",
+        "var_value": "2",
+        "script": "Route101_EventScript_PreventExitSouth"
+      },
+      {
+        "type": "trigger",
+        "x": 6,
+        "y": 16,
+        "elevation": 3,
+        "var": "VAR_ROUTE101_STATE",
+        "var_value": "2",
+        "script": "Route101_EventScript_PreventExitWest"
+      },
+      {
+        "type": "trigger",
+        "x": 6,
+        "y": 15,
+        "elevation": 3,
+        "var": "VAR_ROUTE101_STATE",
+        "var_value": "2",
+        "script": "Route101_EventScript_PreventExitWest"
+      },
+      {
+        "type": "trigger",
+        "x": 6,
+        "y": 17,
+        "elevation": 3,
+        "var": "VAR_ROUTE101_STATE",
+        "var_value": "2",
+        "script": "Route101_EventScript_PreventExitWest"
+      },
+      {
+        "type": "trigger",
+        "x": 6,
+        "y": 18,
+        "elevation": 3,
+        "var": "VAR_ROUTE101_STATE",
+        "var_value": "2",
+        "script": "Route101_EventScript_PreventExitWest"
+      },
+      {
+        "type": "trigger",
+        "x": 7,
+        "y": 13,
+        "elevation": 3,
+        "var": "VAR_ROUTE101_STATE",
+        "var_value": "2",
+        "script": "Route101_EventScript_PreventExitNorth"
+      }
+    ],
+    "background": [
+      {
+        "type": "sign",
+        "x": 5,
+        "y": 9,
+        "elevation": 0,
+        "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+        "script": "Route101_EventScript_RouteSign"
+      }
+    ]
+  },
+  {
+    "map": "Route103",
+    "objects": [
+      {
+        "graphics_id": "OBJ_EVENT_GFX_MAN_3",
+        "x": 49,
+        "y": 12,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "Route103_EventScript_Man",
+        "flag": "0"
+      },
+      {
+        "local_id": "LOCALID_ROUTE103_RIVAL",
+        "graphics_id": "OBJ_EVENT_GFX_VAR_0",
+        "x": 10,
+        "y": 3,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "Route103_EventScript_Rival",
+        "flag": "FLAG_HIDE_ROUTE_103_RIVAL"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
+        "x": 71,
+        "y": 11,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_DOWN_AND_RIGHT",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NORMAL",
+        "trainer_sight_or_berry_tree_id": "3",
+        "script": "Route103_EventScript_Daisy",
+        "flag": "0"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_TWIN",
+        "x": 65,
+        "y": 12,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NORMAL",
+        "trainer_sight_or_berry_tree_id": "1",
+        "script": "Route103_EventScript_Liv",
+        "flag": "0"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_TWIN",
+        "x": 64,
+        "y": 12,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NORMAL",
+        "trainer_sight_or_berry_tree_id": "1",
+        "script": "Route103_EventScript_Amy",
+        "flag": "0"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_FISHERMAN",
+        "x": 50,
+        "y": 8,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_WALK_DOWN_AND_UP",
+        "movement_range_x": 0,
+        "movement_range_y": 1,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "Route103_EventScript_Andrew",
+        "flag": "0"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
+        "x": 58,
+        "y": 5,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_BERRY_TREE_GROWTH",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_103_CHERI_1",
+        "script": "BerryTreeScript",
+        "flag": "0"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
+        "x": 59,
+        "y": 5,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_BERRY_TREE_GROWTH",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_103_LEPPA",
+        "script": "BerryTreeScript",
+        "flag": "0"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
+        "x": 60,
+        "y": 5,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_BERRY_TREE_GROWTH",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "BERRY_TREE_ROUTE_103_CHERI_2",
+        "script": "BerryTreeScript",
+        "flag": "0"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_BOY_1",
+        "x": 20,
+        "y": 10,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+        "movement_range_x": 1,
+        "movement_range_y": 2,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "Route103_EventScript_Boy",
+        "flag": "0"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_PROF_BIRCH",
+        "x": 7,
+        "y": 3,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+        "movement_range_x": 1,
+        "movement_range_y": 1,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "ProfBirch_EventScript_RatePokedexOrRegister",
+        "flag": "FLAG_HIDE_ROUTE_103_BIRCH"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_POKEFAN_M",
+        "x": 56,
+        "y": 13,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NORMAL",
+        "trainer_sight_or_berry_tree_id": "5",
+        "script": "Route103_EventScript_Miguel",
+        "flag": "0"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_GOLD_ITEM_BALL",
+        "x": 50,
+        "y": 5,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+        "movement_range_x": 1,
+        "movement_range_y": 1,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "ITEM_FRIEND_BALL",
+        "script": "Common_EventScript_FindItem",
+        "flag": "FLAG_ITEM_ROUTE_103_FRIEND_BALL"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_CUTTABLE_TREE",
+        "x": 67,
+        "y": 7,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+        "movement_range_x": 1,
+        "movement_range_y": 1,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "EventScript_CutTree",
+        "flag": "FLAG_TEMP_12"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_CUTTABLE_TREE",
+        "x": 72,
+        "y": 8,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+        "movement_range_x": 1,
+        "movement_range_y": 1,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "EventScript_CutTree",
+        "flag": "FLAG_TEMP_13"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
+        "x": 67,
+        "y": 5,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+        "movement_range_x": 1,
+        "movement_range_y": 1,
+        "trainer_type": "TRAINER_TYPE_NORMAL",
+        "trainer_sight_or_berry_tree_id": "2",
+        "script": "Route103_EventScript_Rhett",
+        "flag": "0"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_MAN_5",
+        "x": 67,
+        "y": 9,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_UP",
+        "movement_range_x": 1,
+        "movement_range_y": 1,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "Route103_EventScript_Marcos",
+        "flag": "0"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_SWIMMER_F",
+        "x": 36,
+        "y": 6,
+        "elevation": 1,
+        "movement_type": "MOVEMENT_TYPE_WALK_DOWN_AND_UP",
+        "movement_range_x": 1,
+        "movement_range_y": 3,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "Route103_EventScript_Isabelle",
+        "flag": "0"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M",
+        "x": 36,
+        "y": 13,
+        "elevation": 1,
+        "movement_type": "MOVEMENT_TYPE_WALK_UP_AND_DOWN",
+        "movement_range_x": 1,
+        "movement_range_y": 3,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "Route103_EventScript_Pete",
+        "flag": "0"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+        "x": 64,
+        "y": 7,
+        "elevation": 0,
+        "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+        "movement_range_x": 1,
+        "movement_range_y": 1,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "ITEM_PP_UP",
+        "script": "Common_EventScript_FindItem",
+        "flag": "FLAG_ITEM_ROUTE_103_PP_UP"
+      }
+    ],
+    "warps": [
+      {
+        "x": 45,
+        "y": 6,
+        "elevation": 0,
+        "dest_map": "MAP_ALTERING_CAVE",
+        "dest_warp_id": "0"
+      }
+    ],
+    "coords": [],
+    "background": [
+      {
+        "type": "sign",
+        "x": 11,
+        "y": 9,
+        "elevation": 0,
+        "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+        "script": "Route103_EventScript_RouteSign"
+      }
+    ]
+  }
+]

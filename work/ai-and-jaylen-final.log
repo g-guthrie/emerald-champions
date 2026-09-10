@@ -1,0 +1,690 @@
+arm-none-eabi-cpp -iquote include -Wno-trigraphs -DMODERN=1 -DTESTING=0 -DEMERALD -std=gnu17 -DEC_HEADLESS_FIXTURES=0 -traditional-cpp - < src/data/trainers.party | tools/trainerproc/trainerproc -o src/data/trainers.h -i src/data/trainers.party -
+tools/scaninc/scaninc -M build/emerald-test/test/battle/ai/emerald_champions_plans.d -g build/assets -I include -I tools/agbcc/include test/battle/ai/emerald_champions_plans.c
+tools/scaninc/scaninc -M build/emerald-test/test/test_runner_battle.d -g build/assets -I include -I tools/agbcc/include test/test_runner_battle.c
+tools/scaninc/scaninc -M build/emerald-test/src/emerald_champions_battle_plan.d -g build/assets -I include -I tools/agbcc/include src/emerald_champions_battle_plan.c
+tools/scaninc/scaninc -M build/emerald-test/src/data.d -g build/assets -I include -I tools/agbcc/include src/data.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/data.o src/data.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/emerald_champions_battle_plan.o src/emerald_champions_battle_plan.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/test_runner_battle.o test/test_runner_battle.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/battle/ai/emerald_champions_plans.o test/battle/ai/emerald_champions_plans.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 4
+[1] EC expert pair: Glare enables a partner KO but not through a paralysis cure: [32mPASS[0m
+[2] EC expert pair: Feint opens partner damage through Protect but not immunity: [32mPASS[0m
+[0] EC expert pair: secondary paralysis earns probabilistic partner order with a Cloak control: [32mPASS[0m
+[3] EC expert pair: Knock Off timing removes only the later offensive item boost: [32mPASS[0m
+[1] EC expert pair: preserve the Plus Minus partner before taking a boosted knockout: [32mPASS[0m
+[2] EC expert pair: timely primary Charm protects its user: [32mPASS[0m
+[1] EC expert pair: non-Flying priority Roost recovers under continued pressure: [32mPASS[0m
+[3] EC expert pair: reciprocal Helping Hand secures its concrete partner's spread KOs: [32mPASS[0m
+[0] EC expert pair: Nuzzle speed control distinguishes primary and secondary immunity: [32mPASS[0m
+[3] EC expert pair: Motor Drive activation earns its same-turn speed crossing: [32mPASS[0m
+[1] EC expert pair: Trick Room never cancels itself and is reset after expiry: [32mPASS[0m
+[2] EC expert pair: candidate evaluation restores board caches field and RNG: [32mPASS[0m
+[3] EC expert pair: Coaching values the partner attack and physical survival: [32mPASS[0m
+[1] EC expert pair: Klutz transfers Flame Orb to a vulnerable physical attacker: [32mPASS[0m
+[3] EC expert pair: Follow Me protects the Trick Room setter: [32mPASS[0m
+[0] EC expert pair: reciprocal Justified activation preserves the recipient's attack: [32mPASS[0m
+[1] EC expert pair: Helping Hand requires a damaging partner action: [32mPASS[0m
+[2] EC expert pair: Acid Spray enables only a later unblocked special attack: [32mPASS[0m
+[3] EC expert pair: damage-based recoil distinguishes unsafe and surviving attacks: [32mPASS[0m
+[0] EC expert pair: partner healing preserves the slower winning attack: [32mPASS[0m
+[2] EC expert pair: Perish countdown survives and simultaneous deadlines choose distinct escapes: [32mPASS[0m
+[1] EC expert pair: beneficial weather is established once: [32mPASS[0m
+[0] EC expert pair: candidate Trace copies deterministic abilities and restores state: [32mPASS[0m
+[1] EC expert pair: Cotton Guard earns only timely physical mitigation: [32mPASS[0m
+[0] EC expert pair: Quiver Dance mitigates only later special attacks: [32mPASS[0m
+[2] EC expert pair: Wish survives modest pressure and pays at the next end turn: [32mPASS[0m
+[1] EC expert pair: HP-powered damage follows public faster chip: [32mPASS[0m
+[3] EC expert pair: offensive drops protect a slower partner only when timely and unblocked: [32mPASS[0m
+[0] EC expert pair: prevent a priority hit from activating Defeatist before attack: [32mPASS[0m
+[3] EC expert pair: Stamina changes the followup after partner chip: [32mPASS[0m
+[1] EC expert pair: Sleep Powder denial respects native accuracy Grass and Goggles: [32mPASS[0m
+[2] EC expert pair: Life Orb costs a hit and stolen Sitrus heals before recoil: [32mPASS[0m
+[0] EC expert pair: team shields cannot bypass empty double-guard rejection: [32mPASS[0m
+[1] EC expert pair: Rock Tomb earns a partner crossing unless Cloak blocks it: [32mPASS[0m
+[2] EC expert pair: Iron Defense mitigates only later physical attacks: [32mPASS[0m
+[0] EC hazard targeting: Magic Bounce discourages hazards on either foe flank: [32mPASS[0m
+[3] EC hazard targeting: partners do not duplicate a full hazard: [32mPASS[0m
+[3] EC Perish policy: fresh trapped targets, escape timing and immunity guards: [32mPASS[0m
+[0] EC hazard targeting: damaging hazard moves remain attacks at capacity: [32mPASS[0m
+[0] EC Octolock: an affected target is rejected without rejecting a fresh target: [32mPASS[0m
+[2] EC expert pair: two passive guards need progress but retain useful waits and legal fallback: [32mPASS[0m
+[3] EC live review Jaylen timing: six-player bench: [32mPASS[0m
+REVIEW_INPUT trainer=326 slot=0 species=615 lv=38 HP=120 Atk=48 Def=54 SpA=112 SpD=119 Spe=132 item=430 ability=26
+REVIEW_INPUT trainer=326 slot=1 species=462 lv=38 HP=136 Atk=62 Def=140 SpA=115 SpD=85 Spe=62 item=557 ability=148
+REVIEW_INPUT trainer=326 slot=2 species=990 lv=38 HP=139 Atk=147 Def=58 SpA=35 SpD=58 Spe=123 item=444 ability=255
+REVIEW_INPUT trainer=326 slot=3 species=473 lv=38 HP=143 Atk=139 Def=77 SpA=62 SpD=62 Spe=111 item=523 ability=47
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Snowscape target=1
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Thunderbolt target=2
+AI decision turn=2 actor=1 move=Blizzard target=0
+AI decision turn=2 actor=3 move=Thunderbolt target=0
+REVIEW_AFTER board=99 turns=1 reserves=0 species=615/462 HP=120/136 foes=98/114 faints=0/0 initialFrames=44
+REVIEW_STATE actor=1 move=Snowscape PP=4/20/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=430
+REVIEW_STATE actor=3 move=Thunderbolt PP=14/15/10/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=148 item=557
+REVIEW_TIMING setup=6 bothActors=42 complete=48
+REVIEW_INPUT trainer=326 slot=0 species=615 lv=38 HP=120 Atk=48 Def=54 SpA=112 SpD=119 Spe=132 item=430 ability=26
+REVIEW_INPUT trainer=326 slot=1 species=462 lv=38 HP=136 Atk=62 Def=140 SpA=115 SpD=85 Spe=62 item=557 ability=148
+REVIEW_INPUT trainer=326 slot=2 species=990 lv=38 HP=139 Atk=147 Def=58 SpA=35 SpD=58 Spe=123 item=444 ability=255
+REVIEW_INPUT trainer=326 slot=3 species=473 lv=38 HP=143 Atk=139 Def=77 SpA=62 SpD=62 Spe=111 item=523 ability=47
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Icicle Crash target=0
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Knock Off target=2
+AI decision turn=2 actor=1 move=Icicle Crash target=0
+AI decision turn=2 actor=3 move=Knock Off target=2
+REVIEW_AFTER board=99 turns=1 reserves=1 species=990/473 HP=139/143 foes=98/114 faints=0/0 initialFrames=29
+REVIEW_STATE actor=1 move=Icicle Crash PP=9/15/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=255 item=444
+REVIEW_STATE actor=3 move=Knock Off PP=10/10/19/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=47 item=523
+REVIEW_TIMING setup=6 bothActors=12 complete=18
+[2] EC expert pair: personality flags preserve an accurate guaranteed KO: [32mPASS[0m
+[3] EC revealed redirection: do not repeatedly feed Volt Absorb: [32mPASS[0m
+[3] EC status legality: a spent burn is not a substitute for an action: [32mPASS[0m
+[1] EC hazard targeting: correct opposing side, valid layers, no saturated repeat: [32mPASS[0m
+[3] EC doubles budget: initial Mega and full benches stay below 1.2 seconds: [32mPASS[0m
+MEGA_BUDGET_INITIAL_FRAMES=60
+[1] EC status legality: preserve damaging moves and legal forced fallback: [32mPASS[0m
+[3] EC authored strategy: Parker preserves a nonimmune reserve beside Earthquake: [32mPASS[0m
+[3] EC authored strategy: Parker repeats Earthquake safely through Telepathy: [32mPASS[0m
+[3] EC authored strategy: Flannery advances Eruption before opposing Rock Slide: [32mPASS[0m
+[3] EC Tailwind: faster recoil attackers do not use empty speed setup: [32mPASS[0m
+[1] EC authored strategy: Maura escapes her countdown while retaining the trap: [32mPASS[0m
+[1] EC authored strategy: Connie's mutual Surf activates Storm Drain: [32mPASS[0m
+[3] EC Leech Seed: do not repeat into a seeded Follow Me recipient: [32mPASS[0m
+[1] EC authored strategy: Tabitha activation requires survival and a useful boost: [32mPASS[0m
+[3] EC pivot cleanup: exhausted bench does not skip the next target: [32mPASS[0m
+[1] EC expert pair: two eligible partners commit only one Mega for their owner: [32mPASS[0m
+[0] EC live review Jaylen: sustained physical and rain disruption: [32mPASS[0m
+REVIEW_INPUT trainer=326 slot=0 species=615 lv=38 HP=120 Atk=48 Def=54 SpA=112 SpD=119 Spe=132 item=430 ability=26
+REVIEW_INPUT trainer=326 slot=1 species=462 lv=38 HP=136 Atk=62 Def=140 SpA=115 SpD=85 Spe=62 item=557 ability=148
+REVIEW_INPUT trainer=326 slot=2 species=990 lv=38 HP=139 Atk=147 Def=58 SpA=35 SpD=58 Spe=123 item=444 ability=255
+REVIEW_INPUT trainer=326 slot=3 species=473 lv=38 HP=143 Atk=139 Def=77 SpA=62 SpD=62 Spe=111 item=523 ability=47
+AI decision turn=1 actor=0 move=Drain Punch target=3
+AI decision turn=1 actor=1 move=Snowscape target=1
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Blizzard target=0
+AI decision turn=2 actor=3 move=Iron Defense target=3
+REVIEW_AFTER board=80 turns=1 reserves=0 species=615/462 HP=120/136 foes=155/135 faints=0/0 initialFrames=35
+REVIEW_STATE actor=1 move=Snowscape PP=4/20/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=430
+REVIEW_STATE actor=3 move=Protect PP=15/15/10/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=148 item=557
+JAYLEN_WEATHER=256 duration=4
+REVIEW_INPUT trainer=326 slot=0 species=615 lv=38 HP=120 Atk=48 Def=54 SpA=112 SpD=119 Spe=132 item=430 ability=26
+REVIEW_INPUT trainer=326 slot=1 species=462 lv=38 HP=136 Atk=62 Def=140 SpA=115 SpD=85 Spe=62 item=557 ability=148
+REVIEW_INPUT trainer=326 slot=2 species=990 lv=38 HP=139 Atk=147 Def=58 SpA=35 SpD=58 Spe=123 item=444 ability=255
+REVIEW_INPUT trainer=326 slot=3 species=473 lv=38 HP=143 Atk=139 Def=77 SpA=62 SpD=62 Spe=111 item=523 ability=47
+AI decision turn=1 actor=0 move=Drain Punch target=3
+AI decision turn=1 actor=1 move=Snowscape target=1
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Drain Punch target=3
+AI decision turn=2 actor=1 move=Blizzard target=0
+AI decision turn=2 actor=2 move=Follow Me target=2
+AI decision turn=2 actor=3 move=Iron Defense target=3
+AI decision turn=3 actor=1 move=Blizzard target=0
+AI decision turn=3 actor=3 move=Thunderbolt target=0
+REVIEW_AFTER board=80 turns=2 reserves=0 species=615/462 HP=120/100 foes=115/81 faints=0/0 initialFrames=34
+REVIEW_STATE actor=1 move=Blizzard PP=4/20/4/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=430
+REVIEW_STATE actor=3 move=Iron Defense PP=15/14/10/4 Atk=6 Def=8 SpA=6 SpD=6 Spe=6 status=0 ability=148 item=557
+JAYLEN_WEATHER=256 duration=3
+REVIEW_INPUT trainer=326 slot=0 species=615 lv=38 HP=120 Atk=48 Def=54 SpA=112 SpD=119 Spe=132 item=430 ability=26
+REVIEW_INPUT trainer=326 slot=1 species=462 lv=38 HP=136 Atk=62 Def=140 SpA=115 SpD=85 Spe=62 item=557 ability=148
+REVIEW_INPUT trainer=326 slot=2 species=990 lv=38 HP=139 Atk=147 Def=58 SpA=35 SpD=58 Spe=123 item=444 ability=255
+REVIEW_INPUT trainer=326 slot=3 species=473 lv=38 HP=143 Atk=139 Def=77 SpA=62 SpD=62 Spe=111 item=523 ability=47
+AI decision turn=1 actor=0 move=Drain Punch target=3
+AI decision turn=1 actor=1 move=Snowscape target=1
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Drain Punch target=3
+AI decision turn=2 actor=1 move=Blizzard target=0
+AI decision turn=2 actor=2 move=Follow Me target=2
+AI decision turn=2 actor=3 move=Iron Defense target=3
+AI decision turn=3 actor=0 move=Drain Punch target=3
+AI decision turn=3 actor=1 move=Blizzard target=0
+AI decision turn=3 actor=2 move=Follow Me target=2
+AI decision turn=3 actor=3 move=Thunderbolt target=0
+AI decision turn=4 actor=1 move=Blizzard target=0
+AI decision turn=4 actor=3 move=Body Press target=0
+REVIEW_AFTER board=80 turns=3 reserves=0 species=615/462 HP=120/64 foes=75/93 faints=0/0 initialFrames=34
+REVIEW_STATE actor=1 move=Blizzard PP=4/20/3/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=430
+REVIEW_STATE actor=3 move=Thunderbolt PP=14/14/10/4 Atk=6 Def=8 SpA=6 SpD=6 Spe=6 status=0 ability=148 item=557
+JAYLEN_WEATHER=256 duration=2
+REVIEW_INPUT trainer=326 slot=0 species=615 lv=38 HP=120 Atk=48 Def=54 SpA=112 SpD=119 Spe=132 item=430 ability=26
+REVIEW_INPUT trainer=326 slot=1 species=462 lv=38 HP=136 Atk=62 Def=140 SpA=115 SpD=85 Spe=62 item=557 ability=148
+REVIEW_INPUT trainer=326 slot=2 species=990 lv=38 HP=139 Atk=147 Def=58 SpA=35 SpD=58 Spe=123 item=444 ability=255
+REVIEW_INPUT trainer=326 slot=3 species=473 lv=38 HP=143 Atk=139 Def=77 SpA=62 SpD=62 Spe=111 item=523 ability=47
+AI decision turn=1 actor=0 move=Drain Punch target=3
+AI decision turn=1 actor=1 move=Snowscape target=1
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Drain Punch target=3
+AI decision turn=2 actor=1 move=Blizzard target=0
+AI decision turn=2 actor=2 move=Follow Me target=2
+AI decision turn=2 actor=3 move=Iron Defense target=3
+AI decision turn=3 actor=0 move=Drain Punch target=3
+AI decision turn=3 actor=1 move=Blizzard target=0
+AI decision turn=3 actor=2 move=Follow Me target=2
+AI decision turn=3 actor=3 move=Thunderbolt target=0
+AI decision turn=4 actor=0 move=Drain Punch target=3
+AI decision turn=4 actor=1 move=Blizzard target=0
+AI decision turn=4 actor=2 move=Follow Me target=2
+AI decision turn=4 actor=3 move=Body Press target=0
+AI decision turn=5 actor=1 move=Freeze-Dry target=0
+AI decision turn=5 actor=3 move=Thunderbolt target=0
+REVIEW_AFTER board=80 turns=4 reserves=0 species=615/462 HP=120/28 foes=35/0 faints=0/1 initialFrames=34
+REVIEW_STATE actor=1 move=Blizzard PP=4/20/2/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=430
+REVIEW_STATE actor=3 move=Body Press PP=14/14/9/4 Atk=6 Def=8 SpA=6 SpD=6 Spe=6 status=0 ability=148 item=557
+JAYLEN_WEATHER=256 duration=1
+REVIEW_INPUT trainer=326 slot=0 species=615 lv=38 HP=120 Atk=48 Def=54 SpA=112 SpD=119 Spe=132 item=430 ability=26
+REVIEW_INPUT trainer=326 slot=1 species=462 lv=38 HP=136 Atk=62 Def=140 SpA=115 SpD=85 Spe=62 item=557 ability=148
+REVIEW_INPUT trainer=326 slot=2 species=990 lv=38 HP=139 Atk=147 Def=58 SpA=35 SpD=58 Spe=123 item=444 ability=255
+REVIEW_INPUT trainer=326 slot=3 species=473 lv=38 HP=143 Atk=139 Def=77 SpA=62 SpD=62 Spe=111 item=523 ability=47
+AI decision turn=1 actor=0 move=Drain Punch target=3
+AI decision turn=1 actor=1 move=Snowscape target=1
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Drain Punch target=3
+AI decision turn=2 actor=1 move=Blizzard target=0
+AI decision turn=2 actor=2 move=Follow Me target=2
+AI decision turn=2 actor=3 move=Iron Defense target=3
+AI decision turn=3 actor=0 move=Drain Punch target=3
+AI decision turn=3 actor=1 move=Blizzard target=0
+AI decision turn=3 actor=2 move=Follow Me target=2
+AI decision turn=3 actor=3 move=Thunderbolt target=0
+AI decision turn=4 actor=0 move=Drain Punch target=3
+AI decision turn=4 actor=1 move=Blizzard target=0
+AI decision turn=4 actor=2 move=Follow Me target=2
+AI decision turn=4 actor=3 move=Body Press target=0
+AI decision turn=5 actor=0 move=Drain Punch target=3
+AI decision turn=5 actor=1 move=Freeze-Dry target=0
+AI decision turn=5 actor=3 move=Thunderbolt target=0
+REVIEW_AFTER board=80 turns=5 reserves=0 species=615/462 HP=120/28 foes=0/0 faints=0/2 initialFrames=35
+REVIEW_STATE actor=1 move=Freeze-Dry PP=4/19/2/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=430
+REVIEW_STATE actor=3 move=Body Press PP=14/14/9/4 Atk=6 Def=8 SpA=6 SpD=6 Spe=6 status=0 ability=148 item=557
+JAYLEN_WEATHER=256 duration=1
+REVIEW_INPUT trainer=326 slot=0 species=615 lv=38 HP=120 Atk=48 Def=54 SpA=112 SpD=119 Spe=132 item=430 ability=26
+REVIEW_INPUT trainer=326 slot=1 species=462 lv=38 HP=136 Atk=62 Def=140 SpA=115 SpD=85 Spe=62 item=557 ability=148
+REVIEW_INPUT trainer=326 slot=2 species=990 lv=38 HP=139 Atk=147 Def=58 SpA=35 SpD=58 Spe=123 item=444 ability=255
+REVIEW_INPUT trainer=326 slot=3 species=473 lv=38 HP=143 Atk=139 Def=77 SpA=62 SpD=62 Spe=111 item=523 ability=47
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Snowscape target=1
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI decision turn=2 actor=1 move=Blizzard target=0
+AI decision turn=2 actor=3 move=Iron Defense target=3
+REVIEW_AFTER board=81 turns=1 reserves=0 species=615/462 HP=120/136 foes=159/135 faints=0/0 initialFrames=35
+REVIEW_STATE actor=1 move=Snowscape PP=4/20/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=430
+REVIEW_STATE actor=3 move=Thunderbolt PP=14/15/10/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=148 item=557
+JAYLEN_WEATHER=256 duration=4
+REVIEW_INPUT trainer=326 slot=0 species=615 lv=38 HP=120 Atk=48 Def=54 SpA=112 SpD=119 Spe=132 item=430 ability=26
+REVIEW_INPUT trainer=326 slot=1 species=462 lv=38 HP=136 Atk=62 Def=140 SpA=115 SpD=85 Spe=62 item=557 ability=148
+REVIEW_INPUT trainer=326 slot=2 species=990 lv=38 HP=139 Atk=147 Def=58 SpA=35 SpD=58 Spe=123 item=444 ability=255
+REVIEW_INPUT trainer=326 slot=3 species=473 lv=38 HP=143 Atk=139 Def=77 SpA=62 SpD=62 Spe=111 item=523 ability=47
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Snowscape target=1
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI decision turn=2 actor=0 move=Scald target=3
+AI decision turn=2 actor=1 move=Blizzard target=0
+AI decision turn=2 actor=2 move=Follow Me target=2
+AI decision turn=2 actor=3 move=Iron Defense target=3
+AI decision turn=3 actor=1 move=Freeze-Dry target=0
+AI decision turn=3 actor=3 move=Body Press target=2
+REVIEW_AFTER board=81 turns=2 reserves=0 species=615/462 HP=120/96 foes=134/81 faints=0/0 initialFrames=35
+REVIEW_STATE actor=1 move=Blizzard PP=4/20/4/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=430
+REVIEW_STATE actor=3 move=Iron Defense PP=14/14/10/5 Atk=6 Def=8 SpA=6 SpD=6 Spe=6 status=0 ability=148 item=557
+JAYLEN_WEATHER=256 duration=3
+REVIEW_INPUT trainer=326 slot=0 species=615 lv=38 HP=120 Atk=48 Def=54 SpA=112 SpD=119 Spe=132 item=430 ability=26
+REVIEW_INPUT trainer=326 slot=1 species=462 lv=38 HP=136 Atk=62 Def=140 SpA=115 SpD=85 Spe=62 item=557 ability=148
+REVIEW_INPUT trainer=326 slot=2 species=990 lv=38 HP=139 Atk=147 Def=58 SpA=35 SpD=58 Spe=123 item=444 ability=255
+REVIEW_INPUT trainer=326 slot=3 species=473 lv=38 HP=143 Atk=139 Def=77 SpA=62 SpD=62 Spe=111 item=523 ability=47
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Snowscape target=1
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI decision turn=2 actor=0 move=Scald target=3
+AI decision turn=2 actor=1 move=Blizzard target=0
+AI decision turn=2 actor=2 move=Follow Me target=2
+AI decision turn=2 actor=3 move=Iron Defense target=3
+AI decision turn=3 actor=0 move=Scald target=3
+AI decision turn=3 actor=1 move=Freeze-Dry target=0
+AI decision turn=3 actor=2 move=Follow Me target=2
+AI decision turn=3 actor=3 move=Body Press target=2
+AI decision turn=4 actor=1 move=Freeze-Dry target=0
+AI decision turn=4 actor=3 move=Thunderbolt target=0
+REVIEW_AFTER board=81 turns=3 reserves=0 species=615/462 HP=120/56 foes=134/0 faints=0/1 initialFrames=35
+REVIEW_STATE actor=1 move=Freeze-Dry PP=4/19/4/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=430
+REVIEW_STATE actor=3 move=Body Press PP=14/14/9/5 Atk=6 Def=8 SpA=6 SpD=6 Spe=6 status=0 ability=148 item=557
+JAYLEN_WEATHER=256 duration=2
+REVIEW_INPUT trainer=326 slot=0 species=615 lv=38 HP=120 Atk=48 Def=54 SpA=112 SpD=119 Spe=132 item=430 ability=26
+REVIEW_INPUT trainer=326 slot=1 species=462 lv=38 HP=136 Atk=62 Def=140 SpA=115 SpD=85 Spe=62 item=557 ability=148
+REVIEW_INPUT trainer=326 slot=2 species=990 lv=38 HP=139 Atk=147 Def=58 SpA=35 SpD=58 Spe=123 item=444 ability=255
+REVIEW_INPUT trainer=326 slot=3 species=473 lv=38 HP=143 Atk=139 Def=77 SpA=62 SpD=62 Spe=111 item=523 ability=47
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Snowscape target=1
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI decision turn=2 actor=0 move=Scald target=3
+AI decision turn=2 actor=1 move=Blizzard target=0
+AI decision turn=2 actor=2 move=Follow Me target=2
+AI decision turn=2 actor=3 move=Iron Defense target=3
+AI decision turn=3 actor=0 move=Scald target=3
+AI decision turn=3 actor=1 move=Freeze-Dry target=0
+AI decision turn=3 actor=2 move=Follow Me target=2
+AI decision turn=3 actor=3 move=Body Press target=2
+AI decision turn=4 actor=0 move=Scald target=3
+AI decision turn=4 actor=1 move=Freeze-Dry target=0
+AI decision turn=4 actor=3 move=Thunderbolt target=0
+REVIEW_AFTER board=81 turns=4 reserves=0 species=615/462 HP=120/16 foes=0/0 faints=0/2 initialFrames=35
+REVIEW_STATE actor=1 move=Freeze-Dry PP=4/18/4/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=430
+REVIEW_STATE actor=3 move=Thunderbolt PP=13/14/9/5 Atk=6 Def=8 SpA=6 SpD=6 Spe=6 status=0 ability=148 item=557
+JAYLEN_WEATHER=256 duration=2
+[0] EC Calm Mind: fast Simple setup accounts for immediate special defense: [32mPASS[0m
+[0] EC Tailwind: charge and speed rewards exclude immune or fainted foes: [32mPASS[0m
+[0] EC battle plans: compiled directives follow trainer ownership and exclude other battle namespaces: [32mPASS[0m
+[2] EC live review Jaylen: snow pressure and reserves: [32mPASS[0m
+REVIEW_INPUT trainer=326 slot=0 species=615 lv=38 HP=120 Atk=48 Def=54 SpA=112 SpD=119 Spe=132 item=430 ability=26
+REVIEW_INPUT trainer=326 slot=1 species=462 lv=38 HP=136 Atk=62 Def=140 SpA=115 SpD=85 Spe=62 item=557 ability=148
+REVIEW_INPUT trainer=326 slot=2 species=990 lv=38 HP=139 Atk=147 Def=58 SpA=35 SpD=58 Spe=123 item=444 ability=255
+REVIEW_INPUT trainer=326 slot=3 species=473 lv=38 HP=143 Atk=139 Def=77 SpA=62 SpD=62 Spe=111 item=523 ability=47
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Snowscape target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Body Press target=0
+AI decision turn=2 actor=1 move=Blizzard target=0
+AI decision turn=2 actor=3 move=Body Press target=0
+REVIEW_AFTER board=0 turns=1 reserves=0 species=615/462 HP=64/68 foes=35/155 faints=0/0 initialFrames=38
+REVIEW_STATE actor=1 move=Snowscape PP=4/20/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=430
+REVIEW_STATE actor=3 move=Body Press PP=15/15/9/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=148 item=557
+JAYLEN_WEATHER=256 duration=4 leftSpeed=132 rightSpeed=62
+REVIEW_INPUT trainer=326 slot=0 species=615 lv=38 HP=120 Atk=48 Def=54 SpA=112 SpD=119 Spe=132 item=430 ability=26
+REVIEW_INPUT trainer=326 slot=1 species=462 lv=38 HP=136 Atk=62 Def=140 SpA=115 SpD=85 Spe=62 item=557 ability=148
+REVIEW_INPUT trainer=326 slot=2 species=990 lv=38 HP=139 Atk=147 Def=58 SpA=35 SpD=58 Spe=123 item=444 ability=255
+REVIEW_INPUT trainer=326 slot=3 species=473 lv=38 HP=143 Atk=139 Def=77 SpA=62 SpD=62 Spe=111 item=523 ability=47
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Snowscape target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Body Press target=0
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Blizzard target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Body Press target=0
+AI switch turn=2 actor=3 party=2
+AI decision turn=3 actor=1 move=Blizzard target=2
+AI decision turn=3 actor=3 move=Icicle Crash target=2
+REVIEW_AFTER board=0 turns=2 reserves=0 species=615/990 HP=64/139 foes=0/131 faints=1/1 initialFrames=38
+REVIEW_STATE actor=1 move=Blizzard PP=4/20/4/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=430
+REVIEW_STATE actor=3 move=- PP=10/15/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=255 item=444
+JAYLEN_WEATHER=256 duration=3 leftSpeed=132 rightSpeed=184
+REVIEW_INPUT trainer=326 slot=0 species=615 lv=38 HP=120 Atk=48 Def=54 SpA=112 SpD=119 Spe=132 item=430 ability=26
+REVIEW_INPUT trainer=326 slot=1 species=462 lv=38 HP=136 Atk=62 Def=140 SpA=115 SpD=85 Spe=62 item=557 ability=148
+REVIEW_INPUT trainer=326 slot=2 species=990 lv=38 HP=139 Atk=147 Def=58 SpA=35 SpD=58 Spe=123 item=444 ability=255
+REVIEW_INPUT trainer=326 slot=3 species=473 lv=38 HP=143 Atk=139 Def=77 SpA=62 SpD=62 Spe=111 item=523 ability=47
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Snowscape target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Body Press target=0
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Blizzard target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Body Press target=0
+AI switch turn=2 actor=3 party=2
+AI decision turn=3 actor=2 move=Drain Punch target=3
+AI decision turn=3 actor=1 move=Blizzard target=2
+AI decision turn=3 actor=3 move=Icicle Crash target=2
+REVIEW_AFTER board=0 turns=3 reserves=0 species=615/990 HP=64/139 foes=0/0 faints=1/2 initialFrames=38
+REVIEW_STATE actor=1 move=Blizzard PP=4/20/3/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=430
+REVIEW_STATE actor=3 move=Icicle Crash PP=9/15/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=255 item=444
+JAYLEN_WEATHER=256 duration=3 leftSpeed=132 rightSpeed=184
+REVIEW_INPUT trainer=326 slot=0 species=615 lv=38 HP=120 Atk=48 Def=54 SpA=112 SpD=119 Spe=132 item=430 ability=26
+REVIEW_INPUT trainer=326 slot=1 species=462 lv=38 HP=136 Atk=62 Def=140 SpA=115 SpD=85 Spe=62 item=557 ability=148
+REVIEW_INPUT trainer=326 slot=2 species=990 lv=38 HP=139 Atk=147 Def=58 SpA=35 SpD=58 Spe=123 item=444 ability=255
+REVIEW_INPUT trainer=326 slot=3 species=473 lv=38 HP=143 Atk=139 Def=77 SpA=62 SpD=62 Spe=111 item=523 ability=47
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Snowscape target=1
+AI decision turn=1 actor=2 move=Super Fang target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI decision turn=2 actor=1 move=Blizzard target=2
+AI decision turn=2 actor=3 move=Body Press target=2
+REVIEW_AFTER board=1 turns=1 reserves=0 species=615/462 HP=72/68 foes=0/135 faints=0/1 initialFrames=34
+REVIEW_STATE actor=1 move=Snowscape PP=4/20/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=430
+REVIEW_STATE actor=3 move=Thunderbolt PP=14/15/10/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=148 item=557
+JAYLEN_WEATHER=256 duration=4 leftSpeed=132 rightSpeed=62
+REVIEW_INPUT trainer=326 slot=0 species=615 lv=38 HP=120 Atk=48 Def=54 SpA=112 SpD=119 Spe=132 item=430 ability=26
+REVIEW_INPUT trainer=326 slot=1 species=462 lv=38 HP=136 Atk=62 Def=140 SpA=115 SpD=85 Spe=62 item=557 ability=148
+REVIEW_INPUT trainer=326 slot=2 species=990 lv=38 HP=139 Atk=147 Def=58 SpA=35 SpD=58 Spe=123 item=444 ability=255
+REVIEW_INPUT trainer=326 slot=3 species=473 lv=38 HP=143 Atk=139 Def=77 SpA=62 SpD=62 Spe=111 item=523 ability=47
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Snowscape target=1
+AI decision turn=1 actor=2 move=Super Fang target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI decision turn=2 actor=2 move=Super Fang target=3
+AI decision turn=2 actor=1 move=Blizzard target=2
+AI decision turn=2 actor=3 move=Body Press target=2
+AI decision turn=3 actor=1 move=Blizzard target=2
+AI decision turn=3 actor=3 move=Body Press target=2
+REVIEW_AFTER board=1 turns=2 reserves=0 species=615/462 HP=72/34 foes=0/55 faints=0/1 initialFrames=34
+REVIEW_STATE actor=1 move=Blizzard PP=4/20/4/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=430
+REVIEW_STATE actor=3 move=Body Press PP=14/15/9/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=148 item=557
+JAYLEN_WEATHER=256 duration=3 leftSpeed=132 rightSpeed=62
+REVIEW_INPUT trainer=326 slot=0 species=615 lv=38 HP=120 Atk=48 Def=54 SpA=112 SpD=119 Spe=132 item=430 ability=26
+REVIEW_INPUT trainer=326 slot=1 species=462 lv=38 HP=136 Atk=62 Def=140 SpA=115 SpD=85 Spe=62 item=557 ability=148
+REVIEW_INPUT trainer=326 slot=2 species=990 lv=38 HP=139 Atk=147 Def=58 SpA=35 SpD=58 Spe=123 item=444 ability=255
+REVIEW_INPUT trainer=326 slot=3 species=473 lv=38 HP=143 Atk=139 Def=77 SpA=62 SpD=62 Spe=111 item=523 ability=47
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Snowscape target=1
+AI decision turn=1 actor=2 move=Super Fang target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI decision turn=2 actor=2 move=Super Fang target=3
+AI decision turn=2 actor=1 move=Blizzard target=2
+AI decision turn=2 actor=3 move=Body Press target=2
+AI decision turn=3 actor=2 move=Super Fang target=3
+AI decision turn=3 actor=1 move=Blizzard target=2
+AI decision turn=3 actor=3 move=Body Press target=2
+REVIEW_AFTER board=1 turns=3 reserves=0 species=615/462 HP=72/34 foes=0/0 faints=0/2 initialFrames=34
+REVIEW_STATE actor=1 move=Blizzard PP=4/20/3/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=430
+REVIEW_STATE actor=3 move=Body Press PP=14/15/9/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=148 item=557
+JAYLEN_WEATHER=256 duration=3 leftSpeed=132 rightSpeed=62
+REVIEW_INPUT trainer=326 slot=0 species=615 lv=38 HP=120 Atk=48 Def=54 SpA=112 SpD=119 Spe=132 item=430 ability=26
+REVIEW_INPUT trainer=326 slot=1 species=462 lv=38 HP=136 Atk=62 Def=140 SpA=115 SpD=85 Spe=62 item=557 ability=148
+REVIEW_INPUT trainer=326 slot=2 species=990 lv=38 HP=139 Atk=147 Def=58 SpA=35 SpD=58 Spe=123 item=444 ability=255
+REVIEW_INPUT trainer=326 slot=3 species=473 lv=38 HP=143 Atk=139 Def=77 SpA=62 SpD=62 Spe=111 item=523 ability=47
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Freeze-Dry target=2
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI decision turn=2 actor=1 move=Freeze-Dry target=2
+AI decision turn=2 actor=3 move=Thunderbolt target=0
+REVIEW_AFTER board=2 turns=1 reserves=0 species=615/462 HP=94/93 foes=19/135 faints=0/0 initialFrames=40
+REVIEW_STATE actor=1 move=- PP=5/20/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=430
+REVIEW_STATE actor=3 move=Thunderbolt PP=14/15/10/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=148 item=557
+JAYLEN_WEATHER=0 duration=0 leftSpeed=132 rightSpeed=62
+REVIEW_INPUT trainer=326 slot=0 species=615 lv=38 HP=120 Atk=48 Def=54 SpA=112 SpD=119 Spe=132 item=430 ability=26
+REVIEW_INPUT trainer=326 slot=1 species=462 lv=38 HP=136 Atk=62 Def=140 SpA=115 SpD=85 Spe=62 item=557 ability=148
+REVIEW_INPUT trainer=326 slot=2 species=990 lv=38 HP=139 Atk=147 Def=58 SpA=35 SpD=58 Spe=123 item=444 ability=255
+REVIEW_INPUT trainer=326 slot=3 species=473 lv=38 HP=143 Atk=139 Def=77 SpA=62 SpD=62 Spe=111 item=523 ability=47
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Freeze-Dry target=2
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Freeze-Dry target=2
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=Thunderbolt target=0
+REVIEW_AFTER board=2 turns=2 reserves=0 species=615/462 HP=94/93 foes=0/0 faints=0/2 initialFrames=40
+REVIEW_STATE actor=1 move=Freeze-Dry PP=5/19/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=430
+REVIEW_STATE actor=3 move=Thunderbolt PP=13/15/10/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=148 item=557
+JAYLEN_WEATHER=0 duration=0 leftSpeed=132 rightSpeed=62
+REVIEW_INPUT trainer=326 slot=0 species=615 lv=38 HP=120 Atk=48 Def=54 SpA=112 SpD=119 Spe=132 item=430 ability=26
+REVIEW_INPUT trainer=326 slot=1 species=462 lv=38 HP=136 Atk=62 Def=140 SpA=115 SpD=85 Spe=62 item=557 ability=148
+REVIEW_INPUT trainer=326 slot=2 species=990 lv=38 HP=139 Atk=147 Def=58 SpA=35 SpD=58 Spe=123 item=444 ability=255
+REVIEW_INPUT trainer=326 slot=3 species=473 lv=38 HP=143 Atk=139 Def=77 SpA=62 SpD=62 Spe=111 item=523 ability=47
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=Snowscape target=1
+AI decision turn=1 actor=2 move=Psychic target=1
+AI decision turn=1 actor=3 move=Thunderbolt target=2
+AI decision turn=2 actor=1 move=Freeze-Dry target=0
+AI decision turn=2 actor=3 move=Body Press target=0
+REVIEW_AFTER board=3 turns=1 reserves=0 species=615/462 HP=72/74 foes=90/0 faints=0/1 initialFrames=25
+REVIEW_STATE actor=1 move=Snowscape PP=4/20/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=430
+REVIEW_STATE actor=3 move=Thunderbolt PP=14/15/10/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=148 item=0
+JAYLEN_WEATHER=256 duration=4 leftSpeed=132 rightSpeed=62
+REVIEW_INPUT trainer=326 slot=0 species=615 lv=38 HP=120 Atk=48 Def=54 SpA=112 SpD=119 Spe=132 item=430 ability=26
+REVIEW_INPUT trainer=326 slot=1 species=462 lv=38 HP=136 Atk=62 Def=140 SpA=115 SpD=85 Spe=62 item=557 ability=148
+REVIEW_INPUT trainer=326 slot=2 species=990 lv=38 HP=139 Atk=147 Def=58 SpA=35 SpD=58 Spe=123 item=444 ability=255
+REVIEW_INPUT trainer=326 slot=3 species=473 lv=38 HP=143 Atk=139 Def=77 SpA=62 SpD=62 Spe=111 item=523 ability=47
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=Snowscape target=1
+AI decision turn=1 actor=2 move=Psychic target=1
+AI decision turn=1 actor=3 move=Thunderbolt target=2
+AI decision turn=2 actor=0 move=Earthquake target=1
+AI decision turn=2 actor=1 move=Freeze-Dry target=0
+AI decision turn=2 actor=3 move=Body Press target=0
+AI switch turn=2 actor=3 party=2
+AI decision turn=3 actor=1 move=Freeze-Dry target=0
+AI decision turn=3 actor=3 move=U-turn target=0
+REVIEW_AFTER board=3 turns=2 reserves=0 species=615/990 HP=72/139 foes=1/0 faints=1/1 initialFrames=25
+REVIEW_STATE actor=1 move=Freeze-Dry PP=4/19/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=430
+REVIEW_STATE actor=3 move=- PP=10/15/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=255 item=444
+JAYLEN_WEATHER=256 duration=3 leftSpeed=132 rightSpeed=184
+REVIEW_INPUT trainer=326 slot=0 species=615 lv=38 HP=120 Atk=48 Def=54 SpA=112 SpD=119 Spe=132 item=430 ability=26
+REVIEW_INPUT trainer=326 slot=1 species=462 lv=38 HP=136 Atk=62 Def=140 SpA=115 SpD=85 Spe=62 item=557 ability=148
+REVIEW_INPUT trainer=326 slot=2 species=990 lv=38 HP=139 Atk=147 Def=58 SpA=35 SpD=58 Spe=123 item=444 ability=255
+REVIEW_INPUT trainer=326 slot=3 species=473 lv=38 HP=143 Atk=139 Def=77 SpA=62 SpD=62 Spe=111 item=523 ability=47
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=Snowscape target=1
+AI decision turn=1 actor=2 move=Psychic target=1
+AI decision turn=1 actor=3 move=Thunderbolt target=2
+AI decision turn=2 actor=0 move=Earthquake target=1
+AI decision turn=2 actor=1 move=Freeze-Dry target=0
+AI decision turn=2 actor=3 move=Body Press target=0
+AI switch turn=2 actor=3 party=2
+AI decision turn=3 actor=0 move=Earthquake target=1
+AI decision turn=3 actor=1 move=Freeze-Dry target=0
+AI decision turn=3 actor=3 move=U-turn target=0
+REVIEW_AFTER board=3 turns=3 reserves=0 species=615/990 HP=72/139 foes=0/0 faints=1/2 initialFrames=25
+REVIEW_STATE actor=1 move=Freeze-Dry PP=4/19/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=430
+REVIEW_STATE actor=3 move=U-turn PP=10/15/19/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=255 item=444
+JAYLEN_WEATHER=256 duration=3 leftSpeed=132 rightSpeed=184
+REVIEW_INPUT trainer=326 slot=0 species=615 lv=38 HP=120 Atk=48 Def=54 SpA=112 SpD=119 Spe=132 item=430 ability=26
+REVIEW_INPUT trainer=326 slot=1 species=462 lv=38 HP=136 Atk=62 Def=140 SpA=115 SpD=85 Spe=62 item=557 ability=148
+REVIEW_INPUT trainer=326 slot=2 species=990 lv=38 HP=139 Atk=147 Def=58 SpA=35 SpD=58 Spe=123 item=444 ability=255
+REVIEW_INPUT trainer=326 slot=3 species=473 lv=38 HP=143 Atk=139 Def=77 SpA=62 SpD=62 Spe=111 item=523 ability=47
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Freeze-Dry target=2
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI decision turn=2 actor=1 move=Freeze-Dry target=0
+AI decision turn=2 actor=3 move=Thunderbolt target=0
+REVIEW_AFTER board=4 turns=1 reserves=0 species=615/462 HP=120/136 foes=1/0 faints=0/1 initialFrames=40
+REVIEW_STATE actor=1 move=Freeze-Dry PP=5/19/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=430
+REVIEW_STATE actor=3 move=Thunderbolt PP=14/15/10/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=148 item=557
+JAYLEN_WEATHER=0 duration=0 leftSpeed=132 rightSpeed=62
+REVIEW_INPUT trainer=326 slot=0 species=615 lv=38 HP=120 Atk=48 Def=54 SpA=112 SpD=119 Spe=132 item=430 ability=26
+REVIEW_INPUT trainer=326 slot=1 species=462 lv=38 HP=136 Atk=62 Def=140 SpA=115 SpD=85 Spe=62 item=557 ability=148
+REVIEW_INPUT trainer=326 slot=2 species=990 lv=38 HP=139 Atk=147 Def=58 SpA=35 SpD=58 Spe=123 item=444 ability=255
+REVIEW_INPUT trainer=326 slot=3 species=473 lv=38 HP=143 Atk=139 Def=77 SpA=62 SpD=62 Spe=111 item=523 ability=47
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Freeze-Dry target=2
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Freeze-Dry target=0
+AI decision turn=2 actor=3 move=Thunderbolt target=0
+REVIEW_AFTER board=4 turns=2 reserves=0 species=615/462 HP=120/136 foes=0/0 faints=0/2 initialFrames=40
+REVIEW_STATE actor=1 move=Freeze-Dry PP=5/18/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=430
+REVIEW_STATE actor=3 move=Thunderbolt PP=14/15/10/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=148 item=557
+JAYLEN_WEATHER=0 duration=0 leftSpeed=132 rightSpeed=62
+REVIEW_INPUT trainer=326 slot=0 species=615 lv=38 HP=120 Atk=48 Def=54 SpA=112 SpD=119 Spe=132 item=430 ability=26
+REVIEW_INPUT trainer=326 slot=1 species=462 lv=38 HP=136 Atk=62 Def=140 SpA=115 SpD=85 Spe=62 item=557 ability=148
+REVIEW_INPUT trainer=326 slot=2 species=990 lv=38 HP=139 Atk=147 Def=58 SpA=35 SpD=58 Spe=123 item=444 ability=255
+REVIEW_INPUT trainer=326 slot=3 species=473 lv=38 HP=143 Atk=139 Def=77 SpA=62 SpD=62 Spe=111 item=523 ability=47
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Superpower target=0
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=High Horsepower target=0
+AI decision turn=2 actor=1 move=Superpower target=2
+AI decision turn=2 actor=3 move=High Horsepower target=2
+REVIEW_AFTER board=0 turns=1 reserves=1 species=990/473 HP=139/52 foes=0/155 faints=0/1 initialFrames=25
+REVIEW_STATE actor=1 move=Superpower PP=10/15/20/4 Atk=5 Def=5 SpA=6 SpD=6 Spe=6 status=0 ability=255 item=444
+REVIEW_STATE actor=3 move=High Horsepower PP=9/10/20/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=47 item=0
+JAYLEN_WEATHER=0 duration=0 leftSpeed=184 rightSpeed=111
+REVIEW_INPUT trainer=326 slot=0 species=615 lv=38 HP=120 Atk=48 Def=54 SpA=112 SpD=119 Spe=132 item=430 ability=26
+REVIEW_INPUT trainer=326 slot=1 species=462 lv=38 HP=136 Atk=62 Def=140 SpA=115 SpD=85 Spe=62 item=557 ability=148
+REVIEW_INPUT trainer=326 slot=2 species=990 lv=38 HP=139 Atk=147 Def=58 SpA=35 SpD=58 Spe=123 item=444 ability=255
+REVIEW_INPUT trainer=326 slot=3 species=473 lv=38 HP=143 Atk=139 Def=77 SpA=62 SpD=62 Spe=111 item=523 ability=47
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Superpower target=0
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=High Horsepower target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=1 move=Superpower target=2
+AI decision turn=2 actor=3 move=High Horsepower target=2
+AI decision turn=3 actor=1 move=Superpower target=2
+REVIEW_AFTER board=0 turns=2 reserves=1 species=990/473 HP=139/0 foes=0/94 faints=1/1 initialFrames=25
+REVIEW_STATE actor=1 move=Superpower PP=10/15/20/3 Atk=4 Def=4 SpA=6 SpD=6 Spe=6 status=0 ability=255 item=444
+REVIEW_STATE actor=3 move=- PP=8/10/20/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=0 item=0
+JAYLEN_WEATHER=0 duration=0 leftSpeed=184 rightSpeed=111
+REVIEW_INPUT trainer=326 slot=0 species=615 lv=38 HP=120 Atk=48 Def=54 SpA=112 SpD=119 Spe=132 item=430 ability=26
+REVIEW_INPUT trainer=326 slot=1 species=462 lv=38 HP=136 Atk=62 Def=140 SpA=115 SpD=85 Spe=62 item=557 ability=148
+REVIEW_INPUT trainer=326 slot=2 species=990 lv=38 HP=139 Atk=147 Def=58 SpA=35 SpD=58 Spe=123 item=444 ability=255
+REVIEW_INPUT trainer=326 slot=3 species=473 lv=38 HP=143 Atk=139 Def=77 SpA=62 SpD=62 Spe=111 item=523 ability=47
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Superpower target=0
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=High Horsepower target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=1 move=Superpower target=2
+AI decision turn=2 actor=3 move=High Horsepower target=2
+AI decision turn=3 actor=2 move=Drain Punch target=3
+AI decision turn=3 actor=1 move=Superpower target=2
+REVIEW_AFTER board=0 turns=3 reserves=1 species=990/473 HP=0/0 foes=0/132 faints=2/1 initialFrames=25
+REVIEW_STATE actor=1 move=- PP=10/15/20/2 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=0 item=444
+REVIEW_STATE actor=3 move=- PP=8/10/20/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=0 item=0
+JAYLEN_WEATHER=0 duration=0 leftSpeed=123 rightSpeed=111
+REVIEW_INPUT trainer=326 slot=0 species=615 lv=38 HP=120 Atk=48 Def=54 SpA=112 SpD=119 Spe=132 item=430 ability=26
+REVIEW_INPUT trainer=326 slot=1 species=462 lv=38 HP=136 Atk=62 Def=140 SpA=115 SpD=85 Spe=62 item=557 ability=148
+REVIEW_INPUT trainer=326 slot=2 species=990 lv=38 HP=139 Atk=147 Def=58 SpA=35 SpD=58 Spe=123 item=444 ability=255
+REVIEW_INPUT trainer=326 slot=3 species=473 lv=38 HP=143 Atk=139 Def=77 SpA=62 SpD=62 Spe=111 item=523 ability=47
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Icicle Crash target=0
+AI decision turn=1 actor=2 move=Super Fang target=3
+AI decision turn=1 actor=3 move=High Horsepower target=2
+AI decision turn=2 actor=1 move=Icicle Crash target=2
+AI decision turn=2 actor=3 move=High Horsepower target=2
+REVIEW_AFTER board=1 turns=1 reserves=1 species=990/473 HP=139/107 foes=0/60 faints=0/1 initialFrames=22
+REVIEW_STATE actor=1 move=Icicle Crash PP=9/15/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=255 item=444
+REVIEW_STATE actor=3 move=High Horsepower PP=9/10/20/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=47 item=0
+JAYLEN_WEATHER=0 duration=0 leftSpeed=184 rightSpeed=111
+REVIEW_INPUT trainer=326 slot=0 species=615 lv=38 HP=120 Atk=48 Def=54 SpA=112 SpD=119 Spe=132 item=430 ability=26
+REVIEW_INPUT trainer=326 slot=1 species=462 lv=38 HP=136 Atk=62 Def=140 SpA=115 SpD=85 Spe=62 item=557 ability=148
+REVIEW_INPUT trainer=326 slot=2 species=990 lv=38 HP=139 Atk=147 Def=58 SpA=35 SpD=58 Spe=123 item=444 ability=255
+REVIEW_INPUT trainer=326 slot=3 species=473 lv=38 HP=143 Atk=139 Def=77 SpA=62 SpD=62 Spe=111 item=523 ability=47
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Icicle Crash target=0
+AI decision turn=1 actor=2 move=Super Fang target=3
+AI decision turn=1 actor=3 move=High Horsepower target=2
+AI decision turn=2 actor=2 move=Super Fang target=3
+AI decision turn=2 actor=1 move=Icicle Crash target=2
+AI decision turn=2 actor=3 move=High Horsepower target=2
+REVIEW_AFTER board=1 turns=2 reserves=1 species=990/473 HP=139/107 foes=0/0 faints=0/2 initialFrames=22
+REVIEW_STATE actor=1 move=Icicle Crash PP=8/15/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=255 item=444
+REVIEW_STATE actor=3 move=High Horsepower PP=9/10/20/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=47 item=0
+JAYLEN_WEATHER=0 duration=0 leftSpeed=184 rightSpeed=111
+REVIEW_INPUT trainer=326 slot=0 species=615 lv=38 HP=120 Atk=48 Def=54 SpA=112 SpD=119 Spe=132 item=430 ability=26
+REVIEW_INPUT trainer=326 slot=1 species=462 lv=38 HP=136 Atk=62 Def=140 SpA=115 SpD=85 Spe=62 item=557 ability=148
+REVIEW_INPUT trainer=326 slot=2 species=990 lv=38 HP=139 Atk=147 Def=58 SpA=35 SpD=58 Spe=123 item=444 ability=255
+REVIEW_INPUT trainer=326 slot=3 species=473 lv=38 HP=143 Atk=139 Def=77 SpA=62 SpD=62 Spe=111 item=523 ability=47
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Icicle Crash target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Knock Off target=0
+AI decision turn=2 actor=1 move=U-turn target=2
+AI decision turn=2 actor=3 move=High Horsepower target=0
+REVIEW_AFTER board=2 turns=1 reserves=1 species=990/473 HP=115/62 foes=64/135 faints=0/0 initialFrames=26
+REVIEW_STATE actor=1 move=- PP=10/15/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=255 item=444
+REVIEW_STATE actor=3 move=Knock Off PP=10/10/19/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=47 item=0
+JAYLEN_WEATHER=0 duration=0 leftSpeed=184 rightSpeed=111
+REVIEW_INPUT trainer=326 slot=0 species=615 lv=38 HP=120 Atk=48 Def=54 SpA=112 SpD=119 Spe=132 item=430 ability=26
+REVIEW_INPUT trainer=326 slot=1 species=462 lv=38 HP=136 Atk=62 Def=140 SpA=115 SpD=85 Spe=62 item=557 ability=148
+REVIEW_INPUT trainer=326 slot=2 species=990 lv=38 HP=139 Atk=147 Def=58 SpA=35 SpD=58 Spe=123 item=444 ability=255
+REVIEW_INPUT trainer=326 slot=3 species=473 lv=38 HP=143 Atk=139 Def=77 SpA=62 SpD=62 Spe=111 item=523 ability=47
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Icicle Crash target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Knock Off target=0
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=U-turn target=2
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=High Horsepower target=0
+AI decision turn=3 actor=1 move=U-turn target=2
+REVIEW_AFTER board=2 turns=2 reserves=1 species=990/473 HP=115/0 foes=0/29 faints=1/1 initialFrames=26
+REVIEW_STATE actor=1 move=U-turn PP=10/15/19/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=255 item=444
+REVIEW_STATE actor=3 move=- PP=9/10/19/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=0 item=0
+JAYLEN_WEATHER=0 duration=0 leftSpeed=184 rightSpeed=111
+REVIEW_INPUT trainer=326 slot=0 species=615 lv=38 HP=120 Atk=48 Def=54 SpA=112 SpD=119 Spe=132 item=430 ability=26
+REVIEW_INPUT trainer=326 slot=1 species=462 lv=38 HP=136 Atk=62 Def=140 SpA=115 SpD=85 Spe=62 item=557 ability=148
+REVIEW_INPUT trainer=326 slot=2 species=990 lv=38 HP=139 Atk=147 Def=58 SpA=35 SpD=58 Spe=123 item=444 ability=255
+REVIEW_INPUT trainer=326 slot=3 species=473 lv=38 HP=143 Atk=139 Def=77 SpA=62 SpD=62 Spe=111 item=523 ability=47
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Icicle Crash target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Knock Off target=0
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=U-turn target=2
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=High Horsepower target=0
+AI decision turn=3 actor=2 move=Scald target=3
+AI decision turn=3 actor=1 move=U-turn target=2
+REVIEW_AFTER board=2 turns=3 reserves=1 species=990/473 HP=115/0 foes=0/0 faints=1/2 initialFrames=26
+REVIEW_STATE actor=1 move=U-turn PP=10/15/18/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=255 item=444
+REVIEW_STATE actor=3 move=- PP=9/10/19/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=0 item=0
+JAYLEN_WEATHER=0 duration=0 leftSpeed=184 rightSpeed=111
+REVIEW_INPUT trainer=326 slot=0 species=615 lv=38 HP=120 Atk=48 Def=54 SpA=112 SpD=119 Spe=132 item=430 ability=26
+REVIEW_INPUT trainer=326 slot=1 species=462 lv=38 HP=136 Atk=62 Def=140 SpA=115 SpD=85 Spe=62 item=557 ability=148
+REVIEW_INPUT trainer=326 slot=2 species=990 lv=38 HP=139 Atk=147 Def=58 SpA=35 SpD=58 Spe=123 item=444 ability=255
+REVIEW_INPUT trainer=326 slot=3 species=473 lv=38 HP=143 Atk=139 Def=77 SpA=62 SpD=62 Spe=111 item=523 ability=47
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=Icicle Crash target=2
+AI decision turn=1 actor=2 move=Psychic target=1
+AI decision turn=1 actor=3 move=Ice Shard target=0
+AI decision turn=2 actor=1 move=Icicle Crash target=0
+AI decision turn=2 actor=3 move=Knock Off target=0
+REVIEW_AFTER board=3 turns=1 reserves=1 species=990/473 HP=66/88 foes=4/0 faints=0/1 initialFrames=24
+REVIEW_STATE actor=1 move=Icicle Crash PP=9/15/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=255 item=444
+REVIEW_STATE actor=3 move=Ice Shard PP=10/10/20/19 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=47 item=523
+JAYLEN_WEATHER=0 duration=0 leftSpeed=184 rightSpeed=111
+REVIEW_INPUT trainer=326 slot=0 species=615 lv=38 HP=120 Atk=48 Def=54 SpA=112 SpD=119 Spe=132 item=430 ability=26
+REVIEW_INPUT trainer=326 slot=1 species=462 lv=38 HP=136 Atk=62 Def=140 SpA=115 SpD=85 Spe=62 item=557 ability=148
+REVIEW_INPUT trainer=326 slot=2 species=990 lv=38 HP=139 Atk=147 Def=58 SpA=35 SpD=58 Spe=123 item=444 ability=255
+REVIEW_INPUT trainer=326 slot=3 species=473 lv=38 HP=143 Atk=139 Def=77 SpA=62 SpD=62 Spe=111 item=523 ability=47
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=Icicle Crash target=2
+AI decision turn=1 actor=2 move=Psychic target=1
+AI decision turn=1 actor=3 move=Ice Shard target=0
+AI decision turn=2 actor=0 move=Earthquake target=1
+AI decision turn=2 actor=1 move=Icicle Crash target=0
+AI decision turn=2 actor=3 move=Knock Off target=0
+REVIEW_AFTER board=3 turns=2 reserves=1 species=990/473 HP=66/88 foes=0/0 faints=0/2 initialFrames=24
+REVIEW_STATE actor=1 move=Icicle Crash PP=8/15/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=255 item=444
+REVIEW_STATE actor=3 move=Ice Shard PP=10/10/20/19 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=47 item=523
+JAYLEN_WEATHER=0 duration=0 leftSpeed=184 rightSpeed=111
+REVIEW_INPUT trainer=326 slot=0 species=615 lv=38 HP=120 Atk=48 Def=54 SpA=112 SpD=119 Spe=132 item=430 ability=26
+REVIEW_INPUT trainer=326 slot=1 species=462 lv=38 HP=136 Atk=62 Def=140 SpA=115 SpD=85 Spe=62 item=557 ability=148
+REVIEW_INPUT trainer=326 slot=2 species=990 lv=38 HP=139 Atk=147 Def=58 SpA=35 SpD=58 Spe=123 item=444 ability=255
+REVIEW_INPUT trainer=326 slot=3 species=473 lv=38 HP=143 Atk=139 Def=77 SpA=62 SpD=62 Spe=111 item=523 ability=47
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Icicle Crash target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Knock Off target=0
+AI decision turn=2 actor=1 move=Icicle Crash target=2
+AI decision turn=2 actor=3 move=Knock Off target=2
+REVIEW_AFTER board=4 turns=1 reserves=1 species=990/473 HP=139/64 foes=0/135 faints=0/1 initialFrames=26
+REVIEW_STATE actor=1 move=Icicle Crash PP=9/15/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=255 item=444
+REVIEW_STATE actor=3 move=Knock Off PP=10/10/19/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=47 item=0
+JAYLEN_WEATHER=0 duration=0 leftSpeed=184 rightSpeed=111
+REVIEW_INPUT trainer=326 slot=0 species=615 lv=38 HP=120 Atk=48 Def=54 SpA=112 SpD=119 Spe=132 item=430 ability=26
+REVIEW_INPUT trainer=326 slot=1 species=462 lv=38 HP=136 Atk=62 Def=140 SpA=115 SpD=85 Spe=62 item=557 ability=148
+REVIEW_INPUT trainer=326 slot=2 species=990 lv=38 HP=139 Atk=147 Def=58 SpA=35 SpD=58 Spe=123 item=444 ability=255
+REVIEW_INPUT trainer=326 slot=3 species=473 lv=38 HP=143 Atk=139 Def=77 SpA=62 SpD=62 Spe=111 item=523 ability=47
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Icicle Crash target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Knock Off target=0
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=1 move=Icicle Crash target=2
+AI decision turn=2 actor=3 move=Knock Off target=2
+REVIEW_AFTER board=4 turns=2 reserves=1 species=990/473 HP=139/64 foes=0/0 faints=0/2 initialFrames=26
+REVIEW_STATE actor=1 move=Icicle Crash PP=8/15/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=255 item=444
+REVIEW_STATE actor=3 move=Knock Off PP=10/10/18/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=47 item=0
+JAYLEN_WEATHER=0 duration=0 leftSpeed=184 rightSpeed=111
+
+- Tests [32mPASSED[0m:          63
+- Tests [34mTOTAL[0m:           63
+

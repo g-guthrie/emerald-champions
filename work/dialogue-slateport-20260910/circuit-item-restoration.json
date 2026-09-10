@@ -1,0 +1,250 @@
+{
+  "circuit-berry-ready": [
+    {
+      "species": 143,
+      "item": 523,
+      "level": 80,
+      "hp": [
+        370,
+        370
+      ],
+      "checksum_valid": true
+    },
+    {
+      "species": 1225,
+      "item": 0,
+      "level": 80,
+      "hp": [
+        226,
+        226
+      ],
+      "checksum_valid": true
+    },
+    {
+      "species": 129,
+      "item": 0,
+      "level": 80,
+      "hp": [
+        146,
+        146
+      ],
+      "checksum_valid": true
+    },
+    {
+      "species": 129,
+      "item": 0,
+      "level": 80,
+      "hp": [
+        146,
+        146
+      ],
+      "checksum_valid": true
+    },
+    {
+      "species": 129,
+      "item": 0,
+      "level": 80,
+      "hp": [
+        146,
+        146
+      ],
+      "checksum_valid": true
+    },
+    {
+      "species": 129,
+      "item": 0,
+      "level": 80,
+      "hp": [
+        146,
+        146
+      ],
+      "checksum_valid": true
+    }
+  ],
+  "circuit-berry-loss-turn": [
+    {
+      "species": 143,
+      "item": 0,
+      "level": 100,
+      "hp": [
+        49,
+        461
+      ],
+      "checksum_valid": true
+    },
+    {
+      "species": 1225,
+      "item": 0,
+      "level": 100,
+      "hp": [
+        0,
+        281
+      ],
+      "checksum_valid": true
+    },
+    {
+      "species": 129,
+      "item": 0,
+      "level": 100,
+      "hp": [
+        0,
+        181
+      ],
+      "checksum_valid": true
+    },
+    {
+      "species": 129,
+      "item": 0,
+      "level": 100,
+      "hp": [
+        0,
+        181
+      ],
+      "checksum_valid": true
+    },
+    {
+      "species": 129,
+      "item": 0,
+      "level": 100,
+      "hp": [
+        0,
+        181
+      ],
+      "checksum_valid": true
+    },
+    {
+      "species": 129,
+      "item": 0,
+      "level": 100,
+      "hp": [
+        0,
+        181
+      ],
+      "checksum_valid": true
+    }
+  ],
+  "circuit-berry-between-matches": [
+    {
+      "species": 143,
+      "item": 523,
+      "level": 100,
+      "hp": [
+        461,
+        461
+      ],
+      "checksum_valid": true
+    },
+    {
+      "species": 1225,
+      "item": 0,
+      "level": 100,
+      "hp": [
+        281,
+        281
+      ],
+      "checksum_valid": true
+    },
+    {
+      "species": 129,
+      "item": 0,
+      "level": 100,
+      "hp": [
+        181,
+        181
+      ],
+      "checksum_valid": true
+    },
+    {
+      "species": 129,
+      "item": 0,
+      "level": 100,
+      "hp": [
+        181,
+        181
+      ],
+      "checksum_valid": true
+    },
+    {
+      "species": 129,
+      "item": 0,
+      "level": 100,
+      "hp": [
+        181,
+        181
+      ],
+      "checksum_valid": true
+    },
+    {
+      "species": 129,
+      "item": 0,
+      "level": 100,
+      "hp": [
+        181,
+        181
+      ],
+      "checksum_valid": true
+    }
+  ],
+  "circuit-berry-defeat": [
+    {
+      "species": 143,
+      "item": 523,
+      "level": 80,
+      "hp": [
+        370,
+        370
+      ],
+      "checksum_valid": true
+    },
+    {
+      "species": 1225,
+      "item": 0,
+      "level": 80,
+      "hp": [
+        226,
+        226
+      ],
+      "checksum_valid": true
+    },
+    {
+      "species": 129,
+      "item": 0,
+      "level": 80,
+      "hp": [
+        146,
+        146
+      ],
+      "checksum_valid": true
+    },
+    {
+      "species": 129,
+      "item": 0,
+      "level": 80,
+      "hp": [
+        146,
+        146
+      ],
+      "checksum_valid": true
+    },
+    {
+      "species": 129,
+      "item": 0,
+      "level": 80,
+      "hp": [
+        146,
+        146
+      ],
+      "checksum_valid": true
+    },
+    {
+      "species": 129,
+      "item": 0,
+      "level": 80,
+      "hp": [
+        146,
+        146
+      ],
+      "checksum_valid": true
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "status": "pass",
+  "scope": "Native release boot/New Game/revised Birch speech to player naming. Button inputs only; no fixture writes, synthetic party, battle automation or save loaded. Not full campaign traversal.",
+  "rom": "pokeemerald-dialogue-20260909-release.gba",
+  "rom_sha256": "afc461a2c3297a5dc75662df6f106de33c21df3de87fb689598ddb4a4a8ae4df",
+  "speech_frames_captured": 30,
+  "speech_frames_visually_inspected": [
+    0,
+    2,
+    4,
+    5,
+    8,
+    9,
+    12,
+    13,
+    16,
+    17,
+    20,
+    21,
+    24,
+    25,
+    27,
+    29
+  ],
+  "observation": "Sampled dialogue fits within the two-line box and scrolls/advances to the naming screen."
+}

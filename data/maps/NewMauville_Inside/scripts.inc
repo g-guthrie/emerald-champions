@@ -363,16 +363,16 @@ NewMauville_Inside_Text_RotomRemains:
 	.string "It is still waiting for your answer.$"
 
 NewMauville_Inside_Text_RotomCaught:
-	.string "The generator finally falls\n"
-	.string "silent.\p"
-	.string "The ROTOM CATALOG nearby changes\n"
-	.string "ROTOM into its five appliances.\p"
-	.string "Inspect the plant's marked stone\n"
-	.string "for other unusual discoveries.\p"
-	.string "REGIELEKI responds to REGISTEEL.\n"
-	.string "DEVON can explain that clue and\l"
-	.string "the conditions for the other\l"
-	.string "SIGNS.$"
+	.string "ROTOM is safely out of the\n"
+	.string "generator.\p"
+	.string "The ROTOM CATALOG changes ROTOM\n"
+	.string "into its five appliances.\p"
+	.string "The sign near the entrance lists\n"
+	.string "this plant's wild POKéMON.\p"
+	.string "It shows legendary requirements\n"
+	.string "and marks partners you've caught.\p"
+	.string "The local guide in MAUVILLE's\n"
+	.string "POKéMON CENTER can help, too.$"
 @ BEGIN EMERALD CHAMPIONS LEGENDARY ROOTS
 .set EC_SIGN_ZAPDOS_ID, 69
 
@@ -421,17 +421,18 @@ NewMauville_Inside_EventScript_ZapdosCleanup::
 	end
 
 NewMauville_Inside_Text_ZapdosDormant:
-	.string "A CHAMPION'S SIGN marks the generator.\p"
-	.string "Its light is dormant. HOENN's story\n"
-	.string "has not yet reached this place.$"
+	.string "ZAPDOS watches over the\n"
+	.string "generator. Return with the\l"
+	.string "BALANCE BADGE to challenge it.$"
 
 NewMauville_Inside_Text_ZapdosNeedsPartner:
-	.string "This Sign follows HOENN's story.\n"
-	.string "Return as your journey continues.$"
+	.string "ZAPDOS accepts challengers with\n"
+	.string "the BALANCE BADGE. No partner\l"
+	.string "species is required.$"
 
 NewMauville_Inside_Text_ZapdosAwakens:
-	.string "The CHAMPION'S SIGN erupts with light!\n"
-	.string "ZAPDOS answers the challenge!$"
+	.string "ZAPDOS crackles with electricity!\n"
+	.string "It accepts your challenge!$"
 
 
 

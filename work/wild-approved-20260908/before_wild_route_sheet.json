@@ -1,0 +1,525 @@
+{
+  "_about": "Exact authored Surf and rod species, in native slot order. The water generator copies these species into existing wild_encounters.json method tables and preserves their levels and encounter rates. Region/cap describe authoring context, not physical access or evolution readiness. Land and Rock Smash are authored directly in wild_encounters.json.",
+  "MAP_ROUTE103": {
+    "region": "west",
+    "cap": 14,
+    "why": "The first water you see and can't cross. Shore birds and tide-pool life, nothing that outclasses a starter.",
+    "surf": ["WINGULL", "SHELLOS", "STARYU", "KINGLER", "WIGLETT"],
+    "old_rod": ["MAGIKARP", "REMORAID"],
+    "good_rod": ["STARYU", "QWILFISH", "CLAMPERL"],
+    "super_rod": ["KINGLER", "SHELLDER", "SEADRA", "WISHIWASHI", "FEEBAS"]
+  },
+  "MAP_ROUTE102": {
+    "region": "inland",
+    "cap": 14,
+    "why": "Petalburg pond. Freshwater babies; the first place a Poliwag or Surskit becomes a real option.",
+    "surf": ["POLIWAG", "MASQUERAIN", "LOMBRE", "AZUMARILL", "CHEWTLE"],
+    "old_rod": ["MAGIKARP", "GOLDEEN"],
+    "good_rod": ["CORPHISH", "OCTILLERY", "PSYDUCK"],
+    "super_rod": ["DREDNAW", "SHARPEDO", "LOMBRE", "QUAGSIRE", "DRATINI"]
+  },
+  "MAP_PETALBURG_CITY": {
+    "region": "west",
+    "cap": 14,
+    "why": "A sheltered town pond. Marill joins Magikarp on the Old Rod; Surf and stronger rods broaden the waterside team options.",
+    "surf": ["MARILL", "LOMBRE", "TENTACRUEL", "SHELLOS", "CORSOLA"],
+    "old_rod": ["MAGIKARP", "MARILL"],
+    "good_rod": ["KRABBY", "LUVDISC", "BRUXISH"],
+    "super_rod": ["WISHIWASHI", "CLAWITZER", "DRAGALGE", "SHARPEDO", "MAREANIE"]
+  },
+  "MAP_ROUTE104": {
+    "region": "west",
+    "cap": 20,
+    "why": "Briney's beach. Wingull country, Wiglett burrows in the sand, Skrelp hides in the kelp off Petalburg Woods.",
+    "surf": ["WINGULL", "TENTACRUEL", "CORSOLA", "MANTINE", "WIGLETT"],
+    "old_rod": ["MAGIKARP", "SKRELP"],
+    "good_rod": ["CLAUNCHER", "OCTILLERY", "HORSEA"],
+    "super_rod": ["WISHIWASHI", "SHARPEDO", "LUVDISC", "BRUXISH", "FEEBAS"]
+  },
+  "MAP_DEWFORD_TOWN": {
+    "region": "west",
+    "cap": 20,
+    "why": "Old Rod Mantyke remains a village specialty. Mantine is the stronger-rod return visit, with Krabby, Staryu and Corsola around the pier and reef.",
+    "surf": ["KRABBY", "STARYU", "MANTINE", "CLAMPERL", "CORSOLA"],
+    "old_rod": ["MAGIKARP", "MANTYKE"],
+    "good_rod": ["LUVDISC", "STARYU", "QWILFISH"],
+    "super_rod": ["CLAWITZER", "DRAGALGE", "SHARPEDO", "BRUXISH", "MANTINE"]
+  },
+  "MAP_ROUTE106": {
+    "region": "west",
+    "cap": 20,
+    "why": "Granite Cave beach. Rock-pool armour: Binacle, Krabby, Clamperl; Dwebble country above the tide line.",
+    "surf": ["BINACLE", "CLAMPERL", "JELLICENT", "BARRASKEWDA", "WIGLETT"],
+    "old_rod": ["MAGIKARP", "KRABBY"],
+    "good_rod": ["SHELLDER", "SKRELP", "CARVANHA"],
+    "super_rod": ["LUVDISC", "BRUXISH", "STARYU", "QWILFISH", "MAREANIE"]
+  },
+  "MAP_ROUTE105": {
+    "region": "west",
+    "cap": 55,
+    "why": "Open crossing south of Dewford. Wishiwashi schools, Mantyke riding Wailmer; the first stretch that feels like ocean.",
+    "surf": ["WISHIWASHI", "WAILORD", "CLAMPERL", "LUMINEON", "MANTINE"],
+    "old_rod": ["MAGIKARP", "REMORAID"],
+    "good_rod": ["SEADRA", "CLAWITZER", "DRAGALGE"],
+    "super_rod": ["LUVDISC", "BRUXISH", "KINGLER", "SHELLDER", "FEEBAS"]
+  },
+  "MAP_ROUTE107": {
+    "region": "west",
+    "cap": 55,
+    "why": "Fast swimmers and clear shallows: Arrokuda, Lumineon and Staryu, with Barraskewda on the Super Rod.",
+    "surf": ["ARROKUDA", "LUMINEON", "KINGLER", "CORSOLA", "WIGLETT"],
+    "old_rod": ["MAGIKARP", "STARYU"],
+    "good_rod": ["BRUXISH", "CLAMPERL", "OCTILLERY"],
+    "super_rod": ["QWILFISH", "SEADRA", "WISHIWASHI", "CLAWITZER", "BARRASKEWDA"]
+  },
+  "MAP_ROUTE108": {
+    "region": "west",
+    "cap": 55,
+    "why": "Abandoned Ship waters. Wreck-dwellers: Frillish, Skrelp, Dhelmise drifting off the hull.",
+    "surf": ["FRILLISH", "DRAGALGE", "MANTINE", "CLAMPERL", "DHELMISE"],
+    "old_rod": ["MAGIKARP", "CLAUNCHER"],
+    "good_rod": ["QWILFISH", "SEADRA", "WISHIWASHI"],
+    "super_rod": ["DRAGALGE", "SHARPEDO", "LUVDISC", "BRUXISH", "MAREANIE"]
+  },
+  "MAP_ROUTE109": {
+    "region": "west",
+    "cap": 30,
+    "why": "Slateport beach. Tourist shallows: Shellos, Krabby, Corsola; Wiglett in the sand between the umbrellas.",
+    "surf": ["SHELLOS", "KINGLER", "LUMINEON", "JELLICENT", "WIGLETT"],
+    "old_rod": ["MAGIKARP", "LUVDISC"],
+    "good_rod": ["OCTILLERY", "CLAUNCHER", "SKRELP"],
+    "super_rod": ["BRUXISH", "KINGLER", "SHELLDER", "STARYU", "FEEBAS"]
+  },
+  "MAP_SLATEPORT_CITY": {
+    "region": "west",
+    "cap": 30,
+    "why": "Working harbour. Tentacool in the slips, Clauncher and Skrelp under the docks, Pyukumuku on the breakwater.",
+    "surf": ["TENTACOOL", "PYUKUMUKU", "KINGLER", "CORSOLA", "MANTINE"],
+    "old_rod": ["MAGIKARP", "CLAUNCHER"],
+    "good_rod": ["SKRELP", "SHELLDER", "STARYU"],
+    "super_rod": ["CLAMPERL", "OCTILLERY", "SEADRA", "WISHIWASHI", "DHELMISE"]
+  },
+  "MAP_ROUTE110": {
+    "region": "west",
+    "cap": 30,
+    "why": "Cycling Road coast. Electric-tinged shallows: Chinchou, Tynamo-adjacent life, Finneon under the bridge lights.",
+    "surf": ["FINNEON", "PELIPPER", "JELLICENT", "BARRASKEWDA", "CORSOLA"],
+    "old_rod": ["MAGIKARP", "CHINCHOU"],
+    "good_rod": ["OCTILLERY", "HORSEA", "WISHIWASHI"],
+    "super_rod": ["CLAWITZER", "DRAGALGE", "SHARPEDO", "LUVDISC", "FEEBAS"]
+  },
+  "MAP_ROUTE111": {
+    "region": "inland",
+    "cap": 30,
+    "why": "Desert oasis: Wooper and Barboach mud life, with Whiscash on the Super Rod. Dratini remains the unusual Surf find.",
+    "surf": ["WOOPER", "WHISCASH", "DREDNAW", "CRAWDAUNT", "DRATINI"],
+    "old_rod": ["MAGIKARP", "BARBOACH"],
+    "good_rod": ["GOLDEEN", "PALPITOAD", "DREDNAW"],
+    "super_rod": ["OCTILLERY", "GOLDUCK", "LOMBRE", "QUAGSIRE", "WHISCASH"]
+  },
+  "MAP_ROUTE114": {
+    "region": "inland",
+    "cap": 40,
+    "why": "Meteor Falls river. Cold fast water: Buizel, Basculin, Corphish; Dratini is the reason people fish here.",
+    "surf": ["BUIZEL", "BASCULIN", "SHELLOS", "POLIWHIRL", "DRATINI"],
+    "old_rod": ["MAGIKARP", "CORPHISH"],
+    "good_rod": ["WHISCASH", "GOLDUCK", "LOMBRE"],
+    "super_rod": ["SEAKING", "BASCULIN", "LANTURN", "POLIWHIRL", "DRATINI"]
+  },
+  "MAP_ROUTE115": {
+    "region": "west",
+    "cap": 14,
+    "why": "Rustboro's north shore. Rocky shallows: Krabby, Binacle, Shellder; a Mantyke in the surf on a good day.",
+    "surf": ["KRABBY", "BARBARACLE", "SHELLOS", "WAILORD", "MANTINE"],
+    "old_rod": ["MAGIKARP", "SHELLDER"],
+    "good_rod": ["STARYU", "CLAMPERL", "OCTILLERY"],
+    "super_rod": ["CLAWITZER", "DRAGALGE", "SHARPEDO", "LUVDISC", "FEEBAS"]
+  },
+  "MAP_ROUTE117": {
+    "region": "inland",
+    "cap": 30,
+    "why": "Day Care ponds. Gentle water: Lotad, Marill, Ducklett; Tympole singing in the reeds.",
+    "surf": ["LOTAD", "SWANNA", "CRAWDAUNT", "SEAKING", "CHEWTLE"],
+    "old_rod": ["WOOPER_PALDEA", "TYMPOLE"],
+    "good_rod": ["GOLDEEN", "CARVANHA", "OCTILLERY"],
+    "super_rod": ["LOMBRE", "QUAGSIRE", "WHISCASH", "CRAWDAUNT", "FEEBAS"]
+  },
+  "MAP_ROUTE118": {
+    "region": "inland",
+    "cap": 30,
+    "why": "Where the river meets the sea. Carvanha come upstream; the Good Rod is found here and the water proves it.",
+    "surf": ["CARVANHA", "GOLDUCK", "BASCULIN", "SHELLOS", "TAUROS_PALDEA_AQUA"],
+    "old_rod": ["MAGIKARP", "CARVANHA"],
+    "good_rod": ["CHINCHOU", "PSYDUCK", "LOMBRE"],
+    "super_rod": ["SEAKING", "WHISCASH", "CRAWDAUNT", "BASCULIN_BLUE_STRIPED", "DRATINI"]
+  },
+  "MAP_ROUTE119": {
+    "region": "inland",
+    "cap": 55,
+    "why": "Rainforest river. Feebas water; Tympole and Poliwag everywhere, Slowpoke asleep on the bank.",
+    "surf": ["POLIWAG", "SLOWBRO", "LOMBRE", "MASQUERAIN", "FEEBAS"],
+    "old_rod": ["MAGIKARP", "TYMPOLE"],
+    "good_rod": ["BASCULIN", "QUAGSIRE", "SEAKING"],
+    "super_rod": ["LANTURN", "POLIWHIRL", "DREDNAW", "SHARPEDO", "FEEBAS"]
+  },
+  "MAP_ROUTE120": {
+    "region": "inland",
+    "cap": 55,
+    "why": "Reed marsh: Wooper, Masquerain and Chewtle. Ludicolo is the distinctive Super Rod find among the freshwater residents.",
+    "surf": ["WOOPER", "MASQUERAIN", "POLIWHIRL", "LOMBRE", "CHEWTLE"],
+    "old_rod": ["MAGIKARP", "CORPHISH"],
+    "good_rod": ["SEISMITOAD", "QUAGSIRE", "SEAKING"],
+    "super_rod": ["LANTURN", "POLIWHIRL", "DREDNAW", "SHARPEDO", "LUDICOLO"]
+  },
+  "MAP_ROUTE121": {
+    "region": "inland",
+    "cap": 60,
+    "why": "Mt. Pyre foreshore: Frillish and Swanna over still water, with Jellicent on the Super Rod.",
+    "surf": ["FRILLISH", "SWANNA", "MASQUERAIN", "AZUMARILL", "DRATINI"],
+    "old_rod": ["MAGIKARP", "BASCULIN"],
+    "good_rod": ["LANTURN", "WHISCASH", "CRAWDAUNT"],
+    "super_rod": ["SHARPEDO", "OCTILLERY", "GOLDUCK", "LOMBRE", "JELLICENT"]
+  },
+  "MAP_ROUTE123": {
+    "region": "inland",
+    "cap": 55,
+    "why": "Berry Master's river. Fat, healthy fish: Goldeen, Corphish, Basculin; Buizel racing the current.",
+    "surf": ["BUIZEL", "SEAKING", "SWANNA", "SEISMITOAD", "CHEWTLE"],
+    "old_rod": ["MAGIKARP", "GOLDEEN"],
+    "good_rod": ["CRAWDAUNT", "SEISMITOAD", "DREDNAW"],
+    "super_rod": ["QUAGSIRE", "WHISCASH", "BASCULIN", "LANTURN", "DRATINI"]
+  },
+  "MAP_ROUTE122": {
+    "region": "east",
+    "cap": 60,
+    "why": "Mt. Pyre's moat. Grey water under the mountain: Frillish, Mareanie, Dhelmise anchors dragged from the shrine.",
+    "surf": ["FRILLISH", "TOXAPEX", "TENTACRUEL", "MANTINE", "LAPRAS"],
+    "old_rod": ["MAGIKARP", "CHINCHOU"],
+    "good_rod": ["QWILFISH", "SEADRA", "OCTILLERY"],
+    "super_rod": ["DRAGALGE", "CLAWITZER", "KINGLER", "SHELLDER", "DHELMISE"]
+  },
+  "MAP_LILYCOVE_CITY": {
+    "region": "east",
+    "cap": 60,
+    "why": "Big port. Wailmer in the bay, Cramorant on the pilings, Luvdisc for the Contest crowd.",
+    "surf": ["WAILMER", "CRAMORANT", "TOXAPEX", "PYUKUMUKU", "LAPRAS"],
+    "old_rod": ["MAGIKARP", "LUVDISC"],
+    "good_rod": ["CORSOLA", "SHARPEDO", "LANTURN"],
+    "super_rod": ["KINGLER", "SHELLDER", "BRUXISH", "BARRASKEWDA", "RELICANTH"]
+  },
+  "MAP_ROUTE124": {
+    "region": "east",
+    "cap": 60,
+    "why": "Dive route. Deep blue with shard hunters below: Mantyke, Clamperl, Finizen playing at the surface.",
+    "surf": ["MANTINE", "CLAMPERL", "CRAMORANT", "JELLICENT", "FINIZEN"],
+    "old_rod": ["MAGIKARP", "HORSEA"],
+    "good_rod": ["OCTILLERY", "CORSOLA", "DRAGALGE"],
+    "super_rod": ["BRUXISH", "BARRASKEWDA", "WAILORD", "SHARPEDO", "RELICANTH"]
+  },
+  "MAP_ROUTE125": {
+    "region": "east",
+    "cap": 60,
+    "why": "Shoal approach: Spheal, Dewgong and Walrein follow the cold current, with Pelipper overhead and Lapras offshore.",
+    "surf": ["SPHEAL", "DEWGONG", "PELIPPER", "WALREIN", "LAPRAS"],
+    "old_rod": ["MAGIKARP", "ARROKUDA"],
+    "good_rod": ["LANTURN", "SHARPEDO", "SEADRA"],
+    "super_rod": ["QWILFISH", "LUVDISC", "CORSOLA", "DRAGALGE", "QWILFISH_HISUI"]
+  },
+  "MAP_ROUTE126": {
+    "region": "east",
+    "cap": 60,
+    "why": "Sootopolis ring. Clear water over the crater: Alomomola, Wishiwashi, Luvdisc; Tauros-Aqua patrol the reef.",
+    "surf": ["ALOMOMOLA", "WISHIWASHI", "MANTINE", "SHARPEDO", "TAUROS_PALDEA_AQUA"],
+    "old_rod": ["MAGIKARP", "LUVDISC"],
+    "good_rod": ["CLAWITZER", "SEADRA", "OCTILLERY"],
+    "super_rod": ["DRAGALGE", "KINGLER", "SHELLDER", "BRUXISH", "FEEBAS"]
+  },
+  "MAP_ROUTE127": {
+    "region": "east",
+    "cap": 60,
+    "why": "Toxic reef: Mareanie, Toxapex, Pyukumuku and Bruxish, with Lapras beyond the reef.",
+    "surf": ["MAREANIE", "PYUKUMUKU", "TOXAPEX", "BRUXISH", "LAPRAS"],
+    "old_rod": ["MAGIKARP", "BRUXISH"],
+    "good_rod": ["DRAGALGE", "QWILFISH", "LUVDISC"],
+    "super_rod": ["KINGLER", "SHELLDER", "BARRASKEWDA", "WAILORD", "RELICANTH"]
+  },
+  "MAP_ROUTE128": {
+    "region": "east",
+    "cap": 60,
+    "why": "Ever Grande approach. Big shapes: Wailmer, Mantyke, Carvanha packs; Finizen follows the boats.",
+    "surf": ["WAILMER", "SHARPEDO", "JELLICENT", "ALOMOMOLA", "FINIZEN"],
+    "old_rod": ["MAGIKARP", "REMORAID"],
+    "good_rod": ["SEADRA", "DRAGALGE", "CLAWITZER"],
+    "super_rod": ["BARRASKEWDA", "WAILORD", "SHARPEDO", "LANTURN", "LAPRAS"]
+  },
+  "MAP_MOSSDEEP_CITY": {
+    "region": "east",
+    "cap": 60,
+    "why": "Staryu tide pools and Cramorant pilings. Starmie rewards a return to the sea beside the Space Center with the Super Rod.",
+    "surf": ["CRAMORANT", "STARYU", "LUMINEON", "FINIZEN", "ALOMOMOLA"],
+    "old_rod": ["MAGIKARP", "FINNEON"],
+    "good_rod": ["CORSOLA", "QWILFISH", "LUVDISC"],
+    "super_rod": ["WAILORD", "SHARPEDO", "LANTURN", "SEADRA", "STARMIE"]
+  },
+  "MAP_EVER_GRANDE_CITY": {
+    "region": "east",
+    "cap": 80,
+    "why": "League waterfall. Everything is grown here: the last sea before Victory Road, Lapras as the send-off.",
+    "surf": ["WAILMER", "MANTINE", "PYUKUMUKU", "WISHIWASHI", "LAPRAS"],
+    "old_rod": ["MAGIKARP", "HORSEA"],
+    "good_rod": ["QWILFISH", "LANTURN", "OCTILLERY"],
+    "super_rod": ["BRUXISH", "BARRASKEWDA", "WAILORD", "SHARPEDO", "RELICANTH"]
+  },
+  "MAP_ROUTE129": {
+    "region": "deep",
+    "cap": 70,
+    "why": "Deep-water crossing: Wailmer and Wailord pods, Sharpedo lanes and Mantine riding the current.",
+    "surf": ["WAILMER", "SHARPEDO", "WAILORD", "MANTINE", "LAPRAS"],
+    "old_rod": ["MAGIKARP", "CHINCHOU"],
+    "good_rod": ["QWILFISH", "BARRASKEWDA", "BRUXISH"],
+    "super_rod": ["QWILFISH_HISUI", "OCTILLERY", "SEADRA", "RELICANTH", "BASCULEGION"]
+  },
+  "MAP_ROUTE130": {
+    "region": "deep",
+    "cap": 70,
+    "why": "Mirage Island waters: Frillish and Jellicent shadows among Wishiwashi schools. The island grass is a Wynaut colony with birds and forest visitors.",
+    "surf": ["FRILLISH", "WISHIWASHI", "JELLICENT", "ALOMOMOLA", "LAPRAS"],
+    "old_rod": ["MAGIKARP", "REMORAID"],
+    "good_rod": ["SEADRA", "BARRASKEWDA", "BRUXISH"],
+    "super_rod": ["QWILFISH_HISUI", "LANTURN", "QWILFISH", "RELICANTH", "BASCULEGION"]
+  },
+  "MAP_ROUTE131": {
+    "region": "deep",
+    "cap": 70,
+    "why": "Sky Pillar approach: Clamperl beds, Relicanth grounds, Tentacruel and Gyarados in the old sea.",
+    "surf": ["CLAMPERL", "TENTACRUEL", "RELICANTH", "LUMINEON", "GYARADOS"],
+    "old_rod": ["MAGIKARP", "RELICANTH"],
+    "good_rod": ["SHELLDER", "CLAMPERL", "LUVDISC"],
+    "super_rod": ["QWILFISH", "OCTILLERY", "SEADRA", "DRAGALGE", "BASCULEGION"]
+  },
+  "MAP_PACIFIDLOG_TOWN": {
+    "region": "deep",
+    "cap": 70,
+    "why": "Floating town. People live on the water here: Alomomola nurses, Cramorant fishers, Luvdisc under the rafts.",
+    "surf": ["ALOMOMOLA", "CRAMORANT", "PELIPPER", "MANTINE", "FINIZEN"],
+    "old_rod": ["MAGIKARP", "LUVDISC"],
+    "good_rod": ["CLAMPERL", "BARRASKEWDA", "BRUXISH"],
+    "super_rod": ["RELICANTH", "DRAGALGE", "CLAWITZER", "SHELLDER", "LAPRAS"]
+  },
+  "MAP_ROUTE132": {
+    "region": "deep",
+    "cap": 70,
+    "why": "Fast current: Carvanha and Barraskewda hunt the channel; Magikarp, Wailord and Finizen retain their existing surface roles.",
+    "surf": ["CARVANHA", "MAGIKARP", "BARRASKEWDA", "WAILORD", "FINIZEN"],
+    "old_rod": ["MAGIKARP", "ARROKUDA"],
+    "good_rod": ["BRUXISH", "KINGLER", "QWILFISH_HISUI"],
+    "super_rod": ["SEADRA", "RELICANTH", "DRAGALGE", "CLAWITZER", "LAPRAS"]
+  },
+  "MAP_ROUTE133": {
+    "region": "deep",
+    "cap": 70,
+    "why": "Cold current meets kelp: Spheal drift south, Dragalge shelter in the weeds, and Mantine and Lapras cross below Pelipper.",
+    "surf": ["SPHEAL", "PELIPPER", "DRAGALGE", "MANTINE", "LAPRAS"],
+    "old_rod": ["MAGIKARP", "SKRELP"],
+    "good_rod": ["CLAWITZER", "LANTURN", "QWILFISH"],
+    "super_rod": ["BRUXISH", "CLAMPERL", "LUVDISC", "KINGLER", "BASCULEGION"]
+  },
+  "MAP_ROUTE134": {
+    "region": "deep",
+    "cap": 70,
+    "why": "Sealed Chamber approach: Seel and Clamperl, then Huntail and Gorebyss along the trench. Gyarados remains the surface discovery.",
+    "surf": ["SEEL", "CLAMPERL", "HUNTAIL", "GOREBYSS", "GYARADOS"],
+    "old_rod": ["MAGIKARP", "RELICANTH"],
+    "good_rod": ["LANTURN", "BRUXISH", "CLAMPERL"],
+    "super_rod": ["QWILFISH", "OCTILLERY", "SEADRA", "DRAGALGE", "BASCULEGION"]
+  },
+  "MAP_SOOTOPOLIS_CITY": {
+    "region": "deep",
+    "cap": 70,
+    "why": "Crater lake. Sacred, sheltered water: Luvdisc, Alomomola, Finizen; Gyarados because the Gym Leader keeps them.",
+    "surf": ["ALOMOMOLA", "WISHIWASHI", "CLAMPERL", "FINIZEN", "GYARADOS"],
+    "old_rod": ["MAGIKARP", "LUVDISC"],
+    "good_rod": ["SEADRA", "QWILFISH_HISUI", "LANTURN"],
+    "super_rod": ["BRUXISH", "CLAMPERL", "KINGLER", "QWILFISH", "FINIZEN"]
+  },
+  "MAP_SEAFLOOR_CAVERN_ENTRANCE": {
+    "region": "deep",
+    "cap": 70,
+    "why": "Cavern pool: Clamperl, Tentacruel and Sharpedo. The Dondozo and Tatsugiri discoveries are in the separate submerged submarine chamber.",
+    "surf": ["CLAMPERL", "TENTACRUEL", "SHARPEDO", "MAGIKARP", "LAPRAS"],
+    "old_rod": ["MAGIKARP", "CHINCHOU"],
+    "good_rod": ["RELICANTH", "DRAGALGE", "CLAWITZER"],
+    "super_rod": ["QWILFISH_HISUI", "QWILFISH", "OCTILLERY", "SEADRA", "BASCULEGION"]
+  },
+  "MAP_SEAFLOOR_CAVERN_ROOM6": {
+    "region": "deep",
+    "cap": 70,
+    "why": "Dark inner pool: Frillish, Jellicent, Dragalge and Golisopod, with Basculegion on the Super Rod.",
+    "surf": ["FRILLISH", "DRAGALGE", "JELLICENT", "GOLISOPOD", "LAPRAS"],
+    "old_rod": ["MAGIKARP", "QWILFISH"],
+    "good_rod": ["SHELLDER", "BRUXISH", "CLAMPERL"],
+    "super_rod": ["RELICANTH", "DRAGALGE", "CLAWITZER", "BARRASKEWDA", "BASCULEGION"]
+  },
+  "MAP_SEAFLOOR_CAVERN_ROOM7": {
+    "region": "deep",
+    "cap": 70,
+    "why": "Shell beds and deep channels: Clamperl, Huntail, Gorebyss and Wishiwashi. Finizen and the existing rod discoveries remain.",
+    "surf": ["CLAMPERL", "WISHIWASHI", "HUNTAIL", "GOREBYSS", "FINIZEN"],
+    "old_rod": ["MAGIKARP", "RELICANTH"],
+    "good_rod": ["LANTURN", "LUVDISC", "KINGLER"],
+    "super_rod": ["SHELLDER", "BARRASKEWDA", "BRUXISH", "CLAMPERL", "BASCULEGION"]
+  },
+  "MAP_SHOAL_CAVE_LOW_TIDE_ENTRANCE_ROOM": {
+    "region": "ice",
+    "cap": 60,
+    "why": "Tidal cave mouth. Spheal and Seel haul out here; Hisuian Qwilfish come in with the tide.",
+    "surf": ["SPHEAL", "DEWGONG", "AVALUGG", "SNOM", "CETODDLE"],
+    "old_rod": ["MAGIKARP", "SHELLDER"],
+    "good_rod": ["LANTURN", "OCTILLERY", "LUVDISC"],
+    "super_rod": ["WALREIN", "DEWGONG", "QWILFISH_HISUI", "CLAMPERL", "CETODDLE"]
+  },
+  "MAP_SHOAL_CAVE_LOW_TIDE_INNER_ROOM": {
+    "region": "ice",
+    "cap": 60,
+    "why": "Inner ice pools. Cetoddle territory; Clamperl and Relicanth under the ice shelf, Lapras once a season.",
+    "surf": ["CETODDLE", "CLAMPERL", "WAILORD", "JELLICENT", "LAPRAS"],
+    "old_rod": ["MAGIKARP", "CLAMPERL"],
+    "good_rod": ["RELICANTH", "SEADRA", "WALREIN"],
+    "super_rod": ["OCTILLERY", "LUVDISC", "LANTURN", "SHELLDER", "CETODDLE"]
+  },
+  "MAP_METEOR_FALLS_1F_1R": {
+    "region": "inland",
+    "cap": 40,
+    "why": "Waterfall cave, front. Buizel and Barboach in the plunge pool; Dratini is why Dragon Tamers train here.",
+    "surf": ["BUIZEL", "WHISCASH", "SLOWBRO", "DREDNAW", "DRATINI"],
+    "old_rod": ["MAGIKARP", "BARBOACH"],
+    "good_rod": ["CRAWDAUNT", "SEAKING", "BASCULIN"],
+    "super_rod": ["GOLDUCK", "LOMBRE", "QUAGSIRE", "LANTURN", "DRATINI"]
+  },
+  "MAP_METEOR_FALLS_1F_2R": {
+    "region": "inland",
+    "cap": 40,
+    "why": "Waterfall cave, upper. Same river, deeper: Basculin, Chinchou; Dratini again for the persistent.",
+    "surf": ["BASCULIN", "POLIWHIRL", "WHISCASH", "CRAWDAUNT", "DRATINI"],
+    "old_rod": ["MAGIKARP", "CHINCHOU"],
+    "good_rod": ["WHISCASH", "CRAWDAUNT", "BASCULIN"],
+    "super_rod": ["QUAGSIRE", "SEAKING", "POLIWHIRL", "SEISMITOAD", "FEEBAS"]
+  },
+  "MAP_METEOR_FALLS_B1F_1R": {
+    "region": "inland",
+    "cap": 60,
+    "why": "The dragon pool: Dratini and Dragonair share the deep water, with Kingdra as a ready partner. Basculin and Poliwhirl keep the river identity.",
+    "surf": ["DRATINI", "BASCULIN", "DRAGONAIR", "POLIWHIRL", "KINGDRA"],
+    "old_rod": ["MAGIKARP", "CHINCHOU"],
+    "good_rod": ["CRAWDAUNT", "SEISMITOAD", "DREDNAW"],
+    "super_rod": ["BASCULIN", "POLIWHIRL", "SHARPEDO", "OCTILLERY", "KINGDRA"]
+  },
+  "MAP_METEOR_FALLS_B1F_2R": {
+    "region": "inland",
+    "cap": 60,
+    "why": "Rear cave, Sign chamber. Quiet pool; Slowpoke, Wooper, one Feebas for whoever fishes in a shrine.",
+    "surf": ["SLOWPOKE", "QUAGSIRE", "POLIWHIRL", "LOMBRE", "DRATINI"],
+    "old_rod": ["MAGIKARP", "GOLDEEN"],
+    "good_rod": ["BASCULIN", "SHARPEDO", "OCTILLERY"],
+    "super_rod": ["SEISMITOAD", "DREDNAW", "GOLDUCK", "LOMBRE", "FEEBAS"]
+  },
+  "MAP_PETALBURG_WOODS_3": {
+    "region": "inland",
+    "cap": 14,
+    "why": "Restored deep woods pond. Lotad, Surskit, Poliwag; a Celebi shrine's water should be gentle.",
+    "surf": ["LOTAD", "MASQUERAIN", "SHELLOS", "POLIWHIRL", "CHEWTLE"],
+    "old_rod": ["MAGIKARP", "POLIWAG"],
+    "good_rod": ["GOLDEEN", "DREDNAW", "CARVANHA"],
+    "super_rod": ["LANTURN", "SEISMITOAD", "OCTILLERY", "GOLDUCK", "FEEBAS"]
+  },
+  "MAP_SAFARI_ZONE_NORTHWEST": {
+    "region": "inland",
+    "cap": 55,
+    "why": "Safari cliff pool. Buizel and Basculin in fast water; Dratini for the Acro Bike crowd.",
+    "surf": ["BUIZEL", "BASCULIN", "QUAGSIRE", "GOLDUCK", "DRATINI"],
+    "old_rod": ["MAGIKARP", "CORPHISH"],
+    "good_rod": ["LANTURN", "SHARPEDO", "OCTILLERY"],
+    "super_rod": ["SEISMITOAD", "DREDNAW", "GOLDUCK", "LOMBRE", "DRATINI"]
+  },
+  "MAP_SAFARI_ZONE_SOUTHEAST": {
+    "region": "inland",
+    "cap": 55,
+    "why": "Safari lowland stream: Marill, Lotad and Goldeen families, with Azumarill as the Super Rod prize.",
+    "surf": ["MARILL", "LOMBRE", "GOLDUCK", "SWANNA", "CHEWTLE"],
+    "old_rod": ["MAGIKARP", "GOLDEEN"],
+    "good_rod": ["CRAWDAUNT", "OCTILLERY", "GOLDUCK"],
+    "super_rod": ["DREDNAW", "SHARPEDO", "LOMBRE", "QUAGSIRE", "AZUMARILL"]
+  },
+  "MAP_SAFARI_ZONE_SOUTHWEST": {
+    "region": "inland",
+    "cap": 55,
+    "why": "Safari deep pond. Slowpoke banks, Psyduck, Carvanha that shouldn't be this far inland.",
+    "surf": ["SLOWPOKE", "GOLDUCK", "FLOATZEL", "SEISMITOAD", "FEEBAS"],
+    "old_rod": ["MAGIKARP", "CARVANHA"],
+    "good_rod": ["BASCULIN", "LOMBRE", "QUAGSIRE"],
+    "super_rod": ["OCTILLERY", "GOLDUCK", "SEAKING", "WHISCASH", "DRATINI"]
+  },
+  "MAP_SANDSTREWN_RUINS": {
+    "region": "inland",
+    "cap": 30,
+    "why": "Buried cistern: Wooper and Whiscash in still water. An ancient Relicanth rewards fishing in the ruins.",
+    "surf": ["WOOPER", "WHISCASH", "GOLDUCK", "SWANNA", "CHEWTLE"],
+    "old_rod": ["MAGIKARP", "BARBOACH"],
+    "good_rod": ["GOLDEEN", "CARVANHA", "OCTILLERY"],
+    "super_rod": ["SEISMITOAD", "DREDNAW", "GOLDUCK", "LOMBRE", "RELICANTH"]
+  },
+  "MAP_SCORCHED_SLAB_B1F": {
+    "region": "inland",
+    "cap": 55,
+    "why": "Hot spring cave. Warm water: Slowpoke, Psyduck; Tympole thrive in the heat.",
+    "surf": ["SLOWPOKE", "GOLDUCK", "SWANNA", "FLOATZEL", "FEEBAS"],
+    "old_rod": ["MAGIKARP", "TYMPOLE"],
+    "good_rod": ["BASCULIN", "OCTILLERY", "GOLDUCK"],
+    "super_rod": ["DREDNAW", "SHARPEDO", "LOMBRE", "QUAGSIRE", "DRATINI"]
+  },
+  "MAP_SEASPRAY_CAVE": {
+    "region": "west",
+    "cap": 30,
+    "why": "Restored sea cave off Route 115. Salt pools: Binacle, Clamperl, Shellder; Mantyke sheltering from the surf.",
+    "surf": ["BINACLE", "CLAMPERL", "SHELLOS", "WAILORD", "MANTINE"],
+    "old_rod": ["MAGIKARP", "SHELLDER"],
+    "good_rod": ["KRABBY", "CARVANHA", "LUVDISC"],
+    "super_rod": ["BRUXISH", "STARYU", "QWILFISH", "CLAMPERL", "MAREANIE"]
+  },
+  "MAP_ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS": {
+    "region": "east",
+    "cap": 55,
+    "why": "Flooded wreck: Frillish and Jellicent haunt the corridors; Dhelmise is the leading Super Rod catch and a Surf discovery.",
+    "surf": ["FRILLISH", "DRAGALGE", "JELLICENT", "TENTACRUEL", "DHELMISE"],
+    "old_rod": ["MAGIKARP", "QWILFISH"],
+    "good_rod": ["SHELLDER", "CORSOLA", "DRAGALGE"],
+    "super_rod": ["DHELMISE", "DRAGALGE", "SHARPEDO", "LANTURN", "JELLICENT"]
+  },
+  "MAP_ABANDONED_SHIP_ROOMS_B1F": {
+    "region": "east",
+    "cap": 55,
+    "why": "Flooded cabins: Mareanie, Golisopod and Qwilfish shelter in the hull; Clauncher and Clawitzer occupy the pipes. Dhelmise remains in the wreck.",
+    "surf": ["MAREANIE", "TENTACRUEL", "GOLISOPOD", "QWILFISH", "LAPRAS"],
+    "old_rod": ["MAGIKARP", "CLAUNCHER"],
+    "good_rod": ["CORSOLA", "SHELLDER", "BRUXISH"],
+    "super_rod": ["CLAWITZER", "OCTILLERY", "QWILFISH", "BARBARACLE", "DHELMISE"]
+  },
+  "MAP_ALTERING_CAVE_B1F": {
+    "region": "inland",
+    "cap": 100,
+    "why": "Postgame distortion pool. Fully grown freshwater life and every inland hunt at once; a reward lake.",
+    "surf": ["BASCULIN", "SLOWBRO", "GOLDUCK", "SWANNA", "DRATINI"],
+    "old_rod": ["MAGIKARP", "CHINCHOU"],
+    "good_rod": ["SHARPEDO", "OCTILLERY", "GOLDUCK"],
+    "super_rod": ["CRAWDAUNT", "BASCULIN", "POLIWHIRL", "SEISMITOAD", "FEEBAS"]
+  },
+  "MAP_VICTORY_ROAD_B2F": {
+    "region": "inland",
+    "cap": 80,
+    "why": "Underground river: Basculin and Floatzel at the surface, with Crawdaunt and Dragonair among the ready Super Rod choices before the League.",
+    "surf": ["BASCULIN", "FLOATZEL", "SEAKING", "SHELLOS", "DRATINI"],
+    "old_rod": ["MAGIKARP", "CARVANHA"],
+    "good_rod": ["LANTURN", "POLIWHIRL", "SEISMITOAD"],
+    "super_rod": ["DREDNAW", "CRAWDAUNT", "GOLDUCK", "BASCULIN", "DRAGONAIR"]
+  }
+}

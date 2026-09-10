@@ -1,0 +1,170 @@
+WALK ArtisanCave_B1F (13, 43) to (18, 43) steps 5
+artisan-pearl-string-approach 0 RESULT frames=1740 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=b3edb3d6e1781bf3 nonzero_pixels=38358 save_bytes=0
+READ width=4 address=020022c4 value=00000001
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00001863
+READ width=4 address=020022e0 value=00000012
+READ width=4 address=020022e4 value=0000002b
+READ width=4 address=02002290 value=00000002
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+READ width=4 address=0200229c value=00000000
+ 
+artisan-pearl-string-before 0 RESULT frames=100 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=b3edb3d6e1781bf3 nonzero_pixels=38358 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00001863
+READ width=4 address=020022e0 value=00000012
+READ width=4 address=020022e4 value=0000002b
+READ width=4 address=02002290 value=00000002
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+READ width=4 address=0200229c value=00000000
+ 
+artisan-pearl-string 0 RESULT frames=3000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=b3edb3d6e1781bf3 nonzero_pixels=38358 save_bytes=0
+READ width=4 address=020022c4 value=00000001
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00001863
+READ width=4 address=020022e0 value=00000012
+READ width=4 address=020022e4 value=0000002b
+READ width=4 address=02002290 value=00000002
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+READ width=4 address=0200229c value=00000000
+ 
+artisan-pearl-string-repeat 0 RESULT frames=2300 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=b3edb3d6e1781bf3 nonzero_pixels=38358 save_bytes=0
+READ width=4 address=020022c4 value=00000001
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00001863
+READ width=4 address=020022e0 value=00000012
+READ width=4 address=020022e4 value=0000002b
+READ width=4 address=02002290 value=00000002
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+READ width=4 address=0200229c value=00000000
+ 
+WALK ArtisanCave_B1F (18, 43) to (32, 37) steps 32
+artisan-comet-shard-approach 0 RESULT frames=3036 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=91114b42ee110709 nonzero_pixels=38337 save_bytes=0
+READ width=4 address=020022c4 value=00000001
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00001863
+READ width=4 address=020022e0 value=00000020
+READ width=4 address=020022e4 value=00000025
+READ width=4 address=02002290 value=00000002
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+READ width=4 address=0200229c value=00000000
+ 
+artisan-comet-shard-before 0 RESULT frames=100 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=91114b42ee110709 nonzero_pixels=38337 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00001863
+READ width=4 address=020022e0 value=00000020
+READ width=4 address=020022e4 value=00000025
+READ width=4 address=02002290 value=00000002
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+READ width=4 address=0200229c value=00000000
+ 
+artisan-comet-shard 0 RESULT frames=3000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=34da492dd2fb1157 nonzero_pixels=38351 save_bytes=0
+READ width=4 address=020022c4 value=00000001
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00001863
+READ width=4 address=020022e0 value=00000020
+READ width=4 address=020022e4 value=00000025
+READ width=4 address=02002290 value=00000002
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+READ width=4 address=0200229c value=00000000
+ 
+artisan-comet-shard-repeat 0 RESULT frames=2300 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=34da492dd2fb1157 nonzero_pixels=38351 save_bytes=0
+READ width=4 address=020022c4 value=00000001
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00001863
+READ width=4 address=020022e0 value=00000020
+READ width=4 address=020022e4 value=00000025
+READ width=4 address=02002290 value=00000002
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+READ width=4 address=0200229c value=00000000
+ 
+WALK ArtisanCave_B1F (32, 37) to (32, 28) steps 25
+artisan-nugget-approach 0 RESULT frames=2700 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=ce58a1cefec11138 nonzero_pixels=38351 save_bytes=0
+READ width=4 address=020022c4 value=00000001
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00001863
+READ width=4 address=020022e0 value=00000020
+READ width=4 address=020022e4 value=0000001c
+READ width=4 address=02002290 value=00000002
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+READ width=4 address=0200229c value=00000000
+ 
+artisan-nugget-before 0 RESULT frames=100 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=ce58a1cefec11138 nonzero_pixels=38351 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00001863
+READ width=4 address=020022e0 value=00000020
+READ width=4 address=020022e4 value=0000001c
+READ width=4 address=02002290 value=00000002
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+READ width=4 address=0200229c value=00000000
+ 
+artisan-nugget 0 RESULT frames=3000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=ce58a1cefec11138 nonzero_pixels=38351 save_bytes=0
+READ width=4 address=020022c4 value=00000001
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00001863
+READ width=4 address=020022e0 value=00000020
+READ width=4 address=020022e4 value=0000001c
+READ width=4 address=02002290 value=00000002
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+READ width=4 address=0200229c value=00000000
+ 
+artisan-nugget-repeat 0 RESULT frames=2300 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=ce58a1cefec11138 nonzero_pixels=38351 save_bytes=0
+READ width=4 address=020022c4 value=00000001
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00001863
+READ width=4 address=020022e0 value=00000020
+READ width=4 address=020022e4 value=0000001c
+READ width=4 address=02002290 value=00000002
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+READ width=4 address=0200229c value=00000000
+ 
+WALK ArtisanCave_B1F (32, 28) to (7, 6) steps 67
+artisan-big-pearl-approach 0 RESULT frames=4716 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=e8c4739f66b759d0 nonzero_pixels=38358 save_bytes=0
+READ width=4 address=020022c4 value=00000001
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00001863
+READ width=4 address=020022e0 value=00000010
+READ width=4 address=020022e4 value=0000000a
+READ width=4 address=02002290 value=00000002
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+READ width=4 address=0200229c value=00000000
+ 
+Traceback (most recent call last):
+  File "/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/dialogue-slateport-20260910/probe_artisan_pickups.py", line 23, in <module>
+    for item,xy,tag in [('ITEM_PEARL_STRING',(19,43),'artisan-pearl-string'),('ITEM_COMET_SHARD',(32,38),'artisan-comet-shard'),('ITEM_NUGGET',(32,29),'artisan-nugget'),('ITEM_BIG_PEARL',(7,5),'artisan-big-pearl'),('ITEM_STAR_PIECE',(27,8),'artisan-star-piece')]: s=pickup(name,s,item,xy,tag)
+                                                                                                                                                                                                                                                                          ~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/dialogue-slateport-20260910/probe_artisan_pickups.py", line 14, in pickup
+    state=walk(name,state,tag+'-approach',target=target)
+  File "/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/dialogue-slateport-20260910/walk_island_maps.py", line 43, in walk
+    else:assert tuple(end[1:])==target,(tag,end,target)
+                ^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('artisan-big-pearl-approach', [6243, 16, 10], (7, 6))

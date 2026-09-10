@@ -1549,7 +1549,7 @@ static void DeterminePokemonToShow(void)
 
     // Go through the Pokédex, and anything that has gotten caught we put into our massive array.
     // This basically packs all of the caught Pokémon into the front of the array
-    for (dexNum = 1, j = 0; dexNum < NATIONAL_DEX_COUNT; dexNum++)
+    for (dexNum = 1, j = 0; dexNum <= NATIONAL_DEX_COUNT; dexNum++)
     {
         if (GetSetPokedexFlag(dexNum, FLAG_GET_CAUGHT))
         {
@@ -1607,7 +1607,7 @@ static void DeterminePokemonToShow(void)
     else
     {
         // Check to see if our starter has already appeared in this list, break if it has
-        for (dexNum = 0; sCreditsData->monToShow[dexNum] != starter && dexNum < NUM_MON_SLIDES; dexNum++);
+        for (dexNum = 0; dexNum < NUM_MON_SLIDES && sCreditsData->monToShow[dexNum] != starter; dexNum++);
 
         // If it has, swap it with the last Pokémon, to ensure our starter is the last image
         if (dexNum < sCreditsData->numMonToShow - 1)

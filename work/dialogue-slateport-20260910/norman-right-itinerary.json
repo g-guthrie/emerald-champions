@@ -1,0 +1,143 @@
+[
+  {
+    "from": [
+      4,
+      110
+    ],
+    "to": [
+      7,
+      106
+    ],
+    "keys": [
+      "UP",
+      "UP",
+      "UP",
+      "UP",
+      "RIGHT",
+      "RIGHT",
+      "RIGHT"
+    ]
+  },
+  {
+    "from": [
+      1,
+      98
+    ],
+    "to": [
+      3,
+      94
+    ],
+    "keys": [
+      "UP",
+      "UP",
+      "UP",
+      "UP",
+      "RIGHT",
+      "RIGHT"
+    ]
+  },
+  {
+    "from": [
+      3,
+      94
+    ],
+    "to": [
+      7,
+      93
+    ],
+    "keys": [
+      "UP",
+      "RIGHT",
+      "RIGHT",
+      "RIGHT",
+      "RIGHT"
+    ]
+  },
+  {
+    "from": [
+      1,
+      72
+    ],
+    "to": [
+      3,
+      68
+    ],
+    "keys": [
+      "UP",
+      "UP",
+      "UP",
+      "UP",
+      "RIGHT",
+      "RIGHT"
+    ]
+  },
+  {
+    "from": [
+      3,
+      68
+    ],
+    "to": [
+      1,
+      67
+    ],
+    "keys": [
+      "UP",
+      "LEFT",
+      "LEFT"
+    ]
+  },
+  {
+    "from": [
+      7,
+      33
+    ],
+    "to": [
+      3,
+      29
+    ],
+    "keys": [
+      "UP",
+      "UP",
+      "UP",
+      "LEFT",
+      "LEFT",
+      "LEFT",
+      "LEFT",
+      "UP"
+    ]
+  },
+  {
+    "from": [
+      3,
+      29
+    ],
+    "to": [
+      1,
+      28
+    ],
+    "keys": [
+      "UP",
+      "LEFT",
+      "LEFT"
+    ]
+  },
+  {
+    "from": [
+      7,
+      7
+    ],
+    "to": [
+      4,
+      3
+    ],
+    "keys": [
+      "UP",
+      "UP",
+      "UP",
+      "LEFT",
+      "LEFT",
+      "UP",
+      "LEFT"
+    ]
+  }
+]

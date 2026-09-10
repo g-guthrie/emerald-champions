@@ -1,0 +1,1881 @@
+[
+  {
+    "file": "data/maps/Route109/scripts.inc",
+    "label": "DewfordTown_Text_BrineyLandedInSlateportDeliverGoods",
+    "line": 503,
+    "text": "MR. BRINEY: Ahoy!\\nWe've made land in SLATEPORT!\\pI suppose you're going to visit CAPT.\\nSTERN and deliver the DEVON GOODS?$",
+    "lines": [
+      {
+        "text": "MR. BRINEY: Ahoy!",
+        "width": 88,
+        "unresolved": []
+      },
+      {
+        "text": "We've made land in SLATEPORT!",
+        "width": 156,
+        "unresolved": []
+      },
+      {
+        "text": "I suppose you're going to visit CAPT.",
+        "width": 194,
+        "unresolved": []
+      },
+      {
+        "text": "STERN and deliver the DEVON GOODS?",
+        "width": 184,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route109/scripts.inc",
+    "label": "Route109_Text_BrineySailToDewfordQuestion",
+    "line": 509,
+    "text": "MR. BRINEY: I thought you're supposed\\nto deliver the DEVON GOODS.\\pWould you like to sail back to\\nDEWFORD, then?$",
+    "lines": [
+      {
+        "text": "MR. BRINEY: I thought you're supposed",
+        "width": 200,
+        "unresolved": []
+      },
+      {
+        "text": "to deliver the DEVON GOODS.",
+        "width": 142,
+        "unresolved": []
+      },
+      {
+        "text": "Would you like to sail back to",
+        "width": 152,
+        "unresolved": []
+      },
+      {
+        "text": "DEWFORD, then?",
+        "width": 78,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route109/scripts.inc",
+    "label": "Route109_Text_BrineyDewfordItIs",
+    "line": 515,
+    "text": "MR. BRINEY: DEWFORD it is, then!\\pAnchors aweigh!\\nPEEKO, we're setting sail, my darling!$",
+    "lines": [
+      {
+        "text": "MR. BRINEY: DEWFORD it is, then!",
+        "width": 162,
+        "unresolved": []
+      },
+      {
+        "text": "Anchors aweigh!",
+        "width": 82,
+        "unresolved": []
+      },
+      {
+        "text": "PEEKO, we're setting sail, my darling!",
+        "width": 193,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route109/scripts.inc",
+    "label": "Route109_Text_BrineyDeliverDevonGoods",
+    "line": 520,
+    "text": "MR. BRINEY: Then you go on and deliver\\nthe DEVON GOODS. I'll be waiting.$",
+    "lines": [
+      {
+        "text": "MR. BRINEY: Then you go on and deliver",
+        "width": 196,
+        "unresolved": []
+      },
+      {
+        "text": "the DEVON GOODS. I'll be waiting.",
+        "width": 169,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route109/scripts.inc",
+    "label": "DewfordTown_Text_BrineyLandedInSlateport",
+    "line": 524,
+    "text": "MR. BRINEY: Ahoy! We've made land in\\nSLATEPORT!\\pYou just go on and tell me whenever\\nyou want to set sail again!$",
+    "lines": [
+      {
+        "text": "MR. BRINEY: Ahoy! We've made land in",
+        "width": 186,
+        "unresolved": []
+      },
+      {
+        "text": "SLATEPORT!",
+        "width": 58,
+        "unresolved": []
+      },
+      {
+        "text": "You just go on and tell me whenever",
+        "width": 183,
+        "unresolved": []
+      },
+      {
+        "text": "you want to set sail again!",
+        "width": 139,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route109/scripts.inc",
+    "label": "Route109_Text_BrineyWhereAreWeBound",
+    "line": 530,
+    "text": "MR. BRINEY: Ahoy!\\nFor you, I'll go out to sea anytime!\\pNow, my friend, where are we bound?$",
+    "lines": [
+      {
+        "text": "MR. BRINEY: Ahoy!",
+        "width": 88,
+        "unresolved": []
+      },
+      {
+        "text": "For you, I'll go out to sea anytime!",
+        "width": 183,
+        "unresolved": []
+      },
+      {
+        "text": "Now, my friend, where are we bound?",
+        "width": 181,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route109/scripts.inc",
+    "label": "Route109_Text_BrineyTellMeWhenYouNeedToSail",
+    "line": 535,
+    "text": "MR. BRINEY: You just tell me whenever\\nyou need to set sail again!$",
+    "lines": [
+      {
+        "text": "MR. BRINEY: You just tell me whenever",
+        "width": 192,
+        "unresolved": []
+      },
+      {
+        "text": "you need to set sail again!",
+        "width": 139,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route109/scripts.inc",
+    "label": "Route109_Text_ChillAtMyPapasSpot",
+    "line": 539,
+    "text": "Yo, TRAINERS!\\nWhether you're hot to trot,\\lor cool cat not,\\lchill at my papa's spot!$",
+    "lines": [
+      {
+        "text": "Yo, TRAINERS!",
+        "width": 70,
+        "unresolved": []
+      },
+      {
+        "text": "Whether you're hot to trot,",
+        "width": 144,
+        "unresolved": []
+      },
+      {
+        "text": "or cool cat not,",
+        "width": 81,
+        "unresolved": []
+      },
+      {
+        "text": "chill at my papa's spot!",
+        "width": 124,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route109/scripts.inc",
+    "label": "Route109_Text_LittleKidsDartAround",
+    "line": 545,
+    "text": "Little kids can dart around so quickly…\\pYou don't dare take your eyes off them\\nfor an instant. It's very taxing.\\pMine are with my POKéMON, so they\\nshould be okay, but…$",
+    "lines": [
+      {
+        "text": "Little kids can dart around so quickly…",
+        "width": 204,
+        "unresolved": []
+      },
+      {
+        "text": "You don't dare take your eyes off them",
+        "width": 205,
+        "unresolved": []
+      },
+      {
+        "text": "for an instant. It's very taxing.",
+        "width": 171,
+        "unresolved": []
+      },
+      {
+        "text": "Mine are with my POKéMON, so they",
+        "width": 172,
+        "unresolved": []
+      },
+      {
+        "text": "should be okay, but…",
+        "width": 106,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route109/scripts.inc",
+    "label": "Route109_Text_SandCastleTakingLongTime",
+    "line": 552,
+    "text": "Our sand castle's taking a long time\\nto make.$",
+    "lines": [
+      {
+        "text": "Our sand castle's taking a long time",
+        "width": 189,
+        "unresolved": []
+      },
+      {
+        "text": "to make.",
+        "width": 42,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route109/scripts.inc",
+    "label": "Route109_Text_YouCanHaveThis",
+    "line": 556,
+    "text": "You can have this!$",
+    "lines": [
+      {
+        "text": "You can have this!",
+        "width": 95,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route109/scripts.inc",
+    "label": "Route109_Text_WereGoingToMakeBigCastle",
+    "line": 559,
+    "text": "We're going to get all the sand from\\nthe beach and make a big castle!\\pAnd then we're going to be a king and\\nqueen.\\pWe'll let you be a servant.$",
+    "lines": [
+      {
+        "text": "We're going to get all the sand from",
+        "width": 187,
+        "unresolved": []
+      },
+      {
+        "text": "the beach and make a big castle!",
+        "width": 168,
+        "unresolved": []
+      },
+      {
+        "text": "And then we're going to be a king and",
+        "width": 193,
+        "unresolved": []
+      },
+      {
+        "text": "queen.",
+        "width": 33,
+        "unresolved": []
+      },
+      {
+        "text": "We'll let you be a servant.",
+        "width": 137,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route109/scripts.inc",
+    "label": "Route109_Text_ZigzagoonPicksUpLitter",
+    "line": 566,
+    "text": "The water around these parts is clean.\\pBut, I get my ZIGZAGOON to pick up\\nlitter from the shoreline at times.\\pDirty water becomes rain and joins our\\nrivers, which we drink from…\\pIf we pollute the sea, it all comes\\nback to haunt us eventually.$",
+    "lines": [
+      {
+        "text": "The water around these parts is clean.",
+        "width": 200,
+        "unresolved": []
+      },
+      {
+        "text": "But, I get my ZIGZAGOON to pick up",
+        "width": 178,
+        "unresolved": []
+      },
+      {
+        "text": "litter from the shoreline at times.",
+        "width": 179,
+        "unresolved": []
+      },
+      {
+        "text": "Dirty water becomes rain and joins our",
+        "width": 199,
+        "unresolved": []
+      },
+      {
+        "text": "rivers, which we drink from…",
+        "width": 143,
+        "unresolved": []
+      },
+      {
+        "text": "If we pollute the sea, it all comes",
+        "width": 176,
+        "unresolved": []
+      },
+      {
+        "text": "back to haunt us eventually.",
+        "width": 149,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route109/scripts.inc",
+    "label": "Route109_Text_ZigzagoonCry",
+    "line": 575,
+    "text": "ZIGZAGOON: Guguu?$",
+    "lines": [
+      {
+        "text": "ZIGZAGOON: Guguu?",
+        "width": 96,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route109/scripts.inc",
+    "label": "Route109_Text_SeashoreHouseSign",
+    "line": 578,
+    "text": "SEASHORE HOUSE\\p“May hot battles rage on hot sands!\\nThe place for hot TRAINERS!”$",
+    "lines": [
+      {
+        "text": "SEASHORE HOUSE",
+        "width": 81,
+        "unresolved": []
+      },
+      {
+        "text": "“May hot battles rage on hot sands!",
+        "width": 187,
+        "unresolved": []
+      },
+      {
+        "text": "The place for hot TRAINERS!”",
+        "width": 151,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route109/scripts.inc",
+    "label": "Route109_Text_TrainerTipsSign",
+    "line": 583,
+    "text": "TRAINER TIPS\\pEvery partner has competitive\\npotential. Battles do not award\\lEVs to grind.\\pUse a CENTER specialist to set\\nNature and EVs. Compare\\lthe resulting stats before battle.$",
+    "lines": [
+      {
+        "text": "TRAINER TIPS",
+        "width": 69,
+        "unresolved": []
+      },
+      {
+        "text": "Every partner has competitive",
+        "width": 158,
+        "unresolved": []
+      },
+      {
+        "text": "potential. Battles do not award",
+        "width": 164,
+        "unresolved": []
+      },
+      {
+        "text": "EVs to grind.",
+        "width": 66,
+        "unresolved": []
+      },
+      {
+        "text": "Use a CENTER specialist to set",
+        "width": 159,
+        "unresolved": []
+      },
+      {
+        "text": "Nature and EVs. Compare",
+        "width": 124,
+        "unresolved": []
+      },
+      {
+        "text": "the resulting stats before battle.",
+        "width": 181,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route109/scripts.inc",
+    "label": "Route109_Text_HUEY_LocalConversation",
+    "line": 591,
+    "text": "My sea legs are excellent.\\nMy land legs filed a complaint.$",
+    "lines": [
+      {
+        "text": "My sea legs are excellent.",
+        "width": 134,
+        "unresolved": []
+      },
+      {
+        "text": "My land legs filed a complaint.",
+        "width": 156,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route109/scripts.inc",
+    "label": "Route109_Text_GWEN_LocalConversation",
+    "line": 595,
+    "text": "My float has never lost a race.\\nIt has never entered one either.$",
+    "lines": [
+      {
+        "text": "My float has never lost a race.",
+        "width": 159,
+        "unresolved": []
+      },
+      {
+        "text": "It has never entered one either.",
+        "width": 169,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route109/scripts.inc",
+    "label": "Route109_Text_ELIJAH_LocalConversation",
+    "line": 599,
+    "text": "A bird overhead means good luck.\\nUsually. Keep your hat on.$",
+    "lines": [
+      {
+        "text": "A bird overhead means good luck.",
+        "width": 168,
+        "unresolved": []
+      },
+      {
+        "text": "Usually. Keep your hat on.",
+        "width": 133,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route109_SeashoreHouse/scripts.inc",
+    "label": "Route109_SeashoreHouse_Text_SeashoreHouseIntro",
+    "line": 104,
+    "text": "I'm the owner of the SEASHORE HOUSE.\\nBut you can call me MR. SEA!\\pWhat I love above all is to see hot\\nPOKéMON battles.\\pLet me see that your heart burns hot!\\pIf you can defeat all the TRAINERS\\nhere, I'll reward your efforts.$",
+    "lines": [
+      {
+        "text": "I'm the owner of the SEASHORE HOUSE.",
+        "width": 194,
+        "unresolved": []
+      },
+      {
+        "text": "But you can call me MR. SEA!",
+        "width": 141,
+        "unresolved": []
+      },
+      {
+        "text": "What I love above all is to see hot",
+        "width": 178,
+        "unresolved": []
+      },
+      {
+        "text": "POKéMON battles.",
+        "width": 88,
+        "unresolved": []
+      },
+      {
+        "text": "Let me see that your heart burns hot!",
+        "width": 196,
+        "unresolved": []
+      },
+      {
+        "text": "If you can defeat all the TRAINERS",
+        "width": 182,
+        "unresolved": []
+      },
+      {
+        "text": "here, I'll reward your efforts.",
+        "width": 159,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route109_SeashoreHouse/scripts.inc",
+    "label": "Route109_SeashoreHouse_Text_ShowMeSomeHotMatches",
+    "line": 113,
+    "text": "Show me some hot matches!\\pI run this SEASHORE HOUSE just for\\nthat reason alone!$",
+    "lines": [
+      {
+        "text": "Show me some hot matches!",
+        "width": 136,
+        "unresolved": []
+      },
+      {
+        "text": "I run this SEASHORE HOUSE just for",
+        "width": 181,
+        "unresolved": []
+      },
+      {
+        "text": "that reason alone!",
+        "width": 97,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route109_SeashoreHouse/scripts.inc",
+    "label": "Route109_SeashoreHouse_Text_TakeTheseSodaPopBottles",
+    "line": 118,
+    "text": "You're scorching hot!\\nThose battles blazed!\\lI'm more than just satisfied!\\pAs thanks for showing me your hot\\nstreak, I want you to take these.\\pIt's half a dozen bottles of SODA POP!$",
+    "lines": [
+      {
+        "text": "You're scorching hot!",
+        "width": 114,
+        "unresolved": []
+      },
+      {
+        "text": "Those battles blazed!",
+        "width": 114,
+        "unresolved": []
+      },
+      {
+        "text": "I'm more than just satisfied!",
+        "width": 154,
+        "unresolved": []
+      },
+      {
+        "text": "As thanks for showing me your hot",
+        "width": 176,
+        "unresolved": []
+      },
+      {
+        "text": "streak, I want you to take these.",
+        "width": 173,
+        "unresolved": []
+      },
+      {
+        "text": "It's half a dozen bottles of SODA POP!",
+        "width": 201,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route109_SeashoreHouse/scripts.inc",
+    "label": "Route109_SeashoreHouse_Text_BagFull",
+    "line": 126,
+    "text": "Oh, but hey, your BAG's jammed full.\\nI'll hang on to these for you.$",
+    "lines": [
+      {
+        "text": "Oh, but hey, your BAG's jammed full.",
+        "width": 183,
+        "unresolved": []
+      },
+      {
+        "text": "I'll hang on to these for you.",
+        "width": 154,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route109_SeashoreHouse/scripts.inc",
+    "label": "Route109_SeashoreHouse_Text_WantToBuySodaPop",
+    "line": 130,
+    "text": "Want to buy some SODA POP?\\nPOKéMON love it!\\pJust ¥300 a bottle!\\nBuy some!$",
+    "lines": [
+      {
+        "text": "Want to buy some SODA POP?",
+        "width": 141,
+        "unresolved": []
+      },
+      {
+        "text": "POKéMON love it!",
+        "width": 84,
+        "unresolved": []
+      },
+      {
+        "text": "Just ¥300 a bottle!",
+        "width": 101,
+        "unresolved": []
+      },
+      {
+        "text": "Buy some!",
+        "width": 49,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route109_SeashoreHouse/scripts.inc",
+    "label": "Route109_SeashoreHouse_Text_HereYouGo",
+    "line": 136,
+    "text": "Here you go!$",
+    "lines": [
+      {
+        "text": "Here you go!",
+        "width": 63,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route109_SeashoreHouse/scripts.inc",
+    "label": "Route109_SeashoreHouse_Text_NotEnoughMoney",
+    "line": 139,
+    "text": "You don't have the money.$",
+    "lines": [
+      {
+        "text": "You don't have the money.",
+        "width": 135,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route109_SeashoreHouse/scripts.inc",
+    "label": "Route109_SeashoreHouse_Text_ThatsTooBad",
+    "line": 142,
+    "text": "No?\\nThat's too bad.$",
+    "lines": [
+      {
+        "text": "No?",
+        "width": 18,
+        "unresolved": []
+      },
+      {
+        "text": "That's too bad.",
+        "width": 81,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route109_SeashoreHouse/scripts.inc",
+    "label": "Route109_SeashoreHouse_Text_DwayneIntro",
+    "line": 146,
+    "text": "If you're looking for a battle in the\\nSEASHORE HOUSE, you'll find no\\lhotter TRAINER than me, matey!$",
+    "lines": [
+      {
+        "text": "If you're looking for a battle in the",
+        "width": 191,
+        "unresolved": []
+      },
+      {
+        "text": "SEASHORE HOUSE, you'll find no",
+        "width": 159,
+        "unresolved": []
+      },
+      {
+        "text": "hotter TRAINER than me, matey!",
+        "width": 162,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route109_SeashoreHouse/scripts.inc",
+    "label": "Route109_SeashoreHouse_Text_DwayneDefeated",
+    "line": 151,
+    "text": "That was a hot battle!\\nI can accept that loss, matey!$",
+    "lines": [
+      {
+        "text": "That was a hot battle!",
+        "width": 116,
+        "unresolved": []
+      },
+      {
+        "text": "I can accept that loss, matey!",
+        "width": 158,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route109_SeashoreHouse/scripts.inc",
+    "label": "Route109_SeashoreHouse_Text_DwaynePostBattle",
+    "line": 155,
+    "text": "Whenever I'm in SLATEPORT, I enjoy\\nhot battles and ice-cold SODA POP!$",
+    "lines": [
+      {
+        "text": "Whenever I'm in SLATEPORT, I enjoy",
+        "width": 182,
+        "unresolved": []
+      },
+      {
+        "text": "hot battles and ice-cold SODA POP!",
+        "width": 181,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route109_SeashoreHouse/scripts.inc",
+    "label": "Route109_SeashoreHouse_Text_JohannaIntro",
+    "line": 159,
+    "text": "Boring battles aren't worth the effort.\\pFiery hot battles are what toughen up\\nTRAINERS and POKéMON!$",
+    "lines": [
+      {
+        "text": "Boring battles aren't worth the effort.",
+        "width": 208,
+        "unresolved": []
+      },
+      {
+        "text": "Fiery hot battles are what toughen up",
+        "width": 198,
+        "unresolved": []
+      },
+      {
+        "text": "TRAINERS and POKéMON!",
+        "width": 118,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route109_SeashoreHouse/scripts.inc",
+    "label": "Route109_SeashoreHouse_Text_JohannaDefeated",
+    "line": 164,
+    "text": "That's hot!$",
+    "lines": [
+      {
+        "text": "That's hot!",
+        "width": 61,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route109_SeashoreHouse/scripts.inc",
+    "label": "Route109_SeashoreHouse_Text_JohannaPostBattle",
+    "line": 167,
+    "text": "Whew, I'm all thirsty.\\nMaybe I'll have a SODA POP.$",
+    "lines": [
+      {
+        "text": "Whew, I'm all thirsty.",
+        "width": 110,
+        "unresolved": []
+      },
+      {
+        "text": "Maybe I'll have a SODA POP.",
+        "width": 140,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route109_SeashoreHouse/scripts.inc",
+    "label": "Route109_SeashoreHouse_Text_SimonIntro",
+    "line": 171,
+    "text": "I'm going to show you how great\\nmy POKéMON are, but don't cry!$",
+    "lines": [
+      {
+        "text": "I'm going to show you how great",
+        "width": 165,
+        "unresolved": []
+      },
+      {
+        "text": "my POKéMON are, but don't cry!",
+        "width": 158,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route109_SeashoreHouse/scripts.inc",
+    "label": "Route109_SeashoreHouse_Text_SimonDefeated",
+    "line": 175,
+    "text": "…I lost, but I won't cry…$",
+    "lines": [
+      {
+        "text": "…I lost, but I won't cry…",
+        "width": 129,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/Route109_SeashoreHouse/scripts.inc",
+    "label": "Route109_SeashoreHouse_Text_SimonPostBattle",
+    "line": 178,
+    "text": "With SURF's HM and the right BADGE,\\na partner that can use it could\\lcarry me across the water.\\pIt wouldn't need SURF in its\\nbattle moves! Until then, I'll\\lkeep my trusty inner tube.$",
+    "lines": [
+      {
+        "text": "With SURF's HM and the right BADGE,",
+        "width": 184,
+        "unresolved": []
+      },
+      {
+        "text": "a partner that can use it could",
+        "width": 162,
+        "unresolved": []
+      },
+      {
+        "text": "carry me across the water.",
+        "width": 137,
+        "unresolved": []
+      },
+      {
+        "text": "It wouldn't need SURF in its",
+        "width": 147,
+        "unresolved": []
+      },
+      {
+        "text": "battle moves! Until then, I'll",
+        "width": 153,
+        "unresolved": []
+      },
+      {
+        "text": "keep my trusty inner tube.",
+        "width": 137,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_DavidIntro",
+    "line": 803,
+    "text": "Hiyah! Look at my chiseled abs!\\nThis is what you call “cut”!$",
+    "lines": [
+      {
+        "text": "Hiyah! Look at my chiseled abs!",
+        "width": 161,
+        "unresolved": []
+      },
+      {
+        "text": "This is what you call “cut”!",
+        "width": 143,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_DavidDefeated",
+    "line": 807,
+    "text": "Aiyah!\\nFlubbed out!$",
+    "lines": [
+      {
+        "text": "Aiyah!",
+        "width": 32,
+        "unresolved": []
+      },
+      {
+        "text": "Flubbed out!",
+        "width": 65,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_DavidPostBattle",
+    "line": 811,
+    "text": "Hiyah!\\pMy sculpted abs have nothing to do\\nwith POKéMON battles!$",
+    "lines": [
+      {
+        "text": "Hiyah!",
+        "width": 32,
+        "unresolved": []
+      },
+      {
+        "text": "My sculpted abs have nothing to do",
+        "width": 182,
+        "unresolved": []
+      },
+      {
+        "text": "with POKéMON battles!",
+        "width": 114,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_AliceIntro",
+    "line": 816,
+    "text": "Are you properly protected against\\nthe sun?$",
+    "lines": [
+      {
+        "text": "Are you properly protected against",
+        "width": 184,
+        "unresolved": []
+      },
+      {
+        "text": "the sun?",
+        "width": 45,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_AliceDefeated",
+    "line": 820,
+    "text": "Ouch, ouch, ouch!$",
+    "lines": [
+      {
+        "text": "Ouch, ouch, ouch!",
+        "width": 88,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_AlicePostBattle",
+    "line": 823,
+    "text": "Cheeks are the most prone to burning!$",
+    "lines": [
+      {
+        "text": "Cheeks are the most prone to burning!",
+        "width": 197,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_HueyIntro",
+    "line": 826,
+    "text": "I've laid anchor in ports around\\nthe world, but SLATEPORT's the best.$",
+    "lines": [
+      {
+        "text": "I've laid anchor in ports around",
+        "width": 168,
+        "unresolved": []
+      },
+      {
+        "text": "the world, but SLATEPORT's the best.",
+        "width": 192,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_HueyDefeated",
+    "line": 830,
+    "text": "You're the best!$",
+    "lines": [
+      {
+        "text": "You're the best!",
+        "width": 87,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_HueyPostBattle",
+    "line": 833,
+    "text": "In the best port was the best\\nTRAINER…$",
+    "lines": [
+      {
+        "text": "In the best port was the best",
+        "width": 155,
+        "unresolved": []
+      },
+      {
+        "text": "TRAINER…",
+        "width": 48,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_EdmondIntro",
+    "line": 837,
+    "text": "Urrrrppp…\\nBattle? With me?$",
+    "lines": [
+      {
+        "text": "Urrrrppp…",
+        "width": 50,
+        "unresolved": []
+      },
+      {
+        "text": "Battle? With me?",
+        "width": 86,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_EdmondDefeated",
+    "line": 841,
+    "text": "Urp… Ooooooohhhhhh…\\nUrrrrpppp…$",
+    "lines": [
+      {
+        "text": "Urp… Ooooooohhhhhh…",
+        "width": 110,
+        "unresolved": []
+      },
+      {
+        "text": "Urrrrpppp…",
+        "width": 56,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_EdmondPostBattle",
+    "line": 845,
+    "text": "I'm usually stronger than this!\\nI'm just seasick as a dog!\\pI'm a SAILOR, but…$",
+    "lines": [
+      {
+        "text": "I'm usually stronger than this!",
+        "width": 164,
+        "unresolved": []
+      },
+      {
+        "text": "I'm just seasick as a dog!",
+        "width": 136,
+        "unresolved": []
+      },
+      {
+        "text": "I'm a SAILOR, but…",
+        "width": 96,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_RickyIntro",
+    "line": 850,
+    "text": "I'm thirsty… I could go for a SODA POP\\nat the SEASHORE HOUSE…$",
+    "lines": [
+      {
+        "text": "I'm thirsty… I could go for a SODA POP",
+        "width": 198,
+        "unresolved": []
+      },
+      {
+        "text": "at the SEASHORE HOUSE…",
+        "width": 123,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_RickyDefeated",
+    "line": 854,
+    "text": "Groan…$",
+    "lines": [
+      {
+        "text": "Groan…",
+        "width": 35,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_RickyPostBattle",
+    "line": 857,
+    "text": "I'm getting famished… My inner tube\\nlooks like a giant doughnut…$",
+    "lines": [
+      {
+        "text": "I'm getting famished… My inner tube",
+        "width": 188,
+        "unresolved": []
+      },
+      {
+        "text": "looks like a giant doughnut…",
+        "width": 148,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_RickyRegister",
+    "line": 861,
+    "text": "Call me sometime when I'm not\\nall thirsty, okay?$",
+    "lines": [
+      {
+        "text": "Call me sometime when I'm not",
+        "width": 153,
+        "unresolved": []
+      },
+      {
+        "text": "all thirsty, okay?",
+        "width": 92,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_RickyRematchIntro",
+    "line": 865,
+    "text": "I'm hungry, but I've got enough pep in\\nme for a battle!$",
+    "lines": [
+      {
+        "text": "I'm hungry, but I've got enough pep in",
+        "width": 201,
+        "unresolved": []
+      },
+      {
+        "text": "me for a battle!",
+        "width": 82,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_RickyRematchDefeated",
+    "line": 869,
+    "text": "I lost…\\nIt's because I'm hungry…$",
+    "lines": [
+      {
+        "text": "I lost…",
+        "width": 37,
+        "unresolved": []
+      },
+      {
+        "text": "It's because I'm hungry…",
+        "width": 134,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_RickyRematchPostBattle",
+    "line": 873,
+    "text": "When you eat on a beach, everything\\nseems to taste a little better.$",
+    "lines": [
+      {
+        "text": "When you eat on a beach, everything",
+        "width": 186,
+        "unresolved": []
+      },
+      {
+        "text": "seems to taste a little better.",
+        "width": 161,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_LolaIntro",
+    "line": 877,
+    "text": "Doesn't a beach umbrella look like\\na giant flower?$",
+    "lines": [
+      {
+        "text": "Doesn't a beach umbrella look like",
+        "width": 178,
+        "unresolved": []
+      },
+      {
+        "text": "a giant flower?",
+        "width": 79,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_LolaDefeated",
+    "line": 881,
+    "text": "Mommy!$",
+    "lines": [
+      {
+        "text": "Mommy!",
+        "width": 34,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_LolaPostBattle",
+    "line": 884,
+    "text": "If you look at the beach from the sky,\\nit looks like a big flower garden!$",
+    "lines": [
+      {
+        "text": "If you look at the beach from the sky,",
+        "width": 198,
+        "unresolved": []
+      },
+      {
+        "text": "it looks like a big flower garden!",
+        "width": 170,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_LolaRegister",
+    "line": 888,
+    "text": "Me?\\nI'm here every day!$",
+    "lines": [
+      {
+        "text": "Me?",
+        "width": 18,
+        "unresolved": []
+      },
+      {
+        "text": "I'm here every day!",
+        "width": 101,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_LolaRematchIntro",
+    "line": 892,
+    "text": "I'm not losing to you again!\\nThat's why I have my inner tube!$",
+    "lines": [
+      {
+        "text": "I'm not losing to you again!",
+        "width": 145,
+        "unresolved": []
+      },
+      {
+        "text": "That's why I have my inner tube!",
+        "width": 169,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_LolaRematchDefeated",
+    "line": 896,
+    "text": "Mommy!$",
+    "lines": [
+      {
+        "text": "Mommy!",
+        "width": 34,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_LolaRematchPostBattle",
+    "line": 899,
+    "text": "If I have an inner tube, me and my\\nPOKéMON's cuteness goes way up!$",
+    "lines": [
+      {
+        "text": "If I have an inner tube, me and my",
+        "width": 174,
+        "unresolved": []
+      },
+      {
+        "text": "POKéMON's cuteness goes way up!",
+        "width": 172,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_AustinaIntro",
+    "line": 903,
+    "text": "I can't swim without my inner tube,\\nbut I won't lose at POKéMON!$",
+    "lines": [
+      {
+        "text": "I can't swim without my inner tube,",
+        "width": 182,
+        "unresolved": []
+      },
+      {
+        "text": "but I won't lose at POKéMON!",
+        "width": 149,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_AustinaDefeated",
+    "line": 907,
+    "text": "Did I lose because I have an inner\\ntube?$",
+    "lines": [
+      {
+        "text": "Did I lose because I have an inner",
+        "width": 176,
+        "unresolved": []
+      },
+      {
+        "text": "tube?",
+        "width": 30,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_AustinaPostBattle",
+    "line": 911,
+    "text": "My inner tube is a fashion item.\\nI can't be seen without it.$",
+    "lines": [
+      {
+        "text": "My inner tube is a fashion item.",
+        "width": 162,
+        "unresolved": []
+      },
+      {
+        "text": "I can't be seen without it.",
+        "width": 140,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_GwenIntro",
+    "line": 915,
+    "text": "Hi, big TRAINER.\\nWill you battle with me?$",
+    "lines": [
+      {
+        "text": "Hi, big TRAINER.",
+        "width": 80,
+        "unresolved": []
+      },
+      {
+        "text": "Will you battle with me?",
+        "width": 122,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_GwenDefeated",
+    "line": 919,
+    "text": "Oh, you're strong.$",
+    "lines": [
+      {
+        "text": "Oh, you're strong.",
+        "width": 94,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_GwenPostBattle",
+    "line": 922,
+    "text": "How did you get to be so strong?$",
+    "lines": [
+      {
+        "text": "How did you get to be so strong?",
+        "width": 168,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_CarterIntro",
+    "line": 925,
+    "text": "Wahahah! This dude's going to catch\\nhimself a big one!$",
+    "lines": [
+      {
+        "text": "Wahahah! This dude's going to catch",
+        "width": 189,
+        "unresolved": []
+      },
+      {
+        "text": "himself a big one!",
+        "width": 91,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_CarterDefeated",
+    "line": 929,
+    "text": "This dude just lost one…$",
+    "lines": [
+      {
+        "text": "This dude just lost one…",
+        "width": 127,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_CarterPostBattle",
+    "line": 932,
+    "text": "This dude thinks you're a big one.\\nNo, you're a big-one-to-be!$",
+    "lines": [
+      {
+        "text": "This dude thinks you're a big one.",
+        "width": 176,
+        "unresolved": []
+      },
+      {
+        "text": "No, you're a big-one-to-be!",
+        "width": 145,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_PaulIntro",
+    "line": 936,
+    "text": "PAUL: Well, this is a mood-breaker.\\pI wish you wouldn't disturb our\\nprecious time together.$",
+    "lines": [
+      {
+        "text": "PAUL: Well, this is a mood-breaker.",
+        "width": 176,
+        "unresolved": []
+      },
+      {
+        "text": "I wish you wouldn't disturb our",
+        "width": 163,
+        "unresolved": []
+      },
+      {
+        "text": "precious time together.",
+        "width": 123,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_PaulDefeated",
+    "line": 941,
+    "text": "PAUL: Well, I give up.$",
+    "lines": [
+      {
+        "text": "PAUL: Well, I give up.",
+        "width": 105,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_PaulPostBattle",
+    "line": 944,
+    "text": "PAUL: Well, don't tell anyone that\\nwe're here.\\lThis is just our private world of two!$",
+    "lines": [
+      {
+        "text": "PAUL: Well, don't tell anyone that",
+        "width": 175,
+        "unresolved": []
+      },
+      {
+        "text": "we're here.",
+        "width": 58,
+        "unresolved": []
+      },
+      {
+        "text": "This is just our private world of two!",
+        "width": 193,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_PaulNotEnoughPokemon",
+    "line": 949,
+    "text": "PAUL: We're totally, deeply in love.\\nThat's why we make our POKéMON battle\\ltogether.$",
+    "lines": [
+      {
+        "text": "PAUL: We're totally, deeply in love.",
+        "width": 181,
+        "unresolved": []
+      },
+      {
+        "text": "That's why we make our POKéMON battle",
+        "width": 201,
+        "unresolved": []
+      },
+      {
+        "text": "together.",
+        "width": 50,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_MelIntro",
+    "line": 954,
+    "text": "MEL: We're, like, totally in love.\\nOur romance is heating up all of HOENN!$",
+    "lines": [
+      {
+        "text": "MEL: We're, like, totally in love.",
+        "width": 164,
+        "unresolved": []
+      },
+      {
+        "text": "Our romance is heating up all of HOENN!",
+        "width": 201,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_MelDefeated",
+    "line": 958,
+    "text": "MEL: We lost, and it's my fault!\\nPAUL will hate me!$",
+    "lines": [
+      {
+        "text": "MEL: We lost, and it's my fault!",
+        "width": 160,
+        "unresolved": []
+      },
+      {
+        "text": "PAUL will hate me!",
+        "width": 91,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_MelPostBattle",
+    "line": 962,
+    "text": "MEL: Um, PAUL, are you angry with me?\\nPlease don't be angry.$",
+    "lines": [
+      {
+        "text": "MEL: Um, PAUL, are you angry with me?",
+        "width": 188,
+        "unresolved": []
+      },
+      {
+        "text": "Please don't be angry.",
+        "width": 117,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_MelNotEnoughPokemon",
+    "line": 966,
+    "text": "MEL: We're, like, deeply and truly in love.\\nThat's why we make our POKéMON\\lbattle together.$",
+    "lines": [
+      {
+        "text": "MEL: We're, like, deeply and truly in love.",
+        "width": 211,
+        "unresolved": []
+      },
+      {
+        "text": "That's why we make our POKéMON",
+        "width": 164,
+        "unresolved": []
+      },
+      {
+        "text": "battle together.",
+        "width": 87,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_ChandlerIntro",
+    "line": 971,
+    "text": "Tadaah! See?\\nMy inner tube's round!$",
+    "lines": [
+      {
+        "text": "Tadaah! See?",
+        "width": 67,
+        "unresolved": []
+      },
+      {
+        "text": "My inner tube's round!",
+        "width": 117,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_ChandlerDefeated",
+    "line": 975,
+    "text": "Oh, oh!\\nToo bad!$",
+    "lines": [
+      {
+        "text": "Oh, oh!",
+        "width": 34,
+        "unresolved": []
+      },
+      {
+        "text": "Too bad!",
+        "width": 43,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_ChandlerPostBattle",
+    "line": 979,
+    "text": "After I showed you my round inner\\ntube, too…$",
+    "lines": [
+      {
+        "text": "After I showed you my round inner",
+        "width": 175,
+        "unresolved": []
+      },
+      {
+        "text": "tube, too…",
+        "width": 54,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_HaileyIntro",
+    "line": 983,
+    "text": "I can't swim, so I'm pretending\\nto swim.$",
+    "lines": [
+      {
+        "text": "I can't swim, so I'm pretending",
+        "width": 163,
+        "unresolved": []
+      },
+      {
+        "text": "to swim.",
+        "width": 40,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_HaileyDefeated",
+    "line": 987,
+    "text": "I thought so!\\nI didn't think we could win.$",
+    "lines": [
+      {
+        "text": "I thought so!",
+        "width": 70,
+        "unresolved": []
+      },
+      {
+        "text": "I didn't think we could win.",
+        "width": 142,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_HaileyPostBattle",
+    "line": 991,
+    "text": "When I learn how to swim, I think\\nmy POKéMON will become tougher.$",
+    "lines": [
+      {
+        "text": "When I learn how to swim, I think",
+        "width": 167,
+        "unresolved": []
+      },
+      {
+        "text": "my POKéMON will become tougher.",
+        "width": 164,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_ElijahIntro",
+    "line": 995,
+    "text": "For a guy as macho as me, this kind\\nof POKéMON is the perfect match!$",
+    "lines": [
+      {
+        "text": "For a guy as macho as me, this kind",
+        "width": 178,
+        "unresolved": []
+      },
+      {
+        "text": "of POKéMON is the perfect match!",
+        "width": 172,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_ElijahDefeated",
+    "line": 999,
+    "text": "I'm cool even in defeat, hey?$",
+    "lines": [
+      {
+        "text": "I'm cool even in defeat, hey?",
+        "width": 152,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/trainers.inc",
+    "label": "Route109_Text_ElijahPostBattle",
+    "line": 1002,
+    "text": "For a guy as macho as me, a port\\nis the perfect setting!\\pI guess I'll head for SLATEPORT.$",
+    "lines": [
+      {
+        "text": "For a guy as macho as me, a port",
+        "width": 163,
+        "unresolved": []
+      },
+      {
+        "text": "is the perfect setting!",
+        "width": 122,
+        "unresolved": []
+      },
+      {
+        "text": "I guess I'll head for SLATEPORT.",
+        "width": 169,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/move_tutors.inc",
+    "label": "MoveTutor_Text_ThisMoveCanOnlyBeLearnedOnce",
+    "line": 1,
+    "text": "I can give this lesson only once.\\nShall we begin?$",
+    "lines": [
+      {
+        "text": "I can give this lesson only once.",
+        "width": 169,
+        "unresolved": []
+      },
+      {
+        "text": "Shall we begin?",
+        "width": 78,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/move_tutors.inc",
+    "label": "MoveTutor_Text_SwaggerTeach",
+    "line": 5,
+    "text": "Heh! My POKéMON totally rules!\\nIt's cooler than any POKéMON!\\pI was lipping off with a swagger in\\nmy step like that when the CHAIRMAN\\lchewed me out.\\pThat took the swagger out of my step.\\pIf you'd like, I'll teach the move\\nSWAGGER to a POKéMON of yours.$",
+    "lines": [
+      {
+        "text": "Heh! My POKéMON totally rules!",
+        "width": 157,
+        "unresolved": []
+      },
+      {
+        "text": "It's cooler than any POKéMON!",
+        "width": 157,
+        "unresolved": []
+      },
+      {
+        "text": "I was lipping off with a swagger in",
+        "width": 178,
+        "unresolved": []
+      },
+      {
+        "text": "my step like that when the CHAIRMAN",
+        "width": 188,
+        "unresolved": []
+      },
+      {
+        "text": "chewed me out.",
+        "width": 75,
+        "unresolved": []
+      },
+      {
+        "text": "That took the swagger out of my step.",
+        "width": 197,
+        "unresolved": []
+      },
+      {
+        "text": "If you'd like, I'll teach the move",
+        "width": 175,
+        "unresolved": []
+      },
+      {
+        "text": "SWAGGER to a POKéMON of yours.",
+        "width": 161,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/move_tutors.inc",
+    "label": "MoveTutor_Text_SwaggerDeclined",
+    "line": 15,
+    "text": "What, no? Can't you get into\\nthe spirit of things?$",
+    "lines": [
+      {
+        "text": "What, no? Can't you get into",
+        "width": 148,
+        "unresolved": []
+      },
+      {
+        "text": "the spirit of things?",
+        "width": 110,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/move_tutors.inc",
+    "label": "MoveTutor_Text_SwaggerWhichMon",
+    "line": 19,
+    "text": "All right, which POKéMON wants to\\nlearn how to SWAGGER?$",
+    "lines": [
+      {
+        "text": "All right, which POKéMON wants to",
+        "width": 171,
+        "unresolved": []
+      },
+      {
+        "text": "learn how to SWAGGER?",
+        "width": 114,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/text/move_tutors.inc",
+    "label": "MoveTutor_Text_SwaggerTaught",
+    "line": 23,
+    "text": "I'll just praise my POKéMON from now\\non without the swagger.$",
+    "lines": [
+      {
+        "text": "I'll just praise my POKéMON from now",
+        "width": 189,
+        "unresolved": []
+      },
+      {
+        "text": "on without the swagger.",
+        "width": 123,
+        "unresolved": []
+      }
+    ]
+  }
+]

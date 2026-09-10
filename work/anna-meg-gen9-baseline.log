@@ -1,0 +1,291 @@
+tools/scaninc/scaninc -M build/emerald-test/test/battle/ai/emerald_champions_plans.d -g build/assets -I include -I tools/agbcc/include test/battle/ai/emerald_champions_plans.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/battle/ai/emerald_champions_plans.o test/battle/ai/emerald_champions_plans.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 4
+[0] EC live review AnnaMeg timing: complete six-player party: [32mPASS[0m
+ANNA_AND_MEG_1_INPUT slot=0 lv=28 HP=114 Atk=42 Def=63 SpA=64 SpD=92 Spe=47 item=523 ability=39
+ANNA_AND_MEG_1_INPUT slot=1 lv=28 HP=91 Atk=107 Def=43 SpA=29 SpD=75 Spe=80 item=442 ability=7
+ANNA_AND_MEG_1_INPUT slot=2 lv=28 HP=114 Atk=44 Def=80 SpA=42 SpD=55 Spe=30 item=472 ability=20
+ANNA_AND_MEG_1_INPUT slot=3 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Psychic target=0
+AI switch turn=1 actor=3 party=3
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=2 actor=1 move=Psychic target=0
+AI decision turn=2 actor=3 move=Rock Blast target=2
+ANNA_AND_MEG_1_TIMING setup=11 bothActors=60 complete=71 warm=59
+[1] EC live review AnnaMeg Ground: four-party transitions: [32mPASS[0m
+ANNA_AND_MEG_1_INPUT slot=0 lv=28 HP=114 Atk=42 Def=63 SpA=64 SpD=92 Spe=47 item=523 ability=39
+ANNA_AND_MEG_1_INPUT slot=1 lv=28 HP=91 Atk=107 Def=43 SpA=29 SpD=75 Spe=80 item=442 ability=7
+ANNA_AND_MEG_1_INPUT slot=2 lv=28 HP=114 Atk=44 Def=80 SpA=42 SpD=55 Spe=30 item=472 ability=20
+ANNA_AND_MEG_1_INPUT slot=3 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=Foul Play target=2
+AI decision turn=1 actor=2 move=Psychic target=1
+AI decision turn=1 actor=3 move=Knock Off target=2
+AI decision turn=2 actor=1 move=Protect target=1
+AI switch turn=2 actor=3 party=2
+ANNA_AND_MEG_1_AFTER board=30 turns=1 reserves=0 species=765/106 HP=81/27 foes=84/0 Atk=6/6 SpA=6/6 Spe=6/6 item=0/442 faints=0/1
+ANNA_AND_MEG_1_STATE moves=Foul Play/Knock Off PP=15/10/14/5 otherPP=10/10/19/10 partyHP=81/27/114/77 type=1/2 status=0/0
+ANNA_AND_MEG_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=39/7
+ANNA_AND_MEG_1_INPUT slot=0 lv=28 HP=114 Atk=42 Def=63 SpA=64 SpD=92 Spe=47 item=523 ability=39
+ANNA_AND_MEG_1_INPUT slot=1 lv=28 HP=91 Atk=107 Def=43 SpA=29 SpD=75 Spe=80 item=442 ability=7
+ANNA_AND_MEG_1_INPUT slot=2 lv=28 HP=114 Atk=44 Def=80 SpA=42 SpD=55 Spe=30 item=472 ability=20
+ANNA_AND_MEG_1_INPUT slot=3 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=Foul Play target=2
+AI decision turn=1 actor=2 move=Psychic target=1
+AI decision turn=1 actor=3 move=Knock Off target=2
+AI decision turn=2 actor=0 move=Earthquake target=1
+AI decision turn=2 actor=1 move=Protect target=1
+AI switch turn=2 actor=3 party=2
+AI decision turn=3 actor=1 move=Psychic target=0
+AI decision turn=3 actor=3 move=Protect target=3
+ANNA_AND_MEG_1_AFTER board=30 turns=2 reserves=0 species=765/108 HP=81/87 foes=84/0 Atk=6/6 SpA=6/6 Spe=6/6 item=0/472 faints=0/1
+ANNA_AND_MEG_1_STATE moves=Protect/- PP=15/10/14/4 otherPP=15/20/10/5 partyHP=81/27/87/77 type=1/1 status=0/0
+ANNA_AND_MEG_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=39/20
+[3] EC live review AnnaMeg disruption: flinch and Water pressure: [32mPASS[0m
+ANNA_AND_MEG_1_INPUT slot=0 lv=28 HP=114 Atk=42 Def=63 SpA=64 SpD=92 Spe=47 item=523 ability=39
+ANNA_AND_MEG_1_INPUT slot=1 lv=28 HP=91 Atk=107 Def=43 SpA=29 SpD=75 Spe=80 item=442 ability=7
+ANNA_AND_MEG_1_INPUT slot=2 lv=28 HP=114 Atk=44 Def=80 SpA=42 SpD=55 Spe=30 item=472 ability=20
+ANNA_AND_MEG_1_INPUT slot=3 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Psychic target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=High Jump Kick target=2
+AI decision turn=2 actor=1 move=Psychic target=0
+AI decision turn=2 actor=3 move=High Jump Kick target=0
+ANNA_AND_MEG_1_AFTER board=10 turns=1 reserves=0 species=765/106 HP=103/91 foes=5/0 Atk=6/6 SpA=6/6 Spe=6/6 item=523/442 faints=0/1
+ANNA_AND_MEG_1_STATE moves=Psychic/High Jump Kick PP=15/9/15/5 otherPP=9/10/20/10 partyHP=103/91/114/77 type=1/2 status=0/0
+ANNA_AND_MEG_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=39/7
+ANNA_AND_MEG_1_INPUT slot=0 lv=28 HP=114 Atk=42 Def=63 SpA=64 SpD=92 Spe=47 item=523 ability=39
+ANNA_AND_MEG_1_INPUT slot=1 lv=28 HP=91 Atk=107 Def=43 SpA=29 SpD=75 Spe=80 item=442 ability=7
+ANNA_AND_MEG_1_INPUT slot=2 lv=28 HP=114 Atk=44 Def=80 SpA=42 SpD=55 Spe=30 item=472 ability=20
+ANNA_AND_MEG_1_INPUT slot=3 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Psychic target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=High Jump Kick target=2
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Psychic target=0
+AI decision turn=2 actor=3 move=High Jump Kick target=0
+ANNA_AND_MEG_1_AFTER board=10 turns=2 reserves=0 species=765/106 HP=103/91 foes=0/0 Atk=6/6 SpA=6/6 Spe=6/6 item=523/442 faints=0/2
+ANNA_AND_MEG_1_STATE moves=Psychic/High Jump Kick PP=15/9/15/5 otherPP=8/10/20/10 partyHP=103/91/114/77 type=1/2 status=0/0
+ANNA_AND_MEG_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=39/7
+ANNA_AND_MEG_1_INPUT slot=0 lv=28 HP=114 Atk=42 Def=63 SpA=64 SpD=92 Spe=47 item=523 ability=39
+ANNA_AND_MEG_1_INPUT slot=1 lv=28 HP=91 Atk=107 Def=43 SpA=29 SpD=75 Spe=80 item=442 ability=7
+ANNA_AND_MEG_1_INPUT slot=2 lv=28 HP=114 Atk=44 Def=80 SpA=42 SpD=55 Spe=30 item=472 ability=20
+ANNA_AND_MEG_1_INPUT slot=3 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Knock Off target=2
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Brave Bird target=2
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Bullet Seed target=2
+ANNA_AND_MEG_1_AFTER board=10 turns=1 reserves=1 species=108/732 HP=112/13 foes=95/8 Atk=6/6 SpA=6/6 Spe=6/6 item=472/494 faints=0/0
+ANNA_AND_MEG_1_STATE moves=-/Brave Bird PP=15/20/10/5 otherPP=10/20/14/20 partyHP=112/13/0/0 type=1/1 status=0/0
+ANNA_AND_MEG_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=20/92
+ANNA_AND_MEG_1_INPUT slot=0 lv=28 HP=114 Atk=42 Def=63 SpA=64 SpD=92 Spe=47 item=523 ability=39
+ANNA_AND_MEG_1_INPUT slot=1 lv=28 HP=91 Atk=107 Def=43 SpA=29 SpD=75 Spe=80 item=442 ability=7
+ANNA_AND_MEG_1_INPUT slot=2 lv=28 HP=114 Atk=44 Def=80 SpA=42 SpD=55 Spe=30 item=472 ability=20
+ANNA_AND_MEG_1_INPUT slot=3 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Knock Off target=2
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Brave Bird target=2
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=Bullet Seed target=2
+AI decision turn=3 actor=1 move=Body Slam target=0
+AI decision turn=3 actor=3 move=Brave Bird target=0
+ANNA_AND_MEG_1_AFTER board=10 turns=2 reserves=1 species=108/732 HP=114/13 foes=95/0 Atk=6/6 SpA=6/6 Spe=6/6 item=472/494 faints=0/1
+ANNA_AND_MEG_1_STATE moves=Protect/Bullet Seed PP=15/20/10/4 otherPP=10/19/14/20 partyHP=114/13/0/0 type=1/1 status=0/0
+ANNA_AND_MEG_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=20/92
+[2] EC live review AnnaMeg counterplay: burn and redirection: [32mPASS[0m
+ANNA_AND_MEG_1_INPUT slot=0 lv=28 HP=114 Atk=42 Def=63 SpA=64 SpD=92 Spe=47 item=523 ability=39
+ANNA_AND_MEG_1_INPUT slot=1 lv=28 HP=91 Atk=107 Def=43 SpA=29 SpD=75 Spe=80 item=442 ability=7
+ANNA_AND_MEG_1_INPUT slot=2 lv=28 HP=114 Atk=44 Def=80 SpA=42 SpD=55 Spe=30 item=472 ability=20
+ANNA_AND_MEG_1_INPUT slot=3 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+AI decision turn=1 actor=0 move=Will-O-Wisp target=1
+AI decision turn=1 actor=1 move=Instruct target=3
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=High Jump Kick target=2
+AI decision turn=2 actor=1 move=Instruct target=3
+AI decision turn=2 actor=3 move=High Jump Kick target=2
+ANNA_AND_MEG_1_AFTER board=20 turns=1 reserves=0 species=765/106 HP=107/91 foes=110/46 Atk=6/6 SpA=6/6 Spe=6/6 item=523/442 faints=0/0
+ANNA_AND_MEG_1_STATE moves=Instruct/High Jump Kick PP=14/10/15/5 otherPP=9/10/20/10 partyHP=107/91/114/77 type=1/2 status=16/0
+ANNA_AND_MEG_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=39/7
+ANNA_AND_MEG_1_INPUT slot=0 lv=28 HP=114 Atk=42 Def=63 SpA=64 SpD=92 Spe=47 item=523 ability=39
+ANNA_AND_MEG_1_INPUT slot=1 lv=28 HP=91 Atk=107 Def=43 SpA=29 SpD=75 Spe=80 item=442 ability=7
+ANNA_AND_MEG_1_INPUT slot=2 lv=28 HP=114 Atk=44 Def=80 SpA=42 SpD=55 Spe=30 item=472 ability=20
+ANNA_AND_MEG_1_INPUT slot=3 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+AI decision turn=1 actor=0 move=Will-O-Wisp target=1
+AI decision turn=1 actor=1 move=Instruct target=3
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=High Jump Kick target=2
+AI decision turn=2 actor=0 move=Foul Play target=1
+AI decision turn=2 actor=1 move=Instruct target=3
+AI decision turn=2 actor=2 move=Follow Me target=2
+AI decision turn=2 actor=3 move=High Jump Kick target=2
+AI decision turn=3 actor=1 move=Foul Play target=0
+AI switch turn=3 actor=3 party=3
+ANNA_AND_MEG_1_AFTER board=20 turns=2 reserves=0 species=765/106 HP=80/46 foes=110/0 Atk=6/6 SpA=6/6 Spe=6/6 item=0/442 faints=0/1
+ANNA_AND_MEG_1_STATE moves=Instruct/Instruct PP=13/10/15/5 otherPP=7/10/20/10 partyHP=80/46/114/77 type=1/2 status=16/0
+ANNA_AND_MEG_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=39/7
+ANNA_AND_MEG_1_INPUT slot=0 lv=28 HP=114 Atk=42 Def=63 SpA=64 SpD=92 Spe=47 item=523 ability=39
+ANNA_AND_MEG_1_INPUT slot=1 lv=28 HP=91 Atk=107 Def=43 SpA=29 SpD=75 Spe=80 item=442 ability=7
+ANNA_AND_MEG_1_INPUT slot=2 lv=28 HP=114 Atk=44 Def=80 SpA=42 SpD=55 Spe=30 item=472 ability=20
+ANNA_AND_MEG_1_INPUT slot=3 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+AI decision turn=1 actor=0 move=Will-O-Wisp target=1
+AI decision turn=1 actor=1 move=Knock Off target=2
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=Brave Bird target=0
+AI decision turn=2 actor=1 move=Knock Off target=0
+AI decision turn=2 actor=3 move=Brave Bird target=0
+ANNA_AND_MEG_1_AFTER board=20 turns=1 reserves=1 species=108/732 HP=107/71 foes=110/79 Atk=6/6 SpA=6/6 Spe=6/6 item=472/494 faints=0/0
+ANNA_AND_MEG_1_STATE moves=Knock Off/Brave Bird PP=15/19/10/5 otherPP=10/20/14/20 partyHP=107/71/0/0 type=1/1 status=16/0
+ANNA_AND_MEG_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=20/92
+ANNA_AND_MEG_1_INPUT slot=0 lv=28 HP=114 Atk=42 Def=63 SpA=64 SpD=92 Spe=47 item=523 ability=39
+ANNA_AND_MEG_1_INPUT slot=1 lv=28 HP=91 Atk=107 Def=43 SpA=29 SpD=75 Spe=80 item=442 ability=7
+ANNA_AND_MEG_1_INPUT slot=2 lv=28 HP=114 Atk=44 Def=80 SpA=42 SpD=55 Spe=30 item=472 ability=20
+ANNA_AND_MEG_1_INPUT slot=3 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+AI decision turn=1 actor=0 move=Will-O-Wisp target=1
+AI decision turn=1 actor=1 move=Knock Off target=2
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=Brave Bird target=0
+AI decision turn=2 actor=0 move=Foul Play target=1
+AI decision turn=2 actor=1 move=Knock Off target=0
+AI decision turn=2 actor=2 move=Follow Me target=2
+AI decision turn=2 actor=3 move=Brave Bird target=0
+AI decision turn=3 actor=1 move=Knock Off target=0
+AI decision turn=3 actor=3 move=Bullet Seed target=2
+ANNA_AND_MEG_1_AFTER board=20 turns=2 reserves=1 species=108/732 HP=88/65 foes=110/56 Atk=6/6 SpA=6/6 Spe=6/6 item=472/494 faints=0/0
+ANNA_AND_MEG_1_STATE moves=Knock Off/Brave Bird PP=15/18/10/5 otherPP=10/20/13/20 partyHP=88/65/0/0 type=1/1 status=16/0
+ANNA_AND_MEG_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=20/92
+[0] EC live review AnnaMeg core: pressure and promoted reserves: [32mPASS[0m
+ANNA_AND_MEG_1_INPUT slot=0 lv=28 HP=114 Atk=42 Def=63 SpA=64 SpD=92 Spe=47 item=523 ability=39
+ANNA_AND_MEG_1_INPUT slot=1 lv=28 HP=91 Atk=107 Def=43 SpA=29 SpD=75 Spe=80 item=442 ability=7
+ANNA_AND_MEG_1_INPUT slot=2 lv=28 HP=114 Atk=44 Def=80 SpA=42 SpD=55 Spe=30 item=472 ability=20
+ANNA_AND_MEG_1_INPUT slot=3 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Instruct target=3
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=High Jump Kick target=0
+AI decision turn=2 actor=1 move=Psychic target=2
+AI decision turn=2 actor=3 move=High Jump Kick target=2
+ANNA_AND_MEG_1_AFTER board=0 turns=1 reserves=0 species=765/106 HP=114/33 foes=0/76 Atk=6/6 SpA=6/6 Spe=6/6 item=523/442 faints=0/1
+ANNA_AND_MEG_1_STATE moves=Instruct/Instruct PP=14/10/15/5 otherPP=8/10/20/10 partyHP=114/33/114/77 type=1/2 status=0/0
+ANNA_AND_MEG_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=39/7
+ANNA_AND_MEG_1_INPUT slot=0 lv=28 HP=114 Atk=42 Def=63 SpA=64 SpD=92 Spe=47 item=523 ability=39
+ANNA_AND_MEG_1_INPUT slot=1 lv=28 HP=91 Atk=107 Def=43 SpA=29 SpD=75 Spe=80 item=442 ability=7
+ANNA_AND_MEG_1_INPUT slot=2 lv=28 HP=114 Atk=44 Def=80 SpA=42 SpD=55 Spe=30 item=472 ability=20
+ANNA_AND_MEG_1_INPUT slot=3 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Instruct target=3
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=High Jump Kick target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=1 move=Psychic target=2
+AI decision turn=2 actor=3 move=High Jump Kick target=2
+AI switch turn=2 actor=3 party=3
+AI decision turn=3 actor=1 move=Psychic target=2
+AI decision turn=3 actor=3 move=Bullet Seed target=2
+ANNA_AND_MEG_1_AFTER board=0 turns=2 reserves=0 species=765/732 HP=114/77 foes=0/20 Atk=6/6 SpA=6/6 Spe=6/6 item=523/494 faints=1/1
+ANNA_AND_MEG_1_STATE moves=Psychic/- PP=14/9/15/5 otherPP=10/20/15/20 partyHP=114/0/114/77 type=1/1 status=0/0
+ANNA_AND_MEG_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=39/92
+ANNA_AND_MEG_1_INPUT slot=0 lv=28 HP=114 Atk=42 Def=63 SpA=64 SpD=92 Spe=47 item=523 ability=39
+ANNA_AND_MEG_1_INPUT slot=1 lv=28 HP=91 Atk=107 Def=43 SpA=29 SpD=75 Spe=80 item=442 ability=7
+ANNA_AND_MEG_1_INPUT slot=2 lv=28 HP=114 Atk=44 Def=80 SpA=42 SpD=55 Spe=30 item=472 ability=20
+ANNA_AND_MEG_1_INPUT slot=3 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Foul Play target=0
+AI switch turn=1 actor=3 party=2
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=1 move=Foul Play target=0
+AI decision turn=2 actor=3 move=Protect target=3
+ANNA_AND_MEG_1_AFTER board=1 turns=1 reserves=0 species=765/108 HP=96/96 foes=46/104 Atk=6/6 SpA=6/6 Spe=6/6 item=523/472 faints=0/0
+ANNA_AND_MEG_1_STATE moves=Foul Play/- PP=15/10/14/5 otherPP=15/20/10/5 partyHP=96/91/96/77 type=1/1 status=0/0
+ANNA_AND_MEG_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=39/20
+ANNA_AND_MEG_1_INPUT slot=0 lv=28 HP=114 Atk=42 Def=63 SpA=64 SpD=92 Spe=47 item=523 ability=39
+ANNA_AND_MEG_1_INPUT slot=1 lv=28 HP=91 Atk=107 Def=43 SpA=29 SpD=75 Spe=80 item=442 ability=7
+ANNA_AND_MEG_1_INPUT slot=2 lv=28 HP=114 Atk=44 Def=80 SpA=42 SpD=55 Spe=30 item=472 ability=20
+ANNA_AND_MEG_1_INPUT slot=3 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Foul Play target=0
+AI switch turn=1 actor=3 party=2
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=0 move=Psychic target=1
+AI decision turn=2 actor=1 move=Foul Play target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=1 move=Psychic target=0
+AI decision turn=3 actor=3 move=Knock Off target=0
+ANNA_AND_MEG_1_AFTER board=1 turns=2 reserves=0 species=765/108 HP=78/103 foes=4/104 Atk=6/6 SpA=6/6 Spe=6/6 item=523/472 faints=0/0
+ANNA_AND_MEG_1_STATE moves=Foul Play/Protect PP=15/10/13/5 otherPP=15/20/10/4 partyHP=78/91/103/77 type=1/1 status=0/0
+ANNA_AND_MEG_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=39/20
+ANNA_AND_MEG_1_INPUT slot=0 lv=28 HP=114 Atk=42 Def=63 SpA=64 SpD=92 Spe=47 item=523 ability=39
+ANNA_AND_MEG_1_INPUT slot=1 lv=28 HP=91 Atk=107 Def=43 SpA=29 SpD=75 Spe=80 item=442 ability=7
+ANNA_AND_MEG_1_INPUT slot=2 lv=28 HP=114 Atk=44 Def=80 SpA=42 SpD=55 Spe=30 item=472 ability=20
+ANNA_AND_MEG_1_INPUT slot=3 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Knock Off target=0
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Brave Bird target=0
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Bullet Seed target=0
+ANNA_AND_MEG_1_AFTER board=0 turns=1 reserves=1 species=108/732 HP=87/20 foes=27/119 Atk=6/6 SpA=6/6 Spe=6/6 item=472/494 faints=0/0
+ANNA_AND_MEG_1_STATE moves=Knock Off/Brave Bird PP=15/19/10/5 otherPP=10/20/14/20 partyHP=87/20/0/0 type=1/1 status=0/0
+ANNA_AND_MEG_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=20/92
+ANNA_AND_MEG_1_INPUT slot=0 lv=28 HP=114 Atk=42 Def=63 SpA=64 SpD=92 Spe=47 item=523 ability=39
+ANNA_AND_MEG_1_INPUT slot=1 lv=28 HP=91 Atk=107 Def=43 SpA=29 SpD=75 Spe=80 item=442 ability=7
+ANNA_AND_MEG_1_INPUT slot=2 lv=28 HP=114 Atk=44 Def=80 SpA=42 SpD=55 Spe=30 item=472 ability=20
+ANNA_AND_MEG_1_INPUT slot=3 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Knock Off target=0
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Brave Bird target=0
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Bullet Seed target=0
+AI decision turn=3 actor=1 move=Knock Off target=2
+ANNA_AND_MEG_1_AFTER board=0 turns=2 reserves=1 species=108/732 HP=94/0 foes=0/119 Atk=6/6 SpA=6/6 Spe=6/6 item=472/494 faints=1/1
+ANNA_AND_MEG_1_STATE moves=Protect/- PP=15/19/10/4 otherPP=10/19/14/20 partyHP=94/0/0/0 type=1/1 status=0/0
+ANNA_AND_MEG_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=20/0
+ANNA_AND_MEG_1_INPUT slot=0 lv=28 HP=114 Atk=42 Def=63 SpA=64 SpD=92 Spe=47 item=523 ability=39
+ANNA_AND_MEG_1_INPUT slot=1 lv=28 HP=91 Atk=107 Def=43 SpA=29 SpD=75 Spe=80 item=442 ability=7
+ANNA_AND_MEG_1_INPUT slot=2 lv=28 HP=114 Atk=44 Def=80 SpA=42 SpD=55 Spe=30 item=472 ability=20
+ANNA_AND_MEG_1_INPUT slot=3 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Knock Off target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Rock Blast target=0
+AI decision turn=2 actor=1 move=Body Slam target=2
+AI decision turn=2 actor=3 move=Bullet Seed target=2
+ANNA_AND_MEG_1_AFTER board=1 turns=1 reserves=1 species=108/732 HP=61/33 foes=0/92 Atk=6/6 SpA=6/6 Spe=6/6 item=472/494 faints=0/1
+ANNA_AND_MEG_1_STATE moves=Knock Off/Rock Blast PP=15/19/10/5 otherPP=9/20/15/20 partyHP=61/33/0/0 type=1/1 status=0/0
+ANNA_AND_MEG_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=20/92
+ANNA_AND_MEG_1_INPUT slot=0 lv=28 HP=114 Atk=42 Def=63 SpA=64 SpD=92 Spe=47 item=523 ability=39
+ANNA_AND_MEG_1_INPUT slot=1 lv=28 HP=91 Atk=107 Def=43 SpA=29 SpD=75 Spe=80 item=442 ability=7
+ANNA_AND_MEG_1_INPUT slot=2 lv=28 HP=114 Atk=44 Def=80 SpA=42 SpD=55 Spe=30 item=472 ability=20
+ANNA_AND_MEG_1_INPUT slot=3 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Knock Off target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Rock Blast target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=1 move=Body Slam target=2
+AI decision turn=2 actor=3 move=Bullet Seed target=2
+AI decision turn=3 actor=1 move=Protect target=1
+ANNA_AND_MEG_1_AFTER board=1 turns=2 reserves=1 species=108/732 HP=68/0 foes=0/46 Atk=6/6 SpA=6/6 Spe=6/6 item=472/494 faints=1/1
+ANNA_AND_MEG_1_STATE moves=Body Slam/- PP=14/19/10/5 otherPP=9/19/15/20 partyHP=68/0/0/0 type=1/1 status=0/0
+ANNA_AND_MEG_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=20/0
+
+- Tests [32mPASSED[0m:          5
+- Tests [34mTOTAL[0m:           5
+

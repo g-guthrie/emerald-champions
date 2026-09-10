@@ -70,11 +70,14 @@ FortreeCity_House4_Text_BringsWorldCloserTogether:
 
 FortreeCity_House4_Text_GoBirdPokemon:
 	.string "There!\n"
-	.string "Go, BIRD POKéMON!$"
+	.string "Take this to my friend in\n"
+	.string "MOSSDEEP, WINGULL!$"
 
 FortreeCity_House4_Text_AskedWingullToRunErrand:
-	.string "Heheh, I asked my WINGULL to run\n"
-	.string "an errand for me.$"
+	.string "My WINGULL is delivering MAIL\n"
+	.string "to a friend in MOSSDEEP.\p"
+	.string "If you meet it there, say hello!\n"
+	.string "It may be ready to fly home.$"
 FortreeCity_House4_Text_WelcomeWingullTakeSachet:
 	.string "Welcome back, Wingull! And thank you.\p"
 	.string "Please take this Sachet as my thanks.$"

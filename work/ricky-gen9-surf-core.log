@@ -1,0 +1,416 @@
+arm-none-eabi-cpp -iquote include -Wno-trigraphs -DMODERN=1 -DTESTING=0 -DEMERALD -std=gnu17 -DEC_HEADLESS_FIXTURES=0 -traditional-cpp - < src/data/trainers.party | tools/trainerproc/trainerproc -o src/data/trainers.h -i src/data/trainers.party -
+tools/scaninc/scaninc -M build/emerald-test/test/battle/ai/emerald_champions_plans.d -g build/assets -I include -I tools/agbcc/include test/battle/ai/emerald_champions_plans.c
+tools/scaninc/scaninc -M build/emerald-test/test/test_runner_battle.d -g build/assets -I include -I tools/agbcc/include test/test_runner_battle.c
+tools/scaninc/scaninc -M build/emerald-test/src/emerald_champions_battle_plan.d -g build/assets -I include -I tools/agbcc/include src/emerald_champions_battle_plan.c
+tools/scaninc/scaninc -M build/emerald-test/src/data.d -g build/assets -I include -I tools/agbcc/include src/data.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/data.o src/data.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/emerald_champions_battle_plan.o src/emerald_champions_battle_plan.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/test_runner_battle.o test/test_runner_battle.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/battle/ai/emerald_champions_plans.o test/battle/ai/emerald_champions_plans.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 4
+[0] EC live review Ricky timing: complete cold decision with six-player party: [32mPASS[0m
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Yawn target=0
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Focus Energy target=3
+AI decision turn=2 actor=1 move=Stomping Tantrum target=0
+AI decision turn=2 actor=3 move=Surf target=2
+E44_RICKY_COMPLETE_TIMING trainer=64 setupFrames=6 decisionFrames=35 completeFrames=41 warmFrames=35 first=3 moves=Stomping Tantrum/Surf
+[1] EC live review Ricky disruption: Fake Out Taunt and redirected attacks: [32mPASS[0m
+RICKY_INPUT reserves=0 slot=0 lv=18 HP=64 Atk=26 Def=41 SpA=17 SpD=19 Speed=15 item=494 ability=11
+RICKY_INPUT reserves=0 slot=1 lv=18 HP=60 Atk=43 Def=37 SpA=64 SpD=37 Speed=38 item=471 ability=97
+RICKY_INPUT reserves=0 slot=2 lv=18 HP=51 Atk=48 Def=28 SpA=21 SpD=24 Speed=37 item=494 ability=173
+RICKY_INPUT reserves=0 slot=3 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=494 ability=172
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Stomping Tantrum target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Stomping Tantrum target=2
+AI switch turn=2 actor=3 party=3
+RICKY_STATUS board=10 turns=1 pair=0 foesStatus=0/0 yawn=0/0 trapped=0/0/0/0 SpA=6/6 focus=0/0
+RICKY_ENGINE board=10 turns=1 pair=0 status=0/0 items=494/471 unburden=0/0
+RICKY_AFTER board=10 turns=1 pair=0 native=1 species=194/224 HP=59/60 foes=66/72 moves=-/Protect speeds=15/38 foeSpeeds=53/49 Atk=6/6 Def=6/6 PP=20/20 faints=0/0
+RICKY_INPUT reserves=0 slot=0 lv=18 HP=64 Atk=26 Def=41 SpA=17 SpD=19 Speed=15 item=494 ability=11
+RICKY_INPUT reserves=0 slot=1 lv=18 HP=60 Atk=43 Def=37 SpA=64 SpD=37 Speed=38 item=471 ability=97
+RICKY_INPUT reserves=0 slot=2 lv=18 HP=51 Atk=48 Def=28 SpA=21 SpD=24 Speed=37 item=494 ability=173
+RICKY_INPUT reserves=0 slot=3 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=494 ability=172
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Stomping Tantrum target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Taunt target=1
+AI decision turn=2 actor=1 move=Stomping Tantrum target=2
+AI switch turn=2 actor=3 party=3
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=1 move=Stomping Tantrum target=0
+AI decision turn=3 actor=3 move=Protect target=3
+RICKY_STATUS board=10 turns=2 pair=0 foesStatus=0/0 yawn=0/0 trapped=0/0/0/0 SpA=6/6 focus=0/0
+RICKY_ENGINE board=10 turns=2 pair=0 status=0/0 items=494/494 unburden=0/0
+RICKY_AFTER board=10 turns=2 pair=0 native=2 species=194/394 HP=59/30 foes=66/40 moves=Stomping Tantrum/- speeds=15/39 foeSpeeds=53/49 Atk=6/6 Def=6/6 PP=20/5 faints=0/0
+RICKY_INPUT reserves=0 slot=0 lv=18 HP=64 Atk=26 Def=41 SpA=17 SpD=19 Speed=15 item=494 ability=11
+RICKY_INPUT reserves=0 slot=1 lv=18 HP=60 Atk=43 Def=37 SpA=64 SpD=37 Speed=38 item=471 ability=97
+RICKY_INPUT reserves=0 slot=2 lv=18 HP=51 Atk=48 Def=28 SpA=21 SpD=24 Speed=37 item=494 ability=173
+RICKY_INPUT reserves=0 slot=3 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=494 ability=172
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Stomping Tantrum target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Taunt target=1
+AI decision turn=2 actor=1 move=Stomping Tantrum target=2
+AI switch turn=2 actor=3 party=3
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=0 move=Taunt target=1
+AI decision turn=3 actor=1 move=Stomping Tantrum target=0
+AI decision turn=3 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=3 move=Protect target=3
+AI decision turn=4 actor=1 move=Stomping Tantrum target=0
+AI decision turn=4 actor=3 move=Hydro Pump target=0
+RICKY_STATUS board=10 turns=3 pair=0 foesStatus=0/0 yawn=0/0 trapped=0/0/0/0 SpA=6/6 focus=0/0
+RICKY_ENGINE board=10 turns=3 pair=0 status=0/0 items=494/494 unburden=0/0
+RICKY_AFTER board=10 turns=3 pair=0 native=3 species=194/394 HP=59/30 foes=56/40 moves=Stomping Tantrum/Protect speeds=15/39 foeSpeeds=53/49 Atk=6/6 Def=6/6 PP=20/5 faints=0/0
+RICKY_INPUT reserves=0 slot=0 lv=18 HP=64 Atk=26 Def=41 SpA=17 SpD=19 Speed=15 item=494 ability=11
+RICKY_INPUT reserves=0 slot=1 lv=18 HP=60 Atk=43 Def=37 SpA=64 SpD=37 Speed=38 item=471 ability=97
+RICKY_INPUT reserves=0 slot=2 lv=18 HP=51 Atk=48 Def=28 SpA=21 SpD=24 Speed=37 item=494 ability=173
+RICKY_INPUT reserves=0 slot=3 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=494 ability=172
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Stomping Tantrum target=2
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Yawn target=2
+AI switch turn=2 actor=3 party=3
+RICKY_STATUS board=11 turns=1 pair=0 foesStatus=0/0 yawn=0/0 trapped=0/0/0/0 SpA=6/6 focus=0/0
+RICKY_ENGINE board=11 turns=1 pair=0 status=0/0 items=494/471 unburden=0/0
+RICKY_AFTER board=11 turns=1 pair=0 native=1 species=194/224 HP=64/60 foes=52/54 moves=Stomping Tantrum/Protect speeds=15/38 foeSpeeds=56/49 Atk=6/6 Def=6/6 PP=20/20 faints=0/0
+RICKY_INPUT reserves=0 slot=0 lv=18 HP=64 Atk=26 Def=41 SpA=17 SpD=19 Speed=15 item=494 ability=11
+RICKY_INPUT reserves=0 slot=1 lv=18 HP=60 Atk=43 Def=37 SpA=64 SpD=37 Speed=38 item=471 ability=97
+RICKY_INPUT reserves=0 slot=2 lv=18 HP=51 Atk=48 Def=28 SpA=21 SpD=24 Speed=37 item=494 ability=173
+RICKY_INPUT reserves=0 slot=3 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=494 ability=172
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Stomping Tantrum target=2
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Psychic target=3
+AI decision turn=2 actor=1 move=Yawn target=2
+AI switch turn=2 actor=3 party=3
+AI decision turn=2 actor=2 move=Follow Me target=2
+AI decision turn=3 actor=1 move=Stomping Tantrum target=2
+AI decision turn=3 actor=3 move=Hydro Pump target=0
+RICKY_STATUS board=11 turns=2 pair=0 foesStatus=0/0 yawn=0/1 trapped=0/0/0/0 SpA=6/6 focus=0/0
+RICKY_ENGINE board=11 turns=2 pair=0 status=0/0 items=494/494 unburden=0/0
+RICKY_AFTER board=11 turns=2 pair=0 native=2 species=194/394 HP=64/34 foes=52/54 moves=Yawn/- speeds=15/39 foeSpeeds=56/49 Atk=6/6 Def=6/6 PP=20/5 faints=0/0
+RICKY_INPUT reserves=0 slot=0 lv=18 HP=64 Atk=26 Def=41 SpA=17 SpD=19 Speed=15 item=494 ability=11
+RICKY_INPUT reserves=0 slot=1 lv=18 HP=60 Atk=43 Def=37 SpA=64 SpD=37 Speed=38 item=471 ability=97
+RICKY_INPUT reserves=0 slot=2 lv=18 HP=51 Atk=48 Def=28 SpA=21 SpD=24 Speed=37 item=494 ability=173
+RICKY_INPUT reserves=0 slot=3 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=494 ability=172
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Stomping Tantrum target=2
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Psychic target=3
+AI decision turn=2 actor=1 move=Yawn target=2
+AI switch turn=2 actor=3 party=3
+AI decision turn=2 actor=2 move=Follow Me target=2
+AI decision turn=3 actor=0 move=Psychic target=3
+AI decision turn=3 actor=1 move=Stomping Tantrum target=2
+AI decision turn=3 actor=2 move=Follow Me target=2
+AI decision turn=3 actor=3 move=Hydro Pump target=0
+AI decision turn=4 actor=1 move=Stomping Tantrum target=2
+AI decision turn=4 actor=3 move=Hydro Pump target=0
+RICKY_STATUS board=11 turns=3 pair=0 foesStatus=0/2 yawn=0/0 trapped=0/0/0/0 SpA=6/6 focus=0/0
+RICKY_ENGINE board=11 turns=3 pair=0 status=0/0 items=494/494 unburden=0/0
+RICKY_AFTER board=11 turns=3 pair=0 native=3 species=194/394 HP=64/12 foes=52/23 moves=Stomping Tantrum/Hydro Pump speeds=15/39 foeSpeeds=56/49 Atk=6/6 Def=6/6 PP=20/4 faints=0/0
+[2] EC live review Ricky core: physical special leads and reserves: [32mPASS[0m
+RICKY_INPUT reserves=0 slot=0 lv=18 HP=64 Atk=26 Def=41 SpA=17 SpD=19 Speed=15 item=494 ability=11
+RICKY_INPUT reserves=0 slot=1 lv=18 HP=60 Atk=43 Def=37 SpA=64 SpD=37 Speed=38 item=471 ability=97
+RICKY_INPUT reserves=0 slot=2 lv=18 HP=51 Atk=48 Def=28 SpA=21 SpD=24 Speed=37 item=494 ability=173
+RICKY_INPUT reserves=0 slot=3 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=494 ability=172
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Stomping Tantrum target=0
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Recover target=1
+AI switch turn=2 actor=3 party=3
+RICKY_STATUS board=0 turns=1 pair=0 foesStatus=0/0 yawn=0/0 trapped=0/0/0/0 SpA=6/6 focus=0/0
+RICKY_ENGINE board=0 turns=1 pair=0 status=0/0 items=494/471 unburden=0/0
+RICKY_AFTER board=0 turns=1 pair=0 native=1 species=194/224 HP=42/60 foes=53/78 moves=Stomping Tantrum/Protect speeds=15/38 foeSpeeds=33/25 Atk=6/6 Def=6/6 PP=20/20 faints=0/0
+RICKY_FOCUS board=0 turns=1 pair=0 focus=0/0
+RICKY_INPUT reserves=0 slot=0 lv=18 HP=64 Atk=26 Def=41 SpA=17 SpD=19 Speed=15 item=494 ability=11
+RICKY_INPUT reserves=0 slot=1 lv=18 HP=60 Atk=43 Def=37 SpA=64 SpD=37 Speed=38 item=471 ability=97
+RICKY_INPUT reserves=0 slot=2 lv=18 HP=51 Atk=48 Def=28 SpA=21 SpD=24 Speed=37 item=494 ability=173
+RICKY_INPUT reserves=0 slot=3 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=494 ability=172
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Stomping Tantrum target=0
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Recover target=1
+AI switch turn=2 actor=3 party=3
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=3 actor=1 move=Recover target=1
+AI decision turn=3 actor=3 move=Protect target=3
+RICKY_STATUS board=0 turns=2 pair=0 foesStatus=0/0 yawn=0/0 trapped=0/0/0/0 SpA=6/6 focus=0/0
+RICKY_ENGINE board=0 turns=2 pair=0 status=0/0 items=494/494 unburden=0/0
+RICKY_AFTER board=0 turns=2 pair=0 native=2 species=194/394 HP=52/37 foes=46/78 moves=Recover/- speeds=15/39 foeSpeeds=33/25 Atk=6/6 Def=6/6 PP=20/5 faints=0/0
+RICKY_FOCUS board=0 turns=2 pair=0 focus=0/0
+RICKY_INPUT reserves=0 slot=0 lv=18 HP=64 Atk=26 Def=41 SpA=17 SpD=19 Speed=15 item=494 ability=11
+RICKY_INPUT reserves=0 slot=1 lv=18 HP=60 Atk=43 Def=37 SpA=64 SpD=37 Speed=38 item=471 ability=97
+RICKY_INPUT reserves=0 slot=2 lv=18 HP=51 Atk=48 Def=28 SpA=21 SpD=24 Speed=37 item=494 ability=173
+RICKY_INPUT reserves=0 slot=3 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=494 ability=172
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Stomping Tantrum target=0
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Recover target=1
+AI switch turn=2 actor=3 party=3
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=3 actor=0 move=Double-Edge target=1
+AI decision turn=3 actor=1 move=Recover target=1
+AI decision turn=3 actor=2 move=Drain Punch target=3
+AI decision turn=3 actor=3 move=Protect target=3
+AI decision turn=4 actor=1 move=Stomping Tantrum target=0
+AI decision turn=4 actor=3 move=Hydro Pump target=0
+RICKY_STATUS board=0 turns=3 pair=0 foesStatus=0/0 yawn=0/0 trapped=0/0/0/0 SpA=6/6 focus=0/0
+RICKY_ENGINE board=0 turns=3 pair=0 status=0/0 items=494/494 unburden=0/0
+RICKY_AFTER board=0 turns=3 pair=0 native=3 species=194/394 HP=62/37 foes=39/78 moves=Recover/Protect speeds=15/39 foeSpeeds=33/25 Atk=6/6 Def=6/6 PP=20/5 faints=0/0
+RICKY_FOCUS board=0 turns=3 pair=0 focus=0/0
+RICKY_INPUT reserves=0 slot=0 lv=18 HP=64 Atk=26 Def=41 SpA=17 SpD=19 Speed=15 item=494 ability=11
+RICKY_INPUT reserves=0 slot=1 lv=18 HP=60 Atk=43 Def=37 SpA=64 SpD=37 Speed=38 item=471 ability=97
+RICKY_INPUT reserves=0 slot=2 lv=18 HP=51 Atk=48 Def=28 SpA=21 SpD=24 Speed=37 item=494 ability=173
+RICKY_INPUT reserves=0 slot=3 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=494 ability=172
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Stomping Tantrum target=0
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Recover target=1
+AI switch turn=2 actor=3 party=3
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=3 actor=0 move=Double-Edge target=1
+AI decision turn=3 actor=1 move=Recover target=1
+AI decision turn=3 actor=2 move=Drain Punch target=3
+AI decision turn=3 actor=3 move=Protect target=3
+AI decision turn=4 actor=0 move=Double-Edge target=1
+AI decision turn=4 actor=1 move=Stomping Tantrum target=0
+AI decision turn=4 actor=2 move=Drain Punch target=3
+AI decision turn=4 actor=3 move=Hydro Pump target=0
+AI decision turn=5 actor=1 move=Stomping Tantrum target=0
+AI decision turn=5 actor=3 move=Ice Beam target=0
+RICKY_STATUS board=0 turns=4 pair=0 foesStatus=0/0 yawn=0/0 trapped=0/0/0/0 SpA=6/6 focus=0/0
+RICKY_ENGINE board=0 turns=4 pair=0 status=0/0 items=494/494 unburden=0/0
+RICKY_AFTER board=0 turns=4 pair=0 native=4 species=194/394 HP=40/18 foes=3/78 moves=Stomping Tantrum/Hydro Pump speeds=15/39 foeSpeeds=33/25 Atk=6/6 Def=6/6 PP=20/4 faints=0/0
+RICKY_FOCUS board=0 turns=4 pair=0 focus=0/0
+RICKY_INPUT reserves=0 slot=0 lv=18 HP=64 Atk=26 Def=41 SpA=17 SpD=19 Speed=15 item=494 ability=11
+RICKY_INPUT reserves=0 slot=1 lv=18 HP=60 Atk=43 Def=37 SpA=64 SpD=37 Speed=38 item=471 ability=97
+RICKY_INPUT reserves=0 slot=2 lv=18 HP=51 Atk=48 Def=28 SpA=21 SpD=24 Speed=37 item=494 ability=173
+RICKY_INPUT reserves=0 slot=3 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=494 ability=172
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Stomping Tantrum target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Yawn target=2
+AI switch turn=2 actor=3 party=3
+RICKY_STATUS board=1 turns=1 pair=0 foesStatus=0/0 yawn=0/0 trapped=0/0/0/0 SpA=6/6 focus=0/0
+RICKY_ENGINE board=1 turns=1 pair=0 status=0/0 items=494/471 unburden=0/0
+RICKY_AFTER board=1 turns=1 pair=0 native=1 species=194/224 HP=64/60 foes=52/54 moves=Stomping Tantrum/Protect speeds=15/38 foeSpeeds=56/49 Atk=6/6 Def=6/6 PP=20/20 faints=0/0
+RICKY_FOCUS board=1 turns=1 pair=0 focus=0/0
+RICKY_INPUT reserves=0 slot=0 lv=18 HP=64 Atk=26 Def=41 SpA=17 SpD=19 Speed=15 item=494 ability=11
+RICKY_INPUT reserves=0 slot=1 lv=18 HP=60 Atk=43 Def=37 SpA=64 SpD=37 Speed=38 item=471 ability=97
+RICKY_INPUT reserves=0 slot=2 lv=18 HP=51 Atk=48 Def=28 SpA=21 SpD=24 Speed=37 item=494 ability=173
+RICKY_INPUT reserves=0 slot=3 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=494 ability=172
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Stomping Tantrum target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Psychic target=3
+AI decision turn=2 actor=1 move=Yawn target=2
+AI switch turn=2 actor=3 party=3
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=3 actor=1 move=Stomping Tantrum target=2
+AI decision turn=3 actor=3 move=Protect target=3
+RICKY_STATUS board=1 turns=2 pair=0 foesStatus=0/0 yawn=0/1 trapped=0/0/0/0 SpA=6/6 focus=0/0
+RICKY_ENGINE board=1 turns=2 pair=0 status=0/0 items=494/494 unburden=0/0
+RICKY_AFTER board=1 turns=2 pair=0 native=2 species=194/394 HP=64/34 foes=52/54 moves=Yawn/- speeds=15/39 foeSpeeds=56/49 Atk=6/6 Def=6/6 PP=20/5 faints=0/0
+RICKY_FOCUS board=1 turns=2 pair=0 focus=0/0
+RICKY_INPUT reserves=0 slot=0 lv=18 HP=64 Atk=26 Def=41 SpA=17 SpD=19 Speed=15 item=494 ability=11
+RICKY_INPUT reserves=0 slot=1 lv=18 HP=60 Atk=43 Def=37 SpA=64 SpD=37 Speed=38 item=471 ability=97
+RICKY_INPUT reserves=0 slot=2 lv=18 HP=51 Atk=48 Def=28 SpA=21 SpD=24 Speed=37 item=494 ability=173
+RICKY_INPUT reserves=0 slot=3 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=494 ability=172
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Stomping Tantrum target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Psychic target=3
+AI decision turn=2 actor=1 move=Yawn target=2
+AI switch turn=2 actor=3 party=3
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=3 actor=0 move=Psychic target=3
+AI decision turn=3 actor=1 move=Stomping Tantrum target=2
+AI decision turn=3 actor=2 move=Thunderbolt target=1
+AI decision turn=3 actor=3 move=Protect target=3
+AI decision turn=4 actor=1 move=Helping Hand target=3
+AI decision turn=4 actor=3 move=Ice Beam target=0
+RICKY_STATUS board=1 turns=3 pair=0 foesStatus=0/2 yawn=0/0 trapped=0/0/0/0 SpA=6/6 focus=0/0
+RICKY_ENGINE board=1 turns=3 pair=0 status=0/0 items=494/494 unburden=0/0
+RICKY_AFTER board=1 turns=3 pair=0 native=3 species=194/394 HP=64/34 foes=52/54 moves=Stomping Tantrum/Protect speeds=15/39 foeSpeeds=56/49 Atk=6/6 Def=6/6 PP=20/5 faints=0/0
+RICKY_FOCUS board=1 turns=3 pair=0 focus=0/0
+RICKY_INPUT reserves=0 slot=0 lv=18 HP=64 Atk=26 Def=41 SpA=17 SpD=19 Speed=15 item=494 ability=11
+RICKY_INPUT reserves=0 slot=1 lv=18 HP=60 Atk=43 Def=37 SpA=64 SpD=37 Speed=38 item=471 ability=97
+RICKY_INPUT reserves=0 slot=2 lv=18 HP=51 Atk=48 Def=28 SpA=21 SpD=24 Speed=37 item=494 ability=173
+RICKY_INPUT reserves=0 slot=3 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=494 ability=172
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Stomping Tantrum target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Psychic target=3
+AI decision turn=2 actor=1 move=Yawn target=2
+AI switch turn=2 actor=3 party=3
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=3 actor=0 move=Psychic target=3
+AI decision turn=3 actor=1 move=Stomping Tantrum target=2
+AI decision turn=3 actor=2 move=Thunderbolt target=1
+AI decision turn=3 actor=3 move=Protect target=3
+AI decision turn=4 actor=0 move=Psychic target=3
+AI decision turn=4 actor=1 move=Helping Hand target=3
+AI decision turn=4 actor=2 move=Thunderbolt target=1
+AI decision turn=4 actor=3 move=Ice Beam target=0
+AI decision turn=5 actor=1 move=Stomping Tantrum target=2
+AI decision turn=5 actor=3 move=Protect target=3
+RICKY_STATUS board=1 turns=4 pair=0 foesStatus=0/1 yawn=0/0 trapped=0/0/0/0 SpA=6/6 focus=0/0
+RICKY_ENGINE board=1 turns=4 pair=0 status=0/0 items=494/494 unburden=0/0
+RICKY_AFTER board=1 turns=4 pair=0 native=4 species=194/394 HP=64/12 foes=0/54 moves=Helping Hand/Ice Beam speeds=15/39 foeSpeeds=0/49 Atk=6/6 Def=6/6 PP=19/5 faints=0/1
+RICKY_FOCUS board=1 turns=4 pair=0 focus=0/0
+RICKY_INPUT reserves=1 slot=0 lv=18 HP=64 Atk=26 Def=41 SpA=17 SpD=19 Speed=15 item=494 ability=11
+RICKY_INPUT reserves=1 slot=1 lv=18 HP=60 Atk=43 Def=37 SpA=64 SpD=37 Speed=38 item=471 ability=97
+RICKY_INPUT reserves=1 slot=2 lv=18 HP=51 Atk=48 Def=28 SpA=21 SpD=24 Speed=37 item=494 ability=173
+RICKY_INPUT reserves=1 slot=3 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=494 ability=172
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Hydro Pump target=0
+AI decision turn=2 actor=1 move=Liquidation target=0
+AI decision turn=2 actor=3 move=Hydro Pump target=0
+RICKY_STATUS board=0 turns=1 pair=1 foesStatus=0/0 yawn=0/0 trapped=0/0/0/0 SpA=6/6 focus=0/0
+RICKY_ENGINE board=0 turns=1 pair=1 status=0/0 items=494/494 unburden=0/0
+RICKY_AFTER board=0 turns=1 pair=1 native=1 species=833/394 HP=51/37 foes=51/78 moves=Protect/Hydro Pump speeds=37/39 foeSpeeds=33/25 Atk=6/6 Def=6/6 PP=10/4 faints=0/0
+RICKY_FOCUS board=0 turns=1 pair=1 focus=0/0
+RICKY_INPUT reserves=1 slot=0 lv=18 HP=64 Atk=26 Def=41 SpA=17 SpD=19 Speed=15 item=494 ability=11
+RICKY_INPUT reserves=1 slot=1 lv=18 HP=60 Atk=43 Def=37 SpA=64 SpD=37 Speed=38 item=471 ability=97
+RICKY_INPUT reserves=1 slot=2 lv=18 HP=51 Atk=48 Def=28 SpA=21 SpD=24 Speed=37 item=494 ability=173
+RICKY_INPUT reserves=1 slot=3 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=494 ability=172
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Hydro Pump target=0
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Liquidation target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Hydro Pump target=0
+AI decision turn=3 actor=1 move=Liquidation target=2
+AI decision turn=3 actor=3 move=Hydro Pump target=2
+RICKY_STATUS board=0 turns=2 pair=1 foesStatus=0/0 yawn=0/0 trapped=0/0/0/0 SpA=6/6 focus=0/0
+RICKY_ENGINE board=0 turns=2 pair=1 status=0/0 items=494/494 unburden=0/0
+RICKY_AFTER board=0 turns=2 pair=1 native=2 species=833/394 HP=17/18 foes=0/78 moves=Liquidation/Hydro Pump speeds=37/39 foeSpeeds=0/25 Atk=6/6 Def=6/6 PP=9/3 faints=0/1
+RICKY_FOCUS board=0 turns=2 pair=1 focus=0/0
+RICKY_INPUT reserves=1 slot=0 lv=18 HP=64 Atk=26 Def=41 SpA=17 SpD=19 Speed=15 item=494 ability=11
+RICKY_INPUT reserves=1 slot=1 lv=18 HP=60 Atk=43 Def=37 SpA=64 SpD=37 Speed=38 item=471 ability=97
+RICKY_INPUT reserves=1 slot=2 lv=18 HP=51 Atk=48 Def=28 SpA=21 SpD=24 Speed=37 item=494 ability=173
+RICKY_INPUT reserves=1 slot=3 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=494 ability=172
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Hydro Pump target=0
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Liquidation target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Hydro Pump target=0
+AI decision turn=3 actor=2 move=Drain Punch target=3
+AI decision turn=3 actor=1 move=Liquidation target=2
+AI decision turn=3 actor=3 move=Hydro Pump target=2
+AI decision turn=4 actor=1 move=Liquidation target=2
+RICKY_STATUS board=0 turns=3 pair=1 foesStatus=0/0 yawn=0/0 trapped=0/0/0/0 SpA=6/6 focus=0/0
+RICKY_ENGINE board=0 turns=3 pair=1 status=0/0 items=494/494 unburden=0/0
+RICKY_AFTER board=0 turns=3 pair=1 native=3 species=833/394 HP=17/0 foes=0/43 moves=Liquidation/- speeds=37/0 foeSpeeds=0/25 Atk=6/6 Def=6/6 PP=8/2 faints=1/1
+RICKY_FOCUS board=0 turns=3 pair=1 focus=0/0
+RICKY_INPUT reserves=1 slot=0 lv=18 HP=64 Atk=26 Def=41 SpA=17 SpD=19 Speed=15 item=494 ability=11
+RICKY_INPUT reserves=1 slot=1 lv=18 HP=60 Atk=43 Def=37 SpA=64 SpD=37 Speed=38 item=471 ability=97
+RICKY_INPUT reserves=1 slot=2 lv=18 HP=51 Atk=48 Def=28 SpA=21 SpD=24 Speed=37 item=494 ability=173
+RICKY_INPUT reserves=1 slot=3 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=494 ability=172
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Hydro Pump target=0
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Liquidation target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Hydro Pump target=0
+AI decision turn=3 actor=2 move=Drain Punch target=3
+AI decision turn=3 actor=1 move=Liquidation target=2
+AI decision turn=3 actor=3 move=Hydro Pump target=2
+AI decision turn=4 actor=2 move=Drain Punch target=3
+AI decision turn=4 actor=1 move=Liquidation target=2
+RICKY_STATUS board=0 turns=4 pair=1 foesStatus=0/0 yawn=0/0 trapped=0/0/0/0 SpA=6/6 focus=0/0
+RICKY_ENGINE board=0 turns=4 pair=1 status=0/0 items=494/494 unburden=0/0
+RICKY_AFTER board=0 turns=4 pair=1 native=3 species=833/394 HP=0/0 foes=0/21 moves=-/- speeds=37/0 foeSpeeds=0/25 Atk=6/6 Def=6/6 PP=7/2 faints=2/1
+RICKY_FOCUS board=0 turns=4 pair=1 focus=0/0
+RICKY_INPUT reserves=1 slot=0 lv=18 HP=64 Atk=26 Def=41 SpA=17 SpD=19 Speed=15 item=494 ability=11
+RICKY_INPUT reserves=1 slot=1 lv=18 HP=60 Atk=43 Def=37 SpA=64 SpD=37 Speed=38 item=471 ability=97
+RICKY_INPUT reserves=1 slot=2 lv=18 HP=51 Atk=48 Def=28 SpA=21 SpD=24 Speed=37 item=494 ability=173
+RICKY_INPUT reserves=1 slot=3 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=494 ability=172
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Ice Beam target=0
+AI decision turn=2 actor=1 move=Liquidation target=0
+AI decision turn=2 actor=3 move=Hydro Pump target=0
+RICKY_STATUS board=1 turns=1 pair=1 foesStatus=32/0 yawn=0/0 trapped=0/0/0/0 SpA=6/6 focus=0/0
+RICKY_ENGINE board=1 turns=1 pair=1 status=0/0 items=494/494 unburden=0/0
+RICKY_AFTER board=1 turns=1 pair=1 native=1 species=833/394 HP=51/34 foes=14/72 moves=Protect/Ice Beam speeds=37/39 foeSpeeds=56/49 Atk=6/6 Def=6/6 PP=10/5 faints=0/0
+RICKY_FOCUS board=1 turns=1 pair=1 focus=0/0
+RICKY_INPUT reserves=1 slot=0 lv=18 HP=64 Atk=26 Def=41 SpA=17 SpD=19 Speed=15 item=494 ability=11
+RICKY_INPUT reserves=1 slot=1 lv=18 HP=60 Atk=43 Def=37 SpA=64 SpD=37 Speed=38 item=471 ability=97
+RICKY_INPUT reserves=1 slot=2 lv=18 HP=51 Atk=48 Def=28 SpA=21 SpD=24 Speed=37 item=494 ability=173
+RICKY_INPUT reserves=1 slot=3 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=494 ability=172
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Ice Beam target=0
+AI decision turn=2 actor=0 move=Psychic target=3
+AI decision turn=2 actor=1 move=Liquidation target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=3 move=Hydro Pump target=0
+AI decision turn=3 actor=1 move=Liquidation target=2
+AI decision turn=3 actor=3 move=Icy Wind target=2
+RICKY_STATUS board=1 turns=2 pair=1 foesStatus=0/0 yawn=0/0 trapped=0/0/0/0 SpA=6/6 focus=0/0
+RICKY_ENGINE board=1 turns=2 pair=1 status=0/0 items=494/494 unburden=0/0
+RICKY_AFTER board=1 turns=2 pair=1 native=2 species=833/394 HP=13/12 foes=0/54 moves=Liquidation/Hydro Pump speeds=37/39 foeSpeeds=0/49 Atk=6/6 Def=6/6 PP=9/4 faints=0/1
+RICKY_FOCUS board=1 turns=2 pair=1 focus=0/0
+RICKY_INPUT reserves=1 slot=0 lv=18 HP=64 Atk=26 Def=41 SpA=17 SpD=19 Speed=15 item=494 ability=11
+RICKY_INPUT reserves=1 slot=1 lv=18 HP=60 Atk=43 Def=37 SpA=64 SpD=37 Speed=38 item=471 ability=97
+RICKY_INPUT reserves=1 slot=2 lv=18 HP=51 Atk=48 Def=28 SpA=21 SpD=24 Speed=37 item=494 ability=173
+RICKY_INPUT reserves=1 slot=3 lv=18 HP=56 Atk=30 Def=35 SpA=56 SpD=37 Speed=39 item=494 ability=172
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Ice Beam target=0
+AI decision turn=2 actor=0 move=Psychic target=3
+AI decision turn=2 actor=1 move=Liquidation target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=3 move=Hydro Pump target=0
+AI decision turn=3 actor=2 move=Thunderbolt target=1
+AI decision turn=3 actor=1 move=Liquidation target=2
+AI decision turn=3 actor=3 move=Icy Wind target=2
+AI decision turn=4 actor=3 move=Hydro Pump target=2
+RICKY_STATUS board=1 turns=3 pair=1 foesStatus=0/0 yawn=0/0 trapped=0/0/0/0 SpA=6/6 focus=0/0
+RICKY_ENGINE board=1 turns=3 pair=1 status=0/0 items=494/494 unburden=0/0
+RICKY_AFTER board=1 turns=3 pair=1 native=3 species=833/394 HP=0/12 foes=0/43 moves=-/Icy Wind speeds=0/39 foeSpeeds=0/32 Atk=6/6 Def=6/6 PP=9/4 faints=1/1
+RICKY_FOCUS board=1 turns=3 pair=1 focus=0/0
+
+- Tests [32mPASSED[0m:          3
+- Tests [34mTOTAL[0m:           3
+

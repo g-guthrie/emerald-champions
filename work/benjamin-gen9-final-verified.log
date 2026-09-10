@@ -1,0 +1,673 @@
+arm-none-eabi-cpp -iquote include -Wno-trigraphs -DMODERN=1 -DTESTING=0 -DEMERALD -std=gnu17 -DEC_HEADLESS_FIXTURES=0 -traditional-cpp - < src/data/trainers.party | tools/trainerproc/trainerproc -o src/data/trainers.h -i src/data/trainers.party -
+tools/scaninc/scaninc -M build/emerald-test/test/battle/ai/emerald_champions_plans.d -g build/assets -I include -I tools/agbcc/include test/battle/ai/emerald_champions_plans.c
+tools/scaninc/scaninc -M build/emerald-test/test/test_runner_battle.d -g build/assets -I include -I tools/agbcc/include test/test_runner_battle.c
+tools/scaninc/scaninc -M build/emerald-test/src/emerald_champions_battle_plan.d -g build/assets -I include -I tools/agbcc/include src/emerald_champions_battle_plan.c
+tools/scaninc/scaninc -M build/emerald-test/src/data.d -g build/assets -I include -I tools/agbcc/include src/data.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/data.o src/data.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/emerald_champions_battle_plan.o src/emerald_champions_battle_plan.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/test_runner_battle.o test/test_runner_battle.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/battle/ai/emerald_champions_plans.o test/battle/ai/emerald_champions_plans.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 4
+[0] EC live review Benjamin timing: complete six-player party: [32mPASS[0m
+BENJAMIN_INPUT slot=0 lv=28 HP=83 Atk=70 Def=47 SpA=45 SpD=50 Spe=104 item=523 ability=101
+BENJAMIN_INPUT slot=1 lv=28 HP=86 Atk=46 Def=47 SpA=90 SpD=47 Spe=111 item=523 ability=277
+BENJAMIN_INPUT slot=2 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+BENJAMIN_INPUT slot=3 lv=28 HP=83 Atk=73 Def=72 SpA=29 SpD=50 Spe=85 item=348 ability=17
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Fake Out target=0
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Thunderbolt target=2
+AI decision turn=2 actor=1 move=Play Rough target=0
+AI decision turn=2 actor=3 move=Thunderbolt target=2
+BENJAMIN_TIMING setup=6 bothActors=46 complete=52 warm=47
+[2] EC live review Benjamin Ground: four-party transitions: [32mPASS[0m
+BENJAMIN_INPUT slot=0 lv=28 HP=83 Atk=70 Def=47 SpA=45 SpD=50 Spe=104 item=523 ability=101
+BENJAMIN_INPUT slot=1 lv=28 HP=86 Atk=46 Def=47 SpA=90 SpD=47 Spe=111 item=523 ability=277
+BENJAMIN_INPUT slot=2 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+BENJAMIN_INPUT slot=3 lv=28 HP=83 Atk=73 Def=72 SpA=29 SpD=50 Spe=85 item=348 ability=17
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=Fake Out target=0
+AI decision turn=1 actor=2 move=Psychic target=1
+AI decision turn=1 actor=3 move=Thunderbolt target=2
+AI decision turn=2 actor=1 move=Icy Wind target=0
+AI decision turn=2 actor=3 move=Hurricane target=0
+BENJAMIN_AFTER board=30 turns=1 reserves=0 species=53/1329 HP=83/86 foes=92/0 Atk=6/6 SpA=6/6 Spe=6/6 item=523/523 faints=0/1
+BENJAMIN_STATE moves=Fake Out/Thunderbolt PP=9/15/20/10 otherPP=14/10/15/5 partyHP=83/86/77/83 type=1/14 status=0/0
+BENJAMIN_FIELD tailwind=0 charge=0/0 foeSpeedStage=6/6 foeStatus=0/0
+BENJAMIN_INPUT slot=0 lv=28 HP=83 Atk=70 Def=47 SpA=45 SpD=50 Spe=104 item=523 ability=101
+BENJAMIN_INPUT slot=1 lv=28 HP=86 Atk=46 Def=47 SpA=90 SpD=47 Spe=111 item=523 ability=277
+BENJAMIN_INPUT slot=2 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+BENJAMIN_INPUT slot=3 lv=28 HP=83 Atk=73 Def=72 SpA=29 SpD=50 Spe=85 item=348 ability=17
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=Fake Out target=0
+AI decision turn=1 actor=2 move=Psychic target=1
+AI decision turn=1 actor=3 move=Thunderbolt target=2
+AI decision turn=2 actor=0 move=Earthquake target=1
+AI decision turn=2 actor=1 move=Icy Wind target=0
+AI decision turn=2 actor=3 move=Hurricane target=0
+AI decision turn=3 actor=1 move=Icy Wind target=0
+AI decision turn=3 actor=3 move=Hurricane target=0
+BENJAMIN_AFTER board=30 turns=2 reserves=0 species=53/1329 HP=83/86 foes=10/0 Atk=6/6 SpA=6/6 Spe=6/6 item=523/523 faints=0/1
+BENJAMIN_STATE moves=Icy Wind/Hurricane PP=9/14/20/10 otherPP=14/9/15/5 partyHP=83/86/77/83 type=1/14 status=0/0
+BENJAMIN_FIELD tailwind=0 charge=0/0 foeSpeedStage=5/6 foeStatus=0/0
+BENJAMIN_INPUT slot=0 lv=28 HP=83 Atk=70 Def=47 SpA=45 SpD=50 Spe=104 item=523 ability=101
+BENJAMIN_INPUT slot=1 lv=28 HP=86 Atk=46 Def=47 SpA=90 SpD=47 Spe=111 item=523 ability=277
+BENJAMIN_INPUT slot=2 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+BENJAMIN_INPUT slot=3 lv=28 HP=83 Atk=73 Def=72 SpA=29 SpD=50 Spe=85 item=348 ability=17
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=Fake Out target=0
+AI decision turn=1 actor=2 move=Psychic target=1
+AI decision turn=1 actor=3 move=Thunderbolt target=2
+AI decision turn=2 actor=0 move=Earthquake target=1
+AI decision turn=2 actor=1 move=Icy Wind target=0
+AI decision turn=2 actor=3 move=Hurricane target=0
+AI decision turn=3 actor=0 move=Earthquake target=1
+AI decision turn=3 actor=1 move=Icy Wind target=0
+AI decision turn=3 actor=3 move=Hurricane target=0
+BENJAMIN_AFTER board=30 turns=3 reserves=0 species=53/1329 HP=83/86 foes=0/0 Atk=6/6 SpA=6/6 Spe=6/6 item=523/523 faints=0/2
+BENJAMIN_STATE moves=Icy Wind/Hurricane PP=9/14/20/10 otherPP=14/8/15/5 partyHP=83/86/77/83 type=1/14 status=0/0
+BENJAMIN_FIELD tailwind=0 charge=0/0 foeSpeedStage=6/6 foeStatus=0/0
+[0] EC live review Benjamin disruption: flinch and Ice pressure: [32mPASS[0m
+BENJAMIN_INPUT slot=0 lv=28 HP=83 Atk=70 Def=47 SpA=45 SpD=50 Spe=104 item=523 ability=101
+BENJAMIN_INPUT slot=1 lv=28 HP=86 Atk=46 Def=47 SpA=90 SpD=47 Spe=111 item=523 ability=277
+BENJAMIN_INPUT slot=2 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+BENJAMIN_INPUT slot=3 lv=28 HP=83 Atk=73 Def=72 SpA=29 SpD=50 Spe=85 item=348 ability=17
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Fake Out target=0
+AI decision turn=1 actor=2 move=Ice Beam target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI decision turn=2 actor=1 move=U-turn target=0
+AI decision turn=2 actor=3 move=Protect target=3
+BENJAMIN_AFTER board=10 turns=1 reserves=0 species=53/1329 HP=69/45 foes=1/104 Atk=6/6 SpA=6/6 Spe=6/6 item=523/0 faints=0/0
+BENJAMIN_STATE moves=Fake Out/Thunderbolt PP=9/15/20/10 otherPP=14/10/15/5 partyHP=69/45/77/83 type=1/14 status=0/0
+BENJAMIN_FIELD tailwind=0 charge=0/0 foeSpeedStage=6/6 foeStatus=64/0
+BENJAMIN_INPUT slot=0 lv=28 HP=83 Atk=70 Def=47 SpA=45 SpD=50 Spe=104 item=523 ability=101
+BENJAMIN_INPUT slot=1 lv=28 HP=86 Atk=46 Def=47 SpA=90 SpD=47 Spe=111 item=523 ability=277
+BENJAMIN_INPUT slot=2 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+BENJAMIN_INPUT slot=3 lv=28 HP=83 Atk=73 Def=72 SpA=29 SpD=50 Spe=85 item=348 ability=17
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Fake Out target=0
+AI decision turn=1 actor=2 move=Ice Beam target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=U-turn target=0
+AI decision turn=2 actor=2 move=Ice Beam target=3
+AI decision turn=2 actor=3 move=Protect target=3
+AI switch turn=2 actor=1 party=2
+AI decision turn=3 actor=1 move=Brave Bird target=2
+AI decision turn=3 actor=3 move=Hurricane target=2
+BENJAMIN_AFTER board=10 turns=2 reserves=0 species=732/1329 HP=77/45 foes=0/104 Atk=6/6 SpA=6/6 Spe=6/6 item=494/0 faints=0/1
+BENJAMIN_STATE moves=-/Protect PP=10/20/15/20 otherPP=14/10/15/4 partyHP=69/45/77/83 type=1/14 status=0/0
+BENJAMIN_FIELD tailwind=0 charge=0/0 foeSpeedStage=6/6 foeStatus=0/0
+BENJAMIN_INPUT slot=0 lv=28 HP=83 Atk=70 Def=47 SpA=45 SpD=50 Spe=104 item=523 ability=101
+BENJAMIN_INPUT slot=1 lv=28 HP=86 Atk=46 Def=47 SpA=90 SpD=47 Spe=111 item=523 ability=277
+BENJAMIN_INPUT slot=2 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+BENJAMIN_INPUT slot=3 lv=28 HP=83 Atk=73 Def=72 SpA=29 SpD=50 Spe=85 item=348 ability=17
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Fake Out target=0
+AI decision turn=1 actor=2 move=Ice Beam target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=U-turn target=0
+AI decision turn=2 actor=2 move=Ice Beam target=3
+AI decision turn=2 actor=3 move=Protect target=3
+AI switch turn=2 actor=1 party=2
+AI decision turn=3 actor=2 move=Ice Beam target=3
+AI decision turn=3 actor=1 move=Brave Bird target=2
+AI decision turn=3 actor=3 move=Hurricane target=2
+BENJAMIN_AFTER board=10 turns=3 reserves=0 species=732/1329 HP=66/45 foes=0/0 Atk=6/6 SpA=6/6 Spe=6/6 item=494/0 faints=0/2
+BENJAMIN_STATE moves=Brave Bird/Hurricane PP=10/20/14/20 otherPP=14/9/15/4 partyHP=69/45/66/83 type=1/14 status=0/0
+BENJAMIN_FIELD tailwind=0 charge=0/0 foeSpeedStage=6/6 foeStatus=0/0
+BENJAMIN_INPUT slot=0 lv=28 HP=83 Atk=70 Def=47 SpA=45 SpD=50 Spe=104 item=523 ability=101
+BENJAMIN_INPUT slot=1 lv=28 HP=86 Atk=46 Def=47 SpA=90 SpD=47 Spe=111 item=523 ability=277
+BENJAMIN_INPUT slot=2 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+BENJAMIN_INPUT slot=3 lv=28 HP=83 Atk=73 Def=72 SpA=29 SpD=50 Spe=85 item=348 ability=17
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Brave Bird target=2
+AI decision turn=1 actor=2 move=Ice Beam target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Bullet Seed target=0
+AI decision turn=2 actor=3 move=Acrobatics target=2
+BENJAMIN_AFTER board=10 turns=1 reserves=1 species=732/207 HP=66/83 foes=95/104 Atk=6/6 SpA=6/6 Spe=6/6 item=494/348 faints=0/0
+BENJAMIN_STATE moves=-/Protect PP=10/20/15/20 otherPP=15/10/20/4 partyHP=66/83/0/0 type=1/5 status=0/0
+BENJAMIN_FIELD tailwind=0 charge=0/0 foeSpeedStage=6/6 foeStatus=0/0
+BENJAMIN_INPUT slot=0 lv=28 HP=83 Atk=70 Def=47 SpA=45 SpD=50 Spe=104 item=523 ability=101
+BENJAMIN_INPUT slot=1 lv=28 HP=86 Atk=46 Def=47 SpA=90 SpD=47 Spe=111 item=523 ability=277
+BENJAMIN_INPUT slot=2 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+BENJAMIN_INPUT slot=3 lv=28 HP=83 Atk=73 Def=72 SpA=29 SpD=50 Spe=85 item=348 ability=17
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Brave Bird target=2
+AI decision turn=1 actor=2 move=Ice Beam target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Bullet Seed target=0
+AI decision turn=2 actor=2 move=Ice Beam target=3
+AI decision turn=2 actor=3 move=Acrobatics target=2
+AI decision turn=3 actor=1 move=Bullet Seed target=0
+AI decision turn=3 actor=3 move=Acrobatics target=0
+BENJAMIN_AFTER board=10 turns=2 reserves=1 species=732/207 HP=36/83 foes=55/0 Atk=6/6 SpA=6/6 Spe=6/6 item=494/0 faints=0/1
+BENJAMIN_STATE moves=Bullet Seed/Acrobatics PP=10/19/15/20 otherPP=14/10/20/4 partyHP=36/83/0/0 type=1/5 status=0/0
+BENJAMIN_FIELD tailwind=0 charge=0/0 foeSpeedStage=6/6 foeStatus=0/0
+BENJAMIN_INPUT slot=0 lv=28 HP=83 Atk=70 Def=47 SpA=45 SpD=50 Spe=104 item=523 ability=101
+BENJAMIN_INPUT slot=1 lv=28 HP=86 Atk=46 Def=47 SpA=90 SpD=47 Spe=111 item=523 ability=277
+BENJAMIN_INPUT slot=2 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+BENJAMIN_INPUT slot=3 lv=28 HP=83 Atk=73 Def=72 SpA=29 SpD=50 Spe=85 item=348 ability=17
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Brave Bird target=2
+AI decision turn=1 actor=2 move=Ice Beam target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Bullet Seed target=0
+AI decision turn=2 actor=2 move=Ice Beam target=3
+AI decision turn=2 actor=3 move=Acrobatics target=2
+AI decision turn=3 actor=0 move=Drain Punch target=1
+AI decision turn=3 actor=1 move=Bullet Seed target=0
+AI decision turn=3 actor=3 move=Acrobatics target=0
+BENJAMIN_AFTER board=10 turns=3 reserves=1 species=732/207 HP=36/83 foes=0/0 Atk=6/6 SpA=6/6 Spe=6/6 item=494/0 faints=0/2
+BENJAMIN_STATE moves=Bullet Seed/Acrobatics PP=10/19/15/20 otherPP=13/10/20/4 partyHP=36/83/0/0 type=1/5 status=0/0
+BENJAMIN_FIELD tailwind=0 charge=0/0 foeSpeedStage=6/6 foeStatus=0/0
+[1] EC live review Benjamin wind: faster electric pressure: [32mPASS[0m
+BENJAMIN_INPUT slot=0 lv=28 HP=83 Atk=70 Def=47 SpA=45 SpD=50 Spe=104 item=523 ability=101
+BENJAMIN_INPUT slot=1 lv=28 HP=86 Atk=46 Def=47 SpA=90 SpD=47 Spe=111 item=523 ability=277
+BENJAMIN_INPUT slot=2 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+BENJAMIN_INPUT slot=3 lv=28 HP=83 Atk=73 Def=72 SpA=29 SpD=50 Spe=85 item=348 ability=17
+AI decision turn=1 actor=0 move=Thunderbolt target=1
+AI decision turn=1 actor=1 move=Fake Out target=0
+AI decision turn=1 actor=2 move=Shadow Ball target=3
+AI decision turn=1 actor=3 move=Tailwind target=3
+AI decision turn=2 actor=1 move=Play Rough target=0
+AI decision turn=2 actor=3 move=Protect target=3
+BENJAMIN_AFTER board=40 turns=1 reserves=0 species=53/1329 HP=83/55 foes=79/85 Atk=6/6 SpA=6/6 Spe=6/6 item=523/0 faints=0/0
+BENJAMIN_STATE moves=Fake Out/Tailwind PP=9/15/20/10 otherPP=15/10/14/5 partyHP=83/55/77/83 type=1/14 status=0/0
+BENJAMIN_FIELD tailwind=3 charge=0/1 foeSpeedStage=6/6 foeStatus=0/0
+BENJAMIN_INPUT slot=0 lv=28 HP=83 Atk=70 Def=47 SpA=45 SpD=50 Spe=104 item=523 ability=101
+BENJAMIN_INPUT slot=1 lv=28 HP=86 Atk=46 Def=47 SpA=90 SpD=47 Spe=111 item=523 ability=277
+BENJAMIN_INPUT slot=2 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+BENJAMIN_INPUT slot=3 lv=28 HP=83 Atk=73 Def=72 SpA=29 SpD=50 Spe=85 item=348 ability=17
+AI decision turn=1 actor=0 move=Thunderbolt target=1
+AI decision turn=1 actor=1 move=Fake Out target=0
+AI decision turn=1 actor=2 move=Shadow Ball target=3
+AI decision turn=1 actor=3 move=Tailwind target=3
+AI decision turn=2 actor=0 move=Thunderbolt target=1
+AI decision turn=2 actor=1 move=Play Rough target=0
+AI decision turn=2 actor=2 move=Shadow Ball target=3
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=1 move=Play Rough target=0
+AI decision turn=3 actor=3 move=Thunderbolt target=2
+BENJAMIN_AFTER board=40 turns=2 reserves=0 species=53/1329 HP=61/55 foes=79/85 Atk=6/6 SpA=6/6 Spe=6/6 item=0/0 faints=0/0
+BENJAMIN_STATE moves=Play Rough/Protect PP=9/15/20/9 otherPP=15/10/14/4 partyHP=61/55/77/83 type=1/14 status=0/0
+BENJAMIN_FIELD tailwind=2 charge=0/1 foeSpeedStage=6/6 foeStatus=0/0
+BENJAMIN_INPUT slot=0 lv=28 HP=83 Atk=70 Def=47 SpA=45 SpD=50 Spe=104 item=523 ability=101
+BENJAMIN_INPUT slot=1 lv=28 HP=86 Atk=46 Def=47 SpA=90 SpD=47 Spe=111 item=523 ability=277
+BENJAMIN_INPUT slot=2 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+BENJAMIN_INPUT slot=3 lv=28 HP=83 Atk=73 Def=72 SpA=29 SpD=50 Spe=85 item=348 ability=17
+AI decision turn=1 actor=0 move=Thunderbolt target=1
+AI decision turn=1 actor=1 move=Fake Out target=0
+AI decision turn=1 actor=2 move=Shadow Ball target=3
+AI decision turn=1 actor=3 move=Tailwind target=3
+AI decision turn=2 actor=0 move=Thunderbolt target=1
+AI decision turn=2 actor=1 move=Play Rough target=0
+AI decision turn=2 actor=2 move=Shadow Ball target=3
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=0 move=Thunderbolt target=1
+AI decision turn=3 actor=1 move=Play Rough target=0
+AI decision turn=3 actor=2 move=Shadow Ball target=3
+AI decision turn=3 actor=3 move=Thunderbolt target=2
+AI decision turn=4 actor=1 move=Play Rough target=0
+AI decision turn=4 actor=3 move=Thunderbolt target=2
+BENJAMIN_AFTER board=40 turns=3 reserves=0 species=53/1329 HP=19/55 foes=53/28 Atk=6/6 SpA=6/6 Spe=6/6 item=0/0 faints=0/0
+BENJAMIN_STATE moves=Play Rough/Thunderbolt PP=9/15/20/8 otherPP=14/10/14/4 partyHP=19/55/77/83 type=1/14 status=0/0
+BENJAMIN_FIELD tailwind=1 charge=0/0 foeSpeedStage=6/6 foeStatus=0/64
+BENJAMIN_INPUT slot=0 lv=28 HP=83 Atk=70 Def=47 SpA=45 SpD=50 Spe=104 item=523 ability=101
+BENJAMIN_INPUT slot=1 lv=28 HP=86 Atk=46 Def=47 SpA=90 SpD=47 Spe=111 item=523 ability=277
+BENJAMIN_INPUT slot=2 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+BENJAMIN_INPUT slot=3 lv=28 HP=83 Atk=73 Def=72 SpA=29 SpD=50 Spe=85 item=348 ability=17
+AI decision turn=1 actor=0 move=Thunderbolt target=1
+AI decision turn=1 actor=1 move=Fake Out target=0
+AI decision turn=1 actor=2 move=Shadow Ball target=3
+AI decision turn=1 actor=3 move=Tailwind target=3
+AI decision turn=2 actor=0 move=Thunderbolt target=1
+AI decision turn=2 actor=1 move=Play Rough target=0
+AI decision turn=2 actor=2 move=Shadow Ball target=3
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=0 move=Thunderbolt target=1
+AI decision turn=3 actor=1 move=Play Rough target=0
+AI decision turn=3 actor=2 move=Shadow Ball target=3
+AI decision turn=3 actor=3 move=Thunderbolt target=2
+AI decision turn=4 actor=0 move=Thunderbolt target=1
+AI decision turn=4 actor=1 move=Play Rough target=0
+AI decision turn=4 actor=2 move=Shadow Ball target=3
+AI decision turn=4 actor=3 move=Thunderbolt target=2
+AI switch turn=4 actor=1 party=3
+AI decision turn=5 actor=1 move=Acrobatics target=0
+AI decision turn=5 actor=3 move=Tailwind target=3
+BENJAMIN_AFTER board=40 turns=4 reserves=0 species=207/1329 HP=83/55 foes=27/0 Atk=6/6 SpA=6/6 Spe=6/6 item=348/0 faints=1/1
+BENJAMIN_STATE moves=-/Thunderbolt PP=15/10/20/5 otherPP=13/10/14/4 partyHP=0/55/77/83 type=5/14 status=0/0
+BENJAMIN_FIELD tailwind=0 charge=0/0 foeSpeedStage=6/6 foeStatus=0/0
+BENJAMIN_INPUT slot=0 lv=28 HP=83 Atk=70 Def=47 SpA=45 SpD=50 Spe=104 item=523 ability=101
+BENJAMIN_INPUT slot=1 lv=28 HP=86 Atk=46 Def=47 SpA=90 SpD=47 Spe=111 item=523 ability=277
+BENJAMIN_INPUT slot=2 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+BENJAMIN_INPUT slot=3 lv=28 HP=83 Atk=73 Def=72 SpA=29 SpD=50 Spe=85 item=348 ability=17
+AI decision turn=1 actor=0 move=Thunderbolt target=1
+AI decision turn=1 actor=1 move=Fake Out target=0
+AI decision turn=1 actor=2 move=Shadow Ball target=3
+AI decision turn=1 actor=3 move=Tailwind target=3
+AI decision turn=2 actor=0 move=Thunderbolt target=1
+AI decision turn=2 actor=1 move=Play Rough target=0
+AI decision turn=2 actor=2 move=Shadow Ball target=3
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=0 move=Thunderbolt target=1
+AI decision turn=3 actor=1 move=Play Rough target=0
+AI decision turn=3 actor=2 move=Shadow Ball target=3
+AI decision turn=3 actor=3 move=Thunderbolt target=2
+AI decision turn=4 actor=0 move=Thunderbolt target=1
+AI decision turn=4 actor=1 move=Play Rough target=0
+AI decision turn=4 actor=2 move=Shadow Ball target=3
+AI decision turn=4 actor=3 move=Thunderbolt target=2
+AI switch turn=4 actor=1 party=3
+AI decision turn=5 actor=0 move=Thunderbolt target=1
+AI decision turn=5 actor=1 move=Acrobatics target=0
+AI decision turn=5 actor=3 move=Tailwind target=3
+BENJAMIN_AFTER board=40 turns=5 reserves=0 species=207/1329 HP=83/55 foes=0/0 Atk=6/6 SpA=6/6 Spe=6/6 item=0/0 faints=1/2
+BENJAMIN_STATE moves=Acrobatics/Tailwind PP=14/10/20/5 otherPP=13/10/13/4 partyHP=0/55/77/83 type=5/14 status=0/0
+BENJAMIN_FIELD tailwind=4 charge=0/1 foeSpeedStage=6/6 foeStatus=0/0
+[2] EC live review Benjamin core: pressure and promoted reserves: [32mPASS[0m
+BENJAMIN_INPUT slot=0 lv=28 HP=83 Atk=70 Def=47 SpA=45 SpD=50 Spe=104 item=523 ability=101
+BENJAMIN_INPUT slot=1 lv=28 HP=86 Atk=46 Def=47 SpA=90 SpD=47 Spe=111 item=523 ability=277
+BENJAMIN_INPUT slot=2 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+BENJAMIN_INPUT slot=3 lv=28 HP=83 Atk=73 Def=72 SpA=29 SpD=50 Spe=85 item=348 ability=17
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Fake Out target=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Hurricane target=2
+AI switch turn=2 actor=1 party=2
+AI decision turn=2 actor=3 move=Hurricane target=2
+BENJAMIN_AFTER board=0 turns=1 reserves=0 species=53/1329 HP=45/86 foes=82/37 Atk=6/6 SpA=6/6 Spe=6/6 item=0/523 faints=0/0
+BENJAMIN_STATE moves=Fake Out/Hurricane PP=9/15/20/10 otherPP=15/9/15/5 partyHP=45/86/77/83 type=1/14 status=0/0
+BENJAMIN_FIELD tailwind=0 charge=0/0 foeSpeedStage=6/6 foeStatus=0/0
+BENJAMIN_INPUT slot=0 lv=28 HP=83 Atk=70 Def=47 SpA=45 SpD=50 Spe=104 item=523 ability=101
+BENJAMIN_INPUT slot=1 lv=28 HP=86 Atk=46 Def=47 SpA=90 SpD=47 Spe=111 item=523 ability=277
+BENJAMIN_INPUT slot=2 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+BENJAMIN_INPUT slot=3 lv=28 HP=83 Atk=73 Def=72 SpA=29 SpD=50 Spe=85 item=348 ability=17
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Fake Out target=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Hurricane target=2
+AI switch turn=2 actor=1 party=2
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Hurricane target=2
+AI decision turn=3 actor=1 move=Brave Bird target=0
+AI decision turn=3 actor=3 move=Thunderbolt target=0
+BENJAMIN_AFTER board=0 turns=2 reserves=0 species=732/1329 HP=33/86 foes=68/0 Atk=6/6 SpA=6/6 Spe=6/6 item=494/523 faints=0/1
+BENJAMIN_STATE moves=-/Hurricane PP=10/20/15/20 otherPP=15/8/15/5 partyHP=45/86/33/83 type=1/14 status=0/0
+BENJAMIN_FIELD tailwind=0 charge=0/0 foeSpeedStage=6/6 foeStatus=0/0
+BENJAMIN_INPUT slot=0 lv=28 HP=83 Atk=70 Def=47 SpA=45 SpD=50 Spe=104 item=523 ability=101
+BENJAMIN_INPUT slot=1 lv=28 HP=86 Atk=46 Def=47 SpA=90 SpD=47 Spe=111 item=523 ability=277
+BENJAMIN_INPUT slot=2 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+BENJAMIN_INPUT slot=3 lv=28 HP=83 Atk=73 Def=72 SpA=29 SpD=50 Spe=85 item=348 ability=17
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Fake Out target=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Hurricane target=2
+AI switch turn=2 actor=1 party=2
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Hurricane target=2
+AI decision turn=3 actor=0 move=Double-Edge target=1
+AI decision turn=3 actor=1 move=Brave Bird target=0
+AI decision turn=3 actor=3 move=Thunderbolt target=0
+BENJAMIN_AFTER board=0 turns=3 reserves=0 species=732/1329 HP=19/86 foes=0/0 Atk=6/6 SpA=6/6 Spe=6/6 item=494/523 faints=0/2
+BENJAMIN_STATE moves=Brave Bird/Thunderbolt PP=10/20/14/20 otherPP=14/8/15/5 partyHP=45/86/19/83 type=1/14 status=0/0
+BENJAMIN_FIELD tailwind=0 charge=0/0 foeSpeedStage=6/6 foeStatus=0/0
+BENJAMIN_INPUT slot=0 lv=28 HP=83 Atk=70 Def=47 SpA=45 SpD=50 Spe=104 item=523 ability=101
+BENJAMIN_INPUT slot=1 lv=28 HP=86 Atk=46 Def=47 SpA=90 SpD=47 Spe=111 item=523 ability=277
+BENJAMIN_INPUT slot=2 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+BENJAMIN_INPUT slot=3 lv=28 HP=83 Atk=73 Def=72 SpA=29 SpD=50 Spe=85 item=348 ability=17
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Fake Out target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI decision turn=2 actor=1 move=Icy Wind target=2
+AI decision turn=2 actor=3 move=Hurricane target=2
+BENJAMIN_AFTER board=1 turns=1 reserves=0 species=53/1329 HP=83/86 foes=0/86 Atk=6/6 SpA=6/6 Spe=6/6 item=523/523 faints=0/1
+BENJAMIN_STATE moves=Fake Out/Thunderbolt PP=9/15/20/10 otherPP=14/10/15/5 partyHP=83/86/77/83 type=1/14 status=0/0
+BENJAMIN_FIELD tailwind=0 charge=0/0 foeSpeedStage=6/6 foeStatus=0/0
+BENJAMIN_INPUT slot=0 lv=28 HP=83 Atk=70 Def=47 SpA=45 SpD=50 Spe=104 item=523 ability=101
+BENJAMIN_INPUT slot=1 lv=28 HP=86 Atk=46 Def=47 SpA=90 SpD=47 Spe=111 item=523 ability=277
+BENJAMIN_INPUT slot=2 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+BENJAMIN_INPUT slot=3 lv=28 HP=83 Atk=73 Def=72 SpA=29 SpD=50 Spe=85 item=348 ability=17
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Fake Out target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=1 move=Icy Wind target=2
+AI decision turn=2 actor=3 move=Hurricane target=2
+AI decision turn=3 actor=1 move=Play Rough target=2
+AI decision turn=3 actor=3 move=Hurricane target=2
+BENJAMIN_AFTER board=1 turns=2 reserves=0 species=53/1329 HP=83/86 foes=0/69 Atk=6/6 SpA=6/6 Spe=6/6 item=523/523 faints=0/1
+BENJAMIN_STATE moves=Icy Wind/Hurricane PP=9/14/20/10 otherPP=14/9/15/5 partyHP=83/86/77/83 type=1/14 status=0/0
+BENJAMIN_FIELD tailwind=0 charge=0/0 foeSpeedStage=6/5 foeStatus=0/0
+BENJAMIN_INPUT slot=0 lv=28 HP=83 Atk=70 Def=47 SpA=45 SpD=50 Spe=104 item=523 ability=101
+BENJAMIN_INPUT slot=1 lv=28 HP=86 Atk=46 Def=47 SpA=90 SpD=47 Spe=111 item=523 ability=277
+BENJAMIN_INPUT slot=2 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+BENJAMIN_INPUT slot=3 lv=28 HP=83 Atk=73 Def=72 SpA=29 SpD=50 Spe=85 item=348 ability=17
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Fake Out target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=1 move=Icy Wind target=2
+AI decision turn=2 actor=3 move=Hurricane target=2
+AI decision turn=3 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=1 move=Play Rough target=2
+AI decision turn=3 actor=3 move=Hurricane target=2
+AI decision turn=4 actor=1 move=Play Rough target=2
+AI decision turn=4 actor=3 move=Hurricane target=2
+BENJAMIN_AFTER board=1 turns=3 reserves=0 species=53/1329 HP=83/86 foes=0/23 Atk=6/6 SpA=6/6 Spe=6/6 item=523/523 faints=0/1
+BENJAMIN_STATE moves=Play Rough/Hurricane PP=9/14/20/9 otherPP=14/8/15/5 partyHP=83/86/77/83 type=1/14 status=0/0
+BENJAMIN_FIELD tailwind=0 charge=0/0 foeSpeedStage=6/5 foeStatus=0/0
+BENJAMIN_INPUT slot=0 lv=28 HP=83 Atk=70 Def=47 SpA=45 SpD=50 Spe=104 item=523 ability=101
+BENJAMIN_INPUT slot=1 lv=28 HP=86 Atk=46 Def=47 SpA=90 SpD=47 Spe=111 item=523 ability=277
+BENJAMIN_INPUT slot=2 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+BENJAMIN_INPUT slot=3 lv=28 HP=83 Atk=73 Def=72 SpA=29 SpD=50 Spe=85 item=348 ability=17
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Fake Out target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=1 move=Icy Wind target=2
+AI decision turn=2 actor=3 move=Hurricane target=2
+AI decision turn=3 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=1 move=Play Rough target=2
+AI decision turn=3 actor=3 move=Hurricane target=2
+AI decision turn=4 actor=2 move=Thunderbolt target=3
+AI decision turn=4 actor=1 move=Play Rough target=2
+AI decision turn=4 actor=3 move=Hurricane target=2
+BENJAMIN_AFTER board=1 turns=4 reserves=0 species=53/1329 HP=83/86 foes=0/0 Atk=6/6 SpA=6/6 Spe=6/6 item=523/523 faints=0/2
+BENJAMIN_STATE moves=Play Rough/Hurricane PP=9/14/20/9 otherPP=14/7/15/5 partyHP=83/86/77/83 type=1/14 status=0/0
+BENJAMIN_FIELD tailwind=0 charge=0/0 foeSpeedStage=6/6 foeStatus=0/0
+BENJAMIN_INPUT slot=0 lv=28 HP=83 Atk=70 Def=47 SpA=45 SpD=50 Spe=104 item=523 ability=101
+BENJAMIN_INPUT slot=1 lv=28 HP=86 Atk=46 Def=47 SpA=90 SpD=47 Spe=111 item=523 ability=277
+BENJAMIN_INPUT slot=2 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+BENJAMIN_INPUT slot=3 lv=28 HP=83 Atk=73 Def=72 SpA=29 SpD=50 Spe=85 item=348 ability=17
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Brave Bird target=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Acrobatics target=2
+AI decision turn=2 actor=1 move=Brave Bird target=0
+AI decision turn=2 actor=3 move=Acrobatics target=0
+BENJAMIN_AFTER board=0 turns=1 reserves=1 species=732/207 HP=18/83 foes=87/0 Atk=6/6 SpA=6/6 Spe=6/6 item=494/0 faints=0/1
+BENJAMIN_STATE moves=Brave Bird/Acrobatics PP=10/20/14/20 otherPP=14/10/20/5 partyHP=18/83/0/0 type=1/5 status=0/0
+BENJAMIN_FIELD tailwind=0 charge=0/0 foeSpeedStage=6/6 foeStatus=0/0
+BENJAMIN_INPUT slot=0 lv=28 HP=83 Atk=70 Def=47 SpA=45 SpD=50 Spe=104 item=523 ability=101
+BENJAMIN_INPUT slot=1 lv=28 HP=86 Atk=46 Def=47 SpA=90 SpD=47 Spe=111 item=523 ability=277
+BENJAMIN_INPUT slot=2 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+BENJAMIN_INPUT slot=3 lv=28 HP=83 Atk=73 Def=72 SpA=29 SpD=50 Spe=85 item=348 ability=17
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Brave Bird target=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Acrobatics target=2
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Brave Bird target=0
+AI decision turn=2 actor=3 move=Acrobatics target=0
+BENJAMIN_AFTER board=0 turns=2 reserves=1 species=732/207 HP=4/83 foes=0/0 Atk=6/6 SpA=6/6 Spe=6/6 item=494/0 faints=0/2
+BENJAMIN_STATE moves=Brave Bird/Acrobatics PP=10/20/13/20 otherPP=13/10/20/5 partyHP=4/83/0/0 type=1/5 status=0/0
+BENJAMIN_FIELD tailwind=0 charge=0/0 foeSpeedStage=6/6 foeStatus=0/0
+BENJAMIN_INPUT slot=0 lv=28 HP=83 Atk=70 Def=47 SpA=45 SpD=50 Spe=104 item=523 ability=101
+BENJAMIN_INPUT slot=1 lv=28 HP=86 Atk=46 Def=47 SpA=90 SpD=47 Spe=111 item=523 ability=277
+BENJAMIN_INPUT slot=2 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+BENJAMIN_INPUT slot=3 lv=28 HP=83 Atk=73 Def=72 SpA=29 SpD=50 Spe=85 item=348 ability=17
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Rock Blast target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=High Horsepower target=2
+AI decision turn=2 actor=1 move=Bullet Seed target=2
+AI decision turn=2 actor=3 move=High Horsepower target=2
+BENJAMIN_AFTER board=1 turns=1 reserves=1 species=732/207 HP=22/83 foes=0/74 Atk=6/6 SpA=6/6 Spe=6/6 item=494/348 faints=0/1
+BENJAMIN_STATE moves=Rock Blast/High Horsepower PP=9/20/15/20 otherPP=15/9/20/5 partyHP=22/83/0/0 type=1/5 status=0/0
+BENJAMIN_FIELD tailwind=0 charge=0/0 foeSpeedStage=6/6 foeStatus=0/0
+BENJAMIN_INPUT slot=0 lv=28 HP=83 Atk=70 Def=47 SpA=45 SpD=50 Spe=104 item=523 ability=101
+BENJAMIN_INPUT slot=1 lv=28 HP=86 Atk=46 Def=47 SpA=90 SpD=47 Spe=111 item=523 ability=277
+BENJAMIN_INPUT slot=2 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+BENJAMIN_INPUT slot=3 lv=28 HP=83 Atk=73 Def=72 SpA=29 SpD=50 Spe=85 item=348 ability=17
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Rock Blast target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=High Horsepower target=2
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=1 move=Bullet Seed target=2
+AI decision turn=2 actor=3 move=High Horsepower target=2
+BENJAMIN_AFTER board=1 turns=2 reserves=1 species=732/207 HP=22/83 foes=0/0 Atk=6/6 SpA=6/6 Spe=6/6 item=494/348 faints=0/2
+BENJAMIN_STATE moves=Bullet Seed/High Horsepower PP=9/19/15/20 otherPP=15/8/20/5 partyHP=22/83/0/0 type=1/5 status=0/0
+BENJAMIN_FIELD tailwind=0 charge=0/0 foeSpeedStage=6/6 foeStatus=0/0
+[3] EC live review Benjamin counterplay: burn and redirection: [32mPASS[0m
+BENJAMIN_INPUT slot=0 lv=28 HP=83 Atk=70 Def=47 SpA=45 SpD=50 Spe=104 item=523 ability=101
+BENJAMIN_INPUT slot=1 lv=28 HP=86 Atk=46 Def=47 SpA=90 SpD=47 Spe=111 item=523 ability=277
+BENJAMIN_INPUT slot=2 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+BENJAMIN_INPUT slot=3 lv=28 HP=83 Atk=73 Def=72 SpA=29 SpD=50 Spe=85 item=348 ability=17
+AI decision turn=1 actor=0 move=Will-O-Wisp target=1
+AI decision turn=1 actor=1 move=Fake Out target=2
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=Hurricane target=0
+AI switch turn=2 actor=1 party=3
+AI decision turn=2 actor=3 move=Thunderbolt target=0
+BENJAMIN_AFTER board=20 turns=1 reserves=0 species=53/1329 HP=78/86 foes=79/86 Atk=6/6 SpA=6/6 Spe=6/6 item=523/523 faints=0/0
+BENJAMIN_STATE moves=Fake Out/Hurricane PP=9/15/20/10 otherPP=15/9/15/5 partyHP=78/86/77/83 type=1/14 status=16/0
+BENJAMIN_FIELD tailwind=0 charge=0/0 foeSpeedStage=6/6 foeStatus=0/0
+BENJAMIN_INPUT slot=0 lv=28 HP=83 Atk=70 Def=47 SpA=45 SpD=50 Spe=104 item=523 ability=101
+BENJAMIN_INPUT slot=1 lv=28 HP=86 Atk=46 Def=47 SpA=90 SpD=47 Spe=111 item=523 ability=277
+BENJAMIN_INPUT slot=2 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+BENJAMIN_INPUT slot=3 lv=28 HP=83 Atk=73 Def=72 SpA=29 SpD=50 Spe=85 item=348 ability=17
+AI decision turn=1 actor=0 move=Will-O-Wisp target=1
+AI decision turn=1 actor=1 move=Fake Out target=2
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=Hurricane target=0
+AI switch turn=2 actor=1 party=3
+AI decision turn=2 actor=0 move=Foul Play target=1
+AI decision turn=2 actor=2 move=Follow Me target=2
+AI decision turn=2 actor=3 move=Thunderbolt target=0
+AI decision turn=3 actor=1 move=Acrobatics target=0
+AI decision turn=3 actor=3 move=Hurricane target=0
+BENJAMIN_AFTER board=20 turns=2 reserves=0 species=207/1329 HP=83/86 foes=71/104 Atk=6/6 SpA=6/6 Spe=6/6 item=348/523 faints=0/0
+BENJAMIN_STATE moves=-/Thunderbolt PP=15/10/20/5 otherPP=14/9/15/5 partyHP=78/86/77/83 type=5/14 status=0/0
+BENJAMIN_FIELD tailwind=0 charge=0/0 foeSpeedStage=6/6 foeStatus=0/0
+BENJAMIN_INPUT slot=0 lv=28 HP=83 Atk=70 Def=47 SpA=45 SpD=50 Spe=104 item=523 ability=101
+BENJAMIN_INPUT slot=1 lv=28 HP=86 Atk=46 Def=47 SpA=90 SpD=47 Spe=111 item=523 ability=277
+BENJAMIN_INPUT slot=2 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+BENJAMIN_INPUT slot=3 lv=28 HP=83 Atk=73 Def=72 SpA=29 SpD=50 Spe=85 item=348 ability=17
+AI decision turn=1 actor=0 move=Will-O-Wisp target=1
+AI decision turn=1 actor=1 move=Fake Out target=2
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=Hurricane target=0
+AI switch turn=2 actor=1 party=3
+AI decision turn=2 actor=0 move=Foul Play target=1
+AI decision turn=2 actor=2 move=Follow Me target=2
+AI decision turn=2 actor=3 move=Thunderbolt target=0
+AI decision turn=3 actor=0 move=Foul Play target=1
+AI decision turn=3 actor=1 move=Acrobatics target=0
+AI decision turn=3 actor=2 move=Follow Me target=2
+AI decision turn=3 actor=3 move=Hurricane target=0
+AI decision turn=4 actor=1 move=High Horsepower target=2
+AI decision turn=4 actor=3 move=Hurricane target=0
+BENJAMIN_AFTER board=20 turns=3 reserves=0 species=207/1329 HP=83/86 foes=63/59 Atk=6/6 SpA=6/6 Spe=6/6 item=0/523 faints=0/0
+BENJAMIN_STATE moves=Acrobatics/Hurricane PP=14/10/20/5 otherPP=14/8/15/5 partyHP=78/86/77/83 type=5/14 status=0/0
+BENJAMIN_FIELD tailwind=0 charge=0/0 foeSpeedStage=6/6 foeStatus=0/0
+BENJAMIN_INPUT slot=0 lv=28 HP=83 Atk=70 Def=47 SpA=45 SpD=50 Spe=104 item=523 ability=101
+BENJAMIN_INPUT slot=1 lv=28 HP=86 Atk=46 Def=47 SpA=90 SpD=47 Spe=111 item=523 ability=277
+BENJAMIN_INPUT slot=2 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+BENJAMIN_INPUT slot=3 lv=28 HP=83 Atk=73 Def=72 SpA=29 SpD=50 Spe=85 item=348 ability=17
+AI decision turn=1 actor=0 move=Will-O-Wisp target=1
+AI decision turn=1 actor=1 move=Fake Out target=2
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=Hurricane target=0
+AI switch turn=2 actor=1 party=3
+AI decision turn=2 actor=0 move=Foul Play target=1
+AI decision turn=2 actor=2 move=Follow Me target=2
+AI decision turn=2 actor=3 move=Thunderbolt target=0
+AI decision turn=3 actor=0 move=Foul Play target=1
+AI decision turn=3 actor=1 move=Acrobatics target=0
+AI decision turn=3 actor=2 move=Follow Me target=2
+AI decision turn=3 actor=3 move=Hurricane target=0
+AI decision turn=4 actor=0 move=Foul Play target=1
+AI decision turn=4 actor=1 move=High Horsepower target=2
+AI decision turn=4 actor=2 move=Follow Me target=2
+AI decision turn=4 actor=3 move=Hurricane target=0
+AI decision turn=5 actor=1 move=High Horsepower target=2
+AI decision turn=5 actor=3 move=Hurricane target=2
+BENJAMIN_AFTER board=20 turns=4 reserves=0 species=207/1329 HP=83/86 foes=0/23 Atk=6/6 SpA=6/6 Spe=6/6 item=0/523 faints=0/1
+BENJAMIN_STATE moves=High Horsepower/Hurricane PP=14/9/20/5 otherPP=14/7/15/5 partyHP=78/86/77/83 type=5/14 status=0/0
+BENJAMIN_FIELD tailwind=0 charge=0/0 foeSpeedStage=6/6 foeStatus=0/0
+BENJAMIN_INPUT slot=0 lv=28 HP=83 Atk=70 Def=47 SpA=45 SpD=50 Spe=104 item=523 ability=101
+BENJAMIN_INPUT slot=1 lv=28 HP=86 Atk=46 Def=47 SpA=90 SpD=47 Spe=111 item=523 ability=277
+BENJAMIN_INPUT slot=2 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+BENJAMIN_INPUT slot=3 lv=28 HP=83 Atk=73 Def=72 SpA=29 SpD=50 Spe=85 item=348 ability=17
+AI decision turn=1 actor=0 move=Will-O-Wisp target=1
+AI decision turn=1 actor=1 move=Fake Out target=2
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=Hurricane target=0
+AI switch turn=2 actor=1 party=3
+AI decision turn=2 actor=0 move=Foul Play target=1
+AI decision turn=2 actor=2 move=Follow Me target=2
+AI decision turn=2 actor=3 move=Thunderbolt target=0
+AI decision turn=3 actor=0 move=Foul Play target=1
+AI decision turn=3 actor=1 move=Acrobatics target=0
+AI decision turn=3 actor=2 move=Follow Me target=2
+AI decision turn=3 actor=3 move=Hurricane target=0
+AI decision turn=4 actor=0 move=Foul Play target=1
+AI decision turn=4 actor=1 move=High Horsepower target=2
+AI decision turn=4 actor=2 move=Follow Me target=2
+AI decision turn=4 actor=3 move=Hurricane target=0
+AI decision turn=5 actor=2 move=Follow Me target=2
+AI decision turn=5 actor=1 move=High Horsepower target=2
+AI decision turn=5 actor=3 move=Hurricane target=2
+BENJAMIN_AFTER board=20 turns=5 reserves=0 species=207/1329 HP=83/86 foes=0/0 Atk=6/6 SpA=6/6 Spe=6/6 item=0/523 faints=0/2
+BENJAMIN_STATE moves=High Horsepower/Hurricane PP=14/9/20/5 otherPP=14/6/15/5 partyHP=78/86/77/83 type=5/14 status=0/0
+BENJAMIN_FIELD tailwind=0 charge=0/0 foeSpeedStage=6/6 foeStatus=0/0
+BENJAMIN_INPUT slot=0 lv=28 HP=83 Atk=70 Def=47 SpA=45 SpD=50 Spe=104 item=523 ability=101
+BENJAMIN_INPUT slot=1 lv=28 HP=86 Atk=46 Def=47 SpA=90 SpD=47 Spe=111 item=523 ability=277
+BENJAMIN_INPUT slot=2 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+BENJAMIN_INPUT slot=3 lv=28 HP=83 Atk=73 Def=72 SpA=29 SpD=50 Spe=85 item=348 ability=17
+AI decision turn=1 actor=0 move=Will-O-Wisp target=1
+AI decision turn=1 actor=1 move=Brave Bird target=0
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=High Horsepower target=2
+AI decision turn=2 actor=1 move=Bullet Seed target=2
+AI decision turn=2 actor=3 move=High Horsepower target=2
+BENJAMIN_AFTER board=20 turns=1 reserves=1 species=732/207 HP=71/83 foes=110/65 Atk=6/6 SpA=6/6 Spe=6/6 item=494/348 faints=0/0
+BENJAMIN_STATE moves=Brave Bird/High Horsepower PP=10/20/14/20 otherPP=15/9/20/5 partyHP=71/83/0/0 type=1/5 status=16/0
+BENJAMIN_FIELD tailwind=0 charge=0/0 foeSpeedStage=6/6 foeStatus=0/0
+BENJAMIN_INPUT slot=0 lv=28 HP=83 Atk=70 Def=47 SpA=45 SpD=50 Spe=104 item=523 ability=101
+BENJAMIN_INPUT slot=1 lv=28 HP=86 Atk=46 Def=47 SpA=90 SpD=47 Spe=111 item=523 ability=277
+BENJAMIN_INPUT slot=2 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+BENJAMIN_INPUT slot=3 lv=28 HP=83 Atk=73 Def=72 SpA=29 SpD=50 Spe=85 item=348 ability=17
+AI decision turn=1 actor=0 move=Will-O-Wisp target=1
+AI decision turn=1 actor=1 move=Brave Bird target=0
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=High Horsepower target=2
+AI decision turn=2 actor=0 move=Foul Play target=1
+AI decision turn=2 actor=1 move=Bullet Seed target=2
+AI decision turn=2 actor=2 move=Follow Me target=2
+AI decision turn=2 actor=3 move=High Horsepower target=2
+AI decision turn=3 actor=1 move=U-turn target=0
+AI decision turn=3 actor=3 move=Acrobatics target=0
+BENJAMIN_AFTER board=20 turns=2 reserves=1 species=732/207 HP=22/83 foes=110/0 Atk=6/6 SpA=6/6 Spe=6/6 item=494/348 faints=0/1
+BENJAMIN_STATE moves=Bullet Seed/High Horsepower PP=10/19/14/20 otherPP=15/8/20/5 partyHP=22/83/0/0 type=1/5 status=16/0
+BENJAMIN_FIELD tailwind=0 charge=0/0 foeSpeedStage=6/6 foeStatus=0/0
+BENJAMIN_INPUT slot=0 lv=28 HP=83 Atk=70 Def=47 SpA=45 SpD=50 Spe=104 item=523 ability=101
+BENJAMIN_INPUT slot=1 lv=28 HP=86 Atk=46 Def=47 SpA=90 SpD=47 Spe=111 item=523 ability=277
+BENJAMIN_INPUT slot=2 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+BENJAMIN_INPUT slot=3 lv=28 HP=83 Atk=73 Def=72 SpA=29 SpD=50 Spe=85 item=348 ability=17
+AI decision turn=1 actor=0 move=Will-O-Wisp target=1
+AI decision turn=1 actor=1 move=Brave Bird target=0
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=High Horsepower target=2
+AI decision turn=2 actor=0 move=Foul Play target=1
+AI decision turn=2 actor=1 move=Bullet Seed target=2
+AI decision turn=2 actor=2 move=Follow Me target=2
+AI decision turn=2 actor=3 move=High Horsepower target=2
+AI decision turn=3 actor=0 move=Foul Play target=1
+AI decision turn=3 actor=1 move=U-turn target=0
+AI decision turn=3 actor=3 move=Acrobatics target=0
+AI decision turn=4 actor=3 move=Acrobatics target=0
+BENJAMIN_AFTER board=20 turns=3 reserves=1 species=732/207 HP=0/83 foes=63/0 Atk=6/6 SpA=6/6 Spe=6/6 item=494/0 faints=1/1
+BENJAMIN_STATE moves=-/Acrobatics PP=10/19/14/19 otherPP=14/8/20/5 partyHP=0/83/0/0 type=1/5 status=0/0
+BENJAMIN_FIELD tailwind=0 charge=0/0 foeSpeedStage=6/6 foeStatus=0/0
+BENJAMIN_INPUT slot=0 lv=28 HP=83 Atk=70 Def=47 SpA=45 SpD=50 Spe=104 item=523 ability=101
+BENJAMIN_INPUT slot=1 lv=28 HP=86 Atk=46 Def=47 SpA=90 SpD=47 Spe=111 item=523 ability=277
+BENJAMIN_INPUT slot=2 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+BENJAMIN_INPUT slot=3 lv=28 HP=83 Atk=73 Def=72 SpA=29 SpD=50 Spe=85 item=348 ability=17
+AI decision turn=1 actor=0 move=Will-O-Wisp target=1
+AI decision turn=1 actor=1 move=Brave Bird target=0
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=High Horsepower target=2
+AI decision turn=2 actor=0 move=Foul Play target=1
+AI decision turn=2 actor=1 move=Bullet Seed target=2
+AI decision turn=2 actor=2 move=Follow Me target=2
+AI decision turn=2 actor=3 move=High Horsepower target=2
+AI decision turn=3 actor=0 move=Foul Play target=1
+AI decision turn=3 actor=1 move=U-turn target=0
+AI decision turn=3 actor=3 move=Acrobatics target=0
+AI decision turn=4 actor=3 move=Acrobatics target=0
+AI decision turn=4 actor=0 move=Foul Play target=1
+AI decision turn=5 actor=3 move=Acrobatics target=0
+BENJAMIN_AFTER board=20 turns=4 reserves=1 species=732/207 HP=0/49 foes=59/0 Atk=6/6 SpA=6/6 Spe=6/6 item=494/0 faints=1/1
+BENJAMIN_STATE moves=-/Acrobatics PP=10/19/14/19 otherPP=13/8/20/5 partyHP=0/49/0/0 type=1/5 status=0/0
+BENJAMIN_FIELD tailwind=0 charge=0/0 foeSpeedStage=6/6 foeStatus=0/0
+BENJAMIN_INPUT slot=0 lv=28 HP=83 Atk=70 Def=47 SpA=45 SpD=50 Spe=104 item=523 ability=101
+BENJAMIN_INPUT slot=1 lv=28 HP=86 Atk=46 Def=47 SpA=90 SpD=47 Spe=111 item=523 ability=277
+BENJAMIN_INPUT slot=2 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+BENJAMIN_INPUT slot=3 lv=28 HP=83 Atk=73 Def=72 SpA=29 SpD=50 Spe=85 item=348 ability=17
+AI decision turn=1 actor=0 move=Will-O-Wisp target=1
+AI decision turn=1 actor=1 move=Brave Bird target=0
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=High Horsepower target=2
+AI decision turn=2 actor=0 move=Foul Play target=1
+AI decision turn=2 actor=1 move=Bullet Seed target=2
+AI decision turn=2 actor=2 move=Follow Me target=2
+AI decision turn=2 actor=3 move=High Horsepower target=2
+AI decision turn=3 actor=0 move=Foul Play target=1
+AI decision turn=3 actor=1 move=U-turn target=0
+AI decision turn=3 actor=3 move=Acrobatics target=0
+AI decision turn=4 actor=3 move=Acrobatics target=0
+AI decision turn=4 actor=0 move=Foul Play target=1
+AI decision turn=5 actor=3 move=Acrobatics target=0
+AI decision turn=5 actor=0 move=Foul Play target=1
+AI decision turn=6 actor=3 move=Acrobatics target=0
+BENJAMIN_AFTER board=20 turns=5 reserves=1 species=732/207 HP=0/15 foes=28/0 Atk=6/6 SpA=6/6 Spe=6/6 item=494/0 faints=1/1
+BENJAMIN_STATE moves=-/Acrobatics PP=10/19/14/19 otherPP=12/8/20/5 partyHP=0/15/0/0 type=1/5 status=0/0
+BENJAMIN_FIELD tailwind=0 charge=0/0 foeSpeedStage=6/6 foeStatus=0/0
+BENJAMIN_INPUT slot=0 lv=28 HP=83 Atk=70 Def=47 SpA=45 SpD=50 Spe=104 item=523 ability=101
+BENJAMIN_INPUT slot=1 lv=28 HP=86 Atk=46 Def=47 SpA=90 SpD=47 Spe=111 item=523 ability=277
+BENJAMIN_INPUT slot=2 lv=28 HP=77 Atk=78 Def=41 SpA=32 SpD=41 Spe=80 item=494 ability=92
+BENJAMIN_INPUT slot=3 lv=28 HP=83 Atk=73 Def=72 SpA=29 SpD=50 Spe=85 item=348 ability=17
+AI decision turn=1 actor=0 move=Will-O-Wisp target=1
+AI decision turn=1 actor=1 move=Brave Bird target=0
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=High Horsepower target=2
+AI decision turn=2 actor=0 move=Foul Play target=1
+AI decision turn=2 actor=1 move=Bullet Seed target=2
+AI decision turn=2 actor=2 move=Follow Me target=2
+AI decision turn=2 actor=3 move=High Horsepower target=2
+AI decision turn=3 actor=0 move=Foul Play target=1
+AI decision turn=3 actor=1 move=U-turn target=0
+AI decision turn=3 actor=3 move=Acrobatics target=0
+AI decision turn=4 actor=3 move=Acrobatics target=0
+AI decision turn=4 actor=0 move=Foul Play target=1
+AI decision turn=5 actor=3 move=Acrobatics target=0
+AI decision turn=5 actor=0 move=Foul Play target=1
+AI decision turn=6 actor=3 move=Acrobatics target=0
+AI decision turn=6 actor=0 move=Foul Play target=1
+BENJAMIN_AFTER board=20 turns=6 reserves=1 species=732/207 HP=0/15 foes=0/0 Atk=6/6 SpA=6/6 Spe=6/6 item=494/0 faints=1/2
+BENJAMIN_STATE moves=-/Acrobatics PP=10/19/14/19 otherPP=11/8/20/5 partyHP=0/15/0/0 type=1/5 status=0/0
+BENJAMIN_FIELD tailwind=0 charge=0/0 foeSpeedStage=6/6 foeStatus=0/0
+
+- Tests [32mPASSED[0m:          6
+- Tests [34mTOTAL[0m:           6
+

@@ -28,17 +28,16 @@
       "flag": "FLAG_EC_ITEM_RUINS_STEELIXITE"
     },
     {
-      "local_id": "LOCALID_ROUTE111_RUINS_EXTERIOR_LEGENDARY_SIGN",
-      "graphics_id": "OBJ_EVENT_GFX_DEOXYS_TRIANGLE",
-      "x": 8,
-      "y": 11,
+      "graphics_id": "OBJ_EVENT_GFX_HIKER",
+      "x": 15,
+      "y": 12,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Common_EventScript_LegendaryLandmark",
+      "script": "Route111_RuinsExterior_EventScript_Archaeologist",
       "flag": "0"
     }
   ],

@@ -1,0 +1,9 @@
+{
+  "schema_version": 2,
+  "inputs_sha256": "47c79924005497df14304f30a33a84d1cfd601cf9cdb2946a66dda1d4c34e35e",
+  "input_count": 28979,
+  "artifacts": {
+    "pokeemerald-champions-playtest-20260909-1728-release.gba": "36e8d39bb969e34a31bf4f93b7e2817e31bf4b4ebc8877c35fb2a691a6256679",
+    "pokeemerald-champions-playtest-20260909-1728-release.elf": "97fe122952b2e16bfb268147b0db8c06c668a74ed0ff6ae9908a928c7cfb839b"
+  }
+}

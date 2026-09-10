@@ -123,10 +123,11 @@ Route115_EventScript_Marlene::
 	end
 
 Route115_Text_NeverKnowWhenCavePokemonWillAppear:
-	.string "The shifted tide exposed SEASPRAY CAVE\n"
-	.string "along the lower shore.\p"
-	.string "Its first chamber is wet stone. The floor\n"
-	.string "below is somehow frozen.$"
+	.string "The shifted tide exposed SEASPRAY\n"
+	.string "CAVE along the lower shore.\p"
+	.string "Its first chamber is wet stone.\n"
+	.string "The floor below is somehow\l"
+	.string "frozen.$"
 
 Route115_Text_RouteSignRustboro:
 	.string "ROUTE 115\n"

@@ -277,26 +277,35 @@ RustboroCity_Gym_Movement_GuideReturn4:
 	step_end
 
 RustboroCity_Gym_Text_GuideIntroduction:
-	.string "Yo! Welcome to RUSTBORO GYM.\p"
-	.string "Every trainer here brings a\n"
-	.string "complete doubles plan. ROXANNE\n"
-	.string "brings the full force of her Rock\n"
-	.string "team.\p"
-	.string "Prepare your partners, study the\n"
-	.string "board, and make your own opening.\p"
-	.string "Take these FRESH WATERS. Come see\n"
-	.string "me after you earn the BADGE!$"
+	.string "Yo! Welcome to RUSTBORO GYM.\n"
+	.string "ROXANNE brings a whole Rock team.\l"
+	.string "Have a plan for both opponents!\p"
+	.string "Battle Sets at the CENTER prepare\n"
+	.string "moves and EVs. Heal up and use\l"
+	.string "the LEVELER before you challenge.\p"
+	.string "In battle, L shows foe types.\n"
+	.string "On a move, R opens its details\l"
+	.string "during TRAINER battles.\p"
+	.string "Move symbols show effectiveness:\n"
+	.string "a dotted circle means double,\l"
+	.string "a star means four times damage.\p"
+	.string "The school notebook explains\n"
+	.string "every symbol and the shortcuts.\l"
+	.string "Check your target in doubles!\p"
+	.string "Take these FRESH WATERS for\n"
+	.string "healing outside TRAINER battles.\l"
+	.string "Come see me after your BADGE!$"
 
 RustboroCity_Gym_Text_GymGuideAdvice:
 	.string "ROXANNE uses Rock Pokémon with\n"
 	.string "different jobs.\p"
 	.string "CARBINK can reverse move order\n"
-	.string "with TRICK ROOM. NOSEPASS can\n"
-	.string "guard its partner from spread\n"
+	.string "with TRICK ROOM. NOSEPASS can\l"
+	.string "guard its partner from spread\l"
 	.string "attacks.\p"
 	.string "Water and Grass are useful, but\n"
-	.string "target choice and timing still\n"
-	.string "matter. Build the answer that\n"
+	.string "target choice and timing still\l"
+	.string "matter. Build the answer that\l"
 	.string "suits your team!$"
 
 RustboroCity_Gym_Text_GymGuidePostVictory:
@@ -317,12 +326,12 @@ RustboroCity_Gym_Text_JoshIntro:
 	.string "We make that extra action count!$"
 
 RustboroCity_Gym_Text_JoshDefeat:
-	.string "You broke the wall and the chip!$"
+	.string "Our wall came down!$"
 
 RustboroCity_Gym_Text_JoshPostBattle:
-	.string "STURDY can preserve NOSEPASS at\n"
-	.string "full health. Chip damage or an\n"
-	.string "Ability that bypasses it changes\n"
+	.string "STURDY can preserve BONSLY at\n"
+	.string "full health. Chip damage or an\l"
+	.string "Ability that bypasses it changes\l"
 	.string "the plan.$"
 
 RustboroCity_Gym_Text_TommyIntro:
@@ -353,10 +362,10 @@ RustboroCity_Gym_Text_MarcPostBattle:
 RustboroCity_Gym_Text_RoxanneIntro:
 	.string "I am ROXANNE, RUSTBORO's GYM\n"
 	.string "LEADER.\p"
-	.string "Each challenger gives me something\n"
-	.string "new to study.\p"
+	.string "Each challenger gives me\n"
+	.string "something new to study.\p"
 	.string "My Pokémon can endure a blow,\n"
-	.string "guard a partner, or reverse the\n"
+	.string "guard a partner, or reverse the\l"
 	.string "order of battle.\p"
 	.string "Show me how your team answers\n"
 	.string "mine.$"
@@ -372,12 +381,12 @@ RustboroCity_Gym_Text_ReceivedStoneBadge:
 	.string "from ROXANNE.$"
 
 RustboroCity_Gym_Text_StoneBadgeInfoTakeThis:
-	.string "The STONE BADGE lets your LEVELER train\n"
-	.string "a party up to Lv. 20.\p"
-	.string "It also enables POKéMON to use CUT\n"
-	.string "outside of battle.\p"
-	.string "It also marks your first true step\n"
-	.string "toward the POKéMON LEAGUE.\p"
+	.string "The STONE BADGE lets your LEVELER\n"
+	.string "train a party up to Lv. 20.\p"
+	.string "It also enables POKéMON to use\n"
+	.string "CUT outside of battle.\p"
+	.string "It also marks your first true\n"
+	.string "step toward the POKéMON LEAGUE.\p"
 	.string "Please take this with you, too.$"
 RustboroCity_Gym_Text_ExplainRoxanneRewards:
 	.string "Aerodactylite lets Aerodactyl Mega\n"

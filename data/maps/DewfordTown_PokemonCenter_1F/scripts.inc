@@ -25,13 +25,21 @@ DewfordTown_PokemonCenter_1F_EventScript_Man::
 	end
 
 DewfordTown_PokemonCenter_1F_Text_StoneCavern:
-	.string "There's a stone cavern at the edge\n"
-	.string "of town.\p"
-	.string "I've heard you can find rare stones\n"
-	.string "there.$"
+	.string "Off to explore the cavern?\n"
+	.string "There are rare stones in there.\p"
+	.string "If you've earned the STONE BADGE,\n"
+	.string "your level cap is now 20. Use\l"
+	.string "the LEVELER before heading out!\p"
+	.string "A new evolution may suit a new\n"
+	.string "Battle Set. The TUTOR can help\l"
+	.string "you prepare for BRAWLY, too.$"
 
 DewfordTown_PokemonCenter_1F_Text_FaintedMonCanUseHM:
-	.string "Even if a POKéMON faints and can't\n"
-	.string "battle, it can still use a move learned\l"
-	.string "from a HIDDEN MACHINE (HM).$"
+	.string "With an HM and its BADGE, a\n"
+	.string "compatible partner can use skills\l"
+	.string "such as CUT without a move slot.\p"
+	.string "Even a fainted partner can help.\n"
+	.string "FLASH is different: get its HM\l"
+	.string "and BADGE, and caves light up\l"
+	.string "as you enter. No partner needed!$"
 

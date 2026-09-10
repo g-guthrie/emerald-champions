@@ -1,0 +1,20 @@
+elite-state 0 RESULT frames=30 stop_matched=0 pc=0000001c rtc=946684800 width=240 height=160 video_hash=9f54ba7932286a9f nonzero_pixels=26671 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+ 
+sidney 0 RESULT frames=30 stop_matched=0 pc=08199d4a rtc=946684800 width=240 height=160 video_hash=9f54ba7932286a9f nonzero_pixels=26671 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+ 
+phoebe 0 RESULT frames=30 stop_matched=0 pc=08199d4a rtc=946684800 width=240 height=160 video_hash=9f54ba7932286a9f nonzero_pixels=26671 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+ 
+glacia 0 RESULT frames=30 stop_matched=0 pc=08199d4a rtc=946684800 width=240 height=160 video_hash=9f54ba7932286a9f nonzero_pixels=26671 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+ 
+drake 0 RESULT frames=30 stop_matched=0 pc=08199d4a rtc=946684800 width=240 height=160 video_hash=9f54ba7932286a9f nonzero_pixels=26671 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+ 
+reboot 0 RESULT frames=2500 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=fcedff64999ebb83 nonzero_pixels=38400 save_bytes=0
+READ width=1 address=03006bf4 value=00000000
+READ width=1 address=03006bf6 value=00000000
+READ width=4 address=03006be8 value=00000000
+ 

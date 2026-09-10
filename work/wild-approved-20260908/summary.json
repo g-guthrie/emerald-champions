@@ -1,0 +1,42 @@
+{
+  "maps": 108,
+  "tables": 135,
+  "slots": 469,
+  "previous_direct_species": 641,
+  "current_direct_species": 652,
+  "direct_removed": [
+    "SPECIES_GOLBAT",
+    "SPECIES_GURDURR",
+    "SPECIES_KAKUNA",
+    "SPECIES_MACHOKE",
+    "SPECIES_METAPOD",
+    "SPECIES_MIGHTYENA",
+    "SPECIES_NUZLEAF",
+    "SPECIES_PARAS",
+    "SPECIES_PUPITAR",
+    "SPECIES_SKIPLOOM"
+  ],
+  "direct_added": [
+    "SPECIES_AMPHAROS",
+    "SPECIES_CERULEDGE",
+    "SPECIES_CLOYSTER",
+    "SPECIES_EELEKTRIK",
+    "SPECIES_GASTRODON",
+    "SPECIES_GOURGEIST",
+    "SPECIES_KLINKLANG",
+    "SPECIES_MUDSDALE",
+    "SPECIES_MUK",
+    "SPECIES_NINETALES",
+    "SPECIES_OMASTAR",
+    "SPECIES_PILOSWINE",
+    "SPECIES_POLITOED",
+    "SPECIES_PORYGON_Z",
+    "SPECIES_REUNICLUS",
+    "SPECIES_ROSELIA",
+    "SPECIES_SANDSLASH_ALOLA",
+    "SPECIES_SEALEO",
+    "SPECIES_SWELLOW",
+    "SPECIES_TINKATON",
+    "SPECIES_WEAVILE"
+  ]
+}

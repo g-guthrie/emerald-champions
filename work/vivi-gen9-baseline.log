@@ -1,0 +1,206 @@
+tools/scaninc/scaninc -M build/emerald-test/test/battle/ai/emerald_champions_plans.d -g build/assets -I include -I tools/agbcc/include test/battle/ai/emerald_champions_plans.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/battle/ai/emerald_champions_plans.o test/battle/ai/emerald_champions_plans.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 4
+[0] EC live review Vivi timing: healthy six-player bench: [32mPASS[0m
+REVIEW_INPUT trainer=606 slot=0 species=753 lv=28 HP=69 Atk=39 Def=33 SpA=64 SpD=33 Spe=50 item=558 ability=126
+REVIEW_INPUT trainer=606 slot=1 species=195 lv=28 HP=117 Atk=92 Def=67 SpA=45 SpD=50 Spe=33 item=553 ability=109
+REVIEW_INPUT trainer=606 slot=2 species=640 lv=30 HP=104 Atk=87 Def=57 SpA=61 SpD=91 Spe=107 item=479 ability=154
+REVIEW_INPUT trainer=606 slot=3 species=329 lv=33 HP=86 Atk=71 Def=48 SpA=58 SpD=43 Spe=90 item=523 ability=26
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Leaf Storm target=0
+AI decision turn=2 actor=3 move=Ice Punch target=2
+REVIEW_AFTER board=99 turns=1 reserves=0 species=753/195 HP=69/117 foes=76/88 faints=0/0 initialFrames=47
+REVIEW_STATE actor=1 move=Protect PP=5/10/5/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=126 item=558
+REVIEW_STATE actor=3 move=Protect PP=15/15/10/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=109 item=553
+REVIEW_TIMING setup=7 bothActors=42 complete=49
+[1] EC live review Vivi: physical special and flinch pressure: [32mPASS[0m
+REVIEW_INPUT trainer=606 slot=0 species=753 lv=28 HP=69 Atk=39 Def=33 SpA=64 SpD=33 Spe=50 item=558 ability=126
+REVIEW_INPUT trainer=606 slot=1 species=195 lv=28 HP=117 Atk=92 Def=67 SpA=45 SpD=50 Spe=33 item=553 ability=109
+REVIEW_INPUT trainer=606 slot=2 species=640 lv=30 HP=104 Atk=87 Def=57 SpA=61 SpD=91 Spe=107 item=479 ability=154
+REVIEW_INPUT trainer=606 slot=3 species=329 lv=33 HP=86 Atk=71 Def=48 SpA=58 SpD=43 Spe=90 item=523 ability=26
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=High Horsepower target=0
+AI decision turn=2 actor=1 move=Leaf Storm target=0
+AI decision turn=2 actor=3 move=Waterfall target=0
+REVIEW_AFTER board=0 turns=1 reserves=0 species=753/195 HP=69/75 foes=56/119 faints=0/0 initialFrames=43
+REVIEW_STATE actor=1 move=Protect PP=5/10/5/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=126 item=558
+REVIEW_STATE actor=3 move=High Horsepower PP=15/15/9/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=109 item=553
+REVIEW_INPUT trainer=606 slot=0 species=753 lv=28 HP=69 Atk=39 Def=33 SpA=64 SpD=33 Spe=50 item=558 ability=126
+REVIEW_INPUT trainer=606 slot=1 species=195 lv=28 HP=117 Atk=92 Def=67 SpA=45 SpD=50 Spe=33 item=553 ability=109
+REVIEW_INPUT trainer=606 slot=2 species=640 lv=30 HP=104 Atk=87 Def=57 SpA=61 SpD=91 Spe=107 item=479 ability=154
+REVIEW_INPUT trainer=606 slot=3 species=329 lv=33 HP=86 Atk=71 Def=48 SpA=58 SpD=43 Spe=90 item=523 ability=26
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=High Horsepower target=0
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Leaf Storm target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Waterfall target=0
+AI switch turn=2 actor=1 party=2
+AI decision turn=3 actor=1 move=Close Combat target=2
+AI decision turn=3 actor=3 move=Protect target=3
+REVIEW_AFTER board=0 turns=2 reserves=0 species=640/195 HP=104/33 foes=0/119 faints=1/1 initialFrames=43
+REVIEW_STATE actor=1 move=- PP=15/5/5/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=154 item=479
+REVIEW_STATE actor=3 move=Waterfall PP=14/15/9/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=109 item=553
+REVIEW_INPUT trainer=606 slot=0 species=753 lv=28 HP=69 Atk=39 Def=33 SpA=64 SpD=33 Spe=50 item=558 ability=126
+REVIEW_INPUT trainer=606 slot=1 species=195 lv=28 HP=117 Atk=92 Def=67 SpA=45 SpD=50 Spe=33 item=553 ability=109
+REVIEW_INPUT trainer=606 slot=2 species=640 lv=30 HP=104 Atk=87 Def=57 SpA=61 SpD=91 Spe=107 item=479 ability=154
+REVIEW_INPUT trainer=606 slot=3 species=329 lv=33 HP=86 Atk=71 Def=48 SpA=58 SpD=43 Spe=90 item=523 ability=26
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Ice Punch target=0
+AI decision turn=2 actor=1 move=Leaf Storm target=2
+AI decision turn=2 actor=3 move=Waterfall target=0
+REVIEW_AFTER board=1 turns=1 reserves=0 species=753/195 HP=69/117 foes=32/104 faints=0/0 initialFrames=36
+REVIEW_STATE actor=1 move=Protect PP=5/10/5/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=126 item=558
+REVIEW_STATE actor=3 move=Ice Punch PP=15/14/10/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=109 item=553
+REVIEW_INPUT trainer=606 slot=0 species=753 lv=28 HP=69 Atk=39 Def=33 SpA=64 SpD=33 Spe=50 item=558 ability=126
+REVIEW_INPUT trainer=606 slot=1 species=195 lv=28 HP=117 Atk=92 Def=67 SpA=45 SpD=50 Spe=33 item=553 ability=109
+REVIEW_INPUT trainer=606 slot=2 species=640 lv=30 HP=104 Atk=87 Def=57 SpA=61 SpD=91 Spe=107 item=479 ability=154
+REVIEW_INPUT trainer=606 slot=3 species=329 lv=33 HP=86 Atk=71 Def=48 SpA=58 SpD=43 Spe=90 item=523 ability=26
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Ice Punch target=0
+AI decision turn=2 actor=0 move=Psychic target=1
+AI decision turn=2 actor=1 move=Leaf Storm target=2
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Waterfall target=0
+AI switch turn=2 actor=1 party=3
+AI decision turn=3 actor=1 move=Earth Power target=2
+AI decision turn=3 actor=3 move=High Horsepower target=2
+REVIEW_AFTER board=1 turns=2 reserves=0 species=329/195 HP=86/117 foes=0/104 faints=1/1 initialFrames=36
+REVIEW_STATE actor=1 move=- PP=15/10/10/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=523
+REVIEW_STATE actor=3 move=Waterfall PP=14/14/10/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=109 item=553
+REVIEW_INPUT trainer=606 slot=0 species=753 lv=28 HP=69 Atk=39 Def=33 SpA=64 SpD=33 Spe=50 item=558 ability=126
+REVIEW_INPUT trainer=606 slot=1 species=195 lv=28 HP=117 Atk=92 Def=67 SpA=45 SpD=50 Spe=33 item=553 ability=109
+REVIEW_INPUT trainer=606 slot=2 species=640 lv=30 HP=104 Atk=87 Def=57 SpA=61 SpD=91 Spe=107 item=479 ability=154
+REVIEW_INPUT trainer=606 slot=3 species=329 lv=33 HP=86 Atk=71 Def=48 SpA=58 SpD=43 Spe=90 item=523 ability=26
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Leaf Storm target=0
+AI decision turn=2 actor=3 move=High Horsepower target=0
+REVIEW_AFTER board=2 turns=1 reserves=0 species=753/195 HP=69/117 foes=76/104 faints=0/0 initialFrames=44
+REVIEW_STATE actor=1 move=Protect PP=5/10/5/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=126 item=558
+REVIEW_STATE actor=3 move=Protect PP=15/15/10/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=109 item=553
+REVIEW_INPUT trainer=606 slot=0 species=753 lv=28 HP=69 Atk=39 Def=33 SpA=64 SpD=33 Spe=50 item=558 ability=126
+REVIEW_INPUT trainer=606 slot=1 species=195 lv=28 HP=117 Atk=92 Def=67 SpA=45 SpD=50 Spe=33 item=553 ability=109
+REVIEW_INPUT trainer=606 slot=2 species=640 lv=30 HP=104 Atk=87 Def=57 SpA=61 SpD=91 Spe=107 item=479 ability=154
+REVIEW_INPUT trainer=606 slot=3 species=329 lv=33 HP=86 Atk=71 Def=48 SpA=58 SpD=43 Spe=90 item=523 ability=26
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Leaf Storm target=0
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=High Horsepower target=0
+AI switch turn=2 actor=1 party=2
+AI decision turn=3 actor=1 move=Leaf Blade target=0
+AI decision turn=3 actor=3 move=Protect target=3
+REVIEW_AFTER board=2 turns=2 reserves=0 species=640/195 HP=104/74 foes=9/104 faints=1/0 initialFrames=44
+REVIEW_STATE actor=1 move=- PP=15/5/5/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=154 item=479
+REVIEW_STATE actor=3 move=High Horsepower PP=15/15/9/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=109 item=553
+REVIEW_INPUT trainer=606 slot=0 species=753 lv=28 HP=69 Atk=39 Def=33 SpA=64 SpD=33 Spe=50 item=558 ability=126
+REVIEW_INPUT trainer=606 slot=1 species=195 lv=28 HP=117 Atk=92 Def=67 SpA=45 SpD=50 Spe=33 item=553 ability=109
+REVIEW_INPUT trainer=606 slot=2 species=640 lv=30 HP=104 Atk=87 Def=57 SpA=61 SpD=91 Spe=107 item=479 ability=154
+REVIEW_INPUT trainer=606 slot=3 species=329 lv=33 HP=86 Atk=71 Def=48 SpA=58 SpD=43 Spe=90 item=523 ability=26
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Close Combat target=0
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Earth Power target=2
+AI decision turn=2 actor=1 move=Close Combat target=2
+AI decision turn=2 actor=3 move=Earth Power target=2
+REVIEW_AFTER board=0 turns=1 reserves=1 species=640/329 HP=94/49 foes=0/117 faints=0/1 initialFrames=22
+REVIEW_STATE actor=1 move=Close Combat PP=15/4/5/20 Atk=6 Def=5 SpA=6 SpD=5 Spe=6 status=0 ability=154 item=479
+REVIEW_STATE actor=3 move=Earth Power PP=15/9/10/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=0
+REVIEW_INPUT trainer=606 slot=0 species=753 lv=28 HP=69 Atk=39 Def=33 SpA=64 SpD=33 Spe=50 item=558 ability=126
+REVIEW_INPUT trainer=606 slot=1 species=195 lv=28 HP=117 Atk=92 Def=67 SpA=45 SpD=50 Spe=33 item=553 ability=109
+REVIEW_INPUT trainer=606 slot=2 species=640 lv=30 HP=104 Atk=87 Def=57 SpA=61 SpD=91 Spe=107 item=479 ability=154
+REVIEW_INPUT trainer=606 slot=3 species=329 lv=33 HP=86 Atk=71 Def=48 SpA=58 SpD=43 Spe=90 item=523 ability=26
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Close Combat target=0
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Earth Power target=2
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=1 move=Close Combat target=2
+AI decision turn=2 actor=3 move=Earth Power target=2
+AI decision turn=3 actor=1 move=Close Combat target=2
+REVIEW_AFTER board=0 turns=2 reserves=1 species=640/329 HP=84/0 foes=0/41 faints=1/1 initialFrames=22
+REVIEW_STATE actor=1 move=Close Combat PP=15/3/5/20 Atk=6 Def=4 SpA=6 SpD=4 Spe=6 status=0 ability=154 item=479
+REVIEW_STATE actor=3 move=- PP=15/8/10/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=0 item=0
+REVIEW_INPUT trainer=606 slot=0 species=753 lv=28 HP=69 Atk=39 Def=33 SpA=64 SpD=33 Spe=50 item=558 ability=126
+REVIEW_INPUT trainer=606 slot=1 species=195 lv=28 HP=117 Atk=92 Def=67 SpA=45 SpD=50 Spe=33 item=553 ability=109
+REVIEW_INPUT trainer=606 slot=2 species=640 lv=30 HP=104 Atk=87 Def=57 SpA=61 SpD=91 Spe=107 item=479 ability=154
+REVIEW_INPUT trainer=606 slot=3 species=329 lv=33 HP=86 Atk=71 Def=48 SpA=58 SpD=43 Spe=90 item=523 ability=26
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Stone Edge target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Earth Power target=2
+AI decision turn=2 actor=1 move=Stone Edge target=2
+AI decision turn=2 actor=3 move=Earth Power target=2
+REVIEW_AFTER board=1 turns=1 reserves=1 species=640/329 HP=94/86 foes=0/68 faints=0/1 initialFrames=20
+REVIEW_STATE actor=1 move=Stone Edge PP=15/5/4/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=154 item=479
+REVIEW_STATE actor=3 move=Earth Power PP=15/9/10/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=523
+REVIEW_INPUT trainer=606 slot=0 species=753 lv=28 HP=69 Atk=39 Def=33 SpA=64 SpD=33 Spe=50 item=558 ability=126
+REVIEW_INPUT trainer=606 slot=1 species=195 lv=28 HP=117 Atk=92 Def=67 SpA=45 SpD=50 Spe=33 item=553 ability=109
+REVIEW_INPUT trainer=606 slot=2 species=640 lv=30 HP=104 Atk=87 Def=57 SpA=61 SpD=91 Spe=107 item=479 ability=154
+REVIEW_INPUT trainer=606 slot=3 species=329 lv=33 HP=86 Atk=71 Def=48 SpA=58 SpD=43 Spe=90 item=523 ability=26
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Stone Edge target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Earth Power target=2
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=1 move=Stone Edge target=2
+AI decision turn=2 actor=3 move=Earth Power target=2
+REVIEW_AFTER board=1 turns=2 reserves=1 species=640/329 HP=84/86 foes=0/0 faints=0/2 initialFrames=20
+REVIEW_STATE actor=1 move=Stone Edge PP=15/5/3/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=154 item=479
+REVIEW_STATE actor=3 move=Earth Power PP=15/8/10/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=523
+REVIEW_INPUT trainer=606 slot=0 species=753 lv=28 HP=69 Atk=39 Def=33 SpA=64 SpD=33 Spe=50 item=558 ability=126
+REVIEW_INPUT trainer=606 slot=1 species=195 lv=28 HP=117 Atk=92 Def=67 SpA=45 SpD=50 Spe=33 item=553 ability=109
+REVIEW_INPUT trainer=606 slot=2 species=640 lv=30 HP=104 Atk=87 Def=57 SpA=61 SpD=91 Spe=107 item=479 ability=154
+REVIEW_INPUT trainer=606 slot=3 species=329 lv=33 HP=86 Atk=71 Def=48 SpA=58 SpD=43 Spe=90 item=523 ability=26
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Close Combat target=2
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Dragon Claw target=2
+AI decision turn=2 actor=1 move=Close Combat target=2
+AI decision turn=2 actor=3 move=Dragon Claw target=0
+REVIEW_AFTER board=2 turns=1 reserves=1 species=640/329 HP=89/56 foes=76/71 faints=0/0 initialFrames=24
+REVIEW_STATE actor=1 move=- PP=15/5/5/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=154 item=479
+REVIEW_STATE actor=3 move=Dragon Claw PP=14/10/10/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=0
+REVIEW_INPUT trainer=606 slot=0 species=753 lv=28 HP=69 Atk=39 Def=33 SpA=64 SpD=33 Spe=50 item=558 ability=126
+REVIEW_INPUT trainer=606 slot=1 species=195 lv=28 HP=117 Atk=92 Def=67 SpA=45 SpD=50 Spe=33 item=553 ability=109
+REVIEW_INPUT trainer=606 slot=2 species=640 lv=30 HP=104 Atk=87 Def=57 SpA=61 SpD=91 Spe=107 item=479 ability=154
+REVIEW_INPUT trainer=606 slot=3 species=329 lv=33 HP=86 Atk=71 Def=48 SpA=58 SpD=43 Spe=90 item=523 ability=26
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Close Combat target=2
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Dragon Claw target=2
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Close Combat target=2
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=Dragon Claw target=0
+AI decision turn=3 actor=1 move=Leaf Blade target=0
+AI decision turn=3 actor=3 move=Dragon Claw target=0
+REVIEW_AFTER board=2 turns=2 reserves=1 species=640/329 HP=19/56 foes=55/0 faints=0/1 initialFrames=24
+REVIEW_STATE actor=1 move=Close Combat PP=15/4/5/20 Atk=6 Def=5 SpA=6 SpD=5 Spe=6 status=0 ability=154 item=479
+REVIEW_STATE actor=3 move=Dragon Claw PP=13/10/10/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=26 item=0
+
+- Tests [32mPASSED[0m:          2
+- Tests [34mTOTAL[0m:           2
+

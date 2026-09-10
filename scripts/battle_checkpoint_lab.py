@@ -19,6 +19,7 @@ import run_emerald_champions_campaign as campaign
 import render_emerald_champions_ui as ui
 import native_tools
 from item_catalog import free_vendor_items
+from emerald_champions_evs import EV_PER_STAT_MAX, EV_TOTAL_MAX
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -123,7 +124,7 @@ def center_services(map_names: list[str]) -> tuple[list[dict[str, str]], list[Pa
         for obj in data.get("object_events", []):
             script = str(obj.get("script", ""))
             if "BattleVendor" in script:
-                for service in ("preset", "nature", "ability", "held_item", "stat_points"):
+                for service in ("preset", "nature", "ability", "held_item", "evs"):
                     rows[service] = {"service": service, "source": map_json.relative_to(ROOT).as_posix(), "script": script}
             if "MoveTutor" in script:
                 rows["moves"] = {"service": "moves", "source": map_json.relative_to(ROOT).as_posix(), "script": script}
@@ -149,7 +150,7 @@ def opponent_dossier(trainer_ids: list[str]) -> tuple[list[dict[str, Any]], Path
             fields = {key: value for key, value in (line.split(": ", 1) for line in lines if ": " in line)}
             mons.append({"species": species, "item": item, "level": int(fields["Level"]),
                          "ability": fields["Ability"], "nature": fields["Nature"],
-                         "stat_points": fields.get("EVs"), "moves": [line[2:] for line in lines if line.startswith("- ")]})
+                         "evs": fields.get("EVs"), "moves": [line[2:] for line in lines if line.startswith("- ")]})
         headers = {key: value for key, value in (line.split(": ", 1) for line in header.splitlines() if ": " in line)}
         dossiers.append({"trainer_id": trainer, "name": headers.get("Name"), "class": headers.get("Class"),
                          "format": "doubles" if headers.get("Double Battle") == "Yes" else "singles",
@@ -258,7 +259,7 @@ def materialize_legal_arsenal(map_names: list[str], cap: int, party: list[dict[s
         key = species.removeprefix("SPECIES_").replace("_", "").lower()
         legal_moves = learnsets["learnsets"].get(key, [])
         result_species.append({**direct[species], "abilities": abilities, "legal_moves": legal_moves,
-                               "natures": natures, "stat_points": {"total": 66, "per_stat_max": 32},
+                               "natures": natures, "evs": {"total": EV_TOTAL_MAX, "per_stat_max": EV_PER_STAT_MAX},
                                "presets": presets.get(species, []),
                                "legality_provenance": [learnsets_path.relative_to(ROOT).as_posix(), sets_path.relative_to(ROOT).as_posix()]})
     sources = [wild_path, field_specials, sets_path, learnsets_path, nature_path,
@@ -270,7 +271,7 @@ def materialize_legal_arsenal(map_names: list[str], cap: int, party: list[dict[s
             "pokemon": result_species, "held_items": held_items,
             "mega_access": mega_access, "mega_stones": mega_items, "evolution_items": evolution_items,
             "evolution_edges": evolution_edges, "natures": natures,
-            "stat_point_rule": {"total": 66, "per_stat_max": 32}}, sources
+            "ev_rule": {"total": EV_TOTAL_MAX, "per_stat_max": EV_PER_STAT_MAX}}, sources
 
 
 class LabError(RuntimeError):
@@ -552,7 +553,7 @@ def build_checkpoint(args: argparse.Namespace, manifest: dict[str, Any], recipes
                              "invalidation": "any input hash change requires regeneration"},
         "preparation_adapter": {"schema_version": 1, "request_log": "preparation.jsonl",
                                 "execution_boundary": "native Center UI or canonical game functions",
-                                "allowed_changes": ["party", "preset", "moves", "nature", "ability", "held_item", "stat_points", "level"],
+                                "allowed_changes": ["party", "preset", "moves", "nature", "ability", "held_item", "evs", "level"],
                                 "result_states": ["requested", "applied", "rejected"],
                                 "reject_if": ["species_not_in_legal_arsenal", "item_not_owned", "move_not_legal", "service_unavailable", "cap_exceeded"]},
         "launch": {"campaign_autowin_disabled": True, "disabled_symbol": "gEcHeadlessFixtureActiveScenario", "disabled_value": 0, "reset_source": str(state), "allowed_controls": list(BUTTONS), "observation": "screenshots", "engage_actions": recipe["engage_actions"]},

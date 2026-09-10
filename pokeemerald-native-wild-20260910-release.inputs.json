@@ -1,0 +1,9 @@
+{
+  "schema_version": 2,
+  "inputs_sha256": "ce97232815ffeda92f7c470583c6db774d95154a9da1a9c754db940e52a6e2a7",
+  "input_count": 28979,
+  "artifacts": {
+    "pokeemerald-native-wild-20260910-release.gba": "3c4cf3a1bc32691383bbef738e42ab0fd61c72325cb58e0a269f61ebbb19153e",
+    "pokeemerald-native-wild-20260910-release.elf": "25b66a944766a00a36ea833d6d345bce151479f258824058ea0f8bc4f0f1a18b"
+  }
+}

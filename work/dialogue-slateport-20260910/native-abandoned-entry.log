@@ -1,0 +1,51 @@
+abandoned-route108-ready 0 RESULT frames=1500 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=14ee58a96a22403b nonzero_pixels=38236 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00000017
+READ width=4 address=020022e0 value=0000001d
+READ width=4 address=020022e4 value=00000007
+READ width=4 address=02002290 value=00000000
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+READ width=4 address=0200229c value=00000000
+ 
+WALK Route108 (29, 7) to (29, 6) steps 1
+abandoned-deck-entry 0 RESULT frames=1548 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=b37288c6245bc1bb nonzero_pixels=38314 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00000017
+READ width=4 address=020022e0 value=0000001d
+READ width=4 address=020022e4 value=00000006
+READ width=4 address=02002290 value=00000000
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+READ width=4 address=0200229c value=00000000
+ 
+abandoned-deck-entry-cross 0 RESULT frames=1500 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=3f2e9238b90f16cd nonzero_pixels=38343 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00001836
+READ width=4 address=020022e0 value=0000000d
+READ width=4 address=020022e4 value=0000000f
+READ width=4 address=02002290 value=00000000
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+READ width=4 address=0200229c value=00000000
+ 
+WALK AbandonedShip_Deck (13, 15) to (13, 9) steps 6
+abandoned-corridor-entry 0 RESULT frames=1788 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=9b1b5a5f342b02e6 nonzero_pixels=19655 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00001837
+READ width=4 address=020022e0 value=00000008
+READ width=4 address=020022e4 value=0000000b
+READ width=4 address=02002290 value=00000000
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+READ width=4 address=0200229c value=00000000
+ 
+CHECKPOINT abandoned-corridor-entry

@@ -1,0 +1,936 @@
+[
+  {
+    "map": "SouthernIsland_Exterior",
+    "actors": [
+      {
+        "local_id": "LOCALID_SOUTHERN_ISLAND_SAILOR",
+        "graphics_id": "OBJ_EVENT_GFX_SAILOR",
+        "x": 13,
+        "y": 23,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_UP",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "SouthernIsland_Exterior_EventScript_Sailor",
+        "flag": "0"
+      },
+      {
+        "local_id": "LOCALID_SOUTHERN_ISLAND_SS_TIDAL",
+        "graphics_id": "OBJ_EVENT_GFX_SS_TIDAL",
+        "x": 13,
+        "y": 25,
+        "elevation": 1,
+        "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "0"
+      }
+    ],
+    "warps": [
+      {
+        "x": 14,
+        "y": 5,
+        "elevation": 3,
+        "dest_map": "MAP_SOUTHERN_ISLAND_INTERIOR",
+        "dest_warp_id": "0"
+      },
+      {
+        "x": 15,
+        "y": 5,
+        "elevation": 3,
+        "dest_map": "MAP_SOUTHERN_ISLAND_INTERIOR",
+        "dest_warp_id": "1"
+      }
+    ],
+    "background": [
+      {
+        "type": "sign",
+        "x": 16,
+        "y": 7,
+        "elevation": 3,
+        "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+        "script": "SouthernIsland_Exterior_EventScript_Sign"
+      }
+    ],
+    "coordinate": [],
+    "script_bytes": 1427
+  },
+  {
+    "map": "SouthernIsland_Interior",
+    "actors": [
+      {
+        "graphics_id": "OBJ_EVENT_GFX_VAR_0",
+        "x": 13,
+        "y": 12,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_UP",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "FLAG_HIDE_SOUTHERN_ISLAND_EON_STONE"
+      },
+      {
+        "local_id": "LOCALID_SOUTHERN_ISLAND_LATI",
+        "graphics_id": "OBJ_EVENT_GFX_VAR_1",
+        "x": 13,
+        "y": 2,
+        "elevation": 0,
+        "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "FLAG_HIDE_SOUTHERN_ISLAND_UNCHOSEN_EON_DUO_MON"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
+        "x": 8,
+        "y": 8,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "ITEM_LATIASITE",
+        "script": "Common_EventScript_FindItem",
+        "flag": "FLAG_EC_MEGA_REWARD_LATIASITE"
+      },
+      {
+        "graphics_id": "OBJ_EVENT_GFX_MEGA_STONE",
+        "x": 10,
+        "y": 6,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "ITEM_LATIOSITE",
+        "script": "Common_EventScript_FindItem",
+        "flag": "FLAG_EC_MEGA_REWARD_LATIOSITE"
+      }
+    ],
+    "warps": [
+      {
+        "x": 13,
+        "y": 18,
+        "elevation": 3,
+        "dest_map": "MAP_SOUTHERN_ISLAND_EXTERIOR",
+        "dest_warp_id": "0"
+      },
+      {
+        "x": 14,
+        "y": 18,
+        "elevation": 3,
+        "dest_map": "MAP_SOUTHERN_ISLAND_EXTERIOR",
+        "dest_warp_id": "1"
+      }
+    ],
+    "background": [
+      {
+        "type": "sign",
+        "x": 13,
+        "y": 11,
+        "elevation": 3,
+        "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+        "script": "SouthernIsland_Interior_EventScript_TryLatiEncounter"
+      }
+    ],
+    "coordinate": [],
+    "script_bytes": 4706
+  },
+  {
+    "map": "BirthIsland_Exterior",
+    "actors": [
+      {
+        "local_id": "LOCALID_BIRTH_ISLAND_EXTERIOR_ROCK",
+        "graphics_id": "OBJ_EVENT_GFX_DEOXYS_TRIANGLE",
+        "x": 15,
+        "y": 12,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+        "movement_range_x": 1,
+        "movement_range_y": 1,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "BirthIsland_Exterior_EventScript_Triangle",
+        "flag": "FLAG_HIDE_BIRTH_ISLAND_DEOXYS_TRIANGLE"
+      },
+      {
+        "local_id": "LOCALID_BIRTH_ISLAND_DEOXYS",
+        "graphics_id": "OBJ_EVENT_GFX_DEOXYS",
+        "x": 15,
+        "y": 3,
+        "elevation": 0,
+        "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+        "movement_range_x": 1,
+        "movement_range_y": 1,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "FLAG_HIDE_DEOXYS"
+      }
+    ],
+    "warps": [
+      {
+        "x": 15,
+        "y": 24,
+        "elevation": 0,
+        "dest_map": "MAP_BIRTH_ISLAND_HARBOR",
+        "dest_warp_id": "0"
+      }
+    ],
+    "background": [],
+    "coordinate": [],
+    "script_bytes": 4027
+  },
+  {
+    "map": "BirthIsland_Harbor",
+    "actors": [
+      {
+        "local_id": "LOCALID_BIRTH_ISLAND_SAILOR",
+        "graphics_id": "OBJ_EVENT_GFX_SAILOR",
+        "x": 8,
+        "y": 5,
+        "elevation": 0,
+        "movement_type": "MOVEMENT_TYPE_FACE_UP",
+        "movement_range_x": 1,
+        "movement_range_y": 1,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "BirthIsland_Harbor_EventScript_Sailor",
+        "flag": "0"
+      },
+      {
+        "local_id": "LOCALID_BIRTH_ISLAND_SS_TIDAL",
+        "graphics_id": "OBJ_EVENT_GFX_SS_TIDAL",
+        "x": 8,
+        "y": 7,
+        "elevation": 1,
+        "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+        "movement_range_x": 1,
+        "movement_range_y": 1,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "0"
+      }
+    ],
+    "warps": [
+      {
+        "x": 8,
+        "y": 2,
+        "elevation": 0,
+        "dest_map": "MAP_BIRTH_ISLAND_EXTERIOR",
+        "dest_warp_id": "0"
+      }
+    ],
+    "background": [],
+    "coordinate": [],
+    "script_bytes": 721
+  },
+  {
+    "map": "FarawayIsland_Entrance",
+    "actors": [
+      {
+        "local_id": "LOCALID_FARAWAY_ISLAND_SAILOR",
+        "graphics_id": "OBJ_EVENT_GFX_SAILOR",
+        "x": 13,
+        "y": 39,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_FACE_UP",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "FarawayIsland_Entrance_EventScript_Sailor",
+        "flag": "0"
+      },
+      {
+        "local_id": "LOCALID_FARAWAY_ISLAND_SS_TIDAL",
+        "graphics_id": "OBJ_EVENT_GFX_SS_TIDAL",
+        "x": 13,
+        "y": 41,
+        "elevation": 1,
+        "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+        "movement_range_x": 0,
+        "movement_range_y": 0,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "0"
+      }
+    ],
+    "warps": [
+      {
+        "x": 22,
+        "y": 7,
+        "elevation": 3,
+        "dest_map": "MAP_FARAWAY_ISLAND_INTERIOR",
+        "dest_warp_id": "0"
+      },
+      {
+        "x": 23,
+        "y": 7,
+        "elevation": 3,
+        "dest_map": "MAP_FARAWAY_ISLAND_INTERIOR",
+        "dest_warp_id": "1"
+      }
+    ],
+    "background": [
+      {
+        "type": "sign",
+        "x": 3,
+        "y": 32,
+        "elevation": 0,
+        "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+        "script": "FarawayIsland_Entrance_EventScript_Sign"
+      }
+    ],
+    "coordinate": [
+      {
+        "type": "trigger",
+        "x": 9,
+        "y": 18,
+        "elevation": 3,
+        "var": "TRIGGER_RUN_IMMEDIATELY",
+        "var_value": "0",
+        "script": "FarawayIsland_Entrance_EventScript_SetCloudsWeather"
+      },
+      {
+        "type": "trigger",
+        "x": 10,
+        "y": 20,
+        "elevation": 3,
+        "var": "TRIGGER_RUN_IMMEDIATELY",
+        "var_value": "0",
+        "script": "FarawayIsland_Entrance_EventScript_ClearWeather"
+      },
+      {
+        "type": "trigger",
+        "x": 22,
+        "y": 9,
+        "elevation": 3,
+        "var": "TRIGGER_RUN_IMMEDIATELY",
+        "var_value": "0",
+        "script": "FarawayIsland_Entrance_EventScript_SetCloudsWeather"
+      }
+    ],
+    "script_bytes": 1204
+  },
+  {
+    "map": "FarawayIsland_Interior",
+    "actors": [
+      {
+        "local_id": "LOCALID_FARAWAY_ISLAND_MEW",
+        "graphics_id": "OBJ_EVENT_GFX_MEW",
+        "x": 13,
+        "y": 17,
+        "elevation": 3,
+        "movement_type": "MOVEMENT_TYPE_COPY_PLAYER_OPPOSITE_IN_GRASS",
+        "movement_range_x": 15,
+        "movement_range_y": 15,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "1",
+        "script": "FarawayIsland_Interior_EventScript_Mew",
+        "flag": "FLAG_HIDE_MEW"
+      }
+    ],
+    "warps": [
+      {
+        "x": 12,
+        "y": 19,
+        "elevation": 0,
+        "dest_map": "MAP_FARAWAY_ISLAND_ENTRANCE",
+        "dest_warp_id": "0"
+      },
+      {
+        "x": 13,
+        "y": 19,
+        "elevation": 0,
+        "dest_map": "MAP_FARAWAY_ISLAND_ENTRANCE",
+        "dest_warp_id": "1"
+      }
+    ],
+    "background": [],
+    "coordinate": [],
+    "script_bytes": 6096
+  },
+  {
+    "map": "NavelRock_B1F",
+    "actors": [],
+    "warps": [
+      {
+        "x": 4,
+        "y": 3,
+        "elevation": 3,
+        "dest_map": "MAP_NAVEL_ROCK_ENTRANCE",
+        "dest_warp_id": "0"
+      },
+      {
+        "x": 18,
+        "y": 9,
+        "elevation": 3,
+        "dest_map": "MAP_NAVEL_ROCK_FORK",
+        "dest_warp_id": "1"
+      }
+    ],
+    "background": [],
+    "coordinate": [],
+    "script_bytes": 37
+  },
+  {
+    "map": "NavelRock_Bottom",
+    "actors": [
+      {
+        "local_id": "LOCALID_NAVEL_ROCK_LUGIA",
+        "graphics_id": "OBJ_EVENT_GFX_LUGIA",
+        "x": 11,
+        "y": 13,
+        "elevation": 0,
+        "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+        "movement_range_x": 1,
+        "movement_range_y": 1,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "NavelRock_Bottom_EventScript_Lugia",
+        "flag": "FLAG_HIDE_LUGIA"
+      }
+    ],
+    "warps": [
+      {
+        "x": 14,
+        "y": 19,
+        "elevation": 0,
+        "dest_map": "MAP_NAVEL_ROCK_DOWN11",
+        "dest_warp_id": "0"
+      }
+    ],
+    "background": [],
+    "coordinate": [],
+    "script_bytes": 2440
+  },
+  {
+    "map": "NavelRock_Down01",
+    "actors": [],
+    "warps": [
+      {
+        "x": 3,
+        "y": 3,
+        "elevation": 3,
+        "dest_map": "MAP_NAVEL_ROCK_FORK",
+        "dest_warp_id": "2"
+      },
+      {
+        "x": 5,
+        "y": 5,
+        "elevation": 3,
+        "dest_map": "MAP_NAVEL_ROCK_DOWN02",
+        "dest_warp_id": "0"
+      }
+    ],
+    "background": [],
+    "coordinate": [],
+    "script_bytes": 40
+  },
+  {
+    "map": "NavelRock_Down02",
+    "actors": [],
+    "warps": [
+      {
+        "x": 5,
+        "y": 5,
+        "elevation": 3,
+        "dest_map": "MAP_NAVEL_ROCK_DOWN01",
+        "dest_warp_id": "1"
+      },
+      {
+        "x": 3,
+        "y": 3,
+        "elevation": 3,
+        "dest_map": "MAP_NAVEL_ROCK_DOWN03",
+        "dest_warp_id": "0"
+      }
+    ],
+    "background": [],
+    "coordinate": [],
+    "script_bytes": 40
+  },
+  {
+    "map": "NavelRock_Down03",
+    "actors": [],
+    "warps": [
+      {
+        "x": 3,
+        "y": 3,
+        "elevation": 3,
+        "dest_map": "MAP_NAVEL_ROCK_DOWN02",
+        "dest_warp_id": "1"
+      },
+      {
+        "x": 5,
+        "y": 5,
+        "elevation": 3,
+        "dest_map": "MAP_NAVEL_ROCK_DOWN04",
+        "dest_warp_id": "0"
+      }
+    ],
+    "background": [],
+    "coordinate": [],
+    "script_bytes": 40
+  },
+  {
+    "map": "NavelRock_Down04",
+    "actors": [],
+    "warps": [
+      {
+        "x": 5,
+        "y": 5,
+        "elevation": 3,
+        "dest_map": "MAP_NAVEL_ROCK_DOWN03",
+        "dest_warp_id": "1"
+      },
+      {
+        "x": 3,
+        "y": 3,
+        "elevation": 3,
+        "dest_map": "MAP_NAVEL_ROCK_DOWN05",
+        "dest_warp_id": "0"
+      }
+    ],
+    "background": [],
+    "coordinate": [],
+    "script_bytes": 40
+  },
+  {
+    "map": "NavelRock_Down05",
+    "actors": [],
+    "warps": [
+      {
+        "x": 3,
+        "y": 3,
+        "elevation": 3,
+        "dest_map": "MAP_NAVEL_ROCK_DOWN04",
+        "dest_warp_id": "1"
+      },
+      {
+        "x": 5,
+        "y": 5,
+        "elevation": 3,
+        "dest_map": "MAP_NAVEL_ROCK_DOWN06",
+        "dest_warp_id": "0"
+      }
+    ],
+    "background": [],
+    "coordinate": [],
+    "script_bytes": 40
+  },
+  {
+    "map": "NavelRock_Down06",
+    "actors": [],
+    "warps": [
+      {
+        "x": 5,
+        "y": 5,
+        "elevation": 3,
+        "dest_map": "MAP_NAVEL_ROCK_DOWN05",
+        "dest_warp_id": "1"
+      },
+      {
+        "x": 3,
+        "y": 3,
+        "elevation": 3,
+        "dest_map": "MAP_NAVEL_ROCK_DOWN07",
+        "dest_warp_id": "0"
+      }
+    ],
+    "background": [],
+    "coordinate": [],
+    "script_bytes": 40
+  },
+  {
+    "map": "NavelRock_Down07",
+    "actors": [],
+    "warps": [
+      {
+        "x": 3,
+        "y": 3,
+        "elevation": 3,
+        "dest_map": "MAP_NAVEL_ROCK_DOWN06",
+        "dest_warp_id": "1"
+      },
+      {
+        "x": 5,
+        "y": 5,
+        "elevation": 3,
+        "dest_map": "MAP_NAVEL_ROCK_DOWN08",
+        "dest_warp_id": "0"
+      }
+    ],
+    "background": [],
+    "coordinate": [],
+    "script_bytes": 40
+  },
+  {
+    "map": "NavelRock_Down08",
+    "actors": [],
+    "warps": [
+      {
+        "x": 5,
+        "y": 5,
+        "elevation": 3,
+        "dest_map": "MAP_NAVEL_ROCK_DOWN07",
+        "dest_warp_id": "1"
+      },
+      {
+        "x": 3,
+        "y": 3,
+        "elevation": 3,
+        "dest_map": "MAP_NAVEL_ROCK_DOWN09",
+        "dest_warp_id": "0"
+      }
+    ],
+    "background": [],
+    "coordinate": [],
+    "script_bytes": 40
+  },
+  {
+    "map": "NavelRock_Down09",
+    "actors": [],
+    "warps": [
+      {
+        "x": 3,
+        "y": 3,
+        "elevation": 3,
+        "dest_map": "MAP_NAVEL_ROCK_DOWN08",
+        "dest_warp_id": "1"
+      },
+      {
+        "x": 5,
+        "y": 5,
+        "elevation": 3,
+        "dest_map": "MAP_NAVEL_ROCK_DOWN10",
+        "dest_warp_id": "0"
+      }
+    ],
+    "background": [],
+    "coordinate": [],
+    "script_bytes": 40
+  },
+  {
+    "map": "NavelRock_Down10",
+    "actors": [],
+    "warps": [
+      {
+        "x": 5,
+        "y": 5,
+        "elevation": 3,
+        "dest_map": "MAP_NAVEL_ROCK_DOWN09",
+        "dest_warp_id": "1"
+      },
+      {
+        "x": 3,
+        "y": 3,
+        "elevation": 3,
+        "dest_map": "MAP_NAVEL_ROCK_DOWN11",
+        "dest_warp_id": "1"
+      }
+    ],
+    "background": [],
+    "coordinate": [],
+    "script_bytes": 40
+  },
+  {
+    "map": "NavelRock_Down11",
+    "actors": [],
+    "warps": [
+      {
+        "x": 5,
+        "y": 5,
+        "elevation": 3,
+        "dest_map": "MAP_NAVEL_ROCK_BOTTOM",
+        "dest_warp_id": "0"
+      },
+      {
+        "x": 3,
+        "y": 3,
+        "elevation": 3,
+        "dest_map": "MAP_NAVEL_ROCK_DOWN10",
+        "dest_warp_id": "1"
+      }
+    ],
+    "background": [],
+    "coordinate": [],
+    "script_bytes": 40
+  },
+  {
+    "map": "NavelRock_Entrance",
+    "actors": [],
+    "warps": [
+      {
+        "x": 10,
+        "y": 5,
+        "elevation": 3,
+        "dest_map": "MAP_NAVEL_ROCK_B1F",
+        "dest_warp_id": "0"
+      },
+      {
+        "x": 10,
+        "y": 26,
+        "elevation": 3,
+        "dest_map": "MAP_NAVEL_ROCK_EXTERIOR",
+        "dest_warp_id": "1"
+      }
+    ],
+    "background": [],
+    "coordinate": [],
+    "script_bytes": 42
+  },
+  {
+    "map": "NavelRock_Exterior",
+    "actors": [],
+    "warps": [
+      {
+        "x": 10,
+        "y": 18,
+        "elevation": 0,
+        "dest_map": "MAP_NAVEL_ROCK_HARBOR",
+        "dest_warp_id": "0"
+      },
+      {
+        "x": 10,
+        "y": 10,
+        "elevation": 0,
+        "dest_map": "MAP_NAVEL_ROCK_ENTRANCE",
+        "dest_warp_id": "1"
+      }
+    ],
+    "background": [],
+    "coordinate": [],
+    "script_bytes": 187
+  },
+  {
+    "map": "NavelRock_Fork",
+    "actors": [],
+    "warps": [
+      {
+        "x": 4,
+        "y": 6,
+        "elevation": 3,
+        "dest_map": "MAP_NAVEL_ROCK_UP1",
+        "dest_warp_id": "0"
+      },
+      {
+        "x": 11,
+        "y": 79,
+        "elevation": 3,
+        "dest_map": "MAP_NAVEL_ROCK_B1F",
+        "dest_warp_id": "1"
+      },
+      {
+        "x": 22,
+        "y": 6,
+        "elevation": 3,
+        "dest_map": "MAP_NAVEL_ROCK_DOWN01",
+        "dest_warp_id": "0"
+      }
+    ],
+    "background": [],
+    "coordinate": [],
+    "script_bytes": 38
+  },
+  {
+    "map": "NavelRock_Harbor",
+    "actors": [
+      {
+        "local_id": "LOCALID_NAVEL_ROCK_SAILOR",
+        "graphics_id": "OBJ_EVENT_GFX_SAILOR",
+        "x": 8,
+        "y": 5,
+        "elevation": 0,
+        "movement_type": "MOVEMENT_TYPE_FACE_UP",
+        "movement_range_x": 1,
+        "movement_range_y": 1,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "NavelRock_Harbor_EventScript_Sailor",
+        "flag": "0"
+      },
+      {
+        "local_id": "LOCALID_NAVEL_ROCK_SS_TIDAL",
+        "graphics_id": "OBJ_EVENT_GFX_SS_TIDAL",
+        "x": 8,
+        "y": 7,
+        "elevation": 1,
+        "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+        "movement_range_x": 1,
+        "movement_range_y": 1,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "0"
+      }
+    ],
+    "warps": [
+      {
+        "x": 8,
+        "y": 2,
+        "elevation": 0,
+        "dest_map": "MAP_NAVEL_ROCK_EXTERIOR",
+        "dest_warp_id": "0"
+      }
+    ],
+    "background": [],
+    "coordinate": [],
+    "script_bytes": 705
+  },
+  {
+    "map": "NavelRock_Top",
+    "actors": [
+      {
+        "local_id": "LOCALID_NAVEL_ROCK_HO_OH",
+        "graphics_id": "OBJ_EVENT_GFX_HOOH",
+        "x": 12,
+        "y": 4,
+        "elevation": 0,
+        "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+        "movement_range_x": 1,
+        "movement_range_y": 1,
+        "trainer_type": "TRAINER_TYPE_NONE",
+        "trainer_sight_or_berry_tree_id": "0",
+        "script": "0x0",
+        "flag": "FLAG_HIDE_HO_OH"
+      }
+    ],
+    "warps": [
+      {
+        "x": 13,
+        "y": 20,
+        "elevation": 3,
+        "dest_map": "MAP_NAVEL_ROCK_UP4",
+        "dest_warp_id": "1"
+      }
+    ],
+    "background": [
+      {
+        "type": "hidden_item",
+        "x": 12,
+        "y": 9,
+        "elevation": 3,
+        "item": "ITEM_SACRED_ASH",
+        "flag": "FLAG_HIDDEN_ITEM_NAVEL_ROCK_TOP_SACRED_ASH"
+      }
+    ],
+    "coordinate": [
+      {
+        "type": "trigger",
+        "x": 12,
+        "y": 10,
+        "elevation": 3,
+        "var": "VAR_TEMP_1",
+        "var_value": "0",
+        "script": "NavelRock_Top_EventScript_HoOh"
+      }
+    ],
+    "script_bytes": 3086
+  },
+  {
+    "map": "NavelRock_Up1",
+    "actors": [],
+    "warps": [
+      {
+        "x": 5,
+        "y": 5,
+        "elevation": 3,
+        "dest_map": "MAP_NAVEL_ROCK_FORK",
+        "dest_warp_id": "0"
+      },
+      {
+        "x": 3,
+        "y": 3,
+        "elevation": 3,
+        "dest_map": "MAP_NAVEL_ROCK_UP2",
+        "dest_warp_id": "0"
+      }
+    ],
+    "background": [],
+    "coordinate": [],
+    "script_bytes": 37
+  },
+  {
+    "map": "NavelRock_Up2",
+    "actors": [],
+    "warps": [
+      {
+        "x": 3,
+        "y": 3,
+        "elevation": 3,
+        "dest_map": "MAP_NAVEL_ROCK_UP1",
+        "dest_warp_id": "1"
+      },
+      {
+        "x": 5,
+        "y": 5,
+        "elevation": 3,
+        "dest_map": "MAP_NAVEL_ROCK_UP3",
+        "dest_warp_id": "0"
+      }
+    ],
+    "background": [],
+    "coordinate": [],
+    "script_bytes": 37
+  },
+  {
+    "map": "NavelRock_Up3",
+    "actors": [],
+    "warps": [
+      {
+        "x": 5,
+        "y": 5,
+        "elevation": 3,
+        "dest_map": "MAP_NAVEL_ROCK_UP2",
+        "dest_warp_id": "1"
+      },
+      {
+        "x": 3,
+        "y": 3,
+        "elevation": 3,
+        "dest_map": "MAP_NAVEL_ROCK_UP4",
+        "dest_warp_id": "0"
+      }
+    ],
+    "background": [],
+    "coordinate": [],
+    "script_bytes": 37
+  },
+  {
+    "map": "NavelRock_Up4",
+    "actors": [],
+    "warps": [
+      {
+        "x": 3,
+        "y": 3,
+        "elevation": 3,
+        "dest_map": "MAP_NAVEL_ROCK_UP3",
+        "dest_warp_id": "1"
+      },
+      {
+        "x": 5,
+        "y": 5,
+        "elevation": 3,
+        "dest_map": "MAP_NAVEL_ROCK_TOP",
+        "dest_warp_id": "0"
+      }
+    ],
+    "background": [],
+    "coordinate": [],
+    "script_bytes": 37
+  }
+]

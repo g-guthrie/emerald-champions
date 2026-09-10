@@ -1,0 +1,9 @@
+{
+  "schema_version": 2,
+  "inputs_sha256": "5f93d2105ddd76e3e60fa8eb93e58c21b0483e08826bbf24f232ce89beb19a17",
+  "input_count": 28980,
+  "artifacts": {
+    "pokeemerald-slateport-audit-20260910-release.gba": "35c7ccb3ce321606f4096c2ffbcdfbb2db673dd573d8882da0234c0c6510b1f7",
+    "pokeemerald-slateport-audit-20260910-release.elf": "ec5543a36deee24b7db681323b1f908a41a2ab6a59a9c23c83bb86deeb6805ef"
+  }
+}

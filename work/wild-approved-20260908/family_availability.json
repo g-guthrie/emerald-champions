@@ -1,0 +1,78 @@
+[
+  {
+    "species": "SPECIES_GOLBAT",
+    "mode": "evolution from retained catches",
+    "retained_direct_relatives": [
+      "SPECIES_CROBAT",
+      "SPECIES_ZUBAT"
+    ]
+  },
+  {
+    "species": "SPECIES_GURDURR",
+    "mode": "evolution from retained catches",
+    "retained_direct_relatives": [
+      "SPECIES_TIMBURR"
+    ]
+  },
+  {
+    "species": "SPECIES_KAKUNA",
+    "mode": "evolution from retained catches",
+    "retained_direct_relatives": [
+      "SPECIES_BEEDRILL",
+      "SPECIES_WEEDLE"
+    ]
+  },
+  {
+    "species": "SPECIES_MACHOKE",
+    "mode": "evolution from retained catches",
+    "retained_direct_relatives": [
+      "SPECIES_MACHOP"
+    ]
+  },
+  {
+    "species": "SPECIES_METAPOD",
+    "mode": "evolution from retained catches",
+    "retained_direct_relatives": [
+      "SPECIES_BUTTERFREE",
+      "SPECIES_CATERPIE"
+    ]
+  },
+  {
+    "species": "SPECIES_MIGHTYENA",
+    "mode": "evolution from retained catches",
+    "retained_direct_relatives": [
+      "SPECIES_POOCHYENA"
+    ]
+  },
+  {
+    "species": "SPECIES_NUZLEAF",
+    "mode": "evolution from retained catches",
+    "retained_direct_relatives": [
+      "SPECIES_SEEDOT",
+      "SPECIES_SHIFTRY"
+    ]
+  },
+  {
+    "species": "SPECIES_PARAS",
+    "mode": "Breeding retained wild Parasect; configured egg groups and Daycare reverse-evolution source reviewed (not a breeding playtest)",
+    "retained_direct_relatives": [
+      "SPECIES_PARASECT"
+    ]
+  },
+  {
+    "species": "SPECIES_PUPITAR",
+    "mode": "evolution from retained catches",
+    "retained_direct_relatives": [
+      "SPECIES_LARVITAR",
+      "SPECIES_TYRANITAR"
+    ]
+  },
+  {
+    "species": "SPECIES_SKIPLOOM",
+    "mode": "evolution from retained catches",
+    "retained_direct_relatives": [
+      "SPECIES_HOPPIP",
+      "SPECIES_JUMPLUFF"
+    ]
+  }
+]

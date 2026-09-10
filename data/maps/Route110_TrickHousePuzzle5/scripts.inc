@@ -956,9 +956,9 @@ Route110_TrickHousePuzzle5_Text_Mechadoll2Quiz3:
 	.string "TAUNT prevents the target from\n"
 	.string "choosing which moves?$"
 Route110_TrickHousePuzzle5_Text_Mechadoll3Intro:
-	.string "CLICKETY-CLACK…\n"
-	.string "MECHADOLL 3 AM I!\p"
-	.string "MATTERS OF MONEY ARE MY SOLE FOCUS.$"
+	.string "CLICKETY-CLACK... MECHADOLL 3 AM I!\p"
+	.string "SUPPORT, STATUS, AND HELD ITEMS!\n"
+	.string "SMALL DETAILS, LARGE CONSEQUENCES!$"
 
 Route110_TrickHousePuzzle5_Text_Mechadoll3Quiz1:
 	.string "MECHADOLL 3 QUIZ.\p"

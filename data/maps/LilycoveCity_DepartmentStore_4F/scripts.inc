@@ -2,52 +2,48 @@ LilycoveCity_DepartmentStore_4F_MapScripts::
 	.byte 0
 
 LilycoveCity_DepartmentStore_4F_EventScript_Gentleman::
-	msgbox LilycoveCity_DepartmentStore_4F_Text_AttackOrDefense, MSGBOX_NPC
+	msgbox LilycoveCity_DepartmentStore_4F_Text_Gentleman, MSGBOX_NPC
 	end
-
 LilycoveCity_DepartmentStore_4F_EventScript_Woman::
-	msgbox LilycoveCity_DepartmentStore_4F_Text_ManyDifferentMoves, MSGBOX_NPC
+	msgbox LilycoveCity_DepartmentStore_4F_Text_Woman, MSGBOX_NPC
 	end
-
 LilycoveCity_DepartmentStore_4F_EventScript_Youngster::
-	msgbox LilycoveCity_DepartmentStore_4F_Text_PokemonOnlyHaveFourMoves, MSGBOX_NPC
+	msgbox LilycoveCity_DepartmentStore_4F_Text_Youngster, MSGBOX_NPC
 	end
-
 LilycoveCity_DepartmentStore_4F_EventScript_ClerkLeft::
-	msgbox LilycoveCity_DepartmentStore_4F_Text_ClerkMoves, MSGBOX_NPC
+	lock
+	faceplayer
+	msgbox LilycoveCity_DepartmentStore_4F_Text_Stones, MSGBOX_DEFAULT
+	setvar VAR_0x8004, 0
+	special OpenEmeraldChampionsEvolutionSpecialist
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
 	end
-
 LilycoveCity_DepartmentStore_4F_EventScript_ClerkRight::
-	msgbox LilycoveCity_DepartmentStore_4F_Text_ClerkSets, MSGBOX_NPC
+	lock
+	faceplayer
+	msgbox LilycoveCity_DepartmentStore_4F_Text_Tools, MSGBOX_DEFAULT
+	setvar VAR_0x8004, 1
+	special OpenEmeraldChampionsEvolutionSpecialist
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
 	end
-
-LilycoveCity_DepartmentStore_4F_Text_AttackOrDefense:
-	.string "Hmm…\p"
-	.string "Immediate pressure…\n"
-	.string "Or a defensive answer…\p"
-	.string "A good set needs four moves that solve\n"
-	.string "one plan without becoming predictable.$"
-
-LilycoveCity_DepartmentStore_4F_Text_ManyDifferentMoves:
-	.string "There are so many different kinds of\n"
-	.string "moves.\p"
-	.string "The POKéMON CENTER tutor can teach\n"
-	.string "every move a species may legally learn.$"
-
-LilycoveCity_DepartmentStore_4F_Text_PokemonOnlyHaveFourMoves:
-	.string "A POKéMON learns only four moves.\p"
-	.string "Changing one can change the role of the\n"
-	.string "whole team.$"
-
-LilycoveCity_DepartmentStore_4F_Text_ClerkMoves:
-	.string "Every POKéMON CENTER has a tutor who\n"
-	.string "teaches legal moves without charging.\p"
-	.string "Experiment freely. No TM purchase is\n"
-	.string "needed.$"
-
-LilycoveCity_DepartmentStore_4F_Text_ClerkSets:
-	.string "The CENTER tutor also applies complete\n"
-	.string "competitive sets: moves, Nature,\l"
-	.string "Ability, Stat Points, and held item.\p"
-	.string "Mega sets still require the matching\n"
-	.string "stone from your adventure.$"
+LilycoveCity_DepartmentStore_4F_Text_Stones:
+	.string "Every evolution stone, ¥3000 each!\n"
+	.string "Which one does your partner need?$"
+LilycoveCity_DepartmentStore_4F_Text_Tools:
+	.string "Special evolution tools cost ¥5000.\n"
+	.string "Reusable devices cost ¥10000.\p"
+	.string "A reusable device only needs to be\n"
+	.string "bought once. Check its description!$"
+LilycoveCity_DepartmentStore_4F_Text_Gentleman:
+	.string "The left counter sells stones.\n"
+	.string "The right has the unusual tools.\p"
+	.string "Even the LINKING CORD! It's reusable,\n"
+	.string "so my whole team can share it.$"
+LilycoveCity_DepartmentStore_4F_Text_Woman:
+	.string "I found an evolution item on my travels.\n"
+	.string "That saved me a shopping trip!$"
+LilycoveCity_DepartmentStore_4F_Text_Youngster:
+	.string "Evolving opens up new moves and roles.\n"
+	.string "I'll visit the free CENTER tutor next!$"

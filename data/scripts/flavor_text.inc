@@ -119,8 +119,8 @@ Text_Bookshelf::
 	.string "books.$"
 
 Text_NothingButPokemonBooks::
-	.string "ほんだなに　ならんでいるのは\n"
-	.string "ポケモンの　ほん　ばかりだ$"
+	.string "Every book on the shelf is about\n"
+	.string "POKéMON.$"
 
 Text_ATownMap::
 	.string "A TOWN MAP.$"

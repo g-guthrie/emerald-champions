@@ -443,11 +443,11 @@ RusturfTunnel_Text_Peeko:
 
 RusturfTunnel_Text_GruntIntro:
 	.string "Grah, keelhaul it all!\p"
-	.string "The hostage POKéMON turned out to be a\n"
-	.string "useless little bird, and now I'm stuck\l"
-	.string "in a tunnel to nowhere!\p"
-	.string "Hey! You! You want the package? Come\n"
-	.string "and take it from DONDOZO!$"
+	.string "A hostage bird, a stolen package,\n"
+	.string "and a tunnel to nowhere! This job\l"
+	.string "was supposed to be easy!\p"
+	.string "You want the package? MIGHTYENA,\n"
+	.string "show this meddler the way out!$"
 
 RusturfTunnel_Text_GruntDefeat:
 	.string "Urrrggh! My career in crime comes to\n"

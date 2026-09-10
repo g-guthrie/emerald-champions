@@ -287,7 +287,7 @@ MauvilleCity_Gym_Text_GymGuidePostVictory:
 
 MauvilleCity_Gym_Text_KirkIntro:
 	.string "PINCURCHIN floors the whole stage,\n"
-	.string "and TOGEDEMARU takes your bolts.\p"
+	.string "and EMOLGA turns bolts into speed.\p"
 	.string "Find the current's blind spot!$"
 
 MauvilleCity_Gym_Text_KirkDefeat:
@@ -301,7 +301,7 @@ MauvilleCity_Gym_Text_KirkPostBattle:
 
 MauvilleCity_Gym_Text_ShawnIntro:
 	.string "Some of my Pokémon float above\n"
-	.string "Ground attacks. Others use the\n"
+	.string "Ground attacks. Others use the\l"
 	.string "terrain beneath them.\p"
 	.string "Can you tell which answer fits\n"
 	.string "each pair?$"
@@ -316,16 +316,17 @@ MauvilleCity_Gym_Text_ShawnPostBattle:
 	.string "pace and a Dragon typing.$"
 
 MauvilleCity_Gym_Text_BenIntro:
-	.string "Send current -- LANTURN drinks it.\n"
-	.string "Send water -- HELIOLISK drinks that.\p"
-	.string "What is left in your bag?$"
+	.string "Send electricity, and LANTURN\n"
+	.string "drinks it. Send water, and\l"
+	.string "HELIOLISK drinks that.\p"
+	.string "What else can your partners do?$"
 
 MauvilleCity_Gym_Text_BenDefeat:
-	.string "You reversed my reverse current!$"
+	.string "Our circuit couldn't hold!$"
 
 MauvilleCity_Gym_Text_BenPostBattle:
 	.string "CHARJABUG powers special attacks\n"
-	.string "with BATTERY. DISCHARGE can even\n"
+	.string "with BATTERY. DISCHARGE can even\l"
 	.string "heal LANTURN.\p"
 	.string "That same move is not safe beside\n"
 	.string "every partner.$"
@@ -336,7 +337,7 @@ MauvilleCity_Gym_Text_VivianIntro:
 	.string "Split us, or lose to both!$"
 
 MauvilleCity_Gym_Text_VivianDefeat:
-	.string "You found a path around every immunity!$"
+	.string "Our partnership wasn't enough!$"
 
 MauvilleCity_Gym_Text_VivianPostBattle:
 	.string "Do not press ELECTRIC attacks into the\n"
@@ -344,7 +345,7 @@ MauvilleCity_Gym_Text_VivianPostBattle:
 
 MauvilleCity_Gym_Text_AngeloIntro:
 	.string "JOLTIK makes THUNDER more\n"
-	.string "reliable, and TOXTRICITY turns\n"
+	.string "reliable, and TOXTRICITY turns\l"
 	.string "sound into power.\p"
 	.string "We are ready to take our chances!$"
 
@@ -353,7 +354,7 @@ MauvilleCity_Gym_Text_AngeloDefeat:
 
 MauvilleCity_Gym_Text_AngeloPostBattle:
 	.string "WATTREL can set TAILWIND, and\n"
-	.string "JOLTIK can slow opponents with\n"
+	.string "JOLTIK can slow opponents with\l"
 	.string "ELECTROWEB.\p"
 	.string "Those moves change speed in\n"
 	.string "different ways.$"
@@ -363,7 +364,7 @@ MauvilleCity_Gym_Text_WattsonIntro:
 	.string "ELECTRODE sends the current.\n"
 	.string "ELECTIVIRE turns it into speed.\p"
 	.string "I know how my partners work\n"
-	.string "together. Show me what yours can\n"
+	.string "together. Show me what yours can\l"
 	.string "do!$"
 
 MauvilleCity_Gym_Text_WattsonDefeat:

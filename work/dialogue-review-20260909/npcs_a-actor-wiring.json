@@ -1,0 +1,365 @@
+[
+  {
+    "map": "DewfordMeadow",
+    "npc": {
+      "graphics_id": "OBJ_EVENT_GFX_POKEFAN_F",
+      "x": 27,
+      "y": 12,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "DewfordMeadow_EventScript_Warden",
+      "flag": "0"
+    },
+    "npc_cell": {
+      "x": 27,
+      "y": 12,
+      "packed": "0x3004",
+      "metatile": "0x4",
+      "collision": 0,
+      "elevation": 3,
+      "behavior": "0x0"
+    },
+    "start": [
+      39,
+      3
+    ],
+    "interaction_neighbors": [
+      {
+        "x": 28,
+        "y": 12,
+        "packed": "0x3004",
+        "metatile": "0x4",
+        "collision": 0,
+        "elevation": 3,
+        "behavior": "0x0"
+      },
+      {
+        "x": 26,
+        "y": 12,
+        "packed": "0x3004",
+        "metatile": "0x4",
+        "collision": 0,
+        "elevation": 3,
+        "behavior": "0x0"
+      },
+      {
+        "x": 27,
+        "y": 13,
+        "packed": "0x3004",
+        "metatile": "0x4",
+        "collision": 0,
+        "elevation": 3,
+        "behavior": "0x0"
+      },
+      {
+        "x": 27,
+        "y": 11,
+        "packed": "0x3004",
+        "metatile": "0x4",
+        "collision": 0,
+        "elevation": 3,
+        "behavior": "0x0"
+      }
+    ],
+    "source_path_to_interaction": [
+      [
+        39,
+        3
+      ],
+      [
+        39,
+        4
+      ],
+      [
+        38,
+        4
+      ],
+      [
+        37,
+        4
+      ],
+      [
+        36,
+        4
+      ],
+      [
+        36,
+        5
+      ],
+      [
+        35,
+        5
+      ],
+      [
+        35,
+        6
+      ],
+      [
+        34,
+        6
+      ],
+      [
+        34,
+        7
+      ],
+      [
+        33,
+        7
+      ],
+      [
+        32,
+        7
+      ],
+      [
+        31,
+        7
+      ],
+      [
+        31,
+        8
+      ],
+      [
+        31,
+        9
+      ],
+      [
+        31,
+        10
+      ],
+      [
+        31,
+        11
+      ],
+      [
+        31,
+        12
+      ],
+      [
+        31,
+        13
+      ],
+      [
+        30,
+        13
+      ],
+      [
+        29,
+        13
+      ],
+      [
+        28,
+        13
+      ],
+      [
+        28,
+        12
+      ]
+    ],
+    "existing_component_cells_before": 318,
+    "after": 317,
+    "disconnected_cells_excluding_npc": 0,
+    "runtime_tested": false
+  },
+  {
+    "map": "Route111_RuinsExterior",
+    "npc": {
+      "graphics_id": "OBJ_EVENT_GFX_HIKER",
+      "x": 15,
+      "y": 12,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route111_RuinsExterior_EventScript_Archaeologist",
+      "flag": "0"
+    },
+    "npc_cell": {
+      "x": 15,
+      "y": 12,
+      "packed": "0x3129",
+      "metatile": "0x129",
+      "collision": 0,
+      "elevation": 3,
+      "behavior": "0x0"
+    },
+    "start": [
+      13,
+      11
+    ],
+    "interaction_neighbors": [
+      {
+        "x": 16,
+        "y": 12,
+        "packed": "0x3129",
+        "metatile": "0x129",
+        "collision": 0,
+        "elevation": 3,
+        "behavior": "0x0"
+      },
+      {
+        "x": 14,
+        "y": 12,
+        "packed": "0x3121",
+        "metatile": "0x121",
+        "collision": 0,
+        "elevation": 3,
+        "behavior": "0x0"
+      },
+      {
+        "x": 15,
+        "y": 13,
+        "packed": "0x3001",
+        "metatile": "0x1",
+        "collision": 0,
+        "elevation": 3,
+        "behavior": "0x0"
+      },
+      {
+        "x": 15,
+        "y": 11,
+        "packed": "0x3121",
+        "metatile": "0x121",
+        "collision": 0,
+        "elevation": 3,
+        "behavior": "0x0"
+      }
+    ],
+    "source_path_to_interaction": [
+      [
+        13,
+        11
+      ],
+      [
+        13,
+        12
+      ],
+      [
+        14,
+        12
+      ],
+      [
+        14,
+        13
+      ],
+      [
+        15,
+        13
+      ],
+      [
+        16,
+        13
+      ],
+      [
+        16,
+        12
+      ]
+    ],
+    "existing_component_cells_before": 98,
+    "after": 97,
+    "disconnected_cells_excluding_npc": 0,
+    "runtime_tested": false
+  },
+  {
+    "map": "DewfordManor_1F",
+    "npc": {
+      "graphics_id": "OBJ_EVENT_GFX_EXPERT_M",
+      "x": 14,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "DewfordManor_1F_EventScript_Historian",
+      "flag": "0"
+    },
+    "npc_cell": {
+      "x": 14,
+      "y": 10,
+      "packed": "0x3238",
+      "metatile": "0x238",
+      "collision": 0,
+      "elevation": 3,
+      "behavior": "0xb"
+    },
+    "start": [
+      11,
+      11
+    ],
+    "interaction_neighbors": [
+      {
+        "x": 15,
+        "y": 10,
+        "packed": "0x3238",
+        "metatile": "0x238",
+        "collision": 0,
+        "elevation": 3,
+        "behavior": "0xb"
+      },
+      {
+        "x": 13,
+        "y": 10,
+        "packed": "0x3238",
+        "metatile": "0x238",
+        "collision": 0,
+        "elevation": 3,
+        "behavior": "0xb"
+      },
+      {
+        "x": 14,
+        "y": 11,
+        "packed": "0x3238",
+        "metatile": "0x238",
+        "collision": 0,
+        "elevation": 3,
+        "behavior": "0xb"
+      },
+      {
+        "x": 14,
+        "y": 9,
+        "packed": "0x3238",
+        "metatile": "0x238",
+        "collision": 0,
+        "elevation": 3,
+        "behavior": "0xb"
+      }
+    ],
+    "source_path_to_interaction": [
+      [
+        11,
+        11
+      ],
+      [
+        12,
+        11
+      ],
+      [
+        13,
+        11
+      ],
+      [
+        14,
+        11
+      ],
+      [
+        15,
+        11
+      ],
+      [
+        15,
+        10
+      ]
+    ],
+    "existing_component_cells_before": 74,
+    "after": 73,
+    "disconnected_cells_excluding_npc": 0,
+    "runtime_tested": false
+  }
+]

@@ -1008,10 +1008,18 @@ Route104_Text_WhatsItLikeAtBottomOfSea:
 	.string "of the sea?$"
 
 Route104_Text_ThrowBallAtWeakenedPokemon:
-	.string "If you're going to throw a POKé BALL,\n"
-	.string "weaken the wild POKéMON first.\p"
-	.string "It will be easier to catch if it's been\n"
-	.string "poisoned, burned, or lulled to sleep.$"
+	.string "A weakened wild POKéMON is easier\n"
+	.string "to catch. Sleep or paralysis can\l"
+	.string "help, too.\p"
+	.string "See the Ball shown in battle?\n"
+	.string "Tap R to throw it when the wild\l"
+	.string "POKéMON can be caught.\p"
+	.string "On the FIGHT/BAG menu, hold R\n"
+	.string "and use the Control Pad to cycle\l"
+	.string "through the Balls in your BAG.\p"
+	.string "Release R after choosing, then\n"
+	.string "tap R to throw. Watch its HP;\l"
+	.string "you don't want it to faint!$"
 
 Route104_Text_OnlyThrowBallAtWildPokemon:
 	.string "You're a thief if you try to steal\n"
@@ -1020,11 +1028,11 @@ Route104_Text_OnlyThrowBallAtWildPokemon:
 	.string "wild POKéMON.$"
 
 Route104_Text_ImNotATrainer:
-	.string "Oh, no, I'm not a TRAINER.\p"
-	.string "But that's right, if TRAINERS lock eyes,\n"
-	.string "it's a challenge to battle.\p"
-	.string "If you don't want to battle, stay out\n"
-	.string "of their sight.$"
+	.string "Oh, no, I'm not a TRAINER. I'm\n"
+	.string "just out for a walk.\p"
+	.string "Some TRAINERS will challenge you\n"
+	.string "as soon as they see you. Others\l"
+	.string "would rather stop and chat!$"
 Route104_Text_LikeFillingMouthWithSeedsTakeThis:
 	.string "I found this LEAF STONE beneath the\n"
 	.string "flowers! Some GRASS POKéMON evolve\l"
@@ -1081,10 +1089,10 @@ Route104_Text_MayMinesDecentLetsBattle:
 	.string "How about a little battle?$"
 
 Route104_Text_MayHaventRaisedPokemon:
-	.string "MAY: Oh, what's the matter?\p"
-	.string "Haven't you caught or raised your\n"
-	.string "POKéMON very much?\p"
-	.string "That's not very good for a TRAINER!$"
+	.string "MAY: Okay! We can battle when\n"
+	.string "you're ready.\p"
+	.string "I've got plenty of POKéDEX notes\n"
+	.string "to sort out in the meantime.$"
 
 Route104_Text_MayLetsBattle:
 	.string "MAY: So, what do you think?\n"
@@ -1099,11 +1107,11 @@ Route104_Text_MayDefeat:
 	.string "Yikes! You read that faster than me!$"
 
 Route104_Text_MayPostBattle:
-	.string "MAY: You handle a team like you've\n"
-	.string "done it for years.\p"
-	.string "But go talk to MR. BRINEY sometime.\n"
-	.string "He and PEEKO aren't a “set”. They're\l"
-	.string "friends. That matters here too.$"
+	.string "MAY: We've both come a long way\n"
+	.string "since ROUTE 103!\p"
+	.string "Are you sailing with MR. BRINEY?\n"
+	.string "Say hello to PEEKO for me. I hope\l"
+	.string "the sea stays calm for you!$"
 
 Route104_Text_BrendanWeShouldRegister:
 	.string "BRENDAN: Oh, hey, {PLAYER}!\p"
@@ -1126,22 +1134,25 @@ Route104_Text_BrendanDoingGreatLetsBattle:
 	.string "a battle?$"
 
 Route104_Text_BrendanNoConfidence:
-	.string "BRENDAN: What's the matter? Don't have\n"
-	.string "any confidence in your POKéMON?$"
+	.string "BRENDAN: Got somewhere to be? All\n"
+	.string "right. Come find me when you want\l"
+	.string "a battle!$"
 
 Route104_Text_BrendanLetsBattle:
 	.string "BRENDAN: What's up?\n"
 	.string "Want to have a battle with me?$"
 
 Route104_Text_BrendanIntro:
-	.string "BRENDAN: {PLAYER}. Fresh TRAINER or not,\n"
-	.string "I'm not going easy.$"
+	.string "BRENDAN: Ready, {PLAYER}? I've\n"
+	.string "been looking forward to our next\l"
+	.string "battle!$"
 
 Route104_Text_BrendanDefeat:
 	.string "Hmm… Fine. You saw it coming.$"
 
 Route104_Text_BrendanPostBattle:
-	.string "BRENDAN: You build well already.\p"
-	.string "Still. Watch MR. BRINEY with PEEKO some\n"
-	.string "time. Not every partner is a piece on\l"
-	.string "a board. Don't forget that part.$"
+	.string "BRENDAN: You've been busy since\n"
+	.string "ROUTE 103. I'll have to keep up!\p"
+	.string "You're going out to sea with MR.\n"
+	.string "BRINEY, right? Bring back a good\l"
+	.string "story. I'll have one for you, too.$"

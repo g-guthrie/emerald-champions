@@ -310,9 +310,9 @@ BattleFrontier_OutsideWest_Text_BattlePikeSign:
 	.string "CHAMPIONS CIRCUIT RECEPTION\n"
 	.string "Central arena: BATTLE TOWER$"
 BattleFrontier_OutsideWest_Text_ThisIsBattleTower:
-	.string "This is the BATTLE TOWER.\p"
-	.string "TRAINERS bring their best-raised\n"
-	.string "POKéMON for elimination-style matches.$"
+	.string "This is the BATTLE TOWER.\n"
+	.string "The CHAMPIONS CIRCUIT holds its\l"
+	.string "doubles matches in the central arena.$"
 
 BattleFrontier_OutsideWest_Text_MayISeeYourTicket:
 	.string "Hello, are you here for the ferry?\n"
@@ -413,11 +413,9 @@ BattleFrontier_OutsideWest_Text_KeepBattlingUntilIGetSymbol:
 	.string "I'm going to keep battling until I\n"
 	.string "beat my best Circuit streak!$"
 BattleFrontier_OutsideWest_Text_YoureOffToChallengeDome:
-	.string "Oh? You're off to challenge\n"
-	.string "the BATTLE DOME?\p"
-	.string "I'll wish you the best of luck.\n"
-	.string "Let us both win our way up and meet\l"
-	.string "in challenges.$"
+	.string "Registering at the DOME? Good luck!\n"
+	.string "We'll both end up at the TOWER arena.\l"
+	.string "Maybe I'll see you there.$"
 
 BattleFrontier_OutsideWest_Text_DomeIsHereGrandpa:
 	.string "Grandpa, over here!\n"
@@ -467,12 +465,10 @@ BattleFrontier_OutsideWest_Text_LastTimeOurEyesMet:
 	.string "our eyes met and sparks flew!$"
 
 BattleFrontier_OutsideWest_Text_DomeAceLookedBecauseOfMyCheering:
-	.string "Whaaaaaat?!\n"
-	.string "Pfft!\p"
-	.string "That only happened because\n"
-	.string "I happened to be sitting next to you!\p"
+	.string "Whaaaaaat?! Pfft!\p"
 	.string "The DOME ACE only looked our way\n"
-	.string "because my cheering was so loud!$"
+	.string "because my cheering was so loud!\l"
+	.string "That old tournament was legendary!$"
 
 BattleFrontier_OutsideWest_Text_DomeAceIsMine:
 	.string "Oh, shush!\n"
@@ -483,18 +479,14 @@ BattleFrontier_OutsideWest_Text_DomeAceIsMine:
 	.string "The only idol for me!$"
 
 BattleFrontier_OutsideWest_Text_FansOverThereUsedToBeTrainers:
-	.string "Those people squabbling over there…\p"
-	.string "It's hard to believe, but they once\n"
-	.string "were TRAINERS, and good ones, too.\p"
-	.string "They used to be incredibly tough,\n"
-	.string "and they were famous, too.\p"
-	.string "But they were obliterated by this\n"
-	.string "certain TRAINER at a tournament.\p"
-	.string "They were so thoroughly whipped,\n"
-	.string "they became smitten by the TRAINER.\p"
-	.string "Now they're just fans of the TRAINER.\n"
-	.string "They go cheer for their idol at the\l"
-	.string "BATTLE DOME every day now.$"
+	.string "Those people squabbling over there\n"
+	.string "used to be famous TRAINERS.\p"
+	.string "Then one tournament opponent beat\n"
+	.string "all of them. They became fans on\l"
+	.string "the spot!\p"
+	.string "The old DOME tournaments ended,\n"
+	.string "but they still meet here every day\l"
+	.string "to argue over their idol.$"
 
 BattleFrontier_OutsideWest_Text_MonWithLongTailInFrontier:
 	.string "I heard a rumor that someone saw\n"

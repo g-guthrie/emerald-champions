@@ -4555,7 +4555,10 @@ static void BufferInGameTradeMonName(void)
 {
     u8 nickname[max(32, POKEMON_NAME_BUFFER_SIZE)];
     const struct InGameTrade *inGameTrade = &sIngameTrades[gSpecialVar_0x8005];
-    GetMonData(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8005], MON_DATA_NICKNAME, nickname);
+    struct Pokemon *mon = gSpecialVar_0x8004 == PC_MON_CHOSEN
+        ? &gParties[B_TRAINER_OPPONENT_A][TRADEMON_FROM_PC]
+        : &gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004];
+    GetMonData(mon, MON_DATA_NICKNAME, nickname);
     StringCopy_Nickname(gStringVar1, nickname);
     StringCopy(gStringVar2, GetSpeciesName(inGameTrade->species));
 }
@@ -4608,7 +4611,7 @@ static void CreateInGameTradePokemonInternal(u8 whichPlayerMon, u8 whichInGameTr
         }
     }
     // Apply this last so legacy trade fields cannot overwrite the finished
-    // competitive build's moves, nature, Ability, Stat Points, or held item.
+    // competitive build's moves, nature, Ability, EVs, or held item.
     ApplyEmeraldChampionsBattleSetChoice(pokemon, 0);
     CalculateMonStats(&gParties[B_TRAINER_OPPONENT_A][0]);
 }

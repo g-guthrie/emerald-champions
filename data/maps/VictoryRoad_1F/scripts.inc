@@ -19,6 +19,7 @@ VictoryRoad_1F_EventScript_SetEntranceWallyPos2::
 
 VictoryRoad_1F_EventScript_WallyBattleTrigger1::
 	lockall
+	call VictoryRoad_1F_EventScript_CheckWallyParty
 	setvar VAR_0x8008, 1
 	addobject LOCALID_VICTORY_ROAD_ENTRANCE_WALLY
 	applymovement LOCALID_VICTORY_ROAD_ENTRANCE_WALLY, VictoryRoad_1F_Movement_WallyApproachPlayer1
@@ -28,11 +29,24 @@ VictoryRoad_1F_EventScript_WallyBattleTrigger1::
 
 VictoryRoad_1F_EventScript_WallyBattleTrigger2::
 	lockall
+	call VictoryRoad_1F_EventScript_CheckWallyParty
 	setvar VAR_0x8008, 2
 	addobject LOCALID_VICTORY_ROAD_ENTRANCE_WALLY
 	applymovement LOCALID_VICTORY_ROAD_ENTRANCE_WALLY, VictoryRoad_1F_Movement_WallyApproachPlayer2
 	waitmovement 0
 	goto VictoryRoad_1F_EventScript_WallyEntranceBattle
+	end
+
+VictoryRoad_1F_EventScript_CheckWallyParty::
+	special HasEnoughMonsForDoubleBattle
+	goto_if_ne VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS, VictoryRoad_1F_EventScript_WallyNeedsTwoMons
+	return
+
+VictoryRoad_1F_EventScript_WallyNeedsTwoMons::
+	msgbox EmeraldChampions_Text_NeedTwoPokemon, MSGBOX_DEFAULT
+	applymovement LOCALID_PLAYER, Common_Movement_WalkDown
+	waitmovement 0
+	releaseall
 	end
 
 VictoryRoad_1F_EventScript_WallyEntranceBattle::
@@ -95,7 +109,14 @@ VictoryRoad_1F_EventScript_RematchWally::
 
 VictoryRoad_1F_EventScript_Edgar::
 	trainerbattle_double TRAINER_EDGAR, VictoryRoad_1F_Text_EdgarIntro, VictoryRoad_1F_Text_EdgarDefeat, EmeraldChampions_Text_NeedTwoPokemon
+	setvar VAR_0x8004, LEGENDARY_SIGN_VICTINI
+	special GetSelectedLegendarySignState
+	goto_if_eq VAR_RESULT, 2, VictoryRoad_1F_EventScript_EdgarVictiniCaught
 	msgbox VictoryRoad_1F_Text_EdgarPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+VictoryRoad_1F_EventScript_EdgarVictiniCaught::
+	msgbox VictoryRoad_1F_Text_EdgarVictiniCaught, MSGBOX_AUTOCLOSE
 	end
 
 VictoryRoad_1F_EventScript_Albert::
@@ -119,35 +140,42 @@ VictoryRoad_1F_EventScript_Katelynn::
 	end
 
 VictoryRoad_1F_Text_WallyNotGoingToLoseAnymore:
-	.string "WALLY: Hi! {PLAYER}!\p"
-	.string "Surprised? I made it here, and it's\n"
-	.string "because of you.\p"
-	.string "Losing in MAUVILLE showed me my team had\n"
-	.string "no answer for speed. Now TOGEKISS pulls\l"
-	.string "every attack while the rest set up.\p"
-	.string "I'm not losing anymore. Here I come!$"
+	.string "WALLY: {PLAYER}! I was hoping I'd\n"
+	.string "see you!\p"
+	.string "When we met, I couldn't imagine\n"
+	.string "traveling this far from home. Now\l"
+	.string "look at us!\p"
+	.string "My uncle still worries, so I call\n"
+	.string "whenever I reach a new town.\p"
+	.string "This time, I want to tell him I\n"
+	.string "won. Here I come!$"
 
 VictoryRoad_1F_Text_WallyEntranceDefeat:
-	.string "You still had an answer for my answer…$"
+	.string "We gave it everything we had…$"
 
 VictoryRoad_1F_Text_WallyPostEntranceBattle:
-	.string "WALLY: I couldn't beat you today, but I\n"
-	.string "saw the seam in my team.\p"
-	.string "Next time it's closed.$"
+	.string "WALLY: I wanted to win so badly…\p"
+	.string "But I'm glad you were here to see\n"
+	.string "how far we've come. I'll keep\l"
+	.string "going, {PLAYER}. You can count on\l"
+	.string "that!$"
 
 VictoryRoad_1F_Text_WallyIntro:
-	.string "WALLY: Hi! {PLAYER}!\p"
-	.string "I rebuilt again since last time. I\n"
-	.string "wanted you to see it first!\p"
-	.string "Okay… Here I come!$"
+	.string "WALLY: {PLAYER}! Welcome back!\p"
+	.string "We've been training since our last\n"
+	.string "battle. I wanted you to see us!\p"
+	.string "All right… Here we come!$"
 
 VictoryRoad_1F_Text_WallyDefeat:
-	.string "You still had an answer for my answer…$"
+	.string "Still just out of reach…$"
 
 VictoryRoad_1F_Text_WallyPostBattle:
-	.string "WALLY: Not this time either… But the gap\n"
-	.string "is closing, {PLAYER}.\p"
-	.string "When it closes, I'm taking the LEAGUE.$"
+	.string "WALLY: I used to be afraid to\n"
+	.string "lose. Now every battle makes me\l"
+	.string "want to try again.\p"
+	.string "Someday, I'll meet you at the\n"
+	.string "LEAGUE. Until then, let's keep\l"
+	.string "helping each other grow!$"
 
 VictoryRoad_1F_Text_EdgarIntro:
 	.string "I've made it this far a couple times,\n"
@@ -157,15 +185,20 @@ VictoryRoad_1F_Text_EdgarDefeat:
 	.string "My dream ends here again…$"
 
 VictoryRoad_1F_Text_EdgarPostBattle:
-	.string "You've made it this far. Keep the\n"
-	.string "momentum going and become the\l"
-	.string "CHAMPION! If anyone can, it's you!\p"
-	.string "A victory-shaped mark nearby sketches\n"
-	.string "LUCARIO. Keep that family close.$"
+	.string "You have made it this far. Keep\n"
+	.string "going and become the CHAMPION!\p"
+	.string "VICTINI lives on this floor,\n"
+	.string "with a 3% encounter chance.\l"
+	.string "A rare bit of luck on a hard road!$"
 
 VictoryRoad_1F_Text_AlbertIntro:
 	.string "I didn't come all this way to lose now.\n"
 	.string "That possibility doesn't exist!$"
+
+VictoryRoad_1F_Text_EdgarVictiniCaught:
+	.string "You've already found VICTINI!\p"
+	.string "Now go claim your own victory\n"
+	.string "at the POKéMON LEAGUE!$"
 
 VictoryRoad_1F_Text_AlbertDefeat:
 	.string "Impossible…\n"

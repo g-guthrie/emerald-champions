@@ -282,11 +282,12 @@ SlateportCity_OceanicMuseum_2F_EventScript_MuseumPatron3::
 	end
 
 SlateportCity_OceanicMuseum_2F_Text_ThankYouForTheParts:
-	.string "I'm STERN. You brought DEVON's parts!\p"
-	.string "They'll let us measure pressure\n"
-	.string "deep beneath the seafloor.\p"
-	.string "The tides have shifted since strange\n"
-	.string "marks began shining across HOENN.$"
+	.string "I'm STERN. You brought DEVON's\n"
+	.string "parts! They'll help us measure\l"
+	.string "pressure deep beneath the sea.\p"
+	.string "The tides have been changing.\n"
+	.string "Even the wild POKéMON are\l"
+	.string "appearing in unusual places.$"
 
 SlateportCity_OceanicMuseum_2F_Text_WellTakeThoseParts:
 	.string "Hold it. Those parts map pressure below\n"
@@ -324,12 +325,16 @@ SlateportCity_OceanicMuseum_2F_Text_CameToSeeWhatsTakingSoLong:
 SlateportCity_OceanicMuseum_2F_Text_ArchieWarning:
 	.string "I'm ARCHIE, leader of TEAM AQUA.\p"
 	.string "The sea doesn't care for borders.\n"
-	.string "Life moves where the water carries it.\p"
-	.string "Those parts can trace the deep current\n"
-	.string "waking HOENN's ancient marks.\p"
-	.string "MAXIE would bury that power\n"
-	.string "under more land. I intend to let it flow.\p"
-	.string "Hand them over, or stand and fight!$"
+	.string "Life moves where the water\l"
+	.string "carries it.\p"
+	.string "Those instruments can track the\n"
+	.string "deep currents and lead us to the\l"
+	.string "POKéMON that shaped the sea.\p"
+	.string "MAXIE would bury that power under\n"
+	.string "more land. I intend to let it\l"
+	.string "flow.\p"
+	.string "Hand them over, or stand and\n"
+	.string "fight!$"
 
 SlateportCity_OceanicMuseum_2F_Text_ArchieDefeat:
 	.string "Tch! I underestimated you.$"
@@ -341,18 +346,21 @@ SlateportCity_OceanicMuseum_2F_Text_ArchieDefeated:
 	.string "your precious instruments.$"
 
 SlateportCity_OceanicMuseum_2F_Text_SternThankYouForSavingUs:
-	.string "{PLAYER}, thank you.\n"
-	.string "You kept us and the parts safe.\p"
-	.string "These parts may reveal why the ocean\n"
-	.string "and the CHAMPION'S SIGNS move together.$"
+	.string "{PLAYER}, thank you. You kept us\n"
+	.string "and the parts safe.\p"
+	.string "Our instruments may reveal what\n"
+	.string "is disturbing the ocean and its\l"
+	.string "POKéMON.$"
 
 SlateportCity_OceanicMuseum_2F_Text_SternIveGotToGo:
-	.string "I'll get these instruments to the ship.\n"
-	.string "We can't let AQUA reach the depths first.\p"
-	.string "After DEWFORD GYM, follow ROUTE 110\n"
-	.string "north to MAUVILLE CITY.\p"
+	.string "I'll get these instruments to the\n"
+	.string "ship. We can't let AQUA reach the\l"
+	.string "depths first.\p"
+	.string "After DEWFORD GYM, follow ROUTE\n"
+	.string "110 north to MAUVILLE CITY.\p"
 	.string "WATTSON keeps the city running.\n"
-	.string "His GYM should give you a challenge!$"
+	.string "His GYM should give you a\l"
+	.string "challenge!$"
 
 SlateportCity_OceanicMuseum_2F_Text_BrawlyHandoff:
 	.string "But earn BRAWLY's BADGE first.\n"
@@ -412,9 +420,9 @@ SlateportCity_OceanicMuseum_2F_Text_SurfaceSeawaterDisplay:
 	.string "as currents driven by the winds.”$"
 
 SlateportCity_OceanicMuseum_2F_Text_SSTidalReplica:
-	.string "“THE FERRY S.S. TIDAL\p"
-	.string "“A scale replica of the ship under\n"
-	.string "construction at STERN'S SHIPYARD.”$"
+	.string "“THE FERRY S.S. TIDAL”\p"
+	.string "“A scale replica of the vessel\n"
+	.string "designed at STERN'S SHIPYARD.”$"
 
 SlateportCity_OceanicMuseum_2F_Text_SubmarineReplica:
 	.string "“SUBMARINE EXPLORER 1\p"

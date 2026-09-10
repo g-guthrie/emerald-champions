@@ -231,8 +231,9 @@ MtPyre_Summit_Text_DarkraiDormant:
 	.string "Your partner may stay in the PC.$"
 
 MtPyre_Summit_Text_DarkraiQuiet:
-	.string "The nightmare has lifted. The black\n"
-	.string "SIGN records the trial you completed.$"
+	.string "The nightmare has lifted. Your\n"
+	.string "encounter with DARKRAI is\l"
+	.string "recorded.$"
 
 MtPyre_Summit_Text_DarkraiNeedsTrainers:
 	.string "A dream can calm this nightmare.\p"
@@ -249,39 +250,44 @@ MtPyre_Summit_Text_DarkraiNeedsMusharna:
 	.string "Your partner may stay in the PC.$"
 
 MtPyre_Summit_Text_DarkraiAwakened:
-	.string "The Legendary Sign has awakened!\p"
-	.string "Nightmare mist now gathers at the\n"
-	.string "summit's black mark.$"
+	.string "DARKRAI emerges from the\n"
+	.string "nightmare mist. Approach it at\l"
+	.string "the summit.$"
 
 MtPyre_Summit_Text_DarkraiAwaits:
-	.string "Nightmare mist still gathers around\n"
-	.string "the summit's black mark.$"
+	.string "DARKRAI is still waiting in the\n"
+	.string "nightmare mist at the summit.$"
 
 
 MtPyre_Summit_Text_CresseliaAwakened:
-	.string "DARKRAI's capture completes one\n"
-	.string "half of the dream.\p"
-	.string "A second Sign shines in the deepest\n"
-	.string "chamber of Meteor Falls.$"
+	.string "DARKRAI's capture has revealed a\n"
+	.string "new lead: CRESSELIA shelters in\l"
+	.string "the rear B1F room of METEOR\l"
+	.string "FALLS.\p"
+	.string "With six badges and the MAGMA\n"
+	.string "EMBLEM, it can appear among\l"
+	.string "wild POKéMON there.$"
 
 MtPyre_Summit_Text_CresseliaAwaits:
-	.string "The lunar Sign still shines in the\n"
-	.string "deepest chamber of Meteor Falls.$"
+	.string "CRESSELIA can appear among wild\n"
+	.string "POKéMON in METEOR FALLS' rear B1F\l"
+	.string "room, after six badges and the\l"
+	.string "MAGMA EMBLEM.$"
 
 MtPyre_Summit_Text_TimeSignDormant:
-	.string "Dream and nightmare are now bound.\p"
-	.string "A final Sign sleeps until you are\n"
-	.string "recognized as Champion.$"
+	.string "DIALGA lives in the main B1F\n"
+	.string "chamber of METEOR FALLS. It has\l"
+	.string "a 3% wild encounter chance.$"
 
 MtPyre_Summit_Text_DialgaAwakened:
-	.string "The final Legendary Sign rings\n"
-	.string "through Meteor Falls.\p"
-	.string "Seek the chamber where time stands\n"
-	.string "alone.$"
+	.string "DIALGA can appear among wild\n"
+	.string "POKéMON in the main B1F chamber\l"
+	.string "of METEOR FALLS. Its chance is 3%.$"
 
 MtPyre_Summit_Text_DialgaAwaits:
-	.string "The Sign of time still waits in the\n"
-	.string "hidden depths of Meteor Falls.$"
+	.string "Search the main B1F chamber of\n"
+	.string "METEOR FALLS for DIALGA. Each\l"
+	.string "wild encounter has a 3% chance.$"
 
 MtPyre_Summit_Text_DreamChainComplete:
 	.string "Nightmare, dream, and time have all\n"
@@ -575,86 +581,93 @@ MtPyre_Summit_EventScript_Matt::
 	end
 
 MtPyre_Summit_Text_MattIntro:
-	.string "MATT: Rain does more than boost Water. It\n"
-	.string "heals, redirects Fire, and changes tempo.\p"
-	.string "Break AQUA's formation before the wind!$"
+	.string "MATT: Hey, I know you! ARCHIE\n"
+	.string "said you'd turn up again.\p"
+	.string "He needs more time at the summit.\n"
+	.string "So you get to battle me!$"
 
 MtPyre_Summit_Text_MattDefeat:
-	.string "You kept one answer outside the current.$"
+	.string "You're tougher than I expected!$"
 
 MtPyre_Summit_Text_MattAfter:
-	.string "ARCHIE is beyond us with the RED ORB. If\n"
-	.string "you follow, expect the sea to fight back.$"
+	.string "ARCHIE is beyond us with the RED\n"
+	.string "ORB. If you follow, expect the\l"
+	.string "sea to fight back.$"
 
 MtPyre_Summit_Text_Grunt1Intro:
-	.string "MAGMA reached the ORBS first, but their\n"
-	.string "fixed formation left a path behind them.\p"
-	.string "AQUA will take that path and the ORB.$"
+	.string "MAGMA got here first. We're not\n"
+	.string "letting them take both ORBS!\p"
+	.string "And you're not getting through,\n"
+	.string "either!$"
 
 MtPyre_Summit_Text_Grunt1Defeat:
-	.string "You changed course inside my attack…$"
+	.string "You got past me, too…$"
 
 MtPyre_Summit_Text_Grunt1PostBattle:
-	.string "One current broke. Others still run\n"
-	.string "between you and ARCHIE.$"
+	.string "ARCHIE's farther up. The others\n"
+	.string "will stop you!$"
 
 MtPyre_Summit_Text_Grunt2Intro:
-	.string "MAGMA guards one lane and calls it order.\n"
-	.string "AQUA attacks from every open current.\p"
-	.string "Read this one before it carries you away.$"
+	.string "We came all this way for the RED\n"
+	.string "ORB. Don't think we're leaving\l"
+	.string "without it!$"
 
 MtPyre_Summit_Text_Grunt2Defeat:
-	.string "You found still water inside the rush…$"
+	.string "That wasn't supposed to happen!$"
 
 MtPyre_Summit_Text_Grunt2PostBattle:
-	.string "You keep interfering, but have you\n"
-	.string "decided what the ORBS should protect?$"
+	.string "Why do you keep following us?\n"
+	.string "MAGMA is the one you should be\l"
+	.string "stopping!$"
 
 MtPyre_Summit_Text_Grunt3Intro:
-	.string "We saw you at MT. CHIMNEY.\p"
-	.string "You reject MAGMA and still pursue AQUA.\n"
-	.string "Then show me the answer you chose.$"
+	.string "You helped stop MAGMA at MT.\n"
+	.string "CHIMNEY. So why are you fighting\l"
+	.string "us now?\p"
+	.string "Fine! I'll stop you myself!$"
 
 MtPyre_Summit_Text_Grunt3Defeat:
-	.string "You refused both currents…$"
+	.string "You're really not on our side…$"
 
 MtPyre_Summit_Text_Grunt3PostBattle:
 	.string "The battle still bought ARCHIE time.\n"
 	.string "The RED ORB is already within reach.$"
 
 MtPyre_Summit_Text_Grunt4Intro:
-	.string "You adapt too freely for MAGMA and\n"
-	.string "question too much for AQUA.\p"
-	.string "A lone Trainer should not be able to\n"
-	.string "break two organizations. Prove me wrong.$"
+	.string "You again?! Do you ever get tired\n"
+	.string "of chasing TEAM AQUA?\p"
+	.string "I'm putting an end to it!$"
 
 MtPyre_Summit_Text_Grunt4Defeat:
-	.string "You needed neither uniform…$"
+	.string "Not again!$"
 
 MtPyre_Summit_Text_Grunt4PostBattle:
-	.string "Our crews make ARCHIE's plans possible.\n"
-	.string "Your team did the same for yours.$"
+	.string "ARCHIE will know what to do. He\n"
+	.string "has to.$"
 
 MtPyre_Summit_Text_ArchieWeGotTheOrbLetsGo:
-	.string "ARCHIE: MAXIE took the BLUE ORB, but the\n"
-	.string "RED ORB belongs to AQUA now.\p"
-	.string "The wardens say the ORBS once quieted\n"
-	.string "land, sea, and every shining SIGN.\p"
-	.string "Then the sea can use that same network\n"
-	.string "to wake. AQUA, move out!$"
+	.string "ARCHIE: MAXIE took the BLUE ORB.\n"
+	.string "The RED ORB belongs to AQUA now!\p"
+	.string "The wardens used these ORBS to\n"
+	.string "keep ancient powers asleep. I\l"
+	.string "will use this one to wake the\l"
+	.string "sea.\p"
+	.string "AQUA, move out!$"
 
 MtPyre_Summit_Text_BothOrbsTakenMagmaLeftThis:
-	.string "Both ORBS are gone. They were never\n"
-	.string "weapons; together they completed a seal.\p"
-	.string "The CHAMPION'S SIGNS are that seal's\n"
-	.string "outer pattern, spread across HOENN.\p"
-	.string "MAGMA dropped this EMBLEM in its haste.\n"
-	.string "Take it to their hideout in JAGGED PASS.\p"
-	.string "Use ROUTE 112's cable car to MT. CHIMNEY.\n"
-	.string "Then descend the pass. Carry the EMBLEM\l"
-	.string "near the odd boulder on its east side.\p"
-	.string "It may open the way. Stop MAGMA before\n"
-	.string "they break what the ORBS protected.$"
+	.string "Both ORBS are gone. They were\n"
+	.string "entrusted to us to keep GROUDON\l"
+	.string "and KYOGRE's powers in balance.\p"
+	.string "MAGMA dropped this EMBLEM. Take\n"
+	.string "it to their hideout in JAGGED\l"
+	.string "PASS.\p"
+	.string "Ride ROUTE 112's cable car to MT.\n"
+	.string "CHIMNEY, then descend the pass.\p"
+	.string "Carry the EMBLEM near the odd\n"
+	.string "boulder on the east side. It may\l"
+	.string "open the way.\p"
+	.string "Stop MAGMA before they awaken\n"
+	.string "something they cannot control.$"
 
 MtPyre_Summit_Text_MagmaEmblemSentToPC:
 	.string "Your KEY ITEMS pocket is full, so the\n"
@@ -669,35 +682,34 @@ MtPyre_Summit_Text_MagmaEmblemNoRoom:
 	.string "full. Make room, then speak to me again.$"
 
 MtPyre_Summit_Text_OrbsHaveBeenTaken:
-	.string "With the ORBS apart, land and sea will\n"
-	.string "pull against the same ancient network.\p"
-	.string "Only the guardian of the sky ever stood\n"
-	.string "outside that struggle.\p"
-	.string "Take the MAGMA EMBLEM to JAGGED PASS.\n"
-	.string "Use ROUTE 112's cable car to MT. CHIMNEY.\l"
-	.string "Then go down to the strange boulder.\p"
-	.string "Find MAGMA's hideout before they undo\n"
-	.string "the seal.$"
+	.string "The stolen ORBS can awaken\n"
+	.string "GROUDON and KYOGRE. Their powers\l"
+	.string "must never clash again.\p"
+	.string "Take the MAGMA EMBLEM to JAGGED\n"
+	.string "PASS. Use ROUTE 112's cable car\l"
+	.string "to MT. CHIMNEY, then descend the\l"
+	.string "pass.\p"
+	.string "Approach the strange boulder on\n"
+	.string "the east side. Find MAGMA before\l"
+	.string "they awaken GROUDON.$"
 
 MtPyre_Summit_Text_GroudonKyogreAwakened:
-	.string "Oh, my goodness…\p"
-	.string "You say that both GROUDON and KYOGRE\n"
-	.string "have been awakened?\p"
-	.string "It is said that the BLUE ORB and\n"
-	.string "the RED ORB quelled the rage of\l"
-	.string "the two POKéMON…\p"
-	.string "It is also said that the true owner\n"
-	.string "of the ORBS still exists.\p"
-	.string "However, no one knows who, or what\n"
-	.string "exactly, the ORBS belong to.\p"
-	.string "It could be a human, or perhaps\n"
-	.string "a POKéMON, but no one knows.$"
+	.string "Both GROUDON and KYOGRE are\n"
+	.string "awake? Then we are all in danger.\p"
+	.string "The ORBS are part of their\n"
+	.string "ancient bond. They are no\l"
+	.string "guarantee of obedience.\p"
+	.string "Only RAYQUAZA stopped their last\n"
+	.string "clash. You must find someone who\l"
+	.string "knows where it rests.$"
 
 MtPyre_Summit_Text_ThoseTwoMenReturnedOrbs:
-	.string "The two men who took the ORBS came\n"
-	.string "back to return them on their own.\p"
-	.string "Those men…\n"
-	.string "Perhaps they are not so evil after all…$"
+	.string "The two men returned the ORBS\n"
+	.string "themselves. They finally saw what\l"
+	.string "their plans would do to HOENN.\p"
+	.string "I am glad they came back. But\n"
+	.string "repairing the harm will take more\l"
+	.string "than returning what they stole.$"
 
 MtPyre_Summit_Text_SuperAncientPokemonTaughtUs:
 	.string "The embodiments of the land, sea,\n"
@@ -722,17 +734,21 @@ MtPyre_Summit_Text_WillYouHearOutMyTale:
 	.string "told in the HOENN region?$"
 
 MtPyre_Summit_Text_GroudonKyogreTale:
-	.string "Long ago, GROUDON raised the land\n"
-	.string "and KYOGRE carved the sea. Their\l"
+	.string "GROUDON raised the land and\n"
+	.string "KYOGRE carved the sea. Their\l"
 	.string "clash grew until neither could\l"
 	.string "stop.\p"
-	.string "Ancient Trainers formed a network\n"
-	.string "of SIGNS with trusted POKéMON.\p"
-	.string "The RED and BLUE ORBS joined it,\n"
-	.string "but RAYQUAZA supplied its balance.\p"
-	.string "The mountain still bears other\n"
-	.string "SIGNS. Inspect them yourself;\l"
-	.string "their conditions differ.$"
+	.string "RAYQUAZA descended and calmed\n"
+	.string "them. The RED and BLUE ORBS were\l"
+	.string "left in our care.\p"
+	.string "TAPU LELE and Galarian MOLTRES\n"
+	.string "live in the outside grass.\l"
+	.string "GIRATINA lives on the sixth floor.\l"
+	.string "Each has a 3% encounter chance.\p"
+	.string "Accept the MAGMA EMBLEM and earn\n"
+	.string "six badges to find YVELTAL\l"
+	.string "outside, too. SWEET SCENT helps\l"
+	.string "with that discovery.$"
 MtPyre_Summit_Text_WellThatTooIsFine:
 	.string "I see…\n"
 	.string "Well, that, too, is fine…$"
@@ -743,28 +759,28 @@ MtPyre_Summit_Text_MaxieSilence:
 	.string "… … … … … …$"
 
 MtPyre_Summit_Text_HearTheNewLegendOfHoenn:
-	.string "The old legend named three great powers.\n"
-	.string "SOOTOPOLIS added a fourth: the Trainer\l"
-	.string "who understood why balance mattered.\p"
-	.string "Will you hear HOENN's new legend?$"
+	.string "Our old tale tells how RAYQUAZA\n"
+	.string "stopped a terrible clash. Now we\l"
+	.string "have seen it happen again.\p"
+	.string "Will you hear what people are\n"
+	.string "saying about SOOTOPOLIS?$"
 
 MtPyre_Summit_Text_HoennTrioTale:
-	.string "Land and sea became absolute, and\n"
-	.string "HOENN began to break.\p"
-	.string "A green POKéMON descended from the\n"
-	.string "sky and answered your call.\p"
-	.string "RAYQUAZA restored the balance. You\n"
-	.string "gave it a reason to answer.\p"
-	.string "The sixth floor holds another\n"
-	.string "SIGN. Return there after earning\l"
-	.string "the title of Champion.$"
+	.string "RAYQUAZA restored the balance.\n"
+	.string "You helped HOENN find a way\l"
+	.string "through.\p"
+	.string "Search the sixth floor for\n"
+	.string "GIRATINA. It has a 3% wild\l"
+	.string "encounter chance.$"
 MtPyre_Summit_EventScript_OldLadyAfterMagma::
 	msgbox MtPyre_Summit_Text_OrbsApart, MSGBOX_DEFAULT
 	release
 	end
 
 MtPyre_Summit_Text_OrbsApart:
-	.string "With the ORBS apart, land and sea will\n"
-	.string "pull against the same ancient network.\p"
-	.string "Only the guardian of the sky ever stood\n"
-	.string "outside that struggle.$"
+	.string "The ORBS were entrusted to us to\n"
+	.string "keep GROUDON and KYOGRE's powers\l"
+	.string "in balance.\p"
+	.string "Only RAYQUAZA could calm their\n"
+	.string "last clash. I fear we will need\l"
+	.string "its help again.$"

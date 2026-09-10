@@ -271,7 +271,6 @@ static u64 GetAiFlags(u16 trainerId, enum BattlerId battler)
              | AI_FLAG_SMART_SWITCHING
              | AI_FLAG_SMART_MON_CHOICES
              | AI_FLAG_PP_STALL_PREVENTION
-             | AI_FLAG_PREDICTION
              | AI_FLAG_TRY_TO_2HKO
              | AI_FLAG_HP_AWARE
              | AI_FLAG_POWERFUL_STATUS
@@ -426,6 +425,9 @@ void SetupAIPredictionData(enum BattlerId battler, enum SwitchType switchType)
 void ComputeAiBattlerDecisions(enum BattlerId battler)
 {
     gAiLogicData->aiCalcInProgress = TRUE;
+    // Charge native setup, but not intervening UI/controller frames, against
+    // this side's coordinated decision budget.
+    gAiLogicData->decisionStartFrame = gMain.vblankCounter1 - gAiLogicData->decisionSetupFrames;
 
         AIDebugTimerStart();
 
@@ -820,11 +822,15 @@ void CalcBattlerAiMovesData(struct AiLogicData *aiData, enum BattlerId battlerAt
         .terrain = terrain,
     };
 
+    memset(&aiData->populationBomb[battlerAtk][battlerDef], 0, sizeof(aiData->populationBomb[battlerAtk][battlerDef]));
+
     for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
     {
         struct SimulatedDamage dmg = {0};
         aiCalc.typeEffectiveness = Q_4_12(0.0);
         aiCalc.move = moves[moveIndex];
+        aiCalc.populationBomb = GetMoveEffect(aiCalc.move) == EFFECT_POPULATION_BOMB
+            ? &aiData->populationBomb[battlerAtk][battlerDef] : NULL;
 
         // Move data is reused for consecutive switch-in candidates, so reset every slot before skipping unusable moves.
         aiData->simulatedDmg[battlerAtk][battlerDef][moveIndex] = dmg;
@@ -866,6 +872,7 @@ static void SetBattlerAiMovesData(struct AiLogicData *aiData, enum BattlerId bat
 void SetAiLogicDataForTurn(struct AiLogicData *aiData)
 {
     memset(aiData, 0, sizeof(struct AiLogicData));
+    aiData->decisionStartFrame = gMain.vblankCounter1;
     gAiBattleData->aiUsingGimmick = 0;
 
     if (!IsSmartBattle())
@@ -909,6 +916,7 @@ void SetAiLogicDataForTurn(struct AiLogicData *aiData)
     gBattleStruct->dynamicMoveCategory = DAMAGE_CATEGORY_NONE;
 
     AIDebugTimerEnd();
+    aiData->decisionSetupFrames = gMain.vblankCounter1 - aiData->decisionStartFrame;
     gAiLogicData->aiCalcInProgress = FALSE;
 }
 
@@ -999,9 +1007,11 @@ s32 AI_ScoreMoveAgainstTarget(enum BattlerId battler, enum BattlerId target, u32
     gAiThinkingStruct->moveConsidered = move;
     for (u32 i = 0; i < MAX_MON_MOVES; i++)
         gAiThinkingStruct->score[i] = AI_SCORE_DEFAULT;
-    for (u32 bit = 0; bit < ARRAY_COUNT(sBattleAiFuncTable) && score > 0; bit++)
+    while (flags && score > 0)
     {
-        if (flags & (1ULL << bit) && sBattleAiFuncTable[bit] != NULL)
+        u32 bit = __builtin_ctzll(flags);
+        flags &= flags - 1;
+        if (bit < ARRAY_COUNT(sBattleAiFuncTable) && sBattleAiFuncTable[bit] != NULL)
         {
             gAiThinkingStruct->aiLogicId = bit;
             score = sBattleAiFuncTable[bit](battler, target, move, score);
@@ -1475,6 +1485,28 @@ static bool32 AI_RedirectionHasPartnerPayoff(enum BattlerId battler, enum Move m
     return FALSE;
 }
 
+
+// Repeating a revealed redirection move is a risk, not knowledge of the
+// player's pending command. Avoid rewarding another Seed that would reach
+// an already-seeded recipient. This adds no simulated turns or new state.
+static bool32 IsLeechSeedLikelyRedirectedToSeededFoe(enum BattlerId battlerAtk, enum BattlerId battlerDef)
+{
+    struct AiLogicData *aiData = gAiLogicData;
+    enum BattlerId redirector = GetPartnerBattler(battlerDef);
+    enum Move previous = aiData->lastUsedMove[redirector];
+    if (!HasPartner(battlerDef) || !gBattleMons[redirector].volatiles.leechSeed
+     || (previous != MOVE_FOLLOW_ME && previous != MOVE_RAGE_POWDER)
+     || IsBattlerIncapacitated(redirector, aiData->abilities[redirector])
+     || IsMoveRedirectionPrevented(battlerAtk, MOVE_LEECH_SEED, aiData->abilities[battlerAtk])
+     || (IsPowderMove(previous) && !IsAffectedByPowderMove(battlerAtk, aiData->abilities[battlerAtk], aiData->holdEffects[battlerAtk])))
+        return FALSE;
+    enum Move *moves = GetMovesArray(redirector);
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+        if (moves[i] == previous && !IsMoveUnusable(i, previous, aiData->moveLimitations[redirector]))
+            return TRUE;
+    return FALSE;
+}
+
 static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move, s32 score)
 {
     // move data
@@ -1709,7 +1741,12 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
                     RETURN_SCORE_MINUS(20);
                 break;
             case ABILITY_MAGIC_BOUNCE:
-                if (CanMoveBeBouncedBack(battlerAtk, move))
+                // A partner only reflects moves that also target its side or
+                // hit it. Selected Spore/Leech Seed do not gain an immunity
+                // merely because their recipient stands beside Magic Bounce.
+                if ((moveTarget == TARGET_OPPONENTS_FIELD || moveTarget == TARGET_BOTH
+                  || moveTarget == TARGET_FOES_AND_ALLY || moveTarget == TARGET_ALL_BATTLERS)
+                 && MoveCanBeBouncedBack(move) && IsBattleMoveStatus(move))
                     RETURN_SCORE_MINUS(20);
                 break;
             case ABILITY_SWEET_VEIL:
@@ -2082,7 +2119,9 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
             ADJUST_SCORE(-8);
         break;
     case EFFECT_LEECH_SEED:
-        if (gBattleMons[battlerDef].volatiles.leechSeed
+        if (IsLeechSeedLikelyRedirectedToSeededFoe(battlerAtk, battlerDef))
+            ADJUST_SCORE(-20);
+        else if (gBattleMons[battlerDef].volatiles.leechSeed
          || IS_BATTLER_OF_TYPE(battlerDef, TYPE_GRASS)
          || DoesPartnerHaveSameMoveEffect(GetPartnerBattler(battlerAtk), battlerDef, move, aiData->partnerMove))
             ADJUST_SCORE(-10);
@@ -2138,6 +2177,12 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
         if (IsWakeupTurn(battlerAtk) || !IsAsleepOrComatose(battlerAtk, aiData->abilities[battlerAtk]))
             ADJUST_SCORE(-10);    // if mon will wake up, is not asleep, or is not comatose
         break;
+    case EFFECT_OCTOLOCK:
+        // Native Octolock fails on an already affected target. Its recurring
+        // defense drops remain useful on fresh targets even under Shadow Tag.
+        if (gBattleMons[battlerDef].volatiles.octolock)
+            return 0;
+        break;
     case EFFECT_MEAN_LOOK:
         if (AI_CanBattlerEscape(battlerDef)
             || IsBattlerTrapped(battlerAtk, battlerDef)
@@ -2153,26 +2198,27 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
             ADJUST_SCORE(-10);
         break;
     case EFFECT_SPIKES:
-        if (gSideTimers[GetBattlerSide(battlerDef)].spikesAmount >= 3)
-            ADJUST_SCORE(-10);
-        else if (PartnerMoveIsSameNoTarget(GetPartnerBattler(battlerAtk), move, aiData->partnerMove)
+        if (AI_IsHazardAtCapacity(GetBattlerSide(battlerDef), move))
+            return 0;
+        if (PartnerMoveIsSameNoTarget(GetPartnerBattler(battlerAtk), move, aiData->partnerMove)
           && gSideTimers[GetBattlerSide(battlerDef)].spikesAmount == 2)
             ADJUST_SCORE(-10); // only one mon needs to set up the last layer of Spikes
         break;
     case EFFECT_STEALTH_ROCK:
-        if (IsHazardOnSide(GetBattlerSide(battlerDef), HAZARDS_STEALTH_ROCK)
-          || PartnerMoveIsSameNoTarget(GetPartnerBattler(battlerAtk), move, aiData->partnerMove)) //Only one mon needs to set up Stealth Rocks
+        if (AI_IsHazardAtCapacity(GetBattlerSide(battlerDef), move))
+            return 0;
+        if (PartnerMoveIsSameNoTarget(GetPartnerBattler(battlerAtk), move, aiData->partnerMove)) //Only one mon needs to set up Stealth Rocks
             ADJUST_SCORE(-10);
         break;
     case EFFECT_TOXIC_SPIKES:
-        if (gSideTimers[GetBattlerSide(battlerDef)].toxicSpikesAmount >= 2)
-            ADJUST_SCORE(-10);
-        else if (PartnerMoveIsSameNoTarget(GetPartnerBattler(battlerAtk), move, aiData->partnerMove) && gSideTimers[GetBattlerSide(battlerDef)].toxicSpikesAmount == 1)
+        if (AI_IsHazardAtCapacity(GetBattlerSide(battlerDef), move))
+            return 0;
+        if (PartnerMoveIsSameNoTarget(GetPartnerBattler(battlerAtk), move, aiData->partnerMove) && gSideTimers[GetBattlerSide(battlerDef)].toxicSpikesAmount == 1)
             ADJUST_SCORE(-10); // only one mon needs to set up the last layer of Toxic Spikes
         break;
     case EFFECT_STICKY_WEB:
-        if (IsHazardOnSide(GetBattlerSide(battlerDef), HAZARDS_STICKY_WEB))
-            ADJUST_SCORE(-10);
+        if (AI_IsHazardAtCapacity(GetBattlerSide(battlerDef), move))
+            return 0;
         if (DoesPartnerHaveSameMoveEffect(GetPartnerBattler(battlerAtk), battlerDef, move, aiData->partnerMove))
             ADJUST_SCORE(-10); // only one mon needs to set up Sticky Web
         break;
@@ -2908,10 +2954,7 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
     case EFFECT_TRICK_ROOM:
         if (gFieldStatuses & STATUS_FIELD_TRICK_ROOM && gFieldTimers.trickRoomTimer == 1)
         {
-            if (!CanRefreshTrickRoom(battlerAtk))
-                ADJUST_SCORE(NO_DAMAGE_OR_FAILS);
-            else if (PartnerMoveEffectIs(GetPartnerBattler(battlerAtk), aiData->partnerMove, EFFECT_TRICK_ROOM))
-                ADJUST_SCORE(PERFECT_EFFECT);
+            ADJUST_SCORE(NO_DAMAGE_OR_FAILS);
         }
         else if (PartnerMoveEffectIs(GetPartnerBattler(battlerAtk), aiData->partnerMove, EFFECT_TRICK_ROOM))
             ADJUST_SCORE(NO_DAMAGE_OR_FAILS);
@@ -3535,13 +3578,6 @@ static s32 AI_DoubleBattle(enum BattlerId battlerAtk, enum BattlerId battlerDef,
     // consider global move effects
     switch (effect)
     {
-    // Both Pokemon use Trick Room on the final turn of Trick Room to anticipate both opponents Protecting to stall out.
-    // This unsets Trick Room and resets it with a full timer.
-    case EFFECT_TRICK_ROOM:
-        if (CanRefreshTrickRoom(battlerAtk)
-         && RandomPercentage(RNG_AI_REFRESH_TRICK_ROOM_ON_LAST_TURN, DOUBLE_TRICK_ROOM_ON_LAST_TURN_CHANCE))
-            ADJUST_SCORE(PERFECT_EFFECT);
-        break;
     case EFFECT_TAILWIND:
         // Anticipate both opponents protecting to stall out Trick Room, and apply Tailwind.
         if (gFieldStatuses & STATUS_FIELD_TRICK_ROOM && gFieldTimers.trickRoomTimer == 1
@@ -4198,10 +4234,16 @@ static u32 GetWindAbilityScore(enum BattlerId battlerAtk, enum BattlerId battler
     }
     else if (aiData->abilities[battlerAtk] == ABILITY_WIND_POWER)
     {
-        if (gBattleMons[battlerAtk].volatiles.chargeTimer == 0
-         && HasDamagingMoveOfType(battlerAtk, TYPE_ELECTRIC))
+        if (gBattleMons[battlerAtk].volatiles.chargeTimer == 0)
         {
-            score = DECENT_EFFECT;
+            // Charging cannot help when every living foe is immune. Reuse
+            // the native damage cache; do not simulate another attack here.
+            for (u32 i = 0; i < MAX_MON_MOVES; i++)
+                if (GetMoveType(gBattleMons[battlerAtk].moves[i]) == TYPE_ELECTRIC)
+                    for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
+                        if (IsBattlerAlive(foe) && !IsBattlerAlly(battlerAtk, foe)
+                         && aiData->simulatedDmg[battlerAtk][foe][i].median > 0)
+                            return DECENT_EFFECT;
         }
     }
 
@@ -4278,8 +4320,33 @@ bool32 DoesBattlerKOItselfWithRecoil(enum BattlerId battlerAtk, enum BattlerId b
     // Get recoil damage
     if (effect == EFFECT_CHLOROBLAST || effect == EFFECT_MAX_HP_50_RECOIL)
         recoilDmg = (monHP + 1) / 2; // Half of max HP rounded up
-    if (GetMoveEffect(move) == EFFECT_RECOIL)
-        recoilDmg = monHP * GetMoveRecoil(move) / 100; // Recoil damage
+    if (effect == EFFECT_RECOIL)
+    {
+        // Damage-based recoil is not a fraction of the user's maximum HP.
+        // This comparison labels only a guaranteed lethal single hit; do not
+        // infer aggregate recoil from a multi-strike/target damage cache.
+        u32 index = GetMoveIndex(battlerAtk, move);
+        if (index >= MAX_MON_MOVES || IsMultiHitMove(move) || GetMoveStrikeCount(move) > 1
+         || gAiLogicData->abilities[battlerAtk] == ABILITY_PARENTAL_BOND
+         || GetMoveTarget(move) == TARGET_BOTH || GetMoveTarget(move) == TARGET_FOES_AND_ALLY
+         || GetActiveGimmick(battlerAtk) == GIMMICK_DYNAMAX || GetActiveGimmick(battlerAtk) == GIMMICK_Z_MOVE)
+            return FALSE;
+        u32 damage = gAiLogicData->simulatedDmg[battlerAtk][battlerDef][index].minimum;
+        if (DoesSubstituteBlockMove(battlerAtk, battlerDef, move))
+            damage = min(damage, gBattleMons[battlerDef].volatiles.substituteHP);
+        else
+        {
+            enum Ability ability = AI_GetMoldBreakerSanitizedAbility(battlerAtk, gAiLogicData->abilities[battlerAtk],
+                gAiLogicData->abilities[battlerDef], gAiLogicData->holdEffects[battlerDef], move);
+            if (!gBattleMons[battlerDef].volatiles.transformed
+             && ((ability == ABILITY_DISGUISE && IsMimikyuDisguised(battlerDef))
+                 || (ability == ABILITY_ICE_FACE && gBattleMons[battlerDef].species == SPECIES_EISCUE_ICE
+                     && IsBattleMovePhysical(move))))
+                damage = 0;
+            damage = min(damage, gBattleMons[battlerDef].hp);
+        }
+        recoilDmg = damage ? max(1, damage * max(1, GetMoveRecoil(move)) / 100) : 0;
+    }
 
     // Does recoil KO attacker
     s32 opposingMons = 0;
@@ -5081,8 +5148,11 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
     case EFFECT_ENDURE:
         if (CanTargetFaintAi(battlerDef, battlerAtk))
         {
-            if (gBattleMons[battlerAtk].hp > gBattleMons[battlerAtk].maxHP / 4 // Pinch berry couldn't have activated yet
-             && IsPinchBerryItemEffect(aiData->holdEffects[battlerAtk]))
+            if (IsPinchBerryItemEffect(aiData->holdEffects[battlerAtk])
+             && gBattleMons[battlerAtk].hp > 1
+             && !IsUnnerveBlocked(battlerAtk, aiData->items[battlerAtk])
+             && gBattleMons[battlerAtk].hp > GetBerryActivationThreshold(gBattleMons[battlerAtk].maxHP,
+                    4, aiData->abilities[battlerAtk], aiData->items[battlerAtk]))
                 ADJUST_SCORE(GOOD_EFFECT);
             else if ((gBattleMons[battlerAtk].hp > 1) // Only spam endure for Flail/Reversal if you're not at Min Health
              && (HasMoveWithEffect(battlerAtk, EFFECT_FLAIL) || HasMoveWithEffect(battlerAtk, EFFECT_ENDEAVOR)))
@@ -5282,7 +5352,13 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
         break;
     case EFFECT_TRICK:
     case EFFECT_BESTOW:
-        switch (aiData->holdEffects[battlerAtk])
+    {
+        // Klutz disables the item on its current holder, not the item being
+        // transferred. In particular, a Klutz user's Flame Orb can still burn
+        // its recipient. Keep the effective-item cache unchanged for damage.
+        enum HoldEffect offeredEffect = aiData->abilities[battlerAtk] == ABILITY_KLUTZ
+            ? GetItemHoldEffect(aiData->items[battlerAtk]) : aiData->holdEffects[battlerAtk];
+        switch (offeredEffect)
         {
         case HOLD_EFFECT_CHOICE_SCARF:
             ADJUST_SCORE(DECENT_EFFECT); // assume its beneficial
@@ -5303,7 +5379,17 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
             }
             break;
         case HOLD_EFFECT_FLAME_ORB:
-            if (!ShouldBurn(battlerAtk, battlerAtk, aiData->abilities[battlerAtk])
+            if (aiData->abilities[battlerAtk] == ABILITY_KLUTZ)
+            {
+                if (aiData->abilities[battlerDef] != ABILITY_KLUTZ
+                 && !gBattleMons[battlerDef].volatiles.embargoTimer
+                 && !(gFieldStatuses & STATUS_FIELD_MAGIC_ROOM)
+                 && CanBeBurned(battlerAtk, battlerDef, aiData->abilities[battlerDef])
+                 && ShouldBurn(battlerAtk, battlerDef, aiData->abilities[battlerDef])
+                 && HasMoveWithCategory(battlerDef, DAMAGE_CATEGORY_PHYSICAL))
+                    ADJUST_SCORE(GOOD_EFFECT);
+            }
+            else if (!ShouldBurn(battlerAtk, battlerAtk, aiData->abilities[battlerAtk])
              || (gBattleMons[battlerAtk].status1 & STATUS1_BURN))
             {
                 ADJUST_SCORE(DECENT_EFFECT);
@@ -5375,6 +5461,7 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
             }
         }
         break;
+    }
     case EFFECT_CORROSIVE_GAS:
         if (CanKnockOffItem(battlerDef, battlerAtk, aiData->items[battlerDef]))
         {
@@ -5760,13 +5847,15 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
             u32 foe1Speed = aiData->speedStats[GetBattlerLeftFoe(battlerAtk)];
             u32 foe2Speed = aiData->speedStats[GetBattlerRightFoe(battlerAtk)];
 
-            if (speed <= foe1Speed && (speed * 2) > foe1Speed)
+            if (IsBattlerAlive(GetBattlerLeftFoe(battlerAtk)) && speed <= foe1Speed && (speed * 2) > foe1Speed)
                 tailwindScore += 1;
-            if (speed <= foe2Speed && (speed * 2) > foe2Speed)
+            if (IsBattlerAlive(GetBattlerRightFoe(battlerAtk)) && speed <= foe2Speed && (speed * 2) > foe2Speed)
                 tailwindScore += 1;
-            if (partnerSpeed <= foe1Speed && (partnerSpeed * 2) > foe1Speed)
+            if (IsBattlerAlive(GetPartnerBattler(battlerAtk)) && IsBattlerAlive(GetBattlerLeftFoe(battlerAtk))
+             && partnerSpeed <= foe1Speed && (partnerSpeed * 2) > foe1Speed)
                 tailwindScore += 1;
-            if (partnerSpeed <= foe2Speed && (partnerSpeed * 2) > foe2Speed)
+            if (IsBattlerAlive(GetPartnerBattler(battlerAtk)) && IsBattlerAlive(GetBattlerRightFoe(battlerAtk))
+             && partnerSpeed <= foe2Speed && (partnerSpeed * 2) > foe2Speed)
                 tailwindScore += 1;
 
             if (tailwindScore > 0)
@@ -5783,6 +5872,11 @@ static s32 AI_CalcMoveEffectScore(enum BattlerId battlerAtk, enum BattlerId batt
 
                 if (windAbilityScore > 0)
                     ADJUST_SCORE(windAbilityScore);
+                else if (tailwindScore == 0 && !HasBattlerSideMoveWithEffect(battlerAtk, EFFECT_ELECTRO_BALL))
+                    // No current speed-order or wind-activation payoff. A
+                    // neutral score lets Tailwind become a recoil-free idle
+                    // action in the pair evaluator instead of useful offense.
+                    ADJUST_SCORE(NO_DAMAGE_OR_FAILS);
             }
         }
         break;

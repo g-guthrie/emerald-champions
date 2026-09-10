@@ -1,0 +1,86 @@
+[
+  {
+    "file": "data/maps/OldaleTown/scripts.inc",
+    "label": "OldaleTown_Text_SavingMyProgress"
+  },
+  {
+    "file": "data/maps/OldaleTown_House2/scripts.inc",
+    "label": "OldaleTown_House2_Text_PokemonLevelUp"
+  },
+  {
+    "file": "data/maps/OldaleTown_House2/scripts.inc",
+    "label": "OldaleTown_House2_Text_YoullGoFurtherWithStrongPokemon"
+  },
+  {
+    "file": "data/maps/OldaleTown_PokemonCenter_1F/scripts.inc",
+    "label": "OldaleTown_PokemonCenter_1F_Text_TrainersCanUsePC"
+  },
+  {
+    "file": "data/maps/OldaleTown_PokemonCenter_1F/scripts.inc",
+    "label": "OldaleTown_PokemonCenter_1F_Text_PokemonCentersAreGreat"
+  },
+  {
+    "file": "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc",
+    "label": "LittlerootTown_ProfessorBirchsLab_Text_OpeningReady"
+  },
+  {
+    "file": "data/maps/PetalburgCity_Gym/scripts.inc",
+    "label": "PetalburgCity_Gym_Text_DadGoCollectBadges"
+  },
+  {
+    "file": "data/maps/Route104/scripts.inc",
+    "label": "Route104_Text_ThrowBallAtWeakenedPokemon"
+  },
+  {
+    "file": "data/maps/RustboroCity_PokemonSchool/scripts.inc",
+    "label": "RustboroCity_PokemonSchool_Text_StudentsWhoStudyEveryTool"
+  },
+  {
+    "file": "data/maps/RustboroCity_PokemonSchool/scripts.inc",
+    "label": "RustboroCity_PokemonSchool_Text_ExplainSunStone"
+  },
+  {
+    "file": "data/maps/RustboroCity_PokemonSchool/scripts.inc",
+    "label": "RustboroCity_PokemonSchool_Text_PokemonHealItselfWithBerry"
+  },
+  {
+    "file": "data/maps/RustboroCity_PokemonSchool/scripts.inc",
+    "label": "RustboroCity_PokemonSchool_Text_StudentsNotes"
+  },
+  {
+    "file": "data/maps/RustboroCity_PokemonCenter_1F/scripts.inc",
+    "label": "RustboroCity_PokemonCenter_1F_Text_PokemonHavePersonalities"
+  },
+  {
+    "file": "data/maps/RustboroCity/scripts.inc",
+    "label": "RustboroCity_Text_PokemonCanChangeLookFromExp"
+  },
+  {
+    "file": "data/maps/RustboroCity/scripts.inc",
+    "label": "RustboroCity_Text_TradePokemonGrowFast"
+  },
+  {
+    "file": "data/maps/RustboroCity_Gym/scripts.inc",
+    "label": "RustboroCity_Gym_Text_GuideIntroduction"
+  },
+  {
+    "file": "data/maps/DewfordTown_PokemonCenter_1F/scripts.inc",
+    "label": "DewfordTown_PokemonCenter_1F_Text_StoneCavern"
+  },
+  {
+    "file": "data/scripts/emerald_champions.inc",
+    "label": "EmeraldChampions_Text_ExplainBattleSets"
+  },
+  {
+    "file": "data/text/pkmn_center_nurse.inc",
+    "label": "gText_EmeraldChampionsExplainFlightBeacon"
+  },
+  {
+    "file": "data/maps/RustboroCity_PokemonSchool/scripts.inc",
+    "label": "RustboroCity_PokemonSchool_Text_PokemontCantUseManMadeItems"
+  },
+  {
+    "file": "data/maps/RustboroCity_PokemonSchool/scripts.inc",
+    "label": "RustboroCity_PokemonSchool_Text_ConfusedPokemonAttacksItself"
+  }
+]

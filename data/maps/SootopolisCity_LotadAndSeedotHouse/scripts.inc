@@ -10,6 +10,7 @@ SootopolisCity_LotadAndSeedotHouse_EventScript_SeedotBrother::
 	chooseboxmon SELECT_PC_MON_TRADE
 	waitstate
 	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, SootopolisCity_LotadAndSeedotHouse_EventScript_CancelShowSeedot
+	copyvar VAR_0x800A, VAR_SEEDOT_SIZE_RECORD
 	special CompareSeedotSize
 	goto_if_eq VAR_RESULT, COMPARE_SIZE_INCORRECT_SPECIES, SootopolisCity_LotadAndSeedotHouse_EventScript_NotSeedot
 	goto_if_eq VAR_RESULT, COMPARE_SIZE_SMALLER, SootopolisCity_LotadAndSeedotHouse_EventScript_SmallSeedot
@@ -41,6 +42,7 @@ SootopolisCity_LotadAndSeedotHouse_EventScript_BigSeedot::
 	end
 
 SootopolisCity_LotadAndSeedotHouse_EventScript_NoRoomForElixir1::
+	copyvar VAR_SEEDOT_SIZE_RECORD, VAR_0x800A
 	msgbox SootopolisCity_LotadAndSeedotHouse_Text_BagCrammedFull1, MSGBOX_DEFAULT
 	release
 	end
@@ -54,6 +56,7 @@ SootopolisCity_LotadAndSeedotHouse_EventScript_LotadBrother::
 	chooseboxmon SELECT_PC_MON_TRADE
 	waitstate
 	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, SootopolisCity_LotadAndSeedotHouse_EventScript_CancelShowLotad
+	copyvar VAR_0x800A, VAR_LOTAD_SIZE_RECORD
 	special CompareLotadSize
 	goto_if_eq VAR_RESULT, COMPARE_SIZE_INCORRECT_SPECIES, SootopolisCity_LotadAndSeedotHouse_EventScript_NotLotad
 	goto_if_eq VAR_RESULT, COMPARE_SIZE_SMALLER, SootopolisCity_LotadAndSeedotHouse_EventScript_SmallLotad
@@ -85,6 +88,7 @@ SootopolisCity_LotadAndSeedotHouse_EventScript_BigLotad::
 	end
 
 SootopolisCity_LotadAndSeedotHouse_EventScript_NoRoomForElixir2::
+	copyvar VAR_LOTAD_SIZE_RECORD, VAR_0x800A
 	msgbox SootopolisCity_LotadAndSeedotHouse_Text_BagCrammedFull2, MSGBOX_DEFAULT
 	release
 	end

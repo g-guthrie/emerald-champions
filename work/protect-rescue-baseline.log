@@ -1,0 +1,97 @@
+tools/scaninc/scaninc -M build/emerald-test/test/battle/ai/emerald_champions_plans.d -g build/assets -I include -I tools/agbcc/include test/battle/ai/emerald_champions_plans.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/battle/ai/emerald_champions_plans.o test/battle/ai/emerald_champions_plans.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 4
+[0] EC live review Protect audit rescue: native rescue factory and fresh starter stats: [32mPASS[0m
+GUARD_SCORE turn=1 pair=3:Belly Drum/1:Crunch score=-260 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Belly Drum/1:Crunch score=-258 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Extreme Speed/1:Crunch score=-240 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Extreme Speed/1:Crunch score=-237 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Extreme Speed/1:Crunch score=-236 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Protect/1:Crunch score=-76 raw=101/100 guardChance=100/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Protect/1:Crunch score=-74 raw=101/100 guardChance=100/0 streak=0/0
+AI decision turn=1 actor=0 move=Liquidation target=1
+AI decision turn=1 actor=1 move=Crunch target=2
+AI decision turn=1 actor=2 move=Flamethrower target=3
+AI decision turn=1 actor=3 move=Protect target=3
+GUARD_SCORE turn=2 pair=3:Belly Drum/1:Crunch score=-345 raw=100/100 guardChance=0/0 streak=1/0
+GUARD_SCORE turn=2 pair=3:Extreme Speed/1:Crunch score=-324 raw=102/100 guardChance=0/0 streak=1/0
+GUARD_SCORE turn=2 pair=3:Extreme Speed/1:Helping Hand score=-320 raw=102/103 guardChance=0/0 streak=1/0
+GUARD_SCORE turn=2 pair=3:Extreme Speed/1:Crunch score=-318 raw=102/100 guardChance=0/0 streak=1/0
+GUARD_SCORE turn=2 pair=3:Extreme Speed/1:Helping Hand score=-309 raw=102/103 guardChance=0/0 streak=1/0
+AI decision turn=2 actor=1 move=Helping Hand target=3
+AI decision turn=2 actor=3 move=Extreme Speed target=2
+GUARD_RESCUE pair=0 turns=1 native=1 levels=5/5/2/2 HP=1/14 foes=24/18 last=Crunch/Protect counter=0/1
+GUARD_SCORE turn=1 pair=3:Belly Drum/1:Crunch score=-260 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Belly Drum/1:Crunch score=-258 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Extreme Speed/1:Crunch score=-240 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Extreme Speed/1:Crunch score=-237 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Extreme Speed/1:Crunch score=-236 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Protect/1:Crunch score=-76 raw=101/100 guardChance=100/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Protect/1:Crunch score=-74 raw=101/100 guardChance=100/0 streak=0/0
+AI decision turn=1 actor=0 move=Liquidation target=1
+AI decision turn=1 actor=1 move=Crunch target=2
+AI decision turn=1 actor=2 move=Flamethrower target=3
+AI decision turn=1 actor=3 move=Protect target=3
+GUARD_SCORE turn=2 pair=3:Belly Drum/1:Crunch score=-345 raw=100/100 guardChance=0/0 streak=1/0
+GUARD_SCORE turn=2 pair=3:Extreme Speed/1:Crunch score=-324 raw=102/100 guardChance=0/0 streak=1/0
+GUARD_SCORE turn=2 pair=3:Extreme Speed/1:Helping Hand score=-320 raw=102/103 guardChance=0/0 streak=1/0
+GUARD_SCORE turn=2 pair=3:Extreme Speed/1:Crunch score=-318 raw=102/100 guardChance=0/0 streak=1/0
+GUARD_SCORE turn=2 pair=3:Extreme Speed/1:Helping Hand score=-309 raw=102/103 guardChance=0/0 streak=1/0
+AI decision turn=2 actor=0 move=Liquidation target=1
+AI decision turn=2 actor=1 move=Helping Hand target=3
+AI decision turn=2 actor=2 move=Flamethrower target=3
+AI decision turn=2 actor=3 move=Extreme Speed target=2
+GUARD_RESCUE pair=0 turns=2 native=1 levels=5/5/2/2 HP=0/0 foes=24/11 last=-/- counter=0/0
+GUARD_SCORE turn=1 pair=3:Belly Drum/1:Crunch score=-360 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Extreme Speed/1:Crunch score=-334 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Extreme Speed/1:Helping Hand score=-325 raw=102/90 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Protect/1:Crunch score=-176 raw=101/100 guardChance=100/0 streak=0/0
+AI decision turn=1 actor=0 move=Bullet Seed target=1
+AI decision turn=1 actor=1 move=Crunch target=0
+AI decision turn=1 actor=2 move=Flamethrower target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=3 move=Extreme Speed target=0
+GUARD_RESCUE pair=1 turns=1 native=1 levels=5/5/2/2 HP=0/14 foes=23/21 last=-/Protect counter=0/1
+GUARD_SCORE turn=1 pair=3:Belly Drum/1:Crunch score=-360 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Extreme Speed/1:Crunch score=-334 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Extreme Speed/1:Helping Hand score=-325 raw=102/90 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Protect/1:Crunch score=-176 raw=101/100 guardChance=100/0 streak=0/0
+AI decision turn=1 actor=0 move=Bullet Seed target=1
+AI decision turn=1 actor=1 move=Crunch target=0
+AI decision turn=1 actor=2 move=Flamethrower target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=3 move=Extreme Speed target=0
+AI decision turn=2 actor=0 move=Bullet Seed target=1
+AI decision turn=2 actor=2 move=Flamethrower target=3
+GUARD_RESCUE pair=1 turns=2 native=1 levels=5/5/2/2 HP=0/0 foes=19/21 last=-/- counter=0/0
+GUARD_SCORE turn=1 pair=3:Belly Drum/1:Crunch score=-360 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Extreme Speed/1:Crunch score=-334 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Extreme Speed/1:Helping Hand score=-325 raw=102/90 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Protect/1:Crunch score=-176 raw=101/100 guardChance=100/0 streak=0/0
+AI decision turn=1 actor=0 move=Bullet Seed target=1
+AI decision turn=1 actor=1 move=Crunch target=0
+AI decision turn=1 actor=2 move=Liquidation target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=3 move=Extreme Speed target=0
+GUARD_RESCUE pair=2 turns=1 native=1 levels=5/5/2/2 HP=0/14 foes=23/24 last=-/Protect counter=0/1
+GUARD_SCORE turn=1 pair=3:Belly Drum/1:Crunch score=-360 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Extreme Speed/1:Crunch score=-334 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Extreme Speed/1:Helping Hand score=-325 raw=102/90 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Protect/1:Crunch score=-176 raw=101/100 guardChance=100/0 streak=0/0
+AI decision turn=1 actor=0 move=Bullet Seed target=1
+AI decision turn=1 actor=1 move=Crunch target=0
+AI decision turn=1 actor=2 move=Liquidation target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=3 move=Extreme Speed target=0
+AI decision turn=2 actor=0 move=Bullet Seed target=1
+AI decision turn=2 actor=2 move=Liquidation target=3
+GUARD_RESCUE pair=2 turns=2 native=1 levels=5/5/2/2 HP=0/0 foes=19/24 last=-/- counter=0/0
+
+- Tests [32mPASSED[0m:          1
+- Tests [34mTOTAL[0m:           1
+

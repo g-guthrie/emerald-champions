@@ -119,7 +119,6 @@ RUNTIME_GATES = (
     RuntimeGate(
         "Billy's Imposter lead targets a vulnerable foe after copying its moves",
     ),
-    RuntimeGate("test/save.c"),
     RuntimeGate(
         "test/battle/ai/ai_doubles.c",
     ),
@@ -233,6 +232,7 @@ def run(
     timeout: int | None = None,
     cwd: Path = ROOT,
     test_results: bool = False,
+    env: dict[str, str] | None = None,
 ) -> tuple[str, float]:
     started = time.monotonic()
     try:
@@ -244,6 +244,7 @@ def run(
             text=True,
             timeout=timeout,
             check=False,
+            env=env,
         )
     except subprocess.TimeoutExpired as error:
         output = error.stdout or ""
@@ -416,6 +417,7 @@ def verify_gate(
     romtest: str,
     objcopy: str,
     runtime_cwd: Path,
+    workers: int = 1,
 ) -> float:
     shutil.copyfile(test_elf, headless_elf)
     run(
@@ -435,6 +437,7 @@ def verify_gate(
         timeout=gate.timeout_seconds,
         cwd=runtime_cwd,
         test_results=True,
+        env={**os.environ, "HYDRA_JOBS": str(workers)},
     )
 
     summary = validate_gate_output(gate, output)
@@ -457,6 +460,7 @@ def verify_gate(
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--jobs", type=int, default=os.cpu_count() or 1)
+    parser.add_argument("--workers", type=int, help="emulator workers (1-32); defaults to --jobs, capped at 32")
     parser.add_argument("--build-only", action="store_true")
     parser.add_argument("--run-only", action="store_true")
     parser.add_argument("--test-elf", type=Path, default=ROOT / "pokeemerald-test.elf")
@@ -473,6 +477,9 @@ def main() -> None:
     args = parser.parse_args()
     if args.jobs < 1:
         fail("--jobs must be positive")
+    workers = min(args.jobs, 32) if args.workers is None else args.workers
+    if not 1 <= workers <= 32:
+        fail("--workers must be between 1 and 32")
     if args.build_only and args.run_only:
         fail("--build-only and --run-only are mutually exclusive")
 
@@ -544,6 +551,7 @@ def main() -> None:
     base_digest = hashlib.sha256(test_elf.read_bytes()).hexdigest()
 
     test_elapsed = 0.0
+    print(f"emulator_workers={workers} (filters sequential; no nested worker pools)", flush=True)
     for gate in RUNTIME_GATES:
         print(f"\n== Runtime filter: {gate.filter} ==", flush=True)
         test_elapsed += verify_gate(
@@ -555,6 +563,7 @@ def main() -> None:
             romtest=romtest,
             objcopy=objcopy,
             runtime_cwd=runtime_cwd,
+            workers=workers,
         )
 
     if hashlib.sha256(test_elf.read_bytes()).hexdigest() != base_digest:

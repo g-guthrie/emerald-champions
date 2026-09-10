@@ -1,0 +1,31 @@
+[
+  {
+    "species": "SPECIES_KRICKETOT",
+    "mode": "Breeding retained evolved relatives; configured egg groups and Daycare reverse-evolution source reviewed (not an executed breeding session)",
+    "retained_direct_relatives": [
+      "SPECIES_KRICKETUNE"
+    ]
+  },
+  {
+    "species": "SPECIES_ODDISH",
+    "mode": "Breeding retained evolved relatives; configured egg groups and Daycare reverse-evolution source reviewed (not an executed breeding session)",
+    "retained_direct_relatives": [
+      "SPECIES_BELLOSSOM",
+      "SPECIES_GLOOM"
+    ]
+  },
+  {
+    "species": "SPECIES_SKWOVET",
+    "mode": "Breeding retained evolved relatives; configured egg groups and Daycare reverse-evolution source reviewed (not an executed breeding session)",
+    "retained_direct_relatives": [
+      "SPECIES_GREEDENT"
+    ]
+  },
+  {
+    "species": "SPECIES_TAROUNTULA",
+    "mode": "Breeding retained evolved relatives; configured egg groups and Daycare reverse-evolution source reviewed (not an executed breeding session)",
+    "retained_direct_relatives": [
+      "SPECIES_SPIDOPS"
+    ]
+  }
+]

@@ -491,6 +491,10 @@ const u32 gObjectEventPic_ApricornTree[] = INCGFX_U32("graphics/object_events/pi
 
 const u32 gFieldEffectObjectPic_ShinySparkle[] = INCGFX_U32("graphics/field_effects/pics/shiny_sparkle.png", ".4bpp", "-mwidth 2 -mheight 4");
 
+const u16 gObjectEventPic_Sign[] = INCGFX_U16("graphics/object_events/pics/misc/sign.png", ".4bpp");
+
+const u16 gObjectEventPal_NpcWhite[] = INCGFX_U16("graphics/object_events/palettes/npc_white.pal", ".gbapal");
+
 #if IS_FRLG
 
 const u16 gObjectEventPic_RedNormal[] = INCGFX_U16("graphics/object_events/pics/people/red/red_normal.png", ".4bpp", "-mwidth 2 -mheight 4");
@@ -513,7 +517,6 @@ const u16 gObjectEventPal_PlayerReflectionFrlg[] = INCGFX_U16("graphics/object_e
 const u16 gObjectEventPal_NpcBlue[] = INCGFX_U16("graphics/object_events/palettes/npc_blue.pal", ".gbapal");
 const u16 gObjectEventPal_NpcPink[] = INCGFX_U16("graphics/object_events/palettes/npc_pink.pal", ".gbapal");
 const u16 gObjectEventPal_NpcGreen[] = INCGFX_U16("graphics/object_events/palettes/npc_green.pal", ".gbapal");
-const u16 gObjectEventPal_NpcWhite[] = INCGFX_U16("graphics/object_events/palettes/npc_white.pal", ".gbapal");
 const u16 gObjectEventPal_NpcBlueReflection[] = INCGFX_U16("graphics/object_events/palettes/npc_blue_reflection.pal", ".gbapal");
 const u16 gObjectEventPal_NpcPinkReflection[] = INCGFX_U16("graphics/object_events/palettes/npc_pink_reflection.pal", ".gbapal");
 const u16 gObjectEventPal_NpcGreenReflection[] = INCGFX_U16("graphics/object_events/palettes/npc_green_reflection.pal", ".gbapal");
@@ -605,7 +608,6 @@ const u16 gObjectEventPic_Ruby[] = INCGFX_U16("graphics/object_events/pics/misc/
 const u16 gObjectEventPic_Sapphire[] = INCGFX_U16("graphics/object_events/pics/misc/sapphire.png", ".4bpp");
 const u16 gObjectEventPic_OldAmber[] = INCGFX_U16("graphics/object_events/pics/misc/old_amber.png", ".4bpp");
 const u16 gObjectEventPic_GymSign[] = INCGFX_U16("graphics/object_events/pics/misc/gym_sign.png", ".4bpp");
-const u16 gObjectEventPic_Sign[] = INCGFX_U16("graphics/object_events/pics/misc/sign.png", ".4bpp");
 const u16 gObjectEventPic_WoodenSign[] = INCGFX_U16("graphics/object_events/pics/misc/wooden_sign.png", ".4bpp");
 const u16 gObjectEventPic_Clipboard[] = INCGFX_U16("graphics/object_events/pics/misc/clipboard.png", ".4bpp");
 const u16 gObjectEventPal_Meteorite[] = INCGFX_U16("graphics/object_events/palettes/meteorite.pal", ".gbapal");

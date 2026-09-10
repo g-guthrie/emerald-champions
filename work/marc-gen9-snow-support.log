@@ -1,0 +1,582 @@
+arm-none-eabi-cpp -iquote include -Wno-trigraphs -DMODERN=1 -DTESTING=0 -DEMERALD -std=gnu17 -DEC_HEADLESS_FIXTURES=0 -traditional-cpp - < src/data/trainers.party | tools/trainerproc/trainerproc -o src/data/trainers.h -i src/data/trainers.party -
+tools/scaninc/scaninc -M build/emerald-test/test/battle/ai/emerald_champions_plans.d -g build/assets -I include -I tools/agbcc/include test/battle/ai/emerald_champions_plans.c
+tools/scaninc/scaninc -M build/emerald-test/test/test_runner_battle.d -g build/assets -I include -I tools/agbcc/include test/test_runner_battle.c
+tools/scaninc/scaninc -M build/emerald-test/src/emerald_champions_battle_plan.d -g build/assets -I include -I tools/agbcc/include src/emerald_champions_battle_plan.c
+tools/scaninc/scaninc -M build/emerald-test/src/data.d -g build/assets -I include -I tools/agbcc/include src/data.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/data.o src/data.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/emerald_champions_battle_plan.o src/emerald_champions_battle_plan.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/test_runner_battle.o test/test_runner_battle.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/battle/ai/emerald_champions_plans.o test/battle/ai/emerald_champions_plans.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 4
+[0] EC live review Marc timing: complete cold decision with six-player party: [32mPASS[0m
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Rock Slide target=0
+AI decision turn=2 actor=1 move=Aurora Veil target=1
+AI decision turn=2 actor=3 move=Rock Slide target=0
+E29_MARC_COMPLETE_TIMING trainer=571 setupFrames=6 decisionFrames=33 completeFrames=39 warmFrames=33 first=3 moves=Aurora Veil/Rock Slide
+[1] EC live review Marc disruption: Ghost phazing and noncontact Fire: [32mPASS[0m
+MARC_INPUT reserves=0 slot=0 lv=12 HP=51 Atk=19 Def=20 SpA=24 SpD=23 Speed=29 item=481 ability=117
+MARC_INPUT reserves=0 slot=1 lv=13 HP=61 Atk=53 Def=44 SpA=12 SpD=14 Speed=27 item=553 ability=249
+MARC_INPUT reserves=0 slot=2 lv=13 HP=42 Atk=40 Def=29 SpA=18 SpD=20 Speed=31 item=494 ability=173
+MARC_INPUT reserves=0 slot=3 lv=13 HP=53 Atk=47 Def=39 SpA=16 SpD=23 Speed=28 item=523 ability=271
+MARC_INPUT reserves=0 slot=4 lv=14 HP=43 Atk=49 Def=21 SpA=27 SpD=21 Speed=40 item=0 ability=129
+MARC_INPUT reserves=0 slot=5 lv=13 HP=44 Atk=53 Def=19 SpA=14 SpD=16 Speed=32 item=444 ability=104
+AI decision turn=1 actor=0 move=Fake Out target=3
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Dragon Tail target=1
+AI decision turn=1 actor=3 move=Rock Slide target=0
+AI switch turn=2 actor=1 party=4
+AI decision turn=2 actor=3 move=Rock Slide target=0
+MARC_SUPPORT board=10 turns=1 pair=0 screen=0 SpAStages=6/6 foeStatus=0/0
+MARC_TEMPO board=10 turns=1 reserves=0 tailwind=0 rawSpeeds=29/27 ownHP=51/59 friendship=0/0
+MARC_AFTER board=10 turns=1 reserves=0 native=1 species=698/874 HP=51/59 foes=49/45 moves=Protect/- weather=256 duration=4 speeds=29/27 foeSpeeds=39/32 AtkStages=6/6 foeStatus=0/0 faints=0/0
+MARC_CONTROL board=0 turns=1 tailwind=0 Taunt=0/0 items=481/553 statuses=0/0
+MARC_INPUT reserves=0 slot=0 lv=12 HP=51 Atk=19 Def=20 SpA=24 SpD=23 Speed=29 item=481 ability=117
+MARC_INPUT reserves=0 slot=1 lv=13 HP=61 Atk=53 Def=44 SpA=12 SpD=14 Speed=27 item=553 ability=249
+MARC_INPUT reserves=0 slot=2 lv=13 HP=42 Atk=40 Def=29 SpA=18 SpD=20 Speed=31 item=494 ability=173
+MARC_INPUT reserves=0 slot=3 lv=13 HP=53 Atk=47 Def=39 SpA=16 SpD=23 Speed=28 item=523 ability=271
+MARC_INPUT reserves=0 slot=4 lv=14 HP=43 Atk=49 Def=21 SpA=27 SpD=21 Speed=40 item=0 ability=129
+MARC_INPUT reserves=0 slot=5 lv=13 HP=44 Atk=53 Def=19 SpA=14 SpD=16 Speed=32 item=444 ability=104
+AI decision turn=1 actor=0 move=Fake Out target=3
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Dragon Tail target=1
+AI decision turn=1 actor=3 move=Rock Slide target=0
+AI switch turn=2 actor=1 party=4
+AI decision turn=2 actor=0 move=Taunt target=3
+AI decision turn=2 actor=2 move=Bite target=1
+AI decision turn=2 actor=3 move=Rock Slide target=0
+AI decision turn=3 actor=1 move=Acrobatics target=0
+AI decision turn=3 actor=3 move=High Horsepower target=2
+MARC_SUPPORT board=10 turns=2 pair=0 screen=0 SpAStages=6/6 foeStatus=0/0
+MARC_TEMPO board=10 turns=2 reserves=0 tailwind=0 rawSpeeds=40/27 ownHP=33/59 friendship=0/0
+MARC_AFTER board=10 turns=2 reserves=0 native=2 species=566/874 HP=33/59 foes=41/32 moves=-/Rock Slide weather=256 duration=3 speeds=40/27 foeSpeeds=39/32 AtkStages=6/6 foeStatus=0/0 faints=0/0
+MARC_CONTROL board=0 turns=2 tailwind=0 Taunt=0/2 items=0/553 statuses=0/0
+MARC_INPUT reserves=0 slot=0 lv=12 HP=51 Atk=19 Def=20 SpA=24 SpD=23 Speed=29 item=481 ability=117
+MARC_INPUT reserves=0 slot=1 lv=13 HP=61 Atk=53 Def=44 SpA=12 SpD=14 Speed=27 item=553 ability=249
+MARC_INPUT reserves=0 slot=2 lv=13 HP=42 Atk=40 Def=29 SpA=18 SpD=20 Speed=31 item=494 ability=173
+MARC_INPUT reserves=0 slot=3 lv=13 HP=53 Atk=47 Def=39 SpA=16 SpD=23 Speed=28 item=523 ability=271
+MARC_INPUT reserves=0 slot=4 lv=14 HP=43 Atk=49 Def=21 SpA=27 SpD=21 Speed=40 item=0 ability=129
+MARC_INPUT reserves=0 slot=5 lv=13 HP=44 Atk=53 Def=19 SpA=14 SpD=16 Speed=32 item=444 ability=104
+AI decision turn=1 actor=0 move=Fake Out target=3
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Dragon Tail target=1
+AI decision turn=1 actor=3 move=Rock Slide target=0
+AI switch turn=2 actor=1 party=4
+AI decision turn=2 actor=0 move=Taunt target=3
+AI decision turn=2 actor=2 move=Bite target=1
+AI decision turn=2 actor=3 move=Rock Slide target=0
+AI decision turn=3 actor=0 move=Taunt target=3
+AI decision turn=3 actor=1 move=Acrobatics target=0
+AI decision turn=3 actor=2 move=Bite target=1
+AI decision turn=3 actor=3 move=High Horsepower target=2
+AI decision turn=4 actor=1 move=Knock Off target=2
+AI decision turn=4 actor=3 move=Rock Slide target=2
+MARC_SUPPORT board=10 turns=3 pair=0 screen=0 SpAStages=6/6 foeStatus=0/0
+MARC_TEMPO board=10 turns=3 reserves=0 tailwind=0 rawSpeeds=40/27 ownHP=23/59 friendship=0/0
+MARC_AFTER board=10 turns=3 reserves=0 native=3 species=566/874 HP=23/59 foes=0/17 moves=Acrobatics/High Horsepower weather=256 duration=2 speeds=40/27 foeSpeeds=0/32 AtkStages=6/6 foeStatus=0/0 faints=0/1
+MARC_CONTROL board=0 turns=3 tailwind=0 Taunt=0/1 items=0/553 statuses=0/0
+MARC_INPUT reserves=0 slot=0 lv=12 HP=51 Atk=19 Def=20 SpA=24 SpD=23 Speed=29 item=481 ability=117
+MARC_INPUT reserves=0 slot=1 lv=13 HP=61 Atk=53 Def=44 SpA=12 SpD=14 Speed=27 item=553 ability=249
+MARC_INPUT reserves=0 slot=2 lv=13 HP=42 Atk=40 Def=29 SpA=18 SpD=20 Speed=31 item=494 ability=173
+MARC_INPUT reserves=0 slot=3 lv=13 HP=53 Atk=47 Def=39 SpA=16 SpD=23 Speed=28 item=523 ability=271
+MARC_INPUT reserves=0 slot=4 lv=14 HP=43 Atk=49 Def=21 SpA=27 SpD=21 Speed=40 item=0 ability=129
+MARC_INPUT reserves=0 slot=5 lv=13 HP=44 Atk=53 Def=19 SpA=14 SpD=16 Speed=32 item=444 ability=104
+AI decision turn=1 actor=0 move=Flamethrower target=1
+AI decision turn=1 actor=1 move=Blizzard target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=High Horsepower target=0
+AI decision turn=2 actor=1 move=Blizzard target=0
+AI decision turn=2 actor=3 move=High Horsepower target=0
+MARC_SUPPORT board=11 turns=1 pair=0 screen=0 SpAStages=6/6 foeStatus=0/0
+MARC_TEMPO board=11 turns=1 reserves=0 tailwind=0 rawSpeeds=29/27 ownHP=34/34 friendship=0/0
+MARC_AFTER board=11 turns=1 reserves=0 native=1 species=698/874 HP=34/34 foes=1/48 moves=Blizzard/High Horsepower weather=256 duration=4 speeds=29/27 foeSpeeds=27/17 AtkStages=6/6 foeStatus=0/0 faints=0/0
+MARC_CONTROL board=1 turns=1 tailwind=0 Taunt=0/0 items=481/0 statuses=0/0
+MARC_INPUT reserves=0 slot=0 lv=12 HP=51 Atk=19 Def=20 SpA=24 SpD=23 Speed=29 item=481 ability=117
+MARC_INPUT reserves=0 slot=1 lv=13 HP=61 Atk=53 Def=44 SpA=12 SpD=14 Speed=27 item=553 ability=249
+MARC_INPUT reserves=0 slot=2 lv=13 HP=42 Atk=40 Def=29 SpA=18 SpD=20 Speed=31 item=494 ability=173
+MARC_INPUT reserves=0 slot=3 lv=13 HP=53 Atk=47 Def=39 SpA=16 SpD=23 Speed=28 item=523 ability=271
+MARC_INPUT reserves=0 slot=4 lv=14 HP=43 Atk=49 Def=21 SpA=27 SpD=21 Speed=40 item=0 ability=129
+MARC_INPUT reserves=0 slot=5 lv=13 HP=44 Atk=53 Def=19 SpA=14 SpD=16 Speed=32 item=444 ability=104
+AI decision turn=1 actor=0 move=Flamethrower target=1
+AI decision turn=1 actor=1 move=Blizzard target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=High Horsepower target=0
+AI decision turn=2 actor=0 move=Flamethrower target=1
+AI decision turn=2 actor=1 move=Blizzard target=0
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=3 move=High Horsepower target=0
+AI switch turn=2 actor=3 party=4
+AI decision turn=3 actor=1 move=Aurora Veil target=1
+AI decision turn=3 actor=3 move=Acrobatics target=2
+MARC_SUPPORT board=11 turns=2 pair=0 screen=0 SpAStages=6/6 foeStatus=0/0
+MARC_TEMPO board=11 turns=2 reserves=0 tailwind=0 rawSpeeds=29/40 ownHP=34/43 friendship=0/0
+MARC_AFTER board=11 turns=2 reserves=0 native=2 species=698/566 HP=34/43 foes=0/43 moves=Blizzard/- weather=256 duration=3 speeds=29/40 foeSpeeds=0/17 AtkStages=6/6 foeStatus=0/0 faints=1/1
+MARC_CONTROL board=1 turns=2 tailwind=0 Taunt=0/0 items=481/0 statuses=0/0
+MARC_INPUT reserves=0 slot=0 lv=12 HP=51 Atk=19 Def=20 SpA=24 SpD=23 Speed=29 item=481 ability=117
+MARC_INPUT reserves=0 slot=1 lv=13 HP=61 Atk=53 Def=44 SpA=12 SpD=14 Speed=27 item=553 ability=249
+MARC_INPUT reserves=0 slot=2 lv=13 HP=42 Atk=40 Def=29 SpA=18 SpD=20 Speed=31 item=494 ability=173
+MARC_INPUT reserves=0 slot=3 lv=13 HP=53 Atk=47 Def=39 SpA=16 SpD=23 Speed=28 item=523 ability=271
+MARC_INPUT reserves=0 slot=4 lv=14 HP=43 Atk=49 Def=21 SpA=27 SpD=21 Speed=40 item=0 ability=129
+MARC_INPUT reserves=0 slot=5 lv=13 HP=44 Atk=53 Def=19 SpA=14 SpD=16 Speed=32 item=444 ability=104
+AI decision turn=1 actor=0 move=Flamethrower target=1
+AI decision turn=1 actor=1 move=Blizzard target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=High Horsepower target=0
+AI decision turn=2 actor=0 move=Flamethrower target=1
+AI decision turn=2 actor=1 move=Blizzard target=0
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=3 move=High Horsepower target=0
+AI switch turn=2 actor=3 party=4
+AI decision turn=3 actor=2 move=Giga Drain target=3
+AI decision turn=3 actor=1 move=Aurora Veil target=1
+AI decision turn=3 actor=3 move=Acrobatics target=2
+MARC_SUPPORT board=11 turns=3 pair=0 screen=0 SpAStages=6/6 foeStatus=0/0
+MARC_TEMPO board=11 turns=3 reserves=0 tailwind=0 rawSpeeds=29/40 ownHP=34/43 friendship=0/0
+MARC_AFTER board=11 turns=3 reserves=0 native=2 species=698/566 HP=34/43 foes=0/0 moves=Blizzard/Acrobatics weather=256 duration=3 speeds=29/40 foeSpeeds=0/17 AtkStages=6/6 foeStatus=0/0 faints=1/2
+MARC_CONTROL board=1 turns=3 tailwind=0 Taunt=0/0 items=481/0 statuses=0/0
+MARC_INPUT reserves=1 slot=0 lv=12 HP=51 Atk=19 Def=20 SpA=24 SpD=23 Speed=29 item=481 ability=117
+MARC_INPUT reserves=1 slot=1 lv=13 HP=61 Atk=53 Def=44 SpA=12 SpD=14 Speed=27 item=553 ability=249
+MARC_INPUT reserves=1 slot=2 lv=13 HP=42 Atk=40 Def=29 SpA=18 SpD=20 Speed=31 item=494 ability=173
+MARC_INPUT reserves=1 slot=3 lv=13 HP=53 Atk=47 Def=39 SpA=16 SpD=23 Speed=28 item=523 ability=271
+MARC_INPUT reserves=1 slot=4 lv=14 HP=43 Atk=49 Def=21 SpA=27 SpD=21 Speed=40 item=0 ability=129
+MARC_INPUT reserves=1 slot=5 lv=13 HP=44 Atk=53 Def=19 SpA=14 SpD=16 Speed=32 item=444 ability=104
+AI decision turn=1 actor=0 move=Flamethrower target=1
+AI decision turn=1 actor=1 move=Crunch target=2
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Knock Off target=2
+AI decision turn=2 actor=1 move=Dragon Dance target=1
+AI decision turn=2 actor=3 move=Knock Off target=0
+MARC_SUPPORT board=12 turns=1 pair=1 screen=0 SpAStages=6/6 foeStatus=0/0
+MARC_TEMPO board=12 turns=1 reserves=1 tailwind=0 rawSpeeds=31/28 ownHP=39/53 friendship=0/0
+MARC_AFTER board=12 turns=1 reserves=1 native=1 species=696/1338 HP=39/53 foes=48/0 moves=Crunch/Knock Off weather=0 duration=0 speeds=31/28 foeSpeeds=27/0 AtkStages=6/6 foeStatus=0/0 faints=0/1
+MARC_CONTROL board=2 turns=1 tailwind=0 Taunt=0/0 items=494/523 statuses=0/0
+MARC_INPUT reserves=1 slot=0 lv=12 HP=51 Atk=19 Def=20 SpA=24 SpD=23 Speed=29 item=481 ability=117
+MARC_INPUT reserves=1 slot=1 lv=13 HP=61 Atk=53 Def=44 SpA=12 SpD=14 Speed=27 item=553 ability=249
+MARC_INPUT reserves=1 slot=2 lv=13 HP=42 Atk=40 Def=29 SpA=18 SpD=20 Speed=31 item=494 ability=173
+MARC_INPUT reserves=1 slot=3 lv=13 HP=53 Atk=47 Def=39 SpA=16 SpD=23 Speed=28 item=523 ability=271
+MARC_INPUT reserves=1 slot=4 lv=14 HP=43 Atk=49 Def=21 SpA=27 SpD=21 Speed=40 item=0 ability=129
+MARC_INPUT reserves=1 slot=5 lv=13 HP=44 Atk=53 Def=19 SpA=14 SpD=16 Speed=32 item=444 ability=104
+AI decision turn=1 actor=0 move=Flamethrower target=1
+AI decision turn=1 actor=1 move=Crunch target=2
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Knock Off target=2
+AI decision turn=2 actor=0 move=Flamethrower target=1
+AI decision turn=2 actor=1 move=Dragon Dance target=1
+AI decision turn=2 actor=3 move=Knock Off target=0
+AI decision turn=3 actor=1 move=Dragon Claw target=0
+AI decision turn=3 actor=3 move=Rock Slide target=0
+MARC_SUPPORT board=12 turns=2 pair=1 screen=0 SpAStages=6/6 foeStatus=0/0
+MARC_TEMPO board=12 turns=2 reserves=1 tailwind=0 rawSpeeds=31/28 ownHP=36/53 friendship=0/0
+MARC_AFTER board=12 turns=2 reserves=1 native=2 species=696/1338 HP=36/53 foes=32/0 moves=Dragon Dance/Knock Off weather=0 duration=0 speeds=46/28 foeSpeeds=27/0 AtkStages=7/6 foeStatus=0/0 faints=0/1
+MARC_CONTROL board=2 turns=2 tailwind=0 Taunt=0/0 items=494/523 statuses=0/0
+MARC_INPUT reserves=1 slot=0 lv=12 HP=51 Atk=19 Def=20 SpA=24 SpD=23 Speed=29 item=481 ability=117
+MARC_INPUT reserves=1 slot=1 lv=13 HP=61 Atk=53 Def=44 SpA=12 SpD=14 Speed=27 item=553 ability=249
+MARC_INPUT reserves=1 slot=2 lv=13 HP=42 Atk=40 Def=29 SpA=18 SpD=20 Speed=31 item=494 ability=173
+MARC_INPUT reserves=1 slot=3 lv=13 HP=53 Atk=47 Def=39 SpA=16 SpD=23 Speed=28 item=523 ability=271
+MARC_INPUT reserves=1 slot=4 lv=14 HP=43 Atk=49 Def=21 SpA=27 SpD=21 Speed=40 item=0 ability=129
+MARC_INPUT reserves=1 slot=5 lv=13 HP=44 Atk=53 Def=19 SpA=14 SpD=16 Speed=32 item=444 ability=104
+AI decision turn=1 actor=0 move=Flamethrower target=1
+AI decision turn=1 actor=1 move=Crunch target=2
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Knock Off target=2
+AI decision turn=2 actor=0 move=Flamethrower target=1
+AI decision turn=2 actor=1 move=Dragon Dance target=1
+AI decision turn=2 actor=3 move=Knock Off target=0
+AI decision turn=3 actor=0 move=Flamethrower target=1
+AI decision turn=3 actor=1 move=Dragon Claw target=0
+AI decision turn=3 actor=3 move=Rock Slide target=0
+MARC_SUPPORT board=12 turns=3 pair=1 screen=0 SpAStages=6/6 foeStatus=0/0
+MARC_TEMPO board=12 turns=3 reserves=1 tailwind=0 rawSpeeds=31/28 ownHP=36/53 friendship=0/0
+MARC_AFTER board=12 turns=3 reserves=1 native=2 species=696/1338 HP=36/53 foes=0/0 moves=Dragon Claw/Knock Off weather=0 duration=0 speeds=46/28 foeSpeeds=27/0 AtkStages=7/6 foeStatus=0/0 faints=0/2
+MARC_CONTROL board=2 turns=3 tailwind=0 Taunt=0/0 items=494/523 statuses=0/0
+[2] EC live review Marc core: physical special leads and reserves: [32mPASS[0m
+MARC_INPUT reserves=0 slot=0 lv=12 HP=51 Atk=19 Def=20 SpA=24 SpD=23 Speed=29 item=481 ability=117
+MARC_INPUT reserves=0 slot=1 lv=13 HP=61 Atk=53 Def=44 SpA=12 SpD=14 Speed=27 item=553 ability=249
+MARC_INPUT reserves=0 slot=2 lv=13 HP=42 Atk=40 Def=29 SpA=18 SpD=20 Speed=31 item=494 ability=173
+MARC_INPUT reserves=0 slot=3 lv=13 HP=53 Atk=47 Def=39 SpA=16 SpD=23 Speed=28 item=523 ability=271
+MARC_INPUT reserves=0 slot=4 lv=14 HP=43 Atk=49 Def=21 SpA=27 SpD=21 Speed=40 item=0 ability=129
+MARC_INPUT reserves=0 slot=5 lv=13 HP=44 Atk=53 Def=19 SpA=14 SpD=16 Speed=32 item=444 ability=104
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Rock Slide target=0
+AI decision turn=2 actor=1 move=Aurora Veil target=1
+AI decision turn=2 actor=3 move=High Horsepower target=0
+MARC_SUPPORT board=0 turns=1 pair=0 screen=0 SpAStages=6/6 foeStatus=0/0
+MARC_TEMPO board=0 turns=1 reserves=0 tailwind=0 rawSpeeds=29/27 ownHP=51/61 friendship=0/0
+MARC_AFTER board=0 turns=1 reserves=0 native=1 species=698/874 HP=51/61 foes=36/50 moves=Protect/Rock Slide weather=256 duration=4 speeds=29/27 foeSpeeds=24/19 AtkStages=6/6 foeStatus=0/0 faints=0/0
+MARC_INPUT reserves=0 slot=0 lv=12 HP=51 Atk=19 Def=20 SpA=24 SpD=23 Speed=29 item=481 ability=117
+MARC_INPUT reserves=0 slot=1 lv=13 HP=61 Atk=53 Def=44 SpA=12 SpD=14 Speed=27 item=553 ability=249
+MARC_INPUT reserves=0 slot=2 lv=13 HP=42 Atk=40 Def=29 SpA=18 SpD=20 Speed=31 item=494 ability=173
+MARC_INPUT reserves=0 slot=3 lv=13 HP=53 Atk=47 Def=39 SpA=16 SpD=23 Speed=28 item=523 ability=271
+MARC_INPUT reserves=0 slot=4 lv=14 HP=43 Atk=49 Def=21 SpA=27 SpD=21 Speed=40 item=0 ability=129
+MARC_INPUT reserves=0 slot=5 lv=13 HP=44 Atk=53 Def=19 SpA=14 SpD=16 Speed=32 item=444 ability=104
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Rock Slide target=0
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Aurora Veil target=1
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=High Horsepower target=0
+AI decision turn=3 actor=1 move=Protect target=1
+AI decision turn=3 actor=3 move=High Horsepower target=0
+MARC_SUPPORT board=0 turns=2 pair=0 screen=4 SpAStages=6/6 foeStatus=0/0
+MARC_TEMPO board=0 turns=2 reserves=0 tailwind=0 rawSpeeds=29/27 ownHP=43/45 friendship=0/0
+MARC_AFTER board=0 turns=2 reserves=0 native=2 species=698/874 HP=43/45 foes=16/58 moves=Aurora Veil/High Horsepower weather=256 duration=3 speeds=29/27 foeSpeeds=24/19 AtkStages=6/6 foeStatus=0/0 faints=0/0
+MARC_INPUT reserves=0 slot=0 lv=12 HP=51 Atk=19 Def=20 SpA=24 SpD=23 Speed=29 item=481 ability=117
+MARC_INPUT reserves=0 slot=1 lv=13 HP=61 Atk=53 Def=44 SpA=12 SpD=14 Speed=27 item=553 ability=249
+MARC_INPUT reserves=0 slot=2 lv=13 HP=42 Atk=40 Def=29 SpA=18 SpD=20 Speed=31 item=494 ability=173
+MARC_INPUT reserves=0 slot=3 lv=13 HP=53 Atk=47 Def=39 SpA=16 SpD=23 Speed=28 item=523 ability=271
+MARC_INPUT reserves=0 slot=4 lv=14 HP=43 Atk=49 Def=21 SpA=27 SpD=21 Speed=40 item=0 ability=129
+MARC_INPUT reserves=0 slot=5 lv=13 HP=44 Atk=53 Def=19 SpA=14 SpD=16 Speed=32 item=444 ability=104
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Rock Slide target=0
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Aurora Veil target=1
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=High Horsepower target=0
+AI decision turn=3 actor=0 move=Double-Edge target=1
+AI decision turn=3 actor=1 move=Protect target=1
+AI decision turn=3 actor=2 move=Drain Punch target=3
+AI decision turn=3 actor=3 move=High Horsepower target=0
+AI switch turn=4 actor=1 party=4
+AI decision turn=4 actor=3 move=High Horsepower target=2
+MARC_SUPPORT board=0 turns=3 pair=0 screen=3 SpAStages=6/6 foeStatus=0/0
+MARC_TEMPO board=0 turns=3 reserves=0 tailwind=0 rawSpeeds=29/27 ownHP=43/29 friendship=0/0
+MARC_AFTER board=0 turns=3 reserves=0 native=3 species=698/874 HP=43/29 foes=0/58 moves=Protect/High Horsepower weather=256 duration=2 speeds=29/27 foeSpeeds=0/19 AtkStages=6/6 foeStatus=0/0 faints=0/1
+MARC_INPUT reserves=0 slot=0 lv=12 HP=51 Atk=19 Def=20 SpA=24 SpD=23 Speed=29 item=481 ability=117
+MARC_INPUT reserves=0 slot=1 lv=13 HP=61 Atk=53 Def=44 SpA=12 SpD=14 Speed=27 item=553 ability=249
+MARC_INPUT reserves=0 slot=2 lv=13 HP=42 Atk=40 Def=29 SpA=18 SpD=20 Speed=31 item=494 ability=173
+MARC_INPUT reserves=0 slot=3 lv=13 HP=53 Atk=47 Def=39 SpA=16 SpD=23 Speed=28 item=523 ability=271
+MARC_INPUT reserves=0 slot=4 lv=14 HP=43 Atk=49 Def=21 SpA=27 SpD=21 Speed=40 item=0 ability=129
+MARC_INPUT reserves=0 slot=5 lv=13 HP=44 Atk=53 Def=19 SpA=14 SpD=16 Speed=32 item=444 ability=104
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Rock Slide target=0
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Aurora Veil target=1
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=High Horsepower target=0
+AI decision turn=3 actor=0 move=Double-Edge target=1
+AI decision turn=3 actor=1 move=Protect target=1
+AI decision turn=3 actor=2 move=Drain Punch target=3
+AI decision turn=3 actor=3 move=High Horsepower target=0
+AI switch turn=4 actor=1 party=4
+AI decision turn=4 actor=2 move=Drain Punch target=3
+AI decision turn=4 actor=3 move=High Horsepower target=2
+AI decision turn=5 actor=1 move=Acrobatics target=2
+AI decision turn=5 actor=3 move=Rock Slide target=2
+MARC_SUPPORT board=0 turns=4 pair=0 screen=2 SpAStages=6/6 foeStatus=0/0
+MARC_TEMPO board=0 turns=4 reserves=0 tailwind=0 rawSpeeds=40/27 ownHP=43/13 friendship=0/0
+MARC_AFTER board=0 turns=4 reserves=0 native=4 species=566/874 HP=43/13 foes=0/49 moves=-/High Horsepower weather=256 duration=1 speeds=40/27 foeSpeeds=0/19 AtkStages=6/6 foeStatus=0/0 faints=0/1
+MARC_INPUT reserves=0 slot=0 lv=12 HP=51 Atk=19 Def=20 SpA=24 SpD=23 Speed=29 item=481 ability=117
+MARC_INPUT reserves=0 slot=1 lv=13 HP=61 Atk=53 Def=44 SpA=12 SpD=14 Speed=27 item=553 ability=249
+MARC_INPUT reserves=0 slot=2 lv=13 HP=42 Atk=40 Def=29 SpA=18 SpD=20 Speed=31 item=494 ability=173
+MARC_INPUT reserves=0 slot=3 lv=13 HP=53 Atk=47 Def=39 SpA=16 SpD=23 Speed=28 item=523 ability=271
+MARC_INPUT reserves=0 slot=4 lv=14 HP=43 Atk=49 Def=21 SpA=27 SpD=21 Speed=40 item=0 ability=129
+MARC_INPUT reserves=0 slot=5 lv=13 HP=44 Atk=53 Def=19 SpA=14 SpD=16 Speed=32 item=444 ability=104
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Rock Slide target=0
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Aurora Veil target=1
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=High Horsepower target=0
+AI decision turn=3 actor=0 move=Double-Edge target=1
+AI decision turn=3 actor=1 move=Protect target=1
+AI decision turn=3 actor=2 move=Drain Punch target=3
+AI decision turn=3 actor=3 move=High Horsepower target=0
+AI switch turn=4 actor=1 party=4
+AI decision turn=4 actor=2 move=Drain Punch target=3
+AI decision turn=4 actor=3 move=High Horsepower target=2
+AI decision turn=5 actor=2 move=Drain Punch target=3
+AI decision turn=5 actor=1 move=Acrobatics target=2
+AI decision turn=5 actor=3 move=Rock Slide target=2
+MARC_SUPPORT board=0 turns=5 pair=0 screen=2 SpAStages=6/6 foeStatus=0/0
+MARC_TEMPO board=0 turns=5 reserves=0 tailwind=0 rawSpeeds=40/27 ownHP=43/13 friendship=0/0
+MARC_AFTER board=0 turns=5 reserves=0 native=4 species=566/874 HP=43/13 foes=0/0 moves=Acrobatics/High Horsepower weather=256 duration=1 speeds=40/27 foeSpeeds=0/19 AtkStages=6/6 foeStatus=0/0 faints=0/2
+MARC_INPUT reserves=0 slot=0 lv=12 HP=51 Atk=19 Def=20 SpA=24 SpD=23 Speed=29 item=481 ability=117
+MARC_INPUT reserves=0 slot=1 lv=13 HP=61 Atk=53 Def=44 SpA=12 SpD=14 Speed=27 item=553 ability=249
+MARC_INPUT reserves=0 slot=2 lv=13 HP=42 Atk=40 Def=29 SpA=18 SpD=20 Speed=31 item=494 ability=173
+MARC_INPUT reserves=0 slot=3 lv=13 HP=53 Atk=47 Def=39 SpA=16 SpD=23 Speed=28 item=523 ability=271
+MARC_INPUT reserves=0 slot=4 lv=14 HP=43 Atk=49 Def=21 SpA=27 SpD=21 Speed=40 item=0 ability=129
+MARC_INPUT reserves=0 slot=5 lv=13 HP=44 Atk=53 Def=19 SpA=14 SpD=16 Speed=32 item=444 ability=104
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Rock Slide target=0
+AI decision turn=2 actor=1 move=Blizzard target=0
+AI decision turn=2 actor=3 move=Rock Slide target=0
+MARC_SUPPORT board=1 turns=1 pair=0 screen=0 SpAStages=6/6 foeStatus=0/0
+MARC_TEMPO board=1 turns=1 reserves=0 tailwind=0 rawSpeeds=29/27 ownHP=51/61 friendship=0/0
+MARC_AFTER board=1 turns=1 reserves=0 native=1 species=698/874 HP=51/61 foes=40/26 moves=Protect/Rock Slide weather=256 duration=4 speeds=29/27 foeSpeeds=35/17 AtkStages=6/6 foeStatus=0/0 faints=0/0
+MARC_INPUT reserves=0 slot=0 lv=12 HP=51 Atk=19 Def=20 SpA=24 SpD=23 Speed=29 item=481 ability=117
+MARC_INPUT reserves=0 slot=1 lv=13 HP=61 Atk=53 Def=44 SpA=12 SpD=14 Speed=27 item=553 ability=249
+MARC_INPUT reserves=0 slot=2 lv=13 HP=42 Atk=40 Def=29 SpA=18 SpD=20 Speed=31 item=494 ability=173
+MARC_INPUT reserves=0 slot=3 lv=13 HP=53 Atk=47 Def=39 SpA=16 SpD=23 Speed=28 item=523 ability=271
+MARC_INPUT reserves=0 slot=4 lv=14 HP=43 Atk=49 Def=21 SpA=27 SpD=21 Speed=40 item=0 ability=129
+MARC_INPUT reserves=0 slot=5 lv=13 HP=44 Atk=53 Def=19 SpA=14 SpD=16 Speed=32 item=444 ability=104
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Rock Slide target=0
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Blizzard target=0
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=3 move=Rock Slide target=0
+AI decision turn=3 actor=1 move=Blizzard target=0
+AI decision turn=3 actor=3 move=High Horsepower target=0
+MARC_SUPPORT board=1 turns=2 pair=0 screen=0 SpAStages=6/6 foeStatus=32/0
+MARC_TEMPO board=1 turns=2 reserves=0 tailwind=0 rawSpeeds=29/27 ownHP=26/61 friendship=0/0
+MARC_AFTER board=1 turns=2 reserves=0 native=2 species=698/874 HP=26/61 foes=28/0 moves=Blizzard/Rock Slide weather=256 duration=3 speeds=29/27 foeSpeeds=35/0 AtkStages=6/6 foeStatus=32/0 faints=0/1
+MARC_INPUT reserves=0 slot=0 lv=12 HP=51 Atk=19 Def=20 SpA=24 SpD=23 Speed=29 item=481 ability=117
+MARC_INPUT reserves=0 slot=1 lv=13 HP=61 Atk=53 Def=44 SpA=12 SpD=14 Speed=27 item=553 ability=249
+MARC_INPUT reserves=0 slot=2 lv=13 HP=42 Atk=40 Def=29 SpA=18 SpD=20 Speed=31 item=494 ability=173
+MARC_INPUT reserves=0 slot=3 lv=13 HP=53 Atk=47 Def=39 SpA=16 SpD=23 Speed=28 item=523 ability=271
+MARC_INPUT reserves=0 slot=4 lv=14 HP=43 Atk=49 Def=21 SpA=27 SpD=21 Speed=40 item=0 ability=129
+MARC_INPUT reserves=0 slot=5 lv=13 HP=44 Atk=53 Def=19 SpA=14 SpD=16 Speed=32 item=444 ability=104
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Rock Slide target=0
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Blizzard target=0
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=3 move=Rock Slide target=0
+AI decision turn=3 actor=0 move=Super Fang target=1
+AI decision turn=3 actor=1 move=Blizzard target=0
+AI decision turn=3 actor=3 move=High Horsepower target=0
+MARC_SUPPORT board=1 turns=3 pair=0 screen=0 SpAStages=6/6 foeStatus=0/0
+MARC_TEMPO board=1 turns=3 reserves=0 tailwind=0 rawSpeeds=29/27 ownHP=13/61 friendship=0/0
+MARC_AFTER board=1 turns=3 reserves=0 native=2 species=698/874 HP=13/61 foes=0/0 moves=Blizzard/High Horsepower weather=256 duration=3 speeds=29/27 foeSpeeds=35/0 AtkStages=6/6 foeStatus=0/0 faints=0/2
+MARC_INPUT reserves=1 slot=0 lv=12 HP=51 Atk=19 Def=20 SpA=24 SpD=23 Speed=29 item=481 ability=117
+MARC_INPUT reserves=1 slot=1 lv=13 HP=61 Atk=53 Def=44 SpA=12 SpD=14 Speed=27 item=553 ability=249
+MARC_INPUT reserves=1 slot=2 lv=13 HP=42 Atk=40 Def=29 SpA=18 SpD=20 Speed=31 item=494 ability=173
+MARC_INPUT reserves=1 slot=3 lv=13 HP=53 Atk=47 Def=39 SpA=16 SpD=23 Speed=28 item=523 ability=271
+MARC_INPUT reserves=1 slot=4 lv=14 HP=43 Atk=49 Def=21 SpA=27 SpD=21 Speed=40 item=0 ability=129
+MARC_INPUT reserves=1 slot=5 lv=13 HP=44 Atk=53 Def=19 SpA=14 SpD=16 Speed=32 item=444 ability=104
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Dragon Dance target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Knock Off target=0
+AI decision turn=2 actor=1 move=Dragon Claw target=0
+AI decision turn=2 actor=3 move=Protect target=3
+MARC_SUPPORT board=0 turns=1 pair=1 screen=0 SpAStages=6/7 foeStatus=0/0
+MARC_TEMPO board=0 turns=1 reserves=1 tailwind=0 rawSpeeds=31/28 ownHP=33/36 friendship=0/0
+MARC_AFTER board=0 turns=1 reserves=1 native=1 species=696/1338 HP=33/36 foes=33/58 moves=Dragon Dance/Knock Off weather=0 duration=0 speeds=46/42 foeSpeeds=24/19 AtkStages=7/7 foeStatus=0/0 faints=0/0
+MARC_INPUT reserves=1 slot=0 lv=12 HP=51 Atk=19 Def=20 SpA=24 SpD=23 Speed=29 item=481 ability=117
+MARC_INPUT reserves=1 slot=1 lv=13 HP=61 Atk=53 Def=44 SpA=12 SpD=14 Speed=27 item=553 ability=249
+MARC_INPUT reserves=1 slot=2 lv=13 HP=42 Atk=40 Def=29 SpA=18 SpD=20 Speed=31 item=494 ability=173
+MARC_INPUT reserves=1 slot=3 lv=13 HP=53 Atk=47 Def=39 SpA=16 SpD=23 Speed=28 item=523 ability=271
+MARC_INPUT reserves=1 slot=4 lv=14 HP=43 Atk=49 Def=21 SpA=27 SpD=21 Speed=40 item=0 ability=129
+MARC_INPUT reserves=1 slot=5 lv=13 HP=44 Atk=53 Def=19 SpA=14 SpD=16 Speed=32 item=444 ability=104
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Dragon Dance target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Knock Off target=0
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Dragon Claw target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=1 move=Dragon Claw target=2
+AI switch turn=3 actor=3 party=4
+MARC_SUPPORT board=0 turns=2 pair=1 screen=0 SpAStages=6/7 foeStatus=0/0
+MARC_TEMPO board=0 turns=2 reserves=1 tailwind=0 rawSpeeds=31/28 ownHP=33/36 friendship=0/0
+MARC_AFTER board=0 turns=2 reserves=1 native=2 species=696/1338 HP=33/36 foes=0/58 moves=Dragon Claw/Protect weather=0 duration=0 speeds=46/42 foeSpeeds=0/19 AtkStages=7/7 foeStatus=0/0 faints=0/1
+MARC_INPUT reserves=1 slot=0 lv=12 HP=51 Atk=19 Def=20 SpA=24 SpD=23 Speed=29 item=481 ability=117
+MARC_INPUT reserves=1 slot=1 lv=13 HP=61 Atk=53 Def=44 SpA=12 SpD=14 Speed=27 item=553 ability=249
+MARC_INPUT reserves=1 slot=2 lv=13 HP=42 Atk=40 Def=29 SpA=18 SpD=20 Speed=31 item=494 ability=173
+MARC_INPUT reserves=1 slot=3 lv=13 HP=53 Atk=47 Def=39 SpA=16 SpD=23 Speed=28 item=523 ability=271
+MARC_INPUT reserves=1 slot=4 lv=14 HP=43 Atk=49 Def=21 SpA=27 SpD=21 Speed=40 item=0 ability=129
+MARC_INPUT reserves=1 slot=5 lv=13 HP=44 Atk=53 Def=19 SpA=14 SpD=16 Speed=32 item=444 ability=104
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Dragon Dance target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Knock Off target=0
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Dragon Claw target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=2 move=Drain Punch target=3
+AI decision turn=3 actor=1 move=Dragon Claw target=2
+AI switch turn=3 actor=3 party=4
+AI decision turn=4 actor=1 move=Dragon Claw target=2
+AI decision turn=4 actor=3 move=Acrobatics target=2
+MARC_SUPPORT board=0 turns=3 pair=1 screen=0 SpAStages=6/6 foeStatus=0/0
+MARC_TEMPO board=0 turns=3 reserves=1 tailwind=0 rawSpeeds=31/40 ownHP=33/18 friendship=0/0
+MARC_AFTER board=0 turns=3 reserves=1 native=3 species=696/566 HP=33/18 foes=0/45 moves=Dragon Claw/- weather=0 duration=0 speeds=46/40 foeSpeeds=0/19 AtkStages=7/6 foeStatus=0/0 faints=0/1
+MARC_INPUT reserves=1 slot=0 lv=12 HP=51 Atk=19 Def=20 SpA=24 SpD=23 Speed=29 item=481 ability=117
+MARC_INPUT reserves=1 slot=1 lv=13 HP=61 Atk=53 Def=44 SpA=12 SpD=14 Speed=27 item=553 ability=249
+MARC_INPUT reserves=1 slot=2 lv=13 HP=42 Atk=40 Def=29 SpA=18 SpD=20 Speed=31 item=494 ability=173
+MARC_INPUT reserves=1 slot=3 lv=13 HP=53 Atk=47 Def=39 SpA=16 SpD=23 Speed=28 item=523 ability=271
+MARC_INPUT reserves=1 slot=4 lv=14 HP=43 Atk=49 Def=21 SpA=27 SpD=21 Speed=40 item=0 ability=129
+MARC_INPUT reserves=1 slot=5 lv=13 HP=44 Atk=53 Def=19 SpA=14 SpD=16 Speed=32 item=444 ability=104
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Crunch target=2
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Knock Off target=2
+AI decision turn=2 actor=1 move=Dragon Dance target=1
+AI decision turn=2 actor=3 move=Knock Off target=0
+MARC_SUPPORT board=1 turns=1 pair=1 screen=0 SpAStages=6/6 foeStatus=0/0
+MARC_TEMPO board=1 turns=1 reserves=1 tailwind=0 rawSpeeds=31/28 ownHP=21/53 friendship=0/0
+MARC_AFTER board=1 turns=1 reserves=1 native=1 species=696/1338 HP=21/53 foes=53/0 moves=Crunch/Knock Off weather=0 duration=0 speeds=31/28 foeSpeeds=35/0 AtkStages=6/6 foeStatus=0/0 faints=0/1
+MARC_INPUT reserves=1 slot=0 lv=12 HP=51 Atk=19 Def=20 SpA=24 SpD=23 Speed=29 item=481 ability=117
+MARC_INPUT reserves=1 slot=1 lv=13 HP=61 Atk=53 Def=44 SpA=12 SpD=14 Speed=27 item=553 ability=249
+MARC_INPUT reserves=1 slot=2 lv=13 HP=42 Atk=40 Def=29 SpA=18 SpD=20 Speed=31 item=494 ability=173
+MARC_INPUT reserves=1 slot=3 lv=13 HP=53 Atk=47 Def=39 SpA=16 SpD=23 Speed=28 item=523 ability=271
+MARC_INPUT reserves=1 slot=4 lv=14 HP=43 Atk=49 Def=21 SpA=27 SpD=21 Speed=40 item=0 ability=129
+MARC_INPUT reserves=1 slot=5 lv=13 HP=44 Atk=53 Def=19 SpA=14 SpD=16 Speed=32 item=444 ability=104
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Crunch target=2
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Knock Off target=2
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Dragon Dance target=1
+AI decision turn=2 actor=3 move=Knock Off target=0
+AI decision turn=3 actor=1 move=Dragon Claw target=0
+AI decision turn=3 actor=3 move=Crabhammer target=0
+MARC_SUPPORT board=1 turns=2 pair=1 screen=0 SpAStages=6/6 foeStatus=0/0
+MARC_TEMPO board=1 turns=2 reserves=1 tailwind=0 rawSpeeds=31/28 ownHP=11/53 friendship=0/0
+MARC_AFTER board=1 turns=2 reserves=1 native=2 species=696/1338 HP=11/53 foes=39/0 moves=Dragon Dance/Knock Off weather=0 duration=0 speeds=46/28 foeSpeeds=35/0 AtkStages=7/6 foeStatus=0/0 faints=0/1
+MARC_INPUT reserves=1 slot=0 lv=12 HP=51 Atk=19 Def=20 SpA=24 SpD=23 Speed=29 item=481 ability=117
+MARC_INPUT reserves=1 slot=1 lv=13 HP=61 Atk=53 Def=44 SpA=12 SpD=14 Speed=27 item=553 ability=249
+MARC_INPUT reserves=1 slot=2 lv=13 HP=42 Atk=40 Def=29 SpA=18 SpD=20 Speed=31 item=494 ability=173
+MARC_INPUT reserves=1 slot=3 lv=13 HP=53 Atk=47 Def=39 SpA=16 SpD=23 Speed=28 item=523 ability=271
+MARC_INPUT reserves=1 slot=4 lv=14 HP=43 Atk=49 Def=21 SpA=27 SpD=21 Speed=40 item=0 ability=129
+MARC_INPUT reserves=1 slot=5 lv=13 HP=44 Atk=53 Def=19 SpA=14 SpD=16 Speed=32 item=444 ability=104
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Crunch target=2
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Knock Off target=2
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Dragon Dance target=1
+AI decision turn=2 actor=3 move=Knock Off target=0
+AI decision turn=3 actor=0 move=Super Fang target=1
+AI decision turn=3 actor=1 move=Dragon Claw target=0
+AI decision turn=3 actor=3 move=Crabhammer target=0
+AI decision turn=4 actor=1 move=Dragon Claw target=0
+AI decision turn=4 actor=3 move=Rock Slide target=0
+MARC_SUPPORT board=1 turns=3 pair=1 screen=0 SpAStages=6/6 foeStatus=0/0
+MARC_TEMPO board=1 turns=3 reserves=1 tailwind=0 rawSpeeds=31/28 ownHP=6/53 friendship=0/0
+MARC_AFTER board=1 turns=3 reserves=1 native=3 species=696/1338 HP=6/53 foes=2/0 moves=Dragon Claw/Crabhammer weather=0 duration=0 speeds=46/28 foeSpeeds=35/0 AtkStages=7/6 foeStatus=0/0 faints=0/1
+MARC_INPUT reserves=1 slot=0 lv=12 HP=51 Atk=19 Def=20 SpA=24 SpD=23 Speed=29 item=481 ability=117
+MARC_INPUT reserves=1 slot=1 lv=13 HP=61 Atk=53 Def=44 SpA=12 SpD=14 Speed=27 item=553 ability=249
+MARC_INPUT reserves=1 slot=2 lv=13 HP=42 Atk=40 Def=29 SpA=18 SpD=20 Speed=31 item=494 ability=173
+MARC_INPUT reserves=1 slot=3 lv=13 HP=53 Atk=47 Def=39 SpA=16 SpD=23 Speed=28 item=523 ability=271
+MARC_INPUT reserves=1 slot=4 lv=14 HP=43 Atk=49 Def=21 SpA=27 SpD=21 Speed=40 item=0 ability=129
+MARC_INPUT reserves=1 slot=5 lv=13 HP=44 Atk=53 Def=19 SpA=14 SpD=16 Speed=32 item=444 ability=104
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Crunch target=2
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Knock Off target=2
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Dragon Dance target=1
+AI decision turn=2 actor=3 move=Knock Off target=0
+AI decision turn=3 actor=0 move=Super Fang target=1
+AI decision turn=3 actor=1 move=Dragon Claw target=0
+AI decision turn=3 actor=3 move=Crabhammer target=0
+AI decision turn=4 actor=0 move=Super Fang target=1
+AI decision turn=4 actor=1 move=Dragon Claw target=0
+AI decision turn=4 actor=3 move=Rock Slide target=0
+MARC_SUPPORT board=1 turns=4 pair=1 screen=0 SpAStages=6/6 foeStatus=0/0
+MARC_TEMPO board=1 turns=4 reserves=1 tailwind=0 rawSpeeds=31/28 ownHP=6/53 friendship=0/0
+MARC_AFTER board=1 turns=4 reserves=1 native=3 species=696/1338 HP=6/53 foes=0/0 moves=Dragon Claw/Crabhammer weather=0 duration=0 speeds=46/28 foeSpeeds=35/0 AtkStages=7/6 foeStatus=0/0 faints=0/2
+MARC_INPUT reserves=2 slot=0 lv=12 HP=51 Atk=19 Def=20 SpA=24 SpD=23 Speed=29 item=481 ability=117
+MARC_INPUT reserves=2 slot=1 lv=13 HP=61 Atk=53 Def=44 SpA=12 SpD=14 Speed=27 item=553 ability=249
+MARC_INPUT reserves=2 slot=2 lv=13 HP=42 Atk=40 Def=29 SpA=18 SpD=20 Speed=31 item=494 ability=173
+MARC_INPUT reserves=2 slot=3 lv=13 HP=53 Atk=47 Def=39 SpA=16 SpD=23 Speed=28 item=523 ability=271
+MARC_INPUT reserves=2 slot=4 lv=14 HP=43 Atk=49 Def=21 SpA=27 SpD=21 Speed=40 item=0 ability=129
+MARC_INPUT reserves=2 slot=5 lv=13 HP=44 Atk=53 Def=19 SpA=14 SpD=16 Speed=32 item=444 ability=104
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Acrobatics target=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Rock Slide target=0
+AI decision turn=2 actor=1 move=Knock Off target=0
+AI decision turn=2 actor=3 move=Rock Slide target=0
+MARC_SUPPORT board=0 turns=1 pair=2 screen=0 SpAStages=6/6 foeStatus=0/0
+MARC_TEMPO board=0 turns=1 reserves=2 tailwind=0 rawSpeeds=40/32 ownHP=43/44 friendship=0/0
+MARC_AFTER board=0 turns=1 reserves=2 native=1 species=566/408 HP=43/44 foes=36/0 moves=Acrobatics/Rock Slide weather=0 duration=0 speeds=40/48 foeSpeeds=24/0 AtkStages=6/6 foeStatus=0/0 faints=0/1
+MARC_INPUT reserves=2 slot=0 lv=12 HP=51 Atk=19 Def=20 SpA=24 SpD=23 Speed=29 item=481 ability=117
+MARC_INPUT reserves=2 slot=1 lv=13 HP=61 Atk=53 Def=44 SpA=12 SpD=14 Speed=27 item=553 ability=249
+MARC_INPUT reserves=2 slot=2 lv=13 HP=42 Atk=40 Def=29 SpA=18 SpD=20 Speed=31 item=494 ability=173
+MARC_INPUT reserves=2 slot=3 lv=13 HP=53 Atk=47 Def=39 SpA=16 SpD=23 Speed=28 item=523 ability=271
+MARC_INPUT reserves=2 slot=4 lv=14 HP=43 Atk=49 Def=21 SpA=27 SpD=21 Speed=40 item=0 ability=129
+MARC_INPUT reserves=2 slot=5 lv=13 HP=44 Atk=53 Def=19 SpA=14 SpD=16 Speed=32 item=444 ability=104
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Acrobatics target=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Rock Slide target=0
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Knock Off target=0
+AI decision turn=2 actor=3 move=Rock Slide target=0
+MARC_SUPPORT board=0 turns=2 pair=2 screen=0 SpAStages=6/6 foeStatus=0/0
+MARC_TEMPO board=0 turns=2 reserves=2 tailwind=0 rawSpeeds=40/32 ownHP=43/44 friendship=0/0
+MARC_AFTER board=0 turns=2 reserves=2 native=1 species=566/408 HP=43/44 foes=0/0 moves=Knock Off/Rock Slide weather=0 duration=0 speeds=40/48 foeSpeeds=24/0 AtkStages=6/6 foeStatus=0/0 faints=0/2
+MARC_INPUT reserves=2 slot=0 lv=12 HP=51 Atk=19 Def=20 SpA=24 SpD=23 Speed=29 item=481 ability=117
+MARC_INPUT reserves=2 slot=1 lv=13 HP=61 Atk=53 Def=44 SpA=12 SpD=14 Speed=27 item=553 ability=249
+MARC_INPUT reserves=2 slot=2 lv=13 HP=42 Atk=40 Def=29 SpA=18 SpD=20 Speed=31 item=494 ability=173
+MARC_INPUT reserves=2 slot=3 lv=13 HP=53 Atk=47 Def=39 SpA=16 SpD=23 Speed=28 item=523 ability=271
+MARC_INPUT reserves=2 slot=4 lv=14 HP=43 Atk=49 Def=21 SpA=27 SpD=21 Speed=40 item=0 ability=129
+MARC_INPUT reserves=2 slot=5 lv=13 HP=44 Atk=53 Def=19 SpA=14 SpD=16 Speed=32 item=444 ability=104
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Acrobatics target=2
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Rock Slide target=0
+AI decision turn=2 actor=1 move=Knock Off target=0
+AI decision turn=2 actor=3 move=Rock Slide target=0
+MARC_SUPPORT board=1 turns=1 pair=2 screen=0 SpAStages=6/6 foeStatus=0/0
+MARC_TEMPO board=1 turns=1 reserves=2 tailwind=0 rawSpeeds=40/32 ownHP=43/44 friendship=0/0
+MARC_AFTER board=1 turns=1 reserves=2 native=1 species=566/408 HP=43/44 foes=40/0 moves=Acrobatics/Rock Slide weather=0 duration=0 speeds=40/48 foeSpeeds=35/0 AtkStages=6/6 foeStatus=0/0 faints=0/1
+MARC_INPUT reserves=2 slot=0 lv=12 HP=51 Atk=19 Def=20 SpA=24 SpD=23 Speed=29 item=481 ability=117
+MARC_INPUT reserves=2 slot=1 lv=13 HP=61 Atk=53 Def=44 SpA=12 SpD=14 Speed=27 item=553 ability=249
+MARC_INPUT reserves=2 slot=2 lv=13 HP=42 Atk=40 Def=29 SpA=18 SpD=20 Speed=31 item=494 ability=173
+MARC_INPUT reserves=2 slot=3 lv=13 HP=53 Atk=47 Def=39 SpA=16 SpD=23 Speed=28 item=523 ability=271
+MARC_INPUT reserves=2 slot=4 lv=14 HP=43 Atk=49 Def=21 SpA=27 SpD=21 Speed=40 item=0 ability=129
+MARC_INPUT reserves=2 slot=5 lv=13 HP=44 Atk=53 Def=19 SpA=14 SpD=16 Speed=32 item=444 ability=104
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Acrobatics target=2
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Rock Slide target=0
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Knock Off target=0
+AI decision turn=2 actor=3 move=Rock Slide target=0
+AI decision turn=3 actor=1 move=Acrobatics target=0
+AI decision turn=3 actor=3 move=Rock Slide target=0
+MARC_SUPPORT board=1 turns=2 pair=2 screen=0 SpAStages=6/6 foeStatus=0/0
+MARC_TEMPO board=1 turns=2 reserves=2 tailwind=0 rawSpeeds=40/32 ownHP=43/44 friendship=0/0
+MARC_AFTER board=1 turns=2 reserves=2 native=2 species=566/408 HP=43/44 foes=24/0 moves=Knock Off/Rock Slide weather=0 duration=0 speeds=40/48 foeSpeeds=35/0 AtkStages=6/6 foeStatus=0/0 faints=0/1
+MARC_INPUT reserves=2 slot=0 lv=12 HP=51 Atk=19 Def=20 SpA=24 SpD=23 Speed=29 item=481 ability=117
+MARC_INPUT reserves=2 slot=1 lv=13 HP=61 Atk=53 Def=44 SpA=12 SpD=14 Speed=27 item=553 ability=249
+MARC_INPUT reserves=2 slot=2 lv=13 HP=42 Atk=40 Def=29 SpA=18 SpD=20 Speed=31 item=494 ability=173
+MARC_INPUT reserves=2 slot=3 lv=13 HP=53 Atk=47 Def=39 SpA=16 SpD=23 Speed=28 item=523 ability=271
+MARC_INPUT reserves=2 slot=4 lv=14 HP=43 Atk=49 Def=21 SpA=27 SpD=21 Speed=40 item=0 ability=129
+MARC_INPUT reserves=2 slot=5 lv=13 HP=44 Atk=53 Def=19 SpA=14 SpD=16 Speed=32 item=444 ability=104
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Acrobatics target=2
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Rock Slide target=0
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Knock Off target=0
+AI decision turn=2 actor=3 move=Rock Slide target=0
+AI decision turn=3 actor=0 move=Super Fang target=1
+AI decision turn=3 actor=1 move=Acrobatics target=0
+AI decision turn=3 actor=3 move=Rock Slide target=0
+MARC_SUPPORT board=1 turns=3 pair=2 screen=0 SpAStages=6/6 foeStatus=0/0
+MARC_TEMPO board=1 turns=3 reserves=2 tailwind=0 rawSpeeds=40/32 ownHP=43/44 friendship=0/0
+MARC_AFTER board=1 turns=3 reserves=2 native=2 species=566/408 HP=43/44 foes=0/0 moves=Acrobatics/Rock Slide weather=0 duration=0 speeds=40/48 foeSpeeds=35/0 AtkStages=6/6 foeStatus=0/0 faints=0/2
+
+- Tests [32mPASSED[0m:          3
+- Tests [34mTOTAL[0m:           3
+

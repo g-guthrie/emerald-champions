@@ -157,7 +157,7 @@ static void Task_ChooseBoxMon(u8 taskId)
 void ChooseBoxMon(struct ScriptContext *ctx)
 {
     sSelectionType = ScriptReadByte(ctx);
-    if (!OW_CHOOSE_FROM_PC_AND_PARTY)
+    if (!OW_CHOOSE_FROM_PC_AND_PARTY && sSelectionType != SELECT_PC_MON_DAYCARE)
     {
         sPcMonSelectionTypes[sSelectionType].partyMonBackup();
         return;

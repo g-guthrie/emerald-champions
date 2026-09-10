@@ -1,0 +1,957 @@
+arm-none-eabi-cpp -iquote include -Wno-trigraphs -DMODERN=1 -DTESTING=0 -DEMERALD -std=gnu17 -DEC_HEADLESS_FIXTURES=0 -traditional-cpp - < src/data/trainers.party | tools/trainerproc/trainerproc -o src/data/trainers.h -i src/data/trainers.party -
+tools/scaninc/scaninc -M build/emerald-test/test/test_runner_battle.d -g build/assets -I include -I tools/agbcc/include test/test_runner_battle.c
+tools/scaninc/scaninc -M build/emerald-test/src/emerald_champions_battle_plan.d -g build/assets -I include -I tools/agbcc/include src/emerald_champions_battle_plan.c
+tools/scaninc/scaninc -M build/emerald-test/src/data.d -g build/assets -I include -I tools/agbcc/include src/data.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/data.o src/data.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/emerald_champions_battle_plan.o src/emerald_champions_battle_plan.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/test_runner_battle.o test/test_runner_battle.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 4
+[3] EC live review Kai timing: six-player bench: [32mPASS[0m
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Ice Beam target=2
+AI decision turn=2 actor=1 move=Octolock target=0
+AI decision turn=2 actor=3 move=Ice Beam target=2
+REVIEW_AFTER board=99 turns=1 reserves=0 species=853/364 HP=144/152 foes=98/114 faints=0/0 initialFrames=44
+REVIEW_STATE actor=1 move=Protect PP=15/10/15/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=7 item=523
+REVIEW_STATE actor=3 move=Ice Beam PP=10/9/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=47 item=494
+REVIEW_PLAYER actor=0 species=619 move=Protect PP=10/10/20/4 status=0
+REVIEW_PLAYER actor=2 species=178 move=Protect PP=10/10/15/4 status=0
+REVIEW_TIMING setup=6 bothActors=42 complete=48
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Ice Beam target=2
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Body Press target=0
+AI decision turn=2 actor=1 move=Ice Beam target=2
+AI decision turn=2 actor=3 move=Body Press target=0
+REVIEW_AFTER board=99 turns=1 reserves=1 species=658/652 HP=114/150 foes=98/114 faints=0/0 initialFrames=22
+REVIEW_STATE actor=1 move=Ice Beam PP=5/9/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=168 item=479
+REVIEW_STATE actor=3 move=Body Press PP=5/9/15/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=171 item=496
+REVIEW_PLAYER actor=0 species=619 move=Protect PP=10/10/20/4 status=0
+REVIEW_PLAYER actor=2 species=178 move=Protect PP=10/10/15/4 status=0
+REVIEW_TIMING setup=7 bothActors=19 complete=26
+[0] EC live review Kai: native defensive abilities: [32mPASS[0m
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Thunder Wave target=1
+AI decision turn=1 actor=1 move=Drain Punch target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Ice Beam target=0
+AI decision turn=2 actor=1 move=Drain Punch target=2
+AI decision turn=2 actor=3 move=Ice Beam target=2
+REVIEW_AFTER board=91 turns=1 reserves=0 species=853/364 HP=144/108 foes=103/90 faints=0/0 initialFrames=44
+REVIEW_STATE actor=1 move=Drain Punch PP=15/9/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=7 item=523
+REVIEW_STATE actor=3 move=Ice Beam PP=10/9/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=47 item=494
+REVIEW_PLAYER actor=0 species=302 move=Thunder Wave PP=19/15/20/5 status=32
+REVIEW_PLAYER actor=2 species=417 move=Thunderbolt PP=14/10/20/5 status=0
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Sludge Bomb target=3
+AI decision turn=1 actor=1 move=Hydro Pump target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Iron Defense target=3
+AI decision turn=2 actor=0 move=Sludge Bomb target=3
+AI decision turn=2 actor=1 move=Hydro Pump target=2
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=3 move=Body Press target=0
+AI decision turn=3 actor=1 move=Ice Beam target=0
+AI decision turn=3 actor=3 move=Body Press target=0
+REVIEW_AFTER board=91 turns=2 reserves=1 species=658/652 HP=26/150 foes=61/0 faints=0/1 initialFrames=22
+REVIEW_STATE actor=1 move=Hydro Pump PP=3/10/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=168 item=479
+REVIEW_STATE actor=3 move=Body Press PP=5/9/15/14 Atk=6 Def=8 SpA=6 SpD=6 Spe=6 status=0 ability=171 item=496
+REVIEW_PLAYER actor=0 species=407 move=Sludge Bomb PP=8/10/15/10 status=0
+REVIEW_PLAYER actor=2 species=417 move=- PP=14/10/20/5 status=0
+[1] EC live review Kai: revealed guards and Octolock 3/3: [31mFAIL[0m
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Ice Beam target=2
+AI decision turn=2 actor=1 move=Octolock target=0
+AI decision turn=2 actor=3 move=Ice Beam target=2
+REVIEW_AFTER board=90 turns=1 reserves=0 species=853/364 HP=144/152 foes=98/114 faints=0/0 initialFrames=44
+REVIEW_STATE actor=1 move=Protect PP=15/10/15/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=7 item=523
+REVIEW_STATE actor=3 move=Ice Beam PP=10/9/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=47 item=494
+REVIEW_PLAYER actor=0 species=619 move=Protect PP=10/10/20/4 status=0
+REVIEW_PLAYER actor=2 species=178 move=Protect PP=10/10/15/4 status=0
+KAI_TRAP left=0 right=0 Def=6/6 SpD=6/6
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Ice Beam target=2
+AI decision turn=2 actor=0 move=High Jump Kick target=1
+AI decision turn=2 actor=1 move=Octolock target=0
+AI decision turn=2 actor=2 move=Psychic target=3
+AI decision turn=2 actor=3 move=Ice Beam target=2
+AI decision turn=3 actor=1 move=Drain Punch target=0
+AI decision turn=3 actor=3 move=Ice Beam target=0
+REVIEW_AFTER board=90 turns=2 reserves=0 species=853/364 HP=102/81 foes=98/143 faints=0/1 initialFrames=44
+REVIEW_STATE actor=1 move=Octolock PP=14/10/15/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=7 item=0
+REVIEW_STATE actor=3 move=Ice Beam PP=10/8/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=47 item=494
+REVIEW_PLAYER actor=0 species=619 move=High Jump Kick PP=10/9/20/4 status=0
+REVIEW_PLAYER actor=2 species=259 move=- PP=10/10/15/10 status=0
+KAI_TRAP left=1 right=0 Def=5/6 SpD=5/6
+REVIEW_TIMING setup=6 bothActors=42 complete=48
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Ice Beam target=2
+AI decision turn=2 actor=0 move=High Jump Kick target=1
+AI decision turn=2 actor=1 move=Octolock target=0
+AI decision turn=2 actor=2 move=Psychic target=3
+AI decision turn=2 actor=3 move=Ice Beam target=2
+AI decision turn=3 actor=0 move=High Jump Kick target=1
+AI decision turn=3 actor=1 move=Drain Punch target=0
+AI decision turn=3 actor=2 move=Earth Power target=3
+AI decision turn=3 actor=3 move=Ice Beam target=0
+test/battle/ai/../../../work/kai_gen9_probe.inc:81: TURN 3 incomplete (playerLeft requests record type 4 at index 9)
+[2] EC live review Kai: bulky pressure: [32mPASS[0m
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Foul Play target=1
+AI decision turn=1 actor=1 move=Drain Punch target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Ice Beam target=2
+AI decision turn=2 actor=1 move=Drain Punch target=0
+AI decision turn=2 actor=3 move=Ice Beam target=0
+REVIEW_AFTER board=80 turns=1 reserves=0 species=853/364 HP=140/108 foes=107/87 faints=0/0 initialFrames=43
+REVIEW_STATE actor=1 move=Drain Punch PP=15/9/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=7 item=523
+REVIEW_STATE actor=3 move=Ice Beam PP=10/9/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=47 item=494
+REVIEW_PLAYER actor=0 species=197 move=Foul Play PP=14/15/20/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=Thunderbolt PP=14/10/20/5 status=32
+KAI_TRAP left=0 right=0 Def=6/6 SpD=6/6
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Foul Play target=1
+AI decision turn=1 actor=1 move=Drain Punch target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Ice Beam target=2
+AI decision turn=2 actor=0 move=Foul Play target=1
+AI decision turn=2 actor=1 move=Drain Punch target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Ice Beam target=0
+AI decision turn=3 actor=1 move=Drain Punch target=0
+AI decision turn=3 actor=3 move=Brine target=0
+REVIEW_AFTER board=80 turns=2 reserves=0 species=853/364 HP=136/64 foes=17/87 faints=0/0 initialFrames=43
+REVIEW_STATE actor=1 move=Drain Punch PP=15/8/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=7 item=523
+REVIEW_STATE actor=3 move=Ice Beam PP=10/8/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=47 item=494
+REVIEW_PLAYER actor=0 species=197 move=Foul Play PP=13/15/20/5 status=32
+REVIEW_PLAYER actor=2 species=417 move=Thunderbolt PP=13/10/20/5 status=0
+KAI_TRAP left=0 right=0 Def=6/6 SpD=6/6
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Foul Play target=1
+AI decision turn=1 actor=1 move=Drain Punch target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Ice Beam target=2
+AI decision turn=2 actor=0 move=Foul Play target=1
+AI decision turn=2 actor=1 move=Drain Punch target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Ice Beam target=0
+AI decision turn=3 actor=0 move=Foul Play target=1
+AI decision turn=3 actor=1 move=Drain Punch target=0
+AI decision turn=3 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=3 move=Brine target=0
+AI decision turn=4 actor=1 move=Drain Punch target=2
+AI decision turn=4 actor=3 move=Helping Hand target=1
+REVIEW_AFTER board=80 turns=3 reserves=0 species=853/364 HP=121/20 foes=0/75 faints=0/1 initialFrames=43
+REVIEW_STATE actor=1 move=Drain Punch PP=15/7/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=7 item=523
+REVIEW_STATE actor=3 move=Brine PP=9/8/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=47 item=494
+REVIEW_PLAYER actor=0 species=197 move=- PP=12/15/20/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=Thunderbolt PP=12/10/20/5 status=0
+KAI_TRAP left=0 right=0 Def=6/6 SpD=6/6
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Foul Play target=1
+AI decision turn=1 actor=1 move=Drain Punch target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Ice Beam target=2
+AI decision turn=2 actor=0 move=Foul Play target=1
+AI decision turn=2 actor=1 move=Drain Punch target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Ice Beam target=0
+AI decision turn=3 actor=0 move=Foul Play target=1
+AI decision turn=3 actor=1 move=Drain Punch target=0
+AI decision turn=3 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=3 move=Brine target=0
+AI decision turn=4 actor=2 move=Thunderbolt target=3
+AI decision turn=4 actor=1 move=Drain Punch target=2
+AI decision turn=4 actor=3 move=Helping Hand target=1
+AI switch turn=4 actor=3 party=2
+AI decision turn=5 actor=1 move=Drain Punch target=2
+AI decision turn=5 actor=3 move=Ice Beam target=2
+REVIEW_AFTER board=80 turns=4 reserves=0 species=853/658 HP=144/114 foes=0/9 faints=1/1 initialFrames=43
+REVIEW_STATE actor=1 move=Drain Punch PP=15/6/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=7 item=523
+REVIEW_STATE actor=3 move=- PP=5/10/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=168 item=479
+REVIEW_PLAYER actor=0 species=197 move=- PP=12/15/20/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=Thunderbolt PP=11/10/20/5 status=0
+KAI_TRAP left=0 right=0 Def=6/6 SpD=6/6
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Night Shade target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Super Fang target=3
+AI decision turn=1 actor=3 move=Ice Beam target=2
+AI decision turn=2 actor=1 move=Drain Punch target=2
+AI decision turn=2 actor=3 move=Ice Beam target=2
+REVIEW_AFTER board=81 turns=1 reserves=0 species=853/364 HP=144/76 foes=119/87 faints=0/0 initialFrames=43
+REVIEW_STATE actor=1 move=Protect PP=15/10/15/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=7 item=523
+REVIEW_STATE actor=3 move=Ice Beam PP=10/9/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=47 item=494
+REVIEW_PLAYER actor=0 species=356 move=Night Shade PP=14/15/20/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=Super Fang PP=15/9/20/5 status=32
+KAI_TRAP left=0 right=0 Def=6/6 SpD=6/6
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Night Shade target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Super Fang target=3
+AI decision turn=1 actor=3 move=Ice Beam target=2
+AI decision turn=2 actor=0 move=Night Shade target=1
+AI decision turn=2 actor=1 move=Drain Punch target=2
+AI decision turn=2 actor=2 move=Super Fang target=3
+AI decision turn=2 actor=3 move=Ice Beam target=2
+AI decision turn=3 actor=1 move=Drain Punch target=2
+AI switch turn=3 actor=3 party=2
+REVIEW_AFTER board=81 turns=2 reserves=0 species=853/364 HP=104/38 foes=119/27 faints=0/0 initialFrames=43
+REVIEW_STATE actor=1 move=Drain Punch PP=15/9/15/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=7 item=523
+REVIEW_STATE actor=3 move=Ice Beam PP=10/8/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=47 item=494
+REVIEW_PLAYER actor=0 species=356 move=Night Shade PP=13/15/20/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=Super Fang PP=15/8/20/5 status=32
+KAI_TRAP left=0 right=0 Def=6/6 SpD=6/6
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Night Shade target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Super Fang target=3
+AI decision turn=1 actor=3 move=Ice Beam target=2
+AI decision turn=2 actor=0 move=Night Shade target=1
+AI decision turn=2 actor=1 move=Drain Punch target=2
+AI decision turn=2 actor=2 move=Super Fang target=3
+AI decision turn=2 actor=3 move=Ice Beam target=2
+AI decision turn=3 actor=0 move=Night Shade target=1
+AI decision turn=3 actor=1 move=Drain Punch target=2
+AI switch turn=3 actor=3 party=2
+AI decision turn=3 actor=2 move=Super Fang target=3
+AI decision turn=4 actor=1 move=Ice Punch target=0
+AI decision turn=4 actor=3 move=Dark Pulse target=0
+REVIEW_AFTER board=81 turns=3 reserves=0 species=853/658 HP=77/57 foes=119/0 faints=0/1 initialFrames=43
+REVIEW_STATE actor=1 move=Drain Punch PP=15/8/15/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=7 item=523
+REVIEW_STATE actor=3 move=- PP=5/10/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=168 item=479
+REVIEW_PLAYER actor=0 species=356 move=Night Shade PP=12/15/20/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=- PP=15/7/20/5 status=0
+KAI_TRAP left=0 right=0 Def=6/6 SpD=6/6
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Night Shade target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Super Fang target=3
+AI decision turn=1 actor=3 move=Ice Beam target=2
+AI decision turn=2 actor=0 move=Night Shade target=1
+AI decision turn=2 actor=1 move=Drain Punch target=2
+AI decision turn=2 actor=2 move=Super Fang target=3
+AI decision turn=2 actor=3 move=Ice Beam target=2
+AI decision turn=3 actor=0 move=Night Shade target=1
+AI decision turn=3 actor=1 move=Drain Punch target=2
+AI switch turn=3 actor=3 party=2
+AI decision turn=3 actor=2 move=Super Fang target=3
+AI decision turn=4 actor=0 move=Night Shade target=1
+AI decision turn=4 actor=1 move=Ice Punch target=0
+AI decision turn=4 actor=3 move=Dark Pulse target=0
+AI decision turn=5 actor=1 move=Octolock target=0
+AI decision turn=5 actor=3 move=Dark Pulse target=0
+REVIEW_AFTER board=81 turns=4 reserves=0 species=853/658 HP=77/46 foes=43/0 faints=0/1 initialFrames=43
+REVIEW_STATE actor=1 move=Ice Punch PP=15/8/13/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=7 item=523
+REVIEW_STATE actor=3 move=Dark Pulse PP=5/10/13/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=168 item=479
+REVIEW_PLAYER actor=0 species=356 move=Night Shade PP=12/15/20/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=- PP=15/7/20/5 status=0
+KAI_TRAP left=0 right=0 Def=6/6 SpD=6/6
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Night Shade target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Super Fang target=3
+AI decision turn=1 actor=3 move=Ice Beam target=2
+AI decision turn=2 actor=0 move=Night Shade target=1
+AI decision turn=2 actor=1 move=Drain Punch target=2
+AI decision turn=2 actor=2 move=Super Fang target=3
+AI decision turn=2 actor=3 move=Ice Beam target=2
+AI decision turn=3 actor=0 move=Night Shade target=1
+AI decision turn=3 actor=1 move=Drain Punch target=2
+AI switch turn=3 actor=3 party=2
+AI decision turn=3 actor=2 move=Super Fang target=3
+AI decision turn=4 actor=0 move=Night Shade target=1
+AI decision turn=4 actor=1 move=Ice Punch target=0
+AI decision turn=4 actor=3 move=Dark Pulse target=0
+AI decision turn=5 actor=0 move=Night Shade target=1
+AI decision turn=5 actor=1 move=Octolock target=0
+AI decision turn=5 actor=3 move=Dark Pulse target=0
+REVIEW_AFTER board=81 turns=5 reserves=0 species=853/658 HP=77/35 foes=0/0 faints=0/2 initialFrames=43
+REVIEW_STATE actor=1 move=Ice Punch PP=15/8/13/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=7 item=523
+REVIEW_STATE actor=3 move=Dark Pulse PP=5/10/11/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=168 item=479
+REVIEW_PLAYER actor=0 species=356 move=- PP=12/15/20/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=- PP=15/7/20/5 status=0
+KAI_TRAP left=0 right=0 Def=6/6 SpD=6/6
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Foul Play target=1
+AI decision turn=1 actor=1 move=Hydro Pump target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Body Press target=0
+AI decision turn=2 actor=1 move=Hydro Pump target=2
+AI decision turn=2 actor=3 move=Body Press target=0
+REVIEW_AFTER board=80 turns=1 reserves=1 species=658/652 HP=51/135 foes=101/82 faints=0/0 initialFrames=21
+REVIEW_STATE actor=1 move=Hydro Pump PP=4/10/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=168 item=479
+REVIEW_STATE actor=3 move=Body Press PP=5/9/15/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=171 item=496
+REVIEW_PLAYER actor=0 species=197 move=Foul Play PP=14/15/20/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=Thunderbolt PP=14/10/20/5 status=0
+KAI_TRAP left=0 right=0 Def=6/6 SpD=6/6
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Foul Play target=1
+AI decision turn=1 actor=1 move=Hydro Pump target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Body Press target=0
+AI decision turn=2 actor=0 move=Foul Play target=1
+AI decision turn=2 actor=1 move=Hydro Pump target=2
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Body Press target=0
+AI decision turn=3 actor=3 move=Body Press target=0
+REVIEW_AFTER board=80 turns=2 reserves=1 species=658/652 HP=0/135 foes=39/0 faints=1/1 initialFrames=21
+REVIEW_STATE actor=1 move=- PP=3/10/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=0 item=479
+REVIEW_STATE actor=3 move=Body Press PP=5/8/15/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=171 item=496
+REVIEW_PLAYER actor=0 species=197 move=Foul Play PP=13/15/20/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=- PP=14/10/20/5 status=0
+KAI_TRAP left=0 right=0 Def=6/6 SpD=6/6
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Foul Play target=1
+AI decision turn=1 actor=1 move=Hydro Pump target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Body Press target=0
+AI decision turn=2 actor=0 move=Foul Play target=1
+AI decision turn=2 actor=1 move=Hydro Pump target=2
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Body Press target=0
+AI decision turn=3 actor=3 move=Body Press target=0
+AI decision turn=3 actor=0 move=Foul Play target=1
+REVIEW_AFTER board=80 turns=3 reserves=1 species=658/652 HP=0/120 foes=0/0 faints=1/2 initialFrames=21
+REVIEW_STATE actor=1 move=- PP=3/10/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=0 item=479
+REVIEW_STATE actor=3 move=Body Press PP=5/7/15/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=171 item=496
+REVIEW_PLAYER actor=0 species=197 move=- PP=12/15/20/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=- PP=14/10/20/5 status=0
+KAI_TRAP left=0 right=0 Def=6/6 SpD=6/6
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Night Shade target=1
+AI decision turn=1 actor=1 move=Dark Pulse target=0
+AI decision turn=1 actor=2 move=Super Fang target=3
+AI decision turn=1 actor=3 move=Iron Defense target=3
+AI decision turn=2 actor=1 move=Dark Pulse target=0
+AI decision turn=2 actor=3 move=Body Press target=2
+REVIEW_AFTER board=81 turns=1 reserves=1 species=658/652 HP=103/75 foes=57/113 faints=0/0 initialFrames=18
+REVIEW_STATE actor=1 move=Dark Pulse PP=5/10/13/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=168 item=479
+REVIEW_STATE actor=3 move=Iron Defense PP=5/10/15/14 Atk=6 Def=8 SpA=6 SpD=6 Spe=6 status=0 ability=171 item=496
+REVIEW_PLAYER actor=0 species=356 move=- PP=15/15/20/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=Super Fang PP=15/9/20/5 status=0
+KAI_TRAP left=0 right=0 Def=6/6 SpD=6/6
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Night Shade target=1
+AI decision turn=1 actor=1 move=Dark Pulse target=0
+AI decision turn=1 actor=2 move=Super Fang target=3
+AI decision turn=1 actor=3 move=Iron Defense target=3
+AI decision turn=2 actor=0 move=Night Shade target=1
+AI decision turn=2 actor=1 move=Dark Pulse target=0
+AI decision turn=2 actor=2 move=Super Fang target=3
+AI decision turn=2 actor=3 move=Body Press target=2
+REVIEW_AFTER board=81 turns=2 reserves=1 species=658/652 HP=92/38 foes=0/0 faints=0/2 initialFrames=18
+REVIEW_STATE actor=1 move=Dark Pulse PP=5/10/11/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=168 item=479
+REVIEW_STATE actor=3 move=Body Press PP=5/9/15/14 Atk=6 Def=8 SpA=6 SpD=6 Spe=6 status=0 ability=171 item=496
+REVIEW_PLAYER actor=0 species=356 move=- PP=15/15/20/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=- PP=15/8/20/5 status=0
+KAI_TRAP left=0 right=0 Def=6/6 SpD=6/6
+[0] EC live review Kai: pressure and reserves: [32mPASS[0m
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Drain Punch target=0
+AI switch turn=1 actor=3 party=3
+AI decision turn=1 actor=2 move=Ice Punch target=3
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Body Press target=0
+REVIEW_AFTER board=0 turns=1 reserves=0 species=853/652 HP=143/106 foes=3/130 faints=0/0 initialFrames=45
+REVIEW_STATE actor=1 move=Drain Punch PP=15/9/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=7 item=523
+REVIEW_STATE actor=3 move=- PP=5/10/15/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=171 item=496
+REVIEW_PLAYER actor=0 species=133 move=Double-Edge PP=14/20/20/5 status=0
+REVIEW_PLAYER actor=2 species=533 move=Ice Punch PP=10/14/20/5 status=0
+KAI_MECHANICS trap=0/0 Def=6/6 SpD=6/6 types=2/2 protean=0
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Drain Punch target=0
+AI switch turn=1 actor=3 party=3
+AI decision turn=1 actor=2 move=Ice Punch target=3
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=2 move=Ice Punch target=3
+AI decision turn=2 actor=3 move=Body Press target=0
+AI decision turn=3 actor=1 move=Drain Punch target=2
+AI decision turn=3 actor=3 move=Body Press target=2
+REVIEW_AFTER board=0 turns=2 reserves=0 species=853/652 HP=143/62 foes=0/105 faints=0/1 initialFrames=45
+REVIEW_STATE actor=1 move=Protect PP=15/9/15/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=7 item=523
+REVIEW_STATE actor=3 move=Body Press PP=5/9/15/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=171 item=496
+REVIEW_PLAYER actor=0 species=133 move=- PP=14/20/20/5 status=0
+REVIEW_PLAYER actor=2 species=533 move=Ice Punch PP=10/13/20/5 status=0
+KAI_MECHANICS trap=0/0 Def=6/6 SpD=6/6 types=2/2 protean=0
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Drain Punch target=0
+AI switch turn=1 actor=3 party=3
+AI decision turn=1 actor=2 move=Ice Punch target=3
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=2 move=Ice Punch target=3
+AI decision turn=2 actor=3 move=Body Press target=0
+AI decision turn=3 actor=2 move=Ice Punch target=3
+AI decision turn=3 actor=1 move=Drain Punch target=2
+AI decision turn=3 actor=3 move=Body Press target=2
+AI decision turn=4 actor=1 move=Drain Punch target=2
+AI decision turn=4 actor=3 move=Body Press target=2
+REVIEW_AFTER board=0 turns=3 reserves=0 species=853/652 HP=144/18 foes=0/1 faints=0/1 initialFrames=45
+REVIEW_STATE actor=1 move=Drain Punch PP=15/8/15/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=7 item=523
+REVIEW_STATE actor=3 move=Body Press PP=5/8/15/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=171 item=496
+REVIEW_PLAYER actor=0 species=133 move=- PP=14/20/20/5 status=0
+REVIEW_PLAYER actor=2 species=533 move=Ice Punch PP=10/12/20/5 status=0
+KAI_MECHANICS trap=0/0 Def=6/6 SpD=6/6 types=2/2 protean=0
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Air Slash target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Ice Beam target=0
+AI decision turn=2 actor=1 move=Drain Punch target=2
+AI decision turn=2 actor=3 move=Ice Beam target=2
+REVIEW_AFTER board=1 turns=1 reserves=0 species=853/364 HP=144/108 foes=0/135 faints=0/1 initialFrames=38
+REVIEW_STATE actor=1 move=Protect PP=15/10/15/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=7 item=523
+REVIEW_STATE actor=3 move=Ice Beam PP=10/9/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=47 item=494
+REVIEW_PLAYER actor=0 species=178 move=- PP=10/14/15/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=Thunderbolt PP=14/10/20/5 status=0
+KAI_MECHANICS trap=0/0 Def=6/6 SpD=6/6 types=2/2 protean=0
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Air Slash target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Ice Beam target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=1 move=Drain Punch target=2
+AI decision turn=2 actor=3 move=Ice Beam target=2
+AI decision turn=3 actor=1 move=Drain Punch target=2
+AI decision turn=3 actor=3 move=Brine target=2
+REVIEW_AFTER board=1 turns=2 reserves=0 species=853/364 HP=144/64 foes=0/75 faints=0/1 initialFrames=38
+REVIEW_STATE actor=1 move=Drain Punch PP=15/9/15/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=7 item=523
+REVIEW_STATE actor=3 move=Ice Beam PP=10/8/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=47 item=494
+REVIEW_PLAYER actor=0 species=178 move=- PP=10/14/15/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=Thunderbolt PP=13/10/20/5 status=32
+KAI_MECHANICS trap=0/0 Def=6/6 SpD=6/6 types=2/2 protean=0
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Air Slash target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Ice Beam target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=1 move=Drain Punch target=2
+AI decision turn=2 actor=3 move=Ice Beam target=2
+AI decision turn=3 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=1 move=Drain Punch target=2
+AI decision turn=3 actor=3 move=Brine target=2
+REVIEW_AFTER board=1 turns=3 reserves=0 species=853/364 HP=144/20 foes=0/0 faints=0/2 initialFrames=38
+REVIEW_STATE actor=1 move=Drain Punch PP=15/8/15/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=7 item=523
+REVIEW_STATE actor=3 move=Brine PP=9/8/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=47 item=494
+REVIEW_PLAYER actor=0 species=178 move=- PP=10/14/15/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=- PP=12/10/20/5 status=0
+KAI_MECHANICS trap=0/0 Def=6/6 SpD=6/6 types=2/2 protean=0
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Drain Punch target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Brine target=0
+AI decision turn=2 actor=1 move=Drain Punch target=0
+AI decision turn=2 actor=3 move=Helping Hand target=1
+REVIEW_AFTER board=2 turns=1 reserves=0 species=853/364 HP=127/134 foes=44/135 faints=0/0 initialFrames=45
+REVIEW_STATE actor=1 move=- PP=15/10/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=7 item=523
+REVIEW_STATE actor=3 move=Brine PP=9/10/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=47 item=494
+REVIEW_PLAYER actor=0 species=619 move=Fake Out PP=9/10/20/20 status=0
+REVIEW_PLAYER actor=2 species=271 move=Scald PP=10/14/10/5 status=0
+KAI_MECHANICS trap=0/0 Def=6/6 SpD=6/6 types=2/2 protean=0
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Drain Punch target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Brine target=0
+AI decision turn=2 actor=0 move=Knock Off target=1
+AI decision turn=2 actor=1 move=Drain Punch target=0
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=Helping Hand target=1
+AI decision turn=3 actor=1 move=Drain Punch target=2
+AI decision turn=3 actor=3 move=Ice Beam target=2
+REVIEW_AFTER board=2 turns=2 reserves=0 species=853/364 HP=130/116 foes=0/135 faints=0/1 initialFrames=45
+REVIEW_STATE actor=1 move=Drain Punch PP=15/9/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=7 item=0
+REVIEW_STATE actor=3 move=Helping Hand PP=9/10/15/19 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=47 item=494
+REVIEW_PLAYER actor=0 species=619 move=- PP=9/10/19/20 status=0
+REVIEW_PLAYER actor=2 species=271 move=Scald PP=10/13/10/5 status=0
+KAI_MECHANICS trap=0/0 Def=6/6 SpD=6/6 types=2/2 protean=0
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Drain Punch target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Brine target=0
+AI decision turn=2 actor=0 move=Knock Off target=1
+AI decision turn=2 actor=1 move=Drain Punch target=0
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=Helping Hand target=1
+AI decision turn=3 actor=2 move=Scald target=3
+AI decision turn=3 actor=1 move=Drain Punch target=2
+AI decision turn=3 actor=3 move=Ice Beam target=2
+AI decision turn=4 actor=1 move=Drain Punch target=2
+AI decision turn=4 actor=3 move=Ice Beam target=2
+REVIEW_AFTER board=2 turns=3 reserves=0 species=853/364 HP=144/98 foes=0/41 faints=0/1 initialFrames=45
+REVIEW_STATE actor=1 move=Drain Punch PP=15/8/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=7 item=0
+REVIEW_STATE actor=3 move=Ice Beam PP=9/9/15/19 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=47 item=494
+REVIEW_PLAYER actor=0 species=619 move=- PP=9/10/19/20 status=0
+REVIEW_PLAYER actor=2 species=271 move=Scald PP=10/12/10/5 status=32
+KAI_MECHANICS trap=0/0 Def=6/6 SpD=6/6 types=2/2 protean=0
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Drain Punch target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Brine target=0
+AI decision turn=2 actor=0 move=Knock Off target=1
+AI decision turn=2 actor=1 move=Drain Punch target=0
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=Helping Hand target=1
+AI decision turn=3 actor=2 move=Scald target=3
+AI decision turn=3 actor=1 move=Drain Punch target=2
+AI decision turn=3 actor=3 move=Ice Beam target=2
+AI decision turn=4 actor=2 move=Scald target=3
+AI decision turn=4 actor=1 move=Drain Punch target=2
+AI decision turn=4 actor=3 move=Ice Beam target=2
+REVIEW_AFTER board=2 turns=4 reserves=0 species=853/364 HP=144/80 foes=0/0 faints=0/2 initialFrames=45
+REVIEW_STATE actor=1 move=Drain Punch PP=15/7/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=7 item=0
+REVIEW_STATE actor=3 move=Ice Beam PP=9/8/15/19 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=47 item=494
+REVIEW_PLAYER actor=0 species=619 move=- PP=9/10/19/20 status=0
+REVIEW_PLAYER actor=2 species=271 move=- PP=10/11/10/5 status=0
+KAI_MECHANICS trap=0/0 Def=6/6 SpD=6/6 types=2/2 protean=0
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Air Slash target=1
+AI decision turn=1 actor=3 move=Ice Beam target=2
+AI decision turn=2 actor=1 move=Drain Punch target=0
+AI decision turn=2 actor=3 move=Icy Wind target=0
+REVIEW_AFTER board=3 turns=1 reserves=0 species=853/364 HP=144/112 foes=90/0 faints=0/1 initialFrames=21
+REVIEW_STATE actor=1 move=Protect PP=15/10/15/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=7 item=523
+REVIEW_STATE actor=3 move=Ice Beam PP=10/9/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=47 item=494
+REVIEW_PLAYER actor=0 species=51 move=Earthquake PP=9/10/5/5 status=0
+REVIEW_PLAYER actor=2 species=178 move=- PP=10/14/15/5 status=0
+KAI_MECHANICS trap=0/0 Def=6/6 SpD=6/6 types=2/2 protean=0
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Air Slash target=1
+AI decision turn=1 actor=3 move=Ice Beam target=2
+AI decision turn=2 actor=0 move=Earthquake target=1
+AI decision turn=2 actor=1 move=Drain Punch target=0
+AI decision turn=2 actor=3 move=Icy Wind target=0
+REVIEW_AFTER board=3 turns=2 reserves=0 species=853/364 HP=102/72 foes=0/0 faints=0/2 initialFrames=21
+REVIEW_STATE actor=1 move=Drain Punch PP=15/9/15/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=7 item=523
+REVIEW_STATE actor=3 move=Icy Wind PP=10/9/14/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=47 item=494
+REVIEW_PLAYER actor=0 species=51 move=- PP=8/10/5/5 status=0
+REVIEW_PLAYER actor=2 species=178 move=- PP=10/14/15/5 status=0
+KAI_MECHANICS trap=0/0 Def=6/6 SpD=6/6 types=2/2 protean=0
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Drain Punch target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Brine target=0
+AI decision turn=2 actor=1 move=Drain Punch target=2
+AI decision turn=2 actor=3 move=Ice Beam target=2
+REVIEW_AFTER board=4 turns=1 reserves=0 species=853/364 HP=144/86 foes=0/135 faints=0/1 initialFrames=45
+REVIEW_STATE actor=1 move=Drain Punch PP=15/9/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=7 item=523
+REVIEW_STATE actor=3 move=Brine PP=9/10/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=47 item=494
+REVIEW_PLAYER actor=0 species=619 move=- PP=10/10/20/19 status=0
+REVIEW_PLAYER actor=2 species=271 move=Giga Drain PP=9/15/10/5 status=0
+KAI_MECHANICS trap=0/0 Def=6/6 SpD=6/6 types=2/2 protean=0
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Drain Punch target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Brine target=0
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=1 move=Drain Punch target=2
+AI decision turn=2 actor=3 move=Ice Beam target=2
+AI decision turn=3 actor=1 move=Drain Punch target=2
+AI decision turn=3 actor=3 move=Ice Beam target=2
+REVIEW_AFTER board=4 turns=2 reserves=0 species=853/364 HP=144/20 foes=0/41 faints=0/1 initialFrames=45
+REVIEW_STATE actor=1 move=Drain Punch PP=15/8/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=7 item=523
+REVIEW_STATE actor=3 move=Ice Beam PP=9/9/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=47 item=494
+REVIEW_PLAYER actor=0 species=619 move=- PP=10/10/20/19 status=0
+REVIEW_PLAYER actor=2 species=271 move=Giga Drain PP=8/15/10/5 status=32
+KAI_MECHANICS trap=0/0 Def=6/6 SpD=6/6 types=2/2 protean=0
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Drain Punch target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Brine target=0
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=1 move=Drain Punch target=2
+AI decision turn=2 actor=3 move=Ice Beam target=2
+AI decision turn=3 actor=2 move=Giga Drain target=3
+AI decision turn=3 actor=1 move=Drain Punch target=2
+AI decision turn=3 actor=3 move=Ice Beam target=2
+REVIEW_AFTER board=4 turns=3 reserves=0 species=853/364 HP=144/0 foes=0/0 faints=1/2 initialFrames=45
+REVIEW_STATE actor=1 move=Drain Punch PP=15/7/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=7 item=523
+REVIEW_STATE actor=3 move=- PP=9/9/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=0 item=494
+REVIEW_PLAYER actor=0 species=619 move=- PP=10/10/20/19 status=0
+REVIEW_PLAYER actor=2 species=271 move=- PP=7/15/10/5 status=0
+KAI_MECHANICS trap=0/0 Def=6/6 SpD=6/6 types=2/2 protean=0
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Ice Beam target=2
+AI decision turn=1 actor=2 move=Ice Punch target=3
+AI decision turn=1 actor=3 move=Body Press target=0
+AI decision turn=2 actor=1 move=Ice Beam target=2
+AI decision turn=2 actor=3 move=Spiky Shield target=3
+REVIEW_AFTER board=0 turns=1 reserves=1 species=658/652 HP=35/106 foes=0/59 faints=0/1 initialFrames=21
+REVIEW_STATE actor=1 move=Ice Beam PP=5/9/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=168 item=479
+REVIEW_STATE actor=3 move=Body Press PP=5/9/15/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=171 item=496
+REVIEW_PLAYER actor=0 species=133 move=- PP=14/20/20/5 status=0
+REVIEW_PLAYER actor=2 species=533 move=Ice Punch PP=10/14/20/5 status=0
+KAI_MECHANICS trap=0/0 Def=6/6 SpD=6/6 types=16/16 protean=1
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Ice Beam target=2
+AI decision turn=1 actor=2 move=Ice Punch target=3
+AI decision turn=1 actor=3 move=Body Press target=0
+AI decision turn=2 actor=2 move=Ice Punch target=3
+AI decision turn=2 actor=1 move=Ice Beam target=2
+AI decision turn=2 actor=3 move=Spiky Shield target=3
+REVIEW_AFTER board=0 turns=2 reserves=1 species=658/652 HP=24/106 foes=0/0 faints=0/2 initialFrames=21
+REVIEW_STATE actor=1 move=Ice Beam PP=5/8/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=168 item=479
+REVIEW_STATE actor=3 move=Spiky Shield PP=4/9/15/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=171 item=496
+REVIEW_PLAYER actor=0 species=133 move=- PP=14/20/20/5 status=0
+REVIEW_PLAYER actor=2 species=533 move=- PP=10/14/20/5 status=0
+KAI_MECHANICS trap=0/0 Def=6/6 SpD=6/6 types=16/16 protean=1
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Air Slash target=1
+AI decision turn=1 actor=1 move=Ice Beam target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Iron Defense target=3
+AI decision turn=2 actor=1 move=Ice Beam target=2
+AI decision turn=2 actor=3 move=Body Press target=2
+REVIEW_AFTER board=1 turns=1 reserves=1 species=658/652 HP=103/135 foes=0/135 faints=0/1 initialFrames=19
+REVIEW_STATE actor=1 move=Ice Beam PP=5/9/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=168 item=479
+REVIEW_STATE actor=3 move=Iron Defense PP=5/10/15/14 Atk=6 Def=8 SpA=6 SpD=6 Spe=6 status=0 ability=171 item=496
+REVIEW_PLAYER actor=0 species=178 move=- PP=10/15/15/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=Thunderbolt PP=14/10/20/5 status=0
+KAI_MECHANICS trap=0/0 Def=6/6 SpD=6/6 types=16/16 protean=1
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Air Slash target=1
+AI decision turn=1 actor=1 move=Ice Beam target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Iron Defense target=3
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=1 move=Ice Beam target=2
+AI decision turn=2 actor=3 move=Body Press target=2
+AI decision turn=3 actor=1 move=Ice Beam target=2
+AI decision turn=3 actor=3 move=Body Press target=2
+REVIEW_AFTER board=1 turns=2 reserves=1 species=658/652 HP=92/120 foes=0/4 faints=0/1 initialFrames=19
+REVIEW_STATE actor=1 move=Ice Beam PP=5/8/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=168 item=479
+REVIEW_STATE actor=3 move=Body Press PP=5/9/15/14 Atk=6 Def=8 SpA=6 SpD=6 Spe=6 status=0 ability=171 item=496
+REVIEW_PLAYER actor=0 species=178 move=- PP=10/15/15/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=Thunderbolt PP=13/10/20/5 status=0
+KAI_MECHANICS trap=0/0 Def=6/6 SpD=6/6 types=16/16 protean=1
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Air Slash target=1
+AI decision turn=1 actor=1 move=Ice Beam target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Iron Defense target=3
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=1 move=Ice Beam target=2
+AI decision turn=2 actor=3 move=Body Press target=2
+AI decision turn=3 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=1 move=Ice Beam target=2
+AI decision turn=3 actor=3 move=Body Press target=2
+REVIEW_AFTER board=1 turns=3 reserves=1 species=658/652 HP=81/120 foes=0/0 faints=0/2 initialFrames=19
+REVIEW_STATE actor=1 move=Ice Beam PP=5/7/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=168 item=479
+REVIEW_STATE actor=3 move=Body Press PP=5/9/15/14 Atk=6 Def=8 SpA=6 SpD=6 Spe=6 status=0 ability=171 item=496
+REVIEW_PLAYER actor=0 species=178 move=- PP=10/15/15/5 status=0
+REVIEW_PLAYER actor=2 species=417 move=- PP=13/10/20/5 status=0
+KAI_MECHANICS trap=0/0 Def=6/6 SpD=6/6 types=16/16 protean=1
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Hydro Pump target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Body Press target=0
+AI decision turn=2 actor=1 move=Hydro Pump target=0
+AI decision turn=2 actor=3 move=Body Press target=0
+REVIEW_AFTER board=2 turns=1 reserves=1 species=658/652 HP=93/125 foes=8/135 faints=0/0 initialFrames=25
+REVIEW_STATE actor=1 move=- PP=5/10/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=168 item=479
+REVIEW_STATE actor=3 move=Body Press PP=5/9/15/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=171 item=496
+REVIEW_PLAYER actor=0 species=619 move=Fake Out PP=9/10/20/20 status=0
+REVIEW_PLAYER actor=2 species=271 move=Scald PP=10/14/10/5 status=0
+KAI_MECHANICS trap=0/0 Def=6/6 SpD=6/6 types=12/18 protean=0
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Hydro Pump target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Body Press target=0
+AI decision turn=2 actor=0 move=Knock Off target=1
+AI decision turn=2 actor=1 move=Hydro Pump target=0
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=Body Press target=0
+AI decision turn=3 actor=1 move=Ice Beam target=2
+AI decision turn=3 actor=3 move=Body Press target=2
+REVIEW_AFTER board=2 turns=2 reserves=1 species=658/652 HP=82/100 foes=0/75 faints=0/1 initialFrames=25
+REVIEW_STATE actor=1 move=Hydro Pump PP=4/10/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=168 item=479
+REVIEW_STATE actor=3 move=Body Press PP=5/8/15/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=171 item=496
+REVIEW_PLAYER actor=0 species=619 move=- PP=9/10/20/20 status=0
+REVIEW_PLAYER actor=2 species=271 move=Scald PP=10/13/10/5 status=0
+KAI_MECHANICS trap=0/0 Def=6/6 SpD=6/6 types=12/12 protean=1
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Hydro Pump target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Body Press target=0
+AI decision turn=2 actor=0 move=Knock Off target=1
+AI decision turn=2 actor=1 move=Hydro Pump target=0
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=Body Press target=0
+AI decision turn=3 actor=2 move=Scald target=3
+AI decision turn=3 actor=1 move=Ice Beam target=2
+AI decision turn=3 actor=3 move=Body Press target=2
+REVIEW_AFTER board=2 turns=3 reserves=1 species=658/652 HP=71/100 foes=0/0 faints=0/2 initialFrames=25
+REVIEW_STATE actor=1 move=Ice Beam PP=4/9/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=168 item=479
+REVIEW_STATE actor=3 move=Body Press PP=5/7/15/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=171 item=496
+REVIEW_PLAYER actor=0 species=619 move=- PP=9/10/20/20 status=0
+REVIEW_PLAYER actor=2 species=271 move=- PP=10/13/10/5 status=0
+KAI_MECHANICS trap=0/0 Def=6/6 SpD=6/6 types=12/12 protean=1
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=Ice Beam target=2
+AI decision turn=1 actor=2 move=Air Slash target=1
+AI decision turn=1 actor=3 move=Body Press target=0
+AI decision turn=2 actor=1 move=Hydro Pump target=0
+AI decision turn=2 actor=3 move=Body Press target=0
+REVIEW_AFTER board=3 turns=1 reserves=1 species=658/652 HP=40/135 foes=1/0 faints=0/1 initialFrames=20
+REVIEW_STATE actor=1 move=Ice Beam PP=5/9/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=168 item=479
+REVIEW_STATE actor=3 move=Body Press PP=5/9/15/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=171 item=496
+REVIEW_PLAYER actor=0 species=51 move=Earthquake PP=9/10/5/5 status=0
+REVIEW_PLAYER actor=2 species=178 move=- PP=10/15/15/5 status=0
+KAI_MECHANICS trap=0/0 Def=6/6 SpD=6/6 types=16/16 protean=1
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=Ice Beam target=2
+AI decision turn=1 actor=2 move=Air Slash target=1
+AI decision turn=1 actor=3 move=Body Press target=0
+AI decision turn=2 actor=0 move=Earthquake target=1
+AI decision turn=2 actor=1 move=Hydro Pump target=0
+AI decision turn=2 actor=3 move=Body Press target=0
+REVIEW_AFTER board=3 turns=2 reserves=1 species=658/652 HP=0/120 foes=0/0 faints=1/2 initialFrames=20
+REVIEW_STATE actor=1 move=- PP=5/9/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=0 item=479
+REVIEW_STATE actor=3 move=Body Press PP=5/8/15/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=171 item=496
+REVIEW_PLAYER actor=0 species=51 move=- PP=8/10/5/5 status=0
+REVIEW_PLAYER actor=2 species=178 move=- PP=10/15/15/5 status=0
+KAI_MECHANICS trap=0/0 Def=6/6 SpD=6/6 types=16/16 protean=0
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Hydro Pump target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Body Press target=0
+AI decision turn=2 actor=1 move=U-turn target=2
+AI decision turn=2 actor=3 move=Body Press target=2
+REVIEW_AFTER board=4 turns=1 reserves=1 species=658/652 HP=103/126 foes=0/135 faints=0/1 initialFrames=25
+REVIEW_STATE actor=1 move=Hydro Pump PP=4/10/15/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=168 item=479
+REVIEW_STATE actor=3 move=Body Press PP=5/9/15/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=171 item=496
+REVIEW_PLAYER actor=0 species=619 move=- PP=10/10/20/19 status=0
+REVIEW_PLAYER actor=2 species=271 move=Giga Drain PP=9/15/10/5 status=0
+KAI_MECHANICS trap=0/0 Def=6/6 SpD=6/6 types=12/12 protean=1
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Hydro Pump target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Body Press target=0
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=1 move=U-turn target=2
+AI decision turn=2 actor=3 move=Body Press target=2
+AI decision turn=3 actor=1 move=Ice Beam target=2
+AI decision turn=3 actor=3 move=Body Press target=2
+REVIEW_AFTER board=4 turns=2 reserves=1 species=658/652 HP=92/102 foes=0/35 faints=0/1 initialFrames=25
+REVIEW_STATE actor=1 move=U-turn PP=4/10/15/19 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=168 item=479
+REVIEW_STATE actor=3 move=Body Press PP=5/8/15/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=171 item=496
+REVIEW_PLAYER actor=0 species=619 move=- PP=10/10/20/19 status=0
+REVIEW_PLAYER actor=2 species=271 move=Giga Drain PP=8/15/10/5 status=0
+KAI_MECHANICS trap=0/0 Def=6/6 SpD=6/6 types=12/12 protean=1
+REVIEW_INPUT trainer=713 slot=0 species=853 lv=38 HP=144 Atk=143 Def=85 SpA=62 SpD=77 Spe=48 item=523 ability=7
+REVIEW_INPUT trainer=713 slot=1 species=364 lv=38 HP=152 Atk=55 Def=70 SpA=106 SpD=69 Spe=50 item=494 ability=47
+REVIEW_INPUT trainer=713 slot=2 species=658 lv=38 HP=114 Atk=79 Def=67 SpA=119 SpD=70 Spe=146 item=479 ability=168
+REVIEW_INPUT trainer=713 slot=3 species=652 lv=38 HP=150 Atk=98 Def=146 SpA=65 SpD=74 Spe=65 item=496 ability=171
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Hydro Pump target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Body Press target=0
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=1 move=U-turn target=2
+AI decision turn=2 actor=3 move=Body Press target=2
+AI decision turn=3 actor=2 move=Giga Drain target=3
+AI decision turn=3 actor=1 move=Ice Beam target=2
+AI decision turn=3 actor=3 move=Body Press target=2
+REVIEW_AFTER board=4 turns=3 reserves=1 species=658/652 HP=81/102 foes=0/0 faints=0/2 initialFrames=25
+REVIEW_STATE actor=1 move=Ice Beam PP=4/9/15/19 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=168 item=479
+REVIEW_STATE actor=3 move=Body Press PP=5/8/15/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=171 item=496
+REVIEW_PLAYER actor=0 species=619 move=- PP=10/10/20/19 status=0
+REVIEW_PLAYER actor=2 species=271 move=- PP=8/15/10/5 status=0
+KAI_MECHANICS trap=0/0 Def=6/6 SpD=6/6 types=12/12 protean=1
+
+  [31mFAILED[0m tests:
+  - [31mtest/battle/ai/../../../work/kai_gen9_probe.inc:81[0m: EC live review Kai: revealed guards and Octolock 3/3: 81: TURN 3 incomplete (playerLeft requests record type 4 at index 9)
+
+- Tests [31mFAILED[0m:          1    Add TESTS='X' to run tests with the defined prefix.
+- Tests [32mPASSED[0m:          4
+- Tests [34mTOTAL[0m:           5
+
+make: *** [check] Error 1

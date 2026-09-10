@@ -3,6 +3,8 @@ ScorchedSlab_HeatransRoom_MapScripts::
 
 ScorchedSlab_HeatransRoom_EventScript_MagmaStone::
 	lock
+	specialvar VAR_RESULT, GetHeatranDiscoveryState
+	goto_if_ne VAR_RESULT, 0, ScorchedSlab_HeatransRoom_EventScript_MagmaStoneEnd
 	checkitem ITEM_MAGMA_STONE, 1
 	goto_if_eq VAR_RESULT, TRUE, ScorchedSlab_HeatransRoom_EventScript_PlaceMagmaStone
 	release

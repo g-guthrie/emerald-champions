@@ -533,7 +533,8 @@ LilycoveCity_PokemonCenter_1F_Text_ThankYouForLastTime:
 
 LilycoveCity_PokemonCenter_1F_Text_PlayerGaveMeBadThing:
 	.string "Before, I think it was {STR_VAR_3}…\p"
-	.string "{STR_VAR_3} gave me one {STR_VAR_2},\n"
+	.string "{STR_VAR_3} gave me one\n"
+	.string "{STR_VAR_2},\l"
 	.string "saying it was {STR_VAR_1}.\p"
 	.string "But it wasn't {STR_VAR_1}.\n"
 	.string "Not in the least bit.$"

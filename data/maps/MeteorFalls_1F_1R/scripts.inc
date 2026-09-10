@@ -298,75 +298,78 @@ MeteorFalls_1F_1R_EventScript_MetCozmo::
 	end
 
 MeteorFalls_1F_1R_Text_WithThisMeteorite:
-	.string "The METEORITE is secured.\p"
-	.string "Its resonance will force MT. CHIMNEY's\n"
-	.string "ancient network awake.$"
+	.string "The METEORITE is secured. Its\n"
+	.string "energy will feed MAXIE's machine\l"
+	.string "at MT. CHIMNEY!$"
 
 MeteorFalls_1F_1R_Text_DontExpectMercyFromMagma:
-	.string "COURTNEY: You crossed our operation\n"
-	.string "twice. Coincidence is no longer likely.\p"
-	.string "This formation will remove you from\n"
-	.string "MAXIE's equation.$"
+	.string "COURTNEY: The METEORITE is ours.\p"
+	.string "You won't take it from us. I'll\n"
+	.string "stop you here.$"
 
 MeteorFalls_1F_1R_Text_CourtneyDefeat:
-	.string "You broke our celestial formation…$"
+	.string "COURTNEY: You broke through…$"
 
 MeteorFalls_1F_1R_Text_GruntDefeat:
-	.string "Even the meteor team failed?!$"
+	.string "We lost, even here?!$"
 
 MeteorFalls_1F_1R_Text_HoldItRightThereMagma:
-	.string "Hold it, TEAM MAGMA!\p"
-	.string "That METEORITE reaches currents below\n"
-	.string "HOENN. You will not seal them away!$"
+	.string "Hold it, TEAM MAGMA! If you set\n"
+	.string "off that volcano, the whole coast\l"
+	.string "will suffer!$"
 
 MeteorFalls_1F_1R_Text_BeSeeingYouTeamAqua:
-	.string "COURTNEY: AQUA arrived sooner than\n"
-	.string "projected. The result is unchanged.\p"
-	.string "We have the METEORITE. MAXIE is already\n"
-	.string "preparing MT. CHIMNEY's fault network.\p"
-	.string "Pursue us if you want to see certainty\n"
-	.string "replace your leader's chaos.$"
+	.string "COURTNEY: AQUA arrived sooner\n"
+	.string "than projected. The result is\l"
+	.string "unchanged.\p"
+	.string "We have the METEORITE. MAXIE is\n"
+	.string "already preparing the machine at\l"
+	.string "MT. CHIMNEY.\p"
+	.string "Follow us if you want to see the\n"
+	.string "land rise.$"
 
 MeteorFalls_1F_1R_Text_ArchieSeenYouBefore:
-	.string "ARCHIE: We met at SLATEPORT's MUSEUM.\n"
-	.string "{PLAYER}, wasn't it?\p"
-	.string "I mistook you for one of MAGMA's crew.\n"
-	.string "You proved you choose your own current.\p"
-	.string "MAXIE thinks every living system can be\n"
-	.string "measured, fixed, and made obedient.\p"
-	.string "Now he means to force that certainty\n"
-	.string "through MT. CHIMNEY.\p"
-	.string "AQUA will stop him. If you value a world\n"
-	.string "that can still change, follow us.$"
+	.string "ARCHIE: We met at SLATEPORT's\n"
+	.string "MUSEUM. {PLAYER}, wasn't it?\p"
+	.string "You stopped my crew there. But we\n"
+	.string "both know what MAGMA is planning\l"
+	.string "now.\p"
+	.string "If MAXIE sets off MT. CHIMNEY,\n"
+	.string "the lava could destroy habitats\l"
+	.string "all the way to the coast.\p"
+	.string "We're going after him. You can\n"
+	.string "help, if you mean to stop that\l"
+	.string "eruption.$"
 
 MeteorFalls_1F_1R_Text_BossWeShouldChaseMagma:
 	.string "BOSS, we should give chase to\n"
 	.string "TEAM MAGMA…$"
 
 MeteorFalls_1F_1R_Text_ArchieYesNoTellingWhatMagmaWillDo:
-	.string "ARCHIE: We move now.\p"
-	.string "If MAGMA drives that METEORITE into the\n"
-	.string "fault line, the mountain answers first.$"
+	.string "ARCHIE: Right! No time to waste.\n"
+	.string "Get to MT. CHIMNEY before MAXIE\l"
+	.string "starts that machine!$"
 
 MeteorFalls_1F_1R_Text_ArchieFarewell:
-	.string "ARCHIE: {PLAYER}, come to MT. CHIMNEY.\n"
-	.string "Take the cable car on ROUTE 112.\p"
-	.string "You have already changed this race.$"
+	.string "ARCHIE: ROUTE 112's cable car\n"
+	.string "leads to the summit. We'll see\l"
+	.string "you there, {PLAYER}!$"
 
 MeteorFalls_1F_1R_Text_MeetProfCozmo:
-	.string "I'm PROF. COZMO. MAGMA asked me to map\n"
-	.string "the METEORITE's resonance here.\p"
-	.string "I thought it was geological research.\n"
-	.string "They took the sample and my readings.\p"
-	.string "The pattern matches MT. CHIMNEY's fault\n"
-	.string "line and those strange marks in HOENN.\p"
-	.string "If they amplify it at the summit, the\n"
-	.string "whole network may answer at once.$"
+	.string "I'm PROF. COZMO. MAGMA asked me\n"
+	.string "to study the METEORITE's energy.\p"
+	.string "I thought it was geological\n"
+	.string "research. They took the sample\l"
+	.string "and my readings.\p"
+	.string "That energy could trigger an\n"
+	.string "eruption at MT. CHIMNEY. People\l"
+	.string "and POKéMON would lose their\l"
+	.string "homes!$"
 
 MeteorFalls_1F_1R_Text_WhatsTeamMagmaDoingAtMtChimney:
-	.string "PROF. COZMO: The METEORITE and the\n"
-	.string "fault line share one resonance.\p"
-	.string "Please stop MAGMA before they force the\n"
-	.string "entire network awake.\p"
-	.string "ROUTE 112's cable car will take you\n"
-	.string "to MT. CHIMNEY's summit.$"
+	.string "PROF. COZMO: MAGMA plans to use\n"
+	.string "the METEORITE to power a machine\l"
+	.string "at the volcano.\p"
+	.string "Please stop them before it\n"
+	.string "erupts! ROUTE 112's cable car\l"
+	.string "goes to MT. CHIMNEY's summit.$"

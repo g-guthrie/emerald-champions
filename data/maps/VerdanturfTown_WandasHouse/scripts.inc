@@ -82,7 +82,7 @@ VerdanturfTown_WandasHouse_Text_StrongerSpeech:
 	.string "WALLY: I lost to you, {PLAYER}, but I'm\n"
 	.string "not feeling down anymore.\p"
 	.string "Because I have a new purpose in life.\n"
-	.string "Together with my RALTS, I'm going\l"
+	.string "Together with my KIRLIA, I'm going\l"
 	.string "to challenge POKéMON GYMS and become\l"
 	.string "a great TRAINER.\p"
 	.string "Please watch me, {PLAYER}.\n"
@@ -175,7 +175,7 @@ VerdanturfTown_WandasHouse_EventScript_MegaGift_GARDEVOIRITE::
 	goto VerdanturfTown_WandasHouse_EventScript_WallysAunt
 
 VerdanturfTown_WandasHouse_EventScript_MegaGift_GARDEVOIRITE_Text:
-	.string "Wally and his Ralts have given\n"
+	.string "Wally and his partner have given\n"
 	.string "each other the courage to grow.\p"
 	.string "If you raise a Gardevoir, this\n"
 	.string "stone can deepen that partnership.$"

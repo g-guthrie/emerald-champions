@@ -1,0 +1,165 @@
+tools/scaninc/scaninc -M build/emerald-test/test/battle/ai/emerald_champions_plans.d -g build/assets -I include -I tools/agbcc/include test/battle/ai/emerald_champions_plans.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/battle/ai/emerald_champions_plans.o test/battle/ai/emerald_champions_plans.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 4
+[0] EC live review Isabel timing: complete cold six-player party: [32mPASS[0m
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Fake Out target=2
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Double-Edge target=0
+AI decision turn=2 actor=3 move=Dazzling Gleam target=0
+ISABEL_TIMING setup=7 bothActors=46 complete=53 warm=46
+[1] EC live review Isabel disruption: Fake Out Taunt and Competitive: [32mPASS[0m
+ISABEL_INPUT slot=0 lv=28 HP=86 Atk=67 Def=50 SpA=39 SpD=44 Speed=89 item=523 ability=96
+ISABEL_INPUT slot=1 lv=28 HP=125 Atk=46 Def=38 SpA=85 SpD=41 Speed=56 item=472 ability=172
+ISABEL_INPUT slot=2 lv=28 HP=117 Atk=46 Def=59 SpA=66 SpD=81 Speed=47 item=481 ability=98
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Fake Out target=2
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=Dazzling Gleam target=0
+AI decision turn=2 actor=1 move=Double-Edge target=0
+AI decision turn=2 actor=3 move=Protect target=3
+ISABEL_AFTER board=10 turns=1 pair=0 species=301/40 HP=73/125 foes=45/64 moves=Fake Out/Dazzling Gleam speed=89/56 foeSpeed=79/71 stageSpA=6/6 items=523/472 foeStatus=0/0 PP=9/10 thirdPP=20/10 fourthPP=20/5 faints=0/0
+ISABEL_INPUT slot=0 lv=28 HP=86 Atk=67 Def=50 SpA=39 SpD=44 Speed=89 item=523 ability=96
+ISABEL_INPUT slot=1 lv=28 HP=125 Atk=46 Def=38 SpA=85 SpD=41 Speed=56 item=472 ability=172
+ISABEL_INPUT slot=2 lv=28 HP=117 Atk=46 Def=59 SpA=66 SpD=81 Speed=47 item=481 ability=98
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Fake Out target=2
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=Dazzling Gleam target=0
+AI decision turn=2 actor=0 move=Taunt target=3
+AI decision turn=2 actor=1 move=Double-Edge target=0
+AI decision turn=2 actor=2 move=Follow Me target=2
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=1 move=Double-Edge target=0
+AI decision turn=3 actor=3 move=Hyper Voice target=0
+ISABEL_AFTER board=10 turns=2 pair=0 species=301/40 HP=60/125 foes=45/50 moves=Double-Edge/Protect speed=89/56 foeSpeed=79/71 stageSpA=6/6 items=523/472 foeStatus=0/0 PP=9/10 thirdPP=20/10 fourthPP=20/4 faints=0/0
+ISABEL_INPUT slot=0 lv=28 HP=86 Atk=67 Def=50 SpA=39 SpD=44 Speed=89 item=523 ability=96
+ISABEL_INPUT slot=1 lv=28 HP=125 Atk=46 Def=38 SpA=85 SpD=41 Speed=56 item=472 ability=172
+ISABEL_INPUT slot=2 lv=28 HP=117 Atk=46 Def=59 SpA=66 SpD=81 Speed=47 item=481 ability=98
+AI decision turn=1 actor=0 move=Flamethrower target=3
+AI decision turn=1 actor=1 move=Fake Out target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Hyper Voice target=0
+AI decision turn=2 actor=1 move=Helping Hand target=3
+AI decision turn=2 actor=3 move=Hyper Voice target=0
+ISABEL_AFTER board=11 turns=1 pair=0 species=301/40 HP=55/125 foes=79/73 moves=Fake Out/Hyper Voice speed=89/56 foeSpeed=71/71 stageSpA=6/8 items=523/472 foeStatus=0/0 PP=9/9 thirdPP=20/10 fourthPP=20/5 faints=0/0
+ISABEL_INPUT slot=0 lv=28 HP=86 Atk=67 Def=50 SpA=39 SpD=44 Speed=89 item=523 ability=96
+ISABEL_INPUT slot=1 lv=28 HP=125 Atk=46 Def=38 SpA=85 SpD=41 Speed=56 item=472 ability=172
+ISABEL_INPUT slot=2 lv=28 HP=117 Atk=46 Def=59 SpA=66 SpD=81 Speed=47 item=481 ability=98
+AI decision turn=1 actor=0 move=Flamethrower target=3
+AI decision turn=1 actor=1 move=Fake Out target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Hyper Voice target=0
+AI decision turn=2 actor=0 move=Flamethrower target=3
+AI decision turn=2 actor=1 move=Helping Hand target=3
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=3 move=Hyper Voice target=0
+ISABEL_AFTER board=11 turns=2 pair=0 species=301/40 HP=45/44 foes=0/0 moves=Helping Hand/Hyper Voice speed=89/56 foeSpeed=71/71 stageSpA=6/8 items=0/472 foeStatus=0/0 PP=9/8 thirdPP=20/10 fourthPP=19/5 faints=0/2
+[2] EC live review Isabel core: physical special and reserve support: [32mPASS[0m
+ISABEL_INPUT slot=0 lv=28 HP=86 Atk=67 Def=50 SpA=39 SpD=44 Speed=89 item=523 ability=96
+ISABEL_INPUT slot=1 lv=28 HP=125 Atk=46 Def=38 SpA=85 SpD=41 Speed=56 item=472 ability=172
+ISABEL_INPUT slot=2 lv=28 HP=117 Atk=46 Def=59 SpA=66 SpD=81 Speed=47 item=481 ability=98
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Fake Out target=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Dazzling Gleam target=0
+AI decision turn=2 actor=1 move=Double-Edge target=0
+AI decision turn=2 actor=3 move=Dazzling Gleam target=0
+ISABEL_AFTER board=0 turns=1 pair=0 species=301/40 HP=51/125 foes=68/75 moves=Fake Out/Dazzling Gleam speed=89/56 foeSpeed=47/38 stageSpA=6/6 items=0/472 foeStatus=0/0 PP=9/10 thirdPP=20/10 fourthPP=20/5 faints=0/0
+ISABEL_INPUT slot=0 lv=28 HP=86 Atk=67 Def=50 SpA=39 SpD=44 Speed=89 item=523 ability=96
+ISABEL_INPUT slot=1 lv=28 HP=125 Atk=46 Def=38 SpA=85 SpD=41 Speed=56 item=472 ability=172
+ISABEL_INPUT slot=2 lv=28 HP=117 Atk=46 Def=59 SpA=66 SpD=81 Speed=47 item=481 ability=98
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Fake Out target=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Dazzling Gleam target=0
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Double-Edge target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Dazzling Gleam target=0
+AI switch turn=2 actor=1 party=2
+AI decision turn=3 actor=1 move=Moonblast target=2
+AI decision turn=3 actor=3 move=Dazzling Gleam target=2
+ISABEL_AFTER board=0 turns=2 pair=0 species=36/40 HP=117/65 foes=0/76 moves=-/Dazzling Gleam speed=47/56 foeSpeed=0/38 stageSpA=6/6 items=481/472 foeStatus=0/0 PP=15/10 thirdPP=20/10 fourthPP=5/5 faints=1/1
+ISABEL_INPUT slot=0 lv=28 HP=86 Atk=67 Def=50 SpA=39 SpD=44 Speed=89 item=523 ability=96
+ISABEL_INPUT slot=1 lv=28 HP=125 Atk=46 Def=38 SpA=85 SpD=41 Speed=56 item=472 ability=172
+ISABEL_INPUT slot=2 lv=28 HP=117 Atk=46 Def=59 SpA=66 SpD=81 Speed=47 item=481 ability=98
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Fake Out target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Ice Beam target=0
+AI decision turn=2 actor=1 move=Double-Edge target=2
+AI decision turn=2 actor=3 move=Ice Beam target=0
+ISABEL_AFTER board=1 turns=1 pair=0 species=301/40 HP=55/125 foes=7/104 moves=Fake Out/Ice Beam speed=89/56 foeSpeed=105/71 stageSpA=6/6 items=523/472 foeStatus=32/0 PP=9/10 thirdPP=20/9 fourthPP=20/5 faints=0/0
+ISABEL_INPUT slot=0 lv=28 HP=86 Atk=67 Def=50 SpA=39 SpD=44 Speed=89 item=523 ability=96
+ISABEL_INPUT slot=1 lv=28 HP=125 Atk=46 Def=38 SpA=85 SpD=41 Speed=56 item=472 ability=172
+ISABEL_INPUT slot=2 lv=28 HP=117 Atk=46 Def=59 SpA=66 SpD=81 Speed=47 item=481 ability=98
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Fake Out target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Ice Beam target=0
+AI decision turn=2 actor=0 move=Psychic target=3
+AI decision turn=2 actor=1 move=Double-Edge target=2
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=3 move=Ice Beam target=0
+AI decision turn=3 actor=1 move=Helping Hand target=3
+AI decision turn=3 actor=3 move=Hyper Voice target=2
+ISABEL_AFTER board=1 turns=2 pair=0 species=301/40 HP=32/51 foes=0/64 moves=Double-Edge/Ice Beam speed=89/56 foeSpeed=0/71 stageSpA=6/6 items=0/472 foeStatus=0/0 PP=9/10 thirdPP=20/8 fourthPP=20/5 faints=0/1
+ISABEL_INPUT slot=0 lv=28 HP=86 Atk=67 Def=50 SpA=39 SpD=44 Speed=89 item=523 ability=96
+ISABEL_INPUT slot=1 lv=28 HP=125 Atk=46 Def=38 SpA=85 SpD=41 Speed=56 item=472 ability=172
+ISABEL_INPUT slot=2 lv=28 HP=117 Atk=46 Def=59 SpA=66 SpD=81 Speed=47 item=481 ability=98
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Moonblast target=2
+AI decision turn=2 actor=1 move=Dazzling Gleam target=0
+AI decision turn=2 actor=3 move=Follow Me target=3
+ISABEL_AFTER board=0 turns=1 pair=1 species=40/36 HP=125/96 foes=101/87 moves=Protect/Moonblast speed=56/47 foeSpeed=47/38 stageSpA=6/6 items=472/481 foeStatus=0/0 PP=10/14 thirdPP=10/20 fourthPP=4/5 faints=0/0
+ISABEL_INPUT slot=0 lv=28 HP=86 Atk=67 Def=50 SpA=39 SpD=44 Speed=89 item=523 ability=96
+ISABEL_INPUT slot=1 lv=28 HP=125 Atk=46 Def=38 SpA=85 SpD=41 Speed=56 item=472 ability=172
+ISABEL_INPUT slot=2 lv=28 HP=117 Atk=46 Def=59 SpA=66 SpD=81 Speed=47 item=481 ability=98
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Moonblast target=2
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Dazzling Gleam target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Follow Me target=3
+AI decision turn=3 actor=1 move=Dazzling Gleam target=0
+AI decision turn=3 actor=3 move=Helping Hand target=1
+ISABEL_AFTER board=0 turns=2 pair=1 species=40/36 HP=125/29 foes=71/65 moves=Dazzling Gleam/Follow Me speed=56/47 foeSpeed=47/38 stageSpA=6/6 items=472/481 foeStatus=0/0 PP=10/14 thirdPP=10/20 fourthPP=4/5 faints=0/0
+ISABEL_INPUT slot=0 lv=28 HP=86 Atk=67 Def=50 SpA=39 SpD=44 Speed=89 item=523 ability=96
+ISABEL_INPUT slot=1 lv=28 HP=125 Atk=46 Def=38 SpA=85 SpD=41 Speed=56 item=472 ability=172
+ISABEL_INPUT slot=2 lv=28 HP=117 Atk=46 Def=59 SpA=66 SpD=81 Speed=47 item=481 ability=98
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Ice Beam target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Follow Me target=3
+AI decision turn=2 actor=1 move=Hyper Voice target=0
+AI decision turn=2 actor=3 move=Moonblast target=0
+ISABEL_AFTER board=1 turns=1 pair=1 species=40/36 HP=125/59 foes=26/104 moves=Ice Beam/Follow Me speed=56/47 foeSpeed=105/71 stageSpA=6/6 items=472/481 foeStatus=32/0 PP=10/15 thirdPP=9/20 fourthPP=5/5 faints=0/0
+ISABEL_INPUT slot=0 lv=28 HP=86 Atk=67 Def=50 SpA=39 SpD=44 Speed=89 item=523 ability=96
+ISABEL_INPUT slot=1 lv=28 HP=125 Atk=46 Def=38 SpA=85 SpD=41 Speed=56 item=472 ability=172
+ISABEL_INPUT slot=2 lv=28 HP=117 Atk=46 Def=59 SpA=66 SpD=81 Speed=47 item=481 ability=98
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Ice Beam target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Follow Me target=3
+AI decision turn=2 actor=0 move=Psychic target=3
+AI decision turn=2 actor=1 move=Hyper Voice target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=3 move=Moonblast target=0
+AI decision turn=3 actor=1 move=Hyper Voice target=2
+AI decision turn=3 actor=3 move=Moonblast target=2
+ISABEL_AFTER board=1 turns=2 pair=1 species=40/36 HP=99/17 foes=0/71 moves=Hyper Voice/Moonblast speed=56/47 foeSpeed=0/71 stageSpA=6/6 items=472/481 foeStatus=0/0 PP=9/14 thirdPP=9/20 fourthPP=5/5 faints=0/1
+
+- Tests [32mPASSED[0m:          3
+- Tests [34mTOTAL[0m:           3
+

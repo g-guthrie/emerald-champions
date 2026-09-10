@@ -354,8 +354,14 @@ OldaleTown_Movement_ReturnToOriginalPosition:
 	step_end
 
 OldaleTown_Text_SavingMyProgress:
-	.string "I want to take a rest, so I'm saving my\n"
-	.string "progress.$"
+	.string "I'm saving before I take a rest.\n"
+	.string "Don't forget yours!\p"
+	.string "Once you SAVE, the START menu\n"
+	.string "also has RELOAD. It loads your\l"
+	.string "last save without a reset.\p"
+	.string "Anything since that save is lost.\n"
+	.string "I always SAVE before trying\l"
+	.string "something I might want to undo!$"
 
 OldaleTown_Text_IWorkAtPokemonMart:
 	.string "Hi!\n"
@@ -364,16 +370,17 @@ OldaleTown_Text_IWorkAtPokemonMart:
 
 OldaleTown_Text_ThisIsAPokemonMart:
 	.string "This is a POKéMON MART.\n"
-	.string "Just look for our blue roof.\p"
-	.string "We sell a variety of goods including\n"
-	.string "POKé BALLS for catching POKéMON.\p"
-	.string "Here, I'd like you to have this as\n"
-	.string "a promotional item.$"
+	.string "Just look for the blue roof!\p"
+	.string "The clerk stocks POTIONS and\n"
+	.string "other supplies for your travels.\p"
+	.string "Here, take a POTION to try.$"
 
 OldaleTown_Text_PotionExplanation:
-	.string "A POTION can be used anytime, so it's\n"
-	.string "even more useful than a POKéMON CENTER\l"
-	.string "in certain situations.$"
+	.string "A POTION can help an injured\n"
+	.string "partner while you're exploring.\p"
+	.string "You can't use your BAG during\n"
+	.string "TRAINER battles, so patch\l"
+	.string "everyone up before a challenge!$"
 
 OldaleTown_Text_WaitDontComeInHere:
 	.string "Aaaaah! Wait!\n"
@@ -390,10 +397,10 @@ OldaleTown_Text_DiscoveredFootprints:
 	.string "them, okay?$"
 
 OldaleTown_Text_FinishedSketchingFootprints:
-	.string "I finished sketching the footprints of\n"
-	.string "a rare POKéMON.\p"
-	.string "But it turns out they were only my\n"
-	.string "own footprints…$"
+	.string "I finished sketching those rare\n"
+	.string "POKéMON footprints!\p"
+	.string "But it turns out they were only\n"
+	.string "my own footprints…$"
 
 OldaleTown_Text_MayLetsGoBack:
 	.string "MAY: {PLAYER}{KUN}!\n"

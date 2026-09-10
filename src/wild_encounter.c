@@ -53,7 +53,7 @@ extern const u8 EmeraldChampions_EventScript_RepelSprayWoreOff[];
 
 static u16 FeebasRandom(void);
 static void FeebasSeedRng(u16 seed);
-static bool8 sSweetScentInverted = FALSE;
+static bool8 sSweetScentActive = FALSE;
 
 static void ApplyFluteEncounterRateMod(u32 *encRate);
 static void ApplyCleanseTagEncounterRateMod(u32 *encRate);
@@ -139,13 +139,20 @@ static u8 *AppendRouteSignMethod(
     lineWidth = GetStringWidth(FONT_NORMAL, methodName, 0);
     for (u32 i = 0; i < count; i++)
     {
-        const u8 *name = GetSpeciesName(entries[i].species);
+        u8 name[64];
+        enum LegendarySignId id = GetLegendarySignIdBySpecies(entries[i].species);
+        StringCopy(name, GetLegendaryDisplayName(entries[i].species));
+        if (id < LEGENDARY_SIGN_COUNT && IsLegendarySignCaught(id))
+            StringAppend(name, COMPOUND_STRING(" (Caught)"));
         u16 nameWidth = GetStringWidth(FONT_NORMAL, name, 0);
         u16 separatorWidth = firstName ? 0 : GetStringWidth(FONT_NORMAL, sText_RouteSignSpeciesSeparator, 0);
 
-        if (!firstName && lineWidth + separatorWidth + nameWidth > ROUTE_SIGN_MAX_LINE_WIDTH)
+        // Reserve the comma that will end this line if the next name wraps.
+        u16 trailingWidth = i + 1 < count ? GetStringWidth(FONT_NORMAL, sText_RouteSignSpeciesComma, 0) : 0;
+        if (lineWidth + separatorWidth + nameWidth + trailingWidth > ROUTE_SIGN_MAX_LINE_WIDTH)
         {
-            dest = StringCopy(dest, sText_RouteSignSpeciesComma);
+            if (!firstName)
+                dest = StringCopy(dest, sText_RouteSignSpeciesComma);
             dest = StringCopy(dest, sText_RouteSignSpeciesLineBreak);
             lineWidth = 0;
             firstName = TRUE;
@@ -213,6 +220,23 @@ void BufferCurrentMapRouteSignSpecies(void)
         dest = AppendRouteSignMethod(dest, sText_RouteSignGoodRod, entries, count, &hasMethod);
         count = CollectRouteSignSpecies(entries, info, 5, 5);
         dest = AppendRouteSignMethod(dest, sText_RouteSignSuperRod, entries, count, &hasMethod);
+        // Keep caught discoveries on the roster as a record, after the rods.
+        count = 0;
+        for (enum LegendarySignId id = 0; id < LEGENDARY_SIGN_COUNT; id++)
+        {
+            const struct LegendarySignDefinition *sign = &gLegendarySignDefinitions[id];
+            u16 map = ((u8)gSaveBlock1Ptr->location.mapGroup << 8) | (u8)gSaveBlock1Ptr->location.mapNum;
+            if (sign->mapId == map && sign->source == LEGENDARY_SOURCE_NATIVE_WILD)
+                entries[count++].species = sign->species;
+        }
+        dest = AppendRouteSignMethod(dest,
+            gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE125)
+                && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE125)
+                ? COMPOUND_STRING("Legendaries (Surf, 3% each): ")
+                : COMPOUND_STRING("Legendaries (3% each): "),
+            entries, count, &hasMethod);
+        if (count != 0)
+            dest = StringCopy(dest, COMPOUND_STRING("\pSWEET SCENT: 25% total chance\namong eligible, uncaught legends.\pOnce caught, they stop appearing."));
         if (DEXNAV_ENABLED)
         {
             info = GetRouteSignInfo(headerId, WILD_AREA_HIDDEN);
@@ -227,7 +251,9 @@ void BufferCurrentMapRouteSignSpecies(void)
         entries[0].species = SPECIES_FEEBAS;
         dest = AppendRouteSignMethod(dest, sText_RouteSignUnderBridge, entries, 1, &hasMethod);
     }
-    if (!hasMethod)
+    if (hasMethod)
+        StringCopy(dest, COMPOUND_STRING("\pSWEET SCENT reverses ordinary\nrarity: rare species become common.\pLegendary chances stay separate."));
+    else
         StringCopy(gStringVar4, sText_RouteSignNoSpecies);
 }
 
@@ -370,16 +396,108 @@ u32 ChooseWildMonIndex_Land(void)
     else
         wildMonIndex = 11;
 
-    // Sweet Scent always reverses the slot order, so the rarest Pokemon on the
-    // route becomes the most likely one. It is the reward for spending a turn
-    // and a move slot instead of walking.
-    if (sSweetScentInverted || (LURE_STEP_COUNT != 0 && (Random() % 10 < 2)))
+    // Lures occasionally reverse slots. Sweet Scent uses species totals instead.
+    if (LURE_STEP_COUNT != 0 && (Random() % 10 < 2))
         swap = TRUE;
 
     if (swap)
         wildMonIndex = 11 - wildMonIndex;
 
     return wildMonIndex;
+}
+
+// Reverse ordinary species probabilities, not slot positions. Duplicate slots
+// are combined first; tied species share their reversed probability equally.
+// Ordinary-table legends retain their own slot chances and capture rules.
+u32 ChooseSweetScentWildMonIndex(const struct WildPokemon *mons, enum WildPokemonArea area)
+{
+    static const u8 landBounds[] = {
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_0, ENCOUNTER_CHANCE_LAND_MONS_SLOT_1,
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_2, ENCOUNTER_CHANCE_LAND_MONS_SLOT_3,
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_4, ENCOUNTER_CHANCE_LAND_MONS_SLOT_5,
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_6, ENCOUNTER_CHANCE_LAND_MONS_SLOT_7,
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_8, ENCOUNTER_CHANCE_LAND_MONS_SLOT_9,
+        ENCOUNTER_CHANCE_LAND_MONS_SLOT_10, ENCOUNTER_CHANCE_LAND_MONS_SLOT_11,
+    };
+    static const u8 waterBounds[] = {
+        ENCOUNTER_CHANCE_WATER_MONS_SLOT_0, ENCOUNTER_CHANCE_WATER_MONS_SLOT_1,
+        ENCOUNTER_CHANCE_WATER_MONS_SLOT_2, ENCOUNTER_CHANCE_WATER_MONS_SLOT_3,
+        ENCOUNTER_CHANCE_WATER_MONS_SLOT_4,
+    };
+    struct ScentSpecies { enum Species species; u32 weight; } entries[NUM_LAND_MONS_ENCOUNTER_SLOTS];
+    const u8 *bounds = area == WILD_AREA_WATER ? waterBounds : landBounds;
+    u32 slots = area == WILD_AREA_WATER ? ARRAY_COUNT(waterBounds) : ARRAY_COUNT(landBounds);
+    u32 count = 0, total = 0;
+    u32 roll = RandomUniform(RNG_NONE, 0, bounds[slots - 1] - 1);
+    u32 ordinaryRoll = roll;
+    u32 originalSlot = 0;
+    while (roll >= bounds[originalSlot])
+        originalSlot++;
+    if (GetLegendarySignIdBySpecies(mons[originalSlot].species) < LEGENDARY_SIGN_COUNT
+     && CanAcquireLegendarySignSpecies(mons[originalSlot].species))
+        return originalSlot;
+
+    for (u32 i = 0; i < slots; i++)
+    {
+        u32 weight = bounds[i] - (i == 0 ? 0 : bounds[i - 1]);
+        if (GetLegendarySignIdBySpecies(mons[i].species) < LEGENDARY_SIGN_COUNT)
+        {
+            if (i < originalSlot)
+                ordinaryRoll -= weight;
+            continue;
+        }
+        u32 j;
+        for (j = 0; j < count; j++)
+            if (entries[j].species == mons[i].species)
+                break;
+        if (j == count)
+            entries[count++] = (struct ScentSpecies){mons[i].species, 0};
+        entries[j].weight += weight;
+        total += weight;
+    }
+    // Let the existing acquisition fallback handle an all-legendary table.
+    if (count == 0)
+        return originalSlot;
+    if (GetLegendarySignIdBySpecies(mons[originalSlot].species) < LEGENDARY_SIGN_COUNT)
+        ordinaryRoll = RandomUniform(RNG_WILD_MON_TARGET, 0, total - 1);
+
+    for (u32 i = 1; i < count; i++)
+    {
+        struct ScentSpecies entry = entries[i];
+        u32 j = i;
+        while (j != 0 && entries[j - 1].weight < entry.weight)
+        {
+            entries[j] = entries[j - 1];
+            j--;
+        }
+        entries[j] = entry;
+    }
+    u32 selected = 0;
+    while (ordinaryRoll >= entries[count - 1 - selected].weight)
+    {
+        ordinaryRoll -= entries[count - 1 - selected].weight;
+        selected++;
+    }
+    u32 first = selected, last = selected;
+    while (first != 0 && entries[first - 1].weight == entries[selected].weight)
+        first--;
+    while (last + 1 < count && entries[last + 1].weight == entries[selected].weight)
+        last++;
+    if (first != last)
+        selected = RandomUniform(RNG_WILD_MON_TARGET, first, last);
+
+    // Preserve the chosen species' original distribution of encounter levels.
+    roll = RandomUniform(RNG_WILD_MON_TARGET, 0, entries[selected].weight - 1);
+    for (u32 i = 0; i < slots; i++)
+    {
+        if (mons[i].species != entries[selected].species)
+            continue;
+        u32 weight = bounds[i] - (i == 0 ? 0 : bounds[i - 1]);
+        if (roll < weight)
+            return i;
+        roll -= weight;
+    }
+    return originalSlot;
 }
 
 // Mostly equivalent to ChooseWildMonIndex_Land
@@ -432,10 +550,8 @@ u32 ChooseWildMonIndex_Water(void)
     else
         wildMonIndex = 4;
 
-    // Sweet Scent always reverses the slot order, so the rarest Pokemon on the
-    // route becomes the most likely one. It is the reward for spending a turn
-    // and a move slot instead of walking.
-    if (sSweetScentInverted || (LURE_STEP_COUNT != 0 && (Random() % 10 < 2)))
+    // Lures occasionally reverse slots. Sweet Scent uses species totals instead.
+    if (LURE_STEP_COUNT != 0 && (Random() % 10 < 2))
         swap = TRUE;
 
     if (swap)
@@ -481,10 +597,8 @@ u32 ChooseWildMonIndex_Rocks(void)
     else
         wildMonIndex = 4;
 
-    // Sweet Scent always reverses the slot order, so the rarest Pokemon on the
-    // route becomes the most likely one. It is the reward for spending a turn
-    // and a move slot instead of walking.
-    if (sSweetScentInverted || (LURE_STEP_COUNT != 0 && (Random() % 10 < 2)))
+    // Lures occasionally reverse slots. Sweet Scent uses species totals instead.
+    if (LURE_STEP_COUNT != 0 && (Random() % 10 < 2))
         swap = TRUE;
 
     if (swap)
@@ -501,10 +615,8 @@ static u32 ChooseWildMonIndex_Fishing(u8 rod)
     u8 rand = Random() % max(max(ENCOUNTER_CHANCE_FISHING_MONS_OLD_ROD_TOTAL, ENCOUNTER_CHANCE_FISHING_MONS_GOOD_ROD_TOTAL),
                              ENCOUNTER_CHANCE_FISHING_MONS_SUPER_ROD_TOTAL);
 
-    // Sweet Scent always reverses the slot order, so the rarest Pokemon on the
-    // route becomes the most likely one. It is the reward for spending a turn
-    // and a move slot instead of walking.
-    if (sSweetScentInverted || (LURE_STEP_COUNT != 0 && (Random() % 10 < 2)))
+    // Lures occasionally reverse slots. Sweet Scent uses species totals instead.
+    if (LURE_STEP_COUNT != 0 && (Random() % 10 < 2))
         swap = TRUE;
 
     switch (rod)
@@ -711,6 +823,11 @@ bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, enum WildPok
 {
     u8 wildMonIndex = 0;
     u8 level;
+    enum Species species;
+    bool32 rareLegendary;
+    if (sSweetScentActive && (area == WILD_AREA_LAND || area == WILD_AREA_WATER))
+        wildMonIndex = ChooseSweetScentWildMonIndex(wildMonInfo->wildPokemon, area);
+    else
     switch (area)
     {
     case WILD_AREA_LAND:
@@ -754,11 +871,32 @@ bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, enum WildPok
         break;
     }
 
-    if (!CanAcquireLegendarySignSpecies(wildMonInfo->wildPokemon[wildMonIndex].species))
-        return FALSE;
+    species = ChooseRareWildLegendarySpecies(area, sSweetScentActive);
+    rareLegendary = species != SPECIES_NONE && !IsNativeWildLegendarySpecies(species);
+    if (species == SPECIES_NONE)
+        species = wildMonInfo->wildPokemon[wildMonIndex].species;
+    if (!CanAcquireLegendarySignSpecies(species))
+    {
+        // A caught one-time resident leaves its slot to another local resident.
+        // Do not cancel ordinary outcomes and inflate the legendary share of
+        // successful Sweet Scent encounters after a player catches an Ultra Beast.
+        u32 slots = area == WILD_AREA_LAND ? NUM_LAND_MONS_ENCOUNTER_SLOTS
+                  : area == WILD_AREA_WATER ? NUM_WATER_MONS_ENCOUNTER_SLOTS
+                  : area == WILD_AREA_ROCKS ? NUM_ROCK_SMASH_MONS_ENCOUNTER_SLOTS : 1;
+        u32 tried;
+        for (tried = 0; tried < slots; tried++)
+        {
+            wildMonIndex = (wildMonIndex + 1) % slots;
+            species = wildMonInfo->wildPokemon[wildMonIndex].species;
+            if (CanAcquireLegendarySignSpecies(species))
+                break;
+        }
+        if (tried == slots)
+            return FALSE;
+    }
 
     level = ChooseWildMonLevel(wildMonInfo->wildPokemon, wildMonIndex, area);
-    if (IsLegendarySignOrdinaryWildSpecies(wildMonInfo->wildPokemon[wildMonIndex].species))
+    if (rareLegendary || IsLegendarySignOrdinaryWildSpecies(species))
         level = min(MAX_LEVEL, GetCurrentLevelCap());
     // Emerald Champions: nothing in the wild is ever above the live level cap.
     // Table levels describe the route; an early Old Rod cannot pull a Lv 45
@@ -769,7 +907,9 @@ bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, enum WildPok
     if (gMapHeader.mapLayoutId != LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_WILD_MONS && flags & WILD_CHECK_KEEN_EYE && !IsAbilityAllowingEncounter(level))
         return FALSE;
 
-    CreateWildMon(wildMonInfo->wildPokemon[wildMonIndex].species, level);
+    CreateWildMon(species, level);
+    if (rareLegendary)
+        ApplyEmeraldChampionsRandomNonMegaSet(&gParties[B_TRAINER_OPPONENT_A][0]);
     return TRUE;
 }
 
@@ -1103,15 +1243,7 @@ static bool8 SweetScentWildEncounterInner(void)
             if (gWildMonHeaders[headerId].encounterTypes[timeOfDay].landMonsInfo == NULL)
                 return FALSE;
 
-            if (TryStartRoamerEncounter())
-            {
-                BattleSetup_StartRoamerBattle();
-                return TRUE;
-            }
-
-            if (DoMassOutbreakEncounterTest() == TRUE)
-                SetUpMassOutbreakEncounter(0);
-            else if (TryGenerateWildMon(gWildMonHeaders[headerId].encounterTypes[timeOfDay].landMonsInfo, WILD_AREA_LAND, 0) != TRUE)
+            if (TryGenerateWildMon(gWildMonHeaders[headerId].encounterTypes[timeOfDay].landMonsInfo, WILD_AREA_LAND, 0) != TRUE)
                 return FALSE;
 
             BattleSetup_StartWildBattle();
@@ -1125,12 +1257,6 @@ static bool8 SweetScentWildEncounterInner(void)
                 return FALSE;
             if (gWildMonHeaders[headerId].encounterTypes[timeOfDay].waterMonsInfo == NULL)
                 return FALSE;
-
-            if (TryStartRoamerEncounter())
-            {
-                BattleSetup_StartRoamerBattle();
-                return TRUE;
-            }
 
             if (TryGenerateWildMon(gWildMonHeaders[headerId].encounterTypes[timeOfDay].waterMonsInfo, WILD_AREA_WATER, 0) != TRUE)
                 return FALSE;
@@ -1146,9 +1272,9 @@ bool8 SweetScentWildEncounter(void)
 {
     bool8 encountered;
 
-    sSweetScentInverted = TRUE;
+    sSweetScentActive = TRUE;
     encountered = SweetScentWildEncounterInner();
-    sSweetScentInverted = FALSE;
+    sSweetScentActive = FALSE;
     return encountered;
 }
 

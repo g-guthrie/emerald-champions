@@ -1,21 +1,10 @@
-# Independent audit tools (2026-09-03)
+# Targeted map diagnostics (2026-09-08)
 
-These compare the live map and script data with the pinned Inclement reference. They are
-independent of `scripts/verify_*`. Extract the reference tree first (it is not tracked):
-
-```sh
-mkdir -p work/audit-baselines/inclement
-git archive cf41a95b68a39ca74fefeb934c460f6f47eb0b3b data/maps data/scripts data/layouts data/event_scripts.s include/constants data/text | tar -x -C work/audit-baselines/inclement
-```
-
-- `ec_baseline_diff.py` - every Hoenn map vs Inclement v1.13: header, connections, objects,
-  warps, triggers, signs, layout collision, and semantically normalised scripts
-  (compare+goto merged, local IDs resolved, text/movement labels hashed). Writes
-  `baseline_diff.json` next to the tree.
-- `show_label.py MAP LABEL...` - normalised side-by-side diff of one script label.
-- `reach.py` - decodes map.bin collision, treats permanent NPCs as blockers, flood-fills
-  from every warp, and reports reachability regressions vs Inclement.
-- `textwidth.py` - measures every dialogue line with the FONT_NORMAL glyph widths.
+The historical Inclement baseline diff and reachability helpers were retired.
+Current game code, not a pinned historical map or redesign snapshot, is authority.
+`textwidth.py` remains an optional heuristic: it does not resolve concatenated
+assembly strings, dynamic variables, or cursor/font controls and cannot certify
+dialogue layout.
 
 `map_integrity.py` replaces the earlier ad-hoc map sweep with a source-derived
 tile and geometry inventory. Build the canonical graphics converter first, then
@@ -26,7 +15,8 @@ make tools
 python3 scripts/audit/map_integrity.py --out work/audits/map_tile_inventory.json
 ```
 
-The required release gate runs this check. It distinguishes registered source
+The required release gate runs only the compiled structural check, with dynamic
+inventories disabled. It distinguishes registered source
 maps from the Hoenn maps and Emerald layouts actually emitted by `mapjson`.
 Invalid compiled references fail; dormant findings remain visible in the report
 and also fail when `--all-data` is requested. The report keeps exact packed map
@@ -34,12 +24,14 @@ cells, engine masks, shared metatile definitions, converter-derived payloads,
 palette sources and possible animation ownership. It uses the real converter's
 `-Wnum_tiles` behavior rather than assuming a requested truncation occurred.
 
-`map_dynamic_inventory.py` supplies script-root contexts, animation ranges,
+The optional `map_dynamic_inventory.py` helper supplies script-root contexts, animation ranges,
 public map setters, graphics loaders and memory-transfer source locations.
 Shared contexts are possible call paths, not demonstrated execution. Dynamic
 coordinates, layout changes, conditional branches and generic memory operations
 remain explicitly unresolved where their state cannot be derived. A successful
-structural check does not certify those states or visual fidelity.
+structural check does not certify those states or visual fidelity. Its source
+expression parser has known limitations documented in the static-check audit;
+these inferred dynamic ranges are not release certification.
 
 Render a selected map range from a freshly built fixture tree:
 

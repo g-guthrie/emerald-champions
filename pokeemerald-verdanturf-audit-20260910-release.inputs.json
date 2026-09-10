@@ -1,0 +1,9 @@
+{
+  "schema_version": 2,
+  "inputs_sha256": "96d6f6fc2cb71a745ff7520c3ff44053967c09a9953027c0765d7ec0b9a02676",
+  "input_count": 28980,
+  "artifacts": {
+    "pokeemerald-verdanturf-audit-20260910-release.gba": "10b84bd3cfbb73a9e72509a6b39e8421966d5e54576fd39f9527287ea8c17807",
+    "pokeemerald-verdanturf-audit-20260910-release.elf": "0a92589d1411b656b77a04ecda60d0d7e8747673f9331903de0b294acc0f065c"
+  }
+}

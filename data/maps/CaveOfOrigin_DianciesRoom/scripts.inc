@@ -23,23 +23,29 @@ CaveOfOrigin_DianciesRoom_EventScript_WallaceNotReady::
 	end
 
 CaveOfOrigin_DianciesRoom_Text_WallaceIntro:
-	.string "This crystal chamber records HOENN's\n"
-	.string "deepest answer to pressure.\p"
-	.string "As Champion, face my unrestricted rain\n"
-	.string "exhibition. Nothing here is ceremonial.$"
+	.string "WALLACE: Listen to the water in\n"
+	.string "this chamber. Even a quiet place\l"
+	.string "has its own rhythm.\p"
+	.string "We've met at the LEAGUE. Here, I'd\n"
+	.string "like to show you another side of\l"
+	.string "my team!$"
 
 CaveOfOrigin_DianciesRoom_Text_WallaceDefeat:
-	.string "You found calm inside impossible rain.$"
+	.string "A magnificent performance!$"
 
 CaveOfOrigin_DianciesRoom_Text_WallaceAfter:
-	.string "The chamber has heard two\n"
-	.string "Champions answer one another.\p"
-	.string "The DIANCITE beside its guardian\n"
-	.string "belongs to your exploration. Our\l"
-	.string "battle was its own reward.$"
+	.string "WALLACE: What a pleasure to battle\n"
+	.string "you here! The crystals seemed to\l"
+	.string "catch every flash of light.\p"
+	.string "You needn't win an exhibition to\n"
+	.string "meet DIANCIE or find the DIANCITE\l"
+	.string "here. Take your time exploring!$"
 CaveOfOrigin_DianciesRoom_Text_WallaceNotReady:
-	.string "First defeat me at the POKéMON LEAGUE.\n"
-	.string "Then return for the unrestricted battle.$"
+	.string "WALLACE: Challenge me at the\n"
+	.string "POKéMON LEAGUE first. Then we can\l"
+	.string "hold a special exhibition here.\p"
+	.string "You're welcome to explore the\n"
+	.string "chamber in the meantime.$"
 
 CaveOfOrigin_DianciesRoom_EventScript_Diancie::
 	lock
@@ -67,10 +73,10 @@ CaveOfOrigin_DianciesRoom_EventScript_DiancieCaught::
 	end
 
 CaveOfOrigin_DianciesRoom_Text_WallaceOffer::
-	.string "Would you face my unrestricted\n"
-	.string "rain exhibition here?\p"
-	.string "The chamber's guardian and its\n"
-	.string "stone will wait while we battle.$"
+	.string "WALLACE: Would you join me for a\n"
+	.string "special exhibition battle here?\p"
+	.string "I've brought a different team from\n"
+	.string "the one you faced at the LEAGUE.$"
 
 CaveOfOrigin_DianciesRoom_Text_WallaceDecline::
 	.string "Whenever your team is ready. I\n"

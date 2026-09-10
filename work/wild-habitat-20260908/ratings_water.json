@@ -1,0 +1,254 @@
+[
+  {
+    "id": "MAP_ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS",
+    "rating": 10,
+    "reason": "Frillish/Jellicent and Dragalge establish a haunted wreck, while 30% Super Rod Dhelmise makes its signature discovery practical.",
+    "recommendation": ""
+  },
+  {
+    "id": "MAP_ABANDONED_SHIP_ROOMS_B1F",
+    "rating": 9,
+    "reason": "Mareanie, Golisopod and Clawitzer give the flooded cabins a strong scavenger identity; Lapras is the generic outlier.",
+    "recommendation": "Replace the 10% Surf Lapras slot with Barbaracle, retaining Lapras at its other coastal locations and Dhelmise in both wreck interiors."
+  },
+  {
+    "id": "MAP_EVER_GRANDE_CITY",
+    "rating": 7,
+    "reason": "The coast has useful catches but no finale-specific reward, and its Super Rod roster exactly duplicates Route124.",
+    "recommendation": "Use a waterfall Super Rod roster of Kingdra 30%, Barraskewda 25%, Gyarados 20%, Cloyster 15% and Relicanth 10%; promote the 35% Surf Wailmer slot to Wailord."
+  },
+  {
+    "id": "MAP_LILYCOVE_CITY",
+    "rating": 9,
+    "reason": "The bird-filled bay, shore Rock Smash pool and several useful fishing families feel convincingly coastal.",
+    "recommendation": "Replace Super Rod Shellder at 25% with Cloyster so the strongest rod offers a ready evolved shellfish beside Kingler, while preserving Shellder elsewhere."
+  },
+  {
+    "id": "MAP_MOSSDEEP_CITY",
+    "rating": 9,
+    "reason": "Staryu/Starmie fit the star-associated city and give useful options, but generic Wailord leads its strongest rod.",
+    "recommendation": "Exchange Super Rod Wailord and Starmie chances, making Starmie 30% and Wailord 10%; replace Good Rod Luvdisc at 25% with Staryu to establish the family across methods."
+  },
+  {
+    "id": "MAP_PACIFIDLOG_TOWN",
+    "rating": 8,
+    "reason": "Alomomola and seabirds make the floating town recognizable, but its Super Rod mostly repeats the surrounding ocean.",
+    "recommendation": "Keep the town Surf roster; replace Super Rod Shellder 15% and Lapras 10% with Huntail and Gorebyss respectively to make shell-bed fishing beneath the town its discovery."
+  },
+  {
+    "id": "MAP_ROUTE124",
+    "rating": 8,
+    "reason": "Mantine and Clamperl define a useful shelf habitat, but the strongest rod is an interchangeable ocean pool.",
+    "recommendation": "Replace Super Rod Bruxish 30% with Mantine and Wailord 20% with Cloyster; retain the other fishing options and the entire separate Dive roster."
+  },
+  {
+    "id": "MAP_ROUTE125",
+    "rating": 8,
+    "reason": "Spheal, Dewgong and Walrein introduce Shoal beautifully, but warm-reef fishing species dilute that cold-current identity.",
+    "recommendation": "Use Super Rod Qwilfish 30%, Cloyster 25%, Walrein 20%, Dewgong 15% and Hisuian Qwilfish 10%, replacing Luvdisc, Corsola and Dragalge in that method."
+  },
+  {
+    "id": "MAP_ROUTE126",
+    "rating": 9,
+    "reason": "Alomomola and Wishiwashi form a recognizable reef community, with Aqua Tauros and Feebas providing memorable useful catches.",
+    "recommendation": "Keep Aqua Tauros and Feebas; replace Super Rod Kingler 25% with Wishiwashi and Shellder 20% with Gorebyss to better connect surface fishing to the shell-and-coral reef below."
+  },
+  {
+    "id": "MAP_ROUTE127",
+    "rating": 9,
+    "reason": "Mareanie/Toxapex and Pyukumuku make this a clear defensive reef, but its strongest rod returns to whales and generic shellfish.",
+    "recommendation": "Replace Super Rod Kingler 30% with Toxapex and Wailord 15% with Corsola, keeping the other methods and their readily available Bruxish."
+  },
+  {
+    "id": "MAP_ROUTE128",
+    "rating": 8,
+    "reason": "The cavern approach offers strong marine partners, but Wailmer-led Surf overlaps heavily with Route129 and nearby cities.",
+    "recommendation": "Make Surf Sharpedo 35%, Jellicent 25%, Malamar 18%, Alomomola 12% and Finizen 10%; replace Super Rod Lapras 10% with Jellicent for a predator-and-ghost approach to Seafloor Cavern."
+  },
+  {
+    "id": "MAP_ROUTE129",
+    "rating": 9,
+    "reason": "The Wailmer/Wailord population makes a good whale route, but the leading Super Rod catch does not support that identity.",
+    "recommendation": "Replace Super Rod Hisuian Qwilfish 30% with Wailord, Relicanth 15% with Mantine and Basculegion 10% with Finizen; keep Basculegion concentrated in the ghost-water locations."
+  },
+  {
+    "id": "MAP_ROUTE130",
+    "rating": 9,
+    "reason": "The 43% Wynaut colony makes Mirage Island distinctive, and Frillish/Jellicent give its water a theme; the rods still repeat adjacent routes.",
+    "recommendation": "Preserve the complete Wynaut land colony; replace Super Rod Hisuian Qwilfish 30% with Jellicent, Qwilfish 20% with Octillery and Relicanth 15% with Wishiwashi, retaining Basculegion 10% as the ghost-water reward."
+  },
+  {
+    "id": "MAP_ROUTE131",
+    "rating": 8,
+    "reason": "Relicanth on Surf and Old Rod suits the ancient-pillar approach, but its Super Rod pool exactly duplicates Route134.",
+    "recommendation": "Replace Super Rod Octillery 25% with Relicanth, Seadra 20% with Kingdra and Basculegion 10% with Gyarados, tying the stronger rod to ancient marine and dragon discoveries."
+  },
+  {
+    "id": "MAP_ROUTE132",
+    "rating": 8,
+    "reason": "Carvanha, Barraskewda and Old Rod Arrokuda suit the rushing current, but common Surf Magikarp and the deep-relic rod pool weaken that theme.",
+    "recommendation": "Replace Surf Magikarp 25% with Sharpedo; use Super Rod Barraskewda 30%, Sharpedo 25%, Mantine 20%, Clawitzer 15% and Finizen 10% for the fast open-water channel."
+  },
+  {
+    "id": "MAP_ROUTE133",
+    "rating": 6,
+    "reason": "Spheal-led Surf mixes cold-water, reef and current identities, while the rods provide little distinction from neighboring sea routes.",
+    "recommendation": "Make Surf Mantine 35%, Pelipper 25%, Dragalge 18%, Cramorant 12% and Finizen 10%; use Super Rod Bruxish 30%, Octillery 25%, Lanturn 20%, Clawitzer 15% and Kingdra 10% for a bird-and-reef eddy between the fast channel and relic shallows."
+  },
+  {
+    "id": "MAP_ROUTE134",
+    "rating": 7,
+    "reason": "Huntail/Gorebyss suggest good shell beds, but Seel leads Surf and the Super Rod is identical to Route131.",
+    "recommendation": "Replace Surf Seel 35% with Relicanth; use Super Rod Relicanth 30%, Huntail 25%, Gorebyss 20%, Clawitzer 15% and Gyarados 10% to make the Sealed Chamber approach a fossil-and-shell habitat."
+  },
+  {
+    "id": "MAP_SAFARI_ZONE_NORTH",
+    "rating": 10,
+    "reason": "Tropical forms, big herbivores and strong insects form a rich reserve with useful catches and a complementary rocky excavation pool.",
+    "recommendation": ""
+  },
+  {
+    "id": "MAP_SAFARI_ZONE_NORTHEAST",
+    "rating": 8,
+    "reason": "The herd species are useful, but bugs, Houndour and repeated reserve residents leave the zone less distinctive than its neighbors.",
+    "recommendation": "Replace land Houndour 13%, Pineco 12% and Forretress 11% with Miltank, Tauros and Stantler respectively, yielding herds at 23%, 22% and 17%; emphasize the two bugs in Southeast instead and keep the current Rock Smash pool."
+  },
+  {
+    "id": "MAP_SAFARI_ZONE_NORTHWEST",
+    "rating": 9,
+    "reason": "Birds, rhinos, Kangaskhan and Chansey make an excellent safari grassland, but its Good Rod ignores the surrounding freshwater habitat.",
+    "recommendation": "Replace Good Rod Lanturn 45%, Sharpedo 30% and Octillery 25% with Quagsire, Whiscash and Golduck respectively; retain the land roster and both Dratini methods."
+  },
+  {
+    "id": "MAP_SAFARI_ZONE_SOUTH",
+    "rating": 10,
+    "reason": "Regional cats, Raichu, Wobbuffet, Smeargle, Chansey and Ditto make a distinct specialist-support collection with practical encounter chances.",
+    "recommendation": ""
+  },
+  {
+    "id": "MAP_SAFARI_ZONE_SOUTHEAST",
+    "rating": 8,
+    "reason": "Gligar, Flaaffy and woodland mammals are useful, but substantial Johto overlap and generic fishing blur the zone.",
+    "recommendation": "Replace land Stantler 8% and Quagsire 7% with Pineco and Forretress; keep Quagsire on Super Rod, replace Good Rod Octillery 30% with Poliwhirl, and replace Super Rod Sharpedo 25% with Crawdaunt."
+  },
+  {
+    "id": "MAP_SAFARI_ZONE_SOUTHWEST",
+    "rating": 10,
+    "reason": "Wetland bugs, frogs and the complete Goomy line form a coherent habitat with both developing and immediately evolved choices; the ponds support it.",
+    "recommendation": ""
+  },
+  {
+    "id": "MAP_SEAFLOOR_CAVERN_ENTRANCE",
+    "rating": 8,
+    "reason": "Good Rod Relicanth and Dragalge provide a useful deep-water welcome, but Surf Magikarp and the repeated pufferfish rod pool feel generic.",
+    "recommendation": "Replace Surf Magikarp 12% with Lanturn; replace Super Rod Hisuian Qwilfish 30% with Relicanth and Qwilfish 25% with Kingdra, retaining Octillery, Seadra and Basculegion."
+  },
+  {
+    "id": "MAP_SEAFLOOR_CAVERN_ROOM1",
+    "rating": 9,
+    "reason": "A 34% Dragalge population with Golisopod gives the first chamber a strong identity and useful immediate partners.",
+    "recommendation": "Merge Barraskewda 8% into Grapploct, making it 15%, and Sharpedo 5% into Toxapex, making it 15%; those displaced species remain in other cavern rooms."
+  },
+  {
+    "id": "MAP_SEAFLOOR_CAVERN_ROOM2",
+    "rating": 7,
+    "reason": "Sharpedo and Basculegion have promise, but eleven species still resemble a broad mixture of the surrounding chambers.",
+    "recommendation": "Merge Kingdra 5% and Dragalge 7% into Sharpedo, making its resident population 33%; keep the bats, Floatzel, Basculegion and remaining shoreline partners."
+  },
+  {
+    "id": "MAP_SEAFLOOR_CAVERN_ROOM3",
+    "rating": 10,
+    "reason": "Dhelmise at 29% beside Claydol, Sableye and Bronzong makes a distinctive submerged-relic chamber with useful team-building roles.",
+    "recommendation": ""
+  },
+  {
+    "id": "MAP_SEAFLOOR_CAVERN_ROOM4",
+    "rating": 7,
+    "reason": "Malamar gives the room a possible identity, but most slots repeat the general cavern pool and differ little from Room2.",
+    "recommendation": "Merge Sharpedo 13% into Malamar for 32%, Barraskewda 8% into Bruxish for 13%, and Golisopod 10% into Grapploct for 15%, emphasizing strange psychic predators and grapplers."
+  },
+  {
+    "id": "MAP_SEAFLOOR_CAVERN_ROOM5",
+    "rating": 9,
+    "reason": "Kingdra at 34% is a clear payoff, though Golisopod still takes a large repeated share beside the dragon residents.",
+    "recommendation": "Merge the Golisopod 22% slots into Kingdra, making a 56% Kingdra colony with Dragalge at 16% and the remaining five supporting species unchanged."
+  },
+  {
+    "id": "MAP_SEAFLOOR_CAVERN_ROOM6",
+    "rating": 7,
+    "reason": "Barbaracle distinguishes land, but the Surf and rod pools largely replay ghosts and predators already caught elsewhere.",
+    "recommendation": "Merge land Dragalge 12% and Kingdra 5% into Barbaracle for 40%; change Surf Frillish 35% to Binacle, Jellicent 18% to Golisopod and Lapras 10% to Clawitzer; change Super Rod Dragalge 25% to Barbaracle and Basculegion 10% to Grapploct."
+  },
+  {
+    "id": "MAP_SEAFLOOR_CAVERN_ROOM7",
+    "rating": 7,
+    "reason": "The Toxapex shore and Huntail/Gorebyss water can be distinctive, but land overlap and generic fishing obscure those strengths.",
+    "recommendation": "Merge land Malamar 10% and Kingdra 5% into Toxapex for 38%; change Good Rod Luvdisc 30% to Clamperl; use Super Rod Huntail 30%, Gorebyss 25%, Toxapex 20%, Clamperl 15% and Relicanth 10%."
+  },
+  {
+    "id": "MAP_SEAFLOOR_CAVERN_ROOM8",
+    "rating": 8,
+    "reason": "The compact evolved roster is strong, but Kingdra/Dragalge repeat Room5 and unique Clobbopus is only a small discovery.",
+    "recommendation": "Keep Clobbopus 5%; replace Kingdra 23% with Grapploct and merge Dragalge 23% into Basculegion for 28%, retaining Golisopod, Clawitzer and Crobat as the deep-chamber supporting cast."
+  },
+  {
+    "id": "MAP_SHOAL_CAVE_LOW_TIDE_ENTRANCE_ROOM",
+    "rating": 7,
+    "reason": "The cold coast offers good choices, but twelve land species blur the deeper rooms and Surf Snom plus rod Cetoddle are awkward placements.",
+    "recommendation": "Merge land Zubat 13% into Spheal for 25%; replace Surf Snom 12% with Lapras and Cetoddle 10% with Eiscue; replace Super Rod Cetoddle 10% with Cloyster, preserving Snom and Cetoddle in the cave land rosters."
+  },
+  {
+    "id": "MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM",
+    "rating": 10,
+    "reason": "Alolan Vulpix, Iron Bundle, Arctibax and regional forms make a memorable ice-room payoff, with strong snow-team options and sensible encounter chances.",
+    "recommendation": ""
+  },
+  {
+    "id": "MAP_SHOAL_CAVE_LOW_TIDE_INNER_ROOM",
+    "rating": 7,
+    "reason": "Galarian Darumaka is an excellent find, but ten of twelve land species match the stairs and Cetoddle again occupies water and rod slots.",
+    "recommendation": "Merge land Spheal 12% and Bergmite 8% into Galarian Darumaka for 33%, and replace Snom 6% with land Cetoddle; replace Surf Cetoddle 35% with Sealeo, Super Rod Cetoddle 10% with Cloyster and Luvdisc 25% with Lapras."
+  },
+  {
+    "id": "MAP_SHOAL_CAVE_LOW_TIDE_LOWER_ROOM",
+    "rating": 7,
+    "reason": "Alolan Sandshrew is a worthwhile exclusive, but almost everything around it repeats the neighboring cold rooms.",
+    "recommendation": "Merge land Spheal 12% and Snover 8% into Alolan Sandshrew for 33%, then replace Cubchoo 7% with Alolan Sandslash for an armored-ice colony; retain the remaining residents."
+  },
+  {
+    "id": "MAP_SHOAL_CAVE_LOW_TIDE_STAIRS_ROOM",
+    "rating": 6,
+    "reason": "The roster has no distinct signature and shares ten of twelve species with the inner room, despite its useful individual catches.",
+    "recommendation": "Merge Spheal 13% into Swinub for 24%, Seel 12% into Bergmite for 20%, and Snorunt 10% into Cubchoo for 17%; replace Snom 5% with Piloswine to create a recognizable burrowing-ice transition."
+  },
+  {
+    "id": "MAP_SLATEPORT_CITY",
+    "rating": 9,
+    "reason": "Clauncher, Skrelp, Kingler and Dhelmise fit a busy port and make returning with better rods worthwhile.",
+    "recommendation": "Replace Super Rod Clamperl 30% with Clawitzer and Seadra 20% with Starmie, connecting the advanced rod to the port families available through the earlier rods; retain Dhelmise 10%."
+  },
+  {
+    "id": "MAP_SOOTOPOLIS_CITY",
+    "rating": 8,
+    "reason": "Alomomola and schooling fish suit the sheltered crater, but its fishing barely develops the existing Gyarados landmark identity.",
+    "recommendation": "Reorder Surf to Gyarados 35%, Alomomola 25%, Wishiwashi 18%, Finizen 12% and Clamperl 10%; replace Super Rod Kingler 20% with Milotic and Qwilfish 15% with Gyarados, preserving the Dive reef unchanged."
+  },
+  {
+    "id": "MAP_UNDERWATER_ROUTE124",
+    "rating": 10,
+    "reason": "Lanturn, Starmie, Dondozo and deep predators make Dive immediately rewarding, with broad useful roles and distinct uncommon finds.",
+    "recommendation": ""
+  },
+  {
+    "id": "MAP_UNDERWATER_ROUTE126",
+    "rating": 10,
+    "reason": "Coral and shellfish lead naturally into Cursola, Milotic and Palafin, giving the reef a coherent identity and worthwhile Dive discoveries.",
+    "recommendation": ""
+  },
+  {
+    "id": "MAP_UNDERWATER_SEAFLOOR_CAVERN",
+    "rating": 10,
+    "reason": "Dondozo and all three Tatsugiri forms make the submarine habitat a memorable doubles-team discovery, supported by rare deep-sea surprises.",
+    "recommendation": ""
+  }
+]

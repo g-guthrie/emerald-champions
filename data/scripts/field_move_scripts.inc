@@ -52,6 +52,44 @@ Text_WantToCut:
 Text_MonUsedFieldMove:
 	.string "{STR_VAR_1} used {STR_VAR_2}!$"
 
+@ Interact at the solution positions described by the original tomb inscriptions.
+EventScript_BrailleRockSmash::
+	lockall
+	buffermovename STR_VAR_2, MOVE_ROCK_SMASH
+	checkfieldmove FIELD_MOVE_ROCK_SMASH, TRUE
+	goto EventScript_BrailleFieldMove
+
+EventScript_BrailleFlash::
+	lockall
+	buffermovename STR_VAR_2, MOVE_FLASH
+	checkfieldmove FIELD_MOVE_FLASH, TRUE
+EventScript_BrailleFieldMove:
+	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_BrailleFieldMoveUnavailable
+	setfieldeffectargument 0, VAR_RESULT
+	bufferpartymonnick STR_VAR_1, VAR_RESULT
+	msgbox Text_UseBrailleFieldMove, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EventScript_CancelCut
+	msgbox Text_MonUsedFieldMove, MSGBOX_DEFAULT
+	closemessage
+	setfieldeffectargument 3, 0
+	dofieldeffect FLDEFF_USE_TOMB_PUZZLE_EFFECT
+	waitfieldeffect FLDEFF_USE_TOMB_PUZZLE_EFFECT
+	releaseall
+	end
+
+EventScript_BrailleFieldMoveUnavailable:
+	goto_if_eq VAR_0x8005, 1, EventScript_NobodyCanUseFieldMove
+	msgbox Text_BrailleFieldMoveLocked, MSGBOX_DEFAULT
+	releaseall
+	end
+
+Text_UseBrailleFieldMove:
+	.string "Use {STR_VAR_2}?$"
+
+Text_BrailleFieldMoveLocked:
+	.string "To use {STR_VAR_2}, you need\n"
+	.string "its field licence and required BADGE.$"
+
 Text_CantCut:
 	.string "This tree looks like it can be\n"
 	.string "CUT down!$"

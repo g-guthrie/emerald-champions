@@ -1,0 +1,18 @@
+before 0 3 FAIL: final Pokedex entry excluded
+ 
+before 1 -6  work/dialogue-slateport-20260910/credits-selection-before.c:96:26: runtime error: index 71 out of bounds for type 'u16[71]' (aka 'unsigned short[71]')
+SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior work/dialogue-slateport-20260910/credits-selection-before.c:96:26 
+
+before 2 -6  work/dialogue-slateport-20260910/credits-selection-before.c:96:26: runtime error: index 71 out of bounds for type 'u16[71]' (aka 'unsigned short[71]')
+SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior work/dialogue-slateport-20260910/credits-selection-before.c:96:26 
+
+before 3 0 PASS: eligible slides and final starter
+ 
+after 0 0 PASS: eligible slides and final starter
+ 
+after 1 0 PASS: eligible slides and final starter
+ 
+after 2 0 PASS: eligible slides and final starter
+ 
+after 3 0 PASS: eligible slides and final starter
+ 

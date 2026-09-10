@@ -9,6 +9,7 @@ VerdanturfMeadow_OnTransition:
 
 VerdanturfMeadow_EventScript_Warden::
 	msgbox VerdanturfMeadow_Text_Warden, MSGBOX_NPC
+	releaseall
 	end
 VerdanturfMeadow_Text_Warden:
 	.string "DEERLING graze among these flowers.\n"

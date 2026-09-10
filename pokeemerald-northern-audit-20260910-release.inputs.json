@@ -1,0 +1,9 @@
+{
+  "schema_version": 2,
+  "inputs_sha256": "6474a6bf1e701b5ca414892bca6741b3a1e0672a604238bfa398aa5fbc89e14b",
+  "input_count": 28982,
+  "artifacts": {
+    "pokeemerald-northern-audit-20260910-release.gba": "0bdd9256bb550c8264c6814d27214c4a033e0947fd9b80618ad1569c712be1a1",
+    "pokeemerald-northern-audit-20260910-release.elf": "c18769c34edf33390e3d5aff876bfa55ace27a0123c64e6a1b50ee892ee4cb6a"
+  }
+}

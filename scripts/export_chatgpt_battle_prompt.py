@@ -95,7 +95,7 @@ def battle_list() -> list[str]:
             rows.append(f"plan: {b.plan}")
             rows.append(f"crack: {b.crack}")
             for mon in b.mons:
-                rows.append(f"{mon.species} @{mon.item} {mon.ability} {mon.nature} {mon.points} {mon.offset:+d} | {', '.join(mon.moves)}")
+                rows.append(f"{mon.species} @{mon.item} {mon.ability} {mon.nature} {mon.evs} {mon.offset:+d} | {', '.join(mon.moves)}")
     return rows
 
 
@@ -107,7 +107,7 @@ EMERALD CHAMPIONS — FULL CAMPAIGN BATTLE DESIGN BRIEF
 You are designing every trainer battle in "Pokémon Emerald Champions", a
 pokeemerald-expansion ROM hack that turns Hoenn into a hard, no-grind, doubles
 focused Pokémon Champions experience. The player receives competitive Pokémon,
-free held items, a teambuilder for Stat Points, Mega Evolution after the second
+free held items, a teambuilder for EVs, Mega Evolution after the second
 Gym, and can catch nearly every species, every Mega Stone and every legendary
 (via "Legendary Signs") over the campaign. By the end of the game the player
 should be able to say two things: "I am very good at Pokémon" and "I had the
@@ -122,7 +122,7 @@ so that the file can be dropped straight into the game's compiler and pass its
 legality gates. Think about every battle individually and in the context of
 the whole arc. Do not template. Do not reuse the same set on many trainers.
 Every battle must be interesting: a real doubles (or singles) plan, smart item
-choices, coherent Abilities, natures and Stat Points, and a "crack" the player
+choices, coherent Abilities, natures and EVs, and a "crack" the player
 can discover.
 
 DESIGN PHILOSOPHY (from the game's author)
@@ -194,10 +194,10 @@ HARD RULES THE COMPILER ENFORCES (a violation rejects the whole file)
   level-up, TM and egg moves that exist in Scarlet/Violet, Sword/Shield or the
   species' last mainline appearance. Smeargle is exempt.
 - 1 to 6 Pokémon per branch; doubles/multi branches need at least 2.
-- Stat Points: six values HP/Atk/Def/SpA/SpD/Spe, each 0-32, total <= 66.
-  Attack points require at least one physical move, Sp. Atk points require a
-  special move, and points must not oppose a dominant category (do not give
-  Attack points to a 3-special-move set or vice versa). Natures must not lower
+- EVs: six values HP/Atk/Def/SpA/SpD/Spe, each 0-252, total <= 510.
+  Attack EVs require at least one physical move, Sp. Atk EVs require a
+  special move, and EVs must not oppose a dominant category (do not give
+  Attack EVs to a 3-special-move set or vice versa). Natures must not lower
   the only attacking category.
 - Item Clause: no two Pokémon on one branch hold the same item. NONE allowed.
 - Species Clause: no duplicate species on one branch.
@@ -263,14 +263,13 @@ One block per branch, in the same order as the BATTLE LIST:
 ## E0002 TRAINER_CALVIN_1 class=regular
 plan: one or two sentences describing what the team is trying to do.
 crack: one or two sentences describing how a good player beats it.
-POOCHYENA @FOCUS_SASH RATTLED JOLLY 2/32/0/0/0/32 -2 | CRUNCH, PLAY_ROUGH, SUCKER_PUNCH, HOWL
-ZIGZAGOON @SITRUS_BERRY GLUTTONY ADAMANT 2/32/0/0/0/32 -1 | BELLY_DRUM, EXTREME_SPEED, SEED_BOMB, PROTECT
-TAILLOW @TOXIC_ORB GUTS JOLLY 2/32/0/0/0/32 0 | FACADE, BRAVE_BIRD, QUICK_ATTACK, PROTECT
+POOCHYENA @FOCUS_SASH RATTLED JOLLY 4/252/0/0/0/252 -2 | CRUNCH, PLAY_ROUGH, SUCKER_PUNCH, HOWL
+ZIGZAGOON @SITRUS_BERRY GLUTTONY ADAMANT 4/252/0/0/0/252 -1 | BELLY_DRUM, EXTREME_SPEED, SEED_BOMB, PROTECT
+TAILLOW @TOXIC_ORB GUTS JOLLY 4/252/0/0/0/252 0 | FACADE, BRAVE_BIRD, QUICK_ATTACK, PROTECT
 
 Line grammar: SPECIES @ITEM ABILITY NATURE HP/ATK/DEF/SPA/SPD/SPE OFFSET | MOVE, MOVE, MOVE, MOVE
-The Stat Point column also accepts these shorthands: PS=2/32/0/0/0/32
-SS=2/0/0/32/0/32 PB=32/32/2/0/0/0 SB=32/0/2/32/0/0 WD=32/0/32/0/2/0
-WS=32/0/2/0/32/0 WM=32/0/16/0/18/0 FS=32/0/2/0/0/32 MX=2/32/0/32/0/0.
+The EV column also accepts the shorthands documented by EV_SPREADS in
+scripts/emerald_champions_teams.py (for example PS=4/252/0/0/0/252).
 When an encounter has several branches (the rival's starter branches, the two
 trainers of a multi battle), write plan/crack on the first branch only; later
 branches inherit them. Keep the ## header exactly as given in the BATTLE LIST

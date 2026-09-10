@@ -1,0 +1,330 @@
+tools/scaninc/scaninc -M build/emerald-test/test/battle/ai/emerald_champions_plans.d -g build/assets -I include -I tools/agbcc/include test/battle/ai/emerald_champions_plans.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/battle/ai/emerald_champions_plans.o test/battle/ai/emerald_champions_plans.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 4
+[0] EC live review Jacob timing: complete six-player party: [32mPASS[0m
+JACOB_INPUT slot=0 lv=28 HP=88 Atk=41 Def=90 SpA=27 SpD=62 Spe=17 item=496 ability=160
+JACOB_INPUT slot=1 lv=28 HP=118 Atk=107 Def=64 SpA=42 SpD=64 Spe=40 item=503 ability=24
+JACOB_INPUT slot=2 lv=28 HP=88 Atk=95 Def=50 SpA=39 SpD=50 Spe=103 item=479 ability=80
+JACOB_INPUT slot=3 lv=28 HP=86 Atk=84 Def=50 SpA=54 SpD=50 Spe=108 item=523 ability=144
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Dragon Claw target=2
+AI decision turn=2 actor=1 move=Leech Seed target=0
+AI decision turn=2 actor=3 move=Dragon Claw target=2
+JACOB_TIMING setup=6 bothActors=51 complete=57 warm=50
+[1] EC live review Jacob Ground: four-party transitions: [32mPASS[0m
+JACOB_INPUT slot=0 lv=28 HP=88 Atk=41 Def=90 SpA=27 SpD=62 Spe=17 item=496 ability=160
+JACOB_INPUT slot=1 lv=28 HP=118 Atk=107 Def=64 SpA=42 SpD=64 Spe=40 item=503 ability=24
+JACOB_INPUT slot=2 lv=28 HP=88 Atk=95 Def=50 SpA=39 SpD=50 Spe=103 item=479 ability=80
+JACOB_INPUT slot=3 lv=28 HP=86 Atk=84 Def=50 SpA=54 SpD=50 Spe=108 item=523 ability=144
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Psychic target=1
+AI decision turn=1 actor=3 move=Dragon Claw target=2
+AI decision turn=2 actor=1 move=Gyro Ball target=2
+AI decision turn=2 actor=3 move=Sucker Punch target=2
+JACOB_AFTER board=30 turns=1 reserves=0 species=597/621 HP=88/76 foes=110/37 Atk=6/6 SpA=6/6 Spe=6/6 item=496/503 faints=0/0
+JACOB_STATE moves=Protect/Dragon Claw PP=10/5/20/4 otherPP=14/15/5/15 partyHP=88/76/88/86 type=13/17 status=0/0
+JACOB_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0
+JACOB_INPUT slot=0 lv=28 HP=88 Atk=41 Def=90 SpA=27 SpD=62 Spe=17 item=496 ability=160
+JACOB_INPUT slot=1 lv=28 HP=118 Atk=107 Def=64 SpA=42 SpD=64 Spe=40 item=503 ability=24
+JACOB_INPUT slot=2 lv=28 HP=88 Atk=95 Def=50 SpA=39 SpD=50 Spe=103 item=479 ability=80
+JACOB_INPUT slot=3 lv=28 HP=86 Atk=84 Def=50 SpA=54 SpD=50 Spe=108 item=523 ability=144
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Psychic target=1
+AI decision turn=1 actor=3 move=Dragon Claw target=2
+AI decision turn=2 actor=0 move=Earthquake target=1
+AI decision turn=2 actor=1 move=Gyro Ball target=2
+AI decision turn=2 actor=2 move=Psychic target=1
+AI decision turn=2 actor=3 move=Sucker Punch target=2
+AI decision turn=3 actor=1 move=Leech Seed target=0
+AI switch turn=3 actor=3 party=3
+JACOB_AFTER board=30 turns=2 reserves=0 species=597/621 HP=57/34 foes=100/0 Atk=6/6 SpA=6/6 Spe=6/6 item=496/503 faints=0/1
+JACOB_STATE moves=Gyro Ball/Sucker Punch PP=10/4/20/4 otherPP=14/15/4/15 partyHP=57/34/88/86 type=13/17 status=0/0
+JACOB_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0
+[3] EC live review Jacob disruption: flinch and Water pressure: [32mPASS[0m
+JACOB_INPUT slot=0 lv=28 HP=88 Atk=41 Def=90 SpA=27 SpD=62 Spe=17 item=496 ability=160
+JACOB_INPUT slot=1 lv=28 HP=118 Atk=107 Def=64 SpA=42 SpD=64 Spe=40 item=503 ability=24
+JACOB_INPUT slot=2 lv=28 HP=88 Atk=95 Def=50 SpA=39 SpD=50 Spe=103 item=479 ability=80
+JACOB_INPUT slot=3 lv=28 HP=86 Atk=84 Def=50 SpA=54 SpD=50 Spe=108 item=523 ability=144
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Leech Seed target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Dragon Claw target=0
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Dragon Claw target=0
+JACOB_AFTER board=10 turns=1 reserves=0 species=597/621 HP=84/108 foes=3/104 Atk=6/6 SpA=6/6 Spe=6/6 item=496/503 faints=0/0
+JACOB_STATE moves=-/Dragon Claw PP=10/5/20/5 otherPP=14/15/5/15 partyHP=84/108/88/86 type=13/17 status=0/0
+JACOB_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0
+JACOB_INPUT slot=0 lv=28 HP=88 Atk=41 Def=90 SpA=27 SpD=62 Spe=17 item=496 ability=160
+JACOB_INPUT slot=1 lv=28 HP=118 Atk=107 Def=64 SpA=42 SpD=64 Spe=40 item=503 ability=24
+JACOB_INPUT slot=2 lv=28 HP=88 Atk=95 Def=50 SpA=39 SpD=50 Spe=103 item=479 ability=80
+JACOB_INPUT slot=3 lv=28 HP=86 Atk=84 Def=50 SpA=54 SpD=50 Spe=108 item=523 ability=144
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Leech Seed target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Dragon Claw target=0
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=Dragon Claw target=0
+AI decision turn=3 actor=1 move=Gyro Ball target=2
+AI decision turn=3 actor=3 move=Dragon Claw target=2
+JACOB_AFTER board=10 turns=2 reserves=0 species=597/621 HP=84/98 foes=0/104 Atk=6/6 SpA=6/6 Spe=6/6 item=496/503 faints=0/1
+JACOB_STATE moves=Protect/Dragon Claw PP=10/5/20/4 otherPP=13/15/5/15 partyHP=84/98/88/86 type=13/17 status=0/0
+JACOB_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0
+JACOB_INPUT slot=0 lv=28 HP=88 Atk=41 Def=90 SpA=27 SpD=62 Spe=17 item=496 ability=160
+JACOB_INPUT slot=1 lv=28 HP=118 Atk=107 Def=64 SpA=42 SpD=64 Spe=40 item=503 ability=24
+JACOB_INPUT slot=2 lv=28 HP=88 Atk=95 Def=50 SpA=39 SpD=50 Spe=103 item=479 ability=80
+JACOB_INPUT slot=3 lv=28 HP=86 Atk=84 Def=50 SpA=54 SpD=50 Spe=108 item=523 ability=144
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Drill Run target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Dragon Claw target=0
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Dragon Claw target=0
+JACOB_AFTER board=10 turns=1 reserves=1 species=745/1356 HP=82/67 foes=44/104 Atk=6/6 SpA=6/6 Spe=7/6 item=479/523 faints=0/0
+JACOB_STATE moves=-/Dragon Claw PP=20/10/10/5 otherPP=10/14/20/20 partyHP=82/67/0/0 type=6/17 status=0/0
+JACOB_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0
+JACOB_INPUT slot=0 lv=28 HP=88 Atk=41 Def=90 SpA=27 SpD=62 Spe=17 item=496 ability=160
+JACOB_INPUT slot=1 lv=28 HP=118 Atk=107 Def=64 SpA=42 SpD=64 Spe=40 item=503 ability=24
+JACOB_INPUT slot=2 lv=28 HP=88 Atk=95 Def=50 SpA=39 SpD=50 Spe=103 item=479 ability=80
+JACOB_INPUT slot=3 lv=28 HP=86 Atk=84 Def=50 SpA=54 SpD=50 Spe=108 item=523 ability=144
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Drill Run target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Dragon Claw target=0
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=Dragon Claw target=0
+AI decision turn=3 actor=1 move=Rock Slide target=2
+AI decision turn=3 actor=3 move=U-turn target=2
+JACOB_AFTER board=10 turns=2 reserves=1 species=745/1356 HP=82/48 foes=0/104 Atk=6/6 SpA=6/6 Spe=7/6 item=479/523 faints=0/1
+JACOB_STATE moves=Protect/Dragon Claw PP=20/10/10/4 otherPP=10/13/20/20 partyHP=82/48/0/0 type=6/17 status=0/0
+JACOB_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0
+[2] EC live review Jacob counterplay: burn and redirection: [32mPASS[0m
+JACOB_INPUT slot=0 lv=28 HP=88 Atk=41 Def=90 SpA=27 SpD=62 Spe=17 item=496 ability=160
+JACOB_INPUT slot=1 lv=28 HP=118 Atk=107 Def=64 SpA=42 SpD=64 Spe=40 item=503 ability=24
+JACOB_INPUT slot=2 lv=28 HP=88 Atk=95 Def=50 SpA=39 SpD=50 Spe=103 item=479 ability=80
+JACOB_INPUT slot=3 lv=28 HP=86 Atk=84 Def=50 SpA=54 SpD=50 Spe=108 item=523 ability=144
+AI decision turn=1 actor=0 move=Will-O-Wisp target=1
+AI decision turn=1 actor=1 move=Leech Seed target=2
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=Dragon Claw target=2
+AI decision turn=2 actor=1 move=Leech Seed target=0
+AI decision turn=2 actor=3 move=Dragon Claw target=2
+JACOB_AFTER board=20 turns=1 reserves=0 species=597/621 HP=83/118 foes=110/55 Atk=6/6 SpA=6/6 Spe=6/6 item=496/503 faints=0/0
+JACOB_STATE moves=Leech Seed/Dragon Claw PP=9/5/20/5 otherPP=14/15/5/15 partyHP=83/118/88/86 type=13/17 status=16/0
+JACOB_FIELD foeStatus=0/0 seed=0/2 substitute=0/0 rocks=0
+JACOB_INPUT slot=0 lv=28 HP=88 Atk=41 Def=90 SpA=27 SpD=62 Spe=17 item=496 ability=160
+JACOB_INPUT slot=1 lv=28 HP=118 Atk=107 Def=64 SpA=42 SpD=64 Spe=40 item=503 ability=24
+JACOB_INPUT slot=2 lv=28 HP=88 Atk=95 Def=50 SpA=39 SpD=50 Spe=103 item=479 ability=80
+JACOB_INPUT slot=3 lv=28 HP=86 Atk=84 Def=50 SpA=54 SpD=50 Spe=108 item=523 ability=144
+AI decision turn=1 actor=0 move=Will-O-Wisp target=1
+AI decision turn=1 actor=1 move=Leech Seed target=2
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=Dragon Claw target=2
+AI decision turn=2 actor=0 move=Foul Play target=1
+AI decision turn=2 actor=1 move=Leech Seed target=0
+AI decision turn=2 actor=2 move=Follow Me target=2
+AI decision turn=2 actor=3 move=Dragon Claw target=2
+AI decision turn=3 actor=1 move=Leech Seed target=0
+AI decision turn=3 actor=3 move=Dragon Claw target=2
+JACOB_AFTER board=20 turns=2 reserves=0 species=597/621 HP=75/118 foes=79/32 Atk=6/6 SpA=6/6 Spe=6/6 item=496/503 faints=0/0
+JACOB_STATE moves=Leech Seed/Dragon Claw PP=8/5/20/5 otherPP=13/15/5/15 partyHP=75/118/88/86 type=13/17 status=16/0
+JACOB_FIELD foeStatus=0/0 seed=0/2 substitute=0/0 rocks=0
+JACOB_INPUT slot=0 lv=28 HP=88 Atk=41 Def=90 SpA=27 SpD=62 Spe=17 item=496 ability=160
+JACOB_INPUT slot=1 lv=28 HP=118 Atk=107 Def=64 SpA=42 SpD=64 Spe=40 item=503 ability=24
+JACOB_INPUT slot=2 lv=28 HP=88 Atk=95 Def=50 SpA=39 SpD=50 Spe=103 item=479 ability=80
+JACOB_INPUT slot=3 lv=28 HP=86 Atk=84 Def=50 SpA=54 SpD=50 Spe=108 item=523 ability=144
+AI decision turn=1 actor=0 move=Will-O-Wisp target=1
+AI decision turn=1 actor=1 move=Leech Seed target=2
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=Dragon Claw target=2
+AI decision turn=2 actor=0 move=Foul Play target=1
+AI decision turn=2 actor=1 move=Leech Seed target=0
+AI decision turn=2 actor=2 move=Follow Me target=2
+AI decision turn=2 actor=3 move=Dragon Claw target=2
+AI decision turn=3 actor=0 move=Foul Play target=1
+AI decision turn=3 actor=1 move=Leech Seed target=0
+AI decision turn=3 actor=2 move=Follow Me target=2
+AI decision turn=3 actor=3 move=Dragon Claw target=2
+AI decision turn=4 actor=1 move=Protect target=1
+AI decision turn=4 actor=3 move=Dragon Claw target=0
+JACOB_AFTER board=20 turns=3 reserves=0 species=597/621 HP=67/118 foes=62/0 Atk=6/6 SpA=6/6 Spe=6/6 item=496/503 faints=0/1
+JACOB_STATE moves=Leech Seed/Dragon Claw PP=7/5/20/5 otherPP=12/15/5/15 partyHP=67/118/88/86 type=13/17 status=16/0
+JACOB_FIELD foeStatus=0/0 seed=2/0 substitute=0/0 rocks=0
+JACOB_INPUT slot=0 lv=28 HP=88 Atk=41 Def=90 SpA=27 SpD=62 Spe=17 item=496 ability=160
+JACOB_INPUT slot=1 lv=28 HP=118 Atk=107 Def=64 SpA=42 SpD=64 Spe=40 item=503 ability=24
+JACOB_INPUT slot=2 lv=28 HP=88 Atk=95 Def=50 SpA=39 SpD=50 Spe=103 item=479 ability=80
+JACOB_INPUT slot=3 lv=28 HP=86 Atk=84 Def=50 SpA=54 SpD=50 Spe=108 item=523 ability=144
+AI decision turn=1 actor=0 move=Will-O-Wisp target=1
+AI decision turn=1 actor=1 move=Drill Run target=2
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=Knock Off target=2
+AI decision turn=2 actor=1 move=Drill Run target=2
+AI decision turn=2 actor=3 move=Dragon Claw target=2
+JACOB_AFTER board=20 turns=1 reserves=1 species=745/1356 HP=75/86 foes=110/53 Atk=6/6 SpA=6/6 Spe=6/6 item=479/523 faints=0/0
+JACOB_STATE moves=Drill Run/Knock Off PP=20/10/9/5 otherPP=10/15/19/20 partyHP=75/86/0/0 type=6/17 status=16/0
+JACOB_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0
+JACOB_INPUT slot=0 lv=28 HP=88 Atk=41 Def=90 SpA=27 SpD=62 Spe=17 item=496 ability=160
+JACOB_INPUT slot=1 lv=28 HP=118 Atk=107 Def=64 SpA=42 SpD=64 Spe=40 item=503 ability=24
+JACOB_INPUT slot=2 lv=28 HP=88 Atk=95 Def=50 SpA=39 SpD=50 Spe=103 item=479 ability=80
+JACOB_INPUT slot=3 lv=28 HP=86 Atk=84 Def=50 SpA=54 SpD=50 Spe=108 item=523 ability=144
+AI decision turn=1 actor=0 move=Will-O-Wisp target=1
+AI decision turn=1 actor=1 move=Drill Run target=2
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=Knock Off target=2
+AI decision turn=2 actor=0 move=Foul Play target=1
+AI decision turn=2 actor=1 move=Drill Run target=2
+AI decision turn=2 actor=2 move=Follow Me target=2
+AI decision turn=2 actor=3 move=Dragon Claw target=2
+AI decision turn=3 actor=3 move=Knock Off target=0
+JACOB_AFTER board=20 turns=2 reserves=1 species=745/1356 HP=0/86 foes=110/0 Atk=6/6 SpA=6/6 Spe=6/6 item=479/523 faints=1/1
+JACOB_STATE moves=-/Dragon Claw PP=20/10/8/5 otherPP=10/14/19/20 partyHP=0/86/0/0 type=6/17 status=0/0
+JACOB_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0
+JACOB_INPUT slot=0 lv=28 HP=88 Atk=41 Def=90 SpA=27 SpD=62 Spe=17 item=496 ability=160
+JACOB_INPUT slot=1 lv=28 HP=118 Atk=107 Def=64 SpA=42 SpD=64 Spe=40 item=503 ability=24
+JACOB_INPUT slot=2 lv=28 HP=88 Atk=95 Def=50 SpA=39 SpD=50 Spe=103 item=479 ability=80
+JACOB_INPUT slot=3 lv=28 HP=86 Atk=84 Def=50 SpA=54 SpD=50 Spe=108 item=523 ability=144
+AI decision turn=1 actor=0 move=Will-O-Wisp target=1
+AI decision turn=1 actor=1 move=Drill Run target=2
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=Knock Off target=2
+AI decision turn=2 actor=0 move=Foul Play target=1
+AI decision turn=2 actor=1 move=Drill Run target=2
+AI decision turn=2 actor=2 move=Follow Me target=2
+AI decision turn=2 actor=3 move=Dragon Claw target=2
+AI decision turn=3 actor=3 move=Knock Off target=0
+AI decision turn=3 actor=0 move=Foul Play target=1
+AI decision turn=4 actor=3 move=Dragon Claw target=0
+JACOB_AFTER board=20 turns=3 reserves=1 species=745/1356 HP=0/49 foes=89/0 Atk=6/6 SpA=6/6 Spe=6/6 item=479/0 faints=1/1
+JACOB_STATE moves=-/Knock Off PP=20/10/8/5 otherPP=10/14/18/20 partyHP=0/49/0/0 type=6/17 status=0/0
+JACOB_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0
+[0] EC live review Jacob core: pressure and promoted reserves: [32mPASS[0m
+JACOB_INPUT slot=0 lv=28 HP=88 Atk=41 Def=90 SpA=27 SpD=62 Spe=17 item=496 ability=160
+JACOB_INPUT slot=1 lv=28 HP=118 Atk=107 Def=64 SpA=42 SpD=64 Spe=40 item=503 ability=24
+JACOB_INPUT slot=2 lv=28 HP=88 Atk=95 Def=50 SpA=39 SpD=50 Spe=103 item=479 ability=80
+JACOB_INPUT slot=3 lv=28 HP=86 Atk=84 Def=50 SpA=54 SpD=50 Spe=108 item=523 ability=144
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Leech Seed target=0
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Dragon Claw target=0
+AI decision turn=2 actor=1 move=Gyro Ball target=0
+AI decision turn=2 actor=3 move=Sucker Punch target=0
+JACOB_AFTER board=0 turns=1 reserves=0 species=597/621 HP=84/78 foes=13/105 Atk=6/6 SpA=6/6 Spe=6/6 item=496/503 faints=0/0
+JACOB_STATE moves=Leech Seed/Dragon Claw PP=9/5/20/5 otherPP=14/15/5/15 partyHP=84/78/88/86 type=13/17 status=0/0
+JACOB_FIELD foeStatus=0/0 seed=2/0 substitute=0/0 rocks=0
+JACOB_INPUT slot=0 lv=28 HP=88 Atk=41 Def=90 SpA=27 SpD=62 Spe=17 item=496 ability=160
+JACOB_INPUT slot=1 lv=28 HP=118 Atk=107 Def=64 SpA=42 SpD=64 Spe=40 item=503 ability=24
+JACOB_INPUT slot=2 lv=28 HP=88 Atk=95 Def=50 SpA=39 SpD=50 Spe=103 item=479 ability=80
+JACOB_INPUT slot=3 lv=28 HP=86 Atk=84 Def=50 SpA=54 SpD=50 Spe=108 item=523 ability=144
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Leech Seed target=0
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Dragon Claw target=0
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Gyro Ball target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Sucker Punch target=0
+AI decision turn=3 actor=1 move=Leech Seed target=2
+AI decision turn=3 actor=3 move=Dragon Claw target=2
+JACOB_AFTER board=0 turns=2 reserves=0 species=597/621 HP=84/38 foes=0/96 Atk=6/6 SpA=6/6 Spe=6/6 item=496/503 faints=0/1
+JACOB_STATE moves=Gyro Ball/Sucker Punch PP=9/4/20/5 otherPP=14/15/4/15 partyHP=84/38/88/86 type=13/17 status=0/0
+JACOB_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0
+JACOB_INPUT slot=0 lv=28 HP=88 Atk=41 Def=90 SpA=27 SpD=62 Spe=17 item=496 ability=160
+JACOB_INPUT slot=1 lv=28 HP=118 Atk=107 Def=64 SpA=42 SpD=64 Spe=40 item=503 ability=24
+JACOB_INPUT slot=2 lv=28 HP=88 Atk=95 Def=50 SpA=39 SpD=50 Spe=103 item=479 ability=80
+JACOB_INPUT slot=3 lv=28 HP=86 Atk=84 Def=50 SpA=54 SpD=50 Spe=108 item=523 ability=144
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Gyro Ball target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Dragon Claw target=0
+AI decision turn=2 actor=1 move=Leech Seed target=2
+AI decision turn=2 actor=3 move=Dragon Claw target=2
+JACOB_AFTER board=1 turns=1 reserves=0 species=597/621 HP=61/111 foes=0/104 Atk=6/6 SpA=6/6 Spe=6/6 item=496/503 faints=0/1
+JACOB_STATE moves=Gyro Ball/Dragon Claw PP=10/4/20/5 otherPP=14/15/5/15 partyHP=61/111/88/86 type=13/17 status=0/0
+JACOB_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0
+JACOB_INPUT slot=0 lv=28 HP=88 Atk=41 Def=90 SpA=27 SpD=62 Spe=17 item=496 ability=160
+JACOB_INPUT slot=1 lv=28 HP=118 Atk=107 Def=64 SpA=42 SpD=64 Spe=40 item=503 ability=24
+JACOB_INPUT slot=2 lv=28 HP=88 Atk=95 Def=50 SpA=39 SpD=50 Spe=103 item=479 ability=80
+JACOB_INPUT slot=3 lv=28 HP=86 Atk=84 Def=50 SpA=54 SpD=50 Spe=108 item=523 ability=144
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Gyro Ball target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Dragon Claw target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=1 move=Leech Seed target=2
+AI decision turn=2 actor=3 move=Dragon Claw target=2
+AI decision turn=3 actor=1 move=Protect target=1
+AI decision turn=3 actor=3 move=Dragon Claw target=2
+JACOB_AFTER board=1 turns=2 reserves=0 species=597/621 HP=74/104 foes=0/55 Atk=6/6 SpA=6/6 Spe=6/6 item=496/503 faints=0/1
+JACOB_STATE moves=Leech Seed/Dragon Claw PP=9/4/20/5 otherPP=13/15/5/15 partyHP=74/104/88/86 type=13/17 status=0/0
+JACOB_FIELD foeStatus=0/0 seed=0/2 substitute=0/0 rocks=0
+JACOB_INPUT slot=0 lv=28 HP=88 Atk=41 Def=90 SpA=27 SpD=62 Spe=17 item=496 ability=160
+JACOB_INPUT slot=1 lv=28 HP=118 Atk=107 Def=64 SpA=42 SpD=64 Spe=40 item=503 ability=24
+JACOB_INPUT slot=2 lv=28 HP=88 Atk=95 Def=50 SpA=39 SpD=50 Spe=103 item=479 ability=80
+JACOB_INPUT slot=3 lv=28 HP=86 Atk=84 Def=50 SpA=54 SpD=50 Spe=108 item=523 ability=144
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Dragon Claw target=0
+AI decision turn=2 actor=1 move=Drill Run target=0
+JACOB_AFTER board=0 turns=1 reserves=1 species=745/1356 HP=88/0 foes=67/119 Atk=6/6 SpA=6/6 Spe=6/6 item=479/523 faints=1/0
+JACOB_STATE moves=Protect/- PP=20/10/10/4 otherPP=10/14/20/20 partyHP=88/0/0/0 type=6/17 status=0/0
+JACOB_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0
+JACOB_INPUT slot=0 lv=28 HP=88 Atk=41 Def=90 SpA=27 SpD=62 Spe=17 item=496 ability=160
+JACOB_INPUT slot=1 lv=28 HP=118 Atk=107 Def=64 SpA=42 SpD=64 Spe=40 item=503 ability=24
+JACOB_INPUT slot=2 lv=28 HP=88 Atk=95 Def=50 SpA=39 SpD=50 Spe=103 item=479 ability=80
+JACOB_INPUT slot=3 lv=28 HP=86 Atk=84 Def=50 SpA=54 SpD=50 Spe=108 item=523 ability=144
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Dragon Claw target=0
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Drill Run target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+JACOB_AFTER board=0 turns=2 reserves=1 species=745/1356 HP=0/0 foes=24/119 Atk=6/6 SpA=6/6 Spe=6/6 item=479/523 faints=2/0
+JACOB_STATE moves=-/- PP=20/10/9/4 otherPP=10/14/20/20 partyHP=0/0/0/0 type=6/17 status=0/0
+JACOB_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0
+JACOB_INPUT slot=0 lv=28 HP=88 Atk=41 Def=90 SpA=27 SpD=62 Spe=17 item=496 ability=160
+JACOB_INPUT slot=1 lv=28 HP=118 Atk=107 Def=64 SpA=42 SpD=64 Spe=40 item=503 ability=24
+JACOB_INPUT slot=2 lv=28 HP=88 Atk=95 Def=50 SpA=39 SpD=50 Spe=103 item=479 ability=80
+JACOB_INPUT slot=3 lv=28 HP=86 Atk=84 Def=50 SpA=54 SpD=50 Spe=108 item=523 ability=144
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Accelerock target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Knock Off target=0
+AI decision turn=2 actor=1 move=Drill Run target=2
+AI decision turn=2 actor=3 move=Knock Off target=2
+JACOB_AFTER board=1 turns=1 reserves=1 species=745/1356 HP=80/73 foes=0/104 Atk=6/6 SpA=6/6 Spe=6/6 item=479/523 faints=0/1
+JACOB_STATE moves=Accelerock/Knock Off PP=19/10/10/5 otherPP=10/15/19/20 partyHP=80/73/0/0 type=6/17 status=0/0
+JACOB_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0
+JACOB_INPUT slot=0 lv=28 HP=88 Atk=41 Def=90 SpA=27 SpD=62 Spe=17 item=496 ability=160
+JACOB_INPUT slot=1 lv=28 HP=118 Atk=107 Def=64 SpA=42 SpD=64 Spe=40 item=503 ability=24
+JACOB_INPUT slot=2 lv=28 HP=88 Atk=95 Def=50 SpA=39 SpD=50 Spe=103 item=479 ability=80
+JACOB_INPUT slot=3 lv=28 HP=86 Atk=84 Def=50 SpA=54 SpD=50 Spe=108 item=523 ability=144
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Accelerock target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Knock Off target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=1 move=Drill Run target=2
+AI decision turn=2 actor=3 move=Knock Off target=2
+AI decision turn=3 actor=1 move=Rock Slide target=2
+AI decision turn=3 actor=3 move=Dragon Claw target=2
+JACOB_AFTER board=1 turns=2 reserves=1 species=745/1356 HP=72/60 foes=0/25 Atk=6/6 SpA=6/6 Spe=6/6 item=479/523 faints=0/1
+JACOB_STATE moves=Drill Run/Knock Off PP=19/10/9/5 otherPP=10/15/18/20 partyHP=72/60/0/0 type=6/17 status=0/0
+JACOB_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0
+
+- Tests [32mPASSED[0m:          5
+- Tests [34mTOTAL[0m:           5
+

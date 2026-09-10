@@ -354,7 +354,7 @@ void BattleSetup_StartDoubleWildBattle(void)
     DoStandardWildBattle(TRUE);
 }
 
-void BattleSetup_StartMultiBattle(void)
+void BattleSetup_SetMultiBattleFlags(void)
 {
     if (gSpecialVar_0x8005 & MULTI_BATTLE_2_VS_WILD) // Player + AI against wild mon
     {
@@ -370,6 +370,11 @@ void BattleSetup_StartMultiBattle(void)
         gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER;
     }
 
+}
+
+void BattleSetup_StartMultiBattle(void)
+{
+    BattleSetup_SetMultiBattleFlags();
     FillPartnerParty(gPartnerTrainerId);
     if (gSpecialVar_0x8005 & MULTI_BATTLE_CHOOSE_MONS) // Skip mons restoring(done in the script)
         gBattleScripting.specialTrainerBattleType = 0xFF;

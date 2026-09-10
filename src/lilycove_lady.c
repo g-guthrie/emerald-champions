@@ -379,7 +379,11 @@ static u8 BufferQuizAuthorName(void)
         StringCopy_PlayerName(gStringVar1, sQuizLadyPtr->playerName);
         ConvertInternationalString(gStringVar1, sQuizLadyPtr->language);
         nameLen = GetPlayerNameLength(sQuizLadyPtr->playerName);
-        if (nameLen == GetPlayerNameLength(gSaveBlock2Ptr->playerName))
+        if (nameLen != GetPlayerNameLength(gSaveBlock2Ptr->playerName))
+        {
+            authorNameId = QUIZ_AUTHOR_NAME_OTHER_PLAYER;
+        }
+        else
         {
             u8 *name = sQuizLadyPtr->playerName;
             for (i = 0; i < nameLen; i++)

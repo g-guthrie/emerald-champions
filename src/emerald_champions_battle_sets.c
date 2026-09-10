@@ -439,113 +439,7 @@ static bool32 DoesMonMatchPresetAbility(struct Pokemon *mon, const struct Emeral
         && actualAbility == GetAbilityBySpecies(species, slot);
 }
 
-// Other half-HP items still need even HP after Belly Drum. Sitrus rounds
-// its activation threshold up and never needs Stat Point adjustments.
-static bool32 DoesItemNeedEvenHp(enum Item item, enum Ability ability)
-{
-    enum HoldEffect holdEffect = GetItemHoldEffect(item);
-
-    if (item == ITEM_SITRUS_BERRY)
-        return FALSE;
-    if (holdEffect == HOLD_EFFECT_RESTORE_HP)
-        return TRUE;
-    // The confusion-flavor berries fire at a quarter of max HP, which Belly
-    // Drum never reaches on its own. Gluttony moves that trigger to half,
-    // which is exactly where Belly Drum leaves the user.
-    return holdEffect == HOLD_EFFECT_CONFUSE_FLAVOR && ability == ABILITY_GLUTTONY;
-}
-
-static bool32 DoesPresetWantEvenHp(const struct EmeraldChampionsBattleSet *preset)
-{
-    if (!DoesItemNeedEvenHp(preset->item, preset->ability))
-        return FALSE;
-    for (u32 i = 0; i < MAX_MON_MOVES; i++)
-    {
-        if (preset->moves[i] == MOVE_BELLY_DRUM)
-            return TRUE;
-    }
-    return FALSE;
-}
-
-static bool32 DoesMonWantEvenHp(struct Pokemon *mon)
-{
-    if (!DoesItemNeedEvenHp(GetMonData(mon, MON_DATA_HELD_ITEM), GetMonAbility(mon)))
-        return FALSE;
-    for (u32 i = 0; i < MAX_MON_MOVES; i++)
-    {
-        if (GetMonData(mon, MON_DATA_MOVE1 + i) == MOVE_BELLY_DRUM)
-            return TRUE;
-    }
-    return FALSE;
-}
-
-bool32 TryNormalizeEmeraldChampionsBellyDrumHpParity(struct Pokemon *mon)
-{
-    static const s8 nudges[] = {0, 1, -1, 2, -2};
-    u32 hpPoints;
-    u32 anchorHpPoints;
-    s32 choice;
-    u32 total = 0;
-    u32 currentHp;
-    u32 oldMaxHp;
-    u8 value;
-
-    if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_NONE
-     || GetMonData(mon, MON_DATA_IS_EGG)
-     || !DoesMonWantEvenHp(mon))
-        return FALSE;
-    oldMaxHp = GetMonData(mon, MON_DATA_MAX_HP);
-    if ((oldMaxHp & 1) == 0)
-        return FALSE;
-
-    hpPoints = GetMonData(mon, MON_DATA_HP_EV);
-    anchorHpPoints = hpPoints;
-    choice = GetEmeraldChampionsCurrentBattleSetChoice(mon);
-    if (choice >= 0)
-        anchorHpPoints = GetEmeraldChampionsBattleSetPresetForFormat(
-            mon, choice, EC_BATTLE_FORMAT_DOUBLES)->statPoints[STAT_HP];
-    else
-    {
-        choice = GetEmeraldChampionsCurrentBattleSetChoiceForFormat(mon, EC_BATTLE_FORMAT_SINGLES);
-        if (choice >= 0)
-            anchorHpPoints = GetEmeraldChampionsBattleSetPresetForFormat(
-                mon, choice, EC_BATTLE_FORMAT_SINGLES)->statPoints[STAT_HP];
-    }
-    for (u32 stat = 0; stat < NUM_STATS; stat++)
-        total += GetMonData(mon, MON_DATA_HP_EV + stat);
-    currentHp = GetMonData(mon, MON_DATA_HP);
-
-    // Anchor recognized sets to their authored investment. Using the current
-    // investment lets successive Leveler visits accumulate deviations beyond
-    // the recognition tolerance. Custom spreads retain their current anchor.
-    for (u32 i = 0; i < ARRAY_COUNT(nudges); i++)
-    {
-        s32 target = (s32)anchorHpPoints + nudges[i];
-        s32 nudge = target - (s32)hpPoints;
-
-        if (target < 0 || target > EC_STAT_POINTS_PER_STAT || (s32)total + nudge > EC_STAT_POINT_BUDGET)
-            continue;
-        value = target;
-        SetMonData(mon, MON_DATA_HP_EV, &value);
-        CalculateMonStats(mon);
-        if ((GetMonData(mon, MON_DATA_MAX_HP) & 1) == 0)
-        {
-            u32 newMaxHp = GetMonData(mon, MON_DATA_MAX_HP);
-            u32 newHp = currentHp == oldMaxHp ? newMaxHp : min(currentHp, newMaxHp);
-
-            SetMonData(mon, MON_DATA_HP, &newHp);
-            return TRUE;
-        }
-    }
-
-    value = hpPoints;
-    SetMonData(mon, MON_DATA_HP_EV, &value);
-    CalculateMonStats(mon);
-    SetMonData(mon, MON_DATA_HP, &currentHp);
-    return FALSE;
-}
-
-const u8 gEmeraldChampionsStatPointOrder[NUM_STATS] =
+const u8 gEmeraldChampionsEvOrder[NUM_STATS] =
 {
     STAT_HP,
     STAT_ATK,
@@ -576,12 +470,8 @@ static bool32 DoesMonMatchPreset(struct Pokemon *mon, const struct EmeraldChampi
 
     for (u32 stat = 0; stat < NUM_STATS; stat++)
     {
-        s32 diff = (s32)GetMonData(mon, EC_STAT_POINT_DATA(stat)) - preset->statPoints[stat];
+        s32 diff = (s32)GetMonData(mon, EC_EV_DATA(stat)) - preset->evs[stat];
 
-        // The parity re-landing may move HP by up to two points; the set is
-        // still the authored set.
-        if (stat == 0 && diff >= -2 && diff <= 2 && DoesPresetWantEvenHp(preset))
-            continue;
         if (diff != 0)
             return FALSE;
     }
@@ -619,7 +509,7 @@ static u8 ApplyPreset(
     enum Item currentItem = GetMonData(mon, MON_DATA_HELD_ITEM);
     bool32 protectedItemHeld;
     u32 abilitySlot;
-    u8 ppBonuses = 0;
+    u8 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
     u8 perfectIv = MAX_PER_STAT_IVS;
 
     if (species == SPECIES_NONE || species == SPECIES_EGG || species >= NUM_SPECIES || preset == NULL)
@@ -665,9 +555,15 @@ static u8 ApplyPreset(
             return EC_BATTLE_SET_FAILED;
     }
 
-    SetMonData(mon, MON_DATA_PP_BONUSES, &ppBonuses);
     for (u32 i = 0; i < MAX_MON_MOVES; i++)
         SetMonMoveSlot(mon, preset->moves[i], i);
+    // Bought PP upgrades stay with their move slots when changing a set.
+    SetMonData(mon, MON_DATA_PP_BONUSES, &ppBonuses);
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+    {
+        u8 pp = CalculatePPWithBonus(preset->moves[i], ppBonuses, i);
+        SetMonData(mon, MON_DATA_PP1 + i, &pp);
+    }
     // Normalize move-driven forms even when the authored move already occupied
     // the same slot and SetMonMoveSlot therefore had no transition to observe.
     for (u32 i = 0; i < MAX_MON_MOVES; i++)
@@ -675,7 +571,7 @@ static u8 ApplyPreset(
     SetMonData(mon, MON_DATA_HIDDEN_NATURE, &preset->nature);
     SetMonData(mon, MON_DATA_ABILITY_NUM, &abilitySlot);
     for (u32 stat = 0; stat < NUM_STATS; stat++)
-        SetMonData(mon, EC_STAT_POINT_DATA(stat), &preset->statPoints[stat]);
+        SetMonData(mon, EC_EV_DATA(stat), &preset->evs[stat]);
     for (u32 stat = 0; stat < NUM_STATS; stat++)
         SetMonData(mon, MON_DATA_HP_IV + stat, &perfectIv);
     if (!(preserveProtectedItemInPlace && protectedItemHeld))
@@ -686,7 +582,6 @@ static u8 ApplyPreset(
             SetMonData(mon, MON_DATA_HELD_ITEM, &preset->item);
     }
     CalculateMonStats(mon);
-    TryNormalizeEmeraldChampionsBellyDrumHpParity(mon);
 
     if (preset->requiredItem == ITEM_NONE)
         return EC_BATTLE_SET_SUCCESS;
@@ -776,4 +671,26 @@ u8 ApplyEmeraldChampionsOpponentSet(struct Pokemon *mon, u8 rawChoice)
         FALSE,
         FALSE
     );
+}
+
+// Build this from the actual supplied sets once, including berries. Taking a
+// free item off a prepared Pokémon must not bypass the catalogue sale rule.
+bool32 IsEmeraldChampionsFreePresetItem(enum Item item)
+{
+    static EWRAM_DATA u8 freeItems[(ITEMS_COUNT + 7) / 8] = {0};
+    static EWRAM_DATA bool8 initialized = FALSE;
+    if (!initialized)
+    {
+        for (u32 species = 1; species < NUM_SPECIES; species++)
+            for (u32 format = EC_BATTLE_FORMAT_DOUBLES; format <= EC_BATTLE_FORMAT_SINGLES; format++)
+                for (u32 choice = 0; choice < GetEmeraldChampionsRawBattleSetCountForFormat(species, format); choice++)
+                {
+                    const struct EmeraldChampionsBattleSet *preset = GetEmeraldChampionsRawBattleSetForFormat(species, choice, format);
+                    enum Item supplied = preset->item;
+                    if (supplied != ITEM_NONE && !IsEmeraldChampionsProtectedProgressionItem(supplied))
+                        freeItems[supplied / 8] |= 1 << (supplied % 8);
+                }
+        initialized = TRUE;
+    }
+    return item < ITEMS_COUNT && (freeItems[item / 8] & (1 << (item % 8)));
 }

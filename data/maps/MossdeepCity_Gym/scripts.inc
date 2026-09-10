@@ -81,7 +81,6 @@ MossdeepCity_Gym_EventScript_TateAndLizaDefeated::
 	clearflag FLAG_UNKNOWN_0x393
 	setvar VAR_0x8008, 7
 	call Common_EventScript_SetGymTrainers
-	clearflag FLAG_HIDE_SLATEPORT_CITY_HARBOR_PATRONS
 	clearflag FLAG_HIDE_MOSSDEEP_CITY_TEAM_MAGMA
 	clearflag FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_1F_TEAM_MAGMA
 	clearflag FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_2F_TEAM_MAGMA
@@ -397,100 +396,102 @@ MossdeepCity_Gym_Text_GymGuidePostVictory:
 	.string "You're one great TRAINER!$"
 
 MossdeepCity_Gym_Text_PrestonIntro:
-	.string "MAGIC GUARD means ALAKAZAM pays no\n"
-	.string "price for anything it does.\p"
-	.string "Hit it directly, or not at all!$"
+	.string "MAGIC GUARD protects ALAKAZAM from\n"
+	.string "poison damage and hazards.\p"
+	.string "You'll need a more direct approach!$"
 
 MossdeepCity_Gym_Text_PrestonDefeat:
-	.string "You refused to repeat yourself!$"
+	.string "I couldn't read your next move.$"
 
 MossdeepCity_Gym_Text_PrestonPostBattle:
-	.string "Never use a setup move beside ENCORE.\n"
-	.string "Attack, or switch the locked partner.$"
+	.string "MAGIC GUARD doesn't stop paralysis\n"
+	.string "or sleep. Damage isn't everything.$"
 
 MossdeepCity_Gym_Text_VirgilIntro:
-	.string "MEDICHAM buys one turn with FAKE OUT.\n"
-	.string "BRONZONG spends it on TRICK ROOM.\p"
-	.string "Then the slowest hits first!$"
+	.string "BRONZONG changes our pace with ROOM.\n"
+	.string "MUSHARNA makes you fear sleep.\p"
+	.string "Slow doesn't mean harmless!$"
 
 MossdeepCity_Gym_Text_VirgilDefeat:
-	.string "You stopped the ROOM before it opened!$"
+	.string "Our timing wasn't enough…$"
 
 MossdeepCity_Gym_Text_VirgilPostBattle:
-	.string "Protect the FAKE OUT turn and the ROOM\n"
-	.string "never happens. Reverse it if it does.$"
+	.string "TRICK ROOM lasts five turns. You can\n"
+	.string "reverse it, or endure until it ends.$"
 
 MossdeepCity_Gym_Text_BlakeIntro:
-	.string "GIRAFARIG's THUNDER WAVE and MR. MIME's\n"
-	.string "ICY WIND both attack your speed.\p"
-	.string "Two ways to be slow. Pick neither!$"
+	.string "MEOWSTIC's screens shelter METANG.\n"
+	.string "KLEFKI and MR. MIME can slow you down.\p"
+	.string "Can you keep the pressure on?$"
 
 MossdeepCity_Gym_Text_BlakeDefeat:
-	.string "You kept your speed through both!$"
+	.string "Our defenses couldn't hold.$"
 
 MossdeepCity_Gym_Text_BlakePostBattle:
-	.string "A paralyzed partner can still switch.\n"
-	.string "Bring the fresh one back in later.$"
+	.string "BRICK BREAK removes our screens.\n"
+	.string "Critical hits can bypass them, too.$"
 
 MossdeepCity_Gym_Text_HannahIntro:
-	.string "SHARPNESS cuts half again as deep,\n"
-	.string "and GALLADE swings twice as well.\p"
-	.string "Every blade here is physical!$"
+	.string "BRUXISH bites. MALAMAR gets stronger\n"
+	.string "when SUPERPOWER should weaken it.\p"
+	.string "Our blades aren't our only weapons!$"
 
 MossdeepCity_Gym_Text_HannahDefeat:
-	.string "You broke the screens first!$"
+	.string "Even our sharpest edge fell short.$"
 
 MossdeepCity_Gym_Text_HannahPostBattle:
-	.string "NASTY PLOT doubles the damage each\n"
-	.string "turn. Never give AZELF a free one.$"
+	.string "Burns hinder my physical attackers.\n"
+	.string "But ESPATHRA attacks another way.$"
 
 MossdeepCity_Gym_Text_SamanthaIntro:
 	.string "GOTHITELLE closes the exit. AZELF\n"
 	.string "plots, and then ends the board.\p"
-	.string "You cannot run from this one!$"
+	.string "Switching won't be so simple!$"
 
 MossdeepCity_Gym_Text_SamanthaDefeat:
-	.string "You barely switched at all!$"
+	.string "I couldn't keep you in my grasp.$"
 
 MossdeepCity_Gym_Text_SamanthaPostBattle:
 	.string "MAGIC BOUNCE returns your hazards and\n"
-	.string "sleep. Attack through XATU instead.$"
+	.string "sleep. ESPEON still fears direct hits.$"
 
 MossdeepCity_Gym_Text_MauraIntro:
-	.string "SLOWBRO leaves and comes back whole.\n"
-	.string "AMOONGUSS puts you to sleep meanwhile.\p"
-	.string "Out-wait me if you can!$"
+	.string "JYNX starts a countdown.\n"
+	.string "GOTHITELLE makes leaving difficult.\p"
+	.string "Three turns. Can you find a way out?$"
 
 MossdeepCity_Gym_Text_MauraDefeat:
-	.string "You aimed where I would be!$"
+	.string "The last note belonged to you.$"
 
 MossdeepCity_Gym_Text_MauraPostBattle:
-	.string "Spread moves ignore ALLY SWITCH.\n"
-	.string "Single-target moves gamble against it.$"
+	.string "GHOST types can leave SHADOW TAG.\n"
+	.string "SOUNDPROOF blocks PERISH SONG.\p"
+	.string "A well-timed pivot can escape, too.$"
 
 MossdeepCity_Gym_Text_SylviaIntro:
-	.string "TATSUGIRI climbs inside DONDOZO,\n"
-	.string "and what comes out is far worse.\p"
-	.string "Stop the little one first!$"
+	.string "INDEEDEE and SIGILYPH open for us.\n"
+	.string "DONDOZO and TATSUGIRI wait in reserve.\p"
+	.string "Save an answer for their partnership!$"
 
 MossdeepCity_Gym_Text_SylviaDefeat:
-	.string "You silenced the second ERUPTION!$"
+	.string "Even our reserve plan wasn't enough.$"
 
 MossdeepCity_Gym_Text_SylviaPostBattle:
-	.string "Lower TORKOAL's HP and ERUPTION fades.\n"
-	.string "KO or TAUNT ORANGURU before it teaches.$"
+	.string "Inside DONDOZO, TATSUGIRI can't be hit.\n"
+	.string "HAZE can clear DONDOZO's boosts.$"
 
 MossdeepCity_Gym_Text_NateIntro:
-	.string "METAGROSS resists half of what you\n"
-	.string "own, and MIMIKYU gets a free turn.\p"
-	.string "Break the disguise early!$"
+	.string "METAGROSS is tough to break\n"
+	.string "through, and MIMIKYU hides behind\l"
+	.string "its DISGUISE.\p"
+	.string "Can you get past both of them?$"
 
 MossdeepCity_Gym_Text_NateDefeat:
-	.string "You hit the star before it shone!$"
+	.string "We ran out of answers.$"
 
 MossdeepCity_Gym_Text_NatePostBattle:
-	.string "An attacker beside support is strong\n"
-	.string "and fragile. Remove the support first.$"
+	.string "Breaking DISGUISE is only a start.\n"
+	.string "MIMIKYU still needs a second answer.$"
 
 MossdeepCity_Gym_Text_KathleenIntro:
 	.string "I am the last door before the twins.\p"
@@ -499,47 +500,49 @@ MossdeepCity_Gym_Text_KathleenIntro:
 	.string "Prove you belong in there!$"
 
 MossdeepCity_Gym_Text_KathleenDefeat:
-	.string "You found the move that fed nothing!$"
+	.string "You've earned your way to the twins.$"
 
 MossdeepCity_Gym_Text_KathleenPostBattle:
-	.string "STORED POWER grows with every boost.\n"
-	.string "Never let SWOOBAT set up twice.$"
+	.string "LATIAS can recover and use CALM MIND.\n"
+	.string "Don't let a long battle favor it.$"
 
 MossdeepCity_Gym_Text_CliffordIntro:
-	.string "PINCURCHIN's terrain doubles RAICHU's\n"
-	.string "speed. ESPATHRA gets faster every turn.\p"
+	.string "PINCURCHIN's terrain doubles\n"
+	.string "RAICHU's speed. ESPATHRA gets\l"
+	.string "faster every turn.\p"
 	.string "Keep up if you can!$"
 
 MossdeepCity_Gym_Text_CliffordDefeat:
-	.string "You turned the terrain off!$"
+	.string "We couldn't keep ahead of you.$"
 
 MossdeepCity_Gym_Text_CliffordPostBattle:
-	.string "Overwrite ELECTRIC TERRAIN and SURGE\n"
-	.string "SURFER becomes an ordinary RAICHU.$"
+	.string "Replacing ELECTRIC TERRAIN removes\n"
+	.string "RAICHU's SURGE SURFER speed boost.$"
 
 MossdeepCity_Gym_Text_MaceyIntro:
 	.string "FERROTHORN and TOXAPEX do not fall.\n"
-	.string "DELPHOX takes the item that would help.\p"
+	.string "DELPHOX brings firepower in reserve.\p"
 	.string "Bring fire, or bring patience!$"
 
 MossdeepCity_Gym_Text_MaceyDefeat:
-	.string "You attacked through the sleep!$"
+	.string "Our patience finally ran out.$"
 
 MossdeepCity_Gym_Text_MaceyPostBattle:
-	.string "Wake-up plans lose to attack plans.\n"
-	.string "Remove the sleeper before it moves.$"
+	.string "TOXAPEX can erase boosts with HAZE.\n"
+	.string "TAUNT can restrict its recovery, too.$"
 
 MossdeepCity_Gym_Text_NicholasIntro:
-	.string "LATIOS moves before you do, and\n"
-	.string "AEGISLASH punishes your reply.\p"
-	.string "Choose your swing carefully!$"
+	.string "LATIOS is quick, and AEGISLASH\n"
+	.string "can make a careless attack\l"
+	.string "costly.\p"
+	.string "Choose your moment!$"
 
 MossdeepCity_Gym_Text_NicholasDefeat:
-	.string "You broke the ROOM through the redirect!$"
+	.string "You found your way past our blades.$"
 
 MossdeepCity_Gym_Text_NicholasPostBattle:
-	.string "FOLLOW ME cannot pull spread attacks.\n"
-	.string "Hit both slots and the ROOM never opens.$"
+	.string "INTIMIDATE helps CONTRARY MALAMAR.\n"
+	.string "A burn is a safer way to weaken it.$"
 
 MossdeepCity_Gym_Text_NeedFeatherBadge:
 	.string "TATE: Your path still bends west.\n"
@@ -548,16 +551,21 @@ MossdeepCity_Gym_Text_NeedFeatherBadge:
 	.string "we'll accept your challenge.$"
 
 MossdeepCity_Gym_Text_TateAndLizaIntro:
-	.string "TATE: We share one board.\n"
-	.string "LIZA: But we can give it two move orders.\p"
-	.string "TATE: Psychic Terrain denies priority.\n"
-	.string "LIZA: TRICK ROOM punishes speed.\p"
-	.string "TATE: Break our timing...\n"
-	.string "LIZA: ...before the ice rider closes it.$"
+	.string "TATE: We grew up battling\n"
+	.string "together.\l"
+	.string "LIZA: We know when to help each\l"
+	.string "other.\p"
+	.string "TATE: Psychic Terrain protects\n"
+	.string "grounded partners from priority\l"
+	.string "moves.\p"
+	.string "LIZA: And under TRICK ROOM…\n"
+	.string "TATE: …the slowest may move\l"
+	.string "first!\p"
+	.string "BOTH: Ready to face us?$"
 
 MossdeepCity_Gym_Text_TateAndLizaDefeat:
-	.string "TATE: You broke the room...\n"
-	.string "LIZA: ...without losing the board.\p"
+	.string "TATE: We shared our strength...\n"
+	.string "LIZA: ...and you still overcame us.\p"
 	.string "TATE: You earned...\n"
 	.string "LIZA: ...the MIND BADGE.$"
 
@@ -580,8 +588,10 @@ MossdeepCity_Gym_Text_RegisteredTateAndLiza:
 	.string "in the POKéNAV.$"
 
 MossdeepCity_Gym_Text_TateAndLizaPostBattle:
-	.string "TATE: The SPACE CENTER detected a wish...\n"
-	.string "LIZA: ...inside METEOR FALLS. Ask STEVEN.$"
+	.string "TATE: A wish sleeps deep inside\n"
+	.string "METEOR FALLS.\p"
+	.string "LIZA: Explore beyond its waterfall.\n"
+	.string "You may find JIRACHI there.$"
 
 MossdeepCity_Gym_Text_TateAndLizaNeedTwoMons:
 	.string "TATE: Hehehe… Were you surprised?\p"

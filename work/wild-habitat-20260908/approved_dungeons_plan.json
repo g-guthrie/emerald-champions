@@ -1,0 +1,853 @@
+{
+  "MAP_ALTERING_CAVE": {
+    "methods": {
+      "land_mons": [
+        "DITTO",
+        "DITTO",
+        "ZORUA",
+        "ZORUA",
+        "ZOROARK",
+        "ZOROARK",
+        "DITTO",
+        "UNOWN",
+        "UNOWN",
+        "UNOWN",
+        "ZOROARK",
+        "UNOWN"
+      ]
+    },
+    "note": "Change only the original entrance default population: Ditto 33%, Zorua 21%, Zoroark 23%, Unown 23%. The eight selector alternatives remain untouched; Zubat remains in earlier ordinary caves."
+  },
+  "MAP_ALTERING_CAVE_1F": {
+    "methods": {
+      "land_mons": [
+        "PORYGON2",
+        "PORYGON_Z",
+        "REUNICLUS",
+        "LUCARIO",
+        "SHIINOTIC",
+        "WOBBUFFET",
+        "PORYGON2",
+        "REUNICLUS",
+        "SWOOBAT",
+        "PORYGON_Z",
+        "BLISSEY",
+        "SPIRITOMB"
+      ]
+    },
+    "note": "Artificial and psychic residents lead: Porygon2 21%, Porygon-Z 17%, Reuniclus 18%. Lucario stays in its 10% slot and Blissey in its 5% slot; Shiinotic, Swoobat, Wobbuffet and Spiritomb support the room. Displaced ordinary cave families retain regional homes; Rock Smash and hidden tables are unchanged."
+  },
+  "MAP_ALTERING_CAVE_B1F": {
+    "methods": {
+      "land_mons": [
+        "SPIRITOMB",
+        "DRUDDIGON",
+        "DRUDDIGON",
+        "MALAMAR",
+        "PARASECT",
+        "WOBBUFFET",
+        "GUZZLORD",
+        "MALAMAR",
+        "EELEKTROSS",
+        "STEELIX",
+        "BLISSEY",
+        "SPIRITOMB"
+      ],
+      "water_mons": [
+        "BASCULEGION",
+        "JELLICENT",
+        "SLOWBRO",
+        "MALAMAR",
+        "DRATINI"
+      ],
+      "good_rod": [
+        "MALAMAR",
+        "JELLICENT",
+        "SLOWBRO"
+      ],
+      "super_rod": [
+        "CRAWDAUNT",
+        "BASCULEGION",
+        "JELLICENT",
+        "SEISMITOAD",
+        "FEEBAS"
+      ]
+    },
+    "note": "Guzzlord retains its exact 8% slot, surrounded by Druddigon 23%, Spiritomb 18% and Malamar 17%. Basculegion/Jellicent define the pond and stronger rods, with Malamar tying the methods together. Lucario remains in the adjacent 1F wing; Blissey and Eelektross retain their original basement slots. Rock Smash, Old Rod and hidden tables are unchanged."
+  },
+  "MAP_ARTISAN_CAVE_1F": {
+    "methods": {
+      "land_mons": [
+        "SMEARGLE",
+        "SMEARGLE",
+        "SMEARGLE",
+        "SMEARGLE",
+        "SMEARGLE",
+        "CHATOT",
+        "GLIGAR",
+        "SABLEYE",
+        "MAWILE",
+        "MR_MIME",
+        "CARBINK",
+        "WOBBUFFET"
+      ]
+    },
+    "note": "Replace only Woobat with Chatot and Aron with Mr. Mime; Smeargle remains exactly 56% and the other slots retain their residents. Woobat and Aron keep their earlier regional cave homes."
+  },
+  "MAP_ARTISAN_CAVE_B1F": {
+    "methods": {
+      "land_mons": [
+        "SMEARGLE",
+        "SMEARGLE",
+        "SMEARGLE",
+        "DITTO",
+        "ORICORIO",
+        "CARBINK",
+        "WOBBUFFET",
+        "SMEARGLE",
+        "SMEARGLE",
+        "SMEARGLE",
+        "DITTO",
+        "ORICORIO"
+      ]
+    },
+    "note": "Smeargle remains exactly 54%. Replace both Sableye slots with Ditto and both Mawile slots with the existing ordinary Oricorio form, giving each distinctive companion 15%; Sableye/Mawile remain on 1F."
+  },
+  "MAP_CAVE_OF_ORIGIN_ENTRANCE": {
+    "methods": {
+      "land_mons": [
+        "SABLEYE",
+        "MAWILE",
+        "CARBINK",
+        "CARBINK",
+        "GLIMMET",
+        "GLIMMORA",
+        "NOIVERN",
+        "TINKATINK",
+        "GLIMMET",
+        "DRUDDIGON",
+        "GABITE",
+        "DURALUDON"
+      ]
+    },
+    "note": "Keep Noivern as the one bat line and retain Sableye/Mawile. Replace redundant Noibat/Golbat with Glimmet/Glimmora and Boldore with Carbink; Carbink reaches 21%, Glimmet 16%. Noibat and Boldore retain other direct catches; Golbat becomes evolution-only through existing early Zubat encounters."
+  },
+  "MAP_CAVE_OF_ORIGIN_1F": {
+    "methods": {
+      "land_mons": [
+        "GLIMMORA",
+        "CLAYDOL",
+        "CARBINK",
+        "GIGALITH",
+        "NOIVERN",
+        "DRUDDIGON",
+        "WALKING_WAKE",
+        "GLIMMORA",
+        "GABITE",
+        "TINKATUFF",
+        "GOODRA",
+        "DRAKLOAK"
+      ]
+    },
+    "note": "Walking Wake retains its exact map and 8% slot. Glimmora becomes 20% while Claydol and Gigalith replace the repeated Mawile/Boldore positions; every other main-floor discovery stays in its original slot. Sableye/Mawile remain in the entrance and the unchanged gem room."
+  },
+  "MAP_CAVE_OF_ORIGIN_UNUSED_RUBY_SAPPHIRE_MAP1": {
+    "methods": {
+      "land_mons": [
+        "GLIMMORA",
+        "GLIMMORA",
+        "CARBINK",
+        "GLIMMORA",
+        "CARBINK",
+        "GLIMMET",
+        "GLIMMET",
+        "TINKATINK",
+        "GABITE",
+        "DURALUDON",
+        "SABLEYE",
+        "MAWILE"
+      ]
+    },
+    "note": "A focused mineral colony makes this connected side chamber worthwhile: Glimmora 35%, Carbink 21%, Glimmet 16%, with Tinkatink, Gabite, Duraludon and the gem dwellers. Goodra/Drakloak and the displaced bats/dragons remain on the main floor or earlier regional maps."
+  },
+  "MAP_CAVE_OF_ORIGIN_UNUSED_RUBY_SAPPHIRE_MAP2": {
+    "methods": {
+      "land_mons": [
+        "ARCHALUDON",
+        "METAGROSS",
+        "TINKATON",
+        "ARCHALUDON",
+        "METAGROSS",
+        "TINKATON",
+        "GLIMMORA",
+        "TINKATUFF",
+        "GABITE",
+        "ARCHALUDON",
+        "GOODRA",
+        "DRAKLOAK"
+      ]
+    },
+    "note": "Finished mineral and metal partners dominate: Archaludon 28%, Metagross 22%, Tinkaton 19%. Retain Glimmora, Tinkatuff, Gabite, Goodra and Drakloak in their native positions. Earlier Duraludon, Beldum/Metang and Tinkatink/Tinkatuff access stays intact."
+  },
+  "MAP_CAVE_OF_ORIGIN_UNUSED_RUBY_SAPPHIRE_MAP3": {
+    "methods": {
+      "land_mons": [
+        "CLEFABLE",
+        "METANG",
+        "SIGILYPH",
+        "MINIOR",
+        "ELGYEM",
+        "BEHEEYEM",
+        "CLEFABLE",
+        "METANG",
+        "MINIOR",
+        "SIGILYPH",
+        "ELGYEM",
+        "BEHEEYEM"
+      ]
+    },
+    "note": "The celestial side chamber receives Route121 Elgyem/Beheeyem at 15%/13%, alongside Clefable 21%, Metang 19%, Sigilyph 16% and Minior 16%. All displaced mineral and dragon families retain earlier main/side-room encounters; the unchanged Diancie room retains its Carbink colony."
+  },
+  "MAP_EMBER_PATH": {
+    "methods": {
+      "land_mons": [
+        "MAGCARGO",
+        "MAGMAR",
+        "BOLDORE",
+        "CHANDELURE",
+        "HEATMOR",
+        "LARVESTA",
+        "BLACEPHALON",
+        "TAUROS_PALDEA_BLAZE",
+        "COALOSSAL",
+        "CENTISKORCH",
+        "SLUGMA",
+        "CHANDELURE"
+      ]
+    },
+    "note": "Only replace the 10% Noibat slot with Chandelure, raising Chandelure to 15%. Blacephalon and Blaze Tauros keep their exact slots and maps."
+  },
+  "MAP_JAGGED_PASS": {
+    "methods": {
+      "land_mons": [
+        "PRIMEAPE",
+        "GLIGAR",
+        "GRUMPIG",
+        "SALANDIT",
+        "MUDBRAY",
+        "FEAROW",
+        "JANGMO_O",
+        "TURTONATOR",
+        "GLIGAR",
+        "MUDSDALE",
+        "ABSOL",
+        "HAKAMO_O"
+      ]
+    },
+    "note": "Keep Jangmo-o/Hakamo-o in their existing slots. Bagon becomes another Gligar slot (18% total) and Deino becomes Mudsdale (5%), supporting the existing Mudbray; Bagon/Deino retain their earlier Rusturf/Granite access."
+  },
+  "MAP_MAGMA_HIDEOUT_1F": {
+    "methods": {
+      "land_mons": [
+        "NUMEL",
+        "SLUGMA",
+        "NUMEL",
+        "DRILBUR",
+        "DRILBUR",
+        "EXCADRILL",
+        "EXCADRILL",
+        "MAGMAR",
+        "HEATMOR",
+        "TURTONATOR",
+        "CAMERUPT",
+        "COALOSSAL"
+      ]
+    },
+    "note": "Numel 24%, Drilbur 20% and Excadrill 16% establish the mining entrance by replacing the generic Geodude/Zubat/Koffing repeats. Slugma and every existing evolved fire discovery retain their native positions; displaced families remain in earlier caves/Fiery Path and other hideout rooms."
+  },
+  "MAP_MAGMA_HIDEOUT_2F_1R": {
+    "methods": {
+      "land_mons": [
+        "EXCADRILL",
+        "COALOSSAL",
+        "EXCADRILL",
+        "COALOSSAL",
+        "DRILBUR",
+        "TORKOAL",
+        "EXCADRILL",
+        "MAGMAR",
+        "HEATMOR",
+        "TURTONATOR",
+        "CAMERUPT",
+        "COALOSSAL"
+      ]
+    },
+    "note": "Excadrill 32% and Coalossal 27% define the excavation chamber, supported by Drilbur and Torkoal rather than five entrance repeats. Magmar, Heatmor, Turtonator and Camerupt retain their native slots; the removed young cave species remain earlier in the region."
+  },
+  "MAP_MAGMA_HIDEOUT_2F_2R": {
+    "methods": {
+      "land_mons": [
+        "KOFFING",
+        "GRIMER",
+        "WEEZING",
+        "SALAZZLE",
+        "MUK",
+        "WEEZING",
+        "EXCADRILL",
+        "SALAZZLE",
+        "SALANDIT",
+        "HOUNDOUR",
+        "WEEZING",
+        "HOUNDOOM"
+      ]
+    },
+    "note": "Replace Noibat with Muk; Weezing reaches 24% and Salazzle 17%, while Koffing/Grimer remain the leading original residents. Retain Salandit and Houndour for direct young-form catches in this hideout, plus Excadrill and Houndoom."
+  },
+  "MAP_MAGMA_HIDEOUT_2F_3R": {
+    "methods": {
+      "land_mons": [
+        "HOUNDOOM",
+        "CAMERUPT",
+        "SALAZZLE",
+        "HOUNDOOM",
+        "CAMERUPT",
+        "KOFFING",
+        "CAMERUPT",
+        "MAGMAR",
+        "SALANDIT",
+        "HEATMOR",
+        "HOUNDOOM",
+        "SALAZZLE"
+      ]
+    },
+    "note": "Camerupt 30%, Houndoom 28% and Salazzle 16% replace the repeated low-stage/bat population. Koffing, Magmar, Salandit and Heatmor remain; Houndour is retained in 2F Room2 and earlier volcanic habitats."
+  },
+  "MAP_MAGMA_HIDEOUT_3F_1R": {
+    "methods": {
+      "land_mons": [
+        "CAMERUPT",
+        "MAGCARGO",
+        "COALOSSAL",
+        "TORKOAL",
+        "EXCADRILL",
+        "TURTONATOR",
+        "MAGMAR",
+        "HOUNDOOM",
+        "TURTONATOR",
+        "COALOSSAL",
+        "DARMANITAN",
+        "VOLCARONA"
+      ]
+    },
+    "note": "Replace Noibat/Graveler with Coalossal/Torkoal and the repeated Weezing slot with Turtonator, yielding Coalossal 16% and Turtonator 14%. Preserve Camerupt, Darmanitan, Volcarona and the other mature fire catches in their original slots."
+  },
+  "MAP_MAGMA_HIDEOUT_3F_2R": {
+    "methods": {
+      "land_mons": [
+        "CHANDELURE",
+        "CERULEDGE",
+        "CHANDELURE",
+        "CERULEDGE",
+        "EXCADRILL",
+        "HOUNDOOM",
+        "MAGMAR",
+        "TURTONATOR",
+        "COALOSSAL",
+        "DARMANITAN",
+        "VOLCARONA",
+        "CHANDELURE"
+      ]
+    },
+    "note": "Chandelure 29% and Ceruledge 22% define a ghost/fire chamber by replacing the first four repeats from the furnace room. Excadrill, Houndoom, Magmar, Turtonator, Coalossal, Darmanitan and Volcarona retain their slots and earlier availability."
+  },
+  "MAP_MAGMA_HIDEOUT_3F_3R": {
+    "methods": {
+      "land_mons": [
+        "VOLCARONA",
+        "CENTISKORCH",
+        "VOLCARONA",
+        "WEEZING",
+        "CENTISKORCH",
+        "HOUNDOOM",
+        "MAGMAR",
+        "TURTONATOR",
+        "SALAZZLE",
+        "HEATMOR",
+        "LARVESTA",
+        "CHANDELURE"
+      ]
+    },
+    "note": "Volcarona 24% and Centiskorch 22% replace Camerupt/Magcargo/Noibat and one excavator repeat. Keep Larvesta and Salazzle in their exact 5%/6% positions and retain the remaining evolved fire companions; displaced families remain in earlier hideout rooms."
+  },
+  "MAP_METEOR_FALLS_1F_1R": {
+    "methods": {
+      "water_mons": [
+        "BUIZEL",
+        "WHISCASH",
+        "FLOATZEL",
+        "DREDNAW",
+        "DRATINI"
+      ],
+      "good_rod": [
+        "CRAWDAUNT",
+        "WHISCASH",
+        "BUIZEL"
+      ],
+      "super_rod": [
+        "FLOATZEL",
+        "WHISCASH",
+        "CRAWDAUNT",
+        "DREDNAW",
+        "DRATINI"
+      ]
+    },
+    "note": "Keep all land encounters and the Old Rod unchanged. Floatzel joins Buizel/Whiscash Surf; the Good Rod develops Buizel/Whiscash alongside Crawdaunt, and the Super Rod features Floatzel/Whiscash with Crawdaunt, Drednaw and the existing Dratini slot."
+  },
+  "MAP_METEOR_FALLS_1F_2R": {
+    "methods": {
+      "good_rod": [
+        "WHISCASH",
+        "LAPRAS",
+        "BASCULIN"
+      ],
+      "super_rod": [
+        "MILOTIC",
+        "LAPRAS",
+        "WHISCASH",
+        "SEISMITOAD",
+        "FEEBAS"
+      ]
+    },
+    "note": "Keep the entire land roster, including Scream Tail/Ferrothorn, and keep Surf/Old Rod unchanged. Add Lapras to the Good Rod; lead the Super Rod with Milotic/Lapras and retain Seismitoad and Feebas in their native smaller slots."
+  },
+  "MAP_METEOR_FALLS_B1F_1R": {
+    "methods": {
+      "super_rod": [
+        "DRAGONAIR",
+        "KINGDRA",
+        "DRATINI",
+        "DRAGONAIR",
+        "KINGDRA"
+      ]
+    },
+    "note": "Keep the dragon Surf population and all land/earlier rods unchanged. The Super Rod becomes Dragonair 45%, Kingdra 35%, Dratini 20%; ordinary river/sea predators retain other regional encounters."
+  },
+  "MAP_METEOR_FALLS_B1F_2R": {
+    "methods": {
+      "super_rod": [
+        "SEISMITOAD",
+        "DREDNAW",
+        "KINGDRA",
+        "MILOTIC",
+        "FEEBAS"
+      ]
+    },
+    "note": "Keep every land discovery, especially Roaring Moon/Salamence/Dragonite. Only replace Super Rod Golduck/Lombre with Kingdra/Milotic, preserving the other slots and all earlier methods."
+  },
+  "MAP_MIRAGE_TOWER_2F": {
+    "methods": {
+      "land_mons": [
+        "BALTOY",
+        "DWEBBLE",
+        "ORTHWORM",
+        "BALTOY",
+        "DWEBBLE",
+        "SANDILE",
+        "SIGILYPH",
+        "DARUMAKA",
+        "KROKOROK",
+        "HONEDGE",
+        "ORTHWORM",
+        "SPIRITOMB"
+      ]
+    },
+    "note": "Baltoy 23%, Dwebble 22% and Orthworm 16% replace the repeated Yamask/Golett/Bronzor positions. Retain Krokorok, Darumaka, Honedge and Spiritomb in their original slots; the displaced relics stay on 1F/B1F."
+  },
+  "MAP_MIRAGE_TOWER_3F": {
+    "methods": {
+      "land_mons": [
+        "GOLURK",
+        "BRONZONG",
+        "GOLURK",
+        "BRONZONG",
+        "CLAYDOL",
+        "SIGILYPH",
+        "KROKOROK",
+        "GOLURK",
+        "HONEDGE",
+        "SANDACONDA",
+        "ORTHWORM",
+        "BRONZONG"
+      ]
+    },
+    "note": "Golurk 31% and Bronzong 27% lead a developed guardian population, with Claydol 10% supporting them. Keep Sigilyph/Krokorok/Honedge/Sandaconda/Orthworm; Darumaka, Dwebble, Yamask and Tinkatink remain on lower floors. The ROOT-rated-10 summit is untouched."
+  },
+  "MAP_MIRAGE_TOWER_B1F": {
+    "methods": {
+      "land_mons": [
+        "YAMASK",
+        "HONEDGE",
+        "BRONZOR",
+        "GOLETT",
+        "YAMASK",
+        "DARUMAKA",
+        "GIMMIGHOUL_CHEST",
+        "SIGILYPH",
+        "HONEDGE",
+        "SPIRITOMB",
+        "CLAYDOL",
+        "GABITE"
+      ]
+    },
+    "note": "Replace only Sandshrew/Trapinch with Yamask/Honedge, taking them to 23%/18%. Chest Gimmighoul remains on this exact map and in its 8% slot; Gabite, Spiritomb and the other treasure-room catches remain unchanged."
+  },
+  "MAP_MT_PYRE_2F": {
+    "methods": {
+      "land_mons": [
+        "SINISTEA",
+        "DUSKULL",
+        "SINISTEA_ANTIQUE",
+        "LITWICK",
+        "LITWICK",
+        "MURKROW",
+        "HAUNTER",
+        "PHANTUMP",
+        "GREAVARD",
+        "SINISTEA_ANTIQUE",
+        "BANETTE",
+        "DUSCLOPS"
+      ]
+    },
+    "note": "Sinistea 13%, Antique Sinistea 16% and Litwick 20% replace three ordinary lower-floor ghost repeats. Duskull retains its exact 12% slot here and its unchanged tower home; the Antique form becomes easier to find without removing other forms regionally."
+  },
+  "MAP_MT_PYRE_5F": {
+    "methods": {
+      "land_mons": [
+        "DRIFBLIM",
+        "POLTCHAGEIST",
+        "LAMPENT",
+        "MIMIKYU",
+        "HAUNTER",
+        "POLTCHAGEIST",
+        "DRIFBLIM",
+        "PHANTUMP",
+        "GREAVARD",
+        "POLTCHAGEIST_ARTISAN",
+        "DUSKNOIR",
+        "CHANDELURE"
+      ]
+    },
+    "note": "Drifblim 21% and ordinary Poltchageist 20% replace the leading Banette/Dusclops repeats and Noibat. Artisan Poltchageist remains in its exact 5% slot, and Dusknoir/Chandelure retain theirs; Banette/Dusclops remain common on unchanged 4F."
+  },
+  "MAP_MT_PYRE_SUMMIT": {
+    "methods": {
+      "land_mons": [
+        "VULPIX",
+        "MEDICHAM",
+        "DRIFBLIM",
+        "BRONZONG",
+        "CHIMECHO",
+        "NINETALES",
+        "FLUTTER_MANE",
+        "BEHEEYEM",
+        "ZORUA_HISUI",
+        "CORSOLA_GALAR",
+        "ABSOL",
+        "HOUNDSTONE"
+      ]
+    },
+    "note": "Only replace the 8% Growlithe slot with Ninetales; Flutter Mane and every other summit slot remain unchanged. Growlithe/Vulpix retain their earlier exterior encounters."
+  },
+  "MAP_NEW_MAUVILLE_ENTRANCE": {
+    "methods": {
+      "land_mons": [
+        "MAGNEMITE",
+        "VOLTORB",
+        "TOGEDEMARU",
+        "ELEKID",
+        "PORYGON",
+        "MAGNEMITE",
+        "KLINK",
+        "ELECTABUZZ",
+        "TYNAMO",
+        "PORYGON2",
+        "MAGNEZONE",
+        "IRON_THORNS"
+      ]
+    },
+    "note": "Magnemite 21%, Voltorb 12% and Togedemaru 11% establish the station entrance. Keep Elekid, Porygon, Electabuzz, Porygon2, Magnezone and Iron Thorns in their original slots; retain young Klink/Tynamo here while Klang becomes more prominent inside."
+  },
+  "MAP_NEW_MAUVILLE_INSIDE": {
+    "methods": {
+      "land_mons": [
+        "MAGNEMITE",
+        "KLANG",
+        "KLINKLANG",
+        "EELEKTRIK",
+        "EELEKTROSS",
+        "TYNAMO",
+        "IRON_HANDS",
+        "TOGEDEMARU",
+        "ELECTABUZZ",
+        "KLANG",
+        "PORYGON2",
+        "WATTREL"
+      ]
+    },
+    "note": "Klang 17%, Klinklang 11%, Eelektrik 10% and Eelektross 10% develop the machinery/generator families. Magnemite, Tynamo, Iron Hands, Wattrel, Electabuzz, Porygon2 and Togedemaru keep their native positions. Klink, Elekid and Porygon remain available at the entrance."
+  },
+  "MAP_SANDSTREWN_RUINS": {
+    "methods": {
+      "water_mons": [
+        "WOOPER",
+        "WHISCASH",
+        "GOLDUCK",
+        "RELICANTH",
+        "CHEWTLE"
+      ]
+    },
+    "note": "Only replace the cistern Swanna slot with Relicanth at 12%, following the report\u2019s preferred ancient-pool interpretation. Preserve Great Tusk, Unown, the entire relic land roster and all rods/Rock Smash."
+  },
+  "MAP_SANDSTREWN_RUINS_2F": {
+    "methods": {
+      "land_mons": [
+        "ORTHWORM",
+        "BRONZONG",
+        "BRONZONG",
+        "DARUMAKA",
+        "ORTHWORM",
+        "SIGILYPH",
+        "KROKOROK",
+        "ORTHWORM",
+        "IRON_TREADS",
+        "GABITE",
+        "SANDACONDA",
+        "TINKATINK"
+      ]
+    },
+    "note": "Orthworm 30% and Bronzong 23% replace the repeated Yamask/Golett/Honedge land slots around Iron Treads, which keeps its exact 6% slot. Young relic stages remain in the physically earlier main/B1F rooms; Rock Smash is unchanged."
+  },
+  "MAP_SANDSTREWN_RUINS_3F": {
+    "methods": {
+      "land_mons": [
+        "DOUBLADE",
+        "BRONZONG",
+        "GOLURK",
+        "DARMANITAN",
+        "DOUBLADE",
+        "SIGILYPH",
+        "SANDACONDA",
+        "CLAYDOL",
+        "CLAYDOL",
+        "DARMANITAN",
+        "KROOKODILE",
+        "SPIRITOMB"
+      ]
+    },
+    "note": "Replace exactly Yamask/Tinkatink/Gabite with Doublade/Claydol/Darmanitan, yielding 23%/13%/15%. Their younger forms retain earlier ruins encounters; all other land and Rock Smash slots are unchanged."
+  },
+  "MAP_SCORCHED_SLAB_B1F": {
+    "methods": {
+      "land_mons": [
+        "TORKOAL",
+        "MAGMAR",
+        "DUGTRIO",
+        "BOLDORE",
+        "HEATMOR",
+        "ZWEILOUS",
+        "MAGMAR",
+        "TURTONATOR",
+        "HEATMOR",
+        "DRUDDIGON",
+        "DARMANITAN",
+        "SLUGMA"
+      ],
+      "water_mons": [
+        "SLOWBRO",
+        "GOLDUCK",
+        "GASTRODON",
+        "FLOATZEL",
+        "FEEBAS"
+      ],
+      "good_rod": [
+        "SLOWBRO",
+        "GASTRODON",
+        "GOLDUCK"
+      ],
+      "super_rod": [
+        "SLOWBRO",
+        "GASTRODON",
+        "WHISCASH",
+        "QUAGSIRE",
+        "DRATINI"
+      ]
+    },
+    "note": "Replace Noibat/Gurdurr/Machoke with Torkoal/Magmar/Heatmor, creating 13%/20%/16% volcanic residents. Surf and rods establish a Slowbro/Gastrodon hot pool, replacing the exact Route102 Super Rod copy; retain Old Rod, Surf Feebas and Super Rod Dratini. Gurdurr and Machoke become evolution-only, with Timburr on Route102 and Machop in Rusturf preserving their earliest family access."
+  },
+  "MAP_SCORCHED_SLAB_B2F": {
+    "methods": {
+      "land_mons": [
+        "MAGMAR",
+        "TURTONATOR",
+        "DUGTRIO",
+        "SALAZZLE",
+        "COALOSSAL",
+        "SALAZZLE",
+        "HEATMOR",
+        "ZWEILOUS",
+        "DARMANITAN",
+        "DRUDDIGON",
+        "IRON_MOTH",
+        "COALOSSAL"
+      ]
+    },
+    "note": "Coalossal 15% and Salazzle 18% replace Noibat/Gurdurr/Boldore, strengthening the hot toxic chamber. Magmar, Turtonator and Iron Moth retain their exact slots, as do the remaining mature catches; Boldore remains in B1F."
+  },
+  "MAP_SCORCHED_SLAB_HEATRANS_ROOM": {
+    "methods": {
+      "land_mons": [
+        "MAGCARGO",
+        "MAGMAR",
+        "COALOSSAL",
+        "MAGCARGO",
+        "TURTONATOR",
+        "HEATMOR",
+        "ZWEILOUS",
+        "COALOSSAL",
+        "DARMANITAN",
+        "DRUDDIGON",
+        "TURTONATOR",
+        "LARVESTA"
+      ]
+    },
+    "note": "Replace Dugtrio/Boldore/Slugma with Coalossal/Magcargo/Turtonator, making the three volcanic anchors 18%/23%/15%. Preserve every other slot, including Larvesta; Slugma and the displaced cave residents remain outside this final chamber."
+  },
+  "MAP_SKY_PILLAR_1F": {
+    "methods": {
+      "land_mons": [
+        "GOLURK",
+        "CLAYDOL",
+        "BANETTE",
+        "DUSCLOPS",
+        "CLAYDOL",
+        "ALTARIA",
+        "GOLURK",
+        "NOIVERN",
+        "DRUDDIGON",
+        "MINIOR",
+        "BAGON",
+        "METANG"
+      ]
+    },
+    "note": "Replace the leading Sableye/Mawile slots with Golurk/Claydol, making the ancient constructs 21%/22%. Keep Minior and every stronger dragon/steel catch in its original slot; gem dwellers retain earlier cave homes."
+  },
+  "MAP_SKY_PILLAR_3F": {
+    "methods": {
+      "land_mons": [
+        "ALTARIA",
+        "NOIVERN",
+        "CLAYDOL",
+        "ALTARIA",
+        "GOLURK",
+        "NOIVERN",
+        "DRAGONAIR",
+        "DRUDDIGON",
+        "MINIOR",
+        "GABITE",
+        "SALAMENCE",
+        "METAGROSS"
+      ]
+    },
+    "note": "Replace the leading Banette/Dusclops slots with Altaria/Noivern, taking the airborne residents to 23%/20%. Dragonair and Salamence retain their exact slots; all remaining discoveries stay available here."
+  },
+  "MAP_SKY_PILLAR_5F": {
+    "methods": {
+      "land_mons": [
+        "SALAMENCE",
+        "NOIVERN",
+        "MINIOR",
+        "ALTARIA",
+        "ALTARIA",
+        "NOIVERN",
+        "DRAGONAIR",
+        "GABITE",
+        "MINIOR",
+        "DRAKLOAK",
+        "SALAMENCE",
+        "METAGROSS"
+      ]
+    },
+    "note": "A concentrated high-altitude population features Salamence 18%, Minior 17%, Altaria 20% and Noivern 20%, replacing grounded ghost/construct repeats. Dragonair, Gabite, Drakloak and Metagross keep their native slots; Dusknoir remains in Mt. Pyre and earlier strong-dragon access is untouched."
+  },
+  "MAP_VICTORY_ROAD_1F": {
+    "methods": {
+      "land_mons": [
+        "KOMMO_O",
+        "MEDICHAM",
+        "NOIVERN",
+        "MEDICHAM",
+        "KOMMO_O",
+        "GABITE",
+        "IRON_VALIANT",
+        "METAGROSS",
+        "KOMMO_O",
+        "DRAGAPULT",
+        "VOLCARONA",
+        "BAXCALIBUR"
+      ]
+    },
+    "note": "Kommo-o 29% and Medicham 22% replace Lairon/Pupitar/Noibat repeats. Iron Valiant and every already-available mature headliner retain their original slots, as does Gabite. Aron and Larvitar retain their earlier family access; Pupitar becomes evolution-only while Tyranitar becomes common on B1F."
+  },
+  "MAP_VICTORY_ROAD_B1F": {
+    "methods": {
+      "land_mons": [
+        "TYRANITAR",
+        "METAGROSS",
+        "IRON_JUGULIS",
+        "IRON_JUGULIS",
+        "TYRANITAR",
+        "METAGROSS",
+        "IRON_VALIANT",
+        "METAGROSS",
+        "KOMMO_O",
+        "DRAGAPULT",
+        "VOLCARONA",
+        "BAXCALIBUR"
+      ]
+    },
+    "note": "Tyranitar 23%, Metagross 27% and Iron Jugulis 21% define the dark/metal floor. Replace repeated Medicham/Lairon/Noivern/Pupitar/Gabite slots; retain Iron Valiant, Kommo-o, Dragapult, Volcarona and Baxcalibur in their native positions. Rock Smash Tyranitar and all earlier strong catches remain available."
+  },
+  "MAP_VICTORY_ROAD_B2F": {
+    "methods": {
+      "land_mons": [
+        "DRAGAPULT",
+        "BAXCALIBUR",
+        "VOLCARONA",
+        "NOIVERN",
+        "DRAGAPULT",
+        "BAXCALIBUR",
+        "KOMMO_O",
+        "DRAGAPULT",
+        "METAGROSS",
+        "IRON_VALIANT",
+        "VOLCARONA",
+        "BAXCALIBUR"
+      ],
+      "water_mons": [
+        "BASCULIN",
+        "FLOATZEL",
+        "SEAKING",
+        "GASTRODON",
+        "DRAGONAIR"
+      ],
+      "super_rod": [
+        "DREDNAW",
+        "CRAWDAUNT",
+        "MILOTIC",
+        "BASCULIN",
+        "DRAGONAIR"
+      ]
+    },
+    "note": "Dragapult 30%, Baxcalibur 25% and Volcarona 16% replace repeated modest/middle-stage land slots. Keep Noivern, Kommo-o, Metagross and Iron Valiant; upgrade only Surf Shellos/Dratini to Gastrodon/Dragonair and Super Rod Golduck to Milotic, preserving earlier access and the other water slots."
+  }
+}

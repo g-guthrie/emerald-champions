@@ -1,0 +1,59 @@
+BattleFrontier_BattlePalaceLobby_EventScript_BlackBelt::
+	msgbox BattleFrontier_BattlePalaceLobby_Text_LadyCanTellWhatMonsThink, MSGBOX_NPC
+	end
+
+
+BattleFrontier_BattlePalaceLobby_EventScript_Man::
+	msgbox BattleFrontier_BattlePalaceLobby_Text_NatureAndMovesKeyHere, MSGBOX_NPC
+	end
+
+
+BattleFrontier_BattlePalaceLobby_EventScript_Beauty::
+	msgbox BattleFrontier_BattlePalaceLobby_Text_MonDocileButTransforms, MSGBOX_NPC
+	end
+
+
+BattleFrontier_BattlePalaceLobby_EventScript_Maniac::
+	msgbox BattleFrontier_BattlePalaceLobby_Text_WhatNatureFavorsChippingAway, MSGBOX_NPC
+	end
+
+
+BattleFrontier_BattlePalaceLobby_Text_LadyCanTellWhatMonsThink:
+	.string "For a hardy fellow like me,\n"
+	.string "hardy POKéMON are the best.\p"
+	.string "Offense is the best defense!\n"
+	.string "A relentless attack is the ultimate!\p"
+	.string "But that's not what I wanted to chat\n"
+	.string "about.\p"
+	.string "Every so often a really cute lady\n"
+	.string "swings by here.\p"
+	.string "She says that she can tell what\n"
+	.string "POKéMON are thinking.\p"
+	.string "I don't know about that part,\n"
+	.string "but she is really cute.\p"
+	.string "Huh?\n"
+	.string "Why are you looking at me like that?$"
+
+
+BattleFrontier_BattlePalaceLobby_Text_NatureAndMovesKeyHere:
+	.string "The old Palace tested how Pokémon\n"
+	.string "acted on their own.\p"
+	.string "In the CIRCUIT, you command every\n"
+	.string "move. Natures change stats, not\l"
+	.string "obedience.$"
+
+BattleFrontier_BattlePalaceLobby_Text_MonDocileButTransforms:
+	.string "My POKéMON is usually very docile.\p"
+	.string "But when it's in a BATTLE HALL,\n"
+	.string "it sometimes seems to become\l"
+	.string "transformed into something wicked!\p"
+	.string "It becomes totally intimidating.\n"
+	.string "It's shocking, even.$"
+
+
+BattleFrontier_BattlePalaceLobby_Text_WhatNatureFavorsChippingAway:
+	.string "A careful Nature and EV\n"
+	.string "spread can help a partner survive\l"
+	.string "the turn that matters.\p"
+	.string "Then I choose what it does with\n"
+	.string "that extra turn!$"

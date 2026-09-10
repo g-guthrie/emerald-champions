@@ -72,7 +72,7 @@ struct ShowdownCircuitTemplate
     enum CircuitDependency dependency;
     enum Item item;
     u8 nature;
-    u8 statPoints[NUM_STATS];
+    u8 evs[NUM_STATS];
 };
 
 extern const struct ShowdownCircuitVariant gShowdownCircuitVariants[SHOWDOWN_CIRCUIT_VARIANT_COUNT];

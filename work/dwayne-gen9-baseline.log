@@ -1,0 +1,416 @@
+tools/scaninc/scaninc -M build/emerald-test/test/battle/ai/emerald_champions_plans.d -g build/assets -I include -I tools/agbcc/include test/battle/ai/emerald_champions_plans.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/battle/ai/emerald_champions_plans.o test/battle/ai/emerald_champions_plans.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 4
+[0] EC live review Dwayne timing: complete cold decision with six-player party: [32mPASS[0m
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Flamethrower target=2
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Fake Out target=0
+AI decision turn=2 actor=1 move=Flamethrower target=2
+AI decision turn=2 actor=3 move=Ice Beam target=2
+E47_DWAYNE_COMPLETE_TIMING trainer=493 setupFrames=7 decisionFrames=40 completeFrames=47 warmFrames=41 first=3 moves=Flamethrower/Ice Beam
+[1] EC live review Dwayne motifs: supported setup and opposing boosts: [32mPASS[0m
+DWAYNE_INPUT reserves=0 slot=0 lv=18 HP=49 Atk=33 Def=23 SpA=51 SpD=30 Speed=51 item=494 ability=49
+DWAYNE_INPUT reserves=0 slot=1 lv=18 HP=49 Atk=18 Def=15 SpA=52 SpD=33 Speed=49 item=481 ability=12
+DWAYNE_INPUT reserves=0 slot=2 lv=18 HP=49 Atk=44 Def=23 SpA=29 SpD=30 Speed=61 item=523 ability=9
+DWAYNE_INPUT reserves=0 slot=3 lv=18 HP=56 Atk=50 Def=29 SpA=34 SpD=29 Speed=56 item=503 ability=89
+AI decision turn=1 actor=0 move=Bulk Up target=0
+AI decision turn=1 actor=1 move=Flamethrower target=2
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=Fake Out target=0
+AI decision turn=2 actor=1 move=Helping Hand target=3
+AI decision turn=2 actor=3 move=Psychic target=0
+DWAYNE_AFTER board=20 turns=1 pair=0 species=240/238 HP=49/49 foes=75/44 moves=Flamethrower/Fake Out speed=51/49 foeSpeed=25/49 SpA=6/6 foeAtk=6 foeDef=6 status=0/0 foeStatus=0/16 lastPP=5/20 faints=0/0
+DWAYNE_INPUT reserves=0 slot=0 lv=18 HP=49 Atk=33 Def=23 SpA=51 SpD=30 Speed=51 item=494 ability=49
+DWAYNE_INPUT reserves=0 slot=1 lv=18 HP=49 Atk=18 Def=15 SpA=52 SpD=33 Speed=49 item=481 ability=12
+DWAYNE_INPUT reserves=0 slot=2 lv=18 HP=49 Atk=44 Def=23 SpA=29 SpD=30 Speed=61 item=523 ability=9
+DWAYNE_INPUT reserves=0 slot=3 lv=18 HP=56 Atk=50 Def=29 SpA=34 SpD=29 Speed=56 item=503 ability=89
+AI decision turn=1 actor=0 move=Bulk Up target=0
+AI decision turn=1 actor=1 move=Flamethrower target=2
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=Fake Out target=0
+AI decision turn=2 actor=0 move=Bulk Up target=0
+AI decision turn=2 actor=1 move=Helping Hand target=3
+AI decision turn=2 actor=2 move=Follow Me target=2
+AI decision turn=2 actor=3 move=Psychic target=0
+AI decision turn=3 actor=1 move=Flamethrower target=2
+AI decision turn=3 actor=3 move=Ice Beam target=2
+DWAYNE_AFTER board=20 turns=2 pair=0 species=240/238 HP=49/49 foes=75/24 moves=Helping Hand/Psychic speed=51/49 foeSpeed=25/49 SpA=6/6 foeAtk=7 foeDef=7 status=0/0 foeStatus=0/16 lastPP=5/20 faints=0/0
+DWAYNE_INPUT reserves=0 slot=0 lv=18 HP=49 Atk=33 Def=23 SpA=51 SpD=30 Speed=51 item=494 ability=49
+DWAYNE_INPUT reserves=0 slot=1 lv=18 HP=49 Atk=18 Def=15 SpA=52 SpD=33 Speed=49 item=481 ability=12
+DWAYNE_INPUT reserves=0 slot=2 lv=18 HP=49 Atk=44 Def=23 SpA=29 SpD=30 Speed=61 item=523 ability=9
+DWAYNE_INPUT reserves=0 slot=3 lv=18 HP=56 Atk=50 Def=29 SpA=34 SpD=29 Speed=56 item=503 ability=89
+AI decision turn=1 actor=0 move=Bulk Up target=0
+AI decision turn=1 actor=1 move=Flamethrower target=2
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=Fake Out target=0
+AI decision turn=2 actor=0 move=Bulk Up target=0
+AI decision turn=2 actor=1 move=Helping Hand target=3
+AI decision turn=2 actor=2 move=Follow Me target=2
+AI decision turn=2 actor=3 move=Psychic target=0
+AI decision turn=3 actor=0 move=Drain Punch target=3
+AI decision turn=3 actor=1 move=Flamethrower target=2
+AI decision turn=3 actor=2 move=Follow Me target=2
+AI decision turn=3 actor=3 move=Ice Beam target=2
+AI decision turn=4 actor=1 move=Protect target=1
+AI decision turn=4 actor=3 move=Psychic target=0
+DWAYNE_AFTER board=20 turns=3 pair=0 species=240/238 HP=49/1 foes=78/0 moves=Flamethrower/Ice Beam speed=51/49 foeSpeed=25/0 SpA=6/6 foeAtk=7 foeDef=7 status=0/0 foeStatus=0/0 lastPP=5/20 faints=0/1
+DWAYNE_INPUT reserves=0 slot=0 lv=18 HP=49 Atk=33 Def=23 SpA=51 SpD=30 Speed=51 item=494 ability=49
+DWAYNE_INPUT reserves=0 slot=1 lv=18 HP=49 Atk=18 Def=15 SpA=52 SpD=33 Speed=49 item=481 ability=12
+DWAYNE_INPUT reserves=0 slot=2 lv=18 HP=49 Atk=44 Def=23 SpA=29 SpD=30 Speed=61 item=523 ability=9
+DWAYNE_INPUT reserves=0 slot=3 lv=18 HP=56 Atk=50 Def=29 SpA=34 SpD=29 Speed=56 item=503 ability=89
+AI decision turn=1 actor=0 move=Bulk Up target=0
+AI decision turn=1 actor=1 move=Flamethrower target=2
+AI decision turn=1 actor=2 move=Super Fang target=1
+AI decision turn=1 actor=3 move=Fake Out target=0
+AI decision turn=2 actor=1 move=Helping Hand target=3
+AI decision turn=2 actor=3 move=Psychic target=0
+DWAYNE_AFTER board=21 turns=1 pair=0 species=240/238 HP=25/49 foes=75/44 moves=Flamethrower/Fake Out speed=51/49 foeSpeed=25/49 SpA=6/6 foeAtk=6 foeDef=6 status=0/0 foeStatus=0/16 lastPP=5/20 faints=0/0
+DWAYNE_INPUT reserves=0 slot=0 lv=18 HP=49 Atk=33 Def=23 SpA=51 SpD=30 Speed=51 item=494 ability=49
+DWAYNE_INPUT reserves=0 slot=1 lv=18 HP=49 Atk=18 Def=15 SpA=52 SpD=33 Speed=49 item=481 ability=12
+DWAYNE_INPUT reserves=0 slot=2 lv=18 HP=49 Atk=44 Def=23 SpA=29 SpD=30 Speed=61 item=523 ability=9
+DWAYNE_INPUT reserves=0 slot=3 lv=18 HP=56 Atk=50 Def=29 SpA=34 SpD=29 Speed=56 item=503 ability=89
+AI decision turn=1 actor=0 move=Bulk Up target=0
+AI decision turn=1 actor=1 move=Flamethrower target=2
+AI decision turn=1 actor=2 move=Super Fang target=1
+AI decision turn=1 actor=3 move=Fake Out target=0
+AI decision turn=2 actor=0 move=Bulk Up target=0
+AI decision turn=2 actor=1 move=Helping Hand target=3
+AI decision turn=2 actor=2 move=Super Fang target=1
+AI decision turn=2 actor=3 move=Psychic target=0
+AI decision turn=3 actor=1 move=Flamethrower target=0
+AI decision turn=3 actor=3 move=Ice Beam target=0
+DWAYNE_AFTER board=21 turns=2 pair=0 species=240/238 HP=13/49 foes=19/40 moves=Helping Hand/Psychic speed=51/49 foeSpeed=25/49 SpA=6/6 foeAtk=7 foeDef=7 status=0/0 foeStatus=0/16 lastPP=5/20 faints=0/0
+DWAYNE_INPUT reserves=0 slot=0 lv=18 HP=49 Atk=33 Def=23 SpA=51 SpD=30 Speed=51 item=494 ability=49
+DWAYNE_INPUT reserves=0 slot=1 lv=18 HP=49 Atk=18 Def=15 SpA=52 SpD=33 Speed=49 item=481 ability=12
+DWAYNE_INPUT reserves=0 slot=2 lv=18 HP=49 Atk=44 Def=23 SpA=29 SpD=30 Speed=61 item=523 ability=9
+DWAYNE_INPUT reserves=0 slot=3 lv=18 HP=56 Atk=50 Def=29 SpA=34 SpD=29 Speed=56 item=503 ability=89
+AI decision turn=1 actor=0 move=Bulk Up target=0
+AI decision turn=1 actor=1 move=Flamethrower target=2
+AI decision turn=1 actor=2 move=Super Fang target=1
+AI decision turn=1 actor=3 move=Fake Out target=0
+AI decision turn=2 actor=0 move=Bulk Up target=0
+AI decision turn=2 actor=1 move=Helping Hand target=3
+AI decision turn=2 actor=2 move=Super Fang target=1
+AI decision turn=2 actor=3 move=Psychic target=0
+AI decision turn=3 actor=0 move=Drain Punch target=3
+AI decision turn=3 actor=1 move=Flamethrower target=0
+AI decision turn=3 actor=2 move=Super Fang target=1
+AI decision turn=3 actor=3 move=Ice Beam target=0
+AI decision turn=4 actor=1 move=Flamethrower target=2
+AI decision turn=4 actor=3 move=Ice Beam target=2
+DWAYNE_AFTER board=21 turns=3 pair=0 species=240/238 HP=7/49 foes=0/30 moves=Flamethrower/Ice Beam speed=51/49 foeSpeed=0/49 SpA=6/6 foeAtk=6 foeDef=6 status=0/0 foeStatus=0/16 lastPP=5/20 faints=0/1
+[2] EC live review Dwayne disruption: Fake Out and Taunt: [32mPASS[0m
+DWAYNE_INPUT reserves=0 slot=0 lv=18 HP=49 Atk=33 Def=23 SpA=51 SpD=30 Speed=51 item=494 ability=49
+DWAYNE_INPUT reserves=0 slot=1 lv=18 HP=49 Atk=18 Def=15 SpA=52 SpD=33 Speed=49 item=481 ability=12
+DWAYNE_INPUT reserves=0 slot=2 lv=18 HP=49 Atk=44 Def=23 SpA=29 SpD=30 Speed=61 item=523 ability=9
+DWAYNE_INPUT reserves=0 slot=3 lv=18 HP=56 Atk=50 Def=29 SpA=34 SpD=29 Speed=56 item=503 ability=89
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Flamethrower target=0
+AI decision turn=1 actor=2 move=Super Fang target=1
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI decision turn=2 actor=1 move=Protect target=1
+AI switch turn=2 actor=3 party=2
+DWAYNE_AFTER board=10 turns=1 pair=0 species=240/238 HP=39/49 foes=62/69 moves=-/Fake Out speed=51/49 foeSpeed=53/49 SpA=6/6 foeAtk=6 foeDef=6 status=0/0 foeStatus=16/0 lastPP=5/20 faints=0/0
+DWAYNE_INPUT reserves=0 slot=0 lv=18 HP=49 Atk=33 Def=23 SpA=51 SpD=30 Speed=51 item=494 ability=49
+DWAYNE_INPUT reserves=0 slot=1 lv=18 HP=49 Atk=18 Def=15 SpA=52 SpD=33 Speed=49 item=481 ability=12
+DWAYNE_INPUT reserves=0 slot=2 lv=18 HP=49 Atk=44 Def=23 SpA=29 SpD=30 Speed=61 item=523 ability=9
+DWAYNE_INPUT reserves=0 slot=3 lv=18 HP=56 Atk=50 Def=29 SpA=34 SpD=29 Speed=56 item=503 ability=89
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Flamethrower target=0
+AI decision turn=1 actor=2 move=Super Fang target=1
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI decision turn=2 actor=0 move=Taunt target=1
+AI decision turn=2 actor=1 move=Protect target=1
+AI switch turn=2 actor=3 party=2
+AI decision turn=2 actor=2 move=Super Fang target=1
+AI decision turn=3 actor=1 move=Flamethrower target=0
+AI decision turn=3 actor=3 move=Protect target=3
+DWAYNE_AFTER board=10 turns=2 pair=0 species=240/239 HP=39/49 foes=58/69 moves=Protect/- speed=51/61 foeSpeed=53/49 SpA=6/6 foeAtk=6 foeDef=6 status=0/0 foeStatus=16/0 lastPP=4/5 faints=0/0
+DWAYNE_INPUT reserves=0 slot=0 lv=18 HP=49 Atk=33 Def=23 SpA=51 SpD=30 Speed=51 item=494 ability=49
+DWAYNE_INPUT reserves=0 slot=1 lv=18 HP=49 Atk=18 Def=15 SpA=52 SpD=33 Speed=49 item=481 ability=12
+DWAYNE_INPUT reserves=0 slot=2 lv=18 HP=49 Atk=44 Def=23 SpA=29 SpD=30 Speed=61 item=523 ability=9
+DWAYNE_INPUT reserves=0 slot=3 lv=18 HP=56 Atk=50 Def=29 SpA=34 SpD=29 Speed=56 item=503 ability=89
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Flamethrower target=0
+AI decision turn=1 actor=2 move=Super Fang target=1
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI decision turn=2 actor=0 move=Taunt target=1
+AI decision turn=2 actor=1 move=Protect target=1
+AI switch turn=2 actor=3 party=2
+AI decision turn=2 actor=2 move=Super Fang target=1
+AI decision turn=3 actor=0 move=Taunt target=1
+AI decision turn=3 actor=1 move=Flamethrower target=0
+AI decision turn=3 actor=2 move=Super Fang target=1
+AI decision turn=3 actor=3 move=Protect target=3
+AI decision turn=4 actor=1 move=Flamethrower target=0
+AI decision turn=4 actor=3 move=Electroweb target=0
+DWAYNE_AFTER board=10 turns=3 pair=0 species=240/239 HP=20/49 foes=30/65 moves=Flamethrower/Protect speed=51/61 foeSpeed=53/49 SpA=6/6 foeAtk=6 foeDef=6 status=0/0 foeStatus=16/16 lastPP=4/4 faints=0/0
+DWAYNE_INPUT reserves=0 slot=0 lv=18 HP=49 Atk=33 Def=23 SpA=51 SpD=30 Speed=51 item=494 ability=49
+DWAYNE_INPUT reserves=0 slot=1 lv=18 HP=49 Atk=18 Def=15 SpA=52 SpD=33 Speed=49 item=481 ability=12
+DWAYNE_INPUT reserves=0 slot=2 lv=18 HP=49 Atk=44 Def=23 SpA=29 SpD=30 Speed=61 item=523 ability=9
+DWAYNE_INPUT reserves=0 slot=3 lv=18 HP=56 Atk=50 Def=29 SpA=34 SpD=29 Speed=56 item=503 ability=89
+AI decision turn=1 actor=0 move=Taunt target=3
+AI decision turn=1 actor=1 move=Flamethrower target=0
+AI decision turn=1 actor=2 move=Super Fang target=1
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI decision turn=2 actor=1 move=Protect target=1
+AI switch turn=2 actor=3 party=2
+DWAYNE_AFTER board=11 turns=1 pair=0 species=240/238 HP=49/49 foes=38/69 moves=Flamethrower/Fake Out speed=51/49 foeSpeed=53/49 SpA=6/6 foeAtk=6 foeDef=6 status=0/0 foeStatus=16/0 lastPP=5/20 faints=0/0
+DWAYNE_INPUT reserves=0 slot=0 lv=18 HP=49 Atk=33 Def=23 SpA=51 SpD=30 Speed=51 item=494 ability=49
+DWAYNE_INPUT reserves=0 slot=1 lv=18 HP=49 Atk=18 Def=15 SpA=52 SpD=33 Speed=49 item=481 ability=12
+DWAYNE_INPUT reserves=0 slot=2 lv=18 HP=49 Atk=44 Def=23 SpA=29 SpD=30 Speed=61 item=523 ability=9
+DWAYNE_INPUT reserves=0 slot=3 lv=18 HP=56 Atk=50 Def=29 SpA=34 SpD=29 Speed=56 item=503 ability=89
+AI decision turn=1 actor=0 move=Taunt target=3
+AI decision turn=1 actor=1 move=Flamethrower target=0
+AI decision turn=1 actor=2 move=Super Fang target=1
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI decision turn=2 actor=0 move=Taunt target=3
+AI decision turn=2 actor=1 move=Protect target=1
+AI switch turn=2 actor=3 party=2
+AI decision turn=2 actor=2 move=Super Fang target=1
+AI decision turn=3 actor=1 move=Flamethrower target=0
+AI decision turn=3 actor=3 move=Thunder Punch target=0
+DWAYNE_AFTER board=11 turns=2 pair=0 species=240/239 HP=49/49 foes=34/69 moves=Protect/- speed=51/61 foeSpeed=53/49 SpA=6/6 foeAtk=6 foeDef=6 status=0/0 foeStatus=16/0 lastPP=4/5 faints=0/0
+DWAYNE_INPUT reserves=0 slot=0 lv=18 HP=49 Atk=33 Def=23 SpA=51 SpD=30 Speed=51 item=494 ability=49
+DWAYNE_INPUT reserves=0 slot=1 lv=18 HP=49 Atk=18 Def=15 SpA=52 SpD=33 Speed=49 item=481 ability=12
+DWAYNE_INPUT reserves=0 slot=2 lv=18 HP=49 Atk=44 Def=23 SpA=29 SpD=30 Speed=61 item=523 ability=9
+DWAYNE_INPUT reserves=0 slot=3 lv=18 HP=56 Atk=50 Def=29 SpA=34 SpD=29 Speed=56 item=503 ability=89
+AI decision turn=1 actor=0 move=Taunt target=3
+AI decision turn=1 actor=1 move=Flamethrower target=0
+AI decision turn=1 actor=2 move=Super Fang target=1
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI decision turn=2 actor=0 move=Taunt target=3
+AI decision turn=2 actor=1 move=Protect target=1
+AI switch turn=2 actor=3 party=2
+AI decision turn=2 actor=2 move=Super Fang target=1
+AI decision turn=3 actor=0 move=Taunt target=3
+AI decision turn=3 actor=1 move=Flamethrower target=0
+AI decision turn=3 actor=2 move=Super Fang target=1
+AI decision turn=3 actor=3 move=Thunder Punch target=0
+AI decision turn=4 actor=1 move=Clear Smog target=2
+AI decision turn=4 actor=3 move=Ice Punch target=2
+DWAYNE_AFTER board=11 turns=3 pair=0 species=240/239 HP=25/49 foes=0/65 moves=Flamethrower/Thunder Punch speed=51/61 foeSpeed=0/49 SpA=6/6 foeAtk=6 foeDef=6 status=0/0 foeStatus=0/16 lastPP=4/5 faints=0/1
+[3] EC live review Dwayne core: physical special leads and reserves: [32mPASS[0m
+DWAYNE_INPUT reserves=0 slot=0 lv=18 HP=49 Atk=33 Def=23 SpA=51 SpD=30 Speed=51 item=494 ability=49
+DWAYNE_INPUT reserves=0 slot=1 lv=18 HP=49 Atk=18 Def=15 SpA=52 SpD=33 Speed=49 item=481 ability=12
+DWAYNE_INPUT reserves=0 slot=2 lv=18 HP=49 Atk=44 Def=23 SpA=29 SpD=30 Speed=61 item=523 ability=9
+DWAYNE_INPUT reserves=0 slot=3 lv=18 HP=56 Atk=50 Def=29 SpA=34 SpD=29 Speed=56 item=503 ability=89
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Flamethrower target=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI decision turn=2 actor=1 move=Flamethrower target=2
+AI decision turn=2 actor=3 move=Psychic target=2
+DWAYNE_AFTER board=0 turns=1 pair=0 species=240/238 HP=7/49 foes=53/53 moves=Flamethrower/Fake Out speed=51/49 foeSpeed=33/25 SpA=6/6 foeAtk=6 foeDef=6 status=0/0 foeStatus=16/16 lastPP=5/20 faints=0/0
+DWAYNE_INPUT reserves=0 slot=0 lv=18 HP=49 Atk=33 Def=23 SpA=51 SpD=30 Speed=51 item=494 ability=49
+DWAYNE_INPUT reserves=0 slot=1 lv=18 HP=49 Atk=18 Def=15 SpA=52 SpD=33 Speed=49 item=481 ability=12
+DWAYNE_INPUT reserves=0 slot=2 lv=18 HP=49 Atk=44 Def=23 SpA=29 SpD=30 Speed=61 item=523 ability=9
+DWAYNE_INPUT reserves=0 slot=3 lv=18 HP=56 Atk=50 Def=29 SpA=34 SpD=29 Speed=56 item=503 ability=89
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Flamethrower target=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Flamethrower target=2
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Psychic target=2
+AI switch turn=2 actor=1 party=3
+AI decision turn=3 actor=1 move=Drain Punch target=0
+AI decision turn=3 actor=3 move=Ice Beam target=0
+DWAYNE_AFTER board=0 turns=2 pair=0 species=391/238 HP=56/49 foes=47/0 moves=-/Psychic speed=56/49 foeSpeed=33/0 SpA=6/6 foeAtk=6 foeDef=6 status=0/0 foeStatus=16/0 lastPP=20/20 faints=1/1
+DWAYNE_INPUT reserves=0 slot=0 lv=18 HP=49 Atk=33 Def=23 SpA=51 SpD=30 Speed=51 item=494 ability=49
+DWAYNE_INPUT reserves=0 slot=1 lv=18 HP=49 Atk=18 Def=15 SpA=52 SpD=33 Speed=49 item=481 ability=12
+DWAYNE_INPUT reserves=0 slot=2 lv=18 HP=49 Atk=44 Def=23 SpA=29 SpD=30 Speed=61 item=523 ability=9
+DWAYNE_INPUT reserves=0 slot=3 lv=18 HP=56 Atk=50 Def=29 SpA=34 SpD=29 Speed=56 item=503 ability=89
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Flamethrower target=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Flamethrower target=2
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Psychic target=2
+AI switch turn=2 actor=1 party=3
+AI decision turn=3 actor=0 move=Double-Edge target=1
+AI decision turn=3 actor=1 move=Drain Punch target=0
+AI decision turn=3 actor=3 move=Ice Beam target=0
+DWAYNE_AFTER board=0 turns=3 pair=0 species=391/238 HP=56/49 foes=0/0 moves=Drain Punch/Psychic speed=56/49 foeSpeed=33/0 SpA=6/6 foeAtk=6 foeDef=6 status=0/0 foeStatus=0/0 lastPP=20/20 faints=1/2
+DWAYNE_INPUT reserves=0 slot=0 lv=18 HP=49 Atk=33 Def=23 SpA=51 SpD=30 Speed=51 item=494 ability=49
+DWAYNE_INPUT reserves=0 slot=1 lv=18 HP=49 Atk=18 Def=15 SpA=52 SpD=33 Speed=49 item=481 ability=12
+DWAYNE_INPUT reserves=0 slot=2 lv=18 HP=49 Atk=44 Def=23 SpA=29 SpD=30 Speed=61 item=523 ability=9
+DWAYNE_INPUT reserves=0 slot=3 lv=18 HP=56 Atk=50 Def=29 SpA=34 SpD=29 Speed=56 item=503 ability=89
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Flamethrower target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Fake Out target=0
+AI decision turn=2 actor=1 move=Flamethrower target=0
+AI decision turn=2 actor=3 move=Ice Beam target=0
+DWAYNE_AFTER board=1 turns=1 pair=0 species=240/238 HP=33/49 foes=20/72 moves=Flamethrower/Fake Out speed=51/49 foeSpeed=56/49 SpA=6/6 foeAtk=6 foeDef=6 status=0/0 foeStatus=16/0 lastPP=5/20 faints=0/0
+DWAYNE_INPUT reserves=0 slot=0 lv=18 HP=49 Atk=33 Def=23 SpA=51 SpD=30 Speed=51 item=494 ability=49
+DWAYNE_INPUT reserves=0 slot=1 lv=18 HP=49 Atk=18 Def=15 SpA=52 SpD=33 Speed=49 item=481 ability=12
+DWAYNE_INPUT reserves=0 slot=2 lv=18 HP=49 Atk=44 Def=23 SpA=29 SpD=30 Speed=61 item=523 ability=9
+DWAYNE_INPUT reserves=0 slot=3 lv=18 HP=56 Atk=50 Def=29 SpA=34 SpD=29 Speed=56 item=503 ability=89
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Flamethrower target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Fake Out target=0
+AI decision turn=2 actor=0 move=Psychic target=3
+AI decision turn=2 actor=1 move=Flamethrower target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=3 move=Ice Beam target=0
+AI decision turn=3 actor=1 move=Protect target=1
+AI decision turn=3 actor=3 move=Ice Beam target=2
+DWAYNE_AFTER board=1 turns=2 pair=0 species=240/238 HP=17/31 foes=0/48 moves=Flamethrower/Ice Beam speed=51/49 foeSpeed=0/49 SpA=6/6 foeAtk=6 foeDef=6 status=0/0 foeStatus=0/0 lastPP=5/20 faints=0/1
+DWAYNE_INPUT reserves=0 slot=0 lv=18 HP=49 Atk=33 Def=23 SpA=51 SpD=30 Speed=51 item=494 ability=49
+DWAYNE_INPUT reserves=0 slot=1 lv=18 HP=49 Atk=18 Def=15 SpA=52 SpD=33 Speed=49 item=481 ability=12
+DWAYNE_INPUT reserves=0 slot=2 lv=18 HP=49 Atk=44 Def=23 SpA=29 SpD=30 Speed=61 item=523 ability=9
+DWAYNE_INPUT reserves=0 slot=3 lv=18 HP=56 Atk=50 Def=29 SpA=34 SpD=29 Speed=56 item=503 ability=89
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Flamethrower target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Fake Out target=0
+AI decision turn=2 actor=0 move=Psychic target=3
+AI decision turn=2 actor=1 move=Flamethrower target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=3 move=Ice Beam target=0
+AI decision turn=3 actor=2 move=Thunderbolt target=1
+AI decision turn=3 actor=1 move=Protect target=1
+AI decision turn=3 actor=3 move=Ice Beam target=2
+AI decision turn=4 actor=1 move=Flamethrower target=2
+AI decision turn=4 actor=3 move=Ice Beam target=2
+DWAYNE_AFTER board=1 turns=3 pair=0 species=240/238 HP=17/31 foes=0/42 moves=Protect/Ice Beam speed=51/49 foeSpeed=0/49 SpA=6/6 foeAtk=6 foeDef=6 status=0/0 foeStatus=0/0 lastPP=4/20 faints=0/1
+DWAYNE_INPUT reserves=1 slot=0 lv=18 HP=49 Atk=33 Def=23 SpA=51 SpD=30 Speed=51 item=494 ability=49
+DWAYNE_INPUT reserves=1 slot=1 lv=18 HP=49 Atk=18 Def=15 SpA=52 SpD=33 Speed=49 item=481 ability=12
+DWAYNE_INPUT reserves=1 slot=2 lv=18 HP=49 Atk=44 Def=23 SpA=29 SpD=30 Speed=61 item=523 ability=9
+DWAYNE_INPUT reserves=1 slot=3 lv=18 HP=56 Atk=50 Def=29 SpA=34 SpD=29 Speed=56 item=503 ability=89
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Thunder Punch target=0
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Drain Punch target=0
+AI decision turn=2 actor=1 move=Thunder Punch target=0
+AI decision turn=2 actor=3 move=Fire Punch target=0
+DWAYNE_AFTER board=0 turns=1 pair=1 species=239/391 HP=49/22 foes=6/78 moves=Thunder Punch/Drain Punch speed=61/56 foeSpeed=16/25 SpA=6/6 foeAtk=6 foeDef=6 status=0/0 foeStatus=64/0 lastPP=5/20 faints=0/0
+DWAYNE_INPUT reserves=1 slot=0 lv=18 HP=49 Atk=33 Def=23 SpA=51 SpD=30 Speed=51 item=494 ability=49
+DWAYNE_INPUT reserves=1 slot=1 lv=18 HP=49 Atk=18 Def=15 SpA=52 SpD=33 Speed=49 item=481 ability=12
+DWAYNE_INPUT reserves=1 slot=2 lv=18 HP=49 Atk=44 Def=23 SpA=29 SpD=30 Speed=61 item=523 ability=9
+DWAYNE_INPUT reserves=1 slot=3 lv=18 HP=56 Atk=50 Def=29 SpA=34 SpD=29 Speed=56 item=503 ability=89
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Thunder Punch target=0
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Drain Punch target=0
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Thunder Punch target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Fire Punch target=0
+AI decision turn=3 actor=1 move=Thunder Punch target=2
+AI decision turn=3 actor=3 move=Fire Punch target=2
+DWAYNE_AFTER board=0 turns=2 pair=1 species=239/391 HP=49/5 foes=0/60 moves=Thunder Punch/Fire Punch speed=61/56 foeSpeed=0/25 SpA=6/6 foeAtk=6 foeDef=6 status=0/0 foeStatus=0/16 lastPP=5/20 faints=0/1
+DWAYNE_INPUT reserves=1 slot=0 lv=18 HP=49 Atk=33 Def=23 SpA=51 SpD=30 Speed=51 item=494 ability=49
+DWAYNE_INPUT reserves=1 slot=1 lv=18 HP=49 Atk=18 Def=15 SpA=52 SpD=33 Speed=49 item=481 ability=12
+DWAYNE_INPUT reserves=1 slot=2 lv=18 HP=49 Atk=44 Def=23 SpA=29 SpD=30 Speed=61 item=523 ability=9
+DWAYNE_INPUT reserves=1 slot=3 lv=18 HP=56 Atk=50 Def=29 SpA=34 SpD=29 Speed=56 item=503 ability=89
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Thunder Punch target=0
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Drain Punch target=0
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Thunder Punch target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Fire Punch target=0
+AI decision turn=3 actor=2 move=Drain Punch target=3
+AI decision turn=3 actor=1 move=Thunder Punch target=2
+AI decision turn=3 actor=3 move=Fire Punch target=2
+AI decision turn=4 actor=1 move=Thunder Punch target=2
+DWAYNE_AFTER board=0 turns=3 pair=1 species=239/391 HP=49/0 foes=0/20 moves=Thunder Punch/- speed=61/0 foeSpeed=0/25 SpA=6/6 foeAtk=6 foeDef=6 status=0/0 foeStatus=0/16 lastPP=5/20 faints=1/1
+DWAYNE_INPUT reserves=1 slot=0 lv=18 HP=49 Atk=33 Def=23 SpA=51 SpD=30 Speed=51 item=494 ability=49
+DWAYNE_INPUT reserves=1 slot=1 lv=18 HP=49 Atk=18 Def=15 SpA=52 SpD=33 Speed=49 item=481 ability=12
+DWAYNE_INPUT reserves=1 slot=2 lv=18 HP=49 Atk=44 Def=23 SpA=29 SpD=30 Speed=61 item=523 ability=9
+DWAYNE_INPUT reserves=1 slot=3 lv=18 HP=56 Atk=50 Def=29 SpA=34 SpD=29 Speed=56 item=503 ability=89
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Thunder Punch target=0
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Drain Punch target=0
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Thunder Punch target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Fire Punch target=0
+AI decision turn=3 actor=2 move=Drain Punch target=3
+AI decision turn=3 actor=1 move=Thunder Punch target=2
+AI decision turn=3 actor=3 move=Fire Punch target=2
+AI decision turn=4 actor=2 move=Drain Punch target=3
+AI decision turn=4 actor=1 move=Thunder Punch target=2
+AI decision turn=5 actor=1 move=Thunder Punch target=2
+DWAYNE_AFTER board=0 turns=4 pair=1 species=239/391 HP=28/0 foes=0/10 moves=Thunder Punch/- speed=61/0 foeSpeed=0/25 SpA=6/6 foeAtk=6 foeDef=6 status=0/0 foeStatus=0/16 lastPP=5/20 faints=1/1
+DWAYNE_INPUT reserves=1 slot=0 lv=18 HP=49 Atk=33 Def=23 SpA=51 SpD=30 Speed=51 item=494 ability=49
+DWAYNE_INPUT reserves=1 slot=1 lv=18 HP=49 Atk=18 Def=15 SpA=52 SpD=33 Speed=49 item=481 ability=12
+DWAYNE_INPUT reserves=1 slot=2 lv=18 HP=49 Atk=44 Def=23 SpA=29 SpD=30 Speed=61 item=523 ability=9
+DWAYNE_INPUT reserves=1 slot=3 lv=18 HP=56 Atk=50 Def=29 SpA=34 SpD=29 Speed=56 item=503 ability=89
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Thunder Punch target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Mach Punch target=2
+AI decision turn=2 actor=1 move=Thunder Punch target=0
+AI decision turn=2 actor=3 move=Fire Punch target=0
+DWAYNE_AFTER board=1 turns=1 pair=1 species=239/391 HP=37/56 foes=16/62 moves=Thunder Punch/Mach Punch speed=61/56 foeSpeed=28/49 SpA=6/6 foeAtk=6 foeDef=6 status=0/0 foeStatus=64/0 lastPP=5/20 faints=0/0
+DWAYNE_INPUT reserves=1 slot=0 lv=18 HP=49 Atk=33 Def=23 SpA=51 SpD=30 Speed=51 item=494 ability=49
+DWAYNE_INPUT reserves=1 slot=1 lv=18 HP=49 Atk=18 Def=15 SpA=52 SpD=33 Speed=49 item=481 ability=12
+DWAYNE_INPUT reserves=1 slot=2 lv=18 HP=49 Atk=44 Def=23 SpA=29 SpD=30 Speed=61 item=523 ability=9
+DWAYNE_INPUT reserves=1 slot=3 lv=18 HP=56 Atk=50 Def=29 SpA=34 SpD=29 Speed=56 item=503 ability=89
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Thunder Punch target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Mach Punch target=2
+AI decision turn=2 actor=0 move=Psychic target=3
+AI decision turn=2 actor=1 move=Thunder Punch target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=3 move=Fire Punch target=0
+AI decision turn=3 actor=1 move=Ice Punch target=2
+AI decision turn=3 actor=3 move=Fire Punch target=2
+DWAYNE_AFTER board=1 turns=2 pair=1 species=239/391 HP=37/56 foes=0/39 moves=Thunder Punch/Fire Punch speed=61/56 foeSpeed=0/49 SpA=6/6 foeAtk=6 foeDef=6 status=0/0 foeStatus=0/16 lastPP=5/20 faints=0/1
+DWAYNE_INPUT reserves=1 slot=0 lv=18 HP=49 Atk=33 Def=23 SpA=51 SpD=30 Speed=51 item=494 ability=49
+DWAYNE_INPUT reserves=1 slot=1 lv=18 HP=49 Atk=18 Def=15 SpA=52 SpD=33 Speed=49 item=481 ability=12
+DWAYNE_INPUT reserves=1 slot=2 lv=18 HP=49 Atk=44 Def=23 SpA=29 SpD=30 Speed=61 item=523 ability=9
+DWAYNE_INPUT reserves=1 slot=3 lv=18 HP=56 Atk=50 Def=29 SpA=34 SpD=29 Speed=56 item=503 ability=89
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Thunder Punch target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Mach Punch target=2
+AI decision turn=2 actor=0 move=Psychic target=3
+AI decision turn=2 actor=1 move=Thunder Punch target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=3 move=Fire Punch target=0
+AI decision turn=3 actor=2 move=Thunderbolt target=1
+AI decision turn=3 actor=1 move=Ice Punch target=2
+AI decision turn=3 actor=3 move=Fire Punch target=2
+AI decision turn=4 actor=1 move=Ice Punch target=2
+AI decision turn=4 actor=3 move=Fire Punch target=2
+DWAYNE_AFTER board=1 turns=3 pair=1 species=239/391 HP=25/56 foes=0/24 moves=Ice Punch/Fire Punch speed=61/56 foeSpeed=0/49 SpA=6/6 foeAtk=6 foeDef=6 status=0/0 foeStatus=0/16 lastPP=5/20 faints=0/1
+DWAYNE_INPUT reserves=1 slot=0 lv=18 HP=49 Atk=33 Def=23 SpA=51 SpD=30 Speed=51 item=494 ability=49
+DWAYNE_INPUT reserves=1 slot=1 lv=18 HP=49 Atk=18 Def=15 SpA=52 SpD=33 Speed=49 item=481 ability=12
+DWAYNE_INPUT reserves=1 slot=2 lv=18 HP=49 Atk=44 Def=23 SpA=29 SpD=30 Speed=61 item=523 ability=9
+DWAYNE_INPUT reserves=1 slot=3 lv=18 HP=56 Atk=50 Def=29 SpA=34 SpD=29 Speed=56 item=503 ability=89
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Thunder Punch target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Mach Punch target=2
+AI decision turn=2 actor=0 move=Psychic target=3
+AI decision turn=2 actor=1 move=Thunder Punch target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=3 move=Fire Punch target=0
+AI decision turn=3 actor=2 move=Thunderbolt target=1
+AI decision turn=3 actor=1 move=Ice Punch target=2
+AI decision turn=3 actor=3 move=Fire Punch target=2
+AI decision turn=4 actor=2 move=Thunderbolt target=1
+AI decision turn=4 actor=1 move=Ice Punch target=2
+AI decision turn=4 actor=3 move=Fire Punch target=2
+DWAYNE_AFTER board=1 turns=4 pair=1 species=239/391 HP=25/56 foes=0/0 moves=Ice Punch/Fire Punch speed=61/56 foeSpeed=0/49 SpA=6/6 foeAtk=6 foeDef=6 status=0/0 foeStatus=0/0 lastPP=5/20 faints=0/2
+
+- Tests [32mPASSED[0m:          4
+- Tests [34mTOTAL[0m:           4
+

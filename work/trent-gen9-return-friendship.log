@@ -1,0 +1,6 @@
+src/data/trainers.party:22802: error: expected one of 'EVs', 'IVs', 'Ability', 'Level', 'Ball', 'Happiness', 'Nature', 'Shiny', 'Dynamax Level', 'Gigantamax', or 'Tera Type'
+src/data/trainers.party:22802: Friendship: 255
+                               ^
+make: *** [src/data/trainers.h] Error 1
+arm-none-eabi-cpp -iquote include -Wno-trigraphs -DMODERN=1 -DTESTING=0 -DEMERALD -std=gnu17 -DEC_HEADLESS_FIXTURES=0 -traditional-cpp - < src/data/trainers.party | tools/trainerproc/trainerproc -o src/data/trainers.h -i src/data/trainers.party -
+Makefile:314: *** Errors occurred while generating map-related sources. See error messages above for more details.  Stop.

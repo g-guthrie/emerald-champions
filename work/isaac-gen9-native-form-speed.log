@@ -1,0 +1,1354 @@
+tools/scaninc/scaninc -M build/emerald-test/test/battle/ai/emerald_champions_plans.d -g build/assets -I include -I tools/agbcc/include test/battle/ai/emerald_champions_plans.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/battle/ai/emerald_champions_plans.o test/battle/ai/emerald_champions_plans.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 4
+[2] EC live review Isaac timing: six-player party: [32mPASS[0m
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Ice Punch target=2
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Follow Me target=3
+AI decision turn=2 actor=1 move=Ice Punch target=2
+AI decision turn=2 actor=3 move=Follow Me target=3
+ISAAC_NATIVE_TIMER=53
+ISAAC_FORM_STATS HP=144/86 Atk=89/22 Def=37/75 SpD=63/51 speed=14/25
+ISAAC_1_AFTER board=99 turns=1 reserves=0 species=446/175 HP=144/86 foes=76/88 Atk=6/6 SpA=6/6 Spe=6/6 item=494/494 faints=0/0
+ISAAC_1_STATE moves=Ice Punch/Follow Me PP=15/15/14/10 otherPP=19/10/5/20 partyHP=144/86/62/74 type=1/19 status=0/0
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=47/32
+ISAAC_1_TIMING board=99 setup=6 bothActors=50 complete=56 warm=50
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Hydro Pump target=0
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Sucker Punch target=2
+AI decision turn=2 actor=1 move=Hydro Pump target=0
+AI decision turn=2 actor=3 move=Sucker Punch target=2
+ISAAC_NATIVE_TIMER=89
+ISAAC_FORM_STATS HP=67/122 Atk=36/118 Def=47/74 SpD=47/74 speed=84/83
+ISAAC_1_AFTER board=99 turns=1 reserves=3 species=120/915 HP=67/122 foes=76/88 Atk=6/6 SpA=6/6 Spe=6/6 item=477/301 faints=0/0
+ISAAC_1_STATE moves=Hydro Pump/Sucker Punch PP=4/10/15/5 otherPP=10/15/10/4 partyHP=67/122/62/74 type=12/1 status=0/0
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=148/185
+ISAAC_1_TIMING board=102 setup=9 bothActors=53 complete=62 warm=54
+[0] EC live review Isaac dragon support: healthy repositioned pair: [32mPASS[0m
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Scald target=1
+AI decision turn=1 actor=1 move=Dragon Dance target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Yawn target=0
+AI decision turn=2 actor=1 move=Dragon Claw target=0
+AI decision turn=2 actor=3 move=Helping Hand target=1
+ISAAC_NATIVE_TIMER=39
+ISAAC_FORM_STATS HP=74/86 Atk=78/22 Def=41/75 SpD=44/51 speed=63/25
+ISAAC_1_AFTER board=50 turns=1 reserves=0 species=147/175 HP=49/86 foes=104/104 Atk=7/6 SpA=6/6 Spe=7/6 item=494/494 faints=0/0
+ISAAC_1_STATE moves=Dragon Dance/Yawn PP=19/5/15/5 otherPP=20/9/5/20 partyHP=49/86/62/144 type=17/19 status=0/0
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=61/32
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Scald target=1
+AI decision turn=1 actor=1 move=Dragon Dance target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Yawn target=0
+AI decision turn=2 actor=0 move=Scald target=1
+AI decision turn=2 actor=1 move=Dragon Claw target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=3 move=Helping Hand target=1
+AI decision turn=3 actor=1 move=Extreme Speed target=0
+AI decision turn=3 actor=3 move=Yawn target=2
+ISAAC_NATIVE_TIMER=39
+ISAAC_FORM_STATS HP=74/86 Atk=78/22 Def=41/75 SpD=44/51 speed=63/25
+ISAAC_1_AFTER board=50 turns=2 reserves=0 species=147/175 HP=24/86 foes=28/104 Atk=7/6 SpA=6/6 Spe=7/6 item=494/494 faints=0/0
+ISAAC_1_STATE moves=Dragon Claw/Helping Hand PP=19/5/14/5 otherPP=20/9/5/19 partyHP=24/86/62/144 type=17/19 status=0/0
+ISAAC_1_FIELD foeStatus=2/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=61/32
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Scald target=1
+AI decision turn=1 actor=1 move=Dragon Dance target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Yawn target=0
+AI decision turn=2 actor=0 move=Scald target=1
+AI decision turn=2 actor=1 move=Dragon Claw target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=3 move=Helping Hand target=1
+AI decision turn=3 actor=0 move=Scald target=1
+AI decision turn=3 actor=1 move=Extreme Speed target=0
+AI decision turn=3 actor=2 move=Thunderbolt target=1
+AI decision turn=3 actor=3 move=Yawn target=2
+AI decision turn=4 actor=1 move=Dragon Claw target=2
+AI decision turn=4 actor=3 move=Follow Me target=3
+ISAAC_NATIVE_TIMER=39
+ISAAC_FORM_STATS HP=74/86 Atk=78/22 Def=41/75 SpD=44/51 speed=63/25
+ISAAC_1_AFTER board=50 turns=3 reserves=0 species=147/175 HP=14/86 foes=0/104 Atk=7/6 SpA=6/6 Spe=7/6 item=494/494 faints=0/1
+ISAAC_1_STATE moves=Extreme Speed/Yawn PP=19/4/14/5 otherPP=20/8/5/19 partyHP=14/86/62/144 type=17/19 status=0/0
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=61/32
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Scald target=1
+AI decision turn=1 actor=1 move=Dragon Dance target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Yawn target=0
+AI decision turn=2 actor=0 move=Scald target=1
+AI decision turn=2 actor=1 move=Dragon Claw target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=3 move=Helping Hand target=1
+AI decision turn=3 actor=0 move=Scald target=1
+AI decision turn=3 actor=1 move=Extreme Speed target=0
+AI decision turn=3 actor=2 move=Thunderbolt target=1
+AI decision turn=3 actor=3 move=Yawn target=2
+AI decision turn=4 actor=2 move=Thunderbolt target=1
+AI decision turn=4 actor=1 move=Dragon Claw target=2
+AI decision turn=4 actor=3 move=Follow Me target=3
+AI decision turn=5 actor=1 move=Dragon Claw target=2
+AI decision turn=5 actor=3 move=Helping Hand target=1
+ISAAC_NATIVE_TIMER=39
+ISAAC_FORM_STATS HP=74/86 Atk=78/22 Def=41/75 SpD=44/51 speed=63/25
+ISAAC_1_AFTER board=50 turns=4 reserves=0 species=147/175 HP=14/68 foes=0/62 Atk=7/6 SpA=6/6 Spe=7/6 item=494/494 faints=0/1
+ISAAC_1_STATE moves=Dragon Claw/Follow Me PP=19/4/13/5 otherPP=19/8/5/19 partyHP=14/68/62/144 type=17/19 status=0/0
+ISAAC_1_FIELD foeStatus=0/2 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=61/32
+[1] EC live review Isaac denial: Taunt and spread Ground: [32mPASS[0m
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Taunt target=3
+AI decision turn=1 actor=1 move=Body Slam target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Follow Me target=3
+AI decision turn=2 actor=1 move=Body Slam target=0
+AI decision turn=2 actor=3 move=Ancient Power target=2
+ISAAC_NATIVE_TIMER=35
+ISAAC_FORM_STATS HP=144/86 Atk=89/22 Def=37/75 SpD=63/51 speed=14/25
+ISAAC_1_AFTER board=40 turns=1 reserves=0 species=446/175 HP=144/61 foes=56/104 Atk=6/6 SpA=6/6 Spe=6/6 item=494/494 faints=0/0
+ISAAC_1_STATE moves=Body Slam/Follow Me PP=14/15/15/10 otherPP=19/10/5/20 partyHP=144/61/62/74 type=1/19 status=0/0
+ISAAC_1_FIELD foeStatus=64/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=47/32
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Taunt target=3
+AI decision turn=1 actor=1 move=Body Slam target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Follow Me target=3
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Body Slam target=0
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=Ancient Power target=2
+AI decision turn=3 actor=1 move=Body Slam target=0
+AI decision turn=3 actor=3 move=Ancient Power target=2
+ISAAC_NATIVE_TIMER=35
+ISAAC_FORM_STATS HP=144/86 Atk=89/22 Def=37/75 SpD=63/51 speed=14/25
+ISAAC_1_AFTER board=40 turns=2 reserves=0 species=446/175 HP=144/36 foes=17/99 Atk=6/7 SpA=6/7 Spe=6/7 item=494/494 faints=0/0
+ISAAC_1_STATE moves=Body Slam/Ancient Power PP=13/15/15/10 otherPP=19/10/4/20 partyHP=144/36/62/74 type=1/19 status=0/0
+ISAAC_1_FIELD foeStatus=64/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=47/32
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Taunt target=3
+AI decision turn=1 actor=1 move=Body Slam target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Follow Me target=3
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Body Slam target=0
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=Ancient Power target=2
+AI decision turn=3 actor=0 move=Drain Punch target=1
+AI decision turn=3 actor=1 move=Body Slam target=0
+AI decision turn=3 actor=2 move=Scald target=3
+AI decision turn=3 actor=3 move=Ancient Power target=2
+AI decision turn=4 actor=1 move=Body Slam target=2
+AI decision turn=4 actor=3 move=Ancient Power target=2
+ISAAC_NATIVE_TIMER=35
+ISAAC_FORM_STATS HP=144/86 Atk=89/22 Def=37/75 SpD=63/51 speed=14/25
+ISAAC_1_AFTER board=40 turns=3 reserves=0 species=446/175 HP=144/20 foes=0/91 Atk=6/8 SpA=6/8 Spe=6/8 item=494/494 faints=0/1
+ISAAC_1_STATE moves=Body Slam/Ancient Power PP=12/15/15/10 otherPP=19/10/3/20 partyHP=144/20/62/74 type=1/19 status=0/0
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=47/32
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Taunt target=3
+AI decision turn=1 actor=1 move=Body Slam target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Follow Me target=3
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Body Slam target=0
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=Ancient Power target=2
+AI decision turn=3 actor=0 move=Drain Punch target=1
+AI decision turn=3 actor=1 move=Body Slam target=0
+AI decision turn=3 actor=2 move=Scald target=3
+AI decision turn=3 actor=3 move=Ancient Power target=2
+AI decision turn=4 actor=2 move=Scald target=3
+AI decision turn=4 actor=1 move=Body Slam target=2
+AI decision turn=4 actor=3 move=Ancient Power target=2
+AI decision turn=5 actor=1 move=Body Slam target=2
+AI switch turn=5 actor=3 party=3
+ISAAC_NATIVE_TIMER=35
+ISAAC_FORM_STATS HP=144/86 Atk=89/22 Def=37/75 SpD=63/51 speed=14/25
+ISAAC_1_AFTER board=40 turns=4 reserves=0 species=446/175 HP=144/10 foes=0/41 Atk=6/9 SpA=6/9 Spe=6/9 item=494/494 faints=0/1
+ISAAC_1_STATE moves=Body Slam/Ancient Power PP=11/15/15/10 otherPP=19/10/2/20 partyHP=144/10/62/74 type=1/19 status=0/0
+ISAAC_1_FIELD foeStatus=0/64 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=47/32
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=Ice Punch target=2
+AI decision turn=1 actor=2 move=Psychic target=1
+AI decision turn=1 actor=3 move=Helping Hand target=1
+AI decision turn=2 actor=1 move=Body Slam target=2
+AI decision turn=2 actor=3 move=Ancient Power target=2
+ISAAC_NATIVE_TIMER=60
+ISAAC_FORM_STATS HP=144/86 Atk=89/22 Def=37/75 SpD=63/51 speed=14/25
+ISAAC_1_AFTER board=41 turns=1 reserves=0 species=446/175 HP=57/61 foes=110/8 Atk=6/6 SpA=6/6 Spe=6/6 item=494/494 faints=0/0
+ISAAC_1_STATE moves=Ice Punch/Helping Hand PP=15/15/14/10 otherPP=20/10/5/19 partyHP=57/61/62/74 type=1/19 status=0/0
+ISAAC_1_FIELD foeStatus=0/32 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=47/32
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=Ice Punch target=2
+AI decision turn=1 actor=2 move=Psychic target=1
+AI decision turn=1 actor=3 move=Helping Hand target=1
+AI decision turn=2 actor=0 move=Earthquake target=1
+AI decision turn=2 actor=1 move=Body Slam target=2
+AI decision turn=2 actor=2 move=Psychic target=1
+AI decision turn=2 actor=3 move=Ancient Power target=2
+AI switch turn=2 actor=1 party=4
+AI decision turn=3 actor=1 move=Hydro Pump target=0
+AI decision turn=3 actor=3 move=Yawn target=0
+ISAAC_NATIVE_TIMER=60
+ISAAC_FORM_STATS HP=67/86 Atk=36/22 Def=47/75 SpD=47/51 speed=84/25
+ISAAC_1_AFTER board=41 turns=2 reserves=0 species=120/175 HP=67/36 foes=110/0 Atk=6/7 SpA=6/7 Spe=6/7 item=477/494 faints=1/1
+ISAAC_1_STATE moves=-/Ancient Power PP=5/10/15/5 otherPP=20/10/4/19 partyHP=0/36/62/74 type=12/19 status=0/0
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=148/32
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=Ice Punch target=2
+AI decision turn=1 actor=2 move=Psychic target=1
+AI decision turn=1 actor=3 move=Helping Hand target=1
+AI decision turn=2 actor=0 move=Earthquake target=1
+AI decision turn=2 actor=1 move=Body Slam target=2
+AI decision turn=2 actor=2 move=Psychic target=1
+AI decision turn=2 actor=3 move=Ancient Power target=2
+AI switch turn=2 actor=1 party=4
+AI decision turn=3 actor=0 move=Earthquake target=1
+AI decision turn=3 actor=1 move=Hydro Pump target=0
+AI decision turn=3 actor=3 move=Yawn target=0
+ISAAC_NATIVE_TIMER=60
+ISAAC_FORM_STATS HP=67/86 Atk=36/22 Def=47/75 SpD=47/51 speed=84/25
+ISAAC_1_AFTER board=41 turns=3 reserves=0 species=120/175 HP=67/36 foes=0/0 Atk=6/7 SpA=6/7 Spe=6/7 item=477/494 faints=1/2
+ISAAC_1_STATE moves=Hydro Pump/Ancient Power PP=4/10/15/5 otherPP=20/10/4/19 partyHP=0/36/62/74 type=12/19 status=0/0
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=148/32
+[3] EC live review Isaac counterplay: burn and redirection: [32mPASS[0m
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Will-O-Wisp target=1
+AI decision turn=1 actor=1 move=Curse target=1
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=Follow Me target=3
+AI decision turn=2 actor=1 move=Curse target=1
+AI decision turn=2 actor=3 move=Follow Me target=3
+ISAAC_NATIVE_TIMER=41
+ISAAC_FORM_STATS HP=144/86 Atk=89/22 Def=37/75 SpD=63/51 speed=14/25
+ISAAC_1_AFTER board=20 turns=1 reserves=0 species=446/175 HP=144/81 foes=110/104 Atk=7/6 SpA=6/6 Spe=5/6 item=494/494 faints=0/0
+ISAAC_1_STATE moves=Curse/Follow Me PP=15/15/15/9 otherPP=19/10/5/20 partyHP=144/81/62/74 type=1/19 status=0/16
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=47/32
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Will-O-Wisp target=1
+AI decision turn=1 actor=1 move=Curse target=1
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=Follow Me target=3
+AI decision turn=2 actor=0 move=Foul Play target=1
+AI decision turn=2 actor=1 move=Curse target=1
+AI decision turn=2 actor=2 move=Follow Me target=2
+AI decision turn=2 actor=3 move=Follow Me target=3
+AI decision turn=3 actor=1 move=Body Slam target=2
+AI decision turn=3 actor=3 move=Helping Hand target=1
+ISAAC_NATIVE_TIMER=41
+ISAAC_FORM_STATS HP=144/86 Atk=89/22 Def=37/75 SpD=63/51 speed=14/25
+ISAAC_1_AFTER board=20 turns=2 reserves=0 species=446/175 HP=144/73 foes=110/104 Atk=8/6 SpA=6/6 Spe=4/6 item=494/494 faints=0/0
+ISAAC_1_STATE moves=Curse/Follow Me PP=15/15/15/8 otherPP=18/10/5/20 partyHP=144/73/62/74 type=1/19 status=0/16
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=47/32
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Will-O-Wisp target=1
+AI decision turn=1 actor=1 move=Curse target=1
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=Follow Me target=3
+AI decision turn=2 actor=0 move=Foul Play target=1
+AI decision turn=2 actor=1 move=Curse target=1
+AI decision turn=2 actor=2 move=Follow Me target=2
+AI decision turn=2 actor=3 move=Follow Me target=3
+AI decision turn=3 actor=0 move=Foul Play target=1
+AI decision turn=3 actor=1 move=Body Slam target=2
+AI decision turn=3 actor=2 move=Follow Me target=2
+AI decision turn=3 actor=3 move=Helping Hand target=1
+AI decision turn=4 actor=1 move=Body Slam target=2
+AI decision turn=4 actor=3 move=Follow Me target=3
+ISAAC_NATIVE_TIMER=41
+ISAAC_FORM_STATS HP=144/86 Atk=89/22 Def=37/75 SpD=63/51 speed=14/25
+ISAAC_1_AFTER board=20 turns=3 reserves=0 species=446/175 HP=89/68 foes=110/37 Atk=8/6 SpA=6/6 Spe=4/6 item=494/494 faints=0/0
+ISAAC_1_STATE moves=Body Slam/Helping Hand PP=14/15/15/8 otherPP=18/10/5/19 partyHP=89/68/62/74 type=1/19 status=0/16
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=47/32
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Will-O-Wisp target=1
+AI decision turn=1 actor=1 move=Curse target=1
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=Follow Me target=3
+AI decision turn=2 actor=0 move=Foul Play target=1
+AI decision turn=2 actor=1 move=Curse target=1
+AI decision turn=2 actor=2 move=Follow Me target=2
+AI decision turn=2 actor=3 move=Follow Me target=3
+AI decision turn=3 actor=0 move=Foul Play target=1
+AI decision turn=3 actor=1 move=Body Slam target=2
+AI decision turn=3 actor=2 move=Follow Me target=2
+AI decision turn=3 actor=3 move=Helping Hand target=1
+AI decision turn=4 actor=0 move=Foul Play target=1
+AI decision turn=4 actor=1 move=Body Slam target=2
+AI decision turn=4 actor=2 move=Follow Me target=2
+AI decision turn=4 actor=3 move=Follow Me target=3
+AI decision turn=5 actor=1 move=Fire Punch target=0
+AI decision turn=5 actor=3 move=Follow Me target=3
+ISAAC_NATIVE_TIMER=41
+ISAAC_FORM_STATS HP=144/86 Atk=89/22 Def=37/75 SpD=63/51 speed=14/25
+ISAAC_1_AFTER board=20 turns=4 reserves=0 species=446/175 HP=89/60 foes=110/0 Atk=8/6 SpA=6/6 Spe=4/6 item=494/494 faints=0/1
+ISAAC_1_STATE moves=Body Slam/Follow Me PP=13/15/15/8 otherPP=17/10/5/19 partyHP=89/60/62/74 type=1/19 status=0/16
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=47/32
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Will-O-Wisp target=1
+AI decision turn=1 actor=1 move=Curse target=1
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=Follow Me target=3
+AI decision turn=2 actor=0 move=Foul Play target=1
+AI decision turn=2 actor=1 move=Curse target=1
+AI decision turn=2 actor=2 move=Follow Me target=2
+AI decision turn=2 actor=3 move=Follow Me target=3
+AI decision turn=3 actor=0 move=Foul Play target=1
+AI decision turn=3 actor=1 move=Body Slam target=2
+AI decision turn=3 actor=2 move=Follow Me target=2
+AI decision turn=3 actor=3 move=Helping Hand target=1
+AI decision turn=4 actor=0 move=Foul Play target=1
+AI decision turn=4 actor=1 move=Body Slam target=2
+AI decision turn=4 actor=2 move=Follow Me target=2
+AI decision turn=4 actor=3 move=Follow Me target=3
+AI decision turn=5 actor=0 move=Foul Play target=1
+AI decision turn=5 actor=1 move=Fire Punch target=0
+AI decision turn=5 actor=3 move=Follow Me target=3
+AI decision turn=6 actor=1 move=Fire Punch target=0
+AI decision turn=6 actor=3 move=Follow Me target=3
+ISAAC_NATIVE_TIMER=41
+ISAAC_FORM_STATS HP=144/86 Atk=89/22 Def=37/75 SpD=63/51 speed=14/25
+ISAAC_1_AFTER board=20 turns=5 reserves=0 species=446/175 HP=89/52 foes=70/0 Atk=8/6 SpA=6/6 Spe=4/6 item=494/494 faints=0/1
+ISAAC_1_STATE moves=Fire Punch/Follow Me PP=13/14/15/8 otherPP=16/10/5/19 partyHP=89/52/62/74 type=1/19 status=0/16
+ISAAC_1_FIELD foeStatus=16/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=47/32
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Will-O-Wisp target=1
+AI decision turn=1 actor=1 move=Dazzling Gleam target=0
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=Extreme Speed target=2
+AI decision turn=2 actor=1 move=Psychic target=2
+AI decision turn=2 actor=3 move=Dragon Claw target=2
+ISAAC_NATIVE_TIMER=16
+ISAAC_FORM_STATS HP=62/74 Atk=22/78 Def=22/41 SpD=45/44 speed=92/63
+ISAAC_1_AFTER board=20 turns=1 reserves=1 species=63/147 HP=62/74 foes=66/67 Atk=6/6 SpA=6/6 Spe=6/6 item=481/494 faints=0/0
+ISAAC_1_STATE moves=Dazzling Gleam/Extreme Speed PP=10/9/5/5 otherPP=20/4/15/5 partyHP=62/74/0/0 type=15/17 status=16/0
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=98/61
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Will-O-Wisp target=1
+AI decision turn=1 actor=1 move=Dazzling Gleam target=0
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=Extreme Speed target=2
+AI decision turn=2 actor=0 move=Foul Play target=1
+AI decision turn=2 actor=1 move=Psychic target=2
+AI decision turn=2 actor=2 move=Follow Me target=2
+AI decision turn=2 actor=3 move=Dragon Claw target=2
+AI decision turn=3 actor=1 move=Psychic target=2
+AI decision turn=3 actor=3 move=Dragon Claw target=2
+ISAAC_NATIVE_TIMER=16
+ISAAC_FORM_STATS HP=62/74 Atk=22/78 Def=22/41 SpD=45/44 speed=92/63
+ISAAC_1_AFTER board=20 turns=2 reserves=1 species=63/147 HP=1/74 foes=66/23 Atk=6/6 SpA=6/6 Spe=6/6 item=0/494 faints=0/0
+ISAAC_1_STATE moves=Psychic/Dragon Claw PP=9/9/5/5 otherPP=20/4/14/5 partyHP=1/74/0/0 type=15/17 status=16/0
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=98/61
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Will-O-Wisp target=1
+AI decision turn=1 actor=1 move=Dazzling Gleam target=0
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=Extreme Speed target=2
+AI decision turn=2 actor=0 move=Foul Play target=1
+AI decision turn=2 actor=1 move=Psychic target=2
+AI decision turn=2 actor=2 move=Follow Me target=2
+AI decision turn=2 actor=3 move=Dragon Claw target=2
+AI decision turn=3 actor=0 move=Foul Play target=1
+AI decision turn=3 actor=1 move=Psychic target=2
+AI decision turn=3 actor=2 move=Follow Me target=2
+AI decision turn=3 actor=3 move=Dragon Claw target=2
+AI decision turn=4 actor=3 move=Protect target=3
+ISAAC_NATIVE_TIMER=16
+ISAAC_FORM_STATS HP=62/74 Atk=22/78 Def=22/41 SpD=45/44 speed=92/63
+ISAAC_1_AFTER board=20 turns=3 reserves=1 species=63/147 HP=0/74 foes=68/0 Atk=6/6 SpA=6/6 Spe=6/6 item=0/494 faints=1/1
+ISAAC_1_STATE moves=-/Dragon Claw PP=8/9/5/5 otherPP=20/4/13/5 partyHP=0/74/0/0 type=15/17 status=0/0
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=0/61
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Will-O-Wisp target=1
+AI decision turn=1 actor=1 move=Dazzling Gleam target=0
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=Extreme Speed target=2
+AI decision turn=2 actor=0 move=Foul Play target=1
+AI decision turn=2 actor=1 move=Psychic target=2
+AI decision turn=2 actor=2 move=Follow Me target=2
+AI decision turn=2 actor=3 move=Dragon Claw target=2
+AI decision turn=3 actor=0 move=Foul Play target=1
+AI decision turn=3 actor=1 move=Psychic target=2
+AI decision turn=3 actor=2 move=Follow Me target=2
+AI decision turn=3 actor=3 move=Dragon Claw target=2
+AI decision turn=4 actor=3 move=Protect target=3
+AI decision turn=4 actor=0 move=Foul Play target=1
+AI decision turn=5 actor=3 move=Dragon Claw target=0
+ISAAC_NATIVE_TIMER=16
+ISAAC_FORM_STATS HP=62/74 Atk=22/78 Def=22/41 SpD=45/44 speed=92/63
+ISAAC_1_AFTER board=20 turns=4 reserves=1 species=63/147 HP=0/74 foes=68/0 Atk=6/6 SpA=6/6 Spe=6/6 item=0/494 faints=1/1
+ISAAC_1_STATE moves=-/Protect PP=8/9/5/5 otherPP=20/4/13/4 partyHP=0/74/0/0 type=15/17 status=0/0
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=0/61
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Will-O-Wisp target=1
+AI decision turn=1 actor=1 move=Dazzling Gleam target=0
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=Extreme Speed target=2
+AI decision turn=2 actor=0 move=Foul Play target=1
+AI decision turn=2 actor=1 move=Psychic target=2
+AI decision turn=2 actor=2 move=Follow Me target=2
+AI decision turn=2 actor=3 move=Dragon Claw target=2
+AI decision turn=3 actor=0 move=Foul Play target=1
+AI decision turn=3 actor=1 move=Psychic target=2
+AI decision turn=3 actor=2 move=Follow Me target=2
+AI decision turn=3 actor=3 move=Dragon Claw target=2
+AI decision turn=4 actor=3 move=Protect target=3
+AI decision turn=4 actor=0 move=Foul Play target=1
+AI decision turn=5 actor=3 move=Dragon Claw target=0
+AI decision turn=5 actor=0 move=Foul Play target=1
+AI decision turn=6 actor=3 move=Dragon Claw target=0
+ISAAC_NATIVE_TIMER=16
+ISAAC_FORM_STATS HP=62/74 Atk=22/78 Def=22/41 SpD=45/44 speed=92/63
+ISAAC_1_AFTER board=20 turns=5 reserves=1 species=63/147 HP=0/29 foes=43/0 Atk=6/6 SpA=6/6 Spe=6/6 item=0/494 faints=1/1
+ISAAC_1_STATE moves=-/Dragon Claw PP=8/9/5/5 otherPP=20/4/12/4 partyHP=0/29/0/0 type=15/17 status=0/0
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=0/61
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Will-O-Wisp target=1
+AI decision turn=1 actor=1 move=Hydro Pump target=2
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=Body Slam target=2
+AI decision turn=2 actor=1 move=Hydro Pump target=0
+AI decision turn=2 actor=3 move=Body Slam target=2
+ISAAC_NATIVE_TIMER=48
+ISAAC_FORM_STATS HP=67/122 Atk=36/118 Def=47/74 SpD=47/74 speed=84/83
+ISAAC_1_AFTER board=20 turns=1 reserves=2 species=120/915 HP=63/122 foes=110/26 Atk=6/6 SpA=6/6 Spe=6/6 item=477/301 faints=0/0
+ISAAC_1_STATE moves=Hydro Pump/Body Slam PP=4/10/15/5 otherPP=10/14/10/5 partyHP=63/122/0/0 type=12/1 status=16/0
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=148/185
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Will-O-Wisp target=1
+AI decision turn=1 actor=1 move=Hydro Pump target=2
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=Body Slam target=2
+AI decision turn=2 actor=0 move=Foul Play target=1
+AI decision turn=2 actor=1 move=Hydro Pump target=0
+AI decision turn=2 actor=2 move=Follow Me target=2
+AI decision turn=2 actor=3 move=Body Slam target=2
+AI decision turn=3 actor=1 move=Recover target=1
+AI decision turn=3 actor=3 move=Sucker Punch target=0
+ISAAC_NATIVE_TIMER=48
+ISAAC_FORM_STATS HP=67/122 Atk=36/118 Def=47/74 SpD=47/74 speed=84/83
+ISAAC_1_AFTER board=20 turns=2 reserves=2 species=120/915 HP=32/122 foes=110/0 Atk=6/6 SpA=6/6 Spe=6/6 item=477/301 faints=0/1
+ISAAC_1_STATE moves=Hydro Pump/Body Slam PP=3/10/15/5 otherPP=10/13/10/5 partyHP=32/122/0/0 type=12/1 status=16/0
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=148/185
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Will-O-Wisp target=1
+AI decision turn=1 actor=1 move=Hydro Pump target=2
+AI decision turn=1 actor=2 move=Follow Me target=2
+AI decision turn=1 actor=3 move=Body Slam target=2
+AI decision turn=2 actor=0 move=Foul Play target=1
+AI decision turn=2 actor=1 move=Hydro Pump target=0
+AI decision turn=2 actor=2 move=Follow Me target=2
+AI decision turn=2 actor=3 move=Body Slam target=2
+AI decision turn=3 actor=0 move=Foul Play target=1
+AI decision turn=3 actor=1 move=Recover target=1
+AI decision turn=3 actor=3 move=Sucker Punch target=0
+AI decision turn=4 actor=1 move=Recover target=1
+AI decision turn=4 actor=3 move=Sucker Punch target=0
+ISAAC_NATIVE_TIMER=48
+ISAAC_FORM_STATS HP=67/122 Atk=36/118 Def=47/74 SpD=47/74 speed=84/83
+ISAAC_1_AFTER board=20 turns=3 reserves=2 species=120/915 HP=34/122 foes=83/0 Atk=6/6 SpA=6/6 Spe=6/6 item=477/301 faints=0/1
+ISAAC_1_STATE moves=Recover/Sucker Punch PP=3/10/15/4 otherPP=10/13/10/4 partyHP=34/122/0/0 type=12/1 status=16/0
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=148/185
+[2] EC live review Isaac disruption: flinch and Water pressure: [32mPASS[0m
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Body Slam target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Follow Me target=3
+AI decision turn=2 actor=1 move=Body Slam target=0
+AI decision turn=2 actor=3 move=Follow Me target=3
+ISAAC_NATIVE_TIMER=35
+ISAAC_FORM_STATS HP=144/86 Atk=89/22 Def=37/75 SpD=63/51 speed=14/25
+ISAAC_1_AFTER board=10 turns=1 reserves=0 species=446/175 HP=132/61 foes=95/104 Atk=6/6 SpA=6/6 Spe=6/6 item=494/494 faints=0/0
+ISAAC_1_STATE moves=-/Follow Me PP=15/15/15/10 otherPP=19/10/5/20 partyHP=132/61/62/74 type=1/19 status=0/0
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=47/32
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Body Slam target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Follow Me target=3
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Body Slam target=0
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=Follow Me target=3
+AI decision turn=3 actor=1 move=Body Slam target=0
+AI decision turn=3 actor=3 move=Follow Me target=3
+ISAAC_NATIVE_TIMER=35
+ISAAC_FORM_STATS HP=144/86 Atk=89/22 Def=37/75 SpD=63/51 speed=14/25
+ISAAC_1_AFTER board=10 turns=2 reserves=0 species=446/175 HP=132/28 foes=37/104 Atk=6/6 SpA=6/6 Spe=6/6 item=494/494 faints=0/0
+ISAAC_1_STATE moves=Body Slam/Follow Me PP=14/15/15/10 otherPP=18/10/5/20 partyHP=132/28/62/74 type=1/19 status=0/0
+ISAAC_1_FIELD foeStatus=64/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=47/32
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Body Slam target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Follow Me target=3
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Body Slam target=0
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=Follow Me target=3
+AI decision turn=3 actor=0 move=Drain Punch target=1
+AI decision turn=3 actor=1 move=Body Slam target=0
+AI decision turn=3 actor=2 move=Scald target=3
+AI decision turn=3 actor=3 move=Follow Me target=3
+AI decision turn=4 actor=1 move=Body Slam target=2
+AI switch turn=4 actor=3 party=3
+ISAAC_NATIVE_TIMER=35
+ISAAC_FORM_STATS HP=144/86 Atk=89/22 Def=37/75 SpD=63/51 speed=14/25
+ISAAC_1_AFTER board=10 turns=3 reserves=0 species=446/175 HP=132/3 foes=0/104 Atk=6/6 SpA=6/6 Spe=6/6 item=494/494 faints=0/1
+ISAAC_1_STATE moves=Body Slam/Follow Me PP=13/15/15/10 otherPP=17/10/5/20 partyHP=132/3/62/74 type=1/19 status=0/0
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=47/32
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Body Slam target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Follow Me target=3
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Body Slam target=0
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=Follow Me target=3
+AI decision turn=3 actor=0 move=Drain Punch target=1
+AI decision turn=3 actor=1 move=Body Slam target=0
+AI decision turn=3 actor=2 move=Scald target=3
+AI decision turn=3 actor=3 move=Follow Me target=3
+AI decision turn=4 actor=2 move=Scald target=3
+AI decision turn=4 actor=1 move=Body Slam target=2
+AI switch turn=4 actor=3 party=3
+AI decision turn=5 actor=1 move=Body Slam target=2
+AI decision turn=5 actor=3 move=Dragon Claw target=2
+ISAAC_NATIVE_TIMER=35
+ISAAC_FORM_STATS HP=144/74 Atk=89/78 Def=37/41 SpD=63/44 speed=14/63
+ISAAC_1_AFTER board=10 turns=4 reserves=0 species=446/147 HP=132/59 foes=0/65 Atk=6/6 SpA=6/6 Spe=6/6 item=494/494 faints=0/1
+ISAAC_1_STATE moves=Body Slam/- PP=12/15/15/10 otherPP=20/5/15/5 partyHP=132/3/62/59 type=1/17 status=0/0
+ISAAC_1_FIELD foeStatus=0/64 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=47/61
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Body Slam target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Follow Me target=3
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Body Slam target=0
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=Follow Me target=3
+AI decision turn=3 actor=0 move=Drain Punch target=1
+AI decision turn=3 actor=1 move=Body Slam target=0
+AI decision turn=3 actor=2 move=Scald target=3
+AI decision turn=3 actor=3 move=Follow Me target=3
+AI decision turn=4 actor=2 move=Scald target=3
+AI decision turn=4 actor=1 move=Body Slam target=2
+AI switch turn=4 actor=3 party=3
+AI decision turn=5 actor=2 move=Scald target=3
+AI decision turn=5 actor=1 move=Body Slam target=2
+AI decision turn=5 actor=3 move=Dragon Claw target=2
+ISAAC_NATIVE_TIMER=35
+ISAAC_FORM_STATS HP=144/74 Atk=89/78 Def=37/41 SpD=63/44 speed=14/63
+ISAAC_1_AFTER board=10 turns=5 reserves=0 species=446/147 HP=132/59 foes=0/0 Atk=6/6 SpA=6/6 Spe=6/6 item=494/494 faints=0/2
+ISAAC_1_STATE moves=Body Slam/Dragon Claw PP=11/15/15/10 otherPP=20/5/14/5 partyHP=132/3/62/59 type=1/17 status=0/0
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=47/61
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Dragon Claw target=0
+AI decision turn=2 actor=1 move=Psychic target=0
+AI decision turn=2 actor=3 move=Dragon Dance target=3
+ISAAC_NATIVE_TIMER=18
+ISAAC_FORM_STATS HP=62/74 Atk=22/78 Def=22/41 SpD=45/44 speed=92/63
+ISAAC_1_AFTER board=10 turns=1 reserves=1 species=63/147 HP=62/59 foes=44/104 Atk=6/6 SpA=6/6 Spe=6/6 item=481/494 faints=0/0
+ISAAC_1_STATE moves=Protect/Dragon Claw PP=10/10/5/4 otherPP=20/5/14/5 partyHP=62/59/0/0 type=15/17 status=0/0
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=98/61
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Dragon Claw target=0
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Psychic target=0
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=Dragon Dance target=3
+AI decision turn=3 actor=1 move=Psychic target=2
+AI decision turn=3 actor=3 move=Dragon Claw target=2
+ISAAC_NATIVE_TIMER=18
+ISAAC_FORM_STATS HP=62/74 Atk=22/78 Def=22/41 SpD=45/44 speed=92/63
+ISAAC_1_AFTER board=10 turns=2 reserves=1 species=63/147 HP=62/44 foes=0/104 Atk=6/7 SpA=6/6 Spe=6/7 item=481/494 faints=0/1
+ISAAC_1_STATE moves=Psychic/Dragon Dance PP=9/10/5/4 otherPP=19/5/14/5 partyHP=62/44/0/0 type=15/17 status=0/0
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=98/61
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Dragon Claw target=0
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Psychic target=0
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=Dragon Dance target=3
+AI decision turn=3 actor=2 move=Scald target=3
+AI decision turn=3 actor=1 move=Psychic target=2
+AI decision turn=3 actor=3 move=Dragon Claw target=2
+AI decision turn=4 actor=1 move=Psychic target=2
+AI decision turn=4 actor=3 move=Extreme Speed target=2
+ISAAC_NATIVE_TIMER=18
+ISAAC_FORM_STATS HP=62/74 Atk=22/78 Def=22/41 SpD=45/44 speed=92/63
+ISAAC_1_AFTER board=10 turns=3 reserves=1 species=63/147 HP=62/29 foes=0/23 Atk=6/7 SpA=6/6 Spe=6/7 item=481/494 faints=0/1
+ISAAC_1_STATE moves=Psychic/Dragon Claw PP=8/10/5/4 otherPP=19/5/13/5 partyHP=62/29/0/0 type=15/17 status=0/0
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=98/61
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Dragon Claw target=0
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Psychic target=0
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=Dragon Dance target=3
+AI decision turn=3 actor=2 move=Scald target=3
+AI decision turn=3 actor=1 move=Psychic target=2
+AI decision turn=3 actor=3 move=Dragon Claw target=2
+AI decision turn=4 actor=2 move=Scald target=3
+AI decision turn=4 actor=1 move=Psychic target=2
+AI decision turn=4 actor=3 move=Extreme Speed target=2
+ISAAC_NATIVE_TIMER=18
+ISAAC_FORM_STATS HP=62/74 Atk=22/78 Def=22/41 SpD=45/44 speed=92/63
+ISAAC_1_AFTER board=10 turns=4 reserves=1 species=63/147 HP=62/29 foes=0/0 Atk=6/7 SpA=6/6 Spe=6/7 item=481/494 faints=0/2
+ISAAC_1_STATE moves=Psychic/Extreme Speed PP=8/10/5/4 otherPP=19/4/13/5 partyHP=62/29/0/0 type=15/17 status=0/0
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=98/61
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Hydro Pump target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI decision turn=2 actor=1 move=Hydro Pump target=2
+AI decision turn=2 actor=3 move=Body Slam target=2
+ISAAC_NATIVE_TIMER=57
+ISAAC_FORM_STATS HP=67/122 Atk=36/118 Def=47/74 SpD=47/74 speed=84/83
+ISAAC_1_AFTER board=10 turns=1 reserves=2 species=120/915 HP=53/122 foes=95/71 Atk=6/6 SpA=6/6 Spe=6/6 item=477/301 faints=0/0
+ISAAC_1_STATE moves=-/Fake Out PP=5/10/15/5 otherPP=9/15/10/5 partyHP=53/122/0/0 type=12/1 status=0/0
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=148/185
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Hydro Pump target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Hydro Pump target=2
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=Body Slam target=2
+AI decision turn=3 actor=1 move=Recover target=1
+AI decision turn=3 actor=3 move=Body Slam target=0
+ISAAC_NATIVE_TIMER=57
+ISAAC_FORM_STATS HP=67/122 Atk=36/118 Def=47/74 SpD=47/74 speed=84/83
+ISAAC_1_AFTER board=10 turns=2 reserves=2 species=120/915 HP=14/122 foes=95/0 Atk=6/6 SpA=6/6 Spe=6/6 item=477/301 faints=0/1
+ISAAC_1_STATE moves=Hydro Pump/Body Slam PP=4/10/15/5 otherPP=9/14/10/5 partyHP=14/122/0/0 type=12/1 status=0/0
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=148/185
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Hydro Pump target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Hydro Pump target=2
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=Body Slam target=2
+AI decision turn=3 actor=0 move=Drain Punch target=1
+AI decision turn=3 actor=1 move=Recover target=1
+AI decision turn=3 actor=3 move=Body Slam target=0
+ISAAC_NATIVE_TIMER=57
+ISAAC_FORM_STATS HP=67/122 Atk=36/118 Def=47/74 SpD=47/74 speed=84/83
+ISAAC_1_AFTER board=10 turns=3 reserves=2 species=120/915 HP=47/122 foes=0/0 Atk=6/6 SpA=6/6 Spe=6/6 item=477/301 faints=0/2
+ISAAC_1_STATE moves=Recover/Body Slam PP=4/10/15/4 otherPP=9/13/10/5 partyHP=47/122/0/0 type=12/1 status=0/0
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=148/185
+[0] EC live review Isaac core: pressure and promoted reserves: [32mPASS[0m
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Curse target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Follow Me target=3
+AI decision turn=2 actor=1 move=Body Slam target=0
+AI decision turn=2 actor=3 move=Helping Hand target=1
+ISAAC_NATIVE_TIMER=48
+ISAAC_FORM_STATS HP=144/86 Atk=89/22 Def=37/75 SpD=63/51 speed=14/25
+ISAAC_1_AFTER board=0 turns=1 reserves=0 species=446/175 HP=144/48 foes=93/119 Atk=7/6 SpA=6/6 Spe=5/6 item=494/494 faints=0/0
+ISAAC_1_STATE moves=Curse/Follow Me PP=15/15/15/9 otherPP=19/10/5/20 partyHP=144/48/62/74 type=1/19 status=0/0
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=47/32
+ISAAC_1_TIMING board=0 setup=6 bothActors=46 complete=52 warm=47
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Curse target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Follow Me target=3
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Body Slam target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Helping Hand target=1
+AI decision turn=3 actor=1 move=Body Slam target=2
+AI decision turn=3 actor=3 move=Follow Me target=3
+ISAAC_NATIVE_TIMER=48
+ISAAC_FORM_STATS HP=144/86 Atk=89/22 Def=37/75 SpD=63/51 speed=14/25
+ISAAC_1_AFTER board=0 turns=2 reserves=0 species=446/175 HP=110/36 foes=0/119 Atk=7/6 SpA=6/6 Spe=5/6 item=494/494 faints=0/1
+ISAAC_1_STATE moves=Body Slam/Helping Hand PP=14/15/15/9 otherPP=19/10/5/19 partyHP=110/36/62/74 type=1/19 status=0/0
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=47/32
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Curse target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Follow Me target=3
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Body Slam target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Helping Hand target=1
+AI decision turn=3 actor=2 move=Drain Punch target=3
+AI decision turn=3 actor=1 move=Body Slam target=2
+AI decision turn=3 actor=3 move=Follow Me target=3
+AI decision turn=4 actor=1 move=Body Slam target=2
+AI decision turn=4 actor=3 move=Follow Me target=3
+ISAAC_NATIVE_TIMER=48
+ISAAC_FORM_STATS HP=144/86 Atk=89/22 Def=37/75 SpD=63/51 speed=14/25
+ISAAC_1_AFTER board=0 turns=3 reserves=0 species=446/175 HP=110/24 foes=0/79 Atk=7/6 SpA=6/6 Spe=5/6 item=494/494 faints=0/1
+ISAAC_1_STATE moves=Body Slam/Follow Me PP=13/15/15/9 otherPP=18/10/5/19 partyHP=110/24/62/74 type=1/19 status=0/0
+ISAAC_1_FIELD foeStatus=0/64 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=47/32
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Curse target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Follow Me target=3
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Body Slam target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Helping Hand target=1
+AI decision turn=3 actor=2 move=Drain Punch target=3
+AI decision turn=3 actor=1 move=Body Slam target=2
+AI decision turn=3 actor=3 move=Follow Me target=3
+AI decision turn=4 actor=2 move=Drain Punch target=3
+AI decision turn=4 actor=1 move=Body Slam target=2
+AI decision turn=4 actor=3 move=Follow Me target=3
+AI decision turn=5 actor=1 move=Body Slam target=2
+AI decision turn=5 actor=3 move=Follow Me target=3
+ISAAC_NATIVE_TIMER=48
+ISAAC_FORM_STATS HP=144/86 Atk=89/22 Def=37/75 SpD=63/51 speed=14/25
+ISAAC_1_AFTER board=0 turns=4 reserves=0 species=446/175 HP=110/24 foes=0/39 Atk=7/6 SpA=6/6 Spe=5/6 item=494/494 faints=0/1
+ISAAC_1_STATE moves=Body Slam/Follow Me PP=12/15/15/9 otherPP=17/10/5/19 partyHP=110/24/62/74 type=1/19 status=0/0
+ISAAC_1_FIELD foeStatus=0/64 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=47/32
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Curse target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Follow Me target=3
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Body Slam target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Helping Hand target=1
+AI decision turn=3 actor=2 move=Drain Punch target=3
+AI decision turn=3 actor=1 move=Body Slam target=2
+AI decision turn=3 actor=3 move=Follow Me target=3
+AI decision turn=4 actor=2 move=Drain Punch target=3
+AI decision turn=4 actor=1 move=Body Slam target=2
+AI decision turn=4 actor=3 move=Follow Me target=3
+AI decision turn=5 actor=2 move=Drain Punch target=3
+AI decision turn=5 actor=1 move=Body Slam target=2
+AI decision turn=5 actor=3 move=Follow Me target=3
+ISAAC_NATIVE_TIMER=48
+ISAAC_FORM_STATS HP=144/86 Atk=89/22 Def=37/75 SpD=63/51 speed=14/25
+ISAAC_1_AFTER board=0 turns=5 reserves=0 species=446/175 HP=110/24 foes=0/0 Atk=7/6 SpA=6/6 Spe=5/6 item=494/494 faints=0/2
+ISAAC_1_STATE moves=Body Slam/Follow Me PP=11/15/15/9 otherPP=16/10/5/19 partyHP=110/24/62/74 type=1/19 status=0/0
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=47/32
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Ice Punch target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Helping Hand target=1
+AI decision turn=2 actor=1 move=Body Slam target=0
+AI decision turn=2 actor=3 move=Ancient Power target=0
+ISAAC_NATIVE_TIMER=45
+ISAAC_FORM_STATS HP=144/86 Atk=89/22 Def=37/75 SpD=63/51 speed=14/25
+ISAAC_1_AFTER board=1 turns=1 reserves=0 species=446/175 HP=108/68 foes=8/104 Atk=6/6 SpA=6/6 Spe=6/6 item=494/494 faints=0/0
+ISAAC_1_STATE moves=Ice Punch/Helping Hand PP=15/15/14/10 otherPP=20/10/5/19 partyHP=108/68/62/74 type=1/19 status=0/0
+ISAAC_1_FIELD foeStatus=32/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=47/32
+ISAAC_1_TIMING board=1 setup=6 bothActors=37 complete=43 warm=38
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Ice Punch target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Helping Hand target=1
+AI decision turn=2 actor=0 move=Psychic target=1
+AI decision turn=2 actor=1 move=Body Slam target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Ancient Power target=0
+AI decision turn=3 actor=1 move=Body Slam target=2
+AI decision turn=3 actor=3 move=Yawn target=2
+ISAAC_NATIVE_TIMER=45
+ISAAC_FORM_STATS HP=144/86 Atk=89/22 Def=37/75 SpD=63/51 speed=14/25
+ISAAC_1_AFTER board=1 turns=2 reserves=0 species=446/175 HP=72/50 foes=0/73 Atk=6/7 SpA=6/7 Spe=6/7 item=494/494 faints=0/1
+ISAAC_1_STATE moves=Body Slam/Ancient Power PP=14/15/14/10 otherPP=20/10/4/19 partyHP=72/50/62/74 type=1/19 status=0/0
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=47/32
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Ice Punch target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Helping Hand target=1
+AI decision turn=2 actor=0 move=Psychic target=1
+AI decision turn=2 actor=1 move=Body Slam target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Ancient Power target=0
+AI decision turn=3 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=1 move=Body Slam target=2
+AI decision turn=3 actor=3 move=Yawn target=2
+AI decision turn=4 actor=1 move=Body Slam target=2
+AI decision turn=4 actor=3 move=Helping Hand target=1
+ISAAC_NATIVE_TIMER=45
+ISAAC_FORM_STATS HP=144/86 Atk=89/22 Def=37/75 SpD=63/51 speed=14/25
+ISAAC_1_AFTER board=1 turns=3 reserves=0 species=446/175 HP=72/37 foes=0/68 Atk=6/7 SpA=6/7 Spe=6/7 item=494/494 faints=0/1
+ISAAC_1_STATE moves=Body Slam/Yawn PP=13/15/14/10 otherPP=20/9/4/19 partyHP=72/37/62/74 type=1/19 status=0/0
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=47/32
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Ice Punch target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Helping Hand target=1
+AI decision turn=2 actor=0 move=Psychic target=1
+AI decision turn=2 actor=1 move=Body Slam target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Ancient Power target=0
+AI decision turn=3 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=1 move=Body Slam target=2
+AI decision turn=3 actor=3 move=Yawn target=2
+AI decision turn=4 actor=2 move=Thunderbolt target=3
+AI decision turn=4 actor=1 move=Body Slam target=2
+AI decision turn=4 actor=3 move=Helping Hand target=1
+AI decision turn=5 actor=1 move=Body Slam target=2
+AI decision turn=5 actor=3 move=Ancient Power target=2
+ISAAC_NATIVE_TIMER=45
+ISAAC_FORM_STATS HP=144/86 Atk=89/22 Def=37/75 SpD=63/51 speed=14/25
+ISAAC_1_AFTER board=1 turns=4 reserves=0 species=446/175 HP=72/24 foes=0/22 Atk=6/7 SpA=6/7 Spe=6/7 item=494/494 faints=0/1
+ISAAC_1_STATE moves=Body Slam/Helping Hand PP=12/15/14/10 otherPP=20/9/4/18 partyHP=72/24/62/74 type=1/19 status=0/0
+ISAAC_1_FIELD foeStatus=0/2 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=47/32
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Ice Punch target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Helping Hand target=1
+AI decision turn=2 actor=0 move=Psychic target=1
+AI decision turn=2 actor=1 move=Body Slam target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Ancient Power target=0
+AI decision turn=3 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=1 move=Body Slam target=2
+AI decision turn=3 actor=3 move=Yawn target=2
+AI decision turn=4 actor=2 move=Thunderbolt target=3
+AI decision turn=4 actor=1 move=Body Slam target=2
+AI decision turn=4 actor=3 move=Helping Hand target=1
+AI decision turn=5 actor=2 move=Thunderbolt target=3
+AI decision turn=5 actor=1 move=Body Slam target=2
+AI decision turn=5 actor=3 move=Ancient Power target=2
+ISAAC_NATIVE_TIMER=45
+ISAAC_FORM_STATS HP=144/86 Atk=89/22 Def=37/75 SpD=63/51 speed=14/25
+ISAAC_1_AFTER board=1 turns=5 reserves=0 species=446/175 HP=72/24 foes=0/0 Atk=6/8 SpA=6/8 Spe=6/8 item=494/494 faints=0/2
+ISAAC_1_STATE moves=Body Slam/Ancient Power PP=11/15/14/10 otherPP=20/9/3/18 partyHP=72/24/62/74 type=1/19 status=0/0
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=47/32
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Psychic target=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Dragon Claw target=0
+AI decision turn=2 actor=1 move=Psychic target=2
+AI decision turn=2 actor=3 move=Dragon Claw target=0
+ISAAC_NATIVE_TIMER=21
+ISAAC_FORM_STATS HP=62/74 Atk=22/78 Def=22/41 SpD=45/44 speed=92/63
+ISAAC_1_AFTER board=0 turns=1 reserves=1 species=63/147 HP=1/32 foes=47/84 Atk=6/6 SpA=6/6 Spe=6/6 item=0/494 faints=0/0
+ISAAC_1_STATE moves=Psychic/Dragon Claw PP=9/10/5/5 otherPP=20/5/14/5 partyHP=1/32/0/0 type=15/17 status=0/0
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=98/61
+ISAAC_1_TIMING board=10 setup=7 bothActors=14 complete=21 warm=14
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Psychic target=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Dragon Claw target=0
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Psychic target=2
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Dragon Claw target=0
+AI decision turn=3 actor=3 move=Extreme Speed target=0
+ISAAC_NATIVE_TIMER=21
+ISAAC_FORM_STATS HP=62/74 Atk=22/78 Def=22/41 SpD=45/44 speed=92/63
+ISAAC_1_AFTER board=0 turns=2 reserves=1 species=63/147 HP=0/32 foes=12/0 Atk=6/6 SpA=6/6 Spe=6/6 item=0/494 faints=1/1
+ISAAC_1_STATE moves=-/Dragon Claw PP=8/10/5/5 otherPP=20/5/13/5 partyHP=0/32/0/0 type=15/17 status=0/0
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=0/61
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Psychic target=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Dragon Claw target=0
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Psychic target=2
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Dragon Claw target=0
+AI decision turn=3 actor=3 move=Extreme Speed target=0
+AI decision turn=3 actor=0 move=Double-Edge target=1
+ISAAC_NATIVE_TIMER=21
+ISAAC_FORM_STATS HP=62/74 Atk=22/78 Def=22/41 SpD=45/44 speed=92/63
+ISAAC_1_AFTER board=0 turns=3 reserves=1 species=63/147 HP=0/32 foes=0/0 Atk=6/6 SpA=6/6 Spe=6/6 item=0/494 faints=1/2
+ISAAC_1_STATE moves=-/Extreme Speed PP=8/10/5/5 otherPP=20/4/13/5 partyHP=0/32/0/0 type=15/17 status=0/0
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=0/61
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Dragon Claw target=0
+AI decision turn=2 actor=1 move=Dazzling Gleam target=0
+AI decision turn=2 actor=3 move=Extreme Speed target=0
+ISAAC_NATIVE_TIMER=18
+ISAAC_FORM_STATS HP=62/74 Atk=22/78 Def=22/41 SpD=45/44 speed=92/63
+ISAAC_1_AFTER board=1 turns=1 reserves=1 species=63/147 HP=62/64 foes=46/104 Atk=6/6 SpA=6/6 Spe=6/6 item=481/494 faints=0/0
+ISAAC_1_STATE moves=Protect/Dragon Claw PP=10/10/5/4 otherPP=20/5/14/5 partyHP=62/64/0/0 type=15/17 status=0/0
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=98/61
+ISAAC_1_TIMING board=11 setup=6 bothActors=15 complete=21 warm=15
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Dragon Claw target=0
+AI decision turn=2 actor=0 move=Psychic target=1
+AI decision turn=2 actor=1 move=Dazzling Gleam target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Extreme Speed target=0
+AI decision turn=3 actor=1 move=Protect target=1
+AI decision turn=3 actor=3 move=Dragon Claw target=2
+ISAAC_NATIVE_TIMER=18
+ISAAC_FORM_STATS HP=62/74 Atk=22/78 Def=22/41 SpD=45/44 speed=92/63
+ISAAC_1_AFTER board=1 turns=2 reserves=1 species=63/147 HP=25/54 foes=0/86 Atk=6/6 SpA=6/6 Spe=6/6 item=481/494 faints=0/1
+ISAAC_1_STATE moves=Dazzling Gleam/Extreme Speed PP=10/9/5/4 otherPP=20/4/14/5 partyHP=25/54/0/0 type=15/17 status=0/0
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=98/61
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Dragon Claw target=0
+AI decision turn=2 actor=0 move=Psychic target=1
+AI decision turn=2 actor=1 move=Dazzling Gleam target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Extreme Speed target=0
+AI decision turn=3 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=1 move=Protect target=1
+AI decision turn=3 actor=3 move=Dragon Claw target=2
+AI decision turn=4 actor=1 move=Psychic target=2
+AI decision turn=4 actor=3 move=Dragon Claw target=2
+ISAAC_NATIVE_TIMER=18
+ISAAC_FORM_STATS HP=62/74 Atk=22/78 Def=22/41 SpD=45/44 speed=92/63
+ISAAC_1_AFTER board=1 turns=3 reserves=1 species=63/147 HP=25/44 foes=0/58 Atk=6/6 SpA=6/6 Spe=6/6 item=481/494 faints=0/1
+ISAAC_1_STATE moves=Protect/Dragon Claw PP=10/9/5/3 otherPP=20/4/13/5 partyHP=25/44/0/0 type=15/17 status=0/0
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=98/61
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Dragon Claw target=0
+AI decision turn=2 actor=0 move=Psychic target=1
+AI decision turn=2 actor=1 move=Dazzling Gleam target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Extreme Speed target=0
+AI decision turn=3 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=1 move=Protect target=1
+AI decision turn=3 actor=3 move=Dragon Claw target=2
+AI decision turn=4 actor=2 move=Thunderbolt target=3
+AI decision turn=4 actor=1 move=Psychic target=2
+AI decision turn=4 actor=3 move=Dragon Claw target=2
+AI decision turn=5 actor=1 move=Psychic target=2
+AI decision turn=5 actor=3 move=Extreme Speed target=2
+ISAAC_NATIVE_TIMER=18
+ISAAC_FORM_STATS HP=62/74 Atk=22/78 Def=22/41 SpD=45/44 speed=92/63
+ISAAC_1_AFTER board=1 turns=4 reserves=1 species=63/147 HP=25/34 foes=0/14 Atk=6/6 SpA=6/6 Spe=6/6 item=481/494 faints=0/1
+ISAAC_1_STATE moves=Psychic/Dragon Claw PP=9/9/5/3 otherPP=20/4/12/5 partyHP=25/34/0/0 type=15/17 status=0/0
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=98/61
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Dragon Claw target=0
+AI decision turn=2 actor=0 move=Psychic target=1
+AI decision turn=2 actor=1 move=Dazzling Gleam target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Extreme Speed target=0
+AI decision turn=3 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=1 move=Protect target=1
+AI decision turn=3 actor=3 move=Dragon Claw target=2
+AI decision turn=4 actor=2 move=Thunderbolt target=3
+AI decision turn=4 actor=1 move=Psychic target=2
+AI decision turn=4 actor=3 move=Dragon Claw target=2
+AI decision turn=5 actor=2 move=Thunderbolt target=3
+AI decision turn=5 actor=1 move=Psychic target=2
+AI decision turn=5 actor=3 move=Extreme Speed target=2
+ISAAC_NATIVE_TIMER=18
+ISAAC_FORM_STATS HP=62/74 Atk=22/78 Def=22/41 SpD=45/44 speed=92/63
+ISAAC_1_AFTER board=1 turns=5 reserves=1 species=63/147 HP=25/34 foes=0/0 Atk=6/6 SpA=6/6 Spe=6/6 item=481/494 faints=0/2
+ISAAC_1_STATE moves=Psychic/Extreme Speed PP=9/9/5/3 otherPP=20/3/12/5 partyHP=25/34/0/0 type=15/17 status=0/0
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=98/61
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Hydro Pump target=0
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Drain Punch target=0
+AI decision turn=2 actor=1 move=Hydro Pump target=2
+AI decision turn=2 actor=3 move=Body Slam target=2
+ISAAC_NATIVE_TIMER=59
+ISAAC_FORM_STATS HP=67/122 Atk=36/118 Def=47/74 SpD=47/74 speed=84/83
+ISAAC_1_AFTER board=0 turns=1 reserves=2 species=120/915 HP=67/54 foes=0/119 Atk=6/6 SpA=6/6 Spe=6/6 item=477/301 faints=0/1
+ISAAC_1_STATE moves=Hydro Pump/Drain Punch PP=4/10/15/5 otherPP=10/15/9/5 partyHP=67/54/0/0 type=12/1 status=0/0
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=148/185
+ISAAC_1_TIMING board=20 setup=6 bothActors=7 complete=13 warm=8
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Hydro Pump target=0
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Drain Punch target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=1 move=Hydro Pump target=2
+AI decision turn=2 actor=3 move=Body Slam target=2
+AI decision turn=3 actor=1 move=Hydro Pump target=2
+AI decision turn=3 actor=3 move=Body Slam target=2
+ISAAC_NATIVE_TIMER=59
+ISAAC_FORM_STATS HP=67/122 Atk=36/118 Def=47/74 SpD=47/74 speed=84/83
+ISAAC_1_AFTER board=0 turns=2 reserves=2 species=120/915 HP=67/54 foes=0/42 Atk=6/6 SpA=6/6 Spe=6/6 item=477/301 faints=0/1
+ISAAC_1_STATE moves=Hydro Pump/Body Slam PP=3/10/15/5 otherPP=10/14/9/5 partyHP=67/54/0/0 type=12/1 status=0/0
+ISAAC_1_FIELD foeStatus=0/64 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=148/185
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Hydro Pump target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Sucker Punch target=0
+AI decision turn=2 actor=1 move=Hydro Pump target=2
+AI decision turn=2 actor=3 move=Body Slam target=2
+ISAAC_NATIVE_TIMER=51
+ISAAC_FORM_STATS HP=67/122 Atk=36/118 Def=47/74 SpD=47/74 speed=84/83
+ISAAC_1_AFTER board=1 turns=1 reserves=2 species=120/915 HP=67/104 foes=0/55 Atk=6/6 SpA=6/6 Spe=6/6 item=477/301 faints=0/1
+ISAAC_1_STATE moves=Hydro Pump/Sucker Punch PP=4/10/15/5 otherPP=10/15/10/4 partyHP=67/104/0/0 type=12/1 status=0/0
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=148/185
+ISAAC_1_TIMING board=21 setup=5 bothActors=7 complete=12 warm=7
+ISAAC_1_INPUT slot=0 lv=29 HP=144 Atk=89 Def=37 SpA=37 SpD=63 Spe=14 item=494 ability=47
+ISAAC_1_INPUT slot=1 lv=29 HP=86 Atk=22 Def=75 SpA=37 SpD=51 Spe=25 item=494 ability=32
+ISAAC_1_INPUT slot=2 lv=29 HP=62 Atk=22 Def=22 SpA=93 SpD=45 Spe=92 item=481 ability=98
+ISAAC_1_INPUT slot=3 lv=30 HP=74 Atk=78 Def=41 SpA=39 SpD=44 Spe=63 item=494 ability=61
+ISAAC_1_INPUT slot=4 lv=30 HP=67 Atk=36 Def=47 SpA=82 SpD=47 Spe=84 item=477 ability=148
+ISAAC_1_INPUT slot=5 lv=30 HP=122 Atk=99 Def=62 SpA=34 SpD=62 Spe=77 item=301 ability=113
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Hydro Pump target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Sucker Punch target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=1 move=Hydro Pump target=2
+AI decision turn=2 actor=3 move=Body Slam target=2
+ISAAC_NATIVE_TIMER=51
+ISAAC_FORM_STATS HP=67/122 Atk=36/118 Def=47/74 SpD=47/74 speed=84/83
+ISAAC_1_AFTER board=1 turns=2 reserves=2 species=120/915 HP=67/104 foes=0/0 Atk=6/6 SpA=6/6 Spe=6/6 item=477/301 faints=0/2
+ISAAC_1_STATE moves=Hydro Pump/Body Slam PP=3/10/15/5 otherPP=10/14/10/4 partyHP=67/104/0/0 type=12/1 status=0/0
+ISAAC_1_FIELD foeStatus=0/0 seed=0/0 substitute=0/0 rocks=0 tailwind=0/0 ability=148/185
+
+- Tests [32mPASSED[0m:          6
+- Tests [34mTOTAL[0m:           6
+

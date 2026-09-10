@@ -28,7 +28,7 @@ Route119_WeatherInstitute_1F_EventScript_LittleBoyTeamAquaHere::
 Route119_WeatherInstitute_1F_EventScript_InstituteWorker1::
 	lock
 	faceplayer
-	goto_if_unset FLAG_SYS_GAME_CLEAR, Route119_WeatherInstitute_1F_EventScript_StudyingRain
+	goto_if_unset FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, Route119_WeatherInstitute_1F_EventScript_StudyingRain
 	setvar VAR_0x8004, 0
 	call_if_set FLAG_DEFEATED_KYOGRE, Route119_WeatherInstitute_1F_EventScript_LegendaryDefeated
 	call_if_set FLAG_DEFEATED_GROUDON, Route119_WeatherInstitute_1F_EventScript_LegendaryDefeated
@@ -69,32 +69,38 @@ Route119_WeatherInstitute_1F_EventScript_Grunt4::
 	end
 
 Route119_WeatherInstitute_1F_Text_Grunt1Intro:
-	.string "The INSTITUTE mapped every pressure\n"
-	.string "shift before the storm arrived.\p"
-	.string "ARCHIE needs those maps. You are not\n"
-	.string "interrupting this current again.$"
+	.string "These maps show storms all over\n"
+	.string "HOENN. ARCHIE wants to know where\l"
+	.string "they begin.\p"
+	.string "He'll get his answers. You're not\n"
+	.string "getting upstairs!$"
 
 Route119_WeatherInstitute_1F_Text_Grunt1Defeat:
-	.string "You read the pressure change first…$"
+	.string "I couldn't keep you out…$"
 
 Route119_WeatherInstitute_1F_Text_Grunt1PostBattle:
-	.string "The maps show weather and the SIGNS\n"
-	.string "moving together.\p"
-	.string "SHELLY took the researchers upstairs.\n"
-	.string "She wants their readings for ARCHIE.$"
+	.string "These maps connect the strange\n"
+	.string "storms to the ocean's depths.\p"
+	.string "SHELLY took the researchers\n"
+	.string "upstairs. ARCHIE wants their\l"
+	.string "readings.$"
 
 Route119_WeatherInstitute_1F_Text_Grunt4Intro:
-	.string "You crossed the flooded grass alone?\n"
-	.string "Then this indoor front will not stop you.\p"
-	.string "I will change the forecast myself.$"
+	.string "You crossed all that rain to get\n"
+	.string "here? Should've stayed where it\l"
+	.string "was dry!\p"
+	.string "Now you've got TEAM AQUA to deal\n"
+	.string "with!$"
 
 Route119_WeatherInstitute_1F_Text_Grunt4Defeat:
-	.string "My forecast failed completely…$"
+	.string "So much for scaring you off…$"
 
 Route119_WeatherInstitute_1F_Text_Grunt4PostBattle:
-	.string "The bed restores exhausted teams.\n"
-	.string "Use it. SHELLY is upstairs with the\l"
-	.string "researchers. That is your next front.$"
+	.string "There's a bed over there. You\n"
+	.string "might want to rest.\p"
+	.string "SHELLY's upstairs with the\n"
+	.string "researchers. She's tougher than I\l"
+	.string "am.$"
 
 Route119_WeatherInstitute_1F_Text_EveryoneWentUpstairs:
 	.string "Those AQUA people took the researchers\n"
@@ -123,9 +129,10 @@ Route119_WeatherInstitute_1F_Text_NoticingAbnormalWeather:
 	.string "heavy rain lately…$"
 
 Route119_WeatherInstitute_1F_Text_WhatWereAquasUpTo:
-	.string "You saved our staff and our records.\p"
-	.string "AQUA was tracing the same anomaly that\n"
-	.string "links our weather stations to the SIGNS.$"
+	.string "You saved our staff and records.\n"
+	.string "AQUA wanted to know what is\l"
+	.string "causing these violent changes in\l"
+	.string "weather.$"
 
 Route119_WeatherInstitute_1F_Text_TakeRestInBed:
 	.string "There's a bed…\n"

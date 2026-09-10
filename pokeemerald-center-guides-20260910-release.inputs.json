@@ -1,0 +1,9 @@
+{
+  "schema_version": 2,
+  "inputs_sha256": "53de1c6955bf7018ef06a85bdf13ef5abd9512359bf0df2f4d8b18b435a6bdc4",
+  "input_count": 28980,
+  "artifacts": {
+    "pokeemerald-center-guides-20260910-release.gba": "640665b91fa6bb26a3c779fccfab918ec74bf7e41295c84d59c2e1878e45ae18",
+    "pokeemerald-center-guides-20260910-release.elf": "adc8c0304020d4dae36fe02e74723de9d5e1b2f24afb3b6c4d3a53246d3c50d0"
+  }
+}

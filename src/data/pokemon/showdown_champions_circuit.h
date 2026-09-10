@@ -13419,7 +13419,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_FOCUS_SASH,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 32, 0, 0},
+        .evs = {252, 0, 4, 252, 0, 0},
     },
     {
         .moves = {MOVE_SLEEP_POWDER, MOVE_HURRICANE, MOVE_POLLEN_PUFF, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -13432,7 +13432,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_QUIVER_DANCE, MOVE_BUG_BUZZ, MOVE_AIR_SLASH, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -13445,7 +13445,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_SLEEP_POWDER, MOVE_STUN_SPORE, MOVE_U_TURN, MOVE_TAILWIND, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -13458,7 +13458,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_FOCUS_SASH,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 32, 0, 0},
+        .evs = {252, 0, 4, 252, 0, 0},
     },
     {
         .moves = {MOVE_FACADE, MOVE_SUCKER_PUNCH, MOVE_U_TURN, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -13471,7 +13471,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_FLAME_ORB,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_SWORDS_DANCE, MOVE_FACADE, MOVE_SUCKER_PUNCH, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -13484,7 +13484,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_FLAME_ORB,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_SUPER_FANG, MOVE_THUNDER_WAVE, MOVE_TAUNT, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -13497,7 +13497,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 32, 0, 0},
+        .evs = {252, 0, 4, 252, 0, 0},
     },
     {
         .moves = {MOVE_DOUBLE_EDGE, MOVE_CRUNCH, MOVE_STOMPING_TANTRUM, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -13510,7 +13510,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_WIDE_LENS,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_DRILL_PECK, MOVE_DRILL_RUN, MOVE_U_TURN, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -13523,7 +13523,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_TAILWIND, MOVE_FEATHER_DANCE, MOVE_DRILL_PECK, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -13536,7 +13536,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 32, 0, 0},
+        .evs = {252, 0, 4, 252, 0, 0},
     },
     {
         .moves = {MOVE_FOCUS_ENERGY, MOVE_DRILL_PECK, MOVE_DRILL_RUN, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -13549,7 +13549,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SCOPE_LENS,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_EARTH_POWER, MOVE_SLUDGE_BOMB, MOVE_ICE_BEAM, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -13562,7 +13562,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_EARTH_POWER, MOVE_SLUDGE_BOMB, MOVE_ICE_BEAM, MOVE_FIRE_BLAST, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -13575,7 +13575,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_ASSAULT_VEST,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 0, 0, 32, 2},
+        .evs = {252, 0, 0, 0, 252, 4},
     },
     {
         .moves = {MOVE_HIGH_HORSEPOWER, MOVE_POISON_JAB, MOVE_ROCK_SLIDE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -13588,7 +13588,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_BODY_PRESS, MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -13601,7 +13601,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_BOLD,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 32, 0, 0, 2},
+        .evs = {252, 0, 252, 0, 0, 4},
     },
     {
         .moves = {MOVE_SLUDGE_BOMB, MOVE_EARTH_POWER, MOVE_ICE_BEAM, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -13614,7 +13614,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_SLUDGE_BOMB, MOVE_EARTH_POWER, MOVE_ICE_BEAM, MOVE_THUNDERBOLT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -13627,7 +13627,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_CHOICE_SCARF,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_POISON_JAB, MOVE_DRILL_RUN, MOVE_ROCK_SLIDE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -13640,7 +13640,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_SPORE, MOVE_RAGE_POWDER, MOVE_SEED_BOMB, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -13653,7 +13653,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LEFTOVERS,
         .nature = NATURE_SASSY,
         .dependency = CIRCUIT_DEPENDENCY_RAIN,
-        .statPoints = {32, 0, 2, 0, 0, 32},
+        .evs = {252, 0, 4, 0, 0, 252},
     },
     {
         .moves = {MOVE_SPORE, MOVE_WIDE_GUARD, MOVE_KNOCK_OFF, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -13666,7 +13666,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_MENTAL_HERB,
         .nature = NATURE_SASSY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 17, 0, 0, 17},
+        .evs = {252, 0, 124, 0, 0, 132},
     },
     {
         .moves = {MOVE_SPORE, MOVE_LEECH_LIFE, MOVE_SEED_BOMB, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -13679,7 +13679,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_BRAVE,
         .dependency = CIRCUIT_DEPENDENCY_TRICK_ROOM,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_RAGE_POWDER, MOVE_SPORE, MOVE_ROTOTILLER, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -13692,7 +13692,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_RELAXED,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 17, 0, 0, 17},
+        .evs = {252, 0, 124, 0, 0, 132},
     },
     {
         .moves = {MOVE_FLARE_BLITZ, MOVE_WILD_CHARGE, MOVE_HIGH_HORSEPOWER, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -13705,7 +13705,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_CHARCOAL,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_FLARE_BLITZ, MOVE_WILL_O_WISP, MOVE_MORNING_SUN, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -13718,7 +13718,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LEFTOVERS,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 16, 0, 18, 0, 0},
+        .evs = {252, 116, 0, 140, 0, 0},
     },
     {
         .moves = {MOVE_SWORDS_DANCE, MOVE_FLARE_BLITZ, MOVE_SOLAR_BLADE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -13731,7 +13731,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_SUN,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_SWORDS_DANCE, MOVE_FLARE_BLITZ, MOVE_HIGH_HORSEPOWER, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -13744,7 +13744,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_CLEAR_AMULET,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_TAILWIND, MOVE_HELPING_HAND, MOVE_BRAVE_BIRD, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -13757,7 +13757,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_FOCUS_SASH,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_SWORDS_DANCE, MOVE_BRAVE_BIRD, MOVE_LEAF_BLADE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -13770,7 +13770,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LEEK,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_FAKE_OUT, MOVE_ICE_SPINNER, MOVE_LIQUIDATION, MOVE_FLIP_TURN, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -13783,7 +13783,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_ASSAULT_VEST,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_FAKE_OUT, MOVE_PERISH_SONG, MOVE_DISABLE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -13796,7 +13796,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 32, 0, 0},
+        .evs = {252, 0, 4, 252, 0, 0},
     },
     {
         .moves = {MOVE_SURF, MOVE_FREEZE_DRY, MOVE_REST, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -13809,7 +13809,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LEFTOVERS,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_RAIN,
-        .statPoints = {32, 0, 0, 0, 32, 2},
+        .evs = {252, 0, 0, 0, 252, 4},
     },
     {
         .moves = {MOVE_FAKE_OUT, MOVE_ICY_WIND, MOVE_ENCORE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -13822,7 +13822,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 32, 0, 0},
+        .evs = {252, 0, 4, 252, 0, 0},
     },
     {
         .moves = {MOVE_LIQUIDATION, MOVE_ROCK_SLIDE, MOVE_HIGH_HORSEPOWER, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -13835,7 +13835,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_SWORDS_DANCE, MOVE_CRABHAMMER, MOVE_KNOCK_OFF, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -13848,7 +13848,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_CRABHAMMER, MOVE_WIDE_GUARD, MOVE_KNOCK_OFF, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -13861,7 +13861,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_CRABHAMMER, MOVE_HAMMER_ARM, MOVE_HIGH_HORSEPOWER, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -13874,7 +13874,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_BRAVE,
         .dependency = CIRCUIT_DEPENDENCY_TRICK_ROOM,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_BONEMERANG, MOVE_ROCK_SLIDE, MOVE_KNOCK_OFF, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -13887,7 +13887,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_THICK_CLUB,
         .nature = NATURE_BRAVE,
         .dependency = CIRCUIT_DEPENDENCY_TRICK_ROOM,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_BONEMERANG, MOVE_STONE_EDGE, MOVE_KNOCK_OFF, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -13900,7 +13900,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_THICK_CLUB,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_DOUBLE_EDGE, MOVE_BONEMERANG, MOVE_FIRE_PUNCH, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -13913,7 +13913,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_THICK_CLUB,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_SWORDS_DANCE, MOVE_BONEMERANG, MOVE_ROCK_SLIDE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -13926,7 +13926,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_THICK_CLUB,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_DRAIN_PUNCH, MOVE_ICE_PUNCH, MOVE_THUNDER_PUNCH, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -13939,7 +13939,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_DRAIN_PUNCH, MOVE_MACH_PUNCH, MOVE_ICE_PUNCH, MOVE_THUNDER_PUNCH, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -13952,7 +13952,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_ASSAULT_VEST,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 0, 0, 0, 2},
+        .evs = {252, 252, 0, 0, 0, 4},
     },
     {
         .moves = {MOVE_COACHING, MOVE_DRAIN_PUNCH, MOVE_ICE_PUNCH, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -13965,7 +13965,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_WATERFALL, MOVE_MEGAHORN, MOVE_DRILL_RUN, MOVE_FLIP_TURN, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -13978,7 +13978,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_ASSAULT_VEST,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_SWORDS_DANCE, MOVE_WATERFALL, MOVE_DRILL_RUN, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -13991,7 +13991,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_CLEAR_AMULET,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_SOAK, MOVE_ICY_WIND, MOVE_FLIP_TURN, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14004,7 +14004,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 32, 0, 0},
+        .evs = {252, 0, 4, 252, 0, 0},
     },
     {
         .moves = {MOVE_WATERFALL, MOVE_MEGAHORN, MOVE_DRILL_RUN, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14017,7 +14017,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_RAIN,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_FAKE_OUT, MOVE_WIDE_GUARD, MOVE_ICY_WIND, MOVE_DAZZLING_GLEAM, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14030,7 +14030,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_FOCUS_SASH,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 32, 0, 0},
+        .evs = {252, 0, 4, 252, 0, 0},
     },
     {
         .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_HELPING_HAND, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14043,7 +14043,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIGHT_CLAY,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 32, 0, 0},
+        .evs = {252, 0, 4, 252, 0, 0},
     },
     {
         .moves = {MOVE_PSYCHIC, MOVE_DAZZLING_GLEAM, MOVE_FOCUS_BLAST, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14056,7 +14056,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_TRICK_ROOM, MOVE_FAKE_OUT, MOVE_DAZZLING_GLEAM, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14069,7 +14069,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_MENTAL_HERB,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 32, 0, 0},
+        .evs = {252, 0, 4, 252, 0, 0},
     },
     {
         .moves = {MOVE_FAKE_OUT, MOVE_LOVELY_KISS, MOVE_ICY_WIND, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14082,7 +14082,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_FOCUS_SASH,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_ICE_BEAM, MOVE_PSYSHOCK, MOVE_FOCUS_BLAST, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14095,7 +14095,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_NASTY_PLOT, MOVE_LOVELY_KISS, MOVE_ICE_BEAM, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14108,7 +14108,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_FOCUS_SASH,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_TRICK_ROOM, MOVE_FAKE_OUT, MOVE_ICE_BEAM, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14121,7 +14121,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_FOCUS_SASH,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_MUDDY_WATER, MOVE_HYDRO_PUMP, MOVE_ICE_BEAM, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14134,7 +14134,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_RAIN,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_SHELL_SMASH, MOVE_HYDRO_PUMP, MOVE_EARTH_POWER, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14147,7 +14147,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_WHITE_HERB,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_ICY_WIND, MOVE_SPIKES, MOVE_KNOCK_OFF, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14160,7 +14160,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LEFTOVERS,
         .nature = NATURE_BOLD,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 32, 0, 0, 2},
+        .evs = {252, 0, 252, 0, 0, 4},
     },
     {
         .moves = {MOVE_METEOR_BEAM, MOVE_HYDRO_PUMP, MOVE_ICE_BEAM, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14173,7 +14173,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_POWER_HERB,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_SWORDS_DANCE, MOVE_WATERFALL, MOVE_STONE_EDGE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14186,7 +14186,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_RAIN,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_SWORDS_DANCE, MOVE_LIQUIDATION, MOVE_STONE_EDGE, MOVE_AQUA_JET, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14199,7 +14199,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_LIQUIDATION, MOVE_ROCK_SLIDE, MOVE_LEECH_LIFE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14212,7 +14212,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_WHITE_HERB,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 32, 0, 0, 0},
+        .evs = {4, 252, 252, 0, 0, 0},
     },
     {
         .moves = {MOVE_RAPID_SPIN, MOVE_KNOCK_OFF, MOVE_ICY_WIND, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14225,7 +14225,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LEFTOVERS,
         .nature = NATURE_CAREFUL,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 0, 32},
+        .evs = {252, 0, 4, 0, 0, 252},
     },
     {
         .moves = {MOVE_TAILWIND, MOVE_ENCORE, MOVE_KNOCK_OFF, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14238,7 +14238,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_COVERT_CLOAK,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 32, 0, 0},
+        .evs = {252, 0, 4, 252, 0, 0},
     },
     {
         .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_ENCORE, MOVE_ROOST, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14251,7 +14251,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIGHT_CLAY,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 32, 0, 0},
+        .evs = {252, 0, 4, 252, 0, 0},
     },
     {
         .moves = {MOVE_SAFEGUARD, MOVE_ENCORE, MOVE_U_TURN, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14264,7 +14264,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 32, 0, 0},
+        .evs = {252, 0, 4, 252, 0, 0},
     },
     {
         .moves = {MOVE_BUG_BUZZ, MOVE_AIR_SLASH, MOVE_FOCUS_BLAST, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14277,7 +14277,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_TAILWIND, MOVE_BRAVE_BIRD, MOVE_TAUNT, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14290,7 +14290,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SAFETY_GOGGLES,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_QUICK_GUARD, MOVE_BRAVE_BIRD, MOVE_HAZE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14303,7 +14303,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_BLACK_SLUDGE,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {18, 16, 0, 32, 0, 0},
+        .evs = {140, 116, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_BRAVE_BIRD, MOVE_U_TURN, MOVE_SUPER_FANG, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14316,7 +14316,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SHARP_BEAK,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_NASTY_PLOT, MOVE_AIR_SLASH, MOVE_HEAT_WAVE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14329,7 +14329,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_PSYCHIC, MOVE_HEAT_WAVE, MOVE_TAILWIND, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14342,7 +14342,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_TRICK_ROOM, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14355,7 +14355,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIGHT_CLAY,
         .nature = NATURE_BOLD,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 32, 0, 0, 2},
+        .evs = {252, 0, 252, 0, 0, 4},
     },
     {
         .moves = {MOVE_PSYCHIC, MOVE_HEAT_WAVE, MOVE_U_TURN, MOVE_ROOST, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14368,7 +14368,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_ROCKY_HELMET,
         .nature = NATURE_BOLD,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 32, 0, 2, 0},
+        .evs = {252, 0, 252, 0, 4, 0},
     },
     {
         .moves = {MOVE_TRICK_ROOM, MOVE_IMPRISON, MOVE_PSYCHIC, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14381,7 +14381,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_COVERT_CLOAK,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 32, 0, 0},
+        .evs = {252, 0, 4, 252, 0, 0},
     },
     {
         .moves = {MOVE_HIDDEN_POWER, MOVE_STORED_POWER, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14394,7 +14394,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_CHOICE_SPECS,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_STORED_POWER, MOVE_HIDDEN_POWER, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14407,7 +14407,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_WEAKNESS_POLICY,
         .nature = NATURE_BOLD,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 17, 0, 0, 17},
+        .evs = {252, 0, 124, 0, 0, 132},
     },
     {
         .moves = {MOVE_ENCORE, MOVE_COUNTER, MOVE_MIRROR_COAT, MOVE_SAFEGUARD, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14420,7 +14420,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_BOLD,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 32, 0, 0, 32},
+        .evs = {4, 0, 252, 0, 0, 252},
     },
     {
         .moves = {MOVE_ENCORE, MOVE_COUNTER, MOVE_MIRROR_COAT, MOVE_DESTINY_BOND, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14433,7 +14433,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_CUSTAP_BERRY,
         .nature = NATURE_CALM,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 32, 0, 0, 32},
+        .evs = {4, 0, 252, 0, 0, 252},
     },
     {
         .moves = {MOVE_ENCORE, MOVE_COUNTER, MOVE_MIRROR_COAT, MOVE_SAFEGUARD, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14446,7 +14446,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LEFTOVERS,
         .nature = NATURE_BOLD,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 32, 0, 0, 32},
+        .evs = {4, 0, 252, 0, 0, 252},
     },
     {
         .moves = {MOVE_POWER_SPLIT, MOVE_HELPING_HAND, MOVE_TOXIC, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14459,7 +14459,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_MENTAL_HERB,
         .nature = NATURE_CAREFUL,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 17, 0, 0, 17},
+        .evs = {252, 0, 124, 0, 0, 132},
     },
     {
         .moves = {MOVE_GUARD_SPLIT, MOVE_HELPING_HAND, MOVE_KNOCK_OFF, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14472,7 +14472,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_MENTAL_HERB,
         .nature = NATURE_RELAXED,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 17, 0, 0, 17},
+        .evs = {252, 0, 124, 0, 0, 132},
     },
     {
         .moves = {MOVE_POWER_TRICK, MOVE_ROCK_SLIDE, MOVE_EARTHQUAKE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14485,7 +14485,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_HARD_STONE,
         .nature = NATURE_RELAXED,
         .dependency = CIRCUIT_DEPENDENCY_TRICK_ROOM,
-        .statPoints = {2, 0, 32, 0, 0, 32},
+        .evs = {4, 0, 252, 0, 0, 252},
     },
     {
         .moves = {MOVE_SCALD, MOVE_ICY_WIND, MOVE_LIFE_DEW, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14498,7 +14498,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LEFTOVERS,
         .nature = NATURE_CALM,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 17, 0, 0, 17},
+        .evs = {252, 0, 124, 0, 0, 132},
     },
     {
         .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_RECOVER, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14511,7 +14511,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIGHT_CLAY,
         .nature = NATURE_BOLD,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 32, 0, 0, 2},
+        .evs = {252, 0, 252, 0, 0, 4},
     },
     {
         .moves = {MOVE_HEAD_SMASH, MOVE_LIQUIDATION, MOVE_ROCK_SLIDE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14524,7 +14524,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_WIDE_LENS,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_FOCUS_ENERGY, MOVE_WATER_SPOUT, MOVE_ICE_BEAM, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14537,7 +14537,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SCOPE_LENS,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 32, 0},
+        .evs = {252, 0, 4, 0, 252, 0},
     },
     {
         .moves = {MOVE_SUBSTITUTE, MOVE_PROTECT, MOVE_HYDRO_PUMP, MOVE_ICE_BEAM, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14550,7 +14550,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LEFTOVERS,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 32, 0},
+        .evs = {252, 0, 4, 0, 252, 0},
     },
     {
         .moves = {MOVE_ICY_WIND, MOVE_ACID_SPRAY, MOVE_HELPING_HAND, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14563,7 +14563,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_MENTAL_HERB,
         .nature = NATURE_CALM,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 0, 32},
+        .evs = {252, 0, 4, 0, 0, 252},
     },
     {
         .moves = {MOVE_WATER_SPOUT, MOVE_HYDRO_PUMP, MOVE_ICE_BEAM, MOVE_FIRE_BLAST, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14576,7 +14576,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_MYSTIC_WATER,
         .nature = NATURE_QUIET,
         .dependency = CIRCUIT_DEPENDENCY_TRICK_ROOM,
-        .statPoints = {32, 0, 2, 0, 32, 0},
+        .evs = {252, 0, 4, 0, 252, 0},
     },
     {
         .moves = {MOVE_WIDE_GUARD, MOVE_TAILWIND, MOVE_SCALD, MOVE_HELPING_HAND, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14589,7 +14589,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_BOLD,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 32, 0, 0, 2},
+        .evs = {252, 0, 252, 0, 0, 4},
     },
     {
         .moves = {MOVE_ICY_WIND, MOVE_SCALD, MOVE_HAZE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14602,7 +14602,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LEFTOVERS,
         .nature = NATURE_BOLD,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 32, 0, 0, 2},
+        .evs = {252, 0, 252, 0, 0, 4},
     },
     {
         .moves = {MOVE_HYDRO_PUMP, MOVE_HURRICANE, MOVE_ICE_BEAM, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14615,7 +14615,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_RAIN,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_TAILWIND, MOVE_WIDE_GUARD, MOVE_ICY_WIND, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14628,7 +14628,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_WACAN_BERRY,
         .nature = NATURE_BOLD,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 32, 0, 0, 2},
+        .evs = {252, 0, 252, 0, 0, 4},
     },
     {
         .moves = {MOVE_BODY_SLAM, MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_MILK_DRINK, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14641,7 +14641,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_COVERT_CLOAK,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 32, 0, 0},
+        .evs = {252, 0, 4, 252, 0, 0},
     },
     {
         .moves = {MOVE_BODY_PRESS, MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_MILK_DRINK, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14654,7 +14654,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_ROCKY_HELMET,
         .nature = NATURE_IMPISH,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 32, 0, 0, 2},
+        .evs = {252, 0, 252, 0, 0, 4},
     },
     {
         .moves = {MOVE_DOUBLE_EDGE, MOVE_HIGH_HORSEPOWER, MOVE_ROCK_SLIDE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14667,7 +14667,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_AFTER_YOU, MOVE_BODY_SLAM, MOVE_HELPING_HAND, MOVE_MILK_DRINK, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14680,7 +14680,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 32, 0, 0},
+        .evs = {252, 0, 4, 252, 0, 0},
     },
     {
         .moves = {MOVE_LIFE_DEW, MOVE_HEAL_BELL, MOVE_HELPING_HAND, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14693,7 +14693,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_COVERT_CLOAK,
         .nature = NATURE_CALM,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 0, 32},
+        .evs = {252, 0, 4, 0, 0, 252},
     },
     {
         .moves = {MOVE_LEAF_STORM, MOVE_PSYCHIC, MOVE_AURA_SPHERE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14706,7 +14706,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_NASTY_PLOT, MOVE_GIGA_DRAIN, MOVE_PSYCHIC, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14719,7 +14719,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LEFTOVERS,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_IMPRISON, MOVE_TRICK_ROOM, MOVE_PSYCHIC, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14732,7 +14732,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_MENTAL_HERB,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 32, 0, 0},
+        .evs = {252, 0, 4, 252, 0, 0},
     },
     {
         .moves = {MOVE_BELLY_DRUM, MOVE_EXTREME_SPEED, MOVE_SEED_BOMB, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14745,7 +14745,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_FIGY_BERRY,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_FACADE, MOVE_THROAT_CHOP, MOVE_STOMPING_TANTRUM, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14758,7 +14758,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_TOXIC_ORB,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_SUPER_FANG, MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_THUNDER_WAVE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14771,7 +14771,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_FOCUS_SASH,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 0, 32, 0, 2},
+        .evs = {252, 0, 0, 252, 0, 4},
     },
     {
         .moves = {MOVE_QUIVER_DANCE, MOVE_BUG_BUZZ, MOVE_AIR_CUTTER, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14784,7 +14784,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_FOCUS_SASH,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_STUN_SPORE, MOVE_STRING_SHOT, MOVE_WHIRLWIND, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14797,7 +14797,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_FOCUS_SASH,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 32, 0, 0},
+        .evs = {252, 0, 4, 252, 0, 0},
     },
     {
         .moves = {MOVE_MORNING_SUN, MOVE_GIGA_DRAIN, MOVE_PSYCHIC, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14810,7 +14810,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LEFTOVERS,
         .nature = NATURE_BOLD,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 32, 0, 0, 2},
+        .evs = {252, 0, 252, 0, 0, 4},
     },
     {
         .moves = {MOVE_QUIVER_DANCE, MOVE_BUG_BUZZ, MOVE_SLUDGE_BOMB, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14823,7 +14823,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LEFTOVERS,
         .nature = NATURE_BOLD,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 32, 0, 0, 2},
+        .evs = {252, 0, 252, 0, 0, 4},
     },
     {
         .moves = {MOVE_TOXIC, MOVE_VENOSHOCK, MOVE_BUG_BUZZ, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14836,7 +14836,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_BLACK_SLUDGE,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 32, 0},
+        .evs = {252, 0, 4, 0, 252, 0},
     },
     {
         .moves = {MOVE_LIGHT_SCREEN, MOVE_STRING_SHOT, MOVE_WHIRLWIND, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14849,7 +14849,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LEFTOVERS,
         .nature = NATURE_CALM,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 0, 32},
+        .evs = {252, 0, 4, 0, 0, 252},
     },
     {
         .moves = {MOVE_FACADE, MOVE_BRAVE_BIRD, MOVE_QUICK_ATTACK, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14862,7 +14862,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_FLAME_ORB,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_BOOMBURST, MOVE_HURRICANE, MOVE_AIR_SLASH, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14875,7 +14875,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_THROAT_SPRAY,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_ENDEAVOR, MOVE_QUICK_ATTACK, MOVE_BRAVE_BIRD, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14888,7 +14888,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_FOCUS_SASH,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_TAILWIND, MOVE_U_TURN, MOVE_QUICK_GUARD, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14901,7 +14901,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_COVERT_CLOAK,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 32, 0, 0},
+        .evs = {252, 0, 4, 252, 0, 0},
     },
     {
         .moves = {MOVE_SWORDS_DANCE, MOVE_BATON_PASS, MOVE_X_SCISSOR, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14914,7 +14914,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_FOCUS_SASH,
         .nature = NATURE_IMPISH,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 32, 0, 0, 2},
+        .evs = {252, 0, 252, 0, 0, 4},
     },
     {
         .moves = {MOVE_DUAL_WINGBEAT, MOVE_LEECH_LIFE, MOVE_NIGHT_SLASH, MOVE_U_TURN, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14927,7 +14927,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_CHOICE_BAND,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_SCREECH, MOVE_U_TURN, MOVE_X_SCISSOR, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14940,7 +14940,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_COVERT_CLOAK,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 32, 0, 0},
+        .evs = {252, 0, 4, 252, 0, 0},
     },
     {
         .moves = {MOVE_POLTERGEIST, MOVE_X_SCISSOR, MOVE_SHADOW_SNEAK, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14953,7 +14953,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_FOCUS_SASH,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {0, 32, 2, 32, 0, 0},
+        .evs = {0, 252, 4, 252, 0, 0},
     },
     {
         .moves = {MOVE_ALLY_SWITCH, MOVE_WILL_O_WISP, MOVE_POLTERGEIST, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14966,7 +14966,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SAFETY_GOGGLES,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {0, 32, 2, 32, 0, 0},
+        .evs = {0, 252, 4, 252, 0, 0},
     },
     {
         .moves = {MOVE_TOXIC, MOVE_SHADOW_SNEAK, MOVE_WILL_O_WISP, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14979,7 +14979,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_HEAVY_DUTY_BOOTS,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {0, 32, 2, 32, 0, 0},
+        .evs = {0, 252, 4, 252, 0, 0},
     },
     {
         .moves = {MOVE_HONE_CLAWS, MOVE_POLTERGEIST, MOVE_X_SCISSOR, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -14992,7 +14992,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_CLEAR_AMULET,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {0, 32, 2, 32, 0, 0},
+        .evs = {0, 252, 4, 252, 0, 0},
     },
     {
         .moves = {MOVE_BOOMBURST, MOVE_FOCUS_BLAST, MOVE_FIRE_BLAST, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15005,7 +15005,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_THROAT_SPRAY,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 0, 0, 32, 2},
+        .evs = {252, 0, 0, 0, 252, 4},
     },
     {
         .moves = {MOVE_HYPER_VOICE, MOVE_ICY_WIND, MOVE_FIRE_BLAST, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15018,7 +15018,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_HYPER_VOICE, MOVE_ICY_WIND, MOVE_FAKE_TEARS, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15031,7 +15031,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_CALM,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 0, 32},
+        .evs = {252, 0, 4, 0, 0, 252},
     },
     {
         .moves = {MOVE_BOOMBURST, MOVE_OVERHEAT, MOVE_HYDRO_PUMP, MOVE_FOCUS_BLAST, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15044,7 +15044,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_CHOICE_SPECS,
         .nature = NATURE_QUIET,
         .dependency = CIRCUIT_DEPENDENCY_TRICK_ROOM,
-        .statPoints = {32, 0, 0, 0, 32, 2},
+        .evs = {252, 0, 0, 0, 252, 4},
     },
     {
         .moves = {MOVE_FAKE_OUT, MOVE_THUNDER_WAVE, MOVE_SUCKER_PUNCH, MOVE_DOUBLE_EDGE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15057,7 +15057,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SILK_SCARF,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_FAKE_OUT, MOVE_ICY_WIND, MOVE_HELPING_HAND, MOVE_HEAL_BELL, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15070,7 +15070,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 32, 0, 0},
+        .evs = {252, 0, 4, 252, 0, 0},
     },
     {
         .moves = {MOVE_CHARM, MOVE_TICKLE, MOVE_WISH, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15083,7 +15083,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_ROCKY_HELMET,
         .nature = NATURE_BOLD,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 32, 0, 0, 2},
+        .evs = {252, 0, 252, 0, 0, 4},
     },
     {
         .moves = {MOVE_HYPER_VOICE, MOVE_ICY_WIND, MOVE_FAKE_TEARS, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15096,7 +15096,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_THROAT_SPRAY,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_WATER_SPOUT, MOVE_HYDRO_PUMP, MOVE_ICE_BEAM, MOVE_ICY_WIND, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15109,7 +15109,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_CHOICE_SCARF,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_SCALD, MOVE_ICY_WIND, MOVE_NOBLE_ROAR, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15122,7 +15122,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_CALM,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 0, 32},
+        .evs = {252, 0, 4, 0, 0, 252},
     },
     {
         .moves = {MOVE_CURSE, MOVE_HEAVY_SLAM, MOVE_LIQUIDATION, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15135,7 +15135,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LEFTOVERS,
         .nature = NATURE_CAREFUL,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 2, 0, 0, 0, 32},
+        .evs = {252, 4, 0, 0, 0, 252},
     },
     {
         .moves = {MOVE_SUPERPOWER, MOVE_FAKE_OUT, MOVE_SUCKER_PUNCH, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15148,7 +15148,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_SKILL_SWAP, MOVE_FAKE_OUT, MOVE_ICY_WIND, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15161,7 +15161,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_COVERT_CLOAK,
         .nature = NATURE_CAREFUL,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 0, 32},
+        .evs = {252, 0, 4, 0, 0, 252},
     },
     {
         .moves = {MOVE_TEETER_DANCE, MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15174,7 +15174,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_COVERT_CLOAK,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 32, 0, 0},
+        .evs = {252, 0, 4, 252, 0, 0},
     },
     {
         .moves = {MOVE_TRICK_ROOM, MOVE_FAKE_OUT, MOVE_HELPING_HAND, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15187,7 +15187,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_MENTAL_HERB,
         .nature = NATURE_SASSY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 17, 0, 0, 17},
+        .evs = {252, 0, 124, 0, 0, 132},
     },
     {
         .moves = {MOVE_TRICK_ROOM, MOVE_PSYCHIC, MOVE_POWER_GEM, MOVE_HELPING_HAND, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15200,7 +15200,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_QUIET,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 32, 0},
+        .evs = {252, 0, 4, 0, 252, 0},
     },
     {
         .moves = {MOVE_METEOR_BEAM, MOVE_PSYSHOCK, MOVE_EARTH_POWER, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15213,7 +15213,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_POWER_HERB,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_HELPING_HAND, MOVE_POWER_GEM, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15226,7 +15226,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIGHT_CLAY,
         .nature = NATURE_BOLD,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 32, 0, 0, 2},
+        .evs = {252, 0, 252, 0, 0, 4},
     },
     {
         .moves = {MOVE_GRAVITY, MOVE_HYPNOSIS, MOVE_EARTH_POWER, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15239,7 +15239,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 32, 0},
+        .evs = {252, 0, 4, 0, 252, 0},
     },
     {
         .moves = {MOVE_TRICK_ROOM, MOVE_ROCK_SLIDE, MOVE_HELPING_HAND, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15252,7 +15252,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_MENTAL_HERB,
         .nature = NATURE_SASSY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 17, 0, 0, 17},
+        .evs = {252, 0, 124, 0, 0, 132},
     },
     {
         .moves = {MOVE_ROCK_SLIDE, MOVE_ZEN_HEADBUTT, MOVE_WILL_O_WISP, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15265,7 +15265,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_HELPING_HAND, MOVE_ROCK_SLIDE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15278,7 +15278,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIGHT_CLAY,
         .nature = NATURE_CAREFUL,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 17, 0, 0, 17},
+        .evs = {252, 0, 124, 0, 0, 132},
     },
     {
         .moves = {MOVE_ROCK_POLISH, MOVE_ROCK_SLIDE, MOVE_ZEN_HEADBUTT, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15291,7 +15291,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_WEAKNESS_POLICY,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_TRICK_ROOM, MOVE_ALLY_SWITCH, MOVE_EARTH_POWER, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15304,7 +15304,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_MENTAL_HERB,
         .nature = NATURE_RELAXED,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 17, 0, 0, 17},
+        .evs = {252, 0, 124, 0, 0, 132},
     },
     {
         .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_EERIE_IMPULSE, MOVE_PSYCHIC, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15317,7 +15317,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIGHT_CLAY,
         .nature = NATURE_CALM,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 0, 32},
+        .evs = {252, 0, 4, 0, 0, 252},
     },
     {
         .moves = {MOVE_IRON_DEFENSE, MOVE_BODY_PRESS, MOVE_EARTH_POWER, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15330,7 +15330,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LEFTOVERS,
         .nature = NATURE_BOLD,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 32, 0, 0, 2},
+        .evs = {252, 0, 252, 0, 0, 4},
     },
     {
         .moves = {MOVE_NASTY_PLOT, MOVE_EARTH_POWER, MOVE_PSYCHIC, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15343,7 +15343,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 0, 0, 32, 2},
+        .evs = {252, 0, 0, 0, 252, 4},
     },
     {
         .moves = {MOVE_GIGA_DRAIN, MOVE_POWER_GEM, MOVE_RECOVER, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15356,7 +15356,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LEFTOVERS,
         .nature = NATURE_CALM,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 0, 32},
+        .evs = {252, 0, 4, 0, 0, 252},
     },
     {
         .moves = {MOVE_STOCKPILE, MOVE_RECOVER, MOVE_LEECH_SEED, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15369,7 +15369,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LEFTOVERS,
         .nature = NATURE_CALM,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 0, 32},
+        .evs = {252, 0, 4, 0, 0, 252},
     },
     {
         .moves = {MOVE_METEOR_BEAM, MOVE_ENERGY_BALL, MOVE_EARTH_POWER, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15382,7 +15382,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_POWER_HERB,
         .nature = NATURE_QUIET,
         .dependency = CIRCUIT_DEPENDENCY_TRICK_ROOM,
-        .statPoints = {32, 0, 2, 0, 32, 0},
+        .evs = {252, 0, 4, 0, 252, 0},
     },
     {
         .moves = {MOVE_SWORDS_DANCE, MOVE_ROCK_SLIDE, MOVE_POWER_WHIP, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15395,7 +15395,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_BRAVE,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_X_SCISSOR, MOVE_ROCK_SLIDE, MOVE_LIQUIDATION, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15408,7 +15408,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_RAIN,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_X_SCISSOR, MOVE_ROCK_SLIDE, MOVE_EARTHQUAKE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15421,7 +15421,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_BRAVE,
         .dependency = CIRCUIT_DEPENDENCY_TRICK_ROOM,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_SWORDS_DANCE, MOVE_X_SCISSOR, MOVE_ROCK_SLIDE, MOVE_AQUA_JET, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15434,7 +15434,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_ROCK_SLIDE, MOVE_KNOCK_OFF, MOVE_RAPID_SPIN, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15447,7 +15447,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LEFTOVERS,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_FAKE_OUT, MOVE_THUNDER_WAVE, MOVE_ICY_WIND, MOVE_RECOVER, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15460,7 +15460,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_CAREFUL,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 0, 32},
+        .evs = {252, 0, 4, 0, 0, 252},
     },
     {
         .moves = {MOVE_DRAIN_PUNCH, MOVE_SHADOW_SNEAK, MOVE_KNOCK_OFF, MOVE_ROCK_SLIDE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15473,7 +15473,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_ASSAULT_VEST,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_FAKE_OUT, MOVE_TRICK_ROOM, MOVE_DRAIN_PUNCH, MOVE_RECOVER, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15486,7 +15486,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_BRAVE,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_HYDRO_PUMP, MOVE_ICY_WIND, MOVE_SUPER_FANG, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15499,7 +15499,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_CALM,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 0, 32},
+        .evs = {252, 0, 4, 0, 0, 252},
     },
     {
         .moves = {MOVE_SWORDS_DANCE, MOVE_LIQUIDATION, MOVE_ICICLE_SPEAR, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15512,7 +15512,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_STOCKPILE, MOVE_BODY_PRESS, MOVE_SUPER_FANG, MOVE_REST, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15525,7 +15525,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_CHESTO_BERRY,
         .nature = NATURE_BOLD,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 32, 0, 0, 2},
+        .evs = {252, 0, 252, 0, 0, 4},
     },
     {
         .moves = {MOVE_BLIZZARD, MOVE_SUPER_FANG, MOVE_AQUA_RING, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15538,7 +15538,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LEFTOVERS,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_SNOW,
-        .statPoints = {32, 0, 2, 0, 32, 0},
+        .evs = {252, 0, 4, 0, 252, 0},
     },
     {
         .moves = {MOVE_SHELL_SMASH, MOVE_WATERFALL, MOVE_CRUNCH, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15551,7 +15551,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_WHITE_HERB,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_COIL, MOVE_WATERFALL, MOVE_CRUNCH, MOVE_SUCKER_PUNCH, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15564,7 +15564,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LEFTOVERS,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_SHELL_SMASH, MOVE_BATON_PASS, MOVE_SUBSTITUTE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15577,7 +15577,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_WHITE_HERB,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 32, 0, 0},
+        .evs = {252, 0, 4, 252, 0, 0},
     },
     {
         .moves = {MOVE_WATERFALL, MOVE_CRUNCH, MOVE_SUCKER_PUNCH, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15590,7 +15590,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_RAIN,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_SHELL_SMASH, MOVE_MUDDY_WATER, MOVE_ICE_BEAM, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15603,7 +15603,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_WHITE_HERB,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_SHELL_SMASH, MOVE_BATON_PASS, MOVE_SUBSTITUTE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15616,7 +15616,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_WHITE_HERB,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 0, 32, 2, 0},
+        .evs = {252, 0, 0, 252, 4, 0},
     },
     {
         .moves = {MOVE_MUDDY_WATER, MOVE_ICE_BEAM, MOVE_REST, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15629,7 +15629,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_RAIN,
-        .statPoints = {32, 0, 0, 0, 32, 2},
+        .evs = {252, 0, 0, 0, 252, 4},
     },
     {
         .moves = {MOVE_HEAD_SMASH, MOVE_LIQUIDATION, MOVE_STOMPING_TANTRUM, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15642,7 +15642,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_CLEAR_AMULET,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_LIQUIDATION, MOVE_STONE_EDGE, MOVE_STOMPING_TANTRUM, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15655,7 +15655,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_RAIN,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_BODY_PRESS, MOVE_ICY_WIND, MOVE_YAWN, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15668,7 +15668,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LEFTOVERS,
         .nature = NATURE_IMPISH,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 32, 0, 0, 2},
+        .evs = {252, 0, 252, 0, 0, 4},
     },
     {
         .moves = {MOVE_HEAD_SMASH, MOVE_LIQUIDATION, MOVE_STOMPING_TANTRUM, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15681,7 +15681,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_BRAVE,
         .dependency = CIRCUIT_DEPENDENCY_TRICK_ROOM,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_SWORDS_DANCE, MOVE_LIQUIDATION, MOVE_RETURN, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15694,7 +15694,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_CURSE, MOVE_AQUA_JET, MOVE_RETURN, MOVE_REST, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15707,7 +15707,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_CHESTO_BERRY,
         .nature = NATURE_CAREFUL,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 17, 0, 0, 0, 17},
+        .evs = {252, 124, 0, 0, 0, 132},
     },
     {
         .moves = {MOVE_SUPER_FANG, MOVE_ICY_WIND, MOVE_YAWN, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15720,7 +15720,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_CAREFUL,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 17, 0, 0, 17},
+        .evs = {252, 0, 124, 0, 0, 132},
     },
     {
         .moves = {MOVE_PROTECT, MOVE_SUBSTITUTE, MOVE_AQUA_JET, MOVE_SUPER_FANG, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15733,7 +15733,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LEFTOVERS,
         .nature = NATURE_CAREFUL,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 17, 0, 0, 17},
+        .evs = {252, 0, 124, 0, 0, 132},
     },
     {
         .moves = {MOVE_QUIVER_DANCE, MOVE_BUG_BUZZ, MOVE_LEAF_STORM, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15746,7 +15746,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 32, 0},
+        .evs = {252, 0, 4, 0, 252, 0},
     },
     {
         .moves = {MOVE_ELECTROWEB, MOVE_STRUGGLE_BUG, MOVE_GIGA_DRAIN, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15759,7 +15759,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LEFTOVERS,
         .nature = NATURE_CALM,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 0, 32},
+        .evs = {252, 0, 4, 0, 0, 252},
     },
     {
         .moves = {MOVE_QUIVER_DANCE, MOVE_BUG_BUZZ, MOVE_AIR_SLASH, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15772,7 +15772,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_FOCUS_SASH,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_TAILWIND, MOVE_ELECTROWEB, MOVE_STRUGGLE_BUG, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15785,7 +15785,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_COVERT_CLOAK,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 32, 0, 0},
+        .evs = {252, 0, 4, 252, 0, 0},
     },
     {
         .moves = {MOVE_HELPING_HAND, MOVE_POLLEN_PUFF, MOVE_SOLAR_BLADE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15798,7 +15798,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_CAREFUL,
         .dependency = CIRCUIT_DEPENDENCY_SUN,
-        .statPoints = {32, 2, 0, 0, 0, 32},
+        .evs = {252, 4, 0, 0, 0, 252},
     },
     {
         .moves = {MOVE_GROWTH, MOVE_SOLAR_BEAM, MOVE_WEATHER_BALL, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15811,7 +15811,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_SUN,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_HELPING_HAND, MOVE_HEAL_PULSE, MOVE_POLLEN_PUFF, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15824,7 +15824,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_CALM,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 0, 32},
+        .evs = {252, 0, 4, 0, 0, 252},
     },
     {
         .moves = {MOVE_SLEEP_POWDER, MOVE_LEECH_SEED, MOVE_POLLEN_PUFF, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15837,7 +15837,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_WIDE_LENS,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 32, 0, 0},
+        .evs = {252, 0, 4, 252, 0, 0},
     },
     {
         .moves = {MOVE_FAKE_OUT, MOVE_DOUBLE_EDGE, MOVE_U_TURN, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15850,7 +15850,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_FAKE_OUT, MOVE_SUCKER_PUNCH, MOVE_KNOCK_OFF, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15863,7 +15863,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_FAKE_OUT, MOVE_HYPNOSIS, MOVE_TAUNT, MOVE_U_TURN, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15876,7 +15876,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_WIDE_LENS,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 32, 0, 0},
+        .evs = {252, 0, 4, 252, 0, 0},
     },
     {
         .moves = {MOVE_NASTY_PLOT, MOVE_HYPER_VOICE, MOVE_THUNDERBOLT, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15889,7 +15889,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_FOCUS_SASH,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_TAILWIND, MOVE_ENCORE, MOVE_PARTING_SHOT, MOVE_CHATTER, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15902,7 +15902,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_FOCUS_SASH,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_BOOMBURST, MOVE_HEAT_WAVE, MOVE_CHATTER, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15915,7 +15915,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_THROAT_SPRAY,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_KNOCK_OFF, MOVE_POISON_JAB, MOVE_TAUNT, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15928,7 +15928,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_BLACK_SLUDGE,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 0, 32, 0, 2},
+        .evs = {252, 0, 0, 252, 0, 4},
     },
     {
         .moves = {MOVE_CROSS_POISON, MOVE_NIGHT_SLASH, MOVE_ACUPRESSURE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15941,7 +15941,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SCOPE_LENS,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_SLEEP_POWDER, MOVE_POWER_WHIP, MOVE_KNOCK_OFF, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15954,7 +15954,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {25, 32, 0, 9, 0, 0},
+        .evs = {196, 252, 0, 60, 0, 0},
     },
     {
         .moves = {MOVE_RAGE_POWDER, MOVE_SLEEP_POWDER, MOVE_POWER_WHIP, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15967,7 +15967,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_CAREFUL,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 16, 0, 0, 18},
+        .evs = {252, 0, 116, 0, 0, 140},
     },
     {
         .moves = {MOVE_BODY_SLAM, MOVE_KNOCK_OFF, MOVE_ICY_WIND, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15980,7 +15980,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LEFTOVERS,
         .nature = NATURE_CAREFUL,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 0, 32},
+        .evs = {252, 0, 4, 0, 0, 252},
     },
     {
         .moves = {MOVE_HELPING_HAND, MOVE_BODY_SLAM, MOVE_DISABLE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -15993,7 +15993,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_CAREFUL,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 17, 0, 0, 17},
+        .evs = {252, 0, 124, 0, 0, 132},
     },
     {
         .moves = {MOVE_EXPLOSION, MOVE_EARTHQUAKE, MOVE_POWER_WHIP, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16006,7 +16006,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_NORMAL_GEM,
         .nature = NATURE_BRAVE,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_CURSE, MOVE_BODY_SLAM, MOVE_POWER_WHIP, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16019,7 +16019,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LEFTOVERS,
         .nature = NATURE_BRAVE,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_RAGE_POWDER, MOVE_SLEEP_POWDER, MOVE_GIGA_DRAIN, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16032,7 +16032,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_ROCKY_HELMET,
         .nature = NATURE_RELAXED,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 32, 0, 2, 0},
+        .evs = {252, 0, 252, 0, 4, 0},
     },
     {
         .moves = {MOVE_POWER_WHIP, MOVE_KNOCK_OFF, MOVE_SLUDGE_BOMB, MOVE_FOCUS_BLAST, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16045,7 +16045,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_ASSAULT_VEST,
         .nature = NATURE_RELAXED,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 17, 0, 0, 17},
+        .evs = {252, 0, 124, 0, 0, 132},
     },
     {
         .moves = {MOVE_SLEEP_POWDER, MOVE_POWER_WHIP, MOVE_ROCK_SLIDE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16058,7 +16058,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_BRAVE,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_SLEEP_POWDER, MOVE_GIGA_DRAIN, MOVE_SLUDGE_BOMB, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16071,7 +16071,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_SUN,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_FOLLOW_ME, MOVE_AIR_SLASH, MOVE_TAILWIND, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16084,7 +16084,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_CALM,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 17, 0, 0, 17},
+        .evs = {252, 0, 124, 0, 0, 132},
     },
     {
         .moves = {MOVE_FOLLOW_ME, MOVE_DAZZLING_GLEAM, MOVE_HELPING_HAND, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16097,7 +16097,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SAFETY_GOGGLES,
         .nature = NATURE_CALM,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 17, 0, 0, 17},
+        .evs = {252, 0, 124, 0, 0, 132},
     },
     {
         .moves = {MOVE_AIR_SLASH, MOVE_HEAT_WAVE, MOVE_AURA_SPHERE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16110,7 +16110,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_FOLLOW_ME, MOVE_LIFE_DEW, MOVE_HELPING_HAND, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16123,7 +16123,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_ROCKY_HELMET,
         .nature = NATURE_BOLD,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 32, 0, 0, 2},
+        .evs = {252, 0, 252, 0, 0, 4},
     },
     {
         .moves = {MOVE_FINAL_GAMBIT, MOVE_V_CREATE, MOVE_BOLT_STRIKE, MOVE_U_TURN, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16136,7 +16136,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_CHOICE_SCARF,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 2, 0, 32, 0, 0},
+        .evs = {252, 4, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_V_CREATE, MOVE_BOLT_STRIKE, MOVE_ZEN_HEADBUTT, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16149,7 +16149,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_TRICK_ROOM, MOVE_HEAT_WAVE, MOVE_HELPING_HAND, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16162,7 +16162,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_QUIET,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 32, 0},
+        .evs = {252, 0, 4, 0, 252, 0},
     },
     {
         .moves = {MOVE_DOUBLE_EDGE, MOVE_CRUNCH, MOVE_SUPERPOWER, MOVE_WILD_CHARGE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16175,7 +16175,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_ASSAULT_VEST,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_HOWL, MOVE_FACADE, MOVE_STOMPING_TANTRUM, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16188,7 +16188,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_FACADE, MOVE_CRUNCH, MOVE_SUPERPOWER, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16201,7 +16201,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_SAND,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_BRAVE_BIRD, MOVE_NIGHT_SLASH, MOVE_TAILWIND, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16214,7 +16214,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SCOPE_LENS,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_BRAVE_BIRD, MOVE_U_TURN, MOVE_FEATHER_DANCE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16227,7 +16227,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_ROCK_SLIDE, MOVE_HEAVY_SLAM, MOVE_WIDE_GUARD, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16240,7 +16240,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_WEAKNESS_POLICY,
         .nature = NATURE_BRAVE,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_ROCK_SLIDE, MOVE_STONE_EDGE, MOVE_HEAVY_SLAM, MOVE_EARTHQUAKE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16253,7 +16253,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_ASSAULT_VEST,
         .nature = NATURE_BRAVE,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_ROCK_SLIDE, MOVE_BULLDOZE, MOVE_WIDE_GUARD, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16266,7 +16266,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_BRAVE,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 2, 0, 0, 0, 32},
+        .evs = {252, 4, 0, 0, 0, 252},
     },
     {
         .moves = {MOVE_CALM_MIND, MOVE_STORED_POWER, MOVE_AIR_SLASH, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16279,7 +16279,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_FAKE_TEARS, MOVE_HELPING_HAND, MOVE_AIR_SLASH, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16292,7 +16292,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_FOCUS_SASH,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 32, 0, 0},
+        .evs = {252, 0, 4, 252, 0, 0},
     },
     {
         .moves = {MOVE_IMPRISON, MOVE_TRICK_ROOM, MOVE_PSYCHIC, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16305,7 +16305,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_FOCUS_SASH,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 32, 0, 0},
+        .evs = {252, 0, 4, 252, 0, 0},
     },
     {
         .moves = {MOVE_MUDDY_WATER, MOVE_EARTH_POWER, MOVE_SLUDGE_BOMB, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16318,7 +16318,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_RAIN,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_MUDDY_WATER, MOVE_EARTH_POWER, MOVE_GRASS_KNOT, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16331,7 +16331,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_LIQUIDATION, MOVE_STOMPING_TANTRUM, MOVE_POISON_JAB, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16344,7 +16344,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_STORM_THROW, MOVE_ROCK_SLIDE, MOVE_FACADE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16357,7 +16357,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_FLAME_ORB,
         .nature = NATURE_BRAVE,
         .dependency = CIRCUIT_DEPENDENCY_TRICK_ROOM,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_STORM_THROW, MOVE_COACHING, MOVE_HELPING_HAND, MOVE_WIDE_GUARD, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16370,7 +16370,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_CAREFUL,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 0, 32},
+        .evs = {252, 0, 4, 0, 0, 252},
     },
     {
         .moves = {MOVE_STORM_THROW, MOVE_KNOCK_OFF, MOVE_ICE_PUNCH, MOVE_ROCK_SLIDE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16383,7 +16383,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_ASSAULT_VEST,
         .nature = NATURE_BRAVE,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_CLOSE_COMBAT, MOVE_ROCK_SLIDE, MOVE_PAYBACK, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16396,7 +16396,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_FIGHTING_GEM,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_CLOSE_COMBAT, MOVE_ROCK_SLIDE, MOVE_QUICK_GUARD, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16409,7 +16409,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_FOCUS_SASH,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_CLOSE_COMBAT, MOVE_KNOCK_OFF, MOVE_EARTHQUAKE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16422,7 +16422,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_EXPERT_BELT,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_FLARE_BLITZ, MOVE_ROCK_SLIDE, MOVE_SUPERPOWER, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16435,7 +16435,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_FLARE_BLITZ, MOVE_U_TURN, MOVE_ROCK_SLIDE, MOVE_SUPERPOWER, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16448,7 +16448,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_CHOICE_SCARF,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_ENDURE, MOVE_HEAT_WAVE, MOVE_PSYCHIC, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16461,7 +16461,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_FOCUS_SASH,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 32, 0},
+        .evs = {252, 0, 4, 0, 252, 0},
     },
     {
         .moves = {MOVE_GROWTH, MOVE_SOLAR_BEAM, MOVE_WEATHER_BALL, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16474,7 +16474,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_SUN,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_GIGA_DRAIN, MOVE_HELPING_HAND, MOVE_AFTER_YOU, MOVE_SPIKY_SHIELD, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16487,7 +16487,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_FOCUS_SASH,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 32, 0, 0},
+        .evs = {252, 0, 4, 252, 0, 0},
     },
     {
         .moves = {MOVE_LEAF_STORM, MOVE_HYPER_VOICE, MOVE_SPIKES, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16500,7 +16500,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 32, 0},
+        .evs = {252, 0, 4, 0, 252, 0},
     },
     {
         .moves = {MOVE_SPIKES, MOVE_ENDEAVOR, MOVE_BULLET_SEED, MOVE_SUCKER_PUNCH, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16513,7 +16513,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_FOCUS_SASH,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_SHELL_SMASH, MOVE_ROCK_SLIDE, MOVE_X_SCISSOR, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16526,7 +16526,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_WHITE_HERB,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_WIDE_GUARD, MOVE_KNOCK_OFF, MOVE_ROCK_SLIDE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16539,7 +16539,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_CAREFUL,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 16, 0, 0, 18},
+        .evs = {252, 0, 116, 0, 0, 140},
     },
     {
         .moves = {MOVE_STEALTH_ROCK, MOVE_SPIKES, MOVE_ROCK_BLAST, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16552,7 +16552,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_FOCUS_SASH,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_TAILWIND, MOVE_ICE_BEAM, MOVE_PSYCHIC, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16565,7 +16565,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_TRICK_ROOM, MOVE_IMPRISON, MOVE_PSYCHIC, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16578,7 +16578,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_QUIET,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 16, 0, 0, 18},
+        .evs = {252, 0, 116, 0, 0, 140},
     },
     {
         .moves = {MOVE_PSYSHOCK, MOVE_AIR_SLASH, MOVE_HEAT_WAVE, MOVE_ICE_BEAM, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16591,7 +16591,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_CHOICE_SPECS,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_WATERFALL, MOVE_ROCK_SLIDE, MOVE_AQUA_JET, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16604,7 +16604,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_RAIN,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_SHELL_SMASH, MOVE_ROCK_SLIDE, MOVE_AQUA_JET, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16617,7 +16617,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_WHITE_HERB,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_WIDE_GUARD, MOVE_KNOCK_OFF, MOVE_AQUA_TAIL, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16630,7 +16630,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_CAREFUL,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 16, 0, 0, 18},
+        .evs = {252, 0, 116, 0, 0, 140},
     },
     {
         .moves = {MOVE_ACROBATICS, MOVE_ROCK_SLIDE, MOVE_QUICK_GUARD, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16643,7 +16643,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_FLYING_GEM,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_METEOR_BEAM, MOVE_AIR_SLASH, MOVE_EARTH_POWER, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16656,7 +16656,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_POWER_HERB,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_TAILWIND, MOVE_TAUNT, MOVE_ROCK_SLIDE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16669,7 +16669,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 2, 0, 32, 0, 0},
+        .evs = {252, 4, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_MEGAHORN, MOVE_IRON_HEAD, MOVE_KNOCK_OFF, MOVE_DRILL_RUN, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16682,7 +16682,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_ASSAULT_VEST,
         .nature = NATURE_BRAVE,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_SWORDS_DANCE, MOVE_IRON_HEAD, MOVE_KNOCK_OFF, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16695,7 +16695,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LEFTOVERS,
         .nature = NATURE_BRAVE,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_MEGAHORN, MOVE_IRON_HEAD, MOVE_CLOSE_COMBAT, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16708,7 +16708,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_BRAVE,
         .dependency = CIRCUIT_DEPENDENCY_TRICK_ROOM,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_TRICK_ROOM, MOVE_WATER_SPOUT, MOVE_SHADOW_BALL, MOVE_RECOVER, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16721,7 +16721,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_QUIET,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 32, 0},
+        .evs = {252, 0, 4, 0, 252, 0},
     },
     {
         .moves = {MOVE_SCALD, MOVE_HEX, MOVE_WILL_O_WISP, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16734,7 +16734,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LEFTOVERS,
         .nature = NATURE_BOLD,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 32, 0, 0, 2},
+        .evs = {252, 0, 252, 0, 0, 4},
     },
     {
         .moves = {MOVE_WATER_SPOUT, MOVE_SHADOW_BALL, MOVE_ICE_BEAM, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16747,7 +16747,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 32, 0},
+        .evs = {252, 0, 4, 0, 252, 0},
     },
     {
         .moves = {MOVE_IRON_DEFENSE, MOVE_BODY_PRESS, MOVE_LEECH_SEED, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16760,7 +16760,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LEFTOVERS,
         .nature = NATURE_BOLD,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 32, 0, 0, 2},
+        .evs = {252, 0, 252, 0, 0, 4},
     },
     {
         .moves = {MOVE_POWER_WHIP, MOVE_GYRO_BALL, MOVE_LEECH_SEED, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16773,7 +16773,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_ROCKY_HELMET,
         .nature = NATURE_RELAXED,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_SWORDS_DANCE, MOVE_POWER_WHIP, MOVE_GYRO_BALL, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16786,7 +16786,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_BRAVE,
         .dependency = CIRCUIT_DEPENDENCY_TRICK_ROOM,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_SHIFT_GEAR, MOVE_GEAR_GRIND, MOVE_WILD_CHARGE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16799,7 +16799,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_SHIFT_GEAR, MOVE_GEAR_GRIND, MOVE_MAGNET_RISE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16812,7 +16812,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LEFTOVERS,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_TRICK_ROOM, MOVE_ALLY_SWITCH, MOVE_GEAR_GRIND, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16825,7 +16825,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_BRAVE,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_TRICK_ROOM, MOVE_PSYCHIC, MOVE_ALLY_SWITCH, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16838,7 +16838,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_QUIET,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 32, 0},
+        .evs = {252, 0, 4, 0, 252, 0},
     },
     {
         .moves = {MOVE_PSYCHIC, MOVE_THUNDERBOLT, MOVE_SHADOW_BALL, MOVE_ENERGY_BALL, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16851,7 +16851,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_CHOICE_SPECS,
         .nature = NATURE_QUIET,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 32, 0},
+        .evs = {252, 0, 4, 0, 252, 0},
     },
     {
         .moves = {MOVE_NASTY_PLOT, MOVE_PSYCHIC, MOVE_DARK_PULSE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16864,7 +16864,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_QUIET,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 32, 0},
+        .evs = {252, 0, 4, 0, 252, 0},
     },
     {
         .moves = {MOVE_FINAL_GAMBIT, MOVE_BUG_BUZZ, MOVE_ENCORE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16877,7 +16877,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_BUG_GEM,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 0, 32, 2, 0},
+        .evs = {252, 0, 0, 252, 4, 0},
     },
     {
         .moves = {MOVE_BUG_BUZZ, MOVE_ENERGY_BALL, MOVE_SLUDGE_BOMB, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16890,7 +16890,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_SPIKES, MOVE_FINAL_GAMBIT, MOVE_ENCORE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16903,7 +16903,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_FOCUS_SASH,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 0, 32, 2, 0},
+        .evs = {252, 0, 0, 252, 4, 0},
     },
     {
         .moves = {MOVE_DRAGON_CLAW, MOVE_FIRE_PUNCH, MOVE_SUCKER_PUNCH, MOVE_IRON_HEAD, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16916,7 +16916,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_ASSAULT_VEST,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_DRAGON_CLAW, MOVE_FIRE_PUNCH, MOVE_ROCK_SLIDE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16929,7 +16929,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_STEALTH_ROCK, MOVE_GLARE, MOVE_DRAGON_TAIL, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16942,7 +16942,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_ROCKY_HELMET,
         .nature = NATURE_CAREFUL,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 0, 32},
+        .evs = {252, 0, 4, 0, 0, 252},
     },
     {
         .moves = {MOVE_HEAD_CHARGE, MOVE_HIGH_HORSEPOWER, MOVE_CLOSE_COMBAT, MOVE_WILD_CHARGE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16955,7 +16955,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_ASSAULT_VEST,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_HEAD_CHARGE, MOVE_WILD_CHARGE, MOVE_HIGH_HORSEPOWER, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16968,7 +16968,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_CLEAR_AMULET,
         .nature = NATURE_BRAVE,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_SWORDS_DANCE, MOVE_HEAD_CHARGE, MOVE_HIGH_HORSEPOWER, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16981,7 +16981,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_FIRE_LASH, MOVE_THROAT_CHOP, MOVE_THUNDER_PUNCH, MOVE_SUPERPOWER, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -16994,7 +16994,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_ASSAULT_VEST,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_FIRE_LASH, MOVE_SUCKER_PUNCH, MOVE_THUNDER_PUNCH, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17007,7 +17007,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_OVERHEAT, MOVE_GIGA_DRAIN, MOVE_WILL_O_WISP, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17020,7 +17020,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_AGUAV_BERRY,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 32, 0},
+        .evs = {252, 0, 4, 0, 252, 0},
     },
     {
         .moves = {MOVE_IRON_HEAD, MOVE_X_SCISSOR, MOVE_ROCK_SLIDE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17033,7 +17033,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_FOCUS_SASH,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_HONE_CLAWS, MOVE_IRON_HEAD, MOVE_X_SCISSOR, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17046,7 +17046,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_CLEAR_AMULET,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_ENTRAINMENT, MOVE_IRON_HEAD, MOVE_X_SCISSOR, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17059,7 +17059,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_FOCUS_SASH,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_HYDRO_PUMP, MOVE_AURA_SPHERE, MOVE_QUICK_GUARD, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17072,7 +17072,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_HYDRO_PUMP, MOVE_AURA_SPHERE, MOVE_ICY_WIND, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17085,7 +17085,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_EXPERT_BELT,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_SCALD, MOVE_AURA_SPHERE, MOVE_HELPING_HAND, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17098,7 +17098,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 32, 0, 0},
+        .evs = {252, 0, 4, 252, 0, 0},
     },
     {
         .moves = {MOVE_TECHNO_BLAST, MOVE_ICE_BEAM, MOVE_FLAMETHROWER, MOVE_U_TURN, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17111,7 +17111,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_CHOICE_SCARF,
         .nature = NATURE_NAIVE,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_BUG_BUZZ, MOVE_IRON_HEAD, MOVE_ICE_BEAM, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17124,7 +17124,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_NAIVE,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_ELECTROWEB, MOVE_FLAMETHROWER, MOVE_U_TURN, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17137,7 +17137,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 32, 0, 0},
+        .evs = {252, 0, 4, 252, 0, 0},
     },
     {
         .moves = {MOVE_GEOMANCY, MOVE_MOONBLAST, MOVE_THUNDERBOLT, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17150,7 +17150,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_POWER_HERB,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_MOONBLAST, MOVE_DAZZLING_GLEAM, MOVE_THUNDERBOLT, MOVE_FOCUS_BLAST, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17163,7 +17163,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_CHOICE_SPECS,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_MOONBLAST, MOVE_THUNDER_WAVE, MOVE_LIGHT_SCREEN, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17176,7 +17176,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_BOLD,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 32, 0, 0, 2},
+        .evs = {252, 0, 252, 0, 0, 4},
     },
     {
         .moves = {MOVE_OBLIVION_WING, MOVE_DARK_PULSE, MOVE_HEAT_WAVE, MOVE_SNARL, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17189,7 +17189,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_ASSAULT_VEST,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 32, 0},
+        .evs = {252, 0, 4, 0, 252, 0},
     },
     {
         .moves = {MOVE_TAILWIND, MOVE_OBLIVION_WING, MOVE_DARK_PULSE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17202,7 +17202,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_KNOCK_OFF, MOVE_SUCKER_PUNCH, MOVE_DUAL_WINGBEAT, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17215,7 +17215,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_THOUSAND_ARROWS, MOVE_DRAGON_DANCE, MOVE_GLARE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17228,7 +17228,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_CLEAR_AMULET,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_THOUSAND_ARROWS, MOVE_COIL, MOVE_DRAGON_TAIL, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17241,7 +17241,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LEFTOVERS,
         .nature = NATURE_CAREFUL,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 0, 32},
+        .evs = {252, 0, 4, 0, 0, 252},
     },
     {
         .moves = {MOVE_THOUSAND_ARROWS, MOVE_EXTREME_SPEED, MOVE_OUTRAGE, MOVE_ROCK_SLIDE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17254,7 +17254,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_CHOICE_BAND,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_MUDDY_WATER, MOVE_ICE_BEAM, MOVE_HELPING_HAND, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17267,7 +17267,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_HYDRO_PUMP, MOVE_MUDDY_WATER, MOVE_ICE_BEAM, MOVE_U_TURN, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17280,7 +17280,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_CHOICE_SPECS,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 32, 0},
+        .evs = {252, 0, 4, 0, 252, 0},
     },
     {
         .moves = {MOVE_SPORE, MOVE_STRENGTH_SAP, MOVE_MOONBLAST, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17293,7 +17293,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_MENTAL_HERB,
         .nature = NATURE_BOLD,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 32, 0, 0, 2},
+        .evs = {252, 0, 252, 0, 0, 4},
     },
     {
         .moves = {MOVE_SPORE, MOVE_STRENGTH_SAP, MOVE_MOONBLAST, MOVE_GIGA_DRAIN, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17306,7 +17306,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_BIG_ROOT,
         .nature = NATURE_CALM,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 0, 32},
+        .evs = {252, 0, 4, 0, 0, 252},
     },
     {
         .moves = {MOVE_DOUBLE_EDGE, MOVE_DRAIN_PUNCH, MOVE_ICE_PUNCH, MOVE_DARKEST_LARIAT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17319,7 +17319,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_ASSAULT_VEST,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_DOUBLE_EDGE, MOVE_DRAIN_PUNCH, MOVE_ICE_PUNCH, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17332,7 +17332,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_FIRST_IMPRESSION, MOVE_LIQUIDATION, MOVE_SUCKER_PUNCH, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17345,7 +17345,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_FIRST_IMPRESSION, MOVE_LIQUIDATION, MOVE_WIDE_GUARD, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17358,7 +17358,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_HELPING_HAND, MOVE_SOAK, MOVE_RECOVER, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17371,7 +17371,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LEFTOVERS,
         .nature = NATURE_BOLD,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 32, 0, 0, 2},
+        .evs = {252, 0, 252, 0, 0, 4},
     },
     {
         .moves = {MOVE_COUNTER, MOVE_RECOVER, MOVE_TOXIC, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17384,7 +17384,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_ROCKY_HELMET,
         .nature = NATURE_BOLD,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 32, 0, 0, 2},
+        .evs = {252, 0, 252, 0, 0, 4},
     },
     {
         .moves = {MOVE_MULTI_ATTACK, MOVE_CRUNCH, MOVE_U_TURN, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17397,7 +17397,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_MULTI_ATTACK, MOVE_TAILWIND, MOVE_PARTING_SHOT, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17410,7 +17410,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 32, 0, 0},
+        .evs = {252, 0, 4, 252, 0, 0},
     },
     {
         .moves = {MOVE_SHELL_SMASH, MOVE_HEAT_WAVE, MOVE_DRAGON_PULSE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17423,7 +17423,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_WHITE_HERB,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_FLAMETHROWER, MOVE_DRAGON_PULSE, MOVE_BODY_PRESS, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17436,7 +17436,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LEFTOVERS,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 32, 0},
+        .evs = {252, 0, 4, 0, 252, 0},
     },
     {
         .moves = {MOVE_ZING_ZAP, MOVE_IRON_HEAD, MOVE_NUZZLE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17449,7 +17449,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_AIR_BALLOON,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_FAKE_OUT, MOVE_ZING_ZAP, MOVE_NUZZLE, MOVE_SPIKY_SHIELD, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17462,7 +17462,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_HEAVY_SLAM, MOVE_POWER_WHIP, MOVE_SHADOW_CLAW, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17475,7 +17475,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_BRAVE,
         .dependency = CIRCUIT_DEPENDENCY_TRICK_ROOM,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_ANCHOR_SHOT, MOVE_POWER_WHIP, MOVE_LIQUIDATION, MOVE_SHADOW_CLAW, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17488,7 +17488,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_ASSAULT_VEST,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_ANCHOR_SHOT, MOVE_POWER_WHIP, MOVE_SYNTHESIS, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17501,7 +17501,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LEFTOVERS,
         .nature = NATURE_CAREFUL,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 2, 0, 0, 0, 32},
+        .evs = {252, 4, 0, 0, 0, 252},
     },
     {
         .moves = {MOVE_THUNDERBOLT, MOVE_DAZZLING_GLEAM, MOVE_VOLT_SWITCH, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17514,7 +17514,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_ELECTROWEB, MOVE_DAZZLING_GLEAM, MOVE_VOLT_SWITCH, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17527,7 +17527,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_PSYCHIC, MOVE_MOONBLAST, MOVE_FOCUS_BLAST, MOVE_PSYSHOCK, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17540,7 +17540,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_CHOICE_SPECS,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_PSYCHIC, MOVE_MOONBLAST, MOVE_TAUNT, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17553,7 +17553,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_HORN_LEECH, MOVE_CLOSE_COMBAT, MOVE_ROCK_SLIDE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17566,7 +17566,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_HORN_LEECH, MOVE_NATURES_MADNESS, MOVE_LIGHT_SCREEN, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17579,7 +17579,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_CAREFUL,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 0, 32},
+        .evs = {252, 0, 4, 0, 0, 252},
     },
     {
         .moves = {MOVE_MOONBLAST, MOVE_SURF, MOVE_ICE_BEAM, MOVE_DAZZLING_GLEAM, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17592,7 +17592,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_ASSAULT_VEST,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 32, 0},
+        .evs = {252, 0, 4, 0, 252, 0},
     },
     {
         .moves = {MOVE_MUDDY_WATER, MOVE_MOONBLAST, MOVE_ICY_WIND, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17605,7 +17605,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_CALM,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 0, 32},
+        .evs = {252, 0, 4, 0, 0, 252},
     },
     {
         .moves = {MOVE_POWER_GEM, MOVE_SLUDGE_BOMB, MOVE_THUNDERBOLT, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17618,7 +17618,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_METEOR_BEAM, MOVE_SLUDGE_BOMB, MOVE_THUNDERBOLT, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17631,7 +17631,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_POWER_HERB,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_CLOSE_COMBAT, MOVE_LUNGE, MOVE_ICE_PUNCH, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17644,7 +17644,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_DRAIN_PUNCH, MOVE_LUNGE, MOVE_ICE_PUNCH, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17657,7 +17657,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_ROCKY_HELMET,
         .nature = NATURE_IMPISH,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 32, 0, 0, 2},
+        .evs = {252, 0, 252, 0, 0, 4},
     },
     {
         .moves = {MOVE_CLOSE_COMBAT, MOVE_LUNGE, MOVE_ICE_BEAM, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17670,7 +17670,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_NAIVE,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 0, 32, 0},
+        .evs = {4, 252, 0, 0, 252, 0},
     },
     {
         .moves = {MOVE_HI_JUMP_KICK, MOVE_U_TURN, MOVE_ICE_BEAM, MOVE_QUICK_GUARD, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17683,7 +17683,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_FOCUS_SASH,
         .nature = NATURE_NAIVE,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 0, 32, 0},
+        .evs = {4, 252, 0, 0, 252, 0},
     },
     {
         .moves = {MOVE_THUNDERBOLT, MOVE_ENERGY_BALL, MOVE_DAZZLING_GLEAM, MOVE_ELECTROWEB, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17696,7 +17696,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_ASSAULT_VEST,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_TAIL_GLOW, MOVE_THUNDERBOLT, MOVE_ENERGY_BALL, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17709,7 +17709,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_FOCUS_SASH,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_HEAVY_SLAM, MOVE_STONE_EDGE, MOVE_WIDE_GUARD, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17722,7 +17722,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_BRAVE,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_HEAVY_SLAM, MOVE_FLAMETHROWER, MOVE_LEECH_SEED, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17735,7 +17735,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LEFTOVERS,
         .nature = NATURE_SASSY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 0, 32},
+        .evs = {252, 0, 4, 0, 0, 252},
     },
     {
         .moves = {MOVE_AUTOTOMIZE, MOVE_FLASH_CANNON, MOVE_LEAF_STORM, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17748,7 +17748,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_LEAF_BLADE, MOVE_SACRED_SWORD, MOVE_SMART_STRIKE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17761,7 +17761,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_FOCUS_SASH,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_LEAF_BLADE, MOVE_SACRED_SWORD, MOVE_TAILWIND, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17774,7 +17774,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_FOCUS_SASH,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_CRUNCH, MOVE_HEAVY_SLAM, MOVE_HIGH_HORSEPOWER, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17787,7 +17787,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_BRAVE,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_DRACO_METEOR, MOVE_SNARL, MOVE_HEAT_WAVE, MOVE_WIDE_GUARD, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17800,7 +17800,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_QUIET,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 32, 0},
+        .evs = {252, 0, 4, 0, 252, 0},
     },
     {
         .moves = {MOVE_SPECTRAL_THIEF, MOVE_CLOSE_COMBAT, MOVE_SHADOW_SNEAK, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17813,7 +17813,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_BULK_UP, MOVE_SPECTRAL_THIEF, MOVE_CLOSE_COMBAT, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17826,7 +17826,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_CLEAR_AMULET,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_DRACO_METEOR, MOVE_SLUDGE_BOMB, MOVE_FLAMETHROWER, MOVE_NASTY_PLOT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17839,7 +17839,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_WISE_GLASSES,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_DRACO_METEOR, MOVE_SLUDGE_BOMB, MOVE_HEAT_WAVE, MOVE_TAILWIND, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17852,7 +17852,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_TRICK_ROOM, MOVE_GYRO_BALL, MOVE_ROCK_SLIDE, MOVE_WIDE_GUARD, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17865,7 +17865,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LEFTOVERS,
         .nature = NATURE_BRAVE,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 32, 0, 0, 2},
+        .evs = {252, 0, 252, 0, 0, 4},
     },
     {
         .moves = {MOVE_GYRO_BALL, MOVE_ROCK_SLIDE, MOVE_TRICK_ROOM, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17878,7 +17878,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_BRAVE,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_HEAT_WAVE, MOVE_SHADOW_BALL, MOVE_PSYCHIC, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17891,7 +17891,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_WISE_GLASSES,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_HEAT_WAVE, MOVE_SHADOW_BALL, MOVE_WILL_O_WISP, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17904,7 +17904,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_PLASMA_FISTS, MOVE_CLOSE_COMBAT, MOVE_PLAY_ROUGH, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17917,7 +17917,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_FAKE_OUT, MOVE_ELECTROWEB, MOVE_CLOSE_COMBAT, MOVE_VOLT_SWITCH, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17930,7 +17930,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_ASSAULT_VEST,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_FLASH_CANNON, MOVE_THUNDER_WAVE, MOVE_ACID_ARMOR, MOVE_HEADBUTT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17943,7 +17943,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LEFTOVERS,
         .nature = NATURE_RELAXED,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 32, 0, 0, 2},
+        .evs = {252, 0, 252, 0, 0, 4},
     },
     {
         .moves = {MOVE_IRON_HEAD, MOVE_BRUTAL_SWING, MOVE_THUNDER_WAVE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17956,7 +17956,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_FOCUS_SASH,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_DOUBLE_IRON_BASH, MOVE_THUNDER_PUNCH, MOVE_ICE_PUNCH, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17969,7 +17969,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_WEAKNESS_POLICY,
         .nature = NATURE_BRAVE,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_DOUBLE_IRON_BASH, MOVE_THUNDER_PUNCH, MOVE_ICE_PUNCH, MOVE_HIGH_HORSEPOWER, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17982,7 +17982,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_ASSAULT_VEST,
         .nature = NATURE_BRAVE,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_REFLECT, MOVE_LIGHT_SCREEN, MOVE_HELPING_HAND, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -17995,7 +17995,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIGHT_CLAY,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 32, 0, 0},
+        .evs = {252, 0, 4, 252, 0, 0},
     },
     {
         .moves = {MOVE_TRICK_ROOM, MOVE_HELPING_HAND, MOVE_STRUGGLE_BUG, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18008,7 +18008,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_SASSY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 0, 32},
+        .evs = {252, 0, 4, 0, 0, 252},
     },
     {
         .moves = {MOVE_PSYCHIC_TERRAIN, MOVE_EXPANDING_FORCE, MOVE_BUG_BUZZ, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18021,7 +18021,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 32, 0},
+        .evs = {252, 0, 4, 0, 252, 0},
     },
     {
         .moves = {MOVE_IRON_DEFENSE, MOVE_BODY_PRESS, MOVE_STORED_POWER, MOVE_RECOVER, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18034,7 +18034,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LEFTOVERS,
         .nature = NATURE_BOLD,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 32, 0, 2, 0},
+        .evs = {252, 0, 252, 0, 4, 0},
     },
     {
         .moves = {MOVE_DARK_PULSE, MOVE_PSYCHIC, MOVE_BURNING_JEALOUSY, MOVE_U_TURN, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18047,7 +18047,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_CHOICE_SPECS,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_NASTY_PLOT, MOVE_DARK_PULSE, MOVE_PSYCHIC, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18060,7 +18060,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_GRASSY_SEED,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_TERRAIN,
-        .statPoints = {32, 0, 2, 0, 32, 0},
+        .evs = {252, 0, 4, 0, 252, 0},
     },
     {
         .moves = {MOVE_FAKE_TEARS, MOVE_SNARL, MOVE_PARTING_SHOT, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18073,7 +18073,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 32, 0, 0},
+        .evs = {252, 0, 4, 252, 0, 0},
     },
     {
         .moves = {MOVE_FAKE_OUT, MOVE_BEAT_UP, MOVE_QUICK_GUARD, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18086,7 +18086,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_FOCUS_SASH,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 32, 0, 0},
+        .evs = {252, 0, 4, 252, 0, 0},
     },
     {
         .moves = {MOVE_POLLEN_PUFF, MOVE_SLEEP_POWDER, MOVE_HELPING_HAND, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18099,7 +18099,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_CALM,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 0, 32},
+        .evs = {252, 0, 4, 0, 0, 252},
     },
     {
         .moves = {MOVE_GIGA_DRAIN, MOVE_POLLEN_PUFF, MOVE_COTTON_SPORE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18112,7 +18112,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_ROCKY_HELMET,
         .nature = NATURE_BOLD,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 32, 0, 2, 0},
+        .evs = {252, 0, 252, 0, 4, 0},
     },
     {
         .moves = {MOVE_GRASSY_TERRAIN, MOVE_GRASSY_GLIDE, MOVE_POLLEN_PUFF, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18125,7 +18125,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_TERRAIN_EXTENDER,
         .nature = NATURE_RELAXED,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 32, 0, 2, 0},
+        .evs = {252, 0, 252, 0, 4, 0},
     },
     {
         .moves = {MOVE_LEAF_STORM, MOVE_POLLEN_PUFF, MOVE_AROMATHERAPY, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18138,7 +18138,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_EJECT_PACK,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 32, 0},
+        .evs = {252, 0, 4, 0, 252, 0},
     },
     {
         .moves = {MOVE_COTTON_GUARD, MOVE_BODY_PRESS, MOVE_THUNDER_WAVE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18151,7 +18151,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LEFTOVERS,
         .nature = NATURE_IMPISH,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 32, 0, 0, 2},
+        .evs = {252, 0, 252, 0, 0, 4},
     },
     {
         .moves = {MOVE_COTTON_GUARD, MOVE_GUARD_SWAP, MOVE_BODY_PRESS, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18164,7 +18164,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_IMPISH,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 32, 0, 0, 2},
+        .evs = {252, 0, 252, 0, 0, 4},
     },
     {
         .moves = {MOVE_DOUBLE_EDGE, MOVE_WILD_CHARGE, MOVE_ZEN_HEADBUTT, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18177,7 +18177,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_THUNDER_FANG, MOVE_CRUNCH, MOVE_PSYCHIC_FANGS, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18190,7 +18190,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_DISCHARGE, MOVE_SNARL, MOVE_VOLT_SWITCH, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18203,7 +18203,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_NUZZLE, MOVE_HELPING_HAND, MOVE_EERIE_IMPULSE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18216,7 +18216,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_FOCUS_SASH,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 32, 0, 0},
+        .evs = {252, 0, 4, 252, 0, 0},
     },
     {
         .moves = {MOVE_ELECTRIC_TERRAIN, MOVE_RISING_VOLTAGE, MOVE_HELPING_HAND, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18229,7 +18229,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_MAGNET,
         .nature = NATURE_TIMID,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 0, 0, 32, 32, 0},
+        .evs = {4, 0, 0, 252, 252, 0},
     },
     {
         .moves = {MOVE_FIRE_LASH, MOVE_LEECH_LIFE, MOVE_POWER_WHIP, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18242,7 +18242,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_LUNGE, MOVE_WILL_O_WISP, MOVE_KNOCK_OFF, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18255,7 +18255,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_ROCKY_HELMET,
         .nature = NATURE_IMPISH,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 32, 0, 0, 2},
+        .evs = {252, 0, 252, 0, 0, 4},
     },
     {
         .moves = {MOVE_COIL, MOVE_FIRE_LASH, MOVE_LEECH_LIFE, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18268,7 +18268,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LEFTOVERS,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_HEAT_WAVE, MOVE_SCALD, MOVE_SCORCHING_SANDS, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18281,7 +18281,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 2, 0, 32, 0},
+        .evs = {252, 0, 4, 0, 252, 0},
     },
     {
         .moves = {MOVE_COACHING, MOVE_DRAIN_PUNCH, MOVE_OCTOLOCK, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18294,7 +18294,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_CAREFUL,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 2, 0, 0, 0, 32},
+        .evs = {252, 4, 0, 0, 0, 252},
     },
     {
         .moves = {MOVE_MACH_PUNCH, MOVE_BULLET_PUNCH, MOVE_POWER_UP_PUNCH, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18307,7 +18307,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_TOPSY_TURVY, MOVE_CLOSE_COMBAT, MOVE_SUCKER_PUNCH, MOVE_DETECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18320,7 +18320,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_CLOSE_COMBAT, MOVE_LIQUIDATION, MOVE_ICE_PUNCH, MOVE_SUCKER_PUNCH, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18333,7 +18333,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_CHOICE_BAND,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_FACADE, MOVE_KNOCK_OFF, MOVE_CLOSE_COMBAT, MOVE_OBSTRUCT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18346,7 +18346,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_FLAME_ORB,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_KNOCK_OFF, MOVE_CLOSE_COMBAT, MOVE_GUNK_SHOT, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18359,7 +18359,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_KNOCK_OFF, MOVE_PARTING_SHOT, MOVE_TAUNT, MOVE_QUICK_GUARD, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18372,7 +18372,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 2, 0, 32, 0, 0},
+        .evs = {252, 4, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_DOUBLE_EDGE, MOVE_KNOCK_OFF, MOVE_CLOSE_COMBAT, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18385,7 +18385,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_SHADOW_BALL, MOVE_EARTH_POWER, MOVE_ICY_WIND, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18398,7 +18398,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 0, 0, 32, 2},
+        .evs = {252, 0, 0, 0, 252, 4},
     },
     {
         .moves = {MOVE_SHADOW_BALL, MOVE_POWER_GEM, MOVE_EARTH_POWER, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18411,7 +18411,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_WEAKNESS_POLICY,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 0, 0, 32, 2},
+        .evs = {252, 0, 0, 0, 252, 4},
     },
     {
         .moves = {MOVE_PERISH_SONG, MOVE_STRENGTH_SAP, MOVE_ICY_WIND, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18424,7 +18424,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LEFTOVERS,
         .nature = NATURE_CALM,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 0, 2, 0, 32},
+        .evs = {252, 0, 0, 4, 0, 252},
     },
     {
         .moves = {MOVE_SHADOW_BALL, MOVE_POWER_GEM, MOVE_EARTH_POWER, MOVE_ICE_BEAM, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18437,7 +18437,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_CHOICE_SPECS,
         .nature = NATURE_MODEST,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 0, 0, 32, 2},
+        .evs = {252, 0, 0, 0, 252, 4},
     },
     {
         .moves = {MOVE_CLOSE_COMBAT, MOVE_KNOCK_OFF, MOVE_FIRST_IMPRESSION, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18450,7 +18450,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_CLOSE_COMBAT, MOVE_LEAF_BLADE, MOVE_NIGHT_SLASH, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18463,7 +18463,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LEEK,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_COACHING, MOVE_HELPING_HAND, MOVE_QUICK_GUARD, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18476,7 +18476,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_SITRUS_BERRY,
         .nature = NATURE_CAREFUL,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 0, 17, 0, 0, 17},
+        .evs = {252, 0, 124, 0, 0, 132},
     },
     {
         .moves = {MOVE_SWORDS_DANCE, MOVE_CLOSE_COMBAT, MOVE_BRAVE_BIRD, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18489,7 +18489,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_CLEAR_AMULET,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_BOLT_BEAK, MOVE_DRAGON_CLAW, MOVE_HIGH_HORSEPOWER, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18502,7 +18502,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_SAND,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_BOLT_BEAK, MOVE_DRAGON_RUSH, MOVE_HIGH_HORSEPOWER, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18515,7 +18515,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_WIDE_LENS,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_BOLT_BEAK, MOVE_DRAGON_CLAW, MOVE_FIRE_FANG, MOVE_HIGH_HORSEPOWER, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18528,7 +18528,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_CHOICE_SCARF,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_BOLT_BEAK, MOVE_BLIZZARD, MOVE_LOW_KICK, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18541,7 +18541,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_NAIVE,
         .dependency = CIRCUIT_DEPENDENCY_SNOW,
-        .statPoints = {2, 16, 0, 32, 16, 0},
+        .evs = {8, 124, 0, 252, 124, 0},
     },
     {
         .moves = {MOVE_BOLT_BEAK, MOVE_ICICLE_CRASH, MOVE_LOW_KICK, MOVE_STOMPING_TANTRUM, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18554,7 +18554,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_CHOICE_SCARF,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_BOLT_BEAK, MOVE_FREEZE_DRY, MOVE_LOW_KICK, MOVE_ICY_WIND, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18567,7 +18567,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_ASSAULT_VEST,
         .nature = NATURE_NAIVE,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 16, 0, 0, 16, 2},
+        .evs = {252, 124, 0, 0, 124, 8},
     },
     {
         .moves = {MOVE_FISHIOUS_REND, MOVE_PSYCHIC_FANGS, MOVE_DRAGON_RUSH, MOVE_SLEEP_TALK, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18580,7 +18580,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_CHOICE_BAND,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_SAND,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_FISHIOUS_REND, MOVE_PSYCHIC_FANGS, MOVE_CRUNCH, MOVE_OUTRAGE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18593,7 +18593,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_CHOICE_SCARF,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
     {
         .moves = {MOVE_FISHIOUS_REND, MOVE_PSYCHIC_FANGS, MOVE_CRUNCH, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18606,7 +18606,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_MYSTIC_WATER,
         .nature = NATURE_ADAMANT,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_FISHIOUS_REND, MOVE_FREEZE_DRY, MOVE_ICICLE_CRASH, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18619,7 +18619,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LIFE_ORB,
         .nature = NATURE_NAIVE,
         .dependency = CIRCUIT_DEPENDENCY_SNOW,
-        .statPoints = {2, 16, 0, 32, 16, 0},
+        .evs = {8, 124, 0, 252, 124, 0},
     },
     {
         .moves = {MOVE_FISHIOUS_REND, MOVE_FREEZE_DRY, MOVE_SUPER_FANG, MOVE_PROTECT, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18632,7 +18632,7 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_LEFTOVERS,
         .nature = NATURE_BRAVE,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {32, 32, 2, 0, 0, 0},
+        .evs = {252, 252, 4, 0, 0, 0},
     },
     {
         .moves = {MOVE_FISHIOUS_REND, MOVE_ICICLE_CRASH, MOVE_PSYCHIC_FANGS, MOVE_CRUNCH, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE},
@@ -18645,6 +18645,6 @@ const struct ShowdownCircuitTemplate gShowdownCircuitTemplates[SHOWDOWN_CIRCUIT_
         .item = ITEM_CHOICE_SCARF,
         .nature = NATURE_JOLLY,
         .dependency = CIRCUIT_DEPENDENCY_NONE,
-        .statPoints = {2, 32, 0, 32, 0, 0},
+        .evs = {4, 252, 0, 252, 0, 0},
     },
 };

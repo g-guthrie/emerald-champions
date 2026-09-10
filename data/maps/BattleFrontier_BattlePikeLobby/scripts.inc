@@ -397,11 +397,11 @@ BattleFrontier_BattlePikeLobby_Text_ThinkAbilitiesUsefulHere:
 
 @ Unused
 BattleFrontier_BattlePikeLobby_Text_TrainersWhicheverPathIChoose:
-	.string "What is this weird place?\n"
-	.string "I can't figure it out at all!\p"
-	.string "I've taken the challenge a bunch\n"
-	.string "of times, but all I ever do is run into\l"
-	.string "TRAINERS whichever path I choose.$"
+	.string "I went to a different desk hoping\n"
+	.string "for an easier challenge.\p"
+	.string "They all enter the same CIRCUIT!\n"
+	.string "Now the receptionist recognizes\l"
+	.string "me…$"
 
 BattleFrontier_BattlePikeLobby_Text_RulesAreListed:
 	.string "The Battle Choice's rules are listed.$"

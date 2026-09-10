@@ -11,7 +11,9 @@ SandstrewnRuins_EventScript_Archaeologist::
 	msgbox SandstrewnRuins_Text_Archaeologist, MSGBOX_NPC
 	end
 SandstrewnRuins_Text_Archaeologist:
-	.string "Every fossil here records a different\n"
-	.string "answer to survival. Take them; build.\p"
-	.string "Below us, cells of green light wait for\n"
-	.string "the guardian of the land.$"
+	.string "Every fossil here tells us how a\n"
+	.string "POKéMON lived. Imagine this place\l"
+	.string "before the desert!\p"
+	.string "Those green lights below us may\n"
+	.string "be ZYGARDE. Search B1F. It has\l"
+	.string "a 3% wild encounter chance.$"

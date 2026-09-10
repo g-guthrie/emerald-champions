@@ -1,0 +1,34 @@
+league-retired-lobby 0 RESULT frames=2500 stop_matched=0 pc=08199d48 rtc=946684800 width=240 height=160 video_hash=9f54ba7932286a9f nonzero_pixels=26671 save_bytes=0
+READ width=4 address=020022c4 value=00004e20
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=02002290 value=00000001
+READ width=4 address=020022d4 value=0000100a
+READ width=4 address=020022e0 value=00000003
+READ width=4 address=020022e4 value=00000004
+READ width=4 address=030051b4 value=02011330
+READ width=4 address=030051b0 value=020151a8
+READ width=4 address=03006bf4 value=00000000
+READ width=4 address=03006be8 value=00000000
+READ width=2 address=020337f6 value=00000033
+READ width=2 address=020337f8 value=00000033
+READ width=2 address=0203385a value=00000034
+READ width=2 address=0203385c value=00000034
+ 
+league-hof-record 0 RESULT frames=12000 stop_matched=0 pc=08199d48 rtc=946684800 width=240 height=160 video_hash=4ede3c05785fec49 nonzero_pixels=38243 save_bytes=131072
+READ width=4 address=020022c4 value=00000001
+READ width=4 address=020022ec value=00000001
+READ width=4 address=020022f0 value=00000001
+READ width=4 address=02002290 value=00000005
+READ width=4 address=020022d4 value=0000100b
+READ width=4 address=020022e0 value=00000007
+READ width=4 address=020022e4 value=00000005
+READ width=4 address=030051b4 value=02011340
+READ width=4 address=030051b0 value=020151b8
+READ width=4 address=03006bf4 value=00010001
+READ width=4 address=03006be8 value=00000000
+READ width=2 address=020337f6 value=00000033
+READ width=2 address=020337f8 value=00000033
+READ width=2 address=0203385a value=00000034
+READ width=2 address=0203385c value=00000034
+ 

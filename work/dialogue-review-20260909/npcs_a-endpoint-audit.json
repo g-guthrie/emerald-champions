@@ -1,0 +1,510 @@
+{
+  "rare_wild_definition_count": 54,
+  "candidate_text_blocks": 46,
+  "candidate_text_blocks_with_source_callers": 41,
+  "inactive_text_blocks": [
+    "MtPyre_Summit_Text_CresseliaAwakened",
+    "MtPyre_Summit_Text_CresseliaAwaits",
+    "MtPyre_Summit_Text_TimeSignDormant",
+    "MtPyre_Summit_Text_DialgaAwakened",
+    "MtPyre_Summit_Text_DialgaAwaits"
+  ],
+  "live_guide_handler_branches": 46,
+  "restored_actor_maps": [
+    "AlteringCave_1F",
+    "PetalburgWoods_3",
+    "ScorchedSlab_B2F",
+    "SandstrewnRuins"
+  ],
+  "stale_active_encounter_stone_text_found": [],
+  "source_only": true,
+  "runtime_tested": false,
+  "rare_wild_guidance": [
+    {
+      "id": "LEGENDARY_SIGN_AZELF",
+      "species": "AZELF",
+      "map": "SHOAL_CAVE_LOW_TIDE_ICE_ROOM",
+      "badges": 6,
+      "partner": "NONE",
+      "flag": "FLAG_BADGE06_GET",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_CELEBI",
+      "species": "CELEBI",
+      "map": "PETALBURG_WOODS_3",
+      "badges": 1,
+      "partner": "NONE",
+      "flag": "FLAG_BADGE01_GET",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_COBALION",
+      "species": "COBALION",
+      "map": "GRANITE_CAVE_B2F",
+      "badges": 1,
+      "partner": "NONE",
+      "flag": "FLAG_BADGE01_GET",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_CRESSELIA",
+      "species": "CRESSELIA",
+      "map": "METEOR_FALLS_B1F_2R",
+      "badges": 6,
+      "partner": "DARKRAI",
+      "flag": "FLAG_RECEIVED_RED_OR_BLUE_ORB",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_DIALGA",
+      "species": "DIALGA",
+      "map": "METEOR_FALLS_B1F_1R",
+      "badges": 7,
+      "partner": "NONE",
+      "flag": "FLAG_BADGE07_GET",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_ENTEI",
+      "species": "ENTEI",
+      "map": "FIERY_PATH",
+      "badges": 3,
+      "partner": "NONE",
+      "flag": "FLAG_BADGE03_GET",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_GIRATINA",
+      "species": "GIRATINA",
+      "map": "MT_PYRE_6F",
+      "badges": 7,
+      "partner": "NONE",
+      "flag": "FLAG_BADGE07_GET",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_HOOPA",
+      "species": "HOOPA",
+      "map": "ALTERING_CAVE_1F",
+      "badges": 5,
+      "partner": "NONE",
+      "flag": "FLAG_BADGE05_GET",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_KYUREM",
+      "species": "KYUREM",
+      "map": "SHOAL_CAVE_LOW_TIDE_ICE_ROOM",
+      "badges": 7,
+      "partner": "NONE",
+      "flag": "FLAG_BADGE07_GET",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_LANDORUS",
+      "species": "LANDORUS",
+      "map": "ROUTE111_RUINS_EXTERIOR",
+      "badges": 5,
+      "partner": "NONE",
+      "flag": "FLAG_BADGE05_GET",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_MESPRIT",
+      "species": "MESPRIT",
+      "map": "ROUTE120",
+      "badges": 5,
+      "partner": "NONE",
+      "flag": "FLAG_BADGE05_GET",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_PALKIA",
+      "species": "PALKIA",
+      "map": "UNDERWATER_SEAFLOOR_CAVERN",
+      "badges": 7,
+      "partner": "NONE",
+      "flag": "FLAG_BADGE07_GET",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_RAIKOU",
+      "species": "RAIKOU",
+      "map": "ROUTE110",
+      "badges": 2,
+      "partner": "NONE",
+      "flag": "FLAG_BADGE02_GET",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_REGIDRAGO",
+      "species": "REGIDRAGO",
+      "map": "METEOR_FALLS_1F_2R",
+      "badges": 6,
+      "partner": "REGIROCK",
+      "flag": "FLAG_BADGE06_GET",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_REGIELEKI",
+      "species": "REGIELEKI",
+      "map": "NEW_MAUVILLE_INSIDE",
+      "badges": 5,
+      "partner": "REGISTEEL",
+      "flag": "FLAG_RECEIVED_WATTSON_ELECTIRIZER",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_RESHIRAM",
+      "species": "RESHIRAM",
+      "map": "SCORCHED_SLAB_B2F",
+      "badges": 6,
+      "partner": "NONE",
+      "flag": "FLAG_BADGE06_GET",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_SHAYMIN",
+      "species": "SHAYMIN",
+      "map": "ROUTE102",
+      "badges": 0,
+      "partner": "NONE",
+      "flag": "0",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_TAPU_BULU",
+      "species": "TAPU_BULU",
+      "map": "ROUTE123",
+      "badges": 6,
+      "partner": "NONE",
+      "flag": "FLAG_BADGE06_GET",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_TAPU_KOKO",
+      "species": "TAPU_KOKO",
+      "map": "ROUTE110",
+      "badges": 5,
+      "partner": "NONE",
+      "flag": "FLAG_BADGE05_GET",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_TAPU_LELE",
+      "species": "TAPU_LELE",
+      "map": "MT_PYRE_EXTERIOR",
+      "badges": 6,
+      "partner": "NONE",
+      "flag": "FLAG_BADGE06_GET",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_THUNDURUS",
+      "species": "THUNDURUS",
+      "map": "ROUTE110",
+      "badges": 5,
+      "partner": "NONE",
+      "flag": "FLAG_HIDE_WEATHER_INSTITUTE_2F_AQUA_GRUNT_M",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_TORNADUS",
+      "species": "TORNADUS",
+      "map": "ROUTE119",
+      "badges": 5,
+      "partner": "NONE",
+      "flag": "FLAG_HIDE_WEATHER_INSTITUTE_2F_AQUA_GRUNT_M",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_UXIE",
+      "species": "UXIE",
+      "map": "METEOR_FALLS_B1F_1R",
+      "badges": 5,
+      "partner": "NONE",
+      "flag": "FLAG_BADGE05_GET",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_VICTINI",
+      "species": "VICTINI",
+      "map": "VICTORY_ROAD_1F",
+      "badges": 8,
+      "partner": "NONE",
+      "flag": "FLAG_BADGE08_GET",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_VIRIZION",
+      "species": "VIRIZION",
+      "map": "PETALBURG_WOODS_2",
+      "badges": 2,
+      "partner": "NONE",
+      "flag": "FLAG_BADGE02_GET",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_XERNEAS",
+      "species": "XERNEAS",
+      "map": "ROUTE120",
+      "badges": 6,
+      "partner": "NONE",
+      "flag": "FLAG_BADGE06_GET",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_YVELTAL",
+      "species": "YVELTAL",
+      "map": "MT_PYRE_EXTERIOR",
+      "badges": 6,
+      "partner": "NONE",
+      "flag": "FLAG_RECEIVED_RED_OR_BLUE_ORB",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_ZEKROM",
+      "species": "ZEKROM",
+      "map": "NEW_MAUVILLE_INSIDE",
+      "badges": 6,
+      "partner": "NONE",
+      "flag": "FLAG_RECEIVED_WATTSON_ELECTIRIZER",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_ZERAORA",
+      "species": "ZERAORA",
+      "map": "NEW_MAUVILLE_INSIDE",
+      "badges": 5,
+      "partner": "NONE",
+      "flag": "FLAG_RECEIVED_WATTSON_ELECTIRIZER",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_ZYGARDE",
+      "species": "ZYGARDE",
+      "map": "SANDSTREWN_RUINS_B1F",
+      "badges": 5,
+      "partner": "NONE",
+      "flag": "FLAG_BADGE05_GET",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_COSMOG",
+      "species": "COSMOG",
+      "map": "DEWFORD_MEADOW",
+      "badges": 1,
+      "partner": "NONE",
+      "flag": "FLAG_BADGE01_GET",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_ENAMORUS",
+      "species": "ENAMORUS",
+      "map": "VERDANTURF_MEADOW",
+      "badges": 6,
+      "partner": "NONE",
+      "flag": "FLAG_BADGE06_GET",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_FEZANDIPITI",
+      "species": "FEZANDIPITI",
+      "map": "VERDANTURF_MEADOW",
+      "badges": 6,
+      "partner": "NONE",
+      "flag": "FLAG_BADGE06_GET",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_MELOETTA",
+      "species": "MELOETTA",
+      "map": "DEWFORD_MEADOW",
+      "badges": 2,
+      "partner": "NONE",
+      "flag": "FLAG_BADGE02_GET",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_MELTAN",
+      "species": "MELTAN",
+      "map": "NEW_MAUVILLE_INSIDE",
+      "badges": 5,
+      "partner": "NONE",
+      "flag": "FLAG_BADGE05_GET",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_MUNKIDORI",
+      "species": "MUNKIDORI",
+      "map": "DEWFORD_MEADOW",
+      "badges": 4,
+      "partner": "NONE",
+      "flag": "FLAG_BADGE04_GET",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_OKIDOGI",
+      "species": "OKIDOGI",
+      "map": "ASHEN_WOODS",
+      "badges": 4,
+      "partner": "NONE",
+      "flag": "FLAG_BADGE04_GET",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_TERAPAGOS",
+      "species": "TERAPAGOS",
+      "map": "CAVE_OF_ORIGIN_B1F",
+      "badges": 7,
+      "partner": "NONE",
+      "flag": "FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_WO_CHIEN",
+      "species": "WO_CHIEN",
+      "map": "PETALBURG_WOODS_2",
+      "badges": 4,
+      "partner": "NONE",
+      "flag": "FLAG_BADGE04_GET",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_CHIEN_PAO",
+      "species": "CHIEN_PAO",
+      "map": "SHOAL_CAVE_LOW_TIDE_ICE_ROOM",
+      "badges": 6,
+      "partner": "NONE",
+      "flag": "FLAG_BADGE06_GET",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_CHI_YU",
+      "species": "CHI_YU",
+      "map": "ASHEN_WOODS",
+      "badges": 4,
+      "partner": "NONE",
+      "flag": "FLAG_BADGE04_GET",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_KUBFU",
+      "species": "KUBFU",
+      "map": "ROUTE112",
+      "badges": 3,
+      "partner": "NONE",
+      "flag": "FLAG_BADGE03_GET",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_MANAPHY",
+      "species": "MANAPHY",
+      "map": "UNDERWATER_SEAFLOOR_CAVERN",
+      "badges": 7,
+      "partner": "NONE",
+      "flag": "FLAG_BADGE07_GET",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_SUICUNE",
+      "species": "SUICUNE",
+      "map": "ROUTE125",
+      "badges": 6,
+      "partner": "NONE",
+      "flag": "FLAG_BADGE06_GET",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_TAPU_FINI",
+      "species": "TAPU_FINI",
+      "map": "ROUTE126",
+      "badges": 7,
+      "partner": "NONE",
+      "flag": "FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_TERRAKION",
+      "species": "TERRAKION",
+      "map": "VICTORY_ROAD_B1F",
+      "badges": 8,
+      "partner": "NONE",
+      "flag": "FLAG_BADGE08_GET",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_TING_LU",
+      "species": "TING_LU",
+      "map": "DESERT_UNDERPASS",
+      "badges": 4,
+      "partner": "NONE",
+      "flag": "FLAG_BADGE04_GET",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_TYPE_NULL",
+      "species": "TYPE_NULL",
+      "map": "ROUTE117",
+      "badges": 2,
+      "partner": "NONE",
+      "flag": "FLAG_BADGE02_GET",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_VOLCANION",
+      "species": "VOLCANION",
+      "map": "MAGMA_HIDEOUT_4F",
+      "badges": 6,
+      "partner": "NONE",
+      "flag": "FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_KELDEO",
+      "species": "KELDEO",
+      "map": "ROUTE127",
+      "badges": 7,
+      "partner": "NONE",
+      "flag": "FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_OGERPON",
+      "species": "OGERPON",
+      "map": "ROUTE120",
+      "badges": 5,
+      "partner": "NONE",
+      "flag": "FLAG_BADGE05_GET",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_ARTICUNO_GALAR",
+      "species": "ARTICUNO_GALAR",
+      "map": "ROUTE120",
+      "badges": 6,
+      "partner": "NONE",
+      "flag": "FLAG_BADGE06_GET",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_ZAPDOS_GALAR",
+      "species": "ZAPDOS_GALAR",
+      "map": "ROUTE112",
+      "badges": 3,
+      "partner": "NONE",
+      "flag": "FLAG_BADGE03_GET",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    },
+    {
+      "id": "LEGENDARY_SIGN_MOLTRES_GALAR",
+      "species": "MOLTRES_GALAR",
+      "map": "MT_PYRE_EXTERIOR",
+      "badges": 6,
+      "partner": "NONE",
+      "flag": "FLAG_BADGE06_GET",
+      "devon_guide": "RustboroCity_DevonCorp_2F_EventScript_PokemonDreamsScientist -> RustboroCity_DevonCorp_2F_EventScript_CheckSignMastery -> Common_EventScript_LegendaryGuide -> BuildLegendarySignResearchMenu -> ResearchSelectedLegendarySign"
+    }
+  ]
+}

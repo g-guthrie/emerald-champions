@@ -375,10 +375,15 @@ u16 TakePokemonFromDaycare(void)
 static u8 GetLevelAfterDaycareSteps(struct BoxPokemon *mon, u32 steps)
 {
     struct BoxPokemon tempMon = *mon;
+    u8 levelBefore = GetLevelFromBoxMonExp(mon);
+    u8 levelCap = GetCurrentLevelCap();
+
+    if (levelBefore >= levelCap)
+        return levelBefore;
 
     u32 experience = GetBoxMonData(mon, MON_DATA_EXP) + steps;
-    SetBoxMonData(&tempMon, MON_DATA_EXP,  &experience);
-    return GetLevelFromBoxMonExp(&tempMon);
+    SetBoxMonData(&tempMon, MON_DATA_EXP, &experience);
+    return min(GetLevelFromBoxMonExp(&tempMon), levelCap);
 }
 
 static u8 GetNumLevelsGainedFromSteps(struct DaycareMon *daycareMon)
@@ -388,8 +393,6 @@ static u8 GetNumLevelsGainedFromSteps(struct DaycareMon *daycareMon)
 
     levelBefore = GetLevelFromBoxMonExp(&daycareMon->mon);
     levelAfter = GetLevelAfterDaycareSteps(&daycareMon->mon, daycareMon->steps);
-    if (levelAfter > GetCurrentLevelCap())
-        levelAfter = GetCurrentLevelCap();
     return levelAfter - levelBefore;
 }
 
@@ -610,64 +613,9 @@ void TriggerPendingDaycareEgg(void)
 
 void InheritIVs(struct Pokemon *egg, struct DayCare *daycare)
 {
-    u32 i, iv, slot;
-    enum Stat powerStat;
-    u32 start = 0;
-    u32 powerItemCount = 0;
-    u8 selectedIvs[5] = {0};
-    u8 availableIVs[NUM_STATS];
-
-    u32 randParents = RandomUniform(RNG_DAYCARE_PICK_IVS_PARENT, 0, 31); // 2^5 1 parent/bit for each selected stat, -1 because 0 is included
-    u32 randIv = RandomUniform(RNG_DAYCARE_INHERITED_STATS, 0, 719); // 6! is the maximum number of stat combination, -1 because 0 is included
-
-    for (i = 0; i < NUM_STATS; i++)
-    {
-        availableIVs[i] = i;
-    }
-
-    u32 howManyIVs = 3;
-    for (i = 0; i < DAYCARE_MON_COUNT; i++)
-    {
-        enum Item item = GetBoxMonData(&daycare->mons[i].mon, MON_DATA_HELD_ITEM);
-        if (item == ITEM_DESTINY_KNOT)
-            howManyIVs = 5;
-        if (GetItemHoldEffect(item) == HOLD_EFFECT_POWER_ITEM)
-        {
-            slot = i;
-            powerStat = GetItemSecondaryId(item);
-            powerItemCount++;
-        }
-    }
-    if (powerItemCount > 0)
-    {
-        if (powerItemCount == 2)
-        {
-            slot = randParents & 1;
-            randParents >>= 1;
-            powerStat = GetItemSecondaryId(GetBoxMonData(&daycare->mons[slot].mon, MON_DATA_HELD_ITEM));
-        }
-        iv = GetBoxMonData(&daycare->mons[slot].mon, MON_DATA_HP_IV + powerStat);
-        SetMonData(egg, MON_DATA_HP_IV + powerStat, &iv);
-        RemoveIVIndexFromList(availableIVs, powerStat);
-        start++;
-    }
-
-    for (i = start; i < howManyIVs; i++)
-    {
-        u32 index = randIv % (NUM_STATS - i);
-        randIv = randIv / (NUM_STATS - i);
-        selectedIvs[i] = availableIVs[index];
-        RemoveIVIndexFromList(availableIVs, index);
-    }
-
-    for (i = start; i < howManyIVs; i++)
-    {
-        slot = randParents & 1;
-        randParents >>= 1;
-        iv = GetBoxMonData(&daycare->mons[slot].mon, MON_DATA_HP_IV + selectedIvs[i]);
-        SetMonData(egg, MON_DATA_HP_IV + selectedIvs[i], &iv);
-    }
-
+    // Egg IVs follow the same universal rule as every other constructor.
+    // Parent selection and held items no longer create an IV progression path.
+    SetBoxMonIVs(&egg->box, MAX_PER_STAT_IVS);
 }
 
 static void InheritPokeball(struct Pokemon *egg, struct DayCare *daycare)

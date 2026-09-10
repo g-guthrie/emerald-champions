@@ -264,10 +264,13 @@ SafariZone_RestHouse_Text_PsychicM:
 	.string "north and northwest; MAROWAK, north.$"
 
 SafariZone_RestHouse_Text_FatMan:
-	.string "If you put a {POKEBLOCK} on the FEEDER,\n"
-	.string "POKéMON are attracted to it.\p"
-	.string "I think POKéMON with the same sort of\n"
-	.string "nature are drawn by a certain {POKEBLOCK}.$"
+	.string "A FEEDER draws nearby POKéMON\n"
+	.string "that enjoy its {POKEBLOCK}'s flavor.\p"
+	.string "Try throwing the same flavor in battle.\n"
+	.string "A tasty treat helps keep them around!\p"
+	.string "Their tastes stay the same when you\n"
+	.string "change battle sets. The FEEDER's treat\l"
+	.string "lasts for 100 steps.$"
 
 SafariZone_South_Text_AreaOffLimits1:
 	.string "This area is still under construction.\n"
@@ -302,8 +305,9 @@ SafariZone_Northeast_Text_Boy:
 	.string "decide what I should catch.$"
 
 SafariZone_Northeast_Text_Woman:
-	.string "I heard that you can see PIKACHU here.\n"
-	.string "Where might one be?$"
+	.string "I heard you can see PIKACHU in the\n"
+	.string "southern part of the SAFARI ZONE.\l"
+	.string "I may have wandered too far!$"
 
 SafariZone_Northeast_Text_Girl:
 	.string "Oh, boo!\n"

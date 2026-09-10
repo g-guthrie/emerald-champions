@@ -1,0 +1,360 @@
+arm-none-eabi-cpp -iquote include -Wno-trigraphs -DMODERN=1 -DTESTING=0 -DEMERALD -std=gnu17 -DEC_HEADLESS_FIXTURES=0 -traditional-cpp - < src/data/trainers.party | tools/trainerproc/trainerproc -o src/data/trainers.h -i src/data/trainers.party -
+tools/scaninc/scaninc -M build/emerald-test/test/battle/ai/emerald_champions_plans.d -g build/assets -I include -I tools/agbcc/include test/battle/ai/emerald_champions_plans.c
+tools/scaninc/scaninc -M build/emerald-test/test/test_runner_battle.d -g build/assets -I include -I tools/agbcc/include test/test_runner_battle.c
+tools/scaninc/scaninc -M build/emerald-test/src/emerald_champions_battle_plan.d -g build/assets -I include -I tools/agbcc/include src/emerald_champions_battle_plan.c
+tools/scaninc/scaninc -M build/emerald-test/src/data.d -g build/assets -I include -I tools/agbcc/include src/data.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/data.o src/data.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/emerald_champions_battle_plan.o src/emerald_champions_battle_plan.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/test_runner_battle.o test/test_runner_battle.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/battle/ai/emerald_champions_plans.o test/battle/ai/emerald_champions_plans.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 4
+[0] EC live review Shayla timing: six-player bench: [32mPASS[0m
+REVIEW_INPUT trainer=747 slot=0 species=192 lv=38 HP=117 Atk=65 Def=58 SpA=132 SpD=81 Spe=63 item=481 ability=34
+REVIEW_INPUT trainer=747 slot=1 species=182 lv=38 HP=117 Atk=69 Def=88 SpA=119 SpD=92 Spe=78 item=523 ability=34
+REVIEW_INPUT trainer=747 slot=2 species=671 lv=38 HP=143 Atk=59 Def=101 SpA=101 SpD=134 Spe=73 item=472 ability=166
+REVIEW_INPUT trainer=747 slot=3 species=763 lv=38 HP=114 Atk=131 Def=91 SpA=48 SpD=91 Spe=104 item=479 ability=214
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Sunny Day target=1
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Moonblast target=0
+AI decision turn=2 actor=1 move=Energy Ball target=0
+AI decision turn=2 actor=3 move=Giga Drain target=0
+REVIEW_AFTER board=99 turns=1 reserves=0 species=192/182 HP=117/117 foes=98/114 faints=0/0 initialFrames=54
+REVIEW_STATE actor=1 move=Sunny Day PP=10/10/10/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=34 item=481
+REVIEW_STATE actor=3 move=Moonblast PP=20/10/14/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=34 item=523
+REVIEW_TIMING setup=6 bothActors=50 complete=56
+REVIEW_INPUT trainer=747 slot=0 species=192 lv=38 HP=117 Atk=65 Def=58 SpA=132 SpD=81 Spe=63 item=481 ability=34
+REVIEW_INPUT trainer=747 slot=1 species=182 lv=38 HP=117 Atk=69 Def=88 SpA=119 SpD=92 Spe=78 item=523 ability=34
+REVIEW_INPUT trainer=747 slot=2 species=671 lv=38 HP=143 Atk=59 Def=101 SpA=101 SpD=134 Spe=73 item=472 ability=166
+REVIEW_INPUT trainer=747 slot=3 species=763 lv=38 HP=114 Atk=131 Def=91 SpA=48 SpD=91 Spe=104 item=479 ability=214
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Moonblast target=0
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Knock Off target=2
+AI decision turn=2 actor=1 move=Moonblast target=0
+AI decision turn=2 actor=3 move=Knock Off target=2
+REVIEW_AFTER board=99 turns=1 reserves=1 species=671/763 HP=143/114 foes=98/114 faints=0/0 initialFrames=26
+REVIEW_STATE actor=1 move=Moonblast PP=14/20/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=166 item=472
+REVIEW_STATE actor=3 move=Knock Off PP=10/10/19/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=214 item=479
+REVIEW_TIMING setup=6 bothActors=22 complete=28
+[1] EC live review Shayla: physical setup and reserves: [32mPASS[0m
+REVIEW_INPUT trainer=747 slot=0 species=192 lv=38 HP=117 Atk=65 Def=58 SpA=132 SpD=81 Spe=63 item=481 ability=34
+REVIEW_INPUT trainer=747 slot=1 species=182 lv=38 HP=117 Atk=69 Def=88 SpA=119 SpD=92 Spe=78 item=523 ability=34
+REVIEW_INPUT trainer=747 slot=2 species=671 lv=38 HP=143 Atk=59 Def=101 SpA=101 SpD=134 Spe=73 item=472 ability=166
+REVIEW_INPUT trainer=747 slot=3 species=763 lv=38 HP=114 Atk=131 Def=91 SpA=48 SpD=91 Spe=104 item=479 ability=214
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Sunny Day target=1
+AI decision turn=1 actor=2 move=Ice Punch target=3
+AI decision turn=1 actor=3 move=Moonblast target=2
+AI switch turn=2 actor=1 party=2
+AI decision turn=2 actor=3 move=Moonblast target=2
+REVIEW_AFTER board=10 turns=1 reserves=0 species=192/182 HP=39/72 foes=106/77 faints=0/0 initialFrames=43
+REVIEW_STATE actor=1 move=Sunny Day PP=10/10/10/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=34 item=481
+REVIEW_STATE actor=3 move=Moonblast PP=20/10/14/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=34 item=0
+SHAYLA_WEATHER=16 leftSpeed=126 rightSpeed=156
+REVIEW_INPUT trainer=747 slot=0 species=192 lv=38 HP=117 Atk=65 Def=58 SpA=132 SpD=81 Spe=63 item=481 ability=34
+REVIEW_INPUT trainer=747 slot=1 species=182 lv=38 HP=117 Atk=69 Def=88 SpA=119 SpD=92 Spe=78 item=523 ability=34
+REVIEW_INPUT trainer=747 slot=2 species=671 lv=38 HP=143 Atk=59 Def=101 SpA=101 SpD=134 Spe=73 item=472 ability=166
+REVIEW_INPUT trainer=747 slot=3 species=763 lv=38 HP=114 Atk=131 Def=91 SpA=48 SpD=91 Spe=104 item=479 ability=214
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Sunny Day target=1
+AI decision turn=1 actor=2 move=Ice Punch target=3
+AI decision turn=1 actor=3 move=Moonblast target=2
+AI switch turn=2 actor=1 party=2
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=2 move=Ice Punch target=3
+AI decision turn=2 actor=3 move=Moonblast target=2
+AI decision turn=3 actor=1 move=Moonblast target=0
+AI decision turn=3 actor=3 move=Giga Drain target=0
+REVIEW_AFTER board=10 turns=2 reserves=0 species=671/182 HP=105/72 foes=91/0 faints=0/1 initialFrames=43
+REVIEW_STATE actor=1 move=- PP=15/20/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=166 item=472
+REVIEW_STATE actor=3 move=Moonblast PP=20/10/13/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=34 item=0
+SHAYLA_WEATHER=16 leftSpeed=73 rightSpeed=156
+REVIEW_INPUT trainer=747 slot=0 species=192 lv=38 HP=117 Atk=65 Def=58 SpA=132 SpD=81 Spe=63 item=481 ability=34
+REVIEW_INPUT trainer=747 slot=1 species=182 lv=38 HP=117 Atk=69 Def=88 SpA=119 SpD=92 Spe=78 item=523 ability=34
+REVIEW_INPUT trainer=747 slot=2 species=671 lv=38 HP=143 Atk=59 Def=101 SpA=101 SpD=134 Spe=73 item=472 ability=166
+REVIEW_INPUT trainer=747 slot=3 species=763 lv=38 HP=114 Atk=131 Def=91 SpA=48 SpD=91 Spe=104 item=479 ability=214
+AI decision turn=1 actor=0 move=Air Slash target=1
+AI decision turn=1 actor=1 move=Energy Ball target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Quiver Dance target=3
+AI decision turn=2 actor=1 move=Energy Ball target=0
+AI decision turn=2 actor=3 move=Moonblast target=0
+REVIEW_AFTER board=11 turns=1 reserves=0 species=192/182 HP=1/105 foes=78/135 faints=0/0 initialFrames=36
+REVIEW_STATE actor=1 move=Energy Ball PP=9/10/10/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=34 item=481
+REVIEW_STATE actor=3 move=Quiver Dance PP=19/10/15/5 Atk=6 Def=6 SpA=7 SpD=7 Spe=7 status=0 ability=34 item=523
+SHAYLA_WEATHER=0 leftSpeed=63 rightSpeed=117
+REVIEW_INPUT trainer=747 slot=0 species=192 lv=38 HP=117 Atk=65 Def=58 SpA=132 SpD=81 Spe=63 item=481 ability=34
+REVIEW_INPUT trainer=747 slot=1 species=182 lv=38 HP=117 Atk=69 Def=88 SpA=119 SpD=92 Spe=78 item=523 ability=34
+REVIEW_INPUT trainer=747 slot=2 species=671 lv=38 HP=143 Atk=59 Def=101 SpA=101 SpD=134 Spe=73 item=472 ability=166
+REVIEW_INPUT trainer=747 slot=3 species=763 lv=38 HP=114 Atk=131 Def=91 SpA=48 SpD=91 Spe=104 item=479 ability=214
+AI decision turn=1 actor=0 move=Air Slash target=1
+AI decision turn=1 actor=1 move=Energy Ball target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Quiver Dance target=3
+AI decision turn=2 actor=0 move=Air Slash target=1
+AI decision turn=2 actor=1 move=Energy Ball target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Moonblast target=0
+AI switch turn=2 actor=1 party=3
+AI decision turn=3 actor=1 move=Power Whip target=2
+AI decision turn=3 actor=3 move=Moonblast target=2
+REVIEW_AFTER board=11 turns=2 reserves=0 species=763/182 HP=114/97 foes=0/135 faints=1/1 initialFrames=36
+REVIEW_STATE actor=1 move=- PP=10/10/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=214 item=479
+REVIEW_STATE actor=3 move=Moonblast PP=19/10/14/5 Atk=6 Def=6 SpA=7 SpD=7 Spe=7 status=0 ability=34 item=523
+SHAYLA_WEATHER=0 leftSpeed=104 rightSpeed=117
+REVIEW_INPUT trainer=747 slot=0 species=192 lv=38 HP=117 Atk=65 Def=58 SpA=132 SpD=81 Spe=63 item=481 ability=34
+REVIEW_INPUT trainer=747 slot=1 species=182 lv=38 HP=117 Atk=69 Def=88 SpA=119 SpD=92 Spe=78 item=523 ability=34
+REVIEW_INPUT trainer=747 slot=2 species=671 lv=38 HP=143 Atk=59 Def=101 SpA=101 SpD=134 Spe=73 item=472 ability=166
+REVIEW_INPUT trainer=747 slot=3 species=763 lv=38 HP=114 Atk=131 Def=91 SpA=48 SpD=91 Spe=104 item=479 ability=214
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Sunny Day target=1
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Moonblast target=0
+AI decision turn=2 actor=1 move=Sunny Day target=1
+AI decision turn=2 actor=3 move=Giga Drain target=0
+REVIEW_AFTER board=12 turns=1 reserves=0 species=192/182 HP=93/97 foes=1/135 faints=0/0 initialFrames=44
+REVIEW_STATE actor=1 move=- PP=10/10/10/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=34 item=481
+REVIEW_STATE actor=3 move=Moonblast PP=20/10/14/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=34 item=523
+SHAYLA_WEATHER=0 leftSpeed=63 rightSpeed=78
+REVIEW_INPUT trainer=747 slot=0 species=192 lv=38 HP=117 Atk=65 Def=58 SpA=132 SpD=81 Spe=63 item=481 ability=34
+REVIEW_INPUT trainer=747 slot=1 species=182 lv=38 HP=117 Atk=69 Def=88 SpA=119 SpD=92 Spe=78 item=523 ability=34
+REVIEW_INPUT trainer=747 slot=2 species=671 lv=38 HP=143 Atk=59 Def=101 SpA=101 SpD=134 Spe=73 item=472 ability=166
+REVIEW_INPUT trainer=747 slot=3 species=763 lv=38 HP=114 Atk=131 Def=91 SpA=48 SpD=91 Spe=104 item=479 ability=214
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Sunny Day target=1
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Moonblast target=0
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Sunny Day target=1
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=Giga Drain target=0
+AI decision turn=3 actor=1 move=Weather Ball target=2
+AI decision turn=3 actor=3 move=Giga Drain target=2
+REVIEW_AFTER board=12 turns=2 reserves=0 species=192/182 HP=26/105 foes=0/135 faints=0/1 initialFrames=44
+REVIEW_STATE actor=1 move=Sunny Day PP=10/10/10/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=34 item=481
+REVIEW_STATE actor=3 move=Giga Drain PP=20/9/14/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=34 item=523
+SHAYLA_WEATHER=16 leftSpeed=126 rightSpeed=156
+REVIEW_INPUT trainer=747 slot=0 species=192 lv=38 HP=117 Atk=65 Def=58 SpA=132 SpD=81 Spe=63 item=481 ability=34
+REVIEW_INPUT trainer=747 slot=1 species=182 lv=38 HP=117 Atk=69 Def=88 SpA=119 SpD=92 Spe=78 item=523 ability=34
+REVIEW_INPUT trainer=747 slot=2 species=671 lv=38 HP=143 Atk=59 Def=101 SpA=101 SpD=134 Spe=73 item=472 ability=166
+REVIEW_INPUT trainer=747 slot=3 species=763 lv=38 HP=114 Atk=131 Def=91 SpA=48 SpD=91 Spe=104 item=479 ability=214
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=Sunny Day target=1
+AI decision turn=1 actor=2 move=Air Slash target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Energy Ball target=0
+AI decision turn=2 actor=3 move=Quiver Dance target=3
+REVIEW_AFTER board=13 turns=1 reserves=0 species=192/182 HP=81/117 foes=90/114 faints=0/0 initialFrames=20
+REVIEW_STATE actor=1 move=Sunny Day PP=10/10/10/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=34 item=481
+REVIEW_STATE actor=3 move=Protect PP=20/10/15/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=34 item=523
+SHAYLA_WEATHER=16 leftSpeed=126 rightSpeed=156
+REVIEW_INPUT trainer=747 slot=0 species=192 lv=38 HP=117 Atk=65 Def=58 SpA=132 SpD=81 Spe=63 item=481 ability=34
+REVIEW_INPUT trainer=747 slot=1 species=182 lv=38 HP=117 Atk=69 Def=88 SpA=119 SpD=92 Spe=78 item=523 ability=34
+REVIEW_INPUT trainer=747 slot=2 species=671 lv=38 HP=143 Atk=59 Def=101 SpA=101 SpD=134 Spe=73 item=472 ability=166
+REVIEW_INPUT trainer=747 slot=3 species=763 lv=38 HP=114 Atk=131 Def=91 SpA=48 SpD=91 Spe=104 item=479 ability=214
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=Sunny Day target=1
+AI decision turn=1 actor=2 move=Air Slash target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Earthquake target=1
+AI decision turn=2 actor=1 move=Energy Ball target=0
+AI decision turn=2 actor=2 move=Air Slash target=3
+AI decision turn=2 actor=3 move=Quiver Dance target=3
+AI decision turn=3 actor=1 move=Energy Ball target=0
+AI decision turn=3 actor=3 move=Giga Drain target=0
+REVIEW_AFTER board=13 turns=2 reserves=0 species=192/182 HP=45/54 foes=1/114 faints=0/0 initialFrames=20
+REVIEW_STATE actor=1 move=Energy Ball PP=9/10/10/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=34 item=481
+REVIEW_STATE actor=3 move=Quiver Dance PP=19/10/15/4 Atk=6 Def=6 SpA=7 SpD=7 Spe=7 status=0 ability=34 item=0
+SHAYLA_WEATHER=16 leftSpeed=126 rightSpeed=234
+REVIEW_INPUT trainer=747 slot=0 species=192 lv=38 HP=117 Atk=65 Def=58 SpA=132 SpD=81 Spe=63 item=481 ability=34
+REVIEW_INPUT trainer=747 slot=1 species=182 lv=38 HP=117 Atk=69 Def=88 SpA=119 SpD=92 Spe=78 item=523 ability=34
+REVIEW_INPUT trainer=747 slot=2 species=671 lv=38 HP=143 Atk=59 Def=101 SpA=101 SpD=134 Spe=73 item=472 ability=166
+REVIEW_INPUT trainer=747 slot=3 species=763 lv=38 HP=114 Atk=131 Def=91 SpA=48 SpD=91 Spe=104 item=479 ability=214
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Sunny Day target=1
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Moonblast target=0
+AI switch turn=2 actor=1 party=2
+AI decision turn=2 actor=3 move=Giga Drain target=0
+REVIEW_AFTER board=14 turns=1 reserves=0 species=192/182 HP=117/98 foes=1/135 faints=0/0 initialFrames=44
+REVIEW_STATE actor=1 move=- PP=10/10/10/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=34 item=481
+REVIEW_STATE actor=3 move=Moonblast PP=20/10/14/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=34 item=523
+SHAYLA_WEATHER=0 leftSpeed=63 rightSpeed=78
+REVIEW_INPUT trainer=747 slot=0 species=192 lv=38 HP=117 Atk=65 Def=58 SpA=132 SpD=81 Spe=63 item=481 ability=34
+REVIEW_INPUT trainer=747 slot=1 species=182 lv=38 HP=117 Atk=69 Def=88 SpA=119 SpD=92 Spe=78 item=523 ability=34
+REVIEW_INPUT trainer=747 slot=2 species=671 lv=38 HP=143 Atk=59 Def=101 SpA=101 SpD=134 Spe=73 item=472 ability=166
+REVIEW_INPUT trainer=747 slot=3 species=763 lv=38 HP=114 Atk=131 Def=91 SpA=48 SpD=91 Spe=104 item=479 ability=214
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Sunny Day target=1
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Moonblast target=0
+AI switch turn=2 actor=1 party=2
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=3 move=Giga Drain target=0
+AI decision turn=3 actor=1 move=Calm Mind target=1
+AI decision turn=3 actor=3 move=Giga Drain target=2
+REVIEW_AFTER board=14 turns=2 reserves=0 species=671/182 HP=132/84 foes=0/135 faints=0/1 initialFrames=44
+REVIEW_STATE actor=1 move=- PP=15/20/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=166 item=472
+REVIEW_STATE actor=3 move=Giga Drain PP=20/9/14/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=34 item=523
+SHAYLA_WEATHER=0 leftSpeed=73 rightSpeed=78
+REVIEW_INPUT trainer=747 slot=0 species=192 lv=38 HP=117 Atk=65 Def=58 SpA=132 SpD=81 Spe=63 item=481 ability=34
+REVIEW_INPUT trainer=747 slot=1 species=182 lv=38 HP=117 Atk=69 Def=88 SpA=119 SpD=92 Spe=78 item=523 ability=34
+REVIEW_INPUT trainer=747 slot=2 species=671 lv=38 HP=143 Atk=59 Def=101 SpA=101 SpD=134 Spe=73 item=472 ability=166
+REVIEW_INPUT trainer=747 slot=3 species=763 lv=38 HP=114 Atk=131 Def=91 SpA=48 SpD=91 Spe=104 item=479 ability=214
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Moonblast target=2
+AI decision turn=1 actor=2 move=Ice Punch target=3
+AI decision turn=1 actor=3 move=High Jump Kick target=0
+AI decision turn=2 actor=1 move=Moonblast target=2
+AI decision turn=2 actor=3 move=Power Whip target=2
+REVIEW_AFTER board=10 turns=1 reserves=1 species=671/763 HP=143/33 foes=0/53 faints=0/1 initialFrames=16
+REVIEW_STATE actor=1 move=Moonblast PP=14/20/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=166 item=472
+REVIEW_STATE actor=3 move=High Jump Kick PP=10/9/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=214 item=479
+SHAYLA_WEATHER=0 leftSpeed=73 rightSpeed=104
+REVIEW_INPUT trainer=747 slot=0 species=192 lv=38 HP=117 Atk=65 Def=58 SpA=132 SpD=81 Spe=63 item=481 ability=34
+REVIEW_INPUT trainer=747 slot=1 species=182 lv=38 HP=117 Atk=69 Def=88 SpA=119 SpD=92 Spe=78 item=523 ability=34
+REVIEW_INPUT trainer=747 slot=2 species=671 lv=38 HP=143 Atk=59 Def=101 SpA=101 SpD=134 Spe=73 item=472 ability=166
+REVIEW_INPUT trainer=747 slot=3 species=763 lv=38 HP=114 Atk=131 Def=91 SpA=48 SpD=91 Spe=104 item=479 ability=214
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Moonblast target=2
+AI decision turn=1 actor=2 move=Ice Punch target=3
+AI decision turn=1 actor=3 move=High Jump Kick target=0
+AI decision turn=2 actor=2 move=Ice Punch target=3
+AI decision turn=2 actor=1 move=Moonblast target=2
+AI decision turn=2 actor=3 move=Power Whip target=2
+REVIEW_AFTER board=10 turns=2 reserves=1 species=671/763 HP=143/22 foes=0/0 faints=0/2 initialFrames=16
+REVIEW_STATE actor=1 move=Moonblast PP=14/20/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=166 item=472
+REVIEW_STATE actor=3 move=Power Whip PP=9/9/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=214 item=479
+SHAYLA_WEATHER=0 leftSpeed=73 rightSpeed=104
+REVIEW_INPUT trainer=747 slot=0 species=192 lv=38 HP=117 Atk=65 Def=58 SpA=132 SpD=81 Spe=63 item=481 ability=34
+REVIEW_INPUT trainer=747 slot=1 species=182 lv=38 HP=117 Atk=69 Def=88 SpA=119 SpD=92 Spe=78 item=523 ability=34
+REVIEW_INPUT trainer=747 slot=2 species=671 lv=38 HP=143 Atk=59 Def=101 SpA=101 SpD=134 Spe=73 item=472 ability=166
+REVIEW_INPUT trainer=747 slot=3 species=763 lv=38 HP=114 Atk=131 Def=91 SpA=48 SpD=91 Spe=104 item=479 ability=214
+AI decision turn=1 actor=0 move=Air Slash target=1
+AI decision turn=1 actor=1 move=Moonblast target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Moonblast target=0
+AI decision turn=2 actor=3 move=High Jump Kick target=2
+REVIEW_AFTER board=11 turns=1 reserves=1 species=671/763 HP=115/114 foes=56/135 faints=0/0 initialFrames=17
+REVIEW_STATE actor=1 move=Moonblast PP=14/20/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=166 item=472
+REVIEW_STATE actor=3 move=Protect PP=10/10/20/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=214 item=479
+SHAYLA_WEATHER=0 leftSpeed=73 rightSpeed=104
+REVIEW_INPUT trainer=747 slot=0 species=192 lv=38 HP=117 Atk=65 Def=58 SpA=132 SpD=81 Spe=63 item=481 ability=34
+REVIEW_INPUT trainer=747 slot=1 species=182 lv=38 HP=117 Atk=69 Def=88 SpA=119 SpD=92 Spe=78 item=523 ability=34
+REVIEW_INPUT trainer=747 slot=2 species=671 lv=38 HP=143 Atk=59 Def=101 SpA=101 SpD=134 Spe=73 item=472 ability=166
+REVIEW_INPUT trainer=747 slot=3 species=763 lv=38 HP=114 Atk=131 Def=91 SpA=48 SpD=91 Spe=104 item=479 ability=214
+AI decision turn=1 actor=0 move=Air Slash target=1
+AI decision turn=1 actor=1 move=Moonblast target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Air Slash target=1
+AI decision turn=2 actor=1 move=Moonblast target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=High Jump Kick target=2
+AI decision turn=3 actor=1 move=Moonblast target=2
+AI decision turn=3 actor=3 move=Power Whip target=2
+REVIEW_AFTER board=11 turns=2 reserves=1 species=671/763 HP=99/91 foes=0/74 faints=0/1 initialFrames=17
+REVIEW_STATE actor=1 move=Moonblast PP=13/20/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=166 item=472
+REVIEW_STATE actor=3 move=High Jump Kick PP=10/9/20/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=214 item=479
+SHAYLA_WEATHER=0 leftSpeed=73 rightSpeed=104
+REVIEW_INPUT trainer=747 slot=0 species=192 lv=38 HP=117 Atk=65 Def=58 SpA=132 SpD=81 Spe=63 item=481 ability=34
+REVIEW_INPUT trainer=747 slot=1 species=182 lv=38 HP=117 Atk=69 Def=88 SpA=119 SpD=92 Spe=78 item=523 ability=34
+REVIEW_INPUT trainer=747 slot=2 species=671 lv=38 HP=143 Atk=59 Def=101 SpA=101 SpD=134 Spe=73 item=472 ability=166
+REVIEW_INPUT trainer=747 slot=3 species=763 lv=38 HP=114 Atk=131 Def=91 SpA=48 SpD=91 Spe=104 item=479 ability=214
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Moonblast target=2
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Power Whip target=2
+AI decision turn=2 actor=1 move=Moonblast target=0
+AI decision turn=2 actor=3 move=Power Whip target=0
+REVIEW_AFTER board=12 turns=1 reserves=1 species=671/763 HP=143/103 foes=98/0 faints=0/1 initialFrames=19
+REVIEW_STATE actor=1 move=Moonblast PP=14/20/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=166 item=472
+REVIEW_STATE actor=3 move=Power Whip PP=9/10/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=214 item=479
+SHAYLA_WEATHER=0 leftSpeed=73 rightSpeed=104
+REVIEW_INPUT trainer=747 slot=0 species=192 lv=38 HP=117 Atk=65 Def=58 SpA=132 SpD=81 Spe=63 item=481 ability=34
+REVIEW_INPUT trainer=747 slot=1 species=182 lv=38 HP=117 Atk=69 Def=88 SpA=119 SpD=92 Spe=78 item=523 ability=34
+REVIEW_INPUT trainer=747 slot=2 species=671 lv=38 HP=143 Atk=59 Def=101 SpA=101 SpD=134 Spe=73 item=472 ability=166
+REVIEW_INPUT trainer=747 slot=3 species=763 lv=38 HP=114 Atk=131 Def=91 SpA=48 SpD=91 Spe=104 item=479 ability=214
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Moonblast target=2
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Power Whip target=2
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Moonblast target=0
+AI decision turn=2 actor=3 move=Power Whip target=0
+REVIEW_AFTER board=12 turns=2 reserves=1 species=671/763 HP=124/92 foes=0/0 faints=0/2 initialFrames=19
+REVIEW_STATE actor=1 move=Moonblast PP=13/20/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=166 item=472
+REVIEW_STATE actor=3 move=Power Whip PP=8/10/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=214 item=479
+SHAYLA_WEATHER=0 leftSpeed=73 rightSpeed=104
+REVIEW_INPUT trainer=747 slot=0 species=192 lv=38 HP=117 Atk=65 Def=58 SpA=132 SpD=81 Spe=63 item=481 ability=34
+REVIEW_INPUT trainer=747 slot=1 species=182 lv=38 HP=117 Atk=69 Def=88 SpA=119 SpD=92 Spe=78 item=523 ability=34
+REVIEW_INPUT trainer=747 slot=2 species=671 lv=38 HP=143 Atk=59 Def=101 SpA=101 SpD=134 Spe=73 item=472 ability=166
+REVIEW_INPUT trainer=747 slot=3 species=763 lv=38 HP=114 Atk=131 Def=91 SpA=48 SpD=91 Spe=104 item=479 ability=214
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=Moonblast target=0
+AI decision turn=1 actor=2 move=Air Slash target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Moonblast target=0
+AI decision turn=2 actor=3 move=Knock Off target=2
+REVIEW_AFTER board=13 turns=1 reserves=1 species=671/763 HP=109/114 foes=32/114 faints=0/0 initialFrames=17
+REVIEW_STATE actor=1 move=Moonblast PP=14/20/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=166 item=472
+REVIEW_STATE actor=3 move=Protect PP=10/10/20/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=214 item=479
+SHAYLA_WEATHER=0 leftSpeed=73 rightSpeed=104
+REVIEW_INPUT trainer=747 slot=0 species=192 lv=38 HP=117 Atk=65 Def=58 SpA=132 SpD=81 Spe=63 item=481 ability=34
+REVIEW_INPUT trainer=747 slot=1 species=182 lv=38 HP=117 Atk=69 Def=88 SpA=119 SpD=92 Spe=78 item=523 ability=34
+REVIEW_INPUT trainer=747 slot=2 species=671 lv=38 HP=143 Atk=59 Def=101 SpA=101 SpD=134 Spe=73 item=472 ability=166
+REVIEW_INPUT trainer=747 slot=3 species=763 lv=38 HP=114 Atk=131 Def=91 SpA=48 SpD=91 Spe=104 item=479 ability=214
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=Moonblast target=0
+AI decision turn=1 actor=2 move=Air Slash target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Earthquake target=1
+AI decision turn=2 actor=1 move=Moonblast target=0
+AI decision turn=2 actor=2 move=Air Slash target=3
+AI decision turn=2 actor=3 move=Knock Off target=2
+AI decision turn=3 actor=1 move=Moonblast target=2
+REVIEW_AFTER board=13 turns=2 reserves=1 species=671/763 HP=75/0 foes=0/114 faints=1/1 initialFrames=17
+REVIEW_STATE actor=1 move=Moonblast PP=13/20/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=166 item=472
+REVIEW_STATE actor=3 move=- PP=10/10/20/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=0 item=479
+SHAYLA_WEATHER=0 leftSpeed=73 rightSpeed=104
+REVIEW_INPUT trainer=747 slot=0 species=192 lv=38 HP=117 Atk=65 Def=58 SpA=132 SpD=81 Spe=63 item=481 ability=34
+REVIEW_INPUT trainer=747 slot=1 species=182 lv=38 HP=117 Atk=69 Def=88 SpA=119 SpD=92 Spe=78 item=523 ability=34
+REVIEW_INPUT trainer=747 slot=2 species=671 lv=38 HP=143 Atk=59 Def=101 SpA=101 SpD=134 Spe=73 item=472 ability=166
+REVIEW_INPUT trainer=747 slot=3 species=763 lv=38 HP=114 Atk=131 Def=91 SpA=48 SpD=91 Spe=104 item=479 ability=214
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Moonblast target=2
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Power Whip target=2
+AI decision turn=2 actor=1 move=Moonblast target=0
+AI decision turn=2 actor=3 move=Power Whip target=0
+REVIEW_AFTER board=14 turns=1 reserves=1 species=671/763 HP=143/103 foes=98/0 faints=0/1 initialFrames=19
+REVIEW_STATE actor=1 move=Moonblast PP=14/20/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=166 item=472
+REVIEW_STATE actor=3 move=Power Whip PP=9/10/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=214 item=479
+SHAYLA_WEATHER=0 leftSpeed=73 rightSpeed=104
+REVIEW_INPUT trainer=747 slot=0 species=192 lv=38 HP=117 Atk=65 Def=58 SpA=132 SpD=81 Spe=63 item=481 ability=34
+REVIEW_INPUT trainer=747 slot=1 species=182 lv=38 HP=117 Atk=69 Def=88 SpA=119 SpD=92 Spe=78 item=523 ability=34
+REVIEW_INPUT trainer=747 slot=2 species=671 lv=38 HP=143 Atk=59 Def=101 SpA=101 SpD=134 Spe=73 item=472 ability=166
+REVIEW_INPUT trainer=747 slot=3 species=763 lv=38 HP=114 Atk=131 Def=91 SpA=48 SpD=91 Spe=104 item=479 ability=214
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Moonblast target=2
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Power Whip target=2
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Moonblast target=0
+AI decision turn=2 actor=3 move=Power Whip target=0
+REVIEW_AFTER board=14 turns=2 reserves=1 species=671/763 HP=124/92 foes=0/0 faints=0/2 initialFrames=19
+REVIEW_STATE actor=1 move=Moonblast PP=13/20/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=166 item=472
+REVIEW_STATE actor=3 move=Power Whip PP=8/10/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=214 item=479
+SHAYLA_WEATHER=0 leftSpeed=73 rightSpeed=104
+
+- Tests [32mPASSED[0m:          2
+- Tests [34mTOTAL[0m:           2
+

@@ -12,23 +12,27 @@ SeafloorCavern_Room1_EventScript_Grunt2::
 	end
 
 SeafloorCavern_Room1_Text_Grunt1Intro:
-	.string "This cavern changes direction with every\n"
-	.string "current. Turn back while you still can.$"
+	.string "Those currents outside spun our sub\n"
+	.string "around. You should turn back while\l"
+	.string "you still know the way!$"
 
 SeafloorCavern_Room1_Text_Grunt1Defeat:
-	.string "You made the shifting floor look fixed…$"
+	.string "You kept your footing better than me!$"
 
 SeafloorCavern_Room1_Text_Grunt1PostBattle:
-	.string "ARCHIE is farther below. Every room from\n"
-	.string "here is meant to misdirect pursuit.$"
+	.string "ARCHIE went deeper into the cavern.\n"
+	.string "Those twisting passages ought to\l"
+	.string "keep you busy for a while.$"
 
 SeafloorCavern_Room1_Text_Grunt2Intro:
-	.string "The submarine found one narrow route in.\n"
-	.string "My formation seals it behind us.$"
+	.string "The channel outside was just wide\n"
+	.string "enough for our sub. But this passage\l"
+	.string "isn't wide enough for both of us!$"
 
 SeafloorCavern_Room1_Text_Grunt2Defeat:
 	.string "You opened the route again…$"
 
 SeafloorCavern_Room1_Text_Grunt2PostBattle:
-	.string "The stolen submarine is already deeper.\n"
-	.string "You are following its pressure trail.$"
+	.string "We left the submarine outside.\n"
+	.string "ARCHIE took the crew farther in.\l"
+	.string "I was supposed to guard the way...$"

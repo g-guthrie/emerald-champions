@@ -1,0 +1,506 @@
+tools/scaninc/scaninc -M build/emerald-test/test/battle/ai/emerald_champions_plans.d -g build/assets -I include -I tools/agbcc/include test/battle/ai/emerald_champions_plans.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/battle/ai/emerald_champions_plans.o test/battle/ai/emerald_champions_plans.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 4
+[0] EC live review Protect audit dead end: lone injured rival Mudkip without a guard payoff: [31mFAIL[0m
+AI decision turn=1 actor=0 move=Thunderbolt target=1
+AI decision turn=1 actor=1 move=Liquidation target=0
+work/guard_audit.inc:61085: 2 TURNs specified, but 1 ran
+[1] EC live review Protect audit opening: actual first trainers sustained pressure: [32mPASS[0m
+GUARD_SCORE turn=1 pair=3:Fake Out/1:Seed Bomb score=239 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Fake Out/1:Seed Bomb score=243 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Fake Out/1:Drain Punch score=250 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Fake Out/1:Swords Dance score=267 raw=102/103 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Fake Out/1:Seed Bomb score=362 raw=104/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Fake Out/1:Seed Bomb score=366 raw=104/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Fake Out/1:Drain Punch score=374 raw=104/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Fake Out/1:Swords Dance score=390 raw=104/103 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Fake Out/1:- score=220 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Fake Out/1:- score=345 raw=104/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:-/1:Seed Bomb score=178 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:-/1:Seed Bomb score=182 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:-/1:Drain Punch score=189 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:-/1:Swords Dance score=206 raw=100/103 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:-/1:Protect score=321 raw=100/101 guardChance=0/100 streak=0/0
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Swords Dance target=1
+AI decision turn=1 actor=2 move=Double-Edge target=3
+AI decision turn=1 actor=3 move=Fake Out target=2
+GUARD_SCORE turn=2 pair=3:Fake Out/1:Seed Bomb score=69 raw=70/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Fake Out/1:Seed Bomb score=76 raw=70/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Fake Out/1:Drain Punch score=110 raw=70/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Thunderbolt/1:Seed Bomb score=220 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Thunderbolt/1:Seed Bomb score=302 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Thunderbolt/1:Drain Punch score=377 raw=100/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Fake Out/1:- score=22 raw=70/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Thunderbolt/1:- score=173 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:-/1:Seed Bomb score=198 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:-/1:Seed Bomb score=205 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:-/1:Drain Punch score=230 raw=100/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:-/1:Protect score=309 raw=100/102 guardChance=0/100 streak=0/0
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Drain Punch target=2
+AI decision turn=2 actor=2 move=Wish target=2
+AI decision turn=2 actor=3 move=Thunderbolt target=2
+GUARD_SCORE turn=3 pair=3:Fake Out/1:Seed Bomb score=204 raw=70/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:Fake Out/1:Seed Bomb score=396 raw=70/112 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:Fake Out/1:Drain Punch score=402 raw=70/112 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:Thunderbolt/1:Seed Bomb score=552 raw=112/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:Thunderbolt/1:Seed Bomb score=564 raw=112/112 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:Electroweb/1:Drain Punch score=570 raw=112/112 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:Fake Out/1:- score=148 raw=70/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:Thunderbolt/1:- score=496 raw=112/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:-/1:Seed Bomb score=272 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:-/1:Seed Bomb score=496 raw=100/112 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:-/1:Drain Punch score=505 raw=100/112 guardChance=0/0 streak=0/0
+AI decision turn=3 actor=1 move=Drain Punch target=2
+AI decision turn=3 actor=3 move=Electroweb target=0
+GUARD_AUDIT trainer=520 turns=2 HP=18/34 foes=53/6 last=Drain Punch/Thunderbolt streaks=0/0 resulting=Drain Punch/Thunderbolt
+GUARD_SCORE turn=1 pair=3:Fake Out/1:Seed Bomb score=239 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Fake Out/1:Seed Bomb score=243 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Fake Out/1:Drain Punch score=250 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Fake Out/1:Swords Dance score=267 raw=102/103 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Fake Out/1:Seed Bomb score=362 raw=104/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Fake Out/1:Seed Bomb score=366 raw=104/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Fake Out/1:Drain Punch score=374 raw=104/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Fake Out/1:Swords Dance score=390 raw=104/103 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Fake Out/1:- score=220 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Fake Out/1:- score=345 raw=104/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:-/1:Seed Bomb score=178 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:-/1:Seed Bomb score=182 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:-/1:Drain Punch score=189 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:-/1:Swords Dance score=206 raw=100/103 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:-/1:Protect score=321 raw=100/101 guardChance=0/100 streak=0/0
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Swords Dance target=1
+AI decision turn=1 actor=2 move=Double-Edge target=3
+AI decision turn=1 actor=3 move=Fake Out target=2
+GUARD_SCORE turn=2 pair=3:Fake Out/1:Seed Bomb score=69 raw=70/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Fake Out/1:Seed Bomb score=76 raw=70/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Fake Out/1:Drain Punch score=110 raw=70/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Thunderbolt/1:Seed Bomb score=220 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Thunderbolt/1:Seed Bomb score=302 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Thunderbolt/1:Drain Punch score=377 raw=100/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Fake Out/1:- score=22 raw=70/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Thunderbolt/1:- score=173 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:-/1:Seed Bomb score=198 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:-/1:Seed Bomb score=205 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:-/1:Drain Punch score=230 raw=100/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:-/1:Protect score=309 raw=100/102 guardChance=0/100 streak=0/0
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Drain Punch target=2
+AI decision turn=2 actor=2 move=Wish target=2
+AI decision turn=2 actor=3 move=Thunderbolt target=2
+GUARD_SCORE turn=3 pair=3:Fake Out/1:Seed Bomb score=204 raw=70/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:Fake Out/1:Seed Bomb score=396 raw=70/112 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:Fake Out/1:Drain Punch score=402 raw=70/112 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:Thunderbolt/1:Seed Bomb score=552 raw=112/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:Thunderbolt/1:Seed Bomb score=564 raw=112/112 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:Electroweb/1:Drain Punch score=570 raw=112/112 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:Fake Out/1:- score=148 raw=70/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:Thunderbolt/1:- score=496 raw=112/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:-/1:Seed Bomb score=272 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:-/1:Seed Bomb score=496 raw=100/112 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:-/1:Drain Punch score=505 raw=100/112 guardChance=0/0 streak=0/0
+AI decision turn=3 actor=0 move=Super Fang target=1
+AI decision turn=3 actor=1 move=Drain Punch target=2
+AI decision turn=3 actor=2 move=Double-Edge target=3
+AI decision turn=3 actor=3 move=Electroweb target=0
+GUARD_SCORE turn=4 pair=3:Fake Out/1:Seed Bomb score=342 raw=70/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=4 pair=3:Fake Out/1:Drain Punch score=380 raw=70/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=4 pair=3:Helping Hand/1:Seed Bomb score=479 raw=105/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=4 pair=3:Helping Hand/1:Drain Punch score=496 raw=105/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=4 pair=3:Fake Out/1:- score=330 raw=70/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=4 pair=3:-/1:Seed Bomb score=464 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=4 pair=3:-/1:Drain Punch score=502 raw=100/102 guardChance=0/0 streak=0/0
+AI decision turn=4 actor=0 move=Super Fang target=1
+AI decision turn=4 actor=1 move=Drain Punch target=0
+AI decision turn=4 actor=3 move=Helping Hand target=1
+GUARD_SCORE turn=5 pair=3:Fake Out/1:Seed Bomb score=393 raw=70/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=5 pair=3:Helping Hand/1:Seed Bomb score=645 raw=103/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=5 pair=3:Fake Out/1:- score=332 raw=70/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=5 pair=3:-/1:Seed Bomb score=506 raw=100/102 guardChance=0/0 streak=0/0
+AI decision turn=5 actor=1 move=Seed Bomb target=0
+AI decision turn=5 actor=3 move=Helping Hand target=1
+GUARD_AUDIT trainer=520 turns=4 HP=10/34 foes=38/0 last=Drain Punch/Helping Hand streaks=0/0 resulting=Drain Punch/Helping Hand
+GUARD_SCORE turn=1 pair=3:Fake Out/1:Liquidation score=247 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Fake Out/1:Liquidation score=251 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Fake Out/1:Superpower score=294 raw=102/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Fake Out/1:Liquidation score=372 raw=104/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Fake Out/1:Liquidation score=376 raw=104/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Fake Out/1:Superpower score=419 raw=104/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Thunderbolt/1:Superpower score=496 raw=100/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Fake Out/1:- score=220 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Fake Out/1:- score=345 raw=104/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:-/1:Liquidation score=184 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:-/1:Superpower score=196 raw=100/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:-/1:Protect score=321 raw=100/101 guardChance=0/100 streak=0/0
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Superpower target=2
+AI decision turn=1 actor=2 move=Double-Edge target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=2
+GUARD_SCORE turn=2 pair=3:Fake Out/1:Liquidation score=181 raw=70/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Fake Out/1:Liquidation score=384 raw=70/112 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Thunderbolt/1:Liquidation score=529 raw=112/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Thunderbolt/1:Liquidation score=560 raw=112/112 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Fake Out/1:- score=140 raw=70/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Thunderbolt/1:- score=488 raw=112/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:-/1:Liquidation score=279 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:-/1:Protect score=367 raw=100/102 guardChance=0/100 streak=0/0
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Liquidation target=2
+AI decision turn=2 actor=2 move=Wish target=2
+AI decision turn=2 actor=3 move=Thunderbolt target=2
+GUARD_SCORE turn=3 pair=3:Fake Out/1:Liquidation score=347 raw=70/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:Helping Hand/1:Liquidation score=588 raw=103/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:Fake Out/1:- score=321 raw=70/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:-/1:Liquidation score=393 raw=100/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:-/1:Protect score=451 raw=100/102 guardChance=0/100 streak=0/0
+AI decision turn=3 actor=1 move=Liquidation target=0
+AI decision turn=3 actor=3 move=Helping Hand target=1
+GUARD_AUDIT trainer=526 turns=2 HP=5/34 foes=36/0 last=Liquidation/Thunderbolt streaks=0/0 resulting=Liquidation/Thunderbolt
+GUARD_SCORE turn=1 pair=3:Fake Out/1:Liquidation score=247 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Fake Out/1:Liquidation score=251 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Fake Out/1:Superpower score=294 raw=102/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Fake Out/1:Liquidation score=372 raw=104/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Fake Out/1:Liquidation score=376 raw=104/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Fake Out/1:Superpower score=419 raw=104/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Thunderbolt/1:Superpower score=496 raw=100/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Fake Out/1:- score=220 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Fake Out/1:- score=345 raw=104/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:-/1:Liquidation score=184 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:-/1:Superpower score=196 raw=100/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:-/1:Protect score=321 raw=100/101 guardChance=0/100 streak=0/0
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Superpower target=2
+AI decision turn=1 actor=2 move=Double-Edge target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=2
+GUARD_SCORE turn=2 pair=3:Fake Out/1:Liquidation score=181 raw=70/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Fake Out/1:Liquidation score=384 raw=70/112 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Thunderbolt/1:Liquidation score=529 raw=112/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Thunderbolt/1:Liquidation score=560 raw=112/112 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Fake Out/1:- score=140 raw=70/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Thunderbolt/1:- score=488 raw=112/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:-/1:Liquidation score=279 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:-/1:Protect score=367 raw=100/102 guardChance=0/100 streak=0/0
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Liquidation target=2
+AI decision turn=2 actor=2 move=Wish target=2
+AI decision turn=2 actor=3 move=Thunderbolt target=2
+GUARD_SCORE turn=3 pair=3:Fake Out/1:Liquidation score=347 raw=70/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:Helping Hand/1:Liquidation score=588 raw=103/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:Fake Out/1:- score=321 raw=70/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:-/1:Liquidation score=393 raw=100/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:-/1:Protect score=451 raw=100/102 guardChance=0/100 streak=0/0
+AI decision turn=3 actor=0 move=Super Fang target=1
+AI decision turn=3 actor=1 move=Liquidation target=0
+AI decision turn=3 actor=3 move=Helping Hand target=1
+GUARD_AUDIT trainer=526 turns=3 HP=0/34 foes=0/0 last=-/Helping Hand streaks=0/0 resulting=-/Helping Hand
+GUARD_SCORE turn=1 pair=3:Fake Out/1:Flamethrower score=226 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Fake Out/1:Flamethrower score=236 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Fake Out/1:Heat Wave score=257 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Fake Out/1:Flamethrower score=374 raw=104/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Fake Out/1:Heat Wave score=381 raw=104/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Fake Out/1:- score=220 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Fake Out/1:- score=345 raw=104/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:-/1:Flamethrower score=197 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:-/1:Heat Wave score=203 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:-/1:Protect score=321 raw=100/101 guardChance=0/100 streak=0/0
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Heat Wave target=0
+AI decision turn=1 actor=2 move=Double-Edge target=3
+AI decision turn=1 actor=3 move=Fake Out target=2
+GUARD_SCORE turn=2 pair=3:Fake Out/1:Flamethrower score=97 raw=70/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Fake Out/1:Flamethrower score=99 raw=70/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Fake Out/1:Heat Wave score=104 raw=70/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Thunderbolt/1:Flamethrower score=247 raw=100/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Thunderbolt/1:Flamethrower score=266 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Helping Hand/1:Flamethrower score=276 raw=90/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Fake Out/1:- score=82 raw=70/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Thunderbolt/1:- score=232 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:-/1:Flamethrower score=235 raw=100/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:-/1:Flamethrower score=237 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:-/1:Heat Wave score=241 raw=100/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:-/1:Protect score=343 raw=100/104 guardChance=0/100 streak=0/0
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Protect target=1
+AI switch turn=2 actor=3 party=2
+AI decision turn=2 actor=2 move=Wish target=2
+GUARD_SCORE turn=3 pair=3:Spore/1:Flamethrower score=162 raw=90/102 guardChance=0/0 streak=0/1
+GUARD_SCORE turn=3 pair=3:Spore/1:Heat Wave score=163 raw=90/102 guardChance=0/0 streak=0/1
+GUARD_SCORE turn=3 pair=3:Leech Seed/1:Flamethrower score=222 raw=105/102 guardChance=0/0 streak=0/1
+GUARD_SCORE turn=3 pair=3:Leech Seed/1:Heat Wave score=223 raw=105/102 guardChance=0/0 streak=0/1
+GUARD_SCORE turn=3 pair=3:Spore/1:- score=123 raw=90/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:Leech Seed/1:- score=183 raw=105/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:-/1:Flamethrower score=178 raw=100/102 guardChance=0/0 streak=0/1
+GUARD_SCORE turn=3 pair=3:-/1:Flamethrower score=180 raw=100/100 guardChance=0/0 streak=0/1
+GUARD_SCORE turn=3 pair=3:-/1:Heat Wave score=186 raw=100/102 guardChance=0/0 streak=0/1
+AI decision turn=3 actor=1 move=Heat Wave target=0
+AI decision turn=3 actor=3 move=Leech Seed target=0
+GUARD_AUDIT trainer=523 turns=2 HP=15/47 foes=31/32 last=Protect/- streaks=1/0 resulting=Protect/-
+GUARD_SCORE turn=1 pair=3:Fake Out/1:Flamethrower score=226 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Fake Out/1:Flamethrower score=236 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Fake Out/1:Heat Wave score=257 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Fake Out/1:Flamethrower score=374 raw=104/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Fake Out/1:Heat Wave score=381 raw=104/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Fake Out/1:- score=220 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Fake Out/1:- score=345 raw=104/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:-/1:Flamethrower score=197 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:-/1:Heat Wave score=203 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:-/1:Protect score=321 raw=100/101 guardChance=0/100 streak=0/0
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Heat Wave target=0
+AI decision turn=1 actor=2 move=Double-Edge target=3
+AI decision turn=1 actor=3 move=Fake Out target=2
+GUARD_SCORE turn=2 pair=3:Fake Out/1:Flamethrower score=97 raw=70/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Fake Out/1:Flamethrower score=99 raw=70/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Fake Out/1:Heat Wave score=104 raw=70/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Thunderbolt/1:Flamethrower score=247 raw=100/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Thunderbolt/1:Flamethrower score=266 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Helping Hand/1:Flamethrower score=276 raw=90/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Fake Out/1:- score=82 raw=70/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Thunderbolt/1:- score=232 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:-/1:Flamethrower score=235 raw=100/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:-/1:Flamethrower score=237 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:-/1:Heat Wave score=241 raw=100/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:-/1:Protect score=343 raw=100/104 guardChance=0/100 streak=0/0
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Protect target=1
+AI switch turn=2 actor=3 party=2
+AI decision turn=2 actor=2 move=Wish target=2
+GUARD_SCORE turn=3 pair=3:Spore/1:Flamethrower score=162 raw=90/102 guardChance=0/0 streak=0/1
+GUARD_SCORE turn=3 pair=3:Spore/1:Heat Wave score=163 raw=90/102 guardChance=0/0 streak=0/1
+GUARD_SCORE turn=3 pair=3:Leech Seed/1:Flamethrower score=222 raw=105/102 guardChance=0/0 streak=0/1
+GUARD_SCORE turn=3 pair=3:Leech Seed/1:Heat Wave score=223 raw=105/102 guardChance=0/0 streak=0/1
+GUARD_SCORE turn=3 pair=3:Spore/1:- score=123 raw=90/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:Leech Seed/1:- score=183 raw=105/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:-/1:Flamethrower score=178 raw=100/102 guardChance=0/0 streak=0/1
+GUARD_SCORE turn=3 pair=3:-/1:Flamethrower score=180 raw=100/100 guardChance=0/0 streak=0/1
+GUARD_SCORE turn=3 pair=3:-/1:Heat Wave score=186 raw=100/102 guardChance=0/0 streak=0/1
+AI decision turn=3 actor=0 move=Super Fang target=1
+AI decision turn=3 actor=1 move=Heat Wave target=0
+AI decision turn=3 actor=2 move=Double-Edge target=3
+AI decision turn=3 actor=3 move=Leech Seed target=0
+GUARD_SCORE turn=4 pair=3:Spore/1:Flamethrower score=381 raw=90/112 guardChance=0/0 streak=0/1
+GUARD_SCORE turn=4 pair=3:Leech Seed/1:Flamethrower score=441 raw=105/112 guardChance=0/0 streak=0/1
+GUARD_SCORE turn=4 pair=3:Spore/1:- score=143 raw=90/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=4 pair=3:Leech Seed/1:- score=203 raw=105/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=4 pair=3:-/1:Flamethrower score=421 raw=100/112 guardChance=0/0 streak=0/1
+AI decision turn=4 actor=0 move=Super Fang target=1
+AI decision turn=4 actor=1 move=Flamethrower target=0
+AI decision turn=4 actor=2 move=Wish target=2
+AI decision turn=4 actor=3 move=Leech Seed target=2
+GUARD_SCORE turn=5 pair=3:Spore/1:Flamethrower score=304 raw=88/100 guardChance=0/0 streak=0/1
+GUARD_SCORE turn=5 pair=3:Spore/1:Heat Wave score=308 raw=88/100 guardChance=0/0 streak=0/1
+GUARD_SCORE turn=5 pair=3:Spore/1:Flamethrower score=312 raw=90/100 guardChance=0/0 streak=0/1
+GUARD_SCORE turn=5 pair=3:Spore/1:Heat Wave score=316 raw=90/100 guardChance=0/0 streak=0/1
+GUARD_SCORE turn=5 pair=3:Giga Drain/1:Flamethrower score=365 raw=100/100 guardChance=0/0 streak=0/1
+GUARD_SCORE turn=5 pair=3:Giga Drain/1:Heat Wave score=369 raw=100/100 guardChance=0/0 streak=0/1
+GUARD_SCORE turn=5 pair=3:Spore/1:- score=333 raw=90/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=5 pair=3:Giga Drain/1:- score=379 raw=100/100 guardChance=0/0 streak=0/0
+AI decision turn=5 actor=1 move=Heat Wave target=2
+AI decision turn=5 actor=3 move=Giga Drain target=2
+GUARD_AUDIT trainer=523 turns=4 HP=3/47 foes=0/35 last=Flamethrower/Leech Seed streaks=1/0 resulting=Flamethrower/Leech Seed
+GUARD_SCORE turn=1 pair=3:Belly Drum/1:Crunch score=211 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Belly Drum/1:Crunch score=217 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Extreme Speed/1:Crunch score=222 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Extreme Speed/1:Crunch score=228 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Extreme Speed/1:Crunch score=234 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Extreme Speed/1:Crunch score=240 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Belly Drum/1:- score=48 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Extreme Speed/1:- score=67 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Extreme Speed/1:- score=80 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Protect/1:- score=184 raw=101/100 guardChance=100/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:-/1:Crunch score=121 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:-/1:Crunch score=127 raw=100/100 guardChance=0/0 streak=0/0
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Crunch target=2
+AI decision turn=1 actor=2 move=Double-Edge target=3
+AI decision turn=1 actor=3 move=Extreme Speed target=2
+GUARD_SCORE turn=2 pair=3:Belly Drum/1:Crunch score=96 raw=86/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Belly Drum/1:Crunch score=176 raw=86/104 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Belly Drum/1:Sucker Punch score=244 raw=86/94 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Extreme Speed/1:Sucker Punch score=271 raw=102/94 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Extreme Speed/1:Sucker Punch score=280 raw=104/94 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Extreme Speed/1:Helping Hand score=304 raw=104/88 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Belly Drum/1:- score=39 raw=86/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Extreme Speed/1:- score=66 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Extreme Speed/1:- score=213 raw=104/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:-/1:Crunch score=24 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:-/1:Crunch score=233 raw=100/104 guardChance=0/0 streak=0/0
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Helping Hand target=3
+AI decision turn=2 actor=2 move=Wish target=2
+AI decision turn=2 actor=3 move=Extreme Speed target=2
+GUARD_SCORE turn=3 pair=3:Belly Drum/1:Crunch score=288 raw=86/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:Extreme Speed/1:Crunch score=315 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:Extreme Speed/1:Helping Hand score=323 raw=102/101 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:Belly Drum/1:- score=214 raw=86/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:Extreme Speed/1:- score=241 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:-/1:Crunch score=233 raw=100/100 guardChance=0/0 streak=0/0
+AI decision turn=3 actor=1 move=Helping Hand target=3
+AI decision turn=3 actor=3 move=Extreme Speed target=0
+GUARD_AUDIT trainer=318 turns=2 HP=9/12 foes=53/0 last=Helping Hand/Extreme Speed streaks=0/0 resulting=Helping Hand/Extreme Speed
+GUARD_SCORE turn=1 pair=3:Belly Drum/1:Crunch score=211 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Belly Drum/1:Crunch score=217 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Extreme Speed/1:Crunch score=222 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Extreme Speed/1:Crunch score=228 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Extreme Speed/1:Crunch score=234 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Extreme Speed/1:Crunch score=240 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Belly Drum/1:- score=48 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Extreme Speed/1:- score=67 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Extreme Speed/1:- score=80 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Protect/1:- score=184 raw=101/100 guardChance=100/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:-/1:Crunch score=121 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:-/1:Crunch score=127 raw=100/100 guardChance=0/0 streak=0/0
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Crunch target=2
+AI decision turn=1 actor=2 move=Double-Edge target=3
+AI decision turn=1 actor=3 move=Extreme Speed target=2
+GUARD_SCORE turn=2 pair=3:Belly Drum/1:Crunch score=96 raw=86/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Belly Drum/1:Crunch score=176 raw=86/104 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Belly Drum/1:Sucker Punch score=244 raw=86/94 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Extreme Speed/1:Sucker Punch score=271 raw=102/94 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Extreme Speed/1:Sucker Punch score=280 raw=104/94 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Extreme Speed/1:Helping Hand score=304 raw=104/88 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Belly Drum/1:- score=39 raw=86/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Extreme Speed/1:- score=66 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Extreme Speed/1:- score=213 raw=104/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:-/1:Crunch score=24 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:-/1:Crunch score=233 raw=100/104 guardChance=0/0 streak=0/0
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Helping Hand target=3
+AI decision turn=2 actor=2 move=Wish target=2
+AI decision turn=2 actor=3 move=Extreme Speed target=2
+GUARD_SCORE turn=3 pair=3:Belly Drum/1:Crunch score=288 raw=86/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:Extreme Speed/1:Crunch score=315 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:Extreme Speed/1:Helping Hand score=323 raw=102/101 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:Belly Drum/1:- score=214 raw=86/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:Extreme Speed/1:- score=241 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:-/1:Crunch score=233 raw=100/100 guardChance=0/0 streak=0/0
+AI decision turn=3 actor=0 move=Super Fang target=1
+AI decision turn=3 actor=1 move=Helping Hand target=3
+AI decision turn=3 actor=3 move=Extreme Speed target=0
+GUARD_SCORE turn=4 pair=3:Belly Drum/1:Crunch score=313 raw=86/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=4 pair=3:Extreme Speed/1:Crunch score=320 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=4 pair=3:Extreme Speed/1:Taunt score=334 raw=102/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=4 pair=3:Belly Drum/1:- score=227 raw=86/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=4 pair=3:Extreme Speed/1:- score=254 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=4 pair=3:-/1:Crunch score=246 raw=100/100 guardChance=0/0 streak=0/0
+AI decision turn=4 actor=0 move=Super Fang target=1
+AI decision turn=4 actor=1 move=Taunt target=0
+AI decision turn=4 actor=3 move=Extreme Speed target=0
+GUARD_SCORE turn=5 pair=3:Belly Drum/1:Crunch score=304 raw=86/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=5 pair=3:Extreme Speed/1:Crunch score=331 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=5 pair=3:Protect/1:Crunch score=338 raw=102/100 guardChance=100/0 streak=0/0
+GUARD_SCORE turn=5 pair=3:Belly Drum/1:- score=238 raw=86/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=5 pair=3:Extreme Speed/1:- score=240 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=5 pair=3:Protect/1:- score=246 raw=102/100 guardChance=100/0 streak=0/0
+GUARD_SCORE turn=5 pair=3:-/1:Crunch score=232 raw=100/100 guardChance=0/0 streak=0/0
+AI decision turn=5 actor=1 move=Crunch target=0
+AI decision turn=5 actor=3 move=Protect target=3
+GUARD_AUDIT trainer=318 turns=4 HP=3/12 foes=31/0 last=Taunt/Extreme Speed streaks=0/0 resulting=Taunt/Extreme Speed
+GUARD_SCORE turn=1 pair=3:Rock Slide/1:Electroweb score=213 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Rock Slide/1:Toxic Thread score=225 raw=100/103 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Rock Slide/1:Poison Jab score=230 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Rock Slide/1:Poison Jab score=232 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Rock Slide/1:Knock Off score=234 raw=100/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Rock Slide/1:Knock Off score=236 raw=100/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Rock Slide/1:- score=193 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Protect/1:- score=194 raw=101/100 guardChance=100/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:-/1:Electroweb score=154 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:-/1:Toxic Thread score=166 raw=100/103 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:-/1:Poison Jab score=171 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:-/1:Poison Jab score=173 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:-/1:Knock Off score=176 raw=100/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:-/1:Knock Off score=177 raw=100/102 guardChance=0/0 streak=0/0
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Knock Off target=2
+AI decision turn=1 actor=2 move=Double-Edge target=3
+AI decision turn=1 actor=3 move=Rock Slide target=0
+GUARD_SCORE turn=2 pair=3:Rock Slide/1:Knock Off score=261 raw=100/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:X-Scissor/1:Knock Off score=270 raw=102/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:X-Scissor/1:Knock Off score=316 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Rock Slide/1:- score=202 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:X-Scissor/1:- score=241 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:-/1:Knock Off score=124 raw=100/102 guardChance=0/0 streak=0/0
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Knock Off target=2
+AI decision turn=2 actor=2 move=Wish target=2
+AI decision turn=2 actor=3 move=X-Scissor target=2
+GUARD_SCORE turn=3 pair=3:Rock Slide/1:Knock Off score=444 raw=112/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:Rock Slide/1:Knock Off score=485 raw=112/112 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:Rock Slide/1:- score=465 raw=112/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:X-Scissor/1:- score=476 raw=112/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:-/1:Knock Off score=190 raw=100/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:-/1:Knock Off score=422 raw=100/112 guardChance=0/0 streak=0/0
+AI decision turn=3 actor=1 move=Knock Off target=2
+AI decision turn=3 actor=3 move=Rock Slide target=0
+GUARD_AUDIT trainer=615 turns=2 HP=11/39 foes=46/6 last=Knock Off/X-Scissor streaks=0/0 resulting=Knock Off/X-Scissor
+GUARD_SCORE turn=1 pair=3:Rock Slide/1:Electroweb score=213 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Rock Slide/1:Toxic Thread score=225 raw=100/103 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Rock Slide/1:Poison Jab score=230 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Rock Slide/1:Poison Jab score=232 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Rock Slide/1:Knock Off score=234 raw=100/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Rock Slide/1:Knock Off score=236 raw=100/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Rock Slide/1:- score=193 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:Protect/1:- score=194 raw=101/100 guardChance=100/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:-/1:Electroweb score=154 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:-/1:Toxic Thread score=166 raw=100/103 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:-/1:Poison Jab score=171 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:-/1:Poison Jab score=173 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:-/1:Knock Off score=176 raw=100/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=1 pair=3:-/1:Knock Off score=177 raw=100/102 guardChance=0/0 streak=0/0
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Knock Off target=2
+AI decision turn=1 actor=2 move=Double-Edge target=3
+AI decision turn=1 actor=3 move=Rock Slide target=0
+GUARD_SCORE turn=2 pair=3:Rock Slide/1:Knock Off score=261 raw=100/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:X-Scissor/1:Knock Off score=270 raw=102/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:X-Scissor/1:Knock Off score=316 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:Rock Slide/1:- score=202 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:X-Scissor/1:- score=241 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=2 pair=3:-/1:Knock Off score=124 raw=100/102 guardChance=0/0 streak=0/0
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Knock Off target=2
+AI decision turn=2 actor=2 move=Wish target=2
+AI decision turn=2 actor=3 move=X-Scissor target=2
+GUARD_SCORE turn=3 pair=3:Rock Slide/1:Knock Off score=444 raw=112/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:Rock Slide/1:Knock Off score=485 raw=112/112 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:Rock Slide/1:- score=465 raw=112/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:X-Scissor/1:- score=476 raw=112/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:-/1:Knock Off score=190 raw=100/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=3 pair=3:-/1:Knock Off score=422 raw=100/112 guardChance=0/0 streak=0/0
+AI decision turn=3 actor=0 move=Super Fang target=1
+AI decision turn=3 actor=1 move=Knock Off target=2
+AI decision turn=3 actor=2 move=Double-Edge target=3
+AI decision turn=3 actor=3 move=Rock Slide target=0
+GUARD_SCORE turn=4 pair=3:Rock Slide/1:Knock Off score=433 raw=100/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=4 pair=3:X-Scissor/1:Knock Off score=438 raw=100/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=4 pair=3:Knock Off/1:Knock Off score=441 raw=102/102 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=4 pair=3:Rock Slide/1:- score=429 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=4 pair=3:X-Scissor/1:- score=435 raw=100/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=4 pair=3:Knock Off/1:- score=461 raw=102/100 guardChance=0/0 streak=0/0
+AI decision turn=4 actor=0 move=Super Fang target=1
+AI decision turn=4 actor=1 move=Knock Off target=0
+AI decision turn=4 actor=3 move=Knock Off target=0
+GUARD_SCORE turn=5 pair=3:Rock Slide/1:Knock Off score=452 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=5 pair=3:X-Scissor/1:Knock Off score=457 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=5 pair=3:Rock Slide/1:- score=477 raw=102/100 guardChance=0/0 streak=0/0
+GUARD_SCORE turn=5 pair=3:X-Scissor/1:- score=483 raw=102/100 guardChance=0/0 streak=0/0
+AI decision turn=5 actor=1 move=Knock Off target=0
+AI decision turn=5 actor=3 move=X-Scissor target=0
+GUARD_AUDIT trainer=615 turns=4 HP=3/39 foes=24/0 last=Knock Off/Knock Off streaks=0/0 resulting=Knock Off/Knock Off
+
+  [31mFAILED[0m tests:
+  - [31mwork/guard_audit.inc:61085[0m: EC live review Protect audit dead end: lone injured rival Mudkip without a guard payoff: 61085: 2 TURNs specified, but 1 ran
+
+- Tests [31mFAILED[0m:          1    Add TESTS='X' to run tests with the defined prefix.
+- Tests [32mPASSED[0m:          1
+- Tests [34mTOTAL[0m:           2
+
+make: *** [check] Error 1

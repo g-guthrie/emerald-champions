@@ -1,0 +1,24 @@
+BattleFrontier_BattleTowerLobby_EventScript_Woman::
+	msgbox BattleFrontier_BattleTowerLobby_Text_WinsInRowRecorded, MSGBOX_NPC
+	end
+
+
+BattleFrontier_BattleTowerLobby_EventScript_Boy::
+	msgbox BattleFrontier_BattleTowerLobby_Text_CanLeaveUntilLossOrSevenWins, MSGBOX_NPC
+	end
+
+
+BattleFrontier_BattleTowerLobby_Text_WinsInRowRecorded:
+	.string "The number of matches you win in a row\n"
+	.string "is recorded.\p"
+	.string "I'd better not get beaten in\n"
+	.string "an embarrassing way!$"
+
+
+BattleFrontier_BattleTowerLobby_Text_CanLeaveUntilLossOrSevenWins:
+	.string "The CIRCUIT restores your team\n"
+	.string "after each match.\p"
+	.string "You may continue or leave then. A\n"
+	.string "strong run deserves another\l"
+	.string "well-prepared decision.$"
+@ Unused

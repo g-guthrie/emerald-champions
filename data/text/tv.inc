@@ -1526,16 +1526,12 @@ gTVSecretBaseVisitText08::
 	.string "… … … … … …$"
 
 gTVSecretBaseVisitText09::
-	.string "Sigh…\n"
-	.string "I've got to hand it to {STR_VAR_1}.\p"
-	.string "The TRAINER's POKéMON were truly\n"
-	.string "worthy of the CHAMPION's title.\p"
-	.string "They gave ample proof of {STR_VAR_1}'s\n"
-	.string "toughness as a TRAINER.\p"
+	.string "Sigh… I've got to hand it to\n"
+	.string "{STR_VAR_1}. Those POKéMON were a\l"
+	.string "formidable team!\p"
 	.string "That the {STR_VAR_2} knew the move\n"
-	.string "{STR_VAR_3}…\p"
-	.string "It shows you what sort of a TRAINER\n"
-	.string "{STR_VAR_1} is.\p"
+	.string "{STR_VAR_3}… It shows you what\l"
+	.string "sort of a TRAINER {STR_VAR_1} is.\p"
 	.string "Certainly, it was quite a lesson!$"
 
 gTVSecretBaseVisitText10::
@@ -1622,12 +1618,12 @@ gTVThePokemonBattleSeminarText00::
 gTVThePokemonBattleSeminarText01::
 	.string "And it used the move {STR_VAR_3}\n"
 	.string "on the {STR_VAR_2}…\p"
-	.string "Hmm… {STR_VAR_1}!\n"
-	.string "That's the wrong thing to do!$"
+	.string "Let's look at the damage options,\n"
+	.string "{STR_VAR_1}!$"
 
 gTVThePokemonBattleSeminarText02::
-	.string "In addition to the doomed move,\n"
-	.string "the TRAINER's {STR_VAR_1} also knew$"
+	.string "The TRAINER's {STR_VAR_1} also\n"
+	.string "knew$"
 
 gTVThePokemonBattleSeminarText03::
 	.string "the moves {STR_VAR_1}, {STR_VAR_2},\n"
@@ -1641,15 +1637,15 @@ gTVThePokemonBattleSeminarText05::
 	.string "the move {STR_VAR_2}.$"
 
 gTVThePokemonBattleSeminarText06::
-	.string "So, in this situation, what should\n"
-	.string "the TRAINER have used?\p"
-	.string "… … … … … …\n"
-	.string "The move {STR_VAR_1}!\p"
-	.string "The move {STR_VAR_1} would have been\n"
-	.string "absolutely better than {STR_VAR_2}.\p"
-	.string "Viewers, I urge you to learn from this\n"
-	.string "case and battle with intelligence!\p"
-	.string "Until next time, farewell!$"
+	.string "Our damage comparison suggests\n"
+	.string "{STR_VAR_1} could hit harder than\l"
+	.string "{STR_VAR_2}.\p"
+	.string "More damage is not always the\n"
+	.string "goal! Accuracy, side effects, and\l"
+	.string "catching a wild POKéMON can change\l"
+	.string "the best choice.\p"
+	.string "Consider the whole field before\n"
+	.string "you choose. Until next time!$"
 
 gTVTrainerFanClubText00::
 	.string "All together now!\n"
@@ -2582,11 +2578,12 @@ ContestLiveUpdates_Text_FailedToAppeal::
 	.string "{STR_VAR_1} make even one appeal.$"
 
 ContestLiveUpdates_Text_LastInBothRounds::
-	.string "It came dead last in both primary\n"
-	.string "and secondary judging.\p"
-	.string "I hope that {STR_VAR_1} will retrain this\n"
-	.string "{STR_VAR_2} and erase the shame of\l"
-	.string "this undisputed last-place finish.$"
+	.string "It finished last in both rounds of\n"
+	.string "judging.\p"
+	.string "{STR_VAR_1} and the {STR_VAR_2}\n"
+	.string "have a fresh challenge: a routine\l"
+	.string "that lets their best qualities\l"
+	.string "shine.$"
 
 ContestLiveUpdates_Text_NotExcitingEnough::
 	.string "It failed to take advantage of\n"
@@ -2621,19 +2618,18 @@ ContestLiveUpdates_Text_LostBySmallMargin::
 	.string "were weeping over this outcome.$"
 
 ContestLiveUpdates_Text_RepeatedAppeals::
-	.string "It disappointed the JUDGE by\n"
-	.string "repeating the same appeals.\p"
-	.string "It's an unforgivable error in any\n"
-	.string "CONTEST, and the POKéMON paid.\p"
-	.string "{STR_VAR_1} should feel guilty for\n"
-	.string "this sorry showing.$"
+	.string "Repeating the same appeals cost it\n"
+	.string "the JUDGE's attention.\p"
+	.string "{STR_VAR_1} could try varying the\n"
+	.string "routine next time to keep the\l"
+	.string "audience guessing.$"
 
 ContestLiveUpdates_Text_ValiantEffortButLost::
-	.string "{STR_VAR_1} turned in a valiant effort,\n"
-	.string "but…\p"
-	.string "It was all for naught, finishing last.\p"
-	.string "{STR_VAR_1} should learn from this loss\n"
-	.string "and put the knowledge to good use.$"
+	.string "{STR_VAR_1} finished last, but\n"
+	.string "kept giving the performance\l"
+	.string "everything.\p"
+	.string "There is plenty to learn from that\n"
+	.string "effort. We hope to see a comeback!$"
 
 ContestLiveUpdates_Text_Outro::
 	.string "I'd like to end this program with our\n"

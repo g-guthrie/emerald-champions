@@ -44,9 +44,10 @@ MossdeepCity_Mart_Text_ReviveIsFantastic:
 	.string "the used-up PP of moves.$"
 
 MossdeepCity_Mart_Text_MaxRepelLastsLongest:
-	.string "MAX REPEL keeps all weak POKéMON away.\p"
-	.string "Out of all the REPEL sprays, it lasts\n"
-	.string "the longest.$"
+	.string "MAX REPEL lasts 250 steps.\n"
+	.string "It keeps weaker wild POKéMON away.\p"
+	.string "The reusable REPEL SPRAY lasts\n"
+	.string "500 steps and can be used again!$"
 
 MossdeepCity_Mart_Text_NetAndDiveBallsRare:
 	.string "NET and DIVE BALLS specialize in\n"

@@ -649,10 +649,12 @@ DewfordTown_EventScript_PhraseNotTrendyEnough::
 	end
 
 DewfordTown_Text_TinyIslandCommunity:
-	.string "The meadow west of town reopened after\n"
-	.string "the cave began shining.\p"
-	.string "An abandoned manor there holds DEVON's\n"
-	.string "oldest records of MEGA EVOLUTION.$"
+	.string "There's a meadow west of town.\n"
+	.string "Lately, travelers have spotted\l"
+	.string "some very unusual POKéMON there.\p"
+	.string "The old manor holds records of\n"
+	.string "MEGA EVOLUTION. Someone must have\l"
+	.string "studied it here long ago.$"
 
 DewfordTown_Text_TownSign:
 	.string "DEWFORD TOWN\n"
@@ -697,9 +699,11 @@ DewfordTown_Text_BrineyLandedInDewford:
 	.string "you want to set sail again!$"
 
 DewfordTown_Text_WhereAreWeBound:
-	.string "MR. BRINEY: Ahoy! The LETTER's delivered,\n"
-	.string "and the sea's still calling us!\p"
-	.string "Now, my friend, where are we bound?$"
+	.string "MR. BRINEY: Ahoy! The LETTER's\n"
+	.string "delivered, and the sea's still\l"
+	.string "calling us!\p"
+	.string "Now, my friend, where are we\n"
+	.string "bound?$"
 
 DewfordTown_Text_PetalburgWereSettingSail:
 	.string "MR. BRINEY: PETALBURG, is it?\p"

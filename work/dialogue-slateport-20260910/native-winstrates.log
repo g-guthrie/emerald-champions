@@ -1,0 +1,8 @@
+48 FLAG_HIDE_ROUTE_111_VICKY_WINSTRATE 0 RESULT frames=40000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=c49cdf17e4a4e502 nonzero_pixels=38325 save_bytes=0
+READ width=4 address=0200224c value=00000001
+READ width=4 address=02002274 value=00000000
+READ width=4 address=02002278 value=00000000
+READ width=4 address=0200225c value=0000001a
+READ width=4 address=0200227c value=00000004
+READ width=4 address=02002284 value=00000001
+

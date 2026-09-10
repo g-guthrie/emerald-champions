@@ -415,7 +415,7 @@ MauvilleCity_EventScript_Wattson::
 	lock
 	faceplayer
 	goto_if_set FLAG_RECEIVED_WATTSON_ELECTIRIZER, MauvilleCity_EventScript_ReceivedElectirizer
-	goto_if_eq VAR_NEW_MAUVILLE_STATE, 2, MauvilleCity_EventScript_CompletedNewMauville
+	goto_if_ge VAR_NEW_MAUVILLE_STATE, 2, MauvilleCity_EventScript_CompletedNewMauville
 	goto_if_set FLAG_GOT_BASEMENT_KEY_FROM_WATTSON, MauvilleCity_EventScript_BegunNewMauville
 	msgbox MauvilleCity_Text_WattsonNeedFavorTakeKey, MSGBOX_DEFAULT
 	giveitem ITEM_BASEMENT_KEY
@@ -466,8 +466,10 @@ MauvilleCity_Text_UncleHesTooPeppy:
 
 MauvilleCity_Text_WallyWantToChallengeGym:
 	.string "WALLY: Aww, UNCLE, please?\p"
-	.string "I don't grind. Nobody has to. I built a\n"
-	.string "team, and a GYM is where you test one.$"
+	.string "I feel so much better since\n"
+	.string "moving to VERDANTURF. We've been\l"
+	.string "practicing every day!\p"
+	.string "RALTS even evolved into KIRLIA!$"
 
 MauvilleCity_Text_UncleYourePushingIt:
 	.string "UNCLE: Now hold on, WALLY.\p"
@@ -477,19 +479,22 @@ MauvilleCity_Text_UncleYourePushingIt:
 	.string "to suddenly challenge a GYM?$"
 
 MauvilleCity_Text_WallyWeCanBeatAnyone:
-	.string "WALLY: I'm not pushing it.\p"
-	.string "RALTS and I found five partners who\n"
-	.string "cover each other. We can beat anyone!$"
+	.string "WALLY: We've made new friends,\n"
+	.string "too! I want to see how far we can\l"
+	.string "go together.$"
 
 MauvilleCity_Text_WallyWillYouBattleMe:
 	.string "WALLY: Oh! Hi, {PLAYER}!\p"
-	.string "I've built a real doubles team since we\n"
-	.string "met. I want you and my UNCLE to see it.\p"
-	.string "Please, will you battle me?$"
+	.string "Do you remember helping me catch\n"
+	.string "RALTS? We've come a long way\l"
+	.string "since then.\p"
+	.string "Please, will you battle me? I\n"
+	.string "want to show my UNCLE I'm ready.$"
 
 MauvilleCity_Text_WallyMyUncleWontKnowImStrong:
-	.string "WALLY: Oh… If you won't, my UNCLE will\n"
-	.string "never believe my team is real.$"
+	.string "WALLY: Oh… All right. I was\n"
+	.string "hoping you could help me show\l"
+	.string "him.$"
 
 MauvilleCity_Text_UncleCanYouBattleWally:
 	.string "UNCLE: {PLAYER}{KUN}, was it?\n"
@@ -503,19 +508,19 @@ MauvilleCity_Text_WallyPleaseBattleMe:
 	.string "One battle.$"
 
 MauvilleCity_Text_WallyHereICome:
-	.string "WALLY: {PLAYER}, thank you.\p"
-	.string "WEAVILE leads, ZAPDOS sets the wind…\n"
-	.string "Okay. Here I come!$"
+	.string "WALLY: Thank you, {PLAYER}!\p"
+	.string "All right, everyone. Let's show\n"
+	.string "them what we can do!$"
 
 MauvilleCity_Text_WallyDefeat:
-	.string "WALLY: ...\p"
-	.string "I had a plan for every partner.\n"
-	.string "You still found your way through.\p"
-	.string "I lost...$"
+	.string "WALLY: I… I lost.\p"
+	.string "I really thought we were ready…$"
 MauvilleCity_Text_WallyIllGoBackToVerdanturf:
 	.string "WALLY: UNCLE… I'll go back to\n"
 	.string "VERDANTURF.\p"
-	.string "I know what my team was missing now.$"
+	.string "But I don't want to give up.\n"
+	.string "KIRLIA and I still have so much to\l"
+	.string "learn.$"
 
 MauvilleCity_Text_ThankYouNotEnoughToBattle:
 	.string "{PLAYER}, thank you.\n"

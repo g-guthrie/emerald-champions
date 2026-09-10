@@ -1,12 +1,14 @@
 Route111_Text_MakingRoomUseTMToMakeYourOwn:
-	.string "I'm making my own room here with the\n"
-	.string "POKéMON move SECRET POWER.\p"
-	.string "Center tutors can teach it anytime.\n"
+	.string "I'm making my own room here with\n"
+	.string "SECRET POWER. A partner that can\l"
+	.string "learn it can use it in the field.\p"
 	.string "Want an ULTRA BALL for the road?$"
 Route111_Text_ExplainSecretPower:
-	.string "Center tutors can teach Secret Power.\p"
-	.string "Take this Ultra Ball for exploring,\n"
-	.string "and use Secret Power at marked trees.$"
+	.string "Any compatible partner can use\n"
+	.string "SECRET POWER in the field.\p"
+	.string "Look for marked trees, thick\n"
+	.string "bushes, and small indents in rock\l"
+	.string "walls.$"
 
 Route111_Text_DontWantThis:
 	.string "Oh, you don't want this?\n"

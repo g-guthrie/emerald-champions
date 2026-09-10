@@ -1,4 +1,5 @@
 #include "global.h"
+#include "braille_puzzles.h"
 #include "malloc.h"
 #include "battle.h"
 #include "battle_anim.h"
@@ -526,9 +527,10 @@ static u8 IndividualToCombinedPartyId(u8 index, enum BattlerId battler);
 static const u8 sText_askText[] = _("Would you like to change {STR_VAR_1}'s\nability to {STR_VAR_2}?");
 static const u8 sText_doneText[] = _("{STR_VAR_1}'s Ability became\n{STR_VAR_2}!{PAUSE_UNTIL_PRESS}");
 static const u8 sText_CancelTitleCase[] = _("Cancel");
+static const u8 sText_DigThroughWall[] = _("Use DIG to open a passage\nthrough this wall?");
 static const u8 sText_LevelerComplete[] = _("Party preparation is complete.\nCurrent cap: Lv. {STR_VAR_1}.{PAUSE_UNTIL_PRESS}");
-static const u8 sText_BasePointsResetToZero[] = _("{STR_VAR_1}'s base points\nwere all reset to zero!{PAUSE_UNTIL_PRESS}");
-static const u8 sText_CannotSendMonToBoxHM[] = _("Cannot send that mon to the box,\nbecause it knows a HM move.{PAUSE_UNTIL_PRESS}");
+static const u8 sText_BasePointsResetToZero[] = _("{STR_VAR_1}'s EVs\nwere all reset to zero!{PAUSE_UNTIL_PRESS}");
+static const u8 sText_CannotSendMonToBoxHM[] = _("Cannot send that mon to the box,\nbecause it knows an HM move.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_CannotSendMonToBoxPartner[] = _("Cannot send a mon that doesn't\nbelong to you to the box.{PAUSE_UNTIL_PRESS}");
 
 // static const data
@@ -4185,9 +4187,14 @@ static void CursorCb_FieldMove(u8 taskId)
             sPartyMenuInternal->data[0] = fieldMove;
             break;
         case FIELD_MOVE_DIG:
-            mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->escapeWarp.mapGroup, gSaveBlock1Ptr->escapeWarp.mapNum);
-            GetMapNameGeneric(gStringVar1, mapHeader->regionMapSectionId);
-            StringExpandPlaceholders(gStringVar4, gText_EscapeFromHere);
+            if (ShouldDoBrailleDigEffect())
+                StringCopy(gStringVar4, sText_DigThroughWall);
+            else
+            {
+                mapHeader = Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->escapeWarp.mapGroup, gSaveBlock1Ptr->escapeWarp.mapNum);
+                GetMapNameGeneric(gStringVar1, mapHeader->regionMapSectionId);
+                StringExpandPlaceholders(gStringVar4, gText_EscapeFromHere);
+            }
             DisplayFieldMoveExitAreaMessage(taskId);
             sPartyMenuInternal->data[0] = fieldMove;
             break;
@@ -6010,11 +6017,6 @@ static void CB2_ShowPartyMenuForLeveler(void)
 
     if (slot == PARTY_SIZE)
     {
-        // The new level may have flipped HP parity under a Belly Drum + berry
-        // set; re-land it before the party boxes are drawn.
-        for (u32 i = 0; i < gPartiesCount[B_TRAINER_PLAYER]; i++)
-            TryNormalizeEmeraldChampionsBellyDrumHpParity(&gParties[B_TRAINER_PLAYER][i]);
-
         if (sLevelerRaisedParty)
         {
             gPartyMenu.slotId = 0;

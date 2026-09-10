@@ -1,0 +1,111 @@
+tools/scaninc/scaninc -M build/emerald-test/src/battle_ai_pair.d -g build/assets -I include -I tools/agbcc/include src/battle_ai_pair.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/battle_ai_pair.o src/battle_ai_pair.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 4
+[0] EC live review E0001: actual Treecko pair against faster Inner Focus pressure: [32mPASS[0m
+E1_PAIR_DIAG left=Fake Out target=0 scalar=100 right=Seed Bomb target=0 scalar=100 scoreBound=50 best=-2147483648 forecasts=2
+E1_PAIR_DIAG left=Fake Out target=0 scalar=100 right=Seed Bomb target=2 scalar=100 scoreBound=50 best=50 forecasts=2
+E1_PAIR_DIAG left=Fake Out target=0 scalar=100 right=Drain Punch target=0 scalar=100 scoreBound=50 best=50 forecasts=2
+E1_PAIR_DIAG left=Fake Out target=0 scalar=100 right=Drain Punch target=2 scalar=100 scoreBound=50 best=50 forecasts=2
+E1_PAIR_DIAG left=Fake Out target=0 scalar=100 right=Swords Dance target=1 scalar=100 scoreBound=50 best=50 forecasts=2
+E1_PAIR_DIAG left=Fake Out target=0 scalar=100 right=Protect target=1 scalar=101 scoreBound=184 best=50 forecasts=2
+E1_PAIR_DIAG left=Fake Out target=2 scalar=100 right=Seed Bomb target=0 scalar=100 scoreBound=35 best=184 forecasts=2
+E1_PAIR_DIAG left=Fake Out target=2 scalar=100 right=Seed Bomb target=2 scalar=100 scoreBound=35 best=184 forecasts=2
+E1_PAIR_DIAG left=Fake Out target=2 scalar=100 right=Drain Punch target=0 scalar=100 scoreBound=35 best=184 forecasts=2
+E1_PAIR_DIAG left=Fake Out target=2 scalar=100 right=Drain Punch target=2 scalar=100 scoreBound=35 best=184 forecasts=2
+E1_PAIR_DIAG left=Fake Out target=2 scalar=100 right=Swords Dance target=1 scalar=100 scoreBound=35 best=184 forecasts=2
+E1_PAIR_DIAG left=Fake Out target=2 scalar=100 right=Protect target=1 scalar=101 scoreBound=197 best=184 forecasts=2
+E1_PAIR_DIAG left=Thunderbolt target=0 scalar=102 right=Seed Bomb target=0 scalar=100 scoreBound=104 best=197 forecasts=2
+E1_PAIR_DIAG left=Thunderbolt target=0 scalar=102 right=Seed Bomb target=2 scalar=100 scoreBound=104 best=197 forecasts=2
+E1_PAIR_DIAG left=Thunderbolt target=0 scalar=102 right=Drain Punch target=0 scalar=100 scoreBound=104 best=197 forecasts=2
+E1_PAIR_DIAG left=Thunderbolt target=0 scalar=102 right=Drain Punch target=2 scalar=100 scoreBound=104 best=197 forecasts=2
+E1_PAIR_DIAG left=Thunderbolt target=0 scalar=102 right=Swords Dance target=1 scalar=100 scoreBound=104 best=197 forecasts=2
+E1_PAIR_DIAG left=Thunderbolt target=0 scalar=102 right=Protect target=1 scalar=101 scoreBound=212 best=197 forecasts=2
+E1_PAIR_DIAG left=Thunderbolt target=2 scalar=102 right=Seed Bomb target=0 scalar=100 scoreBound=63 best=212 forecasts=2
+E1_PAIR_DIAG left=Thunderbolt target=2 scalar=102 right=Seed Bomb target=2 scalar=100 scoreBound=63 best=212 forecasts=2
+E1_PAIR_DIAG left=Thunderbolt target=2 scalar=102 right=Drain Punch target=0 scalar=100 scoreBound=63 best=212 forecasts=2
+E1_PAIR_DIAG left=Thunderbolt target=2 scalar=102 right=Drain Punch target=2 scalar=100 scoreBound=63 best=212 forecasts=2
+E1_PAIR_DIAG left=Thunderbolt target=2 scalar=102 right=Swords Dance target=1 scalar=100 scoreBound=63 best=212 forecasts=2
+E1_PAIR_DIAG left=Thunderbolt target=2 scalar=102 right=Protect target=1 scalar=101 scoreBound=247 best=212 forecasts=2
+E1_PAIR_DIAG left=Electroweb target=2 scalar=102 right=Seed Bomb target=0 scalar=100 scoreBound=98 best=247 forecasts=2
+E1_PAIR_DIAG left=Electroweb target=2 scalar=102 right=Seed Bomb target=2 scalar=100 scoreBound=84 best=247 forecasts=2
+E1_PAIR_DIAG left=Electroweb target=2 scalar=102 right=Drain Punch target=0 scalar=100 scoreBound=89 best=247 forecasts=2
+E1_PAIR_DIAG left=Electroweb target=2 scalar=102 right=Drain Punch target=2 scalar=100 scoreBound=74 best=247 forecasts=2
+E1_PAIR_DIAG left=Electroweb target=2 scalar=102 right=Swords Dance target=1 scalar=100 scoreBound=70 best=247 forecasts=2
+E1_PAIR_DIAG left=Electroweb target=2 scalar=102 right=Protect target=1 scalar=101 scoreBound=217 best=247 forecasts=2
+E1_PAIR_DIAG left=Protect target=3 scalar=101 right=Seed Bomb target=0 scalar=100 scoreBound=184 best=247 forecasts=2
+E1_PAIR_DIAG left=Protect target=3 scalar=101 right=Seed Bomb target=2 scalar=100 scoreBound=184 best=247 forecasts=2
+E1_PAIR_DIAG left=Protect target=3 scalar=101 right=Drain Punch target=0 scalar=100 scoreBound=184 best=247 forecasts=2
+E1_PAIR_DIAG left=Protect target=3 scalar=101 right=Drain Punch target=2 scalar=100 scoreBound=184 best=247 forecasts=2
+E1_PAIR_DIAG left=Protect target=3 scalar=101 right=Swords Dance target=1 scalar=100 scoreBound=184 best=247 forecasts=2
+E1_PAIR_DIAG left=Protect target=3 scalar=101 right=Protect target=1 scalar=101 scoreBound=368 best=247 forecasts=2
+E1_PAIR_DIAG left=- target=3 scalar=100 right=Seed Bomb target=0 scalar=100 scoreBound=0 best=-2147483648 forecasts=2
+E1_PAIR_DIAG left=- target=3 scalar=100 right=Seed Bomb target=2 scalar=100 scoreBound=0 best=0 forecasts=2
+E1_PAIR_DIAG left=- target=3 scalar=100 right=Drain Punch target=0 scalar=100 scoreBound=0 best=0 forecasts=2
+E1_PAIR_DIAG left=- target=3 scalar=100 right=Drain Punch target=2 scalar=100 scoreBound=0 best=0 forecasts=2
+E1_PAIR_DIAG left=- target=3 scalar=100 right=Swords Dance target=1 scalar=100 scoreBound=0 best=0 forecasts=2
+E1_PAIR_DIAG left=- target=3 scalar=100 right=Protect target=1 scalar=101 scoreBound=184 best=0 forecasts=2
+AI decision turn=1 actor=0 move=Drain Punch target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Thunderbolt target=0
+E1 pressure sash=0 executed=Protect/Protect opponentHP=35/34 playerHP=41/41 playerSpeeds=39/39 opponentSpeeds=36/40
+E1_PAIR_DIAG left=Fake Out target=0 scalar=100 right=Seed Bomb target=0 scalar=100 scoreBound=55 best=-2147483648 forecasts=2
+E1_PAIR_DIAG left=Fake Out target=0 scalar=100 right=Seed Bomb target=2 scalar=100 scoreBound=55 best=55 forecasts=2
+E1_PAIR_DIAG left=Fake Out target=0 scalar=100 right=Drain Punch target=0 scalar=100 scoreBound=55 best=55 forecasts=2
+E1_PAIR_DIAG left=Fake Out target=0 scalar=100 right=Drain Punch target=2 scalar=100 scoreBound=55 best=55 forecasts=2
+E1_PAIR_DIAG left=Fake Out target=0 scalar=100 right=Swords Dance target=1 scalar=100 scoreBound=55 best=55 forecasts=2
+E1_PAIR_DIAG left=Fake Out target=0 scalar=100 right=Protect target=1 scalar=101 scoreBound=184 best=55 forecasts=2
+E1_PAIR_DIAG left=Fake Out target=2 scalar=100 right=Seed Bomb target=0 scalar=100 scoreBound=35 best=184 forecasts=2
+E1_PAIR_DIAG left=Fake Out target=2 scalar=100 right=Seed Bomb target=2 scalar=100 scoreBound=35 best=184 forecasts=2
+E1_PAIR_DIAG left=Fake Out target=2 scalar=100 right=Drain Punch target=0 scalar=100 scoreBound=35 best=184 forecasts=2
+E1_PAIR_DIAG left=Fake Out target=2 scalar=100 right=Drain Punch target=2 scalar=100 scoreBound=35 best=184 forecasts=2
+E1_PAIR_DIAG left=Fake Out target=2 scalar=100 right=Swords Dance target=1 scalar=100 scoreBound=35 best=184 forecasts=2
+E1_PAIR_DIAG left=Fake Out target=2 scalar=100 right=Protect target=1 scalar=101 scoreBound=202 best=184 forecasts=2
+E1_PAIR_DIAG left=Thunderbolt target=0 scalar=102 right=Seed Bomb target=0 scalar=100 scoreBound=139 best=202 forecasts=2
+E1_PAIR_DIAG left=Thunderbolt target=0 scalar=102 right=Seed Bomb target=2 scalar=100 scoreBound=139 best=202 forecasts=2
+E1_PAIR_DIAG left=Thunderbolt target=0 scalar=102 right=Drain Punch target=0 scalar=100 scoreBound=139 best=202 forecasts=2
+E1_PAIR_DIAG left=Thunderbolt target=0 scalar=102 right=Drain Punch target=2 scalar=100 scoreBound=139 best=202 forecasts=2
+E1_PAIR_DIAG left=Thunderbolt target=0 scalar=102 right=Swords Dance target=1 scalar=100 scoreBound=139 best=202 forecasts=2
+E1_PAIR_DIAG left=Thunderbolt target=0 scalar=102 right=Protect target=1 scalar=101 scoreBound=246 best=202 forecasts=2
+E1_PAIR_DIAG left=Thunderbolt target=2 scalar=102 right=Seed Bomb target=0 scalar=100 scoreBound=97 best=246 forecasts=2
+E1_PAIR_DIAG left=Thunderbolt target=2 scalar=102 right=Seed Bomb target=2 scalar=100 scoreBound=97 best=246 forecasts=2
+E1_PAIR_DIAG left=Thunderbolt target=2 scalar=102 right=Drain Punch target=0 scalar=100 scoreBound=97 best=246 forecasts=2
+E1_PAIR_DIAG left=Thunderbolt target=2 scalar=102 right=Drain Punch target=2 scalar=100 scoreBound=97 best=246 forecasts=2
+E1_PAIR_DIAG left=Thunderbolt target=2 scalar=102 right=Swords Dance target=1 scalar=100 scoreBound=97 best=246 forecasts=2
+E1_PAIR_DIAG left=Thunderbolt target=2 scalar=102 right=Protect target=1 scalar=101 scoreBound=281 best=246 forecasts=2
+E1_PAIR_DIAG left=Electroweb target=2 scalar=102 right=Seed Bomb target=0 scalar=100 scoreBound=126 best=281 forecasts=2
+E1_PAIR_DIAG left=Electroweb target=2 scalar=102 right=Seed Bomb target=2 scalar=100 scoreBound=126 best=281 forecasts=2
+E1_PAIR_DIAG left=Electroweb target=2 scalar=102 right=Drain Punch target=0 scalar=100 scoreBound=110 best=281 forecasts=2
+E1_PAIR_DIAG left=Electroweb target=2 scalar=102 right=Drain Punch target=2 scalar=100 scoreBound=110 best=281 forecasts=2
+E1_PAIR_DIAG left=Electroweb target=2 scalar=102 right=Swords Dance target=1 scalar=100 scoreBound=85 best=281 forecasts=2
+E1_PAIR_DIAG left=Electroweb target=2 scalar=102 right=Protect target=1 scalar=101 scoreBound=269 best=281 forecasts=2
+E1_PAIR_DIAG left=Protect target=3 scalar=101 right=Seed Bomb target=0 scalar=100 scoreBound=184 best=281 forecasts=2
+E1_PAIR_DIAG left=Protect target=3 scalar=101 right=Seed Bomb target=2 scalar=100 scoreBound=184 best=281 forecasts=2
+E1_PAIR_DIAG left=Protect target=3 scalar=101 right=Drain Punch target=0 scalar=100 scoreBound=184 best=281 forecasts=2
+E1_PAIR_DIAG left=Protect target=3 scalar=101 right=Drain Punch target=2 scalar=100 scoreBound=184 best=281 forecasts=2
+E1_PAIR_DIAG left=Protect target=3 scalar=101 right=Swords Dance target=1 scalar=100 scoreBound=184 best=281 forecasts=2
+E1_PAIR_DIAG left=Protect target=3 scalar=101 right=Protect target=1 scalar=101 scoreBound=368 best=281 forecasts=2
+E1_PAIR_DIAG left=- target=3 scalar=100 right=Seed Bomb target=0 scalar=100 scoreBound=0 best=-2147483648 forecasts=2
+E1_PAIR_DIAG left=- target=3 scalar=100 right=Seed Bomb target=2 scalar=100 scoreBound=0 best=0 forecasts=2
+E1_PAIR_DIAG left=- target=3 scalar=100 right=Drain Punch target=0 scalar=100 scoreBound=0 best=0 forecasts=2
+E1_PAIR_DIAG left=- target=3 scalar=100 right=Drain Punch target=2 scalar=100 scoreBound=0 best=0 forecasts=2
+E1_PAIR_DIAG left=- target=3 scalar=100 right=Swords Dance target=1 scalar=100 scoreBound=0 best=0 forecasts=2
+E1_PAIR_DIAG left=- target=3 scalar=100 right=Protect target=1 scalar=101 scoreBound=184 best=0 forecasts=2
+AI decision turn=1 actor=0 move=Drain Punch target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Thunderbolt target=0
+E1 pressure sash=1 executed=Protect/Protect opponentHP=35/34 playerHP=41/41 playerSpeeds=39/39 opponentSpeeds=36/40
+
+- Tests [32mPASSED[0m:          1
+- Tests [34mTOTAL[0m:           1
+

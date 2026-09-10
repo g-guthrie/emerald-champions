@@ -1,0 +1,34 @@
+BattleFrontier_BattlePikeLobby_EventScript_Hiker::
+	msgbox BattleFrontier_BattlePikeLobby_Text_OneRoomAwayFromGoal, MSGBOX_NPC
+	end
+
+
+BattleFrontier_BattlePikeLobby_EventScript_Twin::
+	msgbox BattleFrontier_BattlePikeLobby_Text_NeverHadToBattleTrainer, MSGBOX_NPC
+	end
+
+
+BattleFrontier_BattlePikeLobby_EventScript_Beauty::
+	msgbox BattleFrontier_BattlePikeLobby_Text_ThinkAbilitiesUsefulHere, MSGBOX_NPC
+	end
+
+
+BattleFrontier_BattlePikeLobby_Text_OneRoomAwayFromGoal:
+	.string "One more victory would have beaten\n"
+	.string "my Circuit record.\p"
+	.string "A status move stopped me. I left\n"
+	.string "that answer out of my team.$"
+
+BattleFrontier_BattlePikeLobby_Text_NeverHadToBattleTrainer:
+	.string "I used to get lucky in the PIKE.\p"
+	.string "The CIRCUIT makes you face a\n"
+	.string "complete opposing team every\l"
+	.string "match. I like that.$"
+
+BattleFrontier_BattlePikeLobby_Text_ThinkAbilitiesUsefulHere:
+	.string "Listen! Listen!\p"
+	.string "Don't you think that the special\n"
+	.string "abilities of POKéMON will be useful\l"
+	.string "here?$"
+
+@ Unused

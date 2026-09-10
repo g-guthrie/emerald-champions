@@ -53,10 +53,11 @@ SootopolisCity_PokemonCenter_1F_Text_WallaceToughestInHoenn:
 	.string "How strong could they be?$"
 
 SootopolisCity_PokemonCenter_1F_Text_EveryoneTakenRefuge:
-	.string "Everyone in town has taken refuge\n"
-	.string "and won't come out of their homes.\p"
-	.string "Even I would rather not venture\n"
-	.string "outside.$"
+	.string "Many families are sheltering\n"
+	.string "indoors until the weather\l"
+	.string "settles.\p"
+	.string "I'd rather stay here, too. That\n"
+	.string "clash outside is frightening.$"
 
 SootopolisCity_PokemonCenter_1F_Text_AlwaysBeFriendsWithPokemon:
 	.string "Whenever, wherever, and whatever\n"

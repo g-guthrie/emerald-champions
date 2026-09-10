@@ -87,45 +87,52 @@ AquaHideout_B2F_EventScript_Grunt8::
 	end
 
 AquaHideout_B2F_Text_MattIntro:
-	.string "MATT: You crossed the entire hideout\n"
-	.string "before the tide changed. Impressive.\p"
-	.string "ARCHIE needs one final current of time.\n"
-	.string "My job is to make every turn cost you.$"
+	.string "MATT: You made it through the\n"
+	.string "whole hideout? Ha! You've got\l"
+	.string "guts.\p"
+	.string "ARCHIE's nearly ready to sail. I\n"
+	.string "just need to keep you busy a\l"
+	.string "little longer!$"
 
 AquaHideout_B2F_Text_MattDefeat:
-	.string "You refused every delay I offered…$"
+	.string "Ha… You don't give up, do you?$"
 
 AquaHideout_B2F_Text_OurBossGotThroughHisPreparations:
-	.string "MATT: You won the battle. ARCHIE still\n"
-	.string "finished the dive sequence.$"
+	.string "MATT: You beat me, but you're too\n"
+	.string "late! ARCHIE's ready to dive!$"
 
 AquaHideout_B2F_Text_MattPostBattle:
-	.string "MATT: ARCHIE is headed for a cavern\n"
+	.string "MATT: ARCHIE's headed for a cavern\n"
 	.string "beneath ROUTE 128.\p"
-	.string "Still chasing him? Surf east from\n"
-	.string "LILYCOVE to MOSSDEEP and earn its BADGE.\p"
-	.string "Then ask STEVEN at his house in the\n"
-	.string "northwest of MOSSDEEP about DIVE.\p"
-	.string "By the time you can reach the seafloor,\n"
-	.string "ARCHIE will have what he came for!$"
+	.string "Go on, chase him! You'll need DIVE\n"
+	.string "to follow a submarine down there.\p"
+	.string "You'll need MOSSDEEP's BADGE and\n"
+	.string "DIVE. Ask STEVEN for help, if you\l"
+	.string "can find him! ARCHIE will be miles\l"
+	.string "ahead.$"
 
 AquaHideout_B2F_Text_Grunt4Intro:
-	.string "Waiting is part of an ambush. You finally\n"
-	.string "entered the current I was assigned.$"
+	.string "I've been waiting here so long my\n"
+	.string "feet have gone numb.\p"
+	.string "At last! An intruder! I knew this\n"
+	.string "post mattered!$"
 
 AquaHideout_B2F_Text_Grunt4Defeat:
-	.string "You turned my ambush back on me…$"
+	.string "All that waiting, and I still\n"
+	.string "lost…$"
 
 AquaHideout_B2F_Text_Grunt4PostBattle:
-	.string "The delay still served ARCHIE. Whether it\n"
-	.string "was enough is happening below us now.$"
+	.string "Even a little delay helps ARCHIE\n"
+	.string "get the submarine ready.\p"
+	.string "That's what I'm putting in my\n"
+	.string "report, anyway.$"
 
 AquaHideout_B2F_Text_Grunt6Intro:
-	.string "Warp panels, the HIDEOUT's pride\n"
-	.string "and joy!\p"
-	.string "Every panel changes your position and\n"
-	.string "every battle changes your resources.\p"
-	.string "AQUA wins by making the field move.$"
+	.string "Warp panels! The pride of our\n"
+	.string "hideout!\p"
+	.string "I know exactly where you came\n"
+	.string "from. Let's see if you can get\l"
+	.string "past me!$"
 
 AquaHideout_B2F_Text_Grunt6Defeat:
 	.string "What's wrong with you?\n"

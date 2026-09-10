@@ -92,6 +92,14 @@ Route112_EventScript_MtChimneyCableCarSign::
 
 Route112_EventScript_MtChimneySign::
 	msgbox Route112_Text_MtChimneySign, MSGBOX_SIGN
+	setvar VAR_0x8004, LEGENDARY_SIGN_ENTEI
+	special GetSelectedLegendarySignState
+	goto_if_eq VAR_RESULT, 2, Route112_EventScript_EnteiCaught
+	msgbox Route112_Text_EnteiClue, MSGBOX_SIGN
+	goto Common_EventScript_ShowRouteSpecies
+
+Route112_EventScript_EnteiCaught::
+	msgbox Route112_Text_EnteiCaught, MSGBOX_SIGN
 	goto Common_EventScript_ShowRouteSpecies
 
 Route112_EventScript_RouteSignLavaridge::
@@ -149,11 +157,11 @@ Route112_EventScript_Shayla::
 
 Route112_Text_LeaderGoingToAwakenThing:
 	.string "Hey, man, is our leader really going\n"
-	.string "to awaken that thing?$"
+	.string "to stir up the whole volcano?$"
 
 Route112_Text_YeahWeNeedMeteorite:
-	.string "Sounds like it, yeah. But I heard\n"
-	.string "we need a METEORITE to do it.$"
+	.string "Sounds like it. I heard the machine\n"
+	.string "needs a METEORITE to get it going.$"
 
 Route112_Text_OhThatsWhyCrewWentToFallarbor:
 	.string "Oh, I get it now. That's why the rest\n"
@@ -175,10 +183,12 @@ Route112_Text_MtChimneyCableCarSign:
 Route112_Text_MtChimneySign:
 	.string "MT. CHIMNEY\p"
 	.string "For LAVARIDGE TOWN or the summit,\n"
-	.string "please take the CABLE CAR.\p"
-	.string "A newer carving points to FIERY\n"
-	.string "PATH. A fiery guardian may answer\l"
-	.string "a holder of the DYNAMO BADGE.$"
+	.string "please take the CABLE CAR.$"
+
+Route112_Text_EnteiClue:
+	.string "FIELD NOTE: ENTEI lives in\n"
+	.string "FIERY PATH. Each wild encounter\l"
+	.string "there has a 3% chance.$"
 Route112_Text_RouteSignLavaridge:
 	.string "ROUTE 112\n"
 	.string "{LEFT_ARROW} LAVARIDGE TOWN$"
@@ -191,3 +201,7 @@ Route112_Text_CAROL_LocalConversation:
 	.string "for Galarian WEEZING.\p"
 	.string "Outside that cave, it evolves into\n"
 	.string "the usual WEEZING.$"
+
+Route112_Text_EnteiCaught:
+	.string "FIELD NOTE: ENTEI of FIERY PATH\n"
+	.string "has been caught.$"

@@ -1,0 +1,18 @@
+puzzle 1 frames 25320 actions [('cut', (13, 18), 3180), ('cut', (14, 14), 5240), ('cut', (11, 12), 7300), ('cut', (4, 8), 9840), ('cut', (2, 12), 11980), ('arrive', (2, 16), 12540), ('cut', (11, 8), 17300), ('cut', (13, 6), 19280), ('arrive', (13, 2), 19680), ('arrive', (4, 4), 22660)]
+0 RESULT frames=25320 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=bc2f54a599598604 nonzero_pixels=24511 save_bytes=0
+READ width=4 address=0200224c value=00000001
+READ width=4 address=02002274 value=00000000
+READ width=4 address=02002278 value=00000000
+READ width=4 address=0200225c value=00001d01
+READ width=4 address=02002268 value=00000004
+READ width=4 address=0200226c value=00000004
+ 
+puzzle 2 frames 28700 actions [('arrive', (11, 12), 2400), ('arrive', (0, 4), 7270), ('arrive', (14, 5), 9740), ('arrive', (7, 11), 14130), ('arrive', (14, 13), 18840), ('arrive', (13, 2), 23060), ('arrive', (4, 4), 26040)]
+0 RESULT frames=28700 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=bc2f54a599598604 nonzero_pixels=24511 save_bytes=0
+READ width=4 address=0200224c value=00000002
+READ width=4 address=02002274 value=00000000
+READ width=4 address=02002278 value=00000000
+READ width=4 address=0200225c value=00001d01
+READ width=4 address=02002268 value=00000004
+READ width=4 address=0200226c value=00000004
+ 

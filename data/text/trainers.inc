@@ -1367,7 +1367,7 @@ Route111_Text_WiltonIntro:
 	.string "touch it.$"
 
 Route111_Text_WiltonDefeat:
-	.string "You never touched the coffin.$"
+	.string "My defenses weren't enough…$"
 
 Route111_Text_WiltonPostBattle:
 	.string "Contact moves are a habit. Break the\n"
@@ -1392,10 +1392,10 @@ Route111_Text_WiltonPostRematch:
 	.string "aim for the POKéMON LEAGUE.$"
 
 Route111_Text_BrookeIntro:
-	.string "Four roles. BLASTOISE holds,\n"
-	.string "INFERNAPE leads, EXEGGUTOR\l"
-	.string "sleeps, RAIKOU finishes.\p"
-	.string "Which one do you answer first?$"
+	.string "Every partner has a job. Some make\n"
+	.string "an opening; others charge through\l"
+	.string "it.\p"
+	.string "Which one will you answer first?$"
 
 Route111_Text_BrookeDefeat:
 	.string "You picked the right one.$"
@@ -1419,9 +1419,9 @@ Route111_Text_BrookeRematchDefeat:
 	.string "You've taught them good moves!$"
 
 Route111_Text_BrookePostRematch:
-	.string "Maybe I should have stopped my\n"
-	.string "POKéMON from evolving until they\l"
-	.string "learned better moves…$"
+	.string "I should ask a CENTER TUTOR about\n"
+	.string "moves that give my partners more\l"
+	.string "ways to help each other.$"
 
 Route111_Text_CeliaIntro:
 	.string "I shouldn't have come to a place like\n"
@@ -1994,13 +1994,14 @@ Route114_Text_AngelinaPostBattle:
 	.string "they evolve, it's startling!$"
 
 Route115_Text_TimothyIntro:
-	.string "HARIYAMA opens with FAKE OUT. Then\n"
-	.string "DUSCLOPS slows the clock for\n"
+	.string "HARIYAMA opens with FAKE OUT.\n"
+	.string "Then DUSCLOPS slows the clock for\l"
 	.string "CONKELDURR.\p"
-	.string "Read the tempo. Then keep me company.$"
+	.string "Read the tempo. Then keep me\n"
+	.string "company.$"
 
 Route115_Text_TimothyDefeat:
-	.string "You saw the clock turn before I did.$"
+	.string "You set the pace of that match!$"
 
 Route115_Text_TimothyPostBattle:
 	.string "Effort beats talent, but knowing which\n"
@@ -2678,12 +2679,12 @@ Route118_Text_DaltonPostRematch:
 	.string "you through my electric guitar…$"
 
 Route118_Text_DeandreIntro:
-	.string "Go, go, go!\n"
-	.string "POKéMON 1, 2, and 3!$"
+	.string "Go, go, go! Every partner, ready\n"
+	.string "for action!$"
 
 Route118_Text_DeandreDefeat:
-	.string "Come in, POKéMON! Are you okay?\n"
-	.string "POKéMON 1, 2, and 3?!$"
+	.string "Come in, POKéMON! Is everybody\n"
+	.string "okay?!$"
 
 Route118_Text_DeandrePostBattle:
 	.string "Isn't it cool that I have a POKéMON\n"
@@ -2704,16 +2705,18 @@ Route119_Text_BrentPostBattle:
 	.string "You'll never understand…$"
 
 Route119_Text_DonaldIntro:
-	.string "My swarm redirects attacks, spreads\n"
-	.string "sleep, and steals the route's tempo.\p"
-	.string "Try to keep your plan through all three.$"
+	.string "A swarm doesn't have to stand\n"
+	.string "still! Mine can slow you down\l"
+	.string "while keeping the pressure on.\p"
+	.string "Try to keep up!$"
 
 Route119_Text_DonaldDefeat:
-	.string "You found the target behind the swarm…$"
+	.string "My swarm couldn't hold you back!$"
 
 Route119_Text_DonaldPostBattle:
-	.string "Redirection buys time; it does not decide\n"
-	.string "what to do with that time. You did.$"
+	.string "ELECTROWEB slows the opposing\n"
+	.string "pair. I need to make better use of\l"
+	.string "the time that buys.$"
 
 Route119_Text_TaylorIntro:
 	.string "If you step forward, we step forward.\p"
@@ -2739,40 +2742,50 @@ Route119_Text_DougPostBattle:
 	.string "I hope you enjoyed our performance.$"
 
 Route119_Text_GregIntro:
-	.string "First I copy your pace with TAILWIND.\n"
-	.string "Then my screens copy your defenses.\p"
-	.string "Show me the move I cannot mimic.$"
+	.string "We're the MIMIC CIRCLE! I've\n"
+	.string "copied a few tricks from the wind\l"
+	.string "and the light.\p"
+	.string "Let's see if they hold up in\n"
+	.string "battle!$"
 
 Route119_Text_GregDefeat:
-	.string "You attacked around every reflection…$"
+	.string "My reflections weren't enough…$"
 
 Route119_Text_GregPostBattle:
-	.string "Screens soften power, not judgment.\n"
-	.string "Your choices stayed sharper than mine.$"
+	.string "REFLECT and LIGHT SCREEN soften\n"
+	.string "attacks. TAILWIND helps us act\l"
+	.string "sooner.\p"
+	.string "Putting those tricks together\n"
+	.string "takes practice!$"
 
 Route119_Text_KentIntro:
-	.string "One shell accelerates. One empty shell\n"
-	.string "refuses almost every attack.\p"
-	.string "Read which threat is real before the\n"
-	.string "forest catches fire.$"
+	.string "See that darting shape between the\n"
+	.string "trees? That's my partner warming\l"
+	.string "up!\p"
+	.string "The forest never stands still.\n"
+	.string "Neither do we!$"
 
 Route119_Text_KentDefeat:
-	.string "You identified the real threat…$"
+	.string "You caught up with us!$"
 
 Route119_Text_KentPostBattle:
-	.string "A strange gimmick is only dangerous once\n"
-	.string "if the opponent learns its question.$"
+	.string "NINJASK gathers Speed, then BATON\n"
+	.string "PASS can hand it to a teammate.\p"
+	.string "The tricky part is choosing when\n"
+	.string "to make the handoff.$"
 
 Route119_Text_JacksonIntro:
 	.string "A RANGER reads the ground. Here the\n"
 	.string "ground is TAPU KOKO's own terrain.$"
 
 Route119_Text_JacksonDefeat:
-	.string "You read the rain faster than I did.$"
+	.string "You handled our charged-up team!$"
 
 Route119_Text_JacksonPostBattle:
-	.string "Weather is terrain you can't see.\n"
-	.string "Learn to walk on it.$"
+	.string "ELECTRIC TERRAIN changes the\n"
+	.string "ground under our feet. The rain\l"
+	.string "changes the weather above it.\p"
+	.string "A RANGER watches both.$"
 
 Route119_Text_JacksonRegister:
 	.string "I hope you'll share advice without\n"
@@ -2799,8 +2812,9 @@ Route119_Text_CatherineDefeat:
 	.string "Prepared for everything, then.$"
 
 Route119_Text_CatherinePostBattle:
-	.string "You carry exactly what you need and\n"
-	.string "nothing you don't. That's the job.$"
+	.string "Being prepared means having more\n"
+	.string "than one plan. The weather can\l"
+	.string "change before you finish packing!$"
 
 Route119_Text_CatherineRegister:
 	.string "Do you have a POKéNAV?\n"
@@ -2844,28 +2858,32 @@ Route119_Text_PhilPostBattle:
 	.string "admired BIRD POKéMON…$"
 
 Route119_Text_YasuIntro:
-	.string "One shadow changes type. One erases\n"
-	.string "boosts. One turns precision into power.\p"
-	.string "A ninja survives by changing roles.$"
+	.string "A ninja watches for an opening. My\n"
+	.string "partners can make one with speed,\l"
+	.string "strength, or a well-timed trick.\p"
+	.string "Will you leave us a gap?$"
 
 Route119_Text_YasuDefeat:
-	.string "You saw every role before it changed…$"
+	.string "My techniques fell short…$"
 
 Route119_Text_YasuPostBattle:
-	.string "Flexibility is not randomness. Each form\n"
-	.string "must answer a specific threat.$"
+	.string "A ninja must learn when to strike\n"
+	.string "and when to retreat. My partners\l"
+	.string "and I still have work to do.$"
 
 Route119_Text_TakashiIntro:
-	.string "Levitate keeps my own plan clear.\n"
-	.string "Then sand turns the route against you.\p"
-	.string "Can your footing survive the shift?$"
+	.string "I trained in this rain until you\n"
+	.string "couldn't hear my footsteps.\p"
+	.string "Now let's see how quietly my\n"
+	.string "partners can take you by surprise!$"
 
 Route119_Text_TakashiDefeat:
-	.string "You found solid ground before I did…$"
+	.string "So much for my surprise attack!$"
 
 Route119_Text_TakashiPostBattle:
-	.string "Sand rewards a plan with safe footing.\n"
-	.string "Yours had more than one.$"
+	.string "Concealment only lasts until the\n"
+	.string "battle starts. After that, I have\l"
+	.string "to rely on my partners.$"
 
 Route119_Text_HideoIntro:
 	.string "To hide a tree, use a forest!$"
@@ -2895,12 +2913,13 @@ Route119_Text_ChrisPostBattle:
 	.string "It's an indescribably luxuriant moment!$"
 
 Route119_Text_FabianIntro:
-	.string "My rhythm is thunder, voice, and wind.\n"
-	.string "LIGHTNING ROD keeps the band in tune.\p"
-	.string "Try to break the chorus.$"
+	.string "My rhythm is thunder, voice, and\n"
+	.string "wind. Every partner adds something\l"
+	.string "to the band.\p"
+	.string "Try to break the chorus!$"
 
 Route119_Text_FabianDefeat:
-	.string "You cut the power before the last chord!$"
+	.string "That brought the house down!$"
 
 Route119_Text_FabianPostBattle:
 	.string "A doubles team is a band: each part can\n"
@@ -2921,16 +2940,18 @@ Route119_Text_DaytonPostBattle:
 	.string "TRAINERS like you!$"
 
 Route119_Text_RachelIntro:
-	.string "My parasol is for more than rain.\n"
-	.string "This whole team changes with weather.\p"
-	.string "Choose the forecast you can survive.$"
+	.string "My parasol is for more than show.\n"
+	.string "My partners know how to make the\l"
+	.string "most of a rainy day.\p"
+	.string "Shall we?$"
 
 Route119_Text_RachelDefeat:
-	.string "You made my own forecast unsafe…$"
+	.string "Oh! My forecast was wrong…$"
 
 Route119_Text_RachelPostBattle:
-	.string "Weather should create options, not force\n"
-	.string "one script. Your team found another.$"
+	.string "A good rain team needs a plan for\n"
+	.string "clear skies, too. I'll remember\l"
+	.string "that on my next walk.$"
 
 Route120_Text_ColinIntro:
 	.string "Do you have any moves that can strike\n"
@@ -3027,17 +3048,18 @@ Route120_Text_JeffreyPostRematch:
 	.string "For my precious BUG POKéMON…$"
 
 Route120_Text_JenniferIntro:
-	.string "Abilities decide more than moves.\n"
-	.string "PRANKSTER, SHADOW TAG, BAD DREAMS…\p"
-	.string "If you don't know all three, you'll\n"
-	.string "learn them the hard way.$"
+	.string "An ABILITY can change a whole\n"
+	.string "battle. Mine have a few surprises\l"
+	.string "for you.\p"
+	.string "Ready to discover them?$"
 
 Route120_Text_JenniferDefeat:
-	.string "You knew every one of them.$"
+	.string "Your team surprised me!$"
 
 Route120_Text_JenniferPostBattle:
-	.string "Read an Ability before the first turn.\n"
-	.string "It changes what “safe” means.$"
+	.string "PRANKSTER gives many status moves\n"
+	.string "priority. Think about what a\l"
+	.string "partner can do with that opening.$"
 
 Route120_Text_ChipIntro:
 	.string "Who might you be?\p"
@@ -3058,11 +3080,12 @@ Route120_Text_ClarissaIntro:
 	.string "Can your team do the same?$"
 
 Route120_Text_ClarissaDefeat:
-	.string "You found shelter inside my storm…$"
+	.string "You weathered that battle well!$"
 
 Route120_Text_ClarissaPostBattle:
-	.string "Rain should create choices, not force\n"
-	.string "one answer. Your team found several.$"
+	.string "I love the rain, but I can't count\n"
+	.string "on it forever. Even a parasol\l"
+	.string "needs folding sometimes.$"
 
 Route120_Text_AngelicaIntro:
 	.string "Me, POKéMON, and my parasol…\p"
@@ -3122,8 +3145,10 @@ Route120_Text_LeonelDefeat:
 	.string "You read every change in the field!$"
 
 Route120_Text_LeonelPostBattle:
-	.string "A TRAINER with TROPIUS said the marks\n"
-	.string "in this grass answered their party.$"
+	.string "OGERPON lives in this route's\n"
+	.string "grass, with a 3% encounter chance.\p"
+	.string "SWEET SCENT can help draw out\n"
+	.string "the local legendaries.$"
 
 Route121_Text_VanessaIntro:
 	.string "Will you play with my delightfully\n"
@@ -3322,16 +3347,17 @@ Route121_Text_MarcelPostBattle:
 	.string "first loss. Time to earn it again.$"
 
 Route123_Text_WendyIntro:
-	.string "SCIZOR pulls, HYDREIGON pushes. Want to\n"
-	.string "find out how strong you are? I'm the\l"
-	.string "test.$"
+	.string "SCIZOR pulls, HYDREIGON pushes.\n"
+	.string "Want to find out how strong you\l"
+	.string "are? I'm the test.$"
 
 Route123_Text_WendyDefeat:
 	.string "Passed. With room to spare.$"
 
 Route123_Text_WendyPostBattle:
-	.string "You beat me without a single wasted\n"
-	.string "turn. That's the whole exam.$"
+	.string "A good test gives both TRAINERS\n"
+	.string "something to think about. You've\l"
+	.string "certainly given me plenty!$"
 
 Route123_Text_BraxtonIntro:
 	.string "That's a lot of BADGES. Let's see if\n"
@@ -3341,8 +3367,9 @@ Route123_Text_BraxtonDefeat:
 	.string "Worthy. Every one of them.$"
 
 Route123_Text_BraxtonPostBattle:
-	.string "You did those BADGES proud. Now go\n"
-	.string "earn the ones that are left.$"
+	.string "You did those BADGES proud.\n"
+	.string "Wherever you go next, keep that\l"
+	.string "determination.$"
 
 Route123_Text_VioletIntro:
 	.string "They say that good times are filled\n"
@@ -4120,7 +4147,7 @@ Route127_Text_AthenaIntro:
 	.string "makes it fast. Shall we?$"
 
 Route127_Text_AthenaDefeat:
-	.string "You never let me strategize.$"
+	.string "You got the better of me!$"
 
 Route127_Text_AthenaPostBattle:
 	.string "Out here, time slows down. Battles\n"
@@ -4139,9 +4166,10 @@ Route128_Text_IsaiahPostBattle:
 	.string "but I will never give up!$"
 
 Route128_Text_IsaiahRegister:
-	.string "I know I'm not good now, but I think\n"
-	.string "I can win eventually.\p"
-	.string "Please register me and track my progress.$"
+	.string "I know I'm not good now, but I\n"
+	.string "think I can win eventually.\p"
+	.string "Please register me and track my\n"
+	.string "progress.$"
 
 Route128_Text_IsaiahRematchIntro:
 	.string "I'm still feeling good. I'll keep on\n"
@@ -4208,16 +4236,16 @@ Route128_Text_RubenPostBattle:
 
 Route128_Text_WayneIntro:
 	.string "I want to visit EVER GRANDE, so I\n"
-	.string "caught myself a POKéMON that knows\l"
-	.string "the move WATERFALL to crest the falls.$"
+	.string "brought a partner that can use\l"
+	.string "WATERFALL to crest the falls.$"
 
 Route128_Text_WayneDefeat:
 	.string "I'm crestfallen!$"
 
 Route128_Text_WaynePostBattle:
-	.string "Awww, phooey!\p"
-	.string "My POKéMON knows WATERFALL, but\n"
-	.string "I don't have the SOOTOPOLIS GYM BADGE!$"
+	.string "Awww, phooey! My partner can use\n"
+	.string "WATERFALL, but I still need the\l"
+	.string "SOOTOPOLIS GYM BADGE!$"
 
 Route128_Text_HarrisonIntro:
 	.string "You're looking awfully tough.\n"
@@ -4234,16 +4262,15 @@ Route128_Text_HarrisonPostBattle:
 	.string "of my league?$"
 
 Route128_Text_CarleeIntro:
-	.string "The sunlight seems to be more harsh\n"
-	.string "in this area.$"
+	.string "Open water, no shelter…\n"
+	.string "I hope you came prepared!$"
 
 Route128_Text_CarleeDefeat:
-	.string "I couldn't see very well because of\n"
-	.string "the sun's glare.$"
+	.string "I should have prepared for you!$"
 
 Route128_Text_CarleePostBattle:
-	.string "I should go back soon.\n"
-	.string "I need to reapply my sunscreen.$"
+	.string "Sun or rain, I watch the weather.\n"
+	.string "It can change quickly out here.$"
 
 Route129_Text_ChaseIntro:
 	.string "This is my first triathlon.\n"
@@ -4533,8 +4560,9 @@ Route132_Text_JonathanDefeat:
 	.string "Wow! You're strong, all right!$"
 
 Route132_Text_JonathanPostBattle:
-	.string "I still feel eyes on me. It's probably\n"
-	.string "the SABLEYE. I keep forgetting it's mine.$"
+	.string "I still feel eyes on me. It's\n"
+	.string "probably the SABLEYE. I keep\l"
+	.string "forgetting it's mine.$"
 
 Route132_Text_PaxtonIntro:
 	.string "My wife's wandered off again. Fine.\n"
@@ -4596,8 +4624,9 @@ Route133_Text_LindaPostBattle:
 	.string "That's so annoying!$"
 
 Route133_Text_WarrenIntro:
-	.string "Everyone raises the same six. Not me.\n"
-	.string "MUSHARNA and TORTERRA, my way.$"
+	.string "I like finding my own way to win.\n"
+	.string "MUSHARNA and TORTERRA help me do\l"
+	.string "just that!$"
 
 Route133_Text_WarrenDefeat:
 	.string "Darn it! My way is still too slack!$"
@@ -4619,8 +4648,9 @@ Route133_Text_BeckPostBattle:
 	.string "but I've grown to like this place, too.$"
 
 Route133_Text_MollieIntro:
-	.string "I've battled thousands of times. GENGAR\n"
-	.string "remembers every one of them.$"
+	.string "I've battled thousands of times.\n"
+	.string "GENGAR remembers every one of\l"
+	.string "them.$"
 
 Route133_Text_MollieDefeat:
 	.string "Thousands of losses, and this one\n"
@@ -4712,16 +4742,17 @@ Route134_Text_KelvinPostBattle:
 	.string "can still SURF, but it feels wrong.$"
 
 Route134_Text_MarleyIntro:
-	.string "Can your team dodge lightning? ARCANINE\n"
-	.string "and ESCAVALIER move before you blink.$"
+	.string "Fast or slow, every partner needs\n"
+	.string "its moment. Mine won't let an\l"
+	.string "opening go to waste!$"
 
 Route134_Text_MarleyDefeat:
-	.string "I didn't know that technique existed.\n"
-	.string "Thoroughly beaten.$"
+	.string "Oh! Thoroughly beaten!$"
 
 Route134_Text_MarleyPostBattle:
-	.string "I haven't lost my passion for speed.\n"
-	.string "Just the battle. Speed comes back.$"
+	.string "A slow partner can still hit hard.\n"
+	.string "The trick is getting it safely\l"
+	.string "into position.$"
 
 Route134_Text_ReynaIntro:
 	.string "My POKéMON can't be taken down\n"

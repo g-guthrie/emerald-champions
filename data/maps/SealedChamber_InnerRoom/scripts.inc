@@ -75,25 +75,16 @@ SealedChamber_InnerRoom_EventScript_RegigigasEC::
 	msgbox SealedChamber_InnerRoom_Text_RegigigasStatue, MSGBOX_DEFAULT
 	closemessage
 	braillemsgbox SealedChamber_InnerRoom_Braille_Regigigas
-	setvar VAR_0x8004, SPECIES_REGICE
-	special DoesPlayerPartyHaveSelectedSpeciesFamily
-	goto_if_eq VAR_RESULT, FALSE, SealedChamber_InnerRoom_EventScript_RegigigasStatue
-	setvar VAR_0x8004, SPECIES_REGIROCK
-	special DoesPlayerPartyHaveSelectedSpeciesFamily
-	goto_if_eq VAR_RESULT, FALSE, SealedChamber_InnerRoom_EventScript_RegigigasStatue
-	setvar VAR_0x8004, SPECIES_REGISTEEL
-	special DoesPlayerPartyHaveSelectedSpeciesFamily
-	goto_if_eq VAR_RESULT, FALSE, SealedChamber_InnerRoom_EventScript_RegigigasStatue
-	waitse
-	playmoncry SPECIES_REGIGIGAS, CRY_MODE_ENCOUNTER
-	delay 40
-	waitmoncry
 	setvar VAR_0x8004, EC_SIGN_REGIGIGAS_ID
 	special TryUnlockSelectedLegendarySign
 	goto_if_eq VAR_RESULT, 5, Common_EventScript_LegendaryRestingAtShrine
 	goto_if_eq VAR_RESULT, 0, SealedChamber_InnerRoom_EventScript_RegigigasStatue
 	goto_if_eq VAR_RESULT, 1, SealedChamber_InnerRoom_EventScript_RegigigasStatue
 	goto_if_eq VAR_RESULT, 4, SealedChamber_InnerRoom_EventScript_RegigigasECCaught
+	waitse
+	playmoncry SPECIES_REGIGIGAS, CRY_MODE_ENCOUNTER
+	delay 40
+	waitmoncry
 	msgbox SealedChamber_InnerRoom_Text_RegigigasECAwakens, MSGBOX_DEFAULT
 	setvar VAR_0x8004, EC_SIGN_REGIGIGAS_ID
 	special CreateSelectedLegendarySignEncounter
@@ -107,6 +98,9 @@ SealedChamber_InnerRoom_EventScript_RegigigasEC::
 	end
 
 SealedChamber_InnerRoom_EventScript_RegigigasStatue::
+	setvar VAR_0x8004, EC_SIGN_REGIGIGAS_ID
+	special ResearchSelectedLegendarySign
+	msgbox gStringVar4, MSGBOX_DEFAULT
 	release
 	end
 

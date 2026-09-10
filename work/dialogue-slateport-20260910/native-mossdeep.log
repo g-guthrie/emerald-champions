@@ -1,0 +1,100 @@
+164 0 RESULT frames=12000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=049cd268a38e0791 nonzero_pixels=6883 save_bytes=0
+READ width=4 address=020022c4 value=00000001
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=02002290 value=00000001
+READ width=4 address=020022d4 value=00000e00
+READ width=4 address=020022e0 value=00000017
+READ width=4 address=020022e4 value=00000008
+READ width=1 address=02033790 value=00000002
+ 
+165 0 RESULT frames=12000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=d69797f19bc67714 nonzero_pixels=21523 save_bytes=0
+READ width=4 address=020022c4 value=00000002
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=02002290 value=00000001
+READ width=4 address=020022d4 value=00000e09
+READ width=4 address=020022e0 value=0000000d
+READ width=4 address=020022e4 value=00000003
+READ width=1 address=02033790 value=00000002
+ 
+166 0 RESULT frames=12000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=e49173a4bc930ccf nonzero_pixels=21507 save_bytes=0
+READ width=4 address=020022c4 value=00000002
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=02002290 value=00000000
+READ width=4 address=020022d4 value=00000e09
+READ width=4 address=020022e0 value=0000000d
+READ width=4 address=020022e4 value=00000003
+READ width=1 address=02033790 value=00000002
+ 
+167 0 RESULT frames=12000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=5c8ed996716debfb nonzero_pixels=19009 save_bytes=0
+READ width=4 address=020022c4 value=00000001
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=02002290 value=00000000
+READ width=4 address=020022d4 value=00000e09
+READ width=4 address=020022e0 value=0000000d
+READ width=4 address=020022e4 value=00000002
+READ width=1 address=02033790 value=00000002
+ 
+169 0 RESULT frames=12000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=ab673e873720930a nonzero_pixels=16441 save_bytes=0
+READ width=4 address=020022c4 value=00000002
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=02002290 value=00000000
+READ width=4 address=020022d4 value=00000e0a
+READ width=4 address=020022e0 value=00000002
+READ width=4 address=020022e4 value=00000008
+READ width=1 address=02033790 value=00000002
+ 
+168 0 RESULT frames=20000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=5c8ed996716debfb nonzero_pixels=19009 save_bytes=0
+READ width=4 address=020022c4 value=00000001
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=02002290 value=00000000
+READ width=4 address=020022d4 value=00000e09
+READ width=4 address=020022e0 value=0000000d
+READ width=4 address=020022e4 value=00000002
+READ width=1 address=02033790 value=00000002
+ 
+170 0 RESULT frames=20000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=18794ccb24de8e66 nonzero_pixels=38400 save_bytes=0
+READ width=4 address=020022c4 value=00000002
+READ width=4 address=020022ec value=00000001
+READ width=4 address=020022f0 value=00000001
+READ width=4 address=02002290 value=00000000
+READ width=4 address=020022d4 value=00000e0a
+READ width=4 address=020022e0 value=00000002
+READ width=4 address=020022e4 value=00000008
+READ width=1 address=02033790 value=00000002
+ 
+171 0 RESULT frames=12000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=9c07a4d49e97463d nonzero_pixels=15371 save_bytes=0
+READ width=4 address=020022c4 value=00000001
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=02002290 value=00000000
+READ width=4 address=020022d4 value=00000e07
+READ width=4 address=020022e0 value=00000003
+READ width=4 address=020022e4 value=00000007
+READ width=1 address=02033790 value=00000002
+ 
+172 0 RESULT frames=12000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=f55e2cf091461513 nonzero_pixels=11090 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=02002290 value=00000000
+READ width=4 address=020022d4 value=00000e00
+READ width=4 address=020022e0 value=00000002
+READ width=4 address=020022e4 value=00000015
+READ width=1 address=02033790 value=00000002
+ 
+173 0 RESULT frames=12000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=b70284e60ab0ca70 nonzero_pixels=38358 save_bytes=0
+READ width=4 address=020022c4 value=00000002
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=02002290 value=00000000
+READ width=4 address=020022d4 value=00000006
+READ width=4 address=020022e0 value=00000029
+READ width=4 address=020022e4 value=00000018
+READ width=1 address=02033790 value=00000002
+ 

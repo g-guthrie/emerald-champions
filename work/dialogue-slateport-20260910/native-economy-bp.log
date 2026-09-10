@@ -1,0 +1,10 @@
+bp-cord-buy expected 92 0 RESULT frames=8000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=81560bfb9f22cf7e nonzero_pixels=24110 save_bytes=0
+READ width=4 address=020022c0 value=00000064
+READ width=4 address=020022e8 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000 
+bp-cord-already-pc expected 100 0 RESULT frames=8000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=81560bfb9f22cf7e nonzero_pixels=24110 save_bytes=0
+READ width=4 address=020022c0 value=00000064
+READ width=4 address=020022e8 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000 

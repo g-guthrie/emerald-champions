@@ -1,0 +1,729 @@
+{
+  "species_width_bound": {
+    "name": "Brambleghast",
+    "width": 69,
+    "source": "src/data/pokemon/species_info/*.h, speciesName superset"
+  },
+  "rows": [
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_InterviewRequestHasName",
+      "line": "Wow!",
+      "width": 22
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_InterviewRequestHasName",
+      "line": "It's plain to see that you lavish your",
+      "width": 198
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_InterviewRequestHasName",
+      "line": "love on your {STR_VAR_1}.",
+      "width": 138
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_InterviewRequestHasName",
+      "line": "Okay, it's named {STR_VAR_2}.",
+      "width": 163
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_InterviewRequestHasName",
+      "line": "Can I ask you a favor?",
+      "width": 116
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_InterviewRequestHasName",
+      "line": "I'm a TV reporter, and I'm running",
+      "width": 177
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_InterviewRequestHasName",
+      "line": "a survey on POK\u00e9MON.",
+      "width": 107
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_InterviewRequestHasName",
+      "line": "Would you be willing to answer a few",
+      "width": 184
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_InterviewRequestHasName",
+      "line": "simple questions for me?",
+      "width": 128
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_InterviewRequestHasName",
+      "line": "",
+      "width": 0
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_HereGoesQuickAnswers",
+      "line": "Great! Thank you!",
+      "width": 91
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_HereGoesQuickAnswers",
+      "line": "Okay, here goes.",
+      "width": 83
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_HereGoesQuickAnswers",
+      "line": "I just need quick answers, okay?",
+      "width": 170
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_HereGoesQuickAnswers",
+      "line": "",
+      "width": 0
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_DescribeFeelingsFirstMetMon",
+      "line": "When you first met {STR_VAR_1},",
+      "width": 171
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_DescribeFeelingsFirstMetMon",
+      "line": "what did you feel?",
+      "width": 95
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_DescribeFeelingsFirstMetMon",
+      "line": "How would you describe your feelings",
+      "width": 191
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_DescribeFeelingsFirstMetMon",
+      "line": "at the time?",
+      "width": 64
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_DescribeFeelingsFirstMetMon",
+      "line": "",
+      "width": 0
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_LikenMonToSomethingYouLike",
+      "line": "Your {STR_VAR_1} is cared for lovingly.",
+      "width": 208
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_LikenMonToSomethingYouLike",
+      "line": "If you were to liken it to something",
+      "width": 186
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_LikenMonToSomethingYouLike",
+      "line": "that you like, what would it be?",
+      "width": 163
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_LikenMonToSomethingYouLike",
+      "line": "",
+      "width": 0
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_WhatAttractedYouAboutMon",
+      "line": "This question also relates to your",
+      "width": 179
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_WhatAttractedYouAboutMon",
+      "line": "beloved {STR_VAR_1}.",
+      "width": 115
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_WhatAttractedYouAboutMon",
+      "line": "What was it about {STR_VAR_1} that",
+      "width": 190
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_WhatAttractedYouAboutMon",
+      "line": "attracted you?",
+      "width": 80
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_WhatAttractedYouAboutMon",
+      "line": "",
+      "width": 0
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_WhatDoPokemonMeanToYou",
+      "line": "Okay, that makes sense.",
+      "width": 123
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_WhatDoPokemonMeanToYou",
+      "line": "The next question might be a little",
+      "width": 182
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_WhatDoPokemonMeanToYou",
+      "line": "on the tough side.",
+      "width": 94
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_WhatDoPokemonMeanToYou",
+      "line": "Here goes\u2026",
+      "width": 56
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_WhatDoPokemonMeanToYou",
+      "line": "What do POK\u00e9MON mean to you?",
+      "width": 153
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_WhatDoPokemonMeanToYou",
+      "line": "",
+      "width": 0
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_ThatsAllForInterview",
+      "line": "I see!",
+      "width": 31
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_ThatsAllForInterview",
+      "line": "Hmhm\u2026",
+      "width": 30
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_ThatsAllForInterview",
+      "line": "Okay!",
+      "width": 28
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_ThatsAllForInterview",
+      "line": "Thanks for helping me out.",
+      "width": 136
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_ThatsAllForInterview",
+      "line": "It was fun and enlightening",
+      "width": 144
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_ThatsAllForInterview",
+      "line": "chatting with you.",
+      "width": 95
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_ThatsAllForInterview",
+      "line": "It's possible that our interview will",
+      "width": 191
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_ThatsAllForInterview",
+      "line": "end up on TV. Tune in and check!",
+      "width": 164
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_ThatsAllForInterview",
+      "line": "Okay, that's all.",
+      "width": 86
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_ThatsAllForInterview",
+      "line": "Bye-bye!",
+      "width": 46
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_ThatsAllForInterview",
+      "line": "",
+      "width": 0
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_HereIfYouGetUrgeToTellMe",
+      "line": "Oh, okay\u2026",
+      "width": 48
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_HereIfYouGetUrgeToTellMe",
+      "line": "Well, if you get the urge to tell me",
+      "width": 178
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_HereIfYouGetUrgeToTellMe",
+      "line": "about POK\u00e9MON, I'll be here!",
+      "width": 146
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_HereIfYouGetUrgeToTellMe",
+      "line": "",
+      "width": 0
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_EnjoyDoingInterviews",
+      "line": "I enjoy this job--you get to learn",
+      "width": 179
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_EnjoyDoingInterviews",
+      "line": "about POK\u00e9MON by doing interviews.",
+      "width": 182
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_EnjoyDoingInterviews",
+      "line": "",
+      "width": 0
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_InterviewRequest",
+      "line": "Hi, you seem to be very close to your",
+      "width": 189
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_InterviewRequest",
+      "line": "{STR_VAR_1}.",
+      "width": 72
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_InterviewRequest",
+      "line": "Do you know what?",
+      "width": 93
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_InterviewRequest",
+      "line": "I'm a TV reporter.",
+      "width": 93
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_InterviewRequest",
+      "line": "I travel around interviewing people",
+      "width": 185
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_InterviewRequest",
+      "line": "about POK\u00e9MON.",
+      "width": 78
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_InterviewRequest",
+      "line": "I'm wondering if you'd be willing to tell",
+      "width": 208
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_InterviewRequest",
+      "line": "me a little about your {STR_VAR_1}?",
+      "width": 191
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_InterviewRequest",
+      "line": "",
+      "width": 0
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_TellMeAnythingAboutYourMon",
+      "line": "Wow, thank you!",
+      "width": 79
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_TellMeAnythingAboutYourMon",
+      "line": "Okay, then, please tell me anything",
+      "width": 181
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_TellMeAnythingAboutYourMon",
+      "line": "you'd like about your {STR_VAR_1}.",
+      "width": 187
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_TellMeAnythingAboutYourMon",
+      "line": "",
+      "width": 0
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_ThatsAllForInterview2",
+      "line": "Wow\u2026",
+      "width": 24
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_ThatsAllForInterview2",
+      "line": "That's an interesting account.",
+      "width": 163
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_ThatsAllForInterview2",
+      "line": "You really are tight with {STR_VAR_1},",
+      "width": 203
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_ThatsAllForInterview2",
+      "line": "aren't you?",
+      "width": 62
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_ThatsAllForInterview2",
+      "line": "I get the feeling that your account",
+      "width": 187
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_ThatsAllForInterview2",
+      "line": "will make a great TV story.",
+      "width": 136
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_ThatsAllForInterview2",
+      "line": "I promise that I'll turn this into",
+      "width": 174
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_ThatsAllForInterview2",
+      "line": "an entertaining show.",
+      "width": 112
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_ThatsAllForInterview2",
+      "line": "Keep your eyes out for it.",
+      "width": 134
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_ThatsAllForInterview2",
+      "line": "Okay, that's all.",
+      "width": 86
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_ThatsAllForInterview2",
+      "line": "Bye-bye!",
+      "width": 46
+    },
+    {
+      "label": "SlateportCity_PokemonFanClub_Text_ThatsAllForInterview2",
+      "line": "",
+      "width": 0
+    },
+    {
+      "label": "SlateportCity_OceanicMuseum_1F_Text_InterviewRequest",
+      "line": "Oh?",
+      "width": 18
+    },
+    {
+      "label": "SlateportCity_OceanicMuseum_1F_Text_InterviewRequest",
+      "line": "Do you perhaps like POK\u00e9MON?",
+      "width": 151
+    },
+    {
+      "label": "SlateportCity_OceanicMuseum_1F_Text_InterviewRequest",
+      "line": "I'm on assignment with the TV network.",
+      "width": 202
+    },
+    {
+      "label": "SlateportCity_OceanicMuseum_1F_Text_InterviewRequest",
+      "line": "I'm gathering stories on POK\u00e9MON and",
+      "width": 195
+    },
+    {
+      "label": "SlateportCity_OceanicMuseum_1F_Text_InterviewRequest",
+      "line": "TRAINERS that occurred recently.",
+      "width": 175
+    },
+    {
+      "label": "SlateportCity_OceanicMuseum_1F_Text_InterviewRequest",
+      "line": "If you don't mind, could you tell me",
+      "width": 184
+    },
+    {
+      "label": "SlateportCity_OceanicMuseum_1F_Text_InterviewRequest",
+      "line": "something about yourself?",
+      "width": 139
+    },
+    {
+      "label": "SlateportCity_OceanicMuseum_1F_Text_InterviewRequest",
+      "line": "",
+      "width": 0
+    },
+    {
+      "label": "SlateportCity_OceanicMuseum_1F_Text_InterviewRequestShort",
+      "line": "I'm gathering stories on POK\u00e9MON and",
+      "width": 195
+    },
+    {
+      "label": "SlateportCity_OceanicMuseum_1F_Text_InterviewRequestShort",
+      "line": "TRAINERS that occurred recently.",
+      "width": 175
+    },
+    {
+      "label": "SlateportCity_OceanicMuseum_1F_Text_InterviewRequestShort",
+      "line": "If you don't mind, could you tell me",
+      "width": 184
+    },
+    {
+      "label": "SlateportCity_OceanicMuseum_1F_Text_InterviewRequestShort",
+      "line": "something about yourself?",
+      "width": 139
+    },
+    {
+      "label": "SlateportCity_OceanicMuseum_1F_Text_InterviewRequestShort",
+      "line": "",
+      "width": 0
+    },
+    {
+      "label": "SlateportCity_OceanicMuseum_1F_Text_TellMeExperienceInvolvingPokemon",
+      "line": "Oh, you will?",
+      "width": 63
+    },
+    {
+      "label": "SlateportCity_OceanicMuseum_1F_Text_TellMeExperienceInvolvingPokemon",
+      "line": "Thank you!",
+      "width": 55
+    },
+    {
+      "label": "SlateportCity_OceanicMuseum_1F_Text_TellMeExperienceInvolvingPokemon",
+      "line": "Then, please, tell me anything of",
+      "width": 169
+    },
+    {
+      "label": "SlateportCity_OceanicMuseum_1F_Text_TellMeExperienceInvolvingPokemon",
+      "line": "interest that you experienced recently",
+      "width": 207
+    },
+    {
+      "label": "SlateportCity_OceanicMuseum_1F_Text_TellMeExperienceInvolvingPokemon",
+      "line": "involving POK\u00e9MON.",
+      "width": 96
+    },
+    {
+      "label": "SlateportCity_OceanicMuseum_1F_Text_TellMeExperienceInvolvingPokemon",
+      "line": "",
+      "width": 0
+    },
+    {
+      "label": "SlateportCity_OceanicMuseum_1F_Text_LetMeKnowIfYouHaveStory",
+      "line": "Oh, I see\u2026",
+      "width": 51
+    },
+    {
+      "label": "SlateportCity_OceanicMuseum_1F_Text_LetMeKnowIfYouHaveStory",
+      "line": "Well, if you do have an interesting",
+      "width": 178
+    },
+    {
+      "label": "SlateportCity_OceanicMuseum_1F_Text_LetMeKnowIfYouHaveStory",
+      "line": "story to tell, please let me know.",
+      "width": 171
+    },
+    {
+      "label": "SlateportCity_OceanicMuseum_1F_Text_LetMeKnowIfYouHaveStory",
+      "line": "",
+      "width": 0
+    },
+    {
+      "label": "SlateportCity_OceanicMuseum_1F_Text_ThatsAllForInterview",
+      "line": "Oh, what an uplifting story!",
+      "width": 144
+    },
+    {
+      "label": "SlateportCity_OceanicMuseum_1F_Text_ThatsAllForInterview",
+      "line": "I'll be sure to get your story told",
+      "width": 180
+    },
+    {
+      "label": "SlateportCity_OceanicMuseum_1F_Text_ThatsAllForInterview",
+      "line": "on television.",
+      "width": 72
+    },
+    {
+      "label": "SlateportCity_OceanicMuseum_1F_Text_ThatsAllForInterview",
+      "line": "It should be aired sometime, I think,",
+      "width": 189
+    },
+    {
+      "label": "SlateportCity_OceanicMuseum_1F_Text_ThatsAllForInterview",
+      "line": "so please look forward to it.",
+      "width": 148
+    },
+    {
+      "label": "SlateportCity_OceanicMuseum_1F_Text_ThatsAllForInterview",
+      "line": "",
+      "width": 0
+    },
+    {
+      "label": "SlateportCity_OceanicMuseum_1F_Text_BetterWriteUpStory",
+      "line": "Hmmm\u2026",
+      "width": 30
+    },
+    {
+      "label": "SlateportCity_OceanicMuseum_1F_Text_BetterWriteUpStory",
+      "line": "I've got a good story for a TV program.",
+      "width": 203
+    },
+    {
+      "label": "SlateportCity_OceanicMuseum_1F_Text_BetterWriteUpStory",
+      "line": "I'd better write it up in a hurry!",
+      "width": 171
+    },
+    {
+      "label": "SlateportCity_OceanicMuseum_1F_Text_BetterWriteUpStory",
+      "line": "",
+      "width": 0
+    },
+    {
+      "label": "ChampionsTent_Text_Challenge",
+      "line": "Take on three DOUBLE BATTLES?",
+      "width": 161
+    },
+    {
+      "label": "ChampionsTent_Text_Challenge",
+      "line": "",
+      "width": 0
+    },
+    {
+      "label": "ChampionsTent_Text_Rules",
+      "line": "Bring six Pok\u00e9mon ready to battle.",
+      "width": 178
+    },
+    {
+      "label": "ChampionsTent_Text_Rules",
+      "line": "EGGS cannot enter.",
+      "width": 98
+    },
+    {
+      "label": "ChampionsTent_Text_Rules",
+      "line": "Your team fights at your current",
+      "width": 171
+    },
+    {
+      "label": "ChampionsTent_Text_Rules",
+      "line": "level cap. Your chosen builds stay.",
+      "width": 180
+    },
+    {
+      "label": "ChampionsTent_Text_Rules",
+      "line": "Win three battles for a prize.",
+      "width": 153
+    },
+    {
+      "label": "ChampionsTent_Text_Rules",
+      "line": "You may retire between battles.",
+      "width": 165
+    },
+    {
+      "label": "ChampionsTent_Text_Rules",
+      "line": "Your party is restored afterward.",
+      "width": 175
+    },
+    {
+      "label": "ChampionsTent_Text_Rules",
+      "line": "These wins are separate from the",
+      "width": 172
+    },
+    {
+      "label": "ChampionsTent_Text_Rules",
+      "line": "CHAMPIONS CIRCUIT.",
+      "width": 102
+    },
+    {
+      "label": "ChampionsTent_Text_Rules",
+      "line": "",
+      "width": 0
+    },
+    {
+      "label": "ChampionsTent_Text_Opponent",
+      "line": "Battle {STR_VAR_2}: {STR_VAR_1}!",
+      "width": 178
+    },
+    {
+      "label": "ChampionsTent_Text_Opponent",
+      "line": "The opposing team is Lv. {STR_VAR_3}.",
+      "width": 149
+    },
+    {
+      "label": "ChampionsTent_Text_Opponent",
+      "line": "",
+      "width": 0
+    },
+    {
+      "label": "ChampionsTent_Text_Continue",
+      "line": "Well played! Your team is healed.",
+      "width": 167
+    },
+    {
+      "label": "ChampionsTent_Text_Continue",
+      "line": "Continue the exhibition?",
+      "width": 130
+    },
+    {
+      "label": "ChampionsTent_Text_Continue",
+      "line": "",
+      "width": 0
+    },
+    {
+      "label": "ChampionsTent_Text_Thanks",
+      "line": "Thank you for battling!",
+      "width": 122
+    },
+    {
+      "label": "ChampionsTent_Text_Thanks",
+      "line": "Come back with your next idea.",
+      "width": 157
+    },
+    {
+      "label": "ChampionsTent_Text_Thanks",
+      "line": "",
+      "width": 0
+    },
+    {
+      "label": "ChampionsTent_Text_Prize",
+      "line": "Three wins! Here is your prize:",
+      "width": 156
+    },
+    {
+      "label": "ChampionsTent_Text_Prize",
+      "line": "{PLAYER} received {STR_VAR_1}!",
+      "width": 175
+    },
+    {
+      "label": "ChampionsTent_Text_Prize",
+      "line": "",
+      "width": 0
+    },
+    {
+      "label": "ChampionsTent_Text_PrizeFull",
+      "line": "Your prize is waiting here.",
+      "width": 136
+    },
+    {
+      "label": "ChampionsTent_Text_PrizeFull",
+      "line": "Make room in your BAG and return.",
+      "width": 171
+    },
+    {
+      "label": "ChampionsTent_Text_PrizeFull",
+      "line": "",
+      "width": 0
+    },
+    {
+      "label": "ChampionsTent_Text_NeedParty",
+      "line": "Bring six Pok\u00e9mon able to battle.",
+      "width": 171
+    },
+    {
+      "label": "ChampionsTent_Text_NeedParty",
+      "line": "Prepare at a POK\u00e9MON CENTER, then",
+      "width": 178
+    },
+    {
+      "label": "ChampionsTent_Text_NeedParty",
+      "line": "come back when you are ready.",
+      "width": 154
+    },
+    {
+      "label": "ChampionsTent_Text_NeedParty",
+      "line": "",
+      "width": 0
+    },
+    {
+      "label": "ChampionsTent_Text_NoOpponent",
+      "line": "The next team is not ready yet.",
+      "width": 162
+    },
+    {
+      "label": "ChampionsTent_Text_NoOpponent",
+      "line": "Please try the exhibition again.",
+      "width": 166
+    },
+    {
+      "label": "ChampionsTent_Text_NoOpponent",
+      "line": "",
+      "width": 0
+    }
+  ]
+}

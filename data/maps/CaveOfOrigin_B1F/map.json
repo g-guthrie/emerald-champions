@@ -28,20 +28,6 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "CaveOfOrigin_B1F_EventScript_Wallace",
       "flag": "FLAG_HIDE_CAVE_OF_ORIGIN_B1F_WALLACE"
-    },
-    {
-      "local_id": "LOCALID_CAVE_OF_ORIGIN_B1F_LEGENDARY_SIGN",
-      "graphics_id": "OBJ_EVENT_GFX_DEOXYS_TRIANGLE",
-      "x": 12,
-      "y": 4,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_NONE",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Common_EventScript_LegendaryLandmark",
-      "flag": "0"
     }
   ],
   "warp_events": [

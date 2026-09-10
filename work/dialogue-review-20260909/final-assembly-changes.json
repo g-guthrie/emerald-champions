@@ -1,0 +1,2422 @@
+[
+  {
+    "owner": "main",
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_IncenseScholar"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MauvilleCity/scripts.inc",
+    "label": "MauvilleCity_Text_WallyWantToChallengeGym"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MauvilleCity/scripts.inc",
+    "label": "MauvilleCity_Text_WallyWeCanBeatAnyone"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MauvilleCity/scripts.inc",
+    "label": "MauvilleCity_Text_WallyWillYouBattleMe"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MauvilleCity/scripts.inc",
+    "label": "MauvilleCity_Text_WallyMyUncleWontKnowImStrong"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MauvilleCity/scripts.inc",
+    "label": "MauvilleCity_Text_WallyHereICome"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MauvilleCity/scripts.inc",
+    "label": "MauvilleCity_Text_WallyDefeat"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MauvilleCity/scripts.inc",
+    "label": "MauvilleCity_Text_WallyIllGoBackToVerdanturf"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/FortreeCity/scripts.inc",
+    "label": "FortreeCity_Text_SomethingBlockingGym"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/FortreeCity/scripts.inc",
+    "label": "FortreeCity_Text_PokemonThatEvolveWhenTraded"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/LilycoveCity/scripts.inc",
+    "label": "LilycoveCity_Text_MayShoppingLetsBattle"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/LilycoveCity/scripts.inc",
+    "label": "LilycoveCity_Text_MayNotRaisingPokemon"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/LilycoveCity/scripts.inc",
+    "label": "LilycoveCity_Text_MayBattleMe"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/LilycoveCity/scripts.inc",
+    "label": "LilycoveCity_Text_MayWontBeBeaten"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/LilycoveCity/scripts.inc",
+    "label": "LilycoveCity_Text_BrendanShoppingLetsBattle"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/LilycoveCity/scripts.inc",
+    "label": "LilycoveCity_Text_BrendanNoConfidence"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/LilycoveCity/scripts.inc",
+    "label": "LilycoveCity_Text_BrendanBattleMe"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/LilycoveCity/scripts.inc",
+    "label": "LilycoveCity_Text_BrendanYouGoingToCollectBadges"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MossdeepCity/scripts.inc",
+    "label": "MossdeepCity_Text_ScottSomethingWrongWithTown"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/SootopolisCity/scripts.inc",
+    "label": "SootopolisCity_Text_GroudonPleaseStop"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/SootopolisCity/scripts.inc",
+    "label": "SootopolisCity_Text_AfterAllOurScheming"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/SootopolisCity/scripts.inc",
+    "label": "SootopolisCity_Text_TryingMeaninglessToPokemon"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/SootopolisCity/scripts.inc",
+    "label": "SootopolisCity_Text_DoesThisMakeYourFearPokemon"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/SootopolisCity/scripts.inc",
+    "label": "SootopolisCity_Text_SoThatsRayquaza"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/SootopolisCity/scripts.inc",
+    "label": "SootopolisCity_Text_AquaMagmaDidntMeanHarm"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/SootopolisCity/scripts.inc",
+    "label": "SootopolisCity_Text_ThankYouForHelpAcceptThis"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/SootopolisCity/scripts.inc",
+    "label": "SootopolisCity_Text_DazzledByMentor"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/LittlerootTown/scripts.inc",
+    "label": "LittlerootTown_Text_WearTheseRunningShoes"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/OldaleTown/scripts.inc",
+    "label": "OldaleTown_Text_PotionExplanation"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/DewfordTown/scripts.inc",
+    "label": "DewfordTown_Text_TinyIslandCommunity"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/DewfordTown/scripts.inc",
+    "label": "DewfordTown_Text_WhereAreWeBound"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/LavaridgeTown/scripts.inc",
+    "label": "LavaridgeTown_Text_GoGogglesNoRoom"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/VerdanturfTown/scripts.inc",
+    "label": "VerdanturfTown_Text_TownSign"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/Route103/scripts.inc",
+    "label": "Route103_Text_MayLetsBattle"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/Route103/scripts.inc",
+    "label": "Route103_Text_BrendanLetsBattle"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_MayLetsBattle"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_MayDefeated"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_BrendanLetsBattle"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_BrendanDefeated"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/Route119/scripts.inc",
+    "label": "Route119_Text_MayIntro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/Route119/scripts.inc",
+    "label": "Route119_Text_MayDefeat"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/Route119/scripts.inc",
+    "label": "Route119_Text_MayExplainFly"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/Route119/scripts.inc",
+    "label": "Route119_Text_BrendanIntro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/Route119/scripts.inc",
+    "label": "Route119_Text_BrendanIllGiveYouThis"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/LittlerootTown_MaysHouse_1F/scripts.inc",
+    "label": "RivalsHouse_1F_Text_MayWhoAreYou"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/LittlerootTown_MaysHouse_1F/scripts.inc",
+    "label": "RivalsHouse_1F_Text_BrendanWhoAreYou"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/LittlerootTown_MaysHouse_2F/scripts.inc",
+    "label": "RivalsHouse_2F_Text_MayWhoAreYou"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/LittlerootTown_MaysHouse_2F/scripts.inc",
+    "label": "RivalsHouse_2F_Text_BrendanWhoAreYou"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc",
+    "label": "LittlerootTown_ProfessorBirchsLab_Text_MightBeGoodIdeaToGoSeeRival"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc",
+    "label": "LittlerootTown_ProfessorBirchsLab_Text_OtherRegionsUpgradeToNational"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc",
+    "label": "LittlerootTown_ProfessorBirchsLab_Text_CompletedDexResearchReward"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc",
+    "label": "LittlerootTown_ProfessorBirchsLab_Text_ResearchRewardComplete"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc",
+    "label": "LittlerootTown_ProfessorBirchsLab_Text_ResearchRewardBagFull"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/OldaleTown_House2/scripts.inc",
+    "label": "OldaleTown_House2_Text_PokemonLevelUp"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/OldaleTown_House2/scripts.inc",
+    "label": "OldaleTown_House2_Text_YoullGoFurtherWithStrongPokemon"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/DewfordTown_PokemonCenter_1F/scripts.inc",
+    "label": "DewfordTown_PokemonCenter_1F_Text_FaintedMonCanUseHM"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/DewfordTown_Gym/scripts.inc",
+    "label": "DewfordTown_Gym_Text_GymGuideAdvice"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/DewfordTown_Gym/scripts.inc",
+    "label": "DewfordTown_Gym_Text_TakaoIntro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/DewfordTown_Gym/scripts.inc",
+    "label": "DewfordTown_Gym_Text_TakaoPostBattle"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/DewfordTown_Gym/scripts.inc",
+    "label": "DewfordTown_Gym_Text_JocelynPostBattle"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/DewfordTown_Gym/scripts.inc",
+    "label": "DewfordTown_Gym_Text_CristianPostBattle"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/LavaridgeTown_Gym_1F/scripts.inc",
+    "label": "LavaridgeTown_Gym_1F_Text_GymGuideAdvice"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/LavaridgeTown_Gym_1F/scripts.inc",
+    "label": "LavaridgeTown_Gym_1F_Text_FlanneryIntro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/PetalburgCity_Gym/scripts.inc",
+    "label": "PetalburgCity_Gym_Text_NormanIntro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/PetalburgCity_Gym/scripts.inc",
+    "label": "PetalburgCity_Gym_Text_ExplainLopunnite"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/PetalburgCity_Gym/scripts.inc",
+    "label": "PetalburgCity_Gym_Text_RandallIntro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/PetalburgCity_Gym/scripts.inc",
+    "label": "PetalburgCity_Gym_Text_GeorgeIntro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/PetalburgCity_Gym/scripts.inc",
+    "label": "PetalburgCity_Gym_Text_BerkeIntro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/PetalburgCity_Gym/scripts.inc",
+    "label": "PetalburgCity_Gym_Text_BerkePostBattle"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/PetalburgCity_Gym/scripts.inc",
+    "label": "PetalburgCity_Gym_Text_MaryIntro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/PetalburgCity_Gym/scripts.inc",
+    "label": "PetalburgCity_Gym_Text_JodyIntro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/SlateportCity_SternsShipyard_1F/scripts.inc",
+    "label": "SlateportCity_SternsShipyard_1F_Text_BrineyJoinedUs"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/SlateportCity_SternsShipyard_1F/scripts.inc",
+    "label": "SlateportCity_SternsShipyard_1F_Text_DecidedToHelpDock"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/SlateportCity_OceanicMuseum_2F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_2F_Text_SternIveGotToGo"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/SlateportCity_OceanicMuseum_2F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_2F_Text_SSTidalReplica"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/SlateportCity_Harbor/scripts.inc",
+    "label": "SlateportCity_Harbor_Text_FerryServiceUnavailable"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/SlateportCity_Harbor/scripts.inc",
+    "label": "SlateportCity_Harbor_Text_YouMustHaveTicket"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MauvilleCity_Gym/scripts.inc",
+    "label": "MauvilleCity_Gym_Text_ShawnIntro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MauvilleCity_Gym/scripts.inc",
+    "label": "MauvilleCity_Gym_Text_BenIntro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MauvilleCity_Gym/scripts.inc",
+    "label": "MauvilleCity_Gym_Text_BenPostBattle"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MauvilleCity_Gym/scripts.inc",
+    "label": "MauvilleCity_Gym_Text_AngeloIntro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MauvilleCity_Gym/scripts.inc",
+    "label": "MauvilleCity_Gym_Text_AngeloPostBattle"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MauvilleCity_Gym/scripts.inc",
+    "label": "MauvilleCity_Gym_Text_WattsonIntro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/RustboroCity_DevonCorp_1F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_1F_Text_StaffGotRobbed"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/RustboroCity_DevonCorp_1F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_1F_Text_RobberWasntVeryBright"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/RustboroCity_DevonCorp_1F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_1F_Text_HowCouldWeGetRobbed"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/RustboroCity_DevonCorp_2F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_2F_Text_MagearnaPC"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/RustboroCity_DevonCorp_3F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_3F_Text_StevenAwaitsKnuckleBadge"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/RustboroCity_DevonCorp_3F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_3F_Text_ThankYouForDeliveringLetter"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/RustboroCity_Gym/scripts.inc",
+    "label": "RustboroCity_Gym_Text_GuideIntroduction"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/RustboroCity_Gym/scripts.inc",
+    "label": "RustboroCity_Gym_Text_GymGuideAdvice"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/RustboroCity_Gym/scripts.inc",
+    "label": "RustboroCity_Gym_Text_JoshPostBattle"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/RustboroCity_Gym/scripts.inc",
+    "label": "RustboroCity_Gym_Text_RoxanneIntro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/RustboroCity_Gym/scripts.inc",
+    "label": "RustboroCity_Gym_Text_StoneBadgeInfoTakeThis"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/RustboroCity_PokemonSchool/scripts.inc",
+    "label": "RustboroCity_PokemonSchool_Text_StudentsWhoStudyEveryTool"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/RustboroCity_PokemonCenter_1F/scripts.inc",
+    "label": "RustboroCity_PokemonCenter_1F_Text_HMCutNextDoor"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/FortreeCity_Gym/scripts.inc",
+    "label": "FortreeCity_Gym_Text_AshleyIntro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/FortreeCity_Gym/scripts.inc",
+    "label": "FortreeCity_Gym_Text_WinonaIntro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/FortreeCity_Gym/scripts.inc",
+    "label": "FortreeCity_Gym_Text_WinonaDefeat"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/FortreeCity_Gym/scripts.inc",
+    "label": "FortreeCity_Gym_Text_PyreHandoff"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/FortreeCity_Gym/scripts.inc",
+    "label": "FortreeCity_Gym_Text_WinonaPostBattle"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/FortreeCity_Gym/scripts.inc",
+    "label": "FortreeCity_Gym_Text_WinonaAfterPyre"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/LilycoveCity_Harbor/scripts.inc",
+    "label": "LilycoveCity_Harbor_Text_FerryUnavailable"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/LilycoveCity_Harbor/scripts.inc",
+    "label": "LilycoveCity_Harbor_Text_NoTicket"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/LilycoveCity_Harbor/scripts.inc",
+    "label": "LilycoveCity_Harbor_Text_ChampionPassesBagFull"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/LilycoveCity_Harbor/scripts.inc",
+    "label": "LilycoveCity_Harbor_Text_LatiReport"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MossdeepCity_Gym/scripts.inc",
+    "label": "MossdeepCity_Gym_Text_NateIntro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MossdeepCity_Gym/scripts.inc",
+    "label": "MossdeepCity_Gym_Text_CliffordIntro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MossdeepCity_Gym/scripts.inc",
+    "label": "MossdeepCity_Gym_Text_NicholasIntro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MossdeepCity_Gym/scripts.inc",
+    "label": "MossdeepCity_Gym_Text_TateAndLizaIntro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MossdeepCity_Gym/scripts.inc",
+    "label": "MossdeepCity_Gym_Text_TateAndLizaPostBattle"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MossdeepCity_SpaceCenter_1F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_1F_Text_HaywireButRocketLaunchImminent"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MossdeepCity_SpaceCenter_1F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_1F_Text_HaywireButSuccessfulLaunchNumber"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MossdeepCity_SpaceCenter_1F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_1F_Text_MagmaHaveSightsOnSpaceCenter"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MossdeepCity_SpaceCenter_1F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_1F_Text_MagmaCantStealFuelTakeThis"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_2F_Text_YoureOutnumberedTakeUsOn"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_2F_Text_GoodAnswer"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_2F_Text_Grunt5Intro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_2F_Text_Grunt5Defeat"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_2F_Text_Grunt6Intro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_2F_Text_Grunt6Defeat"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_2F_Text_Grunt7Intro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_2F_Text_Grunt7Defeat"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_2F_Text_Grunt6PostBattle"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_2F_Text_Grunt7PostBattle"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_2F_Text_Grunt5PostBattle"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_2F_Text_WellTakeCareOfYou"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_2F_Text_MaxieDontInterfere"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_2F_Text_StevenAreYouReadyToBattle"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_Text_TabithaDefeat"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_2F_Text_TabithaIntro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_2F_Text_TabithaAfter"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_Text_CourtneyDefeat"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_2F_Text_CourtneyFormation"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_2F_Text_MaxieWeFailedIsAquaAlsoMisguided"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_2F_Text_MaxieWeWillGiveUp"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_2F_Text_StevenThankYouComeSeeMeAtHome"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/SootopolisCity_Gym_1F/scripts.inc",
+    "label": "SootopolisCity_Gym_1F_Text_JuanIntro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/SootopolisCity_Gym_1F/scripts.inc",
+    "label": "SootopolisCity_Gym_1F_Text_ExplainGyaradosite"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/SootopolisCity_Gym_1F/scripts.inc",
+    "label": "SootopolisCity_Gym_1F_Text_JuanPostBattle"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/SootopolisCity_PokemonCenter_1F/scripts.inc",
+    "label": "SootopolisCity_PokemonCenter_1F_Text_EveryoneTakenRefuge"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/SootopolisCity_House1/scripts.inc",
+    "label": "SootopolisCity_House1_Text_ExplainRazorClaw"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/SootopolisCity_House2/scripts.inc",
+    "label": "SootopolisCity_House2_Text_DidYouKnowAboutMtPyreOrbs"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/SootopolisCity_House2/scripts.inc",
+    "label": "SootopolisCity_House2_Text_YesTwoOrbsSideBySide"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/SootopolisCity_House2/scripts.inc",
+    "label": "SootopolisCity_House2_Text_OughtToVisitAndSee"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/EverGrandeCity_PhoebesRoom/scripts.inc",
+    "label": "EverGrandeCity_PhoebesRoom_Text_Defeat"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/EverGrandeCity_GlaciasRoom/scripts.inc",
+    "label": "EverGrandeCity_GlaciasRoom_Text_PostBattleSpeech"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/EverGrandeCity_ChampionsRoom/scripts.inc",
+    "label": "EverGrandeCity_ChampionsRoom_Text_IntroSpeech"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/EverGrandeCity_ChampionsRoom/scripts.inc",
+    "label": "EverGrandeCity_ChampionsRoom_Text_PostBattleSpeech"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/EverGrandeCity_ChampionsRoom/scripts.inc",
+    "label": "EverGrandeCity_ChampionsRoom_Text_BirchArriveRatePokedex"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/EverGrandeCity_ChampionsRoom/scripts.inc",
+    "label": "EverGrandeCity_ChampionsRoom_Text_BirchCongratulations"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/EverGrandeCity_ChampionsRoom/scripts.inc",
+    "label": "EverGrandeCity_ChampionsRoom_Text_MayCongratulations"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/EverGrandeCity_ChampionsRoom/scripts.inc",
+    "label": "EverGrandeCity_ChampionsRoom_Text_BrendanCongratulations"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/EverGrandeCity_PokemonCenter_1F/scripts.inc",
+    "label": "EverGrandeCity_PokemonCenter_1F_Text_ScottHappyForYou"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MeteorFalls_1F_1R/scripts.inc",
+    "label": "MeteorFalls_1F_1R_Text_DontExpectMercyFromMagma"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MeteorFalls_1F_1R/scripts.inc",
+    "label": "MeteorFalls_1F_1R_Text_CourtneyDefeat"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MeteorFalls_1F_1R/scripts.inc",
+    "label": "MeteorFalls_1F_1R_Text_GruntDefeat"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MeteorFalls_1F_1R/scripts.inc",
+    "label": "MeteorFalls_1F_1R_Text_ArchieSeenYouBefore"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MeteorFalls_1F_1R/scripts.inc",
+    "label": "MeteorFalls_1F_1R_Text_ArchieYesNoTellingWhatMagmaWillDo"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MeteorFalls_1F_1R/scripts.inc",
+    "label": "MeteorFalls_1F_1R_Text_ArchieFarewell"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/GraniteCave_StevensRoom/scripts.inc",
+    "label": "GraniteCave_StevensRoom_Text_NoStarterStone"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/GraniteCave_StevensRoom/scripts.inc",
+    "label": "GraniteCave_StevensRoom_Text_ArchiveOpen"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/PetalburgWoods/scripts.inc",
+    "label": "PetalburgWoods_Text_TartAppleExplanation"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MtChimney/scripts.inc",
+    "label": "MtChimney_Text_MaxieDefeat"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MtChimney/scripts.inc",
+    "label": "MtChimney_Text_MaxieYouHaventSeenLastOfMagma"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MtChimney/scripts.inc",
+    "label": "MtChimney_Text_TabithaIntro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MtChimney/scripts.inc",
+    "label": "MtChimney_Text_TabithaDefeat"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MtChimney/scripts.inc",
+    "label": "MtChimney_Text_TabithaPostBattle"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MtChimney/scripts.inc",
+    "label": "MtChimney_Text_Grunt2Intro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MtChimney/scripts.inc",
+    "label": "MtChimney_Text_Grunt2Defeat"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MtChimney/scripts.inc",
+    "label": "MtChimney_Text_Grunt1Intro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MtChimney/scripts.inc",
+    "label": "MtChimney_Text_Grunt1Defeat"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MtChimney/scripts.inc",
+    "label": "MtChimney_Text_Grunt1PostBattle"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MtChimney/scripts.inc",
+    "label": "MtChimney_Text_TeamAquaAlwaysMessingWithPlans"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MtChimney/scripts.inc",
+    "label": "MtChimney_Text_MeteoritesPackAmazingPower"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MtChimney/scripts.inc",
+    "label": "MtChimney_Text_YouBetterNotMessWithUs"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MtChimney/scripts.inc",
+    "label": "MtChimney_Text_AquasNameSimilar"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MtChimney/scripts.inc",
+    "label": "MtChimney_Text_KeepMakingMoreLand"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MtChimney/scripts.inc",
+    "label": "MtChimney_Text_ArchieGoStopTeamMagma"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MtChimney/scripts.inc",
+    "label": "MtChimney_Text_ArchieThankYou"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MtChimney/scripts.inc",
+    "label": "MtChimney_Text_MagmaOutnumbersUs"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MtChimney/scripts.inc",
+    "label": "MtChimney_Text_LessHabitatForWaterPokemon"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MtChimney/scripts.inc",
+    "label": "MtChimney_Text_MagmasNameSimilar"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MtChimney/scripts.inc",
+    "label": "MtChimney_Text_MeteoriteFittedOnMachine"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MtChimney/scripts.inc",
+    "label": "MtChimney_Text_RouteSign"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_MattIntro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_MattDefeat"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_MattAfter"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_Grunt1Intro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_Grunt1Defeat"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_Grunt1PostBattle"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_Grunt2Intro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_Grunt2Defeat"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_Grunt2PostBattle"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_Grunt3Intro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_Grunt3Defeat"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_Grunt4Intro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_Grunt4Defeat"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_Grunt4PostBattle"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_GroudonKyogreAwakened"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_ThoseTwoMenReturnedOrbs"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_HearTheNewLegendOfHoenn"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/SeafloorCavern_Room9/scripts.inc",
+    "label": "SeafloorCavern_Room9_Text_ArchieBeholdKyogre"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/SeafloorCavern_Room9/scripts.inc",
+    "label": "SeafloorCavern_Room9_Text_ArchieYouMustDisappear"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/SeafloorCavern_Room9/scripts.inc",
+    "label": "SeafloorCavern_Room9_Text_ArchieDefeat"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/SeafloorCavern_Room9/scripts.inc",
+    "label": "SeafloorCavern_Room9_Text_ArchieWhatRainingTooHard"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/SeafloorCavern_Room9/scripts.inc",
+    "label": "SeafloorCavern_Room9_Text_ArchieWhyDidKyogreDisappear"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/SeafloorCavern_Room9/scripts.inc",
+    "label": "SeafloorCavern_Room9_Text_MaxieWhatHaveYouWrought"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/SeafloorCavern_Room9/scripts.inc",
+    "label": "SeafloorCavern_Room9_Text_ArchieDontGetAllHighAndMighty"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/SeafloorCavern_Room9/scripts.inc",
+    "label": "SeafloorCavern_Room9_Text_MaxieWeDontHaveTimeToArgue"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/CaveOfOrigin_B1F/scripts.inc",
+    "label": "CaveOfOrigin_B1F_Text_WhereIsRayquaza"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/CaveOfOrigin_B1F/scripts.inc",
+    "label": "CaveOfOrigin_B1F_Text_ButWereInCaveOfOrigin"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/CaveOfOrigin_B1F/scripts.inc",
+    "label": "CaveOfOrigin_B1F_Text_OldLadyDidntMentionThat"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/CaveOfOrigin_B1F/scripts.inc",
+    "label": "CaveOfOrigin_B1F_Text_CantYouRememberSomehow"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MagmaHideout_4F/scripts.inc",
+    "label": "MagmaHideout_4F_Text_CourtneyIntro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MagmaHideout_4F/scripts.inc",
+    "label": "MagmaHideout_4F_Text_CourtneyDefeat"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MagmaHideout_4F/scripts.inc",
+    "label": "MagmaHideout_4F_Text_CourtneyAfter"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MagmaHideout_4F/scripts.inc",
+    "label": "MagmaHideout_4F_Text_Grunt11Intro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MagmaHideout_4F/scripts.inc",
+    "label": "MagmaHideout_4F_Text_Grunt11Defeat"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MagmaHideout_4F/scripts.inc",
+    "label": "MagmaHideout_4F_Text_Grunt11PostBattle"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MagmaHideout_4F/scripts.inc",
+    "label": "MagmaHideout_4F_Text_Grunt12Intro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MagmaHideout_4F/scripts.inc",
+    "label": "MagmaHideout_4F_Text_Grunt12Defeat"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MagmaHideout_4F/scripts.inc",
+    "label": "MagmaHideout_4F_Text_Grunt13Intro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MagmaHideout_4F/scripts.inc",
+    "label": "MagmaHideout_4F_Text_Grunt13Defeat"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MagmaHideout_4F/scripts.inc",
+    "label": "MagmaHideout_4F_Text_Grunt13PostBattle"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MagmaHideout_4F/scripts.inc",
+    "label": "MagmaHideout_4F_Text_TabithaIntro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MagmaHideout_4F/scripts.inc",
+    "label": "MagmaHideout_4F_Text_TabithaDefeat"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MagmaHideout_4F/scripts.inc",
+    "label": "MagmaHideout_4F_Text_TabithaPostBattle"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MagmaHideout_4F/scripts.inc",
+    "label": "MagmaHideout_4F_Text_MaxieGroudonWhatsWrong"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MagmaHideout_4F/scripts.inc",
+    "label": "MagmaHideout_4F_Text_MaxieOhItWasYou"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/MagmaHideout_4F/scripts.inc",
+    "label": "MagmaHideout_4F_Text_MaxieImGoingAfterGroudon"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/Route119_WeatherInstitute_1F/scripts.inc",
+    "label": "Route119_WeatherInstitute_1F_Text_Grunt1Intro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/Route119_WeatherInstitute_1F/scripts.inc",
+    "label": "Route119_WeatherInstitute_1F_Text_Grunt1Defeat"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/Route119_WeatherInstitute_1F/scripts.inc",
+    "label": "Route119_WeatherInstitute_1F_Text_Grunt4Intro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/Route119_WeatherInstitute_1F/scripts.inc",
+    "label": "Route119_WeatherInstitute_1F_Text_Grunt4Defeat"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/Route119_WeatherInstitute_1F/scripts.inc",
+    "label": "Route119_WeatherInstitute_1F_Text_Grunt4PostBattle"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/Route119_WeatherInstitute_2F/scripts.inc",
+    "label": "Route119_WeatherInstitute_2F_Text_Grunt2Intro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/Route119_WeatherInstitute_2F/scripts.inc",
+    "label": "Route119_WeatherInstitute_2F_Text_Grunt2Defeat"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/Route119_WeatherInstitute_2F/scripts.inc",
+    "label": "Route119_WeatherInstitute_2F_Text_Grunt2PostBattle"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/Route119_WeatherInstitute_2F/scripts.inc",
+    "label": "Route119_WeatherInstitute_2F_Text_Grunt3Intro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/Route119_WeatherInstitute_2F/scripts.inc",
+    "label": "Route119_WeatherInstitute_2F_Text_Grunt3Defeat"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/Route119_WeatherInstitute_2F/scripts.inc",
+    "label": "Route119_WeatherInstitute_2F_Text_Grunt3PostBattle"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/Route119_WeatherInstitute_2F/scripts.inc",
+    "label": "Route119_WeatherInstitute_2F_Text_Grunt5Intro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/Route119_WeatherInstitute_2F/scripts.inc",
+    "label": "Route119_WeatherInstitute_2F_Text_Grunt5Defeat"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/Route119_WeatherInstitute_2F/scripts.inc",
+    "label": "Route119_WeatherInstitute_2F_Text_Grunt5PostBattle"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/Route119_WeatherInstitute_2F/scripts.inc",
+    "label": "Route119_WeatherInstitute_2F_Text_ShellyIntro"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/Route119_WeatherInstitute_2F/scripts.inc",
+    "label": "Route119_WeatherInstitute_2F_Text_ShellyDefeat"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/Route119_WeatherInstitute_2F/scripts.inc",
+    "label": "Route119_WeatherInstitute_2F_Text_ShellyPostBattle"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/Route119_WeatherInstitute_2F/scripts.inc",
+    "label": "Route119_WeatherInstitute_2F_Text_WeHaveToHurryToMtPyre"
+  },
+  {
+    "owner": "main",
+    "file": "data/maps/Route119_WeatherInstitute_2F/scripts.inc",
+    "label": "Route119_WeatherInstitute_2F_Text_ThanksPleaseTakePokemon"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/Route104/scripts.inc",
+    "label": "Route104_Text_ThrowBallAtWeakenedPokemon"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/Route104/scripts.inc",
+    "label": "Route104_Text_ImNotATrainer"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/Route104/scripts.inc",
+    "label": "Route104_Text_MayHaventRaisedPokemon"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/Route104/scripts.inc",
+    "label": "Route104_Text_MayPostBattle"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/Route104/scripts.inc",
+    "label": "Route104_Text_BrendanNoConfidence"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/Route104/scripts.inc",
+    "label": "Route104_Text_BrendanIntro"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/Route104/scripts.inc",
+    "label": "Route104_Text_BrendanPostBattle"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/Route111/scripts.inc",
+    "label": "Route111_Text_TrainerTipsSpAtkSpDef"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/Route111/scripts.inc",
+    "label": "Route111_Text_MirageTowerClearlyVisible"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/Route111/scripts.inc",
+    "label": "Route111_Text_ThatWasShockingSandRainedDown"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/Route111/scripts.inc",
+    "label": "Route111_Text_MirageTowerHasntBeenSeenSince"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/Route111/scripts.inc",
+    "label": "Route111_Text_DynamoGuardTrigger"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/Route117/scripts.inc",
+    "label": "Route117_Text_DayCarePokemonHadNewMove"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/Route117/scripts.inc",
+    "label": "Route117_Text_ArentTheseFlowersPretty"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/Route118/scripts.inc",
+    "label": "Route118_Text_StevenQuestions"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/Route118/scripts.inc",
+    "label": "Route118_Text_MagikarpGuyChallenge"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/Route118/scripts.inc",
+    "label": "Route118_Text_MagikarpGuyDefeat"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/Route118/scripts.inc",
+    "label": "Route118_Text_MagikarpGuyAfter"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/Route121/scripts.inc",
+    "label": "Route121_Text_AheadLoomsMtPyre"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/Route123/scripts.inc",
+    "label": "Route123_Text_YouLikeGrassMonsTooHaveThis"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/Route123/scripts.inc",
+    "label": "Route123_Text_RouteSignMtPyre"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/VerdanturfTown_House/scripts.inc",
+    "label": "VerdanturfTown_House_Text_DefeatEliteFourInARow"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/SlateportCity_PokemonFanClub/scripts.inc",
+    "label": "SlateportCity_PokemonFanClub_Text_FurfrouOffer"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/SlateportCity_PokemonFanClub/scripts.inc",
+    "label": "SlateportCity_PokemonFanClub_Text_FurfrouComplete"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/SlateportCity_PokemonFanClub/scripts.inc",
+    "label": "SlateportCity_PokemonFanClub_Text_NothingElseToGiveYou"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/MauvilleCity_House1/scripts.inc",
+    "label": "MauvilleCity_House1_Text_ExplainRockSmash"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/LilycoveCity_CoveLilyMotel_2F/scripts.inc",
+    "label": "LilycoveCity_CoveLilyMotel_2F_Text_BuffelChallenge"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/LilycoveCity_CoveLilyMotel_2F/scripts.inc",
+    "label": "LilycoveCity_CoveLilyMotel_2F_Text_GirlsAreCute"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/LilycoveCity_ContestHall/scripts.inc",
+    "label": "LilycoveCity_ContestHall_Text_WantCuteMonOfMyOwn"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/LilycoveCity_House2/scripts.inc",
+    "label": "LilycoveCity_House2_Text_NotAwakeYetHaveThis"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/LilycoveCity_House2/scripts.inc",
+    "label": "LilycoveCity_House2_Text_SleepIsEssential"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/JaggedPass/scripts.inc",
+    "label": "JaggedPass_Text_DianaRegister"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/AquaHideout_B2F/scripts.inc",
+    "label": "AquaHideout_B2F_Text_MattIntro"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/AquaHideout_B2F/scripts.inc",
+    "label": "AquaHideout_B2F_Text_MattDefeat"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/AquaHideout_B2F/scripts.inc",
+    "label": "AquaHideout_B2F_Text_OurBossGotThroughHisPreparations"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/AquaHideout_B2F/scripts.inc",
+    "label": "AquaHideout_B2F_Text_MattPostBattle"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/AquaHideout_B2F/scripts.inc",
+    "label": "AquaHideout_B2F_Text_Grunt4Intro"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/AquaHideout_B2F/scripts.inc",
+    "label": "AquaHideout_B2F_Text_Grunt4Defeat"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/AquaHideout_B2F/scripts.inc",
+    "label": "AquaHideout_B2F_Text_Grunt4PostBattle"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/AquaHideout_B2F/scripts.inc",
+    "label": "AquaHideout_B2F_Text_Grunt6Intro"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/SeafloorCavern_Room3/scripts.inc",
+    "label": "SeafloorCavern_Room3_Text_ShellyIntro"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/SeafloorCavern_Room3/scripts.inc",
+    "label": "SeafloorCavern_Room3_Text_ShellyDefeat"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/SeafloorCavern_Room3/scripts.inc",
+    "label": "SeafloorCavern_Room3_Text_ShellyPostBattle"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/SeafloorCavern_Room3/scripts.inc",
+    "label": "SeafloorCavern_Room3_Text_Grunt5Intro"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/SeafloorCavern_Room3/scripts.inc",
+    "label": "SeafloorCavern_Room3_Text_Grunt5Defeat"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/SeafloorCavern_Room3/scripts.inc",
+    "label": "SeafloorCavern_Room3_Text_Grunt5PostBattle"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/VictoryRoad_1F/scripts.inc",
+    "label": "VictoryRoad_1F_Text_WallyNotGoingToLoseAnymore"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/VictoryRoad_1F/scripts.inc",
+    "label": "VictoryRoad_1F_Text_WallyEntranceDefeat"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/VictoryRoad_1F/scripts.inc",
+    "label": "VictoryRoad_1F_Text_WallyPostEntranceBattle"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/VictoryRoad_1F/scripts.inc",
+    "label": "VictoryRoad_1F_Text_WallyIntro"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/VictoryRoad_1F/scripts.inc",
+    "label": "VictoryRoad_1F_Text_WallyDefeat"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/VictoryRoad_1F/scripts.inc",
+    "label": "VictoryRoad_1F_Text_WallyPostBattle"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/VictoryRoad_1F/scripts.inc",
+    "label": "VictoryRoad_1F_Text_EdgarPostBattle"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/MagmaHideout_1F/scripts.inc",
+    "label": "MagmaHideout_1F_Text_Grunt1Intro"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/MagmaHideout_1F/scripts.inc",
+    "label": "MagmaHideout_1F_Text_Grunt1Defeat"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/MagmaHideout_1F/scripts.inc",
+    "label": "MagmaHideout_1F_Text_Grunt1PostBattle"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/MagmaHideout_1F/scripts.inc",
+    "label": "MagmaHideout_1F_Text_Grunt2Intro"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/MagmaHideout_1F/scripts.inc",
+    "label": "MagmaHideout_1F_Text_Grunt2Defeat"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/MagmaHideout_1F/scripts.inc",
+    "label": "MagmaHideout_1F_Text_Grunt2PostBattle"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/MagmaHideout_2F_2R/scripts.inc",
+    "label": "MagmaHideout_2F_2R_Text_Grunt6Intro"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/MagmaHideout_2F_2R/scripts.inc",
+    "label": "MagmaHideout_2F_2R_Text_Grunt6Defeat"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/MagmaHideout_2F_2R/scripts.inc",
+    "label": "MagmaHideout_2F_2R_Text_Grunt6PostBattle"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/MagmaHideout_2F_2R/scripts.inc",
+    "label": "MagmaHideout_2F_2R_Text_Grunt8Intro"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/BattleFrontier_BattleTowerLobby/scripts.inc",
+    "label": "BattleFrontier_BattleTowerLobby_Text_CircuitRewardNoRoom"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/BattleFrontier_BattleTowerLobby/scripts.inc",
+    "label": "BattleFrontier_BattleTowerLobby_Text_CircuitLocked"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/BattleFrontier_BattlePikeLobby/scripts.inc",
+    "label": "BattleFrontier_BattlePikeLobby_Text_TrainersWhicheverPathIChoose"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/BattleFrontier_RankingHall/scripts.inc",
+    "label": "BattleFrontier_RankingHall_Text_IsYourNameOnThisList"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/BattleFrontier_RankingHall/scripts.inc",
+    "label": "BattleFrontier_RankingHall_Text_WorkHarderIfYouSawFriendsName"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/BattleFrontier_RankingHall/scripts.inc",
+    "label": "BattleFrontier_RankingHall_Text_MyNamesNotUpThere"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/BattleFrontier_Lounge1/scripts.inc",
+    "label": "BattleFrontier_Lounge1_Text_EvExplanation"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/BattleFrontier_Lounge1/scripts.inc",
+    "label": "BattleFrontier_Lounge1_Text_EvReminder"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/BattleFrontier_Lounge7/scripts.inc",
+    "label": "BattleFrontier_Lounge7_Text_LeftTutorFree"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/BattleFrontier_Lounge7/scripts.inc",
+    "label": "BattleFrontier_Lounge7_Text_RightTutorFree"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/AlteringCave_1F/scripts.inc",
+    "label": "AlteringCave_1F_Text_Researcher"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/AlteringCave_B1F/scripts.inc",
+    "label": "AlteringCave_B1F_Text_LeafIntro"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/AlteringCave_B1F/scripts.inc",
+    "label": "AlteringCave_B1F_Text_LeafDefeat"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/AlteringCave_B1F/scripts.inc",
+    "label": "AlteringCave_B1F_Text_LeafAfter"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/CaveOfOrigin_DianciesRoom/scripts.inc",
+    "label": "CaveOfOrigin_DianciesRoom_Text_WallaceIntro"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/CaveOfOrigin_DianciesRoom/scripts.inc",
+    "label": "CaveOfOrigin_DianciesRoom_Text_WallaceDefeat"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/CaveOfOrigin_DianciesRoom/scripts.inc",
+    "label": "CaveOfOrigin_DianciesRoom_Text_WallaceAfter"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/CaveOfOrigin_DianciesRoom/scripts.inc",
+    "label": "CaveOfOrigin_DianciesRoom_Text_WallaceNotReady"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/CaveOfOrigin_DianciesRoom/scripts.inc",
+    "label": "CaveOfOrigin_DianciesRoom_Text_WallaceOffer"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/DewfordMeadow/scripts.inc",
+    "label": "DewfordMeadow_Text_Warden"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/DewfordMeadow/scripts.inc",
+    "label": "DewfordMeadow_Text_ManorSign"
+  },
+  {
+    "owner": "npcs_a",
+    "file": "data/maps/Seaspray_Cave/scripts.inc",
+    "label": "Seaspray_Cave_Text_Explorer"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/Route102/scripts.inc",
+    "label": "Route102_Text_CatchWholeBunchOfPokemon"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/Route112/scripts.inc",
+    "label": "Route112_Text_LeaderGoingToAwakenThing"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/Route112/scripts.inc",
+    "label": "Route112_Text_YeahWeNeedMeteorite"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/Route112/scripts.inc",
+    "label": "Route112_Text_MtChimneySign"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/Route114/scripts.inc",
+    "label": "Route114_Text_GoodRodOffer"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/Route114/scripts.inc",
+    "label": "Route114_Text_GoodRodAdvice"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/Route115/scripts.inc",
+    "label": "Route115_Text_NeverKnowWhenCavePokemonWillAppear"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/FallarborTown_MoveRelearnersHouse/scripts.inc",
+    "label": "FallarborTown_MoveRelearnersHouse_Text_IvyEvieIntro3"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/SlateportCity_House/scripts.inc",
+    "label": "SlateportCity_House_Text_NatureToDoWithStatGains"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/MauvilleCity_Mart/scripts.inc",
+    "label": "MauvilleCity_Mart_Text_ItemsToTemporarilyElevateStats"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/LilycoveCity_DepartmentStore_4F/scripts.inc",
+    "label": "LilycoveCity_DepartmentStore_4F_Text_AttackOrDefense"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/MossdeepCity_House1/scripts.inc",
+    "label": "MossdeepCity_House1_Text_CynthiaDefeat"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/MossdeepCity_House1/scripts.inc",
+    "label": "MossdeepCity_House1_Text_CynthiaAfter"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/Route117_PokemonDayCare/scripts.inc",
+    "label": "Route117_PokemonDayCare_Text_TogepiEggAfter"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/RusturfTunnel/scripts.inc",
+    "label": "RusturfTunnel_Text_GruntIntro"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/AquaHideout_B1F/scripts.inc",
+    "label": "AquaHideout_B1F_Text_Grunt2PostBattle"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/AquaHideout_B1F/scripts.inc",
+    "label": "AquaHideout_B1F_Text_Grunt3PostBattle"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/SeafloorCavern_Entrance/scripts.inc",
+    "label": "SeafloorCavern_Entrance_Text_HearMagmaNearMossdeep"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/SeafloorCavern_Entrance/scripts.inc",
+    "label": "SeafloorCavern_Entrance_Text_HearMagmaNearMossdeepShort"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/SeafloorCavern_Room1/scripts.inc",
+    "label": "SeafloorCavern_Room1_Text_Grunt1Intro"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/SeafloorCavern_Room1/scripts.inc",
+    "label": "SeafloorCavern_Room1_Text_Grunt1Defeat"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/SeafloorCavern_Room1/scripts.inc",
+    "label": "SeafloorCavern_Room1_Text_Grunt1PostBattle"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/SeafloorCavern_Room1/scripts.inc",
+    "label": "SeafloorCavern_Room1_Text_Grunt2Intro"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/SeafloorCavern_Room1/scripts.inc",
+    "label": "SeafloorCavern_Room1_Text_Grunt2PostBattle"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/CaveOfOrigin_1F/scripts.inc",
+    "label": "CaveOfOrigin_1F_Text_CarbinkStuck"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/MagmaHideout_3F_1R/scripts.inc",
+    "label": "MagmaHideout_3F_1R_Text_Grunt16Intro"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/MagmaHideout_3F_1R/scripts.inc",
+    "label": "MagmaHideout_3F_1R_Text_Grunt16PostBattle"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/SSTidalCorridor/scripts.inc",
+    "label": "SSTidalCorridor_Text_ScottBattleFrontierInvite"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/BattleFrontier_OutsideWest/scripts.inc",
+    "label": "BattleFrontier_OutsideWest_Text_ThisIsBattleTower"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/BattleFrontier_OutsideWest/scripts.inc",
+    "label": "BattleFrontier_OutsideWest_Text_YoureOffToChallengeDome"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/BattleFrontier_OutsideWest/scripts.inc",
+    "label": "BattleFrontier_OutsideWest_Text_DomeAceLookedBecauseOfMyCheering"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/BattleFrontier_OutsideWest/scripts.inc",
+    "label": "BattleFrontier_OutsideWest_Text_FansOverThereUsedToBeTrainers"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/BattleFrontier_OutsideEast/scripts.inc",
+    "label": "BattleFrontier_OutsideEast_Text_EnoughBattlePointsForDoll"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
+    "label": "BattleFrontier_ExchangeServiceCorner_Text_MoreBattlePointsForRecord"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
+    "label": "BattleFrontier_ExchangeServiceCorner_Text_DreamBallDesc"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/BattleFrontier_Lounge5/scripts.inc",
+    "label": "BattleFrontier_Lounge5_Text_NatureGirlGreeting"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/BattleFrontier_Lounge6/scripts.inc",
+    "label": "BattleFrontier_Lounge6_Text_WouldYouLikeToTrade"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/Route110_TrickHousePuzzle1/scripts.inc",
+    "label": "Route110_TrickHousePuzzle1_Text_SallyIntro"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/Route110_TrickHousePuzzle5/scripts.inc",
+    "label": "Route110_TrickHousePuzzle5_Text_Mechadoll3Intro"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/AshenWoods/scripts.inc",
+    "label": "AshenWoods_Text_AlannahIntro"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/AshenWoods/scripts.inc",
+    "label": "AshenWoods_Text_MartinAfter"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/AshenWoods/scripts.inc",
+    "label": "AshenWoods_Text_RomanIntro"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/AshenWoods/scripts.inc",
+    "label": "AshenWoods_Text_RomanDefeat"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/AshenWoods/scripts.inc",
+    "label": "AshenWoods_Text_RomanAfter"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/AshenWoods/scripts.inc",
+    "label": "AshenWoods_Text_ElmerIntro"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/AshenWoods/scripts.inc",
+    "label": "AshenWoods_Text_ElmerAfter"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/AshenWoods/scripts.inc",
+    "label": "AshenWoods_Text_Caretaker"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/EmberPath/scripts.inc",
+    "label": "EmberPath_Text_Warden"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/SandstrewnRuins/scripts.inc",
+    "label": "SandstrewnRuins_Text_Archaeologist"
+  },
+  {
+    "owner": "npcs_b",
+    "file": "data/maps/ScorchedSlab_B2F/scripts.inc",
+    "label": "ScorchedSlab_B2F_Text_Warden"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/apprentice.inc",
+    "label": "gText_ApprenticeWhichLevelMode0"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/apprentice.inc",
+    "label": "gText_ApprenticeWhichLevelMode1"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/apprentice.inc",
+    "label": "gText_ApprenticeWhichLevelMode2"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/apprentice.inc",
+    "label": "gText_ApprenticeWhichLevelMode3"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/apprentice.inc",
+    "label": "gText_ApprenticeWhichLevelMode4"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/apprentice.inc",
+    "label": "gText_ApprenticeWhichLevelMode5"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/apprentice.inc",
+    "label": "gText_ApprenticeWhichLevelMode6"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/apprentice.inc",
+    "label": "gText_ApprenticeWhichLevelMode7"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/apprentice.inc",
+    "label": "gText_ApprenticeWhichLevelMode8"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/apprentice.inc",
+    "label": "gText_ApprenticeWhichLevelMode9"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/apprentice.inc",
+    "label": "gText_ApprenticeWhichLevelMode10"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/apprentice.inc",
+    "label": "gText_ApprenticeWhichLevelMode11"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/apprentice.inc",
+    "label": "gText_ApprenticeWhichLevelMode12"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/apprentice.inc",
+    "label": "gText_ApprenticePleaseTeach13"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/apprentice.inc",
+    "label": "gText_ApprenticeWhichLevelMode13"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/apprentice.inc",
+    "label": "gText_ApprenticeWhichLevelMode14"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/apprentice.inc",
+    "label": "gText_ApprenticeWhichLevelMode15"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/battle_tent.inc",
+    "label": "VerdanturfTown_BattleTentLobby_Text_WelcomeToBattleTent"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/birch_speech.inc",
+    "label": "gText_Birch_MainSpeech"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/event_ticket_1.inc",
+    "label": "EventTicket_Text_SouthernIslandSailBack"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/match_call.inc",
+    "label": "MatchCall_NegativeBattleText3"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/match_call.inc",
+    "label": "MatchCall_NegativeBattleText4"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/match_call.inc",
+    "label": "MatchCall_NegativeBattleText10"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/match_call.inc",
+    "label": "MatchCall_Text_Drake"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/match_call.inc",
+    "label": "MatchCall_Text_May8"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/match_call.inc",
+    "label": "MatchCall_Text_Brendan8"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/match_call.inc",
+    "label": "MatchCall_Text_Scott6"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/move_relearner.inc",
+    "label": "MoveRelearner_Text_AnythingElse"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/move_tutors.inc",
+    "label": "MoveTutor_Text_ThisMoveCanOnlyBeLearnedOnce"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/pkmn_center_nurse.inc",
+    "label": "gText_EmeraldChampionsExplainTools"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/pokedex_rating.inc",
+    "label": "gBirchDexRatingText_Cancel"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/pokedex_rating.inc",
+    "label": "gBirchDexRatingText_LessThan110"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/pokedex_rating.inc",
+    "label": "gBirchDexRatingText_LessThan130"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/pokedex_rating.inc",
+    "label": "gBirchDexRatingText_DexCompleted"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route111_Text_WiltonDefeat"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route111_Text_BrookeIntro"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route111_Text_BrookePostRematch"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route115_Text_TimothyIntro"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route115_Text_TimothyDefeat"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route118_Text_DeandreIntro"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route118_Text_DeandreDefeat"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route119_Text_DonaldIntro"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route119_Text_DonaldDefeat"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route119_Text_DonaldPostBattle"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route119_Text_GregIntro"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route119_Text_GregDefeat"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route119_Text_GregPostBattle"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route119_Text_KentIntro"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route119_Text_KentDefeat"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route119_Text_KentPostBattle"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route119_Text_JacksonDefeat"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route119_Text_JacksonPostBattle"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route119_Text_CatherinePostBattle"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route119_Text_YasuIntro"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route119_Text_YasuDefeat"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route119_Text_YasuPostBattle"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route119_Text_TakashiIntro"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route119_Text_TakashiDefeat"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route119_Text_TakashiPostBattle"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route119_Text_FabianIntro"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route119_Text_FabianDefeat"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route119_Text_RachelIntro"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route119_Text_RachelDefeat"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route119_Text_RachelPostBattle"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route120_Text_JenniferIntro"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route120_Text_JenniferDefeat"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route120_Text_JenniferPostBattle"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route120_Text_ClarissaDefeat"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route120_Text_ClarissaPostBattle"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route120_Text_LeonelPostBattle"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route123_Text_WendyIntro"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route123_Text_WendyPostBattle"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route123_Text_BraxtonPostBattle"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route127_Text_AthenaDefeat"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route128_Text_IsaiahRegister"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route128_Text_WayneIntro"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route128_Text_WaynePostBattle"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route132_Text_JonathanPostBattle"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route133_Text_WarrenIntro"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route133_Text_MollieIntro"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route134_Text_MarleyIntro"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route134_Text_MarleyDefeat"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/trainers.inc",
+    "label": "Route134_Text_MarleyPostBattle"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/tv.inc",
+    "label": "gTVSecretBaseVisitText09"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/tv.inc",
+    "label": "gTVThePokemonBattleSeminarText01"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/tv.inc",
+    "label": "gTVThePokemonBattleSeminarText02"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/tv.inc",
+    "label": "gTVThePokemonBattleSeminarText06"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/tv.inc",
+    "label": "ContestLiveUpdates_Text_LastInBothRounds"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/tv.inc",
+    "label": "ContestLiveUpdates_Text_RepeatedAppeals"
+  },
+  {
+    "owner": "shared",
+    "file": "data/text/tv.inc",
+    "label": "ContestLiveUpdates_Text_ValiantEffortButLost"
+  },
+  {
+    "owner": "shared",
+    "file": "data/scripts/elite_four.inc",
+    "label": "PokemonLeague_EliteFour_Text_Retired"
+  },
+  {
+    "owner": "shared",
+    "file": "data/scripts/emerald_champions.inc",
+    "label": "EmeraldChampions_Text_ExplainBattleSets"
+  },
+  {
+    "owner": "shared",
+    "file": "data/scripts/emerald_champions.inc",
+    "label": "EmeraldChampions_Text_FormGiftFull"
+  },
+  {
+    "owner": "shared",
+    "file": "data/scripts/emerald_champions.inc",
+    "label": "EmeraldChampions_Text_CosmogInfo"
+  },
+  {
+    "owner": "shared",
+    "file": "data/scripts/flavor_text.inc",
+    "label": "Text_NothingButPokemonBooks"
+  },
+  {
+    "owner": "shared",
+    "file": "data/scripts/follower.inc",
+    "label": "gText_FollowerDefault"
+  },
+  {
+    "owner": "shared",
+    "file": "data/scripts/safari_zone.inc",
+    "label": "SafariZone_Northeast_Text_Woman"
+  },
+  {
+    "owner": "shared",
+    "file": "data/scripts/secret_power_tm.inc",
+    "label": "Route111_Text_MakingRoomUseTMToMakeYourOwn"
+  },
+  {
+    "owner": "shared",
+    "file": "data/scripts/secret_power_tm.inc",
+    "label": "Route111_Text_ExplainSecretPower"
+  }
+]

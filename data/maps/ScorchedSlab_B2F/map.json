@@ -106,17 +106,16 @@
       "flag": "FLAG_TEMP_15"
     },
     {
-      "local_id": "LOCALID_SCORCHED_SLAB_B2F_LEGENDARY_SIGN",
-      "graphics_id": "OBJ_EVENT_GFX_DEOXYS_TRIANGLE",
-      "x": 12,
-      "y": 15,
-      "elevation": 4,
-      "movement_type": "MOVEMENT_TYPE_NONE",
+      "graphics_id": "OBJ_EVENT_GFX_HIKER",
+      "x": 19,
+      "y": 16,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Common_EventScript_LegendaryLandmark",
+      "script": "ScorchedSlab_B2F_EventScript_Warden",
       "flag": "0"
     }
   ],

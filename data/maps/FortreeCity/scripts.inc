@@ -99,11 +99,13 @@ FortreeCity_Text_SawGiganticPokemonInSky:
 FortreeCity_Text_SomethingBlockingGym:
 	.string "I want to go to the POKéMON GYM,\n"
 	.string "but something's blocking the way.\p"
-	.string "After all the bother I went through\n"
-	.string "training on ROUTE 120…\p"
-	.string "STEVEN is on the bridge east of town.\n"
-	.string "He was studying something invisible.\p"
-	.string "Maybe he can help us clear the GYM path!$"
+	.string "After all the bother I went\n"
+	.string "through training on ROUTE 120…\p"
+	.string "STEVEN is on the bridge east of\n"
+	.string "town. He was studying something\l"
+	.string "invisible.\p"
+	.string "Maybe he can help us clear the\n"
+	.string "GYM path!$"
 
 FortreeCity_Text_ThisTimeIllBeatWinona:
 	.string "I've got my pride-and-joy POKéMON\n"
@@ -130,8 +132,12 @@ FortreeCity_Text_BugPokemonComeThroughWindow:
 	.string "It can be really startling.$"
 
 FortreeCity_Text_PokemonThatEvolveWhenTraded:
-	.string "There are POKéMON that evolve when\n"
-	.string "you trade them! That's what I heard.$"
+	.string "Some POKéMON evolve when you\n"
+	.string "trade them.\p"
+	.string "A LINKING CORD lets you evolve\n"
+	.string "those partners yourself, too. Ask\l"
+	.string "a CENTER vendor about evolution\l"
+	.string "items!$"
 
 FortreeCity_Text_SomethingUnseeable:
 	.string "Something unseeable is in the way.$"

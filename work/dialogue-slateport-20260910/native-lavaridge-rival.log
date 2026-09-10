@@ -1,0 +1,50 @@
+64 VAR_LAVARIDGE_TOWN_STATE 0 RESULT frames=9000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=3a012eb3cfa4e85f nonzero_pixels=38354 save_bytes=0
+READ width=4 address=0200224c value=00000002
+READ width=4 address=02002274 value=00000000
+READ width=4 address=02002278 value=00000000
+READ width=4 address=0200225c value=0000000c
+READ width=4 address=0200227c value=00000000
+READ width=4 address=02002284 value=00000000
+READ width=4 address=02002268 value=00000005
+READ width=4 address=0200226c value=00000010
+ 
+65 VAR_LAVARIDGE_TOWN_STATE 0 RESULT frames=9000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=bccc4a936ca28f93 nonzero_pixels=38365 save_bytes=0
+READ width=4 address=0200224c value=00000002
+READ width=4 address=02002274 value=00000000
+READ width=4 address=02002278 value=00000000
+READ width=4 address=0200225c value=0000000c
+READ width=4 address=0200227c value=00000000
+READ width=4 address=02002284 value=00000000
+READ width=4 address=02002268 value=00000005
+READ width=4 address=0200226c value=00000010
+ 
+66 VAR_LAVARIDGE_TOWN_STATE 0 RESULT frames=9000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=3ff8eb8c8debdb91 nonzero_pixels=38331 save_bytes=0
+READ width=4 address=0200224c value=00000002
+READ width=4 address=02002274 value=00000000
+READ width=4 address=02002278 value=00000000
+READ width=4 address=0200225c value=0000000c
+READ width=4 address=0200227c value=00000000
+READ width=4 address=02002284 value=00000000
+READ width=4 address=02002268 value=00000009
+READ width=4 address=0200226c value=00000007
+ 
+67 VAR_LAVARIDGE_TOWN_STATE 0 RESULT frames=9000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=aef27b3d38058525 nonzero_pixels=38342 save_bytes=0
+READ width=4 address=0200224c value=00000002
+READ width=4 address=02002274 value=00000000
+READ width=4 address=02002278 value=00000000
+READ width=4 address=0200225c value=0000000c
+READ width=4 address=0200227c value=00000000
+READ width=4 address=02002284 value=00000000
+READ width=4 address=02002268 value=00000009
+READ width=4 address=0200226c value=00000007
+ 
+68 VAR_LAVARIDGE_TOWN_STATE 0 RESULT frames=9000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=7d19628cd7a8e663 nonzero_pixels=38358 save_bytes=0
+READ width=4 address=0200224c value=00000002
+READ width=4 address=02002274 value=00000000
+READ width=4 address=02002278 value=00000000
+READ width=4 address=0200225c value=0000000c
+READ width=4 address=0200227c value=00000000
+READ width=4 address=02002284 value=00000000
+READ width=4 address=02002268 value=00000005
+READ width=4 address=0200226c value=00000010
+ 

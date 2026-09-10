@@ -1,0 +1,9 @@
+{
+  "schema_version": 2,
+  "inputs_sha256": "a250b75a271115ba52dd11dba8d9768b66023d7f75ba1debdd5dc4df3ba7eea0",
+  "input_count": 28977,
+  "artifacts": {
+    "pokeemerald-repair-20260908-release.gba": "226bd3e025e096254f710c42dec339a00eb6d744bfc8b5b3cdbe12022513ab7c",
+    "pokeemerald-repair-20260908-release.elf": "729118910432a5e9cfbbdc676af9342f2de8257be3c7f256e9776c3571f7460e"
+  }
+}

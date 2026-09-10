@@ -1,0 +1,220 @@
+tools/scaninc/scaninc -M build/emerald-test/test/battle/ai/emerald_champions_plans.d -g build/assets -I include -I tools/agbcc/include test/battle/ai/emerald_champions_plans.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/battle/ai/emerald_champions_plans.o test/battle/ai/emerald_champions_plans.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 4
+[0] EC live review Dawson timing: complete cold decision with six-player party: [32mPASS[0m
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Fake Out target=2
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Brave Bird target=2
+AI decision turn=2 actor=1 move=Knock Off target=2
+AI decision turn=2 actor=3 move=Tailwind target=3
+E25_DAWSON_COMPLETE_TIMING trainer=694 setupFrames=7 decisionFrames=42 completeFrames=49 warmFrames=41 first=3 moves=Knock Off/Tailwind
+[1] EC live review Dawson disruption: Ghost phazing and noncontact Fire: [32mPASS[0m
+DAWSON_INPUT reserves=0 slot=0 lv=12 HP=45 Atk=34 Def=22 SpA=16 SpD=18 Speed=18 item=494 ability=181
+DAWSON_INPUT reserves=0 slot=1 lv=12 HP=34 Atk=27 Def=17 SpA=14 SpD=17 Speed=31 item=481 ability=51
+DAWSON_INPUT reserves=0 slot=2 lv=12 HP=43 Atk=27 Def=22 SpA=16 SpD=19 Speed=20 item=494 ability=218
+DAWSON_INPUT reserves=0 slot=3 lv=12 HP=39 Atk=28 Def=18 SpA=16 SpD=18 Speed=37 item=425 ability=92
+AI decision turn=1 actor=0 move=Fake Out target=3
+AI decision turn=1 actor=1 move=Knock Off target=2
+AI switch turn=1 actor=3 party=2
+AI decision turn=1 actor=2 move=Dragon Tail target=1
+AI decision turn=2 actor=1 move=Tail Slap target=0
+AI decision turn=2 actor=3 move=Double-Edge target=0
+DAWSON_TEMPO board=10 turns=1 reserves=0 tailwind=0 rawSpeeds=37/20 ownHP=39/41 friendship=0/0
+DAWSON_AFTER board=10 turns=1 reserves=0 native=1 species=572/831 HP=39/41 foes=49/23 moves=-/- weather=0 duration=0 speeds=37/20 foeSpeeds=39/32 AtkStages=6/6 foeStatus=0/0 faints=0/0
+DAWSON_CONTROL board=0 turns=1 tailwind=0 Taunt=0/0 items=425/494 statuses=0/0
+DAWSON_INPUT reserves=0 slot=0 lv=12 HP=45 Atk=34 Def=22 SpA=16 SpD=18 Speed=18 item=494 ability=181
+DAWSON_INPUT reserves=0 slot=1 lv=12 HP=34 Atk=27 Def=17 SpA=14 SpD=17 Speed=31 item=481 ability=51
+DAWSON_INPUT reserves=0 slot=2 lv=12 HP=43 Atk=27 Def=22 SpA=16 SpD=19 Speed=20 item=494 ability=218
+DAWSON_INPUT reserves=0 slot=3 lv=12 HP=39 Atk=28 Def=18 SpA=16 SpD=18 Speed=37 item=425 ability=92
+AI decision turn=1 actor=0 move=Fake Out target=3
+AI decision turn=1 actor=1 move=Knock Off target=2
+AI switch turn=1 actor=3 party=2
+AI decision turn=1 actor=2 move=Dragon Tail target=1
+AI decision turn=2 actor=0 move=Taunt target=3
+AI decision turn=2 actor=1 move=Tail Slap target=0
+AI decision turn=2 actor=2 move=Bite target=1
+AI decision turn=2 actor=3 move=Double-Edge target=0
+AI switch turn=3 actor=1 party=1
+AI decision turn=3 actor=3 move=Double-Edge target=0
+DAWSON_TEMPO board=10 turns=2 reserves=0 tailwind=0 rawSpeeds=37/20 ownHP=28/36 friendship=0/0
+DAWSON_AFTER board=10 turns=2 reserves=0 native=2 species=572/831 HP=28/36 foes=13/23 moves=Tail Slap/Double-Edge weather=0 duration=0 speeds=37/20 foeSpeeds=39/32 AtkStages=6/6 foeStatus=0/0 faints=0/0
+DAWSON_CONTROL board=0 turns=2 tailwind=0 Taunt=0/2 items=425/494 statuses=0/0
+DAWSON_INPUT reserves=0 slot=0 lv=12 HP=45 Atk=34 Def=22 SpA=16 SpD=18 Speed=18 item=494 ability=181
+DAWSON_INPUT reserves=0 slot=1 lv=12 HP=34 Atk=27 Def=17 SpA=14 SpD=17 Speed=31 item=481 ability=51
+DAWSON_INPUT reserves=0 slot=2 lv=12 HP=43 Atk=27 Def=22 SpA=16 SpD=19 Speed=20 item=494 ability=218
+DAWSON_INPUT reserves=0 slot=3 lv=12 HP=39 Atk=28 Def=18 SpA=16 SpD=18 Speed=37 item=425 ability=92
+AI decision turn=1 actor=0 move=Flamethrower target=1
+AI decision turn=1 actor=1 move=Fake Out target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Brave Bird target=2
+AI decision turn=2 actor=1 move=Knock Off target=2
+AI decision turn=2 actor=3 move=Tailwind target=3
+DAWSON_TEMPO board=11 turns=1 reserves=0 tailwind=0 rawSpeeds=18/31 ownHP=45/10 friendship=0/0
+DAWSON_AFTER board=11 turns=1 reserves=0 native=1 species=974/821 HP=45/10 foes=43/11 moves=Fake Out/Brave Bird weather=0 duration=0 speeds=18/31 foeSpeeds=27/17 AtkStages=6/6 foeStatus=0/0 faints=0/0
+DAWSON_CONTROL board=1 turns=1 tailwind=0 Taunt=0/0 items=494/481 statuses=0/0
+DAWSON_INPUT reserves=0 slot=0 lv=12 HP=45 Atk=34 Def=22 SpA=16 SpD=18 Speed=18 item=494 ability=181
+DAWSON_INPUT reserves=0 slot=1 lv=12 HP=34 Atk=27 Def=17 SpA=14 SpD=17 Speed=31 item=481 ability=51
+DAWSON_INPUT reserves=0 slot=2 lv=12 HP=43 Atk=27 Def=22 SpA=16 SpD=19 Speed=20 item=494 ability=218
+DAWSON_INPUT reserves=0 slot=3 lv=12 HP=39 Atk=28 Def=18 SpA=16 SpD=18 Speed=37 item=425 ability=92
+AI decision turn=1 actor=0 move=Flamethrower target=1
+AI decision turn=1 actor=1 move=Fake Out target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Brave Bird target=2
+AI decision turn=2 actor=0 move=Flamethrower target=1
+AI decision turn=2 actor=1 move=Knock Off target=2
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=3 move=Tailwind target=3
+AI decision turn=3 actor=1 move=Knock Off target=0
+AI decision turn=3 actor=3 move=Brave Bird target=0
+DAWSON_TEMPO board=11 turns=2 reserves=0 tailwind=3 rawSpeeds=18/31 ownHP=17/10 friendship=0/0
+DAWSON_AFTER board=11 turns=2 reserves=0 native=2 species=974/821 HP=17/10 foes=43/0 moves=Knock Off/Tailwind weather=0 duration=0 speeds=36/62 foeSpeeds=27/0 AtkStages=6/6 foeStatus=0/0 faints=0/1
+DAWSON_CONTROL board=1 turns=2 tailwind=3 Taunt=0/0 items=494/481 statuses=0/0
+DAWSON_INPUT reserves=1 slot=0 lv=12 HP=45 Atk=34 Def=22 SpA=16 SpD=18 Speed=18 item=494 ability=181
+DAWSON_INPUT reserves=1 slot=1 lv=12 HP=34 Atk=27 Def=17 SpA=14 SpD=17 Speed=31 item=481 ability=51
+DAWSON_INPUT reserves=1 slot=2 lv=12 HP=43 Atk=27 Def=22 SpA=16 SpD=19 Speed=20 item=494 ability=218
+DAWSON_INPUT reserves=1 slot=3 lv=12 HP=39 Atk=28 Def=18 SpA=16 SpD=18 Speed=37 item=425 ability=92
+AI decision turn=1 actor=0 move=Flamethrower target=1
+AI decision turn=1 actor=1 move=Double-Edge target=2
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Tail Slap target=2
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Tail Slap target=0
+DAWSON_TEMPO board=12 turns=1 reserves=1 tailwind=0 rawSpeeds=20/37 ownHP=11/39 friendship=0/0
+DAWSON_AFTER board=12 turns=1 reserves=1 native=1 species=831/572 HP=11/39 foes=48/0 moves=Double-Edge/Tail Slap weather=0 duration=0 speeds=20/37 foeSpeeds=27/0 AtkStages=6/6 foeStatus=0/0 faints=0/1
+DAWSON_CONTROL board=2 turns=1 tailwind=0 Taunt=0/0 items=494/425 statuses=0/0
+DAWSON_INPUT reserves=1 slot=0 lv=12 HP=45 Atk=34 Def=22 SpA=16 SpD=18 Speed=18 item=494 ability=181
+DAWSON_INPUT reserves=1 slot=1 lv=12 HP=34 Atk=27 Def=17 SpA=14 SpD=17 Speed=31 item=481 ability=51
+DAWSON_INPUT reserves=1 slot=2 lv=12 HP=43 Atk=27 Def=22 SpA=16 SpD=19 Speed=20 item=494 ability=218
+DAWSON_INPUT reserves=1 slot=3 lv=12 HP=39 Atk=28 Def=18 SpA=16 SpD=18 Speed=37 item=425 ability=92
+AI decision turn=1 actor=0 move=Flamethrower target=1
+AI decision turn=1 actor=1 move=Double-Edge target=2
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Tail Slap target=2
+AI decision turn=2 actor=0 move=Flamethrower target=1
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Tail Slap target=0
+AI decision turn=3 actor=1 move=Double-Edge target=0
+AI decision turn=3 actor=3 move=Tail Slap target=0
+DAWSON_TEMPO board=12 turns=2 reserves=1 tailwind=0 rawSpeeds=20/37 ownHP=11/39 friendship=0/0
+DAWSON_AFTER board=12 turns=2 reserves=1 native=2 species=831/572 HP=11/39 foes=28/0 moves=Protect/Tail Slap weather=0 duration=0 speeds=20/37 foeSpeeds=27/0 AtkStages=6/6 foeStatus=0/0 faints=0/1
+DAWSON_CONTROL board=2 turns=2 tailwind=0 Taunt=0/0 items=494/425 statuses=0/0
+[2] EC live review Dawson core: physical special leads and reserves: [32mPASS[0m
+DAWSON_INPUT reserves=0 slot=0 lv=12 HP=45 Atk=34 Def=22 SpA=16 SpD=18 Speed=18 item=494 ability=181
+DAWSON_INPUT reserves=0 slot=1 lv=12 HP=34 Atk=27 Def=17 SpA=14 SpD=17 Speed=31 item=481 ability=51
+DAWSON_INPUT reserves=0 slot=2 lv=12 HP=43 Atk=27 Def=22 SpA=16 SpD=19 Speed=20 item=494 ability=218
+DAWSON_INPUT reserves=0 slot=3 lv=12 HP=39 Atk=28 Def=18 SpA=16 SpD=18 Speed=37 item=425 ability=92
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Fake Out target=0
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Tailwind target=3
+AI decision turn=2 actor=1 move=Iron Head target=0
+AI decision turn=2 actor=3 move=Brave Bird target=0
+DAWSON_TEMPO board=0 turns=1 reserves=0 tailwind=3 rawSpeeds=18/31 ownHP=45/19 friendship=0/0
+DAWSON_AFTER board=0 turns=1 reserves=0 native=1 species=974/821 HP=45/19 foes=46/58 moves=Fake Out/Tailwind weather=0 duration=0 speeds=36/62 foeSpeeds=24/19 AtkStages=6/6 foeStatus=0/0 faints=0/0
+DAWSON_INPUT reserves=0 slot=0 lv=12 HP=45 Atk=34 Def=22 SpA=16 SpD=18 Speed=18 item=494 ability=181
+DAWSON_INPUT reserves=0 slot=1 lv=12 HP=34 Atk=27 Def=17 SpA=14 SpD=17 Speed=31 item=481 ability=51
+DAWSON_INPUT reserves=0 slot=2 lv=12 HP=43 Atk=27 Def=22 SpA=16 SpD=19 Speed=20 item=494 ability=218
+DAWSON_INPUT reserves=0 slot=3 lv=12 HP=39 Atk=28 Def=18 SpA=16 SpD=18 Speed=37 item=425 ability=92
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Fake Out target=0
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Tailwind target=3
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Iron Head target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Brave Bird target=0
+AI switch turn=2 actor=3 party=2
+AI decision turn=3 actor=1 move=Knock Off target=0
+AI decision turn=3 actor=3 move=Double-Edge target=0
+DAWSON_TEMPO board=0 turns=2 reserves=0 tailwind=2 rawSpeeds=18/20 ownHP=45/43 friendship=0/0
+DAWSON_AFTER board=0 turns=2 reserves=0 native=2 species=974/831 HP=45/43 foes=14/58 moves=Iron Head/- weather=0 duration=0 speeds=36/40 foeSpeeds=24/19 AtkStages=6/6 foeStatus=0/0 faints=1/0
+DAWSON_INPUT reserves=0 slot=0 lv=12 HP=45 Atk=34 Def=22 SpA=16 SpD=18 Speed=18 item=494 ability=181
+DAWSON_INPUT reserves=0 slot=1 lv=12 HP=34 Atk=27 Def=17 SpA=14 SpD=17 Speed=31 item=481 ability=51
+DAWSON_INPUT reserves=0 slot=2 lv=12 HP=43 Atk=27 Def=22 SpA=16 SpD=19 Speed=20 item=494 ability=218
+DAWSON_INPUT reserves=0 slot=3 lv=12 HP=39 Atk=28 Def=18 SpA=16 SpD=18 Speed=37 item=425 ability=92
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Fake Out target=2
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Tailwind target=3
+AI decision turn=2 actor=1 move=Knock Off target=0
+AI decision turn=2 actor=3 move=Brave Bird target=2
+DAWSON_TEMPO board=1 turns=1 reserves=0 tailwind=3 rawSpeeds=18/31 ownHP=23/34 friendship=0/0
+DAWSON_AFTER board=1 turns=1 reserves=0 native=1 species=974/821 HP=23/34 foes=53/40 moves=Fake Out/Tailwind weather=0 duration=0 speeds=36/62 foeSpeeds=35/17 AtkStages=6/6 foeStatus=0/0 faints=0/0
+DAWSON_INPUT reserves=0 slot=0 lv=12 HP=45 Atk=34 Def=22 SpA=16 SpD=18 Speed=18 item=494 ability=181
+DAWSON_INPUT reserves=0 slot=1 lv=12 HP=34 Atk=27 Def=17 SpA=14 SpD=17 Speed=31 item=481 ability=51
+DAWSON_INPUT reserves=0 slot=2 lv=12 HP=43 Atk=27 Def=22 SpA=16 SpD=19 Speed=20 item=494 ability=218
+DAWSON_INPUT reserves=0 slot=3 lv=12 HP=39 Atk=28 Def=18 SpA=16 SpD=18 Speed=37 item=425 ability=92
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Fake Out target=2
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Tailwind target=3
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Knock Off target=0
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=3 move=Brave Bird target=2
+AI decision turn=3 actor=1 move=U-turn target=0
+AI decision turn=3 actor=3 move=Brave Bird target=0
+DAWSON_TEMPO board=1 turns=2 reserves=0 tailwind=2 rawSpeeds=18/31 ownHP=12/21 friendship=0/0
+DAWSON_AFTER board=1 turns=2 reserves=0 native=2 species=974/821 HP=12/21 foes=42/0 moves=Knock Off/Brave Bird weather=0 duration=0 speeds=36/62 foeSpeeds=35/0 AtkStages=6/6 foeStatus=0/0 faints=0/1
+DAWSON_INPUT reserves=1 slot=0 lv=12 HP=45 Atk=34 Def=22 SpA=16 SpD=18 Speed=18 item=494 ability=181
+DAWSON_INPUT reserves=1 slot=1 lv=12 HP=34 Atk=27 Def=17 SpA=14 SpD=17 Speed=31 item=481 ability=51
+DAWSON_INPUT reserves=1 slot=2 lv=12 HP=43 Atk=27 Def=22 SpA=16 SpD=19 Speed=20 item=494 ability=218
+DAWSON_INPUT reserves=1 slot=3 lv=12 HP=39 Atk=28 Def=18 SpA=16 SpD=18 Speed=37 item=425 ability=92
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Tail Slap target=0
+AI decision turn=2 actor=1 move=Double-Edge target=0
+DAWSON_TEMPO board=0 turns=1 reserves=1 tailwind=0 rawSpeeds=20/37 ownHP=43/0 friendship=0/0
+DAWSON_AFTER board=0 turns=1 reserves=1 native=1 species=831/572 HP=43/0 foes=32/58 moves=Protect/- weather=0 duration=0 speeds=20/0 foeSpeeds=24/19 AtkStages=6/6 foeStatus=0/0 faints=1/0
+DAWSON_INPUT reserves=1 slot=0 lv=12 HP=45 Atk=34 Def=22 SpA=16 SpD=18 Speed=18 item=494 ability=181
+DAWSON_INPUT reserves=1 slot=1 lv=12 HP=34 Atk=27 Def=17 SpA=14 SpD=17 Speed=31 item=481 ability=51
+DAWSON_INPUT reserves=1 slot=2 lv=12 HP=43 Atk=27 Def=22 SpA=16 SpD=19 Speed=20 item=494 ability=218
+DAWSON_INPUT reserves=1 slot=3 lv=12 HP=39 Atk=28 Def=18 SpA=16 SpD=18 Speed=37 item=425 ability=92
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Tail Slap target=0
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Double-Edge target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=3 actor=1 move=Double-Edge target=0
+DAWSON_TEMPO board=0 turns=2 reserves=1 tailwind=0 rawSpeeds=20/37 ownHP=11/0 friendship=0/0
+DAWSON_AFTER board=0 turns=2 reserves=1 native=2 species=831/572 HP=11/0 foes=13/58 moves=Double-Edge/- weather=0 duration=0 speeds=20/0 foeSpeeds=24/19 AtkStages=6/6 foeStatus=0/0 faints=1/0
+DAWSON_INPUT reserves=1 slot=0 lv=12 HP=45 Atk=34 Def=22 SpA=16 SpD=18 Speed=18 item=494 ability=181
+DAWSON_INPUT reserves=1 slot=1 lv=12 HP=34 Atk=27 Def=17 SpA=14 SpD=17 Speed=31 item=481 ability=51
+DAWSON_INPUT reserves=1 slot=2 lv=12 HP=43 Atk=27 Def=22 SpA=16 SpD=19 Speed=20 item=494 ability=218
+DAWSON_INPUT reserves=1 slot=3 lv=12 HP=39 Atk=28 Def=18 SpA=16 SpD=18 Speed=37 item=425 ability=92
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Double-Edge target=2
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Tail Slap target=2
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Tail Slap target=0
+DAWSON_TEMPO board=1 turns=1 reserves=1 tailwind=0 rawSpeeds=20/37 ownHP=18/39 friendship=0/0
+DAWSON_AFTER board=1 turns=1 reserves=1 native=1 species=831/572 HP=18/39 foes=53/0 moves=Double-Edge/Tail Slap weather=0 duration=0 speeds=20/37 foeSpeeds=35/0 AtkStages=6/6 foeStatus=0/0 faints=0/1
+DAWSON_INPUT reserves=1 slot=0 lv=12 HP=45 Atk=34 Def=22 SpA=16 SpD=18 Speed=18 item=494 ability=181
+DAWSON_INPUT reserves=1 slot=1 lv=12 HP=34 Atk=27 Def=17 SpA=14 SpD=17 Speed=31 item=481 ability=51
+DAWSON_INPUT reserves=1 slot=2 lv=12 HP=43 Atk=27 Def=22 SpA=16 SpD=19 Speed=20 item=494 ability=218
+DAWSON_INPUT reserves=1 slot=3 lv=12 HP=39 Atk=28 Def=18 SpA=16 SpD=18 Speed=37 item=425 ability=92
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Double-Edge target=2
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Tail Slap target=2
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Tail Slap target=0
+AI decision turn=3 actor=1 move=Double-Edge target=0
+AI decision turn=3 actor=3 move=Knock Off target=0
+DAWSON_TEMPO board=1 turns=2 reserves=1 tailwind=0 rawSpeeds=20/37 ownHP=18/39 friendship=0/0
+DAWSON_AFTER board=1 turns=2 reserves=1 native=2 species=831/572 HP=18/39 foes=33/0 moves=Protect/Tail Slap weather=0 duration=0 speeds=20/37 foeSpeeds=35/0 AtkStages=6/6 foeStatus=0/0 faints=0/1
+
+- Tests [32mPASSED[0m:          3
+- Tests [34mTOTAL[0m:           3
+

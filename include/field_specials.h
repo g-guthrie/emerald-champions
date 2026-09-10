@@ -2,6 +2,7 @@
 #define GUARD_FIELD_SPECIALS_H
 
 #include "constants/species.h"
+#include "constants/items.h"
 
 extern bool8 gBikeCyclingChallenge;
 extern u8 gBikeCollisions;
@@ -43,10 +44,10 @@ void CutMoveOpenDottedHoleDoor(void);
 void IsEmeraldChampionsGameCornerPokemonClaimed(void);
 void GiveEmeraldChampionsGameCornerPokemon(void);
 void GiveEmeraldChampionsPreparedPokemon(void);
-void BufferSelectedMonEmeraldChampionsStatPointSummary(void);
-void BufferSelectedMonEmeraldChampionsStatPointDetail(void);
-void AdjustSelectedMonEmeraldChampionsStatPoints(void);
-void ResetSelectedMonEmeraldChampionsStatPoints(void);
+void BufferSelectedMonEmeraldChampionsEvSummary(void);
+void BufferSelectedMonEmeraldChampionsEvDetail(void);
+void AdjustSelectedMonEmeraldChampionsEvs(void);
+void ResetSelectedMonEmeraldChampionsEvs(void);
 #if EC_HEADLESS_FIXTURES
 bool32 IsScrollableMultichoiceHeadlessActive(u16 menu);
 #endif
@@ -66,5 +67,8 @@ void BufferEmeraldChampionsFormPreview(void);
 void ApplyEmeraldChampionsFormSelection(void);
 void BufferEmeraldChampionsBondingPreview(void);
 void ApplyEmeraldChampionsBonding(void);
+
+u32 GetEmeraldChampionsEvolutionPrice(enum Item item);
+bool32 IsEmeraldChampionsFreeCatalogueItem(enum Item item);
 
 #endif // GUARD_FIELD_SPECIALS_H

@@ -1,0 +1,32 @@
+regigigas-faint 0 RESULT frames=12000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=c47d5adff594209b nonzero_pixels=38343 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=02002290 value=00000001
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+ 
+regigigas-missing-partner 0 RESULT frames=12000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=ec9dd76e04c19099 nonzero_pixels=38067 save_bytes=0
+READ width=4 address=020022c4 value=00000000
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=02002290 value=00000001
+READ width=4 address=0200228c value=00000000
+READ width=4 address=02002294 value=00000000
+ 
+regigigas-restored-partner 0 RESULT frames=12000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=c47d5adff594209b nonzero_pixels=38343 save_bytes=0
+READ width=4 address=020022c4 value=00000001
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=02002290 value=00000002
+READ width=4 address=0200228c value=00000001
+READ width=4 address=02002294 value=000001e6
+ 
+regigigas-caught-reentry 0 RESULT frames=12000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=c47d5adff594209b nonzero_pixels=38343 save_bytes=0
+READ width=4 address=020022c4 value=00000001
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=02002290 value=00000002
+READ width=4 address=0200228c value=00000001
+READ width=4 address=02002294 value=000001e6
+ 

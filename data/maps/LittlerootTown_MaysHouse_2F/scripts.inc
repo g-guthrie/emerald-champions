@@ -316,32 +316,32 @@ LittlerootTown_MaysHouse_2F_EventScript_TurnOffPlayerPC::
 	end
 
 RivalsHouse_2F_Text_MayWhoAreYou:
-	.string "You're {PLAYER}, right?\n"
-	.string "I'm MAY. Welcome to LITTLEROOT!\p"
-	.string "Dad said a GYM LEADER's kid was\n"
-	.string "moving next door. I hoped we'd battle.\p"
-	.string "He studies how Trainers from different\n"
-	.string "regions build around their partners.\p"
-	.string "For today's fieldwork, he packed all\n"
-	.string "nine regional starter trios.\p"
-	.string "He went to ROUTE 101, north of town.\n"
-	.string "Go introduce yourself before he leaves!$"
+	.string "You're {PLAYER}, right? I'm MAY.\n"
+	.string "Welcome to LITTLEROOT!\p"
+	.string "Dad said a GYM LEADER's family\n"
+	.string "was moving next door. I hoped\l"
+	.string "we'd get to be friends!\p"
+	.string "He studies POKéMON from all nine\n"
+	.string "regions. He took their starter\l"
+	.string "partners out for fieldwork today.\p"
+	.string "You can meet him on ROUTE 101,\n"
+	.string "north of town!$"
 
 RivalsHouse_2F_Text_MayGettingReady:
 	.string "POKéMON fully restored!\n"
 	.string "Items ready, and…$"
 
 RivalsHouse_2F_Text_BrendanWhoAreYou:
-	.string "You're {PLAYER}, right?\n"
-	.string "I'm BRENDAN. Welcome to LITTLEROOT!\p"
-	.string "Dad said a GYM LEADER's kid was\n"
-	.string "moving next door. I hoped we'd battle.\p"
-	.string "He studies how Trainers from different\n"
-	.string "regions build around their partners.\p"
-	.string "For today's fieldwork, he packed all\n"
-	.string "nine regional starter trios.\p"
-	.string "He went to ROUTE 101, north of town.\n"
-	.string "Go introduce yourself before he leaves!$"
+	.string "You're {PLAYER}? I'm BRENDAN. Dad\n"
+	.string "told me you were moving next\l"
+	.string "door.\p"
+	.string "A GYM LEADER's kid, huh? We'll\n"
+	.string "have to battle sometime!\p"
+	.string "Dad studies POKéMON from all nine\n"
+	.string "regions. He's on ROUTE 101 with\l"
+	.string "their starter partners today.\p"
+	.string "Head north out of town. You can't\n"
+	.string "miss him!$"
 
 RivalsHouse_2F_Text_BrendanGettingReady:
 	.string "POKéMON fully restored…\n"

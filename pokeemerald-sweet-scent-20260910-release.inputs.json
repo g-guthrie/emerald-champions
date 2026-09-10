@@ -1,0 +1,9 @@
+{
+  "schema_version": 2,
+  "inputs_sha256": "5240c5b0293312c8981a070f42d06faba9809a976e628344a78a3df882fd7dd0",
+  "input_count": 28980,
+  "artifacts": {
+    "pokeemerald-sweet-scent-20260910-release.gba": "6d0adda93ec2aacc9719e03abca1d08eb3408793dff88ae4458a1e6edb682606",
+    "pokeemerald-sweet-scent-20260910-release.elf": "95efd2ad440b5e7bd7f424018cb4c1706ef94ac89a9aadb1dbeca1d97878e62f"
+  }
+}

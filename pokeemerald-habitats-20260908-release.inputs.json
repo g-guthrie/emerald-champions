@@ -1,0 +1,9 @@
+{
+  "schema_version": 2,
+  "inputs_sha256": "29d8850e5e99dbdc6834ea2e54d084eca0d65d847ea7f3152b88b7c0c24dc1a7",
+  "input_count": 28977,
+  "artifacts": {
+    "pokeemerald-habitats-20260908-release.gba": "55a1471823240783ddd36e1c97afdb2571007da88ad95932ba33b1f75ef9296b",
+    "pokeemerald-habitats-20260908-release.elf": "d1c14551b62b8c0d2fd6330a98588b4c5547a205399e3de334eef4a0b4ca6237"
+  }
+}

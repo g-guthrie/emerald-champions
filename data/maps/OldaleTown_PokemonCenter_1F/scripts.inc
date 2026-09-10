@@ -38,16 +38,27 @@ OldaleTown_PokemonCenter_1F_EventScript_WirelessClubAvailable::
 	end
 
 OldaleTown_PokemonCenter_1F_Text_TrainersCanUsePC:
-	.string "That PC in the corner there is\n"
-	.string "for any POKéMON TRAINER to use.\p"
-	.string "Naturally, that means you're welcome\n"
-	.string "to use it, too.$"
+	.string "Planning your team at the PC?\n"
+	.string "Try the TUTOR beside it, too.\p"
+	.string "Ask for a Battle Set: a prepared\n"
+	.string "combination of moves, Ability,\l"
+	.string "Nature, EVs, and a held item.\p"
+	.string "Choose Doubles for team battles.\n"
+	.string "You can preview a set, then\l"
+	.string "decide whether to apply it.\p"
+	.string "It's free, and you can change\n"
+	.string "the details afterward. Think of\l"
+	.string "it as a starting point!$"
 
 OldaleTown_PokemonCenter_1F_Text_PokemonCentersAreGreat:
-	.string "POKéMON CENTERS are great!\p"
-	.string "You can use their services as much\n"
-	.string "as you like, and it's all for free.\l"
-	.string "You never have to worry!$"
+	.string "I keep my POKé VIAL handy.\n"
+	.string "One use restores the whole party\l"
+	.string "outside battle!\p"
+	.string "The nurse refills its one dose\n"
+	.string "whenever I stop for healing.\p"
+	.string "Register a Key Item in your BAG,\n"
+	.string "then press SELECT to use it.\l"
+	.string "Much quicker on a long walk!$"
 
 OldaleTown_PokemonCenter_1F_Text_WirelessClubNotAvailable:
 	.string "The POKéMON WIRELESS CLUB on\n"

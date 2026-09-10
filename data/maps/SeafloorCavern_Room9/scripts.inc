@@ -226,24 +226,26 @@ SeafloorCavern_Room9_Text_ArchieSoItWasYou:
 	.string "So it was you, after all.$"
 
 SeafloorCavern_Room9_Text_ArchieBeholdKyogre:
-	.string "ARCHIE: KYOGRE, the current before\n"
-	.string "maps, borders, or human permission.\p"
-	.string "Every awakened SIGN bends toward it.\n"
-	.string "Today the sea becomes free again.$"
+	.string "ARCHIE: Look at it, {PLAYER}.\n"
+	.string "KYOGRE! The POKéMON that made the\l"
+	.string "sea.\p"
+	.string "With its power, the ocean can\n"
+	.string "grow. Sea POKéMON will have all\l"
+	.string "the space they need!$"
 
 SeafloorCavern_Room9_Text_ArchieYouMustDisappear:
-	.string "You chased us through every changing\n"
-	.string "route and answered every formation.\p"
-	.string "One final current stands between you and\n"
-	.string "my dream. Survive it if you can.$"
+	.string "You've chased us this far. But I\n"
+	.string "won't let you stop us now!\p"
+	.string "This dream means everything to\n"
+	.string "TEAM AQUA!$"
 
 SeafloorCavern_Room9_Text_ArchieDefeat:
-	.string "You kept your shape while breaking mine.$"
+	.string "No… Not after coming so far!$"
 
 SeafloorCavern_Room9_Text_ArchieWithThisRedOrb:
-	.string "ARCHIE: You won the battle. The RED ORB\n"
-	.string "still decides the world.\p"
-	.string "KYOGRE, answer the sea!$"
+	.string "ARCHIE: You won. But the RED ORB\n"
+	.string "can still call KYOGRE!\p"
+	.string "KYOGRE! Give the sea room to grow!$"
 
 SeafloorCavern_Room9_Text_RedOrbShinesByItself:
 	.string "The RED ORB suddenly began shining\n"
@@ -251,8 +253,7 @@ SeafloorCavern_Room9_Text_RedOrbShinesByItself:
 
 SeafloorCavern_Room9_Text_ArchieWhereDidKyogreGo:
 	.string "ARCHIE: What?!\p"
-	.string "I didn't do anything.\n"
-	.string "Why did the RED ORB…\p"
+	.string "The ORB… I didn't make it shine!\p"
 	.string "Where did KYOGRE go?$"
 
 SeafloorCavern_Room9_Text_ArchieAMessageFromOutside:
@@ -260,35 +261,42 @@ SeafloorCavern_Room9_Text_ArchieAMessageFromOutside:
 	.string "members outside…$"
 
 SeafloorCavern_Room9_Text_ArchieWhatRainingTooHard:
-	.string "ARCHIE: Heavy rain? Good. The current is\n"
-	.string "moving exactly as planned.\p"
-	.string "What? Routes flooded, crews trapped, and\n"
-	.string "the pressure still rising?\p"
-	.string "No. Freedom was not supposed to erase\n"
-	.string "everything it connected.$"
+	.string "ARCHIE: Heavy rain? Good! KYOGRE\n"
+	.string "is expanding the sea!\p"
+	.string "What? The routes are flooding?\n"
+	.string "Our own crews are trapped?\p"
+	.string "Tell them to get to high ground!\n"
+	.string "How can the rain still be getting\l"
+	.string "worse?$"
 
 SeafloorCavern_Room9_Text_ArchieWhyDidKyogreDisappear:
-	.string "ARCHIE: The RED ORB woke KYOGRE, but it\n"
-	.string "never promised me control.\p"
-	.string "I mistook motion for obedience.$"
+	.string "ARCHIE: The RED ORB woke KYOGRE.\n"
+	.string "Why won't it answer me now?\p"
+	.string "I never wanted people to get\n"
+	.string "hurt…$"
 
 SeafloorCavern_Room9_Text_MaxieWhatHaveYouWrought:
-	.string "MAXIE: ARCHIE, the network is amplifying\n"
-	.string "KYOGRE exactly as it amplified GROUDON.\p"
-	.string "If this continues, neither land nor the\n"
-	.string "people you meant to free will remain.$"
+	.string "MAXIE: ARCHIE! KYOGRE's rain is\n"
+	.string "spreading, and GROUDON's heat is\l"
+	.string "getting worse.\p"
+	.string "If they meet, the people and\n"
+	.string "POKéMON of HOENN will be caught\l"
+	.string "between them!$"
 
 SeafloorCavern_Room9_Text_ArchieDontGetAllHighAndMighty:
-	.string "ARCHIE: Your certainty woke GROUDON! My\n"
-	.string "mistake only mirrors yours.\p"
-	.string "And the RED ORB should still let me...\n"
-	.string "No. We never understood the ORBS.$"
+	.string "ARCHIE: You're the one who woke\n"
+	.string "GROUDON!\p"
+	.string "I thought the ORB would let me\n"
+	.string "control KYOGRE. But it's not\l"
+	.string "listening. Neither of them is!$"
 
 SeafloorCavern_Room9_Text_MaxieWeDontHaveTimeToArgue:
-	.string "MAXIE: Blame is another wasted turn.\n"
-	.string "Outside, HOENN is breaking now.\p"
-	.string "Look at the world our perfect answers\n"
-	.string "created.$"
+	.string "MAXIE: We can argue later! We\n"
+	.string "need to get everyone out of this\l"
+	.string "cavern.\p"
+	.string "Come and see what's happening\n"
+	.string "outside, ARCHIE. We have to stop\l"
+	.string "it.$"
 
 SeafloorCavern_Room9_Text_MaxieComeOnPlayer:
 	.string "MAXIE: {PLAYER}, come on, you have\n"

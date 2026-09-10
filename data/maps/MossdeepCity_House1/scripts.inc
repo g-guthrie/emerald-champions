@@ -83,12 +83,13 @@ MossdeepCity_House1_Text_CynthiaChallenge:
 	.string "a Champion from another region?$"
 
 MossdeepCity_House1_Text_CynthiaDefeat:
-	.string "You removed the shelter, denied sleep,\n"
-	.string "and still saved an answer for GARCHOMP.$"
+	.string "What a battle! You and your POKéMON\n"
+	.string "have given me something new to study.$"
 
 MossdeepCity_House1_Text_CynthiaAfter:
-	.string "Take this SHINY CHARM. Let your next\n"
-	.string "journey reveal something extraordinary.$"
+	.string "The SHINY CHARM is yours.\n"
+	.string "May your next journey reveal\l"
+	.string "something extraordinary.$"
 
 MossdeepCity_House1_Text_CynthiaNotReady:
 	.string "These kind hosts gave me a quiet place\n"

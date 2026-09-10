@@ -1,0 +1,149 @@
+[
+  {
+    "file": "data/maps/OldaleTown/scripts.inc",
+    "label": "OldaleTown_Text_SavingMyProgress",
+    "max_width": 172,
+    "pages": 3,
+    "lines": 8
+  },
+  {
+    "file": "data/maps/OldaleTown_House2/scripts.inc",
+    "label": "OldaleTown_House2_Text_PokemonLevelUp",
+    "max_width": 170,
+    "pages": 4,
+    "lines": 10
+  },
+  {
+    "file": "data/maps/OldaleTown_House2/scripts.inc",
+    "label": "OldaleTown_House2_Text_YoullGoFurtherWithStrongPokemon",
+    "max_width": 182,
+    "pages": 3,
+    "lines": 8
+  },
+  {
+    "file": "data/maps/OldaleTown_PokemonCenter_1F/scripts.inc",
+    "label": "OldaleTown_PokemonCenter_1F_Text_TrainersCanUsePC",
+    "max_width": 172,
+    "pages": 4,
+    "lines": 11
+  },
+  {
+    "file": "data/maps/OldaleTown_PokemonCenter_1F/scripts.inc",
+    "label": "OldaleTown_PokemonCenter_1F_Text_PokemonCentersAreGreat",
+    "max_width": 172,
+    "pages": 3,
+    "lines": 8
+  },
+  {
+    "file": "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc",
+    "label": "LittlerootTown_ProfessorBirchsLab_Text_OpeningReady",
+    "max_width": 178,
+    "pages": 5,
+    "lines": 13
+  },
+  {
+    "file": "data/maps/PetalburgCity_Gym/scripts.inc",
+    "label": "PetalburgCity_Gym_Text_DadGoCollectBadges",
+    "max_width": 172,
+    "pages": 7,
+    "lines": 21
+  },
+  {
+    "file": "data/maps/Route104/scripts.inc",
+    "label": "Route104_Text_ThrowBallAtWeakenedPokemon",
+    "max_width": 174,
+    "pages": 4,
+    "lines": 12
+  },
+  {
+    "file": "data/maps/RustboroCity_PokemonSchool/scripts.inc",
+    "label": "RustboroCity_PokemonSchool_Text_StudentsWhoStudyEveryTool",
+    "max_width": 178,
+    "pages": 6,
+    "lines": 17
+  },
+  {
+    "file": "data/maps/RustboroCity_PokemonSchool/scripts.inc",
+    "label": "RustboroCity_PokemonSchool_Text_ExplainSunStone",
+    "max_width": 159,
+    "pages": 2,
+    "lines": 6
+  },
+  {
+    "file": "data/maps/RustboroCity_PokemonSchool/scripts.inc",
+    "label": "RustboroCity_PokemonSchool_Text_PokemonHealItselfWithBerry",
+    "max_width": 170,
+    "pages": 4,
+    "lines": 11
+  },
+  {
+    "file": "data/maps/RustboroCity_PokemonSchool/scripts.inc",
+    "label": "RustboroCity_PokemonSchool_Text_StudentsNotes",
+    "max_width": 173,
+    "pages": 8,
+    "lines": 20
+  },
+  {
+    "file": "data/maps/RustboroCity_PokemonCenter_1F/scripts.inc",
+    "label": "RustboroCity_PokemonCenter_1F_Text_PokemonHavePersonalities",
+    "max_width": 177,
+    "pages": 4,
+    "lines": 12
+  },
+  {
+    "file": "data/maps/RustboroCity/scripts.inc",
+    "label": "RustboroCity_Text_PokemonCanChangeLookFromExp",
+    "max_width": 169,
+    "pages": 2,
+    "lines": 5
+  },
+  {
+    "file": "data/maps/RustboroCity/scripts.inc",
+    "label": "RustboroCity_Text_TradePokemonGrowFast",
+    "max_width": 175,
+    "pages": 2,
+    "lines": 5
+  },
+  {
+    "file": "data/maps/RustboroCity_Gym/scripts.inc",
+    "label": "RustboroCity_Gym_Text_GuideIntroduction",
+    "max_width": 179,
+    "pages": 6,
+    "lines": 18
+  },
+  {
+    "file": "data/maps/DewfordTown_PokemonCenter_1F/scripts.inc",
+    "label": "DewfordTown_PokemonCenter_1F_Text_StoneCavern",
+    "max_width": 179,
+    "pages": 3,
+    "lines": 8
+  },
+  {
+    "file": "data/scripts/emerald_champions.inc",
+    "label": "EmeraldChampions_Text_ExplainBattleSets",
+    "max_width": 170,
+    "pages": 4,
+    "lines": 12
+  },
+  {
+    "file": "data/text/pkmn_center_nurse.inc",
+    "label": "gText_EmeraldChampionsExplainFlightBeacon",
+    "max_width": 161,
+    "pages": 2,
+    "lines": 5
+  },
+  {
+    "file": "data/maps/RustboroCity_PokemonSchool/scripts.inc",
+    "label": "RustboroCity_PokemonSchool_Text_PokemontCantUseManMadeItems",
+    "max_width": 179,
+    "pages": 2,
+    "lines": 6
+  },
+  {
+    "file": "data/maps/RustboroCity_PokemonSchool/scripts.inc",
+    "label": "RustboroCity_PokemonSchool_Text_ConfusedPokemonAttacksItself",
+    "max_width": 166,
+    "pages": 3,
+    "lines": 8
+  }
+]

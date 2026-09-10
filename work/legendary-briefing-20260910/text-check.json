@@ -1,0 +1,236 @@
+[
+  {
+    "file": "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc",
+    "label": "LittlerootTown_ProfessorBirchsLab_Text_OpeningDex",
+    "line": 803,
+    "text": "Take this POK\u00e9DEX, too. It records\\nthe POK\u00e9MON you see and catch.\\pHOENN's weather has been strange.\\nPOK\u00e9MON are appearing in places\\lwe've never seen them before.\\pEven LEGENDARY POK\u00e9MON, once known\\nonly through stories, are being\\lsighted along our routes!\\pAre they following the weather,\\nor is something drawing them here?\\lYour discoveries could help us learn.$",
+    "lines": [
+      {
+        "text": "Take this POK\u00e9DEX, too. It records",
+        "width": 179,
+        "unresolved": []
+      },
+      {
+        "text": "the POK\u00e9MON you see and catch.",
+        "width": 162,
+        "unresolved": []
+      },
+      {
+        "text": "HOENN's weather has been strange.",
+        "width": 181,
+        "unresolved": []
+      },
+      {
+        "text": "POK\u00e9MON are appearing in places",
+        "width": 166,
+        "unresolved": []
+      },
+      {
+        "text": "we've never seen them before.",
+        "width": 157,
+        "unresolved": []
+      },
+      {
+        "text": "Even LEGENDARY POK\u00e9MON, once known",
+        "width": 189,
+        "unresolved": []
+      },
+      {
+        "text": "only through stories, are being",
+        "width": 162,
+        "unresolved": []
+      },
+      {
+        "text": "sighted along our routes!",
+        "width": 133,
+        "unresolved": []
+      },
+      {
+        "text": "Are they following the weather,",
+        "width": 163,
+        "unresolved": []
+      },
+      {
+        "text": "or is something drawing them here?",
+        "width": 180,
+        "unresolved": []
+      },
+      {
+        "text": "Your discoveries could help us learn.",
+        "width": 191,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc",
+    "label": "LittlerootTown_ProfessorBirchsLab_Text_OpeningSendoff",
+    "line": 851,
+    "text": "Head west from OLDALE along\\nROUTE 102 to PETALBURG CITY.\\pYour dad runs the GYM there.\\nGo show him your team!\\pRead the route signs as you go.\\nThey list local POK\u00e9MON by grass,\\lwater, and fishing method.\\pKeep reading past the fishing\\nlists for local LEGENDARIES. Many\\lcan be found in the wild!\\pFor more leads, ask the local\\nguide near the PC in each\\lPOK\u00e9MON CENTER.\\pHe can tell you which LEGENDARIES\\nare nearby and who to talk to\\labout them. Enjoy the journey!$",
+    "lines": [
+      {
+        "text": "Head west from OLDALE along",
+        "width": 147,
+        "unresolved": []
+      },
+      {
+        "text": "ROUTE 102 to PETALBURG CITY.",
+        "width": 153,
+        "unresolved": []
+      },
+      {
+        "text": "Your dad runs the GYM there.",
+        "width": 147,
+        "unresolved": []
+      },
+      {
+        "text": "Go show him your team!",
+        "width": 115,
+        "unresolved": []
+      },
+      {
+        "text": "Read the route signs as you go.",
+        "width": 162,
+        "unresolved": []
+      },
+      {
+        "text": "They list local POK\u00e9MON by grass,",
+        "width": 171,
+        "unresolved": []
+      },
+      {
+        "text": "water, and fishing method.",
+        "width": 136,
+        "unresolved": []
+      },
+      {
+        "text": "Keep reading past the fishing",
+        "width": 155,
+        "unresolved": []
+      },
+      {
+        "text": "lists for local LEGENDARIES. Many",
+        "width": 174,
+        "unresolved": []
+      },
+      {
+        "text": "can be found in the wild!",
+        "width": 127,
+        "unresolved": []
+      },
+      {
+        "text": "For more leads, ask the local",
+        "width": 148,
+        "unresolved": []
+      },
+      {
+        "text": "guide near the PC in each",
+        "width": 130,
+        "unresolved": []
+      },
+      {
+        "text": "POK\u00e9MON CENTER.",
+        "width": 84,
+        "unresolved": []
+      },
+      {
+        "text": "He can tell you which LEGENDARIES",
+        "width": 177,
+        "unresolved": []
+      },
+      {
+        "text": "are nearby and who to talk to",
+        "width": 152,
+        "unresolved": []
+      },
+      {
+        "text": "about them. Enjoy the journey!",
+        "width": 160,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/PetalburgWoods/scripts.inc",
+    "label": "PetalburgWoods_Text_ThatWasAwfullyClose",
+    "line": 366,
+    "text": "Whew... Thank you for helping me!\\pThese papers track the strange\\nweather and LEGENDARY sightings.\\lDEVON is studying the connection.\\pOur field notes help keep the\\nroute signs up to date. Some\\ldiscoveries need more than luck.\\pA sign lists any special\\nrequirements. Once you catch a\\llocal legend, it marks it Caught.\\pThat POK\u00e9MON stops appearing, so\\nyou can search for your next find.\\pI must get these reports to DEVON.\\nFirst, take this GREAT BALL\\las my thanks!$",
+    "lines": [
+      {
+        "text": "Whew... Thank you for helping me!",
+        "width": 167,
+        "unresolved": []
+      },
+      {
+        "text": "These papers track the strange",
+        "width": 165,
+        "unresolved": []
+      },
+      {
+        "text": "weather and LEGENDARY sightings.",
+        "width": 175,
+        "unresolved": []
+      },
+      {
+        "text": "DEVON is studying the connection.",
+        "width": 177,
+        "unresolved": []
+      },
+      {
+        "text": "Our field notes help keep the",
+        "width": 152,
+        "unresolved": []
+      },
+      {
+        "text": "route signs up to date. Some",
+        "width": 147,
+        "unresolved": []
+      },
+      {
+        "text": "discoveries need more than luck.",
+        "width": 169,
+        "unresolved": []
+      },
+      {
+        "text": "A sign lists any special",
+        "width": 122,
+        "unresolved": []
+      },
+      {
+        "text": "requirements. Once you catch a",
+        "width": 161,
+        "unresolved": []
+      },
+      {
+        "text": "local legend, it marks it Caught.",
+        "width": 166,
+        "unresolved": []
+      },
+      {
+        "text": "That POK\u00e9MON stops appearing, so",
+        "width": 174,
+        "unresolved": []
+      },
+      {
+        "text": "you can search for your next find.",
+        "width": 178,
+        "unresolved": []
+      },
+      {
+        "text": "I must get these reports to DEVON.",
+        "width": 181,
+        "unresolved": []
+      },
+      {
+        "text": "First, take this GREAT BALL",
+        "width": 142,
+        "unresolved": []
+      },
+      {
+        "text": "as my thanks!",
+        "width": 70,
+        "unresolved": []
+      }
+    ]
+  }
+]

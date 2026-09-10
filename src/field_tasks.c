@@ -1,3 +1,4 @@
+#include "constants/emerald_champions.h"
 #include "global.h"
 #include "bike.h"
 #include "clock.h"
@@ -788,6 +789,9 @@ static void AshGrassPerStepCallback(u8 taskId)
             ashGatherCount = GetVarPointer(VAR_ASH_GATHER_COUNT);
             if (*ashGatherCount < 9999)
                 (*ashGatherCount)++;
+            u16 progress = VarGet(VAR_EC_SOOT_PROGRESS);
+            if ((progress & EC_SOOT_TOTAL_MASK) < 9999)
+                VarSet(VAR_EC_SOOT_PROGRESS, progress + 1);
         }
     }
 }

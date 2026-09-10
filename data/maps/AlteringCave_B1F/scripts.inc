@@ -90,16 +90,22 @@ AlteringCave_B1F_Movement_LeafLeaves:
 	step_end
 
 AlteringCave_B1F_Text_LeafIntro:
-	.string "I followed the distortions here from\n"
-	.string "Kanto. They react to strong teams.\p"
-	.string "Show me whether Hoenn chose well.$"
+	.string "LEAF: I followed reports of\n"
+	.string "strange POKéMON here from KANTO.\p"
+	.string "There's something powerful in this\n"
+	.string "cavern. Before you go farther,\l"
+	.string "let's see how your team handles\l"
+	.string "mine!$"
 
 AlteringCave_B1F_Text_LeafDefeat:
-	.string "It did. That was a Champion's answer.$"
+	.string "You've earned my respect!$"
 
 AlteringCave_B1F_Text_LeafAfter:
-	.string "Take this MEWTWONITE X. What waits\n"
-	.string "below deserves its full power.$"
+	.string "LEAF: Take this MEWTWONITE X. It\n"
+	.string "can help MEWTWO Mega Evolve.\p"
+	.string "If you meet it here, I hope the\n"
+	.string "two of you can learn to trust each\l"
+	.string "other.$"
 AlteringCave_B1F_Text_LeafBagFull:
 	.string "Make room for the MEWTWONITE X.\n"
 	.string "Your reward will wait here.$"
@@ -150,15 +156,16 @@ AlteringCave_B1F_EventScript_MewtwoCleanup::
 	end
 
 AlteringCave_B1F_Text_MewtwoDormant:
-	.string "A CHAMPION'S SIGN is carved here.\p"
-	.string "Its light is dormant. Hoenn's story\n"
-	.string "has not yet reached this place.$"
+	.string "MEWTWO is watching you. Return\n"
+	.string "with the MIND BADGE to challenge\l"
+	.string "it.$"
 
 AlteringCave_B1F_Text_MewtwoNeedsPartner:
-	.string "This Sign follows HOENN's story.\n"
-	.string "Return as your journey continues.$"
+	.string "MEWTWO accepts challengers with\n"
+	.string "the MIND BADGE. No partner\l"
+	.string "species is required.$"
 
 AlteringCave_B1F_Text_MewtwoAwakens:
-	.string "The CHAMPION'S SIGN erupts with light!\n"
-	.string "MEWTWO answers the challenge!$"
+	.string "MEWTWO steps forward to challenge\n"
+	.string "you!$"
 

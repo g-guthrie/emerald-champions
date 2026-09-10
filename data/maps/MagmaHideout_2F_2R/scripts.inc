@@ -35,15 +35,19 @@ MagmaHideout_2F_2R_Text_Grunt15PostBattle:
 	.string "think he does either.$"
 
 MagmaHideout_2F_2R_Text_Grunt6Intro:
-	.string "I used to hate this heat. Then MAGMORTAR\n"
-	.string "taught me to wear it like armor.$"
+	.string "I used to hate this heat. My\n"
+	.string "POKéMON seem perfectly\l"
+	.string "comfortable!\p"
+	.string "Maybe they're trying to tell me to\n"
+	.string "stop complaining. Come on, then!$"
 
 MagmaHideout_2F_2R_Text_Grunt6Defeat:
-	.string "Even armor buckles under pressure…$"
+	.string "Now I really need some fresh air…$"
 
 MagmaHideout_2F_2R_Text_Grunt6PostBattle:
-	.string "Maybe TEAM MAGMA suits me after all.\n"
-	.string "I just need a stronger furnace.$"
+	.string "They love it here. I suppose I can\n"
+	.string "put up with a little sweat.\p"
+	.string "A lot of sweat, actually.$"
 
 MagmaHideout_2F_2R_Text_Grunt7Intro:
 	.string "You feel those tremors? People say it's\n"
@@ -58,10 +62,10 @@ MagmaHideout_2F_2R_Text_Grunt7PostBattle:
 	.string "MAGMA's almost there. I hope.$"
 
 MagmaHideout_2F_2R_Text_Grunt8Intro:
-	.string "Wait. One of ours dropped his MAGMA\n"
-	.string "EMBLEM outside. Was it you who found it?\p"
-	.string "Doesn't matter. You're still not\n"
-	.string "getting past FLYGON.$"
+	.string "Wait. One of ours lost a MAGMA\n"
+	.string "EMBLEM. Is that how you got in?\p"
+	.string "Oh, he'll hear about this! But\n"
+	.string "first, I've got to deal with you!$"
 
 MagmaHideout_2F_2R_Text_Grunt8Defeat:
 	.string "I'm having trouble believing this…$"

@@ -1,0 +1,13 @@
+Victini ID 42
+base RESULT frames=1000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=c8373bed92e3d538 nonzero_pixels=32569 save_bytes=0
+
+victini-guide-caught 0 RESULT frames=13500 stop_matched=0 pc=08199d48 rtc=946684800 width=240 height=160 video_hash=0f2da57c4b39d4cf nonzero_pixels=19344 save_bytes=0
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=02002290 value=00000000
+ 
+victini-guide-waiting 0 RESULT frames=13500 stop_matched=0 pc=08199d48 rtc=946684800 width=240 height=160 video_hash=0f2da57c4b39d4cf nonzero_pixels=19344 save_bytes=0
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=02002290 value=00000000
+ 

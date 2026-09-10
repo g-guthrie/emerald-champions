@@ -1,0 +1,1462 @@
+{
+  "coverage": {
+    "total_read": 286,
+    "by_file": {
+      "src/legendary_signs.c": 111,
+      "src/field_specials.c": 175,
+      "src/caps.c": 0
+    },
+    "strings_changed": 3,
+    "details": [
+      {
+        "file": "src/legendary_signs.c",
+        "source_line_before": 770,
+        "change": "Needs partner → Check clue: missing discovery conditions may require caught records rather than a current party member."
+      },
+      {
+        "file": "src/legendary_signs.c",
+        "source_line_before": 905,
+        "change": "Badge requirement no longer produces singular 1 Gym Badges."
+      },
+      {
+        "file": "src/legendary_signs.c",
+        "source_line_before": 962,
+        "change": "Sweet Scent probability explicitly split equally among eligible, uncaught discoveries."
+      }
+    ],
+    "source_review": "Every _(…) and COMPOUND_STRING(…) literal read; all remaining non-include literals inventoried and are palette asset paths/extensions, not dialogue. C logic unchanged.",
+    "runtime_exercised": false
+  },
+  "reviewed_strings": [
+    {
+      "file": "src/legendary_signs.c",
+      "line": 33,
+      "text": "Shoal Cave's ice room"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 34,
+      "text": "Granite Cave B2F"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 35,
+      "text": "Fiery Path"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 36,
+      "text": "Mt. Pyre's sixth floor"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 37,
+      "text": "Route 111's desert"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 38,
+      "text": "the ruins above Route 111"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 39,
+      "text": "Route 120"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 40,
+      "text": "the Seafloor Cavern seabed"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 41,
+      "text": "Route 110"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 42,
+      "text": "Meteor Falls' rear cave"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 43,
+      "text": "Dewford Meadow"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 44,
+      "text": "Altering Cave"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 45,
+      "text": "Cave of Origin B1F"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 46,
+      "text": "New Mauville"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 47,
+      "text": "Scorched Slab B2F"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 48,
+      "text": "Route 102's grass"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 49,
+      "text": "Route 123"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 50,
+      "text": "Mt. Pyre's exterior"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 51,
+      "text": "Route 119's grass"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 52,
+      "text": "Meteor Falls B1F"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 53,
+      "text": "Victory Road 1F"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 54,
+      "text": "Petalburg Woods, second area"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 55,
+      "text": "Petalburg Woods, third area"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 56,
+      "text": "Meteor Falls B1F, rear room"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 57,
+      "text": "Desert Underpass"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 58,
+      "text": "Sandstrewn Ruins B1F"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 59,
+      "text": "Ashen Woods"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 60,
+      "text": "Verdanturf Meadow"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 61,
+      "text": "Route 112"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 62,
+      "text": "Route 117"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 63,
+      "text": "Route 125"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 64,
+      "text": "Route 126"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 65,
+      "text": "Route 127"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 66,
+      "text": "Victory Road B1F"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 67,
+      "text": "Magma Hideout 4F"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 68,
+      "text": "Devon Corp. 2F"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 69,
+      "text": "the Champions Circuit"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 70,
+      "text": "Mauville's Game Corner"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 71,
+      "text": "Route 117's Day Care"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 72,
+      "text": "Mt. Pyre's summit"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 73,
+      "text": "the Sealed Chamber"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 74,
+      "text": "Altering Cave B1F"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 75,
+      "text": "Ember Path"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 79,
+      "text": "an unknown place"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 720,
+      "text": "Terra Cave"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 720,
+      "text": "Marine Cave"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 721,
+      "text": "Sky Pillar's summit"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 721,
+      "text": "the Desert Ruins"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 722,
+      "text": "the Island Cave"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 722,
+      "text": "the Ancient Tomb"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 723,
+      "text": "Hoenn's routes / Southern Island"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 723,
+      "text": "Hoenn's routes / Southern Island"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 724,
+      "text": "Navel Rock's lower chamber"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 724,
+      "text": "Navel Rock's summit"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 725,
+      "text": "Faraway Island"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 725,
+      "text": "Birth Island"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 726,
+      "text": "Jirachi's room in Meteor Falls"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 726,
+      "text": "Diancie's room in Cave of Origin"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 727,
+      "text": "Heatran's room in Scorched Slab"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 727,
+      "text": "Ember Path"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 735,
+      "text": "Galarian Articuno"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 736,
+      "text": "Galarian Zapdos"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 737,
+      "text": "Galarian Moltres"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 766,
+      "text": " (Caught)"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 768,
+      "text": " (Not yet)"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 770,
+      "text": " (Needs partner)"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 777,
+      "text": " (Lead)"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 779,
+      "text": " (Available)"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 781,
+      "text": " (Resting)"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 781,
+      "text": " (Ready)"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 797,
+      "text": " (Caught)"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 797,
+      "text": " (Lead)"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 852,
+      "text": "{STR_VAR_2}\\n{STR_VAR_3}."
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 855,
+      "text": "\\pCaught! This discovery is recorded."
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 859,
+      "text": "\\pAfter resolving the weather crisis,\\nask the Weather Institute about\\lunusual weather. Follow its report."
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 861,
+      "text": "\\pReturn to the summit after resolving\\nthe crisis in Sootopolis."
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 863,
+      "text": "\\pTake WAILORD and RELICANTH to the\\nSealed Chamber on Route 134.\\pRead its inscriptions to open the\\nthree ruins, then solve each puzzle."
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 865,
+      "text": "\\pWith six badges, ask the sailor at\\nLilycove Harbor about his sightings.\\pOne roams Hoenn; the other waits on\\nSouthern Island. He gives the passes."
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 867,
+      "text": "\\pPlace the MAGMA STONE in its room\\nto awaken HEATRAN."
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 869,
+      "text": "\\pFollow MEW through the island's grass\\nand approach when you find it."
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 871,
+      "text": "\\pFollow the moving triangle with as\\nfew steps as possible."
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 873,
+      "text": "\\pExplore this place and approach the\\nlegendary when you find it."
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 874,
+      "text": "\\pIf it escapes or faints, leave the\\narea and return for another try."
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 892,
+      "text": "{STR_VAR_2}\\n{STR_VAR_3}."
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 895,
+      "text": "\\pCaught! This discovery is recorded."
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 905,
+      "text": "\\pAvailable after earning\\n{STR_VAR_1} Gym Badges."
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 909,
+      "text": "\\pFirst, resolve the weather crisis\\nin Sootopolis."
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 911,
+      "text": "\\pHelp Wattson stop New Mauville's\\ngenerator, then report back to him."
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 913,
+      "text": "\\pFirst, rescue the Weather Institute\\nresearchers from Team Aqua."
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 915,
+      "text": "\\pFirst, confront Maxie deep inside\\nthe Magma Hideout."
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 917,
+      "text": "\\pFirst, help the elders at Mt. Pyre\\nand receive their Orb."
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 923,
+      "text": "\\pHelp Dewford Meadow's warden perform\\na song. Bring a Pokémon with SING."
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 925,
+      "text": "\\pBring CASTFORM to the archaeologist\\nat Route 111's elevated ruins.\\lHelp with the local weather survey."
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 927,
+      "text": "\\pFirst, catch RESHIRAM or ZEKROM.\\nEither discovery is enough."
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 929,
+      "text": "\\pBring REGIROCK, REGICE and REGISTEEL\\ntogether to the statue."
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 931,
+      "text": "\\pCatch OKIDOGI, MUNKIDORI and\\nFEZANDIPITI, then inspect the shrine."
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 935,
+      "text": "\\pA clue points to this family:\\n{STR_VAR_1}.\\pBefriend a member of that family.\\nA caught Pokédex entry is enough;\\lyour partner can stay in the PC."
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 944,
+      "text": "\\pAsk the Pokémon prize counter at\\nMauville's Game Corner."
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 947,
+      "text": "\\pEarn its Champions Circuit milestone\\nat the Battle Frontier's Battle Tower.\\pThe ferry opens with six badges.\\pLifetime wins count. The attendant\\nkeeps an earned reward until claimed."
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 951,
+      "text": "\\pResolve the weather crisis and earn\\nall eight badges, then visit Devon.\\pNo Pokédex completion is needed."
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 952,
+      "text": "\\pWin 40 Circuit battles in total and\\nclaim its other legendary rewards."
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 955,
+      "text": "\\pLeave MANAPHY and DITTO together\\nat Route 117's Day Care.\\pHatch their Egg to meet PHIONE."
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 958,
+      "text": "\\pAvailable now!"
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 960,
+      "text": "\\pSearch while SURFING in this area.\\nThis Pokémon has a 1% encounter chance."
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 961,
+      "text": "\\pSearch the wild Pokémon in this area.\\nThis Pokémon has a 1% encounter chance."
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 962,
+      "text": "\\pSWEET SCENT gives a 25% chance of\\na legendary encounter here.\\pAvailable legends share that chance.\\nIt cannot bypass their requirements."
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 963,
+      "text": "\\pIf it escapes or faints, keep looking.\\nIt can appear again until caught."
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 966,
+      "text": "\\pSearch the wild Pokémon in this area.\\nNo research visit is needed."
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 973,
+      "text": "\\pSpeak to Devon's dream researcher\\nabout his mechanical prototype."
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 978,
+      "text": "\\pResting after your last encounter.\\nLeave this area and return to retry."
+    },
+    {
+      "file": "src/legendary_signs.c",
+      "line": 982,
+      "text": "\\pReady! Approach the Pokémon or\\ninspect its shrine in this area."
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 96,
+      "text": "Back"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 97,
+      "text": "Reset All"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 98,
+      "text": "HP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 99,
+      "text": "Attack"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 100,
+      "text": "Defense"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 101,
+      "text": "Sp. Atk"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 102,
+      "text": "Sp. Def"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 103,
+      "text": "Speed"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 104,
+      "text": "-32"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 105,
+      "text": "-16"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 106,
+      "text": "-4"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 107,
+      "text": "+4"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 108,
+      "text": "+16"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 109,
+      "text": "+32"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 110,
+      "text": "Set to 0"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 111,
+      "text": "Set Maximum"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 112,
+      "text": "No Pokémon was selected."
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 113,
+      "text": "EVs used: "
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 114,
+      "text": "/510\\nEVs {RIGHT_ARROW} stat after Nature"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 115,
+      "text": "That stat cannot be adjusted."
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 116,
+      "text": "  "
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 117,
+      "text": "/252"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 118,
+      "text": " {RIGHT_ARROW} "
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 119,
+      "text": ": "
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 120,
+      "text": "\\nEVs: "
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 121,
+      "text": "/252  Left: "
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 122,
+      "text": " (fixed HP)"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 153,
+      "text": "no change"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 154,
+      "text": "+"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 155,
+      "text": " -"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 156,
+      "text": "Atk"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 157,
+      "text": "Def"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 158,
+      "text": "Spe"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 159,
+      "text": "SpA"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 160,
+      "text": "SpD"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 711,
+      "text": "\\n"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 712,
+      "text": "\\l"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 713,
+      "text": "\\p"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 714,
+      "text": "--"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 715,
+      "text": "Ability: "
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 716,
+      "text": "Nature: "
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 717,
+      "text": "Item: "
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 718,
+      "text": "I don't have that set anymore."
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 1009,
+      "text": "Big guy"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 1010,
+      "text": "Big girl"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 1011,
+      "text": "son"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 1012,
+      "text": "daughter"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 1013,
+      "text": "99 times +"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 1014,
+      "text": "1 minute +"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 1015,
+      "text": " seconds"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 1016,
+      "text": " time(s)"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 1018,
+      "text": "WALLACE"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 1019,
+      "text": "STEVEN"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 1020,
+      "text": "BRAWLY"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 1021,
+      "text": "WINONA"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 1022,
+      "text": "PHOEBE"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 1023,
+      "text": "GLACIA"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3404,
+      "text": "Heart"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3405,
+      "text": "Star"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3406,
+      "text": "Diamond"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3407,
+      "text": "Debutante"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3408,
+      "text": "Matron"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3409,
+      "text": "Dandy"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3410,
+      "text": "La Reine"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3411,
+      "text": "Kabuki"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3412,
+      "text": "Pharaoh"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3413,
+      "text": "Natural"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3418,
+      "text": "BLUE FLUTE"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3419,
+      "text": "YELLOW FLUTE"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3420,
+      "text": "RED FLUTE"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3421,
+      "text": "WHITE FLUTE"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3422,
+      "text": "BLACK FLUTE"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3423,
+      "text": "PRETTY CHAIR"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3424,
+      "text": "PRETTY DESK"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3429,
+      "text": "0 pts"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3430,
+      "text": "10 pts"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3431,
+      "text": "20 pts"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3432,
+      "text": "30 pts"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3433,
+      "text": "40 pts"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3434,
+      "text": "50 pts"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3435,
+      "text": "60 pts"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3436,
+      "text": "70 pts"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3437,
+      "text": "80 pts"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3438,
+      "text": "90 pts"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3439,
+      "text": "100 pts"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3440,
+      "text": "?"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3444,
+      "text": "KISS POSTER{CLEAR_TO 94}16BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3445,
+      "text": "KISS CUSHION{CLEAR_TO 94}32BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3446,
+      "text": "SMOOCHUM DOLL{CLEAR_TO 94}32BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3447,
+      "text": "TOGEPI DOLL{CLEAR_TO 94}48BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3448,
+      "text": "MEOWTH DOLL{CLEAR_TO 94}48BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3449,
+      "text": "CLEFAIRY DOLL{CLEAR_TO 94}48BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3450,
+      "text": "DITTO DOLL{CLEAR_TO 94}48BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3451,
+      "text": "CYNDAQUIL DOLL{CLEAR_TO 94}80BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3452,
+      "text": "CHIKORITA DOLL{CLEAR_TO 94}80BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3453,
+      "text": "TOTODILE DOLL{CLEAR_TO 94}80BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3458,
+      "text": "LAPRAS DOLL{CLEAR_TO 88}128BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3459,
+      "text": "SNORLAX DOLL{CLEAR_TO 88}128BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3460,
+      "text": "VENUSAUR DOLL{CLEAR_TO 88}256BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3461,
+      "text": "CHARIZARD DOLL{CLEAR_TO 88}256BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3462,
+      "text": "BLASTOISE DOLL{CLEAR_TO 88}256BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3467,
+      "text": "PP UP{CLEAR_TO 100}4BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3468,
+      "text": "PP MAX{CLEAR_TO 94}12BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3469,
+      "text": "MAX REVIVE{CLEAR_TO 100}8BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3470,
+      "text": "SACRED ASH{CLEAR_TO 94}32BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3471,
+      "text": "DREAM BALL{CLEAR_TO 100}8BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3472,
+      "text": "BEAST BALL{CLEAR_TO 100}8BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3477,
+      "text": "LINKING CORD{CLEAR_TO 100}8BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3478,
+      "text": "PROTECTOR{CLEAR_TO 94}12BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3479,
+      "text": "ELECTIRIZER{CLEAR_TO 94}12BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3480,
+      "text": "MAGMARIZER{CLEAR_TO 94}12BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3481,
+      "text": "REAPER CLOTH{CLEAR_TO 94}12BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3482,
+      "text": "RAZOR CLAW{CLEAR_TO 94}12BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3483,
+      "text": "SWEET APPLE{CLEAR_TO 100}8BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3484,
+      "text": "TART APPLE{CLEAR_TO 100}8BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3485,
+      "text": "PRISM SCALE{CLEAR_TO 94}16BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3490,
+      "text": "ENERGYPOWDER{CLEAR_TO 114}{FONT_SMALL}50"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3491,
+      "text": "ENERGY ROOT{CLEAR_TO 114}{FONT_SMALL}80"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3492,
+      "text": "HEAL POWDER{CLEAR_TO 114}{FONT_SMALL}50"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3493,
+      "text": "REVIVAL HERB{CLEAR_TO 108}{FONT_SMALL}300"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3494,
+      "text": "ETHER{CLEAR_TO 99}{FONT_SMALL}500"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3495,
+      "text": "MAX ETHER{CLEAR_TO 99}{FONT_SMALL}1,000"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3496,
+      "text": "ELIXIR{CLEAR_TO 99}{FONT_SMALL}1,500"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3497,
+      "text": "MAX ELIXIR{CLEAR_TO 99}{FONT_SMALL}3,000"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3498,
+      "text": "PP UP{CLEAR_TO 99}{FONT_SMALL}3,000"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3499,
+      "text": "PP MAX{CLEAR_TO 99}{FONT_SMALL}9,000"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3500,
+      "text": "SACRED ASH{CLEAR_TO 99}{FONT_SMALL}12,000"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3518,
+      "text": "SOFTBOILED{CLEAR_TO 78}16BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3519,
+      "text": "SEISMIC TOSS{CLEAR_TO 78}24BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3520,
+      "text": "DREAM EATER{CLEAR_TO 78}24BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3521,
+      "text": "MEGA PUNCH{CLEAR_TO 78}24BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3522,
+      "text": "MEGA KICK{CLEAR_TO 78}48BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3523,
+      "text": "BODY SLAM{CLEAR_TO 78}48BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3524,
+      "text": "ROCK SLIDE{CLEAR_TO 78}48BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3525,
+      "text": "COUNTER{CLEAR_TO 78}48BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3526,
+      "text": "THUNDER WAVE{CLEAR_TO 78}48BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3527,
+      "text": "SWORDS DANCE{CLEAR_TO 78}48BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3532,
+      "text": "DEFENSE CURL{CLEAR_TO 78}16BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3533,
+      "text": "SNORE{CLEAR_TO 78}24BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3534,
+      "text": "MUD-SLAP{CLEAR_TO 78}24BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3535,
+      "text": "SWIFT{CLEAR_TO 78}24BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3536,
+      "text": "ICY WIND{CLEAR_TO 78}24BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3537,
+      "text": "ENDURE{CLEAR_TO 78}48BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3538,
+      "text": "PSYCH UP{CLEAR_TO 78}48BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3539,
+      "text": "ICE PUNCH{CLEAR_TO 78}48BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3540,
+      "text": "THUNDERPUNCH{CLEAR_TO 78}48BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3541,
+      "text": "FIRE PUNCH{CLEAR_TO 78}48BP"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3593,
+      "text": "Kanto"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3594,
+      "text": "Johto"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3595,
+      "text": "Hoenn"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3596,
+      "text": "Sinnoh"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3597,
+      "text": "Unova"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3598,
+      "text": "Kalos"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3599,
+      "text": "Alola"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3600,
+      "text": "Galar"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 3601,
+      "text": "Paldea"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 5521,
+      "text": ""
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 5527,
+      "text": "SampleCode"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 6276,
+      "text": "Now on:"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 6850,
+      "text": "Plain Cosplay"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 6851,
+      "text": "Rock Star"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 6852,
+      "text": "Belle"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 6853,
+      "text": "Pop Star"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 6854,
+      "text": "Ph. D."
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 6855,
+      "text": "Libre"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 6868,
+      "text": "Normal"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 6869,
+      "text": "Attack"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 6870,
+      "text": "Defense"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 6871,
+      "text": "Speed"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 6966,
+      "text": "{STR_VAR_1}: {STR_VAR_2}."
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 6972,
+      "text": "Your party still needs its Surf\\ncapability. Choose another move."
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 6976,
+      "text": "Empty slot"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 6977,
+      "text": "Empty slot"
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 6979,
+      "text": "\\p{STR_VAR_2} becomes\\n{STR_VAR_3}."
+    },
+    {
+      "file": "src/field_specials.c",
+      "line": 7023,
+      "text": "Set {STR_VAR_1}'s friendship\\nto {STR_VAR_2}?"
+    }
+  ]
+}

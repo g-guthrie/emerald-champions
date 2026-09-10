@@ -106,7 +106,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_PIKACHU",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_1",
       "x": 49,
       "y": 2,
       "elevation": 3,
@@ -114,9 +114,10 @@
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "VAR_TEMP_1",
+      "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "FLAG_TEMP_2"
+      "flag": "FLAG_TEMP_2",
+      "local_id": "LOCALID_DAYCARE_MON_1"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_RUNNING_TRIATHLETE_M",
@@ -366,18 +367,18 @@
       "flag": "FLAG_HIDDEN_ITEM_ROUTE_117_CHARIZARDITE_Y"
     },
     {
-      "local_id": "LOCALID_ROUTE117_LEGENDARY_SIGN",
-      "graphics_id": "OBJ_EVENT_GFX_DEOXYS_TRIANGLE",
-      "x": 13,
-      "y": 8,
+      "graphics_id": "OBJ_EVENT_GFX_VAR_0",
+      "x": 48,
+      "y": 2,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Common_EventScript_LegendaryLandmark",
-      "flag": "0"
+      "script": "NULL",
+      "flag": "FLAG_TEMP_1",
+      "local_id": "LOCALID_DAYCARE_MON_0"
     }
   ],
   "warp_events": [

@@ -1,0 +1,206 @@
+tools/scaninc/scaninc -M build/emerald-test/test/battle/ai/emerald_champions_plans.d -g build/assets -I include -I tools/agbcc/include test/battle/ai/emerald_champions_plans.c
+tools/scaninc/scaninc -M build/emerald-test/test/upstream_critical_fixes.d -g build/assets -I include -I tools/agbcc/include test/upstream_critical_fixes.c
+tools/scaninc/scaninc -M build/emerald-test/test/emerald_champions.d -g build/assets -I include -I tools/agbcc/include test/emerald_champions.c
+tools/scaninc/scaninc -M build/emerald-test/src/wild_encounter.d -g build/assets -I include -I tools/agbcc/include src/wild_encounter.c
+tools/scaninc/scaninc -M build/emerald-test/src/trade.d -g build/assets -I include -I tools/agbcc/include src/trade.c
+tools/scaninc/scaninc -M build/emerald-test/src/party_menu.d -g build/assets -I include -I tools/agbcc/include src/party_menu.c
+tools/scaninc/scaninc -M build/emerald-test/src/move_relearner.d -g build/assets -I include -I tools/agbcc/include src/move_relearner.c
+tools/scaninc/scaninc -M build/emerald-test/src/legendary_signs.d -g build/assets -I include -I tools/agbcc/include src/legendary_signs.c
+tools/scaninc/scaninc -M build/emerald-test/src/field_specials.d -g build/assets -I include -I tools/agbcc/include src/field_specials.c
+tools/scaninc/scaninc -M build/emerald-test/src/evolution_scene.d -g build/assets -I include -I tools/agbcc/include src/evolution_scene.c
+tools/scaninc/scaninc -M build/emerald-test/src/emerald_champions_opening.d -g build/assets -I include -I tools/agbcc/include src/emerald_champions_opening.c
+tools/scaninc/scaninc -M build/emerald-test/src/emerald_champions_headless.d -g build/assets -I include -I tools/agbcc/include src/emerald_champions_headless.c
+tools/scaninc/scaninc -M build/emerald-test/src/emerald_champions_battle_sets.d -g build/assets -I include -I tools/agbcc/include src/emerald_champions_battle_sets.c
+tools/scaninc/scaninc -M build/emerald-test/src/emerald_champions_agent_prep.d -g build/assets -I include -I tools/agbcc/include src/emerald_champions_agent_prep.c
+tools/scaninc/scaninc -M build/emerald-test/src/battle_setup.d -g build/assets -I include -I tools/agbcc/include src/battle_setup.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/battle_setup.o src/battle_setup.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/emerald_champions_agent_prep.o src/emerald_champions_agent_prep.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/emerald_champions_battle_sets.o src/emerald_champions_battle_sets.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/emerald_champions_headless.o src/emerald_champions_headless.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/emerald_champions_opening.o src/emerald_champions_opening.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/evolution_scene.o src/evolution_scene.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/field_specials.o src/field_specials.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/legendary_signs.o src/legendary_signs.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/move_relearner.o src/move_relearner.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/party_menu.o src/party_menu.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/trade.o src/trade.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/wild_encounter.o src/wild_encounter.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/emerald_champions.o test/emerald_champions.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/upstream_critical_fixes.o test/upstream_critical_fixes.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/battle/ai/emerald_champions_plans.o test/battle/ai/emerald_champions_plans.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 4
+[0] EC preset berry review: Substitute plus Drum or Sitrus application by level: [32mPASS[0m
+BERRY_REVIEW species=Eiscue format=1 choice=0 level=10 apply=1 item=Salac Berry ability=248 drum=1 sub=1 rawHp=38 rawHpEv=4 postHp=38 currentHp=38 postHpEv=4 evTotal=508 odd=0 gluttonyOrJuice=0
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Eiscue format=1 choice=0 level=10 full=38 subCost=9 afterSub=29 drumCost=19 afterDrum=19 afterSubDrum=10 halfDown=19 halfUp=19 quarterDown=9
+BERRY_REVIEW species=Eiscue format=1 choice=0 level=12 apply=1 item=Salac Berry ability=248 drum=1 sub=1 rawHp=43 rawHpEv=4 postHp=43 currentHp=43 postHpEv=4 evTotal=508 odd=1 gluttonyOrJuice=0
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Eiscue format=1 choice=0 level=12 full=43 subCost=10 afterSub=33 drumCost=21 afterDrum=22 afterSubDrum=12 halfDown=21 halfUp=22 quarterDown=10
+BERRY_REVIEW species=Eiscue format=1 choice=0 level=14 apply=1 item=Salac Berry ability=248 drum=1 sub=1 rawHp=49 rawHpEv=4 postHp=49 currentHp=49 postHpEv=4 evTotal=508 odd=1 gluttonyOrJuice=0
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Eiscue format=1 choice=0 level=14 full=49 subCost=12 afterSub=37 drumCost=24 afterDrum=25 afterSubDrum=13 halfDown=24 halfUp=25 quarterDown=12
+BERRY_REVIEW species=Eiscue format=1 choice=0 level=50 apply=1 item=Salac Berry ability=248 drum=1 sub=1 rawHp=151 rawHpEv=4 postHp=151 currentHp=151 postHpEv=4 evTotal=508 odd=1 gluttonyOrJuice=0
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Eiscue format=1 choice=0 level=50 full=151 subCost=37 afterSub=114 drumCost=75 afterDrum=76 afterSubDrum=39 halfDown=75 halfUp=76 quarterDown=37
+BERRY_REVIEW species=Eiscue format=1 choice=0 level=100 apply=1 item=Salac Berry ability=248 drum=1 sub=1 rawHp=292 rawHpEv=4 postHp=292 currentHp=292 postHpEv=4 evTotal=508 odd=0 gluttonyOrJuice=0
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Eiscue format=1 choice=0 level=100 full=292 subCost=73 afterSub=219 drumCost=146 afterDrum=146 afterSubDrum=73 halfDown=146 halfUp=146 quarterDown=73
+BERRY_REVIEW species=Hawlucha format=1 choice=0 level=10 apply=1 item=Sitrus Berry ability=84 drum=0 sub=1 rawHp=38 rawHpEv=4 postHp=38 currentHp=38 postHpEv=4 evTotal=508 odd=0 gluttonyOrJuice=0
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Hawlucha format=1 choice=0 level=10 full=38 subCost=9 afterSub=29 drumCost=19 afterDrum=19 afterSubDrum=10 halfDown=19 halfUp=19 quarterDown=9
+BERRY_REVIEW species=Hawlucha format=1 choice=0 level=12 apply=1 item=Sitrus Berry ability=84 drum=0 sub=1 rawHp=44 rawHpEv=4 postHp=44 currentHp=44 postHpEv=4 evTotal=508 odd=0 gluttonyOrJuice=0
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Hawlucha format=1 choice=0 level=12 full=44 subCost=11 afterSub=33 drumCost=22 afterDrum=22 afterSubDrum=11 halfDown=22 halfUp=22 quarterDown=11
+BERRY_REVIEW species=Hawlucha format=1 choice=0 level=14 apply=1 item=Sitrus Berry ability=84 drum=0 sub=1 rawHp=50 rawHpEv=4 postHp=50 currentHp=50 postHpEv=4 evTotal=508 odd=0 gluttonyOrJuice=0
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Hawlucha format=1 choice=0 level=14 full=50 subCost=12 afterSub=38 drumCost=25 afterDrum=25 afterSubDrum=13 halfDown=25 halfUp=25 quarterDown=12
+BERRY_REVIEW species=Hawlucha format=1 choice=0 level=50 apply=1 item=Sitrus Berry ability=84 drum=0 sub=1 rawHp=154 rawHpEv=4 postHp=154 currentHp=154 postHpEv=4 evTotal=508 odd=0 gluttonyOrJuice=0
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Hawlucha format=1 choice=0 level=50 full=154 subCost=38 afterSub=116 drumCost=77 afterDrum=77 afterSubDrum=39 halfDown=77 halfUp=77 quarterDown=38
+BERRY_REVIEW species=Hawlucha format=1 choice=0 level=100 apply=1 item=Sitrus Berry ability=84 drum=0 sub=1 rawHp=298 rawHpEv=4 postHp=298 currentHp=298 postHpEv=4 evTotal=508 odd=0 gluttonyOrJuice=0
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Hawlucha format=1 choice=0 level=100 full=298 subCost=74 afterSub=224 drumCost=149 afterDrum=149 afterSubDrum=75 halfDown=149 halfUp=149 quarterDown=74
+[1] EC preset berry review: non-Sitrus Belly Drum application by level: [32mPASS[0m
+BERRY_REVIEW species=Poliwag format=0 choice=1 level=2 apply=1 item=Berry Juice ability=11 drum=1 sub=0 rawHp=14 rawHpEv=116 postHp=14 currentHp=14 postHpEv=116 evTotal=508 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Poliwag format=0 choice=1 level=2 full=14 subCost=3 afterSub=11 drumCost=7 afterDrum=7 afterSubDrum=4 halfDown=7 halfUp=7 quarterDown=3
+BERRY_REVIEW species=Poliwag format=0 choice=1 level=5 apply=1 item=Berry Juice ability=11 drum=1 sub=0 rawHp=22 rawHpEv=116 postHp=22 currentHp=22 postHpEv=116 evTotal=508 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Poliwag format=0 choice=1 level=5 full=22 subCost=5 afterSub=17 drumCost=11 afterDrum=11 afterSubDrum=6 halfDown=11 halfUp=11 quarterDown=5
+BERRY_REVIEW species=Poliwag format=0 choice=1 level=10 apply=1 item=Berry Juice ability=11 drum=1 sub=0 rawHp=34 rawHpEv=116 postHp=34 currentHp=34 postHpEv=116 evTotal=508 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Poliwag format=0 choice=1 level=10 full=34 subCost=8 afterSub=26 drumCost=17 afterDrum=17 afterSubDrum=9 halfDown=17 halfUp=17 quarterDown=8
+BERRY_REVIEW species=Poliwag format=0 choice=1 level=12 apply=1 item=Berry Juice ability=11 drum=1 sub=0 rawHp=38 rawHpEv=116 postHp=38 currentHp=38 postHpEv=116 evTotal=508 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Poliwag format=0 choice=1 level=12 full=38 subCost=9 afterSub=29 drumCost=19 afterDrum=19 afterSubDrum=10 halfDown=19 halfUp=19 quarterDown=9
+BERRY_REVIEW species=Poliwag format=0 choice=1 level=14 apply=1 item=Berry Juice ability=11 drum=1 sub=0 rawHp=43 rawHpEv=116 postHp=42 currentHp=42 postHpEv=96 evTotal=488 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Poliwag format=0 choice=1 level=14 full=42 subCost=10 afterSub=32 drumCost=21 afterDrum=21 afterSubDrum=11 halfDown=21 halfUp=21 quarterDown=10
+BERRY_REVIEW species=Poliwag format=0 choice=1 level=20 apply=1 item=Berry Juice ability=11 drum=1 sub=0 rawHp=58 rawHpEv=116 postHp=58 currentHp=58 postHpEv=116 evTotal=508 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Poliwag format=0 choice=1 level=20 full=58 subCost=14 afterSub=44 drumCost=29 afterDrum=29 afterSubDrum=15 halfDown=29 halfUp=29 quarterDown=14
+BERRY_REVIEW species=Poliwag format=0 choice=1 level=30 apply=1 item=Berry Juice ability=11 drum=1 sub=0 rawHp=82 rawHpEv=116 postHp=82 currentHp=82 postHpEv=116 evTotal=508 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Poliwag format=0 choice=1 level=30 full=82 subCost=20 afterSub=62 drumCost=41 afterDrum=41 afterSubDrum=21 halfDown=41 halfUp=41 quarterDown=20
+BERRY_REVIEW species=Poliwag format=0 choice=1 level=50 apply=1 item=Berry Juice ability=11 drum=1 sub=0 rawHp=130 rawHpEv=116 postHp=130 currentHp=130 postHpEv=116 evTotal=508 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Poliwag format=0 choice=1 level=50 full=130 subCost=32 afterSub=98 drumCost=65 afterDrum=65 afterSubDrum=33 halfDown=65 halfUp=65 quarterDown=32
+BERRY_REVIEW species=Poliwag format=0 choice=1 level=100 apply=1 item=Berry Juice ability=11 drum=1 sub=0 rawHp=250 rawHpEv=116 postHp=250 currentHp=250 postHpEv=116 evTotal=508 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Poliwag format=0 choice=1 level=100 full=250 subCost=62 afterSub=188 drumCost=125 afterDrum=125 afterSubDrum=63 halfDown=125 halfUp=125 quarterDown=62
+BERRY_REVIEW species=Poliwag format=1 choice=0 level=2 apply=1 item=Berry Juice ability=11 drum=1 sub=0 rawHp=14 rawHpEv=116 postHp=14 currentHp=14 postHpEv=116 evTotal=508 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Poliwag format=1 choice=0 level=2 full=14 subCost=3 afterSub=11 drumCost=7 afterDrum=7 afterSubDrum=4 halfDown=7 halfUp=7 quarterDown=3
+BERRY_REVIEW species=Poliwag format=1 choice=0 level=5 apply=1 item=Berry Juice ability=11 drum=1 sub=0 rawHp=22 rawHpEv=116 postHp=22 currentHp=22 postHpEv=116 evTotal=508 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Poliwag format=1 choice=0 level=5 full=22 subCost=5 afterSub=17 drumCost=11 afterDrum=11 afterSubDrum=6 halfDown=11 halfUp=11 quarterDown=5
+BERRY_REVIEW species=Poliwag format=1 choice=0 level=10 apply=1 item=Berry Juice ability=11 drum=1 sub=0 rawHp=34 rawHpEv=116 postHp=34 currentHp=34 postHpEv=116 evTotal=508 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Poliwag format=1 choice=0 level=10 full=34 subCost=8 afterSub=26 drumCost=17 afterDrum=17 afterSubDrum=9 halfDown=17 halfUp=17 quarterDown=8
+BERRY_REVIEW species=Poliwag format=1 choice=0 level=12 apply=1 item=Berry Juice ability=11 drum=1 sub=0 rawHp=38 rawHpEv=116 postHp=38 currentHp=38 postHpEv=116 evTotal=508 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Poliwag format=1 choice=0 level=12 full=38 subCost=9 afterSub=29 drumCost=19 afterDrum=19 afterSubDrum=10 halfDown=19 halfUp=19 quarterDown=9
+BERRY_REVIEW species=Poliwag format=1 choice=0 level=14 apply=1 item=Berry Juice ability=11 drum=1 sub=0 rawHp=43 rawHpEv=116 postHp=42 currentHp=42 postHpEv=96 evTotal=488 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Poliwag format=1 choice=0 level=14 full=42 subCost=10 afterSub=32 drumCost=21 afterDrum=21 afterSubDrum=11 halfDown=21 halfUp=21 quarterDown=10
+BERRY_REVIEW species=Poliwag format=1 choice=0 level=20 apply=1 item=Berry Juice ability=11 drum=1 sub=0 rawHp=58 rawHpEv=116 postHp=58 currentHp=58 postHpEv=116 evTotal=508 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Poliwag format=1 choice=0 level=20 full=58 subCost=14 afterSub=44 drumCost=29 afterDrum=29 afterSubDrum=15 halfDown=29 halfUp=29 quarterDown=14
+BERRY_REVIEW species=Poliwag format=1 choice=0 level=30 apply=1 item=Berry Juice ability=11 drum=1 sub=0 rawHp=82 rawHpEv=116 postHp=82 currentHp=82 postHpEv=116 evTotal=508 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Poliwag format=1 choice=0 level=30 full=82 subCost=20 afterSub=62 drumCost=41 afterDrum=41 afterSubDrum=21 halfDown=41 halfUp=41 quarterDown=20
+BERRY_REVIEW species=Poliwag format=1 choice=0 level=50 apply=1 item=Berry Juice ability=11 drum=1 sub=0 rawHp=130 rawHpEv=116 postHp=130 currentHp=130 postHpEv=116 evTotal=508 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Poliwag format=1 choice=0 level=50 full=130 subCost=32 afterSub=98 drumCost=65 afterDrum=65 afterSubDrum=33 halfDown=65 halfUp=65 quarterDown=32
+BERRY_REVIEW species=Poliwag format=1 choice=0 level=100 apply=1 item=Berry Juice ability=11 drum=1 sub=0 rawHp=250 rawHpEv=116 postHp=250 currentHp=250 postHpEv=116 evTotal=508 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Poliwag format=1 choice=0 level=100 full=250 subCost=62 afterSub=188 drumCost=125 afterDrum=125 afterSubDrum=63 halfDown=125 halfUp=125 quarterDown=62
+BERRY_REVIEW species=Snorlax format=0 choice=0 level=2 apply=1 item=Iapapa Berry ability=82 drum=1 sub=0 rawHp=20 rawHpEv=252 postHp=20 currentHp=20 postHpEv=252 evTotal=508 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Snorlax format=0 choice=0 level=2 full=20 subCost=5 afterSub=15 drumCost=10 afterDrum=10 afterSubDrum=5 halfDown=10 halfUp=10 quarterDown=5
+BERRY_REVIEW species=Snorlax format=0 choice=0 level=5 apply=1 item=Iapapa Berry ability=82 drum=1 sub=0 rawHp=35 rawHpEv=252 postHp=35 currentHp=35 postHpEv=252 evTotal=508 odd=1 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Snorlax format=0 choice=0 level=5 full=35 subCost=8 afterSub=27 drumCost=17 afterDrum=18 afterSubDrum=10 halfDown=17 halfUp=18 quarterDown=8
+BERRY_REVIEW species=Snorlax format=0 choice=0 level=10 apply=1 item=Iapapa Berry ability=82 drum=1 sub=0 rawHp=61 rawHpEv=252 postHp=60 currentHp=60 postHpEv=232 evTotal=488 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Snorlax format=0 choice=0 level=10 full=60 subCost=15 afterSub=45 drumCost=30 afterDrum=30 afterSubDrum=15 halfDown=30 halfUp=30 quarterDown=15
+BERRY_REVIEW species=Snorlax format=0 choice=0 level=12 apply=1 item=Iapapa Berry ability=82 drum=1 sub=0 rawHp=71 rawHpEv=252 postHp=70 currentHp=70 postHpEv=228 evTotal=484 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Snorlax format=0 choice=0 level=12 full=70 subCost=17 afterSub=53 drumCost=35 afterDrum=35 afterSubDrum=18 halfDown=35 halfUp=35 quarterDown=17
+BERRY_REVIEW species=Snorlax format=0 choice=0 level=14 apply=1 item=Iapapa Berry ability=82 drum=1 sub=0 rawHp=81 rawHpEv=252 postHp=80 currentHp=80 postHpEv=224 evTotal=480 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Snorlax format=0 choice=0 level=14 full=80 subCost=20 afterSub=60 drumCost=40 afterDrum=40 afterSubDrum=20 halfDown=40 halfUp=40 quarterDown=20
+BERRY_REVIEW species=Snorlax format=0 choice=0 level=20 apply=1 item=Iapapa Berry ability=82 drum=1 sub=0 rawHp=112 rawHpEv=252 postHp=112 currentHp=112 postHpEv=252 evTotal=508 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Snorlax format=0 choice=0 level=20 full=112 subCost=28 afterSub=84 drumCost=56 afterDrum=56 afterSubDrum=28 halfDown=56 halfUp=56 quarterDown=28
+BERRY_REVIEW species=Snorlax format=0 choice=0 level=30 apply=1 item=Iapapa Berry ability=82 drum=1 sub=0 rawHp=164 rawHpEv=252 postHp=164 currentHp=164 postHpEv=252 evTotal=508 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Snorlax format=0 choice=0 level=30 full=164 subCost=41 afterSub=123 drumCost=82 afterDrum=82 afterSubDrum=41 halfDown=82 halfUp=82 quarterDown=41
+BERRY_REVIEW species=Snorlax format=0 choice=0 level=50 apply=1 item=Iapapa Berry ability=82 drum=1 sub=0 rawHp=267 rawHpEv=252 postHp=266 currentHp=266 postHpEv=248 evTotal=504 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Snorlax format=0 choice=0 level=50 full=266 subCost=66 afterSub=200 drumCost=133 afterDrum=133 afterSubDrum=67 halfDown=133 halfUp=133 quarterDown=66
+BERRY_REVIEW species=Snorlax format=0 choice=0 level=100 apply=1 item=Iapapa Berry ability=82 drum=1 sub=0 rawHp=524 rawHpEv=252 postHp=524 currentHp=524 postHpEv=252 evTotal=508 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Snorlax format=0 choice=0 level=100 full=524 subCost=131 afterSub=393 drumCost=262 afterDrum=262 afterSubDrum=131 halfDown=262 halfUp=262 quarterDown=131
+BERRY_REVIEW species=Zigzagoon format=0 choice=0 level=2 apply=1 item=Figy Berry ability=82 drum=1 sub=0 rawHp=15 rawHpEv=252 postHp=15 currentHp=15 postHpEv=252 evTotal=508 odd=1 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Zigzagoon format=0 choice=0 level=2 full=15 subCost=3 afterSub=12 drumCost=7 afterDrum=8 afterSubDrum=5 halfDown=7 halfUp=8 quarterDown=3
+BERRY_REVIEW species=Zigzagoon format=0 choice=0 level=5 apply=1 item=Figy Berry ability=82 drum=1 sub=0 rawHp=23 rawHpEv=252 postHp=23 currentHp=23 postHpEv=252 evTotal=508 odd=1 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Zigzagoon format=0 choice=0 level=5 full=23 subCost=5 afterSub=18 drumCost=11 afterDrum=12 afterSubDrum=7 halfDown=11 halfUp=12 quarterDown=5
+BERRY_REVIEW species=Zigzagoon format=0 choice=0 level=10 apply=1 item=Figy Berry ability=82 drum=1 sub=0 rawHp=37 rawHpEv=252 postHp=36 currentHp=36 postHpEv=248 evTotal=504 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Zigzagoon format=0 choice=0 level=10 full=36 subCost=9 afterSub=27 drumCost=18 afterDrum=18 afterSubDrum=9 halfDown=18 halfUp=18 quarterDown=9
+BERRY_REVIEW species=Zigzagoon format=0 choice=0 level=12 apply=1 item=Figy Berry ability=82 drum=1 sub=0 rawHp=42 rawHpEv=252 postHp=42 currentHp=42 postHpEv=252 evTotal=508 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Zigzagoon format=0 choice=0 level=12 full=42 subCost=10 afterSub=32 drumCost=21 afterDrum=21 afterSubDrum=11 halfDown=21 halfUp=21 quarterDown=10
+BERRY_REVIEW species=Zigzagoon format=0 choice=0 level=14 apply=1 item=Figy Berry ability=82 drum=1 sub=0 rawHp=47 rawHpEv=252 postHp=46 currentHp=46 postHpEv=228 evTotal=484 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Zigzagoon format=0 choice=0 level=14 full=46 subCost=11 afterSub=35 drumCost=23 afterDrum=23 afterSubDrum=12 halfDown=23 halfUp=23 quarterDown=11
+BERRY_REVIEW species=Zigzagoon format=0 choice=0 level=20 apply=1 item=Figy Berry ability=82 drum=1 sub=0 rawHp=64 rawHpEv=252 postHp=64 currentHp=64 postHpEv=252 evTotal=508 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Zigzagoon format=0 choice=0 level=20 full=64 subCost=16 afterSub=48 drumCost=32 afterDrum=32 afterSubDrum=16 halfDown=32 halfUp=32 quarterDown=16
+BERRY_REVIEW species=Zigzagoon format=0 choice=0 level=30 apply=1 item=Figy Berry ability=82 drum=1 sub=0 rawHp=91 rawHpEv=252 postHp=90 currentHp=90 postHpEv=248 evTotal=504 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Zigzagoon format=0 choice=0 level=30 full=90 subCost=22 afterSub=68 drumCost=45 afterDrum=45 afterSubDrum=23 halfDown=45 halfUp=45 quarterDown=22
+BERRY_REVIEW species=Zigzagoon format=0 choice=0 level=50 apply=1 item=Figy Berry ability=82 drum=1 sub=0 rawHp=145 rawHpEv=252 postHp=144 currentHp=144 postHpEv=248 evTotal=504 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Zigzagoon format=0 choice=0 level=50 full=144 subCost=36 afterSub=108 drumCost=72 afterDrum=72 afterSubDrum=36 halfDown=72 halfUp=72 quarterDown=36
+BERRY_REVIEW species=Zigzagoon format=0 choice=0 level=100 apply=1 item=Figy Berry ability=82 drum=1 sub=0 rawHp=280 rawHpEv=252 postHp=280 currentHp=280 postHpEv=252 evTotal=508 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Zigzagoon format=0 choice=0 level=100 full=280 subCost=70 afterSub=210 drumCost=140 afterDrum=140 afterSubDrum=70 halfDown=140 halfUp=140 quarterDown=70
+BERRY_REVIEW species=Zigzagoon format=1 choice=0 level=2 apply=1 item=Figy Berry ability=82 drum=1 sub=0 rawHp=15 rawHpEv=252 postHp=15 currentHp=15 postHpEv=252 evTotal=508 odd=1 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Zigzagoon format=1 choice=0 level=2 full=15 subCost=3 afterSub=12 drumCost=7 afterDrum=8 afterSubDrum=5 halfDown=7 halfUp=8 quarterDown=3
+BERRY_REVIEW species=Zigzagoon format=1 choice=0 level=5 apply=1 item=Figy Berry ability=82 drum=1 sub=0 rawHp=23 rawHpEv=252 postHp=23 currentHp=23 postHpEv=252 evTotal=508 odd=1 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Zigzagoon format=1 choice=0 level=5 full=23 subCost=5 afterSub=18 drumCost=11 afterDrum=12 afterSubDrum=7 halfDown=11 halfUp=12 quarterDown=5
+BERRY_REVIEW species=Zigzagoon format=1 choice=0 level=10 apply=1 item=Figy Berry ability=82 drum=1 sub=0 rawHp=37 rawHpEv=252 postHp=36 currentHp=36 postHpEv=248 evTotal=504 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Zigzagoon format=1 choice=0 level=10 full=36 subCost=9 afterSub=27 drumCost=18 afterDrum=18 afterSubDrum=9 halfDown=18 halfUp=18 quarterDown=9
+BERRY_REVIEW species=Zigzagoon format=1 choice=0 level=12 apply=1 item=Figy Berry ability=82 drum=1 sub=0 rawHp=42 rawHpEv=252 postHp=42 currentHp=42 postHpEv=252 evTotal=508 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Zigzagoon format=1 choice=0 level=12 full=42 subCost=10 afterSub=32 drumCost=21 afterDrum=21 afterSubDrum=11 halfDown=21 halfUp=21 quarterDown=10
+BERRY_REVIEW species=Zigzagoon format=1 choice=0 level=14 apply=1 item=Figy Berry ability=82 drum=1 sub=0 rawHp=47 rawHpEv=252 postHp=46 currentHp=46 postHpEv=228 evTotal=484 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Zigzagoon format=1 choice=0 level=14 full=46 subCost=11 afterSub=35 drumCost=23 afterDrum=23 afterSubDrum=12 halfDown=23 halfUp=23 quarterDown=11
+BERRY_REVIEW species=Zigzagoon format=1 choice=0 level=20 apply=1 item=Figy Berry ability=82 drum=1 sub=0 rawHp=64 rawHpEv=252 postHp=64 currentHp=64 postHpEv=252 evTotal=508 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Zigzagoon format=1 choice=0 level=20 full=64 subCost=16 afterSub=48 drumCost=32 afterDrum=32 afterSubDrum=16 halfDown=32 halfUp=32 quarterDown=16
+BERRY_REVIEW species=Zigzagoon format=1 choice=0 level=30 apply=1 item=Figy Berry ability=82 drum=1 sub=0 rawHp=91 rawHpEv=252 postHp=90 currentHp=90 postHpEv=248 evTotal=504 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Zigzagoon format=1 choice=0 level=30 full=90 subCost=22 afterSub=68 drumCost=45 afterDrum=45 afterSubDrum=23 halfDown=45 halfUp=45 quarterDown=22
+BERRY_REVIEW species=Zigzagoon format=1 choice=0 level=50 apply=1 item=Figy Berry ability=82 drum=1 sub=0 rawHp=145 rawHpEv=252 postHp=144 currentHp=144 postHpEv=248 evTotal=504 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Zigzagoon format=1 choice=0 level=50 full=144 subCost=36 afterSub=108 drumCost=72 afterDrum=72 afterSubDrum=36 halfDown=72 halfUp=72 quarterDown=36
+BERRY_REVIEW species=Zigzagoon format=1 choice=0 level=100 apply=1 item=Figy Berry ability=82 drum=1 sub=0 rawHp=280 rawHpEv=252 postHp=280 currentHp=280 postHpEv=252 evTotal=508 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Zigzagoon format=1 choice=0 level=100 full=280 subCost=70 afterSub=210 drumCost=140 afterDrum=140 afterSubDrum=70 halfDown=140 halfUp=140 quarterDown=70
+BERRY_REVIEW species=Linoone format=0 choice=0 level=2 apply=1 item=Figy Berry ability=82 drum=1 sub=0 rawHp=17 rawHpEv=252 postHp=16 currentHp=16 postHpEv=248 evTotal=504 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Linoone format=0 choice=0 level=2 full=16 subCost=4 afterSub=12 drumCost=8 afterDrum=8 afterSubDrum=4 halfDown=8 halfUp=8 quarterDown=4
+BERRY_REVIEW species=Linoone format=0 choice=0 level=5 apply=1 item=Figy Berry ability=82 drum=1 sub=0 rawHp=27 rawHpEv=252 postHp=27 currentHp=27 postHpEv=252 evTotal=508 odd=1 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Linoone format=0 choice=0 level=5 full=27 subCost=6 afterSub=21 drumCost=13 afterDrum=14 afterSubDrum=8 halfDown=13 halfUp=14 quarterDown=6
+BERRY_REVIEW species=Linoone format=0 choice=0 level=10 apply=1 item=Figy Berry ability=82 drum=1 sub=0 rawHp=45 rawHpEv=252 postHp=44 currentHp=44 postHpEv=248 evTotal=504 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Linoone format=0 choice=0 level=10 full=44 subCost=11 afterSub=33 drumCost=22 afterDrum=22 afterSubDrum=11 halfDown=22 halfUp=22 quarterDown=11
+BERRY_REVIEW species=Linoone format=0 choice=0 level=12 apply=1 item=Figy Berry ability=82 drum=1 sub=0 rawHp=52 rawHpEv=252 postHp=52 currentHp=52 postHpEv=252 evTotal=508 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Linoone format=0 choice=0 level=12 full=52 subCost=13 afterSub=39 drumCost=26 afterDrum=26 afterSubDrum=13 halfDown=26 halfUp=26 quarterDown=13
+BERRY_REVIEW species=Linoone format=0 choice=0 level=14 apply=1 item=Figy Berry ability=82 drum=1 sub=0 rawHp=59 rawHpEv=252 postHp=58 currentHp=58 postHpEv=248 evTotal=504 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Linoone format=0 choice=0 level=14 full=58 subCost=14 afterSub=44 drumCost=29 afterDrum=29 afterSubDrum=15 halfDown=29 halfUp=29 quarterDown=14
+BERRY_REVIEW species=Linoone format=0 choice=0 level=20 apply=1 item=Figy Berry ability=82 drum=1 sub=0 rawHp=80 rawHpEv=252 postHp=80 currentHp=80 postHpEv=252 evTotal=508 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Linoone format=0 choice=0 level=20 full=80 subCost=20 afterSub=60 drumCost=40 afterDrum=40 afterSubDrum=20 halfDown=40 halfUp=40 quarterDown=20
+BERRY_REVIEW species=Linoone format=0 choice=0 level=30 apply=1 item=Figy Berry ability=82 drum=1 sub=0 rawHp=115 rawHpEv=252 postHp=114 currentHp=114 postHpEv=248 evTotal=504 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Linoone format=0 choice=0 level=30 full=114 subCost=28 afterSub=86 drumCost=57 afterDrum=57 afterSubDrum=29 halfDown=57 halfUp=57 quarterDown=28
+BERRY_REVIEW species=Linoone format=0 choice=0 level=50 apply=1 item=Figy Berry ability=82 drum=1 sub=0 rawHp=185 rawHpEv=252 postHp=184 currentHp=184 postHpEv=248 evTotal=504 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Linoone format=0 choice=0 level=50 full=184 subCost=46 afterSub=138 drumCost=92 afterDrum=92 afterSubDrum=46 halfDown=92 halfUp=92 quarterDown=46
+BERRY_REVIEW species=Linoone format=0 choice=0 level=100 apply=1 item=Figy Berry ability=82 drum=1 sub=0 rawHp=360 rawHpEv=252 postHp=360 currentHp=360 postHpEv=252 evTotal=508 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Linoone format=0 choice=0 level=100 full=360 subCost=90 afterSub=270 drumCost=180 afterDrum=180 afterSubDrum=90 halfDown=180 halfUp=180 quarterDown=90
+BERRY_REVIEW species=Linoone format=1 choice=0 level=2 apply=1 item=Figy Berry ability=82 drum=1 sub=0 rawHp=17 rawHpEv=252 postHp=16 currentHp=16 postHpEv=248 evTotal=504 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Linoone format=1 choice=0 level=2 full=16 subCost=4 afterSub=12 drumCost=8 afterDrum=8 afterSubDrum=4 halfDown=8 halfUp=8 quarterDown=4
+BERRY_REVIEW species=Linoone format=1 choice=0 level=5 apply=1 item=Figy Berry ability=82 drum=1 sub=0 rawHp=27 rawHpEv=252 postHp=27 currentHp=27 postHpEv=252 evTotal=508 odd=1 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Linoone format=1 choice=0 level=5 full=27 subCost=6 afterSub=21 drumCost=13 afterDrum=14 afterSubDrum=8 halfDown=13 halfUp=14 quarterDown=6
+BERRY_REVIEW species=Linoone format=1 choice=0 level=10 apply=1 item=Figy Berry ability=82 drum=1 sub=0 rawHp=45 rawHpEv=252 postHp=44 currentHp=44 postHpEv=248 evTotal=504 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Linoone format=1 choice=0 level=10 full=44 subCost=11 afterSub=33 drumCost=22 afterDrum=22 afterSubDrum=11 halfDown=22 halfUp=22 quarterDown=11
+BERRY_REVIEW species=Linoone format=1 choice=0 level=12 apply=1 item=Figy Berry ability=82 drum=1 sub=0 rawHp=52 rawHpEv=252 postHp=52 currentHp=52 postHpEv=252 evTotal=508 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Linoone format=1 choice=0 level=12 full=52 subCost=13 afterSub=39 drumCost=26 afterDrum=26 afterSubDrum=13 halfDown=26 halfUp=26 quarterDown=13
+BERRY_REVIEW species=Linoone format=1 choice=0 level=14 apply=1 item=Figy Berry ability=82 drum=1 sub=0 rawHp=59 rawHpEv=252 postHp=58 currentHp=58 postHpEv=248 evTotal=504 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Linoone format=1 choice=0 level=14 full=58 subCost=14 afterSub=44 drumCost=29 afterDrum=29 afterSubDrum=15 halfDown=29 halfUp=29 quarterDown=14
+BERRY_REVIEW species=Linoone format=1 choice=0 level=20 apply=1 item=Figy Berry ability=82 drum=1 sub=0 rawHp=80 rawHpEv=252 postHp=80 currentHp=80 postHpEv=252 evTotal=508 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Linoone format=1 choice=0 level=20 full=80 subCost=20 afterSub=60 drumCost=40 afterDrum=40 afterSubDrum=20 halfDown=40 halfUp=40 quarterDown=20
+BERRY_REVIEW species=Linoone format=1 choice=0 level=30 apply=1 item=Figy Berry ability=82 drum=1 sub=0 rawHp=115 rawHpEv=252 postHp=114 currentHp=114 postHpEv=248 evTotal=504 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Linoone format=1 choice=0 level=30 full=114 subCost=28 afterSub=86 drumCost=57 afterDrum=57 afterSubDrum=29 halfDown=57 halfUp=57 quarterDown=28
+BERRY_REVIEW species=Linoone format=1 choice=0 level=50 apply=1 item=Figy Berry ability=82 drum=1 sub=0 rawHp=185 rawHpEv=252 postHp=184 currentHp=184 postHpEv=248 evTotal=504 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Linoone format=1 choice=0 level=50 full=184 subCost=46 afterSub=138 drumCost=92 afterDrum=92 afterSubDrum=46 halfDown=92 halfUp=92 quarterDown=46
+BERRY_REVIEW species=Linoone format=1 choice=0 level=100 apply=1 item=Figy Berry ability=82 drum=1 sub=0 rawHp=360 rawHpEv=252 postHp=360 currentHp=360 postHpEv=252 evTotal=508 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Linoone format=1 choice=0 level=100 full=360 subCost=90 afterSub=270 drumCost=180 afterDrum=180 afterSubDrum=90 halfDown=180 halfUp=180 quarterDown=90
+BERRY_REVIEW species=Munchlax format=0 choice=0 level=2 apply=1 item=Iapapa Berry ability=82 drum=1 sub=0 rawHp=19 rawHpEv=252 postHp=19 currentHp=19 postHpEv=252 evTotal=508 odd=1 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Munchlax format=0 choice=0 level=2 full=19 subCost=4 afterSub=15 drumCost=9 afterDrum=10 afterSubDrum=6 halfDown=9 halfUp=10 quarterDown=4
+BERRY_REVIEW species=Munchlax format=0 choice=0 level=5 apply=1 item=Iapapa Berry ability=82 drum=1 sub=0 rawHp=33 rawHpEv=252 postHp=32 currentHp=32 postHpEv=232 evTotal=488 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Munchlax format=0 choice=0 level=5 full=32 subCost=8 afterSub=24 drumCost=16 afterDrum=16 afterSubDrum=8 halfDown=16 halfUp=16 quarterDown=8
+BERRY_REVIEW species=Munchlax format=0 choice=0 level=10 apply=1 item=Iapapa Berry ability=82 drum=1 sub=0 rawHp=56 rawHpEv=252 postHp=56 currentHp=56 postHpEv=252 evTotal=508 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Munchlax format=0 choice=0 level=10 full=56 subCost=14 afterSub=42 drumCost=28 afterDrum=28 afterSubDrum=14 halfDown=28 halfUp=28 quarterDown=14
+BERRY_REVIEW species=Munchlax format=0 choice=0 level=12 apply=1 item=Iapapa Berry ability=82 drum=1 sub=0 rawHp=65 rawHpEv=252 postHp=64 currentHp=64 postHpEv=228 evTotal=484 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Munchlax format=0 choice=0 level=12 full=64 subCost=16 afterSub=48 drumCost=32 afterDrum=32 afterSubDrum=16 halfDown=32 halfUp=32 quarterDown=16
+BERRY_REVIEW species=Munchlax format=0 choice=0 level=14 apply=1 item=Iapapa Berry ability=82 drum=1 sub=0 rawHp=74 rawHpEv=252 postHp=74 currentHp=74 postHpEv=252 evTotal=508 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Munchlax format=0 choice=0 level=14 full=74 subCost=18 afterSub=56 drumCost=37 afterDrum=37 afterSubDrum=19 halfDown=37 halfUp=37 quarterDown=18
+BERRY_REVIEW species=Munchlax format=0 choice=0 level=20 apply=1 item=Iapapa Berry ability=82 drum=1 sub=0 rawHp=102 rawHpEv=252 postHp=102 currentHp=102 postHpEv=252 evTotal=508 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Munchlax format=0 choice=0 level=20 full=102 subCost=25 afterSub=77 drumCost=51 afterDrum=51 afterSubDrum=26 halfDown=51 halfUp=51 quarterDown=25
+BERRY_REVIEW species=Munchlax format=0 choice=0 level=30 apply=1 item=Iapapa Berry ability=82 drum=1 sub=0 rawHp=149 rawHpEv=252 postHp=148 currentHp=148 postHpEv=248 evTotal=504 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Munchlax format=0 choice=0 level=30 full=148 subCost=37 afterSub=111 drumCost=74 afterDrum=74 afterSubDrum=37 halfDown=74 halfUp=74 quarterDown=37
+BERRY_REVIEW species=Munchlax format=0 choice=0 level=50 apply=1 item=Iapapa Berry ability=82 drum=1 sub=0 rawHp=242 rawHpEv=252 postHp=242 currentHp=242 postHpEv=252 evTotal=508 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Munchlax format=0 choice=0 level=50 full=242 subCost=60 afterSub=182 drumCost=121 afterDrum=121 afterSubDrum=61 halfDown=121 halfUp=121 quarterDown=60
+BERRY_REVIEW species=Munchlax format=0 choice=0 level=100 apply=1 item=Iapapa Berry ability=82 drum=1 sub=0 rawHp=474 rawHpEv=252 postHp=474 currentHp=474 postHpEv=252 evTotal=508 odd=0 gluttonyOrJuice=1
+BERRY_REVIEW_ARITH_NOT_BATTLE species=Munchlax format=0 choice=0 level=100 full=474 subCost=118 afterSub=356 drumCost=237 afterDrum=237 afterSubDrum=119 halfDown=237 halfUp=237 quarterDown=118
+
+- Tests [32mPASSED[0m:          2
+- Tests [34mTOTAL[0m:           2
+

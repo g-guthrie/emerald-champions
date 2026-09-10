@@ -1,0 +1,567 @@
+tools/scaninc/scaninc -M build/emerald-test/test/battle/ai/emerald_champions_plans.d -g build/assets -I include -I tools/agbcc/include test/battle/ai/emerald_champions_plans.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/battle/ai/emerald_champions_plans.o test/battle/ai/emerald_champions_plans.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 4
+[2] EC live review Maria timing: healthy six-player bench: [32mPASS[0m
+REVIEW_INPUT trainer=369 slot=0 species=478 lv=28 HP=86 Atk=52 Def=52 SpA=76 SpD=52 Spe=101 item=481 ability=130
+REVIEW_INPUT trainer=369 slot=1 species=757 lv=28 HP=73 Atk=34 Def=36 SpA=71 SpD=36 Spe=81 item=494 ability=12
+REVIEW_INPUT trainer=369 slot=2 species=1174 lv=28 HP=88 Atk=96 Def=50 SpA=39 SpD=50 Spe=101 item=477 ability=181
+REVIEW_INPUT trainer=369 slot=3 species=814 lv=28 HP=83 Atk=79 Def=47 SpA=39 SpD=47 Spe=91 item=494 ability=236
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Shadow Ball target=2
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Shadow Ball target=2
+AI switch turn=2 actor=3 party=3
+REVIEW_AFTER board=99 turns=1 reserves=0 species=478/757 HP=86/73 foes=76/88 faints=0/0 initialFrames=46
+REVIEW_STATE actor=1 move=Shadow Ball PP=15/14/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=130 item=481
+REVIEW_STATE actor=3 move=Protect PP=15/10/20/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=12 item=494
+REVIEW_TIMING setup=6 bothActors=43 complete=49
+[0] EC live review Maria denial: Taunt and spread Ground: [32mPASS[0m
+REVIEW_INPUT trainer=369 slot=0 species=478 lv=28 HP=86 Atk=52 Def=52 SpA=76 SpD=52 Spe=101 item=481 ability=130
+REVIEW_INPUT trainer=369 slot=1 species=757 lv=28 HP=73 Atk=34 Def=36 SpA=71 SpD=36 Spe=81 item=494 ability=12
+REVIEW_INPUT trainer=369 slot=2 species=1174 lv=28 HP=88 Atk=96 Def=50 SpA=39 SpD=50 Spe=101 item=477 ability=181
+REVIEW_INPUT trainer=369 slot=3 species=814 lv=28 HP=83 Atk=79 Def=47 SpA=39 SpD=47 Spe=91 item=494 ability=236
+AI decision turn=1 actor=0 move=Taunt target=3
+AI decision turn=1 actor=1 move=Shadow Ball target=0
+AI decision turn=1 actor=2 move=Scald target=1
+AI decision turn=1 actor=3 move=Flamethrower target=0
+AI decision turn=2 actor=1 move=Shadow Ball target=2
+AI decision turn=2 actor=3 move=Protect target=3
+REVIEW_AFTER board=20 turns=1 reserves=0 species=478/757 HP=44/73 foes=0/104 faints=0/1 initialFrames=43
+REVIEW_STATE actor=1 move=Shadow Ball PP=15/14/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=130 item=481
+REVIEW_STATE actor=3 move=Flamethrower PP=14/10/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=12 item=494
+REVIEW_INPUT trainer=369 slot=0 species=478 lv=28 HP=86 Atk=52 Def=52 SpA=76 SpD=52 Spe=101 item=481 ability=130
+REVIEW_INPUT trainer=369 slot=1 species=757 lv=28 HP=73 Atk=34 Def=36 SpA=71 SpD=36 Spe=81 item=494 ability=12
+REVIEW_INPUT trainer=369 slot=2 species=1174 lv=28 HP=88 Atk=96 Def=50 SpA=39 SpD=50 Spe=101 item=477 ability=181
+REVIEW_INPUT trainer=369 slot=3 species=814 lv=28 HP=83 Atk=79 Def=47 SpA=39 SpD=47 Spe=91 item=494 ability=236
+AI decision turn=1 actor=0 move=Taunt target=3
+AI decision turn=1 actor=1 move=Shadow Ball target=0
+AI decision turn=1 actor=2 move=Scald target=1
+AI decision turn=1 actor=3 move=Flamethrower target=0
+AI decision turn=2 actor=2 move=Scald target=1
+AI decision turn=2 actor=1 move=Shadow Ball target=2
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=1 move=Destiny Bond target=1
+AI decision turn=3 actor=3 move=Sludge Bomb target=2
+REVIEW_AFTER board=20 turns=2 reserves=0 species=478/757 HP=2/73 foes=0/79 faints=0/1 initialFrames=43
+REVIEW_STATE actor=1 move=Shadow Ball PP=15/13/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=130 item=481
+REVIEW_STATE actor=3 move=Protect PP=14/10/20/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=12 item=494
+REVIEW_INPUT trainer=369 slot=0 species=478 lv=28 HP=86 Atk=52 Def=52 SpA=76 SpD=52 Spe=101 item=481 ability=130
+REVIEW_INPUT trainer=369 slot=1 species=757 lv=28 HP=73 Atk=34 Def=36 SpA=71 SpD=36 Spe=81 item=494 ability=12
+REVIEW_INPUT trainer=369 slot=2 species=1174 lv=28 HP=88 Atk=96 Def=50 SpA=39 SpD=50 Spe=101 item=477 ability=181
+REVIEW_INPUT trainer=369 slot=3 species=814 lv=28 HP=83 Atk=79 Def=47 SpA=39 SpD=47 Spe=91 item=494 ability=236
+AI decision turn=1 actor=0 move=Taunt target=3
+AI decision turn=1 actor=1 move=Shadow Ball target=0
+AI decision turn=1 actor=2 move=Scald target=1
+AI decision turn=1 actor=3 move=Flamethrower target=0
+AI decision turn=2 actor=2 move=Scald target=1
+AI decision turn=2 actor=1 move=Shadow Ball target=2
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=2 move=Scald target=1
+AI decision turn=3 actor=1 move=Destiny Bond target=1
+AI decision turn=3 actor=3 move=Sludge Bomb target=2
+REVIEW_AFTER board=20 turns=3 reserves=0 species=478/757 HP=2/73 foes=0/0 faints=0/2 initialFrames=43
+REVIEW_STATE actor=1 move=Destiny Bond PP=15/13/15/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=130 item=481
+REVIEW_STATE actor=3 move=Sludge Bomb PP=14/9/20/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=12 item=494
+REVIEW_INPUT trainer=369 slot=0 species=478 lv=28 HP=86 Atk=52 Def=52 SpA=76 SpD=52 Spe=101 item=481 ability=130
+REVIEW_INPUT trainer=369 slot=1 species=757 lv=28 HP=73 Atk=34 Def=36 SpA=71 SpD=36 Spe=81 item=494 ability=12
+REVIEW_INPUT trainer=369 slot=2 species=1174 lv=28 HP=88 Atk=96 Def=50 SpA=39 SpD=50 Spe=101 item=477 ability=181
+REVIEW_INPUT trainer=369 slot=3 species=814 lv=28 HP=83 Atk=79 Def=47 SpA=39 SpD=47 Spe=91 item=494 ability=236
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=Shadow Ball target=2
+AI decision turn=1 actor=2 move=Air Slash target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Icy Wind target=0
+AI decision turn=2 actor=3 move=Flamethrower target=2
+REVIEW_AFTER board=21 turns=1 reserves=0 species=478/757 HP=34/73 foes=110/14 faints=0/0 initialFrames=52
+REVIEW_STATE actor=1 move=Shadow Ball PP=15/14/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=130 item=481
+REVIEW_STATE actor=3 move=Protect PP=15/10/20/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=12 item=494
+REVIEW_INPUT trainer=369 slot=0 species=478 lv=28 HP=86 Atk=52 Def=52 SpA=76 SpD=52 Spe=101 item=481 ability=130
+REVIEW_INPUT trainer=369 slot=1 species=757 lv=28 HP=73 Atk=34 Def=36 SpA=71 SpD=36 Spe=81 item=494 ability=12
+REVIEW_INPUT trainer=369 slot=2 species=1174 lv=28 HP=88 Atk=96 Def=50 SpA=39 SpD=50 Spe=101 item=477 ability=181
+REVIEW_INPUT trainer=369 slot=3 species=814 lv=28 HP=83 Atk=79 Def=47 SpA=39 SpD=47 Spe=91 item=494 ability=236
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=Shadow Ball target=2
+AI decision turn=1 actor=2 move=Air Slash target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Earthquake target=1
+AI decision turn=2 actor=1 move=Icy Wind target=0
+AI decision turn=2 actor=2 move=Air Slash target=3
+AI decision turn=2 actor=3 move=Flamethrower target=2
+AI switch turn=2 actor=3 party=2
+AI decision turn=3 actor=1 move=Icy Wind target=0
+AI decision turn=3 actor=3 move=Protect target=3
+REVIEW_AFTER board=21 turns=2 reserves=0 species=478/1174 HP=8/88 foes=41/0 faints=1/1 initialFrames=52
+REVIEW_STATE actor=1 move=Icy Wind PP=14/14/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=130 item=481
+REVIEW_STATE actor=3 move=- PP=20/10/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=181 item=477
+REVIEW_INPUT trainer=369 slot=0 species=478 lv=28 HP=86 Atk=52 Def=52 SpA=76 SpD=52 Spe=101 item=481 ability=130
+REVIEW_INPUT trainer=369 slot=1 species=757 lv=28 HP=73 Atk=34 Def=36 SpA=71 SpD=36 Spe=81 item=494 ability=12
+REVIEW_INPUT trainer=369 slot=2 species=1174 lv=28 HP=88 Atk=96 Def=50 SpA=39 SpD=50 Spe=101 item=477 ability=181
+REVIEW_INPUT trainer=369 slot=3 species=814 lv=28 HP=83 Atk=79 Def=47 SpA=39 SpD=47 Spe=91 item=494 ability=236
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=Shadow Ball target=2
+AI decision turn=1 actor=2 move=Air Slash target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Earthquake target=1
+AI decision turn=2 actor=1 move=Icy Wind target=0
+AI decision turn=2 actor=2 move=Air Slash target=3
+AI decision turn=2 actor=3 move=Flamethrower target=2
+AI switch turn=2 actor=3 party=2
+AI decision turn=3 actor=0 move=Earthquake target=1
+AI decision turn=3 actor=1 move=Icy Wind target=0
+AI decision turn=3 actor=3 move=Protect target=3
+REVIEW_AFTER board=21 turns=3 reserves=0 species=478/1174 HP=8/88 foes=0/0 faints=1/2 initialFrames=52
+REVIEW_STATE actor=1 move=Icy Wind PP=13/14/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=130 item=481
+REVIEW_STATE actor=3 move=Protect PP=20/10/5/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=181 item=477
+[1] EC live review Maria speed support: fast Normal pressure and Amulet denial: [32mPASS[0m
+REVIEW_INPUT trainer=369 slot=0 species=478 lv=28 HP=86 Atk=52 Def=52 SpA=76 SpD=52 Spe=101 item=481 ability=130
+REVIEW_INPUT trainer=369 slot=1 species=757 lv=28 HP=73 Atk=34 Def=36 SpA=71 SpD=36 Spe=81 item=494 ability=12
+REVIEW_INPUT trainer=369 slot=2 species=1174 lv=28 HP=88 Atk=96 Def=50 SpA=39 SpD=50 Spe=101 item=477 ability=181
+REVIEW_INPUT trainer=369 slot=3 species=814 lv=28 HP=83 Atk=79 Def=47 SpA=39 SpD=47 Spe=91 item=494 ability=236
+AI decision turn=1 actor=0 move=Zen Headbutt target=3
+AI decision turn=1 actor=1 move=Icy Wind target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Icy Wind target=0
+AI switch turn=2 actor=3 party=3
+REVIEW_AFTER board=10 turns=1 reserves=0 species=478/757 HP=61/73 foes=75/88 faints=0/0 initialFrames=43
+REVIEW_STATE actor=1 move=Icy Wind PP=14/15/15/5 Atk=5 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=130 item=481
+REVIEW_STATE actor=3 move=Protect PP=15/10/20/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=12 item=494
+MARIA_SPEED tauros=108 stage=5 salandit=81 stage=6
+REVIEW_INPUT trainer=369 slot=0 species=478 lv=28 HP=86 Atk=52 Def=52 SpA=76 SpD=52 Spe=101 item=481 ability=130
+REVIEW_INPUT trainer=369 slot=1 species=757 lv=28 HP=73 Atk=34 Def=36 SpA=71 SpD=36 Spe=81 item=494 ability=12
+REVIEW_INPUT trainer=369 slot=2 species=1174 lv=28 HP=88 Atk=96 Def=50 SpA=39 SpD=50 Spe=101 item=477 ability=181
+REVIEW_INPUT trainer=369 slot=3 species=814 lv=28 HP=83 Atk=79 Def=47 SpA=39 SpD=47 Spe=91 item=494 ability=236
+AI decision turn=1 actor=0 move=Zen Headbutt target=3
+AI decision turn=1 actor=1 move=Icy Wind target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Zen Headbutt target=3
+AI decision turn=2 actor=1 move=Icy Wind target=0
+AI switch turn=2 actor=3 party=3
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=3 actor=1 move=Icy Wind target=0
+AI decision turn=3 actor=3 move=High Jump Kick target=0
+REVIEW_AFTER board=10 turns=2 reserves=0 species=478/814 HP=36/57 foes=56/72 faints=0/0 initialFrames=43
+REVIEW_STATE actor=1 move=Icy Wind PP=13/15/15/5 Atk=5 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=130 item=481
+REVIEW_STATE actor=3 move=- PP=15/10/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=236 item=494
+MARIA_SPEED tauros=108 stage=4 salandit=91 stage=6
+REVIEW_INPUT trainer=369 slot=0 species=478 lv=28 HP=86 Atk=52 Def=52 SpA=76 SpD=52 Spe=101 item=481 ability=130
+REVIEW_INPUT trainer=369 slot=1 species=757 lv=28 HP=73 Atk=34 Def=36 SpA=71 SpD=36 Spe=81 item=494 ability=12
+REVIEW_INPUT trainer=369 slot=2 species=1174 lv=28 HP=88 Atk=96 Def=50 SpA=39 SpD=50 Spe=101 item=477 ability=181
+REVIEW_INPUT trainer=369 slot=3 species=814 lv=28 HP=83 Atk=79 Def=47 SpA=39 SpD=47 Spe=91 item=494 ability=236
+AI decision turn=1 actor=0 move=Zen Headbutt target=3
+AI decision turn=1 actor=1 move=Icy Wind target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Zen Headbutt target=3
+AI decision turn=2 actor=1 move=Icy Wind target=0
+AI switch turn=2 actor=3 party=3
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=3 actor=0 move=Zen Headbutt target=3
+AI decision turn=3 actor=1 move=Icy Wind target=0
+AI decision turn=3 actor=2 move=Thunderbolt target=1
+AI decision turn=3 actor=3 move=High Jump Kick target=0
+AI decision turn=4 actor=1 move=Shadow Ball target=2
+AI decision turn=4 actor=3 move=High Jump Kick target=2
+REVIEW_AFTER board=10 turns=3 reserves=0 species=478/814 HP=11/57 foes=0/56 faints=0/1 initialFrames=43
+REVIEW_STATE actor=1 move=Icy Wind PP=12/15/15/5 Atk=5 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=130 item=481
+REVIEW_STATE actor=3 move=High Jump Kick PP=15/9/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=236 item=494
+MARIA_SPEED tauros=108 stage=6 salandit=91 stage=6
+REVIEW_INPUT trainer=369 slot=0 species=478 lv=28 HP=86 Atk=52 Def=52 SpA=76 SpD=52 Spe=101 item=481 ability=130
+REVIEW_INPUT trainer=369 slot=1 species=757 lv=28 HP=73 Atk=34 Def=36 SpA=71 SpD=36 Spe=81 item=494 ability=12
+REVIEW_INPUT trainer=369 slot=2 species=1174 lv=28 HP=88 Atk=96 Def=50 SpA=39 SpD=50 Spe=101 item=477 ability=181
+REVIEW_INPUT trainer=369 slot=3 species=814 lv=28 HP=83 Atk=79 Def=47 SpA=39 SpD=47 Spe=91 item=494 ability=236
+AI decision turn=1 actor=0 move=Zen Headbutt target=3
+AI decision turn=1 actor=1 move=Icy Wind target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Icy Wind target=0
+AI switch turn=2 actor=3 party=3
+REVIEW_AFTER board=11 turns=1 reserves=0 species=478/757 HP=61/73 foes=75/88 faints=0/0 initialFrames=43
+REVIEW_STATE actor=1 move=Icy Wind PP=14/15/15/5 Atk=5 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=130 item=481
+REVIEW_STATE actor=3 move=Protect PP=15/10/20/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=12 item=494
+MARIA_SPEED tauros=108 stage=6 salandit=81 stage=6
+REVIEW_INPUT trainer=369 slot=0 species=478 lv=28 HP=86 Atk=52 Def=52 SpA=76 SpD=52 Spe=101 item=481 ability=130
+REVIEW_INPUT trainer=369 slot=1 species=757 lv=28 HP=73 Atk=34 Def=36 SpA=71 SpD=36 Spe=81 item=494 ability=12
+REVIEW_INPUT trainer=369 slot=2 species=1174 lv=28 HP=88 Atk=96 Def=50 SpA=39 SpD=50 Spe=101 item=477 ability=181
+REVIEW_INPUT trainer=369 slot=3 species=814 lv=28 HP=83 Atk=79 Def=47 SpA=39 SpD=47 Spe=91 item=494 ability=236
+AI decision turn=1 actor=0 move=Zen Headbutt target=3
+AI decision turn=1 actor=1 move=Icy Wind target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Zen Headbutt target=3
+AI decision turn=2 actor=1 move=Icy Wind target=0
+AI switch turn=2 actor=3 party=3
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=3 actor=1 move=Icy Wind target=0
+AI decision turn=3 actor=3 move=High Jump Kick target=0
+REVIEW_AFTER board=11 turns=2 reserves=0 species=478/814 HP=36/57 foes=56/72 faints=0/0 initialFrames=43
+REVIEW_STATE actor=1 move=Icy Wind PP=13/15/15/5 Atk=5 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=130 item=481
+REVIEW_STATE actor=3 move=- PP=15/10/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=236 item=494
+MARIA_SPEED tauros=108 stage=6 salandit=91 stage=6
+REVIEW_INPUT trainer=369 slot=0 species=478 lv=28 HP=86 Atk=52 Def=52 SpA=76 SpD=52 Spe=101 item=481 ability=130
+REVIEW_INPUT trainer=369 slot=1 species=757 lv=28 HP=73 Atk=34 Def=36 SpA=71 SpD=36 Spe=81 item=494 ability=12
+REVIEW_INPUT trainer=369 slot=2 species=1174 lv=28 HP=88 Atk=96 Def=50 SpA=39 SpD=50 Spe=101 item=477 ability=181
+REVIEW_INPUT trainer=369 slot=3 species=814 lv=28 HP=83 Atk=79 Def=47 SpA=39 SpD=47 Spe=91 item=494 ability=236
+AI decision turn=1 actor=0 move=Zen Headbutt target=3
+AI decision turn=1 actor=1 move=Icy Wind target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Zen Headbutt target=3
+AI decision turn=2 actor=1 move=Icy Wind target=0
+AI switch turn=2 actor=3 party=3
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=3 actor=0 move=Zen Headbutt target=3
+AI decision turn=3 actor=1 move=Icy Wind target=0
+AI decision turn=3 actor=2 move=Thunderbolt target=1
+AI decision turn=3 actor=3 move=High Jump Kick target=0
+AI decision turn=4 actor=1 move=Shadow Ball target=2
+AI decision turn=4 actor=3 move=High Jump Kick target=2
+REVIEW_AFTER board=11 turns=3 reserves=0 species=478/814 HP=11/31 foes=0/56 faints=0/1 initialFrames=43
+REVIEW_STATE actor=1 move=Icy Wind PP=12/15/15/5 Atk=5 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=130 item=481
+REVIEW_STATE actor=3 move=High Jump Kick PP=15/9/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=236 item=494
+MARIA_SPEED tauros=108 stage=6 salandit=91 stage=6
+[3] EC live review Maria: physical special and flinch pressure: [32mPASS[0m
+REVIEW_INPUT trainer=369 slot=0 species=478 lv=28 HP=86 Atk=52 Def=52 SpA=76 SpD=52 Spe=101 item=481 ability=130
+REVIEW_INPUT trainer=369 slot=1 species=757 lv=28 HP=73 Atk=34 Def=36 SpA=71 SpD=36 Spe=81 item=494 ability=12
+REVIEW_INPUT trainer=369 slot=2 species=1174 lv=28 HP=88 Atk=96 Def=50 SpA=39 SpD=50 Spe=101 item=477 ability=181
+REVIEW_INPUT trainer=369 slot=3 species=814 lv=28 HP=83 Atk=79 Def=47 SpA=39 SpD=47 Spe=91 item=494 ability=236
+AI decision turn=1 actor=0 move=Bite target=1
+AI decision turn=1 actor=1 move=Shadow Ball target=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Shadow Ball target=2
+AI decision turn=2 actor=3 move=Flamethrower target=2
+REVIEW_AFTER board=0 turns=1 reserves=0 species=478/757 HP=58/73 foes=101/88 faints=0/0 initialFrames=40
+REVIEW_STATE actor=1 move=Shadow Ball PP=15/14/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=130 item=481
+REVIEW_STATE actor=3 move=Protect PP=15/10/20/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=12 item=494
+REVIEW_INPUT trainer=369 slot=0 species=478 lv=28 HP=86 Atk=52 Def=52 SpA=76 SpD=52 Spe=101 item=481 ability=130
+REVIEW_INPUT trainer=369 slot=1 species=757 lv=28 HP=73 Atk=34 Def=36 SpA=71 SpD=36 Spe=81 item=494 ability=12
+REVIEW_INPUT trainer=369 slot=2 species=1174 lv=28 HP=88 Atk=96 Def=50 SpA=39 SpD=50 Spe=101 item=477 ability=181
+REVIEW_INPUT trainer=369 slot=3 species=814 lv=28 HP=83 Atk=79 Def=47 SpA=39 SpD=47 Spe=91 item=494 ability=236
+AI decision turn=1 actor=0 move=Bite target=1
+AI decision turn=1 actor=1 move=Shadow Ball target=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Quick Attack target=3
+AI decision turn=2 actor=1 move=Shadow Ball target=2
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Flamethrower target=2
+AI decision turn=3 actor=1 move=Icy Wind target=0
+AI switch turn=3 actor=3 party=2
+REVIEW_AFTER board=0 turns=2 reserves=0 species=478/757 HP=58/55 foes=101/0 faints=0/1 initialFrames=40
+REVIEW_STATE actor=1 move=Shadow Ball PP=15/13/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=130 item=481
+REVIEW_STATE actor=3 move=Flamethrower PP=14/10/20/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=12 item=494
+REVIEW_INPUT trainer=369 slot=0 species=478 lv=28 HP=86 Atk=52 Def=52 SpA=76 SpD=52 Spe=101 item=481 ability=130
+REVIEW_INPUT trainer=369 slot=1 species=757 lv=28 HP=73 Atk=34 Def=36 SpA=71 SpD=36 Spe=81 item=494 ability=12
+REVIEW_INPUT trainer=369 slot=2 species=1174 lv=28 HP=88 Atk=96 Def=50 SpA=39 SpD=50 Spe=101 item=477 ability=181
+REVIEW_INPUT trainer=369 slot=3 species=814 lv=28 HP=83 Atk=79 Def=47 SpA=39 SpD=47 Spe=91 item=494 ability=236
+AI decision turn=1 actor=0 move=Bite target=1
+AI decision turn=1 actor=1 move=Shadow Ball target=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Quick Attack target=3
+AI decision turn=2 actor=1 move=Shadow Ball target=2
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Flamethrower target=2
+AI decision turn=3 actor=0 move=Quick Attack target=3
+AI decision turn=3 actor=1 move=Icy Wind target=0
+AI switch turn=3 actor=3 party=2
+AI decision turn=4 actor=1 move=Will-O-Wisp target=0
+AI decision turn=4 actor=3 move=Close Combat target=0
+REVIEW_AFTER board=0 turns=3 reserves=0 species=478/1174 HP=58/78 foes=88/0 faints=0/1 initialFrames=40
+REVIEW_STATE actor=1 move=Icy Wind PP=14/13/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=130 item=481
+REVIEW_STATE actor=3 move=- PP=20/10/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=181 item=477
+REVIEW_INPUT trainer=369 slot=0 species=478 lv=28 HP=86 Atk=52 Def=52 SpA=76 SpD=52 Spe=101 item=481 ability=130
+REVIEW_INPUT trainer=369 slot=1 species=757 lv=28 HP=73 Atk=34 Def=36 SpA=71 SpD=36 Spe=81 item=494 ability=12
+REVIEW_INPUT trainer=369 slot=2 species=1174 lv=28 HP=88 Atk=96 Def=50 SpA=39 SpD=50 Spe=101 item=477 ability=181
+REVIEW_INPUT trainer=369 slot=3 species=814 lv=28 HP=83 Atk=79 Def=47 SpA=39 SpD=47 Spe=91 item=494 ability=236
+AI decision turn=1 actor=0 move=Bite target=1
+AI decision turn=1 actor=1 move=Shadow Ball target=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Quick Attack target=3
+AI decision turn=2 actor=1 move=Shadow Ball target=2
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Flamethrower target=2
+AI decision turn=3 actor=0 move=Quick Attack target=3
+AI decision turn=3 actor=1 move=Icy Wind target=0
+AI switch turn=3 actor=3 party=2
+AI decision turn=4 actor=0 move=Quick Attack target=3
+AI decision turn=4 actor=1 move=Will-O-Wisp target=0
+AI decision turn=4 actor=3 move=Close Combat target=0
+REVIEW_AFTER board=0 turns=4 reserves=0 species=478/1174 HP=58/68 foes=0/0 faints=0/2 initialFrames=40
+REVIEW_STATE actor=1 move=Icy Wind PP=14/13/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=130 item=481
+REVIEW_STATE actor=3 move=Close Combat PP=20/10/4/5 Atk=6 Def=5 SpA=6 SpD=5 Spe=6 status=0 ability=181 item=477
+REVIEW_INPUT trainer=369 slot=0 species=478 lv=28 HP=86 Atk=52 Def=52 SpA=76 SpD=52 Spe=101 item=481 ability=130
+REVIEW_INPUT trainer=369 slot=1 species=757 lv=28 HP=73 Atk=34 Def=36 SpA=71 SpD=36 Spe=81 item=494 ability=12
+REVIEW_INPUT trainer=369 slot=2 species=1174 lv=28 HP=88 Atk=96 Def=50 SpA=39 SpD=50 Spe=101 item=477 ability=181
+REVIEW_INPUT trainer=369 slot=3 species=814 lv=28 HP=83 Atk=79 Def=47 SpA=39 SpD=47 Spe=91 item=494 ability=236
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Shadow Ball target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Icy Wind target=0
+AI decision turn=2 actor=3 move=Flamethrower target=0
+REVIEW_AFTER board=1 turns=1 reserves=0 species=478/757 HP=61/73 foes=14/104 faints=0/0 initialFrames=37
+REVIEW_STATE actor=1 move=Shadow Ball PP=15/14/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=130 item=481
+REVIEW_STATE actor=3 move=Protect PP=15/10/20/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=12 item=494
+REVIEW_INPUT trainer=369 slot=0 species=478 lv=28 HP=86 Atk=52 Def=52 SpA=76 SpD=52 Spe=101 item=481 ability=130
+REVIEW_INPUT trainer=369 slot=1 species=757 lv=28 HP=73 Atk=34 Def=36 SpA=71 SpD=36 Spe=81 item=494 ability=12
+REVIEW_INPUT trainer=369 slot=2 species=1174 lv=28 HP=88 Atk=96 Def=50 SpA=39 SpD=50 Spe=101 item=477 ability=181
+REVIEW_INPUT trainer=369 slot=3 species=814 lv=28 HP=83 Atk=79 Def=47 SpA=39 SpD=47 Spe=91 item=494 ability=236
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Shadow Ball target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Air Slash target=3
+AI decision turn=2 actor=1 move=Icy Wind target=0
+AI decision turn=2 actor=2 move=Super Fang target=1
+AI decision turn=2 actor=3 move=Flamethrower target=0
+AI decision turn=3 actor=1 move=Shadow Ball target=2
+AI decision turn=3 actor=3 move=Protect target=3
+REVIEW_AFTER board=1 turns=2 reserves=0 species=478/757 HP=61/22 foes=0/75 faints=0/1 initialFrames=37
+REVIEW_STATE actor=1 move=Icy Wind PP=14/14/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=130 item=481
+REVIEW_STATE actor=3 move=Flamethrower PP=14/10/20/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=12 item=494
+REVIEW_INPUT trainer=369 slot=0 species=478 lv=28 HP=86 Atk=52 Def=52 SpA=76 SpD=52 Spe=101 item=481 ability=130
+REVIEW_INPUT trainer=369 slot=1 species=757 lv=28 HP=73 Atk=34 Def=36 SpA=71 SpD=36 Spe=81 item=494 ability=12
+REVIEW_INPUT trainer=369 slot=2 species=1174 lv=28 HP=88 Atk=96 Def=50 SpA=39 SpD=50 Spe=101 item=477 ability=181
+REVIEW_INPUT trainer=369 slot=3 species=814 lv=28 HP=83 Atk=79 Def=47 SpA=39 SpD=47 Spe=91 item=494 ability=236
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Shadow Ball target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Air Slash target=3
+AI decision turn=2 actor=1 move=Icy Wind target=0
+AI decision turn=2 actor=2 move=Super Fang target=1
+AI decision turn=2 actor=3 move=Flamethrower target=0
+AI decision turn=3 actor=2 move=Super Fang target=1
+AI decision turn=3 actor=1 move=Shadow Ball target=2
+AI decision turn=3 actor=3 move=Protect target=3
+AI decision turn=4 actor=1 move=Shadow Ball target=2
+AI decision turn=4 actor=3 move=Flamethrower target=2
+REVIEW_AFTER board=1 turns=3 reserves=0 species=478/757 HP=61/22 foes=0/38 faints=0/1 initialFrames=37
+REVIEW_STATE actor=1 move=Shadow Ball PP=14/13/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=130 item=481
+REVIEW_STATE actor=3 move=Protect PP=14/10/20/3 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=12 item=494
+REVIEW_INPUT trainer=369 slot=0 species=478 lv=28 HP=86 Atk=52 Def=52 SpA=76 SpD=52 Spe=101 item=481 ability=130
+REVIEW_INPUT trainer=369 slot=1 species=757 lv=28 HP=73 Atk=34 Def=36 SpA=71 SpD=36 Spe=81 item=494 ability=12
+REVIEW_INPUT trainer=369 slot=2 species=1174 lv=28 HP=88 Atk=96 Def=50 SpA=39 SpD=50 Spe=101 item=477 ability=181
+REVIEW_INPUT trainer=369 slot=3 species=814 lv=28 HP=83 Atk=79 Def=47 SpA=39 SpD=47 Spe=91 item=494 ability=236
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Shadow Ball target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Air Slash target=3
+AI decision turn=2 actor=1 move=Icy Wind target=0
+AI decision turn=2 actor=2 move=Super Fang target=1
+AI decision turn=2 actor=3 move=Flamethrower target=0
+AI decision turn=3 actor=2 move=Super Fang target=1
+AI decision turn=3 actor=1 move=Shadow Ball target=2
+AI decision turn=3 actor=3 move=Protect target=3
+AI decision turn=4 actor=2 move=Super Fang target=1
+AI decision turn=4 actor=1 move=Shadow Ball target=2
+AI decision turn=4 actor=3 move=Flamethrower target=2
+REVIEW_AFTER board=1 turns=4 reserves=0 species=478/757 HP=61/22 foes=0/0 faints=0/2 initialFrames=37
+REVIEW_STATE actor=1 move=Shadow Ball PP=14/12/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=130 item=481
+REVIEW_STATE actor=3 move=Protect PP=14/10/20/3 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=12 item=494
+REVIEW_INPUT trainer=369 slot=0 species=478 lv=28 HP=86 Atk=52 Def=52 SpA=76 SpD=52 Spe=101 item=481 ability=130
+REVIEW_INPUT trainer=369 slot=1 species=757 lv=28 HP=73 Atk=34 Def=36 SpA=71 SpD=36 Spe=81 item=494 ability=12
+REVIEW_INPUT trainer=369 slot=2 species=1174 lv=28 HP=88 Atk=96 Def=50 SpA=39 SpD=50 Spe=101 item=477 ability=181
+REVIEW_INPUT trainer=369 slot=3 species=814 lv=28 HP=83 Atk=79 Def=47 SpA=39 SpD=47 Spe=91 item=494 ability=236
+AI decision turn=1 actor=0 move=Fake Out target=3
+AI decision turn=1 actor=1 move=Shadow Ball target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Flamethrower target=0
+AI switch turn=1 actor=3 party=3
+AI decision turn=2 actor=1 move=Icy Wind target=0
+AI decision turn=2 actor=3 move=U-turn target=2
+REVIEW_AFTER board=2 turns=1 reserves=0 species=478/814 HP=86/83 foes=30/104 faints=1/0 initialFrames=43
+REVIEW_STATE actor=1 move=Shadow Ball PP=15/14/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=130 item=481
+REVIEW_STATE actor=3 move=- PP=15/10/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=236 item=494
+REVIEW_INPUT trainer=369 slot=0 species=478 lv=28 HP=86 Atk=52 Def=52 SpA=76 SpD=52 Spe=101 item=481 ability=130
+REVIEW_INPUT trainer=369 slot=1 species=757 lv=28 HP=73 Atk=34 Def=36 SpA=71 SpD=36 Spe=81 item=494 ability=12
+REVIEW_INPUT trainer=369 slot=2 species=1174 lv=28 HP=88 Atk=96 Def=50 SpA=39 SpD=50 Spe=101 item=477 ability=181
+REVIEW_INPUT trainer=369 slot=3 species=814 lv=28 HP=83 Atk=79 Def=47 SpA=39 SpD=47 Spe=91 item=494 ability=236
+AI decision turn=1 actor=0 move=Fake Out target=3
+AI decision turn=1 actor=1 move=Shadow Ball target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Flamethrower target=0
+AI switch turn=1 actor=3 party=3
+AI decision turn=2 actor=0 move=Drain Punch target=3
+AI decision turn=2 actor=1 move=Icy Wind target=0
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=U-turn target=2
+AI switch turn=2 actor=3 party=2
+AI decision turn=3 actor=1 move=Icy Wind target=2
+AI decision turn=3 actor=3 move=Close Combat target=2
+REVIEW_AFTER board=2 turns=2 reserves=0 species=478/1174 HP=86/2 foes=0/36 faints=1/1 initialFrames=43
+REVIEW_STATE actor=1 move=Icy Wind PP=14/14/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=130 item=481
+REVIEW_STATE actor=3 move=- PP=20/10/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=181 item=477
+REVIEW_INPUT trainer=369 slot=0 species=478 lv=28 HP=86 Atk=52 Def=52 SpA=76 SpD=52 Spe=101 item=481 ability=130
+REVIEW_INPUT trainer=369 slot=1 species=757 lv=28 HP=73 Atk=34 Def=36 SpA=71 SpD=36 Spe=81 item=494 ability=12
+REVIEW_INPUT trainer=369 slot=2 species=1174 lv=28 HP=88 Atk=96 Def=50 SpA=39 SpD=50 Spe=101 item=477 ability=181
+REVIEW_INPUT trainer=369 slot=3 species=814 lv=28 HP=83 Atk=79 Def=47 SpA=39 SpD=47 Spe=91 item=494 ability=236
+AI decision turn=1 actor=0 move=Fake Out target=3
+AI decision turn=1 actor=1 move=Shadow Ball target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Flamethrower target=0
+AI switch turn=1 actor=3 party=3
+AI decision turn=2 actor=0 move=Drain Punch target=3
+AI decision turn=2 actor=1 move=Icy Wind target=0
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=U-turn target=2
+AI switch turn=2 actor=3 party=2
+AI decision turn=3 actor=2 move=Scald target=3
+AI decision turn=3 actor=1 move=Icy Wind target=2
+AI decision turn=3 actor=3 move=Close Combat target=2
+REVIEW_AFTER board=2 turns=3 reserves=0 species=478/1174 HP=86/2 foes=0/0 faints=1/2 initialFrames=43
+REVIEW_STATE actor=1 move=Icy Wind PP=14/14/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=130 item=481
+REVIEW_STATE actor=3 move=Close Combat PP=20/10/4/5 Atk=6 Def=5 SpA=6 SpD=5 Spe=6 status=0 ability=181 item=477
+REVIEW_INPUT trainer=369 slot=0 species=478 lv=28 HP=86 Atk=52 Def=52 SpA=76 SpD=52 Spe=101 item=481 ability=130
+REVIEW_INPUT trainer=369 slot=1 species=757 lv=28 HP=73 Atk=34 Def=36 SpA=71 SpD=36 Spe=81 item=494 ability=12
+REVIEW_INPUT trainer=369 slot=2 species=1174 lv=28 HP=88 Atk=96 Def=50 SpA=39 SpD=50 Spe=101 item=477 ability=181
+REVIEW_INPUT trainer=369 slot=3 species=814 lv=28 HP=83 Atk=79 Def=47 SpA=39 SpD=47 Spe=91 item=494 ability=236
+AI decision turn=1 actor=0 move=Bite target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=High Jump Kick target=0
+AI decision turn=2 actor=1 move=Close Combat target=2
+AI decision turn=2 actor=3 move=High Jump Kick target=2
+REVIEW_AFTER board=0 turns=1 reserves=1 species=1174/814 HP=88/41 foes=0/119 faints=0/1 initialFrames=21
+REVIEW_STATE actor=1 move=Protect PP=20/10/5/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=181 item=477
+REVIEW_STATE actor=3 move=High Jump Kick PP=15/9/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=236 item=494
+REVIEW_INPUT trainer=369 slot=0 species=478 lv=28 HP=86 Atk=52 Def=52 SpA=76 SpD=52 Spe=101 item=481 ability=130
+REVIEW_INPUT trainer=369 slot=1 species=757 lv=28 HP=73 Atk=34 Def=36 SpA=71 SpD=36 Spe=81 item=494 ability=12
+REVIEW_INPUT trainer=369 slot=2 species=1174 lv=28 HP=88 Atk=96 Def=50 SpA=39 SpD=50 Spe=101 item=477 ability=181
+REVIEW_INPUT trainer=369 slot=3 species=814 lv=28 HP=83 Atk=79 Def=47 SpA=39 SpD=47 Spe=91 item=494 ability=236
+AI decision turn=1 actor=0 move=Bite target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=High Jump Kick target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=1 move=Close Combat target=2
+AI decision turn=2 actor=3 move=High Jump Kick target=2
+AI decision turn=3 actor=1 move=Close Combat target=2
+REVIEW_AFTER board=0 turns=2 reserves=1 species=1174/814 HP=88/0 foes=0/68 faints=1/1 initialFrames=21
+REVIEW_STATE actor=1 move=Close Combat PP=20/10/4/4 Atk=6 Def=5 SpA=6 SpD=5 Spe=6 status=0 ability=181 item=477
+REVIEW_STATE actor=3 move=- PP=15/8/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=0 item=494
+REVIEW_INPUT trainer=369 slot=0 species=478 lv=28 HP=86 Atk=52 Def=52 SpA=76 SpD=52 Spe=101 item=481 ability=130
+REVIEW_INPUT trainer=369 slot=1 species=757 lv=28 HP=73 Atk=34 Def=36 SpA=71 SpD=36 Spe=81 item=494 ability=12
+REVIEW_INPUT trainer=369 slot=2 species=1174 lv=28 HP=88 Atk=96 Def=50 SpA=39 SpD=50 Spe=101 item=477 ability=181
+REVIEW_INPUT trainer=369 slot=3 species=814 lv=28 HP=83 Atk=79 Def=47 SpA=39 SpD=47 Spe=91 item=494 ability=236
+AI decision turn=1 actor=0 move=Bite target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=High Jump Kick target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=1 move=Close Combat target=2
+AI decision turn=2 actor=3 move=High Jump Kick target=2
+AI decision turn=3 actor=2 move=Drain Punch target=3
+AI decision turn=3 actor=1 move=Close Combat target=2
+REVIEW_AFTER board=0 turns=3 reserves=1 species=1174/814 HP=0/0 foes=0/77 faints=2/1 initialFrames=21
+REVIEW_STATE actor=1 move=- PP=20/10/3/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=0 item=477
+REVIEW_STATE actor=3 move=- PP=15/8/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=0 item=494
+REVIEW_INPUT trainer=369 slot=0 species=478 lv=28 HP=86 Atk=52 Def=52 SpA=76 SpD=52 Spe=101 item=481 ability=130
+REVIEW_INPUT trainer=369 slot=1 species=757 lv=28 HP=73 Atk=34 Def=36 SpA=71 SpD=36 Spe=81 item=494 ability=12
+REVIEW_INPUT trainer=369 slot=2 species=1174 lv=28 HP=88 Atk=96 Def=50 SpA=39 SpD=50 Spe=101 item=477 ability=181
+REVIEW_INPUT trainer=369 slot=3 species=814 lv=28 HP=83 Atk=79 Def=47 SpA=39 SpD=47 Spe=91 item=494 ability=236
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Accelerock target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Sucker Punch target=0
+AI decision turn=2 actor=1 move=Accelerock target=2
+AI decision turn=2 actor=3 move=High Jump Kick target=2
+REVIEW_AFTER board=1 turns=1 reserves=1 species=1174/814 HP=61/83 foes=0/104 faints=0/1 initialFrames=20
+REVIEW_STATE actor=1 move=Accelerock PP=19/10/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=181 item=477
+REVIEW_STATE actor=3 move=Sucker Punch PP=15/10/20/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=236 item=494
+REVIEW_INPUT trainer=369 slot=0 species=478 lv=28 HP=86 Atk=52 Def=52 SpA=76 SpD=52 Spe=101 item=481 ability=130
+REVIEW_INPUT trainer=369 slot=1 species=757 lv=28 HP=73 Atk=34 Def=36 SpA=71 SpD=36 Spe=81 item=494 ability=12
+REVIEW_INPUT trainer=369 slot=2 species=1174 lv=28 HP=88 Atk=96 Def=50 SpA=39 SpD=50 Spe=101 item=477 ability=181
+REVIEW_INPUT trainer=369 slot=3 species=814 lv=28 HP=83 Atk=79 Def=47 SpA=39 SpD=47 Spe=91 item=494 ability=236
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Accelerock target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Sucker Punch target=0
+AI decision turn=2 actor=2 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Accelerock target=2
+AI decision turn=2 actor=3 move=High Jump Kick target=2
+AI decision turn=3 actor=1 move=Close Combat target=2
+AI decision turn=3 actor=3 move=High Jump Kick target=2
+REVIEW_AFTER board=1 turns=2 reserves=1 species=1174/814 HP=31/83 foes=0/55 faints=0/1 initialFrames=20
+REVIEW_STATE actor=1 move=Accelerock PP=18/10/5/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=181 item=477
+REVIEW_STATE actor=3 move=High Jump Kick PP=15/9/20/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=236 item=494
+REVIEW_INPUT trainer=369 slot=0 species=478 lv=28 HP=86 Atk=52 Def=52 SpA=76 SpD=52 Spe=101 item=481 ability=130
+REVIEW_INPUT trainer=369 slot=1 species=757 lv=28 HP=73 Atk=34 Def=36 SpA=71 SpD=36 Spe=81 item=494 ability=12
+REVIEW_INPUT trainer=369 slot=2 species=1174 lv=28 HP=88 Atk=96 Def=50 SpA=39 SpD=50 Spe=101 item=477 ability=181
+REVIEW_INPUT trainer=369 slot=3 species=814 lv=28 HP=83 Atk=79 Def=47 SpA=39 SpD=47 Spe=91 item=494 ability=236
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Accelerock target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Sucker Punch target=0
+AI decision turn=2 actor=2 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Accelerock target=2
+AI decision turn=2 actor=3 move=High Jump Kick target=2
+AI decision turn=3 actor=2 move=Super Fang target=1
+AI decision turn=3 actor=1 move=Close Combat target=2
+AI decision turn=3 actor=3 move=High Jump Kick target=2
+AI decision turn=4 actor=1 move=Accelerock target=2
+AI decision turn=4 actor=3 move=Flare Blitz target=2
+REVIEW_AFTER board=1 turns=3 reserves=1 species=1174/814 HP=16/83 foes=0/12 faints=0/1 initialFrames=20
+REVIEW_STATE actor=1 move=Close Combat PP=18/10/4/5 Atk=6 Def=5 SpA=6 SpD=5 Spe=6 status=0 ability=181 item=477
+REVIEW_STATE actor=3 move=High Jump Kick PP=15/8/20/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=236 item=494
+REVIEW_INPUT trainer=369 slot=0 species=478 lv=28 HP=86 Atk=52 Def=52 SpA=76 SpD=52 Spe=101 item=481 ability=130
+REVIEW_INPUT trainer=369 slot=1 species=757 lv=28 HP=73 Atk=34 Def=36 SpA=71 SpD=36 Spe=81 item=494 ability=12
+REVIEW_INPUT trainer=369 slot=2 species=1174 lv=28 HP=88 Atk=96 Def=50 SpA=39 SpD=50 Spe=101 item=477 ability=181
+REVIEW_INPUT trainer=369 slot=3 species=814 lv=28 HP=83 Atk=79 Def=47 SpA=39 SpD=47 Spe=91 item=494 ability=236
+AI decision turn=1 actor=0 move=Fake Out target=3
+AI decision turn=1 actor=1 move=Close Combat target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=U-turn target=0
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=U-turn target=0
+REVIEW_AFTER board=2 turns=1 reserves=1 species=1174/814 HP=88/5 foes=1/104 faints=0/0 initialFrames=22
+REVIEW_STATE actor=1 move=Close Combat PP=20/10/4/5 Atk=6 Def=5 SpA=6 SpD=5 Spe=6 status=0 ability=181 item=477
+REVIEW_STATE actor=3 move=- PP=15/10/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=236 item=494
+REVIEW_INPUT trainer=369 slot=0 species=478 lv=28 HP=86 Atk=52 Def=52 SpA=76 SpD=52 Spe=101 item=481 ability=130
+REVIEW_INPUT trainer=369 slot=1 species=757 lv=28 HP=73 Atk=34 Def=36 SpA=71 SpD=36 Spe=81 item=494 ability=12
+REVIEW_INPUT trainer=369 slot=2 species=1174 lv=28 HP=88 Atk=96 Def=50 SpA=39 SpD=50 Spe=101 item=477 ability=181
+REVIEW_INPUT trainer=369 slot=3 species=814 lv=28 HP=83 Atk=79 Def=47 SpA=39 SpD=47 Spe=91 item=494 ability=236
+AI decision turn=1 actor=0 move=Fake Out target=3
+AI decision turn=1 actor=1 move=Close Combat target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=U-turn target=0
+AI decision turn=2 actor=0 move=Drain Punch target=3
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=U-turn target=0
+AI decision turn=3 actor=1 move=Close Combat target=2
+REVIEW_AFTER board=2 turns=2 reserves=1 species=1174/814 HP=88/0 foes=0/104 faints=1/1 initialFrames=22
+REVIEW_STATE actor=1 move=Protect PP=20/10/4/4 Atk=6 Def=5 SpA=6 SpD=5 Spe=6 status=0 ability=181 item=477
+REVIEW_STATE actor=3 move=- PP=15/10/19/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=0 item=494
+REVIEW_INPUT trainer=369 slot=0 species=478 lv=28 HP=86 Atk=52 Def=52 SpA=76 SpD=52 Spe=101 item=481 ability=130
+REVIEW_INPUT trainer=369 slot=1 species=757 lv=28 HP=73 Atk=34 Def=36 SpA=71 SpD=36 Spe=81 item=494 ability=12
+REVIEW_INPUT trainer=369 slot=2 species=1174 lv=28 HP=88 Atk=96 Def=50 SpA=39 SpD=50 Spe=101 item=477 ability=181
+REVIEW_INPUT trainer=369 slot=3 species=814 lv=28 HP=83 Atk=79 Def=47 SpA=39 SpD=47 Spe=91 item=494 ability=236
+AI decision turn=1 actor=0 move=Fake Out target=3
+AI decision turn=1 actor=1 move=Close Combat target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=U-turn target=0
+AI decision turn=2 actor=0 move=Drain Punch target=3
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=U-turn target=0
+AI decision turn=3 actor=2 move=Scald target=3
+AI decision turn=3 actor=1 move=Close Combat target=2
+REVIEW_AFTER board=2 turns=3 reserves=1 species=1174/814 HP=0/0 foes=0/53 faints=2/1 initialFrames=22
+REVIEW_STATE actor=1 move=- PP=20/10/3/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=0 item=477
+REVIEW_STATE actor=3 move=- PP=15/10/19/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=0 item=494
+
+- Tests [32mPASSED[0m:          4
+- Tests [34mTOTAL[0m:           4
+

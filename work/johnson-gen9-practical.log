@@ -1,0 +1,316 @@
+tools/scaninc/scaninc -M build/emerald-test/test/battle/ai/emerald_champions_plans.d -g build/assets -I include -I tools/agbcc/include test/battle/ai/emerald_champions_plans.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/battle/ai/emerald_champions_plans.o test/battle/ai/emerald_champions_plans.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 4
+[0] EC live review Johnson timing: complete cold decision with six-player party: [32mPASS[0m
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Wild Charge target=2
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Quick Attack target=2
+AI decision turn=2 actor=1 move=Crunch target=2
+AI decision turn=2 actor=3 move=Quick Attack target=2
+E23_JOHNSON_COMPLETE_TIMING trainer=754 setupFrames=8 decisionFrames=42 completeFrames=50 warmFrames=42 first=3 moves=Crunch/Quick Attack
+[2] EC live review Johnson reserves: native friendship physical special and Fake Out pressure 2/9: [31mFAIL[0m
+JOHNSON_RESERVE_INPUT board=0 slot=0 species=659 level=12 HP=34 Atk=26 Def=17 SpA=14 SpD=17 Speed=29 item=523 ability=37 friendship=0
+JOHNSON_RESERVE_INPUT board=0 slot=1 species=276 level=12 HP=35 Atk=29 Def=15 SpA=13 SpD=15 Speed=39 item=446 ability=62 friendship=0
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Frustration target=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Brave Bird target=2
+JOHNSON_RESERVE_AFTER board=0 turns=1 moves=-/- HP=0/0 foes=41/14 status=0/0 item=523/446 friendship=0/0 faint=2/0
+JOHNSON_NATIVE_CACHE board=0 turns=1 slot2=Frustration vsLeft=25/27/30 vsRight=24/25/28
+JOHNSON_RESERVE_INPUT board=0 slot=0 species=659 level=12 HP=34 Atk=26 Def=17 SpA=14 SpD=17 Speed=29 item=523 ability=37 friendship=0
+JOHNSON_RESERVE_INPUT board=0 slot=1 species=276 level=12 HP=35 Atk=29 Def=15 SpA=13 SpD=15 Speed=39 item=446 ability=62 friendship=0
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Frustration target=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Brave Bird target=2
+work/johnson_reserve_probe.inc:52001: 2 TURNs specified, but 1 ran
+[1] EC live review Johnson denial: Intimidate special pressure and Ghost disruption: [32mPASS[0m
+JOHNSON_DENIAL_INPUT b=0 owner=0 slot=0 species=133 lv=14 HP=52 stats=24/23/18/39/24 item=494 ability=91
+JOHNSON_DENIAL_MENU b=0 owner=0 slot=0 moves=38/98/44/182 friendship=50
+JOHNSON_DENIAL_INPUT b=0 owner=0 slot=1 species=532 lv=14 HP=58 stats=31/24/14/29/19 item=494 ability=89
+JOHNSON_DENIAL_MENU b=0 owner=0 slot=1 moves=409/8/339/182 friendship=70
+JOHNSON_DENIAL_INPUT b=0 owner=1 slot=0 species=403 lv=12 HP=44 stats=34/17/16/16/19 item=494 ability=22
+JOHNSON_DENIAL_MENU b=0 owner=1 slot=0 moves=528/242/424/182 friendship=0
+JOHNSON_DENIAL_INPUT b=0 owner=1 slot=1 species=396 lv=12 HP=35 stats=29/15/13/15/33 item=434 ability=120
+JOHNSON_DENIAL_MENU b=0 owner=1 slot=1 moves=413/38/98/369 friendship=0
+JOHNSON_DENIAL_INPUT b=0 owner=1 slot=2 species=659 lv=12 HP=34 stats=26/17/14/17/29 item=523 ability=37
+JOHNSON_DENIAL_MENU b=0 owner=1 slot=2 moves=98/280/218/182 friendship=0
+JOHNSON_DENIAL_INPUT b=0 owner=1 slot=3 species=276 lv=12 HP=35 stats=29/15/13/15/39 item=446 ability=62
+JOHNSON_DENIAL_MENU b=0 owner=1 slot=3 moves=263/413/98/182 friendship=0
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Wild Charge target=2
+AI decision turn=1 actor=2 move=Drain Punch target=1
+AI decision turn=1 actor=3 move=Brave Bird target=2
+AI decision turn=2 actor=1 move=Wild Charge target=2
+AI decision turn=2 actor=3 move=Brave Bird target=0
+JOHNSON_DENIAL_END b=0 t=1 native=1 active=403/396 slots=0/1 HP=6/21 foes=46/6 faints=0/0
+JOHNSON_DENIAL_MOVES b=0 t=1 own=Wild Charge/Brave Bird player=Double-Edge/Drain Punch
+JOHNSON_DENIAL_STATE b=0 t=1 playerAtk=5/5 playerSpA=6/6 ownStatus=0/0 foeStatus=0/0 items=494/434
+JOHNSON_DENIAL_PARTY b=0 t=1 slot=0 species=403 HP=6/44 item=494 status=0
+JOHNSON_DENIAL_PARTY b=0 t=1 slot=1 species=396 HP=21/35 item=434 status=0
+JOHNSON_DENIAL_PARTY b=0 t=1 slot=2 species=659 HP=34/34 item=523 status=0
+JOHNSON_DENIAL_PARTY b=0 t=1 slot=3 species=276 HP=35/35 item=446 status=0
+JOHNSON_DENIAL_INPUT b=0 owner=0 slot=0 species=133 lv=14 HP=52 stats=24/23/18/39/24 item=494 ability=91
+JOHNSON_DENIAL_MENU b=0 owner=0 slot=0 moves=38/98/44/182 friendship=50
+JOHNSON_DENIAL_INPUT b=0 owner=0 slot=1 species=532 lv=14 HP=58 stats=31/24/14/29/19 item=494 ability=89
+JOHNSON_DENIAL_MENU b=0 owner=0 slot=1 moves=409/8/339/182 friendship=70
+JOHNSON_DENIAL_INPUT b=0 owner=1 slot=0 species=403 lv=12 HP=44 stats=34/17/16/16/19 item=494 ability=22
+JOHNSON_DENIAL_MENU b=0 owner=1 slot=0 moves=528/242/424/182 friendship=0
+JOHNSON_DENIAL_INPUT b=0 owner=1 slot=1 species=396 lv=12 HP=35 stats=29/15/13/15/33 item=434 ability=120
+JOHNSON_DENIAL_MENU b=0 owner=1 slot=1 moves=413/38/98/369 friendship=0
+JOHNSON_DENIAL_INPUT b=0 owner=1 slot=2 species=659 lv=12 HP=34 stats=26/17/14/17/29 item=523 ability=37
+JOHNSON_DENIAL_MENU b=0 owner=1 slot=2 moves=98/280/218/182 friendship=0
+JOHNSON_DENIAL_INPUT b=0 owner=1 slot=3 species=276 lv=12 HP=35 stats=29/15/13/15/39 item=446 ability=62
+JOHNSON_DENIAL_MENU b=0 owner=1 slot=3 moves=263/413/98/182 friendship=0
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Wild Charge target=2
+AI decision turn=1 actor=2 move=Drain Punch target=1
+AI decision turn=1 actor=3 move=Brave Bird target=2
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Wild Charge target=2
+AI decision turn=2 actor=2 move=Drain Punch target=1
+AI decision turn=2 actor=3 move=Brave Bird target=0
+AI switch turn=2 actor=1 party=2
+AI switch turn=2 actor=3 party=3
+AI decision turn=3 actor=1 move=Brick Break target=0
+AI decision turn=3 actor=3 move=Brave Bird target=2
+JOHNSON_DENIAL_END b=0 t=2 native=2 active=659/276 slots=2/3 HP=34/35 foes=21/13 faints=2/0
+JOHNSON_DENIAL_MOVES b=0 t=2 own=-/- player=Double-Edge/Drain Punch
+JOHNSON_DENIAL_STATE b=0 t=2 playerAtk=5/5 playerSpA=6/6 ownStatus=0/0 foeStatus=0/0 items=523/446
+JOHNSON_DENIAL_PARTY b=0 t=2 slot=0 species=403 HP=0/44 item=494 status=0
+JOHNSON_DENIAL_PARTY b=0 t=2 slot=1 species=396 HP=0/35 item=434 status=0
+JOHNSON_DENIAL_PARTY b=0 t=2 slot=2 species=659 HP=34/34 item=523 status=0
+JOHNSON_DENIAL_PARTY b=0 t=2 slot=3 species=276 HP=35/35 item=446 status=0
+JOHNSON_DENIAL_INPUT b=1 owner=0 slot=0 species=417 lv=14 HP=53 stats=18/40/21/34/35 item=523 ability=10
+JOHNSON_DENIAL_MENU b=1 owner=0 slot=0 moves=85/162/266/182 friendship=100
+JOHNSON_DENIAL_INPUT b=1 owner=0 slot=1 species=270 lv=14 HP=48 stats=15/17/27/27/17 item=494 ability=44
+JOHNSON_DENIAL_MENU b=1 owner=0 slot=1 moves=202/58/240/182 friendship=50
+JOHNSON_DENIAL_INPUT b=1 owner=1 slot=0 species=403 lv=12 HP=44 stats=34/17/16/16/19 item=494 ability=22
+JOHNSON_DENIAL_MENU b=1 owner=1 slot=0 moves=528/242/424/182 friendship=0
+JOHNSON_DENIAL_INPUT b=1 owner=1 slot=1 species=396 lv=12 HP=35 stats=29/15/13/15/33 item=434 ability=120
+JOHNSON_DENIAL_MENU b=1 owner=1 slot=1 moves=413/38/98/369 friendship=0
+JOHNSON_DENIAL_INPUT b=1 owner=1 slot=2 species=659 lv=12 HP=34 stats=26/17/14/17/29 item=523 ability=37
+JOHNSON_DENIAL_MENU b=1 owner=1 slot=2 moves=98/280/218/182 friendship=0
+JOHNSON_DENIAL_INPUT b=1 owner=1 slot=3 species=276 lv=12 HP=35 stats=29/15/13/15/39 item=446 ability=62
+JOHNSON_DENIAL_MENU b=1 owner=1 slot=3 moves=263/413/98/182 friendship=0
+AI decision turn=1 actor=0 move=Thunderbolt target=3
+AI decision turn=1 actor=1 move=Wild Charge target=2
+AI decision turn=1 actor=2 move=Giga Drain target=1
+AI decision turn=1 actor=3 move=Brave Bird target=2
+AI switch turn=1 actor=3 party=2
+AI decision turn=2 actor=1 move=Wild Charge target=2
+AI decision turn=2 actor=3 move=Frustration target=2
+JOHNSON_DENIAL_END b=1 t=1 native=1 active=403/659 slots=0/2 HP=24/34 foes=53/37 faints=1/0
+JOHNSON_DENIAL_MOVES b=1 t=1 own=Wild Charge/- player=Thunderbolt/Giga Drain
+JOHNSON_DENIAL_STATE b=1 t=1 playerAtk=5/5 playerSpA=6/6 ownStatus=0/0 foeStatus=0/0 items=494/523
+JOHNSON_DENIAL_PARTY b=1 t=1 slot=0 species=403 HP=24/44 item=494 status=0
+JOHNSON_DENIAL_PARTY b=1 t=1 slot=1 species=396 HP=0/35 item=434 status=0
+JOHNSON_DENIAL_PARTY b=1 t=1 slot=2 species=659 HP=34/34 item=523 status=0
+JOHNSON_DENIAL_PARTY b=1 t=1 slot=3 species=276 HP=35/35 item=446 status=0
+JOHNSON_DENIAL_INPUT b=1 owner=0 slot=0 species=417 lv=14 HP=53 stats=18/40/21/34/35 item=523 ability=10
+JOHNSON_DENIAL_MENU b=1 owner=0 slot=0 moves=85/162/266/182 friendship=100
+JOHNSON_DENIAL_INPUT b=1 owner=0 slot=1 species=270 lv=14 HP=48 stats=15/17/27/27/17 item=494 ability=44
+JOHNSON_DENIAL_MENU b=1 owner=0 slot=1 moves=202/58/240/182 friendship=50
+JOHNSON_DENIAL_INPUT b=1 owner=1 slot=0 species=403 lv=12 HP=44 stats=34/17/16/16/19 item=494 ability=22
+JOHNSON_DENIAL_MENU b=1 owner=1 slot=0 moves=528/242/424/182 friendship=0
+JOHNSON_DENIAL_INPUT b=1 owner=1 slot=1 species=396 lv=12 HP=35 stats=29/15/13/15/33 item=434 ability=120
+JOHNSON_DENIAL_MENU b=1 owner=1 slot=1 moves=413/38/98/369 friendship=0
+JOHNSON_DENIAL_INPUT b=1 owner=1 slot=2 species=659 lv=12 HP=34 stats=26/17/14/17/29 item=523 ability=37
+JOHNSON_DENIAL_MENU b=1 owner=1 slot=2 moves=98/280/218/182 friendship=0
+JOHNSON_DENIAL_INPUT b=1 owner=1 slot=3 species=276 lv=12 HP=35 stats=29/15/13/15/39 item=446 ability=62
+JOHNSON_DENIAL_MENU b=1 owner=1 slot=3 moves=263/413/98/182 friendship=0
+AI decision turn=1 actor=0 move=Thunderbolt target=3
+AI decision turn=1 actor=1 move=Wild Charge target=2
+AI decision turn=1 actor=2 move=Giga Drain target=1
+AI decision turn=1 actor=3 move=Brave Bird target=2
+AI switch turn=1 actor=3 party=2
+AI decision turn=2 actor=0 move=Thunderbolt target=3
+AI decision turn=2 actor=1 move=Wild Charge target=2
+AI decision turn=2 actor=2 move=Giga Drain target=1
+AI decision turn=2 actor=3 move=Frustration target=2
+AI decision turn=3 actor=1 move=Protect target=1
+AI decision turn=3 actor=3 move=Protect target=3
+JOHNSON_DENIAL_END b=1 t=2 native=2 active=403/659 slots=0/2 HP=23/21 foes=53/0 faints=1/1
+JOHNSON_DENIAL_MOVES b=1 t=2 own=Wild Charge/Frustration player=Thunderbolt/-
+JOHNSON_DENIAL_STATE b=1 t=2 playerAtk=5/6 playerSpA=6/6 ownStatus=0/0 foeStatus=0/0 items=494/0
+JOHNSON_DENIAL_PARTY b=1 t=2 slot=0 species=403 HP=23/44 item=494 status=0
+JOHNSON_DENIAL_PARTY b=1 t=2 slot=1 species=396 HP=0/35 item=434 status=0
+JOHNSON_DENIAL_PARTY b=1 t=2 slot=2 species=659 HP=21/34 item=0 status=0
+JOHNSON_DENIAL_PARTY b=1 t=2 slot=3 species=276 HP=35/35 item=446 status=0
+JOHNSON_DENIAL_INPUT b=2 owner=0 slot=0 species=619 lv=14 HP=49 stats=33/23/21/23/39 item=494 ability=39
+JOHNSON_DENIAL_MENU b=2 owner=0 slot=0 moves=252/269/409/282 friendship=50
+JOHNSON_DENIAL_INPUT b=2 owner=0 slot=1 species=885 lv=14 HP=45 stats=26/28/18/17/32 item=494 ability=29
+JOHNSON_DENIAL_MENU b=2 owner=0 slot=1 moves=525/611/44/182 friendship=50
+JOHNSON_DENIAL_INPUT b=2 owner=1 slot=0 species=403 lv=12 HP=44 stats=34/17/16/16/19 item=494 ability=22
+JOHNSON_DENIAL_MENU b=2 owner=1 slot=0 moves=528/242/424/182 friendship=0
+JOHNSON_DENIAL_INPUT b=2 owner=1 slot=1 species=396 lv=12 HP=35 stats=29/15/13/15/33 item=434 ability=120
+JOHNSON_DENIAL_MENU b=2 owner=1 slot=1 moves=413/38/98/369 friendship=0
+JOHNSON_DENIAL_INPUT b=2 owner=1 slot=2 species=659 lv=12 HP=34 stats=26/17/14/17/29 item=523 ability=37
+JOHNSON_DENIAL_MENU b=2 owner=1 slot=2 moves=98/280/218/182 friendship=0
+JOHNSON_DENIAL_INPUT b=2 owner=1 slot=3 species=276 lv=12 HP=35 stats=29/15/13/15/39 item=446 ability=62
+JOHNSON_DENIAL_MENU b=2 owner=1 slot=3 moves=263/413/98/182 friendship=0
+AI decision turn=1 actor=0 move=Fake Out target=3
+AI decision turn=1 actor=1 move=Crunch target=2
+AI decision turn=1 actor=2 move=Dragon Tail target=1
+AI decision turn=1 actor=3 move=Brave Bird target=0
+AI decision turn=2 actor=1 move=Protect target=1
+AI switch turn=2 actor=3 party=0
+JOHNSON_DENIAL_END b=2 t=1 native=1 active=276/396 slots=3/1 HP=35/24 foes=49/31 faints=0/0
+JOHNSON_DENIAL_MOVES b=2 t=1 own=-/- player=Fake Out/Dragon Tail
+JOHNSON_DENIAL_STATE b=2 t=1 playerAtk=6/6 playerSpA=6/6 ownStatus=128/0 foeStatus=0/0 items=446/434
+JOHNSON_DENIAL_PARTY b=2 t=1 slot=0 species=403 HP=32/44 item=494 status=0
+JOHNSON_DENIAL_PARTY b=2 t=1 slot=1 species=396 HP=24/35 item=434 status=0
+JOHNSON_DENIAL_PARTY b=2 t=1 slot=2 species=659 HP=34/34 item=523 status=0
+JOHNSON_DENIAL_PARTY b=2 t=1 slot=3 species=276 HP=35/35 item=446 status=128
+JOHNSON_DENIAL_INPUT b=2 owner=0 slot=0 species=619 lv=14 HP=49 stats=33/23/21/23/39 item=494 ability=39
+JOHNSON_DENIAL_MENU b=2 owner=0 slot=0 moves=252/269/409/282 friendship=50
+JOHNSON_DENIAL_INPUT b=2 owner=0 slot=1 species=885 lv=14 HP=45 stats=26/28/18/17/32 item=494 ability=29
+JOHNSON_DENIAL_MENU b=2 owner=0 slot=1 moves=525/611/44/182 friendship=50
+JOHNSON_DENIAL_INPUT b=2 owner=1 slot=0 species=403 lv=12 HP=44 stats=34/17/16/16/19 item=494 ability=22
+JOHNSON_DENIAL_MENU b=2 owner=1 slot=0 moves=528/242/424/182 friendship=0
+JOHNSON_DENIAL_INPUT b=2 owner=1 slot=1 species=396 lv=12 HP=35 stats=29/15/13/15/33 item=434 ability=120
+JOHNSON_DENIAL_MENU b=2 owner=1 slot=1 moves=413/38/98/369 friendship=0
+JOHNSON_DENIAL_INPUT b=2 owner=1 slot=2 species=659 lv=12 HP=34 stats=26/17/14/17/29 item=523 ability=37
+JOHNSON_DENIAL_MENU b=2 owner=1 slot=2 moves=98/280/218/182 friendship=0
+JOHNSON_DENIAL_INPUT b=2 owner=1 slot=3 species=276 lv=12 HP=35 stats=29/15/13/15/39 item=446 ability=62
+JOHNSON_DENIAL_MENU b=2 owner=1 slot=3 moves=263/413/98/182 friendship=0
+AI decision turn=1 actor=0 move=Fake Out target=3
+AI decision turn=1 actor=1 move=Crunch target=2
+AI decision turn=1 actor=2 move=Dragon Tail target=1
+AI decision turn=1 actor=3 move=Brave Bird target=0
+AI decision turn=2 actor=0 move=Knock Off target=1
+AI decision turn=2 actor=1 move=Protect target=1
+AI switch turn=2 actor=3 party=0
+AI decision turn=2 actor=2 move=Bite target=1
+AI decision turn=3 actor=1 move=Brave Bird target=0
+AI decision turn=3 actor=3 move=Crunch target=2
+JOHNSON_DENIAL_END b=2 t=2 native=2 active=276/403 slots=3/0 HP=33/32 foes=49/31 faints=0/0
+JOHNSON_DENIAL_MOVES b=2 t=2 own=Protect/- player=Knock Off/Bite
+JOHNSON_DENIAL_STATE b=2 t=2 playerAtk=6/6 playerSpA=6/6 ownStatus=384/0 foeStatus=0/0 items=446/494
+JOHNSON_DENIAL_PARTY b=2 t=2 slot=0 species=403 HP=32/44 item=494 status=0
+JOHNSON_DENIAL_PARTY b=2 t=2 slot=1 species=396 HP=24/35 item=434 status=0
+JOHNSON_DENIAL_PARTY b=2 t=2 slot=2 species=659 HP=34/34 item=523 status=0
+JOHNSON_DENIAL_PARTY b=2 t=2 slot=3 species=276 HP=33/35 item=446 status=128
+[3] EC live review Johnson leads: native physical and special pressure: [32mPASS[0m
+JOHNSON_INPUT board=0 owner=0 slot=0 species=133 lv=14 HP=52 stats=24/23/18/39/24 item=494 ability=91
+JOHNSON_INPUT board=0 owner=0 slot=1 species=532 lv=14 HP=58 stats=31/24/14/29/19 item=494 ability=89
+JOHNSON_INPUT board=0 owner=1 slot=0 species=403 lv=12 HP=44 stats=34/17/16/16/19 item=494 ability=22
+JOHNSON_INPUT board=0 owner=1 slot=1 species=396 lv=12 HP=35 stats=29/15/13/15/33 item=434 ability=120
+JOHNSON_INPUT board=0 owner=1 slot=2 species=659 lv=12 HP=34 stats=26/17/14/17/29 item=523 ability=37
+JOHNSON_INPUT board=0 owner=1 slot=3 species=276 lv=12 HP=35 stats=29/15/13/15/39 item=446 ability=62
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Wild Charge target=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Brave Bird target=2
+AI switch turn=1 actor=3 party=2
+AI decision turn=2 actor=1 move=Wild Charge target=2
+AI decision turn=2 actor=3 move=Quick Attack target=2
+JOHNSON_AFTER board=0 t=1 native=1 active=403/659 HP=21/34 foes=46/9 moves=Wild Charge/- faints=1/0
+JOHNSON_STATE board=0 t=1 Def=6/6 foeSpe=6/6 items=494/523
+JOHNSON_INPUT board=0 owner=0 slot=0 species=133 lv=14 HP=52 stats=24/23/18/39/24 item=494 ability=91
+JOHNSON_INPUT board=0 owner=0 slot=1 species=532 lv=14 HP=58 stats=31/24/14/29/19 item=494 ability=89
+JOHNSON_INPUT board=0 owner=1 slot=0 species=403 lv=12 HP=44 stats=34/17/16/16/19 item=494 ability=22
+JOHNSON_INPUT board=0 owner=1 slot=1 species=396 lv=12 HP=35 stats=29/15/13/15/33 item=434 ability=120
+JOHNSON_INPUT board=0 owner=1 slot=2 species=659 lv=12 HP=34 stats=26/17/14/17/29 item=523 ability=37
+JOHNSON_INPUT board=0 owner=1 slot=3 species=276 lv=12 HP=35 stats=29/15/13/15/39 item=446 ability=62
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Wild Charge target=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Brave Bird target=2
+AI switch turn=1 actor=3 party=2
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Wild Charge target=2
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Quick Attack target=2
+AI switch turn=2 actor=1 party=3
+AI decision turn=3 actor=1 move=Protect target=1
+AI decision turn=3 actor=3 move=Frustration target=0
+JOHNSON_AFTER board=0 t=2 native=2 active=276/659 HP=35/34 foes=25/0 moves=-/Quick Attack faints=2/1
+JOHNSON_STATE board=0 t=2 Def=6/6 foeSpe=6/6 items=446/523
+JOHNSON_INPUT board=0 owner=0 slot=0 species=133 lv=14 HP=52 stats=24/23/18/39/24 item=494 ability=91
+JOHNSON_INPUT board=0 owner=0 slot=1 species=532 lv=14 HP=58 stats=31/24/14/29/19 item=494 ability=89
+JOHNSON_INPUT board=0 owner=1 slot=0 species=403 lv=12 HP=44 stats=34/17/16/16/19 item=494 ability=22
+JOHNSON_INPUT board=0 owner=1 slot=1 species=396 lv=12 HP=35 stats=29/15/13/15/33 item=434 ability=120
+JOHNSON_INPUT board=0 owner=1 slot=2 species=659 lv=12 HP=34 stats=26/17/14/17/29 item=523 ability=37
+JOHNSON_INPUT board=0 owner=1 slot=3 species=276 lv=12 HP=35 stats=29/15/13/15/39 item=446 ability=62
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Wild Charge target=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Brave Bird target=2
+AI switch turn=1 actor=3 party=2
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Wild Charge target=2
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Quick Attack target=2
+AI switch turn=2 actor=1 party=3
+AI decision turn=3 actor=0 move=Double-Edge target=1
+AI decision turn=3 actor=1 move=Protect target=1
+AI decision turn=3 actor=3 move=Frustration target=0
+JOHNSON_AFTER board=0 t=3 native=2 active=276/659 HP=35/34 foes=0/0 moves=Protect/Frustration faints=2/2
+JOHNSON_STATE board=0 t=3 Def=6/6 foeSpe=6/6 items=446/523
+JOHNSON_INPUT board=1 owner=0 slot=0 species=417 lv=14 HP=53 stats=18/40/21/34/35 item=523 ability=10
+JOHNSON_INPUT board=1 owner=0 slot=1 species=270 lv=14 HP=48 stats=15/17/27/27/17 item=494 ability=44
+JOHNSON_INPUT board=1 owner=1 slot=0 species=403 lv=12 HP=44 stats=34/17/16/16/19 item=494 ability=22
+JOHNSON_INPUT board=1 owner=1 slot=1 species=396 lv=12 HP=35 stats=29/15/13/15/33 item=434 ability=120
+JOHNSON_INPUT board=1 owner=1 slot=2 species=659 lv=12 HP=34 stats=26/17/14/17/29 item=523 ability=37
+JOHNSON_INPUT board=1 owner=1 slot=3 species=276 lv=12 HP=35 stats=29/15/13/15/39 item=446 ability=62
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Wild Charge target=2
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Brave Bird target=2
+AI decision turn=2 actor=1 move=Crunch target=0
+AI switch turn=2 actor=3 party=2
+JOHNSON_AFTER board=1 t=1 native=1 active=403/396 HP=22/20 foes=53/0 moves=Wild Charge/Brave Bird faints=0/1
+JOHNSON_STATE board=1 t=1 Def=6/6 foeSpe=6/6 items=494/434
+JOHNSON_INPUT board=1 owner=0 slot=0 species=417 lv=14 HP=53 stats=18/40/21/34/35 item=523 ability=10
+JOHNSON_INPUT board=1 owner=0 slot=1 species=270 lv=14 HP=48 stats=15/17/27/27/17 item=494 ability=44
+JOHNSON_INPUT board=1 owner=1 slot=0 species=403 lv=12 HP=44 stats=34/17/16/16/19 item=494 ability=22
+JOHNSON_INPUT board=1 owner=1 slot=1 species=396 lv=12 HP=35 stats=29/15/13/15/33 item=434 ability=120
+JOHNSON_INPUT board=1 owner=1 slot=2 species=659 lv=12 HP=34 stats=26/17/14/17/29 item=523 ability=37
+JOHNSON_INPUT board=1 owner=1 slot=3 species=276 lv=12 HP=35 stats=29/15/13/15/39 item=446 ability=62
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Wild Charge target=2
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Brave Bird target=2
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Crunch target=0
+AI switch turn=2 actor=3 party=2
+AI decision turn=3 actor=1 move=Crunch target=0
+AI decision turn=3 actor=3 move=Frustration target=0
+JOHNSON_AFTER board=1 t=2 native=2 active=403/659 HP=11/34 foes=45/0 moves=Crunch/- faints=0/1
+JOHNSON_STATE board=1 t=2 Def=6/6 foeSpe=6/6 items=494/523
+JOHNSON_INPUT board=1 owner=0 slot=0 species=417 lv=14 HP=53 stats=18/40/21/34/35 item=523 ability=10
+JOHNSON_INPUT board=1 owner=0 slot=1 species=270 lv=14 HP=48 stats=15/17/27/27/17 item=494 ability=44
+JOHNSON_INPUT board=1 owner=1 slot=0 species=403 lv=12 HP=44 stats=34/17/16/16/19 item=494 ability=22
+JOHNSON_INPUT board=1 owner=1 slot=1 species=396 lv=12 HP=35 stats=29/15/13/15/33 item=434 ability=120
+JOHNSON_INPUT board=1 owner=1 slot=2 species=659 lv=12 HP=34 stats=26/17/14/17/29 item=523 ability=37
+JOHNSON_INPUT board=1 owner=1 slot=3 species=276 lv=12 HP=35 stats=29/15/13/15/39 item=446 ability=62
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Wild Charge target=2
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Brave Bird target=2
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Crunch target=0
+AI switch turn=2 actor=3 party=2
+AI decision turn=3 actor=0 move=Super Fang target=1
+AI decision turn=3 actor=1 move=Crunch target=0
+AI decision turn=3 actor=3 move=Frustration target=0
+AI decision turn=4 actor=1 move=Crunch target=0
+AI decision turn=4 actor=3 move=Quick Attack target=0
+JOHNSON_AFTER board=1 t=3 native=3 active=403/659 HP=6/34 foes=14/0 moves=Crunch/Frustration faints=0/1
+JOHNSON_STATE board=1 t=3 Def=6/6 foeSpe=6/6 items=494/523
+
+  [31mFAILED[0m tests:
+  - [31mwork/johnson_reserve_probe.inc:52001[0m: EC live review Johnson reserves: native friendship physical special and Fake Out pressure 2/9: 52001: 2 TURNs specified, but 1 ran
+
+- Tests [31mFAILED[0m:          1    Add TESTS='X' to run tests with the defined prefix.
+- Tests [32mPASSED[0m:          3
+- Tests [34mTOTAL[0m:           4
+
+make: *** [check] Error 1

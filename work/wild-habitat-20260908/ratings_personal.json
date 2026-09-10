@@ -1,0 +1,830 @@
+[
+  {
+    "id": "MAP_ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS",
+    "rating": 10,
+    "reason": "Frillish, Jellicent and Dhelmise make this feel haunted. Hooking Dhelmise at 30% is a worthwhile wreck expedition.",
+    "area": "Abandoned Ship — flooded corridors"
+  },
+  {
+    "id": "MAP_ABANDONED_SHIP_ROOMS_B1F",
+    "rating": 9,
+    "reason": "Golisopod, Qwilfish and Barbaracle belong in a broken hull. I would put Lapras outside the ship, though.",
+    "area": "Abandoned Ship — B1F rooms"
+  },
+  {
+    "id": "MAP_ALTERING_CAVE",
+    "rating": 3,
+    "reason": "After the League, walking into 100% Zubat is a letdown. The default population does nothing with this location.",
+    "area": "Altering Cave — original entrance"
+  },
+  {
+    "id": "MAP_ALTERING_CAVE_1F",
+    "rating": 7,
+    "reason": "Lucario, Shiinotic and Blissey are useful catches, but most of this postgame roster was already available elsewhere.",
+    "area": "Altering Cave 1F"
+  },
+  {
+    "id": "MAP_ALTERING_CAVE_B1F",
+    "rating": 7,
+    "reason": "Guzzlord is exciting. Another cave mix plus a pond containing Poliwhirl and Basculin does not make the whole basement special.",
+    "area": "Altering Cave B1F"
+  },
+  {
+    "id": "MAP_ARTISAN_CAVE_1F",
+    "rating": 9,
+    "reason": "Smeargle at 56% fixes the main problem. Aron and Woobat still feel like remnants of the old filler list.",
+    "area": "Artisan Cave 1F"
+  },
+  {
+    "id": "MAP_ARTISAN_CAVE_B1F",
+    "rating": 8,
+    "reason": "The Smeargle colony is better, but every species here also appears on 1F. This floor still lacks its own attraction.",
+    "area": "Artisan Cave B1F"
+  },
+  {
+    "id": "MAP_ASHEN_WOODS",
+    "rating": 10,
+    "reason": "Hisuian Growlithe, Buzzwole, Brute Bonnet and Bloodmoon Ursaluna make this a place I would deliberately explore and revisit.",
+    "area": "Ashen Woods"
+  },
+  {
+    "id": "MAP_CAVE_OF_ORIGIN_1F",
+    "rating": 8,
+    "reason": "Walking Wake is a great ancient-cave discovery. Sableye, Mawile, Carbink and Boldore still occupy almost half the encounters.",
+    "area": "Cave of Origin 1F"
+  },
+  {
+    "id": "MAP_CAVE_OF_ORIGIN_DIANCIES_ROOM",
+    "rating": 10,
+    "reason": "Carbink, Sableye, Mawile and Glimmora make a convincing gem chamber. I would keep this focused four-species roster.",
+    "area": "Cave of Origin — Diancie's room"
+  },
+  {
+    "id": "MAP_CAVE_OF_ORIGIN_ENTRANCE",
+    "rating": 7,
+    "reason": "Sableye and Mawile again, plus Noibat, Golbat and Noivern. Too much of this sacred cave feels like earlier caves.",
+    "area": "Cave of Origin Entrance"
+  },
+  {
+    "id": "MAP_CAVE_OF_ORIGIN_UNUSED_RUBY_SAPPHIRE_MAP1",
+    "rating": 5,
+    "reason": "Every species is already in the entrance or main floor. I see little reason to hunt in this optional room.",
+    "area": "Cave of Origin — side chamber 1"
+  },
+  {
+    "id": "MAP_CAVE_OF_ORIGIN_UNUSED_RUBY_SAPPHIRE_MAP2",
+    "rating": 6,
+    "reason": "Archaludon helps, but the other eleven species repeat the main floor. The room deserves more than one distinguishing catch.",
+    "area": "Cave of Origin — side chamber 2"
+  },
+  {
+    "id": "MAP_CAVE_OF_ORIGIN_UNUSED_RUBY_SAPPHIRE_MAP3",
+    "rating": 7,
+    "reason": "Clefable and Metang finally suggest a celestial chamber. Most remaining slots still repeat the previous rooms.",
+    "area": "Cave of Origin — side chamber 3"
+  },
+  {
+    "id": "MAP_DESERT_UNDERPASS",
+    "rating": 10,
+    "reason": "Four fossil hybrids, Ditto and three-segment Dudunsparce are discoveries worth making. They suit an unusual buried passage.",
+    "area": "Desert Underpass"
+  },
+  {
+    "id": "MAP_DEWFORD_MANOR_1F",
+    "rating": 9,
+    "reason": "Gastly, Drowzee, Galarian Slowpoke and Sinistea give the manor character. I would feature Sableye more prominently than Hoothoot.",
+    "area": "Dewford Manor 1F"
+  },
+  {
+    "id": "MAP_DEWFORD_MEADOW",
+    "rating": 10,
+    "reason": "The pollinators make sense, Butterfree and Ribombee are useful now, and Pheromosa is a thrilling find. I would keep it.",
+    "area": "Dewford Meadow"
+  },
+  {
+    "id": "MAP_DEWFORD_TOWN",
+    "rating": 8,
+    "reason": "Old Rod Mantyke is excellent. A Good Rod dominated by Luvdisc is a disappointing follow-up for this fishing town.",
+    "area": "Dewford Town"
+  },
+  {
+    "id": "MAP_EMBER_PATH",
+    "rating": 9,
+    "reason": "Blacephalon, Blaze Tauros and Chandelure are worth coming for. The 10% Noibat slot feels wasted beside them.",
+    "area": "Ember Path"
+  },
+  {
+    "id": "MAP_EVER_GRANDE_CITY",
+    "rating": 7,
+    "reason": "Its Super Rod roster exactly copies Route124. Wailmer and Pyukumuku do not make this feel like the final coastal stop.",
+    "area": "Ever Grande City"
+  },
+  {
+    "id": "MAP_FIERY_PATH",
+    "rating": 10,
+    "reason": "Torkoal, Koffing, Charcadet and Slither Wing give useful, different team options while still feeling native to a hot tunnel.",
+    "area": "Fiery Path"
+  },
+  {
+    "id": "MAP_GRANITE_CAVE_1F",
+    "rating": 10,
+    "reason": "Makuhita, Abra, Aron and Beldum make the first cave visit rewarding. Glimmet and Nacli fit without replacing its Hoenn residents.",
+    "area": "Granite Cave 1F"
+  },
+  {
+    "id": "MAP_GRANITE_CAVE_B1F",
+    "rating": 9,
+    "reason": "Sableye, Mawile and Meditite give the descent real value. Timburr is less of a discovery now that it is on Route102.",
+    "area": "Granite Cave B1F"
+  },
+  {
+    "id": "MAP_GRANITE_CAVE_B2F",
+    "rating": 8,
+    "reason": "Tinkatink, Duraludon and Deino are great reasons to continue. Too much of the rest repeats B1F, including its common residents.",
+    "area": "Granite Cave B2F"
+  },
+  {
+    "id": "MAP_GRANITE_CAVE_STEVENS_ROOM",
+    "rating": 9,
+    "reason": "Beldum, Metang and Lucario make Steven's room rewarding. I would make Beldum, rather than Aron, the leading encounter.",
+    "area": "Granite Cave — Steven's room"
+  },
+  {
+    "id": "MAP_JAGGED_PASS",
+    "rating": 8,
+    "reason": "Primeape, Gligar and Mudbray suit the slopes. Bagon, Deino, Jangmo-o and Hakamo-o together feel like excess dragon storage.",
+    "area": "Jagged Pass"
+  },
+  {
+    "id": "MAP_LILYCOVE_CITY",
+    "rating": 8,
+    "reason": "Wailmer and Cramorant suit the busy bay. The stronger rods largely repeat shellfish and predators found along the surrounding coast.",
+    "area": "Lilycove City"
+  },
+  {
+    "id": "MAP_MAGMA_HIDEOUT_1F",
+    "rating": 8,
+    "reason": "Numel, Slugma and the mining Pokémon make a sensible entrance population. I want the deeper rooms to develop this cast.",
+    "area": "Magma Hideout 1F"
+  },
+  {
+    "id": "MAP_MAGMA_HIDEOUT_2F_1R",
+    "rating": 5,
+    "reason": "Ten of twelve species repeat 1F. Geodude becoming Graveler and Zubat becoming Noibat barely changes the experience.",
+    "area": "Magma Hideout 2F Room 1"
+  },
+  {
+    "id": "MAP_MAGMA_HIDEOUT_2F_2R",
+    "rating": 8,
+    "reason": "Koffing, Grimer and Weezing suggest a toxic chamber. I like that direction, but the Noibat slot adds little.",
+    "area": "Magma Hideout 2F Room 2"
+  },
+  {
+    "id": "MAP_MAGMA_HIDEOUT_2F_3R",
+    "rating": 7,
+    "reason": "Houndour, Houndoom and Salazzle could define this room. Numel, Slugma, Noibat and Graveler repeatedly dilute that idea.",
+    "area": "Magma Hideout 2F Room 3"
+  },
+  {
+    "id": "MAP_MAGMA_HIDEOUT_3F_1R",
+    "rating": 8,
+    "reason": "Camerupt, Darmanitan and Volcarona make this feel more dangerous. Noibat and Graveler still take 21% of the table.",
+    "area": "Magma Hideout 3F Room 1"
+  },
+  {
+    "id": "MAP_MAGMA_HIDEOUT_3F_2R",
+    "rating": 7,
+    "reason": "Chandelure is welcome, but this largely repeats the previous chamber's Camerupt, Magcargo, Weezing and other evolved Fire types.",
+    "area": "Magma Hideout 3F Room 2"
+  },
+  {
+    "id": "MAP_MAGMA_HIDEOUT_3F_3R",
+    "rating": 7,
+    "reason": "Salazzle and Larvesta suggest a different hot ecosystem. Most encounters still replay the same Camerupt/Magcargo/Noibat mix.",
+    "area": "Magma Hideout 3F Room 3"
+  },
+  {
+    "id": "MAP_MAGMA_HIDEOUT_4F",
+    "rating": 10,
+    "reason": "Gouging Fire, Camerupt, Coalossal, Volcarona and Chandelure deliver the intensity I want at the hideout's end.",
+    "area": "Magma Hideout 4F"
+  },
+  {
+    "id": "MAP_METEOR_FALLS_1F_1R",
+    "rating": 9,
+    "reason": "Lunatone, Solrock, Clefairy and Minior make the cave memorable. The Super Rod's Golduck/Lombre/Quagsire mix is much less distinctive.",
+    "area": "Meteor Falls 1F Room 1"
+  },
+  {
+    "id": "MAP_METEOR_FALLS_1F_2R",
+    "rating": 9,
+    "reason": "Scream Tail and Ferrothorn are worthwhile deeper finds. Fishing still feels like an ordinary river transplanted into the cave.",
+    "area": "Meteor Falls 1F Room 2"
+  },
+  {
+    "id": "MAP_METEOR_FALLS_B1F_1R",
+    "rating": 9,
+    "reason": "Dratini, Dragonair and Kingdra make Surf excellent here. The Super Rod undercuts that with Poliwhirl, Sharpedo and Octillery.",
+    "area": "Meteor Falls B1F Room 1"
+  },
+  {
+    "id": "MAP_METEOR_FALLS_B1F_2R",
+    "rating": 9,
+    "reason": "Roaring Moon, Salamence and Dragonite justify the journey. Finding Lombre and Golduck on the Super Rod is comparatively deflating.",
+    "area": "Meteor Falls B1F Room 2"
+  },
+  {
+    "id": "MAP_METEOR_FALLS_STEVENS_CAVE",
+    "rating": 10,
+    "reason": "The Beldum family, Steven's steels, Iron Crown and Iron Boulder belong together. Almost every catch could start a new team.",
+    "area": "Meteor Falls — Steven's cave"
+  },
+  {
+    "id": "MAP_MIRAGE_TOWER_1F",
+    "rating": 10,
+    "reason": "Sandshrew and Trapinch among Baltoy, Golett, Yamask and Honedge make this feel like a buried ruin with useful early finds.",
+    "area": "Mirage Tower 1F"
+  },
+  {
+    "id": "MAP_MIRAGE_TOWER_2F",
+    "rating": 8,
+    "reason": "Dwebble and Orthworm are good additions, but Yamask, Golett and Bronzor make most encounters feel like the floor below.",
+    "area": "Mirage Tower 2F"
+  },
+  {
+    "id": "MAP_MIRAGE_TOWER_3F",
+    "rating": 8,
+    "reason": "Golurk, Claydol and Bronzong sell the old guardians. The mix still spends too much time repeating the lower-floor population.",
+    "area": "Mirage Tower 3F"
+  },
+  {
+    "id": "MAP_MIRAGE_TOWER_4F",
+    "rating": 10,
+    "reason": "Claydol, Golurk, Bronzong and Cofagrigus finally feel like an assembly of ruin guardians. Darmanitan and Krookodile add muscle.",
+    "area": "Mirage Tower 4F"
+  },
+  {
+    "id": "MAP_MIRAGE_TOWER_B1F",
+    "rating": 9,
+    "reason": "Chest Gimmighoul is exactly the treasure I want here. The otherwise familiar Sandshrew/Trapinch/relic mix could emphasize that treasure chamber more.",
+    "area": "Mirage Tower B1F"
+  },
+  {
+    "id": "MAP_MOSSDEEP_CITY",
+    "rating": 9,
+    "reason": "Staryu and Starmie beside the Space Center feel right. I would give Starmie a more prominent Super Rod position.",
+    "area": "Mossdeep City"
+  },
+  {
+    "id": "MAP_MT_PYRE_1F",
+    "rating": 10,
+    "reason": "Duskull at 22% and Shuppet at 20% make the tower belong to its ghosts. The smaller ghost discoveries complement them.",
+    "area": "Mt. Pyre 1F"
+  },
+  {
+    "id": "MAP_MT_PYRE_2F",
+    "rating": 8,
+    "reason": "Antique Sinistea is a good find, but almost everything else repeats 1F. I would develop the antique-and-candle idea further.",
+    "area": "Mt. Pyre 2F"
+  },
+  {
+    "id": "MAP_MT_PYRE_3F",
+    "rating": 10,
+    "reason": "Litwick and Lampent together at 32% make this feel like a candle-filled floor, with other ghosts supporting the scene.",
+    "area": "Mt. Pyre 3F"
+  },
+  {
+    "id": "MAP_MT_PYRE_4F",
+    "rating": 10,
+    "reason": "Banette and Dusclops at 20% each make the climb feel more dangerous. Mimikyu and the rarer evolved ghosts add useful choices.",
+    "area": "Mt. Pyre 4F"
+  },
+  {
+    "id": "MAP_MT_PYRE_5F",
+    "rating": 8,
+    "reason": "Artisan Poltchageist and Drifblim interest me. Noibat does not, and the rest repeats too much of 4F.",
+    "area": "Mt. Pyre 5F"
+  },
+  {
+    "id": "MAP_MT_PYRE_6F",
+    "rating": 10,
+    "reason": "Sinistcha, Houndstone, Dusknoir and Chandelure give the upper floor the finished, powerful ghost roster it deserves.",
+    "area": "Mt. Pyre 6F"
+  },
+  {
+    "id": "MAP_MT_PYRE_EXTERIOR",
+    "rating": 10,
+    "reason": "Hisuian Zorua and Galarian Corsola belong beside a graveyard. Chimecho, Vulpix and Drifloon complete the atmosphere.",
+    "area": "Mt. Pyre Exterior"
+  },
+  {
+    "id": "MAP_MT_PYRE_SUMMIT",
+    "rating": 9,
+    "reason": "Flutter Mane is a superb summit discovery. Growlithe and Vulpix still make too much of the climb feel like the exterior again.",
+    "area": "Mt. Pyre Summit"
+  },
+  {
+    "id": "MAP_NEW_MAUVILLE_ENTRANCE",
+    "rating": 9,
+    "reason": "Magnemite, Voltorb, Klink and Porygon make a convincing power station. Magnezone and Iron Thorns reward checking it properly.",
+    "area": "New Mauville Entrance"
+  },
+  {
+    "id": "MAP_NEW_MAUVILLE_INSIDE",
+    "rating": 8,
+    "reason": "Iron Hands is exciting, but most residents repeat the entrance. I would make the machinery and generator population more distinct inside.",
+    "area": "New Mauville Inside"
+  },
+  {
+    "id": "MAP_PACIFIDLOG_TOWN",
+    "rating": 9,
+    "reason": "Alomomola and the fishing birds fit life around the rafts. Super Rod Shellder feels modest for a return visit this late.",
+    "area": "Pacifidlog Town"
+  },
+  {
+    "id": "MAP_PETALBURG_CITY",
+    "rating": 5,
+    "reason": "Marill fits these ponds. Tentacruel, Corsola, Dragalge and Sharpedo make the rest feel like a misplaced ocean roster.",
+    "area": "Petalburg City"
+  },
+  {
+    "id": "MAP_PETALBURG_WOODS",
+    "rating": 8,
+    "reason": "Shroomish, Slakoth, Caterpie and Ferroseed are good woodland choices. Aipom as the leading Rock Smash encounter feels wrong to me.",
+    "area": "Petalburg Woods 1"
+  },
+  {
+    "id": "MAP_PETALBURG_WOODS_2",
+    "rating": 6,
+    "reason": "Caterpie, Weedle, Kakuna and Metapod consume 46%. I want stronger bugs in the deeper woods, not so many stages of two families.",
+    "area": "Petalburg Woods 2"
+  },
+  {
+    "id": "MAP_PETALBURG_WOODS_3",
+    "rating": 9,
+    "reason": "Croagunk, Murkrow, Kartana and Goomy make exploration worthwhile. The pond's Lanturn/Octillery fishing mix is much less convincing.",
+    "area": "Petalburg Woods 3"
+  },
+  {
+    "id": "MAP_ROUTE101",
+    "rating": 8,
+    "reason": "Mienfoo substantially improves it. Zigzagoon, Poochyena, Sentret and Lillipup still occupy 41%, crowding the more interesting opening choices.",
+    "area": "Route 101"
+  },
+  {
+    "id": "MAP_ROUTE102",
+    "rating": 9,
+    "reason": "Timburr and Pachirisu alongside Lotad, Marill and Ralts are excellent. The later Super Rod's Lombre is an underwhelming return reward.",
+    "area": "Route 102"
+  },
+  {
+    "id": "MAP_ROUTE103",
+    "rating": 8,
+    "reason": "Shellos and Growlithe are excellent early tools. Shinx, Mareep, Electrike, Blitzle, Yamper, Toxel and Grubbin crowd seven Electric evolution lines together.",
+    "area": "Route 103"
+  },
+  {
+    "id": "MAP_ROUTE104",
+    "rating": 6,
+    "reason": "Azurill and Budew help, but Pikipek, Pidgey, Pidove and Fletchling take 36%. After moving Mienfoo, I left this route too bird-heavy.",
+    "area": "Route 104"
+  },
+  {
+    "id": "MAP_ROUTE105",
+    "rating": 8,
+    "reason": "Crabrawler, Inkay and the shore birds give the land character. Luvdisc leading the Super Rod table is a weak reason to return.",
+    "area": "Route 105"
+  },
+  {
+    "id": "MAP_ROUTE106",
+    "rating": 8,
+    "reason": "Makuhita, Crabrawler and Hawlucha make this a believable fighting coast. The Luvdisc-led Super Rod roster does not match that excitement.",
+    "area": "Route 106"
+  },
+  {
+    "id": "MAP_ROUTE107",
+    "rating": 9,
+    "reason": "Arrokuda and the Barraskewda rod discovery give this stretch a clear fast-fish identity. The middle catches could follow that idea more closely.",
+    "area": "Route 107"
+  },
+  {
+    "id": "MAP_ROUTE108",
+    "rating": 9,
+    "reason": "Frillish and Dhelmise make the approaching wreck feel present. Super Rod Luvdisc and Bruxish contribute much less to that experience.",
+    "area": "Route 108"
+  },
+  {
+    "id": "MAP_ROUTE109",
+    "rating": 9,
+    "reason": "Sandygast and Pincurchin from beach rocks are discoveries I like. The stronger fishing still repeats nearby Kingler, Shellder and Staryu.",
+    "area": "Route 109"
+  },
+  {
+    "id": "MAP_ROUTE110",
+    "rating": 8,
+    "reason": "Gulpin, Varoom, Shroodle and Trubbish fit Cycling Road's outskirts. The fishing does not follow the electrical/industrial character nearly as well.",
+    "area": "Route 110"
+  },
+  {
+    "id": "MAP_ROUTE111",
+    "rating": 9,
+    "reason": "Cacnea, Bramblin, Hippopotas, Gible and Galarian Yamask make a strong desert. The oasis's Octillery-led Super Rod feels borrowed.",
+    "area": "Route 111"
+  },
+  {
+    "id": "MAP_ROUTE111_RUINS_EXTERIOR",
+    "rating": 8,
+    "reason": "Xatu, Farigiraf and Sandy Shocks are interesting here. The Rockruff/Skiploom/Jumpluff portion feels less connected to the ruins.",
+    "area": "Route 111 Ruins Exterior"
+  },
+  {
+    "id": "MAP_ROUTE112",
+    "rating": 10,
+    "reason": "Numel and Ponyta establish the volcanic slope; Mankey, Primeape, Tyrogue and Combat Tauros supply useful Fighting choices.",
+    "area": "Route 112"
+  },
+  {
+    "id": "MAP_ROUTE113",
+    "rating": 8,
+    "reason": "Spinda, Skarmory and Spoink give this ash route its character. Another Mienfoo and assorted fighters draw attention away from them.",
+    "area": "Route 113"
+  },
+  {
+    "id": "MAP_ROUTE114",
+    "rating": 9,
+    "reason": "Swablu, Zangoose and Seviper preserve the route's appeal. Phanpy and Dratini add good reasons to investigate both cliffs and water.",
+    "area": "Route 114"
+  },
+  {
+    "id": "MAP_ROUTE115",
+    "rating": 7,
+    "reason": "Tangela, Pancham and Minior interest me, but Jigglypuff, Taillow, Skwovet and the other mammals do not add up to a convincing north shore.",
+    "area": "Route 115"
+  },
+  {
+    "id": "MAP_ROUTE116",
+    "rating": 10,
+    "reason": "Mime Jr., Munchlax, Riolu and Throh offer different answers before Roxanne. Dreepy remains an appealing long-term investment beside them.",
+    "area": "Route 116"
+  },
+  {
+    "id": "MAP_ROUTE117",
+    "rating": 8,
+    "reason": "Ditto, Audino, Tandemaus and the unusual Old Rod roster suit the Daycare. Floette, Sunkern and Sunflora coming from rocks do not.",
+    "area": "Route 117"
+  },
+  {
+    "id": "MAP_ROUTE118",
+    "rating": 8,
+    "reason": "Passimian, Manectric and Duraludon are useful discoveries. Lickitung, Carnivine and Komala make the land feel less deliberately placed.",
+    "area": "Route 118"
+  },
+  {
+    "id": "MAP_ROUTE119",
+    "rating": 10,
+    "reason": "Tropius, Goomy, Oranguru, Comfey and Amoonguss belong in this rainforest. Raging Bolt and Feebas make it worth exploring thoroughly.",
+    "area": "Route 119"
+  },
+  {
+    "id": "MAP_ROUTE120",
+    "rating": 8,
+    "reason": "Absol, Shiftry, Morelull and the Pumpkaboo sizes sell the woods. Watchog taking 10% is a slot I would spend differently.",
+    "area": "Route 120"
+  },
+  {
+    "id": "MAP_ROUTE121",
+    "rating": 7,
+    "reason": "Skuntank, Mabosstiff and Zoroark suggest a good ominous route. Furfrou, Elgyem and Maushold pull it in several unrelated directions.",
+    "area": "Route 121"
+  },
+  {
+    "id": "MAP_ROUTE122",
+    "rating": 9,
+    "reason": "Frillish and Dhelmise make sense around Mt. Pyre. Kingler and Shellder on the Super Rod still feel like ordinary beach fishing.",
+    "area": "Route 122"
+  },
+  {
+    "id": "MAP_ROUTE123",
+    "rating": 6,
+    "reason": "My Patrat move preserved the family, but I dislike the result here. Applin, Smoliv and Karrablast/Shelmet deserve more attention than the common mammals.",
+    "area": "Route 123"
+  },
+  {
+    "id": "MAP_ROUTE124",
+    "rating": 8,
+    "reason": "Mantine and Clamperl make a good approach to Dive. Its Super Rod list is exactly the same as Ever Grande's.",
+    "area": "Route 124"
+  },
+  {
+    "id": "MAP_ROUTE125",
+    "rating": 8,
+    "reason": "Spheal, Dewgong and Walrein make the cold current believable. Super Rod Luvdisc and Corsola pull the fishing back toward a generic warm coast.",
+    "area": "Route 125"
+  },
+  {
+    "id": "MAP_ROUTE126",
+    "rating": 8,
+    "reason": "Aqua Tauros is a catch I would want. The surrounding Alomomola/Wishiwashi sea is pleasant, but the rods add little unique to this crater ring.",
+    "area": "Route 126"
+  },
+  {
+    "id": "MAP_ROUTE127",
+    "rating": 9,
+    "reason": "Mareanie, Toxapex, Pyukumuku and Bruxish make a convincing reef. The Super Rod largely abandons that idea for Kingler and Shellder.",
+    "area": "Route 127"
+  },
+  {
+    "id": "MAP_ROUTE128",
+    "rating": 8,
+    "reason": "Sharpedo and Jellicent suit the cavern approach. The Wailmer/Wailord/Clawitzer fishing still resembles several neighboring stretches.",
+    "area": "Route 128"
+  },
+  {
+    "id": "MAP_ROUTE129",
+    "rating": 9,
+    "reason": "Wailmer and Wailord feel like pods here. The Super Rod's Seadra and Octillery do less to establish a deep-sea route.",
+    "area": "Route 129"
+  },
+  {
+    "id": "MAP_ROUTE130",
+    "rating": 9,
+    "reason": "The Wynaut colony finally makes Mirage Island special. Frillish and Jellicent suit its waters; the two Qwilfish forms dominate the Super Rod too heavily.",
+    "area": "Route 130"
+  },
+  {
+    "id": "MAP_ROUTE131",
+    "rating": 8,
+    "reason": "Relicanth and Clamperl make a believable old sea. The Super Rod drops that idea for another Qwilfish/Octillery/Seadra list.",
+    "area": "Route 131"
+  },
+  {
+    "id": "MAP_ROUTE132",
+    "rating": 7,
+    "reason": "Barraskewda fits the rushing current. Surf Magikarp at 25% and a Seadra/Relicanth-led Super Rod do not deliver the same energy.",
+    "area": "Route 132"
+  },
+  {
+    "id": "MAP_ROUTE133",
+    "rating": 7,
+    "reason": "Spheal and Dragalge suggest a cold current carrying kelp. Clamperl and Luvdisc take 45% of the Super Rod and weaken the return visit.",
+    "area": "Route 133"
+  },
+  {
+    "id": "MAP_ROUTE134",
+    "rating": 8,
+    "reason": "Clamperl, Huntail and Gorebyss give the trench a real population. Fishing should reinforce them instead of exactly repeating Route131's Super Rod.",
+    "area": "Route 134"
+  },
+  {
+    "id": "MAP_RUSTURF_TUNNEL",
+    "rating": 9,
+    "reason": "Bagon, Larvitar, Machop and Drilbur make this an exciting early detour. Whismur could be easier to find without sacrificing those options.",
+    "area": "Rusturf Tunnel"
+  },
+  {
+    "id": "MAP_SAFARI_ZONE_NORTH",
+    "rating": 10,
+    "reason": "Kangaskhan, Scyther and the Alolan forms are catches I would travel for. The larger herbivores make them feel part of a reserve.",
+    "area": "Safari Zone North"
+  },
+  {
+    "id": "MAP_SAFARI_ZONE_NORTHEAST",
+    "rating": 8,
+    "reason": "Miltank, Tauros and Forretress make sense together. Houndour and Ledian are less compelling headliners for an optional late hunting area.",
+    "area": "Safari Zone Northeast"
+  },
+  {
+    "id": "MAP_SAFARI_ZONE_NORTHWEST",
+    "rating": 9,
+    "reason": "Rhyhorn/Rhydon, Chansey and the regional finds justify visiting. The pond's Lombre/Golduck fishing is less special than the land.",
+    "area": "Safari Zone Northwest"
+  },
+  {
+    "id": "MAP_SAFARI_ZONE_SOUTH",
+    "rating": 10,
+    "reason": "Alolan Raichu, regional Meowth, Mr. Mime, Smeargle and Chansey offer a terrific collection of different team-building tools.",
+    "area": "Safari Zone South"
+  },
+  {
+    "id": "MAP_SAFARI_ZONE_SOUTHEAST",
+    "rating": 8,
+    "reason": "Gligar, Ambipom and Ursaring interest me. Flaaffy and Ariados occupy too much space before the more exciting evolved catches.",
+    "area": "Safari Zone Southeast"
+  },
+  {
+    "id": "MAP_SAFARI_ZONE_SOUTHWEST",
+    "rating": 10,
+    "reason": "Karrablast/Shelmet and their evolutions belong together. Palpitoad, Croagunk and Goomy make the surrounding marsh feel coherent.",
+    "area": "Safari Zone Southwest"
+  },
+  {
+    "id": "MAP_SANDSTREWN_RUINS",
+    "rating": 9,
+    "reason": "Great Tusk, Unown, Honedge and the relic Pokémon are well placed. Swanna in the buried cistern is the bit I do not buy.",
+    "area": "Sandstrewn Ruins"
+  },
+  {
+    "id": "MAP_SANDSTREWN_RUINS_2F",
+    "rating": 8,
+    "reason": "Iron Treads and Orthworm suit the buried machinery. Too many ordinary encounters repeat Yamask, Golett and Honedge from earlier rooms.",
+    "area": "Sandstrewn Ruins 2F"
+  },
+  {
+    "id": "MAP_SANDSTREWN_RUINS_3F",
+    "rating": 7,
+    "reason": "After the Stakataka chamber, another common Yamask plus Tinkatink and Gabite feels like a step backward in the discoveries.",
+    "area": "Sandstrewn Ruins 3F"
+  },
+  {
+    "id": "MAP_SANDSTREWN_RUINS_B1F",
+    "rating": 10,
+    "reason": "Stakataka looks like part of the ruin itself. Cofagrigus, Golurk, Bronzong and Aegislash make convincing inhabitants around it.",
+    "area": "Sandstrewn Ruins B1F"
+  },
+  {
+    "id": "MAP_SCORCHED_SLAB_B1F",
+    "rating": 6,
+    "reason": "Noibat, Gurdurr and Machoke do not strongly establish a hot cave. Its Super Rod even duplicates Route102 exactly.",
+    "area": "Scorched Slab B1F"
+  },
+  {
+    "id": "MAP_SCORCHED_SLAB_B2F",
+    "rating": 8,
+    "reason": "Magmar, Turtonator and Iron Moth make this feel hotter and stranger. Noibat and the ordinary cave fighters still take unnecessary space.",
+    "area": "Scorched Slab B2F"
+  },
+  {
+    "id": "MAP_SCORCHED_SLAB_HEATRANS_ROOM",
+    "rating": 7,
+    "reason": "Magcargo and Coalossal fit. Boldore, Dugtrio and Slugma make Heatran's chamber feel less impressive than its location promises.",
+    "area": "Scorched Slab — Heatran's room"
+  },
+  {
+    "id": "MAP_SEAFLOOR_CAVERN_ENTRANCE",
+    "rating": 8,
+    "reason": "Relicanth on the Good Rod suits the depths. Magikarp in the Surf table feels like a missed chance to establish the cavern.",
+    "area": "Seafloor Cavern Entrance"
+  },
+  {
+    "id": "MAP_SEAFLOOR_CAVERN_ROOM1",
+    "rating": 7,
+    "reason": "Golisopod and Toxapex work here. Concentrating Dragalge while retaining Barraskewda and Kingdra on the walking floor was not my best choice.",
+    "area": "Seafloor Cavern Room 1"
+  },
+  {
+    "id": "MAP_SEAFLOOR_CAVERN_ROOM2",
+    "rating": 6,
+    "reason": "Sharpedo, Basculegion and Kingdra feel misplaced on the cave floor. Zubat and Floatzel do not turn the mix into a distinct room.",
+    "area": "Seafloor Cavern Room 2"
+  },
+  {
+    "id": "MAP_SEAFLOOR_CAVERN_ROOM3",
+    "rating": 10,
+    "reason": "Dhelmise, Claydol, Bronzong and Sableye make this feel like a strange relic chamber. The narrower roster works.",
+    "area": "Seafloor Cavern Room 3"
+  },
+  {
+    "id": "MAP_SEAFLOOR_CAVERN_ROOM4",
+    "rating": 7,
+    "reason": "Malamar is a good resident to emphasize. Sharpedo, Barraskewda and Kingdra make too much of the rest feel like a fishing list.",
+    "area": "Seafloor Cavern Room 4"
+  },
+  {
+    "id": "MAP_SEAFLOOR_CAVERN_ROOM5",
+    "rating": 6,
+    "reason": "I increased Kingdra to 34%, but this is a walking cave floor. I would move that concentration into an actual pool.",
+    "area": "Seafloor Cavern Room 5"
+  },
+  {
+    "id": "MAP_SEAFLOOR_CAVERN_ROOM6",
+    "rating": 8,
+    "reason": "Barbaracle on the floor and Frillish/Jellicent in the pool distinguish the methods well. The remaining land fish dilute that improvement.",
+    "area": "Seafloor Cavern Room 6"
+  },
+  {
+    "id": "MAP_SEAFLOOR_CAVERN_ROOM7",
+    "rating": 7,
+    "reason": "Toxapex and the Clamperl/Huntail/Gorebyss pool work. Mawile and Good Rod Luvdisc feel like leftovers from unrelated populations.",
+    "area": "Seafloor Cavern Room 7"
+  },
+  {
+    "id": "MAP_SEAFLOOR_CAVERN_ROOM8",
+    "rating": 7,
+    "reason": "Golisopod and Clobbopus belong on the floor. Kingdra and Dragalge together at 46% overwhelm those more convincing residents.",
+    "area": "Seafloor Cavern Room 8"
+  },
+  {
+    "id": "MAP_SEASPRAY_CAVE",
+    "rating": 8,
+    "reason": "Chinchou, Tynamo and the two Stunfisk are interesting cave-water finds. Wailord and the routine beach fishing weaken the setting.",
+    "area": "Seaspray Cave"
+  },
+  {
+    "id": "MAP_SEASPRAY_CAVE_B1F",
+    "rating": 10,
+    "reason": "Swinub, Snover, Sneasel and Frigibax offer different reasons to descend. Smoochum and Cryogonal make the ice pocket more than one evolution line.",
+    "area": "Seaspray Cave B1F"
+  },
+  {
+    "id": "MAP_SHOAL_CAVE_LOW_TIDE_ENTRANCE_ROOM",
+    "rating": 6,
+    "reason": "Spheal and Seel are right. Surf Snom and rod-caught Cetoddle are not placements I like, and Zubat leads the land roster.",
+    "area": "Shoal Cave — entrance"
+  },
+  {
+    "id": "MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM",
+    "rating": 10,
+    "reason": "Alolan Vulpix, Hisuian Sneasel, Galarian Mr. Mime and Iron Bundle make this a proper hidden-room reward.",
+    "area": "Shoal Cave — ice room"
+  },
+  {
+    "id": "MAP_SHOAL_CAVE_LOW_TIDE_INNER_ROOM",
+    "rating": 7,
+    "reason": "Galarian Darumaka is exciting. Cetoddle dominating Surf and reappearing on rods makes the water feel poorly considered.",
+    "area": "Shoal Cave — inner room"
+  },
+  {
+    "id": "MAP_SHOAL_CAVE_LOW_TIDE_LOWER_ROOM",
+    "rating": 8,
+    "reason": "Alolan Sandshrew deserves this room. The other eleven residents repeat too much of the surrounding ice cave.",
+    "area": "Shoal Cave — lower room"
+  },
+  {
+    "id": "MAP_SHOAL_CAVE_LOW_TIDE_STAIRS_ROOM",
+    "rating": 6,
+    "reason": "This offers almost the same Spheal/Swinub/Snorunt/Sneasel mix as the other rooms, without a comparable new discovery.",
+    "area": "Shoal Cave — stairs room"
+  },
+  {
+    "id": "MAP_SKY_PILLAR_1F",
+    "rating": 8,
+    "reason": "Claydol, Golurk and Minior fit the old tower. Sableye and Mawile leading yet another cave roster make the entrance too familiar.",
+    "area": "Sky Pillar 1F"
+  },
+  {
+    "id": "MAP_SKY_PILLAR_3F",
+    "rating": 9,
+    "reason": "Altaria, Noivern, Dragonair and Salamence make the climb worthwhile. I would let the airborne residents define more of the encounters.",
+    "area": "Sky Pillar 3F"
+  },
+  {
+    "id": "MAP_SKY_PILLAR_5F",
+    "rating": 8,
+    "reason": "The top largely repeats 3F. I want more Altaria, Noivern and Minior here, rather than Banette and Claydol leading again.",
+    "area": "Sky Pillar 5F"
+  },
+  {
+    "id": "MAP_SLATEPORT_CITY",
+    "rating": 9,
+    "reason": "Clauncher and Skrelp under the docks, with Dhelmise offshore, feel deliberate. The Super Rod could develop those families more convincingly.",
+    "area": "Slateport City"
+  },
+  {
+    "id": "MAP_SOOTOPOLIS_CITY",
+    "rating": 8,
+    "reason": "Gyarados belongs in this crater lake. The Super Rod's Bruxish/Kingler/Qwilfish list feels disconnected from that particular place.",
+    "area": "Sootopolis City"
+  },
+  {
+    "id": "MAP_UNDERWATER_ROUTE124",
+    "rating": 10,
+    "reason": "Lanturn, Jellicent, Starmie and Dondozo make descending feel like entering another world. Every slot contributes something worth catching.",
+    "area": "Dive — Route 124"
+  },
+  {
+    "id": "MAP_UNDERWATER_ROUTE126",
+    "rating": 10,
+    "reason": "Corsola/Cursola, Clamperl's evolutions and Feebas/Milotic make this feel like an ecosystem, with Palafin as a welcome surprise.",
+    "area": "Dive — Route 126"
+  },
+  {
+    "id": "MAP_UNDERWATER_SEAFLOOR_CAVERN",
+    "rating": 10,
+    "reason": "Dondozo and all three Tatsugiri forms make this a team-building destination. Nihilego and Iron Bundle add the right deep-water strangeness.",
+    "area": "Dive — submerged submarine"
+  },
+  {
+    "id": "MAP_VERDANTURF_MEADOW",
+    "rating": 10,
+    "reason": "Cottonee, Indeedee and Hatenna offer real team engines. Iron Leaves and Eternal Floette are memorable rewards among the flowers.",
+    "area": "Verdanturf Meadow"
+  },
+  {
+    "id": "MAP_VICTORY_ROAD_1F",
+    "rating": 8,
+    "reason": "Iron Valiant, Metagross and the final dragons are exciting. Noibat and the several middle evolutions weaken the final-challenge feeling.",
+    "area": "Victory Road 1F"
+  },
+  {
+    "id": "MAP_VICTORY_ROAD_B1F",
+    "rating": 8,
+    "reason": "Iron Jugulis and Rock Smash Tyranitar add value. Eleven land species still repeat 1F, so this does not feel sufficiently different.",
+    "area": "Victory Road B1F"
+  },
+  {
+    "id": "MAP_VICTORY_ROAD_B2F",
+    "rating": 7,
+    "reason": "Even after my rod improvement, Shellos, Noibat and Metang feel modest here when stronger finished Pokémon were already available upstairs.",
+    "area": "Victory Road B2F"
+  }
+]

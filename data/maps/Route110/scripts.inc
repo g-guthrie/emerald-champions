@@ -840,13 +840,15 @@ Route110_Text_AquaActionsBringSmiles:
 	.string "smiles to people's faces!$"
 
 Route110_Text_MayLetsBattle:
-	.string "MAY: {PLAYER}{KUN}! I've been catching\n"
-	.string "partners on every route since OLDALE.\p"
-	.string "Two of them cover each other in a way\n"
-	.string "I want to test. Doubles, right now!$"
+	.string "MAY: {PLAYER}{KUN}! I've been\n"
+	.string "finding new POKéMON all the way\l"
+	.string "from OLDALE.\p"
+	.string "You must have met some, too!\n"
+	.string "Let's have a battle and introduce\l"
+	.string "them!$"
 
 Route110_Text_MayDefeated:
-	.string "You broke my pair before it clicked!$"
+	.string "Wow! You've gotten stronger!$"
 
 Route110_Text_MayTakeThis:
 	.string "MAY: Your partners found an answer\n"
@@ -856,10 +858,10 @@ Route110_Text_MayTakeThis:
 Route110_Text_MayExplainItemfinder:
 	.string "MAY: That's a DOWSING MACHINE. It\n"
 	.string "reacts to hidden items.\p"
-	.string "DEVON's researcher has useful\n"
-	.string "leads if you want help finding a\l"
-	.string "SIGN.\p"
-	.string "I'm heading north to MAUVILLE!\n"
+	.string "For legendary POKéMON, ask the\n"
+	.string "guide near a POKéMON CENTER's PC.\l"
+	.string "They know the local leads.\p"
+	.string "I'm heading north to MAUVILLE.\n"
 	.string "WATTSON's GYM is there. See you!$"
 Route110_Text_RivalBeforeBattle:
 	.string "Hey, {PLAYER}! Meet me just down\n"
@@ -878,25 +880,28 @@ Route110_Text_DowsingMachineNoRoom:
 	.string "Make room, then speak to me again.$"
 
 Route110_Text_BrendanLetsBattle:
-	.string "BRENDAN: Hey, {PLAYER}. Figured you'd\n"
-	.string "come this way.\p"
-	.string "I built a pair that covers each other.\n"
-	.string "Let's see if your six can read it.$"
+	.string "BRENDAN: Hey, {PLAYER}! Figured\n"
+	.string "you'd come this way.\p"
+	.string "I've been looking forward to\n"
+	.string "another battle. Let's see how far\l"
+	.string "we've come!$"
 
 Route110_Text_BrendanDefeated:
-	.string "Hmm… You read the pair fast.$"
+	.string "Hah… You've been busy, too!$"
 
 Route110_Text_BrendanTakeThis:
 	.string "BRENDAN: A strong team, well\n"
 	.string "played. You earned that win.\p"
 	.string "Here. Take this.$"
 Route110_Text_BrendanExplainItemfinder:
-	.string "BRENDAN: DOWSING MACHINE. It hums near\n"
-	.string "items you can't see.\p"
-	.string "DEVON's researcher has useful leads\n"
-	.string "if you want help finding a SIGN.\p"
+	.string "BRENDAN: A DOWSING MACHINE! It\n"
+	.string "hums near items you can't see.\p"
+	.string "The guide near each POKéMON\n"
+	.string "CENTER's PC knows local legendary\l"
+	.string "POKéMON and where to find them.\p"
 	.string "Keep north to MAUVILLE CITY.\n"
-	.string "WATTSON's GYM will test your team.$"
+	.string "WATTSON's GYM will test your\l"
+	.string "team.$"
 
 Route110_Text_RideBikeAtFullSpeed:
 	.string "Wouldn't it be great to ride a BIKE\n"
@@ -1022,10 +1027,8 @@ Route110_Text_SeasideParkingSign:
 	.string "SEASIDE PARKING$"
 
 Route110_Text_MauvilleCitySign:
-	.string "ROUTE 110 {UP_ARROW} MAUVILLE CITY\p"
-	.string "A storm is carved into the stone.\n"
-	.string "Return with the DYNAMO BADGE and\l"
-	.string "inspect the nearby landmark.$"
+	.string "ROUTE 110\n"
+	.string "{UP_ARROW} MAUVILLE CITY$"
 Route110_Text_TrainerTipsPrlzSleep:
 	.string "TRAINER TIPS\p"
 	.string "Paralysis usually lowers Speed and\n"

@@ -1,16 +1,18 @@
 #ifndef GUARD_CONSTANTS_EMERALD_CHAMPIONS_H
 #define GUARD_CONSTANTS_EMERALD_CHAMPIONS_H
 
+#define EC_SOOT_TOTAL_MASK 0x7FFF
+#define EC_SOOT_CORD_RECEIVED 0x8000
+#define EC_SOOT_CORD_TARGET 100
+#define EC_SOOT_MARSHADOW_TARGET 250
+#define EC_SOOT_MEGA_TARGET 500
+
+
 #define EC_BATTLE_SET_FAILED                 0
 #define EC_BATTLE_SET_SUCCESS                1
 #define EC_BATTLE_SET_SPECIAL_ITEM_EQUIPPED  2
 #define EC_BATTLE_SET_MEGA                   3
 #define EC_BATTLE_SET_MEGA_STONE_HELD        4
-
-// Each Stat Point adds one stat before Nature at every level. The 66-point
-// budget lets two stats max with two points to spare.
-#define EC_STAT_POINTS_PER_STAT              32
-#define EC_STAT_POINT_BUDGET                 66
 
 #define EC_BATTLE_FORMAT_DOUBLES             0
 #define EC_BATTLE_FORMAT_SINGLES             1

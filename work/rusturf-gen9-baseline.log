@@ -1,0 +1,230 @@
+tools/scaninc/scaninc -M build/emerald-test/test/battle/ai/emerald_champions_plans.d -g build/assets -I include -I tools/agbcc/include test/battle/ai/emerald_champions_plans.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/battle/ai/emerald_champions_plans.o test/battle/ai/emerald_champions_plans.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 4
+[0] EC live review Rusturf timing: complete cold decision with six-player party: [32mPASS[0m
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Play Rough target=0
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Play Rough target=0
+AI decision turn=2 actor=3 move=Waterfall target=0
+E31_RUSTURF_COMPLETE_TIMING trainer=16 setupFrames=7 decisionFrames=50 completeFrames=57 warmFrames=50 first=3 moves=Play Rough/Waterfall
+[1] EC live review Rusturf disruption: Ghost phazing and noncontact Fire: [32mPASS[0m
+RUSTURF_INPUT reserves=0 slot=0 lv=19 HP=61 Atk=57 Def=37 SpA=29 SpD=33 Speed=53 item=479 ability=22
+RUSTURF_INPUT reserves=0 slot=1 lv=19 HP=71 Atk=63 Def=54 SpA=27 SpD=31 Speed=43 item=487 ability=22
+RUSTURF_INPUT reserves=0 slot=2 lv=18 HP=62 Atk=28 Def=32 SpA=47 SpD=32 Speed=21 item=494 ability=91
+RUSTURF_INPUT reserves=0 slot=3 lv=19 HP=50 Atk=39 Def=24 SpA=19 SpD=26 Speed=47 item=481 ability=39
+AI decision turn=1 actor=0 move=Fake Out target=3
+AI decision turn=1 actor=1 move=Crunch target=2
+AI decision turn=1 actor=2 move=Dragon Tail target=1
+AI decision turn=1 actor=3 move=Waterfall target=2
+AI decision turn=2 actor=1 move=Crunch target=2
+AI decision turn=2 actor=3 move=Waterfall target=0
+RUSTURF_SUPPORT board=10 turns=1 pair=0 tailwind=0 SpAStages=6/6 foeStatus=0/0
+RUSTURF_TEMPO board=10 turns=1 reserves=0 tailwind=0 rawSpeeds=47/43 ownHP=50/69 friendship=0/0
+RUSTURF_AFTER board=10 turns=1 reserves=0 native=1 species=41/211 HP=50/69 foes=66/11 moves=-/- weather=0 duration=0 speeds=47/43 foeSpeeds=53/44 AtkStages=6/6 foeStatus=0/0 faints=0/0
+RUSTURF_CONTROL board=0 turns=1 tailwind=0 Taunt=0/0 items=481/487 statuses=0/0
+RUSTURF_INPUT reserves=0 slot=0 lv=19 HP=61 Atk=57 Def=37 SpA=29 SpD=33 Speed=53 item=479 ability=22
+RUSTURF_INPUT reserves=0 slot=1 lv=19 HP=71 Atk=63 Def=54 SpA=27 SpD=31 Speed=43 item=487 ability=22
+RUSTURF_INPUT reserves=0 slot=2 lv=18 HP=62 Atk=28 Def=32 SpA=47 SpD=32 Speed=21 item=494 ability=91
+RUSTURF_INPUT reserves=0 slot=3 lv=19 HP=50 Atk=39 Def=24 SpA=19 SpD=26 Speed=47 item=481 ability=39
+AI decision turn=1 actor=0 move=Fake Out target=3
+AI decision turn=1 actor=1 move=Crunch target=2
+AI decision turn=1 actor=2 move=Dragon Tail target=1
+AI decision turn=1 actor=3 move=Waterfall target=2
+AI decision turn=2 actor=0 move=Taunt target=3
+AI decision turn=2 actor=1 move=Crunch target=2
+AI decision turn=2 actor=2 move=Bite target=1
+AI decision turn=2 actor=3 move=Waterfall target=0
+AI decision turn=3 actor=1 move=Brave Bird target=0
+AI decision turn=3 actor=3 move=Waterfall target=0
+RUSTURF_SUPPORT board=10 turns=2 pair=0 tailwind=0 SpAStages=6/6 foeStatus=0/0
+RUSTURF_TEMPO board=10 turns=2 reserves=0 tailwind=0 rawSpeeds=47/43 ownHP=50/71 friendship=0/0
+RUSTURF_AFTER board=10 turns=2 reserves=0 native=2 species=41/211 HP=50/71 foes=41/0 moves=Crunch/Waterfall weather=0 duration=0 speeds=47/43 foeSpeeds=53/0 AtkStages=6/6 foeStatus=0/0 faints=0/1
+RUSTURF_CONTROL board=0 turns=2 tailwind=0 Taunt=0/2 items=481/487 statuses=0/0
+RUSTURF_INPUT reserves=0 slot=0 lv=19 HP=61 Atk=57 Def=37 SpA=29 SpD=33 Speed=53 item=479 ability=22
+RUSTURF_INPUT reserves=0 slot=1 lv=19 HP=71 Atk=63 Def=54 SpA=27 SpD=31 Speed=43 item=487 ability=22
+RUSTURF_INPUT reserves=0 slot=2 lv=18 HP=62 Atk=28 Def=32 SpA=47 SpD=32 Speed=21 item=494 ability=91
+RUSTURF_INPUT reserves=0 slot=3 lv=19 HP=50 Atk=39 Def=24 SpA=19 SpD=26 Speed=47 item=481 ability=39
+AI decision turn=1 actor=0 move=Flamethrower target=1
+AI decision turn=1 actor=1 move=Crunch target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Poison Jab target=2
+AI decision turn=2 actor=1 move=Crunch target=0
+AI decision turn=2 actor=3 move=Waterfall target=0
+RUSTURF_SUPPORT board=11 turns=1 pair=0 tailwind=0 SpAStages=6/6 foeStatus=0/0
+RUSTURF_TEMPO board=11 turns=1 reserves=0 tailwind=0 rawSpeeds=53/43 ownHP=33/71 friendship=0/0
+RUSTURF_AFTER board=11 turns=1 reserves=0 native=1 species=262/211 HP=33/71 foes=35/0 moves=Crunch/Poison Jab weather=0 duration=0 speeds=53/43 foeSpeeds=37/0 AtkStages=6/6 foeStatus=0/0 faints=0/1
+RUSTURF_CONTROL board=1 turns=1 tailwind=0 Taunt=0/0 items=479/487 statuses=0/0
+RUSTURF_INPUT reserves=0 slot=0 lv=19 HP=61 Atk=57 Def=37 SpA=29 SpD=33 Speed=53 item=479 ability=22
+RUSTURF_INPUT reserves=0 slot=1 lv=19 HP=71 Atk=63 Def=54 SpA=27 SpD=31 Speed=43 item=487 ability=22
+RUSTURF_INPUT reserves=0 slot=2 lv=18 HP=62 Atk=28 Def=32 SpA=47 SpD=32 Speed=21 item=494 ability=91
+RUSTURF_INPUT reserves=0 slot=3 lv=19 HP=50 Atk=39 Def=24 SpA=19 SpD=26 Speed=47 item=481 ability=39
+AI decision turn=1 actor=0 move=Flamethrower target=1
+AI decision turn=1 actor=1 move=Crunch target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Poison Jab target=2
+AI decision turn=2 actor=0 move=Flamethrower target=1
+AI decision turn=2 actor=1 move=Crunch target=0
+AI decision turn=2 actor=3 move=Waterfall target=0
+RUSTURF_SUPPORT board=11 turns=2 pair=0 tailwind=0 SpAStages=6/6 foeStatus=0/0
+RUSTURF_TEMPO board=11 turns=2 reserves=0 tailwind=0 rawSpeeds=53/43 ownHP=27/71 friendship=0/0
+RUSTURF_AFTER board=11 turns=2 reserves=0 native=1 species=262/211 HP=27/71 foes=0/0 moves=Crunch/Poison Jab weather=0 duration=0 speeds=53/43 foeSpeeds=37/0 AtkStages=6/6 foeStatus=0/0 faints=0/2
+RUSTURF_CONTROL board=1 turns=2 tailwind=0 Taunt=0/0 items=479/487 statuses=0/0
+RUSTURF_INPUT reserves=1 slot=0 lv=19 HP=61 Atk=57 Def=37 SpA=29 SpD=33 Speed=53 item=479 ability=22
+RUSTURF_INPUT reserves=1 slot=1 lv=19 HP=71 Atk=63 Def=54 SpA=27 SpD=31 Speed=43 item=487 ability=22
+RUSTURF_INPUT reserves=1 slot=2 lv=18 HP=62 Atk=28 Def=32 SpA=47 SpD=32 Speed=21 item=494 ability=91
+RUSTURF_INPUT reserves=1 slot=3 lv=19 HP=50 Atk=39 Def=24 SpA=19 SpD=26 Speed=47 item=481 ability=39
+AI decision turn=1 actor=0 move=Flamethrower target=1
+AI decision turn=1 actor=1 move=Sludge Bomb target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Brave Bird target=2
+AI decision turn=2 actor=1 move=Sludge Bomb target=0
+AI decision turn=2 actor=3 move=Tailwind target=3
+RUSTURF_SUPPORT board=12 turns=1 pair=1 tailwind=0 SpAStages=6/6 foeStatus=8/0
+RUSTURF_TEMPO board=12 turns=1 reserves=1 tailwind=0 rawSpeeds=21/47 ownHP=54/29 friendship=0/0
+RUSTURF_AFTER board=12 turns=1 reserves=1 native=1 species=690/41 HP=54/29 foes=22/0 moves=Sludge Bomb/Brave Bird weather=0 duration=0 speeds=21/47 foeSpeeds=37/0 AtkStages=6/6 foeStatus=8/0 faints=0/1
+RUSTURF_CONTROL board=2 turns=1 tailwind=0 Taunt=0/0 items=494/481 statuses=0/0
+RUSTURF_INPUT reserves=1 slot=0 lv=19 HP=61 Atk=57 Def=37 SpA=29 SpD=33 Speed=53 item=479 ability=22
+RUSTURF_INPUT reserves=1 slot=1 lv=19 HP=71 Atk=63 Def=54 SpA=27 SpD=31 Speed=43 item=487 ability=22
+RUSTURF_INPUT reserves=1 slot=2 lv=18 HP=62 Atk=28 Def=32 SpA=47 SpD=32 Speed=21 item=494 ability=91
+RUSTURF_INPUT reserves=1 slot=3 lv=19 HP=50 Atk=39 Def=24 SpA=19 SpD=26 Speed=47 item=481 ability=39
+AI decision turn=1 actor=0 move=Flamethrower target=1
+AI decision turn=1 actor=1 move=Sludge Bomb target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Brave Bird target=2
+AI decision turn=2 actor=0 move=Flamethrower target=1
+AI decision turn=2 actor=1 move=Sludge Bomb target=0
+AI decision turn=2 actor=3 move=Tailwind target=3
+RUSTURF_SUPPORT board=12 turns=2 pair=1 tailwind=4 SpAStages=6/6 foeStatus=0/0
+RUSTURF_TEMPO board=12 turns=2 reserves=1 tailwind=4 rawSpeeds=21/47 ownHP=54/29 friendship=0/0
+RUSTURF_AFTER board=12 turns=2 reserves=1 native=1 species=690/41 HP=54/29 foes=0/0 moves=Sludge Bomb/Tailwind weather=0 duration=0 speeds=21/47 foeSpeeds=37/0 AtkStages=6/6 foeStatus=0/0 faints=0/2
+RUSTURF_CONTROL board=2 turns=2 tailwind=4 Taunt=0/0 items=494/481 statuses=0/0
+[2] EC live review Rusturf core: physical special leads and reserves: [32mPASS[0m
+RUSTURF_INPUT reserves=0 slot=0 lv=19 HP=61 Atk=57 Def=37 SpA=29 SpD=33 Speed=53 item=479 ability=22
+RUSTURF_INPUT reserves=0 slot=1 lv=19 HP=71 Atk=63 Def=54 SpA=27 SpD=31 Speed=43 item=487 ability=22
+RUSTURF_INPUT reserves=0 slot=2 lv=18 HP=62 Atk=28 Def=32 SpA=47 SpD=32 Speed=21 item=494 ability=91
+RUSTURF_INPUT reserves=0 slot=3 lv=19 HP=50 Atk=39 Def=24 SpA=19 SpD=26 Speed=47 item=481 ability=39
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Howl target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Waterfall target=0
+AI decision turn=2 actor=1 move=Play Rough target=2
+AI decision turn=2 actor=3 move=Waterfall target=0
+RUSTURF_SUPPORT board=0 turns=1 pair=0 tailwind=0 SpAStages=6/6 foeStatus=0/0
+RUSTURF_TEMPO board=0 turns=1 reserves=0 tailwind=0 rawSpeeds=53/43 ownHP=61/70 friendship=0/0
+RUSTURF_AFTER board=0 turns=1 reserves=0 native=1 species=262/211 HP=61/70 foes=31/78 moves=Howl/Waterfall weather=0 duration=0 speeds=53/43 foeSpeeds=33/25 AtkStages=7/7 foeStatus=0/0 faints=0/0
+RUSTURF_INPUT reserves=0 slot=0 lv=19 HP=61 Atk=57 Def=37 SpA=29 SpD=33 Speed=53 item=479 ability=22
+RUSTURF_INPUT reserves=0 slot=1 lv=19 HP=71 Atk=63 Def=54 SpA=27 SpD=31 Speed=43 item=487 ability=22
+RUSTURF_INPUT reserves=0 slot=2 lv=18 HP=62 Atk=28 Def=32 SpA=47 SpD=32 Speed=21 item=494 ability=91
+RUSTURF_INPUT reserves=0 slot=3 lv=19 HP=50 Atk=39 Def=24 SpA=19 SpD=26 Speed=47 item=481 ability=39
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Howl target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Waterfall target=0
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Play Rough target=2
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Waterfall target=0
+AI decision turn=3 actor=1 move=Play Rough target=2
+AI decision turn=3 actor=3 move=Waterfall target=2
+RUSTURF_SUPPORT board=0 turns=2 pair=0 tailwind=0 SpAStages=6/6 foeStatus=0/0
+RUSTURF_TEMPO board=0 turns=2 reserves=0 tailwind=0 rawSpeeds=53/43 ownHP=55/71 friendship=0/0
+RUSTURF_AFTER board=0 turns=2 reserves=0 native=2 species=262/211 HP=55/71 foes=0/14 moves=Play Rough/Waterfall weather=0 duration=0 speeds=53/43 foeSpeeds=0/25 AtkStages=7/7 foeStatus=0/0 faints=0/1
+RUSTURF_INPUT reserves=0 slot=0 lv=19 HP=61 Atk=57 Def=37 SpA=29 SpD=33 Speed=53 item=479 ability=22
+RUSTURF_INPUT reserves=0 slot=1 lv=19 HP=71 Atk=63 Def=54 SpA=27 SpD=31 Speed=43 item=487 ability=22
+RUSTURF_INPUT reserves=0 slot=2 lv=18 HP=62 Atk=28 Def=32 SpA=47 SpD=32 Speed=21 item=494 ability=91
+RUSTURF_INPUT reserves=0 slot=3 lv=19 HP=50 Atk=39 Def=24 SpA=19 SpD=26 Speed=47 item=481 ability=39
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Howl target=1
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Poison Jab target=2
+AI decision turn=2 actor=1 move=Crunch target=0
+AI decision turn=2 actor=3 move=Waterfall target=0
+RUSTURF_SUPPORT board=1 turns=1 pair=0 tailwind=0 SpAStages=6/6 foeStatus=0/0
+RUSTURF_TEMPO board=1 turns=1 reserves=0 tailwind=0 rawSpeeds=53/43 ownHP=31/71 friendship=0/0
+RUSTURF_AFTER board=1 turns=1 reserves=0 native=1 species=262/211 HP=31/71 foes=72/0 moves=Howl/Poison Jab weather=0 duration=0 speeds=53/43 foeSpeeds=49/0 AtkStages=7/7 foeStatus=0/0 faints=0/1
+RUSTURF_INPUT reserves=0 slot=0 lv=19 HP=61 Atk=57 Def=37 SpA=29 SpD=33 Speed=53 item=479 ability=22
+RUSTURF_INPUT reserves=0 slot=1 lv=19 HP=71 Atk=63 Def=54 SpA=27 SpD=31 Speed=43 item=487 ability=22
+RUSTURF_INPUT reserves=0 slot=2 lv=18 HP=62 Atk=28 Def=32 SpA=47 SpD=32 Speed=21 item=494 ability=91
+RUSTURF_INPUT reserves=0 slot=3 lv=19 HP=50 Atk=39 Def=24 SpA=19 SpD=26 Speed=47 item=481 ability=39
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Howl target=1
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Poison Jab target=2
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Crunch target=0
+AI decision turn=2 actor=3 move=Waterfall target=0
+AI decision turn=3 actor=1 move=Crunch target=0
+AI decision turn=3 actor=3 move=Waterfall target=0
+RUSTURF_SUPPORT board=1 turns=2 pair=0 tailwind=0 SpAStages=6/6 foeStatus=0/0
+RUSTURF_TEMPO board=1 turns=2 reserves=0 tailwind=0 rawSpeeds=53/43 ownHP=13/71 friendship=0/0
+RUSTURF_AFTER board=1 turns=2 reserves=0 native=2 species=262/211 HP=13/71 foes=6/0 moves=Crunch/Waterfall weather=0 duration=0 speeds=53/43 foeSpeeds=49/0 AtkStages=7/7 foeStatus=0/0 faints=0/1
+RUSTURF_INPUT reserves=1 slot=0 lv=19 HP=61 Atk=57 Def=37 SpA=29 SpD=33 Speed=53 item=479 ability=22
+RUSTURF_INPUT reserves=1 slot=1 lv=19 HP=71 Atk=63 Def=54 SpA=27 SpD=31 Speed=43 item=487 ability=22
+RUSTURF_INPUT reserves=1 slot=2 lv=18 HP=62 Atk=28 Def=32 SpA=47 SpD=32 Speed=21 item=494 ability=91
+RUSTURF_INPUT reserves=1 slot=3 lv=19 HP=50 Atk=39 Def=24 SpA=19 SpD=26 Speed=47 item=481 ability=39
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Muddy Water target=0
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Muddy Water target=0
+AI decision turn=2 actor=3 move=Tailwind target=3
+RUSTURF_SUPPORT board=0 turns=1 pair=1 tailwind=0 SpAStages=6/6 foeStatus=0/0
+RUSTURF_TEMPO board=0 turns=1 reserves=1 tailwind=0 rawSpeeds=21/47 ownHP=32/50 friendship=0/0
+RUSTURF_AFTER board=0 turns=1 reserves=1 native=1 species=690/41 HP=32/50 foes=49/62 moves=Muddy Water/Protect weather=0 duration=0 speeds=21/47 foeSpeeds=33/25 AtkStages=6/6 foeStatus=0/0 faints=0/0
+RUSTURF_INPUT reserves=1 slot=0 lv=19 HP=61 Atk=57 Def=37 SpA=29 SpD=33 Speed=53 item=479 ability=22
+RUSTURF_INPUT reserves=1 slot=1 lv=19 HP=71 Atk=63 Def=54 SpA=27 SpD=31 Speed=43 item=487 ability=22
+RUSTURF_INPUT reserves=1 slot=2 lv=18 HP=62 Atk=28 Def=32 SpA=47 SpD=32 Speed=21 item=494 ability=91
+RUSTURF_INPUT reserves=1 slot=3 lv=19 HP=50 Atk=39 Def=24 SpA=19 SpD=26 Speed=47 item=481 ability=39
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Muddy Water target=0
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Muddy Water target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Tailwind target=3
+AI decision turn=3 actor=1 move=Muddy Water target=0
+AI decision turn=3 actor=3 move=Brave Bird target=2
+RUSTURF_SUPPORT board=0 turns=2 pair=1 tailwind=3 SpAStages=6/6 foeStatus=0/0
+RUSTURF_TEMPO board=0 turns=2 reserves=1 tailwind=3 rawSpeeds=21/47 ownHP=2/40 friendship=0/0
+RUSTURF_AFTER board=0 turns=2 reserves=1 native=2 species=690/41 HP=2/40 foes=28/51 moves=Muddy Water/Tailwind weather=0 duration=0 speeds=42/94 foeSpeeds=33/25 AtkStages=6/6 foeStatus=0/0 faints=0/0
+RUSTURF_INPUT reserves=1 slot=0 lv=19 HP=61 Atk=57 Def=37 SpA=29 SpD=33 Speed=53 item=479 ability=22
+RUSTURF_INPUT reserves=1 slot=1 lv=19 HP=71 Atk=63 Def=54 SpA=27 SpD=31 Speed=43 item=487 ability=22
+RUSTURF_INPUT reserves=1 slot=2 lv=18 HP=62 Atk=28 Def=32 SpA=47 SpD=32 Speed=21 item=494 ability=91
+RUSTURF_INPUT reserves=1 slot=3 lv=19 HP=50 Atk=39 Def=24 SpA=19 SpD=26 Speed=47 item=481 ability=39
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Sludge Bomb target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Brave Bird target=2
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Protect target=3
+RUSTURF_SUPPORT board=1 turns=1 pair=1 tailwind=0 SpAStages=6/6 foeStatus=8/0
+RUSTURF_TEMPO board=1 turns=1 reserves=1 tailwind=0 rawSpeeds=21/47 ownHP=31/29 friendship=0/0
+RUSTURF_AFTER board=1 turns=1 reserves=1 native=1 species=690/41 HP=31/29 foes=51/0 moves=Sludge Bomb/Brave Bird weather=0 duration=0 speeds=21/47 foeSpeeds=49/0 AtkStages=6/6 foeStatus=8/0 faints=0/1
+RUSTURF_INPUT reserves=1 slot=0 lv=19 HP=61 Atk=57 Def=37 SpA=29 SpD=33 Speed=53 item=479 ability=22
+RUSTURF_INPUT reserves=1 slot=1 lv=19 HP=71 Atk=63 Def=54 SpA=27 SpD=31 Speed=43 item=487 ability=22
+RUSTURF_INPUT reserves=1 slot=2 lv=18 HP=62 Atk=28 Def=32 SpA=47 SpD=32 Speed=21 item=494 ability=91
+RUSTURF_INPUT reserves=1 slot=3 lv=19 HP=50 Atk=39 Def=24 SpA=19 SpD=26 Speed=47 item=481 ability=39
+AI decision turn=1 actor=0 move=Super Fang target=1
+AI decision turn=1 actor=1 move=Sludge Bomb target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Brave Bird target=2
+AI decision turn=2 actor=0 move=Super Fang target=1
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=1 move=Sludge Bomb target=0
+AI decision turn=3 actor=3 move=Crunch target=0
+RUSTURF_SUPPORT board=1 turns=2 pair=1 tailwind=0 SpAStages=6/6 foeStatus=8/0
+RUSTURF_TEMPO board=1 turns=2 reserves=1 tailwind=0 rawSpeeds=21/47 ownHP=31/29 friendship=0/0
+RUSTURF_AFTER board=1 turns=2 reserves=1 native=2 species=690/41 HP=31/29 foes=42/0 moves=Protect/Protect weather=0 duration=0 speeds=21/47 foeSpeeds=49/0 AtkStages=6/6 foeStatus=8/0 faints=0/1
+
+- Tests [32mPASSED[0m:          3
+- Tests [34mTOTAL[0m:           3
+

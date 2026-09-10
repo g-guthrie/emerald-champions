@@ -1,0 +1,603 @@
+arm-none-eabi-cpp -iquote include -Wno-trigraphs -DMODERN=1 -DTESTING=0 -DEMERALD -std=gnu17 -DEC_HEADLESS_FIXTURES=0 -traditional-cpp - < src/data/trainers.party | tools/trainerproc/trainerproc -o src/data/trainers.h -i src/data/trainers.party -
+tools/scaninc/scaninc -M build/emerald-test/test/battle/ai/emerald_champions_plans.d -g build/assets -I include -I tools/agbcc/include test/battle/ai/emerald_champions_plans.c
+tools/scaninc/scaninc -M build/emerald-test/test/test_runner_battle.d -g build/assets -I include -I tools/agbcc/include test/test_runner_battle.c
+tools/scaninc/scaninc -M build/emerald-test/src/emerald_champions_battle_plan.d -g build/assets -I include -I tools/agbcc/include src/emerald_champions_battle_plan.c
+tools/scaninc/scaninc -M build/emerald-test/src/data.d -g build/assets -I include -I tools/agbcc/include src/data.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/data.o src/data.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/emerald_champions_battle_plan.o src/emerald_champions_battle_plan.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/test_runner_battle.o test/test_runner_battle.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/battle/ai/emerald_champions_plans.o test/battle/ai/emerald_champions_plans.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 4
+[1] EC live review Marlene timing: complete cold decision with six-player party: [32mPASS[0m
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Trick Room target=1
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Psychic target=0
+AI decision turn=2 actor=3 move=Psychic target=0
+E19_COMPLETE_TIMING trainer=752 setupFrames=7 decisionFrames=38 completeFrames=45 warmFrames=39 first=3 moves=Psychic/Psychic
+[0] EC live review Marlene Room: absent active and expiring native team decisions: [32mPASS[0m
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Trick Room target=1
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Psychic target=2
+AI decision turn=2 actor=1 move=Psychic target=2
+AI switch turn=2 actor=3 party=2
+MARLENE_ROOM_QUERY timer=0 set=1 clear=0 moves=Trick Room/Psychic switch=0 speed=20/10 foespeed=35/19 HP=47/54
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Trick Room target=1
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Psychic target=2
+AI decision turn=2 actor=1 move=Psychic target=2
+AI switch turn=2 actor=3 party=2
+MARLENE_ROOM_QUERY timer=2 set=0 clear=0 moves=Psychic/Psychic switch=8 speed=20/10 foespeed=35/19 HP=47/54
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Trick Room target=1
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Psychic target=2
+AI decision turn=2 actor=1 move=Psychic target=2
+AI switch turn=2 actor=3 party=2
+MARLENE_ROOM_QUERY timer=1 set=1 clear=0 moves=Psychic/Psychic switch=8 speed=20/10 foespeed=35/19 HP=47/54
+[1] EC live review Marlene Yawn: sleep follows two end turns and respects immediate cure: [32mPASS[0m
+AI decision turn=1 actor=0 move=Snarl target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Yawn target=0
+MARLENE_YAWN_NATIVE turns=1 chesto=0 status=0 yawn=1 item=494 HP=46/58 ownHP=47/40
+AI decision turn=1 actor=0 move=Snarl target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Yawn target=0
+AI decision turn=2 actor=0 move=Snarl target=1
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=2 move=Recover target=2
+AI decision turn=2 actor=3 move=Protect target=3
+MARLENE_YAWN_NATIVE turns=2 chesto=0 status=2 yawn=0 item=494 HP=46/58 ownHP=41/40
+AI decision turn=1 actor=0 move=Snarl target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Yawn target=0
+AI decision turn=2 actor=0 move=Snarl target=1
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=2 move=Recover target=2
+AI decision turn=2 actor=3 move=Protect target=3
+MARLENE_YAWN_NATIVE turns=2 chesto=1 status=0 yawn=0 item=0 HP=46/58 ownHP=41/40
+[2] EC live review Marlene Competitive: special drops invite reserve retaliation: [32mPASS[0m
+AI decision turn=1 actor=0 move=Snarl target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Scald target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Earth Power target=0
+AI decision turn=2 actor=3 move=Psychic target=2
+MARLENE_COMP_CACHE turns=1 move=Psychic left=0/0 right=7/10 effective=0/4096
+MARLENE_COMP_CACHE turns=1 move=Energy Ball left=7/9 right=10/14 effective=4096/8192
+MARLENE_COMP_CACHE turns=1 move=Dark Pulse left=3/4 right=5/7 effective=2048/4096
+MARLENE_COMP_CACHE turns=1 move=Protect left=0/0 right=0/0 effective=4096/4096
+MARLENE_COMPETITIVE turns=1 active=343/574 HP=42/44 foes=46/58 LAST=Protect/Protect SpA=6/6 faints=0/0
+AI decision turn=1 actor=0 move=Snarl target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Scald target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Snarl target=1
+AI decision turn=2 actor=1 move=Earth Power target=0
+AI decision turn=2 actor=2 move=Scald target=1
+AI decision turn=2 actor=3 move=Psychic target=2
+AI decision turn=3 actor=1 move=Protect target=1
+AI decision turn=3 actor=3 move=Protect target=3
+MARLENE_COMP_CACHE turns=2 move=Psychic left=0/0 right=18/22 effective=0/4096
+MARLENE_COMP_CACHE turns=2 move=Energy Ball left=17/20 right=24/30 effective=4096/8192
+MARLENE_COMP_CACHE turns=2 move=Dark Pulse left=7/9 right=11/13 effective=2048/4096
+MARLENE_COMP_CACHE turns=2 move=Protect left=0/0 right=0/0 effective=4096/4096
+MARLENE_COMPETITIVE turns=2 active=343/574 HP=14/36 foes=39/46 LAST=Earth Power/Psychic SpA=5/7 faints=0/0
+AI decision turn=1 actor=0 move=Snarl target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Scald target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Snarl target=1
+AI decision turn=2 actor=1 move=Earth Power target=0
+AI decision turn=2 actor=2 move=Scald target=1
+AI decision turn=2 actor=3 move=Psychic target=2
+AI decision turn=3 actor=0 move=Snarl target=1
+AI decision turn=3 actor=1 move=Protect target=1
+AI decision turn=3 actor=2 move=Scald target=1
+AI decision turn=3 actor=3 move=Protect target=3
+AI decision turn=4 actor=1 move=Earth Power target=0
+AI decision turn=4 actor=3 move=Protect target=3
+MARLENE_COMP_CACHE turns=3 move=Psychic left=0/0 right=18/22 effective=0/4096
+MARLENE_COMP_CACHE turns=3 move=Energy Ball left=17/20 right=24/30 effective=4096/8192
+MARLENE_COMP_CACHE turns=3 move=Dark Pulse left=7/9 right=11/13 effective=2048/4096
+MARLENE_COMP_CACHE turns=3 move=Protect left=0/0 right=0/0 effective=4096/4096
+MARLENE_COMPETITIVE turns=3 active=343/574 HP=14/36 foes=39/46 LAST=Protect/Protect SpA=5/7 faints=0/0
+AI decision turn=1 actor=0 move=Snarl target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Scald target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Snarl target=1
+AI decision turn=2 actor=1 move=Earth Power target=0
+AI decision turn=2 actor=2 move=Scald target=1
+AI decision turn=2 actor=3 move=Psychic target=2
+AI decision turn=3 actor=0 move=Snarl target=1
+AI decision turn=3 actor=1 move=Protect target=1
+AI decision turn=3 actor=2 move=Scald target=1
+AI decision turn=3 actor=3 move=Protect target=3
+AI decision turn=4 actor=0 move=Snarl target=1
+AI decision turn=4 actor=1 move=Earth Power target=0
+AI decision turn=4 actor=2 move=Scald target=1
+AI decision turn=4 actor=3 move=Protect target=3
+AI decision turn=5 actor=3 move=Energy Ball target=0
+MARLENE_COMP_CACHE turns=4 move=Psychic left=0/0 right=25/30 effective=0/4096
+MARLENE_COMP_CACHE turns=4 move=Energy Ball left=22/26 right=34/40 effective=4096/8192
+MARLENE_COMP_CACHE turns=4 move=Dark Pulse left=10/12 right=15/18 effective=2048/4096
+MARLENE_COMP_CACHE turns=4 move=Protect left=0/0 right=0/0 effective=4096/4096
+MARLENE_COMPETITIVE turns=4 active=343/574 HP=0/28 foes=39/46 LAST=-/Protect SpA=6/8 faints=1/0
+[3] EC live review Marlene Yawn: actual choices against Dark and live Storm Drain: [32mPASS[0m
+AI decision turn=1 actor=0 move=Snarl target=1
+AI decision turn=1 actor=1 move=Power Gem target=0
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Psychic target=2
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Protect target=3
+MARLENE_YAWN_AI turns=1 moves=Power Gem/Psychic ownSpecies=325/79 ownHP=41/40 foes=41/58 yawn=0/0 status=0/0 switches=0
+MARLENE_YAWN_CLAUSE turns=1 enabled=0 active=0 partyIndex=0 trainer=0 PoochItem=494 ShellosItem=494
+AI decision turn=1 actor=0 move=Snarl target=1
+AI decision turn=1 actor=1 move=Power Gem target=0
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Psychic target=2
+AI decision turn=2 actor=0 move=Snarl target=1
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=2 move=Recover target=2
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=1 move=Psychic target=2
+AI decision turn=3 actor=3 move=Yawn target=0
+MARLENE_YAWN_AI turns=2 moves=Protect/Protect ownSpecies=325/79 ownHP=41/40 foes=41/58 yawn=0/0 status=0/0 switches=0
+MARLENE_YAWN_CLAUSE turns=2 enabled=0 active=0 partyIndex=0 trainer=0 PoochItem=494 ShellosItem=494
+AI decision turn=1 actor=0 move=Snarl target=1
+AI decision turn=1 actor=1 move=Power Gem target=0
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Psychic target=2
+AI decision turn=2 actor=0 move=Snarl target=1
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=2 move=Recover target=2
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=0 move=Snarl target=1
+AI decision turn=3 actor=1 move=Psychic target=2
+AI decision turn=3 actor=2 move=Recover target=2
+AI decision turn=3 actor=3 move=Yawn target=0
+AI decision turn=4 actor=1 move=Psychic target=2
+AI decision turn=4 actor=3 move=Protect target=3
+MARLENE_YAWN_AI turns=3 moves=Psychic/Yawn ownSpecies=325/79 ownHP=35/39 foes=41/58 yawn=1/0 status=0/0 switches=0
+MARLENE_YAWN_CLAUSE turns=3 enabled=0 active=0 partyIndex=0 trainer=0 PoochItem=494 ShellosItem=494
+AI decision turn=1 actor=0 move=Snarl target=1
+AI decision turn=1 actor=1 move=Power Gem target=0
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Psychic target=2
+AI decision turn=2 actor=0 move=Snarl target=1
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=2 move=Recover target=2
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=0 move=Snarl target=1
+AI decision turn=3 actor=1 move=Psychic target=2
+AI decision turn=3 actor=2 move=Recover target=2
+AI decision turn=3 actor=3 move=Yawn target=0
+AI decision turn=4 actor=0 move=Snarl target=1
+AI decision turn=4 actor=1 move=Psychic target=2
+AI decision turn=4 actor=2 move=Recover target=2
+AI decision turn=4 actor=3 move=Protect target=3
+AI decision turn=5 actor=1 move=Psychic target=2
+AI decision turn=5 actor=3 move=Yawn target=2
+MARLENE_YAWN_AI turns=4 moves=Psychic/Protect ownSpecies=325/79 ownHP=29/39 foes=41/58 yawn=0/0 status=2/0 switches=0
+MARLENE_YAWN_CLAUSE turns=4 enabled=0 active=0 partyIndex=0 trainer=0 PoochItem=494 ShellosItem=494
+[0] EC live review Marlene reserves: physical Dark and Baltoy item comparison: [32mPASS[0m
+MARLENE_RESERVE_INPUT dark=0 eviolite=1 owner=0 slot=0 species=417 level=14 HP=53 Atk=18 Def=40 SpA=21 SpD=34 Speed=35 item=523 ability=10 moves=85/162/266/182
+MARLENE_RESERVE_INPUT dark=0 eviolite=1 owner=0 slot=1 species=532 level=14 HP=58 Atk=31 Def=24 SpA=14 SpD=29 Speed=19 item=494 ability=89 moves=409/8/339/182
+MARLENE_RESERVE_INPUT dark=0 eviolite=1 owner=1 slot=0 species=343 level=12 HP=42 Atk=18 Def=22 SpA=27 SpD=25 Speed=18 item=494 ability=26 moves=414/94/58/182
+MARLENE_RESERVE_INPUT dark=0 eviolite=1 owner=1 slot=1 species=574 level=12 HP=44 Atk=15 Def=20 SpA=31 SpD=24 Speed=17 item=481 ability=172 moves=94/412/399/182
+MARLENE_RESERVE_INPUT dark=0 eviolite=1 owner=1 slot=2 species=325 level=12 HP=0 Atk=14 Def=20 SpA=25 SpD=35 Speed=20 item=494 ability=47 moves=433/94/408/182
+MARLENE_RESERVE_INPUT dark=0 eviolite=1 owner=1 slot=3 species=79 level=12 HP=0 Atk=24 Def=24 SpA=27 SpD=18 Speed=10 item=523 ability=144 moves=94/56/281/182
+AI decision turn=1 actor=0 move=Thunderbolt target=3
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=1
+AI decision turn=1 actor=3 move=Psychic target=2
+AI decision turn=2 actor=1 move=Psychic target=2
+AI decision turn=2 actor=3 move=Protect target=3
+MARLENE_RESERVE_AFTER dark=0 eviolite=1 turns=1 nativeTurns=1 active=343/574 HP=42/28 foes=53/38 LAST=Protect/Psychic foeLAST=Thunderbolt/Drain Punch room=0 timer=0 SpA=6/6 Speed=18/17 items=494/481 faints=0/0
+MARLENE_RESERVE_PARTY dark=0 eviolite=1 turns=1 slot=0 species=343 HP=42/42 item=494
+MARLENE_RESERVE_PARTY dark=0 eviolite=1 turns=1 slot=1 species=574 HP=28/44 item=481
+MARLENE_RESERVE_PARTY dark=0 eviolite=1 turns=1 slot=2 species=325 HP=0/47 item=494
+MARLENE_RESERVE_PARTY dark=0 eviolite=1 turns=1 slot=3 species=79 HP=0/54 item=523
+MARLENE_RESERVE_INPUT dark=0 eviolite=1 owner=0 slot=0 species=417 level=14 HP=53 Atk=18 Def=40 SpA=21 SpD=34 Speed=35 item=523 ability=10 moves=85/162/266/182
+MARLENE_RESERVE_INPUT dark=0 eviolite=1 owner=0 slot=1 species=532 level=14 HP=58 Atk=31 Def=24 SpA=14 SpD=29 Speed=19 item=494 ability=89 moves=409/8/339/182
+MARLENE_RESERVE_INPUT dark=0 eviolite=1 owner=1 slot=0 species=343 level=12 HP=42 Atk=18 Def=22 SpA=27 SpD=25 Speed=18 item=494 ability=26 moves=414/94/58/182
+MARLENE_RESERVE_INPUT dark=0 eviolite=1 owner=1 slot=1 species=574 level=12 HP=44 Atk=15 Def=20 SpA=31 SpD=24 Speed=17 item=481 ability=172 moves=94/412/399/182
+MARLENE_RESERVE_INPUT dark=0 eviolite=1 owner=1 slot=2 species=325 level=12 HP=0 Atk=14 Def=20 SpA=25 SpD=35 Speed=20 item=494 ability=47 moves=433/94/408/182
+MARLENE_RESERVE_INPUT dark=0 eviolite=1 owner=1 slot=3 species=79 level=12 HP=0 Atk=24 Def=24 SpA=27 SpD=18 Speed=10 item=523 ability=144 moves=94/56/281/182
+AI decision turn=1 actor=0 move=Thunderbolt target=3
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=1
+AI decision turn=1 actor=3 move=Psychic target=2
+AI decision turn=2 actor=0 move=Thunderbolt target=3
+AI decision turn=2 actor=1 move=Psychic target=2
+AI decision turn=2 actor=2 move=Drain Punch target=1
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=1 move=Earth Power target=2
+AI decision turn=3 actor=3 move=Psychic target=2
+MARLENE_RESERVE_AFTER dark=0 eviolite=1 turns=2 nativeTurns=2 active=343/574 HP=34/28 foes=53/12 LAST=Psychic/Protect foeLAST=Thunderbolt/Drain Punch room=0 timer=0 SpA=6/6 Speed=18/17 items=494/481 faints=0/0
+MARLENE_RESERVE_PARTY dark=0 eviolite=1 turns=2 slot=0 species=343 HP=34/42 item=494
+MARLENE_RESERVE_PARTY dark=0 eviolite=1 turns=2 slot=1 species=574 HP=28/44 item=481
+MARLENE_RESERVE_PARTY dark=0 eviolite=1 turns=2 slot=2 species=325 HP=0/47 item=494
+MARLENE_RESERVE_PARTY dark=0 eviolite=1 turns=2 slot=3 species=79 HP=0/54 item=523
+MARLENE_RESERVE_INPUT dark=0 eviolite=1 owner=0 slot=0 species=417 level=14 HP=53 Atk=18 Def=40 SpA=21 SpD=34 Speed=35 item=523 ability=10 moves=85/162/266/182
+MARLENE_RESERVE_INPUT dark=0 eviolite=1 owner=0 slot=1 species=532 level=14 HP=58 Atk=31 Def=24 SpA=14 SpD=29 Speed=19 item=494 ability=89 moves=409/8/339/182
+MARLENE_RESERVE_INPUT dark=0 eviolite=1 owner=1 slot=0 species=343 level=12 HP=42 Atk=18 Def=22 SpA=27 SpD=25 Speed=18 item=494 ability=26 moves=414/94/58/182
+MARLENE_RESERVE_INPUT dark=0 eviolite=1 owner=1 slot=1 species=574 level=12 HP=44 Atk=15 Def=20 SpA=31 SpD=24 Speed=17 item=481 ability=172 moves=94/412/399/182
+MARLENE_RESERVE_INPUT dark=0 eviolite=1 owner=1 slot=2 species=325 level=12 HP=0 Atk=14 Def=20 SpA=25 SpD=35 Speed=20 item=494 ability=47 moves=433/94/408/182
+MARLENE_RESERVE_INPUT dark=0 eviolite=1 owner=1 slot=3 species=79 level=12 HP=0 Atk=24 Def=24 SpA=27 SpD=18 Speed=10 item=523 ability=144 moves=94/56/281/182
+AI decision turn=1 actor=0 move=Thunderbolt target=3
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=1
+AI decision turn=1 actor=3 move=Psychic target=2
+AI decision turn=2 actor=0 move=Thunderbolt target=3
+AI decision turn=2 actor=1 move=Psychic target=2
+AI decision turn=2 actor=2 move=Drain Punch target=1
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=0 move=Thunderbolt target=3
+AI decision turn=3 actor=1 move=Earth Power target=2
+AI decision turn=3 actor=2 move=Drain Punch target=1
+AI decision turn=3 actor=3 move=Psychic target=2
+AI decision turn=4 actor=1 move=Earth Power target=0
+AI decision turn=4 actor=3 move=Protect target=3
+MARLENE_RESERVE_AFTER dark=0 eviolite=1 turns=3 nativeTurns=3 active=343/574 HP=26/12 foes=40/0 LAST=Earth Power/Psychic foeLAST=Thunderbolt/- room=0 timer=0 SpA=6/6 Speed=18/17 items=494/481 faints=0/1
+MARLENE_RESERVE_PARTY dark=0 eviolite=1 turns=3 slot=0 species=343 HP=26/42 item=494
+MARLENE_RESERVE_PARTY dark=0 eviolite=1 turns=3 slot=1 species=574 HP=12/44 item=481
+MARLENE_RESERVE_PARTY dark=0 eviolite=1 turns=3 slot=2 species=325 HP=0/47 item=494
+MARLENE_RESERVE_PARTY dark=0 eviolite=1 turns=3 slot=3 species=79 HP=0/54 item=523
+MARLENE_RESERVE_INPUT dark=1 eviolite=1 owner=0 slot=0 species=417 level=14 HP=53 Atk=18 Def=40 SpA=21 SpD=34 Speed=35 item=523 ability=10 moves=85/162/266/182
+MARLENE_RESERVE_INPUT dark=1 eviolite=1 owner=0 slot=1 species=261 level=14 HP=46 Atk=36 Def=19 SpA=15 SpD=17 Speed=19 item=494 ability=50 moves=242/389/269/182
+MARLENE_RESERVE_INPUT dark=1 eviolite=1 owner=1 slot=0 species=343 level=12 HP=42 Atk=18 Def=22 SpA=27 SpD=25 Speed=18 item=494 ability=26 moves=414/94/58/182
+MARLENE_RESERVE_INPUT dark=1 eviolite=1 owner=1 slot=1 species=574 level=12 HP=44 Atk=15 Def=20 SpA=31 SpD=24 Speed=17 item=481 ability=172 moves=94/412/399/182
+MARLENE_RESERVE_INPUT dark=1 eviolite=1 owner=1 slot=2 species=325 level=12 HP=0 Atk=14 Def=20 SpA=25 SpD=35 Speed=20 item=494 ability=47 moves=433/94/408/182
+MARLENE_RESERVE_INPUT dark=1 eviolite=1 owner=1 slot=3 species=79 level=12 HP=0 Atk=24 Def=24 SpA=27 SpD=18 Speed=10 item=523 ability=144 moves=94/56/281/182
+AI decision turn=1 actor=0 move=Thunderbolt target=3
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Crunch target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Earth Power target=2
+AI decision turn=2 actor=3 move=Psychic target=0
+MARLENE_RESERVE_AFTER dark=1 eviolite=1 turns=1 nativeTurns=1 active=343/574 HP=42/44 foes=53/46 LAST=Protect/Protect foeLAST=Thunderbolt/Crunch room=0 timer=0 SpA=6/6 Speed=18/17 items=494/481 faints=0/0
+MARLENE_RESERVE_PARTY dark=1 eviolite=1 turns=1 slot=0 species=343 HP=42/42 item=494
+MARLENE_RESERVE_PARTY dark=1 eviolite=1 turns=1 slot=1 species=574 HP=44/44 item=481
+MARLENE_RESERVE_PARTY dark=1 eviolite=1 turns=1 slot=2 species=325 HP=0/47 item=494
+MARLENE_RESERVE_PARTY dark=1 eviolite=1 turns=1 slot=3 species=79 HP=0/54 item=523
+MARLENE_RESERVE_INPUT dark=1 eviolite=1 owner=0 slot=0 species=417 level=14 HP=53 Atk=18 Def=40 SpA=21 SpD=34 Speed=35 item=523 ability=10 moves=85/162/266/182
+MARLENE_RESERVE_INPUT dark=1 eviolite=1 owner=0 slot=1 species=261 level=14 HP=46 Atk=36 Def=19 SpA=15 SpD=17 Speed=19 item=494 ability=50 moves=242/389/269/182
+MARLENE_RESERVE_INPUT dark=1 eviolite=1 owner=1 slot=0 species=343 level=12 HP=42 Atk=18 Def=22 SpA=27 SpD=25 Speed=18 item=494 ability=26 moves=414/94/58/182
+MARLENE_RESERVE_INPUT dark=1 eviolite=1 owner=1 slot=1 species=574 level=12 HP=44 Atk=15 Def=20 SpA=31 SpD=24 Speed=17 item=481 ability=172 moves=94/412/399/182
+MARLENE_RESERVE_INPUT dark=1 eviolite=1 owner=1 slot=2 species=325 level=12 HP=0 Atk=14 Def=20 SpA=25 SpD=35 Speed=20 item=494 ability=47 moves=433/94/408/182
+MARLENE_RESERVE_INPUT dark=1 eviolite=1 owner=1 slot=3 species=79 level=12 HP=0 Atk=24 Def=24 SpA=27 SpD=18 Speed=10 item=523 ability=144 moves=94/56/281/182
+AI decision turn=1 actor=0 move=Thunderbolt target=3
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Crunch target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Thunderbolt target=3
+AI decision turn=2 actor=1 move=Earth Power target=2
+AI decision turn=2 actor=2 move=Crunch target=1
+AI decision turn=2 actor=3 move=Psychic target=0
+AI decision turn=3 actor=1 move=Earth Power target=0
+AI decision turn=3 actor=3 move=Protect target=3
+MARLENE_RESERVE_AFTER dark=1 eviolite=1 turns=2 nativeTurns=2 active=343/574 HP=10/28 foes=40/30 LAST=Earth Power/Psychic foeLAST=Thunderbolt/Crunch room=0 timer=0 SpA=6/6 Speed=18/17 items=494/481 faints=0/0
+MARLENE_RESERVE_PARTY dark=1 eviolite=1 turns=2 slot=0 species=343 HP=10/42 item=494
+MARLENE_RESERVE_PARTY dark=1 eviolite=1 turns=2 slot=1 species=574 HP=28/44 item=481
+MARLENE_RESERVE_PARTY dark=1 eviolite=1 turns=2 slot=2 species=325 HP=0/47 item=494
+MARLENE_RESERVE_PARTY dark=1 eviolite=1 turns=2 slot=3 species=79 HP=0/54 item=523
+MARLENE_RESERVE_INPUT dark=1 eviolite=1 owner=0 slot=0 species=417 level=14 HP=53 Atk=18 Def=40 SpA=21 SpD=34 Speed=35 item=523 ability=10 moves=85/162/266/182
+MARLENE_RESERVE_INPUT dark=1 eviolite=1 owner=0 slot=1 species=261 level=14 HP=46 Atk=36 Def=19 SpA=15 SpD=17 Speed=19 item=494 ability=50 moves=242/389/269/182
+MARLENE_RESERVE_INPUT dark=1 eviolite=1 owner=1 slot=0 species=343 level=12 HP=42 Atk=18 Def=22 SpA=27 SpD=25 Speed=18 item=494 ability=26 moves=414/94/58/182
+MARLENE_RESERVE_INPUT dark=1 eviolite=1 owner=1 slot=1 species=574 level=12 HP=44 Atk=15 Def=20 SpA=31 SpD=24 Speed=17 item=481 ability=172 moves=94/412/399/182
+MARLENE_RESERVE_INPUT dark=1 eviolite=1 owner=1 slot=2 species=325 level=12 HP=0 Atk=14 Def=20 SpA=25 SpD=35 Speed=20 item=494 ability=47 moves=433/94/408/182
+MARLENE_RESERVE_INPUT dark=1 eviolite=1 owner=1 slot=3 species=79 level=12 HP=0 Atk=24 Def=24 SpA=27 SpD=18 Speed=10 item=523 ability=144 moves=94/56/281/182
+AI decision turn=1 actor=0 move=Thunderbolt target=3
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Crunch target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Thunderbolt target=3
+AI decision turn=2 actor=1 move=Earth Power target=2
+AI decision turn=2 actor=2 move=Crunch target=1
+AI decision turn=2 actor=3 move=Psychic target=0
+AI decision turn=3 actor=0 move=Thunderbolt target=3
+AI decision turn=3 actor=1 move=Earth Power target=0
+AI decision turn=3 actor=2 move=Crunch target=1
+AI decision turn=3 actor=3 move=Protect target=3
+AI decision turn=4 actor=3 move=Psychic target=0
+MARLENE_RESERVE_AFTER dark=1 eviolite=1 turns=3 nativeTurns=3 active=343/574 HP=0/28 foes=40/30 LAST=-/Protect foeLAST=Thunderbolt/Crunch room=0 timer=0 SpA=6/6 Speed=18/17 items=494/481 faints=1/0
+MARLENE_RESERVE_PARTY dark=1 eviolite=1 turns=3 slot=0 species=343 HP=0/42 item=494
+MARLENE_RESERVE_PARTY dark=1 eviolite=1 turns=3 slot=1 species=574 HP=28/44 item=481
+MARLENE_RESERVE_PARTY dark=1 eviolite=1 turns=3 slot=2 species=325 HP=0/47 item=494
+MARLENE_RESERVE_PARTY dark=1 eviolite=1 turns=3 slot=3 species=79 HP=0/54 item=523
+[1] EC live review Marlene leads: bulky pressure Electric Grass and denial: [32mPASS[0m
+MARLENE_INPUT board=0 owner=0 slot=0 species=417 level=14 HP=53 Atk=18 Def=40 SpA=21 SpD=34 Speed=35 item=523 ability=10 moves=85/162/266/182
+MARLENE_INPUT board=0 owner=0 slot=1 species=532 level=14 HP=58 Atk=31 Def=24 SpA=14 SpD=29 Speed=19 item=494 ability=89 moves=409/8/339/182
+MARLENE_INPUT board=0 owner=1 slot=0 species=325 level=12 HP=47 Atk=14 Def=20 SpA=25 SpD=35 Speed=20 item=494 ability=47 moves=433/94/408/182
+MARLENE_INPUT board=0 owner=1 slot=1 species=79 level=12 HP=54 Atk=24 Def=24 SpA=27 SpD=18 Speed=10 item=523 ability=144 moves=94/56/281/182
+MARLENE_INPUT board=0 owner=1 slot=2 species=343 level=12 HP=42 Atk=18 Def=22 SpA=27 SpD=25 Speed=18 item=494 ability=26 moves=414/94/58/182
+MARLENE_INPUT board=0 owner=1 slot=3 species=574 level=12 HP=44 Atk=15 Def=20 SpA=31 SpD=24 Speed=17 item=481 ability=172 moves=94/412/399/182
+AI decision turn=1 actor=0 move=Super Fang target=3
+AI decision turn=1 actor=1 move=Trick Room target=1
+AI decision turn=1 actor=2 move=Drain Punch target=1
+AI decision turn=1 actor=3 move=Psychic target=2
+AI decision turn=2 actor=1 move=Psychic target=2
+AI decision turn=2 actor=3 move=Protect target=3
+MARLENE_AFTER board=0 turns=1 nativeTurns=1 active=325/79 slots=0/1 HP=38/40 foes=53/40 LAST=Trick Room/Psychic foeLAST=Super Fang/Drain Punch room=1 timer=4 ownAtk=6/6 ownDef=6/6 ownSpA=6/6 ownSpD=6/6 ownSpeed=6/6 foeSpD=6/5 foeSpeed=6/6 taunt=0/0 faints
+=0/0
+MARLENE_PARTY board=0 turns=1 slot=0 species=325 HP=38/47 status=0 item=494
+MARLENE_PARTY board=0 turns=1 slot=1 species=79 HP=40/54 status=0 item=0
+MARLENE_PARTY board=0 turns=1 slot=2 species=343 HP=42/42 status=0 item=494
+MARLENE_PARTY board=0 turns=1 slot=3 species=574 HP=44/44 status=0 item=481
+MARLENE_INPUT board=0 owner=0 slot=0 species=417 level=14 HP=53 Atk=18 Def=40 SpA=21 SpD=34 Speed=35 item=523 ability=10 moves=85/162/266/182
+MARLENE_INPUT board=0 owner=0 slot=1 species=532 level=14 HP=58 Atk=31 Def=24 SpA=14 SpD=29 Speed=19 item=494 ability=89 moves=409/8/339/182
+MARLENE_INPUT board=0 owner=1 slot=0 species=325 level=12 HP=47 Atk=14 Def=20 SpA=25 SpD=35 Speed=20 item=494 ability=47 moves=433/94/408/182
+MARLENE_INPUT board=0 owner=1 slot=1 species=79 level=12 HP=54 Atk=24 Def=24 SpA=27 SpD=18 Speed=10 item=523 ability=144 moves=94/56/281/182
+MARLENE_INPUT board=0 owner=1 slot=2 species=343 level=12 HP=42 Atk=18 Def=22 SpA=27 SpD=25 Speed=18 item=494 ability=26 moves=414/94/58/182
+MARLENE_INPUT board=0 owner=1 slot=3 species=574 level=12 HP=44 Atk=15 Def=20 SpA=31 SpD=24 Speed=17 item=481 ability=172 moves=94/412/399/182
+AI decision turn=1 actor=0 move=Super Fang target=3
+AI decision turn=1 actor=1 move=Trick Room target=1
+AI decision turn=1 actor=2 move=Drain Punch target=1
+AI decision turn=1 actor=3 move=Psychic target=2
+AI decision turn=2 actor=0 move=Super Fang target=3
+AI decision turn=2 actor=1 move=Psychic target=2
+AI decision turn=2 actor=2 move=Drain Punch target=1
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=1 move=Psychic target=2
+AI switch turn=3 actor=3 party=2
+MARLENE_AFTER board=0 turns=2 nativeTurns=2 active=325/79 slots=0/1 HP=29/40 foes=53/18 LAST=Psychic/Protect foeLAST=Super Fang/Drain Punch room=1 timer=3 ownAtk=6/6 ownDef=6/6 ownSpA=6/6 ownSpD=6/6 ownSpeed=6/6 foeSpD=6/4 foeSpeed=6/6 taunt=0/0 faints=0/
+0
+MARLENE_PARTY board=0 turns=2 slot=0 species=325 HP=29/47 status=0 item=494
+MARLENE_PARTY board=0 turns=2 slot=1 species=79 HP=40/54 status=0 item=0
+MARLENE_PARTY board=0 turns=2 slot=2 species=343 HP=42/42 status=0 item=494
+MARLENE_PARTY board=0 turns=2 slot=3 species=574 HP=44/44 status=0 item=481
+MARLENE_INPUT board=0 owner=0 slot=0 species=417 level=14 HP=53 Atk=18 Def=40 SpA=21 SpD=34 Speed=35 item=523 ability=10 moves=85/162/266/182
+MARLENE_INPUT board=0 owner=0 slot=1 species=532 level=14 HP=58 Atk=31 Def=24 SpA=14 SpD=29 Speed=19 item=494 ability=89 moves=409/8/339/182
+MARLENE_INPUT board=0 owner=1 slot=0 species=325 level=12 HP=47 Atk=14 Def=20 SpA=25 SpD=35 Speed=20 item=494 ability=47 moves=433/94/408/182
+MARLENE_INPUT board=0 owner=1 slot=1 species=79 level=12 HP=54 Atk=24 Def=24 SpA=27 SpD=18 Speed=10 item=523 ability=144 moves=94/56/281/182
+MARLENE_INPUT board=0 owner=1 slot=2 species=343 level=12 HP=42 Atk=18 Def=22 SpA=27 SpD=25 Speed=18 item=494 ability=26 moves=414/94/58/182
+MARLENE_INPUT board=0 owner=1 slot=3 species=574 level=12 HP=44 Atk=15 Def=20 SpA=31 SpD=24 Speed=17 item=481 ability=172 moves=94/412/399/182
+AI decision turn=1 actor=0 move=Super Fang target=3
+AI decision turn=1 actor=1 move=Trick Room target=1
+AI decision turn=1 actor=2 move=Drain Punch target=1
+AI decision turn=1 actor=3 move=Psychic target=2
+AI decision turn=2 actor=0 move=Super Fang target=3
+AI decision turn=2 actor=1 move=Psychic target=2
+AI decision turn=2 actor=2 move=Drain Punch target=1
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=0 move=Super Fang target=3
+AI decision turn=3 actor=1 move=Psychic target=2
+AI switch turn=3 actor=3 party=2
+AI decision turn=3 actor=2 move=Drain Punch target=1
+AI decision turn=4 actor=1 move=Psychic target=0
+AI decision turn=4 actor=3 move=Earth Power target=0
+MARLENE_AFTER board=0 turns=3 nativeTurns=3 active=325/343 slots=0/2 HP=20/21 foes=53/0 LAST=Psychic/- foeLAST=Super Fang/- room=1 timer=2 ownAtk=6/6 ownDef=6/6 ownSpA=6/6 ownSpD=6/6 ownSpeed=6/6 foeSpD=6/6 foeSpeed=6/6 taunt=0/0 faints=0/1
+MARLENE_PARTY board=0 turns=3 slot=0 species=325 HP=20/47 status=0 item=494
+MARLENE_PARTY board=0 turns=3 slot=1 species=79 HP=54/54 status=0 item=0
+MARLENE_PARTY board=0 turns=3 slot=2 species=343 HP=21/42 status=0 item=494
+MARLENE_PARTY board=0 turns=3 slot=3 species=574 HP=44/44 status=0 item=481
+MARLENE_INPUT board=0 owner=0 slot=0 species=417 level=14 HP=53 Atk=18 Def=40 SpA=21 SpD=34 Speed=35 item=523 ability=10 moves=85/162/266/182
+MARLENE_INPUT board=0 owner=0 slot=1 species=532 level=14 HP=58 Atk=31 Def=24 SpA=14 SpD=29 Speed=19 item=494 ability=89 moves=409/8/339/182
+MARLENE_INPUT board=0 owner=1 slot=0 species=325 level=12 HP=47 Atk=14 Def=20 SpA=25 SpD=35 Speed=20 item=494 ability=47 moves=433/94/408/182
+MARLENE_INPUT board=0 owner=1 slot=1 species=79 level=12 HP=54 Atk=24 Def=24 SpA=27 SpD=18 Speed=10 item=523 ability=144 moves=94/56/281/182
+MARLENE_INPUT board=0 owner=1 slot=2 species=343 level=12 HP=42 Atk=18 Def=22 SpA=27 SpD=25 Speed=18 item=494 ability=26 moves=414/94/58/182
+MARLENE_INPUT board=0 owner=1 slot=3 species=574 level=12 HP=44 Atk=15 Def=20 SpA=31 SpD=24 Speed=17 item=481 ability=172 moves=94/412/399/182
+AI decision turn=1 actor=0 move=Super Fang target=3
+AI decision turn=1 actor=1 move=Trick Room target=1
+AI decision turn=1 actor=2 move=Drain Punch target=1
+AI decision turn=1 actor=3 move=Psychic target=2
+AI decision turn=2 actor=0 move=Super Fang target=3
+AI decision turn=2 actor=1 move=Psychic target=2
+AI decision turn=2 actor=2 move=Drain Punch target=1
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=0 move=Super Fang target=3
+AI decision turn=3 actor=1 move=Psychic target=2
+AI switch turn=3 actor=3 party=2
+AI decision turn=3 actor=2 move=Drain Punch target=1
+AI decision turn=4 actor=0 move=Super Fang target=3
+AI decision turn=4 actor=1 move=Psychic target=0
+AI decision turn=4 actor=3 move=Earth Power target=0
+AI decision turn=5 actor=1 move=Psychic target=0
+AI decision turn=5 actor=3 move=Earth Power target=0
+MARLENE_AFTER board=0 turns=4 nativeTurns=4 active=325/343 slots=0/2 HP=20/11 foes=26/0 LAST=Psychic/Earth Power foeLAST=Super Fang/- room=1 timer=1 ownAtk=6/6 ownDef=6/6 ownSpA=6/6 ownSpD=6/6 ownSpeed=6/6 foeSpD=4/6 foeSpeed=6/6 taunt=0/0 faints=0/1
+MARLENE_PARTY board=0 turns=4 slot=0 species=325 HP=20/47 status=0 item=494
+MARLENE_PARTY board=0 turns=4 slot=1 species=79 HP=54/54 status=0 item=0
+MARLENE_PARTY board=0 turns=4 slot=2 species=343 HP=11/42 status=0 item=494
+MARLENE_PARTY board=0 turns=4 slot=3 species=574 HP=44/44 status=0 item=481
+MARLENE_INPUT board=1 owner=0 slot=0 species=417 level=14 HP=53 Atk=18 Def=40 SpA=21 SpD=34 Speed=35 item=523 ability=10 moves=85/162/266/182
+MARLENE_INPUT board=1 owner=0 slot=1 species=270 level=14 HP=48 Atk=15 Def=17 SpA=27 SpD=27 Speed=17 item=494 ability=44 moves=202/58/240/182
+MARLENE_INPUT board=1 owner=1 slot=0 species=325 level=12 HP=47 Atk=14 Def=20 SpA=25 SpD=35 Speed=20 item=494 ability=47 moves=433/94/408/182
+MARLENE_INPUT board=1 owner=1 slot=1 species=79 level=12 HP=54 Atk=24 Def=24 SpA=27 SpD=18 Speed=10 item=523 ability=144 moves=94/56/281/182
+MARLENE_INPUT board=1 owner=1 slot=2 species=343 level=12 HP=42 Atk=18 Def=22 SpA=27 SpD=25 Speed=18 item=494 ability=26 moves=414/94/58/182
+MARLENE_INPUT board=1 owner=1 slot=3 species=574 level=12 HP=44 Atk=15 Def=20 SpA=31 SpD=24 Speed=17 item=481 ability=172 moves=94/412/399/182
+AI decision turn=1 actor=0 move=Thunderbolt target=1
+AI decision turn=1 actor=1 move=Trick Room target=1
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Psychic target=0
+AI switch turn=2 actor=3 party=2
+MARLENE_AFTER board=1 turns=1 nativeTurns=1 active=325/79 slots=0/1 HP=40/54 foes=53/48 LAST=Trick Room/Protect foeLAST=Thunderbolt/Giga Drain room=1 timer=4 ownAtk=6/6 ownDef=6/6 ownSpA=6/6 ownSpD=6/6 ownSpeed=6/6 foeSpD=6/6 foeSpeed=6/6 taunt=0/0 faints
+=0/0
+MARLENE_PARTY board=1 turns=1 slot=0 species=325 HP=40/47 status=0 item=494
+MARLENE_PARTY board=1 turns=1 slot=1 species=79 HP=54/54 status=0 item=523
+MARLENE_PARTY board=1 turns=1 slot=2 species=343 HP=42/42 status=0 item=494
+MARLENE_PARTY board=1 turns=1 slot=3 species=574 HP=44/44 status=0 item=481
+MARLENE_INPUT board=1 owner=0 slot=0 species=417 level=14 HP=53 Atk=18 Def=40 SpA=21 SpD=34 Speed=35 item=523 ability=10 moves=85/162/266/182
+MARLENE_INPUT board=1 owner=0 slot=1 species=270 level=14 HP=48 Atk=15 Def=17 SpA=27 SpD=27 Speed=17 item=494 ability=44 moves=202/58/240/182
+MARLENE_INPUT board=1 owner=1 slot=0 species=325 level=12 HP=47 Atk=14 Def=20 SpA=25 SpD=35 Speed=20 item=494 ability=47 moves=433/94/408/182
+MARLENE_INPUT board=1 owner=1 slot=1 species=79 level=12 HP=54 Atk=24 Def=24 SpA=27 SpD=18 Speed=10 item=523 ability=144 moves=94/56/281/182
+MARLENE_INPUT board=1 owner=1 slot=2 species=343 level=12 HP=42 Atk=18 Def=22 SpA=27 SpD=25 Speed=18 item=494 ability=26 moves=414/94/58/182
+MARLENE_INPUT board=1 owner=1 slot=3 species=574 level=12 HP=44 Atk=15 Def=20 SpA=31 SpD=24 Speed=17 item=481 ability=172 moves=94/412/399/182
+AI decision turn=1 actor=0 move=Thunderbolt target=1
+AI decision turn=1 actor=1 move=Trick Room target=1
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Thunderbolt target=1
+AI decision turn=2 actor=1 move=Psychic target=0
+AI switch turn=2 actor=3 party=2
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=3 actor=1 move=Psychic target=2
+AI decision turn=3 actor=3 move=Protect target=3
+MARLENE_AFTER board=1 turns=2 nativeTurns=2 active=325/343 slots=0/2 HP=33/22 foes=43/48 LAST=Psychic/- foeLAST=Thunderbolt/Giga Drain room=1 timer=3 ownAtk=6/6 ownDef=6/6 ownSpA=6/6 ownSpD=6/6 ownSpeed=6/6 foeSpD=5/6 foeSpeed=6/6 taunt=0/0 faints=0/0
+MARLENE_PARTY board=1 turns=2 slot=0 species=325 HP=33/47 status=0 item=494
+MARLENE_PARTY board=1 turns=2 slot=1 species=79 HP=54/54 status=0 item=523
+MARLENE_PARTY board=1 turns=2 slot=2 species=343 HP=22/42 status=0 item=494
+MARLENE_PARTY board=1 turns=2 slot=3 species=574 HP=44/44 status=0 item=481
+MARLENE_INPUT board=1 owner=0 slot=0 species=417 level=14 HP=53 Atk=18 Def=40 SpA=21 SpD=34 Speed=35 item=523 ability=10 moves=85/162/266/182
+MARLENE_INPUT board=1 owner=0 slot=1 species=270 level=14 HP=48 Atk=15 Def=17 SpA=27 SpD=27 Speed=17 item=494 ability=44 moves=202/58/240/182
+MARLENE_INPUT board=1 owner=1 slot=0 species=325 level=12 HP=47 Atk=14 Def=20 SpA=25 SpD=35 Speed=20 item=494 ability=47 moves=433/94/408/182
+MARLENE_INPUT board=1 owner=1 slot=1 species=79 level=12 HP=54 Atk=24 Def=24 SpA=27 SpD=18 Speed=10 item=523 ability=144 moves=94/56/281/182
+MARLENE_INPUT board=1 owner=1 slot=2 species=343 level=12 HP=42 Atk=18 Def=22 SpA=27 SpD=25 Speed=18 item=494 ability=26 moves=414/94/58/182
+MARLENE_INPUT board=1 owner=1 slot=3 species=574 level=12 HP=44 Atk=15 Def=20 SpA=31 SpD=24 Speed=17 item=481 ability=172 moves=94/412/399/182
+AI decision turn=1 actor=0 move=Thunderbolt target=1
+AI decision turn=1 actor=1 move=Trick Room target=1
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Thunderbolt target=1
+AI decision turn=2 actor=1 move=Psychic target=0
+AI switch turn=2 actor=3 party=2
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=3 actor=0 move=Thunderbolt target=1
+AI decision turn=3 actor=1 move=Psychic target=2
+AI decision turn=3 actor=2 move=Giga Drain target=3
+AI decision turn=3 actor=3 move=Protect target=3
+AI decision turn=4 actor=1 move=Psychic target=2
+AI switch turn=4 actor=3 party=3
+MARLENE_AFTER board=1 turns=3 nativeTurns=3 active=325/343 slots=0/2 HP=26/22 foes=43/39 LAST=Psychic/Protect foeLAST=Thunderbolt/Giga Drain room=1 timer=2 ownAtk=6/6 ownDef=6/6 ownSpA=6/6 ownSpD=6/6 ownSpeed=6/6 foeSpD=5/5 foeSpeed=6/6 taunt=0/0 faints=0
+/0
+MARLENE_PARTY board=1 turns=3 slot=0 species=325 HP=26/47 status=0 item=494
+MARLENE_PARTY board=1 turns=3 slot=1 species=79 HP=54/54 status=0 item=523
+MARLENE_PARTY board=1 turns=3 slot=2 species=343 HP=22/42 status=0 item=494
+MARLENE_PARTY board=1 turns=3 slot=3 species=574 HP=44/44 status=0 item=481
+MARLENE_INPUT board=1 owner=0 slot=0 species=417 level=14 HP=53 Atk=18 Def=40 SpA=21 SpD=34 Speed=35 item=523 ability=10 moves=85/162/266/182
+MARLENE_INPUT board=1 owner=0 slot=1 species=270 level=14 HP=48 Atk=15 Def=17 SpA=27 SpD=27 Speed=17 item=494 ability=44 moves=202/58/240/182
+MARLENE_INPUT board=1 owner=1 slot=0 species=325 level=12 HP=47 Atk=14 Def=20 SpA=25 SpD=35 Speed=20 item=494 ability=47 moves=433/94/408/182
+MARLENE_INPUT board=1 owner=1 slot=1 species=79 level=12 HP=54 Atk=24 Def=24 SpA=27 SpD=18 Speed=10 item=523 ability=144 moves=94/56/281/182
+MARLENE_INPUT board=1 owner=1 slot=2 species=343 level=12 HP=42 Atk=18 Def=22 SpA=27 SpD=25 Speed=18 item=494 ability=26 moves=414/94/58/182
+MARLENE_INPUT board=1 owner=1 slot=3 species=574 level=12 HP=44 Atk=15 Def=20 SpA=31 SpD=24 Speed=17 item=481 ability=172 moves=94/412/399/182
+AI decision turn=1 actor=0 move=Thunderbolt target=1
+AI decision turn=1 actor=1 move=Trick Room target=1
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Thunderbolt target=1
+AI decision turn=2 actor=1 move=Psychic target=0
+AI switch turn=2 actor=3 party=2
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=3 actor=0 move=Thunderbolt target=1
+AI decision turn=3 actor=1 move=Psychic target=2
+AI decision turn=3 actor=2 move=Giga Drain target=3
+AI decision turn=3 actor=3 move=Protect target=3
+AI decision turn=4 actor=0 move=Thunderbolt target=1
+AI decision turn=4 actor=1 move=Psychic target=2
+AI switch turn=4 actor=3 party=3
+AI decision turn=4 actor=2 move=Giga Drain target=3
+AI decision turn=5 actor=1 move=Psychic target=2
+AI decision turn=5 actor=3 move=Protect target=3
+MARLENE_AFTER board=1 turns=4 nativeTurns=4 active=325/574 slots=0/3 HP=19/28 foes=43/32 LAST=Psychic/- foeLAST=Thunderbolt/Giga Drain room=1 timer=1 ownAtk=6/6 ownDef=6/6 ownSpA=6/6 ownSpD=6/6 ownSpeed=6/6 foeSpD=5/4 foeSpeed=6/6 taunt=0/0 faints=0/0
+MARLENE_PARTY board=1 turns=4 slot=0 species=325 HP=19/47 status=0 item=494
+MARLENE_PARTY board=1 turns=4 slot=1 species=79 HP=54/54 status=0 item=523
+MARLENE_PARTY board=1 turns=4 slot=2 species=343 HP=22/42 status=0 item=494
+MARLENE_PARTY board=1 turns=4 slot=3 species=574 HP=28/44 status=0 item=481
+MARLENE_INPUT board=2 owner=0 slot=0 species=619 level=14 HP=49 Atk=33 Def=23 SpA=21 SpD=23 Speed=39 item=494 ability=39 moves=252/269/409/282
+MARLENE_INPUT board=2 owner=0 slot=1 species=417 level=14 HP=53 Atk=18 Def=40 SpA=21 SpD=34 Speed=35 item=523 ability=10 moves=85/162/266/182
+MARLENE_INPUT board=2 owner=1 slot=0 species=325 level=12 HP=47 Atk=14 Def=20 SpA=25 SpD=35 Speed=20 item=494 ability=47 moves=433/94/408/182
+MARLENE_INPUT board=2 owner=1 slot=1 species=79 level=12 HP=54 Atk=24 Def=24 SpA=27 SpD=18 Speed=10 item=523 ability=144 moves=94/56/281/182
+MARLENE_INPUT board=2 owner=1 slot=2 species=343 level=12 HP=42 Atk=18 Def=22 SpA=27 SpD=25 Speed=18 item=494 ability=26 moves=414/94/58/182
+MARLENE_INPUT board=2 owner=1 slot=3 species=574 level=12 HP=44 Atk=15 Def=20 SpA=31 SpD=24 Speed=17 item=481 ability=172 moves=94/412/399/182
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Trick Room target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Trick Room target=1
+AI switch turn=2 actor=3 party=2
+MARLENE_AFTER board=2 turns=1 nativeTurns=1 active=325/79 slots=0/1 HP=41/54 foes=49/53 LAST=-/Protect foeLAST=Fake Out/Thunderbolt room=0 timer=0 ownAtk=6/6 ownDef=6/6 ownSpA=6/6 ownSpD=6/6 ownSpeed=6/6 foeSpD=6/6 foeSpeed=6/6 taunt=0/0 faints=0/0
+MARLENE_PARTY board=2 turns=1 slot=0 species=325 HP=41/47 status=0 item=494
+MARLENE_PARTY board=2 turns=1 slot=1 species=79 HP=54/54 status=0 item=523
+MARLENE_PARTY board=2 turns=1 slot=2 species=343 HP=42/42 status=0 item=494
+MARLENE_PARTY board=2 turns=1 slot=3 species=574 HP=44/44 status=0 item=481
+MARLENE_INPUT board=2 owner=0 slot=0 species=619 level=14 HP=49 Atk=33 Def=23 SpA=21 SpD=23 Speed=39 item=494 ability=39 moves=252/269/409/282
+MARLENE_INPUT board=2 owner=0 slot=1 species=417 level=14 HP=53 Atk=18 Def=40 SpA=21 SpD=34 Speed=35 item=523 ability=10 moves=85/162/266/182
+MARLENE_INPUT board=2 owner=1 slot=0 species=325 level=12 HP=47 Atk=14 Def=20 SpA=25 SpD=35 Speed=20 item=494 ability=47 moves=433/94/408/182
+MARLENE_INPUT board=2 owner=1 slot=1 species=79 level=12 HP=54 Atk=24 Def=24 SpA=27 SpD=18 Speed=10 item=523 ability=144 moves=94/56/281/182
+MARLENE_INPUT board=2 owner=1 slot=2 species=343 level=12 HP=42 Atk=18 Def=22 SpA=27 SpD=25 Speed=18 item=494 ability=26 moves=414/94/58/182
+MARLENE_INPUT board=2 owner=1 slot=3 species=574 level=12 HP=44 Atk=15 Def=20 SpA=31 SpD=24 Speed=17 item=481 ability=172 moves=94/412/399/182
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Trick Room target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Taunt target=1
+AI decision turn=2 actor=1 move=Trick Room target=1
+AI switch turn=2 actor=3 party=2
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=1 move=Psychic target=0
+AI decision turn=3 actor=3 move=Psychic target=0
+MARLENE_AFTER board=2 turns=2 nativeTurns=2 active=325/343 slots=0/2 HP=41/42 foes=49/53 LAST=-/- foeLAST=Taunt/Thunderbolt room=0 timer=0 ownAtk=6/6 ownDef=6/6 ownSpA=6/6 ownSpD=6/6 ownSpeed=6/6 foeSpD=6/6 foeSpeed=6/6 taunt=2/0 faints=0/0
+MARLENE_PARTY board=2 turns=2 slot=0 species=325 HP=41/47 status=0 item=494
+MARLENE_PARTY board=2 turns=2 slot=1 species=79 HP=54/54 status=0 item=523
+MARLENE_PARTY board=2 turns=2 slot=2 species=343 HP=42/42 status=0 item=494
+MARLENE_PARTY board=2 turns=2 slot=3 species=574 HP=44/44 status=0 item=481
+MARLENE_INPUT board=2 owner=0 slot=0 species=619 level=14 HP=49 Atk=33 Def=23 SpA=21 SpD=23 Speed=39 item=494 ability=39 moves=252/269/409/282
+MARLENE_INPUT board=2 owner=0 slot=1 species=417 level=14 HP=53 Atk=18 Def=40 SpA=21 SpD=34 Speed=35 item=523 ability=10 moves=85/162/266/182
+MARLENE_INPUT board=2 owner=1 slot=0 species=325 level=12 HP=47 Atk=14 Def=20 SpA=25 SpD=35 Speed=20 item=494 ability=47 moves=433/94/408/182
+MARLENE_INPUT board=2 owner=1 slot=1 species=79 level=12 HP=54 Atk=24 Def=24 SpA=27 SpD=18 Speed=10 item=523 ability=144 moves=94/56/281/182
+MARLENE_INPUT board=2 owner=1 slot=2 species=343 level=12 HP=42 Atk=18 Def=22 SpA=27 SpD=25 Speed=18 item=494 ability=26 moves=414/94/58/182
+MARLENE_INPUT board=2 owner=1 slot=3 species=574 level=12 HP=44 Atk=15 Def=20 SpA=31 SpD=24 Speed=17 item=481 ability=172 moves=94/412/399/182
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Trick Room target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Taunt target=1
+AI decision turn=2 actor=1 move=Trick Room target=1
+AI switch turn=2 actor=3 party=2
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=0 move=Taunt target=1
+AI decision turn=3 actor=1 move=Psychic target=0
+AI decision turn=3 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=3 move=Psychic target=0
+AI decision turn=4 actor=1 move=Psychic target=2
+AI decision turn=4 actor=3 move=Earth Power target=2
+MARLENE_AFTER board=2 turns=3 nativeTurns=3 active=325/343 slots=0/2 HP=41/42 foes=0/53 LAST=Psychic/Psychic foeLAST=-/Thunderbolt room=0 timer=0 ownAtk=6/6 ownDef=6/6 ownSpA=6/6 ownSpD=6/6 ownSpeed=6/6 foeSpD=6/6 foeSpeed=6/6 taunt=1/0 faints=0/1
+MARLENE_PARTY board=2 turns=3 slot=0 species=325 HP=41/47 status=0 item=494
+MARLENE_PARTY board=2 turns=3 slot=1 species=79 HP=54/54 status=0 item=523
+MARLENE_PARTY board=2 turns=3 slot=2 species=343 HP=42/42 status=0 item=494
+MARLENE_PARTY board=2 turns=3 slot=3 species=574 HP=44/44 status=0 item=481
+MARLENE_INPUT board=2 owner=0 slot=0 species=619 level=14 HP=49 Atk=33 Def=23 SpA=21 SpD=23 Speed=39 item=494 ability=39 moves=252/269/409/282
+MARLENE_INPUT board=2 owner=0 slot=1 species=417 level=14 HP=53 Atk=18 Def=40 SpA=21 SpD=34 Speed=35 item=523 ability=10 moves=85/162/266/182
+MARLENE_INPUT board=2 owner=1 slot=0 species=325 level=12 HP=47 Atk=14 Def=20 SpA=25 SpD=35 Speed=20 item=494 ability=47 moves=433/94/408/182
+MARLENE_INPUT board=2 owner=1 slot=1 species=79 level=12 HP=54 Atk=24 Def=24 SpA=27 SpD=18 Speed=10 item=523 ability=144 moves=94/56/281/182
+MARLENE_INPUT board=2 owner=1 slot=2 species=343 level=12 HP=42 Atk=18 Def=22 SpA=27 SpD=25 Speed=18 item=494 ability=26 moves=414/94/58/182
+MARLENE_INPUT board=2 owner=1 slot=3 species=574 level=12 HP=44 Atk=15 Def=20 SpA=31 SpD=24 Speed=17 item=481 ability=172 moves=94/412/399/182
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Trick Room target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Taunt target=1
+AI decision turn=2 actor=1 move=Trick Room target=1
+AI switch turn=2 actor=3 party=2
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=0 move=Taunt target=1
+AI decision turn=3 actor=1 move=Psychic target=0
+AI decision turn=3 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=3 move=Psychic target=0
+AI decision turn=4 actor=2 move=Thunderbolt target=3
+AI decision turn=4 actor=1 move=Psychic target=2
+AI decision turn=4 actor=3 move=Earth Power target=2
+AI decision turn=5 actor=1 move=Trick Room target=1
+AI decision turn=5 actor=3 move=Earth Power target=2
+MARLENE_AFTER board=2 turns=4 nativeTurns=4 active=325/343 slots=0/2 HP=41/42 foes=0/20 LAST=Psychic/Earth Power foeLAST=-/Thunderbolt room=0 timer=0 ownAtk=6/6 ownDef=6/6 ownSpA=6/6 ownSpD=6/6 ownSpeed=6/6 foeSpD=6/4 foeSpeed=6/6 taunt=0/0 faints=0/1
+MARLENE_PARTY board=2 turns=4 slot=0 species=325 HP=41/47 status=0 item=494
+MARLENE_PARTY board=2 turns=4 slot=1 species=79 HP=54/54 status=0 item=523
+MARLENE_PARTY board=2 turns=4 slot=2 species=343 HP=42/42 status=0 item=494
+MARLENE_PARTY board=2 turns=4 slot=3 species=574 HP=44/44 status=0 item=481
+
+- Tests [32mPASSED[0m:          7
+- Tests [34mTOTAL[0m:           7
+

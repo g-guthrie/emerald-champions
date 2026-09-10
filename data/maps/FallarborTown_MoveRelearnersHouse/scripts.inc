@@ -8,12 +8,12 @@ FallarborTown_MoveRelearnersHouse_EventScript_IvyEvieIntro::
 	goto_if_set FLAG_EC_MET_IVY_EVIE, FallarborTown_MoveRelearnersHouse_EventScript_IntroDone
 	playse SE_PIN
 	applymovement LOCALID_MOVE_RELEARNER, Common_Movement_ExclamationMark
-	applymovement LOCALID_STAT_POINT_TRAINER, Common_Movement_ExclamationMark
+	applymovement LOCALID_EV_TRAINER, Common_Movement_ExclamationMark
 	waitmovement 0
 	applymovement LOCALID_MOVE_RELEARNER, Common_Movement_Delay48
 	waitmovement 0
 	applymovement LOCALID_MOVE_RELEARNER, Common_Movement_FacePlayer
-	applymovement LOCALID_STAT_POINT_TRAINER, Common_Movement_FacePlayer
+	applymovement LOCALID_EV_TRAINER, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox FallarborTown_MoveRelearnersHouse_Text_IvyEvieIntro1, MSGBOX_DEFAULT
 	msgbox FallarborTown_MoveRelearnersHouse_Text_IvyEvieIntro2, MSGBOX_DEFAULT
@@ -36,16 +36,16 @@ FallarborTown_MoveRelearnersHouse_Text_IvyEvieIntro2:
 	.string "seriously beef up your team!$"
 
 FallarborTown_MoveRelearnersHouse_Text_IvyEvieIntro3:
-	.string "EVIE: And these days it's all free.\p"
-	.string "IVY tunes STAT POINTS, and I trade\n"
-	.string "HEART SCALES for PP UPS.\p"
+	.string "EVIE: IVY adjusts EVs for free.\p"
+	.string "I collect HEART SCALES and trade\n"
+	.string "a PP UP for each one.\p"
 	.string "Come back as often as you like!$"
 
-FallarborTown_MoveRelearnersHouse_EventScript_StatPointTrainer::
+FallarborTown_MoveRelearnersHouse_EventScript_EvTrainer::
 	lockall
 	call FallarborTown_MoveRelearnersHouse_EventScript_IvyEvieIntro
 	releaseall
-	goto Common_EventScript_EmeraldChampionsStatPointEditor
+	goto Common_EventScript_EmeraldChampionsEvEditor
 	end
 
 FallarborTown_MoveRelearnersHouse_EventScript_MoveRelearner::
@@ -93,7 +93,9 @@ FallarborTown_MoveRelearnersHouse_Text_ImTheScaleCollector:
 	.string "The tutors at every POKéMON CENTER\n"
 	.string "already teach moves for free.\p"
 	.string "I polish HEART SCALES into PP UPS,\n"
-	.string "one for one.$"
+	.string "one for one.\p"
+	.string "PP upgrades stay with their move slots\n"
+	.string "when you change a battle set.$"
 
 FallarborTown_MoveRelearnersHouse_Text_TradeScaleForPPUp:
 	.string "Trade one HEART SCALE for one PP UP?$"

@@ -1,0 +1,6714 @@
+[
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_BattleItemScholar",
+    "line": 10,
+    "text": "I once sold POWER items here.\\pThe left-side vendor in every CENTER\\nnow supplies battle items for free.$",
+    "lines": [
+      {
+        "text": "I once sold POWER items here.",
+        "width": 151,
+        "unresolved": []
+      },
+      {
+        "text": "The left-side vendor in every CENTER",
+        "width": 193,
+        "unresolved": []
+      },
+      {
+        "text": "now supplies battle items for free.",
+        "width": 182,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_IncenseScholar",
+    "line": 19,
+    "text": "You don't need Incense to get\\nbaby POKéMON from compatible\\lparents.\\pSome Incenses have effects in\\nbattle, though. The CENTER\\lvendors can help you find them.$",
+    "lines": [
+      {
+        "text": "You don't need Incense to get",
+        "width": 159,
+        "unresolved": []
+      },
+      {
+        "text": "baby POKéMON from compatible",
+        "width": 154,
+        "unresolved": []
+      },
+      {
+        "text": "parents.",
+        "width": 44,
+        "unresolved": []
+      },
+      {
+        "text": "Some Incenses have effects in",
+        "width": 160,
+        "unresolved": []
+      },
+      {
+        "text": "battle, though. The CENTER",
+        "width": 139,
+        "unresolved": []
+      },
+      {
+        "text": "vendors can help you find them.",
+        "width": 163,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_WhoahLineSoLong",
+    "line": 48,
+    "text": "Whoa! This line barely moves!\\nI could have paddled home by now.$",
+    "lines": [
+      {
+        "text": "Whoa! This line barely moves!",
+        "width": 149,
+        "unresolved": []
+      },
+      {
+        "text": "I could have paddled home by now.",
+        "width": 173,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_LookingForBrawly",
+    "line": 52,
+    "text": "Oh! You came looking for\\nDEWFORD's GYM LEADER?\\pThat's me! BRAWLY.\\nGuess I've kept you waiting.\\pI'll head back to DEWFORD right now.\\nBring two POKéMON. I battle doubles!$",
+    "lines": [
+      {
+        "text": "Oh! You came looking for",
+        "width": 125,
+        "unresolved": []
+      },
+      {
+        "text": "DEWFORD's GYM LEADER?",
+        "width": 120,
+        "unresolved": []
+      },
+      {
+        "text": "That's me! BRAWLY.",
+        "width": 97,
+        "unresolved": []
+      },
+      {
+        "text": "Guess I've kept you waiting.",
+        "width": 149,
+        "unresolved": []
+      },
+      {
+        "text": "I'll head back to DEWFORD right now.",
+        "width": 188,
+        "unresolved": []
+      },
+      {
+        "text": "Bring two POKéMON. I battle doubles!",
+        "width": 189,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_CatchingGuruSellWhatYouNeed",
+    "line": 971,
+    "text": "I'm the CATCHING GURU! I stock\\nspecialized BALLS for every hunt.\\pThe right BALL can turn a rare sighting\\ninto your next teammate!$",
+    "lines": [
+      {
+        "text": "I'm the CATCHING GURU! I stock",
+        "width": 163,
+        "unresolved": []
+      },
+      {
+        "text": "specialized BALLS for every hunt.",
+        "width": 175,
+        "unresolved": []
+      },
+      {
+        "text": "The right BALL can turn a rare sighting",
+        "width": 203,
+        "unresolved": []
+      },
+      {
+        "text": "into your next teammate!",
+        "width": 130,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_EvsAlreadyReady",
+    "line": 977,
+    "text": "A CENTER tutor can prepare\\nyour {STR_VAR_1}'s EV spread.\\pThere is no EV training here; only\\nteam building and battle practice!$",
+    "lines": [
+      {
+        "text": "A CENTER tutor can prepare",
+        "width": 141,
+        "unresolved": []
+      },
+      {
+        "text": "your {STR_VAR_1}'s EV spread.",
+        "width": 172,
+        "unresolved": []
+      },
+      {
+        "text": "There is no EV training here; only",
+        "width": 172,
+        "unresolved": []
+      },
+      {
+        "text": "team building and battle practice!",
+        "width": 179,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_WonderIfLighthouseStartlesPokemon",
+    "line": 983,
+    "text": "The light of the lighthouse reaches\\ndozens of miles away.\\pI wonder if it doesn't startle POKéMON\\nin the sea.$",
+    "lines": [
+      {
+        "text": "The light of the lighthouse reaches",
+        "width": 186,
+        "unresolved": []
+      },
+      {
+        "text": "dozens of miles away.",
+        "width": 110,
+        "unresolved": []
+      },
+      {
+        "text": "I wonder if it doesn't startle POKéMON",
+        "width": 202,
+        "unresolved": []
+      },
+      {
+        "text": "in the sea.",
+        "width": 55,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_SeaweedFullOfLife",
+    "line": 989,
+    "text": "Ooh, look at this!\\pThe seaweed you can get around these\\nparts is fresh and full of life.\\pWhy, it looks like it can even rear up\\nand attack!$",
+    "lines": [
+      {
+        "text": "Ooh, look at this!",
+        "width": 90,
+        "unresolved": []
+      },
+      {
+        "text": "The seaweed you can get around these",
+        "width": 197,
+        "unresolved": []
+      },
+      {
+        "text": "parts is fresh and full of life.",
+        "width": 159,
+        "unresolved": []
+      },
+      {
+        "text": "Why, it looks like it can even rear up",
+        "width": 189,
+        "unresolved": []
+      },
+      {
+        "text": "and attack!",
+        "width": 61,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_HowTownIsBornAndGrows",
+    "line": 996,
+    "text": "Where the water is clean, the fruits\\nof bountiful harvest gather.\\pAnd where people gather, a market\\nsoon starts.\\pThat is how a town is born and grows.$",
+    "lines": [
+      {
+        "text": "Where the water is clean, the fruits",
+        "width": 186,
+        "unresolved": []
+      },
+      {
+        "text": "of bountiful harvest gather.",
+        "width": 150,
+        "unresolved": []
+      },
+      {
+        "text": "And where people gather, a market",
+        "width": 175,
+        "unresolved": []
+      },
+      {
+        "text": "soon starts.",
+        "width": 65,
+        "unresolved": []
+      },
+      {
+        "text": "That is how a town is born and grows.",
+        "width": 189,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_SlateportWonderfulPlace",
+    "line": 1003,
+    "text": "Shopping where you can breathe the\\nscent of the ocean…\\pSLATEPORT is such a wonderful place!$",
+    "lines": [
+      {
+        "text": "Shopping where you can breathe the",
+        "width": 185,
+        "unresolved": []
+      },
+      {
+        "text": "scent of the ocean…",
+        "width": 105,
+        "unresolved": []
+      },
+      {
+        "text": "SLATEPORT is such a wonderful place!",
+        "width": 192,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_BuyBricksSoDecorWontGetDirty",
+    "line": 1008,
+    "text": "If you put DOLLS or CUSHIONS on\\nthe floor, they'll get dirty.\\pI'm going to buy some BRICKS so my\\nDOLLS and CUSHIONS won't get dirty\\lwhen I leave them out.$",
+    "lines": [
+      {
+        "text": "If you put DOLLS or CUSHIONS on",
+        "width": 167,
+        "unresolved": []
+      },
+      {
+        "text": "the floor, they'll get dirty.",
+        "width": 146,
+        "unresolved": []
+      },
+      {
+        "text": "I'm going to buy some BRICKS so my",
+        "width": 181,
+        "unresolved": []
+      },
+      {
+        "text": "DOLLS and CUSHIONS won't get dirty",
+        "width": 186,
+        "unresolved": []
+      },
+      {
+        "text": "when I leave them out.",
+        "width": 115,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_GoingToCompeteInBattleTent",
+    "line": 1015,
+    "text": "Wroooar! I'm going to compete in\\nthe BATTLE TENT, too!\\pBut before that, I need to catch\\nsome POKéMON!$",
+    "lines": [
+      {
+        "text": "Wroooar! I'm going to compete in",
+        "width": 169,
+        "unresolved": []
+      },
+      {
+        "text": "the BATTLE TENT, too!",
+        "width": 112,
+        "unresolved": []
+      },
+      {
+        "text": "But before that, I need to catch",
+        "width": 170,
+        "unresolved": []
+      },
+      {
+        "text": "some POKéMON!",
+        "width": 73,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_BushedHikingFromMauville",
+    "line": 1021,
+    "text": "Whew… I'm just bushed…\\pI hiked over from MAUVILLE CITY.\\nBut, boy, this city's huge.\\pIf I'd known this, I would've ridden\\nmy BIKE here.$",
+    "lines": [
+      {
+        "text": "Whew… I'm just bushed…",
+        "width": 122,
+        "unresolved": []
+      },
+      {
+        "text": "I hiked over from MAUVILLE CITY.",
+        "width": 170,
+        "unresolved": []
+      },
+      {
+        "text": "But, boy, this city's huge.",
+        "width": 137,
+        "unresolved": []
+      },
+      {
+        "text": "If I'd known this, I would've ridden",
+        "width": 188,
+        "unresolved": []
+      },
+      {
+        "text": "my BIKE here.",
+        "width": 68,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_EveryoneCallsHimCaptStern",
+    "line": 1028,
+    "text": "STERN, the fellow who built the\\nMUSEUM, also happens to be the leader\\lof an undersea exploration team.\\pSo, everyone calls him CAPT. STERN.$",
+    "lines": [
+      {
+        "text": "STERN, the fellow who built the",
+        "width": 160,
+        "unresolved": []
+      },
+      {
+        "text": "MUSEUM, also happens to be the leader",
+        "width": 196,
+        "unresolved": []
+      },
+      {
+        "text": "of an undersea exploration team.",
+        "width": 171,
+        "unresolved": []
+      },
+      {
+        "text": "So, everyone calls him CAPT. STERN.",
+        "width": 179,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_WhatsLongLineOverThere",
+    "line": 1034,
+    "text": "What is that over there?\\nThat long line…$",
+    "lines": [
+      {
+        "text": "What is that over there?",
+        "width": 128,
+        "unresolved": []
+      },
+      {
+        "text": "That long line…",
+        "width": 78,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_VisitedMuseumOften",
+    "line": 1038,
+    "text": "When I was a child, I visited\\nthe MUSEUM often.\\pI used to dream about the mysteries of\\nthe sea after seeing the exhibits.$",
+    "lines": [
+      {
+        "text": "When I was a child, I visited",
+        "width": 145,
+        "unresolved": []
+      },
+      {
+        "text": "the MUSEUM often.",
+        "width": 93,
+        "unresolved": []
+      },
+      {
+        "text": "I used to dream about the mysteries of",
+        "width": 203,
+        "unresolved": []
+      },
+      {
+        "text": "the sea after seeing the exhibits.",
+        "width": 179,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_QuitPushing",
+    "line": 1044,
+    "text": "Hey, there! Quit pushing!\\nThis is the line, can't you see?$",
+    "lines": [
+      {
+        "text": "Hey, there! Quit pushing!",
+        "width": 129,
+        "unresolved": []
+      },
+      {
+        "text": "This is the line, can't you see?",
+        "width": 163,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_AquaHasPolicy",
+    "line": 1048,
+    "text": "TEAM AQUA has a policy of\\nassembling and dispersing at\\lthe operation site.$",
+    "lines": [
+      {
+        "text": "TEAM AQUA has a policy of",
+        "width": 131,
+        "unresolved": []
+      },
+      {
+        "text": "assembling and dispersing at",
+        "width": 150,
+        "unresolved": []
+      },
+      {
+        "text": "the operation site.",
+        "width": 100,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_BossIsBrilliant",
+    "line": 1053,
+    "text": "Our BOSS is brilliant.\\pWhat would he want to do with\\na MUSEUM now?$",
+    "lines": [
+      {
+        "text": "Our BOSS is brilliant.",
+        "width": 108,
+        "unresolved": []
+      },
+      {
+        "text": "What would he want to do with",
+        "width": 152,
+        "unresolved": []
+      },
+      {
+        "text": "a MUSEUM now?",
+        "width": 72,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_WhatsNewSchemeIWonder",
+    "line": 1058,
+    "text": "What's the new scheme, I wonder?\\pOur BOSS is scary when he's mad, so\\nI'd better not screw things up…$",
+    "lines": [
+      {
+        "text": "What's the new scheme, I wonder?",
+        "width": 173,
+        "unresolved": []
+      },
+      {
+        "text": "Our BOSS is scary when he's mad, so",
+        "width": 182,
+        "unresolved": []
+      },
+      {
+        "text": "I'd better not screw things up…",
+        "width": 167,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_ShouldTakeItAll",
+    "line": 1063,
+    "text": "If there's something we need in\\nthe MUSEUM, we should take it all!$",
+    "lines": [
+      {
+        "text": "If there's something we need in",
+        "width": 166,
+        "unresolved": []
+      },
+      {
+        "text": "the MUSEUM, we should take it all!",
+        "width": 173,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_DontButtIn",
+    "line": 1067,
+    "text": "Hey, you there!\\nDon't butt in!$",
+    "lines": [
+      {
+        "text": "Hey, you there!",
+        "width": 78,
+        "unresolved": []
+      },
+      {
+        "text": "Don't butt in!",
+        "width": 74,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_RemindsMeOfLongLineForGames",
+    "line": 1071,
+    "text": "A long line, huh?\\pIt reminds me of the times I lined up to\\nbuy smash-hit games…$",
+    "lines": [
+      {
+        "text": "A long line, huh?",
+        "width": 84,
+        "unresolved": []
+      },
+      {
+        "text": "It reminds me of the times I lined up to",
+        "width": 204,
+        "unresolved": []
+      },
+      {
+        "text": "buy smash-hit games…",
+        "width": 112,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_WhyAreWeLiningUp",
+    "line": 1076,
+    "text": "Why are we even lining up and paying?\\nWe should just march in!$",
+    "lines": [
+      {
+        "text": "Why are we even lining up and paying?",
+        "width": 192,
+        "unresolved": []
+      },
+      {
+        "text": "We should just march in!",
+        "width": 124,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_WhatDoYouWant",
+    "line": 1080,
+    "text": "What?\\nWhat do you want?$",
+    "lines": [
+      {
+        "text": "What?",
+        "width": 30,
+        "unresolved": []
+      },
+      {
+        "text": "What do you want?",
+        "width": 93,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_IllReadSignForYou",
+    "line": 1084,
+    "text": "You want to read this sign?\\nI'll read it for you!$",
+    "lines": [
+      {
+        "text": "You want to read this sign?",
+        "width": 142,
+        "unresolved": []
+      },
+      {
+        "text": "I'll read it for you!",
+        "width": 104,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_SaysSomethingLikeSeaIsEndless",
+    "line": 1088,
+    "text": "Let's see…\\pUm… I think it says something like\\n“the life in the sea is endless.”\\pYup, I'm pretty sure that's what\\nit says.$",
+    "lines": [
+      {
+        "text": "Let's see…",
+        "width": 57,
+        "unresolved": []
+      },
+      {
+        "text": "Um… I think it says something like",
+        "width": 176,
+        "unresolved": []
+      },
+      {
+        "text": "“the life in the sea is endless.”",
+        "width": 167,
+        "unresolved": []
+      },
+      {
+        "text": "Yup, I'm pretty sure that's what",
+        "width": 172,
+        "unresolved": []
+      },
+      {
+        "text": "it says.",
+        "width": 40,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_ShouldveBroughtMyGameBoy",
+    "line": 1095,
+    "text": "Grumble…\\pI should've brought my Game Boy\\nAdvance so I wouldn't get bored in line…\\pGrumble…$",
+    "lines": [
+      {
+        "text": "Grumble…",
+        "width": 45,
+        "unresolved": []
+      },
+      {
+        "text": "I should've brought my Game Boy",
+        "width": 168,
+        "unresolved": []
+      },
+      {
+        "text": "Advance so I wouldn't get bored in line…",
+        "width": 210,
+        "unresolved": []
+      },
+      {
+        "text": "Grumble…",
+        "width": 45,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_HotSpringsAfterOperation",
+    "line": 1101,
+    "text": "When this operation's over, I'll take\\nyou to a hot spring spa!\\pThat's what our leader said.\\nI can't wait!$",
+    "lines": [
+      {
+        "text": "When this operation's over, I'll take",
+        "width": 194,
+        "unresolved": []
+      },
+      {
+        "text": "you to a hot spring spa!",
+        "width": 124,
+        "unresolved": []
+      },
+      {
+        "text": "That's what our leader said.",
+        "width": 147,
+        "unresolved": []
+      },
+      {
+        "text": "I can't wait!",
+        "width": 68,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_SeaIsSoWet",
+    "line": 1107,
+    "text": "The sea is just so vast…\\pCould the sea have been made by\\nthe tears shed by POKéMON?$",
+    "lines": [
+      {
+        "text": "The sea is just so vast…",
+        "width": 126,
+        "unresolved": []
+      },
+      {
+        "text": "Could the sea have been made by",
+        "width": 166,
+        "unresolved": []
+      },
+      {
+        "text": "the tears shed by POKéMON?",
+        "width": 143,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_SinkOldBoats",
+    "line": 1112,
+    "text": "Do you know what they do with old\\nships that become too creaky to sail?\\pThey sink them in the sea so they\\nbecome habitats for POKéMON.$",
+    "lines": [
+      {
+        "text": "Do you know what they do with old",
+        "width": 173,
+        "unresolved": []
+      },
+      {
+        "text": "ships that become too creaky to sail?",
+        "width": 197,
+        "unresolved": []
+      },
+      {
+        "text": "They sink them in the sea so they",
+        "width": 173,
+        "unresolved": []
+      },
+      {
+        "text": "become habitats for POKéMON.",
+        "width": 153,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_BuyTooMuch",
+    "line": 1118,
+    "text": "Whenever I visit here, I get carried\\naway and buy too much.$",
+    "lines": [
+      {
+        "text": "Whenever I visit here, I get carried",
+        "width": 185,
+        "unresolved": []
+      },
+      {
+        "text": "away and buy too much.",
+        "width": 117,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_GetNameRaterToHelpYou",
+    "line": 1122,
+    "text": "If you want to change your POKéMON's\\nnickname, you'll have to get the NAME\\lRATER to help you.$",
+    "lines": [
+      {
+        "text": "If you want to change your POKéMON's",
+        "width": 197,
+        "unresolved": []
+      },
+      {
+        "text": "nickname, you'll have to get the NAME",
+        "width": 195,
+        "unresolved": []
+      },
+      {
+        "text": "RATER to help you.",
+        "width": 94,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_CantChangeTradeMonName",
+    "line": 1127,
+    "text": "Any POKéMON you get in a trade,\\nyou can't change its nickname.\\pThe original TRAINER's love for that\\nPOKéMON is in the nickname.$",
+    "lines": [
+      {
+        "text": "Any POKéMON you get in a trade,",
+        "width": 162,
+        "unresolved": []
+      },
+      {
+        "text": "you can't change its nickname.",
+        "width": 161,
+        "unresolved": []
+      },
+      {
+        "text": "The original TRAINER's love for that",
+        "width": 191,
+        "unresolved": []
+      },
+      {
+        "text": "POKéMON is in the nickname.",
+        "width": 141,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_BattleTentBuiltRecently",
+    "line": 1133,
+    "text": "Recently, a BATTLE TENT was built\\nin SLATEPORT.\\pGYMS are fun, but the BATTLE TENT's\\nawesome in its own way.\\pYou should go find tough POKéMON\\nfor the BATTLE TENT!$",
+    "lines": [
+      {
+        "text": "Recently, a BATTLE TENT was built",
+        "width": 174,
+        "unresolved": []
+      },
+      {
+        "text": "in SLATEPORT.",
+        "width": 70,
+        "unresolved": []
+      },
+      {
+        "text": "GYMS are fun, but the BATTLE TENT's",
+        "width": 188,
+        "unresolved": []
+      },
+      {
+        "text": "awesome in its own way.",
+        "width": 119,
+        "unresolved": []
+      },
+      {
+        "text": "You should go find tough POKéMON",
+        "width": 173,
+        "unresolved": []
+      },
+      {
+        "text": "for the BATTLE TENT!",
+        "width": 108,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_CaptSternBeingInterviewed",
+    "line": 1141,
+    "text": "I was hoping that it was a famous star\\nso I could get an autograph.\\pBut who's that being interviewed?\\nIsn't that CAPT. STERN?$",
+    "lines": [
+      {
+        "text": "I was hoping that it was a famous star",
+        "width": 199,
+        "unresolved": []
+      },
+      {
+        "text": "so I could get an autograph.",
+        "width": 147,
+        "unresolved": []
+      },
+      {
+        "text": "But who's that being interviewed?",
+        "width": 179,
+        "unresolved": []
+      },
+      {
+        "text": "Isn't that CAPT. STERN?",
+        "width": 126,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_InterviewerSoCool",
+    "line": 1147,
+    "text": "That lady interviewer is so cool\\nand pretty.\\pWhen I grow up, I'm going to be\\nan international journalist!$",
+    "lines": [
+      {
+        "text": "That lady interviewer is so cool",
+        "width": 165,
+        "unresolved": []
+      },
+      {
+        "text": "and pretty.",
+        "width": 59,
+        "unresolved": []
+      },
+      {
+        "text": "When I grow up, I'm going to be",
+        "width": 159,
+        "unresolved": []
+      },
+      {
+        "text": "an international journalist!",
+        "width": 147,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_SternSaysDiscoveredSomething",
+    "line": 1153,
+    "text": "CAPT. STERN says they discovered\\nsomething at the bottom of the sea.\\pI wonder what it is?\\nWhat could it be?$",
+    "lines": [
+      {
+        "text": "CAPT. STERN says they discovered",
+        "width": 174,
+        "unresolved": []
+      },
+      {
+        "text": "something at the bottom of the sea.",
+        "width": 187,
+        "unresolved": []
+      },
+      {
+        "text": "I wonder what it is?",
+        "width": 103,
+        "unresolved": []
+      },
+      {
+        "text": "What could it be?",
+        "width": 89,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_CaptainComeBackWithBigFish",
+    "line": 1159,
+    "text": "What's going on here?\\pDid the good CAPTAIN come back with\\na big fish from the ocean floor?$",
+    "lines": [
+      {
+        "text": "What's going on here?",
+        "width": 114,
+        "unresolved": []
+      },
+      {
+        "text": "Did the good CAPTAIN come back with",
+        "width": 188,
+        "unresolved": []
+      },
+      {
+        "text": "a big fish from the ocean floor?",
+        "width": 166,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_AmIOnTV",
+    "line": 1164,
+    "text": "Hey! Are you watching?\\nAm I on TV?$",
+    "lines": [
+      {
+        "text": "Hey! Are you watching?",
+        "width": 118,
+        "unresolved": []
+      },
+      {
+        "text": "Am I on TV?",
+        "width": 57,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_CaptainsACelebrity",
+    "line": 1168,
+    "text": "A TV interview! Here!\\nThe CAPTAIN's a celebrity!$",
+    "lines": [
+      {
+        "text": "A TV interview! Here!",
+        "width": 107,
+        "unresolved": []
+      },
+      {
+        "text": "The CAPTAIN's a celebrity!",
+        "width": 140,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_BigSmileForCamera",
+    "line": 1172,
+    "text": "TY: Okay, CAPT. STERN, a big smile\\nfor the camera!$",
+    "lines": [
+      {
+        "text": "TY: Okay, CAPT. STERN, a big smile",
+        "width": 168,
+        "unresolved": []
+      },
+      {
+        "text": "for the camera!",
+        "width": 80,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_MostInvaluableExperience",
+    "line": 1176,
+    "text": "GABBY: I see, I see. You've had a most\\ninvaluable experience…$",
+    "lines": [
+      {
+        "text": "GABBY: I see, I see. You've had a most",
+        "width": 195,
+        "unresolved": []
+      },
+      {
+        "text": "invaluable experience…",
+        "width": 120,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_SternMoveAheadWithExploration",
+    "line": 1180,
+    "text": "CAPT. STERN: Yes, indeed. We intend to\\nmove ahead with our exploration.$",
+    "lines": [
+      {
+        "text": "CAPT. STERN: Yes, indeed. We intend to",
+        "width": 194,
+        "unresolved": []
+      },
+      {
+        "text": "move ahead with our exploration.",
+        "width": 169,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_GabbyWonderfulThanksForInterview",
+    "line": 1184,
+    "text": "GABBY: That's wonderful, CAPT. STERN!\\nThank you for taking the time from\\lyour busy schedule to talk to us.\\pWe hope we can interview you again\\nwith news of more discoveries!$",
+    "lines": [
+      {
+        "text": "GABBY: That's wonderful, CAPT. STERN!",
+        "width": 196,
+        "unresolved": []
+      },
+      {
+        "text": "Thank you for taking the time from",
+        "width": 180,
+        "unresolved": []
+      },
+      {
+        "text": "your busy schedule to talk to us.",
+        "width": 172,
+        "unresolved": []
+      },
+      {
+        "text": "We hope we can interview you again",
+        "width": 179,
+        "unresolved": []
+      },
+      {
+        "text": "with news of more discoveries!",
+        "width": 158,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_SternWhewFirstInterview",
+    "line": 1191,
+    "text": "CAPT. STERN: Whew…\\pThat was my first time to be filmed for\\nTV. That was nerve-wracking.$",
+    "lines": [
+      {
+        "text": "CAPT. STERN: Whew…",
+        "width": 96,
+        "unresolved": []
+      },
+      {
+        "text": "That was my first time to be filmed for",
+        "width": 200,
+        "unresolved": []
+      },
+      {
+        "text": "TV. That was nerve-wracking.",
+        "width": 149,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_OhPlayerWeMadeDiscovery",
+    "line": 1196,
+    "text": "Oh! {PLAYER}{KUN}!\\nYou're looking great!\\pWe made a huge discovery on our last\\nseafloor exploration.\\pWe found an underwater cavern on\\nROUTE 128.\\pWe think it's the habitat of a POKéMON\\nthat's said to have been long extinct.$",
+    "lines": [
+      {
+        "text": "Oh! {PLAYER}{KUN}!",
+        "width": 65,
+        "unresolved": []
+      },
+      {
+        "text": "You're looking great!",
+        "width": 112,
+        "unresolved": []
+      },
+      {
+        "text": "We made a huge discovery on our last",
+        "width": 189,
+        "unresolved": []
+      },
+      {
+        "text": "seafloor exploration.",
+        "width": 112,
+        "unresolved": []
+      },
+      {
+        "text": "We found an underwater cavern on",
+        "width": 174,
+        "unresolved": []
+      },
+      {
+        "text": "ROUTE 128.",
+        "width": 54,
+        "unresolved": []
+      },
+      {
+        "text": "We think it's the habitat of a POKéMON",
+        "width": 201,
+        "unresolved": []
+      },
+      {
+        "text": "that's said to have been long extinct.",
+        "width": 201,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_AquaWillAssumeControlOfSubmarine",
+    "line": 1206,
+    "text": "Fufufu…\\nCAPT. STERN, I presume.\\pWe of TEAM AQUA will assume\\ncontrol of your submarine!\\pYour objections are meaningless!\\nWe expect your total cooperation!\\pFufufu…\\nJust watch and learn what TEAM\\lAQUA has planned!$",
+    "lines": [
+      {
+        "text": "Fufufu…",
+        "width": 42,
+        "unresolved": []
+      },
+      {
+        "text": "CAPT. STERN, I presume.",
+        "width": 119,
+        "unresolved": []
+      },
+      {
+        "text": "We of TEAM AQUA will assume",
+        "width": 141,
+        "unresolved": []
+      },
+      {
+        "text": "control of your submarine!",
+        "width": 138,
+        "unresolved": []
+      },
+      {
+        "text": "Your objections are meaningless!",
+        "width": 172,
+        "unresolved": []
+      },
+      {
+        "text": "We expect your total cooperation!",
+        "width": 178,
+        "unresolved": []
+      },
+      {
+        "text": "Fufufu…",
+        "width": 42,
+        "unresolved": []
+      },
+      {
+        "text": "Just watch and learn what TEAM",
+        "width": 162,
+        "unresolved": []
+      },
+      {
+        "text": "AQUA has planned!",
+        "width": 92,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_SternWhatWasAllThat",
+    "line": 1217,
+    "text": "CAPT. STERN: What was that all about?\\pIt sounded like someone using\\na megaphone…\\pWhere did it come from?$",
+    "lines": [
+      {
+        "text": "CAPT. STERN: What was that all about?",
+        "width": 194,
+        "unresolved": []
+      },
+      {
+        "text": "It sounded like someone using",
+        "width": 156,
+        "unresolved": []
+      },
+      {
+        "text": "a megaphone…",
+        "width": 69,
+        "unresolved": []
+      },
+      {
+        "text": "Where did it come from?",
+        "width": 120,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_FromHarborTryingToTakeSub",
+    "line": 1223,
+    "text": "It's from the HARBOR!\\pThe submarine!\\nThey're trying to take it!$",
+    "lines": [
+      {
+        "text": "It's from the HARBOR!",
+        "width": 114,
+        "unresolved": []
+      },
+      {
+        "text": "The submarine!",
+        "width": 76,
+        "unresolved": []
+      },
+      {
+        "text": "They're trying to take it!",
+        "width": 136,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_PleaseComeWithMe",
+    "line": 1228,
+    "text": "{PLAYER}{KUN}!\\nPlease, come with me!$",
+    "lines": [
+      {
+        "text": "{PLAYER}{KUN}!",
+        "width": 46,
+        "unresolved": []
+      },
+      {
+        "text": "Please, come with me!",
+        "width": 108,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_BattleTentSign",
+    "line": 1232,
+    "text": "BATTLE TENT SLATEPORT SITE\\n“Find it! The ultimate POKéMON!”$",
+    "lines": [
+      {
+        "text": "BATTLE TENT SLATEPORT SITE",
+        "width": 147,
+        "unresolved": []
+      },
+      {
+        "text": "“Find it! The ultimate POKéMON!”",
+        "width": 168,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_SternsShipyardWantedSign",
+    "line": 1236,
+    "text": "STERN'S SHIPYARD\\p“Wanted: A sailor capable of sailing\\nin all currents.”$",
+    "lines": [
+      {
+        "text": "STERN'S SHIPYARD",
+        "width": 93,
+        "unresolved": []
+      },
+      {
+        "text": "“Wanted: A sailor capable of sailing",
+        "width": 185,
+        "unresolved": []
+      },
+      {
+        "text": "in all currents.”",
+        "width": 85,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_SternsShipyardNearsCompletion",
+    "line": 1241,
+    "text": "STERN'S SHIPYARD\\p“The ferry S.S. TIDAL nears\\ncompletion for serving the ports of\\lSLATEPORT and LILYCOVE.”$",
+    "lines": [
+      {
+        "text": "STERN'S SHIPYARD",
+        "width": 93,
+        "unresolved": []
+      },
+      {
+        "text": "“The ferry S.S. TIDAL nears",
+        "width": 141,
+        "unresolved": []
+      },
+      {
+        "text": "completion for serving the ports of",
+        "width": 186,
+        "unresolved": []
+      },
+      {
+        "text": "SLATEPORT and LILYCOVE.”",
+        "width": 135,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_SternsShipyardFerryComplete",
+    "line": 1247,
+    "text": "STERN'S SHIPYARD\\p“Boarding of the SLATEPORT-LILYCOVE\\nferry S.S. TIDAL is handled at the\\lHARBOR.”$",
+    "lines": [
+      {
+        "text": "STERN'S SHIPYARD",
+        "width": 93,
+        "unresolved": []
+      },
+      {
+        "text": "“Boarding of the SLATEPORT-LILYCOVE",
+        "width": 198,
+        "unresolved": []
+      },
+      {
+        "text": "ferry S.S. TIDAL is handled at the",
+        "width": 174,
+        "unresolved": []
+      },
+      {
+        "text": "HARBOR.”",
+        "width": 45,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_PokemonFanClubSign",
+    "line": 1253,
+    "text": "POKéMON FAN CLUB\\n“Calling all fans of POKéMON!”$",
+    "lines": [
+      {
+        "text": "POKéMON FAN CLUB",
+        "width": 90,
+        "unresolved": []
+      },
+      {
+        "text": "“Calling all fans of POKéMON!”",
+        "width": 156,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_OceanicMuseumSign",
+    "line": 1257,
+    "text": "“The endless sea sustains\\nall life.”\\pOCEANIC MUSEUM$",
+    "lines": [
+      {
+        "text": "“The endless sea sustains",
+        "width": 137,
+        "unresolved": []
+      },
+      {
+        "text": "all life.”",
+        "width": 46,
+        "unresolved": []
+      },
+      {
+        "text": "OCEANIC MUSEUM",
+        "width": 81,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_CitySign",
+    "line": 1262,
+    "text": "SLATEPORT CITY\\p“The port where people and POKéMON\\ncross paths.”$",
+    "lines": [
+      {
+        "text": "SLATEPORT CITY",
+        "width": 81,
+        "unresolved": []
+      },
+      {
+        "text": "“The port where people and POKéMON",
+        "width": 185,
+        "unresolved": []
+      },
+      {
+        "text": "cross paths.”",
+        "width": 71,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_MarketSign",
+    "line": 1267,
+    "text": "SLATEPORT MARKET\\n“Specialty goods and local services!”$",
+    "lines": [
+      {
+        "text": "SLATEPORT MARKET",
+        "width": 93,
+        "unresolved": []
+      },
+      {
+        "text": "“Specialty goods and local services!”",
+        "width": 197,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_HarborFerryUnderConstruction",
+    "line": 1271,
+    "text": "SLATEPORT HARBOR\\p“The ferry S.S. TIDAL is under\\nconstruction in the SHIPYARD.\\p“Service is scheduled to begin\\nshortly.”$",
+    "lines": [
+      {
+        "text": "SLATEPORT HARBOR",
+        "width": 93,
+        "unresolved": []
+      },
+      {
+        "text": "“The ferry S.S. TIDAL is under",
+        "width": 154,
+        "unresolved": []
+      },
+      {
+        "text": "construction in the SHIPYARD.",
+        "width": 157,
+        "unresolved": []
+      },
+      {
+        "text": "“Service is scheduled to begin",
+        "width": 159,
+        "unresolved": []
+      },
+      {
+        "text": "shortly.”",
+        "width": 48,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_HarborSign",
+    "line": 1278,
+    "text": "SLATEPORT HARBOR\\p“Enjoy a delightful cruise on\\nthe ferry S.S. TIDAL.”$",
+    "lines": [
+      {
+        "text": "SLATEPORT HARBOR",
+        "width": 93,
+        "unresolved": []
+      },
+      {
+        "text": "“Enjoy a delightful cruise on",
+        "width": 152,
+        "unresolved": []
+      },
+      {
+        "text": "the ferry S.S. TIDAL.”",
+        "width": 112,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_NameRatersHouseSign",
+    "line": 1283,
+    "text": "NAME RATER'S HOUSE\\n“POKéMON nicknames rated.”$",
+    "lines": [
+      {
+        "text": "NAME RATER'S HOUSE",
+        "width": 102,
+        "unresolved": []
+      },
+      {
+        "text": "“POKéMON nicknames rated.”",
+        "width": 144,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_ExplainBerries",
+    "line": 1287,
+    "text": "If a wild POKéMON gets hurt, it heals\\nitself by chewing on BERRIES.\\pDid you know that?\\pSomebody saw that and got the idea\\nof making medicine from BERRIES.\\pDid you know that?\\pTo turn BERRIES into medicine,\\nthey must be crushed into powder.\\pDid you know that?\\pYou seem to have an interest\\nin BERRIES!\\pI've got something good for someone\\nlike you.$",
+    "lines": [
+      {
+        "text": "If a wild POKéMON gets hurt, it heals",
+        "width": 189,
+        "unresolved": []
+      },
+      {
+        "text": "itself by chewing on BERRIES.",
+        "width": 153,
+        "unresolved": []
+      },
+      {
+        "text": "Did you know that?",
+        "width": 97,
+        "unresolved": []
+      },
+      {
+        "text": "Somebody saw that and got the idea",
+        "width": 184,
+        "unresolved": []
+      },
+      {
+        "text": "of making medicine from BERRIES.",
+        "width": 170,
+        "unresolved": []
+      },
+      {
+        "text": "Did you know that?",
+        "width": 97,
+        "unresolved": []
+      },
+      {
+        "text": "To turn BERRIES into medicine,",
+        "width": 158,
+        "unresolved": []
+      },
+      {
+        "text": "they must be crushed into powder.",
+        "width": 176,
+        "unresolved": []
+      },
+      {
+        "text": "Did you know that?",
+        "width": 97,
+        "unresolved": []
+      },
+      {
+        "text": "You seem to have an interest",
+        "width": 150,
+        "unresolved": []
+      },
+      {
+        "text": "in BERRIES!",
+        "width": 59,
+        "unresolved": []
+      },
+      {
+        "text": "I've got something good for someone",
+        "width": 192,
+        "unresolved": []
+      },
+      {
+        "text": "like you.",
+        "width": 44,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_PowderJarSentToPC",
+    "line": 1302,
+    "text": "Your KEY ITEMS pocket is full, so the\\nPOWDER JAR was sent to your PC.$",
+    "lines": [
+      {
+        "text": "Your KEY ITEMS pocket is full, so the",
+        "width": 191,
+        "unresolved": []
+      },
+      {
+        "text": "POWDER JAR was sent to your PC.",
+        "width": 164,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_PowderJarNoRoom",
+    "line": 1306,
+    "text": "Your KEY ITEMS pocket and PC are full.\\nMake room, then return for the jar.$",
+    "lines": [
+      {
+        "text": "Your KEY ITEMS pocket and PC are full.",
+        "width": 198,
+        "unresolved": []
+      },
+      {
+        "text": "Make room, then return for the jar.",
+        "width": 180,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_ExplainBerryPowder",
+    "line": 1310,
+    "text": "I recently had machines installed at\\nPOKéMON CENTERS for crushing BERRIES.\\pThe BERRY CRUSH machines are at\\nthe DIRECT CORNER upstairs.\\pDid you know?\\pCould you make BERRY POWDER for\\nme using those machines?\\pI can make you all sorts of medicine\\nif you bring me lots of BERRY POWDER.$",
+    "lines": [
+      {
+        "text": "I recently had machines installed at",
+        "width": 190,
+        "unresolved": []
+      },
+      {
+        "text": "POKéMON CENTERS for crushing BERRIES.",
+        "width": 203,
+        "unresolved": []
+      },
+      {
+        "text": "The BERRY CRUSH machines are at",
+        "width": 168,
+        "unresolved": []
+      },
+      {
+        "text": "the DIRECT CORNER upstairs.",
+        "width": 147,
+        "unresolved": []
+      },
+      {
+        "text": "Did you know?",
+        "width": 70,
+        "unresolved": []
+      },
+      {
+        "text": "Could you make BERRY POWDER for",
+        "width": 168,
+        "unresolved": []
+      },
+      {
+        "text": "me using those machines?",
+        "width": 131,
+        "unresolved": []
+      },
+      {
+        "text": "I can make you all sorts of medicine",
+        "width": 186,
+        "unresolved": []
+      },
+      {
+        "text": "if you bring me lots of BERRY POWDER.",
+        "width": 191,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_BroughtMeSomeBerryPowder",
+    "line": 1321,
+    "text": "Have you brought me some\\nBERRY POWDER?$",
+    "lines": [
+      {
+        "text": "Have you brought me some",
+        "width": 131,
+        "unresolved": []
+      },
+      {
+        "text": "BERRY POWDER?",
+        "width": 75,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_ExchangeWhatWithIt",
+    "line": 1325,
+    "text": "What would you like to exchange\\nit with?$",
+    "lines": [
+      {
+        "text": "What would you like to exchange",
+        "width": 165,
+        "unresolved": []
+      },
+      {
+        "text": "it with?",
+        "width": 41,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_ExchangeBerryPowderForItem",
+    "line": 1329,
+    "text": "Okay, you want to exchange your\\nBERRY POWDER for one {STR_VAR_1}?$",
+    "lines": [
+      {
+        "text": "Okay, you want to exchange your",
+        "width": 167,
+        "unresolved": []
+      },
+      {
+        "text": "BERRY POWDER for one {STR_VAR_1}?",
+        "width": 197,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_DontHaveEnoughBerryPowder",
+    "line": 1333,
+    "text": "Oh, dear. You don't have enough\\nBERRY POWDER.$",
+    "lines": [
+      {
+        "text": "Oh, dear. You don't have enough",
+        "width": 164,
+        "unresolved": []
+      },
+      {
+        "text": "BERRY POWDER.",
+        "width": 72,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_FineBerryPowderTradeSomethingElse",
+    "line": 1337,
+    "text": "This is fine BERRY POWDER.\\nIt will make excellent medicine.\\pWould you like to trade more of your\\nBERRY POWDER for something else?$",
+    "lines": [
+      {
+        "text": "This is fine BERRY POWDER.",
+        "width": 135,
+        "unresolved": []
+      },
+      {
+        "text": "It will make excellent medicine.",
+        "width": 163,
+        "unresolved": []
+      },
+      {
+        "text": "Would you like to trade more of your",
+        "width": 186,
+        "unresolved": []
+      },
+      {
+        "text": "BERRY POWDER for something else?",
+        "width": 175,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_WhenYouGetMoreBringItToMe",
+    "line": 1343,
+    "text": "Okay! When you get some more\\nBERRY POWDER, bring it to me, please!$",
+    "lines": [
+      {
+        "text": "Okay! When you get some more",
+        "width": 150,
+        "unresolved": []
+      },
+      {
+        "text": "BERRY POWDER, bring it to me, please!",
+        "width": 189,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_ComeBackToTradeBerryPowder",
+    "line": 1347,
+    "text": "Come back if you'd like to trade your\\nBERRY POWDER for some medicine.\\pI'm always running a bazaar here.\\pDid you know?$",
+    "lines": [
+      {
+        "text": "Come back if you'd like to trade your",
+        "width": 193,
+        "unresolved": []
+      },
+      {
+        "text": "BERRY POWDER for some medicine.",
+        "width": 166,
+        "unresolved": []
+      },
+      {
+        "text": "I'm always running a bazaar here.",
+        "width": 173,
+        "unresolved": []
+      },
+      {
+        "text": "Did you know?",
+        "width": 70,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_YouDroveTeamAquaAway",
+    "line": 1353,
+    "text": "SCOTT: Good to see you again!\\nWe met in PETALBURG.\\pI just saw TEAM AQUA rush out.\\nWas that your team's doing?$",
+    "lines": [
+      {
+        "text": "SCOTT: Good to see you again!",
+        "width": 152,
+        "unresolved": []
+      },
+      {
+        "text": "We met in PETALBURG.",
+        "width": 106,
+        "unresolved": []
+      },
+      {
+        "text": "I just saw TEAM AQUA rush out.",
+        "width": 157,
+        "unresolved": []
+      },
+      {
+        "text": "Was that your team's doing?",
+        "width": 147,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_MaybeThisTrainer",
+    "line": 1359,
+    "text": "SCOTT: Handling a surprise like\\nthat takes more than strong moves.\\lYou kept your team together.$",
+    "lines": [
+      {
+        "text": "SCOTT: Handling a surprise like",
+        "width": 159,
+        "unresolved": []
+      },
+      {
+        "text": "that takes more than strong moves.",
+        "width": 184,
+        "unresolved": []
+      },
+      {
+        "text": "You kept your team together.",
+        "width": 151,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_LetsRegisterEachOther",
+    "line": 1364,
+    "text": "SCOTT: I'd like to hear how your\\njourney goes. Let's register\\leach other in our POKéNAVS.$",
+    "lines": [
+      {
+        "text": "SCOTT: I'd like to hear how your",
+        "width": 165,
+        "unresolved": []
+      },
+      {
+        "text": "journey goes. Let's register",
+        "width": 150,
+        "unresolved": []
+      },
+      {
+        "text": "each other in our POKéNAVS.",
+        "width": 143,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_RegisteredScott",
+    "line": 1369,
+    "text": "Registered SCOTT\\nin the POKéNAV.$",
+    "lines": [
+      {
+        "text": "Registered SCOTT",
+        "width": 90,
+        "unresolved": []
+      },
+      {
+        "text": "in the POKéNAV.",
+        "width": 79,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_KeepEyeOnTrainersBeSeeingYou",
+    "line": 1373,
+    "text": "SCOTT: There are promising\\nTRAINERS all over HOENN. I have\\la few more stops to make.\\pKeep trying new plans,\\n{PLAYER}{KUN}. I'll be watching\\lfor your next BADGE!$",
+    "lines": [
+      {
+        "text": "SCOTT: There are promising",
+        "width": 137,
+        "unresolved": []
+      },
+      {
+        "text": "TRAINERS all over HOENN. I have",
+        "width": 163,
+        "unresolved": []
+      },
+      {
+        "text": "a few more stops to make.",
+        "width": 131,
+        "unresolved": []
+      },
+      {
+        "text": "Keep trying new plans,",
+        "width": 115,
+        "unresolved": []
+      },
+      {
+        "text": "{PLAYER}{KUN}. I'll be watching",
+        "width": 132,
+        "unresolved": []
+      },
+      {
+        "text": "for your next BADGE!",
+        "width": 107,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_TakingBattleTentChallenge",
+    "line": 1381,
+    "text": "SCOTT: Oh, hey!\\nIf it isn't {PLAYER}{KUN}!\\p{PLAYER}{KUN}, let me guess--you're going\\nto take the BATTLE TENT challenge?\\pYeah! That's a good idea!\\nThat's a really great idea!\\pAfter all, a tough TRAINER is\\nthe perfect fit for the BATTLE TENT!\\pGive it your best effort!$",
+    "lines": [
+      {
+        "text": "SCOTT: Oh, hey!",
+        "width": 76,
+        "unresolved": []
+      },
+      {
+        "text": "If it isn't {PLAYER}{KUN}!",
+        "width": 105,
+        "unresolved": []
+      },
+      {
+        "text": "{PLAYER}{KUN}, let me guess--you're going",
+        "width": 190,
+        "unresolved": []
+      },
+      {
+        "text": "to take the BATTLE TENT challenge?",
+        "width": 185,
+        "unresolved": []
+      },
+      {
+        "text": "Yeah! That's a good idea!",
+        "width": 132,
+        "unresolved": []
+      },
+      {
+        "text": "That's a really great idea!",
+        "width": 140,
+        "unresolved": []
+      },
+      {
+        "text": "After all, a tough TRAINER is",
+        "width": 149,
+        "unresolved": []
+      },
+      {
+        "text": "the perfect fit for the BATTLE TENT!",
+        "width": 192,
+        "unresolved": []
+      },
+      {
+        "text": "Give it your best effort!",
+        "width": 130,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_GretaChallenge",
+    "line": 1420,
+    "text": "I'm GRETA of the BATTLE ARENA.\\pA real match reveals mind, skill,\\nand body all at once. Show me yours!$",
+    "lines": [
+      {
+        "text": "I'm GRETA of the BATTLE ARENA.",
+        "width": 162,
+        "unresolved": []
+      },
+      {
+        "text": "A real match reveals mind, skill,",
+        "width": 163,
+        "unresolved": []
+      },
+      {
+        "text": "and body all at once. Show me yours!",
+        "width": 185,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_GretaDefeat",
+    "line": 1425,
+    "text": "All three were sharp. Nicely done!$",
+    "lines": [
+      {
+        "text": "All three were sharp. Nicely done!",
+        "width": 173,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_GretaDecline",
+    "line": 1428,
+    "text": "Return when mind, skill, and body are\\nready to be judged together.$",
+    "lines": [
+      {
+        "text": "Return when mind, skill, and body are",
+        "width": 188,
+        "unresolved": []
+      },
+      {
+        "text": "ready to be judged together.",
+        "width": 150,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_GretaAfter",
+    "line": 1432,
+    "text": "That GENGARITE marks a contender.\\nBring it to the BATTLE FRONTIER.$",
+    "lines": [
+      {
+        "text": "That GENGARITE marks a contender.",
+        "width": 181,
+        "unresolved": []
+      },
+      {
+        "text": "Bring it to the BATTLE FRONTIER.",
+        "width": 169,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_KnuckleGuardClosed",
+    "line": 1466,
+    "text": "ROUTE 110 is closed while the CYCLING\\nROAD crew resurfaces the trail.\\pThe LEAGUE lets certified TRAINERS\\nthrough. BRAWLY's KNUCKLE BADGE\\lcounts.$",
+    "lines": [
+      {
+        "text": "ROUTE 110 is closed while the CYCLING",
+        "width": 196,
+        "unresolved": []
+      },
+      {
+        "text": "ROAD crew resurfaces the trail.",
+        "width": 163,
+        "unresolved": []
+      },
+      {
+        "text": "The LEAGUE lets certified TRAINERS",
+        "width": 185,
+        "unresolved": []
+      },
+      {
+        "text": "through. BRAWLY's KNUCKLE BADGE",
+        "width": 173,
+        "unresolved": []
+      },
+      {
+        "text": "counts.",
+        "width": 39,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_BrawlyAtMuseum",
+    "line": 1482,
+    "text": "BRAWLY is in the queue outside the\\nOCEANIC MUSEUM. Ask him to go home.\\pThen sail back with MR. BRINEY and\\nchallenge DEWFORD GYM.$",
+    "lines": [
+      {
+        "text": "BRAWLY is in the queue outside the",
+        "width": 180,
+        "unresolved": []
+      },
+      {
+        "text": "OCEANIC MUSEUM. Ask him to go home.",
+        "width": 184,
+        "unresolved": []
+      },
+      {
+        "text": "Then sail back with MR. BRINEY and",
+        "width": 177,
+        "unresolved": []
+      },
+      {
+        "text": "challenge DEWFORD GYM.",
+        "width": 119,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_BrawlyBackInDewford",
+    "line": 1488,
+    "text": "BRAWLY has returned to DEWFORD GYM.\\nChallenge him for the KNUCKLE BADGE.\\pMR. BRINEY's boat is on ROUTE 109,\\nsouth of SLATEPORT.$",
+    "lines": [
+      {
+        "text": "BRAWLY has returned to DEWFORD GYM.",
+        "width": 190,
+        "unresolved": []
+      },
+      {
+        "text": "Challenge him for the KNUCKLE BADGE.",
+        "width": 191,
+        "unresolved": []
+      },
+      {
+        "text": "MR. BRINEY's boat is on ROUTE 109,",
+        "width": 178,
+        "unresolved": []
+      },
+      {
+        "text": "south of SLATEPORT.",
+        "width": 105,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_KnuckleGuardTrigger",
+    "line": 1494,
+    "text": "Whoa, not past the cones! ROUTE 110\\nis closed until you hold the\\lKNUCKLE BADGE.$",
+    "lines": [
+      {
+        "text": "Whoa, not past the cones! ROUTE 110",
+        "width": 187,
+        "unresolved": []
+      },
+      {
+        "text": "is closed until you hold the",
+        "width": 143,
+        "unresolved": []
+      },
+      {
+        "text": "KNUCKLE BADGE.",
+        "width": 78,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_BattleTentCorridor/scripts.inc",
+    "label": "SlateportCity_ContestHall_Text_AdviceForContests",
+    "line": 154,
+    "text": "Want a tasty little bit of advice\\nfor CONTESTS?\\pUsing a certain move after another\\ncertain kind of move sometimes gets\\lyou extra attention.\\pIf you know what you're doing,\\nyou can score big in appeal.\\pOf course, your opponents might try\\ndisrupting your POKéMON's showing.$",
+    "lines": [
+      {
+        "text": "Want a tasty little bit of advice",
+        "width": 170,
+        "unresolved": []
+      },
+      {
+        "text": "for CONTESTS?",
+        "width": 74,
+        "unresolved": []
+      },
+      {
+        "text": "Using a certain move after another",
+        "width": 182,
+        "unresolved": []
+      },
+      {
+        "text": "certain kind of move sometimes gets",
+        "width": 188,
+        "unresolved": []
+      },
+      {
+        "text": "you extra attention.",
+        "width": 108,
+        "unresolved": []
+      },
+      {
+        "text": "If you know what you're doing,",
+        "width": 159,
+        "unresolved": []
+      },
+      {
+        "text": "you can score big in appeal.",
+        "width": 143,
+        "unresolved": []
+      },
+      {
+        "text": "Of course, your opponents might try",
+        "width": 187,
+        "unresolved": []
+      },
+      {
+        "text": "disrupting your POKéMON's showing.",
+        "width": 184,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_BattleTentCorridor/scripts.inc",
+    "label": "SlateportCity_ContestHall_Text_MyPapaIsContestJudge",
+    "line": 166,
+    "text": "My papa, he's a CONTEST JUDGE.\\pI wonder what I should be when I\\ngrow up, a JUDGE or a GYM LEADER?$",
+    "lines": [
+      {
+        "text": "My papa, he's a CONTEST JUDGE.",
+        "width": 159,
+        "unresolved": []
+      },
+      {
+        "text": "I wonder what I should be when I",
+        "width": 168,
+        "unresolved": []
+      },
+      {
+        "text": "grow up, a JUDGE or a GYM LEADER?",
+        "width": 172,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_BattleTentCorridor/scripts.inc",
+    "label": "SlateportCity_ContestHall_Text_ImLikeMajorlyCheesed",
+    "line": 172,
+    "text": "Hey, man, I'm like majorly cheesed,\\nyou know. Like, you know, I just\\lwanted to know why my POKéMON\\lnever won, you know, like, hey?\\pSo, like, I gave the JUDGE my two\\ncents, you know, they're free.\\pAnd he wouldn't hear me out, like, hey!\\nSo, like, total bummer, man!\\pHey, like, you! Zip it, you know?\\nJust, you know, take this!$",
+    "lines": [
+      {
+        "text": "Hey, man, I'm like majorly cheesed,",
+        "width": 178,
+        "unresolved": []
+      },
+      {
+        "text": "you know. Like, you know, I just",
+        "width": 162,
+        "unresolved": []
+      },
+      {
+        "text": "wanted to know why my POKéMON",
+        "width": 159,
+        "unresolved": []
+      },
+      {
+        "text": "never won, you know, like, hey?",
+        "width": 157,
+        "unresolved": []
+      },
+      {
+        "text": "So, like, I gave the JUDGE my two",
+        "width": 167,
+        "unresolved": []
+      },
+      {
+        "text": "cents, you know, they're free.",
+        "width": 157,
+        "unresolved": []
+      },
+      {
+        "text": "And he wouldn't hear me out, like, hey!",
+        "width": 198,
+        "unresolved": []
+      },
+      {
+        "text": "So, like, total bummer, man!",
+        "width": 138,
+        "unresolved": []
+      },
+      {
+        "text": "Hey, like, you! Zip it, you know?",
+        "width": 161,
+        "unresolved": []
+      },
+      {
+        "text": "Just, you know, take this!",
+        "width": 134,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_BattleTentCorridor/scripts.inc",
+    "label": "SlateportCity_ContestHall_Text_ExplainTorment",
+    "line": 185,
+    "text": "That move the tutor teaches, like,\\nTORMENT? You hearing me?\\pLike, it won't let the other guy\\nuse the same move twice in a row, see?\\pHey, now, you listen here, like,\\nI'm not laying a torment on you!$",
+    "lines": [
+      {
+        "text": "That move the tutor teaches, like,",
+        "width": 178,
+        "unresolved": []
+      },
+      {
+        "text": "TORMENT? You hearing me?",
+        "width": 132,
+        "unresolved": []
+      },
+      {
+        "text": "Like, it won't let the other guy",
+        "width": 164,
+        "unresolved": []
+      },
+      {
+        "text": "use the same move twice in a row, see?",
+        "width": 196,
+        "unresolved": []
+      },
+      {
+        "text": "Hey, now, you listen here, like,",
+        "width": 156,
+        "unresolved": []
+      },
+      {
+        "text": "I'm not laying a torment on you!",
+        "width": 167,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_BattleTentCorridor/scripts.inc",
+    "label": "SlateportCity_ContestHall_Text_MCStepUpTakePartInContest",
+    "line": 194,
+    "text": "MC: Oh, my, my!\\nNow isn't that a dandy of a POKéMON?\\pPlease! Do step right up and take\\npart in our splendid CONTESTS!\\pYou'll do well! I'm sure of it!\\nMy eyes have never failed me!$",
+    "lines": [
+      {
+        "text": "MC: Oh, my, my!",
+        "width": 70,
+        "unresolved": []
+      },
+      {
+        "text": "Now isn't that a dandy of a POKéMON?",
+        "width": 193,
+        "unresolved": []
+      },
+      {
+        "text": "Please! Do step right up and take",
+        "width": 173,
+        "unresolved": []
+      },
+      {
+        "text": "part in our splendid CONTESTS!",
+        "width": 158,
+        "unresolved": []
+      },
+      {
+        "text": "You'll do well! I'm sure of it!",
+        "width": 153,
+        "unresolved": []
+      },
+      {
+        "text": "My eyes have never failed me!",
+        "width": 152,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_BattleTentCorridor/scripts.inc",
+    "label": "SlateportCity_ContestHall_Text_JudgeWouldntDoToMissContest",
+    "line": 203,
+    "text": "JUDGE: Well, hello there!\\nI see that you're a TRAINER!\\pThen, it just wouldn't do for you\\nto miss a POKéMON CONTEST!\\pGet a CONTEST PASS in VERDANTURF\\nCITY and enter anytime!$",
+    "lines": [
+      {
+        "text": "JUDGE: Well, hello there!",
+        "width": 124,
+        "unresolved": []
+      },
+      {
+        "text": "I see that you're a TRAINER!",
+        "width": 150,
+        "unresolved": []
+      },
+      {
+        "text": "Then, it just wouldn't do for you",
+        "width": 171,
+        "unresolved": []
+      },
+      {
+        "text": "to miss a POKéMON CONTEST!",
+        "width": 140,
+        "unresolved": []
+      },
+      {
+        "text": "Get a CONTEST PASS in VERDANTURF",
+        "width": 175,
+        "unresolved": []
+      },
+      {
+        "text": "CITY and enter anytime!",
+        "width": 124,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_BattleTentCorridor/scripts.inc",
+    "label": "SlateportCity_ContestHall_Text_ItsAppealTime",
+    "line": 212,
+    "text": "It's appeal time!\\nWhat should I lead with?$",
+    "lines": [
+      {
+        "text": "It's appeal time!",
+        "width": 90,
+        "unresolved": []
+      },
+      {
+        "text": "What should I lead with?",
+        "width": 126,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_BattleTentCorridor/scripts.inc",
+    "label": "SlateportCity_ContestHall_Text_DidntPayAttentionToAppeal",
+    "line": 217,
+    "text": "They didn't pay much attention to\\nmy POKéMON's appeal…\\pHumph, that JUDGE, he doesn't know\\na good thing when he sees it.$",
+    "lines": [
+      {
+        "text": "They didn't pay much attention to",
+        "width": 179,
+        "unresolved": []
+      },
+      {
+        "text": "my POKéMON's appeal…",
+        "width": 112,
+        "unresolved": []
+      },
+      {
+        "text": "Humph, that JUDGE, he doesn't know",
+        "width": 183,
+        "unresolved": []
+      },
+      {
+        "text": "a good thing when he sees it.",
+        "width": 149,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_BattleTentCorridor/scripts.inc",
+    "label": "SlateportCity_ContestHall_Text_RewardWithSageAdvice",
+    "line": 224,
+    "text": "Oh, hi! You must be a serious fan to get\\nthis close to the action.\\pI'll reward your enthusiasm with\\nthis sage advice.\\pIf a move goes over really well,\\nthe audience will get excited.\\pThe POKéMON that makes its appeal\\nright when everyone's excited…\\pWell, you'd think something good has\\nto happen!$",
+    "lines": [
+      {
+        "text": "Oh, hi! You must be a serious fan to get",
+        "width": 203,
+        "unresolved": []
+      },
+      {
+        "text": "this close to the action.",
+        "width": 129,
+        "unresolved": []
+      },
+      {
+        "text": "I'll reward your enthusiasm with",
+        "width": 169,
+        "unresolved": []
+      },
+      {
+        "text": "this sage advice.",
+        "width": 89,
+        "unresolved": []
+      },
+      {
+        "text": "If a move goes over really well,",
+        "width": 161,
+        "unresolved": []
+      },
+      {
+        "text": "the audience will get excited.",
+        "width": 155,
+        "unresolved": []
+      },
+      {
+        "text": "The POKéMON that makes its appeal",
+        "width": 179,
+        "unresolved": []
+      },
+      {
+        "text": "right when everyone's excited…",
+        "width": 165,
+        "unresolved": []
+      },
+      {
+        "text": "Well, you'd think something good has",
+        "width": 190,
+        "unresolved": []
+      },
+      {
+        "text": "to happen!",
+        "width": 55,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_BattleTentCorridor/scripts.inc",
+    "label": "SlateportCity_ContestHall_Text_MoreFreakedOutThanMon",
+    "line": 237,
+    "text": "I can't do this! I'm more freaked out\\nthan my POKéMON.\\pI'm shivering and my heart is racing!$",
+    "lines": [
+      {
+        "text": "I can't do this! I'm more freaked out",
+        "width": 195,
+        "unresolved": []
+      },
+      {
+        "text": "than my POKéMON.",
+        "width": 87,
+        "unresolved": []
+      },
+      {
+        "text": "I'm shivering and my heart is racing!",
+        "width": 191,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_BattleTentCorridor/scripts.inc",
+    "label": "SlateportCity_ContestHall_Text_BattleAndContestAlike",
+    "line": 243,
+    "text": "A battle and a CONTEST aren't the\\nsame, but they are alike, too.\\pYou need to work hard and believe\\nin the POKéMON you've raised.$",
+    "lines": [
+      {
+        "text": "A battle and a CONTEST aren't the",
+        "width": 177,
+        "unresolved": []
+      },
+      {
+        "text": "same, but they are alike, too.",
+        "width": 151,
+        "unresolved": []
+      },
+      {
+        "text": "You need to work hard and believe",
+        "width": 174,
+        "unresolved": []
+      },
+      {
+        "text": "in the POKéMON you've raised.",
+        "width": 154,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_BattleTentCorridor/scripts.inc",
+    "label": "SlateportCity_ContestHall_Text_MonLooksOnTopOfGame",
+    "line": 250,
+    "text": "That POKéMON looks like it's on top\\nof its game, huh?\\pA POKéMON that does good in the\\nsecondary judging seems to be more\\lrelaxed when it's doing appeals.$",
+    "lines": [
+      {
+        "text": "That POKéMON looks like it's on top",
+        "width": 184,
+        "unresolved": []
+      },
+      {
+        "text": "of its game, huh?",
+        "width": 88,
+        "unresolved": []
+      },
+      {
+        "text": "A POKéMON that does good in the",
+        "width": 166,
+        "unresolved": []
+      },
+      {
+        "text": "secondary judging seems to be more",
+        "width": 184,
+        "unresolved": []
+      },
+      {
+        "text": "relaxed when it's doing appeals.",
+        "width": 168,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_BattleTentCorridor/scripts.inc",
+    "label": "SlateportCity_ContestHall_Text_MyMonBetterThanThatLot",
+    "line": 258,
+    "text": "Will you look at that sorry sight?\\pHeh, my POKéMON's absolutely better\\nthan that lot!$",
+    "lines": [
+      {
+        "text": "Will you look at that sorry sight?",
+        "width": 174,
+        "unresolved": []
+      },
+      {
+        "text": "Heh, my POKéMON's absolutely better",
+        "width": 190,
+        "unresolved": []
+      },
+      {
+        "text": "than that lot!",
+        "width": 74,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_BattleTentCorridor/scripts.inc",
+    "label": "SlateportCity_ContestHall_Text_GetUrgeToMoveWithMon",
+    "line": 264,
+    "text": "Don't you get the urge to move with\\nPOKéMON if they're putting on an\\lenergetic appeal?$",
+    "lines": [
+      {
+        "text": "Don't you get the urge to move with",
+        "width": 186,
+        "unresolved": []
+      },
+      {
+        "text": "POKéMON if they're putting on an",
+        "width": 172,
+        "unresolved": []
+      },
+      {
+        "text": "energetic appeal?",
+        "width": 94,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_BattleTentCorridor/scripts.inc",
+    "label": "SlateportCity_ContestHall_Text_HyperRankStage",
+    "line": 270,
+    "text": "POKéMON CONTESTS\\nHYPER RANK STAGE!$",
+    "lines": [
+      {
+        "text": "POKéMON CONTESTS",
+        "width": 93,
+        "unresolved": []
+      },
+      {
+        "text": "HYPER RANK STAGE!",
+        "width": 94,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_BattleTentLobby/scripts.inc",
+    "label": "SlateportCity_BattleTentLobby_Text_CouldntFindMonForMe",
+    "line": 272,
+    "text": "I couldn't settle on a team. Too\\nmany interesting choices!\\pThen I found this PRISM SCALE.\\nMaybe you can put it to use.$",
+    "lines": [
+      {
+        "text": "I couldn't settle on a team. Too",
+        "width": 167,
+        "unresolved": []
+      },
+      {
+        "text": "many interesting choices!",
+        "width": 135,
+        "unresolved": []
+      },
+      {
+        "text": "Then I found this PRISM SCALE.",
+        "width": 160,
+        "unresolved": []
+      },
+      {
+        "text": "Maybe you can put it to use.",
+        "width": 145,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_BattleTentLobby/scripts.inc",
+    "label": "SlateportCity_BattleTentLobby_Text_ExplainPrismScale",
+    "line": 277,
+    "text": "A Prism Scale evolves Feebas.\\nUse it from the Bag when ready.$",
+    "lines": [
+      {
+        "text": "A Prism Scale evolves Feebas.",
+        "width": 152,
+        "unresolved": []
+      },
+      {
+        "text": "Use it from the Bag when ready.",
+        "width": 161,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_BattleTentLobby/scripts.inc",
+    "label": "SlateportCity_BattleTentLobby_Text_IllTryUsingBugMons",
+    "line": 281,
+    "text": "I don't really like BUG POKéMON,\\nbut maybe I'll try using some for\\la change of pace.\\pWho knows, I might even get to like\\nthem!$",
+    "lines": [
+      {
+        "text": "I don't really like BUG POKéMON,",
+        "width": 165,
+        "unresolved": []
+      },
+      {
+        "text": "but maybe I'll try using some for",
+        "width": 172,
+        "unresolved": []
+      },
+      {
+        "text": "a change of pace.",
+        "width": 90,
+        "unresolved": []
+      },
+      {
+        "text": "Who knows, I might even get to like",
+        "width": 180,
+        "unresolved": []
+      },
+      {
+        "text": "them!",
+        "width": 28,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_BattleTentLobby/scripts.inc",
+    "label": "SlateportCity_BattleTentLobby_Text_BattleEvenWithoutToughMons",
+    "line": 288,
+    "text": "The CENTER can prepare any legal\\nset for free. Bring your own six\\land test them here.$",
+    "lines": [
+      {
+        "text": "The CENTER can prepare any legal",
+        "width": 171,
+        "unresolved": []
+      },
+      {
+        "text": "set for free. Bring your own six",
+        "width": 163,
+        "unresolved": []
+      },
+      {
+        "text": "and test them here.",
+        "width": 101,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_BattleTentLobby/scripts.inc",
+    "label": "SlateportCity_BattleTentLobby_Text_NiceIfMoreSelection",
+    "line": 292,
+    "text": "A new opponent every match! I keep\\nleaving with another idea for my\\lteam.$",
+    "lines": [
+      {
+        "text": "A new opponent every match! I keep",
+        "width": 183,
+        "unresolved": []
+      },
+      {
+        "text": "leaving with another idea for my",
+        "width": 167,
+        "unresolved": []
+      },
+      {
+        "text": "team.",
+        "width": 27,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_BattleTentLobby/scripts.inc",
+    "label": "SlateportCity_BattleTentLobby_Text_ExhibitionWelcome",
+    "line": 297,
+    "text": "The port brings together teams\\nfrom every shore.\\pThis is a six-Pokémon doubles\\nexhibition. You command every move\\land switch.\\pYour team uses the current cap.\\nDifficulty sets opponent levels.\\lEnter with six healthy partners?$",
+    "lines": [
+      {
+        "text": "The port brings together teams",
+        "width": 163,
+        "unresolved": []
+      },
+      {
+        "text": "from every shore.",
+        "width": 90,
+        "unresolved": []
+      },
+      {
+        "text": "This is a six-Pokémon doubles",
+        "width": 154,
+        "unresolved": []
+      },
+      {
+        "text": "exhibition. You command every move",
+        "width": 182,
+        "unresolved": []
+      },
+      {
+        "text": "and switch.",
+        "width": 58,
+        "unresolved": []
+      },
+      {
+        "text": "Your team uses the current cap.",
+        "width": 165,
+        "unresolved": []
+      },
+      {
+        "text": "Difficulty sets opponent levels.",
+        "width": 170,
+        "unresolved": []
+      },
+      {
+        "text": "Enter with six healthy partners?",
+        "width": 171,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_BattleTentLobby/scripts.inc",
+    "label": "SlateportCity_BattleTentLobby_Text_ExhibitionRules",
+    "line": 307,
+    "text": "LOCAL DOUBLES EXHIBITIONS\\pBring six healthy Pokémon, with no\\nEggs. Prepare freely before\\lentering.\\pThree victories earn one local\\nprize. Your party is restored\\lafter each exhibition.\\pThese results are separate from\\nthe CHAMPIONS CIRCUIT. You return\\lto this lobby afterward.$",
+    "lines": [
+      {
+        "text": "LOCAL DOUBLES EXHIBITIONS",
+        "width": 144,
+        "unresolved": []
+      },
+      {
+        "text": "Bring six healthy Pokémon, with no",
+        "width": 177,
+        "unresolved": []
+      },
+      {
+        "text": "Eggs. Prepare freely before",
+        "width": 144,
+        "unresolved": []
+      },
+      {
+        "text": "entering.",
+        "width": 48,
+        "unresolved": []
+      },
+      {
+        "text": "Three victories earn one local",
+        "width": 157,
+        "unresolved": []
+      },
+      {
+        "text": "prize. Your party is restored",
+        "width": 150,
+        "unresolved": []
+      },
+      {
+        "text": "after each exhibition.",
+        "width": 116,
+        "unresolved": []
+      },
+      {
+        "text": "These results are separate from",
+        "width": 168,
+        "unresolved": []
+      },
+      {
+        "text": "the CHAMPIONS CIRCUIT. You return",
+        "width": 181,
+        "unresolved": []
+      },
+      {
+        "text": "to this lobby afterward.",
+        "width": 126,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_Harbor/scripts.inc",
+    "label": "SlateportCity_Harbor_Text_FerryServiceUnavailable",
+    "line": 386,
+    "text": "The ferry opens to TRAINERS with\\nsix BADGES. Come back with the\\lFEATHER BADGE!$",
+    "lines": [
+      {
+        "text": "The ferry opens to TRAINERS with",
+        "width": 173,
+        "unresolved": []
+      },
+      {
+        "text": "six BADGES. Come back with the",
+        "width": 158,
+        "unresolved": []
+      },
+      {
+        "text": "FEATHER BADGE!",
+        "width": 79,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_Harbor/scripts.inc",
+    "label": "SlateportCity_Harbor_Text_MayISeeYourTicket",
+    "line": 391,
+    "text": "Hello, are you here for the ferry?\\nMay I confirm your ferry pass?$",
+    "lines": [
+      {
+        "text": "Hello, are you here for the ferry?",
+        "width": 174,
+        "unresolved": []
+      },
+      {
+        "text": "May I confirm your ferry pass?",
+        "width": 159,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_Harbor/scripts.inc",
+    "label": "SlateportCity_Harbor_Text_YouMustHaveTicket",
+    "line": 395,
+    "text": "You'll need a ferry pass. With\\nsix BADGES, speak to the sailor\\lat LILYCOVE HARBOR. He can\\lregister yours.$",
+    "lines": [
+      {
+        "text": "You'll need a ferry pass. With",
+        "width": 154,
+        "unresolved": []
+      },
+      {
+        "text": "six BADGES, speak to the sailor",
+        "width": 161,
+        "unresolved": []
+      },
+      {
+        "text": "at LILYCOVE HARBOR. He can",
+        "width": 141,
+        "unresolved": []
+      },
+      {
+        "text": "register yours.",
+        "width": 79,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_Harbor/scripts.inc",
+    "label": "SlateportCity_Harbor_Text_ConfirmedPassWhereTo",
+    "line": 401,
+    "text": "The attendant confirmed your ferry\\npass.\\pPerfect! That's all you need!\\pAnd where would you like to go?$",
+    "lines": [
+      {
+        "text": "The attendant confirmed your ferry",
+        "width": 186,
+        "unresolved": []
+      },
+      {
+        "text": "pass.",
+        "width": 27,
+        "unresolved": []
+      },
+      {
+        "text": "Perfect! That's all you need!",
+        "width": 153,
+        "unresolved": []
+      },
+      {
+        "text": "And where would you like to go?",
+        "width": 161,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_Harbor/scripts.inc",
+    "label": "SlateportCity_Harbor_Text_SailAnotherTime",
+    "line": 407,
+    "text": "Please sail with us another time!$",
+    "lines": [
+      {
+        "text": "Please sail with us another time!",
+        "width": 170,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_Harbor/scripts.inc",
+    "label": "SlateportCity_Harbor_Text_LilycoveItIs",
+    "line": 410,
+    "text": "LILYCOVE CITY it is, then!$",
+    "lines": [
+      {
+        "text": "LILYCOVE CITY it is, then!",
+        "width": 135,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_Harbor/scripts.inc",
+    "label": "SlateportCity_Harbor_Text_BattleFrontierItIs",
+    "line": 413,
+    "text": "BATTLE FRONTIER it is, then!$",
+    "lines": [
+      {
+        "text": "BATTLE FRONTIER it is, then!",
+        "width": 147,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_Harbor/scripts.inc",
+    "label": "SlateportCity_Harbor_Text_PleaseBoardFerry",
+    "line": 416,
+    "text": "Please board the ferry and wait for\\ndeparture.$",
+    "lines": [
+      {
+        "text": "Please board the ferry and wait for",
+        "width": 184,
+        "unresolved": []
+      },
+      {
+        "text": "departure.",
+        "width": 55,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_Harbor/scripts.inc",
+    "label": "SlateportCity_Harbor_Text_WhereWouldYouLikeToGo",
+    "line": 420,
+    "text": "Then, where would you like to go?$",
+    "lines": [
+      {
+        "text": "Then, where would you like to go?",
+        "width": 170,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_Harbor/scripts.inc",
+    "label": "SlateportCity_Harbor_Text_LoveToGoDeepUnderwaterSomeday",
+    "line": 423,
+    "text": "A journey to the bottom of the sea…\\nI wonder what it'd be like?\\pI'd love to go deep underwater like\\nthat someday.$",
+    "lines": [
+      {
+        "text": "A journey to the bottom of the sea…",
+        "width": 187,
+        "unresolved": []
+      },
+      {
+        "text": "I wonder what it'd be like?",
+        "width": 140,
+        "unresolved": []
+      },
+      {
+        "text": "I'd love to go deep underwater like",
+        "width": 184,
+        "unresolved": []
+      },
+      {
+        "text": "that someday.",
+        "width": 72,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_Harbor/scripts.inc",
+    "label": "SlateportCity_Harbor_Text_AbnormalWeather",
+    "line": 429,
+    "text": "For a ship to sail safely, we need to\\nknow about the weather!\\pSpeaking of weather, I heard something\\nfrom a guy at the WEATHER INSTITUTE.\\pHe was saying abnormal weather has\\nbeen reported all over the place!\\pYou should visit the WEATHER INSTITUTE\\nand ask around!$",
+    "lines": [
+      {
+        "text": "For a ship to sail safely, we need to",
+        "width": 186,
+        "unresolved": []
+      },
+      {
+        "text": "know about the weather!",
+        "width": 126,
+        "unresolved": []
+      },
+      {
+        "text": "Speaking of weather, I heard something",
+        "width": 204,
+        "unresolved": []
+      },
+      {
+        "text": "from a guy at the WEATHER INSTITUTE.",
+        "width": 194,
+        "unresolved": []
+      },
+      {
+        "text": "He was saying abnormal weather has",
+        "width": 183,
+        "unresolved": []
+      },
+      {
+        "text": "been reported all over the place!",
+        "width": 172,
+        "unresolved": []
+      },
+      {
+        "text": "You should visit the WEATHER INSTITUTE",
+        "width": 207,
+        "unresolved": []
+      },
+      {
+        "text": "and ask around!",
+        "width": 81,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_Harbor/scripts.inc",
+    "label": "SlateportCity_Harbor_Text_SubTooSmallForMe",
+    "line": 439,
+    "text": "I wanted to go with CAPT. STERN on\\nthe ocean floor exploration.\\pBut the sub's too small for me.\\pIf I squeezed in, there wouldn't be\\nany room for the CAPTAIN…$",
+    "lines": [
+      {
+        "text": "I wanted to go with CAPT. STERN on",
+        "width": 178,
+        "unresolved": []
+      },
+      {
+        "text": "the ocean floor exploration.",
+        "width": 148,
+        "unresolved": []
+      },
+      {
+        "text": "But the sub's too small for me.",
+        "width": 160,
+        "unresolved": []
+      },
+      {
+        "text": "If I squeezed in, there wouldn't be",
+        "width": 184,
+        "unresolved": []
+      },
+      {
+        "text": "any room for the CAPTAIN…",
+        "width": 136,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_Harbor/scripts.inc",
+    "label": "SlateportCity_Harbor_Text_SameThugsTriedToRobAtMuseum",
+    "line": 446,
+    "text": "CAPT. STERN: Those thugs…\\pThey're the same lot who tried to rob\\nthe DEVON GOODS at the MUSEUM.$",
+    "lines": [
+      {
+        "text": "CAPT. STERN: Those thugs…",
+        "width": 135,
+        "unresolved": []
+      },
+      {
+        "text": "They're the same lot who tried to rob",
+        "width": 194,
+        "unresolved": []
+      },
+      {
+        "text": "the DEVON GOODS at the MUSEUM.",
+        "width": 162,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_Harbor/scripts.inc",
+    "label": "SlateportCity_Harbor_Text_ArchieYouAgainHideoutInLilycove",
+    "line": 451,
+    "text": "ARCHIE: Oh?\\nNot you again…\\pYou are tenacious to track us here,\\nthat much I will give you.\\pBut now…\\nNo one can stop us! No one!\\pOr, will you follow us back to our\\nHIDEOUT in LILYCOVE CITY?\\pFwahahahaha…$",
+    "lines": [
+      {
+        "text": "ARCHIE: Oh?",
+        "width": 60,
+        "unresolved": []
+      },
+      {
+        "text": "Not you again…",
+        "width": 76,
+        "unresolved": []
+      },
+      {
+        "text": "You are tenacious to track us here,",
+        "width": 184,
+        "unresolved": []
+      },
+      {
+        "text": "that much I will give you.",
+        "width": 130,
+        "unresolved": []
+      },
+      {
+        "text": "But now…",
+        "width": 45,
+        "unresolved": []
+      },
+      {
+        "text": "No one can stop us! No one!",
+        "width": 140,
+        "unresolved": []
+      },
+      {
+        "text": "Or, will you follow us back to our",
+        "width": 168,
+        "unresolved": []
+      },
+      {
+        "text": "HIDEOUT in LILYCOVE CITY?",
+        "width": 139,
+        "unresolved": []
+      },
+      {
+        "text": "Fwahahahaha…",
+        "width": 72,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_Harbor/scripts.inc",
+    "label": "SlateportCity_Harbor_Text_CaptSternWhyStealMySubmarine",
+    "line": 462,
+    "text": "CAPT. STERN: They have my submarine.\\nThe cavern charts are aboard, too.\\pARCHIE named LILYCOVE. Reach the city\\nby heading east from ROUTE 121.\\pFind LILYCOVE's eastern beach. SURF\\nnorth to TEAM AQUA's cave hideout.\\pStop their launch before they reach\\nthe sleeping POKéMON on the seafloor.$",
+    "lines": [
+      {
+        "text": "CAPT. STERN: They have my submarine.",
+        "width": 189,
+        "unresolved": []
+      },
+      {
+        "text": "The cavern charts are aboard, too.",
+        "width": 179,
+        "unresolved": []
+      },
+      {
+        "text": "ARCHIE named LILYCOVE. Reach the city",
+        "width": 202,
+        "unresolved": []
+      },
+      {
+        "text": "by heading east from ROUTE 121.",
+        "width": 165,
+        "unresolved": []
+      },
+      {
+        "text": "Find LILYCOVE's eastern beach. SURF",
+        "width": 192,
+        "unresolved": []
+      },
+      {
+        "text": "north to TEAM AQUA's cave hideout.",
+        "width": 183,
+        "unresolved": []
+      },
+      {
+        "text": "Stop their launch before they reach",
+        "width": 188,
+        "unresolved": []
+      },
+      {
+        "text": "the sleeping POKéMON on the seafloor.",
+        "width": 197,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_Harbor/scripts.inc",
+    "label": "SlateportCity_Harbor_Text_TeamAquaLeftNeedDive",
+    "line": 472,
+    "text": "CAPT. STERN: AQUA left before you\\ncould stop them... Don't blame\\lyourself.\\pTo follow that submarine, you'll\\nneed DIVE registered, the MIND\\lBADGE, and a partner able to use\\lthe technique.\\pTravel to MOSSDEEP. Its divers and\\nthe SPACE CENTER may be able to\\lhelp.$",
+    "lines": [
+      {
+        "text": "CAPT. STERN: AQUA left before you",
+        "width": 174,
+        "unresolved": []
+      },
+      {
+        "text": "could stop them... Don't blame",
+        "width": 155,
+        "unresolved": []
+      },
+      {
+        "text": "yourself.",
+        "width": 48,
+        "unresolved": []
+      },
+      {
+        "text": "To follow that submarine, you'll",
+        "width": 166,
+        "unresolved": []
+      },
+      {
+        "text": "need DIVE registered, the MIND",
+        "width": 161,
+        "unresolved": []
+      },
+      {
+        "text": "BADGE, and a partner able to use",
+        "width": 167,
+        "unresolved": []
+      },
+      {
+        "text": "the technique.",
+        "width": 76,
+        "unresolved": []
+      },
+      {
+        "text": "Travel to MOSSDEEP. Its divers and",
+        "width": 180,
+        "unresolved": []
+      },
+      {
+        "text": "the SPACE CENTER may be able to",
+        "width": 166,
+        "unresolved": []
+      },
+      {
+        "text": "help.",
+        "width": 25,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_Harbor/scripts.inc",
+    "label": "SlateportCity_Harbor_Text_NeedDiveToCatchSub",
+    "line": 483,
+    "text": "CAPT. STERN: To follow the\\nsubmarine, you'll need DIVE\\lregistered, the MIND BADGE, and a\\lcompatible partner.\\pVisit MOSSDEEP's SPACE CENTER and\\nfind STEVEN. He may be able to\\lhelp.$",
+    "lines": [
+      {
+        "text": "CAPT. STERN: To follow the",
+        "width": 134,
+        "unresolved": []
+      },
+      {
+        "text": "submarine, you'll need DIVE",
+        "width": 143,
+        "unresolved": []
+      },
+      {
+        "text": "registered, the MIND BADGE, and a",
+        "width": 173,
+        "unresolved": []
+      },
+      {
+        "text": "compatible partner.",
+        "width": 102,
+        "unresolved": []
+      },
+      {
+        "text": "Visit MOSSDEEP's SPACE CENTER and",
+        "width": 182,
+        "unresolved": []
+      },
+      {
+        "text": "find STEVEN. He may be able to",
+        "width": 155,
+        "unresolved": []
+      },
+      {
+        "text": "help.",
+        "width": 25,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_Harbor/scripts.inc",
+    "label": "SlateportCity_Harbor_Text_WontBeLongBeforeWeFinishFerry",
+    "line": 491,
+    "text": "CAPT. STERN: Oh, yes.\\nMR. BRINEY came to our SHIPYARD.\\pIt won't be long now before we finish\\nmaking the ferry!$",
+    "lines": [
+      {
+        "text": "CAPT. STERN: Oh, yes.",
+        "width": 105,
+        "unresolved": []
+      },
+      {
+        "text": "MR. BRINEY came to our SHIPYARD.",
+        "width": 170,
+        "unresolved": []
+      },
+      {
+        "text": "It won't be long now before we finish",
+        "width": 194,
+        "unresolved": []
+      },
+      {
+        "text": "making the ferry!",
+        "width": 90,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_Harbor/scripts.inc",
+    "label": "SlateportCity_Harbor_Text_FinishedMakingFerry",
+    "line": 497,
+    "text": "CAPT. STERN: {PLAYER}{KUN}!\\pWe finally finished making the ferry\\nS.S. TIDAL!\\pWe couldn't have done it without\\nyour friend MR. BRINEY.\\pPlease go for a short cruise on it!$",
+    "lines": [
+      {
+        "text": "CAPT. STERN: {PLAYER}{KUN}!",
+        "width": 112,
+        "unresolved": []
+      },
+      {
+        "text": "We finally finished making the ferry",
+        "width": 187,
+        "unresolved": []
+      },
+      {
+        "text": "S.S. TIDAL!",
+        "width": 55,
+        "unresolved": []
+      },
+      {
+        "text": "We couldn't have done it without",
+        "width": 171,
+        "unresolved": []
+      },
+      {
+        "text": "your friend MR. BRINEY.",
+        "width": 119,
+        "unresolved": []
+      },
+      {
+        "text": "Please go for a short cruise on it!",
+        "width": 178,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_Harbor/scripts.inc",
+    "label": "SlateportCity_Harbor_Text_WouldYouTradeScanner",
+    "line": 505,
+    "text": "CAPT. STERN: Oh?\\n{PLAYER}{KUN}, that item you have…\\pThat's a SCANNER! That would sure\\nhelp us on our explorations.\\p{PLAYER}{KUN}, would you trade your\\nSCANNER for something?\\pLike, say, a DEEPSEATOOTH or\\na DEEPSEASCALE that I have?$",
+    "lines": [
+      {
+        "text": "CAPT. STERN: Oh?",
+        "width": 84,
+        "unresolved": []
+      },
+      {
+        "text": "{PLAYER}{KUN}, that item you have…",
+        "width": 151,
+        "unresolved": []
+      },
+      {
+        "text": "That's a SCANNER! That would sure",
+        "width": 178,
+        "unresolved": []
+      },
+      {
+        "text": "help us on our explorations.",
+        "width": 145,
+        "unresolved": []
+      },
+      {
+        "text": "{PLAYER}{KUN}, would you trade your",
+        "width": 155,
+        "unresolved": []
+      },
+      {
+        "text": "SCANNER for something?",
+        "width": 123,
+        "unresolved": []
+      },
+      {
+        "text": "Like, say, a DEEPSEATOOTH or",
+        "width": 147,
+        "unresolved": []
+      },
+      {
+        "text": "a DEEPSEASCALE that I have?",
+        "width": 150,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_Harbor/scripts.inc",
+    "label": "SlateportCity_Harbor_Text_IfYouWantToTradeLetMeKnow",
+    "line": 515,
+    "text": "CAPT. STERN: Are you certain?\\nIt's useless to you, {PLAYER}{KUN}…\\pWell, okay, then. If you want to trade\\nyour SCANNER, let me know.$",
+    "lines": [
+      {
+        "text": "CAPT. STERN: Are you certain?",
+        "width": 152,
+        "unresolved": []
+      },
+      {
+        "text": "It's useless to you, {PLAYER}{KUN}…",
+        "width": 157,
+        "unresolved": []
+      },
+      {
+        "text": "Well, okay, then. If you want to trade",
+        "width": 193,
+        "unresolved": []
+      },
+      {
+        "text": "your SCANNER, let me know.",
+        "width": 135,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_Harbor/scripts.inc",
+    "label": "SlateportCity_Harbor_Text_TradeForDeepSeaTooth",
+    "line": 521,
+    "text": "CAPT. STERN: So you'll trade it for\\nmy DEEPSEATOOTH?$",
+    "lines": [
+      {
+        "text": "CAPT. STERN: So you'll trade it for",
+        "width": 178,
+        "unresolved": []
+      },
+      {
+        "text": "my DEEPSEATOOTH?",
+        "width": 93,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_Harbor/scripts.inc",
+    "label": "SlateportCity_Harbor_Text_TradeForDeepSeaScale",
+    "line": 525,
+    "text": "CAPT. STERN: So you'll trade it for\\nmy DEEPSEASCALE?$",
+    "lines": [
+      {
+        "text": "CAPT. STERN: So you'll trade it for",
+        "width": 178,
+        "unresolved": []
+      },
+      {
+        "text": "my DEEPSEASCALE?",
+        "width": 93,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_Harbor/scripts.inc",
+    "label": "SlateportCity_Harbor_Text_WhichOneDoYouWant",
+    "line": 529,
+    "text": "CAPT. STERN: Which one do you want?$",
+    "lines": [
+      {
+        "text": "CAPT. STERN: Which one do you want?",
+        "width": 184,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_Harbor/scripts.inc",
+    "label": "SlateportCity_Harbor_Text_HandedScannerToStern",
+    "line": 532,
+    "text": "{PLAYER} handed the SCANNER to\\nCAPT. STERN.$",
+    "lines": [
+      {
+        "text": "{PLAYER} handed the SCANNER to",
+        "width": 162,
+        "unresolved": []
+      },
+      {
+        "text": "CAPT. STERN.",
+        "width": 63,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_Harbor/scripts.inc",
+    "label": "SlateportCity_Harbor_Text_ThisWillHelpResearch",
+    "line": 536,
+    "text": "CAPT. STERN: Thanks, {PLAYER}{KUN}!\\nThis will help our research a lot!$",
+    "lines": [
+      {
+        "text": "CAPT. STERN: Thanks, {PLAYER}{KUN}!",
+        "width": 154,
+        "unresolved": []
+      },
+      {
+        "text": "This will help our research a lot!",
+        "width": 169,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_House/scripts.inc",
+    "label": "SlateportCity_House_Text_NatureToDoWithStatGains",
+    "line": 12,
+    "text": "My POKéMON has a HASTY nature.\\nThat raises its SPEED, but lowers\\lits DEFENSE.\\pThe CENTER specialist can adjust\\nNatures. Mine likes life in the fast\\llane, so HASTY suits us!$",
+    "lines": [
+      {
+        "text": "My POKéMON has a HASTY nature.",
+        "width": 161,
+        "unresolved": []
+      },
+      {
+        "text": "That raises its SPEED, but lowers",
+        "width": 172,
+        "unresolved": []
+      },
+      {
+        "text": "its DEFENSE.",
+        "width": 64,
+        "unresolved": []
+      },
+      {
+        "text": "The CENTER specialist can adjust",
+        "width": 173,
+        "unresolved": []
+      },
+      {
+        "text": "Natures. Mine likes life in the fast",
+        "width": 182,
+        "unresolved": []
+      },
+      {
+        "text": "lane, so HASTY suits us!",
+        "width": 123,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_House/scripts.inc",
+    "label": "SlateportCity_House_Text_MustBeGoingToBattleTent",
+    "line": 20,
+    "text": "You're a TRAINER, aren't you?\\pSince you came to SLATEPORT CITY,\\nyou must be going to the BATTLE TENT.$",
+    "lines": [
+      {
+        "text": "You're a TRAINER, aren't you?",
+        "width": 157,
+        "unresolved": []
+      },
+      {
+        "text": "Since you came to SLATEPORT CITY,",
+        "width": 178,
+        "unresolved": []
+      },
+      {
+        "text": "you must be going to the BATTLE TENT.",
+        "width": 196,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_Mart/scripts.inc",
+    "label": "SlateportCity_Mart_Text_MarketAndMartStockDifferentGoods",
+    "line": 35,
+    "text": "The MARKET has unusual merchandise.\\pThe MART is still a reliable place to\\nrestock everyday field supplies.$",
+    "lines": [
+      {
+        "text": "The MARKET has unusual merchandise.",
+        "width": 190,
+        "unresolved": []
+      },
+      {
+        "text": "The MART is still a reliable place to",
+        "width": 184,
+        "unresolved": []
+      },
+      {
+        "text": "restock everyday field supplies.",
+        "width": 170,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_Mart/scripts.inc",
+    "label": "SlateportCity_Mart_Text_GreatBallIsBetter",
+    "line": 40,
+    "text": "A GREAT BALL is better than a POKé BALL\\nat catching POKéMON.\\pWith this, I should be able to get that\\nelusive POKéMON…$",
+    "lines": [
+      {
+        "text": "A GREAT BALL is better than a POKé BALL",
+        "width": 207,
+        "unresolved": []
+      },
+      {
+        "text": "at catching POKéMON.",
+        "width": 109,
+        "unresolved": []
+      },
+      {
+        "text": "With this, I should be able to get that",
+        "width": 199,
+        "unresolved": []
+      },
+      {
+        "text": "elusive POKéMON…",
+        "width": 89,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_NameRatersHouse/scripts.inc",
+    "label": "SlateportCity_NameRatersHouse_Text_PleasedToRateMonNickname",
+    "line": 64,
+    "text": "Hi, hi! I'm the NAME RATER!\\nI'm the fortune-teller of names!\\pI shall be pleased to rate your\\nPOKéMON's nickname.$",
+    "lines": [
+      {
+        "text": "Hi, hi! I'm the NAME RATER!",
+        "width": 136,
+        "unresolved": []
+      },
+      {
+        "text": "I'm the fortune-teller of names!",
+        "width": 172,
+        "unresolved": []
+      },
+      {
+        "text": "I shall be pleased to rate your",
+        "width": 160,
+        "unresolved": []
+      },
+      {
+        "text": "POKéMON's nickname.",
+        "width": 106,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_NameRatersHouse/scripts.inc",
+    "label": "SlateportCity_NameRatersHouse_Text_CritiqueWhichMonNickname",
+    "line": 70,
+    "text": "Which POKéMON's nickname should\\nI critique?$",
+    "lines": [
+      {
+        "text": "Which POKéMON's nickname should",
+        "width": 171,
+        "unresolved": []
+      },
+      {
+        "text": "I critique?",
+        "width": 58,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_NameRatersHouse/scripts.inc",
+    "label": "SlateportCity_NameRatersHouse_Text_FineNameSuggestBetterOne",
+    "line": 74,
+    "text": "Hmmm… {STR_VAR_1}, is it? That is\\nquite a fine name you bestowed.\\pBut! What say you, if I were to\\nsuggest a slightly better name?$",
+    "lines": [
+      {
+        "text": "Hmmm… {STR_VAR_1}, is it? That is",
+        "width": 180,
+        "unresolved": []
+      },
+      {
+        "text": "quite a fine name you bestowed.",
+        "width": 164,
+        "unresolved": []
+      },
+      {
+        "text": "But! What say you, if I were to",
+        "width": 157,
+        "unresolved": []
+      },
+      {
+        "text": "suggest a slightly better name?",
+        "width": 167,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_NameRatersHouse/scripts.inc",
+    "label": "SlateportCity_NameRatersHouse_Text_WhatShallNewNameBe",
+    "line": 80,
+    "text": "Ah, good. Then, what shall the new\\nnickname be?$",
+    "lines": [
+      {
+        "text": "Ah, good. Then, what shall the new",
+        "width": 173,
+        "unresolved": []
+      },
+      {
+        "text": "nickname be?",
+        "width": 67,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_NameRatersHouse/scripts.inc",
+    "label": "SlateportCity_NameRatersHouse_Text_MonShallBeKnownAsName",
+    "line": 84,
+    "text": "Done! From now on, this POKéMON\\nshall be known as {STR_VAR_1}!\\pIt is a better name than before!\\nHow fortunate for you!$",
+    "lines": [
+      {
+        "text": "Done! From now on, this POKéMON",
+        "width": 163,
+        "unresolved": []
+      },
+      {
+        "text": "shall be known as {STR_VAR_1}!",
+        "width": 168,
+        "unresolved": []
+      },
+      {
+        "text": "It is a better name than before!",
+        "width": 168,
+        "unresolved": []
+      },
+      {
+        "text": "How fortunate for you!",
+        "width": 119,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_NameRatersHouse/scripts.inc",
+    "label": "SlateportCity_NameRatersHouse_Text_DoVisitAgain",
+    "line": 90,
+    "text": "I see.\\nDo come visit again.$",
+    "lines": [
+      {
+        "text": "I see.",
+        "width": 30,
+        "unresolved": []
+      },
+      {
+        "text": "Do come visit again.",
+        "width": 102,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_NameRatersHouse/scripts.inc",
+    "label": "SlateportCity_NameRatersHouse_Text_NameNoDifferentYetSuperior",
+    "line": 94,
+    "text": "Done! From now on, this POKéMON\\nshall be known as {STR_VAR_1}!\\pIt looks no different from before,\\nand yet, this is vastly superior!\\pHow fortunate for you!$",
+    "lines": [
+      {
+        "text": "Done! From now on, this POKéMON",
+        "width": 163,
+        "unresolved": []
+      },
+      {
+        "text": "shall be known as {STR_VAR_1}!",
+        "width": 168,
+        "unresolved": []
+      },
+      {
+        "text": "It looks no different from before,",
+        "width": 179,
+        "unresolved": []
+      },
+      {
+        "text": "and yet, this is vastly superior!",
+        "width": 168,
+        "unresolved": []
+      },
+      {
+        "text": "How fortunate for you!",
+        "width": 119,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_NameRatersHouse/scripts.inc",
+    "label": "SlateportCity_NameRatersHouse_Text_MagnificentName",
+    "line": 101,
+    "text": "Hmmm… {STR_VAR_1} it is!\\pThis is a magnificent nickname!\\nIt is impeccably beyond reproach!\\pYou'll do well to cherish your\\n{STR_VAR_1} now and beyond.$",
+    "lines": [
+      {
+        "text": "Hmmm… {STR_VAR_1} it is!",
+        "width": 135,
+        "unresolved": []
+      },
+      {
+        "text": "This is a magnificent nickname!",
+        "width": 162,
+        "unresolved": []
+      },
+      {
+        "text": "It is impeccably beyond reproach!",
+        "width": 176,
+        "unresolved": []
+      },
+      {
+        "text": "You'll do well to cherish your",
+        "width": 153,
+        "unresolved": []
+      },
+      {
+        "text": "{STR_VAR_1} now and beyond.",
+        "width": 156,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_NameRatersHouse/scripts.inc",
+    "label": "SlateportCity_NameRatersHouse_Text_ThatIsMerelyAnEgg",
+    "line": 108,
+    "text": "Now, now.\\nThat is merely an EGG!$",
+    "lines": [
+      {
+        "text": "Now, now.",
+        "width": 45,
+        "unresolved": []
+      },
+      {
+        "text": "That is merely an EGG!",
+        "width": 113,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_NameRatersHouse/scripts.inc",
+    "label": "SlateportCity_NameRatersHouse_EventScript_MegaGift_MALAMARITE_Text",
+    "line": 124,
+    "text": "An Inkay once watched me write\\nits name while hanging upside down.\\pIt left this curious stone behind.\\nA Malamar should know what to do.$",
+    "lines": [
+      {
+        "text": "An Inkay once watched me write",
+        "width": 162,
+        "unresolved": []
+      },
+      {
+        "text": "its name while hanging upside down.",
+        "width": 182,
+        "unresolved": []
+      },
+      {
+        "text": "It left this curious stone behind.",
+        "width": 177,
+        "unresolved": []
+      },
+      {
+        "text": "A Malamar should know what to do.",
+        "width": 172,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_1F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_1F_Text_WouldYouLikeToEnter",
+    "line": 225,
+    "text": "Welcome to the OCEANIC MUSEUM.\\pThe entrance fee is ¥50.\\nWould you like to enter?$",
+    "lines": [
+      {
+        "text": "Welcome to the OCEANIC MUSEUM.",
+        "width": 163,
+        "unresolved": []
+      },
+      {
+        "text": "The entrance fee is ¥50.",
+        "width": 126,
+        "unresolved": []
+      },
+      {
+        "text": "Would you like to enter?",
+        "width": 125,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_1F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_1F_Text_PleaseEnjoyYourself",
+    "line": 230,
+    "text": "Please enjoy yourself.$",
+    "lines": [
+      {
+        "text": "Please enjoy yourself.",
+        "width": 117,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_1F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_1F_Text_NotEnoughMoney",
+    "line": 233,
+    "text": "Oh? I'm sorry, but you don't seem to\\nhave enough money.$",
+    "lines": [
+      {
+        "text": "Oh? I'm sorry, but you don't seem to",
+        "width": 190,
+        "unresolved": []
+      },
+      {
+        "text": "have enough money.",
+        "width": 99,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_1F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_1F_Text_CatchUpWithYourGroup",
+    "line": 237,
+    "text": "Oh? You're with that group that\\nwent in earlier?\\pYou're the only one who's late.\\nYou'd better go catch up to them!$",
+    "lines": [
+      {
+        "text": "Oh? You're with that group that",
+        "width": 167,
+        "unresolved": []
+      },
+      {
+        "text": "went in earlier?",
+        "width": 82,
+        "unresolved": []
+      },
+      {
+        "text": "You're the only one who's late.",
+        "width": 163,
+        "unresolved": []
+      },
+      {
+        "text": "You'd better go catch up to them!",
+        "width": 177,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_1F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_1F_Text_AquaExistForGoodOfAll",
+    "line": 243,
+    "text": "We, TEAM AQUA, exist for the good\\nof all!$",
+    "lines": [
+      {
+        "text": "We, TEAM AQUA, exist for the good",
+        "width": 171,
+        "unresolved": []
+      },
+      {
+        "text": "of all!",
+        "width": 33,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_1F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_1F_Text_OurBossIsntHere",
+    "line": 247,
+    "text": "We were told to assemble here,\\nso we did, but…\\pOur BOSS, the linchpin, isn't here.$",
+    "lines": [
+      {
+        "text": "We were told to assemble here,",
+        "width": 156,
+        "unresolved": []
+      },
+      {
+        "text": "so we did, but…",
+        "width": 76,
+        "unresolved": []
+      },
+      {
+        "text": "Our BOSS, the linchpin, isn't here.",
+        "width": 176,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_1F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_1F_Text_WouldStuffHereMakeMeRich",
+    "line": 252,
+    "text": "If I ripped off the stuff here,\\nwould it make me rich?$",
+    "lines": [
+      {
+        "text": "If I ripped off the stuff here,",
+        "width": 161,
+        "unresolved": []
+      },
+      {
+        "text": "would it make me rich?",
+        "width": 113,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_1F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_1F_Text_CanLearnForNefariousDeeds",
+    "line": 256,
+    "text": "What I learn here, I can put to use on\\nnefarious deeds…$",
+    "lines": [
+      {
+        "text": "What I learn here, I can put to use on",
+        "width": 194,
+        "unresolved": []
+      },
+      {
+        "text": "nefarious deeds…",
+        "width": 90,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_1F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_1F_Text_RustboroBungled",
+    "line": 260,
+    "text": "If our goons didn't bungle things\\nin RUSTBORO, we wouldn't be here!$",
+    "lines": [
+      {
+        "text": "If our goons didn't bungle things",
+        "width": 176,
+        "unresolved": []
+      },
+      {
+        "text": "in RUSTBORO, we wouldn't be here!",
+        "width": 173,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_1F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_1F_Text_DidntHaveMoney",
+    "line": 264,
+    "text": "I didn't have ¥50, so it took a long\\ntime getting by the receptionist.$",
+    "lines": [
+      {
+        "text": "I didn't have ¥50, so it took a long",
+        "width": 183,
+        "unresolved": []
+      },
+      {
+        "text": "time getting by the receptionist.",
+        "width": 174,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_1F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_1F_Text_LearnAboutSeaForBattling",
+    "line": 268,
+    "text": "I want to learn about the sea and\\nuse that knowledge for battling.$",
+    "lines": [
+      {
+        "text": "I want to learn about the sea and",
+        "width": 174,
+        "unresolved": []
+      },
+      {
+        "text": "use that knowledge for battling.",
+        "width": 170,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_1F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_1F_Text_SternIsRoleModel",
+    "line": 272,
+    "text": "I get all giddy and gooey when\\nI see the sea!\\pFor me, CAPT. STERN is the number\\none role model!$",
+    "lines": [
+      {
+        "text": "I get all giddy and gooey when",
+        "width": 156,
+        "unresolved": []
+      },
+      {
+        "text": "I see the sea!",
+        "width": 73,
+        "unresolved": []
+      },
+      {
+        "text": "For me, CAPT. STERN is the number",
+        "width": 170,
+        "unresolved": []
+      },
+      {
+        "text": "one role model!",
+        "width": 77,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_1F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_1F_Text_MustBePokemonWeDontKnow",
+    "line": 278,
+    "text": "The sea is vast without end, and\\ninfinitely deep…\\pThere must be many POKéMON that\\nwe don't know about.$",
+    "lines": [
+      {
+        "text": "The sea is vast without end, and",
+        "width": 167,
+        "unresolved": []
+      },
+      {
+        "text": "infinitely deep…",
+        "width": 85,
+        "unresolved": []
+      },
+      {
+        "text": "There must be many POKéMON that",
+        "width": 170,
+        "unresolved": []
+      },
+      {
+        "text": "we don't know about.",
+        "width": 108,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_1F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_1F_Text_WantSeaPokemon",
+    "line": 284,
+    "text": "I want a sea POKéMON.\\pI think it would feel cool and nice\\nto hug.$",
+    "lines": [
+      {
+        "text": "I want a sea POKéMON.",
+        "width": 111,
+        "unresolved": []
+      },
+      {
+        "text": "I think it would feel cool and nice",
+        "width": 177,
+        "unresolved": []
+      },
+      {
+        "text": "to hug.",
+        "width": 36,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_1F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_1F_Text_RememberMeTakeThis",
+    "line": 289,
+    "text": "Aiyeeeh!\\nWhat are you doing here?\\pMe? I'm the TEAM AQUA member\\nyou thumped before, remember?\\lBack in RUSTURF TUNNEL?\\pHere, take this!\\nYou have to forgive me!$",
+    "lines": [
+      {
+        "text": "Aiyeeeh!",
+        "width": 44,
+        "unresolved": []
+      },
+      {
+        "text": "What are you doing here?",
+        "width": 128,
+        "unresolved": []
+      },
+      {
+        "text": "Me? I'm the TEAM AQUA member",
+        "width": 152,
+        "unresolved": []
+      },
+      {
+        "text": "you thumped before, remember?",
+        "width": 159,
+        "unresolved": []
+      },
+      {
+        "text": "Back in RUSTURF TUNNEL?",
+        "width": 127,
+        "unresolved": []
+      },
+      {
+        "text": "Here, take this!",
+        "width": 82,
+        "unresolved": []
+      },
+      {
+        "text": "You have to forgive me!",
+        "width": 121,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_1F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_1F_Text_HopeINeverSeeYouAgain",
+    "line": 297,
+    "text": "That DEEP SEA TOOTH suits you more\\nthan it does me. It evolves CLAMPERL.\\pHope I never see you again!\\nWahahaha!$",
+    "lines": [
+      {
+        "text": "That DEEP SEA TOOTH suits you more",
+        "width": 183,
+        "unresolved": []
+      },
+      {
+        "text": "than it does me. It evolves CLAMPERL.",
+        "width": 194,
+        "unresolved": []
+      },
+      {
+        "text": "Hope I never see you again!",
+        "width": 142,
+        "unresolved": []
+      },
+      {
+        "text": "Wahahaha!",
+        "width": 52,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_1F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_1F_Text_YouHaveToTakeThis",
+    "line": 303,
+    "text": "Awww, come on!\\nYou have to take this and let me go!$",
+    "lines": [
+      {
+        "text": "Awww, come on!",
+        "width": 73,
+        "unresolved": []
+      },
+      {
+        "text": "You have to take this and let me go!",
+        "width": 186,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_1F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_1F_Text_WhirlpoolExperiment",
+    "line": 307,
+    "text": "A blue fluid is spiraling inside\\na glass vessel.\\p“This is an experiment to create a\\nWHIRLPOOL artificially using wind.”$",
+    "lines": [
+      {
+        "text": "A blue fluid is spiraling inside",
+        "width": 158,
+        "unresolved": []
+      },
+      {
+        "text": "a glass vessel.",
+        "width": 77,
+        "unresolved": []
+      },
+      {
+        "text": "“This is an experiment to create a",
+        "width": 178,
+        "unresolved": []
+      },
+      {
+        "text": "WHIRLPOOL artificially using wind.”",
+        "width": 183,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_1F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_1F_Text_WaterfallExperiment",
+    "line": 313,
+    "text": "A red ball is bobbing up and down\\ninside a glass vessel.\\p“This is an experiment simulating a\\nWATERFALL using the ball's buoyancy.”$",
+    "lines": [
+      {
+        "text": "A red ball is bobbing up and down",
+        "width": 168,
+        "unresolved": []
+      },
+      {
+        "text": "inside a glass vessel.",
+        "width": 112,
+        "unresolved": []
+      },
+      {
+        "text": "“This is an experiment simulating a",
+        "width": 182,
+        "unresolved": []
+      },
+      {
+        "text": "WATERFALL using the ball's buoyancy.”",
+        "width": 201,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_1F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_1F_Text_OceanSoilDisplay",
+    "line": 319,
+    "text": "It's a sample of soil from the ocean\\nfloor.\\p“Over many years, the remains of\\nlife-forms settle at the bottom of\\lthe sea, making sedimentary layers.\\p“By analyzing these layers, the\\nancient past is revealed.”$",
+    "lines": [
+      {
+        "text": "It's a sample of soil from the ocean",
+        "width": 188,
+        "unresolved": []
+      },
+      {
+        "text": "floor.",
+        "width": 30,
+        "unresolved": []
+      },
+      {
+        "text": "“Over many years, the remains of",
+        "width": 169,
+        "unresolved": []
+      },
+      {
+        "text": "life-forms settle at the bottom of",
+        "width": 182,
+        "unresolved": []
+      },
+      {
+        "text": "the sea, making sedimentary layers.",
+        "width": 184,
+        "unresolved": []
+      },
+      {
+        "text": "“By analyzing these layers, the",
+        "width": 164,
+        "unresolved": []
+      },
+      {
+        "text": "ancient past is revealed.”",
+        "width": 137,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_1F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_1F_Text_BeachSandDisplay",
+    "line": 328,
+    "text": "It's a sample of beach sand.\\p“Stones from mountains are washed\\ndown by rivers where they are\\lchipped and ground down.\\p“They are reduced to grains and end\\nup as sand on beaches.”$",
+    "lines": [
+      {
+        "text": "It's a sample of beach sand.",
+        "width": 148,
+        "unresolved": []
+      },
+      {
+        "text": "“Stones from mountains are washed",
+        "width": 182,
+        "unresolved": []
+      },
+      {
+        "text": "down by rivers where they are",
+        "width": 153,
+        "unresolved": []
+      },
+      {
+        "text": "chipped and ground down.",
+        "width": 129,
+        "unresolved": []
+      },
+      {
+        "text": "“They are reduced to grains and end",
+        "width": 187,
+        "unresolved": []
+      },
+      {
+        "text": "up as sand on beaches.”",
+        "width": 123,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_1F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_1F_Text_OceanicMinifact1",
+    "line": 336,
+    "text": "“OCEANIC MINIFACT 1\\nWhy is seawater blue?\\p“Light is composed of many colors.\\p“When light passes through water,\\nmost kinds of light lose color.\\p“However, blue light retains its\\ncolor, making the sea appear blue.”$",
+    "lines": [
+      {
+        "text": "“OCEANIC MINIFACT 1",
+        "width": 108,
+        "unresolved": []
+      },
+      {
+        "text": "Why is seawater blue?",
+        "width": 112,
+        "unresolved": []
+      },
+      {
+        "text": "“Light is composed of many colors.",
+        "width": 179,
+        "unresolved": []
+      },
+      {
+        "text": "“When light passes through water,",
+        "width": 177,
+        "unresolved": []
+      },
+      {
+        "text": "most kinds of light lose color.",
+        "width": 157,
+        "unresolved": []
+      },
+      {
+        "text": "“However, blue light retains its",
+        "width": 165,
+        "unresolved": []
+      },
+      {
+        "text": "color, making the sea appear blue.”",
+        "width": 181,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_1F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_1F_Text_OceanicMinifact2",
+    "line": 345,
+    "text": "“OCEANIC MINIFACT 2\\nWhy is the sea salty?\\p“Seawater contains dissolved salt in\\nthe form of sodium and chlorine ions.\\p“These ions leech out of rocks\\nand are carried out to sea by rain.\\p“The concentration of dissolved salt\\nmakes the sea salty.”$",
+    "lines": [
+      {
+        "text": "“OCEANIC MINIFACT 2",
+        "width": 108,
+        "unresolved": []
+      },
+      {
+        "text": "Why is the sea salty?",
+        "width": 110,
+        "unresolved": []
+      },
+      {
+        "text": "“Seawater contains dissolved salt in",
+        "width": 193,
+        "unresolved": []
+      },
+      {
+        "text": "the form of sodium and chlorine ions.",
+        "width": 191,
+        "unresolved": []
+      },
+      {
+        "text": "“These ions leech out of rocks",
+        "width": 160,
+        "unresolved": []
+      },
+      {
+        "text": "and are carried out to sea by rain.",
+        "width": 178,
+        "unresolved": []
+      },
+      {
+        "text": "“The concentration of dissolved salt",
+        "width": 195,
+        "unresolved": []
+      },
+      {
+        "text": "makes the sea salty.”",
+        "width": 112,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_1F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_1F_Text_OceanicMinifact3",
+    "line": 355,
+    "text": "“OCEANIC MINIFACT 3\\nWhich is bigger? The sea or land?\\p“The sea covers about 70% of\\nthe planet, and the rest is land.\\p“The sea is therefore more than twice\\nthe size of land.”$",
+    "lines": [
+      {
+        "text": "“OCEANIC MINIFACT 3",
+        "width": 108,
+        "unresolved": []
+      },
+      {
+        "text": "Which is bigger? The sea or land?",
+        "width": 170,
+        "unresolved": []
+      },
+      {
+        "text": "“The sea covers about 70% of",
+        "width": 152,
+        "unresolved": []
+      },
+      {
+        "text": "the planet, and the rest is land.",
+        "width": 167,
+        "unresolved": []
+      },
+      {
+        "text": "“The sea is therefore more than twice",
+        "width": 197,
+        "unresolved": []
+      },
+      {
+        "text": "the size of land.”",
+        "width": 92,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_1F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_1F_Text_FossilDisplay",
+    "line": 363,
+    "text": "It's a fossil with wavy ridges on it.\\p“Soil on the ocean floor gets scoured\\nby the tide.\\p“The flowing seawater marks the soil\\nwith small ridges and valleys.\\p“If this soil becomes fossilized, it is\\ncalled a ripple mark.”$",
+    "lines": [
+      {
+        "text": "It's a fossil with wavy ridges on it.",
+        "width": 187,
+        "unresolved": []
+      },
+      {
+        "text": "“Soil on the ocean floor gets scoured",
+        "width": 196,
+        "unresolved": []
+      },
+      {
+        "text": "by the tide.",
+        "width": 61,
+        "unresolved": []
+      },
+      {
+        "text": "“The flowing seawater marks the soil",
+        "width": 191,
+        "unresolved": []
+      },
+      {
+        "text": "with small ridges and valleys.",
+        "width": 152,
+        "unresolved": []
+      },
+      {
+        "text": "“If this soil becomes fossilized, it is",
+        "width": 197,
+        "unresolved": []
+      },
+      {
+        "text": "called a ripple mark.”",
+        "width": 110,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_1F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_1F_Text_DepthMeasuringMachine",
+    "line": 372,
+    "text": "A strange machine is rotating under\\na glass dome.\\pMaybe it's for measuring the depth\\nof something…$",
+    "lines": [
+      {
+        "text": "A strange machine is rotating under",
+        "width": 186,
+        "unresolved": []
+      },
+      {
+        "text": "a glass dome.",
+        "width": 67,
+        "unresolved": []
+      },
+      {
+        "text": "Maybe it's for measuring the depth",
+        "width": 183,
+        "unresolved": []
+      },
+      {
+        "text": "of something…",
+        "width": 73,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_2F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_2F_Text_ThankYouForTheParts",
+    "line": 284,
+    "text": "I'm STERN. You brought DEVON's\\nparts! They'll help us measure\\lpressure deep beneath the sea.\\pThe tides have been changing.\\nEven the wild POKéMON are\\lappearing in unusual places.$",
+    "lines": [
+      {
+        "text": "I'm STERN. You brought DEVON's",
+        "width": 164,
+        "unresolved": []
+      },
+      {
+        "text": "parts! They'll help us measure",
+        "width": 158,
+        "unresolved": []
+      },
+      {
+        "text": "pressure deep beneath the sea.",
+        "width": 163,
+        "unresolved": []
+      },
+      {
+        "text": "The tides have been changing.",
+        "width": 155,
+        "unresolved": []
+      },
+      {
+        "text": "Even the wild POKéMON are",
+        "width": 133,
+        "unresolved": []
+      },
+      {
+        "text": "appearing in unusual places.",
+        "width": 147,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_2F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_2F_Text_WellTakeThoseParts",
+    "line": 292,
+    "text": "Hold it. Those parts map pressure below\\nthe seafloor. AQUA is taking them.$",
+    "lines": [
+      {
+        "text": "Hold it. Those parts map pressure below",
+        "width": 204,
+        "unresolved": []
+      },
+      {
+        "text": "the seafloor. AQUA is taking them.",
+        "width": 176,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_2F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_2F_Text_SternWhoAreYou",
+    "line": 296,
+    "text": "CAPT. STERN: Wh-what?\\nWho are you people?$",
+    "lines": [
+      {
+        "text": "CAPT. STERN: Wh-what?",
+        "width": 114,
+        "unresolved": []
+      },
+      {
+        "text": "Who are you people?",
+        "width": 102,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_2F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_2F_Text_WereTeamAqua",
+    "line": 300,
+    "text": "We're TEAM AQUA! Those parts belong to\\nthe people who understand the sea!$",
+    "lines": [
+      {
+        "text": "We're TEAM AQUA! Those parts belong to",
+        "width": 204,
+        "unresolved": []
+      },
+      {
+        "text": "the people who understand the sea!",
+        "width": 184,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_2F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_2F_Text_Grunt1Defeat",
+    "line": 304,
+    "text": "That wasn't supposed to happen!$",
+    "lines": [
+      {
+        "text": "That wasn't supposed to happen!",
+        "width": 172,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_2F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_2F_Text_BossGoingToBeFurious",
+    "line": 307,
+    "text": "The boss is going to hear about this…$",
+    "lines": [
+      {
+        "text": "The boss is going to hear about this…",
+        "width": 194,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_2F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_2F_Text_LetMeTakeCareOfThis",
+    "line": 310,
+    "text": "Move aside.\\nI'll get those parts myself!$",
+    "lines": [
+      {
+        "text": "Move aside.",
+        "width": 58,
+        "unresolved": []
+      },
+      {
+        "text": "I'll get those parts myself!",
+        "width": 147,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_2F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_2F_Text_Grunt2Defeat",
+    "line": 314,
+    "text": "I can't stop this kid!$",
+    "lines": [
+      {
+        "text": "I can't stop this kid!",
+        "width": 114,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_2F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_2F_Text_MeddlingKid",
+    "line": 317,
+    "text": "We still don't have the parts.\\nWhat are we going to tell ARCHIE?$",
+    "lines": [
+      {
+        "text": "We still don't have the parts.",
+        "width": 155,
+        "unresolved": []
+      },
+      {
+        "text": "What are we going to tell ARCHIE?",
+        "width": 173,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_2F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_2F_Text_CameToSeeWhatsTakingSoLong",
+    "line": 321,
+    "text": "That's enough. You two, stand back.\\nI'll deal with this.$",
+    "lines": [
+      {
+        "text": "That's enough. You two, stand back.",
+        "width": 186,
+        "unresolved": []
+      },
+      {
+        "text": "I'll deal with this.",
+        "width": 98,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_2F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_2F_Text_ArchieWarning",
+    "line": 325,
+    "text": "I'm ARCHIE, leader of TEAM AQUA.\\pThe sea doesn't care for borders.\\nLife moves where the water\\lcarries it.\\pThose instruments can track the\\ndeep currents and lead us to the\\lPOKéMON that shaped the sea.\\pMAXIE would bury that power under\\nmore land. I intend to let it\\lflow.\\pHand them over, or stand and\\nfight!$",
+    "lines": [
+      {
+        "text": "I'm ARCHIE, leader of TEAM AQUA.",
+        "width": 168,
+        "unresolved": []
+      },
+      {
+        "text": "The sea doesn't care for borders.",
+        "width": 176,
+        "unresolved": []
+      },
+      {
+        "text": "Life moves where the water",
+        "width": 140,
+        "unresolved": []
+      },
+      {
+        "text": "carries it.",
+        "width": 54,
+        "unresolved": []
+      },
+      {
+        "text": "Those instruments can track the",
+        "width": 170,
+        "unresolved": []
+      },
+      {
+        "text": "deep currents and lead us to the",
+        "width": 170,
+        "unresolved": []
+      },
+      {
+        "text": "POKéMON that shaped the sea.",
+        "width": 153,
+        "unresolved": []
+      },
+      {
+        "text": "MAXIE would bury that power under",
+        "width": 178,
+        "unresolved": []
+      },
+      {
+        "text": "more land. I intend to let it",
+        "width": 144,
+        "unresolved": []
+      },
+      {
+        "text": "flow.",
+        "width": 25,
+        "unresolved": []
+      },
+      {
+        "text": "Hand them over, or stand and",
+        "width": 148,
+        "unresolved": []
+      },
+      {
+        "text": "fight!",
+        "width": 32,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_2F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_2F_Text_ArchieDefeat",
+    "line": 339,
+    "text": "Tch! I underestimated you.$",
+    "lines": [
+      {
+        "text": "Tch! I underestimated you.",
+        "width": 139,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_2F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_2F_Text_ArchieDefeated",
+    "line": 342,
+    "text": "Keep them, then.\\nAQUA won't turn back for one Trainer.\\pWe'll find that current with or without\\nyour precious instruments.$",
+    "lines": [
+      {
+        "text": "Keep them, then.",
+        "width": 84,
+        "unresolved": []
+      },
+      {
+        "text": "AQUA won't turn back for one Trainer.",
+        "width": 195,
+        "unresolved": []
+      },
+      {
+        "text": "We'll find that current with or without",
+        "width": 203,
+        "unresolved": []
+      },
+      {
+        "text": "your precious instruments.",
+        "width": 140,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_2F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_2F_Text_SternThankYouForSavingUs",
+    "line": 348,
+    "text": "{PLAYER}, thank you. You kept us\\nand the parts safe.\\pOur instruments may reveal what\\nis disturbing the ocean and its\\lPOKéMON.$",
+    "lines": [
+      {
+        "text": "{PLAYER}, thank you. You kept us",
+        "width": 165,
+        "unresolved": []
+      },
+      {
+        "text": "and the parts safe.",
+        "width": 101,
+        "unresolved": []
+      },
+      {
+        "text": "Our instruments may reveal what",
+        "width": 167,
+        "unresolved": []
+      },
+      {
+        "text": "is disturbing the ocean and its",
+        "width": 162,
+        "unresolved": []
+      },
+      {
+        "text": "POKéMON.",
+        "width": 45,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_2F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_2F_Text_SternIveGotToGo",
+    "line": 355,
+    "text": "I'll get these instruments to the\\nship. We can't let AQUA reach the\\ldepths first.\\pAfter DEWFORD GYM, follow ROUTE\\n110 north to MAUVILLE CITY.\\pWATTSON keeps the city running.\\nHis GYM should give you a\\lchallenge!$",
+    "lines": [
+      {
+        "text": "I'll get these instruments to the",
+        "width": 176,
+        "unresolved": []
+      },
+      {
+        "text": "ship. We can't let AQUA reach the",
+        "width": 172,
+        "unresolved": []
+      },
+      {
+        "text": "depths first.",
+        "width": 69,
+        "unresolved": []
+      },
+      {
+        "text": "After DEWFORD GYM, follow ROUTE",
+        "width": 166,
+        "unresolved": []
+      },
+      {
+        "text": "110 north to MAUVILLE CITY.",
+        "width": 146,
+        "unresolved": []
+      },
+      {
+        "text": "WATTSON keeps the city running.",
+        "width": 166,
+        "unresolved": []
+      },
+      {
+        "text": "His GYM should give you a",
+        "width": 129,
+        "unresolved": []
+      },
+      {
+        "text": "challenge!",
+        "width": 54,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_2F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_2F_Text_BrawlyHandoff",
+    "line": 365,
+    "text": "But earn BRAWLY's BADGE first.\\nThen you can head north.$",
+    "lines": [
+      {
+        "text": "But earn BRAWLY's BADGE first.",
+        "width": 161,
+        "unresolved": []
+      },
+      {
+        "text": "Then you can head north.",
+        "width": 128,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_2F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_2F_Text_RemindsMeOfAbandonedShip",
+    "line": 369,
+    "text": "I saw a model of a ship here.\\pIt reminded me of the ABANDONED SHIP\\nnear DEWFORD TOWN…$",
+    "lines": [
+      {
+        "text": "I saw a model of a ship here.",
+        "width": 145,
+        "unresolved": []
+      },
+      {
+        "text": "It reminded me of the ABANDONED SHIP",
+        "width": 195,
+        "unresolved": []
+      },
+      {
+        "text": "near DEWFORD TOWN…",
+        "width": 101,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_2F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_2F_Text_DontRunInMuseum",
+    "line": 374,
+    "text": "Don't you dare run around inside\\nthe MUSEUM!$",
+    "lines": [
+      {
+        "text": "Don't you dare run around inside",
+        "width": 170,
+        "unresolved": []
+      },
+      {
+        "text": "the MUSEUM!",
+        "width": 61,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_2F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_2F_Text_WantToRideSubmarine",
+    "line": 378,
+    "text": "Wow, the submarine's awesome!\\nI want to go for a ride!$",
+    "lines": [
+      {
+        "text": "Wow, the submarine's awesome!",
+        "width": 157,
+        "unresolved": []
+      },
+      {
+        "text": "I want to go for a ride!",
+        "width": 120,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_2F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_2F_Text_WaterQualitySample1",
+    "line": 382,
+    "text": "“WATER QUALITY SAMPLE 1,” the\\nlabel says.\\pThe sea is all connected, but the\\nwater seems to differ by region.$",
+    "lines": [
+      {
+        "text": "“WATER QUALITY SAMPLE 1,” the",
+        "width": 159,
+        "unresolved": []
+      },
+      {
+        "text": "label says.",
+        "width": 56,
+        "unresolved": []
+      },
+      {
+        "text": "The sea is all connected, but the",
+        "width": 171,
+        "unresolved": []
+      },
+      {
+        "text": "water seems to differ by region.",
+        "width": 167,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_2F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_2F_Text_WaterQualitySample2",
+    "line": 388,
+    "text": "“WATER QUALITY SAMPLE 2,” the\\nlabel says.\\pDoes the saltiness of seawater differ\\nby region, too?$",
+    "lines": [
+      {
+        "text": "“WATER QUALITY SAMPLE 2,” the",
+        "width": 159,
+        "unresolved": []
+      },
+      {
+        "text": "label says.",
+        "width": 56,
+        "unresolved": []
+      },
+      {
+        "text": "Does the saltiness of seawater differ",
+        "width": 199,
+        "unresolved": []
+      },
+      {
+        "text": "by region, too?",
+        "width": 78,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_2F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_2F_Text_PressureExperiment",
+    "line": 394,
+    "text": "A rubber ball is expanding and\\nshrinking.\\p“In the sea, the weight of water itself\\nexerts pressure.\\p“In shallow water, the pressure is not\\nvery heavy.\\p“However, in extremely deep water,\\nthe pressure can reach even tens of\\lthousands of tons on a small area.”$",
+    "lines": [
+      {
+        "text": "A rubber ball is expanding and",
+        "width": 155,
+        "unresolved": []
+      },
+      {
+        "text": "shrinking.",
+        "width": 52,
+        "unresolved": []
+      },
+      {
+        "text": "“In the sea, the weight of water itself",
+        "width": 203,
+        "unresolved": []
+      },
+      {
+        "text": "exerts pressure.",
+        "width": 87,
+        "unresolved": []
+      },
+      {
+        "text": "“In shallow water, the pressure is not",
+        "width": 198,
+        "unresolved": []
+      },
+      {
+        "text": "very heavy.",
+        "width": 59,
+        "unresolved": []
+      },
+      {
+        "text": "“However, in extremely deep water,",
+        "width": 179,
+        "unresolved": []
+      },
+      {
+        "text": "the pressure can reach even tens of",
+        "width": 189,
+        "unresolved": []
+      },
+      {
+        "text": "thousands of tons on a small area.”",
+        "width": 184,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_2F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_2F_Text_HoennModel",
+    "line": 405,
+    "text": "“MODEL OF HOENN REGION”\\pIt's a miniature diorama of the\\nHOENN region.\\pWhere is LITTLEROOT TOWN on this?$",
+    "lines": [
+      {
+        "text": "“MODEL OF HOENN REGION”",
+        "width": 129,
+        "unresolved": []
+      },
+      {
+        "text": "It's a miniature diorama of the",
+        "width": 163,
+        "unresolved": []
+      },
+      {
+        "text": "HOENN region.",
+        "width": 69,
+        "unresolved": []
+      },
+      {
+        "text": "Where is LITTLEROOT TOWN on this?",
+        "width": 178,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_2F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_2F_Text_DeepSeawaterDisplay",
+    "line": 411,
+    "text": "It's a display on the flow of seawater.\\p“Near the bottom of the sea, water\\nflows due to differences in such\\lfactors as temperature and salinity.”$",
+    "lines": [
+      {
+        "text": "It's a display on the flow of seawater.",
+        "width": 203,
+        "unresolved": []
+      },
+      {
+        "text": "“Near the bottom of the sea, water",
+        "width": 181,
+        "unresolved": []
+      },
+      {
+        "text": "flows due to differences in such",
+        "width": 170,
+        "unresolved": []
+      },
+      {
+        "text": "factors as temperature and salinity.”",
+        "width": 198,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_2F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_2F_Text_SurfaceSeawaterDisplay",
+    "line": 417,
+    "text": "It's a display on the flow of seawater.\\p“Toward the surface, seawater flows\\nas currents driven by the winds.”$",
+    "lines": [
+      {
+        "text": "It's a display on the flow of seawater.",
+        "width": 203,
+        "unresolved": []
+      },
+      {
+        "text": "“Toward the surface, seawater flows",
+        "width": 190,
+        "unresolved": []
+      },
+      {
+        "text": "as currents driven by the winds.”",
+        "width": 173,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_2F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_2F_Text_SSTidalReplica",
+    "line": 422,
+    "text": "“THE FERRY S.S. TIDAL”\\p“A scale replica of the vessel\\ndesigned at STERN'S SHIPYARD.”$",
+    "lines": [
+      {
+        "text": "“THE FERRY S.S. TIDAL”",
+        "width": 117,
+        "unresolved": []
+      },
+      {
+        "text": "“A scale replica of the vessel",
+        "width": 156,
+        "unresolved": []
+      },
+      {
+        "text": "designed at STERN'S SHIPYARD.”",
+        "width": 166,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_2F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_2F_Text_SubmarineReplica",
+    "line": 427,
+    "text": "“SUBMARINE EXPLORER 1\\p“A replica of the high-performance\\nocean floor exploration submarine.”$",
+    "lines": [
+      {
+        "text": "“SUBMARINE EXPLORER 1",
+        "width": 120,
+        "unresolved": []
+      },
+      {
+        "text": "“A replica of the high-performance",
+        "width": 183,
+        "unresolved": []
+      },
+      {
+        "text": "ocean floor exploration submarine.”",
+        "width": 187,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_2F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_2F_Text_SumbersibleReplica",
+    "line": 432,
+    "text": "“SUBMERSIBLE POD\\p“A replica of a compact, unmanned\\npod for seafloor exploration.”$",
+    "lines": [
+      {
+        "text": "“SUBMERSIBLE POD",
+        "width": 93,
+        "unresolved": []
+      },
+      {
+        "text": "“A replica of a compact, unmanned",
+        "width": 175,
+        "unresolved": []
+      },
+      {
+        "text": "pod for seafloor exploration.”",
+        "width": 159,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_OceanicMuseum_2F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_2F_Text_SSAnneReplica",
+    "line": 437,
+    "text": "“S.S. ANNE\\p“A replica of the luxury liner that\\ncircles the globe.”$",
+    "lines": [
+      {
+        "text": "“S.S. ANNE",
+        "width": 51,
+        "unresolved": []
+      },
+      {
+        "text": "“A replica of the luxury liner that",
+        "width": 179,
+        "unresolved": []
+      },
+      {
+        "text": "circles the globe.”",
+        "width": 98,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_PokemonCenter_1F/scripts.inc",
+    "label": "SlateportCity_PokemonCenter_1F_Text_RaiseDifferentTypesOfPokemon",
+    "line": 27,
+    "text": "Want a tip for battling?\\pI'd say it's raising different kinds\\nof POKéMON in a balanced manner.\\pIt's no good to make just one\\nPOKéMON strong.\\pIf it has a type disadvantage,\\nit might not stand a chance.$",
+    "lines": [
+      {
+        "text": "Want a tip for battling?",
+        "width": 125,
+        "unresolved": []
+      },
+      {
+        "text": "I'd say it's raising different kinds",
+        "width": 189,
+        "unresolved": []
+      },
+      {
+        "text": "of POKéMON in a balanced manner.",
+        "width": 169,
+        "unresolved": []
+      },
+      {
+        "text": "It's no good to make just one",
+        "width": 155,
+        "unresolved": []
+      },
+      {
+        "text": "POKéMON strong.",
+        "width": 83,
+        "unresolved": []
+      },
+      {
+        "text": "If it has a type disadvantage,",
+        "width": 158,
+        "unresolved": []
+      },
+      {
+        "text": "it might not stand a chance.",
+        "width": 146,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_PokemonCenter_1F/scripts.inc",
+    "label": "SlateportCity_PokemonCenter_1F_Text_TradedMonWithFriend",
+    "line": 36,
+    "text": "I trade POKéMON with my friends.\\pIf a traded POKéMON is holding an\\nitem, it makes me twice as happy!$",
+    "lines": [
+      {
+        "text": "I trade POKéMON with my friends.",
+        "width": 168,
+        "unresolved": []
+      },
+      {
+        "text": "If a traded POKéMON is holding an",
+        "width": 173,
+        "unresolved": []
+      },
+      {
+        "text": "item, it makes me twice as happy!",
+        "width": 169,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_PokemonFanClub/scripts.inc",
+    "label": "SlateportCity_PokemonFanClub_Text_FurfrouOffer",
+    "line": 85,
+    "text": "A fine FURFROU deserves a fine\\ntrim! Would yours like a new cut?$",
+    "lines": [
+      {
+        "text": "A fine FURFROU deserves a fine",
+        "width": 160,
+        "unresolved": []
+      },
+      {
+        "text": "trim! Would yours like a new cut?",
+        "width": 168,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_PokemonFanClub/scripts.inc",
+    "label": "SlateportCity_PokemonFanClub_Text_FurfrouChoose",
+    "line": 89,
+    "text": "Choose the FURFROU you want styled.$",
+    "lines": [
+      {
+        "text": "Choose the FURFROU you want styled.",
+        "width": 190,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_PokemonFanClub/scripts.inc",
+    "label": "SlateportCity_PokemonFanClub_Text_FurfrouComplete",
+    "line": 92,
+    "text": "All done! {STR_VAR_1} has a lovely\\nnew look.$",
+    "lines": [
+      {
+        "text": "All done! {STR_VAR_1} has a lovely",
+        "width": 185,
+        "unresolved": []
+      },
+      {
+        "text": "new look.",
+        "width": 46,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_PokemonFanClub/scripts.inc",
+    "label": "SlateportCity_PokemonFanClub_Text_FurfrouInvalid",
+    "line": 96,
+    "text": "I can only style FURFROU, including\\none that already has a trim.$",
+    "lines": [
+      {
+        "text": "I can only style FURFROU, including",
+        "width": 182,
+        "unresolved": []
+      },
+      {
+        "text": "one that already has a trim.",
+        "width": 144,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_PokemonFanClub/scripts.inc",
+    "label": "SlateportCity_PokemonFanClub_Text_FurfrouExit",
+    "line": 100,
+    "text": "Come back whenever FURFROU wants a\\ndifferent look.$",
+    "lines": [
+      {
+        "text": "Come back whenever FURFROU wants a",
+        "width": 188,
+        "unresolved": []
+      },
+      {
+        "text": "different look.",
+        "width": 79,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_PokemonFanClub/scripts.inc",
+    "label": "SlateportCity_PokemonFanClub_Text_MeetChairman",
+    "line": 355,
+    "text": "Er-hem! I am the CHAIRMAN of the\\nPOKéMON FAN CLUB!\\pBeing the CHAIRMAN, I am naturally\\nthe most important!\\pNo one can best me when it comes\\nto raising POKéMON. No one!\\pWell, let me tell you about\\nPOKéMON CONTESTS.\\pThey're events where one can show off\\nPOKéMON for the world to see!\\pHowever, they're held in far-off towns,\\nso I cannot participate often enough.\\pThat is why we gather here to show\\noff our POKéMON, and have others\\lshow us theirs.$",
+    "lines": [
+      {
+        "text": "Er-hem! I am the CHAIRMAN of the",
+        "width": 171,
+        "unresolved": []
+      },
+      {
+        "text": "POKéMON FAN CLUB!",
+        "width": 94,
+        "unresolved": []
+      },
+      {
+        "text": "Being the CHAIRMAN, I am naturally",
+        "width": 179,
+        "unresolved": []
+      },
+      {
+        "text": "the most important!",
+        "width": 103,
+        "unresolved": []
+      },
+      {
+        "text": "No one can best me when it comes",
+        "width": 169,
+        "unresolved": []
+      },
+      {
+        "text": "to raising POKéMON. No one!",
+        "width": 140,
+        "unresolved": []
+      },
+      {
+        "text": "Well, let me tell you about",
+        "width": 134,
+        "unresolved": []
+      },
+      {
+        "text": "POKéMON CONTESTS.",
+        "width": 96,
+        "unresolved": []
+      },
+      {
+        "text": "They're events where one can show off",
+        "width": 202,
+        "unresolved": []
+      },
+      {
+        "text": "POKéMON for the world to see!",
+        "width": 153,
+        "unresolved": []
+      },
+      {
+        "text": "However, they're held in far-off towns,",
+        "width": 206,
+        "unresolved": []
+      },
+      {
+        "text": "so I cannot participate often enough.",
+        "width": 199,
+        "unresolved": []
+      },
+      {
+        "text": "That is why we gather here to show",
+        "width": 179,
+        "unresolved": []
+      },
+      {
+        "text": "off our POKéMON, and have others",
+        "width": 172,
+        "unresolved": []
+      },
+      {
+        "text": "show us theirs.",
+        "width": 78,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_PokemonFanClub/scripts.inc",
+    "label": "SlateportCity_PokemonFanClub_Text_LikeToSeeEnteredContestPokemon",
+    "line": 372,
+    "text": "The POKéMON of a TRAINER who has\\nentered a POKéMON CONTEST…\\lThat, I would like to see.$",
+    "lines": [
+      {
+        "text": "The POKéMON of a TRAINER who has",
+        "width": 174,
+        "unresolved": []
+      },
+      {
+        "text": "entered a POKéMON CONTEST…",
+        "width": 146,
+        "unresolved": []
+      },
+      {
+        "text": "That, I would like to see.",
+        "width": 129,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_PokemonFanClub/scripts.inc",
+    "label": "SlateportCity_PokemonFanClub_Text_AllowMeToExamineYourPokemon",
+    "line": 377,
+    "text": "Er-hem! I see you've participated in\\na POKéMON CONTEST!\\pPlease! Allow me to examine how you\\nhave raised your POKéMON.\\pIt delights me no end to see POKéMON\\nraised by other TRAINERS.\\pThe happy expressions of POKéMON\\nraised with proper care…\\pThe kindly eyes of the TRAINER that\\nnurtured and raised the POKéMON…\\pThe very thought fills my heart to\\noverwhelming with joy.\\pOh! I do beg your pardon!\\nForgive me for prattling on so!\\pPlease! Allow me to examine how much\\nyour POKéMON has grown!$",
+    "lines": [
+      {
+        "text": "Er-hem! I see you've participated in",
+        "width": 191,
+        "unresolved": []
+      },
+      {
+        "text": "a POKéMON CONTEST!",
+        "width": 100,
+        "unresolved": []
+      },
+      {
+        "text": "Please! Allow me to examine how you",
+        "width": 182,
+        "unresolved": []
+      },
+      {
+        "text": "have raised your POKéMON.",
+        "width": 134,
+        "unresolved": []
+      },
+      {
+        "text": "It delights me no end to see POKéMON",
+        "width": 191,
+        "unresolved": []
+      },
+      {
+        "text": "raised by other TRAINERS.",
+        "width": 134,
+        "unresolved": []
+      },
+      {
+        "text": "The happy expressions of POKéMON",
+        "width": 177,
+        "unresolved": []
+      },
+      {
+        "text": "raised with proper care…",
+        "width": 127,
+        "unresolved": []
+      },
+      {
+        "text": "The kindly eyes of the TRAINER that",
+        "width": 188,
+        "unresolved": []
+      },
+      {
+        "text": "nurtured and raised the POKéMON…",
+        "width": 175,
+        "unresolved": []
+      },
+      {
+        "text": "The very thought fills my heart to",
+        "width": 178,
+        "unresolved": []
+      },
+      {
+        "text": "overwhelming with joy.",
+        "width": 115,
+        "unresolved": []
+      },
+      {
+        "text": "Oh! I do beg your pardon!",
+        "width": 129,
+        "unresolved": []
+      },
+      {
+        "text": "Forgive me for prattling on so!",
+        "width": 160,
+        "unresolved": []
+      },
+      {
+        "text": "Please! Allow me to examine how much",
+        "width": 188,
+        "unresolved": []
+      },
+      {
+        "text": "your POKéMON has grown!",
+        "width": 125,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_PokemonFanClub/scripts.inc",
+    "label": "SlateportCity_PokemonFanClub_Text_HowIsYourPokemonGrowing",
+    "line": 395,
+    "text": "How is your POKéMON growing?\\nAllow me to examine it.$",
+    "lines": [
+      {
+        "text": "How is your POKéMON growing?",
+        "width": 150,
+        "unresolved": []
+      },
+      {
+        "text": "Allow me to examine it.",
+        "width": 115,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_PokemonFanClub/scripts.inc",
+    "label": "SlateportCity_PokemonFanClub_Text_HmHmISee",
+    "line": 399,
+    "text": "Hm, hm…\\nI see…$",
+    "lines": [
+      {
+        "text": "Hm, hm…",
+        "width": 36,
+        "unresolved": []
+      },
+      {
+        "text": "I see…",
+        "width": 33,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_PokemonFanClub/scripts.inc",
+    "label": "SlateportCity_PokemonFanClub_Text_GiveMonMorePokeblocks",
+    "line": 403,
+    "text": "Hmmm… It's not bad, but it's not\\ngood, either…\\pYou, the TRAINER, must put more\\neffort into raising this POKéMON!\\pFor instance, may I suggest that\\nyou give it more {POKEBLOCK}S?$",
+    "lines": [
+      {
+        "text": "Hmmm… It's not bad, but it's not",
+        "width": 169,
+        "unresolved": []
+      },
+      {
+        "text": "good, either…",
+        "width": 69,
+        "unresolved": []
+      },
+      {
+        "text": "You, the TRAINER, must put more",
+        "width": 164,
+        "unresolved": []
+      },
+      {
+        "text": "effort into raising this POKéMON!",
+        "width": 174,
+        "unresolved": []
+      },
+      {
+        "text": "For instance, may I suggest that",
+        "width": 171,
+        "unresolved": []
+      },
+      {
+        "text": "you give it more {POKEBLOCK}S?",
+        "width": 127,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_PokemonFanClub/scripts.inc",
+    "label": "SlateportCity_PokemonFanClub_Text_NoSpaceForReward",
+    "line": 411,
+    "text": "Oh, my…\\pYour POKéMON is growing quite well,\\nso you deserve a reward.\\pUnfortunately, you have no space for\\nthis in your BAG.$",
+    "lines": [
+      {
+        "text": "Oh, my…",
+        "width": 36,
+        "unresolved": []
+      },
+      {
+        "text": "Your POKéMON is growing quite well,",
+        "width": 180,
+        "unresolved": []
+      },
+      {
+        "text": "so you deserve a reward.",
+        "width": 126,
+        "unresolved": []
+      },
+      {
+        "text": "Unfortunately, you have no space for",
+        "width": 194,
+        "unresolved": []
+      },
+      {
+        "text": "this in your BAG.",
+        "width": 85,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_PokemonFanClub/scripts.inc",
+    "label": "SlateportCity_PokemonFanClub_Text_MonMostImpressiveGiveItThis",
+    "line": 418,
+    "text": "Your {STR_VAR_1}, it is growing in\\na most impressive manner!\\lIt is one fine specimen!\\pBut! If you were to give it this,\\nit would grow even better! Indeed!$",
+    "lines": [
+      {
+        "text": "Your {STR_VAR_1}, it is growing in",
+        "width": 188,
+        "unresolved": []
+      },
+      {
+        "text": "a most impressive manner!",
+        "width": 133,
+        "unresolved": []
+      },
+      {
+        "text": "It is one fine specimen!",
+        "width": 124,
+        "unresolved": []
+      },
+      {
+        "text": "But! If you were to give it this,",
+        "width": 165,
+        "unresolved": []
+      },
+      {
+        "text": "it would grow even better! Indeed!",
+        "width": 179,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_PokemonFanClub/scripts.inc",
+    "label": "SlateportCity_PokemonFanClub_Text_ExplainRedScarf",
+    "line": 425,
+    "text": "Let a POKéMON hold that RED SCARF.\\pEveryone will recognize the coolness\\nof that POKéMON!$",
+    "lines": [
+      {
+        "text": "Let a POKéMON hold that RED SCARF.",
+        "width": 181,
+        "unresolved": []
+      },
+      {
+        "text": "Everyone will recognize the coolness",
+        "width": 192,
+        "unresolved": []
+      },
+      {
+        "text": "of that POKéMON!",
+        "width": 88,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_PokemonFanClub/scripts.inc",
+    "label": "SlateportCity_PokemonFanClub_Text_ExplainBlueScarf",
+    "line": 430,
+    "text": "Let a POKéMON hold that BLUE SCARF.\\pIts beauty will be accentuated much\\nmore than now!$",
+    "lines": [
+      {
+        "text": "Let a POKéMON hold that BLUE SCARF.",
+        "width": 187,
+        "unresolved": []
+      },
+      {
+        "text": "Its beauty will be accentuated much",
+        "width": 189,
+        "unresolved": []
+      },
+      {
+        "text": "more than now!",
+        "width": 75,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_PokemonFanClub/scripts.inc",
+    "label": "SlateportCity_PokemonFanClub_Text_ExplainPinkScarf",
+    "line": 435,
+    "text": "Let a POKéMON hold that PINK SCARF.\\pIt will draw out the cuteness of\\nthe POKéMON some more!$",
+    "lines": [
+      {
+        "text": "Let a POKéMON hold that PINK SCARF.",
+        "width": 187,
+        "unresolved": []
+      },
+      {
+        "text": "It will draw out the cuteness of",
+        "width": 167,
+        "unresolved": []
+      },
+      {
+        "text": "the POKéMON some more!",
+        "width": 120,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_PokemonFanClub/scripts.inc",
+    "label": "SlateportCity_PokemonFanClub_Text_ExplainGreenScarf",
+    "line": 440,
+    "text": "Let a POKéMON hold that GREEN SCARF.\\pThat will enhance the\\nsmartness of POKéMON!$",
+    "lines": [
+      {
+        "text": "Let a POKéMON hold that GREEN SCARF.",
+        "width": 193,
+        "unresolved": []
+      },
+      {
+        "text": "That will enhance the",
+        "width": 111,
+        "unresolved": []
+      },
+      {
+        "text": "smartness of POKéMON!",
+        "width": 117,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_PokemonFanClub/scripts.inc",
+    "label": "SlateportCity_PokemonFanClub_Text_ExplainYellowScarf",
+    "line": 445,
+    "text": "Let a POKéMON hold that YELLOW SCARF.\\pIt will bolster your POKéMON's\\ntoughness so much more!$",
+    "lines": [
+      {
+        "text": "Let a POKéMON hold that YELLOW SCARF.",
+        "width": 199,
+        "unresolved": []
+      },
+      {
+        "text": "It will bolster your POKéMON's",
+        "width": 158,
+        "unresolved": []
+      },
+      {
+        "text": "toughness so much more!",
+        "width": 126,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_PokemonFanClub/scripts.inc",
+    "label": "SlateportCity_PokemonFanClub_Text_NothingElseToGiveYou",
+    "line": 450,
+    "text": "You've earned every scarf I have!\\pDo keep visiting with your\\nPOKéMON. Seeing them flourish is a\\ljoy!$",
+    "lines": [
+      {
+        "text": "You've earned every scarf I have!",
+        "width": 178,
+        "unresolved": []
+      },
+      {
+        "text": "Do keep visiting with your",
+        "width": 135,
+        "unresolved": []
+      },
+      {
+        "text": "POKéMON. Seeing them flourish is a",
+        "width": 177,
+        "unresolved": []
+      },
+      {
+        "text": "joy!",
+        "width": 21,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_PokemonFanClub/scripts.inc",
+    "label": "SlateportCity_PokemonFanClub_Text_ShowMePokemonThatLoveYou",
+    "line": 456,
+    "text": "I love seeing POKéMON that love\\ntheir TRAINERS.\\pPOKéMON are very sensitive to\\nthe feelings of their TRAINERS.\\pIf you treat your POKéMON with love\\nand care, they'll love you back.\\pWhen your POKéMON grow to love you,\\nplease come show me.$",
+    "lines": [
+      {
+        "text": "I love seeing POKéMON that love",
+        "width": 165,
+        "unresolved": []
+      },
+      {
+        "text": "their TRAINERS.",
+        "width": 81,
+        "unresolved": []
+      },
+      {
+        "text": "POKéMON are very sensitive to",
+        "width": 156,
+        "unresolved": []
+      },
+      {
+        "text": "the feelings of their TRAINERS.",
+        "width": 164,
+        "unresolved": []
+      },
+      {
+        "text": "If you treat your POKéMON with love",
+        "width": 186,
+        "unresolved": []
+      },
+      {
+        "text": "and care, they'll love you back.",
+        "width": 164,
+        "unresolved": []
+      },
+      {
+        "text": "When your POKéMON grow to love you,",
+        "width": 185,
+        "unresolved": []
+      },
+      {
+        "text": "please come show me.",
+        "width": 106,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_PokemonFanClub/scripts.inc",
+    "label": "SlateportCity_PokemonFanClub_Text_PokemonAdoresYou",
+    "line": 466,
+    "text": "Your POKéMON really adores you.\\pFor you, a most compassionate\\nTRAINER, a gift from the FAN CLUB!$",
+    "lines": [
+      {
+        "text": "Your POKéMON really adores you.",
+        "width": 164,
+        "unresolved": []
+      },
+      {
+        "text": "For you, a most compassionate",
+        "width": 156,
+        "unresolved": []
+      },
+      {
+        "text": "TRAINER, a gift from the FAN CLUB!",
+        "width": 178,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_PokemonFanClub/scripts.inc",
+    "label": "SlateportCity_PokemonFanClub_Text_TreatPokemonWithLove",
+    "line": 471,
+    "text": "POKéMON are very sensitive to\\nthe feelings of their TRAINERS.\\pIf you treat your POKéMON with love\\nand care, they'll love you back.$",
+    "lines": [
+      {
+        "text": "POKéMON are very sensitive to",
+        "width": 156,
+        "unresolved": []
+      },
+      {
+        "text": "the feelings of their TRAINERS.",
+        "width": 164,
+        "unresolved": []
+      },
+      {
+        "text": "If you treat your POKéMON with love",
+        "width": 186,
+        "unresolved": []
+      },
+      {
+        "text": "and care, they'll love you back.",
+        "width": 164,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_PokemonFanClub/scripts.inc",
+    "label": "SlateportCity_PokemonFanClub_Text_PokemonDontLikeFainting",
+    "line": 477,
+    "text": "If you keep letting a POKéMON faint\\nin battle, it'll come to resent it.\\pSoon, it will become less trusting\\nof the TRAINER.\\pIn other words, it certainly won't\\nlike you very much.$",
+    "lines": [
+      {
+        "text": "If you keep letting a POKéMON faint",
+        "width": 186,
+        "unresolved": []
+      },
+      {
+        "text": "in battle, it'll come to resent it.",
+        "width": 173,
+        "unresolved": []
+      },
+      {
+        "text": "Soon, it will become less trusting",
+        "width": 173,
+        "unresolved": []
+      },
+      {
+        "text": "of the TRAINER.",
+        "width": 81,
+        "unresolved": []
+      },
+      {
+        "text": "In other words, it certainly won't",
+        "width": 177,
+        "unresolved": []
+      },
+      {
+        "text": "like you very much.",
+        "width": 97,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_PokemonFanClub/scripts.inc",
+    "label": "SlateportCity_PokemonFanClub_Text_MonEnjoyedLuxuryBall",
+    "line": 485,
+    "text": "Do POKéMON remember how they were\\ncaught?\\pMine became friendly so quickly after\\nI caught it in a LUXURY BALL.$",
+    "lines": [
+      {
+        "text": "Do POKéMON remember how they were",
+        "width": 180,
+        "unresolved": []
+      },
+      {
+        "text": "caught?",
+        "width": 42,
+        "unresolved": []
+      },
+      {
+        "text": "Mine became friendly so quickly after",
+        "width": 195,
+        "unresolved": []
+      },
+      {
+        "text": "I caught it in a LUXURY BALL.",
+        "width": 149,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_PokemonFanClub/scripts.inc",
+    "label": "SlateportCity_PokemonFanClub_Text_Skitty",
+    "line": 491,
+    "text": "SKITTY: Fffnyaaaah…$",
+    "lines": [
+      {
+        "text": "SKITTY: Fffnyaaaah…",
+        "width": 108,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_PokemonFanClub/scripts.inc",
+    "label": "SlateportCity_PokemonFanClub_Text_Zigzagoon",
+    "line": 494,
+    "text": "ZIGZAGOON: Kyuuu…$",
+    "lines": [
+      {
+        "text": "ZIGZAGOON: Kyuuu…",
+        "width": 96,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_PokemonFanClub/scripts.inc",
+    "label": "SlateportCity_PokemonFanClub_Text_Azumarill",
+    "line": 497,
+    "text": "AZUMARILL: Marimari?$",
+    "lines": [
+      {
+        "text": "AZUMARILL: Marimari?",
+        "width": 108,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_SternsShipyard_1F/scripts.inc",
+    "label": "SlateportCity_SternsShipyard_1F_Text_CantMakeHeadsOrTails",
+    "line": 65,
+    "text": "The hull fits. The engine fits.\\nSo why won't these measurements agree?\\pIf I move this here…\\nNo, then that won't fit!$",
+    "lines": [
+      {
+        "text": "The hull fits. The engine fits.",
+        "width": 155,
+        "unresolved": []
+      },
+      {
+        "text": "So why won't these measurements agree?",
+        "width": 211,
+        "unresolved": []
+      },
+      {
+        "text": "If I move this here…",
+        "width": 105,
+        "unresolved": []
+      },
+      {
+        "text": "No, then that won't fit!",
+        "width": 125,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_SternsShipyard_1F/scripts.inc",
+    "label": "SlateportCity_SternsShipyard_1F_Text_MeetDockDeliverToStern",
+    "line": 71,
+    "text": "Hm? Oh, sorry. I'm DOCK.\\nCAPT. STERN asked me to design a ferry.\\pAre those the DEVON GOODS?\\nHe's been waiting for them.\\pHe's at the OCEANIC MUSEUM.\\nTake the parcel straight to him.$",
+    "lines": [
+      {
+        "text": "Hm? Oh, sorry. I'm DOCK.",
+        "width": 121,
+        "unresolved": []
+      },
+      {
+        "text": "CAPT. STERN asked me to design a ferry.",
+        "width": 203,
+        "unresolved": []
+      },
+      {
+        "text": "Are those the DEVON GOODS?",
+        "width": 143,
+        "unresolved": []
+      },
+      {
+        "text": "He's been waiting for them.",
+        "width": 142,
+        "unresolved": []
+      },
+      {
+        "text": "He's at the OCEANIC MUSEUM.",
+        "width": 147,
+        "unresolved": []
+      },
+      {
+        "text": "Take the parcel straight to him.",
+        "width": 166,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_SternsShipyard_1F/scripts.inc",
+    "label": "SlateportCity_SternsShipyard_1F_Text_CouldYouFindStern",
+    "line": 79,
+    "text": "DOCK: Try the OCEANIC MUSEUM.\\nCAPT. STERN needs that parcel.\\pI'll be here, arguing with\\nthese measurements…$",
+    "lines": [
+      {
+        "text": "DOCK: Try the OCEANIC MUSEUM.",
+        "width": 155,
+        "unresolved": []
+      },
+      {
+        "text": "CAPT. STERN needs that parcel.",
+        "width": 159,
+        "unresolved": []
+      },
+      {
+        "text": "I'll be here, arguing with",
+        "width": 131,
+        "unresolved": []
+      },
+      {
+        "text": "these measurements…",
+        "width": 110,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_SternsShipyard_1F/scripts.inc",
+    "label": "SlateportCity_SternsShipyard_1F_Text_CouldUseAdviceFromVeteran",
+    "line": 85,
+    "text": "DOCK: Shipbuilding is an art.\\pA lot of things can't be figured out\\njust by calculating.\\pI really could use advice from a veteran\\nwho knows the seas…$",
+    "lines": [
+      {
+        "text": "DOCK: Shipbuilding is an art.",
+        "width": 145,
+        "unresolved": []
+      },
+      {
+        "text": "A lot of things can't be figured out",
+        "width": 188,
+        "unresolved": []
+      },
+      {
+        "text": "just by calculating.",
+        "width": 104,
+        "unresolved": []
+      },
+      {
+        "text": "I really could use advice from a veteran",
+        "width": 208,
+        "unresolved": []
+      },
+      {
+        "text": "who knows the seas…",
+        "width": 105,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_SternsShipyard_1F/scripts.inc",
+    "label": "SlateportCity_SternsShipyard_1F_Text_BrineyJoinedUs",
+    "line": 92,
+    "text": "DOCK: MR. BRINEY's joined us!\\pThe ferry is sailing, but there's\\nalways work to do. His experience\\lat sea is a great help.$",
+    "lines": [
+      {
+        "text": "DOCK: MR. BRINEY's joined us!",
+        "width": 151,
+        "unresolved": []
+      },
+      {
+        "text": "The ferry is sailing, but there's",
+        "width": 169,
+        "unresolved": []
+      },
+      {
+        "text": "always work to do. His experience",
+        "width": 172,
+        "unresolved": []
+      },
+      {
+        "text": "at sea is a great help.",
+        "width": 115,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_SternsShipyard_1F/scripts.inc",
+    "label": "SlateportCity_SternsShipyard_1F_Text_FerryIsReady",
+    "line": 98,
+    "text": "DOCK: The ferry is finally ready!\\pThe new S.S. TIDAL is truly a marvel\\nof technology!\\pBut, I get the feeling that we can\\nmake something even better.\\pYou know, there's never an end to\\ntechnology's march.$",
+    "lines": [
+      {
+        "text": "DOCK: The ferry is finally ready!",
+        "width": 167,
+        "unresolved": []
+      },
+      {
+        "text": "The new S.S. TIDAL is truly a marvel",
+        "width": 181,
+        "unresolved": []
+      },
+      {
+        "text": "of technology!",
+        "width": 77,
+        "unresolved": []
+      },
+      {
+        "text": "But, I get the feeling that we can",
+        "width": 176,
+        "unresolved": []
+      },
+      {
+        "text": "make something even better.",
+        "width": 147,
+        "unresolved": []
+      },
+      {
+        "text": "You know, there's never an end to",
+        "width": 175,
+        "unresolved": []
+      },
+      {
+        "text": "technology's march.",
+        "width": 105,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_SternsShipyard_1F/scripts.inc",
+    "label": "SlateportCity_SternsShipyard_1F_Text_DecidedToHelpDock",
+    "line": 107,
+    "text": "MR. BRINEY: Ah, {PLAYER}{KUN}!\\nIt's been too long!\\pI've joined DOCK here at the\\nshipyard. That lad's S.S. TIDAL\\lis a fine vessel!\\pHe knows the engineering, and I\\nknow the sea. Together, we'll\\lkeep her sailing for years!$",
+    "lines": [
+      {
+        "text": "MR. BRINEY: Ah, {PLAYER}{KUN}!",
+        "width": 124,
+        "unresolved": []
+      },
+      {
+        "text": "It's been too long!",
+        "width": 101,
+        "unresolved": []
+      },
+      {
+        "text": "I've joined DOCK here at the",
+        "width": 149,
+        "unresolved": []
+      },
+      {
+        "text": "shipyard. That lad's S.S. TIDAL",
+        "width": 160,
+        "unresolved": []
+      },
+      {
+        "text": "is a fine vessel!",
+        "width": 85,
+        "unresolved": []
+      },
+      {
+        "text": "He knows the engineering, and I",
+        "width": 163,
+        "unresolved": []
+      },
+      {
+        "text": "know the sea. Together, we'll",
+        "width": 151,
+        "unresolved": []
+      },
+      {
+        "text": "keep her sailing for years!",
+        "width": 139,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_SternsShipyard_1F/scripts.inc",
+    "label": "SlateportCity_SternsShipyard_1F_Text_SeaIsLikeLivingThing",
+    "line": 117,
+    "text": "The seasons, the weather, where\\nthe moon sits in the sky…\\pThese and other conditions make\\nthe sea change its expression.\\pThat's right!\\nThe sea is like a living thing!$",
+    "lines": [
+      {
+        "text": "The seasons, the weather, where",
+        "width": 166,
+        "unresolved": []
+      },
+      {
+        "text": "the moon sits in the sky…",
+        "width": 131,
+        "unresolved": []
+      },
+      {
+        "text": "These and other conditions make",
+        "width": 169,
+        "unresolved": []
+      },
+      {
+        "text": "the sea change its expression.",
+        "width": 160,
+        "unresolved": []
+      },
+      {
+        "text": "That's right!",
+        "width": 70,
+        "unresolved": []
+      },
+      {
+        "text": "The sea is like a living thing!",
+        "width": 152,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_SternsShipyard_1F/scripts.inc",
+    "label": "SlateportCity_SternsShipyard_1F_Text_GetSeasickEasily",
+    "line": 125,
+    "text": "I get seasick real easily.\\nSo I get to help out here instead.$",
+    "lines": [
+      {
+        "text": "I get seasick real easily.",
+        "width": 132,
+        "unresolved": []
+      },
+      {
+        "text": "So I get to help out here instead.",
+        "width": 175,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_SternsShipyard_2F/scripts.inc",
+    "label": "SlateportCity_SternsShipyard_2F_Text_ShipDesignMoreLikeBuilding",
+    "line": 12,
+    "text": "Designing a large ship is more like\\nmaking a big building than putting\\ltogether a transportation vehicle.$",
+    "lines": [
+      {
+        "text": "Designing a large ship is more like",
+        "width": 176,
+        "unresolved": []
+      },
+      {
+        "text": "making a big building than putting",
+        "width": 177,
+        "unresolved": []
+      },
+      {
+        "text": "together a transportation vehicle.",
+        "width": 183,
+        "unresolved": []
+      }
+    ]
+  },
+  {
+    "file": "data/maps/SlateportCity_SternsShipyard_2F/scripts.inc",
+    "label": "SlateportCity_SternsShipyard_2F_Text_FloatsBecauseBuoyancy",
+    "line": 17,
+    "text": "Don't you think it's strange that\\na ship made of heavy iron floats?\\pIt floats because of a principle\\ncalled buoyancy.$",
+    "lines": [
+      {
+        "text": "Don't you think it's strange that",
+        "width": 178,
+        "unresolved": []
+      },
+      {
+        "text": "a ship made of heavy iron floats?",
+        "width": 173,
+        "unresolved": []
+      },
+      {
+        "text": "It floats because of a principle",
+        "width": 168,
+        "unresolved": []
+      },
+      {
+        "text": "called buoyancy.",
+        "width": 86,
+        "unresolved": []
+      }
+    ]
+  }
+]

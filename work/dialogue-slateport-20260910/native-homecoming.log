@@ -1,0 +1,30 @@
+homecoming-male 0 RESULT frames=18000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=6563829d2bae3fe2 nonzero_pixels=30042 save_bytes=0
+READ width=4 address=020022c4 value=00000003
+READ width=4 address=020022ec value=00000001
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00000100
+READ width=4 address=020022e0 value=00000004
+READ width=4 address=020022e4 value=00000005
+READ width=4 address=030051b4 value=02011398
+READ width=4 address=030051b0 value=02015210
+ 
+homecoming-female 0 RESULT frames=18000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=90d1361e2252516e nonzero_pixels=31525 save_bytes=0
+READ width=4 address=020022c4 value=00000003
+READ width=4 address=020022ec value=00000001
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00000102
+READ width=4 address=020022e0 value=00000006
+READ width=4 address=020022e4 value=00000005
+READ width=4 address=030051b4 value=02011398
+READ width=4 address=030051b0 value=02015210
+ 
+homecoming-male-early-pass 0 RESULT frames=18000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=ce20f970e5e44d1c nonzero_pixels=20903 save_bytes=0
+READ width=4 address=020022c4 value=00000002
+READ width=4 address=020022ec value=00000000
+READ width=4 address=020022f0 value=00000000
+READ width=4 address=020022d4 value=00000100
+READ width=4 address=020022e0 value=00000008
+READ width=4 address=020022e4 value=00000003
+READ width=4 address=030051b4 value=02011398
+READ width=4 address=030051b0 value=02015210
+ 

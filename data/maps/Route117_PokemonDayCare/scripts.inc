@@ -81,10 +81,12 @@ Route117_PokemonDayCare_Text_TogepiEggReceived:
 	.string "by two POKéMON you leave here.$"
 
 Route117_PokemonDayCare_Text_TogepiEggAfter:
-	.string "Leave two compatible POKéMON here,\n"
-	.string "then hatch the EGG they produce.\p"
-	.string "One is enough for a KANGASKHANITE!\n"
-	.string "Gift EGGS, including TOGEPI, don't count.$"
+	.string "Leave two compatible POKéMON\n"
+	.string "here, then hatch the EGG they\l"
+	.string "produce.\p"
+	.string "One is enough for a\n"
+	.string "KANGASKHANITE! Gift EGGS,\l"
+	.string "including TOGEPI, don't count.$"
 
 Route117_PokemonDayCare_Text_HatchReward:
 	.string "You raised an EGG from two parents!\n"

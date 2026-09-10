@@ -637,13 +637,13 @@ MauvilleCity_PokemonCenter_1F_Text_UsedItemFinderTitle::
 	.string "The Item-Finding TRAINER$"
 
 MauvilleCity_PokemonCenter_1F_Text_UsedItemFinderAction::
-	.string "Used an ITEMFINDER$"
+	.string "Used a DOWSING MACHINE$"
 
 MauvilleCity_PokemonCenter_1F_Text_UsedItemFinderStory::
 	.string "This is a tale of a TRAINER\n"
 	.string "named {STR_VAR_3}.\p"
-	.string "This TRAINER used an ITEMFINDER\n"
-	.string "{STR_VAR_1} times!\p"
+	.string "This TRAINER used a\n"
+	.string "DOWSING MACHINE {STR_VAR_1} times!\p"
 	.string "{STR_VAR_3} must enjoy scouring the\n"
 	.string "ground for hidden items!$"
 

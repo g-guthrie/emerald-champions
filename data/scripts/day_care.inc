@@ -82,16 +82,14 @@ Route117_PokemonDayCare_EventScript_DaycareWoman::
 	end
 
 Route117_PokemonDayCare_EventScript_GiveMonToRaise::
-	specialvar VAR_RESULT, CountPartyNonEggMons
-	goto_if_eq VAR_RESULT, 1, Route117_PokemonDayCare_EventScript_OnlyOneMon
-	specialvar VAR_RESULT, CountPartyAliveNonEggMons
-	goto_if_eq VAR_RESULT, 2, Route117_PokemonDayCare_EventScript_OnlyTwoAliveMons
 	msgbox Route117_PokemonDayCare_Text_WhichMonShouldWeRaise, MSGBOX_DEFAULT
 	chooseboxmon SELECT_PC_MON_DAYCARE
 	waitstate
 	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, Route117_PokemonDayCare_EventScript_ComeAgain
+	goto_if_eq VAR_0x8004, PC_MON_CHOSEN, Route117_PokemonDayCare_EventScript_DepositSelectedMon
 	specialvar VAR_RESULT, CountPartyAliveNonEggMons_IgnoreVar0x8004Slot
-	goto_if_eq VAR_RESULT, 0, Route117_PokemonDayCare_EventScript_OnlyOneAliveMon
+	goto_if_lt VAR_RESULT, 2, Route117_PokemonDayCare_EventScript_OnlyTwoAliveMons
+Route117_PokemonDayCare_EventScript_DepositSelectedMon::
 	specialvar VAR_0x8005, GetSelectedMonNicknameAndSpecies
 	waitse
 	playmoncry VAR_0x8005, CRY_MODE_NORMAL
@@ -326,8 +324,8 @@ Route117_PokemonDayCare_Text_WouldYouLikeUsToRaiseAMon:
 	.string "Would you like us to raise one?$"
 
 Route117_PokemonDayCare_Text_WhichMonShouldWeRaise:
-	.string "Which POKéMON should we raise for\n"
-	.string "you?$"
+	.string "Choose a POKéMON from your party\n"
+	.string "or PC for us to raise.$"
 
 Route117_PokemonDayCare_Text_WellRaiseYourMon:
 	.string "Fine, we'll raise your {STR_VAR_1}\n"
@@ -401,9 +399,7 @@ Text_EggHatchHuh:
 	.string "Huh?$"
 
 Route117_PokemonDayCare_Text_YoullBeLeftWithJustOne:
-	.string "Huh?\n"
-	.string "Now, now.\p"
-	.string "If you leave that POKéMON with\n"
-	.string "me, you'll be left with just one.\p"
-	.string "You will be better off if you catch\n"
-	.string "some more, I dare say.$"
+	.string "Keep at least two healthy POKéMON\n"
+	.string "with you for double battles.\p"
+	.string "You can leave a boxed POKéMON here\n"
+	.string "without changing your party.$"

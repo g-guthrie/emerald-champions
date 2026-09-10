@@ -85,8 +85,9 @@ RustboroCity_DevonCorp_1F_Text_WelcomeToDevonCorp:
 	.string "medicine that enhance your life.$"
 
 RustboroCity_DevonCorp_1F_Text_StaffGotRobbed:
-	.string "One of our research staff stupidly\n"
-	.string "got robbed of an important parcel.$"
+	.string "One of our researchers was robbed\n"
+	.string "of an important parcel. I hope\l"
+	.string "he's all right.$"
 
 RustboroCity_DevonCorp_1F_Text_ThoseShoesAreOurProduct:
 	.string "Hey, those RUNNING SHOES!\n"
@@ -95,11 +96,11 @@ RustboroCity_DevonCorp_1F_Text_ThoseShoesAreOurProduct:
 	.string "using something we made.$"
 
 RustboroCity_DevonCorp_1F_Text_RobberWasntVeryBright:
-	.string "That stolen parcel…\p"
-	.string "Well, sure it's important, but it's not\n"
-	.string "anything that anyone can use.\p"
-	.string "In my estimation, that robber must not\n"
-	.string "have been very bright.$"
+	.string "That parcel holds instruments for\n"
+	.string "CAPT. STERN's research.\p"
+	.string "Who would go to so much trouble\n"
+	.string "to steal them? They must know\l"
+	.string "what the captain is studying.$"
 
 RustboroCity_DevonCorp_1F_Text_SoundsLikeStolenGoodsRecovered:
 	.string "It sounds like they've recovered\n"
@@ -110,8 +111,9 @@ RustboroCity_DevonCorp_1F_Text_OnlyAuthorizedPeopleEnter:
 	.string "are allowed to enter here.$"
 
 RustboroCity_DevonCorp_1F_Text_HowCouldWeGetRobbed:
-	.string "It's beyond stupid.\n"
-	.string "How could we get robbed?$"
+	.string "After that robbery, we're being\n"
+	.string "much more careful with our\l"
+	.string "research deliveries.$"
 
 RustboroCity_DevonCorp_1F_Text_YoureAlwaysWelcomeHere:
 	.string "Hi, there!\n"

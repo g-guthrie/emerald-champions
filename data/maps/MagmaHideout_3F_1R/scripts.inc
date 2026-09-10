@@ -24,8 +24,9 @@ MagmaHideout_3F_1R_Text_Grunt9PostBattle:
 	.string "hoods inside a volcano? Be honest.$"
 
 MagmaHideout_3F_1R_Text_Grunt16Intro:
-	.string "MAXIE offers a world people can predict,\n"
-	.string "build on, and pass to their children.\p"
+	.string "MAXIE offers a world people can\n"
+	.string "predict, build on, and pass to\l"
+	.string "their children.\p"
 	.string "AQUA rejects it. You question it.\n"
 	.string "I will defend it.$"
 
@@ -33,5 +34,6 @@ MagmaHideout_3F_1R_Text_Grunt16Defeat:
 	.string "Your uncertainty outplayed my order…$"
 
 MagmaHideout_3F_1R_Text_Grunt16PostBattle:
-	.string "I still believe MAGMA's question matters.\n"
-	.string "I am less certain our answer is complete.$"
+	.string "I still believe MAGMA's question\n"
+	.string "matters. I am less certain our\l"
+	.string "answer is complete.$"

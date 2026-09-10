@@ -495,9 +495,11 @@ LilycoveCity_ContestHall_Text_ThatGirlThereIsCutest:
 	.string "POKéMON by their looks?$"
 
 LilycoveCity_ContestHall_Text_WantCuteMonOfMyOwn:
-	.string "Ohh, seeing all these cute POKéMON,\n"
-	.string "they make we want to get my own!\p"
-	.string "I'm going to go catch some!$"
+	.string "Ohh, seeing all these cute POKéMON\n"
+	.string "makes me want to meet one of my\l"
+	.string "own!\p"
+	.string "I'm going to go look for a\n"
+	.string "partner!$"
 
 LilycoveCity_ContestHall_Text_BeautyContestStage:
 	.string "BEAUTY CONTEST STAGE\n"

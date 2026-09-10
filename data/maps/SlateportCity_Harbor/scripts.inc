@@ -5,12 +5,13 @@ SlateportCity_Harbor_MapScripts::
 SlateportCity_Harbor_OnTransition:
 	setescapewarp MAP_SLATEPORT_CITY, 28, 13
 	setvar VAR_TEMP_1, 0
-	call_if_eq VAR_SLATEPORT_HARBOR_STATE, 1, SlateportCity_Harbor_EventScript_ReadyAquaEscapeScene
-	call_if_set FLAG_SYS_GAME_CLEAR, SlateportCity_Harbor_EventScript_ShowSSTidal
+	goto_if_eq VAR_SLATEPORT_HARBOR_STATE, 1, SlateportCity_Harbor_EventScript_ReadyAquaEscapeScene
+	call_if_set FLAG_BADGE06_GET, SlateportCity_Harbor_EventScript_ShowSSTidal
 	end
 
 SlateportCity_Harbor_EventScript_ShowSSTidal::
 	clearflag FLAG_HIDE_SLATEPORT_CITY_HARBOR_SS_TIDAL
+	clearflag FLAG_HIDE_SLATEPORT_CITY_HARBOR_PATRONS
 	return
 
 SlateportCity_Harbor_EventScript_ReadyAquaEscapeScene::
@@ -18,7 +19,8 @@ SlateportCity_Harbor_EventScript_ReadyAquaEscapeScene::
 	setobjectxyperm LOCALID_SLATEPORT_HARBOR_CAPT_STERN, 12, 13
 	setobjectmovementtype LOCALID_SLATEPORT_HARBOR_CAPT_STERN, MOVEMENT_TYPE_FACE_LEFT
 	setflag FLAG_HIDE_SLATEPORT_CITY_HARBOR_PATRONS
-	return
+	setflag FLAG_HIDE_SLATEPORT_CITY_HARBOR_SS_TIDAL
+	end
 
 SlateportCity_Harbor_EventScript_AquaEscapeTrigger0::
 	lockall
@@ -157,7 +159,7 @@ SlateportCity_Harbor_Movement_PlayerWalkUp:
 SlateportCity_Harbor_EventScript_FerryAttendant::
 	lock
 	faceplayer
-	goto_if_unset FLAG_SYS_GAME_CLEAR, SlateportCity_Harbor_EventScript_FerryUnavailable
+	goto_if_unset FLAG_BADGE06_GET, SlateportCity_Harbor_EventScript_FerryUnavailable
 	goto_if_unset FLAG_RECEIVED_SS_TICKET, SlateportCity_Harbor_EventScript_NoTicket
 	goto SlateportCity_Harbor_EventScript_AskForTicket
 
@@ -174,7 +176,7 @@ SlateportCity_Harbor_EventScript_AskForTicket::
 	end
 
 SlateportCity_Harbor_EventScript_ChooseDestination::
-	goto_if_set FLAG_MET_SCOTT_ON_SS_TIDAL, SlateportCity_Harbor_EventScript_ChooseDestinationWithBattleFrontier
+	goto_if_set FLAG_BADGE06_GET, SlateportCity_Harbor_EventScript_ChooseDestinationWithBattleFrontier
 	multichoicedefault 18, 8, MULTI_SSTIDAL_SLATEPORT_NO_BF, 2, FALSE
 	switch VAR_RESULT
 	case 0, SlateportCity_Harbor_EventScript_Lilycove
@@ -263,7 +265,7 @@ SlateportCity_Harbor_Movement_BoardFerryNorth:
 SlateportCity_Harbor_EventScript_Sailor::
 	lock
 	faceplayer
-	goto_if_unset FLAG_SYS_GAME_CLEAR, SlateportCity_Harbor_EventScript_SailorNoAbnormalWeather
+	goto_if_unset FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, SlateportCity_Harbor_EventScript_SailorNoAbnormalWeather
 	setvar VAR_0x8004, 0
 	call_if_set FLAG_DEFEATED_KYOGRE, SlateportCity_Harbor_EventScript_CountDefeatedLegendary
 	call_if_set FLAG_DEFEATED_GROUDON, SlateportCity_Harbor_EventScript_CountDefeatedLegendary
@@ -319,7 +321,7 @@ SlateportCity_Harbor_EventScript_CaptSternFerryOrScannerComment::
 	goto_if_eq VAR_TEMP_1, 1, SlateportCity_Harbor_EventScript_TradedScanner
 	checkitem ITEM_SCANNER
 	goto_if_eq VAR_RESULT, TRUE, SlateportCity_Harbor_EventScript_AskToTradeScanner
-	goto_if_set FLAG_SYS_GAME_CLEAR, SlateportCity_Harbor_EventScript_FerryFinished
+	goto_if_set FLAG_BADGE06_GET, SlateportCity_Harbor_EventScript_FerryFinished
 	msgbox SlateportCity_Harbor_Text_WontBeLongBeforeWeFinishFerry, MSGBOX_DEFAULT
 	release
 	end
@@ -384,20 +386,19 @@ SlateportCity_Harbor_EventScript_TradedScanner::
 	end
 
 SlateportCity_Harbor_Text_FerryServiceUnavailable:
-	.string "I beg your pardon?\n"
-	.string "You're looking for a ship?\p"
-	.string "I'm sorry, the ferry service isn't\n"
-	.string "available at present…$"
+	.string "The ferry opens to TRAINERS with\n"
+	.string "six BADGES. Come back with the\l"
+	.string "FEATHER BADGE!$"
 
 SlateportCity_Harbor_Text_MayISeeYourTicket:
 	.string "Hello, are you here for the ferry?\n"
 	.string "May I confirm your ferry pass?$"
 
 SlateportCity_Harbor_Text_YouMustHaveTicket:
-	.string "Your ferry pass is not registered.\p"
-	.string "I'm terribly sorry.\p"
-	.string "You need a registered pass to board\n"
-	.string "the ferry.$"
+	.string "You'll need a ferry pass. With\n"
+	.string "six BADGES, speak to the sailor\l"
+	.string "at LILYCOVE HARBOR. He can\l"
+	.string "register yours.$"
 
 SlateportCity_Harbor_Text_ConfirmedPassWhereTo:
 	.string "The attendant confirmed your ferry\n"

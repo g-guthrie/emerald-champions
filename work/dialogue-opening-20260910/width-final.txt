@@ -1,0 +1,41 @@
+blocks 466 lines 1452 over200 40
+{"file": "data/maps/LittlerootTown/scripts.inc", "label": "LittlerootTown_Text_TownSign", "width": 204, "text": "“A town that can't be shaded any hue.”"}
+{"file": "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc", "label": "LittlerootTown_ProfessorBirchsLab_Text_LikeYouToHavePokemon", "width": 202, "text": "My colleagues sent these POKéMON from"}
+{"file": "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc", "label": "LittlerootTown_ProfessorBirchsLab_Text_LikeYouToHavePokemon", "width": 202, "text": "nine regions. Quite a welcome to HOENN!"}
+{"file": "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc", "label": "LittlerootTown_ProfessorBirchsLab_Text_LikeYouToHavePokemon", "width": 203, "text": "That one trusted you when it mattered."}
+{"file": "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc", "label": "LittlerootTown_ProfessorBirchsLab_Text_LikeYouToHavePokemon", "width": 209, "text": "I'd like you to keep traveling together."}
+{"file": "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc", "label": "LittlerootTown_ProfessorBirchsLab_Text_WhyNotGiveNicknameToMon", "width": 203, "text": "PROF. BIRCH: While you're at it, why not"}
+{"file": "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc", "label": "LittlerootTown_ProfessorBirchsLab_Text_GetRivalToTeachYou", "width": 203, "text": "Good! You can learn a lot from a battle,"}
+{"file": "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc", "label": "LittlerootTown_ProfessorBirchsLab_Text_GetRivalToTeachYou", "width": 204, "text": "even one you lose. Take care out there!"}
+{"file": "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc", "label": "LittlerootTown_ProfessorBirchsLab_Text_HeardYouBeatRivalTakePokedex", "width": 202, "text": "your battle! Sounds like quite a match."}
+{"file": "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc", "label": "LittlerootTown_ProfessorBirchsLab_Text_HeardYouBeatRivalTakePokedex", "width": 205, "text": "I have something for your journey. This"}
+{"file": "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc", "label": "LittlerootTown_ProfessorBirchsLab_Text_HeardYouBeatRivalTakePokedex", "width": 206, "text": "POKéDEX records each species you meet,"}
+{"file": "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc", "label": "LittlerootTown_ProfessorBirchsLab_Text_ExplainPokedex", "width": 210, "text": "Read the signs along each route. They'll"}
+{"file": "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc", "label": "LittlerootTown_ProfessorBirchsLab_Text_ExplainPokedex", "width": 202, "text": "help you find the POKéMON living there."}
+{"file": "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc", "label": "LittlerootTown_ProfessorBirchsLab_Text_ExplainPokedex", "width": 205, "text": "The LEVELER helps new teammates catch"}
+{"file": "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc", "label": "LittlerootTown_ProfessorBirchsLab_Text_ExplainPokedex", "width": 208, "text": "and preparation. Look after each other!"}
+{"file": "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc", "label": "LittlerootTown_ProfessorBirchsLab_Text_CatchCutePokemonWithPokeBalls", "width": 203, "text": "meet new friends in unexpected places."}
+{"file": "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc", "label": "LittlerootTown_ProfessorBirchsLab_Text_CatchCoolPokemonWithPokeBalls", "width": 202, "text": "There's more out there than you think."}
+{"file": "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc", "label": "LittlerootTown_ProfessorBirchsLab_Text_CatchCoolPokemonWithPokeBalls", "width": 201, "text": "Catch different POKéMON. Then you can"}
+{"file": "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc", "label": "LittlerootTown_ProfessorBirchsLab_Text_ResearchRewardWaiting", "width": 204, "text": "PROF. BIRCH: Your LEGENDARY FORM tools"}
+{"file": "data/maps/LittlerootTown_BrendansHouse_1F/scripts.inc", "label": "PlayersHouse_1F_Text_BetterGetBackToGym", "width": 207, "text": "MOM, thanks for looking after the house"}
+{"file": "data/maps/LittlerootTown_BrendansHouse_1F/scripts.inc", "label": "PlayersHouse_1F_Text_DadShouldStayLonger", "width": 207, "text": "while, but all he talks about is POKéMON."}
+{"file": "data/maps/LittlerootTown_BrendansHouse_1F/scripts.inc", "label": "PlayersHouse_1F_Text_DadShouldStayLonger", "width": 208, "text": "He should relax and stay a little longer."}
+{"file": "data/maps/LittlerootTown_MaysHouse_2F/scripts.inc", "label": "RivalsHouse_2F_Text_MayWhereShouldIGoNext", "width": 207, "text": "Wouldn't it be funny if we ran into each"}
+{"file": "data/maps/LittlerootTown_MaysHouse_2F/scripts.inc", "label": "RivalsHouse_2F_Text_BrendanWhereShouldIGoNext", "width": 210, "text": "BRENDAN: I'm having a hard time deciding"}
+{"file": "data/maps/LittlerootTown_MaysHouse_2F/scripts.inc", "label": "RivalsHouse_2F_Text_BrendanWhereShouldIGoNext", "width": 204, "text": "Hey, {PLAYER}, if I see you while I'm out"}
+{"file": "data/scripts/emerald_champions.inc", "label": "EmeraldChampions_Text_ResearchPartners", "width": 201, "text": "Which research partner interests you?"}
+{"file": "data/scripts/emerald_champions.inc", "label": "EmeraldChampions_Text_AppearanceInfo", "width": 202, "text": "without changing your partner's build."}
+{"file": "data/scripts/emerald_champions.inc", "label": "EmeraldChampions_Text_BondingDone", "width": 205, "text": "help when evolution conditions are met."}
+{"file": "data/text/pkmn_center_nurse.inc", "label": "gText_EmeraldChampionsExplainRepelSpray", "width": 201, "text": "that chance. Their requirements apply."}
+{"file": "data/text/move_relearner.inc", "label": "MoveRelearner_Text_CantTeachMoveToPkmn", "width": 207, "text": "It doesn't appear as if I have any move"}
+{"file": "data/maps/LilycoveCity_MoveDeletersHouse/scripts.inc", "label": "LilycoveCity_MoveDeletersHouse_Text_ICanMakeMonForgetMove", "width": 203, "text": "I can make POKéMON forget their moves."}
+{"file": "data/maps/LilycoveCity_MoveDeletersHouse/scripts.inc", "label": "LilycoveCity_MoveDeletersHouse_Text_MonsMoveShouldBeForgotten", "width": 208, "text": "Hm! {STR_VAR_1}'s {STR_VAR_2}?"}
+{"file": "data/maps/LilycoveCity_MoveDeletersHouse/scripts.inc", "label": "LilycoveCity_MoveDeletersHouse_Text_CantForgetSurf", "width": 207, "text": "Your {STR_VAR_1} doesn't seem willing"}
+{"file": "data/event_scripts.s", "label": "gText_PokemartSign", "width": 206, "text": "“Selected items for your convenience!”"}
+{"file": "data/event_scripts.s", "label": "gText_WhichFloorWouldYouLike", "width": 205, "text": "Welcome to LILYCOVE DEPARTMENT STORE."}
+{"file": "data/event_scripts.s", "label": "gText_PokemonTrainerSchoolEmail", "width": 207, "text": "There's an e-mail from POKéMON TRAINER"}
+{"file": "data/event_scripts.s", "label": "gText_PokemonTrainerSchoolEmail", "width": 205, "text": "A TRAINER's expertise is tested on the"}
+{"file": "data/event_scripts.s", "label": "gText_PokerusExplanation", "width": 203, "text": "except that they are microscopic life-"}
+{"file": "data/event_scripts.s", "label": "gText_LegendaryResting", "width": 208, "text": "Leave this area and return to try again."}
+{"file": "data/event_scripts.s", "label": "gText_LegendaryFlewAway", "width": 208, "text": "Leave this area and return to try again."}

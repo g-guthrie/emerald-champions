@@ -322,10 +322,11 @@ PetalburgWoods_Text_NotAOneToBeFound:
 	.string "Not a one to be found…$"
 
 PetalburgWoods_Text_HaveYouSeenShroomish:
-	.string "Oh, hello! Have you seen a SHROOMISH\n"
-	.string "around here? I've always loved them.\p"
-	.string "I'm on my way back to DEVON in RUSTBORO.\n"
-	.string "I thought I could spare a little time…$"
+	.string "Oh, hello! Seen any SHROOMISH?\n"
+	.string "I've always loved them.\p"
+	.string "I'm taking research papers back\n"
+	.string "to DEVON in RUSTBORO. I thought\l"
+	.string "I could spare a little time...$"
 
 PetalburgWoods_Text_IWasGoingToAmbushYou:
 	.string "I was going to ambush you, but you\n"
@@ -363,11 +364,21 @@ PetalburgWoods_Text_YouveGotSomeNerve:
 	.string "I'll let you go today!$"
 
 PetalburgWoods_Text_ThatWasAwfullyClose:
-	.string "Whew… I thought he'd caught me.\n"
-	.string "Thank you for standing up to him.\p"
-	.string "I must get these papers back to DEVON.\n"
-	.string "But first, take this GREAT BALL.\p"
-	.string "It's the least I can do!$"
+	.string "Whew... Thank you for helping me!\p"
+	.string "These papers track the strange\n"
+	.string "weather and LEGENDARY sightings.\l"
+	.string "DEVON is studying the connection.\p"
+	.string "Our field notes help keep the\n"
+	.string "route signs up to date. Some\l"
+	.string "discoveries need more than luck.\p"
+	.string "A sign lists any special\n"
+	.string "requirements. Once you catch a\l"
+	.string "local legend, it marks it Caught.\p"
+	.string "That POKéMON stops appearing, so\n"
+	.string "you can search for your next find.\p"
+	.string "I must get these reports to DEVON.\n"
+	.string "First, take this GREAT BALL\l"
+	.string "as my thanks!$"
 
 PetalburgWoods_Text_TeamAquaAfterSomethingInRustboro:
 	.string "He said TEAM AQUA was after something\n"
@@ -453,23 +464,25 @@ PetalburgWoods_Text_TryUsingThisItem:
 	.string "You should try using this item.$"
 
 PetalburgWoods_Text_TartAppleExplanation:
-	.string "It's a TART APPLE.\n"
-	.string "Use it to evolve the right APPLIN.\p"
-	.string "Evolution items reward exploring even\n"
-	.string "when battle gear is easy to obtain.$"
+	.string "It's a TART APPLE. Use it on\n"
+	.string "APPLIN to evolve it into FLAPPLE.\p"
+	.string "Funny how the same POKéMON can\n"
+	.string "grow differently depending on its\l"
+	.string "favorite treat!$"
 
 PetalburgWoods_Text_TrainerTipsExperience:
 	.string "TRAINER TIPS\p"
-	.string "Use the LEVELER to bring a new partner\n"
+	.string "Use the LEVELER to bring partners\n"
 	.string "to your current training limit.\p"
-	.string "Then prepare its moves, Ability, Nature,\n"
-	.string "and held item before the next battle.$"
+	.string "Then prepare their moves, Ability,\n"
+	.string "Nature, and held item for battle.$"
 
 PetalburgWoods_Text_TrainerTipsPP:
 	.string "FOREST FIELD NOTES\p"
-	.string "CUT reveals paths into the\n"
-	.string "old-growth forest.\p"
-	.string "One SIGN answers the KNUCKLE\n"
-	.string "BADGE. Deeper marks answer the\l"
-	.string "HEAT BADGE. Inspect them yourself;\l"
-	.string "DEVON offers clues if you want.$"
+	.string "CUT opens paths into the deeper\n"
+	.string "forest. CELEBI lives in the\l"
+	.string "third area.\p"
+	.string "VIRIZION and WO-CHIEN live in\n"
+	.string "the second area. Each of these\l"
+	.string "legendaries has a 3% wild\l"
+	.string "encounter chance in its habitat.$"

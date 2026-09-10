@@ -1,0 +1,1430 @@
+[
+  {
+    "index": 14,
+    "file": "data/maps/SlateportCity/scripts.inc",
+    "label": "SlateportCity_Text_IncenseScholar",
+    "before": "Incense still matters for breeding, but not as a scarce battle tool. / Check CENTER vendors and local shops.$",
+    "after": "You don't need Incense to get baby POKéMON from compatible parents.\n\nSome Incenses have effects in battle, though. The CENTER vendors can help you find them."
+  },
+  {
+    "index": 101,
+    "file": "data/maps/MauvilleCity/scripts.inc",
+    "label": "MauvilleCity_Text_WallyWantToChallengeGym",
+    "before": "WALLY: Aww, UNCLE, please? / I don't grind. Nobody has to. I built a team, and a GYM is where you test one.$",
+    "after": "WALLY: Aww, UNCLE, please?\n\nI feel so much better since moving to VERDANTURF. RALTS and I have been practicing every day!"
+  },
+  {
+    "index": 103,
+    "file": "data/maps/MauvilleCity/scripts.inc",
+    "label": "MauvilleCity_Text_WallyWeCanBeatAnyone",
+    "before": "WALLY: I'm not pushing it. / RALTS and I found five partners who cover each other. We can beat anyone!$",
+    "after": "WALLY: We've made new friends, too! I want to see how far we can go together."
+  },
+  {
+    "index": 104,
+    "file": "data/maps/MauvilleCity/scripts.inc",
+    "label": "MauvilleCity_Text_WallyWillYouBattleMe",
+    "before": "WALLY: Oh! Hi, {PLAYER}! / I've built a real doubles team since we met. I want you and my UNCLE to see it. / Please, will you battle me?$",
+    "after": "WALLY: Oh! Hi, {PLAYER}!\n\nDo you remember helping me catch RALTS? We've come a long way since then.\n\nPlease, will you battle me? I want to show my UNCLE I'm ready."
+  },
+  {
+    "index": 105,
+    "file": "data/maps/MauvilleCity/scripts.inc",
+    "label": "MauvilleCity_Text_WallyMyUncleWontKnowImStrong",
+    "before": "WALLY: Oh… If you won't, my UNCLE will never believe my team is real.$",
+    "after": "WALLY: Oh… All right. I was hoping you could help me show him."
+  },
+  {
+    "index": 108,
+    "file": "data/maps/MauvilleCity/scripts.inc",
+    "label": "MauvilleCity_Text_WallyHereICome",
+    "before": "WALLY: {PLAYER}, thank you. / WEAVILE leads, ZAPDOS sets the wind… Okay. Here I come!$",
+    "after": "WALLY: Thank you, {PLAYER}!\n\nAll right, everyone. Let's show them what we can do!"
+  },
+  {
+    "index": 109,
+    "file": "data/maps/MauvilleCity/scripts.inc",
+    "label": "MauvilleCity_Text_WallyDefeat",
+    "before": "WALLY: ... / I had a plan for every partner. You still found your way through. / I lost...$",
+    "after": "WALLY: I… I lost.\n\nI really thought we were ready…"
+  },
+  {
+    "index": 110,
+    "file": "data/maps/MauvilleCity/scripts.inc",
+    "label": "MauvilleCity_Text_WallyIllGoBackToVerdanturf",
+    "before": "WALLY: UNCLE… I'll go back to VERDANTURF. / I know what my team was missing now.$",
+    "after": "WALLY: UNCLE… I'll go back to VERDANTURF.\n\nBut I don't want to give up. RALTS and I still have so much to learn."
+  },
+  {
+    "index": 187,
+    "file": "data/maps/FortreeCity/scripts.inc",
+    "label": "FortreeCity_Text_PokemonThatEvolveWhenTraded",
+    "before": "There are POKéMON that evolve when you trade them! That's what I heard.$",
+    "after": "Some POKéMON evolve when you trade them.\n\nA LINKING CORD lets you evolve those partners yourself, too. Ask a CENTER vendor about evolution items!"
+  },
+  {
+    "index": 197,
+    "file": "data/maps/LilycoveCity/scripts.inc",
+    "label": "LilycoveCity_Text_MayShoppingLetsBattle",
+    "before": "MAY: {PLAYER}{KUN}! Shopping? The CENTER gives out held items free, but choosing is the fun part. / I've rebuilt my team around the POKéMON I found on the way. Let's see how yours has grown!$",
+    "after": "MAY: {PLAYER}{KUN}! Are you shopping, too?\n\nI was looking for a gift for Dad, but I keep finding things I want!\n\nIt's been ages since our last battle. Want to show me your team?"
+  },
+  {
+    "index": 198,
+    "file": "data/maps/LilycoveCity/scripts.inc",
+    "label": "LilycoveCity_Text_MayNotRaisingPokemon",
+    "before": "MAY: Not now? Come on. Nobody needs to grind here. Bring the plan you have.$",
+    "after": "MAY: Another time, then! I'll be here trying to choose a present."
+  },
+  {
+    "index": 199,
+    "file": "data/maps/LilycoveCity/scripts.inc",
+    "label": "LilycoveCity_Text_MayBattleMe",
+    "before": "MAY: Come on, battle me so I can see how you build now!$",
+    "after": "MAY: Ready for a battle? I've met some wonderful POKéMON since ROUTE 119!"
+  },
+  {
+    "index": 200,
+    "file": "data/maps/LilycoveCity/scripts.inc",
+    "label": "LilycoveCity_Text_MayWontBeBeaten",
+    "before": "MAY: My six have an answer for everything. Let's see yours answer them!$",
+    "after": "MAY: All right! Everyone, let's give it our best!"
+  },
+  {
+    "index": 206,
+    "file": "data/maps/LilycoveCity/scripts.inc",
+    "label": "LilycoveCity_Text_BrendanShoppingLetsBattle",
+    "before": "BRENDAN: {PLAYER}. Running an errand for Dad. No, not DOLLS. / It's been a while. Let's see whose six got smarter since ROUTE 119.$",
+    "after": "BRENDAN: {PLAYER}! Running an errand for Dad. No, I'm not buying DOLLS!\n\nIt's been a while since ROUTE 119. Got time for a battle?"
+  },
+  {
+    "index": 207,
+    "file": "data/maps/LilycoveCity/scripts.inc",
+    "label": "LilycoveCity_Text_BrendanNoConfidence",
+    "before": "BRENDAN: What, no plan ready? That's new for you.$",
+    "after": "BRENDAN: Got other plans? Fair enough. Come find me when you're ready!"
+  },
+  {
+    "index": 208,
+    "file": "data/maps/LilycoveCity/scripts.inc",
+    "label": "LilycoveCity_Text_BrendanBattleMe",
+    "before": "BRENDAN: Battle me. I want to see how you build now.$",
+    "after": "BRENDAN: How about that battle? I've been looking forward to it!"
+  },
+  {
+    "index": 212,
+    "file": "data/maps/LilycoveCity/scripts.inc",
+    "label": "LilycoveCity_Text_BrendanYouGoingToCollectBadges",
+    "before": "{PLAYER}, what's next? The rest of the BADGES and the LEAGUE? / Maybe I'll do that too… / Anyway. Keep reading them faster.$",
+    "after": "BRENDAN: What's next, {PLAYER}? The rest of the BADGES, then the LEAGUE?\n\nMaybe I'll try that, too. But first, Dad's waiting for these supplies.\n\nDon't get too far ahead of me!"
+  },
+  {
+    "index": 268,
+    "file": "data/maps/MossdeepCity/scripts.inc",
+    "label": "MossdeepCity_Text_ScottSomethingWrongWithTown",
+    "before": "SCOTT: {PLAYER}{KUN}, feeling good? I'm doing great! / I'd heard MOSSDEEP's GYM LEADER is pretty strong, so I decided to come take a look-see for myself. / But there's something wrong about this town. / People are going on about a warning letter and the SPACE CENTER… / I don't think it concerns me in any way, though.$",
+    "after": "SCOTT: {PLAYER}{KUN}! I came to watch the GYM, but everyone's worried about a threat to the SPACE CENTER.\n\nSTEVEN is looking into it. I hope those researchers are safe."
+  },
+  {
+    "index": 303,
+    "file": "data/maps/SootopolisCity/scripts.inc",
+    "label": "SootopolisCity_Text_GroudonPleaseStop",
+    "before": "MAXIE: GROUDON, stop! I wanted land that could sustain a future, not consume it. / My certainty left no room for yours.$",
+    "after": "MAXIE: GROUDON, stop!\n\nI wanted more land for people and POKéMON to live on. You're burning the homes they already have!"
+  },
+  {
+    "index": 304,
+    "file": "data/maps/SootopolisCity/scripts.inc",
+    "label": "SootopolisCity_Text_AfterAllOurScheming",
+    "before": "MAXIE: RAYQUAZA did not overpower both rivals. It restored their relationship. / All our models optimized one side of a system that could only live in balance.$",
+    "after": "MAXIE: The heat is fading… RAYQUAZA stopped them.\n\nI was so certain more land would help HOENN. I wouldn't listen to anyone who questioned me.\n\nLook what that certainty nearly cost us."
+  },
+  {
+    "index": 306,
+    "file": "data/maps/SootopolisCity/scripts.inc",
+    "label": "SootopolisCity_Text_TryingMeaninglessToPokemon",
+    "before": "ARCHIE: Land, sea, and sky returned to motion without belonging to any of us. / AQUA tried to free the world by choosing its answer for it. That was control too.$",
+    "after": "ARCHIE: The rain's stopped. People can come out again.\n\nI said I was protecting sea POKéMON. I nearly washed away every home along this coast.\n\nWe have to return the ORBS, MAXIE."
+  },
+  {
+    "index": 308,
+    "file": "data/maps/SootopolisCity/scripts.inc",
+    "label": "SootopolisCity_Text_DoesThisMakeYourFearPokemon",
+    "before": "STEVEN: Power without relationship looks terrifying. You already know the answer: a partner is not a tool to command.$",
+    "after": "STEVEN: I understand why people are frightened. Neither leader could control the POKéMON they awakened.\n\nBut POKéMON have helped us through this, too. We must find a way to stop the fighting."
+  },
+  {
+    "index": 312,
+    "file": "data/maps/SootopolisCity/scripts.inc",
+    "label": "SootopolisCity_Text_SoThatsRayquaza",
+    "before": "STEVEN: RAYQUAZA did not make them flee. It reminded land and sea of the whole.$",
+    "after": "STEVEN: So that's RAYQUAZA…\n\nJust as the old tale said, it stopped their clash. You reached it in time, {PLAYER}."
+  },
+  {
+    "index": 315,
+    "file": "data/maps/SootopolisCity/scripts.inc",
+    "label": "SootopolisCity_Text_AquaMagmaDidntMeanHarm",
+    "before": "WALLACE: MAXIE and ARCHIE caused this, but both finally understand the cost. / Hear them. Accountability matters more when the motive once sounded noble.$",
+    "after": "WALLACE: MAXIE and ARCHIE are still here. They owe you an explanation.\n\nReturning the ORBS will be a start. There is much more for them to put right."
+  },
+  {
+    "index": 316,
+    "file": "data/maps/SootopolisCity/scripts.inc",
+    "label": "SootopolisCity_Text_ThankYouForHelpAcceptThis",
+    "before": "WALLACE: You did not win by possessing the strongest POKéMON in the crater. / You found the one relationship that made every other action possible. / HOENN is safe. Please accept this.$",
+    "after": "WALLACE: You crossed HOENN to stop this disaster, then climbed SKY PILLAR when we needed you most.\n\nThank you, {PLAYER}{KUN}. SOOTOPOLIS is safe again. Please accept this."
+  },
+  {
+    "index": 318,
+    "file": "data/maps/SootopolisCity/scripts.inc",
+    "label": "SootopolisCity_Text_DazzledByMentor",
+    "before": "WALLACE: JUAN's Gym is the final test before the LEAGUE. Expect no mercy.$",
+    "after": "WALLACE: JUAN, my mentor, leads this city's GYM. His BADGE is the last you need for the LEAGUE.\n\nYou've helped our city through so much. I look forward to seeing how far your journey takes you."
+  },
+  {
+    "index": 324,
+    "file": "data/maps/LittlerootTown/scripts.inc",
+    "label": "LittlerootTown_Text_WearTheseRunningShoes",
+    "before": "MOM: {PLAYER}! {PLAYER}! Did you introduce yourself to PROF. BIRCH? / Oh! What an adorable POKéMON! You got it from PROF. BIRCH. How nice! / You're your father's child, all right. You look good together with POKéMON! / Here, honey! If you're going out on an adventure, wear these RUNNING SHOES. / They'll put a zip in your step!$",
+    "after": "MOM: {PLAYER}! Did you meet PROF. BIRCH?\n\nOh! Look at your two new friends! You're setting off together? How lovely!\n\nYour father will be so proud. Here, honey, take these RUNNING SHOES.\n\nThey'll put a zip in your step!"
+  },
+  {
+    "index": 344,
+    "file": "data/maps/OldaleTown/scripts.inc",
+    "label": "OldaleTown_Text_PotionExplanation",
+    "before": "A POTION can be used anytime, so it's even more useful than a POKéMON CENTER in certain situations.$",
+    "after": "A POTION can help an injured partner while you're exploring.\n\nYou can't use your BAG during TRAINER battles, so patch everyone up before a challenge!"
+  },
+  {
+    "index": 352,
+    "file": "data/maps/DewfordTown/scripts.inc",
+    "label": "DewfordTown_Text_TinyIslandCommunity",
+    "before": "The meadow west of town reopened after the cave began shining. / An abandoned manor there holds DEVON's oldest records of MEGA EVOLUTION.$",
+    "after": "There's a meadow west of town. Lately, travelers have spotted some very unusual POKéMON there.\n\nThe old manor holds records of MEGA EVOLUTION. Someone must have studied it here long ago."
+  },
+  {
+    "index": 431,
+    "file": "data/maps/Route103/scripts.inc",
+    "label": "Route103_Text_MayLetsBattle",
+    "before": "MAY: I took the partner you left with Dad. PIKACHU and the rest of my team are ready too! / Bring the team you want. Ready for our DOUBLE BATTLE?$",
+    "after": "MAY: The partner you left with Dad has joined my team!\n\nI've been so excited to introduce everyone. Ready for our DOUBLE BATTLE?"
+  },
+  {
+    "index": 435,
+    "file": "data/maps/Route103/scripts.inc",
+    "label": "Route103_Text_BrendanLetsBattle",
+    "before": "BRENDAN: I took the partner you left with Dad. PIKACHU and the rest of my team are ready too! / Bring the team you want. Ready for our DOUBLE BATTLE?$",
+    "after": "BRENDAN: I took the partner you left with Dad. We're getting along great!\n\nLet's see how your team and mine measure up. DOUBLE BATTLE. Ready?"
+  },
+  {
+    "index": 451,
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_MayLetsBattle",
+    "before": "MAY: {PLAYER}{KUN}! I've been catching partners on every route since OLDALE. / Two of them cover each other in a way I want to test. Doubles, right now!$",
+    "after": "MAY: {PLAYER}{KUN}! I've been finding new POKéMON all the way from OLDALE.\n\nYou must have met some, too! Let's have a battle and introduce them!"
+  },
+  {
+    "index": 452,
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_MayDefeated",
+    "before": "You broke my pair before it clicked!$",
+    "after": "Wow! You've gotten stronger!"
+  },
+  {
+    "index": 459,
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_BrendanLetsBattle",
+    "before": "BRENDAN: Hey, {PLAYER}. Figured you'd come this way. / I built a pair that covers each other. Let's see if your six can read it.$",
+    "after": "BRENDAN: Hey, {PLAYER}! Figured you'd come this way.\n\nI've been looking forward to another battle. Let's see how far we've come!"
+  },
+  {
+    "index": 460,
+    "file": "data/maps/Route110/scripts.inc",
+    "label": "Route110_Text_BrendanDefeated",
+    "before": "Hmm… You read the pair fast.$",
+    "after": "Hah… You've been busy, too!"
+  },
+  {
+    "index": 495,
+    "file": "data/maps/Route119/scripts.inc",
+    "label": "Route119_Text_MayIntro",
+    "before": "MAY: {PLAYER}{KUN}! The storms up here rewrote my whole team. / I want to know if you still adapt faster than I do. Ready? Go!$",
+    "after": "MAY: {PLAYER}{KUN}! There you are!\n\nI keep stopping to take notes, and then the rain washes them away!\n\nA battle will cheer us up. Ready?"
+  },
+  {
+    "index": 496,
+    "file": "data/maps/Route119/scripts.inc",
+    "label": "Route119_Text_MayDefeat",
+    "before": "You changed plans mid-storm!$",
+    "after": "Whew! That was worth getting soaked for!"
+  },
+  {
+    "index": 498,
+    "file": "data/maps/Route119/scripts.inc",
+    "label": "Route119_Text_MayExplainFly",
+    "before": "MAY: Your FLIGHT BEACON turns on once you hold the FEATHER BADGE. / WINONA awards it at FORTREE GYM. Just follow this road north! / Use it from the BAG. Any town you've seen, instantly. / Go home sometime. Mom asks about you. / Maybe we'll meet at the LEAGUE!$",
+    "after": "MAY: Your FLIGHT BEACON works once you earn the FEATHER BADGE from WINONA in FORTREE.\n\nFollow this road north! Then use the beacon from your BAG to fly to towns you've visited.\n\nStop by home sometime. Your mom would love to see you!"
+  },
+  {
+    "index": 501,
+    "file": "data/maps/Route119/scripts.inc",
+    "label": "Route119_Text_BrendanIntro",
+    "before": "BRENDAN: {PLAYER}! The rain up here made me rebuild everything. / Let's see whose rebuild is better. It's a battle, so battle!$",
+    "after": "BRENDAN: {PLAYER}! I wondered when you'd catch up.\n\nA little rain hasn't stopped us practicing. Come on, let's battle!"
+  },
+  {
+    "index": 503,
+    "file": "data/maps/Route119/scripts.inc",
+    "label": "Route119_Text_BrendanIllGiveYouThis",
+    "before": "BRENDAN: You could build a team for any route in HOENN now. / Here. Try this out.$",
+    "after": "BRENDAN: I knew you'd give us a good battle. Here, take this!"
+  },
+  {
+    "index": 575,
+    "file": "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc",
+    "label": "LittlerootTown_ProfessorBirchsLab_Text_MightBeGoodIdeaToGoSeeRival",
+    "before": "{RIVAL} is out studying on ROUTE 103. You should go introduce your partner! / {RIVAL}'s POKéMON has the type edge. Visit OLDALE's POKéMON CENTER first. / The LEVELER trains your POKéMON to the current level limit, free of charge. / Would you like to go find {RIVAL}?$",
+    "after": "{RIVAL} is studying POKéMON on ROUTE 103. Why not introduce your new partners?\n\nOLDALE's CENTER can help you prepare. Its free LEVELER brings your POKéMON up to the current training limit.\n\nWould you like to go find {RIVAL}?"
+  },
+  {
+    "index": 595,
+    "file": "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc",
+    "label": "LittlerootTown_ProfessorBirchsLab_Text_OtherRegionsUpgradeToNational",
+    "before": "PROF. BIRCH: Now… / {PLAYER}{KUN} and {RIVAL}, I've had the two of you help me study POKéMON. / Your POKéDEX recorded every region from the day your journey began. / Now I can synchronize our final field notes and mark FRONTIER research. / Here, let me see your POKéDEX units.$",
+    "after": "PROF. BIRCH: {PLAYER}{KUN}, {RIVAL}, you've both brought back so many field notes!\n\nYour POKéDEX units could record every region from the start. Let's add our latest observations to both.\n\nMay I see them for a moment?"
+  },
+  {
+    "index": 603,
+    "file": "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc",
+    "label": "LittlerootTown_ProfessorBirchsLab_Text_CompletedDexResearchReward",
+    "before": "PROF. BIRCH: Oh, {PLAYER}{KUN}! Let's have a look at your POKéDEX. / … … … … … … … … … … … … / Every known HOENN species. Wonderful! You proved how each habitat connects. / DEVON helped me restore five tools from our LEGENDARY FORM research. / They let certain rare POKéMON change or combine outside battle. Take them!$",
+    "after": "PROF. BIRCH: Every known HOENN species! What a remarkable record of your journey.\n\nI've kept a spare set of our legendary form tools here. Take any you're missing!\n\nThey're also in the CENTER vendors' Evolution Items archive. Your MEGA RING gives you access there."
+  },
+  {
+    "index": 605,
+    "file": "data/maps/LittlerootTown_ProfessorBirchsLab/scripts.inc",
+    "label": "LittlerootTown_ProfessorBirchsLab_Text_ResearchRewardComplete",
+    "before": "Those tools affect KYUREM, ZYGARDE, NECROZMA, and CALYREX. / The POKéMON must still choose you. The tools only reveal forms they can take.$",
+    "after": "The tools let KYUREM, ZYGARDE, NECROZMA, and CALYREX change forms or combine with certain partners.\n\nThere's always something new to learn about POKéMON!"
+  },
+  {
+    "index": 788,
+    "file": "data/maps/PetalburgCity_Gym/scripts.inc",
+    "label": "PetalburgCity_Gym_Text_NormanIntro",
+    "before": "DAD: Four BADGES brought you back, but this battle is not about raw growth. / Every member of my team reveals a rule: a lock, an Ability, an item, or a clock. / Read each one before you commit. I will battle as GYM LEADER, not as your father.$",
+    "after": "DAD: Four BADGES already… I still remember you setting out from LITTLEROOT.\n\nI'm proud of you, {PLAYER}. But here in the GYM, I have to give every challenger my best.\n\nShow me how far you and your POKéMON have come!"
+  },
+  {
+    "index": 915,
+    "file": "data/maps/SlateportCity_OceanicMuseum_2F/scripts.inc",
+    "label": "SlateportCity_OceanicMuseum_2F_Text_SSTidalReplica",
+    "before": "“THE FERRY S.S. TIDAL / “A scale replica of the ship under construction at STERN'S SHIPYARD.”$",
+    "after": "“THE FERRY S.S. TIDAL”\n\n“A scale replica of the vessel designed at STERN'S SHIPYARD.”"
+  },
+  {
+    "index": 919,
+    "file": "data/maps/SlateportCity_Harbor/scripts.inc",
+    "label": "SlateportCity_Harbor_Text_FerryServiceUnavailable",
+    "before": "I beg your pardon? You're looking for a ship? / I'm sorry, the ferry service isn't available at present…$",
+    "after": "The ferry opens to TRAINERS with six BADGES. Come back with the FEATHER BADGE!"
+  },
+  {
+    "index": 921,
+    "file": "data/maps/SlateportCity_Harbor/scripts.inc",
+    "label": "SlateportCity_Harbor_Text_YouMustHaveTicket",
+    "before": "Your ferry pass is not registered. / I'm terribly sorry. / You need a registered pass to board the ferry.$",
+    "after": "You'll need a ferry pass. With six BADGES, speak to the sailor at LILYCOVE HARBOR. He can register yours."
+  },
+  {
+    "index": 953,
+    "file": "data/maps/MauvilleCity_Gym/scripts.inc",
+    "label": "MauvilleCity_Gym_Text_BenIntro",
+    "before": "Send current -- LANTURN drinks it. Send water -- HELIOLISK drinks that. / What is left in your bag?$",
+    "after": "Send electricity, and LANTURN drinks it. Send water, and HELIOLISK drinks that.\n\nWhat else can your partners do?"
+  },
+  {
+    "index": 979,
+    "file": "data/maps/RustboroCity_DevonCorp_1F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_1F_Text_StaffGotRobbed",
+    "before": "One of our research staff stupidly got robbed of an important parcel.$",
+    "after": "One of our researchers was robbed of an important parcel. I hope he's all right."
+  },
+  {
+    "index": 981,
+    "file": "data/maps/RustboroCity_DevonCorp_1F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_1F_Text_RobberWasntVeryBright",
+    "before": "That stolen parcel… / Well, sure it's important, but it's not anything that anyone can use. / In my estimation, that robber must not have been very bright.$",
+    "after": "That parcel holds instruments for CAPT. STERN's research.\n\nWho would go to so much trouble to steal them? They must know what the captain is studying."
+  },
+  {
+    "index": 984,
+    "file": "data/maps/RustboroCity_DevonCorp_1F/scripts.inc",
+    "label": "RustboroCity_DevonCorp_1F_Text_HowCouldWeGetRobbed",
+    "before": "It's beyond stupid. How could we get robbed?$",
+    "after": "After that robbery, we're being much more careful with our research deliveries."
+  },
+  {
+    "index": 1087,
+    "file": "data/maps/RustboroCity_PokemonCenter_1F/scripts.inc",
+    "label": "RustboroCity_PokemonCenter_1F_Text_HMCutNextDoor",
+    "before": "The man next door gave me an HM! / I used it to teach my POKéMON how to CUT down skinny trees.$",
+    "after": "The man next door gave me CUT!\n\nWith the STONE BADGE and a compatible partner, I can clear skinny trees. It doesn't take up a battle move slot."
+  },
+  {
+    "index": 1160,
+    "file": "data/maps/FortreeCity_Gym/scripts.inc",
+    "label": "FortreeCity_Gym_Text_WinonaIntro",
+    "before": "I am WINONA, FORTREE's GYM LEADER. / The sky controls position: wind decides speed, wings evade Ground, snow hides the final horizon. / Preserve the answer you will need after the weather changes.$",
+    "after": "I am WINONA, FORTREE's GYM LEADER.\n\nMy POKéMON and I have flown through clear skies and sudden storms. We know how quickly the wind can turn.\n\nShow me how your team meets a changing sky!"
+  },
+  {
+    "index": 1161,
+    "file": "data/maps/FortreeCity_Gym/scripts.inc",
+    "label": "FortreeCity_Gym_Text_WinonaDefeat",
+    "before": "You denied the wind without losing sight of the snow. Accept the FEATHER BADGE.$",
+    "after": "You've carried your team through our strongest winds. The FEATHER BADGE is yours."
+  },
+  {
+    "index": 1167,
+    "file": "data/maps/FortreeCity_Gym/scripts.inc",
+    "label": "FortreeCity_Gym_Text_WinonaPostBattle",
+    "before": "A flying team is not one species label. It is freedom of position. Remember that. / To follow AQUA to MT. PYRE, head east through ROUTES 120 and 121, then SURF south on ROUTE 122. / Find what drew them to that quiet place.$",
+    "after": "WINONA: A strong wind can carry you far, but you must choose where to go.\n\nTo follow AQUA to MT. PYRE, head east through ROUTES 120 and 121, then SURF south on ROUTE 122.\n\nI hope the people there are safe."
+  },
+  {
+    "index": 1174,
+    "file": "data/maps/FortreeCity_Gym/scripts.inc",
+    "label": "FortreeCity_Gym_Text_WinonaAfterPyre",
+    "before": "A flying team is not one species label. It is freedom of position. Remember that.$",
+    "after": "WINONA: A strong wind can carry you far, but you must choose where to go.\n\nMay your journey bring you clear skies."
+  },
+  {
+    "index": 1205,
+    "file": "data/maps/LilycoveCity_Harbor/scripts.inc",
+    "label": "LilycoveCity_Harbor_Text_FerryUnavailable",
+    "before": "I beg your pardon? You're looking for a ship? / I'm sorry, the ferry service isn't available at present…$",
+    "after": "The ferry opens to TRAINERS with six BADGES. Come back with the FEATHER BADGE!"
+  },
+  {
+    "index": 1207,
+    "file": "data/maps/LilycoveCity_Harbor/scripts.inc",
+    "label": "LilycoveCity_Harbor_Text_NoTicket",
+    "before": "Your ferry pass is not registered. / I'm terribly sorry. / You need a registered pass to board the ferry.$",
+    "after": "You'll need a ferry pass. With six BADGES, speak to the sailor here in LILYCOVE HARBOR. He can register yours."
+  },
+  {
+    "index": 1218,
+    "file": "data/maps/LilycoveCity_Harbor/scripts.inc",
+    "label": "LilycoveCity_Harbor_Text_LatiReport",
+    "before": "Two flying POKéMON were spotted! / One now travels HOENN's routes. The other rests on SOUTHERN ISLAND. / Which color did you hear about on the mainland: red or blue?$",
+    "after": "I've received two sightings: red LATIAS and blue LATIOS!\n\nOne will travel HOENN's routes. The other waits on SOUTHERN ISLAND.\n\nWhich mainland lead shall we follow: red or blue?"
+  },
+  {
+    "index": 1243,
+    "file": "data/maps/MossdeepCity_Gym/scripts.inc",
+    "label": "MossdeepCity_Gym_Text_NateIntro",
+    "before": "METAGROSS resists half of what you own, and MIMIKYU gets a free turn. / Break the disguise early!$",
+    "after": "METAGROSS is tough to break through, and MIMIKYU hides behind its DISGUISE.\n\nCan you get past both of them?"
+  },
+  {
+    "index": 1255,
+    "file": "data/maps/MossdeepCity_Gym/scripts.inc",
+    "label": "MossdeepCity_Gym_Text_NicholasIntro",
+    "before": "LATIOS moves before you do, and AEGISLASH punishes your reply. / Choose your swing carefully!$",
+    "after": "LATIOS is quick, and AEGISLASH can make a careless attack costly.\n\nChoose your moment!"
+  },
+  {
+    "index": 1259,
+    "file": "data/maps/MossdeepCity_Gym/scripts.inc",
+    "label": "MossdeepCity_Gym_Text_TateAndLizaIntro",
+    "before": "TATE: We share one board. LIZA: But we can give it two move orders. / TATE: Psychic Terrain denies priority. LIZA: TRICK ROOM punishes speed. / TATE: Break our timing... LIZA: ...before GARDEVOIR takes over.$",
+    "after": "TATE: We grew up battling together.\nLIZA: We know when to help each other.\n\nTATE: Psychic Terrain protects grounded partners from priority moves.\n\nLIZA: And under TRICK ROOM…\nTATE: …the slowest may move first!\n\nBOTH: Ready to face us?"
+  },
+  {
+    "index": 1276,
+    "file": "data/maps/MossdeepCity_SpaceCenter_1F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_1F_Text_HaywireButRocketLaunchImminent",
+    "before": "I know that things are a little haywire right now, but… / The rocket's launch is imminent!$",
+    "after": "We were preparing for a launch when MAGMA arrived.\n\nThe crew needs that fuel. We can't let them take it!"
+  },
+  {
+    "index": 1277,
+    "file": "data/maps/MossdeepCity_SpaceCenter_1F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_1F_Text_HaywireButSuccessfulLaunchNumber",
+    "before": "I know that things are a little haywire right now, but… / The rocket launched safely! That's launch no. {STR_VAR_1}!$",
+    "after": "We'd completed launch no. {STR_VAR_1} safely. Then TEAM MAGMA arrived.\n\nI can't believe they're trying to steal our fuel!"
+  },
+  {
+    "index": 1279,
+    "file": "data/maps/MossdeepCity_SpaceCenter_1F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_1F_Text_MagmaHaveSightsOnSpaceCenter",
+    "before": "Those MAGMA thugs have their sights set on our SPACE CENTER. / But we can't allow anything that minor to interfere with our rocket launch!$",
+    "after": "Those MAGMA thugs have threatened the SPACE CENTER.\n\nWe're securing the rocket fuel. If they take it, they could do terrible damage."
+  },
+  {
+    "index": 1282,
+    "file": "data/maps/MossdeepCity_SpaceCenter_1F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_1F_Text_MagmaCantStealFuelTakeThis",
+    "before": "TEAM MAGMA can't be allowed to steal the rocket fuel. / Oh, by the way, you can have this stone I found on the beach.$",
+    "after": "TEAM MAGMA mustn't get that fuel!\n\nI found this SUN STONE on the beach. If it can help one of your POKéMON, please take it."
+  },
+  {
+    "index": 1308,
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_2F_Text_YoureOutnumberedTakeUsOn",
+    "before": "Three consecutive formations guard this corridor. You still choose to advance?$",
+    "after": "You'll have to battle all three of us, one after another!\n\nStill want to come through?"
+  },
+  {
+    "index": 1309,
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_2F_Text_GoodAnswer",
+    "before": "A sound decision. Recover your team before challenging the full sequence.$",
+    "after": "That's right. Go downstairs while you can!"
+  },
+  {
+    "index": 1310,
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_2F_Text_Grunt5Intro",
+    "before": "First formation: establish pressure before you can read the sequence.$",
+    "after": "I'm first! You're not getting past this corridor!"
+  },
+  {
+    "index": 1311,
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_2F_Text_Grunt5Defeat",
+    "before": "First line broken. The sequence holds.$",
+    "after": "What?! It's your turn. Stop that kid!"
+  },
+  {
+    "index": 1312,
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_2F_Text_Grunt6Intro",
+    "before": "Second formation: punish the answer you revealed in the first.$",
+    "after": "You beat one of us. Let's see you beat two!"
+  },
+  {
+    "index": 1313,
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_2F_Text_Grunt6Defeat",
+    "before": "You changed plans between battles…$",
+    "after": "Oh, no… It's all up to you now!"
+  },
+  {
+    "index": 1314,
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_2F_Text_Grunt7Intro",
+    "before": "Final formation: exploit the damage the first two left behind. No reset.$",
+    "after": "I'm the last one! MAXIE's counting on me!"
+  },
+  {
+    "index": 1315,
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_2F_Text_Grunt7Defeat",
+    "before": "Your team endured the whole sequence…$",
+    "after": "All three of us… defeated!"
+  },
+  {
+    "index": 1316,
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_2F_Text_Grunt6PostBattle",
+    "before": "Three battles should expose every answer. You kept finding new ones.$",
+    "after": "Three of us guarding one corridor. I thought this would be an easy job."
+  },
+  {
+    "index": 1317,
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_2F_Text_Grunt7PostBattle",
+    "before": "Attrition favored us. Adaptation favored you.$",
+    "after": "I can't believe you beat us all. What do I tell MAXIE?"
+  },
+  {
+    "index": 1318,
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_2F_Text_Grunt5PostBattle",
+    "before": "MAXIE's model did not account for a team that improves while being worn down.$",
+    "after": "We were supposed to keep everyone downstairs until MAXIE had the fuel."
+  },
+  {
+    "index": 1319,
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_2F_Text_WellTakeCareOfYou",
+    "before": "You broke the corridor and reached the launch floor. That ends here. / Our final formation protects MAXIE and the fuel at the same time.$",
+    "after": "The others couldn't stop you? Then we will!\n\nMAXIE isn't leaving without that fuel."
+  },
+  {
+    "index": 1320,
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_2F_Text_MaxieDontInterfere",
+    "before": "MAXIE: The calculation has reached its final input. Do not interfere.$",
+    "after": "MAXIE: You again? STEVEN is already wasting my time. Stand aside!"
+  },
+  {
+    "index": 1323,
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_2F_Text_StevenAreYouReadyToBattle",
+    "before": "STEVEN: {PLAYER}! We fight together. Their formation is built for two targets. / Are you ready to break it as partners?$",
+    "after": "STEVEN: {PLAYER}! Help me stop them.\n\nAre you ready to battle alongside me?"
+  },
+  {
+    "index": 1326,
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_Text_TabithaDefeat",
+    "before": "The launch angle collapsed…$",
+    "after": "I couldn't keep you away…"
+  },
+  {
+    "index": 1327,
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_2F_Text_TabithaIntro",
+    "before": "TABITHA: The rocket needs a stable base. / My sand formation will pin both of your POKéMON before you reach MAXIE.$",
+    "after": "TABITHA: MAXIE needs that rocket fuel. My orders are to keep everyone else away!"
+  },
+  {
+    "index": 1328,
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_2F_Text_TabithaAfter",
+    "before": "You broke the foundation, but the real launch sequence is still ahead.$",
+    "after": "TABITHA: You beat me, but MAXIE won't leave empty-handed. STEVEN is still trying to stop him."
+  },
+  {
+    "index": 1330,
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_Text_CourtneyDefeat",
+    "before": "Joint model... broken by partnership.$",
+    "after": "COURTNEY: Defeated… Both of us."
+  },
+  {
+    "index": 1331,
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_2F_Text_CourtneyFormation",
+    "before": "COURTNEY: MAXIE supplies force. I supply the alternate clock. STEVEN is accounted for. You remain the unstable variable.$",
+    "after": "COURTNEY: STEVEN… and you.\n\nMAXIE, I'll cover you. We still need that fuel."
+  },
+  {
+    "index": 1332,
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_2F_Text_MaxieWeFailedIsAquaAlsoMisguided",
+    "before": "MAXIE: Again, your partnership adapted while my certainty narrowed. / We failed to control GROUDON, and now we would destroy what refused control. / If MAGMA's premise is wrong, then AQUA's opposite certainty must be wrong as well.$",
+    "after": "MAXIE: We couldn't control GROUDON. So I came here to take fuel and force an eruption anyway.\n\nI nearly destroyed the very land I claimed to protect.\n\nIf I was this wrong… ARCHIE may be making the same mistake at sea."
+  },
+  {
+    "index": 1333,
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_2F_Text_MaxieWeWillGiveUp",
+    "before": "MAXIE: Keep the fuel. I must find GROUDON before ARCHIE repeats the same mistake.$",
+    "after": "MAXIE: Keep the fuel. We're leaving.\n\nI must find GROUDON, and stop ARCHIE before he awakens KYOGRE."
+  },
+  {
+    "index": 1334,
+    "file": "data/maps/MossdeepCity_SpaceCenter_2F/scripts.inc",
+    "label": "MossdeepCity_SpaceCenter_2F_Text_StevenThankYouComeSeeMeAtHome",
+    "before": "STEVEN: That was true doubles play: each of us made the other's options better. / Come to my home west of the GYM. I have the HM DIVE for you. / We can use it to follow AQUA's stolen submarine.$",
+    "after": "STEVEN: Thank you, {PLAYER}. Together, we kept the staff and their research safe.\n\nCome to my home west of the GYM. I have DIVE for you.\n\nYou'll need it to follow AQUA's stolen submarine."
+  },
+  {
+    "index": 1337,
+    "file": "data/maps/SootopolisCity_Gym_1F/scripts.inc",
+    "label": "SootopolisCity_Gym_1F_Text_JuanIntro",
+    "before": "I am JUAN, WALLACE's mentor, keeper of SOOTOPOLIS's final examination. / You calmed one impossible rain. Now face rain used deliberately: speed, endurance and growing power. / Artistry gives each choice purpose. Show me yours.$",
+    "after": "I am JUAN, WALLACE's mentor and SOOTOPOLIS's GYM LEADER.\n\nYou have done our city a great service. Now let us meet as TRAINERS.\n\nMy partners thrive in rain. Each brings a different strength to our performance. Shall we begin?"
+  },
+  {
+    "index": 1382,
+    "file": "data/maps/SootopolisCity_PokemonCenter_1F/scripts.inc",
+    "label": "SootopolisCity_PokemonCenter_1F_Text_EveryoneTakenRefuge",
+    "before": "Everyone in town has taken refuge and won't come out of their homes. / Even I would rather not venture outside.$",
+    "after": "Many families are sheltering indoors until the weather settles.\n\nI'd rather stay here, too. That clash outside is frightening."
+  },
+  {
+    "index": 1393,
+    "file": "data/maps/SootopolisCity_House2/scripts.inc",
+    "label": "SootopolisCity_House2_Text_DidYouKnowAboutMtPyreOrbs",
+    "before": "MT. PYRE… / At its peak are two orbs placed side by side. Did you know?$",
+    "after": "MT. PYRE… I once visited its summit and saw the two ORBS in the elders' care.\n\nHave you heard their story?"
+  },
+  {
+    "index": 1394,
+    "file": "data/maps/SootopolisCity_House2/scripts.inc",
+    "label": "SootopolisCity_House2_Text_YesTwoOrbsSideBySide",
+    "before": "Yes, two orbs side by side… / The sight of them together… It is somehow soothing…$",
+    "after": "The elders said those ORBS were passed down for generations.\n\nI still remember how carefully they watched over them."
+  },
+  {
+    "index": 1395,
+    "file": "data/maps/SootopolisCity_House2/scripts.inc",
+    "label": "SootopolisCity_House2_Text_OughtToVisitAndSee",
+    "before": "Is that so? Perhaps you ought to visit and see…$",
+    "after": "The elders at MT. PYRE can tell you. They've kept HOENN's old stories alive for so long."
+  },
+  {
+    "index": 1447,
+    "file": "data/maps/EverGrandeCity_PhoebesRoom/scripts.inc",
+    "label": "EverGrandeCity_PhoebesRoom_Text_Defeat",
+    "before": "You honored what you could not touch. My grandmother would like you.$",
+    "after": "What a wonderful team! My grandmother would love to meet your POKéMON."
+  },
+  {
+    "index": 1451,
+    "file": "data/maps/EverGrandeCity_GlaciasRoom/scripts.inc",
+    "label": "EverGrandeCity_GlaciasRoom_Text_PostBattleSpeech",
+    "before": "DRAKE is old, and his Dragons are not all alike. Study each one.$",
+    "after": "DRAKE waits ahead. He's sailed through many storms with his DRAGON POKéMON.\n\nYou have earned his full attention."
+  },
+  {
+    "index": 1455,
+    "file": "data/maps/EverGrandeCity_ChampionsRoom/scripts.inc",
+    "label": "EverGrandeCity_ChampionsRoom_Text_IntroSpeech",
+    "before": "WALLACE: Welcome, {PLAYER}. / Across HOENN, moves, items and rare partners offered new possibilities. Mega Evolution opened even more. / You restored SOOTOPOLIS's balance and beat the ELITE FOUR under the LEAGUE's battle rules. / Now face the region's complete exam. My team is ready. Is yours? / Show me the Champion you became!$",
+    "after": "WALLACE: Welcome, {PLAYER}.\n\nWhen we met in SOOTOPOLIS, HOENN needed your courage. Today, you've come here to pursue your own dream.\n\nEight BADGES. The ELITE FOUR. You and your partners have earned this challenge.\n\nI am WALLACE, HOENN's CHAMPION. I will give you everything I have!"
+  },
+  {
+    "index": 1457,
+    "file": "data/maps/EverGrandeCity_ChampionsRoom/scripts.inc",
+    "label": "EverGrandeCity_ChampionsRoom_Text_PostBattleSpeech",
+    "before": "WALLACE: This victory belongs to you and the partners who brought you here. / Every choice along the way helped shape the TRAINER before me. / You stand at HOENN's peak, but the FRONTIER waits beyond the summit. / I proclaim you the new HOENN CHAMPION!$",
+    "after": "WALLACE: This victory belongs to you and the partners who brought you here.\n\nAll the roads you traveled, all the people and POKéMON you met… They brought you to this moment.\n\nI proclaim you the new HOENN CHAMPION!"
+  },
+  {
+    "index": 1462,
+    "file": "data/maps/EverGrandeCity_ChampionsRoom/scripts.inc",
+    "label": "EverGrandeCity_ChampionsRoom_Text_BirchArriveRatePokedex",
+    "before": "BIRCH: You did it, {PLAYER}! / You began with one of nine traditions, then made HOENN's whole ecosystem yours. / Let me see the POKéDEX that recorded all those possible teams.$",
+    "after": "BIRCH: You did it, {PLAYER}!\n\nIt seems like yesterday you and those two POKéMON rescued me on ROUTE 101. Now look at you!\n\nMay I see your POKéDEX? I'd love to see the record of your journey."
+  },
+  {
+    "index": 1463,
+    "file": "data/maps/EverGrandeCity_ChampionsRoom/scripts.inc",
+    "label": "EverGrandeCity_ChampionsRoom_Text_BirchCongratulations",
+    "before": "BIRCH: Congratulations. The final room records one team; HOENN remembers all.$",
+    "after": "BIRCH: Congratulations, {PLAYER}! Your parents will be so proud.\n\nAnd thank you, all of you POKéMON, for looking after our new CHAMPION!"
+  },
+  {
+    "index": 1466,
+    "file": "data/maps/EverGrandeCity_ChampionsRoom/scripts.inc",
+    "label": "EverGrandeCity_ChampionsRoom_Text_MayCongratulations",
+    "before": "MAY: Groan… / … … … … … … … … / Kidding! That's the rule, and you earned every part of it. / {PLAYER}{KUN}! Honestly, congratulations!$",
+    "after": "MAY: Aww… I wanted to come, too!\n\nHehe! Go on, {PLAYER}{KUN}. This is your moment.\n\nI'm so happy for you. Congratulations!"
+  },
+  {
+    "index": 1467,
+    "file": "data/maps/EverGrandeCity_ChampionsRoom/scripts.inc",
+    "label": "EverGrandeCity_ChampionsRoom_Text_BrendanCongratulations",
+    "before": "BRENDAN: Whaaaat?! … … … … … / Fine. That's the rule, and I watched you earn it. / {PLAYER}, way to go! Congratulations!$",
+    "after": "BRENDAN: What?! I wanted to see it!\n\nAll right, all right. You earned this, {PLAYER}.\n\nWay to go! Dad will be talking about this for weeks!"
+  },
+  {
+    "index": 1475,
+    "file": "data/maps/EverGrandeCity_PokemonCenter_1F/scripts.inc",
+    "label": "EverGrandeCity_PokemonCenter_1F_Text_ScottHappyForYou",
+    "before": "SCOTT: {PLAYER}{KUN}, you've clawed your way up to face the POKéMON LEAGUE! / I'm happy for you! You made my cheering worthwhile! / {PLAYER}{KUN}, if you were to become the POKéMON LEAGUE CHAMPION… / I'll get in touch with you then. / Okay, {PLAYER}{KUN}. Go for greatness!$",
+    "after": "SCOTT: {PLAYER}{KUN}! You've made it to the POKéMON LEAGUE!\n\nI knew you were one to watch. Now you've got a shot at the championship!\n\nI'll be cheering for you. Give them a battle they'll remember!"
+  },
+  {
+    "index": 1478,
+    "file": "data/maps/MeteorFalls_1F_1R/scripts.inc",
+    "label": "MeteorFalls_1F_1R_Text_DontExpectMercyFromMagma",
+    "before": "COURTNEY: You crossed our operation twice. Coincidence is no longer likely. / This formation will remove you from MAXIE's equation.$",
+    "after": "COURTNEY: The METEORITE is ours.\n\nYou won't take it from us. I'll stop you here."
+  },
+  {
+    "index": 1479,
+    "file": "data/maps/MeteorFalls_1F_1R/scripts.inc",
+    "label": "MeteorFalls_1F_1R_Text_CourtneyDefeat",
+    "before": "You broke our celestial formation…$",
+    "after": "COURTNEY: You broke through…"
+  },
+  {
+    "index": 1480,
+    "file": "data/maps/MeteorFalls_1F_1R/scripts.inc",
+    "label": "MeteorFalls_1F_1R_Text_GruntDefeat",
+    "before": "Even the meteor team failed?!$",
+    "after": "We lost, even here?!"
+  },
+  {
+    "index": 1483,
+    "file": "data/maps/MeteorFalls_1F_1R/scripts.inc",
+    "label": "MeteorFalls_1F_1R_Text_ArchieSeenYouBefore",
+    "before": "ARCHIE: We met at SLATEPORT's MUSEUM. {PLAYER}, wasn't it? / I mistook you for one of MAGMA's crew. You proved you choose your own current. / MAXIE thinks every living system can be measured, fixed, and made obedient. / Now he means to force that certainty through MT. CHIMNEY. / AQUA will stop him. If you value a world that can still change, follow us.$",
+    "after": "ARCHIE: We met at SLATEPORT's MUSEUM. {PLAYER}, wasn't it?\n\nYou stopped my crew there. But we both know what MAGMA is planning now.\n\nIf MAXIE sets off MT. CHIMNEY, the lava could destroy habitats all the way to the coast.\n\nWe're going after him. You can help, if you mean to stop that eruption."
+  },
+  {
+    "index": 1485,
+    "file": "data/maps/MeteorFalls_1F_1R/scripts.inc",
+    "label": "MeteorFalls_1F_1R_Text_ArchieYesNoTellingWhatMagmaWillDo",
+    "before": "ARCHIE: We move now. / If MAGMA drives that METEORITE into the fault line, the mountain answers first.$",
+    "after": "ARCHIE: Right! No time to waste. Get to MT. CHIMNEY before MAXIE starts that machine!"
+  },
+  {
+    "index": 1486,
+    "file": "data/maps/MeteorFalls_1F_1R/scripts.inc",
+    "label": "MeteorFalls_1F_1R_Text_ArchieFarewell",
+    "before": "ARCHIE: {PLAYER}, come to MT. CHIMNEY. Take the cable car on ROUTE 112. / You have already changed this race.$",
+    "after": "ARCHIE: ROUTE 112's cable car leads to the summit. We'll see you there, {PLAYER}!"
+  },
+  {
+    "index": 1493,
+    "file": "data/maps/GraniteCave_StevensRoom/scripts.inc",
+    "label": "GraniteCave_StevensRoom_Text_NoStarterStone",
+    "before": "Your original partners have no applicable Mega Stone here. / Your other teammates can carry one!$",
+    "after": "I don't have a matching Mega Stone for your original partners here.\n\nKeep exploring. Other members of your team may be able to Mega Evolve, too!"
+  },
+  {
+    "index": 1494,
+    "file": "data/maps/GraniteCave_StevensRoom/scripts.inc",
+    "label": "GraniteCave_StevensRoom_Text_ArchiveOpen",
+    "before": "The RING lets your partners use the Mega Stones you find across HOENN. / Look for their glimmer off the path. People may have stones to share, too. / POKéMON CENTER VENDORS still offer evolution items free of charge.$",
+    "after": "The RING lets your partners use Mega Stones you find across HOENN. Look off the path, and talk to people you meet!\n\nIt also opens the CENTER vendors' free Evolution Items archive. Legendary form tools are there, too."
+  },
+  {
+    "index": 1528,
+    "file": "data/maps/PetalburgWoods/scripts.inc",
+    "label": "PetalburgWoods_Text_TartAppleExplanation",
+    "before": "It's a TART APPLE. Use it to evolve the right APPLIN. / Evolution items reward exploring even when battle gear is easy to obtain.$",
+    "after": "It's a TART APPLE. Use it on APPLIN to evolve it into FLAPPLE.\n\nFunny how the same POKéMON can grow differently depending on its favorite treat!"
+  },
+  {
+    "index": 1533,
+    "file": "data/maps/MtChimney/scripts.inc",
+    "label": "MtChimney_Text_MaxieDefeat",
+    "before": "You found the flaw before I could stabilize the field...$",
+    "after": "You stopped my team… How?!"
+  },
+  {
+    "index": 1534,
+    "file": "data/maps/MtChimney/scripts.inc",
+    "label": "MtChimney_Text_MaxieYouHaventSeenLastOfMagma",
+    "before": "MAXIE: The METEORITE was one input, not the plan itself. The BLUE ORB remains. / You stopped this eruption, but the fault line is already moving beneath HOENN.$",
+    "after": "MAXIE: You've stopped this machine. But MAGMA's work will continue.\n\nThere is a greater power beneath HOENN. We will find a way to awaken it."
+  },
+  {
+    "index": 1535,
+    "file": "data/maps/MtChimney/scripts.inc",
+    "label": "MtChimney_Text_TabithaIntro",
+    "before": "TABITHA: You followed the METEORITE. Good. You understand the real objective. / MAXIE already has it. My formation only needs to keep you from his machine.$",
+    "after": "TABITHA: So you followed us from METEOR FALLS!\n\nMAXIE is working with the METEORITE. I'm not letting you near his machine!"
+  },
+  {
+    "index": 1536,
+    "file": "data/maps/MtChimney/scripts.inc",
+    "label": "MtChimney_Text_TabithaDefeat",
+    "before": "You broke the guard line too quickly…$",
+    "after": "I couldn't hold you off!"
+  },
+  {
+    "index": 1537,
+    "file": "data/maps/MtChimney/scripts.inc",
+    "label": "MtChimney_Text_TabithaPostBattle",
+    "before": "MAXIE, begin the fault-line sequence! The delay model has failed.$",
+    "after": "TABITHA: MAXIE! The intruder is coming!"
+  },
+  {
+    "index": 1539,
+    "file": "data/maps/MtChimney/scripts.inc",
+    "label": "MtChimney_Text_Grunt2Defeat",
+    "before": "My certainty cracked first…$",
+    "after": "I couldn't protect the machine…"
+  },
+  {
+    "index": 1541,
+    "file": "data/maps/MtChimney/scripts.inc",
+    "label": "MtChimney_Text_Grunt1Intro",
+    "before": "This ridge could become solid ground, not a threat hanging over LAVARIDGE. / I believe in that future enough to defend it.$",
+    "after": "LAVARIDGE sits beside a volcano. Imagine if we could make all that land safe!\n\nThat's what MAXIE promised us. I'm not letting you stop him!"
+  },
+  {
+    "index": 1542,
+    "file": "data/maps/MtChimney/scripts.inc",
+    "label": "MtChimney_Text_Grunt1Defeat",
+    "before": "Belief was not enough to hold the line…$",
+    "after": "Even with all our training…"
+  },
+  {
+    "index": 1543,
+    "file": "data/maps/MtChimney/scripts.inc",
+    "label": "MtChimney_Text_Grunt1PostBattle",
+    "before": "You came through fire to challenge us. Maybe certainty is not the same as truth.$",
+    "after": "I thought this would make people feel safer. Why are they all so frightened?"
+  },
+  {
+    "index": 1544,
+    "file": "data/maps/MtChimney/scripts.inc",
+    "label": "MtChimney_Text_TeamAquaAlwaysMessingWithPlans",
+    "before": "AQUA keeps changing the field before our formation can stabilize it.$",
+    "after": "Those AQUA grunts keep trying to reach our machine!"
+  },
+  {
+    "index": 1546,
+    "file": "data/maps/MtChimney/scripts.inc",
+    "label": "MtChimney_Text_YouBetterNotMessWithUs",
+    "before": "Stand back! We are forcing the mountain into a stable state for everyone.$",
+    "after": "Stand back! MAXIE is working at the crater!"
+  },
+  {
+    "index": 1547,
+    "file": "data/maps/MtChimney/scripts.inc",
+    "label": "MtChimney_Text_AquasNameSimilar",
+    "before": "MAGMA builds fixed ground. AQUA trusts change without limits. / Do not confuse opposite answers.$",
+    "after": "MAGMA wants more land. AQUA wants more sea.\n\nAnd neither side is giving way today!"
+  },
+  {
+    "index": 1549,
+    "file": "data/maps/MtChimney/scripts.inc",
+    "label": "MtChimney_Text_KeepMakingMoreLand",
+    "before": "We will make the fault line hold!$",
+    "after": "More land means more places to live! That's why we're here!"
+  },
+  {
+    "index": 1553,
+    "file": "data/maps/MtChimney/scripts.inc",
+    "label": "MtChimney_Text_ArchieThankYou",
+    "before": "ARCHIE: You stopped him. I owe you that. / But do not confuse AQUA with MAGMA. We would free the old current, not cage it. / Take JAGGED PASS down to LAVARIDGE. Your next GYM is there. / That METEORITE is still in the machine. COZMO in FALLARBOR may want it back. / If you stand in our way again, I will expect an even better battle.$",
+    "after": "ARCHIE: You stopped him. I owe you that.\n\nThe sea POKéMON along this coast can breathe easy. But AQUA's work isn't finished.\n\nJAGGED PASS leads down to LAVARIDGE. You've earned a rest.\n\nAnd that METEORITE is still in the machine. COZMO in FALLARBOR will want it back."
+  },
+  {
+    "index": 1554,
+    "file": "data/maps/MtChimney/scripts.inc",
+    "label": "MtChimney_Text_MagmaOutnumbersUs",
+    "before": "MAGMA fixed every approach at once. We cannot break their formation!$",
+    "after": "MAGMA outnumbers us! We can't get through to the machine!"
+  },
+  {
+    "index": 1555,
+    "file": "data/maps/MtChimney/scripts.inc",
+    "label": "MtChimney_Text_LessHabitatForWaterPokemon",
+    "before": "If they seal the currents, every WATER POKéMON below loses its habitat!$",
+    "after": "If lava pours into the sea, what happens to the POKéMON living there?"
+  },
+  {
+    "index": 1556,
+    "file": "data/maps/MtChimney/scripts.inc",
+    "label": "MtChimney_Text_MagmasNameSimilar",
+    "before": "AQUA keeps life moving. MAGMA would freeze the world into one answer.$",
+    "after": "We joined AQUA to protect the sea. We can't let MAGMA destroy it!"
+  },
+  {
+    "index": 1562,
+    "file": "data/maps/MtChimney/scripts.inc",
+    "label": "MtChimney_Text_MeteoriteFittedOnMachine",
+    "before": "A METEORITE is fitted on a mysterious machine… / The machine seems to be storing energy in the METEORITE.$",
+    "after": "A METEORITE is fitted into the machine. Cables run from it toward the crater."
+  },
+  {
+    "index": 1567,
+    "file": "data/maps/MtChimney/scripts.inc",
+    "label": "MtChimney_Text_RouteSign",
+    "before": "{DOWN_ARROW} JAGGED PATH LAVARIDGE TOWN AHEAD$",
+    "after": "{DOWN_ARROW} JAGGED PASS\nLAVARIDGE TOWN AHEAD"
+  },
+  {
+    "index": 1603,
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_MattIntro",
+    "before": "MATT: Rain does more than boost Water. It heals, redirects Fire, and changes tempo. / Break AQUA's formation before the wind!$",
+    "after": "MATT: Hey, I know you! ARCHIE said you'd turn up again.\n\nHe needs more time at the summit. So you get to battle me!"
+  },
+  {
+    "index": 1604,
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_MattDefeat",
+    "before": "You kept one answer outside the current.$",
+    "after": "You're tougher than I expected!"
+  },
+  {
+    "index": 1606,
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_Grunt1Intro",
+    "before": "MAGMA reached the ORBS first, but their fixed formation left a path behind them. / AQUA will take that path and the ORB.$",
+    "after": "MAGMA got here first. We're not letting them take both ORBS!\n\nAnd you're not getting through, either!"
+  },
+  {
+    "index": 1607,
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_Grunt1Defeat",
+    "before": "You changed course inside my attack…$",
+    "after": "You got past me, too…"
+  },
+  {
+    "index": 1608,
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_Grunt1PostBattle",
+    "before": "One current broke. Others still run between you and ARCHIE.$",
+    "after": "ARCHIE's farther up. The others will stop you!"
+  },
+  {
+    "index": 1609,
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_Grunt2Intro",
+    "before": "MAGMA guards one lane and calls it order. AQUA attacks from every open current. / Read this one before it carries you away.$",
+    "after": "We came all this way for the RED ORB. Don't think we're leaving without it!"
+  },
+  {
+    "index": 1610,
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_Grunt2Defeat",
+    "before": "You found still water inside the rush…$",
+    "after": "That wasn't supposed to happen!"
+  },
+  {
+    "index": 1611,
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_Grunt2PostBattle",
+    "before": "You keep interfering, but have you decided what the ORBS should protect?$",
+    "after": "Why do you keep following us? MAGMA is the one you should be stopping!"
+  },
+  {
+    "index": 1612,
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_Grunt3Intro",
+    "before": "We saw you at MT. CHIMNEY. / You reject MAGMA and still pursue AQUA. Then show me the answer you chose.$",
+    "after": "You helped stop MAGMA at MT. CHIMNEY. So why are you fighting us now?\n\nFine! I'll stop you myself!"
+  },
+  {
+    "index": 1613,
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_Grunt3Defeat",
+    "before": "You refused both currents…$",
+    "after": "You're really not on our side…"
+  },
+  {
+    "index": 1615,
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_Grunt4Intro",
+    "before": "You adapt too freely for MAGMA and question too much for AQUA. / A lone Trainer should not be able to break two organizations. Prove me wrong.$",
+    "after": "You again?! Do you ever get tired of chasing TEAM AQUA?\n\nI'm putting an end to it!"
+  },
+  {
+    "index": 1616,
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_Grunt4Defeat",
+    "before": "You needed neither uniform…$",
+    "after": "Not again!"
+  },
+  {
+    "index": 1617,
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_Grunt4PostBattle",
+    "before": "Our crews make ARCHIE's plans possible. Your team did the same for yours.$",
+    "after": "ARCHIE will know what to do. He has to."
+  },
+  {
+    "index": 1624,
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_GroudonKyogreAwakened",
+    "before": "Oh, my goodness… / You say that both GROUDON and KYOGRE have been awakened? / It is said that the BLUE ORB and the RED ORB quelled the rage of the two POKéMON… / It is also said that the true owner of the ORBS still exists. / However, no one knows who, or what exactly, the ORBS belong to. / It could be a human, or perhaps a POKéMON, but no one knows.$",
+    "after": "Both GROUDON and KYOGRE are awake? Then we are all in danger.\n\nThe ORBS are part of their ancient bond. They are no guarantee of obedience.\n\nOnly RAYQUAZA stopped their last clash. You must find someone who knows where it rests."
+  },
+  {
+    "index": 1625,
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_ThoseTwoMenReturnedOrbs",
+    "before": "The two men who took the ORBS came back to return them on their own. / Those men… Perhaps they are not so evil after all…$",
+    "after": "The two men returned the ORBS themselves. They finally saw what their plans would do to HOENN.\n\nI am glad they came back. But repairing the harm will take more than returning what they stole."
+  },
+  {
+    "index": 1631,
+    "file": "data/maps/MtPyre_Summit/scripts.inc",
+    "label": "MtPyre_Summit_Text_HearTheNewLegendOfHoenn",
+    "before": "The old legend named three great powers. SOOTOPOLIS added a fourth: the Trainer who understood why balance mattered. / Will you hear HOENN's new legend?$",
+    "after": "Our old tale tells how RAYQUAZA stopped a terrible clash. Now we have seen it happen again.\n\nWill you hear what people are saying about SOOTOPOLIS?"
+  },
+  {
+    "index": 1636,
+    "file": "data/maps/SeafloorCavern_Room9/scripts.inc",
+    "label": "SeafloorCavern_Room9_Text_ArchieBeholdKyogre",
+    "before": "ARCHIE: KYOGRE, the current before maps, borders, or human permission. / The ocean itself answers your call. Today the sea becomes free again!$",
+    "after": "ARCHIE: Look at it, {PLAYER}. KYOGRE! The POKéMON that made the sea.\n\nWith its power, the ocean can grow. Sea POKéMON will have all the space they need!"
+  },
+  {
+    "index": 1637,
+    "file": "data/maps/SeafloorCavern_Room9/scripts.inc",
+    "label": "SeafloorCavern_Room9_Text_ArchieYouMustDisappear",
+    "before": "You chased us through every changing route and answered every formation. / One final current stands between you and my dream. Survive it if you can.$",
+    "after": "You've chased us this far. But I won't let you stop us now!\n\nThis dream means everything to TEAM AQUA!"
+  },
+  {
+    "index": 1638,
+    "file": "data/maps/SeafloorCavern_Room9/scripts.inc",
+    "label": "SeafloorCavern_Room9_Text_ArchieDefeat",
+    "before": "You kept your shape while breaking mine.$",
+    "after": "No… Not after coming so far!"
+  },
+  {
+    "index": 1643,
+    "file": "data/maps/SeafloorCavern_Room9/scripts.inc",
+    "label": "SeafloorCavern_Room9_Text_ArchieWhatRainingTooHard",
+    "before": "ARCHIE: Heavy rain? Good. The current is moving exactly as planned. / What? Routes flooded, crews trapped, and the pressure still rising? / No. Freedom was not supposed to erase everything it connected.$",
+    "after": "ARCHIE: Heavy rain? Good! KYOGRE is expanding the sea!\n\nWhat? The routes are flooding? Our own crews are trapped?\n\nTell them to get to high ground! How can the rain still be getting worse?"
+  },
+  {
+    "index": 1644,
+    "file": "data/maps/SeafloorCavern_Room9/scripts.inc",
+    "label": "SeafloorCavern_Room9_Text_ArchieWhyDidKyogreDisappear",
+    "before": "ARCHIE: The RED ORB woke KYOGRE, but it never promised me control. / I mistook motion for obedience.$",
+    "after": "ARCHIE: The RED ORB woke KYOGRE. Why won't it answer me now?\n\nI never wanted people to get hurt…"
+  },
+  {
+    "index": 1645,
+    "file": "data/maps/SeafloorCavern_Room9/scripts.inc",
+    "label": "SeafloorCavern_Room9_Text_MaxieWhatHaveYouWrought",
+    "before": "MAXIE: ARCHIE, KYOGRE's rain is spreading beyond the coast. GROUDON will answer with its own power. / If they clash, neither the land nor the people you meant to free will survive.$",
+    "after": "MAXIE: ARCHIE! KYOGRE's rain is spreading, and GROUDON's heat is getting worse.\n\nIf they meet, the people and POKéMON of HOENN will be caught between them!"
+  },
+  {
+    "index": 1646,
+    "file": "data/maps/SeafloorCavern_Room9/scripts.inc",
+    "label": "SeafloorCavern_Room9_Text_ArchieDontGetAllHighAndMighty",
+    "before": "ARCHIE: Your certainty woke GROUDON! My mistake only mirrors yours. / And the RED ORB should still let me... No. We never understood the ORBS.$",
+    "after": "ARCHIE: You're the one who woke GROUDON!\n\nI thought the ORB would let me control KYOGRE. But it's not listening. Neither of them is!"
+  },
+  {
+    "index": 1647,
+    "file": "data/maps/SeafloorCavern_Room9/scripts.inc",
+    "label": "SeafloorCavern_Room9_Text_MaxieWeDontHaveTimeToArgue",
+    "before": "MAXIE: Blame is another wasted turn. Outside, HOENN is breaking now. / Look at the world our perfect answers created.$",
+    "after": "MAXIE: We can argue later! We need to get everyone out of this cavern.\n\nCome and see what's happening outside, ARCHIE. We have to stop it."
+  },
+  {
+    "index": 1650,
+    "file": "data/maps/CaveOfOrigin_B1F/scripts.inc",
+    "label": "CaveOfOrigin_B1F_Text_WhereIsRayquaza",
+    "before": "WALLACE: {PLAYER}{KUN}, you have walked more of HOENN than any of us. / Do you know where RAYQUAZA is now?$",
+    "after": "WALLACE: Where might a POKéMON of the sky rest?\n\nHave you heard of any place on your travels that could shelter RAYQUAZA?"
+  },
+  {
+    "index": 1651,
+    "file": "data/maps/CaveOfOrigin_B1F/scripts.inc",
+    "label": "CaveOfOrigin_B1F_Text_ButWereInCaveOfOrigin",
+    "before": "WALLACE: The CAVE OF ORIGIN? / But that's right here! I need you to do better than that! / Please, I need you to think about where RAYQUAZA might be right now.$",
+    "after": "WALLACE: We've searched the CAVE OF ORIGIN. There is no sign of RAYQUAZA here.\n\nPerhaps somewhere higher, closer to the sky?"
+  },
+  {
+    "index": 1652,
+    "file": "data/maps/CaveOfOrigin_B1F/scripts.inc",
+    "label": "CaveOfOrigin_B1F_Text_OldLadyDidntMentionThat",
+    "before": "WALLACE: MT. PYRE? / But when I met the old lady there earlier, she made no mention of it. / I very much doubt that the old lady would try to hide something from me… / {PLAYER}{KUN}, could you think about this more carefully for me?$",
+    "after": "WALLACE: The elders at MT. PYRE told me RAYQUAZA's story, but it doesn't rest there.\n\nPerhaps another place high above the sea?"
+  },
+  {
+    "index": 1653,
+    "file": "data/maps/CaveOfOrigin_B1F/scripts.inc",
+    "label": "CaveOfOrigin_B1F_Text_CantYouRememberSomehow",
+    "before": "WALLACE: Huh? You don't remember? Hmm… That's a problem… / Can't you remember somehow?$",
+    "after": "WALLACE: There is an old tower called SKY PILLAR, near ROUTE 131. It reaches high above the sea.\n\nCould that be the place we're looking for?"
+  },
+  {
+    "index": 1661,
+    "file": "data/maps/MagmaHideout_4F/scripts.inc",
+    "label": "MagmaHideout_4F_Text_CourtneyIntro",
+    "before": "COURTNEY: Prediction: you will target the sun before noticing the split pressure. / Let us measure how quickly you correct.$",
+    "after": "COURTNEY: You reached the chamber.\n\nMAXIE must not be interrupted. I will stop you here."
+  },
+  {
+    "index": 1662,
+    "file": "data/maps/MagmaHideout_4F/scripts.inc",
+    "label": "MagmaHideout_4F_Text_CourtneyDefeat",
+    "before": "Correction arrived before failure. Noted.$",
+    "after": "COURTNEY: Defeated… Again."
+  },
+  {
+    "index": 1663,
+    "file": "data/maps/MagmaHideout_4F/scripts.inc",
+    "label": "MagmaHideout_4F_Text_CourtneyAfter",
+    "before": "MAXIE values certainty. You keep proving that adaptation is also measurable.$",
+    "after": "COURTNEY: MAXIE is just ahead.\n\nGROUDON… What will it do when it wakes?"
+  },
+  {
+    "index": 1665,
+    "file": "data/maps/MagmaHideout_4F/scripts.inc",
+    "label": "MagmaHideout_4F_Text_Grunt11Intro",
+    "before": "MAXIE promised solid ground under every home in HOENN. I believe him. / MANDIBUZZ taunts, MAMOSWINE crushes. You will not reach the chamber.$",
+    "after": "MAXIE promised solid ground under every home in HOENN. I believe him.\n\nYou're not getting into that chamber!"
+  },
+  {
+    "index": 1666,
+    "file": "data/maps/MagmaHideout_4F/scripts.inc",
+    "label": "MagmaHideout_4F_Text_Grunt11Defeat",
+    "before": "You moved before my TAUNT mattered…$",
+    "after": "You beat my whole team…"
+  },
+  {
+    "index": 1667,
+    "file": "data/maps/MagmaHideout_4F/scripts.inc",
+    "label": "MagmaHideout_4F_Text_Grunt11PostBattle",
+    "before": "None of us have seen GROUDON. MAXIE keeps it behind the last door. / I wonder if certainty needs a door.$",
+    "after": "None of us have seen GROUDON. MAXIE keeps the last chamber closed.\n\nThe mountain's shaking. I hope he knows what he's doing."
+  },
+  {
+    "index": 1668,
+    "file": "data/maps/MagmaHideout_4F/scripts.inc",
+    "label": "MagmaHideout_4F_Text_Grunt12Intro",
+    "before": "Sun, sand, and GARCHOMP's stone. MAXIE built this formation for one outcome. / Soon! Very soon our ground will hold!$",
+    "after": "Can you feel the mountain shaking? That's GROUDON's power!\n\nMAXIE's waited years for this. I won't let you spoil it!"
+  },
+  {
+    "index": 1669,
+    "file": "data/maps/MagmaHideout_4F/scripts.inc",
+    "label": "MagmaHideout_4F_Text_Grunt12Defeat",
+    "before": "The formation had one answer, and you found the other…$",
+    "after": "I couldn't stop you…"
+  },
+  {
+    "index": 1671,
+    "file": "data/maps/MagmaHideout_4F/scripts.inc",
+    "label": "MagmaHideout_4F_Text_Grunt13Intro",
+    "before": "AMOONGUSS pulls your attacks. RHYPERIOR turns the ones that land into power. / You're not getting by me easily!$",
+    "after": "This is the last chamber. GROUDON is just beyond us.\n\nYou want to stop MAXIE? You'll have to get past me!"
+  },
+  {
+    "index": 1672,
+    "file": "data/maps/MagmaHideout_4F/scripts.inc",
+    "label": "MagmaHideout_4F_Text_Grunt13Defeat",
+    "before": "You hit the slot I left open…$",
+    "after": "My team couldn't hold you back…"
+  },
+  {
+    "index": 1673,
+    "file": "data/maps/MagmaHideout_4F/scripts.inc",
+    "label": "MagmaHideout_4F_Text_Grunt13PostBattle",
+    "before": "Go on, then. Tell MAXIE the ground moved under us too.$",
+    "after": "That tremor… Was it stronger than the last one?"
+  },
+  {
+    "index": 1674,
+    "file": "data/maps/MagmaHideout_4F/scripts.inc",
+    "label": "MagmaHideout_4F_Text_TabithaIntro",
+    "before": "TABITHA: Every chamber behind you was built to make one approach predictable. / MAXIE is already with GROUDON. I only need to make your last answer too slow.$",
+    "after": "TABITHA: You've made it through the entire hideout. I should have expected it.\n\nMAXIE is with GROUDON. This is the moment we've worked for.\n\nI'm not letting you take it from us!"
+  },
+  {
+    "index": 1675,
+    "file": "data/maps/MagmaHideout_4F/scripts.inc",
+    "label": "MagmaHideout_4F_Text_TabithaDefeat",
+    "before": "Your last answer was faster than my model allowed…$",
+    "after": "Even here, I couldn't defeat you…"
+  },
+  {
+    "index": 1676,
+    "file": "data/maps/MagmaHideout_4F/scripts.inc",
+    "label": "MagmaHideout_4F_Text_TabithaPostBattle",
+    "before": "Every minute you spent on me was one more MAXIE had with GROUDON. / Go and see what certainty awakened.$",
+    "after": "TABITHA: MAXIE is just ahead.\n\nThe shaking keeps getting worse. What is happening in there?"
+  },
+  {
+    "index": 1678,
+    "file": "data/maps/MagmaHideout_4F/scripts.inc",
+    "label": "MagmaHideout_4F_Text_MaxieGroudonWhatsWrong",
+    "before": "MAXIE: GROUDON! The model was exact. Why did the ORB make you reject me? / Where are you going?$",
+    "after": "MAXIE: GROUDON! What's wrong? The BLUE ORB was supposed to awaken you!\n\nWait! Where are you going?"
+  },
+  {
+    "index": 1679,
+    "file": "data/maps/MagmaHideout_4F/scripts.inc",
+    "label": "MagmaHideout_4F_Text_MaxieOhItWasYou",
+    "before": "MAXIE: You again. GROUDON fled before you touched the machine. / Then prove the error is mine, not yours.$",
+    "after": "MAXIE: You! Did you see that? GROUDON left without a single command.\n\nDon't look at me like that. You won't stop TEAM MAGMA!"
+  },
+  {
+    "index": 1681,
+    "file": "data/maps/MagmaHideout_4F/scripts.inc",
+    "label": "MagmaHideout_4F_Text_MaxieImGoingAfterGroudon",
+    "before": "MAXIE: Your team adapted; my plan did not. I understand the lesson. / But GROUDON is loose, and ARCHIE still holds the matching disaster. / He needs STERN's submarine to reach the seafloor. STERN is in SLATEPORT. / Go to the harbor in northeast SLATEPORT and warn CAPT. STERN. / I will follow GROUDON. This is no longer an experiment we control.$",
+    "after": "MAXIE: GROUDON is loose. I have to find out why the ORB failed to control it.\n\nARCHIE still has the RED ORB. He'll need STERN's submarine to reach KYOGRE on the seafloor.\n\nGo warn CAPT. STERN at the harbor in northeast SLATEPORT.\n\nI'm going after GROUDON."
+  },
+  {
+    "index": 1682,
+    "file": "data/maps/Route119_WeatherInstitute_1F/scripts.inc",
+    "label": "Route119_WeatherInstitute_1F_Text_Grunt1Intro",
+    "before": "The INSTITUTE mapped every pressure shift before the storm arrived. / ARCHIE needs those maps. You are not interrupting this current again.$",
+    "after": "These maps show storms all over HOENN. ARCHIE wants to know where they begin.\n\nHe'll get his answers. You're not getting upstairs!"
+  },
+  {
+    "index": 1683,
+    "file": "data/maps/Route119_WeatherInstitute_1F/scripts.inc",
+    "label": "Route119_WeatherInstitute_1F_Text_Grunt1Defeat",
+    "before": "You read the pressure change first…$",
+    "after": "I couldn't keep you out…"
+  },
+  {
+    "index": 1685,
+    "file": "data/maps/Route119_WeatherInstitute_1F/scripts.inc",
+    "label": "Route119_WeatherInstitute_1F_Text_Grunt4Intro",
+    "before": "You crossed the flooded grass alone? Then this indoor front will not stop you. / I will change the forecast myself.$",
+    "after": "You crossed all that rain to get here? Should've stayed where it was dry!\n\nNow you've got TEAM AQUA to deal with!"
+  },
+  {
+    "index": 1686,
+    "file": "data/maps/Route119_WeatherInstitute_1F/scripts.inc",
+    "label": "Route119_WeatherInstitute_1F_Text_Grunt4Defeat",
+    "before": "My forecast failed completely…$",
+    "after": "So much for scaring you off…"
+  },
+  {
+    "index": 1687,
+    "file": "data/maps/Route119_WeatherInstitute_1F/scripts.inc",
+    "label": "Route119_WeatherInstitute_1F_Text_Grunt4PostBattle",
+    "before": "The bed restores exhausted teams. Use it. SHELLY is upstairs with the researchers. That is your next front.$",
+    "after": "There's a bed over there. You might want to rest.\n\nSHELLY's upstairs with the researchers. She's tougher than I am."
+  },
+  {
+    "index": 1694,
+    "file": "data/maps/Route119_WeatherInstitute_2F/scripts.inc",
+    "label": "Route119_WeatherInstitute_2F_Text_Grunt2Intro",
+    "before": "CASTFORM reads a battlefield before the first drop falls. AQUA needs that gift. / You will not reach the research wing.$",
+    "after": "The researchers say CASTFORM changes with the weather. ARCHIE wants to know why!\n\nYou can't go into the research wing!"
+  },
+  {
+    "index": 1695,
+    "file": "data/maps/Route119_WeatherInstitute_2F/scripts.inc",
+    "label": "Route119_WeatherInstitute_2F_Text_Grunt2Defeat",
+    "before": "You changed the forecast around me…$",
+    "after": "I couldn't stop you…"
+  },
+  {
+    "index": 1697,
+    "file": "data/maps/Route119_WeatherInstitute_2F/scripts.inc",
+    "label": "Route119_WeatherInstitute_2F_Text_Grunt3Intro",
+    "before": "Rare data, rare POKéMON, hidden currents. AQUA follows what the world conceals.$",
+    "after": "Weather records, rare POKéMON… This place has everything ARCHIE asked for!\n\nYou're not taking it away from us!"
+  },
+  {
+    "index": 1698,
+    "file": "data/maps/Route119_WeatherInstitute_2F/scripts.inc",
+    "label": "Route119_WeatherInstitute_2F_Text_Grunt3Defeat",
+    "before": "You exposed every hidden line…$",
+    "after": "But I was guarding the records…"
+  },
+  {
+    "index": 1699,
+    "file": "data/maps/Route119_WeatherInstitute_2F/scripts.inc",
+    "label": "Route119_WeatherInstitute_2F_Text_Grunt3PostBattle",
+    "before": "ARCHIE wants a world no border can hold. You keep asking what that freedom costs.$",
+    "after": "We've watched strange storms gather out at sea. ARCHIE says these records will tell us what they mean."
+  },
+  {
+    "index": 1700,
+    "file": "data/maps/Route119_WeatherInstitute_2F/scripts.inc",
+    "label": "Route119_WeatherInstitute_2F_Text_Grunt5Intro",
+    "before": "You came for the weather POKéMON, too? / Then you know a changing form can answer more fields than a rigid one. Show me.$",
+    "after": "What are you after? The records? The weather POKéMON?\n\nWhatever it is, TEAM AQUA got here first!"
+  },
+  {
+    "index": 1701,
+    "file": "data/maps/Route119_WeatherInstitute_2F/scripts.inc",
+    "label": "Route119_WeatherInstitute_2F_Text_Grunt5Defeat",
+    "before": "Your answer changed one turn sooner…$",
+    "after": "I couldn't hold my post…"
+  },
+  {
+    "index": 1702,
+    "file": "data/maps/Route119_WeatherInstitute_2F/scripts.inc",
+    "label": "Route119_WeatherInstitute_2F_Text_Grunt5PostBattle",
+    "before": "CASTFORM was never the whole objective. The storm records point toward MT. PYRE and its ORBS.$",
+    "after": "The storm records led us to old stories about MT. PYRE. ARCHIE thinks its ORBS are the key."
+  },
+  {
+    "index": 1703,
+    "file": "data/maps/Route119_WeatherInstitute_2F/scripts.inc",
+    "label": "Route119_WeatherInstitute_2F_Text_ShellyIntro",
+    "before": "SHELLY: We came for weather records. They show what happens when the ancient sea begins to stir. / AQUA changes the battlefield before the opponent can adjust. / Let's see how quickly you read a storm!$",
+    "after": "SHELLY: We came for weather records. They show something powerful stirring in the ocean.\n\nYou should have stayed out of this, {PLAYER}. I'm not letting you interfere with ARCHIE's work!"
+  },
+  {
+    "index": 1704,
+    "file": "data/maps/Route119_WeatherInstitute_2F/scripts.inc",
+    "label": "Route119_WeatherInstitute_2F_Text_ShellyDefeat",
+    "before": "You found the calm inside my storm…$",
+    "after": "You've beaten us here, too…"
+  },
+  {
+    "index": 1705,
+    "file": "data/maps/Route119_WeatherInstitute_2F/scripts.inc",
+    "label": "Route119_WeatherInstitute_2F_Text_ShellyPostBattle",
+    "before": "You adapted inside the storm. No wonder ARCHIE remembers you. / The records point to MT. PYRE. We move.$",
+    "after": "SHELLY: You're as persistent as ARCHIE said.\n\nWe have what we need. These records point to MT. PYRE."
+  },
+  {
+    "index": 1707,
+    "file": "data/maps/Route119_WeatherInstitute_2F/scripts.inc",
+    "label": "Route119_WeatherInstitute_2F_Text_WeHaveToHurryToMtPyre",
+    "before": "What?! MAGMA already moved toward the BLUE ORB? / The records confirm MT. PYRE is the next node. AQUA, change course now!$",
+    "after": "What?! MAGMA is heading for the BLUE ORB?\n\nSHELLY: Then we can't waste another moment here. AQUA! To MT. PYRE!"
+  },
+  {
+    "index": 1708,
+    "file": "data/maps/Route119_WeatherInstitute_2F/scripts.inc",
+    "label": "Route119_WeatherInstitute_2F_Text_ThanksPleaseTakePokemon",
+    "before": "You saved our staff and our data. Take this CASTFORM as a research partner. / It reads weather directly, and old desert records say the land itself knows it.$",
+    "after": "You saved us, and our research. Thank you!\n\nThis CASTFORM has helped us study the weather. I think it would enjoy traveling with you. Please take it!"
+  },
+  {
+    "index": 558,
+    "file": "data/maps/LittlerootTown_MaysHouse_1F/scripts.inc",
+    "label": "RivalsHouse_1F_Text_MayWhoAreYou",
+    "before": "You're {PLAYER}, right? I'm MAY. Welcome to LITTLEROOT! / Dad said a GYM LEADER's kid was moving next door. I hoped we'd battle. / He studies how Trainers from different regions build around their partners. / For today's fieldwork, he packed all nine regional starter trios. / He went to ROUTE 101, north of town. Go introduce yourself before he leaves!$",
+    "after": "You're {PLAYER}, right? I'm MAY. Welcome to LITTLEROOT!\n\nDad said a GYM LEADER's family was moving next door. I hoped we'd get to be friends!\n\nHe studies POKéMON from all nine regions. He took their starter partners out for fieldwork today.\n\nYou can meet him on ROUTE 101, north of town!"
+  },
+  {
+    "index": 561,
+    "file": "data/maps/LittlerootTown_MaysHouse_2F/scripts.inc",
+    "label": "RivalsHouse_2F_Text_MayWhoAreYou",
+    "before": "You're {PLAYER}, right? I'm MAY. Welcome to LITTLEROOT! / Dad said a GYM LEADER's kid was moving next door. I hoped we'd battle. / He studies how Trainers from different regions build around their partners. / For today's fieldwork, he packed all nine regional starter trios. / He went to ROUTE 101, north of town. Go introduce yourself before he leaves!$",
+    "after": "You're {PLAYER}, right? I'm MAY. Welcome to LITTLEROOT!\n\nDad said a GYM LEADER's family was moving next door. I hoped we'd get to be friends!\n\nHe studies POKéMON from all nine regions. He took their starter partners out for fieldwork today.\n\nYou can meet him on ROUTE 101, north of town!"
+  },
+  {
+    "index": 559,
+    "file": "data/maps/LittlerootTown_MaysHouse_1F/scripts.inc",
+    "label": "RivalsHouse_1F_Text_BrendanWhoAreYou",
+    "before": "You're {PLAYER}, right? I'm BRENDAN. Welcome to LITTLEROOT! / Dad said a GYM LEADER's kid was moving next door. I hoped we'd battle. / He studies how Trainers from different regions build around their partners. / For today's fieldwork, he packed all nine regional starter trios. / He went to ROUTE 101, north of town. Go introduce yourself before he leaves!$",
+    "after": "You're {PLAYER}? I'm BRENDAN. Dad told me you were moving next door.\n\nA GYM LEADER's kid, huh? We'll have to battle sometime!\n\nDad studies POKéMON from all nine regions. He's on ROUTE 101 with their starter partners today.\n\nHead north out of town. You can't miss him!"
+  },
+  {
+    "index": 563,
+    "file": "data/maps/LittlerootTown_MaysHouse_2F/scripts.inc",
+    "label": "RivalsHouse_2F_Text_BrendanWhoAreYou",
+    "before": "You're {PLAYER}, right? I'm BRENDAN. Welcome to LITTLEROOT! / Dad said a GYM LEADER's kid was moving next door. I hoped we'd battle. / He studies how Trainers from different regions build around their partners. / For today's fieldwork, he packed all nine regional starter trios. / He went to ROUTE 101, north of town. Go introduce yourself before he leaves!$",
+    "after": "You're {PLAYER}? I'm BRENDAN. Dad told me you were moving next door.\n\nA GYM LEADER's kid, huh? We'll have to battle sometime!\n\nDad studies POKéMON from all nine regions. He's on ROUTE 101 with their starter partners today.\n\nHead north out of town. You can't miss him!"
+  },
+  {
+    "index": 859,
+    "file": "data/maps/SlateportCity_SternsShipyard_1F/scripts.inc",
+    "label": "SlateportCity_SternsShipyard_1F_Text_DecidedToHelpDock",
+    "before": "MR. BRINEY: Ah, {PLAYER}{KUN}! It's been too long! / Aye, since I met you, this old sea dog's been feeling frisky! / So I've decided to help DOCK make a ferry. / Aye, after all, a ferry would be able to carry a lot of people. / But, you know, that DOCK is really something special. / With his knack for technology and my experience, I'm sure that we can build one great ship, aye!$",
+    "after": "MR. BRINEY: Ah, {PLAYER}{KUN}! It's been too long!\n\nI've joined DOCK here at the shipyard. That lad's S.S. TIDAL is a fine vessel!\n\nHe knows the engineering, and I know the sea. Together, we'll keep her sailing for years!"
+  },
+  {
+    "index": 857,
+    "file": "data/maps/SlateportCity_SternsShipyard_1F/scripts.inc",
+    "label": "SlateportCity_SternsShipyard_1F_Text_BrineyJoinedUs",
+    "before": "DOCK: Hi! MR. BRINEY's joined us to lend us his help. / Thanks to the veteran sailor, the ferry is steadily coming together.$",
+    "after": "DOCK: MR. BRINEY's joined us!\n\nThe ferry is sailing, but there's always work to do. His experience at sea is a great help."
+  },
+  {
+    "index": 1390,
+    "file": "data/maps/SootopolisCity_House1/scripts.inc",
+    "label": "SootopolisCity_House1_Text_ExplainRazorClaw",
+    "before": "A Razor Claw evolves Sneasel. Use it at night when ready.$",
+    "after": "Use a RAZOR CLAW on SNEASEL at night to evolve it into WEAVILE.\n\nA Hisuian SNEASEL needs it during the day instead, to become SNEASLER."
+  },
+  {
+    "index": 635,
+    "file": "data/maps/DewfordTown_PokemonCenter_1F/scripts.inc",
+    "label": "DewfordTown_PokemonCenter_1F_Text_FaintedMonCanUseHM",
+    "before": "Even if a POKéMON faints and can't battle, it can still use a move learned from a HIDDEN MACHINE (HM).$",
+    "after": "Once you have an HM and its BADGE, a compatible partner lets you use that field skill.\n\nIt doesn't take up a battle move slot. You can even clear the way if that partner has fainted."
+  },
+  {
+    "index": 621,
+    "file": "data/maps/OldaleTown_House2/scripts.inc",
+    "label": "OldaleTown_House2_Text_PokemonLevelUp",
+    "before": "POKéMON grow from battles, but you never need to grind. / A POKéMON CENTER LEVELER trains your whole party to the current limit.$",
+    "after": "POKéMON grow stronger as they gain levels.\n\nThe CENTER's free LEVELER brings your whole party to the current limit. It's handy when a new partner joins!"
+  },
+  {
+    "index": 622,
+    "file": "data/maps/OldaleTown_House2/scripts.inc",
+    "label": "OldaleTown_House2_Text_YoullGoFurtherWithStrongPokemon",
+    "before": "Raw levels alone won't take you far. / Build different partners for different battles, then change plans when needed.$",
+    "after": "Get to know what each partner does well.\n\nA new move or a different teammate can make all the difference in a tough battle."
+  }
+]

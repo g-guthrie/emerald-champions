@@ -304,7 +304,7 @@ DewfordTown_Hall_Text_CantImagineLifeWithoutTrend:
 	.string "What's in vogue? Why, it has to be\n"
 	.string "“{STR_VAR_1}”!\p"
 	.string "I can't imagine what life would be like\n"
-	.string "without “{STR_VAR_1}”!$"
+	.string "without that trend!$"
 
 DewfordTown_Hall_Text_GettingBoredOfTrend:
 	.string "What's in vogue? Why, it has to be\n"
@@ -321,8 +321,8 @@ DewfordTown_Hall_Text_TeachingMonAboutTrend:
 DewfordTown_Hall_Text_DeepLinkBetweenXAndY:
 	.string "I'm studying up on the hip and trendy\n"
 	.string "“{STR_VAR_1}” now.\p"
-	.string "Is it true that there's a deep link\n"
-	.string "between “{STR_VAR_1}”\l"
+	.string "Is there a deep link between\n"
+	.string "“{STR_VAR_1}”\l"
 	.string "and “{STR_VAR_2}”?$"
 
 DewfordTown_Hall_Text_MyHunchWasRight:
@@ -353,8 +353,8 @@ DewfordTown_Hall_Text_CollectTrendMerchandise:
 	.string "licensed merchandise.\p"
 	.string "I have official\n"
 	.string "“{STR_VAR_1}” DOLLS…\p"
-	.string "Official “{STR_VAR_1}”\n"
-	.string "brand clothing…\p"
+	.string "Official clothing for\n"
+	.string "“{STR_VAR_1}”…\p"
 	.string "And officially licensed\n"
 	.string "“{STR_VAR_1}”\l"
 	.string "picture books.\p"
@@ -438,7 +438,7 @@ DewfordTown_Hall_Text_BrilliantIndeed:
 	.string "“{STR_VAR_1}.”\l"
 	.string "Brilliant, indeed!\p"
 	.string "Starting today, our lives will revolve\n"
-	.string "around “{STR_VAR_1}”!$"
+	.string "around that trend!$"
 
 DewfordTown_Hall_Text_TrendHasBecomePartOfLife:
 	.string "I was thinking, though…\p"
@@ -461,7 +461,7 @@ DewfordTown_Hall_Text_TrendWeighsHeavilyOnMind:
 DewfordTown_Hall_Text_IfWeTeamUpWellBeInvincible:
 	.string "If you and me team up as a combo,\n"
 	.string "we'll be invincible when it comes to all\l"
-	.string "things “{STR_VAR_1}”!$"
+	.string "things trendy!$"
 
 DewfordTown_Hall_Text_WellBeTrendDuo:
 	.string "Spot on, my friend!\p"
@@ -474,7 +474,9 @@ DewfordTown_Hall_Text_GiveYouDeepSeaScale:
 	.string "It evolves Clamperl into Gorebyss.$"
 
 DewfordTown_Hall_Text_ScaleAndTrend:
-	.string "That DEEP SEA SCALE evolves CLAMPERL\n"
-	.string "into GOREBYSS.\p"
-	.string "The trendy move “{STR_VAR_1}” is\n"
+	.string "That DEEP SEA SCALE evolves\n"
+	.string "CLAMPERL into GOREBYSS. Use it\l"
+	.string "from the BAG when ready.\p"
+	.string "And the latest trend?\n"
+	.string "“{STR_VAR_1}” is\l"
 	.string "making waves, too.$"

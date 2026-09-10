@@ -17,28 +17,32 @@ MagmaHideout_1F_EventScript_Grunt2::
 	end
 
 MagmaHideout_1F_Text_Grunt1Intro:
-	.string "Every guard has one fixed position.\n"
-	.string "Mine is this corner and this approach.\p"
-	.string "MAXIE says order fails when one person\n"
-	.string "abandons their place. I will hold mine.$"
+	.string "This corner is my post. Nobody\n"
+	.string "gets past it while I'm on duty!\p"
+	.string "MAXIE is counting on us. I won't\n"
+	.string "let him down!$"
 
 MagmaHideout_1F_Text_Grunt1Defeat:
-	.string "I held the position, but not the battle…$"
+	.string "I couldn't hold my own post…$"
 
 MagmaHideout_1F_Text_Grunt1PostBattle:
-	.string "A fixed post is useless if the opponent\n"
-	.string "can change every approach.$"
+	.string "I thought standing guard would be\n"
+	.string "the easy job.\p"
+	.string "The digging crew warned me. I\n"
+	.string "should have listened.$"
 
 MagmaHideout_1F_Text_Grunt2Intro:
-	.string "Our leader told us to dig into\n"
-	.string "MT. CHIMNEY, so we dug and dug.\p"
-	.string "We found a chamber tied to the same\n"
-	.string "network as the CHAMPION'S SIGNS.\p"
-	.string "Beat my formation and see it yourself.$"
+	.string "Our leader told us to dig into MT.\n"
+	.string "CHIMNEY, so we dug and dug.\p"
+	.string "What we found could give HOENN\n"
+	.string "more land than we ever dreamed of!\p"
+	.string "And you're not getting near it!$"
 
 MagmaHideout_1F_Text_Grunt2Defeat:
-	.string "The entrance line has fallen…$"
+	.string "All that digging wore me out…$"
 
 MagmaHideout_1F_Text_Grunt2PostBattle:
-	.string "The chamber is deeper in. What MAXIE\n"
-	.string "woke there may already be moving.$"
+	.string "MAXIE is in the deepest chamber.\n"
+	.string "He says the BLUE ORB will awaken\l"
+	.string "what we found.\p"
+	.string "I hope he knows what he's doing.$"

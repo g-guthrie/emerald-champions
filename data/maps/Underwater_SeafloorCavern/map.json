@@ -79,20 +79,6 @@
       "trainer_sight_or_berry_tree_id": "ITEM_TATSUGIRINITE",
       "script": "Common_EventScript_FindItem",
       "flag": "FLAG_EC_MEGA_REWARD_TATSUGIRINITE"
-    },
-    {
-      "local_id": "LOCALID_UNDERWATER_SEAFLOOR_CAVERN_LEGENDARY_SIGN",
-      "graphics_id": "OBJ_EVENT_GFX_DEOXYS_TRIANGLE",
-      "x": 8,
-      "y": 6,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_NONE",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Common_EventScript_LegendaryLandmark",
-      "flag": "0"
     }
   ],
   "warp_events": [

@@ -65,17 +65,21 @@ EverGrandeCity_GlaciasRoom_EventScript_Defeated::
 	end
 
 EverGrandeCity_GlaciasRoom_Text_IntroSpeech:
-	.string "GLACIA. I came far for opponents worth\n"
-	.string "the cold.\p"
+	.string "GLACIA. I came far for opponents\n"
+	.string "worth the cold.\p"
 	.string "Snow is patience. The VEIL buys time,\n"
 	.string "the wind rearranges order, and one\l"
-	.string "slow horse ends whoever hurries.\p"
-	.string "Break the climate. The ice will follow.$"
+	.string "powerful Dragon waits behind it.\p"
+	.string "Changing the weather is one answer.\n"
+	.string "But the VEIL can outlast the snow.$"
 
 EverGrandeCity_GlaciasRoom_Text_Defeat:
-	.string "…You thawed the shelter before the\n"
-	.string "storm arrived. Acceptable.$"
+	.string "…Your team weathered the battle.\n"
+	.string "Acceptable.$"
 
 EverGrandeCity_GlaciasRoom_Text_PostBattleSpeech:
-	.string "DRAKE is old, and old Dragons know both\n"
-	.string "speeds. Assume nothing about his tempo.$"
+	.string "DRAKE waits ahead. He's sailed\n"
+	.string "through many storms with his\l"
+	.string "DRAGON POKéMON.\p"
+	.string "You have earned his full\n"
+	.string "attention.$"

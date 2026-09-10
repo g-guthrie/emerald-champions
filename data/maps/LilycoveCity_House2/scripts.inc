@@ -19,11 +19,13 @@ LilycoveCity_House2_EventScript_ReceivedMoonStone::
 	end
 
 LilycoveCity_House2_Text_NotAwakeYetHaveThis:
-	.string "Huh? What? What's that?\p"
-	.string "I'm not near awake yet…\n"
-	.string "You can have this…$"
+	.string "Huh? What? Oh, a visitor…\p"
+	.string "I was admiring this MOON STONE and\n"
+	.string "drifted off. You can have it…\l"
+	.string "Yawn…$"
 
 LilycoveCity_House2_Text_SleepIsEssential:
-	.string "Yawn…\p"
-	.string "Sleep is essential for good health…\n"
-	.string "Sleep and regain health…$"
+	.string "Yawn… A MOON STONE can help\n"
+	.string "certain POKéMON evolve…\p"
+	.string "Me? A little more sleep will do\n"
+	.string "nicely…$"

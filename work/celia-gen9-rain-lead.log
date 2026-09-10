@@ -1,0 +1,363 @@
+arm-none-eabi-cpp -iquote include -Wno-trigraphs -DMODERN=1 -DTESTING=0 -DEMERALD -std=gnu17 -DEC_HEADLESS_FIXTURES=0 -traditional-cpp - < src/data/trainers.party | tools/trainerproc/trainerproc -o src/data/trainers.h -i src/data/trainers.party -
+tools/scaninc/scaninc -M build/emerald-test/test/battle/ai/emerald_champions_plans.d -g build/assets -I include -I tools/agbcc/include test/battle/ai/emerald_champions_plans.c
+tools/scaninc/scaninc -M build/emerald-test/test/test_runner_battle.d -g build/assets -I include -I tools/agbcc/include test/test_runner_battle.c
+tools/scaninc/scaninc -M build/emerald-test/src/emerald_champions_battle_plan.d -g build/assets -I include -I tools/agbcc/include src/emerald_champions_battle_plan.c
+tools/scaninc/scaninc -M build/emerald-test/src/data.d -g build/assets -I include -I tools/agbcc/include src/data.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/data.o src/data.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/emerald_champions_battle_plan.o src/emerald_champions_battle_plan.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/test_runner_battle.o test/test_runner_battle.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/battle/ai/emerald_champions_plans.o test/battle/ai/emerald_champions_plans.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 4
+[0] EC live review Celia timing: six-player bench: [32mPASS[0m
+REVIEW_INPUT trainer=743 slot=0 species=47 lv=38 HP=129 Atk=88 Def=77 SpA=55 SpD=111 Spe=39 item=472 ability=87
+REVIEW_INPUT trainer=743 slot=1 species=186 lv=38 HP=152 Atk=65 Def=106 SpA=85 SpD=93 Spe=69 item=447 ability=2
+REVIEW_INPUT trainer=743 slot=2 species=189 lv=38 HP=117 Atk=82 Def=69 SpA=52 SpD=88 Spe=136 item=348 ability=151
+REVIEW_INPUT trainer=743 slot=3 species=711 lv=38 HP=109 Atk=54 Def=109 SpA=119 SpD=73 Spe=104 item=445 ability=138
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=X-Scissor target=2
+AI decision turn=2 actor=3 move=Weather Ball target=0
+REVIEW_AFTER board=99 turns=1 reserves=0 species=47/186 HP=129/152 foes=98/114 faints=0/0 initialFrames=59
+REVIEW_STATE actor=1 move=Protect PP=15/10/15/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=87 item=472
+REVIEW_STATE actor=3 move=Protect PP=10/15/20/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=2 item=447
+REVIEW_TIMING setup=5 bothActors=55 complete=60
+REVIEW_INPUT trainer=743 slot=0 species=47 lv=38 HP=129 Atk=88 Def=77 SpA=55 SpD=111 Spe=39 item=472 ability=87
+REVIEW_INPUT trainer=743 slot=1 species=186 lv=38 HP=152 Atk=65 Def=106 SpA=85 SpD=93 Spe=69 item=447 ability=2
+REVIEW_INPUT trainer=743 slot=2 species=189 lv=38 HP=117 Atk=82 Def=69 SpA=52 SpD=88 Spe=136 item=348 ability=151
+REVIEW_INPUT trainer=743 slot=3 species=711 lv=38 HP=109 Atk=54 Def=109 SpA=119 SpD=73 Spe=104 item=445 ability=138
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Acrobatics target=0
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Acrobatics target=0
+AI decision turn=2 actor=3 move=Shadow Ball target=2
+REVIEW_AFTER board=99 turns=1 reserves=1 species=189/711 HP=117/109 foes=98/114 faints=0/0 initialFrames=38
+REVIEW_STATE actor=1 move=Acrobatics PP=14/15/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=151 item=348
+REVIEW_STATE actor=3 move=Protect PP=15/10/15/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=16 ability=138 item=445
+REVIEW_TIMING setup=6 bothActors=34 complete=40
+[1] EC live review Celia: Spore pressure and Grass reserves: [32mPASS[0m
+REVIEW_INPUT trainer=743 slot=0 species=47 lv=38 HP=129 Atk=88 Def=77 SpA=55 SpD=111 Spe=39 item=472 ability=87
+REVIEW_INPUT trainer=743 slot=1 species=186 lv=38 HP=152 Atk=65 Def=106 SpA=85 SpD=93 Spe=69 item=447 ability=2
+REVIEW_INPUT trainer=743 slot=2 species=189 lv=38 HP=117 Atk=82 Def=69 SpA=52 SpD=88 Spe=136 item=348 ability=151
+REVIEW_INPUT trainer=743 slot=3 species=711 lv=38 HP=109 Atk=54 Def=109 SpA=119 SpD=73 Spe=104 item=445 ability=138
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Ice Punch target=3
+AI decision turn=1 actor=3 move=Weather Ball target=2
+AI decision turn=2 actor=1 move=Spore target=2
+AI decision turn=2 actor=3 move=Icy Wind target=0
+REVIEW_AFTER board=0 turns=1 reserves=0 species=47/186 HP=129/137 foes=131/88 faints=0/0 initialFrames=44
+REVIEW_STATE actor=1 move=Protect PP=15/10/15/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=87 item=472
+REVIEW_STATE actor=3 move=Weather Ball PP=9/15/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=2 item=447
+CELIA_FIELD weather=2 timer=7 items=472/447 foeSleep=0/0
+REVIEW_INPUT trainer=743 slot=0 species=47 lv=38 HP=129 Atk=88 Def=77 SpA=55 SpD=111 Spe=39 item=472 ability=87
+REVIEW_INPUT trainer=743 slot=1 species=186 lv=38 HP=152 Atk=65 Def=106 SpA=85 SpD=93 Spe=69 item=447 ability=2
+REVIEW_INPUT trainer=743 slot=2 species=189 lv=38 HP=117 Atk=82 Def=69 SpA=52 SpD=88 Spe=136 item=348 ability=151
+REVIEW_INPUT trainer=743 slot=3 species=711 lv=38 HP=109 Atk=54 Def=109 SpA=119 SpD=73 Spe=104 item=445 ability=138
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Ice Punch target=3
+AI decision turn=1 actor=3 move=Weather Ball target=2
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Spore target=2
+AI decision turn=2 actor=2 move=Ice Punch target=3
+AI decision turn=2 actor=3 move=Icy Wind target=0
+AI decision turn=3 actor=1 move=X-Scissor target=2
+AI decision turn=3 actor=3 move=Weather Ball target=2
+REVIEW_AFTER board=0 turns=2 reserves=0 species=47/186 HP=93/137 foes=105/76 faints=0/0 initialFrames=44
+REVIEW_STATE actor=1 move=Spore PP=14/10/15/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=87 item=472
+REVIEW_STATE actor=3 move=Icy Wind PP=9/14/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=2 item=447
+CELIA_FIELD weather=2 timer=6 items=472/447 foeSleep=0/1
+REVIEW_INPUT trainer=743 slot=0 species=47 lv=38 HP=129 Atk=88 Def=77 SpA=55 SpD=111 Spe=39 item=472 ability=87
+REVIEW_INPUT trainer=743 slot=1 species=186 lv=38 HP=152 Atk=65 Def=106 SpA=85 SpD=93 Spe=69 item=447 ability=2
+REVIEW_INPUT trainer=743 slot=2 species=189 lv=38 HP=117 Atk=82 Def=69 SpA=52 SpD=88 Spe=136 item=348 ability=151
+REVIEW_INPUT trainer=743 slot=3 species=711 lv=38 HP=109 Atk=54 Def=109 SpA=119 SpD=73 Spe=104 item=445 ability=138
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Weather Ball target=0
+AI decision turn=2 actor=1 move=X-Scissor target=0
+AI decision turn=2 actor=3 move=Weather Ball target=0
+REVIEW_AFTER board=1 turns=1 reserves=0 species=47/186 HP=129/102 foes=38/135 faints=0/0 initialFrames=44
+REVIEW_STATE actor=1 move=Protect PP=15/10/15/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=87 item=472
+REVIEW_STATE actor=3 move=Weather Ball PP=9/15/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=2 item=447
+CELIA_FIELD weather=2 timer=7 items=472/447 foeSleep=0/0
+REVIEW_INPUT trainer=743 slot=0 species=47 lv=38 HP=129 Atk=88 Def=77 SpA=55 SpD=111 Spe=39 item=472 ability=87
+REVIEW_INPUT trainer=743 slot=1 species=186 lv=38 HP=152 Atk=65 Def=106 SpA=85 SpD=93 Spe=69 item=447 ability=2
+REVIEW_INPUT trainer=743 slot=2 species=189 lv=38 HP=117 Atk=82 Def=69 SpA=52 SpD=88 Spe=136 item=348 ability=151
+REVIEW_INPUT trainer=743 slot=3 species=711 lv=38 HP=109 Atk=54 Def=109 SpA=119 SpD=73 Spe=104 item=445 ability=138
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Weather Ball target=0
+AI decision turn=2 actor=0 move=Psychic target=1
+AI decision turn=2 actor=1 move=X-Scissor target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Weather Ball target=0
+AI decision turn=3 actor=1 move=X-Scissor target=2
+AI decision turn=3 actor=3 move=Protect target=3
+REVIEW_AFTER board=1 turns=2 reserves=0 species=47/186 HP=102/52 foes=0/105 faints=0/1 initialFrames=44
+REVIEW_STATE actor=1 move=X-Scissor PP=15/10/14/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=87 item=472
+REVIEW_STATE actor=3 move=Weather Ball PP=8/15/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=2 item=447
+CELIA_FIELD weather=2 timer=6 items=472/447 foeSleep=0/0
+REVIEW_INPUT trainer=743 slot=0 species=47 lv=38 HP=129 Atk=88 Def=77 SpA=55 SpD=111 Spe=39 item=472 ability=87
+REVIEW_INPUT trainer=743 slot=1 species=186 lv=38 HP=152 Atk=65 Def=106 SpA=85 SpD=93 Spe=69 item=447 ability=2
+REVIEW_INPUT trainer=743 slot=2 species=189 lv=38 HP=117 Atk=82 Def=69 SpA=52 SpD=88 Spe=136 item=348 ability=151
+REVIEW_INPUT trainer=743 slot=3 species=711 lv=38 HP=109 Atk=54 Def=109 SpA=119 SpD=73 Spe=104 item=445 ability=138
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=X-Scissor target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Weather Ball target=0
+AI decision turn=2 actor=1 move=X-Scissor target=0
+AI decision turn=2 actor=3 move=Protect target=3
+REVIEW_AFTER board=2 turns=1 reserves=0 species=47/186 HP=129/122 foes=1/135 faints=0/0 initialFrames=47
+REVIEW_STATE actor=1 move=- PP=15/10/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=87 item=472
+REVIEW_STATE actor=3 move=Weather Ball PP=9/15/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=2 item=447
+CELIA_FIELD weather=2 timer=7 items=472/447 foeSleep=0/0
+REVIEW_INPUT trainer=743 slot=0 species=47 lv=38 HP=129 Atk=88 Def=77 SpA=55 SpD=111 Spe=39 item=472 ability=87
+REVIEW_INPUT trainer=743 slot=1 species=186 lv=38 HP=152 Atk=65 Def=106 SpA=85 SpD=93 Spe=69 item=447 ability=2
+REVIEW_INPUT trainer=743 slot=2 species=189 lv=38 HP=117 Atk=82 Def=69 SpA=52 SpD=88 Spe=136 item=348 ability=151
+REVIEW_INPUT trainer=743 slot=3 species=711 lv=38 HP=109 Atk=54 Def=109 SpA=119 SpD=73 Spe=104 item=445 ability=138
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=X-Scissor target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Weather Ball target=0
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=X-Scissor target=0
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=1 move=X-Scissor target=2
+AI decision turn=3 actor=3 move=Helping Hand target=1
+REVIEW_AFTER board=2 turns=2 reserves=0 species=47/186 HP=128/122 foes=0/135 faints=0/1 initialFrames=47
+REVIEW_STATE actor=1 move=X-Scissor PP=15/10/14/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=87 item=472
+REVIEW_STATE actor=3 move=Protect PP=9/15/20/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=2 item=447
+CELIA_FIELD weather=2 timer=6 items=472/447 foeSleep=0/0
+REVIEW_INPUT trainer=743 slot=0 species=47 lv=38 HP=129 Atk=88 Def=77 SpA=55 SpD=111 Spe=39 item=472 ability=87
+REVIEW_INPUT trainer=743 slot=1 species=186 lv=38 HP=152 Atk=65 Def=106 SpA=85 SpD=93 Spe=69 item=447 ability=2
+REVIEW_INPUT trainer=743 slot=2 species=189 lv=38 HP=117 Atk=82 Def=69 SpA=52 SpD=88 Spe=136 item=348 ability=151
+REVIEW_INPUT trainer=743 slot=3 species=711 lv=38 HP=109 Atk=54 Def=109 SpA=119 SpD=73 Spe=104 item=445 ability=138
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Air Slash target=3
+AI decision turn=1 actor=3 move=Weather Ball target=0
+AI decision turn=2 actor=1 move=X-Scissor target=0
+AI decision turn=2 actor=3 move=Weather Ball target=0
+REVIEW_AFTER board=3 turns=1 reserves=0 species=47/186 HP=129/61 foes=1/114 faints=0/0 initialFrames=25
+REVIEW_STATE actor=1 move=Protect PP=15/10/15/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=87 item=472
+REVIEW_STATE actor=3 move=Weather Ball PP=9/15/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=2 item=447
+CELIA_FIELD weather=2 timer=7 items=472/447 foeSleep=0/0
+REVIEW_INPUT trainer=743 slot=0 species=47 lv=38 HP=129 Atk=88 Def=77 SpA=55 SpD=111 Spe=39 item=472 ability=87
+REVIEW_INPUT trainer=743 slot=1 species=186 lv=38 HP=152 Atk=65 Def=106 SpA=85 SpD=93 Spe=69 item=447 ability=2
+REVIEW_INPUT trainer=743 slot=2 species=189 lv=38 HP=117 Atk=82 Def=69 SpA=52 SpD=88 Spe=136 item=348 ability=151
+REVIEW_INPUT trainer=743 slot=3 species=711 lv=38 HP=109 Atk=54 Def=109 SpA=119 SpD=73 Spe=104 item=445 ability=138
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Air Slash target=3
+AI decision turn=1 actor=3 move=Weather Ball target=0
+AI decision turn=2 actor=0 move=Earthquake target=1
+AI decision turn=2 actor=1 move=X-Scissor target=0
+AI decision turn=2 actor=2 move=Air Slash target=3
+AI decision turn=2 actor=3 move=Weather Ball target=0
+AI switch turn=2 actor=3 party=3
+AI decision turn=3 actor=1 move=Protect target=1
+AI decision turn=3 actor=3 move=Protect target=3
+REVIEW_AFTER board=3 turns=2 reserves=0 species=47/711 HP=129/109 foes=0/114 faints=1/1 initialFrames=25
+REVIEW_STATE actor=1 move=X-Scissor PP=15/10/14/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=87 item=472
+REVIEW_STATE actor=3 move=- PP=15/10/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=138 item=445
+CELIA_FIELD weather=2 timer=6 items=472/445 foeSleep=0/0
+REVIEW_INPUT trainer=743 slot=0 species=47 lv=38 HP=129 Atk=88 Def=77 SpA=55 SpD=111 Spe=39 item=472 ability=87
+REVIEW_INPUT trainer=743 slot=1 species=186 lv=38 HP=152 Atk=65 Def=106 SpA=85 SpD=93 Spe=69 item=447 ability=2
+REVIEW_INPUT trainer=743 slot=2 species=189 lv=38 HP=117 Atk=82 Def=69 SpA=52 SpD=88 Spe=136 item=348 ability=151
+REVIEW_INPUT trainer=743 slot=3 species=711 lv=38 HP=109 Atk=54 Def=109 SpA=119 SpD=73 Spe=104 item=445 ability=138
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=X-Scissor target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Weather Ball target=0
+AI decision turn=2 actor=1 move=X-Scissor target=2
+AI decision turn=2 actor=3 move=Protect target=3
+REVIEW_AFTER board=4 turns=1 reserves=0 species=47/186 HP=129/78 foes=0/135 faints=0/1 initialFrames=47
+REVIEW_STATE actor=1 move=X-Scissor PP=15/10/14/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=87 item=472
+REVIEW_STATE actor=3 move=Weather Ball PP=9/15/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=2 item=447
+CELIA_FIELD weather=2 timer=7 items=472/447 foeSleep=0/0
+REVIEW_INPUT trainer=743 slot=0 species=47 lv=38 HP=129 Atk=88 Def=77 SpA=55 SpD=111 Spe=39 item=472 ability=87
+REVIEW_INPUT trainer=743 slot=1 species=186 lv=38 HP=152 Atk=65 Def=106 SpA=85 SpD=93 Spe=69 item=447 ability=2
+REVIEW_INPUT trainer=743 slot=2 species=189 lv=38 HP=117 Atk=82 Def=69 SpA=52 SpD=88 Spe=136 item=348 ability=151
+REVIEW_INPUT trainer=743 slot=3 species=711 lv=38 HP=109 Atk=54 Def=109 SpA=119 SpD=73 Spe=104 item=445 ability=138
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=X-Scissor target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Weather Ball target=0
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=1 move=X-Scissor target=2
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=1 move=X-Scissor target=2
+AI switch turn=3 actor=3 party=3
+REVIEW_AFTER board=4 turns=2 reserves=0 species=47/186 HP=129/78 foes=0/61 faints=0/1 initialFrames=47
+REVIEW_STATE actor=1 move=X-Scissor PP=15/10/13/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=87 item=472
+REVIEW_STATE actor=3 move=Protect PP=9/15/20/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=2 item=447
+CELIA_FIELD weather=2 timer=6 items=472/447 foeSleep=0/0
+REVIEW_INPUT trainer=743 slot=0 species=47 lv=38 HP=129 Atk=88 Def=77 SpA=55 SpD=111 Spe=39 item=472 ability=87
+REVIEW_INPUT trainer=743 slot=1 species=186 lv=38 HP=152 Atk=65 Def=106 SpA=85 SpD=93 Spe=69 item=447 ability=2
+REVIEW_INPUT trainer=743 slot=2 species=189 lv=38 HP=117 Atk=82 Def=69 SpA=52 SpD=88 Spe=136 item=348 ability=151
+REVIEW_INPUT trainer=743 slot=3 species=711 lv=38 HP=109 Atk=54 Def=109 SpA=119 SpD=73 Spe=104 item=445 ability=138
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Acrobatics target=2
+AI decision turn=1 actor=2 move=Ice Punch target=3
+AI decision turn=1 actor=3 move=Shadow Ball target=2
+AI decision turn=2 actor=1 move=Acrobatics target=2
+AI decision turn=2 actor=3 move=Giga Drain target=0
+REVIEW_AFTER board=0 turns=1 reserves=1 species=189/711 HP=49/49 foes=109/20 faints=0/0 initialFrames=21
+REVIEW_STATE actor=1 move=Acrobatics PP=14/15/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=151 item=0
+REVIEW_STATE actor=3 move=Shadow Ball PP=14/10/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=16 ability=138 item=445
+CELIA_FIELD weather=0 timer=0 items=0/445 foeSleep=0/0
+REVIEW_INPUT trainer=743 slot=0 species=47 lv=38 HP=129 Atk=88 Def=77 SpA=55 SpD=111 Spe=39 item=472 ability=87
+REVIEW_INPUT trainer=743 slot=1 species=186 lv=38 HP=152 Atk=65 Def=106 SpA=85 SpD=93 Spe=69 item=447 ability=2
+REVIEW_INPUT trainer=743 slot=2 species=189 lv=38 HP=117 Atk=82 Def=69 SpA=52 SpD=88 Spe=136 item=348 ability=151
+REVIEW_INPUT trainer=743 slot=3 species=711 lv=38 HP=109 Atk=54 Def=109 SpA=119 SpD=73 Spe=104 item=445 ability=138
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Acrobatics target=2
+AI decision turn=1 actor=2 move=Ice Punch target=3
+AI decision turn=1 actor=3 move=Shadow Ball target=2
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Acrobatics target=2
+AI decision turn=2 actor=2 move=Ice Punch target=3
+AI decision turn=2 actor=3 move=Giga Drain target=0
+AI decision turn=3 actor=3 move=Giga Drain target=0
+REVIEW_AFTER board=0 turns=2 reserves=1 species=189/711 HP=0/62 foes=54/0 faints=1/1 initialFrames=21
+REVIEW_STATE actor=1 move=- PP=13/15/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=0 item=0
+REVIEW_STATE actor=3 move=Giga Drain PP=14/9/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=16 ability=138 item=445
+CELIA_FIELD weather=0 timer=0 items=0/445 foeSleep=0/0
+REVIEW_INPUT trainer=743 slot=0 species=47 lv=38 HP=129 Atk=88 Def=77 SpA=55 SpD=111 Spe=39 item=472 ability=87
+REVIEW_INPUT trainer=743 slot=1 species=186 lv=38 HP=152 Atk=65 Def=106 SpA=85 SpD=93 Spe=69 item=447 ability=2
+REVIEW_INPUT trainer=743 slot=2 species=189 lv=38 HP=117 Atk=82 Def=69 SpA=52 SpD=88 Spe=136 item=348 ability=151
+REVIEW_INPUT trainer=743 slot=3 species=711 lv=38 HP=109 Atk=54 Def=109 SpA=119 SpD=73 Spe=104 item=445 ability=138
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Acrobatics target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Shadow Ball target=0
+AI decision turn=2 actor=1 move=Seed Bomb target=2
+AI decision turn=2 actor=3 move=Giga Drain target=2
+REVIEW_AFTER board=1 turns=1 reserves=1 species=189/711 HP=53/94 foes=0/135 faints=0/1 initialFrames=23
+REVIEW_STATE actor=1 move=Acrobatics PP=14/15/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=151 item=0
+REVIEW_STATE actor=3 move=Shadow Ball PP=14/10/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=16 ability=138 item=445
+CELIA_FIELD weather=0 timer=0 items=0/445 foeSleep=0/0
+REVIEW_INPUT trainer=743 slot=0 species=47 lv=38 HP=129 Atk=88 Def=77 SpA=55 SpD=111 Spe=39 item=472 ability=87
+REVIEW_INPUT trainer=743 slot=1 species=186 lv=38 HP=152 Atk=65 Def=106 SpA=85 SpD=93 Spe=69 item=447 ability=2
+REVIEW_INPUT trainer=743 slot=2 species=189 lv=38 HP=117 Atk=82 Def=69 SpA=52 SpD=88 Spe=136 item=348 ability=151
+REVIEW_INPUT trainer=743 slot=3 species=711 lv=38 HP=109 Atk=54 Def=109 SpA=119 SpD=73 Spe=104 item=445 ability=138
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Acrobatics target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Shadow Ball target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=1 move=Seed Bomb target=2
+AI decision turn=2 actor=3 move=Giga Drain target=2
+AI decision turn=3 actor=1 move=Acrobatics target=2
+AI decision turn=3 actor=3 move=Giga Drain target=2
+REVIEW_AFTER board=1 turns=2 reserves=1 species=189/711 HP=53/88 foes=0/75 faints=0/1 initialFrames=23
+REVIEW_STATE actor=1 move=Seed Bomb PP=14/14/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=151 item=0
+REVIEW_STATE actor=3 move=Giga Drain PP=14/9/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=16 ability=138 item=445
+CELIA_FIELD weather=0 timer=0 items=0/445 foeSleep=0/0
+REVIEW_INPUT trainer=743 slot=0 species=47 lv=38 HP=129 Atk=88 Def=77 SpA=55 SpD=111 Spe=39 item=472 ability=87
+REVIEW_INPUT trainer=743 slot=1 species=186 lv=38 HP=152 Atk=65 Def=106 SpA=85 SpD=93 Spe=69 item=447 ability=2
+REVIEW_INPUT trainer=743 slot=2 species=189 lv=38 HP=117 Atk=82 Def=69 SpA=52 SpD=88 Spe=136 item=348 ability=151
+REVIEW_INPUT trainer=743 slot=3 species=711 lv=38 HP=109 Atk=54 Def=109 SpA=119 SpD=73 Spe=104 item=445 ability=138
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Acrobatics target=2
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Shadow Ball target=2
+AI decision turn=2 actor=1 move=Acrobatics target=2
+AI decision turn=2 actor=3 move=Giga Drain target=0
+REVIEW_AFTER board=2 turns=1 reserves=1 species=189/711 HP=97/84 foes=98/96 faints=0/0 initialFrames=23
+REVIEW_STATE actor=1 move=- PP=15/15/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=151 item=348
+REVIEW_STATE actor=3 move=Shadow Ball PP=14/10/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=16 ability=138 item=445
+CELIA_FIELD weather=0 timer=0 items=348/445 foeSleep=0/0
+REVIEW_INPUT trainer=743 slot=0 species=47 lv=38 HP=129 Atk=88 Def=77 SpA=55 SpD=111 Spe=39 item=472 ability=87
+REVIEW_INPUT trainer=743 slot=1 species=186 lv=38 HP=152 Atk=65 Def=106 SpA=85 SpD=93 Spe=69 item=447 ability=2
+REVIEW_INPUT trainer=743 slot=2 species=189 lv=38 HP=117 Atk=82 Def=69 SpA=52 SpD=88 Spe=136 item=348 ability=151
+REVIEW_INPUT trainer=743 slot=3 species=711 lv=38 HP=109 Atk=54 Def=109 SpA=119 SpD=73 Spe=104 item=445 ability=138
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Acrobatics target=2
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Shadow Ball target=2
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Acrobatics target=2
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=Giga Drain target=0
+AI decision turn=3 actor=1 move=Acrobatics target=0
+AI decision turn=3 actor=3 move=Shadow Ball target=0
+REVIEW_AFTER board=2 turns=2 reserves=1 species=189/711 HP=69/103 foes=15/0 faints=0/1 initialFrames=23
+REVIEW_STATE actor=1 move=Acrobatics PP=14/15/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=151 item=0
+REVIEW_STATE actor=3 move=Giga Drain PP=14/9/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=16 ability=138 item=445
+CELIA_FIELD weather=0 timer=0 items=0/445 foeSleep=0/0
+REVIEW_INPUT trainer=743 slot=0 species=47 lv=38 HP=129 Atk=88 Def=77 SpA=55 SpD=111 Spe=39 item=472 ability=87
+REVIEW_INPUT trainer=743 slot=1 species=186 lv=38 HP=152 Atk=65 Def=106 SpA=85 SpD=93 Spe=69 item=447 ability=2
+REVIEW_INPUT trainer=743 slot=2 species=189 lv=38 HP=117 Atk=82 Def=69 SpA=52 SpD=88 Spe=136 item=348 ability=151
+REVIEW_INPUT trainer=743 slot=3 species=711 lv=38 HP=109 Atk=54 Def=109 SpA=119 SpD=73 Spe=104 item=445 ability=138
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=Acrobatics target=0
+AI decision turn=1 actor=2 move=Air Slash target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Acrobatics target=0
+AI decision turn=2 actor=3 move=Shadow Ball target=2
+REVIEW_AFTER board=3 turns=1 reserves=1 species=189/711 HP=117/109 foes=1/114 faints=0/0 initialFrames=24
+REVIEW_STATE actor=1 move=Acrobatics PP=14/15/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=151 item=0
+REVIEW_STATE actor=3 move=Protect PP=15/10/15/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=16 ability=138 item=445
+CELIA_FIELD weather=0 timer=0 items=0/445 foeSleep=0/0
+REVIEW_INPUT trainer=743 slot=0 species=47 lv=38 HP=129 Atk=88 Def=77 SpA=55 SpD=111 Spe=39 item=472 ability=87
+REVIEW_INPUT trainer=743 slot=1 species=186 lv=38 HP=152 Atk=65 Def=106 SpA=85 SpD=93 Spe=69 item=447 ability=2
+REVIEW_INPUT trainer=743 slot=2 species=189 lv=38 HP=117 Atk=82 Def=69 SpA=52 SpD=88 Spe=136 item=348 ability=151
+REVIEW_INPUT trainer=743 slot=3 species=711 lv=38 HP=109 Atk=54 Def=109 SpA=119 SpD=73 Spe=104 item=445 ability=138
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=Acrobatics target=0
+AI decision turn=1 actor=2 move=Air Slash target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Earthquake target=1
+AI decision turn=2 actor=1 move=Acrobatics target=0
+AI decision turn=2 actor=2 move=Air Slash target=3
+AI decision turn=2 actor=3 move=Shadow Ball target=2
+AI decision turn=3 actor=1 move=Acrobatics target=2
+REVIEW_AFTER board=3 turns=2 reserves=1 species=189/711 HP=117/0 foes=0/114 faints=1/1 initialFrames=24
+REVIEW_STATE actor=1 move=Acrobatics PP=13/15/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=151 item=0
+REVIEW_STATE actor=3 move=- PP=15/10/15/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=0 item=445
+CELIA_FIELD weather=0 timer=0 items=0/445 foeSleep=0/0
+REVIEW_INPUT trainer=743 slot=0 species=47 lv=38 HP=129 Atk=88 Def=77 SpA=55 SpD=111 Spe=39 item=472 ability=87
+REVIEW_INPUT trainer=743 slot=1 species=186 lv=38 HP=152 Atk=65 Def=106 SpA=85 SpD=93 Spe=69 item=447 ability=2
+REVIEW_INPUT trainer=743 slot=2 species=189 lv=38 HP=117 Atk=82 Def=69 SpA=52 SpD=88 Spe=136 item=348 ability=151
+REVIEW_INPUT trainer=743 slot=3 species=711 lv=38 HP=109 Atk=54 Def=109 SpA=119 SpD=73 Spe=104 item=445 ability=138
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Acrobatics target=2
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Shadow Ball target=2
+AI decision turn=2 actor=1 move=U-turn target=0
+AI decision turn=2 actor=3 move=Shadow Ball target=0
+REVIEW_AFTER board=4 turns=1 reserves=1 species=189/711 HP=117/109 foes=98/0 faints=0/1 initialFrames=23
+REVIEW_STATE actor=1 move=Acrobatics PP=14/15/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=151 item=0
+REVIEW_STATE actor=3 move=Shadow Ball PP=14/10/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=16 ability=138 item=445
+CELIA_FIELD weather=0 timer=0 items=0/445 foeSleep=0/0
+REVIEW_INPUT trainer=743 slot=0 species=47 lv=38 HP=129 Atk=88 Def=77 SpA=55 SpD=111 Spe=39 item=472 ability=87
+REVIEW_INPUT trainer=743 slot=1 species=186 lv=38 HP=152 Atk=65 Def=106 SpA=85 SpD=93 Spe=69 item=447 ability=2
+REVIEW_INPUT trainer=743 slot=2 species=189 lv=38 HP=117 Atk=82 Def=69 SpA=52 SpD=88 Spe=136 item=348 ability=151
+REVIEW_INPUT trainer=743 slot=3 species=711 lv=38 HP=109 Atk=54 Def=109 SpA=119 SpD=73 Spe=104 item=445 ability=138
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Acrobatics target=2
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Shadow Ball target=2
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=U-turn target=0
+AI decision turn=2 actor=3 move=Shadow Ball target=0
+REVIEW_AFTER board=4 turns=2 reserves=1 species=189/711 HP=117/109 foes=0/0 faints=0/2 initialFrames=23
+REVIEW_STATE actor=1 move=U-turn PP=14/15/19/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=151 item=0
+REVIEW_STATE actor=3 move=Shadow Ball PP=13/10/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=16 ability=138 item=445
+CELIA_FIELD weather=0 timer=0 items=0/445 foeSleep=0/0
+
+- Tests [32mPASSED[0m:          2
+- Tests [34mTOTAL[0m:           2
+

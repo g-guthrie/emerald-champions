@@ -1,0 +1,329 @@
+tools/scaninc/scaninc -M build/emerald-test/test/battle/ai/emerald_champions_plans.d -g build/assets -I include -I tools/agbcc/include test/battle/ai/emerald_champions_plans.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/battle/ai/emerald_champions_plans.o test/battle/ai/emerald_champions_plans.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 4
+[0] EC live review Archie Museum timing: complete cold six-player party: [32mPASS[0m
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Rain Dance target=1
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Fake Out target=0
+AI decision turn=2 actor=1 move=Hurricane target=2
+AI decision turn=2 actor=3 move=Hydro Pump target=0
+ARCHIE_MUSEUM_TIMING setup=7 bothActors=48 complete=55 warm=48
+[1] EC live review Archie Museum attrition: one injured usable player Pokemon: [32mPASS[0m
+ARCHIE_MUSEUM_INPUT slot=0 lv=19 HP=62 Atk=19 Def=24 SpA=31 SpD=34 Speed=43 item=447 ability=44
+ARCHIE_MUSEUM_INPUT slot=1 lv=20 HP=60 Atk=27 Def=31 SpA=51 SpD=39 Speed=43 item=479 ability=33
+ARCHIE_MUSEUM_INPUT slot=2 lv=20 HP=53 Atk=60 Def=37 SpA=27 SpD=25 Speed=37 item=481 ability=91
+ARCHIE_MUSEUM_INPUT slot=3 lv=21 HP=54 Atk=25 Def=26 SpA=45 SpD=53 Speed=59 item=487 ability=29
+ARCHIE_MUSEUM_INPUT slot=4 lv=21 HP=69 Atk=58 Def=40 SpA=34 SpD=43 Speed=68 item=523 ability=39
+ARCHIE_MUSEUM_INPUT slot=5 lv=22 HP=58 Atk=71 Def=20 SpA=36 SpD=20 Speed=54 item=477 ability=3
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Rain Dance target=1
+AI decision turn=1 actor=3 move=Fake Out target=0
+AI decision turn=2 actor=1 move=Hurricane target=0
+AI decision turn=2 actor=3 move=Hydro Pump target=0
+ARCHIE_MUSEUM_AFTER board=20 turns=1 pair=0 species=278/271 HP=62/54 foes=46/0 moves=Rain Dance/Fake Out speed=43/86 foeSpeed=33/0 items=447/479 stageAtk=6/6 stageSpe=6/6 PP=4/9 fourthPP=5/10 rain=1 weatherTimer=7 faints=0/0 absent=4
+ARCHIE_MUSEUM_INPUT slot=0 lv=19 HP=62 Atk=19 Def=24 SpA=31 SpD=34 Speed=43 item=447 ability=44
+ARCHIE_MUSEUM_INPUT slot=1 lv=20 HP=60 Atk=27 Def=31 SpA=51 SpD=39 Speed=43 item=479 ability=33
+ARCHIE_MUSEUM_INPUT slot=2 lv=20 HP=53 Atk=60 Def=37 SpA=27 SpD=25 Speed=37 item=481 ability=91
+ARCHIE_MUSEUM_INPUT slot=3 lv=21 HP=54 Atk=25 Def=26 SpA=45 SpD=53 Speed=59 item=487 ability=29
+ARCHIE_MUSEUM_INPUT slot=4 lv=21 HP=69 Atk=58 Def=40 SpA=34 SpD=43 Speed=68 item=523 ability=39
+ARCHIE_MUSEUM_INPUT slot=5 lv=22 HP=58 Atk=71 Def=20 SpA=36 SpD=20 Speed=54 item=477 ability=3
+AI decision turn=1 actor=0 move=Drain Punch target=3
+AI decision turn=1 actor=1 move=Rain Dance target=1
+AI decision turn=1 actor=3 move=Fake Out target=0
+AI decision turn=2 actor=1 move=Hurricane target=0
+AI decision turn=2 actor=3 move=Giga Drain target=0
+ARCHIE_MUSEUM_AFTER board=21 turns=1 pair=0 species=278/271 HP=62/54 foes=52/0 moves=Rain Dance/Fake Out speed=43/86 foeSpeed=25/0 items=447/479 stageAtk=6/6 stageSpe=6/6 PP=4/9 fourthPP=5/10 rain=1 weatherTimer=7 faints=0/0 absent=4
+[2] EC live review Archie Museum disruption: Fake Out Taunt and opposing Tailwind: [32mPASS[0m
+ARCHIE_MUSEUM_INPUT slot=0 lv=19 HP=62 Atk=19 Def=24 SpA=31 SpD=34 Speed=43 item=447 ability=44
+ARCHIE_MUSEUM_INPUT slot=1 lv=20 HP=60 Atk=27 Def=31 SpA=51 SpD=39 Speed=43 item=479 ability=33
+ARCHIE_MUSEUM_INPUT slot=2 lv=20 HP=53 Atk=60 Def=37 SpA=27 SpD=25 Speed=37 item=481 ability=91
+ARCHIE_MUSEUM_INPUT slot=3 lv=21 HP=54 Atk=25 Def=26 SpA=45 SpD=53 Speed=59 item=487 ability=29
+ARCHIE_MUSEUM_INPUT slot=4 lv=21 HP=69 Atk=58 Def=40 SpA=34 SpD=43 Speed=68 item=523 ability=39
+ARCHIE_MUSEUM_INPUT slot=5 lv=22 HP=58 Atk=71 Def=20 SpA=36 SpD=20 Speed=54 item=477 ability=3
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Rain Dance target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI switch turn=2 actor=1 party=4
+AI decision turn=2 actor=3 move=Hydro Pump target=0
+ARCHIE_MUSEUM_AFTER board=10 turns=1 pair=0 species=278/271 HP=48/54 foes=66/67 moves=-/Fake Out speed=43/43 foeSpeed=53/49 items=447/479 stageAtk=6/6 stageSpe=6/6 PP=5/9 fourthPP=5/10 rain=0 weatherTimer=0 faints=0/0 absent=0
+ARCHIE_MUSEUM_INPUT slot=0 lv=19 HP=62 Atk=19 Def=24 SpA=31 SpD=34 Speed=43 item=447 ability=44
+ARCHIE_MUSEUM_INPUT slot=1 lv=20 HP=60 Atk=27 Def=31 SpA=51 SpD=39 Speed=43 item=479 ability=33
+ARCHIE_MUSEUM_INPUT slot=2 lv=20 HP=53 Atk=60 Def=37 SpA=27 SpD=25 Speed=37 item=481 ability=91
+ARCHIE_MUSEUM_INPUT slot=3 lv=21 HP=54 Atk=25 Def=26 SpA=45 SpD=53 Speed=59 item=487 ability=29
+ARCHIE_MUSEUM_INPUT slot=4 lv=21 HP=69 Atk=58 Def=40 SpA=34 SpD=43 Speed=68 item=523 ability=39
+ARCHIE_MUSEUM_INPUT slot=5 lv=22 HP=58 Atk=71 Def=20 SpA=36 SpD=20 Speed=54 item=477 ability=3
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Rain Dance target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI switch turn=2 actor=1 party=4
+AI decision turn=2 actor=0 move=Taunt target=1
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=3 move=Hydro Pump target=0
+AI decision turn=3 actor=1 move=Brave Bird target=0
+AI decision turn=3 actor=3 move=Hydro Pump target=0
+ARCHIE_MUSEUM_AFTER board=10 turns=2 pair=0 species=42/271 HP=37/48 foes=23/67 moves=-/Hydro Pump speed=68/43 foeSpeed=53/49 items=523/479 stageAtk=6/6 stageSpe=6/6 PP=15/9 fourthPP=20/10 rain=0 weatherTimer=0 faints=0/0 absent=0
+ARCHIE_MUSEUM_INPUT slot=0 lv=19 HP=62 Atk=19 Def=24 SpA=31 SpD=34 Speed=43 item=447 ability=44
+ARCHIE_MUSEUM_INPUT slot=1 lv=20 HP=60 Atk=27 Def=31 SpA=51 SpD=39 Speed=43 item=479 ability=33
+ARCHIE_MUSEUM_INPUT slot=2 lv=20 HP=53 Atk=60 Def=37 SpA=27 SpD=25 Speed=37 item=481 ability=91
+ARCHIE_MUSEUM_INPUT slot=3 lv=21 HP=54 Atk=25 Def=26 SpA=45 SpD=53 Speed=59 item=487 ability=29
+ARCHIE_MUSEUM_INPUT slot=4 lv=21 HP=69 Atk=58 Def=40 SpA=34 SpD=43 Speed=68 item=523 ability=39
+ARCHIE_MUSEUM_INPUT slot=5 lv=22 HP=58 Atk=71 Def=20 SpA=36 SpD=20 Speed=54 item=477 ability=3
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Rain Dance target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI switch turn=2 actor=1 party=4
+AI decision turn=2 actor=0 move=Taunt target=1
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=3 move=Hydro Pump target=0
+AI decision turn=3 actor=0 move=Drain Punch target=3
+AI decision turn=3 actor=1 move=Brave Bird target=0
+AI decision turn=3 actor=2 move=Thunderbolt target=1
+AI decision turn=3 actor=3 move=Hydro Pump target=0
+AI decision turn=4 actor=1 move=Poison Fang target=2
+AI decision turn=4 actor=3 move=Giga Drain target=2
+ARCHIE_MUSEUM_AFTER board=10 turns=3 pair=0 species=42/271 HP=15/42 foes=0/45 moves=Brave Bird/Hydro Pump speed=68/43 foeSpeed=0/49 items=0/479 stageAtk=6/6 stageSpe=6/6 PP=14/9 fourthPP=20/10 rain=0 weatherTimer=0 faints=0/1 absent=1
+ARCHIE_MUSEUM_INPUT slot=0 lv=19 HP=62 Atk=19 Def=24 SpA=31 SpD=34 Speed=43 item=447 ability=44
+ARCHIE_MUSEUM_INPUT slot=1 lv=20 HP=60 Atk=27 Def=31 SpA=51 SpD=39 Speed=43 item=479 ability=33
+ARCHIE_MUSEUM_INPUT slot=2 lv=20 HP=53 Atk=60 Def=37 SpA=27 SpD=25 Speed=37 item=481 ability=91
+ARCHIE_MUSEUM_INPUT slot=3 lv=21 HP=54 Atk=25 Def=26 SpA=45 SpD=53 Speed=59 item=487 ability=29
+ARCHIE_MUSEUM_INPUT slot=4 lv=21 HP=69 Atk=58 Def=40 SpA=34 SpD=43 Speed=68 item=523 ability=39
+ARCHIE_MUSEUM_INPUT slot=5 lv=22 HP=58 Atk=71 Def=20 SpA=36 SpD=20 Speed=54 item=477 ability=3
+AI decision turn=1 actor=0 move=Tailwind target=0
+AI decision turn=1 actor=1 move=Rain Dance target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI decision turn=2 actor=1 move=Rain Dance target=1
+AI decision turn=2 actor=3 move=Hydro Pump target=0
+ARCHIE_MUSEUM_AFTER board=11 turns=1 pair=0 species=278/271 HP=62/54 foes=52/67 moves=Rain Dance/Fake Out speed=43/86 foeSpeed=112/98 items=447/479 stageAtk=6/6 stageSpe=6/6 PP=4/9 fourthPP=5/10 rain=1 weatherTimer=7 faints=0/0 absent=0
+ARCHIE_MUSEUM_INPUT slot=0 lv=19 HP=62 Atk=19 Def=24 SpA=31 SpD=34 Speed=43 item=447 ability=44
+ARCHIE_MUSEUM_INPUT slot=1 lv=20 HP=60 Atk=27 Def=31 SpA=51 SpD=39 Speed=43 item=479 ability=33
+ARCHIE_MUSEUM_INPUT slot=2 lv=20 HP=53 Atk=60 Def=37 SpA=27 SpD=25 Speed=37 item=481 ability=91
+ARCHIE_MUSEUM_INPUT slot=3 lv=21 HP=54 Atk=25 Def=26 SpA=45 SpD=53 Speed=59 item=487 ability=29
+ARCHIE_MUSEUM_INPUT slot=4 lv=21 HP=69 Atk=58 Def=40 SpA=34 SpD=43 Speed=68 item=523 ability=39
+ARCHIE_MUSEUM_INPUT slot=5 lv=22 HP=58 Atk=71 Def=20 SpA=36 SpD=20 Speed=54 item=477 ability=3
+AI decision turn=1 actor=0 move=Tailwind target=0
+AI decision turn=1 actor=1 move=Rain Dance target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI decision turn=2 actor=0 move=Psychic target=3
+AI decision turn=2 actor=1 move=Rain Dance target=1
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=3 move=Hydro Pump target=0
+AI switch turn=2 actor=1 party=2
+AI decision turn=3 actor=1 move=Crabhammer target=2
+AI decision turn=3 actor=3 move=Hydro Pump target=2
+ARCHIE_MUSEUM_AFTER board=11 turns=2 pair=0 species=341/271 HP=53/17 foes=0/67 moves=-/Hydro Pump speed=37/86 foeSpeed=0/98 items=481/479 stageAtk=6/6 stageSpe=6/6 PP=10/9 fourthPP=20/10 rain=1 weatherTimer=6 faints=1/1 absent=1
+ARCHIE_MUSEUM_INPUT slot=0 lv=19 HP=62 Atk=19 Def=24 SpA=31 SpD=34 Speed=43 item=447 ability=44
+ARCHIE_MUSEUM_INPUT slot=1 lv=20 HP=60 Atk=27 Def=31 SpA=51 SpD=39 Speed=43 item=479 ability=33
+ARCHIE_MUSEUM_INPUT slot=2 lv=20 HP=53 Atk=60 Def=37 SpA=27 SpD=25 Speed=37 item=481 ability=91
+ARCHIE_MUSEUM_INPUT slot=3 lv=21 HP=54 Atk=25 Def=26 SpA=45 SpD=53 Speed=59 item=487 ability=29
+ARCHIE_MUSEUM_INPUT slot=4 lv=21 HP=69 Atk=58 Def=40 SpA=34 SpD=43 Speed=68 item=523 ability=39
+ARCHIE_MUSEUM_INPUT slot=5 lv=22 HP=58 Atk=71 Def=20 SpA=36 SpD=20 Speed=54 item=477 ability=3
+AI decision turn=1 actor=0 move=Tailwind target=0
+AI decision turn=1 actor=1 move=Rain Dance target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI decision turn=2 actor=0 move=Psychic target=3
+AI decision turn=2 actor=1 move=Rain Dance target=1
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=3 move=Hydro Pump target=0
+AI switch turn=2 actor=1 party=2
+AI decision turn=3 actor=2 move=Thunderbolt target=1
+AI decision turn=3 actor=1 move=Crabhammer target=2
+AI decision turn=3 actor=3 move=Hydro Pump target=2
+ARCHIE_MUSEUM_AFTER board=11 turns=3 pair=0 species=341/271 HP=1/11 foes=0/0 moves=Crabhammer/Hydro Pump speed=37/86 foeSpeed=0/98 items=0/479 stageAtk=6/6 stageSpe=6/6 PP=9/9 fourthPP=20/10 rain=1 weatherTimer=6 faints=1/2 absent=1
+[3] EC live review Archie Museum core: physical special and both reserve pairs: [32mPASS[0m
+ARCHIE_MUSEUM_INPUT slot=0 lv=19 HP=62 Atk=19 Def=24 SpA=31 SpD=34 Speed=43 item=447 ability=44
+ARCHIE_MUSEUM_INPUT slot=1 lv=20 HP=60 Atk=27 Def=31 SpA=51 SpD=39 Speed=43 item=479 ability=33
+ARCHIE_MUSEUM_INPUT slot=2 lv=20 HP=53 Atk=60 Def=37 SpA=27 SpD=25 Speed=37 item=481 ability=91
+ARCHIE_MUSEUM_INPUT slot=3 lv=21 HP=54 Atk=25 Def=26 SpA=45 SpD=53 Speed=59 item=487 ability=29
+ARCHIE_MUSEUM_INPUT slot=4 lv=21 HP=69 Atk=58 Def=40 SpA=34 SpD=43 Speed=68 item=523 ability=39
+ARCHIE_MUSEUM_INPUT slot=5 lv=22 HP=58 Atk=71 Def=20 SpA=36 SpD=20 Speed=54 item=477 ability=3
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Rain Dance target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Fake Out target=0
+AI decision turn=2 actor=1 move=Hurricane target=0
+AI decision turn=2 actor=3 move=Hydro Pump target=0
+ARCHIE_MUSEUM_AFTER board=0 turns=1 pair=0 species=278/271 HP=62/21 foes=64/78 moves=Rain Dance/Fake Out speed=43/86 foeSpeed=33/25 items=447/479 stageAtk=6/6 stageSpe=6/6 PP=4/9 fourthPP=5/10 rain=1 weatherTimer=7 faints=0/0 absent=0
+ARCHIE_MUSEUM_INPUT slot=0 lv=19 HP=62 Atk=19 Def=24 SpA=31 SpD=34 Speed=43 item=447 ability=44
+ARCHIE_MUSEUM_INPUT slot=1 lv=20 HP=60 Atk=27 Def=31 SpA=51 SpD=39 Speed=43 item=479 ability=33
+ARCHIE_MUSEUM_INPUT slot=2 lv=20 HP=53 Atk=60 Def=37 SpA=27 SpD=25 Speed=37 item=481 ability=91
+ARCHIE_MUSEUM_INPUT slot=3 lv=21 HP=54 Atk=25 Def=26 SpA=45 SpD=53 Speed=59 item=487 ability=29
+ARCHIE_MUSEUM_INPUT slot=4 lv=21 HP=69 Atk=58 Def=40 SpA=34 SpD=43 Speed=68 item=523 ability=39
+ARCHIE_MUSEUM_INPUT slot=5 lv=22 HP=58 Atk=71 Def=20 SpA=36 SpD=20 Speed=54 item=477 ability=3
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Rain Dance target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Fake Out target=0
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Hurricane target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Hydro Pump target=0
+AI switch turn=2 actor=3 party=4
+AI decision turn=3 actor=1 move=Hurricane target=0
+AI decision turn=3 actor=3 move=Brave Bird target=2
+ARCHIE_MUSEUM_AFTER board=0 turns=2 pair=0 species=278/42 HP=62/69 foes=5/78 moves=Hurricane/- speed=43/68 foeSpeed=33/25 items=447/523 stageAtk=6/6 stageSpe=6/6 PP=4/15 fourthPP=5/20 rain=1 weatherTimer=6 faints=1/0 absent=0
+ARCHIE_MUSEUM_INPUT slot=0 lv=19 HP=62 Atk=19 Def=24 SpA=31 SpD=34 Speed=43 item=447 ability=44
+ARCHIE_MUSEUM_INPUT slot=1 lv=20 HP=60 Atk=27 Def=31 SpA=51 SpD=39 Speed=43 item=479 ability=33
+ARCHIE_MUSEUM_INPUT slot=2 lv=20 HP=53 Atk=60 Def=37 SpA=27 SpD=25 Speed=37 item=481 ability=91
+ARCHIE_MUSEUM_INPUT slot=3 lv=21 HP=54 Atk=25 Def=26 SpA=45 SpD=53 Speed=59 item=487 ability=29
+ARCHIE_MUSEUM_INPUT slot=4 lv=21 HP=69 Atk=58 Def=40 SpA=34 SpD=43 Speed=68 item=523 ability=39
+ARCHIE_MUSEUM_INPUT slot=5 lv=22 HP=58 Atk=71 Def=20 SpA=36 SpD=20 Speed=54 item=477 ability=3
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Rain Dance target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI decision turn=2 actor=1 move=Rain Dance target=1
+AI decision turn=2 actor=3 move=Hydro Pump target=0
+ARCHIE_MUSEUM_AFTER board=1 turns=1 pair=0 species=278/271 HP=62/23 foes=52/67 moves=Rain Dance/Fake Out speed=43/86 foeSpeed=56/49 items=447/479 stageAtk=6/6 stageSpe=6/6 PP=4/9 fourthPP=5/10 rain=1 weatherTimer=7 faints=0/0 absent=0
+ARCHIE_MUSEUM_INPUT slot=0 lv=19 HP=62 Atk=19 Def=24 SpA=31 SpD=34 Speed=43 item=447 ability=44
+ARCHIE_MUSEUM_INPUT slot=1 lv=20 HP=60 Atk=27 Def=31 SpA=51 SpD=39 Speed=43 item=479 ability=33
+ARCHIE_MUSEUM_INPUT slot=2 lv=20 HP=53 Atk=60 Def=37 SpA=27 SpD=25 Speed=37 item=481 ability=91
+ARCHIE_MUSEUM_INPUT slot=3 lv=21 HP=54 Atk=25 Def=26 SpA=45 SpD=53 Speed=59 item=487 ability=29
+ARCHIE_MUSEUM_INPUT slot=4 lv=21 HP=69 Atk=58 Def=40 SpA=34 SpD=43 Speed=68 item=523 ability=39
+ARCHIE_MUSEUM_INPUT slot=5 lv=22 HP=58 Atk=71 Def=20 SpA=36 SpD=20 Speed=54 item=477 ability=3
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Rain Dance target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI decision turn=2 actor=0 move=Psychic target=3
+AI decision turn=2 actor=1 move=Rain Dance target=1
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=3 move=Hydro Pump target=0
+AI switch turn=2 actor=1 party=5
+AI decision turn=3 actor=1 move=Liquidation target=2
+AI decision turn=3 actor=3 move=Hydro Pump target=2
+ARCHIE_MUSEUM_AFTER board=1 turns=2 pair=0 species=318/271 HP=58/17 foes=0/67 moves=-/Hydro Pump speed=54/86 foeSpeed=0/49 items=477/479 stageAtk=6/6 stageSpe=6/6 PP=15/9 fourthPP=5/10 rain=1 weatherTimer=6 faints=1/1 absent=1
+ARCHIE_MUSEUM_INPUT slot=0 lv=19 HP=62 Atk=19 Def=24 SpA=31 SpD=34 Speed=43 item=447 ability=44
+ARCHIE_MUSEUM_INPUT slot=1 lv=20 HP=60 Atk=27 Def=31 SpA=51 SpD=39 Speed=43 item=479 ability=33
+ARCHIE_MUSEUM_INPUT slot=2 lv=20 HP=53 Atk=60 Def=37 SpA=27 SpD=25 Speed=37 item=481 ability=91
+ARCHIE_MUSEUM_INPUT slot=3 lv=21 HP=54 Atk=25 Def=26 SpA=45 SpD=53 Speed=59 item=487 ability=29
+ARCHIE_MUSEUM_INPUT slot=4 lv=21 HP=69 Atk=58 Def=40 SpA=34 SpD=43 Speed=68 item=523 ability=39
+ARCHIE_MUSEUM_INPUT slot=5 lv=22 HP=58 Atk=71 Def=20 SpA=36 SpD=20 Speed=54 item=477 ability=3
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Crabhammer target=0
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Knock Off target=0
+AI decision turn=2 actor=3 move=Hydro Pump target=0
+ARCHIE_MUSEUM_AFTER board=0 turns=1 pair=1 species=341/72 HP=15/54 foes=12/78 moves=Crabhammer/Protect speed=37/59 foeSpeed=33/25 items=481/487 stageAtk=6/6 stageSpe=6/6 PP=9/5 fourthPP=20/4 rain=0 weatherTimer=0 faints=0/0 absent=0
+ARCHIE_MUSEUM_INPUT slot=0 lv=19 HP=62 Atk=19 Def=24 SpA=31 SpD=34 Speed=43 item=447 ability=44
+ARCHIE_MUSEUM_INPUT slot=1 lv=20 HP=60 Atk=27 Def=31 SpA=51 SpD=39 Speed=43 item=479 ability=33
+ARCHIE_MUSEUM_INPUT slot=2 lv=20 HP=53 Atk=60 Def=37 SpA=27 SpD=25 Speed=37 item=481 ability=91
+ARCHIE_MUSEUM_INPUT slot=3 lv=21 HP=54 Atk=25 Def=26 SpA=45 SpD=53 Speed=59 item=487 ability=29
+ARCHIE_MUSEUM_INPUT slot=4 lv=21 HP=69 Atk=58 Def=40 SpA=34 SpD=43 Speed=68 item=523 ability=39
+ARCHIE_MUSEUM_INPUT slot=5 lv=22 HP=58 Atk=71 Def=20 SpA=36 SpD=20 Speed=54 item=477 ability=3
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Crabhammer target=0
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Knock Off target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Hydro Pump target=0
+AI decision turn=3 actor=1 move=Crabhammer target=2
+AI decision turn=3 actor=3 move=Hydro Pump target=2
+ARCHIE_MUSEUM_AFTER board=0 turns=2 pair=1 species=341/72 HP=15/38 foes=0/77 moves=Knock Off/Hydro Pump speed=37/59 foeSpeed=0/25 items=481/487 stageAtk=6/6 stageSpe=6/6 PP=9/4 fourthPP=20/4 rain=0 weatherTimer=0 faints=0/1 absent=1
+ARCHIE_MUSEUM_INPUT slot=0 lv=19 HP=62 Atk=19 Def=24 SpA=31 SpD=34 Speed=43 item=447 ability=44
+ARCHIE_MUSEUM_INPUT slot=1 lv=20 HP=60 Atk=27 Def=31 SpA=51 SpD=39 Speed=43 item=479 ability=33
+ARCHIE_MUSEUM_INPUT slot=2 lv=20 HP=53 Atk=60 Def=37 SpA=27 SpD=25 Speed=37 item=481 ability=91
+ARCHIE_MUSEUM_INPUT slot=3 lv=21 HP=54 Atk=25 Def=26 SpA=45 SpD=53 Speed=59 item=487 ability=29
+ARCHIE_MUSEUM_INPUT slot=4 lv=21 HP=69 Atk=58 Def=40 SpA=34 SpD=43 Speed=68 item=523 ability=39
+ARCHIE_MUSEUM_INPUT slot=5 lv=22 HP=58 Atk=71 Def=20 SpA=36 SpD=20 Speed=54 item=477 ability=3
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Knock Off target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Aqua Jet target=0
+AI decision turn=2 actor=3 move=Hydro Pump target=0
+ARCHIE_MUSEUM_AFTER board=1 turns=1 pair=1 species=341/72 HP=1/54 foes=4/72 moves=Knock Off/Protect speed=37/59 foeSpeed=56/49 items=0/487 stageAtk=6/6 stageSpe=6/6 PP=10/5 fourthPP=20/4 rain=0 weatherTimer=0 faints=0/0 absent=0
+ARCHIE_MUSEUM_INPUT slot=0 lv=19 HP=62 Atk=19 Def=24 SpA=31 SpD=34 Speed=43 item=447 ability=44
+ARCHIE_MUSEUM_INPUT slot=1 lv=20 HP=60 Atk=27 Def=31 SpA=51 SpD=39 Speed=43 item=479 ability=33
+ARCHIE_MUSEUM_INPUT slot=2 lv=20 HP=53 Atk=60 Def=37 SpA=27 SpD=25 Speed=37 item=481 ability=91
+ARCHIE_MUSEUM_INPUT slot=3 lv=21 HP=54 Atk=25 Def=26 SpA=45 SpD=53 Speed=59 item=487 ability=29
+ARCHIE_MUSEUM_INPUT slot=4 lv=21 HP=69 Atk=58 Def=40 SpA=34 SpD=43 Speed=68 item=523 ability=39
+ARCHIE_MUSEUM_INPUT slot=5 lv=22 HP=58 Atk=71 Def=20 SpA=36 SpD=20 Speed=54 item=477 ability=3
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Knock Off target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Psychic target=3
+AI decision turn=2 actor=1 move=Aqua Jet target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=3 move=Hydro Pump target=0
+AI switch turn=2 actor=1 party=4
+AI decision turn=3 actor=1 move=Poison Fang target=2
+AI decision turn=3 actor=3 move=Hydro Pump target=2
+ARCHIE_MUSEUM_AFTER board=1 turns=2 pair=1 species=42/72 HP=69/54 foes=0/44 moves=-/Hydro Pump speed=68/59 foeSpeed=0/49 items=523/487 stageAtk=6/6 stageSpe=6/6 PP=15/4 fourthPP=20/4 rain=0 weatherTimer=0 faints=1/1 absent=1
+ARCHIE_MUSEUM_INPUT slot=0 lv=19 HP=62 Atk=19 Def=24 SpA=31 SpD=34 Speed=43 item=447 ability=44
+ARCHIE_MUSEUM_INPUT slot=1 lv=20 HP=60 Atk=27 Def=31 SpA=51 SpD=39 Speed=43 item=479 ability=33
+ARCHIE_MUSEUM_INPUT slot=2 lv=20 HP=53 Atk=60 Def=37 SpA=27 SpD=25 Speed=37 item=481 ability=91
+ARCHIE_MUSEUM_INPUT slot=3 lv=21 HP=54 Atk=25 Def=26 SpA=45 SpD=53 Speed=59 item=487 ability=29
+ARCHIE_MUSEUM_INPUT slot=4 lv=21 HP=69 Atk=58 Def=40 SpA=34 SpD=43 Speed=68 item=523 ability=39
+ARCHIE_MUSEUM_INPUT slot=5 lv=22 HP=58 Atk=71 Def=20 SpA=36 SpD=20 Speed=54 item=477 ability=3
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Brave Bird target=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Brave Bird target=0
+AI decision turn=2 actor=3 move=Crunch target=2
+ARCHIE_MUSEUM_AFTER board=0 turns=1 pair=2 species=42/318 HP=28/58 foes=59/4 moves=Brave Bird/Protect speed=68/81 foeSpeed=33/25 items=0/477 stageAtk=6/6 stageSpe=6/7 PP=14/15 fourthPP=20/4 rain=0 weatherTimer=0 faints=0/0 absent=0
+ARCHIE_MUSEUM_INPUT slot=0 lv=19 HP=62 Atk=19 Def=24 SpA=31 SpD=34 Speed=43 item=447 ability=44
+ARCHIE_MUSEUM_INPUT slot=1 lv=20 HP=60 Atk=27 Def=31 SpA=51 SpD=39 Speed=43 item=479 ability=33
+ARCHIE_MUSEUM_INPUT slot=2 lv=20 HP=53 Atk=60 Def=37 SpA=27 SpD=25 Speed=37 item=481 ability=91
+ARCHIE_MUSEUM_INPUT slot=3 lv=21 HP=54 Atk=25 Def=26 SpA=45 SpD=53 Speed=59 item=487 ability=29
+ARCHIE_MUSEUM_INPUT slot=4 lv=21 HP=69 Atk=58 Def=40 SpA=34 SpD=43 Speed=68 item=523 ability=39
+ARCHIE_MUSEUM_INPUT slot=5 lv=22 HP=58 Atk=71 Def=20 SpA=36 SpD=20 Speed=54 item=477 ability=3
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Brave Bird target=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Brave Bird target=0
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Crunch target=2
+AI decision turn=3 actor=3 move=Crunch target=0
+ARCHIE_MUSEUM_AFTER board=0 turns=2 pair=2 species=42/318 HP=0/58 foes=15/0 moves=-/Crunch speed=0/108 foeSpeed=33/0 items=0/477 stageAtk=6/6 stageSpe=6/8 PP=13/14 fourthPP=20/4 rain=0 weatherTimer=0 faints=1/1 absent=6
+ARCHIE_MUSEUM_INPUT slot=0 lv=19 HP=62 Atk=19 Def=24 SpA=31 SpD=34 Speed=43 item=447 ability=44
+ARCHIE_MUSEUM_INPUT slot=1 lv=20 HP=60 Atk=27 Def=31 SpA=51 SpD=39 Speed=43 item=479 ability=33
+ARCHIE_MUSEUM_INPUT slot=2 lv=20 HP=53 Atk=60 Def=37 SpA=27 SpD=25 Speed=37 item=481 ability=91
+ARCHIE_MUSEUM_INPUT slot=3 lv=21 HP=54 Atk=25 Def=26 SpA=45 SpD=53 Speed=59 item=487 ability=29
+ARCHIE_MUSEUM_INPUT slot=4 lv=21 HP=69 Atk=58 Def=40 SpA=34 SpD=43 Speed=68 item=523 ability=39
+ARCHIE_MUSEUM_INPUT slot=5 lv=22 HP=58 Atk=71 Def=20 SpA=36 SpD=20 Speed=54 item=477 ability=3
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Poison Fang target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Crunch target=0
+AI decision turn=2 actor=1 move=Brave Bird target=2
+AI decision turn=2 actor=3 move=Protect target=3
+ARCHIE_MUSEUM_AFTER board=1 turns=1 pair=2 species=42/318 HP=37/58 foes=0/53 moves=Poison Fang/Crunch speed=68/81 foeSpeed=0/49 items=523/477 stageAtk=6/6 stageSpe=6/7 PP=15/14 fourthPP=20/5 rain=0 weatherTimer=0 faints=0/1 absent=1
+ARCHIE_MUSEUM_INPUT slot=0 lv=19 HP=62 Atk=19 Def=24 SpA=31 SpD=34 Speed=43 item=447 ability=44
+ARCHIE_MUSEUM_INPUT slot=1 lv=20 HP=60 Atk=27 Def=31 SpA=51 SpD=39 Speed=43 item=479 ability=33
+ARCHIE_MUSEUM_INPUT slot=2 lv=20 HP=53 Atk=60 Def=37 SpA=27 SpD=25 Speed=37 item=481 ability=91
+ARCHIE_MUSEUM_INPUT slot=3 lv=21 HP=54 Atk=25 Def=26 SpA=45 SpD=53 Speed=59 item=487 ability=29
+ARCHIE_MUSEUM_INPUT slot=4 lv=21 HP=69 Atk=58 Def=40 SpA=34 SpD=43 Speed=68 item=523 ability=39
+ARCHIE_MUSEUM_INPUT slot=5 lv=22 HP=58 Atk=71 Def=20 SpA=36 SpD=20 Speed=54 item=477 ability=3
+AI decision turn=1 actor=0 move=Psychic target=3
+AI decision turn=1 actor=1 move=Poison Fang target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=1
+AI decision turn=1 actor=3 move=Crunch target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=1
+AI decision turn=2 actor=1 move=Brave Bird target=2
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=1 move=Brave Bird target=2
+AI decision turn=3 actor=3 move=Liquidation target=2
+ARCHIE_MUSEUM_AFTER board=1 turns=2 pair=2 species=42/318 HP=17/58 foes=0/47 moves=Brave Bird/Protect speed=68/108 foeSpeed=0/49 items=0/477 stageAtk=6/6 stageSpe=6/8 PP=14/14 fourthPP=20/4 rain=0 weatherTimer=0 faints=0/1 absent=1
+
+- Tests [32mPASSED[0m:          4
+- Tests [34mTOTAL[0m:           4
+

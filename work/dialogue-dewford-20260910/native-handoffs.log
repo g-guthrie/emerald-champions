@@ -1,0 +1,13 @@
+22 FLAG_RECOVERED_DEVON_GOODS 0 RESULT frames=16000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=2901245fbb8bdd69 nonzero_pixels=38358 save_bytes=0
+READ width=4 address=0200224c value=00000001
+READ width=4 address=02002274 value=00000000
+READ width=4 address=02002278 value=00000000
+READ width=4 address=0200225c value=00001804
+READ width=4 address=02002268 value=0000000d
+READ width=4 address=0200226c value=00000005
+
+Traceback (most recent call last):
+  File "/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/dialogue-dewford-20260910/probe_handoffs.py", line 8, in <module>
+    flag=int(re.search(r'#define '+query+r'\s+(0x[0-9A-Fa-f]+|\d+)',const)[1],0)
+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+TypeError: 'NoneType' object is not subscriptable

@@ -11,6 +11,83 @@
 #include "constants/daycare.h"
 #include "constants/move_relearner.h"
 
+
+// One native stat regression, not a battle or trainer-design assertion.
+// Literal expectations cover low-level rounding, EV / 4 rounding at level 50,
+// level-100 scaling, Nature, and universal perfect IVs despite a zero-IV creation request.
+TEST("Emerald Champions EV stats: level scaling, Nature, universal perfect IVs and HP invariants")
+{
+    static const u8 levels[] = {5, 12, 50, 100};
+    static const u8 evs[] = {0, 3, 4, 12, 252};
+    static const u16 attack[][5] = {
+        {9, 9, 9, 9, 13},
+        {16, 16, 17, 17, 25},
+        {55, 55, 56, 57, 90},
+        {105, 105, 106, 108, 174},
+    };
+    static const u16 hp[][5] = {
+        {20, 20, 20, 20, 23},
+        {34, 34, 34, 35, 42},
+        {113, 113, 114, 115, 145},
+        {217, 217, 218, 220, 280},
+    };
+    struct Pokemon mon;
+    u8 zero = 0;
+    u8 maxEvs = 252;
+    u8 nature = NATURE_ADAMANT;
+    u16 faintedHp = 0;
+    u32 packedZeroIvs = 0;
+
+    // The ordinary constructor, not only the IV-specific one, must initialize
+    // stored IVs. Non-stat consumers (for example Hidden Power) also read them.
+    CreateMon(&mon, SPECIES_ZIGZAGOON, 5, 0, OTID_STRUCT_PLAYER_ID);
+    for (u32 stat = 0; stat < NUM_STATS; stat++)
+        EXPECT_EQ(GetMonData(&mon, MON_DATA_HP_IV + stat), 31);
+
+    for (u32 level = 0; level < ARRAY_COUNT(levels); level++)
+    {
+        for (u32 investment = 0; investment < ARRAY_COUNT(evs); investment++)
+        {
+            CreateRandomMonWithIVs(&mon, SPECIES_ZIGZAGOON, levels[level], 0);
+            SetMonData(&mon, MON_DATA_IVS, &packedZeroIvs);
+            for (u32 stat = 0; stat < NUM_STATS; stat++)
+                SetMonData(&mon, MON_DATA_HP_EV + stat, &zero);
+            SetMonData(&mon, MON_DATA_HIDDEN_NATURE, &nature);
+            SetMonData(&mon, MON_DATA_HP_EV, &evs[investment]);
+            SetMonData(&mon, MON_DATA_ATK_EV, &evs[investment]);
+            CalculateMonStats(&mon);
+
+            for (u32 stat = 0; stat < NUM_STATS; stat++)
+            {
+                SetMonData(&mon, MON_DATA_HP_IV + stat, &zero);
+                EXPECT_EQ(GetMonData(&mon, MON_DATA_HP_IV + stat), 31);
+            }
+            EXPECT_EQ(GetMonData(&mon, MON_DATA_ATK), attack[level][investment]);
+            EXPECT_EQ(GetMonData(&mon, MON_DATA_MAX_HP), hp[level][investment]);
+            EXPECT_EQ(GetMonData(&mon, MON_DATA_HP), hp[level][investment]);
+        }
+    }
+
+    // Recalculation must not revive a fainted Pokemon when its maximum rises.
+    SetMonData(&mon, MON_DATA_HP_EV, &zero);
+    CalculateMonStats(&mon);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_MAX_HP), 217);
+    SetMonData(&mon, MON_DATA_HP, &faintedHp);
+    SetMonData(&mon, MON_DATA_HP_EV, &maxEvs);
+    CalculateMonStats(&mon);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_MAX_HP), 280);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_HP), 0);
+
+    CreateRandomMonWithIVs(&mon, SPECIES_SHEDINJA, 100, 0);
+    for (u32 stat = 0; stat < NUM_STATS; stat++)
+        SetMonData(&mon, MON_DATA_HP_EV + stat, &zero);
+    SetMonData(&mon, MON_DATA_HIDDEN_NATURE, &nature);
+    SetMonData(&mon, MON_DATA_HP_EV, &maxEvs);
+    CalculateMonStats(&mon);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_MAX_HP), 1);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_HP), 1);
+}
+
 TEST("Nature independent from Hidden Nature")
 {
     u32 i, j, nature = 0, hiddenNature = 0;
@@ -112,128 +189,6 @@ TEST("Shininess set on an Egg persists after hatching")
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_IS_SHINY), TRUE);
 }
 
-TEST("Hyper Training follows the configured stat calculation without changing stored IVs")
-{
-    u32 data, hp, atk, def, speed, spatk, spdef, friendship = 0;
-    struct Pokemon mon;
-    CreateMonWithIVs(&mon, SPECIES_WOBBUFFET, 100, 0, OTID_STRUCT_PRESET(0), 3);
-    // Consider B_FRIENDSHIP_BOOST.
-    SetMonData(&mon, MON_DATA_FRIENDSHIP, &friendship);
-    CalculateMonStats(&mon);
-
-    hp = GetMonData(&mon, MON_DATA_HP);
-    atk = GetMonData(&mon, MON_DATA_ATK);
-    def = GetMonData(&mon, MON_DATA_DEF);
-    speed = GetMonData(&mon, MON_DATA_SPEED);
-    spatk = GetMonData(&mon, MON_DATA_SPATK);
-    spdef = GetMonData(&mon, MON_DATA_SPDEF);
-
-    data = TRUE;
-    SetMonData(&mon, MON_DATA_HYPER_TRAINED_HP, &data);
-    SetMonData(&mon, MON_DATA_HYPER_TRAINED_ATK, &data);
-    SetMonData(&mon, MON_DATA_HYPER_TRAINED_DEF, &data);
-    SetMonData(&mon, MON_DATA_HYPER_TRAINED_SPEED, &data);
-    SetMonData(&mon, MON_DATA_HYPER_TRAINED_SPATK, &data);
-    SetMonData(&mon, MON_DATA_HYPER_TRAINED_SPDEF, &data);
-    CalculateMonStats(&mon);
-
-    EXPECT_EQ(GetMonData(&mon, MON_DATA_HP_IV), 3);
-    EXPECT_EQ(GetMonData(&mon, MON_DATA_ATK_IV), 3);
-    EXPECT_EQ(GetMonData(&mon, MON_DATA_DEF_IV), 3);
-    EXPECT_EQ(GetMonData(&mon, MON_DATA_SPEED_IV), 3);
-    EXPECT_EQ(GetMonData(&mon, MON_DATA_SPATK_IV), 3);
-    EXPECT_EQ(GetMonData(&mon, MON_DATA_SPDEF_IV), 3);
-    EXPECT_EQ(GetMonData(&mon, MON_DATA_SPEED_IV), 3);
-
-    if (P_STAT_CALCULATION >= GEN_CHAMPIONS)
-    {
-        EXPECT_EQ(hp, GetMonData(&mon, MON_DATA_HP));
-        EXPECT_EQ(atk, GetMonData(&mon, MON_DATA_ATK));
-        EXPECT_EQ(def, GetMonData(&mon, MON_DATA_DEF));
-        EXPECT_EQ(speed, GetMonData(&mon, MON_DATA_SPEED));
-        EXPECT_EQ(spatk, GetMonData(&mon, MON_DATA_SPATK));
-        EXPECT_EQ(spdef, GetMonData(&mon, MON_DATA_SPDEF));
-    }
-    else
-    {
-        EXPECT_EQ(hp - 3 + MAX_PER_STAT_IVS, GetMonData(&mon, MON_DATA_HP));
-        EXPECT_EQ(atk - 3 + MAX_PER_STAT_IVS, GetMonData(&mon, MON_DATA_ATK));
-        EXPECT_EQ(def - 3 + MAX_PER_STAT_IVS, GetMonData(&mon, MON_DATA_DEF));
-        EXPECT_EQ(speed - 3 + MAX_PER_STAT_IVS, GetMonData(&mon, MON_DATA_SPEED));
-        EXPECT_EQ(spatk - 3 + MAX_PER_STAT_IVS, GetMonData(&mon, MON_DATA_SPATK));
-        EXPECT_EQ(spdef - 3 + MAX_PER_STAT_IVS, GetMonData(&mon, MON_DATA_SPDEF));
-    }
-}
-
-TEST("Champions stat calculation uses perfect IVs and Stat Points")
-{
-    struct Pokemon mon;
-    u32 zero = 0;
-    u32 statPoints = 11;
-    u32 nature = NATURE_HARDY;
-    u32 friendship = 0;
-    u32 level = 50;
-    u32 expectedHp;
-    u32 expectedAttack;
-
-    ASSUME(P_STAT_CALCULATION >= GEN_CHAMPIONS);
-    CreateMonWithIVs(&mon, SPECIES_WOBBUFFET, level, 0, OTID_STRUCT_PRESET(0), zero);
-    SetMonData(&mon, MON_DATA_HIDDEN_NATURE, &nature);
-    SetMonData(&mon, MON_DATA_FRIENDSHIP, &friendship);
-    SetMonData(&mon, MON_DATA_HP_EV, &statPoints);
-    SetMonData(&mon, MON_DATA_ATK_EV, &statPoints);
-    CalculateMonStats(&mon);
-
-    expectedHp = ((2 * GetSpeciesBaseHP(SPECIES_WOBBUFFET) + MAX_PER_STAT_IVS) * level) / 100 + level + 10 + statPoints;
-    expectedAttack = ((2 * GetSpeciesBaseAttack(SPECIES_WOBBUFFET) + MAX_PER_STAT_IVS) * level) / 100 + 5 + statPoints;
-    EXPECT_EQ(GetMonData(&mon, MON_DATA_MAX_HP), expectedHp);
-    EXPECT_EQ(GetMonData(&mon, MON_DATA_ATK), expectedAttack);
-    EXPECT_EQ(GetMonData(&mon, MON_DATA_HP_IV), zero);
-    EXPECT_EQ(GetMonData(&mon, MON_DATA_ATK_IV), zero);
-}
-
-TEST("Champions fixed Stat Points apply before Nature at every level")
-{
-    struct Pokemon mon;
-    u32 level;
-    u32 points;
-    u32 nature;
-    u32 zero = 0;
-    u32 neutral = NATURE_HARDY;
-    u32 base;
-    PARAMETRIZE { level = 5; points = 1; nature = NATURE_ADAMANT; }
-    PARAMETRIZE { level = 10; points = 10; nature = NATURE_MODEST; }
-    PARAMETRIZE { level = 25; points = 32; nature = NATURE_HARDY; }
-    PARAMETRIZE { level = 50; points = 32; nature = NATURE_ADAMANT; }
-    PARAMETRIZE { level = 100; points = 32; nature = NATURE_MODEST; }
-    ASSUME(P_STAT_CALCULATION >= GEN_CHAMPIONS);
-    CreateMonWithIVs(&mon, SPECIES_WOBBUFFET, level, 0, OTID_STRUCT_PRESET(0), zero);
-    SetMonData(&mon, MON_DATA_HIDDEN_NATURE, &neutral);
-    SetMonData(&mon, MON_DATA_FRIENDSHIP, &zero);
-    SetMonData(&mon, MON_DATA_ATK_EV, &zero);
-    CalculateMonStats(&mon);
-    base = GetMonData(&mon, MON_DATA_ATK);
-    SetMonData(&mon, MON_DATA_ATK_EV, &points);
-    SetMonData(&mon, MON_DATA_HIDDEN_NATURE, &nature);
-    CalculateMonStats(&mon);
-    if (nature == NATURE_ADAMANT)
-        EXPECT_EQ(GetMonData(&mon, MON_DATA_ATK), (base + points) * 110 / 100);
-    else if (nature == NATURE_MODEST)
-        EXPECT_EQ(GetMonData(&mon, MON_DATA_ATK), (base + points) * 90 / 100);
-    else
-        EXPECT_EQ(GetMonData(&mon, MON_DATA_ATK), base + points);
-}
-
-TEST("Champions fixed Stat Points preserve Shedinja HP")
-{
-    struct Pokemon mon;
-    u32 points = 32;
-    CreateMon(&mon, SPECIES_SHEDINJA, 10, 0, OTID_STRUCT_PRESET(0));
-    SetMonData(&mon, MON_DATA_HP_EV, &points);
-    CalculateMonStats(&mon);
-    EXPECT_EQ(GetMonData(&mon, MON_DATA_MAX_HP), 1);
-}
-
 TEST("Champions PP calculation caps base PP and does not use PP Ups")
 {
     ASSUME(P_MOVE_PP_CALCULATION >= GEN_CHAMPIONS);
@@ -271,32 +226,6 @@ TEST("Status1 round-trips through BoxPokemon")
     SetMonData(&mon1, MON_DATA_STATUS, &status1);
     BoxMonToMon(&mon1.box, &mon2);
     EXPECT_EQ(GetMonData(&mon2, MON_DATA_STATUS), status1);
-}
-
-TEST("canhypertrain/hypertrain affect MON_DATA_HYPER_TRAINED_* and recalculate stats")
-{
-    u32 atk, friendship = 0;
-    CreateRandomMonWithIVs(&gParties[B_TRAINER_PLAYER][0], SPECIES_WOBBUFFET, 100, 0);
-
-    // Consider B_FRIENDSHIP_BOOST.
-    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_FRIENDSHIP, &friendship);
-    CalculateMonStats(&gParties[B_TRAINER_PLAYER][0]);
-
-    atk = GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_ATK);
-
-    RUN_OVERWORLD_SCRIPT(
-        canhypertrain STAT_ATK, 0;
-    );
-    EXPECT(VarGet(VAR_RESULT));
-
-    RUN_OVERWORLD_SCRIPT(
-        hypertrain STAT_ATK, 0;
-        canhypertrain STAT_ATK, 0;
-    );
-    EXPECT(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HYPER_TRAINED_ATK));
-    // Champions already calculates every stat with a perfect effective IV.
-    EXPECT_EQ(atk + (P_STAT_CALCULATION >= GEN_CHAMPIONS ? 0 : 31), GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_ATK));
-    EXPECT(!VarGet(VAR_RESULT));
 }
 
 TEST("hasgigantamaxfactor/togglegigantamaxfactor affect MON_DATA_GIGANTAMAX_FACTOR")
@@ -349,84 +278,6 @@ TEST("givemon [simple]")
 
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_WOBBUFFET);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_LEVEL), 100);
-}
-
-TEST("givemon respects perfectIVCount")
-{
-    ZeroPlayerPartyMons();
-    u32 perfectIVs[6] = {0};
-
-    ASSUME(gSpeciesInfo[SPECIES_MEW].perfectIVCount == 3);
-    ASSUME(gSpeciesInfo[SPECIES_CELEBI].perfectIVCount == 3);
-    ASSUME(gSpeciesInfo[SPECIES_JIRACHI].perfectIVCount == 3);
-    ASSUME(gSpeciesInfo[SPECIES_MANAPHY].perfectIVCount == 3);
-    ASSUME(gSpeciesInfo[SPECIES_VICTINI].perfectIVCount == 3);
-    ASSUME(gSpeciesInfo[SPECIES_DIANCIE].perfectIVCount == 3);
-
-    RUN_OVERWORLD_SCRIPT(
-        givemon SPECIES_MEW, 100;
-        givemon SPECIES_CELEBI, 100;
-        givemon SPECIES_JIRACHI, 100;
-        givemon SPECIES_MANAPHY, 100;
-        givemon SPECIES_VICTINI, 100;
-        givemon SPECIES_DIANCIE, 100;
-    );
-
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_MEW);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_SPECIES), SPECIES_CELEBI);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][2], MON_DATA_SPECIES), SPECIES_JIRACHI);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][3], MON_DATA_SPECIES), SPECIES_MANAPHY);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][4], MON_DATA_SPECIES), SPECIES_VICTINI);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][5], MON_DATA_SPECIES), SPECIES_DIANCIE);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_LEVEL), 100);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_LEVEL), 100);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][2], MON_DATA_LEVEL), 100);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][3], MON_DATA_LEVEL), 100);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][4], MON_DATA_LEVEL), 100);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][5], MON_DATA_LEVEL), 100);
-    for (u32 j = 0; j < 6; j++)
-    {
-        for (u32 k = 0; k < NUM_STATS; k++)
-        {
-            if (GetMonData(&gParties[B_TRAINER_PLAYER][j], MON_DATA_HP_IV + k) == MAX_PER_STAT_IVS)
-                perfectIVs[j]++;
-        }
-        EXPECT_GE(perfectIVs[j], 3);
-    }
-}
-
-TEST("givemon respects perfectIVCount but does overwrite fixed IVs (1)")
-{
-    ZeroPlayerPartyMons();
-
-    ASSUME(gSpeciesInfo[SPECIES_MEW].perfectIVCount == 3);
-    RUN_OVERWORLD_SCRIPT(
-        givemon SPECIES_MEW, 100, hpIv=7, atkIv=8, defIv=9, speedIv=10, spAtkIv=11, spDefIv=12
-    );
-
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP_IV), 7);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_ATK_IV), 8);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_DEF_IV), 9);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPEED_IV), 10);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPATK_IV), 11);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPDEF_IV), 12);
-}
-
-TEST("givemon respects perfectIVCount but does overwrite fixed IVs (2)")
-{
-    ZeroPlayerPartyMons();
-
-    ASSUME(gSpeciesInfo[SPECIES_MEW].perfectIVCount == 3);
-    RUN_OVERWORLD_SCRIPT(
-        givemon SPECIES_MEW, 100, hpIv=7, atkIv=8, defIv=9
-    );
-
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP_IV), 7);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_ATK_IV), 8);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_DEF_IV), 9);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPEED_IV), MAX_PER_STAT_IVS);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPATK_IV), MAX_PER_STAT_IVS);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPDEF_IV), MAX_PER_STAT_IVS);
 }
 
 TEST("givemon respects FORM_CHANGE_ITEM_HOLD")
@@ -731,26 +582,6 @@ TEST("Optimised SetMonData")
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SANITY_IS_BAD_EGG), FALSE);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_EXP), exp);
     EXPECT_FASTER(optimised, vanilla);
-}
-
-//Sanity check for a CalculateMonStats refactor (could be deleted or improved)
-TEST("CalculateMonStats")
-{
-    ZeroPlayerPartyMons();
-
-    RUN_OVERWORLD_SCRIPT(
-        givemon SPECIES_WOBBUFFET, 100, item=ITEM_LEFTOVERS, ball=BALL_MASTER, nature=NATURE_BOLD, abilityNum=2, gender=MON_MALE, hpEv=1, atkEv=2, defEv=3, speedEv=4, spAtkEv=5, spDefEv=6, hpIv=7, atkIv=8, defIv=9, speedIv=10, spAtkIv=11, spDefIv=12, move1=MOVE_SCRATCH, move2=MOVE_SPLASH, move3=MOVE_CELEBRATE, move4=MOVE_EXPLOSION, shinyMode=SHINY_MODE_ALWAYS, gmaxFactor=TRUE, teraType=TYPE_FIRE, dmaxLevel=7;
-    );
-
-    // Independently calculated exact stats: perfect effective IVs and two
-    // investment units per Stat Point in Champions; legacy IV/EV values below.
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MAX_HP), P_STAT_CALCULATION >= GEN_CHAMPIONS ? 523 : 497);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_ATK), P_STAT_CALCULATION >= GEN_CHAMPIONS ? 95 : 71);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_DEF), P_STAT_CALCULATION >= GEN_CHAMPIONS ? 173 : 143);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPEED), P_STAT_CALCULATION >= GEN_CHAMPIONS ? 110 : 82);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPATK), P_STAT_CALCULATION >= GEN_CHAMPIONS ? 112 : 83);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPDEF), P_STAT_CALCULATION >= GEN_CHAMPIONS ? 164 : 134);
-
 }
 
 TEST("BoxPokemon encryption works")

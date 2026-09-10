@@ -1,12 +1,6 @@
-Common_EventScript_EmeraldChampionsOpeningPrep::
-	setvar VAR_UNUSED_0x8014, 1
-	goto EmeraldChampions_EventScript_InitializePrep
-
 Common_EventScript_EmeraldChampionsMoveTutor::
-	setvar VAR_UNUSED_0x8014, 0
 	lockall
 	faceplayer
-EmeraldChampions_EventScript_InitializePrep:
 	setvar VAR_0x8007, EC_BATTLE_FORMAT_DOUBLES
 	setvar VAR_0x8009, 0
 	setvar VAR_0x800B, 0
@@ -16,7 +10,7 @@ EmeraldChampions_EventScript_MoveTutorMain:
 	waitmessage
 	dynmultipush EmeraldChampions_Text_BuildBattleSet, 0
 	dynmultipush EmeraldChampions_Text_ChangeNature, 1
-	dynmultipush EmeraldChampions_Text_EditStatPoints, 2
+	dynmultipush EmeraldChampions_Text_EditEvs, 2
 	dynmultipush EmeraldChampions_Text_LearnMove, 3
 	dynmultipush EmeraldChampions_Text_OtherServices, 4
 	dynmultipush EmeraldChampions_Text_Exit, 5
@@ -28,7 +22,7 @@ EmeraldChampions_EventScript_MoveTutorMain:
 	switch VAR_RESULT
 	case 0, EmeraldChampions_EventScript_BattleSetChooseMon
 	case 1, EmeraldChampions_EventScript_NatureChooseMon
-	case 2, EmeraldChampions_EventScript_StatPointChooseMon
+	case 2, EmeraldChampions_EventScript_EvChooseMon
 	case 3, EmeraldChampions_EventScript_OpenMoveRelearner
 	case 4, EmeraldChampions_EventScript_OtherServices
 	case 5, EmeraldChampions_EventScript_MoveTutorExit
@@ -165,38 +159,38 @@ EmeraldChampions_EventScript_NameRaterChanged:
 	goto_if_eq VAR_RESULT, YES, EmeraldChampions_EventScript_NameRaterChooseMon
 	goto EmeraldChampions_EventScript_OtherServices
 
-Common_EventScript_EmeraldChampionsStatPointEditor::
+Common_EventScript_EmeraldChampionsEvEditor::
 	lockall
 	faceplayer
 	setvar VAR_0x8009, 1
-	goto EmeraldChampions_EventScript_StatPointChooseMon
+	goto EmeraldChampions_EventScript_EvChooseMon
 
-EmeraldChampions_EventScript_StatPointChooseMon:
-	msgbox EmeraldChampions_Text_ChooseStatPointMon, MSGBOX_DEFAULT
+EmeraldChampions_EventScript_EvChooseMon:
+	msgbox EmeraldChampions_Text_ChooseEvMon, MSGBOX_DEFAULT
 	special ChoosePartyMon
-	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, EmeraldChampions_EventScript_StatPointCancel
+	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, EmeraldChampions_EventScript_EvCancel
 	special IsSelectedMonEgg
-	goto_if_eq VAR_RESULT, TRUE, EmeraldChampions_EventScript_StatPointEgg
+	goto_if_eq VAR_RESULT, TRUE, EmeraldChampions_EventScript_EvEgg
 	copyvar VAR_0x800A, VAR_0x8004
 	setvar VAR_0x8008, 0
-	goto EmeraldChampions_EventScript_StatPointMain
+	goto EmeraldChampions_EventScript_EvMain
 
-EmeraldChampions_EventScript_StatPointMain:
-	special BufferSelectedMonEmeraldChampionsStatPointSummary
+EmeraldChampions_EventScript_EvMain:
+	special BufferSelectedMonEmeraldChampionsEvSummary
 	message gStringVar4
 	waitmessage
-	setvar VAR_0x8004, SCROLL_MULTI_EMERALD_CHAMPIONS_STAT_POINTS
+	setvar VAR_0x8004, SCROLL_MULTI_EMERALD_CHAMPIONS_EVS
 	special ShowScrollableMultichoice
-	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, EmeraldChampions_EventScript_StatPointChooseMon
+	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, EmeraldChampions_EventScript_EvChooseMon
 	copyvar VAR_0x8008, VAR_RESULT
-	goto_if_eq VAR_0x8008, 7, EmeraldChampions_EventScript_StatPointChooseMon
-	goto_if_eq VAR_0x8008, 6, EmeraldChampions_EventScript_StatPointReset
+	goto_if_eq VAR_0x8008, 7, EmeraldChampions_EventScript_EvChooseMon
+	goto_if_eq VAR_0x8008, 6, EmeraldChampions_EventScript_EvReset
 	copyvar VAR_0x8005, VAR_0x8008
 	setvar VAR_0x8006, 0
-	goto EmeraldChampions_EventScript_StatPointAdjust
+	goto EmeraldChampions_EventScript_EvAdjust
 
-EmeraldChampions_EventScript_StatPointAdjust:
-	special BufferSelectedMonEmeraldChampionsStatPointDetail
+EmeraldChampions_EventScript_EvAdjust:
+	special BufferSelectedMonEmeraldChampionsEvDetail
 	message gStringVar4
 	waitmessage
 	setvar VAR_0x8004, SCROLL_MULTI_EMERALD_CHAMPIONS_STAT_ADJUST
@@ -204,40 +198,40 @@ EmeraldChampions_EventScript_StatPointAdjust:
 
 @ The adjustment list persists between presses. Each step is applied, the
 @ running total is rewritten in place, and the same list resumes input.
-EmeraldChampions_EventScript_StatPointAdjustResult:
-	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, EmeraldChampions_EventScript_StatPointMain
+EmeraldChampions_EventScript_EvAdjustResult:
+	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, EmeraldChampions_EventScript_EvMain
 	copyvar VAR_0x8006, VAR_RESULT
-	goto_if_eq VAR_0x8006, 8, EmeraldChampions_EventScript_StatPointMain
-	special AdjustSelectedMonEmeraldChampionsStatPoints
-	call_if_eq VAR_RESULT, FALSE, EmeraldChampions_EventScript_StatPointAdjustmentBlocked
-	special BufferSelectedMonEmeraldChampionsStatPointDetail
+	goto_if_eq VAR_0x8006, 8, EmeraldChampions_EventScript_EvMain
+	special AdjustSelectedMonEmeraldChampionsEvs
+	call_if_eq VAR_RESULT, FALSE, EmeraldChampions_EventScript_EvAdjustmentBlocked
+	special BufferSelectedMonEmeraldChampionsEvDetail
 	message gStringVar4
 	waitmessage
 	special ScrollableMultichoice_TryReturnToList
 	waitstate
-	goto EmeraldChampions_EventScript_StatPointAdjustResult
+	goto EmeraldChampions_EventScript_EvAdjustResult
 
-EmeraldChampions_EventScript_StatPointAdjustmentBlocked:
+EmeraldChampions_EventScript_EvAdjustmentBlocked:
 	playse SE_FAILURE
 	return
 
-EmeraldChampions_EventScript_StatPointReset:
-	msgbox EmeraldChampions_Text_ResetStatPoints, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, EmeraldChampions_EventScript_StatPointMain
-	special ResetSelectedMonEmeraldChampionsStatPoints
-	msgbox EmeraldChampions_Text_StatPointsReset, MSGBOX_DEFAULT
-	goto EmeraldChampions_EventScript_StatPointMain
+EmeraldChampions_EventScript_EvReset:
+	msgbox EmeraldChampions_Text_ResetEvs, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EmeraldChampions_EventScript_EvMain
+	special ResetSelectedMonEmeraldChampionsEvs
+	msgbox EmeraldChampions_Text_EvsReset, MSGBOX_DEFAULT
+	goto EmeraldChampions_EventScript_EvMain
 
-EmeraldChampions_EventScript_StatPointEgg:
-	msgbox EmeraldChampions_Text_StatPointEgg, MSGBOX_DEFAULT
-	goto EmeraldChampions_EventScript_StatPointChooseMon
+EmeraldChampions_EventScript_EvEgg:
+	msgbox EmeraldChampions_Text_EvEgg, MSGBOX_DEFAULT
+	goto EmeraldChampions_EventScript_EvChooseMon
 
-EmeraldChampions_EventScript_StatPointCancel:
-	goto_if_eq VAR_0x8009, 1, EmeraldChampions_EventScript_StatPointExternalExit
+EmeraldChampions_EventScript_EvCancel:
+	goto_if_eq VAR_0x8009, 1, EmeraldChampions_EventScript_EvExternalExit
 	goto EmeraldChampions_EventScript_MoveTutorMain
 
-EmeraldChampions_EventScript_StatPointExternalExit:
-	msgbox EmeraldChampions_Text_StatPointGoodbye, MSGBOX_DEFAULT
+EmeraldChampions_EventScript_EvExternalExit:
+	msgbox EmeraldChampions_Text_EvGoodbye, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -386,19 +380,12 @@ EmeraldChampions_EventScript_BattleSetSpecialItem:
 
 EmeraldChampions_EventScript_MoveTutorExit:
 	msgbox EmeraldChampions_Text_MoveTutorGoodbye, MSGBOX_DEFAULT
-	goto_if_eq VAR_UNUSED_0x8014, 1, EmeraldChampions_EventScript_ReturnService
 	releaseall
 	end
 
-Common_EventScript_EmeraldChampionsOpeningItems::
-	setvar VAR_UNUSED_0x8014, 1
-	goto EmeraldChampions_EventScript_InitializeItems
-
 Common_EventScript_EmeraldChampionsBattleVendor::
-	setvar VAR_UNUSED_0x8014, 0
 	lock
 	faceplayer
-EmeraldChampions_EventScript_InitializeItems:
 	setvar VAR_0x8008, 0
 	setvar VAR_0x8009, 0
 
@@ -462,7 +449,6 @@ EmeraldChampions_EventScript_OpenEvolutionArchive:
 
 EmeraldChampions_EventScript_BattleVendorExit:
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
-	goto_if_eq VAR_UNUSED_0x8014, 1, EmeraldChampions_EventScript_ReturnService
 	release
 	end
 
@@ -472,8 +458,10 @@ EmeraldChampions_Text_BattleVendorWelcome:
 	.string "Which kind of held item do you need?$"
 
 EmeraldChampions_Text_BattleVendorCompleteWelcome:
-	.string "Your RING opens the Evolution Items\n"
-	.string "archive. Those items are free!\p"
+	.string "Your RING opens the Form Tools archive.\n"
+	.string "These form-changing tools are free!\p"
+	.string "Evolution specialists sell stones and\n"
+	.string "devices. LILYCOVE has the full range.\p"
 	.string "For Mega Stones, explore HOENN and\n"
 	.string "get to know the people who live here.$"
 
@@ -481,7 +469,7 @@ EmeraldChampions_Text_HeldItems:
 	.string "Held Items$"
 
 EmeraldChampions_Text_EvolutionArchive:
-	.string "Evolution Items$"
+	.string "Form Tools$"
 
 EmeraldChampions_Text_BattleItemCategoryPrompt:
 	.string "Which kind of held item do you need?$"
@@ -513,8 +501,8 @@ EmeraldChampions_Text_MoveTutorHowCanHelp:
 EmeraldChampions_Text_BuildBattleSet:
 	.string "Build a Battle Set$"
 
-EmeraldChampions_Text_EditStatPoints:
-	.string "Edit Stat Points$"
+EmeraldChampions_Text_EditEvs:
+	.string "Edit EVs$"
 
 EmeraldChampions_Text_LearnMove:
 	.string "Learn a Move$"
@@ -535,10 +523,18 @@ EmeraldChampions_Text_Exit:
 	.string "Exit$"
 
 EmeraldChampions_Text_ExplainBattleSets:
-	.string "A Battle Set rebuilds a Pokémon\n"
-	.string "from top to bottom: its moves,\l"
-	.string "Nature, Ability, Stat Points,\l"
-	.string "and held item.$"
+	.string "A Battle Set is a prepared build:\n"
+	.string "moves, Nature, Ability, EVs,\l"
+	.string "and a held item.\p"
+	.string "I'll show it before you decide.\n"
+	.string "Applying it replaces those parts\l"
+	.string "of your current build.\p"
+	.string "You can edit it afterward, or\n"
+	.string "try another set, all for free.\l"
+	.string "Use your Leveler separately.\p"
+	.string "Transformation items, such as\n"
+	.string "Mega Stones, must be found\l"
+	.string "separately.$"
 
 EmeraldChampions_Text_ChooseBattleSetMon:
 	.string "Which Pokémon should I prepare?$"
@@ -553,21 +549,21 @@ EmeraldChampions_Text_Doubles:
 EmeraldChampions_Text_Singles:
 	.string "Singles$"
 
-EmeraldChampions_Text_ChooseStatPointMon:
-	.string "Each point adds +1 before Nature.\n"
+EmeraldChampions_Text_ChooseEvMon:
+	.string "Up to 252 EVs per stat, 510 total.\n"
 	.string "Whose stats should we adjust?$"
 
-EmeraldChampions_Text_ResetStatPoints:
-	.string "Reset all six Stat Points to zero?$"
+EmeraldChampions_Text_ResetEvs:
+	.string "Reset all six EVs to zero?$"
 
-EmeraldChampions_Text_StatPointsReset:
-	.string "All Stat Points were reset.\n"
+EmeraldChampions_Text_EvsReset:
+	.string "All EVs were reset.\n"
 	.string "You can now build a new spread.$"
 
-EmeraldChampions_Text_StatPointEgg:
-	.string "An Egg's Stat Points can't be edited.$"
+EmeraldChampions_Text_EvEgg:
+	.string "An Egg's EVs can't be edited.$"
 
-EmeraldChampions_Text_StatPointGoodbye:
+EmeraldChampions_Text_EvGoodbye:
 	.string "Come back whenever you want to\n"
 	.string "customize another spread.$"
 
@@ -965,7 +961,9 @@ EmeraldChampions_Text_FormGiftParty:
 EmeraldChampions_Text_FormGiftPC:
 	.string "Your new partner was sent to the PC!$"
 EmeraldChampions_Text_FormGiftFull:
-	.string "Your party and PC need room first.\nI'll keep your partner here for you.$"
+	.string "There's no room in your party or\n"
+	.string "PC. I'll keep your partner here\l"
+	.string "until a space opens up.$"
 EmeraldChampions_Text_ResearchPartners:
 	.string "Which research partner interests you?$"
 EmeraldChampions_Text_BattleBondInfo:
@@ -975,7 +973,11 @@ EmeraldChampions_Text_PartnerInfo:
 EmeraldChampions_Text_KubfuInfo:
 	.string "A Dark Scroll and a Water Scroll\nlead KUBFU to different styles.\pThis second partner lets you explore\nboth paths with your original KUBFU.$"
 EmeraldChampions_Text_CosmogInfo:
-	.string "COSMOEM evolves into SOLGALEO by day\nor LUNALA at night.\pThis second COSMOG lets you explore\nboth paths. Use your Leveler when ready.$"
+	.string "COSMOEM evolves into SOLGALEO by\n"
+	.string "day or LUNALA at night.\p"
+	.string "This second COSMOG lets you\n"
+	.string "explore both paths. Use your\l"
+	.string "Leveler when ready.$"
 EmeraldChampions_Text_ContestServices:
 	.string "Would you like help with your\npartner's appearance or costume?$"
 EmeraldChampions_Text_Appearance:
@@ -1014,3 +1016,24 @@ EmeraldChampions_Text_BondingDone:
 	.string "Friendship is set. Your Leveler can\nhelp when evolution conditions are met.$"
 EmeraldChampions_Text_BondingUnavailable:
 	.string "Please choose a Pokémon, not an Egg.$"
+
+Common_EventScript_CenterLocalGuide::
+	lockall
+	faceplayer
+	msgbox EmeraldChampions_Text_CenterLocalGuide, MSGBOX_DEFAULT
+	setvar VAR_0x8004, 0
+
+EmeraldChampions_EventScript_CenterLocalGuideNext::
+	special BufferNextCenterLegendaryLead
+	goto_if_eq VAR_RESULT, FALSE, EmeraldChampions_EventScript_CenterLocalGuideEnd
+	msgbox gStringVar4, MSGBOX_DEFAULT
+	goto EmeraldChampions_EventScript_CenterLocalGuideNext
+
+EmeraldChampions_EventScript_CenterLocalGuideEnd::
+	releaseall
+	end
+
+EmeraldChampions_Text_CenterLocalGuide:
+	.string "I listen for stories about rare\n"
+	.string "POKéMON around here. Let me tell\l"
+	.string "you where to look!$"

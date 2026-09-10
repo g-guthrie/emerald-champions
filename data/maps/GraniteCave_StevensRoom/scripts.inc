@@ -70,7 +70,7 @@ GraniteCave_StevensRoom_EventScript_RegisterSteven::
 
 GraniteCave_StevensRoom_EventScript_Finish::
 	call_if_unset FLAG_DELIVERED_DEVON_GOODS, GraniteCave_StevensRoom_EventScript_SternHandoff
-	msgbox GraniteCave_StevensRoom_Text_IveGotToHurryAlong, MSGBOX_DEFAULT
+	call GraniteCave_StevensRoom_EventScript_CobalionFarewell
 	closemessage
 	setflag FLAG_HIDE_GRANITE_CAVE_STEVEN
 	call_if_eq VAR_FACING, DIR_NORTH, GraniteCave_StevensRoom_EventScript_StevenExitNorth
@@ -81,6 +81,19 @@ GraniteCave_StevensRoom_EventScript_Finish::
 	removeobject LOCALID_GRANITE_CAVE_STEVEN
 	release
 	end
+
+GraniteCave_StevensRoom_EventScript_CobalionFarewell::
+	setvar VAR_0x8004, LEGENDARY_SIGN_COBALION
+	special GetSelectedLegendarySignState
+	goto_if_ne VAR_RESULT, 2, GraniteCave_StevensRoom_EventScript_CobalionUncaught
+
+GraniteCave_StevensRoom_EventScript_CobalionCaught::
+	msgbox GraniteCave_StevensRoom_Text_CobalionCaught, MSGBOX_DEFAULT
+	return
+
+GraniteCave_StevensRoom_EventScript_CobalionUncaught::
+	msgbox GraniteCave_StevensRoom_Text_IveGotToHurryAlong, MSGBOX_DEFAULT
+	return
 
 GraniteCave_StevensRoom_EventScript_SternHandoff::
 	msgbox GraniteCave_StevensRoom_Text_SternHandoff, MSGBOX_DEFAULT
@@ -174,13 +187,14 @@ GraniteCave_StevensRoom_Movement_StevenExitSouth:
 	step_end
 
 GraniteCave_StevensRoom_Text_ImStevenLetterForMe:
-	.string "I'm STEVEN. Forgive me, I didn't hear\n"
-	.string "you come in. Look at these markings.\p"
-	.string "They began to shine when the bedrock\n"
-	.string "started resonating. But the marks\l"
-	.string "themselves are much older than DEVON.\p"
-	.string "No mineral vein forms a pattern like\n"
-	.string "this… Oh? A LETTER from my father?$"
+	.string "I'm STEVEN. Forgive me, I didn't\n"
+	.string "hear you come in.\p"
+	.string "Rare POKéMON have been seeking\n"
+	.string "shelter in these caves. Their\l"
+	.string "movements seem to follow the\l"
+	.string "unusual weather.\p"
+	.string "I'm trying to understand why. Oh?\n"
+	.string "A LETTER from my father?$"
 GraniteCave_StevensRoom_Text_ThankYouTakeThis:
 	.string "You've earned BRAWLY's trust. And you\n"
 	.string "came all this way to find me. Thank you.\p"
@@ -190,25 +204,31 @@ GraniteCave_StevensRoom_Text_ThankYouTakeThis:
 	.string "Have your partner hold its stone.\n"
 	.string "Choose FIGHT, then press START before\l"
 	.string "you choose a move.\p"
-	.string "The RING and the CHAMPION'S SIGNS\n"
-	.string "respond to that same bond.$"
+	.string "A strong bond helps your team\n"
+	.string "bring out that power.$"
 
 GraniteCave_StevensRoom_Text_NoStarterStone:
-	.string "Your original partners have no\n"
-	.string "applicable Mega Stone here.\p"
-	.string "Your other teammates can carry one!$"
+	.string "I don't have a matching Mega\n"
+	.string "Stone for your original partners\l"
+	.string "here.\p"
+	.string "Keep exploring. Other members of\n"
+	.string "your team may be able to Mega\l"
+	.string "Evolve, too!$"
 
 GraniteCave_StevensRoom_Text_ArchiveOpen:
-	.string "The RING lets your partners use the\n"
-	.string "Mega Stones you find across HOENN.\p"
-	.string "Look for their glimmer off the path.\n"
-	.string "People may have stones to share, too.\p"
-	.string "POKéMON CENTER VENDORS still offer\n"
-	.string "evolution items free of charge.$"
+	.string "The RING lets your partners use\n"
+	.string "Mega Stones you find across\l"
+	.string "HOENN. Look off the path, and\l"
+	.string "talk to people you meet!\p"
+	.string "It also opens the CENTER vendors'\n"
+	.string "free Form Tools archive.\l"
+	.string "Legendary form tools are there,\l"
+	.string "too.$"
 
 GraniteCave_StevensRoom_Text_ReturnWithKnuckleBadge:
-	.string "The LETTER confirms what I feared:\n"
-	.string "these marks are shining across HOENN.\p"
+	.string "The LETTER confirms it: unusual\n"
+	.string "weather is driving rare POKéMON\l"
+	.string "into new hiding places.\p"
 	.string "Challenge BRAWLY at DEWFORD GYM.\n"
 	.string "Come back with the KNUCKLE BADGE.$"
 
@@ -221,11 +241,11 @@ GraniteCave_StevensRoom_Text_FindBrawlyInSlateport:
 	.string "I'll wait here for your KNUCKLE BADGE.$"
 
 GraniteCave_StevensRoom_Text_CouldBecomeChampionLetsRegister:
-	.string "There are things a stone can tell me,\n"
-	.string "and things only a journey can teach.\p"
+	.string "A journey teaches you things you\n"
+	.string "cannot learn in a laboratory.\p"
 	.string "Let's register each other in the\n"
-	.string "POKéNAV. If these signs change,\l"
-	.string "I'll let you know.$"
+	.string "POKéNAV. I'll keep studying these\l"
+	.string "unusual POKéMON sightings.$"
 
 GraniteCave_StevensRoom_Text_RegisteredSteven:
 	.string "Registered STEVEN\n"
@@ -240,16 +260,25 @@ GraniteCave_StevensRoom_Text_SternHandoff:
 	.string "tell you where to find the captain.$"
 
 GraniteCave_StevensRoom_Text_IveGotToHurryAlong:
-	.string "I'm heading east. MAGMA and AQUA\n"
-	.string "are disturbing more than land and\l"
-	.string "sea.\p"
-	.string "Inspect the marked stone in the\n"
-	.string "lower cave. COBALION may answer\l"
-	.string "once you hold the STONE BADGE.\p"
-	.string "DEVON's researcher keeps optional\n"
-	.string "clues. You can explore without\l"
-	.string "him.$"
+	.string "I am heading east. MAGMA and AQUA\n"
+	.string "are disturbing more than land\l"
+	.string "and sea.\p"
+	.string "COBALION lives among wild\n"
+	.string "POKéMON on GRANITE CAVE B2F,\l"
+	.string "with a 3% encounter chance.\p"
+	.string "Read the area signs as you travel.\n"
+	.string "They list the local POKéMON and\l"
+	.string "any special requirements.$"
 
 GraniteCave_StevensRoom_Text_OhBagIsFull:
 	.string "Your BAG is full. Make room and return;\n"
 	.string "I will keep the MEGA RING safe.$"
+
+GraniteCave_StevensRoom_Text_CobalionCaught:
+	.string "You've already found COBALION!\n"
+	.string "It chose a remarkable companion.\p"
+	.string "I am heading east to study these\n"
+	.string "disturbances. Keep checking the\l"
+	.string "route signs as you travel.\p"
+	.string "They record your discoveries and\n"
+	.string "show which POKéMON remain nearby.$"

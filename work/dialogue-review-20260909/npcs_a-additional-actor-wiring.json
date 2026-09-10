@@ -1,0 +1,312 @@
+[
+  {
+    "map": "AlteringCave_1F",
+    "npc": {
+      "graphics_id": "OBJ_EVENT_GFX_SCIENTIST_1",
+      "x": 6,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "AlteringCave_1F_EventScript_Researcher",
+      "flag": "0"
+    },
+    "npc_cell": {
+      "x": 6,
+      "y": 6,
+      "packed": "0x3201",
+      "metatile": "0x201",
+      "collision": 0,
+      "elevation": 3,
+      "behavior": "0x8"
+    },
+    "start": [
+      5,
+      6
+    ],
+    "start_source": {
+      "x": 5,
+      "y": 6,
+      "elevation": 0,
+      "dest_map": "MAP_ALTERING_CAVE",
+      "dest_warp_id": 1
+    },
+    "interaction_neighbors": [
+      {
+        "x": 5,
+        "y": 6,
+        "packed": "0x3227",
+        "metatile": "0x227",
+        "collision": 0,
+        "elevation": 3,
+        "behavior": "0x61"
+      },
+      {
+        "x": 6,
+        "y": 5,
+        "packed": "0x3201",
+        "metatile": "0x201",
+        "collision": 0,
+        "elevation": 3,
+        "behavior": "0x8"
+      },
+      {
+        "x": 7,
+        "y": 6,
+        "packed": "0x3201",
+        "metatile": "0x201",
+        "collision": 0,
+        "elevation": 3,
+        "behavior": "0x8"
+      }
+    ],
+    "source_path_to_interaction": [
+      [
+        5,
+        6
+      ]
+    ],
+    "component_cells_before": 16,
+    "component_cells_after": 15,
+    "disconnected_cells_excluding_npc": 0,
+    "runtime_tested": false
+  },
+  {
+    "map": "PetalburgWoods_3",
+    "npc": {
+      "graphics_id": "OBJ_EVENT_GFX_CAMPER",
+      "x": 10,
+      "y": 10,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "PetalburgWoods_3_EventScript_Ranger",
+      "flag": "0"
+    },
+    "npc_cell": {
+      "x": 10,
+      "y": 10,
+      "packed": "0x3001",
+      "metatile": "0x1",
+      "collision": 0,
+      "elevation": 3,
+      "behavior": "0x0"
+    },
+    "start": [
+      8,
+      7
+    ],
+    "start_source": {
+      "x": 8,
+      "y": 7,
+      "elevation": 0,
+      "dest_map": "MAP_PETALBURG_WOODS_2",
+      "dest_warp_id": 2
+    },
+    "interaction_neighbors": [
+      {
+        "x": 9,
+        "y": 10,
+        "packed": "0x3001",
+        "metatile": "0x1",
+        "collision": 0,
+        "elevation": 3,
+        "behavior": "0x0"
+      },
+      {
+        "x": 10,
+        "y": 11,
+        "packed": "0x3001",
+        "metatile": "0x1",
+        "collision": 0,
+        "elevation": 3,
+        "behavior": "0x0"
+      },
+      {
+        "x": 11,
+        "y": 10,
+        "packed": "0x3001",
+        "metatile": "0x1",
+        "collision": 0,
+        "elevation": 3,
+        "behavior": "0x0"
+      }
+    ],
+    "source_path_to_interaction": [
+      [
+        8,
+        7
+      ],
+      [
+        9,
+        7
+      ],
+      [
+        9,
+        8
+      ],
+      [
+        9,
+        9
+      ],
+      [
+        9,
+        10
+      ]
+    ],
+    "component_cells_before": 145,
+    "component_cells_after": 144,
+    "disconnected_cells_excluding_npc": 0,
+    "runtime_tested": false
+  },
+  {
+    "map": "ScorchedSlab_B2F",
+    "npc": {
+      "graphics_id": "OBJ_EVENT_GFX_HIKER",
+      "x": 19,
+      "y": 16,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "ScorchedSlab_B2F_EventScript_Warden",
+      "flag": "0"
+    },
+    "npc_cell": {
+      "x": 19,
+      "y": 16,
+      "packed": "0x3211",
+      "metatile": "0x211",
+      "collision": 0,
+      "elevation": 3,
+      "behavior": "0x8"
+    },
+    "start": [
+      17,
+      15
+    ],
+    "start_source": {
+      "x": 17,
+      "y": 15,
+      "elevation": 0,
+      "dest_map": "MAP_SCORCHED_SLAB_B1F",
+      "dest_warp_id": 1
+    },
+    "interaction_neighbors": [
+      {
+        "x": 19,
+        "y": 15,
+        "packed": "0x3211",
+        "metatile": "0x211",
+        "collision": 0,
+        "elevation": 3,
+        "behavior": "0x8"
+      },
+      {
+        "x": 18,
+        "y": 16,
+        "packed": "0x3211",
+        "metatile": "0x211",
+        "collision": 0,
+        "elevation": 3,
+        "behavior": "0x8"
+      },
+      {
+        "x": 19,
+        "y": 17,
+        "packed": "0x3211",
+        "metatile": "0x211",
+        "collision": 0,
+        "elevation": 3,
+        "behavior": "0x8"
+      }
+    ],
+    "source_path_to_interaction": [
+      [
+        17,
+        15
+      ],
+      [
+        18,
+        15
+      ],
+      [
+        19,
+        15
+      ]
+    ],
+    "component_cells_before": 28,
+    "component_cells_after": 27,
+    "disconnected_cells_excluding_npc": 0,
+    "runtime_tested": false
+  },
+  {
+    "map": "SandstrewnRuins",
+    "npc": {
+      "graphics_id": "OBJ_EVENT_GFX_HIKER",
+      "x": 5,
+      "y": 14,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SandstrewnRuins_EventScript_Archaeologist",
+      "flag": "0"
+    },
+    "npc_cell": {
+      "x": 5,
+      "y": 14,
+      "packed": "0x3211",
+      "metatile": "0x211",
+      "collision": 0,
+      "elevation": 3,
+      "behavior": "0x8"
+    },
+    "start": [
+      4,
+      13
+    ],
+    "start_source": {
+      "x": 4,
+      "y": 13,
+      "elevation": 0,
+      "dest_map": "MAP_DESERT_UNDERPASS",
+      "dest_warp_id": 1
+    },
+    "interaction_neighbors": [
+      {
+        "x": 4,
+        "y": 14,
+        "packed": "0x3211",
+        "metatile": "0x211",
+        "collision": 0,
+        "elevation": 3,
+        "behavior": "0x8"
+      }
+    ],
+    "source_path_to_interaction": [
+      [
+        4,
+        13
+      ],
+      [
+        4,
+        14
+      ]
+    ],
+    "component_cells_before": 4,
+    "component_cells_after": 3,
+    "disconnected_cells_excluding_npc": 0,
+    "runtime_tested": false
+  }
+]

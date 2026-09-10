@@ -351,7 +351,6 @@ BattleFrontier_BattleDomeLobby_EventScript_PrevTourneyResultsDoublesLvOpen::
 	return
 
 BattleFrontier_BattleDomeLobby_EventScript_Maniac::
-	dome_getwinnersname
 	msgbox BattleFrontier_BattleDomeLobby_Text_LastWinnerWasTough, MSGBOX_NPC
 	end
 
@@ -578,10 +577,10 @@ BattleFrontier_BattleDomeLobby_Text_PrevTourneyResultsDoublesLvOpen:
 	.string "Open Level DOUBLE BATTLE Tournament.$"
 
 BattleFrontier_BattleDomeLobby_Text_LastWinnerWasTough:
-	.string "These monitors preserve the DOME's\n"
-	.string "old tournaments.\p"
-	.string "Today's Circuit records are marked\n"
-	.string "separately. A different challenge,\l"
+	.string "These monitors used to show the\n"
+	.string "DOME's tournament results.\p"
+	.string "Now they show your CIRCUIT\n"
+	.string "records. A different challenge,\l"
 	.string "the same ambition!$"
 BattleFrontier_OutsideWest_Text_LongDreamedAboutBattleFrontier:
 	.string "The BATTLE FRONTIER…\n"

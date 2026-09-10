@@ -114,8 +114,8 @@ SSTidalRooms_Text_JedPostBattle:
 	.string "You must be an awesome TRAINER!$"
 
 SSTidalRooms_Text_JedNotEnoughMons:
-	.string "JED: You only have one POKéMON?\n"
-	.string "Isn't that just too lonesome?$"
+	.string "JED: We battle together!\n"
+	.string "Bring two battle-ready POKéMON.$"
 
 SSTidalRooms_Text_LeaIntro:
 	.string "LEA: I feel a little silly, but…\n"
@@ -131,7 +131,7 @@ SSTidalRooms_Text_LeaPostBattle:
 
 SSTidalRooms_Text_LeaNotEnoughMons:
 	.string "LEA: I wanted to battle…\n"
-	.string "But you don't even have two POKéMON…$"
+	.string "Bring two battle-ready POKéMON!$"
 
 SSTidalRooms_Text_GarretIntro:
 	.string "Ah, you've come just in time.\p"

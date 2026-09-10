@@ -187,10 +187,8 @@ void LoadPlayerParty(void)
         u32 data;
         gParties[B_TRAINER_PLAYER][i] = *GetSavedPlayerPartyMon(i);
 
-        // Refresh cached party stats when continuing with the fixed Stat Point
-        // formula. CalculateMonStats preserves fainting and clamps current HP.
-        if (P_STAT_CALCULATION >= GEN_CHAMPIONS
-         && GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES) != SPECIES_NONE)
+        // Refresh cached stats; preserve fainting and clamp current HP.
+        if (GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES) != SPECIES_NONE)
             CalculateMonStats(&gParties[B_TRAINER_PLAYER][i]);
 
         // TODO: Turn this into a save migration once those are available.

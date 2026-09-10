@@ -1,0 +1,208 @@
+tools/scaninc/scaninc -M build/emerald-test/data/sound_data.d -g build/assets -I include -I "" data/sound_data.s
+tools/scaninc/scaninc -M build/emerald-test/data/mystery_gift.d -g build/assets -I include -I "" data/mystery_gift.s
+tools/scaninc/scaninc -M build/emerald-test/data/maps.d -g build/assets -I include -I "" data/maps.s
+tools/scaninc/scaninc -M build/emerald-test/data/map_events.d -g build/assets -I include -I "" data/map_events.s
+tools/scaninc/scaninc -M build/emerald-test/data/field_effect_scripts.d -g build/assets -I include -I "" data/field_effect_scripts.s
+tools/scaninc/scaninc -M build/emerald-test/data/event_scripts.d -g build/assets -I include -I "" data/event_scripts.s
+tools/scaninc/scaninc -M build/emerald-test/data/contest_ai_scripts.d -g build/assets -I include -I "" data/contest_ai_scripts.s
+tools/scaninc/scaninc -M build/emerald-test/data/battle_scripts_2.d -g build/assets -I include -I "" data/battle_scripts_2.s
+tools/scaninc/scaninc -M build/emerald-test/data/battle_scripts_1.d -g build/assets -I include -I "" data/battle_scripts_1.s
+tools/scaninc/scaninc -M build/emerald-test/data/battle_anim_scripts.d -g build/assets -I include -I "" data/battle_anim_scripts.s
+tools/scaninc/scaninc -M build/emerald-test/src/m4a_1.d -g build/assets -I include -I "" src/m4a_1.s
+tools/scaninc/scaninc -M build/emerald-test/src/libgcnmultiboot.d -g build/assets -I include -I "" src/libgcnmultiboot.s
+tools/scaninc/scaninc -M build/emerald-test/test/battle/ai/emerald_champions_plans.d -g build/assets -I include -I tools/agbcc/include test/battle/ai/emerald_champions_plans.c
+tools/scaninc/scaninc -M build/emerald-test/src/title_screen.d -g build/assets -I include -I tools/agbcc/include src/title_screen.c
+tools/scaninc/scaninc -M build/emerald-test/src/main.d -g build/assets -I include -I tools/agbcc/include src/main.c
+tools/scaninc/scaninc -M build/emerald-test/src/emerald_champions_headless.d -g build/assets -I include -I tools/agbcc/include src/emerald_champions_headless.c
+tools/scaninc/scaninc -M build/emerald-test/src/battle_setup.d -g build/assets -I include -I tools/agbcc/include src/battle_setup.c
+tools/scaninc/scaninc -M build/emerald-test/src/battle_script_commands.d -g build/assets -I include -I tools/agbcc/include src/battle_script_commands.c
+tools/scaninc/scaninc -M build/emerald-test/src/battle_main.d -g build/assets -I include -I tools/agbcc/include src/battle_main.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/battle_main.o src/battle_main.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/battle_script_commands.o src/battle_script_commands.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/battle_setup.o src/battle_setup.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/emerald_champions_headless.o src/emerald_champions_headless.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/main.o src/main.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/title_screen.o src/title_screen.c
+tools/preproc/preproc src/libgcnmultiboot.s charmap.txt | arm-none-eabi-cpp -iquote include -Wno-trigraphs -DMODERN=1 -DTESTING=1 -DEMERALD -std=gnu17 -DEC_HEADLESS_FIXTURES=0 -I include - | tools/preproc/preproc -ie src/libgcnmultiboot.s charmap.txt | arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -o build/emerald-test/src/libgcnmultiboot.o
+tools/preproc/preproc src/m4a_1.s charmap.txt | arm-none-eabi-cpp -iquote include -Wno-trigraphs -DMODERN=1 -DTESTING=1 -DEMERALD -std=gnu17 -DEC_HEADLESS_FIXTURES=0 -I include - | tools/preproc/preproc -ie src/m4a_1.s charmap.txt | arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -o build/emerald-test/src/m4a_1.o
+tools/preproc/preproc -s data/battle_anim_scripts.s charmap.txt | arm-none-eabi-cpp -iquote include -Wno-trigraphs -DMODERN=1 -DTESTING=1 -DEMERALD -std=gnu17 -DEC_HEADLESS_FIXTURES=0 -I include - | tools/preproc/preproc -ie data/battle_anim_scripts.s charmap.txt | arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -o build/emerald-test/data/battle_anim_scripts.o
+tools/preproc/preproc -s data/battle_scripts_1.s charmap.txt | arm-none-eabi-cpp -iquote include -Wno-trigraphs -DMODERN=1 -DTESTING=1 -DEMERALD -std=gnu17 -DEC_HEADLESS_FIXTURES=0 -I include - | tools/preproc/preproc -ie data/battle_scripts_1.s charmap.txt | arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -o build/emerald-test/data/battle_scripts_1.o
+tools/preproc/preproc -s data/battle_scripts_2.s charmap.txt | arm-none-eabi-cpp -iquote include -Wno-trigraphs -DMODERN=1 -DTESTING=1 -DEMERALD -std=gnu17 -DEC_HEADLESS_FIXTURES=0 -I include - | tools/preproc/preproc -ie data/battle_scripts_2.s charmap.txt | arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -o build/emerald-test/data/battle_scripts_2.o
+tools/preproc/preproc -s data/contest_ai_scripts.s charmap.txt | arm-none-eabi-cpp -iquote include -Wno-trigraphs -DMODERN=1 -DTESTING=1 -DEMERALD -std=gnu17 -DEC_HEADLESS_FIXTURES=0 -I include - | tools/preproc/preproc -ie data/contest_ai_scripts.s charmap.txt | arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -o build/emerald-test/data/contest_ai_scripts.o
+tools/preproc/preproc -s data/event_scripts.s charmap.txt | arm-none-eabi-cpp -iquote include -Wno-trigraphs -DMODERN=1 -DTESTING=1 -DEMERALD -std=gnu17 -DEC_HEADLESS_FIXTURES=0 -I include - | tools/preproc/preproc -ie data/event_scripts.s charmap.txt | arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -o build/emerald-test/data/event_scripts.o
+tools/preproc/preproc -s data/field_effect_scripts.s charmap.txt | arm-none-eabi-cpp -iquote include -Wno-trigraphs -DMODERN=1 -DTESTING=1 -DEMERALD -std=gnu17 -DEC_HEADLESS_FIXTURES=0 -I include - | tools/preproc/preproc -ie data/field_effect_scripts.s charmap.txt | arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -o build/emerald-test/data/field_effect_scripts.o
+tools/preproc/preproc -s data/map_events.s charmap.txt | arm-none-eabi-cpp -iquote include -Wno-trigraphs -DMODERN=1 -DTESTING=1 -DEMERALD -std=gnu17 -DEC_HEADLESS_FIXTURES=0 -I include - | tools/preproc/preproc -ie data/map_events.s charmap.txt | arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -o build/emerald-test/data/map_events.o
+tools/preproc/preproc -s data/maps.s charmap.txt | arm-none-eabi-cpp -iquote include -Wno-trigraphs -DMODERN=1 -DTESTING=1 -DEMERALD -std=gnu17 -DEC_HEADLESS_FIXTURES=0 -I include - | tools/preproc/preproc -ie data/maps.s charmap.txt | arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -o build/emerald-test/data/maps.o
+tools/preproc/preproc -s data/mystery_gift.s charmap.txt | arm-none-eabi-cpp -iquote include -Wno-trigraphs -DMODERN=1 -DTESTING=1 -DEMERALD -std=gnu17 -DEC_HEADLESS_FIXTURES=0 -I include - | tools/preproc/preproc -ie data/mystery_gift.s charmap.txt | arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -o build/emerald-test/data/mystery_gift.o
+tools/preproc/preproc -s data/sound_data.s charmap.txt | arm-none-eabi-cpp -iquote include -Wno-trigraphs -DMODERN=1 -DTESTING=1 -DEMERALD -std=gnu17 -DEC_HEADLESS_FIXTURES=0 -I include - | tools/preproc/preproc -ie data/sound_data.s charmap.txt | arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -o build/emerald-test/data/sound_data.o
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/battle/ai/emerald_champions_plans.o test/battle/ai/emerald_champions_plans.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 4
+[0] EC live review Travis timing: six-player bench: [32mPASS[0m
+REVIEW_INPUT trainer=218 slot=0 species=567 lv=38 HP=117 Atk=147 Def=66 SpA=90 SpD=66 Spe=136 item=348 ability=129
+REVIEW_INPUT trainer=218 slot=1 species=673 lv=38 HP=177 Atk=127 Def=64 SpA=68 SpD=78 Spe=88 item=472 ability=157
+REVIEW_INPUT trainer=218 slot=2 species=558 lv=38 HP=113 Atk=128 Def=119 SpA=59 SpD=73 Spe=81 item=460 ability=5
+REVIEW_INPUT trainer=218 slot=3 species=123 lv=38 HP=113 Atk=124 Def=77 SpA=52 SpD=77 Spe=132 item=494 ability=101
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Acrobatics target=0
+AI switch turn=1 actor=3 party=2
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=2 actor=1 move=Acrobatics target=0
+AI decision turn=2 actor=3 move=Rock Slide target=0
+REVIEW_AFTER board=99 turns=1 reserves=0 species=567/558 HP=117/113 foes=98/114 faints=0/0 initialFrames=43
+REVIEW_STATE actor=1 move=Acrobatics PP=14/10/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=129 item=348
+REVIEW_STATE actor=3 move=- PP=5/15/10/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=5 item=460
+REVIEW_TIMING setup=7 bothActors=40 complete=47
+REVIEW_INPUT trainer=218 slot=0 species=567 lv=38 HP=117 Atk=147 Def=66 SpA=90 SpD=66 Spe=136 item=348 ability=129
+REVIEW_INPUT trainer=218 slot=1 species=673 lv=38 HP=177 Atk=127 Def=64 SpA=68 SpD=78 Spe=88 item=472 ability=157
+REVIEW_INPUT trainer=218 slot=2 species=558 lv=38 HP=113 Atk=128 Def=119 SpA=59 SpD=73 Spe=81 item=460 ability=5
+REVIEW_INPUT trainer=218 slot=3 species=123 lv=38 HP=113 Atk=124 Def=77 SpA=52 SpD=77 Spe=132 item=494 ability=101
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Rock Slide target=0
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Dual Wingbeat target=0
+AI decision turn=2 actor=1 move=Rock Slide target=0
+AI decision turn=2 actor=3 move=Dual Wingbeat target=0
+REVIEW_AFTER board=99 turns=1 reserves=1 species=558/123 HP=113/113 foes=98/114 faints=0/0 initialFrames=23
+REVIEW_STATE actor=1 move=Rock Slide PP=5/15/9/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=5 item=460
+REVIEW_STATE actor=3 move=Dual Wingbeat PP=20/9/20/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=101 item=494
+REVIEW_TIMING setup=8 bothActors=18 complete=26
+[1] EC live review Travis: sand pressure and reserves: [32mPASS[0m
+REVIEW_INPUT trainer=218 slot=0 species=567 lv=38 HP=117 Atk=147 Def=66 SpA=90 SpD=66 Spe=136 item=348 ability=129
+REVIEW_INPUT trainer=218 slot=1 species=673 lv=38 HP=177 Atk=127 Def=64 SpA=68 SpD=78 Spe=88 item=472 ability=157
+REVIEW_INPUT trainer=218 slot=2 species=558 lv=38 HP=113 Atk=128 Def=119 SpA=59 SpD=73 Spe=81 item=460 ability=5
+REVIEW_INPUT trainer=218 slot=3 species=123 lv=38 HP=113 Atk=124 Def=77 SpA=52 SpD=77 Spe=132 item=494 ability=101
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Acrobatics target=2
+AI decision turn=1 actor=2 move=Ice Punch target=3
+AI decision turn=1 actor=3 move=Horn Leech target=2
+AI decision turn=2 actor=1 move=Acrobatics target=0
+AI decision turn=2 actor=3 move=Horn Leech target=0
+REVIEW_AFTER board=10 turns=1 reserves=0 species=567/673 HP=83/177 foes=120/0 faints=0/1 initialFrames=39
+REVIEW_STATE actor=1 move=Acrobatics PP=14/10/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=129 item=0
+REVIEW_STATE actor=3 move=Horn Leech PP=9/20/10/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=157 item=472
+REVIEW_INPUT trainer=218 slot=0 species=567 lv=38 HP=117 Atk=147 Def=66 SpA=90 SpD=66 Spe=136 item=348 ability=129
+REVIEW_INPUT trainer=218 slot=1 species=673 lv=38 HP=177 Atk=127 Def=64 SpA=68 SpD=78 Spe=88 item=472 ability=157
+REVIEW_INPUT trainer=218 slot=2 species=558 lv=38 HP=113 Atk=128 Def=119 SpA=59 SpD=73 Spe=81 item=460 ability=5
+REVIEW_INPUT trainer=218 slot=3 species=123 lv=38 HP=113 Atk=124 Def=77 SpA=52 SpD=77 Spe=132 item=494 ability=101
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Acrobatics target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Bulk Up target=3
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Horn Leech target=0
+REVIEW_AFTER board=11 turns=1 reserves=0 species=567/673 HP=33/173 foes=51/135 faints=0/0 initialFrames=35
+REVIEW_STATE actor=1 move=Acrobatics PP=14/10/20/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=129 item=0
+REVIEW_STATE actor=3 move=Bulk Up PP=10/19/10/5 Atk=7 Def=7 SpA=6 SpD=6 Spe=6 status=0 ability=157 item=472
+REVIEW_INPUT trainer=218 slot=0 species=567 lv=38 HP=117 Atk=147 Def=66 SpA=90 SpD=66 Spe=136 item=348 ability=129
+REVIEW_INPUT trainer=218 slot=1 species=673 lv=38 HP=177 Atk=127 Def=64 SpA=68 SpD=78 Spe=88 item=472 ability=157
+REVIEW_INPUT trainer=218 slot=2 species=558 lv=38 HP=113 Atk=128 Def=119 SpA=59 SpD=73 Spe=81 item=460 ability=5
+REVIEW_INPUT trainer=218 slot=3 species=123 lv=38 HP=113 Atk=124 Def=77 SpA=52 SpD=77 Spe=132 item=494 ability=101
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Horn Leech target=0
+AI decision turn=2 actor=1 move=Acrobatics target=2
+AI decision turn=2 actor=3 move=Horn Leech target=0
+REVIEW_AFTER board=12 turns=1 reserves=0 species=567/673 HP=117/164 foes=25/135 faints=0/0 initialFrames=40
+REVIEW_STATE actor=1 move=Protect PP=15/10/20/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=129 item=348
+REVIEW_STATE actor=3 move=Horn Leech PP=9/20/10/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=157 item=472
+REVIEW_INPUT trainer=218 slot=0 species=567 lv=38 HP=117 Atk=147 Def=66 SpA=90 SpD=66 Spe=136 item=348 ability=129
+REVIEW_INPUT trainer=218 slot=1 species=673 lv=38 HP=177 Atk=127 Def=64 SpA=68 SpD=78 Spe=88 item=472 ability=157
+REVIEW_INPUT trainer=218 slot=2 species=558 lv=38 HP=113 Atk=128 Def=119 SpA=59 SpD=73 Spe=81 item=460 ability=5
+REVIEW_INPUT trainer=218 slot=3 species=123 lv=38 HP=113 Atk=124 Def=77 SpA=52 SpD=77 Spe=132 item=494 ability=101
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Air Slash target=3
+AI decision turn=1 actor=3 move=Horn Leech target=0
+AI decision turn=2 actor=1 move=Acrobatics target=0
+AI decision turn=2 actor=3 move=Horn Leech target=0
+REVIEW_AFTER board=13 turns=1 reserves=0 species=567/673 HP=117/79 foes=1/114 faints=0/0 initialFrames=26
+REVIEW_STATE actor=1 move=Protect PP=15/10/20/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=129 item=348
+REVIEW_STATE actor=3 move=Horn Leech PP=9/20/10/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=157 item=472
+REVIEW_INPUT trainer=218 slot=0 species=567 lv=38 HP=117 Atk=147 Def=66 SpA=90 SpD=66 Spe=136 item=348 ability=129
+REVIEW_INPUT trainer=218 slot=1 species=673 lv=38 HP=177 Atk=127 Def=64 SpA=68 SpD=78 Spe=88 item=472 ability=157
+REVIEW_INPUT trainer=218 slot=2 species=558 lv=38 HP=113 Atk=128 Def=119 SpA=59 SpD=73 Spe=81 item=460 ability=5
+REVIEW_INPUT trainer=218 slot=3 species=123 lv=38 HP=113 Atk=124 Def=77 SpA=52 SpD=77 Spe=132 item=494 ability=101
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Horn Leech target=0
+AI decision turn=2 actor=1 move=Acrobatics target=2
+AI decision turn=2 actor=3 move=Horn Leech target=0
+REVIEW_AFTER board=14 turns=1 reserves=0 species=567/673 HP=117/177 foes=25/135 faints=0/0 initialFrames=40
+REVIEW_STATE actor=1 move=Protect PP=15/10/20/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=129 item=348
+REVIEW_STATE actor=3 move=Horn Leech PP=9/20/10/5 Atk=7 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=157 item=472
+REVIEW_INPUT trainer=218 slot=0 species=567 lv=38 HP=117 Atk=147 Def=66 SpA=90 SpD=66 Spe=136 item=348 ability=129
+REVIEW_INPUT trainer=218 slot=1 species=673 lv=38 HP=177 Atk=127 Def=64 SpA=68 SpD=78 Spe=88 item=472 ability=157
+REVIEW_INPUT trainer=218 slot=2 species=558 lv=38 HP=113 Atk=128 Def=119 SpA=59 SpD=73 Spe=81 item=460 ability=5
+REVIEW_INPUT trainer=218 slot=3 species=123 lv=38 HP=113 Atk=124 Def=77 SpA=52 SpD=77 Spe=132 item=494 ability=101
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=X-Scissor target=0
+AI decision turn=1 actor=2 move=Ice Punch target=3
+AI decision turn=1 actor=3 move=Dual Wingbeat target=0
+AI decision turn=2 actor=1 move=X-Scissor target=2
+AI decision turn=2 actor=3 move=Dual Wingbeat target=2
+REVIEW_AFTER board=10 turns=1 reserves=1 species=558/123 HP=93/57 foes=0/155 faints=0/1 initialFrames=20
+REVIEW_STATE actor=1 move=X-Scissor PP=5/15/10/14 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=5 item=460
+REVIEW_STATE actor=3 move=Dual Wingbeat PP=20/9/20/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=101 item=494
+REVIEW_INPUT trainer=218 slot=0 species=567 lv=38 HP=117 Atk=147 Def=66 SpA=90 SpD=66 Spe=136 item=348 ability=129
+REVIEW_INPUT trainer=218 slot=1 species=673 lv=38 HP=177 Atk=127 Def=64 SpA=68 SpD=78 Spe=88 item=472 ability=157
+REVIEW_INPUT trainer=218 slot=2 species=558 lv=38 HP=113 Atk=128 Def=119 SpA=59 SpD=73 Spe=81 item=460 ability=5
+REVIEW_INPUT trainer=218 slot=3 species=123 lv=38 HP=113 Atk=124 Def=77 SpA=52 SpD=77 Spe=132 item=494 ability=101
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Rock Slide target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Bug Bite target=2
+AI decision turn=2 actor=1 move=Rock Slide target=0
+AI decision turn=2 actor=3 move=Quick Attack target=0
+REVIEW_AFTER board=11 turns=1 reserves=1 species=558/123 HP=37/75 foes=30/59 faints=0/0 initialFrames=18
+REVIEW_STATE actor=1 move=Rock Slide PP=5/15/9/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=5 item=460
+REVIEW_STATE actor=3 move=Bug Bite PP=20/10/19/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=101 item=494
+REVIEW_INPUT trainer=218 slot=0 species=567 lv=38 HP=117 Atk=147 Def=66 SpA=90 SpD=66 Spe=136 item=348 ability=129
+REVIEW_INPUT trainer=218 slot=1 species=673 lv=38 HP=177 Atk=127 Def=64 SpA=68 SpD=78 Spe=88 item=472 ability=157
+REVIEW_INPUT trainer=218 slot=2 species=558 lv=38 HP=113 Atk=128 Def=119 SpA=59 SpD=73 Spe=81 item=460 ability=5
+REVIEW_INPUT trainer=218 slot=3 species=123 lv=38 HP=113 Atk=124 Def=77 SpA=52 SpD=77 Spe=132 item=494 ability=101
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Shell Smash target=1
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Dual Wingbeat target=2
+AI decision turn=2 actor=1 move=Shell Smash target=1
+AI decision turn=2 actor=3 move=Dual Wingbeat target=0
+REVIEW_AFTER board=12 turns=1 reserves=1 species=558/123 HP=107/113 foes=98/0 faints=0/1 initialFrames=19
+REVIEW_STATE actor=1 move=- PP=5/15/10/15 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=5 item=460
+REVIEW_STATE actor=3 move=Dual Wingbeat PP=20/9/20/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=101 item=494
+REVIEW_INPUT trainer=218 slot=0 species=567 lv=38 HP=117 Atk=147 Def=66 SpA=90 SpD=66 Spe=136 item=348 ability=129
+REVIEW_INPUT trainer=218 slot=1 species=673 lv=38 HP=177 Atk=127 Def=64 SpA=68 SpD=78 Spe=88 item=472 ability=157
+REVIEW_INPUT trainer=218 slot=2 species=558 lv=38 HP=113 Atk=128 Def=119 SpA=59 SpD=73 Spe=81 item=460 ability=5
+REVIEW_INPUT trainer=218 slot=3 species=123 lv=38 HP=113 Atk=124 Def=77 SpA=52 SpD=77 Spe=132 item=494 ability=101
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=X-Scissor target=0
+AI decision turn=1 actor=2 move=Air Slash target=3
+AI decision turn=1 actor=3 move=Dual Wingbeat target=0
+AI decision turn=2 actor=1 move=X-Scissor target=2
+AI decision turn=2 actor=3 move=Dual Wingbeat target=2
+REVIEW_AFTER board=13 turns=1 reserves=1 species=558/123 HP=79/29 foes=0/53 faints=0/1 initialFrames=20
+REVIEW_STATE actor=1 move=X-Scissor PP=5/15/10/14 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=5 item=460
+REVIEW_STATE actor=3 move=Dual Wingbeat PP=20/9/20/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=101 item=494
+REVIEW_INPUT trainer=218 slot=0 species=567 lv=38 HP=117 Atk=147 Def=66 SpA=90 SpD=66 Spe=136 item=348 ability=129
+REVIEW_INPUT trainer=218 slot=1 species=673 lv=38 HP=177 Atk=127 Def=64 SpA=68 SpD=78 Spe=88 item=472 ability=157
+REVIEW_INPUT trainer=218 slot=2 species=558 lv=38 HP=113 Atk=128 Def=119 SpA=59 SpD=73 Spe=81 item=460 ability=5
+REVIEW_INPUT trainer=218 slot=3 species=123 lv=38 HP=113 Atk=124 Def=77 SpA=52 SpD=77 Spe=132 item=494 ability=101
+AI decision turn=1 actor=0 move=Taunt target=3
+AI decision turn=1 actor=1 move=Shell Smash target=1
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Dual Wingbeat target=2
+AI decision turn=2 actor=1 move=Shell Smash target=1
+AI decision turn=2 actor=3 move=Dual Wingbeat target=0
+REVIEW_AFTER board=14 turns=1 reserves=1 species=558/123 HP=113/113 foes=98/0 faints=0/1 initialFrames=19
+REVIEW_STATE actor=1 move=Shell Smash PP=5/14/10/15 Atk=8 Def=6 SpA=8 SpD=6 Spe=8 status=0 ability=5 item=0
+REVIEW_STATE actor=3 move=Dual Wingbeat PP=20/9/20/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=101 item=494
+
+- Tests [32mPASSED[0m:          2
+- Tests [34mTOTAL[0m:           2
+

@@ -108,7 +108,7 @@ enum {
 };
 
 static void SwapDomeTrainers(int, int, u16 *);
-static void CalcDomeMonStats(const struct TrainerMon *fmon, int level, u8 ivs, int *stats);
+static void CalcDomeMonStats(const struct TrainerMon *fmon, int level, int *stats);
 static void CreateDomeOpponentMons(u16);
 static int SelectOpponentMons_Good(u16, bool8);
 static int SelectOpponentMons_Bad(u16, bool8);
@@ -1917,7 +1917,6 @@ static void InitDomeTrainers(void)
     int monId;
     u16 *rankingScores;
     int *statValues;
-    u8 ivs = 0;
 
     species[0] = SPECIES_NONE;
     species[1] = SPECIES_NONE;
@@ -2038,11 +2037,10 @@ static void InitDomeTrainers(void)
     {
         monTypesBits = 0;
         rankingScores[i] = 0;
-        ivs = GetFrontierTrainerFixedIvs(DOME_TRAINERS[i].trainerId);
         for (j = 0; j < FRONTIER_PARTY_SIZE; j++)
         {
             CalcDomeMonStats(&gFacilityTrainerMons[DOME_MONS[i][j]],
-                             monLevel, ivs, statValues);
+                             monLevel, statValues);
 
             rankingScores[i] += statValues[STAT_ATK];
             rankingScores[i] += statValues[STAT_DEF];
@@ -2113,40 +2111,11 @@ static void InitDomeTrainers(void)
     Free(statValues);
 }
 
-#define CALC_STAT(base, statIndex)                                                          \
-{                                                                                           \
-    u8 baseStat = gSpeciesInfo[fmon->species].base;                                                 \
-    stats[statIndex] = (((2 * baseStat + ivs + evs[statIndex] / 4) * level) / 100) + 5;     \
-    stats[statIndex] = (u8) ModifyStatByNature(fmon->nature, stats[statIndex], statIndex);        \
-}
-
-static void CalcDomeMonStats(const struct TrainerMon *fmon, int level, u8 ivs, int *stats)
+static void CalcDomeMonStats(const struct TrainerMon *fmon, int level, int *stats)
 {
-    int evs[NUM_STATS];
-
     for (enum Stat i = 0; i < NUM_STATS; i++)
-    {
-        if (fmon->ev != NULL)
-            evs[i] = fmon->ev[i];
-        else
-            evs[i] = 0;
-    }
-
-    if (HasShedinjaHPHandling(fmon->species))
-    {
-        stats[STAT_HP] = 1;
-    }
-    else
-    {
-        int n = 2 * GetSpeciesBaseHP(fmon->species);
-        stats[STAT_HP] = (((n + ivs + evs[STAT_HP] / 4) * level) / 100) + level + 10;
-    }
-
-    CALC_STAT(baseAttack, STAT_ATK);
-    CALC_STAT(baseDefense, STAT_DEF);
-    CALC_STAT(baseSpeed, STAT_SPEED);
-    CALC_STAT(baseSpAttack, STAT_SPATK);
-    CALC_STAT(baseSpDefense, STAT_SPDEF);
+        stats[i] = CalculateSpeciesStat(fmon->species, fmon->nature, i, level,
+                                       fmon->ev != NULL ? fmon->ev[i] : 0);
 }
 
 static void SwapDomeTrainers(int id1, int id2, u16 *statsArray)
@@ -5685,7 +5654,6 @@ static void InitRandomTourneyTreeResults(void)
     enum FrontierLevelMode lvlMode;
     u16 *statSums;
     int *statValues;
-    u8 ivs = 0;
 
     species[0] = SPECIES_NONE;
     species[1] = SPECIES_NONE;
@@ -5752,11 +5720,10 @@ static void InitRandomTourneyTreeResults(void)
     {
         monTypesBits = 0;
         statSums[i] = 0;
-        ivs = GetFrontierTrainerFixedIvs(DOME_TRAINERS[i].trainerId);
         for (j = 0; j < FRONTIER_PARTY_SIZE; j++)
         {
             CalcDomeMonStats(&gFacilityTrainerMons[DOME_MONS[i][j]],
-                             monLevel, ivs, statValues);
+                             monLevel, statValues);
 
             statSums[i] += statValues[STAT_ATK];
             statSums[i] += statValues[STAT_DEF];

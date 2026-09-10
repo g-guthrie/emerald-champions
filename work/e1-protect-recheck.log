@@ -1,0 +1,143 @@
+tools/scaninc/scaninc -M build/emerald-test/src/battle_ai_util.d -g build/assets -I include -I tools/agbcc/include src/battle_ai_util.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/battle_ai_util.o src/battle_ai_util.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+[7] EC expert pair: non-Flying priority Roost recovers under continued pressure: [32mPASS[0m
+[6] EC expert pair: timely primary Charm protects its user: [32mPASS[0m
+[4] EC expert pair: preserve the Plus Minus partner before taking a boosted knockout: [32mPASS[0m
+[1] EC expert pair: Glare enables a partner KO but not through a paralysis cure: [32mPASS[0m
+[2] EC expert pair: Feint opens partner damage through Protect but not immunity: [32mPASS[0m
+[0] EC expert pair: secondary paralysis earns probabilistic partner order with a Cloak control: [32mPASS[0m
+[5] EC expert pair: Nuzzle speed control distinguishes primary and secondary immunity: [32mPASS[0m
+[3] EC expert pair: Knock Off timing removes only the later offensive item boost: [32mPASS[0m
+[7] EC expert pair: reciprocal Helping Hand secures its concrete partner's spread KOs: [32mPASS[0m
+[7] EC expert pair: Helping Hand requires a damaging partner action: [32mPASS[0m
+[5] EC expert pair: Coaching values the partner attack and physical survival: [32mPASS[0m
+[1] EC expert pair: Trick Room never cancels itself and is reset after expiry: [32mPASS[0m
+[0] EC expert pair: Klutz transfers Flame Orb to a vulnerable physical attacker: [32mPASS[0m
+[2] EC expert pair: Acid Spray enables only a later unblocked special attack: [32mPASS[0m
+[3] EC expert pair: beneficial weather is established once: [32mPASS[0m
+[7] EC expert pair: Follow Me protects the Trick Room setter: [32mPASS[0m
+[6] EC expert pair: candidate evaluation restores board caches field and RNG: [32mPASS[0m
+[4] EC expert pair: reciprocal Justified activation preserves the recipient's attack: [32mPASS[0m
+[4] EC expert pair: recoil can trigger Gluttony healing unless Unnerve blocks it 1/3: [31mFAIL[0m
+test/battle/ai/ai_doubles.c:301: Unmatched EXPECT_MOVE Protect, got Double-Edge
+[1] EC expert pair: Motor Drive activation earns its same-turn speed crossing: [32mPASS[0m
+[0] EC expert pair: Cotton Guard earns only timely physical mitigation: [32mPASS[0m
+[5] EC expert pair: Perish countdown survives and simultaneous deadlines choose distinct escapes: [32mPASS[0m
+[6] EC expert pair: timing probe with full parties and legal Mega reserves: [32mPASS[0m
+full-party paired decision selected=1 frames=30
+[2] EC expert pair: candidate Trace copies deterministic abilities and restores state: [32mPASS[0m
+[7] EC expert pair: damage-based recoil distinguishes unsafe and surviving attacks: [32mPASS[0m
+[1] EC expert pair: partner healing preserves the slower winning attack: [32mPASS[0m
+[4] EC expert pair: personality flags preserve an accurate guaranteed KO: [32mPASS[0m
+[6] EC expert pair: HP-powered damage follows public faster chip: [32mPASS[0m
+[0] EC expert pair: Iron Defense mitigates only later physical attacks: [32mPASS[0m
+[2] EC expert pair: Rock Tomb earns a partner crossing unless Cloak blocks it: [32mPASS[0m
+[4] EC expert pair: two eligible partners commit only one Mega for their owner: [32mPASS[0m
+[3] EC expert pair: Life Orb costs a hit and stolen Sitrus heals before recoil: [32mPASS[0m
+[0] EC Perish policy: fresh trapped targets, escape timing and immunity guards: [32mPASS[0m
+[7] EC expert pair: prevent a priority hit from activating Defeatist before attack: [32mPASS[0m
+[3] EC live review E0001: actual reserves respect Grass and Magic Bounce: [32mPASS[0m
+AI decision turn=1 actor=0 move=Bullet Seed target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Psychic target=1
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Giga Drain target=2
+AI decision turn=2 actor=3 move=Quick Attack target=2
+E1 reserves indices=2/3 executed=Protect/Protect HP=47/35 TaillowStatus=128
+[6] EC expert pair: Sleep Powder denial respects native accuracy Grass and Goggles: [32mPASS[0m
+[3] EC authored strategy: Parker repeats Earthquake safely through Telepathy: [32mPASS[0m
+[3] EC battle plans: compiled directives follow trainer ownership and exclude other battle namespaces: [32mPASS[0m
+[1] EC expert pair: Wish survives modest pressure and pays at the next end turn: [32mPASS[0m
+[0] EC live review E0001: actual Treecko pair against faster Inner Focus pressure: [32mPASS[0m
+AI decision turn=1 actor=0 move=Drain Punch target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Thunderbolt target=0
+E1 pressure sash=0 executed=Protect/Protect opponentHP=35/34 playerHP=41/41 playerSpeeds=39/39 opponentSpeeds=36/40
+AI decision turn=1 actor=0 move=Drain Punch target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Seed Bomb target=2
+AI decision turn=2 actor=3 move=Electroweb target=0
+E1 pressure sash=1 executed=Protect/Protect opponentHP=35/34 playerHP=41/41 playerSpeeds=39/39 opponentSpeeds=36/40
+[7] EC live review E0001: native counterfactual sash pressure lines 2/2: [31mFAIL[0m
+AI decision turn=1 actor=0 move=Drain Punch target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+E1 counterfactual web=0 TreeckoHP=35 PikaPartyHP=3 foesHP=7/41 foeSpeedStages=6/6
+AI decision turn=1 actor=0 move=Drain Punch target=1
+AI decision turn=1 actor=1 move=Seed Bomb target=0
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Electroweb target=0
+work/rival_ai_probe.inc:1065: TURN 1 incomplete
+[5] EC expert pair: offensive drops protect a slower partner only when timely and unblocked: [32mPASS[0m
+[1] EC expert pair: Quiver Dance mitigates only later special attacks: [32mPASS[0m
+[5] EC authored strategy: Connie's mutual Surf activates Storm Drain: [32mPASS[0m
+[2] EC authored strategy: Maura escapes her countdown while retaining the trap: [32mPASS[0m
+[1] EC expert pair: Stamina changes the followup after partner chip: [32mPASS[0m
+[1] EC authored strategy: Parker preserves a nonimmune reserve beside Earthquake: [32mPASS[0m
+[1] EC authored strategy: Flannery advances Eruption before opposing Rock Slide: [32mPASS[0m
+[2] EC authored strategy: Tabitha activation requires survival and a useful boost: [32mPASS[0m
+[6] EC live review E0001: actual Hoenn rival opening decisions: [32mPASS[0m
+AI decision turn=1 actor=0 move=Liquidation target=1
+AI decision turn=1 actor=1 move=Seed Bomb target=0
+AI decision turn=1 actor=2 move=Flamethrower target=1
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI switch turn=1 actor=1 party=3
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Protect target=3
+E1 trainer=520 disruption=0 completedTurns=1 left=Taillow lastExecuted=- hp=35/35 right=Pikachu lastExecuted=Thunderbolt hp=34/34 playerHP=0/51 versus 41/41 levels=14/14/12/12
+AI decision turn=1 actor=0 move=Bullet Seed target=1
+AI decision turn=1 actor=1 move=Liquidation target=2
+AI decision turn=1 actor=2 move=Flamethrower target=1
+AI decision turn=1 actor=3 move=Fake Out target=0
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Protect target=3
+E1 trainer=526 disruption=0 completedTurns=1 left=Mudkip lastExecuted=Liquidation hp=17/37 right=Pikachu lastExecuted=Fake Out hp=34/34 playerHP=39/48 versus 20/41 levels=14/14/12/12
+AI decision turn=1 actor=0 move=Bullet Seed target=1
+AI decision turn=1 actor=1 move=Flamethrower target=0
+AI decision turn=1 actor=2 move=Liquidation target=1
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Protect target=3
+E1 trainer=523 disruption=0 completedTurns=1 left=Torchic lastExecuted=Flamethrower hp=33/36 right=Pikachu lastExecuted=Fake Out hp=34/34 playerHP=0/48 versus 46/51 levels=14/14/12/12
+AI decision turn=1 actor=0 move=Liquidation target=1
+AI decision turn=1 actor=1 move=Seed Bomb target=0
+AI decision turn=1 actor=2 move=Will-O-Wisp target=1
+AI decision turn=1 actor=3 move=Thunderbolt target=0
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Protect target=3
+E1 trainer=529 disruption=1 completedTurns=1 left=Treecko lastExecuted=Seed Bomb hp=30/35 right=Pikachu lastExecuted=Thunderbolt hp=34/34 playerHP=0/51 versus 41/41 levels=14/14/12/12
+AI decision turn=1 actor=0 move=Bullet Seed target=1
+AI decision turn=1 actor=1 move=Liquidation target=2
+AI decision turn=1 actor=2 move=Will-O-Wisp target=1
+AI decision turn=1 actor=3 move=Fake Out target=0
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Protect target=3
+E1 trainer=535 disruption=1 completedTurns=1 left=Mudkip lastExecuted=Liquidation hp=32/37 right=Pikachu lastExecuted=Fake Out hp=34/34 playerHP=39/48 versus 20/41 levels=14/14/12/12
+AI decision turn=1 actor=0 move=Bullet Seed target=1
+AI decision turn=1 actor=1 move=Flamethrower target=0
+AI decision turn=1 actor=2 move=Wide Guard target=2
+AI decision turn=1 actor=3 move=Fake Out target=2
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Protect target=3
+E1 trainer=532 disruption=1 completedTurns=1 left=Torchic lastExecuted=Flamethrower hp=33/36 right=Pikachu lastExecuted=Fake Out hp=34/34 playerHP=0/48 versus 46/51 levels=14/14/12/12
+
+  [31mFAILED[0m tests:
+  - [31mtest/battle/ai/ai_doubles.c:269[0m: EC expert pair: recoil can trigger Gluttony healing unless Unnerve blocks it 1/3: 301: Unmatched EXPECT_MOVE Protect, got Double-Edge
+  - [31mwork/rival_ai_probe.inc:1065[0m: EC live review E0001: native counterfactual sash pressure lines 2/2: 1065: TURN 1 incomplete
+
+- Tests [31mFAILED[0m:          2    Add TESTS='X' to run tests with the defined prefix.
+- Tests [32mPASSED[0m:          48
+- Tests [34mTOTAL[0m:           50
+
+make: *** [check] Error 1

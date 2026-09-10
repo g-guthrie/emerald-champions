@@ -1,0 +1,17 @@
+python3 tools/learnset_helpers/make_tutors.py tools/learnset_helpers/build/all_tutors.json
+tools/scaninc/scaninc -M build/emerald-test/data/event_scripts.d -g build/assets -I include -I "" data/event_scripts.s
+tools/scaninc/scaninc -M build/emerald-test/test/battle/hold_effect/restore_pct_hp.d -g build/assets -I include -I tools/agbcc/include test/battle/hold_effect/restore_pct_hp.c
+tools/preproc/preproc -s data/event_scripts.s charmap.txt | arm-none-eabi-cpp -iquote include -Wno-trigraphs -DMODERN=1 -DTESTING=1 -DEMERALD -std=gnu17 -DEC_HEADLESS_FIXTURES=0 -I include - | tools/preproc/preproc -ie data/event_scripts.s charmap.txt | arm-none-eabi-as -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym EMERALD=1 -o build/emerald-test/data/event_scripts.o
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/battle/hold_effect/restore_pct_hp.o test/battle/hold_effect/restore_pct_hp.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 4
+[0] Berry policy review: Stuff Cheeks still forces consumption at full HP through Unnerve: [32mPASS[0m
+[1] Berry policy review: Ripen and Unnerve still exclude Berry Juice: [32mPASS[0m
+
+- Tests [32mPASSED[0m:          2
+- Tests [34mTOTAL[0m:           2
+

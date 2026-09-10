@@ -1,0 +1,21 @@
+{
+  "maps": 2,
+  "tables": 2,
+  "slots": 11,
+  "before_direct": 652,
+  "after_direct": 654,
+  "added": [
+    "SPECIES_ARBOLIVA",
+    "SPECIES_BELLOSSOM",
+    "SPECIES_GREEDENT",
+    "SPECIES_HYDRAPPLE",
+    "SPECIES_KRICKETUNE",
+    "SPECIES_SPIDOPS"
+  ],
+  "removed_direct": [
+    "SPECIES_KRICKETOT",
+    "SPECIES_ODDISH",
+    "SPECIES_SKWOVET",
+    "SPECIES_TAROUNTULA"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "elf": "/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/pokeemerald-opening-dialogue-headless.elf",
+  "param_symbol": "0x0200220c",
+  "rendered": [
+    {
+      "frames": 1500,
+      "keys": [
+        [
+          600,
+          2,
+          "A"
+        ]
+      ],
+      "name": "birch-introduction",
+      "pixel_sha256": "100f9b2ddfb094104c48ebf39a738a4e001836f35172fd3bc81258c470d9ab8e",
+      "png_sha256": "840e3f43fc9ae788eb9569fef9e328c6b8fbcba0b5917e84657d6bf85993bad4",
+      "scenario_id": 34,
+      "screenshot": "work/dialogue-opening-20260910/visual-birch/birch-introduction.png",
+      "verified_runtime_state": false,
+      "video_hash": "ad1ed5edd0e2940d"
+    }
+  ],
+  "rom": "/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/pokeemerald-opening-dialogue-headless.gba",
+  "rom_sha256": "64af1fe2110781cb17bc05584eb76555939e6a0b8129cdbb517a5232b43cd72c",
+  "scenario_symbol": "0x0200228c",
+  "schema_version": 1
+}

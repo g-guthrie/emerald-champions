@@ -1,0 +1,20 @@
+89 gift kind 2 id 16498 0 RESULT frames=12000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=8e54f3dda82091e8 nonzero_pixels=38325 save_bytes=0
+READ width=4 address=0200224c value=00000002
+READ width=4 address=02002274 value=00000000
+READ width=4 address=02002278 value=00000000
+READ width=4 address=0200225c value=00000022
+READ width=4 address=02002268 value=00000019
+READ width=4 address=0200226c value=0000001f
+READ width=4 address=0200227c value=00000001
+READ width=1 address=020336c0 value=00000002
+ 
+90 gift kind 2 id 16498 0 RESULT frames=12000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=188475fd8b8cf8ad nonzero_pixels=38301 save_bytes=0
+READ width=4 address=0200224c value=00000002
+READ width=4 address=02002274 value=00000000
+READ width=4 address=02002278 value=00000000
+READ width=4 address=0200225c value=00000022
+READ width=4 address=02002268 value=0000001a
+READ width=4 address=0200226c value=0000001f
+READ width=4 address=0200227c value=00000001
+READ width=1 address=020336c0 value=00000002
+ 

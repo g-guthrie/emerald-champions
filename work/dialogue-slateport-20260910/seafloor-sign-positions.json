@@ -1,0 +1,54 @@
+{
+  "SeafloorCavern_Entrance": [
+    11,
+    3
+  ],
+  "SeafloorCavern_Room1": [
+    6,
+    17
+  ],
+  "SeafloorCavern_Room2": [
+    11,
+    7
+  ],
+  "SeafloorCavern_Room3": [
+    10,
+    13
+  ],
+  "SeafloorCavern_Room4": [
+    12,
+    2
+  ],
+  "SeafloorCavern_Room5": [
+    5,
+    2
+  ],
+  "SeafloorCavern_Room6": [
+    10,
+    20
+  ],
+  "SeafloorCavern_Room7": [
+    4,
+    22
+  ],
+  "SeafloorCavern_Room8": [
+    3,
+    11
+  ],
+  "Route126": [
+    13,
+    0
+  ],
+  "Route127": [
+    13,
+    22
+  ],
+  "Route128": [
+    64,
+    29
+  ],
+  "Underwater_Route126": [
+    46,
+    66
+  ]
+}

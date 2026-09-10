@@ -81,14 +81,13 @@ gText_ApprenticeRejectTeaching0::
 	.string "I'm begging you, please!$"
 
 gText_ApprenticeWhichLevelMode0::
-	.string "Oh, really? You will?\n"
-	.string "Awesome! Wicked! Awoooh!\p"
-	.string "Oh… I'm sorry…\n"
-	.string "I'm so happy, I'm crying…\p"
-	.string "Um… Then please tell me!\n"
-	.string "It's about the BATTLE TOWER.\p"
-	.string "Which would be better for me: Level 50\n"
-	.string "or the Open Level?$"
+	.string "Oh, really? You will? Awesome!\n"
+	.string "Wicked! Awoooh!\p"
+	.string "Oh… I'm sorry… I'm so happy, I'm\n"
+	.string "crying…\p"
+	.string "I'm planning my own practice team.\n"
+	.string "Should I train for Level 50 or\l"
+	.string "Open Level?$"
 
 gText_ApprenticeLevelModeThanks0::
 	.string "{STR_VAR_1}?\n"
@@ -116,9 +115,9 @@ gText_ApprenticeRejectTeaching1::
 
 gText_ApprenticeWhichLevelMode1::
 	.string "Yay! Great!\p"
-	.string "The first thing I wanted to ask you is\n"
-	.string "about the BATTLE TOWER!\p"
-	.string "The Level 50 and Open Level Rooms…\n"
+	.string "I want to set a goal for my\n"
+	.string "practice team! Level 50 or Open\l"
+	.string "Level?\p"
 	.string "Which would be perfect for me?$"
 
 gText_ApprenticeLevelModeThanks1::
@@ -143,12 +142,11 @@ gText_ApprenticeRejectTeaching2::
 	.string "Please, can you answer my questions?$"
 
 gText_ApprenticeWhichLevelMode2::
-	.string "Thank you!\n"
-	.string "Here's my first question right away!\p"
-	.string "The BATTLE TOWER has two levels,\n"
-	.string "Level 50 and Open Level, right?\p"
-	.string "Which level do you think is more\n"
-	.string "suitable for me?$"
+	.string "Thank you! Here's my first\n"
+	.string "question!\p"
+	.string "For my own practice team, should I\n"
+	.string "aim for Level 50 or Open Level?\p"
+	.string "Which is more suitable for me?$"
 
 gText_ApprenticeLevelModeThanks2::
 	.string "Oh, the {STR_VAR_1} challenge?\n"
@@ -192,15 +190,12 @@ gText_ApprenticeRejectTeaching3::
 	.string "me advice?$"
 
 gText_ApprenticeWhichLevelMode3::
-	.string "Really? I can't believe it!\n"
-	.string "I can't believe you'll advise me!\l"
-	.string "I… I'm so happy…\p"
-	.string "What I want to ask you is really\n"
-	.string "trivial, but I can't decide…\p"
-	.string "At the BATTLE TOWER, they let you\n"
-	.string "choose Level 50 or Open Level.\p"
-	.string "Which course do you think even I may\n"
-	.string "have a chance at?$"
+	.string "Really? I can't believe you'll\n"
+	.string "advise me! I… I'm so happy…\p"
+	.string "I need a goal for my practice\n"
+	.string "team, but I can't decide…\p"
+	.string "Level 50 or Open Level? Which\n"
+	.string "could someone like me manage?$"
 
 gText_ApprenticeLevelModeThanks3::
 	.string "{STR_VAR_1}? Okay!\n"
@@ -230,12 +225,13 @@ gText_ApprenticeRejectTeaching4::
 	.string "You have to reconsider!$"
 
 gText_ApprenticeWhichLevelMode4::
-	.string "Okay, so there is this something.\n"
-	.string "I want you to decide it for me.\p"
-	.string "You know that the BATTLE TOWER has\n"
-	.string "Level 50 and Open Level Rooms?\p"
-	.string "Which do you think would be good\n"
-	.string "for me, {PLAYER}{KUN}?$"
+	.string "Okay, I need you to decide\n"
+	.string "something for me.\p"
+	.string "I'm planning my own practice team.\n"
+	.string "Should I aim for Level 50 or Open\l"
+	.string "Level?\p"
+	.string "Which do you think would suit me,\n"
+	.string "{PLAYER}{KUN}?$"
 
 gText_ApprenticeLevelModeThanks4::
 	.string "Okay, {STR_VAR_1} is suitable for me?\n"
@@ -269,11 +265,10 @@ gText_ApprenticeRejectTeaching5::
 
 gText_ApprenticeWhichLevelMode5::
 	.string "Thank you! That's more like it!\n"
-	.string "So, let's start with an easy one!\p"
-	.string "You know about the BATTLE TOWER's\n"
-	.string "two courses, right?\l"
-	.string "You know, Level 50 and Open Level.\p"
-	.string "Me being a busy guy, which one should\n"
+	.string "Let's start with an easy one!\p"
+	.string "I need a training goal for my\n"
+	.string "team. Level 50 or Open Level?\p"
+	.string "Me being a busy guy, which should\n"
 	.string "I gear up for?$"
 
 gText_ApprenticeLevelModeThanks5::
@@ -302,16 +297,13 @@ gText_ApprenticeRejectTeaching6::
 	.string "You really mean okay, don't you?$"
 
 gText_ApprenticeWhichLevelMode6::
-	.string "Yay! I knew you'd have a big heart,\n"
-	.string "{PLAYER}!\p"
-	.string "What should I ask you first?\n"
-	.string "…Oh, I thought of something!\p"
-	.string "Drum roll, please!\n"
-	.string "The question I have is…\p"
-	.string "If I were to take a BATTLE TOWER\n"
-	.string "challenge, which way should I go?\p"
-	.string "Level 50 or Open Level?\n"
-	.string "Which suits me more?$"
+	.string "Yay! I knew you'd have a big\n"
+	.string "heart, {PLAYER}!\p"
+	.string "Drum roll, please! My first\n"
+	.string "question is about my practice\l"
+	.string "team!\p"
+	.string "Level 50 or Open Level? Which\n"
+	.string "suits me more?$"
 
 gText_ApprenticeLevelModeThanks6::
 	.string "Oh-oh-oh!\n"
@@ -346,13 +338,10 @@ gText_ApprenticeRejectTeaching7::
 
 gText_ApprenticeWhichLevelMode7::
 	.string "Oh… I'm delighted!\p"
-	.string "I don't wish to waste your time,\n"
-	.string "so please advise me on this.\p"
-	.string "I plan to take a BATTLE TOWER\n"
-	.string "challenge soon.\p"
-	.string "However, there are two levels…\p"
-	.string "Which would be most suitable for me?\n"
-	.string "Level 50 or Open Level?$"
+	.string "Please help me set a goal for my\n"
+	.string "own practice team.\p"
+	.string "Which would be most suitable for\n"
+	.string "me? Level 50 or Open Level?$"
 
 gText_ApprenticeLevelModeThanks7::
 	.string "{STR_VAR_1} is your choice!\n"
@@ -383,13 +372,12 @@ gText_ApprenticeRejectTeaching8::
 	.string "I beg you for your guidance!$"
 
 gText_ApprenticeWhichLevelMode8::
-	.string "Hieeeeh! {PLAYER} said yes!\n"
-	.string "{PLAYER} said yes!\p"
-	.string "I won't be able to sleep tonight…\n"
-	.string "Thank you ever so much!\p"
-	.string "Then, here's my question!\p"
-	.string "At the BATTLE TOWER, what is right\n"
-	.string "for me, Level 50 or Open Level?$"
+	.string "Hieeeeh! {PLAYER} said yes! I\n"
+	.string "won't be able to sleep tonight…\p"
+	.string "Then, here's my question! For my\n"
+	.string "practice team, what is right for\l"
+	.string "me?\p"
+	.string "Level 50 or Open Level?$"
 
 gText_ApprenticeLevelModeThanks8::
 	.string "{STR_VAR_1}! Perfectly understood!\n"
@@ -420,10 +408,9 @@ gText_ApprenticeRejectTeaching9::
 gText_ApprenticeWhichLevelMode9::
 	.string "Oh, yeah! That's a solid reply!\n"
 	.string "Excellent, I might add!\p"
-	.string "So how about a first piece of advice\n"
-	.string "on the BATTLE TOWER?\p"
-	.string "If I were to go, what would be better?\n"
-	.string "Level 50 or Open Level?$"
+	.string "Now for my own practice team…\n"
+	.string "Should I train for Level 50 or\l"
+	.string "Open Level?$"
 
 gText_ApprenticeLevelModeThanks9::
 	.string "Uh-huh, {STR_VAR_1} it is!\n"
@@ -455,15 +442,13 @@ gText_ApprenticeRejectTeaching10::
 	.string "my POKéMON master?$"
 
 gText_ApprenticeWhichLevelMode10::
-	.string "Yippee!\n"
-	.string "I'll buy you a boat for that!\p"
-	.string "Of course I'm lying again!\n"
-	.string "But… Thank you, master!\p"
-	.string "You know how there's Level 50 and\n"
-	.string "Open Level at the BATTLE TOWER?\p"
-	.string "I'm having trouble deciding which\n"
-	.string "level I should challenge…\p"
-	.string "Can you decide for me, master?$"
+	.string "Yippee! I'll buy you a boat for\n"
+	.string "that!\p"
+	.string "Of course I'm lying again! But…\n"
+	.string "Thank you, master!\p"
+	.string "Should I train my own team for\n"
+	.string "Level 50 or Open Level? Decide for\l"
+	.string "me, master!$"
 
 gText_ApprenticeLevelModeThanks10::
 	.string "Okay, so {STR_VAR_1} is better!\n"
@@ -498,14 +483,14 @@ gText_ApprenticeRejectTeaching11::
 	.string "Become my mentor, please!$"
 
 gText_ApprenticeWhichLevelMode11::
-	.string "That's it!\n"
-	.string "{PLAYER}, you've got the spirit!\p"
-	.string "So here's my first question\n"
-	.string "that begs your suggestion!\p"
-	.string "It's about the BATTLE TOWER,\n"
-	.string "and it hinges on my power!\p"
-	.string "Level 50 and Open Level there be,\n"
-	.string "which is the one that's good for me?$"
+	.string "That's it! {PLAYER}, you've got\n"
+	.string "the spirit!\p"
+	.string "My practice team needs a\n"
+	.string "destination! I leave it to your\l"
+	.string "inspiration!\p"
+	.string "Level 50 or Open Level there be,\n"
+	.string "which is the one that's good for\l"
+	.string "me?$"
 
 gText_ApprenticeLevelModeThanks11::
 	.string "Okay, {STR_VAR_1} it is, you say!\n"
@@ -536,12 +521,11 @@ gText_ApprenticeRejectTeaching12::
 	.string "I need you to teach me everything!$"
 
 gText_ApprenticeWhichLevelMode12::
-	.string "Lucky, yeah, woohoo!\n"
-	.string "Should I pop a question to you?\p"
-	.string "Since we're near the BATTLE TOWER,\n"
-	.string "how about a question about its power?\p"
-	.string "Of the choices you see,\n"
-	.string "which is the right one for me?$"
+	.string "Lucky, yeah, woohoo! Should I pop\n"
+	.string "a question to you?\p"
+	.string "My practice team needs a goal to\n"
+	.string "pursue. Level 50 or Open Level?\l"
+	.string "It's up to you!$"
 
 gText_ApprenticeLevelModeThanks12::
 	.string "If {STR_VAR_1} is what you suggest,\n"
@@ -551,17 +535,17 @@ gText_ApprenticeLevelModeThanks12::
 	.string "See you again, my smart friend!$"
 
 gText_ApprenticePleaseTeach13::
-	.string "Oh, hi! You there!\n"
-	.string "Can I get you to massage my shoulder?\p"
-	.string "…Yes, there! That's it!\n"
-	.string "Ouch, ouch! Oooh, that feels great!\p"
-	.string "My name's {STR_VAR_1}.\n"
-	.string "I take karate training, but my body's\l"
-	.string "not built to take the abuse…\p"
+	.string "Oh, hi! You there! Can I get you\n"
+	.string "to massage my shoulder?\p"
+	.string "…Yes, there! Ouch, ouch! Oooh,\n"
+	.string "that feels great!\p"
+	.string "My name's {STR_VAR_1}. I take\n"
+	.string "karate training, but my body's not\l"
+	.string "built to take the abuse…\p"
 	.string "I decided I'll battle POKéMON and\n"
 	.string "toughen myself up.\p"
 	.string "You're {PLAYER}{KUN}, aren't you?\n"
-	.string "The POKéMON LEAGUE CHAMP?\p"
+	.string "I've heard you're a tough TRAINER!\p"
 	.string "Listen, can I get you to give me\n"
 	.string "advice?$"
 
@@ -573,10 +557,11 @@ gText_ApprenticeRejectTeaching13::
 gText_ApprenticeWhichLevelMode13::
 	.string "Thank you. Mighty good of you!\n"
 	.string "…Cough! Cough!\p"
-	.string "Oogh, I have to toughen up quick…\p"
-	.string "I'll be heading off to the BATTLE TOWER\n"
-	.string "right away, but what would be better\l"
-	.string "for me? Level 50 or Open Level?$"
+	.string "Oogh, I have to toughen up quick…\n"
+	.string "My POKéMON need a training goal,\l"
+	.string "too.\p"
+	.string "Level 50 or Open Level? Which\n"
+	.string "should I aim for?$"
 
 gText_ApprenticeLevelModeThanks13::
 	.string "Hm, all right. That's {STR_VAR_1}.\n"
@@ -608,13 +593,11 @@ gText_ApprenticeRejectTeaching14::
 	.string "I need your advice!$"
 
 gText_ApprenticeWhichLevelMode14::
-	.string "Th-thank you…\p"
-	.string "But please don't look at me like that.\n"
-	.string "It makes me all flustered.\p"
-	.string "Please, answer me without looking\n"
-	.string "at my eyes.\p"
-	.string "At the BATTLE TOWER…\n"
-	.string "Which level should I attempt?$"
+	.string "Th-thank you… Please don't stare.\n"
+	.string "I'm getting all flustered.\p"
+	.string "I need a goal for my practice\n"
+	.string "team. Level 50 or Open Level?\p"
+	.string "Which should I attempt?$"
 
 gText_ApprenticeLevelModeThanks14::
 	.string "Oh… Okay!\n"
@@ -646,13 +629,14 @@ gText_ApprenticeRejectTeaching15::
 	.string "accept me as your apprentice.$"
 
 gText_ApprenticeWhichLevelMode15::
-	.string "You really are accepting me?\n"
-	.string "I don't wish to celebrate prematurely.\p"
-	.string "If it is true, I apologize.\n"
-	.string "But now, I need your advice.\p"
-	.string "If I were to enter the BATTLE TOWER,\n"
-	.string "what would be worthy of me?\l"
-	.string "Level 50 or Open Level?$"
+	.string "You really are accepting me? I\n"
+	.string "don't wish to celebrate\l"
+	.string "prematurely.\p"
+	.string "If it is true, I apologize. Now, I\n"
+	.string "need your advice.\p"
+	.string "For my own practice team, what\n"
+	.string "would be worthy of me? Level 50 or\l"
+	.string "Open Level?$"
 
 gText_ApprenticeLevelModeThanks15::
 	.string "{STR_VAR_1}?\n"

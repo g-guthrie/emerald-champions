@@ -755,6 +755,49 @@ bool32 AI_MoveAlwaysCrits(enum BattlerId battlerAtk, enum BattlerId battlerDef, 
     return result;
 }
 
+bool32 AI_MoveBreaksScreensBeforeDamage(enum Move move)
+{
+    for (u32 i = 0; i < GetMoveAdditionalEffectCount(move); i++)
+    {
+        const struct AdditionalEffect *effect = GetMoveAdditionalEffectById(move, i);
+        if (effect->moveEffect == MOVE_EFFECT_BREAK_SCREEN && effect->preAttackEffect
+         && !effect->self && effect->chance == 0)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+bool32 AI_CanScreenReduceDamage(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move)
+{
+    if (battlerAtk == battlerDef || IsBattleMoveStatus(move)
+     || (gAiLogicData->abilities[battlerAtk] == ABILITY_INFILTRATOR && !IsBattlerAlly(battlerAtk, battlerDef))
+     || (AI_MoveBreaksScreensBeforeDamage(move) && (B_BRICK_BREAK >= GEN_4 || !IsBattlerAlly(battlerAtk, battlerDef))))
+        return FALSE;
+
+    // These return from native DoFixedDamageMoveCalc before screen modifiers.
+    // Physical category alone does not make Super Fang screen-reducible.
+    switch (GetMoveEffect(move))
+    {
+    case EFFECT_LEVEL_DAMAGE:
+    case EFFECT_PSYWAVE:
+    case EFFECT_FIXED_HP_DAMAGE:
+    case EFFECT_FIXED_PERCENT_DAMAGE:
+    case EFFECT_FINAL_GAMBIT:
+    case EFFECT_REFLECT_DAMAGE:
+    case EFFECT_ENDEAVOR:
+    case EFFECT_OHKO:
+    case EFFECT_BIDE:
+        return FALSE;
+    case EFFECT_BEAT_UP:
+        if (GetConfig(B_BEAT_UP) < GEN_5)
+            return FALSE;
+        break;
+    default:
+        break;
+    }
+    return !AI_MoveAlwaysCrits(battlerAtk, battlerDef, move);
+}
+
 static bool32 AI_HasParentalBondSecondHit(struct DamageContext *ctx)
 {
     return ctx->abilities[ctx->battlerAtk] == ABILITY_PARENTAL_BOND
@@ -853,6 +896,44 @@ static void AI_GetStrikeCounts(struct DamageContext *ctx, u32 *minimum, u32 *med
 
 static bool32 AI_FirstStrikeBlocked(struct DamageContext *ctx);
 
+u32 AI_GetContactDamage(enum BattlerId actor, enum BattlerId target, enum Move move,
+    enum Ability ability, enum HoldEffect held, enum HoldEffect targetHeld, enum Ability targetAbility)
+{
+    // The AI's contact helper matches native eligibility without recording
+    // hypothetical Pads/Long Reach observations in the live battle history.
+    if (ability == ABILITY_MAGIC_GUARD
+     || !AI_MoveMakesContact(actor, target, ability, held, move)
+     || DoesSubstituteBlockMove(actor, target, move))
+        return 0;
+    u32 hp = GetNonDynamaxMaxHP(actor);
+    u32 damage = targetHeld == HOLD_EFFECT_ROCKY_HELMET ? max(1, hp / 6) : 0;
+    if (targetAbility == ABILITY_ROUGH_SKIN || targetAbility == ABILITY_IRON_BARBS)
+        damage += max(1, hp / (B_ROUGH_SKIN_DMG >= GEN_4 ? 8 : 16));
+    return damage;
+}
+
+static void AI_PopulationTrySitrus(struct DamageContext *ctx, enum BattlerId battler)
+{
+    struct BattlePokemon *mon = &gBattleMons[battler];
+    if (!mon->hp || mon->item != ITEM_SITRUS_BERRY
+     || ctx->holdEffects[battler] != HOLD_EFFECT_RESTORE_PCT_HP
+     || mon->hp > GetBerryActivationThreshold(mon->maxHP, 2, ctx->abilities[battler], mon->item)
+     || (B_HEAL_BLOCKING >= GEN_5 && mon->volatiles.healBlockTimer))
+        return;
+    for (enum BattlerId foe = 0; foe < gBattlersCount; foe++)
+        if (IsBattlerAlive(foe) && !IsBattlerAlly(battler, foe)
+         && (ctx->abilities[foe] == ABILITY_UNNERVE
+             || ctx->abilities[foe] == ABILITY_AS_ONE_ICE_RIDER
+             || ctx->abilities[foe] == ABILITY_AS_ONE_SHADOW_RIDER))
+            return;
+    u32 healing = GetNonDynamaxMaxHP(battler) * GetItemHoldEffectParam(ITEM_SITRUS_BERRY) / 100;
+    if (ctx->abilities[battler] == ABILITY_RIPEN)
+        healing *= 2;
+    mon->hp = min(mon->maxHP, mon->hp + max(1, healing));
+    mon->item = ITEM_NONE;
+    ctx->holdEffects[battler] = HOLD_EFFECT_NONE;
+}
+
 static u32 AI_AdjustGuaranteedSurvival(struct DamageContext *ctx, u32 damage, u8 *consumed, u32 rollBit)
 {
     if (AI_FirstStrikeBlocked(ctx) || damage < gBattleMons[ctx->battlerDef].hp)
@@ -884,7 +965,7 @@ static void AI_ConsumeResistBerry(struct DamageContext *ctx, u8 *consumed, u32 r
 
 // A single strike has one native base calculation. Roll-dependent modifiers
 // and survival/item effects still run independently against the same target.
-static struct SimulatedDamage AI_CalcSingleStrike(struct DamageContext *ctx)
+static struct SimulatedDamage AI_CalcSingleStrike(struct DamageContext *ctx, bool32 rawDamage)
 {
     struct SimulatedDamage damage = {0};
     u16 *values[] = {&damage.minimum, &damage.median, &damage.maximum};
@@ -902,7 +983,8 @@ static struct SimulatedDamage AI_CalcSingleStrike(struct DamageContext *ctx)
         struct DamageContext rollCtx = *ctx;
         u32 amount = fixedDamage == INT32_MAX
             ? AI_ApplyModifiersAfterDmgRoll(&rollCtx, GetDamageByRollType(base, roll)) : base;
-        amount = AI_AdjustGuaranteedSurvival(&rollCtx, amount, &damage.consumedItem, rollBits[roll]);
+        if (!rawDamage)
+            amount = AI_AdjustGuaranteedSurvival(&rollCtx, amount, &damage.consumedItem, rollBits[roll]);
         AI_ConsumeResistBerry(&rollCtx, &damage.consumedItem, rollBits[roll]);
         *values[roll] = amount;
         gBattleMons[ctx->battlerDef].item = item;
@@ -913,11 +995,35 @@ static struct SimulatedDamage AI_CalcSingleStrike(struct DamageContext *ctx)
 
 // Each roll starts from the same target. A resist Berry applies to its first
 // eligible strike, then the remaining strikes see the consumed item and HP.
-static u32 AI_CalcStrikes(struct DamageContext *initial, u32 hits, enum DamageRollType roll, u32 skipStrikes, u32 strikeLimit, u8 *consumed, u32 rollBit)
+static u32 AI_CalcStrikes(struct DamageContext *initial, u32 hits, enum DamageRollType roll, u32 skipStrikes, u32 strikeLimit, u8 *consumed, u32 rollBit,
+    struct AiPopulationBombDamage *population)
 {
     struct DamageContext ctx = *initial;
     struct BattlePokemon savedDef = gBattleMons[ctx.battlerDef];
+    struct BattlePokemon savedAtk = gBattleMons[ctx.battlerAtk];
     u32 total = 0;
+    bool32 populationBomb = GetMoveEffect(ctx.move) == EFFECT_POPULATION_BOMB && !AI_FirstStrikeBlocked(&ctx)
+        && skipStrikes == 0 && strikeLimit == 0;
+    u32 accuracy = 100;
+    if (populationBomb)
+    {
+        struct BattleCalcValues cv = {.battlerAtk = ctx.battlerAtk, .battlerDef = ctx.battlerDef, .move = ctx.move};
+        memcpy(cv.abilities, ctx.abilities, sizeof(cv.abilities));
+        memcpy(cv.holdEffects, ctx.holdEffects, sizeof(cv.holdEffects));
+        accuracy = CanMoveSkipAccuracyCalc(&cv, ctx.weather, AI_CHECK) ? 100 : min(100, GetTotalAccuracy(&cv, ctx.weather));
+    }
+    bool32 repeatedAccuracy = ctx.abilities[ctx.battlerAtk] != ABILITY_SKILL_LINK
+        && ctx.holdEffects[ctx.battlerAtk] != HOLD_EFFECT_LOADED_DICE;
+    u32 minimumStrikes = ctx.holdEffects[ctx.battlerAtk] == HOLD_EFFECT_LOADED_DICE
+        && ctx.abilities[ctx.battlerAtk] != ABILITY_SKILL_LINK ? 4 : AI_POPULATION_BOMB_STRIKES;
+    u32 contact = populationBomb ? AI_GetContactDamage(ctx.battlerAtk, ctx.battlerDef, ctx.move,
+        ctx.abilities[ctx.battlerAtk], ctx.holdEffects[ctx.battlerAtk], ctx.holdEffects[ctx.battlerDef], ctx.abilities[ctx.battlerDef]) : 0;
+    s32 expectedLoss = 0;
+    u32 reach = 10000, minimumLoss = 0;
+    bool32 populationStopped = FALSE;
+    u32 minimumCount = repeatedAccuracy && accuracy < 100 ? 1 : minimumStrikes;
+    if (populationBomb)
+        hits = AI_POPULATION_BOMB_STRIKES;
     bool32 parentalBond = hits == 2 && !IsMultiHitMove(ctx.move)
         && GetMoveStrikeCount(ctx.move) == 0 && GetMoveEffect(ctx.move) != EFFECT_BEAT_UP
         && AI_HasParentalBondSecondHit(&ctx);
@@ -940,15 +1046,65 @@ static u32 AI_CalcStrikes(struct DamageContext *initial, u32 hits, enum DamageRo
         if (damage == INT32_MAX)
             damage = AI_ApplyModifiersAfterDmgRoll(&ctx, GetDamageByRollType(CalculateMoveDamageVars(&ctx), roll));
 
+        if (populationBomb && population)
+        {
+            population->valid = TRUE;
+            population->repeatedAccuracy = repeatedAccuracy;
+            population->minimumStrikes = minimumStrikes;
+            population->strike[roll][i] = damage;
+            population->count[roll] = i + 1;
+        }
+        // Retain native damage prefixes up to the move's fixed bound even
+        // after this board's actor faints. Pair trials may heal it first.
+        // HP-dependent abilities after a different earlier hit/heal remain
+        // the same approximation as the general cached-damage model.
+        if (populationStopped)
+            continue;
         damage = AI_AdjustGuaranteedSurvival(&ctx, damage, consumed, rollBit);
 
         total += damage;
+        u32 hpBefore = gBattleMons[ctx.battlerDef].hp;
         gBattleMons[ctx.battlerDef].hp -= min(gBattleMons[ctx.battlerDef].hp, damage);
         AI_ConsumeResistBerry(&ctx, consumed, rollBit);
+        if (populationBomb)
+        {
+            if (damage > 0)
+                gBattleMons[ctx.battlerAtk].hp -= min(gBattleMons[ctx.battlerAtk].hp, contact);
+            // Native contact/attacker items precede target threshold items,
+            // and both happen before the next strike (including the last KO).
+            AI_PopulationTrySitrus(&ctx, ctx.battlerAtk);
+            AI_PopulationTrySitrus(&ctx, ctx.battlerDef);
+            expectedLoss += ((s32)hpBefore - gBattleMons[ctx.battlerDef].hp) * (s32)reach;
+            if (i < minimumCount)
+                minimumLoss = max(0, (s32)savedDef.hp - gBattleMons[ctx.battlerDef].hp);
+            if (repeatedAccuracy)
+                reach = reach * accuracy / 100;
+            else if (minimumStrikes == 4 && i + 1 >= 4)
+                reach = (AI_POPULATION_BOMB_STRIKES - i - 1) * 10000 / 7;
+            if (!gBattleMons[ctx.battlerAtk].hp || !gBattleMons[ctx.battlerDef].hp)
+            {
+                populationStopped = TRUE;
+                if (population)
+                    continue;
+                break;
+            }
+        }
         if (gBattleMons[ctx.battlerDef].hp == 0 || (strikeLimit != 0 && i - skipStrikes + 1 == strikeLimit))
             break;
     }
+    if (populationBomb)
+    {
+        // Damage is conditional on the first accuracy check succeeding; the
+        // caller already weights that first check. Subsequent misses count.
+        if (roll == DMG_ROLL_LOWEST)
+            total = minimumLoss;
+        else if (roll == DMG_ROLL_MEDIAN)
+            total = max(0, expectedLoss / 10000);
+        else
+            total = max(0, (s32)savedDef.hp - gBattleMons[ctx.battlerDef].hp);
+    }
     gBattleMons[ctx.battlerDef] = savedDef;
+    gBattleMons[ctx.battlerAtk] = savedAtk;
     return total;
 }
 
@@ -1142,7 +1298,7 @@ bool32 AI_ApplyMegaForm(enum BattlerId battler)
     return TRUE;
 }
 
-static struct SimulatedDamage AI_CalcDamageInternal(struct AiCalcValues *aiCalc, enum BattlerId battlerAtk, enum BattlerId battlerDef, u32 hp, struct AiKOChance *chance)
+static struct SimulatedDamage AI_CalcDamageInternal(struct AiCalcValues *aiCalc, enum BattlerId battlerAtk, enum BattlerId battlerDef, u32 hp, struct AiKOChance *chance, bool32 rawDamage)
 {
     struct SimulatedDamage simDamage = {0};
     enum Move move = aiCalc->move;
@@ -1173,6 +1329,8 @@ static struct SimulatedDamage AI_CalcDamageInternal(struct AiCalcValues *aiCalc,
     u32 savedResultFlags = gBattleStruct->moveResultFlags[battlerDef];
     u16 savedMovePower = gBattleMovePower;
     enum BattlerId savedPotentialItemBattler = gPotentialItemEffectBattler;
+    enum BattleSide screenSide = B_BRICK_BREAK >= GEN_4 ? GetBattlerSide(battlerDef) : GetBattlerSide(battlerAtk) ^ BIT_SIDE;
+    u32 savedScreenSideStatus = gSideStatuses[screenSide];
     enum Species savedBeatUpSpecies[PARTY_SIZE];
     s16 savedPassiveHpUpdate[MAX_BATTLERS_COUNT];
     u8 savedMultiString = gBattleCommunication[MULTISTRING_CHOOSER];
@@ -1252,6 +1410,12 @@ static struct SimulatedDamage AI_CalcDamageInternal(struct AiCalcValues *aiCalc,
 
     if (movePower && !IsDamageMoveUnusable(&ctx))
     {
+        // Native target failure and accuracy run before this primary effect,
+        // then successful screen breakers calculate their own hit unscreened.
+        // This damage cache is conditional on a hit; it must not retain the
+        // screen just because it does not execute native pre-attack scripts.
+        if (AI_MoveBreaksScreensBeforeDamage(move))
+            gSideStatuses[screenSide] &= ~SIDE_STATUS_SCREEN_ANY;
         u32 minHits, medianHits, maxHits;
         ProteanTryChangeType(battlerAtk, aiData->abilities[battlerAtk], move, ctx.moveType);
         AI_GetStrikeCounts(&ctx, &minHits, &medianHits, &maxHits);
@@ -1276,17 +1440,21 @@ static struct SimulatedDamage AI_CalcDamageInternal(struct AiCalcValues *aiCalc,
         else if (maxHits == 1)
         {
             if (aiCalc->skipStrikes == 0)
-                simDamage = AI_CalcSingleStrike(&ctx);
+                simDamage = AI_CalcSingleStrike(&ctx, rawDamage);
         }
-        else
+        else if (!rawDamage)
         {
-            simDamage.minimum = AI_CalcStrikes(&ctx, minHits, DMG_ROLL_LOWEST, aiCalc->skipStrikes, aiCalc->strikeLimit, &simDamage.consumedItem, AI_ITEM_CONSUMED_MINIMUM);
-            simDamage.median = AI_CalcStrikes(&ctx, medianHits, DMG_ROLL_MEDIAN, aiCalc->skipStrikes, aiCalc->strikeLimit, &simDamage.consumedItem, AI_ITEM_CONSUMED_MEDIAN);
-            simDamage.maximum = AI_CalcStrikes(&ctx, maxHits, DMG_ROLL_HIGHEST, aiCalc->skipStrikes, aiCalc->strikeLimit, &simDamage.consumedItem, AI_ITEM_CONSUMED_MAXIMUM);
+            simDamage.minimum = AI_CalcStrikes(&ctx, minHits, DMG_ROLL_LOWEST, aiCalc->skipStrikes, aiCalc->strikeLimit, &simDamage.consumedItem, AI_ITEM_CONSUMED_MINIMUM, aiCalc->populationBomb);
+            simDamage.median = AI_CalcStrikes(&ctx, medianHits, DMG_ROLL_MEDIAN, aiCalc->skipStrikes, aiCalc->strikeLimit, &simDamage.consumedItem, AI_ITEM_CONSUMED_MEDIAN, aiCalc->populationBomb);
+            simDamage.maximum = AI_CalcStrikes(&ctx, maxHits, DMG_ROLL_HIGHEST, aiCalc->skipStrikes, aiCalc->strikeLimit, &simDamage.consumedItem, AI_ITEM_CONSUMED_MAXIMUM, aiCalc->populationBomb);
             if (minHits == 4 && maxHits == 5)
-                simDamage.median = (simDamage.median + AI_CalcStrikes(&ctx, 5, DMG_ROLL_MEDIAN, aiCalc->skipStrikes, aiCalc->strikeLimit, &simDamage.consumedItem, AI_ITEM_CONSUMED_MEDIAN)) / 2;
+                simDamage.median = (simDamage.median + AI_CalcStrikes(&ctx, 5, DMG_ROLL_MEDIAN, aiCalc->skipStrikes, aiCalc->strikeLimit, &simDamage.consumedItem, AI_ITEM_CONSUMED_MEDIAN, NULL)) / 2;
             simDamage.random = simDamage.median;
         }
+        // Move-end recoil keys off an affected recipient, not occupant HP
+        // loss. Keep this native eligibility before Sash/Endure caps separate
+        // from damage, using the damage cache's existing padding byte.
+        simDamage.affectsTarget = maxHits > aiCalc->skipStrikes;
         if (chance != NULL)
             AI_CalcContextKOChance(&ctx, &simDamage, minHits, maxHits, hp, chance);
     }
@@ -1324,6 +1492,7 @@ static struct SimulatedDamage AI_CalcDamageInternal(struct AiCalcValues *aiCalc,
     gBattleStruct->moveResultFlags[battlerDef] = savedResultFlags;
     gBattleMovePower = savedMovePower;
     gPotentialItemEffectBattler = savedPotentialItemBattler;
+    gSideStatuses[screenSide] = savedScreenSideStatus;
     memcpy(gBattleStruct->beatUpSpecies, savedBeatUpSpecies, sizeof(savedBeatUpSpecies));
     memcpy(gBattleStruct->passiveHpUpdate, savedPassiveHpUpdate, sizeof(savedPassiveHpUpdate));
     gBattleCommunication[MULTISTRING_CHOOSER] = savedMultiString;
@@ -1335,13 +1504,116 @@ static struct SimulatedDamage AI_CalcDamageInternal(struct AiCalcValues *aiCalc,
 
 struct SimulatedDamage AI_CalcDamage(struct AiCalcValues *aiCalc, enum BattlerId battlerAtk, enum BattlerId battlerDef)
 {
-    return AI_CalcDamageInternal(aiCalc, battlerAtk, battlerDef, 0, NULL);
+    return AI_CalcDamageInternal(aiCalc, battlerAtk, battlerDef, 0, NULL, FALSE);
+}
+
+// HP-power interpolation needs native damage before Sash/Sturdy/Endure clip
+// it to the target's starting HP. All damage modifiers, including resist
+// Berries, remain native; the caller applies survival at action-time HP.
+struct SimulatedDamage AI_CalcHpPowerDamage(struct AiCalcValues *aiCalc, enum BattlerId battlerAtk, enum BattlerId battlerDef, u32 hp)
+{
+    enum Gimmick active = GetActiveGimmick(battlerAtk);
+    if (GetMoveEffect(aiCalc->move) != EFFECT_POWER_BASED_ON_USER_HP
+        || active == GIMMICK_Z_MOVE || active == GIMMICK_DYNAMAX
+        || aiCalc->gimmickAtk == GIMMICK_Z_MOVE || aiCalc->gimmickAtk == GIMMICK_DYNAMAX
+        || (active == GIMMICK_NONE && aiCalc->gimmickAtk == GIMMICK_MEGA)
+        || gAiLogicData->abilities[battlerAtk] == ABILITY_PARENTAL_BOND
+        || hp == 0 || hp > gBattleMons[battlerAtk].maxHP)
+        return (struct SimulatedDamage){0};
+
+    u16 savedHp = gBattleMons[battlerAtk].hp;
+    u8 savedPercent = gAiLogicData->hpPercents[battlerAtk];
+    gBattleMons[battlerAtk].hp = hp;
+    gAiLogicData->hpPercents[battlerAtk] = GetHealthPercentage(battlerAtk);
+    struct SimulatedDamage damage = AI_CalcDamageInternal(aiCalc, battlerAtk, battlerDef, 0, NULL, TRUE);
+    gBattleMons[battlerAtk].hp = savedHp;
+    gAiLogicData->hpPercents[battlerAtk] = savedPercent;
+    return damage;
+}
+
+static bool32 AI_CanCalcRawSingleHitAnchor(const struct AiCalcValues *aiCalc, enum BattlerId battlerAtk)
+{
+    enum Move move = GetMoveEffect(aiCalc->move) == EFFECT_NATURE_POWER ? GetNaturePowerMove() : aiCalc->move;
+    enum Gimmick active = GetActiveGimmick(battlerAtk);
+    if (IsMultiHitMove(move) || GetMoveStrikeCount(move) > 1
+     || GetMoveEffect(move) == EFFECT_BEAT_UP || GetMoveEffect(move) == EFFECT_PSYWAVE
+     || gAiLogicData->abilities[battlerAtk] == ABILITY_PARENTAL_BOND
+     || active == GIMMICK_Z_MOVE || active == GIMMICK_DYNAMAX
+     || aiCalc->gimmickAtk == GIMMICK_Z_MOVE || aiCalc->gimmickAtk == GIMMICK_DYNAMAX
+     || (active == GIMMICK_NONE && aiCalc->gimmickAtk == GIMMICK_MEGA))
+        return FALSE;
+    return TRUE;
+}
+
+struct SimulatedDamage AI_CalcDefeatistDamage(struct AiCalcValues *aiCalc, enum BattlerId battlerAtk, enum BattlerId battlerDef, bool32 healthy)
+{
+    if (!AI_CanCalcRawSingleHitAnchor(aiCalc, battlerAtk)
+     || gAiLogicData->abilities[battlerAtk] != ABILITY_DEFEATIST
+     || gBattleMons[battlerAtk].maxHP < 2
+     || GetMoveEffect(aiCalc->move) == EFFECT_POWER_BASED_ON_USER_HP
+     || GetMoveEffect(aiCalc->move) == EFFECT_FLAIL
+     || GetMoveEffect(aiCalc->move) == EFFECT_FINAL_GAMBIT
+     || GetMoveEffect(aiCalc->move) == EFFECT_ENDEAVOR)
+        return (struct SimulatedDamage){0};
+    // Defeatist halves the offensive stat before native integer rounding;
+    // halving final damage would invent different low-level KO thresholds.
+    u16 savedHp = gBattleMons[battlerAtk].hp;
+    u8 savedPercent = gAiLogicData->hpPercents[battlerAtk];
+    gBattleMons[battlerAtk].hp = healthy ? gBattleMons[battlerAtk].maxHP : gBattleMons[battlerAtk].maxHP / 2;
+    gAiLogicData->hpPercents[battlerAtk] = GetHealthPercentage(battlerAtk);
+    struct SimulatedDamage damage = AI_CalcDamageInternal(aiCalc, battlerAtk, battlerDef, 0, NULL, TRUE);
+    gBattleMons[battlerAtk].hp = savedHp;
+    gAiLogicData->hpPercents[battlerAtk] = savedPercent;
+    return damage;
+}
+
+struct SimulatedDamage AI_CalcPartnerBoostDamage(struct AiCalcValues *aiCalc, enum BattlerId battlerAtk, enum BattlerId battlerDef, bool32 partnerPresent)
+{
+    if (!AI_CanCalcRawSingleHitAnchor(aiCalc, battlerAtk))
+        return (struct SimulatedDamage){0};
+
+    // The caller verifies special damage and a currently active Plus/Minus
+    // pairing. Change only the calculation's cached ability: removing the
+    // occupant would also change spread targeting and unrelated mechanics.
+    enum BattlerId partner = GetPartnerBattler(battlerAtk);
+    enum Ability savedAbility = gAiLogicData->abilities[partner];
+    if (!partnerPresent)
+        gAiLogicData->abilities[partner] = ABILITY_NONE;
+    struct SimulatedDamage damage = AI_CalcDamageInternal(aiCalc, battlerAtk, battlerDef, 0, NULL, TRUE);
+    // The native calculation restores its actor/target and RNG, but this
+    // partner need not be either of them, so restore our override explicitly.
+    gAiLogicData->abilities[partner] = savedAbility;
+    return damage;
+}
+
+struct SimulatedDamage AI_CalcItemBoostDamage(struct AiCalcValues *aiCalc, enum BattlerId battlerAtk, enum BattlerId battlerDef, bool32 itemPresent)
+{
+    if (!AI_CanCalcRawSingleHitAnchor(aiCalc, battlerAtk))
+        return (struct SimulatedDamage){0};
+
+    // The caller selects a supported offensive item/move pairing. Native
+    // damage reads both the battle mon's item and cached AI item data; remove
+    // all three representations for this anchor, without changing HP or form.
+    enum Item savedItem = gBattleMons[battlerAtk].item;
+    enum Item savedKnownItem = gAiLogicData->items[battlerAtk];
+    enum HoldEffect savedEffect = gAiLogicData->holdEffects[battlerAtk];
+    if (!itemPresent)
+    {
+        gBattleMons[battlerAtk].item = ITEM_NONE;
+        gAiLogicData->items[battlerAtk] = ITEM_NONE;
+        gAiLogicData->holdEffects[battlerAtk] = HOLD_EFFECT_NONE;
+    }
+    struct SimulatedDamage damage = AI_CalcDamageInternal(aiCalc, battlerAtk, battlerDef, 0, NULL, TRUE);
+    gBattleMons[battlerAtk].item = savedItem;
+    gAiLogicData->items[battlerAtk] = savedKnownItem;
+    gAiLogicData->holdEffects[battlerAtk] = savedEffect;
+    return damage;
 }
 
 struct AiKOChance AI_CalcKOChance(struct AiCalcValues *aiCalc, enum BattlerId battlerAtk, enum BattlerId battlerDef, u32 hp)
 {
     struct AiKOChance chance = {.numerator = 0, .denominator = 1, .exact = TRUE};
-    AI_CalcDamageInternal(aiCalc, battlerAtk, battlerDef, hp, &chance);
+    AI_CalcDamageInternal(aiCalc, battlerAtk, battlerDef, hp, &chance, FALSE);
     return chance;
 }
 
@@ -2600,41 +2872,6 @@ bool32 ShouldClearFieldStatus(enum BattlerId battler, u32 fieldStatus)
     return FieldStatusChecker(battler, fieldStatus, FIELD_EFFECT_NEGATIVE);
 }
 
-bool32 CanRefreshTrickRoom(enum BattlerId battler)
-{
-    enum BattlerId partner = GetPartnerBattler(battler);
-
-    if (!(gFieldStatuses & STATUS_FIELD_TRICK_ROOM) || gFieldTimers.trickRoomTimer != 1
-     || !HasPartner(battler) || !ShouldSetFieldStatus(battler, STATUS_FIELD_TRICK_ROOM))
-        return FALSE;
-
-    // Refreshing takes both actions. A second setter in the moveset is not
-    // enough if it is asleep, switching, Taunted, out of PP or otherwise locked.
-    for (enum BattlerId ally = 0; ally < gBattlersCount; ally++)
-    {
-        bool32 canUseRoom = FALSE;
-        if (ally != battler && ally != partner)
-            continue;
-        if (gBattleMons[ally].status1 & (STATUS1_SLEEP | STATUS1_FREEZE)
-         || IsBattlerIncapacitated(ally, gAiLogicData->abilities[ally])
-         || gAiLogicData->shouldSwitch & (1u << ally))
-            return FALSE;
-        enum Move *moves = GetMovesArray(ally);
-        for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
-        {
-            if (!IsMoveUnusable(slot, moves[slot], gAiLogicData->moveLimitations[ally])
-             && GetMoveEffect(moves[slot]) == EFFECT_TRICK_ROOM)
-                canUseRoom = TRUE;
-        }
-        if (!canUseRoom)
-            return FALSE;
-    }
-
-    if (gAiLogicData->battlerMovesScored & (1u << partner)
-     && GetMoveEffect(gBattleMons[partner].moves[gAiBattleData->chosenMoveIndex[partner]]) != EFFECT_TRICK_ROOM)
-        return FALSE;
-    return TRUE;
-}
 
 bool32 IsBattlerDamagedByStatus(enum BattlerId battler)
 {
@@ -4497,9 +4734,14 @@ bool32 ShouldSetScreen(enum BattlerId battlerAtk, enum BattlerId battlerDef, enu
             bool32 protected = TRUE;
             if (IsMoveUnusable(i, move, gAiLogicData->moveLimitations[foe]) || IsBattleMoveStatus(move)
              || (moveEffect == EFFECT_REFLECT && GetMoveCategory(move) != DAMAGE_CATEGORY_PHYSICAL)
-             || (moveEffect == EFFECT_LIGHT_SCREEN && GetMoveCategory(move) != DAMAGE_CATEGORY_SPECIAL)
-             || (AI_GetDamage(foe, battlerAtk, i, AI_DEFENDING, gAiLogicData) == 0
-                 && (!HasPartner(battlerAtk) || AI_GetDamage(foe, GetPartnerBattler(battlerAtk), i, AI_DEFENDING, gAiLogicData) == 0)))
+             || (moveEffect == EFFECT_LIGHT_SCREEN && GetMoveCategory(move) != DAMAGE_CATEGORY_SPECIAL))
+                continue;
+            bool32 helpsSelf = AI_GetDamage(foe, battlerAtk, i, AI_DEFENDING, gAiLogicData) != 0
+                && AI_CanScreenReduceDamage(foe, battlerAtk, move);
+            bool32 helpsPartner = HasPartner(battlerAtk)
+                && AI_GetDamage(foe, GetPartnerBattler(battlerAtk), i, AI_DEFENDING, gAiLogicData) != 0
+                && AI_CanScreenReduceDamage(foe, GetPartnerBattler(battlerAtk), move);
+            if (!helpsSelf && !helpsPartner)
                 continue;
             if (!hasLaterBreaker)
                 return TRUE;
@@ -5148,7 +5390,29 @@ static bool32 HasMoveThatChangesKOThreshold(enum BattlerId battlerId, u32 noOfHi
     return FALSE;
 }
 
-static enum AIScore IncreaseStatUpScoreInternal(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Stat statId, s32 stages, bool32 considerContrary)
+static bool32 AI_SpeedBoostCrossesTarget(enum BattlerId actor, enum BattlerId target, s32 stages)
+{
+    u16 savedSpeed = gAiLogicData->speedStats[actor];
+    u8 savedStage = gBattleMons[actor].statStages[STAT_SPEED];
+    u32 savedParadoxStat = gBattleMons[actor].volatiles.paradoxBoostedStat;
+    if (stages <= 0 || savedSpeed >= gAiLogicData->speedStats[target])
+        return FALSE;
+
+    // Recalculate through native rounding, weather, items and paralysis. This
+    // is a per-move heuristic, not a native calculation inside the pair loop.
+    gBattleMons[actor].statStages[STAT_SPEED] = min(MAX_STAT_STAGE, savedStage + stages);
+    u32 boostedSpeed = GetBattlerTotalSpeedStat(actor, gAiLogicData->abilities[actor], gAiLogicData->holdEffects[actor]);
+    gAiLogicData->speedStats[actor] = boostedSpeed;
+    bool32 crosses = boostedSpeed > gAiLogicData->speedStats[target]
+        && AI_IsFaster(actor, target, MOVE_NONE, MOVE_NONE, DONT_CONSIDER_PRIORITY);
+    gBattleMons[actor].statStages[STAT_SPEED] = savedStage;
+    // Native paradox lookup may initialize this cached field while measuring.
+    gBattleMons[actor].volatiles.paradoxBoostedStat = savedParadoxStat;
+    gAiLogicData->speedStats[actor] = savedSpeed;
+    return crosses;
+}
+
+static enum AIScore IncreaseStatUpScoreInternal(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Stat statId, s32 stages, bool32 considerContrary, bool32 stagesAlreadyAdjusted)
 {
     enum AIScore tempScore = NO_INCREASE;
     u32 noOfHitsToFaint = NoOfHitsForTargetToFaintBattler(battlerDef, battlerAtk, AI_SHOULD_SETUP_DEFENDING, DONT_CONSIDER_ENDURE);
@@ -5176,7 +5440,10 @@ static enum AIScore IncreaseStatUpScoreInternal(enum BattlerId battlerAtk, enum 
         return NO_INCREASE;
 
     // Stat stages are effectively doubled under Simple.
-    if (gAiLogicData->abilities[battlerAtk] == ABILITY_SIMPLE)
+    // Self-effect callers already applied Simple. Avoid doubling it again for
+    // this Speed forecast; legacy non-Speed scoring is outside this change.
+    if (gAiLogicData->abilities[battlerAtk] == ABILITY_SIMPLE
+     && !(statId == STAT_SPEED && stagesAlreadyAdjusted))
         stages *= 2;
 
     // Predicting switch
@@ -5229,7 +5496,9 @@ static enum AIScore IncreaseStatUpScoreInternal(enum BattlerId battlerAtk, enum 
     case STAT_SPEED:
         if (gFieldStatuses & STATUS_FIELD_TRICK_ROOM && gFieldTimers.trickRoomTimer > 1)
             tempScore += AWFUL_EFFECT;
-        else if ((noOfHitsToFaint >= 3 && !aiIsFaster) || noOfHitsToFaint == UNKNOWN_NO_OF_HITS)
+        else if (!aiIsFaster
+              && (noOfHitsToFaint >= 3 || noOfHitsToFaint == UNKNOWN_NO_OF_HITS)
+              && AI_SpeedBoostCrossesTarget(battlerAtk, battlerDef, stages))
         {
             if (stages == 1)
                 tempScore += DECENT_EFFECT;
@@ -5307,12 +5576,12 @@ bool32 HasHPForDamagingSetup(enum BattlerId battlerAtk, enum BattlerId battlerDe
 
 enum AIScore IncreaseStatUpScore(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Stat stat, s32 stage)
 {
-    return IncreaseStatUpScoreInternal(battlerAtk, battlerDef, stat, stage, TRUE);
+    return IncreaseStatUpScoreInternal(battlerAtk, battlerDef, stat, stage, TRUE, FALSE);
 }
 
 enum AIScore IncreaseStatUpScoreContrary(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Stat stat, s32 stage)
 {
-    return IncreaseStatUpScoreInternal(battlerAtk, battlerDef, stat, stage, FALSE);
+    return IncreaseStatUpScoreInternal(battlerAtk, battlerDef, stat, stage, FALSE, FALSE);
 }
 
 void IncreasePoisonScore(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move, s32 *score)
@@ -6037,10 +6306,32 @@ bool32 AI_ShouldCopyStatChanges(enum BattlerId battlerAtk, enum BattlerId battle
     return FALSE;
 }
 
+// Share capacity checks between bad-move rejection and setup rewards. Attacks
+// that also lay hazards retain their damage even when the hazard is full.
+bool32 AI_IsHazardAtCapacity(enum BattleSide side, enum Move move)
+{
+    switch (GetMoveEffect(move))
+    {
+    case EFFECT_SPIKES:
+    case EFFECT_CEASELESS_EDGE:
+        return gSideTimers[side].spikesAmount >= 3;
+    case EFFECT_TOXIC_SPIKES:
+        return gSideTimers[side].toxicSpikesAmount >= 2;
+    case EFFECT_STEALTH_ROCK:
+    case EFFECT_STONE_AXE:
+        return IsHazardOnSide(side, HAZARDS_STEALTH_ROCK);
+    case EFFECT_STICKY_WEB:
+        return IsHazardOnSide(side, HAZARDS_STICKY_WEB);
+    default:
+        return FALSE;
+    }
+}
+
 //TODO - track entire opponent party data to determine hazard effectiveness
 bool32 AI_ShouldSetUpHazards(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move, struct AiLogicData *aiData)
 {
-    if (CountUsablePartyMons(battlerDef) == 0
+    if (AI_IsHazardAtCapacity(GetBattlerSide(battlerDef), move)
+     || CountUsablePartyMons(battlerDef) == 0
      || HasBattlerSideMoveWithAIEffect(battlerDef, AI_EFFECT_CLEAR_HAZARDS))
         return FALSE;
 
@@ -6808,9 +7099,9 @@ s32 GetSelfStatChangeScore(enum BattlerId battlerAtk, enum BattlerId battlerDef,
 
             if (stage > 0)
             {
-                // The function handles Simple which it does not need in this case, but it is harmless
-                // Also a lot of recalculating happening in there, can be optimized later (should be split in 2 parts)
-                tempScore += IncreaseStatUpScoreContrary(battlerAtk, battlerDef, stat, stage);
+                // Mark this delta adjusted so Speed does not apply Simple
+                // twice. Other legacy stat-score behavior remains unchanged.
+                tempScore += IncreaseStatUpScoreInternal(battlerAtk, battlerDef, stat, stage, FALSE, TRUE);
             }
             else if (stage < 0)
             {

@@ -214,8 +214,8 @@ Route121_Text_OkayMoveOutToMtPyre:
 
 Route121_Text_AheadLoomsMtPyre:
 	.string "Ahead looms MT. PYRE…\p"
-	.string "It is a natural monument to the spirits \n"
-	.string "of departed POKéMON…$"
+	.string "It is a natural monument to the\n"
+	.string "spirits of departed POKéMON…$"
 
 Route121_Text_MtPyrePierSign:
 	.string "MT. PYRE PIER\p"

@@ -39,9 +39,8 @@ Route114_FossilManiacsHouse_Text_DigReturnsYouToEntrance:
 	.string "Old peat has another use: use a PEAT\n"
 	.string "BLOCK on URSARING at night to evolve\l"
 	.string "it into URSALUNA, anywhere in HOENN.\p"
-	.string "The free Evolution Items archive\n"
-	.string "supplies PEAT BLOCKS once you have\l"
-	.string "the MEGA RING.$"
+	.string "LILYCOVE's evolution department\n"
+	.string "sells PEAT BLOCKS.$"
 
 Route114_FossilManiacsHouse_Text_RocksFillDisplayCase:
 	.string "Rocks in peculiar shapes fill\n"

@@ -176,7 +176,9 @@ Route109_SeashoreHouse_Text_SimonDefeated:
 	.string "…I lost, but I won't cry…$"
 
 Route109_SeashoreHouse_Text_SimonPostBattle:
-	.string "If one of my POKéMON knew the move\n"
-	.string "for carrying me across water on its\l"
-	.string "back, I could get rid of this inner tube.$"
-
+	.string "With SURF's HM and the right BADGE,\n"
+	.string "a partner that can use it could\l"
+	.string "carry me across the water.\p"
+	.string "It wouldn't need SURF in its\n"
+	.string "battle moves! Until then, I'll\l"
+	.string "keep my trusty inner tube.$"

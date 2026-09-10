@@ -1,0 +1,505 @@
+arm-none-eabi-cpp -iquote include -Wno-trigraphs -DMODERN=1 -DTESTING=0 -DEMERALD -std=gnu17 -DEC_HEADLESS_FIXTURES=0 -traditional-cpp - < src/data/trainers.party | tools/trainerproc/trainerproc -o src/data/trainers.h -i src/data/trainers.party -
+tools/scaninc/scaninc -M build/emerald-test/test/battle/ai/emerald_champions_plans.d -g build/assets -I include -I tools/agbcc/include test/battle/ai/emerald_champions_plans.c
+tools/scaninc/scaninc -M build/emerald-test/test/test_runner_battle.d -g build/assets -I include -I tools/agbcc/include test/test_runner_battle.c
+tools/scaninc/scaninc -M build/emerald-test/src/emerald_champions_headless.d -g build/assets -I include -I tools/agbcc/include src/emerald_champions_headless.c
+tools/scaninc/scaninc -M build/emerald-test/src/emerald_champions_battle_plan.d -g build/assets -I include -I tools/agbcc/include src/emerald_champions_battle_plan.c
+tools/scaninc/scaninc -M build/emerald-test/src/data.d -g build/assets -I include -I tools/agbcc/include src/data.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/data.o src/data.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/emerald_champions_battle_plan.o src/emerald_champions_battle_plan.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/src/emerald_champions_headless.o src/emerald_champions_headless.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/test_runner_battle.o test/test_runner_battle.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/battle/ai/emerald_champions_plans.o test/battle/ai/emerald_champions_plans.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 4
+[1] EC live review Tyron Mega order: [31mFAIL[0m
+REVIEW_INPUT trainer=704 slot=0 species=123 lv=28 HP=86 Atk=92 Def=58 SpA=39 SpD=58 Spe=99 item=494 ability=101
+REVIEW_INPUT trainer=704 slot=1 species=140 lv=28 HP=63 Atk=76 Def=64 SpA=39 SpD=38 Spe=68 item=494 ability=133
+REVIEW_INPUT trainer=704 slot=2 species=15 lv=29 HP=85 Atk=90 Def=37 SpA=36 SpD=60 Spe=92 item=296 ability=68
+REVIEW_INPUT trainer=704 slot=3 species=545 lv=28 HP=80 Atk=87 Def=63 SpA=39 SpD=52 Spe=103 item=481 ability=3
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Poison Jab target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Poison Jab target=0
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Poison Jab target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Poison Jab target=0
+work/tyron_gen9_probe.inc:60070: Did you mean: ANIMATION(ANIM_TYPE_MOVE, MOVE_POISON_JAB, opponentLeft)
+work/tyron_gen9_probe.inc:60070: Did you mean: ANIMATION(ANIM_TYPE_MOVE, MOVE_PSYCHIC, playerLeft)
+work/tyron_gen9_probe.inc:60070: Did you mean: ANIMATION(ANIM_TYPE_MOVE, MOVE_POISON_JAB, opponentRight)
+work/tyron_gen9_probe.inc:60070: Did you mean: ANIMATION(ANIM_TYPE_MOVE, MOVE_THUNDERBOLT, playerRight)
+AI decision turn=2 actor=3 move=Protect target=3
+work/tyron_gen9_probe.inc:60070: Unmatched ANIMATION
+[0] EC live review Tyron timing: healthy six-player bench: [32mPASS[0m
+REVIEW_INPUT trainer=704 slot=0 species=123 lv=28 HP=86 Atk=92 Def=58 SpA=39 SpD=58 Spe=99 item=494 ability=101
+REVIEW_INPUT trainer=704 slot=1 species=140 lv=28 HP=63 Atk=76 Def=64 SpA=39 SpD=38 Spe=68 item=494 ability=133
+REVIEW_INPUT trainer=704 slot=2 species=15 lv=29 HP=85 Atk=90 Def=37 SpA=36 SpD=60 Spe=92 item=296 ability=68
+REVIEW_INPUT trainer=704 slot=3 species=545 lv=28 HP=80 Atk=87 Def=63 SpA=39 SpD=52 Spe=103 item=481 ability=3
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Dual Wingbeat target=0
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Dual Wingbeat target=0
+AI decision turn=2 actor=3 move=Aqua Jet target=2
+REVIEW_AFTER board=99 turns=1 reserves=0 species=123/140 HP=86/63 foes=76/88 faints=0/0 initialFrames=50
+REVIEW_STATE actor=1 move=Dual Wingbeat PP=20/9/20/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=101 item=494
+REVIEW_STATE actor=3 move=Protect PP=10/5/20/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=133 item=494
+REVIEW_TIMING setup=7 bothActors=48 complete=55
+REVIEW_INPUT trainer=704 slot=0 species=123 lv=28 HP=86 Atk=92 Def=58 SpA=39 SpD=58 Spe=99 item=494 ability=101
+REVIEW_INPUT trainer=704 slot=1 species=140 lv=28 HP=63 Atk=76 Def=64 SpA=39 SpD=38 Spe=68 item=494 ability=133
+REVIEW_INPUT trainer=704 slot=2 species=15 lv=29 HP=85 Atk=90 Def=37 SpA=36 SpD=60 Spe=92 item=296 ability=68
+REVIEW_INPUT trainer=704 slot=3 species=545 lv=28 HP=80 Atk=87 Def=63 SpA=39 SpD=52 Spe=103 item=481 ability=3
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Poison Jab target=2
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Poison Jab target=2
+AI decision turn=2 actor=3 move=Rock Slide target=0
+REVIEW_AFTER board=99 turns=1 reserves=1 species=910/545 HP=85/80 foes=76/88 faints=0/0 initialFrames=52
+REVIEW_STATE actor=1 move=Poison Jab PP=5/19/10/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=91 item=296
+REVIEW_STATE actor=3 move=Protect PP=4/10/20/10 Atk=6 Def=6 SpA=6 SpD=6 Spe=7 status=0 ability=3 item=481
+REVIEW_TIMING setup=6 bothActors=22 complete=28
+[2] EC live review Tyron: Rock and Fire pressure: [32mPASS[0m
+REVIEW_INPUT trainer=704 slot=0 species=123 lv=28 HP=86 Atk=92 Def=58 SpA=39 SpD=58 Spe=99 item=494 ability=101
+REVIEW_INPUT trainer=704 slot=1 species=140 lv=28 HP=63 Atk=76 Def=64 SpA=39 SpD=38 Spe=68 item=494 ability=133
+REVIEW_INPUT trainer=704 slot=2 species=15 lv=29 HP=85 Atk=90 Def=37 SpA=36 SpD=60 Spe=92 item=296 ability=68
+REVIEW_INPUT trainer=704 slot=3 species=545 lv=28 HP=80 Atk=87 Def=63 SpA=39 SpD=52 Spe=103 item=481 ability=3
+AI decision turn=1 actor=0 move=Rock Slide target=1
+AI decision turn=1 actor=1 move=Bug Bite target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Liquidation target=0
+AI decision turn=2 actor=1 move=Bug Bite target=0
+AI decision turn=2 actor=3 move=Protect target=3
+REVIEW_AFTER board=10 turns=1 reserves=0 species=123/140 HP=34/2 foes=95/70 faints=0/0 initialFrames=44
+REVIEW_STATE actor=1 move=Bug Bite PP=20/10/19/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=101 item=494
+REVIEW_STATE actor=3 move=Liquidation PP=9/5/20/5 Atk=6 Def=5 SpA=6 SpD=6 Spe=8 status=0 ability=133 item=494
+REVIEW_INPUT trainer=704 slot=0 species=123 lv=28 HP=86 Atk=92 Def=58 SpA=39 SpD=58 Spe=99 item=494 ability=101
+REVIEW_INPUT trainer=704 slot=1 species=140 lv=28 HP=63 Atk=76 Def=64 SpA=39 SpD=38 Spe=68 item=494 ability=133
+REVIEW_INPUT trainer=704 slot=2 species=15 lv=29 HP=85 Atk=90 Def=37 SpA=36 SpD=60 Spe=92 item=296 ability=68
+REVIEW_INPUT trainer=704 slot=3 species=545 lv=28 HP=80 Atk=87 Def=63 SpA=39 SpD=52 Spe=103 item=481 ability=3
+AI decision turn=1 actor=0 move=Rock Slide target=1
+AI decision turn=1 actor=1 move=Bug Bite target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Liquidation target=0
+AI decision turn=2 actor=0 move=Rock Slide target=1
+AI decision turn=2 actor=1 move=Bug Bite target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=1 move=Bug Bite target=2
+AI decision turn=3 actor=3 move=Liquidation target=0
+REVIEW_AFTER board=10 turns=2 reserves=0 species=123/140 HP=3/2 foes=58/70 faints=0/0 initialFrames=44
+REVIEW_STATE actor=1 move=Bug Bite PP=20/10/18/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=101 item=494
+REVIEW_STATE actor=3 move=Protect PP=9/5/20/4 Atk=6 Def=5 SpA=6 SpD=6 Spe=8 status=0 ability=133 item=494
+REVIEW_INPUT trainer=704 slot=0 species=123 lv=28 HP=86 Atk=92 Def=58 SpA=39 SpD=58 Spe=99 item=494 ability=101
+REVIEW_INPUT trainer=704 slot=1 species=140 lv=28 HP=63 Atk=76 Def=64 SpA=39 SpD=38 Spe=68 item=494 ability=133
+REVIEW_INPUT trainer=704 slot=2 species=15 lv=29 HP=85 Atk=90 Def=37 SpA=36 SpD=60 Spe=92 item=296 ability=68
+REVIEW_INPUT trainer=704 slot=3 species=545 lv=28 HP=80 Atk=87 Def=63 SpA=39 SpD=52 Spe=103 item=481 ability=3
+AI decision turn=1 actor=0 move=Rock Slide target=1
+AI decision turn=1 actor=1 move=Bug Bite target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Liquidation target=0
+AI decision turn=2 actor=0 move=Rock Slide target=1
+AI decision turn=2 actor=1 move=Bug Bite target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=0 move=Rock Slide target=1
+AI decision turn=3 actor=1 move=Bug Bite target=2
+AI decision turn=3 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=3 move=Liquidation target=0
+AI switch turn=3 actor=3 party=2
+AI decision turn=4 actor=1 move=Bug Bite target=2
+AI decision turn=4 actor=3 move=Poison Jab target=2
+REVIEW_AFTER board=10 turns=3 reserves=0 species=123/15 HP=3/85 foes=0/36 faints=1/1 initialFrames=44
+REVIEW_STATE actor=1 move=Bug Bite PP=20/10/17/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=101 item=494
+REVIEW_STATE actor=3 move=- PP=5/20/10/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=68 item=296
+REVIEW_INPUT trainer=704 slot=0 species=123 lv=28 HP=86 Atk=92 Def=58 SpA=39 SpD=58 Spe=99 item=494 ability=101
+REVIEW_INPUT trainer=704 slot=1 species=140 lv=28 HP=63 Atk=76 Def=64 SpA=39 SpD=38 Spe=68 item=494 ability=133
+REVIEW_INPUT trainer=704 slot=2 species=15 lv=29 HP=85 Atk=90 Def=37 SpA=36 SpD=60 Spe=92 item=296 ability=68
+REVIEW_INPUT trainer=704 slot=3 species=545 lv=28 HP=80 Atk=87 Def=63 SpA=39 SpD=52 Spe=103 item=481 ability=3
+AI decision turn=1 actor=0 move=Rock Slide target=1
+AI decision turn=1 actor=1 move=Bug Bite target=2
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Liquidation target=0
+AI decision turn=2 actor=0 move=Rock Slide target=1
+AI decision turn=2 actor=1 move=Bug Bite target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=0 move=Rock Slide target=1
+AI decision turn=3 actor=1 move=Bug Bite target=2
+AI decision turn=3 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=3 move=Liquidation target=0
+AI switch turn=3 actor=3 party=2
+AI decision turn=4 actor=2 move=Thunderbolt target=3
+AI decision turn=4 actor=1 move=Bug Bite target=2
+AI decision turn=4 actor=3 move=Poison Jab target=2
+REVIEW_AFTER board=10 turns=4 reserves=0 species=123/910 HP=3/85 foes=0/0 faints=1/2 initialFrames=44
+REVIEW_STATE actor=1 move=Bug Bite PP=20/10/17/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=101 item=494
+REVIEW_STATE actor=3 move=Poison Jab PP=5/19/10/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=91 item=296
+REVIEW_INPUT trainer=704 slot=0 species=123 lv=28 HP=86 Atk=92 Def=58 SpA=39 SpD=58 Spe=99 item=494 ability=101
+REVIEW_INPUT trainer=704 slot=1 species=140 lv=28 HP=63 Atk=76 Def=64 SpA=39 SpD=38 Spe=68 item=494 ability=133
+REVIEW_INPUT trainer=704 slot=2 species=15 lv=29 HP=85 Atk=90 Def=37 SpA=36 SpD=60 Spe=92 item=296 ability=68
+REVIEW_INPUT trainer=704 slot=3 species=545 lv=28 HP=80 Atk=87 Def=63 SpA=39 SpD=52 Spe=103 item=481 ability=3
+AI decision turn=1 actor=0 move=Flamethrower target=1
+AI decision turn=1 actor=1 move=Dual Wingbeat target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Aqua Jet target=0
+AI decision turn=2 actor=1 move=Dual Wingbeat target=0
+AI decision turn=2 actor=3 move=Aqua Jet target=0
+REVIEW_AFTER board=11 turns=1 reserves=0 species=123/140 HP=13/10 foes=21/104 faints=0/0 initialFrames=45
+REVIEW_STATE actor=1 move=Dual Wingbeat PP=20/9/20/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=16 ability=101 item=494
+REVIEW_STATE actor=3 move=Aqua Jet PP=10/5/19/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=16 ability=133 item=494
+REVIEW_INPUT trainer=704 slot=0 species=123 lv=28 HP=86 Atk=92 Def=58 SpA=39 SpD=58 Spe=99 item=494 ability=101
+REVIEW_INPUT trainer=704 slot=1 species=140 lv=28 HP=63 Atk=76 Def=64 SpA=39 SpD=38 Spe=68 item=494 ability=133
+REVIEW_INPUT trainer=704 slot=2 species=15 lv=29 HP=85 Atk=90 Def=37 SpA=36 SpD=60 Spe=92 item=296 ability=68
+REVIEW_INPUT trainer=704 slot=3 species=545 lv=28 HP=80 Atk=87 Def=63 SpA=39 SpD=52 Spe=103 item=481 ability=3
+AI decision turn=1 actor=0 move=Flamethrower target=1
+AI decision turn=1 actor=1 move=Dual Wingbeat target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Aqua Jet target=0
+AI decision turn=2 actor=0 move=Flamethrower target=1
+AI decision turn=2 actor=1 move=Dual Wingbeat target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Aqua Jet target=0
+AI switch turn=2 actor=3 party=2
+AI decision turn=3 actor=1 move=Bug Bite target=2
+AI decision turn=3 actor=3 move=Drill Run target=2
+REVIEW_AFTER board=11 turns=2 reserves=0 species=123/15 HP=8/85 foes=0/104 faints=1/1 initialFrames=45
+REVIEW_STATE actor=1 move=Dual Wingbeat PP=20/8/20/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=16 ability=101 item=494
+REVIEW_STATE actor=3 move=- PP=5/20/10/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=68 item=296
+REVIEW_INPUT trainer=704 slot=0 species=123 lv=28 HP=86 Atk=92 Def=58 SpA=39 SpD=58 Spe=99 item=494 ability=101
+REVIEW_INPUT trainer=704 slot=1 species=140 lv=28 HP=63 Atk=76 Def=64 SpA=39 SpD=38 Spe=68 item=494 ability=133
+REVIEW_INPUT trainer=704 slot=2 species=15 lv=29 HP=85 Atk=90 Def=37 SpA=36 SpD=60 Spe=92 item=296 ability=68
+REVIEW_INPUT trainer=704 slot=3 species=545 lv=28 HP=80 Atk=87 Def=63 SpA=39 SpD=52 Spe=103 item=481 ability=3
+AI decision turn=1 actor=0 move=Flamethrower target=1
+AI decision turn=1 actor=1 move=Dual Wingbeat target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Aqua Jet target=0
+AI decision turn=2 actor=0 move=Flamethrower target=1
+AI decision turn=2 actor=1 move=Dual Wingbeat target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Aqua Jet target=0
+AI switch turn=2 actor=3 party=2
+AI decision turn=3 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=1 move=Bug Bite target=2
+AI decision turn=3 actor=3 move=Drill Run target=2
+AI decision turn=4 actor=1 move=Dual Wingbeat target=2
+AI decision turn=4 actor=3 move=Poison Jab target=2
+REVIEW_AFTER board=11 turns=3 reserves=0 species=123/15 HP=24/61 foes=0/47 faints=1/1 initialFrames=45
+REVIEW_STATE actor=1 move=Bug Bite PP=20/8/19/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=16 ability=101 item=494
+REVIEW_STATE actor=3 move=Drill Run PP=5/20/9/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=68 item=296
+REVIEW_INPUT trainer=704 slot=0 species=123 lv=28 HP=86 Atk=92 Def=58 SpA=39 SpD=58 Spe=99 item=494 ability=101
+REVIEW_INPUT trainer=704 slot=1 species=140 lv=28 HP=63 Atk=76 Def=64 SpA=39 SpD=38 Spe=68 item=494 ability=133
+REVIEW_INPUT trainer=704 slot=2 species=15 lv=29 HP=85 Atk=90 Def=37 SpA=36 SpD=60 Spe=92 item=296 ability=68
+REVIEW_INPUT trainer=704 slot=3 species=545 lv=28 HP=80 Atk=87 Def=63 SpA=39 SpD=52 Spe=103 item=481 ability=3
+AI decision turn=1 actor=0 move=Flamethrower target=1
+AI decision turn=1 actor=1 move=Dual Wingbeat target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Aqua Jet target=0
+AI decision turn=2 actor=0 move=Flamethrower target=1
+AI decision turn=2 actor=1 move=Dual Wingbeat target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Aqua Jet target=0
+AI switch turn=2 actor=3 party=2
+AI decision turn=3 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=1 move=Bug Bite target=2
+AI decision turn=3 actor=3 move=Drill Run target=2
+AI decision turn=4 actor=2 move=Thunderbolt target=3
+AI decision turn=4 actor=1 move=Dual Wingbeat target=2
+AI decision turn=4 actor=3 move=Poison Jab target=2
+REVIEW_AFTER board=11 turns=4 reserves=0 species=123/910 HP=24/61 foes=0/0 faints=1/2 initialFrames=45
+REVIEW_STATE actor=1 move=Bug Bite PP=20/8/19/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=16 ability=101 item=494
+REVIEW_STATE actor=3 move=Poison Jab PP=5/19/9/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=91 item=296
+[3] EC live review Tyron: physical special and flinch pressure: [32mPASS[0m
+REVIEW_INPUT trainer=704 slot=0 species=123 lv=28 HP=86 Atk=92 Def=58 SpA=39 SpD=58 Spe=99 item=494 ability=101
+REVIEW_INPUT trainer=704 slot=1 species=140 lv=28 HP=63 Atk=76 Def=64 SpA=39 SpD=38 Spe=68 item=494 ability=133
+REVIEW_INPUT trainer=704 slot=2 species=15 lv=29 HP=85 Atk=90 Def=37 SpA=36 SpD=60 Spe=92 item=296 ability=68
+REVIEW_INPUT trainer=704 slot=3 species=545 lv=28 HP=80 Atk=87 Def=63 SpA=39 SpD=52 Spe=103 item=481 ability=3
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Dual Wingbeat target=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Dual Wingbeat target=2
+AI decision turn=2 actor=3 move=Liquidation target=0
+REVIEW_AFTER board=0 turns=1 reserves=0 species=123/140 HP=52/63 foes=90/43 faints=0/0 initialFrames=46
+REVIEW_STATE actor=1 move=Dual Wingbeat PP=20/9/20/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=101 item=494
+REVIEW_STATE actor=3 move=Protect PP=10/5/20/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=133 item=494
+TYRON_SPEED actual=99/68
+REVIEW_INPUT trainer=704 slot=0 species=123 lv=28 HP=86 Atk=92 Def=58 SpA=39 SpD=58 Spe=99 item=494 ability=101
+REVIEW_INPUT trainer=704 slot=1 species=140 lv=28 HP=63 Atk=76 Def=64 SpA=39 SpD=38 Spe=68 item=494 ability=133
+REVIEW_INPUT trainer=704 slot=2 species=15 lv=29 HP=85 Atk=90 Def=37 SpA=36 SpD=60 Spe=92 item=296 ability=68
+REVIEW_INPUT trainer=704 slot=3 species=545 lv=28 HP=80 Atk=87 Def=63 SpA=39 SpD=52 Spe=103 item=481 ability=3
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Dual Wingbeat target=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Dual Wingbeat target=2
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Liquidation target=0
+AI decision turn=3 actor=1 move=Dual Wingbeat target=0
+AI decision turn=3 actor=3 move=Liquidation target=0
+REVIEW_AFTER board=0 turns=2 reserves=0 species=123/140 HP=18/63 foes=46/0 faints=0/1 initialFrames=46
+REVIEW_STATE actor=1 move=Dual Wingbeat PP=20/8/20/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=101 item=494
+REVIEW_STATE actor=3 move=Liquidation PP=9/5/20/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=133 item=494
+TYRON_SPEED actual=99/68
+REVIEW_INPUT trainer=704 slot=0 species=123 lv=28 HP=86 Atk=92 Def=58 SpA=39 SpD=58 Spe=99 item=494 ability=101
+REVIEW_INPUT trainer=704 slot=1 species=140 lv=28 HP=63 Atk=76 Def=64 SpA=39 SpD=38 Spe=68 item=494 ability=133
+REVIEW_INPUT trainer=704 slot=2 species=15 lv=29 HP=85 Atk=90 Def=37 SpA=36 SpD=60 Spe=92 item=296 ability=68
+REVIEW_INPUT trainer=704 slot=3 species=545 lv=28 HP=80 Atk=87 Def=63 SpA=39 SpD=52 Spe=103 item=481 ability=3
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Dual Wingbeat target=2
+AI decision turn=1 actor=2 move=Drain Punch target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Dual Wingbeat target=2
+AI decision turn=2 actor=2 move=Drain Punch target=3
+AI decision turn=2 actor=3 move=Liquidation target=0
+AI decision turn=3 actor=0 move=Double-Edge target=1
+AI decision turn=3 actor=1 move=Dual Wingbeat target=0
+AI decision turn=3 actor=3 move=Liquidation target=0
+REVIEW_AFTER board=0 turns=3 reserves=0 species=123/140 HP=18/63 foes=0/0 faints=0/2 initialFrames=46
+REVIEW_STATE actor=1 move=Dual Wingbeat PP=20/7/20/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=101 item=494
+REVIEW_STATE actor=3 move=Liquidation PP=9/5/20/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=133 item=494
+TYRON_SPEED actual=99/68
+REVIEW_INPUT trainer=704 slot=0 species=123 lv=28 HP=86 Atk=92 Def=58 SpA=39 SpD=58 Spe=99 item=494 ability=101
+REVIEW_INPUT trainer=704 slot=1 species=140 lv=28 HP=63 Atk=76 Def=64 SpA=39 SpD=38 Spe=68 item=494 ability=133
+REVIEW_INPUT trainer=704 slot=2 species=15 lv=29 HP=85 Atk=90 Def=37 SpA=36 SpD=60 Spe=92 item=296 ability=68
+REVIEW_INPUT trainer=704 slot=3 species=545 lv=28 HP=80 Atk=87 Def=63 SpA=39 SpD=52 Spe=103 item=481 ability=3
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Dual Wingbeat target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Aqua Jet target=0
+AI decision turn=2 actor=1 move=Bug Bite target=2
+AI decision turn=2 actor=3 move=Aqua Jet target=0
+REVIEW_AFTER board=1 turns=1 reserves=0 species=123/140 HP=47/13 foes=3/104 faints=0/0 initialFrames=42
+REVIEW_STATE actor=1 move=Dual Wingbeat PP=20/9/20/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=101 item=494
+REVIEW_STATE actor=3 move=Aqua Jet PP=10/5/19/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=133 item=494
+TYRON_SPEED actual=99/68
+REVIEW_INPUT trainer=704 slot=0 species=123 lv=28 HP=86 Atk=92 Def=58 SpA=39 SpD=58 Spe=99 item=494 ability=101
+REVIEW_INPUT trainer=704 slot=1 species=140 lv=28 HP=63 Atk=76 Def=64 SpA=39 SpD=38 Spe=68 item=494 ability=133
+REVIEW_INPUT trainer=704 slot=2 species=15 lv=29 HP=85 Atk=90 Def=37 SpA=36 SpD=60 Spe=92 item=296 ability=68
+REVIEW_INPUT trainer=704 slot=3 species=545 lv=28 HP=80 Atk=87 Def=63 SpA=39 SpD=52 Spe=103 item=481 ability=3
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Dual Wingbeat target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Aqua Jet target=0
+AI decision turn=2 actor=0 move=Psychic target=1
+AI decision turn=2 actor=1 move=Bug Bite target=2
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Aqua Jet target=0
+AI switch turn=2 actor=3 party=3
+AI decision turn=3 actor=1 move=Bug Bite target=2
+AI decision turn=3 actor=3 move=Megahorn target=2
+REVIEW_AFTER board=1 turns=2 reserves=0 species=123/545 HP=68/80 foes=0/70 faints=1/1 initialFrames=42
+REVIEW_STATE actor=1 move=Bug Bite PP=20/9/19/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=101 item=494
+REVIEW_STATE actor=3 move=- PP=5/10/20/10 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=3 item=481
+TYRON_SPEED actual=99/103
+REVIEW_INPUT trainer=704 slot=0 species=123 lv=28 HP=86 Atk=92 Def=58 SpA=39 SpD=58 Spe=99 item=494 ability=101
+REVIEW_INPUT trainer=704 slot=1 species=140 lv=28 HP=63 Atk=76 Def=64 SpA=39 SpD=38 Spe=68 item=494 ability=133
+REVIEW_INPUT trainer=704 slot=2 species=15 lv=29 HP=85 Atk=90 Def=37 SpA=36 SpD=60 Spe=92 item=296 ability=68
+REVIEW_INPUT trainer=704 slot=3 species=545 lv=28 HP=80 Atk=87 Def=63 SpA=39 SpD=52 Spe=103 item=481 ability=3
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Dual Wingbeat target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Aqua Jet target=0
+AI decision turn=2 actor=0 move=Psychic target=1
+AI decision turn=2 actor=1 move=Bug Bite target=2
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Aqua Jet target=0
+AI switch turn=2 actor=3 party=3
+AI decision turn=3 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=1 move=Bug Bite target=2
+AI decision turn=3 actor=3 move=Megahorn target=2
+REVIEW_AFTER board=1 turns=3 reserves=0 species=123/545 HP=68/80 foes=0/0 faints=1/2 initialFrames=42
+REVIEW_STATE actor=1 move=Bug Bite PP=20/9/18/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=101 item=494
+REVIEW_STATE actor=3 move=Megahorn PP=5/9/20/10 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=3 item=481
+TYRON_SPEED actual=99/103
+REVIEW_INPUT trainer=704 slot=0 species=123 lv=28 HP=86 Atk=92 Def=58 SpA=39 SpD=58 Spe=99 item=494 ability=101
+REVIEW_INPUT trainer=704 slot=1 species=140 lv=28 HP=63 Atk=76 Def=64 SpA=39 SpD=38 Spe=68 item=494 ability=133
+REVIEW_INPUT trainer=704 slot=2 species=15 lv=29 HP=85 Atk=90 Def=37 SpA=36 SpD=60 Spe=92 item=296 ability=68
+REVIEW_INPUT trainer=704 slot=3 species=545 lv=28 HP=80 Atk=87 Def=63 SpA=39 SpD=52 Spe=103 item=481 ability=3
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Dual Wingbeat target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Dual Wingbeat target=2
+AI decision turn=2 actor=3 move=Liquidation target=0
+REVIEW_AFTER board=2 turns=1 reserves=0 species=123/140 HP=76/63 foes=76/104 faints=0/0 initialFrames=47
+REVIEW_STATE actor=1 move=- PP=20/10/20/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=101 item=494
+REVIEW_STATE actor=3 move=Protect PP=10/5/20/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=133 item=494
+TYRON_SPEED actual=99/68
+REVIEW_INPUT trainer=704 slot=0 species=123 lv=28 HP=86 Atk=92 Def=58 SpA=39 SpD=58 Spe=99 item=494 ability=101
+REVIEW_INPUT trainer=704 slot=1 species=140 lv=28 HP=63 Atk=76 Def=64 SpA=39 SpD=38 Spe=68 item=494 ability=133
+REVIEW_INPUT trainer=704 slot=2 species=15 lv=29 HP=85 Atk=90 Def=37 SpA=36 SpD=60 Spe=92 item=296 ability=68
+REVIEW_INPUT trainer=704 slot=3 species=545 lv=28 HP=80 Atk=87 Def=63 SpA=39 SpD=52 Spe=103 item=481 ability=3
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Dual Wingbeat target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Dual Wingbeat target=2
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=Liquidation target=0
+AI decision turn=3 actor=1 move=Dual Wingbeat target=0
+AI decision turn=3 actor=3 move=Aqua Jet target=0
+REVIEW_AFTER board=2 turns=2 reserves=0 species=123/140 HP=69/63 foes=25/0 faints=0/1 initialFrames=47
+REVIEW_STATE actor=1 move=Dual Wingbeat PP=20/9/20/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=101 item=494
+REVIEW_STATE actor=3 move=Liquidation PP=9/5/20/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=133 item=494
+TYRON_SPEED actual=99/68
+REVIEW_INPUT trainer=704 slot=0 species=123 lv=28 HP=86 Atk=92 Def=58 SpA=39 SpD=58 Spe=99 item=494 ability=101
+REVIEW_INPUT trainer=704 slot=1 species=140 lv=28 HP=63 Atk=76 Def=64 SpA=39 SpD=38 Spe=68 item=494 ability=133
+REVIEW_INPUT trainer=704 slot=2 species=15 lv=29 HP=85 Atk=90 Def=37 SpA=36 SpD=60 Spe=92 item=296 ability=68
+REVIEW_INPUT trainer=704 slot=3 species=545 lv=28 HP=80 Atk=87 Def=63 SpA=39 SpD=52 Spe=103 item=481 ability=3
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Dual Wingbeat target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Dual Wingbeat target=2
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=Liquidation target=0
+AI decision turn=3 actor=0 move=Drain Punch target=1
+AI decision turn=3 actor=1 move=Dual Wingbeat target=0
+AI decision turn=3 actor=3 move=Aqua Jet target=0
+REVIEW_AFTER board=2 turns=3 reserves=0 species=123/140 HP=69/63 foes=0/0 faints=0/2 initialFrames=47
+REVIEW_STATE actor=1 move=Dual Wingbeat PP=20/9/20/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=101 item=494
+REVIEW_STATE actor=3 move=Aqua Jet PP=9/5/19/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=133 item=494
+TYRON_SPEED actual=99/68
+REVIEW_INPUT trainer=704 slot=0 species=123 lv=28 HP=86 Atk=92 Def=58 SpA=39 SpD=58 Spe=99 item=494 ability=101
+REVIEW_INPUT trainer=704 slot=1 species=140 lv=28 HP=63 Atk=76 Def=64 SpA=39 SpD=38 Spe=68 item=494 ability=133
+REVIEW_INPUT trainer=704 slot=2 species=15 lv=29 HP=85 Atk=90 Def=37 SpA=36 SpD=60 Spe=92 item=296 ability=68
+REVIEW_INPUT trainer=704 slot=3 species=545 lv=28 HP=80 Atk=87 Def=63 SpA=39 SpD=52 Spe=103 item=481 ability=3
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Poison Jab target=0
+AI decision turn=1 actor=2 move=Ice Punch target=3
+AI decision turn=1 actor=3 move=Poison Jab target=0
+AI decision turn=2 actor=1 move=Poison Jab target=2
+AI decision turn=2 actor=3 move=Poison Jab target=2
+REVIEW_AFTER board=0 turns=1 reserves=1 species=910/545 HP=85/49 foes=0/119 faints=0/1 initialFrames=39
+REVIEW_STATE actor=1 move=Poison Jab PP=5/19/10/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=91 item=296
+REVIEW_STATE actor=3 move=Poison Jab PP=5/10/19/10 Atk=6 Def=6 SpA=6 SpD=6 Spe=7 status=0 ability=3 item=481
+TYRON_SPEED actual=127/154
+REVIEW_INPUT trainer=704 slot=0 species=123 lv=28 HP=86 Atk=92 Def=58 SpA=39 SpD=58 Spe=99 item=494 ability=101
+REVIEW_INPUT trainer=704 slot=1 species=140 lv=28 HP=63 Atk=76 Def=64 SpA=39 SpD=38 Spe=68 item=494 ability=133
+REVIEW_INPUT trainer=704 slot=2 species=15 lv=29 HP=85 Atk=90 Def=37 SpA=36 SpD=60 Spe=92 item=296 ability=68
+REVIEW_INPUT trainer=704 slot=3 species=545 lv=28 HP=80 Atk=87 Def=63 SpA=39 SpD=52 Spe=103 item=481 ability=3
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Poison Jab target=0
+AI decision turn=1 actor=2 move=Ice Punch target=3
+AI decision turn=1 actor=3 move=Poison Jab target=0
+AI decision turn=2 actor=2 move=Ice Punch target=3
+AI decision turn=2 actor=1 move=Poison Jab target=2
+AI decision turn=2 actor=3 move=Poison Jab target=2
+AI decision turn=3 actor=1 move=Poison Jab target=2
+AI decision turn=3 actor=3 move=Protect target=3
+REVIEW_AFTER board=0 turns=2 reserves=1 species=910/545 HP=85/4 foes=0/36 faints=0/1 initialFrames=39
+REVIEW_STATE actor=1 move=Poison Jab PP=5/18/10/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=91 item=296
+REVIEW_STATE actor=3 move=Poison Jab PP=5/10/18/10 Atk=6 Def=6 SpA=6 SpD=6 Spe=8 status=0 ability=3 item=481
+TYRON_SPEED actual=127/206
+REVIEW_INPUT trainer=704 slot=0 species=123 lv=28 HP=86 Atk=92 Def=58 SpA=39 SpD=58 Spe=99 item=494 ability=101
+REVIEW_INPUT trainer=704 slot=1 species=140 lv=28 HP=63 Atk=76 Def=64 SpA=39 SpD=38 Spe=68 item=494 ability=133
+REVIEW_INPUT trainer=704 slot=2 species=15 lv=29 HP=85 Atk=90 Def=37 SpA=36 SpD=60 Spe=92 item=296 ability=68
+REVIEW_INPUT trainer=704 slot=3 species=545 lv=28 HP=80 Atk=87 Def=63 SpA=39 SpD=52 Spe=103 item=481 ability=3
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Poison Jab target=0
+AI decision turn=1 actor=2 move=Ice Punch target=3
+AI decision turn=1 actor=3 move=Poison Jab target=0
+AI decision turn=2 actor=2 move=Ice Punch target=3
+AI decision turn=2 actor=1 move=Poison Jab target=2
+AI decision turn=2 actor=3 move=Poison Jab target=2
+AI decision turn=3 actor=2 move=Ice Punch target=3
+AI decision turn=3 actor=1 move=Poison Jab target=2
+AI decision turn=3 actor=3 move=Protect target=3
+REVIEW_AFTER board=0 turns=3 reserves=1 species=910/545 HP=85/4 foes=0/0 faints=0/2 initialFrames=39
+REVIEW_STATE actor=1 move=Poison Jab PP=5/17/10/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=91 item=296
+REVIEW_STATE actor=3 move=Protect PP=4/10/18/10 Atk=6 Def=6 SpA=6 SpD=6 Spe=8 status=0 ability=3 item=481
+TYRON_SPEED actual=127/206
+REVIEW_INPUT trainer=704 slot=0 species=123 lv=28 HP=86 Atk=92 Def=58 SpA=39 SpD=58 Spe=99 item=494 ability=101
+REVIEW_INPUT trainer=704 slot=1 species=140 lv=28 HP=63 Atk=76 Def=64 SpA=39 SpD=38 Spe=68 item=494 ability=133
+REVIEW_INPUT trainer=704 slot=2 species=15 lv=29 HP=85 Atk=90 Def=37 SpA=36 SpD=60 Spe=92 item=296 ability=68
+REVIEW_INPUT trainer=704 slot=3 species=545 lv=28 HP=80 Atk=87 Def=63 SpA=39 SpD=52 Spe=103 item=481 ability=3
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Poison Jab target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Poison Jab target=0
+AI decision turn=2 actor=3 move=Protect target=3
+REVIEW_AFTER board=1 turns=1 reserves=1 species=910/545 HP=0/55 foes=0/104 faints=1/1 initialFrames=34
+REVIEW_STATE actor=1 move=- PP=5/19/10/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=0 item=296
+REVIEW_STATE actor=3 move=Poison Jab PP=5/10/19/10 Atk=6 Def=6 SpA=6 SpD=6 Spe=7 status=0 ability=3 item=481
+TYRON_SPEED actual=127/154
+REVIEW_INPUT trainer=704 slot=0 species=123 lv=28 HP=86 Atk=92 Def=58 SpA=39 SpD=58 Spe=99 item=494 ability=101
+REVIEW_INPUT trainer=704 slot=1 species=140 lv=28 HP=63 Atk=76 Def=64 SpA=39 SpD=38 Spe=68 item=494 ability=133
+REVIEW_INPUT trainer=704 slot=2 species=15 lv=29 HP=85 Atk=90 Def=37 SpA=36 SpD=60 Spe=92 item=296 ability=68
+REVIEW_INPUT trainer=704 slot=3 species=545 lv=28 HP=80 Atk=87 Def=63 SpA=39 SpD=52 Spe=103 item=481 ability=3
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Poison Jab target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Poison Jab target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=3 move=Megahorn target=2
+REVIEW_AFTER board=1 turns=2 reserves=1 species=910/545 HP=0/55 foes=0/104 faints=1/1 initialFrames=34
+REVIEW_STATE actor=1 move=- PP=5/19/10/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=0 item=296
+REVIEW_STATE actor=3 move=Protect PP=4/10/19/10 Atk=6 Def=6 SpA=6 SpD=6 Spe=8 status=0 ability=3 item=481
+TYRON_SPEED actual=127/206
+REVIEW_INPUT trainer=704 slot=0 species=123 lv=28 HP=86 Atk=92 Def=58 SpA=39 SpD=58 Spe=99 item=494 ability=101
+REVIEW_INPUT trainer=704 slot=1 species=140 lv=28 HP=63 Atk=76 Def=64 SpA=39 SpD=38 Spe=68 item=494 ability=133
+REVIEW_INPUT trainer=704 slot=2 species=15 lv=29 HP=85 Atk=90 Def=37 SpA=36 SpD=60 Spe=92 item=296 ability=68
+REVIEW_INPUT trainer=704 slot=3 species=545 lv=28 HP=80 Atk=87 Def=63 SpA=39 SpD=52 Spe=103 item=481 ability=3
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Poison Jab target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Poison Jab target=0
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Protect target=3
+AI decision turn=3 actor=2 move=Thunderbolt target=3
+AI decision turn=3 actor=3 move=Megahorn target=2
+AI decision turn=4 actor=3 move=Poison Jab target=2
+REVIEW_AFTER board=1 turns=3 reserves=1 species=910/545 HP=0/30 foes=0/61 faints=1/1 initialFrames=34
+REVIEW_STATE actor=1 move=- PP=5/19/10/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=0 item=296
+REVIEW_STATE actor=3 move=Megahorn PP=4/9/19/10 Atk=6 Def=6 SpA=6 SpD=6 Spe=9 status=0 ability=3 item=481
+TYRON_SPEED actual=127/257
+REVIEW_INPUT trainer=704 slot=0 species=123 lv=28 HP=86 Atk=92 Def=58 SpA=39 SpD=58 Spe=99 item=494 ability=101
+REVIEW_INPUT trainer=704 slot=1 species=140 lv=28 HP=63 Atk=76 Def=64 SpA=39 SpD=38 Spe=68 item=494 ability=133
+REVIEW_INPUT trainer=704 slot=2 species=15 lv=29 HP=85 Atk=90 Def=37 SpA=36 SpD=60 Spe=92 item=296 ability=68
+REVIEW_INPUT trainer=704 slot=3 species=545 lv=28 HP=80 Atk=87 Def=63 SpA=39 SpD=52 Spe=103 item=481 ability=3
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Poison Jab target=2
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Poison Jab target=0
+AI decision turn=2 actor=1 move=Poison Jab target=2
+AI decision turn=2 actor=3 move=Poison Jab target=0
+REVIEW_AFTER board=2 turns=1 reserves=1 species=910/545 HP=63/38 foes=13/104 faints=0/0 initialFrames=40
+REVIEW_STATE actor=1 move=- PP=5/20/10/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=91 item=296
+REVIEW_STATE actor=3 move=Poison Jab PP=5/10/19/10 Atk=6 Def=6 SpA=6 SpD=6 Spe=7 status=0 ability=3 item=481
+TYRON_SPEED actual=127/154
+REVIEW_INPUT trainer=704 slot=0 species=123 lv=28 HP=86 Atk=92 Def=58 SpA=39 SpD=58 Spe=99 item=494 ability=101
+REVIEW_INPUT trainer=704 slot=1 species=140 lv=28 HP=63 Atk=76 Def=64 SpA=39 SpD=38 Spe=68 item=494 ability=133
+REVIEW_INPUT trainer=704 slot=2 species=15 lv=29 HP=85 Atk=90 Def=37 SpA=36 SpD=60 Spe=92 item=296 ability=68
+REVIEW_INPUT trainer=704 slot=3 species=545 lv=28 HP=80 Atk=87 Def=63 SpA=39 SpD=52 Spe=103 item=481 ability=3
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Poison Jab target=2
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Poison Jab target=0
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Poison Jab target=2
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=Poison Jab target=0
+REVIEW_AFTER board=2 turns=2 reserves=1 species=910/545 HP=63/38 foes=0/0 faints=0/2 initialFrames=40
+REVIEW_STATE actor=1 move=Poison Jab PP=5/19/10/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=91 item=296
+REVIEW_STATE actor=3 move=Poison Jab PP=5/10/18/10 Atk=6 Def=6 SpA=6 SpD=6 Spe=7 status=0 ability=3 item=481
+TYRON_SPEED actual=127/154
+
+  [31mFAILED[0m tests:
+  - [31mwork/tyron_gen9_probe.inc:60057[0m: EC live review Tyron Mega order: 60070: Unmatched ANIMATION
+
+- Tests [31mFAILED[0m:          1    Add TESTS='X' to run tests with the defined prefix.
+- Tests [32mPASSED[0m:          3
+- Tests [34mTOTAL[0m:           4
+
+make: *** [check] Error 1

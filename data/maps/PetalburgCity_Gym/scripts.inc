@@ -1098,9 +1098,22 @@ PetalburgCity_Gym_EventScript_GymGuide::
 	lock
 	faceplayer
 	goto_if_set FLAG_DEFEATED_PETALBURG_GYM, PetalburgCity_Gym_EventScript_GymGuidePostVictory
+	goto_if_lt VAR_PETALBURG_GYM_STATE, 6, PetalburgCity_Gym_EventScript_GymGuideNotReady
 	msgbox PetalburgCity_Gym_Text_GymGuideAdvice, MSGBOX_DEFAULT
 	release
 	end
+
+PetalburgCity_Gym_EventScript_GymGuideNotReady::
+	msgbox PetalburgCity_Gym_Text_GymGuideNotReady, MSGBOX_DEFAULT
+	release
+	end
+
+PetalburgCity_Gym_Text_GymGuideNotReady:
+	.string "NORMAN takes challengers with\n"
+	.string "four GYM BADGES.\p"
+	.string "He's here at the entrance if\n"
+	.string "you'd like to talk. Come back\l"
+	.string "for these rooms when you're ready!$"
 
 PetalburgCity_Gym_EventScript_GymGuidePostVictory::
 	msgbox PetalburgCity_Gym_Text_GymGuidePostVictory, MSGBOX_DEFAULT
@@ -1130,17 +1143,13 @@ PetalburgCity_Gym_EventScript_GymStatue::
 	end
 
 PetalburgCity_Gym_Text_DadYoureHereWithYourPokemon:
-	.string "DAD: Hm?\p"
-	.string "Well, if it isn't {PLAYER}!\n"
-	.string "So you're all finished moving in?\p"
-	.string "I'm surprised that you managed to\n"
-	.string "get here by yourself.\p"
-	.string "Oh, I see.\n"
-	.string "You're with your POKéMON.\p"
-	.string "Hm… Then I guess you're going to\n"
-	.string "become a TRAINER like me, {PLAYER}.\p"
-	.string "That's great news!\n"
-	.string "I'll be looking forward to it!$"
+	.string "DAD: {PLAYER}! You made it!\n"
+	.string "How was the trip from LITTLEROOT?\p"
+	.string "And these are your POKéMON...\n"
+	.string "So your own journey has begun.\p"
+	.string "I'm proud of you. Take your time,\n"
+	.string "get to know your partners, and\l"
+	.string "find your own way as a TRAINER.$"
 
 PetalburgCity_Gym_Text_WallyIdLikeAPokemon:
 	.string "Um… I…\n"
@@ -1151,12 +1160,11 @@ PetalburgCity_Gym_Text_DadOhYoureWallyRight:
 	.string "You're WALLY, right?$"
 
 PetalburgCity_Gym_Text_WallyIveNeverCaughtAPokemon:
-	.string "WALLY: I'm going to go stay with my\n"
+	.string "WALLY: I'm going to stay with my\n"
 	.string "relatives in VERDANTURF TOWN.\p"
-	.string "I thought I would be lonely by myself,\n"
-	.string "so I wanted to take a POKéMON along.\p"
-	.string "But I've never caught a POKéMON before.\n"
-	.string "I don't know how…$"
+	.string "I thought a POKéMON could keep me\n"
+	.string "company... But I've never caught\l"
+	.string "one before. I don't know how.$"
 
 PetalburgCity_Gym_Text_DadHmISee:
 	.string "DAD: Hm. I see.$"
@@ -1203,21 +1211,27 @@ PetalburgCity_Gym_Text_WallyThankYouBye:
 	.string "Bye, {PLAYER}!$"
 
 PetalburgCity_Gym_Text_DadGoCollectBadges:
-	.string "DAD: Now…\p"
-	.string "{PLAYER}, if you want to become a\n"
-	.string "strong TRAINER, here's my advice.\p"
-	.string "Head west to ROUTE 104, then north\n"
-	.string "through PETALBURG WOODS to RUSTBORO.\p"
-	.string "There, you should challenge\n"
-	.string "the GYM LEADER, ROXANNE.\p"
-	.string "After her, go on to other POKéMON\n"
-	.string "GYMS and defeat their LEADERS.\p"
-	.string "Collect BADGES from them,\n"
-	.string "understood?\p"
-	.string "Of course, I'm a GYM LEADER, too.\n"
-	.string "We'll battle one day, {PLAYER}.\p"
-	.string "But that's only after you become\n"
-	.string "stronger.$"
+	.string "DAD: A team grows through\n"
+	.string "practice, {PLAYER}. Don't be\l"
+	.string "afraid to try a different plan.\p"
+	.string "In a TRAINER battle, RUN asks\n"
+	.string "if you want to restart. Say YES\l"
+	.string "to begin that same battle again.\p"
+	.string "Say NO and you'll be asked if\n"
+	.string "you want to quit instead.\l"
+	.string "Quitting counts as a loss.\p"
+	.string "Say NO again to keep battling.\n"
+	.string "Restarting a battle is separate\l"
+	.string "from reloading a saved game.\p"
+	.string "Head west to ROUTE 104, then\n"
+	.string "north through PETALBURG WOODS.\l"
+	.string "ROXANNE's GYM is in RUSTBORO.\p"
+	.string "The school there teaches team\n"
+	.string "preparation. Learn about EVs and\l"
+	.string "battle controls before the GYM.\p"
+	.string "Collect four BADGES, and then\n"
+	.string "we'll have our own battle.\l"
+	.string "I'm looking forward to it!$"
 
 PetalburgCity_Gym_Text_NormanGoToRustboro:
 	.string "DAD: Hm? Aren't you going to the\n"
@@ -1261,17 +1275,20 @@ PetalburgCity_Gym_Text_NextGymLavaridge:
 	.string "I'll be waiting here at the GYM.$"
 
 PetalburgCity_Gym_Text_NormanIntro:
-	.string "DAD: Four BADGES brought you back, but\n"
-	.string "this battle is not about raw growth.\p"
-	.string "Every member of my team reveals a rule:\n"
-	.string "a lock, an Ability, an item, or a clock.\p"
-	.string "Read each one before you commit. I will\n"
-	.string "battle as GYM LEADER, not as your father.$"
+	.string "DAD: Four BADGES already… I still\n"
+	.string "remember you setting out from\l"
+	.string "LITTLEROOT.\p"
+	.string "I'm proud of you, {PLAYER}. But\n"
+	.string "here in the GYM, I have to give\l"
+	.string "every challenger my best.\p"
+	.string "Show me how far you and your\n"
+	.string "POKéMON have come!$"
 
 PetalburgCity_Gym_Text_NormanDefeat:
-	.string "You read every rule I placed in front of\n"
-	.string "you, and forced me to read yours.\p"
-	.string "I'm proud of you. Take the BALANCE BADGE.$"
+	.string "You beat the team I've raised\n"
+	.string "with so much care.\p"
+	.string "I'm proud of you.\n"
+	.string "Take the BALANCE BADGE.$"
 
 PetalburgCity_Gym_Text_ReceivedBalanceBadge:
 	.string "{PLAYER} received the BALANCE BADGE\n"
@@ -1285,8 +1302,9 @@ PetalburgCity_Gym_Text_ExplainBalanceBadgeTakeThis:
 	.string "This is my gift to you. {PLAYER}, I'm\n"
 	.string "sure you can use it correctly.$"
 PetalburgCity_Gym_Text_ExplainLopunnite:
-	.string "Dad: Lopunnite lets Lopunny Mega Evolve.\n"
-	.string "Let it hold the stone in battle.$"
+	.string "Dad: Lopunnite lets Lopunny Mega\n"
+	.string "Evolve. Let it hold the stone in\l"
+	.string "battle.$"
 
 PetalburgCity_Gym_Text_DadHappyAndSad:
 	.string "DAD: As a LEADER, I learned from you.\n"
@@ -1336,7 +1354,7 @@ PetalburgCity_Gym_Text_GymGuidePostVictory:
 PetalburgCity_Gym_Text_RandallIntro:
 	.string "This is the MULTIHIT ROOM.\p"
 	.string "One attack can strike again and\n"
-	.string "again. A FOCUS SASH may not be\n"
+	.string "again. A FOCUS SASH may not be\l"
 	.string "enough!$"
 
 PetalburgCity_Gym_Text_RandallDefeat:
@@ -1357,20 +1375,19 @@ PetalburgCity_Gym_Text_RandallPostBadge:
 
 PetalburgCity_Gym_Text_ParkerIntro:
 	.string "Welcome to the TRICK ROOM.\p"
-	.string "The slower Pokémon can move first\n"
-	.string "here. ORANGURU can also make its\n"
-	.string "partner repeat an attack.\p"
-	.string "Let us see how you position your\n"
-	.string "team.$"
+	.string "LICKILICKY shakes the ground.\n"
+	.string "ORANGURU tells it to do it again.\p"
+	.string "TELEPATHY keeps my partner safe.\n"
+	.string "What will keep yours safe?$"
 
 PetalburgCity_Gym_Text_ParkerDefeat:
 	.string "Our timing was not enough. Good\n"
 	.string "battle!$"
 
 PetalburgCity_Gym_Text_ParkerPostBattle:
-	.string "The next door leads to the POWER\n"
-	.string "ROOM.\p"
-	.string "Keep your team ready for it!$"
+	.string "WIDE GUARD can stop both EARTHQUAKES.\n"
+	.string "But we have single-target moves, too.\p"
+	.string "The POWER ROOM is next. Be ready!$"
 
 PetalburgCity_Gym_Text_ParkerPostBadge:
 	.string "After you beat our LEADER, the\n"
@@ -1379,7 +1396,7 @@ PetalburgCity_Gym_Text_ParkerPostBadge:
 PetalburgCity_Gym_Text_GeorgeIntro:
 	.string "This is the ENDURANCE ROOM.\p"
 	.string "Healing buys time. DUBWOOL can\n"
-	.string "turn that time into BODY PRESS\n"
+	.string "turn that time into BODY PRESS\l"
 	.string "power.\p"
 	.string "Can your team finish the job?$"
 
@@ -1399,7 +1416,7 @@ PetalburgCity_Gym_Text_GeorgePostBadge:
 PetalburgCity_Gym_Text_BerkeIntro:
 	.string "This is the BURST ROOM.\p"
 	.string "EXPLOUD's voice can hit Ghosts.\n"
-	.string "MEGA GLALIE turns Normal attacks\n"
+	.string "MEGA GLALIE turns Normal attacks\l"
 	.string "into Ice.\p"
 	.string "Prepare for both sides of the\n"
 	.string "board!$"
@@ -1411,7 +1428,7 @@ PetalburgCity_Gym_Text_BerkePostBattle:
 	.string "A strong pair can attack through\n"
 	.string "different defenses.\p"
 	.string "The last reserves still matter:\n"
-	.string "STOUTLAND and KANGASKHAN keep the\n"
+	.string "STOUTLAND and KANGASKHAN keep the\l"
 	.string "pressure on.$"
 
 PetalburgCity_Gym_Text_BerkePostBadge:
@@ -1421,8 +1438,8 @@ PetalburgCity_Gym_Text_BerkePostBadge:
 
 PetalburgCity_Gym_Text_MaryIntro:
 	.string "This is the RETALIATION ROOM.\p"
-	.string "DRAMPA can gain power after a hard\n"
-	.string "hit. RUFFLET's HUSTLE trades\n"
+	.string "DRAMPA can gain power after a\n"
+	.string "hard hit. RUFFLET's HUSTLE trades\l"
 	.string "accuracy for strength.\p"
 	.string "Every risk needs a purpose!$"
 
@@ -1463,7 +1480,7 @@ PetalburgCity_Gym_Text_AlexiaPostBadge:
 PetalburgCity_Gym_Text_JodyIntro:
 	.string "This is the POWER ROOM.\p"
 	.string "Our LEADER told us to give you\n"
-	.string "everything we have, even if you\n"
+	.string "everything we have, even if you\l"
 	.string "are his kid.\p"
 	.string "That is exactly what we will do!$"
 

@@ -33,8 +33,11 @@ SootopolisCity_House1_Text_FoundThisRazorClaw:
 	.string "This RAZOR CLAW is just as sharp.\n"
 	.string "I bequeath it to you!$"
 SootopolisCity_House1_Text_ExplainRazorClaw:
-	.string "A Razor Claw evolves Sneasel.\n"
-	.string "Use it at night when ready.$"
+	.string "Use a RAZOR CLAW on SNEASEL at\n"
+	.string "night to evolve it into WEAVILE.\p"
+	.string "A Hisuian SNEASEL needs it during\n"
+	.string "the day instead, to become\l"
+	.string "SNEASLER.$"
 
 SootopolisCity_House1_Text_Kecleon:
 	.string "KECLEON: Puu puhyaah.$"

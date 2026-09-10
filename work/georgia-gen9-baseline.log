@@ -1,0 +1,336 @@
+tools/scaninc/scaninc -M build/emerald-test/test/battle/ai/emerald_champions_plans.d -g build/assets -I include -I tools/agbcc/include test/battle/ai/emerald_champions_plans.c
+/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/battle/ai/emerald_champions_plans.o test/battle/ai/emerald_champions_plans.c
+cd build/emerald-test && arm-none-eabi-ld -T ld_script_test.ld -o pokeemerald-test.elf <objects> <test-objects> <lib>
+arm-none-eabi-ld: warning: pokeemerald-test.elf has a LOAD segment with RWX permissions
+tools/gbafix/gbafix build/emerald-test/pokeemerald-test.elf -t"EM CHAMPIONS" -cBPEE -m01 -r0 -d0 --silent
+tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
+tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
+Hydra workers: 4
+[0] EC live review Georgia timing: six-player bench: [32mPASS[0m
+REVIEW_INPUT trainer=281 slot=0 species=12 lv=38 HP=129 Atk=45 Def=55 SpA=92 SpD=77 Spe=119 item=481 ability=14
+REVIEW_INPUT trainer=281 slot=1 species=375 lv=38 HP=129 Atk=106 Def=93 SpA=52 SpD=77 Spe=54 item=502 ability=29
+REVIEW_INPUT trainer=281 slot=2 species=857 lv=38 HP=127 Atk=42 Def=72 SpA=82 SpD=96 Spe=54 item=494 ability=156
+REVIEW_INPUT trainer=281 slot=3 species=178 lv=38 HP=109 Atk=65 Def=69 SpA=128 SpD=69 Spe=132 item=523 ability=156
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Hurricane target=0
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Protect target=3
+AI decision turn=2 actor=1 move=Hurricane target=0
+AI decision turn=2 actor=3 move=Meteor Mash target=2
+REVIEW_AFTER board=99 turns=1 reserves=0 species=12/375 HP=129/129 foes=98/114 faints=0/0 initialFrames=55
+REVIEW_STATE actor=1 move=Hurricane PP=15/20/9/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=14 item=481
+REVIEW_STATE actor=3 move=Protect PP=10/20/15/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=29 item=502
+REVIEW_TIMING setup=6 bothActors=52 complete=58
+REVIEW_INPUT trainer=281 slot=0 species=12 lv=38 HP=129 Atk=45 Def=55 SpA=92 SpD=77 Spe=119 item=481 ability=14
+REVIEW_INPUT trainer=281 slot=1 species=375 lv=38 HP=129 Atk=106 Def=93 SpA=52 SpD=77 Spe=54 item=502 ability=29
+REVIEW_INPUT trainer=281 slot=2 species=857 lv=38 HP=127 Atk=42 Def=72 SpA=82 SpD=96 Spe=54 item=494 ability=156
+REVIEW_INPUT trainer=281 slot=3 species=178 lv=38 HP=109 Atk=65 Def=69 SpA=128 SpD=69 Spe=132 item=523 ability=156
+AI decision turn=1 actor=0 move=Protect target=0
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Protect target=2
+AI decision turn=1 actor=3 move=Psychic target=0
+AI decision turn=2 actor=1 move=Psychic target=2
+AI decision turn=2 actor=3 move=Psychic target=0
+REVIEW_AFTER board=99 turns=1 reserves=1 species=857/178 HP=127/109 foes=98/114 faints=0/0 initialFrames=26
+REVIEW_STATE actor=1 move=Protect PP=10/10/10/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=156 item=494
+REVIEW_STATE actor=3 move=Psychic PP=9/15/10/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=156 item=523
+REVIEW_TIMING setup=7 bothActors=21 complete=28
+[1] EC live review Georgia: powder support and Policy reserves: [32mPASS[0m
+REVIEW_INPUT trainer=281 slot=0 species=12 lv=38 HP=129 Atk=45 Def=55 SpA=92 SpD=77 Spe=119 item=481 ability=14
+REVIEW_INPUT trainer=281 slot=1 species=375 lv=38 HP=129 Atk=106 Def=93 SpA=52 SpD=77 Spe=54 item=502 ability=29
+REVIEW_INPUT trainer=281 slot=2 species=857 lv=38 HP=127 Atk=42 Def=72 SpA=82 SpD=96 Spe=54 item=494 ability=156
+REVIEW_INPUT trainer=281 slot=3 species=178 lv=38 HP=109 Atk=65 Def=69 SpA=128 SpD=69 Spe=132 item=523 ability=156
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Hurricane target=2
+AI decision turn=1 actor=2 move=Ice Punch target=3
+AI decision turn=1 actor=3 move=Zen Headbutt target=2
+AI decision turn=2 actor=1 move=Sleep Powder target=0
+AI decision turn=2 actor=3 move=Meteor Mash target=0
+REVIEW_AFTER board=0 turns=1 reserves=0 species=12/375 HP=47/129 foes=104/0 faints=0/1 initialFrames=45
+REVIEW_STATE actor=1 move=Hurricane PP=15/20/9/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=14 item=481
+REVIEW_STATE actor=3 move=Zen Headbutt PP=10/20/14/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=29 item=502
+REVIEW_INPUT trainer=281 slot=0 species=12 lv=38 HP=129 Atk=45 Def=55 SpA=92 SpD=77 Spe=119 item=481 ability=14
+REVIEW_INPUT trainer=281 slot=1 species=375 lv=38 HP=129 Atk=106 Def=93 SpA=52 SpD=77 Spe=54 item=502 ability=29
+REVIEW_INPUT trainer=281 slot=2 species=857 lv=38 HP=127 Atk=42 Def=72 SpA=82 SpD=96 Spe=54 item=494 ability=156
+REVIEW_INPUT trainer=281 slot=3 species=178 lv=38 HP=109 Atk=65 Def=69 SpA=128 SpD=69 Spe=132 item=523 ability=156
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Hurricane target=2
+AI decision turn=1 actor=2 move=Ice Punch target=3
+AI decision turn=1 actor=3 move=Zen Headbutt target=2
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Sleep Powder target=0
+AI decision turn=2 actor=3 move=Meteor Mash target=0
+AI decision turn=3 actor=1 move=Hurricane target=0
+AI decision turn=3 actor=3 move=Meteor Mash target=0
+REVIEW_AFTER board=0 turns=2 reserves=0 species=12/375 HP=47/129 foes=53/0 faints=0/1 initialFrames=45
+REVIEW_STATE actor=1 move=Sleep Powder PP=14/20/9/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=14 item=481
+REVIEW_STATE actor=3 move=Meteor Mash PP=9/20/14/5 Atk=7 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=29 item=502
+REVIEW_INPUT trainer=281 slot=0 species=12 lv=38 HP=129 Atk=45 Def=55 SpA=92 SpD=77 Spe=119 item=481 ability=14
+REVIEW_INPUT trainer=281 slot=1 species=375 lv=38 HP=129 Atk=106 Def=93 SpA=52 SpD=77 Spe=54 item=502 ability=29
+REVIEW_INPUT trainer=281 slot=2 species=857 lv=38 HP=127 Atk=42 Def=72 SpA=82 SpD=96 Spe=54 item=494 ability=156
+REVIEW_INPUT trainer=281 slot=3 species=178 lv=38 HP=109 Atk=65 Def=69 SpA=128 SpD=69 Spe=132 item=523 ability=156
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Meteor Mash target=0
+AI decision turn=2 actor=1 move=Sleep Powder target=2
+AI decision turn=2 actor=3 move=Meteor Mash target=0
+REVIEW_AFTER board=1 turns=1 reserves=0 species=12/375 HP=129/99 foes=56/135 faints=0/0 initialFrames=41
+REVIEW_STATE actor=1 move=Protect PP=15/20/10/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=14 item=481
+REVIEW_STATE actor=3 move=Meteor Mash PP=9/20/15/5 Atk=7 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=29 item=502
+REVIEW_INPUT trainer=281 slot=0 species=12 lv=38 HP=129 Atk=45 Def=55 SpA=92 SpD=77 Spe=119 item=481 ability=14
+REVIEW_INPUT trainer=281 slot=1 species=375 lv=38 HP=129 Atk=106 Def=93 SpA=52 SpD=77 Spe=54 item=502 ability=29
+REVIEW_INPUT trainer=281 slot=2 species=857 lv=38 HP=127 Atk=42 Def=72 SpA=82 SpD=96 Spe=54 item=494 ability=156
+REVIEW_INPUT trainer=281 slot=3 species=178 lv=38 HP=109 Atk=65 Def=69 SpA=128 SpD=69 Spe=132 item=523 ability=156
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Meteor Mash target=0
+AI decision turn=2 actor=0 move=Psychic target=1
+AI decision turn=2 actor=1 move=Sleep Powder target=2
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Meteor Mash target=0
+AI decision turn=3 actor=1 move=Hurricane target=2
+AI decision turn=3 actor=3 move=Zen Headbutt target=2
+REVIEW_AFTER board=1 turns=2 reserves=0 species=12/375 HP=56/99 foes=0/135 faints=0/1 initialFrames=41
+REVIEW_STATE actor=1 move=Sleep Powder PP=14/20/10/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=14 item=481
+REVIEW_STATE actor=3 move=Meteor Mash PP=8/20/15/5 Atk=8 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=29 item=502
+REVIEW_INPUT trainer=281 slot=0 species=12 lv=38 HP=129 Atk=45 Def=55 SpA=92 SpD=77 Spe=119 item=481 ability=14
+REVIEW_INPUT trainer=281 slot=1 species=375 lv=38 HP=129 Atk=106 Def=93 SpA=52 SpD=77 Spe=54 item=502 ability=29
+REVIEW_INPUT trainer=281 slot=2 species=857 lv=38 HP=127 Atk=42 Def=72 SpA=82 SpD=96 Spe=54 item=494 ability=156
+REVIEW_INPUT trainer=281 slot=3 species=178 lv=38 HP=109 Atk=65 Def=69 SpA=128 SpD=69 Spe=132 item=523 ability=156
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Hurricane target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Bullet Punch target=0
+AI decision turn=2 actor=1 move=Hurricane target=0
+AI decision turn=2 actor=3 move=Meteor Mash target=0
+REVIEW_AFTER board=2 turns=1 reserves=0 species=12/375 HP=104/80 foes=65/135 faints=0/0 initialFrames=45
+REVIEW_STATE actor=1 move=- PP=15/20/10/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=14 item=481
+REVIEW_STATE actor=3 move=Bullet Punch PP=10/19/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=29 item=502
+REVIEW_INPUT trainer=281 slot=0 species=12 lv=38 HP=129 Atk=45 Def=55 SpA=92 SpD=77 Spe=119 item=481 ability=14
+REVIEW_INPUT trainer=281 slot=1 species=375 lv=38 HP=129 Atk=106 Def=93 SpA=52 SpD=77 Spe=54 item=502 ability=29
+REVIEW_INPUT trainer=281 slot=2 species=857 lv=38 HP=127 Atk=42 Def=72 SpA=82 SpD=96 Spe=54 item=494 ability=156
+REVIEW_INPUT trainer=281 slot=3 species=178 lv=38 HP=109 Atk=65 Def=69 SpA=128 SpD=69 Spe=132 item=523 ability=156
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Hurricane target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Bullet Punch target=0
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Hurricane target=0
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=Meteor Mash target=0
+AI decision turn=3 actor=1 move=Hurricane target=2
+AI decision turn=3 actor=3 move=Bullet Punch target=2
+REVIEW_AFTER board=2 turns=2 reserves=0 species=12/375 HP=104/31 foes=0/110 faints=0/1 initialFrames=45
+REVIEW_STATE actor=1 move=Hurricane PP=15/20/9/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=14 item=481
+REVIEW_STATE actor=3 move=Meteor Mash PP=9/19/15/5 Atk=7 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=29 item=502
+REVIEW_INPUT trainer=281 slot=0 species=12 lv=38 HP=129 Atk=45 Def=55 SpA=92 SpD=77 Spe=119 item=481 ability=14
+REVIEW_INPUT trainer=281 slot=1 species=375 lv=38 HP=129 Atk=106 Def=93 SpA=52 SpD=77 Spe=54 item=502 ability=29
+REVIEW_INPUT trainer=281 slot=2 species=857 lv=38 HP=127 Atk=42 Def=72 SpA=82 SpD=96 Spe=54 item=494 ability=156
+REVIEW_INPUT trainer=281 slot=3 species=178 lv=38 HP=109 Atk=65 Def=69 SpA=128 SpD=69 Spe=132 item=523 ability=156
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Air Slash target=3
+AI decision turn=1 actor=3 move=Meteor Mash target=0
+AI switch turn=2 actor=1 party=3
+AI decision turn=2 actor=3 move=Bullet Punch target=0
+REVIEW_AFTER board=3 turns=1 reserves=0 species=12/375 HP=129/7 foes=1/114 faints=0/0 initialFrames=32
+REVIEW_STATE actor=1 move=Protect PP=15/20/10/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=14 item=481
+REVIEW_STATE actor=3 move=Meteor Mash PP=9/20/15/5 Atk=9 Def=6 SpA=8 SpD=6 Spe=6 status=0 ability=29 item=0
+REVIEW_INPUT trainer=281 slot=0 species=12 lv=38 HP=129 Atk=45 Def=55 SpA=92 SpD=77 Spe=119 item=481 ability=14
+REVIEW_INPUT trainer=281 slot=1 species=375 lv=38 HP=129 Atk=106 Def=93 SpA=52 SpD=77 Spe=54 item=502 ability=29
+REVIEW_INPUT trainer=281 slot=2 species=857 lv=38 HP=127 Atk=42 Def=72 SpA=82 SpD=96 Spe=54 item=494 ability=156
+REVIEW_INPUT trainer=281 slot=3 species=178 lv=38 HP=109 Atk=65 Def=69 SpA=128 SpD=69 Spe=132 item=523 ability=156
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=Protect target=1
+AI decision turn=1 actor=2 move=Air Slash target=3
+AI decision turn=1 actor=3 move=Meteor Mash target=0
+AI switch turn=2 actor=1 party=3
+AI decision turn=2 actor=0 move=Earthquake target=1
+AI decision turn=2 actor=2 move=Air Slash target=3
+AI decision turn=2 actor=3 move=Bullet Punch target=0
+AI switch turn=2 actor=3 party=0
+AI decision turn=3 actor=1 move=Air Slash target=2
+AI decision turn=3 actor=3 move=Hurricane target=2
+REVIEW_AFTER board=3 turns=2 reserves=0 species=178/12 HP=109/129 foes=0/114 faints=1/1 initialFrames=32
+REVIEW_STATE actor=1 move=- PP=10/15/10/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=156 item=523
+REVIEW_STATE actor=3 move=- PP=15/20/10/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=14 item=481
+REVIEW_INPUT trainer=281 slot=0 species=12 lv=38 HP=129 Atk=45 Def=55 SpA=92 SpD=77 Spe=119 item=481 ability=14
+REVIEW_INPUT trainer=281 slot=1 species=375 lv=38 HP=129 Atk=106 Def=93 SpA=52 SpD=77 Spe=54 item=502 ability=29
+REVIEW_INPUT trainer=281 slot=2 species=857 lv=38 HP=127 Atk=42 Def=72 SpA=82 SpD=96 Spe=54 item=494 ability=156
+REVIEW_INPUT trainer=281 slot=3 species=178 lv=38 HP=109 Atk=65 Def=69 SpA=128 SpD=69 Spe=132 item=523 ability=156
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Hurricane target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Bullet Punch target=0
+AI decision turn=2 actor=1 move=Hurricane target=2
+AI decision turn=2 actor=3 move=Zen Headbutt target=2
+REVIEW_AFTER board=4 turns=1 reserves=0 species=12/375 HP=129/107 foes=0/135 faints=0/1 initialFrames=45
+REVIEW_STATE actor=1 move=Hurricane PP=15/20/9/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=14 item=481
+REVIEW_STATE actor=3 move=Bullet Punch PP=10/19/15/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=29 item=502
+REVIEW_INPUT trainer=281 slot=0 species=12 lv=38 HP=129 Atk=45 Def=55 SpA=92 SpD=77 Spe=119 item=481 ability=14
+REVIEW_INPUT trainer=281 slot=1 species=375 lv=38 HP=129 Atk=106 Def=93 SpA=52 SpD=77 Spe=54 item=502 ability=29
+REVIEW_INPUT trainer=281 slot=2 species=857 lv=38 HP=127 Atk=42 Def=72 SpA=82 SpD=96 Spe=54 item=494 ability=156
+REVIEW_INPUT trainer=281 slot=3 species=178 lv=38 HP=109 Atk=65 Def=69 SpA=128 SpD=69 Spe=132 item=523 ability=156
+AI decision turn=1 actor=0 move=Taunt target=1
+AI decision turn=1 actor=1 move=Hurricane target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Bullet Punch target=0
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=1 move=Hurricane target=2
+AI decision turn=2 actor=3 move=Zen Headbutt target=2
+REVIEW_AFTER board=4 turns=2 reserves=0 species=12/375 HP=129/107 foes=0/0 faints=0/2 initialFrames=45
+REVIEW_STATE actor=1 move=Hurricane PP=15/20/8/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=14 item=481
+REVIEW_STATE actor=3 move=Zen Headbutt PP=10/19/14/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=29 item=502
+REVIEW_INPUT trainer=281 slot=0 species=12 lv=38 HP=129 Atk=45 Def=55 SpA=92 SpD=77 Spe=119 item=481 ability=14
+REVIEW_INPUT trainer=281 slot=1 species=375 lv=38 HP=129 Atk=106 Def=93 SpA=52 SpD=77 Spe=54 item=502 ability=29
+REVIEW_INPUT trainer=281 slot=2 species=857 lv=38 HP=127 Atk=42 Def=72 SpA=82 SpD=96 Spe=54 item=494 ability=156
+REVIEW_INPUT trainer=281 slot=3 species=178 lv=38 HP=109 Atk=65 Def=69 SpA=128 SpD=69 Spe=132 item=523 ability=156
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Psychic target=2
+AI decision turn=1 actor=2 move=Ice Punch target=3
+AI decision turn=1 actor=3 move=Psychic target=2
+AI decision turn=2 actor=1 move=Psychic target=0
+AI decision turn=2 actor=3 move=Psychic target=0
+REVIEW_AFTER board=0 turns=1 reserves=1 species=857/178 HP=83/109 foes=117/0 faints=0/1 initialFrames=18
+REVIEW_STATE actor=1 move=Psychic PP=9/10/10/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=156 item=494
+REVIEW_STATE actor=3 move=Psychic PP=9/15/10/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=156 item=523
+REVIEW_INPUT trainer=281 slot=0 species=12 lv=38 HP=129 Atk=45 Def=55 SpA=92 SpD=77 Spe=119 item=481 ability=14
+REVIEW_INPUT trainer=281 slot=1 species=375 lv=38 HP=129 Atk=106 Def=93 SpA=52 SpD=77 Spe=54 item=502 ability=29
+REVIEW_INPUT trainer=281 slot=2 species=857 lv=38 HP=127 Atk=42 Def=72 SpA=82 SpD=96 Spe=54 item=494 ability=156
+REVIEW_INPUT trainer=281 slot=3 species=178 lv=38 HP=109 Atk=65 Def=69 SpA=128 SpD=69 Spe=132 item=523 ability=156
+AI decision turn=1 actor=0 move=Double-Edge target=1
+AI decision turn=1 actor=1 move=Psychic target=2
+AI decision turn=1 actor=2 move=Ice Punch target=3
+AI decision turn=1 actor=3 move=Psychic target=2
+AI decision turn=2 actor=0 move=Double-Edge target=1
+AI decision turn=2 actor=1 move=Psychic target=0
+AI decision turn=2 actor=3 move=Psychic target=0
+AI decision turn=3 actor=1 move=Psychic target=0
+AI decision turn=3 actor=3 move=Psychic target=0
+REVIEW_AFTER board=0 turns=2 reserves=1 species=857/178 HP=39/109 foes=37/0 faints=0/1 initialFrames=18
+REVIEW_STATE actor=1 move=Psychic PP=8/10/10/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=156 item=494
+REVIEW_STATE actor=3 move=Psychic PP=8/15/10/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=156 item=523
+REVIEW_INPUT trainer=281 slot=0 species=12 lv=38 HP=129 Atk=45 Def=55 SpA=92 SpD=77 Spe=119 item=481 ability=14
+REVIEW_INPUT trainer=281 slot=1 species=375 lv=38 HP=129 Atk=106 Def=93 SpA=52 SpD=77 Spe=54 item=502 ability=29
+REVIEW_INPUT trainer=281 slot=2 species=857 lv=38 HP=127 Atk=42 Def=72 SpA=82 SpD=96 Spe=54 item=494 ability=156
+REVIEW_INPUT trainer=281 slot=3 species=178 lv=38 HP=109 Atk=65 Def=69 SpA=128 SpD=69 Spe=132 item=523 ability=156
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Dazzling Gleam target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Air Slash target=0
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=3 move=Air Slash target=0
+REVIEW_AFTER board=1 turns=1 reserves=1 species=857/178 HP=107/70 foes=36/118 faints=0/0 initialFrames=18
+REVIEW_STATE actor=1 move=Dazzling Gleam PP=10/9/10/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=156 item=494
+REVIEW_STATE actor=3 move=Air Slash PP=10/14/10/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=156 item=0
+REVIEW_INPUT trainer=281 slot=0 species=12 lv=38 HP=129 Atk=45 Def=55 SpA=92 SpD=77 Spe=119 item=481 ability=14
+REVIEW_INPUT trainer=281 slot=1 species=375 lv=38 HP=129 Atk=106 Def=93 SpA=52 SpD=77 Spe=54 item=502 ability=29
+REVIEW_INPUT trainer=281 slot=2 species=857 lv=38 HP=127 Atk=42 Def=72 SpA=82 SpD=96 Spe=54 item=494 ability=156
+REVIEW_INPUT trainer=281 slot=3 species=178 lv=38 HP=109 Atk=65 Def=69 SpA=128 SpD=69 Spe=132 item=523 ability=156
+AI decision turn=1 actor=0 move=Psychic target=1
+AI decision turn=1 actor=1 move=Dazzling Gleam target=0
+AI decision turn=1 actor=2 move=Thunderbolt target=3
+AI decision turn=1 actor=3 move=Air Slash target=0
+AI decision turn=2 actor=0 move=Psychic target=1
+AI decision turn=2 actor=1 move=Protect target=1
+AI decision turn=2 actor=2 move=Thunderbolt target=3
+AI decision turn=2 actor=3 move=Air Slash target=0
+AI decision turn=3 actor=1 move=Psychic target=2
+AI decision turn=3 actor=3 move=Psychic target=2
+REVIEW_AFTER board=1 turns=2 reserves=1 species=857/178 HP=107/4 foes=0/118 faints=0/1 initialFrames=18
+REVIEW_STATE actor=1 move=Protect PP=10/9/10/4 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=156 item=494
+REVIEW_STATE actor=3 move=Air Slash PP=10/13/10/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=156 item=0
+REVIEW_INPUT trainer=281 slot=0 species=12 lv=38 HP=129 Atk=45 Def=55 SpA=92 SpD=77 Spe=119 item=481 ability=14
+REVIEW_INPUT trainer=281 slot=1 species=375 lv=38 HP=129 Atk=106 Def=93 SpA=52 SpD=77 Spe=54 item=502 ability=29
+REVIEW_INPUT trainer=281 slot=2 species=857 lv=38 HP=127 Atk=42 Def=72 SpA=82 SpD=96 Spe=54 item=494 ability=156
+REVIEW_INPUT trainer=281 slot=3 species=178 lv=38 HP=109 Atk=65 Def=69 SpA=128 SpD=69 Spe=132 item=523 ability=156
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Dazzling Gleam target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Psychic target=0
+AI decision turn=2 actor=1 move=Dazzling Gleam target=0
+AI decision turn=2 actor=3 move=Psychic target=0
+REVIEW_AFTER board=2 turns=1 reserves=1 species=857/178 HP=114/82 foes=1/135 faints=0/0 initialFrames=19
+REVIEW_STATE actor=1 move=- PP=10/10/10/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=156 item=494
+REVIEW_STATE actor=3 move=Psychic PP=9/15/10/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=156 item=0
+REVIEW_INPUT trainer=281 slot=0 species=12 lv=38 HP=129 Atk=45 Def=55 SpA=92 SpD=77 Spe=119 item=481 ability=14
+REVIEW_INPUT trainer=281 slot=1 species=375 lv=38 HP=129 Atk=106 Def=93 SpA=52 SpD=77 Spe=54 item=502 ability=29
+REVIEW_INPUT trainer=281 slot=2 species=857 lv=38 HP=127 Atk=42 Def=72 SpA=82 SpD=96 Spe=54 item=494 ability=156
+REVIEW_INPUT trainer=281 slot=3 species=178 lv=38 HP=109 Atk=65 Def=69 SpA=128 SpD=69 Spe=132 item=523 ability=156
+AI decision turn=1 actor=0 move=Fake Out target=1
+AI decision turn=1 actor=1 move=Dazzling Gleam target=0
+AI decision turn=1 actor=2 move=Scald target=3
+AI decision turn=1 actor=3 move=Psychic target=0
+AI decision turn=2 actor=0 move=Drain Punch target=1
+AI decision turn=2 actor=1 move=Dazzling Gleam target=0
+AI decision turn=2 actor=2 move=Scald target=3
+AI decision turn=2 actor=3 move=Psychic target=0
+AI decision turn=3 actor=1 move=Psychic target=2
+AI decision turn=3 actor=3 move=Air Slash target=2
+REVIEW_AFTER board=2 turns=2 reserves=1 species=857/178 HP=114/28 foes=0/117 faints=0/1 initialFrames=19
+REVIEW_STATE actor=1 move=Dazzling Gleam PP=10/9/10/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=156 item=494
+REVIEW_STATE actor=3 move=Psychic PP=8/15/10/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=156 item=0
+REVIEW_INPUT trainer=281 slot=0 species=12 lv=38 HP=129 Atk=45 Def=55 SpA=92 SpD=77 Spe=119 item=481 ability=14
+REVIEW_INPUT trainer=281 slot=1 species=375 lv=38 HP=129 Atk=106 Def=93 SpA=52 SpD=77 Spe=54 item=502 ability=29
+REVIEW_INPUT trainer=281 slot=2 species=857 lv=38 HP=127 Atk=42 Def=72 SpA=82 SpD=96 Spe=54 item=494 ability=156
+REVIEW_INPUT trainer=281 slot=3 species=178 lv=38 HP=109 Atk=65 Def=69 SpA=128 SpD=69 Spe=132 item=523 ability=156
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=Psychic target=0
+AI decision turn=1 actor=2 move=Air Slash target=3
+AI decision turn=1 actor=3 move=Psychic target=0
+AI decision turn=2 actor=1 move=Dazzling Gleam target=2
+AI decision turn=2 actor=3 move=Air Slash target=2
+REVIEW_AFTER board=3 turns=1 reserves=1 species=857/178 HP=88/69 foes=0/114 faints=0/1 initialFrames=18
+REVIEW_STATE actor=1 move=Psychic PP=9/10/10/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=156 item=494
+REVIEW_STATE actor=3 move=Psychic PP=9/15/10/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=156 item=0
+REVIEW_INPUT trainer=281 slot=0 species=12 lv=38 HP=129 Atk=45 Def=55 SpA=92 SpD=77 Spe=119 item=481 ability=14
+REVIEW_INPUT trainer=281 slot=1 species=375 lv=38 HP=129 Atk=106 Def=93 SpA=52 SpD=77 Spe=54 item=502 ability=29
+REVIEW_INPUT trainer=281 slot=2 species=857 lv=38 HP=127 Atk=42 Def=72 SpA=82 SpD=96 Spe=54 item=494 ability=156
+REVIEW_INPUT trainer=281 slot=3 species=178 lv=38 HP=109 Atk=65 Def=69 SpA=128 SpD=69 Spe=132 item=523 ability=156
+AI decision turn=1 actor=0 move=Earthquake target=1
+AI decision turn=1 actor=1 move=Psychic target=0
+AI decision turn=1 actor=2 move=Air Slash target=3
+AI decision turn=1 actor=3 move=Psychic target=0
+AI decision turn=2 actor=2 move=Air Slash target=3
+AI decision turn=2 actor=1 move=Dazzling Gleam target=2
+AI decision turn=2 actor=3 move=Air Slash target=2
+AI decision turn=3 actor=1 move=Dazzling Gleam target=2
+AI decision turn=3 actor=3 move=Psychic target=2
+REVIEW_AFTER board=3 turns=2 reserves=1 species=857/178 HP=88/2 foes=0/29 faints=0/1 initialFrames=18
+REVIEW_STATE actor=1 move=Dazzling Gleam PP=9/9/10/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=156 item=494
+REVIEW_STATE actor=3 move=Air Slash PP=9/14/10/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=156 item=0
+REVIEW_INPUT trainer=281 slot=0 species=12 lv=38 HP=129 Atk=45 Def=55 SpA=92 SpD=77 Spe=119 item=481 ability=14
+REVIEW_INPUT trainer=281 slot=1 species=375 lv=38 HP=129 Atk=106 Def=93 SpA=52 SpD=77 Spe=54 item=502 ability=29
+REVIEW_INPUT trainer=281 slot=2 species=857 lv=38 HP=127 Atk=42 Def=72 SpA=82 SpD=96 Spe=54 item=494 ability=156
+REVIEW_INPUT trainer=281 slot=3 species=178 lv=38 HP=109 Atk=65 Def=69 SpA=128 SpD=69 Spe=132 item=523 ability=156
+AI decision turn=1 actor=0 move=Taunt target=3
+AI decision turn=1 actor=1 move=Dazzling Gleam target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Psychic target=0
+AI decision turn=2 actor=1 move=Psychic target=2
+AI decision turn=2 actor=3 move=Air Slash target=2
+REVIEW_AFTER board=4 turns=1 reserves=1 species=857/178 HP=127/84 foes=0/122 faints=0/1 initialFrames=19
+REVIEW_STATE actor=1 move=Dazzling Gleam PP=10/9/10/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=156 item=494
+REVIEW_STATE actor=3 move=Taunt PP=9/15/10/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=156 item=523
+REVIEW_INPUT trainer=281 slot=0 species=12 lv=38 HP=129 Atk=45 Def=55 SpA=92 SpD=77 Spe=119 item=481 ability=14
+REVIEW_INPUT trainer=281 slot=1 species=375 lv=38 HP=129 Atk=106 Def=93 SpA=52 SpD=77 Spe=54 item=502 ability=29
+REVIEW_INPUT trainer=281 slot=2 species=857 lv=38 HP=127 Atk=42 Def=72 SpA=82 SpD=96 Spe=54 item=494 ability=156
+REVIEW_INPUT trainer=281 slot=3 species=178 lv=38 HP=109 Atk=65 Def=69 SpA=128 SpD=69 Spe=132 item=523 ability=156
+AI decision turn=1 actor=0 move=Taunt target=3
+AI decision turn=1 actor=1 move=Dazzling Gleam target=0
+AI decision turn=1 actor=2 move=Giga Drain target=3
+AI decision turn=1 actor=3 move=Psychic target=0
+AI decision turn=2 actor=2 move=Giga Drain target=3
+AI decision turn=2 actor=1 move=Psychic target=2
+AI decision turn=2 actor=3 move=Air Slash target=2
+AI decision turn=3 actor=1 move=Psychic target=2
+AI decision turn=3 actor=3 move=Air Slash target=2
+REVIEW_AFTER board=4 turns=2 reserves=1 species=857/178 HP=127/84 foes=0/91 faints=0/1 initialFrames=19
+REVIEW_STATE actor=1 move=Psychic PP=9/9/10/5 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=156 item=494
+REVIEW_STATE actor=3 move=Air Slash PP=9/14/10/20 Atk=6 Def=6 SpA=6 SpD=6 Spe=6 status=0 ability=156 item=523
+
+- Tests [32mPASSED[0m:          2
+- Tests [34mTOTAL[0m:           2
+

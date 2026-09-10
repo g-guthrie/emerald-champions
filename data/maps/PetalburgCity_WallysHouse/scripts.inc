@@ -18,6 +18,8 @@ PetalburgCity_WallysHouse_OnFrame:
 
 PetalburgCity_WallysHouse_EventScript_GiveHMSurf::
 	lockall
+	@ End the automatic visit even if delivery fails; Dad can retry it on talk.
+	setvar VAR_PETALBURG_CITY_STATE, 5
 	msgbox PetalburgCity_WallysHouse_Text_PleaseExcuseUs, MSGBOX_DEFAULT
 	giveitem ITEM_HM_SURF
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
@@ -30,8 +32,10 @@ PetalburgCity_WallysHouse_EventScript_GiveHMSurf::
 PetalburgCity_WallysHouse_EventScript_WallysDad::
 	lock
 	faceplayer
+	goto_if_lt VAR_PETALBURG_GYM_STATE, 2, PetalburgCity_WallysHouse_EventScript_BeforeWallyCatch
 	goto_if_set FLAG_DEFEATED_WALLY_VICTORY_ROAD, PetalburgCity_WallysHouse_EventScript_DefeatedWallyInVictoryRoad
 	goto_if_set FLAG_RECEIVED_HM_SURF, PetalburgCity_WallysHouse_EventScript_ReceivedHMSurf
+	goto_if_set FLAG_BADGE05_GET, PetalburgCity_WallysHouse_EventScript_GiveHMSurf
 	goto_if_set FLAG_THANKED_FOR_PLAYING_WITH_WALLY, PetalburgCity_WallysHouse_EventScript_PlayedWithWally
 	msgbox PetalburgCity_WallysHouse_Text_ThanksForPlayingWithWally, MSGBOX_DEFAULT
 	setflag FLAG_THANKED_FOR_PLAYING_WITH_WALLY
@@ -62,6 +66,7 @@ PetalburgCity_WallysHouse_EventScript_PlayedWithWally::
 PetalburgCity_WallysHouse_EventScript_WallysMom::
 	lock
 	faceplayer
+	goto_if_lt VAR_PETALBURG_GYM_STATE, 2, PetalburgCity_WallysHouse_EventScript_BeforeWallyCatch
 	goto_if_set FLAG_RECEIVED_HM_SURF, PetalburgCity_WallysHouse_EventScript_MomReceivedHMSurf
 	msgbox PetalburgCity_WallysHouse_Text_WallyWasReallyHappy, MSGBOX_DEFAULT
 	release
@@ -73,20 +78,14 @@ PetalburgCity_WallysHouse_EventScript_MomReceivedHMSurf::
 	end
 
 PetalburgCity_WallysHouse_Text_ThanksForPlayingWithWally:
-	.string "You're…\n"
-	.string "Ah, you must be {PLAYER}{KUN}, right?\p"
-	.string "Thank you for playing with WALLY a\n"
-	.string "little while ago.\p"
-	.string "He's been frail and sickly ever\n"
-	.string "since he was a baby.\p"
-	.string "We've sent him to stay with my relatives\n"
-	.string "in VERDANTURF TOWN for a while.\p"
-	.string "The air is a lot cleaner there\n"
-	.string "than it is here.\p"
-	.string "What's that? Where's WALLY?\n"
-	.string "He's already left, our WALLY.\p"
-	.string "I wonder where he could have\n"
-	.string "gotten by now?$"
+	.string "You must be {PLAYER}{KUN}!\n"
+	.string "Thank you for helping WALLY catch\l"
+	.string "his first POKéMON.\p"
+	.string "He's often been too ill to go out.\n"
+	.string "Seeing him so excited means a lot.\p"
+	.string "He's left to stay with relatives\n"
+	.string "in VERDANTURF TOWN. We hope the\l"
+	.string "clean air will do him good.$"
 
 PetalburgCity_WallysHouse_Text_WonderHowWallyIsDoing:
 	.string "I wonder how our WALLY is doing?$"
@@ -109,8 +108,12 @@ PetalburgCity_WallysHouse_Text_PleaseExcuseUs:
 	.string "I'd really like you to have this.$"
 
 PetalburgCity_WallysHouse_Text_SurfGoAllSortsOfPlaces:
-	.string "A partner that can SURF will carry\n"
-	.string "you across water. Head to MAUVILLE.\p"
+	.string "A partner that can learn SURF can\n"
+	.string "carry you across water.\p"
+	.string "It need not learn the move first.\n"
+	.string "Keep it in your party and face\l"
+	.string "the water.\p"
+	.string "Head to MAUVILLE.\p"
 	.string "Go east onto ROUTE 118 and cross its\n"
 	.string "river, then take ROUTE 119 north.\p"
 	.string "Beyond the WEATHER INSTITUTE lies\n"
@@ -143,3 +146,14 @@ PetalburgCity_WallysHouse_Text_WallyLeftWithoutTelling:
 	.string "he's surprisingly strong-willed.\p"
 	.string "I'm sure that he'll come back safe\n"
 	.string "and sound one day!$"
+
+PetalburgCity_WallysHouse_EventScript_BeforeWallyCatch::
+	msgbox PetalburgCity_WallysHouse_Text_BeforeWallyCatch, MSGBOX_DEFAULT
+	release
+	end
+
+PetalburgCity_WallysHouse_Text_BeforeWallyCatch:
+	.string "Our WALLY is going to stay with\n"
+	.string "relatives in VERDANTURF TOWN.\p"
+	.string "He hopes to take a POKéMON along.\n"
+	.string "He went to ask NORMAN for help.$"
