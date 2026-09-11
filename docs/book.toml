@@ -1,9 +1,0 @@
-[book]
-language = "en"
-src = "."
-title = "Emerald Champions"
-
-[output.html]
-git-repository-url = "https://github.com/g-guthrie/emerald-champions"
-edit-url-template = "https://github.com/g-guthrie/emerald-champions/edit/main/docs/{path}"
-site-url = "/emerald-champions/"
