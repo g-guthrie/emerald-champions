@@ -1,9 +1,0 @@
-{
-  "schema_version": 2,
-  "inputs_sha256": "b8d068e78c3027b08077b5f70d0155fcbaf8d2dec61160097cf0d4e21e548aa0",
-  "input_count": 28980,
-  "artifacts": {
-    "pokeemerald-mauville-audit-20260910-release.gba": "d90ed621239435818f46d394b8035d21aafe0a79e0f0608fa3b320ba4171e207",
-    "pokeemerald-mauville-audit-20260910-release.elf": "7defdc29575a242b656577c4d998ef9507cd924e4ae2bdd54ba8f5e1233c3799"
-  }
-}

@@ -1,9 +1,0 @@
-{
-  "schema_version": 2,
-  "inputs_sha256": "37510d81bfdd0e5d5977472016ce3b66574ec47301d5807195fcdadbbf96716a",
-  "input_count": 28979,
-  "artifacts": {
-    "pokeemerald-legendary-wild-20260909-release.gba": "9eb4bce7854c87a746828059d41a612f5cccbb08514cda641f06fa8bc3f2b7f2",
-    "pokeemerald-legendary-wild-20260909-release.elf": "00629a8e7ad4a446a46711e6bf35c7577922282acd2d6dc1399b84b514f50fad"
-  }
-}

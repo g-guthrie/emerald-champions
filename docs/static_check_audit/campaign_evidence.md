@@ -10,7 +10,7 @@ Pruned baseline-comparison classes/imports/fixtures, legacy item-report/source-t
 
 The campaign runner's capture-token audit is advisory rather than fatal; capture/prerequisite helpers remain because the existing diagnostic output consumes their reports. The appendix generator retains explicit `--write` export but no `--check` freshness certification. No report was regenerated. README no longer directs historical baseline comparisons. Root separately narrowed the mandatory map inventory to `include_dynamic=False`; its shared helper remains available, without claiming dynamic execution proof.
 
-Post-cleanup verification: campaign 34/34, agent integrity 16/16, and map integrity/render integrity 16/16 passed. Campaign `--validate-only` passed 227 segment symbol/structure checks (not gameplay); generator `--help` exposes only `--write`; `git diff --check` passed. No live consumer import references the deleted comparator or interactive-scope module. Historical copies inside `Cohesion Book/baseline/source/` were left untouched.
+Post-cleanup verification: campaign 34/34, agent integrity 16/16, and map integrity/render integrity 16/16 passed. Campaign `--validate-only` passed 227 segment symbol/structure checks (not gameplay); generator `--help` exposes only `--write`; `git diff --check` passed. No live consumer import references the deleted comparator or interactive-scope module. Historical copies inside `Cohesion Book/baseline/source/` were removed in 7.1; they remain reachable from `codex/emerald-champions-7.0`.
 
 ## Findings
 

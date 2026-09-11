@@ -1,9 +1,0 @@
-{
-  "schema_version": 2,
-  "inputs_sha256": "854859ff87bc721dd1062fb5d0ffe8e8583a73362c3e7bea7fe21d506c19b2f2",
-  "input_count": 28980,
-  "artifacts": {
-    "pokeemerald-opening-dialogue-20260910-release.gba": "25127265f85dc9fc181d4bf0728d88cdc3709970c46a7a54612e3c1a6107b5ea",
-    "pokeemerald-opening-dialogue-20260910-release.elf": "aea27e9b40f1fe085c10a3e178cf7ff7eee1488dbd5fcbbe6ae2dbe7bf4bde49"
-  }
-}

@@ -1,9 +1,0 @@
-{
-  "schema_version": 2,
-  "inputs_sha256": "666defca54a1e58701cd5a8483ee8aed5a9e1b43948b67b101e0ab6b43c953d4",
-  "input_count": 28977,
-  "artifacts": {
-    "pokeemerald-wild-review-20260908-release.gba": "a68d1f296356090ae181fbaf172ccf79b638ee4d7548e108e46aa0d5a3461854",
-    "pokeemerald-wild-review-20260908-release.elf": "601f688ecfa007a657f925a99cabbedd9ef8ef868d17e57c211704cc39c2d903"
-  }
-}

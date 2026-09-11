@@ -1,9 +1,0 @@
-{
-  "schema_version": 2,
-  "inputs_sha256": "56f92364934d1f110af9d6eda5ff0cab7dd69f173d8dd1aa35b6b90df0401811",
-  "input_count": 28980,
-  "artifacts": {
-    "pokeemerald-dewford-audit-20260910-release.gba": "44d2a34b0d9d882b8daadf4027779a3ab0c77f058af9dc9483a946c69da95b1d",
-    "pokeemerald-dewford-audit-20260910-release.elf": "6bd8d963480bc25eb123bd203902af2df2e8f3d36090e69655ec910229836cd2"
-  }
-}

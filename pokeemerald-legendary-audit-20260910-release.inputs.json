@@ -1,9 +1,0 @@
-{
-  "schema_version": 2,
-  "inputs_sha256": "cf9147c0ddb767c11f457411a3957e94c42b8e60352d439c031135ec044f3da2",
-  "input_count": 28980,
-  "artifacts": {
-    "pokeemerald-legendary-audit-20260910-release.gba": "76fcd63f87e6d8640ecbfbaa79c22e9e9e342db980229780fe2c3b0e41f79aad",
-    "pokeemerald-legendary-audit-20260910-release.elf": "4e529476d0150762fdf7574605e79a759e486dee4d497d950f3d5a5002f75f52"
-  }
-}

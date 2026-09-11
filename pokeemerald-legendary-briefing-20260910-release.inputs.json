@@ -1,9 +1,0 @@
-{
-  "schema_version": 2,
-  "inputs_sha256": "e53bba818aa2532519a6dc477eac767f45172127b11698b2f612d4a13375912f",
-  "input_count": 28980,
-  "artifacts": {
-    "pokeemerald-legendary-briefing-20260910-release.gba": "608be11daf2b17f1dc4cbfe72dd350761214066fc9c244b56648db95f06d623b",
-    "pokeemerald-legendary-briefing-20260910-release.elf": "ca27f71fafac7e94b2450eacde52dee863bf5920530d3abdc18e927cadcf3701"
-  }
-}
