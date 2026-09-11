@@ -8,11 +8,23 @@ Usage: python3 scripts/generate_seam_manifest.py [--out docs/SEAM_MANIFEST.md]
 """
 import os,re,sys,json,argparse,subprocess
 
-EC_PAT = re.compile(
-    r'EmeraldChampions|emerald_champions|LegendarySign|LEGENDARY_SIGN|'
-    r'GetCurrentLevelCap|GetLevelCap|GetSoftLevelCapExpValue|ChampionsCircuit|'
-    r'CHAMPIONS_CIRCUIT|MegaStoneReward|mega_stone_rewards|'
-    r'\bEC_(?!WORD|GROUP|POKEMON|MOVE|EMPTY|MASK|DYNAMIC|NUM|TRAINER|INDEX|CASE)[A-Z]')
+# Replaced at runtime by main() with a pattern derived from EC-owned symbols.
+EC_PAT = re.compile(r'(?!x)x')
+
+# Token patterns that are unambiguously ours regardless of symbol naming.
+EC_TOKENS = re.compile(
+    r'\bEC_(?!WORD|GROUP|POKEMON|MOVE|EMPTY|MASK|DYNAMIC|NUM|TRAINER|INDEX|CASE)[A-Z]'
+    r'|\bFLAG_EC_|\bVAR_EC_|emerald_champions|champions_circuit|legendary_signs')
+
+# Symbols DEFINED by EC-owned files. Derived from the source, never guessed:
+# every identifier an inherited file could call to reach our code.
+# A function whose NAME marks it as ours, wherever it currently lives.
+OWNED_NAME = re.compile(r'EmeraldChampions|ChampionsCircuit|LegendarySign|LegendaryEncounter|LegendaryRelic|LocalLegendary|MegaStoneReward|LevelCap')
+
+DEF_RE = re.compile(
+    r'^(?:[A-Za-z_][A-Za-z0-9_]*[ \t\*]+)+([A-Za-z_][A-Za-z0-9_]*)\s*\(', re.M)
+DECL_RE = re.compile(
+    r'^\s*(?:extern\s+)?(?:[A-Za-z_][A-Za-z0-9_]*[ \t\*]+)+([A-Za-z_][A-Za-z0-9_]*)\s*\([^;]*\)\s*;', re.M)
 
 # Files whose NAME marks them as EC-owned: not seams, they are the corpus.
 OWNED = re.compile(
@@ -62,7 +74,7 @@ def classify(line, func, path):
             return 'declaration'
         if st.startswith('#define'): return 'define'
         return 'header-other'
-    if func and EC_PAT.search(func): return 'owned-function'
+    if func and OWNED_NAME.search(func): return 'owned-function'
     if func is None: return 'file-scope-data'
     return 'hook'
 
@@ -74,6 +86,40 @@ def main():
     a=ap.parse_args()
     os.chdir(a.root)
     tracked=[p for p in subprocess.run(['git','ls-files'],capture_output=True,text=True).stdout.split('\n') if p]
+
+    # 1. Harvest every symbol defined or declared by EC-owned files.
+    owned_syms=set()
+    owned_files=[p for p in tracked if p.startswith(('src/','include/')) and OWNED.search(p)]
+    for p in owned_files:
+        try: t=open(p,encoding='utf-8',errors='replace').read()
+        except OSError: continue
+        for m in DEF_RE.finditer(t):  owned_syms.add(m.group(1))
+        for m in DECL_RE.finditer(t): owned_syms.add(m.group(1))
+    NOISE={'if','for','while','switch','return','sizeof','do','else','case','defined',
+           'STATIC_ASSERT','ARRAY_COUNT','AGB_ASSERT','min','max','abs'}
+    owned_syms={x for x in owned_syms if x not in NOISE and len(x)>3}
+    # Drop ALL_CAPS macro spellings: those are engine macros used by our files,
+    # not symbols our files export.
+    owned_syms={x for x in owned_syms if not re.fullmatch(r'[A-Z0-9_]+',x)}
+    # Drop anything ALSO defined by an inherited file. If the engine defines it,
+    # a reference to it is not a seam into our code.
+    foreign=set()
+    for p2 in tracked:
+        if not p2.startswith(('src/','include/')) or not p2.endswith(('.c','.h')): continue
+        if OWNED.search(p2) or p2.startswith('src/data/'): continue
+        try: t2=open(p2,encoding='utf-8',errors='replace').read()
+        except OSError: continue
+        for m in DEF_RE.finditer(t2):  foreign.add(m.group(1))
+        for m in DECL_RE.finditer(t2): foreign.add(m.group(1))
+    dropped=owned_syms & foreign
+    owned_syms-=foreign
+    if dropped:
+        print(f"dropped {len(dropped)} symbols also defined by the engine")
+    global EC_PAT
+    EC_PAT=re.compile('|'.join([EC_TOKENS.pattern]+
+                     [r'\b'+re.escape(x)+r'\b' for x in sorted(owned_syms)]))
+    print(f"derived {len(owned_syms)} exported symbols from {len(owned_files)} EC-owned files")
+
     sites=[]
     for p in tracked:
         if not p.startswith(('src/','include/')) or not p.endswith(('.c','.h')): continue
