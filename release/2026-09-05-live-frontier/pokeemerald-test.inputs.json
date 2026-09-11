@@ -1,8 +1,0 @@
-{
-  "schema_version": 2,
-  "inputs_sha256": "aded40aceb8a4cf0e6746d5855d63d22ea9fe925568f795881f230db378a68ae",
-  "input_count": 30016,
-  "artifacts": {
-    "pokeemerald-test.elf": "8fa4e2ad45b252504437f04bd0e0bc4230f51d7164569781d085f104dab3f56f"
-  }
-}

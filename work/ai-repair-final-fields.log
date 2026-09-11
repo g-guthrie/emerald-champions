@@ -1,8 +1,0 @@
-tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
-tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
-[0] AI sets up terrain for its ally: [32mPASS[0m
-[1] AI sets up weather for its ally: [32mPASS[0m
-
-- Tests [32mPASSED[0m:          2
-- Tests [34mTOTAL[0m:           2
-

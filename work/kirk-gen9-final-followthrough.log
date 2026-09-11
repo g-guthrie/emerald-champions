@@ -1,7 +1,0 @@
-tools/scaninc/scaninc -M build/emerald-test/test/battle/ai/emerald_champions_plans.d -g build/assets -I include -I tools/agbcc/include test/battle/ai/emerald_champions_plans.c
-/Users/ericguthrie/Documents/ChatGPT/Emerald/emerald-champions/work/toolchain/arm-expanded/Payload/bin/../libexec/gcc/arm-none-eabi/15.3.1/cc1 -quiet <flags> -o build/emerald-test/test/battle/ai/emerald_champions_plans.o test/battle/ai/emerald_champions_plans.c
-In file included from test/battle/ai/emerald_champions_plans.c:605:
-work/kirk_gen9_probe.inc: In function 'Test60088':
-work/kirk_gen9_probe.inc:60105:21: error: 'typeof' applied to a bit-field
-make: *** [build/emerald-test/test/battle/ai/emerald_champions_plans.o] Error 1
-make: *** Deleting file `build/emerald-test/test/battle/ai/emerald_champions_plans.o'

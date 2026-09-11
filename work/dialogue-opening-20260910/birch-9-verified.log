@@ -1,7 +1,0 @@
-WATCH frame=1603 address=0200224c value=00000005 screenshot=work/dialogue-opening-20260910/query-9-001603-00000005.png
-WATCH frame=2302 address=0200224c value=00000001 screenshot=work/dialogue-opening-20260910/query-9-002302-00000001.png
-WATCH frame=2502 address=0200224c value=0000000a screenshot=work/dialogue-opening-20260910/query-9-002502-0000000a.png
-RESULT frames=3500 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=10b1c944b1e9a6b1 nonzero_pixels=33140 save_bytes=0
-READ width=4 address=0200224c value=0000000a
-READ width=4 address=02002274 value=00000000
-READ width=4 address=02002278 value=00000000

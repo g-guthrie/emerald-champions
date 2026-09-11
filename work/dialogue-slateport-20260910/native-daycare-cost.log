@@ -1,8 +1,0 @@
-35 0 RESULT frames=300 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=8a97141cbca81952 nonzero_pixels=21707 save_bytes=0
-READ width=2 address=020022d0 value=000001f4
-READ width=2 address=020022ce value=00000004
- 
-36 0 RESULT frames=300 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=8a97141cbca81952 nonzero_pixels=21707 save_bytes=0
-READ width=2 address=020022d0 value=00000064
-READ width=2 address=020022ce value=00000000
- 

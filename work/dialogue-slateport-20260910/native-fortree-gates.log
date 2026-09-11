@@ -1,9 +1,0 @@
-path 97 return 51 orientations (2, 3, 2, 1, 0, 3, 1, 3)
-0 RESULT frames=28800 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=277f8cdf42b739bf nonzero_pixels=38351 save_bytes=0
-READ width=4 address=02002274 value=00000000
-READ width=4 address=02002278 value=00000000
-READ width=4 address=0200225c value=00000004
-READ width=4 address=02002268 value=00000016
-READ width=4 address=0200226c value=0000000c
-READ width=4 address=0200227c value=00000001
- 

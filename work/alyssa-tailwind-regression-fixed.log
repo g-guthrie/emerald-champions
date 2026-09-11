@@ -1,8 +1,0 @@
-tools/patchelf/patchelf pokeemerald-test-headless.elf gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "\x00"
-tools/mgba-rom-test-hydra/mgba-rom-test-hydra tools/mgba/mgba-rom-test-mac arm-none-eabi-objcopy pokeemerald-test-headless.elf
-Hydra workers: 4
-[0] EC Tailwind: faster recoil attackers do not use empty speed setup: [32mPASS[0m
-
-- Tests [32mPASSED[0m:          1
-- Tests [34mTOTAL[0m:           1
-

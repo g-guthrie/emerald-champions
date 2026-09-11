@@ -1,5 +1,0 @@
-RESULT frames=1500 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=b4b7ef84858d9235 nonzero_pixels=38324 save_bytes=0
-READ width=4 address=03006b64 value=00000001
-
-RESULT frames=1500 stop_matched=0 pc=000001f8 rtc=946706400 width=240 height=160 video_hash=b4b7ef84858d9235 nonzero_pixels=38324 save_bytes=0
-READ width=4 address=03006b64 value=00060001

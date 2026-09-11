@@ -1,9 +1,0 @@
-[
-  {
-    "tag": "purchase-tool-money",
-    "expected": 45000,
-    "code": 0,
-    "stdout": "RESULT frames=8000 stop_matched=0 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=e3016567482edf02 nonzero_pixels=30620 save_bytes=0\nREAD width=4 address=020022c0 value=0000afc8\nREAD width=4 address=020022e8 value=00000000\nREAD width=4 address=020022ec value=00000000\nREAD width=4 address=020022f0 value=00000000\n",
-    "stderr": ""
-  }
-]

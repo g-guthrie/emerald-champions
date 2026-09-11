@@ -1,7 +1,0 @@
-Native GBA function tests using the independently built pokeemerald-legendary-wild-test.elf
-
-PASS: Rare wild selection preserves 1 percent slots and the Sweet Scent quarter
-PASS: Rare wild NPC discovery requires local help and survives depositing the partner
-
-TOTAL 2; PASSED 2; failures/debt 0.
-No full campaign or capture-animation traversal was run.

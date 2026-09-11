@@ -1,4 +1,0 @@
-RESULT frames=2662 stop_matched=1 pc=000001f8 rtc=946684800 width=240 height=160 video_hash=13ea67b859e8ad43 nonzero_pixels=26379 save_bytes=0
-READ width=4 address=0200223c value=00000001
-READ width=4 address=02002274 value=00000000
-READ width=4 address=02002278 value=00000000
