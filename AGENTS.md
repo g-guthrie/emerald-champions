@@ -28,6 +28,21 @@ collision validity alone does not establish good choreography or presentation.
   onward. Implement and verify each chapter's interactions, native battles and
   handoff before claiming campaign progress beyond it. Parallel later-area
   preparation does not constitute verified campaign traversal.
+- Complete each area's currently available NPC conversations, inspections,
+  pickups, gifts, trades, economies, services, puzzles, optional activities,
+  unlocks and every trainer battle as the primary playthrough reaches them.
+  Record later-gated content and alternative outcomes for legal revisits or
+  earned-checkpoint branches. Build strong stage-obtainable player teams through
+  the game; tune/replay shared AI rules and individual encounter intent as each
+  fight is reached. Audit our counterplay before weakening a difficult trainer.
+  Area completion requires executed evidence, not manifest declarations. Keep
+  full recordings where supported and distinguish recorded from inspected
+  frames; scope confidence to verified behavior. See book section 25.
+- Review screenshots in labeled contact sheets/collages by default. Group
+  related scene moments and outcomes, preserve unmodified originals and trace
+  links, and identify synthetic versus earned-playthrough views. Inspect an
+  individual frame or crop only for a specific detail. Assemble captured pixels
+  deterministically; never regenerate gameplay evidence to make it look better.
 - Make the smallest coherent change. Prefer deletion and reuse over new layers.
 - Preserve gameplay while refactoring; fix demonstrated defects. Discuss new
   progression, economy, difficulty, availability or overworld design unless the

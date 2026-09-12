@@ -1,10 +1,9 @@
 {
   "schema_version": 1,
-  "description": "Book v4 input-driven campaign recipes, rebuilt and verified from a fresh save in story order. Later recipes remain unvalidated until reached. Use --battle-mode native for primary campaign evidence; default autowin is separate script traversal. Direct warps and story flag writes are forbidden in the main chain.",
+  "description": "Book v4 input-driven campaign recipes, rebuilt and verified from a fresh save in story order. Later recipes remain unvalidated until reached. Use --battle-mode native for primary campaign evidence; autowin is separate script traversal with compatible recipes. Direct warps and story flag writes are forbidden in the main chain.",
   "battle_policy": {
-    "trainer": "normal victory cleanup through BattleDebug_WonBattle",
-    "ordinary_wild": "defeat",
-    "capture_only_legendary": "separate real-capture module required"
+    "native": "Default: normal player inputs and engine battle outcomes. Canonical v4 recipes use this mode.",
+    "autowin": "Explicit legacy script-traversal mode; requires compatible recipes and does not assess combat."
   },
   "segments": [
     {
@@ -408,118 +407,142 @@
       "id": "main-03-north-warning",
       "parent": "main-02-rival-house-exit",
       "chapter": "Birch Rescue",
-      "frames": 3000,
+      "frames": 740,
       "actions": [
-        {"at": 200, "duration": 80, "keys": ["RIGHT"]},
-        {"at": 500, "duration": 150, "keys": ["UP"]},
-        {"at": 2000, "duration": 20, "keys": ["RIGHT"]},
-        {"at": 2300, "duration": 40, "keys": ["UP"]}
+        {"at": 0, "duration": 64, "keys": ["LEFT"]},
+        {"at": 90, "duration": 144, "keys": ["UP"]},
+        {"at": 500, "duration": 1, "keys": ["A"]}
       ],
       "screenshots": [
-        {"at": 1700, "name": "littleroot-north-path"},
-        {"at": 2999, "name": "north-warning-dialogue"}
+        {"at": 430, "name": "044-044-north-warning-route-warning"},
+        {"at": 739, "name": "main-03-north-warning"}
       ],
-      "expected": {
-        "map": "MAP_LITTLEROOT_TOWN",
-        "position": [11, 1],
-        "battle_serial_min": 0
-      }
+      "expected": {"map": "MAP_LITTLEROOT_TOWN", "position": [10, 2], "battle_serial_min": 0}
     },
     {
       "id": "main-03-warning-complete",
       "parent": "main-03-north-warning",
       "chapter": "Birch Rescue",
-      "frames": 2000,
+      "frames": 600,
       "actions": [
-        {"at": 30, "duration": 2, "keys": ["A"]},
-        {"at": 530, "duration": 2, "keys": ["A"]},
-        {"at": 1030, "duration": 2, "keys": ["A"]},
-        {"at": 1530, "duration": 2, "keys": ["A"]}
+        {"at": 0, "duration": 30, "keys": ["A"]},
+        {"at": 150, "duration": 30, "keys": ["A"]},
+        {"at": 300, "duration": 30, "keys": ["A"]},
+        {"at": 450, "duration": 30, "keys": ["A"]}
       ],
       "screenshots": [
-        {"at": 1000, "name": "warning-explanation"},
-        {"at": 1999, "name": "route-open"}
+        {"at": 599, "name": "main-03-warning-complete"}
       ],
-      "expected": {
-        "map": "MAP_LITTLEROOT_TOWN",
-        "position": [11, 1],
-        "battle_serial_min": 0,
-        "stable_overworld": true
-      }
+      "expected": {"map": "MAP_LITTLEROOT_TOWN", "position": [10, 2], "battle_serial_min": 0, "stable_overworld": true, "vars": {"VAR_LITTLEROOT_TOWN_STATE": 2}}
     },
     {
       "id": "main-03-rescue-clearing",
       "parent": "main-03-warning-complete",
       "chapter": "Birch Rescue",
-      "frames": 2700,
+      "frames": 1250,
       "actions": [
-        {"at": 200, "duration": 50, "keys": ["UP"]},
-        {"at": 1230, "duration": 2, "keys": ["A"]},
-        {"at": 1730, "duration": 2, "keys": ["A"]},
-        {"at": 2230, "duration": 2, "keys": ["A"]}
+        {"at": 0, "duration": 16, "keys": ["RIGHT"]},
+        {"at": 40, "duration": 64, "keys": ["UP"]},
+        {"at": 500, "duration": 30, "keys": ["A"]},
+        {"at": 650, "duration": 30, "keys": ["A"]},
+        {"at": 800, "duration": 30, "keys": ["A"]},
+        {"at": 950, "duration": 30, "keys": ["A"]},
+        {"at": 1100, "duration": 30, "keys": ["A"]}
       ],
       "screenshots": [
-        {"at": 1000, "name": "birch-calls-for-help"},
-        {"at": 2699, "name": "rescue-clearing-ready"}
+        {"at": 420, "name": "050-050-route101-entry-clearing"},
+        {"at": 1249, "name": "main-03-rescue-clearing"}
       ],
-      "expected": {
-        "map": "MAP_ROUTE101",
-        "position": [11, 15],
-        "battle_serial_min": 0,
-        "stable_overworld": true
-      }
+      "expected": {"map": "MAP_ROUTE101", "position": [11, 15], "battle_serial_min": 0, "stable_overworld": true}
     },
     {
       "id": "main-03-starter-bag",
       "parent": "main-03-rescue-clearing",
       "chapter": "Birch Rescue",
-      "frames": 2500,
+      "frames": 1230,
       "actions": [
-        {"at": 200, "duration": 50, "keys": ["LEFT"]},
-        {"at": 500, "duration": 2, "keys": ["UP"]},
-        {"at": 1250, "duration": 2, "keys": ["A"]},
-        {"at": 1800, "duration": 2, "keys": ["A"]}
+        {"at": 0, "duration": 64, "keys": ["LEFT"]},
+        {"at": 90, "duration": 1, "keys": ["UP"]},
+        {"at": 110, "duration": 1, "keys": ["A"]},
+        {"at": 500, "duration": 1, "keys": ["A"]},
+        {"at": 750, "duration": 1, "keys": ["A"]},
+        {"at": 970, "duration": 1, "keys": ["A"]}
       ],
       "screenshots": [
-        {"at": 1000, "name": "birch-field-bag"},
-        {"at": 1500, "name": "charmander-selector"},
-        {"at": 2499, "name": "charmander-confirmation"}
+        {"at": 450, "name": "056-056-starter-bag-selection"},
+        {"at": 700, "name": "057-057-first-partner-torchic-confirm"},
+        {"at": 930, "name": "058-058-first-selected-second-choice"},
+        {"at": 1180, "name": "059-059-pair-confirm-pair-confirmation"},
+        {"at": 1229, "name": "main-03-starter-bag"}
       ],
-      "expected": {
-        "map": "MAP_ROUTE101",
-        "position": [7, 15],
-        "battle_serial_min": 0
-      }
+      "expected": {"map": "MAP_ROUTE101", "position": [7, 15], "battle_serial_min": 0, "in_battle": false}
     },
     {
-      "id": "main-03-first-autowin",
+      "id": "main-03-rescue-battle-start",
       "parent": "main-03-starter-bag",
       "chapter": "Birch Rescue",
-      "frames": 3200,
+      "frames": 1650,
       "actions": [
-        {"at": 30, "duration": 2, "keys": ["A"]},
-        {"at": 1800, "duration": 2, "keys": ["A"]},
-        {"at": 2200, "duration": 2, "keys": ["A"]},
-        {"at": 2600, "duration": 2, "keys": ["A"]}
+        {"at": 0, "duration": 1, "keys": ["A"]},
+        {"at": 1000, "duration": 1, "keys": ["A"]}
       ],
       "screenshots": [
-        {"at": 1200, "name": "first-battle-transition"},
-        {"at": 3199, "name": "birch-rescued"}
+        {"at": 450, "name": "060-060-rescue-native-start-encounter"},
+        {"at": 850, "name": "060-060-rescue-native-start-sendout"},
+        {"at": 1450, "name": "061-061-rescue-sendout-partners"},
+        {"at": 1649, "name": "main-03-rescue-battle-start"}
       ],
-      "interactive_mode": "scripted_tutorial",
-      "battle_automation": "auto-win",
-      "coverage": {
-        "interactive_flows": ["tutorial.birch_rescue"]
-      },
-      "expected": {
-        "map": "MAP_ROUTE101",
-        "position": [7, 15],
-        "battle_serial_min": 1
-      }
+      "expected": {"map": "MAP_ROUTE101", "position": [7, 15], "battle_serial_min": 1, "in_battle": true, "vars": {"VAR_STARTER_GEN": 3, "VAR_STARTER_MON": 1, "VAR_EC_SECOND_STARTER": 3, "VAR_EC_OPENING_STATE": 1}, "flags": {"FLAG_RESCUED_BIRCH": 0, "FLAG_SYS_POKEDEX_GET": 0}}
+    },
+    {
+      "id": "main-03-rescue-won",
+      "parent": "main-03-rescue-battle-start",
+      "chapter": "Birch Rescue",
+      "frames": 5981,
+      "actions": [
+        {"at": 0, "duration": 1, "keys": ["A"]},
+        {"at": 130, "duration": 1, "keys": ["A"]},
+        {"at": 310, "duration": 1, "keys": ["A"]},
+        {"at": 470, "duration": 1, "keys": ["A"]},
+        {"at": 620, "duration": 1, "keys": ["RIGHT"]},
+        {"at": 645, "duration": 1, "keys": ["A"]},
+        {"at": 690, "duration": 1, "keys": ["LEFT"]},
+        {"at": 780, "duration": 1, "keys": ["A"]},
+        {"at": 1280, "duration": 1, "keys": ["A"]},
+        {"at": 1780, "duration": 1, "keys": ["A"]},
+        {"at": 2281, "duration": 1, "keys": ["A"]},
+        {"at": 2441, "duration": 1, "keys": ["A"]},
+        {"at": 2601, "duration": 1, "keys": ["A"]},
+        {"at": 2781, "duration": 1, "keys": ["A"]},
+        {"at": 2941, "duration": 1, "keys": ["A"]},
+        {"at": 3006, "duration": 1, "keys": ["LEFT"]},
+        {"at": 3101, "duration": 1, "keys": ["A"]},
+        {"at": 3731, "duration": 1, "keys": ["A"]},
+        {"at": 4381, "duration": 1, "keys": ["A"]},
+        {"at": 4681, "duration": 1, "keys": ["A"]},
+        {"at": 4981, "duration": 1, "keys": ["A"]},
+        {"at": 5281, "duration": 1, "keys": ["A"]},
+        {"at": 5581, "duration": 1, "keys": ["A"]}
+      ],
+      "screenshots": [
+        {"at": 410, "name": "064-064-torchic-target-target"},
+        {"at": 760, "name": "066-066-liquidation-target-zigzagoon-target"},
+        {"at": 1180, "name": "067-067-rescue-turn1-torchic-attack"},
+        {"at": 1630, "name": "067-067-rescue-turn1-liquidation"},
+        {"at": 2130, "name": "067-067-rescue-turn1-outcome"},
+        {"at": 2561, "name": "069-069-rescue-turn2-torchic-target"},
+        {"at": 3431, "name": "070-070-rescue-turn2-mudkip-attacks"},
+        {"at": 4081, "name": "070-070-rescue-turn2-mudkip-result"},
+        {"at": 4931, "name": "071-071-rescue-turn2-resolution-liquidation"},
+        {"at": 5681, "name": "071-071-rescue-turn2-resolution-resolution"},
+        {"at": 5980, "name": "main-03-rescue-won"}
+      ],
+      "coverage": {"interactive_flows": ["tutorial.birch_rescue"]},
+      "expected": {"map": "MAP_ROUTE101", "position": [7, 15], "battle_serial_min": 1, "in_battle": false, "vars": {"VAR_EC_OPENING_STATE": 2}, "flags": {"FLAG_RESCUED_BIRCH": 1, "FLAG_SYS_POKEDEX_GET": 0}}
     },
     {
       "id": "main-03-lab-nickname",
-      "parent": "main-03-first-autowin",
+      "parent": "main-03-rescue-won",
       "chapter": "Birch Rescue",
       "frames": 3000,
       "actions": [

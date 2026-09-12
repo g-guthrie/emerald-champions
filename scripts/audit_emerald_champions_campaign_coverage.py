@@ -82,7 +82,7 @@ def classify_map(name: str, map_id: str, group: str, scope: dict[str, Any]) -> s
         name.startswith(prefix) for prefix in scope.get("generated_map_prefixes", [])
     ):
         return "generated"
-    if "Unused" in name or group in set(scope.get("system_groups", [])) or name in set(scope.get("system_maps", [])) or any(
+    if group in set(scope.get("system_groups", [])) or name in set(scope.get("system_maps", [])) or any(
         name.startswith(prefix) for prefix in scope.get("system_map_prefixes", [])
     ):
         return "system"
@@ -515,6 +515,13 @@ def print_summary(result: dict[str, Any]) -> None:
 
 
 def self_test() -> None:
+    # C48 uses these restored rooms despite their inherited Ruby/Sapphire names.
+    for floor in (1, 2, 3):
+        assert classify_map(
+            f"CaveOfOrigin_UnusedRubySapphireMap{floor}",
+            f"MAP_CAVE_OF_ORIGIN_UNUSED_RUBY_SAPPHIRE_MAP{floor}",
+            "gMapGroup_Dungeons", {"system_map_prefixes": ["Unused"]},
+        ) == "campaign_unclassified"
     fake_inventory = {
         "inventory_sha256": "test",
         "entities": {kind: [] for kind in KINDS},

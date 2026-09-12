@@ -32,14 +32,14 @@ changing code. Run no blanket suite merely to increase coverage totals.
 
 | Purpose | Entry point | Limit |
 | --- | --- | --- |
-| Campaign traversal | `scripts/run_emerald_champions_campaign.py` | `--battle-mode native` preserves combat; default `autowin` is traversal only |
+| Campaign traversal | `scripts/run_emerald_champions_campaign.py` | Default `native` preserves combat; explicit `autowin` is traversal only |
 | Native battle play | `tools/agent_player/agent_player.py`, `scripts/battle_checkpoint_lab.py` | Requires campaign battle automation disabled and current artifacts |
 | Visual scenarios | `scripts/render_emerald_champions_ui.py`, `scripts/verify_emerald_champions_visual_runtime.py` | Requires the test-only fixture build and screenshot inspection |
 
-Select `--battle-mode native` for the book-ordered fresh-save campaign. It uses
+The default `native` mode runs the book-ordered fresh-save campaign. It uses
 the normal New Game and preserves battle outcomes; inputs must actually play
-each battle. Its checkpoints require native ancestry. The default `autowin`
-mode remains useful for separate script traversal. Legacy `battle_automation`
+each battle. Its checkpoints require native ancestry. Explicit `--battle-mode autowin` remains available for separate script traversal
+with compatible input recipes. Legacy `battle_automation`
 manifest labels do not change the selected mode. Existing later-chapter input
 recipes remain unvalidated until reached in the reviewed book order. Agent-player success events are reported outcomes, not
 independent proof. Preserve both pipelines and their distinct interpretation.

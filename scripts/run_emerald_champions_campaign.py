@@ -566,6 +566,10 @@ def validate_expected(
             f"{segment['id']}: expected capture serial >= {capture_minimum}, observed "
             f"{telemetry['gEcHeadlessCampaignCaptureSerial']}"
         )
+    if "in_battle" in expected:
+        actual = bool(telemetry["gEcHeadlessCampaignInBattle"])
+        if actual != expected["in_battle"]:
+            fail(f"{segment['id']}: expected in_battle={expected['in_battle']}, observed {actual}")
     if "captured_species" in expected:
         actual = telemetry["gEcHeadlessCampaignLastCapturedSpecies"]
         if actual != expected["captured_species"]:
@@ -1367,7 +1371,8 @@ def run_segment(
             "--screenshot-on-change",
             f"4:0x{addresses['gEcHeadlessCampaignMapId']:x}:400:{screenshot_dir / 'map'}",
             "--screenshot-on-change",
-            f"4:0x{addresses['gEcHeadlessCampaignBattleSerial']:x}:2:{screenshot_dir / 'battle'}",
+            # Native counts at battle initialization, before intro graphics load.
+            f"4:0x{addresses['gEcHeadlessCampaignBattleSerial']:x}:{400 if battle_mode == 'native' else 2}:{screenshot_dir / 'battle'}",
         )
     )
     for name in TELEMETRY_SYMBOLS:
@@ -1579,8 +1584,8 @@ def write_failure_bundle(
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--battle-mode", choices=("native", "autowin"), default="autowin",
-                        help="native preserves actual combat; autowin is legacy traversal only")
+    parser.add_argument("--battle-mode", choices=("native", "autowin"), default="native",
+                        help="native (default) preserves actual combat; autowin requires compatible traversal recipes")
     parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     parser.add_argument("--rom", type=Path, default=DEFAULT_ROM)
     parser.add_argument("--elf", type=Path, default=DEFAULT_ELF)
