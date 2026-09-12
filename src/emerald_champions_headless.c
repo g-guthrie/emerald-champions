@@ -168,7 +168,7 @@ enum EmeraldChampionsHeadlessBattleResolution EmeraldChampionsHeadlessGetBattleR
                           | BATTLE_TYPE_CATCH_TUTORIAL
                           | BATTLE_TYPE_POKEDUDE))
         return EC_HEADLESS_BATTLE_NATIVE;
-    if (gEcHeadlessCampaignForceLoss && (gBattleTypeFlags & BATTLE_TYPE_TRAINER))
+    if (gEcHeadlessCampaignForceLoss)
         return EC_HEADLESS_BATTLE_LOSS;
     if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_BOOK_RESEARCH)
         return (gEcHeadlessFixtureParam & 0x800) ? EC_HEADLESS_BATTLE_CAPTURE : EC_HEADLESS_BATTLE_WIN;
@@ -394,7 +394,7 @@ static void PrepareBookResearchScene(void)
             FillHeadlessKeyPocket();
         else
         {
-            struct BagPocket *pocket = &gBagPockets[GetItemPocket(scene == 14 || scene == 15 || scene == 17 ? ITEM_VENUSAURITE : ITEM_DEEP_SEA_TOOTH)];
+            struct BagPocket *pocket = &gBagPockets[GetItemPocket(scene == 14 || scene == 15 || scene == 17 || scene == 26 ? ITEM_VENUSAURITE : ITEM_DEEP_SEA_TOOTH)];
             for (u32 slot = 0; slot < pocket->capacity; slot++)
                 BagPocket_SetSlotItemIdAndCount(pocket, slot,
                     pocket->id == POCKET_MEGA_STONES ? ITEM_ABOMASITE : ITEM_FIRE_STONE, MAX_BAG_ITEM_CAPACITY);
@@ -548,6 +548,73 @@ static void PrepareBookResearchScene(void)
     case 20:
         gSaveBlock2Ptr->frontier.battlePoints = 100;
         LoadHeadlessMap(MAP_BATTLE_FRONTIER_EXCHANGE_SERVICE_CORNER, 9, 7);
+        break;
+    case 21: // Origin actor; missing means the chapter's Rain Badge is missing.
+    case 22: // Meteor actor; the two observations are intentionally independent.
+    case 23: // Origin entrance, with an unavailable actor and no observation.
+    case 24: // Meteor entrance, with an unavailable actor and no observation.
+        FlagClear(FLAG_EC_SURVEYED_ORIGIN_CHAMBER);
+        FlagClear(FLAG_EC_SURVEYED_METEOR_CHAMBER);
+        FlagClear(FLAG_EC_CAUGHT_DIANCIE);
+        FlagClear(FLAG_EC_CAUGHT_JIRACHI);
+        if (missing)
+            FlagClear(FLAG_BADGE08_GET);
+        if (gEcHeadlessFixtureParam & 0x1000)
+            FlagSet(scene & 1 ? FLAG_EC_SURVEYED_METEOR_CHAMBER : FLAG_EC_SURVEYED_ORIGIN_CHAMBER);
+        if (gEcHeadlessFixtureParam & 0x2000)
+            FlagSet(FLAG_EC_STEVEN_RESEARCH_CONCLUSION);
+        if (gEcHeadlessFixtureParam & 0x4000)
+            FlagSet(FLAG_EC_REPORT_C48_COMPLETE);
+        if (gEcHeadlessFixtureParam & 0x8000)
+            FlagSet(FLAG_SYS_GAME_CLEAR);
+        if (completed)
+            FlagSet(scene & 1 ? FLAG_EC_SURVEYED_ORIGIN_CHAMBER : FLAG_EC_SURVEYED_METEOR_CHAMBER);
+        if (gEcHeadlessFixtureParam & 0x100)
+        {
+            // Real full-storage boundary: no party/PC slot can receive a catch.
+            for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+                CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][slot], SPECIES_ZIGZAGOON, 80, OTID_STRUCT_PLAYER_ID);
+            for (u32 box = 0; box < TOTAL_BOXES_COUNT; box++)
+                for (u32 slot = 0; slot < IN_BOX_COUNT; slot++)
+                    CreateBoxMon(&gPokemonStoragePtr->boxes[box][slot], SPECIES_ZIGZAGOON, 14, 0, OTID_STRUCT_PLAYER_ID);
+            CalculatePlayerPartyCount();
+        }
+        AddBagItem(ITEM_POKE_BALL, 1);
+        if (gEcHeadlessFixtureParam & 0x10000)
+        {
+            // A real Smoke Ball makes native Run deterministic for exit QA.
+            enum Item item = ITEM_SMOKE_BALL;
+            SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM, &item);
+        }
+        SetLastHealLocationWarp(HEAL_LOCATION_SOOTOPOLIS_CITY);
+        if (scene == 23)
+            FlagSet(FLAG_EC_CAUGHT_DIANCIE);
+        if (scene == 24)
+            FlagSet(FLAG_EC_CAUGHT_JIRACHI);
+        if (scene & 1)
+            LoadHeadlessMap(MAP_CAVE_OF_ORIGIN_DIANCIES_ROOM, 9, scene == 23 ? 8 : 10);
+        else
+            LoadHeadlessMap(MAP_METEOR_FALLS_JIRACHIS_ROOM, 7, scene == 24 ? 8 : 7);
+        break;
+    case 25: // The obsolete pickup no longer blocks the required Jirachi door.
+        if (gEcHeadlessFixtureParam & 0x100)
+        {
+            struct BagPocket *pocket = &gBagPockets[GetItemPocket(ITEM_BEAST_BALL)];
+            for (u32 slot = 0; slot < pocket->capacity; slot++)
+                BagPocket_SetSlotItemIdAndCount(pocket, slot, ITEM_POKE_BALL, MAX_BAG_ITEM_CAPACITY);
+        }
+        LoadHeadlessMap(MAP_METEOR_FALLS_B1F_2R, 5, 4);
+        break;
+    case 26: // Diancite reuses Shoal's original visible TM70 pickup corner.
+        if (missing)
+            AddPCItem(ITEM_DIANCITE, 1);
+        if (completed)
+            FlagSet(FLAG_EC_MEGA_REWARD_DIANCITE);
+        LoadHeadlessMap(MAP_SHOAL_CAVE_LOW_TIDE_STAIRS_ROOM, 12, 12);
+        break;
+    case 27:
+        FlagSet(FLAG_SYS_USE_FLASH);
+        LoadHeadlessMap(MAP_GRANITE_CAVE_B2F, 12, 11);
         break;
     }
     gEcHeadlessFixtureSetupResult = TRUE;
