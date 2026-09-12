@@ -161,8 +161,7 @@ Route110_EventScript_PlayerRidingAcroBike::
 	end
 
 Route110_EventScript_Edward::
-	trainerbattle_double TRAINER_EDWARD, Route110_Text_EdwardIntro, Route110_Text_EdwardDefeated, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route110_Text_EdwardPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route110_Text_EdwardPostBattle, MSGBOX_NPC
 	end
 
 Route110_EventScript_Jaclyn::
@@ -171,24 +170,7 @@ Route110_EventScript_Jaclyn::
 	end
 
 Route110_EventScript_Edwin::
-	trainerbattle_double TRAINER_EDWIN_1, Route110_Text_EdwinIntro, Route110_Text_EdwinDefeated, EmeraldChampions_Text_NeedTwoPokemon, Route110_EventScript_EdwinRegisterMatchCallAfterBattle
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route110_EventScript_EdwinRematch
-	msgbox Route110_Text_EdwinPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route110_EventScript_EdwinRegisterMatchCallAfterBattle::
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route110_Text_EdwinRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_EDWIN_1
-	release
-	end
-
-Route110_EventScript_EdwinRematch::
-	trainerbattle_rematch_double TRAINER_EDWIN_1, Route110_Text_EdwinRematchIntro, Route110_Text_EdwinRematchDefeated, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route110_Text_EdwinRematchPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route110_Text_EdwinPostBattle, MSGBOX_NPC
 	end
 
 Route110_EventScript_Dale::
@@ -206,24 +188,7 @@ Route110_EventScript_Anthony::
 	end
 
 Route110_EventScript_Benjamin::
-	trainerbattle_double TRAINER_BENJAMIN_1, Route110_Text_BenjaminIntro, Route110_Text_BenjaminDefeated, EmeraldChampions_Text_NeedTwoPokemon, Route110_EventScript_BenjaminRegisterMatchCallAfterBattle
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route110_EventScript_BenjaminRematch
-	msgbox Route110_Text_BenjaminPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route110_EventScript_BenjaminRegisterMatchCallAfterBattle::
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route110_Text_BenjaminRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_BENJAMIN_1
-	release
-	end
-
-Route110_EventScript_BenjaminRematch::
-	trainerbattle_rematch_double TRAINER_BENJAMIN_1, Route110_Text_BenjaminRematchIntro, Route110_Text_BenjaminRematchDefeated, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route110_Text_BenjaminRematchPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route110_Text_BenjaminPostBattle, MSGBOX_NPC
 	end
 
 Route110_EventScript_Jasmine::
@@ -232,24 +197,7 @@ Route110_EventScript_Jasmine::
 	end
 
 Route110_EventScript_Abigail::
-	trainerbattle_double TRAINER_ABIGAIL_1, Route110_Text_AbigailIntro, Route110_Text_AbigailDefeated, EmeraldChampions_Text_NeedTwoPokemon, Route110_EventScript_AbigailRegisterMatchCallAfterBattle
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route110_EventScript_AbigailRematch
-	msgbox Route110_Text_AbigailPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route110_EventScript_AbigailRegisterMatchCallAfterBattle::
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route110_Text_AbigailRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_ABIGAIL_1
-	release
-	end
-
-Route110_EventScript_AbigailRematch::
-	trainerbattle_rematch_double TRAINER_ABIGAIL_1, Route110_Text_AbigailRematchIntro, Route110_Text_AbigailRematchDefeated, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route110_Text_AbigailRematchPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route110_Text_AbigailPostBattle, MSGBOX_NPC
 	end
 
 Route110_EventScript_Isabel::
@@ -287,13 +235,11 @@ Route110_EventScript_Kaleb::
 	end
 
 Route110_EventScript_Joseph::
-	trainerbattle_double TRAINER_JOSEPH, Route110_Text_JosephIntro, Route110_Text_JosephDefeated, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route110_Text_JosephPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route110_Text_JosephPostBattle, MSGBOX_NPC
 	end
 
 Route110_EventScript_Alyssa::
-	trainerbattle_double TRAINER_ALYSSA, Route110_Text_AlyssaIntro, Route110_Text_AlyssaDefeated, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route110_Text_AlyssaPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route110_Text_AlyssaPostBattle, MSGBOX_NPC
 	end
 
 Route110_EventScript_CyclingChallengeEnd::

@@ -4,8 +4,6 @@
 #include "global.h"
 #include "constants/emerald_champions.h"
 
-#define EMERALD_CHAMPIONS_SET_NAME_LENGTH 24
-
 struct EmeraldChampionsBattleSet
 {
     enum Move moves[MAX_MON_MOVES];
@@ -25,7 +23,7 @@ struct EmeraldChampionsBattleSetRange
 
 struct EmeraldChampionsBattleSetChoice
 {
-    u8 name[EMERALD_CHAMPIONS_SET_NAME_LENGTH];
+    const u8 *name;
     struct EmeraldChampionsBattleSet preset;
 };
 
@@ -35,16 +33,11 @@ struct EmeraldChampionsBattleSetChoice
 // six stats can never be paired differently in two places.
 extern const u8 gEmeraldChampionsEvOrder[NUM_STATS];
 #define EC_EV_DATA(displayIndex) (MON_DATA_HP_EV + gEmeraldChampionsEvOrder[displayIndex])
+#define EC_IV_DATA(displayIndex) (MON_DATA_HP_IV + gEmeraldChampionsEvOrder[displayIndex])
 #define EC_STAT_VALUE_DATA(displayIndex) (MON_DATA_MAX_HP + gEmeraldChampionsEvOrder[displayIndex])
 
-extern const struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SPECIES];
-extern const u8 *const gEmeraldChampionsDefaultBattleSetNames[NUM_SPECIES];
-extern const struct EmeraldChampionsBattleSetRange gEmeraldChampionsBattleSetRanges[NUM_SPECIES];
-extern const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternatives[];
-extern const struct EmeraldChampionsBattleSet gEmeraldChampionsSinglesDefaultBattleSets[NUM_SPECIES];
-extern const u8 *const gEmeraldChampionsSinglesDefaultBattleSetNames[NUM_SPECIES];
-extern const struct EmeraldChampionsBattleSetRange gEmeraldChampionsSinglesBattleSetRanges[NUM_SPECIES];
-extern const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsSinglesBattleSetAlternatives[];
+extern const struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSets[];
+extern const struct EmeraldChampionsBattleSetRange gEmeraldChampionsBattleSetRanges[EC_BATTLE_FORMAT_COUNT][NUM_SPECIES];
 
 u8 GetEmeraldChampionsBattleSetCount(struct Pokemon *mon);
 u8 GetEmeraldChampionsBattleSetCountForFormat(struct Pokemon *mon, u8 format);
@@ -70,5 +63,13 @@ u8 ApplyEmeraldChampionsScriptedSet(struct Pokemon *mon, const struct EmeraldCha
 bool32 IsEmeraldChampionsProtectedProgressionItem(enum Item item);
 bool32 IsEmeraldChampionsFreePresetItem(enum Item item);
 bool32 IsEmeraldChampionsOrdinaryWildSpecies(enum Species species);
+
+// Preparation move policy is shared by the tutor and form-change consumers.
+const u16 *GetEmeraldChampionsPreparationMoves(enum Species species);
+// Existing preparation pool plus both preset formats, excluding known moves.
+// Pass NULL to count without writing a list.
+u32 GetEmeraldChampionsPreparationMovesToLearn(struct BoxPokemon *mon, u16 *moves);
+bool32 CanSpeciesUseEmeraldChampionsPreparationMove(enum Species species, enum Move move);
+bool32 CanSpeciesKeepEmeraldChampionsUnfusionMove(enum Species species, enum Move move);
 
 #endif // GUARD_EMERALD_CHAMPIONS_BATTLE_SETS_H

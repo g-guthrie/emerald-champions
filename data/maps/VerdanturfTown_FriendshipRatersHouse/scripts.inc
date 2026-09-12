@@ -144,7 +144,7 @@ VerdanturfTown_FriendshipRatersHouse_EventScript_MegaGift_RAICHUNITE_X::
 	lock
 	faceplayer
 	msgbox VerdanturfTown_FriendshipRatersHouse_EventScript_MegaGift_RAICHUNITE_X_Text, MSGBOX_DEFAULT
-	giveitem ITEM_RAICHUNITE_X
+	giveuniqueitem ITEM_RAICHUNITE_X
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_EC_MEGA_GIFT_RAICHUNITE_X
 	release

@@ -2,13 +2,11 @@ Route132_MapScripts::
 	.byte 0
 
 Route132_EventScript_Gilbert::
-	trainerbattle_double TRAINER_GILBERT, Route132_Text_GilbertIntro, Route132_Text_GilbertDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route132_Text_GilbertPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route132_Text_GilbertPostBattle, MSGBOX_NPC
 	end
 
 Route132_EventScript_Dana::
-	trainerbattle_double TRAINER_DANA, Route132_Text_DanaIntro, Route132_Text_DanaDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route132_Text_DanaPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route132_Text_DanaPostBattle, MSGBOX_NPC
 	end
 
 Route132_EventScript_Ronald::
@@ -17,8 +15,7 @@ Route132_EventScript_Ronald::
 	end
 
 Route132_EventScript_Kiyo::
-	trainerbattle_double TRAINER_KIYO, Route132_Text_KiyoIntro, Route132_Text_KiyoDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route132_Text_KiyoPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route132_Text_KiyoPostBattle, MSGBOX_NPC
 	end
 
 Route132_EventScript_Paxton::

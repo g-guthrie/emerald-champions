@@ -202,15 +202,23 @@ NewMauville_Inside_EventScript_RotomEncounter::
 	special FinishLegendaryLandmarkEncounter
 	specialvar VAR_RESULT, GetBattleOutcome
 	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, NewMauville_Inside_EventScript_RotomCaught
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, NewMauville_Inside_EventScript_RotomResolved
 	setvar VAR_NEW_MAUVILLE_STATE, 5
+	goto_if_unset FLAG_EC_RESOLVED_ROTOM, NewMauville_Inside_EventScript_RotomStillWaiting
+	setvar VAR_NEW_MAUVILLE_STATE, 6
+	call NewMauville_Inside_EventScript_SetGeneratorOffMetatiles
+NewMauville_Inside_EventScript_RotomStillWaiting::
 	msgbox NewMauville_Inside_Text_RotomRemains, MSGBOX_DEFAULT
 	releaseall
 	end
 
 NewMauville_Inside_EventScript_RotomCaught::
+	setflag FLAG_EC_CAUGHT_ROTOM
+NewMauville_Inside_EventScript_RotomResolved::
+	setflag FLAG_EC_RESOLVED_ROTOM
 	setvar VAR_NEW_MAUVILLE_STATE, 6
 	call NewMauville_Inside_EventScript_SetGeneratorOffMetatiles
-	msgbox NewMauville_Inside_Text_RotomCaught, MSGBOX_DEFAULT
+	msgbox NewMauville_Inside_Text_RotomResolved, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -242,6 +250,7 @@ NewMauville_Inside_EventScript_SetGeneratorOnMetatiles::
 
 NewMauville_Inside_EventScript_Generator::
 	lockall
+	goto_if_set FLAG_EC_RESOLVED_ROTOM, NewMauville_Inside_EventScript_RotomReturn
 	goto_if_eq VAR_NEW_MAUVILLE_STATE, 2, NewMauville_Inside_EventScript_GeneratorOff
 	goto_if_eq VAR_NEW_MAUVILLE_STATE, 4, NewMauville_Inside_EventScript_GeneratorOff
 	goto_if_eq VAR_NEW_MAUVILLE_STATE, 6, NewMauville_Inside_EventScript_GeneratorOff
@@ -437,3 +446,21 @@ NewMauville_Inside_Text_ZapdosAwakens:
 
 
 @ END EMERALD CHAMPIONS LEGENDARY ROOTS
+
+NewMauville_Inside_EventScript_RotomReturn::
+	lockall
+	goto_if_unset FLAG_EC_RESOLVED_ROTOM, NewMauville_Inside_EventScript_RotomReturnEnd
+	goto_if_set FLAG_EC_CAUGHT_ROTOM, NewMauville_Inside_EventScript_GeneratorOff
+	msgbox NewMauville_Inside_Text_RotomReturn, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, NewMauville_Inside_EventScript_RotomReturnEnd
+	goto NewMauville_Inside_EventScript_RotomEncounter
+NewMauville_Inside_EventScript_RotomReturnEnd::
+	releaseall
+	end
+NewMauville_Inside_Text_RotomReturn:
+	.string "A quiet hum comes from inside.\n"
+	.string "Invite ROTOM out again?$"
+
+NewMauville_Inside_Text_RotomResolved:
+	.string "The generator is quiet at last.\n"
+	.string "WATTSON will want these readings.$"

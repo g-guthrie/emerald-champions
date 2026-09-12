@@ -50,8 +50,7 @@
 #define P_GBA_STYLE_SPECIES_FOOTPRINTS  FALSE       // By default, Pokémon have their updated footprints. This config can revert them back to GBA-style.
 
 // Other settings
-#define P_STAT_CALCULATION               GEN_9       // Conventional EV / 4 calculation; this game fixes all IVs at 31.
-#define P_MOVE_PP_CALCULATION            GEN_LATEST  // Champions caps base PP at 20 and uses its own maximum-PP formula without PP Ups.
+#define P_STAT_CALCULATION               GEN_9       // Conventional EV / 4 calculation; IVs default to 31 and remain editable.
 #define P_CRIES_ENABLED                  TRUE        // If TRUE, Pokémon will have cries. Disabling this saves around a LOT of ROM space (over 25%!), but instead we recommend disabling individual unused Pokémon families in include/config/species_enabled.h.
 #define P_LEGENDARY_PERFECT_IVS          GEN_LATEST  // Since Gen 6, Legendaries, Mythicals and Ultra Beasts found in the wild or given through gifts have at least 3 perfect IVs.
 #define P_SHOW_TERA_TYPE                 GEN_8       // Since Gen 9, the Tera Type is shown on the summary screen.

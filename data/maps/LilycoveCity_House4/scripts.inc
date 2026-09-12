@@ -25,7 +25,7 @@ LilycoveCity_House4_EventScript_MegaGift_LAPRASITE::
 	lock
 	faceplayer
 	msgbox LilycoveCity_House4_EventScript_MegaGift_LAPRASITE_Text, MSGBOX_DEFAULT
-	giveitem ITEM_LAPRASITE
+	giveuniqueitem ITEM_LAPRASITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_EC_MEGA_GIFT_LAPRASITE
 	release
@@ -42,7 +42,7 @@ LilycoveCity_House4_EventScript_MegaGift_STARMINITE::
 	lock
 	faceplayer
 	msgbox LilycoveCity_House4_EventScript_MegaGift_STARMINITE_Text, MSGBOX_DEFAULT
-	giveitem ITEM_STARMINITE
+	giveuniqueitem ITEM_STARMINITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_EC_MEGA_GIFT_STARMINITE
 	release

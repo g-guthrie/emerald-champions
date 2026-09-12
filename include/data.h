@@ -80,9 +80,9 @@ struct TrainerMon
     enum Type teraType:5;
     bool8 gigantamaxFactor:1;
     u8 shouldUseDynamax:1;
-    u8 padding1:1;
+    bool8 useLevelOffset:1;
     u8 dynamaxLevel:4;
-    u8 padding2:4;
+    s8 levelOffset:4; // Campaign offset from the live player cap (-8..7).
     u32 tags;
 };
 
@@ -131,6 +131,7 @@ struct Trainer
     enum Item items[MAX_TRAINER_ITEMS];
     struct StartingStatuses startingStatus; // this trainer starts a battle with a given status. see include/constants/battle.h for values
     u8 trainerClass;
+    u8 prizeMultiplier; // First-clear campaign prize per incoming cap level; zero uses legacy rules.
     u16 encounterMusic:4;
     u16 multiTeamSize:1;
     u16 gender:1;

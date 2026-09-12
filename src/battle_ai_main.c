@@ -7033,8 +7033,3 @@ void ResetDynamicAiFunctions(void)
     sDynamicAiFunc = NULL;
     gDynamicAiSwitchFunc = NULL;
 }
-
-void BattleAI_SetDynamicFunc(AiScoreFunc func)
-{
-    sDynamicAiFunc = func;
-}

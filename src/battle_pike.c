@@ -1,4 +1,5 @@
 #include "global.h"
+#include "move.h"
 #include "battle_pike.h"
 #include "event_data.h"
 #include "frontier_util.h"
@@ -81,6 +82,7 @@ static void PrepareOneTrainer(bool8 difficult);
 static u16 GetNPCRoomGraphicsId(void);
 static void PrepareTwoTrainers(void);
 static void TryHealMons(u8 healCount);
+static bool32 IsPikeMonNeedingHealing(struct Pokemon *mon);
 static void Task_DoStatusInflictionScreenFlash(u8 taskId);
 static bool8 AtLeastTwoAliveMons(void);
 static u8 SpeciesToPikeMonId(enum Species species);
@@ -767,36 +769,6 @@ static void StatusInflictionScreenFlash(void)
     CreateTask(Task_DoStatusInflictionScreenFlash, 2);
 }
 
-static void HealMon(struct Pokemon *mon)
-{
-    u8 i;
-    u16 hp;
-    u8 ppBonuses;
-    u8 data[4];
-
-    for (i = 0; i < 4; i++)
-        data[i] = 0;
-
-    hp = GetMonData(mon, MON_DATA_MAX_HP);
-    data[0] = hp;
-    data[1] = hp >> 8;
-    SetMonData(mon, MON_DATA_HP, data);
-
-    ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
-    for (i = 0; i < MAX_MON_MOVES; i++)
-    {
-        enum Move move = GetMonData(mon, MON_DATA_MOVE1 + i);
-        data[0] = CalculatePPWithBonus(move, ppBonuses, i);
-        SetMonData(mon, MON_DATA_PP1 + i, data);
-    }
-
-    data[0] = 0;
-    data[1] = 0;
-    data[2] = 0;
-    data[3] = 0;
-    SetMonData(mon, MON_DATA_STATUS, data);
-}
-
 static bool8 DoesAbilityPreventStatus(struct Pokemon *mon, u32 status)
 {
     enum Ability ability = GetMonAbility(mon);
@@ -1243,7 +1215,7 @@ static void Task_DoStatusInflictionScreenFlash(u8 taskId)
 
 static void TryHealMons(u8 healCount)
 {
-    u8 j, i;
+    u8 i;
     u8 indices[FRONTIER_PARTY_SIZE];
 
     if (healCount == 0)
@@ -1258,41 +1230,34 @@ static void TryHealMons(u8 healCount)
 
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
-        bool32 canBeHealed = FALSE;
         struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][indices[i]];
-        u16 curr = GetMonData(mon, MON_DATA_HP);
-        u16 max = GetMonData(mon, MON_DATA_MAX_HP);
-        if (curr < max)
+        if (IsPikeMonNeedingHealing(mon))
         {
-            canBeHealed = TRUE;
-        }
-        else if (GetAilmentFromStatus(GetMonData(mon, MON_DATA_STATUS)) != AILMENT_NONE)
-        {
-            canBeHealed = TRUE;
-        }
-        else
-        {
-            u8 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
-            for (j = 0; j < MAX_MON_MOVES; j++)
-            {
-                enum Move move = GetMonData(mon, MON_DATA_MOVE1 + j);
-                max = CalculatePPWithBonus(move, ppBonuses, j);
-                curr = GetMonData(mon, MON_DATA_PP1 + j);
-                if (curr < max)
-                {
-                    canBeHealed = TRUE;
-                    break;
-                }
-            }
-        }
-
-        if (canBeHealed == TRUE)
-        {
-            HealMon(&gParties[B_TRAINER_PLAYER][indices[i]]);
+            HealPokemon(&gParties[B_TRAINER_PLAYER][indices[i]]);
             if (--healCount == 0)
                 break;
         }
     }
+}
+
+static bool32 IsPikeMonNeedingHealing(struct Pokemon *mon)
+{
+    u16 curr = GetMonData(mon, MON_DATA_HP);
+    u16 max = GetMonData(mon, MON_DATA_MAX_HP);
+
+    if (curr < max || GetAilmentFromStatus(GetMonData(mon, MON_DATA_STATUS)) != AILMENT_NONE)
+        return TRUE;
+
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+    {
+        enum Move move = GetMonData(mon, MON_DATA_MOVE1 + i);
+        max = GetMoveMaxPP(move);
+        curr = GetMonData(mon, MON_DATA_PP1 + i);
+        if (curr < max)
+            return TRUE;
+    }
+
+    return FALSE;
 }
 
 static void GetInBattlePike(void)
@@ -1527,36 +1492,13 @@ static void SetHealingroomTypesDisabled(void)
 
 static void IsPartyFullHealed(void)
 {
-    u8 i, j;
+    u8 i;
 
     gSpecialVar_Result = TRUE;
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
-        bool32 canBeHealed = FALSE;
         struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
-        u16 curr = GetMonData(mon, MON_DATA_HP);
-        u16 max = GetMonData(mon, MON_DATA_MAX_HP);
-        if (curr >= max && GetAilmentFromStatus(GetMonData(mon, MON_DATA_STATUS)) == AILMENT_NONE)
-        {
-            u8 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
-            for (j = 0; j < MAX_MON_MOVES; j++)
-            {
-                enum Move move = GetMonData(mon, MON_DATA_MOVE1 + j);
-                max = CalculatePPWithBonus(move, ppBonuses, j);
-                curr = GetMonData(mon, MON_DATA_PP1 + j);
-                if (curr < max)
-                {
-                    canBeHealed = TRUE;
-                    break;
-                }
-            }
-        }
-        else
-        {
-            canBeHealed = TRUE;
-        }
-
-        if (canBeHealed == TRUE)
+        if (IsPikeMonNeedingHealing(mon))
         {
             gSpecialVar_Result = FALSE;
             break;

@@ -170,7 +170,7 @@ def prepare_emerald_champions_preparation_output(all_learnables: dict[str, list[
         f"#define EMERALD_CHAMPIONS_PREPARATION_MOVE_COUNT {total_moves}",
         f"#define EMERALD_CHAMPIONS_PREPARATION_MAX_MOVES {max_moves}",
         f"#define EMERALD_CHAMPIONS_PREPARATION_MAX_SPECIES SPECIES_{max_species}",
-        "STATIC_ASSERT(EMERALD_CHAMPIONS_PREPARATION_MAX_MOVES <= MAX_RELEARNER_MOVES, PreparationMoveListExceedsRuntimeBuffer);",
+        "STATIC_ASSERT(EMERALD_CHAMPIONS_PREPARATION_MAX_MOVES <= MOVES_COUNT_ALL, PreparationMoveListExceedsMoveCount);",
         "",
         "static const u16 *const sEmeraldChampionsPreparationLearnsets[NUM_SPECIES] =",
         "{",

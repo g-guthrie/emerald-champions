@@ -765,7 +765,6 @@ static void SootopolisGymIcePerStepCallback(u8 taskId)
 static void AshGrassPerStepCallback(u8 taskId)
 {
     s16 x, y;
-    u16 *ashGatherCount;
     s16 *data = gTasks[taskId].data;
     PlayerGetDestCoords(&x, &y);
 
@@ -786,9 +785,6 @@ static void AshGrassPerStepCallback(u8 taskId)
         // Try to gather ash
         if (CheckBagHasItem(ITEM_SOOT_SACK, 1))
         {
-            ashGatherCount = GetVarPointer(VAR_ASH_GATHER_COUNT);
-            if (*ashGatherCount < 9999)
-                (*ashGatherCount)++;
             u16 progress = VarGet(VAR_EC_SOOT_PROGRESS);
             if ((progress & EC_SOOT_TOTAL_MASK) < 9999)
                 VarSet(VAR_EC_SOOT_PROGRESS, progress + 1);

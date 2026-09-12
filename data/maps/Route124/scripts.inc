@@ -19,29 +19,11 @@ Route124_EventScript_Roland::
 	end
 
 Route124_EventScript_Jenny::
-	trainerbattle_double TRAINER_JENNY_1, Route124_Text_JennyIntro, Route124_Text_JennyDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route124_EventScript_RegisterJenny
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route124_EventScript_RematchJenny
-	msgbox Route124_Text_JennyPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route124_EventScript_RegisterJenny::
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route124_Text_JennyRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_JENNY_1
-	release
-	end
-
-Route124_EventScript_RematchJenny::
-	trainerbattle_rematch_double TRAINER_JENNY_1, Route124_Text_JennyRematchIntro, Route124_Text_JennyRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route124_Text_JennyPostRematch, MSGBOX_AUTOCLOSE
+	msgbox Route124_Text_JennyPostBattle, MSGBOX_NPC
 	end
 
 Route124_EventScript_Grace::
-	trainerbattle_double TRAINER_GRACE, Route124_Text_GraceIntro, Route124_Text_GraceDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route124_Text_GracePostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route124_Text_GracePostBattle, MSGBOX_NPC
 	end
 
 Route124_EventScript_Chad::
@@ -87,13 +69,11 @@ Route124_EventScript_RematchRoy::
 	end
 
 Route124_EventScript_Declan::
-	trainerbattle_double TRAINER_DECLAN, Route124_Text_DeclanIntro, Route124_Text_DeclanDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route124_Text_DeclanPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route124_Text_DeclanPostBattle, MSGBOX_NPC
 	end
 
 Route124_EventScript_Isabella::
-	trainerbattle_double TRAINER_ISABELLA, Route124_Text_IsabellaIntro, Route124_Text_IsabellaDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route124_Text_IsabellaPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route124_Text_IsabellaPostBattle, MSGBOX_NPC
 	end
 
 Route124_Text_HuntersHouse:

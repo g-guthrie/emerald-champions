@@ -23,7 +23,8 @@ Route118_OnFrame:
 Route118_EventScript_GoodRodFisherman::
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_GOOD_ROD, Route118_EventScript_ReceivedGoodRod
+	goto_if_set FLAG_EC_ROUTE118_ROD_GIFT, Route118_EventScript_ReceivedGoodRod
+	goto_if_set FLAG_RECEIVED_GOOD_ROD, Route118_EventScript_RodBallGift
 	msgbox Route118_Text_YouAgreeGoodRodIsGood, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, YES, Route118_EventScript_ReceiveGoodRod
 	goto_if_eq VAR_RESULT, NO, Route118_EventScript_DeclineGoodRod
@@ -34,6 +35,7 @@ Route118_EventScript_ReceiveGoodRod::
 	giveitem ITEM_GOOD_ROD
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_GOOD_ROD
+	setflag FLAG_EC_ROUTE118_ROD_GIFT
 	msgbox Route118_Text_TryYourLuckFishing, MSGBOX_DEFAULT
 	release
 	end
@@ -218,34 +220,15 @@ Route118_EventScript_Wade::
 	end
 
 Route118_EventScript_Dalton::
-	trainerbattle_double TRAINER_DALTON_1, Route118_Text_DaltonIntro, Route118_Text_DaltonDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route118_EventScript_RegisterDalton
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route118_EventScript_RematchDalton
-	msgbox Route118_Text_DaltonPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route118_EventScript_RegisterDalton::
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route118_Text_DaltonRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_DALTON_1
-	release
-	end
-
-Route118_EventScript_RematchDalton::
-	trainerbattle_rematch_double TRAINER_DALTON_1, Route118_Text_DaltonRematchIntro, Route118_Text_DaltonRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route118_Text_DaltonPostRematch, MSGBOX_AUTOCLOSE
+	msgbox Route118_Text_DaltonPostBattle, MSGBOX_NPC
 	end
 
 Route118_EventScript_Perry::
-	trainerbattle_double TRAINER_PERRY, Route118_Text_PerryIntro, Route118_Text_PerryDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route118_Text_PerryPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route118_Text_PerryPostBattle, MSGBOX_NPC
 	end
 
 Route118_EventScript_Chester::
-	trainerbattle_double TRAINER_CHESTER, Route118_Text_ChesterIntro, Route118_Text_ChesterDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route118_Text_ChesterPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route118_Text_ChesterPostBattle, MSGBOX_NPC
 	end
 
 Route118_EventScript_Deandre::
@@ -333,3 +316,15 @@ Route118_Text_WADE_LocalConversation:
 Route118_Text_BARNY_LocalConversation:
 	.string "WAILORD took the bait once.\n"
 	.string "I am still paying for the rod.$"
+
+Route118_EventScript_RodBallGift::
+	msgbox Route118_Text_RodBallGift, MSGBOX_DEFAULT
+	giveitem ITEM_NET_BALL, 10
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_EC_ROUTE118_ROD_GIFT
+	goto Route118_EventScript_ReceivedGoodRod
+
+Route118_Text_RodBallGift:
+	.string "You already have a GOOD ROD!\p"
+	.string "Take this one-time pack of ten\n"
+	.string "NET BALLS for your next fishing trip.$"

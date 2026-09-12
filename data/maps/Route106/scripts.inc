@@ -10,8 +10,7 @@ Route106_EventScript_Douglas::
 	end
 
 Route106_EventScript_Kyla::
-	trainerbattle_double TRAINER_KYLA, Route106_Text_KylaIntro, Route106_Text_KylaDefeated, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route106_Text_KylaPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route106_Text_KylaPostBattle, MSGBOX_NPC
 	end
 
 Route106_EventScript_Elliot::

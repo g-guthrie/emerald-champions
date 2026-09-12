@@ -16,7 +16,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 import emerald_champions_teams as teams  # noqa: E402
-import audit_emerald_champions_master_battles as audit  # noqa: E402
+import ec_moves as reference  # noqa: E402
 
 OUT = ROOT / "work" / "exports" / "chatgpt_battle_design_prompt.txt"
 
@@ -27,7 +27,7 @@ def species_roster() -> list[str]:
     for path in (ROOT / "src/data/pokemon/species_info").glob("gen_*_families.h"):
         for level, evolved in re.findall(r"\{EVO_LEVEL,\s*(\d+),\s*SPECIES_([A-Z0-9_]+)", path.read_text()):
             evo[evolved] = min(evo.get(evolved, 999), int(level))
-    types = audit.species_types()
+    types = reference.species_types()
     for path in sorted((ROOT / "src/data/pokemon/species_info").glob("*.h")):
         text = path.read_text(errors="ignore")
         for block in re.split(r"\n    \[SPECIES_", text)[1:]:
@@ -323,10 +323,10 @@ def main() -> None:
     parts.append("")
     parts.append("HELD ITEMS AVAILABLE (bare constant names)")
     parts.append("=" * 72)
-    items = sorted(audit.ITEMS)
+    items = sorted(reference.ITEMS)
     parts.append(", ".join(i[5:] for i in items))
     parts.append("")
-    parts.append("NATURES: " + ", ".join(sorted(n[7:] for n in audit.NATURES)))
+    parts.append("NATURES: " + ", ".join(sorted(n[7:] for n in reference.NATURES)))
     parts.append("")
     parts.append("END OF BRIEF. Now produce all 561 branches in the OUTPUT FORMAT, in order, as one plain-text block.")
     OUT.write_text("\n".join(parts) + "\n")

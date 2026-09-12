@@ -1,4 +1,5 @@
 #include "global.h"
+#include "move.h"
 #include "battle.h"
 #include "constants/battle_ai.h"
 #include "battle_ai_main.h"
@@ -373,7 +374,7 @@ static void ApplySwitchCandidateEntry(enum BattlerId battler)
         || gBattleMons[battler].hp < gBattleMons[battler].maxHP || gBattleMons[battler].status1;
     if (gBattleStruct->battlerState[battler].storedLunarDance)
         for (u32 i = 0; i < MAX_MON_MOVES; i++)
-            if (gBattleMons[battler].pp[i] < CalculatePPWithBonus(gBattleMons[battler].moves[i], gBattleMons[battler].ppBonuses, i))
+            if (gBattleMons[battler].pp[i] < GetMoveMaxPP(gBattleMons[battler].moves[i]))
                 canHeal = TRUE;
     if (healing.healBeforeHazards && canHeal)
     {
@@ -385,7 +386,7 @@ static void ApplySwitchCandidateEntry(enum BattlerId battler)
         else if (gBattleStruct->battlerState[battler].storedLunarDance)
         {
             for (u32 i = 0; i < MAX_MON_MOVES; i++)
-                gBattleMons[battler].pp[i] = CalculatePPWithBonus(gBattleMons[battler].moves[i], gBattleMons[battler].ppBonuses, i);
+                gBattleMons[battler].pp[i] = GetMoveMaxPP(gBattleMons[battler].moves[i]);
             gBattleStruct->battlerState[battler].storedLunarDance = FALSE;
         }
         else

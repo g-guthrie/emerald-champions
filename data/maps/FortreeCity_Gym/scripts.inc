@@ -33,7 +33,7 @@ FortreeCity_Gym_EventScript_WinonaDefeated::
 	call Common_EventScript_PlayGymBadgeFanfare
 	msgbox FortreeCity_Gym_Text_ExplainFeatherBadgeTakeThis, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_FORTREE_GYM
-	setflag FLAG_BADGE06_GET
+	completemilestone FLAG_BADGE06_GET
 	setflag FLAG_HIDE_ROUTE_120_STEVEN
 	setvar VAR_0x8008, 6
 	call Common_EventScript_SetGymTrainers
@@ -52,7 +52,7 @@ FortreeCity_Gym_EventScript_WinonaDefeated::
 	end
 
 FortreeCity_Gym_EventScript_GiveAltarianite2::
-	giveitem ITEM_ALTARIANITE
+	giveuniqueitem ITEM_ALTARIANITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	msgbox FortreeCity_Gym_Text_ExplainAltarianite, MSGBOX_DEFAULT
 	call_if_unset FLAG_RECEIVED_RED_OR_BLUE_ORB, FortreeCity_Gym_EventScript_PyreHandoff
@@ -61,7 +61,7 @@ FortreeCity_Gym_EventScript_GiveAltarianite2::
 	end
 
 FortreeCity_Gym_EventScript_GiveAltarianite::
-	giveitem ITEM_ALTARIANITE
+	giveuniqueitem ITEM_ALTARIANITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 	msgbox FortreeCity_Gym_Text_ExplainAltarianite, MSGBOX_DEFAULT
 	call_if_unset FLAG_RECEIVED_RED_OR_BLUE_ORB, FortreeCity_Gym_EventScript_PyreHandoff

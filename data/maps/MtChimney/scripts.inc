@@ -67,7 +67,7 @@ MtChimney_EventScript_Maxie::
 	call_if_eq VAR_FACING, DIR_NORTH, MtChimney_EventScript_ArchieExitNorth
 	removeobject LOCALID_MT_CHIMNEY_ARCHIE
 	setflag FLAG_HIDE_MT_CHIMNEY_TEAM_AQUA
-	setflag FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY
+	completemilestone FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY
 	clearflag FLAG_HIDE_FALLARBOR_HOUSE_PROF_COZMO
 	setflag FLAG_HIDE_METEOR_FALLS_1F_1R_COZMO
 	clearflag FLAG_HIDE_MT_CHIMNEY_LAVA_COOKIE_LADY
@@ -502,13 +502,11 @@ MtChimney_EventScript_RematchShelby::
 	end
 
 MtChimney_EventScript_Melissa::
-	trainerbattle_double TRAINER_MELISSA, MtChimney_Text_MelissaIntro, MtChimney_Text_MelissaDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox MtChimney_Text_MelissaPostBattle, MSGBOX_AUTOCLOSE
+	msgbox MtChimney_Text_MelissaPostBattle, MSGBOX_NPC
 	end
 
 MtChimney_EventScript_Sheila::
-	trainerbattle_double TRAINER_SHEILA, MtChimney_Text_SheilaIntro, MtChimney_Text_SheilaDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox MtChimney_Text_SheilaPostBattle, MSGBOX_AUTOCLOSE
+	msgbox MtChimney_Text_SheilaPostBattle, MSGBOX_NPC
 	end
 
 MtChimney_EventScript_Shirley::
@@ -522,24 +520,7 @@ MtChimney_EventScript_Grunt1::
 	end
 
 MtChimney_EventScript_Sawyer::
-	trainerbattle_double TRAINER_SAWYER_1, MtChimney_Text_SawyerIntro, MtChimney_Text_SawyerDefeat, EmeraldChampions_Text_NeedTwoPokemon, MtChimney_EventScript_SawyerDefeated
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, MtChimney_EventScript_SawyerRematch
-	msgbox MtChimney_Text_SawyerPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-MtChimney_EventScript_SawyerDefeated::
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox MtChimney_Text_SawyerRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_SAWYER_1
-	release
-	end
-
-MtChimney_EventScript_SawyerRematch::
-	trainerbattle_rematch_double TRAINER_SAWYER_1, MtChimney_Text_SawyerRematchIntro, MtChimney_Text_SawyerRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox MtChimney_Text_SawyerPostRematch, MSGBOX_AUTOCLOSE
+	msgbox MtChimney_Text_SawyerPostBattle, MSGBOX_NPC
 	end
 
 MtChimney_Text_MeteoriteWillActivateVolcano:
@@ -763,24 +744,9 @@ MtChimney_Text_ShelbyPostRematch:
 	.string "Perhaps your heart has become one\n"
 	.string "with the hearts of your POKéMON.$"
 
-MtChimney_Text_MelissaIntro:
-	.string "I've got the fire in me, baby.\n"
-	.string "I can't stand it! I have to battle!$"
-
-MtChimney_Text_MelissaDefeat:
-	.string "Ooh, that was a scorching-hot match!$"
-
 MtChimney_Text_MelissaPostBattle:
 	.string "The heat of MT. CHIMNEY warms\n"
 	.string "me up, baby!$"
-
-MtChimney_Text_SheilaIntro:
-	.string "I've finally made it to MT. CHIMNEY.\n"
-	.string "I want to make my POKéMON battle!$"
-
-MtChimney_Text_SheilaDefeat:
-	.string "The way you battle…\n"
-	.string "It's like a MT. CHIMNEY eruption!$"
 
 MtChimney_Text_SheilaPostBattle:
 	.string "Like I said, I've finally made it to\n"
@@ -803,29 +769,6 @@ MtChimney_Text_ShirleyPostBattle:
 	.string "hot springs. Want to join me?\p"
 	.string "Just joking!$"
 
-MtChimney_Text_SawyerIntro:
-	.string "This is one fine mountain! Plenty of\n"
-	.string "hot people around for company!$"
-
-MtChimney_Text_SawyerDefeat:
-	.string "Oh, you're a real firebrand, too!$"
-
 MtChimney_Text_SawyerPostBattle:
 	.string "I think I need a dip in LAVARIDGE\n"
 	.string "HOT SPRING with the locals!$"
-
-MtChimney_Text_SawyerRegister:
-	.string "I like little fireballs like you.\n"
-	.string "Let me register you in my POKéNAV.$"
-
-MtChimney_Text_SawyerRematchIntro:
-	.string "I'm happily surrounded by hot people\n"
-	.string "around these parts. I won't lose!$"
-
-MtChimney_Text_SawyerRematchDefeat:
-	.string "Gosh, you're still the same\n"
-	.string "firebrand as before!$"
-
-MtChimney_Text_SawyerPostRematch:
-	.string "Actually, it really is hot here.\n"
-	.string "I'm overdressed for these parts.$"

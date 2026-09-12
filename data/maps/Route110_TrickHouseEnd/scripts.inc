@@ -59,7 +59,7 @@ Route110_TrickHouseEnd_EventScript_CompletedPuzzle1::
 	msgbox Route110_TrickHouseEnd_Text_AllNightToPlantTrees, MSGBOX_DEFAULT
 	msgbox Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward, MSGBOX_DEFAULT
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
-	giveitem ITEM_STARAPTITE
+	giveuniqueitem ITEM_STARAPTITE
 	call_if_eq VAR_RESULT, FALSE, Route110_TrickHouseEnd_EventScript_BagFull
 	msgbox Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou, MSGBOX_DEFAULT
 	closemessage
@@ -131,7 +131,7 @@ Route110_TrickHouseEnd_EventScript_CompletedPuzzle7::
 	msgbox Route110_TrickHouseEnd_Text_AllNightSettingUpArrows, MSGBOX_DEFAULT
 	msgbox Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward, MSGBOX_DEFAULT
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
-	giveitem ITEM_PP_MAX
+	giveitem ITEM_MAX_ETHER
 	call_if_eq VAR_RESULT, FALSE, Route110_TrickHouseEnd_EventScript_BagFull
 	msgbox Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou, MSGBOX_DEFAULT
 	closemessage
@@ -376,7 +376,7 @@ Route110_TrickHouseEnd_EventScript_ClaimFinalTent::
 
 Route110_TrickHouseEnd_EventScript_ClaimFinalStone::
 	msgbox Route110_TrickHouseEnd_Text_FinalPrizeMegaStone, MSGBOX_DEFAULT
-	giveitem ITEM_ALAKAZITE
+	giveuniqueitem ITEM_ALAKAZITE
 	goto_if_eq VAR_RESULT, FALSE, Route110_TrickHouseEnd_EventScript_BagFull
 	setflag FLAG_EC_TRICK_FINAL_ALAKAZITE_RECEIVED
 	return

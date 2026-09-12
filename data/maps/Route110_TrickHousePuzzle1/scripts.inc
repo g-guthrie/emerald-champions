@@ -32,8 +32,7 @@ Route110_TrickHousePuzzle1_EventScript_Eddie::
 	end
 
 Route110_TrickHousePuzzle1_EventScript_Robin::
-	trainerbattle_double TRAINER_ROBIN, Route110_TrickHousePuzzle1_Text_RobinIntro, Route110_TrickHousePuzzle1_Text_RobinDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route110_TrickHousePuzzle1_Text_RobinPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route110_TrickHousePuzzle1_Text_RobinPostBattle, MSGBOX_NPC
 	end
 
 Route110_TrickHousePuzzle1_Text_WroteSecretCodeLockOpened::
@@ -66,12 +65,6 @@ Route110_TrickHousePuzzle1_Text_EddiePostBattle:
 	.string "I lost my way, I lost a battle, and I'm\n"
 	.string "now even more lost… I can't get out…$"
 
-Route110_TrickHousePuzzle1_Text_RobinIntro:
-	.string "Just who is the TRICK MASTER?$"
-
-Route110_TrickHousePuzzle1_Text_RobinDefeat:
-	.string "I lost while I was lost in thought!$"
-
-Route110_TrickHousePuzzle1_Text_RobinPostBattle:
-	.string "You're strong!\n"
-	.string "Just who are you?$"
+Route110_TrickHousePuzzle1_Text_RobinPostBattle::
+	.string "The TRICK MASTER loves hiding\n"
+	.string "things. Check every corner!$"

@@ -15,6 +15,8 @@ DewfordMeadow_EventScript_Warden::
 	setvar VAR_0x8004, LEGENDARY_SIGN_MELOETTA
 	special TryUnlockLocalLegendaryDiscovery
 	goto_if_eq VAR_RESULT, FALSE, DewfordMeadow_EventScript_Warden_Review
+	setflag FLAG_EC_MEADOW_SONG_PERFORMED
+	call_if_set FLAG_EC_MANOR_NOTES_READ, DewfordManor_1F_EventScript_RecordResearch
 	msgbox DewfordMeadow_EventScript_Warden_Helped, MSGBOX_DEFAULT
 DewfordMeadow_EventScript_Warden_Review::
 	setvar VAR_0x8004, LEGENDARY_SIGN_MELOETTA

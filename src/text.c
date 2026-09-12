@@ -37,7 +37,6 @@ static void DecompressGlyph_Normal(u16, bool32);
 static void DecompressGlyph_Short(u16, bool32);
 static void DecompressGlyph_Narrow(u16, bool32);
 static void DecompressGlyph_SmallNarrow(u16, bool32);
-static void DecompressGlyph_Bold(u16);
 static void DecompressGlyph_Narrower(u16, bool32);
 static void DecompressGlyph_SmallNarrower(u16, bool32);
 static void DecompressGlyph_ShortNarrow(u16, bool32);
@@ -313,8 +312,6 @@ static const u8 sTextScrollSpeeds[] =
     [OPTIONS_TEXT_SPEED_FAST]    = 4,
     [OPTIONS_TEXT_SPEED_INSTANT] = 6,
 };
-
-static const u16 sFontBoldJapaneseGlyphs[] = INCGFX_U16("graphics/fonts/japanese_bold.png", ".hwjpnfont");
 
 static void SetFontsPointer(const struct FontInfo *fonts)
 {
@@ -1824,129 +1821,6 @@ s32 GetStringLineWidth(u8 fontId, const u8 *str, s16 letterSpacing, u32 lineNum,
     return strWidth;
 }
 
-u8 RenderTextHandleBold(u8 *pixels, u8 fontId, u8 *str)
-{
-    u8 *strLocal;
-    int strPos;
-    int temp;
-    int temp2;
-
-    union TextColor savedTextColors = SaveTextColors();
-
-    union TextColor textColor = {
-        .background = TEXT_COLOR_TRANSPARENT,
-        .foreground = TEXT_COLOR_WHITE,
-        .shadow = TEXT_COLOR_LIGHT_GRAY,
-        .accent = TEXT_COLOR_TRANSPARENT,
-    };
-
-    GenerateFontHalfRowLookupTable(textColor);
-    strLocal = str;
-    strPos = 0;
-
-    do
-    {
-        temp = strLocal[strPos++];
-        switch (temp)
-        {
-        case EXT_CTRL_CODE_BEGIN:
-            temp2 = strLocal[strPos++];
-            switch (temp2)
-            {
-            case EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW:
-                textColor.foreground = strLocal[strPos++];
-                textColor.background = textColor.accent = strLocal[strPos++];
-                textColor.shadow = strLocal[strPos++];
-                GenerateFontHalfRowLookupTable(textColor);
-                continue;
-            case EXT_CTRL_CODE_TEXT_COLORS:
-                textColor.foreground = strLocal[strPos++];
-                textColor.shadow = strLocal[strPos++];
-                textColor.accent = strLocal[strPos++];
-                GenerateFontHalfRowLookupTable(textColor);
-                continue;
-            case EXT_CTRL_CODE_BACKGROUND:
-                textColor.background = strLocal[strPos++];
-                GenerateFontHalfRowLookupTable(textColor);
-                continue;
-            case EXT_CTRL_CODE_COLOR:
-                textColor.foreground = strLocal[strPos++];
-                GenerateFontHalfRowLookupTable(textColor);
-                continue;
-            case EXT_CTRL_CODE_SHADOW:
-                textColor.shadow = strLocal[strPos++];
-                GenerateFontHalfRowLookupTable(textColor);
-                continue;
-            case EXT_CTRL_CODE_ACCENT:
-                textColor.accent = strLocal[strPos++];
-                GenerateFontHalfRowLookupTable(textColor);
-                continue;
-            case EXT_CTRL_CODE_HIGHLIGHT:
-                textColor.background = textColor.accent = strLocal[strPos++];
-                GenerateFontHalfRowLookupTable(textColor);
-                continue;
-            case EXT_CTRL_CODE_FONT:
-                fontId = strLocal[strPos++];
-                break;
-            case EXT_CTRL_CODE_PLAY_BGM:
-            case EXT_CTRL_CODE_PLAY_SE:
-                ++strPos;
-            case EXT_CTRL_CODE_PALETTE:
-            case EXT_CTRL_CODE_PAUSE:
-            case EXT_CTRL_CODE_ESCAPE:
-            case EXT_CTRL_CODE_SHIFT_RIGHT:
-            case EXT_CTRL_CODE_SHIFT_DOWN:
-            case EXT_CTRL_CODE_CLEAR:
-            case EXT_CTRL_CODE_SKIP:
-            case EXT_CTRL_CODE_CLEAR_TO:
-            case EXT_CTRL_CODE_MIN_LETTER_SPACING:
-            case EXT_CTRL_CODE_SPEAKER:
-                ++strPos;
-                break;
-            case EXT_CTRL_CODE_RESET_FONT:
-            case EXT_CTRL_CODE_PAUSE_UNTIL_PRESS:
-            case EXT_CTRL_CODE_WAIT_SE:
-            case EXT_CTRL_CODE_FILL_WINDOW:
-            case EXT_CTRL_CODE_JPN:
-            case EXT_CTRL_CODE_ENG:
-            default:
-                continue;
-            }
-            break;
-        case CHAR_DYNAMIC:
-        case CHAR_KEYPAD_ICON:
-        case CHAR_EXTRA_SYMBOL:
-        case PLACEHOLDER_BEGIN:
-            ++strPos;
-            break;
-        case CHAR_PROMPT_SCROLL:
-        case CHAR_PROMPT_CLEAR:
-        case CHAR_NEWLINE:
-        case EOS:
-            break;
-        default:
-            switch (fontId)
-            {
-            case FONT_BOLD:
-                DecompressGlyph_Bold(temp);
-                break;
-            case FONT_NORMAL:
-            default:
-                DecompressGlyph_Normal(temp, TRUE);
-                break;
-            }
-            CpuCopy32(gCurGlyph.gfxBufferTop, pixels, 0x20);
-            CpuCopy32(gCurGlyph.gfxBufferBottom, pixels + 0x20, 0x20);
-            pixels += 0x40;
-            break;
-        }
-    }
-    while (temp != EOS);
-
-    RestoreTextColors(savedTextColors);
-    return 1;
-}
-
 u8 DrawKeypadIcon(u8 windowId, u8 keypadIconId, u16 x, u16 y)
 {
     BlitBitmapRectToWindow(
@@ -2221,17 +2095,6 @@ static u32 GetGlyphWidth_Normal(u16 glyphId, bool32 isJapanese)
         return 8;
     else
         return gFontNormalLatinGlyphWidths[glyphId];
-}
-
-static void DecompressGlyph_Bold(u16 glyphId)
-{
-    const u16 *glyphs;
-
-    glyphs = sFontBoldJapaneseGlyphs + (0x100 * (glyphId >> 4)) + (0x8 * (glyphId & 0xF));
-    DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
-    DecompressGlyphTile(glyphs + 0x80, gCurGlyph.gfxBufferBottom);
-    gCurGlyph.width = 8;
-    gCurGlyph.height = 12;
 }
 
 static void DecompressGlyph_Narrower(u16 glyphId, bool32 isJapanese)

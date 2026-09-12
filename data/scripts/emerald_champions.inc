@@ -22,11 +22,24 @@ EmeraldChampions_EventScript_MoveTutorMain:
 	switch VAR_RESULT
 	case 0, EmeraldChampions_EventScript_BattleSetChooseMon
 	case 1, EmeraldChampions_EventScript_NatureChooseMon
-	case 2, EmeraldChampions_EventScript_EvChooseMon
+	case 2, EmeraldChampions_EventScript_TrainingType
 	case 3, EmeraldChampions_EventScript_OpenMoveRelearner
 	case 4, EmeraldChampions_EventScript_OtherServices
 	case 5, EmeraldChampions_EventScript_MoveTutorExit
 	case MULTI_B_PRESSED, EmeraldChampions_EventScript_MoveTutorExit
+
+EmeraldChampions_EventScript_TrainingType:
+	message EmeraldChampions_Text_TrainingType
+	waitmessage
+	dynmultipush EmeraldChampions_Text_EvTraining, 0
+	dynmultipush EmeraldChampions_Text_IvTraining, 1
+	dynmultipush EmeraldChampions_Text_Back, 2
+	dynmultistack 30, 1, FALSE, 3, 0, 0, DYN_MULTICHOICE_CB_NONE
+	closemessage
+	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, EmeraldChampions_EventScript_MoveTutorMain
+	goto_if_eq VAR_RESULT, 2, EmeraldChampions_EventScript_MoveTutorMain
+	copyvar VAR_0x8002, VAR_RESULT
+	goto EmeraldChampions_EventScript_EvChooseMon
 
 EmeraldChampions_EventScript_OtherServices:
 	message EmeraldChampions_Text_OtherServicesPrompt
@@ -163,10 +176,16 @@ Common_EventScript_EmeraldChampionsEvEditor::
 	lockall
 	faceplayer
 	setvar VAR_0x8009, 1
+	setvar VAR_0x8002, EC_TRAINING_EVS
 	goto EmeraldChampions_EventScript_EvChooseMon
 
 EmeraldChampions_EventScript_EvChooseMon:
+	goto_if_eq VAR_0x8002, EC_TRAINING_IVS, EmeraldChampions_EventScript_IvChooseMon
 	msgbox EmeraldChampions_Text_ChooseEvMon, MSGBOX_DEFAULT
+	goto EmeraldChampions_EventScript_TrainingChooseMon
+EmeraldChampions_EventScript_IvChooseMon:
+	msgbox EmeraldChampions_Text_ChooseIvMon, MSGBOX_DEFAULT
+EmeraldChampions_EventScript_TrainingChooseMon:
 	special ChoosePartyMon
 	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, EmeraldChampions_EventScript_EvCancel
 	special IsSelectedMonEgg
@@ -176,7 +195,7 @@ EmeraldChampions_EventScript_EvChooseMon:
 	goto EmeraldChampions_EventScript_EvMain
 
 EmeraldChampions_EventScript_EvMain:
-	special BufferSelectedMonEmeraldChampionsEvSummary
+	special BufferSelectedMonEmeraldChampionsTrainingSummary
 	message gStringVar4
 	waitmessage
 	setvar VAR_0x8004, SCROLL_MULTI_EMERALD_CHAMPIONS_EVS
@@ -190,7 +209,7 @@ EmeraldChampions_EventScript_EvMain:
 	goto EmeraldChampions_EventScript_EvAdjust
 
 EmeraldChampions_EventScript_EvAdjust:
-	special BufferSelectedMonEmeraldChampionsEvDetail
+	special BufferSelectedMonEmeraldChampionsTrainingDetail
 	message gStringVar4
 	waitmessage
 	setvar VAR_0x8004, SCROLL_MULTI_EMERALD_CHAMPIONS_STAT_ADJUST
@@ -202,9 +221,9 @@ EmeraldChampions_EventScript_EvAdjustResult:
 	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, EmeraldChampions_EventScript_EvMain
 	copyvar VAR_0x8006, VAR_RESULT
 	goto_if_eq VAR_0x8006, 8, EmeraldChampions_EventScript_EvMain
-	special AdjustSelectedMonEmeraldChampionsEvs
+	special AdjustSelectedMonEmeraldChampionsTraining
 	call_if_eq VAR_RESULT, FALSE, EmeraldChampions_EventScript_EvAdjustmentBlocked
-	special BufferSelectedMonEmeraldChampionsEvDetail
+	special BufferSelectedMonEmeraldChampionsTrainingDetail
 	message gStringVar4
 	waitmessage
 	special ScrollableMultichoice_TryReturnToList
@@ -216,10 +235,18 @@ EmeraldChampions_EventScript_EvAdjustmentBlocked:
 	return
 
 EmeraldChampions_EventScript_EvReset:
+	goto_if_eq VAR_0x8002, EC_TRAINING_IVS, EmeraldChampions_EventScript_IvReset
 	msgbox EmeraldChampions_Text_ResetEvs, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EmeraldChampions_EventScript_EvMain
-	special ResetSelectedMonEmeraldChampionsEvs
+	special ResetSelectedMonEmeraldChampionsTraining
 	msgbox EmeraldChampions_Text_EvsReset, MSGBOX_DEFAULT
+	goto EmeraldChampions_EventScript_EvMain
+
+EmeraldChampions_EventScript_IvReset:
+	msgbox EmeraldChampions_Text_ResetIvs, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EmeraldChampions_EventScript_EvMain
+	special ResetSelectedMonEmeraldChampionsTraining
+	msgbox EmeraldChampions_Text_IvsReset, MSGBOX_DEFAULT
 	goto EmeraldChampions_EventScript_EvMain
 
 EmeraldChampions_EventScript_EvEgg:
@@ -502,7 +529,7 @@ EmeraldChampions_Text_BuildBattleSet:
 	.string "Build a Battle Set$"
 
 EmeraldChampions_Text_EditEvs:
-	.string "Edit EVs$"
+	.string "Edit Stats$"
 
 EmeraldChampions_Text_LearnMove:
 	.string "Learn a Move$"
@@ -524,7 +551,7 @@ EmeraldChampions_Text_Exit:
 
 EmeraldChampions_Text_ExplainBattleSets:
 	.string "A Battle Set is a prepared build:\n"
-	.string "moves, Nature, Ability, EVs,\l"
+	.string "moves, Nature, Ability, EVs, IVs,\l"
 	.string "and a held item.\p"
 	.string "I'll show it before you decide.\n"
 	.string "Applying it replaces those parts\l"
@@ -561,7 +588,7 @@ EmeraldChampions_Text_EvsReset:
 	.string "You can now build a new spread.$"
 
 EmeraldChampions_Text_EvEgg:
-	.string "An Egg's EVs can't be edited.$"
+	.string "An Egg's stats can't be edited.$"
 
 EmeraldChampions_Text_EvGoodbye:
 	.string "Come back whenever you want to\n"
@@ -850,7 +877,7 @@ EmeraldChampions_EventScript_CosplayGift:
 	goto Common_EventScript_EmeraldChampionsContestServices
 
 Common_EventScript_EmeraldChampionsDeoxysResearch::
-	goto_if_unset FLAG_SYS_GAME_CLEAR, EmeraldChampions_EventScript_ReturnService
+	goto_if_unset FLAG_EC_REPORT_C43_COMPLETE, EmeraldChampions_EventScript_ReturnService
 	msgbox EmeraldChampions_Text_DeoxysResearch, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EmeraldChampions_EventScript_ReturnService
 	setvar VAR_0x8006, 2
@@ -1037,3 +1064,18 @@ EmeraldChampions_Text_CenterLocalGuide:
 	.string "I listen for stories about rare\n"
 	.string "POKéMON around here. Let me tell\l"
 	.string "you where to look!$"
+
+EmeraldChampions_Text_TrainingType:
+	.string "Choose EV training or IV tuning.$"
+EmeraldChampions_Text_EvTraining:
+	.string "EV Training$"
+EmeraldChampions_Text_IvTraining:
+	.string "IV Tuning$"
+EmeraldChampions_Text_ChooseIvMon:
+	.string "IVs start at 31. You can lower them\n"
+	.string "deliberately for your strategy.\p"
+	.string "Whose stats should we adjust?$"
+EmeraldChampions_Text_ResetIvs:
+	.string "Restore all six IVs to 31?$"
+EmeraldChampions_Text_IvsReset:
+	.string "All IVs were restored to 31.$"

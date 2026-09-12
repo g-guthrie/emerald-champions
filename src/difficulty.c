@@ -33,7 +33,8 @@ void SetCurrentDifficultyLevel(enum DifficultyLevel desiredDifficulty)
     VarSet(B_VAR_DIFFICULTY, desiredDifficulty);
 }
 
-// Difficulty only staggers opponent levels (Easy -4, Normal -2, Hard 0).
+// Facilities retain their Hard baseline (Easy -4, Normal -2, Hard 0).
+// Campaign authoring uses Normal and adds two before this reduction.
 // It never changes trainer AI: the player is meant to experiment with the
 // same authored teams and the same opponents at different level gaps.
 u8 GetTrainerLevelReduction(void)
@@ -50,37 +51,12 @@ u8 GetTrainerLevelReduction(void)
     }
 }
 
-void ApplyTrainerLevelDifficulty(struct Pokemon *party)
+u8 GetCampaignTrainerLevel(s8 offset)
 {
-    u8 reduction = GetTrainerLevelReduction();
-    u8 floor = 1;
-
-    // All campaign trainers keep pace with the live cap, including gyms
-    // and return visits. Their authored higher levels still take precedence.
-    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
-     && !(gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED | BATTLE_TYPE_TRAINER_HILL)))
-        floor = min(MAX_LEVEL, GetCurrentLevelCap());
-
-    for (u32 i = 0; i < PARTY_SIZE; i++)
-    {
-        enum Species species = GetMonData(&party[i], MON_DATA_SPECIES);
-        u32 experience;
-        u16 maxHp;
-        u8 level;
-
-        if (species == SPECIES_NONE || species == SPECIES_EGG)
-            continue;
-
-        level = GetMonData(&party[i], MON_DATA_LEVEL);
-        level = max(level, floor);
-        level = level > reduction ? level - reduction : 1;
-        experience = gExperienceTables[gSpeciesInfo[species].growthRate][level];
-        SetMonData(&party[i], MON_DATA_EXP, &experience);
-        SetMonData(&party[i], MON_DATA_LEVEL, &level);
-        CalculateMonStats(&party[i]);
-        maxHp = GetMonData(&party[i], MON_DATA_MAX_HP);
-        SetMonData(&party[i], MON_DATA_HP, &maxHp);
-    }
+    // Authoring uses the Normal baseline. Apply difficulty before the level
+    // ceiling so a Normal level-100 opponent does not accidentally become 98.
+    s32 level = (s32)GetCurrentLevelCap() + offset + 2 - GetTrainerLevelReduction();
+    return max(1, min(MAX_LEVEL, level));
 }
 
 enum DifficultyLevel GetBattlePartnerDifficultyLevel(u16 partnerId)

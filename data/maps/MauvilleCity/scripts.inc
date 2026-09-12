@@ -415,7 +415,7 @@ MauvilleCity_EventScript_Wattson::
 	lock
 	faceplayer
 	goto_if_set FLAG_RECEIVED_WATTSON_ELECTIRIZER, MauvilleCity_EventScript_ReceivedElectirizer
-	goto_if_ge VAR_NEW_MAUVILLE_STATE, 2, MauvilleCity_EventScript_CompletedNewMauville
+	goto_if_set FLAG_EC_RESOLVED_ROTOM, MauvilleCity_EventScript_CompletedNewMauville
 	goto_if_set FLAG_GOT_BASEMENT_KEY_FROM_WATTSON, MauvilleCity_EventScript_BegunNewMauville
 	msgbox MauvilleCity_Text_WattsonNeedFavorTakeKey, MSGBOX_DEFAULT
 	giveitem ITEM_BASEMENT_KEY
@@ -431,6 +431,7 @@ MauvilleCity_EventScript_BegunNewMauville::
 	end
 
 MauvilleCity_EventScript_CompletedNewMauville::
+	completemilestone FLAG_EC_REPORT_C28_COMPLETE
 	msgbox MauvilleCity_Text_WattsonThanksTakeElectirizer, MSGBOX_DEFAULT
 	giveitem ITEM_ELECTIRIZER
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull

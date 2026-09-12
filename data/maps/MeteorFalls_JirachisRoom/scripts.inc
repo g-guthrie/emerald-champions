@@ -1,5 +1,10 @@
 MeteorFalls_JirachisRoom_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, MeteorFalls_JirachisRoom_OnTransition
 	.byte 0
+
+MeteorFalls_JirachisRoom_OnTransition:
+	setflag FLAG_EC_SURVEYED_METEOR_CHAMBER
+	end
 
 MeteorFalls_JirachisRoom_EventScript_Jirachi::
 	lock

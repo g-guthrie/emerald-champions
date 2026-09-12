@@ -283,5 +283,5 @@ FallarborTown_Text_TownSign:
 	.string "“A farm community with small gardens.”$"
 
 FallarborTown_Text_MoveTutorSign:
-	.string "HEART SCALE WORKSHOP\n"
-	.string "“Scales polished into PP UPS.”$"
+	.string "POKéMON TRAINING WORKSHOP\n"
+	.string "“Free EV and move advice.”$"

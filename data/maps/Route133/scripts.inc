@@ -63,8 +63,7 @@ Route133_EventScript_Franklin::
 	end
 
 Route133_EventScript_Debra::
-	trainerbattle_double TRAINER_DEBRA, Route133_Text_DebraIntro, Route133_Text_DebraDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route133_Text_DebraPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route133_Text_DebraPostBattle, MSGBOX_NPC
 	end
 
 Route133_EventScript_Linda::
@@ -78,8 +77,7 @@ Route133_EventScript_Warren::
 	end
 
 Route133_EventScript_Beck::
-	trainerbattle_double TRAINER_BECK, Route133_Text_BeckIntro, Route133_Text_BeckDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route133_Text_BeckPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route133_Text_BeckPostBattle, MSGBOX_NPC
 	end
 
 Route133_EventScript_Mollie::

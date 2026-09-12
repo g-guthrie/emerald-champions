@@ -111,7 +111,7 @@ FallarborTown_CozmosHouse_EventScript_MegaGift_CLEFABLITE::
 	lock
 	faceplayer
 	msgbox FallarborTown_CozmosHouse_EventScript_MegaGift_CLEFABLITE_Text, MSGBOX_DEFAULT
-	giveitem ITEM_CLEFABLITE
+	giveuniqueitem ITEM_CLEFABLITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_EC_MEGA_GIFT_CLEFABLITE
 	release

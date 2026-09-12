@@ -1,4 +1,5 @@
 #include "global.h"
+#include "move.h"
 #include "data.h"
 #include "emerald_champions_battle_sets.h"
 #include "item.h"
@@ -10,6 +11,7 @@
 #include "constants/items.h"
 
 #include "data/pokemon/emerald_champions_battle_sets.h"
+#include "data/pokemon/emerald_champions_preparation_learnsets.h"
 
 static const u8 sRecommendedSetName[] = _("Recommended");
 
@@ -170,42 +172,12 @@ static bool32 IsValidBattleFormat(u8 format)
     return format < EC_BATTLE_FORMAT_COUNT;
 }
 
-static const struct EmeraldChampionsBattleSet *GetDefaultSetTable(u8 format)
-{
-    return format == EC_BATTLE_FORMAT_SINGLES
-         ? gEmeraldChampionsSinglesDefaultBattleSets
-         : gEmeraldChampionsDefaultBattleSets;
-}
-
-static const u8 *const *GetDefaultSetNameTable(u8 format)
-{
-    return format == EC_BATTLE_FORMAT_SINGLES
-         ? gEmeraldChampionsSinglesDefaultBattleSetNames
-         : gEmeraldChampionsDefaultBattleSetNames;
-}
-
-static const struct EmeraldChampionsBattleSetRange *GetSetRangeTable(u8 format)
-{
-    return format == EC_BATTLE_FORMAT_SINGLES
-         ? gEmeraldChampionsSinglesBattleSetRanges
-         : gEmeraldChampionsBattleSetRanges;
-}
-
-static const struct EmeraldChampionsBattleSetChoice *GetSetAlternativeTable(u8 format)
-{
-    return format == EC_BATTLE_FORMAT_SINGLES
-         ? gEmeraldChampionsSinglesBattleSetAlternatives
-         : gEmeraldChampionsBattleSetAlternatives;
-}
-
 static bool32 HasDirectBattleSet(enum Species species, u8 format)
 {
-    const struct EmeraldChampionsBattleSet *defaults = GetDefaultSetTable(format);
-
     return species > SPECIES_NONE
         && species < NUM_SPECIES
         && IsValidBattleFormat(format)
-        && defaults[species].moves[0] != MOVE_NONE;
+        && gEmeraldChampionsBattleSetRanges[format][species].count != 0;
 }
 
 static enum Species ResolveBattleSetSpecies(enum Species species, u8 format)
@@ -233,21 +205,20 @@ static enum Species ResolveBattleSetSpecies(enum Species species, u8 format)
     return species;
 }
 
-u8 GetEmeraldChampionsRawBattleSetCountForFormat(enum Species species, u8 format)
+static const struct EmeraldChampionsBattleSetRange *ResolveBattleSetRange(enum Species species, u8 format)
 {
-    const struct EmeraldChampionsBattleSet *defaults;
-    const struct EmeraldChampionsBattleSetRange *ranges;
-
     if (!IsValidBattleFormat(format))
-        return 0;
+        return NULL;
     species = ResolveBattleSetSpecies(species, format);
     if (species == SPECIES_NONE || species == SPECIES_EGG || species >= NUM_SPECIES)
-        return 0;
-    defaults = GetDefaultSetTable(format);
-    ranges = GetSetRangeTable(format);
-    if (defaults[species].moves[0] == MOVE_NONE)
-        return 0;
-    return ranges[species].count + 1;
+        return NULL;
+    return &gEmeraldChampionsBattleSetRanges[format][species];
+}
+
+u8 GetEmeraldChampionsRawBattleSetCountForFormat(enum Species species, u8 format)
+{
+    const struct EmeraldChampionsBattleSetRange *range = ResolveBattleSetRange(species, format);
+    return range == NULL ? 0 : range->count;
 }
 
 const struct EmeraldChampionsBattleSet *GetEmeraldChampionsRawBattleSetForFormat(
@@ -255,21 +226,10 @@ const struct EmeraldChampionsBattleSet *GetEmeraldChampionsRawBattleSetForFormat
     u8 rawChoice,
     u8 format)
 {
-    const struct EmeraldChampionsBattleSetRange *range;
-    const struct EmeraldChampionsBattleSet *defaults;
-    const struct EmeraldChampionsBattleSetChoice *alternatives;
-
-    if (GetEmeraldChampionsRawBattleSetCountForFormat(species, format) == 0)
+    const struct EmeraldChampionsBattleSetRange *range = ResolveBattleSetRange(species, format);
+    if (range == NULL || rawChoice >= range->count)
         return NULL;
-    species = ResolveBattleSetSpecies(species, format);
-    defaults = GetDefaultSetTable(format);
-    alternatives = GetSetAlternativeTable(format);
-    range = &GetSetRangeTable(format)[species];
-    if (rawChoice == 0)
-        return &defaults[species];
-    if (rawChoice > range->count)
-        return NULL;
-    return &alternatives[range->offset + rawChoice - 1].preset;
+    return &gEmeraldChampionsBattleSets[range->offset + rawChoice].preset;
 }
 
 u8 GetEmeraldChampionsRawBattleSetCount(enum Species species)
@@ -282,6 +242,12 @@ const struct EmeraldChampionsBattleSet *GetEmeraldChampionsRawBattleSet(enum Spe
     return GetEmeraldChampionsRawBattleSetForFormat(species, rawChoice, EC_BATTLE_FORMAT_DOUBLES);
 }
 
+static bool32 IsVisiblePreset(struct Pokemon *mon, const struct EmeraldChampionsBattleSet *preset)
+{
+    return (!PresetRequiresTransformation(preset) || HasTransformationAccess(mon, preset))
+        && !PresetRequiresOwnedHeldItem(mon, preset);
+}
+
 // With no outputs, count every visible set; otherwise stop at the requested choice.
 static u8 ScanVisibleBattleSets(
     struct Pokemon *mon,
@@ -291,42 +257,24 @@ static u8 ScanVisibleBattleSets(
     const u8 **nameOut)
 {
     enum Species species = GetMonData(mon, MON_DATA_SPECIES);
-    enum Species setSpecies;
-    const struct EmeraldChampionsBattleSetRange *range;
-    const struct EmeraldChampionsBattleSet *defaults;
-    const u8 *const *defaultNames;
-    const struct EmeraldChampionsBattleSetChoice *alternatives;
+    const struct EmeraldChampionsBattleSetRange *range = ResolveBattleSetRange(species, format);
     u8 visibleChoice = 0;
 
-    if (GetEmeraldChampionsRawBattleSetCountForFormat(species, format) == 0)
+    if (range == NULL)
         return 0;
-
-    setSpecies = ResolveBattleSetSpecies(species, format);
-    defaults = GetDefaultSetTable(format);
-    defaultNames = GetDefaultSetNameTable(format);
-    alternatives = GetSetAlternativeTable(format);
-    range = &GetSetRangeTable(format)[setSpecies];
-    for (u8 rawChoice = 0; rawChoice <= range->count; rawChoice++)
+    for (u8 rawChoice = 0; rawChoice < range->count; rawChoice++)
     {
-        const struct EmeraldChampionsBattleSet *preset = rawChoice == 0
-            ? &defaults[setSpecies]
-            : &alternatives[range->offset + rawChoice - 1].preset;
+        const struct EmeraldChampionsBattleSetChoice *entry = &gEmeraldChampionsBattleSets[range->offset + rawChoice];
+        const struct EmeraldChampionsBattleSet *preset = &entry->preset;
 
-        if ((PresetRequiresTransformation(preset) && !HasTransformationAccess(mon, preset))
-         || PresetRequiresOwnedHeldItem(mon, preset))
+        if (!IsVisiblePreset(mon, preset))
             continue;
         if (visibleChoice++ == choice && (presetOut != NULL || nameOut != NULL))
         {
             if (presetOut != NULL)
                 *presetOut = preset;
             if (nameOut != NULL)
-            {
-                *nameOut = rawChoice == 0
-                    ? defaultNames[setSpecies]
-                    : alternatives[range->offset + rawChoice - 1].name;
-                if (rawChoice == 0 && *nameOut == NULL)
-                    *nameOut = sRecommendedSetName;
-            }
+                *nameOut = entry->name;
             return visibleChoice;
         }
     }
@@ -421,8 +369,8 @@ static bool32 FindPresetAbilitySlot(enum Species species, const struct EmeraldCh
 {
     if (FindAbilitySlot(species, preset->ability, slot))
         return TRUE;
-    enum Species setSpecies = ResolveBattleSetSpecies(species, EC_BATTLE_FORMAT_DOUBLES);
-    return FindAbilitySlot(species, gEmeraldChampionsDefaultBattleSets[setSpecies].ability, slot)
+    const struct EmeraldChampionsBattleSet *fallback = GetEmeraldChampionsRawBattleSet(species, 0);
+    return FindAbilitySlot(species, fallback == NULL ? ABILITY_NONE : fallback->ability, slot)
         || FindFallbackAbilitySlot(species, slot);
 }
 
@@ -480,14 +428,18 @@ static bool32 DoesMonMatchPreset(struct Pokemon *mon, const struct EmeraldChampi
 
 s16 GetEmeraldChampionsCurrentBattleSetChoiceForFormat(struct Pokemon *mon, u8 format)
 {
-    u8 count = GetEmeraldChampionsBattleSetCountForFormat(mon, format);
-
-    for (u8 choice = 0; choice < count; choice++)
+    const struct EmeraldChampionsBattleSetRange *range = ResolveBattleSetRange(GetMonData(mon, MON_DATA_SPECIES), format);
+    u8 choice = 0;
+    if (range == NULL)
+        return -1;
+    for (u8 raw = 0; raw < range->count; raw++)
     {
-        const struct EmeraldChampionsBattleSet *preset = NULL;
-
-        if (ResolveVisibleChoice(mon, choice, format, &preset, NULL) && DoesMonMatchPreset(mon, preset))
+        const struct EmeraldChampionsBattleSet *preset = &gEmeraldChampionsBattleSets[range->offset + raw].preset;
+        if (!IsVisiblePreset(mon, preset))
+            continue;
+        if (DoesMonMatchPreset(mon, preset))
             return choice;
+        choice++;
     }
     return -1;
 }
@@ -497,19 +449,23 @@ s16 GetEmeraldChampionsCurrentBattleSetChoice(struct Pokemon *mon)
     return GetEmeraldChampionsCurrentBattleSetChoiceForFormat(mon, EC_BATTLE_FORMAT_DOUBLES);
 }
 
+enum PresetApplication
+{
+    PRESET_TUTOR,
+    PRESET_EVOLUTION,
+    PRESET_WILD,
+    PRESET_SCRIPTED,
+};
+
 static u8 ApplyPreset(
     struct Pokemon *mon,
     const struct EmeraldChampionsBattleSet *preset,
-    bool32 preserveProtectedItem,
-    bool32 supplyRequiredItem,
-    bool32 requireMegaAccess,
-    bool32 preserveProtectedItemInPlace)
+    enum PresetApplication application)
 {
     enum Species species = GetMonData(mon, MON_DATA_SPECIES);
     enum Item currentItem = GetMonData(mon, MON_DATA_HELD_ITEM);
     bool32 protectedItemHeld;
     u32 abilitySlot;
-    u8 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
     u8 perfectIv = MAX_PER_STAT_IVS;
 
     if (species == SPECIES_NONE || species == SPECIES_EGG || species >= NUM_SPECIES || preset == NULL)
@@ -520,17 +476,17 @@ static u8 ApplyPreset(
     if (!FindPresetAbilitySlot(species, preset, &abilitySlot))
         return EC_BATTLE_SET_FAILED;
     if (IsEmeraldChampionsProtectedProgressionItem(preset->item)
-     && !supplyRequiredItem
+     && application != PRESET_SCRIPTED
      && currentItem != preset->item)
         return EC_BATTLE_SET_FAILED;
     if (preset->requiredItem != ITEM_NONE
      && !IsBattleSetTransformationItem(preset->requiredItem))
         return EC_BATTLE_SET_FAILED;
     if (PresetRequiresTransformation(preset)
-     && requireMegaAccess
+     && application == PRESET_TUTOR
      && !HasTransformationAccess(mon, preset))
         return EC_BATTLE_SET_FAILED;
-    if (preserveProtectedItem && protectedItemHeld)
+    if (application == PRESET_TUTOR && protectedItemHeld)
         return EC_BATTLE_SET_SPECIAL_ITEM_EQUIPPED;
 
     for (u32 i = 0; i < MAX_MON_MOVES; i++)
@@ -557,13 +513,6 @@ static u8 ApplyPreset(
 
     for (u32 i = 0; i < MAX_MON_MOVES; i++)
         SetMonMoveSlot(mon, preset->moves[i], i);
-    // Bought PP upgrades stay with their move slots when changing a set.
-    SetMonData(mon, MON_DATA_PP_BONUSES, &ppBonuses);
-    for (u32 i = 0; i < MAX_MON_MOVES; i++)
-    {
-        u8 pp = CalculatePPWithBonus(preset->moves[i], ppBonuses, i);
-        SetMonData(mon, MON_DATA_PP1 + i, &pp);
-    }
     // Normalize move-driven forms even when the authored move already occupied
     // the same slot and SetMonMoveSlot therefore had no transition to observe.
     for (u32 i = 0; i < MAX_MON_MOVES; i++)
@@ -572,11 +521,12 @@ static u8 ApplyPreset(
     SetMonData(mon, MON_DATA_ABILITY_NUM, &abilitySlot);
     for (u32 stat = 0; stat < NUM_STATS; stat++)
         SetMonData(mon, EC_EV_DATA(stat), &preset->evs[stat]);
-    for (u32 stat = 0; stat < NUM_STATS; stat++)
-        SetMonData(mon, MON_DATA_HP_IV + stat, &perfectIv);
-    if (!(preserveProtectedItemInPlace && protectedItemHeld))
+    if (application != PRESET_EVOLUTION)
+        for (u32 stat = 0; stat < NUM_STATS; stat++)
+            SetMonData(mon, MON_DATA_HP_IV + stat, &perfectIv);
+    if (!(application == PRESET_EVOLUTION && protectedItemHeld))
     {
-        if (supplyRequiredItem && preset->requiredItem != ITEM_NONE)
+        if (application == PRESET_SCRIPTED && preset->requiredItem != ITEM_NONE)
             SetMonData(mon, MON_DATA_HELD_ITEM, &preset->requiredItem);
         else if (preset->requiredItem == ITEM_NONE || currentItem != preset->requiredItem)
             SetMonData(mon, MON_DATA_HELD_ITEM, &preset->item);
@@ -595,7 +545,7 @@ u8 ApplyEmeraldChampionsBattleSetChoiceForFormat(struct Pokemon *mon, u8 choice,
     const struct EmeraldChampionsBattleSet *preset = NULL;
     if (!ResolveVisibleChoice(mon, choice, format, &preset, NULL))
         return EC_BATTLE_SET_FAILED;
-    return ApplyPreset(mon, preset, TRUE, FALSE, TRUE, FALSE);
+    return ApplyPreset(mon, preset, PRESET_TUTOR);
 }
 
 u8 ApplyEmeraldChampionsBattleSetChoice(struct Pokemon *mon, u8 choice)
@@ -607,20 +557,21 @@ u8 ApplyEmeraldChampionsBattleSetChoice(struct Pokemon *mon, u8 choice)
 
 u8 ApplyEmeraldChampionsRecommendedEvolutionSet(struct Pokemon *mon)
 {
-    enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+    const struct EmeraldChampionsBattleSetRange *range = ResolveBattleSetRange(GetMonData(mon, MON_DATA_SPECIES), EC_BATTLE_FORMAT_DOUBLES);
+    if (range == NULL)
+        return EC_BATTLE_SET_FAILED;
 
     // Evolution always returns the campaign to its doubles-first orientation.
     // Select the first ordinary role explicitly: a small number of legacy
     // species arrays place a Mega role in raw slot zero.
-    for (u8 choice = 0; choice < GetEmeraldChampionsRawBattleSetCount(species); choice++)
+    for (u8 choice = 0; choice < range->count; choice++)
     {
         const struct EmeraldChampionsBattleSet *preset =
-            GetEmeraldChampionsRawBattleSet(species, choice);
+            &gEmeraldChampionsBattleSets[range->offset + choice].preset;
 
-        if (preset != NULL
-         && !PresetRequiresTransformation(preset)
+        if (!PresetRequiresTransformation(preset)
          && !IsEmeraldChampionsProtectedProgressionItem(preset->item))
-            return ApplyPreset(mon, preset, FALSE, FALSE, FALSE, TRUE);
+            return ApplyPreset(mon, preset, PRESET_EVOLUTION);
     }
     return EC_BATTLE_SET_FAILED;
 }
@@ -635,16 +586,17 @@ u8 ApplyEmeraldChampionsRandomWildSet(struct Pokemon *mon)
 
 u8 ApplyEmeraldChampionsRandomNonMegaSet(struct Pokemon *mon)
 {
-    enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+    const struct EmeraldChampionsBattleSetRange *range = ResolveBattleSetRange(GetMonData(mon, MON_DATA_SPECIES), EC_BATTLE_FORMAT_DOUBLES);
+    if (range == NULL)
+        return EC_BATTLE_SET_FAILED;
     const struct EmeraldChampionsBattleSet *selected = NULL;
     u32 matches = 0;
 
-    for (u8 choice = 0; choice < GetEmeraldChampionsRawBattleSetCount(species); choice++)
+    for (u8 choice = 0; choice < range->count; choice++)
     {
-        const struct EmeraldChampionsBattleSet *preset = GetEmeraldChampionsRawBattleSet(species, choice);
+        const struct EmeraldChampionsBattleSet *preset = &gEmeraldChampionsBattleSets[range->offset + choice].preset;
 
-        if (preset == NULL
-         || PresetRequiresTransformation(preset)
+        if (PresetRequiresTransformation(preset)
          || IsEmeraldChampionsProtectedProgressionItem(preset->item))
             continue;
         if (RandomUniform(RNG_NONE, 0, ++matches - 1) == 0)
@@ -652,12 +604,12 @@ u8 ApplyEmeraldChampionsRandomNonMegaSet(struct Pokemon *mon)
     }
     if (selected == NULL)
         return EC_BATTLE_SET_FAILED;
-    return ApplyPreset(mon, selected, FALSE, FALSE, FALSE, FALSE);
+    return ApplyPreset(mon, selected, PRESET_WILD);
 }
 
 u8 ApplyEmeraldChampionsScriptedSet(struct Pokemon *mon, const struct EmeraldChampionsBattleSet *preset)
 {
-    return ApplyPreset(mon, preset, FALSE, TRUE, FALSE, FALSE);
+    return ApplyPreset(mon, preset, PRESET_SCRIPTED);
 }
 
 u8 ApplyEmeraldChampionsOpponentSet(struct Pokemon *mon, u8 rawChoice)
@@ -666,31 +618,122 @@ u8 ApplyEmeraldChampionsOpponentSet(struct Pokemon *mon, u8 rawChoice)
     return ApplyPreset(
         mon,
         GetEmeraldChampionsRawBattleSet(species, rawChoice),
-        FALSE,
-        TRUE,
-        FALSE,
-        FALSE
+        PRESET_SCRIPTED
     );
 }
 
-// Build this from the actual supplied sets once, including berries. Taking a
-// free item off a prepared Pokémon must not bypass the catalogue sale rule.
+// Membership is generated from supplied presets; protection remains live item policy.
 bool32 IsEmeraldChampionsFreePresetItem(enum Item item)
 {
-    static EWRAM_DATA u8 freeItems[(ITEMS_COUNT + 7) / 8] = {0};
-    static EWRAM_DATA bool8 initialized = FALSE;
-    if (!initialized)
+    return item < ITEMS_COUNT && sEmeraldChampionsPresetItems[item]
+        && !IsEmeraldChampionsProtectedProgressionItem(item);
+}
+
+// Shared preparation access and form-retention policy. UI consumers query
+// these owners; they do not assemble their own legality tables.
+const u16 *GetEmeraldChampionsPreparationMoves(enum Species species)
+{
+    const u16 *moves;
+    enum Species baseSpecies;
+
+    if (species <= SPECIES_NONE || species >= NUM_SPECIES)
+        return sEmeraldChampionsPreparationMoves_None;
+
+    // This table is intentionally separate from SpeciesInfo.teachableLearnset:
+    // only the Center's All Legal Moves service receives historical legality.
+    moves = sEmeraldChampionsPreparationLearnsets[species];
+    if (moves != NULL)
+        return moves;
+
+    baseSpecies = GET_BASE_SPECIES_ID(species);
+    if (baseSpecies > SPECIES_NONE && baseSpecies < NUM_SPECIES)
     {
-        for (u32 species = 1; species < NUM_SPECIES; species++)
-            for (u32 format = EC_BATTLE_FORMAT_DOUBLES; format <= EC_BATTLE_FORMAT_SINGLES; format++)
-                for (u32 choice = 0; choice < GetEmeraldChampionsRawBattleSetCountForFormat(species, format); choice++)
-                {
-                    const struct EmeraldChampionsBattleSet *preset = GetEmeraldChampionsRawBattleSetForFormat(species, choice, format);
-                    enum Item supplied = preset->item;
-                    if (supplied != ITEM_NONE && !IsEmeraldChampionsProtectedProgressionItem(supplied))
-                        freeItems[supplied / 8] |= 1 << (supplied % 8);
-                }
-        initialized = TRUE;
+        moves = sEmeraldChampionsPreparationLearnsets[baseSpecies];
+        if (moves != NULL)
+            return moves;
     }
-    return item < ITEMS_COUNT && (freeItems[item / 8] & (1 << (item % 8)));
+
+    return sEmeraldChampionsPreparationMoves_None;
+}
+
+static void BuildEmeraldChampionsPreparationMoveAccess(enum Species species, bool8 *availableMoves)
+{
+    const u16 *preparationMoves = GetEmeraldChampionsPreparationMoves(species);
+
+    for (u32 i = 0; preparationMoves[i] != MOVE_UNAVAILABLE; i++)
+    {
+        enum Move move = preparationMoves[i];
+
+        if (move > MOVE_NONE && move < MOVES_COUNT_ALL)
+            availableMoves[move] = TRUE;
+    }
+
+    // Presets grant individual move access in both formats, including item-gated
+    // roles. Reuse their species/form resolver without granting any held items.
+    // Smeargle gets its preset moves here; everything else still needs Sketch.
+    for (u8 format = 0; format < EC_BATTLE_FORMAT_COUNT; format++)
+    {
+        const struct EmeraldChampionsBattleSetRange *range = ResolveBattleSetRange(species, format);
+        if (range == NULL)
+            continue;
+        for (u32 choice = 0; choice < range->count; choice++)
+        {
+            const struct EmeraldChampionsBattleSet *preset =
+                &gEmeraldChampionsBattleSets[range->offset + choice].preset;
+            for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
+            {
+                enum Move move = preset->moves[slot];
+                if (move > MOVE_NONE && move < MOVES_COUNT_ALL)
+                    availableMoves[move] = TRUE;
+            }
+        }
+    }
+
+}
+
+bool32 CanSpeciesUseEmeraldChampionsPreparationMove(enum Species species, enum Move move)
+{
+    bool8 availableMoves[MOVES_COUNT_ALL] = {FALSE};
+    if (move <= MOVE_NONE || move >= MOVES_COUNT_ALL)
+        return FALSE;
+    BuildEmeraldChampionsPreparationMoveAccess(species, availableMoves);
+    return availableMoves[move];
+}
+
+u32 GetEmeraldChampionsPreparationMovesToLearn(struct BoxPokemon *mon, u16 *moves)
+{
+    bool8 availableMoves[MOVES_COUNT_ALL] = {FALSE};
+    u32 numMoves = 0;
+    BuildEmeraldChampionsPreparationMoveAccess(GetBoxMonData(mon, MON_DATA_SPECIES), availableMoves);
+
+    for (u32 move = MOVE_NONE + 1; move < MOVES_COUNT_ALL; move++)
+    {
+        if (availableMoves[move] && !BoxMonKnowsMove(mon, move))
+        {
+            if (moves != NULL)
+                moves[numMoves] = move;
+            numMoves++;
+        }
+    }
+
+    return numMoves;
+}
+
+bool32 CanSpeciesKeepEmeraldChampionsUnfusionMove(enum Species species, enum Move move)
+{
+    if (CanSpeciesUseEmeraldChampionsPreparationMove(species, move))
+        return TRUE;
+    const struct LevelUpMove *levelMoves = GetSpeciesLevelUpLearnset(species);
+    for (u32 i = 0; levelMoves[i].move != LEVEL_UP_MOVE_END; i++)
+        if (levelMoves[i].move == move)
+            return TRUE;
+    const u16 *moves = GetSpeciesTeachableLearnset(species);
+    for (u32 i = 0; moves[i] != MOVE_UNAVAILABLE; i++)
+        if (moves[i] == move)
+            return TRUE;
+    moves = GetSpeciesEggMoves(species);
+    for (u32 i = 0; moves[i] != MOVE_UNAVAILABLE; i++)
+        if (moves[i] == move)
+            return TRUE;
+    return FALSE;
 }

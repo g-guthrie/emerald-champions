@@ -51,7 +51,7 @@ Route117_EventScript_Woman::
 	faceplayer
 	goto_if_set FLAG_ITEM_ROUTE_115_AUDINITE, Route117_EventScript_AudiniteAfter
 	msgbox Route117_Text_AudiniteGift, MSGBOX_DEFAULT
-	giveitem ITEM_AUDINITE
+	giveuniqueitem ITEM_AUDINITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_ITEM_ROUTE_115_AUDINITE
 	goto Route117_EventScript_AudiniteAfter

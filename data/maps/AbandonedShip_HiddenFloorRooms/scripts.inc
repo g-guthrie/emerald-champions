@@ -115,3 +115,21 @@ AbandonedShip_HiddenFloorRooms_Text_BrightShinyTrash:
 	.string "It's bright and shiny!\n"
 	.string "But it's just trash…$"
 
+
+AbandonedShip_HiddenFloorRooms_EventScript_ResearchChart::
+	lock
+	faceplayer
+	goto_if_set FLAG_EC_WRECK_CHART_RESEARCH, AbandonedShip_HiddenFloorRooms_EventScript_ResearchChartEnd
+	setflag FLAG_EC_WRECK_CHART_RESEARCH
+	addmoney 1500
+	removeobject VAR_LAST_TALKED
+	msgbox AbandonedShip_HiddenFloorRooms_Text_ResearchChart, MSGBOX_DEFAULT
+AbandonedShip_HiddenFloorRooms_EventScript_ResearchChartEnd::
+	release
+	end
+
+AbandonedShip_HiddenFloorRooms_Text_ResearchChart:
+	.string "An old survey chart! Its markings\n"
+	.string "complete part of STERN's archive.\p"
+	.string "You receive ¥1,500 in research\n"
+	.string "funding.$"

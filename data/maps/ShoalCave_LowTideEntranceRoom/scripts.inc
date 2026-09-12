@@ -25,9 +25,7 @@ ShoalCave_LowTideEntranceRoom_EventScript_ShellBellExpert::
 	goto_if_eq VAR_RESULT, FALSE, ShoalCave_EventScript_NeedMaterials
 	checkitem ITEM_SHOAL_SHELL, 4
 	goto_if_eq VAR_RESULT, FALSE, ShoalCave_EventScript_NeedMaterials
-	setvar VAR_0x8008, ITEM_GLALITITE
-	call_if_set FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_GLALITITE, ShoalCave_EventScript_PearlReward
-	bufferitemname STR_VAR_1, VAR_0x8008
+	special BufferEmeraldChampionsShoalReward
 	msgbox ShoalCave_Text_ConfirmExchange, MSGBOX_YESNO
 	goto_if_ne VAR_RESULT, YES, ShoalCave_EventScript_DeclineExchange
 	special TradeEmeraldChampionsShoalMaterials
@@ -39,9 +37,6 @@ ShoalCave_LowTideEntranceRoom_EventScript_ShellBellExpert::
 	waitfanfare
 	release
 	end
-ShoalCave_EventScript_PearlReward:
-	setvar VAR_0x8008, ITEM_BIG_PEARL
-	return
 ShoalCave_EventScript_NeedMaterials:
 	msgbox ShoalCave_Text_Materials, MSGBOX_DEFAULT
 	release

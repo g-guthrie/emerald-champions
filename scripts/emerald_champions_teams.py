@@ -13,10 +13,10 @@ truth for every campaign trainer team.  Each block is one trainer branch:
 Species, items, abilities, natures and moves are written without their
 ``SPECIES_``/``ITEM_``/``ABILITY_``/``NATURE_``/``MOVE_`` prefixes. EVs accept
 six slash-separated values in HP/Atk/Def/SpA/SpD/Spe order or a spread in
-``EV_SPREADS``. The level column is the offset from the encounter's strict
-level cap and is materialized verbatim. At battle creation, all campaign
-trainer Pokemon receive the live-cap floor in src/difficulty.c before the global
-difficulty offset, including gyms and the four-Pokemon opening rival.
+``EV_SPREADS``. The level column is the offset from the live player cap on Normal.
+TrainerMon stores it explicitly; native creation applies Easy -2 / Hard +2
+before clamping to 1..100, including gyms and the prepared opening rival.
+The materialized absolute Level is a preview of the recorded encounter cap.
 
 ``strategy:`` supplies explicit contextual instructions to the bounded doubles
 planner (comma-separated names, or NONE). ``plan:`` and ``crack:`` explain the
@@ -111,12 +111,15 @@ class Mon:
     evs: str
     offset: int
     moves: list[str]
+    ivs: str = "31/31/31/31/31/31"
+    friendship: int = 255
 
     def master_line(self, index: int) -> str:
         return (
             f"  {index}. SPECIES_{self.species} @ ITEM_{self.item} | level_offset={self.offset} | "
             f"ability=ABILITY_{self.ability} | nature=NATURE_{self.nature} | "
             f"evs={self.evs} | moves=" + ",".join(f"MOVE_{move}" for move in self.moves)
+            + f" | ivs={self.ivs} | friendship={self.friendship}"
         )
 
 
@@ -196,7 +199,20 @@ def read_teams(path: Path = TEAMS) -> list[Branch]:
         mon = MON_RE.match(line)
         if not mon:
             raise SystemExit(f"{where}: cannot parse team line {line!r}")
-        moves = [move.strip() for move in mon.group(7).split(",") if move.strip()]
+        parts = mon.group(7).split("|")
+        moves = [move.strip() for move in parts[0].split(",") if move.strip()]
+        attributes = {}
+        for extra in parts[1:]:
+            key, separator, value = extra.strip().partition("=")
+            if not separator or key not in {"ivs", "friendship"} or key in attributes:
+                raise SystemExit(f"{where}: invalid or duplicate member attribute {extra!r}")
+            attributes[key] = value
+        ivs = attributes.get("ivs", "31/31/31/31/31/31")
+        if len(ivs.split("/")) != 6 or any(not v.isdigit() or not 0 <= int(v) <= 31 for v in ivs.split("/")):
+            raise SystemExit(f"{where}: invalid IVs {ivs!r}")
+        friendship = int(attributes.get("friendship", "0" if "FRUSTRATION" in moves else "255"))
+        if not 0 <= friendship <= 255:
+            raise SystemExit(f"{where}: friendship must be 0..255")
         if not 1 <= len(moves) <= 4:
             raise SystemExit(f"{where}: {len(moves)} moves")
         current.mons.append(Mon(
@@ -207,6 +223,8 @@ def read_teams(path: Path = TEAMS) -> list[Branch]:
             evs=parse_evs(mon.group(5), where),
             offset=int(mon.group(6)),
             moves=moves,
+            ivs=ivs,
+            friendship=friendship,
         ))
     seen: set[str] = set()
     for branch in branches:
@@ -373,7 +391,7 @@ def main() -> None:
 
     if args.summary:
         sys.path.insert(0, str(ROOT / "scripts"))
-        import audit_emerald_champions_master_battles as audit  # noqa: E402
+        import ec_moves as reference  # noqa: E402
 
         species = Counter(mon.species for branch in branches for mon in branch.mons)
         items = Counter(mon.item for branch in branches for mon in branch.mons)
@@ -382,14 +400,14 @@ def main() -> None:
         print("branches:", len(branches), "pokemon:", sum(species.values()), "distinct species:", len(species))
         print("top species:", species.most_common(20))
         print("top items:", items.most_common(15))
-        missing_megas = sorted(stone for stone in audit.MEGA_STONES if stone[5:] not in items)
-        print(f"megas used {len(audit.MEGA_STONES) - len(missing_megas)}/{len(audit.MEGA_STONES)}; missing:", missing_megas)
+        missing_megas = sorted(stone for stone in reference.MEGA_STONES if stone[5:] not in items)
+        print(f"megas used {len(reference.MEGA_STONES) - len(missing_megas)}/{len(reference.MEGA_STONES)}; missing:", missing_megas)
         used = set(species)
         missing_signs = sorted(
-            sign for sign in audit.SIGN_SPECIES
-            if not ({alias[8:] for alias in audit.LEGENDARY_SHOWCASE_ALIASES.get(sign, {sign})} & used)
+            sign for sign in reference.SIGN_SPECIES
+            if not ({alias[8:] for alias in reference.LEGENDARY_SHOWCASE_ALIASES.get(sign, {sign})} & used)
         )
-        print(f"legendary signs used {len(audit.SIGN_SPECIES) - len(missing_signs)}/{len(audit.SIGN_SPECIES)}; missing:", missing_signs)
+        print(f"legendary signs used {len(reference.SIGN_SPECIES) - len(missing_signs)}/{len(reference.SIGN_SPECIES)}; missing:", missing_signs)
         return
 
     if args.write:

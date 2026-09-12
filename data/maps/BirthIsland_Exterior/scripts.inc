@@ -97,10 +97,12 @@ BirthIsland_Exterior_EventScript_Deoxys::
 
 BirthIsland_Exterior_EventScript_CaughtDeoxys::
 	setflag FLAG_BATTLED_DEOXYS
+	call BirthIsland_Exterior_EventScript_RecordResearch
 	release
 	end
 
 BirthIsland_Exterior_EventScript_DefeatedDeoxys::
+	call BirthIsland_Exterior_EventScript_RecordResearch
 	goto Common_EventScript_LegendaryResting
 	end
 
@@ -118,3 +120,14 @@ BirthIsland_Exterior_Movement_DeoxysApproach:
 	walk_slow_down
 	walk_slow_down
 	step_end
+
+BirthIsland_Exterior_EventScript_RecordResearch::
+	goto_if_set FLAG_EC_REPORT_C43_COMPLETE, Common_EventScript_NopReturn
+	completemilestone FLAG_EC_REPORT_C43_COMPLETE
+	msgbox BirthIsland_Exterior_Text_ResearchRecord, MSGBOX_DEFAULT
+	return
+
+BirthIsland_Exterior_Text_ResearchRecord:
+	.string "The strange signal is understood.\n"
+	.string "Your discovery earns ¥12,000.\l"
+	.string "Your level cap is now 78.$"

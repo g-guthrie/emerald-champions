@@ -1,17 +1,19 @@
-> **Current development handoff:** [Continue here](docs/CONTINUE_HERE.md) · [Complete Cohesion Book](Cohesion%20Book/README.md)
-
 # Emerald Champions
 
-A doubles-focused Emerald adventure built on pokeemerald-expansion, with free team-preparation services, adjustable trainer levels, and separate battle Retry and save Reload actions.
+A doubles-focused Emerald adventure built on pokeemerald-expansion, with free
+team preparation, adjustable trainer levels, battle Retry and save Reload.
 
-The executable source defines the game. Documentation explains that source; passing a check establishes only the behavior that check actually covers.
+The executable source defines the game:
 
-- [Implemented systems](docs/SYSTEMS.md)
-- [Build and verification](docs/VERIFICATION.md)
-- [Known issues and audit limits](docs/KNOWN_ISSUES.md)
-- [Source and data ownership](docs/README.md)
-- [Credits](CREDITS.md) and [third-party notices](THIRD_PARTY_NOTICES.md)
+| Content | Owner |
+| --- | --- |
+| Engine and gameplay | `src/`, `include/`, `data/` |
+| Authored trainer/preset inputs | `data/emerald_champions/` and their consuming generators in `scripts/` |
+| Compiled trainer parties | `src/data/trainers.party` |
+| Wild encounters | `src/data/wild_encounters.json` |
+| Scenes and dialogue | `data/maps/`, `data/scripts/` |
+| Build and verification | [docs/VERIFICATION.md](docs/VERIFICATION.md) |
 
-Game logic lives in `src/`, `include/`, and `data/`. Authored configuration and imported datasets belong in `data/emerald_champions/`; executable scenarios and reference baselines belong in `tests/`. The `docs/` directory contains explanations, not build inputs.
-
-The gameplay traversal pipeline and battle-testing pipeline have different purposes. Traversal can automatically resolve battles to test progression. Combat evaluation must run real battles with that automation disabled. Neither a static check nor an automatically won campaign demonstrates difficulty or balance.
+Use a fresh save. Selected tests do not certify the full campaign or its balance.
+Read [AGENTS.md](AGENTS.md) before editing. Credits and required notices remain in
+[CREDITS.md](CREDITS.md) and [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

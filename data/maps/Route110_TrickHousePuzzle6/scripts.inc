@@ -33,8 +33,7 @@ Route110_TrickHousePuzzle6_EventScript_Sophia::
 	end
 
 Route110_TrickHousePuzzle6_EventScript_Benny::
-	trainerbattle_double TRAINER_BENNY, Route110_TrickHousePuzzle6_Text_BennyIntro, Route110_TrickHousePuzzle6_Text_BennyDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route110_TrickHousePuzzle6_Text_BennyPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route110_TrickHousePuzzle6_Text_BennyPostBattle, MSGBOX_NPC
 	end
 
 Route110_TrickHousePuzzle6_EventScript_Sebastian::
@@ -62,16 +61,9 @@ Route110_TrickHousePuzzle6_Text_SophiaPostBattle:
 	.string "It's a challenge I've found worth\n"
 	.string "repeating!$"
 
-Route110_TrickHousePuzzle6_Text_BennyIntro:
-	.string "Maybe I could get my BIRD POKéMON\n"
-	.string "to fly over the wall…$"
-
-Route110_TrickHousePuzzle6_Text_BennyDefeat:
-	.string "Gwaaah! I blew it!$"
-
-Route110_TrickHousePuzzle6_Text_BennyPostBattle:
-	.string "Ehehehe… I guess I lost because\n"
-	.string "I was trying to cheat.$"
+Route110_TrickHousePuzzle6_Text_BennyPostBattle::
+	.string "Ehehehe… I was looking for a shortcut.\n"
+	.string "The TRICK MASTER thinks of everything!$"
 
 Route110_TrickHousePuzzle6_Text_SebastianIntro:
 	.string "I'm getting dizzy from these rotating\n"

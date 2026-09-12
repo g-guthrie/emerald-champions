@@ -90,8 +90,7 @@ Route110_TrickHousePuzzle2_EventScript_Ted::
 	end
 
 Route110_TrickHousePuzzle2_EventScript_Paul::
-	trainerbattle_double TRAINER_PAUL, Route110_TrickHousePuzzle2_Text_PaulIntro, Route110_TrickHousePuzzle2_Text_PaulDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route110_TrickHousePuzzle2_Text_PaulPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route110_TrickHousePuzzle2_Text_PaulPostBattle, MSGBOX_NPC
 	end
 
 Route110_TrickHousePuzzle2_EventScript_Georgia::
@@ -116,13 +115,6 @@ Route110_TrickHousePuzzle2_Text_TedDefeat:
 Route110_TrickHousePuzzle2_Text_TedPostBattle:
 	.string "Can I get you to push all the buttons\n"
 	.string "for me?$"
-
-Route110_TrickHousePuzzle2_Text_PaulIntro:
-	.string "Oh! You're on your second TRICK HOUSE\n"
-	.string "challenge!$"
-
-Route110_TrickHousePuzzle2_Text_PaulDefeat:
-	.string "You're good at battling too?$"
 
 Route110_TrickHousePuzzle2_Text_PaulPostBattle:
 	.string "The TRICK MASTER rigged all the tricks\n"

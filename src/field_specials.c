@@ -50,6 +50,7 @@
 #include "region_map.h"
 #include "rtc.h"
 #include "script.h"
+#include "money.h"
 #include "script_menu.h"
 #include "shop.h"
 #include "sound.h"
@@ -104,6 +105,8 @@ static const u8 sText_StatSpeed[] = _("Speed");
 static const u8 sText_Minus32[] = _("-32");
 static const u8 sText_Minus16[] = _("-16");
 static const u8 sText_Minus4[] = _("-4");
+static const u8 sText_Minus1[] = _("-1");
+static const u8 sText_Plus1[] = _("+1");
 static const u8 sText_Plus4[] = _("+4");
 static const u8 sText_Plus16[] = _("+16");
 static const u8 sText_Plus32[] = _("+32");
@@ -115,13 +118,16 @@ static const u8 sText_StatSummarySuffix[] = _("/510\nEVs {RIGHT_ARROW} stat afte
 static const u8 sText_StatCannotAdjust[] = _("That stat cannot be adjusted.");
 static const u8 sText_StatMenuDivider[] = _("  ");
 static const u8 sText_StatMenuMaximum[] = _("/252");
+static const u8 sText_IvMenuMaximum[] = _("/31");
+static const u8 sText_IvSummary[] = _("IVs: 0-31 each\nIVs {RIGHT_ARROW} stat after Nature");
+static const u8 sText_IvsPrefix[] = _("\nIVs: ");
 static const u8 sText_StatArrow[] = _(" {RIGHT_ARROW} ");
 static const u8 sText_StatColon[] = _(": ");
 static const u8 sText_EvsPrefix[] = _("\nEVs: ");
 static const u8 sText_EvsLeft[] = _("/252  Left: ");
 static const u8 sText_StatFixedHp[] = _(" (fixed HP)");
 
-static const u8 *const sEmeraldChampionsEvNames[] =
+static const u8 *const sEmeraldChampionsTrainingStatNames[] =
 {
     sText_StatHp,
     sText_StatAttack,
@@ -146,7 +152,20 @@ static const u8 *const sEmeraldChampionsStatAdjustNames[] =
     sText_Back,
 };
 
-static EWRAM_DATA u8 sEmeraldChampionsEvMenuText[NUM_STATS][32] = {0};
+static const u8 *const sEmeraldChampionsIvAdjustNames[] =
+{
+    sText_Minus16, sText_Minus4, sText_Minus1,
+    sText_Plus1, sText_Plus4, sText_Plus16,
+    sText_SetZero, sText_SetMaximum, sText_Back,
+};
+
+// Script-local editor mode; every entry point selects it explicitly.
+static bool32 IsEditingEmeraldChampionsIvs(void)
+{
+    return gSpecialVar_0x8002 == EC_TRAINING_IVS;
+}
+
+static EWRAM_DATA u8 sEmeraldChampionsTrainingMenuText[NUM_STATS][32] = {0};
 
 // Nature rows are built from gNaturesInfo so the list can never disagree with
 // the engine's own table: "Adamant  +Atk -SpA", "Hardy  no change".
@@ -515,6 +534,41 @@ static u8 TryGiveEmeraldChampionsGameCornerPokemon(enum Species species, u16 fla
     return giveResult;
 }
 
+// Check actual ownership, never the Pokédex: release/transfer must not strand
+// the survey. Prefer a usable adult over an Egg in any storage location.
+void LocateEmeraldChampionsCastform(void)
+{
+    bool32 hasEgg = FALSE;
+
+    gSpecialVar_Result = EC_CASTFORM_NONE;
+    for (u32 location = EC_CASTFORM_PARTY; location <= EC_CASTFORM_DAYCARE; location++)
+    {
+        u32 count = location == EC_CASTFORM_PARTY ? PARTY_SIZE
+                  : location == EC_CASTFORM_BOX ? TOTAL_BOXES_COUNT * IN_BOX_COUNT : DAYCARE_MON_COUNT;
+        for (u32 slot = 0; slot < count; slot++)
+        {
+            struct BoxPokemon *mon = location == EC_CASTFORM_PARTY ? &gParties[B_TRAINER_PLAYER][slot].box
+                                   : location == EC_CASTFORM_BOX ? GetBoxedMonPtr(slot / IN_BOX_COUNT, slot % IN_BOX_COUNT)
+                                   : &gSaveBlock1Ptr->daycare.mons[slot].mon;
+            enum Species species = GetBoxMonData(mon, MON_DATA_SPECIES);
+            if (species == SPECIES_NONE || GET_BASE_SPECIES_ID(species) != SPECIES_CASTFORM)
+                continue;
+            if (GetBoxMonData(mon, MON_DATA_IS_EGG))
+            {
+                hasEgg = TRUE;
+                continue;
+            }
+            gSpecialVar_Result = location;
+            gSpecialVar_0x8004 = slot;
+            if (location == EC_CASTFORM_BOX)
+                StringCopy(gStringVar1, GetBoxNamePtr(slot / IN_BOX_COUNT));
+            return;
+        }
+    }
+    if (hasEgg)
+        gSpecialVar_Result = EC_CASTFORM_EGG;
+}
+
 void GiveEmeraldChampionsPreparedPokemon(void)
 {
     gSpecialVar_Result = TryGiveEmeraldChampionsPreparedPokemon(
@@ -632,10 +686,17 @@ void GiveEmeraldChampionsStarterMegaStoneAtIndex(void)
     gSpecialVar_Result = TRUE;
     if (item == ITEM_NONE || (delivered & (1 << index)))
         return;
-    bool32 fulfilled = OwnsEmeraldChampionsMegaStone(item);
+    bool32 fulfilled = PlayerOwnsItem(item);
+    bool32 duplicateStarter = FALSE;
     for (u32 i = 0; i < index; i++)
         if ((delivered & (1 << i)) && GetEmeraldChampionsStarterStoneAtIndex(i) == item)
-            fulfilled = TRUE;
+            duplicateStarter = TRUE;
+    if (fulfilled && !duplicateStarter)
+    {
+        AddMoney(&gSaveBlock1Ptr->money, 3000);
+        gSpecialVar_0x8005 = 3;
+    }
+    fulfilled |= duplicateStarter;
     if (!fulfilled && AddBagItem(item, 1))
     {
         fulfilled = TRUE;
@@ -811,14 +872,7 @@ void BufferSelectedMonCurrentEmeraldChampionsBattleSet(void)
     gSpecialVar_Result = TRUE;
 }
 
-static u32 GetSelectedMonEvTotal(struct Pokemon *mon)
-{
-    u32 total = 0;
 
-    for (u32 stat = 0; stat < NUM_STATS; stat++)
-        total += GetMonData(mon, EC_EV_DATA(stat));
-    return total;
-}
 
 static void AppendEvValue(u8 *text, u32 value)
 {
@@ -837,21 +891,21 @@ static void AppendStatValue(u8 *text, u32 value)
 }
 
 // "HP  252/252 {RIGHT_ARROW} 80": show the actual native stat beside its EVs.
-static const u8 *BuildEmeraldChampionsEvMenuText(u32 stat)
+static const u8 *BuildEmeraldChampionsTrainingMenuText(u32 stat)
 {
     struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x800A];
-    u8 *text = sEmeraldChampionsEvMenuText[stat];
+    u8 *text = sEmeraldChampionsTrainingMenuText[stat];
 
-    StringCopy(text, sEmeraldChampionsEvNames[stat]);
+    StringCopy(text, sEmeraldChampionsTrainingStatNames[stat]);
     StringAppend(text, sText_StatMenuDivider);
-    AppendEvValue(text, GetMonData(mon, EC_EV_DATA(stat)));
-    StringAppend(text, sText_StatMenuMaximum);
+    AppendEvValue(text, GetMonData(mon, IsEditingEmeraldChampionsIvs() ? EC_IV_DATA(stat) : EC_EV_DATA(stat)));
+    StringAppend(text, IsEditingEmeraldChampionsIvs() ? sText_IvMenuMaximum : sText_StatMenuMaximum);
     StringAppend(text, sText_StatArrow);
     AppendStatValue(text, GetMonData(mon, EC_STAT_VALUE_DATA(stat)));
     return text;
 }
 
-void BufferSelectedMonEmeraldChampionsEvSummary(void)
+void BufferSelectedMonEmeraldChampionsTrainingSummary(void)
 {
     if (gSpecialVar_0x800A >= gPartiesCount[B_TRAINER_PLAYER])
     {
@@ -860,13 +914,18 @@ void BufferSelectedMonEmeraldChampionsEvSummary(void)
     }
 
     struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x800A];
+    if (IsEditingEmeraldChampionsIvs())
+    {
+        StringCopy(gStringVar4, sText_IvSummary);
+        return;
+    }
     StringCopy(gStringVar4, sText_StatSummaryPrefix);
-    AppendEvValue(gStringVar4, GetSelectedMonEvTotal(mon));
+    AppendEvValue(gStringVar4, GetMonEVCount(mon));
     StringAppend(gStringVar4, sText_StatSummarySuffix);
 }
 
 // Show the native level-scaled stat after Nature beside the EV allocation.
-void BufferSelectedMonEmeraldChampionsEvDetail(void)
+void BufferSelectedMonEmeraldChampionsTrainingDetail(void)
 {
     struct Pokemon *mon;
     u32 stat;
@@ -881,21 +940,32 @@ void BufferSelectedMonEmeraldChampionsEvDetail(void)
 
     mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x800A];
     stat = gSpecialVar_0x8005;
-    total = GetSelectedMonEvTotal(mon);
-    StringCopy(gStringVar4, sEmeraldChampionsEvNames[stat]);
+    total = GetMonEVCount(mon);
+    StringCopy(gStringVar4, sEmeraldChampionsTrainingStatNames[stat]);
     StringAppend(gStringVar4, sText_StatColon);
     AppendStatValue(gStringVar4, GetMonData(mon, EC_STAT_VALUE_DATA(stat)));
     if (stat == 0 && HasShedinjaHPHandling(GetMonData(mon, MON_DATA_SPECIES)))
         StringAppend(gStringVar4, sText_StatFixedHp);
-    StringAppend(gStringVar4, sText_EvsPrefix);
-    AppendEvValue(gStringVar4, GetMonData(mon, EC_EV_DATA(stat)));
-    StringAppend(gStringVar4, sText_EvsLeft);
-    AppendEvValue(gStringVar4, MAX_TOTAL_EVS - min(total, MAX_TOTAL_EVS));
+    if (IsEditingEmeraldChampionsIvs())
+    {
+        StringAppend(gStringVar4, sText_IvsPrefix);
+        AppendEvValue(gStringVar4, GetMonData(mon, EC_IV_DATA(stat)));
+        StringAppend(gStringVar4, sText_IvMenuMaximum);
+    }
+    else
+    {
+        StringAppend(gStringVar4, sText_EvsPrefix);
+        AppendEvValue(gStringVar4, GetMonData(mon, EC_EV_DATA(stat)));
+        StringAppend(gStringVar4, sText_EvsLeft);
+        AppendEvValue(gStringVar4, MAX_TOTAL_EVS - min(total, MAX_TOTAL_EVS));
+    }
 }
 
-void AdjustSelectedMonEmeraldChampionsEvs(void)
+void AdjustSelectedMonEmeraldChampionsTraining(void)
 {
-    static const s8 deltas[] = {-32, -16, -4, 4, 16, 32};
+    static const s8 deltas[][6] = {{-32, -16, -4, 4, 16, 32}, {-16, -4, -1, 1, 4, 16}};
+    bool32 ivs = IsEditingEmeraldChampionsIvs();
+    u32 maximum = ivs ? MAX_PER_STAT_IVS : MAX_PER_STAT_EVS;
     struct Pokemon *mon;
     s32 current;
     s32 total;
@@ -908,31 +978,32 @@ void AdjustSelectedMonEmeraldChampionsEvs(void)
         return;
 
     mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x800A];
-    current = GetMonData(mon, EC_EV_DATA(gSpecialVar_0x8005));
-    total = GetSelectedMonEvTotal(mon);
-    if (gSpecialVar_0x8006 < ARRAY_COUNT(deltas))
-        target = current + deltas[gSpecialVar_0x8006];
+    current = GetMonData(mon, ivs ? EC_IV_DATA(gSpecialVar_0x8005) : EC_EV_DATA(gSpecialVar_0x8005));
+    total = GetMonEVCount(mon);
+    if (gSpecialVar_0x8006 < ARRAY_COUNT(deltas[0]))
+        target = current + deltas[ivs][gSpecialVar_0x8006];
     else if (gSpecialVar_0x8006 == 6)
         target = 0;
     else
-        target = MAX_PER_STAT_EVS;
+        target = maximum;
 
     // Never below zero or above the per-stat cap, and an increase can only
     // spend what is left of the budget.
-    target = min(max(target, 0), MAX_PER_STAT_EVS);
-    if (target > current)
+    target = min(max(target, 0), maximum);
+    if (!ivs && target > current)
         target = min(target, current + max(MAX_TOTAL_EVS - total, 0));
     if (target == current)
         return;
     u8 value = target;
-    SetMonData(mon, EC_EV_DATA(gSpecialVar_0x8005), &value);
+    SetMonData(mon, ivs ? EC_IV_DATA(gSpecialVar_0x8005) : EC_EV_DATA(gSpecialVar_0x8005), &value);
     CalculateMonStats(mon);
     gSpecialVar_Result = TRUE;
 }
 
-void ResetSelectedMonEmeraldChampionsEvs(void)
+void ResetSelectedMonEmeraldChampionsTraining(void)
 {
-    u8 zero = 0;
+    bool32 ivs = IsEditingEmeraldChampionsIvs();
+    u8 value = ivs ? MAX_PER_STAT_IVS : 0;
 
     gSpecialVar_Result = FALSE;
     if (gSpecialVar_0x800A >= gPartiesCount[B_TRAINER_PLAYER])
@@ -940,8 +1011,8 @@ void ResetSelectedMonEmeraldChampionsEvs(void)
     for (u32 stat = 0; stat < NUM_STATS; stat++)
         SetMonData(
             &gParties[B_TRAINER_PLAYER][gSpecialVar_0x800A],
-            EC_EV_DATA(stat),
-            &zero
+            ivs ? EC_IV_DATA(stat) : EC_EV_DATA(stat),
+            &value
         );
     CalculateMonStats(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x800A]);
     gSpecialVar_Result = TRUE;
@@ -3142,16 +3213,6 @@ void ShowScrollableMultichoice(void)
         task->tKeepOpenAfterSelect = FALSE;
         task->tTaskId = taskId;
         break;
-    case SCROLL_MULTI_GLASS_WORKSHOP_VENDOR:
-        task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN - 1;
-        task->tNumItems = 8;
-        task->tLeft = 1;
-        task->tTop = 1;
-        task->tWidth = 9;
-        task->tHeight = 10;
-        task->tKeepOpenAfterSelect = FALSE;
-        task->tTaskId = taskId;
-        break;
     case SCROLL_MULTI_POKEMON_FAN_CLUB_RATER:
         task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
         task->tNumItems = 12;
@@ -3307,7 +3368,7 @@ void ShowScrollableMultichoice(void)
         break;
     case SCROLL_MULTI_EMERALD_CHAMPIONS_EVS:
         task->tMaxItemsOnScreen = 4;
-        task->tNumItems = ARRAY_COUNT(sEmeraldChampionsEvNames);
+        task->tNumItems = ARRAY_COUNT(sEmeraldChampionsTrainingStatNames);
         // Rows include three-digit EVs and the resulting stat. The actual
         // text width is measured below and the left edge adjusted to fit.
         task->tLeft = 14;
@@ -3413,17 +3474,6 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         COMPOUND_STRING("Natural"),
         sText_Back,
     },
-    [SCROLL_MULTI_GLASS_WORKSHOP_VENDOR] =
-    {
-        COMPOUND_STRING("BLUE FLUTE  250"),
-        COMPOUND_STRING("YELLOW FLUTE  500"),
-        COMPOUND_STRING("RED FLUTE  500"),
-        COMPOUND_STRING("WHITE FLUTE  1000"),
-        COMPOUND_STRING("BLACK FLUTE  1000"),
-        COMPOUND_STRING("PRETTY CHAIR  6000"),
-        COMPOUND_STRING("PRETTY DESK  8000"),
-        gText_Exit
-    },
     [SCROLL_MULTI_POKEMON_FAN_CLUB_RATER] =
     {
         COMPOUND_STRING("0 pts"),
@@ -3464,8 +3514,8 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
     },
     [SCROLL_MULTI_BF_EXCHANGE_CORNER_SUPPLY_VENDOR] =
     {
-        COMPOUND_STRING("PP UP{CLEAR_TO 100}4BP"),
-        COMPOUND_STRING("PP MAX{CLEAR_TO 94}12BP"),
+        COMPOUND_STRING("QUICK BALL{CLEAR_TO 100}2BP"),
+        COMPOUND_STRING("TIMER BALL{CLEAR_TO 100}2BP"),
         COMPOUND_STRING("MAX REVIVE{CLEAR_TO 100}8BP"),
         COMPOUND_STRING("SACRED ASH{CLEAR_TO 94}32BP"),
         COMPOUND_STRING("DREAM BALL{CLEAR_TO 100}8BP"),
@@ -3636,7 +3686,12 @@ static void Task_ShowScrollableMultichoice(u8 taskId)
               && i < NUM_STATS
               && gSpecialVar_0x800A < gPartiesCount[B_TRAINER_PLAYER])
         {
-            text = BuildEmeraldChampionsEvMenuText(i);
+            text = BuildEmeraldChampionsTrainingMenuText(i);
+        }
+        else if (gSpecialVar_0x8004 == SCROLL_MULTI_EMERALD_CHAMPIONS_STAT_ADJUST
+              && IsEditingEmeraldChampionsIvs())
+        {
+            text = sEmeraldChampionsIvAdjustNames[i];
         }
         else if (gSpecialVar_0x8004 == SCROLL_MULTI_EMERALD_CHAMPIONS_NATURES && i < NUM_NATURES)
         {
@@ -4430,31 +4485,6 @@ bool8 ShouldShowBoxWasFullMessage(void)
             return TRUE;
         }
     }
-    return FALSE;
-}
-
-bool8 IsDestinationBoxFull(void)
-{
-    int box;
-    int i;
-    SetPCBoxToSendMon(VarGet(VAR_PC_BOX_TO_SEND_MON));
-    box = StorageGetCurrentBox();
-    do
-    {
-        for (i = 0; i < IN_BOX_COUNT; i++)
-        {
-            if (GetBoxMonData(GetBoxedMonPtr(box, i), MON_DATA_SPECIES, 0) == SPECIES_NONE)
-            {
-                if (GetPCBoxToSendMon() != box)
-                    FlagClear(FLAG_SHOWN_BOX_WAS_FULL_MESSAGE);
-                VarSet(VAR_PC_BOX_TO_SEND_MON, box);
-                return ShouldShowBoxWasFullMessage();
-            }
-        }
-
-        if (++box == TOTAL_BOXES_COUNT)
-            box = 0;
-    } while (box != StorageGetCurrentBox());
     return FALSE;
 }
 
@@ -6819,7 +6849,7 @@ void GiveEmeraldChampionsFormGift(void)
         return;
     const struct EmeraldChampionsFormGift *entry = &sEmeraldChampionsFormGifts[gift];
     CreateRandomMon(&mon, entry->species, min(GetCurrentLevelCap(), 25));
-    if (ApplyEmeraldChampionsScriptedSet(&mon, entry->preset) != EC_BATTLE_SET_SUCCESS)
+    if (ApplyEmeraldChampionsScriptedSet(&mon, entry->preset != NULL ? entry->preset : GetEmeraldChampionsRawBattleSet(entry->species, 0)) != EC_BATTLE_SET_SUCCESS)
         return;
     u32 partySlot = CalculatePlayerPartyCount();
     gSpecialVar_Result = GiveScriptedMonToPlayer(&mon, PARTY_SIZE);
@@ -6891,7 +6921,7 @@ static const u8 *GetEmeraldChampionsServiceFormName(enum Species source, enum Sp
         if (GetEmeraldChampionsCostume(source) >= 0 && to >= 0)
             return sEmeraldChampionsCostumes[to].name;
     }
-    else if (mode == 2 && FlagGet(FLAG_SYS_GAME_CLEAR))
+    else if (mode == 2 && FlagGet(FLAG_EC_REPORT_C43_COMPLETE))
     {
         bool32 sourceAllowed = FALSE;
         for (u32 i = 0; i < ARRAY_COUNT(sEmeraldChampionsDeoxysForms); i++)
@@ -7058,8 +7088,13 @@ void ClaimEmeraldChampionsSootMilestone(void)
         return;
     CopyItemName(item, gStringVar1);
     // A previously obtained reusable device fulfills this tier too.
-    if (OwnsEmeraldChampionsMegaStone(item))
+    if (PlayerOwnsItem(item))
+    {
+        u32 bonus = item == ITEM_LINKING_CORD ? 5000 : 3000;
+        AddMoney(&gSaveBlock1Ptr->money, bonus);
+        ConvertIntToDecimalStringN(gStringVar2, bonus, STR_CONV_MODE_LEFT_ALIGN, 4);
         gSpecialVar_Result = 5;
+    }
     else if (AddBagItem(item, 1))
         gSpecialVar_Result = 1;
     else if (AddPCItem(item, 1))
@@ -7078,7 +7113,6 @@ void ClaimEmeraldChampionsSootMilestone(void)
 void BufferEmeraldChampionsSootProgress(void)
 {
     u16 total = VarGet(VAR_EC_SOOT_PROGRESS) & EC_SOOT_TOTAL_MASK;
-    ConvertIntToDecimalStringN(gStringVar1, VarGet(VAR_ASH_GATHER_COUNT), STR_CONV_MODE_LEFT_ALIGN, 4);
     ConvertIntToDecimalStringN(gStringVar2, total, STR_CONV_MODE_LEFT_ALIGN, 4);
     gSpecialVar_Result = total >= EC_SOOT_MEGA_TARGET ? 3 : total >= EC_SOOT_MARSHADOW_TARGET ? 2 : total >= EC_SOOT_CORD_TARGET ? 1 : 0;
 }
@@ -7088,20 +7122,6 @@ static const u16 sPaidEvolutionItems[] =
 #include "data/emerald_champions_paid_evolution_items.h"
     ITEM_NONE,
 };
-
-u32 GetEmeraldChampionsEvolutionPrice(enum Item item)
-{
-    for (u32 i = 0; sPaidEvolutionItems[i] != ITEM_NONE; i++)
-        if (sPaidEvolutionItems[i] == item)
-        {
-            if (GetItemImportance(item))
-                return 10000;
-            if (gItemsInfo[item].sortType == ITEM_TYPE_EVOLUTION_STONE)
-                return 3000;
-            return 5000;
-        }
-    return 0;
-}
 
 bool32 IsEmeraldChampionsFreeCatalogueItem(enum Item item)
 {
@@ -7134,9 +7154,20 @@ void OpenEmeraldChampionsEvolutionSpecialist(void)
     ScriptContext_Stop();
 }
 
+static enum Item GetEmeraldChampionsShoalReward(void)
+{
+    return FlagGet(FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_GLALITITE)
+        || PlayerOwnsItem(ITEM_GLALITITE) ? ITEM_BIG_PEARL : ITEM_GLALITITE;
+}
+
+void BufferEmeraldChampionsShoalReward(void)
+{
+    CopyItemName(GetEmeraldChampionsShoalReward(), gStringVar1);
+}
+
 void TradeEmeraldChampionsShoalMaterials(void)
 {
-    enum Item reward = FlagGet(FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_GLALITITE) ? ITEM_BIG_PEARL : ITEM_GLALITITE;
+    enum Item reward = GetEmeraldChampionsShoalReward();
     gSpecialVar_Result = 0;
     if (!CheckBagHasItem(ITEM_SHOAL_SALT, 4) || !CheckBagHasItem(ITEM_SHOAL_SHELL, 4))
         return;
@@ -7153,4 +7184,25 @@ void TradeEmeraldChampionsShoalMaterials(void)
     RemoveBagItem(ITEM_SHOAL_SALT, 4);
     RemoveBagItem(ITEM_SHOAL_SHELL, 4);
     FlagSet(FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_GLALITITE);
+}
+
+void CheckEmeraldChampionsRedundantPurchase(void)
+{
+    enum Item item = gSpecialVar_0x8004;
+    gSpecialVar_Result = GetItemImportance(item) && PlayerOwnsItem(item);
+    CopyItemName(item, gStringVar1);
+}
+
+void ConvertEmeraldChampionsFiniteReward(void)
+{
+    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
+    enum Item item = gSpecialVar_0x8000;
+    u32 bonus = gSpecialVar_0x8001 == 1 ? GetFiniteDuplicateRewardValue(item) : 0;
+    gSpecialVar_Result = bonus != 0;
+    if (bonus)
+    {
+        AddMoney(&gSaveBlock1Ptr->money, bonus);
+        CopyItemName(item, gStringVar1);
+        ConvertIntToDecimalStringN(gStringVar2, bonus, STR_CONV_MODE_LEFT_ALIGN, 4);
+    }
 }

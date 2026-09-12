@@ -349,3 +349,51 @@ EventScript_NoCaseForHiddenCoins::
 	setvar VAR_RESULT, 0
 	releaseall
 	end
+
+Common_EventScript_ObtainFiniteItem::
+	special ConvertEmeraldChampionsFiniteReward
+	goto_if_eq VAR_RESULT, FALSE, Std_ObtainItem
+	msgbox Common_Text_DuplicateFiniteReward, MSGBOX_DEFAULT
+	setvar VAR_RESULT, TRUE
+	return
+
+Common_Text_DuplicateFiniteReward:
+	.string "You already own a {STR_VAR_1}.\p"
+	.string "This discovery earns a one-time\n"
+	.string "research payment of ¥{STR_VAR_2}!$"
+
+Common_EventScript_ReturnNPCTradeItem::
+	special ReturnInGameTradeHeldItem
+	goto_if_eq VAR_RESULT, 0, Common_EventScript_TradeHeldItemFull
+	goto_if_eq VAR_RESULT, 4, Common_EventScript_TradeMailAttached
+	call_if_eq VAR_RESULT, 2, Common_EventScript_TradeHeldItemBag
+	call_if_eq VAR_RESULT, 3, Common_EventScript_TradeHeldItemPC
+	setvar VAR_RESULT, TRUE
+	return
+
+Common_EventScript_TradeHeldItemBag:
+	msgbox Common_Text_TradeHeldItemBag, MSGBOX_DEFAULT
+	return
+Common_EventScript_TradeHeldItemPC:
+	msgbox Common_Text_TradeHeldItemPC, MSGBOX_DEFAULT
+	return
+Common_EventScript_TradeHeldItemFull:
+	msgbox Common_Text_TradeHeldItemFull, MSGBOX_DEFAULT
+	setvar VAR_RESULT, FALSE
+	return
+Common_EventScript_TradeMailAttached:
+	msgbox Common_Text_TradeMailAttached, MSGBOX_DEFAULT
+	setvar VAR_RESULT, FALSE
+	return
+Common_Text_TradeHeldItemBag:
+	.string "Your POKéMON's {STR_VAR_1}\n"
+	.string "was returned to your BAG.$"
+Common_Text_TradeHeldItemPC:
+	.string "Your POKéMON's {STR_VAR_1}\n"
+	.string "was returned to your item PC.$"
+Common_Text_TradeHeldItemFull:
+	.string "Make room in your BAG or item PC\n"
+	.string "for the held item before trading.$"
+Common_Text_TradeMailAttached:
+	.string "Please remove your POKéMON's MAIL\n"
+	.string "before trading. Keep its message safe!$"

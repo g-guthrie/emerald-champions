@@ -10,13 +10,16 @@ LilycoveCity_Harbor_EventScript_FerryAttendant::
 	lock
 	faceplayer
 	goto_if_unset FLAG_BADGE06_GET, LilycoveCity_Harbor_EventScript_FerryUnavailable
-	goto_if_unset FLAG_RECEIVED_SS_TICKET, LilycoveCity_Harbor_EventScript_NoTicket
+	call LilycoveCity_Harbor_EventScript_BriefExpedition
+	call_if_unset FLAG_LATIOS_OR_LATIAS_ROAMING, LilycoveCity_Harbor_EventScript_LatiReport
+	call LilycoveCity_Harbor_EventScript_ReportMew
 	call LilycoveCity_Harbor_EventScript_GetEonTicketState
 	call LilycoveCity_Harbor_EventScript_GetAuroraTicketState
 	call LilycoveCity_Harbor_EventScript_GetOldSeaMapState
 	call LilycoveCity_Harbor_EventScript_GetMysticTicketState
 	call LilycoveCity_Harbor_EventScript_GetFirstTimeShowingTicket
 	call LilycoveCity_Harbor_EventScript_GetHasTicketsState
+	goto_if_eq VAR_TEMP_E, 2, LilycoveCity_Harbor_EventScript_EonTicketFirstTime
 	goto_if_eq VAR_TEMP_C, 2, LilycoveCity_Harbor_EventScript_OldSeaMapFirstTime
 	goto_if_eq VAR_TEMP_B, 1, LilycoveCity_Harbor_EventScript_EonTicketFirstTime
 	goto_if_eq VAR_TEMP_B, 2, LilycoveCity_Harbor_EventScript_AuroraTicketFirstTime
@@ -100,8 +103,7 @@ LilycoveCity_Harbor_EventScript_GoToBattleFrontier::
 LilycoveCity_Harbor_EventScript_GetEonTicketState::
 	setvar VAR_TEMP_E, 0
 	goto_if_unset FLAG_ENABLE_SHIP_SOUTHERN_ISLAND, Common_EventScript_NopReturn
-	checkitem ITEM_EON_TICKET
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_NopReturn
+	goto_if_unset FLAG_EC_EARNED_EON_TICKET, Common_EventScript_NopReturn
 	setvar VAR_TEMP_E, 1
 	goto_if_set FLAG_SHOWN_EON_TICKET, Common_EventScript_NopReturn
 	setvar VAR_TEMP_E, 2
@@ -110,8 +112,7 @@ LilycoveCity_Harbor_EventScript_GetEonTicketState::
 LilycoveCity_Harbor_EventScript_GetAuroraTicketState::
 	setvar VAR_TEMP_D, 0
 	goto_if_unset FLAG_ENABLE_SHIP_BIRTH_ISLAND, Common_EventScript_NopReturn
-	checkitem ITEM_AURORA_TICKET
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_NopReturn
+	goto_if_unset FLAG_EC_EARNED_AURORA_TICKET, Common_EventScript_NopReturn
 	setvar VAR_TEMP_D, 1
 	goto_if_set FLAG_SHOWN_AURORA_TICKET, Common_EventScript_NopReturn
 	setvar VAR_TEMP_D, 2
@@ -120,8 +121,7 @@ LilycoveCity_Harbor_EventScript_GetAuroraTicketState::
 LilycoveCity_Harbor_EventScript_GetOldSeaMapState::
 	setvar VAR_TEMP_C, 0
 	goto_if_unset FLAG_ENABLE_SHIP_FARAWAY_ISLAND, Common_EventScript_NopReturn
-	checkitem ITEM_OLD_SEA_MAP
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_NopReturn
+	goto_if_unset FLAG_EC_EARNED_OLD_SEA_MAP, Common_EventScript_NopReturn
 	setvar VAR_TEMP_C, 1
 	goto_if_set FLAG_SHOWN_OLD_SEA_MAP, Common_EventScript_NopReturn
 	setvar VAR_TEMP_C, 2
@@ -433,27 +433,42 @@ LilycoveCity_Harbor_EventScript_Sailor::
 	end
 
 LilycoveCity_Harbor_EventScript_SailorFerryAvailable::
-	msgbox LilycoveCity_Harbor_Text_SailorFerryAvailable, MSGBOX_DEFAULT
+	call LilycoveCity_Harbor_EventScript_BriefExpedition
+	call LilycoveCity_Harbor_EventScript_ReportMew
 	call_if_unset FLAG_RECEIVED_SS_TICKET, LilycoveCity_Harbor_EventScript_GiveSSTicket
 	call_if_unset FLAG_LATIOS_OR_LATIAS_ROAMING, LilycoveCity_Harbor_EventScript_LatiReport
 	checkitem ITEM_EON_TICKET, 1
 	call_if_eq VAR_RESULT, FALSE, LilycoveCity_Harbor_EventScript_GiveEonTicket
-	setflag FLAG_ENABLE_SHIP_SOUTHERN_ISLAND
 	checkitem ITEM_MYSTIC_TICKET, 1
 	call_if_eq VAR_RESULT, FALSE, LilycoveCity_Harbor_EventScript_GiveMysticTicket
 	setflag FLAG_ENABLE_SHIP_NAVEL_ROCK
 	setflag FLAG_RECEIVED_MYSTIC_TICKET
-	checkitem ITEM_AURORA_TICKET, 1
-	call_if_eq VAR_RESULT, FALSE, LilycoveCity_Harbor_EventScript_GiveAuroraTicket
-	setflag FLAG_ENABLE_SHIP_BIRTH_ISLAND
-	setflag FLAG_RECEIVED_AURORA_TICKET
-	checkitem ITEM_OLD_SEA_MAP, 1
-	call_if_eq VAR_RESULT, FALSE, LilycoveCity_Harbor_EventScript_GiveOldSeaMap
-	setflag FLAG_ENABLE_SHIP_FARAWAY_ISLAND
-	setflag FLAG_RECEIVED_OLD_SEA_MAP
+	call_if_set FLAG_EC_EARNED_AURORA_TICKET, LilycoveCity_Harbor_EventScript_TryDeliverAuroraTicket
+	call_if_unset FLAG_RECEIVED_OLD_SEA_MAP, LilycoveCity_Harbor_EventScript_GiveOldSeaMap
 	msgbox LilycoveCity_Harbor_Text_ChampionPassesReady, MSGBOX_DEFAULT
 	release
 	end
+
+LilycoveCity_Harbor_EventScript_TryDeliverAuroraTicket::
+	call_if_unset FLAG_RECEIVED_AURORA_TICKET, LilycoveCity_Harbor_EventScript_GiveAuroraTicket
+	return
+
+LilycoveCity_Harbor_EventScript_BriefExpedition::
+	goto_if_set FLAG_EC_EARNED_SS_TICKET, Common_EventScript_NopReturn
+	setflag FLAG_EC_EARNED_SS_TICKET
+	setflag FLAG_EC_EARNED_EON_TICKET
+	setflag FLAG_EC_EARNED_OLD_SEA_MAP
+	setflag FLAG_ENABLE_SHIP_SOUTHERN_ISLAND
+	setflag FLAG_ENABLE_SHIP_FARAWAY_ISLAND
+	msgbox LilycoveCity_Harbor_Text_ExpeditionBriefing, MSGBOX_DEFAULT
+	return
+
+LilycoveCity_Harbor_EventScript_ReportMew::
+	goto_if_unset FLAG_EC_RESOLVED_MEW, Common_EventScript_NopReturn
+	goto_if_set FLAG_EC_REPORT_C36_COMPLETE, Common_EventScript_NopReturn
+	completemilestone FLAG_EC_REPORT_C36_COMPLETE
+	msgbox LilycoveCity_Harbor_Text_MewReport, MSGBOX_DEFAULT
+	return
 
 LilycoveCity_Harbor_EventScript_GiveEonTicket::
 	giveitem ITEM_EON_TICKET
@@ -468,11 +483,13 @@ LilycoveCity_Harbor_EventScript_GiveMysticTicket::
 LilycoveCity_Harbor_EventScript_GiveAuroraTicket::
 	giveitem ITEM_AURORA_TICKET
 	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_Harbor_EventScript_PassesBagFull
+	setflag FLAG_RECEIVED_AURORA_TICKET
 	return
 
 LilycoveCity_Harbor_EventScript_GiveOldSeaMap::
 	giveitem ITEM_OLD_SEA_MAP
 	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_Harbor_EventScript_PassesBagFull
+	setflag FLAG_RECEIVED_OLD_SEA_MAP
 	return
 
 LilycoveCity_Harbor_EventScript_PassesBagFull::
@@ -631,18 +648,34 @@ LilycoveCity_Harbor_Text_SailorFerryAvailable:
 	.string "POKéMON as your total wins grow.$"
 
 LilycoveCity_Harbor_Text_ChampionPassesReady:
-	.string "Your island routes are active.\n"
-	.string "Show the attendant a pass to\l"
-	.string "choose a destination.\p"
-	.string "Explore for LATIAS or LATIOS,\n"
-	.string "LUGIA, HO-OH, DEOXYS and MEW. You\l"
-	.string "can meet them during your GYM\l"
-	.string "journey.$"
+	.string "Your expedition papers are ready.\n"
+	.string "BIRTH ISLAND clearance follows\l"
+	.string "the SPACE CENTER investigation.$"
 
 LilycoveCity_Harbor_Text_ChampionPassesBagFull:
-	.string "Your BAG cannot hold the next\n"
-	.string "pass. Make room and speak to me\l"
-	.string "again.$"
+	.string "Your travel rights are recorded.\n"
+	.string "You can board now. Make room and\l"
+	.string "return for the remaining papers.$"
+
+LilycoveCity_Harbor_Text_ExpeditionBriefing:
+	.string "DEVON and CAPT. STERN have booked\n"
+	.string "your research passage.\p"
+	.string "SOUTHERN ISLAND is our first stop.\n"
+	.string "The old sea chart begins where\l"
+	.string "the regular charts end.\p"
+	.string "Your S.S. TICKET, EON TICKET and\n"
+	.string "OLD SEA MAP rights are recorded.\l"
+	.string "The sailor holds your papers.\p"
+	.string "Return here with the findings\n"
+	.string "from FARAWAY ISLAND.$"
+
+LilycoveCity_Harbor_Text_MewReport:
+	.string "We came looking for a record and\n"
+	.string "found a living part of it.\p"
+	.string "This connects to DEWFORD's old\n"
+	.string "research. I'll send word to DEVON.\p"
+	.string "Your report earns ¥12,000.\n"
+	.string "Your level cap is now 64.$"
 
 LilycoveCity_Harbor_EventScript_GiveSSTicket::
 	giveitem ITEM_SS_TICKET

@@ -145,10 +145,14 @@ FarawayIsland_Interior_EventScript_Mew::
 
 FarawayIsland_Interior_EventScript_MewCaught::
 	setflag FLAG_CAUGHT_MEW
+	setflag FLAG_EC_RESOLVED_MEW
+	msgbox FarawayIsland_Interior_Text_ResearchRecord, MSGBOX_DEFAULT
 	release
 	end
 
 FarawayIsland_Interior_EventScript_MewDefeated::
+	setflag FLAG_EC_RESOLVED_MEW
+	msgbox FarawayIsland_Interior_Text_ResearchRecord, MSGBOX_DEFAULT
 	goto Common_EventScript_LegendaryResting
 	end
 
@@ -190,3 +194,8 @@ FarawayIsland_Interior_EventScript_HideMewWhenGrassCut::
 
 FarawayIsland_Interior_Text_TheFeelingOfBeingWatchedFaded:
 	.string "The feeling of being watched faded…$"
+
+FarawayIsland_Interior_Text_ResearchRecord:
+	.string "A living part of the old record…\n"
+	.string "Take these findings back to the\l"
+	.string "LILYCOVE HARBOR expedition team.$"

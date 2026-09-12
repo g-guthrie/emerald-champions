@@ -204,10 +204,10 @@ AshenWoods_EventScript_Alannah::
 	msgbox AshenWoods_Text_AlannahAfter, MSGBOX_AUTOCLOSE
 	end
 AshenWoods_EventScript_Martin::
-	trainerbattle_double TRAINER_MARTIN, AshenWoods_Text_MartinIntro, AshenWoods_Text_MartinDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	goto_if_set FLAG_EC_CAUGHT_MOLTRES, AshenWoods_EventScript_MoltresCaught
-	msgbox AshenWoods_Text_MartinAfter, MSGBOX_AUTOCLOSE
+	msgbox AshenWoods_Text_MartinAfter, MSGBOX_NPC
 	end
+
 AshenWoods_EventScript_Roman::
 	trainerbattle_double TRAINER_ROMAN, AshenWoods_Text_RomanIntro, AshenWoods_Text_RomanDefeat, EmeraldChampions_Text_NeedTwoPokemon
 	msgbox AshenWoods_Text_RomanAfter, MSGBOX_AUTOCLOSE
@@ -217,6 +217,18 @@ AshenWoods_EventScript_Elmer::
 	msgbox AshenWoods_Text_ElmerAfter, MSGBOX_AUTOCLOSE
 	end
 AshenWoods_EventScript_Caretaker::
+	goto_if_set FLAG_EC_RESOLVED_MOLTRES, AshenWoods_EventScript_RidgeQuiet
+	goto_if_unset FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY, AshenWoods_EventScript_CaretakerBeforeRescue
+	goto_if_lt VAR_CHANSEY_NURSE_STATE, 7, AshenWoods_EventScript_CaretakerBeforeRescue
+	setflag FLAG_LANDMARK_EMBER_PATH
+	msgbox AshenWoods_Text_RidgeBriefing, MSGBOX_NPC
+	end
+
+AshenWoods_EventScript_RidgeQuiet::
+	msgbox AshenWoods_Text_RidgeQuiet, MSGBOX_NPC
+	end
+
+AshenWoods_EventScript_CaretakerBeforeRescue::
 	msgbox AshenWoods_Text_Caretaker, MSGBOX_NPC
 	end
 
@@ -229,11 +241,6 @@ AshenWoods_Text_AlannahDefeat:
 AshenWoods_Text_AlannahAfter:
 	.string "The forest rewards adaptation, not one\n"
 	.string "perfect type chart.$"
-AshenWoods_Text_MartinIntro:
-	.string "A firebird circles whenever the sun\n"
-	.string "breaks through. Face the whole blaze!$"
-AshenWoods_Text_MartinDefeat:
-	.string "You extinguished the wildfire cleanly.$"
 AshenWoods_Text_MartinAfter:
 	.string "MOLTRES roosts in EMBER PATH.\n"
 	.string "Follow the trail and keep your eyes\l"
@@ -269,10 +276,24 @@ AshenWoods_Text_Caretaker:
 	.string "they are right.$"
 
 AshenWoods_EventScript_MoltresCaught::
-	msgbox AshenWoods_Text_MoltresCaught, MSGBOX_AUTOCLOSE
+	msgbox AshenWoods_Text_MoltresCaught, MSGBOX_NPC
 	end
 
 AshenWoods_Text_MoltresCaught:
 	.string "MOLTRES found a partner in you!\p"
 	.string "EMBER PATH still glows at sunset.\n"
 	.string "I always look up, out of habit.$"
+
+AshenWoods_Text_RidgeBriefing:
+	.string "The ash has stopped falling, but\n"
+	.string "the ground hasn't settled.\p"
+	.string "Follow the old trail into EMBER PATH.\n"
+	.string "Something is keeping the ridge hot.\p"
+	.string "If you find a roost, give it room.$"
+
+AshenWoods_Text_RidgeQuiet:
+	.string "The ridge is quiet again. You found\n"
+	.string "what was stirring it.\p"
+	.string "Take what you learned back to the\n"
+	.string "researchers. They need more than\l"
+	.string "another weather report.$"

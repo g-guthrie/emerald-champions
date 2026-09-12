@@ -1,5 +1,10 @@
 CaveOfOrigin_DianciesRoom_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, CaveOfOrigin_DianciesRoom_OnTransition
 	.byte 0
+
+CaveOfOrigin_DianciesRoom_OnTransition:
+	setflag FLAG_EC_SURVEYED_ORIGIN_CHAMBER
+	end
 
 CaveOfOrigin_DianciesRoom_EventScript_WallaceExhibition::
 	lock

@@ -210,8 +210,8 @@ BattleFrontier_ExchangeServiceCorner_EventScript_ChooseSupply::
 	special ShowScrollableMultichoice
 	special CloseFrontierExchangeCornerItemIconWindow
 	switch VAR_RESULT
-	case 0, BattleFrontier_ExchangeServiceCorner_EventScript_PPUp
-	case 1, BattleFrontier_ExchangeServiceCorner_EventScript_PPMax
+	case 0, BattleFrontier_ExchangeServiceCorner_EventScript_QuickBall
+	case 1, BattleFrontier_ExchangeServiceCorner_EventScript_TimerBall
 	case 2, BattleFrontier_ExchangeServiceCorner_EventScript_MaxRevive
 	case 3, BattleFrontier_ExchangeServiceCorner_EventScript_SacredAsh
 	case 4, BattleFrontier_ExchangeServiceCorner_EventScript_DreamBall
@@ -227,12 +227,12 @@ BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseSupply::
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize
 	end
 
-BattleFrontier_ExchangeServiceCorner_EventScript_PPUp::
-	setitemandprice ITEM_PP_UP, 4
+BattleFrontier_ExchangeServiceCorner_EventScript_QuickBall::
+	setitemandprice ITEM_QUICK_BALL, 2
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseSupply
 
-BattleFrontier_ExchangeServiceCorner_EventScript_PPMax::
-	setitemandprice ITEM_PP_MAX, 12
+BattleFrontier_ExchangeServiceCorner_EventScript_TimerBall::
+	setitemandprice ITEM_TIMER_BALL, 2
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseSupply
 
 BattleFrontier_ExchangeServiceCorner_EventScript_MaxRevive::
@@ -279,6 +279,9 @@ BattleFrontier_ExchangeServiceCorner_EventScript_ChooseEvolutionItem::
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseEvolutionItem::
+	copyvar VAR_0x8004, VAR_0x8009
+	special CheckEmeraldChampionsRedundantPurchase
+	goto_if_eq VAR_RESULT, TRUE, BattleFrontier_ExchangeServiceCorner_EventScript_AlreadyOwned
 	bufferitemname STR_VAR_1, VAR_0x8009
 	msgbox BattleFrontier_ExchangeServiceCorner_Text_ConfirmPurchase, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseEvolutionItem
@@ -286,10 +289,6 @@ BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseEvolutionItem::
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_LinkingCord::
-	checkitem ITEM_LINKING_CORD
-	goto_if_eq VAR_RESULT, TRUE, BattleFrontier_ExchangeServiceCorner_EventScript_AlreadyOwnCord
-	checkpcitem ITEM_LINKING_CORD
-	goto_if_eq VAR_RESULT, TRUE, BattleFrontier_ExchangeServiceCorner_EventScript_AlreadyOwnCord
 	setitemandprice ITEM_LINKING_CORD, 8
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseEvolutionItem
 
@@ -462,11 +461,13 @@ BattleFrontier_ExchangeServiceCorner_Text_LargeDollDesc::
 	.string "A large DOLL.\n"
 	.string "Place it on a mat or a desk.$"
 
-BattleFrontier_ExchangeServiceCorner_Text_PPUpDesc::
-	.string "Raises the PP of one selected move.$"
+BattleFrontier_ExchangeServiceCorner_Text_QuickBallDesc::
+	.string "A BALL that works best\n"
+	.string "at the start of an encounter.$"
 
-BattleFrontier_ExchangeServiceCorner_Text_PPMaxDesc::
-	.string "Fully raises one selected move's PP.$"
+BattleFrontier_ExchangeServiceCorner_Text_TimerBallDesc::
+	.string "A BALL that works better\n"
+	.string "as the encounter lasts longer.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_MaxReviveDesc::
 	.string "Revives one POKéMON with full HP.$"
@@ -508,9 +509,10 @@ BattleFrontier_ExchangeServiceCorner_Text_TartAppleDesc::
 BattleFrontier_ExchangeServiceCorner_Text_PrismScaleDesc::
 	.string "A shining scale that evolves FEEBAS.$"
 
-BattleFrontier_ExchangeServiceCorner_EventScript_AlreadyOwnCord:
-	msgbox BattleFrontier_ExchangeServiceCorner_Text_AlreadyOwnCord, MSGBOX_DEFAULT
+BattleFrontier_ExchangeServiceCorner_EventScript_AlreadyOwned::
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_AlreadyOwned, MSGBOX_DEFAULT
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_ChooseEvolutionItem
-BattleFrontier_ExchangeServiceCorner_Text_AlreadyOwnCord:
-	.string "You already own a LINKING CORD.\n"
-	.string "It's reusable, so save your points!$"
+
+BattleFrontier_ExchangeServiceCorner_Text_AlreadyOwned:
+	.string "You already own a {STR_VAR_1}.\n"
+	.string "There is no need to buy another.$"

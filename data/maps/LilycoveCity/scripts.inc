@@ -11,7 +11,7 @@ LilycoveCity_EventScript_AltarianiteKeeper::
 	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_EventScript_AltarianiteKeeperNeedsAltaria
 	msgbox LilycoveCity_Text_AltarianiteKeeperOffer, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, LilycoveCity_EventScript_AltarianiteKeeperDecline
-	giveitem ITEM_ALTARIANITE
+	giveuniqueitem ITEM_ALTARIANITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_WINONA_ALTARIANITE
 LilycoveCity_EventScript_AltarianiteKeeperExplain::

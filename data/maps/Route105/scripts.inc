@@ -40,13 +40,11 @@ Route105_EventScript_Dominik::
 	end
 
 Route105_EventScript_Beverly::
-	trainerbattle_double TRAINER_BEVERLY, Route105_Text_BeverlyIntro, Route105_Text_BeverlyDefeated, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route105_Text_PostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route105_Text_PostBattle, MSGBOX_NPC
 	end
 
 Route105_EventScript_Imani::
-	trainerbattle_double TRAINER_IMANI, Route105_Text_ImaniIntro, Route105_Text_ImaniDefeated, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route105_Text_ImaniPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route105_Text_ImaniPostBattle, MSGBOX_NPC
 	end
 
 Route105_EventScript_Josue::
@@ -55,24 +53,7 @@ Route105_EventScript_Josue::
 	end
 
 Route105_EventScript_Andres::
-	trainerbattle_double TRAINER_ANDRES_1, Route105_Text_AndresIntro, Route105_Text_AndresDefeated, EmeraldChampions_Text_NeedTwoPokemon, Route105_EventScript_AndresRegisterMatchCallAfterBattle
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route105_EventScript_AndresRematch
-	msgbox Route105_Text_AndresPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route105_EventScript_AndresRegisterMatchCallAfterBattle::
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route105_Text_AndresRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_ANDRES_1
-	release
-	end
-
-Route105_EventScript_AndresRematch::
-	trainerbattle_rematch_double TRAINER_ANDRES_1, Route105_Text_AndresRematchIntro, Route105_Text_AndresRematchDefeated, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route105_Text_AndresRematchPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route105_Text_AndresPostBattle, MSGBOX_NPC
 	end
 
 Route104_Text_DadPokenavCall:

@@ -379,7 +379,7 @@ u32 ScriptGiveMonParameterized(u8 side, u8 slot, struct PokemonTemplate *monTemp
     {
         return MON_CANT_GIVE;
     }
-    CopyMon(&gParties[B_TRAINER_OPPONENT_A][slot], &mon, sizeof(struct Pokemon));
+    memcpy(&gParties[B_TRAINER_OPPONENT_A][slot], &mon, sizeof(struct Pokemon));
     return MON_GIVEN_TO_PARTY;
 }
 

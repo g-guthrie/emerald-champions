@@ -80,6 +80,8 @@ Route119_WeatherInstitute_2F_EventScript_ShellyDefeated::
 	end
 
 Route119_WeatherInstitute_2F_EventScript_ReceiveCastform::
+	special LocateEmeraldChampionsCastform
+	goto_if_ne VAR_RESULT, EC_CASTFORM_NONE, Route119_WeatherInstitute_2F_EventScript_OwnedCastform
 	msgbox Route119_WeatherInstitute_2F_Text_ThanksPleaseTakePokemon, MSGBOX_DEFAULT
 	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_CASTFORM_NORMAL
 	setvar VAR_0x8004, SPECIES_CASTFORM_NORMAL
@@ -127,11 +129,16 @@ Route119_WeatherInstitute_2F_EventScript_ExplainCastform::
 	end
 
 Route119_WeatherInstitute_2F_EventScript_TryGiveRevealGlass::
+	goto_if_set FLAG_EC_RECEIVED_REVEAL_GLASS, Route119_WeatherInstitute_2F_EventScript_OfferSurvey
 	checkitem ITEM_REVEAL_GLASS, 1
-	goto_if_eq VAR_RESULT, TRUE, Route119_WeatherInstitute_2F_EventScript_Release
+	goto_if_eq VAR_RESULT, TRUE, Route119_WeatherInstitute_2F_EventScript_RecordRevealGlass
 	giveitem ITEM_REVEAL_GLASS
 	goto_if_eq VAR_RESULT, FALSE, Route119_WeatherInstitute_2F_EventScript_RevealGlassBagFull
 	msgbox Route119_WeatherInstitute_2F_Text_RevealGlassPurpose, MSGBOX_DEFAULT
+Route119_WeatherInstitute_2F_EventScript_RecordRevealGlass::
+	setflag FLAG_EC_RECEIVED_REVEAL_GLASS
+	goto Route119_WeatherInstitute_2F_EventScript_OfferSurvey
+	end
 
 Route119_WeatherInstitute_2F_EventScript_Release::
 	release
@@ -218,18 +225,78 @@ Route119_WeatherInstitute_2F_Movement_ScientistApproachPlayer:
 Route119_WeatherInstitute_2F_EventScript_WeatherScientist::
 	lock
 	faceplayer
-	goto_if_unset FLAG_RECEIVED_CASTFORM, Route119_WeatherInstitute_2F_EventScript_ReceiveCastform
-	checkitem ITEM_REVEAL_GLASS, 1
-	goto_if_eq VAR_RESULT, FALSE, Route119_WeatherInstitute_2F_EventScript_GiveRevealGlass
-	goto Route119_WeatherInstitute_2F_EventScript_ScientistMentionWeather
+	goto_if_unset FLAG_HIDE_ROUTE_119_TEAM_AQUA, Route119_WeatherInstitute_2F_EventScript_ScientistMentionWeather
+	goto_if_set FLAG_EC_REPORT_C30_COMPLETE, Route119_WeatherInstitute_2F_EventScript_TryGiveRevealGlass
+	goto Route119_WeatherInstitute_2F_EventScript_ReceiveCastform
 	end
 
-Route119_WeatherInstitute_2F_EventScript_GiveRevealGlass::
-	giveitem ITEM_REVEAL_GLASS
-	goto_if_eq VAR_RESULT, FALSE, Route119_WeatherInstitute_2F_EventScript_RevealGlassBagFull
-	msgbox Route119_WeatherInstitute_2F_Text_RevealGlassPurpose, MSGBOX_DEFAULT
-	goto Route119_WeatherInstitute_2F_EventScript_ScientistMentionWeather
+Route119_WeatherInstitute_2F_EventScript_OwnedCastform::
+	setflag FLAG_RECEIVED_CASTFORM
+	switch VAR_RESULT
+	case EC_CASTFORM_PARTY, Route119_WeatherInstitute_2F_EventScript_TryGiveRevealGlass
+	case EC_CASTFORM_BOX, Route119_WeatherInstitute_2F_EventScript_CastformInBox
+	case EC_CASTFORM_DAYCARE, Route119_WeatherInstitute_2F_EventScript_CastformInDaycare
+	msgbox Route119_WeatherInstitute_2F_Text_CastformEgg, MSGBOX_DEFAULT
+	goto Route119_WeatherInstitute_2F_EventScript_OfferSurvey
 	end
+
+Route119_WeatherInstitute_2F_EventScript_CastformInBox::
+	msgbox Route119_WeatherInstitute_2F_Text_CastformInBox, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, Route119_WeatherInstitute_2F_EventScript_OfferSurvey
+Route119_WeatherInstitute_2F_EventScript_OpenStorage::
+	special ShowPokemonStorageSystemPC
+	goto Route119_WeatherInstitute_2F_EventScript_Release
+	end
+
+Route119_WeatherInstitute_2F_EventScript_CastformInDaycare::
+	msgbox Route119_WeatherInstitute_2F_Text_CastformInDaycare, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, Route119_WeatherInstitute_2F_EventScript_OfferSurvey
+	getpartysize
+	goto_if_eq VAR_RESULT, PARTY_SIZE, Route119_WeatherInstitute_2F_EventScript_OpenStorage
+	special LocateEmeraldChampionsCastform
+	special TakePokemonFromDaycare
+	msgbox Route119_WeatherInstitute_2F_Text_CastformRetrieved, MSGBOX_DEFAULT
+	goto Route119_WeatherInstitute_2F_EventScript_TryGiveRevealGlass
+	end
+
+Route119_WeatherInstitute_2F_EventScript_OfferSurvey::
+	goto_if_set FLAG_EC_REPORT_C30_COMPLETE, Route119_WeatherInstitute_2F_EventScript_ScientistMentionWeather
+	msgbox Route119_WeatherInstitute_2F_Text_OfferSurvey, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, Route119_WeatherInstitute_2F_EventScript_Release
+	closemessage
+	warp MAP_ROUTE111_RUINS_EXTERIOR, 13, 12
+	waitstate
+	releaseall
+	end
+
+Route119_WeatherInstitute_2F_Text_CastformInBox:
+	.string "Your CASTFORM is in BOX {STR_VAR_1}.\n"
+	.string "Open the PC to bring it along?$"
+
+Route119_WeatherInstitute_2F_Text_CastformInDaycare:
+	.string "Your CASTFORM is at the DAY CARE.\n"
+	.string "Shall I arrange its return?\l"
+	.string "The Institute covers the fee.\p"
+	.string "If your party is full, we'll open\n"
+	.string "the PC first. Speak to me again\l"
+	.string "when you have room.$"
+
+Route119_WeatherInstitute_2F_Text_CastformRetrieved:
+	.string "CASTFORM has returned to your\n"
+	.string "party, ready for the survey.$"
+
+Route119_WeatherInstitute_2F_Text_CastformEgg:
+	.string "You already own a CASTFORM Egg.\n"
+	.string "Hatch it and bring CASTFORM along\l"
+	.string "for the survey.$"
+
+Route119_WeatherInstitute_2F_Text_OfferSurvey:
+	.string "Our research flier can take you\n"
+	.string "to the elevated desert ruins.\p"
+	.string "Bring CASTFORM to our researcher.\n"
+	.string "He'll arrange the return trip,\l"
+	.string "even if you need another party.\p"
+	.string "Leave for the weather survey?$"
 
 Route119_WeatherInstitute_2F_Text_Grunt2Intro:
 	.string "The researchers say CASTFORM\n"

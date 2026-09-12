@@ -203,6 +203,7 @@ void BufferCurrentMapRouteSignSpecies(void)
     {
         const struct WildPokemonInfo *info;
         u8 count;
+        u16 map = ((u8)gSaveBlock1Ptr->location.mapGroup << 8) | (u8)gSaveBlock1Ptr->location.mapNum;
 
         info = GetRouteSignInfo(headerId, WILD_AREA_LAND);
         count = CollectRouteSignSpecies(entries, info, 0, NUM_LAND_MONS_ENCOUNTER_SLOTS);
@@ -225,7 +226,6 @@ void BufferCurrentMapRouteSignSpecies(void)
         for (enum LegendarySignId id = 0; id < LEGENDARY_SIGN_COUNT; id++)
         {
             const struct LegendarySignDefinition *sign = &gLegendarySignDefinitions[id];
-            u16 map = ((u8)gSaveBlock1Ptr->location.mapGroup << 8) | (u8)gSaveBlock1Ptr->location.mapNum;
             if (sign->mapId == map && sign->source == LEGENDARY_SOURCE_NATIVE_WILD)
                 entries[count++].species = sign->species;
         }
@@ -825,6 +825,7 @@ bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, enum WildPok
     u8 level;
     enum Species species;
     bool32 rareLegendary;
+    u32 levelCap;
     if (sSweetScentActive && (area == WILD_AREA_LAND || area == WILD_AREA_WATER))
         wildMonIndex = ChooseSweetScentWildMonIndex(wildMonInfo->wildPokemon, area);
     else
@@ -896,12 +897,13 @@ bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, enum WildPok
     }
 
     level = ChooseWildMonLevel(wildMonInfo->wildPokemon, wildMonIndex, area);
+    levelCap = GetCurrentLevelCap();
     if (rareLegendary || IsLegendarySignOrdinaryWildSpecies(species))
-        level = min(MAX_LEVEL, GetCurrentLevelCap());
+        level = min(MAX_LEVEL, levelCap);
     // Emerald Champions: nothing in the wild is ever above the live level cap.
     // Table levels describe the route; an early Old Rod cannot pull a Lv 45
     // Qwilfish out of Route 103 when the cap is 14.
-    level = min(level, GetCurrentLevelCap());
+    level = min(level, levelCap);
     if (flags & WILD_CHECK_REPEL && !IsWildLevelAllowedByRepel(level))
         return FALSE;
     if (gMapHeader.mapLayoutId != LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_WILD_MONS && flags & WILD_CHECK_KEEN_EYE && !IsAbilityAllowingEncounter(level))

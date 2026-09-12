@@ -23,6 +23,7 @@
 #include "fldeff_misc.h"
 #include "follower_npc.h"
 #include "item_menu.h"
+#include "item.h"
 #include "link.h"
 #include "match_call.h"
 #include "metatile_behavior.h"
@@ -467,6 +468,14 @@ static const u8 *GetInteractedBackgroundEventScript(struct MapPosition *position
         gSpecialVar_0x8004 = bgEvent->bgUnion.hiddenItem.hiddenItemId + FLAG_HIDDEN_ITEMS_START;
         gSpecialVar_0x8005 = bgEvent->bgUnion.hiddenItem.item;
         gSpecialVar_0x8009 = bgEvent->bgUnion.hiddenItem.quantity;
+        if (gSpecialVar_0x8005 == ITEM_EVERSTONE
+            && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_GRANITE_CAVE_B2F)
+            && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_GRANITE_CAVE_B2F)
+            && PlayerOwnsItem(ITEM_EVERSTONE))
+        {
+            gSpecialVar_0x8005 = ITEM_DUSK_BALL;
+            gSpecialVar_0x8009 = 10;
+        }
         if (FlagGet(gSpecialVar_0x8004) == TRUE)
             return NULL;
         return EventScript_HiddenItemScript;

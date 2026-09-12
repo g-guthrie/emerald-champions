@@ -101,7 +101,7 @@ MossdeepCity_Gym_EventScript_TateAndLizaDefeated::
 	end
 
 MossdeepCity_Gym_EventScript_GiveMetagrossite2::
-	giveitem ITEM_METAGROSSITE
+	giveuniqueitem ITEM_METAGROSSITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	msgbox MossdeepCity_Gym_Text_ExplainMetagrossite, MSGBOX_DEFAULT
 	call_if_lt VAR_MOSSDEEP_SPACE_CENTER_STATE, 3, MossdeepCity_Gym_EventScript_SpaceCenterHandoff
@@ -110,7 +110,7 @@ MossdeepCity_Gym_EventScript_GiveMetagrossite2::
 	end
 
 MossdeepCity_Gym_EventScript_GiveMetagrossite::
-	giveitem ITEM_METAGROSSITE
+	giveuniqueitem ITEM_METAGROSSITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 	msgbox MossdeepCity_Gym_Text_ExplainMetagrossite, MSGBOX_DEFAULT
 	call_if_lt VAR_MOSSDEEP_SPACE_CENTER_STATE, 3, MossdeepCity_Gym_EventScript_SpaceCenterHandoff

@@ -53,8 +53,7 @@ SSTidalRooms_EventScript_Lea::
 	end
 
 SSTidalRooms_EventScript_Garret::
-	trainerbattle_double TRAINER_GARRET, SSTidalRooms_Text_GarretIntro, SSTidalRooms_Text_GarretDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox SSTidalRooms_Text_GarretPostBattle, MSGBOX_AUTOCLOSE
+	msgbox SSTidalRooms_Text_GarretPostBattle, MSGBOX_NPC
 	end
 
 SSTidalRooms_EventScript_Naomi::
@@ -132,14 +131,6 @@ SSTidalRooms_Text_LeaPostBattle:
 SSTidalRooms_Text_LeaNotEnoughMons:
 	.string "LEA: I wanted to battle…\n"
 	.string "Bring two battle-ready POKéMON!$"
-
-SSTidalRooms_Text_GarretIntro:
-	.string "Ah, you've come just in time.\p"
-	.string "I'm bored, you see.\n"
-	.string "You may entertain me.$"
-
-SSTidalRooms_Text_GarretDefeat:
-	.string "…That will do.$"
 
 SSTidalRooms_Text_GarretPostBattle:
 	.string "Perhaps I shall get Father to acquire\n"

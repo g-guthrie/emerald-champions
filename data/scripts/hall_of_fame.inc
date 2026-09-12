@@ -1,6 +1,6 @@
 EverGrandeCity_HallOfFame_EventScript_SetGameClearFlags::
 	special SetChampionSaveWarp
-	setflag FLAG_IS_CHAMPION
+	completemilestone FLAG_IS_CHAMPION
 	call_if_eq VAR_FOSSIL_MANIAC_STATE, 0, EverGrandeCity_HallOfFame_EventScript_SetDesertUnderpassCommentReady
 	clearflag FLAG_HIDE_LILYCOVE_MOTEL_GAME_DESIGNERS
 	call EverGrandeCity_HallOfFame_EventScript_ResetEliteFour
@@ -28,7 +28,7 @@ EverGrandeCity_HallOfFame_EventScript_SetDesertUnderpassCommentReady::
 	return
 
 EverGrandeCity_HallOfFame_EventScript_ShowStevensHouseBeldum::
-	clearflag FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_BELDUM_POKEBALL
+	@ Beldum is offered after the Space Center; its receipt persists.
 	return
 
 EverGrandeCity_HallOfFame_EventScript_ReadyReceiveSSTicketEvent::

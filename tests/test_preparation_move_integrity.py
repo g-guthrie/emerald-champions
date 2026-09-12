@@ -18,6 +18,8 @@ from verify_trainer_ability_legality import preprocess_species_info, SPECIES_MAR
 
 class PreparationMoveIntegrity(unittest.TestCase):
     def test_historical_and_preset_moves_are_individually_learnable(self):
+        subprocess.run([sys.executable, "tools/learnset_helpers/make_teachables.py", "--preparation"],
+                       cwd=ROOT, check=True, timeout=60)
         species = preprocess_species_info().split("const struct SpeciesInfo gSpeciesInfo[]", 1)[1]
         markers = list(SPECIES_MARKER.finditer(species))
         pointers = []
@@ -28,14 +30,14 @@ class PreparationMoveIntegrity(unittest.TestCase):
                 pointers.append(f"[{marker[1]}] = {{{form[1]}}},")
 
         header = (ROOT / "include/emerald_champions_battle_sets.h").read_text()
-        structs = header[header.index("#define EMERALD_CHAMPIONS_SET_NAME_LENGTH"):
-                         header.index("// Stat Points")]
+        structs = header[header.index("struct EmeraldChampionsBattleSet\n"):
+                         header.index("// EVs are shown")]
         sets = (ROOT / "src/emerald_champions_battle_sets.c").read_text()
         lookup = sets[sets.index("static bool32 IsValidBattleFormat("):
-                      sets.index("// With no outputs")]
+                      sets.index("static bool32 IsVisiblePreset(")]
         tutor = (ROOT / "src/move_relearner.c").read_text()
-        collector = tutor[tutor.index("const u16 *GetEmeraldChampionsPreparationMoves("):
-                          tutor.index("void Special_HasMoveToRelearn(")]
+        collector = sets[sets.index("const u16 *GetEmeraldChampionsPreparationMoves("):
+                         sets.index("bool32 CanSpeciesKeepEmeraldChampionsUnfusionMove(")]
         has_moves = tutor[tutor.rindex("static bool32 HasRelearnerAllMoves("):
                           tutor.rindex("static bool32 IsLevelUpMoveRelearnerActive(")]
 
@@ -105,23 +107,17 @@ int main(void) {
         for (u32 i = 0; historical[i] != MOVE_UNAVAILABLE; i++) expected[historical[i]] = TRUE;
         // Read the compiled tables directly, independently of the raw lookup API.
         for (u32 format = 0; format < EC_BATTLE_FORMAT_COUNT; format++) {
-            const struct EmeraldChampionsBattleSet *defaults = format == EC_BATTLE_FORMAT_DOUBLES
-                ? gEmeraldChampionsDefaultBattleSets : gEmeraldChampionsSinglesDefaultBattleSets;
-            const struct EmeraldChampionsBattleSetRange *ranges = format == EC_BATTLE_FORMAT_DOUBLES
-                ? gEmeraldChampionsBattleSetRanges : gEmeraldChampionsSinglesBattleSetRanges;
-            const struct EmeraldChampionsBattleSetChoice *alternatives = format == EC_BATTLE_FORMAT_DOUBLES
-                ? gEmeraldChampionsBattleSetAlternatives : gEmeraldChampionsSinglesBattleSetAlternatives;
+            const struct EmeraldChampionsBattleSetRange *ranges = gEmeraldChampionsBattleSetRanges[format];
             u32 owner = species;
-            if (defaults[owner].moves[0] == MOVE_NONE && gSpeciesInfo[species].formSpeciesIdTable) {
+            if (ranges[owner].count == 0 && gSpeciesInfo[species].formSpeciesIdTable) {
                 const u16 *forms = gSpeciesInfo[species].formSpeciesIdTable;
                 for (u32 i = 0; forms[i] != FORM_SPECIES_END; i++) {
-                    if (defaults[forms[i]].moves[0] != MOVE_NONE) { owner = forms[i]; break; }
+                    if (ranges[forms[i]].count != 0) { owner = forms[i]; break; }
                 }
             }
-            if (defaults[owner].moves[0] == MOVE_NONE) continue;
-            for (u32 raw = 0; raw <= ranges[owner].count; raw++) {
-                const struct EmeraldChampionsBattleSet *preset = raw == 0 ? &defaults[owner]
-                    : &alternatives[ranges[owner].offset + raw - 1].preset;
+            if (ranges[owner].count == 0) continue;
+            for (u32 raw = 0; raw < ranges[owner].count; raw++) {
+                const struct EmeraldChampionsBattleSet *preset = &gEmeraldChampionsBattleSets[ranges[owner].offset + raw].preset;
                 if (owner == species) checked++;
                 for (u32 slot = 0; slot < MAX_MON_MOVES; slot++) expected[preset->moves[slot]] = TRUE;
             }

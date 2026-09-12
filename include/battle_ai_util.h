@@ -115,7 +115,6 @@ typedef bool32 (*MoveFlag)(enum Move move);
 
 bool32 AI_IsFaster(enum BattlerId battlerAi, enum BattlerId battlerDef, enum Move aiMove, enum Move playerMove, enum ConsiderPriority considerPriority);
 bool32 AI_IsSlower(enum BattlerId battlerAi, enum BattlerId battlerDef, enum Move aiMove, enum Move playerMove, enum ConsiderPriority considerPriority);
-bool32 AI_RandLessThan(u32 val);
 bool32 AI_IsBattlerGrounded(enum BattlerId battler);
 enum MoveTarget AI_GetBattlerMoveTargetType(enum BattlerId battler, enum Move move);
 enum Ability AI_GetMoldBreakerSanitizedAbility(enum BattlerId battlerAtk, enum Ability abilityAtk, enum Ability abilityDef, enum HoldEffect holdEffectDef, enum Move move);
@@ -225,7 +224,6 @@ bool32 AI_MoveAlwaysCrits(enum BattlerId battlerAtk, enum BattlerId battlerDef, 
 bool32 AI_CanScreenReduceDamage(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move);
 bool32 AI_MoveBreaksScreensBeforeDamage(enum Move move);
 u32 AI_GetBeatUpHitCount(enum BattlerId battlerAtk);
-struct AiKOChance AI_CalcKOChance(struct AiCalcValues *aiCalc, enum BattlerId battlerAtk, enum BattlerId battlerDef, u32 hp);
 struct SimulatedDamage AI_CalcDamageAfterBerry(struct AiCalcValues *aiCalc, enum BattlerId battlerAtk, enum BattlerId battlerDef);
 bool32 AI_IsDamagedByRecoil(enum BattlerId battler);
 u32 GetNoOfHitsToKO(u32 dmg, s32 hp);
@@ -344,7 +342,6 @@ bool32 IsAllyProtectingFromMove(enum BattlerId battlerAtk, enum Move attackerMov
 struct BattlePokemon *AllocSaveBattleMons(void);
 void FreeRestoreBattleMons(struct BattlePokemon *savedBattleMons);
 struct AiLogicData *AllocSaveAiLogicData(void);
-void FreeRestoreAiLogicData(struct AiLogicData *savedAiLogicData);
 s32 CountUsablePartyMons(enum BattlerId battlerId);
 s32 CountUsableSideMons(enum BattlerId battlerId);
 bool32 IsPartyFullyHealedExceptBattler(enum BattlerId battler);

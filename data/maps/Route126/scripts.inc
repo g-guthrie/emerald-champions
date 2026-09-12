@@ -7,13 +7,11 @@ Route126_OnTransition:
 	end
 
 Route126_EventScript_Barry::
-	trainerbattle_double TRAINER_BARRY, Route126_Text_BarryIntro, Route126_Text_BarryDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route126_Text_BarryPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route126_Text_BarryPostBattle, MSGBOX_NPC
 	end
 
 Route126_EventScript_Dean::
-	trainerbattle_double TRAINER_DEAN, Route126_Text_DeanIntro, Route126_Text_DeanDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route126_Text_DeanPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route126_Text_DeanPostBattle, MSGBOX_NPC
 	end
 
 Route126_EventScript_Nikki::
@@ -35,31 +33,12 @@ Route126_EventScript_Isobel::
 	end
 
 Route126_EventScript_Sienna::
-	trainerbattle_double TRAINER_SIENNA, Route126_Text_SiennaIntro, Route126_Text_SiennaDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route126_Text_SiennaPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route126_Text_SiennaPostBattle, MSGBOX_NPC
 	end
 
 Route126_EventScript_Pablo::
-	trainerbattle_double TRAINER_PABLO_1, Route126_Text_PabloIntro, Route126_Text_PabloDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route126_EventScript_RegisterPablo
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route126_EventScript_RematchPablo
-	msgbox Route126_Text_PabloPostBattle, MSGBOX_DEFAULT
-	release
+	msgbox Route126_Text_PabloPostBattle, MSGBOX_NPC
 	end
-
-Route126_EventScript_RegisterPablo::
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route126_Text_PabloRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_PABLO_1
-	release
-	end
-
-Route126_EventScript_RematchPablo::
-	trainerbattle_rematch_double TRAINER_PABLO_1, Route126_Text_PabloRematchIntro, Route126_Text_PabloRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route126_Text_PabloPostRematch, MSGBOX_AUTOCLOSE
-	end
-
 
 Route126_Text_LEONARDO_LocalConversation:
 	.string "I was racing a FLOATZEL.\n"

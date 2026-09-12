@@ -372,8 +372,7 @@ Route119_EventScript_WeatherInstituteSign::
 	goto Common_EventScript_ShowRouteSpecies
 
 Route119_EventScript_Brent::
-	trainerbattle_double TRAINER_BRENT, Route119_Text_BrentIntro, Route119_Text_BrentDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route119_Text_BrentPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route119_Text_BrentPostBattle, MSGBOX_NPC
 	end
 
 Route119_EventScript_Donald::
@@ -392,13 +391,11 @@ Route119_EventScript_Doug::
 	end
 
 Route119_EventScript_Greg::
-	trainerbattle_double TRAINER_GREG, Route119_Text_GregIntro, Route119_Text_GregDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route119_Text_GregPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route119_Text_GregPostBattle, MSGBOX_NPC
 	end
 
 Route119_EventScript_Kent::
-	trainerbattle_double TRAINER_KENT, Route119_Text_KentIntro, Route119_Text_KentDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route119_Text_KentPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route119_Text_KentPostBattle, MSGBOX_NPC
 	end
 
 Route119_EventScript_Jackson::
@@ -453,13 +450,11 @@ Route119_EventScript_Phil::
 	end
 
 Route119_EventScript_Yasu::
-	trainerbattle_double TRAINER_YASU, Route119_Text_YasuIntro, Route119_Text_YasuDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route119_Text_YasuPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route119_Text_YasuPostBattle, MSGBOX_NPC
 	end
 
 Route119_EventScript_Takashi::
-	trainerbattle_double TRAINER_TAKASHI, Route119_Text_TakashiIntro, Route119_Text_TakashiDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route119_Text_TakashiPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route119_Text_TakashiPostBattle, MSGBOX_NPC
 	end
 
 Route119_EventScript_Hideo::
@@ -468,13 +463,11 @@ Route119_EventScript_Hideo::
 	end
 
 Route119_EventScript_Chris::
-	trainerbattle_double TRAINER_CHRIS, Route119_Text_ChrisIntro, Route119_Text_ChrisDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route119_Text_ChrisPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route119_Text_ChrisPostBattle, MSGBOX_NPC
 	end
 
 Route119_EventScript_Fabian::
-	trainerbattle_double TRAINER_FABIAN, Route119_Text_FabianIntro, Route119_Text_FabianDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route119_Text_FabianPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route119_Text_FabianPostBattle, MSGBOX_NPC
 	end
 
 Route119_EventScript_Dayton::
@@ -482,8 +475,7 @@ Route119_EventScript_Dayton::
 	end
 
 Route119_EventScript_Rachel::
-	trainerbattle_double TRAINER_RACHEL, Route119_Text_RachelIntro, Route119_Text_RachelDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route119_Text_RachelPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route119_Text_RachelPostBattle, MSGBOX_NPC
 	end
 
 Route119_EventScript_BridgeAquaGrunt1::

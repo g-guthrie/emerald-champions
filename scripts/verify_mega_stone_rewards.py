@@ -50,6 +50,7 @@ def world_reward_sources(root: Path = ROOT) -> dict[str, list[str]]:
             nodes[match[1]] = (body, path.parent.name, next_label if falls_through else None)
     visited, pending = set(), list(roots)
     trade_reachable = False
+    special_sources = defaultdict(list)
     while pending:
         name = pending.pop()
         if name in visited:
@@ -60,8 +61,10 @@ def world_reward_sources(root: Path = ROOT) -> dict[str, list[str]]:
         if name not in nodes:
             continue
         body, location, fallthrough = nodes[name]
-        for item in set(re.findall(r"\bgiveitem\s+(ITEM_\w+)", body)) & required:
+        for item in set(re.findall(r"\bgive(?:unique)?item\s+(ITEM_\w+)", body)) & required:
             rewards[item].append(f"{location}: NPC/event gift ({name})")
+        for special in re.findall(r"\bspecial\s+(\w+)", body):
+            special_sources[special].append(location)
         trade_reachable |= bool(re.search(r"\bspecial\s+TradeEmeraldChampionsGardenBerries\b", body))
         pending.extend(token for token in re.findall(r"\b\w+\b", body) if token in nodes or token in aliases)
         if fallthrough:
@@ -74,6 +77,20 @@ def world_reward_sources(root: Path = ROOT) -> dict[str, list[str]]:
         if rewards[item]:
             raise ValueError(f"{item}: another reward bypasses its berry exchange")
         rewards[item].append("Route123_BerryMastersHouse: one-time garden berry trade")
+    # Follow reachable native transaction entrypoints as well as item macros.
+    native_rewards = {
+        "ClaimEmeraldChampionsSootMilestone": ("ITEM_HOUNDOOMINITE", "FLAG_ITEM_FIERY_PATH_HOUNDOOMINITE"),
+        "TradeEmeraldChampionsShoalMaterials": ("ITEM_GLALITITE", "FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_GLALITITE"),
+    }
+    native = (root / "src/field_specials.c").read_text()
+    for special, (item, receipt) in native_rewards.items():
+        body = re.search(r"void " + special + r"\(void\)\s*\{(.*?)^\}", native, re.S | re.M)
+        if not body or receipt not in body[1] or "AddBagItem" not in body[1]:
+            raise ValueError(f"{special}: native finite reward/receipt contract is missing")
+        if item not in native:
+            raise ValueError(f"{special}: native stone selection is missing")
+        for location in special_sources[special]:
+            rewards[item].append(f"{location}: native finite exchange ({special})")
     return dict(rewards)
 
 

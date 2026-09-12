@@ -3,7 +3,6 @@
 
 #include "constants/items.h"
 
-bool32 OwnsEmeraldChampionsMegaStone(enum Item item);
 void CountEmeraldChampionsGardenBerries(void);
 void TradeEmeraldChampionsGardenBerries(void);
 

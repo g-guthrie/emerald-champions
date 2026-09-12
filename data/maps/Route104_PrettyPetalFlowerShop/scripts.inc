@@ -99,7 +99,7 @@ Route104_PrettyPetalFlowerShop_EventScript_MegaGift_VENUSAURITE::
 	lock
 	faceplayer
 	msgbox Route104_PrettyPetalFlowerShop_EventScript_MegaGift_VENUSAURITE_Text, MSGBOX_DEFAULT
-	giveitem ITEM_VENUSAURITE
+	giveuniqueitem ITEM_VENUSAURITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_EC_MEGA_GIFT_VENUSAURITE
 	release

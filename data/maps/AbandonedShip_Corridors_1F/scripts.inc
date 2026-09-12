@@ -6,16 +6,8 @@ AbandonedShip_Corridors_1F_EventScript_Youngster::
 	end
 
 AbandonedShip_Corridors_1F_EventScript_Charlie::
-	trainerbattle_double TRAINER_CHARLIE, AbandonedShip_Corridors_1F_Text_CharlieIntro, AbandonedShip_Corridors_1F_Text_CharlieDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox AbandonedShip_Corridors_1F_Text_CharliePostBattle, MSGBOX_AUTOCLOSE
+	msgbox AbandonedShip_Corridors_1F_Text_CharliePostBattle, MSGBOX_NPC
 	end
-
-AbandonedShip_Corridors_1F_Text_CharlieIntro:
-	.string "What's so funny about having my inner\n"
-	.string "tube aboard the ship?$"
-
-AbandonedShip_Corridors_1F_Text_CharlieDefeat:
-	.string "Whoa, you overwhelmed me!$"
 
 AbandonedShip_Corridors_1F_Text_CharliePostBattle:
 	.string "It's not easy throwing POKé BALLS\n"

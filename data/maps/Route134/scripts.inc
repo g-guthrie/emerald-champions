@@ -7,18 +7,15 @@ Route134_OnResume:
 	end
 
 Route134_EventScript_Jack::
-	trainerbattle_double TRAINER_JACK, Route134_Text_JackIntro, Route134_Text_JackDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route134_Text_JackPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route134_Text_JackPostBattle, MSGBOX_NPC
 	end
 
 Route134_EventScript_Laurel::
-	trainerbattle_double TRAINER_LAUREL, Route134_Text_LaurelIntro, Route134_Text_LaurelDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route134_Text_LaurelPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route134_Text_LaurelPostBattle, MSGBOX_NPC
 	end
 
 Route134_EventScript_Alex::
-	trainerbattle_double TRAINER_ALEX, Route134_Text_AlexIntro, Route134_Text_AlexDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route134_Text_AlexPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route134_Text_AlexPostBattle, MSGBOX_NPC
 	end
 
 Route134_EventScript_Aaron::
@@ -36,8 +33,7 @@ Route134_EventScript_Hudson::
 	end
 
 Route134_EventScript_Reyna::
-	trainerbattle_double TRAINER_REYNA, Route134_Text_ReynaIntro, Route134_Text_ReynaDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route134_Text_ReynaPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route134_Text_ReynaPostBattle, MSGBOX_NPC
 	end
 
 Route134_EventScript_Marley::
@@ -46,10 +42,8 @@ Route134_EventScript_Marley::
 	end
 
 Route134_EventScript_Kelvin::
-	trainerbattle_double TRAINER_KELVIN, Route134_Text_KelvinIntro, Route134_Text_KelvinDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route134_Text_KelvinPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route134_Text_KelvinPostBattle, MSGBOX_NPC
 	end
-
 
 Route134_Text_HITOSHI_LocalConversation:
 	.string "Even MACHAMP takes a rest day.\n"

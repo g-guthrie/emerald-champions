@@ -80,7 +80,7 @@
       "flag": "FLAG_TEMP_12"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_INCLEMENT_MOLTRES",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(MOLTRES)",
       "x": 21,
       "y": 14,
       "elevation": 3,

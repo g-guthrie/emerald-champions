@@ -52,7 +52,7 @@ DewfordTown_House2_EventScript_MegaGift_KINGLERITE::
 	lock
 	faceplayer
 	msgbox DewfordTown_House2_EventScript_MegaGift_KINGLERITE_Text, MSGBOX_DEFAULT
-	giveitem ITEM_KINGLERITE
+	giveuniqueitem ITEM_KINGLERITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_EC_MEGA_GIFT_KINGLERITE
 	release
@@ -69,7 +69,7 @@ DewfordTown_House2_EventScript_MegaGift_GYARADOSITE::
 	lock
 	faceplayer
 	msgbox DewfordTown_House2_EventScript_MegaGift_GYARADOSITE_Text, MSGBOX_DEFAULT
-	giveitem ITEM_GYARADOSITE
+	giveuniqueitem ITEM_GYARADOSITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_EC_MEGA_GIFT_GYARADOSITE
 	release

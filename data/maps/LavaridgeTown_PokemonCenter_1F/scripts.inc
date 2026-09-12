@@ -38,7 +38,7 @@ LavaridgeTown_PokemonCenter_1F_EventScript_Lucy::
 LavaridgeTown_PokemonCenter_1F_EventScript_LucyReward::
 	checkitemspace ITEM_ABSOLITE, 1
 	goto_if_eq VAR_RESULT, FALSE, LavaridgeTown_PokemonCenter_1F_EventScript_LucyBagFull
-	giveitem ITEM_ABSOLITE
+	giveuniqueitem ITEM_ABSOLITE
 	setflag FLAG_RECEIVED_LUCY_ABSOLITE
 LavaridgeTown_PokemonCenter_1F_EventScript_LucyAfter::
 	msgbox LavaridgeTown_PokemonCenter_1F_Text_LucyReward, MSGBOX_DEFAULT

@@ -13,8 +13,7 @@ Route110_TrickHousePuzzle4_EventScript_FoundScroll::
 	end
 
 Route110_TrickHousePuzzle4_EventScript_Cora::
-	trainerbattle_double TRAINER_CORA, Route110_TrickHousePuzzle4_Text_CoraIntro, Route110_TrickHousePuzzle4_Text_CoraDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route110_TrickHousePuzzle4_Text_CoraPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route110_TrickHousePuzzle4_Text_CoraPostBattle, MSGBOX_NPC
 	end
 
 Route110_TrickHousePuzzle4_EventScript_Yuji::
@@ -23,8 +22,7 @@ Route110_TrickHousePuzzle4_EventScript_Yuji::
 	end
 
 Route110_TrickHousePuzzle4_EventScript_Paula::
-	trainerbattle_double TRAINER_PAULA, Route110_TrickHousePuzzle4_Text_PaulaIntro, Route110_TrickHousePuzzle4_Text_PaulaDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route110_TrickHousePuzzle4_Text_PaulaPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route110_TrickHousePuzzle4_Text_PaulaPostBattle, MSGBOX_NPC
 	end
 
 Route110_TrickHousePuzzle4_Text_WroteSecretCodeLockOpened:
@@ -34,17 +32,9 @@ Route110_TrickHousePuzzle4_Text_WroteSecretCodeLockOpened:
 	.string "… … … … … … … …\p"
 	.string "The lock clicked open!$"
 
-Route110_TrickHousePuzzle4_Text_CoraIntro:
-	.string "It's too much bother to think this out.\n"
-	.string "I only wanted to battle!$"
-
-Route110_TrickHousePuzzle4_Text_CoraDefeat:
-	.string "Even though I lost, I still like battling\n"
-	.string "the best!$"
-
-Route110_TrickHousePuzzle4_Text_CoraPostBattle:
-	.string "Wouldn't you agree? You would go\n"
-	.string "anywhere if TRAINERS were there.$"
+Route110_TrickHousePuzzle4_Text_CoraPostBattle::
+	.string "I enjoy meeting other TRAINERS\n"
+	.string "while solving these puzzles.$"
 
 Route110_TrickHousePuzzle4_Text_YujiIntro:
 	.string "Heh! Boulders like this, I can brush\n"
@@ -57,13 +47,6 @@ Route110_TrickHousePuzzle4_Text_YujiDefeat:
 Route110_TrickHousePuzzle4_Text_YujiPostBattle:
 	.string "It's not good enough to be brawny…\n"
 	.string "You have to use your head. Be brainy!$"
-
-Route110_TrickHousePuzzle4_Text_PaulaIntro:
-	.string "The TRICK HOUSE is getting trickier,\n"
-	.string "isn't it?$"
-
-Route110_TrickHousePuzzle4_Text_PaulaDefeat:
-	.string "Aaak!$"
 
 Route110_TrickHousePuzzle4_Text_PaulaPostBattle:
 	.string "Has anyone made it to the end?$"

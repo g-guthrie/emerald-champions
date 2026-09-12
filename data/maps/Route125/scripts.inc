@@ -25,13 +25,11 @@ Route125_EventScript_Nolen::
 	end
 
 Route125_EventScript_Stan::
-	trainerbattle_double TRAINER_STAN, Route125_Text_StanIntro, Route125_Text_StanDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route125_Text_StanPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route125_Text_StanPostBattle, MSGBOX_NPC
 	end
 
 Route125_EventScript_Tanya::
-	trainerbattle_double TRAINER_TANYA, Route125_Text_TanyaIntro, Route125_Text_TanyaDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route125_Text_TanyaPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route125_Text_TanyaPostBattle, MSGBOX_NPC
 	end
 
 Route125_EventScript_Sharon::
@@ -39,39 +37,19 @@ Route125_EventScript_Sharon::
 	end
 
 Route125_EventScript_Ernest::
-	trainerbattle_double TRAINER_ERNEST_1, Route125_Text_ErnestIntro, Route125_Text_ErnestDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route125_EventScript_RegisterErnest
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route125_EventScript_RematchErnest
-	msgbox Route125_Text_ErnestPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route125_EventScript_RegisterErnest::
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route125_Text_ErnestRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_ERNEST_1
-	release
-	end
-
-Route125_EventScript_RematchErnest::
-	trainerbattle_rematch_double TRAINER_ERNEST_1, Route125_Text_ErnestRematchIntro, Route125_Text_ErnestRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route125_Text_ErnestRematchPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route125_Text_ErnestPostBattle, MSGBOX_NPC
 	end
 
 Route125_EventScript_Kim::
-	trainerbattle_double TRAINER_KIM_AND_IRIS, Route125_Text_KimIntro, Route125_Text_KimDefeat, Route125_Text_KimNotEnoughMons
-	msgbox Route125_Text_KimPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route125_Text_KimPostBattle, MSGBOX_NPC
 	end
 
 Route125_EventScript_Iris::
-	trainerbattle_double TRAINER_KIM_AND_IRIS, Route125_Text_IrisIntro, Route125_Text_IrisDefeat, Route125_Text_IrisNotEnoughMons
-	msgbox Route125_Text_IrisPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route125_Text_IrisPostBattle, MSGBOX_NPC
 	end
 
 Route125_EventScript_Presley::
-	trainerbattle_double TRAINER_PRESLEY, Route125_Text_PresleyIntro, Route125_Text_PresleyDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route125_Text_PresleyPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route125_Text_PresleyPostBattle, MSGBOX_NPC
 	end
 
 Route125_EventScript_Auron::

@@ -53,8 +53,7 @@ Route115_EventScript_RematchTimothy::
 	end
 
 Route115_EventScript_Koichi::
-	trainerbattle_double TRAINER_KOICHI, Route115_Text_KoichiIntro, Route115_Text_KoichiDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route115_Text_KoichiPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route115_Text_KoichiPostBattle, MSGBOX_NPC
 	end
 
 Route115_EventScript_Nob::
@@ -95,8 +94,7 @@ Route115_EventScript_RematchCyndy::
 	end
 
 Route115_EventScript_Hector::
-	trainerbattle_double TRAINER_HECTOR, Route115_Text_HectorIntro, Route115_Text_HectorDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route115_Text_HectorPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route115_Text_HectorPostBattle, MSGBOX_NPC
 	end
 
 Route115_EventScript_Kyra::
@@ -104,8 +102,7 @@ Route115_EventScript_Kyra::
 	end
 
 Route115_EventScript_Jaiden::
-	trainerbattle_double TRAINER_JAIDEN, Route115_Text_JaidenIntro, Route115_Text_JaidenDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route115_Text_JaidenPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route115_Text_JaidenPostBattle, MSGBOX_NPC
 	end
 
 Route115_EventScript_Alix::

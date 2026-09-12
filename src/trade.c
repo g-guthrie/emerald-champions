@@ -19,6 +19,7 @@
 #include "link_rfu.h"
 #include "load_save.h"
 #include "mail.h"
+#include "item.h"
 #include "main.h"
 #include "mystery_gift.h"
 #include "mystery_gift_menu.h"
@@ -5121,4 +5122,32 @@ static void CB2_SaveAndEndWirelessTrade(void)
     AnimateSprites();
     BuildOamBuffer();
     UpdatePaletteFade();
+}
+
+void ReturnInGameTradeHeldItem(void)
+{
+    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
+    struct BoxPokemon *mon = GetSelectedBoxMonFromPcOrParty();
+    enum Item item = GetBoxMonData(mon, MON_DATA_HELD_ITEM);
+    enum Item none = ITEM_NONE;
+    gSpecialVar_Result = 1;
+    if (item == ITEM_NONE)
+        return;
+    CopyItemName(item, gStringVar1);
+    if (ItemIsMail(item))
+    {
+        // Let the normal Mail UI preserve its message before the trade.
+        gSpecialVar_Result = 4;
+        return;
+    }
+    if (AddBagItem(item, 1))
+        gSpecialVar_Result = 2;
+    else if (AddPCItem(item, 1))
+        gSpecialVar_Result = 3;
+    else
+    {
+        gSpecialVar_Result = 0;
+        return;
+    }
+    SetBoxMonData(mon, MON_DATA_HELD_ITEM, &none);
 }

@@ -30,7 +30,7 @@ LavaridgeTown_House_EventScript_MegaGift_BLAZIKENITE::
 	lock
 	faceplayer
 	msgbox LavaridgeTown_House_EventScript_MegaGift_BLAZIKENITE_Text, MSGBOX_DEFAULT
-	giveitem ITEM_BLAZIKENITE
+	giveuniqueitem ITEM_BLAZIKENITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_EC_MEGA_GIFT_BLAZIKENITE
 	release
@@ -47,7 +47,7 @@ LavaridgeTown_House_EventScript_MegaGift_MACHAMPITE::
 	lock
 	faceplayer
 	msgbox LavaridgeTown_House_EventScript_MegaGift_MACHAMPITE_Text, MSGBOX_DEFAULT
-	giveitem ITEM_MACHAMPITE
+	giveuniqueitem ITEM_MACHAMPITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_EC_MEGA_GIFT_MACHAMPITE
 	release

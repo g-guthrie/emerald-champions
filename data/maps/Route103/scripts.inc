@@ -288,8 +288,7 @@ Route103_EventScript_Marcos::
 	end
 
 Route103_EventScript_Rhett::
-	trainerbattle_double TRAINER_RHETT, Route103_Text_RhettIntro, Route103_Text_RhettDefeated, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route103_Text_RhettPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route103_Text_RhettPostBattle, MSGBOX_NPC
 	end
 
 Route103_EventScript_Pete::

@@ -39,7 +39,7 @@ FortreeCity_House5_EventScript_MegaGift_CHIMECHITE::
 	lock
 	faceplayer
 	msgbox FortreeCity_House5_EventScript_MegaGift_CHIMECHITE_Text, MSGBOX_DEFAULT
-	giveitem ITEM_CHIMECHITE
+	giveuniqueitem ITEM_CHIMECHITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_EC_MEGA_GIFT_CHIMECHITE
 	release

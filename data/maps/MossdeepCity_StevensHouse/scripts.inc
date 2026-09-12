@@ -38,7 +38,6 @@ MossdeepCity_StevensHouse_EventScript_StevenGivesDive::
 	waitmovement 0
 	msgbox MossdeepCity_StevensHouse_Text_YouveEarnedHMDive, MSGBOX_DEFAULT
 	giveitem ITEM_HM_DIVE
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_HM_DIVE
 	setflag FLAG_OMIT_DIVE_FROM_STEVEN_LETTER
 	msgbox MossdeepCity_StevensHouse_Text_ExplainDive, MSGBOX_DEFAULT
@@ -135,8 +134,18 @@ MossdeepCity_StevensHouse_EventScript_RockDisplay::
 	end
 
 MossdeepCity_StevensHouse_EventScript_Steven::
-	msgbox MossdeepCity_StevensHouse_Text_UnderwateCavernBetweenMossdeepSootopolis, MSGBOX_NPC
+	lock
+	faceplayer
+	call_if_set FLAG_BADGE08_GET, MossdeepCity_StevensHouse_EventScript_ReviewResearch
+	checkitem ITEM_HM_DIVE
+	call_if_eq VAR_RESULT, FALSE, MossdeepCity_StevensHouse_EventScript_DeliverDive
+	msgbox MossdeepCity_StevensHouse_Text_UnderwateCavernBetweenMossdeepSootopolis, MSGBOX_DEFAULT
+	release
 	end
+
+MossdeepCity_StevensHouse_EventScript_DeliverDive::
+	giveitem ITEM_HM_DIVE
+	return
 
 MossdeepCity_StevensHouse_EventScript_Letter::
 	lockall
@@ -217,3 +226,30 @@ MossdeepCity_StevensHouse_Text_LetterFromSteven:
 MossdeepCity_StevensHouse_Text_CollectionOfRareRocks:
 	.string "It's a collection of rare rocks and\n"
 	.string "stones assembled by STEVEN.$"
+
+MossdeepCity_StevensHouse_EventScript_ReviewResearch::
+	goto_if_set FLAG_EC_REPORT_C48_COMPLETE, Common_EventScript_NopReturn
+	goto_if_unset FLAG_EC_SURVEYED_ORIGIN_CHAMBER, MossdeepCity_StevensHouse_EventScript_ResearchPending
+	goto_if_unset FLAG_EC_SURVEYED_METEOR_CHAMBER, MossdeepCity_StevensHouse_EventScript_ResearchPending
+	setflag FLAG_EC_STEVEN_RESEARCH_CONCLUSION
+	msgbox MossdeepCity_StevensHouse_Text_ResearchConclusion, MSGBOX_DEFAULT
+	return
+
+MossdeepCity_StevensHouse_EventScript_ResearchPending::
+	msgbox MossdeepCity_StevensHouse_Text_ResearchPending, MSGBOX_DEFAULT
+	return
+
+MossdeepCity_StevensHouse_Text_ResearchPending:
+	.string "The chamber beneath SOOTOPOLIS\n"
+	.string "and JIRACHI's room deep inside\l"
+	.string "METEOR FALLS complete our record.\p"
+	.string "Explore both, then bring me your\n"
+	.string "findings. Catching their POKéMON\l"
+	.string "is your own choice.$"
+
+MossdeepCity_StevensHouse_Text_ResearchConclusion:
+	.string "When we met, you carried a letter.\n"
+	.string "Now you can explain what those\l"
+	.string "scattered reports were describing.\p"
+	.string "Take our conclusion to my father\n"
+	.string "at DEVON in RUSTBORO.$"

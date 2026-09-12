@@ -52,24 +52,6 @@ static const struct MassOutbreak sPokeOutbreakSpeciesList[OUTBREAK_COUNT] = {
     }
 };
 
-void ZeroMassOutbreak(void)
-{
-    gSaveBlock1Ptr->outbreakPokemonSpecies = 0;
-    gSaveBlock1Ptr->outbreakPokemonSpecies = 0;
-    gSaveBlock1Ptr->outbreakLocationMapNum = 0;
-    gSaveBlock1Ptr->outbreakLocationMapGroup = 0;
-    gSaveBlock1Ptr->outbreakPokemonLevel = 0;
-    for (u32 i = 0; i < MAX_MON_MOVES; i++)
-        gSaveBlock1Ptr->outbreakPokemonMoves[i] = 0;
-    gSaveBlock1Ptr->outbreakPokemonProbability = 0;
-    gSaveBlock1Ptr->outbreakDaysLeft = 0;
-}
-
-struct MassOutbreak GetStaticOutbreak(enum MassOutbreakIndex outbreakIdx)
-{
-    return sPokeOutbreakSpeciesList[outbreakIdx];
-}
-
 enum Species GetStaticOutbreakSpecies(enum MassOutbreakIndex outbreakIdx)
 {
     return sPokeOutbreakSpeciesList[outbreakIdx].species;
@@ -328,4 +310,3 @@ void ScrCmd_getmassoutbreakdata(struct ScriptContext *ctx)
     }
     VarSet(varId, value);
 }
-

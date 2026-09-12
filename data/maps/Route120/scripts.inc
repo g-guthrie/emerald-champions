@@ -331,24 +331,7 @@ Route120_EventScript_Jenna::
 	end
 
 Route120_EventScript_Jeffrey::
-	trainerbattle_double TRAINER_JEFFREY_1, Route120_Text_JeffreyIntro, Route120_Text_JeffreyDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route120_EventScript_RegisterJeffrey
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route120_EventScript_RematchJeffrey
-	msgbox Route120_Text_JeffreyPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route120_EventScript_RegisterJeffrey::
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route120_Text_JeffreyRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_JEFFREY_1
-	release
-	end
-
-Route120_EventScript_RematchJeffrey::
-	trainerbattle_rematch_double TRAINER_JEFFREY_1, Route120_Text_JeffreyRematchIntro, Route120_Text_JeffreyRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route120_Text_JeffreyPostRematch, MSGBOX_AUTOCLOSE
+	msgbox Route120_Text_JeffreyPostBattle, MSGBOX_NPC
 	end
 
 Route120_EventScript_Jennifer::
@@ -357,18 +340,15 @@ Route120_EventScript_Jennifer::
 	end
 
 Route120_EventScript_Chip::
-	trainerbattle_double TRAINER_CHIP, Route120_Text_ChipIntro, Route120_Text_ChipDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route120_Text_ChipPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route120_Text_ChipPostBattle, MSGBOX_NPC
 	end
 
 Route120_EventScript_Clarissa::
-	trainerbattle_double TRAINER_CLARISSA, Route120_Text_ClarissaIntro, Route120_Text_ClarissaDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route120_Text_ClarissaPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route120_Text_ClarissaPostBattle, MSGBOX_NPC
 	end
 
 Route120_EventScript_Angelica::
-	trainerbattle_double TRAINER_ANGELICA, Route120_Text_AngelicaIntro, Route120_Text_AngelicaDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route120_Text_AngelicaPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route120_Text_AngelicaPostBattle, MSGBOX_NPC
 	end
 
 Route120_EventScript_Keigo::
@@ -380,21 +360,8 @@ Route120_EventScript_Riley::
 	end
 
 Route120_EventScript_Leonel::
-	trainerbattle_double TRAINER_LEONEL, Route120_Text_LeonelIntro, Route120_Text_LeonelDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	setvar VAR_0x8004, LEGENDARY_SIGN_OGERPON
-	specialvar VAR_RESULT, GetSelectedLegendarySignState
-	goto_if_eq VAR_RESULT, 2, Route120_EventScript_LeonelOgerponCaught
-	msgbox Route120_Text_LeonelPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route120_Text_LeonelPostBattle, MSGBOX_NPC
 	end
-
-Route120_EventScript_LeonelOgerponCaught::
-	msgbox Route120_Text_LeonelOgerponCaught, MSGBOX_AUTOCLOSE
-	end
-
-Route120_Text_LeonelOgerponCaught:
-	.string "So OGERPON is traveling with you!\p"
-	.string "The old stories have a new\n"
-	.string "chapter. Take care of each other.$"
 
 Route120_EventScript_Callie::
 	msgbox Route120_Text_CALLIE_LocalConversation, MSGBOX_NPC

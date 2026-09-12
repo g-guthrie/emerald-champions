@@ -16,9 +16,10 @@ AI: Smart Trainer / Prediction / Hp Aware / Smart Switching / Predict Switch / P
 Metagross @ Assault Vest
 Ability: Clear Body
 Adamant Nature
-Level: 70
+Level: 72
+Happiness: 255
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
+EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
 - Bullet Punch
 - Heavy Slam
 - Psychic Fangs
@@ -27,9 +28,10 @@ EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
 Skarmory @ Rocky Helmet
 Ability: Sturdy
 Impish Nature
-Level: 70
+Level: 72
+Happiness: 255
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 32 HP / 0 Atk / 32 Def / 0 SpA / 2 SpD / 0 Spe
+EVs: 252 HP / 0 Atk / 252 Def / 0 SpA / 4 SpD / 0 Spe
 - Tailwind
 - Body Press
 - Brave Bird
@@ -38,9 +40,10 @@ EVs: 32 HP / 0 Atk / 32 Def / 0 SpA / 2 SpD / 0 Spe
 Aggron @ Air Balloon
 Ability: Rock Head
 Adamant Nature
-Level: 70
+Level: 72
+Happiness: 255
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-EVs: 2 HP / 32 Atk / 0 Def / 0 SpA / 0 SpD / 32 Spe
+EVs: 4 HP / 252 Atk / 0 Def / 0 SpA / 0 SpD / 252 Spe
 - Head Smash
 - Heavy Slam
 - High Horsepower

@@ -13,8 +13,10 @@ ScorchedSlab_HeatransRoom_EventScript_MagmaStone::
 ScorchedSlab_HeatransRoom_EventScript_PlaceMagmaStone::
 	msgbox ScorchedSlab_HeatransRoom_Text_PlaceMagmaStone, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, ScorchedSlab_HeatransRoom_EventScript_MagmaStoneEnd
-	fadescreen FADE_TO_BLACK
+	msgbox ScorchedSlab_HeatransRoom_Text_StoneAnswers, MSGBOX_DEFAULT
 	closemessage
+	special DoSealedChamberShakingEffect_Short
+	fadescreen FADE_TO_BLACK
 	waitse
 	playmoncry SPECIES_HEATRAN, CRY_MODE_ENCOUNTER
 	delay 40
@@ -47,13 +49,31 @@ ScorchedSlab_HeatransRoom_EventScript_Heatran::
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	special FinishLegendaryLandmarkEncounter
 	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_LegendaryResting
-	goto ScorchedSlab_HeatransRoom_EventScript_HeatranCaught
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, ScorchedSlab_HeatransRoom_EventScript_HeatranCaught
+	goto_if_ne VAR_RESULT, B_OUTCOME_WON, Common_EventScript_LegendaryResting
+	call ScorchedSlab_HeatransRoom_EventScript_Report
+	goto Common_EventScript_LegendaryResting
 	end
 
 ScorchedSlab_HeatransRoom_EventScript_HeatranCaught::
+	call ScorchedSlab_HeatransRoom_EventScript_Report
 	setflag FLAG_EC_CAUGHT_HEATRAN
 	removeobject LOCALID_EC_HEATRAN
 	release
 	end
 
+
+ScorchedSlab_HeatransRoom_EventScript_Report::
+	setflag FLAG_EC_RESOLVED_HEATRAN
+	completemilestone FLAG_EC_REPORT_C39_COMPLETE
+	msgbox ScorchedSlab_HeatransRoom_Text_StoneCools, MSGBOX_DEFAULT
+	return
+
+ScorchedSlab_HeatransRoom_Text_StoneAnswers:
+	.string "The MAGMA STONE grows warm.\n"
+	.string "Something answers from beneath\l"
+	.string "the chamber.$"
+
+ScorchedSlab_HeatransRoom_Text_StoneCools:
+	.string "The stone has gone cold.\n"
+	.string "The tremor is fading.$"

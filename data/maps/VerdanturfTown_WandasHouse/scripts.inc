@@ -168,7 +168,7 @@ VerdanturfTown_WandasHouse_EventScript_MegaGift_GARDEVOIRITE::
 	lock
 	faceplayer
 	msgbox VerdanturfTown_WandasHouse_EventScript_MegaGift_GARDEVOIRITE_Text, MSGBOX_DEFAULT
-	giveitem ITEM_GARDEVOIRITE
+	giveuniqueitem ITEM_GARDEVOIRITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_EC_MEGA_GIFT_GARDEVOIRITE
 	release

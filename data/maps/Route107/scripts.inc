@@ -7,29 +7,11 @@ Route107_EventScript_Darrin::
 	end
 
 Route107_EventScript_Tony::
-	trainerbattle_double TRAINER_TONY_1, Route107_Text_TonyIntro, Route107_Text_TonyDefeated, EmeraldChampions_Text_NeedTwoPokemon, Route107_EventScript_TonyRegisterMatchCallAfterBattle
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route107_EventScript_TonyRematch
-	msgbox Route107_Text_TonyPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route107_EventScript_TonyRegisterMatchCallAfterBattle::
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route107_Text_TonyRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_TONY_1
-	release
-	end
-
-Route107_EventScript_TonyRematch::
-	trainerbattle_rematch_double TRAINER_TONY_1, Route107_Text_TonyRematchIntro, Route107_Text_TonyRematchDefeated, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route107_Text_TonyRematchPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route107_Text_TonyPostBattle, MSGBOX_NPC
 	end
 
 Route107_EventScript_Denise::
-	trainerbattle_double TRAINER_DENISE, Route107_Text_DeniseIntro, Route107_Text_DeniseDefeated, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route107_Text_DenisePostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route107_Text_DenisePostBattle, MSGBOX_NPC
 	end
 
 Route107_EventScript_Beth::
@@ -37,20 +19,16 @@ Route107_EventScript_Beth::
 	end
 
 Route107_EventScript_Lisa::
-	trainerbattle_double TRAINER_LISA_AND_RAY, Route107_Text_LisaIntro, Route107_Text_LisaDefeated, Route107_Text_LisaNotEnoughPokemon
-	msgbox Route107_Text_LisaPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route107_Text_LisaPostBattle, MSGBOX_NPC
 	end
 
 Route107_EventScript_Ray::
-	trainerbattle_double TRAINER_LISA_AND_RAY, Route107_Text_RayIntro, Route107_Text_RayDefeated, Route107_Text_RayNotEnoughPokemon
-	msgbox Route107_Text_RayPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route107_Text_RayPostBattle, MSGBOX_NPC
 	end
 
 Route107_EventScript_Camron::
-	trainerbattle_double TRAINER_CAMRON, Route107_Text_CamronIntro, Route107_Text_CamronDefeated, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route107_Text_CamronPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route107_Text_CamronPostBattle, MSGBOX_NPC
 	end
-
 
 Route107_Text_BETH_LocalConversation:
 	.string "I swim for the scenery.\n"

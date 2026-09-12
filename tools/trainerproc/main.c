@@ -71,6 +71,8 @@ struct Pokemon
 
     int level;
     int level_line;
+    int level_offset;
+    int level_offset_line;
 
     struct String ball;
     int ball_line;
@@ -117,6 +119,8 @@ struct Trainer
 
     struct String class;
     int class_line;
+    int prize_multiplier;
+    int prize_multiplier_line;
 
     struct String encounter_music;
     int encounter_music_line;
@@ -1218,6 +1222,16 @@ static bool parse_trainer(struct Parser *p, const struct Parsed *parsed, struct 
             trainer->class_line = value.location.line;
             trainer->class = token_string(&value);
         }
+        else if (is_literal_token(&key, "Prize Multiplier"))
+        {
+            if (trainer->prize_multiplier_line)
+                any_error = !set_show_parse_error(p, key.location, "duplicate 'Prize Multiplier'");
+            trainer->prize_multiplier_line = value.location.line;
+            if (!token_int(p, &value, &trainer->prize_multiplier))
+                any_error = !show_parse_error(p);
+            else if (trainer->prize_multiplier < 0 || trainer->prize_multiplier > 255)
+                any_error = !set_show_parse_error(p, value.location, "Prize Multiplier must be 0..255");
+        }
         else if (is_literal_token(&key, "Music"))
         {
             if (trainer->encounter_music_line)
@@ -1457,6 +1471,16 @@ static bool parse_trainer(struct Parser *p, const struct Parsed *parsed, struct 
                 pokemon->level_line = value.location.line;
                 if (!token_int(p, &value, &pokemon->level))
                     any_error = !show_parse_error(p);
+            }
+            else if (is_literal_token(&key, "Level Offset"))
+            {
+                if (pokemon->level_offset_line)
+                    any_error = !set_show_parse_error(p, key.location, "duplicate 'Level Offset'");
+                pokemon->level_offset_line = value.location.line;
+                if (!token_int(p, &value, &pokemon->level_offset))
+                    any_error = !show_parse_error(p);
+                else if (pokemon->level_offset < -8 || pokemon->level_offset > 7)
+                    any_error = !set_show_parse_error(p, value.location, "Level Offset must be -8..7");
             }
             else if (is_literal_token(&key, "Ball"))
             {
@@ -1841,6 +1865,9 @@ static void fprint_trainers(const char *output_path, FILE *f, struct Parsed *par
             fprintf(f, ",\n");
         }
 
+        if (trainer->prize_multiplier_line)
+            fprintf(f, "        .prizeMultiplier = %d,\n", trainer->prize_multiplier);
+
         if (!is_empty_string(trainer->pic))
         {
             fprintf(f, "#line %d\n", trainer->pic_line);
@@ -2064,6 +2091,8 @@ static void fprint_trainers(const char *output_path, FILE *f, struct Parsed *par
             {
                 fprintf(f, "#line %d\n", pokemon->level_line);
                 fprintf(f, "            .lvl = %d,\n", pokemon->level);
+                if (pokemon->level_offset_line)
+                    fprintf(f, "            .useLevelOffset = TRUE, .levelOffset = %d,\n", pokemon->level_offset);
             }
 
             if (pokemon->ball_line)

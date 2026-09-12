@@ -612,8 +612,7 @@ Route111_EventScript_Irene::
 	end
 
 Route111_EventScript_Daisuke::
-	trainerbattle_double TRAINER_DAISUKE, Route111_Text_DaisukeIntro, Route111_Text_DaisukeDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route111_Text_DaisukePostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route111_Text_DaisukePostBattle, MSGBOX_NPC
 	end
 
 Route111_EventScript_Wilton::
@@ -659,8 +658,7 @@ Route111_EventScript_RematchBrooke::
 	end
 
 Route111_EventScript_Hayden::
-	trainerbattle_double TRAINER_HAYDEN, Route111_Text_HaydenIntro, Route111_Text_HaydenDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route111_Text_HaydenPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route111_Text_HaydenPostBattle, MSGBOX_NPC
 	end
 
 Route111_EventScript_Bianca::
@@ -674,23 +672,19 @@ Route111_EventScript_Tyron::
 	end
 
 Route111_EventScript_Celina::
-	trainerbattle_double TRAINER_CELINA, Route111_Text_CelinaIntro, Route111_Text_CelinaDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route111_Text_CelinaPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route111_Text_CelinaPostBattle, MSGBOX_NPC
 	end
 
 Route111_EventScript_Celia::
-	trainerbattle_double TRAINER_CELIA, Route111_Text_CeliaIntro, Route111_Text_CeliaDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route111_Text_CeliaPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route111_Text_CeliaPostBattle, MSGBOX_NPC
 	end
 
 Route111_EventScript_Bryan::
-	trainerbattle_double TRAINER_BRYAN, Route111_Text_BryanIntro, Route111_Text_BryanDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route111_Text_BryanPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route111_Text_BryanPostBattle, MSGBOX_NPC
 	end
 
 Route111_EventScript_Branden::
-	trainerbattle_double TRAINER_BRANDEN, Route111_Text_BrandenIntro, Route111_Text_BrandenDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route111_Text_BrandenPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route111_Text_BrandenPostBattle, MSGBOX_NPC
 	end
 
 Route111_EventScript_TrainerHillSign::

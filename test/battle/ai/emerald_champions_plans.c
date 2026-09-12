@@ -96,7 +96,6 @@ static void AuthoredOpponent(u16 trainerId, u32 badges, bool32 injuredCoalossal)
     SetCurrentDifficultyLevel(DIFFICULTY_NORMAL);
     gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE;
     CreateNPCTrainerPartyFromTrainer(party, trainer);
-    ApplyTrainerLevelDifficulty(party);
     gBattleTypeFlags = savedFlags;
     SetCurrentDifficultyLevel(savedDifficulty);
     for (u32 i = 0; i < ARRAY_COUNT(savedBadges); i++)

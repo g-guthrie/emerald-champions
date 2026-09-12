@@ -8,6 +8,8 @@ DewfordManor_1F_OnTransition:
 	end
 
 DewfordManor_1F_EventScript_Historian::
+	setflag FLAG_EC_MANOR_NOTES_READ
+	call_if_set FLAG_EC_MEADOW_SONG_PERFORMED, DewfordManor_1F_EventScript_RecordResearch
 	msgbox DewfordManor_1F_Text_Historian, MSGBOX_NPC
 	end
 DewfordManor_1F_Text_Historian:
@@ -17,3 +19,7 @@ DewfordManor_1F_Text_Historian:
 	.string "only a key. Trust supplies the power.\p"
 	.string "Their final entry mentions a crystal\n"
 	.string "chamber beneath SOOTOPOLIS.$"
+
+DewfordManor_1F_EventScript_RecordResearch::
+	completemilestone FLAG_EC_REPORT_C14_COMPLETE
+	return

@@ -25,27 +25,22 @@ Route129_OnFrame:
 	.2byte 0
 
 Route129_EventScript_Chase::
-	trainerbattle_double TRAINER_CHASE, Route129_Text_ChaseIntro, Route129_Text_ChaseDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route129_Text_ChasePostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route129_Text_ChasePostBattle, MSGBOX_NPC
 	end
 
 Route129_EventScript_Allison::
-	trainerbattle_double TRAINER_ALLISON, Route129_Text_AllisonIntro, Route129_Text_AllisonDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route129_Text_AllisonPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route129_Text_AllisonPostBattle, MSGBOX_NPC
 	end
 
 Route129_EventScript_Reed::
-	trainerbattle_double TRAINER_REED, Route129_Text_ReedIntro, Route129_Text_ReedDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route129_Text_ReedPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route129_Text_ReedPostBattle, MSGBOX_NPC
 	end
 
 Route129_EventScript_Tisha::
-	trainerbattle_double TRAINER_TISHA, Route129_Text_TishaIntro, Route129_Text_TishaDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route129_Text_TishaPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route129_Text_TishaPostBattle, MSGBOX_NPC
 	end
 
 Route129_EventScript_Clarence::
-	trainerbattle_double TRAINER_CLARENCE, Route129_Text_ClarenceIntro, Route129_Text_ClarenceDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route129_Text_ClarencePostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route129_Text_ClarencePostBattle, MSGBOX_NPC
 	end
 

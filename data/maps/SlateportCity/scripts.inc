@@ -757,8 +757,6 @@ SlateportCity_HerbalSupplyStock:
 	.2byte ITEM_ETHER
 	.2byte ITEM_MAX_ETHER
 	.2byte ITEM_ELIXIR
-	.2byte ITEM_PP_UP
-	.2byte ITEM_PP_MAX
 	pokemartlistend
 
 SlateportCity_EventScript_ScottBattleTentScene::
@@ -1134,9 +1132,9 @@ SlateportCity_Text_NameRatersHouseSign:
 SlateportCity_Text_HerbalSupplies:
 	.string "Fresh herbs and expedition supplies!\n"
 	.string "Cash purchases, ready for the road.\p"
-	.string "PP UPS and PP MAX raise a move's PP.\n"
-	.string "When you change a battle set, those\l"
-	.string "upgrades stay with its move slots.$"
+	.string "ETHERS restore used move PP.\n"
+	.string "Use medicine between battles when\l"
+	.string "a POKéMON CENTER is far away.$"
 
 SlateportCity_Text_MarketDirectory:
 	.string "SLATEPORT MARKET\p"
@@ -1193,9 +1191,8 @@ SlateportCity_EventScript_Greta::
 	goto_if_eq VAR_RESULT, NO, SlateportCity_EventScript_GretaDecline
 	trainerbattle_no_intro_double TRAINER_GRETA_SLATEPORT, SlateportCity_Text_GretaDefeat, EmeraldChampions_Text_NeedTwoPokemon
 SlateportCity_EventScript_GretaReward::
-	checkitemspace ITEM_GENGARITE, 1
+	giveuniqueitem ITEM_GENGARITE
 	goto_if_eq VAR_RESULT, FALSE, SlateportCity_EventScript_GretaBagFull
-	giveitem ITEM_GENGARITE
 	setflag FLAG_RECEIVED_GRETA_GENGARITE
 SlateportCity_EventScript_GretaAfter::
 	msgbox SlateportCity_Text_GretaAfter, MSGBOX_DEFAULT

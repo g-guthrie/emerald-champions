@@ -165,7 +165,7 @@ TEST("Wild residents leave encounter pools after capture and signs record comple
     ResetSignState();
     for (u32 badge = 0; badge < 8; badge++)
         FlagClear(FLAG_BADGE01_GET + badge);
-    FlagClear(FLAG_HIDE_WEATHER_INSTITUTE_2F_AQUA_GRUNT_M);
+    FlagClear(FLAG_HIDE_ROUTE_119_TEAM_AQUA);
     gSaveBlock1Ptr->location.mapGroup = MAP_GROUP(MAP_ROUTE110);
     gSaveBlock1Ptr->location.mapNum = MAP_NUM(MAP_ROUTE110);
     EXPECT(CanAcquireLegendarySignSpecies(SPECIES_RAIKOU));
@@ -175,7 +175,7 @@ TEST("Wild residents leave encounter pools after capture and signs record comple
         {
             for (u32 badge = 0; badge < 5; badge++)
                 FlagSet(FLAG_BADGE01_GET + badge);
-            FlagSet(FLAG_HIDE_WEATHER_INSTITUTE_2F_AQUA_GRUNT_M);
+            FlagSet(FLAG_HIDE_ROUTE_119_TEAM_AQUA);
         }
         for (u32 roll = 0; roll < 100; roll++)
         {

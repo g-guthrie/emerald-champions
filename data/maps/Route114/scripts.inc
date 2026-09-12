@@ -7,12 +7,14 @@ Route114_MapScripts::
 Route114_EventScript_GoodRodFisherman::
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_GOOD_ROD, Route114_EventScript_GoodRodAlreadyReceived
+	goto_if_set FLAG_EC_ROUTE114_ROD_GIFT, Route114_EventScript_GoodRodAlreadyReceived
+	goto_if_set FLAG_RECEIVED_GOOD_ROD, Route114_EventScript_RodBallGift
 	msgbox Route114_Text_GoodRodOffer, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, Route114_EventScript_GoodRodDeclined
 	giveitem ITEM_GOOD_ROD
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_GOOD_ROD
+	setflag FLAG_EC_ROUTE114_ROD_GIFT
 Route114_EventScript_GoodRodAlreadyReceived::
 	msgbox Route114_Text_GoodRodAdvice, MSGBOX_DEFAULT
 	release
@@ -119,8 +121,7 @@ Route114_EventScript_Lucas::
 	end
 
 Route114_EventScript_Shane::
-	trainerbattle_double TRAINER_SHANE, Route114_Text_ShaneIntro, Route114_Text_ShaneDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route114_Text_ShanePostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route114_Text_ShanePostBattle, MSGBOX_NPC
 	end
 
 Route114_EventScript_Nancy::
@@ -149,44 +150,23 @@ Route114_EventScript_RematchSteve::
 	end
 
 Route114_EventScript_Bernie::
-	trainerbattle_double TRAINER_BERNIE_1, Route114_Text_BernieIntro, Route114_Text_BernieDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route114_EventScript_RegisterBernie
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route114_EventScript_RematchBernie
-	msgbox Route114_Text_BerniePostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route114_EventScript_RegisterBernie::
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route114_Text_BernieRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_BERNIE_1
-	release
-	end
-
-Route114_EventScript_RematchBernie::
-	trainerbattle_rematch_double TRAINER_BERNIE_1, Route114_Text_BernieRematchIntro, Route114_Text_BernieRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route114_Text_BerniePostRematch, MSGBOX_AUTOCLOSE
+	msgbox Route114_Text_BerniePostBattle, MSGBOX_NPC
 	end
 
 Route114_EventScript_Claude::
-	trainerbattle_double TRAINER_CLAUDE, Route114_Text_ClaudeIntro, Route114_Text_ClaudeDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route114_Text_ClaudePostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route114_Text_ClaudePostBattle, MSGBOX_NPC
 	end
 
 Route114_EventScript_Nolan::
-	trainerbattle_double TRAINER_NOLAN, Route114_Text_NolanIntro, Route114_Text_NolanDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route114_Text_NolanPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route114_Text_NolanPostBattle, MSGBOX_NPC
 	end
 
 Route114_EventScript_Tyra::
-	trainerbattle_double TRAINER_TYRA_AND_IVY, Route114_Text_TyraIntro, Route114_Text_TyraDefeat, Route114_Text_TyraNotEnoughMons
-	msgbox Route114_Text_TyraPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route114_Text_TyraPostBattle, MSGBOX_NPC
 	end
 
 Route114_EventScript_Ivy::
-	trainerbattle_double TRAINER_TYRA_AND_IVY, Route114_Text_IvyIntro, Route114_Text_IvyDefeat, Route114_Text_IvyNotEnoughMons
-	msgbox Route114_Text_IvyPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route114_Text_IvyPostBattle, MSGBOX_NPC
 	end
 
 Route114_EventScript_Angelina::
@@ -229,3 +209,15 @@ Route114_Text_LanettesHouse:
 Route114_Text_NANCY_LocalConversation:
 	.string "I packed for every weather.\n"
 	.string "My bag weighs more than I do.$"
+
+Route114_EventScript_RodBallGift::
+	msgbox Route114_Text_RodBallGift, MSGBOX_DEFAULT
+	giveitem ITEM_NET_BALL, 10
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_EC_ROUTE114_ROD_GIFT
+	goto Route114_EventScript_GoodRodAlreadyReceived
+
+Route114_Text_RodBallGift:
+	.string "You already have a GOOD ROD!\p"
+	.string "Take this one-time pack of ten\n"
+	.string "NET BALLS for your next fishing trip.$"

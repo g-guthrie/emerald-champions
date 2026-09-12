@@ -43,14 +43,8 @@ struct EmeraldChampionsBattleSetChoice { struct EmeraldChampionsBattleSet preset
 static const u8 sRecommendedSetName[] = "Recommended";
 static const u16 forms[] = {FORM, DIRECT, NUM_SPECIES};
 static struct { const u16 *formSpeciesIdTable; } gSpeciesInfo[NUM_SPECIES] = {[FORM] = {forms}};
-static struct EmeraldChampionsBattleSet gEmeraldChampionsSinglesDefaultBattleSets[NUM_SPECIES];
-static struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_SPECIES];
-static const u8 *gEmeraldChampionsSinglesDefaultBattleSetNames[NUM_SPECIES];
-static const u8 *gEmeraldChampionsDefaultBattleSetNames[NUM_SPECIES];
-static struct EmeraldChampionsBattleSetRange gEmeraldChampionsSinglesBattleSetRanges[NUM_SPECIES];
-static struct EmeraldChampionsBattleSetRange gEmeraldChampionsBattleSetRanges[NUM_SPECIES];
-static struct EmeraldChampionsBattleSetChoice gEmeraldChampionsSinglesBattleSetAlternatives[4];
-static struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSetAlternatives[4];
+static struct EmeraldChampionsBattleSetRange gEmeraldChampionsBattleSetRanges[EC_BATTLE_FORMAT_COUNT][NUM_SPECIES];
+static struct EmeraldChampionsBattleSetChoice gEmeraldChampionsBattleSets[8];
 static unsigned GetMonData(struct Pokemon *mon, unsigned key) { return mon->species; }
 static bool32 PresetRequiresTransformation(const struct EmeraldChampionsBattleSet *p) { return p->transformation; }
 static bool32 HasTransformationAccess(struct Pokemon *mon, const struct EmeraldChampionsBattleSet *p) { return mon->access; }
@@ -60,26 +54,24 @@ static bool32 PresetRequiresOwnedHeldItem(struct Pokemon *mon, const struct Emer
         harness += r'''
 int main(void) {
     for (unsigned format = 0; format < EC_BATTLE_FORMAT_COUNT; format++) {
-        struct EmeraldChampionsBattleSet *defaults = format == 0 ? gEmeraldChampionsSinglesDefaultBattleSets : gEmeraldChampionsDefaultBattleSets;
-        struct EmeraldChampionsBattleSetRange *ranges = format == 0 ? gEmeraldChampionsSinglesBattleSetRanges : gEmeraldChampionsBattleSetRanges;
-        struct EmeraldChampionsBattleSetChoice *alts = format == 0 ? gEmeraldChampionsSinglesBattleSetAlternatives : gEmeraldChampionsBattleSetAlternatives;
-        const u8 **names = format == 0 ? gEmeraldChampionsSinglesDefaultBattleSetNames : gEmeraldChampionsDefaultBattleSetNames;
-        defaults[DIRECT].moves[0] = 1;
-        ranges[DIRECT] = (struct EmeraldChampionsBattleSetRange){1, 3};
-        names[DIRECT] = format == 0 ? (const u8 *)"Singles" : NULL;
-        alts[1] = (struct EmeraldChampionsBattleSetChoice){{{2}, 1, 1, 1, 0}, (const u8 *)"Mega"};
-        alts[2] = (struct EmeraldChampionsBattleSetChoice){{{3}, 1, 0, 0, 1}, (const u8 *)"Relic"};
-        alts[3] = (struct EmeraldChampionsBattleSetChoice){{{4}, 0, 0, 0, 0}, (const u8 *)"Ordinary"};
+        struct EmeraldChampionsBattleSetChoice *entries = &gEmeraldChampionsBattleSets[format * 4];
+        struct EmeraldChampionsBattleSetRange *ranges = gEmeraldChampionsBattleSetRanges[format];
+        entries[0].preset.moves[0] = 1;
+        entries[0].name = format == 0 ? (const u8 *)"Singles" : sRecommendedSetName;
+        ranges[DIRECT] = (struct EmeraldChampionsBattleSetRange){format * 4, 4};
+        entries[1] = (struct EmeraldChampionsBattleSetChoice){{{2}, 1, 1, 1, 0}, (const u8 *)"Mega"};
+        entries[2] = (struct EmeraldChampionsBattleSetChoice){{{3}, 1, 0, 0, 1}, (const u8 *)"Relic"};
+        entries[3] = (struct EmeraldChampionsBattleSetChoice){{{4}, 0, 0, 0, 0}, (const u8 *)"Ordinary"};
         for (unsigned hiddenDefault = 0; hiddenDefault < 2; hiddenDefault++) {
-            defaults[DIRECT].transformation = hiddenDefault;
+            entries[0].preset.transformation = hiddenDefault;
             for (unsigned access = 0; access < 2; access++) for (unsigned owned = 0; owned < 2; owned++) {
                 const struct EmeraldChampionsBattleSet *expected[4];
                 const u8 *expectedNames[4];
                 unsigned count = 0;
-                if (!hiddenDefault || access) { expected[count] = &defaults[DIRECT]; expectedNames[count++] = names[DIRECT] ? names[DIRECT] : sRecommendedSetName; }
-                if (access) { expected[count] = &alts[1].preset; expectedNames[count++] = alts[1].name; }
-                if (owned) { expected[count] = &alts[2].preset; expectedNames[count++] = alts[2].name; }
-                expected[count] = &alts[3].preset; expectedNames[count++] = alts[3].name;
+                if (!hiddenDefault || access) { expected[count] = &entries[0].preset; expectedNames[count++] = entries[0].name; }
+                if (access) { expected[count] = &entries[1].preset; expectedNames[count++] = entries[1].name; }
+                if (owned) { expected[count] = &entries[2].preset; expectedNames[count++] = entries[2].name; }
+                expected[count] = &entries[3].preset; expectedNames[count++] = entries[3].name;
                 for (unsigned species = DIRECT; species <= FORM; species++) {
                     struct Pokemon mon = {species, access, owned};
                     assert(GetEmeraldChampionsBattleSetCountForFormat(&mon, format) == count);
@@ -101,14 +93,14 @@ int main(void) {
         assert(GetEmeraldChampionsBattleSetPresetForFormat(&mon, 0, format) == NULL);
         assert(GetEmeraldChampionsBattleSetNameForFormat(&mon, 0, format) == sRecommendedSetName);
     }
-    gEmeraldChampionsSinglesBattleSetRanges[DIRECT].count = 0;
+    gEmeraldChampionsBattleSetRanges[EC_BATTLE_FORMAT_SINGLES][DIRECT].count = 1;
     struct Pokemon mon = {DIRECT, 0, 0};
     assert(GetEmeraldChampionsBattleSetCountForFormat(&mon, EC_BATTLE_FORMAT_SINGLES) == 0);
     assert(GetEmeraldChampionsBattleSetPresetForFormat(&mon, 0, EC_BATTLE_FORMAT_SINGLES) == NULL);
     assert(GetEmeraldChampionsBattleSetNameForFormat(&mon, 0, EC_BATTLE_FORMAT_SINGLES) == sRecommendedSetName);
     mon.access = 1;
     assert(GetEmeraldChampionsBattleSetCountForFormat(&mon, EC_BATTLE_FORMAT_SINGLES) == 1);
-    assert(GetEmeraldChampionsBattleSetPresetForFormat(&mon, 0, EC_BATTLE_FORMAT_SINGLES) == &gEmeraldChampionsSinglesDefaultBattleSets[DIRECT]);
+    assert(GetEmeraldChampionsBattleSetPresetForFormat(&mon, 0, EC_BATTLE_FORMAT_SINGLES) == &gEmeraldChampionsBattleSets[gEmeraldChampionsBattleSetRanges[EC_BATTLE_FORMAT_SINGLES][DIRECT].offset].preset);
     assert(GetEmeraldChampionsBattleSetPresetForFormat(&mon, 1, EC_BATTLE_FORMAT_SINGLES) == NULL);
     return 0;
 }

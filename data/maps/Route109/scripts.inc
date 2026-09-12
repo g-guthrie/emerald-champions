@@ -402,13 +402,11 @@ Route109_EventScript_TrainerTipsSign::
 	end
 
 Route109_EventScript_David::
-	trainerbattle_double TRAINER_DAVID, Route109_Text_DavidIntro, Route109_Text_DavidDefeated, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route109_Text_DavidPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route109_Text_DavidPostBattle, MSGBOX_NPC
 	end
 
 Route109_EventScript_Alice::
-	trainerbattle_double TRAINER_ALICE, Route109_Text_AliceIntro, Route109_Text_AliceDefeated, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route109_Text_AlicePostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route109_Text_AlicePostBattle, MSGBOX_NPC
 	end
 
 Route109_EventScript_Huey::
@@ -421,24 +419,7 @@ Route109_EventScript_Edmond::
 	end
 
 Route109_EventScript_Ricky::
-	trainerbattle_double TRAINER_RICKY_1, Route109_Text_RickyIntro, Route109_Text_RickyDefeated, EmeraldChampions_Text_NeedTwoPokemon, Route109_EventScript_RickyRegisterMatchCallAfterBattle
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route109_EventScript_RickyRematch
-	msgbox Route109_Text_RickyPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route109_EventScript_RickyRegisterMatchCallAfterBattle::
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route109_Text_RickyRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_RICKY_1
-	release
-	end
-
-Route109_EventScript_RickyRematch::
-	trainerbattle_rematch_double TRAINER_RICKY_1, Route109_Text_RickyRematchIntro, Route109_Text_RickyRematchDefeated, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route109_Text_RickyRematchPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route109_Text_RickyPostBattle, MSGBOX_NPC
 	end
 
 Route109_EventScript_Lola::
@@ -463,8 +444,7 @@ Route109_EventScript_LolaRematch::
 	end
 
 Route109_EventScript_Austina::
-	trainerbattle_double TRAINER_AUSTINA, Route109_Text_AustinaIntro, Route109_Text_AustinaDefeated, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route109_Text_AustinaPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route109_Text_AustinaPostBattle, MSGBOX_NPC
 	end
 
 Route109_EventScript_Gwen::
@@ -472,8 +452,7 @@ Route109_EventScript_Gwen::
 	end
 
 Route109_EventScript_Carter::
-	trainerbattle_double TRAINER_CARTER, Route109_Text_CarterIntro, Route109_Text_CarterDefeated, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route109_Text_CarterPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route109_Text_CarterPostBattle, MSGBOX_NPC
 	end
 
 Route109_EventScript_Paul::

@@ -2113,9 +2113,12 @@ static void InitDomeTrainers(void)
 
 static void CalcDomeMonStats(const struct TrainerMon *fmon, int level, int *stats)
 {
+    // TrainerMon EVs use Showdown order; native stat order puts Speed fourth.
+    static const u8 evIndices[NUM_STATS] = {0, 1, 2, 5, 3, 4};
     for (enum Stat i = 0; i < NUM_STATS; i++)
         stats[i] = CalculateSpeciesStat(fmon->species, fmon->nature, i, level,
-                                       fmon->ev != NULL ? fmon->ev[i] : 0);
+                                       fmon->ev != NULL ? fmon->ev[evIndices[i]] : 0,
+                                       fmon->iv ? (fmon->iv >> (i * 5)) & MAX_IV_MASK : MAX_PER_STAT_IVS);
 }
 
 static void SwapDomeTrainers(int id1, int id2, u16 *statsArray)

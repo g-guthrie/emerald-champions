@@ -622,6 +622,9 @@ struct BattleStruct
     u8 wildVictorySong;
     enum Type dynamicMoveType;
     enum BattlerId battlerPreventingSwitchout;
+    u8 campaignLevelCap;
+    u8 campaignPrizeMultiplier;
+    bool8 campaignRewardEligible;
     u8 moneyMultiplier:6;
     u8 moneyMultiplierItem:1;
     u8 moneyMultiplierMove:1;

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "move.h"
 #include "emerald_champions_opening.h"
 #include "battle.h"
 #include "battle_anim.h"
@@ -2870,6 +2871,7 @@ static void BattleStartClearSetData(void)
     gBattleStruct->safariEscapeFactor = 3;
     gBattleStruct->wildVictorySong = 0;
     gBattleStruct->moneyMultiplier = 1;
+    InitCampaignBattleReward();
 
     gBattleStruct->givenExpMons[0] = 0;
     gBattleStruct->givenExpMons[1] = 0;
@@ -3970,10 +3972,8 @@ static void HandleTurnActionSelectionState(void)
                         {
                             moveInfo.moves[i] = gBattleMons[battler].moves[i];
                             moveInfo.currentPP[i] = gBattleMons[battler].pp[i];
-                            moveInfo.maxPP[i] = CalculatePPWithBonus(
-                                                            gBattleMons[battler].moves[i],
-                                                            gBattleMons[battler].ppBonuses,
-                                                            i);
+                            moveInfo.maxPP[i] = GetMoveMaxPP(
+                                                            gBattleMons[battler].moves[i]);
                         }
 
                         BtlController_EmitChooseMove(battler, B_COMM_TO_CONTROLLER, IsDoubleBattle() != 0, FALSE, &moveInfo);

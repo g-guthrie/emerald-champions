@@ -40,7 +40,7 @@ DewfordTown_House1_EventScript_MegaGift_BARBARACITE::
 	lock
 	faceplayer
 	msgbox DewfordTown_House1_EventScript_MegaGift_BARBARACITE_Text, MSGBOX_DEFAULT
-	giveitem ITEM_BARBARACITE
+	giveuniqueitem ITEM_BARBARACITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_EC_MEGA_GIFT_BARBARACITE
 	release

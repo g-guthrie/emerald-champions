@@ -34,13 +34,11 @@ Route130_EventScript_CheckSetAbnormalWeather::
 	return
 
 Route130_EventScript_Rodney::
-	trainerbattle_double TRAINER_RODNEY, Route130_Text_RodneyIntro, Route130_Text_RodneyDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route130_Text_RodneyPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route130_Text_RodneyPostBattle, MSGBOX_NPC
 	end
 
 Route130_EventScript_Katie::
-	trainerbattle_double TRAINER_KATIE, Route130_Text_KatieIntro, Route130_Text_KatieDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route130_Text_KatiePostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route130_Text_KatiePostBattle, MSGBOX_NPC
 	end
 
 Route130_EventScript_Santiago::

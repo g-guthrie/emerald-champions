@@ -9,7 +9,6 @@ extern u8 gBikeCollisions;
 extern u16 gScrollableMultichoice_ScrollOffset;
 
 u8 GetLeadMonIndex(void);
-bool8 IsDestinationBoxFull(void);
 u16 GetPCBoxToSendMon(void);
 bool8 InMultiPartnerRoom(void);
 void UpdateTrainerFansAfterLinkBattle(void);
@@ -44,10 +43,10 @@ void CutMoveOpenDottedHoleDoor(void);
 void IsEmeraldChampionsGameCornerPokemonClaimed(void);
 void GiveEmeraldChampionsGameCornerPokemon(void);
 void GiveEmeraldChampionsPreparedPokemon(void);
-void BufferSelectedMonEmeraldChampionsEvSummary(void);
-void BufferSelectedMonEmeraldChampionsEvDetail(void);
-void AdjustSelectedMonEmeraldChampionsEvs(void);
-void ResetSelectedMonEmeraldChampionsEvs(void);
+void BufferSelectedMonEmeraldChampionsTrainingSummary(void);
+void BufferSelectedMonEmeraldChampionsTrainingDetail(void);
+void AdjustSelectedMonEmeraldChampionsTraining(void);
+void ResetSelectedMonEmeraldChampionsTraining(void);
 #if EC_HEADLESS_FIXTURES
 bool32 IsScrollableMultichoiceHeadlessActive(u16 menu);
 #endif
@@ -68,7 +67,14 @@ void ApplyEmeraldChampionsFormSelection(void);
 void BufferEmeraldChampionsBondingPreview(void);
 void ApplyEmeraldChampionsBonding(void);
 
-u32 GetEmeraldChampionsEvolutionPrice(enum Item item);
 bool32 IsEmeraldChampionsFreeCatalogueItem(enum Item item);
+
+void LocateEmeraldChampionsCastform(void);
+
+void TradeEmeraldChampionsShoalMaterials(void);
+void BufferEmeraldChampionsShoalReward(void);
+void CheckEmeraldChampionsRedundantPurchase(void);
+void ConvertEmeraldChampionsFiniteReward(void);
+void ClaimEmeraldChampionsSootMilestone(void);
 
 #endif // GUARD_FIELD_SPECIALS_H

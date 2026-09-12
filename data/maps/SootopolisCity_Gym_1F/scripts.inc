@@ -101,7 +101,7 @@ SootopolisCity_Gym_1F_EventScript_JuanDefeated::
 	call Common_EventScript_PlayGymBadgeFanfare
 	msgbox SootopolisCity_Gym_1F_Text_ExplainRainBadgeTakeThis, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_SOOTOPOLIS_GYM
-	setflag FLAG_BADGE08_GET
+	completemilestone FLAG_BADGE08_GET
 	setflag FLAG_HIDE_SOOTOPOLIS_CITY_RESIDENTS
 	setflag FLAG_HIDE_SOOTOPOLIS_CITY_STEVEN
 	setflag FLAG_HIDE_SOOTOPOLIS_CITY_WALLACE
@@ -122,14 +122,14 @@ SootopolisCity_Gym_1F_EventScript_JuanDefeated::
 	end
 
 SootopolisCity_Gym_1F_EventScript_GiveGyaradosite::
-	giveitem ITEM_GYARADOSITE
+	giveuniqueitem ITEM_GYARADOSITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 	msgbox SootopolisCity_Gym_1F_Text_ExplainGyaradosite, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_JUAN_GYARADOSITE
 	return
 
 SootopolisCity_Gym_1F_EventScript_GiveGyaradosite2::
-	giveitem ITEM_GYARADOSITE
+	giveuniqueitem ITEM_GYARADOSITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	msgbox SootopolisCity_Gym_1F_Text_ExplainGyaradosite, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_JUAN_GYARADOSITE

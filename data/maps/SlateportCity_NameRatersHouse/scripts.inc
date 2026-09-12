@@ -115,7 +115,7 @@ SlateportCity_NameRatersHouse_EventScript_MegaGift_MALAMARITE::
 	lock
 	faceplayer
 	msgbox SlateportCity_NameRatersHouse_EventScript_MegaGift_MALAMARITE_Text, MSGBOX_DEFAULT
-	giveitem ITEM_MALAMARITE
+	giveuniqueitem ITEM_MALAMARITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_EC_MEGA_GIFT_MALAMARITE
 	release

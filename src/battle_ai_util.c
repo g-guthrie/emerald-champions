@@ -153,13 +153,6 @@ enum Move GetAIChosenMove(enum BattlerId battlerId)
     return index == MAX_MON_MOVES ? MOVE_NONE : gBattleMons[battlerId].moves[index];
 }
 
-bool32 AI_RandLessThan(u32 val)
-{
-    if ((Random() % 0xFF) < val)
-        return TRUE;
-    return FALSE;
-}
-
 bool32 IsAiFlagPresent(u64 flag)
 {
     for (enum BattlerId battlerIndex = 0; battlerIndex < MAX_BATTLERS_COUNT; battlerIndex++)
@@ -1608,13 +1601,6 @@ struct SimulatedDamage AI_CalcItemBoostDamage(struct AiCalcValues *aiCalc, enum 
     gAiLogicData->items[battlerAtk] = savedKnownItem;
     gAiLogicData->holdEffects[battlerAtk] = savedEffect;
     return damage;
-}
-
-struct AiKOChance AI_CalcKOChance(struct AiCalcValues *aiCalc, enum BattlerId battlerAtk, enum BattlerId battlerDef, u32 hp)
-{
-    struct AiKOChance chance = {.numerator = 0, .denominator = 1, .exact = TRUE};
-    AI_CalcDamageInternal(aiCalc, battlerAtk, battlerDef, hp, &chance, FALSE);
-    return chance;
 }
 
 // Call only after a first attack activated the target's resist Berry. This
@@ -5207,12 +5193,6 @@ struct AiLogicData *AllocSaveAiLogicData(void)
     struct AiLogicData *savedAiLogicData = Alloc(SIZE_G_AI_LOGIC_DATA);
     memcpy(savedAiLogicData, gAiLogicData, SIZE_G_AI_LOGIC_DATA);
     return savedAiLogicData;
-}
-
-void FreeRestoreAiLogicData(struct AiLogicData *savedAiLogicData)
-{
-    memcpy(gAiLogicData, savedAiLogicData, SIZE_G_AI_LOGIC_DATA);
-    Free(savedAiLogicData);
 }
 
 // party logic

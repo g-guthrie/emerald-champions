@@ -102,6 +102,7 @@ EventScript_PkmnCenterNurse_TakeAndHealPkmn::
 	applymovement VAR_0x800B, Common_Movement_FaceDown
 	waitmovement 0
 	special HealPlayerParty
+	special RestockEmeraldChampionsBasicBalls
 	callnative RetryPendingLegendaryRelics
 	copyvar VAR_POKE_VIAL_CHARGES, VAR_POKE_VIAL_MAX_CHARGES
 	callnative UpdateFollowingPokemon

@@ -22,17 +22,16 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from emerald_champions_evs import validate_evs
+from emerald_champions_teams import BRANCH_RE, ENCOUNTER_RE, line_value
 
 ROOT = Path(__file__).resolve().parents[1]
 MASTER = ROOT / "data/emerald_champions/emerald_champions_master_battle_design.txt"
 TRAINERS_PARTY = ROOT / "src" / "data" / "trainers.party"
-ENCOUNTER_RE = re.compile(r"(?m)^=== ENCOUNTER (\d{4}) ===$")
 TRAINER_BLOCK_RE = re.compile(r"(?m)^=== (TRAINER_[A-Z0-9_]+) ===$")
-BRANCH_RE = re.compile(r"(?m)^--- BRANCH ([A-Z0-9_]+) ---$")
 MON_RE = re.compile(
     r"(?m)^  \d+\. (SPECIES_[A-Z0-9_]+) @ (ITEM_[A-Z0-9_]+) \| "
     r"level_offset=(-?\d+) \| ability=(ABILITY_[A-Z0-9_]+) \| "
-    r"nature=(NATURE_[A-Z0-9_]+) \| evs=([0-9/]+) \| moves=([A-Z0-9_,]+)$"
+    r"nature=(NATURE_[A-Z0-9_]+) \| evs=([0-9/]+) \| moves=([A-Z0-9_,]+) \| ivs=([0-9/]+) \| friendship=(\d+)$"
 )
 
 # Class names remain compatibility aliases. Every campaign trainer uses the
@@ -54,10 +53,13 @@ class Mon:
     species: str
     item: str
     level: int
+    offset: int
     ability: str
     nature: str
     evs: list[int]
     moves: list[str]
+    ivs: list[int]
+    friendship: int
 
 
 @dataclass
@@ -68,11 +70,7 @@ class Design:
     ai_profile: str
     ai_extra: list[str]
     mons: list[Mon]
-
-
-def line_value(text: str, key: str) -> str:
-    match = re.search(rf"(?m)^{re.escape(key)}: (.*)$", text)
-    return match.group(1) if match else ""
+    prize_multiplier: int
 
 
 def split_by_markers(text: str, pattern: re.Pattern[str]) -> tuple[str, list[tuple[re.Match[str], str]]]:
@@ -100,17 +98,21 @@ def read_designs(master: Path = MASTER) -> dict[str, Design]:
             fmt = line_value(branch, "format")
             mons = []
             for match in MON_RE.finditer(branch):
-                level = cap + int(match.group(3))
-                if not 1 <= level <= 100:
-                    raise ValueError(f"{trainer}: level {level} is outside 1-100")
+                offset = int(match.group(3))
+                if not -8 <= offset <= 7:
+                    raise ValueError(f"{trainer}: level offset {offset} is outside -8..7")
+                level = min(100, max(1, cap + offset))
                 mons.append(Mon(
                     species=match.group(1),
                     item=match.group(2),
                     level=level,
+                    offset=int(match.group(3)),
                     ability=match.group(4),
                     nature=match.group(5),
                     evs=validate_evs([int(value) for value in match.group(6).split("/")]),
                     moves=match.group(7).split(","),
+                    ivs=[int(v) for v in match.group(8).split("/")],
+                    friendship=int(match.group(9)),
                 ))
             if not mons:
                 raise ValueError(f"{trainer}: no EV-encoded Pokemon records")
@@ -118,7 +120,13 @@ def read_designs(master: Path = MASTER) -> dict[str, Design]:
                 raise ValueError(f"duplicate trainer design {trainer}")
             extra = line_value(branch, "ai_extra")
             ai_extra = [trait.strip() for trait in extra.split(",") if trait.strip()] if extra else []
-            designs[trainer] = Design(encounter_number, trainer, fmt, ai_profile, ai_extra, mons)
+            cls = line_value(encounter, "battle_class")
+            rate = 20 if cls in {"regular", "casual", "grunt"} else 40 if cls in {"ace", "gym", "rival", "brain"} else 100
+            if 493 <= encounter_number <= 496:
+                rate = 150
+            elif encounter_number == 497:
+                rate = 200
+            designs[trainer] = Design(encounter_number, trainer, fmt, ai_profile, ai_extra, mons, rate)
     return designs
 
 
@@ -148,15 +156,13 @@ def render_party(design: Design) -> str:
         rows.extend([
             title,
             f"Level: {mon.level}",
+            f"Level Offset: {mon.offset}",
             f"Ability: {mon.ability}",
-            "IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe",
+            "IVs: " + " / ".join(f"{value} {name}" for value, name in zip(mon.ivs, stat_names)),
+            f"Happiness: {mon.friendship}",
             "EVs: " + " / ".join(f"{value} {name}" for value, name in zip(mon.evs, stat_names)),
             f"Nature: {mon.nature}",
         ])
-        # Unspecified trainer friendship is zero, leaving Return at 1 BP.
-        # Materialize its intended full power; preserve zero for Frustration.
-        if "MOVE_RETURN" in mon.moves:
-            rows.append("Happiness: 255")
         rows.extend(f"- {move}" for move in mon.moves if move != "MOVE_NONE")
         rows.append("")
     return "\n".join(rows).rstrip()
@@ -167,6 +173,7 @@ def rewrite_trainer_block(block: str, design: Design) -> str:
     header = block[:section_end] if section_end >= 0 else block.rstrip()
     header = replace_attribute(header, "Double Battle", "Yes" if design.format in ("double", "multi") else "No")
     header = replace_attribute(header, "AI", ai_flags(design))
+    header = replace_attribute(header, "Prize Multiplier", str(design.prize_multiplier))
     # Campaign battles are competitive puzzles: no Bag healing on either side.
     header = re.sub(r"(?m)^Items:.*\n?", "", header)
     if design.format == "multi":

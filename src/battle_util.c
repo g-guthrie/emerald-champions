@@ -9749,19 +9749,6 @@ bool32 MoveHasAdditionalEffect(enum Move move, enum MoveEffect moveEffect)
     return FALSE;
 }
 
-bool32 MoveHasAdditionalOnSideEffect(enum Move move)
-{
-    u32 i;
-    u32 numAdditionalEffects = GetMoveAdditionalEffectCount(move);
-    for (i = 0; i < numAdditionalEffects; i++)
-    {
-        const struct AdditionalEffect *additionalEffect = GetMoveAdditionalEffectById(move, i);
-        if (additionalEffect->onSide)
-            return TRUE;
-    }
-    return FALSE;
-}
-
 bool32 MoveHasAdditionalEffectWithChance(enum Move move, enum MoveEffect moveEffect, u32 chance)
 {
     u32 i;

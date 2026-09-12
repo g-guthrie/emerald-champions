@@ -137,6 +137,7 @@ GraniteCave_StevensRoom_EventScript_StoneStorageFull::
 	end
 
 GraniteCave_StevensRoom_EventScript_StoneReceipt::
+	goto_if_eq VAR_0x800B, 3, GraniteCave_StevensRoom_EventScript_StoneCashReceipt
 	bufferitemnameplural STR_VAR_2, VAR_0x8000, 1
 	playfanfare MUS_OBTAIN_ITEM
 	msgbox gText_ObtainedTheItem, MSGBOX_DEFAULT
@@ -282,3 +283,12 @@ GraniteCave_StevensRoom_Text_CobalionCaught:
 	.string "route signs as you travel.\p"
 	.string "They record your discoveries and\n"
 	.string "show which POKéMON remain nearby.$"
+
+GraniteCave_StevensRoom_EventScript_StoneCashReceipt::
+	bufferitemname STR_VAR_1, VAR_0x8000
+	msgbox GraniteCave_StevensRoom_Text_StoneCash, MSGBOX_DEFAULT
+	return
+
+GraniteCave_StevensRoom_Text_StoneCash:
+	.string "You already own a {STR_VAR_1}.\n"
+	.string "DEVON awards you ¥3,000 instead!$"

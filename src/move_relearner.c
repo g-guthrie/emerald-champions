@@ -33,7 +33,6 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "data/tutor_moves.h"
-#include "data/pokemon/emerald_champions_preparation_learnsets.h"
 
 // The different versions of hearts are selected using animation
 // commands.
@@ -272,7 +271,6 @@ static u32 GetRelearnerLevelUpMoves(struct BoxPokemon *mon, u16 *moves);
 static u32 GetRelearnerEggMoves(struct BoxPokemon *mon, u16 *moves);
 static u32 GetRelearnerTMMoves(struct BoxPokemon *mon, u16 *moves);
 static u32 GetRelearnerTutorMoves(struct BoxPokemon *mon, u16 *moves);
-u32 GetEmeraldChampionsPreparationMovesToLearn(struct BoxPokemon *mon, u16 *moves);
 
 static void Task_MoveRelearner_HandleInput(u8 taskId);
 static void Task_MoveRelearner_LearnMove(u8 taskId);
@@ -1016,92 +1014,6 @@ static u32 GetRelearnerTutorMoves(struct BoxPokemon *mon, u16 *moves)
 
         if (!BoxMonKnowsMove(mon, move))
             moves[numMoves++] = move;
-    }
-
-    return numMoves;
-}
-
-const u16 *GetEmeraldChampionsPreparationMoves(enum Species species)
-{
-    const u16 *moves;
-    enum Species baseSpecies;
-
-    if (species <= SPECIES_NONE || species >= NUM_SPECIES)
-        return sEmeraldChampionsPreparationMoves_None;
-
-    // This table is intentionally separate from SpeciesInfo.teachableLearnset:
-    // only the Center's All Legal Moves service receives historical legality.
-    moves = sEmeraldChampionsPreparationLearnsets[species];
-    if (moves != NULL)
-        return moves;
-
-    baseSpecies = GET_BASE_SPECIES_ID(species);
-    if (baseSpecies > SPECIES_NONE && baseSpecies < NUM_SPECIES)
-    {
-        moves = sEmeraldChampionsPreparationLearnsets[baseSpecies];
-        if (moves != NULL)
-            return moves;
-    }
-
-    return sEmeraldChampionsPreparationMoves_None;
-}
-
-static void BuildEmeraldChampionsPreparationMoveAccess(enum Species species, bool8 *availableMoves)
-{
-    const u16 *preparationMoves = GetEmeraldChampionsPreparationMoves(species);
-
-    for (u32 i = 0; preparationMoves[i] != MOVE_UNAVAILABLE; i++)
-    {
-        enum Move move = preparationMoves[i];
-
-        if (move > MOVE_NONE && move < MOVES_COUNT_ALL)
-            availableMoves[move] = TRUE;
-    }
-
-    // Presets grant individual move access in both formats, including item-gated
-    // roles. Reuse their species/form resolver without granting any held items.
-    // Smeargle gets its preset moves here; everything else still needs Sketch.
-    for (u8 format = 0; format < EC_BATTLE_FORMAT_COUNT; format++)
-    {
-        u32 count = GetEmeraldChampionsRawBattleSetCountForFormat(species, format);
-        for (u32 choice = 0; choice < count; choice++)
-        {
-            const struct EmeraldChampionsBattleSet *preset =
-                GetEmeraldChampionsRawBattleSetForFormat(species, choice, format);
-            for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
-            {
-                enum Move move = preset->moves[slot];
-                if (move > MOVE_NONE && move < MOVES_COUNT_ALL)
-                    availableMoves[move] = TRUE;
-            }
-        }
-    }
-
-}
-
-bool32 CanSpeciesUseEmeraldChampionsPreparationMove(enum Species species, enum Move move)
-{
-    bool8 availableMoves[MOVES_COUNT_ALL] = {FALSE};
-    if (move <= MOVE_NONE || move >= MOVES_COUNT_ALL)
-        return FALSE;
-    BuildEmeraldChampionsPreparationMoveAccess(species, availableMoves);
-    return availableMoves[move];
-}
-
-u32 GetEmeraldChampionsPreparationMovesToLearn(struct BoxPokemon *mon, u16 *moves)
-{
-    bool8 availableMoves[MOVES_COUNT_ALL] = {FALSE};
-    u32 numMoves = 0;
-    BuildEmeraldChampionsPreparationMoveAccess(GetBoxMonData(mon, MON_DATA_SPECIES), availableMoves);
-
-    for (u32 move = MOVE_NONE + 1; move < MOVES_COUNT_ALL; move++)
-    {
-        if (availableMoves[move] && !BoxMonKnowsMove(mon, move))
-        {
-            if (moves != NULL)
-                moves[numMoves] = move;
-            numMoves++;
-        }
     }
 
     return numMoves;

@@ -299,7 +299,6 @@ gSpecials::
 	def_special RemoveCameraObject
 	def_special GetPokeblockNameByMonNature
 	def_special GetSecretBaseNearbyMapName
-	def_special CheckRelicanthWailord
 	def_special ShouldDoBrailleRegirockEffectOld
 	def_special DoOrbEffect
 	def_special FadeOutOrbEffect, waitstate=1
@@ -529,10 +528,10 @@ gSpecials::
 	def_special BufferSelectedMonEmeraldChampionsBattleSetPreview
 	def_special BufferSelectedMonNature
 	def_special BufferSelectedMonCurrentEmeraldChampionsBattleSet
-	def_special BufferSelectedMonEmeraldChampionsEvSummary
-	def_special BufferSelectedMonEmeraldChampionsEvDetail
-	def_special AdjustSelectedMonEmeraldChampionsEvs
-	def_special ResetSelectedMonEmeraldChampionsEvs
+	def_special BufferSelectedMonEmeraldChampionsTrainingSummary
+	def_special BufferSelectedMonEmeraldChampionsTrainingDetail
+	def_special AdjustSelectedMonEmeraldChampionsTraining
+	def_special ResetSelectedMonEmeraldChampionsTraining
 	def_special TryUnlockSelectedLegendarySign
 	def_special GetSelectedLegendarySignState
 	def_special ShouldShowSelectedLegendarySignObject
@@ -572,7 +571,7 @@ gSpecials::
 	def_special StartEmeraldChampionsBirchRescue, waitstate=1
 	def_special BufferEmeraldChampionsRivalBranch
 	def_special GiveEmeraldChampionsOpeningBalls
-	def_special TopUpEmeraldChampionsOpeningBalls
+	def_special RestockEmeraldChampionsBasicBalls
 	def_special BufferEmeraldChampionsStarterNames
 	def_special SelectEmeraldChampionsStarterForNaming
 	def_special GiveEmeraldChampionsStarterMegaStoneAtIndex
@@ -733,3 +732,11 @@ gSpecials::
 	def_special TradeEmeraldChampionsShoalMaterials
 
 	def_special GetHeatranDiscoveryState
+
+	def_special CompleteEmeraldChampionsMilestone, requests_effects=1
+
+	def_special LocateEmeraldChampionsCastform
+	def_special CheckEmeraldChampionsRedundantPurchase
+	def_special ConvertEmeraldChampionsFiniteReward, requests_effects=1
+	def_special BufferEmeraldChampionsShoalReward
+	def_special ReturnInGameTradeHeldItem, requests_effects=1

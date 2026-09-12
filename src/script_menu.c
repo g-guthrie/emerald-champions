@@ -784,7 +784,7 @@ static void CreateLilycoveSSTidalMultichoice(void)
         }
     }
 
-    if (CheckBagHasItem(ITEM_EON_TICKET, 1) == TRUE && FlagGet(FLAG_ENABLE_SHIP_SOUTHERN_ISLAND) == TRUE)
+    if (FlagGet(FLAG_EC_EARNED_EON_TICKET) && FlagGet(FLAG_ENABLE_SHIP_SOUTHERN_ISLAND))
     {
         if (gSpecialVar_0x8004 == 0)
         {
@@ -816,7 +816,7 @@ static void CreateLilycoveSSTidalMultichoice(void)
         }
     }
 
-    if (CheckBagHasItem(ITEM_AURORA_TICKET, 1) == TRUE && FlagGet(FLAG_ENABLE_SHIP_BIRTH_ISLAND) == TRUE)
+    if (FlagGet(FLAG_EC_EARNED_AURORA_TICKET) && FlagGet(FLAG_ENABLE_SHIP_BIRTH_ISLAND))
     {
         if (gSpecialVar_0x8004 == 0)
         {
@@ -832,7 +832,7 @@ static void CreateLilycoveSSTidalMultichoice(void)
         }
     }
 
-    if (CheckBagHasItem(ITEM_OLD_SEA_MAP, 1) == TRUE && FlagGet(FLAG_ENABLE_SHIP_FARAWAY_ISLAND) == TRUE)
+    if (FlagGet(FLAG_EC_EARNED_OLD_SEA_MAP) && FlagGet(FLAG_ENABLE_SHIP_FARAWAY_ISLAND))
     {
         if (gSpecialVar_0x8004 == 0)
         {

@@ -62,7 +62,7 @@ RustboroCity_DevonCorp_3F_EventScript_ReceivedLetter::
 	playfanfare MUS_OBTAIN_ITEM
 	message RustboroCity_DevonCorp_3F_Text_ReceivedPokenav
 	waitfanfare
-	setflag FLAG_SYS_POKENAV_GET
+	completemilestone FLAG_SYS_POKENAV_GET
 	setflag FLAG_RECEIVED_POKENAV
 	setflag FLAG_HIDE_RUSTBORO_CITY_POKEMON_SCHOOL_SCOTT
 	msgbox RustboroCity_DevonCorp_3F_Text_MrStoneExplainPokenavRestUp, MSGBOX_DEFAULT
@@ -164,6 +164,7 @@ RustboroCity_DevonCorp_3F_Movement_PlayerApproachDesk:
 RustboroCity_DevonCorp_3F_EventScript_MrStone::
 	lock
 	faceplayer
+	call_if_set FLAG_EC_STEVEN_RESEARCH_CONCLUSION, RustboroCity_DevonCorp_3F_EventScript_ResearchConclusion
 	goto_if_set FLAG_RECEIVED_PIDGEOTITE_FROM_DEVON, RustboroCity_DevonCorp_3F_EventScript_MrStoneAfterFavor
 	goto_if_unset FLAG_DELIVERED_STEVEN_LETTER, RustboroCity_DevonCorp_3F_EventScript_MrStoneFavorPending
 	checkitem ITEM_MEGA_RING, 1
@@ -189,7 +190,7 @@ RustboroCity_DevonCorp_3F_EventScript_MegaRingPending::
 
 RustboroCity_DevonCorp_3F_EventScript_GivePidgeotite::
 	msgbox RustboroCity_DevonCorp_3F_Text_ThankYouForDeliveringLetter, MSGBOX_DEFAULT
-	giveitem ITEM_PIDGEOTITE
+	giveuniqueitem ITEM_PIDGEOTITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_PIDGEOTITE_FROM_DEVON
 	msgbox RustboroCity_DevonCorp_3F_Text_ExplainPidgeotite, MSGBOX_DEFAULT
@@ -350,3 +351,17 @@ RustboroCity_DevonCorp_3F_Text_RepeatAndTimerHugelyPopular:
 RustboroCity_DevonCorp_3F_Text_RareRocksDisplay:
 	.string "It's a collection of rare rocks and\n"
 	.string "stones assembled by the PRESIDENT.$"
+
+RustboroCity_DevonCorp_3F_EventScript_ResearchConclusion::
+	goto_if_set FLAG_EC_REPORT_C48_COMPLETE, Common_EventScript_NopReturn
+	completemilestone FLAG_EC_REPORT_C48_COMPLETE
+	msgbox RustboroCity_DevonCorp_3F_Text_ResearchConclusion, MSGBOX_DEFAULT
+	return
+
+RustboroCity_DevonCorp_3F_Text_ResearchConclusion:
+	.string "The report is complete. What you\n"
+	.string "chose to catch is your own journey.\p"
+	.string "You've earned your place at the\n"
+	.string "LEAGUE, and our final ¥20,000\l"
+	.string "research grant.\p"
+	.string "Your level cap is now 94.$"

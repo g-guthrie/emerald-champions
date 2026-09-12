@@ -145,7 +145,8 @@ bool32 EmeraldChampionsHeadlessBattleAutomationActive(void)
         || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_RUSTBORO_GUIDE_RETRY
         || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_STORY_HANDOFF
         || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_RYDEL_RETRY
-        || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_ROUTE110_RETRY;
+        || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_ROUTE110_RETRY
+        || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_BOOK_RESEARCH;
 }
 
 bool32 EmeraldChampionsHeadlessAutoCaptureActive(void)
@@ -162,6 +163,8 @@ enum EmeraldChampionsHeadlessBattleResolution EmeraldChampionsHeadlessGetBattleR
                           | BATTLE_TYPE_CATCH_TUTORIAL
                           | BATTLE_TYPE_POKEDUDE))
         return EC_HEADLESS_BATTLE_NATIVE;
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_BOOK_RESEARCH)
+        return (gEcHeadlessFixtureParam & 0x800) ? EC_HEADLESS_BATTLE_CAPTURE : EC_HEADLESS_BATTLE_WIN;
     if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_STORY_HANDOFF
      && (gEcHeadlessFixtureParam == 116 || gEcHeadlessFixtureParam == 249 || gEcHeadlessFixtureParam == 250)
      && gEcHeadlessCampaignCaptureSerial == 0
@@ -251,7 +254,7 @@ static u16 GetHeadlessOverworldFixtureGraphicsId(enum Species species)
     {
     case SPECIES_ARTICUNO: return OBJ_EVENT_GFX_INCLEMENT_ARTICUNO;
     case SPECIES_ZAPDOS: return OBJ_EVENT_GFX_INCLEMENT_ZAPDOS;
-    case SPECIES_MOLTRES: return OBJ_EVENT_GFX_INCLEMENT_MOLTRES;
+    case SPECIES_MOLTRES: return OBJ_EVENT_GFX_SPECIES(MOLTRES);
     case SPECIES_MEWTWO: return OBJ_EVENT_GFX_INCLEMENT_MEWTWO;
     case SPECIES_JIRACHI: return OBJ_EVENT_GFX_INCLEMENT_JIRACHI;
     case SPECIES_HEATRAN: return OBJ_EVENT_GFX_INCLEMENT_HEATRAN;
@@ -350,6 +353,197 @@ static void CreateHealthyHeadlessMon(
 {
     CreateMon(mon, species, level, 0, trainerId);
     CalculateMonStats(mon);
+}
+
+// Synthetic prerequisite states only. NPC interaction, map travel, reports,
+// inventory transactions and battle exits still execute the real game scripts.
+// Low byte: scene; 0x100: full reward pocket; 0x200: missing prerequisite;
+// 0x400: already completed; 0x800: capture instead of the default battle win.
+static void PrepareBookResearchScene(void)
+{
+    u32 scene = gEcHeadlessFixtureParam & 0xFF;
+    bool32 missing = gEcHeadlessFixtureParam & 0x200;
+    bool32 completed = gEcHeadlessFixtureParam & 0x400;
+    u32 badges = scene <= 4 ? 5 : scene == 6 ? 6 : 8;
+    if (scene == 0 || scene == 4)
+        badges = 4;
+    ZeroPlayerPartyMons();
+    CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_ZIGZAGOON, 80, OTID_STRUCT_PLAYER_ID);
+    if (!missing)
+        CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][1], SPECIES_CASTFORM_NORMAL, 50, OTID_STRUCT_PLAYER_ID);
+    CalculatePlayerPartyCount();
+    ClearBag();
+    SetMoney(&gSaveBlock1Ptr->money, 6000);
+    for (u32 badge = 0; badge < badges; badge++)
+        FlagSet(FLAG_BADGE01_GET + badge);
+    FlagSet(FLAG_SYS_POKEMON_GET);
+    FlagSet(FLAG_SYS_POKEDEX_GET);
+    FlagSet(FLAG_HIDE_ROUTE_119_TEAM_AQUA);
+    VarSet(VAR_WEATHER_INSTITUTE_STATE, 1);
+    VarSet(VAR_REPEL_STEP_COUNT, 250);
+    if (gEcHeadlessFixtureParam & 0x100)
+    {
+        if (scene == 6)
+            FillHeadlessKeyPocket();
+        else
+        {
+            struct BagPocket *pocket = &gBagPockets[GetItemPocket(scene == 14 || scene == 15 || scene == 17 ? ITEM_VENUSAURITE : ITEM_DEEP_SEA_TOOTH)];
+            for (u32 slot = 0; slot < pocket->capacity; slot++)
+                BagPocket_SetSlotItemIdAndCount(pocket, slot,
+                    pocket->id == POCKET_MEGA_STONES ? ITEM_ABOMASITE : ITEM_FIRE_STONE, MAX_BAG_ITEM_CAPACITY);
+        }
+    }
+    switch (scene)
+    {
+    case 0:
+        FlagSet(FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY);
+        VarSet(VAR_CHANSEY_NURSE_STATE, 7);
+        FlagClear(FLAG_EC_CAUGHT_MOLTRES);
+        LoadHeadlessMap(MAP_EMBER_PATH, 21, 15);
+        break;
+    case 1:
+        if (completed)
+            FlagSet(FLAG_EC_REPORT_C30_COMPLETE);
+        LoadHeadlessMap(MAP_ROUTE111_RUINS_EXTERIOR, 15, 13);
+        break;
+    case 2:
+        if (completed)
+            FlagSet(FLAG_EC_REPORT_C30_COMPLETE);
+        LoadHeadlessMap(MAP_ROUTE119_WEATHER_INSTITUTE_2F, 5, 6);
+        break;
+    case 3:
+        FlagSet(FLAG_BADGE07_GET);
+        FlagClear(FLAG_HIDE_SLATEPORT_CITY_HARBOR_CAPTAIN_STERN);
+        VarSet(VAR_SLATEPORT_HARBOR_STATE, 2);
+        if (completed)
+        {
+            FlagSet(FLAG_EC_REPORT_C44_COMPLETE);
+            FlagSet(FLAG_EXCHANGED_SCANNER);
+        }
+        else if (!missing)
+            AddBagItem(ITEM_SCANNER, 1);
+        LoadHeadlessMap(MAP_SLATEPORT_CITY_HARBOR, 6, 14);
+        break;
+    case 4:
+        VarSet(VAR_CHANSEY_NURSE_STATE, 7);
+        FlagSet(FLAG_EC_RESOLVED_MOLTRES);
+        if (!missing)
+            FlagSet(FLAG_EC_SURVEYED_DESERT_DEPTHS);
+        if (completed)
+            FlagSet(FLAG_EC_REPORT_C26_COMPLETE);
+        LoadHeadlessMap(MAP_SANDSTREWN_RUINS, 4, 14);
+        break;
+    case 5:
+        FlagSet(FLAG_EC_REPORT_C26_COMPLETE);
+        FlagSet(FLAG_EC_REPORT_C30_COMPLETE);
+        if (!missing)
+            FlagSet(FLAG_EC_REPORT_C44_COMPLETE);
+        if (completed)
+            FlagSet(FLAG_REGI_DOORS_OPENED);
+        LoadHeadlessMap(MAP_SEALED_CHAMBER_INNER_ROOM, 10, 5);
+        break;
+    case 6:
+        FlagClear(FLAG_HIDE_LILYCOVE_HARBOR_FERRY_ATTENDANT);
+        if (completed)
+            FlagSet(FLAG_EC_RESOLVED_MEW);
+        LoadHeadlessMap(MAP_LILYCOVE_CITY_HARBOR, 8, 11);
+        break;
+    case 7:
+        FlagSet(FLAG_EC_REPORT_C42_COMPLETE);
+        FlagSet(FLAG_RECEIVED_HM_DIVE);
+        FlagClear(FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_STEVEN);
+        VarSet(VAR_STEVENS_HOUSE_STATE, 2);
+        FlagSet(FLAG_EC_SURVEYED_ORIGIN_CHAMBER);
+        if (!missing)
+            FlagSet(FLAG_EC_SURVEYED_METEOR_CHAMBER);
+        LoadHeadlessMap(MAP_MOSSDEEP_CITY_STEVENS_HOUSE, 6, 6);
+        break;
+    case 8:
+        FlagSet(FLAG_RECEIVED_PIDGEOTITE_FROM_DEVON);
+        FlagSet(FLAG_DELIVERED_STEVEN_LETTER);
+        FlagSet(FLAG_SYS_POKENAV_GET);
+        VarSet(VAR_DEVON_CORP_3F_STATE, 1);
+        if (!missing)
+            FlagSet(FLAG_EC_STEVEN_RESEARCH_CONCLUSION);
+        if (completed)
+            FlagSet(FLAG_EC_REPORT_C48_COMPLETE);
+        LoadHeadlessMap(MAP_RUSTBORO_CITY_DEVON_CORP_3F, 17, 6);
+        break;
+    case 9:
+        LoadHeadlessMap(MAP_DEWFORD_TOWN, 8, 18);
+        break;
+    case 10:
+        AddBagItem(ITEM_MAGMA_STONE, 1);
+        FlagSet(FLAG_EC_CAUGHT_HEATRAN);
+        LoadHeadlessMap(MAP_SCORCHED_SLAB_HEATRANS_ROOM, 10, 15);
+        break;
+    case 11:
+        LoadHeadlessMap(MAP_ROUTE104, 31, 25);
+        break;
+    case 12:
+        LoadHeadlessMap(MAP_ROUTE104, 27, 16);
+        break;
+    case 13:
+        AddBagItem(ITEM_SOOT_SACK, 1);
+        VarSet(VAR_EC_SOOT_PROGRESS, 100 | (completed ? EC_SOOT_CORD_RECEIVED : 0));
+        if (!missing)
+            AddPCItem(ITEM_LINKING_CORD, 1);
+        LoadHeadlessMap(MAP_ROUTE113_GLASS_WORKSHOP, 2, 4);
+        break;
+    case 14:
+        FlagClear(FLAG_ITEM_ROUTE_120_GENGARITE);
+        if (!missing)
+            AddPCItem(ITEM_GENGARITE, 1);
+        LoadHeadlessMap(MAP_ROUTE120, 20, 56);
+        break;
+    case 15:
+        VarSet(VAR_STARTER_GEN, 1);
+        VarSet(VAR_STARTER_MON, 0);
+        VarSet(VAR_EC_SECOND_STARTER, 0);
+        VarSet(VAR_STEVEN_STARTER_STONE_DELIVERY, completed ? 1 : 0);
+        FlagSet(FLAG_DELIVERED_STEVEN_LETTER);
+        FlagClear(FLAG_HIDE_GRANITE_CAVE_STEVEN);
+        AddPCItem(ITEM_MEGA_RING, 1);
+        if (!missing)
+            AddPCItem(ITEM_VENUSAURITE, 1);
+        LoadHeadlessMap(MAP_GRANITE_CAVE_STEVENS_ROOM, 7, 9);
+        break;
+    case 16:
+        gSaveBlock2Ptr->frontier.battlePoints = 100;
+        if (!missing)
+            AddPCItem(ITEM_LINKING_CORD, 1);
+        LoadHeadlessMap(MAP_BATTLE_FRONTIER_EXCHANGE_SERVICE_CORNER, 12, 4);
+        break;
+    case 17:
+    {
+        enum Item item = ITEM_VENUSAURITE;
+        SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM, &item);
+        LoadHeadlessMap(MAP_RUSTBORO_CITY_HOUSE1, 5, 4);
+        break;
+    }
+    case 18:
+        AddBagItem(ITEM_POKE_BALL, 2);
+        AddBagItem(ITEM_POKE_VIAL, 1);
+        AddBagItem(ITEM_LEVELER, 1);
+        AddBagItem(ITEM_REPEL_SPRAY, 1);
+        AddBagItem(ITEM_FLIGHT_BEACON, 1);
+        VarSet(VAR_POKE_VIAL_MAX_CHARGES, 1);
+        LoadHeadlessMap(MAP_OLDALE_TOWN_POKEMON_CENTER_1F, 8, 4);
+        break;
+    case 19:
+        AddBagItem(ITEM_SHOAL_SALT, 4);
+        AddBagItem(ITEM_SHOAL_SHELL, 4);
+        if (!missing)
+            AddPCItem(ITEM_GLALITITE, 1);
+        FlagClear(FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_GLALITITE);
+        LoadHeadlessMap(MAP_SHOAL_CAVE_LOW_TIDE_ENTRANCE_ROOM, 17, 15);
+        break;
+    case 20:
+        gSaveBlock2Ptr->frontier.battlePoints = 100;
+        LoadHeadlessMap(MAP_BATTLE_FRONTIER_EXCHANGE_SERVICE_CORNER, 9, 7);
+        break;
+    }
+    gEcHeadlessFixtureSetupResult = TRUE;
 }
 
 static void PrepareHeadlessHallParty(u32 count)
@@ -947,6 +1141,13 @@ void EmeraldChampionsHeadlessObserve(void)
         ClearBag();
         gEcHeadlessFixtureTrigger = 0;
     }
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_BOOK_RESEARCH
+     && gEcHeadlessFixtureTrigger == 2 && gMain.callback2 == CB2_Overworld
+     && !ArePlayerFieldControlsLocked() && !ScriptContext_IsEnabled())
+    {
+        ClearBag();
+        gEcHeadlessFixtureTrigger = 0;
+    }
     if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_LEAF_SCENE)
     {
         gEcHeadlessFixtureFlashLevel = GetFlashLevel();
@@ -1025,8 +1226,8 @@ void EmeraldChampionsHeadlessObserve(void)
             gEcHeadlessCampaignQueryValue = VarGet(gEcHeadlessCampaignQueryId);
         else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_SELL_PRICE)
             gEcHeadlessCampaignQueryValue = GetItemSellPrice(gEcHeadlessCampaignQueryId);
-        else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_EVOLUTION_PRICE)
-            gEcHeadlessCampaignQueryValue = GetEmeraldChampionsEvolutionPrice(gEcHeadlessCampaignQueryId);
+        else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_ITEM_PRICE)
+            gEcHeadlessCampaignQueryValue = GetItemPrice(gEcHeadlessCampaignQueryId);
         else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_MONEY)
             gEcHeadlessCampaignQueryValue = GetMoney(&gSaveBlock1Ptr->money);
         else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_BP)
@@ -1981,6 +2182,9 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
             }
             LoadHeadlessMap(MAP_ROUTE110, 33 + lane, 57);
         }
+        break;
+    case EC_HEADLESS_SCENARIO_BOOK_RESEARCH:
+        PrepareBookResearchScene();
         break;
     case EC_HEADLESS_SCENARIO_STORY_HANDOFF:
         {

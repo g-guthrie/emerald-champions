@@ -710,7 +710,7 @@ RustboroCity_DevonCorp_2F_EventScript_MegaGift_MAGEARNITE::
 	lock
 	faceplayer
 	msgbox RustboroCity_DevonCorp_2F_EventScript_MegaGift_MAGEARNITE_Text, MSGBOX_DEFAULT
-	giveitem ITEM_MAGEARNITE
+	giveuniqueitem ITEM_MAGEARNITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_EC_MEGA_GIFT_MAGEARNITE
 	release

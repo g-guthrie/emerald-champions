@@ -101,6 +101,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_Scientist::
 	end
 
 MossdeepCity_SpaceCenter_2F_EventScript_ScientistNormal::
+	goto_if_set FLAG_EC_REPORT_C42_COMPLETE, MossdeepCity_SpaceCenter_2F_EventScript_BirthIslandBriefing
 	msgbox MossdeepCity_SpaceCenter_2F_Text_MossdeepIdealForRockets, MSGBOX_DEFAULT
 	release
 	end
@@ -294,6 +295,11 @@ MossdeepCity_SpaceCenter_2F_EventScript_DefeatedMaxieTabitha::
 	msgbox MossdeepCity_SpaceCenter_2F_Text_StevenThankYouComeSeeMeAtHome, MSGBOX_DEFAULT
 	closemessage
 	fadescreen FADE_TO_BLACK
+	completemilestone FLAG_EC_REPORT_C42_COMPLETE
+	setflag FLAG_EC_EARNED_AURORA_TICKET
+	setflag FLAG_ENABLE_SHIP_BIRTH_ISLAND
+	setflag FLAG_RECEIVED_HM_DIVE
+	clearflag FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_BELDUM_POKEBALL
 	setflag FLAG_DEFEATED_MAGMA_SPACE_CENTER
 	setflag FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_STEVEN
 	removeobject LOCALID_SPACE_CENTER_2F_STEVEN
@@ -506,3 +512,17 @@ MossdeepCity_SpaceCenter_2F_Text_StevenThankYouComeSeeMeAtHome:
 	.string "I have DIVE for you.\p"
 	.string "You'll need it to follow AQUA's\n"
 	.string "stolen submarine.$"
+
+MossdeepCity_SpaceCenter_2F_EventScript_BirthIslandBriefing::
+	msgbox MossdeepCity_SpaceCenter_2F_Text_BirthIslandBriefing, MSGBOX_DEFAULT
+	release
+	end
+
+MossdeepCity_SpaceCenter_2F_Text_BirthIslandBriefing:
+	.string "Your BIRTH ISLAND clearance is\n"
+	.string "registered at LILYCOVE HARBOR.\p"
+	.string "The readings aren't random. Take\n"
+	.string "the shortest route between each\l"
+	.string "position of the triangle.\p"
+	.string "Extra steps disturb the pattern.\n"
+	.string "A reset costs no ticket or reward.$"

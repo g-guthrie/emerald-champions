@@ -1,4 +1,5 @@
 #include "global.h"
+#include "move.h"
 #include "champions_circuit.h"
 #include "malloc.h"
 #include "apprentice.h"
@@ -84,6 +85,19 @@ struct SpeciesItem
 {
     enum Species species;
     enum Item item;
+};
+
+struct MonSpritesGfxManager
+{
+    u32 numSprites:4;
+    u32 numFrames:8;
+    u32 active:8;
+    u32 dataSize:4;
+    u32 mode:4; // MON_SPR_GFX_MODE_*
+    void *spriteBuffer;
+    u8 **spritePointers;
+    struct SpriteTemplate *templates;
+    struct SpriteFrameImage *frameImages;
 };
 
 static u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon);
@@ -789,28 +803,13 @@ static u32 UncompressStatus(u32 compressedStatus)
 
 void ZeroBoxMonData(struct BoxPokemon *boxMon)
 {
-    u8 *raw = (u8 *)boxMon;
-    u32 i;
-    for (i = 0; i < sizeof(struct BoxPokemon); i++)
-        raw[i] = 0;
+    memset(boxMon, 0, sizeof(*boxMon));
 }
 
 void ZeroMonData(struct Pokemon *mon)
 {
-    u32 arg;
-    ZeroBoxMonData(&mon->box);
-    arg = 0;
-    SetMonData(mon, MON_DATA_STATUS, &arg);
-    SetMonData(mon, MON_DATA_LEVEL, &arg);
-    SetMonData(mon, MON_DATA_HP, &arg);
-    SetMonData(mon, MON_DATA_MAX_HP, &arg);
-    SetMonData(mon, MON_DATA_ATK, &arg);
-    SetMonData(mon, MON_DATA_DEF, &arg);
-    SetMonData(mon, MON_DATA_SPEED, &arg);
-    SetMonData(mon, MON_DATA_SPATK, &arg);
-    SetMonData(mon, MON_DATA_SPDEF, &arg);
-    arg = MAIL_NONE;
-    SetMonData(mon, MON_DATA_MAIL, &arg);
+    memset(mon, 0, sizeof(*mon));
+    mon->mail = MAIL_NONE;
 }
 
 void ZeroPartyMons(struct Pokemon *party)
@@ -821,18 +820,14 @@ void ZeroPartyMons(struct Pokemon *party)
 
 void ZeroPlayerPartyMons(void)
 {
-    for (s32 i = 0; i < PARTY_SIZE; i++)
-        ZeroMonData(&gParties[B_TRAINER_PLAYER][i]);
+    ZeroPartyMons(gParties[B_TRAINER_PLAYER]);
     gPartiesCount[B_TRAINER_PLAYER] = 0;
 }
 
 void ZeroEnemyPartyMons(void)
 {
-    for (s32 i = 0; i < PARTY_SIZE; i++)
-    {
-        ZeroMonData(&gParties[B_TRAINER_OPPONENT_A][i]);
-        ZeroMonData(&gParties[B_TRAINER_OPPONENT_B][i]);
-    }
+    ZeroPartyMons(gParties[B_TRAINER_OPPONENT_A]);
+    ZeroPartyMons(gParties[B_TRAINER_OPPONENT_B]);
     gPartiesCount[B_TRAINER_OPPONENT_A] = 0;
     gPartiesCount[B_TRAINER_OPPONENT_B] = 0;
 }
@@ -903,9 +898,11 @@ bool32 ComputePlayerShinyOdds(u32 personality, u32 value)
 
 void SetBoxMonIVs(struct BoxPokemon *mon, u8 fixedIV)
 {
-    // The retained constructor API accepts legacy IV requests, but every
-    // Pokemon has perfect IVs. Do not roll or graduate individual values.
-    const u32 ivs = 0x3FFFFFFF;
+    // Ordinary acquisitions stay perfect without IV grinding. Explicit values
+    // support deliberate preparation and authored zero-IV team strategies.
+    u32 value = fixedIV <= MAX_PER_STAT_IVS ? fixedIV : MAX_PER_STAT_IVS;
+    u32 ivs = value | (value << 5) | (value << 10) | (value << 15)
+             | (value << 20) | (value << 25);
     SetBoxMonData(mon, MON_DATA_IVS, &ivs);
 }
 
@@ -1316,15 +1313,15 @@ static u16 CalculateBoxMonChecksumReencrypt(struct BoxPokemon *boxMon)
     return checksum;
 }
 
-// Single owner of the game's Gen 9 stat formula, including fixed IVs and
+// Single owner of the game's Gen 9 stat formula, including authored IVs and
 // Shedinja. Party recalculation and facility previews use this same function.
-u32 CalculateSpeciesStat(enum Species species, u32 nature, enum Stat stat, u32 level, u32 evs)
+u32 CalculateSpeciesStat(enum Species species, u32 nature, enum Stat stat, u32 level, u32 evs, u32 iv)
 {
     u32 value;
 
     if (stat == STAT_HP && HasShedinjaHPHandling(species))
         return 1;
-    value = ((2 * GetSpeciesBaseStat(species, stat) + MAX_PER_STAT_IVS + evs / 4) * level) / 100;
+    value = ((2 * GetSpeciesBaseStat(species, stat) + min(iv, MAX_PER_STAT_IVS) + evs / 4) * level) / 100;
     if (stat == STAT_HP)
         return value + level + 10;
     return ModifyStatByNature(nature, value + 5, stat);
@@ -1372,7 +1369,8 @@ void CalculateMonStatsCont(struct Pokemon *mon, bool32 updateSpeedStat)
         if (i == STAT_HP)
             continue;
 
-        s32 n = CalculateSpeciesStat(species, nature, i, level, ev[i]);
+        s32 n = CalculateSpeciesStat(species, nature, i, level, ev[i],
+                                     GetMonData(mon, MON_DATA_HP_IV + i));
         if (B_FRIENDSHIP_BOOST == TRUE)
             n = n + ((n * 10 * friendship) / (MAX_FRIENDSHIP * 100));
         SetMonData(mon, MON_DATA_MAX_HP + i, &n);
@@ -1383,7 +1381,8 @@ void CalculateMonStatsCont(struct Pokemon *mon, bool32 updateSpeedStat)
         return;
 #endif
 
-    newMaxHP = CalculateSpeciesStat(species, nature, STAT_HP, level, ev[STAT_HP]);
+    newMaxHP = CalculateSpeciesStat(species, nature, STAT_HP, level, ev[STAT_HP],
+                                    GetMonData(mon, MON_DATA_HP_IV));
 
     gBattleScripting.levelUpHP = newMaxHP - oldMaxHP;
     if (gBattleScripting.levelUpHP == 0)
@@ -1463,8 +1462,7 @@ u16 GiveMoveToBoxMon(struct BoxPokemon *boxMon, enum Move move)
         enum Move existingMove = GetBoxMonData(boxMon, MON_DATA_MOVE1 + i);
         if (existingMove == MOVE_NONE)
         {
-            u8 ppBonuses = GetBoxMonData(boxMon, MON_DATA_PP_BONUSES);
-            u32 pp = CalculatePPWithBonus(move, ppBonuses, i);
+            u32 pp = GetMoveMaxPP(move);
             SetBoxMonData(boxMon, MON_DATA_MOVE1 + i, &move);
             SetBoxMonData(boxMon, MON_DATA_PP1 + i, &pp);
             return move;
@@ -1484,7 +1482,7 @@ u16 GiveMoveToBattleMon(struct BattlePokemon *mon, enum Move move)
         if (mon->moves[i] == MOVE_NONE)
         {
             mon->moves[i] = move;
-            mon->pp[i] = CalculatePPWithBonus(move, mon->ppBonuses, i);
+            mon->pp[i] = GetMoveMaxPP(move);
             return move;
         }
     }
@@ -1507,16 +1505,60 @@ void SetMonMoveSlot(struct Pokemon *mon, enum Move move, u8 slot)
 void SetBoxMonMoveSlot(struct BoxPokemon *mon, enum Move move, u8 slot)
 {
     SetBoxMonData(mon, MON_DATA_MOVE1 + slot, &move);
-    u8 ppBonuses = GetBoxMonData(mon, MON_DATA_PP_BONUSES);
-    u32 pp = CalculatePPWithBonus(move, ppBonuses, slot);
+    u32 pp = GetMoveMaxPP(move);
     SetBoxMonData(mon, MON_DATA_PP1 + slot, &pp);
+}
+
+void SwapBoxMonMoves(struct BoxPokemon *mon, u8 slotTo, u8 slotFrom)
+{
+    if (slotTo == slotFrom)
+        return;
+
+    enum Move move1 = GetBoxMonData(mon, MON_DATA_MOVE1 + slotTo);
+    enum Move move0 = GetBoxMonData(mon, MON_DATA_MOVE1 + slotFrom);
+    u8 pp1 = GetBoxMonData(mon, MON_DATA_PP1 + slotTo);
+    u8 pp0 = GetBoxMonData(mon, MON_DATA_PP1 + slotFrom);
+    u8 ppBonuses = GetBoxMonData(mon, MON_DATA_PP_BONUSES);
+    u8 ppBonusMask1 = gPPUpGetMask[slotTo];
+    u8 ppBonusMove1 = (ppBonuses & ppBonusMask1) >> (slotTo * 2);
+    u8 ppBonusMask2 = gPPUpGetMask[slotFrom];
+    u8 ppBonusMove2 = (ppBonuses & ppBonusMask2) >> (slotFrom * 2);
+    ppBonuses &= ~ppBonusMask1;
+    ppBonuses &= ~ppBonusMask2;
+    ppBonuses |= (ppBonusMove1 << (slotFrom * 2)) + (ppBonusMove2 << (slotTo * 2));
+    SetBoxMonData(mon, MON_DATA_MOVE1 + slotTo, &move0);
+    SetBoxMonData(mon, MON_DATA_MOVE1 + slotFrom, &move1);
+    SetBoxMonData(mon, MON_DATA_PP1 + slotTo, &pp0);
+    SetBoxMonData(mon, MON_DATA_PP1 + slotFrom, &pp1);
+    SetBoxMonData(mon, MON_DATA_PP_BONUSES, &ppBonuses);
+}
+
+void DeleteMove(struct Pokemon *mon, enum Move move)
+{
+    struct BoxPokemon *boxMon = &mon->box;
+    u32 i, j;
+
+    if (move != MOVE_NONE)
+    {
+        for (i = 0; i < MAX_MON_MOVES; i++)
+        {
+            u32 existingMove = GetBoxMonData(boxMon, MON_DATA_MOVE1 + i);
+            if (existingMove == move)
+            {
+                SetMonMoveSlot(mon, MOVE_NONE, i);
+                RemoveMonPPBonus(mon, i);
+                for (j = i; j < MAX_MON_MOVES - 1; j++)
+                    SwapBoxMonMoves(&mon->box, j, j + 1);
+                break;
+            }
+        }
+    }
 }
 
 static void SetMonMoveSlot_KeepPP(struct Pokemon *mon, enum Move move, u8 slot)
 {
-    u8 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
     u8 currPP = GetMonData(mon, MON_DATA_PP1 + slot);
-    u8 newPP = CalculatePPWithBonus(move, ppBonuses, slot);
+    u8 newPP = GetMoveMaxPP(move);
     u16 finalPP = min(currPP, newPP);
 
     SetMonData(mon, MON_DATA_MOVE1 + slot, &move);
@@ -1526,7 +1568,7 @@ static void SetMonMoveSlot_KeepPP(struct Pokemon *mon, enum Move move, u8 slot)
 void SetBattleMonMoveSlot(struct BattlePokemon *mon, enum Move move, u8 slot)
 {
     mon->moves[slot] = move;
-    mon->pp[slot] = CalculatePPWithBonus(move, mon->ppBonuses, slot);
+    mon->pp[slot] = GetMoveMaxPP(move);
 }
 
 void GiveMonInitialMoveset(struct Pokemon *mon)
@@ -1580,8 +1622,7 @@ void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon) //Credit: AsparagusEdua
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         SetBoxMonData(boxMon, MON_DATA_MOVE1 + i, &moves[i]);
-        u8 ppBonuses = GetBoxMonData(boxMon, MON_DATA_PP_BONUSES);
-        u32 pp = CalculatePPWithBonus(moves[i], ppBonuses, i);
+        u32 pp = GetMoveMaxPP(moves[i]);
         SetBoxMonData(boxMon, MON_DATA_PP1 + i, &pp);
     }
 }
@@ -1664,7 +1705,7 @@ void DeleteFirstMoveAndGiveMoveToMon(struct Pokemon *mon, enum Move move)
     ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
     ppBonuses >>= 2;
     moves[MAX_MON_MOVES - 1] = move;
-    pp[MAX_MON_MOVES - 1] = CalculatePPWithBonus(move, ppBonuses, MAX_MON_MOVES - 1);
+    pp[MAX_MON_MOVES - 1] = GetMoveMaxPP(move);
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
@@ -1902,6 +1943,23 @@ u32 GetMonData3(struct Pokemon *mon, s32 field, u8 *data)
 u32 GetMonData2(struct Pokemon *mon, s32 field)
 {
     return GetMonData3(mon, field, NULL);
+}
+
+bool8 MonKnowsMove(struct Pokemon *mon, enum Move move)
+{
+    return BoxMonKnowsMove(&mon->box, move);
+}
+
+bool8 BoxMonKnowsMove(struct BoxPokemon *boxMon, enum Move move)
+{
+    u8 i;
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (GetBoxMonData(boxMon, MON_DATA_MOVE1 + i) == move)
+            return TRUE;
+    }
+    return FALSE;
 }
 
 union EvolutionTracker
@@ -2516,16 +2574,6 @@ void SetMonData(struct Pokemon *mon, s32 field, const void *dataArg)
 void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
 {
     const u8 *data = dataArg;
-    // IVs are universal, including gifts, eggs, imported teams and packed writes.
-    // Keeping the stored value perfect also makes non-stat IV consumers agree.
-    const u32 perfectIvs = 0x3FFFFFFF;
-    const u8 perfectIv = MAX_PER_STAT_IVS;
-
-    if (field >= MON_DATA_HP_IV && field <= MON_DATA_SPDEF_IV)
-        data = &perfectIv;
-    else if (field == MON_DATA_IVS)
-        data = (const u8 *)&perfectIvs;
-
     if (field > MON_DATA_ENCRYPT_SEPARATOR)
     {
         if (CalculateBoxMonChecksumDecrypt(boxMon) != boxMon->checksum)
@@ -2872,18 +2920,9 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
         boxMon->checksum = CalculateBoxMonChecksumReencrypt(boxMon);
 }
 
-void CopyMon(void *dest, void *src, size_t size)
-{
-    memcpy(dest, src, size);
-}
-
-u8 GiveCapturedMonToPlayer(struct Pokemon *mon)
+static u8 GiveMonToPartyOrPC(struct Pokemon *mon)
 {
     s32 i;
-
-    SetMonData(mon, MON_DATA_OT_NAME, gSaveBlock2Ptr->playerName);
-    SetMonData(mon, MON_DATA_OT_GENDER, &gSaveBlock2Ptr->playerGender);
-    SetMonData(mon, MON_DATA_OT_ID, gSaveBlock2Ptr->playerTrainerId);
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
@@ -2894,9 +2933,17 @@ u8 GiveCapturedMonToPlayer(struct Pokemon *mon)
     if (i >= PARTY_SIZE)
         return CopyMonToPC(mon);
 
-    CopyMon(&gParties[B_TRAINER_PLAYER][i], mon, sizeof(*mon));
+    memcpy(&gParties[B_TRAINER_PLAYER][i], mon, sizeof(*mon));
     gPartiesCount[B_TRAINER_PLAYER] = i + 1;
     return MON_GIVEN_TO_PARTY;
+}
+
+u8 GiveCapturedMonToPlayer(struct Pokemon *mon)
+{
+    SetMonData(mon, MON_DATA_OT_NAME, gSaveBlock2Ptr->playerName);
+    SetMonData(mon, MON_DATA_OT_GENDER, &gSaveBlock2Ptr->playerGender);
+    SetMonData(mon, MON_DATA_OT_ID, gSaveBlock2Ptr->playerTrainerId);
+    return GiveMonToPartyOrPC(mon);
 }
 
 u8 CopyMonToPC(struct Pokemon *mon)
@@ -2915,7 +2962,7 @@ u8 CopyMonToPC(struct Pokemon *mon)
             if (GetBoxMonData(checkingMon, MON_DATA_SPECIES) == SPECIES_NONE)
             {
                 MonRestorePP(mon);
-                CopyMon(checkingMon, &mon->box, sizeof(mon->box));
+                memcpy(checkingMon, &mon->box, sizeof(mon->box));
                 gSpecialVar_MonBoxId = boxNo;
                 gSpecialVar_MonBoxPos = boxPos;
                 if (GetPCBoxToSendMon() != boxNo)
@@ -3058,7 +3105,7 @@ void CreateSecretBaseEnemyParty(struct SecretBase *secretBaseRecord)
                 gBattleResources->secretBase->party.levels[i],
                 gBattleResources->secretBase->party.personality[i],
                 OTID_STRUCT_RANDOM_NO_SHINY,
-                15);
+                MAX_PER_STAT_IVS);
             SetMonData(&gParties[B_TRAINER_OPPONENT_A][i], MON_DATA_HELD_ITEM, &gBattleResources->secretBase->party.heldItems[i]);
 
             for (j = 0; j < NUM_STATS; j++)
@@ -3067,7 +3114,7 @@ void CreateSecretBaseEnemyParty(struct SecretBase *secretBaseRecord)
             for (j = 0; j < MAX_MON_MOVES; j++)
             {
                 SetMonData(&gParties[B_TRAINER_OPPONENT_A][i], MON_DATA_MOVE1 + j, &gBattleResources->secretBase->party.moves[i * MAX_MON_MOVES + j]);
-                u32 pp = CalculatePPWithBonus(gBattleResources->secretBase->party.moves[i * MAX_MON_MOVES + j], 0, j);
+                u32 pp = GetMoveMaxPP(gBattleResources->secretBase->party.moves[i * MAX_MON_MOVES + j]);
                 SetMonData(&gParties[B_TRAINER_OPPONENT_A][i], MON_DATA_PP1 + j, &pp);
             }
         }
@@ -3271,19 +3318,6 @@ const struct FormChange *GetSpeciesFormChanges(enum Species species)
     if (formChanges == NULL)
         return gSpeciesInfo[SPECIES_NONE].formChangeTable;
     return formChanges;
-}
-
-u8 CalculatePPWithBonus(enum Move move, u8 ppBonuses, u8 moveIndex)
-{
-    u8 basePP = GetMovePP(move);
-
-    if (P_MOVE_PP_CALCULATION >= GEN_CHAMPIONS)
-    {
-        if (move == MOVE_REVIVAL_BLESSING || move == MOVE_SKETCH || move == MOVE_STRUGGLE)
-            return basePP;
-        return (basePP / 5 + 1) * 4;
-    }
-    return basePP + ((basePP * 20 * ((gPPUpGetMask[moveIndex] & ppBonuses) >> (2 * moveIndex))) / 100);
 }
 
 void RemoveMonPPBonus(struct Pokemon *mon, u8 moveIndex)
@@ -3504,13 +3538,13 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, enum Item item, u8 partyIndex, 
                 u32 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
                 effectFlags &= ~ITEM4_PP_UP;
                 dataUnsigned = (ppBonuses & gPPUpGetMask[moveIndex]) >> (moveIndex * 2);
-                temp1 = CalculatePPWithBonus(GetMonData(mon, MON_DATA_MOVE1 + moveIndex), ppBonuses, moveIndex);
+                temp1 = GetMoveMaxPP(GetMonData(mon, MON_DATA_MOVE1 + moveIndex));
                 if (dataUnsigned <= 2 && temp1 > 4)
                 {
                     dataUnsigned = ppBonuses + gPPUpAddValues[moveIndex];
                     SetMonData(mon, MON_DATA_PP_BONUSES, &dataUnsigned);
 
-                    dataUnsigned = CalculatePPWithBonus(GetMonData(mon, MON_DATA_MOVE1 + moveIndex), dataUnsigned, moveIndex) - temp1;
+                    dataUnsigned = GetMoveMaxPP(GetMonData(mon, MON_DATA_MOVE1 + moveIndex)) - temp1;
                     dataUnsigned = GetMonData(mon, MON_DATA_PP1 + moveIndex) + dataUnsigned;
                     SetMonData(mon, MON_DATA_PP1 + moveIndex, &dataUnsigned);
                     retVal = FALSE;
@@ -3653,7 +3687,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, enum Item item, u8 partyIndex, 
                                 u32 ppBonus;
                                 dataUnsigned = GetMonData(mon, MON_DATA_PP1 + temp2);
                                 move = GetMonData(mon, MON_DATA_MOVE1 + temp2);
-                                ppBonus = CalculatePPWithBonus(move, GetMonData(mon, MON_DATA_PP_BONUSES), temp2);
+                                ppBonus = GetMoveMaxPP(move);
                                 if (dataUnsigned != ppBonus)
                                 {
                                     dataUnsigned += itemEffect[itemEffectParam];
@@ -3671,7 +3705,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, enum Item item, u8 partyIndex, 
                             enum Move move;
                             dataUnsigned = GetMonData(mon, MON_DATA_PP1 + moveIndex);
                             move = GetMonData(mon, MON_DATA_MOVE1 + moveIndex);
-                            u32 ppBonus = CalculatePPWithBonus(move, GetMonData(mon, MON_DATA_PP_BONUSES), moveIndex);
+                            u32 ppBonus = GetMoveMaxPP(move);
                             if (dataUnsigned != ppBonus)
                             {
                                 dataUnsigned += itemEffect[itemEffectParam++];
@@ -3789,7 +3823,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, enum Item item, u8 partyIndex, 
                     {
                         u32 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
                         dataUnsigned = (ppBonuses & gPPUpGetMask[moveIndex]) >> (moveIndex * 2);
-                        temp2 = CalculatePPWithBonus(GetMonData(mon, MON_DATA_MOVE1 + moveIndex), ppBonuses, moveIndex);
+                        temp2 = GetMoveMaxPP(GetMonData(mon, MON_DATA_MOVE1 + moveIndex));
 
                         // Check if 3 PP Ups have been applied already, and that the move has a total PP of at least 5 (excludes Sketch)
                         if (dataUnsigned < 3 && temp2 >= 5)
@@ -3799,7 +3833,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, enum Item item, u8 partyIndex, 
                             dataUnsigned += gPPUpAddValues[moveIndex] * 3; // Apply 3 PP Ups (max)
 
                             SetMonData(mon, MON_DATA_PP_BONUSES, &dataUnsigned);
-                            dataUnsigned = CalculatePPWithBonus(GetMonData(mon, MON_DATA_MOVE1 + moveIndex), dataUnsigned, moveIndex) - temp2;
+                            dataUnsigned = GetMoveMaxPP(GetMonData(mon, MON_DATA_MOVE1 + moveIndex)) - temp2;
                             dataUnsigned = GetMonData(mon, MON_DATA_PP1 + moveIndex) + dataUnsigned;
                             SetMonData(mon, MON_DATA_PP1 + moveIndex, &dataUnsigned);
                             retVal = FALSE;
@@ -5273,17 +5307,11 @@ void MonRestorePP(struct Pokemon *mon)
 
 void BoxMonRestorePP(struct BoxPokemon *boxMon)
 {
-    int i;
-
-    for (i = 0; i < MAX_MON_MOVES; i++)
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
     {
-        if (GetBoxMonData(boxMon, MON_DATA_MOVE1 + i, 0))
-        {
-            enum Move move = GetBoxMonData(boxMon, MON_DATA_MOVE1 + i, 0);
-            u16 bonus = GetBoxMonData(boxMon, MON_DATA_PP_BONUSES, 0);
-            u8 pp = CalculatePPWithBonus(move, bonus, i);
-            SetBoxMonData(boxMon, MON_DATA_PP1 + i, &pp);
-        }
+        enum Move move = GetBoxMonData(boxMon, MON_DATA_MOVE1 + i);
+        u8 pp = GetMoveMaxPP(move);
+        SetBoxMonData(boxMon, MON_DATA_PP1 + i, &pp);
     }
 }
 
@@ -5672,7 +5700,6 @@ struct MonSpritesGfxManager *CreateMonSpritesGfxManager(u8 managerId, u8 mode)
     {
     case MON_SPR_GFX_MODE_FULL_PARTY:
         gfx->numSprites = PARTY_SIZE + 1;
-        gfx->numSprites2 = PARTY_SIZE + 1;
         gfx->numFrames = MAX_MON_PIC_FRAMES;
         gfx->dataSize = 1;
         gfx->mode = MON_SPR_GFX_MODE_FULL_PARTY;
@@ -5681,7 +5708,6 @@ struct MonSpritesGfxManager *CreateMonSpritesGfxManager(u8 managerId, u8 mode)
     case MON_SPR_GFX_MODE_NORMAL:
     default:
         gfx->numSprites = MAX_BATTLERS_COUNT;
-        gfx->numSprites2 = MAX_BATTLERS_COUNT;
         gfx->numFrames = MAX_MON_PIC_FRAMES;
         gfx->dataSize = 1;
         gfx->mode = MON_SPR_GFX_MODE_NORMAL;
@@ -6621,29 +6647,14 @@ struct BoxPokemon *GetSelectedBoxMonFromPcOrParty(void)
 u32 GiveScriptedMonToPlayer(struct Pokemon *mon, u8 slot)
 {
     u32 sentToPc;
-    u32 i = 0;
     if (slot < PARTY_SIZE)
     {
-        CopyMon(&gParties[B_TRAINER_PLAYER][slot], mon, sizeof(struct Pokemon));
+        memcpy(&gParties[B_TRAINER_PLAYER][slot], mon, sizeof(struct Pokemon));
         sentToPc = MON_GIVEN_TO_PARTY;
     }
     else
     {
-        for (i = 0; i < PARTY_SIZE; i++)
-        {
-            if (GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES) == SPECIES_NONE)
-                break;
-        }
-        if (i >= PARTY_SIZE)
-        {
-            sentToPc = CopyMonToPC(mon);
-        }
-        else
-        {
-            sentToPc = MON_GIVEN_TO_PARTY;
-            CopyMon(&gParties[B_TRAINER_PLAYER][i], mon, sizeof(struct Pokemon));
-            gPartiesCount[B_TRAINER_PLAYER] = i + 1;
-        }
+        sentToPc = GiveMonToPartyOrPC(mon);
     }
     if (sentToPc != MON_CANT_GIVE)
     {

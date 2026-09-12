@@ -17,8 +17,8 @@ class BattleSetAbilityIntegrity(unittest.TestCase):
         source = (ROOT / 'src/emerald_champions_battle_sets.c').read_text()
         find = source[source.index('static bool32 FindAbilitySlot('):source.index('static bool32 IsValidBattleFormat(')]
         start = source.index('static bool32 FindPresetAbilitySlot(') if 'static bool32 FindPresetAbilitySlot(' in source else source.index('static bool32 DoesMonMatchPresetAbility(')
-        match = source[start:source.index('static bool32 DoesItemNeedEvenHp(')]
-        apply = source[source.index('static u8 ApplyPreset('):]
+        match = source[start:source.index('const u8 gEmeraldChampionsEvOrder[')]
+        apply = source[source.index('enum PresetApplication\n'):]
         apply = apply[:apply.index('    if (IsEmeraldChampionsProtectedProgressionItem(preset->item)')]
         apply += '    return abilitySlot;\n}\n'
         harness = r'''
@@ -35,6 +35,7 @@ typedef int bool32;
 #define NUM_ABILITY_SLOTS 3
 #define EC_BATTLE_FORMAT_DOUBLES 1
 #define MON_DATA_SPECIES 0
+#define MON_DATA_PP_BONUSES 1
 #define MON_DATA_HELD_ITEM 1
 #define MAX_PER_STAT_IVS 31
 #define EC_BATTLE_SET_FAILED 255
@@ -48,6 +49,10 @@ static struct EmeraldChampionsBattleSet gEmeraldChampionsDefaultBattleSets[NUM_S
 static unsigned calls, lastAbility;
 static unsigned GetMonData(struct Pokemon *mon, unsigned key) { return key == MON_DATA_SPECIES ? mon->species : ITEM_NONE; }
 static enum Species ResolveBattleSetSpecies(enum Species species, unsigned format) { assert(format == EC_BATTLE_FORMAT_DOUBLES); return species == FORM ? BASE : species; }
+static const struct EmeraldChampionsBattleSet *GetEmeraldChampionsRawBattleSet(enum Species species, u8 choice) {
+    assert(choice == 0);
+    return &gEmeraldChampionsDefaultBattleSets[ResolveBattleSetSpecies(species, EC_BATTLE_FORMAT_DOUBLES)];
+}
 static bool32 IsEmeraldChampionsProtectedProgressionItem(enum Item item) { return 0; }
 static enum Ability GetMonAbility(struct Pokemon *mon) { calls = calls * 10 + 1; return lastAbility = mon->actual; }
 static enum Ability GetAbilityBySpecies(enum Species species, unsigned slot) {
@@ -83,7 +88,7 @@ int main(void) {
             for (unsigned actual = ABILITY_NONE; actual <= MEGA; actual++) {
                 struct Pokemon mon = {species, actual};
                 calls = 0;
-                assert(ApplyPreset(&mon, &preset, 0, 0, 0, 0) == cases[i].expected);
+                assert(ApplyPreset(&mon, &preset, PRESET_WILD) == cases[i].expected);
                 assert(calls == 0);
                 unsigned legalAuthored = 0;
                 for (unsigned slot = 0; slot < NUM_ABILITY_SLOTS; slot++) legalAuthored |= cases[i].slots[slot] == cases[i].authored;
@@ -102,9 +107,9 @@ int main(void) {
     }
     struct Pokemon invalid = {SPECIES_NONE, A};
     struct EmeraldChampionsBattleSet preset = {A};
-    assert(ApplyPreset(&invalid, &preset, 0, 0, 0, 0) == EC_BATTLE_SET_FAILED);
+    assert(ApplyPreset(&invalid, &preset, PRESET_WILD) == EC_BATTLE_SET_FAILED);
     invalid.species = BASE;
-    assert(ApplyPreset(&invalid, NULL, 0, 0, 0, 0) == EC_BATTLE_SET_FAILED);
+    assert(ApplyPreset(&invalid, NULL, PRESET_WILD) == EC_BATTLE_SET_FAILED);
     return 0;
 }
 '''

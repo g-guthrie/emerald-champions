@@ -3,10 +3,11 @@ SealedChamber_InnerRoom_MapScripts::
 
 SealedChamber_InnerRoom_EventScript_BrailleBackWall::
 	lockall
-	braillemsgbox SealedChamber_InnerRoom_Braille_FirstWailordLastRelicanth
+	braillemsgbox SealedChamber_InnerRoom_Braille_ThreeRecords
 	goto_if_set FLAG_REGI_DOORS_OPENED, SealedChamber_InnerRoom_EventScript_NoEffect
-	specialvar VAR_RESULT, CheckRelicanthWailord
-	goto_if_eq VAR_RESULT, FALSE, SealedChamber_InnerRoom_EventScript_NoEffect
+	goto_if_unset FLAG_EC_REPORT_C26_COMPLETE, SealedChamber_InnerRoom_EventScript_ResearchPending
+	goto_if_unset FLAG_EC_REPORT_C30_COMPLETE, SealedChamber_InnerRoom_EventScript_ResearchPending
+	goto_if_unset FLAG_EC_REPORT_C44_COMPLETE, SealedChamber_InnerRoom_EventScript_ResearchPending
 	fadeoutbgm 0
 	playse SE_TRUCK_MOVE
 	special DoSealedChamberShakingEffect_Long
@@ -23,7 +24,7 @@ SealedChamber_InnerRoom_EventScript_BrailleBackWall::
 	msgbox gText_DoorOpenedFarAway, MSGBOX_DEFAULT
 	closemessage
 	fadeinbgm 0
-	setflag FLAG_REGI_DOORS_OPENED
+	completemilestone FLAG_REGI_DOORS_OPENED
 	releaseall
 	end
 
@@ -122,3 +123,15 @@ SealedChamber_InnerRoom_Text_RegigigasECAwakens:
 
 
 @ END EMERALD CHAMPIONS LEGENDARY ROOTS
+
+SealedChamber_InnerRoom_EventScript_ResearchPending::
+	msgbox SealedChamber_InnerRoom_Text_ResearchPending, MSGBOX_DEFAULT
+	releaseall
+	end
+
+SealedChamber_InnerRoom_Text_ResearchPending:
+	.string "The marks describe three records:\n"
+	.string "the DESERT safeguards, CASTFORM's\l"
+	.string "weather, and STERN's seabed scan.\p"
+	.string "Complete those research reports\n"
+	.string "to read the builders' message.$"

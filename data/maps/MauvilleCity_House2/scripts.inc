@@ -79,7 +79,7 @@ MauvilleCity_House2_EventScript_MegaGift_AMPHAROSITE::
 	lock
 	faceplayer
 	msgbox MauvilleCity_House2_EventScript_MegaGift_AMPHAROSITE_Text, MSGBOX_DEFAULT
-	giveitem ITEM_AMPHAROSITE
+	giveuniqueitem ITEM_AMPHAROSITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_EC_MEGA_GIFT_AMPHAROSITE
 	release

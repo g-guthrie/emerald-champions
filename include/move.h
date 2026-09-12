@@ -298,11 +298,15 @@ static inline enum MoveTarget GetMoveTarget(enum Move moveId)
 
 static inline u32 GetMovePP(enum Move moveId)
 {
-    u32 pp = gMovesInfo[SanitizeMoveId(moveId)].pp;
+    return min(gMovesInfo[SanitizeMoveId(moveId)].pp, 20);
+}
 
-    if (P_MOVE_PP_CALCULATION >= GEN_CHAMPIONS)
-        pp = min(pp, 20);
-    return pp;
+static inline u32 GetMoveMaxPP(enum Move moveId)
+{
+    u32 basePP = GetMovePP(moveId);
+    if (moveId == MOVE_NONE || moveId == MOVE_REVIVAL_BLESSING || moveId == MOVE_SKETCH || moveId == MOVE_STRUGGLE)
+        return basePP;
+    return (basePP / 5 + 1) * 4;
 }
 
 static inline enum ZEffect GetMoveZEffect(enum Move moveId)

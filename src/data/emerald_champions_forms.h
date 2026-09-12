@@ -184,15 +184,12 @@ static const struct EmeraldChampionsFormGift sEmeraldChampionsFormGifts[] =
 {
     {
         .species = SPECIES_INDEEDEE_F, .flag = FLAG_EC_GIFT_INDEEDEE_F, .name = COMPOUND_STRING("Indeedee partner"),
-        .preset = &gEmeraldChampionsDefaultBattleSets[SPECIES_INDEEDEE_F],
     },
     {
         .species = SPECIES_PIKACHU_COSPLAY, .flag = FLAG_EC_GIFT_COSPLAY_PIKACHU, .name = COMPOUND_STRING("Cosplay Pikachu"),
-        .preset = &gEmeraldChampionsDefaultBattleSets[SPECIES_PIKACHU_COSPLAY],
     },
     {
         .species = SPECIES_GRENINJA_BATTLE_BOND, .flag = FLAG_EC_GIFT_BATTLE_BOND_GRENINJA, .name = COMPOUND_STRING("Battle Bond Greninja"),
-        .preset = &gEmeraldChampionsDefaultBattleSets[SPECIES_GRENINJA_BATTLE_BOND],
     },
     {
         .species = SPECIES_PIKACHU_STARTER, .flag = FLAG_EC_GIFT_PARTNER_PIKACHU, .name = COMPOUND_STRING("Partner Pikachu"),
@@ -212,7 +209,6 @@ static const struct EmeraldChampionsFormGift sEmeraldChampionsFormGifts[] =
     },
     {
         .species = SPECIES_KUBFU, .flag = FLAG_EC_GIFT_SECOND_KUBFU, .name = COMPOUND_STRING("Second Kubfu"),
-        .preset = &gEmeraldChampionsDefaultBattleSets[SPECIES_KUBFU],
     },
     {
         .species = SPECIES_COSMOG, .flag = FLAG_EC_GIFT_SECOND_COSMOG, .name = COMPOUND_STRING("Second Cosmog"),

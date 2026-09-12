@@ -6,7 +6,13 @@
 #include "caps.h"
 #include "champions_circuit.h"
 #include "difficulty.h"
+#include "data.h"
 #include "emerald_champions_battle_sets.h"
+#include "emerald_champions_opening.h"
+#include "mega_stone_rewards.h"
+#include "trade.h"
+#include "constants/party_menu.h"
+#include "constants/emerald_champions.h"
 #include "event_data.h"
 #include "field_move.h"
 #include "field_player_avatar.h"
@@ -15,6 +21,7 @@
 #include "item.h"
 #include "legendary_signs.h"
 #include "load_save.h"
+#include "money.h"
 #include "move_relearner.h"
 #include "overworld.h"
 #include "pokemon.h"
@@ -302,6 +309,49 @@ TEST("Emerald Champions preparation table covers every enabled species")
         GetEmeraldChampionsPreparationMoves(SPECIES_GLIMMORA));
 }
 
+TEST("Emerald Champions move reordering preserves moves PP and upgrades")
+{
+    const u16 moves[] = {MOVE_TACKLE, MOVE_GROWL, MOVE_LEECH_SEED, MOVE_VINE_WHIP};
+    const u8 pp[] = {1, 0, 3, 2};
+    const u8 bonuses = 0xE4; // Distinct upgrade counts: 0, 1, 2, 3.
+    struct Pokemon mon;
+
+    for (u32 first = 0; first < MAX_MON_MOVES; first++)
+    {
+        for (u32 second = 0; second < MAX_MON_MOVES; second++)
+        {
+            CreateMon(&mon, SPECIES_BULBASAUR, 20, 0, OTID_STRUCT_PLAYER_ID);
+            for (u32 i = 0; i < MAX_MON_MOVES; i++)
+            {
+                SetMonData(&mon, MON_DATA_MOVE1 + i, &moves[i]);
+                SetMonData(&mon, MON_DATA_PP1 + i, &pp[i]);
+            }
+            SetMonData(&mon, MON_DATA_PP_BONUSES, &bonuses);
+            SwapBoxMonMoves(&mon.box, first, second);
+            for (u32 i = 0; i < MAX_MON_MOVES; i++)
+            {
+                u32 source = i == first ? second : i == second ? first : i;
+                EXPECT_EQ(GetMonData(&mon, MON_DATA_MOVE1 + i), moves[source]);
+                EXPECT_EQ(GetMonData(&mon, MON_DATA_PP1 + i), pp[source]);
+                EXPECT_EQ((GetMonData(&mon, MON_DATA_PP_BONUSES) >> (2 * i)) & 3, source);
+            }
+            // Restore order, then exercise the deletion consumer at every slot.
+            SwapBoxMonMoves(&mon.box, first, second);
+            DeleteMove(&mon, moves[first]);
+            for (u32 i = 0; i < MAX_MON_MOVES - 1; i++)
+            {
+                u32 source = i < first ? i : i + 1;
+                EXPECT_EQ(GetMonData(&mon, MON_DATA_MOVE1 + i), moves[source]);
+                EXPECT_EQ(GetMonData(&mon, MON_DATA_PP1 + i), pp[source]);
+                EXPECT_EQ((GetMonData(&mon, MON_DATA_PP_BONUSES) >> (2 * i)) & 3, source);
+            }
+            EXPECT_EQ(GetMonData(&mon, MON_DATA_MOVE4), MOVE_NONE);
+            EXPECT_EQ(GetMonData(&mon, MON_DATA_PP4), 0);
+            EXPECT_EQ(GetMonData(&mon, MON_DATA_PP_BONUSES) >> 6, 0);
+        }
+    }
+}
+
 TEST("Emerald Champions disables the Bag only in competitive trainer battles")
 {
     gBattleTypeFlags = BATTLE_TYPE_TRAINER;
@@ -420,63 +470,88 @@ TEST("Emerald Champions custom Megas retain complete native assets")
     EXPECT_EQ(gItemsInfo[ITEM_GLIMMORANITE].sortType, ITEM_TYPE_MEGA_STONE);
 }
 
-TEST("Emerald Champions live difficulty changes only trainer levels")
+static const struct { u16 flag; u8 cap; } sCampaignCapExpectations[] =
 {
+    {FLAG_BADGE01_GET, 20},
+    {FLAG_EC_REPORT_C14_COMPLETE, 24},
+    {FLAG_DELIVERED_DEVON_GOODS, 30},
+    {FLAG_BADGE03_GET, 34},
+    {FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY, 40},
+    {FLAG_BADGE04_GET, 44},
+    {FLAG_EC_REPORT_C26_COMPLETE, 48},
+    {FLAG_BADGE05_GET, 50},
+    {FLAG_EC_REPORT_C28_COMPLETE, 52},
+    {FLAG_EC_REPORT_C30_COMPLETE, 56},
+    {FLAG_BADGE06_GET, 60},
+    {FLAG_EC_REPORT_C36_COMPLETE, 64},
+    {FLAG_EC_REPORT_C39_COMPLETE, 68},
+    {FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE, 72},
+    {FLAG_EC_REPORT_C42_COMPLETE, 76},
+    {FLAG_EC_REPORT_C43_COMPLETE, 78},
+    {FLAG_REGI_DOORS_OPENED, 82},
+    {FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, 86},
+    {FLAG_BADGE08_GET, 90},
+    {FLAG_EC_REPORT_C48_COMPLETE, 94},
+    {FLAG_DEFEATED_WALLY_VICTORY_ROAD, 96},
+    {FLAG_IS_CHAMPION, 100},
+};
+
+static void ResetCampaignCapMilestones(void)
+{
+    for (u32 i = 0; i < ARRAY_COUNT(sCampaignCapExpectations); i++)
+        FlagClear(sCampaignCapExpectations[i].flag);
+}
+
+TEST("Emerald Champions native trainer creation applies live-cap role offsets once")
+{
+    static const struct TrainerMon mons[] = {
+        {.species = SPECIES_PIKACHU, .lvl = 99, .useLevelOffset = TRUE, .levelOffset = 1,
+         .nature = NATURE_TIMID, .gender = TRAINER_MON_RANDOM_GENDER,
+         .heldItem = ITEM_LIGHT_BALL, .moves = {MOVE_THUNDERBOLT}},
+        {.species = SPECIES_EEVEE, .lvl = 99, .useLevelOffset = TRUE, .levelOffset = -2,
+         .gender = TRAINER_MON_RANDOM_GENDER},
+    };
+    static const struct Trainer trainer = {.party = mons, .partySize = 2};
     struct Pokemon *party = gParties[B_TRAINER_OPPONENT_A];
 
-    ZeroEnemyPartyMons();
-    CreateMon(&party[0], SPECIES_PIKACHU, 20, 0, OTID_STRUCT_PLAYER_ID);
-
+    ResetCampaignCapMilestones();
     SetCurrentDifficultyLevel(DIFFICULTY_HARD);
-    ApplyTrainerLevelDifficulty(party);
-    EXPECT_EQ(GetMonData(&party[0], MON_DATA_LEVEL), 20);
-
+    CreateNPCTrainerPartyFromTrainer(party, &trainer);
+    EXPECT_EQ(GetMonData(&party[0], MON_DATA_LEVEL), 17);
+    EXPECT_EQ(GetMonData(&party[1], MON_DATA_LEVEL), 14);
     SetCurrentDifficultyLevel(DIFFICULTY_NORMAL);
-    ApplyTrainerLevelDifficulty(party);
-    EXPECT_EQ(GetMonData(&party[0], MON_DATA_LEVEL), 18);
-    EXPECT_EQ(GetMonData(&party[0], MON_DATA_HP), GetMonData(&party[0], MON_DATA_MAX_HP));
-
-    CreateMon(&party[0], SPECIES_PIKACHU, 20, 0, OTID_STRUCT_PLAYER_ID);
+    CreateNPCTrainerPartyFromTrainer(party, &trainer);
+    EXPECT_EQ(GetMonData(&party[0], MON_DATA_LEVEL), 15);
+    EXPECT_EQ(GetMonData(&party[1], MON_DATA_LEVEL), 12);
     SetCurrentDifficultyLevel(DIFFICULTY_EASY);
-    ApplyTrainerLevelDifficulty(party);
-    EXPECT_EQ(GetMonData(&party[0], MON_DATA_LEVEL), 16);
+    CreateNPCTrainerPartyFromTrainer(party, &trainer);
+    EXPECT_EQ(GetMonData(&party[0], MON_DATA_LEVEL), 13);
+    EXPECT_EQ(GetMonData(&party[1], MON_DATA_LEVEL), 10);
+    EXPECT_EQ(GetMonData(&party[0], MON_DATA_HP), GetMonData(&party[0], MON_DATA_MAX_HP));
     EXPECT_EQ(GetMonData(&party[0], MON_DATA_SPECIES), SPECIES_PIKACHU);
+    EXPECT_EQ(GetMonData(&party[0], MON_DATA_HELD_ITEM), ITEM_LIGHT_BALL);
+    EXPECT_EQ(GetMonData(&party[0], MON_DATA_MOVE1), MOVE_THUNDERBOLT);
 
-    ZeroEnemyPartyMons();
-    CreateMon(&party[0], SPECIES_EEVEE, 3, 0, OTID_STRUCT_PLAYER_ID);
-    ApplyTrainerLevelDifficulty(party);
-    EXPECT_EQ(GetMonData(&party[0], MON_DATA_LEVEL), 1);
-
+    FlagSet(FLAG_IS_CHAMPION);
+    EXPECT_EQ(GetCampaignTrainerLevel(3), 100);
+    SetCurrentDifficultyLevel(DIFFICULTY_NORMAL);
+    EXPECT_EQ(GetCampaignTrainerLevel(3), 100);
     SetCurrentDifficultyLevel(DIFFICULTY_HARD);
+    EXPECT_EQ(GetCampaignTrainerLevel(3), 100);
+    ResetCampaignCapMilestones();
     ZeroEnemyPartyMons();
 }
 
 TEST("Emerald Champions level caps follow every campaign milestone")
 {
-    static const u16 badges[] =
+    ResetCampaignCapMilestones();
+    EXPECT_EQ(GetCurrentLevelCap(), 14);
+    for (u32 i = 0; i < ARRAY_COUNT(sCampaignCapExpectations); i++)
     {
-        FLAG_BADGE01_GET,
-        FLAG_BADGE02_GET,
-        FLAG_BADGE03_GET,
-        FLAG_BADGE04_GET,
-        FLAG_BADGE05_GET,
-        FLAG_BADGE06_GET,
-        FLAG_BADGE07_GET,
-        FLAG_BADGE08_GET,
-    };
-    static const u8 caps[] = {14, 20, 30, 40, 45, 55, 60, 70, 80};
-
-    FlagClear(FLAG_IS_CHAMPION);
-    for (u32 i = 0; i < ARRAY_COUNT(badges); i++)
-        FlagClear(badges[i]);
-    for (u32 i = 0; i < ARRAY_COUNT(caps); i++)
-    {
-        EXPECT_EQ(GetCurrentLevelCap(), caps[i]);
-        if (i < ARRAY_COUNT(badges))
-            FlagSet(badges[i]);
+        FlagSet(sCampaignCapExpectations[i].flag);
+        EXPECT_EQ(GetCurrentLevelCap(), sCampaignCapExpectations[i].cap);
     }
-    FlagSet(FLAG_IS_CHAMPION);
-    EXPECT_EQ(GetCurrentLevelCap(), MAX_LEVEL);
+    ResetCampaignCapMilestones();
 }
 
 TEST("Emerald Champions strict EXP cap blocks gains at the milestone")
@@ -532,25 +607,19 @@ TEST("Emerald Champions exposes named Doubles and Singles sets for every direct 
 
     for (u8 format = 0; format < EC_BATTLE_FORMAT_COUNT; format++)
     {
-        const struct EmeraldChampionsBattleSet *defaults = format == EC_BATTLE_FORMAT_DOUBLES
-            ? gEmeraldChampionsDefaultBattleSets : gEmeraldChampionsSinglesDefaultBattleSets;
-        const struct EmeraldChampionsBattleSetRange *ranges = format == EC_BATTLE_FORMAT_DOUBLES
-            ? gEmeraldChampionsBattleSetRanges : gEmeraldChampionsSinglesBattleSetRanges;
-        const struct EmeraldChampionsBattleSetChoice *alternatives = format == EC_BATTLE_FORMAT_DOUBLES
-            ? gEmeraldChampionsBattleSetAlternatives : gEmeraldChampionsSinglesBattleSetAlternatives;
+        const struct EmeraldChampionsBattleSetRange *ranges = gEmeraldChampionsBattleSetRanges[format];
 
         for (enum Species species = SPECIES_BULBASAUR; species < NUM_SPECIES; species++)
         {
-            if (defaults[species].moves[0] == MOVE_NONE)
+            if (ranges[species].count == 0)
                 continue;
             PARAMETRIZE_LABEL("format=%d species=%d", format, species)
             {
                 // Enumerate the compiled tables independently of menu visibility:
                 // a hidden or missing role must fail rather than escape the test.
-                for (u32 raw = 0; raw <= ranges[species].count; raw++)
+                for (u32 raw = 0; raw < ranges[species].count; raw++)
                 {
-                    const struct EmeraldChampionsBattleSet *preset = raw == 0 ? &defaults[species]
-                        : &alternatives[ranges[species].offset + raw - 1].preset;
+                    const struct EmeraldChampionsBattleSet *preset = &gEmeraldChampionsBattleSets[ranges[species].offset + raw].preset;
                     enum Item held = preset->requiredItem != ITEM_NONE ? preset->requiredItem : preset->item;
                     u32 applied = 0;
                     u32 total = 0;
@@ -634,18 +703,18 @@ TEST("Emerald Champions EV editor clamps individual and total allocations")
     CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_BULBASAUR, 14, 0, OTID_STRUCT_PLAYER_ID);
     CalculatePlayerPartyCount();
     gSpecialVar_0x800A = 0;
-    ResetSelectedMonEmeraldChampionsEvs();
+    ResetSelectedMonEmeraldChampionsTraining();
     gSpecialVar_0x8005 = STAT_HP;
     gSpecialVar_0x8006 = 7; // Set Maximum.
-    AdjustSelectedMonEmeraldChampionsEvs();
+    AdjustSelectedMonEmeraldChampionsTraining();
     EXPECT_EQ(gSpecialVar_Result, TRUE);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP_EV), 252);
 
     gSpecialVar_0x8005 = STAT_ATK;
-    AdjustSelectedMonEmeraldChampionsEvs();
+    AdjustSelectedMonEmeraldChampionsTraining();
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_ATK_EV), 252);
     gSpecialVar_0x8005 = 5; // Display-order Speed; only six EVs remain.
-    AdjustSelectedMonEmeraldChampionsEvs();
+    AdjustSelectedMonEmeraldChampionsTraining();
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPEED_EV), 6);
     for (u32 stat = 0; stat < NUM_STATS; stat++)
     {
@@ -658,15 +727,15 @@ TEST("Emerald Champions EV editor clamps individual and total allocations")
     // A capped increase is rejected so the field script can play native
     // failure feedback instead of silently redrawing an unchanged value.
     gSpecialVar_0x8006 = 3; // +4 with no EVs remaining.
-    AdjustSelectedMonEmeraldChampionsEvs();
+    AdjustSelectedMonEmeraldChampionsTraining();
     EXPECT_EQ(gSpecialVar_Result, FALSE);
 
     gSpecialVar_0x8006 = 2; // -4, then clamp the remaining two to zero.
-    AdjustSelectedMonEmeraldChampionsEvs();
+    AdjustSelectedMonEmeraldChampionsTraining();
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPEED_EV), 2);
-    AdjustSelectedMonEmeraldChampionsEvs();
+    AdjustSelectedMonEmeraldChampionsTraining();
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPEED_EV), 0);
-    ResetSelectedMonEmeraldChampionsEvs();
+    ResetSelectedMonEmeraldChampionsTraining();
     total = 0;
     for (u32 stat = 0; stat < NUM_STATS; stat++)
         total += GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP_EV + stat);
@@ -1151,36 +1220,30 @@ TEST("Emerald Champions persists appended legendary sign bits")
     EXPECT(!IsLegendarySignCaught(LEGENDARY_SIGN_ARCEUS));
 }
 
-TEST("Emerald Champions Arceus mastery requires every finite Sign source")
+TEST("Emerald Champions Arceus gift requires final badge and resolved crisis")
 {
-    static const u16 caughtVars[] =
-    {
-        VAR_LEGENDARY_SIGNS_CAUGHT_0,
-        VAR_LEGENDARY_SIGNS_CAUGHT_1,
-        VAR_LEGENDARY_SIGNS_CAUGHT_2,
-        VAR_LEGENDARY_SIGNS_CAUGHT_3,
-        VAR_LEGENDARY_SIGNS_CAUGHT_4,
-        VAR_LEGENDARY_SIGNS_CAUGHT_5,
-    };
-
     ZeroPlayerPartyMons();
-    for (u32 i = 0; i < ARRAY_COUNT(caughtVars); i++)
-        VarSet(caughtVars[i], 0);
-    for (enum LegendarySignId signId = 0; signId < LEGENDARY_SIGN_COUNT; signId++)
-    {
-        if (signId == LEGENDARY_SIGN_ARCEUS || signId == LEGENDARY_SIGN_GENESECT)
-            continue;
-        MarkLegendarySignCaughtBySpecies(gLegendarySignDefinitions[signId].species);
-    }
+    for (u32 i = 0; i < ARRAY_COUNT(sEmeraldChampionsTestSignStateVars); i++)
+        VarSet(sEmeraldChampionsTestSignStateVars[i], 0);
+    FlagClear(FLAG_BADGE08_GET);
+    FlagClear(FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE);
 
+    TryGiveArceusLegendarySignMasteryReward();
+    EXPECT_EQ(gSpecialVar_Result, 0);
+    FlagSet(FLAG_BADGE08_GET);
     TryGiveArceusLegendarySignMasteryReward();
     EXPECT_EQ(gSpecialVar_Result, 0);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_NONE);
 
-    MarkLegendarySignCaughtBySpecies(SPECIES_GENESECT);
+    FlagSet(FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE);
     TryGiveArceusLegendarySignMasteryReward();
     EXPECT_EQ(gSpecialVar_Result, 1);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_ARCEUS);
+    TryGiveArceusLegendarySignMasteryReward();
+    EXPECT_EQ(gSpecialVar_Result, 4);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_SPECIES), SPECIES_NONE);
+    FlagClear(FLAG_BADGE08_GET);
+    FlagClear(FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE);
 }
 
 TEST("Emerald Champions Ogerpon mask roles require owned masks without a Mega Ring")
@@ -1238,7 +1301,8 @@ TEST("Emerald Champions free Memories remain protected and require an equipped i
     u32 exercised = 0;
     for (enum Species species = SPECIES_BULBASAUR; species < NUM_SPECIES; species++)
     {
-        enum Item item = gEmeraldChampionsDefaultBattleSets[species].item;
+        const struct EmeraldChampionsBattleSetRange *range = &gEmeraldChampionsBattleSetRanges[EC_BATTLE_FORMAT_DOUBLES][species];
+        enum Item item = range->count == 0 ? ITEM_NONE : gEmeraldChampionsBattleSets[range->offset].preset.item;
         if (item == ITEM_NONE || gItemsInfo[item].sortType != ITEM_TYPE_MEMORY)
             continue;
         struct Pokemon mon;
@@ -1279,7 +1343,7 @@ TEST("Emerald Champions imported battle sets remain legal against current data")
                 Test_MgbaPrintf("illegal imported set species=%d choice=%d ability=%d item=%d required=%d", species, choice, preset->ability, preset->item, preset->requiredItem);
             EXPECT(result == EC_BATTLE_SET_SUCCESS || result == EC_BATTLE_SET_MEGA);
             EXPECT_NE(GetMonAbility(&mon), ABILITY_NONE);
-            if (gEmeraldChampionsDefaultBattleSets[species].moves[0] != MOVE_NONE
+            if (gEmeraldChampionsBattleSetRanges[EC_BATTLE_FORMAT_DOUBLES][species].count != 0
              && preset->requiredItem == ITEM_NONE
              && preset->requiredMove == MOVE_NONE)
             {
@@ -1359,7 +1423,7 @@ TEST("Emerald Champions exposes two pre-Mega roles for every direct set row")
     {
         u32 nonMegaCount = 0;
 
-        if (gEmeraldChampionsDefaultBattleSets[species].moves[0] == MOVE_NONE)
+        if (gEmeraldChampionsBattleSetRanges[EC_BATTLE_FORMAT_DOUBLES][species].count == 0)
             continue;
         for (u8 choice = 0; choice < GetEmeraldChampionsRawBattleSetCount(species); choice++)
         {
@@ -1826,16 +1890,16 @@ TEST("Emerald Champions EV editor shows native stats and three-digit allocations
     gSpecialVar_0x800A = 0;
     gSpecialVar_0x8005 = 0;
     gSpecialVar_0x8006 = 4; // +16 EVs, twice.
-    AdjustSelectedMonEmeraldChampionsEvs();
-    AdjustSelectedMonEmeraldChampionsEvs();
+    AdjustSelectedMonEmeraldChampionsTraining();
+    AdjustSelectedMonEmeraldChampionsTraining();
     EXPECT_EQ(GetMonData(mon, MON_DATA_MAX_HP), base + 2);
     EXPECT_EQ(GetMonData(mon, MON_DATA_HP_EV), 32);
-    BufferSelectedMonEmeraldChampionsEvDetail();
+    BufferSelectedMonEmeraldChampionsTrainingDetail();
     EXPECT_EQ(StringCompare(gStringVar4, expected), 0);
     EXPECT_EQ(GetMonData(mon, MON_DATA_HP), base + 2);
     gSpecialVar_0x8006 = 7;
-    AdjustSelectedMonEmeraldChampionsEvs();
-    BufferSelectedMonEmeraldChampionsEvDetail();
+    AdjustSelectedMonEmeraldChampionsTraining();
+    BufferSelectedMonEmeraldChampionsTrainingDetail();
     EXPECT_EQ(StringCompare(gStringVar4, maximum), 0);
 }
 
@@ -2029,4 +2093,338 @@ TEST("Emerald Champions partial mask grants retry only their saved undelivered i
     EXPECT(!CheckPCHasItem(ITEM_WELLSPRING_MASK, 1));
     ClearBag();
     memset(gSaveBlock1Ptr->pcItems, 0, sizeof(gSaveBlock1Ptr->pcItems));
+}
+
+TEST("Emerald Champions IV editor uses precise values and leaves EVs untouched")
+{
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][0];
+    u8 evs = 252;
+    ZeroPlayerPartyMons();
+    CreateRandomMonWithIVs(mon, SPECIES_ZIGZAGOON, 50, 31);
+    CalculatePlayerPartyCount();
+    SetMonData(mon, MON_DATA_ATK_EV, &evs);
+    gSpecialVar_0x800A = 0;
+    gSpecialVar_0x8002 = EC_TRAINING_IVS;
+    gSpecialVar_0x8005 = 1; // Attack in the displayed order.
+    gSpecialVar_0x8006 = 6; // Set to zero.
+    AdjustSelectedMonEmeraldChampionsTraining();
+    EXPECT_EQ(GetMonData(mon, MON_DATA_ATK_IV), 0);
+    EXPECT_EQ(GetMonData(mon, MON_DATA_ATK_EV), 252);
+    gSpecialVar_0x8006 = 3; // +1 IV, not +4 EVs.
+    AdjustSelectedMonEmeraldChampionsTraining();
+    EXPECT_EQ(GetMonData(mon, MON_DATA_ATK_IV), 1);
+    ResetSelectedMonEmeraldChampionsTraining();
+    EXPECT_EQ(GetMonData(mon, MON_DATA_ATK_IV), 31);
+    EXPECT_EQ(GetMonData(mon, MON_DATA_ATK_EV), 252);
+    gSpecialVar_0x8002 = EC_TRAINING_EVS;
+    ZeroPlayerPartyMons();
+}
+
+TEST("Emerald Champions no-repetition evolutions work at cap and honor Everstone")
+{
+    static const struct { enum Species from, to; enum Move move; u32 personality; } cases[] =
+    {
+        {SPECIES_PRIMEAPE, SPECIES_ANNIHILAPE, MOVE_RAGE_FIST, 0},
+        {SPECIES_STANTLER, SPECIES_WYRDEER, MOVE_PSYSHIELD_BASH, 0},
+        {SPECIES_PAWMO, SPECIES_PAWMOT, MOVE_NONE, 0},
+        {SPECIES_BRAMBLIN, SPECIES_BRAMBLEGHAST, MOVE_NONE, 0},
+        {SPECIES_RELLOR, SPECIES_RABSCA, MOVE_NONE, 0},
+        {SPECIES_BASCULIN_WHITE_STRIPED, SPECIES_BASCULEGION_M, MOVE_NONE, 255},
+        {SPECIES_BASCULIN_WHITE_STRIPED, SPECIES_BASCULEGION_F, MOVE_NONE, 0},
+        {SPECIES_FARFETCHD_GALAR, SPECIES_SIRFETCHD, MOVE_NONE, 0},
+    };
+    struct Pokemon mon;
+    u16 everstone = ITEM_EVERSTONE;
+    ResetCampaignCapMilestones();
+    for (u32 i = 0; i < ARRAY_COUNT(cases); i++)
+    {
+        bool32 canStop = TRUE;
+        CreateMon(&mon, cases[i].from, 14, cases[i].personality, OTID_STRUCT_PLAYER_ID);
+        if (cases[i].move != MOVE_NONE)
+        {
+            EXPECT_EQ(GetEvolutionTargetSpecies(&mon, EVO_MODE_NORMAL, ITEM_NONE, NULL, &canStop, CHECK_EVO), SPECIES_NONE);
+            SetMonMoveSlot(&mon, cases[i].move, 0);
+        }
+        EXPECT(IsMonEligibleForLeveler(&mon));
+        EXPECT_EQ(GetEvolutionTargetSpecies(&mon, EVO_MODE_NORMAL, ITEM_NONE, NULL, &canStop, CHECK_EVO), cases[i].to);
+        EXPECT(canStop);
+        EXPECT_EQ(GetMonData(&mon, MON_DATA_LEVEL), 14);
+        SetMonData(&mon, MON_DATA_HELD_ITEM, &everstone);
+        EXPECT_EQ(GetEvolutionTargetSpecies(&mon, EVO_MODE_NORMAL, ITEM_NONE, NULL, &canStop, CHECK_EVO), SPECIES_NONE);
+        EXPECT(!IsMonEligibleForLeveler(&mon));
+    }
+}
+
+TEST("Emerald Champions authored Dragapult keeps its deliberate zero special Attack IV")
+{
+    struct Pokemon *party = gParties[B_TRAINER_OPPONENT_A];
+    ResetCampaignCapMilestones();
+    CreateNPCTrainerPartyFromTrainer(party, &gTrainers[DIFFICULTY_NORMAL][TRAINER_TABITHA_MAGMA_HIDEOUT]);
+    EXPECT_EQ(GetMonData(&party[0], MON_DATA_SPECIES), SPECIES_DRAGAPULT);
+    EXPECT_EQ(GetMonData(&party[0], MON_DATA_SPATK_IV), 0);
+    EXPECT_EQ(GetMonData(&party[0], MON_DATA_ATK_IV), 31);
+    EXPECT_EQ(GetMonData(&party[0], MON_DATA_FRIENDSHIP), 255);
+    EXPECT_EQ(GetMonData(&party[0], MON_DATA_MOVE2), MOVE_SURF);
+    ZeroEnemyPartyMons();
+}
+
+TEST("Emerald Champions milestone stipends are finite and independent of item delivery")
+{
+    ResetCampaignCapMilestones();
+    FlagClear(FLAG_SYS_POKENAV_GET);
+    SetMoney(&gSaveBlock1Ptr->money, 6000);
+    EXPECT(CompleteCampaignMilestone(FLAG_BADGE01_GET));
+    EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 9000);
+    EXPECT(!CompleteCampaignMilestone(FLAG_BADGE01_GET));
+    EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 9000);
+    EXPECT(CompleteCampaignMilestone(FLAG_SYS_POKENAV_GET));
+    EXPECT_EQ(GetCurrentLevelCap(), 20);
+    EXPECT(CompleteCampaignMilestone(FLAG_DELIVERED_DEVON_GOODS));
+    EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 21000);
+    FlagClear(FLAG_RECEIVED_WATTSON_ELECTIRIZER);
+    EXPECT(CompleteCampaignMilestone(FLAG_EC_REPORT_C28_COMPLETE));
+    EXPECT_EQ(GetCurrentLevelCap(), 52);
+    EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 27000);
+    EXPECT(!FlagGet(FLAG_RECEIVED_WATTSON_ELECTIRIZER));
+    EXPECT(!CompleteCampaignMilestone(FLAG_EC_REPORT_C28_COMPLETE));
+    EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 27000);
+    ResetCampaignCapMilestones();
+    FlagClear(FLAG_SYS_POKENAV_GET);
+}
+
+TEST("Emerald Champions paired prizes use incoming cap once and exclude replays")
+{
+    struct BattleStruct *savedStruct = gBattleStruct;
+    u32 savedFlags = gBattleTypeFlags;
+    TrainerBattleParameter savedParams = gTrainerBattleParameter;
+    ResetCampaignCapMilestones();
+    FlagSet(FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE);
+    memset(&sEmeraldChampionsTestBattleStruct, 0, sizeof(sEmeraldChampionsTestBattleStruct));
+    gBattleStruct = &sEmeraldChampionsTestBattleStruct;
+    gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_TWO_OPPONENTS;
+    InitTrainerBattleParameter();
+    TRAINER_BATTLE_PARAM.opponentA = TRAINER_MAXIE_MOSSDEEP;
+    TRAINER_BATTLE_PARAM.opponentB = TRAINER_COURTNEY_MOSSDEEP;
+    ClearTrainerFlag(TRAINER_BATTLE_PARAM.opponentA);
+    ClearTrainerFlag(TRAINER_BATTLE_PARAM.opponentB);
+    InitCampaignBattleReward();
+    EXPECT_EQ(GetCampaignBattleMoneyReward(), 7200);
+    FlagSet(FLAG_EC_REPORT_C42_COMPLETE);
+    SetCurrentDifficultyLevel(DIFFICULTY_HARD);
+    EXPECT_EQ(GetCampaignBattleMoneyReward(), 7200);
+    SetCurrentDifficultyLevel(DIFFICULTY_EASY);
+    EXPECT_EQ(GetCampaignBattleMoneyReward(), 7200);
+    SetTrainerFlag(TRAINER_BATTLE_PARAM.opponentA);
+    SetTrainerFlag(TRAINER_BATTLE_PARAM.opponentB);
+    InitCampaignBattleReward();
+    EXPECT_EQ(GetCampaignBattleMoneyReward(), 0);
+    ClearTrainerFlag(TRAINER_BATTLE_PARAM.opponentA);
+    ClearTrainerFlag(TRAINER_BATTLE_PARAM.opponentB);
+    TRAINER_BATTLE_PARAM.isRematch = TRUE;
+    InitCampaignBattleReward();
+    EXPECT_EQ(GetCampaignBattleMoneyReward(), 0);
+    gTrainerBattleParameter = savedParams;
+    gBattleStruct = savedStruct;
+    gBattleTypeFlags = savedFlags;
+    SetCurrentDifficultyLevel(DIFFICULTY_HARD);
+    ResetCampaignCapMilestones();
+}
+
+TEST("Emerald Champions survey locates owned Castform across permanent storage")
+{
+    u32 isEgg = TRUE;
+    ZeroPlayerPartyMons();
+    memset(gPokemonStoragePtr, 0, sizeof(*gPokemonStoragePtr));
+    memset(&gSaveBlock1Ptr->daycare, 0, sizeof(gSaveBlock1Ptr->daycare));
+    LocateEmeraldChampionsCastform();
+    EXPECT_EQ(gSpecialVar_Result, EC_CASTFORM_NONE);
+
+    CreateBoxMon(&gSaveBlock1Ptr->daycare.mons[1].mon, SPECIES_CASTFORM_RAINY, 25, 0, OTID_STRUCT_PLAYER_ID);
+    LocateEmeraldChampionsCastform();
+    EXPECT_EQ(gSpecialVar_Result, EC_CASTFORM_DAYCARE);
+    EXPECT_EQ(gSpecialVar_0x8004, 1);
+
+    StringCopy(GetBoxNamePtr(3), COMPOUND_STRING("SURVEY"));
+    CreateBoxMon(GetBoxedMonPtr(3, 7), SPECIES_CASTFORM_SNOWY, 25, 0, OTID_STRUCT_PLAYER_ID);
+    LocateEmeraldChampionsCastform();
+    EXPECT_EQ(gSpecialVar_Result, EC_CASTFORM_BOX);
+    EXPECT_EQ(StringCompare(gStringVar1, COMPOUND_STRING("SURVEY")), 0);
+    EXPECT_EQ(gSpecialVar_0x8004, 3 * IN_BOX_COUNT + 7);
+
+    CreateMon(&gParties[B_TRAINER_PLAYER][2], SPECIES_CASTFORM_SUNNY, 25, 0, OTID_STRUCT_PLAYER_ID);
+    LocateEmeraldChampionsCastform();
+    EXPECT_EQ(gSpecialVar_Result, EC_CASTFORM_PARTY);
+    EXPECT_EQ(gSpecialVar_0x8004, 2);
+    SetMonData(&gParties[B_TRAINER_PLAYER][2], MON_DATA_IS_EGG, &isEgg);
+    LocateEmeraldChampionsCastform();
+    EXPECT_EQ(gSpecialVar_Result, EC_CASTFORM_BOX);
+
+    memset(gPokemonStoragePtr, 0, sizeof(*gPokemonStoragePtr));
+    memset(&gSaveBlock1Ptr->daycare, 0, sizeof(gSaveBlock1Ptr->daycare));
+    LocateEmeraldChampionsCastform();
+    EXPECT_EQ(gSpecialVar_Result, EC_CASTFORM_EGG);
+    ZeroPlayerPartyMons();
+    LocateEmeraldChampionsCastform();
+    EXPECT_EQ(gSpecialVar_Result, EC_CASTFORM_NONE);
+}
+
+static void ResetBookItemOwnership(void)
+{
+    ClearBag();
+    memset(gSaveBlock1Ptr->pcItems, 0, sizeof(gSaveBlock1Ptr->pcItems));
+    ZeroPlayerPartyMons();
+    memset(gPokemonStoragePtr, 0, sizeof(*gPokemonStoragePtr));
+    memset(&gSaveBlock1Ptr->daycare, 0, sizeof(gSaveBlock1Ptr->daycare));
+}
+
+TEST("Emerald Champions permanent item ownership includes Day Care and protects Mega value")
+{
+    enum Item stone = ITEM_VENUSAURITE;
+    enum Item none = ITEM_NONE;
+    ResetBookItemOwnership();
+    EXPECT(!PlayerOwnsItem(ITEM_NONE));
+    EXPECT(!PlayerOwnsItem(stone));
+    EXPECT_EQ(GetFiniteDuplicateRewardValue(stone), 0);
+    CreateBoxMon(&gSaveBlock1Ptr->daycare.mons[0].mon, SPECIES_BULBASAUR, 20, 0, OTID_STRUCT_PLAYER_ID);
+    SetBoxMonData(&gSaveBlock1Ptr->daycare.mons[0].mon, MON_DATA_HELD_ITEM, &stone);
+    EXPECT(PlayerOwnsItem(stone));
+    EXPECT_EQ(GetFiniteDuplicateRewardValue(stone), 3000);
+    EXPECT(IsItemProtectedFromLoss(stone));
+    EXPECT_EQ(GetItemImportance(stone), 0); // Remains holdable.
+    EXPECT_EQ(GetItemSellPrice(stone), 0);
+    SetBoxMonData(&gSaveBlock1Ptr->daycare.mons[0].mon, MON_DATA_HELD_ITEM, &none);
+    EXPECT(!PlayerOwnsItem(stone));
+    EXPECT(AddPCItem(ITEM_LINKING_CORD, 1));
+    EXPECT_EQ(GetFiniteDuplicateRewardValue(ITEM_LINKING_CORD), 5000);
+    EXPECT(IsItemProtectedFromLoss(ITEM_LINKING_CORD));
+    EXPECT_EQ(GetItemSellPrice(ITEM_LINKING_CORD), 0);
+    ResetBookItemOwnership();
+}
+
+TEST("Emerald Champions free Ball restock remains ten after the opening and cannot be sold")
+{
+    ResetBookItemOwnership();
+    FlagSet(FLAG_DEFEATED_RIVAL_ROUTE103);
+    EXPECT(AddBagItem(ITEM_POKE_BALL, 7));
+    RestockEmeraldChampionsBasicBalls();
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_POKE_BALL), 10);
+    RestockEmeraldChampionsBasicBalls();
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_POKE_BALL), 10);
+    ClearBag();
+    EXPECT(AddPCItem(ITEM_POKE_BALL, 4));
+    RestockEmeraldChampionsBasicBalls();
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_POKE_BALL), 6);
+    EXPECT_EQ(GetItemPrice(ITEM_POKE_BALL), 100);
+    EXPECT_EQ(GetItemPrice(ITEM_GREAT_BALL), 300);
+    EXPECT_EQ(GetItemPrice(ITEM_ULTRA_BALL), 600);
+    EXPECT_EQ(GetItemPrice(ITEM_QUICK_BALL), 600);
+    EXPECT_EQ(GetItemPrice(ITEM_ETHER), 1000);
+    EXPECT_EQ(GetItemSellPrice(ITEM_POKE_BALL), 0);
+    EXPECT_EQ(GetItemSellPrice(ITEM_ULTRA_BALL), 0);
+    EXPECT_EQ(GetItemSellPrice(ITEM_HEART_SCALE), 1000);
+    FlagClear(FLAG_DEFEATED_RIVAL_ROUTE103);
+    ResetBookItemOwnership();
+}
+
+TEST("Emerald Champions starter and soot alternatives close each finite receipt once")
+{
+    u32 savedMoney = GetMoney(&gSaveBlock1Ptr->money);
+    ResetBookItemOwnership();
+    SetMoney(&gSaveBlock1Ptr->money, 6000);
+    VarSet(VAR_STARTER_GEN, 1);
+    VarSet(VAR_STARTER_MON, 0);
+    VarSet(VAR_EC_SECOND_STARTER, 0);
+    VarSet(VAR_STEVEN_STARTER_STONE_DELIVERY, 0);
+    EXPECT(AddPCItem(ITEM_VENUSAURITE, 1));
+    gSpecialVar_0x8008 = 0;
+    GiveEmeraldChampionsStarterMegaStoneAtIndex();
+    EXPECT_EQ(gSpecialVar_Result, TRUE);
+    EXPECT_EQ(gSpecialVar_0x8005, 3);
+    EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 9000);
+    GiveEmeraldChampionsStarterMegaStoneAtIndex();
+    EXPECT_EQ(gSpecialVar_0x8005, 0);
+    EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 9000);
+    gSpecialVar_0x8008 = 1; // Bulbasaur has no second stone.
+    GiveEmeraldChampionsStarterMegaStoneAtIndex();
+    EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 9000);
+    EXPECT(AddBagItem(ITEM_LINKING_CORD, 1));
+    VarSet(VAR_EC_SOOT_PROGRESS, 100);
+    ClaimEmeraldChampionsSootMilestone();
+    EXPECT_EQ(gSpecialVar_Result, 5);
+    EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 14000);
+    EXPECT_EQ(VarGet(VAR_EC_SOOT_PROGRESS), 100 | EC_SOOT_CORD_RECEIVED);
+    ClaimEmeraldChampionsSootMilestone();
+    EXPECT_EQ(gSpecialVar_Result, 0);
+    EXPECT_EQ(GetMoney(&gSaveBlock1Ptr->money), 14000);
+    VarSet(VAR_STEVEN_STARTER_STONE_DELIVERY, 0);
+    VarSet(VAR_EC_SOOT_PROGRESS, 0);
+    SetMoney(&gSaveBlock1Ptr->money, savedMoney);
+    ResetBookItemOwnership();
+}
+
+TEST("Emerald Champions garden refuses owned stones and Shoal substitutes before charging")
+{
+    ResetBookItemOwnership();
+    FlagClear(FLAG_EC_BERRY_TRADE_BAXCALIBRITE);
+    FlagClear(FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_GLALITITE);
+    EXPECT(AddBagItem(ITEM_RAZZ_BERRY, 20));
+    EXPECT(AddPCItem(ITEM_BAXCALIBRITE, 1));
+    gSpecialVar_0x8004 = ITEM_BAXCALIBRITE;
+    TradeEmeraldChampionsGardenBerries();
+    EXPECT_EQ(gSpecialVar_Result, EC_MEGA_BERRY_TRADE_ALREADY_DONE);
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_RAZZ_BERRY), 20);
+    EXPECT(!FlagGet(FLAG_EC_BERRY_TRADE_BAXCALIBRITE));
+    EXPECT(AddPCItem(ITEM_GLALITITE, 1));
+    EXPECT(AddBagItem(ITEM_SHOAL_SALT, 4));
+    EXPECT(AddBagItem(ITEM_SHOAL_SHELL, 4));
+    BufferEmeraldChampionsShoalReward();
+    EXPECT_EQ(StringCompare(gStringVar1, GetItemName(ITEM_BIG_PEARL)), 0);
+    TradeEmeraldChampionsShoalMaterials();
+    EXPECT_EQ(gSpecialVar_Result, 1);
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_BIG_PEARL), 1);
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_SHOAL_SALT), 0);
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_SHOAL_SHELL), 0);
+    EXPECT(FlagGet(FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_GLALITITE));
+    TradeEmeraldChampionsShoalMaterials();
+    EXPECT_EQ(gSpecialVar_Result, 0);
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_BIG_PEARL), 1);
+    FlagClear(FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_GLALITITE);
+    ResetBookItemOwnership();
+}
+
+TEST("Emerald Champions NPC trades recover held items from party or PC and reject full stores")
+{
+    enum Item stone = ITEM_VENUSAURITE;
+    ResetBookItemOwnership();
+    CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_ZIGZAGOON, 20, 0, OTID_STRUCT_PLAYER_ID);
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM, &stone);
+    gSpecialVar_0x8004 = 0;
+    ReturnInGameTradeHeldItem();
+    EXPECT_EQ(gSpecialVar_Result, 2);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM), ITEM_NONE);
+    EXPECT_EQ(CountTotalItemQuantityInBag(stone), 1);
+    ReturnInGameTradeHeldItem();
+    EXPECT_EQ(gSpecialVar_Result, 1);
+    EXPECT_EQ(CountTotalItemQuantityInBag(stone), 1);
+    ClearBag();
+    struct BagPocket *pocket = &gBagPockets[GetItemPocket(stone)];
+    for (u32 slot = 0; slot < pocket->capacity; slot++)
+        BagPocket_SetSlotItemIdAndCount(pocket, slot, ITEM_ABOMASITE, MAX_BAG_ITEM_CAPACITY);
+    CreateBoxMon(GetBoxedMonPtr(3, 7), SPECIES_ZIGZAGOON, 20, 0, OTID_STRUCT_PLAYER_ID);
+    SetBoxMonData(GetBoxedMonPtr(3, 7), MON_DATA_HELD_ITEM, &stone);
+    gSpecialVar_0x8004 = PC_MON_CHOSEN;
+    gSpecialVar_MonBoxId = 3;
+    gSpecialVar_MonBoxPos = 7;
+    ReturnInGameTradeHeldItem();
+    EXPECT_EQ(gSpecialVar_Result, 3);
+    EXPECT_EQ(GetBoxMonData(GetBoxedMonPtr(3, 7), MON_DATA_HELD_ITEM), ITEM_NONE);
+    EXPECT(CheckPCHasItem(stone, 1));
+    for (u32 slot = 0; slot < PC_ITEMS_COUNT; slot++)
+        gSaveBlock1Ptr->pcItems[slot] = (struct ItemSlot){ITEM_POTION, MAX_PC_ITEM_CAPACITY};
+    SetBoxMonData(GetBoxedMonPtr(3, 7), MON_DATA_HELD_ITEM, &stone);
+    ReturnInGameTradeHeldItem();
+    EXPECT_EQ(gSpecialVar_Result, 0);
+    EXPECT_EQ(GetBoxMonData(GetBoxedMonPtr(3, 7), MON_DATA_SPECIES), SPECIES_ZIGZAGOON);
+    EXPECT_EQ(GetBoxMonData(GetBoxedMonPtr(3, 7), MON_DATA_HELD_ITEM), stone);
+    ResetBookItemOwnership();
 }

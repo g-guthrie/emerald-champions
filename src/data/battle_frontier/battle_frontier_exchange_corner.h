@@ -27,8 +27,8 @@ static const u16 sFrontierExchangeCorner_Decor2[] =
 // and evolution tools that remain meaningful in the postgame.
 static const enum Item sFrontierExchangeCorner_Supplies[] =
 {
-    ITEM_PP_UP,
-    ITEM_PP_MAX,
+    ITEM_QUICK_BALL,
+    ITEM_TIMER_BALL,
     ITEM_MAX_REVIVE,
     ITEM_SACRED_ASH,
     ITEM_DREAM_BALL,
@@ -77,8 +77,8 @@ static const u8 *const sFrontierExchangeCorner_Decor2Descriptions[] =
 
 static const u8 *const sFrontierExchangeCorner_SupplyDescriptions[] =
 {
-    BattleFrontier_ExchangeServiceCorner_Text_PPUpDesc,
-    BattleFrontier_ExchangeServiceCorner_Text_PPMaxDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_QuickBallDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_TimerBallDesc,
     BattleFrontier_ExchangeServiceCorner_Text_MaxReviveDesc,
     BattleFrontier_ExchangeServiceCorner_Text_SacredAshDesc,
     BattleFrontier_ExchangeServiceCorner_Text_DreamBallDesc,

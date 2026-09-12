@@ -15,8 +15,7 @@ Route108_EventScript_Tara::
 	end
 
 Route108_EventScript_Missy::
-	trainerbattle_double TRAINER_MISSY, Route108_Text_MissyIntro, Route108_Text_MissyDefeated, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route108_Text_MissyPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route108_Text_MissyPostBattle, MSGBOX_NPC
 	end
 
 Route108_EventScript_Carolina::
@@ -25,26 +24,8 @@ Route108_EventScript_Carolina::
 	end
 
 Route108_EventScript_Cory::
-	trainerbattle_double TRAINER_CORY_1, Route108_Text_CoryIntro, Route108_Text_CoryDefeated, EmeraldChampions_Text_NeedTwoPokemon, Route108_EventScript_CoryRegisterMatchCallAfterBattle
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route108_EventScript_CoryRematch
-	msgbox Route108_Text_CoryPostBattle, MSGBOX_DEFAULT
-	release
+	msgbox Route108_Text_CoryPostBattle, MSGBOX_NPC
 	end
-
-Route108_EventScript_CoryRegisterMatchCallAfterBattle::
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route108_Text_CoryRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_CORY_1
-	release
-	end
-
-Route108_EventScript_CoryRematch::
-	trainerbattle_rematch_double TRAINER_CORY_1, Route108_Text_CoryRematchIntro, Route108_Text_CoryRematchDefeated, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route108_Text_CoryRematchPostBattle, MSGBOX_AUTOCLOSE
-	end
-
 
 Route108_Text_JEROME_LocalConversation:
 	.string "I counted every wave out here.\n"

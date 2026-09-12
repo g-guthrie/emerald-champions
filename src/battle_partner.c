@@ -6,6 +6,7 @@
 #include "data.h"
 #include "frontier_util.h"
 #include "difficulty.h"
+#include "caps.h"
 #include "malloc.h"
 #include "string_util.h"
 #include "trainer_util.h"
@@ -44,7 +45,13 @@ void FillPartnerParty(u16 trainerId)
             partnerGen.otID = OTID_STRUCT_PRESET(STEVEN_OTID);
         for (i = 0; i < lastIndex && i < partner->partySize; i++)
         {
-            GenerateMonFromTrainerMon(&gParties[B_TRAINER_PARTNER][i], &partner->party[i], &partnerGen);
+            struct TrainerMon ally = partner->party[i];
+            if (trainerId == TRAINER_PARTNER(PARTNER_STEVEN))
+            {
+                ally.lvl = GetCurrentLevelCap();
+                ally.useLevelOffset = FALSE;
+            }
+            GenerateMonFromTrainerMon(&gParties[B_TRAINER_PARTNER][i], &ally, &partnerGen);
         }
     }
     else if (trainerId == TRAINER_EREADER)

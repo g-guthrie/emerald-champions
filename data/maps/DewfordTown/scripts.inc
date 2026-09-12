@@ -19,13 +19,13 @@ DewfordTown_Text_BrawlyInSlateport:
 
 DewfordTown_OnTransition:
 	setflag FLAG_VISITED_DEWFORD_TOWN
+	setflag FLAG_HIDE_SLATEPORT_CITY_BRAWLY
 	end
 
 DewfordTown_EventScript_Briney::
 	lock
 	faceplayer
-	@ Inclement gates sailing on the Letter alone: the player must be able to reach
-	@ Slateport to find Brawly, who is not in his Gym yet.
+	@ Mainland departure follows the Dewford research chapter.
 	goto_if_unset FLAG_DELIVERED_STEVEN_LETTER, DewfordTown_EventScript_ReturnToPetalburgPrompt
 	message DewfordTown_Text_WhereAreWeBound
 	waitmessage
@@ -45,6 +45,8 @@ DewfordTown_EventScript_ChoosePetalburg::
 	end
 
 DewfordTown_EventScript_ChooseSlateport::
+	goto_if_unset FLAG_BADGE02_GET, DewfordTown_EventScript_DewfordResearchPending
+	goto_if_unset FLAG_EC_REPORT_C14_COMPLETE, DewfordTown_EventScript_DewfordResearchPending
 	msgbox DewfordTown_Text_SlateportWereSettingSail, MSGBOX_DEFAULT
 	closemessage
 	goto DewfordTown_EventScript_SailToSlateport
@@ -817,3 +819,15 @@ DewfordTown_Text_YeahDefinitionOfInRightNow:
 	.string "Yeah, absolutely right!\p"
 	.string "“{STR_VAR_1}” is the\n"
 	.string "definition of “in” right now.$"
+
+DewfordTown_EventScript_DewfordResearchPending::
+	msgbox DewfordTown_Text_DewfordResearchPending, MSGBOX_DEFAULT
+	release
+	end
+
+DewfordTown_Text_DewfordResearchPending:
+	.string "BRAWLY is ready in his GYM.\n"
+	.string "Then visit the MANOR historian\l"
+	.string "and the singing MEADOW.\p"
+	.string "Bring back their research before\n"
+	.string "we sail for SLATEPORT.$"

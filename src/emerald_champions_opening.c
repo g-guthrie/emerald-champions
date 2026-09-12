@@ -33,7 +33,8 @@ static const struct EmeraldChampionsBattleSet sRescueSets[] =
 
 static void GetOpeningStarterSet(enum Species species, struct EmeraldChampionsBattleSet *preset)
 {
-    *preset = gEmeraldChampionsDefaultBattleSets[species];
+    const struct EmeraldChampionsBattleSet *base = GetEmeraldChampionsRawBattleSet(species, 0);
+    *preset = base != NULL ? *base : (struct EmeraldChampionsBattleSet){0};
     if (species == SPECIES_CHIKORITA)
         preset->moves[0] = MOVE_GIGA_DRAIN;
     else if (species == SPECIES_TORCHIC)
@@ -129,7 +130,8 @@ void CreateEmeraldChampionsBirchRescueParty(void)
 void ApplyEmeraldChampionsRegionalRivalSet(struct Pokemon *party, u32 slot, bool32 opening)
 {
     enum Species species = GetMonData(&party[slot], MON_DATA_SPECIES);
-    struct EmeraldChampionsBattleSet preset = gEmeraldChampionsDefaultBattleSets[species];
+    const struct EmeraldChampionsBattleSet *base = GetEmeraldChampionsRawBattleSet(species, 0);
+    struct EmeraldChampionsBattleSet preset = base != NULL ? *base : (struct EmeraldChampionsBattleSet){0};
 
     if (opening)
     {
@@ -208,22 +210,19 @@ void GiveEmeraldChampionsOpeningBalls(void)
     }
 }
 
-void TopUpEmeraldChampionsOpeningBalls(void)
+void RestockEmeraldChampionsBasicBalls(void)
 {
     u32 count = CountTotalItemQuantityInBag(ITEM_POKE_BALL);
 
     gSpecialVar_Result = 0;
-    if (FlagGet(FLAG_DEFEATED_RIVAL_ROUTE103)
-        || VarGet(VAR_EC_OPENING_STATE) != EC_OPENING_PRE_RIVAL_READY)
-        return;
     for (u32 i = 0; i < PC_ITEMS_COUNT; i++)
         if (gSaveBlock1Ptr->pcItems[i].itemId == ITEM_POKE_BALL)
             count += gSaveBlock1Ptr->pcItems[i].quantity;
     if (count >= 10)
         return;
-    if (AddBagItem(ITEM_POKE_BALL, 20 - count))
+    if (AddBagItem(ITEM_POKE_BALL, 10 - count))
         gSpecialVar_Result = 1;
-    else if (AddPCItem(ITEM_POKE_BALL, 20 - count))
+    else if (AddPCItem(ITEM_POKE_BALL, 10 - count))
         gSpecialVar_Result = 2;
 }
 

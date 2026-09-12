@@ -101,7 +101,7 @@ const struct Decoration gDecorations[] =
         .permission = DECORPERM_SOLID_FLOOR,
         .shape = DECORSHAPE_3x3,
         .category = DECORCAT_DESK,
-        .price = 9000,
+        .price = 8000,
         .description = COMPOUND_STRING(
             "A huge desk made\n"
             "of glass. Holds lots\n"
@@ -211,7 +211,7 @@ const struct Decoration gDecorations[] =
         .permission = DECORPERM_PASS_FLOOR,
         .shape = DECORSHAPE_1x1,
         .category = DECORCAT_CHAIR,
-        .price = 2000,
+        .price = 6000,
         .description = COMPOUND_STRING(
             "A small chair made\n"
             "of glass."),

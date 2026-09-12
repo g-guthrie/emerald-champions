@@ -44,7 +44,6 @@ static const u8 gText_RibbonsF700[] = _("RIBBONS {DYNAMIC 0}");
 
 struct Pokenav_RibbonsSummaryList
 {
-    u8 unused1[8];
     struct PokenavMonList *monList;
     u16 selectedPos;
     u16 normalRibbonLastRowStart;
@@ -52,7 +51,6 @@ struct Pokenav_RibbonsSummaryList
     u16 numGiftRibbons;
     u32 ribbonIds[FIRST_GIFT_RIBBON];
     u32 giftRibbonIds[NUM_GIFT_RIBBONS];
-    u32 unused2;
     u32 (*callback)(struct Pokenav_RibbonsSummaryList *);
 };
 
@@ -66,7 +64,6 @@ struct Pokenav_RibbonsSummaryMenu
     u16 unusedWindowId;
     u16 monSpriteId;
     struct Sprite *bigRibbonSprite;
-    u32 unused;
     u8 tilemapBuffers[2][BG_SCREEN_SIZE];
 };
 
@@ -119,28 +116,27 @@ static u32 LoopedTask_ExitRibbonsSummaryMenu(s32);
 struct
 {
     u8 numBits; // The number of bits needed to represent numRibbons
-    u8 numRibbons; // Never read. The contest ribbons have 4 (1 for each rank), the rest are just 1 ribbon
     u8 ribbonId;
     bool8 isGiftRibbon;
 } static  const sRibbonData[] =
 {
-    {1, 1, CHAMPION_RIBBON,      FALSE},
-    {3, 4, COOL_RIBBON_NORMAL,   FALSE},
-    {3, 4, BEAUTY_RIBBON_NORMAL, FALSE},
-    {3, 4, CUTE_RIBBON_NORMAL,   FALSE},
-    {3, 4, SMART_RIBBON_NORMAL,  FALSE},
-    {3, 4, TOUGH_RIBBON_NORMAL,  FALSE},
-    {1, 1, WINNING_RIBBON,       FALSE},
-    {1, 1, VICTORY_RIBBON,       FALSE},
-    {1, 1, ARTIST_RIBBON,        FALSE},
-    {1, 1, EFFORT_RIBBON,        FALSE},
-    {1, 1, MARINE_RIBBON,        TRUE},
-    {1, 1, LAND_RIBBON,          TRUE},
-    {1, 1, SKY_RIBBON,           TRUE},
-    {1, 1, COUNTRY_RIBBON,       TRUE},
-    {1, 1, NATIONAL_RIBBON,      TRUE},
-    {1, 1, EARTH_RIBBON,         TRUE},
-    {1, 1, WORLD_RIBBON,         TRUE}
+    {1, CHAMPION_RIBBON,      FALSE},
+    {3, COOL_RIBBON_NORMAL,   FALSE},
+    {3, BEAUTY_RIBBON_NORMAL, FALSE},
+    {3, CUTE_RIBBON_NORMAL,   FALSE},
+    {3, SMART_RIBBON_NORMAL,  FALSE},
+    {3, TOUGH_RIBBON_NORMAL,  FALSE},
+    {1, WINNING_RIBBON,       FALSE},
+    {1, VICTORY_RIBBON,       FALSE},
+    {1, ARTIST_RIBBON,        FALSE},
+    {1, EFFORT_RIBBON,        FALSE},
+    {1, MARINE_RIBBON,        TRUE},
+    {1, LAND_RIBBON,          TRUE},
+    {1, SKY_RIBBON,           TRUE},
+    {1, COUNTRY_RIBBON,       TRUE},
+    {1, NATIONAL_RIBBON,      TRUE},
+    {1, EARTH_RIBBON,         TRUE},
+    {1, WORLD_RIBBON,         TRUE}
 };
 
 #include "data/text/ribbon_descriptions.h"

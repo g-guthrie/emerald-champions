@@ -285,13 +285,11 @@ Route110_TrickHousePuzzle7_EventScript_RedButton::
 	end
 
 Route110_TrickHousePuzzle7_EventScript_Joshua::
-	trainerbattle_double TRAINER_JOSHUA, Route110_TrickHousePuzzle7_Text_JoshuaIntro, Route110_TrickHousePuzzle7_Text_JoshuaDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route110_TrickHousePuzzle7_Text_JoshuaPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route110_TrickHousePuzzle7_Text_JoshuaPostBattle, MSGBOX_NPC
 	end
 
 Route110_TrickHousePuzzle7_EventScript_Patricia::
-	trainerbattle_double TRAINER_PATRICIA, Route110_TrickHousePuzzle7_Text_PatriciaIntro, Route110_TrickHousePuzzle7_Text_PatriciaDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route110_TrickHousePuzzle7_Text_PatriciaPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route110_TrickHousePuzzle7_Text_PatriciaPostBattle, MSGBOX_NPC
 	end
 
 Route110_TrickHousePuzzle7_EventScript_Alexis::
@@ -305,8 +303,7 @@ Route110_TrickHousePuzzle7_EventScript_Mariela::
 	end
 
 Route110_TrickHousePuzzle7_EventScript_Alvaro::
-	trainerbattle_double TRAINER_ALVARO, Route110_TrickHousePuzzle7_Text_AlvaroIntro, Route110_TrickHousePuzzle7_Text_AlvaroDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route110_TrickHousePuzzle7_Text_AlvaroPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route110_TrickHousePuzzle7_Text_AlvaroPostBattle, MSGBOX_NPC
 	end
 
 Route110_TrickHousePuzzle7_EventScript_Everett::
@@ -321,25 +318,9 @@ Route110_TrickHousePuzzle7_Text_WroteSecretCodeLockOpened::
 	.string "… … … … … … … …\p"
 	.string "The lock clicked open!$"
 
-Route110_TrickHousePuzzle7_Text_JoshuaIntro:
-	.string "The TRICK MASTER always vanishes\n"
-	.string "like smoke. How does he do it?$"
-
-Route110_TrickHousePuzzle7_Text_JoshuaDefeat:
-	.string "Aiyeeeh! You're much too strong!\n"
-	.string "How do you do it?$"
-
 Route110_TrickHousePuzzle7_Text_JoshuaPostBattle:
 	.string "I wish I could appear and disappear as\n"
 	.string "if I were smoke, too.$"
-
-Route110_TrickHousePuzzle7_Text_PatriciaIntro:
-	.string "Going around the same spot…\n"
-	.string "It begets ill fortune…$"
-
-Route110_TrickHousePuzzle7_Text_PatriciaDefeat:
-	.string "Defeated!\n"
-	.string "It's a bad sign…$"
 
 Route110_TrickHousePuzzle7_Text_PatriciaPostBattle:
 	.string "I've circled the same spot over ten\n"
@@ -367,12 +348,6 @@ Route110_TrickHousePuzzle7_Text_MarielaDefeat:
 Route110_TrickHousePuzzle7_Text_MarielaPostBattle:
 	.string "Humph! I'm not upset!\n"
 	.string "Not me!$"
-
-Route110_TrickHousePuzzle7_Text_AlvaroIntro:
-	.string "I ever so closely watched you coming!$"
-
-Route110_TrickHousePuzzle7_Text_AlvaroDefeat:
-	.string "This outcome I didn't see coming…$"
 
 Route110_TrickHousePuzzle7_Text_AlvaroPostBattle:
 	.string "Well, anyway, we both picked a weird\n"

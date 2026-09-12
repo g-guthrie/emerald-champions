@@ -14,8 +14,8 @@
 
 // One native stat regression, not a battle or trainer-design assertion.
 // Literal expectations cover low-level rounding, EV / 4 rounding at level 50,
-// level-100 scaling, Nature, and universal perfect IVs despite a zero-IV creation request.
-TEST("Emerald Champions EV stats: level scaling, Nature, universal perfect IVs and HP invariants")
+// level-100 scaling, Nature, and default perfect IVs. Explicit IV tuning is covered separately.
+TEST("Emerald Champions EV stats: level scaling, Nature, default perfect IVs and HP invariants")
 {
     static const u8 levels[] = {5, 12, 50, 100};
     static const u8 evs[] = {0, 3, 4, 12, 252};
@@ -36,7 +36,8 @@ TEST("Emerald Champions EV stats: level scaling, Nature, universal perfect IVs a
     u8 maxEvs = 252;
     u8 nature = NATURE_ADAMANT;
     u16 faintedHp = 0;
-    u32 packedZeroIvs = 0;
+    u32 packedPerfectIvs = 0x3FFFFFFF;
+    u8 perfectIv = 31;
 
     // The ordinary constructor, not only the IV-specific one, must initialize
     // stored IVs. Non-stat consumers (for example Hidden Power) also read them.
@@ -48,8 +49,8 @@ TEST("Emerald Champions EV stats: level scaling, Nature, universal perfect IVs a
     {
         for (u32 investment = 0; investment < ARRAY_COUNT(evs); investment++)
         {
-            CreateRandomMonWithIVs(&mon, SPECIES_ZIGZAGOON, levels[level], 0);
-            SetMonData(&mon, MON_DATA_IVS, &packedZeroIvs);
+            CreateRandomMonWithIVs(&mon, SPECIES_ZIGZAGOON, levels[level], 31);
+            SetMonData(&mon, MON_DATA_IVS, &packedPerfectIvs);
             for (u32 stat = 0; stat < NUM_STATS; stat++)
                 SetMonData(&mon, MON_DATA_HP_EV + stat, &zero);
             SetMonData(&mon, MON_DATA_HIDDEN_NATURE, &nature);
@@ -59,7 +60,7 @@ TEST("Emerald Champions EV stats: level scaling, Nature, universal perfect IVs a
 
             for (u32 stat = 0; stat < NUM_STATS; stat++)
             {
-                SetMonData(&mon, MON_DATA_HP_IV + stat, &zero);
+                SetMonData(&mon, MON_DATA_HP_IV + stat, &perfectIv);
                 EXPECT_EQ(GetMonData(&mon, MON_DATA_HP_IV + stat), 31);
             }
             EXPECT_EQ(GetMonData(&mon, MON_DATA_ATK), attack[level][investment]);
@@ -86,6 +87,37 @@ TEST("Emerald Champions EV stats: level scaling, Nature, universal perfect IVs a
     CalculateMonStats(&mon);
     EXPECT_EQ(GetMonData(&mon, MON_DATA_MAX_HP), 1);
     EXPECT_EQ(GetMonData(&mon, MON_DATA_HP), 1);
+}
+
+TEST("Emerald Champions useful IVs survive storage and change native stats")
+{
+    struct Pokemon mon, restored;
+    struct BoxPokemon stored;
+    u8 zero = 0;
+    u8 nature = NATURE_ADAMANT;
+    u32 packed = 0;
+    CreateRandomMonWithIVs(&mon, SPECIES_ZIGZAGOON, 100, 31);
+    SetMonData(&mon, MON_DATA_HIDDEN_NATURE, &nature);
+    for (u32 stat = 0; stat < NUM_STATS; stat++)
+        SetMonData(&mon, MON_DATA_HP_EV + stat, &zero);
+    CalculateMonStats(&mon);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_ATK), 105);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_SPEED), 156);
+    SetMonData(&mon, MON_DATA_ATK_IV, &zero);
+    SetMonData(&mon, MON_DATA_SPEED_IV, &zero);
+    CalculateMonStats(&mon);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_ATK), 71);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_SPEED), 125);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_MAX_HP), 217);
+    stored = mon.box;
+    BoxMonToMon(&stored, &restored);
+    EXPECT_EQ(GetMonData(&restored, MON_DATA_ATK_IV), 0);
+    EXPECT_EQ(GetMonData(&restored, MON_DATA_SPEED_IV), 0);
+    EXPECT_EQ(GetMonData(&restored, MON_DATA_SPEED), 125);
+    SetMonData(&restored, MON_DATA_IVS, &packed);
+    CalculateMonStats(&restored);
+    EXPECT_EQ(GetMonData(&restored, MON_DATA_MAX_HP), 186);
+    EXPECT_EQ(GetMonData(&restored, MON_DATA_ATK), 71);
 }
 
 TEST("Nature independent from Hidden Nature")
@@ -191,19 +223,56 @@ TEST("Shininess set on an Egg persists after hatching")
 
 TEST("Champions PP calculation caps base PP and does not use PP Ups")
 {
-    ASSUME(P_MOVE_PP_CALCULATION >= GEN_CHAMPIONS);
     ASSUME(gMovesInfo[MOVE_GROWL].pp > 20);
     ASSUME(gMovesInfo[MOVE_EARTHQUAKE].pp == 10);
     ASSUME(gMovesInfo[MOVE_PROTECT].pp == 5);
     ASSUME(gMovesInfo[MOVE_RECOVER].pp == 5);
 
     EXPECT_EQ(GetMovePP(MOVE_GROWL), 20);
-    EXPECT_EQ(CalculatePPWithBonus(MOVE_GROWL, 0, 0), 20);
-    EXPECT_EQ(CalculatePPWithBonus(MOVE_GROWL, 3, 0), 20);
-    EXPECT_EQ(CalculatePPWithBonus(MOVE_EARTHQUAKE, 0, 0), 12);
-    EXPECT_EQ(CalculatePPWithBonus(MOVE_PROTECT, 0, 0), 8);
-    EXPECT_EQ(CalculatePPWithBonus(MOVE_RECOVER, 0, 0), 8);
-    EXPECT_EQ(CalculatePPWithBonus(MOVE_SKETCH, 3, 0), 1);
+    EXPECT_EQ(GetMoveMaxPP(MOVE_GROWL), 20);
+    EXPECT_EQ(GetMoveMaxPP(MOVE_NONE), 0);
+    EXPECT_EQ(GetMoveMaxPP(MOVE_EARTHQUAKE), 12);
+    EXPECT_EQ(GetMoveMaxPP(MOVE_PROTECT), 8);
+    EXPECT_EQ(GetMoveMaxPP(MOVE_RECOVER), 8);
+    EXPECT_EQ(GetMoveMaxPP(MOVE_SKETCH), 1);
+}
+
+TEST("PP restoration refills moves without healing HP or status")
+{
+    struct Pokemon mon;
+    const u16 moves[MAX_MON_MOVES] = {MOVE_GROWL, MOVE_SKETCH, MOVE_NONE, MOVE_NONE};
+    const u8 remaining[MAX_MON_MOVES] = {3, 0, 7, 0};
+    const u8 full[MAX_MON_MOVES] = {20, 1, 0, 0};
+    u16 hp = 5;
+    u32 status = STATUS1_BURN;
+    CreateMon(&mon, SPECIES_BULBASAUR, 20, 0, OTID_STRUCT_PLAYER_ID);
+    SetMonData(&mon, MON_DATA_HP, &hp);
+    SetMonData(&mon, MON_DATA_STATUS, &status);
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+    {
+        SetMonMoveSlot(&mon, moves[i], i);
+        SetMonData(&mon, MON_DATA_PP1 + i, &remaining[i]);
+    }
+    MonRestorePP(&mon);
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+        EXPECT_EQ(GetMonData(&mon, MON_DATA_PP1 + i), full[i]);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_HP), hp);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_STATUS), status);
+    HealPokemon(&mon);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_HP), GetMonData(&mon, MON_DATA_MAX_HP));
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_STATUS), STATUS1_NONE);
+}
+
+TEST("Clearing a Pokemon removes previous party and boxed state")
+{
+    struct Pokemon mon, empty;
+    memset(&mon, 0xA5, sizeof(mon));
+    mon.maxHP = 300;
+    memset(&empty, 0, sizeof(empty));
+    empty.mail = MAIL_NONE;
+    ZeroMonData(&mon);
+    EXPECT_EQ(memcmp(&mon, &empty, sizeof(mon)), 0);
+    EXPECT_EQ(GetBoxMonData(&mon.box, MON_DATA_HP_LOST), 0);
 }
 
 TEST("Status1 round-trips through BoxPokemon")
@@ -311,8 +380,8 @@ TEST("givemon [moves]")
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE2), MOVE_SPLASH);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE3), MOVE_NONE);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE4), MOVE_NONE);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP1), CalculatePPWithBonus(MOVE_SCRATCH, 0, 0));
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP2), CalculatePPWithBonus(MOVE_SPLASH, 0, 1));
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP1), GetMoveMaxPP(MOVE_SCRATCH));
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP2), GetMoveMaxPP(MOVE_SPLASH));
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP3), 0);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP4), 0);
 }
@@ -337,10 +406,10 @@ TEST("givemon [moves (default)]")
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE2), learnset[learnsetLength - 3].move);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE3), learnset[learnsetLength - 2].move);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE4), learnset[learnsetLength - 1].move);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP1), CalculatePPWithBonus(learnset[learnsetLength - 4].move, 0, 0));
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP2), CalculatePPWithBonus(learnset[learnsetLength - 3].move, 0, 1));
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP3), CalculatePPWithBonus(learnset[learnsetLength - 2].move, 0, 2));
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP4), CalculatePPWithBonus(learnset[learnsetLength - 1].move, 0, 3));
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP1), GetMoveMaxPP(learnset[learnsetLength - 4].move));
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP2), GetMoveMaxPP(learnset[learnsetLength - 3].move));
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP3), GetMoveMaxPP(learnset[learnsetLength - 2].move));
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP4), GetMoveMaxPP(learnset[learnsetLength - 1].move));
 }
 
 TEST("givemon [all]")
@@ -374,10 +443,10 @@ TEST("givemon [all]")
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE2), MOVE_SPLASH);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE3), MOVE_CELEBRATE);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE4), MOVE_EXPLOSION);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP1), CalculatePPWithBonus(MOVE_SCRATCH, 0, 0));
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP2), CalculatePPWithBonus(MOVE_SPLASH, 0, 1));
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP3), CalculatePPWithBonus(MOVE_CELEBRATE, 0, 2));
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP4), CalculatePPWithBonus(MOVE_EXPLOSION, 0, 3));
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP1), GetMoveMaxPP(MOVE_SCRATCH));
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP2), GetMoveMaxPP(MOVE_SPLASH));
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP3), GetMoveMaxPP(MOVE_CELEBRATE));
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP4), GetMoveMaxPP(MOVE_EXPLOSION));
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_IS_SHINY), TRUE);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_GIGANTAMAX_FACTOR), TRUE);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_TERA_TYPE), TYPE_FIRE);
@@ -420,10 +489,10 @@ TEST("givemon [egg]: properties are preserved after hatching")
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE2), MOVE_SPLASH);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE3), MOVE_CELEBRATE);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE4), MOVE_EXPLOSION);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP1), CalculatePPWithBonus(MOVE_SCRATCH, 0, 0));
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP2), CalculatePPWithBonus(MOVE_SPLASH, 0, 1));
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP3), CalculatePPWithBonus(MOVE_CELEBRATE, 0, 2));
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP4), CalculatePPWithBonus(MOVE_EXPLOSION, 0, 3));
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP1), GetMoveMaxPP(MOVE_SCRATCH));
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP2), GetMoveMaxPP(MOVE_SPLASH));
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP3), GetMoveMaxPP(MOVE_CELEBRATE));
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP4), GetMoveMaxPP(MOVE_EXPLOSION));
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_IS_SHINY), TRUE);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_GIGANTAMAX_FACTOR), TRUE);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_TERA_TYPE), TYPE_FIRE);
@@ -497,10 +566,10 @@ TEST("givemon [vars]")
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE2), MOVE_SPLASH);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE3), MOVE_CELEBRATE);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE4), MOVE_EXPLOSION);
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP1), CalculatePPWithBonus(MOVE_SCRATCH, 0, 0));
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP2), CalculatePPWithBonus(MOVE_SPLASH, 0, 1));
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP3), CalculatePPWithBonus(MOVE_CELEBRATE, 0, 2));
-    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP4), CalculatePPWithBonus(MOVE_EXPLOSION, 0, 3));
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP1), GetMoveMaxPP(MOVE_SCRATCH));
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP2), GetMoveMaxPP(MOVE_SPLASH));
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP3), GetMoveMaxPP(MOVE_CELEBRATE));
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP4), GetMoveMaxPP(MOVE_EXPLOSION));
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_IS_SHINY), TRUE);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_GIGANTAMAX_FACTOR), TRUE);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_TERA_TYPE), TYPE_FIRE);

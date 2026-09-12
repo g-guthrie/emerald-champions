@@ -6,22 +6,6 @@
 #include "pokemon_storage_system.h"
 #include "constants/emerald_champions.h"
 
-bool32 OwnsEmeraldChampionsMegaStone(enum Item item)
-{
-    if (CheckBagHasItem(item, 1) || CheckPCHasItem(item, 1))
-        return TRUE;
-    for (u32 slot = 0; slot < PARTY_SIZE; slot++)
-        if (GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_SPECIES) != SPECIES_NONE
-            && GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_HELD_ITEM) == item)
-            return TRUE;
-    for (u32 box = 0; box < TOTAL_BOXES_COUNT; box++)
-        for (u32 slot = 0; slot < IN_BOX_COUNT; slot++)
-            if (GetBoxMonData(&gPokemonStoragePtr->boxes[box][slot], MON_DATA_SPECIES) != SPECIES_NONE
-                && GetBoxMonData(&gPokemonStoragePtr->boxes[box][slot], MON_DATA_HELD_ITEM) == item)
-                return TRUE;
-    return FALSE;
-}
-
 // These garden berries are not supplied by competitive presets or free item
 // menus. Existing berry trees and planting remain the source of the currency.
 static const enum Item sGardenBerries[] =
@@ -65,7 +49,7 @@ void TradeEmeraldChampionsGardenBerries(void)
     {
         if (item != sBerryStoneTrades[i].item)
             continue;
-        if (FlagGet(sBerryStoneTrades[i].flag))
+        if (FlagGet(sBerryStoneTrades[i].flag) || PlayerOwnsItem(item))
         {
             gSpecialVar_Result = EC_MEGA_BERRY_TRADE_ALREADY_DONE;
             return;

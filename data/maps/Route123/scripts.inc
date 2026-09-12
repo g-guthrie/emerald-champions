@@ -53,50 +53,15 @@ Route123_EventScript_Braxton::
 	end
 
 Route123_EventScript_Violet::
-	trainerbattle_double TRAINER_VIOLET, Route123_Text_VioletIntro, Route123_Text_VioletDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route123_Text_VioletPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route123_Text_VioletPostBattle, MSGBOX_NPC
 	end
 
 Route123_EventScript_Cameron::
-	trainerbattle_double TRAINER_CAMERON_1, Route123_Text_CameronIntro, Route123_Text_CameronDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route123_EventScript_RegisterCameron
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route123_EventScript_RematchCameron
-	msgbox Route123_Text_CameronPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route123_EventScript_RegisterCameron::
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route123_Text_CameronRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_CAMERON_1
-	release
-	end
-
-Route123_EventScript_RematchCameron::
-	trainerbattle_rematch_double TRAINER_CAMERON_1, Route123_Text_CameronRematchIntro, Route123_Text_CameronRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route123_Text_CameronPostRematch, MSGBOX_AUTOCLOSE
+	msgbox Route123_Text_CameronPostBattle, MSGBOX_NPC
 	end
 
 Route123_EventScript_Jacki::
-	trainerbattle_double TRAINER_JACKI_1, Route123_Text_JackiIntro, Route123_Text_JackiDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route123_EventScript_RegisterJacki
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route123_EventScript_RematchJacki
-	msgbox Route123_Text_JackiPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route123_EventScript_RegisterJacki::
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route123_Text_JackiRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_JACKI_1
-	release
-	end
-
-Route123_EventScript_RematchJacki::
-	trainerbattle_rematch_double TRAINER_JACKI_1, Route123_Text_JackiRematchIntro, Route123_Text_JackiRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route123_Text_JackiPostRematch, MSGBOX_AUTOCLOSE
+	msgbox Route123_Text_JackiPostBattle, MSGBOX_NPC
 	end
 
 Route123_EventScript_Miu::
@@ -119,13 +84,11 @@ Route123_EventScript_Frederick::
 	end
 
 Route123_EventScript_Alberto::
-	trainerbattle_double TRAINER_ALBERTO, Route123_Text_AlbertoIntro, Route123_Text_AlbertoDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route123_Text_AlbertoPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route123_Text_AlbertoPostBattle, MSGBOX_NPC
 	end
 
 Route123_EventScript_Ed::
-	trainerbattle_double TRAINER_ED, Route123_Text_EdIntro, Route123_Text_EdDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route123_Text_EdPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route123_Text_EdPostBattle, MSGBOX_NPC
 	end
 
 Route123_EventScript_Kayley::
@@ -143,29 +106,11 @@ Route123_EventScript_Jazmyn::
 	end
 
 Route123_EventScript_Davis::
-	trainerbattle_double TRAINER_DAVIS, Route123_Text_DavisIntro, Route123_Text_DavisDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route123_Text_DavisPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route123_Text_DavisPostBattle, MSGBOX_NPC
 	end
 
 Route123_EventScript_Fernando::
-	trainerbattle_double TRAINER_FERNANDO_1, Route123_Text_FernandoIntro, Route123_Text_FernandoDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route123_EventScript_RegisterFernando
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route123_EventScript_RematchFernando
-	msgbox Route123_Text_FernandoPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route123_EventScript_RegisterFernando::
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route123_Text_FernandoRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_FERNANDO_1
-	release
-	end
-
-Route123_EventScript_RematchFernando::
-	trainerbattle_rematch_double TRAINER_FERNANDO_1, Route123_Text_FernandoRematchIntro, Route123_Text_FernandoRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route123_Text_FernandoPostRematch, MSGBOX_AUTOCLOSE
+	msgbox Route123_Text_FernandoPostBattle, MSGBOX_NPC
 	end
 
 Route123_Text_LoveGrassMonsHaveAny:

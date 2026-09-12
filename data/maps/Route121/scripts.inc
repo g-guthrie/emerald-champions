@@ -111,65 +111,27 @@ Route121_EventScript_Vanessa::
 	end
 
 Route121_EventScript_Walter::
-	trainerbattle_double TRAINER_WALTER_1, Route121_Text_WalterIntro, Route121_Text_WalterDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route121_EventScript_RegisterWalter
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route121_EventScript_RematchWalter
-	msgbox Route121_Text_WalterPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route121_EventScript_RegisterWalter::
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route121_Text_WalterRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_WALTER_1
-	release
-	end
-
-Route121_EventScript_RematchWalter::
-	trainerbattle_rematch_double TRAINER_WALTER_1, Route121_Text_WalterRematchIntro, Route121_Text_WalterRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route121_Text_WalterPostRematch, MSGBOX_AUTOCLOSE
+	msgbox Route121_Text_WalterPostBattle, MSGBOX_NPC
 	end
 
 Route121_EventScript_Tammy::
-	trainerbattle_double TRAINER_TAMMY, Route121_Text_TammyIntro, Route121_Text_TammyDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route121_Text_TammyPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route121_Text_TammyPostBattle, MSGBOX_NPC
 	end
 
 Route121_EventScript_Kate::
-	trainerbattle_double TRAINER_KATE_AND_JOY, Route121_Text_KateIntro, Route121_Text_KateDefeat, Route121_Text_KateNotEnoughMons
-	msgbox Route121_Text_KatePostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route121_Text_KatePostBattle, MSGBOX_NPC
 	end
 
 Route121_EventScript_Joy::
-	trainerbattle_double TRAINER_KATE_AND_JOY, Route121_Text_JoyIntro, Route121_Text_JoyDefeat, Route121_Text_JoyNotEnoughMons
-	msgbox Route121_Text_JoyPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route121_Text_JoyPostBattle, MSGBOX_NPC
 	end
 
 Route121_EventScript_Jessica::
-	trainerbattle_double TRAINER_JESSICA_1, Route121_Text_JessicaIntro, Route121_Text_JessicaDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route121_EventScript_RegisterJessica
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route121_EventScript_RematchJessica
-	msgbox Route121_Text_JessicaPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route121_EventScript_RegisterJessica::
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route121_Text_JessicaRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_JESSICA_1
-	release
-	end
-
-Route121_EventScript_RematchJessica::
-	trainerbattle_rematch_double TRAINER_JESSICA_1, Route121_Text_JessicaRematchIntro, Route121_Text_JessicaRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route121_Text_JessicaPostRematch, MSGBOX_AUTOCLOSE
+	msgbox Route121_Text_JessicaPostBattle, MSGBOX_NPC
 	end
 
 Route121_EventScript_Cale::
-	trainerbattle_double TRAINER_CALE, Route121_Text_CaleIntro, Route121_Text_CaleDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route121_Text_CalePostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route121_Text_CalePostBattle, MSGBOX_NPC
 	end
 
 Route121_EventScript_Myles::

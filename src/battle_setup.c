@@ -1,4 +1,5 @@
 #include "global.h"
+#include "caps.h"
 #include "data.h"
 #include "difficulty.h"
 #include "emerald_champions_battle_sets.h"
@@ -478,11 +479,9 @@ static void DoBattlePikeWildBattle(void)
 static void CreateTrainerBattleOpponentParties(void)
 {
     CreateNPCTrainerParty(&gParties[B_TRAINER_OPPONENT_A][0], TRAINER_BATTLE_PARAM.opponentA);
-    ApplyTrainerLevelDifficulty(&gParties[B_TRAINER_OPPONENT_A][0]);
     if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS && !BATTLE_TWO_VS_ONE_OPPONENT)
     {
         CreateNPCTrainerParty(&gParties[B_TRAINER_OPPONENT_B][0], TRAINER_BATTLE_PARAM.opponentB);
-        ApplyTrainerLevelDifficulty(&gParties[B_TRAINER_OPPONENT_B][0]);
     }
 }
 
@@ -872,11 +871,12 @@ static u8 GetSumOfEnemyPartyLevel(u16 opponentId, u8 numMons)
 {
     u8 i;
     u8 sum;
+    u32 partySize = GetTrainerPartySizeFromId(opponentId);
     u32 count = numMons;
     const struct TrainerMon *party;
 
-    if (GetTrainerPartySizeFromId(opponentId) < count)
-        count = GetTrainerPartySizeFromId(opponentId);
+    if (partySize < count)
+        count = partySize;
 
     sum = 0;
 
@@ -2441,4 +2441,31 @@ void CreateTrainerPartyForPlayer(void)
 
     gPartnerTrainerId = gSpecialVar_0x8004;
     CreateNPCTrainerPartyFromTrainer(gParties[B_TRAINER_PLAYER], GetTrainerStructFromId(gSpecialVar_0x8004));
+}
+
+void InitCampaignBattleReward(void)
+{
+    gBattleStruct->campaignLevelCap = 0;
+    gBattleStruct->campaignPrizeMultiplier = 0;
+    gBattleStruct->campaignRewardEligible = FALSE;
+    if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+     || gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED
+                         | BATTLE_TYPE_TRAINER_HILL | BATTLE_TYPE_SECRET_BASE | BATTLE_TYPE_EREADER_TRAINER))
+        return;
+    gBattleStruct->campaignLevelCap = GetCurrentLevelCap();
+    gBattleStruct->campaignPrizeMultiplier = GetTrainerStructFromId(TRAINER_BATTLE_PARAM.opponentA)->prizeMultiplier;
+    gBattleStruct->campaignRewardEligible = !HasTrainerBeenFought(TRAINER_BATTLE_PARAM.opponentA);
+    if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS && !BATTLE_TWO_VS_ONE_OPPONENT)
+    {
+        gBattleStruct->campaignPrizeMultiplier = max(gBattleStruct->campaignPrizeMultiplier,
+            GetTrainerStructFromId(TRAINER_BATTLE_PARAM.opponentB)->prizeMultiplier);
+        gBattleStruct->campaignRewardEligible |= !HasTrainerBeenFought(TRAINER_BATTLE_PARAM.opponentB);
+    }
+    gBattleStruct->campaignRewardEligible &= !TRAINER_BATTLE_PARAM.isRematch;
+}
+
+u32 GetCampaignBattleMoneyReward(void)
+{
+    return gBattleStruct->campaignRewardEligible
+        ? gBattleStruct->campaignLevelCap * gBattleStruct->campaignPrizeMultiplier : 0;
 }

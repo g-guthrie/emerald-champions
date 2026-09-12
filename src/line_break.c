@@ -215,7 +215,6 @@ void BreakSubStringAutomatic(u8 *src, u32 maxWidth, u32 screenLines, u8 fontId, 
                 }
             }
         } while (shouldTryAgain);
-        //u32 currBadness = GetStringBadness(stringLines, totalLines, maxWidth);
         BuildNewString(stringLines, totalLines, screenLines, src, toggleScrollPrompt);
         Free(stringLines);
     }
@@ -234,48 +233,6 @@ bool32 IsWordSplittingChar(const u8 *src, u32 index)
     default:
         return FALSE;
     }
-}
-
-//  Badness calculation
-//  unfilled lines scale linerarly
-//  jagged lines scales by the square
-//  runts scale linearly
-//  numbers not final
-//  ISN'T ACTUALLY USED RIGHT NOW
-u32 GetStringBadness(struct StringLine *stringLines, u32 numLines, u32 maxWidth)
-{
-    u32 badness = 0;
-    u32 *lineWidths = Alloc(numLines*4);
-    u32 widestWidth = 0;
-    for (u32 i = 0; i < numLines; i++)
-    {
-        lineWidths[i] = 0;
-        for (u32 j = 0; j < stringLines[i].numWords; j++)
-            lineWidths[i] += stringLines[i].words[j].width;
-        lineWidths[i] += (stringLines[i].numWords-1)*stringLines[i].spaceWidth;
-        if (lineWidths[i] > widestWidth)
-            widestWidth = lineWidths[i];
-        if (stringLines[i].numWords == 1)
-            badness += BADNESS_RUNT;
-    }
-    for (u32 i = 0; i < numLines; i++)
-    {
-        u32 extraSpaceWidth = 0;
-        if (lineWidths[i] != widestWidth)
-        {
-            //  Not the best way to do this, ideally a line should be allowed to get longer than current widest
-            //  line. But then the widest line has to be recalculated.
-            while (lineWidths[i] + (extraSpaceWidth + 1) * (stringLines[i].numWords - 1) < widestWidth && extraSpaceWidth < MAX_SPACE_WIDTH)
-                extraSpaceWidth++;
-            lineWidths[i] += extraSpaceWidth*(stringLines[i].numWords-1);
-        }
-        badness += (maxWidth - lineWidths[i]) * BADNESS_UNFILLED;
-        u32 baseBadness = (widestWidth - lineWidths[i]) * BADNESS_JAGGED;
-        badness += baseBadness*baseBadness;
-        stringLines[i].extraSpaceWidth = extraSpaceWidth;
-    }
-    Free(lineWidths);
-    return badness;
 }
 
 //  Build the new string from the data stored in the StringLine structs

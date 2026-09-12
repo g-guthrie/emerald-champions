@@ -34,7 +34,7 @@ SootopolisCity_Mart_EventScript_FatMan::
 	end
 
 SootopolisCity_Mart_EventScript_FatManNoLegendaries::
-	msgbox SootopolisCity_Mart_Text_PPUpIsGreat, MSGBOX_DEFAULT
+	msgbox SootopolisCity_Mart_Text_EtherIsUseful, MSGBOX_DEFAULT
 	release
 	end
 
@@ -52,10 +52,10 @@ SootopolisCity_Mart_EventScript_GentlemanNoLegendaries::
 	release
 	end
 
-SootopolisCity_Mart_Text_PPUpIsGreat:
-	.string "PP UP is great!\p"
-	.string "It raises the POWER POINTS, the PP,\n"
-	.string "of a POKéMON move.$"
+SootopolisCity_Mart_Text_EtherIsUseful:
+	.string "An ETHER is handy on long trips!\p"
+	.string "It restores used POWER POINTS, the PP,\n"
+	.string "of a POKéMON move between battles.$"
 
 SootopolisCity_Mart_Text_TooScaryOutside:
 	.string "What…\n"

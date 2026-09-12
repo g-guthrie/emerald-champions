@@ -2172,6 +2172,14 @@
 	callstd STD_OBTAIN_ITEM
 	.endm
 
+	@ A finite gift whose caller owns a permanent completion receipt.
+	@ Duplicate Mega/evolution devices pay the named one-time alternative.
+	.macro giveuniqueitem item:req
+	setorcopyvar VAR_0x8000, \item
+	setvar VAR_0x8001, 1
+	call Common_EventScript_ObtainFiniteItem
+	.endm
+
 	@ For picking up items in the overworld. Similar to giveitem, but with different language and
 	@ sets the flag of the last-talked to object (the item the player picked up).
 	.macro finditem item:req, amount=1
@@ -2726,6 +2734,8 @@
 	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, \declineTradeJump
 	specialvar VAR_0x800B, GetTradeSpecies
 	goto_if_ne VAR_0x800B, VAR_0x8009, \wrongMonJump
+	call Common_EventScript_ReturnNPCTradeItem
+	goto_if_eq VAR_RESULT, FALSE, \declineTradeJump
 	special CreateInGameTradePokemon
 	special DoInGameTradeScene
 	bufferspeciesname STR_VAR_1, VAR_0x8009
@@ -3034,4 +3044,11 @@
 	braillemessage \text
 	getbraillestringwidth \text
 	call EventScript_BrailleCursorWaitButton
+	.endm
+
+	@ Complete a campaign milestone and its stipend once. Only scratch var 3 is
+	@ clobbered; pending item results and the other script parameters survive.
+	.macro completemilestone flag:req
+	setvar VAR_0x8003, \flag
+	special CompleteEmeraldChampionsMilestone
 	.endm

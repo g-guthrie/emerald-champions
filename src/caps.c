@@ -3,32 +3,73 @@
 #include "event_data.h"
 #include "caps.h"
 #include "pokemon.h"
+#include "money.h"
+#include "script.h"
 
+
+// A completed milestone owns both its cap and finite stipend. Capture and
+// pending item delivery are separate. A zero cap leaves the current cap alone.
+static const struct { u16 flag; u8 cap; u16 stipend; } sCampaignMilestones[] =
+{
+    {FLAG_BADGE01_GET, 20, 3000},
+    {FLAG_SYS_POKENAV_GET, 0, 4000},
+    {FLAG_EC_REPORT_C14_COMPLETE, 24, 0},
+    {FLAG_DELIVERED_DEVON_GOODS, 30, 8000},
+    {FLAG_BADGE03_GET, 34, 4000},
+    {FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY, 40, 6000},
+    {FLAG_BADGE04_GET, 44, 0},
+    {FLAG_EC_REPORT_C26_COMPLETE, 48, 8000},
+    {FLAG_BADGE05_GET, 50, 5000},
+    {FLAG_EC_REPORT_C28_COMPLETE, 52, 6000},
+    {FLAG_EC_REPORT_C30_COMPLETE, 56, 6000},
+    {FLAG_BADGE06_GET, 60, 8000},
+    {FLAG_EC_REPORT_C36_COMPLETE, 64, 12000},
+    {FLAG_EC_REPORT_C39_COMPLETE, 68, 10000},
+    {FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE, 72, 10000},
+    {FLAG_EC_REPORT_C42_COMPLETE, 76, 12000},
+    {FLAG_EC_REPORT_C43_COMPLETE, 78, 12000},
+    {FLAG_EC_REPORT_C44_COMPLETE, 0, 12000},
+    {FLAG_REGI_DOORS_OPENED, 82, 16000},
+    {FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, 86, 16000},
+    {FLAG_BADGE08_GET, 90, 14000},
+    {FLAG_EC_REPORT_C48_COMPLETE, 94, 20000},
+    {FLAG_DEFEATED_WALLY_VICTORY_ROAD, 96, 0},
+    {FLAG_IS_CHAMPION, 100, 25000},
+};
+
+bool32 CompleteCampaignMilestone(u16 flag)
+{
+    for (u32 i = 0; i < ARRAY_COUNT(sCampaignMilestones); i++)
+    {
+        if (sCampaignMilestones[i].flag != flag)
+            continue;
+        if (FlagGet(flag))
+            return FALSE;
+        FlagSet(flag);
+        AddMoney(&gSaveBlock1Ptr->money, sCampaignMilestones[i].stipend);
+        return TRUE;
+    }
+    return FALSE;
+}
+
+void CompleteEmeraldChampionsMilestone(void)
+{
+    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
+    CompleteCampaignMilestone(gSpecialVar_0x8003);
+}
 
 u32 GetCurrentLevelCap(void)
 {
-    static const u32 sLevelCapFlagMap[][2] =
-    {
-        {FLAG_BADGE01_GET, 14},
-        {FLAG_BADGE02_GET, 20},
-        {FLAG_BADGE03_GET, 30},
-        {FLAG_BADGE04_GET, 40},
-        {FLAG_BADGE05_GET, 45},
-        {FLAG_BADGE06_GET, 55},
-        {FLAG_BADGE07_GET, 60},
-        {FLAG_BADGE08_GET, 70},
-        {FLAG_IS_CHAMPION, 80},
-    };
-
     u32 i;
 
     if (B_LEVEL_CAP_TYPE == LEVEL_CAP_FLAG_LIST)
     {
-        for (i = 0; i < ARRAY_COUNT(sLevelCapFlagMap); i++)
+        for (i = ARRAY_COUNT(sCampaignMilestones); i > 0; i--)
         {
-            if (!FlagGet(sLevelCapFlagMap[i][0]))
-                return sLevelCapFlagMap[i][1];
+            if (sCampaignMilestones[i - 1].cap != 0 && FlagGet(sCampaignMilestones[i - 1].flag))
+                return sCampaignMilestones[i - 1].cap;
         }
+        return 14;
     }
     else if (B_LEVEL_CAP_TYPE == LEVEL_CAP_VARIABLE)
     {

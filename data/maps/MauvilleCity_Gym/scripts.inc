@@ -104,7 +104,7 @@ MauvilleCity_Gym_EventScript_WattsonDefeated::
 	setvar VAR_SLATEPORT_OUTSIDE_MUSEUM_STATE, 3
 	clearflag FLAG_HIDE_VERDANTURF_TOWN_SCOTT
 	setflag FLAG_DEFEATED_MAUVILLE_GYM
-	setflag FLAG_BADGE03_GET
+	completemilestone FLAG_BADGE03_GET
 	addvar VAR_PETALBURG_GYM_STATE, 1
 	call_if_eq VAR_PETALBURG_GYM_STATE, 6, Common_EventScript_ReadyPetalburgGymForBattle
 	setvar VAR_0x8008, 3
@@ -126,7 +126,7 @@ MauvilleCity_Gym_EventScript_WattsonDefeated::
 	end
 
 MauvilleCity_Gym_EventScript_GiveManectite2::
-	giveitem ITEM_MANECTITE
+	giveuniqueitem ITEM_MANECTITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	msgbox MauvilleCity_Gym_Text_ExplainManectite, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_WATTSON_MANECTITE
@@ -134,7 +134,7 @@ MauvilleCity_Gym_EventScript_GiveManectite2::
 	end
 
 MauvilleCity_Gym_EventScript_GiveManectite::
-	giveitem ITEM_MANECTITE
+	giveuniqueitem ITEM_MANECTITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 	msgbox MauvilleCity_Gym_Text_ExplainManectite, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_WATTSON_MANECTITE

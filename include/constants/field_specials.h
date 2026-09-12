@@ -40,7 +40,6 @@ enum SSTidalState
 enum ScrollMulti
 {
     SCROLL_MULTI_NONE,
-    SCROLL_MULTI_GLASS_WORKSHOP_VENDOR,
     SCROLL_MULTI_POKEMON_FAN_CLUB_RATER,
     SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_1,
     SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2,
@@ -127,5 +126,12 @@ enum {
 // MON_GIVEN_TO_* / MON_CANT_GIVE values from constants/pokemon.h.
 #define EC_GAME_CORNER_PRIZE_SET_FAILED 3
 #define EC_GAME_CORNER_PRIZE_ALREADY_CAUGHT 4
+
+// Permanent ownership locations used by the Institute's recovery service.
+#define EC_CASTFORM_NONE     0
+#define EC_CASTFORM_PARTY    1
+#define EC_CASTFORM_BOX      2
+#define EC_CASTFORM_DAYCARE  3
+#define EC_CASTFORM_EGG      4
 
 #endif // GUARD_CONSTANTS_FIELD_SPECIALS_H

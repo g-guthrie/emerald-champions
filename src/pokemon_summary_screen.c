@@ -1,4 +1,5 @@
 #include "global.h"
+#include "move.h"
 #include "main.h"
 #include "battle.h"
 #include "battle_anim.h"
@@ -131,39 +132,38 @@ static EWRAM_DATA struct PokemonSummaryScreenData
     /*0x04*/ MainCallback callback;
     /*0x08*/ struct Sprite *markingsSprite;
     /*0x0C*/ struct Pokemon currentMon;
-    /*0x70*/ struct PokeSummary
+    struct PokeSummary
     {
-        enum Species species; // 0x0
-        enum Species species2; // 0x2
-        u8 isEgg:1; // 0x4
+        enum Species species;
+        enum Species species2;
+        u8 isEgg:1;
         u8 isShiny:1;
         u8 padding:6;
-        u8 level; // 0x5
-        u8 ribbonCount; // 0x6
-        u8 ailment; // 0x7
-        u8 abilityNum; // 0x8
-        metloc_u8_t metLocation; // 0x9
-        u8 metLevel; // 0xA
-        u8 metGame; // 0xB
-        u32 pid; // 0xC
-        u32 exp; // 0x10
-        enum Move moves[MAX_MON_MOVES]; // 0x14
-        u8 pp[MAX_MON_MOVES]; // 0x1C
-        u16 currentHP; // 0x20
-        u16 maxHP; // 0x22
-        u16 atk; // 0x24
-        u16 def; // 0x26
-        u16 spatk; // 0x28
-        u16 spdef; // 0x2A
-        u16 speed; // 0x2C
-        enum Item item; // 0x2E
-        u16 friendship; // 0x30
-        u8 OTGender; // 0x32
-        u8 nature; // 0x33
-        u8 ppBonuses; // 0x34
-        u8 sanity; // 0x35
-        u8 OTName[17]; // 0x36
-        u32 OTID; // 0x48
+        u8 level;
+        u8 ribbonCount;
+        u8 ailment;
+        u8 abilityNum;
+        metloc_u8_t metLocation;
+        u8 metLevel;
+        u8 metGame;
+        u32 pid;
+        u32 exp;
+        enum Move moves[MAX_MON_MOVES];
+        u8 pp[MAX_MON_MOVES];
+        u16 currentHP;
+        u16 maxHP;
+        u16 atk;
+        u16 def;
+        u16 spatk;
+        u16 spdef;
+        u16 speed;
+        enum Item item;
+        u16 friendship;
+        u8 OTGender;
+        u8 nature;
+        u8 sanity;
+        u8 OTName[17];
+        u32 OTID;
         enum Type teraType;
         u8 mintNature;
     } summary;
@@ -224,8 +224,6 @@ static void CloseMoveSelectMode(u8);
 static void SwitchToMovePositionSwitchMode(u8);
 static void Task_HandleInput_MovePositionSwitch(u8);
 static void ExitMovePositionSwitchMode(u8, bool8);
-static void SwapMonMoves(struct Pokemon *, u8, u8);
-static void SwapBoxMonMoves(struct BoxPokemon *, u8, u8);
 static void Task_SetHandleReplaceMoveInput(u8);
 static void Task_HandleReplaceMoveInput(u8);
 static bool8 CanReplaceMove(void);
@@ -1518,9 +1516,18 @@ static void CopyMonToSummaryStruct(struct Pokemon *mon)
     }
 }
 
+static void ExtractMonMovesToSummaryStruct(struct Pokemon *mon)
+{
+    struct PokeSummary *sum = &sMonSummaryScreen->summary;
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+    {
+        sum->moves[i] = GetMonData(mon, MON_DATA_MOVE1 + i);
+        sum->pp[i] = GetMonData(mon, MON_DATA_PP1 + i);
+    }
+}
+
 static bool8 ExtractMonDataToSummaryStruct(struct Pokemon *mon)
 {
-    u32 i;
     struct PokeSummary *sum = &sMonSummaryScreen->summary;
     // Spread the data extraction over multiple frames.
     switch (sMonSummaryScreen->switchCounter)
@@ -1542,12 +1549,7 @@ static bool8 ExtractMonDataToSummaryStruct(struct Pokemon *mon)
 
         break;
     case 1:
-        for (i = 0; i < MAX_MON_MOVES; i++)
-        {
-            sum->moves[i] = GetMonData(mon, MON_DATA_MOVE1+i);
-            sum->pp[i] = GetMonData(mon, MON_DATA_PP1+i);
-        }
-        sum->ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
+        ExtractMonMovesToSummaryStruct(mon);
         break;
     case 2:
         ExtractMonSkillStatsData(mon, sum);
@@ -2505,17 +2507,9 @@ static void ExitMovePositionSwitchMode(u8 taskId, bool8 swapMoves)
 
     if (swapMoves == TRUE)
     {
-        if (!sMonSummaryScreen->isBoxMon)
-        {
-            struct Pokemon *mon = sMonSummaryScreen->monList.mons;
-            SwapMonMoves(&mon[sMonSummaryScreen->curMonIndex], sMonSummaryScreen->firstMoveIndex, sMonSummaryScreen->secondMoveIndex);
-        }
-        else
-        {
-            struct BoxPokemon *boxMon = sMonSummaryScreen->monList.boxMons;
-            SwapBoxMonMoves(&boxMon[sMonSummaryScreen->curMonIndex], sMonSummaryScreen->firstMoveIndex, sMonSummaryScreen->secondMoveIndex);
-        }
+        SwapBoxMonMoves(GetCurrentBoxmon(), sMonSummaryScreen->firstMoveIndex, sMonSummaryScreen->secondMoveIndex);
         CopyMonToSummaryStruct(&sMonSummaryScreen->currentMon);
+        ExtractMonMovesToSummaryStruct(&sMonSummaryScreen->currentMon);
         SwapMovesNamesPP(sMonSummaryScreen->firstMoveIndex, sMonSummaryScreen->secondMoveIndex);
         SwapMovesTypeSprites(sMonSummaryScreen->firstMoveIndex, sMonSummaryScreen->secondMoveIndex);
         sMonSummaryScreen->firstMoveIndex = sMonSummaryScreen->secondMoveIndex;
@@ -2527,76 +2521,6 @@ static void ExitMovePositionSwitchMode(u8 taskId, bool8 swapMoves)
     ScheduleBgCopyTilemapToVram(1);
     ScheduleBgCopyTilemapToVram(2);
     gTasks[taskId].func = Task_HandleInput_MoveSelect;
-}
-
-static void SwapMonMoves(struct Pokemon *mon, u8 moveIndex1, u8 moveIndex2)
-{
-    struct PokeSummary *summary = &sMonSummaryScreen->summary;
-
-    enum Move move1 = summary->moves[moveIndex1];
-    enum Move move2 = summary->moves[moveIndex2];
-    u8 move1pp = summary->pp[moveIndex1];
-    u8 move2pp = summary->pp[moveIndex2];
-    u8 ppBonuses = summary->ppBonuses;
-
-    // Calculate PP bonuses
-    u8 ppUpMask1 = gPPUpGetMask[moveIndex1];
-    u8 ppBonusMove1 = (ppBonuses & ppUpMask1) >> (moveIndex1 * 2);
-    u8 ppUpMask2 = gPPUpGetMask[moveIndex2];
-    u8 ppBonusMove2 = (ppBonuses & ppUpMask2) >> (moveIndex2 * 2);
-    ppBonuses &= ~ppUpMask1;
-    ppBonuses &= ~ppUpMask2;
-    ppBonuses |= (ppBonusMove1 << (moveIndex2 * 2)) + (ppBonusMove2 << (moveIndex1 * 2));
-
-    // Swap the moves
-    SetMonData(mon, MON_DATA_MOVE1 + moveIndex1, &move2);
-    SetMonData(mon, MON_DATA_MOVE1 + moveIndex2, &move1);
-    SetMonData(mon, MON_DATA_PP1 + moveIndex1, &move2pp);
-    SetMonData(mon, MON_DATA_PP1 + moveIndex2, &move1pp);
-    SetMonData(mon, MON_DATA_PP_BONUSES, &ppBonuses);
-
-    summary->moves[moveIndex1] = move2;
-    summary->moves[moveIndex2] = move1;
-
-    summary->pp[moveIndex1] = move2pp;
-    summary->pp[moveIndex2] = move1pp;
-
-    summary->ppBonuses = ppBonuses;
-}
-
-static void SwapBoxMonMoves(struct BoxPokemon *mon, u8 moveIndex1, u8 moveIndex2)
-{
-    struct PokeSummary *summary = &sMonSummaryScreen->summary;
-
-    enum Move move1 = summary->moves[moveIndex1];
-    enum Move move2 = summary->moves[moveIndex2];
-    u8 move1pp = summary->pp[moveIndex1];
-    u8 move2pp = summary->pp[moveIndex2];
-    u8 ppBonuses = summary->ppBonuses;
-
-    // Calculate PP bonuses
-    u8 ppUpMask1 = gPPUpGetMask[moveIndex1];
-    u8 ppBonusMove1 = (ppBonuses & ppUpMask1) >> (moveIndex1 * 2);
-    u8 ppUpMask2 = gPPUpGetMask[moveIndex2];
-    u8 ppBonusMove2 = (ppBonuses & ppUpMask2) >> (moveIndex2 * 2);
-    ppBonuses &= ~ppUpMask1;
-    ppBonuses &= ~ppUpMask2;
-    ppBonuses |= (ppBonusMove1 << (moveIndex2 * 2)) + (ppBonusMove2 << (moveIndex1 * 2));
-
-    // Swap the moves
-    SetBoxMonData(mon, MON_DATA_MOVE1 + moveIndex1, &move2);
-    SetBoxMonData(mon, MON_DATA_MOVE1 + moveIndex2, &move1);
-    SetBoxMonData(mon, MON_DATA_PP1 + moveIndex1, &move2pp);
-    SetBoxMonData(mon, MON_DATA_PP1 + moveIndex2, &move1pp);
-    SetBoxMonData(mon, MON_DATA_PP_BONUSES, &ppBonuses);
-
-    summary->moves[moveIndex1] = move2;
-    summary->moves[moveIndex2] = move1;
-
-    summary->pp[moveIndex1] = move2pp;
-    summary->pp[moveIndex2] = move1pp;
-
-    summary->ppBonuses = ppBonuses;
 }
 
 static void Task_SetHandleReplaceMoveInput(u8 taskId)
@@ -4050,7 +3974,7 @@ static void PrintMoveNameAndPP(u8 moveIndex)
 
     if (move != 0)
     {
-        pp = CalculatePPWithBonus(move, summary->ppBonuses, moveIndex);
+        pp = GetMoveMaxPP(move);
         PrintTextOnWindowToFit(moveNameWindowId, GetMoveName(move), 0, moveIndex * 16 + 1, 0, 1);
         ConvertIntToDecimalStringN(gStringVar1, summary->pp[moveIndex], STR_CONV_MODE_RIGHT_ALIGN, 2);
         ConvertIntToDecimalStringN(gStringVar2, pp, STR_CONV_MODE_RIGHT_ALIGN, 2);

@@ -29,7 +29,7 @@ VerdanturfTown_House_EventScript_MegaGift_GALLADITE::
 	lock
 	faceplayer
 	msgbox VerdanturfTown_House_EventScript_MegaGift_GALLADITE_Text, MSGBOX_DEFAULT
-	giveitem ITEM_GALLADITE
+	giveuniqueitem ITEM_GALLADITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_EC_MEGA_GIFT_GALLADITE
 	release

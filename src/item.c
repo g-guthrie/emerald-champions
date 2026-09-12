@@ -1,6 +1,8 @@
 #include "global.h"
 #include "field_specials.h"
 #include "item.h"
+#include "pokemon.h"
+#include "pokemon_storage_system.h"
 #include "berry.h"
 #include "pokeball.h"
 #include "string_util.h"
@@ -949,6 +951,28 @@ const u8 *GetItemName(enum Item itemId)
     return name == NULL ? gQuestionMarksItemName : name;
 }
 
+bool32 PlayerOwnsItem(enum Item item)
+{
+    if (item == ITEM_NONE)
+        return FALSE;
+    if (CheckBagHasItem(item, 1) || CheckPCHasItem(item, 1))
+        return TRUE;
+    for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+        if (GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_SPECIES) != SPECIES_NONE
+            && GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_HELD_ITEM) == item)
+            return TRUE;
+    for (u32 box = 0; box < TOTAL_BOXES_COUNT; box++)
+        for (u32 slot = 0; slot < IN_BOX_COUNT; slot++)
+            if (GetBoxMonData(&gPokemonStoragePtr->boxes[box][slot], MON_DATA_SPECIES) != SPECIES_NONE
+                && GetBoxMonData(&gPokemonStoragePtr->boxes[box][slot], MON_DATA_HELD_ITEM) == item)
+                return TRUE;
+    for (u32 slot = 0; slot < DAYCARE_MON_COUNT; slot++)
+        if (GetBoxMonData(&gSaveBlock1Ptr->daycare.mons[slot].mon, MON_DATA_SPECIES) != SPECIES_NONE
+            && GetBoxMonData(&gSaveBlock1Ptr->daycare.mons[slot].mon, MON_DATA_HELD_ITEM) == item)
+            return TRUE;
+    return FALSE;
+}
+
 u32 GetItemPrice(enum Item itemId)
 {
     return gItemsInfo[SanitizeItemId(itemId)].price;
@@ -1127,12 +1151,18 @@ u32 GetItemStatus1Mask(enum Item itemId)
     return 0;
 }
 
+bool32 IsItemProtectedFromLoss(enum Item item)
+{
+    return GetItemImportance(item) || GetItemPocket(item) == POCKET_KEY_ITEMS
+        || GetItemPocket(item) == POCKET_MEGA_STONES;
+}
+
 u32 GetItemSellPrice(enum Item itemId)
 {
-    if (IsEmeraldChampionsFreeCatalogueItem(itemId))
+    if (IsItemProtectedFromLoss(itemId) || GetItemPocket(itemId) == POCKET_POKE_BALLS
+        || IsEmeraldChampionsFreeCatalogueItem(itemId))
         return 0;
-    u32 evolutionPrice = GetEmeraldChampionsEvolutionPrice(itemId);
-    return (evolutionPrice ? evolutionPrice : GetItemPrice(itemId)) / ITEM_SELL_FACTOR;
+    return GetItemPrice(itemId) / ITEM_SELL_FACTOR;
 }
 
 bool32 IsHoldEffectChoice(enum HoldEffect holdEffect)
@@ -1155,4 +1185,18 @@ bool32 IsItemShopCriteriaFulfilled(enum Item itemId)
         return TRUE;
 
     return func(SanitizeItemId(itemId));
+}
+
+// Call only from a finite authored entitlement, before its receipt is closed.
+// Repeatable vendors and trades must not manufacture money through this rule.
+u32 GetFiniteDuplicateRewardValue(enum Item item)
+{
+    if (item == ITEM_NONE || item >= ITEMS_COUNT)
+        return 0;
+    if (gItemsInfo[item].sortType == ITEM_TYPE_MEGA_STONE && PlayerOwnsItem(item))
+        return 3000;
+    if (gItemsInfo[item].sortType == ITEM_TYPE_EVOLUTION_ITEM
+        && GetItemImportance(item) && PlayerOwnsItem(item))
+        return 5000;
+    return 0;
 }

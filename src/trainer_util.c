@@ -1,4 +1,5 @@
 #include "global.h"
+#include "difficulty.h"
 #include "main.h"
 #include "data.h"
 #include "move.h"
@@ -36,7 +37,7 @@ static void CustomTrainerPartyAssignMoves(struct Pokemon *mon, const struct Trai
 
     for (j = 0; j < MAX_MON_MOVES; ++j)
     {
-        u32 pp = CalculatePPWithBonus(partyEntry->moves[j], 0, j);
+        u32 pp = GetMoveMaxPP(partyEntry->moves[j]);
         SetMonData(mon, MON_DATA_MOVE1 + j, &partyEntry->moves[j]);
         SetMonData(mon, MON_DATA_PP1 + j, &pp);
     }
@@ -140,7 +141,9 @@ void GenerateMonFromTrainerMon(struct Pokemon *mon, const struct TrainerMon *tra
         errorf("Unkwown trainer mon gender value %d", trainerMon->gender);
     personality |= genderValue;
     ModifyPersonalityForNature(&personality, trainerMon->nature);
-    CreateMon(mon, trainerMon->species, trainerMon->lvl, personality, trainer->otID);
+    CreateMon(mon, trainerMon->species,
+              trainerMon->useLevelOffset ? GetCampaignTrainerLevel(trainerMon->levelOffset) : trainerMon->lvl,
+              personality, trainer->otID);
     if (trainerMon->nickname != NULL)
         SetMonData(mon, MON_DATA_NICKNAME, trainerMon->nickname);
     if (trainerMon->ev) //ev in struct TrainerMon are stored in Showdown order not vanilla Emerald order

@@ -1193,7 +1193,6 @@
 //     ResetSpriteData();
 //     ResetAllPicSprites();
 //     ResetPaletteFade();
-//     InitObjectEventPalettes(0);
 //     gReservedSpritePaletteCount = 7;
 
 // }

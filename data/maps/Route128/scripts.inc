@@ -175,24 +175,7 @@ Route128_Movement_MaxieApproachPlayer:
 	step_end
 
 Route128_EventScript_Isaiah::
-	trainerbattle_double TRAINER_ISAIAH_1, Route128_Text_IsaiahIntro, Route128_Text_IsaiahDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route128_EventScript_RegisterIsaiah
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route128_EventScript_RematchIsaiah
-	msgbox Route128_Text_IsaiahPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route128_EventScript_RegisterIsaiah::
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route128_Text_IsaiahRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_ISAIAH_1
-	release
-	end
-
-Route128_EventScript_RematchIsaiah::
-	trainerbattle_rematch_double TRAINER_ISAIAH_1, Route128_Text_IsaiahRematchIntro, Route128_Text_IsaiahRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route128_Text_IsaiahPostRematch, MSGBOX_AUTOCLOSE
+	msgbox Route128_Text_IsaiahPostBattle, MSGBOX_NPC
 	end
 
 Route128_EventScript_Katelyn::
@@ -231,13 +214,11 @@ Route128_EventScript_Wayne::
 	end
 
 Route128_EventScript_Harrison::
-	trainerbattle_double TRAINER_HARRISON, Route128_Text_HarrisonIntro, Route128_Text_HarrisonDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route128_Text_HarrisonPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route128_Text_HarrisonPostBattle, MSGBOX_NPC
 	end
 
 Route128_EventScript_Carlee::
-	trainerbattle_double TRAINER_CARLEE, Route128_Text_CarleeIntro, Route128_Text_CarleeDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route128_Text_CarleePostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route128_Text_CarleePostBattle, MSGBOX_NPC
 	end
 
 Route128_Text_ArchieWhatHappened:

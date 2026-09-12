@@ -1,27 +1,8 @@
 # Build and verification
 
-Run commands from the repository root. The canonical toolchain/package setup is in [.github/workflows/build.yml](https://github.com/g-guthrie/emerald-champions/blob/main/.github/workflows/build.yml); [Makefile](https://github.com/g-guthrie/emerald-champions/blob/main/Makefile) defines the actual build. A compatible ARM GCC/binutils/newlib toolchain and native build tools are required. A usable emulator alone is not a complete ROM build environment.
-
-## September 8 repair environment
-
-The repair was built on Apple Silicon with Arm GNU Toolchain 15.3.Rel1
-(GCC 15.3.1 and newlib), Apple make 3.81, libpng 1.6.58 and pkgconf 3.0.7.
-The local extracted toolchain is `work/toolchain/arm-expanded/Payload`.
-That cache is not tracked. Put its `bin` directory on the shell's PATH before
-invoking make: setting only `DEVKITARM` did not reach a recursive generated-data
-command under this make version.
-
-```sh
-export PATH="$PWD/work/toolchain/arm-expanded/Payload/bin:$PATH"
-make -j4 release BUILD_NAME=emerald-repair-20260908
-```
-
-The named build preserves the tracked 5.1 `pokeemerald-release.gba`.
-The local native runner uses the vendored mGBA 0.10.5 source, built under
-`work/mgba-native`; set `MGBA_PREFIX="$PWD/work/mgba-native"` for its Python
-drivers. This is a reproducibility note, not a completed-release claim.
-
-## Release artifacts
+Run commands from the repository root. [The CI workflow](../.github/workflows/build.yml)
+provisions ARM GCC/binutils/newlib, native build tools, Python, libpng and libmGBA.
+The [Makefile](../Makefile) defines the build. Put the ARM toolchain on `PATH`.
 
 ```sh
 make -j4 release
@@ -29,69 +10,38 @@ python3 scripts/stamp_release_inputs.py
 python3 scripts/verify_emerald_champions_release.py
 ```
 
-Stamp the same source tree that actually produced the ROM and ELF. If a container performs the build, create the stamp there and copy the ROM, ELF, and stamp together. A new stamp is not a substitute for a successful build.
+Stamp the tree that actually built the ROM and ELF. For a container build, copy
+both artifacts and their stamp together. Check copied artifacts with
+`python3 scripts/stamp_release_inputs.py --check`. The release checker validates
+configured data, ROM/ELF agreement, header/checksum, fixture exclusion and memory
+bounds. Use `--allow-source-bundle` only for an intentional export without Git
+metadata, and run `git diff --check` in the actual checkout.
 
-[stamp_release_inputs.py](https://github.com/g-guthrie/emerald-champions/blob/main/scripts/stamp_release_inputs.py) binds declared source/generator inputs and artifact hashes. [rom_artifacts.py](https://github.com/g-guthrie/emerald-champions/blob/main/scripts/rom_artifacts.py) checks that the ROM matches the ELF-derived binary plus the Makefile's padding. [verify_emerald_champions_release.py](https://github.com/g-guthrie/emerald-champions/blob/main/scripts/verify_emerald_champions_release.py) runs named static checks and validates the release header, memory bounds, and absence of fixture/test interfaces.
+## Runtime checks
 
-CI builds and stamps the ROM; it does not run regression or design gates. Optional check tools cover map/script structure, configured trainer abilities, trainer formats, authored/generated agreement, encounters, rewards, and artifact identity. Historical art/story snapshots, prose matching, strategy quotas and dormant facility loadouts are not release requirements. Static checks do not establish complete playability or difficulty.
+Use existing focused tests that exercise the changed behavior. The native runner
+supports selected filters and separate build/run environments:
 
-## Runtime tests
+```sh
+python3 scripts/run_emerald_champions_runtime_gates.py --help
+```
 
-`generate_emerald_champions_battle_sets.py --check` compares current authored
-presets with their materialized tables and validates structural/ability bounds.
-Circuit projection has the same current-data integrity boundary. Historical
-role quotas, source-prose rules and strategy heuristics have been retired.
-These checks do not establish competitive strength.
+A test ELF built elsewhere needs its matching input stamp. Keep failed output
+and audit the fixture, configuration, assertion and artifact identity before
+changing code. Run no blanket suite merely to increase coverage totals.
 
-The native "exposes named Doubles and Singles sets" test enumerates both compiled catalogs,
-including item-gated roles, and verifies visibility and the applied Pokémon state. The
-"imported battle sets remain legal" test separately exercises the doubles opponent API.
-
-Run a selected native filter only when it answers a concrete behavior question. Do not run a blanket suite after each change.
-
-The [runtime runner](https://github.com/g-guthrie/emerald-champions/blob/main/scripts/run_emerald_champions_runtime_gates.py) builds a selected test ELF and executes its configured filters. Its explicit per-filter debt is part of the result, not a claim that those defects are fixed. Counts, identities, and process outcomes must agree. `--build-only` and `--run-only` support separate build/runtime environments; copy the test ELF and its input stamp together.
-
-The inherited full-corpus workflow was retired. `test/` contains the focused runtime corpus, current project regressions and harness checks. Selected runtime filters must execute named results with coherent counters and exit status; there are no historical test-count floors. Add a test only for an essential invariant that existing checks do not cover.
-
-Those checks validate particular failure cases, parsers, or extracted production functions. Their fixture boundaries are described in each test; they do not replace emulator execution.
-
-The Cohesion build targets fresh saves. Compatibility migrations and historical-save recovery paths have been removed. Current-run saves, pending rewards, and temporary-party restoration still need to behave correctly.
-
-## Two separate gameplay pipelines
-
-| Pipeline | Entry point | Evidence boundary |
+| Purpose | Entry point | Limit |
 | --- | --- | --- |
-| Campaign traversal | [run_emerald_champions_campaign.py](https://github.com/g-guthrie/emerald-champions/blob/main/scripts/run_emerald_champions_campaign.py), [playthrough manifest](https://github.com/g-guthrie/emerald-champions/blob/main/tests/campaign/playthrough.json) | Drives button inputs and checks scripted progress; its fixture automatically resolves ordinary battles. It does not measure combat difficulty. |
-| Independent battle play | [agent_player.py](https://github.com/g-guthrie/emerald-champions/blob/main/tools/agent_player/agent_player.py), [battle_checkpoint_lab.py](https://github.com/g-guthrie/emerald-champions/blob/main/scripts/battle_checkpoint_lab.py) | Starts from checkpoint-bound resources with campaign automation disabled. Existing semantic success records are evaluator reports, not independently inferred wins. |
+| Campaign traversal | `scripts/run_emerald_champions_campaign.py` | Automatically resolves battles; does not assess combat difficulty |
+| Native battle play | `tools/agent_player/agent_player.py`, `scripts/battle_checkpoint_lab.py` | Requires campaign battle automation disabled and current artifacts |
+| Visual scenarios | `scripts/render_emerald_champions_ui.py`, `scripts/verify_emerald_champions_visual_runtime.py` | Requires the test-only fixture build and screenshot inspection |
 
-The campaign runner currently selects `CAMPAIGN_AUTOWIN` for traversal. Per-segment `battle_automation` fields are descriptive legacy metadata, not executable mode controls: `native` there does **not** disable battle automation. Native battle claims require the separate battle pipeline or an explicitly recorded same-ROM diagnostic mode change with readback; screenshots before a battle are insufficient.
+The campaign runner's legacy `battle_automation` manifest labels do not disable
+its automatic wins. Agent-player success events are reported outcomes, not
+independent proof. Preserve both pipelines and their distinct interpretation.
+Use scratch ROM/save copies for automation, never a writable player save.
 
-Trainer defeat assertions can use test-only aliases such as `FLAG_DEFEATED_TRAINER_TAKAO` in `expected.flags`. The runner derives these from authored `constants/opponents.h` IDs and the reserved trainer flag range; these aliases are not declarations added to the game.
-
-Campaign checkpoints bind state bytes, parent identity, and artifact provenance. Explicit parent-run selection is honored; unrelated future manifest additions can remain compatible when the checkpoint's ancestry is unchanged. The historical full-run baseline comparator was removed in the static-check audit: it could discard incorrect flag/variable expectations while reporting agreement. Use the actual producer's state observations and checkpoint provenance, not an old normalized snapshot, as evidence.
-
-[aggregate_results.py](https://github.com/g-guthrie/emerald-champions/blob/main/tools/agent_player/aggregate_results.py) rejects incompatible run identities and labels reported outcomes. Unknown Hard-mode or budget-exhaustion claims remain unknown. Harness checkpoint restore retains cumulative budgets. It is separate from the game's Retry and Reload controls.
-
-Visual fixture comparison uses [verify_emerald_champions_visual_runtime.py](https://github.com/g-guthrie/emerald-champions/blob/main/scripts/verify_emerald_champions_visual_runtime.py) and [its baseline](https://github.com/g-guthrie/emerald-champions/blob/main/tests/headless/inclement_visual_runtime_baseline.json). This is an optional manual comparison, outside CI. Historical pixels and scenario inventories must not veto deliberate UI changes; matching pixels alone are not an aesthetic judgment.
-
-Record failures and incomplete coverage alongside successes. A release-readiness claim needs a fresh build, relevant runtime tests, native UI/failure-path checks, and an actual fresh-save campaign run; balancing and Nuzlocke difficulty additionally need appropriate play evidence.
-
-## Keeping the suite small
-
-The September 8 static-check audit and subsequent user instruction removed
-drifting host fixtures, old-save layout locks, strategy heuristics, imported
-policy locks and source-text checks without essential regression value. The
-audit and exact disposition are recorded in `docs/static_check_audit/`. Deleted
-checks are not passing checks, and removing a test does not fix the gameplay
-that it purported to verify.
-
-The release command no longer runs the weak script-format/reward-graph gates
-or the branding and partial state-ID scanners. Compiled geometry, configured
-abilities, materialized-output agreement and artifact checks remain. Standalone
-world/coverage reports are not release-readiness evidence. Known remaining
-checker/generator limitations are explicit in the audit; do not treat a green
-projection check as competitive quality or complete native legality.
-
-A retained test needs a concrete current failure it can detect, an assertion that observes that failure, and a reason existing checks do not already cover it. Prefer an executed production-function regression over another source-token scanner. Empty TODOs belong in issue notes. Benchmarks, historical imports and speculative strategy judgments do not belong in required game gates.
-
-When gameplay changes deliberately, revise or delete its old expectation in the same change. Do not restore old rewards, encounters, prose, coordinates, ratios or counts merely to satisfy a test. Preserve actual save integrity, transactional no-room behavior, safe battle actions and the separate traversal/battle pipelines. Broad inherited mechanic coverage was deliberately retired in the September 8 audit; the remaining suite is not an exhaustive engine certification.
+Current games target fresh saves. Preserve current-run rewards, failed-delivery
+retries, save integrity and temporary-party restoration. Record exact build
+identity and scoped results under ignored `work/`; a release check alone is not
+a full campaign playthrough, visual review or balance assessment.

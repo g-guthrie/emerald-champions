@@ -1,4 +1,5 @@
 #include "global.h"
+#include "move.h"
 #include "braille_puzzles.h"
 #include "malloc.h"
 #include "battle.h"
@@ -464,7 +465,6 @@ static void Task_ChoosePartyMon(u8 taskId);
 static void Task_ChooseMonForMoveRelearner(u8);
 static void CB2_ChooseMonForMoveRelearner(void);
 static void Task_BattlePyramidChooseMonHeldItems(u8);
-static void ShiftMoveSlot(struct BoxPokemon *, u8, u8);
 static void BlitBitmapToPartyWindow_LeftColumn(u8, u8, u8, u8, u8, bool8);
 static void BlitBitmapToPartyWindow_RightColumn(u8, u8, u8, u8, u8, bool8);
 static void CursorCb_Summary(u8);
@@ -5570,30 +5570,6 @@ enum Move ItemIdToBattleMoveId(enum Item item)
     return (GetItemPocket(item) == POCKET_TM_HM) ? GetItemTMHMMoveId(item) : MOVE_NONE;
 }
 
-bool8 MonKnowsMove(struct Pokemon *mon, enum Move move)
-{
-    u8 i;
-
-    for (i = 0; i < MAX_MON_MOVES; i++)
-    {
-        if (GetMonData(mon, MON_DATA_MOVE1 + i) == move)
-            return TRUE;
-    }
-    return FALSE;
-}
-
-bool8 BoxMonKnowsMove(struct BoxPokemon *boxMon, enum Move move)
-{
-    u8 i;
-
-    for (i = 0; i < MAX_MON_MOVES; i++)
-    {
-        if (GetBoxMonData(boxMon, MON_DATA_MOVE1 + i) == move)
-            return TRUE;
-    }
-    return FALSE;
-}
-
 static void DisplayLearnMoveMessage(const u8 *str)
 {
     StringExpandPlaceholders(gStringVar4, str);
@@ -6532,28 +6508,6 @@ void FormChangeTeachMove(u8 taskId, enum Move move, u32 slot)
     }
 }
 
-void DeleteMove(struct Pokemon *mon, enum Move move)
-{
-    struct BoxPokemon *boxMon = &mon->box;
-    u32 i, j;
-
-    if (move != MOVE_NONE)
-    {
-        for (i = 0; i < MAX_MON_MOVES; i++)
-        {
-            u32 existingMove = GetBoxMonData(boxMon, MON_DATA_MOVE1 + i);
-            if (existingMove == move)
-            {
-                SetMonMoveSlot(mon, MOVE_NONE, i);
-                RemoveMonPPBonus(mon, i);
-                for (j = i; j < MAX_MON_MOVES - 1; j++)
-                    ShiftMoveSlot(&mon->box, j, j + 1);
-                break;
-            }
-        }
-    }
-}
-
 bool32 DoesMonHaveAnyMoves(struct Pokemon *mon)
 {
     struct BoxPokemon *boxMon = &mon->box;
@@ -6614,7 +6568,7 @@ static void RestoreFusionMon(struct Pokemon *mon)
     }
     else
     {
-        CopyMon(&gParties[B_TRAINER_PLAYER][i], mon, sizeof(*mon));
+        memcpy(&gParties[B_TRAINER_PLAYER][i], mon, sizeof(*mon));
         gPartiesCount[B_TRAINER_PLAYER] = i + 1;
     }
 }
@@ -6640,8 +6594,7 @@ static void SwapFusionMonMoves(struct Pokemon *mon, const u16 moveTable[][2], u3
         {
             if (move == moveTable[j][oldMoveIndex])
             {
-                u8 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
-                u32 pp = CalculatePPWithBonus(moveTable[j][newMoveIndex], ppBonuses, i);
+                u32 pp = GetMoveMaxPP(moveTable[j][newMoveIndex]);
                 SetMonData(mon, MON_DATA_MOVE1 + i, &moveTable[j][newMoveIndex]);
                 SetMonData(mon, MON_DATA_PP1 + i, &pp);
             }
@@ -6658,25 +6611,6 @@ struct EmeraldChampionsUnfusionMoves
     u8 bonuses;
 };
 static EWRAM_DATA struct EmeraldChampionsUnfusionMoves sEmeraldChampionsUnfusionMoves = {0};
-
-static bool32 CanSpeciesKeepUnfusionMove(enum Species species, enum Move move)
-{
-    if (CanSpeciesUseEmeraldChampionsPreparationMove(species, move))
-        return TRUE;
-    const struct LevelUpMove *levelMoves = GetSpeciesLevelUpLearnset(species);
-    for (u32 i = 0; levelMoves[i].move != LEVEL_UP_MOVE_END; i++)
-        if (levelMoves[i].move == move)
-            return TRUE;
-    const u16 *moves = GetSpeciesTeachableLearnset(species);
-    for (u32 i = 0; moves[i] != MOVE_UNAVAILABLE; i++)
-        if (moves[i] == move)
-            return TRUE;
-    moves = GetSpeciesEggMoves(species);
-    for (u32 i = 0; moves[i] != MOVE_UNAVAILABLE; i++)
-        if (moves[i] == move)
-            return TRUE;
-    return FALSE;
-}
 
 static void ApplyEmeraldChampionsUnfusionMoves(struct Pokemon *mon)
 {
@@ -6716,7 +6650,7 @@ static bool32 PrepareEmeraldChampionsUnfusionMoves(u8 taskId)
         if (move == MOVE_NONE)
             continue;
         bool32 keep = gTasks[taskId].tExtraMoveHandling != FORGET_EXTRA_MOVES
-            || CanSpeciesKeepUnfusionMove(gTasks[taskId].fusionResult, move);
+            || CanSpeciesKeepEmeraldChampionsUnfusionMove(gTasks[taskId].fusionResult, move);
         if (!keep || move != original)
         {
             u8 text[120];
@@ -6742,7 +6676,7 @@ static bool32 PrepareEmeraldChampionsUnfusionMoves(u8 taskId)
     if (count == 0)
     {
         sEmeraldChampionsUnfusionMoves.moves[0] = MOVE_CONFUSION;
-        sEmeraldChampionsUnfusionMoves.pp[0] = CalculatePPWithBonus(MOVE_CONFUSION, 0, 0);
+        sEmeraldChampionsUnfusionMoves.pp[0] = GetMoveMaxPP(MOVE_CONFUSION);
         StringAppend(gStringVar4, COMPOUND_STRING("Learn Confusion.\p"));
         changed = TRUE;
     }
@@ -6827,7 +6761,7 @@ static void Task_TryItemUseFusionChange(u8 taskId)
         if (gTasks[taskId].fusionType == FUSE_MON)
         {
             mon2 = &gParties[B_TRAINER_PLAYER][gTasks[taskId].secondFusionSlot];
-            CopyMon(&gPokemonStoragePtr->fusions[gTasks[taskId].storageIndex], mon2, sizeof(*mon2));
+            memcpy(&gPokemonStoragePtr->fusions[gTasks[taskId].storageIndex], mon2, sizeof(*mon2));
             ZeroMonData(&gParties[B_TRAINER_PLAYER][gTasks[taskId].secondFusionSlot]);
         }
         else
@@ -8664,32 +8598,11 @@ void MoveDeleterForgetMove(void)
     ppBonuses &= gPPUpClearMask[gSpecialVar_0x8005];
     SetBoxMonData(boxmon, MON_DATA_PP_BONUSES, &ppBonuses);
     for (u32 i = gSpecialVar_0x8005; i < MAX_MON_MOVES - 1; i++)
-        ShiftMoveSlot(boxmon, i, i + 1);
+        SwapBoxMonMoves(boxmon, i, i + 1);
     if (gSpecialVar_0x8004 == PC_MON_CHOSEN)
         TryBoxMonFormChangeOnMove(boxmon, forgottenMove);
     else
         TryFormChangeOnMove(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004], forgottenMove, B_TRAINER_PLAYER);
-}
-
-static void ShiftMoveSlot(struct BoxPokemon *mon, u8 slotTo, u8 slotFrom)
-{
-    enum Move move1 = GetBoxMonData(mon, MON_DATA_MOVE1 + slotTo);
-    enum Move move0 = GetBoxMonData(mon, MON_DATA_MOVE1 + slotFrom);
-    u8 pp1 = GetBoxMonData(mon, MON_DATA_PP1 + slotTo);
-    u8 pp0 = GetBoxMonData(mon, MON_DATA_PP1 + slotFrom);
-    u8 ppBonuses = GetBoxMonData(mon, MON_DATA_PP_BONUSES);
-    u8 ppBonusMask1 = gPPUpGetMask[slotTo];
-    u8 ppBonusMove1 = (ppBonuses & ppBonusMask1) >> (slotTo * 2);
-    u8 ppBonusMask2 = gPPUpGetMask[slotFrom];
-    u8 ppBonusMove2 = (ppBonuses & ppBonusMask2) >> (slotFrom * 2);
-    ppBonuses &= ~ppBonusMask1;
-    ppBonuses &= ~ppBonusMask2;
-    ppBonuses |= (ppBonusMove1 << (slotFrom * 2)) + (ppBonusMove2 << (slotTo * 2));
-    SetBoxMonData(mon, MON_DATA_MOVE1 + slotTo, &move0);
-    SetBoxMonData(mon, MON_DATA_MOVE1 + slotFrom, &move1);
-    SetBoxMonData(mon, MON_DATA_PP1 + slotTo, &pp0);
-    SetBoxMonData(mon, MON_DATA_PP1 + slotFrom, &pp1);
-    SetBoxMonData(mon, MON_DATA_PP_BONUSES, &ppBonuses);
 }
 
 void IsSelectedMonEgg(void)

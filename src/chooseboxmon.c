@@ -353,8 +353,7 @@ s32 LearnMove(const struct MoveLearnUI *ui, u8 taskId)
         enum Move forgottenMove = GetBoxMonData(boxmon, MON_DATA_MOVE1 + slot);
         RemoveBoxMonPPBonus(boxmon, slot);
         u32 originalPP = GetBoxMonData(boxmon, MON_DATA_PP1 + slot);
-        u8 ppBonuses = GetBoxMonData(boxmon, MON_DATA_PP_BONUSES);
-        u32 pp = CalculatePPWithBonus(move, ppBonuses, slot);
+        u32 pp = GetMoveMaxPP(move);
         SetBoxMonData(boxmon, MON_DATA_MOVE1 + slot, &move);
         if (recoverPP || (pp < originalPP))
             SetBoxMonData(boxmon, MON_DATA_PP1 + slot, &pp);

@@ -891,11 +891,11 @@ static const struct PickupItem sPickupTable[] =
     { ITEM_MAX_REPEL,       {   _,   3,   3,   4,   4,   9,   8,   8,  30,   _, } },
     { ITEM_MOON_STONE,      {   _,   3,   3,   4,   4,   4,   4,   5,   9,  10, } },
     { ITEM_SUN_STONE,       {   _,   3,   3,   4,   4,   4,   4,   5,   9,  10, } },
-    { ITEM_RARE_CANDY,      {   _,   1,   1,   1,   1,   4,   4,   5,   4,   5, } },
+    { ITEM_GREAT_BALL,      {   _,   1,   1,   1,   1,   4,   4,   5,   4,   5, } },
     { ITEM_NUGGET,          {   _,   _,   3,   4,   4,   4,   4,   5,   4,   5, } },
     { ITEM_MAX_POTION,      {   _,   _,   3,   4,   4,   4,   8,   8,   9,  30, } },
     { ITEM_MAX_ETHER,       {   _,   _,   1,   1,   4,   4,   4,   _,   _,   _, } },
-    { ITEM_PP_UP,           {   _,   _,   1,   1,   1,   4,   4,   5,   4,   5, } },
+    { ITEM_ETHER,           {   _,   _,   1,   1,   1,   4,   4,   5,   4,   5, } },
     { ITEM_BIG_NUGGET,      {   _,   _,   1,   1,   1,   1,   4,   5,   4,   5, } },
     { ITEM_DESTINY_KNOT,    {   _,   _,   1,   1,   1,   1,   1,   1,   1,   1, } },
     { ITEM_LEFTOVERS,       {   _,   _,   1,   1,   1,   1,   1,   1,   1,   1, } },
@@ -3942,9 +3942,14 @@ static void Cmd_getmoneyreward(void)
 
     if (gBattleOutcome == B_OUTCOME_WON)
     {
-        money = GetTrainerMoneyToGive(TRAINER_BATTLE_PARAM.opponentA);
-        if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
-            money += GetTrainerMoneyToGive(TRAINER_BATTLE_PARAM.opponentB);
+        if (gBattleStruct->campaignPrizeMultiplier != 0)
+            money = GetCampaignBattleMoneyReward();
+        else
+        {
+            money = GetTrainerMoneyToGive(TRAINER_BATTLE_PARAM.opponentA);
+            if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
+                money += GetTrainerMoneyToGive(TRAINER_BATTLE_PARAM.opponentB);
+        }
         AddMoney(&gSaveBlock1Ptr->money, money);
     }
     else
@@ -9385,7 +9390,7 @@ void BS_ItemRestorePP(void)
     {
         pp = GetMonData(mon, MON_DATA_PP1 + i);
         moveId = GetMonData(mon, MON_DATA_MOVE1 + i);
-        maxPP = CalculatePPWithBonus(moveId, GetMonData(mon, MON_DATA_PP_BONUSES), i);
+        maxPP = GetMoveMaxPP(moveId);
         if (pp != maxPP)
         {
             pp += effect[6];
@@ -10866,7 +10871,7 @@ void BS_RestoreMovePp(void)
     u32 data[MAX_MON_MOVES + 1];
     for (moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
     {
-        gBattleMons[battler].pp[moveIndex] = CalculatePPWithBonus(gBattleMons[battler].moves[moveIndex], gBattleMons[battler].ppBonuses, moveIndex);
+        gBattleMons[battler].pp[moveIndex] = GetMoveMaxPP(gBattleMons[battler].moves[moveIndex]);
         data[moveIndex] = gBattleMons[battler].pp[moveIndex];
     }
     data[moveIndex] = gBattleMons[battler].ppBonuses;

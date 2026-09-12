@@ -57,45 +57,11 @@ Route113_EventScript_Dillon::
 	end
 
 Route113_EventScript_Madeline::
-	trainerbattle_double TRAINER_MADELINE_1, Route113_Text_MadelineIntro, Route113_Text_MadelineDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route113_EventScript_RegisterMadeline
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route113_EventScript_RematchMadeline
-	msgbox Route113_Text_MadelinePostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route113_EventScript_RegisterMadeline::
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route113_Text_MadelineRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_MADELINE_1
-	release
-	end
-
-Route113_EventScript_RematchMadeline::
-	trainerbattle_rematch_double TRAINER_MADELINE_1, Route113_Text_MadelineRematchIntro, Route113_Text_MadelineRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route113_Text_MadelinePostRematch, MSGBOX_AUTOCLOSE
+	msgbox Route113_Text_MadelinePostBattle, MSGBOX_NPC
 	end
 
 Route113_EventScript_Lao::
-	trainerbattle_double TRAINER_LAO_1, Route113_Text_LaoIntro, Route113_Text_LaoDefeat, EmeraldChampions_Text_NeedTwoPokemon, Route113_EventScript_RegisterLao
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route113_EventScript_RematchLao
-	msgbox Route113_Text_LaoPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-Route113_EventScript_RegisterLao::
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	msgbox Route113_Text_LaoRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_LAO_1
-	release
-	end
-
-Route113_EventScript_RematchLao::
-	trainerbattle_rematch_double TRAINER_LAO_1, Route113_Text_LaoRematchIntro, Route113_Text_LaoRematchDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route113_Text_LaoPostRematch, MSGBOX_AUTOCLOSE
+	msgbox Route113_Text_LaoPostBattle, MSGBOX_NPC
 	end
 
 Route113_EventScript_Lung::

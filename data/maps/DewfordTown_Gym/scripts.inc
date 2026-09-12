@@ -170,14 +170,14 @@ DewfordTown_Gym_EventScript_BrawlyDefeated::
 	end
 
 DewfordTown_Gym_EventScript_GiveLucarionite::
-	giveitem ITEM_LUCARIONITE
+	giveuniqueitem ITEM_LUCARIONITE
 	goto_if_eq VAR_RESULT, 0, Common_EventScript_BagIsFull
 	msgbox DewfordTown_Gym_Text_ExplainLucarionite, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_BRAWLY_LUCARIONITE
 	return
 
 DewfordTown_Gym_EventScript_GiveLucarionite2:
-	giveitem ITEM_LUCARIONITE
+	giveuniqueitem ITEM_LUCARIONITE
 	goto_if_eq VAR_RESULT, 0, Common_EventScript_ShowBagIsFull
 	msgbox DewfordTown_Gym_Text_ExplainLucarionite, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_BRAWLY_LUCARIONITE

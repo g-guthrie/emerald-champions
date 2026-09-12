@@ -1,4 +1,5 @@
 #include "global.h"
+#include "move.h"
 #include "battle.h"
 #include "battle_anim.h"
 #include "battle_ai_record.h"
@@ -729,7 +730,6 @@ static enum ItemEffect ItemRestorePp(enum BattlerId battler, enum Item itemId)
     u32 changedPP = 0;
     u32 restoreMove = MAX_MON_MOVES;
     u32 missingMove = MAX_MON_MOVES;
-    u32 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
     bool32 override = gBattleScripting.overrideBerryRequirements;
     enum Ability ability = GetBattlerAbility(battler);
 
@@ -748,7 +748,7 @@ static enum ItemEffect ItemRestorePp(enum BattlerId battler, enum Item itemId)
 
         if (override && missingMove == MAX_MON_MOVES)
         {
-            u32 maxPP = CalculatePPWithBonus(move, ppBonuses, i);
+            u32 maxPP = GetMoveMaxPP(move);
 
             if (currentPP < maxPP)
                 missingMove = i;
@@ -762,7 +762,7 @@ static enum ItemEffect ItemRestorePp(enum BattlerId battler, enum Item itemId)
     {
         enum Move move = GetMonData(mon, MON_DATA_MOVE1 + restoreMove);
         u32 currentPP = GetMonData(mon, MON_DATA_PP1 + restoreMove);
-        u32 maxPP = CalculatePPWithBonus(move, ppBonuses, restoreMove);
+        u32 maxPP = GetMoveMaxPP(move);
         u32 ppRestored = GetItemHoldEffectParam(itemId);
 
         if (ability == ABILITY_RIPEN)

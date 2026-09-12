@@ -55,11 +55,9 @@ struct UsePokeblockSession
     struct Pokemon *mon;
     u8 stringBuffer[64];
     u8 mainState;
-    u8 unused1;
     u8 timer;
     u8 condition;
     u8 numEnhancements;
-    u8 unused2;
     bool8 monInTopHalf;
     u8 conditionsBeforeBlock[CONDITION_COUNT];
     u8 conditionsAfterBlock[CONDITION_COUNT];
@@ -69,27 +67,21 @@ struct UsePokeblockSession
     u8 curSelection;
     bool8 (*loadNewSelection)(void);
     u8 helperState;
-    u8 unused3;
     u8 natureText[34];
 };
 
-// This struct is identical to PokenavMonListItem, the struct used for managing lists of Pokémon in the PokéNav
-// Given that this screen is essentially duplicated in the poknav, this struct was probably the same one with
-// a more general name/purpose
-// TODO: Once the PokéNav conditions screens are documented, resolve the above
+// The box and party identifiers mirror the PokeNav list item used by the shared
+// condition-menu helpers.
 struct UsePokeblockMenuPokemon
 {
     u8 boxId; // Because this screen is never used for the PC this is always set to TOTAL_BOXES_COUNT to refer to party
     u8 monId;
-    u16 data; // never read
 };
 
 struct UsePokeblockMenu
 {
-    u32 unused;
     u16 partyPalettes[PARTY_SIZE][0x40];
     u8 partySheets[NUM_SELECTIONS_LOADED][MON_PIC_SIZE * MAX_MON_PIC_FRAMES];
-    u8 unusedBuffer[0x1000];
     u8 tilemapBuffer[BG_SCREEN_SIZE + 2];
     u8 selectionIconSpriteIds[PARTY_SIZE + 1];
     s16 curMonXOffset;
@@ -1161,7 +1153,6 @@ static void LoadPartyInfo(void)
         {
             sMenu->party[numMons].boxId = TOTAL_BOXES_COUNT;
             sMenu->party[numMons].monId = i;
-            sMenu->party[numMons].data = 0;
             numMons++;
         }
     }

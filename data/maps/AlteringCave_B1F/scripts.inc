@@ -25,7 +25,7 @@ AlteringCave_B1F_EventScript_LeafApproach::
 AlteringCave_B1F_EventScript_LeafReward::
 	checkitem ITEM_MEWTWONITE_X, 1
 	goto_if_eq VAR_RESULT, TRUE, AlteringCave_B1F_EventScript_LeafComplete
-	giveitem ITEM_MEWTWONITE_X
+	giveuniqueitem ITEM_MEWTWONITE_X
 	goto_if_eq VAR_RESULT, FALSE, AlteringCave_B1F_EventScript_LeafBagFull
 AlteringCave_B1F_EventScript_LeafComplete::
 	msgbox AlteringCave_B1F_Text_LeafAfter, MSGBOX_DEFAULT

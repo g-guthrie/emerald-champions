@@ -42,7 +42,6 @@
 #include "trade.h"
 #include "trainer_card.h"
 #include "union_room.h"
-#include "union_room_battle.h"
 #include "union_room_chat.h"
 #include "union_room_player_avatar.h"
 #include "window.h"

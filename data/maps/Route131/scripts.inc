@@ -16,8 +16,7 @@ Route131_EventScript_CheckSetAbnormalWeather::
 	return
 
 Route131_EventScript_Richard::
-	trainerbattle_double TRAINER_RICHARD, Route131_Text_RichardIntro, Route131_Text_RichardDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route131_Text_RichardPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route131_Text_RichardPostBattle, MSGBOX_NPC
 	end
 
 Route131_EventScript_Herman::
@@ -36,22 +35,18 @@ Route131_EventScript_Kara::
 	end
 
 Route131_EventScript_Reli::
-	trainerbattle_double TRAINER_RELI_AND_IAN, Route131_Text_ReliIntro, Route131_Text_ReliDefeat, Route131_Text_ReliNotEnoughMons
-	msgbox Route131_Text_ReliPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route131_Text_ReliPostBattle, MSGBOX_NPC
 	end
 
 Route131_EventScript_Ian::
-	trainerbattle_double TRAINER_RELI_AND_IAN, Route131_Text_IanIntro, Route131_Text_IanDefeat, Route131_Text_IanNotEnoughMons
-	msgbox Route131_Text_IanPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route131_Text_IanPostBattle, MSGBOX_NPC
 	end
 
 Route131_EventScript_Talia::
-	trainerbattle_double TRAINER_TALIA, Route131_Text_TaliaIntro, Route131_Text_TaliaDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route131_Text_TaliaPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route131_Text_TaliaPostBattle, MSGBOX_NPC
 	end
 
 Route131_EventScript_Kevin::
-	trainerbattle_double TRAINER_KEVIN, Route131_Text_KevinIntro, Route131_Text_KevinDefeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox Route131_Text_KevinPostBattle, MSGBOX_AUTOCLOSE
+	msgbox Route131_Text_KevinPostBattle, MSGBOX_NPC
 	end
 

@@ -33,20 +33,16 @@ struct Pokenav_MatchCallGfx
 {
     bool32 (*isTaskActiveCB)(void);
     u32 loopTaskId;
-    u8 filler8[6];
     bool8 skipHangUpSE;
     bool8 newRematchRequest;
     u16 locWindowId;
     u16 infoBoxWindowId;
     u16 msgBoxWindowId;
     s16 pageDelta;
-    u8 unused18;
-    u8 unused19;
     u16 trainerPicPalOffset;
     struct Sprite *optionsCursorSprite;
     struct Sprite *trainerPicSprite;
     u8 bgTilemapBuffer1[BG_SCREEN_SIZE];
-    u8 unusedTilemapBuffer[BG_SCREEN_SIZE];
     u8 bgTilemapBuffer2[BG_SCREEN_SIZE];
     u8 *trainerPicGfxPtr;
     u8 trainerPicGfx[TRAINER_PIC_SIZE];
@@ -282,7 +278,6 @@ bool32 OpenMatchCall(void)
     if (!gfx)
         return FALSE;
 
-    gfx->unused19 = 0;
     gfx->loopTaskId = CreateLoopedTask(LoopedTask_OpenMatchCall, 1);
     gfx->isTaskActiveCB = GetCurrentLoopedTaskActive;
     return TRUE;

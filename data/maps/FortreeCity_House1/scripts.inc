@@ -83,7 +83,7 @@ FortreeCity_House1_EventScript_MegaGift_MILOTICITE::
 	lock
 	faceplayer
 	msgbox FortreeCity_House1_EventScript_MegaGift_MILOTICITE_Text, MSGBOX_DEFAULT
-	giveitem ITEM_MILOTICITE
+	giveuniqueitem ITEM_MILOTICITE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_EC_MEGA_GIFT_MILOTICITE
 	release

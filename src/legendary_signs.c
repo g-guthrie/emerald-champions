@@ -809,7 +809,7 @@ static void AppendLegendaryProgressionRequirements(enum LegendarySignId id)
     }
     if (sign->requiredFlag == FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE && !FlagGet(sign->requiredFlag))
         StringAppend(gStringVar4, COMPOUND_STRING("\pFirst, resolve the weather crisis\nin Sootopolis."));
-    else if (sign->requiredFlag == FLAG_RECEIVED_WATTSON_ELECTIRIZER && !FlagGet(sign->requiredFlag))
+    else if (sign->requiredFlag == FLAG_EC_REPORT_C28_COMPLETE && !FlagGet(sign->requiredFlag))
         StringAppend(gStringVar4, COMPOUND_STRING("\pHelp Wattson stop New Mauville's\ngenerator, then report back to him."));
     else if (sign->requiredFlag == FLAG_HIDE_ROUTE_119_TEAM_AQUA && !FlagGet(sign->requiredFlag))
         StringAppend(gStringVar4, COMPOUND_STRING("\pFirst, rescue the Weather Institute\nresearchers from Team Aqua."));

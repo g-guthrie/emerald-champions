@@ -99,7 +99,6 @@ work/repair-runtime/
 # --- 7.1 cleanup: derived, duplicated and scratch content stays out of git ---
 work/
 release/
-Cohesion Book/baseline/
 tools/mgba-source/
 playtests/*.zip
 *.sav

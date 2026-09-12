@@ -1507,33 +1507,33 @@
 
 #define FLAG_RECEIVED_POKEDEX_FROM_BIRCH            (SYSTEM_FLAGS + 0x84)
 
-#define FLAG_UNUSED_0x8E5                           (SYSTEM_FLAGS + 0x85) // Unused Flag
-#define FLAG_UNUSED_0x8E6                           (SYSTEM_FLAGS + 0x86) // Unused Flag
-#define FLAG_UNUSED_0x8E7                           (SYSTEM_FLAGS + 0x87) // Unused Flag
-#define FLAG_UNUSED_0x8E8                           (SYSTEM_FLAGS + 0x88) // Unused Flag
-#define FLAG_UNUSED_0x8E9                           (SYSTEM_FLAGS + 0x89) // Unused Flag
-#define FLAG_UNUSED_0x8EA                           (SYSTEM_FLAGS + 0x8A) // Unused Flag
-#define FLAG_UNUSED_0x8EB                           (SYSTEM_FLAGS + 0x8B) // Unused Flag
-#define FLAG_UNUSED_0x8EC                           (SYSTEM_FLAGS + 0x8C) // Unused Flag
-#define FLAG_UNUSED_0x8ED                           (SYSTEM_FLAGS + 0x8D) // Unused Flag
-#define FLAG_UNUSED_0x8EE                           (SYSTEM_FLAGS + 0x8E) // Unused Flag
-#define FLAG_UNUSED_0x8EF                           (SYSTEM_FLAGS + 0x8F) // Unused Flag
-#define FLAG_UNUSED_0x8F0                           (SYSTEM_FLAGS + 0x90) // Unused Flag
-#define FLAG_UNUSED_0x8F1                           (SYSTEM_FLAGS + 0x91) // Unused Flag
-#define FLAG_UNUSED_0x8F2                           (SYSTEM_FLAGS + 0x92) // Unused Flag
-#define FLAG_UNUSED_0x8F3                           (SYSTEM_FLAGS + 0x93) // Unused Flag
-#define FLAG_UNUSED_0x8F4                           (SYSTEM_FLAGS + 0x94) // Unused Flag
-#define FLAG_UNUSED_0x8F5                           (SYSTEM_FLAGS + 0x95) // Unused Flag
-#define FLAG_UNUSED_0x8F6                           (SYSTEM_FLAGS + 0x96) // Unused Flag
-#define FLAG_UNUSED_0x8F7                           (SYSTEM_FLAGS + 0x97) // Unused Flag
-#define FLAG_UNUSED_0x8F8                           (SYSTEM_FLAGS + 0x98) // Unused Flag
-#define FLAG_UNUSED_0x8F9                           (SYSTEM_FLAGS + 0x99) // Unused Flag
-#define FLAG_UNUSED_0x8FA                           (SYSTEM_FLAGS + 0x9A) // Unused Flag
-#define FLAG_UNUSED_0x8FB                           (SYSTEM_FLAGS + 0x9B) // Unused Flag
-#define FLAG_UNUSED_0x8FC                           (SYSTEM_FLAGS + 0x9C) // Unused Flag
-#define FLAG_UNUSED_0x8FD                           (SYSTEM_FLAGS + 0x9D) // Unused Flag
-#define FLAG_UNUSED_0x8FE                           (SYSTEM_FLAGS + 0x9E) // Unused Flag
-#define FLAG_UNUSED_0x8FF                           (SYSTEM_FLAGS + 0x9F) // Unused Flag
+#define FLAG_EC_REPORT_C14_COMPLETE                      (SYSTEM_FLAGS + 0x85)
+#define FLAG_EC_REPORT_C26_COMPLETE                      (SYSTEM_FLAGS + 0x86)
+#define FLAG_EC_REPORT_C28_COMPLETE                      (SYSTEM_FLAGS + 0x87)
+#define FLAG_EC_REPORT_C30_COMPLETE                      (SYSTEM_FLAGS + 0x88)
+#define FLAG_EC_REPORT_C36_COMPLETE                      (SYSTEM_FLAGS + 0x89)
+#define FLAG_EC_REPORT_C39_COMPLETE                      (SYSTEM_FLAGS + 0x8A)
+#define FLAG_EC_REPORT_C43_COMPLETE                      (SYSTEM_FLAGS + 0x8B)
+#define FLAG_EC_REPORT_C48_COMPLETE                      (SYSTEM_FLAGS + 0x8C)
+#define FLAG_EC_RESOLVED_MOLTRES                         (SYSTEM_FLAGS + 0x8D)
+#define FLAG_EC_RESOLVED_ROTOM                           (SYSTEM_FLAGS + 0x8E)
+#define FLAG_EC_RESOLVED_HEATRAN                         (SYSTEM_FLAGS + 0x8F)
+#define FLAG_EC_REPORT_C44_COMPLETE                      (SYSTEM_FLAGS + 0x90)
+#define FLAG_EC_MANOR_NOTES_READ                         (SYSTEM_FLAGS + 0x91)
+#define FLAG_EC_MEADOW_SONG_PERFORMED                    (SYSTEM_FLAGS + 0x92)
+#define FLAG_EC_RESOLVED_LANDORUS                        (SYSTEM_FLAGS + 0x93)
+#define FLAG_EC_EARNED_SS_TICKET                         (SYSTEM_FLAGS + 0x94)
+#define FLAG_EC_EARNED_EON_TICKET                        (SYSTEM_FLAGS + 0x95)
+#define FLAG_EC_EARNED_OLD_SEA_MAP                       (SYSTEM_FLAGS + 0x96)
+#define FLAG_EC_EARNED_AURORA_TICKET                     (SYSTEM_FLAGS + 0x97)
+#define FLAG_EC_CAUGHT_ROTOM                             (SYSTEM_FLAGS + 0x98)
+#define FLAG_EC_REPORT_C42_COMPLETE                      (SYSTEM_FLAGS + 0x99)
+#define FLAG_EC_SCANNER_REWARD_SELECTED                  (SYSTEM_FLAGS + 0x9A)
+#define FLAG_EC_SCANNER_REWARD_SCALE                     (SYSTEM_FLAGS + 0x9B)
+#define FLAG_EC_SURVEYED_DESERT_DEPTHS                   (SYSTEM_FLAGS + 0x9C)
+#define FLAG_EC_RECEIVED_REVEAL_GLASS                    (SYSTEM_FLAGS + 0x9D)
+#define FLAG_EC_RESOLVED_MEW                             (SYSTEM_FLAGS + 0x9E)
+#define FLAG_EC_WRECK_CHART_RESEARCH                    (SYSTEM_FLAGS + 0x9F)
 #define FLAG_LANDMARK_SEASPRAY_CAVE                 (SYSTEM_FLAGS + 0xA0) // Emerald Champions: PokeNav landmark for a restored Inclement area
 #define FLAG_LANDMARK_DEWFORD_MEADOW                (SYSTEM_FLAGS + 0xA1) // Emerald Champions: PokeNav landmark for a restored Inclement area
 #define FLAG_LANDMARK_DEWFORD_MANOR                 (SYSTEM_FLAGS + 0xA2) // Emerald Champions: PokeNav landmark for a restored Inclement area
@@ -1543,11 +1543,11 @@
 #define FLAG_LANDMARK_SANDSTREWN_RUINS              (SYSTEM_FLAGS + 0xA6) // Emerald Champions: PokeNav landmark for a restored Inclement area
 #define FLAG_HIDE_ROUTE_111_DYNAMO_GUARD            (SYSTEM_FLAGS + 0xA7) // Emerald Champions: Route 111 north closed until the Dynamo Badge
 #define FLAG_HIDE_SLATEPORT_CITY_KNUCKLE_GUARD      (SYSTEM_FLAGS + 0xA8) // Emerald Champions: Route 110 closed until the Knuckle Badge
-#define FLAG_UNUSED_0x909                           (SYSTEM_FLAGS + 0xA9) // Unused Flag
-#define FLAG_UNUSED_0x90A                           (SYSTEM_FLAGS + 0xAA) // Unused Flag
-#define FLAG_UNUSED_0x90B                           (SYSTEM_FLAGS + 0xAB) // Unused Flag
-#define FLAG_UNUSED_0x90C                           (SYSTEM_FLAGS + 0xAC) // Unused Flag
-#define FLAG_UNUSED_0x90D                           (SYSTEM_FLAGS + 0xAD) // Unused Flag
+#define FLAG_EC_SURVEYED_ORIGIN_CHAMBER                 (SYSTEM_FLAGS + 0xA9)
+#define FLAG_EC_SURVEYED_METEOR_CHAMBER                 (SYSTEM_FLAGS + 0xAA)
+#define FLAG_EC_STEVEN_RESEARCH_CONCLUSION              (SYSTEM_FLAGS + 0xAB)
+#define FLAG_EC_ROUTE114_ROD_GIFT                    (SYSTEM_FLAGS + 0xAC)
+#define FLAG_EC_ROUTE118_ROD_GIFT                    (SYSTEM_FLAGS + 0xAD)
 #define FLAG_UNUSED_0x90E                           (SYSTEM_FLAGS + 0xAE) // Unused Flag
 #define FLAG_UNUSED_0x90F                           (SYSTEM_FLAGS + 0xAF) // Unused Flag
 #define FLAG_UNUSED_0x910                           (SYSTEM_FLAGS + 0xB0) // Unused Flag

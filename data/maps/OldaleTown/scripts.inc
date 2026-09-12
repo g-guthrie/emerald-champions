@@ -36,7 +36,7 @@ OldaleTown_EventScript_Girl::
 OldaleTown_EventScript_MartEmployee::
 	lock
 	faceplayer
-	special TopUpEmeraldChampionsOpeningBalls
+	special RestockEmeraldChampionsBasicBalls
 	goto_if_ne VAR_RESULT, 0, OldaleTown_EventScript_OpeningBallSupplies
 
 OldaleTown_EventScript_MartEmployeeContinue::
@@ -59,8 +59,8 @@ OldaleTown_EventScript_OpeningBallSupplies::
 OldaleTown_Text_OpeningBallSupplies:
 	.string "Your field supplies are topped up!\n"
 	.string "Check your Bag or item PC.\p"
-	.string "Try more partners before your\n"
-	.string "first battle with the PROF.'s kid.$"
+	.string "POKéMON CENTERS can replenish\n"
+	.string "basic BALLS throughout your journey.$"
 
 OldaleTown_EventScript_GoToMartSouth::
 	applymovement LOCALID_OLDALE_MART_EMPLOYEE, OldaleTown_Movement_EmployeeSouth
