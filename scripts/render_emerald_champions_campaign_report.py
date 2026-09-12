@@ -122,6 +122,7 @@ figcaption {{ margin-top:5px; color:#a9c5b0; font-size:.78rem; overflow-wrap:any
 <body><main>
 <h1>Emerald Champions campaign review</h1>
 <p class="summary">{escape(summary)}. Run {escape(str(run.get("run_id", "legacy")))}.
+Battle mode: {escape(str(run.get("battle_mode", "autowin")))}.
 ROM {escape(str(run.get("rom_sha256", "unknown")))}.
 Manifest {escape(str(run.get("manifest_sha256", "unknown")))}.
 Immutable snapshots verified: {escape(str(immutable))}</p>

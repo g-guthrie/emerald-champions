@@ -179,6 +179,14 @@ class ProductionPolicyTests(unittest.TestCase):
         self.assertEqual(result["evidence"]["mode"], "actual-production-C-host-execution")
         self.assertRegex(result["evidence"]["classifier_sha256"], r"^[0-9a-f]{64}$")
 
+    def test_native_campaign_never_forces_any_battle_outcome(self):
+        values = policy.flag_values()
+        cases = [(sum(values[flag] for flag in names), count)
+                 for _, names, count, _, _ in policy.CASES]
+        # Even a leftover forced-loss request cannot override native combat.
+        decisions, _ = policy.classify_cases(cases, native=True, force_loss=True)
+        self.assertEqual(decisions, [policy.NATIVE] * len(cases))
+
     def test_return_value_mutation_fails_even_when_every_old_token_remains(self):
         original = Path.read_text
         source_path = ROOT / "src/emerald_champions_headless.c"

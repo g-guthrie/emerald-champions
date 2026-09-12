@@ -65,11 +65,11 @@ def c_block(source: str, signature: str) -> str:
     return source[start:end] + (";" if source[end:end + 1] == ";" else "") + "\n"
 
 
-def classify_cases(cases: list[tuple[int, int]]) -> tuple[list[str], str]:
+def classify_cases(cases: list[tuple[int, int]], *, native: bool = False, force_loss: bool = False) -> tuple[list[str], str]:
     """Execute the production C decision function with explicit host inputs.
 
-    Only party-count retrieval and the two input globals are supplied by the
-    host fixture. This proves the classifier's decisions, not battle callbacks
+    Party-count retrieval and explicit scenario/battle inputs are supplied by
+    the host fixture. This proves the classifier's decisions, not battle callbacks
     or traversal. A compiler failure is a failed audit, never a Python fallback.
     """
     compiler = shutil.which("cc")
@@ -89,6 +89,10 @@ def classify_cases(cases: list[tuple[int, int]]) -> tuple[list[str], str]:
 static uint32_t gBattleTypeFlags;
 static enum EmeraldChampionsHeadlessScenario gEcHeadlessFixtureActiveScenario;
 static unsigned partyCount;
+static unsigned gEcHeadlessCampaignForceLoss;
+static unsigned gEcHeadlessFixtureParam;
+static unsigned gEcHeadlessCampaignCaptureSerial;
+static unsigned gEcHeadlessCampaignBattleSerial;
 static unsigned CalculatePlayerPartyCount(void) { return partyCount; }
 ''' + function + '''
 int main(void) {
@@ -109,6 +113,10 @@ int main(void) {
     return 0;
 }
 '''
+    if native:
+        program = program.replace("= EC_HEADLESS_SCENARIO_CAMPAIGN_AUTOWIN;", "= EC_HEADLESS_SCENARIO_CAMPAIGN_NATIVE;")
+    if force_loss:
+        program = program.replace("int main(void) {", "int main(void) { gEcHeadlessCampaignForceLoss = 1;")
     with tempfile.TemporaryDirectory(prefix="ec-campaign-policy-") as directory:
         path = Path(directory)
         fixture = path / "policy.c"

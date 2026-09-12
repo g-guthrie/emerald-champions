@@ -132,6 +132,7 @@ extern void CallBattleDomeFunction(void);
 bool32 EmeraldChampionsHeadlessBattleAutomationActive(void)
 {
     return gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CAMPAIGN_AUTOWIN
+        || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CAMPAIGN_NATIVE
         || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CAPTURE_TO_PARTY
         || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CAPTURE_TO_PC
         || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CAPTURE_QUEST_DIANCIE
@@ -158,6 +159,9 @@ bool32 EmeraldChampionsHeadlessAutoCaptureActive(void)
 
 enum EmeraldChampionsHeadlessBattleResolution EmeraldChampionsHeadlessGetBattleResolution(void)
 {
+    // Campaign observation must not choose actions or force battle outcomes.
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CAMPAIGN_NATIVE)
+        return EC_HEADLESS_BATTLE_NATIVE;
     if (gBattleTypeFlags & (BATTLE_TYPE_LINK
                           | BATTLE_TYPE_RECORDED
                           | BATTLE_TYPE_RECORDED_LINK
@@ -1388,7 +1392,9 @@ void EmeraldChampionsHeadlessObserve(void)
 #define EC_CENTER_CHECK(bit, condition) if (condition) checks |= 1u << (bit)
             EC_CENTER_CHECK(0, gEcHeadlessCampaignBattleSerial == 0);
             EC_CENTER_CHECK(1, gEcHeadlessCampaignCaptureSerial == 0);
-            EC_CENTER_CHECK(2, FlagGet(FLAG_SYS_POKEDEX_GET));
+            EC_CENTER_CHECK(2, !FlagGet(FLAG_SYS_POKEDEX_GET)
+                           && !FlagGet(FLAG_RECEIVED_POKEDEX_FROM_BIRCH)
+                           && !FlagGet(FLAG_ADVENTURE_STARTED));
             EC_CENTER_CHECK(3, FlagGet(FLAG_SYS_POKEMON_GET));
             EC_CENTER_CHECK(4, !FlagGet(FLAG_BADGE01_GET));
             EC_CENTER_CHECK(5, CheckBagHasItem(ITEM_POKE_VIAL, 1));
@@ -1841,7 +1847,8 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
     sEcHeadlessObservedDelay = 0;
     sEcHeadlessFurfrouMenuOpened = FALSE;
 
-    if (scenario == EC_HEADLESS_SCENARIO_CAMPAIGN_AUTOWIN)
+    if (scenario == EC_HEADLESS_SCENARIO_CAMPAIGN_AUTOWIN
+     || scenario == EC_HEADLESS_SCENARIO_CAMPAIGN_NATIVE)
     {
         gEcHeadlessCampaignBattleSerial = 0;
         gEcHeadlessCampaignLastBattleType = 0;
@@ -1961,7 +1968,10 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
 
         gEcHeadlessCampaignBattleSerial = 0;
         gEcHeadlessCampaignCaptureSerial = 0;
-        FlagSet(FLAG_SYS_POKEDEX_GET);
+        FlagClear(FLAG_SYS_POKEDEX_GET);
+        FlagClear(FLAG_SYS_NATIONAL_DEX);
+        FlagClear(FLAG_RECEIVED_POKEDEX_FROM_BIRCH);
+        FlagClear(FLAG_ADVENTURE_STARTED);
         FlagSet(FLAG_SYS_POKEMON_GET);
         CreateHealthyHeadlessMon(
             &gParties[B_TRAINER_PLAYER][0], SPECIES_TREECKO, 10,

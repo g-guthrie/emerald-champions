@@ -8111,7 +8111,8 @@ static void Cmd_givecaughtmon(void)
     {
     case GIVECAUGHTMON_CHECK_PARTY_SIZE:
 #if EC_HEADLESS_FIXTURES
-        if (EmeraldChampionsHeadlessAutoCaptureActive())
+        if (EmeraldChampionsHeadlessAutoCaptureActive()
+         || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CAMPAIGN_NATIVE)
         {
             // A full party goes straight through GiveCapturedMonToPlayer's
             // native PC fallback instead of opening the optional swap menu.

@@ -116,9 +116,6 @@ LittlerootTown_ProfessorBirchsLab_EventScript_OfferOpeningNickname::
 
 LittlerootTown_ProfessorBirchsLab_EventScript_OpeningSupplies::
 	setvar VAR_BIRCH_LAB_STATE, 3
-	goto_if_set FLAG_RECEIVED_POKEDEX_FROM_BIRCH, LittlerootTown_ProfessorBirchsLab_EventScript_OpeningBalls
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_OpeningDex, MSGBOX_DEFAULT
-	call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex
 
 LittlerootTown_ProfessorBirchsLab_EventScript_OpeningBalls::
 	special GiveEmeraldChampionsOpeningBalls
@@ -388,6 +385,7 @@ EventScript_RegisterProfBirch::
 
 LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex::
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_OpeningDebrief, MSGBOX_DEFAULT
+	call_if_unset FLAG_RECEIVED_POKEDEX_FROM_BIRCH, LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex
 	giveitem ITEM_GREAT_BALL, 10
 	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_OpeningSendoff
 	addpcitem ITEM_GREAT_BALL, 10
@@ -413,6 +411,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_DebriefBagFull::
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_OpeningDex, MSGBOX_DEFAULT
 	playfanfare MUS_OBTAIN_ITEM
 	message LittlerootTown_ProfessorBirchsLab_Text_ReceivedPokedex
 	waitfanfare
@@ -851,10 +850,7 @@ LittlerootTown_ProfessorBirchsLab_Text_OpeningDebrief:
 	.string "against another TRAINER!\p"
 	.string "There's nothing like getting out\n"
 	.string "in the field with your partners.\l"
-	.string "Even I learn something every day!\p"
-	.string "Here, take these 10 GREAT BALLS.\n"
-	.string "They catch POKéMON more easily\l"
-	.string "than ordinary POKé BALLS.$"
+	.string "Even I learn something every day!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_OpeningSendoff:
 	.string "Head west from OLDALE along\n"

@@ -23,11 +23,21 @@ collision validity alone does not establish good choreography or presentation.
   chains, final integration and publication. Coordinate shared files and flags
   before edits; keep builds and artifacts inside each owner's checkout.
   The main agent alone edits the canonical book; send proposed clarifications.
+- The main implementation/verification path is a fresh save in the book's
+  actual play order: C01, first-arrival Oldale C03, rival/send-off C02, then
+  onward. Implement and verify each chapter's interactions, native battles and
+  handoff before claiming campaign progress beyond it. Parallel later-area
+  preparation does not constitute verified campaign traversal.
 - Make the smallest coherent change. Prefer deletion and reuse over new layers.
 - Preserve gameplay while refactoring; fix demonstrated defects. Discuss new
   progression, economy, difficulty, availability or overworld design unless the
   user has already authorized it. Do not add signs, actors or map tooling as a
   substitute for understanding the existing art and choreography.
+- Overworld placement provenance means original Emerald/Inclement authorship,
+  not merely presence in our current checkout. Prefer repurposing obsolete
+  original pickups, checking composition and context as well as collision.
+  Later-added sparkles/actors require review; the Diancie (7,9) stone placement
+  is explicitly rejected. Do not invent new coordinates to replace it.
 - Source defines the game. Historical audits, prose snapshots and old test
   expectations must not restore superseded behavior.
 - Keep one owner for each rule. Edit authored inputs and regenerate their actual

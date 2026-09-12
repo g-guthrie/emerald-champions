@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "description": "Draft input-driven traversal of the canonical Inclement Emerald v1.13 story. It is not complete or canonical evidence until every required segment and branch passes. Direct warps and story flag writes are forbidden in the main chain.",
+  "description": "Book v4 input-driven campaign recipes, rebuilt and verified from a fresh save in story order. Later recipes remain unvalidated until reached. Use --battle-mode native for primary campaign evidence; default autowin is separate script traversal. Direct warps and story flag writes are forbidden in the main chain.",
   "battle_policy": {
     "trainer": "normal victory cleanup through BattleDebug_WonBattle",
     "ordinary_wild": "defeat",
@@ -22,10 +22,12 @@
       "id": "main-00-title-loop",
       "parent": "main-00-boot-opening",
       "chapter": "New Game",
-      "frames": 1200,
-      "actions": [],
+      "frames": 700,
+      "actions": [
+        {"at": 0, "duration": 1, "keys": ["START"]}
+      ],
       "screenshots": [
-        {"at": 1199, "name": "title-demo"}
+        {"at": 699, "name": "title"}
       ],
       "expected": {"battle_serial_min": 0}
     },
@@ -33,13 +35,12 @@
       "id": "main-00-title-ready",
       "parent": "main-00-title-loop",
       "chapter": "New Game",
-      "frames": 700,
+      "frames": 240,
       "actions": [
-        {"at": 60, "duration": 2, "keys": ["START"]},
-        {"at": 300, "duration": 2, "keys": ["START"]}
+        {"at": 0, "duration": 1, "keys": ["START"]}
       ],
       "screenshots": [
-        {"at": 699, "name": "select-new-game"}
+        {"at": 239, "name": "new-game-menu"}
       ],
       "expected": {"battle_serial_min": 0}
     },
@@ -47,18 +48,79 @@
       "id": "main-01-new-game-truck",
       "parent": "main-00-title-ready",
       "chapter": "New Game",
-      "frames": 500,
+      "frames": 6130,
       "actions": [
-        {"at": 30, "duration": 2, "keys": ["SELECT"]}
+        {"at": 0, "duration": 1, "keys": ["A"]},
+        {"at": 560, "duration": 1, "keys": ["A"]},
+        {"at": 920, "duration": 1, "keys": ["A"]},
+        {"at": 1020, "duration": 1, "keys": ["A"]},
+        {"at": 1120, "duration": 1, "keys": ["A"]},
+        {"at": 1220, "duration": 1, "keys": ["A"]},
+        {"at": 1320, "duration": 1, "keys": ["A"]},
+        {"at": 1420, "duration": 1, "keys": ["A"]},
+        {"at": 1560, "duration": 1, "keys": ["A"]},
+        {"at": 1660, "duration": 1, "keys": ["A"]},
+        {"at": 1760, "duration": 1, "keys": ["A"]},
+        {"at": 1860, "duration": 1, "keys": ["A"]},
+        {"at": 1960, "duration": 1, "keys": ["A"]},
+        {"at": 2110, "duration": 40, "keys": ["A"]},
+        {"at": 2210, "duration": 40, "keys": ["A"]},
+        {"at": 2310, "duration": 40, "keys": ["A"]},
+        {"at": 2410, "duration": 40, "keys": ["A"]},
+        {"at": 2510, "duration": 40, "keys": ["A"]},
+        {"at": 2610, "duration": 40, "keys": ["A"]},
+        {"at": 2710, "duration": 40, "keys": ["A"]},
+        {"at": 2860, "duration": 1, "keys": ["A"]},
+        {"at": 3080, "duration": 1, "keys": ["DOWN"]},
+        {"at": 3095, "duration": 1, "keys": ["A"]},
+        {"at": 3110, "duration": 1, "keys": ["DOWN"]},
+        {"at": 3125, "duration": 1, "keys": ["RIGHT"]},
+        {"at": 3140, "duration": 1, "keys": ["RIGHT"]},
+        {"at": 3155, "duration": 1, "keys": ["RIGHT"]},
+        {"at": 3170, "duration": 1, "keys": ["RIGHT"]},
+        {"at": 3185, "duration": 1, "keys": ["RIGHT"]},
+        {"at": 3200, "duration": 1, "keys": ["A"]},
+        {"at": 3215, "duration": 1, "keys": ["UP"]},
+        {"at": 3230, "duration": 1, "keys": ["UP"]},
+        {"at": 3245, "duration": 1, "keys": ["LEFT"]},
+        {"at": 3260, "duration": 1, "keys": ["A"]},
+        {"at": 3275, "duration": 1, "keys": ["A"]},
+        {"at": 3290, "duration": 1, "keys": ["RIGHT"]},
+        {"at": 3305, "duration": 1, "keys": ["DOWN"]},
+        {"at": 3320, "duration": 1, "keys": ["DOWN"]},
+        {"at": 3335, "duration": 1, "keys": ["A"]},
+        {"at": 3360, "duration": 1, "keys": ["START"]},
+        {"at": 3390, "duration": 1, "keys": ["A"]},
+        {"at": 3530, "duration": 1, "keys": ["A"]},
+        {"at": 3730, "duration": 35, "keys": ["A"]},
+        {"at": 3880, "duration": 35, "keys": ["A"]},
+        {"at": 4030, "duration": 35, "keys": ["A"]},
+        {"at": 4830, "duration": 35, "keys": ["A"]},
+        {"at": 4980, "duration": 35, "keys": ["A"]},
+        {"at": 5130, "duration": 35, "keys": ["A"]},
+        {"at": 5280, "duration": 35, "keys": ["A"]},
+        {"at": 5430, "duration": 35, "keys": ["A"]},
+        {"at": 5580, "duration": 35, "keys": ["A"]}
       ],
       "screenshots": [
-        {"at": 499, "name": "inside-moving-truck"}
+        {"at": 180, "name": "001-001-newgame-intro", "transient": true},
+        {"at": 470, "name": "002-002-birch-welcome-welcome", "transient": true},
+        {"at": 770, "name": "002-002-birch-welcome-introduction", "transient": true},
+        {"at": 1110, "name": "003-003-birch-introduction-intro", "transient": true},
+        {"at": 1310, "name": "003-003-birch-introduction-world", "transient": true},
+        {"at": 1510, "name": "003-003-birch-introduction-question", "transient": true},
+        {"at": 1750, "name": "004-004-identity-professor", "transient": true},
+        {"at": 1950, "name": "004-004-identity-identity", "transient": true},
+        {"at": 2400, "name": "005-005-intro-services-services", "transient": true},
+        {"at": 2600, "name": "005-005-intro-services-gender", "transient": true},
+        {"at": 2980, "name": "006-006-name-name-options", "transient": true},
+        {"at": 3349, "name": "007-007-name-greer-entered", "transient": true},
+        {"at": 4230, "name": "008-008-enter-world-departure", "transient": true},
+        {"at": 4630, "name": "008-008-enter-world-arrival", "transient": true},
+        {"at": 5830, "name": "009-009-moving-truck-truck", "transient": true},
+        {"at": 6129, "name": "inside-moving-truck"}
       ],
-      "expected": {
-        "map": "MAP_INSIDE_OF_TRUCK",
-        "position": [2, 2],
-        "battle_serial_min": 0
-      }
+      "expected": {"map": "MAP_INSIDE_OF_TRUCK", "position": [2, 2], "battle_serial_min": 0, "stable_overworld": true}
     },
     {
       "id": "main-01-truck-exit-mom",
@@ -69,13 +131,11 @@
         {"at": 1100, "duration": 180, "keys": ["RIGHT"]}
       ],
       "screenshots": [
-        {"at": 700, "name": "truck-door-ready"},
-        {"at": 1699, "name": "mom-arrival-dialogue"}
+        {"at": 700, "name": "010-010-exit-truck-truck-door"},
+        {"at": 1600, "name": "010-010-exit-truck-mom"},
+        {"at": 1699, "name": "main-01-truck-exit-mom"}
       ],
-      "expected": {
-        "map": "MAP_LITTLEROOT_TOWN",
-        "battle_serial_min": 0
-      }
+      "expected": {"map": "MAP_LITTLEROOT_TOWN", "position": [4, 10], "battle_serial_min": 0}
     },
     {
       "id": "main-01-house-upstairs",
@@ -83,298 +143,266 @@
       "chapter": "Moving In",
       "frames": 3300,
       "actions": [
-        {"at": 30, "duration": 2, "keys": ["A"]},
-        {"at": 150, "duration": 2, "keys": ["A"]},
-        {"at": 270, "duration": 2, "keys": ["A"]},
-        {"at": 390, "duration": 2, "keys": ["A"]},
-        {"at": 510, "duration": 2, "keys": ["A"]},
-        {"at": 630, "duration": 2, "keys": ["A"]},
-        {"at": 750, "duration": 2, "keys": ["A"]},
-        {"at": 870, "duration": 2, "keys": ["A"]},
-        {"at": 990, "duration": 2, "keys": ["A"]},
-        {"at": 1110, "duration": 2, "keys": ["A"]},
-        {"at": 1230, "duration": 2, "keys": ["A"]},
-        {"at": 1350, "duration": 2, "keys": ["A"]},
-        {"at": 1470, "duration": 2, "keys": ["A"]},
-        {"at": 1590, "duration": 2, "keys": ["A"]},
-        {"at": 1710, "duration": 2, "keys": ["A"]},
-        {"at": 1830, "duration": 2, "keys": ["B"]},
-        {"at": 1920, "duration": 220, "keys": ["UP"]},
-        {"at": 2530, "duration": 2, "keys": ["A"]},
-        {"at": 2630, "duration": 2, "keys": ["A"]},
-        {"at": 2730, "duration": 2, "keys": ["A"]},
-        {"at": 2830, "duration": 2, "keys": ["A"]},
-        {"at": 2930, "duration": 2, "keys": ["A"]},
-        {"at": 3030, "duration": 2, "keys": ["A"]},
-        {"at": 3130, "duration": 2, "keys": ["A"]}
+        {"at": 0, "duration": 30, "keys": ["A"]},
+        {"at": 150, "duration": 30, "keys": ["A"]},
+        {"at": 300, "duration": 30, "keys": ["A"]},
+        {"at": 450, "duration": 30, "keys": ["A"]},
+        {"at": 600, "duration": 30, "keys": ["A"]},
+        {"at": 750, "duration": 30, "keys": ["A"]},
+        {"at": 900, "duration": 30, "keys": ["A"]},
+        {"at": 1100, "duration": 30, "keys": ["A"]},
+        {"at": 1250, "duration": 30, "keys": ["A"]},
+        {"at": 1400, "duration": 30, "keys": ["A"]},
+        {"at": 1550, "duration": 30, "keys": ["A"]},
+        {"at": 1700, "duration": 30, "keys": ["A"]},
+        {"at": 1850, "duration": 30, "keys": ["A"]},
+        {"at": 1950, "duration": 170, "keys": ["UP"]},
+        {"at": 2400, "duration": 30, "keys": ["A"]},
+        {"at": 2550, "duration": 30, "keys": ["A"]},
+        {"at": 2700, "duration": 30, "keys": ["A"]},
+        {"at": 2850, "duration": 30, "keys": ["A"]},
+        {"at": 3000, "duration": 30, "keys": ["A"]},
+        {"at": 3150, "duration": 30, "keys": ["A"]}
       ],
       "screenshots": [
-        {"at": 900, "name": "inside-house-movers"},
-        {"at": 2200, "name": "mom-directs-upstairs"},
-        {"at": 3299, "name": "upstairs-before-clock"}
+        {"at": 550, "name": "011-011-mom-home-home"},
+        {"at": 1000, "name": "011-011-mom-home-directions"},
+        {"at": 1540, "name": "012-012-mom-directions-room"},
+        {"at": 1940, "name": "012-012-mom-directions-upstairs-direction"},
+        {"at": 2180, "name": "013-013-bedroom-stairs"},
+        {"at": 2840, "name": "014-014-upstairs-prompt-clock-direction"},
+        {"at": 3299, "name": "main-01-house-upstairs"}
       ],
-      "expected": {
-        "map": "MAP_LITTLEROOT_TOWN_MAYS_HOUSE_2F",
-        "position": [1, 2],
-        "battle_serial_min": 0,
-        "stable_overworld": true
-      }
+      "expected": {"map": "MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F", "position": [7, 2], "battle_serial_min": 0, "stable_overworld": true}
     },
     {
       "id": "main-01-clock-open",
       "parent": "main-01-house-upstairs",
       "chapter": "Moving In",
-      "frames": 3100,
+      "frames": 550,
       "actions": [
-        {"at": 300, "duration": 28, "keys": ["RIGHT"]},
-        {"at": 730, "duration": 2, "keys": ["UP"]},
-        {"at": 790, "duration": 2, "keys": ["A"]},
-        {"at": 1000, "duration": 2, "keys": ["A"]},
-        {"at": 2230, "duration": 2, "keys": ["A"]}
+        {"at": 0, "duration": 32, "keys": ["LEFT"]},
+        {"at": 50, "duration": 1, "keys": ["UP"]},
+        {"at": 70, "duration": 1, "keys": ["A"]},
+        {"at": 200, "duration": 30, "keys": ["A"]},
+        {"at": 350, "duration": 30, "keys": ["A"]}
       ],
       "screenshots": [
-        {"at": 900, "name": "clock-stopped-dialogue"},
-        {"at": 3099, "name": "clock-ui-ready"}
+        {"at": 170, "name": "015-015-clock-clock-text"},
+        {"at": 500, "name": "015-015-clock-clock-ui"},
+        {"at": 549, "name": "main-01-clock-open"}
       ],
-      "expected": {
-        "map": "MAP_LITTLEROOT_TOWN_MAYS_HOUSE_2F",
-        "position": [3, 2],
-        "battle_serial_min": 0
-      }
+      "expected": {"map": "MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F", "position": [5, 2], "battle_serial_min": 0}
     },
     {
       "id": "main-01-clock-confirm",
       "parent": "main-01-clock-open",
       "chapter": "Moving In",
-      "frames": 1200,
+      "frames": 1000,
       "actions": [
-        {"at": 30, "duration": 2, "keys": ["A"]},
-        {"at": 200, "duration": 2, "keys": ["UP"]},
-        {"at": 350, "duration": 2, "keys": ["A"]}
+        {"at": 0, "duration": 1, "keys": ["A"]},
+        {"at": 180, "duration": 1, "keys": ["A"]},
+        {"at": 500, "duration": 1, "keys": ["A"]},
+        {"at": 590, "duration": 1, "keys": ["UP"]},
+        {"at": 620, "duration": 1, "keys": ["A"]}
       ],
       "screenshots": [
-        {"at": 260, "name": "clock-confirm-yes"},
-        {"at": 1199, "name": "mom-enters-room"}
+        {"at": 130, "name": "016-016-clock-confirm-confirm"},
+        {"at": 450, "name": "016-016-clock-confirm-mom-return"},
+        {"at": 610, "name": "017-017-clock-yes-yes"},
+        {"at": 950, "name": "017-017-clock-yes-room"},
+        {"at": 999, "name": "main-01-clock-confirm"}
       ],
       "interactive_mode": "scripted_tutorial",
       "battle_automation": "native",
-      "coverage": {
-        "interactive_flows": ["tutorial.new_game_clock"]
-      },
-      "expected": {
-        "map": "MAP_LITTLEROOT_TOWN_MAYS_HOUSE_2F",
-        "position": [3, 2],
-        "battle_serial_min": 0
-      }
+      "coverage": {"interactive_flows": ["tutorial.new_game_clock"]},
+      "expected": {"map": "MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F", "position": [5, 2], "battle_serial_min": 0}
     },
     {
       "id": "main-01-room-dialogue-complete",
       "parent": "main-01-clock-confirm",
       "chapter": "Moving In",
-      "frames": 2300,
+      "frames": 1200,
       "actions": [
-        {"at": 30, "duration": 2, "keys": ["A"]},
-        {"at": 430, "duration": 2, "keys": ["A"]},
-        {"at": 830, "duration": 2, "keys": ["A"]},
-        {"at": 1230, "duration": 2, "keys": ["A"]},
-        {"at": 1830, "duration": 2, "keys": ["A"]}
+        {"at": 0, "duration": 30, "keys": ["A"]},
+        {"at": 150, "duration": 30, "keys": ["A"]},
+        {"at": 300, "duration": 30, "keys": ["A"]},
+        {"at": 450, "duration": 30, "keys": ["A"]},
+        {"at": 600, "duration": 30, "keys": ["A"]},
+        {"at": 750, "duration": 30, "keys": ["A"]},
+        {"at": 900, "duration": 30, "keys": ["A"]},
+        {"at": 1050, "duration": 30, "keys": ["A"]}
       ],
       "screenshots": [
-        {"at": 1000, "name": "mom-room-dialogue"},
-        {"at": 2299, "name": "room-controls-restored"}
+        {"at": 590, "name": "018-018-room-complete-advice"},
+        {"at": 1100, "name": "018-018-room-complete-free-control"},
+        {"at": 1199, "name": "main-01-room-dialogue-complete"}
       ],
-      "expected": {
-        "map": "MAP_LITTLEROOT_TOWN_MAYS_HOUSE_2F",
-        "position": [3, 2],
-        "battle_serial_min": 0,
-        "stable_overworld": true
-      }
+      "expected": {"map": "MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F", "position": [5, 2], "battle_serial_min": 0, "stable_overworld": true}
     },
     {
       "id": "main-01-tv-complete",
       "parent": "main-01-room-dialogue-complete",
       "chapter": "Moving In",
-      "frames": 5200,
+      "frames": 2200,
       "actions": [
-        {"at": 300, "duration": 28, "keys": ["LEFT"]},
-        {"at": 700, "duration": 20, "keys": ["UP"]},
-        {"at": 1230, "duration": 2, "keys": ["A"]},
-        {"at": 1730, "duration": 2, "keys": ["A"]},
-        {"at": 2230, "duration": 2, "keys": ["A"]},
-        {"at": 2730, "duration": 2, "keys": ["A"]},
-        {"at": 3230, "duration": 2, "keys": ["A"]},
-        {"at": 3730, "duration": 2, "keys": ["A"]},
-        {"at": 4230, "duration": 2, "keys": ["A"]},
-        {"at": 4730, "duration": 2, "keys": ["A"]}
+        {"at": 0, "duration": 32, "keys": ["RIGHT"]},
+        {"at": 50, "duration": 18, "keys": ["UP"]},
+        {"at": 700, "duration": 30, "keys": ["A"]},
+        {"at": 850, "duration": 30, "keys": ["A"]},
+        {"at": 1000, "duration": 30, "keys": ["A"]},
+        {"at": 1150, "duration": 30, "keys": ["A"]},
+        {"at": 1300, "duration": 30, "keys": ["A"]},
+        {"at": 1450, "duration": 30, "keys": ["A"]},
+        {"at": 1600, "duration": 30, "keys": ["A"]},
+        {"at": 1700, "duration": 30, "keys": ["A"]},
+        {"at": 1850, "duration": 30, "keys": ["A"]},
+        {"at": 2000, "duration": 30, "keys": ["A"]}
       ],
       "screenshots": [
-        {"at": 1000, "name": "mom-calls-from-downstairs"},
-        {"at": 2500, "name": "norman-television-report"},
-        {"at": 5199, "name": "television-scene-complete"}
+        {"at": 500, "name": "019-019-downstairs-broadcast-tv-intro"},
+        {"at": 1140, "name": "020-020-tv-broadcast"},
+        {"at": 1690, "name": "020-020-tv-next-direction"},
+        {"at": 2150, "name": "021-021-tv-done-free-control"},
+        {"at": 2199, "name": "main-01-tv-complete"}
       ],
-      "expected": {
-        "map": "MAP_LITTLEROOT_TOWN_MAYS_HOUSE_1F",
-        "position": [6, 5],
-        "battle_serial_min": 0,
-        "stable_overworld": true
-      }
+      "expected": {"map": "MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F", "position": [4, 5], "battle_serial_min": 0, "stable_overworld": true}
     },
     {
       "id": "main-02-own-house-exit",
       "parent": "main-01-tv-complete",
       "chapter": "Rival Introduction",
-      "frames": 1000,
+      "frames": 1220,
       "actions": [
-        {"at": 30, "duration": 60, "keys": ["RIGHT"]},
-        {"at": 150, "duration": 100, "keys": ["DOWN"]},
-        {"at": 320, "duration": 140, "keys": ["LEFT"]},
-        {"at": 540, "duration": 80, "keys": ["DOWN"]}
+        {"at": 0, "duration": 1, "keys": ["START"]},
+        {"at": 140, "duration": 1, "keys": ["DOWN"]},
+        {"at": 155, "duration": 1, "keys": ["DOWN"]},
+        {"at": 170, "duration": 1, "keys": ["DOWN"]},
+        {"at": 185, "duration": 1, "keys": ["A"]},
+        {"at": 320, "duration": 1, "keys": ["B"]},
+        {"at": 450, "duration": 1, "keys": ["B"]},
+        {"at": 520, "duration": 64, "keys": ["RIGHT"]},
+        {"at": 610, "duration": 64, "keys": ["DOWN"]}
       ],
       "screenshots": [
-        {"at": 999, "name": "outside-player-house"}
+        {"at": 1070, "name": "024-024-exit-home-outside"},
+        {"at": 1219, "name": "main-02-own-house-exit"}
       ],
-      "expected": {
-        "map": "MAP_LITTLEROOT_TOWN",
-        "position": [14, 9],
-        "battle_serial_min": 0,
-        "stable_overworld": true
-      }
+      "expected": {"map": "MAP_LITTLEROOT_TOWN", "position": [5, 9], "battle_serial_min": 0, "stable_overworld": true}
     },
     {
       "id": "main-02-rival-house-entry",
       "parent": "main-02-own-house-exit",
       "chapter": "Rival Introduction",
-      "frames": 1600,
+      "frames": 600,
       "actions": [
-        {"at": 100, "duration": 140, "keys": ["LEFT"]},
-        {"at": 650, "duration": 20, "keys": ["UP"]}
+        {"at": 0, "duration": 144, "keys": ["RIGHT"]},
+        {"at": 180, "duration": 18, "keys": ["UP"]}
       ],
       "screenshots": [
-        {"at": 500, "name": "outside-rival-house"},
-        {"at": 1599, "name": "rival-parent-greeting"}
+        {"at": 550, "name": "025-025-rival-home-introduction"},
+        {"at": 599, "name": "main-02-rival-house-entry"}
       ],
-      "expected": {
-        "map": "MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F",
-        "position": [8, 8],
-        "battle_serial_min": 0
-      }
+      "expected": {"map": "MAP_LITTLEROOT_TOWN_MAYS_HOUSE_1F", "position": [2, 8], "battle_serial_min": 0}
     },
     {
       "id": "main-02-rival-parent-complete",
       "parent": "main-02-rival-house-entry",
       "chapter": "Rival Introduction",
-      "frames": 3000,
+      "frames": 900,
       "actions": [
-        {"at": 30, "duration": 2, "keys": ["A"]},
-        {"at": 530, "duration": 2, "keys": ["A"]},
-        {"at": 1030, "duration": 2, "keys": ["A"]},
-        {"at": 1530, "duration": 2, "keys": ["A"]},
-        {"at": 2030, "duration": 2, "keys": ["A"]},
-        {"at": 2530, "duration": 2, "keys": ["A"]}
+        {"at": 0, "duration": 30, "keys": ["A"]},
+        {"at": 150, "duration": 30, "keys": ["A"]},
+        {"at": 300, "duration": 30, "keys": ["A"]},
+        {"at": 450, "duration": 30, "keys": ["A"]},
+        {"at": 600, "duration": 30, "keys": ["A"]},
+        {"at": 750, "duration": 30, "keys": ["A"]}
       ],
       "screenshots": [
-        {"at": 1000, "name": "rival-parent-dialogue"},
-        {"at": 2999, "name": "rival-parent-complete"}
+        {"at": 899, "name": "main-02-rival-parent-complete"}
       ],
-      "expected": {
-        "map": "MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F",
-        "position": [8, 8],
-        "battle_serial_min": 0,
-        "stable_overworld": true
-      }
+      "expected": {"map": "MAP_LITTLEROOT_TOWN_MAYS_HOUSE_1F", "position": [2, 8], "battle_serial_min": 0, "stable_overworld": true}
     },
     {
       "id": "main-02-rival-ball-position",
       "parent": "main-02-rival-parent-complete",
       "chapter": "Rival Introduction",
-      "frames": 1600,
+      "frames": 470,
       "actions": [
-        {"at": 200, "duration": 100, "keys": ["UP"]},
-        {"at": 1100, "duration": 60, "keys": ["LEFT"]},
-        {"at": 1380, "duration": 20, "keys": ["DOWN"]}
+        {"at": 0, "duration": 112, "keys": ["UP"]},
+        {"at": 350, "duration": 32, "keys": ["DOWN"]},
+        {"at": 400, "duration": 48, "keys": ["RIGHT"]}
       ],
       "screenshots": [
-        {"at": 900, "name": "rival-bedroom-entry"},
-        {"at": 1599, "name": "rival-pokeball-position"}
+        {"at": 290, "name": "032-032-rival-upstairs-room"},
+        {"at": 469, "name": "main-02-rival-ball-position"}
       ],
-      "expected": {
-        "map": "MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F",
-        "position": [3, 3],
-        "battle_serial_min": 0,
-        "stable_overworld": true
-      }
+      "expected": {"map": "MAP_LITTLEROOT_TOWN_MAYS_HOUSE_2F", "position": [4, 4], "battle_serial_min": 0, "stable_overworld": true}
     },
     {
       "id": "main-02-region-menu",
       "parent": "main-02-rival-ball-position",
       "chapter": "Rival Introduction",
-      "frames": 3300,
+      "frames": 1990,
       "actions": [
-        {"at": 30, "duration": 2, "keys": ["A"]},
-        {"at": 530, "duration": 2, "keys": ["A"]},
-        {"at": 1030, "duration": 2, "keys": ["A"]},
-        {"at": 1530, "duration": 2, "keys": ["A"]},
-        {"at": 2030, "duration": 2, "keys": ["A"]},
-        {"at": 2530, "duration": 2, "keys": ["A"]},
-        {"at": 3030, "duration": 2, "keys": ["A"]}
+        {"at": 0, "duration": 1, "keys": ["A"]},
+        {"at": 530, "duration": 30, "keys": ["A"]},
+        {"at": 680, "duration": 30, "keys": ["A"]},
+        {"at": 830, "duration": 30, "keys": ["A"]},
+        {"at": 980, "duration": 30, "keys": ["A"]},
+        {"at": 1130, "duration": 30, "keys": ["A"]},
+        {"at": 1390, "duration": 30, "keys": ["A"]},
+        {"at": 1540, "duration": 30, "keys": ["A"]},
+        {"at": 1810, "duration": 1, "keys": ["A"]}
       ],
       "screenshots": [
-        {"at": 1800, "name": "rival-explains-regions"},
-        {"at": 3299, "name": "nine-region-menu"}
+        {"at": 280, "name": "033-033-meet-may-entrance"},
+        {"at": 480, "name": "033-033-meet-may-intro"},
+        {"at": 970, "name": "034-034-rival-region-intro-region-discussion"},
+        {"at": 1330, "name": "035-035-region-menu-choices"},
+        {"at": 1690, "name": "036-036-region-question-question"},
+        {"at": 1989, "name": "main-02-region-menu"}
       ],
-      "expected": {
-        "map": "MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F",
-        "position": [3, 3],
-        "battle_serial_min": 0
-      }
+      "expected": {"map": "MAP_LITTLEROOT_TOWN_MAYS_HOUSE_2F", "position": [4, 4], "battle_serial_min": 0}
     },
     {
       "id": "main-02-region-selected",
       "parent": "main-02-region-menu",
       "chapter": "Rival Introduction",
-      "frames": 2000,
+      "frames": 710,
       "actions": [
-        {"at": 30, "duration": 2, "keys": ["A"]},
-        {"at": 530, "duration": 2, "keys": ["A"]},
-        {"at": 1030, "duration": 2, "keys": ["A"]},
-        {"at": 1530, "duration": 2, "keys": ["A"]}
+        {"at": 0, "duration": 1, "keys": ["DOWN"]},
+        {"at": 20, "duration": 1, "keys": ["DOWN"]},
+        {"at": 40, "duration": 1, "keys": ["A"]},
+        {"at": 260, "duration": 30, "keys": ["A"]},
+        {"at": 410, "duration": 30, "keys": ["A"]},
+        {"at": 560, "duration": 30, "keys": ["A"]}
       ],
       "screenshots": [
-        {"at": 600, "name": "kanto-region-confirmed"},
-        {"at": 1999, "name": "rival-departs"}
+        {"at": 220, "name": "038-038-hoenn-confirmation"},
+        {"at": 709, "name": "main-02-region-selected"}
       ],
       "interactive_mode": "scripted_tutorial",
       "battle_automation": "native",
-      "coverage": {
-        "interactive_flows": ["tutorial.regional_starter_selection"]
-      },
-      "expected": {
-        "map": "MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F",
-        "position": [3, 3],
-        "battle_serial_min": 0,
-        "stable_overworld": true
-      }
+      "coverage": {"interactive_flows": ["tutorial.regional_starter_selection"]},
+      "expected": {"map": "MAP_LITTLEROOT_TOWN_MAYS_HOUSE_2F", "position": [4, 4], "battle_serial_min": 0, "stable_overworld": true, "vars": {"VAR_STARTER_GEN": 3, "VAR_LITTLEROOT_RIVAL_STATE": 3}}
     },
     {
       "id": "main-02-rival-house-exit",
       "parent": "main-02-region-selected",
       "chapter": "Rival Introduction",
-      "frames": 2200,
+      "frames": 820,
       "actions": [
-        {"at": 200, "duration": 60, "keys": ["RIGHT"]},
-        {"at": 600, "duration": 28, "keys": ["UP"]},
-        {"at": 1400, "duration": 100, "keys": ["DOWN"]}
+        {"at": 0, "duration": 48, "keys": ["LEFT"]},
+        {"at": 65, "duration": 48, "keys": ["UP"]},
+        {"at": 400, "duration": 96, "keys": ["DOWN"]}
       ],
       "screenshots": [
-        {"at": 1100, "name": "rival-house-downstairs"},
-        {"at": 2199, "name": "rival-house-exit"}
+        {"at": 300, "name": "042-042-leave-rival-room-downstairs"},
+        {"at": 730, "name": "043-043-rival-house-exit-outside"},
+        {"at": 819, "name": "main-02-rival-house-exit"}
       ],
-      "expected": {
-        "map": "MAP_LITTLEROOT_TOWN",
-        "position": [5, 9],
-        "battle_serial_min": 0,
-        "stable_overworld": true
-      }
+      "expected": {"map": "MAP_LITTLEROOT_TOWN", "position": [14, 9], "battle_serial_min": 0, "stable_overworld": true}
     },
     {
       "id": "main-03-north-warning",

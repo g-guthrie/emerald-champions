@@ -173,13 +173,13 @@ def verify_artifact_snapshot(evidence: dict[str, object]) -> dict[str, object]:
     return result
 
 
-def parse_scenario_id() -> int:
+def parse_scenario_id(scenario_name: str = SCENARIO_NAME) -> int:
     text = (ROOT / "include/emerald_champions_headless.h").read_text()
     region = text.split("enum EmeraldChampionsHeadlessScenario", 1)[1].split("};", 1)[0]
     names = re.findall(r"EC_HEADLESS_SCENARIO_[A-Z0-9_]+", region)
-    if SCENARIO_NAME not in names:
-        fail(f"missing campaign scenario: {SCENARIO_NAME}")
-    return names.index(SCENARIO_NAME)
+    if scenario_name not in names:
+        fail(f"missing campaign scenario: {scenario_name}")
+    return names.index(scenario_name)
 
 
 def parse_map_ids() -> dict[str, int]:
@@ -1304,6 +1304,7 @@ def run_segment(
     out: Path,
     state_in: Path | None,
 ) -> tuple[Path, dict[str, object]]:
+    battle_mode = "native" if scenario_id == parse_scenario_id("EC_HEADLESS_SCENARIO_CAMPAIGN_NATIVE") else "autowin"
     segment_id = str(segment["id"])
     checkpoint_dir = out / "checkpoints"
     screenshot_dir = out / "screenshots" / segment_id
@@ -1342,6 +1343,9 @@ def run_segment(
             state_in, rom_hash, expected_segment=str(segment["parent"]),
             artifact_evidence=artifact_evidence,
         )
+        parent_metadata = json.loads(state_metadata_path(state_in).read_text())
+        if parent_metadata.get("battle_mode", "autowin") != battle_mode:
+            fail("parent checkpoint battle mode differs; native traversal requires native ancestry")
         command.extend(("--state-in", str(state_in)))
 
     for action in segment.get("actions", []):
@@ -1446,6 +1450,7 @@ def run_segment(
     metadata = {
         "schema_version": 1,
         "segment": segment_id,
+        "battle_mode": battle_mode,
         "parent": segment.get("parent"),
         "rom": str(rom),
         "rom_sha256": rom_hash,
@@ -1499,6 +1504,9 @@ def import_battery_save(save_source, evidence_source, parent, *, runner, rom, ad
     evidence, metadata_evidence = snapshot_artifact(evidence_source, directory / "artifacts", "checkpoint-evidence")
     metadata = json.loads(evidence.read_text())
     validate_save_import_metadata(save, metadata, parent)
+    battle_mode = "native" if scenario_id == parse_scenario_id("EC_HEADLESS_SCENARIO_CAMPAIGN_NATIVE") else "autowin"
+    if metadata.get("battle_mode", "autowin") != battle_mode:
+        fail("imported save battle mode differs; native traversal requires native ancestry")
     validate_checkpoint_ancestry(parent, metadata["artifact_evidence"]["manifest"], artifact_evidence["manifest"], metadata.get("parent"))
     state = directory / f"{parent}.ss1"
     screenshot = directory / "native-continue.png"
@@ -1524,7 +1532,7 @@ def import_battery_save(save_source, evidence_source, parent, *, runner, rom, ad
                 "checkpoint_evidence": verify_artifact_snapshot(metadata_evidence), "command": command,
                 "screenshot": str(screenshot), "pixel_sha256": ui.validate_screenshot_png(screenshot),
                 "assertions": assertions, "telemetry": telemetry}
-    restored = {"schema_version": 1, "segment": parent, "parent": metadata.get("parent"),
+    restored = {"schema_version": 1, "battle_mode": battle_mode, "segment": parent, "parent": metadata.get("parent"),
                 "rom_sha256": sha256(rom), "artifact_evidence": artifact_evidence,
                 "state": str(state), "state_sha256": sha256(state),
                 "save": str(save), "save_sha256": sha256(save), "expected": metadata["expected"],
@@ -1571,6 +1579,8 @@ def write_failure_bundle(
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--battle-mode", choices=("native", "autowin"), default="autowin",
+                        help="native preserves actual combat; autowin is legacy traversal only")
     parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     parser.add_argument("--rom", type=Path, default=DEFAULT_ROM)
     parser.add_argument("--elf", type=Path, default=DEFAULT_ELF)
@@ -1677,7 +1687,7 @@ def main() -> int:
     addresses["gEcHeadlessFixtureScenario"] = ui.resolve_symbol(
         elf, "gEcHeadlessFixtureScenario"
     )
-    scenario_id = parse_scenario_id()
+    scenario_id = parse_scenario_id("EC_HEADLESS_SCENARIO_CAMPAIGN_NATIVE" if args.battle_mode == "native" else SCENARIO_NAME)
     trace_path = run_out / "trace.jsonl"
     trace_path.unlink(missing_ok=True)
     imported_state = None
@@ -1743,6 +1753,7 @@ def main() -> int:
                 "schema_version": 1,
                 "run_id": run_id,
                 "run_kind": "full" if full_run else "targeted",
+                "battle_mode": args.battle_mode,
                 "selection": {
                     "start": args.start,
                     "through": args.through,
@@ -1820,6 +1831,7 @@ def main() -> int:
                 "manifest_sha256": manifest_hash,
                 "run_id": run_id,
                 "run_kind": "full" if full_run else "targeted",
+                "battle_mode": args.battle_mode,
                 "selection": {
                     "start": args.start,
                     "through": args.through,
@@ -1864,6 +1876,7 @@ def main() -> int:
         "schema_version": 1,
         "run_id": run_id,
         "run_kind": run_payload["run_kind"],
+        "battle_mode": args.battle_mode,
         "selection": run_payload["selection"],
         "manifest": str(manifest_snapshot),
         "source_manifest": str(source_manifest),

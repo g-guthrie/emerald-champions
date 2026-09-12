@@ -763,6 +763,7 @@ static void Task_TitleScreenPhase2(u8 taskId)
         if (QUICKSTART && QUICKSTART_HUD
 #if EC_HEADLESS_FIXTURES
          && gEcHeadlessFixtureActiveScenario != EC_HEADLESS_SCENARIO_TITLE
+         && gEcHeadlessFixtureActiveScenario != EC_HEADLESS_SCENARIO_CAMPAIGN_NATIVE
 #endif
         )
             CreateQuickstartHud();
@@ -787,7 +788,11 @@ static void Task_TitleScreenPhase2(u8 taskId)
 // Show Rayquaza silhouette and process main title screen input
 static void Task_TitleScreenPhase3(u8 taskId)
 {
-    if (QUICKSTART && JOY_NEW(SELECT_BUTTON))
+    if (QUICKSTART && JOY_NEW(SELECT_BUTTON)
+#if EC_HEADLESS_FIXTURES
+        && gEcHeadlessFixtureActiveScenario != EC_HEADLESS_SCENARIO_CAMPAIGN_NATIVE
+#endif
+    )
         Quickstart();
 
     if (JOY_NEW(A_BUTTON) || JOY_NEW(START_BUTTON))

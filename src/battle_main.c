@@ -502,6 +502,18 @@ static void EcRestoreForRestart(void)
 
 void CB2_InitBattle(void)
 {
+#if EC_HEADLESS_FIXTURES
+    if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CAMPAIGN_NATIVE
+        && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED | BATTLE_TYPE_RECORDED_LINK
+                              | BATTLE_TYPE_CATCH_TUTORIAL | BATTLE_TYPE_POKEDUDE)))
+    {
+        gEcHeadlessCampaignLastBattleType = gBattleTypeFlags;
+        gEcHeadlessCampaignLastOpponentA = (gBattleTypeFlags & BATTLE_TYPE_TRAINER) ? TRAINER_BATTLE_PARAM.opponentA : TRAINER_NONE;
+        gEcHeadlessCampaignLastOpponentB = (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS) ? TRAINER_BATTLE_PARAM.opponentB : TRAINER_NONE;
+        gEcHeadlessCampaignLastResolution = EC_HEADLESS_BATTLE_NATIVE;
+        gEcHeadlessCampaignBattleSerial++;
+    }
+#endif
     EcSnapshotForRestart();
     if (!gTestRunnerEnabled)
         MoveSaveBlocks_ResetHeap();
