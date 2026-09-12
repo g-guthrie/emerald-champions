@@ -1393,7 +1393,11 @@ void CalculateMonStatsCont(struct Pokemon *mon, bool32 updateSpeedStat)
     // been initialized at this point or this Pokémon is
     // just fainted, the check for oldMaxHP is important.
     if (currentHP == 0 && oldMaxHP != 0)
+    {
+        // Keep boxed damage consistent when a fainted mon's max HP changes.
+        SetMonData(mon, MON_DATA_HP, &currentHP);
         return;
+    }
 
     // Only add to currentHP if newMaxHP went up.
     if (newMaxHP > oldMaxHP)
@@ -2920,9 +2924,42 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
         boxMon->checksum = CalculateBoxMonChecksumReencrypt(boxMon);
 }
 
+bool32 ClampMonToPlayerLevelCap(struct Pokemon *mon)
+{
+    enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+    u32 cap;
+    u32 experience;
+
+    if (species == SPECIES_NONE || species >= NUM_SPECIES || GetMonData(mon, MON_DATA_IS_EGG))
+        return FALSE;
+    cap = GetPlayerLevelCapForSpecies(species);
+    if (GetLevelFromMonExp(mon) <= cap)
+        return FALSE;
+    experience = gExperienceTables[gSpeciesInfo[species].growthRate][cap];
+    SetMonData(mon, MON_DATA_EXP, &experience);
+    CalculateMonStats(mon); // Preserves fainting and clamps HP to the new maximum.
+    return TRUE;
+}
+
+bool32 ClampBoxMonToPlayerLevelCap(struct BoxPokemon *boxMon)
+{
+    struct Pokemon mon;
+    enum Species species = GetBoxMonData(boxMon, MON_DATA_SPECIES);
+
+    if (species == SPECIES_NONE || species >= NUM_SPECIES || GetBoxMonData(boxMon, MON_DATA_IS_EGG)
+        || GetLevelFromBoxMonExp(boxMon) <= GetPlayerLevelCapForSpecies(species))
+        return FALSE;
+    BoxMonToMon(boxMon, &mon);
+    ClampMonToPlayerLevelCap(&mon);
+    *boxMon = mon.box;
+    return TRUE;
+}
+
 static u8 GiveMonToPartyOrPC(struct Pokemon *mon)
 {
     s32 i;
+
+    ClampMonToPlayerLevelCap(mon);
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
@@ -3486,7 +3523,10 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, enum Item item, u8 partyIndex, 
 
                 if (param == 0) // Rare Candy
                 {
-                    dataUnsigned = gExperienceTables[gSpeciesInfo[GetMonData(mon, MON_DATA_SPECIES)].growthRate][GetMonData(mon, MON_DATA_LEVEL) + 1];
+                    enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+                    u32 level = GetMonData(mon, MON_DATA_LEVEL);
+                    if (!B_RARE_CANDY_CAP || level < GetPlayerLevelCapForSpecies(species))
+                        dataUnsigned = gExperienceTables[gSpeciesInfo[species].growthRate][level + 1];
                 }
                 else if (param - 1 < ARRAY_COUNT(sExpCandyExperienceTable)) // EXP Candies
                 {
@@ -3495,7 +3535,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, enum Item item, u8 partyIndex, 
 
                     if (B_RARE_CANDY_CAP && B_EXP_CAP_TYPE == EXP_CAP_HARD)
                     {
-                        u32 currentLevelCap = GetCurrentLevelCap();
+                        u32 currentLevelCap = GetPlayerLevelCapForSpecies(species);
                         if (dataUnsigned > gExperienceTables[gSpeciesInfo[species].growthRate][currentLevelCap])
                             dataUnsigned = gExperienceTables[gSpeciesInfo[species].growthRate][currentLevelCap];
                     }
@@ -4380,7 +4420,7 @@ bool32 IsMonEligibleForLeveler(struct Pokemon *mon)
 {
     return GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE
         && !GetMonData(mon, MON_DATA_IS_EGG)
-        && (GetMonData(mon, MON_DATA_LEVEL) < min(GetCurrentLevelCap(), MAX_LEVEL)
+        && (GetMonData(mon, MON_DATA_LEVEL) < GetPlayerLevelCapForSpecies(GetMonData(mon, MON_DATA_SPECIES))
             || GetEvolutionTargetSpecies(mon, EVO_MODE_NORMAL, ITEM_NONE, NULL, NULL, CHECK_EVO) != SPECIES_NONE);
 }
 
@@ -4990,7 +5030,7 @@ bool8 TryIncrementMonLevel(struct Pokemon *mon)
         expPoints = gExperienceTables[gSpeciesInfo[species].growthRate][MAX_LEVEL];
         SetMonData(mon, MON_DATA_EXP, &expPoints);
     }
-    if (nextLevel > GetCurrentLevelCap() || expPoints < gExperienceTables[gSpeciesInfo[species].growthRate][nextLevel])
+    if (nextLevel > GetPlayerLevelCapForSpecies(species) || expPoints < gExperienceTables[gSpeciesInfo[species].growthRate][nextLevel])
     {
         return FALSE;
     }
@@ -6647,6 +6687,7 @@ struct BoxPokemon *GetSelectedBoxMonFromPcOrParty(void)
 u32 GiveScriptedMonToPlayer(struct Pokemon *mon, u8 slot)
 {
     u32 sentToPc;
+    ClampMonToPlayerLevelCap(mon);
     if (slot < PARTY_SIZE)
     {
         memcpy(&gParties[B_TRAINER_PLAYER][slot], mon, sizeof(struct Pokemon));

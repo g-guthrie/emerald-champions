@@ -11,6 +11,7 @@
 #include "emerald_champions_opening.h"
 #include "mega_stone_rewards.h"
 #include "trade.h"
+#include "tv.h"
 #include "constants/party_menu.h"
 #include "constants/emerald_champions.h"
 #include "event_data.h"
@@ -41,6 +42,7 @@
 #include "constants/field_specials.h"
 #include "constants/flags.h"
 #include "constants/maps.h"
+#include "constants/map_event_ids.h"
 #include "constants/trainers.h"
 #include "constants/vars.h"
 
@@ -552,6 +554,130 @@ TEST("Emerald Champions level caps follow every campaign milestone")
         EXPECT_EQ(GetCurrentLevelCap(), sCampaignCapExpectations[i].cap);
     }
     ResetCampaignCapMilestones();
+}
+
+TEST("Emerald Champions legendary caps use stable species stats without a team count penalty")
+{
+    static const struct { enum Species species; u8 cap100; u8 cap50; } cases[] =
+    {
+        {SPECIES_GARCHOMP, 100, 50},
+        {SPECIES_MEW, 100, 50},
+        {SPECIES_KARTANA, 100, 50},
+        {SPECIES_KYOGRE, 89, 44},
+        {SPECIES_KYOGRE_PRIMAL, 89, 44},
+        {SPECIES_MEWTWO, 88, 44},
+        {SPECIES_MEWTWO_MEGA_X, 88, 44},
+        {SPECIES_ARCEUS, 83, 41},
+        {SPECIES_ARCEUS_FAIRY, 83, 41},
+        {SPECIES_KYUREM_BLACK, 85, 42},
+        {SPECIES_ZACIAN_HERO, 90, 45},
+        {SPECIES_ZACIAN_CROWNED, 85, 42},
+        {SPECIES_NECROZMA_DUSK_MANE, 88, 44},
+    };
+    for (u32 i = 0; i < ARRAY_COUNT(cases); i++)
+    {
+        EXPECT_EQ(GetLevelCapForSpecies(cases[i].species, 100), cases[i].cap100);
+        EXPECT_EQ(GetLevelCapForSpecies(cases[i].species, 50), cases[i].cap50);
+        EXPECT_EQ(GetLevelCapForSpecies(cases[i].species, 1), 1);
+    }
+    EXPECT_EQ(GetLevelCapForSpecies(SPECIES_NONE, 50), 50);
+    EXPECT_EQ(GetLevelCapForSpecies(NUM_SPECIES, 50), 50);
+}
+
+TEST("Emerald Champions Mega items and Dragon Ascent add no player cap penalty")
+{
+    struct Pokemon mon;
+    enum Item item;
+    ResetCampaignCapMilestones();
+    FlagSet(FLAG_DELIVERED_DEVON_GOODS);
+    ClearBag();
+    EXPECT(AddBagItem(ITEM_MEGA_RING, 1));
+    CreateMon(&mon, SPECIES_VENUSAUR, 30, 12345, OTID_STRUCT_PLAYER_ID);
+    CalculateMonStats(&mon);
+    item = ITEM_VENUSAURITE;
+    SetMonData(&mon, MON_DATA_HELD_ITEM, &item);
+    EXPECT(!ClampMonToPlayerLevelCap(&mon));
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_LEVEL), 30);
+    CreateMon(&mon, SPECIES_RAYQUAZA, 26, 12345, OTID_STRUCT_PLAYER_ID);
+    CalculateMonStats(&mon);
+    SetMonMoveSlot(&mon, MOVE_DRAGON_ASCENT, 0);
+    EXPECT(!ClampMonToPlayerLevelCap(&mon));
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_LEVEL), 26);
+    CreateMon(&mon, SPECIES_KYOGRE, 26, 12345, OTID_STRUCT_PLAYER_ID);
+    CalculateMonStats(&mon);
+    item = ITEM_BLUE_ORB;
+    SetMonData(&mon, MON_DATA_HELD_ITEM, &item);
+    EXPECT(!ClampMonToPlayerLevelCap(&mon));
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_LEVEL), 26);
+    ClearBag();
+    ResetCampaignCapMilestones();
+}
+
+TEST("Emerald Champions acquisition caps each legendary and preserves its prepared data")
+{
+    struct Pokemon mon;
+    u16 item = ITEM_FOCUS_SASH;
+    u32 status = STATUS1_PARALYSIS;
+    ResetCampaignCapMilestones();
+    ZeroPlayerPartyMons();
+    CreateMon(&mon, SPECIES_MEWTWO, 80, 12345, OTID_STRUCT_PLAYER_ID);
+    SetMonMoveSlot(&mon, MOVE_PSYSTRIKE, 0);
+    SetMonData(&mon, MON_DATA_HELD_ITEM, &item);
+    SetMonData(&mon, MON_DATA_STATUS, &status);
+    EXPECT_EQ(GiveScriptedMonToPlayer(&mon, 0), MON_GIVEN_TO_PARTY);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_LEVEL), 12);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_MOVE1), MOVE_PSYSTRIKE);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM), item);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_STATUS), status);
+    CreateMon(&mon, SPECIES_MEWTWO, 80, 54321, OTID_STRUCT_PLAYER_ID);
+    EXPECT_EQ(GiveScriptedMonToPlayer(&mon, 1), MON_GIVEN_TO_PARTY);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_LEVEL), 12);
+    EXPECT_EQ(GetPlayerLevelCapForSpecies(SPECIES_MEWTWO), 12);
+    ZeroPlayerPartyMons();
+}
+
+TEST("Emerald Champions cap changes preserve fainting through boxed storage")
+{
+    struct Pokemon mon, restored;
+    struct BoxPokemon box;
+    u16 hp = 0;
+    ResetCampaignCapMilestones();
+    CreateMon(&mon, SPECIES_KYUREM_BLACK, 100, 12345, OTID_STRUCT_PLAYER_ID);
+    CalculateMonStats(&mon);
+    EXPECT_GT(GetMonData(&mon, MON_DATA_MAX_HP), 0);
+    SetMonData(&mon, MON_DATA_HP, &hp);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_HP), 0);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_HP_LOST), GetMonData(&mon, MON_DATA_MAX_HP));
+    box = mon.box;
+    BoxMonToMon(&box, &restored);
+    EXPECT_EQ(GetMonData(&restored, MON_DATA_HP), 0);
+    EXPECT(ClampBoxMonToPlayerLevelCap(&box));
+    EXPECT_NE(GetBoxMonData(&box, MON_DATA_HP_LOST), 0);
+    BoxMonToMon(&box, &restored);
+    EXPECT_EQ(GetMonData(&restored, MON_DATA_LEVEL), 12);
+    EXPECT_EQ(GetMonData(&restored, MON_DATA_HP), 0);
+    EXPECT_EQ(GetMonData(&restored, MON_DATA_HP_LOST), GetMonData(&restored, MON_DATA_MAX_HP));
+    EXPECT(!ClampMonToPlayerLevelCap(&restored));
+    EXPECT_EQ(GetMonData(&restored, MON_DATA_HP), 0);
+}
+
+TEST("Emerald Champions candy and level increments stop at the individual cap")
+{
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][0];
+    u32 experience;
+    ResetCampaignCapMilestones();
+    ZeroPlayerPartyMons();
+    CreateMon(mon, SPECIES_MEWTWO, 11, 12345, OTID_STRUCT_PLAYER_ID);
+    EXPECT(!ExecuteTableBasedItemEffect(mon, ITEM_RARE_CANDY, 0, 0));
+    EXPECT_EQ(GetMonData(mon, MON_DATA_LEVEL), 12);
+    EXPECT(!IsMonEligibleForLeveler(mon));
+    EXPECT(ExecuteTableBasedItemEffect(mon, ITEM_RARE_CANDY, 0, 0));
+    EXPECT_EQ(GetMonData(mon, MON_DATA_LEVEL), 12);
+    experience = gExperienceTables[gSpeciesInfo[SPECIES_MEWTWO].growthRate][13];
+    SetMonData(mon, MON_DATA_EXP, &experience);
+    EXPECT(!TryIncrementMonLevel(mon));
+    EXPECT_EQ(GetMonData(mon, MON_DATA_LEVEL), 12);
+    ZeroPlayerPartyMons();
 }
 
 TEST("Emerald Champions strict EXP cap blocks gains at the milestone")
@@ -1133,7 +1259,8 @@ TEST("Emerald Champions story gifts arrive battle-ready with restoration baselin
             MON_GIVEN_TO_PARTY
         );
         EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_SPECIES), species[slot]);
-        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_LEVEL), levels[slot]);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_LEVEL),
+            min(levels[slot], GetPlayerLevelCapForSpecies(species[slot])));
         EXPECT(MonMatchesEmeraldChampionsNonMegaPreset(&gParties[B_TRAINER_PLAYER][slot]));
         item = GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_HELD_ITEM);
         EXPECT_NE(item, ITEM_NONE);
@@ -1794,8 +1921,8 @@ TEST("Champions Circuit restores the exact prepared party after a run")
 {
     static const enum Species species[PARTY_SIZE] =
     {
-        SPECIES_BULBASAUR,
-        SPECIES_CHARMANDER,
+        SPECIES_MEWTWO,
+        SPECIES_ARCEUS,
         SPECIES_SQUIRTLE,
         SPECIES_PIKACHU,
         SPECIES_EEVEE,
@@ -1828,7 +1955,8 @@ TEST("Champions Circuit restores the exact prepared party after a run")
     ChampionsCircuitBegin();
     EXPECT_EQ(VarGet(VAR_CHAMPIONS_CIRCUIT_ACTIVE), TRUE);
     for (u32 slot = 0; slot < PARTY_SIZE; slot++)
-        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_LEVEL), 100);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_LEVEL),
+            GetLevelCapForSpecies(species[slot], CHAMPIONS_CIRCUIT_BASE_LEVEL));
 
     ChampionsCircuitEnd();
     EXPECT_EQ(VarGet(VAR_CHAMPIONS_CIRCUIT_ACTIVE), FALSE);
@@ -2228,6 +2356,60 @@ TEST("Emerald Champions paired prizes use incoming cap once and exclude replays"
     gBattleTypeFlags = savedFlags;
     SetCurrentDifficultyLevel(DIFFICULTY_HARD);
     ResetCampaignCapMilestones();
+}
+
+TEST("Emerald Champions v4 reporter stages skip retired teams and preserve interview actors")
+{
+    static const u8 nextStates[] = {1, 4, 5, 6, 7, 8, 6};
+    static const u8 gabbyIds[] = {LOCALID_ROUTE111_GABBY_1, LOCALID_ROUTE118_GABBY_1,
+        LOCALID_ROUTE118_GABBY_2, LOCALID_ROUTE120_GABBY_2, LOCALID_ROUTE111_GABBY_3,
+        LOCALID_ROUTE118_GABBY_3, LOCALID_ROUTE120_GABBY_2};
+    static const u8 tyIds[] = {LOCALID_ROUTE111_TY_1, LOCALID_ROUTE118_TY_1,
+        LOCALID_ROUTE118_TY_2, LOCALID_ROUTE120_TY_2, LOCALID_ROUTE111_TY_3,
+        LOCALID_ROUTE118_TY_3, LOCALID_ROUTE120_TY_2};
+    ResetGabbyAndTy();
+    gBattleResults.lastUsedMovePlayer = MOVE_TACKLE;
+    for (u32 i = 0; i < ARRAY_COUNT(nextStates); i++)
+    {
+        GabbyAndTyBeforeInterview();
+        EXPECT_EQ(GabbyAndTyGetBattleNum(), nextStates[i]);
+        GetGabbyAndTyLocalIds();
+        EXPECT_EQ(gSpecialVar_0x8004, gabbyIds[i]);
+        EXPECT_EQ(gSpecialVar_0x8005, tyIds[i]);
+    }
+    for (u32 i = 0; i < 300; i++)
+    {
+        GabbyAndTyBeforeInterview();
+        EXPECT_EQ(GabbyAndTyGetBattleNum(), 6 + (i + 1) % 3);
+    }
+    ResetGabbyAndTy();
+    FlagClear(FLAG_TEMP_SKIP_GABBY_INTERVIEW);
+}
+
+TEST("Emerald Champions v4 final reporter rematches do not renew first-clear money")
+{
+    struct BattleStruct *savedStruct = gBattleStruct;
+    u32 savedFlags = gBattleTypeFlags;
+    TrainerBattleParameter savedParams = gTrainerBattleParameter;
+    memset(&sEmeraldChampionsTestBattleStruct, 0, sizeof(sEmeraldChampionsTestBattleStruct));
+    gBattleStruct = &sEmeraldChampionsTestBattleStruct;
+    gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE;
+    InitTrainerBattleParameter();
+    TRAINER_BATTLE_PARAM.opponentA = TRAINER_GABBY_AND_TY_6;
+    ClearTrainerFlag(TRAINER_GABBY_AND_TY_6);
+    gSaveBlock1Ptr->gabbyAndTyData.battleNum = 5;
+    InitCampaignBattleReward();
+    EXPECT(GetCampaignBattleMoneyReward() > 0);
+    // The map permits replay by clearing the native trainer flag. The persistent
+    // interview counter still owns the already-earned first-clear receipt.
+    gSaveBlock1Ptr->gabbyAndTyData.battleNum = 6;
+    ClearTrainerFlag(TRAINER_GABBY_AND_TY_6);
+    InitCampaignBattleReward();
+    EXPECT_EQ(GetCampaignBattleMoneyReward(), 0);
+    gTrainerBattleParameter = savedParams;
+    gBattleStruct = savedStruct;
+    gBattleTypeFlags = savedFlags;
+    ResetGabbyAndTy();
 }
 
 TEST("Emerald Champions survey locates owned Castform across permanent storage")

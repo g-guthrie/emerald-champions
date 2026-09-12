@@ -58,6 +58,9 @@ void ContestLiveUpdates_SetWinnerAppealFlag(u8 flag);
 void ContestLiveUpdates_SetWinnerMoveUsed(enum Move move);
 void ContestLiveUpdates_SetLoserData(u8 flag, u8 loser);
 void ResetGabbyAndTy(void);
+void GabbyAndTyBeforeInterview(void);
+u8 GabbyAndTyGetBattleNum(void);
+void GetGabbyAndTyLocalIds(void);
 u8 CheckForPlayersHouseNews(void);
 bool8 IsGabbyAndTyShowOnTheAir(void);
 

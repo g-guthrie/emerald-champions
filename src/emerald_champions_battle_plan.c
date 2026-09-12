@@ -35,6 +35,20 @@ u32 EmeraldChampions_GetBattlePlan(enum BattlerId battler)
     return trainer < ARRAY_COUNT(sEmeraldChampionsBattlePlans) ? sEmeraldChampionsBattlePlans[trainer] : 0;
 }
 
+bool32 EmeraldChampions_IsMegaAllowed(enum BattlerId battler)
+{
+    u32 trainer = GetCampaignTrainer(battler);
+    u32 permissions = trainer < ARRAY_COUNT(sEmeraldChampionsMegaPermissions)
+        ? sEmeraldChampionsMegaPermissions[trainer] : 0;
+
+    // Unauthored/facility/player parties retain native eligibility. Authored
+    // slots only grant permission; the native item/form/owner checks still apply.
+    if (!(permissions & 0x80))
+        return TRUE;
+    return gBattlerPartyIndexes[battler] < PARTY_SIZE
+        && (permissions & (1u << gBattlerPartyIndexes[battler]));
+}
+
 u32 EmeraldChampions_GetPartnerTactics(enum BattlerId battler, enum Species species, enum Species partnerSpecies)
 {
     u32 trainer = GetCampaignTrainer(battler);

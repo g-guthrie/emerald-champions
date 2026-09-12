@@ -150,7 +150,9 @@ void EmeraldChampionsAgentPrepPoll(void)
             Fail(EC_AGENT_PREP_BAD_SPECIES, slot);
             return;
         }
-        if (level != GetCurrentLevelCap() || level > MAX_LEVEL)
+        if (level == EC_AGENT_PREP_KEEP)
+            level = GetPlayerLevelCapForSpecies(species);
+        if (level != GetPlayerLevelCapForSpecies(species) || level > MAX_LEVEL)
         {
             Fail(EC_AGENT_PREP_BAD_LEVEL, slot);
             return;
@@ -170,11 +172,14 @@ void EmeraldChampionsAgentPrepPoll(void)
             Fail(EC_AGENT_PREP_BAD_EVS, slot);
             return;
         }
+        ClampMonToPlayerLevelCap(&sEcAgentPreparedParty[slot]);
     }
 
     memset(gParties[B_TRAINER_PLAYER], 0, sizeof(gParties[B_TRAINER_PLAYER]));
     memcpy(gParties[B_TRAINER_PLAYER], sEcAgentPreparedParty, sizeof(sEcAgentPreparedParty));
     CalculatePlayerPartyCount();
+    for (u32 slot = 0; slot < gEcAgentPrepPartyCount; slot++)
+        gEcAgentPrepLevel[slot] = GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_LEVEL);
     SavePlayerParty();
     gEcAgentPrepResult = EC_AGENT_PREP_SUCCESS;
     gEcAgentPrepErrorSlot = EC_AGENT_PREP_KEEP;

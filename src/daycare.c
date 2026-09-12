@@ -323,7 +323,8 @@ static void ApplyDaycareExperience(struct Pokemon *mon)
 
 static u32 GetExpAtLevelCap(struct Pokemon *mon)
 {
-    return gExperienceTables[gSpeciesInfo[GetMonData(mon, MON_DATA_SPECIES)].growthRate][GetCurrentLevelCap()];
+    enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+    return gExperienceTables[gSpeciesInfo[species].growthRate][GetPlayerLevelCapForSpecies(species)];
 }
 
 static u16 TakeSelectedPokemonFromDaycare(struct DaycareMon *daycareMon)
@@ -335,8 +336,9 @@ static u16 TakeSelectedPokemonFromDaycare(struct DaycareMon *daycareMon)
     BoxMonToMon(&daycareMon->mon, &pokemon);
 
     TryFormChange(&pokemon, FORM_CHANGE_WITHDRAW, B_TRAINER_PLAYER);
+    ClampMonToPlayerLevelCap(&pokemon);
 
-    if (GetMonData(&pokemon, MON_DATA_LEVEL) < GetCurrentLevelCap())
+    if (GetMonData(&pokemon, MON_DATA_LEVEL) < GetPlayerLevelCapForSpecies(GetMonData(&pokemon, MON_DATA_SPECIES)))
     {
         experience = GetMonData(&pokemon, MON_DATA_EXP) + daycareMon->steps;
         u32 maxExp = GetExpAtLevelCap(&pokemon);
@@ -376,7 +378,7 @@ static u8 GetLevelAfterDaycareSteps(struct BoxPokemon *mon, u32 steps)
 {
     struct BoxPokemon tempMon = *mon;
     u8 levelBefore = GetLevelFromBoxMonExp(mon);
-    u8 levelCap = GetCurrentLevelCap();
+    u8 levelCap = GetPlayerLevelCapForSpecies(GetBoxMonData(mon, MON_DATA_SPECIES));
 
     if (levelBefore >= levelCap)
         return levelBefore;

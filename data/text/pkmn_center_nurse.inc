@@ -77,9 +77,12 @@ gText_EmeraldChampionsGiveMissingLeveler::
 	.string "the Leveler!$"
 
 gText_EmeraldChampionsExplainLeveler::
-	.string "The Leveler raises your whole party\n"
-	.string "to the current level cap.\p"
-	.string "It never runs out.$"
+	.string "The LEVELER raises each party member\n"
+	.string "to its own level cap. It never\l"
+	.string "runs out.\p"
+	.string "Powerful legendary POKéMON have\n"
+	.string "lower caps to balance their stats.\l"
+	.string "Check each cap in SUMMARY.$"
 
 gText_WouldYouLikeToRestYourPkmn::
 	.string "Hello, and welcome to\n"

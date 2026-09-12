@@ -824,6 +824,8 @@ bool8 BoxMonKnowsMove(struct BoxPokemon *boxMon, enum Move move);
 void SetMonData(struct Pokemon *mon, s32 field, const void *dataArg);
 void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg);
 u8 GiveCapturedMonToPlayer(struct Pokemon *mon);
+bool32 ClampMonToPlayerLevelCap(struct Pokemon *mon);
+bool32 ClampBoxMonToPlayerLevelCap(struct BoxPokemon *mon);
 u8 CopyMonToPC(struct Pokemon *mon);
 u8 CalculatePlayerPartyCount(void);
 u8 CalculateEnemyPartyCount(void);

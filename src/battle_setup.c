@@ -89,6 +89,7 @@ static void SaveChangesToPlayerParty(void);
 static void HandleBattleVariantEndParty(void);
 static void CB2_EndTrainerBattle(void);
 static void CB2_EndChampionsCircuitBattle(void);
+static void CB2_EndScriptedMultiBattle(void);
 static bool32 IsPlayerDefeated(u32 battleOutcome);
 #if FREE_MATCH_CALL == FALSE
 static u16 GetRematchTrainerId(u16 trainerId);
@@ -282,6 +283,14 @@ static void CreateBattleStartTask(enum BattleTransition transition, u16 song)
 {
     u8 taskId = CreateTask(Task_BattleStart, 1);
 
+    // Field entry owns the player party. Facilities normalize separately.
+    if (!(gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED
+                           | BATTLE_TYPE_TRAINER_HILL | BATTLE_TYPE_CATCH_TUTORIAL)))
+    {
+        for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+            ClampMonToPlayerLevelCap(&gParties[B_TRAINER_PLAYER][slot]);
+    }
+
     gTasks[taskId].tTransition = transition;
     PlayMapChosenOrBattleBGM(song);
 }
@@ -377,6 +386,7 @@ void BattleSetup_StartMultiBattle(void)
 {
     BattleSetup_SetMultiBattleFlags();
     FillPartnerParty(gPartnerTrainerId);
+    gMain.savedCallback = CB2_EndScriptedMultiBattle;
     if (gSpecialVar_0x8005 & MULTI_BATTLE_CHOOSE_MONS) // Skip mons restoring(done in the script)
         gBattleScripting.specialTrainerBattleType = 0xFF;
 
@@ -1548,6 +1558,18 @@ static void CB2_EndChampionsCircuitBattle(void)
     SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
+static void CB2_EndScriptedMultiBattle(void)
+{
+    // Preserve the native outcome for the calling script. The selection-menu
+    // callback reports selection success, not whether this battle was won.
+    if (gBattleOutcome == B_OUTCOME_WON && (gBattleTypeFlags & BATTLE_TYPE_TRAINER))
+        SetBattledTrainersFlags();
+    if (!IsPlayerDefeated(gBattleOutcome))
+        DowngradeBadPoison();
+    // multi_do restores the full roster before its caller handles a loss.
+    SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
+}
+
 static void CB2_EndDebugBattle(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
@@ -2455,6 +2477,11 @@ void InitCampaignBattleReward(void)
     gBattleStruct->campaignLevelCap = GetCurrentLevelCap();
     gBattleStruct->campaignPrizeMultiplier = GetTrainerStructFromId(TRAINER_BATTLE_PARAM.opponentA)->prizeMultiplier;
     gBattleStruct->campaignRewardEligible = !HasTrainerBeenFought(TRAINER_BATTLE_PARAM.opponentA);
+    // The final interview's trainer flag is cleared to permit repeat battles.
+    // Its persistent interview counter still records the first-clear receipt.
+    if (TRAINER_BATTLE_PARAM.opponentA == TRAINER_GABBY_AND_TY_6
+        && gSaveBlock1Ptr->gabbyAndTyData.battleNum >= 6)
+        gBattleStruct->campaignRewardEligible = FALSE;
     if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS && !BATTLE_TWO_VS_ONE_OPPONENT)
     {
         gBattleStruct->campaignPrizeMultiplier = max(gBattleStruct->campaignPrizeMultiplier,

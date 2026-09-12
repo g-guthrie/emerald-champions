@@ -40,6 +40,7 @@ struct EmeraldChampionsBattleTactic
 };
 
 u32 EmeraldChampions_GetBattlePlan(enum BattlerId battler);
+bool32 EmeraldChampions_IsMegaAllowed(enum BattlerId battler);
 // Cheap reserve-pair screening. A match only opens a candidate for evaluation;
 // native legality, activation survival and resulting payoff still decide it.
 u32 EmeraldChampions_GetPartnerTactics(enum BattlerId battler, enum Species species, enum Species partnerSpecies);

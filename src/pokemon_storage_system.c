@@ -6371,6 +6371,8 @@ static void SetPlacedMonData(u8 boxId, u8 position)
         if (mon == GetFirstLiveMon())
             gFollowerSteps = 0;
         SetMonFormPSS(&mon->box, FORM_CHANGE_WITHDRAW);
+        CalculateMonStats(mon);
+        ClampMonToPlayerLevelCap(mon);
     }
     else
     {
@@ -6883,13 +6885,27 @@ static void ReshowDisplayMon(void)
 void SetMonFormPSS(struct BoxPokemon *boxMon, enum FormChanges method)
 {
     if (TryBoxMonFormChange(boxMon, method))
+    {
         sRefreshDisplayMonGfx = TRUE;
+    }
+    ClampBoxMonToPlayerLevelCap(boxMon);
 }
 
 void SetMonFormPSS_ItemHold(struct BoxPokemon *boxMon)
 {
     if (TryBoxMonFormChange(boxMon, FORM_CHANGE_ITEM_HOLD))
+    {
         sRefreshDisplayMonGfx = TRUE;
+    }
+    ClampBoxMonToPlayerLevelCap(boxMon);
+    for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+    {
+        if (boxMon == &gParties[B_TRAINER_PLAYER][slot].box)
+        {
+            CalculateMonStats(&gParties[B_TRAINER_PLAYER][slot]);
+            break;
+        }
+    }
     UpdateSpeciesSpritePSS(boxMon);
 }
 

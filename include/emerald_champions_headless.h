@@ -112,6 +112,7 @@ enum EmeraldChampionsHeadlessCampaignQuery
     EC_HEADLESS_CAMPAIGN_QUERY_PP_BONUSES,
     EC_HEADLESS_CAMPAIGN_QUERY_BP,
     EC_HEADLESS_CAMPAIGN_QUERY_PARTY_SPECIES,
+    EC_HEADLESS_CAMPAIGN_QUERY_PLAYER_LEVEL_CAP,
 };
 
 enum EmeraldChampionsHeadlessBattleResolution
@@ -119,6 +120,7 @@ enum EmeraldChampionsHeadlessBattleResolution
     EC_HEADLESS_BATTLE_NATIVE,
     EC_HEADLESS_BATTLE_WIN,
     EC_HEADLESS_BATTLE_CAPTURE,
+    EC_HEADLESS_BATTLE_LOSS,
 };
 
 enum EmeraldChampionsHeadlessPokedexState
@@ -184,6 +186,7 @@ extern volatile u32 gEcHeadlessCampaignLastCapturedSpecies;
 extern volatile u32 gEcHeadlessCampaignLastCaptureResult;
 extern volatile u32 gEcHeadlessCampaignCaptureBookkeepingValid;
 extern volatile u32 gEcHeadlessCampaignLastResolution;
+extern volatile u32 gEcHeadlessCampaignForceLoss;
 bool32 EmeraldChampionsHeadlessBattleAutomationActive(void);
 bool32 EmeraldChampionsHeadlessAutoCaptureActive(void);
 enum EmeraldChampionsHeadlessBattleResolution EmeraldChampionsHeadlessGetBattleResolution(void);

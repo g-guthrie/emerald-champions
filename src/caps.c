@@ -79,6 +79,32 @@ u32 GetCurrentLevelCap(void)
     return MAX_LEVEL;
 }
 
+u32 GetLevelCapForSpecies(enum Species species, u32 baseline)
+{
+    const struct SpeciesInfo *info;
+    u32 total;
+
+    baseline = max(1, min(MAX_LEVEL, baseline));
+    if (species == SPECIES_NONE || species >= NUM_SPECIES)
+        return baseline;
+    info = &gSpeciesInfo[species];
+    // Temporary battle transformations do not apply a second level penalty.
+    // Stable fused/rider forms retain their own configured base-stat budget.
+    if (info->isMegaEvolution || info->isPrimalReversion || info->isUltraBurst
+        || info->isGigantamax || info->isTeraForm)
+        species = GET_BASE_SPECIES_ID(species);
+    info = &gSpeciesInfo[species];
+    if (!(info->isRestrictedLegendary || info->isSubLegendary || info->isMythical))
+        return baseline;
+    total = GetSpeciesBaseStatTotal(species);
+    return total > 600 ? max(1, baseline * 600 / total) : baseline;
+}
+
+u32 GetPlayerLevelCapForSpecies(enum Species species)
+{
+    return GetLevelCapForSpecies(species, GetCurrentLevelCap());
+}
+
 u32 GetSoftLevelCapExpValue(u32 level, u32 expValue)
 {
     static const u32 sExpScalingDown[5] = { 4, 8, 16, 32, 64 };

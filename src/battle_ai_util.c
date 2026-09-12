@@ -1,4 +1,5 @@
 #include "global.h"
+#include "emerald_champions_battle_plan.h"
 #include "battle_z_move.h"
 #include "malloc.h"
 #include "battle.h"
@@ -1275,6 +1276,9 @@ bool32 AI_ApplyMegaForm(enum BattlerId battler)
     enum Species species = GetBattleFormChangeTargetSpecies(battler, FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE, ability);
     struct Pokemon mon = *GetBattlerMon(battler);
     u32 hp = gBattleMons[battler].hp;
+
+    if (!EmeraldChampions_IsMegaAllowed(battler))
+        return FALSE;
 
     if (species == gBattleMons[battler].species)
         species = GetBattleFormChangeTargetSpecies(battler, FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM, ability);

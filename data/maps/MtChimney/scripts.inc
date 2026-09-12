@@ -412,8 +412,7 @@ MtChimney_EventScript_Tabitha::
 	end
 
 MtChimney_EventScript_Grunt2::
-	trainerbattle_double TRAINER_GRUNT_MT_CHIMNEY_2, MtChimney_Text_Grunt2Intro, MtChimney_Text_Grunt2Defeat, EmeraldChampions_Text_NeedTwoPokemon
-	msgbox MtChimney_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE
+	msgbox MtChimney_Text_Grunt2PostBattle, MSGBOX_NPC
 	end
 
 MtChimney_EventScript_BusyMagmaGrunt1::

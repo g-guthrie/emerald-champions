@@ -34,6 +34,7 @@ or strategic quality.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import os
 import re
 import subprocess
@@ -135,6 +136,7 @@ class Branch:
     line: int = 0
     strategy: list[str] = field(default_factory=list)
     tactics: list[tuple[str, str, str, str]] = field(default_factory=list)
+    mega_slots: int | None = None
 
 
 def parse_evs(text: str, where: str) -> str:
@@ -190,6 +192,13 @@ def read_teams(path: Path = TEAMS) -> list[Branch]:
             if unknown:
                 raise SystemExit(f"{where}: unknown battle strategies {sorted(unknown)}")
             continue
+        if line.startswith("mega_slots:"):
+            slots = line.partition(":")[2].strip()
+            values = [] if slots == "NONE" else [int(value.strip()) for value in slots.split(",")]
+            if len(values) != len(set(values)) or any(not 1 <= value <= 6 for value in values):
+                raise SystemExit(f"{where}: Mega slots must be distinct party positions 1..6")
+            current.mega_slots = sum(1 << (value - 1) for value in values)
+            continue
         if line.startswith("tactic:"):
             fields = line[7:].split()
             if len(fields) != 4 or fields[0] not in TACTICS:
@@ -215,6 +224,8 @@ def read_teams(path: Path = TEAMS) -> list[Branch]:
             raise SystemExit(f"{where}: friendship must be 0..255")
         if not 1 <= len(moves) <= 4:
             raise SystemExit(f"{where}: {len(moves)} moves")
+        if not -8 <= int(mon.group(6)) <= 7:
+            raise SystemExit(f"{where}: native level offset must be -8..7")
         current.mons.append(Mon(
             species=mon.group(1),
             item=mon.group(2),
@@ -235,6 +246,8 @@ def read_teams(path: Path = TEAMS) -> list[Branch]:
             raise SystemExit(f"{path.name}:{branch.line}: {branch.trainer} has no Pokemon")
         if len(branch.mons) > 6:
             raise SystemExit(f"{path.name}:{branch.line}: {branch.trainer} has more than six Pokemon")
+        if branch.mega_slots is not None and branch.mega_slots >> len(branch.mons):
+            raise SystemExit(f"{branch.trainer}: Mega permission references an absent party slot")
         for kind, actor, move, recipient in branch.tactics:
             actors = [mon for mon in branch.mons if mon.species == actor]
             if not actors or not any(mon.species == recipient for mon in branch.mons):
@@ -258,6 +271,153 @@ def read_teams(path: Path = TEAMS) -> list[Branch]:
             branch.plan = branch.plan or inherited[0]
             branch.crack = branch.crack or inherited[1]
     return branches
+
+
+def read_book(path: Path) -> list[Branch]:
+    """Read the book's explicit U, E/B, T and executable-intent owners.
+
+    This imports authoring into the existing team pipeline; it does not infer
+    executable tactics from narrative prose or invent missing trainer metadata.
+    """
+    text = path.read_text()
+
+    def section(number: int) -> str:
+        start = re.search(rf"(?m)^{number}\. [A-Z][A-Z ]{{2}}", text)
+        end = re.search(rf"(?m)^{number + 1}\. [A-Z][A-Z ]{{2}}", text)
+        if start is None:
+            raise SystemExit(f"{path}: missing book section {number}")
+        return text[start.start():end.start() if end else len(text)]
+
+    def constant(value: str) -> str:
+        return re.sub(r"[^A-Z0-9]+", "_", value.upper().replace("'", "").replace("’", "")).strip("_")
+
+    evs = dict(re.findall(r"(V\d{3})=(\d+/\d+/\d+/\d+/\d+/\d+)", section(9)))
+    builds: dict[str, Mon] = {}
+    for match in re.finditer(r"(?m)^(U\d{4}) (.+?) @(.+?) \| (.+?) \| (.+?) \| (V\d{3}) \| (.+)$", section(9)):
+        uid, species, item, ability, nature, spread, rest = match.groups()
+        fields = rest.split(" | ")
+        ivs = "31/31/31/31/31/31"
+        friendship = 255
+        for extra in fields[1:]:
+            if extra.startswith("IV "):
+                ivs = extra[3:]
+            elif extra.startswith("friendship "):
+                friendship = int(extra[11:])
+            else:
+                raise SystemExit(f"{uid}: unknown book member field {extra!r}")
+        if uid in builds or spread not in evs:
+            raise SystemExit(f"{uid}: duplicate build or unknown EV key {spread}")
+        builds[uid] = Mon(constant(species), constant(item), constant(ability), constant(nature),
+                          parse_evs(evs[spread], uid), 0, [constant(move) for move in fields[0].split(", ")],
+                          ivs, friendship)
+
+    cards = {m[1]: m[2].strip() for m in re.finditer(
+        r"(?ms)^(T\d{3}) — [^\n]+\n(.*?)(?=^T\d{3} — |^BUILD ROLES AND NATIVE INTERACTION OBLIGATIONS)", section(22))}
+    branches: list[Branch] = []
+    encounter = None
+    cls = ""
+    for line in section(8).splitlines():
+        group = re.match(r"^E(\d{4}) [^|]+ \| ([a-z]+) \|", line)
+        if group:
+            encounter, cls = int(group[1]), group[2]
+        party = re.match(r"^  (.+?) \[(E\d{4}-B\d{2})\]: (.+?); intent (T\d{3}); Mega-eligible slots ([^;]+)(?:; never Mega slots ([0-9,]+))?$", line)
+        if party:
+            name, bid, members, tid, allowed, forbidden = party.groups()
+            if encounter != int(bid[1:5]) or cls not in CLASSES or tid not in cards:
+                raise SystemExit(f"{bid}: missing group/class/tactical card")
+            card = cards[tid]
+            # A joint owner card references one authoritative joint plan.
+            refs = set(re.findall(r"(?:joint (?:Meteor Falls )?plan |joint Meteor Falls plan )(T\d{3})", card))
+            if any(ref not in cards for ref in refs):
+                raise SystemExit(f"{bid}: missing referenced joint plan")
+            paragraphs = [*[(cards[ref]) for ref in sorted(refs)], card]
+            plan = " ".join(" ".join(paragraph.splitlines()) for paragraph in paragraphs)
+            counter = [ln.partition(":")[2].strip() for ln in card.splitlines() if ln.lower().startswith("counterplay")]
+            branch = Branch(encounter, "TRAINER_" + constant(name), cls, plan,
+                            " ".join(counter) or plan)
+            for member in members.split(","):
+                m = re.fullmatch(r"(U\d{4})\(([+-]\d+)\)", member)
+                if m is None or m[1] not in builds:
+                    raise SystemExit(f"{bid}: invalid member {member!r}")
+                base = builds[m[1]]
+                branch.mons.append(Mon(**{**vars(base), "moves": base.moves.copy(), "offset": int(m[2])}))
+            slots = [] if allowed == "none" else [int(value) for value in allowed.split(",")]
+            if len(set(slots)) != len(slots) or any(not 1 <= slot <= len(branch.mons) for slot in slots):
+                raise SystemExit(f"{bid}: invalid Mega slot")
+            if forbidden and set(slots) & {int(value) for value in forbidden.split(",")}:
+                raise SystemExit(f"{bid}: contradictory Mega permission")
+            branch.mega_slots = sum(1 << (slot - 1) for slot in slots)
+            branches.append(branch)
+        elif line.startswith("    Existing executable intent:"):
+            if not branches:
+                raise SystemExit("book intent without a party")
+            intent = line.split(": ", 1)[1].removesuffix(".")
+            preference = re.search(r"^conditional preferences ([^;]+)", intent)
+            if preference is None:
+                raise SystemExit(f"{branches[-1].trainer}: missing conditional preferences")
+            branches[-1].strategy = [] if preference[1] == "none" else preference[1].split(", ")
+            traits = re.search(r"; trainer traits ([^;]+)", intent)
+            if traits:
+                branches[-1].ai = traits[1].split(", ")
+            if "; partnership candidates " in intent:
+                for tactic in intent.split("; partnership candidates ", 1)[1].split("; "):
+                    branches[-1].tactics.append(tuple(tactic.split(" / ")))
+    if not branches or len({branch.trainer for branch in branches}) != len(branches):
+        raise SystemExit("book contains no parties or duplicate trainer identities")
+    # Reuse the normal authoring parser's complete validation, including tactics.
+    with tempfile.TemporaryDirectory() as scratch:
+        target = Path(scratch) / "book-teams.txt"
+        target.write_text(render_teams(branches, path))
+        return read_teams(target)
+
+
+def render_teams(branches: list[Branch], book: Path) -> str:
+    digest = hashlib.sha256(book.read_bytes()).hexdigest()
+    lines = ["#! Generated from the canonical Emerald Champions Game Book; edit the book.",
+             f"#! Book SHA256: {digest}", "#! Reconcile with: emerald_champions_teams.py --book PATH --write", ""]
+    for branch in branches:
+        lines += [f"## E{branch.encounter:04} {branch.trainer} class={branch.cls}",
+                  "strategy: " + (",".join(branch.strategy) or "NONE")]
+        if branch.mega_slots is not None:
+            lines.append("mega_slots: " + (",".join(str(i + 1) for i in range(6) if branch.mega_slots & (1 << i)) or "NONE"))
+        if branch.ai:
+            lines.append("ai: " + ", ".join(branch.ai))
+        lines += ["tactic: " + " ".join(tactic) for tactic in branch.tactics]
+        lines += ["plan: " + branch.plan, "crack: " + branch.crack]
+        for mon in branch.mons:
+            lines.append(f"{mon.species} @{mon.item} {mon.ability} {mon.nature} {mon.evs} {mon.offset} | "
+                         + ", ".join(mon.moves) + f" | ivs={mon.ivs} | friendship={mon.friendship}")
+        lines.append("")
+    return "\n".join(lines)
+
+
+def retain_book_encounters(master_text: str, branches: list[Branch]) -> str:
+    """Retire absent branches without inventing locations, actors or formations."""
+    wanted = {branch.trainer for branch in branches}
+    prefix, blocks = split_encounters(master_text)
+    output = []
+    found = set()
+    for number, block in blocks:
+        markers = list(BRANCH_RE.finditer(block))
+        kept = [marker for marker in markers if marker[1] in wanted]
+        if not kept:
+            continue
+        header = block[:markers[0].start()]
+        parts = [header]
+        for index, marker in enumerate(markers):
+            if marker[1] not in wanted:
+                continue
+            end = markers[index + 1].start() if index + 1 < len(markers) else len(block)
+            parts.append(block[marker.start():end].split("=== END ENCOUNTER ===", 1)[0].rstrip() + "\n")
+            found.add(marker[1])
+        parts.append("=== END ENCOUNTER ===\n\n")
+        output.append("".join(parts))
+    if wanted != found:
+        raise SystemExit(f"book trainers need explicit native encounter metadata: {sorted(wanted - found)}")
+    prefix = set_field(prefix, "rematch_free_physical_encounter_groups", str(len(output)))
+    prefix = set_field(prefix, "rematch_free_explicit_trainer_branch_blocks", str(len(branches)))
+    prefix = set_field(prefix, "included_content", f"{len(output)} active book encounter groups; excluded branches remain retired")
+    return prefix + "".join(output)
 
 
 def line_value(text: str, key: str) -> str:
@@ -308,6 +468,11 @@ def render_plans(branches: list[Branch]) -> str:
     for branch in branches:
         flags = " | ".join("EC_BATTLE_PLAN_" + value for value in branch.strategy) or "0"
         lines.append(f"    [{branch.trainer}] = {flags},")
+    lines += ["};", "", "// Bit 7 marks an explicit policy; bits 0-5 authorize party slots.",
+              "static const u8 sEmeraldChampionsMegaPermissions[TRAINERS_COUNT] =", "{"]
+    for branch in branches:
+        if branch.mega_slots is not None:
+            lines.append(f"    [{branch.trainer}] = 0x{0x80 | branch.mega_slots:02X},")
     lines += ["};", "", "static const struct EmeraldChampionsBattleTactic sEmeraldChampionsBattleTactics[] =", "{"]
     for branch in branches:
         for kind, actor, move, recipient in branch.tactics:
@@ -359,7 +524,7 @@ def compile_master(branches: list[Branch], master_text: str) -> str:
     unused = sorted(set(by_trainer) - used)
     if unused:
         raise SystemExit(f"teams file has branches absent from the master: {unused}")
-    return "".join(out)
+    return "".join(out).rstrip() + "\n"
 
 
 def display(species: str) -> str:
@@ -384,10 +549,12 @@ def main() -> None:
     parser.add_argument("--write", action="store_true", help="rewrite the master and trainers.party")
     parser.add_argument("--check", action="store_true", help="compare generated master/plans/party and validate configured Abilities")
     parser.add_argument("--summary", action="store_true", help="print class, legendary and Mega coverage")
+    parser.add_argument("--book", type=Path, help="import/check the canonical book's explicit party and intent records")
     args = parser.parse_args()
 
-    branches = read_teams()
-    master_text = compile_master(branches, MASTER.read_text())
+    branches = read_book(args.book) if args.book else read_teams()
+    master_source = retain_book_encounters(MASTER.read_text(), branches) if args.book else MASTER.read_text()
+    master_text = compile_master(branches, master_source)
 
     if args.summary:
         sys.path.insert(0, str(ROOT / "scripts"))
@@ -411,6 +578,8 @@ def main() -> None:
         return
 
     if args.write:
+        if args.book:
+            TEAMS.write_text(render_teams(branches, args.book))
         MASTER.write_text(master_text)
         PLANS.write_text(render_plans(branches))
         run([sys.executable, "scripts/implement_emerald_champions_master_battles.py"])
@@ -418,6 +587,8 @@ def main() -> None:
         return
 
     if args.check:
+        if args.book and TEAMS.read_text() != render_teams(branches, args.book):
+            raise SystemExit("authored teams differ from the canonical book; run --book PATH --write")
         if MASTER.read_text() != master_text:
             raise SystemExit("generated master differs from authored teams; run --write")
         if not PLANS.exists() or PLANS.read_text() != render_plans(branches):

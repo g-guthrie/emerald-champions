@@ -1489,9 +1489,10 @@ static void NormalizeCircuitPlayerParty(u8 level)
 
         if (species == SPECIES_NONE || species == SPECIES_EGG)
             continue;
-        exp = gExperienceTables[gSpeciesInfo[species].growthRate][level];
+        u8 individualLevel = GetLevelCapForSpecies(species, level);
+        exp = gExperienceTables[gSpeciesInfo[species].growthRate][individualLevel];
         SetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_EXP, &exp);
-        SetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_LEVEL, &level);
+        SetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_LEVEL, &individualLevel);
         CalculateMonStats(&gParties[B_TRAINER_PLAYER][i]);
     }
     HealPlayerParty();

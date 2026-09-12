@@ -1,8 +1,31 @@
 SlateportCity_OceanicMuseum_2F_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, SlateportCity_OceanicMuseum_2F_OnTransition
 	.byte 0
+
+SlateportCity_OceanicMuseum_2F_OnTransition:
+	setflag FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_2F_ARCHIE
+	setflag FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_2F_AQUA_GRUNT_1
+	setflag FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_2F_AQUA_GRUNT_2
+	goto_if_defeated TRAINER_ARCHIE_SLATEPORT, SlateportCity_OceanicMuseum_2F_EventScript_TransitionDone
+	goto_if_not_defeated TRAINER_GRUNT_MUSEUM_1, SlateportCity_OceanicMuseum_2F_EventScript_TransitionDone
+	clearflag FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_2F_ARCHIE
+	clearflag FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_2F_AQUA_GRUNT_1
+	clearflag FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_2F_AQUA_GRUNT_2
+	setobjectxyperm LOCALID_OCEANIC_MUSEUM_2F_ARCHIE, 11, 6
+	setobjectmovementtype LOCALID_OCEANIC_MUSEUM_2F_ARCHIE, MOVEMENT_TYPE_FACE_RIGHT
+	setobjectxyperm LOCALID_OCEANIC_MUSEUM_2F_GRUNT_1, 10, 5
+	setobjectmovementtype LOCALID_OCEANIC_MUSEUM_2F_GRUNT_1, MOVEMENT_TYPE_FACE_DOWN
+	setobjectxyperm LOCALID_OCEANIC_MUSEUM_2F_GRUNT_2, 10, 7
+	setobjectmovementtype LOCALID_OCEANIC_MUSEUM_2F_GRUNT_2, MOVEMENT_TYPE_FACE_UP
+	playbgm MUS_ENCOUNTER_AQUA, TRUE
+SlateportCity_OceanicMuseum_2F_EventScript_TransitionDone:
+	end
 
 SlateportCity_OceanicMuseum_2F_EventScript_CaptStern::
 	lock
+	faceplayer
+	goto_if_defeated TRAINER_ARCHIE_SLATEPORT, SlateportCity_OceanicMuseum_2F_EventScript_Conclude
+	goto_if_defeated TRAINER_GRUNT_MUSEUM_1, SlateportCity_OceanicMuseum_2F_EventScript_ReadyForArchie
 	call EventScript_CheckStoryDoubleBattleParty
 	setvar VAR_0x8004, ITEM_DEVON_PARTS
 	special CheckEmeraldChampionsHandoffItem
@@ -39,7 +62,6 @@ SlateportCity_OceanicMuseum_2F_EventScript_CaptStern::
 	applymovement LOCALID_OCEANIC_MUSEUM_2F_GRUNT_1, SlateportCity_OceanicMuseum_2F_Movement_GruntApproachToBattle
 	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_2F_Text_LetMeTakeCareOfThis, MSGBOX_DEFAULT
-	trainerbattle_no_intro_double_allow_single TRAINER_GRUNT_MUSEUM_2, SlateportCity_OceanicMuseum_2F_Text_Grunt2Defeat
 	applymovement LOCALID_OCEANIC_MUSEUM_2F_GRUNT_1, SlateportCity_OceanicMuseum_2F_Movement_GruntDefeated
 	waitmovement 0
 	applymovement LOCALID_OCEANIC_MUSEUM_2F_GRUNT_1, Common_Movement_WalkInPlaceFasterDown
@@ -57,8 +79,25 @@ SlateportCity_OceanicMuseum_2F_EventScript_CaptStern::
 	applymovement LOCALID_OCEANIC_MUSEUM_2F_ARCHIE, SlateportCity_OceanicMuseum_2F_Movement_ArchieApproachPlayer
 	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_2F_Text_ArchieWarning, MSGBOX_DEFAULT
+	clearflag FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_2F_ARCHIE
+	clearflag FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_2F_AQUA_GRUNT_1
+	clearflag FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_2F_AQUA_GRUNT_2
+	copyobjectxytoperm LOCALID_OCEANIC_MUSEUM_2F_ARCHIE
+	copyobjectxytoperm LOCALID_OCEANIC_MUSEUM_2F_GRUNT_1
+	copyobjectxytoperm LOCALID_OCEANIC_MUSEUM_2F_GRUNT_2
+	msgbox SlateportCity_OceanicMuseum_2F_Text_PauseBeforeArchie, MSGBOX_DEFAULT
+	releaseall
+	end
+
+SlateportCity_OceanicMuseum_2F_EventScript_ReadyForArchie::
+	lock
+	faceplayer
+	msgbox SlateportCity_OceanicMuseum_2F_Text_ReadyForArchie, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, SlateportCity_OceanicMuseum_2F_EventScript_WaitForArchie
+	call EventScript_CheckStoryDoubleBattleParty
 	trainerbattle_no_intro_double_allow_single TRAINER_ARCHIE_SLATEPORT, SlateportCity_OceanicMuseum_2F_Text_ArchieDefeat
 	msgbox SlateportCity_OceanicMuseum_2F_Text_ArchieDefeated, MSGBOX_DEFAULT
+SlateportCity_OceanicMuseum_2F_EventScript_Conclude:
 	closemessage
 	savebgm MUS_DUMMY
 	fadedefaultbgm
@@ -93,6 +132,27 @@ SlateportCity_OceanicMuseum_2F_EventScript_CaptStern::
 	fadescreen FADE_FROM_BLACK
 	release
 	end
+
+SlateportCity_OceanicMuseum_2F_EventScript_WaitForArchie:
+	msgbox SlateportCity_OceanicMuseum_2F_Text_PauseBeforeArchie, MSGBOX_DEFAULT
+	releaseall
+	end
+
+SlateportCity_OceanicMuseum_2F_EventScript_GruntWaiting::
+	msgbox SlateportCity_OceanicMuseum_2F_Text_MeddlingKid, MSGBOX_NPC
+	end
+
+SlateportCity_OceanicMuseum_2F_Text_PauseBeforeArchie:
+	.string "STERN: I'll keep the parts safe.\n"
+	.string "Ready your team before ARCHIE.\p"
+	.string "You can use your VIAL or visit\n"
+	.string "the POKéMON CENTER. Talk to me\l"
+	.string "again when you're ready to fight.$"
+
+SlateportCity_OceanicMuseum_2F_Text_ReadyForArchie:
+	.string "Ready to challenge ARCHIE?\n"
+	.string "The defeated grunt won't battle\l"
+	.string "you again.$"
 
 SlateportCity_OceanicMuseum_2F_EventScript_BrawlyHandoff::
 	msgbox SlateportCity_OceanicMuseum_2F_Text_BrawlyHandoff, MSGBOX_DEFAULT
@@ -308,11 +368,8 @@ SlateportCity_OceanicMuseum_2F_Text_BossGoingToBeFurious:
 	.string "The boss is going to hear about this…$"
 
 SlateportCity_OceanicMuseum_2F_Text_LetMeTakeCareOfThis:
-	.string "Move aside.\n"
-	.string "I'll get those parts myself!$"
-
-SlateportCity_OceanicMuseum_2F_Text_Grunt2Defeat:
-	.string "I can't stop this kid!$"
+	.string "Wait! The boss is coming.\n"
+	.string "He'll deal with this himself!$"
 
 SlateportCity_OceanicMuseum_2F_Text_MeddlingKid:
 	.string "We still don't have the parts.\n"

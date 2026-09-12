@@ -308,7 +308,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "GabbyAndTy_EventScript_GabbyBattle4",
+      "script": "GabbyAndTy_EventScript_RetiredInterview",
       "flag": "FLAG_HIDE_ROUTE_111_GABBY_AND_TY_2"
     },
     {
@@ -322,7 +322,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "GabbyAndTy_EventScript_TyBattle4",
+      "script": "GabbyAndTy_EventScript_RetiredInterview",
       "flag": "FLAG_HIDE_ROUTE_111_GABBY_AND_TY_2"
     },
     {

@@ -500,10 +500,14 @@ def build_checkpoint(args: argparse.Namespace, manifest: dict[str, Any], recipes
     campaign.run_state_chunk(runner=runner, rom=rom, state=state, addresses=addresses, frames=1, screenshot=shot)
     constants = campaign.parse_numeric_constants()
     badge_names = [f"FLAG_BADGE{i:02d}_GET" for i in range(1, 9)]
-    cap_names = badge_names + ["FLAG_IS_CHAMPION"]
-    flag_values = query_flags(state, runner, rom, addresses, constants, cap_names)
-    cap_steps = list(zip(cap_names, (14, 20, 30, 40, 45, 55, 60, 70, 80)))
-    level_cap = next((cap for name, cap in cap_steps if not flag_values[name]), 100)
+    flag_values = query_flags(state, runner, rom, addresses, constants, badge_names)
+    query_header = ROOT / "include/emerald_champions_headless.h"
+    query_enum = query_header.read_text().split("enum EmeraldChampionsHeadlessCampaignQuery", 1)[1].split("};", 1)[0]
+    cap_query = re.findall(r"EC_HEADLESS_CAMPAIGN_QUERY_[A-Z_]+", query_enum).index("EC_HEADLESS_CAMPAIGN_QUERY_PLAYER_LEVEL_CAP")
+    level_cap, _ = campaign.query_campaign_value(kind=cap_query, identifier=0,
+        runner=runner, rom=rom, state=state, addresses=addresses)
+    if not 1 <= level_cap <= 100:
+        raise LabError("native chapter cap query returned an invalid level")
     pointers = runner_reads(runner, rom, state, [symbols["gPlayerPartyPtr"], symbols["gSaveBlock2Ptr"]])
     party_pointer = pointers[symbols["gPlayerPartyPtr"]]
     save2_pointer = pointers[symbols["gSaveBlock2Ptr"]]
@@ -549,7 +553,7 @@ def build_checkpoint(args: argparse.Namespace, manifest: dict[str, Any], recipes
         "player": {"money": money, "badges": [name for name in badge_names if flag_values[name]], "party": party, "inventory": inventory},
         "services": {"portable_items": services, "available_center_services": available_center_services},
         "legal_arsenal": legal_arsenal,
-        "dependency_graph": {"inputs": source_digest(hashed_sources + [trainer_path, args.manifest.resolve(), args.recipes.resolve()]),
+        "dependency_graph": {"inputs": source_digest(hashed_sources + [trainer_path, query_header, ROOT / "src/caps.c", args.manifest.resolve(), args.recipes.resolve()]),
                              "invalidation": "any input hash change requires regeneration"},
         "preparation_adapter": {"schema_version": 1, "request_log": "preparation.jsonl",
                                 "execution_boundary": "native Center UI or canonical game functions",

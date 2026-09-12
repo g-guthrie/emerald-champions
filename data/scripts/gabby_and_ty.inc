@@ -1,21 +1,16 @@
-@ Gabby and Ty can appear in a fixed location on 3 different routes.
-@ Each time they are battled they will disappear from the route they're on
-@ and relocate to the next one, in the order Route 111 -> Route 118 -> Route 120.
-@ Gabby and Ty have 6 different parties which will get cycled on each appearance.
-@ After they're defeated 6 times they will stick to their 6th party but continue
-@ cycling between the 3 routes. To determine which trainer party gets used GF created
-@ multiple object events for Gabby and Ty on each of the 3 routes. The scripts below
-@ handle hiding and showing these objects so the correct party appears on the correct route.
-@ Route 111 and Route 118 have 3 object events each (parties 1,4,6 and 2,5,6 respectively)
-@ and Route 120 has 2 object events each (parties 3 and 6).
+@ The four retained party stages are 1, 2, 5 and 6. Stages 3/4 are retired.
+@ Stage 5 onward keeps the Feather Badge unlock. The final party continues
+@ rotating between its existing Route111/118/120 positions after first clear.
+@ The interview counter identifies both next placement and post-battle speakers.
 GabbyAndTy_EventScript_UpdateLocation::
 	cleartrainerflag TRAINER_GABBY_AND_TY_6  @ Clear flag for their final party to allow infinite rematches.
 	specialvar VAR_RESULT, GabbyAndTyGetBattleNum
-	@ Emerald Champions: parties 4-6 are authored at chapter cap 60 (Feather Badge).
-	@ Their Route 111 / 118 / 120 spots are walkable at five badges, so the crew stays
-	@ off the road after interview 3 until Winona is beaten, then reappears as normal.
+	@ Retired actor variants remain hidden; keep all established local IDs stable.
+	call GabbyAndTy_EventScript_HideAtRoute120_1
+	call GabbyAndTy_EventScript_HideAtRoute111_2
+	@ Later retained parties keep their existing Feather Badge unlock.
 	goto_if_set FLAG_BADGE06_GET, GabbyAndTy_EventScript_UpdateLocationSwitch
-	goto_if_lt VAR_RESULT, 3, GabbyAndTy_EventScript_UpdateLocationSwitch
+	goto_if_lt VAR_RESULT, 4, GabbyAndTy_EventScript_UpdateLocationSwitch
 	call GabbyAndTy_EventScript_HideAtRoute120_1
 	call GabbyAndTy_EventScript_HideAtRoute111_2
 	call GabbyAndTy_EventScript_HideAtRoute118_2
@@ -28,8 +23,6 @@ GabbyAndTy_EventScript_UpdateLocationSwitch::
 	switch VAR_RESULT
 	case 0, GabbyAndTy_EventScript_MoveForBattle1
 	case 1, GabbyAndTy_EventScript_MoveForBattle2
-	case 2, GabbyAndTy_EventScript_MoveForBattle3
-	case 3, GabbyAndTy_EventScript_MoveForBattle4
 	case 4, GabbyAndTy_EventScript_MoveForBattle5
 	case 5, GabbyAndTy_EventScript_MoveForBattle6
 	case 6, GabbyAndTy_EventScript_MoveForBattle7
@@ -46,19 +39,9 @@ GabbyAndTy_EventScript_MoveForBattle2::
 	call GabbyAndTy_EventScript_HideAtRoute111_1
 	return
 
-GabbyAndTy_EventScript_MoveForBattle3::
-	call GabbyAndTy_EventScript_ShowAtRoute120_1
-	call GabbyAndTy_EventScript_HideAtRoute118_1
-	return
-
-GabbyAndTy_EventScript_MoveForBattle4::
-	call GabbyAndTy_EventScript_ShowAtRoute111_2
-	call GabbyAndTy_EventScript_HideAtRoute120_1
-	return
-
 GabbyAndTy_EventScript_MoveForBattle5::
 	call GabbyAndTy_EventScript_ShowAtRoute118_2
-	call GabbyAndTy_EventScript_HideAtRoute111_2
+	call GabbyAndTy_EventScript_HideAtRoute118_1
 	return
 
 GabbyAndTy_EventScript_MoveForBattle6::
@@ -101,16 +84,8 @@ GabbyAndTy_EventScript_HideAtRoute120_1::
 	setflag FLAG_HIDE_ROUTE_120_GABBY_AND_TY_1
 	return
 
-GabbyAndTy_EventScript_ShowAtRoute120_1::
-	clearflag FLAG_HIDE_ROUTE_120_GABBY_AND_TY_1
-	return
-
 GabbyAndTy_EventScript_HideAtRoute111_2::
 	setflag FLAG_HIDE_ROUTE_111_GABBY_AND_TY_2
-	return
-
-GabbyAndTy_EventScript_ShowAtRoute111_2::
-	clearflag FLAG_HIDE_ROUTE_111_GABBY_AND_TY_2
 	return
 
 GabbyAndTy_EventScript_HideAtRoute118_2::
@@ -165,30 +140,6 @@ GabbyAndTy_EventScript_GabbyBattle2::
 
 GabbyAndTy_EventScript_TyBattle2::
 	trainerbattle_double TRAINER_GABBY_AND_TY_2, GabbyAndTy_Text_TyIntro, GabbyAndTy_Text_TyDefeat, GabbyAndTy_Text_TyNotEnoughMons, GabbyAndTy_EventScript_RequestInterview
-	msgbox GabbyAndTy_Text_TyPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-GabbyAndTy_EventScript_GabbyBattle3::
-	trainerbattle_double TRAINER_GABBY_AND_TY_3, GabbyAndTy_Text_GabbyIntro, GabbyAndTy_Text_GabbyDefeat, GabbyAndTy_Text_GabbyNotEnoughMons, GabbyAndTy_EventScript_RequestInterview
-	msgbox GabbyAndTy_Text_KeepingAnEyeOutForYou, MSGBOX_DEFAULT
-	release
-	end
-
-GabbyAndTy_EventScript_TyBattle3::
-	trainerbattle_double TRAINER_GABBY_AND_TY_3, GabbyAndTy_Text_TyIntro, GabbyAndTy_Text_TyDefeat, GabbyAndTy_Text_TyNotEnoughMons, GabbyAndTy_EventScript_RequestInterview
-	msgbox GabbyAndTy_Text_TyPostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-GabbyAndTy_EventScript_GabbyBattle4::
-	trainerbattle_double TRAINER_GABBY_AND_TY_4, GabbyAndTy_Text_GabbyIntro, GabbyAndTy_Text_GabbyDefeat, GabbyAndTy_Text_GabbyNotEnoughMons, GabbyAndTy_EventScript_RequestInterview
-	msgbox GabbyAndTy_Text_KeepingAnEyeOutForYou, MSGBOX_DEFAULT
-	release
-	end
-
-GabbyAndTy_EventScript_TyBattle4::
-	trainerbattle_double TRAINER_GABBY_AND_TY_4, GabbyAndTy_Text_TyIntro, GabbyAndTy_Text_TyDefeat, GabbyAndTy_Text_TyNotEnoughMons, GabbyAndTy_EventScript_RequestInterview
 	msgbox GabbyAndTy_Text_TyPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -330,3 +281,11 @@ GabbyAndTy_EventScript_KeepingAnEyeOutForYou::
 	msgbox GabbyAndTy_Text_KeepingAnEyeOutForYou, MSGBOX_DEFAULT
 	release
 	end
+
+GabbyAndTy_EventScript_RetiredInterview::
+	msgbox GabbyAndTy_Text_RetiredInterview, MSGBOX_NPC
+	end
+
+GabbyAndTy_Text_RetiredInterview:
+	.string "We've wrapped up this interview.\n"
+	.string "We'll meet you on the road!$"

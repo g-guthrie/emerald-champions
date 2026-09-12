@@ -843,8 +843,14 @@ void GabbyAndTyBeforeInterview(void)
     gSaveBlock1Ptr->gabbyAndTyData.mon1 = gBattleResults.playerMon1Species;
     gSaveBlock1Ptr->gabbyAndTyData.mon2 = gBattleResults.playerMon2Species;
     gSaveBlock1Ptr->gabbyAndTyData.lastMove = gBattleResults.lastUsedMovePlayer;
-    if (gSaveBlock1Ptr->gabbyAndTyData.battleNum != 0xFF)
+    // The authored sequence retains parties 1, 2, 5 and 6. Keep the final
+    // route cycle bounded rather than eventually saturating the u8 counter.
+    if (gSaveBlock1Ptr->gabbyAndTyData.battleNum >= 8)
+        gSaveBlock1Ptr->gabbyAndTyData.battleNum = 6;
+    else
         gSaveBlock1Ptr->gabbyAndTyData.battleNum++;
+    if (gSaveBlock1Ptr->gabbyAndTyData.battleNum == 2)
+        gSaveBlock1Ptr->gabbyAndTyData.battleNum = 4;
 
     gSaveBlock1Ptr->gabbyAndTyData.battleTookMoreThanOneTurn = gBattleResults.playerMonWasDamaged;
 
@@ -939,17 +945,9 @@ void GetGabbyAndTyLocalIds(void)
         gSpecialVar_0x8004 = LOCALID_ROUTE111_GABBY_1;
         gSpecialVar_0x8005 = LOCALID_ROUTE111_TY_1;
         break;
-    case 2:
+    case 4: // After party 2, the next-party counter skips retired parties 3/4.
         gSpecialVar_0x8004 = LOCALID_ROUTE118_GABBY_1;
         gSpecialVar_0x8005 = LOCALID_ROUTE118_TY_1;
-        break;
-    case 3:
-        gSpecialVar_0x8004 = LOCALID_ROUTE120_GABBY_1;
-        gSpecialVar_0x8005 = LOCALID_ROUTE120_TY_1;
-        break;
-    case 4:
-        gSpecialVar_0x8004 = LOCALID_ROUTE111_GABBY_2;
-        gSpecialVar_0x8005 = LOCALID_ROUTE111_TY_2;
         break;
     case 5:
         gSpecialVar_0x8004 = LOCALID_ROUTE118_GABBY_2;

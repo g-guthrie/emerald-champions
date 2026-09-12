@@ -3839,7 +3839,7 @@ static void HandleTurnActionSelectionState(void)
         // without recording or resolving the battle a second time.
         if (gBattleOutcome != 0)
         {
-            BattleDebug_WonBattle();
+            gBattleMainFunc = sEndTurnFuncsTable[gBattleOutcome & 0x7F];
             return;
         }
         gEcHeadlessCampaignLastBattleType = gBattleTypeFlags;
@@ -3851,6 +3851,22 @@ static void HandleTurnActionSelectionState(void)
         {
             EmeraldChampionsHeadlessBeginAutoCapture();
             BattleDebug_CaptureBattle();
+        }
+        else if (headlessResolution == EC_HEADLESS_BATTLE_LOSS)
+        {
+            // Test-only exit-boundary setup, not native combat evaluation.
+            u16 hp = 0;
+            for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+            {
+                SetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_HP, &hp);
+                if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
+                    SetMonData(&gParties[B_TRAINER_PARTNER][slot], MON_DATA_HP, &hp);
+            }
+            for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+                if (IsOnPlayerSide(battler))
+                    gBattleMons[battler].hp = 0;
+            gBattleOutcome = B_OUTCOME_LOST;
+            gBattleMainFunc = sEndTurnFuncsTable[gBattleOutcome];
         }
         else
             BattleDebug_WonBattle();

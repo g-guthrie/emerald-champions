@@ -115,6 +115,7 @@ EWRAM_DATA volatile u32 gEcHeadlessCampaignLastCapturedSpecies = SPECIES_NONE;
 EWRAM_DATA volatile u32 gEcHeadlessCampaignLastCaptureResult = 0;
 EWRAM_DATA volatile u32 gEcHeadlessCampaignCaptureBookkeepingValid = FALSE;
 EWRAM_DATA volatile u32 gEcHeadlessCampaignLastResolution = EC_HEADLESS_BATTLE_NATIVE;
+EWRAM_DATA volatile u32 gEcHeadlessCampaignForceLoss = FALSE;
 EWRAM_DATA volatile u32 gEcHeadlessLeafRewardOwned = FALSE;
 EWRAM_DATA volatile u32 gEcHeadlessLeafCompleted = FALSE;
 EWRAM_DATA volatile u32 gEcHeadlessLeafTrainerDefeated = FALSE;
@@ -163,6 +164,8 @@ enum EmeraldChampionsHeadlessBattleResolution EmeraldChampionsHeadlessGetBattleR
                           | BATTLE_TYPE_CATCH_TUTORIAL
                           | BATTLE_TYPE_POKEDUDE))
         return EC_HEADLESS_BATTLE_NATIVE;
+    if (gEcHeadlessCampaignForceLoss && (gBattleTypeFlags & BATTLE_TYPE_TRAINER))
+        return EC_HEADLESS_BATTLE_LOSS;
     if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_BOOK_RESEARCH)
         return (gEcHeadlessFixtureParam & 0x800) ? EC_HEADLESS_BATTLE_CAPTURE : EC_HEADLESS_BATTLE_WIN;
     if (gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_STORY_HANDOFF
@@ -1235,6 +1238,8 @@ void EmeraldChampionsHeadlessObserve(void)
         else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_PARTY_SPECIES)
             gEcHeadlessCampaignQueryValue = gEcHeadlessCampaignQueryId < PARTY_SIZE
                 ? GetMonData(&gParties[B_TRAINER_PLAYER][gEcHeadlessCampaignQueryId], MON_DATA_SPECIES) : SPECIES_NONE;
+        else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_PLAYER_LEVEL_CAP)
+            gEcHeadlessCampaignQueryValue = GetPlayerLevelCapForSpecies(gEcHeadlessCampaignQueryId);
         else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_PP_BONUSES)
             gEcHeadlessCampaignQueryValue = GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_PP_BONUSES);
         else if (gEcHeadlessCampaignQueryKind == EC_HEADLESS_CAMPAIGN_QUERY_LEGENDARY_ELIGIBLE)
@@ -1829,6 +1834,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
 
     gEcHeadlessFixtureScenario = EC_HEADLESS_SCENARIO_NONE;
     gEcHeadlessFixtureActiveScenario = scenario;
+    gEcHeadlessCampaignForceLoss = FALSE;
     gEcHeadlessFixtureSetupResult = FALSE;
     gEcHeadlessFixtureObservedResult = FALSE;
     gEcHeadlessFixtureTrigger = FALSE;
@@ -1986,6 +1992,21 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
             VarSet(VAR_POKE_VIAL_MAX_CHARGES, 1);
             VarSet(VAR_POKE_VIAL_CHARGES, 1);
             PrepareCircuitParty();
+        }
+        if (gEcHeadlessFixtureParam == 7)
+        {
+            // Cap/UI fixture: real item, Leveler, summary and storage flows.
+            FlagSet(FLAG_DELIVERED_DEVON_GOODS); // Chapter cap 30.
+            FlagSet(FLAG_SYS_POKEMON_GET);
+            AddBagItem(ITEM_MEGA_RING, 1);
+            AddBagItem(ITEM_VENUSAURITE, 1);
+            AddBagItem(ITEM_CHARIZARDITE_X, 1);
+            AddBagItem(ITEM_MEWTWONITE_X, 1);
+            ZeroPlayerPartyMons();
+            CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_VENUSAUR, 30, OTID_STRUCT_PLAYER_ID);
+            CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][1], SPECIES_CHARIZARD, 30, OTID_STRUCT_PLAYER_ID);
+            CreateHealthyHeadlessMon(&gParties[B_TRAINER_PLAYER][2], SPECIES_MEWTWO, 26, OTID_STRUCT_PLAYER_ID);
+            CalculatePlayerPartyCount();
         }
         if (gEcHeadlessFixtureParam == 2
          || gEcHeadlessFixtureParam == 4
@@ -2676,6 +2697,25 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                     }
                     else if (gEcHeadlessFixtureParam <= 170)
                     {
+                        // Full roster for real three-of-six selection and restoration.
+                        FlagSet(FLAG_ADVENTURE_STARTED);
+                        SetLastHealLocationWarp(HEAL_LOCATION_MOSSDEEP_CITY);
+                        PrepareCircuitParty();
+                        for (u32 partySlot = 0; partySlot < PARTY_SIZE; partySlot++)
+                        {
+                            u16 hp = 1;
+                            ClampMonToPlayerLevelCap(&gParties[B_TRAINER_PLAYER][partySlot]);
+                            SetMonData(&gParties[B_TRAINER_PLAYER][partySlot], MON_DATA_HP, &hp);
+                        }
+                        AddBagItem(ITEM_POKE_VIAL, 1);
+                        VarSet(VAR_POKE_VIAL_MAX_CHARGES, 2);
+                        VarSet(VAR_POKE_VIAL_CHARGES, 0);
+                        SetTrainerFlag(TRAINER_GRUNT_SPACE_CENTER_5);
+                        SetTrainerFlag(TRAINER_GRUNT_SPACE_CENTER_7);
+                        if (gEcHeadlessFixtureParam == 169)
+                            SetTrainerFlag(TRAINER_TABITHA_MOSSDEEP);
+                        else // 170: the last commander's fight is still outstanding.
+                            ClearTrainerFlag(TRAINER_TABITHA_MOSSDEEP);
                         FlagSet(FLAG_INTERACTED_WITH_STEVEN_SPACE_CENTER);
                         VarSet(VAR_MOSSDEEP_CITY_STATE, 1); // Preserve the already-heard prompt on entry.
                         LoadHeadlessMap(MAP_MOSSDEEP_CITY_SPACE_CENTER_2F, 2, 8);
@@ -3449,7 +3489,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 FlagSet(FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_2F_AQUA_GRUNT_2);
                 FlagSet(FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_2F_ARCHIE);
                 AddBagItem(ITEM_DEVON_PARTS, 1);
-                LoadHeadlessMap(MAP_SLATEPORT_CITY_OCEANIC_MUSEUM_2F, 13, 7);
+                LoadHeadlessMap(MAP_SLATEPORT_CITY_OCEANIC_MUSEUM_2F, 12, 6);
                 break;
             }
             if (gEcHeadlessFixtureParam == 25 || gEcHeadlessFixtureParam == 26)
@@ -3615,7 +3655,7 @@ void CB2_EmeraldChampionsHeadlessFixture(void)
                 FlagSet(FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_2F_AQUA_GRUNT_1);
                 FlagSet(FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_2F_AQUA_GRUNT_2);
                 FlagSet(FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_2F_ARCHIE);
-                LoadHeadlessMap(MAP_SLATEPORT_CITY_OCEANIC_MUSEUM_2F, 13, 7);
+                LoadHeadlessMap(MAP_SLATEPORT_CITY_OCEANIC_MUSEUM_2F, 12, 6);
             }
             else
                 LoadHeadlessMap(MAP_GRANITE_CAVE_STEVENS_ROOM, 7, 9);

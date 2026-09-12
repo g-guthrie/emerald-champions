@@ -71,10 +71,10 @@ def main():
             ready = advance(f'boot-{param}', 2)
             require(campaign.is_stable_overworld(ready), f'fixture {param} not settled')
             require((ready['gEcHeadlessCampaignPlayerX'], ready['gEcHeadlessCampaignPlayerY']) ==
-                    ((13,7) if param == 3 else (7,9)), 'fixture started at wrong position')
+                    ((12,6) if param == 3 else (7,9)), 'fixture started at wrong position')
 
-        def interact(label):
-            advance(label + '-face', 32, keys=[(0, 16, 'UP')])
+        def interact(label, facing='UP'):
+            advance(label + '-face', 32, keys=[(0, 16, facing)])
             for _ in range(60):
                 v = advance(label, 40, keys=[(0, 2, 'A')])
                 if campaign.is_stable_overworld(v):
@@ -124,7 +124,7 @@ def main():
             boot(3)
             actor(3, False)
             actor(4, False)
-            interact('museum-missing-parts')
+            interact('museum-missing-parts', 'RIGHT')
             require(query(1, 'FLAG_DELIVERED_DEVON_GOODS') == 0, 'missing Parts advanced story')
             actor(3, False)
             actor(4, False)

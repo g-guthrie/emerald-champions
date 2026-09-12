@@ -5,8 +5,13 @@ MossdeepCity_SpaceCenter_2F_MapScripts::
 
 MossdeepCity_SpaceCenter_2F_OnTransition:
 	call_if_eq VAR_MOSSDEEP_CITY_STATE, 2, MossdeepCity_SpaceCenter_2F_EventScript_MoveCivilians
+	call_if_defeated TRAINER_GRUNT_SPACE_CENTER_5, MossdeepCity_SpaceCenter_2F_EventScript_MoveFirstDefeatedGrunt
 	call_if_eq VAR_MOSSDEEP_SPACE_CENTER_STATE, 2, MossdeepCity_SpaceCenter_2F_EventScript_MoveDefeatedGrunts
 	end
+
+MossdeepCity_SpaceCenter_2F_EventScript_MoveFirstDefeatedGrunt:
+	setobjectxyperm LOCALID_SPACE_CENTER_GRUNT_5, 13, 4
+	return
 
 MossdeepCity_SpaceCenter_2F_EventScript_MoveCivilians::
 	clearflag FLAG_INTERACTED_WITH_STEVEN_SPACE_CENTER
@@ -29,6 +34,7 @@ MossdeepCity_SpaceCenter_2F_OnFrame:
 	.2byte 0
 
 MossdeepCity_SpaceCenter_2F_EventScript_ThreeMagmaGrunts::
+	goto_if_defeated TRAINER_GRUNT_SPACE_CENTER_5, MossdeepCity_SpaceCenter_2F_EventScript_FirstLegComplete
 	playse SE_PIN
 	applymovement LOCALID_PLAYER, Common_Movement_ExclamationMark
 	waitmovement 0
@@ -50,20 +56,25 @@ MossdeepCity_SpaceCenter_2F_Movement_PlayerExit:
 	step_end
 
 MossdeepCity_SpaceCenter_2F_EventScript_BattleThreeMagmaGrunts::
+	goto_if_defeated TRAINER_GRUNT_SPACE_CENTER_5, MossdeepCity_SpaceCenter_2F_EventScript_FirstLegComplete
 	msgbox MossdeepCity_SpaceCenter_2F_Text_Grunt5Intro, MSGBOX_DEFAULT
 	trainerbattle_no_intro_double TRAINER_GRUNT_SPACE_CENTER_5, MossdeepCity_SpaceCenter_2F_Text_Grunt5Defeat, EmeraldChampions_Text_NeedTwoPokemon
 	applymovement LOCALID_SPACE_CENTER_GRUNT_5, MossdeepCity_SpaceCenter_2F_Movement_Grunt5Defeated
 	waitmovement 0
-	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
-	waitmovement 0
-	msgbox MossdeepCity_SpaceCenter_2F_Text_Grunt6Intro, MSGBOX_DEFAULT
-	trainerbattle_no_intro_double_allow_single TRAINER_GRUNT_SPACE_CENTER_6, MossdeepCity_SpaceCenter_2F_Text_Grunt6Defeat
-	applymovement LOCALID_SPACE_CENTER_GRUNT_6, MossdeepCity_SpaceCenter_2F_Movement_Grunt6Defeated
-	waitmovement 0
-	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
-	waitmovement 0
+MossdeepCity_SpaceCenter_2F_EventScript_FirstLegComplete:
+	@ State 0 stops the entrance auto-trigger; the trainer flag retains this leg.
+	setvar VAR_MOSSDEEP_SPACE_CENTER_STATE, 0
+	copyobjectxytoperm LOCALID_SPACE_CENTER_GRUNT_5
+	msgbox MossdeepCity_SpaceCenter_2F_Text_PauseBeforeLastGrunt, MSGBOX_DEFAULT
+	releaseall
+	end
+
+MossdeepCity_SpaceCenter_2F_EventScript_BattleLastGrunt:
+	call EventScript_CheckStoryDoubleBattleParty
 	msgbox MossdeepCity_SpaceCenter_2F_Text_Grunt7Intro, MSGBOX_DEFAULT
 	trainerbattle_no_intro_double_allow_single TRAINER_GRUNT_SPACE_CENTER_7, MossdeepCity_SpaceCenter_2F_Text_Grunt7Defeat
+	applymovement LOCALID_SPACE_CENTER_GRUNT_6, MossdeepCity_SpaceCenter_2F_Movement_Grunt6Defeated
+	waitmovement 0
 	applymovement LOCALID_SPACE_CENTER_GRUNT_7, MossdeepCity_SpaceCenter_2F_Movement_Grunt7Defeated
 	waitmovement 0
 	setvar VAR_MOSSDEEP_SPACE_CENTER_STATE, 2
@@ -149,13 +160,28 @@ MossdeepCity_SpaceCenter_2F_EventScript_RichBoyMagma::
 	release
 	end
 
-@ Battle for the below 3 grunts is handled in MossdeepCity_SpaceCenter_2F_EventScript_BattleThreeMagmaGrunts
+@ The two retained guards have separate battles; the middle grunt is an NPC.
 MossdeepCity_SpaceCenter_2F_EventScript_Grunt6::
 	msgbox MossdeepCity_SpaceCenter_2F_Text_Grunt6PostBattle, MSGBOX_NPC
 	end
 
 MossdeepCity_SpaceCenter_2F_EventScript_Grunt7::
-	msgbox MossdeepCity_SpaceCenter_2F_Text_Grunt7PostBattle, MSGBOX_NPC
+	lock
+	faceplayer
+	goto_if_defeated TRAINER_GRUNT_SPACE_CENTER_7, MossdeepCity_SpaceCenter_2F_EventScript_LastGruntDone
+	goto_if_not_defeated TRAINER_GRUNT_SPACE_CENTER_5, MossdeepCity_SpaceCenter_2F_EventScript_FirstGuardWaiting
+	msgbox MossdeepCity_SpaceCenter_2F_Text_ReadyForLastGrunt, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, MossdeepCity_SpaceCenter_2F_EventScript_BattleLastGrunt
+	msgbox MossdeepCity_SpaceCenter_2F_Text_PauseBeforeLastGrunt, MSGBOX_DEFAULT
+	releaseall
+	end
+MossdeepCity_SpaceCenter_2F_EventScript_LastGruntDone:
+	msgbox MossdeepCity_SpaceCenter_2F_Text_Grunt7PostBattle, MSGBOX_DEFAULT
+	releaseall
+	end
+MossdeepCity_SpaceCenter_2F_EventScript_FirstGuardWaiting:
+	msgbox MossdeepCity_SpaceCenter_2F_Text_FirstGuardWaiting, MSGBOX_DEFAULT
+	releaseall
 	end
 
 MossdeepCity_SpaceCenter_2F_EventScript_Grunt5::
@@ -163,6 +189,10 @@ MossdeepCity_SpaceCenter_2F_EventScript_Grunt5::
 	end
 
 MossdeepCity_SpaceCenter_2F_EventScript_Tabitha::
+	lock
+	faceplayer
+	goto_if_not_defeated TRAINER_GRUNT_SPACE_CENTER_7, MossdeepCity_SpaceCenter_2F_EventScript_FirstGuardWaiting
+	releaseall
 	trainerbattle_double TRAINER_TABITHA_MOSSDEEP, MossdeepCity_SpaceCenter_2F_Text_TabithaIntro, MossdeepCity_SpaceCenter_Text_TabithaDefeat, MossdeepCity_SpaceCenter_2F_Text_TabithaNotEnoughMons
 	msgbox MossdeepCity_SpaceCenter_2F_Text_TabithaAfter, MSGBOX_AUTOCLOSE
 	end
@@ -184,6 +214,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_Maxie::
 
 MossdeepCity_SpaceCenter_2F_EventScript_Steven::
 	lockall
+	goto_if_not_defeated TRAINER_TABITHA_MOSSDEEP, MossdeepCity_SpaceCenter_2F_EventScript_TabithaStillGuarding
 	goto_if_set FLAG_INTERACTED_WITH_STEVEN_SPACE_CENTER, MossdeepCity_SpaceCenter_2F_EventScript_ReadyForBattlePrompt
 	setflag FLAG_INTERACTED_WITH_STEVEN_SPACE_CENTER
 	msgbox MossdeepCity_SpaceCenter_2F_Text_StevenWhyStealRocketFuel, MSGBOX_DEFAULT
@@ -197,6 +228,16 @@ MossdeepCity_SpaceCenter_2F_EventScript_Steven::
 	waitmovement 0
 	releaseall
 	end
+
+MossdeepCity_SpaceCenter_2F_EventScript_TabithaStillGuarding:
+	msgbox MossdeepCity_SpaceCenter_2F_Text_TabithaStillGuarding, MSGBOX_DEFAULT
+	releaseall
+	end
+
+MossdeepCity_SpaceCenter_2F_Text_TabithaStillGuarding:
+	.string "STEVEN: TABITHA still guards the\n"
+	.string "passage on the right. Defeat him,\l"
+	.string "then come back to me.$"
 
 MossdeepCity_SpaceCenter_2F_EventScript_StevenFightMovementSouth::
 	applymovement LOCALID_SPACE_CENTER_2F_STEVEN, MossdeepCity_SpaceCenter_2F_Movement_StevenFightSouth
@@ -243,8 +284,13 @@ MossdeepCity_SpaceCenter_2F_EventScript_ReadyForBattlePrompt::
 MossdeepCity_SpaceCenter_2F_EventScript_ChoosePartyForMultiBattle::
 	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
-	special SavePlayerParty
+	closemessage
 	fadescreen FADE_TO_BLACK
+	playfanfare MUS_HEAL
+	special HealPlayerParty
+	copyvar VAR_POKE_VIAL_CHARGES, VAR_POKE_VIAL_MAX_CHARGES
+	waitfanfare
+	special SavePlayerParty
 	special ChooseHalfPartyForBattle
 	goto_if_ne VAR_RESULT, 0, MossdeepCity_SpaceCenter_2F_EventScript_DoStevenMultiBattle
 	special LoadPlayerParty
@@ -295,6 +341,10 @@ MossdeepCity_SpaceCenter_2F_EventScript_DefeatedMaxieTabitha::
 	msgbox MossdeepCity_SpaceCenter_2F_Text_StevenThankYouComeSeeMeAtHome, MSGBOX_DEFAULT
 	closemessage
 	fadescreen FADE_TO_BLACK
+	playfanfare MUS_HEAL
+	special HealPlayerParty
+	copyvar VAR_POKE_VIAL_CHARGES, VAR_POKE_VIAL_MAX_CHARGES
+	waitfanfare
 	completemilestone FLAG_EC_REPORT_C42_COMPLETE
 	setflag FLAG_EC_EARNED_AURORA_TICKET
 	setflag FLAG_ENABLE_SHIP_BIRTH_ISLAND
@@ -382,8 +432,8 @@ MossdeepCity_SpaceCenter_2F_Text_DoesMagmaWantToGoToSpace:
 	.string "Do they want to go to space, too?$"
 
 MossdeepCity_SpaceCenter_2F_Text_YoureOutnumberedTakeUsOn:
-	.string "You'll have to battle all three\n"
-	.string "of us, one after another!\p"
+	.string "Two of us will take you on.\n"
+	.string "First, get past the front guard!\p"
 	.string "Still want to come through?$"
 
 MossdeepCity_SpaceCenter_2F_Text_GoodAnswer:
@@ -398,19 +448,29 @@ MossdeepCity_SpaceCenter_2F_Text_Grunt5Defeat:
 	.string "What?! It's your turn. Stop that\n"
 	.string "kid!$"
 
-MossdeepCity_SpaceCenter_2F_Text_Grunt6Intro:
-	.string "You beat one of us. Let's see you\n"
-	.string "beat two!$"
-
-MossdeepCity_SpaceCenter_2F_Text_Grunt6Defeat:
-	.string "Oh, no… It's all up to you now!$"
-
 MossdeepCity_SpaceCenter_2F_Text_Grunt7Intro:
 	.string "I'm the last one! MAXIE's\n"
 	.string "counting on me!$"
 
 MossdeepCity_SpaceCenter_2F_Text_Grunt7Defeat:
-	.string "All three of us… defeated!$"
+	.string "Both of us… defeated!$"
+
+MossdeepCity_SpaceCenter_2F_Text_PauseBeforeLastGrunt:
+	.string "The last guard is on the right\n"
+	.string "of this corridor. Talk to him\l"
+	.string "when your team is ready.\p"
+	.string "You can use your VIAL or return\n"
+	.string "to MOSSDEEP's POKéMON CENTER.\l"
+	.string "The first fight stays completed.$"
+
+MossdeepCity_SpaceCenter_2F_Text_ReadyForLastGrunt:
+	.string "Ready for the last guard?\n"
+	.string "You can prepare your team first.$"
+
+MossdeepCity_SpaceCenter_2F_Text_FirstGuardWaiting:
+	.string "Finish with the guards by the\n"
+	.string "stairs first. The final guard\l"
+	.string "stands on the right.$"
 
 MossdeepCity_SpaceCenter_2F_Text_Grunt6PostBattle:
 	.string "Three of us guarding one\n"
@@ -449,14 +509,15 @@ MossdeepCity_SpaceCenter_2F_Text_MaxieUseFuelToEruptVolcano:
 	.string "finish what it began myself.$"
 
 MossdeepCity_SpaceCenter_2F_Text_StevenAreYouReadyToBattle:
-	.string "STEVEN: {PLAYER}! Help me stop\n"
-	.string "them.\p"
-	.string "Are you ready to battle alongside\n"
-	.string "me?$"
+	.string "STEVEN: Ready to stop them?\p"
+	.string "I'll heal your whole party and\n"
+	.string "refill your VIAL. Then choose\l"
+	.string "three to battle alongside me.$"
 
 MossdeepCity_SpaceCenter_2F_Text_StevenHurryGetReadyQuickly:
-	.string "STEVEN: Then, hurry!\n"
-	.string "Get ready quickly!$"
+	.string "STEVEN: Take time to prepare.\n"
+	.string "You can visit the CENTER or PC,\l"
+	.string "then return to me here.$"
 
 MossdeepCity_SpaceCenter_2F_Text_JustWantToExpandLand:
 	.string "All I want…\n"

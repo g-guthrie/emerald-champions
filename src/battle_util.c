@@ -1,4 +1,5 @@
 #include "global.h"
+#include "emerald_champions_battle_plan.h"
 #include "emerald_champions_opening.h"
 #include "battle.h"
 #include "battle_anim.h"
@@ -5697,15 +5698,11 @@ enum Obedience GetAttackerObedienceForAction(void)
     if (FlagGet(FLAG_BADGE08_GET)) // Rain Badge, ignore obedience altogether
         return OBEYS;
 
-    // Emerald Champions: obedience follows the strict level cap exactly
-    // (14/20/30/40/45/55/60/70/80) instead of the vanilla 10-per-badge ladder,
-    // which disagreed with the cap at every step. A Pokémon whose met level is
-    // above the current cap (a Lv. 45 fished up on Route 102 under a Lv. 14
-    // cap) is a catch for later, not a way around the cap; anything caught or
-    // Leveled within the cap always obeys.
+    // Acquisitions normalize to the individual cap. Historical met level
+    // must not make a legally downleveled capture disobey.
     if (B_EXP_CAP_TYPE != EXP_CAP_NONE)
     {
-        obedienceLevel = GetCurrentLevelCap();
+        obedienceLevel = GetPlayerLevelCapForSpecies(gBattleMons[gBattlerAttacker].species);
     }
     else
     {
@@ -5727,7 +5724,7 @@ enum Obedience GetAttackerObedienceForAction(void)
             obedienceLevel = 80;
     }
 
-    if (B_OBEDIENCE_MECHANICS >= GEN_8
+    if (B_EXP_CAP_TYPE == EXP_CAP_NONE && B_OBEDIENCE_MECHANICS >= GEN_8
      && !IsOtherTrainer(gBattleMons[gBattlerAttacker].otId, gBattleMons[gBattlerAttacker].otName))
         levelReferenced = gBattleMons[gBattlerAttacker].metLevel;
     else
@@ -8612,6 +8609,9 @@ bool32 CanMegaEvolve(enum BattlerId battler)
 {
     enum HoldEffect holdEffect = GetBattlerHoldEffectIgnoreNegation(battler);
     enum BattlerPosition position = GetBattlerPosition(battler);
+
+    if (!EmeraldChampions_IsMegaAllowed(battler))
+        return FALSE;
 
     // Check if Player has a Mega Ring.
     if (!TESTING

@@ -317,8 +317,6 @@ static const s32 sExperienceScalingFactors[] =
     159767,
 };
 
-static const u16 sWhiteOutBadgeMoney[9] = { 8, 16, 24, 36, 48, 64, 80, 100, 120 };
-
 enum GiveCaughtMonStates
 {
     GIVECAUGHTMON_CHECK_PARTY_SIZE,
@@ -2310,7 +2308,7 @@ static void Cmd_getexp(void)
                     {
                         enum GrowthRate growthRate = gSpeciesInfo[GetMonData(&gParties[B_TRAINER_PLAYER][*expMonId], MON_DATA_SPECIES)].growthRate;
                         u32 currentExp = GetMonData(&gParties[B_TRAINER_PLAYER][*expMonId], MON_DATA_EXP);
-                        u32 levelCap = GetCurrentLevelCap();
+                        u32 levelCap = GetPlayerLevelCapForSpecies(GetMonData(&gParties[B_TRAINER_PLAYER][*expMonId], MON_DATA_SPECIES));
 
                         if (GetMonData(&gParties[B_TRAINER_PLAYER][*expMonId], MON_DATA_LEVEL) >= levelCap)
                             gBattleStruct->battlerExpReward = 0;
@@ -3937,8 +3935,7 @@ static void Cmd_getmoneyreward(void)
 {
     CMD_ARGS();
 
-    u32 money;
-    u8 sPartyLevel = 1;
+    u32 money = 0;
 
     if (gBattleOutcome == B_OUTCOME_WON)
     {
@@ -3952,35 +3949,7 @@ static void Cmd_getmoneyreward(void)
         }
         AddMoney(&gSaveBlock1Ptr->money, money);
     }
-    else
-    {
-        if (B_WHITEOUT_MONEY <= GEN_3)
-        {
-            money = GetMoney(&gSaveBlock1Ptr->money) / 2;
-        }
-        else
-        {
-            s32 i, count;
-            for (i = 0; i < PARTY_SIZE; i++)
-            {
-                if (GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES_OR_EGG) != SPECIES_NONE
-                && GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES_OR_EGG) != SPECIES_EGG)
-                {
-                    if (GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_LEVEL) > sPartyLevel)
-                        sPartyLevel = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_LEVEL);
-                }
-            }
-            for (count = 0, i = 0; i < ARRAY_COUNT(gBadgeFlags); i++)
-            {
-                if (FlagGet(gBadgeFlags[i]) == TRUE)
-                    ++count;
-            }
-            money = sWhiteOutBadgeMoney[count] * sPartyLevel;
-        }
-        if (!IsEnoughMoney(&gSaveBlock1Ptr->money, money))
-            money = GetMoney(&gSaveBlock1Ptr->money);
-        RemoveMoney(&gSaveBlock1Ptr->money, money);
-    }
+    // Defeat and forfeiting never deduct player money in this campaign.
 
     PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff1, 5, money);
     gBattlescriptCurrInstr = cmd->nextInstr;

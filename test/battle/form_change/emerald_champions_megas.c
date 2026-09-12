@@ -1,7 +1,59 @@
 #include "global.h"
 #include "test/battle.h"
 #include "battle_util.h"
+#include "battle_controllers.h"
 #include "battle_gimmick.h"
+#include "battle_setup.h"
+#include "data.h"
+#include "battle_ai_util.h"
+#include "emerald_champions_battle_plan.h"
+#include "constants/opponents.h"
+
+DOUBLE_BATTLE_TEST("Emerald Champions v4 Mega permissions constrain native eligibility and AI form forecasts")
+{
+    enum Species species;
+    enum Item item;
+    u32 slot;
+    bool32 allowed;
+    PARAMETRIZE { species = SPECIES_METAGROSS; item = ITEM_METAGROSSITE; allowed = TRUE; }
+    PARAMETRIZE { species = SPECIES_RAYQUAZA; item = ITEM_FOCUS_SASH; allowed = FALSE; }
+    GIVEN {
+        PLAYER(SPECIES_MAGIKARP) { Moves(MOVE_SPLASH); }
+        PLAYER(SPECIES_MAGIKARP) { Moves(MOVE_SPLASH); }
+        OPPONENT(species) { Item(item); Moves(MOVE_FALSE_SWIPE, MOVE_DRAGON_ASCENT); }
+        OPPONENT(SPECIES_MAGIKARP) { Moves(MOVE_SPLASH); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_SPLASH); MOVE(playerRight, MOVE_SPLASH); MOVE(opponentLeft, MOVE_FALSE_SWIPE, target: playerLeft); MOVE(opponentRight, MOVE_SPLASH); }
+    } THEN {
+        TrainerBattleParameter savedParams = gTrainerBattleParameter;
+        u32 savedFlags = gBattleTypeFlags;
+        u32 savedSlot = gBattlerPartyIndexes[B_BATTLER_1];
+        // Ordinary DOUBLE_BATTLE_TEST fixtures replay link controllers.
+        // Explicitly enter the campaign namespace for this policy check.
+        gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_IS_MASTER;
+        TRAINER_BATTLE_PARAM.opponentA = TRAINER_STEVEN;
+        const struct TrainerMon *party = GetTrainerPartyFromId(TRAINER_STEVEN);
+        for (slot = 0; slot < GetTrainerPartySizeFromId(TRAINER_STEVEN); slot++)
+            if (party[slot].species == species)
+                break;
+        EXPECT(slot < GetTrainerPartySizeFromId(TRAINER_STEVEN));
+        gBattlerPartyIndexes[B_BATTLER_1] = slot;
+        EXPECT_EQ(GetBattlerTrainer(B_BATTLER_1), B_TRAINER_OPPONENT_A);
+        EXPECT_EQ(EmeraldChampions_IsMegaAllowed(B_BATTLER_1), allowed);
+        EXPECT_EQ(CanMegaEvolve(B_BATTLER_1), allowed);
+        if (!allowed)
+        {
+            EXPECT(!AI_ApplyMegaForm(B_BATTLER_1));
+            EXPECT_EQ(opponentLeft->species, SPECIES_RAYQUAZA);
+        }
+        // An unauthored opponent retains ordinary native item/move eligibility.
+        TRAINER_BATTLE_PARAM.opponentA = TRAINER_NONE;
+        EXPECT(CanMegaEvolve(B_BATTLER_1));
+        gBattlerPartyIndexes[B_BATTLER_1] = savedSlot;
+        gBattleTypeFlags = savedFlags;
+        gTrainerBattleParameter = savedParams;
+    }
+}
 
 SINGLE_BATTLE_TEST("Every Emerald Champions Mega transforms with its native requirement")
 {

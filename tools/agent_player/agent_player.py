@@ -645,9 +645,11 @@ class Session:
                 raise HarnessError(f"slot {slot}: species is not in the checkpoint arsenal")
             species = str(raw["species"])
             source = available[species]
-            level = int(raw.get("level", cap))
-            if level != cap:
-                raise HarnessError(f"slot {slot}: level must equal active Hard cap {cap}")
+            # Let the native cap owner select the species-specific default.
+            # Explicit levels are also checked by the native transaction.
+            level = int(raw["level"]) if "level" in raw else None
+            if level is not None and not 1 <= level <= cap:
+                raise HarnessError(f"slot {slot}: level must be within chapter cap {cap}")
             preset = raw.get("preset")
             if preset is not None:
                 if not isinstance(preset, dict) or preset not in source.get("presets", []):
@@ -695,7 +697,7 @@ class Session:
         for slot in range(6):
             mon = normalized[slot] if slot < len(normalized) else None
             write("gEcAgentPrepSpecies", slot * 4, ids[mon["species"]] if mon else 0)
-            write("gEcAgentPrepLevel", slot * 4, mon["level"] if mon else 0)
+            write("gEcAgentPrepLevel", slot * 4, mon["level"] if mon and mon["level"] is not None else keep, False)
             preset = mon["preset"] if mon else None
             write("gEcAgentPrepPreset", slot * 4, int(preset["choice"]) if preset else keep)
             write("gEcAgentPrepFormat", slot * 4, 1 if preset and preset["format"] == "singles" else 0)
@@ -712,6 +714,9 @@ class Session:
         result_reads = [
             {"name": "prep_result", "address": symbol_table["gEcAgentPrepResult"], "width": 4},
             {"name": "prep_error_slot", "address": symbol_table["gEcAgentPrepErrorSlot"], "width": 4},
+        ] + [
+            {"name": f"prep_level_{slot}", "address": symbol_table["gEcAgentPrepLevel"] + slot * 4, "width": 4}
+            for slot in range(len(normalized))
         ]
         meta = self.load_meta()
         shot = self.run_dir / f"observations/prepared-{meta.get('prep_revision_count', 0) + 1:04d}.png"
@@ -721,6 +726,8 @@ class Session:
             raise HarnessError(f"canonical preparation rejected: result={values['prep_result']} slot={values['prep_error_slot']}; logged {row['timestamp_epoch']}")
         meta = self.load_meta()
         meta["frame_count"] += frames
+        for slot, mon in enumerate(normalized):
+            mon["level"] = values[f"prep_level_{slot}"]
         meta["prep_revision_count"] = int(meta.get("prep_revision_count", 0)) + 1
         atomic_json(self.meta_path, meta)
         row = self.prep("roster", "party", json.dumps(normalized, sort_keys=True), "applied", "fixture canonical game functions plus checkpoint arsenal validation", request.get("rationale"))

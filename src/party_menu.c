@@ -528,7 +528,7 @@ static const u8 sText_askText[] = _("Would you like to change {STR_VAR_1}'s\nabi
 static const u8 sText_doneText[] = _("{STR_VAR_1}'s Ability became\n{STR_VAR_2}!{PAUSE_UNTIL_PRESS}");
 static const u8 sText_CancelTitleCase[] = _("Cancel");
 static const u8 sText_DigThroughWall[] = _("Use DIG to open a passage\nthrough this wall?");
-static const u8 sText_LevelerComplete[] = _("Party preparation is complete.\nCurrent cap: Lv. {STR_VAR_1}.{PAUSE_UNTIL_PRESS}");
+static const u8 sText_LevelerComplete[] = _("Party preparation is complete.\nChapter cap: Lv. {STR_VAR_1}.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_BasePointsResetToZero[] = _("{STR_VAR_1}'s EVs\nwere all reset to zero!{PAUSE_UNTIL_PRESS}");
 static const u8 sText_CannotSendMonToBoxHM[] = _("Cannot send that mon to the box,\nbecause it knows an HM move.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_CannotSendMonToBoxPartner[] = _("Cannot send a mon that doesn't\nbelong to you to the box.{PAUSE_UNTIL_PRESS}");
@@ -5842,7 +5842,7 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
     u8 holdEffectParam = GetItemHoldEffectParam(effectItem);
 
     sInitialLevel = GetMonData(mon, MON_DATA_LEVEL);
-    if (!(B_RARE_CANDY_CAP && sInitialLevel >= GetCurrentLevelCap()))
+    if (!(B_RARE_CANDY_CAP && sInitialLevel >= GetPlayerLevelCapForSpecies(GetMonData(mon, MON_DATA_SPECIES))))
     {
         u8 targetLevel;
 
@@ -5851,7 +5851,7 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
         targetLevel = GetMonData(mon, MON_DATA_LEVEL);
         if (!cannotUseEffect && holdEffectParam == 0)
         {
-            u32 levelCap = min(GetCurrentLevelCap(), MAX_LEVEL);
+            u32 levelCap = GetPlayerLevelCapForSpecies(GetMonData(mon, MON_DATA_SPECIES));
             u32 targetExperience;
 
             if (isLeveler)
@@ -5909,7 +5909,9 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
         else
         {
             gPartyMenuUseExitCallback = FALSE;
-            DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
+            ConvertIntToDecimalStringN(gStringVar1, GetPlayerLevelCapForSpecies(GetMonData(mon, MON_DATA_SPECIES)), STR_CONV_MODE_LEFT_ALIGN, 3);
+            StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("This Pokémon's level cap is Lv. {STR_VAR_1}."));
+            DisplayPartyMenuMessage(gStringVar4, TRUE);
             ScheduleBgCopyTilemapToVram(2);
             if (gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD && CheckBagHasItem(gSpecialVar_ItemId, 1))
                 gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
@@ -6556,6 +6558,8 @@ static void RestoreFusionMon(struct Pokemon *mon)
 {
     s32 i;
 
+    ClampMonToPlayerLevelCap(mon);
+
     for (i = 0; i < PARTY_SIZE; i++)
     {
         if (GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES) == SPECIES_NONE)
@@ -6775,6 +6779,7 @@ static void Task_TryItemUseFusionChange(u8 taskId)
         if (gTasks[taskId].fusionType == UNFUSE_MON)
             ApplyEmeraldChampionsUnfusionMoves(mon);
         CalculateMonStats(mon);
+        ClampMonToPlayerLevelCap(mon);
         CompactPartySlots();
         CalculatePlayerPartyCount();
         gTasks[taskId].tState++;
@@ -7068,6 +7073,7 @@ bool32 TryItemUseFormChange(u8 taskId, TaskFunc task)
 
     if (TryFormChange(mon, FORM_CHANGE_ITEM_USE, B_TRAINER_PLAYER))
     {
+        ClampMonToPlayerLevelCap(mon);
         gPartyMenuUseExitCallback = TRUE;
         SetWordTaskArg(taskId, tNextFunc, (u32)task);
         gTasks[taskId].func = Task_TryItemUseFormChange;
@@ -7118,6 +7124,7 @@ bool32 TryMultichoiceFormChange(u8 taskId)
 
     if (TryFormChange(mon, FORM_CHANGE_ITEM_USE_MULTICHOICE, B_TRAINER_PLAYER))
     {
+        ClampMonToPlayerLevelCap(mon);
         gPartyMenuUseExitCallback = TRUE;
         SetWordTaskArg(taskId, tNextFunc, (u32)Task_ClosePartyMenuAfterText);
         gTasks[taskId].func = Task_TryItemUseFormChange;
@@ -7205,6 +7212,8 @@ void TryItemHoldFormChange(struct Pokemon *mon, s8 slotId, enum BattleTrainer tr
 {
     if (TryFormChange(mon, FORM_CHANGE_ITEM_HOLD, trainer))
     {
+        if (trainer == B_TRAINER_PLAYER)
+            ClampMonToPlayerLevelCap(mon);
         enum Species species = GetMonData(mon, MON_DATA_SPECIES);
         PlayCry_NormalNoDucking(species, 0, CRY_VOLUME_RS, CRY_VOLUME_RS);
         FreeAndDestroyMonIconSprite(&gSprites[sPartyMenuBoxes[slotId].monSpriteId]);

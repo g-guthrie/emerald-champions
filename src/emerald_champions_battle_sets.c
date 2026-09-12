@@ -532,6 +532,8 @@ static u8 ApplyPreset(
             SetMonData(mon, MON_DATA_HELD_ITEM, &preset->item);
     }
     CalculateMonStats(mon);
+    if (application == PRESET_TUTOR || application == PRESET_EVOLUTION)
+        ClampMonToPlayerLevelCap(mon);
 
     if (preset->requiredItem == ITEM_NONE)
         return EC_BATTLE_SET_SUCCESS;
