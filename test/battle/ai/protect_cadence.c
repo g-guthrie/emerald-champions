@@ -5,6 +5,47 @@
     | AI_FLAG_SMART_MON_CHOICES | AI_FLAG_PP_STALL_PREVENTION | AI_FLAG_HP_AWARE \
     | AI_FLAG_TRY_TO_2HKO | AI_FLAG_POWERFUL_STATUS | AI_FLAG_KNOW_OPPONENT_PARTY | AI_FLAG_DOUBLE_BATTLE)
 
+AI_DOUBLE_BATTLE_TEST("EC Protect cadence: a last entrant takes its Fake Out knockout instead of an empty first shield")
+{
+    GIVEN {
+        AI_FLAGS(CADENCE_FLAGS);
+        PLAYER(SPECIES_MARSHTOMP) {
+            Level(20); HP(76); MaxHP(76); Attack(45); Defense(39);
+            SpAttack(51); SpDefense(39); Speed(27);
+            Ability(ABILITY_DAMP); Item(ITEM_EVIOLITE);
+            Moves(MOVE_MUDDY_WATER, MOVE_EARTH_POWER, MOVE_ICY_WIND, MOVE_WIDE_GUARD);
+        }
+        PLAYER(SPECIES_AERODACTYL) {
+            Level(20); HP(1); MaxHP(68); Attack(65); Defense(37);
+            SpAttack(31); SpDefense(41); Speed(82);
+            Ability(ABILITY_UNNERVE);
+            Moves(MOVE_ROCK_SLIDE, MOVE_TAILWIND, MOVE_DUAL_WINGBEAT, MOVE_PROTECT);
+        }
+        OPPONENT(SPECIES_MAGIKARP) { HP(1); Speed(10); Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_MAGIKARP) { HP(1); Speed(10); Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_CROAGUNK) {
+            Level(20); HP(55); MaxHP(55); Attack(52); Defense(27);
+            SpAttack(31); SpDefense(27); Speed(43);
+            Ability(ABILITY_DRY_SKIN); Item(ITEM_EVIOLITE);
+            Moves(MOVE_POISON_JAB, MOVE_DRAIN_PUNCH, MOVE_FAKE_OUT, MOVE_PROTECT);
+        }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_EARTH_POWER, target: opponentLeft);
+            MOVE(playerRight, MOVE_DUAL_WINGBEAT, target: opponentRight, hit: TRUE);
+            EXPECT_SEND_OUT(opponentLeft, 2);
+        }
+        TURN {
+            MOVE(playerLeft, MOVE_EARTH_POWER, target: opponentLeft);
+            MOVE(playerRight, MOVE_DUAL_WINGBEAT, target: opponentLeft, hit: TRUE);
+            EXPECT_MOVE(opponentLeft, MOVE_FAKE_OUT, target: playerRight);
+        }
+    } THEN {
+        EXPECT_EQ(playerRight->hp, 0);
+        EXPECT_EQ(opponentLeft->hp, 0);
+    }
+}
+
 AI_DOUBLE_BATTLE_TEST("EC Protect cadence: a lone survivor needs a payoff to repeat its guard")
 {
     bool32 poisonClock;

@@ -3011,11 +3011,8 @@ static s32 EvaluatePairBoard(enum BattlerId actor, u32 noActionMask, struct Pair
     enum BattlerId firstFoe = GetOppositeBattler(actor);
     enum BattlerId secondFoe = GetPartnerBattler(firstFoe);
     bool32 canWait = PairWaitingHasPayoff(ev, actor);
-    enum Move lastMove = gLastMoves[actor];
-    bool32 emptySoloRepeat = !canWait && !IsBattlerAlive(partner)
-        && ev->board.reserveValue[ev->side] == 0
-        && lastMove != MOVE_NONE && lastMove != MOVE_UNAVAILABLE
-        && gBattleMoveEffects[GetMoveEffect(lastMove)].usesProtectCounter;
+    bool32 emptySoloGuard = !canWait && !IsBattlerAlive(partner)
+        && ev->board.reserveValue[ev->side] == 0;
     bool32 hasAlternative = FALSE;
     for (u32 index = 0; index < 2; index++)
     {
@@ -3042,10 +3039,10 @@ static s32 EvaluatePairBoard(enum BattlerId actor, u32 noActionMask, struct Pair
             if (!canWait && hasAlternative && PairIsPassiveGuard(&ev->action[actor])
              && PairIsPassiveGuard(&ev->action[partner]))
                 continue;
-            // A lone survivor cannot turn the same lost board into progress
-            // by repeatedly keeping only its own HP. Retain a first shield,
-            // real waiting payoffs, contact effects and modern side guards.
-            if (emptySoloRepeat && hasAlternative && PairIsPassiveGuard(&ev->action[actor])
+            // The first shield also needs a payoff when nobody can act behind
+            // it. Otherwise it can forfeit a one-turn opportunity like Fake Out.
+            // Keep real waiting payoffs, contact effects and modern side guards.
+            if (emptySoloGuard && hasAlternative && PairIsPassiveGuard(&ev->action[actor])
              && GetProtectType(GetMoveProtectMethod(ev->action[actor].move)) == PROTECT_TYPE_SINGLE)
                 continue;
             s32 score = INT_MAX;
