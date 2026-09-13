@@ -1,5 +1,5 @@
 #! Generated from the canonical Emerald Champions Game Book; edit the book.
-#! Book SHA256: 9760ce213b868e930c26cd75baf52b65be5607d8970f68f27bb0cb1724e6731b
+#! Book SHA256: d2bf84e965c5fcc85888cc43f045bb98993d13a9bfdfd18d1cb5726d566ab762
 #! Reconcile with: emerald_champions_teams.py --book PATH --write
 
 ## E0001 TRAINER_BRENDAN_ROUTE_103_MUDKIP class=rival
@@ -316,9 +316,9 @@ NOSEPASS @SITRUS_BERRY MAGNET_PULL MODEST 252/0/4/252/0/0 0 | POWER_GEM, THUNDER
 BINACLE @RINDO_BERRY TOUGH_CLAWS ADAMANT 252/252/4/0/0/0 1 | ROCK_SLIDE, X_SCISSOR, CROSS_CHOP, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 
 ## E0029 TRAINER_MARC class=gym
-strategy: SNOW,SETUP
+strategy: SNOW,SETUP,PRESSURE
 mega_slots: NONE
-plan: First two useful turns: Amaura establishes snow and uses Aurora Veil when it can complete; Stonjourner supplies Power Spot-backed offense or Wide Guard. Turn two chooses damage or Tyrunt's setup rather than treating Veil as permanent safety. Alternate deployment: Stonjourner plus Scarf Cranidos gives immediate amplified Rock pressure. Reserves & disruption: Klawf's Anger Shell is reactive and Archen needs HP preservation. Snow does not automatically improve the defenses of every Rock teammate. Counterplay & audit: Weather replacement before Veil, concentrated special damage and screen removal. Disposition: Keep a distinctive pre-boss protection lesson; do not attribute snow's Ice-only benefits to the whole party.
+plan: First two useful turns: Amaura establishes snow and uses Aurora Veil when it can complete; Stonjourner supplies Power Spot-backed offense or Wide Guard. Turn two chooses damage or Tyrunt's setup rather than treating Veil as permanent safety. Use the existing pressure valuation: trade Sash HP for useful Blizzard damage when the partner cannot act, while retaining Protect for actual Fake Out denial or an effective partner action. Alternate deployment: Stonjourner plus Scarf Cranidos gives immediate amplified Rock pressure. Reserves & disruption: Klawf's Anger Shell is reactive and Archen needs HP preservation. Snow does not automatically improve the defenses of every Rock teammate. Counterplay & audit: Weather replacement before Veil, concentrated special damage and screen removal. Disposition: Keep a distinctive pre-boss protection lesson; do not attribute snow's Ice-only benefits to the whole party.
 crack: Weather replacement before Veil, concentrated special damage and screen removal. Disposition: Keep a distinctive pre-boss protection lesson; do not attribute snow's Ice-only benefits to the whole party.
 AMAURA @FOCUS_SASH SNOW_WARNING TIMID 252/0/4/0/0/252 0 | AURORA_VEIL, BLIZZARD, ICY_WIND, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 STONJOURNER @RINDO_BERRY POWER_SPOT ADAMANT 252/252/4/0/0/0 0 | ROCK_SLIDE, HIGH_HORSEPOWER, WIDE_GUARD, STEALTH_ROCK | ivs=31/31/31/31/31/31 | friendship=255
