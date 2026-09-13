@@ -3836,6 +3836,34 @@ enum
     STATE_SELECTION_SCRIPT_MAY_RUN
 };
 
+bool32 BattleAIUsesCommittedActions(void)
+{
+    return (gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_FIRST_BATTLE))
+        && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK | BATTLE_TYPE_PALACE))
+        // Native AI tests feed recorded human inputs to live AI controllers.
+        && (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED) || gTestRunnerEnabled)
+        && !IsAiVsAiBattle();
+}
+
+static bool32 AreHumanActionsConfirmed(void)
+{
+    for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
+        if (!BattlerHasAi(battler)
+         && gBattleCommunication[battler] != STATE_WAIT_ACTION_CONFIRMED_STANDBY
+         && gBattleCommunication[battler] != STATE_WAIT_ACTION_CONFIRMED)
+            return FALSE;
+    return TRUE;
+}
+
+bool32 IsBattlerActionCommitted(enum BattlerId battler)
+{
+    // The first flank can still be cancelled while choosing the second.
+    // Selection scripts have larger state IDs but are not confirmed input.
+    return gBattleMainFunc == HandleTurnActionSelectionState
+        && BattleAIUsesCommittedActions() && !BattlerHasAi(battler)
+        && AreHumanActionsConfirmed();
+}
+
 static void HandleTurnActionSelectionState(void)
 {
     s32 i;
@@ -3899,12 +3927,19 @@ static void HandleTurnActionSelectionState(void)
             RecordedBattle_CopyBattlerMoves(battler);
             gBattleCommunication[battler] = STATE_BEFORE_ACTION_CHOSEN;
             bool32 isAiBattler = (gBattleTypeFlags & BATTLE_TYPE_HAS_AI || IsWildMonSmart()) && (BattlerHasAi(battler) && !(gBattleTypeFlags & BATTLE_TYPE_PALACE));
-            if (isAiBattler)
+            if (isAiBattler && !BattleAIUsesCommittedActions())
             {
                 ComputeAiBattlerDecisions(battler); // Do AI score computations here so we can use them in AI_TrySwitchOrUseItem
             }
             // fallthrough
         case STATE_BEFORE_ACTION_CHOSEN: // Choose an action.
+            if (BattleAIUsesCommittedActions() && BattlerHasAi(battler))
+            {
+                if (!AreHumanActionsConfirmed())
+                    break;
+                if (!(gAiLogicData->battlerMovesScored & (1u << battler)) && IsBattlerAlive(battler))
+                    ComputeAiBattlerDecisions(battler);
+            }
             gBattleStruct->monToSwitchIntoId[battler] = PARTY_SIZE;
             if (gBattleTypeFlags & BATTLE_TYPE_MULTI
                 || (position & BIT_FLANK) == B_FLANK_LEFT

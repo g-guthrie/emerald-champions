@@ -905,7 +905,7 @@ void SetAiLogicDataForTurn(struct AiLogicData *aiData)
     for (enum BattlerId battler = 0; battler < battlersCount; battler++)
     {
         // Prediction limited to player side but can be expanded to read partners move in the future
-        if (!IsOnPlayerSide(battler))
+        if (!IsOnPlayerSide(battler) || BattleAIUsesCommittedActions())
             continue;
 
         BattleAI_SetupAIData(0xF, battler);

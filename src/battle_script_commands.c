@@ -8310,7 +8310,9 @@ static void Cmd_trysetcaughtmondexflags(void)
     else
     {
         HandleSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_SET_CAUGHT, personality);
-        gBattlescriptCurrInstr = cmd->nextInstr;
+        // Catches before Birch's send-off still count. Their Dex announcement
+        // and page must wait until the player actually owns the Pokedex.
+        gBattlescriptCurrInstr = FlagGet(FLAG_SYS_POKEDEX_GET) ? cmd->nextInstr : cmd->failInstr;
     }
 }
 

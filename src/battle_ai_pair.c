@@ -133,7 +133,6 @@ static u32 PairMonValue(const struct PairBoard *board, enum BattleTrainer owner,
 
 static void SavePairBoard(struct PairBoard *board, enum BattleSide evaluatingSide)
 {
-    AI_CaptureCandidateState(board->state);
     u8 scoreLimit[MAX_BATTLE_TRAINERS] = {0};
     u8 ownerSide[MAX_BATTLE_TRAINERS] = {0};
     board->activeMask = 0;
@@ -235,6 +234,36 @@ static bool32 PairTargetIsLegal(enum BattlerId actor, enum BattlerId target, enu
 static void BuildPairActions(struct PairEvaluation *ev, enum BattlerId actor, u32 noActionMask)
 {
     ev->count[actor] = 0;
+    if (IsBattlerActionCommitted(actor))
+    {
+        struct PairAction action = {MOVE_NONE, AI_SCORE_DEFAULT, PAIR_IDLE, actor};
+        if (!(noActionMask & (1u << actor)) && IsBattlerAlive(actor)
+         && gChosenActionByBattler[actor] == B_ACTION_USE_MOVE
+         && gBattleMons[actor].volatiles.semiInvulnerable != STATE_COMMANDER
+         && !gBattleMons[actor].volatiles.rechargeTimer)
+        {
+            action.index = gBattleStruct->chosenMovePositions[actor];
+            action.move = GetCommittedMove(actor);
+            action.target = gBattleStruct->moveTarget[actor];
+            if (gProtectStructs[actor].noValidMoves)
+            {
+                action.index = 0;
+            }
+            else if (!gBattleMons[actor].volatiles.multipleTurns
+                  && GetActiveGimmick(actor) != GIMMICK_Z_MOVE
+                  && gBattleMons[actor].volatiles.encoredMove != MOVE_NONE)
+            {
+                action.index = gBattleMons[actor].volatiles.encoredMovePos;
+            }
+            action.executedMove = GetMoveEffect(action.move) == EFFECT_NATURE_POWER ? GetNaturePowerMove() : action.move;
+            if (action.move == MOVE_NONE)
+                action.index = PAIR_IDLE;
+        }
+        // A locked command may fail or hit an ally. Neither permits inventing
+        // a different move/target; non-move commands spend this actor's turn.
+        ev->choices[actor][ev->count[actor]++] = action;
+        return;
+    }
     if (!(noActionMask & (1u << actor)) && IsBattlerAlive(actor)
      && gBattleMons[actor].volatiles.semiInvulnerable != STATE_COMMANDER)
     {
@@ -696,6 +725,12 @@ static u32 ChooseJointFoeForecast(struct PairEvaluation *ev, enum BattlerId acto
     enum BattlerId first = GetOppositeBattler(actor);
     enum BattlerId second = GetPartnerBattler(first);
     enum BattlerId partner = GetPartnerBattler(actor);
+    if (ev->count[first] == 1 && ev->count[second] == 1)
+    {
+        forecasts[0][0] = ev->choices[first][0];
+        forecasts[0][1] = ev->choices[second][0];
+        return 1;
+    }
     u8 masks[2][PAIR_ACTIONS] = {0};
     const enum BattlerId foes[2] = {first, second};
     const enum BattlerId targets[2] = {actor, partner};
@@ -919,10 +954,10 @@ static s32 PairPlanScore(enum BattlerId actor, const struct PairAction *action)
     return score;
 }
 
-static u32 PairRaiseStage(u8 *stage, u32 increase)
+static u32 PairChangeStage(u8 *stage, s32 change)
 {
     u32 old = *stage;
-    u32 next = min(MAX_STAT_STAGE, old + increase);
+    u32 next = min(MAX_STAT_STAGE, max(MIN_STAT_STAGE, (s32)old + change));
     u32 oldNum = old >= DEFAULT_STAT_STAGE ? 2 + old - DEFAULT_STAT_STAGE : 2;
     u32 oldDen = old >= DEFAULT_STAT_STAGE ? 2 : 2 + DEFAULT_STAT_STAGE - old;
     u32 nextNum = next >= DEFAULT_STAT_STAGE ? 2 + next - DEFAULT_STAT_STAGE : 2;
@@ -1807,10 +1842,16 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
             if (planScore <= -10000)
                 return -10000;
             score += planScore;
-            if (action->score == 0 && !PairSupport(move))
-                score -= 500;
-            else if (!PairSupport(move) && effect != EFFECT_WISH)
-                score += (action->score - AI_SCORE_DEFAULT) * 4;
+            // The complete turn owns protection's value. Applying the
+            // isolated scorer again can prefer a blocked attack over a shield
+            // that saves HP while producing the same damage on both sides.
+            if (!PairSupport(move) && effect != EFFECT_WISH && effect != EFFECT_PROTECT)
+            {
+                if (action->score == 0)
+                    score -= 500;
+                else
+                    score += (action->score - AI_SCORE_DEFAULT) * 4;
+            }
         }
         if (effect == EFFECT_BELLY_DRUM)
         {
@@ -1912,8 +1953,10 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
             if (hp[partner] && !(acted & (1u << partner)) && !IsBattleMoveStatus(other->executedMove)
              && other->index != PAIR_IDLE && gAiLogicData->abilities[partner] != ABILITY_GOOD_AS_GOLD)
                 boost[partner] = boost[partner] * 3 / 2;
-            else
-                score -= sign * 150;
+            // A wasted boost already produces no damage in this trial. An
+            // extra penalty here makes Helping Hand + Protect look worse than
+            // Helping Hand + an attack into a confirmed opposing Protect,
+            // despite the latter losing more HP for the same zero damage.
             continue;
         }
         if (effect == EFFECT_FOLLOW_ME)
@@ -2313,12 +2356,12 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                  || (targetAbility == ABILITY_LIGHTNING_ROD && type == TYPE_ELECTRIC))
                 {
                     if (!(acted & (1u << target)) && IsBattleMoveSpecial(actions[target].executedMove))
-                        boost[target] = boost[target] * PairRaiseStage(&attackStage[target], 1) / 100;
+                        boost[target] = boost[target] * PairChangeStage(&attackStage[target], 1) / 100;
                 }
                 else if (targetAbility == ABILITY_MOTOR_DRIVE && type == TYPE_ELECTRIC)
                 {
                     if (!(acted & (1u << target)))
-                        speed[target] = speed[target] * PairRaiseStage(&speedStage[target], 1) / 100;
+                        speed[target] = speed[target] * PairChangeStage(&speedStage[target], 1) / 100;
                 }
                 else if ((targetAbility == ABILITY_WATER_ABSORB && type == TYPE_WATER)
                       || (targetAbility == ABILITY_DRY_SKIN && type == TYPE_WATER)
@@ -2346,17 +2389,19 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
             u32 hitChance = damageHitChance * actionChance[actor] / 10000;
             u32 medianDamage = amount;
             amount = min(amount, hp[target]) * hitChance / 100;
-            if (IsBattlerAlly(actor, target) && hp[target] > worstDamage && amount
+            if (hp[target] > worstDamage && amount
              && gAiLogicData->abilities[actor] != ABILITY_MOLD_BREAKER
              && gAiLogicData->abilities[actor] != ABILITY_TERAVOLT
              && gAiLogicData->abilities[actor] != ABILITY_TURBOBLAZE
              && gAiLogicData->abilities[target] == ABILITY_JUSTIFIED && GetMoveType(move) == TYPE_DARK
              && !(acted & (1u << target)) && IsBattleMovePhysical(actions[target].executedMove))
             {
-                u32 gain = PairRaiseStage(&attackStage[target], effect == EFFECT_BEAT_UP ? AI_GetBeatUpHitCount(actor) : 1);
+                u32 gain = PairChangeStage(&attackStage[target], effect == EFFECT_BEAT_UP ? AI_GetBeatUpHitCount(actor) : 1);
                 boost[target] = boost[target] * gain / 100;
             }
-            if (IsBattlerAlly(actor, target) && hp[target] > worstDamage && amount
+            // Hit-triggered boosts belong to either side. Hitting an opposing
+            // Sturdy/Policy recipient can enable its already-committed reply.
+            if (hp[target] > worstDamage && amount
              && !(acted & (1u << target)) && !IsBattleMoveStatus(actions[target].executedMove))
             {
                 if (gAiLogicData->holdEffects[target] == HOLD_EFFECT_WEAKNESS_POLICY
@@ -2364,11 +2409,9 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                  && gAiLogicData->effectiveness[actor][target][action->index] > UQ_4_12(1.0))
                 {
                     usedItems |= 1u << target;
-                    if (gAiLogicData->abilities[target] != ABILITY_CONTRARY)
-                    {
-                        u32 gain = PairRaiseStage(&attackStage[target], gAiLogicData->abilities[target] == ABILITY_SIMPLE ? 4 : 2);
-                        boost[target] = boost[target] * gain / 100;
-                    }
+                    u32 gain = PairChangeStage(&attackStage[target],
+                        GetAdjustedStatStage(2, gAiLogicData->abilities[target], FALSE));
+                    boost[target] = boost[target] * gain / 100;
                 }
                 if (gAiLogicData->abilities[target] == ABILITY_STEAM_ENGINE
                  && (GetMoveType(move) == TYPE_FIRE || GetMoveType(move) == TYPE_WATER)
@@ -2378,7 +2421,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                 {
                     // Steam Engine adds six stages; prior Speed drops are not
                     // erased. From -2 it reaches +4, not the +6 ceiling.
-                    u32 gain = PairRaiseStage(&speedStage[target], 6);
+                    u32 gain = PairChangeStage(&speedStage[target], 6);
                     speed[target] = speed[target] * gain / 100;
                 }
             }
@@ -2684,7 +2727,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                     if (lowered && !IsBattlerAlly(actor, target) && !(acted & (1u << target))
                      && ((gAiLogicData->abilities[target] == ABILITY_DEFIANT && IsBattleMovePhysical(actions[target].executedMove))
                          || (gAiLogicData->abilities[target] == ABILITY_COMPETITIVE && IsBattleMoveSpecial(actions[target].executedMove))))
-                        boost[target] = boost[target] * PairRaiseStage(&attackStage[target], 2) / 100;
+                        boost[target] = boost[target] * PairChangeStage(&attackStage[target], 2) / 100;
                 }
             }
             if (move == MOVE_FAKE_OUT && amount && gBattleStruct->battlerState[actor].isFirstTurn
@@ -2860,6 +2903,27 @@ static bool32 RefreshPairMoveData(u32 noActionMask, bool32 canStop)
 }
 
 
+static u32 LoadCommittedSwitches(u32 noActionMask)
+{
+    enum BattlerId actors[2];
+    u32 slots[2], count = 0;
+    for (enum BattlerId actor = 0; actor < gBattlersCount; actor++)
+        if (!(noActionMask & (1u << actor)) && IsBattlerActionCommitted(actor)
+         && gChosenActionByBattler[actor] == B_ACTION_SWITCH
+         && gBattleStruct->monToSwitchIntoId[actor] < PARTY_SIZE)
+        {
+            actors[count] = actor;
+            slots[count++] = gBattleStruct->monToSwitchIntoId[actor];
+            noActionMask |= 1u << actor;
+        }
+    if (count == 2)
+        AI_LoadSwitchCandidatePair(actors[0], slots[0], actors[1], slots[1], FALSE);
+    else if (count == 1)
+        AI_LoadSwitchCandidate(actors[0], slots[0], FALSE);
+    return noActionMask;
+}
+
+
 static s32 EvaluatePairBoard(enum BattlerId actor, u32 noActionMask, struct PairAction *chosen, struct PairEvaluation *ev, bool32 refresh, bool32 canStop)
 {
     s32 best = INT_MIN;
@@ -2867,6 +2931,10 @@ static s32 EvaluatePairBoard(enum BattlerId actor, u32 noActionMask, struct Pair
     memset(ev, 0, sizeof(*ev));
     ev->board.state = state;
     ev->side = GetBattlerSide(actor);
+    AI_CaptureCandidateState(ev->board.state);
+    u32 committedMask = LoadCommittedSwitches(noActionMask);
+    refresh |= committedMask != noActionMask;
+    noActionMask = committedMask;
     SavePairBoard(&ev->board, ev->side);
     if (refresh && !RefreshPairMoveData(noActionMask, canStop))
         goto done;
@@ -2911,8 +2979,8 @@ static s32 EvaluatePairBoard(enum BattlerId actor, u32 noActionMask, struct Pair
             action->planScore = GetBattlerSide(battler) == ev->side ? PairPlanScore(battler, action) : 0;
         }
     }
-    // Forecast from available moves and the observed board. The human's
-    // unexecuted command and target buffers are never selection inputs.
+    // Confirmed human actions have exactly one choice. Only genuinely unknown
+    // actors retain the alternative-move/target forecast.
     struct PairAction forecasts[2][2];
     u32 forecastCount = ChooseJointFoeForecast(ev, actor, forecasts);
     enum BattlerId firstFoe = GetOppositeBattler(actor);
@@ -2970,6 +3038,7 @@ done:
     AI_RestoreCandidateState(ev->board.state);
     return best;
 }
+
 
 s32 AI_EvaluateDoublesPosition(enum BattlerId battler, u32 noActionMask)
 {
@@ -3188,10 +3257,10 @@ static bool32 PairPreservesStevenMetagross(enum BattlerId actor)
 bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
 {
     enum BattlerId partner = GetPartnerBattler(actor);
-    if (!IsDoubleBattle() || !IsBattlerAlive(actor) || !IsBattlerAlive(partner) || !BattlerHasAi(partner)
+    if (!IsDoubleBattle() || !IsBattlerAlive(actor) || !BattlerHasAi(partner)
         || gAiLogicData->aiPredictionInProgress
         || !(gAiThinkingStruct->aiFlags[actor] & AI_FLAG_SMART_MON_CHOICES)
-        || !(gAiThinkingStruct->aiFlags[partner] & AI_FLAG_SMART_MON_CHOICES))
+        || (IsBattlerAlive(partner) && !(gAiThinkingStruct->aiFlags[partner] & AI_FLAG_SMART_MON_CHOICES)))
         return FALSE;
     if (gAiLogicData->battlerMovesScored & (1u << actor))
         return TRUE;
@@ -3201,7 +3270,7 @@ bool32 AI_ComputeDoublesDecisions(enum BattlerId actor)
     u8 reserves[2][PARTY_SIZE + 1] = {{PARTY_SIZE}, {PARTY_SIZE}};
     u32 count[2] = {1, 1};
     enum BattlerId actors[2] = {actor, partner};
-    u32 canMega = (CanMegaEvolve(actor) ? 1u : 0u) | (CanMegaEvolve(partner) ? 2u : 0u);
+    u32 canMega = (CanMegaEvolve(actor) ? 1u : 0u) | (IsBattlerAlive(partner) && CanMegaEvolve(partner) ? 2u : 0u);
     bool32 deadline[2] = {EC_PerishMustEscape(actor), EC_PerishMustEscape(partner)};
     bool32 earlyPivot[2] = {EC_PerishShouldPivotEarly(actor), EC_PerishShouldPivotEarly(partner)};
     for (u32 index = 0; index < 2; index++)
