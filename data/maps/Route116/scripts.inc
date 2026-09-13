@@ -347,7 +347,9 @@ Route116_Text_ScoundrelMadeOffWithPeeko:
 	.string "we were jumped by an odd thug…\p"
 	.string "The scoundrel made off with my\n"
 	.string "darling PEEKO!\p"
-	.string "Wrrrooooooaaaar! PEEKO!$"
+	.string "He's inside RUSTURF TUNNEL,\n"
+	.string "just behind me! Please bring\l"
+	.string "PEEKO back!$"
 
 Route116_Text_WantToDigTunnel:
 	.string "Nnn… Roar!\p"
