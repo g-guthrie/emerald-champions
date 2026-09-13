@@ -2176,6 +2176,25 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                 selectedTarget = GetPartnerBattler(selectedTarget);
             }
         }
+        // Native Follow Me resolves before fainted-target fallback. Resolve it
+        // once so the original and fallback paths cannot both hit the redirector.
+        enum BattlerId follow = redirect[GetBattlerSide(selectedTarget)];
+        bool32 followed = !PairSpread(move) && !IsBattlerAlly(actor, selectedTarget)
+            && follow < MAX_BATTLERS_COUNT && hp[follow]
+            && !IsMoveRedirectionPrevented(actor, move, gAiLogicData->abilities[actor])
+            && (!IsPowderMove(actions[follow].move)
+                || IsAffectedByPowderMove(actor, gAiLogicData->abilities[actor], gAiLogicData->holdEffects[actor]));
+        if (followed)
+            selectedTarget = follow;
+        enum BattlerId fallback = GetPartnerBattler(selectedTarget);
+        // HP is conditional on survival. Keep the original recipient's live
+        // branch and send the already-fainted mass to its partner, as native
+        // CancelerSetTargets does. Freeze this before applying the current hit:
+        // this move cannot knock out one foe and then hit the other as well.
+        u32 fallbackChance = !retaliation && !followed && !PairSpread(move)
+            && !IsBattlerAlly(actor, selectedTarget)
+            && GetMoveTarget(move) != TARGET_OPPONENTS_FIELD
+            ? (hp[selectedTarget] ? 100 - survival[selectedTarget] : 100) : 0;
         for (enum BattlerId original = 0; original < gBattlersCount; original++)
         {
             if (original == actor || !hp[original]
@@ -2186,7 +2205,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                 if (IsBattlerAlly(actor, original) && GetMoveTarget(move) == TARGET_BOTH)
                     continue;
             }
-            else if (original != selectedTarget)
+            else if (original != selectedTarget && (original != fallback || !fallbackChance))
                 continue;
             enum BattlerId target = original;
             if (effect == EFFECT_SUCKER_PUNCH
@@ -2195,13 +2214,6 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                  // when Encore will replace that command at execution time.
                  || IsBattleMoveStatus(ev->action[target].move)))
                 continue;
-            enum BattlerId follow = redirect[GetBattlerSide(target)];
-            bool32 followed = !PairSpread(move) && !IsBattlerAlly(actor, target) && follow < MAX_BATTLERS_COUNT && hp[follow]
-             && !IsMoveRedirectionPrevented(actor, move, gAiLogicData->abilities[actor])
-             && (!IsPowderMove(actions[follow].move)
-                 || IsAffectedByPowderMove(actor, gAiLogicData->abilities[actor], gAiLogicData->holdEffects[actor]));
-            if (followed)
-                target = follow;
             if (!MoveIgnoresProtect(move)
              && (((protected & (1u << target)) && !AI_CanContactBypassProtect(actor, target, move))
                  || (PairSpread(move) && (wideGuard & (1u << GetBattlerSide(target))))
@@ -2209,7 +2221,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                      && !IsBattlerAlly(actor, target)
                      && (quickGuard & (1u << GetBattlerSide(target))))))
                 continue;
-            u32 guardHitChance = 100;
+            u32 guardHitChance = !PairSpread(move) && original != selectedTarget ? fallbackChance : 100;
             if (!MoveIgnoresProtect(move))
             {
                 if (!AI_CanContactBypassProtect(actor, target, move))
@@ -2354,7 +2366,9 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                 // One payment if ANY recipient is affected, including allies
                 // and Substitute/Disguise. Execution/paralysis is one shared
                 // event and is applied once after the complete move below.
-                orbHitChance = 100 - (100 - orbHitChance) * (100 - affectedChance) / 100;
+                orbHitChance = PairSpread(move)
+                    ? 100 - (100 - orbHitChance) * (100 - affectedChance) / 100
+                    : min(100, orbHitChance + affectedChance); // Fallback recipients are exclusive.
             }
             if ((ev->screenBreakerMoves[actor] & (1u << action->index)) && damage.maximum)
             {
