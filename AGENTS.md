@@ -73,6 +73,11 @@ Old 7.0/7.1 branches and archived reports are evidence, not competing instructio
   restores battle-start held items (including berries) after the battle; they
   remain consumed during that battle unless a native move/ability restores them.
   Never add manual item healing to solve a loss.
+- Review every trainer for insufficient difficulty, including ordinary route fights.
+  Zero or one player faint is a trigger to assess sustained pressure, matchup and
+  useful enemy actions. Propose concrete team or level improvements when helpful;
+  do not turn the faint count into an automatic quota. Fix AI defects before
+  compensating with levels, and preserve thematic species and strong counterplay.
 - Every Gym trainer should be an exceptional difficulty benchmark; leaders are
   a major step beyond. A comfortable win deserves scrutiny. Audit AI consequences
   before inflating levels; judge pressure/counterplay, not a quota of player faints.

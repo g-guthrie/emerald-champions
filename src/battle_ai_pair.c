@@ -101,6 +101,7 @@ struct PairEvaluation
     u8 paralysisTargets[MAX_BATTLERS_COUNT][MAX_MON_MOVES];
     u8 burnTargets[MAX_BATTLERS_COUNT][MAX_MON_MOVES];
     u8 quashTargets[MAX_BATTLERS_COUNT][MAX_MON_MOVES];
+    u8 tauntTargets[MAX_BATTLERS_COUNT][MAX_MON_MOVES];
     u8 paralysisChance[MAX_BATTLERS_COUNT][MAX_MON_MOVES];
     u8 paralysisRedirectors[MAX_BATTLERS_COUNT][MAX_MON_MOVES];
     u16 paralyzedSpeed[MAX_BATTLERS_COUNT];
@@ -1243,13 +1244,14 @@ static void CachePairMoveEffects(struct PairEvaluation *ev, enum BattlerId actor
     bool32 sleep = move == MOVE_SPORE || move == MOVE_SING || move == MOVE_SLEEP_POWDER;
     bool32 burn = move == MOVE_WILL_O_WISP;
     bool32 quash = move == MOVE_QUASH;
+    bool32 taunt = GetMoveEffect(move) == EFFECT_TAUNT;
     u32 attackDropStat = PairOffensiveDropStat(move);
     bool32 electricParalysis = move == MOVE_THUNDER_WAVE || move == MOVE_NUZZLE;
     bool32 primaryParalysis = move == MOVE_THUNDER_WAVE || move == MOVE_GLARE;
     bool32 paralysis = electricParalysis || move == MOVE_GLARE || move == MOVE_BODY_SLAM;
     bool32 encore = GetMoveEffect(move) == EFFECT_ENCORE;
     bool32 speedDrop = move == MOVE_ELECTROWEB || move == MOVE_ICY_WIND || move == MOVE_ROCK_TOMB || thread;
-    if (move != MOVE_COACHING && move != MOVE_ACID_SPRAY && !speedDrop && !sleep && !burn && !quash && !encore && !paralysis && !attackDropStat)
+    if (move != MOVE_COACHING && move != MOVE_ACID_SPRAY && !speedDrop && !sleep && !burn && !quash && !taunt && !encore && !paralysis && !attackDropStat)
         return;
     if (paralysis)
         ev->paralysisChance[actor][index] = move == MOVE_BODY_SLAM
@@ -1259,7 +1261,7 @@ static void CachePairMoveEffects(struct PairEvaluation *ev, enum BattlerId actor
     {
         if (target == actor || !IsBattlerAlive(target)
          || (move == MOVE_COACHING && target != GetPartnerBattler(actor))
-         || ((speedDrop || sleep || burn || quash || encore || paralysis || attackDropStat) && IsBattlerAlly(actor, target)))
+         || ((speedDrop || sleep || burn || quash || taunt || encore || paralysis || attackDropStat) && IsBattlerAlly(actor, target)))
             continue;
         struct BattleCalcValues cv = {.battlerAtk = actor, .battlerDef = target, .move = move, .moveEffect = GetMoveEffect(move)};
         for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
@@ -1314,7 +1316,7 @@ static void CachePairMoveEffects(struct PairEvaluation *ev, enum BattlerId actor
         }
         // Primary status effects need their own immunity checks, not damage's
         // zero cache or secondary-effect Shield Dust/Covert Cloak checks.
-        if ((thread || sleep || burn || quash || encore || primaryParalysis) && (cv.abilities[target] == ABILITY_GOOD_AS_GOLD
+        if ((thread || sleep || burn || quash || taunt || encore || primaryParalysis) && (cv.abilities[target] == ABILITY_GOOD_AS_GOLD
              || cv.abilities[target] == ABILITY_MAGIC_BOUNCE
              || gProtectStructs[target].bounceMove
              || (GetConfig(B_PRANKSTER_DARK_TYPES) >= GEN_7
@@ -1323,6 +1325,23 @@ static void CachePairMoveEffects(struct PairEvaluation *ev, enum BattlerId actor
                  && !BreaksThroughSemiInvulnerableState(actor, target, cv.abilities[actor], cv.abilities[target],
                      move, gBattleMons[target].volatiles.semiInvulnerable))))
             continue;
+        if (taunt)
+        {
+            if (gBattleMons[target].volatiles.tauntTimer
+             || (GetConfig(B_OBLIVIOUS_TAUNT) >= GEN_6 && cv.abilities[target] == ABILITY_OBLIVIOUS)
+             || DoesSubstituteBlockMove(actor, target, move))
+                continue;
+            s32 priority = AI_GetMovePriority(actor, cv.abilities[actor], move);
+            bool32 blocked = priority > 0
+                && IsPsychicTerrainAffected(target, cv.abilities[target], cv.holdEffects[target], gFieldTimers.terrain);
+            for (enum BattlerId ally = 0; ally < gBattlersCount; ally++)
+                if (IsBattlerAlive(ally) && IsBattlerAlly(target, ally)
+                 && (cv.abilities[ally] == ABILITY_AROMA_VEIL || (priority > 0 && IsDazzlingAbility(cv.abilities[ally]))))
+                    blocked = TRUE;
+            if (!blocked)
+                ev->tauntTargets[actor][index] |= 1u << target;
+            continue;
+        }
         if (burn || quash)
         {
             // Only ordinary uncured burn is modeled here. Status-benefit and
@@ -1819,6 +1838,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
     u32 actionChance[MAX_BATTLERS_COUNT] = {10000, 10000, 10000, 10000};
     s32 coachingValue[MAX_BATTLERS_COUNT] = {0};
     u32 newParalysisTargets = 0, newBurnTargets = 0;
+    u32 newTauntTargets = 0;
     u32 speed[MAX_BATTLERS_COUNT];
     u8 attackStage[MAX_BATTLERS_COUNT], speedStage[MAX_BATTLERS_COUNT];
     u8 statStage[MAX_BATTLERS_COUNT][4]; // Atk, Def, SpDef, SpAtk.
@@ -1896,6 +1916,11 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
          || ((gBattleMons[actor].status1 & STATUS1_FREEZE) && !MoveThawsUser(move))
          || gBattleMons[actor].volatiles.rechargeTimer
          || (gAiLogicData->abilities[actor] == ABILITY_TRUANT && gBattleMons[actor].volatiles.truantCounter))
+            continue;
+        // Taunt cancels the selected status command, including Nature Power's
+        // wrapper. A failed setup earns neither its effect nor its plan reward.
+        if (((newTauntTargets & (1u << actor)) || gBattleMons[actor].volatiles.tauntTimer)
+         && IsBattleMoveStatus(move))
             continue;
         // A faster pair can spend the berry and leave insufficient HP before
         // Drum acts. A failed Drum must not retain its cached setup reward.
@@ -2206,7 +2231,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
         move = action->executedMove;
         effect = GetMoveEffect(move);
         if (IsBattleMoveStatus(move) && !((move == MOVE_TOXIC_THREAD || move == MOVE_SPORE || move == MOVE_SING || move == MOVE_SLEEP_POWDER
-            || move == MOVE_THUNDER_WAVE || move == MOVE_GLARE || move == MOVE_CHARM || move == MOVE_WILL_O_WISP || move == MOVE_QUASH || effect == EFFECT_ENCORE) && applyEffects))
+            || move == MOVE_THUNDER_WAVE || move == MOVE_GLARE || move == MOVE_CHARM || move == MOVE_WILL_O_WISP || move == MOVE_QUASH || effect == EFFECT_TAUNT || effect == EFFECT_ENCORE) && applyEffects))
             continue;
         if (gBattleMoveEffects[effect].twoTurnEffect && !gBattleMons[actor].volatiles.multipleTurns
          && gAiLogicData->holdEffects[actor] != HOLD_EFFECT_POWER_HERB
@@ -2293,6 +2318,29 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
             }
             if (!guardHitChance)
                 continue;
+            if (effect == EFFECT_TAUNT)
+            {
+                if (!(ev->tauntTargets[actor][action->index] & (1u << target)))
+                    continue;
+                u32 chance = min(100, gAiLogicData->moveAccuracy[actor][target][action->index])
+                    * survival[actor] * guardHitChance / 10000 * actionChance[actor] / 10000;
+                if (!chance)
+                    continue;
+                *effectChance = *effectChance ? min(*effectChance, chance) : chance;
+                // An available Mental Herb cures before the pending move.
+                // Track consumption so an earlier removal or second Taunt is
+                // not incorrectly protected by the same item twice.
+                if (B_MENTAL_HERB >= GEN_5 && gAiLogicData->holdEffects[target] == HOLD_EFFECT_MENTAL_HERB
+                 && !(usedItems & (1u << target)))
+                {
+                    usedItems |= 1u << target;
+                    if (gAiLogicData->abilities[target] == ABILITY_UNBURDEN && !gBattleMons[target].volatiles.unburdenActive)
+                        speed[target] *= 2;
+                    continue;
+                }
+                newTauntTargets |= 1u << target;
+                continue;
+            }
             if (move == MOVE_QUASH)
             {
                 if (!(ev->quashTargets[actor][action->index] & (1u << target))
@@ -3070,7 +3118,7 @@ static s32 ScorePairWithImmediateEffects(struct PairEvaluation *ev)
         if (action->index != PAIR_IDLE && ev->paralysisTargets[actor][action->index])
             hasEffect = TRUE;
         if (action->index != PAIR_IDLE && (ev->burnTargets[actor][action->index]
-            || ev->quashTargets[actor][action->index]))
+            || ev->quashTargets[actor][action->index] || ev->tauntTargets[actor][action->index]))
             hasEffect = TRUE;
         if (action->index != PAIR_IDLE && action->move == MOVE_FEINT)
             hasEffect = TRUE;

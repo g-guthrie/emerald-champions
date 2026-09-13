@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "date": "2026-09-13",
-  "session": "work/v4-c14-common-singers-play",
-  "current_step": 76,
+  "session": "work/v4-c15-taunt-fixed-play",
+  "current_step": 1,
   "chapter": "C15",
   "map": "MAP_SLATEPORT_CITY_POKEMON_CENTER_1F",
   "position": [
@@ -13,7 +13,7 @@
   "controls_locked": false,
   "difficulty": "Medium",
   "player_cap": 24,
-  "earned_unique_trainer_clears": 37,
+  "earned_unique_trainer_clears": 38,
   "cleared_trainers": [
     {
       "id": 10,
@@ -162,15 +162,19 @@
     {
       "id": 697,
       "name": "TRAINER_HAILEY"
+    },
+    {
+      "id": 491,
+      "name": "TRAINER_EDMOND"
     }
   ],
   "uncleared_next": [
-    "TRAINER_EDMOND"
+    "TRAINER_LOLA_1"
   ],
   "immediate_plan": [
-    "Continue E0043 Edmond on Route109; exact team/intent/shared AI preaudit then native battle.",
-    "Continue retained beach encounters and Slateport shipyard/museum story.",
-    "Do not replay all past affected trainers after shared fixes; index and focused regressions suffice for now."
+    "Preaudit and play E0045 Lola, then the remaining retained beach trainers.",
+    "Continue Slateport shipyard/museum story. Review easy fights as well as difficult ones.",
+    "No compulsory replay of earlier trainers after shared repairs."
   ],
   "repel_spray": "off",
   "poke_vial_charges": 1,
@@ -198,17 +202,17 @@
     24,
     24
   ],
-  "rom_sha256": "f86c5b16a0619d81325bcd4e67c2dc4f4e51b264fe21d72e4be2a4de52b81cb1",
-  "elf_sha256": "8db5b1bf413d5bec2e56d40fc7065385ae4cf12d7c5c83695ed376edf9dcab41",
-  "inputs_sha256": "0ea5ddc00ce3fb2c410ea479dfcc6ca05bc5a026ed3f7ab0d8b07f092f237e73",
-  "save": "work/v4-c14-common-singers-play/earned-hailey-slateport.sav",
-  "save_sha256": "1fd5ee4e384ff9c0f62f0b714d18fd0a6d71b76ca730b3efdb14279936729171",
-  "state": "work/v4-c14-common-singers-play/current.ss1",
-  "state_sha256": "cb7d3394e75a7e8b804e0dd229f2b495365f1f74fcda5c8bace22b8357bd8ae0",
-  "trace": "work/v4-c14-common-singers-play/trace.json",
-  "source_patch": "Shared Light Screen/Aurora Veil forecast repaired globally; local Jigglypuff always know Sing and have12% manor encounter rate. Natural directions in Steven/manor/warden scenes. Normal release gates pass.",
+  "rom_sha256": "82dc652416592b9e00c4cae2ad26ac97886314a3cadf341784bd030930276e49",
+  "elf_sha256": "6966391f7178cd5dc27dacd9fac6f6ec2f5e9291479edf6b933f12ace00349b0",
+  "inputs_sha256": "fdb9609a18042ba1fe3a6207fc064176e965fc8068fb093031c62fbf8ac2b172",
+  "save": "work/v4-c14-common-singers-play/earned-edmond-slateport.sav",
+  "save_sha256": "c166d365c5a6e6de737e05e54bf81a9477da557f09a500ffa03f82a2dca4e243",
+  "state": "work/v4-c15-taunt-fixed-play/current.ss1",
+  "state_sha256": "fb35ed08f07c1f566b9685f65c1e64fe55b54f43cae2a75e00418ebd6728aa65",
+  "trace": "work/v4-c15-taunt-fixed-play/trace.json",
+  "source_patch": "Shared timely Taunt forecast repaired in move and switch evaluation. Ten native cases pass, existing eight screen cases pass, normal release gates pass. Book indexes earlier/bespoke/later potential owners.",
   "book": "Game Blueprint/Emerald_Champions_Game_Book.txt",
-  "evidence_limits": "37 earned clears; C14 capture/song and Briney sailing complete. Hailey first-attempt nine-turn win with two player faints. Whole campaign unfinished.",
+  "evidence_limits": "38 earned clears. Edmond first-attempt twelve-turn win with five player faints on preceding ROM; updated ROM continued from native Save. Whole campaign unfinished.",
   "recent_results": {
     "Cristian": [
       "loss8",
@@ -231,6 +235,9 @@
     ],
     "Hailey": [
       "win9"
+    ],
+    "Edmond": [
+      "win12"
     ]
   }
 }

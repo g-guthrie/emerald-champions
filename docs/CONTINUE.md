@@ -29,23 +29,24 @@ clean Continue; never transplant a savestate into another ROM/ELF.
 
 ## Exact stopping point
 
-- **Primary: `work/v4-c14-common-singers-play`. C14 complete; Hailey defeated.**
-  Actual local Jigglypuff caught on encounter13 (second after the12% rate change),
-  one Great Ball, Kadabra stored. The caught singer performed with the meadow
-  warden without teaching; cap24 earned. Briney sailed to Slateport. Hailey
-  E0042 won first attempt in9 turns, two player faints; native Center recovery
-  complete. Current Save075/export076: `earned-hailey-slateport.sav`. Player at
-  Slateport Center8,4 facing north. Next E0043 Edmond, then retained beach fights
-  and the shipyard/museum story. Current exact hashes are in the checkpoint.
-- **Medium, cap24,37 earned unique trainer clears.** Brawly remains won attempt7;
-  do not replay him. Primary ROM includes shared Light Screen/Aurora Veil fixes,
-  natural destination/resource guidance and every manor Jigglypuff knowing Sing.
-  No mandatory mass replays after a shared fix; affected-team index is in book.
-  Eight native screen cases and16 local singer comparisons pass. Normal release
-  gates pass. Hailey's6 sampled decisions max43frames (~0.72s), including setup.
-  Her Protect uses bought real partner damage; unsafe setup was avoided until
-  the terminal board. No team/level adjustment made. Pachirisu's consumed Sitrus
-  restored at settlement. Contact sheets: `c14-earned-song`, `hailey-earned`.
+- **Primary: `work/v4-c15-taunt-fixed-play`. C14 complete; Hailey and Edmond defeated.**
+  Clean Continue from the actual Save111/export112 in
+  `work/v4-c14-common-singers-play/earned-edmond-slateport.sav`. Step001 verifies
+  Edmond's clear and the healed party is byte-identical across the ROM change.
+  Player at Slateport Center8,4 facing north. Next E0045 Lola, then retained
+  beach fights and the shipyard/museum story. Exact hashes are in the checkpoint.
+- **Medium, cap24,38 earned unique trainer clears.** Brawly remains won attempt7.
+  Edmond won first attempt in12 turns with five faints; Azumarill20/104 survived.
+  His timely-Taunt defect is repaired globally in move/switch forecasting, with
+  ten native cases and the book's backward/bespoke/forward index. No compulsory
+  replay of this earned pre-fix win. Existing eight screen cases still pass;
+  normal release gates pass. Edmond's six sampled pre-fix decisions max44frames
+  (~0.74s), including setup. Helping Hand/Brave Bird and Koffing Protect bought
+  real knockouts. No team/level increase proposed. Review every trainer for weak
+  pressure as well as excessive difficulty; zero/one faint prompts assessment.
+  Hailey won first attempt in9 turns with two faints, max43frames across6 samples.
+  Actual local Jigglypuff capture/song and Briney sailing are complete; cap24
+  earned. Native contact sheets: `c14-earned-song`, `hailey-earned`, `edmond-earned`.
   Berry economy remains implemented: all67 ordinary berries free; separate typed
   harvest credits, rewards and persistent crops. Six Lum in bag, harvested Lum0.
   Native berry fixture/menu checks are recorded in the previous commit/book.
@@ -108,7 +109,7 @@ actual remaining Facade power; focused native burn9, Glare3, Nuzzle4, secondary
 paralysis3 and Quash4 controls pass. Book has backward/bespoke/forward index;
 `work/facade-status-retrospective-scope.json` inventories exact carriers/setters.
 No prior earned replays and no causal Brawly-loss claim.
-Steven’s Ring handoff is now complete; earn the manor song next. Brawly’s T038/
+Steven’s Ring handoff and the earned manor song are complete. Brawly’s T038/
 U0170–0175 team was inspected: Pachirisu/Choice Band Heracross opening; Guts
 Conkeldurr, AV Hariyama, White Herb Unburden Hawlucha and special Cobalion with
 Coaching/Quick Guard. Shared redirection, Coaching recipient survival, burn
@@ -204,7 +205,7 @@ The replacement engine and other parked checkouts are not execution dependencies
 | Core systems | Legendary cap consumers, source-owned preparation/evolution access, fixed-IV/stat rules, finite/duplicate/pending rewards, economy and scripted recovery have implemented changes and scoped checks. Preserve current contracts; do not restore old proposals. |
 | Native AI | Committed-command knowledge and continuation; move-availability fix; blocked-attack opinion fix; first/repeated lone-survivor Protect rules; retaliation forecast; fainted-target fallback; recipient-survival Coaching value. Focused native failures/fixes are archived. |
 | Early story | C01/C03/C02 opening and directions, Woods/Devon theft, Rustboro/Cut guidance, Roxanne reward/handoff, Rusturf rescue, Devon two deliveries, Briney's passage, Dewford directions and first letter journey were exercised in the earned run and repaired where needed. |
-| C13 current | Individual Lilith/Brenden clears are preserved. Brawly/Steven text removes obsolete Slateport/Flash directions and names the Ring/manor route. First-letter/repeat text was inspected; post-Brawly Ring/manor handoff still needs earned execution. |
+| C13–C15 current | Individual gym clears, Brawly, Steven Ring, local singer capture, manor song and Briney sailing are earned. Hailey and Edmond cleared; Lola next. |
 | Later scenes | Significant source preparation exists, including C48 observation interactions and selected restaged world/reward scenes. Synthetic evidence is available, but none makes later chapters earned or visually user-approved. Continue integrating/polishing them as reached. |
 
 Notable source commits: `600463d17b` committed-command AI; `b650bbe1c4` blocked
@@ -216,7 +217,7 @@ Use commit diffs and current consumers, not a stale summary, when editing.
 
 ## Unfinished work and constraints that must survive the handoff
 
-- Finish C13 and continue every chapter through Champion/postgame obligations in
+- Continue C15 and every remaining chapter through Champion/postgame obligations in
   the book. Audit every retained trainer before fighting, review both wins/losses,
   tune supported weaknesses, acquire sensible counterteams, and keep the book
   synchronized. Do not substitute autowin traversal or a battle-lab grant for
@@ -226,7 +227,7 @@ Use commit diffs and current consumers, not a stale summary, when editing.
   user visual review. Avoid arbitrary decorative actors/sparkles. The rejected
   Diancie coordinate (7,9) remains rejected.
 - Complete remaining mechanics/AI acceptance and relevant variant/randomized/
-  alternate-archetype coverage. The 35 earned wins are not35 fully closed
+  alternate-archetype coverage. The 38 earned wins are not38 fully closed
   acceptance matrices. Earlier shared fixes require dependency-based rechecks;
   prior scores do not automatically certify a newly changed engine.
 - Keep ordinary overlapping trainers' individual victories. Full gauntlet reset
