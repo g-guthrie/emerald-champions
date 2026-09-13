@@ -1,5 +1,5 @@
 #! Generated from the canonical Emerald Champions Game Book; edit the book.
-#! Book SHA256: 6e507ff7dbbd0b951be68119c4f88cf36f30dc3d33d11e70b1b31d59880dd61e
+#! Book SHA256: 2b66cc64fc759e08911606779c6eb0796cccd5b721355bab45210313ebc6e116
 #! Reconcile with: emerald_champions_teams.py --book PATH --write
 
 ## E0001 TRAINER_BRENDAN_ROUTE_103_MUDKIP class=rival
@@ -447,11 +447,11 @@ TYROGUE @FOCUS_SASH VITAL_SPIRIT JOLLY 252/0/4/0/0/252 1 | FAKE_OUT, FEINT, HELP
 ## E0036 TRAINER_BRENDEN class=gym
 strategy: SETUP
 mega_slots: NONE
-plan: First two useful turns: Sawk attacks immediately while Riolu selects Coaching only if Sawk's lock and survival make the boost worthwhile. Turn two attacks again or switches the locked breaker, not blindly repeats Coaching. Alternate deployment: Riolu and No Guard Machop offer a slower but different pressure mode. Reserves & disruption: Throh/Stufful can use Bulk Up only when they survive the resulting exchange; Monferno is the pivot/priority reserve. Counterplay & audit: Priority denial, special pressure and forcing Sawk into an unfavorable Choice lock. Disposition: Keep the roster; resolve Brenden's independent script rather than merging his six members with Lilith's six.
+plan: Level calibration: Throh uses cap minus one to moderate the boosted Storm Throw and Leftovers endgame while retaining Guts, its complete moveset, item, nature and EVs. The other five members retain their authored offsets. First two useful turns: Sawk attacks immediately while Riolu selects Coaching only if Sawk's lock and survival make the boost worthwhile. Turn two attacks again or switches the locked breaker, not blindly repeats Coaching. Alternate deployment: Riolu and No Guard Machop offer a slower but different pressure mode. Reserves & disruption: Throh/Stufful can use Bulk Up only when they survive the resulting exchange; Monferno is the pivot/priority reserve. Counterplay & audit: Priority denial, special pressure and forcing Sawk into an unfavorable Choice lock. Disposition: Keep the roster; resolve Brenden's independent script rather than merging his six members with Lilith's six.
 crack: Priority denial, special pressure and forcing Sawk into an unfavorable Choice lock. Disposition: Keep the roster; resolve Brenden's independent script rather than merging his six members with Lilith's six.
 SAWK @CHOICE_SCARF MOLD_BREAKER ADAMANT 4/252/0/0/0/252 0 | CLOSE_COMBAT, ROCK_SLIDE, POISON_JAB, ICE_PUNCH | ivs=31/31/31/31/31/31 | friendship=255
 RIOLU @FOCUS_SASH PRANKSTER JOLLY 252/0/4/0/0/252 0 | COACHING, DRAIN_PUNCH, BULLET_PUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
-THROH @LEFTOVERS GUTS ADAMANT 252/252/4/0/0/0 0 | STORM_THROW, BODY_SLAM, BULK_UP, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
+THROH @LEFTOVERS GUTS ADAMANT 252/252/4/0/0/0 -1 | STORM_THROW, BODY_SLAM, BULK_UP, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 MACHOP @EVIOLITE NO_GUARD ADAMANT 252/252/4/0/0/0 0 | DYNAMIC_PUNCH, KNOCK_OFF, BULLET_PUNCH, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 STUFFUL @EVIOLITE FLUFFY ADAMANT 252/252/4/0/0/0 0 | DRAIN_PUNCH, PAYBACK, BULK_UP, PROTECT | ivs=31/31/31/31/31/31 | friendship=255
 MONFERNO @EVIOLITE BLAZE JOLLY 4/252/0/0/0/252 1 | FIRE_PUNCH, MACH_PUNCH, BRICK_BREAK, U_TURN | ivs=31/31/31/31/31/31 | friendship=255
