@@ -29,13 +29,14 @@ clean Continue; never transplant a savestate into another ROM/ELF.
 
 ## Exact stopping point
 
-- Primary session: `work/v4-c13-quash-fixed-play`, step **435**. Brawly has five earned losses.
-  Native recovery and Save completed at434; export `earned-brawly-five-losses.sav`.
-  Petalburg Center `(8,4)`, facing up, healthy party and free control.
-  Source now reduces only Brawly Hawlucha22→21; rebuild and clean Continue are next.
+- Primary session: `work/v4-c13-coordinated-play`, step **0**. Six Brawly losses.
+  Native preparation/save at previous session098/099; clean Continue preserves
+  all600 party bytes. Dewford Center `(2,4)`, facing up, healthy/free control.
+  New normal/headless builds include coordinated Brawly20/22/20/20/21/20 and
+  Facade status-forecast repairs (burn, primary and secondary paralysis).
 - **Medium**, cap **20**, **35 earned unique trainer clears**. Cristian: two
   eight-turn losses then a13-turn win. Jocelyn:13-turn loss, eight-turn loss,
-  then seven-turn win. Brawly:10-,10-,13-,11-, and11-turn losses; still uncleared.
+  then seven-turn win. Brawly:10-,10-,13-,11-,11-, and12-turn losses; still uncleared.
 - Current immutable ROM includes the capture-menu repair and shared timely burn/
   Quash forecasts. Clean Continue from each previous normal save preserved ancestry.
   Native acquisition/preparation includes Carbink and Prankster Sableye. Sableye’s
@@ -59,11 +60,11 @@ savestates between different ROMs.
 
 | Slot | Pokemon / native preparation | Moves | HP |
 | --- | --- | --- | --- |
-| 0 | Kadabra, Life Orb, Magic Guard, Timid | Psychic, Dazzling Gleam, Counter, Protect | 52 |
-| 1 | Sableye, Sitrus Berry, Prankster, Careful | Taunt, Quash, Fake Out, Foul Play | 76 |
-| 2 | Aerodactyl, Focus Sash, Unnerve, Jolly | Taunt, Tailwind, Dual Wingbeat, Protect | 68 |
-| 3 | Shaymin, Life Orb, Natural Cure, Modest | Seed Flare, Earth Power, Giga Drain, Psychic | 76 |
-| 4 | Pachirisu, Sitrus Berry, Volt Absorb, Bold | Follow Me, Nuzzle, Super Fang, Protect | 72 |
+| 0 | Aerodactyl, Focus Sash, Unnerve, Jolly | Taunt, Tailwind, Dual Wingbeat, Protect | 68 |
+| 1 | Shaymin, Life Orb, Natural Cure, Timid | Seed Flare, Earth Power, Giga Drain, Psychic | 76 |
+| 2 | Pachirisu, Sitrus Berry, Volt Absorb, Bold | Follow Me, Nuzzle, Super Fang, Protect | 72 |
+| 3 | Sableye, Sitrus Berry, Prankster, Careful | Taunt, Quash, Fake Out, Foul Play | 76 |
+| 4 | Kadabra, Life Orb, Magic Guard, Timid | Psychic, Dazzling Gleam, Counter, Protect | 52 |
 | 5 | Azumarill, Assault Vest, Huge Power, Adamant | Liquidation, Play Rough, Aqua Jet, Knock Off | 88 |
 
 All are level20 and prepared through native services. Mienfoo, Carbink, Marshtomp and
@@ -81,18 +82,25 @@ followed. Attempt five then lost in11 turns; Azumarill's switch into Super Fang 
 next-turn focus fire were costly. Hawlucha's Protect had value, its84 Speed exceeded
 Aerodactyl82, and it survived Wingbeat at5HP before helping close the battle.
 
-First modest balance adjustment: only E0040-B01 Hawlucha offset+2→+1 (22→21 here).
-Expected unboosted Speed81 gives Aerodactyl a response before Unburden. Shared U0174,
-Humberto's reuse, other Brawly levels and all builds/AI stay as authored. Rebuild the
-normal and headless artifacts, then clean Continue from the actual435 battery save.
-Rematch and verify actual stats/outcome; no tuned win claimed. Conkeldurr was the
-initial candidate but fifth-attempt evidence favored Hawlucha's concrete threshold.
+Sixth attempt tested Hawlucha21 (Speed81) and lost in12 turns, max decision46f.
+Four opponents fell; Pachirisu24/Hawlucha29 remained. Conkeldurr98 survived Play
+Rough96; paralysis nullified Aerodactyl's Speed advantage. A mistaken switch into
+Conkeldurr cost Shaymin. The user directed a material coordinated balance review
+around five serious failed attempts. Current Brawly levels20/22/20/20/21/20;
+all builds/species/AI retained. No tuned win yet. New lead Aero+Timid Shaymin69
+pressures enemy Pachirisu early. Center vendor has no Lum Berry; retain Sash.
 
+Facade status forecast: baseline failures reproduced exhausted-Facade exclusion
+under burn, Glare and Nuzzle. Repaired all shared primary/secondary paths and
+actual remaining Facade power; focused native burn9, Glare3, Nuzzle4, secondary
+paralysis3 and Quash4 controls pass. Book has backward/bespoke/forward index;
+`work/facade-status-retrospective-scope.json` inventories exact carriers/setters.
+No prior earned replays and no causal Brawly-loss claim.
 Next: Brawly, then Steven’s Ring and manor/meadow handoffs. His exact T038/
 U0170–0175 team was inspected: Pachirisu/Choice Band Heracross opening; Guts
 Conkeldurr, AV Hariyama, White Herb Unburden Hawlucha and special Cobalion with
 Coaching/Quick Guard. Shared redirection, Coaching recipient survival, burn
-exceptions and priority protection code reviewed. Preserve the builds and apply only the documented Brawly Hawlucha level cut.
+exceptions and priority protection code reviewed. Preserve the builds and apply the documented coordinated Brawly offsets.
 Navigation: Center exit `(8,8)`; Gym door `(8,17)`; arrival `(5,27)`; Brawly `(4,3)`.
 
 Capture YES replacement is earned-verified with Abra; direct-PC NO with Azurill.
@@ -159,10 +167,10 @@ Thunder Wave missed on turn4; Helping Hand/First Impression killed Shaymin on
 turn5. Breloom’s Protect had defensive value. Wingbeat missed on turn6 before
 turn7 victory. Maximum of seven full decisions:61 frames. No team/level nerf.
 
-**Brawly, E0040 / TRAINER_BRAWLY 266.** Five native losses:10,10,13,11,11 turns;
-maximum measured full decision budgets45,51,49,61,45 native frames respectively.
+**Brawly, E0040 / TRAINER_BRAWLY 266.** Six native losses:10,10,13,11,11,12 turns;
+maximum measured full decision budgets45,51,49,61,45,46 native frames respectively.
 Exact T038/U0170–0175 and relevant shared AI were checked before every attempt.
-All five losses used original enemy levels. Hawlucha21 is now authored; rematch pending. Attempt3 removed Cobalion/Hariyama/Heracross; timely burn
+First five used original levels; sixth used Hawlucha21 only. Coordinated cuts now built; rematch pending. Attempt3 removed Cobalion/Hariyama/Heracross; timely burn
 let Aerodactyl survive Hawlucha at2HP. Hawlucha's Protect blocked Foul Play while
 Conkeldurr removed Sableye's berry. Attempt4's Taunt disabled early Follow Me;
 Quash/Psychic removed Cobalion on turn3. Kadabra's Gleam punished Hawlucha's

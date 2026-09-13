@@ -9,6 +9,7 @@ AI_DOUBLE_BATTLE_TEST("EC Prankster burn: a timely burn preserves the attack tha
     enum Move attack = MOVE_DYNAMIC_PUNCH;
     u32 playerHP = 45;
     bool32 reduced = TRUE;
+    bool32 exhaustedFacade = FALSE;
     PARAMETRIZE { burn = TRUE; priority = TRUE; }
     PARAMETRIZE { burn = FALSE; priority = TRUE; }
     PARAMETRIZE { burn = TRUE; priority = FALSE; }
@@ -18,6 +19,8 @@ AI_DOUBLE_BATTLE_TEST("EC Prankster burn: a timely burn preserves the attack tha
     PARAMETRIZE { burn = TRUE; priority = TRUE; targetAbility = ABILITY_WATER_VEIL; attack = MOVE_CLOSE_COMBAT; reduced = FALSE; }
     PARAMETRIZE { burn = TRUE; priority = TRUE; targetItem = ITEM_LUM_BERRY; playerHP = 30; reduced = FALSE; }
     PARAMETRIZE { burn = TRUE; priority = TRUE; attack = MOVE_FACADE; playerHP = 25; reduced = FALSE; }
+    PARAMETRIZE { burn = TRUE; priority = TRUE; exhaustedFacade = TRUE; }
+    PARAMETRIZE { burn = TRUE; priority = TRUE; attack = MOVE_FACADE; playerHP = 45; reduced = FALSE; }
     GIVEN {
         AI_FLAGS(AI_FLAG_BASIC_TRAINER | AI_FLAG_OMNISCIENT | AI_FLAG_SMART_SWITCHING
             | AI_FLAG_SMART_MON_CHOICES | AI_FLAG_PP_STALL_PREVENTION | AI_FLAG_HP_AWARE
@@ -35,7 +38,11 @@ AI_DOUBLE_BATTLE_TEST("EC Prankster burn: a timely burn preserves the attack tha
         OPPONENT(SPECIES_MACHAMP) {
             Level(20); HP(76); MaxHP(84); Attack(82); Defense(43);
             SpAttack(33); SpDefense(45); Speed(33);
-            Ability(targetAbility); Item(targetItem); Moves(attack);
+            Ability(targetAbility); Item(targetItem);
+            if (exhaustedFacade)
+                MovesWithPP({attack, 20}, {MOVE_FACADE, 0});
+            else
+                Moves(attack);
         }
         OPPONENT(SPECIES_ANNIHILAPE) {
             Level(21); HP(8); MaxHP(96); Defense(45); SpAttack(28); SpDefense(49); Speed(49);

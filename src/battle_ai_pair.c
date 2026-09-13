@@ -1334,7 +1334,7 @@ static void CachePairMoveEffects(struct PairEvaluation *ev, enum BattlerId actor
              || cv.abilities[target] == ABILITY_GUTS || cv.abilities[target] == ABILITY_FLARE_BOOST
              || cv.abilities[target] == ABILITY_QUICK_FEET || cv.abilities[target] == ABILITY_MARVEL_SCALE
              || cv.abilities[target] == ABILITY_FLASH_FIRE || cv.abilities[target] == ABILITY_WELL_BAKED_BODY
-             || cv.abilities[target] == ABILITY_SYNCHRONIZE || HasMoveWithEffect(target, EFFECT_FACADE)
+             || cv.abilities[target] == ABILITY_SYNCHRONIZE
              || cv.holdEffects[target] == HOLD_EFFECT_CURE_BRN || cv.holdEffects[target] == HOLD_EFFECT_CURE_STATUS))
                 continue;
             if (AI_GetMovePriority(actor, cv.abilities[actor], move) > 0)
@@ -1383,7 +1383,6 @@ static void CachePairMoveEffects(struct PairEvaluation *ev, enum BattlerId actor
                  || (cv.abilities[target] == ABILITY_LIGHTNING_ROD && GetConfig(B_REDIRECT_ABILITY_IMMUNITY) >= GEN_5)))
              || cv.abilities[target] == ABILITY_GUTS || cv.abilities[target] == ABILITY_MARVEL_SCALE
              || cv.abilities[target] == ABILITY_SYNCHRONIZE
-             || HasMoveWithEffect(target, EFFECT_FACADE)
              || cv.holdEffects[target] == HOLD_EFFECT_CURE_PAR || cv.holdEffects[target] == HOLD_EFFECT_CURE_STATUS)
                 continue;
             ev->paralysisTargets[actor][index] |= 1u << target;
@@ -2305,8 +2304,19 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                 *effectChance = *effectChance ? min(*effectChance, chance) : chance;
                 // Apply at execution time, after actual targeting/Protect.
                 // An attack already performed cannot be weakened retroactively.
+                // Facade doubles its own power after this status lands. In
+                // Gen 6+ it also ignores burn's reduction. Knowing Facade
+                // never exempts the target's other physical attacks.
                 if (!(acted & (1u << target)) && IsBattleMovePhysical(actions[target].executedMove))
-                    boost[target] /= 2;
+                {
+                    if (GetMoveEffect(actions[target].executedMove) == EFFECT_FACADE)
+                    {
+                        if (GetConfig(B_BURN_FACADE_DMG) >= GEN_6)
+                            boost[target] *= 2;
+                    }
+                    else
+                        boost[target] /= 2;
+                }
                 continue;
             }
             if (move == MOVE_THUNDER_WAVE || move == MOVE_GLARE)
@@ -2329,6 +2339,9 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                     continue;
                 newParalysisTargets |= 1u << target;
                 *effectChance = *effectChance ? min(*effectChance, chance) : chance;
+                // Status boosts a remaining Facade, not every move in its set.
+                if (!(acted & (1u << target)) && GetMoveEffect(actions[target].executedMove) == EFFECT_FACADE)
+                    boost[target] *= 2;
                 // Native total Speed includes generation rules and Quick Feet.
                 // Existing same-turn Speed/weather changes retain their ratio.
                 speed[target] = speed[target] * ev->paralyzedSpeed[target] / max(1, gAiLogicData->speedStats[target]);
@@ -2722,6 +2735,8 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                 {
                     newParalysisTargets |= 1u << target;
                     *effectChance = *effectChance ? min(*effectChance, chance) : chance;
+                    if (!(acted & (1u << target)) && GetMoveEffect(actions[target].executedMove) == EFFECT_FACADE)
+                        boost[target] *= 2;
                     speed[target] = speed[target] * ev->paralyzedSpeed[target] / max(1, gAiLogicData->speedStats[target]);
                     if (!(acted & (1u << target)) && !IsBattleMoveStatus(actions[target].executedMove)
                      && !(B_MAGIC_GUARD == GEN_4 && gAiLogicData->abilities[target] == ABILITY_MAGIC_GUARD))

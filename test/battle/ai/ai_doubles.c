@@ -2786,12 +2786,17 @@ AI_DOUBLE_BATTLE_TEST("EC expert pair: Nuzzle speed control distinguishes primar
     PARAMETRIZE { boundary = 0; } // Nuzzle is the available speed-control move.
     PARAMETRIZE { boundary = 1; } // Cloak blocks Nuzzle's secondary, not damage.
     PARAMETRIZE { boundary = 2; } // Same Cloak target; TW is now a separate slot.
+    PARAMETRIZE { boundary = 3; } // Knowing an exhausted Facade cannot prevent slowdown.
     GIVEN {
         AI_FLAGS(EC_EXPERT_FLAGS);
         PLAYER(SPECIES_TAUROS) {
             Level(50); HP(100); MaxHP(100); Attack(300); SpAttack(210);
             Defense(100); SpDefense(100); Speed(80); Ability(ABILITY_ANGER_POINT);
-            Item(boundary ? ITEM_COVERT_CLOAK : ITEM_NONE); Moves(MOVE_TACKLE);
+            Item(boundary == 1 || boundary == 2 ? ITEM_COVERT_CLOAK : ITEM_NONE);
+            if (boundary == 3)
+                MovesWithPP({MOVE_TACKLE, 20}, {MOVE_FACADE, 0});
+            else
+                Moves(MOVE_TACKLE);
         }
         PLAYER(SPECIES_CHANSEY) {
             Level(50); HP(300); MaxHP(300); Attack(100); SpAttack(100);
@@ -2822,7 +2827,7 @@ AI_DOUBLE_BATTLE_TEST("EC expert pair: Nuzzle speed control distinguishes primar
     } THEN {
         if (boundary != 1)
         {
-            EXPECT_EQ(gLastMoves[B_BATTLER_1], boundary == 0 ? MOVE_NUZZLE : MOVE_THUNDER_WAVE);
+            EXPECT_EQ(gLastMoves[B_BATTLER_1], boundary == 2 ? MOVE_THUNDER_WAVE : MOVE_NUZZLE);
             EXPECT_EQ(gLastMoves[B_BATTLER_3], MOVE_PSYCHIC);
             EXPECT_EQ(playerLeft->hp, 0);
             EXPECT_GT(opponentRight->hp, 0);
@@ -2985,8 +2990,10 @@ AI_DOUBLE_BATTLE_TEST("EC expert pair: Feint opens partner damage through Protec
 AI_DOUBLE_BATTLE_TEST("EC expert pair: Glare enables a partner KO but not through a paralysis cure")
 {
     bool32 cure;
+    bool32 exhaustedFacade = FALSE;
     PARAMETRIZE { cure = FALSE; }
     PARAMETRIZE { cure = TRUE; }
+    PARAMETRIZE { cure = FALSE; exhaustedFacade = TRUE; }
     GIVEN {
         AI_FLAGS(AI_FLAG_BASIC_TRAINER | AI_FLAG_OMNISCIENT | AI_FLAG_SMART_SWITCHING
             | AI_FLAG_SMART_MON_CHOICES | AI_FLAG_PP_STALL_PREVENTION | AI_FLAG_HP_AWARE
@@ -2994,7 +3001,11 @@ AI_DOUBLE_BATTLE_TEST("EC expert pair: Glare enables a partner KO but not throug
             | AI_FLAG_DOUBLE_BATTLE);
         PLAYER(SPECIES_MUNCHLAX) {
             Level(14); HP(30); MaxHP(100); Attack(100); Defense(20); SpAttack(20); SpDefense(120); Speed(45);
-            Ability(ABILITY_THICK_FAT); Item(cure ? ITEM_CHERI_BERRY : ITEM_NONE); Moves(MOVE_BODY_SLAM);
+            Ability(ABILITY_THICK_FAT); Item(cure ? ITEM_CHERI_BERRY : ITEM_NONE);
+            if (exhaustedFacade)
+                MovesWithPP({MOVE_BODY_SLAM, 20}, {MOVE_FACADE, 0});
+            else
+                Moves(MOVE_BODY_SLAM);
         }
         PLAYER(SPECIES_PACHIRISU) {
             Level(14); HP(100); MaxHP(100); Attack(20); Defense(100); SpAttack(20); SpDefense(100); Speed(20);

@@ -72,6 +72,10 @@ Old 7.0/7.1 branches and archived reports are evidence, not competing instructio
 - Preserve cool species, coherent themes, strong moves and correct AI. When a
   battle/gauntlet is unreasonable, prefer small individual level-offset reductions.
   Do not nerf competent AI or dismantle a strategy merely because it wins.
+  After roughly five failed, meaningfully prepared attempts, review cumulative
+  pressure and make coordinated, material level cuts where justified. Do not
+  prolong a blocked encounter through endless one-level cuts or demand perfect
+  play. An isolated spike may warrant one cut; RNG-only losses need not.
 - Review opposing Protect throughout EVERY fight: actual payoff, lost opportunity,
   partner survival, consecutive risk and pacing. Fix demonstrated empty, harmful
   or repetitive guarding; an eventual loss/win never excuses poor decisions.

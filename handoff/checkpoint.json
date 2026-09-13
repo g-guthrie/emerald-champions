@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "date": "2026-09-13",
-  "session": "work/v4-c13-quash-fixed-play",
-  "current_step": 435,
+  "session": "work/v4-c13-coordinated-play",
+  "current_step": 0,
   "chapter": "C13",
-  "map": "MAP_PETALBURG_CITY_POKEMON_CENTER_1F",
+  "map": "MAP_DEWFORD_TOWN_POKEMON_CENTER_1F",
   "position": [
-    8,
+    2,
     4
   ],
   "facing": "up",
@@ -159,26 +159,26 @@
   "uncleared_next": [
     {
       "name": "Brawly",
-      "attempts": 5
+      "attempts": 6
     }
   ],
-  "immediate_plan": "Rebuild Hawlucha21 only, clean Continue from post-fifth-loss Save, verify stats and rematch Brawly. Preserve legal held items and retrospective AI audit rule.",
+  "immediate_plan": "Actual Brawly attempt7 with coordinated20/22/20/20/21/20 levels; Aerodactyl+Timid Shaymin lead; defeat Brawly then continue Steven Ring/manor.",
   "repel_spray": "on",
   "poke_vial_charges": 1,
   "party_order": [
-    "Kadabra",
-    "Sableye",
     "Aerodactyl",
     "Shaymin",
     "Pachirisu",
+    "Sableye",
+    "Kadabra",
     "Azumarill"
   ],
   "party_hp": [
-    52,
-    76,
     68,
     76,
     72,
+    76,
+    52,
     88
   ],
   "party_level": [
@@ -189,14 +189,14 @@
     20,
     20
   ],
-  "rom_sha256": "ba2d9b8f626d794420c4d17280d2256c6a43af2b3302f11b13c39941cbc02dd1",
-  "elf_sha256": "ebd85092ee302c5a82922a999bea2e617e6f2c9ebb07c50c1f4613120a5e6d2f",
-  "inputs_sha256": "1e82e3dbc418ba0b7a12d10afbc28d058483a95313132490d9e3b9a1e69ca24f",
-  "save": "work/v4-c13-quash-fixed-play/earned-brawly-five-losses.sav",
-  "save_sha256": "e0b08b6e494dd1391cd77a986069592cbeaa721f92d36567f392753ddb4e109c",
-  "state": "work/v4-c13-quash-fixed-play/current.ss1",
-  "state_sha256": "c2bac1acd35cff40d83f152acd1fcda904025346771d54ca455c2cd83b7777e9",
-  "trace": "work/v4-c13-quash-fixed-play/trace.json",
+  "rom_sha256": "74631d059ed51de5e84359b5cc0048df006279e8c8aca8cfe87da8099c128830",
+  "elf_sha256": "4f7c1fd024e92a182856fef35af77e908395b0b29099445bf6497cb3bf4b013d",
+  "inputs_sha256": "3f98b596446c050b882e5d5d8d5bcfba0690a37416abc9c9d516ad47af0bc58d",
+  "save": "work/v4-c13-hawlucha21-play/earned-brawly-prepared.sav",
+  "save_sha256": "3f9eee8320f68b06340f41cd9cdd553f672392b8c92219d3180f77391534ef8d",
+  "state": "work/v4-c13-coordinated-play/current.ss1",
+  "state_sha256": "186356e508bfef1835629cca63a396028618a0c5f3a34009e254761bdf477dff",
+  "trace": "work/v4-c13-coordinated-play/trace.json",
   "source_patch": null,
   "book": "Game Blueprint/Emerald_Champions_Game_Book.txt",
   "evidence_limits": [
@@ -222,7 +222,8 @@
       "loss10",
       "loss13",
       "loss11",
-      "loss11"
+      "loss11",
+      "loss12"
     ]
   }
 }

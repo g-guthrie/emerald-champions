@@ -58,3 +58,7 @@ all required systems and scenes integrated, material demonstrated defects fixed,
 scoped acceptance evidence and remaining limits stated, and a working normal ROM
 and delivery. A chapter, green suite, source scan, uploaded file or successful
 boot is not completion. User visual acceptance remains the user's decision.
+
+After roughly five failed, meaningfully prepared attempts, assess cumulative
+pressure and make coherent, material level cuts where justified. Avoid endless
+one-level experiments; preserve strong themes, moves and competent AI.
