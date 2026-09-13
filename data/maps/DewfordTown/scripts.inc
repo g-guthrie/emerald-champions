@@ -651,12 +651,16 @@ DewfordTown_EventScript_PhraseNotTrendyEnough::
 	end
 
 DewfordTown_Text_TinyIslandCommunity:
-	.string "There's a meadow west of town.\n"
-	.string "Lately, travelers have spotted\l"
-	.string "some very unusual POKéMON there.\p"
-	.string "The old manor holds records of\n"
-	.string "MEGA EVOLUTION. Someone must have\l"
-	.string "studied it here long ago.$"
+	.string "STEVEN visited our manor to read\n"
+	.string "its old expedition records. Now\l"
+	.string "he's studying GRANITE CAVE.\p"
+	.string "The cave is northwest of town.\n"
+	.string "BRAWLY is here in the GYM.\p"
+	.string "After the LETTER and BRAWLY's GYM,\n"
+	.string "see STEVEN again. Then visit the\l"
+	.string "MEADOW, through our west exit.\p"
+	.string "The manor historian and meadow\n"
+	.string "warden have a discovery to share.$"
 
 DewfordTown_Text_TownSign:
 	.string "DEWFORD TOWN\n"
@@ -674,8 +678,11 @@ DewfordTown_Text_HallSign:
 Route104_Text_LandedInDewfordDeliverLetter:
 	.string "MR. BRINEY: Ahoy!\n"
 	.string "We've hit land in DEWFORD.\p"
-	.string "I suppose you're off to deliver that\n"
-	.string "LETTER to, who was it now, STEVEN!$"
+	.string "STEVEN is in GRANITE CAVE. Go north\n"
+	.string "onto ROUTE 106, then follow the\l"
+	.string "shore west to the cave.\p"
+	.string "I'll wait here by the boat. Come\n"
+	.string "back whenever you need passage!$"
 
 DewfordTown_Text_SetSailBackToPetalburg:
 	.string "MR. BRINEY: Have you delivered your\n"
@@ -689,10 +696,11 @@ DewfordTown_Text_PetalburgWereSettingSail2:
 	.string "PEEKO, we're setting sail, my darling!$"
 
 DewfordTown_Text_GoDeliverIllBeWaiting:
-	.string "MR. BRINEY: Look for GRANITE CAVE along\n"
-	.string "ROUTE 106. That's where STEVEN went.\p"
-	.string "Take your time with the LETTER. PEEKO\n"
-	.string "and I will keep an eye on the boat!$"
+	.string "STEVEN is in GRANITE CAVE. Go north\n"
+	.string "onto ROUTE 106, then follow the\l"
+	.string "shore west to the cave.\p"
+	.string "Take your time with the LETTER.\n"
+	.string "PEEKO and I will wait by the boat!$"
 
 DewfordTown_Text_BrineyLandedInDewford:
 	.string "MR. BRINEY: Ahoy!\n"
