@@ -23550,8 +23550,8 @@ Nature: NATURE_JOLLY
 - MOVE_PROTECT
 
 SPECIES_THROH @ ITEM_LEFTOVERS
-Level: 19
-Level Offset: -1
+Level: 20
+Level Offset: 0
 Ability: ABILITY_GUTS
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 Happiness: 255

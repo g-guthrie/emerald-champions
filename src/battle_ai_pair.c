@@ -1770,6 +1770,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
     u32 hp[MAX_BATTLERS_COUNT], boost[MAX_BATTLERS_COUNT] = {100, 100, 100, 100};
     u32 survival[MAX_BATTLERS_COUNT] = {100, 100, 100, 100};
     u32 actionChance[MAX_BATTLERS_COUNT] = {10000, 10000, 10000, 10000};
+    s32 coachingValue[MAX_BATTLERS_COUNT] = {0};
     u32 newParalysisTargets = 0;
     u32 speed[MAX_BATTLERS_COUNT];
     u8 attackStage[MAX_BATTLERS_COUNT], speedStage[MAX_BATTLERS_COUNT];
@@ -1842,6 +1843,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
         enum BattleMoveEffects effect = GetMoveEffect(move);
         s32 sign = GetBattlerSide(actor) == ev->side ? 1 : -1;
         s32 damageOpinion = 0;
+        s32 coachingOpinion = 0;
         if (((gBattleMons[actor].status1 & STATUS1_SLEEP) > (gAiLogicData->abilities[actor] == ABILITY_EARLY_BIRD ? 2 : 1)
              && !IsUsableWhileAsleepEffect(effect))
          || ((gBattleMons[actor].status1 & STATUS1_FREEZE) && !MoveThawsUser(move))
@@ -1878,7 +1880,10 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
             s32 planScore = action->planScore;
             if (planScore <= -10000)
                 return -10000;
-            score += planScore;
+            if (move == MOVE_COACHING && planScore > 0)
+                coachingOpinion += planScore;
+            else
+                score += planScore;
             // The complete turn owns protection's value. Applying the
             // isolated scorer again can prefer a blocked attack over a shield
             // that saves HP while producing the same damage on both sides.
@@ -1889,7 +1894,9 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                 else
                 {
                     s32 opinion = (action->score - AI_SCORE_DEFAULT) * 4;
-                    if (opinion <= 0 || IsBattleMoveStatus(action->executedMove))
+                    if (move == MOVE_COACHING && opinion > 0)
+                        coachingOpinion += opinion;
+                    else if (opinion <= 0 || IsBattleMoveStatus(action->executedMove))
                         score += opinion;
                     else
                         damageOpinion = opinion;
@@ -2090,6 +2097,10 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
                 statStage[partner][attackStat] = attackStage[partner];
                 PairApplyStatChanges(ev, actor, partner, move, statStage, statModifier, survival[actor], &usedItems);
                 attackStage[partner] = statStage[partner][attackStat];
+                // This turn's damage/survival already values immediate stat
+                // effects. The separate setup preference is future value,
+                // earned only if the recipient survives the complete exchange.
+                coachingValue[partner] += coachingOpinion * survival[actor] / 100 * actionChance[actor] / 10000;
             }
             continue;
         }
@@ -2914,6 +2925,8 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
         }
         s32 value = PairMonValue(&ev->board, ev->board.owner[actor], hp[actor], gBattleMons[actor].maxHP)
             * survival[actor] / 100;
+        if (hp[actor])
+            score += coachingValue[actor] * survival[actor] / 100;
         if (hp[actor] && (newWish & (1u << actor)) && !(newParalysisTargets & (1u << actor)))
         {
             u32 foeSide = GetBattlerSide(actor) ^ 1;
