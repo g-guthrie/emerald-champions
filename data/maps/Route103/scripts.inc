@@ -315,7 +315,8 @@ Route103_Text_MayDefeated:
 
 Route103_Text_MayTimeToHeadBack:
 	.string "MAY: That was a serious battle!\p"
-	.string "Let's tell Dad how our teams did.$"
+	.string "Head south through OLDALE to Dad's\n"
+	.string "lab in LITTLEROOT. See you there!$"
 
 Route103_Text_BrendanRoute103Pokemon:
 	.string "BRENDAN: Okay, so it's this one and\n"
@@ -333,7 +334,8 @@ Route103_Text_BrendanDefeated:
 
 Route103_Text_BrendanTimeToHeadBack:
 	.string "BRENDAN: You earned that win!\p"
-	.string "Let's tell Dad how our teams did.$"
+	.string "Head south through OLDALE to Dad's\n"
+	.string "lab in LITTLEROOT. See you there!$"
 
 Route103_Text_FinishPreparation:
 	.string "Speak to Dad or his lab aide first.\n"

@@ -404,13 +404,14 @@ OldaleTown_Text_FinishedSketchingFootprints:
 
 OldaleTown_Text_MayLetsGoBack:
 	.string "MAY: {PLAYER}{KUN}!\n"
-	.string "Over here!\l"
-	.string "Let's hurry home!$"
+	.string "Over here!\p"
+	.string "Follow ROUTE 101 south to Dad's\n"
+	.string "lab in LITTLEROOT. I'll go ahead!$"
 
 OldaleTown_Text_BrendanLetsGoBack:
-	.string "BRENDAN: I'm heading back to my dad's\n"
-	.string "LAB now.\l"
-	.string "{PLAYER}, you should hustle back, too.$"
+	.string "BRENDAN: Follow ROUTE 101 south\n"
+	.string "to Dad's lab in LITTLEROOT.\p"
+	.string "I'll meet you there, {PLAYER}!$"
 
 OldaleTown_Text_TownSign:
 	.string "OLDALE TOWN\n"
