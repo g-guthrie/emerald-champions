@@ -324,7 +324,7 @@ PetalburgWoods_Text_NotAOneToBeFound:
 PetalburgWoods_Text_HaveYouSeenShroomish:
 	.string "Oh, hello! Seen any SHROOMISH?\n"
 	.string "I've always loved them.\p"
-	.string "I'm taking research papers back\n"
+	.string "I'm taking survey records back\n"
 	.string "to DEVON in RUSTBORO. I thought\l"
 	.string "I could spare a little time...$"
 
@@ -365,29 +365,27 @@ PetalburgWoods_Text_YouveGotSomeNerve:
 
 PetalburgWoods_Text_ThatWasAwfullyClose:
 	.string "Whew... Thank you for helping me!\p"
-	.string "These papers track the strange\n"
-	.string "weather and LEGENDARY sightings.\l"
-	.string "DEVON is studying the connection.\p"
-	.string "Our field notes help keep the\n"
-	.string "route signs up to date. Some\l"
-	.string "discoveries need more than luck.\p"
-	.string "A sign lists any special\n"
-	.string "requirements. Once you catch a\l"
-	.string "local legend, it marks it Caught.\p"
-	.string "That POKéMON stops appearing, so\n"
-	.string "you can search for your next find.\p"
-	.string "I must get these reports to DEVON.\n"
-	.string "First, take this GREAT BALL\l"
+	.string "These are DEVON's survey records.\n"
+	.string "They go with equipment we're\l"
+	.string "sending to SLATEPORT.\p"
+	.string "I don't know why TEAM AQUA wants\n"
+	.string "our work. We need to find out.\p"
+	.string "First, take this GREAT BALL\n"
 	.string "as my thanks!$"
 
 PetalburgWoods_Text_TeamAquaAfterSomethingInRustboro:
-	.string "He said TEAM AQUA was after something\n"
-	.string "in RUSTBORO, too, didn't he?\p"
-	.string "My colleagues could be in trouble.$"
+	.string "He said TEAM AQUA was after\n"
+	.string "something in RUSTBORO, too.\p"
+	.string "I'd better warn my colleagues\n"
+	.string "about our survey equipment.$"
 
 PetalburgWoods_Text_ICantBeWastingTime:
-	.string "I need to warn everyone at DEVON.\n"
-	.string "No more looking for SHROOMISH today!$"
+	.string "Continue north through\n"
+	.string "PETALBURG WOODS and ROUTE 104\l"
+	.string "to RUSTBORO.\p"
+	.string "Challenge ROXANNE at the GYM.\n"
+	.string "I'll meet you in town about\l"
+	.string "DEVON's survey equipment.$"
 
 PetalburgWoods_Text_YoureLoadedWithItems:
 	.string "You're loaded with items.\n"

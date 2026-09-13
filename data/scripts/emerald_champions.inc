@@ -3,7 +3,6 @@ Common_EventScript_EmeraldChampionsMoveTutor::
 	faceplayer
 	setvar VAR_0x8007, EC_BATTLE_FORMAT_DOUBLES
 	setvar VAR_0x8009, 0
-	setvar VAR_0x800B, 0
 
 EmeraldChampions_EventScript_MoveTutorMain:
 	message EmeraldChampions_Text_MoveTutorHowCanHelp
@@ -296,7 +295,6 @@ EmeraldChampions_EventScript_NatureEgg:
 	goto EmeraldChampions_EventScript_NatureChooseMon
 
 EmeraldChampions_EventScript_BattleSetChooseMon:
-	call_if_eq VAR_0x800B, 0, EmeraldChampions_EventScript_ExplainBattleSets
 	msgbox EmeraldChampions_Text_ChooseBattleSetMon, MSGBOX_DEFAULT
 	special ChoosePartyMon
 	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, EmeraldChampions_EventScript_MoveTutorMain
@@ -390,12 +388,6 @@ EmeraldChampions_EventScript_PrepareAnotherBattleSet:
 EmeraldChampions_EventScript_BattleSetEgg:
 	msgbox EmeraldChampions_Text_BattleSetEgg, MSGBOX_DEFAULT
 	goto EmeraldChampions_EventScript_BattleSetChooseMon
-
-@ Explain what a set does once per visit, then keep asking the plain question.
-EmeraldChampions_EventScript_ExplainBattleSets:
-	setvar VAR_0x800B, 1
-	msgbox EmeraldChampions_Text_ExplainBattleSets, MSGBOX_DEFAULT
-	return
 
 EmeraldChampions_EventScript_BattleSetMissing:
 	msgbox EmeraldChampions_Text_BattleSetMissing, MSGBOX_DEFAULT
@@ -549,22 +541,9 @@ EmeraldChampions_Text_RenamePokemon:
 EmeraldChampions_Text_Exit:
 	.string "Exit$"
 
-EmeraldChampions_Text_ExplainBattleSets:
-	.string "A Battle Set is a prepared build:\n"
-	.string "moves, Nature, Ability, EVs, IVs,\l"
-	.string "and a held item.\p"
-	.string "I'll show it before you decide.\n"
-	.string "Applying it replaces those parts\l"
-	.string "of your current build.\p"
-	.string "You can edit it afterward, or\n"
-	.string "try another set, all for free.\l"
-	.string "Use your Leveler separately.\p"
-	.string "Transformation items, such as\n"
-	.string "Mega Stones, must be found\l"
-	.string "separately.$"
-
 EmeraldChampions_Text_ChooseBattleSetMon:
-	.string "Which Pokémon should I prepare?$"
+	.string "Choose a Pokémon for a free set.\n"
+	.string "You'll review it before applying.$"
 
 EmeraldChampions_Text_ChooseBattleFormat:
 	.string "Which battle format are you\n"
