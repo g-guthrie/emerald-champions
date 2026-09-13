@@ -8111,8 +8111,7 @@ static void Cmd_givecaughtmon(void)
     {
     case GIVECAUGHTMON_CHECK_PARTY_SIZE:
 #if EC_HEADLESS_FIXTURES
-        if (EmeraldChampionsHeadlessAutoCaptureActive()
-         || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CAMPAIGN_NATIVE)
+        if (EmeraldChampionsHeadlessAutoCaptureActive())
         {
             // A full party goes straight through GiveCapturedMonToPlayer's
             // native PC fallback instead of opening the optional swap menu.
@@ -8165,11 +8164,13 @@ static void Cmd_givecaughtmon(void)
             {
                 gBattleCommunication[MULTIUSE_STATE] = GIVECAUGHTMON_GIVE_AND_SHOW_MSG;
             }
+            HandleBattleWindow(YESNOBOX_X_Y, WINDOW_CLEAR);
         }
         else if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
             gBattleCommunication[MULTIUSE_STATE] = GIVECAUGHTMON_GIVE_AND_SHOW_MSG;
+            HandleBattleWindow(YESNOBOX_X_Y, WINDOW_CLEAR);
         }
         break;
     case GIVECAUGHTMON_DO_CHOOSE_MON:
@@ -8244,7 +8245,8 @@ static void Cmd_givecaughtmon(void)
         if (giveResult != MON_CANT_GIVE)
             MarkLegendarySignCaughtBySpecies(GetMonData(caughtMon, MON_DATA_SPECIES));
 #if EC_HEADLESS_FIXTURES
-        if (EmeraldChampionsHeadlessAutoCaptureActive())
+        if (EmeraldChampionsHeadlessAutoCaptureActive()
+         || gEcHeadlessFixtureActiveScenario == EC_HEADLESS_SCENARIO_CAMPAIGN_NATIVE)
             EmeraldChampionsHeadlessRecordCapture(
                 GetMonData(caughtMon, MON_DATA_SPECIES), giveResult
             );
@@ -8532,6 +8534,7 @@ static void Cmd_trygivecaughtmonnick(void)
         }
         break;
     case 4:
+        HandleBattleWindow(YESNOBOX_X_Y, WINDOW_CLEAR);
         gBattleCommunication[MULTIUSE_STATE] = 0;
         gBattlescriptCurrInstr = cmd->nextInstr;
         break;

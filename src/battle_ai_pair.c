@@ -99,6 +99,8 @@ struct PairEvaluation
     s8 speedDelta[MAX_BATTLERS_COUNT][MAX_MON_MOVES][MAX_BATTLERS_COUNT];
     u8 sleepDenialChance[MAX_BATTLERS_COUNT][MAX_MON_MOVES][MAX_BATTLERS_COUNT];
     u8 paralysisTargets[MAX_BATTLERS_COUNT][MAX_MON_MOVES];
+    u8 burnTargets[MAX_BATTLERS_COUNT][MAX_MON_MOVES];
+    u8 quashTargets[MAX_BATTLERS_COUNT][MAX_MON_MOVES];
     u8 paralysisChance[MAX_BATTLERS_COUNT][MAX_MON_MOVES];
     u8 paralysisRedirectors[MAX_BATTLERS_COUNT][MAX_MON_MOVES];
     u16 paralyzedSpeed[MAX_BATTLERS_COUNT];
@@ -1239,13 +1241,15 @@ static void CachePairMoveEffects(struct PairEvaluation *ev, enum BattlerId actor
     }
     bool32 thread = move == MOVE_TOXIC_THREAD;
     bool32 sleep = move == MOVE_SPORE || move == MOVE_SING || move == MOVE_SLEEP_POWDER;
+    bool32 burn = move == MOVE_WILL_O_WISP;
+    bool32 quash = move == MOVE_QUASH;
     u32 attackDropStat = PairOffensiveDropStat(move);
     bool32 electricParalysis = move == MOVE_THUNDER_WAVE || move == MOVE_NUZZLE;
     bool32 primaryParalysis = move == MOVE_THUNDER_WAVE || move == MOVE_GLARE;
     bool32 paralysis = electricParalysis || move == MOVE_GLARE || move == MOVE_BODY_SLAM;
     bool32 encore = GetMoveEffect(move) == EFFECT_ENCORE;
     bool32 speedDrop = move == MOVE_ELECTROWEB || move == MOVE_ICY_WIND || move == MOVE_ROCK_TOMB || thread;
-    if (move != MOVE_COACHING && move != MOVE_ACID_SPRAY && !speedDrop && !sleep && !encore && !paralysis && !attackDropStat)
+    if (move != MOVE_COACHING && move != MOVE_ACID_SPRAY && !speedDrop && !sleep && !burn && !quash && !encore && !paralysis && !attackDropStat)
         return;
     if (paralysis)
         ev->paralysisChance[actor][index] = move == MOVE_BODY_SLAM
@@ -1255,7 +1259,7 @@ static void CachePairMoveEffects(struct PairEvaluation *ev, enum BattlerId actor
     {
         if (target == actor || !IsBattlerAlive(target)
          || (move == MOVE_COACHING && target != GetPartnerBattler(actor))
-         || ((speedDrop || sleep || encore || paralysis || attackDropStat) && IsBattlerAlly(actor, target)))
+         || ((speedDrop || sleep || burn || quash || encore || paralysis || attackDropStat) && IsBattlerAlly(actor, target)))
             continue;
         struct BattleCalcValues cv = {.battlerAtk = actor, .battlerDef = target, .move = move, .moveEffect = GetMoveEffect(move)};
         for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
@@ -1310,7 +1314,7 @@ static void CachePairMoveEffects(struct PairEvaluation *ev, enum BattlerId actor
         }
         // Primary status effects need their own immunity checks, not damage's
         // zero cache or secondary-effect Shield Dust/Covert Cloak checks.
-        if ((thread || sleep || encore || primaryParalysis) && (cv.abilities[target] == ABILITY_GOOD_AS_GOLD
+        if ((thread || sleep || burn || quash || encore || primaryParalysis) && (cv.abilities[target] == ABILITY_GOOD_AS_GOLD
              || cv.abilities[target] == ABILITY_MAGIC_BOUNCE
              || gProtectStructs[target].bounceMove
              || (GetConfig(B_PRANKSTER_DARK_TYPES) >= GEN_7
@@ -1319,6 +1323,35 @@ static void CachePairMoveEffects(struct PairEvaluation *ev, enum BattlerId actor
                  && !BreaksThroughSemiInvulnerableState(actor, target, cv.abilities[actor], cv.abilities[target],
                      move, gBattleMons[target].volatiles.semiInvulnerable))))
             continue;
+        if (burn || quash)
+        {
+            // Only ordinary uncured burn is modeled here. Status-benefit and
+            // reflection/cure interactions retain their existing opinion,
+            // never a fictitious physical-damage reduction.
+            if (DoesSubstituteBlockMove(actor, target, move))
+                continue;
+            if (burn && (!CanSetNonVolatileStatus(actor, target, cv.abilities[actor], cv.abilities[target], MOVE_EFFECT_BURN, CHECK_TRIGGER)
+             || cv.abilities[target] == ABILITY_GUTS || cv.abilities[target] == ABILITY_FLARE_BOOST
+             || cv.abilities[target] == ABILITY_QUICK_FEET || cv.abilities[target] == ABILITY_MARVEL_SCALE
+             || cv.abilities[target] == ABILITY_FLASH_FIRE || cv.abilities[target] == ABILITY_WELL_BAKED_BODY
+             || cv.abilities[target] == ABILITY_SYNCHRONIZE || HasMoveWithEffect(target, EFFECT_FACADE)
+             || cv.holdEffects[target] == HOLD_EFFECT_CURE_BRN || cv.holdEffects[target] == HOLD_EFFECT_CURE_STATUS))
+                continue;
+            if (AI_GetMovePriority(actor, cv.abilities[actor], move) > 0)
+            {
+                bool32 blocked = IsPsychicTerrainAffected(target, cv.abilities[target], cv.holdEffects[target], gFieldTimers.terrain);
+                for (enum BattlerId ally = 0; ally < gBattlersCount; ally++)
+                    if (IsBattlerAlive(ally) && IsBattlerAlly(target, ally) && IsDazzlingAbility(cv.abilities[ally]))
+                        blocked = TRUE;
+                if (blocked)
+                    continue;
+            }
+            if (burn)
+                ev->burnTargets[actor][index] |= 1u << target;
+            else
+                ev->quashTargets[actor][index] |= 1u << target;
+            continue;
+        }
         if (paralysis)
         {
             if (!primaryParalysis
@@ -1771,7 +1804,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
     u32 survival[MAX_BATTLERS_COUNT] = {100, 100, 100, 100};
     u32 actionChance[MAX_BATTLERS_COUNT] = {10000, 10000, 10000, 10000};
     s32 coachingValue[MAX_BATTLERS_COUNT] = {0};
-    u32 newParalysisTargets = 0;
+    u32 newParalysisTargets = 0, newBurnTargets = 0;
     u32 speed[MAX_BATTLERS_COUNT];
     u8 attackStage[MAX_BATTLERS_COUNT], speedStage[MAX_BATTLERS_COUNT];
     u8 statStage[MAX_BATTLERS_COUNT][4]; // Atk, Def, SpDef, SpAtk.
@@ -2157,7 +2190,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
         move = action->executedMove;
         effect = GetMoveEffect(move);
         if (IsBattleMoveStatus(move) && !((move == MOVE_TOXIC_THREAD || move == MOVE_SPORE || move == MOVE_SING || move == MOVE_SLEEP_POWDER
-            || move == MOVE_THUNDER_WAVE || move == MOVE_GLARE || move == MOVE_CHARM || effect == EFFECT_ENCORE) && applyEffects))
+            || move == MOVE_THUNDER_WAVE || move == MOVE_GLARE || move == MOVE_CHARM || move == MOVE_WILL_O_WISP || move == MOVE_QUASH || effect == EFFECT_ENCORE) && applyEffects))
             continue;
         if (gBattleMoveEffects[effect].twoTurnEffect && !gBattleMons[actor].volatiles.multipleTurns
          && gAiLogicData->holdEffects[actor] != HOLD_EFFECT_POWER_HERB
@@ -2244,10 +2277,42 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
             }
             if (!guardHitChance)
                 continue;
+            if (move == MOVE_QUASH)
+            {
+                if (!(ev->quashTargets[actor][action->index] & (1u << target))
+                 || (acted & (1u << target)))
+                    continue;
+                u32 chance = min(100, gAiLogicData->moveAccuracy[actor][target][action->index])
+                    * survival[actor] * guardHitChance / 10000 * actionChance[actor] / 10000;
+                if (!chance)
+                    continue;
+                *effectChance = *effectChance ? min(*effectChance, chance) : chance;
+                // Native GetMovePriorityInternal uses -8 for Quash. Apply only
+                // after legal targeting/protection, never to an earlier action.
+                actions[target].priority = -8;
+                continue;
+            }
+            if (move == MOVE_WILL_O_WISP)
+            {
+                if (!(ev->burnTargets[actor][action->index] & (1u << target))
+                 || ((newBurnTargets | newParalysisTargets | newSleepTargets) & (1u << target)))
+                    continue;
+                u32 chance = min(100, gAiLogicData->moveAccuracy[actor][target][action->index])
+                    * survival[actor] * guardHitChance / 10000 * actionChance[actor] / 10000;
+                if (!chance)
+                    continue;
+                newBurnTargets |= 1u << target;
+                *effectChance = *effectChance ? min(*effectChance, chance) : chance;
+                // Apply at execution time, after actual targeting/Protect.
+                // An attack already performed cannot be weakened retroactively.
+                if (!(acted & (1u << target)) && IsBattleMovePhysical(actions[target].executedMove))
+                    boost[target] /= 2;
+                continue;
+            }
             if (move == MOVE_THUNDER_WAVE || move == MOVE_GLARE)
             {
                 if (!(ev->paralysisTargets[actor][action->index] & (1u << target))
-                 || ((newParalysisTargets | newSleepTargets) & (1u << target)))
+                 || ((newBurnTargets | newParalysisTargets | newSleepTargets) & (1u << target)))
                     continue;
                 // Follow Me takes precedence over Lightning Rod. Otherwise
                 // omit redirected TW credit, including any absorber reward.
@@ -2305,7 +2370,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
             {
                 u32 chance = ev->sleepDenialChance[actor][action->index][target];
                 u32 side = GetBattlerSide(target);
-                if (!chance || ((newSleepTargets | newParalysisTargets) & (1u << target))
+                if (!chance || ((newBurnTargets | newSleepTargets | newParalysisTargets) & (1u << target))
                  || (ev->sleepClause && (newSleepSides & (1u << side))))
                     continue;
                 // Landing sleep claims its target/clause even if that target
@@ -2643,7 +2708,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
             }
             if (applyEffects && (move == MOVE_NUZZLE || move == MOVE_BODY_SLAM) && hp[target] && damage.maximum && amount
              && (ev->paralysisTargets[actor][action->index] & (1u << target))
-             && !((newParalysisTargets | newSleepTargets) & (1u << target)))
+             && !((newBurnTargets | newParalysisTargets | newSleepTargets) & (1u << target)))
             {
                 // Follow Me wins over ability redirection. As with Thunder
                 // Wave, do not credit an unresolved Lightning Rod recipient.
@@ -2971,6 +3036,9 @@ static s32 ScorePairWithImmediateEffects(struct PairEvaluation *ev)
                 if (ev->encoreGuardIndex[actor][target])
                     hasEffect = TRUE;
         if (action->index != PAIR_IDLE && ev->paralysisTargets[actor][action->index])
+            hasEffect = TRUE;
+        if (action->index != PAIR_IDLE && (ev->burnTargets[actor][action->index]
+            || ev->quashTargets[actor][action->index]))
             hasEffect = TRUE;
         if (action->index != PAIR_IDLE && action->move == MOVE_FEINT)
             hasEffect = TRUE;

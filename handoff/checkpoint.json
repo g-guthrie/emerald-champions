@@ -1,19 +1,19 @@
 {
   "schema_version": 1,
   "date": "2026-09-13",
-  "session": "work/v4-c13-brenden-final-ai-play",
-  "current_step": 96,
+  "session": "work/v4-c13-quash-fixed-play",
+  "current_step": 74,
   "chapter": "C13",
-  "map": "MAP_GRANITE_CAVE_B1F",
+  "map": "MAP_DEWFORD_TOWN_POKEMON_CENTER_1F",
   "position": [
-    4,
-    21
+    8,
+    4
   ],
-  "facing": "down",
+  "facing": "up",
   "controls_locked": false,
   "difficulty": "Medium",
   "player_cap": 20,
-  "earned_unique_trainer_clears": 33,
+  "earned_unique_trainer_clears": 35,
   "cleared_trainers": [
     {
       "id": 10,
@@ -146,43 +146,40 @@
     {
       "id": 754,
       "name": "TRAINER_JOHNSON"
+    },
+    {
+      "id": 574,
+      "name": "TRAINER_CRISTIAN"
+    },
+    {
+      "id": 425,
+      "name": "TRAINER_JOCELYN"
     }
   ],
   "uncleared_next": [
     {
-      "id": 574,
-      "name": "Cristian",
-      "attempts": 2,
-      "results": [
-        "loss in 8 turns",
-        "loss in 8 turns"
-      ]
-    },
-    {
-      "name": "Jocelyn"
-    },
-    {
-      "name": "Brawly"
+      "name": "Brawly",
+      "attempts": 0
     }
   ],
-  "immediate_plan": "Catch accessible B1F Sableye (20% leading land slot), prepare with native Center services, then retry Cristian. Sableye is not yet caught. This is a player adaptation, not an enemy balance edit.",
-  "repel_spray": "off",
-  "poke_vial_charges": 0,
+  "immediate_plan": "Fight Brawly with native preparation; then earn Steven Ring/manor handoffs. Exact T038 team and shared AI reviewed. No manual healing/X items; naturally activated held items allowed.",
+  "repel_spray": "on",
+  "poke_vial_charges": 1,
   "party_order": [
-    "Mienfoo",
     "Aerodactyl",
-    "Marshtomp",
     "Combusken",
+    "Sableye",
     "Shaymin",
-    "Pachirisu"
+    "Pachirisu",
+    "Marshtomp"
   ],
   "party_hp": [
-    54,
     68,
-    76,
     60,
     76,
-    72
+    76,
+    72,
+    76
   ],
   "party_level": [
     20,
@@ -192,21 +189,33 @@
     20,
     20
   ],
-  "rom_sha256": "f97bdbd7b97aff049b366b2c5e8da478a561cbc7ba329d5210aba12592c3b43d",
-  "elf_sha256": "e9dfda8ce313e0557283e6743bc2da18f0a426974f81405185614e5ef8f65658",
-  "inputs_sha256": "9e0c1fdfff99ff02dfbd4aedf97affc98fc2038f05863293f0658c98c5e80c7b",
-  "save": "work/v4-c13-brenden-final-ai-play/earned-machine-handoff-granite-b1f.sav",
-  "save_sha256": "2e110f2c40086529855ede0471119a0478dd280cf41d547cecec105341481add",
-  "state": "work/v4-c13-brenden-final-ai-play/current.ss1",
-  "state_sha256": "b6913b5155bfd17287f4e99d699c21ce32cf52bfa374a966e0d3c08435f7197d",
-  "trace": "work/v4-c13-brenden-final-ai-play/trace.json",
-  "source_patch": "work/v4-c13-brenden-final-ai-play/resume-source.patch",
+  "rom_sha256": "ba2d9b8f626d794420c4d17280d2256c6a43af2b3302f11b13c39941cbc02dd1",
+  "elf_sha256": "ebd85092ee302c5a82922a999bea2e617e6f2c9ebb07c50c1f4613120a5e6d2f",
+  "inputs_sha256": "1e82e3dbc418ba0b7a12d10afbc28d058483a95313132490d9e3b9a1e69ca24f",
+  "save": "work/v4-c13-quash-fixed-play/earned-jocelyn-cleared.sav",
+  "save_sha256": "b13fa15a09bc56fe5e3e0076fd25ed33f8ccb30383a02205cff0b1fcbbccd2f5",
+  "state": "work/v4-c13-quash-fixed-play/current.ss1",
+  "state_sha256": "1535cb000e914c8fb954656be9149367e196d17179d62281cfb313555472b787",
+  "trace": "work/v4-c13-quash-fixed-play/trace.json",
+  "source_patch": null,
   "book": "Game Blueprint/Emerald_Champions_Game_Book.txt",
   "evidence_limits": [
-    "33 unique earned clears are not complete acceptance matrices.",
-    "Cristian losses are reviewed, not victories or full acceptance.",
-    "No later chapter is claimed earned just because a synthetic scene ran.",
-    "User visual acceptance remains pending.",
-    "Broader randomized and alternate-archetype coverage remains incomplete."
-  ]
+    "35 earned clears are not complete acceptance matrices.",
+    "Capture-menu repair visual acceptance still pending.",
+    "Published original resume assets are behind this local checkpoint until replaced and downloaded.",
+    "No later chapter is earned from synthetic execution.",
+    "User visual acceptance and broader variant coverage remain pending."
+  ],
+  "recent_results": {
+    "Cristian": [
+      "loss8",
+      "loss8",
+      "win13"
+    ],
+    "Jocelyn": [
+      "loss13",
+      "loss8",
+      "win7"
+    ]
+  }
 }

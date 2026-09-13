@@ -52,6 +52,20 @@ Old 7.0/7.1 branches and archived reports are evidence, not competing instructio
   applicable shared AI code. Expect possible quality decline beyond roughly the
   first 130 historically authored encounters. Freely improve demonstrated team,
   moveset, strategy or AI weaknesses; synchronize the book and consumers.
+- Every AI bug requires an affected-team index in the canonical book: earlier
+  cleared encounters, bespoke tactics/implementations, and later authored teams.
+  Trace every plausible shared path, repair every affected implementation, and
+  run focused behavioral regressions for relevant mechanics and exceptions. Carry
+  those regressions into future builds. A local fix is not complete while another
+  identified path retains the defect. Separate verified, potential and unaffected
+  cases; a source audit is not retrospective earned battle acceptance.
+- Do not use Potions, Revives, X items or other manual healing consumables in
+  this playthrough. Use native Center/story recovery; held effects and moves
+  remain ordinary battle mechanics. Naturally activated held berries, White Herb,
+  Weakness Policy and similar equipment are allowed. The Champions settlement
+  restores battle-start held items (including berries) after the battle; they
+  remain consumed during that battle unless a native move/ability restores them.
+  Never add manual item healing to solve a loss.
 - Every Gym trainer should be an exceptional difficulty benchmark; leaders are
   a major step beyond. A comfortable win deserves scrutiny. Audit AI consequences
   before inflating levels; judge pressure/counterplay, not a quota of player faints.

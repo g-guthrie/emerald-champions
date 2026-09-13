@@ -16,9 +16,9 @@ paid API, browser emulator, or additional agent is needed to continue.
 3. Read `handoff/checkpoint.json`. Run the read-only checkpoint/party inspection,
    and view the final save/contact sheet. The supplied session already contains
    its immutable matching ROM, ELF, state, normal save and complete trace.
-4. Continue native play from that session. The immediate plan was to catch a
-   Sableye in Granite Cave B1F, prepare it through the Center, and retry Cristian.
-   Inspect Cristian's current book card/team and relevant AI again before battle.
+4. Read the exact stopping point below before using any published resume asset.
+   The local earned continuation is ahead of the original transfer download.
+   Never silently replace this continuation with that older checkpoint.
 5. Continue Jocelyn, Brawly, Steven's Ring handoff, the manor and the rest of the
    campaign. Build missing/revised story scenes, repair systems/AI as encountered,
    update this book and its consumers, and inspect evidence along the way.
@@ -29,69 +29,57 @@ clean Continue; never transplant a savestate into another ROM/ELF.
 
 ## Exact stopping point
 
-- Session: `work/v4-c13-brenden-final-ai-play`, step **096**, after a confirmed
-  native Save and export to `earned-machine-handoff-granite-b1f.sav`.
-- Location: Granite Cave B1F `(4,21)`, facing down, free overworld control.
-  The interrupted walking command completed before the handoff; its step094
-  trace is present. No capture occurred. The exact current state is step096.
-- **Medium**, player cap **20**, **33 unique earned trainer clears**. Roxanne,
-  the Rusturf rescue, Devon delivery setup, passage to Dewford, the Granite Cave
-  letter and the relevant prior trainer route are earned. Gym clears include
-  Laura, Takao, Lilith and Brenden. **Cristian, Jocelyn and Brawly are not beaten.**
-- Cristian has two recorded eight-turn losses on the current AI. No enemy team
-  or AI change was made in response. Repel Spray is OFF for the Sableye search;
-  Poké Vial has zero charges. All six current Pokemon are healthy after native
-  loss recovery. Sableye is **not yet caught**.
-- Full hashes, save/state names and the 33 actual trainer IDs are in
-  `handoff/checkpoint.json`. Do not count unrelated flags after trainer ID855 as
-  trainer victories, or use the per-session battle serial as total progress.
-- An earlier normal save,
-  `earned-brenden-original-levels-fixed-ai-clear.sav`, is preserved as a recovery
-  checkpoint. It is not the latest primary location. Do not silently roll back
-  the current run or discard the two Cristian attempts.
+- Primary session: `work/v4-c13-quash-fixed-play`, step **074**. Jocelyn was
+  defeated, the party recovered at the Center, and native Save completed at073.
+  Export: `earned-jocelyn-cleared.sav`. Dewford Center `(8,4)`, facing up, free control.
+- **Medium**, cap **20**, **35 earned unique trainer clears**. Cristian: two
+  eight-turn losses then a13-turn win. Jocelyn:13-turn loss, eight-turn loss,
+  then seven-turn win. Brawly is still unplayed.
+- Current immutable ROM includes the capture-menu repair and shared timely burn/
+  Quash forecasts. Clean Continue from each previous normal save preserved ancestry.
+  Native acquisition/preparation includes Carbink and Prankster Sableye. Sableye’s
+  actual B1F habitat rate is13%; caught on the twentieth natural encounter.
+- Party healthy. Repel ON, Old Rod registered. No manual healing consumables or
+  X items in these fights. Naturally activated held items are allowed. The current
+  Champions code restores battle-start held items, including berries, at settlement;
+  they remain consumed within battle unless restored by a native move/ability.
+- Every AI bug requires the book’s backward/bespoke/forward affected-team index,
+  repairs for every plausible affected implementation and focused regressions.
+  Source coverage does not mean every earlier battle was replayed.
+- Published `v4-handoff-20260913` assets remain older than this continuation until
+  repackaging/upload/download verification. Do not roll back to that old save.
 
-The resume ROM is `f97bdbd7b97aff049b366b2c5e8da478a561cbc7ba329d5210aba12592c3b43d`;
-its ELF is `e9dfda8ce313e0557283e6743bc2da18f0a426974f81405185614e5ef8f65658`.
-The archived `inputs.json` belongs to those artifacts. `resume-source.json` and
-`resume-source.patch` preserve the gameplay source base and the two pending map
-edits used by that build. The published handoff adds portable host tools, book
-status corrections and documentation; its newly built production artifact has a
-separate stamp. Do not restamp the old resume ROM against the new checkout.
+Current ROM/ELF hashes and ancestry are in the session trace. Both repairs pass
+focused native regressions; the normal release also builds. Capture destination/
+Yes-No visual acceptance remains pending on the next earned catch. Never transplant
+savestates between different ROMs.
 
-## Current party and intended adaptation
-
-Field order is restored automatically after native win/loss. Forced replacements
-reorder the in-battle party, so inspect before selecting a slot. Never rearrange
-back based on an assumed order while the battle is still active.
+## Current party and rematch plan
 
 | Slot | Pokemon / native preparation | Moves | HP |
 | --- | --- | --- | --- |
-| 0 | Mienfoo, Eviolite, Inner Focus, Adamant | Fake Out, Helping Hand, Drain Punch, Brick Break | 54 |
-| 1 | Aerodactyl, Focus Sash, Unnerve, Jolly | Taunt, Tailwind, Dual Wingbeat, Protect | 68 |
-| 2 | Marshtomp, Eviolite, Damp, Quiet | Muddy Water, Earth Power, Icy Wind, Wide Guard | 76 |
-| 3 | Combusken, Life Orb, Speed Boost, Timid | Heat Wave, Flamethrower, Feint, Protect | 60 |
-| 4 | Shaymin, Choice Specs, Natural Cure, Modest | Seed Flare, Earth Power, Giga Drain, Psychic | 76 |
-| 5 | Pachirisu, Sitrus Berry, Volt Absorb, Bold | Follow Me, Nuzzle, Super Fang, Protect | 72 |
+| 0 | Aerodactyl, Focus Sash, Unnerve, Jolly | Taunt, Tailwind, Dual Wingbeat, Protect | 68 |
+| 2 | Sableye, Sitrus Berry, Prankster, Careful | Will-O-Wisp, Quash, Fake Out, Foul Play | 76 |
+| 1 | Combusken, Life Orb, Speed Boost, Timid | Heat Wave, Flamethrower, Feint, Protect | 60 |
+| 3 | Shaymin, Choice Specs, Natural Cure, Modest | Seed Flare, Earth Power, Giga Drain, Psychic | 76 |
+| 4 | Pachirisu, Sitrus Berry, Volt Absorb, Bold | Follow Me, Nuzzle, Super Fang, Protect | 72 |
+| 5 | Marshtomp, Eviolite, Damp, Quiet | Muddy Water, Earth Power, Icy Wind, Wide Guard | 76 |
 
-All are level20 and were obtained/prepared through the game. The archived party
-snapshots preserve the exact native bytes; prior prep traces preserve the menu
-operations. Pachirisu uses 252 HP/252 Defense/4 Sp. Defense, and Marshtomp uses
-252 HP/252 Sp. Attack/4 Defense in the underlying stat representation. The native
-UI's Champions Stat Points are a separate presentation; do not invent EV changes.
+All are level20 and prepared through native services. Sableye has 252 HP/252 SpD/
+4 Speed. Mienfoo was deposited in Box1; Carbink remains stored. Native forced
+replacements reorder the in-battle party; field order restores after settlement.
 
-Sableye is the leading 20% ordinary land slot in Granite Cave B1F, level13–15.
-The planned adaptation is Prankster burn and useful immunity/utility, obtained
-and prepared normally. Choose its final set through actual available services;
-no set or capture has been granted. Do not use Icy Wind casually into Defiant
-Falinks, and do not paralyze Guts Throh when revisiting a historical fixture.
-Choice Specs locks the first selected move even if Protect blocks it; switching
-or the appropriate native item-loss consequence is needed to change the lock.
+Next: Brawly, then Steven’s Ring and manor/meadow handoffs. His exact T038/
+U0170–0175 team was inspected: Pachirisu/Choice Band Heracross opening; Guts
+Conkeldurr, AV Hariyama, White Herb Unburden Hawlucha and special Cobalion with
+Coaching/Quick Guard. Shared redirection, Coaching recipient survival, burn
+exceptions and priority protection code reviewed. Keep native team/levels.
+Navigation: Center exit `(8,8)`; Gym door `(8,17)`; arrival `(5,27)`; Brawly `(4,3)`.
 
-For navigation, consult `map.json`, `scripts.inc` and `map_path.py`. The latter is
-only static collision/elevation guidance: it can suggest an invalid wall end
-point, does not model every dynamic object, and does not prove native movement.
-The B1F return ladder is at the current entry area. Native movement and screenshots
-remain authoritative. Flight Beacon and Repel Spray are ordinary key items.
+Capture-flow acceptance remains pending: nine ordinary Old Rod casts produced
+no bite. No odds/RNG were changed. Test the repaired full-party destination and
+Yes/No cleanup on the next earned capture; don't stall the campaign on fishing.
+Field specialist Yes/No overlay was also observed and is not yet fixed/accepted.
 
 ## Most recent battle findings
 
@@ -108,7 +96,7 @@ setup. This is sampled evidence, not a global worst-case certificate.
 Double Ace; Falinks Beat Up activates Justified Gallade/Lucario when profitable.
 Lead Falinks74HP/Sash/Defiant/Jolly, speed58, and Gallade65HP/Life Orb/Justified/
 Adamant, speed54. Reserves: AV Iron Fist Hitmonchan, Expert Belt Justified Lucario,
-Choice Band No Guard Machamp, and level21 Life Orb Vital Spirit Annihilape.
+Choice Band No Guard Machamp, and level21 Leftovers Vital Spirit Annihilape.
 Check the actual book/team for all exact moves/EVs; these notes are observations.
 The Beat Up count checks active status/HP and party participation, ally damage
 must be survivable, and boosts affect a recipient's later physical attack.
@@ -125,9 +113,32 @@ Gallade at the cost of Pachirisu; Lucario/Hitmonchan finished the last pair.
 
 These attempts show real pressure and purposeful defense/switching, not a reason
 to weaken the trainer. The complete exact input traces, per-turn memory reads,
-reviews and contact sheets are archived. No full Cristian acceptance or win is
-claimed, and the Justified engine has not yet been observed executing its whole
-positive line in this earned matchup.
+reviews and contact sheets are archived. Attempt three was an earned 13-turn
+win with only Sableye (48/76 HP) remaining. Five party members fainted. Ordinary
+burn, Quash, Foul Play, Feint and redirection made the difference. A newly inflicted
+burn was missing from the shared immediate physical-damage forecast; baseline
+failure and seven fixed native cases are preserved. This victory does not certify
+that AI defect or the whole Justified engine. No enemy team/level nerf was made.
+
+**Jocelyn, E0039-B01 / TRAINER_JOCELYN 425.** Attempt one lost in 13 turns;
+Volbeat was the last opponent at 36/74 HP. Dual Wingbeat missed on turns3 and8.
+Her opening Protect denied Wingbeat and earned Speed Boost. Breloom's Protect
+on turn5 blocked a knockout and activated Toxic Orb; turn6 switched to Crabominable
+instead of gambling on consecutive Protect. Tailwind was set on turns2,6,10,
+after each previous instance expired. Sirfetch'd/Whimsicott focused Sableye and
+Combusken; Breloom removed Aerodactyl and Marshtomp. Turn9 Encore on 1-HP Pachirisu
+had no observed payoff because Breloom killed it before its action. Quash on turn2
+exposed a shared forecast omission: native Combusken was moved behind Wingbeat,
+but the scorer had no Quash turn-order effect. Preserve the baseline fixture and
+the repaired shared path passed four native controls before rematching. Max sampled decision was 55 native frames,
+including setup (13 decisions); this is not a universal timing certificate.
+
+Attempt two lost in eight turns; maximum measured decision56 frames. Attempt
+three won in seven turns with four healthy survivors, after matching Tailwind,
+removing Combusken with Feint/Wingbeat and Crabominable with Psychic. Volbeat’s
+Thunder Wave missed on turn4; Helping Hand/First Impression killed Shaymin on
+turn5. Breloom’s Protect had defensive value. Wingbeat missed on turn6 before
+turn7 victory. Maximum of seven full decisions:61 frames. No team/level nerf.
 
 ## Implementation already integrated
 
@@ -164,7 +175,7 @@ Use commit diffs and current consumers, not a stale summary, when editing.
   user visual review. Avoid arbitrary decorative actors/sparkles. The rejected
   Diancie coordinate (7,9) remains rejected.
 - Complete remaining mechanics/AI acceptance and relevant variant/randomized/
-  alternate-archetype coverage. The 33 earned wins are not 33 fully closed
+  alternate-archetype coverage. The 35 earned wins are not 34 fully closed
   acceptance matrices. Earlier shared fixes require dependency-based rechecks;
   prior scores do not automatically certify a newly changed engine.
 - Keep ordinary overlapping trainers' individual victories. Full gauntlet reset
@@ -198,9 +209,14 @@ The archive index distinguishes gameplay sessions, synthetic scene fixtures,
 focused tests, earlier experiments and historical 7.0 references. Old experiments
 are preserved for diagnosis, not reinstated as current decisions.
 
-- Current session: `work/v4-c13-brenden-final-ai-play/trace.json`, per-turn
-  `*-battle-read.json`, `decision-timing.json`, normal saves, before states,
-  screenshot originals and two detailed Brenden plus two Cristian review records.
+- Current session: `work/v4-c13-quash-fixed-play/trace.json`; predecessor sessions
+  `v4-c13-burn-fixed-play`,
+  `v4-c13-capture-repair-play`, `v4-c13-native-linux-play`, and the extended
+  `v4-c13-brenden-final-ai-play`. Each preserves native inputs/screens/before states.
+  Timing reports: `work/cristian-third-attempt-timing.json` and
+  `work/jocelyn-first-attempt-timing.json`, `work/jocelyn-second-attempt-timing.json`,
+  and `work/jocelyn-third-attempt-timing.json`. Baseline/fixed burn and Quash fixtures
+  are under `work/burn-forecast-baseline`, `work/quash-forecast-baseline` and logs.
 - Earned ancestry: the `battery_parent` and bridge fields in each session trace
   name the previous normal save and hash. Earlier current-run directories include
   `v4-opening-corrected-play`, `v4-c04-play`, `v4-c05-play`, `v4-c06-fixed-play`,

@@ -249,10 +249,11 @@ Example focused test build, with only the required harness and actual regression
 
 ```sh
 make -j4 check-tools
-make -j4 TEST=1 TEST_SOURCE_ALLOWLIST='test/test_runner.c test/test_runner_args.c test/test_runner_battle.c test/battle/ai/coaching_pair.c test/battle/ai/fainted_target_pair.c' pokeemerald-test.elf
+make -j4 TEST=1 TEST_SOURCE_ALLOWLIST='test/test_runner.c test/test_runner_args.c test/test_runner_battle.c test/battle/ai/coaching_pair.c test/battle/ai/fainted_target_pair.c test/battle/ai/prankster_burn_pair.c test/battle/ai/quash_pair.c' pokeemerald-test.elf
 python3 scripts/stamp_release_inputs.py --stamp pokeemerald-test.inputs.json
 python3 scripts/playthrough/run_focus.py --elf pokeemerald-test.elf \
-  --filter 'EC Coaching:' --filter 'EC fainted target:'
+  --filter 'EC Coaching:' --filter 'EC fainted target:' \
+  --filter 'EC Prankster burn:' --filter 'EC Quash:'
 ```
 
 `run_focus.py` checks the source/artifact stamp, then reuses the existing native

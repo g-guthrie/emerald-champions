@@ -6,8 +6,9 @@ Those are different version labels, not competing current projects.
 
 The unfinished goal is to build, play and beat a complete, cohesive campaign for
 hardcore competitive doubles players, repairing the game and updating its book
-as the earned playthrough advances. The current Medium save has **33 unique
-trainer victories**, is in **C13**, and has not beaten Cristian, Jocelyn or Brawly.
+as the earned playthrough advances. The current Medium save has **35 unique
+trainer victories**, is in **C13**, and has beaten Cristian on attempt three.
+Jocelyn was beaten on attempt three after two losses. Brawly is next.
 
 | Read | Purpose |
 | --- | --- |
