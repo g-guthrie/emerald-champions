@@ -40,7 +40,7 @@ RustboroCity_PokemonCenter_1F_Text_PokemonHavePersonalities:
 	.string "to breed for better stats.\p"
 	.string "To change an available Ability,\n"
 	.string "select your POKéMON in the party\l"
-	.string "menu and choose Change Ability.$"
+	.string "menu and choose Ability.$"
 
 RustboroCity_PokemonCenter_1F_Text_MaleAndFemalePokemon:
 	.string "Some POKéMON are male or female.\n"

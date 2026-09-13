@@ -37,11 +37,11 @@ RustboroCity_CuttersHouse_Text_YouCanPutThisHMToGoodUse:
 RustboroCity_CuttersHouse_Text_ExplainCut:
 	.string "That HM registers CUT as a field\n"
 	.string "technique for your team.\p"
-	.string "With the STONE BADGE, a party\n"
-	.string "member able to learn CUT can chop\l"
-	.string "thin trees.\p"
-	.string "It needn't keep CUT among its four\n"
-	.string "battle moves.$"
+	.string "ROXANNE is in RUSTBORO GYM.\n"
+	.string "Her STONE BADGE permits field use.\p"
+	.string "A partner able to learn CUT can\n"
+	.string "then chop thin trees. CUT needn't\l"
+	.string "occupy one of its battle moves.$"
 RustboroCity_CuttersHouse_Text_DadHelpedClearLandOfTrees:
 	.string "When they were expanding the city of\n"
 	.string "RUSTBORO, my dad helped out.\p"
