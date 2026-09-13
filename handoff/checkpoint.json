@@ -1,16 +1,16 @@
 {
   "schema_version": 1,
   "date": "2026-09-13",
-  "session": "work/v4-c14-native-play",
-  "current_step": 0,
+  "session": "work/v4-c14-local-singers-play",
+  "current_step": 5,
   "chapter": "C14",
-  "map": "MAP_GRANITE_CAVE_STEVENS_ROOM",
+  "map": "MAP_DEWFORD_MANOR_1F",
   "position": [
-    7,
-    7
+    13,
+    8
   ],
-  "facing": "up",
-  "controls_locked": false,
+  "facing": "down",
+  "controls_locked": true,
   "difficulty": "Medium",
   "player_cap": 20,
   "earned_unique_trainer_clears": 36,
@@ -162,9 +162,10 @@
   ],
   "uncleared_next": [],
   "immediate_plan": [
-    "Leave Granite Cave; Steven gave Ring, Blazikenite and Swampertite, then departed.",
-    "Earn C14: manor account, native Jigglypuff capture/Sing preparation, meadow performance.",
-    "Continue Slateport and audit every trainer before battle."
+    "Continue native Jigglypuff search in Dewford Manor. Every local Jigglypuff now already knows Sing; no teaching detour.",
+    "Take any Sing user to the meadow warden southeast of the manor, complete song and cap24, then sail Slateport.",
+    "Shared Light Screen/Aurora Veil forecast is fixed in this session ROM; audit Hailey before battle.",
+    "Do not replay every past affected trainer; shared fixes and focused tests plus retrospective index suffice until later audit."
   ],
   "repel_spray": "on",
   "poke_vial_charges": 1,
@@ -192,15 +193,15 @@
     20,
     20
   ],
-  "rom_sha256": "e32077ac5217ff88d9e6f350ba601eb9d68aa665c5815f12b67f0bc547d448a2",
-  "elf_sha256": "adaee2b9fde9510714882ee1fee6aed73d841c68d1c76d02c774bb0e15712748",
-  "inputs_sha256": "0f8b04176517d613afa97213d5f2ae19f822d0e3d599005f4eb604515e04b2a9",
-  "save": "work/v4-c13-berry-complete-play/earned-steven-ring.sav",
-  "save_sha256": "48459242f233c569692e961af4ce4ef63f09c0183ddf358253f5c9ed466d1a6e",
-  "state": "work/v4-c14-native-play/current.ss1",
-  "state_sha256": "8b9c10c9487196c693cc5db40c54333c0cdf1518c84b8530270a3dbe06e88108",
-  "trace": "work/v4-c14-native-play/trace.json",
-  "source_patch": "C14 native singer presentation and repeatable manor/meadow handoffs; berry economy committed 23753c5c6e.",
+  "rom_sha256": "e5f1f8f55b53e2e9229a8394e39ca2a54235f3a65dc4863e420950d5eed7d828",
+  "elf_sha256": "22c8783d713c04bd01ee2ba61f6535d894f3194b251250017793ba9458c34ddf",
+  "inputs_sha256": "cf02ad1f008ce62261e414814202818e92fa1c075390418692136cd10d922795",
+  "save": "work/v4-c14-clear-guide-play/earned-before-local-singers.sav",
+  "save_sha256": "8e4d53e575d0c30d7bdfec563315cda43ff0815d5ef9437fb23d80e0b35e5728",
+  "state": "work/v4-c14-local-singers-play/current.ss1",
+  "state_sha256": "7ab1a93b49b5fcc7e1fcf3fc7e356cf66dd16ea916134691f7b825337afd82d0",
+  "trace": "work/v4-c14-local-singers-play/trace.json",
+  "source_patch": "Local ready-to-sing Jigglypuff; natural destination/resource dialogue; book/AGENTS clarify no button/counter walkthroughs and no mandatory mass replays. Shared screen forecast fixed; eight AI cases and16 seeded local-creation comparisons pass.",
   "book": "Game Blueprint/Emerald_Champions_Game_Book.txt",
   "evidence_limits": "36 earned trainer clears. C14 scene synthetic checks passed; earned traversal underway. Whole game remains unfinished.",
   "recent_results": {

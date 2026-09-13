@@ -63,6 +63,9 @@ Old 7.0/7.1 branches and archived reports are evidence, not competing instructio
   those regressions into future builds. A local fix is not complete while another
   identified path retains the defect. Separate verified, potential and unaffected
   cases; a source audit is not retrospective earned battle acceptance.
+  Do not replay every affected trainer after a shared fix. Repair all affected
+  owners, index the teams and use focused native tests where needed; broad
+  retrospective battle replays belong to a later audit.
 - Do not use Potions, Revives, X items or other manual healing consumables in
   this playthrough. Use native Center/story recovery; held effects and moves
   remain ordinary battle mechanics. Naturally activated held berries, White Herb,
@@ -98,6 +101,17 @@ Old 7.0/7.1 branches and archived reports are evidence, not competing instructio
 - Build a flowing new adventure with repeatable guide-free directions for EVERY
   required handoff and the required exploration integrated into the main story.
   Do not leave old Inclement routing that contradicts the book.
+- Main-path guidance must be unusually explicit: never assume a ROM-hack guide
+  exists. Every gate names the next action, exact destination/person/entrance,
+  and the nearest currently reachable source of each required resource. For a
+  required move, name a catchable compatible species and its habitat. Make the
+  nearby source naturally useful: manor Jigglypuff already know Sing. Give clear
+  in-world destinations and goals, not menu/button walkthroughs or counter
+  coordinates. Keep dialogue concise and natural. Repeat this guidance
+  on blocked and return visits. Check the route and resource access in native
+  play; apply any discovered guidance defect to analogous gates elsewhere.
+  Optional trades, rewards and discoveries may reward exploration; mandatory
+  progress must never depend on guessing a hidden resource or consulting a guide.
 - New/materially changed scenes require native headless execution, meaningful
   screenshots, contact-sheet inspection and refinement: choreography, facing,
   entrances/exits, waits, camera, labels, collision, outcome and re-entry behavior.

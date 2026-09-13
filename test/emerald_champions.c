@@ -42,6 +42,7 @@
 #include "constants/field_specials.h"
 #include "constants/flags.h"
 #include "constants/maps.h"
+#include "constants/layouts.h"
 #include "constants/map_event_ids.h"
 #include "constants/trainers.h"
 #include "constants/vars.h"
@@ -919,6 +920,35 @@ TEST("Emerald Champions ordinary wild creation applies a prepared non-Mega set")
     EXPECT_NE(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_HELD_ITEM), ITEM_CHARIZARDITE_X);
     EXPECT_NE(GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_HELD_ITEM), ITEM_CHARIZARDITE_Y);
     ClearBag();
+}
+
+TEST("Emerald Champions manor Jigglypuff keep Sing after random wild preparation")
+{
+    u16 oldLayout = gMapHeader.mapLayoutId;
+    struct Pokemon ordinary;
+    for (u32 sample = 0; sample < 16; sample++)
+    {
+        gMapHeader.mapLayoutId = LAYOUT_ROUTE104;
+        SeedRng(sample);
+        CreateWildMon(SPECIES_JIGGLYPUFF, 20);
+        ordinary = gParties[B_TRAINER_OPPONENT_A][0];
+        EXPECT(MonMatchesEmeraldChampionsNonMegaPreset(&ordinary));
+
+        gMapHeader.mapLayoutId = LAYOUT_DEWFORD_MANOR_1F;
+        SeedRng(sample);
+        CreateWildMon(SPECIES_JIGGLYPUFF, 20);
+        struct Pokemon *singer = &gParties[B_TRAINER_OPPONENT_A][0];
+        EXPECT_EQ(GetMonData(singer, MON_DATA_MOVE4), MOVE_SING);
+        EXPECT_EQ(GetMonData(singer, MON_DATA_PP4), GetMoveMaxPP(MOVE_SING));
+        for (u32 slot = 0; slot < MAX_MON_MOVES - 1; slot++)
+            EXPECT_EQ(GetMonData(singer, MON_DATA_MOVE1 + slot), GetMonData(&ordinary, MON_DATA_MOVE1 + slot));
+        EXPECT_EQ(GetMonData(singer, MON_DATA_PERSONALITY), GetMonData(&ordinary, MON_DATA_PERSONALITY));
+        EXPECT_EQ(GetMonData(singer, MON_DATA_HELD_ITEM), GetMonData(&ordinary, MON_DATA_HELD_ITEM));
+        EXPECT_EQ(GetMonData(singer, MON_DATA_LEVEL), 20);
+    }
+    CreateWildMon(SPECIES_GASTLY, 20);
+    EXPECT(MonMatchesEmeraldChampionsNonMegaPreset(&gParties[B_TRAINER_OPPONENT_A][0]));
+    gMapHeader.mapLayoutId = oldLayout;
 }
 
 TEST("Emerald Champions wild presets never include Mega roles after Mega access")

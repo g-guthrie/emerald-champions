@@ -811,6 +811,17 @@ void CreateWildMon(enum Species species, u8 level)
      && CurrentBattlePyramidLocation() == PYRAMID_LOCATION_NONE
      && IsEmeraldChampionsOrdinaryWildSpecies(species))
         ApplyEmeraldChampionsRandomWildSet(&gParties[B_TRAINER_OPPONENT_A][0]);
+
+    // The manor's singers are the nearby solution to its meadow quest.
+    // Apply this after the random battle set so every local Jigglypuff keeps
+    // Sing, without changing tutor sets or Jigglypuff from other habitats.
+    if (species == SPECIES_JIGGLYPUFF && gMapHeader.mapLayoutId == LAYOUT_DEWFORD_MANOR_1F)
+    {
+        for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
+            if (GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_MOVE1 + slot) == MOVE_SING)
+                return;
+        SetMonMoveSlot(&gParties[B_TRAINER_OPPONENT_A][0], MOVE_SING, MAX_MON_MOVES - 1);
+    }
 }
 
 #ifdef BUGFIX

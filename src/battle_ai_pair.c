@@ -1649,6 +1649,21 @@ static void PairPopulationAccumulate(struct PairPopulationOutcome *out, enum Bat
     }
 }
 
+static u32 PairScreenMask(enum Move move)
+{
+    switch (GetMoveEffect(move))
+    {
+    case EFFECT_REFLECT:
+        return SIDE_STATUS_REFLECT;
+    case EFFECT_LIGHT_SCREEN:
+        return SIDE_STATUS_LIGHTSCREEN;
+    case EFFECT_AURORA_VEIL:
+        return SIDE_STATUS_AURORA_VEIL;
+    default:
+        return 0;
+    }
+}
+
 static u32 PairScreenFactor(enum Move move, u32 screens)
 {
     if ((screens & SIDE_STATUS_AURORA_VEIL)
@@ -2048,10 +2063,12 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
             redirect[GetBattlerSide(actor)] = actor;
             continue;
         }
-        if (effect == EFFECT_REFLECT)
+        u32 newScreen = PairScreenMask(move);
+        if (newScreen)
         {
             u32 side = GetBattlerSide(actor);
-            if (screens[side] & SIDE_STATUS_REFLECT)
+            if ((screens[side] & newScreen)
+             || (newScreen == SIDE_STATUS_AURORA_VEIL && !(weather & B_WEATHER_ICY_ANY)))
             {
                 // An earlier setter can invalidate a move that looked useful
                 // on the original board; do not retain its positive opinion.
@@ -2061,7 +2078,7 @@ static s32 ScoreFastPair(struct PairEvaluation *ev, bool32 applyEffects, u32 *ef
             }
             if (!PairMayBeSnatched(actor, actions, hp, acted, stopped)
              && PairScreenEffectApplies(applyEffects, survival[actor] * actionChance[actor] / 10000, effectChance))
-                screens[side] |= SIDE_STATUS_REFLECT;
+                screens[side] |= newScreen;
             // Certain setup applies in both passes, not at the chance of an
             // unrelated Snarl. Uncertain setup shares the existing effect pass.
             continue;
@@ -3037,7 +3054,7 @@ static s32 ScorePairWithImmediateEffects(struct PairEvaluation *ev)
     {
         const struct PairAction *action = &ev->action[actor];
         if (action->index != PAIR_IDLE
-         && (GetMoveEffect(action->move) == EFFECT_REFLECT
+         && (PairScreenMask(action->move)
              || (PairSelfDefenseStat(action->move) != STAT_HP
                  && (gBattleMons[actor].status1 & STATUS1_PARALYSIS))
              || ((ev->screenBreakerMoves[actor] & (1u << action->index))

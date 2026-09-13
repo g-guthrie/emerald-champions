@@ -27,10 +27,12 @@ DewfordManor_1F_EventScript_FindWarden:
 	releaseall
 	end
 DewfordManor_1F_Text_FindWarden:
-	.string "Speak to the meadow warden southeast\n"
-	.string "of this manor. Bring a singer.\p"
-	.string "JIGGLYPUFF shelter in these rooms.\n"
-	.string "The Center can teach them SING free.$"
+	.string "Take a partner that knows SING to\n"
+	.string "the meadow warden southeast of here.\p"
+	.string "Need a singer? The JIGGLYPUFF in\n"
+	.string "these rooms already know SING.\p"
+	.string "Any partner that knows the move\n"
+	.string "will do. The song is what matters.$"
 DewfordManor_1F_Text_Historian:
 	.string "This manor housed Hoenn's first study\n"
 	.string "of MEGA EVOLUTION.\p"
