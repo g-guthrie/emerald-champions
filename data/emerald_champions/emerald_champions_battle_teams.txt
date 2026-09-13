@@ -1,5 +1,5 @@
 #! Generated from the canonical Emerald Champions Game Book; edit the book.
-#! Book SHA256: d2bf84e965c5fcc85888cc43f045bb98993d13a9bfdfd18d1cb5726d566ab762
+#! Book SHA256: f28305e05f35958b508ba29279abdf09b859228ba534a1a78346ac78f3ca9684
 #! Reconcile with: emerald_champions_teams.py --book PATH --write
 
 ## E0001 TRAINER_BRENDAN_ROUTE_103_MUDKIP class=rival
@@ -331,8 +331,8 @@ CRANIDOS @CHOICE_SCARF MOLD_BREAKER ADAMANT 4/252/0/0/0/252 1 | HEAD_SMASH, STOM
 strategy: TRICK_ROOM
 mega_slots: NONE
 ai: Ace Pokemon
-plan: First two useful turns: Carbink chooses Trick Room only if the resulting order and survival justify it; Relicanth uses an appropriate Choice Band attack. Turn two spends room turns on knockouts or Helping Hand, rather than free defensive cycling. Alternate deployment: Carbink and Nosepass offer a double-support opening only against a board where Wide Guard materially enables room. Reserves & disruption: Sudowoodo is a second recoil-free breaker, Larvitar needs real Orb activation, and Bombirdier is the proposed faster room-denial fallback. A failed room does not justify endless setter retries. Counterplay & audit: Taunt, double targeting, Wide Guard, Steel coverage and legal strong early options including Kartana. Disposition: AMEND CANDIDATE: give Bombirdier Jolly V001 for a distinct non-room reserve; preserve every species and prohibit a pre-Ring Mega.
-crack: Taunt, double targeting, Wide Guard, Steel coverage and legal strong early options including Kartana. Disposition: AMEND CANDIDATE: give Bombirdier Jolly V001 for a distinct non-room reserve; preserve every species and prohibit a pre-Ring Mega.
+plan: First two useful turns: Carbink chooses Trick Room only if the resulting order and survival justify it; Relicanth uses an appropriate Choice Band attack. Turn two spends room turns on knockouts or Helping Hand, rather than free defensive cycling. Alternate deployment: Carbink and Nosepass offer a double-support opening only against a board where Wide Guard materially enables room. Reserves & disruption: Sudowoodo is a second recoil-free breaker, Larvitar needs real Orb activation, and Bombirdier is the proposed faster room-denial fallback. A failed room does not justify endless setter retries. Counterplay & audit: Taunt, double targeting, Wide Guard, Steel coverage and verified pre-badge options such as Ferroseed and Mimic-evolved Sudowoodo. Kartana remains on its preserved Woods provider; do not count it as a pre-badge counter without confirming physical access. Disposition: AMEND CANDIDATE: give Bombirdier Jolly V001 for a distinct non-room reserve; preserve every species and prohibit a pre-Ring Mega.
+crack: Taunt, double targeting, Wide Guard, Steel coverage and verified pre-badge options such as Ferroseed and Mimic-evolved Sudowoodo. Kartana remains on its preserved Woods provider; do not count it as a pre-badge counter without confirming physical access. Disposition: AMEND CANDIDATE: give Bombirdier Jolly V001 for a distinct non-room reserve; preserve every species and prohibit a pre-Ring Mega.
 CARBINK @MENTAL_HERB STURDY SASSY 252/0/4/0/252/0 1 | TRICK_ROOM, HELPING_HAND, DAZZLING_GLEAM, LIGHT_SCREEN | ivs=31/31/31/31/31/31 | friendship=255
 RELICANTH @CHOICE_BAND ROCK_HEAD BRAVE 252/252/4/0/0/0 2 | HEAD_SMASH, STOMPING_TANTRUM, LIQUIDATION, DOUBLE_EDGE | ivs=31/31/31/31/31/31 | friendship=255
 LARVITAR @FLAME_ORB GUTS BRAVE 252/252/4/0/0/0 1 | ROCK_SLIDE, PROTECT, FACADE, CRUNCH | ivs=31/31/31/31/31/31 | friendship=255
