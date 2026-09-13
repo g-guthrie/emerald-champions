@@ -1,19 +1,19 @@
 {
   "schema_version": 1,
   "date": "2026-09-13",
-  "session": "work/v4-c14-local-singers-play",
-  "current_step": 5,
-  "chapter": "C14",
-  "map": "MAP_DEWFORD_MANOR_1F",
+  "session": "work/v4-c14-common-singers-play",
+  "current_step": 76,
+  "chapter": "C15",
+  "map": "MAP_SLATEPORT_CITY_POKEMON_CENTER_1F",
   "position": [
-    13,
-    8
+    8,
+    4
   ],
-  "facing": "down",
-  "controls_locked": true,
+  "facing": "up",
+  "controls_locked": false,
   "difficulty": "Medium",
-  "player_cap": 20,
-  "earned_unique_trainer_clears": 36,
+  "player_cap": 24,
+  "earned_unique_trainer_clears": 37,
   "cleared_trainers": [
     {
       "id": 10,
@@ -158,52 +158,57 @@
     {
       "id": 266,
       "name": "TRAINER_BRAWLY_1"
+    },
+    {
+      "id": 697,
+      "name": "TRAINER_HAILEY"
     }
   ],
-  "uncleared_next": [],
-  "immediate_plan": [
-    "Continue native Jigglypuff search in Dewford Manor. Every local Jigglypuff now already knows Sing; no teaching detour.",
-    "Take any Sing user to the meadow warden southeast of the manor, complete song and cap24, then sail Slateport.",
-    "Shared Light Screen/Aurora Veil forecast is fixed in this session ROM; audit Hailey before battle.",
-    "Do not replay every past affected trainer; shared fixes and focused tests plus retrospective index suffice until later audit."
+  "uncleared_next": [
+    "TRAINER_EDMOND"
   ],
-  "repel_spray": "on",
+  "immediate_plan": [
+    "Continue E0043 Edmond on Route109; exact team/intent/shared AI preaudit then native battle.",
+    "Continue retained beach encounters and Slateport shipyard/museum story.",
+    "Do not replay all past affected trainers after shared fixes; index and focused regressions suffice for now."
+  ],
+  "repel_spray": "off",
   "poke_vial_charges": 1,
   "party_order": [
     "Aerodactyl",
     "Shaymin",
     "Pachirisu",
     "Sableye",
-    "Kadabra",
+    "Jigglypuff",
     "Azumarill"
   ],
   "party_hp": [
-    68,
-    76,
-    72,
-    76,
-    52,
-    88
+    80,
+    89,
+    85,
+    90,
+    111,
+    104
   ],
   "party_level": [
-    20,
-    20,
-    20,
-    20,
-    20,
-    20
+    24,
+    24,
+    24,
+    24,
+    24,
+    24
   ],
-  "rom_sha256": "e5f1f8f55b53e2e9229a8394e39ca2a54235f3a65dc4863e420950d5eed7d828",
-  "elf_sha256": "22c8783d713c04bd01ee2ba61f6535d894f3194b251250017793ba9458c34ddf",
-  "inputs_sha256": "cf02ad1f008ce62261e414814202818e92fa1c075390418692136cd10d922795",
-  "save": "work/v4-c14-clear-guide-play/earned-before-local-singers.sav",
-  "save_sha256": "8e4d53e575d0c30d7bdfec563315cda43ff0815d5ef9437fb23d80e0b35e5728",
-  "state": "work/v4-c14-local-singers-play/current.ss1",
-  "state_sha256": "7ab1a93b49b5fcc7e1fcf3fc7e356cf66dd16ea916134691f7b825337afd82d0",
-  "trace": "work/v4-c14-local-singers-play/trace.json",
-  "source_patch": "Local ready-to-sing Jigglypuff; natural destination/resource dialogue; book/AGENTS clarify no button/counter walkthroughs and no mandatory mass replays. Shared screen forecast fixed; eight AI cases and16 seeded local-creation comparisons pass.",
+  "rom_sha256": "f86c5b16a0619d81325bcd4e67c2dc4f4e51b264fe21d72e4be2a4de52b81cb1",
+  "elf_sha256": "8db5b1bf413d5bec2e56d40fc7065385ae4cf12d7c5c83695ed376edf9dcab41",
+  "inputs_sha256": "0ea5ddc00ce3fb2c410ea479dfcc6ca05bc5a026ed3f7ab0d8b07f092f237e73",
+  "save": "work/v4-c14-common-singers-play/earned-hailey-slateport.sav",
+  "save_sha256": "1fd5ee4e384ff9c0f62f0b714d18fd0a6d71b76ca730b3efdb14279936729171",
+  "state": "work/v4-c14-common-singers-play/current.ss1",
+  "state_sha256": "cb7d3394e75a7e8b804e0dd229f2b495365f1f74fcda5c8bace22b8357bd8ae0",
+  "trace": "work/v4-c14-common-singers-play/trace.json",
+  "source_patch": "Shared Light Screen/Aurora Veil forecast repaired globally; local Jigglypuff always know Sing and have12% manor encounter rate. Natural directions in Steven/manor/warden scenes. Normal release gates pass.",
   "book": "Game Blueprint/Emerald_Champions_Game_Book.txt",
-  "evidence_limits": "36 earned trainer clears. C14 scene synthetic checks passed; earned traversal underway. Whole game remains unfinished.",
+  "evidence_limits": "37 earned clears; C14 capture/song and Briney sailing complete. Hailey first-attempt nine-turn win with two player faints. Whole campaign unfinished.",
   "recent_results": {
     "Cristian": [
       "loss8",
@@ -223,6 +228,9 @@
       "loss11",
       "loss12",
       "win11"
+    ],
+    "Hailey": [
+      "win9"
     ]
   }
 }

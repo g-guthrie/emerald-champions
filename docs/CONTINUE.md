@@ -29,39 +29,31 @@ clean Continue; never transplant a savestate into another ROM/ELF.
 
 ## Exact stopping point
 
-- **USER RESUMED full implementation/playthrough. Berry economy implemented.**
-  Primary `work/v4-c14-local-singers-play`, clean Continue from native
-  `work/v4-c14-clear-guide-play/earned-before-local-singers.sav`. Manor notes read; now seeking
-  Jigglypuff through native encounters with Repel OFF. No song/cap24 yet. Steven has given the
-  Ring, Blazikenite and Swampertite and departed. C14 performance/directions
-  are built and checked. User clarified: natural destination/resource directions,
-  no menu/button walkthroughs. Local wild Jigglypuff now already know Sing after
-  random wild preparation; catch one and go straight to the meadow warden.
-  Any Sing user is valid. Shared new-Light-Screen/Aurora-Veil forecast fixed,
-  eight native cases pass; affected-team index in book, no mass replays required. Six Lum Berries acquired through
-  the new free vendor; Harvest Pouch obtained and used natively. Harvested Lum
-  remains zero. Native Save021/export022 and new clean Continue preserve these.
-  Current position/step are in `handoff/checkpoint.json`; searching Dewford Manor.
-  Brawly won attempt7 in11 turns; 36 earned unique trainer clears. Do not replay
-  him or pursue the superseded Gyarados/preset Lum workaround.
-  All67 ordinary berries now free. Separate per-type harvest pouch, typed stone
-  recipes and optional Celebi invitation implemented. Growth capped at4h; ripe
-  crops persist. Shared field medicine/resale restrictions cover every berry.
-  Bag now68 types without shifting old save offsets. Native tests8 pass,
-  real harvest/full-bag/full-pouch/full-reward-pocket fixtures and Save/Continue
-  pass, and12 repeated menu entries pass after a shared closemessage redraw fix.
-  Berry Master/Kiri daily pair gifts share an atomic delivery helper.
-  Contact sheets: berries-final-check, berries-menu-accepted, berries-earned.
-  Earlier berries-stress sheet includes the FAILED blank-menu baseline.
-  Normal release gates pass; published external assets remain older.
-- **Medium**, cap **20**, **36 earned unique trainer clears**. Cristian: two
-  eight-turn losses then a13-turn win. Jocelyn:13-turn loss, eight-turn loss,
-  then seven-turn win. Brawly: six losses (10,10,13,11,11,12 turns), then11-turn win.
+- **Primary: `work/v4-c14-common-singers-play`. C14 complete; Hailey defeated.**
+  Actual local Jigglypuff caught on encounter13 (second after the12% rate change),
+  one Great Ball, Kadabra stored. The caught singer performed with the meadow
+  warden without teaching; cap24 earned. Briney sailed to Slateport. Hailey
+  E0042 won first attempt in9 turns, two player faints; native Center recovery
+  complete. Current Save075/export076: `earned-hailey-slateport.sav`. Player at
+  Slateport Center8,4 facing north. Next E0043 Edmond, then retained beach fights
+  and the shipyard/museum story. Current exact hashes are in the checkpoint.
+- **Medium, cap24,37 earned unique trainer clears.** Brawly remains won attempt7;
+  do not replay him. Primary ROM includes shared Light Screen/Aurora Veil fixes,
+  natural destination/resource guidance and every manor Jigglypuff knowing Sing.
+  No mandatory mass replays after a shared fix; affected-team index is in book.
+  Eight native screen cases and16 local singer comparisons pass. Normal release
+  gates pass. Hailey's6 sampled decisions max43frames (~0.72s), including setup.
+  Her Protect uses bought real partner damage; unsafe setup was avoided until
+  the terminal board. No team/level adjustment made. Pachirisu's consumed Sitrus
+  restored at settlement. Contact sheets: `c14-earned-song`, `hailey-earned`.
+  Berry economy remains implemented: all67 ordinary berries free; separate typed
+  harvest credits, rewards and persistent crops. Six Lum in bag, harvested Lum0.
+  Native berry fixture/menu checks are recorded in the previous commit/book.
 - Current immutable ROM includes the capture-menu repair and shared timely burn/
   Quash forecasts. Clean Continue from each previous normal save preserved ancestry.
   Native acquisition/preparation includes Carbink and Prankster Sableye. Sableye’s
   actual B1F habitat rate is13%; caught on the twentieth natural encounter.
-- Party healthy. Repel ON, Old Rod registered. No manual healing consumables or
+- Party healthy. Repel OFF, Old Rod registered. No manual healing consumables or
   X items in these fights. Naturally activated held items are allowed. The current
   Champions code restores battle-start held items, including berries, at settlement;
   they remain consumed within battle unless restored by a native move/ability.
@@ -80,15 +72,15 @@ savestates between different ROMs.
 
 | Slot | Pokemon / native preparation | Moves | HP |
 | --- | --- | --- | --- |
-| 0 | Aerodactyl, Focus Sash, Unnerve, Jolly | Taunt, Tailwind, Dual Wingbeat, Protect | 68 |
-| 1 | Shaymin, Life Orb, Natural Cure, Timid | Seed Flare, Earth Power, Giga Drain, Psychic | 76 |
-| 2 | Pachirisu, Sitrus Berry, Volt Absorb, Bold | Follow Me, Nuzzle, Super Fang, Protect | 72 |
-| 3 | Sableye, Sitrus Berry, Prankster, Careful | Taunt, Quash, Fake Out, Foul Play | 76 |
-| 4 | Kadabra, Life Orb, Magic Guard, Timid | Psychic, Dazzling Gleam, Counter, Protect | 52 |
-| 5 | Azumarill, Assault Vest, Huge Power, Adamant | Liquidation, Play Rough, Aqua Jet, Knock Off | 88 |
+| 0 | Aerodactyl, Focus Sash, Unnerve, Jolly | Taunt, Tailwind, Dual Wingbeat, Protect | 80 |
+| 1 | Shaymin, Life Orb, Natural Cure, Timid | Seed Flare, Earth Power, Giga Drain, Psychic | 89 |
+| 2 | Pachirisu, Sitrus Berry, Volt Absorb, Bold | Follow Me, Nuzzle, Super Fang, Protect | 85 |
+| 3 | Sableye, Sitrus Berry, Prankster, Careful | Taunt, Quash, Fake Out, Foul Play | 90 |
+| 4 | Jigglypuff, Eviolite, Friend Guard | Fake Out, Icy Wind, Helping Hand, Sing | 111 |
+| 5 | Azumarill, Assault Vest, Huge Power, Adamant | Liquidation, Play Rough, Aqua Jet, Knock Off | 104 |
 
-All are level20 and prepared through native services. Mienfoo, Carbink, Marshtomp and
-Combusken are stored. Abra was caught on Granite Cave1F with one Great Ball,
+All are level24. The Leveler preserved the caught singer's native moves.
+Kadabra, Mienfoo, Carbink, Marshtomp and Combusken are stored. Abra was caught on Granite Cave1F with one Great Ball,
 natively replaced Combusken, evolved through the Leveler and received Life Orb.
 Linking Cord is not available until Slateport. Sableye's tutor visit replaced
 Will-O-Wisp: the move-selection inputs came before the summary screen opened.
@@ -116,7 +108,7 @@ actual remaining Facade power; focused native burn9, Glare3, Nuzzle4, secondary
 paralysis3 and Quash4 controls pass. Book has backward/bespoke/forward index;
 `work/facade-status-retrospective-scope.json` inventories exact carriers/setters.
 No prior earned replays and no causal Brawly-loss claim.
-Next: resume Steven’s Ring and manor/meadow handoffs. His exact T038/
+Steven’s Ring handoff is now complete; earn the manor song next. Brawly’s T038/
 U0170–0175 team was inspected: Pachirisu/Choice Band Heracross opening; Guts
 Conkeldurr, AV Hariyama, White Herb Unburden Hawlucha and special Cobalion with
 Coaching/Quick Guard. Shared redirection, Coaching recipient survival, burn

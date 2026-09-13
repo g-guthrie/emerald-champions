@@ -43,7 +43,7 @@ Old 7.0/7.1 branches and archived reports are evidence, not competing instructio
 
 - Follow book play order: C01, first-arrival Oldale C03, rival/send-off C02, then
   onward. Implement and inspect each reached chapter and handoff. Later synthetic
-  scene tests never count as earned traversal. Current progress is C13.
+  scene tests never count as earned traversal. Current progress is C15; use the checkpoint for the exact next encounter.
 - Before calling a useful item unavailable, trace the actual bag, reachable
   harvests, gifts, shops, wild held items and native preparation sources. Obtain
   useful stage-legal berries through play; checking one vendor is insufficient.
