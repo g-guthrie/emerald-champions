@@ -185,3 +185,34 @@ AI_DOUBLE_BATTLE_TEST("EC committed actions: a double knockout loads both AI res
         EXPECT_GT(opponentRight->hp, 0);
     }
 }
+
+AI_DOUBLE_BATTLE_TEST("EC committed actions: a doomed Fake Out user still selects an available move")
+{
+    GIVEN {
+        AI_FLAGS(EC_FLAGS | AI_FLAG_HP_AWARE | AI_FLAG_TRY_TO_2HKO);
+        PLAYER(SPECIES_SHAYMIN) { Level(20); Speed(63); Moves(MOVE_PROTECT, MOVE_GIGA_DRAIN); }
+        PLAYER(SPECIES_WOBBUFFET) { Speed(10); Moves(MOVE_CELEBRATE); }
+        PLAYER(SPECIES_MIENFOO) {
+            Level(20); HP(100); MaxHP(100); Attack(62); Defense(100); Speed(60);
+            Ability(ABILITY_INNER_FOCUS); Item(ITEM_EVIOLITE); Moves(MOVE_FAKE_OUT);
+        }
+        OPPONENT(SPECIES_ZIGZAGOON) { Level(20); Speed(47); Moves(MOVE_PROTECT); }
+        OPPONENT(SPECIES_PAWMI) {
+            Level(19); HP(1); MaxHP(52); Attack(41); Defense(18); Speed(49);
+            Ability(ABILITY_IRON_FIST); Moves(MOVE_FAKE_OUT, MOVE_MACH_PUNCH);
+        }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_PROTECT);
+            SWITCH(playerRight, 2);
+        }
+        TURN {
+            MOVE(playerLeft, MOVE_GIGA_DRAIN, target: opponentLeft);
+            MOVE(playerRight, MOVE_FAKE_OUT, target: opponentRight);
+            EXPECT_MOVE(opponentRight, MOVE_MACH_PUNCH);
+        }
+    } THEN {
+        // The available move may never execute, but selection must complete.
+        EXPECT_EQ(opponentRight->hp, 0);
+    }
+}
